@@ -2,7 +2,7 @@
 layout: docu
 railroad: statements/copy.js
 redirect_from:
-- /docs/sql/statements/copy
+  - /docs/sql/statements/copy
 title: COPY Statement
 ---
 
@@ -88,7 +88,7 @@ COPY FROM DATABASE db1 TO db2 (SCHEMA);
 
 `COPY ... FROM` imports data from an external file into an existing table. The data is appended to whatever data is in the table already. The amount of columns inside the file must match the amount of columns in the table `tbl`, and the contents of the columns must be convertible to the column types of the table. In case this is not possible, an error will be thrown.
 
-If a list of columns is specified, `COPY` will only copy the data in the specified columns from the file. If there are any columns in the table that are not in the column list, `COPY ... FROM` will insert the default values for those columns
+If a list of columns is specified, `COPY` will only copy the data in the specified columns from the file. If there are any columns in the table that are not in the column list, `COPY ... FROM` will insert the default values for those columns.
 
 Copy the contents of a comma-separated file `test.csv` without a header into the table `test`:
 
@@ -143,7 +143,6 @@ An expression may be used as the source of a `COPY ... FROM` command if it is pl
 Read the contents of a file whose path is stored in a variable into the `lineitem` table:
 
 ```sql
-
 SET VARIABLE source_file = 'lineitem.json';
 COPY lineitem FROM (getvariable('source_file'));
 ```
@@ -243,7 +242,7 @@ COPY (SELECT 'hello world') TO (getvariable('target_file'));
 Copy to a file provided as parameter of a prepared statement:
 
 ```sql
-PREPARE v1 AS COPY (SELECT 42 i) to $1;
+PREPARE v1 AS COPY (SELECT 42 AS i) to $1;
 EXECUTE v1('file.csv');
 ```
 
@@ -251,7 +250,7 @@ Expressions may be used for options as well. Copy to a file using a format store
 
 ```sql
 SET VARIABLE my_format = 'parquet';
-COPY (SELECT 42 i) TO 'file' (FORMAT getvariable('my_format'));
+COPY (SELECT 42 AS i) TO 'file' (FORMAT getvariable('my_format'));
 ```
 
 ### `COPY ... TO` Options
@@ -291,7 +290,7 @@ With few exceptions, the below options are applicable to all formats written wit
 
 ## `COPY FROM DATABASE ... TO`
 
-The `COPY FROM DATABASE ... TO` statement copies the entire content from one attached database to another attached database. This includes the schema, including constraints, indexes, sequences, macros, and the data itself.
+The `COPY FROM DATABASE ... TO` statement copies the entire content from one attached database to another attached database. This includes the schema, including constraints, indexes, sequences, macros and the data itself.
 
 ```sql
 ATTACH 'db1.db' AS db1;
@@ -348,7 +347,7 @@ The below options are applicable when writing Parquet files.
 | `FIELD_IDS` | The `field_id` for each column. Pass `auto` to attempt to infer automatically. | `STRUCT` | (empty) |
 | `ROW_GROUP_SIZE_BYTES` | The target size of each row group. You can pass either a human-readable string, e.g., `2MB`, or an integer, i.e., the number of bytes. This option is only used when you have issued `SET preserve_insertion_order = false;`, otherwise, it is ignored. | `BIGINT` | `row_group_size * 1024` |
 | `ROW_GROUP_SIZE` | The target size, i.e., number of rows, of each row group. | `BIGINT` | 122880 |
-| `ROW_GROUPS_PER_FILE` | Create a new Parquet file if the current one has a specified number of row groups. If multiple threads are active, the number of row groups in a file may slightly exceed the specified number of row groups to limit the amount of locking – similarly to the behaviour of `FILE_SIZE_BYTES`. However, if `per_thread_output` is set, only one thread writes to each file, and it becomes accurate again. | `BIGINT` |  (empty) |
+| `ROW_GROUPS_PER_FILE` | Create a new Parquet file if the current one has a specified number of row groups. If multiple threads are active, the number of row groups in a file may slightly exceed the specified number of row groups to limit the amount of locking – similarly to the behavior of `FILE_SIZE_BYTES`. However, if `per_thread_output` is set, only one thread writes to each file, and it becomes accurate again. | `BIGINT` |  (empty) |
 | `PARQUET_VERSION` | The Parquet version to use (`V1`, `V2`). | `VARCHAR` | `V1` |
 
 Some examples of `FIELD_IDS` are as follows.

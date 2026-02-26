@@ -3,6 +3,8 @@ layout: docu
 railroad: query_syntax/groupby.js
 redirect_from:
 - /docs/sql/query_syntax/groupby
+- /cal/2
+- /cal/02
 title: GROUP BY Clause
 ---
 

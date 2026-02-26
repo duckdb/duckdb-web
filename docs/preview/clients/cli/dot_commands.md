@@ -25,7 +25,7 @@ Dot commands are available in the DuckDB CLI client. To use one of these command
 | `.help ⟨-all⟩ ⟨PATTERN⟩`{:.language-sql .highlight}                   | Show help text for `PATTERN`                                                                                                                                                |
 | `.highlight ⟨on/off⟩`{:.language-sql .highlight}                      | Toggle syntax highlighting in the shell `on` / `off`. See the [query syntax highlighting section](#configuring-the-query-syntax-highlighter) for more details               |
 | `.highlight_colors ⟨COMPONENT⟩ ⟨COLOR⟩`{:.language-sql .highlight}    | Configure the color of each component in (duckbox only). See the [result syntax highlighting section](#configuring-the-query-syntax-highlighter) for more details           |
-| `.highlight_results ⟨on/off⟩`{:.language-sql .highlight}              | Toggle highlighting in result tables `on` / `off` (duckbox only). See the [result syntaxx highlighting section](#configuring-the-query-syntax-highlighter) for more details |
+| `.highlight_results ⟨on/off⟩`{:.language-sql .highlight}              | Toggle highlighting in result tables `on` / `off` (duckbox only). See the [result syntax highlighting section](#configuring-the-query-syntax-highlighter) for more details |
 | `.import ⟨FILE⟩ ⟨TABLE⟩`{:.language-sql .highlight}                   | Import data from `FILE` into `TABLE`                                                                                                                                        |
 | `.indexes ⟨TABLE⟩`{:.language-sql .highlight}                         | Show names of indexes                                                                                                                                                       |
 | `.keyword ⟨COLOR⟩`{:.language-sql .highlight}                         | Sets the syntax highlighting color used for keywords                                                                                                                        |
@@ -225,7 +225,7 @@ To set that progress bar component to a blue text that displays the file cache R
      width="400"
      />
 
-To resets all existing progress bar components: 
+To reset all existing progress bar components:
 
 ```sql
 .progress_bar --clear
@@ -288,9 +288,9 @@ For example:
 
 By default, the result highlighting makes a few small modifications:
 
-- Bold column names
-- `NULL` values are greyed out
-- Layout elements are grayed out
+* Bold column names.
+* `NULL` values are greyed out.
+* Layout elements are grayed out.
 
 The highlighting of each of the components can be customized using the `.highlight_colors` command.
 For example:
@@ -310,7 +310,7 @@ The result highlighting can be disabled using `.highlight_results off`.
 ## Shorthands
 
 DuckDB's CLI allows using shorthands for dot commands.
-Once a sequence of characters can unambiguously completed to a dot command or an argument, the CLI (silently) autocompletes them.
+Once a sequence of characters can be unambiguously completed to a dot command or an argument, the CLI (silently) autocompletes them.
 For example:
 
 ```sql
@@ -323,7 +323,7 @@ Is equivalent to:
 .mode markdown
 ```
 
-> Tip Avoid using shorthands in SQL scripts to improve readability and ensure that the scripts and futureproof.
+> Tip Avoid using shorthands in SQL scripts to improve readability and ensure that the scripts are future-proof.
 
 ## Importing Data from CSV
 

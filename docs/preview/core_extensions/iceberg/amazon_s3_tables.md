@@ -39,10 +39,10 @@ CREATE SECRET (
 );
 ```
 
-Then, connect to the catalog using you S3 Tables ARN (available in the AWS Management Console) and the `ENDPOINT_TYPE s3_tables` option:
+Then, connect to the catalog using your S3 Tables ARN (available in the AWS Management Console) and the `ENDPOINT_TYPE s3_tables` option:
 
 ```sql
-ATTACH '⟨s3_tables_arn⟩' AS s3_tables (
+ATTACH '⟨s3_tables_arn⟩' AS my_s3_tables_catalog (
    TYPE iceberg,
    ENDPOINT_TYPE s3_tables
 );
@@ -58,5 +58,5 @@ You can query a table as follows:
 
 ```sql
 SELECT count(*)
-FROM s3_tables.⟨namespace_name⟩.⟨table_name⟩;
+FROM my_s3_tables_catalog.⟨namespace_name⟩.⟨table_name⟩;
 ```

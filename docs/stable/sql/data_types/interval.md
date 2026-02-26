@@ -3,7 +3,7 @@ blurb: Intervals represent periods of time measured in months, days, microsecond
   or a combination thereof.
 layout: docu
 redirect_from:
-- /docs/sql/data_types/interval
+  - /docs/sql/data_types/interval
 title: Interval Type
 ---
 
@@ -44,7 +44,7 @@ SELECT DATE '2000-01-01' + INTERVAL (i) MONTH
 FROM range(12) t(i);
 ```
 
-When `INTERVAL`s are deconstructed via the `datepart` function, the *months* component is additionally split into years and months, and the *microseconds* component is split into hours, minutes, and microseconds. The *days* component is not split into additional units. To demonstrate this, the following query generates an `INTERVAL` called `period` by summing random amounts of the three basis units. It then extracts the aforementioned six parts from `period`, adds them back together, and confirms that the result is always equal to the original `period`.
+When `INTERVAL`s are deconstructed via the `datepart` function, the *months* component is additionally split into years and months, and the *microseconds* component is split into hours, minutes and microseconds. The *days* component is not split into additional units. To demonstrate this, the following query generates an `INTERVAL` called `period` by summing random amounts of the three basis units. It then extracts the aforementioned six parts from `period`, adds them back together, and confirms that the result is always equal to the original `period`.
 
 ```sql
 SELECT
@@ -63,9 +63,9 @@ FROM (
 ) _(period);
 ```
 
-> Warning The *microseconds* component is split only into hours, minutes, and microseconds, rather than hours, minutes, *seconds*, and microseconds.
+> Warning The *microseconds* component is split only into hours, minutes and microseconds, rather than hours, minutes, *seconds* and microseconds.
 
-The following table describe how these parts are extracted by `datepart` in formulas, as a function of the three basis units.
+The following table describes how these parts are extracted by `datepart` in formulas, as a function of the three basis units.
 
 | Part                 | Formula                                          |
 |----------------------|--------------------------------------------------|
@@ -76,7 +76,7 @@ The following table describe how these parts are extracted by `datepart` in form
 | `minute`             | `(#microseconds // (60 * 1_000_000)) % 60`       |
 | `microsecond`        | `#microseconds % (60 * 1_000_000)`               |
 
-Additionally, `datepart` may be used to extract centuries, decades, quarters, seconds, and milliseconds from `INTERVAL`s. However, these parts are not required when reassembling the original `INTERVAL`. In fact, if the previous query additionally extracted any of these additional parts, then the sum of the extracted parts would generally be larger than the original `period`.
+Additionally, `datepart` may be used to extract centuries, decades, quarters, seconds and milliseconds from `INTERVAL`s. However, these parts are not required when reassembling the original `INTERVAL`. In fact, if the previous query additionally extracted any of these additional parts, then the sum of the extracted parts would generally be larger than the original `period`.
 
 | Part                 | Formula                                          |
 |----------------------|--------------------------------------------------|

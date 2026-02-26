@@ -3,6 +3,8 @@ layout: docu
 title: ADBC Client
 ---
 
+> Tip To use the DuckDB ADBC client, download the [`libduckdb` archive]({% link install/index.html %}?environment=c) for your platform and follow the [instructions below](#installing-the-library).
+>
 > The latest stable version of the DuckDB ADBC client is {{ site.current_duckdb_version }}.
 
 [Arrow Database Connectivity (ADBC)](https://arrow.apache.org/adbc/), similarly to ODBC and JDBC, is a C-style API that enables code portability between different database systems. This allows developers to effortlessly build applications that communicate with database systems without using code specific to that system. The main difference between ADBC and ODBC/JDBC is that ADBC uses [Arrow](https://arrow.apache.org/) to transfer data between the database system and the application. DuckDB has an ADBC driver, which takes advantage of the [zero-copy integration between DuckDB and Arrow]({% post_url 2021-12-03-duck-arrow %}) to efficiently transfer data.
@@ -40,7 +42,7 @@ A set of functions that retrieve metadata about the database. In general, these 
 
 | Function name | Description | Arguments | Example |
 |:---|:-|:---|:----|
-| `ConnectionGetObjects` | Get a hierarchical view of all catalogs, database schemas, tables, and columns. | `(AdbcConnection*, int, const char*, const char*, const char*, const char**, const char*, ArrowArrayStream*, AdbcError*)` | `AdbcDatabaseInit(&adbc_database, &adbc_error)` |
+| `ConnectionGetObjects` | Get a hierarchical view of all catalogs, database schemas, tables and columns. | `(AdbcConnection*, int, const char*, const char*, const char*, const char**, const char*, ArrowArrayStream*, AdbcError*)` | `AdbcDatabaseInit(&adbc_database, &adbc_error)` |
 | `ConnectionGetTableSchema` | Get the Arrow schema of a table. | `(AdbcConnection*, const char*, const char*, const char*, ArrowSchema*, AdbcError*)` | `AdbcDatabaseRelease(&adbc_database, &adbc_error)` |
 | `ConnectionGetTableTypes` | Get a list of table types in the database. | `(AdbcConnection*, ArrowArrayStream*, AdbcError*)` | `AdbcDatabaseNew(&adbc_database, &adbc_error)` |
 
@@ -55,7 +57,7 @@ A set of functions with transaction semantics for the connection. By default, al
 
 Statements hold state related to query execution. They represent both one-off queries and prepared statements. They can be reused; however, doing so will invalidate prior result sets from that statement.
 
-The functions used to create, destroy, and set options for a statement:
+The functions used to create, destroy and set options for a statement:
 
 | Function name | Description | Arguments | Example |
 |:---|:-|:---|:----|
@@ -162,7 +164,7 @@ Regardless of the programming language being used, there are two database option
 
 ### C++
 
-We begin our C++ example by declaring the essential variables for querying data through ADBC. These variables include Error, Database, Connection, Statement handling, and an Arrow Stream to transfer data between DuckDB and the application.
+We begin our C++ example by declaring the essential variables for querying data through ADBC. These variables include Error, Database, Connection, Statement handling and an Arrow Stream to transfer data between DuckDB and the application.
 
 ```cpp
 AdbcError adbc_error;

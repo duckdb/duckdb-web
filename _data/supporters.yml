@@ -68,6 +68,10 @@ silver:
     url: https://shiguredo.jp/
     logoimg: shiguredo.svg
 
+  - name: Altertable
+    url: https://altertable.ai/
+    logoimg: altertable.svg
+
 oss:
   - name: Bloomberg
     url: https://www.bloomberg.com/company/stories/bloomberg-ospo-launches-foss-contributor-fund/

@@ -1,299 +1,321 @@
 .. currentmodule:: duckdb
 
-.. autoclass:: duckdb.BinaryValue
+.. autoclass:: BinaryValue
    :members:
    :show-inheritance:
-.. autoclass:: duckdb.BinderException
+.. autoclass:: BinderException
    :members:
    :show-inheritance:
-.. autoclass:: duckdb.BitValue
+.. autoclass:: BitValue
    :members:
    :show-inheritance:
-.. autoclass:: duckdb.BlobValue
+.. autoclass:: BlobValue
    :members:
    :show-inheritance:
-.. autoclass:: duckdb.BooleanValue
+.. autoclass:: BooleanValue
    :members:
    :show-inheritance:
-.. autoclass:: duckdb.CSVLineTerminator
+.. autoclass:: CSVLineTerminator
    :members:
    :show-inheritance:
-.. automethod:: duckdb.CaseExpression
-.. autoclass:: duckdb.CatalogException
+.. autofunction:: CaseExpression
+.. autoclass:: CatalogException
    :members:
    :show-inheritance:
-.. automethod:: duckdb.CoalesceOperator
-.. automethod:: duckdb.ColumnExpression
-.. autoclass:: duckdb.ConnectionException
+.. autofunction:: CoalesceOperator
+.. autofunction:: ColumnExpression
+.. autoclass:: ConnectionException
    :members:
    :show-inheritance:
-.. automethod:: duckdb.ConstantExpression
-.. autoclass:: duckdb.ConstraintException
+.. autofunction:: ConstantExpression
+.. autoclass:: ConstraintException
    :members:
    :show-inheritance:
-.. autoclass:: duckdb.ConversionException
+.. autoclass:: ConversionException
    :members:
    :show-inheritance:
-.. autoclass:: duckdb.DBAPITypeObject
+.. autoclass:: DBAPITypeObject
    :members:
    :show-inheritance:
-.. autoclass:: duckdb.DataError
+.. autoclass:: DataError
    :members:
    :show-inheritance:
-.. autoclass:: duckdb.DateValue
+.. autoclass:: DatabaseError
    :members:
    :show-inheritance:
-.. autoclass:: duckdb.DecimalValue
+.. autoclass:: DateValue
    :members:
    :show-inheritance:
-.. automethod:: duckdb.DefaultExpression
-.. autoclass:: duckdb.DoubleValue
+.. autoclass:: DecimalValue
    :members:
    :show-inheritance:
-.. autoclass:: duckdb.DuckDBPyConnection
+.. autofunction:: DefaultExpression
+.. autoclass:: DependencyException
+   :members:
+   :show-inheritance:
+.. autoclass:: DoubleValue
+   :members:
+   :show-inheritance:
+.. autoclass:: DuckDBPyConnection
    :members:
    :show-inheritance:
 .. include:: relation.rst
-.. autoclass:: duckdb.Error
+.. autoclass:: Error
    :members:
    :show-inheritance:
-.. autoclass:: duckdb.ExpectedResultType
+.. autoclass:: ExpectedResultType
    :members:
    :show-inheritance:
-.. autoclass:: duckdb.ExplainType
+.. autoclass:: ExplainType
    :members:
    :show-inheritance:
-.. autoclass:: duckdb.Expression
+.. autoclass:: Expression
    :members:
    :show-inheritance:
-.. autoclass:: duckdb.FatalException
+.. autoclass:: FatalException
    :members:
    :show-inheritance:
-.. autoclass:: duckdb.FloatValue
+.. autoclass:: FloatValue
    :members:
    :show-inheritance:
-.. automethod:: duckdb.FunctionExpression
-.. autoclass:: duckdb.HTTPException
+.. autofunction:: FunctionExpression
+.. autoclass:: HTTPException
    :members:
    :show-inheritance:
-.. autoclass:: duckdb.HugeIntegerValue
+.. autoclass:: HugeIntegerValue
    :members:
    :show-inheritance:
-.. autoclass:: duckdb.IOException
+.. autoclass:: IOException
    :members:
    :show-inheritance:
-.. autoclass:: duckdb.IntegerValue
+.. autoclass:: IntegerValue
    :members:
    :show-inheritance:
-.. autoclass:: duckdb.IntegrityError
+.. autoclass:: IntegrityError
    :members:
    :show-inheritance:
-.. autoclass:: duckdb.InternalError
+.. autoclass:: InternalError
    :members:
    :show-inheritance:
-.. autoclass:: duckdb.InternalException
+.. autoclass:: InternalException
    :members:
    :show-inheritance:
-.. autoclass:: duckdb.InterruptException
+.. autoclass:: InterruptException
    :members:
    :show-inheritance:
-.. autoclass:: duckdb.IntervalValue
+.. autoclass:: IntervalValue
    :members:
    :show-inheritance:
-.. autoclass:: duckdb.InvalidInputException
+.. autoclass:: InvalidInputException
    :members:
    :show-inheritance:
-.. autoclass:: duckdb.InvalidTypeException
+.. autoclass:: InvalidTypeException
    :members:
    :show-inheritance:
-.. automethod:: duckdb.LambdaExpression
-.. autoclass:: duckdb.LongValue
+.. autofunction:: LambdaExpression
+.. autoclass:: ListValue
    :members:
    :show-inheritance:
-.. autoclass:: duckdb.NotImplementedException
+.. autoclass:: LongValue
    :members:
    :show-inheritance:
-.. autoclass:: duckdb.NotSupportedError
+.. autoclass:: MapValue
    :members:
    :show-inheritance:
-.. autoclass:: duckdb.NullValue
+.. autoclass:: NotImplementedException
    :members:
    :show-inheritance:
-.. autoclass:: duckdb.OperationalError
+.. autoclass:: NotSupportedError
    :members:
    :show-inheritance:
-.. autoclass:: duckdb.OutOfMemoryException
+.. autoclass:: NullValue
    :members:
    :show-inheritance:
-.. autoclass:: duckdb.OutOfRangeException
+.. autoclass:: OperationalError
    :members:
    :show-inheritance:
-.. autoclass:: duckdb.ParserException
+.. autoclass:: OutOfMemoryException
    :members:
    :show-inheritance:
-.. autoclass:: duckdb.PermissionException
+.. autoclass:: OutOfRangeException
    :members:
    :show-inheritance:
-.. autoclass:: duckdb.ProgrammingError
+.. autoclass:: ParserException
    :members:
    :show-inheritance:
-.. autoclass:: duckdb.PythonExceptionHandling
+.. autoclass:: PermissionException
    :members:
    :show-inheritance:
-.. autoclass:: duckdb.RenderMode
+.. autoclass:: ProgrammingError
    :members:
    :show-inheritance:
-.. automethod:: duckdb.SQLExpression
-.. autoclass:: duckdb.SequenceException
+.. autoclass:: PythonExceptionHandling
    :members:
    :show-inheritance:
-.. autoclass:: duckdb.SerializationException
+.. autoclass:: RenderMode
    :members:
    :show-inheritance:
-.. autoclass:: duckdb.ShortValue
+.. autofunction:: SQLExpression
+.. autoclass:: SequenceException
    :members:
    :show-inheritance:
-.. automethod:: duckdb.StarExpression
-.. autoclass:: duckdb.Statement
+.. autoclass:: SerializationException
    :members:
    :show-inheritance:
-.. autoclass:: duckdb.StatementType
+.. autoclass:: ShortValue
    :members:
    :show-inheritance:
-.. autoclass:: duckdb.StringValue
+.. autofunction:: StarExpression
+.. autoclass:: Statement
    :members:
    :show-inheritance:
-.. autoclass:: duckdb.SyntaxException
+.. autoclass:: StatementType
    :members:
    :show-inheritance:
-.. autoclass:: duckdb.TimeTimeZoneValue
+.. autoclass:: StringValue
    :members:
    :show-inheritance:
-.. autoclass:: duckdb.TimeValue
+.. autoclass:: StructValue
    :members:
    :show-inheritance:
-.. autoclass:: duckdb.TimestampMilisecondValue
+.. autoclass:: SyntaxException
    :members:
    :show-inheritance:
-.. autoclass:: duckdb.TimestampNanosecondValue
+.. autoclass:: TimeTimeZoneValue
    :members:
    :show-inheritance:
-.. autoclass:: duckdb.TimestampSecondValue
+.. autoclass:: TimeValue
    :members:
    :show-inheritance:
-.. autoclass:: duckdb.TimestampTimeZoneValue
+.. autoclass:: TimestampMilisecondValue
    :members:
    :show-inheritance:
-.. autoclass:: duckdb.TimestampValue
+.. autoclass:: TimestampNanosecondValue
    :members:
    :show-inheritance:
-.. autoclass:: duckdb.TransactionException
+.. autoclass:: TimestampSecondValue
    :members:
    :show-inheritance:
-.. autoclass:: duckdb.TypeMismatchException
+.. autoclass:: TimestampTimeZoneValue
    :members:
    :show-inheritance:
-.. autoclass:: duckdb.UUIDValue
+.. autoclass:: TimestampValue
    :members:
    :show-inheritance:
-.. autoclass:: duckdb.UnsignedBinaryValue
+.. autoclass:: TransactionException
    :members:
    :show-inheritance:
-.. autoclass:: duckdb.UnsignedIntegerValue
+.. autoclass:: TypeMismatchException
    :members:
    :show-inheritance:
-.. autoclass:: duckdb.UnsignedLongValue
+.. autoclass:: UUIDValue
    :members:
    :show-inheritance:
-.. autoclass:: duckdb.UnsignedShortValue
+.. autoclass:: UnionType
    :members:
    :show-inheritance:
-.. autoclass:: duckdb.Value
+.. autoclass:: UnsignedBinaryValue
    :members:
    :show-inheritance:
-.. autoclass:: duckdb.Warning
+.. autoclass:: UnsignedHugeIntegerValue
    :members:
    :show-inheritance:
-.. automethod:: duckdb.aggregate
-.. automethod:: duckdb.alias
-.. automethod:: duckdb.append
-.. automethod:: duckdb.array_type
-.. automethod:: duckdb.arrow
-.. automethod:: duckdb.begin
-.. automethod:: duckdb.checkpoint
-.. automethod:: duckdb.close
-.. automethod:: duckdb.commit
-.. automethod:: duckdb.connect
-.. automethod:: duckdb.create_function
-.. automethod:: duckdb.cursor
-.. automethod:: duckdb.decimal_type
-.. automethod:: duckdb.default_connection
-.. automethod:: duckdb.description
-.. automethod:: duckdb.df
-.. automethod:: duckdb.distinct
-.. automethod:: duckdb.dtype
-.. automethod:: duckdb.duplicate
-.. automethod:: duckdb.enum_type
-.. automethod:: duckdb.execute
-.. automethod:: duckdb.executemany
-.. automethod:: duckdb.extract_statements
-.. automethod:: duckdb.fetch_arrow_table
-.. automethod:: duckdb.fetch_df
-.. automethod:: duckdb.fetch_df_chunk
-.. automethod:: duckdb.fetch_record_batch
-.. automethod:: duckdb.fetchall
-.. automethod:: duckdb.fetchdf
-.. automethod:: duckdb.fetchmany
-.. automethod:: duckdb.fetchnumpy
-.. automethod:: duckdb.fetchone
-.. automethod:: duckdb.filesystem_is_registered
-.. automethod:: duckdb.filter
-.. automethod:: duckdb.from_arrow
-.. automethod:: duckdb.from_csv_auto
-.. automethod:: duckdb.from_df
-.. automethod:: duckdb.from_parquet
-.. automethod:: duckdb.from_query
-.. automethod:: duckdb.get_table_names
-.. automethod:: duckdb.install_extension
-.. automethod:: duckdb.interrupt
-.. automethod:: duckdb.limit
-.. automethod:: duckdb.list_filesystems
-.. automethod:: duckdb.list_type
-.. automethod:: duckdb.load_extension
-.. automethod:: duckdb.map_type
-.. automethod:: duckdb.order
-.. automethod:: duckdb.pl
-.. automethod:: duckdb.project
-.. automethod:: duckdb.query
-.. automethod:: duckdb.query_df
-.. automethod:: duckdb.query_progress
-.. automethod:: duckdb.read_csv
-.. automethod:: duckdb.read_json
-.. automethod:: duckdb.read_parquet
-.. automethod:: duckdb.register
-.. automethod:: duckdb.register_filesystem
-.. automethod:: duckdb.remove_function
-.. automethod:: duckdb.rollback
-.. automethod:: duckdb.row_type
-.. automethod:: duckdb.rowcount
-.. automethod:: duckdb.set_default_connection
-.. automethod:: duckdb.sql
-.. automethod:: duckdb.sqltype
-.. automethod:: duckdb.string_type
-.. automethod:: duckdb.struct_type
-.. automethod:: duckdb.table
-.. automethod:: duckdb.table_function
-.. automethod:: duckdb.tf
-.. autoclass:: duckdb.token_type
+.. autoclass:: UnsignedIntegerValue
    :members:
    :show-inheritance:
-.. automethod:: duckdb.tokenize
-.. automethod:: duckdb.torch
-.. automethod:: duckdb.type
-.. automethod:: duckdb.union_type
-.. automethod:: duckdb.unregister
-.. automethod:: duckdb.unregister_filesystem
-.. automethod:: duckdb.values
-.. automethod:: duckdb.version
-.. automethod:: duckdb.view
-.. automethod:: duckdb.write_csv
+.. autoclass:: UnsignedLongValue
+   :members:
+   :show-inheritance:
+.. autoclass:: UnsignedShortValue
+   :members:
+   :show-inheritance:
+.. autoclass:: Value
+   :members:
+   :show-inheritance:
+.. autoclass:: Warning
+   :members:
+   :show-inheritance:
+.. autofunction:: __annotate__
+.. autofunction:: aggregate
+.. autofunction:: alias
+.. autofunction:: append
+.. autofunction:: array_type
+.. autofunction:: arrow
+.. autofunction:: begin
+.. autofunction:: checkpoint
+.. autofunction:: close
+.. autofunction:: commit
+.. autofunction:: connect
+.. autofunction:: create_function
+.. autofunction:: cursor
+.. autofunction:: decimal_type
+.. autofunction:: default_connection
+.. autofunction:: description
+.. autofunction:: df
+.. autofunction:: distinct
+.. autofunction:: dtype
+.. autofunction:: duplicate
+.. autofunction:: enum_type
+.. autofunction:: execute
+.. autofunction:: executemany
+.. autofunction:: extract_statements
+.. autofunction:: fetch_arrow_table
+.. autofunction:: fetch_df
+.. autofunction:: fetch_df_chunk
+.. autofunction:: fetch_record_batch
+.. autofunction:: fetchall
+.. autofunction:: fetchdf
+.. autofunction:: fetchmany
+.. autofunction:: fetchnumpy
+.. autofunction:: fetchone
+.. autofunction:: filesystem_is_registered
+.. autofunction:: filter
+.. autofunction:: from_arrow
+.. autofunction:: from_csv_auto
+.. autofunction:: from_df
+.. autofunction:: from_parquet
+.. autofunction:: from_query
+.. autofunction:: get_table_names
+.. autofunction:: install_extension
+.. autofunction:: interrupt
+.. autofunction:: limit
+.. autofunction:: list_filesystems
+.. autofunction:: list_type
+.. autofunction:: load_extension
+.. autofunction:: map_type
+.. autofunction:: order
+.. autofunction:: pl
+.. autofunction:: project
+.. autofunction:: query
+.. autofunction:: query_df
+.. autofunction:: query_progress
+.. autofunction:: read_csv
+.. autofunction:: read_json
+.. autofunction:: read_parquet
+.. autofunction:: register
+.. autofunction:: register_filesystem
+.. autofunction:: remove_function
+.. autofunction:: rollback
+.. autofunction:: row_type
+.. autofunction:: rowcount
+.. autofunction:: set_default_connection
+.. autofunction:: sql
+.. autofunction:: sqltype
+.. autofunction:: string_type
+.. autofunction:: struct_type
+.. autofunction:: table
+.. autofunction:: table_function
+.. autofunction:: tf
+.. autoclass:: token_type
+   :members:
+   :show-inheritance:
+.. autofunction:: tokenize
+.. autofunction:: torch
+.. autofunction:: type
+.. autofunction:: union_type
+.. autofunction:: unregister
+.. autofunction:: unregister_filesystem
+.. autofunction:: values
+.. autofunction:: version
+.. autofunction:: view
+.. autofunction:: write_csv

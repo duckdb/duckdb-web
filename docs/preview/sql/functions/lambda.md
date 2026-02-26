@@ -17,11 +17,11 @@ title: Lambda Functions
 > Currently, `DEFAULT` enables both syntax styles, i.e.,
 > the old single arrow syntax and the Python-style syntax.
 >
-> DuckDB 1.4.0 will be the last release supporting the single arrow syntax without explicitly enabling it.
+> DuckDB 1.5.0 will be the last release supporting the single arrow syntax without explicitly enabling it.
 >
-> DuckDB 1.5.0 disables the single arrow syntax on default.
+> DuckDB 1.6.0 disables the single arrow syntax by default.
 >
-> DuckDB 1.6.0 removes the `lambda_syntax` flag and fully deprecates the single arrow syntax,
+> DuckDB 1.7.0 removes the `lambda_syntax` flag and fully deprecates the single arrow syntax,
 > so the old behavior will no longer be possible.
 
 Lambda functions enable the use of more complex and flexible expressions in queries.
@@ -121,7 +121,7 @@ SELECT list_transform(
 
 ## Scoping
 
-Lambda functions confirm to scoping rules in the following order:
+Lambda functions conform to scoping rules in the following order:
 
 * inner lambda parameters
 * outer lambda parameters

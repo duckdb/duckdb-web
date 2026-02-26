@@ -6,7 +6,7 @@ title: WITH Clause
 
 The `WITH` clause allows you to specify common table expressions (CTEs).
 Regular (non-recursive) common-table-expressions are essentially views that are limited in scope to a particular query.
-CTEs can reference each-other and can be nested. [Recursive CTEs](#recursive-ctes) can reference themselves.
+CTEs can reference each other and can be nested. [Recursive CTEs](#recursive-ctes) can reference themselves.
 
 ## Basic CTE Examples
 
@@ -48,10 +48,10 @@ once and the result is stored in a temporary table. However, under certain condi
 DuckDB can _inline_ the CTE into the main query, which means that the CTE is not
 materialized and its definition is duplicated in each place it is referenced.
 Inlining is done using the following heuristics:
-- The CTE is not referenced more than once.
-- The CTE does not contain a `VOLATILE` function.
-- The CTE is using `AS NOT MATERIALIZED` and does not use `AS MATERIALIZED`.
-- The CTE does not perform a grouped aggregation.
+* The CTE is not referenced more than once.
+* The CTE does not contain a `VOLATILE` function.
+* The CTE is using `AS NOT MATERIALIZED` and does not use `AS MATERIALIZED`.
+* The CTE does not perform a grouped aggregation.
 
 Materialization can be explicitly activated by defining the CTE using `AS MATERIALIZED` and disabled by using `AS NOT MATERIALIZED`. Note that inlining is not always possible, even if the heuristics are met. For example, if the CTE contains a `read_csv` function, it cannot be inlined.
 
@@ -340,6 +340,33 @@ ORDER BY length(path), path;
 
 ## Recursive CTEs with `USING KEY`
 
+> Deprecated DuckDB 1.5.0 deprecated the use of recursive `UNION`s for
+> `USING KEY` CTEs in favor of recursive `UNION ALL`s.
+> 
+> The recursive `UNION`s imply that not all rows that are produced in one
+> iteration are passed to the next, as would be the case for regular recursive
+> CTEs. Since the opposite is true, i.e., all rows are passed from one iteration
+> to the next, going forward DuckDB's `USING KEY` CTEs will require recursive
+> `UNION ALL`s instead.
+>
+> DuckDB 1.5.0 also introduces a new setting to configure the `USING KEY` syntax.
+>
+> ```sql
+> SET deprecated_using_key_syntax = 'DEFAULT';
+> SET deprecated_using_key_syntax = 'UNION_AS_UNION_ALL';
+> ```
+>
+> Currently, `DEFAULT` enables both syntax styles, i.e., allows both recursive
+> `UNION`s and recursive `UNION ALL`s in `USING KEY` CTEs.
+>
+> DuckDB 1.5.0 will be the last release supporting the `UNION` syntax without
+> explicitly enabling it.
+>
+> DuckDB 1.6.0 disables the `UNION` syntax by default.
+>
+> DuckDB 1.7.0 removes the `deprecated_using_key_syntax` flag and fully
+> deprecates the `UNION` syntax.
+
 `USING KEY` alters the behavior of a regular recursive CTE.
 
 In each iteration, a regular recursive CTE appends result rows to the union table, which ultimately defines the overall result of the CTE. In contrast, a CTE with `USING KEY` has the ability to update rows that have been placed in the union table in an earlier iteration: if the current iteration produces a row with key `k`, it replaces a row with the same key `k` in the union table (like a dictionary). If no such row exists in the union table yet, the new row is appended to the union table as usual.
@@ -360,7 +387,7 @@ This will overwrite the old payload `4` with the new payload `3`.
 WITH RECURSIVE tbl(a, b) USING KEY (a) AS (
     SELECT a, b
     FROM (VALUES (1, 3), (2, 4)) t(a, b)
-        UNION
+        UNION ALL
     SELECT a + 1, b
     FROM tbl
     WHERE a < 3
@@ -382,7 +409,7 @@ You can use the `VALUES` clause for the initial (anchor) part of the CTE:
 ```sql
 WITH RECURSIVE tbl(a, b) USING KEY (a) AS (
     VALUES (1, 3), (2, 4)
-        UNION
+        UNION ALL
     SELECT a + 1, b
     FROM tbl
     WHERE a < 3
@@ -412,7 +439,7 @@ INSERT INTO edges VALUES
 WITH RECURSIVE connected_components(id, comp) USING KEY (id) AS (
     SELECT n.id, n.id AS comp
     FROM nodes AS n
-        UNION (
+        UNION ALL (
     SELECT DISTINCT ON (previous_iter.id) previous_iter.id, initial_iter.comp
     FROM 
         recurring.connected_components AS previous_iter,

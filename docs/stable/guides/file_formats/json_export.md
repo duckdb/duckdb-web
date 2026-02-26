@@ -2,7 +2,6 @@
 layout: docu
 redirect_from:
 - /docs/guides/import/json_export
-- /docs/guides/import/json_export/
 - /docs/guides/file_formats/json_export
 title: JSON Export
 ---

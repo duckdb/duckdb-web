@@ -8,55 +8,64 @@ excerpt: |
 extension:
   name: webbed
   description: Comprehensive processing extension for web markup languages (XML and HTML) that enables SQL-native analysis of structured documents with intelligent schema inference, XPath-based data extraction, and powerful HTML table parsing capabilities.
-  version: 1.1.1
+  version: 1.4.0
   language: C++
   build: cmake
   license: MIT
-  requires_toolchains: "vcpkg"
+  requires_toolchains: vcpkg
   maintainers:
     - teaguesterling
-  vcpkg_commit: 'dd3097e305afa53f7b4312371f62058d2e665320'
+  vcpkg_commit: 68a1c387f660632f2f65cdb7e8cd093a08840e5d
 repo:
   github: teaguesterling/duckdb_webbed
-  ref: f2e49ff826ac9ecc084968eaf8e64269c1f82361
-
+  ref: 7d264c0f5b181718c0fc43e89a145cae7b063077
+  ref_next: 7d264c0f5b181718c0fc43e89a145cae7b063077
 docs:
+  docs_url: https://duckdb-webbed.readthedocs.io
   hello_world: |
     -- Load the extension
     LOAD webbed;
-    
+
     -- Read XML files directly into tables
     SELECT * FROM 'data.xml';
     SELECT * FROM read_xml('config/*.xml');
-    
+
     -- Parse and extract from XML content using XPath
     SELECT xml_extract_text('<book><title>Database Guide</title></book>', '//title');
     -- Result: "Database Guide"
-    
+
     -- Parse and extract from HTML content
     SELECT html_extract_text('<html><body><h1>Welcome</h1></body></html>', '//h1');
     -- Result: "Welcome"
-    
+
     -- Extract HTML tables directly into DuckDB
     SELECT * FROM html_extract_tables('<table><tr><th>Name</th><th>Age</th></tr><tr><td>John</td><td>25</td></tr></table>');
-    
+
     -- Extract links and images from HTML pages
     SELECT html_extract_links('<a href="https://example.com">Click here</a>');
     SELECT html_extract_images('<img src="photo.jpg" alt="Photo" width="800">');
-    
+
+    -- Parse XML strings directly (without files)
+    SELECT * FROM parse_xml('<books><book><title>DuckDB</title><price>29.99</price></book></books>');
+
     -- Convert between XML and JSON formats
     SELECT xml_to_json('<person><name>John</name><age>30</age></person>');
     SELECT json_to_xml('{"name":"John","age":"30"}');
 
+    -- Convert HTML to structured document blocks
+    SELECT html_to_duck_blocks('<h1>Title</h1><p>Paragraph with <strong>bold</strong> text.</p>');
+
   extended_description: |
-    DuckDB XML is a comprehensive extension that brings powerful XML and HTML processing capabilities to DuckDB, enabling SQL-native analysis of structured documents. The extension provides three core areas of functionality:
-    
-    **XML Processing & Analysis**: Parse, validate, and extract data from XML documents using full XPath 1.0 expressions. Functions include `xml_extract_text()`, `xml_extract_elements()`, `xml_extract_attributes()`, `xml_valid()`, and `xml_stats()` for comprehensive document analysis. The extension handles namespaces, comments, CDATA sections, and provides utilities like `xml_pretty_print()` and `xml_minify()`.
-    
+    DuckDB XML is a comprehensive extension that brings powerful XML and HTML processing capabilities to DuckDB, enabling SQL-native analysis of structured documents. The extension provides four core areas of functionality:
+
+    **XML Processing & Analysis**: Parse, validate, and extract data from XML documents using full XPath 1.0 expressions. Functions include `xml_extract_text()`, `xml_extract_elements()`, `xml_extract_attributes()`, `xml_valid()`, and `xml_stats()` for comprehensive document analysis. The extension handles namespaces with intelligent 'auto' mode detection, comments, CDATA sections, and provides utilities like `xml_pretty_print()` and `xml_minify()`.
+
     **HTML Processing & Web Scraping**: Advanced HTML parsing capabilities with specialized functions for web data extraction. Extract text content with `html_extract_text()`, parse HTML tables into structured data with `html_extract_tables()`, extract links with metadata using `html_extract_links()`, and extract images with attributes using `html_extract_images()`. Perfect for web scraping and HTML document analysis workflows.
-    
+
+    **Document Block Processing**: Convert HTML documents to and from structured block representations with `html_to_duck_blocks()` and `duck_blocks_to_html()`. Supports paragraphs, headings, code blocks, tables, lists, inline formatting (bold, italic, links, etc.), and frontmatter preservation. Integrates with the `duck_block_utils` extension for full Markdown support.
+
     **Smart Schema Inference & File Reading**: Automatically flatten XML/HTML documents into relational tables with intelligent type detection for dates, numbers, booleans, and nested structures. Functions like `read_xml()` and `read_html()` provide direct file-to-table conversion with configurable options for error handling, maximum file sizes, and schema customization.
-    
+
     **Key XML Functions**:
     - `read_xml(pattern)` - Read XML files with automatic schema inference
     - `xml_extract_text(xml, xpath)` - XPath-based text extraction
@@ -65,23 +74,30 @@ docs:
     - `xml_to_json(xml)` / `json_to_xml(json)` - Format conversions
     - `xml_stats(xml)` - Document statistics and analysis
     - `xml_validate_schema(xml, xsd)` - XSD schema validation
-    
+    - `xml_find_undefined_prefixes(xml, xpath)` - Detect undeclared namespace prefixes
+    - `xml_add_namespace_declarations(xml, map)` - Inject namespace declarations
+    - `parse_xml(content)` - Parse XML strings with schema inference
+    - `parse_xml_objects(content)` - Parse XML strings to raw XML type
+
     **Key HTML Functions**:
     - `read_html(pattern)` - Read HTML files into tables
     - `html_extract_tables(html)` - Extract HTML tables as structured data (this will often require post-processing given the possible complexity of HTML tables)
     - `html_extract_links(html)` - Extract all links with metadata
     - `html_extract_images(html)` - Extract images with attributes
     - `html_extract_text(html, xpath)` - XPath-based HTML text extraction
-    - `parse_html(content)` - Parse HTML strings into structured format
+    - `parse_html(content)` - Parse HTML strings with schema inference
+    - `parse_html_objects(content)` - Parse HTML strings to raw HTML type
+    - `html_to_duck_blocks(html)` - Convert HTML to structured document blocks
+    - `duck_blocks_to_html(blocks)` - Convert document blocks back to HTML
 
-    See: https://github.com/teaguesterling/duckdb_webbed/blob/main/README.md for more examples and details.
-    
+    See https://duckdb-webbed.readthedocs.io for comprehensive documentation and examples.
+
     Built on libxml2 for robust, standards-compliant parsing with comprehensive error handling, memory-safe RAII implementation, and 100% test coverage. The extension supports mixed file systems, configurable schema inference, and efficient processing of large document collections.
 
-extension_star_count: 30
-extension_star_count_pretty: 30
-extension_download_count: 1372
-extension_download_count_pretty: 1.4k
+extension_star_count: 42
+extension_star_count_pretty: 42
+extension_download_count: 5691
+extension_download_count_pretty: 5.7k
 image: '/images/community_extensions/social_preview/preview_community_extension_webbed.png'
 layout: community_extension_doc
 ---
@@ -107,39 +123,53 @@ LOAD {{ page.extension.name }};
 
 <div class="extension_functions_table"></div>
 
-|        function_name        | function_type | description | comment | examples |
-|-----------------------------|---------------|-------------|---------|----------|
-| html_extract_images         | scalar        | NULL        | NULL    |          |
-| html_extract_links          | scalar        | NULL        | NULL    |          |
-| html_extract_table_rows     | scalar        | NULL        | NULL    |          |
-| html_extract_tables         | table         | NULL        | NULL    |          |
-| html_extract_tables_json    | scalar        | NULL        | NULL    |          |
-| html_extract_text           | scalar        | NULL        | NULL    |          |
-| json_to_xml                 | scalar        | NULL        | NULL    |          |
-| parse_html                  | scalar        | NULL        | NULL    |          |
-| read_html                   | table         | NULL        | NULL    |          |
-| read_html_objects           | table         | NULL        | NULL    |          |
-| read_xml                    | table         | NULL        | NULL    |          |
-| read_xml_objects            | table         | NULL        | NULL    |          |
-| to_xml                      | scalar        | NULL        | NULL    |          |
-| xml                         | scalar        | NULL        | NULL    |          |
-| xml_extract_all_text        | scalar        | NULL        | NULL    |          |
-| xml_extract_attributes      | scalar        | NULL        | NULL    |          |
-| xml_extract_cdata           | scalar        | NULL        | NULL    |          |
-| xml_extract_comments        | scalar        | NULL        | NULL    |          |
-| xml_extract_elements        | scalar        | NULL        | NULL    |          |
-| xml_extract_elements_string | scalar        | NULL        | NULL    |          |
-| xml_extract_text            | scalar        | NULL        | NULL    |          |
-| xml_libxml2_version         | scalar        | NULL        | NULL    |          |
-| xml_minify                  | scalar        | NULL        | NULL    |          |
-| xml_namespaces              | scalar        | NULL        | NULL    |          |
-| xml_pretty_print            | scalar        | NULL        | NULL    |          |
-| xml_stats                   | scalar        | NULL        | NULL    |          |
-| xml_to_json                 | scalar        | NULL        | NULL    |          |
-| xml_valid                   | scalar        | NULL        | NULL    |          |
-| xml_validate_schema         | scalar        | NULL        | NULL    |          |
-| xml_well_formed             | scalar        | NULL        | NULL    |          |
-| xml_wrap_fragment           | scalar        | NULL        | NULL    |          |
+|         function_name          | function_type | description | comment | examples |
+|--------------------------------|---------------|-------------|---------|----------|
+| duck_blocks_to_html            | scalar        | NULL        | NULL    |          |
+| html_escape                    | scalar        | NULL        | NULL    |          |
+| html_extract_images            | scalar        | NULL        | NULL    |          |
+| html_extract_links             | scalar        | NULL        | NULL    |          |
+| html_extract_table_rows        | scalar        | NULL        | NULL    |          |
+| html_extract_tables            | table         | NULL        | NULL    |          |
+| html_extract_tables_json       | scalar        | NULL        | NULL    |          |
+| html_extract_text              | scalar        | NULL        | NULL    |          |
+| html_to_duck_blocks            | scalar        | NULL        | NULL    |          |
+| html_unescape                  | scalar        | NULL        | NULL    |          |
+| json_to_xml                    | scalar        | NULL        | NULL    |          |
+| parse_html                     | scalar        | NULL        | NULL    |          |
+| parse_html                     | table         | NULL        | NULL    |          |
+| parse_html_objects             | table         | NULL        | NULL    |          |
+| parse_xml                      | table         | NULL        | NULL    |          |
+| parse_xml_objects              | table         | NULL        | NULL    |          |
+| read_html                      | table         | NULL        | NULL    |          |
+| read_html_objects              | table         | NULL        | NULL    |          |
+| read_xml                       | table         | NULL        | NULL    |          |
+| read_xml_objects               | table         | NULL        | NULL    |          |
+| to_xml                         | scalar        | NULL        | NULL    |          |
+| xml                            | scalar        | NULL        | NULL    |          |
+| xml_add_namespace_declarations | scalar        | NULL        | NULL    |          |
+| xml_common_namespaces          | scalar        | NULL        | NULL    |          |
+| xml_detect_prefixes            | scalar        | NULL        | NULL    |          |
+| xml_extract_all_text           | scalar        | NULL        | NULL    |          |
+| xml_extract_attributes         | scalar        | NULL        | NULL    |          |
+| xml_extract_cdata              | scalar        | NULL        | NULL    |          |
+| xml_extract_comments           | scalar        | NULL        | NULL    |          |
+| xml_extract_elements           | scalar        | NULL        | NULL    |          |
+| xml_extract_elements_string    | scalar        | NULL        | NULL    |          |
+| xml_extract_text               | scalar        | NULL        | NULL    |          |
+| xml_find_undefined_prefixes    | scalar        | NULL        | NULL    |          |
+| xml_libxml2_version            | scalar        | NULL        | NULL    |          |
+| xml_lookup_namespace           | scalar        | NULL        | NULL    |          |
+| xml_minify                     | scalar        | NULL        | NULL    |          |
+| xml_mock_namespaces            | scalar        | NULL        | NULL    |          |
+| xml_namespaces                 | scalar        | NULL        | NULL    |          |
+| xml_pretty_print               | scalar        | NULL        | NULL    |          |
+| xml_stats                      | scalar        | NULL        | NULL    |          |
+| xml_to_json                    | scalar        | NULL        | NULL    |          |
+| xml_valid                      | scalar        | NULL        | NULL    |          |
+| xml_validate_schema            | scalar        | NULL        | NULL    |          |
+| xml_well_formed                | scalar        | NULL        | NULL    |          |
+| xml_wrap_fragment              | scalar        | NULL        | NULL    |          |
 
 ### Added Types
 

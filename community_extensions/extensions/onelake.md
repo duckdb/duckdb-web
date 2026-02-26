@@ -8,16 +8,17 @@ excerpt: |
 extension:
   name: onelake
   description: This extension allows you to connect DuckDB to Microsoft Fabric OneLake workspaces and lakehouses, enabling you to query data stored in OneLake directly from DuckDB.
-  version: 1.0.2
+  version: 1.1.0
   language: C++
   build: cmake
   license: MIT
   maintainers:
     - achrafcei
   excluded_platforms: "windows_amd64_mingw"
+  requires_toolchains: "rust"
 repo:
   github: datumnova/duckdb_onelake
-  ref: 838c17038de3756b43afd6d2b4b1d04ea412dfe7
+  ref: 59c131bc6e81f2edc5d08f71a4cc521f1c51d39e
   canonical_name: onelake
 
 docs:
@@ -52,7 +53,7 @@ docs:
     --     CHAIN 'cli'
     -- );
 
-    -- Optional: use preissued tokens stored in env variables (defaults shown), if they are already available with the same name, no need to set them here (only update the SET commands if the names are different
+    -- Optional: use preissued tokens stored in env variables (defaults shown)
     --SET onelake_env_fabric_token_variable = 'FABRIC_API_TOKEN';
     --SET onelake_env_storage_token_variable = 'AZURE_STORAGE_TOKEN';
     --CREATE SECRET onelake_env (
@@ -60,15 +61,6 @@ docs:
     --    PROVIDER credential_chain,
     --    CHAIN 'env'
     --);
-    -- Combine chain steps if you want CLI fallback
-    --CREATE SECRET onelake_env_chain (
-    --    TYPE ONELAKE,
-    --    PROVIDER credential_chain,
-    --    CHAIN 'cli, env'
-    --);
-
-    -- Optionally keep the token in-session instead of touching the shell
-    --SET VARIABLE AZURE_STORAGE_TOKEN = '<preissued_onelake_access_token>';
 
     -- Attach to your OneLake workspace and lakehouse
     ATTACH '<your_workspace_name>/<your_lakehouse_name>.Lakehouse'
@@ -79,22 +71,55 @@ docs:
 
     SHOW TABLES;
 
-    SELECT * FROM <your_table_name> LIMIT 10 ; -- USING ICEBERG;
+    -- Query tables (Delta or Iceberg)
+    SELECT * FROM <your_table_name> LIMIT 10;
 
-   
+    -- Create a new Delta table
+    CREATE TABLE new_table (
+        id INT,
+        name VARCHAR
+    );
+
+    -- Create a new Delta table with partitioning
+    CREATE TABLE new_table_partitioned (
+        id INT,
+        name VARCHAR,
+        region VARCHAR
+    ) PARTITION BY (region);
+
+    -- Write to Delta tables (INSERT)
+    INSERT INTO new_table VALUES (1, 'New Data');
+
+    -- SET write mode to overwrite (default is append)
+    SET onelake_delta_write_mode = 'overwrite';
+    INSERT INTO new_table VALUES (2, 'Overwritten Data');
+
+    -- Perform destructive operations (UPDATE, DELETE, DROP)
+    -- These require explicit opt-in per session
+    SET onelake_allow_destructive_operations = true;
+    
+    UPDATE new_table 
+    SET name = 'Updated Value' 
+    WHERE id = 1;
+
+    DELETE FROM new_table WHERE id = 1;
+    
+    DROP TABLE new_table;
 
   extended_description: |
-    This extension enables DuckDB to connect to Microsoft Fabric OneLake workspaces and lakehouses, allowing users to query data stored in OneLake directly from DuckDB. 
-    It supports authentication via service principals or credential chains (e.g., Azure CLI) and provides seamless integration with OneLake's data storage capabilities.
-    For detailed setup and usage instructions, visit the [extension repository](https://github.com/datumnova/duckdb_onelake).
+    This extension enables DuckDB to connect to Microsoft Fabric OneLake workspaces and lakehouses, allowing users to query and modify data stored in OneLake directly from DuckDB. 
+    It supports authentication via service principals, credential chains (e.g., Azure CLI), or environment tokens and provides seamless integration with OneLake's data storage capabilities.
     
-    Current limitations:
-    - Only read access is supported; write operations are not implemented.
+    Key Features:
+    - Read support for both Delta and Iceberg tables.
+    - Full write support for Delta tables including CREATE TABLE, INSERT, UPDATE, DELETE, and DROP.
+    - Configurable write modes (append, overwrite) and schema evolution.
+    - ALTER TABLE support is planned for future releases.
 
 extension_star_count: 18
 extension_star_count_pretty: 18
-extension_download_count: 543
-extension_download_count_pretty: 543
+extension_download_count: 573
+extension_download_count_pretty: 573
 image: '/images/community_extensions/social_preview/preview_community_extension_onelake.png'
 layout: community_extension_doc
 ---
@@ -151,8 +176,15 @@ LOAD {{ page.extension.name }};
 | http_retry_wait_ms                   | Time between retries                                                                                                                            | UBIGINT    | GLOBAL | []      |
 | http_timeout                         | HTTP timeout read/write/connection/retry (in seconds)                                                                                           | UBIGINT    | GLOBAL | []      |
 | httpfs_client_implementation         | Select which is the HTTPUtil implementation to be used                                                                                          | VARCHAR    | GLOBAL | []      |
+| onelake_allow_destructive_operations | Allow destructive operations like DROP TABLE (default: false)                                                                                   | BOOLEAN    | GLOBAL | []      |
 | onelake_env_fabric_token_variable    | Environment variable name that stores the Fabric API access token                                                                               | VARCHAR    | GLOBAL | []      |
 | onelake_env_storage_token_variable   | Environment variable name that stores the OneLake storage access token                                                                          | VARCHAR    | GLOBAL | []      |
+| onelake_insert_mode                  | Default INSERT mode (append|overwrite|error_if_exists|ignore)                                                                                   | VARCHAR    | GLOBAL | []      |
+| onelake_partition_columns            | Comma-separated list of partition columns for the next CREATE TABLE                                                                             | VARCHAR    | GLOBAL | []      |
+| onelake_safe_cast                    | Enable safe type casting during writes                                                                                                          | BOOLEAN    | GLOBAL | []      |
+| onelake_schema_mode                  | Schema evolution mode (empty|merge|overwrite)                                                                                                   | VARCHAR    | GLOBAL | []      |
+| onelake_target_file_size             | Target Parquet file size in bytes (0 = default)                                                                                                 | UBIGINT    | GLOBAL | []      |
+| onelake_write_batch_size             | Number of rows per write batch (0 = default)                                                                                                    | UBIGINT    | GLOBAL | []      |
 | s3_access_key_id                     | S3 Access Key ID                                                                                                                                | VARCHAR    | GLOBAL | []      |
 | s3_endpoint                          | S3 Endpoint                                                                                                                                     | VARCHAR    | GLOBAL | []      |
 | s3_kms_key_id                        | S3 KMS Key ID                                                                                                                                   | VARCHAR    | GLOBAL | []      |

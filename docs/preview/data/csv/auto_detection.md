@@ -6,9 +6,9 @@ title: CSV Auto Detection
 When using `read_csv`, the system tries to automatically infer how to read the CSV file using the [CSV sniffer]({% post_url 2023-10-27-csv-sniffer %}).
 This step is necessary because CSV files are not self-describing and come in many different dialects. The auto-detection works roughly as follows:
 
-* Detect the dialect of the CSV file (delimiter, quoting rule, escape)
-* Detect the types of each of the columns
-* Detect whether or not the file has a header row
+* Detect the dialect of the CSV file (delimiter, quoting rule, escape).
+* Detect the types of each of the columns.
+* Detect whether or not the file has a header row.
 
 By default the system will try to auto-detect all options. However, options can be individually overridden by the user. This can be useful in case the system makes a mistake. For example, if the delimiter is chosen incorrectly, we can override it by calling the `read_csv` with an explicit delimiter (e.g., `read_csv('file.csv', delim = '|')`).
 
@@ -94,10 +94,10 @@ FlightDate|UniqueCarrier|OriginCityName|DestCityName
 
 In this file, the dialect detection works as follows:
 
-* If we split by a `|` every row is split into `4` columns
-* If we split by a `,` rows 2-4 are split into `3` columns, while the first row is split into `1` column
-* If we split by `;`, every row is split into `1` column
-* If we split by `\t`, every row is split into `1` column
+* If we split by a `|` every row is split into `4` columns.
+* If we split by a `,` rows 2-4 are split into `3` columns, while the first row is split into `1` column.
+* If we split by `;`, every row is split into `1` column.
+* If we split by `\t`, every row is split into `1` column.
 
 In this example – the system selects the `|` as the delimiter. All rows are split into the same amount of columns, and there is more than one column per row meaning the delimiter was actually found in the CSV file.
 
@@ -152,7 +152,7 @@ The detected types can be individually overridden using the `types` option. This
 * A list of type definitions (e.g., `types = ['INTEGER', 'VARCHAR', 'DATE']`). This overrides the types of the columns in-order of occurrence in the CSV file.
 * Alternatively, `types` takes a `name` → `type` map which overrides options of individual columns (e.g., `types = {'quarter': 'INTEGER'}`).
 
-The set of column types that may be specified using the `types` option is not as limited as the types available for the `auto_type_candidates` option: any valid type definition is acceptable to the `types`-option. (To get a valid type definition, use the [`typeof()`]({% link docs/preview/sql/functions/utility.md %}#typeofexpression) function, or use the `column_type` column  of the [`DESCRIBE`]({% link docs/preview/guides/meta/describe.md %}) result.)
+The set of column types that may be specified using the `types` option is not as limited as the types available for the `auto_type_candidates` option: any valid type definition is acceptable to the `types`-option. (To get a valid type definition, use the [`typeof()`]({% link docs/preview/sql/functions/utility.md %}#typeofexpression) function, or use the `column_type` column of the [`DESCRIBE`]({% link docs/preview/guides/meta/describe.md %}) result.)
 
 The `sniff_csv()` function's `Column` field returns a struct with column names and types that can be used as a basis for overriding types.
 
@@ -166,9 +166,9 @@ Note that headers cannot be detected correctly if all columns are of type `VARCH
 
 ### Dates and Timestamps
 
-DuckDB supports the [ISO 8601 format](https://en.wikipedia.org/wiki/ISO_8601) format by default for timestamps, dates and times. Unfortunately, not all dates and times are formatted using this standard. For that reason, the CSV reader also supports the `dateformat` and `timestampformat` options. Using this format the user can specify a [format string]({% link docs/preview/sql/functions/dateformat.md %}) that specifies how the date or timestamp should be read.
+DuckDB supports the [ISO 8601 format](https://en.wikipedia.org/wiki/ISO_8601) by default for timestamps, dates and times. Unfortunately, not all dates and times are formatted using this standard. For that reason, the CSV reader also supports the `dateformat` and `timestampformat` options. Using this format the user can specify a [format string]({% link docs/preview/sql/functions/dateformat.md %}) that specifies how the date or timestamp should be read.
 
-As part of the auto-detection, the system tries to figure out if dates and times are stored in a different representation. This is not always possible – as there are ambiguities in the representation. For example, the date `01-02-2000` can be parsed as either January 2nd or February 1st. Often these ambiguities can be resolved. For example, if we later encounter the date `21-02-2000` then we know that the format must have been `DD-MM-YYYY`. `MM-DD-YYYY` is no longer possible as there is no 21nd month.
+As part of the auto-detection, the system tries to figure out if dates and times are stored in a different representation. This is not always possible – as there are ambiguities in the representation. For example, the date `01-02-2000` can be parsed as either January 2nd or February 1st. Often these ambiguities can be resolved. For example, if we later encounter the date `21-02-2000` then we know that the format must have been `DD-MM-YYYY`. `MM-DD-YYYY` is no longer possible as there is no 21st month.
 
 If the ambiguities cannot be resolved by looking at the data the system has a list of preferences for which date format to use. If the system chooses incorrectly, the user can specify the `dateformat` and `timestampformat` options manually.
 

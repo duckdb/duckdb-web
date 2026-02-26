@@ -5,66 +5,56 @@ excerpt: |
   DuckDB Community Extensions
   DuckDB QuickJS Runtime Extension
 
+docs:
+  extended_description: "## QuickJS DuckDB Extension\nThis extension provides an embedded\
+    \ QuickJS-NG engine for DuckDB. It allows executing JavaScript code directly within\
+    \ your SQL queries. \n> QuickJS-NG is a small, fast, and embeddable JavaScript\
+    \ engine that supports modern JavaScript features including ES2020.\n\nThis extension\
+    \ is experimental and potentially unstable. Do not use it in production."
+  hello_world: "-- Quack JS with QuickJS\n-- Scalar\nD SELECT quickjs('2+2');\n\u250C\
+    \u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\
+    \u2500\u2500\u2500\u2510\n\u2502 quickjs('2+2') \u2502\n\u2502    varchar    \
+    \ \u2502\n\u251C\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\
+    \u2500\u2500\u2500\u2500\u2500\u2524\n\u2502 4              \u2502\n\u2514\u2500\
+    \u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\
+    \u2500\u2500\u2518\n\n-- Scalar Eval\nD SELECT quickjs_eval('(a, b) => a + b',\
+    \ 5, 3);\n\u250C\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\
+    \u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\
+    \u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\
+    \u2500\u2500\u2510\n\u2502 quickjs_eval('(a, b) => a + b', 5, 3) \u2502\n\u2502\
+    \                 json                  \u2502\n\u251C\u2500\u2500\u2500\u2500\
+    \u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\
+    \u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\
+    \u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2524\n\u2502 8       \
+    \                              \u2502\n\u2514\u2500\u2500\u2500\u2500\u2500\u2500\
+    \u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\
+    \u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\
+    \u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2518\n\n-- Table Eval\nD SELECT *\
+    \ FROM quickjs('parsed_arg0.map(x => x * arg1)', '[1, 2, 3, 4, 5]', 3);\n\u250C\
+    \u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2510\n\u2502 result \u2502\n\
+    \u2502  json  \u2502\n\u251C\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2524\
+    \n\u2502 3      \u2502\n\u2502 6      \u2502\n\u2502 9      \u2502\n\u2502 12\
+    \     \u2502\n\u2502 15     \u2502\n\u2514\u2500\u2500\u2500\u2500\u2500\u2500\
+    \u2500\u2500\u2518\n"
 extension:
-  name: quickjs
-  description: DuckDB QuickJS Runtime Extension
-  version: 0.0.1
-  language: C++
   build: cmake
+  description: DuckDB QuickJS Runtime Extension
+  excluded_platforms: windows_amd64_mingw
+  language: C++
   license: MIT
-  excluded_platforms: "windows_amd64_mingw"
   maintainers:
-    - lmangani
-
+  - lmangani
+  name: quickjs
+  version: '2025120401'
 repo:
   github: quackscience/duckdb-quickjs
-  ref: 83906e2486de7823b10aabcca931533feadfe23c
+  ref: 2d31ccebd7f44babc901c84ba0fe8b560647e136
+  ref_next: fb1ec32f91a21b1bfc200646cb01bcf47c6e6eb7
 
-docs:
-  hello_world: |
-    -- Quack JS with QuickJS
-    -- Scalar
-    D SELECT quickjs('2+2');
-    ┌────────────────┐
-    │ quickjs('2+2') │
-    │    varchar     │
-    ├────────────────┤
-    │ 4              │
-    └────────────────┘
-    
-    -- Scalar Eval
-    D SELECT quickjs_eval('(a, b) => a + b', 5, 3);
-    ┌───────────────────────────────────────┐
-    │ quickjs_eval('(a, b) => a + b', 5, 3) │
-    │                 json                  │
-    ├───────────────────────────────────────┤
-    │ 8                                     │
-    └───────────────────────────────────────┘
-
-    -- Table Eval
-    D SELECT * FROM quickjs('parsed_arg0.map(x => x * arg1)', '[1, 2, 3, 4, 5]', 3);
-    ┌────────┐
-    │ result │
-    │  json  │
-    ├────────┤
-    │ 3      │
-    │ 6      │
-    │ 9      │
-    │ 12     │
-    │ 15     │
-    └────────┘
-
-  extended_description: |
-    ## QuickJS DuckDB Extension
-    This extension provides an embedded QuickJS-NG engine for DuckDB. It allows executing JavaScript code directly within your SQL queries. 
-    > QuickJS-NG is a small, fast, and embeddable JavaScript engine that supports modern JavaScript features including ES2020.
-    
-    This extension is experimental and potentially unstable. Do not use it in production.
-
-extension_star_count: 9
-extension_star_count_pretty: 9
-extension_download_count: 717
-extension_download_count_pretty: 717
+extension_star_count: 11
+extension_star_count_pretty: 11
+extension_download_count: 489
+extension_download_count_pretty: 489
 image: '/images/community_extensions/social_preview/preview_community_extension_quickjs.png'
 layout: community_extension_doc
 ---
@@ -90,10 +80,45 @@ LOAD {{ page.extension.name }};
 
 <div class="extension_functions_table"></div>
 
-| function_name | function_type | description | comment | examples |
-|---------------|---------------|-------------|---------|----------|
-| quickjs       | scalar        | NULL        | NULL    |          |
-| quickjs       | table         | NULL        | NULL    |          |
-| quickjs_eval  | scalar        | NULL        | NULL    |          |
+| function_name | function_type |                                       description                                       | comment |                                 examples                                  |
+|---------------|---------------|-----------------------------------------------------------------------------------------|---------|---------------------------------------------------------------------------|
+| quickjs       | scalar        | Execute JavaScript code and return the result as a string                               | NULL    | [quickjs('1 + 2'), quickjs('"hello".toUpperCase()')]                      |
+| quickjs       | table         | Execute JavaScript code that returns an array, with each element becoming a row         | NULL    | [SELECT * FROM quickjs('[1, 2, 3].map(x => x * 2)')]                      |
+| quickjs_eval  | scalar        | Execute a JavaScript function with the provided arguments and return the result as JSON | NULL    | [quickjs_eval('(a, b) => a + b', 1, 2), quickjs_eval('(x) => x * 2', 21)] |
+
+### Added Settings
+
+<div class="extension_settings_table"></div>
+
+|                 name                 |                                         description                                          | input_type | scope  | aliases |
+|--------------------------------------|----------------------------------------------------------------------------------------------|------------|--------|---------|
+| auto_fallback_to_full_download       | Allows automatically falling back to full file downloads when possible.                      | BOOLEAN    | GLOBAL | []      |
+| ca_cert_file                         | Path to a custom certificate file for self-signed certificates.                              | VARCHAR    | GLOBAL | []      |
+| enable_curl_server_cert_verification | Enable server side certificate verification for CURL backend.                                | BOOLEAN    | GLOBAL | []      |
+| enable_global_s3_configuration       | Automatically fetch AWS credentials from environment variables.                              | BOOLEAN    | GLOBAL | []      |
+| enable_server_cert_verification      | Enable server side certificate verification.                                                 | BOOLEAN    | GLOBAL | []      |
+| force_download                       | Forces upfront download of file                                                              | BOOLEAN    | GLOBAL | []      |
+| hf_max_per_page                      | Debug option to limit number of items returned in list requests                              | UBIGINT    | GLOBAL | []      |
+| http_keep_alive                      | Keep alive connections. Setting this to false can help when running into connection failures | BOOLEAN    | GLOBAL | []      |
+| http_retries                         | HTTP retries on I/O error                                                                    | UBIGINT    | GLOBAL | []      |
+| http_retry_backoff                   | Backoff factor for exponentially increasing retry wait time                                  | FLOAT      | GLOBAL | []      |
+| http_retry_wait_ms                   | Time between retries                                                                         | UBIGINT    | GLOBAL | []      |
+| http_timeout                         | HTTP timeout read/write/connection/retry (in seconds)                                        | UBIGINT    | GLOBAL | []      |
+| httpfs_client_implementation         | Select which is the HTTPUtil implementation to be used                                       | VARCHAR    | GLOBAL | []      |
+| merge_http_secret_into_s3_request    | Merges http secret params into S3 requests                                                   | BOOLEAN    | GLOBAL | []      |
+| s3_access_key_id                     | S3 Access Key ID                                                                             | VARCHAR    | GLOBAL | []      |
+| s3_endpoint                          | S3 Endpoint                                                                                  | VARCHAR    | GLOBAL | []      |
+| s3_kms_key_id                        | S3 KMS Key ID                                                                                | VARCHAR    | GLOBAL | []      |
+| s3_region                            | S3 Region                                                                                    | VARCHAR    | GLOBAL | []      |
+| s3_requester_pays                    | S3 use requester pays mode                                                                   | BOOLEAN    | GLOBAL | []      |
+| s3_secret_access_key                 | S3 Access Key                                                                                | VARCHAR    | GLOBAL | []      |
+| s3_session_token                     | S3 Session Token                                                                             | VARCHAR    | GLOBAL | []      |
+| s3_uploader_max_filesize             | S3 Uploader max filesize (between 50GB and 5TB)                                              | VARCHAR    | GLOBAL | []      |
+| s3_uploader_max_parts_per_file       | S3 Uploader max parts per file (between 1 and 10000)                                         | UBIGINT    | GLOBAL | []      |
+| s3_uploader_thread_limit             | S3 Uploader global thread limit                                                              | UBIGINT    | GLOBAL | []      |
+| s3_url_compatibility_mode            | Disable Globs and Query Parameters on S3 URLs                                                | BOOLEAN    | GLOBAL | []      |
+| s3_url_style                         | S3 URL style                                                                                 | VARCHAR    | GLOBAL | []      |
+| s3_use_ssl                           | S3 use SSL                                                                                   | BOOLEAN    | GLOBAL | []      |
+| unsafe_disable_etag_checks           | Disable checks on ETag consistency                                                           | BOOLEAN    | GLOBAL | []      |
 
 

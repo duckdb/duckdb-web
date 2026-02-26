@@ -535,7 +535,7 @@ body.duckcon7 {
     }
 
     pre {
-        padding: 10px;
+        padding: 15px;
         overflow: auto;
         background: var(--doc-codebox-background-color, #F2F2F2);
         border-radius: 10px;
@@ -584,7 +584,6 @@ body.duckcon7 {
             &::marker {
                 display: none;
             }
-            
         }
         &[open]{
             summary{
@@ -595,6 +594,21 @@ body.duckcon7 {
                 }
             }
         }
+        
+        > div img {
+          max-width: 100%;
+          margin-top: 8px;
+        }
+        
+        > table,
+        > div .highlight{
+            margin-top: 8px;    
+        }
+        
+    }
+    
+    details + details{
+        margin-top: 1em;
     }
 
 }

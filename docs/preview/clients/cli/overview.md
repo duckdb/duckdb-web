@@ -3,11 +3,13 @@ layout: docu
 title: Command Line Client
 ---
 
+> Tip To use the DuckDB CLI client, visit the [CLI installation page]({% link install/index.html %}?environment=cli).
+>
 > The latest stable version of the DuckDB command line client is {{ site.current_duckdb_version }}.
 
 ## Installation
 
-The DuckDB CLI (Command Line Interface) is a single, dependency-free executable. It is precompiled for Windows, Mac, and Linux for both the stable version and for nightly builds produced by GitHub Actions. Please see the [installation page]({% link install/index.html %}) under the CLI tab for download links.
+The DuckDB CLI (Command Line Interface) is a single, dependency-free executable. It is precompiled for Windows, Mac and Linux for both the stable version and for nightly builds produced by GitHub Actions. Please see the [installation page]({% link install/index.html %}) under the CLI tab for download links.
 
 The DuckDB CLI is based on the SQLite command line shell, so CLI-client-specific functionality is similar to what is described in the [SQLite documentation](https://www.sqlite.org/cli.html) (although DuckDB's SQL syntax follows PostgreSQL conventions with a [few exceptions]({% link docs/preview/sql/dialect/postgresql_compatibility.md %})).
 
@@ -73,7 +75,7 @@ SELECT 'quack' AS my_column;
 |-----------|
 | quack     |
 
-The CLI supports all of DuckDB's rich [SQL syntax]({% link docs/preview/sql/introduction.md %}) including `SELECT`, `CREATE`, and `ALTER` statements.
+The CLI supports all of DuckDB's rich [SQL syntax]({% link docs/preview/sql/introduction.md %}) including `SELECT`, `CREATE` and `ALTER` statements.
 
 ### Editor Features
 
@@ -122,7 +124,7 @@ One important option accepted by `.open` is the `--readonly` flag. This disallow
 #### Output Formats
 
 The `.mode` [dot command]({% link docs/preview/clients/cli/dot_commands.md %}#mode) may be used to change the appearance of the tables returned in the terminal output.
-These include the default `duckbox` mode, `csv` and `json` mode for ingestion by other tools, `markdown` and `latex` for documents, and `insert` mode for generating SQL statements.
+These include the default `duckbox` mode, `csv` and `json` mode for ingestion by other tools, `markdown` and `latex` for documents and `insert` mode for generating SQL statements.
 
 #### Writing Results to a File
 
@@ -196,7 +198,7 @@ In this case, no output is returned to the terminal. Instead, the file `series.m
 Several dot commands can be used to configure the CLI.
 On startup, the CLI reads and executes all commands in the file `~/.duckdbrc`, including dot commands and SQL statements.
 This allows you to store the configuration state of the CLI.
-You may also point to a different initialization file using the `-init`.
+You may also point to a different initialization file using the `-init` flag.
 
 ### Setting a Custom Prompt
 
@@ -204,8 +206,14 @@ As an example, a file in the same directory as the DuckDB CLI named `prompt.sql`
 Note that the duck head is built with Unicode characters and does not work in all terminal environments (e.g., in Windows, unless running with WSL and using the Windows Terminal).
 
 ```text
-.prompt '⚫◗ '
+.prompt "{color:yellow1}{sql:select current_database()} ⚫◗ "
 ```
+
+Or a simpler version without colours:
+```sql
+.prompt "{sql:select current_database()} ⚫◗ "
+```
+
 
 To invoke that file on initialization, use this command:
 

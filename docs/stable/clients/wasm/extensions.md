@@ -2,7 +2,6 @@
 layout: docu
 redirect_from:
 - /docs/api/wasm/extensions
-- /docs/api/wasm/extensions/
 - /docs/clients/wasm/extensions
 title: Extensions
 ---
@@ -48,7 +47,7 @@ WebAssembly is basically an additional platform, and there might be platform-spe
 
 ### HTTPFS
 
-The HTTPFS extension is, at the moment, not available in DuckDB-Wasm. Https protocol capabilities needs to go through an additional layer, the browser, which adds both differences and some restrictions to what is doable from native.
+The HTTPFS extension is, at the moment, not available in DuckDB-Wasm. Https protocol capabilities need to go through an additional layer, the browser, which adds both differences and some restrictions to what is doable from native.
 
 Instead, DuckDB-Wasm has a separate implementation that for most purposes is interchangeable, but does not support all use cases (as it must follow security rules imposed by the browser, such as CORS).
 Due to this CORS restriction, any requests for data made using the HTTPFS extension must be to websites that allow (using CORS headers) the website hosting the DuckDB-Wasm instance to access that data.
@@ -73,7 +72,7 @@ DuckDB-Wasm extensions are served pre-compressed using Brotli compression. While
 
 ## Serving Extensions from a Third-Party Repository
 
-As with regular DuckDB, if you use `SET custom_extension_repository = some.url.com`, subsequent loads will be attempted at `some.url.com/duckdb-wasm/$duckdb_version_hash/$duckdb_platform/$name.duckdb_extension.wasm`.
+As with regular DuckDB, if you use `SET custom_extension_repository = 'https://some.url.com'`, subsequent loads will be attempted at `https://some.url.com/duckdb-wasm/$duckdb_version_hash/$duckdb_platform/$name.duckdb_extension.wasm`.
 
 Note that GET requests on the extensions needs to be [CORS enabled](https://www.w3.org/wiki/CORS_Enabled) for a browser to allow the connection.
 

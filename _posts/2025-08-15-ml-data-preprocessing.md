@@ -450,7 +450,7 @@ And we apply coalesce to handle the missing values according to our use-case:
 SELECT
     time_since_last_transaction_with_0: coalesce(time_since_last_transaction, 0),
     time_since_last_transaction_with_mean: coalesce(time_since_last_transaction, avg_time_since_last_transaction),
-    time_since_last_transaction_with_median: coalesce(time_since_last_transaction, median_time_since_last_transaction)
+    time_since_last_transaction_with_libraryn: coalesce(time_since_last_transaction, median_time_since_last_transaction)
 FROM
     financial_trx_testing,
     scaling_params('financial_trx_training', ['time_since_last_transaction'])

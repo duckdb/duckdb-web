@@ -20,7 +20,7 @@ We start by loading the [Palmer Penguins dataset](https://github.com/allisonhors
 
 ```python
 duckdb_conn.read_csv(
-    "http://blobs.duckdb.org/data/penguins.csv"
+    "https://blobs.duckdb.org/data/penguins.csv"
 ).filter(
     "columns(*)::text != 'NA'"
 ).filter(

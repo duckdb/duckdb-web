@@ -28,7 +28,7 @@ The `USING` clause allows deleting based on the content of other tables or subqu
 
 ### `RETURNING` Clause
 
-The `RETURNING` clause allows returning the deletes values. It uses the same syntax as the `SELECT` clause except the `DISTINCT` modifier is not supported.
+The `RETURNING` clause allows returning the deleted values. It uses the same syntax as the `SELECT` clause except the `DISTINCT` modifier is not supported.
 
 ```sql
 CREATE TABLE employees (name VARCHAR, age INTEGER);
@@ -44,7 +44,7 @@ DELETE FROM employees RETURNING name, 2025 - age AS approx_birthyear;
 
 <div id="rrdiagram"></div>
 
-## The`TRUNCATE` Statement
+## The `TRUNCATE` Statement
 
 The `TRUNCATE` statement removes all rows from a table, acting as an alias for `DELETE FROM` without a `WHERE` clause:
 

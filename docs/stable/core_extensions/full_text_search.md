@@ -3,9 +3,7 @@ github_repository: https://github.com/duckdb/duckdb-fts
 layout: docu
 redirect_from:
 - /docs/stable/extensions/full_text_search
-- /docs/stable/extensions/full_text_search/
 - /docs/extensions/full_text_search
-- /docs/extensions/full_text_search/
 title: Full-Text Search Extension
 ---
 
@@ -77,7 +75,7 @@ When an index is built, this retrieval macro is created that can be used to sear
 |:--|:--|:----------|
 | `input_id` | `VARCHAR` | Column name of document identifier, e.g., `'document_identifier'` |
 | `query_string` | `VARCHAR` | The string to search the index for |
-| `fields` | `VARCHAR` | Comma-separarated list of fields to search in, e.g., `'text_field_2, text_field_N'`. Defaults to `NULL` to search all indexed fields |
+| `fields` | `VARCHAR` | Comma-separated list of fields to search in, e.g., `'text_field_2, text_field_N'`. Defaults to `NULL` to search all indexed fields |
 | `k` | `DOUBLE` | Parameter _k<sub>1</sub>_ in the Okapi BM25 retrieval model. Defaults to `1.2` |
 | `b` | `DOUBLE` | Parameter _b_ in the Okapi BM25 retrieval model. Defaults to `0.75` |
 | `conjunctive` | `BOOLEAN` | Whether to make the query conjunctive i.e., all terms in the query string must be present in order for a document to be retrieved |
@@ -166,5 +164,5 @@ ORDER BY score DESC;
 |---------------------|------------------------------------------------------------|------:|
 | doc2                | The cat is a domestic species of small carnivorous mammal. | 0.0   |
 
-> Warning The FTS index will not update automatically when input table changes.
+> Warning The FTS index will not update automatically when the input table changes.
 > A workaround of this limitation can be recreating the index to refresh.

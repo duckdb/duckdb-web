@@ -102,7 +102,7 @@ SELECT * FROM "MyTaBLe";
 ERROR:  relation "MyTaBLe" does not exist
 ```
 
-PostgreSQL does not only treat quoted identifiers as case-sensitive, PostgreSQL treats all identifiers as case-sensitive, e.g., this also does not work:
+PostgreSQL does not only treat quoted identifiers as case-sensitive; it treats all identifiers as case-sensitive, e.g., this also does not work:
 
 ```sql
 CREATE TABLE "PreservedCase" (x INTEGER);
@@ -153,7 +153,7 @@ However, the case insensitive matching in the system for identifiers cannot be t
 
 ## Using Double Equality Sign for Comparison
 
-DuckDB supports both `=` and `==` for quality comparison, while PostgreSQL only supports `=`.
+DuckDB supports both `=` and `==` for equality comparison, while PostgreSQL only supports `=`.
 
 ```sql
 SELECT 1 == 1 AS t;
@@ -273,7 +273,7 @@ In DuckDB, `~` is equivalent to [`regexp_full_match`]({% link docs/preview/sql/f
 The operators `~*` and `!~*` are not supported.
 
 The table below shows that the correspondence between these functions in PostgreSQL and DuckDB is almost non-existent.
-We recommend avoiding the POSIX regular expression matching operators in DuckDB.
+Avoid using the POSIX regular expression matching operators in DuckDB.
 
 <div class="monospace_table"></div>
 

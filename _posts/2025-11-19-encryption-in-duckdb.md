@@ -18,11 +18,12 @@ Databases store arbitrary information, it is clear that many if not most dataset
 
 However, database systems and encryption have a somewhat problematic track record. Even PostgreSQL, the self-proclaimed “The World's Most Advanced Open Source Relational Database” has very [limited options](https://www.postgresql.org/docs/current/encryption-options.html) for data encryption. SQLite, the world’s “[Most Widely Deployed and Used Database Engine](https://www.sqlite.org/mostdeployed.html)” does not support data encryption out-of-the-box, its encryption extension is [a $2000 add-on](https://sqlite.org/com/see.html). 
 
-**DuckDB** has supported [Parquet Modular Encryption](https://parquet.apache.org/docs/file-format/data-pages/encryption/) [for a while](https://duckdb.org/docs/stable/data/parquet/encryption). This feature allows reading and writing Parquet files with encrypted columns. However, while Parquet files are great and [reports of their impending death](https://materializedview.io/p/nimble-and-lance-parquet-killers) are greatly exaggerated, they cannot – for example – be updated in place, a pretty basic feature of a database management system.
+DuckDB has supported [Parquet Modular Encryption](https://parquet.apache.org/docs/file-format/data-pages/encryption/) [for a while](https://duckdb.org/docs/stable/data/parquet/encryption). This feature allows reading and writing Parquet files with encrypted columns. However, while Parquet files are great and [reports of their impending death](https://materializedview.io/p/nimble-and-lance-parquet-killers) are greatly exaggerated, they cannot – for example – be updated in place, a pretty basic feature of a database management system.
 
-Starting with DuckDB 1.4.0, DuckDB supports **transparent data encryption** of data-at-rest using industry-standard AES encryption.
+Starting with DuckDB 1.4.0, DuckDB supports _transparent data encryption_ of data-at-rest using industry-standard AES encryption.
 
 > DuckDB's encryption does not yet meet the official [NIST requirements](https://csrc.nist.gov/projects/cryptographic-standards-and-guidelines).
+> Please follow issue [`#20162` “Store and verify tag for canary encryption”](https://github.com/duckdb/duckdb/issues/20162) to track our progress towards NIST-compliance.
 
 ## Some Basics of Encryption
 
@@ -55,7 +56,7 @@ After the main database header, DuckDB stores two 4KB database headers that cont
 
 Blocks in DuckDB are by default 256KB, but their size is configurable. At the start of each *plaintext* block there is an 8-byte block header, which stores an 8-byte checksum. The checksum is a simple calculation that is often used in database systems to check for any corrupted data. 
 
-<div align="center">
+<div>
     <img src="{% link images/blog/encryption/plaintext-block-light.svg %}"
         alt="Plaintext block"
         class="lightmode-img"
@@ -68,7 +69,7 @@ Blocks in DuckDB are by default 256KB, but their size is configurable. At the st
 
 For encrypted blocks however, its block header consists of 40 bytes instead of 8 bytes for the checksum. The block header for encrypted blocks contains a 16-byte *nonce/IV* and, optionally, a 16-byte *tag*, depending on which encryption cipher is used. The nonce and tag are stored in plaintext, but the checksum is encrypted for better security. Note that the block header always needs to be 8-bytes aligned to calculate the checksum.
 
-<div align="center">
+<div>
     <img src="{% link images/blog/encryption/encrypted-block-light.svg %}"
         alt="Encrypted block"
         class="lightmode-img"
@@ -105,7 +106,7 @@ If we now close the DuckDB process, we can see that there is a `.wal` file shown
 
 Before writing new entries (inserts, updates, deletes) to the database, these entries are essentially logged and appended to the WAL. Only *after* logged entries are flushed to disk, a transaction is considered as committed. A plaintext WAL entry has the following structure:
 
-<div align="center">
+<div>
     <img src="{% link images/blog/encryption/plaintext-wal-entry-light.svg %}"
         alt="Plaintext block"
         class="lightmode-img"
@@ -118,7 +119,7 @@ Before writing new entries (inserts, updates, deletes) to the database, these en
 
 Since the WAL is append-only, we encrypt a WAL entry *per value*. For AES-GCM this means that we append a nonce and a tag to each entry. The structure in which we do this is depicted in below. When we serialize an encrypted entry to the encrypted WAL, we first store the length in plaintext, because we need to know how many bytes we should decrypt. The length is followed by a nonce, which on its turn is followed by the encrypted checksum and the encrypted entry itself. After the entry, a 16-byte tag is stored for verification.
 
-<div align="center">
+<div>
     <img src="{% link images/blog/encryption/encrypted-wal-entry-light.svg %}"
         alt="Plaintext block"
         class="lightmode-img"
@@ -190,7 +191,7 @@ Let’s now visualize both the plaintext and encrypted data with binocle. For th
 <summary markdown='span'>
 Click here to see the entropy of a plaintext database
 </summary>
-<div align="center">
+<div>
     <img src="https://blobs.duckdb.org/images/duckdb-plaintext-database.png" width="800" />
 </div>
 </details>
@@ -199,7 +200,7 @@ Click here to see the entropy of a plaintext database
 <summary markdown='span'>
 Click here to see the entropy of an encrypted database
 </summary>
-<div align="center">
+<div>
     <img src="https://blobs.duckdb.org/images/duckdb-encrypted-database.png" width="800" />
 </div>
 </details>

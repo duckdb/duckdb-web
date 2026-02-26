@@ -25,7 +25,7 @@ Note that 32-bit platforms are limited to using 4 GiB RAM due to the amount of a
 [Big-endian architectures](https://en.wikipedia.org/wiki/Endianness) (such as PowerPC) are [not supported](https://duckdblabs.com/community_support_policy#architectures) by DuckDB.
 While DuckDB can likely be built on such architectures,
 the resulting binary may exhibit [correctness](https://github.com/duckdb/duckdb/issues/5548) [errors](https://github.com/duckdb/duckdb/issues/9714) on certain operations.
-Therefore, it's use is not recommended.
+Therefore, its use is not recommended.
 
 ## RISC-V Architectures
 
@@ -35,7 +35,7 @@ The user [“LivingLinux” on Bluesky](https://bsky.app/profile/livinglinux.bsk
 GEN=ninja \
     CC='gcc-14 -march=rv64gcv_zicsr_zifencei_zihintpause_zvl256b' \
     CXX='g++-14 -march=rv64gcv_zicsr_zifencei_zihintpause_zvl256b' \
-    CORE_EXTENSIONS='fts' \
+    BUILD_EXTENSIONS='fts' \
     make
 ```
 

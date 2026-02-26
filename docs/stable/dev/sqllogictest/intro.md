@@ -2,7 +2,6 @@
 layout: docu
 redirect_from:
 - /dev/sqllogictest/intro
-- /dev/sqllogictest/intro/
 - /docs/dev/sqllogictest/intro
 title: sqllogictest Introduction
 ---
@@ -10,7 +9,7 @@ title: sqllogictest Introduction
 For testing plain SQL, we use an extended version of the SQL logic test suite, adopted from [SQLite](https://www.sqlite.org/sqllogictest/doc/trunk/about.wiki). Every test is a single self-contained file located in the `test/sql` directory.
 To run tests located outside of the default `test` directory, specify `--test-dir <root_directory>` and make sure provided test file paths are relative to that root directory.
 
-The test describes a series of SQL statements, together with either the expected result, a `statement ok` indicator, or a `statement error` indicator. An example of a  test file is shown below:
+The test describes a series of SQL statements, together with either the expected result, a `statement ok` indicator, or a `statement error` indicator. An example of a test file is shown below:
 
 ```sql
 # name: test/sql/projection/test_simple_projection.test
@@ -72,6 +71,6 @@ COPY csv_data TO '__TEST_DIR__/output_file.csv.gz' (COMPRESSION gzip);
 
 ### Require & Extensions
 
-To avoid bloating the core system, certain functionality of DuckDB is available only as an extension. Tests can be build for those extensions by adding a `require` field in the test. If the extension is not loaded, any statements that occurs after the require field will be skipped. Examples of this are `require parquet` or `require icu`.
+To avoid bloating the core system, certain functionality of DuckDB is available only as an extension. Tests can be built for those extensions by adding a `require` field in the test. If the extension is not loaded, any statements that occur after the require field will be skipped. Examples of this are `require parquet` or `require icu`.
 
-Another usage is to limit a test to a specific vector size. For example, adding `require vector_size 512` to a test will prevent the test from being run unless the vector size greater than or equal to 512. This is useful because certain functionality is not supported for low vector sizes, but we run tests using a vector size of 2 in our CI.
+Another usage is to limit a test to a specific vector size. For example, adding `require vector_size 512` to a test will prevent the test from being run unless the vector size is greater than or equal to 512. This is useful because certain functionality is not supported for low vector sizes, but we run tests using a vector size of 2 in our CI.

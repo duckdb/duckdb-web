@@ -78,6 +78,7 @@ Some of this style guide is automated with GitHub Actions, but feel free to run 
 * Single and double quote characters (`'` and `"`) are not converted to smart quotation marks automatically. To insert these, use `“` `”` and `‘` `’`.
 * When referencing other articles, put their titles in quotes, e.g., `see the [“Lightweight Compression in DuckDB” blog post]({% post_url 2022-10-28-lightweight-compression %})`.
 * For unordered lists, use `*`. If the list has multiple levels, use **4 spaces** for indentation.
+    * **Note:** YAML front matter (between `---` markers) requires `-` for lists as per YAML syntax. The `*` marker is only for Markdown content.
 
 > [!TIP]
 > In VS Code, you can configure the [Markdown All in One extension](https://marketplace.visualstudio.com/items?itemName=yzhang.markdown-all-in-one) to use asterisk as the default marker when generating a table of content for a page using the following setting in `settings.json`:

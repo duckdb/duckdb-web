@@ -8,18 +8,18 @@ excerpt: |
 extension:
   name: observefs
   description: Provides IO observability to filesystem
-  version: 0.4.1
+  version: 0.4.6
   language: C++
   build: cmake
   license: MIT
-  excluded_platforms: "wasm_mvp;wasm_eh;wasm_threads;windows_amd64_rtools;windows_amd64;windows_amd64_mingw"
+  excluded_platforms: "wasm_mvp;wasm_eh;wasm_threads;windows_amd64_rtools"
   maintainers:
     - dentiny
     - peterxcli
 
 repo:
   github: dentiny/duckdb-filesystem-observability
-  ref: 4d1848b8732ff39280d91a4c9fb83fc215acc91e
+  ref: cb6a1a7d88eba7f02a9690e1df4c6bf4e166a9f3
 
 docs:
   hello_world: |
@@ -28,14 +28,15 @@ docs:
     This extension provides observability to duckdb filesystems.
     It supports a few key features:
     - 100% compatible with duckdb httpfs
+    - Record latency for most of the IO operations (open, read, write, etc)
     - Provides both process-wise and bucket-wise latency stats (including histogram and quantile estimation) to all read operations
     - Provides cache access insight to duckdb external file cache
     - Allows registering ANY duckdb compatible filesystems (i.e., azure filesystem)
 
-extension_star_count: 6
-extension_star_count_pretty: 6
-extension_download_count: 753
-extension_download_count_pretty: 753
+extension_star_count: 10
+extension_star_count_pretty: 10
+extension_download_count: 432
+extension_download_count_pretty: 432
 image: '/images/community_extensions/social_preview/preview_community_extension_observefs.png'
 layout: community_extension_doc
 ---

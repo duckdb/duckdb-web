@@ -2,7 +2,6 @@
 layout: docu
 redirect_from:
 - /internals/repositories
-- /internals/repositories/
 - /docs/dev/repositories
 title: DuckDB Repositories
 ---

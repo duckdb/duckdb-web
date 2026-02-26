@@ -36,7 +36,7 @@ What to expect from an extension that has a version number in the **unstable** f
 ### Pre-Release Extensions
 
 Pre-release extensions are the next step up from Unstable extensions. They are tagged with version in the **[SemVer](https://semver.org/)** format, more specifically, those in the `v0.y.z` format.
-In semantic versioning, versions starting with `v0` have a special meaning: they indicate that the more strict semantics of regular (`>v1.0.0`) versions do not yet apply. It basically means that an extensions is working
+In semantic versioning, versions starting with `v0` have a special meaning: they indicate that the more strict semantics of regular (`>v1.0.0`) versions do not yet apply. It basically means that an extension is working
 towards becoming a stable extension, but is not quite there yet.
 
 For example, at the time of writing this, the version of the `delta` extension is a pre-release extension of version `v0.1.0`.
@@ -81,7 +81,7 @@ In general, there are 2 ways of using nightly builds: using a nightly DuckDB bui
 
 ### From Stable DuckDB
 
-In most cases, user's will be interested in a nightly build of a specific extension, but don't necessarily want to switch to using the nightly build of DuckDB itself. This allows using a specific bleeding-edge
+In most cases, users will be interested in a nightly build of a specific extension, but don't necessarily want to switch to using the nightly build of DuckDB itself. This allows using a specific bleeding-edge
 feature while limiting the exposure to unstable code.
 
 To achieve this, Core Extensions tend to regularly push builds to the [`core_nightly` repository]({% link docs/preview/extensions/installing_extensions.md %}#extension-repositories). Let's look at an example:

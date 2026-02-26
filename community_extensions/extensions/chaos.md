@@ -16,7 +16,8 @@ extension:
     - taniabogatsch
 repo:
   github: taniabogatsch/duckdb-chaos
-  ref: e112242b794466d2a4a577af0a92fce836708a71
+  ref: 46ef95bf98ef008078c1cf753fa3d78e418b1456
+  ref_next: f076132edafe0a2b150d34af3ad0743bfb937c9f
 
 docs:
   hello_world: |
@@ -38,8 +39,8 @@ docs:
 
 extension_star_count: 0
 extension_star_count_pretty: 0
-extension_download_count: 718
-extension_download_count_pretty: 718
+extension_download_count: 439
+extension_download_count_pretty: 439
 image: '/images/community_extensions/social_preview/preview_community_extension_chaos.png'
 layout: community_extension_doc
 ---

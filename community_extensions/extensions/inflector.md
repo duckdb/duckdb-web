@@ -6,25 +6,27 @@ excerpt: |
   Powerful string case transformation and inflection capabilities directly to your SQL queries.
 
 docs:
-  extended_description: |
-    For more information regarding usage, see the [documentation](https://query.farm/duckdb_extension_inflector.html).
+  extended_description: For more information regarding usage, see the [documentation](https://query.farm/duckdb_extension_inflector.html).
 extension:
   build: cmake
-  description: Powerful string case transformation and inflection capabilities directly to your SQL queries.
+  description: Powerful string case transformation and inflection capabilities directly
+    to your SQL queries.
   language: C++
   license: Apache-2.0
   maintainers:
-    - rustyconover
+  - rustyconover
   name: inflector
   requires_toolchains: rust
-  version: 2025111201
+  version: '2025120401'
 repo:
   github: query-farm/inflector
-  ref: 973052ba08aeec5380f79254d3d3b4d805c0b8b3
-extension_star_count: 2
-extension_star_count_pretty: 2
-extension_download_count: 704
-extension_download_count_pretty: 704
+  ref: 5f2fa551e1c8ca6fdf50f8752afc637fb7a1ceee
+  ref_next: 15d7d6a04ff4db940ca05750a766b5fae024905b
+
+extension_star_count: 7
+extension_star_count_pretty: 7
+extension_download_count: 426
+extension_download_count_pretty: 426
 image: '/images/community_extensions/social_preview/preview_community_extension_inflector.png'
 layout: community_extension_doc
 ---
@@ -50,38 +52,39 @@ LOAD {{ page.extension.name }};
 
 <div class="extension_functions_table"></div>
 
-|          function_name           | function_type | description | comment | examples |
-|----------------------------------|---------------|-------------|---------|----------|
-| inflect                          | scalar        | NULL        | NULL    | NULL     |
-| inflect                          | table         | NULL        | NULL    | NULL     |
-| inflector_deconstantize          | scalar        | NULL        | NULL    | NULL     |
-| inflector_demodulize             | scalar        | NULL        | NULL    | NULL     |
-| inflector_deordinalize           | scalar        | NULL        | NULL    | NULL     |
-| inflector_is_camel_case          | scalar        | NULL        | NULL    | NULL     |
-| inflector_is_class_case          | scalar        | NULL        | NULL    | NULL     |
-| inflector_is_foreign_key         | scalar        | NULL        | NULL    | NULL     |
-| inflector_is_kebab_case          | scalar        | NULL        | NULL    | NULL     |
-| inflector_is_pascal_case         | scalar        | NULL        | NULL    | NULL     |
-| inflector_is_screamingsnake_case | scalar        | NULL        | NULL    | NULL     |
-| inflector_is_sentence_case       | scalar        | NULL        | NULL    | NULL     |
-| inflector_is_snake_case          | scalar        | NULL        | NULL    | NULL     |
-| inflector_is_table_case          | scalar        | NULL        | NULL    | NULL     |
-| inflector_is_title_case          | scalar        | NULL        | NULL    | NULL     |
-| inflector_is_train_case          | scalar        | NULL        | NULL    | NULL     |
-| inflector_ordinalize             | scalar        | NULL        | NULL    | NULL     |
-| inflector_to_camel_case          | scalar        | NULL        | NULL    | NULL     |
-| inflector_to_class_case          | scalar        | NULL        | NULL    | NULL     |
-| inflector_to_foreign_key         | scalar        | NULL        | NULL    | NULL     |
-| inflector_to_kebab_case          | scalar        | NULL        | NULL    | NULL     |
-| inflector_to_pascal_case         | scalar        | NULL        | NULL    | NULL     |
-| inflector_to_plural              | scalar        | NULL        | NULL    | NULL     |
-| inflector_to_screamingsnake_case | scalar        | NULL        | NULL    | NULL     |
-| inflector_to_sentence_case       | scalar        | NULL        | NULL    | NULL     |
-| inflector_to_singular            | scalar        | NULL        | NULL    | NULL     |
-| inflector_to_snake_case          | scalar        | NULL        | NULL    | NULL     |
-| inflector_to_table_case          | scalar        | NULL        | NULL    | NULL     |
-| inflector_to_title_case          | scalar        | NULL        | NULL    | NULL     |
-| inflector_to_train_case          | scalar        | NULL        | NULL    | NULL     |
+|          function_name           | function_type |                               description                                | comment |                            examples                            |
+|----------------------------------|---------------|--------------------------------------------------------------------------|---------|----------------------------------------------------------------|
+| inflect                          | scalar        | Transforms a string value using the specified case format                | NULL    | [inflect('snake', 'helloWorld')]                               |
+| inflect                          | scalar        | Transforms struct field names using the specified case format            | NULL    | [inflect('snake', {firstName: 'John', lastName: 'Doe'})]       |
+| inflect                          | table         | Transforms column names in query results using the specified case format | NULL    | [FROM inflect('snake', SELECT firstName, lastName FROM users)] |
+| inflector_deconstantize          | scalar        | Removes the rightmost segment from a constant expression                 | NULL    | [inflector_deconstantize('Net::HTTP')]                         |
+| inflector_demodulize             | scalar        | Removes the module part from a fully qualified name                      | NULL    | [inflector_demodulize('ActiveRecord::CoreExtensions::String')] |
+| inflector_deordinalize           | scalar        | Removes the ordinal suffix from a string (1st -> 1)                      | NULL    | [inflector_deordinalize('1st')]                                |
+| inflector_is_camel_case          | scalar        | Returns true if the string is in camelCase format                        | NULL    | [inflector_is_camel_case('helloWorld')]                        |
+| inflector_is_class_case          | scalar        | Returns true if the string is in ClassCase (PascalCase) format           | NULL    | [inflector_is_class_case('HelloWorld')]                        |
+| inflector_is_foreign_key         | scalar        | Returns true if the string is in foreign key format (ends with _id)      | NULL    | [inflector_is_foreign_key('message_id')]                       |
+| inflector_is_kebab_case          | scalar        | Returns true if the string is in kebab-case format                       | NULL    | [inflector_is_kebab_case('hello-world')]                       |
+| inflector_is_pascal_case         | scalar        | Returns true if the string is in PascalCase format                       | NULL    | [inflector_is_pascal_case('HelloWorld')]                       |
+| inflector_is_screamingsnake_case | scalar        | Returns true if the string is in SCREAMING_SNAKE_CASE format             | NULL    | [inflector_is_screamingsnake_case('HELLO_WORLD')]              |
+| inflector_is_sentence_case       | scalar        | Returns true if the string is in Sentence case format                    | NULL    | [inflector_is_sentence_case('Hello world')]                    |
+| inflector_is_snake_case          | scalar        | Returns true if the string is in snake_case format                       | NULL    | [inflector_is_snake_case('hello_world')]                       |
+| inflector_is_table_case          | scalar        | Returns true if the string is in table_case format (snake_case plural)   | NULL    | [inflector_is_table_case('foo_bars')]                          |
+| inflector_is_title_case          | scalar        | Returns true if the string is in Title Case format                       | NULL    | [inflector_is_title_case('Hello World')]                       |
+| inflector_is_train_case          | scalar        | Returns true if the string is in Train-Case format                       | NULL    | [inflector_is_train_case('Hello-World')]                       |
+| inflector_ordinalize             | scalar        | Converts a number string to its ordinal form (1st, 2nd, 3rd, etc.)       | NULL    | [inflector_ordinalize('1')]                                    |
+| inflector_to_camel_case          | scalar        | Converts a string to camelCase format                                    | NULL    | [inflector_to_camel_case('hello_world')]                       |
+| inflector_to_class_case          | scalar        | Converts a string to ClassCase (PascalCase) format                       | NULL    | [inflector_to_class_case('hello_world')]                       |
+| inflector_to_foreign_key         | scalar        | Converts a class name to a foreign key column name                       | NULL    | [inflector_to_foreign_key('Message')]                          |
+| inflector_to_kebab_case          | scalar        | Converts a string to kebab-case format                                   | NULL    | [inflector_to_kebab_case('helloWorld')]                        |
+| inflector_to_pascal_case         | scalar        | Converts a string to PascalCase format                                   | NULL    | [inflector_to_pascal_case('hello_world')]                      |
+| inflector_to_plural              | scalar        | Returns the plural form of a word                                        | NULL    | [inflector_to_plural('person')]                                |
+| inflector_to_screamingsnake_case | scalar        | Converts a string to SCREAMING_SNAKE_CASE format                         | NULL    | [inflector_to_screamingsnake_case('helloWorld')]               |
+| inflector_to_sentence_case       | scalar        | Converts a string to Sentence case format                                | NULL    | [inflector_to_sentence_case('helloWorld')]                     |
+| inflector_to_singular            | scalar        | Returns the singular form of a word                                      | NULL    | [inflector_to_singular('people')]                              |
+| inflector_to_snake_case          | scalar        | Converts a string to snake_case format                                   | NULL    | [inflector_to_snake_case('helloWorld')]                        |
+| inflector_to_table_case          | scalar        | Converts a string to table_cases format (snake_case plural)              | NULL    | [inflector_to_table_case('FooBar')]                            |
+| inflector_to_title_case          | scalar        | Converts a string to Title Case format                                   | NULL    | [inflector_to_title_case('hello_world')]                       |
+| inflector_to_train_case          | scalar        | Converts a string to Train-Case format                                   | NULL    | [inflector_to_train_case('helloWorld')]                        |
 
 ### Added Settings
 
@@ -92,6 +95,7 @@ LOAD {{ page.extension.name }};
 | auto_fallback_to_full_download       | Allows automatically falling back to full file downloads when possible.                      | BOOLEAN    | GLOBAL | []      |
 | ca_cert_file                         | Path to a custom certificate file for self-signed certificates.                              | VARCHAR    | GLOBAL | []      |
 | enable_curl_server_cert_verification | Enable server side certificate verification for CURL backend.                                | BOOLEAN    | GLOBAL | []      |
+| enable_global_s3_configuration       | Automatically fetch AWS credentials from environment variables.                              | BOOLEAN    | GLOBAL | []      |
 | enable_server_cert_verification      | Enable server side certificate verification.                                                 | BOOLEAN    | GLOBAL | []      |
 | force_download                       | Forces upfront download of file                                                              | BOOLEAN    | GLOBAL | []      |
 | hf_max_per_page                      | Debug option to limit number of items returned in list requests                              | UBIGINT    | GLOBAL | []      |
@@ -101,6 +105,8 @@ LOAD {{ page.extension.name }};
 | http_retry_wait_ms                   | Time between retries                                                                         | UBIGINT    | GLOBAL | []      |
 | http_timeout                         | HTTP timeout read/write/connection/retry (in seconds)                                        | UBIGINT    | GLOBAL | []      |
 | httpfs_client_implementation         | Select which is the HTTPUtil implementation to be used                                       | VARCHAR    | GLOBAL | []      |
+| inflector_acronyms                   | List of acronyms preserved as uppercase in case conversions (e.g., HTML, API)                | VARCHAR[]  | GLOBAL | []      |
+| merge_http_secret_into_s3_request    | Merges http secret params into S3 requests                                                   | BOOLEAN    | GLOBAL | []      |
 | s3_access_key_id                     | S3 Access Key ID                                                                             | VARCHAR    | GLOBAL | []      |
 | s3_endpoint                          | S3 Endpoint                                                                                  | VARCHAR    | GLOBAL | []      |
 | s3_kms_key_id                        | S3 KMS Key ID                                                                                | VARCHAR    | GLOBAL | []      |

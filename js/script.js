@@ -1,7 +1,13 @@
 $(document).ready(function(){
 	if (window.location.hash) {
 		var hash = window.location.hash;
-		if ($(hash).length) {
+		var has_hash = true;
+		try {
+			$(hash);
+		} catch {
+			has_hash = false;
+		}
+		if (has_hash) if ($(hash).length) {
 			$('html, body').animate({
 				scrollTop: $(hash).offset().top-90
 			}, 300, 'swing');
@@ -310,10 +316,10 @@ $(document).ready(function(){
 	
 // Add class-name to external Links
 $('a').filter(function() {
-	return this.hostname && this.hostname !== location.hostname && $(this).find('img').length === 0;
+	return this.hostname && this.hostname !== location.hostname && $(this).find('img').length === 0 && !$(this).hasClass('button');
 }).addClass("externallink").attr('target','_blank');
 
-$('.headercontent a, .mainlinks a, .box-link a, .footercontent a, .highlight a').removeClass('externallink'); 
+$('.headercontent a, .mainlinks a, .box-link a, .footercontent a, .highlight a, .button').removeClass('externallink');
 $('table a.externallink:contains(GitHub)').removeClass('externallink').addClass('nobg'); 
 $('.supporterboard a.externallink').removeClass('externallink').addClass('nobg'); 
 
@@ -339,7 +345,7 @@ $('body.documentation #main_content_wrap a.externallink').each(function () {
 	if($('body').hasClass('foundation') && $('section.form').length){
 		var hash = window.location.hash.replace('#', '');
 		if( hash.length ){
-			$('div.select .select-text').val(hash);
+			$('.custom-select .select-text').val(hash);
 		}
 		
 		// AJAX FORM SEND
@@ -570,10 +576,10 @@ $('body.documentation #main_content_wrap a.externallink').each(function () {
 			$('.window .content.haslines').each(function(){
 				var height = $(this).find('pre').height()
 				var fontSize = $(this).find('pre').css('font-size');
-				var lineHeight = 18;//Math.floor(parseInt(fontSize.replace('px','')) * 1.2);
-				var lines = Math.ceil(height / lineHeight) + 1
+				var lineHeight = 20;
+				var lines = Math.ceil(height / lineHeight)
 				var linenumbers = '';
-				for (i = 1; i < lines; i++) {
+				for (i = 1; i <= lines; i++) {
 					linenumbers += i + '<br>'
 				}
 				$(this).find('.lines').html(linenumbers);

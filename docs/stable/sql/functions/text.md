@@ -412,8 +412,8 @@ This section describes functions and operators for examining and manipulating [`
 <div class="nostroke_table"></div>
 
 | **Description** | Removes any occurrences of any of the `characters` from the left side of the `string`. `characters` defaults to `space`. |
-| **Example 1** | `ltrim('    test  ')` |
-| **Result** | `test  ` |
+| **Example 1** | <code class="language-plaintext highlighter-rouge">ltrim('&nbsp;&nbsp;&nbsp;&nbsp;test&nbsp;&nbsp;')</code> |
+| **Result** | <code class="language-plaintext highlighter-rouge">test&nbsp;&nbsp;</code> |
 | **Example 2** | `ltrim('>>>>test<<', '><')` |
 | **Result** | `test<<` |
 
@@ -655,8 +655,8 @@ This section describes functions and operators for examining and manipulating [`
 <div class="nostroke_table"></div>
 
 | **Description** | Removes any occurrences of any of the `characters` from the right side of the `string`. `characters` defaults to `space`. |
-| **Example 1** | `rtrim('test  ')` |
-| **Result** | `test` |
+| **Example 1** | <code class="language-plaintext highlighter-rouge">rtrim('&nbsp;&nbsp;&nbsp;&nbsp;test&nbsp;&nbsp;')</code> |
+| **Result** | <code class="language-plaintext highlighter-rouge">&nbsp;&nbsp;&nbsp;&nbsp;test</code> |
 | **Example 2** | `rtrim('>>>>test<<', '><')` |
 | **Result** | `>>>>test` |
 
@@ -787,7 +787,7 @@ This section describes functions and operators for examining and manipulating [`
 <div class="nostroke_table"></div>
 
 | **Description** | Removes any occurrences of any of the `characters` from either side of the `string`. `characters` defaults to `space`. |
-| **Example 1** | `trim('    test  ')` |
+| **Example 1** | <code class="language-plaintext highlighter-rouge">trim('&nbsp;&nbsp;&nbsp;&nbsp;test&nbsp;&nbsp;')</code> |
 | **Result** | `test` |
 | **Example 2** | `trim('>>>>test<<', '><')` |
 | **Result** | `test` |
@@ -857,7 +857,7 @@ These functions are used to measure the similarity of two strings using various 
 |:--|:-------|
 | [`damerau_levenshtein(s1, s2)`](#damerau_levenshteins1-s2) | Extension of Levenshtein distance to also include transposition of adjacent characters as an allowed edit operation. In other words, the minimum number of edit operations (insertions, deletions, substitutions or transpositions) required to change one string to another. Characters of different cases (e.g., `a` and `A`) are considered different. |
 | [`editdist3(s1, s2)`](#levenshteins1-s2) | Alias for `levenshtein`. |
-| [`hamming(s1, s2)`](#hammings1-s2) | The Hamming distance between to strings, i.e., the number of positions with different characters for two strings of equal length. Strings must be of equal length. Characters of different cases (e.g., `a` and `A`) are considered different. |
+| [`hamming(s1, s2)`](#hammings1-s2) | The Hamming distance between two strings, i.e., the number of positions with different characters for two strings of equal length. Strings must be of equal length. Characters of different cases (e.g., `a` and `A`) are considered different. |
 | [`jaccard(s1, s2)`](#jaccards1-s2) | The Jaccard similarity between two strings. Characters of different cases (e.g., `a` and `A`) are considered different. Returns a number between 0 and 1. |
 | [`jaro_similarity(s1, s2[, score_cutoff])`](#jaro_similaritys1-s2-score_cutoff) | The Jaro similarity between two strings. Characters of different cases (e.g., `a` and `A`) are considered different. Returns a number between 0 and 1. For similarity < `score_cutoff`, 0 is returned instead. `score_cutoff` defaults to 0. |
 | [`jaro_winkler_similarity(s1, s2[, score_cutoff])`](#jaro_winkler_similaritys1-s2-score_cutoff) | The Jaro-Winkler similarity between two strings. Characters of different cases (e.g., `a` and `A`) are considered different. Returns a number between 0 and 1. For similarity < `score_cutoff`, 0 is returned instead. `score_cutoff` defaults to 0. |
@@ -878,7 +878,7 @@ These functions are used to measure the similarity of two strings using various 
 
 <div class="nostroke_table"></div>
 
-| **Description** | The Hamming distance between to strings, i.e., the number of positions with different characters for two strings of equal length. Strings must be of equal length. Characters of different cases (e.g., `a` and `A`) are considered different. |
+| **Description** | The Hamming distance between two strings, i.e., the number of positions with different characters for two strings of equal length. Strings must be of equal length. Characters of different cases (e.g., `a` and `A`) are considered different. |
 | **Example** | `hamming('duck', 'luck')` |
 | **Result** | `1` |
 | **Alias** | `mismatches` |
@@ -988,6 +988,8 @@ Pad integers with 0s:
 SELECT format('{:04d}', 33); -- 0033
 ```
 
+> Padding cannot currently be combined with the specification of a thousands separator.
+
 Create timestamps from integers:
 
 ```sql
@@ -1067,7 +1069,7 @@ I'd rather be happy than right.
 |:-|:------|:---|
 | `%c`   | character code to character                                    | `a`            |
 | `%d`   | integer                                                        | `654321`       |
-| `%Xd`  | integer with thousand seperarator `X` from `,`, `.`, `''`, `_` | `654_321`      |
+| `%Xd`  | integer with thousand separator `X` from `,`, `.`, `''`, `_` | `654_321`      |
 | `%E`   | scientific notation                                            | `3.141593E+00` |
 | `%f`   | float                                                          | `4.560000`     |
 | `%hd`  | integer                                                        | `654321`       |

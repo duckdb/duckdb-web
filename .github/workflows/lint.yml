@@ -22,6 +22,17 @@ jobs:
           config: .markdownlint.jsonc
           files: 'docs/stable/**/*.md _posts/*.md'
 
+  version-file:
+    runs-on: ubuntu-22.04
+    steps:
+      - uses: actions/checkout@v6
+      - name: Check no trailing newline in latest_stable_version.txt
+        run: |
+          if [[ $(tail -c 1 data/latest_stable_version.txt | wc -l) -gt 0 ]]; then
+            echo "ERROR: data/latest_stable_version.txt has a trailing newline"
+            exit 1
+          fi
+
   python:
     runs-on: ubuntu-22.04
     steps:

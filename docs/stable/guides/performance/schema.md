@@ -13,7 +13,7 @@ When loading CSV files, you may leverage the CSV reader's [auto-detection mechan
 
 If you run in a memory-constrained environment, using smaller data types (e.g., `TINYINT`) can reduce the amount of memory and disk space required to complete a query. DuckDB’s [bitpacking compression]({% post_url 2022-10-28-lightweight-compression %}#bit-packing) means small values stored in larger data types will not take up larger sizes on disk, but they will take up more memory during processing.
 
-> Bestpractice Use the most restrictive types possible when creating columns. Avoid using strings for encoding more specific data items.
+> Bestpractice: Use the most restrictive types possible when creating columns. Avoid using strings for encoding more specific data items.
 
 ### Microbenchmark: Using Timestamps
 
@@ -52,7 +52,7 @@ JOIN Comment c2 ON c1.ParentCommentId = c2.id;
 
 In the first experiment, we use the correct (most restrictive) types, i.e., both the `id` and the `ParentCommentId` columns are defined as `BIGINT`.
 In the second experiment, we define all columns with the `VARCHAR` type.
-While the results of the queries are the same for all both experiments, their runtime vary significantly.
+While the results of the queries are the same for both experiments, their runtimes vary significantly.
 The results below show that joining on `BIGINT` columns is approx. 1.8× faster than performing the same join on `VARCHAR`-typed columns encoding the same value.
 
 | Join column payload type | Join column schema type | Example value      | Query time |
@@ -60,21 +60,21 @@ The results below show that joining on `BIGINT` columns is approx. 1.8× faster 
 | `BIGINT`                 | `BIGINT`                | `70368755640078`   |      1.2 s |
 | `BIGINT`                 | `VARCHAR`               | `'70368755640078'` |      2.1 s |
 
-> Bestpractice Avoid representing numeric values as strings, especially if you intend to perform e.g., join operations on them.
+> Bestpractice: Avoid representing numeric values as strings, especially if you intend to perform e.g., join operations on them.
 
 ## Constraints
 
 DuckDB allows defining [constraints]({% link docs/stable/sql/constraints.md %}) such as `UNIQUE`, `PRIMARY KEY`, and `FOREIGN KEY`. These constraints can be beneficial for ensuring data integrity but they have a negative effect on load performance as they necessitate building indexes and performing checks. Moreover, they _very rarely improve the performance of queries_ as DuckDB does not rely on these indexes for join and aggregation operators (see [indexing]({% link docs/stable/guides/performance/indexing.md %}) for more details).
 
-> Bestpractice Do not define constraints unless your goal is to ensure data integrity.
+> Bestpractice: Do not define constraints unless your goal is to ensure data integrity.
 
 ### Microbenchmark: The Effect of Primary Keys
 
 We illustrate the effect of using primary keys with the [LDBC Comment table at scale factor 300](https://blobs.duckdb.org/data/ldbc-sf300-comments.tar.zst).
 This table has approx. 554 million entries.
-In the first experiments, we create the schema *without* a primary key, then load the data.
-In the second experiment, we create the schema *with* a primary key, then load the data.
-In the third case, we create the schema *without* a primary key, load the data and then add the primary key constraint.
+In the first experiment, we create the schema *with* a primary key, then load the data.
+In the second experiment, we create the schema *without* a primary key, then load the data.
+In the third experiment, we create the schema *without* a primary key, load the data and then add the primary key constraint.
 In all cases, we take the data from `.csv.gz` files, and measure the time required to perform the loading.
 
 |                  Operation                    | Execution time |
@@ -86,5 +86,5 @@ In all cases, we take the data from `.csv.gz` files, and measure the time requir
 For this dataset, primary keys will only have a (small) positive effect on highly selective queries such as when filtering on a single identifier.
 Defining primary keys (or indexes) will not have an effect on join and aggregation operators.
 
-> Bestpractice For best bulk load performance, avoid primary key constraints.
+> Bestpractice: For best bulk load performance, avoid primary key constraints.
 > If they are required, define them after the bulk loading step.

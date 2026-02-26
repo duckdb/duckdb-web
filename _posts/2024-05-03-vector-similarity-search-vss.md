@@ -115,7 +115,7 @@ The reasoning for locking this feature behind an experimental flag is that we st
 
 We're actively working on addressing this and other issues related to index persistence, which will hopefully make it into [DuckDB v0.10.3]({% link release_calendar.md %}#upcoming-releases), but for now we recommend using the `HNSW` index in in-memory databases only.
 
-At runtime however, much like the `ART` the `HNSW` index must be able to fit into RAM in its entirety, and the memory allocated by the `HNSW` at runtime is allocated "outside" of the DuckDB memory management system, meaning that it wont respect DuckDB's `memory_limit` configuration parameter.
+At runtime however, much like the `ART` the `HNSW` index must be able to fit into RAM in its entirety, and the memory allocated by the `HNSW` at runtime is allocated "outside" of the DuckDB memory management system, meaning that it won't respect DuckDB's `memory_limit` configuration parameter.
 
 Another current limitation with the `HNSW` index so far are that it only supports the `FLOAT` (a 32-bit, single-precision floating point) type for the array elements and only distance metrics corresponding to the three built in distance functions, `array_distance`, `array_negative_inner_product` and `array_cosine_distance`. But this is also something we're looking to expand upon in the near future as it is much less of a technical limitation and more of a "we haven't gotten around to it yet" limitation.
 

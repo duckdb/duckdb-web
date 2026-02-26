@@ -71,7 +71,7 @@ DuckDB distinguishes timestamps `WITHOUT TIME ZONE` and `WITH TIME ZONE` (of whi
 
 Despite the name, a `TIMESTAMP WITH TIME ZONE` does not store time zone information. Instead, it only stores the `INT64` number of non-leap microseconds since the Unix epoch `1970-01-01 00:00:00+00`, and thus unambiguously identifies a point in absolute time, or [*instant*]({% link docs/preview/sql/data_types/timestamp.md %}#instants). The reason for the labels *time zone aware* and `WITH TIME ZONE` is that timestamp arithmetic, [*binning*]({% link docs/preview/sql/data_types/timestamp.md %}#temporal-binning), and string formatting for this type are performed in a [configured time zone]({% link docs/preview/sql/data_types/timestamp.md %}#time-zone-support), which defaults to the system time zone and is just `UTC+00:00` in the examples above.
 
-The corresponding `TIMESTAMP WITHOUT TIME ZONE` stores the same `INT64`, but arithmetic, binning, and string formatting follow the straightforward rules of Coordinated Universal Time (UTC) without offsets or time zones. Accordingly, `TIMESTAMP`s could be interpreted as UTC timestamps, but more commonly they are used to represent *local* observations of time recorded in an unspecified time zone, and operations on these types can be interpreted as simply manipulating tuple fields following nominal temporal logic.
+The corresponding `TIMESTAMP WITHOUT TIME ZONE` stores the same `INT64`, but arithmetic, binning and string formatting follow the straightforward rules of Coordinated Universal Time (UTC) without offsets or time zones. Accordingly, `TIMESTAMP`s could be interpreted as UTC timestamps, but more commonly they are used to represent *local* observations of time recorded in an unspecified time zone, and operations on these types can be interpreted as simply manipulating tuple fields following nominal temporal logic.
 It is a common data cleaning problem to disambiguate such observations, which may also be stored in raw strings without time zone specification or UTC offsets, into unambiguous `TIMESTAMP WITH TIME ZONE` instants. One possible solution to this is to append UTC offsets to strings, followed by an explicit cast to `TIMESTAMP WITH TIME ZONE`. Alternatively, a `TIMESTAMP WITHOUT TIME ZONE` may be created first and then be combined with a time zone specification to obtain a time zone aware `TIMESTAMP WITH TIME ZONE`.
 
 ## Conversion between Strings and Naïve / Time Zone-Aware Timestamps
@@ -80,7 +80,7 @@ The conversion between strings *without* UTC offsets or IANA time zone names and
 The conversion between strings *with* UTC offsets or time zone names and `WITH TIME ZONE` types is also unambiguous, but requires the `ICU` extension to handle time zone names.
 
 When strings *without* UTC offsets or time zone names are converted to a `WITH TIME ZONE` type, the string is interpreted in the configured time zone. 
-When strings with UTC offsets are passed to a `WITHOUT TIME ZONE` type, the offsets or timezone specifications are ignored.
+When strings with UTC offsets are passed to a `WITHOUT TIME ZONE` type, the offsets or time zone specifications are ignored.
 When strings with time zone names other than `UTC` are passed to a `WITHOUT TIME ZONE` type, an error is thrown. 
 
 Finally, when `WITH TIME ZONE` and `WITHOUT TIME ZONE` types are converted to each other via explicit or implicit casts, the translation uses the configured time zone. To use an alternative time zone, the `timezone` function provided by the `ICU` extension may be used:
@@ -135,7 +135,7 @@ An instant is a point in absolute time, usually given as a count of some time in
 
 ### Temporal Binning
 
-Binning is a common practice with continuous data: A range of possible values is broken up into contiguous subsets and the binning operation maps actual values to the *bin* they fall into. *Temporal binning* is simply applying this practice to instants; for example, by binning instants into years, months, and days.
+Binning is a common practice with continuous data: A range of possible values is broken up into contiguous subsets and the binning operation maps actual values to the *bin* they fall into. *Temporal binning* is simply applying this practice to instants; for example, by binning instants into years, months and days.
 
 <img src="/images/blog/timezones/tz-instants-light.svg"
      alt="Time Zone Instants at the Epoch"
@@ -164,8 +164,8 @@ For example, here is what binning for the `'America/Los_Angeles'` time zone look
      class="darkmode-img"
      />
 
-The most common temporal binning problem occurs when daylight savings time changes.
-The example below contains a daylight savings time change where the "hour" bin is two hours long.
+The most common temporal binning problem occurs when daylight saving time changes.
+The example below contains a daylight saving time change where the "hour" bin is two hours long.
 To distinguish the two hours, another range of bins containing the offset from UTC is needed:
 
 <img src="/images/blog/timezones/tz-daylight-light.svg"
@@ -185,7 +185,7 @@ The `TIMESTAMPTZ` type can be binned into calendar and clock bins using a suitab
 The built-in [ICU extension]({% link docs/preview/core_extensions/icu.md %}) implements all the binning and arithmetic functions using the
 [International Components for Unicode](https://icu.unicode.org) time zone and calendar functions.
 
-To set the time zone to use, first load the ICU extension. The ICU extension comes pre-bundled with several DuckDB clients (including Python, R, JDBC, and ODBC), so this step can be skipped in those cases. In other cases you might first need to install and load the ICU extension.
+To set the time zone to use, first load the ICU extension. The ICU extension comes pre-bundled with several DuckDB clients (including Python, R, JDBC and ODBC), so this step can be skipped in those cases. In other cases you might first need to install and load the ICU extension.
 
 ```sql
 INSTALL icu;

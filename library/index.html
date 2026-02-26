@@ -1,0 +1,123 @@
+---
+layout: postarchive
+title: DuckDB Library
+excerpt: A curated collection of books, papers, podcasts and talks podcasts exploring DuckDB.
+redirect_from:
+- /sci
+- /lib
+- /science
+- /media
+- /resources
+---
+
+{% assign all_tags = "" %}
+{% for library_item in site.library %}
+	{% assign all_tags = all_tags | append: library_item.tags | join: "," | append: "," %}
+{% endfor %}
+{% assign unique_tags = all_tags | split: "," | uniq | sort %}
+
+<div class="wrap">
+	<div class="controls filterbar" data-all-available="{{ unique_tags | join: ', ' }}">
+		<input type="text" id="search-input" placeholder="Search...">
+		<div class="filtertags">
+			<div class="filter-highlight"></div>
+			<button type="button" class="filter-btn active" data-filter="*">All</button>
+			<button type="button" class="filter-btn" data-filter=".book">Book</button>
+			<button type="button" class="filter-btn" data-filter=".paper">Paper</button>
+			<button type="button" class="filter-btn" data-filter=".podcast">Podcast</button>
+			<button type="button" class="filter-btn" data-filter=".talk">Talk</button>
+		</div>
+	</div>
+</div>
+
+<div class="post-list wrap">
+	<div class="newstiles library-tiles">
+		{% assign sorted_library = site.library | sort: 'date' | reverse %}
+		{% for library_item in sorted_library %}
+			{% assign random_number = forloop.index | modulo: 3 | plus: 1 %}
+			{% assign tag_classes = "" %}
+			{% for tag in library_item.tags %}
+				{% assign slugified_tag = tag | slugify %}
+				{% assign tag_classes = tag_classes | append: slugified_tag | append: " " %}
+			{% endfor %}
+			{% if library_item.title contains "ducklake" or library_item.title contains "DuckLake" %}
+				{% assign data_source = "ducklake" %}
+			{% elsif library_item.thirdparty == true %}
+				{% assign data_source = "thirdparty" %}
+			{% else %}
+				{% assign data_source = "duckdb" %}
+			{% endif %}
+			{% comment %} Determine data-type value from first tag {% endcomment %}
+			{% if library_item.tags and library_item.tags.size > 0 %}
+				{% assign data_type = library_item.tags[0] | downcase %}
+			{% else %}
+				{% assign data_type = "" %}
+			{% endif %}
+			<div class="librarypreview postpreview {{ tag_classes | downcase }}" data-title="{{ library_item.title | escape }}" data-source="{{ data_source }}"{% if data_type != "" %} data-type="{{ data_type }}"{% endif %}>
+				<a href="/library/{{ library_item.slug | default: library_item.title | slugify }}/" title="{{ library_item.title }}" class="blocklink"></a>
+				<div class="postimg custom">
+					{% if library_item.thumb %}
+						<img src="{{ library_item.thumb }}" alt="{{ library_item.title }}" class="zoom-image">
+					{% else %}
+						{% assign placeholder_number = forloop.index | modulo: 2 | plus: 1 %}
+						<img src="/images/library/thumbs/placeholder-{{ data_source }}-{{ placeholder_number }}.svg" alt="Placeholder" class="zoom-image">
+					{% endif %}
+					{% if library_item.pill or library_item.episode %}
+						<div class="pill-container">
+							{% if library_item.pill %}
+								<span class="pill-tag">{{ library_item.pill }}</span>
+							{% endif %}
+							{% if library_item.episode %}
+								<span class="pill-tag episode-tag">{{ library_item.episode }}</span>
+							{% endif %}
+						</div>
+					{% endif %}
+				</div>
+				<div class="postdetails">
+					{% if library_item.tags %}
+					<div class="tags">
+						{% for tag in library_item.tags %}
+							<span class="tag">{{ tag }}</span>
+						{% endfor %}
+						{% if library_item.length %}
+						  <span class="length">{{ library_item.length }}</span>
+						{% endif %}
+					</div>
+					{% endif %}
+					<h3>{{ library_item.title }}</h3>
+					<div class="meta">
+						<div class="date">{{ library_item.date | date: "%Y-%m-%d" }}</div>
+						<div class="author">{{ library_item.author }}</div>
+					</div>
+				</div>
+			</div>
+		{% endfor %}
+	</div>
+</div>
+
+<div class="wrap blog_typography science-submission-guidelines">
+	<h2>Submission Guidelines</h2>
+	
+	<p>
+		Submissions are welcome in the form of pull requests in the <a href="https://github.com/duckdb/duckdb-web/tree/main/_library"><code class="language-plaintext highlighter-rouge">duckdb-web</code> repository</a>.
+		You are welcome to submit both your own work and also the work of others.
+		When submitting, please follow these guidelines:
+	</p>
+
+	<ul>
+		<li>
+			The filename should start with the release date (e.g., the podcast's, the conference's first day, or the journal issue's publication date),
+			e.g., <code class="language-plaintext highlighter-rouge">2025-09-01</code>.
+			If the exact release date is not easily obtainable, just use an estimated date.
+		</li>
+		<li>If available, please link the presentation slide deck of the talk or paper.</li>
+		<li>For research papers:
+			<ul>
+				<li>Papers should be about an algorithm, data structure, etc. used in DuckDB, built on top of DuckDB. Papers that study DuckDB in depth also qualify. However, papers where the use of DuckDB is limited to e.g., being the baseline for comparison or as part of their data processing toolchain, are out of scope.</li>
+				<li>Include a link to an open-access version of the paper.</li>
+				<li>Include the abstract. Make sure it doesn't have extra newlines, hyphens, or special characters.</li>
+				<li>If applicable, please add an “Implementation” section to describe the availability of the implementation (core DuckDB, community extension, fork, etc.)</li>
+			</ul>
+		</li>
+	</ul>
+</div>

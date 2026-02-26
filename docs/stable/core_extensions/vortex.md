@@ -2,6 +2,8 @@
 github_directory: https://github.com/vortex-data/duckdb-vortex
 layout: docu
 title: Vortex Extension
+redirect_from:
+- /community_extensions/extensions/vortex
 ---
 
 > The `vortex` extension requires DuckDB 1.4.2+.
@@ -44,3 +46,5 @@ You can write Vortex files as follows:
 COPY (SELECT * FROM generate_series(0, 3) t(i))
 TO 'my.vortex' (FORMAT vortex);
 ```
+
+> Warning Make sure to add the `FORMAT vortex` option. If the `vortex` extension is not loaded, using `COPY ... TO 'my.vortex` without the `FORMAT vortex` specifier will result in a CSV file.

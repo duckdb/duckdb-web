@@ -3,6 +3,8 @@ layout: docu
 title: Node.js Client (Neo)
 ---
 
+> Tip To use the DuckDB Node.js client, visit the [Node.js installation page]({% link install/index.html %}?environment=nodejs).
+>
 > The latest stable version of the DuckDB Node.js (Neo) client is {{ site.current_duckdb_node_neo_version }}.
 
 An API for using [DuckDB]({% link index.html %}) in [Node.js](https://nodejs.org/).
@@ -874,7 +876,7 @@ const appender = await connection.createAppender('target_table');
 const chunk = DuckDBDataChunk.create([INTEGER, VARCHAR]);
 chunk.setColumns([
   [42, 123, 17],
-  ['duck', 'mallad', 'goose'],
+  ['duck', 'mallard', 'goose'],
 ]);
 // OR:
 // chunk.setRows([

@@ -65,7 +65,7 @@ COPY
     (FORMAT parquet, ROW_GROUP_SIZE 20_000, ROW_GROUPS_PER_FILE 2);
 ```
 
-> If multiple threads are active, the number of row groups in a file may slightly exceed the specified number of row groups to limit the amount of locking – similarly to the behaviour of [`FILE_SIZE_BYTES`](../../sql/statements/copy#copy--to-options).
+> If multiple threads are active, the number of row groups in a file may slightly exceed the specified number of row groups to limit the amount of locking – similarly to the behavior of [`FILE_SIZE_BYTES`](../../sql/statements/copy#copy--to-options).
 > However, if `PER_THREAD_OUTPUT` is set, only one thread writes to each file, and it becomes accurate again.
 
 See the [Performance Guide on “File Formats”]({% link docs/stable/guides/performance/file_formats.md %}#parquet-file-sizes) for more tips.

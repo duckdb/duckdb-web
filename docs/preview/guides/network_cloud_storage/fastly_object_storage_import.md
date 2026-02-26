@@ -24,7 +24,7 @@ CREATE SECRET my_secret (
 );
 ```
 
-* The `ENDPOINT` needs to point to the [Fastly endpoint for the region](https://docs.fastly.com/en/guides/working-with-object-storage#working-with-the-s3-compatible-api) you want to use (e.g `eu-central.object.fastlystorage.app`).
+* The `ENDPOINT` needs to point to the [Fastly endpoint for the region](https://docs.fastly.com/en/guides/working-with-object-storage#working-with-the-s3-compatible-api) you want to use (e.g., `eu-central.object.fastlystorage.app`).
 * `REGION` must use the same region mentioned in `ENDPOINT`.
 * `URL_STYLE` needs to use `path`.
 

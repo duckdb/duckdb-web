@@ -99,6 +99,11 @@ brew install duckdb
 docker run --rm -it -v "$(pwd):/workspace" -w /workspace duckdb/duckdb
 {%- endhighlight -%}
 
+<h4>Install Specific Version</h4>
+{%- highlight bash -%}
+curl https://install.duckdb.org | DUCKDB_VERSION=1.4.3 sh
+{%- endhighlight -%}
+
 <h4>Direct Download</h4>
 {%- assign f = site.data.checksums.artifacts.cli.macos.x86_64.filename -%}
 <a href="https://install.duckdb.org/v{{ site.current_duckdb_version }}/{{ f }}" class="download-btn" download="{{ f }}" rel="noopener noreferrer">{{ f }}</a>
@@ -112,11 +117,16 @@ docker run --rm -it -v "$(pwd):/workspace" -w /workspace duckdb/duckdb
     data-environment="cli"
     data-docs="{% link docs/stable/clients/cli/overview.md %}">
 
-    <figure class="highlight">
-        <pre><code class="language-bash" data-lang="bash"><span class="nb">curl </span><a href="https://install.duckdb.org">https://install.duckdb.org</a> | <span class="nb">sh</span></code></pre>
-    </figure>
+<figure class="highlight">
+    <pre><code class="language-bash" data-lang="bash"><span class="nb">curl </span><a href="https://install.duckdb.org">https://install.duckdb.org</a> | <span class="nb">sh</span></code></pre>
+</figure>
 
 <div class="alternative">
+
+<h4>Install Specific Version</h4>
+{%- highlight bash -%}
+curl https://install.duckdb.org | DUCKDB_VERSION=1.4.3 sh
+{%- endhighlight -%}
 
 <h4>Docker Image</h4>
 {%- highlight bash -%}
@@ -162,20 +172,18 @@ docker run --rm -it -v "$(pwd):/workspace" -w /workspace duckdb/duckdb
 winget install DuckDB.cli
 {%- endhighlight -%}
 
+<h4>Installation Script (Beta)</h4>
+
+You can install DuckDB with a script the Run menu or the Command Prompt. Please note that this script is in beta – exercise caution when using it.
+
+{%- highlight powershell -%}
+powershell -NoExit iex (iwr "https://install.duckdb.org/install.ps1").Content
+{%- endhighlight -%}
+
 <h4>Docker Image (for WSL2)</h4>
 
 {%- highlight bash -%}
 docker run --rm -it -v "$(pwd):/workspace" -w /workspace duckdb/duckdb
-{%- endhighlight -%}
-
-<h4>Installation Script (Alpha)</h4>
-
-You can now install DuckDB with a script from an administrative PowerShell terminal. Please note that this script is an alpha implementation and exercise cautioen when using it.
-
-{%- highlight powershell -%}
-Set-ExecutionPolicy Bypass -Scope Process -Force
-[System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072
-iex ((New-Object System.Net.WebClient).DownloadString('https://install.duckdb.org/install.ps1'))
 {%- endhighlight -%}
 
 </div>
@@ -201,9 +209,22 @@ pip install duckdb
     data-environment="r"
     data-docs="{% link docs/stable/clients/r.md %}">
 
-{%- highlight bash -%}
+{%- highlight r -%}
 install.packages("duckdb")
 {%- endhighlight -%}
+
+<div class="alternative">
+
+<h4>Installing from the Posit Public Package Manager (Linux)</h4>
+
+{%- highlight r -%}
+options(HTTPUserAgent = sprintf("R/%s R (%s)",
+    getRversion(),
+    paste(getRversion(), R.version["platform"], R.version["arch"], R.version["os"])
+))
+install.packages("duckdb", repos="https://p3m.dev/cran/__linux__/manylinux_2_28/latest/")
+{%- endhighlight -%}
+</div>
 </div>
 
 
@@ -350,9 +371,8 @@ go get github.com/duckdb/duckdb-go/v2
 <a href="https://github.com/duckdb/duckdb-odbc/releases/download/v{{ site.current_duckdb_odbc_version }}/duckdb_odbc-windows-amd64.zip" class="download-btn" download="duckdb_odbc-windows-amd64.zip" rel="noopener noreferrer">duckdb_odbc-windows-amd64.zip</a>
 {%- include checksum_inline.html environment="odbc" platform="windows" architecture="x86_64" -%}
 
-<div class="note">
-    The ODBC client is not yet available as a binary for Windows / arm64.
-</div>
+<a href="https://github.com/duckdb/duckdb-odbc/releases/download/v{{ site.current_duckdb_odbc_version }}/duckdb_odbc-windows-arm64.zip" class="download-btn" download="duckdb_odbc-windows-amd64.zip" rel="noopener noreferrer">duckdb_odbc-windows-arm64.zip</a>
+{%- include checksum_inline.html environment="odbc" platform="windows" architecture="arm64" -%}
 
 </div>
 

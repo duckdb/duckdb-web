@@ -2,12 +2,11 @@
 layout: docu
 redirect_from:
 - /docs/guides/import/excel_import
-- /docs/guides/import/excel_import/
 - /docs/guides/file_formats/excel_import
 title: Excel Import
 ---
 
-DuckDB supports reading Excel `.xlsx` files, however, `.xls` files are not supported.
+DuckDB supports reading Excel `.xlsx` files. However, `.xls` files are not supported.
 
 ## Importing Excel Sheets
 
@@ -41,21 +40,21 @@ To select a specific range of cells, use the `range` parameter with a string in 
 SELECT * FROM read_xlsx('test_excel.xlsx', range = 'A1:B2');
 ```
 
-This can also be used to, e.g., skip the first 5 of rows:
+For example, to skip the first 5 rows:
 
 ```sql
 SELECT * FROM read_xlsx('test_excel.xlsx', range = 'A5:Z');
 ```
 
-Or skip the first 5 columns
+To skip the first 5 columns:
 
 ```sql
 SELECT * FROM read_xlsx('test_excel.xlsx', range = 'E:Z');
 ```
 
-If no range parameter is provided, the range is automatically inferred as the rectangular region of cells between the first row of consecutive non-empty cells and the first empty row spanning the same columns.
+If no range parameter is provided, DuckDB automatically infers the range as the rectangular region of cells between the first row of consecutive non-empty cells and the first empty row spanning the same columns.
 
-By default, if no range is provided DuckDB will stop reading the Excel file at when encountering an empty row. But when a range is provided, the default is to read until the end of the range. This behavior can be controlled with the `stop_at_empty` parameter:
+By default, if no range is provided, DuckDB will stop reading the Excel file when encountering an empty row. But when a range is provided, the default is to read until the end of the range. This behavior can be controlled with the `stop_at_empty` parameter:
 
 ```sql
 -- Read the first 100 rows, or until the first empty row, whichever comes first
@@ -110,7 +109,7 @@ When not importing into an existing table, DuckDB will attempt to infer the type
 - Empty cells are considered to be of type `DOUBLE` by default.
 - Otherwise cells are inferred as `VARCHAR` or `DOUBLE` based on their contents.
 
-This behavior can be adjusted in the following ways.
+You can adjust this behavior in several ways.
 
 To treat all empty cells as `VARCHAR` instead of `DOUBLE`, set `empty_as_varchar` to `true`:
 
@@ -124,7 +123,7 @@ To disable type inference completely and treat all cells as `VARCHAR`, set `all_
 SELECT * FROM read_xlsx('test_excel.xlsx', all_varchar = true);
 ```
 
-Additionally, if the `ignore_errors` parameter is set to `true`, DuckDB will silently replace cells that can't be cast to the corresponding inferred column type with `NULL`'s.
+Additionally, if the `ignore_errors` parameter is set to `true`, DuckDB will silently replace cells that can't be cast to the corresponding inferred column type with `NULL`s.
 
 ```sql
 SELECT * FROM read_xlsx('test_excel.xlsx', ignore_errors = true);

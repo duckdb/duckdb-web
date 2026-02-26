@@ -49,6 +49,10 @@ body.landing{
 			max-width: 750px;
 			text-align: center;
 			margin: 0 auto;
+			&.left{
+				text-align: left;
+				margin: 0;
+			}
 		}
 		.section-image{
 			display: block;
@@ -236,17 +240,17 @@ body.landing{
 			position: relative;
 			.lines{
 				@include code-standard;
-				line-height: 17px;
 				position: absolute;
 				top: 20px;
 				left: 25px;
 				text-align: right;
 				color: var(--main-text-tertiary-color, #B2B2B2);
 				pointer-events: none;
+				line-height: 19.68px !important;
 			}
 			code{
 				@include code-standard;
-				line-height: 17px;
+				line-height: 17px !important;
 			}
 			a{
 				color: inherit;
@@ -547,6 +551,7 @@ body.landing{
 	section.welcome{
 		z-index: 11;
 		.flexwrap{
+			gap: 32px;
 			-webkit-box-align: start;
 				-ms-flex-align: start;
 					align-items: flex-start;
@@ -617,7 +622,7 @@ body.landing{
 		}
 		.window button.copy{
 			right: 30px;
-			top: 30px;
+			top: 40px;
 		}
 		.highlight{
 			border-radius: 10px;
@@ -736,12 +741,16 @@ body.landing{
 
 
 
-@media only screen and (max-width: 1200px) {
-	body.landing{
-		section.welcome .flexwrap .duckdb{
-			margin-left: 15px;
-		}
-	} 
+@media (max-width: 1200px) {
+  body.landing section.welcome .flexwrap {
+	.duckdb {
+		margin-left: 15px;
+	}
+	.window {
+		width: auto;
+		flex: 1;
+	}
+  }
 }
 
 

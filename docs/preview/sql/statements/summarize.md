@@ -11,7 +11,7 @@ The `SUMMARIZE` statement returns summary statistics for a table, view or a quer
 SUMMARIZE tbl;
 ```
 
-In order to summarize a query, prepend `SUMMARIZE` to a query.
+To summarize a query, prepend `SUMMARIZE` to a query.
 
 ```sql
 SUMMARIZE SELECT * FROM tbl;

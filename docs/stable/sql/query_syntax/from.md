@@ -5,6 +5,10 @@ layout: docu
 railroad: query_syntax/from.js
 redirect_from:
 - /docs/sql/query_syntax/from
+- /cal/4
+- /cal/04
+- /cal/6
+- /cal/06
 title: FROM and JOIN Clauses
 ---
 
@@ -141,7 +145,7 @@ SELECT *
 FROM read_csv('test.csv');
 ```
 
-All table functions support a `WITH ORDINALITY` prefix, which extends the returned table by an integer column `ordinality` that enumerates the generated rows starting at `1`.
+All table functions support a `WITH ORDINALITY` suffix, which extends the returned table by an integer column `ordinality` that enumerates the generated rows starting at `1`.
 
 ```sql
 SELECT * 
@@ -299,7 +303,7 @@ This produces the following result:
 
 Note that only rows where the same `iata` attribute was present in both tables were included in the result.
 
-We can also express query using the vanilla `JOIN` clause with the `USING` keyword:
+We can also express this query using the vanilla `JOIN` clause with the `USING` keyword:
 
 ```sql
 SELECT *
@@ -332,7 +336,7 @@ SEMI JOIN airport_names
 | Amsterdam | AMS  |
 | Rotterdam | RTM  |
 
-This query is equivalent with:
+This query is equivalent to:
 
 ```sql
 SELECT *
@@ -356,7 +360,7 @@ ANTI JOIN airport_names
 | Eindhoven | EIN  |
 | Groningen | GRQ  |
 
-This query is equivalent with:
+This query is equivalent to:
 
 ```sql
 SELECT *
@@ -462,7 +466,7 @@ POSITIONAL JOIN t2;
 | 2 | b    |
 | 3 | NULL |
 
-Positional joins are always `FULL OUTER` joins, i.e., missing values (the last values in the shorter column) are set to `NULL`.
+Positional joins are always `FULL OUTER` joins, i.e., the resulting table has the length of the longer input table and the missing entries are filled with `NULL` values.
 
 ### As-Of Joins
 

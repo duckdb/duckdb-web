@@ -7,7 +7,7 @@ The `httpfs` extension supports reading/writing/[globbing](#globbing) files on o
 
 ## Platforms
 
-The `httpfs` filesystem is tested with [AWS S3](https://aws.amazon.com/s3/), [Minio](https://min.io/), [Google Cloud](https://cloud.google.com/storage/docs/interoperability), and [lakeFS](https://docs.lakefs.io/integrations/duckdb.html). Other services that implement the S3 API (such as [Cloudflare R2](https://www.cloudflare.com/en-gb/developer-platform/r2/)) should also work, but not all features may be supported.
+The `httpfs` filesystem is tested with [AWS S3](https://aws.amazon.com/s3/), [Minio](https://min.io/), [Google Cloud](https://cloud.google.com/storage/docs/interoperability) and [lakeFS](https://docs.lakefs.io/integrations/duckdb.html). Other services that implement the S3 API (such as [Cloudflare R2](https://www.cloudflare.com/en-gb/developer-platform/r2/)) should also work, but not all features may be supported.
 
 The following table shows which parts of the S3 API are required for each `httpfs` feature.
 
@@ -120,6 +120,7 @@ Below is a complete list of the supported parameters that can be used for both t
 | `URL_COMPATIBILITY_MODE`      | Can help when URLs contain problematic characters                                     | `S3`, `GCS`, `R2` | `BOOLEAN` | `true`                                      |
 | `URL_STYLE`                   | Either `vhost` or `path`                                                              | `S3`, `GCS`, `R2` | `STRING`  | `vhost` for `S3`, `path` for `R2` and `GCS` |
 | `USE_SSL`                     | Whether to use HTTPS or HTTP                                                          | `S3`, `GCS`, `R2` | `BOOLEAN` | `true`                                      |
+| `VERIFY_SSL`                  | Whether to verify the SSL certificate of the server                                   | `S3`, `GCS`, `R2` | `BOOLEAN` | `true`                                      |
 | `ACCOUNT_ID`                  | The R2 account ID to use for generating the endpoint URL                              | `R2`              | `STRING`  | -                                           |
 | `KMS_KEY_ID`                  | AWS KMS (Key Management Service) key for Server Side Encryption S3                    | `S3`              | `STRING`  | -                                           |
 | `REQUESTER_PAYS`              | Allows use of "requester pays" S3 buckets                                             | `S3`              | `BOOLEAN` | `false`                                     |
@@ -210,7 +211,7 @@ FROM read_parquet([
 
 ### Globbing
 
-File [globbing]({% link docs/preview/sql/functions/pattern_matching.md %}#globbing) is implemented using the ListObjectsV2 API call and allows to use filesystem-like glob patterns to match multiple files, for example:
+File [globbing]({% link docs/preview/sql/functions/pattern_matching.md %}#globbing) is implemented using the ListObjectsV2 API call and allows using filesystem-like glob patterns to match multiple files, for example:
 
 ```sql
 SELECT *

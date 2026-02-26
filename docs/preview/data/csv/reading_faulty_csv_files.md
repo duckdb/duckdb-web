@@ -3,7 +3,7 @@ layout: docu
 title: Reading Faulty CSV Files
 ---
 
-CSV files can come in all shapes and forms, with some presenting many errors that make the process of cleanly reading them inherently difficult. To help users read these files, DuckDB supports detailed error messages, the ability to skip faulty lines, and the possibility of storing faulty lines in a temporary table to assist users with a data cleaning step.
+CSV files can come in all shapes and forms, with some presenting many errors that make the process of cleanly reading them inherently difficult. To help users read these files, DuckDB supports detailed error messages, the ability to skip faulty lines and the possibility of storing faulty lines in a temporary table to assist users with a data cleaning step.
 
 ## Structural Errors
 
@@ -58,7 +58,7 @@ Possible solutions:
   all_varchar=0
 ```
 
-The first block provides us with information regarding where the error occurred, including the line number, the original CSV line, and which field was problematic:
+The first block provides us with information regarding where the error occurred, including the line number, the original CSV line and which field was problematic:
 
 ```console
 Conversion Error:
@@ -136,7 +136,7 @@ Outputs:
 Being able to read faulty CSV files is important, but for many data cleaning operations, it is also necessary to know exactly which lines are corrupted and what errors the parser discovered on them. For scenarios like these, it is possible to use DuckDB's CSV Rejects Table feature.
 By default, this feature creates two temporary tables.
 
-1. `reject_scans`: Stores information regarding the parameters of the CSV Scanner
+1. `reject_scans`: Stores information regarding the parameters of the CSV Scanner.
 2. `reject_errors`: Stores information regarding each CSV faulty line and in which CSV Scanner they happened.
 
 Note that any of the errors described in our Structural Error section will be stored in the rejects tables. Also, if a line has multiple errors, multiple entries will be stored for the same line, one for each error.
@@ -152,7 +152,7 @@ The CSV Reject Scans Table returns the following information:
 | `file_path` | The file path | `VARCHAR` |
 | `delimiter` | The delimiter used e.g., ; | `VARCHAR` |
 | `quote` | The quote used e.g., " | `VARCHAR` |
-| `escape` | The quote used e.g., " | `VARCHAR` |
+| `escape` | The escape used e.g., " | `VARCHAR` |
 | `newline_delimiter` | The newline delimiter used e.g., \r\n | `VARCHAR` |
 | `skip_rows` | If any rows were skipped from the top of the file | `UINTEGER` |
 | `has_header` | If the file has a header | `BOOLEAN` |

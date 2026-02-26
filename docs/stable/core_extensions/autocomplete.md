@@ -3,11 +3,10 @@ github_directory: https://github.com/duckdb/duckdb/tree/main/extension/autocompl
 layout: docu
 redirect_from:
 - /docs/stable/extensions/autocomplete
-- /docs/stable/extensions/autocomplete/
 title: AutoComplete Extension
 ---
 
-The `autocomplete` extension adds supports for autocomplete in the [CLI client]({% link docs/stable/clients/cli/overview.md %}).
+The `autocomplete` extension adds support for autocomplete in the [CLI client]({% link docs/stable/clients/cli/overview.md %}).
 The extension is shipped by default with the CLI client.
 
 ## Behavior

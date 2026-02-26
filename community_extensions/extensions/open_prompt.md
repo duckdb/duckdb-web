@@ -5,109 +5,73 @@ excerpt: |
   DuckDB Community Extensions
   Interact with LLMs with a simple DuckDB Extension
 
+docs:
+  extended_description: "## Open Prompt Extension\nThe `open_prompt()` community extension\
+    \ is shamelessly inspired by the Motherduck `prompt()` but focused on self-hosted\
+    \ usage.\n\n> For examples and instructions check out the `open_prompt()` [README](https://github.com/quackscience/duckdb-extension-openprompt)\n\
+    \n### Configuration\nSetup the completions API URL configuration w/ optional auth\
+    \ token and model name\n\n```\nSET VARIABLE openprompt_api_url = 'http://localhost:11434/v1/chat/completions';\n\
+    SET VARIABLE openprompt_api_token = 'your_api_key_here';\nSET VARIABLE openprompt_model_name\
+    \ = 'qwen2.5:0.5b';\n```\n\nAlternatively the following ENV variables can be used\
+    \ at runtime\n\n```\nOPEN_PROMPT_API_URL='http://localhost:11434/v1/chat/completions'\n\
+    OPEN_PROMPT_API_TOKEN='your_api_key_here'\nOPEN_PROMPT_MODEL_NAME='qwen2.5:0.5b'\n\
+    OPEN_PROMPT_API_TIMEOUT='30'\n```\n\nFor persistent usage, configure parameters\
+    \ using DuckDB `SECRETS`\n\n```sql\nCREATE PERSISTENT SECRET IF NOT EXISTS open_prompt\
+    \ (\n      TYPE open_prompt,\n      PROVIDER config,\n      api_token 'your-api-token',\n\
+    \      api_url 'http://localhost:11434/v1/chat/completions',\n      model_name\
+    \ 'qwen2.5:0.5b',\n      api_timeout '30'\n  );\n```"
+  hello_world: "-- Configure the required parameters to access OpenAI Completions\
+    \ compatible APIs\nD CREATE SECRET IF NOT EXISTS open_prompt (\n      TYPE open_prompt,\n\
+    \      PROVIDER config,\n      api_token 'your-api-token',\n      api_url 'http://localhost:11434/v1/chat/completions',\n\
+    \      model_name 'qwen2.5:0.5b',\n      api_timeout '30'\n  );\n\n-- Prompt any\
+    \ OpenAI Completions API form your query\nD SELECT open_prompt('Write a one-line\
+    \ poem about ducks') AS response;\n\u250C\u2500\u2500\u2500\u2500\u2500\u2500\u2500\
+    \u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\
+    \u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\
+    \u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\
+    \u2500\u2500\u2510\n\u2502                    response                    \u2502\
+    \n\u2502                    varchar                     \u2502\n\u251C\u2500\u2500\
+    \u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\
+    \u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\
+    \u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\
+    \u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2524\n\u2502 Ducks quacking at dawn,\
+    \ swimming in the light. \u2502\n\u2514\u2500\u2500\u2500\u2500\u2500\u2500\u2500\
+    \u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\
+    \u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\
+    \u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\
+    \u2500\u2500\u2518\n\n-- Prompt requesting JSON Structured Output for ChatGPT,\
+    \ LLama3, etc\nSET VARIABLE openprompt_model_name = 'llama3.2:3b';\nSELECT open_prompt('I\
+    \ want ice cream', json_schema := '{\n   \"type\": \"object\",\n   \"properties\"\
+    : {\n     \"summary\": { \"type\": \"string\" },\n     \"sentiment\": { \"type\"\
+    : \"string\", \"enum\": [\"pos\", \"neg\", \"neutral\"] }\n   },\n   \"required\"\
+    : [\"summary\", \"sentiment\"],\n   \"additionalProperties\": false\n }');\n\n\
+    -- Use Custom System Prompt to request JSON Output in smaller models\nSET VARIABLE\
+    \ openprompt_model_name = 'qwen2.5:1.5b';\nSELECT open_prompt('I want ice cream.',\
+    \ system_prompt:='Response MUST be JSON with the following schema: {\n       \"\
+    type\": \"object\",\n       \"properties\": {\n         \"summary\": { \"type\"\
+    : \"string\" },\n         \"sentiment\": { \"type\": \"string\", \"enum\": [\"\
+    pos\", \"neg\", \"neutral\"] }\n       },\n       \"required\": [\"summary\",\
+    \ \"sentiment\"],\n       \"additionalProperties\": false\n     }');\n"
 extension:
-  name: open_prompt
-  description: Interact with LLMs with a simple DuckDB Extension
-  version: 0.0.5
-  language: C++
   build: cmake
+  description: Interact with LLMs with a simple DuckDB Extension
+  excluded_platforms: windows_amd64_rtools
+  language: C++
   license: MIT
-  excluded_platforms: "windows_amd64_rtools"
   maintainers:
-    - lmangani
-    - akvlad
-
+  - lmangani
+  - akvlad
+  name: open_prompt
+  version: '2025120401'
 repo:
   github: quackscience/duckdb-extension-openprompt
-  ref: 846b35872916cbcd866f992521a108d47393737d
+  ref: 5328a2ff7100887263259ccc5ad8c03b8c6bc58a
+  ref_next: b9b0d6884f43e515fda0977fc891598d874f490f
 
-docs:
-  hello_world: |
-    -- Configure the required parameters to access OpenAI Completions compatible APIs
-    D CREATE SECRET IF NOT EXISTS open_prompt (
-          TYPE open_prompt,
-          PROVIDER config,
-          api_token 'your-api-token',
-          api_url 'http://localhost:11434/v1/chat/completions',
-          model_name 'qwen2.5:0.5b',
-          api_timeout '30'
-      );
-    
-    -- Prompt any OpenAI Completions API form your query
-    D SELECT open_prompt('Write a one-line poem about ducks') AS response;
-    ┌────────────────────────────────────────────────┐
-    │                    response                    │
-    │                    varchar                     │
-    ├────────────────────────────────────────────────┤
-    │ Ducks quacking at dawn, swimming in the light. │
-    └────────────────────────────────────────────────┘
-    
-    -- Prompt requesting JSON Structured Output for ChatGPT, LLama3, etc
-    SET VARIABLE openprompt_model_name = 'llama3.2:3b';
-    SELECT open_prompt('I want ice cream', json_schema := '{
-       "type": "object",
-       "properties": {
-         "summary": { "type": "string" },
-         "sentiment": { "type": "string", "enum": ["pos", "neg", "neutral"] }
-       },
-       "required": ["summary", "sentiment"],
-       "additionalProperties": false
-     }');
-
-    -- Use Custom System Prompt to request JSON Output in smaller models
-    SET VARIABLE openprompt_model_name = 'qwen2.5:1.5b';
-    SELECT open_prompt('I want ice cream.', system_prompt:='Response MUST be JSON with the following schema: {
-           "type": "object",
-           "properties": {
-             "summary": { "type": "string" },
-             "sentiment": { "type": "string", "enum": ["pos", "neg", "neutral"] }
-           },
-           "required": ["summary", "sentiment"],
-           "additionalProperties": false
-         }');
-
-  extended_description: |
-    ## Open Prompt Extension
-    The `open_prompt()` community extension is shamelessly inspired by the Motherduck `prompt()` but focused on self-hosted usage.
-    
-    > For examples and instructions check out the `open_prompt()` [README](https://github.com/quackscience/duckdb-extension-openprompt)
-
-    ### Configuration
-    Setup the completions API URL configuration w/ optional auth token and model name
-
-    ```
-    SET VARIABLE openprompt_api_url = 'http://localhost:11434/v1/chat/completions';
-    SET VARIABLE openprompt_api_token = 'your_api_key_here';
-    SET VARIABLE openprompt_model_name = 'qwen2.5:0.5b';
-    ```
-    
-    Alternatively the following ENV variables can be used at runtime
-
-    ```
-    OPEN_PROMPT_API_URL='http://localhost:11434/v1/chat/completions'
-    OPEN_PROMPT_API_TOKEN='your_api_key_here'
-    OPEN_PROMPT_MODEL_NAME='qwen2.5:0.5b'
-    OPEN_PROMPT_API_TIMEOUT='30'
-    ```
-    
-    For persistent usage, configure parameters using DuckDB `SECRETS`
-
-    ```sql
-    CREATE PERSISTENT SECRET IF NOT EXISTS open_prompt (
-          TYPE open_prompt,
-          PROVIDER config,
-          api_token 'your-api-token',
-          api_url 'http://localhost:11434/v1/chat/completions',
-          model_name 'qwen2.5:0.5b',
-          api_timeout '30'
-      );
-    ```
-
-
-extension_star_count: 50
-extension_star_count_pretty: 50
-extension_download_count: 500
-extension_download_count_pretty: 500
+extension_star_count: 57
+extension_star_count_pretty: 57
+extension_download_count: 317
+extension_download_count_pretty: 317
 image: '/images/community_extensions/social_preview/preview_community_extension_open_prompt.png'
 layout: community_extension_doc
 ---
@@ -133,12 +97,50 @@ LOAD {{ page.extension.name }};
 
 <div class="extension_functions_table"></div>
 
-|  function_name  | function_type | description | comment | examples |
-|-----------------|---------------|-------------|---------|----------|
-| open_prompt     | scalar        | NULL        | NULL    |          |
-| set_api_timeout | scalar        | NULL        | NULL    |          |
-| set_api_token   | scalar        | NULL        | NULL    |          |
-| set_api_url     | scalar        | NULL        | NULL    |          |
-| set_model_name  | scalar        | NULL        | NULL    |          |
+|  function_name  | function_type |                              description                               | comment |                          examples                           |
+|-----------------|---------------|------------------------------------------------------------------------|---------|-------------------------------------------------------------|
+| open_prompt     | scalar        | Send a prompt to an LLM API using a specific model                     | NULL    | [open_prompt('Explain SQL', 'gpt-4')]                       |
+| open_prompt     | scalar        | Send a prompt to an LLM API with a system prompt and structured output | NULL    | [open_prompt('Hello', 'gpt-4', '{}', 'You are helpful')]    |
+| open_prompt     | scalar        | Send a prompt to an LLM API with structured JSON output                | NULL    | [open_prompt('Extract name', 'gpt-4', '{"type":"object"}')] |
+| open_prompt     | scalar        | Send a prompt to an OpenAI-compatible LLM API and return the response  | NULL    | [open_prompt('What is DuckDB?')]                            |
+| set_api_timeout | scalar        | Set the API timeout in seconds for LLM requests                        | NULL    | [set_api_timeout('30')]                                     |
+| set_api_token   | scalar        | Set the API token for LLM authentication                               | NULL    | [set_api_token('sk-...')]                                   |
+| set_api_url     | scalar        | Set the API URL for LLM endpoint                                       | NULL    | [set_api_url('https://api.openai.com/v1/chat/completions')] |
+| set_model_name  | scalar        | Set the default model name for LLM requests                            | NULL    | [set_model_name('gpt-4')]                                   |
+
+### Added Settings
+
+<div class="extension_settings_table"></div>
+
+|                 name                 |                                         description                                          | input_type | scope  | aliases |
+|--------------------------------------|----------------------------------------------------------------------------------------------|------------|--------|---------|
+| auto_fallback_to_full_download       | Allows automatically falling back to full file downloads when possible.                      | BOOLEAN    | GLOBAL | []      |
+| ca_cert_file                         | Path to a custom certificate file for self-signed certificates.                              | VARCHAR    | GLOBAL | []      |
+| enable_curl_server_cert_verification | Enable server side certificate verification for CURL backend.                                | BOOLEAN    | GLOBAL | []      |
+| enable_global_s3_configuration       | Automatically fetch AWS credentials from environment variables.                              | BOOLEAN    | GLOBAL | []      |
+| enable_server_cert_verification      | Enable server side certificate verification.                                                 | BOOLEAN    | GLOBAL | []      |
+| force_download                       | Forces upfront download of file                                                              | BOOLEAN    | GLOBAL | []      |
+| hf_max_per_page                      | Debug option to limit number of items returned in list requests                              | UBIGINT    | GLOBAL | []      |
+| http_keep_alive                      | Keep alive connections. Setting this to false can help when running into connection failures | BOOLEAN    | GLOBAL | []      |
+| http_retries                         | HTTP retries on I/O error                                                                    | UBIGINT    | GLOBAL | []      |
+| http_retry_backoff                   | Backoff factor for exponentially increasing retry wait time                                  | FLOAT      | GLOBAL | []      |
+| http_retry_wait_ms                   | Time between retries                                                                         | UBIGINT    | GLOBAL | []      |
+| http_timeout                         | HTTP timeout read/write/connection/retry (in seconds)                                        | UBIGINT    | GLOBAL | []      |
+| httpfs_client_implementation         | Select which is the HTTPUtil implementation to be used                                       | VARCHAR    | GLOBAL | []      |
+| merge_http_secret_into_s3_request    | Merges http secret params into S3 requests                                                   | BOOLEAN    | GLOBAL | []      |
+| s3_access_key_id                     | S3 Access Key ID                                                                             | VARCHAR    | GLOBAL | []      |
+| s3_endpoint                          | S3 Endpoint                                                                                  | VARCHAR    | GLOBAL | []      |
+| s3_kms_key_id                        | S3 KMS Key ID                                                                                | VARCHAR    | GLOBAL | []      |
+| s3_region                            | S3 Region                                                                                    | VARCHAR    | GLOBAL | []      |
+| s3_requester_pays                    | S3 use requester pays mode                                                                   | BOOLEAN    | GLOBAL | []      |
+| s3_secret_access_key                 | S3 Access Key                                                                                | VARCHAR    | GLOBAL | []      |
+| s3_session_token                     | S3 Session Token                                                                             | VARCHAR    | GLOBAL | []      |
+| s3_uploader_max_filesize             | S3 Uploader max filesize (between 50GB and 5TB)                                              | VARCHAR    | GLOBAL | []      |
+| s3_uploader_max_parts_per_file       | S3 Uploader max parts per file (between 1 and 10000)                                         | UBIGINT    | GLOBAL | []      |
+| s3_uploader_thread_limit             | S3 Uploader global thread limit                                                              | UBIGINT    | GLOBAL | []      |
+| s3_url_compatibility_mode            | Disable Globs and Query Parameters on S3 URLs                                                | BOOLEAN    | GLOBAL | []      |
+| s3_url_style                         | S3 URL style                                                                                 | VARCHAR    | GLOBAL | []      |
+| s3_use_ssl                           | S3 use SSL                                                                                   | BOOLEAN    | GLOBAL | []      |
+| unsafe_disable_etag_checks           | Disable checks on ETag consistency                                                           | BOOLEAN    | GLOBAL | []      |
 
 

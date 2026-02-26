@@ -1,15 +1,15 @@
 ---
 layout: docu
 redirect_from:
-- /docs/guides/sql_features/friendly_sql
-- /docs/guides/sql_features/friendly_sql/
-- /docs/sql/dialect/friendly_sql
+  - /docs/guides/sql_features/friendly_sql
+  - /docs/sql/dialect/friendly_sql
 title: Friendly SQL
 ---
 
 DuckDB offers several advanced SQL features and syntactic sugar to make SQL queries more concise. We refer to these colloquially as “friendly SQL”.
 
-> Several of these features are also supported in other systems while some are (currently) exclusive to DuckDB.
+> Several of these features were first introduced by DuckDB, while some are inspired by other systems.
+> Many of the features originally introduced by DuckDB (e.g., [`GROUP BY ALL`]({% link docs/stable/sql/query_syntax/groupby.md %}#group-by-all)) have been since adapted by other systems.
 
 ## Clauses
 
@@ -35,8 +35,8 @@ DuckDB offers several advanced SQL features and syntactic sugar to make SQL quer
     * [`PIVOT`]({% link docs/stable/sql/statements/pivot.md %}) to turn long tables to wide tables.
     * [`UNPIVOT`]({% link docs/stable/sql/statements/unpivot.md %}) to turn wide tables to long tables.
 * Defining SQL-level variables:
-    * [`SET VARIABLE`]({% link docs/stable/sql/statements/set.md %}#set-variable)
-    * [`RESET VARIABLE`]({% link docs/stable/sql/statements/set.md %}#reset-variable)
+    * [`SET VARIABLE`]({% link docs/stable/sql/statements/set_variable.md %}#set-variable)
+    * [`RESET VARIABLE`]({% link docs/stable/sql/statements/set_variable.md %}#reset-variable)
 
 ## Query Features
 

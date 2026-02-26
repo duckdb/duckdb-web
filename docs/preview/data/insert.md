@@ -20,4 +20,4 @@ CREATE TABLE people (id INTEGER, name VARCHAR);
 INSERT INTO people VALUES (1, 'Mark'), (2, 'Hannes');
 ```
 
-For a more detailed description together with syntax diagram can be found, see the [page on the `INSERT` statement]({% link docs/preview/sql/statements/insert.md %}).
+For a more detailed description together with a syntax diagram, see the [page on the `INSERT` statement]({% link docs/preview/sql/statements/insert.md %}).

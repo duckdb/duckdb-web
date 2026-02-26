@@ -1,13 +1,13 @@
 ---
 layout: docu
 redirect_from:
-- /docs/sql/functions/datepart
+  - /docs/sql/functions/datepart
 title: Date Part Functions
 ---
 
 <!-- markdownlint-disable MD001 -->
 
-The `date_part`, `date_trunc`, and `date_diff` functions can be used to extract or manipulate parts of temporal types such as [`TIMESTAMP`]({% link docs/stable/sql/data_types/timestamp.md %}), [`TIMESTAMPTZ`]({% link docs/stable/sql/data_types/timestamp.md %}), [`DATE`]({% link docs/stable/sql/data_types/date.md %}) and [`INTERVAL`]({% link docs/stable/sql/data_types/interval.md %}).
+The `date_part`, `date_trunc` and `date_diff` functions can be used to extract or manipulate parts of temporal types such as [`TIMESTAMP`]({% link docs/stable/sql/data_types/timestamp.md %}), [`TIMESTAMPTZ`]({% link docs/stable/sql/data_types/timestamp.md %}), [`DATE`]({% link docs/stable/sql/data_types/date.md %}) and [`INTERVAL`]({% link docs/stable/sql/data_types/interval.md %}).
 
 The parts to be extracted or manipulated are specified by one of the strings in the tables below.
 The example column provides the corresponding parts of the timestamp `2021-08-03 11:59:44.123456`.

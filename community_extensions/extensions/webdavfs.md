@@ -8,7 +8,7 @@ excerpt: |
 extension:
   name: webdavfs
   description: Allows reading and writing files over WebDAV protocol
-  version: 1.0.1
+  version: '2026020501'
   language: C++
   build: cmake
   license: MIT
@@ -19,7 +19,8 @@ extension:
   vcpkg_commit: 'dd3097e305afa53f7b4312371f62058d2e665320'
 repo:
   github: midwork-finds-jobs/duckdb-webdavfs
-  ref: 00894c37e652a256a26299b7023fc000d47a85c5
+  ref: 359f4c05601798855c07954cf560a6e3beb6fc10
+  ref_next: 49d8be58834230f4466c6c75199e960c50e21a51
 
 docs:
   hello_world: |
@@ -60,10 +61,10 @@ docs:
 
     See: https://github.com/midwork-finds-jobs/webdavfs/blob/main/README.md for more examples and details.
 
-extension_star_count: 0
-extension_star_count_pretty: 0
-extension_download_count: 520
-extension_download_count_pretty: 520
+extension_star_count: 1
+extension_star_count_pretty: 1
+extension_download_count: 381
+extension_download_count_pretty: 381
 image: '/images/community_extensions/social_preview/preview_community_extension_webdavfs.png'
 layout: community_extension_doc
 ---

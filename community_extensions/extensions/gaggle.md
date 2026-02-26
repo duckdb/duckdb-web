@@ -8,7 +8,7 @@ excerpt: |
 extension:
   name: gaggle
   description: A DuckDB extension for working with Kaggle datasets
-  version: 0.1.0-alpha.4
+  version: 0.1.0-alpha.5
   language: Rust & C++
   build: cmake
   license: MIT OR Apache-2.0
@@ -19,7 +19,7 @@ extension:
 
 repo:
   github: CogitatorTech/gaggle
-  ref: 8c5a4bc114e7cb5f0dc8e3343db8d7534878925e
+  ref: aaf8bd403ec71632ff2b297ce6a2e23a62b448b2
 
 docs:
   hello_world: |
@@ -50,10 +50,10 @@ docs:
     
     For more information, like API references and usage examples, visit the project's [GitHub repository](https://github.com/CogitatorTech/gaggle).
 
-extension_star_count: 8
-extension_star_count_pretty: 8
-extension_download_count: 707
-extension_download_count_pretty: 707
+extension_star_count: 15
+extension_star_count_pretty: 15
+extension_download_count: 385
+extension_download_count_pretty: 385
 image: '/images/community_extensions/social_preview/preview_community_extension_gaggle.png'
 layout: community_extension_doc
 ---

@@ -14,7 +14,7 @@ A [min-max index](https://en.wikipedia.org/wiki/Block_Range_Index) (also known a
 
 ### Adaptive Radix Tree (ART)
 
-An [Adaptive Radix Tree (ART)](https://db.in.tum.de/~leis/papers/ART.pdf) is mainly used to ensure primary key constraints and to speed up point and very highly selective (i.e., < 0.1%) queries. ART indexes can be created manually using `CREATE INDEX` clause and they are automatically created for columns with a `UNIQUE` or `PRIMARY KEY` constraint.
+An [Adaptive Radix Tree (ART)](https://db.in.tum.de/~leis/papers/ART.pdf) is mainly used to ensure primary key constraints and to speed up point and very highly selective (i.e., < 0.1%) queries. ART indexes can be created manually using the `CREATE INDEX` clause and they are automatically created for columns with a `UNIQUE` or `PRIMARY KEY` constraint.
 
 > Warning ART indexes must currently be able to fit in memory during index creation. Avoid creating ART indexes if the index does not fit in memory during index creation.
 
@@ -34,7 +34,7 @@ To drop an [ART index](#adaptive-radix-tree-art), use the [`DROP INDEX` statemen
 ## Limitations of ART Indexes
 
 ART indexes create a secondary copy of the data in a second location.
-Maintaining that second copy complicates processing, particularly when combined with transactions. 
+Maintaining that second copy complicates processing.
 Thus, certain limitations currently apply when it comes to modifying data that is also stored in secondary indexes.
 
 > As expected, indexes have a strong effect on performance, slowing down loading and updates, but speeding up certain queries. Please consult the [Performance Guide]({% link docs/preview/guides/performance/indexing.md %}) for details.
@@ -84,7 +84,7 @@ COMMIT;
 ```
 
 In other clients, you might be able to fetch the result of `DELETE ... RETURNING ...`.
-Then, you can use that result in a subsequent `INSERT ...` statements, or potentially make use of DuckDB's `Appender` (if available in the client).
+Then, you can use that result in a subsequent `INSERT ...` statement, or potentially make use of DuckDB's `Appender` (if available in the client).
 
 ### Over-Eager Constraint Checking in Foreign Keys
 
@@ -111,99 +111,3 @@ Violates foreign key constraint because key "id: 1" is still referenced by a for
 
 The reason for this is that DuckDB does not yet support “looking ahead”.
 During the `INSERT`, it is unaware it will reinsert the foreign key value as part of the `UPDATE` rewrite.
-
-### Constraint Checking after Delete with Concurrent Transactions
-
-To better understand the limitations of indexes, we'll first provide a brief overview of index storage in DuckDB.
-DuckDB creates a physical secondary copy of the key column expressions and their row IDs when defining index-based constraints, or when using the `CREATE [UNIQUE] INDEX` statement.
-That secondary structure lives in the physical storage of the table to which it belongs.
-Note that constraint violations are only relevant for primary key, foreign key, and `UNIQUE` indexes.
-
-When running transactions, DuckDB can only change or delete a value after there are no more dependencies to it from older transactions.
-I.e., after all older transactions that still need to see the old value have finished.
-DuckDB uses MVCC to ensure that transactionality.
-For the table storage, each transaction knows if it still has visibility on a value or not.
-A transaction has visibility on a value, if it started before the `COMMIT` of the change/delete.
-Similarly, it has no more visibility on the value, if it started afterward.
-
-**Indexes do not yet have such functionality.**
-Let's say that a `value-row_id` pair exists in the global index and there is a `COMMIT` changing/deleting that value.
-In that case, it **also** stays visible to newer transactions until all **older**, dependent transactions have finished.
-That behavior causes two main limitations, which are listed in more detail below.
-
-The long-term solution to these limitations is to enable transaction-timestamp tracking in indexes.
-However, as-of now, DuckDB does not fully support MVCC for its indexes.
-
-#### Workarounds
-
-As this is a limitation in DuckDB, there is currently no pure-SQL workaround.
-If you have concurrent reads and writes on a table with indexes, then you need to add application-side locks.
-I.e., if you have multiple writes happening while a concurrent read is running, then these have to wait for the read(s) to finish.
-
-You might also consider not using indexes altogether. 
-Instead, DuckDB's `MERGE INTO` statement might suit your needs better.
-
-#### Over-Eager Unique Constraint Checking
-
-For uniqueness constraints, inserts can fail when they should succeed:
-
-```cpp
-// Assume "someTable" is a table with an index enforcing uniqueness.
-tx1 = duckdbTxStart()
-someRecord = duckdb(tx1, "SELECT * FROM someTable USING SAMPLE 1 ROWS")
-
-tx2 = duckdbTxStart()
-duckdbDelete(tx2, someRecord)
-duckdbTxCommit(tx2)
-
-// At this point someRecord is deleted, but tx1 still needs visibility on that record.
-// Thus, the ART index is not updated, so the following query fails with a constraint error:
-tx3 = duckdbTxStart()
-duckdbInsert(tx3, someRecord)
-duckdbTxCommit(tx3)
-
-// Following this, the above insert succeeds because the ART index was allowed to update.
-duckdbTxCommit(tx1)
-```
-
-Note that in older versions of DuckDB some variations of this might've **seemed** to work (no constraint exception).
-That is especially the case for `UPSERT` statements.
-However, these variations caused incorrect states, as constraint checking was incorrectly based on an already-deleted value.
-
-#### Under-Eager Foreign Key Constraint Checking
-
-For foreign key constraints, inserts can succeed when they should fail:
-
-```cpp
-// Setup: Create a primary table with a UUID primary key and a secondary table with a foreign key reference.
-primaryId = generateNewGUID()
-conn = duckdbConnectInMemory()
-
-// Create tables and insert the initial record in the primary table.
-duckdb(conn, "CREATE TABLE primary_table (id UUID PRIMARY KEY)")
-duckdb(conn, "CREATE TABLE secondary_table (primary_id UUID, FOREIGN KEY (primary_id) REFERENCES primary_table(id))")
-duckdbInsert(conn, "primary_table", {id: primaryId})
-
-// Start a transaction tx1, which reads from primary_table.
-tx1 = duckdbTxStart(conn)
-readRecord = duckdb(tx1, "SELECT id FROM primary_table LIMIT 1")
-
-// Note: tx1 remains open, holding locks/resources.
-// Outside of tx1, delete the record from primary_table.
-duckdbDelete(conn, "primary_table", {id: primaryId})
-
-// Try to insert into secondary_table, which has a foreign key reference to the now-deleted primary record.
-// This succeeds because tx1 is still open and the constraint isn't fully enforced yet.
-duckdbInsert(conn, "secondary_table", {primary_id: primaryId})
-
-// Commit tx1, releasing any locks/resources.
-duckdbTxCommit(tx1)
-
-// Verify the primary record is indeed deleted.
-count = duckdb(conn, "SELECT count() FROM primary_table WHERE id = $primaryId", {primaryId: primaryId})
-assert(count == 0, "Record should be deleted")
-
-// Verify the secondary record with the foreign key reference exists, an inconsistent state!
-count = duckdb(conn, "SELECT count() FROM secondary_table WHERE primary_id = $primaryId", {primaryId: primaryId})
-assert(count == 1, "Foreign key reference should exist")
-```

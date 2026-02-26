@@ -10,7 +10,7 @@ The **Secrets manager** provides a unified user interface for secrets across all
 ## Types of Secrets
 
 Secrets are typed, their type identifies which service they are for.
-Most secrets are not included in DuckDB default, instead, they are registered by extensions.
+Most secrets are not included in DuckDB by default; instead, they are registered by extensions.
 Currently, the following secret types are available:
 
 | Secret type   | Service / protocol   | Extension                                                                         |

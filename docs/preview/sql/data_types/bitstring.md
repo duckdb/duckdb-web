@@ -1,5 +1,5 @@
 ---
-blurb: The bitstring type are strings of 1s and 0s.
+blurb: The bitstring type is a string of 1s and 0s.
 layout: docu
 title: Bitstring Type
 ---
@@ -27,7 +27,7 @@ SELECT '101010'::BITSTRING AS b;
 |--------|
 | 101010 |
 
-Create a `BITSTRING` with predefined length is possible with the `bitstring` function. The resulting bitstring will be left-padded with zeroes.
+Creating a `BITSTRING` with a predefined length is possible with the `bitstring` function. The resulting bitstring will be left-padded with zeroes.
 
 ```sql
 SELECT bitstring('0101011', 12) AS b;

@@ -9,16 +9,11 @@ In this page we will go over the basic usage of the extension without the need t
 
 ## Installing and Loading
 
-To install the `iceberg` extension, run:
+The `iceberg` extension is installed and loaded automatically on first use.
+If you would like to install and load it manually, run:
 
 ```sql
 INSTALL iceberg;
-```
-
-Note that the `iceberg` extension is not autoloadable.
-Therefore, you need to load it before using it:
-
-```sql
 LOAD iceberg;
 ```
 
@@ -60,7 +55,7 @@ FROM iceberg_scan('data/iceberg/lineitem_iceberg', allow_moved_paths = true);
 > The `allow_moved_paths` option ensures that some path resolution is performed, 
 > which allows scanning Iceberg tables that are moved.
 
-You can also address specify the current manifest directly in the query, this may be resolved from the catalog prior to the query, in this example the manifest version is a UUID.
+You can also directly specify the current manifest in the query, this may be resolved from the catalog prior to the query, in this example the manifest version is a UUID.
 To do so, navigate to the `data/iceberg` directory and run:
 
 ```sql
@@ -72,7 +67,7 @@ FROM iceberg_scan('lineitem_iceberg/metadata/v1.metadata.json');
 |-------------:|
 | 60175        |
 
-The `iceberg` works together with the [`httpfs` extension]({% link docs/preview/core_extensions/httpfs/overview.md %}) or the [`azure` extension]({% link docs/preview/core_extensions/azure.md %}) to access Iceberg tables in object stores such as S3 or Azure Blob Storage.
+The `iceberg` extension works together with the [`httpfs` extension]({% link docs/preview/core_extensions/httpfs/overview.md %}) or the [`azure` extension]({% link docs/preview/core_extensions/azure.md %}) to access Iceberg tables in object stores such as S3 or Azure Blob Storage.
 
 ```sql
 SELECT count(*)
@@ -121,7 +116,7 @@ By default, the `iceberg` extension will look for a `version-hint.text` file to 
 SELECT *
 FROM iceberg_snapshots(
     'data/iceberg/lineitem_iceberg',
-    version = '1',
+    version = '1'
 );
 ```
 
@@ -134,7 +129,7 @@ If any text file is provided through the `version` parameter, it is opened and t
 SELECT *
 FROM iceberg_snapshots(
     'data/iceberg/lineitem_iceberg',
-    version = 'version-hint.txt',
+    version = 'version-hint.txt'
 );
 ```
 
@@ -152,7 +147,7 @@ FROM iceberg_snapshots(
     'data/iceberg/alternative_metadata_gz_naming',
     version = '2',
     version_name_format = 'rev-%s.metadata.json%s',
-    metadata_compression_codec = 'gzip',
+    metadata_compression_codec = 'gzip'
 );
 ```
 
@@ -182,9 +177,8 @@ FROM iceberg_scan(
 
 ## Limitations
 
-- Updates and deletes.
-- Inserts into v3 Iceberg specification tables.
-- Reads from v3 tables with v2 data types.
-- Geometry data type
+* Inserts into v3 Iceberg specification tables.
+* Reads from v3 tables with v2 data types.
+* Geometry data type.
 
 For a set of unsupported operations when attaching to an Iceberg catalog, see [Unsupported Operations]({% link docs/preview/core_extensions/iceberg/iceberg_rest_catalogs.md %}#unsupported-operations).

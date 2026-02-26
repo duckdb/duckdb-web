@@ -1,7 +1,7 @@
 ---
 layout: docu
 redirect_from:
-- /docs/sql/functions/timestamptz
+  - /docs/sql/functions/timestamptz
 title: Timestamp with Time Zone Functions
 ---
 
@@ -161,7 +161,7 @@ The table below shows the ICU provided scalar functions for `TIMESTAMP WITH TIME
 |:--|:-------|
 | [`age(timestamptz, timestamptz)`](#agetimestamptz-timestamptz) | Subtract arguments, resulting in the time difference between the two timestamps. |
 | [`age(timestamptz)`](#agetimestamptz) | Subtract from current_date. |
-| [`date_diff(part, starttimestamptz, endtimestamptz)`](#date_diffpart-starttimestamptz-endtimestamptz) | The number of [`part`]({% link docs/stable/sql/functions/datepart.md %}) boundaries between `starttimestamptz` and `endtimestamptz` inclusive of the larger timstamp and exclusive of the smaller timestamp. |
+| [`date_diff(part, starttimestamptz, endtimestamptz)`](#date_diffpart-starttimestamptz-endtimestamptz) | The number of [`part`]({% link docs/stable/sql/functions/datepart.md %}) boundaries between `starttimestamptz` and `endtimestamptz` inclusive of the larger timestamp and exclusive of the smaller timestamp. |
 | [`date_part([part, ...], timestamp)`](#date_partpart--timestamptz) | Get the listed [subfields]({% link docs/stable/sql/functions/datepart.md %}) as a `struct`. The list must be constant. |
 | [`date_part(part, timestamp)`](#date_partpart-timestamptz) | Get [subfield]({% link docs/stable/sql/functions/datepart.md %}) (equivalent to `extract`). |
 | [`date_sub(part, starttimestamptz, endtimestamptz)`](#date_subpart-starttimestamptz-endtimestamptz) | The signed length of the interval between `starttimestamptz` and `endtimestamptz`, truncated to whole multiples of [`part`]({% link docs/stable/sql/functions/datepart.md %}). |

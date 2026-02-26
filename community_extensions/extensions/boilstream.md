@@ -8,7 +8,7 @@ excerpt: |
 extension:
   name: boilstream
   description: Secure remote secrets storage with OPAQUE PAKE authentication, email/password registration, MFA login, and automatic ducklake mounting
-  version: 0.4.0
+  version: 0.5.0
   language: C++, Rust
   build: cmake
   license: MIT
@@ -18,7 +18,7 @@ extension:
 
 repo:
   github: dforsber/boilstream-extension
-  ref: 980fb47f9276c04c1aec04868f79974921e7488d
+  ref: 45b114434ec04ffcfc2a3b0231dd9895d08336f0
 
 docs:
   hello_world: |
@@ -95,6 +95,7 @@ docs:
     - `PRAGMA boilstream_bootstrap_session(url_with_token)` - Authenticate with bootstrap token
     - `boilstream_ducklakes()` - List available ducklakes
     - `boilstream_secrets()` - List cached secrets with expiration
+    - `boilstream_buckets()` - List available storage buckets
     - `PRAGMA boilstream_create_ducklake(name, description)` - Create new ducklake
     - `PRAGMA boilstream_help` - Show all available commands
 
@@ -106,10 +107,10 @@ docs:
 
     For detailed documentation, security specification, and setup instructions, visit the [extension repository](https://github.com/dforsber/boilstream-extension).
 
-extension_star_count: 2
-extension_star_count_pretty: 2
-extension_download_count: 705
-extension_download_count_pretty: 705
+extension_star_count: 7
+extension_star_count_pretty: 7
+extension_download_count: 418
+extension_download_count_pretty: 418
 image: '/images/community_extensions/social_preview/preview_community_extension_boilstream.png'
 layout: community_extension_doc
 ---
@@ -138,6 +139,7 @@ LOAD {{ page.extension.name }};
 |          function_name           | function_type | description | comment | examples |
 |----------------------------------|---------------|-------------|---------|----------|
 | boilstream_bootstrap_session     | pragma        | NULL        | NULL    |          |
+| boilstream_buckets               | table         | NULL        | NULL    |          |
 | boilstream_create_ducklake       | pragma        | NULL        | NULL    |          |
 | boilstream_ducklakes             | table         | NULL        | NULL    |          |
 | boilstream_help                  | pragma        | NULL        | NULL    |          |
@@ -182,6 +184,7 @@ LOAD {{ page.extension.name }};
 | ducklake_retry_backoff               | Backoff factor for exponentially increasing retry wait time                                                                   | DOUBLE     | GLOBAL | []      |
 | ducklake_retry_wait_ms               | Time between retries                                                                                                          | UBIGINT    | GLOBAL | []      |
 | enable_curl_server_cert_verification | Enable server side certificate verification for CURL backend.                                                                 | BOOLEAN    | GLOBAL | []      |
+| enable_global_s3_configuration       | Automatically fetch AWS credentials from environment variables.                                                               | BOOLEAN    | GLOBAL | []      |
 | enable_server_cert_verification      | Enable server side certificate verification.                                                                                  | BOOLEAN    | GLOBAL | []      |
 | force_download                       | Forces upfront download of file                                                                                               | BOOLEAN    | GLOBAL | []      |
 | hf_max_per_page                      | Debug option to limit number of items returned in list requests                                                               | UBIGINT    | GLOBAL | []      |
@@ -191,6 +194,7 @@ LOAD {{ page.extension.name }};
 | http_retry_wait_ms                   | Time between retries                                                                                                          | UBIGINT    | GLOBAL | []      |
 | http_timeout                         | HTTP timeout read/write/connection/retry (in seconds)                                                                         | UBIGINT    | GLOBAL | []      |
 | httpfs_client_implementation         | Select which is the HTTPUtil implementation to be used                                                                        | VARCHAR    | GLOBAL | []      |
+| merge_http_secret_into_s3_request    | Merges http secret params into S3 requests                                                                                    | BOOLEAN    | GLOBAL | []      |
 | pg_array_as_varchar                  | Read Postgres arrays as varchar - enables reading mixed dimensional arrays                                                    | BOOLEAN    | GLOBAL | []      |
 | pg_connection_cache                  | Whether or not to use the connection cache                                                                                    | BOOLEAN    | GLOBAL | []      |
 | pg_connection_limit                  | The maximum amount of concurrent Postgres connections                                                                         | UBIGINT    | GLOBAL | []      |

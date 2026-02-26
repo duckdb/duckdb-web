@@ -21,7 +21,7 @@ DuckDB supports Iceberg, Delta and DuckLake as first-class citizens. The followi
 | Upserting                    | ✅                                                                    | ❌                                                                      | ❌                                                         |
 | Create table                 | ✅                                                                    | ✅                                                                      | ❌                                                         |
 | Create table with partitions | ✅                                                                    | ❌                                                                      | ❌                                                         |
-| Attaching to a catalog       | ✅                                                                    | ✅                                                                      | ✅ `*`                                                     |
+| Attaching to a catalog       | ✅                                                                    | ✅                                                                      | ✅ \*                                                     |
 | Rename table                 | ✅                                                                    | ❌                                                                      | ❌                                                         |
 | Rename columns               | ✅                                                                    | ❌                                                                      | ❌                                                         |
 | Add/drop columns             | ✅                                                                    | ❌                                                                      | ❌                                                         |
@@ -32,7 +32,7 @@ DuckDB supports Iceberg, Delta and DuckLake as first-class citizens. The followi
 | Time travel                  | ✅                                                                    | ✅                                                                      | ✅                                                         |
 | Query table changes          | ✅                                                                    | ❌                                                                      | ❌                                                         |
 
-`*` Through the `uc_catalog` extension
+\* Through the [`unity_catalog`](https://github.com/duckdb/unity_catalog) extension.
 
 DuckDB aims to build native extensions with minimal dependencies. The `iceberg` extension for example, has no dependencies on third-party Iceberg libraries, which means all data and metadata operations are implemented natively in the DuckDB extension. For the `delta` extension, we use the [`delta-kernel-rs` project](https://github.com/delta-io/delta-kernel-rs), which is meant to be a lightweight platform for engines to build delta integrations that are as close to native as possible.
 
@@ -40,7 +40,7 @@ DuckDB aims to build native extensions with minimal dependencies. The `iceberg` 
 
 ## Workarounds for Unsupported Features
 
-If the DuckDB core extension does not cover your use case, you can still use DuckDB to process the data and use an external library to help you with the unsupported operations. If you are using the Python client, there are some very good off-the-self libraries that can help you. This examples will have one thing in common, they use Arrow as an efficient, zero-copy data interface with DuckDB.
+If the DuckDB core extension does not cover your use case, you can still use DuckDB to process the data and use an external library to help you with the unsupported operations. If you are using the Python client, there are some very good off-the-shelf libraries that can help you. These examples will have one thing in common, they use Arrow as an efficient, zero-copy data interface with DuckDB.
 
 ### Using PyIceberg with DuckDB
 

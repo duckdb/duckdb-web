@@ -1,9 +1,8 @@
 ---
 layout: docu
 redirect_from:
-- /docs/sql/information_schema
-- /docs/sql/information_schema/
-- /docs/sql/meta/information_schema
+  - /docs/sql/information_schema
+  - /docs/sql/meta/information_schema
 title: Information Schema
 ---
 
@@ -27,7 +26,7 @@ DuckDB's implementation is based on [PostgreSQL's information schema](https://ww
 
 ### `columns`: Columns
 
-The view that describes the catalog information for columns is `information_schema.columns`. It lists the column present in the database and has the following layout:
+The view that describes the catalog information for columns is `information_schema.columns`. It lists the columns present in the database and has the following layout:
 
 | Column | Description | Type | Example |
 |:--|:---|:-|:-|

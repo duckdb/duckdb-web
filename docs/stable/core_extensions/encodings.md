@@ -3,17 +3,13 @@ github_directory: https://github.com/duckdb/duckdb-encodings
 layout: docu
 redirect_from:
 - /docs/stable/extensions/encodings
-- /docs/stable/extensions/encodings/
 - /docs/extensions/encodings
-- /docs/extensions/encodings/
 title: Encodings Extension
 ---
 
-> Warning The Encodings extension will be available with the release of DuckDB v1.3.0.
+The `encodings` extension adds support for reading CSVs using more than 1,000 character encodings.
 
-The `encodings` extension adds supports for reading CSVs using more than 1,000 character encodings.
-- For a complete list of supported `encodings`, see [All Supported Encodings](#all-supported-encodings). 
-- For detailed information on character encoding, see the [ICU data repository](https://github.com/unicode-org/icu-data/tree/main/charset/data/ucm).
+For a complete list of supported `encodings`, see [All Supported Encodings](#all-supported-encodings). For detailed information on character encoding, see the [ICU data repository](https://github.com/unicode-org/icu-data/tree/main/charset/data/ucm).
 
 ## Installing and Loading
 

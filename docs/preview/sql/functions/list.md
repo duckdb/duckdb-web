@@ -872,7 +872,13 @@ SELECT [4, 5, 6] AS l, [x FOR x, i IN l IF i != 2] AS filtered;
 |-----------|----------|
 | [4, 5, 6] | [4, 6]   |
 
-Under the hood, `[f(x) FOR x IN y IF g(x)]` is translated to `list_transform(list_filter(y, x -> f(x)), x -> f(x))`.
+Under the hood, `[f(x) FOR x IN l IF g(x)]` is translated to:
+
+```sql
+l.list_apply(lambda x, i: {'filter': g(x, i), 'result': f(x, i)})
+    .list_filter(lambda x: x.filter)
+    .list_apply(lambda x: x.result)
+```
 
 ## Range Functions
 
@@ -1173,7 +1179,7 @@ SELECT list_aggr([1, 2, 3], 'string_agg', '-') AS str;
 ## Sorting Lists
 
 The function `list_sort` sorts the elements of a list either in ascending or descending order.
-In addition, it allows to provide whether `NULL` values should be moved to the beginning or to the end of the list.
+In addition, it allows specifying whether `NULL` values should be moved to the beginning or to the end of the list.
 It has the same sorting behavior as DuckDB's `ORDER BY` clause.
 Therefore, (nested) values compare the same in `list_sort` as in `ORDER BY`.
 
@@ -1281,7 +1287,7 @@ SELECT
 ```
 
 In general, the input to the flatten function should be a list of lists (not a single level list).
-However, the behavior of the flatten function has specific behavior when handling empty lists and `NULL` values.
+However, the flatten function has specific behavior when handling empty lists and `NULL` values.
 
 If the input list is empty, return an empty list:
 
@@ -1336,7 +1342,7 @@ SELECT flatten([[NULL], [NULL]]);
 
 ## Lambda Functions
 
-DuckDB supports lambda functions in the form `(parameter1, parameter2, ...) -> expression`.
+DuckDB supports lambda functions in the form `lambda parameter1, parameter2, ...:  expression`.
 For details, see the [lambda functions page]({% link docs/preview/sql/functions/lambda.md %}).
 
 ## Related Functions

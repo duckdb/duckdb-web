@@ -44,3 +44,5 @@ You can write Vortex files as follows:
 COPY (SELECT * FROM generate_series(0, 3) t(i))
 TO 'my.vortex' (FORMAT vortex);
 ```
+
+> Warning Make sure to add the `FORMAT vortex` option. If the `vortex` extension is not loaded, using `COPY ... TO 'my.vortex` without the `FORMAT vortex` specifier will result in a CSV file.

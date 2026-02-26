@@ -5,7 +5,7 @@ redirect_from:
 title: Securing Extensions
 ---
 
-DuckDB has a powerful extension mechanism, which have the same privileges as the user running DuckDB's (parent) process.
+DuckDB has a powerful extension mechanism, which has the same privileges as the user running DuckDB's (parent) process.
 This introduces security considerations. Therefore, we recommend reviewing the configuration options listed on this page and setting them according to your attack models.
 
 ## DuckDB Signature Checks

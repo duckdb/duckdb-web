@@ -8,7 +8,7 @@ excerpt: |
 extension:
   name: duckdb_mcp
   description: Model Context Protocol (MCP) extension for DuckDB that enables seamless integration between SQL databases and MCP servers. Provides both client capabilities for accessing remote MCP resources via SQL and server capabilities for exposing database content as MCP resources.
-  version: 1.1.0
+  version: 1.5.1
   language: C++
   build: cmake
   license: MIT
@@ -17,7 +17,8 @@ extension:
     - teaguesterling
 repo:
   github: teaguesterling/duckdb_mcp
-  ref: 440ef9e852a806def5783c7ca4f7fdb3d1021881
+  ref: a40e34191cc7172c257eef7bae34288cf0be90da
+  ref_next: a40e34191cc7172c257eef7bae34288cf0be90da
 
 docs:
   hello_world: |
@@ -43,6 +44,7 @@ docs:
     
     -- Server mode: Start an MCP server to expose database content
     SELECT mcp_server_start('stdio', 'localhost', 0, '{}');
+    -- or mcp_server_start('stdio')
     
     -- Publish database tables as MCP resources
     CREATE TABLE products AS SELECT 'Widget' as name, 10.99 as price;
@@ -50,6 +52,8 @@ docs:
 
   extended_description: |
     DuckDB MCP Extension bridges SQL databases with the Model Context Protocol (MCP), enabling bidirectional integration between DuckDB and MCP servers. The extension operates in dual modes: as an MCP client for accessing remote resources and as an MCP server for exposing database content.
+
+    See the [README.md](https://github.com/teaguesterling/duckdb_mcp/blob/main/README.md) for more details.
     
     **MCP Client Capabilities**: Connect to MCP servers using multiple transport protocols (stdio, TCP, WebSocket) and access remote resources directly in SQL queries. Use the `mcp://` URI scheme with standard DuckDB functions like `read_csv()`, `read_parquet()`, and `read_json()` to seamlessly query remote data sources. Execute remote tools with `mcp_call_tool()` and discover available resources with `mcp_list_resources()`.
     
@@ -74,10 +78,10 @@ docs:
     
     The extension implements the complete JSON-RPC 2.0 MCP protocol with support for multiple transport mechanisms. It enables powerful use cases including database federation, remote data access, tool orchestration, and exposing database insights to external MCP-compatible systems. Perfect for integration with AI agents, data pipelines, and distributed analytical workflows.
 
-extension_star_count: 14
-extension_star_count_pretty: 14
-extension_download_count: 1063
-extension_download_count_pretty: 1.1k
+extension_star_count: 35
+extension_star_count_pretty: 35
+extension_download_count: 468
+extension_download_count_pretty: 468
 image: '/images/community_extensions/social_preview/preview_community_extension_duckdb_mcp.png'
 layout: community_extension_doc
 ---
@@ -114,14 +118,18 @@ LOAD {{ page.extension.name }};
 | mcp_list_resources           | scalar        | NULL        | NULL    |          |
 | mcp_list_tools               | scalar        | NULL        | NULL    |          |
 | mcp_publish_query            | scalar        | NULL        | NULL    |          |
+| mcp_publish_resource         | scalar        | NULL        | NULL    |          |
 | mcp_publish_table            | scalar        | NULL        | NULL    |          |
+| mcp_publish_tool             | scalar        | NULL        | NULL    |          |
 | mcp_reconnect_server         | scalar        | NULL        | NULL    |          |
 | mcp_register_prompt_template | scalar        | NULL        | NULL    |          |
 | mcp_render_prompt_template   | scalar        | NULL        | NULL    |          |
 | mcp_server_health            | scalar        | NULL        | NULL    |          |
+| mcp_server_send_request      | scalar        | NULL        | NULL    |          |
 | mcp_server_start             | scalar        | NULL        | NULL    |          |
 | mcp_server_status            | scalar        | NULL        | NULL    |          |
 | mcp_server_stop              | scalar        | NULL        | NULL    |          |
+| mcp_server_test              | scalar        | NULL        | NULL    |          |
 
 ### Added Settings
 

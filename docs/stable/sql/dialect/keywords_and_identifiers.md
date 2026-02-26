@@ -1,13 +1,10 @@
 ---
 layout: docu
 redirect_from:
-- /docs/sql/case_sensitivity
-- /docs/sql/case_sensitivity/
-- /docs/sql/keywords-and-identifiers
-- /docs/sql/keywords-and-identifiers/
-- /docs/sql/dialect/keywords-and-identifiers
-- /docs/sql/dialect/keywords-and-identifiers/
-- /docs/sql/dialect/keywords_and_identifiers
+  - /docs/sql/case_sensitivity
+  - /docs/sql/keywords-and-identifiers
+  - /docs/sql/dialect/keywords-and-identifiers
+  - /docs/sql/dialect/keywords_and_identifiers
 title: Keywords and Identifiers
 ---
 
@@ -87,7 +84,7 @@ SELECT col_á FROM (SELECT 'x' AS col_a); -- fails
 ```
 
 **Preserving cases:**
-While DuckDB treats identifiers in a case-insensitive manner, it preservers the cases of these identifiers.
+While DuckDB treats identifiers in a case-insensitive manner, it preserves the cases of these identifiers.
 That is, each character's case (uppercase/lowercase) is maintained as originally specified by the user even if a query uses different cases when referring to the identifier.
 For example:
 

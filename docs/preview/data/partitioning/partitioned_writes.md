@@ -60,8 +60,8 @@ SET partitioned_write_max_open_files = 10;
 
 By default, files will be named `data_0.parquet` or `data_0.csv`. With the flag `FILENAME_PATTERN` a pattern with `{i}` or `{uuid}` can be defined to create specific filenames:
 
-* `{i}` will be replaced by an index
-* `{uuid}` will be replaced by a 128 bits long UUID
+* `{i}` will be replaced by an index.
+* `{uuid}` will be replaced by a 128 bits long UUID.
 
 Write a table to a Hive partitioned dataset of .parquet files, with an index in the filename:
 
@@ -92,7 +92,7 @@ COPY orders TO 'orders'
 (FORMAT parquet, PARTITION_BY (year, month), APPEND);
 ```
 
-Using the `APPEND` option result in a behavior similar the `OVERWRITE_OR_IGNORE, FILENAME_PATTERN '{uuid}'` options,
+Using the `APPEND` option results in a behavior similar to the `OVERWRITE_OR_IGNORE, FILENAME_PATTERN '{uuid}'` options,
 but DuckDB performs an extra check for whether the file already exists and then regenerates the UUID in the rare event that it does (to avoid clashes).
 
 ### Handling Slashes in Columns

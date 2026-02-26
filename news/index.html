@@ -3,6 +3,8 @@ layout: postarchive
 title: Engineering Blog
 excerpt: The blog contains use case descriptions, release announcements, benchmarks, etc. about DuckDB.
 body_class: blog
+redirect_from:
+- /blog
 ---
 
 {% assign all_tags = "" %}
@@ -40,13 +42,15 @@ body_class: blog
 				{% assign post_link = post.external_post_url %}
 				{% assign link_target = "_blank" %}
 				{% assign link_rel = "noopener noreferrer" %}
+				{% assign source_domain = post.external_post_url | extract_domain %}
 			{% else %}
 				{% assign is_external = false %}
 				{% assign post_link = post.url %}
 				{% assign link_target = "_self" %}
 				{% assign link_rel = "" %}
+				{% assign source_domain = "duckdb.org" %}
 			{% endif %}
-			<div class="postpreview {{ tag_classes | downcase }}{% if is_external %} external-post{% endif %}" data-title="{{ post.title | escape }}">
+			<div class="postpreview {{ tag_classes | downcase }}{% if is_external %} external-post{% endif %}" data-title="{{ post.title | escape }}" data-source="{{ source_domain }}">
 				<a href="{{ post_link }}" title="{{ post.title }}" class="blocklink" target="{{ link_target }}"{% if link_rel != "" %} rel="{{ link_rel }}"{% endif %}></a>
 				<div class="postimg custom">
 					{% if post.thumb %}

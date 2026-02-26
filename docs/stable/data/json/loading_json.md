@@ -44,7 +44,7 @@ DESCRIBE todos;
 | title       | VARCHAR     | YES  | NULL | NULL    | NULL  |
 | completed   | BOOLEAN     | YES  | NULL | NULL    | NULL  |
 
-If we specify types for subset of columns, `read_json` excludes columns that we don't specify:
+If we specify types for a subset of columns, `read_json` excludes columns that we don't specify:
 
 ```sql
 SELECT *
@@ -332,7 +332,7 @@ CREATE TABLE numbers (i BIGINT);
 COPY numbers FROM 'numbers.json' (ARRAY true);
 ```
 
-The format can be detected automatically the format like so:
+The format can be detected automatically like so:
 
 ```sql
 CREATE TABLE numbers (i BIGINT);

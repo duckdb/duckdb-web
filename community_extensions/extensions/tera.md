@@ -6,25 +6,27 @@ excerpt: |
   Adds templating to DuckDB, enabling dynamic generation of text, HTML, and reports directly within SQL queries using the Tera engine.
 
 docs:
-  extended_description: |
-    For more information regarding usage, see the [documentation](https://query.farm/duckdb_extension_tera.html).
+  extended_description: For more information regarding usage, see the [documentation](https://query.farm/duckdb_extension_tera.html).
 extension:
   build: cmake
-  description: Adds templating to DuckDB, enabling dynamic generation of text, HTML, and reports directly within SQL queries using the Tera engine.
+  description: Adds templating to DuckDB, enabling dynamic generation of text, HTML,
+    and reports directly within SQL queries using the Tera engine.
   language: C++
   license: Apache-2.0
   maintainers:
-    - rustyconover
+  - rustyconover
   name: tera
   requires_toolchains: rust
-  version: 2025102001
+  version: '2025120401'
 repo:
   github: query-farm/tera
-  ref: 68c4797ed487445933eae1683bb8074a56a477ff
-extension_star_count: 5
-extension_star_count_pretty: 5
-extension_download_count: 708
-extension_download_count_pretty: 708
+  ref: 5b8e2b4701c69b196cc6386d86f811a5343ffc6e
+  ref_next: dd8a18c16fb05e341c7e5cf47f89821ab9ce0c1e
+
+extension_star_count: 8
+extension_star_count_pretty: 8
+extension_download_count: 368
+extension_download_count_pretty: 368
 image: '/images/community_extensions/social_preview/preview_community_extension_tera.png'
 layout: community_extension_doc
 ---
@@ -50,9 +52,10 @@ LOAD {{ page.extension.name }};
 
 <div class="extension_functions_table"></div>
 
-| function_name | function_type | description | comment | examples |
-|---------------|---------------|-------------|---------|----------|
-| tera_render   | scalar        | NULL        | NULL    | NULL     |
+| function_name | function_type |                        description                         | comment |                                                     examples                                                      |
+|---------------|---------------|------------------------------------------------------------|---------|-------------------------------------------------------------------------------------------------------------------|
+| tera_render   | scalar        | Renders a Tera template string with JSON context variables | NULL    | [tera_render('Hello {{ name }}!', '{"name": "World"}'), tera_render('{{ value | upper }}', '{"value": "hello"}')] |
+| tera_render   | scalar        | Renders a Tera template string without context variables   | NULL    | [tera_render('Hello World!')]                                                                                     |
 
 ### Added Settings
 
@@ -63,6 +66,7 @@ LOAD {{ page.extension.name }};
 | auto_fallback_to_full_download       | Allows automatically falling back to full file downloads when possible.                      | BOOLEAN    | GLOBAL | []      |
 | ca_cert_file                         | Path to a custom certificate file for self-signed certificates.                              | VARCHAR    | GLOBAL | []      |
 | enable_curl_server_cert_verification | Enable server side certificate verification for CURL backend.                                | BOOLEAN    | GLOBAL | []      |
+| enable_global_s3_configuration       | Automatically fetch AWS credentials from environment variables.                              | BOOLEAN    | GLOBAL | []      |
 | enable_server_cert_verification      | Enable server side certificate verification.                                                 | BOOLEAN    | GLOBAL | []      |
 | force_download                       | Forces upfront download of file                                                              | BOOLEAN    | GLOBAL | []      |
 | hf_max_per_page                      | Debug option to limit number of items returned in list requests                              | UBIGINT    | GLOBAL | []      |
@@ -72,6 +76,7 @@ LOAD {{ page.extension.name }};
 | http_retry_wait_ms                   | Time between retries                                                                         | UBIGINT    | GLOBAL | []      |
 | http_timeout                         | HTTP timeout read/write/connection/retry (in seconds)                                        | UBIGINT    | GLOBAL | []      |
 | httpfs_client_implementation         | Select which is the HTTPUtil implementation to be used                                       | VARCHAR    | GLOBAL | []      |
+| merge_http_secret_into_s3_request    | Merges http secret params into S3 requests                                                   | BOOLEAN    | GLOBAL | []      |
 | s3_access_key_id                     | S3 Access Key ID                                                                             | VARCHAR    | GLOBAL | []      |
 | s3_endpoint                          | S3 Endpoint                                                                                  | VARCHAR    | GLOBAL | []      |
 | s3_kms_key_id                        | S3 KMS Key ID                                                                                | VARCHAR    | GLOBAL | []      |

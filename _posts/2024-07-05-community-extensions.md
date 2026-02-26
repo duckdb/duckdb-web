@@ -98,14 +98,14 @@ For the [maintainer of `h3`](https://github.com/isaacbrodsky/), the publication 
 
 To show that it’s feasible to publish extensions, we reached out to a few developers of key extensions. At the time of the publication of this blog post, the DuckDB Community Extensions repository already contains the following extensions.
 
-| Name | Description |
-|----|------------|
-| [crypto](https://github.com/rustyconover/duckdb-crypto-extension) | Adds cryptographic hash functions and [HMAC](https://en.wikipedia.org/wiki/HMAC). |
-| [h3](https://github.com/isaacbrodsky/h3-duckdb) | Implements hierarchical hexagonal indexing for geospatial data. |
-| [lindel](https://github.com/rustyconover/duckdb-lindel-extension) | Implements linearization/delinearization, Z-Order, Hilbert and Morton curves. |
-| [prql](https://github.com/ywelsch/duckdb-prql) | Allows running [PRQL](https://prql-lang.org/) commands directly within DuckDB. |
-| [scrooge](https://github.com/pdet/Scrooge-McDuck) | Supports a set of aggregation functions and data scanners for financial data. |
-| [shellfs](https://github.com/rustyconover/duckdb-shellfs-extension) | Allows shell commands to be used for input and output. |
+| Name                                                                | Description                                                                       |
+| ------------------------------------------------------------------- | --------------------------------------------------------------------------------- |
+| [crypto](https://github.com/rustyconover/duckdb-crypto-extension)   | Adds cryptographic hash functions and [HMAC](https://en.wikipedia.org/wiki/HMAC). |
+| [h3](https://github.com/isaacbrodsky/h3-duckdb)                     | Implements hierarchical hexagonal indexing for geospatial data.                   |
+| [lindel](https://github.com/rustyconover/duckdb-lindel-extension)   | Implements linearization/delinearization, Z-Order, Hilbert and Morton curves.     |
+| [prql](https://github.com/ywelsch/duckdb-prql)                      | Allows running [PRQL](https://prql-lang.org/) commands directly within DuckDB.    |
+| [scrooge](https://github.com/pdet/Scrooge-McDuck)                   | Supports a set of aggregation functions and data scanners for financial data.     |
+| [shellfs](https://github.com/rustyconover/duckdb-shellfs-extension) | Allows shell commands to be used for input and output.                            |
 
 DuckDB Labs and the DuckDB Foundation do not vet the code within community extensions and, therefore, cannot guarantee that DuckDB community extensions are safe to use. The loading of community extensions can be explicitly disabled with the following one-way configuration option:
 

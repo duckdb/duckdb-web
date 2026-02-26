@@ -47,7 +47,7 @@ DuckDB is constantly improving, so there is a chance that the bug you have encou
 First, try updating to the [**latest stable build**]({% link install/index.html %}?version=stable).
 If this doesn't resolve the problem, try using the [**preview build**]({% link install/index.html %}?version=main) (also known as the “nightly build”).
 
-If you would like use DuckDB with an [open pull request](https://github.com/duckdb/duckdb/pulls) applied to the codebase,
+If you would like to use DuckDB with an [open pull request](https://github.com/duckdb/duckdb/pulls) applied to the codebase,
 you can try [building it from source]({% link docs/preview/dev/building/overview.md %}).
 
 ### Search for Existing Issues
@@ -91,7 +91,7 @@ It's a good idea to try to break down the query into multiple smaller queries wi
 For example, if you have a query that targets a dataset in an AWS S3 bucket and performs two joins on it, try to rewrite it as a series of smaller steps as follows.
 Download the dataset's files manually and load them into DuckDB.
 Then perform the first join and the second join separately.
-If the multi-step approach still exhibits the crash at some step, then the query that triggers the crash is a good basis for a minimal reproducible example.If the multi-step approach works and the multi-step process no longer crashes, try to reconstruct the original query and observe which step reintroduces the error.
+If the multi-step approach still exhibits the crash at some step, then the query that triggers the crash is a good basis for a minimal reproducible example. If the multi-step approach works and the multi-step process no longer crashes, try to reconstruct the original query and observe which step reintroduces the error.
 In both cases, you will have a better understanding of what is causing the issue and potentially also a workaround that you can use right away.
 In any case, please consider [submitting an issue](#submitting-an-issue) with your findings.
 

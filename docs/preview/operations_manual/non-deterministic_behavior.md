@@ -6,7 +6,7 @@ title: Non-Deterministic Behavior
 Several operators in DuckDB exhibit non-deterministic behavior.
 Most notably, SQL uses set semantics, which allows results to be returned in a different order.
 DuckDB exploits this to improve performance, particularly when performing multi-threaded query execution.
-Other factors, such as using different compilers, operating systems, and hardware architectures, can also cause changes in ordering.
+Other factors, such as using different compilers, operating systems and hardware architectures, can also cause changes in ordering.
 This page documents the cases where non-determinism is an _expected behavior_.
 If you would like to make your queries deterministic, see the [“Working Around Non-Determinism” section](#working-around-non-determinism).
 
@@ -38,7 +38,7 @@ For this query, both `[A, B]` and `[B, A]` are valid results.
 
 ## Floating-Point Aggregate Operations with Multi-Threading
 
-Floating-point inaccuracies may produce different results when run in a multi-threaded configurations:
+Floating-point inaccuracies may produce different results when run in multi-threaded configurations:
 For example, [`stddev` and `corr` may produce non-deterministic results](https://github.com/duckdb/duckdb/issues/13763):
 
 ```sql

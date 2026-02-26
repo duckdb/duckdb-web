@@ -91,10 +91,10 @@ ORDER BY row_group_id;
 ```
 
 | row_group_id | stats_min | stats_max | bloom_filter_offset | bloom_filter_length |
-|-------------:|----------:|----------:|--------------------:|--------------------:|
-| 0            | 0         | 900       | 92543967            | 47                  |
-| ...          |           |           |                     |                     |
-| 9            | 0         | 900       | 92544390            | 47                  |
+| -----------: | --------: | --------: | ------------------: | ------------------: |
+|            0 |         0 |       900 |            92543967 |                  47 |
+|          ... |           |           |                     |                     |
+|            9 |         0 |       900 |            92544390 |                  47 |
 
 We can see that there are ten row groups, and that there is a quite compact Bloom filter for reach row group with a length of 47 bytes each. That's ca. 500 bytes added to fairly large file, so rather irrelevant for file size.
 
@@ -108,9 +108,9 @@ ORDER BY row_group_id;
 ```
 
 | row_group_id | stats_min | stats_max | bloom_filter_offset | bloom_filter_length |
-|-------------:|----------:|----------:|---------------------|---------------------|
-| 0            | 0         | 900       | NULL                | NULL                |
-| ...          |           |           |                     |                     |
+| -----------: | --------: | --------: | ------------------- | ------------------- |
+|            0 |         0 |       900 | NULL                | NULL                |
+|          ... |           |           |                     |                     |
 
 We can further explore the Bloom filters in the file using the `parquet_bloom_probe` function. For example, for the value of 500 (which exists in the data), the function shows the following:
 
@@ -118,11 +118,11 @@ We can further explore the Bloom filters in the file using the `parquet_bloom_pr
 FROM parquet_bloom_probe('filter.parquet', 'r', 500);
 ```
 
-|   file_name    | row_group_id | bloom_filter_excludes |
-|----------------|-------------:|----------------------:|
-| filter.parquet | 0            | false                 |
-| ...            | ...          | ...                   |
-| filter.parquet | 9            | false                 |
+| file_name      | row_group_id | bloom_filter_excludes |
+| -------------- | -----------: | --------------------: |
+| filter.parquet |            0 |                 false |
+| ...            |          ... |                   ... |
+| filter.parquet |            9 |                 false |
 
 So the Bloom filter cannot exclude any row group because the value `500` is contained in all row groups. But if we try a *non-existent* value, the Bloom filter strikes:
 
@@ -130,11 +130,11 @@ So the Bloom filter cannot exclude any row group because the value `500` is cont
 FROM parquet_bloom_probe('filter.parquet', 'r', 501);
 ```
 
-|   file_name    | row_group_id | bloom_filter_excludes |
-|----------------|-------------:|----------------------:|
-| filter.parquet | 0            | true                  |
-| ...            | ...          | ...                   |
-| filter.parquet | 9            | true                  |
+| file_name      | row_group_id | bloom_filter_excludes |
+| -------------- | -----------: | --------------------: |
+| filter.parquet |            0 |                  true |
+| ...            |          ... |                   ... |
+| filter.parquet |            9 |                  true |
 
 Here, we can confidently skip all row groups because the Bloom filter guarantees that there can be no matching values in those row groups. All that with 47 bytes per row group.
 

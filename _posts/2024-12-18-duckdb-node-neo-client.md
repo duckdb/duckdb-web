@@ -10,7 +10,7 @@ tags: ["using DuckDB"]
 
 Meet the newest DuckDB client API: [DuckDB Node “Neo”]({% link docs/stable/clients/node_neo/overview.md %})!
 
-You may be familiar with DuckDB’s [old Node client]({% link docs/stable/clients/nodejs/overview.md %}). While it has served the community well over the years, “Neo” aims to learn from and improve upon its predecessor. It presents a friendlier API, supports more features, and uses a more robust and maintainable architecture. It provides both high-level conveniences and low-level access. Let’s take a tour!
+You may be familiar with DuckDB’s [old Node client](https://www.npmjs.com/package/duckdb). While it has served the community well over the years, “Neo” aims to learn from and improve upon its predecessor. It presents a friendlier API, supports more features, and uses a more robust and maintainable architecture. It provides both high-level conveniences and low-level access. Let’s take a tour!
 
 ## What Does It Offer?
 

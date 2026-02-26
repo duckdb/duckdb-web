@@ -5,7 +5,7 @@ title: Date Part Functions
 
 <!-- markdownlint-disable MD001 -->
 
-The `date_part`, `date_trunc`, and `date_diff` functions can be used to extract or manipulate parts of temporal types such as [`TIMESTAMP`]({% link docs/preview/sql/data_types/timestamp.md %}), [`TIMESTAMPTZ`]({% link docs/preview/sql/data_types/timestamp.md %}), [`DATE`]({% link docs/preview/sql/data_types/date.md %}) and [`INTERVAL`]({% link docs/preview/sql/data_types/interval.md %}).
+The `date_part`, `date_trunc` and `date_diff` functions can be used to extract or manipulate parts of temporal types such as [`TIMESTAMP`]({% link docs/preview/sql/data_types/timestamp.md %}), [`TIMESTAMPTZ`]({% link docs/preview/sql/data_types/timestamp.md %}), [`DATE`]({% link docs/preview/sql/data_types/date.md %}) and [`INTERVAL`]({% link docs/preview/sql/data_types/interval.md %}).
 
 The parts to be extracted or manipulated are specified by one of the strings in the tables below.
 The example column provides the corresponding parts of the timestamp `2021-08-03 11:59:44.123456`.
@@ -77,7 +77,7 @@ There are dedicated extraction functions to get certain subfields:
 | [`second(date)`](#seconddate) | Seconds. |
 | [`timezone_hour(date)`](#timezone_hourdate) | Time zone offset hour portion. |
 | [`timezone_minute(date)`](#timezone_minutedate) | Time zone offset minutes portion. |
-| [`timezone(date)`](#timezonedate) | Time zone offset in minutes. |
+| [`timezone(date)`](#timezonedate) | Time zone offset in seconds. |
 | [`week(date)`](#weekdate) | ISO Week. |
 | [`weekday(date)`](#weekdaydate) | Numeric weekday synonym (Sunday = 0, Saturday = 6). |
 | [`weekofyear(date)`](#weekofyeardate) | ISO Week (synonym). |

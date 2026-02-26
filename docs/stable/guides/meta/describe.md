@@ -7,7 +7,7 @@ title: Describe
 
 ## Describing a Table
 
-In order to view the schema of a table, use the `DESCRIBE` statement (or its aliases `DESC` and `SHOW`) followed by the table name.
+To view the schema of a table, use the `DESCRIBE` statement (or its aliases `DESC` and `SHOW`) followed by the table name.
 
 ```sql
 CREATE TABLE tbl (i INTEGER PRIMARY KEY, j VARCHAR);
@@ -22,7 +22,7 @@ SHOW tbl; -- equivalent to DESCRIBE tbl;
 
 ## Describing a Query
 
-In order to view the schema of the result of a query, prepend `DESCRIBE` to a query.
+To view the schema of the result of a query, prepend `DESCRIBE` to a query.
 
 ```sql
 DESCRIBE SELECT * FROM tbl;
@@ -37,7 +37,7 @@ Note that there are subtle differences: compared to the result when [describing 
 
 ## Using `DESCRIBE` in a Subquery
 
-`DESCRIBE` can be used a subquery. This allows creating a table from the description, for example:
+`DESCRIBE` can be used as a subquery. This allows creating a table from the description, for example:
 
 ```sql
 CREATE TABLE tbl_description AS SELECT * FROM (DESCRIBE tbl);

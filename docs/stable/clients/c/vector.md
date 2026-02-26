@@ -2,7 +2,6 @@
 layout: docu
 redirect_from:
 - /docs/api/c/vector
-- /docs/api/c/vector/
 - /docs/clients/c/vector
 title: Vectors
 ---
@@ -53,7 +52,7 @@ For primitive types, the underlying array can be obtained using the `duckdb_vect
 
 ### `NULL` Values
 
-Any value in a vector can be `NULL`. When a value is `NULL`, the values contained within the primary array at that index is undefined (and can be uninitialized). The validity mask is a bitmask consisting of `uint64_t` elements. For every `64` values in the vector, one `uint64_t` element exists (rounded up). The validity mask has its bit set to 1 if the value is valid, or set to 0 if the value is invalid (i.e .`NULL`).
+Any value in a vector can be `NULL`. When a value is `NULL`, the values contained within the primary array at that index is undefined (and can be uninitialized). The validity mask is a bitmask consisting of `uint64_t` elements. For every `64` values in the vector, one `uint64_t` element exists (rounded up). The validity mask has its bit set to 1 if the value is valid, or set to 0 if the value is invalid (i.e., `NULL`).
 
 The bits of the bitmask can be read directly, or the slower helper method `duckdb_validity_row_is_valid` can be used to check whether or not a value is `NULL`.
 
@@ -137,7 +136,7 @@ Note that both list entries itself **and** any children stored in the lists can 
 
 ### Arrays
 
-Arrays are nested types that contain a single child type, repeated exactly `array_size` times per row. Think of them like a fixed-size array in C. Arrays work exactly the same as lists, **except** the length and offset of each entry is fixed. The fixed array size can be obtained by using `duckdb_array_type_array_size`. The data for entry `n` then resides at `offset = n * array_size`, and always has `length = array_size`.
+Arrays are nested types that contain a single child type, repeated exactly `array_size` times per row. Think of them like a fixed-size array in C. Arrays work exactly the same as lists, **except** the length and offset of each entry is fixed. The fixed array size can be obtained by using `duckdb_array_type_array_size`. The data for entry `n` then resides at `offset = n * array_size` and always has `length = array_size`.
 
 Note that much like lists, arrays can still be `NULL`, which must be checked using the validity mask.
 

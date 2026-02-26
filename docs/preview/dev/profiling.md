@@ -27,7 +27,7 @@ The `EXPLAIN [ANALYZE]` statement allows exporting to several formats:
 
 * `text` – default ASCII-art style output
 * `graphviz` – produces a DOT output, which can be rendered with [Graphviz](https://graphviz.org/)
-* `html` – produces an HTML output, which can rendered with [treeflex](https://dumptyd.github.io/treeflex/)
+* `html` – produces an HTML output, which can be rendered with [treeflex](https://dumptyd.github.io/treeflex/)
 * `json` – produces a JSON output
 
 To specify a format, use the `FORMAT` tag:
@@ -52,6 +52,48 @@ For more information, see the [“Profiling”]({% link docs/preview/configurati
 | [`profiling_mode`]({% link docs/preview/configuration/pragmas.md %}#profiling_mode)                                                                                                | Toggle additional optimizer and planner metrics | `standard`                                               | `standard`, `detailed`                                                                                                  |
 | [`custom_profiling_settings`]({% link docs/preview/configuration/pragmas.md %}#custom_profiling_metrics)                                                                           | Enable or disable specific metrics              | All metrics except those activated by detailed profiling | A JSON object that matches the following: `{"METRIC_NAME": "boolean", ...}`. See the [metrics](#metrics) section below. |
 | [`disable_profiling`]({% link docs/preview/configuration/pragmas.md %}#disable_profiling), [`disable_profile`]({% link docs/preview/configuration/pragmas.md %}#disable_profiling) | Turn off profiling                              |                                                          |                                                                                                                         |
+
+## Table Functions
+
+> These table functions were introduced in DuckDB v1.4.2.
+
+DuckDB provides table functions to enable and disable profiling, consolidating multiple settings into a single call.
+
+### `enable_profiling()`
+
+The `enable_profiling()` function configures profiling with the specified options.
+
+```sql
+CALL enable_profiling(
+    format := 'json',
+    save_location := '/path/to/output.json',
+    coverage := 'select',
+    mode := 'standard',
+    metrics := ['QUERY_NAME', 'LATENCY', 'OPERATOR_TIMING']
+);
+```
+
+| Parameter | Type | Description |
+|-----------|------|-------------|
+| `metrics` | `LIST`, `STRUCT`, or JSON | Specifies which metrics to enable |
+| `mode` | `VARCHAR` | Profiling level: `'standard'` or `'detailed'` |
+| `save_location` | `VARCHAR` | File path for profiling output |
+| `coverage` | `VARCHAR` | Query coverage: `'select'` or `'all'` |
+| `format` | `VARCHAR` | Output format: `'query_tree'`, `'json'`, `'query_tree_optimizer'`, `'no_output'` |
+
+All parameters are optional and named. You can also pass metrics as an unnamed parameter:
+
+```sql
+CALL enable_profiling(['LATENCY', 'RESULT_SET_SIZE']);
+```
+
+### `disable_profiling()`
+
+The `disable_profiling()` function turns off profiling.
+
+```sql
+CALL disable_profiling();
+```
 
 ## Metrics
 

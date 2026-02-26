@@ -8,7 +8,7 @@ title: JSON Processing Functions
 ## JSON Extraction Functions
 
 There are two extraction functions, which have their respective operators. The operators can only be used if the string is stored as the `JSON` logical type.
-These functions supports the same two location notations as [JSON Scalar functions](#json-scalar-functions).
+These functions support the same two location notations as [JSON Scalar functions](#json-scalar-functions).
 
 | Function                          | Alias                    | Operator | Description                                                                                                                       |
 | :-------------------------------- | :----------------------- | :------- | --------------------------------------------------------------------------------------------------------------------------------- |
@@ -134,7 +134,7 @@ Note that DuckDB's JSON data type uses [0-based indexing]({% link docs/stable/da
 
 If multiple values need to be extracted from the same JSON, it is more efficient to extract a list of paths:
 
-The following will cause the JSON to be parsed twice,:
+The following will cause the JSON to be parsed twice:
 
 Resulting in a slower query that uses more memory:
 
@@ -177,7 +177,7 @@ We support two kinds of notations to describe locations within JSON: [JSON Point
 | `json_contains(json_haystack, json_needle)` | Returns `true` if `json_needle` is contained in `json_haystack`. Both parameters are of JSON type, but `json_needle` can also be a numeric value or a string, however the string must be wrapped in double quotes.                                                                 |
 | `json_keys(json[, path])`                   | Returns the keys of `json` as a `LIST` of `VARCHAR`, if `json` is a JSON object. If `path` is specified, return the keys of the JSON object at the given `path`. If `path` is a `LIST`, the result will be `LIST` of `LIST` of `VARCHAR`.                                          |
 | `json_structure(json)`                      | Return the structure of `json`. Defaults to `JSON` if the structure is inconsistent (e.g., incompatible types in an array).                                                                                                                                                        |
-| `json_type(json[, path])`                   | Return the type of the supplied `json`, which is one of `ARRAY`, `BIGINT`, `BOOLEAN`, `DOUBLE`, `OBJECT`, `UBIGINT`, `VARCHAR`, and `NULL`. If `path` is specified, return the type of the element at the given `path`. If `path` is a `LIST`, the result will be `LIST` of types. |
+| `json_type(json[, path])`                   | Return the type of the supplied `json`, which is one of `ARRAY`, `BIGINT`, `BOOLEAN`, `DOUBLE`, `OBJECT`, `UBIGINT`, `VARCHAR` and `NULL`. If `path` is specified, return the type of the element at the given `path`. If `path` is a `LIST`, the result will be `LIST` of types. |
 | `json_valid(json)`                          | Return whether `json` is valid JSON.                                                                                                                                                                                                                                               |
 | `json(json)`                                | Parse and minify `json`.                                                                                                                                                                                                                                                           |
 

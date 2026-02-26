@@ -4,15 +4,10 @@ redirect_from:
 - /cal
 - /release-calendar
 - /dev/release-dates
-- /dev/release-dates/
 - /dev/release-calendar
-- /dev/release-calendar/
 - /docs/dev/release_calendar
-- /docs/dev/release_calendar/
 - /docs/stable/dev/release_calendar
-- /docs/stable/dev/release_calendar/
 - /docs/preview/dev/release_calendar
-- /docs/preview/dev/release_calendar/
 title: Release Calendar
 body_class: release-calendar blog_typography post
 max_page_width: medium
@@ -59,6 +54,8 @@ For LTS DuckDB versions, the support period for [community support](https://duck
 
 For an overview of end-of-life information, see the [DuckDB entry on `endoflife.date`](https://endoflife.date/duckdb).
 
+There is no set date yet for the release of DuckDB v1.4.5. We will select the date as necessitated by the issues filed for the DuckDB v1.4.x line. For exampe, if we encounter a critical issue or vulnerability, we will expedite the release of v1.4.5.
+
 ## Past Releases
 
 In the following, we list DuckDB's past releases along with their codename where applicable.
@@ -83,7 +80,7 @@ You can get a [CSV file containing past DuckDB releases](/data/duckdb-releases.c
 For example, you can compute the average number of days between releases using the [`lag` window function]({% link docs/stable/sql/functions/window_functions.md %}#lagexpr-offset-default-order-by-ordering-ignore-nulls):
 
 ```sql
-SELECT avg(diff) AS average_days_between_releases
+SELECT avg(diff)::DECIMAL(8, 2) AS average_days_between_releases
 FROM (
     SELECT release_date - lag(release_date) OVER (ORDER BY release_date) AS diff
     FROM 'https://duckdb.org/data/duckdb-releases.csv'

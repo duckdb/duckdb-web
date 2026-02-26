@@ -5,62 +5,79 @@ excerpt: |
   DuckDB Community Extensions
   DuckDB HTTP Cronjob Extension
 
+docs:
+  extended_description: This extension is experimental and potentially unstable. Do
+    not use it in production.
+  hello_world: "-- Every 15 seconds during hours 1-4\nSELECT cron('SELECT now()',\
+    \ '*/15 * 1-4 * * *');\n\n-- Every 2 hours (at minute 0, second 0) during hours\
+    \ 1-4\nSELECT cron('SELECT version()', '0 0 */2 1-4 * *');\n\n-- Every 5 minute\
+    \ (wipe old data)\nSELECT cron('DELETE FROM somewhere WHERE ts < NOW() - INTERVAL\
+    \ ''1 hour''', '* /5 * * * *');\n\n-- Inspect running Jobs\nSELECT * FROM cron_jobs();\n\
+    \n\u250C\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u252C\u2500\u2500\
+    \u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\
+    \u2500\u2500\u2500\u252C\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\
+    \u2500\u2500\u2500\u2500\u2500\u2500\u2500\u252C\u2500\u2500\u2500\u2500\u2500\
+    \u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\
+    \u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u252C\u2500\u2500\u2500\u2500\
+    \u2500\u2500\u2500\u2500\u2500\u252C\u2500\u2500\u2500\u2500\u2500\u2500\u2500\
+    \u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\
+    \u2500\u2500\u2500\u2500\u2500\u2500\u252C\u2500\u2500\u2500\u2500\u2500\u2500\
+    \u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2510\n\u2502 job_id  \u2502      query\
+    \       \u2502    schedule    \u2502         next_run         \u2502 status  \u2502\
+    \         last_run         \u2502 last_result \u2502\n\u2502 varchar \u2502  \
+    \   varchar      \u2502    varchar     \u2502         varchar          \u2502\
+    \ varchar \u2502         varchar          \u2502   varchar   \u2502\n\u251C\u2500\
+    \u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u253C\u2500\u2500\u2500\u2500\
+    \u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\
+    \u2500\u253C\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\
+    \u2500\u2500\u2500\u2500\u2500\u253C\u2500\u2500\u2500\u2500\u2500\u2500\u2500\
+    \u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\
+    \u2500\u2500\u2500\u2500\u2500\u2500\u253C\u2500\u2500\u2500\u2500\u2500\u2500\
+    \u2500\u2500\u2500\u253C\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\
+    \u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\
+    \u2500\u2500\u2500\u2500\u253C\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\
+    \u2500\u2500\u2500\u2500\u2500\u2524\n\u2502 task_0  \u2502 SELECT version() \u2502\
+    \ */15 * * * * * \u2502 Fri Nov 15 20:44:30 2024 \u2502 Active  \u2502 Fri Nov\
+    \ 15 20:44:15 2024 \u2502 Success     \u2502\n\u2514\u2500\u2500\u2500\u2500\u2500\
+    \u2500\u2500\u2500\u2500\u2534\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\
+    \u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2534\u2500\u2500\
+    \u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\
+    \u2500\u2534\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\
+    \u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\
+    \u2500\u2500\u2534\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2534\
+    \u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\
+    \u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\
+    \u2534\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\
+    \u2500\u2518\n\n-- Inspect running Jobs\nSELECT cron_delete('task_0');\n\n-- Supported\
+    \ Patterns\n\u250C\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\
+    \u2500\u2500\u2500 second (0 - 59)\n\u2502 \u250C\u2500\u2500\u2500\u2500\u2500\
+    \u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500 minute (0 - 59)\n\u2502 \u2502\
+    \ \u250C\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\
+    \u2500 hour (0 - 23)\n\u2502 \u2502 \u2502 \u250C\u2500\u2500\u2500\u2500\u2500\
+    \u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500 day of month (1 - 31)\n\u2502\
+    \ \u2502 \u2502 \u2502 \u250C\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\
+    \u2500\u2500\u2500\u2500 month (1 - 12)\n\u2502 \u2502 \u2502 \u2502 \u2502 \u250C\
+    \u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\
+    \ day of week (0 - 6) (Sunday to Saturday)\n\u2502 \u2502 \u2502 \u2502 \u2502\
+    \ \u2502\n* * * * * *\n"
 extension:
-  name: cronjob
-  description: DuckDB HTTP Cronjob Extension
-  version: 0.0.1
-  language: C++
   build: cmake
+  description: DuckDB HTTP Cronjob Extension
+  language: C++
   license: MIT
   maintainers:
-    - lmangani
-
+  - lmangani
+  name: cronjob
+  version: '2025120401'
 repo:
   github: quackscience/duckdb-extension-cronjob
-  ref: 719904edf23617da02dfb599643452abf51db30e
+  ref: 040dbecd552e6b373fb1bb4582935d243693978e
+  ref_next: 91822698a42f8d8bd615d352b3a61fbcee852ba6
 
-docs:
-  hello_world: |
-    -- Every 15 seconds during hours 1-4
-    SELECT cron('SELECT now()', '*/15 * 1-4 * * *');
-
-    -- Every 2 hours (at minute 0, second 0) during hours 1-4
-    SELECT cron('SELECT version()', '0 0 */2 1-4 * *');
-
-    -- Every 5 minute (wipe old data)
-    SELECT cron('DELETE FROM somewhere WHERE ts < NOW() - INTERVAL ''1 hour''', '* /5 * * * *');
-
-    -- Inspect running Jobs
-    SELECT * FROM cron_jobs();
-    
-    ┌─────────┬──────────────────┬────────────────┬──────────────────────────┬─────────┬──────────────────────────┬─────────────┐
-    │ job_id  │      query       │    schedule    │         next_run         │ status  │         last_run         │ last_result │
-    │ varchar │     varchar      │    varchar     │         varchar          │ varchar │         varchar          │   varchar   │
-    ├─────────┼──────────────────┼────────────────┼──────────────────────────┼─────────┼──────────────────────────┼─────────────┤
-    │ task_0  │ SELECT version() │ */15 * * * * * │ Fri Nov 15 20:44:30 2024 │ Active  │ Fri Nov 15 20:44:15 2024 │ Success     │
-    └─────────┴──────────────────┴────────────────┴──────────────────────────┴─────────┴──────────────────────────┴─────────────┘
-    
-    -- Inspect running Jobs
-    SELECT cron_delete('task_0');
-
-    -- Supported Patterns
-    ┌───────────── second (0 - 59)
-    │ ┌───────────── minute (0 - 59)
-    │ │ ┌───────────── hour (0 - 23)
-    │ │ │ ┌───────────── day of month (1 - 31)
-    │ │ │ │ ┌───────────── month (1 - 12)
-    │ │ │ │ │ ┌───────────── day of week (0 - 6) (Sunday to Saturday)
-    │ │ │ │ │ │
-    * * * * * *
-
-
-  extended_description: |
-    This extension is experimental and potentially unstable. Do not use it in production.
-
-extension_star_count: 41
-extension_star_count_pretty: 41
-extension_download_count: 508
-extension_download_count_pretty: 508
+extension_star_count: 47
+extension_star_count_pretty: 47
+extension_download_count: 396
+extension_download_count_pretty: 396
 image: '/images/community_extensions/social_preview/preview_community_extension_cronjob.png'
 layout: community_extension_doc
 ---
@@ -91,5 +108,40 @@ LOAD {{ page.extension.name }};
 | cron          | scalar        | NULL        | NULL    |          |
 | cron_delete   | scalar        | NULL        | NULL    |          |
 | cron_jobs     | table         | NULL        | NULL    |          |
+
+### Added Settings
+
+<div class="extension_settings_table"></div>
+
+|                 name                 |                                         description                                          | input_type | scope  | aliases |
+|--------------------------------------|----------------------------------------------------------------------------------------------|------------|--------|---------|
+| auto_fallback_to_full_download       | Allows automatically falling back to full file downloads when possible.                      | BOOLEAN    | GLOBAL | []      |
+| ca_cert_file                         | Path to a custom certificate file for self-signed certificates.                              | VARCHAR    | GLOBAL | []      |
+| enable_curl_server_cert_verification | Enable server side certificate verification for CURL backend.                                | BOOLEAN    | GLOBAL | []      |
+| enable_global_s3_configuration       | Automatically fetch AWS credentials from environment variables.                              | BOOLEAN    | GLOBAL | []      |
+| enable_server_cert_verification      | Enable server side certificate verification.                                                 | BOOLEAN    | GLOBAL | []      |
+| force_download                       | Forces upfront download of file                                                              | BOOLEAN    | GLOBAL | []      |
+| hf_max_per_page                      | Debug option to limit number of items returned in list requests                              | UBIGINT    | GLOBAL | []      |
+| http_keep_alive                      | Keep alive connections. Setting this to false can help when running into connection failures | BOOLEAN    | GLOBAL | []      |
+| http_retries                         | HTTP retries on I/O error                                                                    | UBIGINT    | GLOBAL | []      |
+| http_retry_backoff                   | Backoff factor for exponentially increasing retry wait time                                  | FLOAT      | GLOBAL | []      |
+| http_retry_wait_ms                   | Time between retries                                                                         | UBIGINT    | GLOBAL | []      |
+| http_timeout                         | HTTP timeout read/write/connection/retry (in seconds)                                        | UBIGINT    | GLOBAL | []      |
+| httpfs_client_implementation         | Select which is the HTTPUtil implementation to be used                                       | VARCHAR    | GLOBAL | []      |
+| merge_http_secret_into_s3_request    | Merges http secret params into S3 requests                                                   | BOOLEAN    | GLOBAL | []      |
+| s3_access_key_id                     | S3 Access Key ID                                                                             | VARCHAR    | GLOBAL | []      |
+| s3_endpoint                          | S3 Endpoint                                                                                  | VARCHAR    | GLOBAL | []      |
+| s3_kms_key_id                        | S3 KMS Key ID                                                                                | VARCHAR    | GLOBAL | []      |
+| s3_region                            | S3 Region                                                                                    | VARCHAR    | GLOBAL | []      |
+| s3_requester_pays                    | S3 use requester pays mode                                                                   | BOOLEAN    | GLOBAL | []      |
+| s3_secret_access_key                 | S3 Access Key                                                                                | VARCHAR    | GLOBAL | []      |
+| s3_session_token                     | S3 Session Token                                                                             | VARCHAR    | GLOBAL | []      |
+| s3_uploader_max_filesize             | S3 Uploader max filesize (between 50GB and 5TB)                                              | VARCHAR    | GLOBAL | []      |
+| s3_uploader_max_parts_per_file       | S3 Uploader max parts per file (between 1 and 10000)                                         | UBIGINT    | GLOBAL | []      |
+| s3_uploader_thread_limit             | S3 Uploader global thread limit                                                              | UBIGINT    | GLOBAL | []      |
+| s3_url_compatibility_mode            | Disable Globs and Query Parameters on S3 URLs                                                | BOOLEAN    | GLOBAL | []      |
+| s3_url_style                         | S3 URL style                                                                                 | VARCHAR    | GLOBAL | []      |
+| s3_use_ssl                           | S3 use SSL                                                                                   | BOOLEAN    | GLOBAL | []      |
+| unsafe_disable_etag_checks           | Disable checks on ETag consistency                                                           | BOOLEAN    | GLOBAL | []      |
 
 

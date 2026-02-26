@@ -8,7 +8,7 @@ excerpt: |
 extension:
   name: fakeit
   description: The FakeIt Extension enables generation of realistic fake/test data directly in SQL queries
-  version: 0.1.0
+  version: 0.2.2
   language: Rust
   build: cargo
   license: MIT
@@ -19,7 +19,7 @@ extension:
 
 repo:
   github: tobilg/duckdb-fakeit
-  ref: a124eb57810d6a599630c1c185a2cf18185e00ea
+  ref: b12d28c70e7c1f3e3c448a93ba96af47a51ce530
 
 docs:
   hello_world: |
@@ -315,10 +315,6 @@ docs:
     FROM generate_series(1, 50);
     ```
 
-    ## Known Limitations
-
-    **Note:** The extension currently returns identical values across multiple rows when used with `generate_series()` due to DuckDB's function optimization. Single-row queries function correctly. A fix addressing the VOLATILE flag support is pending in the duckdb-rs library.
-
     ## Use Cases
 
     - **Test Data Generation**: Populate development and test databases with realistic data
@@ -329,10 +325,10 @@ docs:
 
     > This extension is experimental and actively being developed. See the repository for the latest updates and examples.
 
-extension_star_count: 2
-extension_star_count_pretty: 2
-extension_download_count: 561
-extension_download_count_pretty: 561
+extension_star_count: 9
+extension_star_count_pretty: 9
+extension_download_count: 397
+extension_download_count_pretty: 397
 image: '/images/community_extensions/social_preview/preview_community_extension_fakeit.png'
 layout: community_extension_doc
 ---

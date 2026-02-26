@@ -9,19 +9,19 @@ title: Building Extensions
 
 ## Building Extensions
 
-To build using extension flags, set the `CORE_EXTENSIONS` flag to the list of extensions that you want to be build. For example:
+To build using extension flags, set the `BUILD_EXTENSIONS` flag to the list of extensions that you want to be built. For example:
 
 ```bash
-CORE_EXTENSIONS='autocomplete;httpfs;icu;json;tpch' GEN=ninja make
+BUILD_EXTENSIONS='autocomplete;httpfs;icu;json;tpch' GEN=ninja make
 ```
 
 This option also accepts out-of-tree extensions such as [`delta`]({% link docs/stable/core_extensions/delta.md %}):
 
 ```bash
-CORE_EXTENSIONS='autocomplete;httpfs;icu;json;tpch;delta' GEN=ninja make
+BUILD_EXTENSIONS='autocomplete;httpfs;icu;json;tpch;delta' GEN=ninja make
 ```
 
-In most cases, extension will be directly linked in the resulting DuckDB executable.
+In most cases, extensions will be directly linked in the resulting DuckDB executable.
 
 ## Special Extension Flags
 

@@ -2,7 +2,7 @@
 blurb: The NULL value represents a missing value.
 layout: docu
 redirect_from:
-- /docs/sql/data_types/nulls
+  - /docs/sql/data_types/nulls
 title: NULL Values
 ---
 
@@ -47,7 +47,7 @@ true
 
 ## NULL and Functions
 
-A function that has input argument as `NULL` **usually** returns `NULL`.
+A function that has an input argument as `NULL` **usually** returns `NULL`.
 
 ```sql
 SELECT cos(NULL);
@@ -115,7 +115,7 @@ For details, see the [`IN` documentation]({% link docs/stable/sql/expressions/in
 
 `NULL` values are ignored in most aggregate functions.
 
-Aggregate functions that do not ignore `NULL` values include: `first`, `last`, `list`, and `array_agg`. To exclude `NULL` values from those aggregate functions, the [`FILTER` clause]({% link docs/stable/sql/query_syntax/filter.md %}) can be used.
+Aggregate functions that do not ignore `NULL` values include: `first`, `last`, `list` and `array_agg`. To exclude `NULL` values from those aggregate functions, the [`FILTER` clause]({% link docs/stable/sql/query_syntax/filter.md %}) can be used.
 
 ```sql
 CREATE TABLE integers (i INTEGER);

@@ -135,7 +135,7 @@ INSERT INTO tbl
     VALUES (1, 84);
 ```
 
-This raises as an error:
+This raises an error:
 
 ```console
 Constraint Error:
@@ -169,7 +169,7 @@ INSERT INTO tbl
     ON CONFLICT DO NOTHING;
 ```
 
-These statements finish successfully and leaves the table with the row `<i: 1, j: 42>`.
+These statements finish successfully and leave the table with the row `<i: 1, j: 42>`.
 
 #### `INSERT OR IGNORE INTO`
 
@@ -294,7 +294,7 @@ NOT NULL constraint failed: t1.val2
 When multiple columns need to be part of the uniqueness constraint, use a single `PRIMARY KEY` clause including all relevant columns:
 
 ```sql
-CREATE TABLE t1 (id1 INTEGER, id2 INTEGER, val1 DOUBLE, PRIMARY KEY(id1, id2));
+CREATE TABLE t1 (id1 INTEGER, id2 INTEGER, val1 DOUBLE, PRIMARY KEY (id1, id2));
 INSERT OR REPLACE INTO t1
     VALUES (1, 2, 3);
 INSERT OR REPLACE INTO t1
@@ -303,7 +303,7 @@ INSERT OR REPLACE INTO t1
 
 ### Defining a Conflict Target
 
-A conflict target may be provided as `ON CONFLICT (conflict_target)`. This is a group of columns that an index or uniqueness/key constraint is defined on. If the conflict target is omitted, or `PRIMARY KEY` constraint(s) on the table are targeted.
+A conflict target may be provided as `ON CONFLICT (conflict_target)`. This is a group of columns that an index or uniqueness/key constraint is defined on. If the conflict target is omitted, the `PRIMARY KEY` constraint(s) on the table are targeted.
 
 Specifying a conflict target is optional unless using a [`DO UPDATE`](#do-update-clause-upsert) and there are multiple unique/primary key constraints on the table.
 

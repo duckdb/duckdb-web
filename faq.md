@@ -23,9 +23,7 @@ toc: false
 
 <div class="answer" markdown="1">
 
-DuckDB is maintained by [Dr. Mark Raasveldt](https://mytherin.github.io) & [Prof. Dr. Hannes Mühleisen](https://hannes.muehleisen.org) along with [many other contributors](https://github.com/duckdb/duckdb/graphs/contributors) from all over the world. Mark and Hannes have set up the [DuckDB Foundation](https://duckdb.org/foundation/) that collects donations and funds development and maintenance of DuckDB. Mark and Hannes are also co-founders of [DuckDB Labs](https://www.duckdblabs.com), which provides commercial services around DuckDB. Several other DuckDB contributors are also affiliated with DuckDB Labs.
-
-DuckDB's initial development took place at the [Database Architectures Group](https://www.cwi.nl/research/groups/database-architectures) at the [Centrum Wiskunde & Informatica (CWI)](https://www.cwi.nl) in Amsterdam, the Netherlands.
+DuckDB was created by [Dr. Mark Raasveldt](https://mytherin.github.io) & [Dr. Hannes Mühleisen](https://hannes.muehleisen.org) at the [Centrum Wiskunde & Informatica (CWI)](https://www.cwi.nl) in Amsterdam, the Netherlands. Mark and Hannes have set up the [DuckDB Foundation](https://duckdb.org/foundation/) that collects donations and funds development and maintenance of DuckDB. Mark and Hannes are also co-founders of [DuckDB Labs](https://www.duckdblabs.com), which provides commercial services around DuckDB, and employs several core contributors of DuckDB.
 
 </div>
 
@@ -148,17 +146,12 @@ Other projects are likely _not affiliated_ with the DuckDB project. Please check
 
 <div class="qa-wrap" markdown="1">
 
-### I would like feature X to be implemented in DuckDB. How do I proceed?
+### What is the official name of the project?
 
 <div class="answer" markdown="1">
 
-Features in DuckDB can be implemented in different ways: in the main DuckDB project, as a [core extension]({% link docs/stable/core_extensions/overview.md %}) or a [community extension]({% link community_extensions/index.md %}). If you have a feature request for DuckDB, please follow these guidelines:
-
-* If you have a feature idea, please raise an issue in the [“Ideas” section in DuckDB's GitHub Discussions](https://github.com/duckdb/duckdb/discussions/categories/ideas). The DuckDB team monitors these ideas and, over time, implements the frequently requested features. For example, we recently published the [Avro Community Extension]({% link community_extensions/extensions/avro.md %}) to support reading Avro files, which was the most requested feature in the issue tracker.
-* If you would like to implement a feature in the main DuckDB project, please discuss it with the DuckDB team on GitHub Discussions or on [our Discord server](https://discord.duckdb.org/). The team can verify whether the idea and the proposed implementation line up with the project's long-term vision.
-* If you would like to implement a feature as an extension, consider submitting it to the [Community Extensions repository]({% link community_extensions/index.md %}).
-
-Please note that DuckDB Labs, the company that employs the main DuckDB contributors, provides [consultancy services for DuckDB](https://duckdblabs.com/support/), which can include implementing features in DuckDB or as DuckDB extensions.
+In official communication, we refer to DuckDB exclusively as “DuckDB” and avoid other names and spellings such as “DDB”, “the Duck” and “DuckDb”.
+Of course, the alternatives are also widely understood and you are welcome to use them, but using “DuckDB” is preferred.
 
 </div>
 
@@ -313,7 +306,7 @@ If you are unsure about the DuckDB version used in a process, run the `PRAGMA ve
 
 <div class="answer" markdown="1">
 
-DuckDB has an the official [documentation]({% link docs/stable/index.md %}), [blog]({% link news/index.html %}) and [media collection]({% link media/index.html %}).
+DuckDB has an the official [documentation]({% link docs/stable/index.md %}), [blog]({% link news/index.html %}) and [library]({% link library/index.html %}).
 At the same time, there are a few third-party resources which can help you learn more about DuckDB:
 
 * To discover projects using DuckDB, we recommend visiting the [`awesome-duckdb` repository](https://github.com/davidgasquez/awesome-duckdb).
@@ -387,7 +380,7 @@ Finally, please report the DuckDB version (for stable version, the version numbe
 <!-- ################################################################################# -->
 <!-- ################################################################################# -->
 
-## Use Cases for DuckDB
+## Using DuckDB
 
 <!-- ----- ----- ----- ----- ----- ----- Q&A entry ----- ----- ----- ----- ----- ----- -->
 
@@ -424,7 +417,7 @@ DuckDB's use cases can be split into roughly
 <a href="https://blobs.duckdb.org/events/duckcon5/hannes-muhleisen-mark-raasveldt-introduction-and-state-of-project.pdf#page=8">three major categories</a>.
 Namely, DuckDB can be used
 for interactive data analysis by a user (“data science”) and
-as pipeline component for automated data processing (“data enginereering”).
+as pipeline component for automated data processing (“data engineering”).
 DuckDB can also be deployed in novel architectures, where one traditionally couldn't run an analytical database management system but DuckDB is available thanks to its portability.
 These architectures include running DuckDB in browsers (using the <a href="{% link docs/stable/clients/wasm/overview.md %}">WebAssembly client</a>) and on smartphones.
 Additionally, DuckDB's extensions unlock use cases such as <a href="{% link docs/stable/core_extensions/spatial/overview.md %}">geospatial analysis</a> and deep integration with
@@ -432,6 +425,26 @@ Additionally, DuckDB's extensions unlock use cases such as <a href="{% link docs
 <a href="{% link docs/stable/core_extensions/postgres.md %}">database</a>
 <a href="{% link docs/stable/core_extensions/sqlite.md %}">systems</a>.
 And finally, in some cases, DuckDB <a href="https://www.nikolasgoebel.com/2024/05/28/duckdb-doesnt-need-data">doesn't even need data to be a database</a>.
+
+</div>
+
+</div>
+
+<!-- ----- ----- ----- ----- ----- ----- Q&A entry ----- ----- ----- ----- ----- ----- -->
+
+<div class="qa-wrap" markdown="1">
+
+### I would like feature X to be implemented in DuckDB. How do I proceed?
+
+<div class="answer" markdown="1">
+
+Features in DuckDB can be implemented in different ways: in the main DuckDB project, as a [core extension]({% link docs/stable/core_extensions/overview.md %}) or a [community extension]({% link community_extensions/index.md %}). If you have a feature request for DuckDB, please follow these guidelines:
+
+* If you have a feature idea, please raise an issue in the [“Ideas” section in DuckDB's GitHub Discussions](https://github.com/duckdb/duckdb/discussions/categories/ideas). The DuckDB team monitors these ideas and, over time, implements the frequently requested features. For example, we recently published the [Avro Community Extension]({% link community_extensions/extensions/avro.md %}) to support reading Avro files, which was the most requested feature in the issue tracker.
+* If you would like to implement a feature in the main DuckDB project, please discuss it with the DuckDB team on GitHub Discussions or on [our Discord server](https://discord.duckdb.org/). The team can verify whether the idea and the proposed implementation line up with the project's long-term vision.
+* If you would like to implement a feature as an extension, consider submitting it to the [Community Extensions repository]({% link community_extensions/index.md %}).
+
+Please note that DuckDB Labs, the company that employs the main DuckDB contributors, provides [consultancy services for DuckDB](https://duckdblabs.com/support/), which can include implementing features in DuckDB or as DuckDB extensions.
 
 </div>
 
@@ -451,7 +464,18 @@ And finally, in some cases, DuckDB <a href="https://www.nikolasgoebel.com/2024/0
 
 <div class="answer" markdown="1">
 
-Official supports covers the [primary clients]({% link docs/stable/clients/overview.md %}) of the latest LTS version (currently 1.4.x) and the latest stable version (currently also 1.4.x).
+While the DuckDB database is a relatively small, lean codebase, it has a large surface area with dozens of clients and extensions.
+Currently, the official community support applies to the following components:
+
+* [primary clients]({% link docs/stable/clients/overview.md %})
+* [primary extensions]({% link docs/stable/core_extensions/overview.md %})
+
+Ths support covers the following minor versions:
+
+* latest LTS (long-term support) version, currently {{ site.current_short_duckdb_lts_version }}
+* the latest stable version, currently {{ site.current_short_duckdb_version }}
+
+For more details, see the [DuckDB Community Support Policy](https://duckdblabs.com/community_support_policy/).
 
 </div>
 
@@ -519,9 +543,9 @@ You should be particularly cautious when downloading binaries and installation s
 
 Websites:
 
-* [`duckdb.org`](https://duckdb.org/): DuckDB
-* [`ducklake.select`](https://ducklake.select/): DuckLake
+* [`duckdb.org`](https://duckdb.org/) and [`duckdb.io`](https://duckdb.io/): DuckDB
 * [`duckdblabs.com`](https://duckdblabs.com/): DuckDB Labs
+* [`ducklake.select`](https://ducklake.select/) and [`ducklake.dev`](https://ducklake.dev/): DuckLake
 
 Social media:
 

@@ -45,9 +45,10 @@ For a list of dot commands available in the CLI shell, see the [Dot Commands pag
 | `-readonly`       | Open the database read-only. This option also supports attaching to remote databases via HTTPS                                                                                   |
 | `-s COMMAND`      | Run `COMMAND` and exit                                                                                        |
 | `-separator SEP`  | Set output column separator to `SEP`. Default: `|`                                                            |
+| `-storage-version VER` | Database storage compatibility version to use.                                                           |
 | `-table`          | Set [output mode]({% link docs/preview/clients/cli/output_formats.md %}) to `table`                            |
 | `-ui`             | Loads and starts the [DuckDB UI]({% link docs/preview/core_extensions/ui.md %}). If the UI is not yet installed, it installs the `ui` extension |
-| `-unsigned`       | Allow loading of [unsigned extensions]({% link docs/preview/extensions/overview.md %}#unsigned-extensions). This option is intended to be used for developing extensions. Consult the [Securing DuckDB page]({% link docs/preview/operations_manual/securing_duckdb/securing_extensions.md %}) for guidelines on how set up DuckDB in a secure manner |
+| `-unsigned`       | Allow loading of [unsigned extensions]({% link docs/preview/extensions/overview.md %}#unsigned-extensions). This option is intended to be used for developing extensions. Consult the [Securing DuckDB page]({% link docs/preview/operations_manual/securing_duckdb/securing_extensions.md %}) for guidelines on how to set up DuckDB in a secure manner |
 | `-version`        | Show DuckDB version                                                                                           |
 
 <!-- markdownlint-enable MD056 -->

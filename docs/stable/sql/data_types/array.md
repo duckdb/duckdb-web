@@ -1,7 +1,7 @@
 ---
 layout: docu
 redirect_from:
-- /docs/sql/data_types/array
+  - /docs/sql/data_types/array
 title: Array Type
 ---
 
@@ -60,7 +60,7 @@ INSERT INTO array_table VALUES (10, [1, 2, 3]), (20, [4, 5, 6]);
 
 Retrieving one or more values from an array can be accomplished using brackets and slicing notation, or through [list functions]({% link docs/stable/sql/functions/list.md %}#list-functions) like `list_extract` and `array_extract`. Using the example in [Defining an Array Field](#defining-an-array-field).
 
-The following queries for extracting the second element of an array are equivalent:
+The following queries for extracting the first element of an array are equivalent:
 
 ```sql
 SELECT id, arr[1] AS element FROM array_table;

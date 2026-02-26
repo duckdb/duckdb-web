@@ -52,7 +52,7 @@ On Ubuntu Linux, running on the ARM64 architecture, the platform is `linux_arm64
 
 ## Extensions
 
-To get a list of DuckDB extension and their status (e.g., `loaded`, `installed`), use the [`duckdb_extensions()` function]({% link docs/preview/extensions/overview.md %}#listing-extensions):
+To get a list of DuckDB extensions and their status (e.g., `loaded`, `installed`), use the [`duckdb_extensions()` function]({% link docs/preview/extensions/overview.md %}#listing-extensions):
 
 ```sql
 SELECT *

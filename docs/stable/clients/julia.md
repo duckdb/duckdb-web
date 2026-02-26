@@ -2,7 +2,6 @@
 layout: docu
 redirect_from:
 - /docs/api/julia
-- /docs/api/julia/
 - /docs/clients/julia
 title: Julia Client
 ---
@@ -38,7 +37,7 @@ con = DBInterface.connect(DuckDB.DB, ":memory:")
 DBInterface.execute(con, "CREATE TABLE integers (i INTEGER)")
 
 # insert data by executing a prepared statement
-stmt = DBInterface.prepare(con, "INSERT INTO integers VALUES(?)")
+stmt = DBInterface.prepare(con, "INSERT INTO integers VALUES (?)")
 DBInterface.execute(stmt, [42])
 
 # query the database
@@ -58,7 +57,7 @@ If you wish to load data from a DataFrame into a DuckDB table you can run a `CRE
 using DuckDB
 using DataFrames
 
-# create a new in-memory dabase
+# create a new in-memory database
 con = DBInterface.connect(DuckDB.DB)
 
 # create a DataFrame

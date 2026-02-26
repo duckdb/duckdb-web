@@ -56,4 +56,4 @@ Mark and Hannes
 
 PS: We are holding our next community event, [DuckCon #5]({% link _events/2024-08-15-duckcon5.md %}), in Seattle on August 15, only a few short weeks from today. Attendance is free. Hope to see you there!
 
-_For press inquiries, please reach out to [Gabor Szarnyas](mailto:gabor@duckdblabs.com)._
+_For press inquiries, please reach out to [Gábor Szárnyas](mailto:gabor@duckdblabs.com)._

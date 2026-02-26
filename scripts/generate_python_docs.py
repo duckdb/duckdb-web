@@ -17,7 +17,6 @@ DUCKDB_DOC_VERSION = os.getenv("DUCKDB_DOC_VERSION", "stable")
 redirect_from_text = """\
 redirect_from:
 - /docs/api/python/reference/index
-- /docs/api/python/reference/index/
 - /docs/clients/python/reference/index
 """
 
@@ -70,7 +69,15 @@ def create_index_rst():
     classes = [
         {
             "name": name,
-            "rst_type": 'automethod' if not inspect.isclass(obj) else 'autoclass',
+            "rst_type": (
+                "autoclass"
+                if inspect.isclass(obj)
+                else (
+                    "autofunction"
+                    if inspect.isbuiltin(duckdb.CaseExpression)
+                    else "automethod"
+                )
+            ),
         }
         for name, obj in inspect.getmembers(duckdb)
         if inspect.isclass(obj) or inspect.isroutine(obj)
@@ -88,7 +95,7 @@ def create_index_rst():
             if cls['name'] == "DuckDBPyRelation":
                 f.write(".. include:: relation.rst\n")
             else:
-                f.write(f".. {cls['rst_type']}:: duckdb.{cls['name']}\n")
+                f.write(f".. {cls['rst_type']}:: {cls['name']}\n")
                 if cls['rst_type'] == 'autoclass':
                     f.write("   :members:\n")
                     f.write("   :show-inheritance:\n")

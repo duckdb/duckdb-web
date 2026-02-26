@@ -62,8 +62,8 @@
 				<div class="options">
 					<a class="button yellow" href="https://duckdblabs.com/#support" target="_blank">Support</a>
 					<button class="mode" data-mode="dark">
-						{% include icon.html name="sun" class="icon icon-sun" size="24" %}
-						{% include icon.html name="moon" class="icon icon-moon" size="24" %}
+						<svg class="icon icon-sun"><use href="#sun"></use></svg>
+						<svg class="icon icon-moon"><use href="#moon-01"></use></svg>
 					</button>
 				</div>
 			</div>
@@ -78,9 +78,6 @@
 						<div class="content">
 							<div class="contentwidth">
 								<h1>{{ page.title }}</h1>
-								{% if page.collection == "science" and page.tags contains "Podcast" and page.thumb %}
-								<img src="{{ page.thumb }}" alt="Page thumbnail" width="400" />
-								{% endif %}
 								{% if page.subtitle %}
 								<h2>{{ page.subtitle }}</h2>
 								{% endif %}
@@ -98,10 +95,11 @@
 											{% if page.event != true and page.collection != "events" %}
 												<div class="publishedinfo">
 													<span class="date">{{ page.date | date: "%Y-%m-%d" }}</span>
-													{% if page.collection == "media" %}
-														<span class="bullet">&middot;</span>
-														<span class="readingtime">{{ page.length }}</span>
-													{% elsif page.collection == "science" %}
+													{% if page.collection == "library" %}
+														{% if page.length %}
+															<span class="bullet">&middot;</span>
+															<span class="readingtime">{{ page.length }}</span>
+														{% endif %}
 													{% else %}
 														<span class="bullet">&middot;</span>
 														<span class="readingtime">{{ content | reading_time }}</span>

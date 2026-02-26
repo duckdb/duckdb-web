@@ -21,10 +21,12 @@ extension:
   vcpkg_commit: "ce613c41372b23b1f51333815feb3edd87ef8a8b"
   # (Optional) this extension requires additional custom toolchain setup
   custom_toolchain_script: true
+  # (Optional) ';' separated list of additional platforms
+  opt_in_platforms: "windows_arm64;"
 
 repo:
   github: duckdb/extension-template
-  ref: e52f46eeca9157124cbc910f52ea8637c95084a1
+  ref: 8148b0e4d1c0f4891ff357e0339224e779cd62bd
 
 docs:
   hello_world: |
@@ -32,10 +34,10 @@ docs:
   extended_description: |
     The quack extension is based on DuckDB's [Extension Template](https://github.com/duckdb/extension-template/), and it's a great starting point to get started building more advanced extensions.
 
-extension_star_count: 243
-extension_star_count_pretty: 243
-extension_download_count: 1033
-extension_download_count_pretty: 1.0k
+extension_star_count: 264
+extension_star_count_pretty: 264
+extension_download_count: 612
+extension_download_count_pretty: 612
 image: '/images/community_extensions/social_preview/preview_community_extension_quack.png'
 layout: community_extension_doc
 ---

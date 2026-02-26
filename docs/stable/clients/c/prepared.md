@@ -2,7 +2,6 @@
 layout: docu
 redirect_from:
 - /docs/api/c/prepared
-- /docs/api/c/prepared/
 - /docs/clients/c/prepared
 title: Prepared Statements
 ---
@@ -270,7 +269,7 @@ duckdb_statement_type value or DUCKDB_STATEMENT_TYPE_INVALID
 
 #### `duckdb_prepared_statement_column_count`
 
-Returns the number of columns present in a the result of the prepared statement. If any of the column types are invalid,
+Returns the number of columns present in the result of the prepared statement. If any of the column types are invalid,
 the result will be 1.
 
 ##### Syntax

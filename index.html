@@ -49,7 +49,7 @@ To add a banner, set banner: true in the front matter and define the banner cont
 							<option value="sql-spatial-extension">Spatial extension</option>
 						</select>
 					</div>
-					<a class="button arrow-right livedemo" href="https://shell.duckdb.org/#queries=v0,%20%20-Create-table-from-Parquet-file%0ACREATE-TABLE-train_services-AS%0A----FROM-'s3%3A%2F%2Fduckdb%20blobs%2Ftrain_services.parquet'~,%20%20-Get-the-top%203-busiest-train-stations%0ASELECT-station_name%2C-count(*)-AS-num_services%0AFROM-train_services%0AGROUP-BY-ALL%0AORDER-BY-num_services-DESC%0ALIMIT-3~">Live demo</a>
+					<a class="button arrow-right livedemo" href="https://shell.duckdb.org/#queries=v0,%20%20-Create-table-from-Parquet-file%0ACREATE-TABLE-train_services-AS%0A----FROM-'https%3A%2F%2Fblobs.duckdb.org%2Ftrain_services.parquet'~%0A%0A%20%20-Get-the-top%203-busiest-train-stations%0ASELECT%0A----station_name%2C%0A----count(*)-AS-num_services%0AFROM-train_services%0AGROUP-BY-ALL%0AORDER-BY-num_services-DESC%0ALIMIT-3~%0A">Live demo</a>
 				</div>
 			</div>
 		</div>
@@ -148,13 +148,15 @@ To add a banner, set banner: true in the front matter and define the banner cont
 					{% assign post_link = post.external_post_url %}
 					{% assign link_target = "_blank" %}
 					{% assign link_rel = "noopener noreferrer" %}
+					{% assign source_domain = post.external_post_url | extract_domain %}
 				{% else %}
 					{% assign is_external = false %}
 					{% assign post_link = post.url %}
 					{% assign link_target = "_self" %}
 					{% assign link_rel = "" %}
+					{% assign source_domain = "duckdb.org" %}
 				{% endif %}
-				<div class="postpreview {{ tag_classes }}{% if is_external %} external-post{% endif %}" data-title="{{ post.title | escape }}">
+				<div class="postpreview {{ tag_classes }}{% if is_external %} external-post{% endif %}" data-title="{{ post.title | escape }}" data-source="{{ source_domain }}">
 					<a href="{{ post_link }}" class="blocklink" title="{{ post.title }}" target="{{ link_target }}"{% if link_rel != "" %} rel="{{ link_rel }}"{% endif %}></a>
 					<div class="postimg custom">
 						{% if post.thumb %}
@@ -240,7 +242,7 @@ To add a banner, set banner: true in the front matter and define the banner cont
 	
 <!-- ------------------- SQL ------------------- -->
 
-<div data-language="sql" data-example="sql-aggregation-query" data-buttontxt="Live demo" data-buttonurl="https://shell.duckdb.org/#queries=v0,%20%20-Directly-query-Parquet-file-over-HTTPS%0ASELECT%0A----station_name%2C%0A----count(*)-AS-num_services%0AFROM-'https%3A%2F%2Fblobs.duckdb.org%2Ftrain_services.parquet'%0AGROUP-BY-ALL%0AORDER-BY-num_services-DESC%0ALIMIT-10~%0A">
+<div data-language="sql" data-example="sql-aggregation-query" data-buttontxt="Live demo" data-buttonurl="https://shell.duckdb.org/#queries=v0,%20%20-Create-table-from-Parquet-file%0ACREATE-TABLE-train_services-AS%0A----FROM-'https%3A%2F%2Fblobs.duckdb.org%2Ftrain_services.parquet'~%0A%0A%20%20-Get-the-top%203-busiest-train-stations%0ASELECT%0A----station_name%2C%0A----count(*)-AS-num_services%0AFROM-train_services%0AGROUP-BY-ALL%0AORDER-BY-num_services-DESC%0ALIMIT-3~%0A">
 {% highlight sql %}
 {% include landing-page/sql/aggregation.sql %}
 {% endhighlight %}

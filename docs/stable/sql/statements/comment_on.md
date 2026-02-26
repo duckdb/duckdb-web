@@ -2,7 +2,7 @@
 layout: docu
 railroad: statements/comment.js
 redirect_from:
-- /docs/sql/statements/comment_on
+  - /docs/sql/statements/comment_on
 title: COMMENT ON Statement
 ---
 

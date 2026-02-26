@@ -7,7 +7,7 @@ title: Complete API
 
 This page contains the reference for DuckDB's C API.
 
-> The reference contains several deprecation notices. These concern methods whose long-term availability is not guaranteed as they may be removed in the future. That said, DuckDB's developers plan to carry out deprecations slowly as several of the deprecated methods do not yet have a fully functional alternative. Therefore, they will not removed before the alternative is available, and even then, there will be a grace period of a few minor versions before removing them. The reason that the methods are already deprecated in v1.0 is to denote that they are not part of the v1.0 stable API, which contains methods that are available long-term.
+> The reference contains several deprecation notices. These concern methods whose long-term availability is not guaranteed as they may be removed in the future. That said, DuckDB's developers plan to carry out deprecations slowly as several of the deprecated methods do not yet have a fully functional alternative. Therefore, they will not be removed before the alternative is available, and even then, there will be a grace period of a few minor versions before removing them. The reason that the methods are already deprecated in v1.0 is to denote that they are not part of the v1.0 stable API, which contains methods that are available long-term.
 
 ## API Reference Overview
 
@@ -5024,7 +5024,7 @@ Creates a map value from a map type and two arrays, one for the keys and one for
 * `map_type`: The map type
 * `keys`: The keys of the map
 * `values`: The values of the map
-* `entry_count`: The number of entrys (key-value pairs) in the map
+* `entry_count`: The number of entries (key-value pairs) in the map
 
 ##### Return Value
 

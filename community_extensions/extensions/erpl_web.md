@@ -17,12 +17,12 @@ extension:
     - jrosskopf
 repo:
   github: DataZooDE/erpl-web
-  ref: d590413c064298fd952b3676c1ac77ef92bbcaa0
+  ref: 4e2fbe02164371d26ac255e4f40878694b1eaf56
 
-extension_star_count: 21
-extension_star_count_pretty: 21
-extension_download_count: 718
-extension_download_count_pretty: 718
+extension_star_count: 24
+extension_star_count_pretty: 24
+extension_download_count: 458
+extension_download_count_pretty: 458
 image: '/images/community_extensions/social_preview/preview_community_extension_erpl_web.png'
 layout: community_extension_doc
 ---
@@ -50,6 +50,13 @@ LOAD {{ page.extension.name }};
 
 |         function_name         | function_type | description | comment | examples |
 |-------------------------------|---------------|-------------|---------|----------|
+| bc_describe                   | table         | NULL        | NULL    |          |
+| bc_read                       | table         | NULL        | NULL    |          |
+| bc_show_companies             | table         | NULL        | NULL    |          |
+| bc_show_entities              | table         | NULL        | NULL    |          |
+| crm_describe                  | table         | NULL        | NULL    |          |
+| crm_read                      | table         | NULL        | NULL    |          |
+| crm_show_entities             | table         | NULL        | NULL    |          |
 | datasphere_describe_asset     | table         | NULL        | NULL    |          |
 | datasphere_describe_space     | table         | NULL        | NULL    |          |
 | datasphere_read_analytical    | table         | NULL        | NULL    |          |
@@ -64,6 +71,29 @@ LOAD {{ page.extension.name }};
 | erpl_trace_enable             | pragma        | NULL        | NULL    |          |
 | erpl_trace_level              | pragma        | NULL        | NULL    |          |
 | erpl_trace_status             | pragma        | NULL        | NULL    |          |
+| graph_calendar_events         | table         | NULL        | NULL    |          |
+| graph_channel_messages        | table         | NULL        | NULL    |          |
+| graph_contacts                | table         | NULL        | NULL    |          |
+| graph_describe_list           | table         | NULL        | NULL    |          |
+| graph_devices                 | table         | NULL        | NULL    |          |
+| graph_excel_range             | table         | NULL        | NULL    |          |
+| graph_excel_table_data        | table         | NULL        | NULL    |          |
+| graph_excel_tables            | table         | NULL        | NULL    |          |
+| graph_excel_worksheets        | table         | NULL        | NULL    |          |
+| graph_groups                  | table         | NULL        | NULL    |          |
+| graph_list_files              | table         | NULL        | NULL    |          |
+| graph_list_items              | table         | NULL        | NULL    |          |
+| graph_messages                | table         | NULL        | NULL    |          |
+| graph_my_teams                | table         | NULL        | NULL    |          |
+| graph_planner_buckets         | table         | NULL        | NULL    |          |
+| graph_planner_plans           | table         | NULL        | NULL    |          |
+| graph_planner_tasks           | table         | NULL        | NULL    |          |
+| graph_show_lists              | table         | NULL        | NULL    |          |
+| graph_show_sites              | table         | NULL        | NULL    |          |
+| graph_signin_logs             | table         | NULL        | NULL    |          |
+| graph_team_channels           | table         | NULL        | NULL    |          |
+| graph_team_members            | table         | NULL        | NULL    |          |
+| graph_users                   | table         | NULL        | NULL    |          |
 | http_delete                   | table         | NULL        | NULL    |          |
 | http_get                      | table         | NULL        | NULL    |          |
 | http_head                     | table         | NULL        | NULL    |          |

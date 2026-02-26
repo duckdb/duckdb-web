@@ -11,7 +11,7 @@ When making changes that have potential performance implications, it is importan
 To build the benchmark suite, run the following command in the [DuckDB repository](https://github.com/duckdb/duckdb):
 
 ```batch
-BUILD_BENCHMARK=1 CORE_EXTENSIONS='tpch' make
+BUILD_BENCHMARK=1 BUILD_EXTENSIONS='tpch' make
 ```
 
 ## Listing Benchmarks
@@ -59,7 +59,7 @@ The output will contain the following:
 0.182948
 ```
 
-### Running Multiple Benchmark Using a Regular Expression
+### Running Multiple Benchmarks Using a Regular Expression
 
 You can also use a regular expression to specify which benchmarks to run.
 Be careful of shell expansion of certain regex characters (e.g., `*` will likely be expanded by your shell, hence this requires proper quoting or escaping).
@@ -111,12 +111,12 @@ To illustrate how to create a benchmark file, we can look at the benchmark for t
 
 Benchmarks are similar to unit test files, and have the same type of header.
 
-```py
+```python
 # name: benchmark/micro/window/window_fill.benchmark
-# description: Measure the perfomance of FILL
+# description: Measure the performance of FILL
 # group: [window]
 ```
-The `make format-head` command fill can ensure that the header has the expected structure and prevent tidy check errors.
+The `make format-head` command can ensure that the header has the expected structure and prevent tidy check errors.
 
 Below this header, there are a set of keywords summarizing the benchmark.
 
@@ -128,7 +128,7 @@ subgroup window
 
 While some benchmarks run a single query,
 it can often be useful to _parameterize_ a benchmark using the `argument` keyword.
-This allows the benchmark to be with different settings, such as data volume.
+This allows the benchmark to be run with different settings, such as data volume.
 For the `FILL` benchmark, there are three arguments:
 
 ```text
@@ -163,7 +163,7 @@ The `argument` parameters are expanded in the query,
 similar to the way that `foreach` values are expanded in unit tests.
 Note that we can issue multiple SQL statements in the `load` section.
 
-One the data is prepared, we are finally ready to specify the query we will benchmark!
+Once the data is prepared, we are finally ready to specify the query we will benchmark!
 This is done in the `run` section, and the restrictions are the same as for a unit test
 (e.g., no blank lines, etc.)
 For the `FILL` benchmark, we want to find all places where the interpolation fails:
@@ -181,7 +181,7 @@ qualify v <> m - 1704067200000;
 
 If the interpolation is correct, then we will have no output, no matter the scale.
 We can check this with the final `result` clause,
-which ash the same syntax as a unit test:
+which has the same syntax as a unit test:
 
 ```text
 result III

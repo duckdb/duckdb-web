@@ -2,7 +2,6 @@
 layout: docu
 redirect_from:
 - /docs/api/c/value
-- /docs/api/c/value/
 - /docs/clients/c/value
 title: Values
 ---
@@ -1471,7 +1470,7 @@ Creates a map value from a map type and two arrays, one for the keys and one for
 * `map_type`: The map type
 * `keys`: The keys of the map
 * `values`: The values of the map
-* `entry_count`: The number of entrys (key-value pairs) in the map
+* `entry_count`: The number of entries (key-value pairs) in the map
 
 ##### Return Value
 
@@ -1481,7 +1480,7 @@ The map value, or nullptr, if the parameters are invalid.
 
 #### `duckdb_create_union_value`
 
-Creates a union value from a union type, a tag index, and a value.
+Creates a union value from a union type, a tag index and a value.
 Must be destroyed with `duckdb_destroy_value`.
 
 ##### Syntax

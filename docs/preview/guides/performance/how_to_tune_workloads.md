@@ -17,7 +17,7 @@ In these cases, consider setting the [`preserve_insertion_order` configuration o
 SET preserve_insertion_order = false;
 ```
 
-This allows the systems to re-order any results that do not contain `ORDER BY` clauses, potentially reducing memory usage.
+This allows the system to re-order any results that do not contain `ORDER BY` clauses, potentially reducing memory usage.
 
 ## Parallelism (Multi-Core Processing)
 
@@ -33,7 +33,7 @@ The row group size can be specified as an option of the `ATTACH` statement:
 ATTACH '/tmp/somefile.db' AS db (ROW_GROUP_SIZE 16384);
 ```
 
-The [performance considerations when chosing `ROW_GROUP_SIZE` for Parquet files]({% link docs/preview/data/parquet/tips.md %}#selecting-a-row_group_size) apply verbatim to DuckDB's own database format.
+The [performance considerations when choosing `ROW_GROUP_SIZE` for Parquet files]({% link docs/preview/data/parquet/tips.md %}#selecting-a-row_group_size) apply verbatim to DuckDB's own database format.
 
 ### Too Many Threads
 
@@ -147,4 +147,4 @@ We run this script using three DuckDB prompts:
 | In-memory DB (compressed)   | `duckdb -cmd "ATTACH ':memory:' AS db (COMPRESS); USE db;"` |         0.55 s |
 | Persistent DB (compressed)  | `duckdb tpch-sf30.db`                                       |         0.56 s |
 
-We can observe that the compressed databases about 8× faster compared to the uncompressed in-memory database.
+We can observe that the compressed databases are about 8× faster compared to the uncompressed in-memory database.

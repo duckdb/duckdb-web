@@ -8,46 +8,46 @@ excerpt: |
 extension:
   name: duck_tails
   description: Smart Development Intelligence for DuckDB - Git-aware data analysis capabilities that allow querying git history, accessing files at any revision, and performing version-aware data analysis with SQL.
-  version: 1.0.0
+  version: 1.2.0
   language: C++
   build: cmake
   license: MIT
-  requires_toolchains: "vcpkg"
-  excluded_platforms: "wasm_mvp;wasm_eh;wasm_threads"
+  requires_toolchains: vcpkg
+  excluded_platforms: wasm_mvp;wasm_eh;wasm_threads;windows_amd64;windows_arm64;windows_amd64_mingw;windows_arm64_mingw
   maintainers:
     - teaguesterling
 repo:
   github: teaguesterling/duck_tails
-  ref: main
-
+  ref: eb4985203fe332d104bcf605097355ab9d155b77
+  ref_next: eb4985203fe332d104bcf605097355ab9d155b77
 docs:
   hello_world: |
     -- Load the extension
     LOAD 'duck_tails';
-    
+
     -- Query git history (defaults to current directory)
     SELECT commit_hash, author_name, message, author_date 
     FROM git_log() LIMIT 5;
-    
+
     -- Access files from git repository at specific revisions
     SELECT * FROM read_csv('git://data/sales.csv@HEAD');
-    
+
     -- Compare data between commits
     SELECT COUNT(*) FROM read_csv('git://data/sales.csv@HEAD') AS current_count,
            COUNT(*) FROM read_csv('git://data/sales.csv@HEAD~1') AS previous_count;
-    
+
     -- Analyze text differences
     SELECT * FROM read_git_diff('git://README.md@HEAD', 'git://README.md@HEAD~1');
 
   extended_description: |
     Duck Tails brings git-aware data analysis capabilities to DuckDB, enabling sophisticated version-controlled data workflows. The extension provides three core capabilities:
-    
+
     **Git Filesystem Access**: Use the `git://` protocol to access any file in your git repository at any commit, branch, or tag. This allows you to query historical data states, compare versions, and perform temporal analysis directly in SQL.
-    
+
     **Repository Metadata Queries**: Query git repository information directly with table functions like `git_log()`, `git_branches()`, and `git_tags()`. Analyze commit histories, track development patterns, and integrate repository metadata into your analytical workflows.
-    
+
     **Text Diff Analysis**: Comprehensive text diffing capabilities with functions like `diff_text()`, `read_git_diff()`, and `text_diff_stats()`. Analyze changes between file versions, track configuration drift, and perform code change analysis.
-    
+
     Key functions include:
     - `git_log([path])` - Query commit history
     - `git_branches([path])` - List repository branches  
@@ -56,12 +56,13 @@ docs:
     - `read_git_diff(file1, [file2])` - Structured diff analysis
     - `text_diff_lines(diff)` - Parse diff into line-by-line changes
     - `text_diff_stats(old, new)` - Diff statistics and metrics
-    
+
     The extension supports mixed file systems, allowing you to combine git://, local files, S3, and other DuckDB-supported protocols in a single query. Built with libgit2 for robust git operations and comprehensive error handling.
-extension_star_count: 2
-extension_star_count_pretty: 2
-extension_download_count: null
-extension_download_count_pretty: n/a
+
+extension_star_count: 14
+extension_star_count_pretty: 14
+extension_download_count: 423
+extension_download_count_pretty: 423
 image: '/images/community_extensions/social_preview/preview_community_extension_duck_tails.png'
 layout: community_extension_doc
 ---
@@ -87,15 +88,25 @@ LOAD {{ page.extension.name }};
 
 <div class="extension_functions_table"></div>
 
-|  function_name  | function_type | description | comment | examples |
-|-----------------|---------------|-------------|---------|----------|
-| diff_text       | scalar        | NULL        | NULL    |          |
-| git_branches    | table         | NULL        | NULL    |          |
-| git_log         | table         | NULL        | NULL    |          |
-| git_tags        | table         | NULL        | NULL    |          |
-| read_git_diff   | table         | NULL        | NULL    |          |
-| text_diff       | scalar        | NULL        | NULL    |          |
-| text_diff_lines | table         | NULL        | NULL    |          |
-| text_diff_stats | scalar        | NULL        | NULL    |          |
+|   function_name   | function_type | description | comment | examples |
+|-------------------|---------------|-------------|---------|----------|
+| diff_text         | scalar        | NULL        | NULL    |          |
+| git_branches      | table         | NULL        | NULL    |          |
+| git_branches_each | table         | NULL        | NULL    |          |
+| git_log           | table         | NULL        | NULL    |          |
+| git_log_each      | table         | NULL        | NULL    |          |
+| git_parents       | table         | NULL        | NULL    |          |
+| git_parents_each  | table         | NULL        | NULL    |          |
+| git_read          | table         | NULL        | NULL    |          |
+| git_read_each     | table         | NULL        | NULL    |          |
+| git_tags          | table         | NULL        | NULL    |          |
+| git_tags_each     | table         | NULL        | NULL    |          |
+| git_tree          | table         | NULL        | NULL    |          |
+| git_tree_each     | table         | NULL        | NULL    |          |
+| git_uri           | scalar        | NULL        | NULL    |          |
+| read_git_diff     | table         | NULL        | NULL    |          |
+| text_diff         | scalar        | NULL        | NULL    |          |
+| text_diff_lines   | table         | NULL        | NULL    |          |
+| text_diff_stats   | scalar        | NULL        | NULL    |          |
 
 

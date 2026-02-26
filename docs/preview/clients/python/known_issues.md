@@ -77,6 +77,25 @@ Alternatively, you can instruct `pip` to compile the package from source as foll
 python3 -m pip install duckdb --no-binary duckdb
 ```
 
+### Parameterized Queries in Relational API
+
+Passing query parameters to the [`sql()`]({% link docs/preview/clients/python/relational_api.md %}#sql), [`query()`]({% link docs/preview/clients/python/relational_api.md %}#query), or [`from_query()`]({% link docs/preview/clients/python/relational_api.md %}#from_query) methods has significant performance overhead.
+There is currently no relation type in core that supports prepared statements, so parameterized queries are immediately materialized into an intermediate representation. This causes at least 5x processing overhead and nearly 2x memory usage compared to the non-parameterized path.
+
+Instead, use [`execute()`]({% link docs/preview/clients/python/dbapi.md %}#prepared-statements) for the parameterized query, then feed the result into the relational API via a [replacement scan]({% link docs/preview/clients/python/relational_api.md %}#sql):
+
+```python
+import duckdb
+
+conn = duckdb.connect()
+
+# Use execute() for the parameterized query
+df = conn.execute("SELECT * FROM my_table WHERE x = ?", [42]).df()
+
+# Use a replacement scan to continue with the relational API
+conn.sql("SELECT * FROM df WHERE y > 0").order("y").show()
+```
+
 ## Known Issues
 
 Unfortunately there are some issues that are either beyond our control or are very elusive / hard to track down.

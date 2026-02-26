@@ -2,7 +2,6 @@
 layout: docu
 redirect_from:
 - /docs/sql/pragmas
-- /docs/sql/pragmas/
 - /docs/configuration/pragmas
 title: Pragmas
 ---
@@ -530,7 +529,7 @@ PRAGMA disable_object_cache;
 #### Compression
 
 During checkpointing, the existing column data + any new changes get compressed.
-There exist a couple pragmas to influence which compression functions are considered.
+There exist a couple of pragmas to influence which compression functions are considered.
 
 ##### Force Compression
 

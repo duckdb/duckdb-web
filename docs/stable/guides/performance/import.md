@@ -2,7 +2,6 @@
 layout: docu
 redirect_from:
 - /docs/guides/import/overview
-- /docs/guides/import/overview/
 - /docs/guides/performance/import
 title: Data Import
 ---
@@ -21,4 +20,4 @@ We recommend importing using the following order:
 If possible, avoid looping row-by-row (tuple-at-a-time) in favor of bulk operations.
 Performing row-by-row inserts (even with prepared statements) is detrimental to performance and will result in slow load times.
 
-> Bestpractice Unless your data is small (<100k rows), avoid using inserts in loops.
+> Bestpractice: Unless your data is small (<100k rows), avoid using inserts in loops.

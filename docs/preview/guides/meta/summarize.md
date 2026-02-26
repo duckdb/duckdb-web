@@ -9,13 +9,13 @@ Note that the quantiles and percentiles are **approximate values**.
 
 ## Usage
 
-In order to summarize the contents of a table, use `SUMMARIZE` followed by the table name.
+To summarize the contents of a table, use `SUMMARIZE` followed by the table name.
 
 ```sql
 SUMMARIZE tbl;
 ```
 
-In order to summarize a query, prepend `SUMMARIZE` to a query.
+To summarize a query, prepend `SUMMARIZE` to a query.
 
 ```sql
 SUMMARIZE SELECT * FROM tbl;
@@ -56,7 +56,7 @@ SUMMARIZE lineitem;
 
 ## Using `SUMMARIZE` in a Subquery
 
-`SUMMARIZE` can be used a subquery. This allows creating a table from the summary, for example:
+`SUMMARIZE` can be used as a subquery. This allows creating a table from the summary, for example:
 
 ```sql
 CREATE TABLE tbl_summary AS SELECT * FROM (SUMMARIZE tbl);

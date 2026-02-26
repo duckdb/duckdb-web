@@ -45,15 +45,15 @@ It turns out that there are a number of important statistical functions that
 turn into holistic aggregates in SQL.
 In particular, here are the statistical holistic aggregates that DuckDB currently supports:
 
-| Function | Description|
-|:---|:---|
-| `mode(x)` | The most common value in a set |
-| `median(x)` | The middle value of a set |
-| `quantile_disc(x, <frac>)` | The exact value corresponding to a fractional position. |
-| `quantile_cont(x, <frac>)` | The interpolated value corresponding to a fractional position. |
-| `quantile_disc(x, [<frac>...])` | A list of the exact values corresponding to a list of fractional positions. |
-| `quantile_cont(x, [<frac>...])` | A list of the interpolated value corresponding to a list of fractional positions. |
-| `mad(x)` | The median of the absolute values of the differences of each value from the median. |
+| Function                        | Description                                                                         |
+| :------------------------------ | :---------------------------------------------------------------------------------- |
+| `mode(x)`                       | The most common value in a set                                                      |
+| `median(x)`                     | The middle value of a set                                                           |
+| `quantile_disc(x, <frac>)`      | The exact value corresponding to a fractional position.                             |
+| `quantile_cont(x, <frac>)`      | The interpolated value corresponding to a fractional position.                      |
+| `quantile_disc(x, [<frac>...])` | A list of the exact values corresponding to a list of fractional positions.         |
+| `quantile_cont(x, [<frac>...])` | A list of the interpolated value corresponding to a list of fractional positions.   |
+| `mad(x)`                        | The median of the absolute values of the differences of each value from the median. |
 
 Where things get really interesting is when we try to compute moving versions of these aggregates.
 For example, computing a moving `AVG` is fairly straightforward:

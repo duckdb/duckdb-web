@@ -15,7 +15,8 @@ header .headerline {
 	z-index: 900;
 	/* Header Content Container */
 	.headercontent {
-		max-width: calc(100% - 40px);
+		max-width: 1184px;
+		padding: 0 15px;
 		height: 100%;
 		margin: 0 auto;
 		color: var(--menu-topmenu-text-color, #1A1A1A);
@@ -25,7 +26,7 @@ header .headerline {
 		/* Logo */
 		.duckdbhome {
 			font-size: 20px;
-			font-family: "DuckDB-Symbol";
+			position: relative; 
 			
 			a {
 				text-decoration: none;
@@ -156,17 +157,16 @@ header .headerline {
 				}
 				/* Search Icon */
 				.search_icon {
-					width: 17px;
+					width: 19px;
 					height: 70px;
-					background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='15' fill='none' viewBox='0 0 16 15'%3E%3Cpath stroke='%231A1A1A' stroke-width='1.5' d='m10.77 9.909 3.926 3.926'/%3E%3Ccircle cx='6.62' cy='6.52' r='5.173' stroke='%231A1A1A' stroke-width='1.5'/%3E%3C/svg%3E");
-					background-repeat: no-repeat;
-					background-size: contain;
-					background-position: center center;
+					display: flex;
+					justify-content: center;
+					align-items: center;
 					cursor: pointer;
 					display: none;
 					
 					&:hover {
-						background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='15' fill='none' viewBox='0 0 16 15'%3E%3Cpath stroke='%236A58DA' stroke-width='1.5' d='m10.77 9.909 3.926 3.926'/%3E%3Ccircle cx='6.62' cy='6.52' r='5.173' stroke='%236A58DA' stroke-width='1.5'/%3E%3C/svg%3E");
+						color: var(--menu-topmenu-text-color-hover, #6A58DA);
 					} 
 				}
 			}
@@ -196,6 +196,8 @@ header .headerline {
 				align-items: center;
 				justify-content: center;
 				transition: all .3s;
+				color: var(--main-text-secondary-color, #666);
+				
 				&[data-mode="dark"] {
 					.icon-sun {
 						display: none;
@@ -215,24 +217,13 @@ header .headerline {
 				}
 				&:hover {
 					border-color: var(--menu-topmenu-text-color-hover, #6A58DA);
-					
-					svg path {
-						fill: var(--menu-topmenu-text-color-hover, #6A58DA);
-					}
-					
-					svg *[stroke] {
-						stroke: var(--menu-topmenu-text-color-hover, #6A58DA);
-					}
+					color: var(--menu-topmenu-text-color-hover, #6A58DA);
 				}
 				
-				svg path {
-					transition: fill .2s;
-					fill: var(--main-text-secondary-color, #666);
-				}
-				
-				svg *[stroke] {
-					transition: stroke .2s;
-					stroke: var(--main-text-secondary-color, #666);
+				.icon-sun,
+				.icon-moon{
+					width: 16px;
+					height: 16px;
 				}
 
 			}
@@ -297,7 +288,7 @@ a.github:hover .starcount {
 body.landing header .headerline .headercontent .landingmenu nav .search_icon,
 body.documentation header .headerline .headercontent .landingmenu nav .search_icon,
 body.blog header .headerline .headercontent .landingmenu nav .search_icon {
-	display: block;
+	display: flex;
 }
 
 /* Site-wide Banner */
@@ -337,7 +328,7 @@ body.blog header .headerline .headercontent .landingmenu nav .search_icon {
 	.close {
 		position: absolute;
 		right: 26px;
-		top: calc(50% - 12px);
+		top: calc(50% - 10px);
 		cursor: pointer;
 		svg path{
 			fill: var(--main-text-primary-color, #0D0D0D);

@@ -2,7 +2,7 @@
 blurb: In DuckDB, strings can be stored in the VARCHAR field.
 layout: docu
 redirect_from:
-- /docs/sql/data_types/text
+  - /docs/sql/data_types/text
 title: Text Types
 ---
 
@@ -16,7 +16,7 @@ The field allows storage of Unicode characters. Internally, the data is encoded 
 
 ## Specifying a Length Limit
 
-Specifying the length for the `VARCHAR`, `STRING`, and `TEXT` types is not required and has no effect on the system. Specifying the length will not improve performance or reduce storage space of the strings in the database. These variants are supported for compatibility with other systems that do require a length to be specified for strings.
+Specifying the length for the `VARCHAR`, `STRING` and `TEXT` types is not required and has no effect on the system. Specifying the length will not improve performance or reduce storage space of the strings in the database. These variants are supported for compatibility with other systems that do require a length to be specified for strings.
 
 If you wish to restrict the number of characters in a `VARCHAR` column for data integrity reasons the `CHECK` constraint should be used, for example:
 
@@ -48,7 +48,7 @@ Values of the text type are character strings, also known as string values or si
 
 ## Strings with Special Characters
 
-To use special characters in string, use [escape string literals]({% link docs/stable/sql/data_types/literal_types.md %}#escape-string-literals) or [dollar-quoted string literals]({% link docs/stable/sql/data_types/literal_types.md %}#dollar-quoted-string-literals). Alternatively, you can use concatenation and the [`chr` character function]({% link docs/stable/sql/functions/text.md %}):
+To use special characters in a string, use [escape string literals]({% link docs/stable/sql/data_types/literal_types.md %}#escape-string-literals) or [dollar-quoted string literals]({% link docs/stable/sql/data_types/literal_types.md %}#dollar-quoted-string-literals). Alternatively, you can use concatenation and the [`chr` character function]({% link docs/stable/sql/functions/text.md %}):
 
 ```sql
 SELECT 'Hello' || chr(10) || 'world' AS msg;

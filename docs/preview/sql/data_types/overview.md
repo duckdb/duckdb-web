@@ -12,12 +12,12 @@ The table below shows all the built-in general-purpose data types. The alternati
 | :------------------------- | :--------------------------------- | :--------------------------------------------------------------------------------------------------------- |
 | `BIGINT`                   | `INT8`, `LONG`                     | Signed eight-byte integer                                                                                  |
 | `BIT`                      | `BITSTRING`                        | String of 1s and 0s                                                                                        |
-| `BLOB`                     | `BYTEA`, `BINARY,` `VARBINARY`     | Variable-length binary data                                                                                |
+| `BLOB`                     | `BYTEA`, `BINARY`, `VARBINARY`     | Variable-length binary data                                                                                |
 | `BIGNUM`                   |                                    | Variable-length integer                                                                                    |
 | `BOOLEAN`                  | `BOOL`, `LOGICAL`                  | Logical Boolean (`true` / `false`)                                                                         |
-| `DATE`                     |                                    | Calendar date (year, month day)                                                                            |
+| `DATE`                     |                                    | Calendar date (year, month, day)                                                                            |
 | `DECIMAL(prec, scale)`     | `NUMERIC(prec, scale)`             | Fixed-precision number with the given width (precision) and scale, defaults to `prec = 18` and `scale = 3` |
-| `DOUBLE`                   | `FLOAT8`,                          | Double precision floating-point number (8 bytes)                                                           |
+| `DOUBLE`                   | `FLOAT8`                           | Double precision floating-point number (8 bytes)                                                           |
 | `FLOAT`                    | `FLOAT4`, `REAL`                   | Single precision floating-point number (4 bytes)                                                           |
 | `HUGEINT`                  |                                    | Signed sixteen-byte integer                                                                                |
 | `INTEGER`                  | `INT4`, `INT`, `SIGNED`            | Signed four-byte integer                                                                                   |
@@ -40,7 +40,7 @@ Implicit and explicit typecasting is possible between numerous types, see the [T
 
 ## Nested / Composite Types
 
-DuckDB supports five nested data types: `ARRAY`, `LIST`, `MAP`, `STRUCT`, and `UNION`. Each supports different use cases and has a different structure.
+DuckDB supports five nested data types: `ARRAY`, `LIST`, `MAP`, `STRUCT` and `UNION`. Each supports different use cases and has a different structure.
 
 | Name | Description | Rules when used in a column | Build from values | Define in DDL/CREATE |
 |:-|:---|:---|:--|:--|
@@ -62,7 +62,7 @@ When used in a table with ART indexes (either via explicit indexes or primary ke
 
 ## Nesting
 
-`ARRAY`, `LIST`, `MAP`, `STRUCT`, and `UNION` types can be arbitrarily nested to any depth, so long as the type rules are observed.
+`ARRAY`, `LIST`, `MAP`, `STRUCT` and `UNION` types can be arbitrarily nested to any depth, so long as the type rules are observed.
 
 Struct with `LIST`s:
 
