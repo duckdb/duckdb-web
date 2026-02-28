@@ -18,7 +18,7 @@ extension:
 
 repo:
   github: marselester/duckdb-maxmind
-  ref: c0c5074b1e4b0ff98dde2fd5cea0c9bcc94c5856
+  ref: 8df8fe223fd2e280310578568973b41801edecb8
 
 docs:
   hello_world: |
@@ -76,10 +76,10 @@ docs:
     └───────────┘
     ```
 
-extension_star_count: 3
-extension_star_count_pretty: 3
-extension_download_count: null
-extension_download_count_pretty: n/a
+extension_star_count: 4
+extension_star_count_pretty: 4
+extension_download_count: 128
+extension_download_count_pretty: 128
 image: '/images/community_extensions/social_preview/preview_community_extension_maxmind.png'
 layout: community_extension_doc
 ---

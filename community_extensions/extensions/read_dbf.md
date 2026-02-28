@@ -17,7 +17,7 @@ extension:
 
 repo:
   github: tocharan/duckdb-dbf
-  ref: ee6e3050dc159e894601095ab980bf2c9503d294
+  ref: 5751c39c435f38e1d25a514c8ffb9861759a3c91
 
 docs:
   hello_world: |
@@ -35,8 +35,8 @@ docs:
 
 extension_star_count: 0
 extension_star_count_pretty: 0
-extension_download_count: 165
-extension_download_count_pretty: 165
+extension_download_count: 326
+extension_download_count_pretty: 326
 image: '/images/community_extensions/social_preview/preview_community_extension_read_dbf.png'
 layout: community_extension_doc
 ---
