@@ -8,7 +8,7 @@ excerpt: |
 extension:
   name: lance
   description: Query Lance datasets directly from DuckDB.
-  version: 0.5.1
+  version: 0.5.2
   language: Rust & C++
   build: cmake
   license: Apache-2.0
@@ -19,8 +19,9 @@ extension:
 
 repo:
   github: lance-format/lance-duckdb
-  # v0.5.1
-  ref: ecddd759a99d2b965844bd3082998d6d21cb80c8
+  # v0.5.2
+  ref: 892b224af0f4a5508e5f3c46f1b8292155880258
+  ref_next: 3633381331446328924e8a1d75d8bbfec960952e
 
 docs:
   hello_world: |
@@ -70,8 +71,8 @@ docs:
 
 extension_star_count: 75
 extension_star_count_pretty: 75
-extension_download_count: 4167
-extension_download_count_pretty: 4.2k
+extension_download_count: 3864
+extension_download_count_pretty: 3.9k
 image: '/images/community_extensions/social_preview/preview_community_extension_lance.png'
 layout: community_extension_doc
 ---
@@ -97,13 +98,29 @@ LOAD {{ page.extension.name }};
 
 <div class="extension_functions_table"></div>
 
-|     function_name      | function_type | description | comment | examples |
-|------------------------|---------------|-------------|---------|----------|
-| __lance_exec           | table         | NULL        | NULL    |          |
-| __lance_namespace_scan | table         | NULL        | NULL    |          |
-| __lance_scan           | table         | NULL        | NULL    |          |
-| lance_fts              | table         | NULL        | NULL    |          |
-| lance_hybrid_search    | table         | NULL        | NULL    |          |
-| lance_vector_search    | table         | NULL        | NULL    |          |
+|        function_name        | function_type | description | comment | examples |
+|-----------------------------|---------------|-------------|---------|----------|
+| __lance_exec                | table         | NULL        | NULL    |          |
+| __lance_namespace_scan      | table         | NULL        | NULL    |          |
+| __lance_scan                | table         | NULL        | NULL    |          |
+| lance_cleanup_old_versions  | table         | NULL        | NULL    |          |
+| lance_column_metadata       | table         | NULL        | NULL    |          |
+| lance_compact_files         | table         | NULL        | NULL    |          |
+| lance_config                | table         | NULL        | NULL    |          |
+| lance_create_scalar_index   | table         | NULL        | NULL    |          |
+| lance_fts                   | table         | NULL        | NULL    |          |
+| lance_hybrid_search         | table         | NULL        | NULL    |          |
+| lance_indices               | table         | NULL        | NULL    |          |
+| lance_schema_metadata       | table         | NULL        | NULL    |          |
+| lance_set_column_metadata   | table         | NULL        | NULL    |          |
+| lance_set_config            | table         | NULL        | NULL    |          |
+| lance_set_schema_metadata   | table         | NULL        | NULL    |          |
+| lance_set_table_metadata    | table         | NULL        | NULL    |          |
+| lance_table_metadata        | table         | NULL        | NULL    |          |
+| lance_unset_column_metadata | table         | NULL        | NULL    |          |
+| lance_unset_config          | table         | NULL        | NULL    |          |
+| lance_unset_schema_metadata | table         | NULL        | NULL    |          |
+| lance_unset_table_metadata  | table         | NULL        | NULL    |          |
+| lance_vector_search         | table         | NULL        | NULL    |          |
 
 

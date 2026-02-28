@@ -8,7 +8,7 @@ excerpt: |
 extension:
   name: sitting_duck
   description: Parse and analyze source code ASTs from 25+ programming languages with tree-sitter grammars and pattern matching
-  version: 1.3.2
+  version: 1.3.4
   language: C++
   build: cmake
   license: MIT
@@ -16,8 +16,8 @@ extension:
     - teaguesterling
 repo:
   github: teaguesterling/sitting_duck
-  ref: 95f0e1243fce165dfcf3ae3dc9eda4d47afb1b98
-  ref_next: 95f0e1243fce165dfcf3ae3dc9eda4d47afb1b98
+  ref: 2e104b6f055edf78cf6fe0a42cc4cd5ea84d77cd
+  ref_next: 2e104b6f055edf78cf6fe0a42cc4cd5ea84d77cd
 docs:
   hello_world: |
     -- Parse Python code and find function definitions
@@ -137,8 +137,8 @@ docs:
 
 extension_star_count: 10
 extension_star_count_pretty: 10
-extension_download_count: 410
-extension_download_count_pretty: 410
+extension_download_count: 406
+extension_download_count_pretty: 406
 image: '/images/community_extensions/social_preview/preview_community_extension_sitting_duck.png'
 layout: community_extension_doc
 ---
@@ -178,6 +178,7 @@ LOAD {{ page.extension.name }};
 | ast_function_scope        | table_macro   | NULL        | NULL    |          |
 | ast_functions_containing  | table_macro   | NULL        | NULL    |          |
 | ast_get_source            | macro         | NULL        | NULL    |          |
+| ast_get_source_line       | macro         | NULL        | NULL    |          |
 | ast_get_source_numbered   | macro         | NULL        | NULL    |          |
 | ast_in_range              | table_macro   | NULL        | NULL    |          |
 | ast_match                 | table_macro   | NULL        | NULL    |          |
@@ -191,8 +192,6 @@ LOAD {{ page.extension.name }};
 | clean_pattern             | macro         | NULL        | NULL    |          |
 | extract_wildcard_rules    | macro         | NULL        | NULL    |          |
 | get_kind                  | scalar        | NULL        | NULL    |          |
-| get_line                  | macro         | NULL        | NULL    |          |
-| get_lines_text            | macro         | NULL        | NULL    |          |
 | get_searchable_types      | scalar        | NULL        | NULL    |          |
 | get_super_kind            | scalar        | NULL        | NULL    |          |
 | get_variadic_names        | macro         | NULL        | NULL    |          |
@@ -250,9 +249,6 @@ LOAD {{ page.extension.name }};
 | read_ast_flat             | table         | NULL        | NULL    |          |
 | read_ast_hierarchical     | table         | NULL        | NULL    |          |
 | read_ast_hierarchical_new | table         | NULL        | NULL    |          |
-| read_lines                | table_macro   | NULL        | NULL    |          |
-| read_lines_context        | table_macro   | NULL        | NULL    |          |
-| read_lines_range          | table_macro   | NULL        | NULL    |          |
 | semantic_type_base        | macro         | NULL        | NULL    |          |
 | semantic_type_code        | scalar        | NULL        | NULL    |          |
 | semantic_type_to_string   | scalar        | NULL        | NULL    |          |

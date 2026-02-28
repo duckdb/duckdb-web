@@ -8,7 +8,7 @@ excerpt: |
 extension:
   name: netquack
   description: DuckDB extension for parsing, extracting, and analyzing domains, URIs, and paths with ease.
-  version: 1.10.0
+  version: 1.11.0
   language: C++
   build: cmake
   license: MIT
@@ -17,8 +17,8 @@ extension:
 
 repo:
   github: hatamiarash7/duckdb-netquack
-  ref: eec48debea91ecc38f1981bf8aeea0217c3e7dfd
-  ref_next: eec48debea91ecc38f1981bf8aeea0217c3e7dfd
+  ref: 912f04bebd6057b093c3cae57a3bf5cbefb98980
+  ref_next: 912f04bebd6057b093c3cae57a3bf5cbefb98980
 
 docs:
   extended_description: |
@@ -30,8 +30,8 @@ docs:
 
 extension_star_count: 33
 extension_star_count_pretty: 33
-extension_download_count: 3222
-extension_download_count_pretty: 3.2k
+extension_download_count: 2984
+extension_download_count_pretty: 3.0k
 image: '/images/community_extensions/social_preview/preview_community_extension_netquack.png'
 layout: community_extension_doc
 ---
@@ -67,6 +67,8 @@ LOAD {{ page.extension.name }};
 | extract_schema           | scalar        | Extracting the schema from a URL                                                                                                 | NULL    | [SELECT extract_schema('mailto:someone@example.com') as schema;]                   |
 | extract_subdomain        | scalar        | Extracting the subdomain from a URL                                                                                              | NULL    | [SELECT extract_subdomain('test.example.com.ac') as dns_record;]                   |
 | extract_tld              | scalar        | Extracting the top-level domain from a URL                                                                                       | NULL    | [SELECT extract_tld('a.example.com') as tld;]                                      |
+| extract_port             | scalar        | Extracting the port from a URL                                                                                                   | NULL    | [SELECT extract_port('https://example.com:8080') as port;]                         |
+| extract_extension        | scalar        | Extracting the file extension from a URL                                                                                         | NULL    | [SELECT extract_extension('https://example.com/path/file.txt') as extension;]      |
 | is_valid_ip              | scalar        | Validates IPv4 and IPv6 addresses                                                                                                | NULL    | [SELECT is_valid_ip('192.168.1.1');]                                               |
 | is_private_ip            | scalar        | Checks if an IP belongs to a private/reserved range (15 IPv4 + 7 IPv6 ranges)                                                    | NULL    | [SELECT is_private_ip('10.0.0.1');]                                                |
 | ip_to_int                | scalar        | Converts IPv4 to 32-bit unsigned integer                                                                                         | NULL    | [SELECT ip_to_int('192.168.1.1');]                                                 |
@@ -81,9 +83,8 @@ LOAD {{ page.extension.name }};
 | base64_decode            | scalar        | Decodes a Base64-encoded string back to its original form                                                                        | NULL    | [SELECT base64_decode('SGVsbG8gV29ybGQ=') AS decoded;]                             |
 | is_valid_url             | scalar        | Checks whether a string is a well-formed URL with scheme, authority, and host                                                    | NULL    | [SELECT is_valid_url('https://example.com');]                                      |
 | is_valid_domain          | scalar        | Validates a domain name against RFC 1035 / RFC 1123 rules                                                                        | NULL    | [SELECT is_valid_domain('example.com');]                                           |
+| extract_path_segments    | table         | Splits a URL path into individual segment rows with index and value                                                              | NULL    | [SELECT * FROM extract_path_segments('https://example.com/a/b/c');]                |
 | update_tranco            | scalar        | Update tranco data                                                                                                               | NULL    | [SELECT update_tranco(true);]                                                      |
-| extract_port             | scalar        | NULL                                                                                                                             | NULL    | NULL                                                                               |
-| extract_extension        | scalar        | NULL                                                                                                                             | NULL    | NULL                                                                               |
 | get_tranco_rank_category | scalar        | NULL                                                                                                                             | NULL    | NULL                                                                               |
 | netquack_version         | table         | NULL                                                                                                                             | NULL    | NULL                                                                               |
 

@@ -8,7 +8,7 @@ excerpt: |
 extension:
   name: duckdb_mcp
   description: Model Context Protocol (MCP) extension for DuckDB that enables seamless integration between SQL databases and MCP servers. Provides both client capabilities for accessing remote MCP resources via SQL and server capabilities for exposing database content as MCP resources.
-  version: 1.5.1
+  version: 1.5.2
   language: C++
   build: cmake
   license: MIT
@@ -17,8 +17,8 @@ extension:
     - teaguesterling
 repo:
   github: teaguesterling/duckdb_mcp
-  ref: a40e34191cc7172c257eef7bae34288cf0be90da
-  ref_next: a40e34191cc7172c257eef7bae34288cf0be90da
+  ref: f77fb3476a470c4ab08bdda8c89f6a9cf8f12a50
+  ref_next: f77fb3476a470c4ab08bdda8c89f6a9cf8f12a50
 
 docs:
   hello_world: |
@@ -80,8 +80,8 @@ docs:
 
 extension_star_count: 35
 extension_star_count_pretty: 35
-extension_download_count: 468
-extension_download_count_pretty: 468
+extension_download_count: 488
+extension_download_count_pretty: 488
 image: '/images/community_extensions/social_preview/preview_community_extension_duckdb_mcp.png'
 layout: community_extension_doc
 ---
@@ -110,6 +110,8 @@ LOAD {{ page.extension.name }};
 |        function_name         | function_type | description | comment | examples |
 |------------------------------|---------------|-------------|---------|----------|
 | mcp_call_tool                | scalar        | NULL        | NULL    |          |
+| mcp_config_begin             | pragma        | NULL        | NULL    |          |
+| mcp_config_end               | pragma        | NULL        | NULL    |          |
 | mcp_get_diagnostics          | scalar        | NULL        | NULL    |          |
 | mcp_get_prompt               | scalar        | NULL        | NULL    |          |
 | mcp_get_resource             | scalar        | NULL        | NULL    |          |
@@ -117,17 +119,24 @@ LOAD {{ page.extension.name }};
 | mcp_list_prompts             | scalar        | NULL        | NULL    |          |
 | mcp_list_resources           | scalar        | NULL        | NULL    |          |
 | mcp_list_tools               | scalar        | NULL        | NULL    |          |
+| mcp_publish_query            | pragma        | NULL        | NULL    |          |
 | mcp_publish_query            | scalar        | NULL        | NULL    |          |
+| mcp_publish_resource         | pragma        | NULL        | NULL    |          |
 | mcp_publish_resource         | scalar        | NULL        | NULL    |          |
+| mcp_publish_table            | pragma        | NULL        | NULL    |          |
 | mcp_publish_table            | scalar        | NULL        | NULL    |          |
+| mcp_publish_tool             | pragma        | NULL        | NULL    |          |
 | mcp_publish_tool             | scalar        | NULL        | NULL    |          |
 | mcp_reconnect_server         | scalar        | NULL        | NULL    |          |
+| mcp_register_prompt_template | pragma        | NULL        | NULL    |          |
 | mcp_register_prompt_template | scalar        | NULL        | NULL    |          |
 | mcp_render_prompt_template   | scalar        | NULL        | NULL    |          |
 | mcp_server_health            | scalar        | NULL        | NULL    |          |
 | mcp_server_send_request      | scalar        | NULL        | NULL    |          |
+| mcp_server_start             | pragma        | NULL        | NULL    |          |
 | mcp_server_start             | scalar        | NULL        | NULL    |          |
 | mcp_server_status            | scalar        | NULL        | NULL    |          |
+| mcp_server_stop              | pragma        | NULL        | NULL    |          |
 | mcp_server_stop              | scalar        | NULL        | NULL    |          |
 | mcp_server_test              | scalar        | NULL        | NULL    |          |
 

@@ -8,7 +8,7 @@ excerpt: |
 extension:
   name: flock
   description: LLM & RAG extension to combine analytics and semantic analysis
-  version: 0.5.0
+  version: 0.6.0
   language: SQL & C++
   build: cmake
   license: MIT
@@ -20,7 +20,7 @@ extension:
 
 repo:
   github: dais-polymtl/flock
-  ref: 7f1c36abe481b97c9e2c6e7303f36005c8d242fa
+  ref: 172a46e463c6c9dbf2aae5cdce955806eb717f26
 
 docs:
   hello_world: |
@@ -62,10 +62,10 @@ docs:
 
     > *Note:* Flock is part of ongoing research by the [Data & AI Systems (DAIS) Laboratory @ Polytechnique Montréal](https://dais-polymtl.github.io/). It is under active development, and some features may evolve. Feedback and contributions are welcome!
 
-extension_star_count: 294
-extension_star_count_pretty: 294
-extension_download_count: 436
-extension_download_count_pretty: 436
+extension_star_count: 295
+extension_star_count_pretty: 295
+extension_download_count: 422
+extension_download_count_pretty: 422
 image: '/images/community_extensions/social_preview/preview_community_extension_flock.png'
 layout: community_extension_doc
 ---
@@ -91,19 +91,22 @@ LOAD {{ page.extension.name }};
 
 <div class="extension_functions_table"></div>
 
-| function_name  | function_type |                              description                               |                      comment                      |                                                                    examples                                                                    |
-|----------------|---------------|------------------------------------------------------------------------|---------------------------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------|
-| llm_complete   | scalar        | Generates text completions using a specified language model            | Requires a defined prompt and model               | [SELECT llm_complete({'model_name': 'default'}, {'prompt_name': 'hello-world'});]                                                              |
-| llm_filter     | scalar        | Filters data based on language model evaluations                       |  returning boolean values                         | [SELECT * FROM data WHERE llm_filter({'model_name': 'default'}, {'prompt_name': 'is_relevant', 'context_columns': [{'data': content}]});]      |
-| llm_embedding  | scalar        | Generates embeddings for input text                                    | Useful for semantic similarity tasks              | [SELECT llm_embedding({'model_name': 'default'}, {'context_columns': [{'data': 'Sample text'}]});]                                             |
-| llm_reduce     | aggregate     | Aggregates multiple inputs into a single output using a language model | Summarizes or combines multiple rows              | [SELECT llm_reduce({'model_name': 'default'}, {'prompt_name': 'summarize', 'context_columns': [{'data': content}]}) FROM documents;]           |
-| llm_rerank     | aggregate     | Reorders query results based on relevance scores from a language model | Enhances result relevance in search applications  | [SELECT llm_rerank({'model_name': 'default'}, {'prompt_name': 'rank_relevance', 'context_columns': [{'data': content}]}) FROM search_results;] |
-| llm_first      | aggregate     | Selects the top-ranked result after reranking                          | Retrieves the most relevant item                  | [SELECT llm_first({'model_name': 'default'}, {'prompt_name': 'rank_relevance', 'context_columns': [{'data': content}]}) FROM search_results;]  |
-| llm_last       | aggregate     | Selects the bottom-ranked result after reranking                       | Retrieves the least relevant item                 | [SELECT llm_last({'model_name': 'default'}, {'prompt_name': 'rank_relevance', 'context_columns': [{'data': content}]}) FROM search_results;]   |
-| fusion_rrf     | scalar        | Implements Reciprocal Rank Fusion (RRF) to combine rankings            | Combines rankings from multiple scoring systems   | [SELECT fusion_rrf(score1, score2) FROM combined_scores;]                                                                                      |
-| fusion_combsum | scalar        | Sums normalized scores from different scoring systems                  | Useful for aggregating scores from various models | [SELECT fusion_combsum(score1, score2) FROM combined_scores;]                                                                                  |
-| fusion_combmnz | scalar        | Sums normalized scores and multiplies by the hit count                 | Enhances the impact of frequently occurring items | [SELECT fusion_combmnz(score1, score2) FROM combined_scores;]                                                                                  |
-| fusion_combmed | scalar        | Computes the median of normalized scores                               | Reduces the effect of outliers in combined scores | [SELECT fusion_combmed(score1, score2) FROM combined_scores;]                                                                                  |
-| fusion_combanz | scalar        | Calculates the average of normalized scores                            | Provides a balanced aggregation of scores         | [SELECT fusion_combanz(score1, score2) FROM combined_scores;]                                                                                  |
+|      function_name      | function_type |                                description                                |                                 comment                                 |                                                                                       examples                                                                                       |
+|-------------------------|---------------|---------------------------------------------------------------------------|-------------------------------------------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| llm_complete            | scalar        | Generates text completions using a specified language model               | Requires model config and prompt; supports text and image inputs        | [SELECT llm_complete({'model_name': 'gpt-4o'}, {'prompt': 'Explain the purpose of Flock.'});]                                                                                        |
+| llm_filter              | scalar        | Filters data based on language model evaluations returning boolean values | Commonly used in WHERE clause; supports text and image inputs           | [SELECT * FROM data WHERE llm_filter({'model_name': 'gpt-4o'}, {'prompt': 'Is this eco-friendly?', 'context_columns': [{'data': content}]});]                                        |
+| llm_embedding           | scalar        | Generates embeddings for input text                                       | Useful for semantic similarity; text only (no image support)            | [SELECT llm_embedding({'model_name': 'text-embedding-3-small'}, {'context_columns': [{'data': product_name}]}) FROM products;]                                                       |
+| llm_reduce              | aggregate     | Aggregates multiple inputs into a single output using a language model    | Use with GROUP BY; summarizes or combines multiple rows                 | [SELECT category, llm_reduce({'model_name': 'gpt-4o'}, {'prompt': 'Summarize the following', 'context_columns': [{'data': content}]}) FROM documents GROUP BY category;]             |
+| llm_rerank              | aggregate     | Reorders query results based on relevance scores from a language model    | Uses sliding window for long lists; returns JSON array of reranked rows | [SELECT llm_rerank({'model_name': 'gpt-4o'}, {'prompt': 'AI and machine learning', 'context_columns': [{'data': document_title}, {'data': document_content}]}) FROM search_results;] |
+| llm_first               | aggregate     | Selects the top-ranked result after reranking by relevance                | Returns single JSON object; use with or without GROUP BY                | [SELECT llm_first({'model_name': 'gpt-4o'}, {'prompt': 'high-performance computing', 'context_columns': [{'data': product_name}, {'data': product_description}]}) FROM products;]    |
+| llm_last                | aggregate     | Selects the bottom-ranked result after reranking by relevance             | Returns single JSON object; use with or without GROUP BY                | [SELECT llm_last({'model_name': 'gpt-4o'}, {'prompt': 'premium audio quality', 'context_columns': [{'data': product_name}, {'data': product_description}]}) FROM products;]          |
+| fusion_rrf              | scalar        | Implements Reciprocal Rank Fusion (RRF) to combine rankings               | Input: document ranks (1 = best); use DENSE_RANK() for rank-based input | [SELECT fusion_rrf(bm25_rank, embedding_rank) AS combined_score FROM ranked_results;]                                                                                                |
+| fusion_combsum          | scalar        | Sums normalized scores from different scoring systems                     | Input: normalized scores (0-1); NULL/NaN/0 treated as 0                 | [SELECT fusion_combsum(bm25_normalized, embedding_normalized) FROM combined_scores;]                                                                                                 |
+| fusion_combmnz          | scalar        | Sums normalized scores multiplied by hit count                            | Enhances impact of frequently occurring items across scoring systems    | [SELECT fusion_combmnz(score1, score2) FROM combined_scores;]                                                                                                                        |
+| fusion_combmed          | scalar        | Computes the median of normalized scores                                  | Reduces effect of outliers in combined scores                           | [SELECT fusion_combmed(score1, score2) FROM combined_scores;]                                                                                                                        |
+| fusion_combanz          | scalar        | Calculates the average of normalized scores                               | Provides balanced aggregation of scores; NULL/NaN/0 treated as 0        | [SELECT fusion_combanz(score1, score2) FROM combined_scores;]                                                                                                                        |
+| flock_get_metrics       | scalar        | Returns usage metrics for LLM function calls in the current session       | Returns JSON with api_calls tokens and timing per function              | [SELECT flock_get_metrics();]                                                                                                                                                        |
+| flock_get_debug_metrics | scalar        | Returns detailed debug metrics including registration order               | Useful for debugging multi-function queries                             | [SELECT flock_get_debug_metrics();]                                                                                                                                                  |
+| flock_reset_metrics     | scalar        | Resets all metrics for the current session                                | Returns confirmation message                                            | [SELECT flock_reset_metrics();]                                                                                                                                                      |
 
 

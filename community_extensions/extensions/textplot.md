@@ -23,10 +23,10 @@ repo:
   ref: d3b90faa3372d4204915343546fa0556601bf243
   ref_next: d8bccda8f7ed5fa162515056866292b95864d747
 
-extension_star_count: 18
-extension_star_count_pretty: 18
-extension_download_count: 525
-extension_download_count_pretty: 525
+extension_star_count: 19
+extension_star_count_pretty: 19
+extension_download_count: 453
+extension_download_count_pretty: 453
 image: '/images/community_extensions/social_preview/preview_community_extension_textplot.png'
 layout: community_extension_doc
 ---
