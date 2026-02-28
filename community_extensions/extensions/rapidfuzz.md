@@ -20,12 +20,12 @@ extension:
 repo:
   github: query-farm/rapidfuzz
   ref: eb2fe18d3f60205722521ff2ddd8eb3c932c7888
-  ref_next: 97e57f3fb87b551533e31b912bfbca27ddb1dd65
+  ref_next: 62a353eb3bc4919348356f02d0c8bfb353aa9e56
 
 extension_star_count: 13
 extension_star_count_pretty: 13
-extension_download_count: 1173
-extension_download_count_pretty: 1.2k
+extension_download_count: 1077
+extension_download_count_pretty: 1.1k
 image: '/images/community_extensions/social_preview/preview_community_extension_rapidfuzz.png'
 layout: community_extension_doc
 ---

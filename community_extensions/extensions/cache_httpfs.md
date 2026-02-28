@@ -8,7 +8,7 @@ excerpt: |
 extension:
   name: cache_httpfs
   description: Read cached filesystem for httpfs
-  version: 0.12.5
+  version: 0.13.0
   language: C++
   build: cmake
   license: MIT
@@ -19,7 +19,8 @@ extension:
 
 repo:
   github: dentiny/duck-read-cache-fs
-  ref: 3aae0cd0afc5da029508f3f0a77dc07c4de9a408
+  ref: d3618a6fd8654db431f0f357cd08c89035411ad6
+  ref_next: b431844ca1b7f03b2207e28236bd7afb4cc78f15
 
 docs:
   hello_world: |
@@ -38,8 +39,8 @@ docs:
 
 extension_star_count: 131
 extension_star_count_pretty: 131
-extension_download_count: 20533
-extension_download_count_pretty: 20.5k
+extension_download_count: 36656
+extension_download_count_pretty: 36.7k
 image: '/images/community_extensions/social_preview/preview_community_extension_cache_httpfs.png'
 layout: community_extension_doc
 ---
@@ -70,6 +71,7 @@ LOAD {{ page.extension.name }};
 | cache_httpfs_add_exclusion_regex          | scalar        | NULL        | NULL    |          |
 | cache_httpfs_cache_access_info_query      | table         | NULL        | NULL    |          |
 | cache_httpfs_cache_status_query           | table         | NULL        | NULL    |          |
+| cache_httpfs_cleanup_dead_temp            | scalar        | NULL        | NULL    |          |
 | cache_httpfs_clear_cache                  | scalar        | NULL        | NULL    |          |
 | cache_httpfs_clear_cache_for_file         | scalar        | NULL        | NULL    |          |
 | cache_httpfs_clear_profile                | scalar        | NULL        | NULL    |          |

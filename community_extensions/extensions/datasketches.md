@@ -23,10 +23,10 @@ repo:
   ref: d7ff45ac116b81f5958d40783470557f27a97911
   ref_next: 4f1e73f77f077deed835dff3cf547b809e94d36a
 
-extension_star_count: 40
-extension_star_count_pretty: 40
-extension_download_count: 770
-extension_download_count_pretty: 770
+extension_star_count: 41
+extension_star_count_pretty: 41
+extension_download_count: 1007
+extension_download_count_pretty: 1.0k
 image: '/images/community_extensions/social_preview/preview_community_extension_datasketches.png'
 layout: community_extension_doc
 ---

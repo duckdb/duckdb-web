@@ -221,8 +221,8 @@ docs:
 
 extension_star_count: 1
 extension_star_count_pretty: 1
-extension_download_count: 315
-extension_download_count_pretty: 315
+extension_download_count: 333
+extension_download_count_pretty: 333
 image: '/images/community_extensions/social_preview/preview_community_extension_fire_duck_ext.png'
 layout: community_extension_doc
 ---

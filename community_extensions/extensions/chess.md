@@ -66,8 +66,8 @@ docs:
 
 extension_star_count: 2
 extension_star_count_pretty: 2
-extension_download_count: 343
-extension_download_count_pretty: 343
+extension_download_count: 346
+extension_download_count_pretty: 346
 image: '/images/community_extensions/social_preview/preview_community_extension_chess.png'
 layout: community_extension_doc
 ---
