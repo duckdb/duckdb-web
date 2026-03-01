@@ -42,8 +42,8 @@ docs:
 
 extension_star_count: 6
 extension_star_count_pretty: 6
-extension_download_count: 416
-extension_download_count_pretty: 416
+extension_download_count: 390
+extension_download_count_pretty: 390
 image: '/images/community_extensions/social_preview/preview_community_extension_psyduck.png'
 layout: community_extension_doc
 ---
