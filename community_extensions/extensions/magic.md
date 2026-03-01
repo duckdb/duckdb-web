@@ -19,6 +19,7 @@ extension:
 repo:
   github: carlopi/duckdb_magic
   ref: 6a214b48b6dc760e398c73131e00ee62f2c5f1bc
+  ref_next: 8028df97ce0ddd9fe6abddd566f0a44a05534ad0
 
 docs:
   hello_world: |
@@ -40,8 +41,8 @@ docs:
 
 extension_star_count: 7
 extension_star_count_pretty: 7
-extension_download_count: 492
-extension_download_count_pretty: 492
+extension_download_count: 484
+extension_download_count_pretty: 484
 image: '/images/community_extensions/social_preview/preview_community_extension_magic.png'
 layout: community_extension_doc
 ---

@@ -8,17 +8,20 @@ excerpt: |
 extension:
   name: miint
   description: Bioinformatics extension for microbiome research - read/write FASTQ, SAM/BAM, BIOM, GFF, Newick trees, query NCBI, and more.
-  version: '2026020501'
+  version: '1.0.0-rc.1'
   language: C++
   build: cmake
   license: BSD-3-Clause
   excluded_platforms: "windows_amd64;windows_amd64_mingw;windows_amd64_rtools;wasm_mvp;wasm_eh;wasm_threads"
   maintainers:
     - wasade
+  requires:
+    duckdb: "1.4.4"
+  requires_toolchains: rust
 
 repo:
   github: the-miint/duckdb-miint
-  ref: e8d6f931ae151b90611a42e362bd1ca3b3da8dfe
+  ref: 05cf7426472b485dcc048344bae2eafc3cf5b798
 
 docs:
   hello_world: |
@@ -73,8 +76,8 @@ docs:
 
 extension_star_count: 2
 extension_star_count_pretty: 2
-extension_download_count: 322
-extension_download_count_pretty: 322
+extension_download_count: 312
+extension_download_count_pretty: 312
 image: '/images/community_extensions/social_preview/preview_community_extension_miint.png'
 layout: community_extension_doc
 ---
@@ -137,23 +140,33 @@ LOAD {{ page.extension.name }};
 | compress_intervals              | aggregate     | Aggregate function that merges overlapping genomic intervals into a minimal set of non-overlapping intervals.                                               | NULL                               | [SELECT reference, compress_intervals(position, stop_position) FROM read_alignments('a.bam') GROUP BY reference;] |
 | woltka_ogu_per_sample           | table_macro   | Compute Woltka OGU counts over alignment data for multiple samples. Accounts for multi-mapped reads.                                                        | Macro - do not quote parameters    | [SELECT * FROM woltka_ogu_per_sample(alignments, sample_id, read_id);]                                            |
 | woltka_ogu                      | table_macro   | Compute Woltka OGU counts over alignment data for a single sample. Accounts for multi-mapped reads.                                                         | Macro - do not quote parameters    | [SELECT * FROM woltka_ogu(alignments, read_id);]                                                                  |
+| rype_extract_strand_minimizers  | table         | NULL                                                                                                                                                        | NULL                               | NULL                                                                                                              |
 | align_minimap2_sharded          | table         | NULL                                                                                                                                                        | NULL                               | NULL                                                                                                              |
+| rype_classify                   | table         | NULL                                                                                                                                                        | NULL                               | NULL                                                                                                              |
+| align_pairwise_cigar            | scalar        | NULL                                                                                                                                                        | NULL                               | NULL                                                                                                              |
 | is_unmapped                     | scalar        | NULL                                                                                                                                                        | NULL                               | NULL                                                                                                              |
+| align_pairwise_full             | scalar        | NULL                                                                                                                                                        | NULL                               | NULL                                                                                                              |
 | bowtie2_available               | scalar        | NULL                                                                                                                                                        | NULL                               | NULL                                                                                                              |
 | is_reverse                      | scalar        | NULL                                                                                                                                                        | NULL                               | NULL                                                                                                              |
 | is_dup                          | scalar        | NULL                                                                                                                                                        | NULL                               | NULL                                                                                                              |
+| miint_versions                  | table         | NULL                                                                                                                                                        | NULL                               | NULL                                                                                                              |
 | parse_gff_attributes            | macro         | NULL                                                                                                                                                        | NULL                               | NULL                                                                                                              |
+| rype_extract_minimizer_set      | table         | NULL                                                                                                                                                        | NULL                               | NULL                                                                                                              |
 | align_bowtie2_sharded           | table         | NULL                                                                                                                                                        | NULL                               | NULL                                                                                                              |
 | is_qcfail                       | scalar        | NULL                                                                                                                                                        | NULL                               | NULL                                                                                                              |
 | is_read1                        | scalar        | NULL                                                                                                                                                        | NULL                               | NULL                                                                                                              |
 | is_read2                        | scalar        | NULL                                                                                                                                                        | NULL                               | NULL                                                                                                              |
+| miint_version                   | scalar        | NULL                                                                                                                                                        | NULL                               | NULL                                                                                                              |
 | read_sequences_sff              | table         | NULL                                                                                                                                                        | NULL                               | NULL                                                                                                              |
 | is_secondary                    | scalar        | NULL                                                                                                                                                        | NULL                               | NULL                                                                                                              |
 | read_sequences_sam              | table         | NULL                                                                                                                                                        | NULL                               | NULL                                                                                                              |
+| align_pairwise_score            | scalar        | NULL                                                                                                                                                        | NULL                               | NULL                                                                                                              |
+| genome_coverage                 | table_macro   | NULL                                                                                                                                                        | NULL                               | NULL                                                                                                              |
 | is_mreverse                     | scalar        | NULL                                                                                                                                                        | NULL                               | NULL                                                                                                              |
 | is_munmap                       | scalar        | NULL                                                                                                                                                        | NULL                               | NULL                                                                                                              |
 | read_sam                        | table         | NULL                                                                                                                                                        | NULL                               | NULL                                                                                                              |
 | is_supplementary                | scalar        | NULL                                                                                                                                                        | NULL                               | NULL                                                                                                              |
+| rype_log_ratio                  | table         | NULL                                                                                                                                                        | NULL                               | NULL                                                                                                              |
 | is_paired                       | scalar        | NULL                                                                                                                                                        | NULL                               | NULL                                                                                                              |
 | is_proper_pair                  | scalar        | NULL                                                                                                                                                        | NULL                               | NULL                                                                                                              |
 
