@@ -87,10 +87,10 @@ docs:
     );
     ```
 
-extension_star_count: 1
-extension_star_count_pretty: 1
-extension_download_count: 389
-extension_download_count_pretty: 389
+extension_star_count: 2
+extension_star_count_pretty: 2
+extension_download_count: 377
+extension_download_count_pretty: 377
 image: '/images/community_extensions/social_preview/preview_community_extension_cassandra.png'
 layout: community_extension_doc
 ---

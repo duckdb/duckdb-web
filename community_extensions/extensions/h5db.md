@@ -8,7 +8,7 @@ excerpt: |
 extension:
   name: h5db
   description: For reading HDF5 datasets and attributes.
-  version: 0.2.0
+  version: 0.3.0
   language: C++
   build: cmake
   license: MIT
@@ -18,7 +18,7 @@ extension:
     - jokasimr
 repo:
   github: jokasimr/h5db
-  ref: v0.2.0
+  ref: v0.3.0
 
 docs:
   hello_world: |
@@ -36,12 +36,12 @@ docs:
     - Index column: Optionally adds an `index` column that supports pushing down constant "range" like filters (`>`, `<=`, `BETWEEN`, etc), to allow efficient selective reads from datasets.
     - Can read datasets that are larger than memory.
 
-    For full documentation see: https://github.com/jokasimr/h5db.
+    For full documentation see: [https://github.com/jokasimr/h5db](https://github.com/jokasimr/h5db).
 
 extension_star_count: 1
 extension_star_count_pretty: 1
-extension_download_count: 401
-extension_download_count_pretty: 401
+extension_download_count: 373
+extension_download_count_pretty: 373
 image: '/images/community_extensions/social_preview/preview_community_extension_h5db.png'
 layout: community_extension_doc
 ---
@@ -76,5 +76,13 @@ LOAD {{ page.extension.name }};
 | h5_rse        | scalar        | NULL        | NULL    |          |
 | h5_tree       | table         | NULL        | NULL    |          |
 | h5db_version  | scalar        | NULL        | NULL    |          |
+
+### Added Settings
+
+<div class="extension_settings_table"></div>
+
+|       name        |                    description                     | input_type | scope  | aliases |
+|-------------------|----------------------------------------------------|------------|--------|---------|
+| h5db_swmr_default | Default to SWMR read mode for h5db table functions | BOOLEAN    | GLOBAL | []      |
 
 

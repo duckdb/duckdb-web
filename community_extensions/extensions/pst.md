@@ -8,7 +8,7 @@ excerpt: |
 extension:
   name: pst
   description: Read Microsoft PST files with rich schemas for common MAPI types (emails, contacts, appointments, tasks)
-  version: 0.1.0
+  version: 0.1.1
   language: C++
   build: cmake
   excluded_platforms: "windows_amd64;windows_amd64_mingw"
@@ -18,7 +18,7 @@ extension:
 
 repo:
   github: intellekthq/duckdb-pst
-  ref: 372875c01072e18c15f446667d4a4533f4fefc5e
+  ref: v0.1.1
 
 docs:
   hello_world: |
@@ -79,8 +79,8 @@ docs:
 
 extension_star_count: 10
 extension_star_count_pretty: 10
-extension_download_count: 376
-extension_download_count_pretty: 376
+extension_download_count: 365
+extension_download_count_pretty: 365
 image: '/images/community_extensions/social_preview/preview_community_extension_pst.png'
 layout: community_extension_doc
 ---
