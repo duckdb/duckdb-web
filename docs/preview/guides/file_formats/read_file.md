@@ -25,6 +25,8 @@ FROM read_text('test/sql/table_function/files/*.txt');
 
 DuckDB first validates the file content as valid UTF-8. If `read_text` attempts to read a file with invalid UTF-8, DuckDB throws an error suggesting to use [`read_blob`](#read_blob) instead.
 
+> The maximum allowed file size for `read_text` is 3.9 GiB.
+
 ## `read_blob`
 
 The `read_blob` table function reads from the selected source(s) to a `BLOB`:
@@ -42,6 +44,8 @@ FROM read_blob('test/sql/table_function/files/*');
 | 12   | Hello World!                                                 | test/sql/table_function/files/one.txt   |
 | 2    | 42                                                           | test/sql/table_function/files/three.txt |
 | 10   | F\xC3\xB6\xC3\xB6 B\xC3\xA4r                                 | test/sql/table_function/files/two.txt   |
+
+> The maximum allowed file size for `read_blob` is 3.9 GiB.
 
 ## Schema
 

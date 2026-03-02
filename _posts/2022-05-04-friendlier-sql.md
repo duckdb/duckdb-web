@@ -275,7 +275,7 @@ DuckDB [makes working with time easier in many ways]({% post_url 2022-01-06-time
 
 DuckDB also implements multiple SQL clauses outside of the traditional core clauses including the [`SAMPLE` clause]({% link docs/stable/sql/query_syntax/sample.md %}) for quickly selecting a random subset of your data and the [`QUALIFY` clause]({% link docs/stable/sql/query_syntax/qualify.md %}) that allows filtering of the results of window functions (much like a `HAVING` clause does for aggregates).  
 
-The [`DISTINCT ON` clause]({% link docs/stable/sql/statements/select.md %}) allows DuckDB to select unique combinations of a subset of the columns in a `SELECT` clause, while returning the first row of data for columns not checked for uniqueness.
+The [`DISTINCT ON` clause]({% link docs/stable/sql/query_syntax/select.md %}#distinct-on-clause) allows DuckDB to select unique combinations of a subset of the columns in a `SELECT` clause, while returning the first row of data for columns not checked for uniqueness.
 
 ## Ideas for the Future
 
