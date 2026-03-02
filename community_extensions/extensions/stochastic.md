@@ -23,8 +23,8 @@ repo:
   ref: 020205b1862e9ab919ad58b1a4a496058a478519
   ref_next: 82c338edb903bc543b92841943983b5e411b1444
 
-extension_star_count: 16
-extension_star_count_pretty: 16
+extension_star_count: 17
+extension_star_count_pretty: 17
 extension_download_count: 401
 extension_download_count_pretty: 401
 image: '/images/community_extensions/social_preview/preview_community_extension_stochastic.png'
