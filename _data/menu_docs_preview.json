@@ -1659,6 +1659,10 @@
               ]
             },
             {
+              "page": "User Agents",
+              "url": "user_agents"
+            },
+            {
               "page": "Securing DuckDB",
               "slug": "securing_duckdb",
               "subsubfolderitems": [
