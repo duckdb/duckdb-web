@@ -40,8 +40,8 @@ docs:
     -- Select gen1 items
     SELECT * FROM list_pokemon_items();
 
-extension_star_count: 6
-extension_star_count_pretty: 6
+extension_star_count: 7
+extension_star_count_pretty: 7
 extension_download_count: 390
 extension_download_count_pretty: 390
 image: '/images/community_extensions/social_preview/preview_community_extension_psyduck.png'
