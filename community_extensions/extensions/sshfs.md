@@ -57,8 +57,8 @@ docs:
 
     See: https://github.com/midwork-finds-jobs/duckdb-sshfs/blob/main/README.md for more examples and details.
 
-extension_star_count: 8
-extension_star_count_pretty: 8
+extension_star_count: 9
+extension_star_count_pretty: 9
 extension_download_count: 402
 extension_download_count_pretty: 402
 image: '/images/community_extensions/social_preview/preview_community_extension_sshfs.png'

@@ -49,8 +49,8 @@ docs:
 
     Maintained by the team at [Kyomi](https://kyomi.ai).
 
-extension_star_count: 1
-extension_star_count_pretty: 1
+extension_star_count: 2
+extension_star_count_pretty: 2
 extension_download_count: 304
 extension_download_count_pretty: 304
 image: '/images/community_extensions/social_preview/preview_community_extension_quackstats.png'

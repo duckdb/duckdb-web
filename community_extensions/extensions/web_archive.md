@@ -60,8 +60,8 @@ docs:
 
     For full documentation, visit the [extension repository](https://github.com/midwork-finds-jobs/duckdb-web-archive).
 
-extension_star_count: 14
-extension_star_count_pretty: 14
+extension_star_count: 15
+extension_star_count_pretty: 15
 extension_download_count: 369
 extension_download_count_pretty: 369
 image: '/images/community_extensions/social_preview/preview_community_extension_web_archive.png'
