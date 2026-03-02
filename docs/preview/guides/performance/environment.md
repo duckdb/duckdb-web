@@ -55,20 +55,24 @@ On Windows, we recommend using NTFS and avoiding FAT32.
 
 ### Network-Attached Disks
 
-**Cloud disks.** DuckDB runs well on network-backed cloud disks such as [AWS EBS](https://aws.amazon.com/ebs/) for both read-only and read-write workloads.
+Special care needs to be taken when using network-attached disks:
+
+* If you are writing to disk, it is important that the disks is reliable. As a general rule of thumb, this is true for locally attached disks, and block storage in the cloud.
+* If your workload is larger than memory and/or fast data loading is important, you need fast disks, preferrably SSD or NVMe with a fast connection.
+
+With these in mind, here are two common architectures and the related considerations when you are using DuckDB's [native database format]({% link docs/stable/internals/storage.md %}):
+
+**Clock storage in the colud.** DuckDB runs well on network-backed cloud disks such as [AWS EBS](https://aws.amazon.com/ebs/) for both read-only and read-write workloads.
 
 **Network-attached storage.**
 Network-attached storage can serve DuckDB for read-only workloads.
-However, _it is not recommended to run DuckDB in read-write mode on network-attached storage (NAS)._
+However, _it is recommended to avoid using DuckDB's native database format in read-write mode on network-attached storage (NAS)._
 These setups include [NFS](https://en.wikipedia.org/wiki/Network_File_System),
 network drives such as [SMB](https://en.wikipedia.org/wiki/Server_Message_Block) and
 [Samba](https://en.wikipedia.org/wiki/Samba_(software)).
 Based on user reports, running read-write workloads on network-attached storage can result in slow and unpredictable performance,
 as well as spurious errors caused by the underlying file system.
-
-> Warning Avoid running DuckDB in read-write mode on network-attached storage.
-
-> Bestpractice: Fast disks are important if your workload is larger than memory and/or fast data loading is important. Only use network-backed disks if they are reliable (e.g., cloud disks) and guarantee high IO.
+Instead of using DuckDB's native database format, consider using the [DuckLake lakehouse format](https://ducklake.select/).
 
 ## Operating System
 
