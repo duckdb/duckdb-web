@@ -3,17 +3,17 @@ layout: docu
 title: Telemetry
 ---
 
-## HTTP user-agent
+## HTTP User Agent
 
 Core DuckDB sets the default user agent as follows:
 
-```
+```text
 duckdb/v1.4.4(osx_arm64) cli 6ddac802ff
 ```
 
-which indicates version, architecture, client, buildref in the agent string. The user-agent string can also be modified via the `custom_user_agent` setting, see [Configuration](https://duckdb.org/docs/stable/configuration/overview).
+which indicates version, architecture, client, buildref in the agent string. The user-agent string can also be modified via the `custom_user_agent` setting, see [Configuration]({% link docs/preview/configuration/overview.md %}).
 
-In addition, some extensions set their own user agents; notable examples here include:
+In addition, some extensions set their own user agents; notable examples here include the following.
 
 ## Extensions
 
@@ -26,12 +26,12 @@ Azure uses the Azure SDK which sets its own user agents. For identity and storag
 
 ### Delta (and Unity Catalog)
 
-The Delta extension employs calls from DuckDB core, tagged as the duckdb default above, and also has calls originating from the Delta Kernel, which may look like:
+The Delta extension employs calls from DuckDB core, tagged as the DuckDB default above, and also has calls originating from the Delta Kernel, which may look like:
 
 - `object_store/0.12.5`
 
-Unity Catalog calls also use a mix of duckdb default user-agents, and the Delta style agent above.
+Unity Catalog calls also use a mix of DuckDB default user-agents, and the Delta style agent above.
 
 ### HTTPFS - HTTPS/S3
 
-Calls via HTTPFS the extension use the duckdb default strings noted above.
+Calls via HTTPFS the extension use the DuckDB default strings noted above.
