@@ -576,11 +576,11 @@ $('body.documentation #main_content_wrap a.externallink').each(function () {
 			$('.window .content.haslines').each(function(){
 				var height = $(this).find('pre').height()
 				var fontSize = $(this).find('pre').css('font-size');
-				var lineHeight = 20;
+				var lineHeight = 22;
 				var lines = Math.ceil(height / lineHeight)
 				var linenumbers = '';
 				for (i = 1; i <= lines; i++) {
-					linenumbers += i + '<br>'
+					linenumbers += '<span>' + i + '</span><br>';
 				}
 				$(this).find('.lines').html(linenumbers);
 			})

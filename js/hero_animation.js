@@ -6,7 +6,7 @@ if (canvas) {
     // --- CONFIGURATION ---
     const SNAKE_LENGTH = 400; // Gradient tail length
     const SPEED = 500; // Pixels per second
-    const SNAKE_WIDTH = 1.5;
+    const SNAKE_WIDTH = 1;
     
     const isDark = () => document.documentElement.classList.contains('darkmode');
     let COLOR = isDark() ? '#665D00' : '#EDDD0C';
