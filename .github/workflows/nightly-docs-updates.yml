@@ -1,6 +1,6 @@
 name: Nightly documentation updates
 
-on: []
+on: workflow_dispatch
 
 jobs:
   UpdateStarCountAndCopyStableToArchive:
