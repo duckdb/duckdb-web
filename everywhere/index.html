@@ -40,10 +40,10 @@ title: DuckDB Everywhere
         <a href="/everywhere/{{ item.slug | default: item.title | slugify }}/" title="{{ item.title }}" class="blocklink"></a>
         <div class="postimg custom">
           {% if item.thumb %}
-            <img src="{{ item.thumb }}" alt="{{ item.title }}" class="zoom-image">
+            <img src="{{ item.thumb }}" alt="{{ item.title }}" class="zoom-image" loading="lazy">
           {% else %}
             {% assign placeholder_number = forloop.index | modulo: 2 | plus: 1 %}
-            <img src="/images/everywhere/thumbs/placeholder-{{ placeholder_number }}.svg" alt="Placeholder" class="zoom-image">
+            <img src="/images/everywhere/thumbs/placeholder-{{ placeholder_number }}.svg" alt="Placeholder" class="zoom-image" loading="lazy">
           {% endif %}
         </div>
         <div class="postdetails">

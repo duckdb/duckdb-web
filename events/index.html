@@ -43,9 +43,9 @@ redirect_from:
 				<a href="/events/{{ event.date | date: '%Y/%m/%d' }}/{{ event.slug | default: event.title | slugify }}/" title="{{ event.title }}" class="blocklink"></a>
 				<div class="postimg custom">
 					{% if event.thumb %}
-						<img src="{{ event.thumb }}" alt="{{ event.title }}" class="zoom-image">
+						<img src="{{ event.thumb }}" alt="{{ event.title }}" class="zoom-image" loading="lazy">
 					{% else %}
-						<img src="/images/blog/thumbs/placeholder-{{ random_number }}.svg" alt="Placeholder" class="zoom-image">
+						<img src="/images/blog/thumbs/placeholder-{{ random_number }}.svg" alt="Placeholder" class="zoom-image" loading="lazy">
 					{% endif %}
 				</div>
 				<div class="postdetails">

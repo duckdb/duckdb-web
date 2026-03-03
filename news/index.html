@@ -54,9 +54,9 @@ redirect_from:
 				<a href="{{ post_link }}" title="{{ post.title }}" class="blocklink" target="{{ link_target }}"{% if link_rel != "" %} rel="{{ link_rel }}"{% endif %}></a>
 				<div class="postimg custom">
 					{% if post.thumb %}
-						<img src="{{ post.thumb }}" alt="{{ post.title }}" class="zoom-image">
+						<img src="{{ post.thumb }}" alt="{{ post.title }}" class="zoom-image" loading="lazy">
 					{% else %}
-						<img src="/images/blog/thumbs/placeholder-{{ random_number }}.svg" alt="Placeholder" class="zoom-image">
+						<img src="/images/blog/thumbs/placeholder-{{ random_number }}.svg" alt="Placeholder" class="zoom-image" loading="lazy">
 					{% endif %}
 				</div>
 				<div class="postdetails">

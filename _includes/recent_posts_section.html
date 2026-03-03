@@ -53,10 +53,10 @@
 							<a href="/library/{{ item.slug | default: item.title | slugify }}/" title="{{ item.title }}" class="blocklink"></a>
 							<div class="postimg custom">
 								{% if item.thumb %}
-									<img src="{{ item.thumb }}" alt="{{ item.title }}" class="zoom-image">
+									<img src="{{ item.thumb }}" alt="{{ item.title }}" class="zoom-image" loading="lazy">
 								{% else %}
 									{% assign placeholder_number = forloop.index | modulo: 2 | plus: 1 %}
-									<img src="/images/library/thumbs/placeholder-{{ data_source }}-{{ placeholder_number }}.svg" alt="Placeholder" class="zoom-image">
+									<img src="/images/library/thumbs/placeholder-{{ data_source }}-{{ placeholder_number }}.svg" alt="Placeholder" class="zoom-image" loading="lazy">
 								{% endif %}
 								{% if item.pill or item.episode %}
 									<div class="pill-container">
@@ -104,13 +104,13 @@
 							<a href="{{ post_link }}" class="blocklink" target="{{ link_target }}"{% if link_rel != "" %} rel="{{ link_rel }}"{% endif %}></a>
 							<div class="postimg custom">
 								{% if item.thumb %}
-									<img src="{{ item.thumb }}" alt="{{ item.title }}" class="zoom-image">
+									<img src="{{ item.thumb }}" alt="{{ item.title }}" class="zoom-image" loading="lazy">
 								{% else %}
 									{% if page.collection == "science" %}
 										{% assign placeholder_number = forloop.index | modulo: 2 | plus: 1 %}
-										<img src="/images/science/thumbs/placeholder-{{ placeholder_number }}.svg" alt="Placeholder" class="zoom-image">
+										<img src="/images/science/thumbs/placeholder-{{ placeholder_number }}.svg" alt="Placeholder" class="zoom-image" loading="lazy">
 									{% else %}
-										<img src="/images/blog/thumbs/placeholder-{{ random_number }}.svg" alt="Placeholder" class="zoom-image">
+										<img src="/images/blog/thumbs/placeholder-{{ random_number }}.svg" alt="Placeholder" class="zoom-image" loading="lazy">
 									{% endif %}
 								{% endif %}
 							</div>
