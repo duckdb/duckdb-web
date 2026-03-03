@@ -477,7 +477,13 @@ body.duckcon7 {
         white-space: pre;
         overflow-x: auto;
         padding: 15px;
+        padding-right: 0;
         margin: 0;
+
+        > code {
+            width: fit-content;
+            padding-right: 15px;
+        }
 
         &::-webkit-scrollbar {
             height: 5px;
