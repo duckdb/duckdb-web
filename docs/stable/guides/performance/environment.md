@@ -15,7 +15,7 @@ DuckDB works efficiently on both AMD64 (x86_64) and ARM64 (AArch64) CPU architec
 
 ### Memory
 
-> Bestpractice: Aim for 1-4 GB memory per thread.
+> Bestpractice Aim for 1-4 GB memory per thread.
 
 #### Minimum Required Memory
 
@@ -70,7 +70,7 @@ as well as spurious errors caused by the underlying file system.
 
 > Warning Avoid running DuckDB in read-write mode on network-attached storage.
 
-> Bestpractice: Fast disks are important if your workload is larger than memory and/or fast data loading is important. Only use network-backed disks if they are reliable (e.g., cloud disks) and guarantee high IO.
+> Bestpractice Fast disks are important if your workload is larger than memory and/or fast data loading is important. Only use network-backed disks if they are reliable (e.g., cloud disks) and guarantee high IO.
 
 ## Operating System
 
