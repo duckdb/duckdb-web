@@ -52,7 +52,11 @@ SET lambda_syntax = 'ENABLE_SINGLE_ARROW';
 SET lambda_syntax = 'DISABLE_SINGLE_ARROW';
 ```
 
-Currently, `DEFAULT` enables both syntax styles, i.e., the old single arrow syntax and the Python-style syntax. DuckDB 1.4.0 will be the last release supporting the single arrow syntax without explicitly enabling it. DuckDB 1.5.0 will disable the single arrow syntax by default. DuckDB 1.6.0 will remove the `lambda_syntax` flag and fully deprecate the single arrow syntax,
+Currently, `DEFAULT` enables both syntax styles, i.e., the old single arrow syntax and the Python-style syntax.
+We will gradually phase out the old syntax.
+DuckDB 1.5.0 will be the last release supporting the single arrow syntax without explicitly enabling it.
+Following versions will first disable the single arrow syntax by default,
+then ultimately remove the `lambda_syntax` flag and fully deprecate the single arrow syntax,
 so the old behavior will no longer be accessible.
 
 ### Serializing Strings in List with Escapes
