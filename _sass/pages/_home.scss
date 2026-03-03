@@ -243,11 +243,11 @@ body.landing{
 				text-align: right;
 				color: var(--main-text-tertiary-color, #B2B2B2);
 				pointer-events: none;
-				line-height: 20px;
+				line-height: 19.6px;
 			}
 			pre, code{
 				@include code-standard;
-				line-height: 20px;
+				line-height: 19.6px;
 			}
 			a{
 				color: inherit;
