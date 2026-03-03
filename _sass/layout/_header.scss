@@ -134,14 +134,17 @@ header .headerline {
 				.hasSub {
 					cursor: pointer;
 					
-					a::after {
-						content: "\E010";
-						font-family: "DuckDB-Symbol";
+					.chevron-down {
+						width: 16px;
+						height: 16px;
 						margin-left: 3px;
+						vertical-align: middle;
+						stroke-width: 2;
+						fill: none;
 					}
 				
 					&:hover {
-						color: $duckDByellow;
+						color: var(--menu-topmenu-text-color-hover, #6A58DA);
 						
 						&+.submenuwrap,
 						&+.submenuwrap:hover {
