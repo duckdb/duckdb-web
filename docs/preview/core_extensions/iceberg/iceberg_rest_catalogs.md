@@ -64,6 +64,7 @@ A REST Catalog with OAuth2 authorization can also be attached with just an `ATTA
 | `EXTRA_HTTP_HEADERS`          | `MAP`     | `NULL`   | Additional HTTP headers to send with REST catalog requests                                            |
 | `SUPPORT_NESTED_NAMESPACES` | `BOOLEAN` | `true`   | Option for catalogs that support nested namespaces.                                                   |
 | `SUPPORT_STAGE_CREATE`        | `BOOLEAN` | `false`  | Option for catalogs that do not support stage create.                                                 |
+| `MAX_TABLE_STALENESS`         | `INTERVAL`| `NULL`   | Option for preventing unnecessary requests to the iceberg rest catalog. You can pass human readable interval strings. `10 minutes`, `30 seconds`, `1 year` all work |
 
 
 
@@ -91,7 +92,7 @@ Since these operations are supported, the following will also work:
 ```sql
 COPY FROM DATABASE duckdb_db TO iceberg_datalake;
 -- Or
-COPY FROM DATABASE iceberg_datalake to duckdb_db;
+COPY FROM DATABASE iceberg_datalake TO duckdb_db;
 ```
 
 This functionality enables deep copies between Iceberg and DuckDB storage.
@@ -167,6 +168,18 @@ CALL set_iceberg_table_properties(
 CALL remove_iceberg_table_properties(
     iceberg_catalog.default.my_table,
     ['some.property']
+);
+```
+
+You can also create a table with table properties.
+
+```sql
+CREATE TABLE test_create_table (a int) 
+WITH (
+    'format-version'='2', -- format version will be elevated to format-version when creating a table
+    'location'='s3://path/to/data', -- location will be elevated to location when creating a table
+    'property1'='value1', 
+    'property2'='value2'
 );
 ```
 
