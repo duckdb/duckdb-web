@@ -114,6 +114,11 @@ body.installation{
 		justify-content: flex-start;
 		gap: 8px;
 		
+		a.option{
+			text-decoration: none;
+			color: inherit;
+		}
+
 		.option{
 			border-radius: 10px;
 			border: 1px solid var(--interactive-folderbox-border-color, #E6E6E6);
