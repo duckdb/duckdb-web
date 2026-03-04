@@ -20,13 +20,13 @@ extension:
   version: '2025120401'
 repo:
   github: query-farm/evalexpr_rhai
-  ref: f4493ade6aa592402b1b80a3eec002d94254b5e9
-  ref_next: 7b731c7870b6fe5ca9fd62dc57a8ec0bfe850cc2
+  andium: f4493ade6aa592402b1b80a3eec002d94254b5e9
+  ref: 7b731c7870b6fe5ca9fd62dc57a8ec0bfe850cc2
 
 extension_star_count: 24
 extension_star_count_pretty: 24
-extension_download_count: 409
-extension_download_count_pretty: 409
+extension_download_count: 397
+extension_download_count_pretty: 397
 image: '/images/community_extensions/social_preview/preview_community_extension_evalexpr_rhai.png'
 layout: community_extension_doc
 ---

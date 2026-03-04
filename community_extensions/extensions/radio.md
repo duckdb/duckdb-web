@@ -20,13 +20,13 @@ extension:
   version: '2025120401'
 repo:
   github: query-farm/radio
-  ref: 0ace6af84ec2289c23944857fd9aded06e65ec9c
-  ref_next: 84295b0ba94db47ae821f26f2232e6ce958520ea
+  andium: 0ace6af84ec2289c23944857fd9aded06e65ec9c
+  ref: 84295b0ba94db47ae821f26f2232e6ce958520ea
 
 extension_star_count: 36
 extension_star_count_pretty: 36
-extension_download_count: 372
-extension_download_count_pretty: 372
+extension_download_count: 382
+extension_download_count_pretty: 382
 image: '/images/community_extensions/social_preview/preview_community_extension_radio.png'
 layout: community_extension_doc
 ---

@@ -16,8 +16,8 @@ extension:
     - teaguesterling
 repo:
   github: teaguesterling/duckdb_read_lines
+  andium: 46612a0e56fa8153e3847249a668d211b317ffd9
   ref: 46612a0e56fa8153e3847249a668d211b317ffd9
-  ref_next: 46612a0e56fa8153e3847249a668d211b317ffd9
 docs:
   hello_world: |
     -- Read all lines from a file
@@ -84,8 +84,8 @@ docs:
 
 extension_star_count: 3
 extension_star_count_pretty: 3
-extension_download_count: 410
-extension_download_count_pretty: 410
+extension_download_count: 399
+extension_download_count_pretty: 399
 image: '/images/community_extensions/social_preview/preview_community_extension_read_lines.png'
 layout: community_extension_doc
 ---

@@ -19,8 +19,8 @@ extension:
 
 repo:
   github: dentiny/duck-read-cache-fs
-  ref: d3618a6fd8654db431f0f357cd08c89035411ad6
-  ref_next: b431844ca1b7f03b2207e28236bd7afb4cc78f15
+  andium: d3618a6fd8654db431f0f357cd08c89035411ad6
+  ref: b431844ca1b7f03b2207e28236bd7afb4cc78f15
 
 docs:
   hello_world: |
@@ -39,8 +39,8 @@ docs:
 
 extension_star_count: 131
 extension_star_count_pretty: 131
-extension_download_count: 51173
-extension_download_count_pretty: 51.2k
+extension_download_count: 68611
+extension_download_count_pretty: 68.6k
 image: '/images/community_extensions/social_preview/preview_community_extension_cache_httpfs.png'
 layout: community_extension_doc
 ---

@@ -19,8 +19,8 @@ extension:
 
 repo:
   github: midwork-finds-jobs/duckdb-sitemap
-  ref: 4c873c85c3f7c8dcab6154de51aa218f61677634
-  ref_next: 15e96dfd6e5dfb6d70a9b7cc5a2675b3969e16b3
+  andium: 4c873c85c3f7c8dcab6154de51aa218f61677634
+  ref: 15e96dfd6e5dfb6d70a9b7cc5a2675b3969e16b3
 
 docs:
   hello_world: |
@@ -125,8 +125,8 @@ docs:
 
 extension_star_count: 1
 extension_star_count_pretty: 1
-extension_download_count: 375
-extension_download_count_pretty: 375
+extension_download_count: 407
+extension_download_count_pretty: 407
 image: '/images/community_extensions/social_preview/preview_community_extension_sitemap.png'
 layout: community_extension_doc
 ---

@@ -17,8 +17,8 @@ extension:
 
 repo:
   github: midwork-finds-jobs/duckdb-web-search
-  ref: cbfe75a10fbe513d5e3ae30151be427f22cfb4e5
-  ref_next: a4e07aa99050e8453b296f2572fc09e5c59f34ec
+  andium: cbfe75a10fbe513d5e3ae30151be427f22cfb4e5
+  ref: a4e07aa99050e8453b296f2572fc09e5c59f34ec
 
 docs:
   hello_world: |
@@ -77,8 +77,8 @@ docs:
 
 extension_star_count: 0
 extension_star_count_pretty: 0
-extension_download_count: 378
-extension_download_count_pretty: 378
+extension_download_count: 354
+extension_download_count_pretty: 354
 image: '/images/community_extensions/social_preview/preview_community_extension_web_search.png'
 layout: community_extension_doc
 ---

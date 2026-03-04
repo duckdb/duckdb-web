@@ -18,8 +18,8 @@ extension:
 
 repo:
   github: dentiny/duckdb-httpfs-timeout-retry
-  ref: d4b8b9dee28a6b36fe5eea8be3dddb8470ccd613
-  ref_next: dea9c7a520b88e491540c4704477305824043452
+  andium: d4b8b9dee28a6b36fe5eea8be3dddb8470ccd613
+  ref: dea9c7a520b88e491540c4704477305824043452
 
 docs:
   hello_world: |
@@ -45,8 +45,8 @@ docs:
 
 extension_star_count: 0
 extension_star_count_pretty: 0
-extension_download_count: 315
-extension_download_count_pretty: 315
+extension_download_count: 510
+extension_download_count_pretty: 510
 image: '/images/community_extensions/social_preview/preview_community_extension_httpfs_timeout_retry.png'
 layout: community_extension_doc
 ---

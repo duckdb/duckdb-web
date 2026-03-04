@@ -85,13 +85,13 @@ extension:
   version: '2025120401'
 repo:
   github: quackscience/duckdb-extension-webmacro
-  ref: 43a4ba8fcc13219be487d0ac12d68d66ac1d8268
-  ref_next: c3e1b90b0c8c72295c5950b5ac286261f8e2c9be
+  andium: 43a4ba8fcc13219be487d0ac12d68d66ac1d8268
+  ref: c3e1b90b0c8c72295c5950b5ac286261f8e2c9be
 
 extension_star_count: 15
 extension_star_count_pretty: 15
-extension_download_count: 355
-extension_download_count_pretty: 355
+extension_download_count: 376
+extension_download_count_pretty: 376
 image: '/images/community_extensions/social_preview/preview_community_extension_webmacro.png'
 layout: community_extension_doc
 ---

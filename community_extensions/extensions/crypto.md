@@ -20,13 +20,13 @@ extension:
   version: '2025120401'
 repo:
   github: query-farm/crypto
-  ref: 9308fe3e74a56b3dd5b046533bac582532bdc7bd
-  ref_next: 2fa32bf08440d7f882c70b88d38e306973be96b7
+  andium: 9308fe3e74a56b3dd5b046533bac582532bdc7bd
+  ref: 2fa32bf08440d7f882c70b88d38e306973be96b7
 
 extension_star_count: 27
 extension_star_count_pretty: 27
-extension_download_count: 12281
-extension_download_count_pretty: 12.3k
+extension_download_count: 11974
+extension_download_count_pretty: 12.0k
 image: '/images/community_extensions/social_preview/preview_community_extension_crypto.png'
 layout: community_extension_doc
 ---
