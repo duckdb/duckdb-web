@@ -19,13 +19,13 @@ extension:
   version: '2025120401'
 repo:
   github: query-farm/rapidfuzz
-  ref: eb2fe18d3f60205722521ff2ddd8eb3c932c7888
-  ref_next: 62a353eb3bc4919348356f02d0c8bfb353aa9e56
+  andium: eb2fe18d3f60205722521ff2ddd8eb3c932c7888
+  ref: 62a353eb3bc4919348356f02d0c8bfb353aa9e56
 
 extension_star_count: 13
 extension_star_count_pretty: 13
-extension_download_count: 889
-extension_download_count_pretty: 889
+extension_download_count: 838
+extension_download_count_pretty: 838
 image: '/images/community_extensions/social_preview/preview_community_extension_rapidfuzz.png'
 layout: community_extension_doc
 ---

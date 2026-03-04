@@ -16,8 +16,8 @@ extension:
     - teaguesterling
 repo:
   github: teaguesterling/sitting_duck
+  andium: 2e104b6f055edf78cf6fe0a42cc4cd5ea84d77cd
   ref: 2e104b6f055edf78cf6fe0a42cc4cd5ea84d77cd
-  ref_next: 2e104b6f055edf78cf6fe0a42cc4cd5ea84d77cd
 docs:
   hello_world: |
     -- Parse Python code and find function definitions
@@ -137,8 +137,8 @@ docs:
 
 extension_star_count: 10
 extension_star_count_pretty: 10
-extension_download_count: 398
-extension_download_count_pretty: 398
+extension_download_count: 387
+extension_download_count_pretty: 387
 image: '/images/community_extensions/social_preview/preview_community_extension_sitting_duck.png'
 layout: community_extension_doc
 ---

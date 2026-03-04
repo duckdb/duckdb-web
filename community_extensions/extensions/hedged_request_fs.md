@@ -18,8 +18,8 @@ extension:
 
 repo:
   github: dentiny/duckdb-hedged-request
-  ref: a94e1b63e9b1e6f94c6c7debbf1d49bc28f510f7
-  ref_next: 4fd920ae714368dc79e63620c1df07f312cfb311
+  andium: a94e1b63e9b1e6f94c6c7debbf1d49bc28f510f7
+  ref: 4fd920ae714368dc79e63620c1df07f312cfb311
 
 docs:
   hello_world: |
@@ -33,8 +33,8 @@ docs:
 
 extension_star_count: 1
 extension_star_count_pretty: 1
-extension_download_count: 315
-extension_download_count_pretty: 315
+extension_download_count: 319
+extension_download_count_pretty: 319
 image: '/images/community_extensions/social_preview/preview_community_extension_hedged_request_fs.png'
 layout: community_extension_doc
 ---

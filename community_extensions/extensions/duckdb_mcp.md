@@ -17,8 +17,8 @@ extension:
     - teaguesterling
 repo:
   github: teaguesterling/duckdb_mcp
+  andium: f77fb3476a470c4ab08bdda8c89f6a9cf8f12a50
   ref: f77fb3476a470c4ab08bdda8c89f6a9cf8f12a50
-  ref_next: f77fb3476a470c4ab08bdda8c89f6a9cf8f12a50
 
 docs:
   hello_world: |
@@ -80,8 +80,8 @@ docs:
 
 extension_star_count: 35
 extension_star_count_pretty: 35
-extension_download_count: 459
-extension_download_count_pretty: 459
+extension_download_count: 474
+extension_download_count_pretty: 474
 image: '/images/community_extensions/social_preview/preview_community_extension_duckdb_mcp.png'
 layout: community_extension_doc
 ---

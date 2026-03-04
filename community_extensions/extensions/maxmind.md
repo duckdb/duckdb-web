@@ -8,7 +8,7 @@ excerpt: |
 extension:
   name: maxmind
   description: Read MaxMind databases (GeoLite, GeoIP)
-  version: 0.4.0
+  version: 0.5.0
   language: Zig
   build: cmake
   license: ISC
@@ -18,15 +18,18 @@ extension:
 
 repo:
   github: marselester/duckdb-maxmind
-  ref: 5e36b9c7ff64341ee8c10b8ef9f1683bf3a1f1e9
+  ref: 631a9271d1e7fc803ea775946083f88fdf6a1584
 
 docs:
   hello_world: |
     SELECT geolite_city('./GeoLite2-City.mmdb', '1.0.64.0', '');
   extended_description: |
     Read MaxMind databases (GeoLite, GeoIP) using table and scalar functions.
+    Use `mmdb_record()` to query any MMDB file as JSON.
 
-    Scan all IP network blocks with `read_mmdb()`:
+    Scan all IP network blocks with `read_mmdb()`.
+    Use the optional `network` parameter to limit the scan to a subnet,
+    e.g., `read_mmdb(path, network='1.0.0.0/8')`.
 
     ```sql
     SELECT network, city.names.en
@@ -40,32 +43,8 @@ docs:
     └─────────────┴───────────┘
     ```
 
-    Limit the scan to a subnet with the `network` parameter:
-
-    ```sql
-    SELECT network, city.names.en
-    FROM read_mmdb('./GeoLite2-City.mmdb', network='1.0.0.0/8')
-    WHERE city.names.en IS NOT NULL
-    LIMIT 1;
-    ┌─────────────┬───────────┐
-    │   network   │    en     │
-    ├─────────────┼───────────┤
-    │ 1.0.64.0/20 │ Hiroshima │
-    └─────────────┴───────────┘
-    ```
-
-    Look up a record by IP address with scalar functions:
-
-    ```sql
-    SELECT geolite_city('./GeoLite2-City.mmdb', '1.0.64.0', '').city.names.en AS en;
-    ┌───────────┐
-    │    en     │
-    ├───────────┤
-    │ Hiroshima │
-    └───────────┘
-    ```
-
-    The third parameter filters which fields to decode for faster lookups:
+    Look up a record by IP address with typed scalar functions that return structs.
+    The third parameter filters which fields to decode for faster lookups (pass `''` for all fields).
 
     ```sql
     SELECT geolite_city('./GeoLite2-City.mmdb', '1.0.64.0', 'city').city.names.en AS en;
@@ -76,10 +55,21 @@ docs:
     └───────────┘
     ```
 
+    Use `mmdb_record()` to query any MMDB file as JSON:
+
+    ```sql
+    SELECT mmdb_record('./GeoLite2-City.mmdb', '1.0.64.0', 'city')::json -> 'city' -> 'names' ->> 'en' AS en;
+    ┌───────────┐
+    │    en     │
+    ├───────────┤
+    │ Hiroshima │
+    └───────────┘
+    ```
+
 extension_star_count: 4
 extension_star_count_pretty: 4
-extension_download_count: 223
-extension_download_count_pretty: 223
+extension_download_count: 328
+extension_download_count_pretty: 328
 image: '/images/community_extensions/social_preview/preview_community_extension_maxmind.png'
 layout: community_extension_doc
 ---
@@ -123,6 +113,7 @@ LOAD {{ page.extension.name }};
 | geolite_asn           | scalar        | NULL        | NULL    |          |
 | geolite_city          | scalar        | NULL        | NULL    |          |
 | geolite_country       | scalar        | NULL        | NULL    |          |
+| mmdb_record           | scalar        | NULL        | NULL    |          |
 | read_mmdb             | table         | NULL        | NULL    |          |
 
 

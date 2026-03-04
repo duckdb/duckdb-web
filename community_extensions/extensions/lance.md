@@ -20,8 +20,8 @@ extension:
 repo:
   github: lance-format/lance-duckdb
   # v0.5.2
-  ref: 892b224af0f4a5508e5f3c46f1b8292155880258
-  ref_next: 3633381331446328924e8a1d75d8bbfec960952e
+  andium: 892b224af0f4a5508e5f3c46f1b8292155880258
+  ref: 3633381331446328924e8a1d75d8bbfec960952e
 
 docs:
   hello_world: |
@@ -71,8 +71,8 @@ docs:
 
 extension_star_count: 75
 extension_star_count_pretty: 75
-extension_download_count: 3116
-extension_download_count_pretty: 3.1k
+extension_download_count: 2590
+extension_download_count_pretty: 2.6k
 image: '/images/community_extensions/social_preview/preview_community_extension_lance.png'
 layout: community_extension_doc
 ---

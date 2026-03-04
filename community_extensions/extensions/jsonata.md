@@ -19,13 +19,13 @@ extension:
   version: 2025110901
 repo:
   github: query-farm/jsonata
-  ref: f7367247a1a857842a885afdad956b64a6d3e769
-  ref_next: c050a2fd1e397e3935ed35cc15bf7c22f7b87d04
+  andium: f7367247a1a857842a885afdad956b64a6d3e769
+  ref: c050a2fd1e397e3935ed35cc15bf7c22f7b87d04
 
 extension_star_count: 2
 extension_star_count_pretty: 2
-extension_download_count: 402
-extension_download_count_pretty: 402
+extension_download_count: 382
+extension_download_count_pretty: 382
 image: '/images/community_extensions/social_preview/preview_community_extension_jsonata.png'
 layout: community_extension_doc
 ---

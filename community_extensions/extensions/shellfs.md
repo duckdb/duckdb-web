@@ -20,13 +20,13 @@ extension:
   version: '2025120401'
 repo:
   github: query-farm/shellfs
-  ref: 4fef6d3d58068ce8ef6ed002441e0eca002cf372
-  ref_next: 42a975299795235df80bfae268c6f4fd154b0dbe
+  andium: 4fef6d3d58068ce8ef6ed002441e0eca002cf372
+  ref: 42a975299795235df80bfae268c6f4fd154b0dbe
 
 extension_star_count: 93
 extension_star_count_pretty: 93
-extension_download_count: 79654
-extension_download_count_pretty: 79.7k
+extension_download_count: 63178
+extension_download_count_pretty: 63.2k
 image: '/images/community_extensions/social_preview/preview_community_extension_shellfs.png'
 layout: community_extension_doc
 ---

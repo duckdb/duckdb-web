@@ -20,13 +20,13 @@ extension:
   version: '2025120401'
 repo:
   github: query-farm/inflector
-  ref: 5f2fa551e1c8ca6fdf50f8752afc637fb7a1ceee
-  ref_next: 2e88fdb219f28135de5e5eed56db0a2e92b54686
+  andium: 5f2fa551e1c8ca6fdf50f8752afc637fb7a1ceee
+  ref: 2e88fdb219f28135de5e5eed56db0a2e92b54686
 
 extension_star_count: 7
 extension_star_count_pretty: 7
-extension_download_count: 422
-extension_download_count_pretty: 422
+extension_download_count: 436
+extension_download_count_pretty: 436
 image: '/images/community_extensions/social_preview/preview_community_extension_inflector.png'
 layout: community_extension_doc
 ---

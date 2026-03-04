@@ -219,10 +219,10 @@ docs:
     only return documents with fields. When a collection contains only
     phantom documents, the result includes just the `__document_id` column.
 
-extension_star_count: 1
-extension_star_count_pretty: 1
-extension_download_count: 324
-extension_download_count_pretty: 324
+extension_star_count: 2
+extension_star_count_pretty: 2
+extension_download_count: 330
+extension_download_count_pretty: 330
 image: '/images/community_extensions/social_preview/preview_community_extension_fire_duck_ext.png'
 layout: community_extension_doc
 ---
