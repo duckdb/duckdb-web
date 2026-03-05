@@ -1137,6 +1137,10 @@
               "url": "jemalloc"
             },
             {
+              "page": "Lance",
+              "url": "lance"
+            },
+            {
               "page": "MySQL",
               "url": "mysql"
             },
