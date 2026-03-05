@@ -72,45 +72,17 @@ LOAD {{ page.extension.name }};
 
 <div class="extension_settings_table"></div>
 
-|                 name                 |                                         description                                          | input_type | scope  | aliases |
-|--------------------------------------|----------------------------------------------------------------------------------------------|------------|--------|---------|
-| auto_fallback_to_full_download       | Allows automatically falling back to full file downloads when possible.                      | BOOLEAN    | GLOBAL | []      |
-| ca_cert_file                         | Path to a custom certificate file for self-signed certificates.                              | VARCHAR    | GLOBAL | []      |
-| enable_curl_server_cert_verification | Enable server side certificate verification for CURL backend.                                | BOOLEAN    | GLOBAL | []      |
-| enable_global_s3_configuration       | Automatically fetch AWS credentials from environment variables.                              | BOOLEAN    | GLOBAL | []      |
-| enable_server_cert_verification      | Enable server side certificate verification.                                                 | BOOLEAN    | GLOBAL | []      |
-| force_download                       | Forces upfront download of file                                                              | BOOLEAN    | GLOBAL | []      |
-| hf_max_per_page                      | Debug option to limit number of items returned in list requests                              | UBIGINT    | GLOBAL | []      |
-| http_keep_alive                      | Keep alive connections. Setting this to false can help when running into connection failures | BOOLEAN    | GLOBAL | []      |
-| http_retries                         | HTTP retries on I/O error                                                                    | UBIGINT    | GLOBAL | []      |
-| http_retry_backoff                   | Backoff factor for exponentially increasing retry wait time                                  | FLOAT      | GLOBAL | []      |
-| http_retry_wait_ms                   | Time between retries                                                                         | UBIGINT    | GLOBAL | []      |
-| http_timeout                         | HTTP timeout read/write/connection/retry (in seconds)                                        | UBIGINT    | GLOBAL | []      |
-| httpfs_client_implementation         | Select which is the HTTPUtil implementation to be used                                       | VARCHAR    | GLOBAL | []      |
-| httpfs_retries_create_dir            | Maximum number of retries for creating directories                                           | UBIGINT    | GLOBAL | []      |
-| httpfs_retries_delete                | Maximum number of retries for deleting files                                                 | UBIGINT    | GLOBAL | []      |
-| httpfs_retries_file_operation        | Maximum number of retries for file operations (open/read/write)                              | UBIGINT    | GLOBAL | []      |
-| httpfs_retries_list                  | Maximum number of retries for listing directories                                            | UBIGINT    | GLOBAL | []      |
-| httpfs_retries_stat                  | Maximum number of retries for stat/metadata operations                                       | UBIGINT    | GLOBAL | []      |
-| httpfs_timeout_create_dir_ms         | Timeout for creating directories (in milliseconds)                                           | UBIGINT    | GLOBAL | []      |
-| httpfs_timeout_delete_ms             | Timeout for deleting files (in milliseconds)                                                 | UBIGINT    | GLOBAL | []      |
-| httpfs_timeout_file_operation_ms     | Timeout for file operations (open/read/write) (in milliseconds)                              | UBIGINT    | GLOBAL | []      |
-| httpfs_timeout_list_ms               | Timeout for listing directories (in milliseconds)                                            | UBIGINT    | GLOBAL | []      |
-| httpfs_timeout_stat_ms               | Timeout for stat/metadata operations (in milliseconds)                                       | UBIGINT    | GLOBAL | []      |
-| merge_http_secret_into_s3_request    | Merges http secret params into S3 requests                                                   | BOOLEAN    | GLOBAL | []      |
-| s3_access_key_id                     | S3 Access Key ID                                                                             | VARCHAR    | GLOBAL | []      |
-| s3_endpoint                          | S3 Endpoint                                                                                  | VARCHAR    | GLOBAL | []      |
-| s3_kms_key_id                        | S3 KMS Key ID                                                                                | VARCHAR    | GLOBAL | []      |
-| s3_region                            | S3 Region                                                                                    | VARCHAR    | GLOBAL | []      |
-| s3_requester_pays                    | S3 use requester pays mode                                                                   | BOOLEAN    | GLOBAL | []      |
-| s3_secret_access_key                 | S3 Access Key                                                                                | VARCHAR    | GLOBAL | []      |
-| s3_session_token                     | S3 Session Token                                                                             | VARCHAR    | GLOBAL | []      |
-| s3_uploader_max_filesize             | S3 Uploader max filesize (between 50GB and 5TB)                                              | VARCHAR    | GLOBAL | []      |
-| s3_uploader_max_parts_per_file       | S3 Uploader max parts per file (between 1 and 10000)                                         | UBIGINT    | GLOBAL | []      |
-| s3_uploader_thread_limit             | S3 Uploader global thread limit                                                              | UBIGINT    | GLOBAL | []      |
-| s3_url_compatibility_mode            | Disable Globs and Query Parameters on S3 URLs                                                | BOOLEAN    | GLOBAL | []      |
-| s3_url_style                         | S3 URL style                                                                                 | VARCHAR    | GLOBAL | []      |
-| s3_use_ssl                           | S3 use SSL                                                                                   | BOOLEAN    | GLOBAL | []      |
-| unsafe_disable_etag_checks           | Disable checks on ETag consistency                                                           | BOOLEAN    | GLOBAL | []      |
+|               name               |                           description                           | input_type | scope  | aliases |
+|----------------------------------|-----------------------------------------------------------------|------------|--------|---------|
+| httpfs_retries_create_dir        | Maximum number of retries for creating directories              | UBIGINT    | GLOBAL | []      |
+| httpfs_retries_delete            | Maximum number of retries for deleting files                    | UBIGINT    | GLOBAL | []      |
+| httpfs_retries_file_operation    | Maximum number of retries for file operations (open/read/write) | UBIGINT    | GLOBAL | []      |
+| httpfs_retries_list              | Maximum number of retries for listing directories               | UBIGINT    | GLOBAL | []      |
+| httpfs_retries_stat              | Maximum number of retries for stat/metadata operations          | UBIGINT    | GLOBAL | []      |
+| httpfs_timeout_create_dir_ms     | Timeout for creating directories (in milliseconds)              | UBIGINT    | GLOBAL | []      |
+| httpfs_timeout_delete_ms         | Timeout for deleting files (in milliseconds)                    | UBIGINT    | GLOBAL | []      |
+| httpfs_timeout_file_operation_ms | Timeout for file operations (open/read/write) (in milliseconds) | UBIGINT    | GLOBAL | []      |
+| httpfs_timeout_list_ms           | Timeout for listing directories (in milliseconds)               | UBIGINT    | GLOBAL | []      |
+| httpfs_timeout_stat_ms           | Timeout for stat/metadata operations (in milliseconds)          | UBIGINT    | GLOBAL | []      |
 
 
