@@ -601,6 +601,7 @@ html.darkmode {
 :root {
   --type-weight-standard: 450;
   /* Desktop */
+  --page-element-spacing-small: 20px;
   --page-section-padding: 20px;
   --page-element-spacing-medium: 25px;
   --page-docs-page-padding: 30px;
@@ -610,6 +611,7 @@ html.darkmode {
   --page-max-width-small: 750px;
   --page-max-width-medium: 950px;
   --page-max-width-large: 1150px;
+  --type-micro: 10px;
   --type-label-3: 11px;
   --type-label-2: 12px;
   --type-tiny: 12px;
@@ -617,6 +619,7 @@ html.darkmode {
   --type-body-small: 14px;
   --type-code: 14px;
   --type-label-1: 14px;
+  --type-side-menu: 14px;
   --type-title-3: 14px;
   --type-menu-items: 15px;
   --type-body-normal: 16px;
@@ -638,6 +641,7 @@ html.darkmode {
     --type-weight-standard: 400;
     /* Mobile */
     --page-docs-page-padding: 15px;
+    --page-element-spacing-small: 15px;
     --page-section-padding: 15px;
     --page-element-spacing-medium: 20px;
     --page-element-spacing-large: 35px;
@@ -646,19 +650,21 @@ html.darkmode {
     --page-max-width-medium: 393px;
     --page-max-width-small: 393px;
     --page-max-width-tiny: 393px;
+    --type-micro: 9px;
     --type-label-3: 11px;
     --type-tiny: 11px;
+    --type-body-small: 12px;
     --type-label-2: 12px;
     --type-pre-title: 12px;
-    --type-body-small: 13px;
     --type-code: 13px;
     --type-label-1: 13px;
+    --type-side-menu: 13px;
     --type-title-3: 13px;
     --type-body-normal: 14px;
-    --type-menu-items: 14px;
     --type-code-large: 15px;
     --type-title-2: 15px;
     --type-body-large: 16px;
+    --type-menu-items: 16px;
     --type-title-1: 16px;
     --type-headline-3: 19px;
     --type-headline-2: 23px;

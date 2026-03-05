@@ -52,8 +52,17 @@ body.landing{
 	}
 	
 	section.welcome{
-		padding-top: 84px; 
-		
+		padding-top: 84px;
+		.wrap{
+			max-width: var(--page-max-width-large, 1150px);
+		}
+		.logo-grid-section{
+			max-width: unset;
+			.logo-cell{
+				width: 286px;
+				
+			}
+		}
 		h1{
 			@include display-1();
 		}
@@ -72,8 +81,8 @@ body.landing{
 		.type{
 			display: inline-block;
 			white-space: nowrap;
-			border-bottom: 10px solid var(--orange-50);
-			line-height: 0.8em;
+			border-bottom: 8px solid var(--orange-50);
+			line-height: 0.9em;
 			margin-top: 0.2em;
 			margin-bottom: 0.12em;
 			border-image: linear-gradient(to right, var(--orange-50), var(--orange-transparent-20)) 1;
@@ -132,7 +141,6 @@ body.landing section.about-cards{
 
 /** LOGO GRID **/
 .logo-grid-section{
-	max-width: 846px;
 	margin: 0 auto;
 	margin-top: 90px;
 
@@ -421,6 +429,12 @@ footer .sitefooter .footercontent .footerlogo{
 
 
 /** SPECIAL DUCKLAKE RESPONSIVE STYLES **/
+
+@media only screen and (max-width: 1180px) {
+	body.landing section.welcome .logo-grid-section .logo-cell{
+		width: auto;
+	}
+}
 
 @media only screen and (max-width: 1000px) {
 	.form .sidecolumn{

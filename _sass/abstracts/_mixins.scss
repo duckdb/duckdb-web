@@ -124,6 +124,14 @@
 	font-family: "SuisseIntl", sans-serif;
 }
 
+@mixin micro {
+	font-size: var(--type-micro, 10px);
+	font-weight: var(--type-weight-standard, 450);
+	line-height: 1.2;
+	letter-spacing: 0.005em;
+	font-family: "SuisseIntl", sans-serif;
+}
+
 @mixin pre-title {
 	font-size: var(--type-pre-title, 13px);
 	text-transform: uppercase;
