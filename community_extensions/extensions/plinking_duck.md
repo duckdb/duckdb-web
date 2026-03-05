@@ -67,10 +67,10 @@ docs:
 
     For full documentation, see [plinking-duck.readthedocs.io](https://plinking-duck.readthedocs.io).
 
-extension_star_count: 1
-extension_star_count_pretty: 1
-extension_download_count: 160
-extension_download_count_pretty: 160
+extension_star_count: {"message":"Not Found","documentation_url":"https://docs.github.com/rest/repos/repos#get-a-repository","status":"404"}
+extension_star_count_pretty: n/a
+extension_download_count: 210
+extension_download_count_pretty: 210
 image: '/images/community_extensions/social_preview/preview_community_extension_plinking_duck.png'
 layout: community_extension_doc
 ---
