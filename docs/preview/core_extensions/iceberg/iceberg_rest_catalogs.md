@@ -47,38 +47,35 @@ SHOW ALL TABLES;
 
 ## `ATTACH` Options
 
-A REST Catalog with OAuth2 authorization can also be attached with just an `ATTACH` statement. See the complete list of `ATTACH` options for a REST catalog below. 
+A REST Catalog with OAuth2 authorization can also be attached with just an `ATTACH` statement. See the complete list of `ATTACH` options for a REST Catalog below.
 
- 
-| Parameter                     | Type      | Default  | Description                                                                                           |
-|-------------------------------|-----------|----------|-------------------------------------------------------------------------------------------------------|
-| `ENDPOINT_TYPE`               | `VARCHAR` | `NULL`   | Used for attaching S3Tables or Glue catalogs. Allowed values are 'GLUE' and 'S3_TABLES'               |
-| `ENDPOINT`                    | `VARCHAR` | `NULL`   | URL endpoint to communicate with the REST Catalog. Cannot be used in conjunction with `ENDPOINT_TYPE` |
-| `SECRET`                      | `VARCHAR` | `NULL`   | Name of secret used to communicate with the REST Catalog                                              |
-| `CLIENT_ID`                   | `VARCHAR` | `NULL`   | CLIENT_ID used for Secret                                                                             |
-| `CLIENT_SECRET`               | `VARCHAR` | `NULL`   | CLIENT_SECRET needed for Secret                                                                       |
-| `DEFAULT_REGION`              | `VARCHAR` | `NULL`   | A Default region to use when communicating with the storage layer                                     |
-| `OAUTH2_SERVER_URI`           | `VARCHAR` | `NULL`   | OAuth2 server url for getting a Bearer Token                                                          |
-| `AUTHORIZATION_TYPE`          | `VARCHAR` | `OAUTH2` | Pass `SigV4` for Catalogs the require SigV4 authorization, `none` for catalogs that don't need auth   |
-| `ACCESS_DELEGATION_MODE`      | `VARCHAR` | `vended_credentials` | Access delegation mode. Allowed values are `vended_credentials` and `none`               |
-| `EXTRA_HTTP_HEADERS`          | `MAP`     | `NULL`   | Additional HTTP headers to send with REST catalog requests                                            |
-| `SUPPORT_NESTED_NAMESPACES` | `BOOLEAN` | `true`   | Option for catalogs that support nested namespaces.                                                   |
-| `SUPPORT_STAGE_CREATE`        | `BOOLEAN` | `false`  | Option for catalogs that do not support stage create.                                                 |
-| `MAX_TABLE_STALENESS`         | `INTERVAL`| `NULL`   | Option for preventing unnecessary requests to the iceberg rest catalog. You can pass human readable interval strings. `10 minutes`, `30 seconds`, `1 year` all work |
+| Parameter                   | Type       | Default              | Description                                                                                                                                                          |
+| --------------------------- | ---------- | -------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `ENDPOINT_TYPE`             | `VARCHAR`  | `NULL`               | Used for attaching S3Tables or Glue catalogs. Allowed values are 'GLUE' and 'S3_TABLES'.                                                                             |
+| `ENDPOINT`                  | `VARCHAR`  | `NULL`               | URL endpoint to communicate with the REST Catalog. Cannot be used in conjunction with `ENDPOINT_TYPE`.                                                               |
+| `SECRET`                    | `VARCHAR`  | `NULL`               | Name of secret used to communicate with the REST Catalog.                                                                                                            |
+| `CLIENT_ID`                 | `VARCHAR`  | `NULL`               | `CLIENT_ID` used for Secret.                                                                                                                                         |
+| `CLIENT_SECRET`             | `VARCHAR`  | `NULL`               | `CLIENT_SECRET` needed for Secret.                                                                                                                                   |
+| `DEFAULT_REGION`            | `VARCHAR`  | `NULL`               | A Default region to use when communicating with the storage layer.                                                                                                   |
+| `OAUTH2_SERVER_URI`         | `VARCHAR`  | `NULL`               | OAuth2 server url for getting a Bearer Token.                                                                                                                        |
+| `AUTHORIZATION_TYPE`        | `VARCHAR`  | `OAUTH2`             | Pass `SigV4` for Catalogs the require SigV4 authorization, `none` for catalogs that don't need auth.                                                                 |
+| `ACCESS_DELEGATION_MODE`    | `VARCHAR`  | `vended_credentials` | Access delegation mode. Allowed values are `vended_credentials` and `none`.                                                                                          |
+| `EXTRA_HTTP_HEADERS`        | `MAP`      | `NULL`               | Additional HTTP headers to send with REST Catalog requests.                                                                                                          |
+| `SUPPORT_NESTED_NAMESPACES` | `BOOLEAN`  | `true`               | Option for catalogs that support nested namespaces.                                                                                                                  |
+| `SUPPORT_STAGE_CREATE`      | `BOOLEAN`  | `false`              | Option for catalogs that do not support stage create.                                                                                                                |
+| `MAX_TABLE_STALENESS`       | `INTERVAL` | `NULL`               | Option for preventing unnecessary requests to the Iceberg REST Catalog. You can pass human readable interval strings. `10 minutes`, `30 seconds`, `1 year` all work. |
 
+The following options can only be passed to a `CREATE SECRET` statement and they require `AUTHORIZATION_TYPE` to be `OAUTH2`:
 
-
-The following options can only be passed to a `CREATE SECRET` statement, and they require `AUTHORIZATION_TYPE` to be `OAUTH2`
-
-| Parameter           | Type      | Default | Description                                         |
-|---------------------|-----------|---------|-----------------------------------------------------|
-| `OAUTH2_GRANT_TYPE` | `VARCHAR` | `NULL`  | Grant Type when requesting an OAuth Token           |
-| `OAUTH2_SCOPE`      | `VARCHAR` | `NULL`  | Requested scope for the returned OAuth Access Token |
+| Parameter           | Type      | Default | Description                                          |
+| ------------------- | --------- | ------- | ---------------------------------------------------- |
+| `OAUTH2_GRANT_TYPE` | `VARCHAR` | `NULL`  | Grant Type when requesting an OAuth Token.           |
+| `OAUTH2_SCOPE`      | `VARCHAR` | `NULL`  | Requested scope for the returned OAuth Access Token. |
 
 
 ### Supported Operations
 
-The DuckDB Iceberg extension supports the following operations when used with a REST catalog attached:
+The DuckDB Iceberg extension supports the following operations when used with a REST Catalog attached:
 
 * `CREATE/DROP SCHEMA`
 * `CREATE/DROP TABLE`
@@ -107,7 +104,7 @@ The `UPDATE` and `DELETE` operations have the following limitations:
 
 ### Metadata Operations
 
-The functions `iceberg_metadata` and `iceberg_snapshots` are also available to use with an Iceberg REST catalog using a fully qualified path, e.g.
+The functions `iceberg_metadata` and `iceberg_snapshots` are also available to use with an Iceberg REST Catalog using a fully qualified path, e.g.:
 
 ```sql
 SELECT * FROM iceberg_metadata(my_datalake.default.t)
@@ -147,11 +144,11 @@ CALL iceberg_to_ducklake('iceberg_datalake', 'my_ducklake', skip_tables := ['tab
 
 DuckDB provides functions to view and modify [Iceberg table properties](https://iceberg.apache.org/spec/#table-metadata-fields):
 
-| Function | Description |
-|----------|-------------|
-| `iceberg_table_properties(table)` | Returns all properties of the specified table. |
-| `set_iceberg_table_properties(table, properties)` | Sets properties on the specified table. |
-| `remove_iceberg_table_properties(table, property_list)` | Removes properties from the specified table. |
+| Function                                                | Description                                    |
+| ------------------------------------------------------- | ---------------------------------------------- |
+| `iceberg_table_properties(table)`                       | Returns all properties of the specified table. |
+| `set_iceberg_table_properties(table, properties)`       | Sets properties on the specified table.        |
+| `remove_iceberg_table_properties(table, property_list)` | Removes properties from the specified table.   |
 
 ```sql
 -- View table properties
@@ -174,12 +171,12 @@ CALL remove_iceberg_table_properties(
 You can also create a table with table properties.
 
 ```sql
-CREATE TABLE test_create_table (a int) 
+CREATE TABLE test_create_table (a INTEGER)
 WITH (
-    'format-version'='2', -- format version will be elevated to format-version when creating a table
-    'location'='s3://path/to/data', -- location will be elevated to location when creating a table
-    'property1'='value1', 
-    'property2'='value2'
+    'format-version' = '2', -- format version will be elevated to format-version when creating a table
+    'location' = 's3://path/to/data', -- location will be elevated to location when creating a table
+    'property1' = 'value1',
+    'property2' = 'value2'
 );
 ```
 
@@ -194,7 +191,7 @@ The following operations are not supported by the DuckDB Iceberg extension:
 
 ### Cloudflare R2 Catalog
 
-To attach to an [R2 Cloudflare](https://developers.cloudflare.com/r2/data-catalog/) managed catalog follow the attach steps below. 
+To attach to an [R2 Cloudflare](https://developers.cloudflare.com/r2/data-catalog/) managed catalog follow the attach steps below.
 
 ```sql
 CREATE SECRET r2_secret (

@@ -71,15 +71,15 @@ FROM glue_catalog.⟨namespace_name⟩.⟨table_name⟩;
 If you have an S3Tables federated catalog, you can create a table using the standard `CREATE TABLE` syntax;
 
 ```sql
-CREATE TABLE glue_catalog.⟨namespace_name⟩.⟨table_name⟩ (a int, b varchar);
+CREATE TABLE glue_catalog.⟨namespace_name⟩.⟨table_name⟩ (a INTEGER, b VARCHAR);
 ```
 
 If the catalog is not federated by S3Tables, you may need to create pass a `location` table property. You can do so using the `WITH` clause.
 
 ```sql
-CREATE TABLE glue_catalog.⟨namespace_name⟩.⟨table_name⟩ (a int, b varchar)
+CREATE TABLE glue_catalog.⟨namespace_name⟩.⟨table_name⟩ (a INTEGER, b VARCHAR)
 WITH (
-    'location'='s3://path/to/location'
+    'location' = 's3://path/to/location'
 );
 ```
 
