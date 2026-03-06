@@ -9,7 +9,7 @@ title: Geometry Data Type
 
 The `GEOMETRY` data type is used to store and manipulate geometric objects, such as points, lines, and polygons.
 
-The `GEOMETRY` type was part of the [`spatial` extension]({% link docs/stable/core_extensions/spatial/overview.md %}) but became a built-in data type in DuckDB v1.5. Most of the benefits of having `GEOMETRY` as a built-in type (e.g., storage optimizations, statistics, etc.) are therefore only available in databases using [storage version v1.5]({% link docs/stable/internals/storage.md %}) and above. However, almost all of the associated functions for working with geometries (e.g., calculating distances, areas, intersections) are still part of `spatial`.
+The `GEOMETRY` type was part of the [`spatial` extension]({% link docs/preview/core_extensions/spatial/overview.md %}) but became a built-in data type in DuckDB v1.5. Most of the benefits of having `GEOMETRY` as a built-in type (e.g., storage optimizations, statistics, etc.) are therefore only available in databases using [storage version v1.5]({% link docs/preview/internals/storage.md %}) and above. However, almost all of the associated functions for working with geometries (e.g., calculating distances, areas, intersections) are still part of `spatial`.
 
 ## Types of Geometries
 
@@ -108,7 +108,7 @@ Geometries can also be "empty" (e.g., `POINT EMPTY`, `LINESTRING EMPTY`, `MULTIP
 
 ## Geometry Storage
 
-Internally `GEOMETRY` values are stored as a sequence of bytes, similarly to DuckDB's `BLOB` types. The exact binary format is not yet stabilized and may change in a future release, but as of DuckDB [storage version v1.5]({% link docs/stable/internals/storage.md %}) it is based on little-endian [Well-Known Binary (WKB)](https://en.wikipedia.org/wiki/Well-known_text_representation_of_geometry#Well-known_binary), which is a standard binary encoding for geometries. In older storage versions, geometries were stored in a different custom binary format used by the `spatial` extension, but this conversion is performed automatically at the storage layer and is not visible to the execution engine or the user.
+Internally `GEOMETRY` values are stored as a sequence of bytes, similarly to DuckDB's `BLOB` types. The exact binary format is not yet stabilized and may change in a future release, but as of DuckDB [storage version v1.5]({% link docs/preview/internals/storage.md %}) it is based on little-endian [Well-Known Binary (WKB)](https://en.wikipedia.org/wiki/Well-known_text_representation_of_geometry#Well-known_binary), which is a standard binary encoding for geometries. In older storage versions, geometries were stored in a different custom binary format used by the `spatial` extension, but this conversion is performed automatically at the storage layer and is not visible to the execution engine or the user.
 
 ### Shredding and Compression
 
@@ -375,4 +375,4 @@ SELECT ST_CRS('POINT(4.897070 52.377956)'::GEOMETRY('OGC:CRS84')) AS crs;
 ## Functions
 
 - See [geometry functions]({% link docs/preview/sql/functions/geometry.md %}) for the list of built-in geometry functions.
-- See the documentation of the [`spatial` extension]({% link docs/stable/core_extensions/spatial/overview.md %}) for the large set of additional geometry functions provided by the extension, including functions for calculating areas, distances, intersections, unions, and much more.
+- See the documentation of the [`spatial` extension]({% link docs/preview/core_extensions/spatial/overview.md %}) for the large set of additional geometry functions provided by the extension, including functions for calculating areas, distances, intersections, unions, and much more.
