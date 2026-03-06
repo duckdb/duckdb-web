@@ -367,7 +367,7 @@ For working with large-scale datasets and/or collaborating on the same dataset, 
 
 We welcome experiments comparing DuckDB's performance to other systems.
 To ensure fair comparison, we have a few recommendations.
-First, try to use the [preview release]({% link docs/preview/index.md %}), which often has significant performance improvements compared to the last stable release.
+First, try to use the [preview release]({% link docs/current/index.md %}), which often has significant performance improvements compared to the last stable release.
 Second, consider consulting our DBTest 2018 paper [_Fair Benchmarking Considered Difficult: Common Pitfalls In Database Performance Testing_](https://hannes.muehleisen.org/publications/DBTEST2018-performance-testing.pdf) for guidelines on how to avoid common issues in benchmarks.
 Third, study the DuckDB [Performance Guide]({% link docs/stable/guides/performance/overview.md %}), which has best practices for ensuring optimal performance.
 Finally, please report the DuckDB version (for stable version, the version number, for nightly builds, the commit hash).
@@ -472,7 +472,7 @@ Currently, the official community support applies to the following components:
 
 Ths support covers the following minor versions:
 
-* latest LTS (long-term support) version, currently {{ site.lts_duckdb_short_version }}
+* latest LTS (long-term support) version, currently {{ site.lts_short_duckdb_version }}
 * the latest stable version, currently {{ site.current_short_duckdb_version }}
 
 For more details, see the [DuckDB Community Support Policy](https://duckdblabs.com/community_support_policy/).

@@ -97,7 +97,7 @@ which prints:
 └─────────────────┘
 ```
 
-Thanks to [replacement scans]({% link docs/preview/sql/dialect/friendly_sql.md %}#data-import), you can omit the function `read_arrow` if the filename ends with `.arrow` or `.arrows`. For example:
+Thanks to [replacement scans]({% link docs/current/sql/dialect/friendly_sql.md %}#data-import), you can omit the function `read_arrow` if the filename ends with `.arrow` or `.arrows`. For example:
 
 ```sql
 SELECT count(*) FROM 'lineitem.arrows';

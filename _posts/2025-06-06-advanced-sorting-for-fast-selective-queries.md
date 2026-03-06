@@ -644,7 +644,7 @@ FROM rowgroup_counts('flights_hilbert', ['origin', 'dest']);
 
 The `rowgroup_id_count` column is a measurement of how many distinct row groups that a specific column value is present in, so it is an indicator of how much work DuckDB would need to do to pull all data associated with that value.
 
-> This calculation uses the [pseudo-column `rowid`]({% link docs/preview/sql/statements/select.md %}#row-ids), and it requires data to have been inserted in a single batch to be perfectly accurate.
+> This calculation uses the [pseudo-column `rowid`]({% link docs/current/sql/statements/select.md %}#row-ids), and it requires data to have been inserted in a single batch to be perfectly accurate.
 > It is only an approximate metric when data is inserted in batches.
 
 ## Conclusion

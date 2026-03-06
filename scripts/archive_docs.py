@@ -13,7 +13,7 @@ old_stable_version = sys.argv[1]
 # update new stable file based on old stable file
 def update_new_stable_page(new_stable_file, old_stable_dir):
     # if the old counterpart exists, parse YAML metadata and get the "redirect_from" field
-    old_stable_file = new_stable_file.replace("docs/preview", "docs/stable")
+    old_stable_file = new_stable_file.replace("docs/current", "docs/stable")
 
     new_stable_doc = frontmatter.load(new_stable_file)
 
@@ -28,14 +28,14 @@ def update_new_stable_page(new_stable_file, old_stable_dir):
 
     # replace link tags in the content
     new_stable_doc.content = new_stable_doc.content.replace(
-        f"{{% link docs/preview/", f"{{% link docs/stable/"
+        f"{{% link docs/current/", f"{{% link docs/stable/"
     )
     return frontmatter.dumps(new_stable_doc)
 
 
-# copy docs/preview to docs/stable, while keeping the redirects from docs/stable
+# copy docs/current to docs/stable, while keeping the redirects from docs/stable
 def archive_preview():
-    src = "docs/preview"
+    src = "docs/current"
     dst = f"docs/stable_temp"
     old_stable = "docs/stable"
 
@@ -110,7 +110,7 @@ shutil.copy(
 )
 archive_stable(old_stable_version)
 
-shutil.copy("_data/menu_docs_preview.json", f"_data/menu_docs_stable.json")
+shutil.copy("_data/menu_docs_current.json", f"_data/menu_docs_stable.json")
 archive_preview()
 
 shutil.move("js/stable", f"js/{old_stable_version}")

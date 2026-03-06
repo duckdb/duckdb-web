@@ -42,8 +42,8 @@ Visit `http://localhost:4000/docs/` (use HTTP, not HTTPS).
 Jekyll with Kramdown/GFM markdown. Navigation menus are driven by JSON data files, not auto-discovered from files.
 
 ### Documentation Versioning
-- `docs/stable/` — current stable release (target for most PRs)
-- `docs/preview/` — nightly/dev release
+- `docs/stable/` — LTS release
+- `docs/current/` — current stable release (target for most PRs)
 - `docs/1.3/`, `docs/1.2/`, etc. — archived versions (rarely edited)
 
 The `_config_exclude_archive.yml` config is used by `serve-latest.sh` to skip archived versions for faster local builds.

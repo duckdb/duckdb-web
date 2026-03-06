@@ -6,7 +6,7 @@ from textwrap import shorten
 
 
 skipped_files = [
-    'docs/preview',
+    'docs/current',
     'docs/1.3',
     'docs/1.2',
     'docs/1.1',

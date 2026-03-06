@@ -16,7 +16,7 @@ Machine learning prototyping often involves juggling datasets, preprocessing ste
 
 ## Data Preparation
 
-We start by loading the [Palmer Penguins dataset](https://github.com/allisonhorst/palmerpenguins/) and use DuckDB's [`COLUMNS(*)` expression]({% link docs/preview/sql/expressions/star.md %}#columns) to filter out any record which contains `NA` or `NULL`:
+We start by loading the [Palmer Penguins dataset](https://github.com/allisonhorst/palmerpenguins/) and use DuckDB's [`COLUMNS(*)` expression]({% link docs/current/sql/expressions/star.md %}#columns) to filter out any record which contains `NA` or `NULL`:
 
 ```python
 duckdb_conn.read_csv(

@@ -475,7 +475,7 @@ TO 'array_false.json' (FORMAT json, ARRAY false);
 
 The `BLOB` format option allows you to select a single column of a DuckDB table into a `.blob` file.
 The column must be cast to the `BLOB` data type. For details on typecasting, see the 
-[Casting Operations Matrix]({% link docs/preview/sql/data_types/typecasting.md %}#Casting-Operations-Matrix).
+[Casting Operations Matrix]({% link docs/current/sql/data_types/typecasting.md %}#Casting-Operations-Matrix).
 
 The below options are applicable when writing `BLOB` files.
 
