@@ -126,5 +126,5 @@ title: Struct Functions
 <div class="nostroke_table"></div>
 
 | **Description** | Add or update field(s) of an existing `STRUCT`. |
-| **Example** | `struct_insert({'a': 1, 'b': 2}, b := 3, c := 4)` |
+| **Example** | `struct_update({'a': 1, 'b': 2}, b := 3, c := 4)` |
 | **Result** | `{'a': 1, 'b': 3, 'c': 4}` |
