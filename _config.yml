@@ -23,7 +23,7 @@ url: "https://duckdb.org" # the base hostname & protocol for your site, e.g. htt
 current_duckdb_codename: "Variegata"
 current_short_duckdb_version: "1.5"
 current_duckdb_version: "1.5.0"
-current_duckdb_hash: "TODO"
+current_duckdb_hash: "3a3967aa81"
 current_duckdb_odbc_version: ""
 current_duckdb_odbc_short_version: ""
 current_duckdb_go_version: ""
