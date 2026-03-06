@@ -20,8 +20,8 @@ extension:
 
 repo:
   github: midwork-finds-jobs/duckdb-valhalla-routing
-  ref: d379f55ff8d80080b5b8e927c53d3062e6a57fab
-  ref_next: e73ec94493444fa0ae452474e4329dda13b4d138
+  andium: d379f55ff8d80080b5b8e927c53d3062e6a57fab
+  ref: e73ec94493444fa0ae452474e4329dda13b4d138
 
 docs:
   hello_world: |
@@ -109,10 +109,10 @@ docs:
 
     Download OSM extracts from [Geofabrik](https://download.geofabrik.de/)
 
-extension_star_count: 2
-extension_star_count_pretty: 2
-extension_download_count: 395
-extension_download_count_pretty: 395
+extension_star_count: 3
+extension_star_count_pretty: 3
+extension_download_count: 400
+extension_download_count_pretty: 400
 image: '/images/community_extensions/social_preview/preview_community_extension_valhalla_routing.png'
 layout: community_extension_doc
 ---

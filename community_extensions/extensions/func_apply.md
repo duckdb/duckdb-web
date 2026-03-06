@@ -16,8 +16,8 @@ extension:
     - teaguesterling
 repo:
   github: teaguesterling/duckdb_func_apply
+  andium: 2013ac345d6f19e61ee78cacae161eb272cf1837
   ref: 2013ac345d6f19e61ee78cacae161eb272cf1837
-  ref_next: 2013ac345d6f19e61ee78cacae161eb272cf1837
 docs:
   hello_world: |
     -- Load the extension
@@ -92,8 +92,8 @@ docs:
 
 extension_star_count: 4
 extension_star_count_pretty: 4
-extension_download_count: 313
-extension_download_count_pretty: 313
+extension_download_count: 386
+extension_download_count_pretty: 386
 image: '/images/community_extensions/social_preview/preview_community_extension_func_apply.png'
 layout: community_extension_doc
 ---

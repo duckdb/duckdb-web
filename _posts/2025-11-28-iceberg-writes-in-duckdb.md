@@ -15,7 +15,7 @@ The Iceberg open table format has become extremely popular in the past two years
 
 ## Getting Started
 
-To experiment with the new DuckDB-Iceberg features, you will need to connect to your favorite Iceberg REST Catalog. There are many ways to connect to an Iceberg REST Catalog: please have a look at the [Connecting to REST Catalogs]({% link docs/stable/core_extensions/iceberg/iceberg_rest_catalogs.md %}) for connecting to catalogs like [Apache Polaris](https://polaris.apache.org/) or [Lakekeeper](https://lakekeeper.io/) and the [Connecting to S3Tables]({% link docs/stable/core_extensions/iceberg/amazon_s3_tables.md %}) page if you would like to connect to [Amazon S3 Tables](https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-tables.html).
+To experiment with the new DuckDB-Iceberg features, you will need to connect to your favorite Iceberg REST Catalog. There are many ways to connect to an Iceberg REST Catalog: please have a look at the [Connecting to REST Catalogs]({% link docs/stable/core_extensions/iceberg/iceberg_rest_catalogs.md %}) for connecting to catalogs like [Apache Polaris](https://polaris.apache.org/) or [Lakekeeper](https://lakekeeper.io/) and the [Connecting to S3 Tables]({% link docs/stable/core_extensions/iceberg/amazon_s3_tables.md %}) page if you would like to connect to [Amazon S3 Tables](https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-tables.html).
 
 ```sql
 ATTACH '⟨warehouse_name⟩' AS iceberg_catalog (

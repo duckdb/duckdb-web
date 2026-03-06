@@ -18,8 +18,8 @@ extension:
 
 repo:
   github: ahuarte47/duckdb-eurostat
-  ref: 99a4d98217ee92592c6db002137bd4881d8d6192
-  ref_next: 120d3e59803e5311dbdbe5ae01b95eddcf086c0e
+  andium: 99a4d98217ee92592c6db002137bd4881d8d6192
+  ref: 120d3e59803e5311dbdbe5ae01b95eddcf086c0e
 
 docs:
   hello_world: |
@@ -148,10 +148,10 @@ docs:
     Time filters (e.g. `WHERE time_period >= '2000' AND time_period <= '2010'`) are also supported
     and will be encoded as range filters in the EUROSTAT API.
 
-extension_star_count: 29
-extension_star_count_pretty: 29
-extension_download_count: 355
-extension_download_count_pretty: 355
+extension_star_count: 30
+extension_star_count_pretty: 30
+extension_download_count: 350
+extension_download_count_pretty: 350
 image: '/images/community_extensions/social_preview/preview_community_extension_eurostat.png'
 layout: community_extension_doc
 ---

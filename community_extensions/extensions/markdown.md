@@ -17,8 +17,8 @@ extension:
   vcpkg_commit: bffcbb75f71553824aa948a7e7b4f798662a6fa7
 repo:
   github: teaguesterling/duckdb_markdown
+  andium: 6468c047a3f2c2d33c6eaeeed70de6e77966be56
   ref: 6468c047a3f2c2d33c6eaeeed70de6e77966be56
-  ref_next: 6468c047a3f2c2d33c6eaeeed70de6e77966be56
 docs:
   hello_world: |
     -- Load the extension
@@ -111,10 +111,10 @@ docs:
 
     Full test suite with 1108 passing assertions across 20 test files.
 
-extension_star_count: 14
-extension_star_count_pretty: 14
-extension_download_count: 408
-extension_download_count_pretty: 408
+extension_star_count: 15
+extension_star_count_pretty: 15
+extension_download_count: 376
+extension_download_count_pretty: 376
 image: '/images/community_extensions/social_preview/preview_community_extension_markdown.png'
 layout: community_extension_doc
 ---

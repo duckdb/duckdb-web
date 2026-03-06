@@ -52,6 +52,8 @@ If you are not in an active transaction, the `ROLLBACK` and `ABORT` statements w
 
 DuckDB's concurrency model guarantees snapshot isolation. Transactions that violate this isolation level are aborted.
 
+Using [PostgreSQL's transaction isolation levels](https://www.postgresql.org/docs/current/transaction-iso.html), DuckDB guarantees *repeatable reads*.
+
 ## Example
 
 We illustrate the use of transactions through a simple example.

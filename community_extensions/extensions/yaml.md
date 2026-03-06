@@ -20,8 +20,8 @@ extension:
   
 repo:
   github: teaguesterling/duckdb_yaml
+  andium: de60de55fb238c44661cef27373e82ab21920f43
   ref: de60de55fb238c44661cef27373e82ab21920f43
-  ref_next: de60de55fb238c44661cef27373e82ab21920f43
 
 docs:
   hello_world: |
@@ -88,10 +88,10 @@ docs:
     
     **Note**: This extension was written primarily using Claude and Claude Code as an exercise in AI-driven development.
 
-extension_star_count: 14
-extension_star_count_pretty: 14
-extension_download_count: 459
-extension_download_count_pretty: 459
+extension_star_count: 15
+extension_star_count_pretty: 15
+extension_download_count: 938
+extension_download_count_pretty: 938
 image: '/images/community_extensions/social_preview/preview_community_extension_yaml.png'
 layout: community_extension_doc
 ---

@@ -17,8 +17,8 @@ extension:
 
 repo:
   github: hatamiarash7/duckdb-netquack
+  andium: 912f04bebd6057b093c3cae57a3bf5cbefb98980
   ref: 912f04bebd6057b093c3cae57a3bf5cbefb98980
-  ref_next: 912f04bebd6057b093c3cae57a3bf5cbefb98980
 
 docs:
   extended_description: |
@@ -30,7 +30,7 @@ docs:
 
 extension_star_count: 33
 extension_star_count_pretty: 33
-extension_download_count: 2866
+extension_download_count: 2860
 extension_download_count_pretty: 2.9k
 image: '/images/community_extensions/social_preview/preview_community_extension_netquack.png'
 layout: community_extension_doc

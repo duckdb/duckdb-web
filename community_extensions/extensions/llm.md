@@ -90,13 +90,13 @@ extension:
   version: '2026020501'
 repo:
   github: midwork-finds-jobs/duckdb-llm
-  ref: 2de6c4d2a7d1bc6cefe8adfac8ecb16c1e7b2f3e
-  ref_next: 18c5a54197440fcf43643c22f5de9ea9cbfe31e5
+  andium: 2de6c4d2a7d1bc6cefe8adfac8ecb16c1e7b2f3e
+  ref: 18c5a54197440fcf43643c22f5de9ea9cbfe31e5
 
 extension_star_count: 1
 extension_star_count_pretty: 1
-extension_download_count: 388
-extension_download_count_pretty: 388
+extension_download_count: 395
+extension_download_count_pretty: 395
 image: '/images/community_extensions/social_preview/preview_community_extension_llm.png'
 layout: community_extension_doc
 ---

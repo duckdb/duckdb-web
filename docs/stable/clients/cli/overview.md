@@ -1,6 +1,7 @@
 ---
 layout: docu
 redirect_from:
+- /cli
 - /docs/api/cli
 - /docs/clients/cli
 - /docs/api/cli/overview

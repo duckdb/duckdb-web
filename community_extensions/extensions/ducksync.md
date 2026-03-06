@@ -17,8 +17,8 @@ extension:
 
 repo:
   github: danjsiegel/ducksync
-  ref: b490211394692a80da97ac609484a12302f9d2b3
-  ref_next: 585d4e34e188cae8b49dd970fe73ce784ea9f0f4
+  andium: b490211394692a80da97ac609484a12302f9d2b3
+  ref: 585d4e34e188cae8b49dd970fe73ce784ea9f0f4
 
 docs:
   hello_world: |
@@ -95,8 +95,8 @@ docs:
 
 extension_star_count: 6
 extension_star_count_pretty: 6
-extension_download_count: 311
-extension_download_count_pretty: 311
+extension_download_count: 333
+extension_download_count_pretty: 333
 image: '/images/community_extensions/social_preview/preview_community_extension_ducksync.png'
 layout: community_extension_doc
 ---

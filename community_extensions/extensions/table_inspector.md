@@ -18,8 +18,8 @@ extension:
     - dentiny
 repo:
   github: dentiny/duckdb-table-inspector
-  ref: 13b830f3ccee4b4be3058a8211ad2f566c1ef698
-  ref_next: 7fb029e2cde2904a572aee40b94684dfd5f55d19
+  andium: 13b830f3ccee4b4be3058a8211ad2f566c1ef698
+  ref: 7fb029e2cde2904a572aee40b94684dfd5f55d19
 docs:
   hello_world: |
     -- List all attached persistent databases with file sizes
@@ -40,8 +40,8 @@ docs:
 
 extension_star_count: 0
 extension_star_count_pretty: 0
-extension_download_count: 315
-extension_download_count_pretty: 315
+extension_download_count: 318
+extension_download_count_pretty: 318
 image: '/images/community_extensions/social_preview/preview_community_extension_table_inspector.png'
 layout: community_extension_doc
 ---

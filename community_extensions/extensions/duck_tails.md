@@ -18,8 +18,8 @@ extension:
     - teaguesterling
 repo:
   github: teaguesterling/duck_tails
+  andium: eb4985203fe332d104bcf605097355ab9d155b77
   ref: eb4985203fe332d104bcf605097355ab9d155b77
-  ref_next: eb4985203fe332d104bcf605097355ab9d155b77
 docs:
   hello_world: |
     -- Load the extension
@@ -61,8 +61,8 @@ docs:
 
 extension_star_count: 14
 extension_star_count_pretty: 14
-extension_download_count: 613
-extension_download_count_pretty: 613
+extension_download_count: 609
+extension_download_count_pretty: 609
 image: '/images/community_extensions/social_preview/preview_community_extension_duck_tails.png'
 layout: community_extension_doc
 ---

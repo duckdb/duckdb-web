@@ -16,8 +16,8 @@ extension:
     - teaguesterling
 repo:
   github: teaguesterling/duckdb_scalarfs
+  andium: f1b17a25ad0635520186b22cf8158730b1c68712
   ref: f1b17a25ad0635520186b22cf8158730b1c68712
-  ref_next: f1b17a25ad0635520186b22cf8158730b1c68712
 docs:
   hello_world: |
     LOAD scalarfs;
@@ -72,8 +72,8 @@ docs:
 
 extension_star_count: 6
 extension_star_count_pretty: 6
-extension_download_count: 407
-extension_download_count_pretty: 407
+extension_download_count: 421
+extension_download_count_pretty: 421
 image: '/images/community_extensions/social_preview/preview_community_extension_scalarfs.png'
 layout: community_extension_doc
 ---
