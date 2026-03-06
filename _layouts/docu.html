@@ -95,7 +95,7 @@ Page URL: <https://duckdb.org{{ page.url }}>
 							{% if version_viewed == "current" %}
 								{% assign version_viewed_pretty = site.current_short_duckdb_version | append: " (current)" %}
 							{% elsif version_viewed == "stable" %}
-								{% assign version_viewed_pretty = site.lts_short_duckdb_version | append: " (lts)" %}
+								{% assign version_viewed_pretty = site.lts_short_duckdb_version | append: " (LTS)" %}
 							{% else %}
 								{% assign version_viewed_pretty = version_viewed %}
 							{% endif %}
