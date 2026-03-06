@@ -38,13 +38,19 @@ current_duckdb_java_short_version: ""
 # LTS version numbers
 lts_short_duckdb_version: "1.4"
 lts_duckdb_version: "1.4.4"
-lts_duckdb_java_version: "1.4.4.0"
-lts_duckdb_odbc_version: "1.4.4.0"
 lts_duckdb_go_version: "1.4.4"
 lts_duckdb_go_tag: "v2.5.5"
 lts_duckdb_r_version: "1.4.4"
 lts_duckdb_rust_version: "1.4.4"
 lts_duckdb_node_neo_version: "1.4.4-r.1"
+lts_duckdb_java_version: "1.4.4.0"
+lts_duckdb_java_short_version: "1.4.4"
+lts_duckdb_odbc_version: "1.4.4.0"
+lts_duckdb_odbc_short_version: "1.4.4"
+lts_duckdb_nodejs_version: "1.4.4"
+lts_duckdb_wasm_version: "1.4.4"
+lts_duckdb_csharp_version: "1.4.4"
+# more Jekyll config
 livereload: true
 highlighter: rouge
 incremental: false
