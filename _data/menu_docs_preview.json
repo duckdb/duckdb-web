@@ -713,6 +713,10 @@
                   "url": "enum"
                 },
                 {
+                  "page": "Geometry",
+                  "url": "geometry"
+                },
+                {
                   "page": "Interval",
                   "url": "interval"
                 },
@@ -851,6 +855,10 @@
                 {
                   "page": "Enum Functions",
                   "url": "enum"
+                },
+                {
+                  "page": "Geometry Functions",
+                  "url": "geometry"
                 },
                 {
                   "page": "Interval Functions",
@@ -1135,6 +1143,10 @@
             {
               "page": "jemalloc",
               "url": "jemalloc"
+            },
+            {
+              "page": "Lance",
+              "url": "lance"
             },
             {
               "page": "MySQL",

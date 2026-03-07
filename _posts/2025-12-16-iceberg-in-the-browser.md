@@ -97,7 +97,7 @@ Check out our demo of serverless Iceberg analytics using the [DuckDB Table Visua
 
 ## Access Your Own Data
 
-Substituting your own S3Tables bucket ARN and credentials with policy [`AmazonS3TablesReadOnlyAccess`](https://us-east-1.console.aws.amazon.com/iam/home?region=us-east-2#/policies/details/arn%3Aaws%3Aiam%3A%3Aaws%3Apolicy%2FAmazonS3TablesReadOnlyAccess), you can also access your catalog, metadata and data.
+Substituting your own S3 Tables bucket ARN and credentials with policy [`AmazonS3TablesReadOnlyAccess`](https://us-east-1.console.aws.amazon.com/iam/home?region=us-east-2#/policies/details/arn%3Aaws%3Aiam%3A%3Aaws%3Apolicy%2FAmazonS3TablesReadOnlyAccess), you can also access your catalog, metadata and data.
 Computations are fully local, and the credentials and warehouse ID are only sent to the catalog endpoint specified in your `ATTACH` command.
 Inputs are translated to SQL, and added to the hash segment of the URL.
 
