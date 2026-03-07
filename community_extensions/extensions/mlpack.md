@@ -71,8 +71,8 @@ docs:
 
 extension_star_count: 18
 extension_star_count_pretty: 18
-extension_download_count: 379
-extension_download_count_pretty: 379
+extension_download_count: 408
+extension_download_count_pretty: 408
 image: '/images/community_extensions/social_preview/preview_community_extension_mlpack.png'
 layout: community_extension_doc
 ---
