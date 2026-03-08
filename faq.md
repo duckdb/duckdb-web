@@ -473,7 +473,7 @@ Currently, the official community support applies to the following components:
 Ths support covers the following minor versions:
 
 * latest LTS (long-term support) version, currently {{ site.lts_short_duckdb_version }}
-* the latest stable version, currently {{ site.current_short_duckdb_version }}
+* the current version, currently {{ site.current_short_duckdb_version }}
 
 For more details, see the [DuckDB Community Support Policy](https://duckdblabs.com/community_support_policy/).
 
