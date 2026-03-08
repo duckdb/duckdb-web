@@ -13,7 +13,7 @@ The environment where DuckDB is run has an obvious impact on performance. This p
 
 DuckDB's officially supported architectures are AMD64 (x86_64) and ARM64 (AArch64) CPU architectures. DuckDB works efficiently on both of these architectures.
 
-> DuckDB can be compiled to other architecture such as [LoongArch]({% link _everywhere/morefine-m700s.md %}) and [RISC-V]({% link docs/preview/dev/building/unofficial_and_unsupported_platforms.md %}#risc-v-architectures). However, there are no performance guarantees for these platforms.
+> DuckDB can be compiled to other architecture such as [LoongArch]({% link _everywhere/morefine-m700s.md %}) and [RISC-V]({% link docs/current/dev/building/unofficial_and_unsupported_platforms.md %}#risc-v-architectures). However, there are no performance guarantees for these platforms.
 
 ### Memory
 
