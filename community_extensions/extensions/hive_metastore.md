@@ -53,10 +53,10 @@ docs:
     - `WAREHOUSE_LOCATION`: The warehouse location path. Used for table storage location resolution (mostly not required, but can be useful in some cases).
     - `DEFAULT_SCHEMA`: The database/schema name to use when queries don't specify one. Defaults to `default` if not provided.
 
-extension_star_count: 0
-extension_star_count_pretty: 0
-extension_download_count: 110
-extension_download_count_pretty: 110
+extension_star_count: 1
+extension_star_count_pretty: 1
+extension_download_count: 270
+extension_download_count_pretty: 270
 image: '/images/community_extensions/social_preview/preview_community_extension_hive_metastore.png'
 layout: community_extension_doc
 ---

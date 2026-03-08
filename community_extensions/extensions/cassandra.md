@@ -11,7 +11,7 @@ extension:
   version: 1.0.0
   language: C++
   build: cmake
-  excluded_platforms: "wasm_mvp;wasm_eh;wasm_threads;windows_amd64_mingw;"
+  excluded_platforms: "wasm_mvp;wasm_eh;wasm_threads;windows_amd64_mingw;linux_amd64_musl"
   license: MIT
   requires_toolchains: "cmake, openssl"
   maintainers:
@@ -89,8 +89,8 @@ docs:
 
 extension_star_count: 2
 extension_star_count_pretty: 2
-extension_download_count: 400
-extension_download_count_pretty: 400
+extension_download_count: 401
+extension_download_count_pretty: 401
 image: '/images/community_extensions/social_preview/preview_community_extension_cassandra.png'
 layout: community_extension_doc
 ---
