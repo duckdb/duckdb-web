@@ -1291,6 +1291,10 @@
                   "url": "read_file"
                 },
                 {
+                  "page": "Directly Reading DuckDB Databases",
+                  "url": "read_duckdb"
+                },
+                {
                   "page": "Excel Import",
                   "url": "excel_import"
                 },

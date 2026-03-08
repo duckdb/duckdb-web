@@ -17,6 +17,7 @@ To find a list of these tools, check out the [Awesome DuckDB repository](https:/
 
 * [Data import overview]({% link docs/current/guides/file_formats/overview.md %})
 * [File access with the `file:` protocol]({% link docs/current/guides/file_formats/file_access.md %})
+* [Reading DuckDB databases]({% link docs/current/guides/file_formats/read_duckdb.md %})
 
 ### CSV Files
 
