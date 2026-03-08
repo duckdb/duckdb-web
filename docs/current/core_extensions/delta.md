@@ -110,3 +110,54 @@ The `delta` extension currently only supports the following platforms:
 * Windows AMD64: `windows_amd64`
 
 Support for the [other DuckDB platforms]({% link docs/current/extensions/extension_distribution.md %}#platforms) is work-in-progress.
+
+## Using delta-rs with DuckDB
+
+In this example, we create a Delta table with the `delta-rs` Python binding, then we use the `delta` extension of DuckDB to read it. We also showcase how to do other read operations with DuckDB, like reading the change data feed using the Arrow zero-copy integration. This operation can also be lazy if reading bigger data by using [Arrow Datasets](https://delta-io.github.io/delta-rs/integrations/delta-lake-arrow/).
+
+<!-- markdownlint-disable MD040 MD046 -->
+
+<details markdown='1'>
+<summary markdown='span'>
+Click here to see the full example.
+</summary>
+
+```python
+import deltalake as dl
+import pyarrow as pa
+
+# Create a delta table and read it with DuckDB Delta extension
+dl.write_deltalake(
+    "tmp/some_table",
+    pa.table({
+        "id": [1, 2, 3],
+        "value": ["a", "b", "c"]
+    })
+)
+with duckdb.connect() as conn:
+    conn.execute("""
+        INSTALL delta;
+        LOAD delta;
+    """)
+    conn.sql("""
+        SELECT * FROM delta_scan('tmp/some_table')
+    """).show()
+
+# Append some data and read the data change feed using the PyArrow integration
+dl.write_deltalake(
+    "tmp/some_table",
+    pa.table({
+        "id": [4, 5],
+        "value": ["d", "e"]
+    }),
+    mode="append"
+)
+table = dl.DeltaTable("tmp/some_table").load_cdf(starting_version=1, ending_version=2)
+with duckdb.connect() as conn:
+    conn.register("t", table)
+    conn.sql("SELECT * FROM t").show()
+```
+
+</details>
+
+<!-- markdownlint-enable MD040 MD046 -->
