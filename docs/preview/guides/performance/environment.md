@@ -9,7 +9,9 @@ The environment where DuckDB is run has an obvious impact on performance. This p
 
 ### CPU
 
-DuckDB works efficiently on both AMD64 (x86_64) and ARM64 (AArch64) CPU architectures.
+DuckDB's officially supported architectures are AMD64 (x86_64) and ARM64 (AArch64) CPU architectures. DuckDB works efficiently on both of these architectures.
+
+> DuckDB can be compiled to other architecture such as [LoongArch]({% link _everywhere/morefine-m700s.md %}) and [RISC-V]({% link docs/preview/dev/building/unofficial_and_unsupported_platforms.md %}#risc-v-architectures). However, there are no performance guarantees for these platforms.
 
 ### Memory
 
@@ -48,7 +50,7 @@ Counter-intuitively, using a disk-based DuckDB instance can be faster than an in
 Read more in the [“How to Tune Workloads” page]({% link docs/preview/guides/performance/how_to_tune_workloads.md %}#persistent-vs-in-memory-tables).
 
 **File systems.**
-On Linux, [DuckDB performs best with the XFS file system](https://www.phoronix.com/review/linux-615-filesystems/5) but it also performs reasonably well with other file systems such as ext4.
+On Linux, [DuckDB performs best with the XFS file system](https://www.phoronix.com/review/linux-70-filesystems/4) but it also performs reasonably well with other file systems such as ext4.
 On Windows, we recommend using NTFS and avoiding FAT32.
 
 > Note that DuckDB databases have built-in checksums, so integrity checks from the file system are not required to prevent data corruption.
