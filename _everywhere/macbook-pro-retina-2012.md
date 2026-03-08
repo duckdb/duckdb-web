@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "MacBook Pro Retina 2012"
+title: "MacBook Pro Retina (2012)"
 author: "Hannes Mühleisen"
 thumb: "/images/everywhere/thumbs/macbook-pro-retina-2012.jpg"
 image: "/images/everywhere/thumbs/macbook-pro-retina-2012.jpg"
