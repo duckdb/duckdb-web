@@ -1,5 +1,7 @@
 ---
 layout: docu
+redirect_from:
+- /docs/preview/sql/dialect/keywords_and_identifiers
 title: Keywords and Identifiers
 ---
 

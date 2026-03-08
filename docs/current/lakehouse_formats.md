@@ -1,5 +1,7 @@
 ---
 layout: docu
+redirect_from:
+- /docs/preview/lakehouse_formats
 title: Lakehouse Formats
 ---
 

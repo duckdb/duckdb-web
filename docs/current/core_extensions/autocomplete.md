@@ -1,6 +1,8 @@
 ---
 github_directory: https://github.com/duckdb/duckdb/tree/main/extension/autocomplete
 layout: docu
+redirect_from:
+- /docs/preview/core_extensions/autocomplete
 title: AutoComplete Extension
 ---
 

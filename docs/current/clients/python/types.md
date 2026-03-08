@@ -1,5 +1,7 @@
 ---
 layout: docu
+redirect_from:
+- /docs/preview/clients/python/types
 title: Types API
 ---
 

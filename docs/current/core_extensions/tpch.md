@@ -1,6 +1,8 @@
 ---
 github_directory: https://github.com/duckdb/duckdb/tree/main/extension/tpch
 layout: docu
+redirect_from:
+- /docs/preview/core_extensions/tpch
 title: TPC-H Extension
 ---
 

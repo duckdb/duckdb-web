@@ -1,5 +1,7 @@
 ---
 layout: docu
+redirect_from:
+- /docs/preview/sql/data_types/map
 title: Map Type
 ---
 

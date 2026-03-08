@@ -1,5 +1,7 @@
 ---
 layout: docu
+redirect_from:
+- /docs/preview/data/multiple_files/overview
 title: Reading Multiple Files
 ---
 

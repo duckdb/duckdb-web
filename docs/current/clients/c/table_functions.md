@@ -1,5 +1,7 @@
 ---
 layout: docu
+redirect_from:
+- /docs/preview/clients/c/table_functions
 title: Table Functions
 ---
 

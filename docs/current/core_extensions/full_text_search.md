@@ -1,6 +1,8 @@
 ---
 github_repository: https://github.com/duckdb/duckdb-fts
 layout: docu
+redirect_from:
+- /docs/preview/core_extensions/full_text_search
 title: Full-Text Search Extension
 ---
 

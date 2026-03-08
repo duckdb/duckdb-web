@@ -1,5 +1,7 @@
 ---
 layout: docu
+redirect_from:
+- /docs/preview/data/json/installing_and_loading
 title: Installing and Loading the JSON extension
 ---
 

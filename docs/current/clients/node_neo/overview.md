@@ -1,5 +1,7 @@
 ---
 layout: docu
+redirect_from:
+- /docs/preview/clients/node_neo/overview
 title: Node.js Client (Neo)
 ---
 

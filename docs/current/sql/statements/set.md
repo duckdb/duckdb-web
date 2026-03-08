@@ -1,6 +1,8 @@
 ---
 layout: docu
 railroad: statements/set.js
+redirect_from:
+- /docs/preview/sql/statements/set
 title: SET and RESET Statements
 ---
 

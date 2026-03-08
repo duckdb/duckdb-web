@@ -1,6 +1,8 @@
 ---
 layout: docu
 railroad: statements/insert.js
+redirect_from:
+- /docs/preview/sql/statements/insert
 title: INSERT Statement
 ---
 

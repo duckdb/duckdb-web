@@ -1,5 +1,7 @@
 ---
 layout: docu
+redirect_from:
+- /docs/preview/guides/meta/explain
 title: 'EXPLAIN: Inspect Query Plans'
 ---
 

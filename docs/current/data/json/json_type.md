@@ -1,5 +1,7 @@
 ---
 layout: docu
+redirect_from:
+- /docs/preview/data/json/json_type
 title: JSON Type
 ---
 

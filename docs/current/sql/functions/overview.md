@@ -1,6 +1,8 @@
 ---
 layout: docu
 railroad: expressions/function.js
+redirect_from:
+- /docs/preview/sql/functions/overview
 title: Functions
 ---
 

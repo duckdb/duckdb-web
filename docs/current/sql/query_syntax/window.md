@@ -1,6 +1,8 @@
 ---
 layout: docu
 railroad: query_syntax/window.js
+redirect_from:
+- /docs/preview/sql/query_syntax/window
 title: WINDOW Clause
 ---
 

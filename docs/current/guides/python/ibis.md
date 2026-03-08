@@ -1,5 +1,7 @@
 ---
 layout: docu
+redirect_from:
+- /docs/preview/guides/python/ibis
 title: Integration with Ibis
 ---
 

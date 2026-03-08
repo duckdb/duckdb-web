@@ -1,5 +1,7 @@
 ---
 layout: docu
+redirect_from:
+- /docs/preview/sql/data_types/literal_types
 title: Literal Types
 ---
 

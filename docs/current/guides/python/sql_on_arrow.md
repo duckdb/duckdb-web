@@ -1,5 +1,7 @@
 ---
 layout: docu
+redirect_from:
+- /docs/preview/guides/python/sql_on_arrow
 title: SQL on Apache Arrow
 ---
 

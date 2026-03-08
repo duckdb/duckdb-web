@@ -1,5 +1,7 @@
 ---
 layout: docu
+redirect_from:
+- /docs/preview/clients/c/replacement_scans
 title: Replacement Scans
 ---
 

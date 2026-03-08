@@ -1,5 +1,7 @@
 ---
 layout: docu
+redirect_from:
+- /docs/preview/guides/snippets/analyze_git_repository
 title: Analyzing a Git Repository
 ---
 

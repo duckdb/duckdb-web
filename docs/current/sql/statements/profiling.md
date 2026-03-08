@@ -1,5 +1,7 @@
 ---
 layout: docu
+redirect_from:
+- /docs/preview/sql/statements/profiling
 title: Profiling Queries
 ---
 

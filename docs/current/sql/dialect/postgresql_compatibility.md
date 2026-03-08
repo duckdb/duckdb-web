@@ -1,5 +1,7 @@
 ---
 layout: docu
+redirect_from:
+- /docs/preview/sql/dialect/postgresql_compatibility
 title: PostgreSQL Compatibility
 ---
 

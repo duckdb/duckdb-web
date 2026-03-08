@@ -1,5 +1,7 @@
 ---
 layout: docu
+redirect_from:
+- /docs/preview/guides/performance/my_workload_is_slow
 title: My Workload Is Slow
 ---
 

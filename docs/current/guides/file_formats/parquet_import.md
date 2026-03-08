@@ -1,5 +1,7 @@
 ---
 layout: docu
+redirect_from:
+- /docs/preview/guides/file_formats/parquet_import
 title: Parquet Import
 ---
 

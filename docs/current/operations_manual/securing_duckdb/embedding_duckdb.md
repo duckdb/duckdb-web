@@ -1,5 +1,7 @@
 ---
 layout: docu
+redirect_from:
+- /docs/preview/operations_manual/securing_duckdb/embedding_duckdb
 title: Embedding DuckDB
 ---
 

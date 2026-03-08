@@ -1,5 +1,7 @@
 ---
 layout: docu
+redirect_from:
+- /docs/preview/guides/network_cloud_storage/s3_iceberg_import
 selected: S3 Iceberg Import
 title: S3 Iceberg Import
 ---

@@ -1,6 +1,8 @@
 ---
 layout: docu
 railroad: statements/load_and_install.js
+redirect_from:
+- /docs/preview/sql/statements/load_and_install
 title: LOAD / INSTALL Statements
 ---
 

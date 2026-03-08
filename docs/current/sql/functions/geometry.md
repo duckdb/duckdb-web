@@ -1,5 +1,7 @@
 ---
 layout: docu
+redirect_from:
+- /docs/preview/sql/functions/geometry
 title: Geometry Functions
 ---
 
@@ -75,4 +77,4 @@ The table below lists the operators that can be used with `GEOMETRY` values.
 
 | **Description** | Sets the Coordinate Reference System (CRS) identifier of the geometry |
 | **Example** | `typeof(ST_SetCRS('POINT(1 2)'::GEOMETRY, 'OGC:CRS84'))` |
-| **Result** | `GEOMETRY('OGC:CRS84')` | 
+| **Result** | `GEOMETRY('OGC:CRS84')` |

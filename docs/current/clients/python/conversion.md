@@ -1,5 +1,7 @@
 ---
 layout: docu
+redirect_from:
+- /docs/preview/clients/python/conversion
 title: Conversion between DuckDB and Python
 ---
 

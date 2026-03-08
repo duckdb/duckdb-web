@@ -1,5 +1,7 @@
 ---
 layout: docu
+redirect_from:
+- /docs/preview/sql/dialect/friendly_sql
 title: Friendly SQL
 ---
 

@@ -1,6 +1,8 @@
 ---
 layout: docu
 railroad: statements/attach.js
+redirect_from:
+- /docs/preview/sql/statements/attach
 title: ATTACH and DETACH Statements
 ---
 

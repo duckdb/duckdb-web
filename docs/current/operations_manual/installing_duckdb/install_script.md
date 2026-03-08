@@ -1,5 +1,7 @@
 ---
 layout: docu
+redirect_from:
+- /docs/preview/operations_manual/installing_duckdb/install_script
 title: Install Script
 ---
 

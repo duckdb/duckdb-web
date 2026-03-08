@@ -1,6 +1,8 @@
 ---
 layout: docu
 railroad: statements/samples.js
+redirect_from:
+- /docs/preview/sql/samples
 title: Samples
 ---
 

@@ -1,6 +1,8 @@
 ---
 github_repository: https://github.com/duckdb/duckdb-go
 layout: docu
+redirect_from:
+- /docs/preview/clients/go
 title: Go Client
 ---
 

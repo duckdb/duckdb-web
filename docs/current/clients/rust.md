@@ -1,6 +1,8 @@
 ---
 github_repository: https://github.com/duckdb/duckdb-rs
 layout: docu
+redirect_from:
+- /docs/preview/clients/rust
 title: Rust Client
 ---
 

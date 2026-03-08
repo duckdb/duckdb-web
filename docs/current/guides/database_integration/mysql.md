@@ -1,5 +1,7 @@
 ---
 layout: docu
+redirect_from:
+- /docs/preview/guides/database_integration/mysql
 title: MySQL Import
 ---
 

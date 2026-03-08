@@ -1,5 +1,7 @@
 ---
 layout: docu
+redirect_from:
+- /docs/preview/clients/cli/output_formats
 title: Output Formats
 ---
 

@@ -1,5 +1,7 @@
 ---
 layout: docu
+redirect_from:
+- /docs/preview/guides/python/execute_sql
 title: Executing SQL in Python
 ---
 

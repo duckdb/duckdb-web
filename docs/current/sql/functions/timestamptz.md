@@ -1,5 +1,7 @@
 ---
 layout: docu
+redirect_from:
+- /docs/preview/sql/functions/timestamptz
 title: Timestamp with Time Zone Functions
 ---
 

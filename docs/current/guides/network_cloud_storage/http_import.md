@@ -1,5 +1,7 @@
 ---
 layout: docu
+redirect_from:
+- /docs/preview/guides/network_cloud_storage/http_import
 title: HTTP Parquet Import
 ---
 

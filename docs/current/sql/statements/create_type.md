@@ -1,6 +1,8 @@
 ---
 layout: docu
 railroad: statements/createtype.js
+redirect_from:
+- /docs/preview/sql/statements/create_type
 title: CREATE TYPE Statement
 ---
 

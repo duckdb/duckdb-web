@@ -1,5 +1,7 @@
 ---
 layout: docu
+redirect_from:
+- /docs/preview/guides/network_cloud_storage/s3_express_one
 title: S3 Express One
 ---
 

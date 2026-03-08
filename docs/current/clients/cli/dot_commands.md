@@ -1,5 +1,7 @@
 ---
 layout: docu
+redirect_from:
+- /docs/preview/clients/cli/dot_commands
 title: Dot Commands
 ---
 

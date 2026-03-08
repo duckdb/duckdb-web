@@ -1,6 +1,8 @@
 ---
 github_repository: https://github.com/duckdb/ducklake
 layout: docu
+redirect_from:
+- /docs/preview/core_extensions/ducklake
 title: DuckLake
 ---
 

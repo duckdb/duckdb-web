@@ -1,6 +1,8 @@
 ---
 layout: docu
 railroad: statements/comment.js
+redirect_from:
+- /docs/preview/sql/statements/comment_on
 title: COMMENT ON Statement
 ---
 

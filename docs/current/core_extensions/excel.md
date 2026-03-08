@@ -1,6 +1,8 @@
 ---
 github_repository: https://github.com/duckdb/duckdb-excel
 layout: docu
+redirect_from:
+- /docs/preview/core_extensions/excel
 title: Excel Extension
 ---
 

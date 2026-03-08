@@ -1,5 +1,7 @@
 ---
 layout: docu
+redirect_from:
+- /docs/preview/extensions/troubleshooting
 title: Troubleshooting of Extensions
 ---
 

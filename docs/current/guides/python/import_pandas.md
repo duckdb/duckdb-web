@@ -1,5 +1,7 @@
 ---
 layout: docu
+redirect_from:
+- /docs/preview/guides/python/import_pandas
 title: Import from Pandas
 ---
 

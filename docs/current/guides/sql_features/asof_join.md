@@ -1,5 +1,7 @@
 ---
 layout: docu
+redirect_from:
+- /docs/preview/guides/sql_features/asof_join
 title: AsOf Join
 ---
 

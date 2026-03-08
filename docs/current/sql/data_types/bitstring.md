@@ -1,6 +1,8 @@
 ---
 blurb: The bitstring type is a string of 1s and 0s.
 layout: docu
+redirect_from:
+- /docs/preview/sql/data_types/bitstring
 title: Bitstring Type
 ---
 

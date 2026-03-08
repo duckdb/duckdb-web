@@ -1,6 +1,8 @@
 ---
 blurb: Numeric types are used to store numbers, and come in different shapes and sizes.
 layout: docu
+redirect_from:
+- /docs/preview/sql/data_types/numeric
 title: Numeric Types
 ---
 

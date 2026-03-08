@@ -1,5 +1,7 @@
 ---
 layout: docu
+redirect_from:
+- /docs/preview/guides/network_cloud_storage/cloudflare_r2_import
 title: Cloudflare R2 Import
 ---
 

@@ -1,5 +1,7 @@
 ---
 layout: docu
+redirect_from:
+- /docs/preview/extensions/installing_extensions
 title: Installing Extensions
 ---
 

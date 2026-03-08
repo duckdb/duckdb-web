@@ -1,5 +1,7 @@
 ---
 layout: docu
+redirect_from:
+- /docs/preview/guides/file_formats/json_export
 title: JSON Export
 ---
 

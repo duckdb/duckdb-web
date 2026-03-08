@@ -1,6 +1,8 @@
 ---
 layout: docu
 railroad: expressions/in.js
+redirect_from:
+- /docs/preview/sql/expressions/in
 title: IN Operator
 ---
 

@@ -1,5 +1,7 @@
 ---
 layout: docu
+redirect_from:
+- /docs/preview/guides/python/export_arrow
 title: Export to Apache Arrow
 ---
 

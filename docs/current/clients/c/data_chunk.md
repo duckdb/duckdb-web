@@ -1,5 +1,7 @@
 ---
 layout: docu
+redirect_from:
+- /docs/preview/clients/c/data_chunk
 title: Data Chunks
 ---
 

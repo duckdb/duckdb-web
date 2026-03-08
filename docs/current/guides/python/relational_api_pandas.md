@@ -1,5 +1,7 @@
 ---
 layout: docu
+redirect_from:
+- /docs/preview/guides/python/relational_api_pandas
 title: Relational API on Pandas
 ---
 

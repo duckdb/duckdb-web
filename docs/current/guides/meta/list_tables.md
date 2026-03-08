@@ -1,5 +1,7 @@
 ---
 layout: docu
+redirect_from:
+- /docs/preview/guides/meta/list_tables
 title: List Tables
 ---
 

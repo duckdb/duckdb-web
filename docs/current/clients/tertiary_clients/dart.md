@@ -1,6 +1,8 @@
 ---
 github_repository: https://github.com/TigerEyeLabs/duckdb-dart
 layout: docu
+redirect_from:
+- /docs/preview/clients/tertiary_clients/dart
 title: Dart Client
 ---
 

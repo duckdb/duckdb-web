@@ -1,5 +1,7 @@
 ---
 layout: docu
+redirect_from:
+- /docs/preview/dev/sqllogictest/result_verification
 title: Result Verification
 ---
 

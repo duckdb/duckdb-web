@@ -1,5 +1,7 @@
 ---
 layout: docu
+redirect_from:
+- /docs/preview/clients/tertiary_clients/julia
 title: Julia Client
 ---
 

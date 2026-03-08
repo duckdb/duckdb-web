@@ -1,5 +1,7 @@
 ---
 layout: docu
+redirect_from:
+- /docs/preview/data/json/overview
 title: JSON Overview
 ---
 

@@ -1,5 +1,7 @@
 ---
 layout: docu
+redirect_from:
+- /docs/preview/guides/troubleshooting/oom_errors
 title: Out of Memory Errors
 ---
 

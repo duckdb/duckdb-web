@@ -1,6 +1,8 @@
 ---
 layout: docu
 railroad: query_syntax/with.js
+redirect_from:
+- /docs/preview/sql/query_syntax/with
 title: WITH Clause
 ---
 

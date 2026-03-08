@@ -1,5 +1,7 @@
 ---
 layout: docu
+redirect_from:
+- /docs/preview/clients/wasm/deploying_duckdb_wasm
 title: Deploying DuckDB-Wasm
 ---
 

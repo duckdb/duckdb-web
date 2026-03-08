@@ -1,5 +1,7 @@
 ---
 layout: docu
+redirect_from:
+- /docs/preview/sql/meta/information_schema
 title: Information Schema
 ---
 

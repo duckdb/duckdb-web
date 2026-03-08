@@ -1,5 +1,7 @@
 ---
 layout: docu
+redirect_from:
+- /docs/preview/dev/internal_errors
 title: Internal Errors
 ---
 

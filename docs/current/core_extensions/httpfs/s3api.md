@@ -1,5 +1,7 @@
 ---
 layout: docu
+redirect_from:
+- /docs/preview/core_extensions/httpfs/s3api
 title: S3 API Support
 ---
 

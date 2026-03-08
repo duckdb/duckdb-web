@@ -1,5 +1,7 @@
 ---
 layout: docu
+redirect_from:
+- /docs/preview/extensions/community_extensions
 title: Community Extensions
 ---
 

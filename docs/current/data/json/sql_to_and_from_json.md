@@ -1,5 +1,7 @@
 ---
 layout: docu
+redirect_from:
+- /docs/preview/data/json/sql_to_and_from_json
 title: SQL to/from JSON
 ---
 

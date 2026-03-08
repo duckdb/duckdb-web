@@ -1,5 +1,7 @@
 ---
 layout: docu
+redirect_from:
+- /docs/preview/clients/c/connect
 title: Startup & Shutdown
 ---
 

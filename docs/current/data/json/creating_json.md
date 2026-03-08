@@ -1,5 +1,7 @@
 ---
 layout: docu
+redirect_from:
+- /docs/preview/data/json/creating_json
 title: Creating JSON
 ---
 

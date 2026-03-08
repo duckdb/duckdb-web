@@ -1,5 +1,7 @@
 ---
 layout: docu
+redirect_from:
+- /docs/preview/data/partitioning/hive_partitioning
 title: Hive Partitioning
 ---
 

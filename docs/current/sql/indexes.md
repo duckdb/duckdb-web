@@ -1,6 +1,8 @@
 ---
 layout: docu
 railroad: statements/indexes.js
+redirect_from:
+- /docs/preview/sql/indexes
 title: Indexes
 ---
 

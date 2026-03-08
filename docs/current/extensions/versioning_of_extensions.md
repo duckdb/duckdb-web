@@ -1,5 +1,7 @@
 ---
 layout: docu
+redirect_from:
+- /docs/preview/extensions/versioning_of_extensions
 title: Versioning of Extensions
 ---
 

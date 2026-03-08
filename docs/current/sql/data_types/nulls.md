@@ -1,6 +1,8 @@
 ---
 blurb: The NULL value represents a missing value.
 layout: docu
+redirect_from:
+- /docs/preview/sql/data_types/nulls
 title: NULL Values
 ---
 

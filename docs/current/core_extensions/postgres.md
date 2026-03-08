@@ -1,6 +1,8 @@
 ---
 github_repository: https://github.com/duckdb/duckdb-postgres
 layout: docu
+redirect_from:
+- /docs/preview/core_extensions/postgres
 title: PostgreSQL Extension
 ---
 

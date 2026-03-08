@@ -1,10 +1,11 @@
 ---
 layout: docu
+redirect_from:
+- /docs/preview/core_extensions/odbc/functions
 title: ODBC Extension Functions
 ---
 
-
- - [odbc_begin_transaction](#odbc_begin_transaction)
+- [odbc_begin_transaction](#odbc_begin_transaction)
  - [odbc_bind_params](#odbc_bind_params)
  - [odbc_close](#odbc_close)
  - [odbc_commit](#odbc_commit)
