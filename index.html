@@ -23,7 +23,7 @@ To add a banner, set banner: true in the front matter and define the banner cont
 				<a class="button yellow arrow-right" href="/docs/installation/">Get DuckDB</a>
 				<a class="button transparent arrow-right" href="/docs/">Read the docs</a>
 			</div>
-			<p class="hero-social-proof">Used by 20+ data teams at Fortune 100 companies</p>
+			<p class="hero-social-proof">Used by data teams across Fortune 500 companies</p>
 		</div>
 		<div class="hero-protocol-boxes">
 			<div class="protocol-box">
@@ -118,14 +118,17 @@ To add a banner, set banner: true in the front matter and define the banner cont
 
 <section class="whyduckdb">
 	<div class="wrap">
-		<h1 class="display-2">DuckDB at a glance</h1>
+		<h1 class="display-2">How we built DuckDB</h1>
 		<div class="icon-grid">
 			<div class="icon-grid-item">
 				<div class="icon-box">
 					<svg class="icon"><use href="#code-circle-03"></use></svg>
 				</div>
 				<h3>Simple</h3>
-				<p>Secure, extensive SQL, query Parquet, CSV, JSON with advanced joins, aggregates, and window functions for precise data handling.</p>
+				<p>
+					We made sure that you can install DuckDB in just a few seconds,
+					and built it on familiar technologies so you can start using it immediately.
+				</p>
 				<a href="/why_duckdb#simple" class="textbutton arrow-right">Read more</a>
 			</div>
 			<div class="icon-grid-item">
@@ -133,7 +136,10 @@ To add a banner, set banner: true in the front matter and define the banner cont
 					<svg class="icon"><use href="#settings-02"></use></svg>
 				</div>
 				<h3>Feature-Rich</h3>
-				<p>DuckDB supports multiple file formats (CSV, Parquet, and JSON), data lake formats. It can also connect to network and cloud storage.</p>
+				<p>
+					We support a wide range of industry standard technologies (e.g., Parquet, SQL, S3)
+					and integrated them for a seamless user experience.
+				</p>
 				<a href="/why_duckdb#feature-rich" class="textbutton arrow-right">Read more</a>
 			</div>
 			<div class="icon-grid-item">
@@ -141,7 +147,10 @@ To add a banner, set banner: true in the front matter and define the banner cont
 					<svg class="icon"><use href="#flash"></use></svg>
 				</div>
 				<h3>Fast</h3>
-				<p>DuckDB runs analytical queries at blazing speed thanks to its columnar engine, which supports parallel execution and can process larger-than-memory workloads.</p>
+				<p>
+					We built DuckDB on a state-of-the-art columnar storage engine.
+					We strived to enable larger-than-memory workloads so you never run out of memory.
+				</p>
 				<a href="/why_duckdb#fast" class="textbutton arrow-right">Read more</a>
 			</div>
 			<div class="icon-grid-item">
@@ -149,7 +158,9 @@ To add a banner, set banner: true in the front matter and define the banner cont
 					<svg class="icon"><use href="#wallet-02"></use></svg>
 				</div>
 				<h3>Free</h3>
-				<p>Embrace freedom and adaptability with DuckDB, a free, open-source solution under the MIT License, offering flexibility through a robust extension mechanism.</p>
+				<p>
+					We release DuckDB, its core extensions and the DuckLake format under MIT, a permissive <nobr>open-source</nobr> license.
+				</p>
 				<a href="/why_duckdb#free" class="textbutton arrow-right">Read more</a>
 			</div>
 			<div class="icon-grid-item">
@@ -157,7 +168,10 @@ To add a banner, set banner: true in the front matter and define the banner cont
 					<svg class="icon"><use href="#luggage-02"></use></svg>
 				</div>
 				<h3>Portable</h3>
-				<p>DuckDB runs on all popular operating systems and hardware architectures. It has idiomatic client APIs for major programming languages.</p>
+				<p>
+					We build DuckDB for all popular operating systems and major CPU architectures.
+					We ship idiomatic client APIs for major programming languages.
+				</p>
 				<a href="/why_duckdb#portable" class="textbutton arrow-right">Read more</a>
 			</div>
 			<div class="icon-grid-item">
@@ -165,7 +179,10 @@ To add a banner, set banner: true in the front matter and define the banner cont
 					<svg class="icon"><use href="#puzzle-piece-02"></use></svg>
 				</div>
 				<h3>Extensible</h3>
-				<p>DuckDB is extensible by third-party features. User contributions are available as community extensions.</p>
+				<p>
+					We added a powerful extension mechanism that enables adding new features.
+					and implemented many key DuckDB features as extensions.
+				</p>
 				<a href="/why_duckdb#extensible" class="textbutton arrow-right">Read more</a>
 			</div>
 		</div>
@@ -176,7 +193,7 @@ To add a banner, set banner: true in the front matter and define the banner cont
 
 <section class="blog">
 	<div class="wrap">
-		<h1 class="display-2">Engineering Blog</h1>
+		<h1 class="display-2">Read the blog from our engineers</h1>
 		<div class="newstileswrap">
 			{% for post in site.posts limit:2 %}
 				{% assign random_number = forloop.index | modulo: 3 | plus: 1 %}
