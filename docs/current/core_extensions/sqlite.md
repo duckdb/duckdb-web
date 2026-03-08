@@ -276,3 +276,7 @@ SELECT * FROM sqlite_db.tmp;
 |   |
 
 > Deprecated The old `sqlite_attach` function is deprecated. It is recommended to switch over to the new [`ATTACH` syntax]({% link docs/current/sql/statements/attach.md %}).
+
+## Compatibility
+
+The SQLite extension can read databases written by [Turso](https://turso.tech/), a Rust rewrite of SQLite.
