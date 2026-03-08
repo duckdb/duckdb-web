@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Leafcloud"
+title: "DuckLake on Leafcloud"
 author: "Gábor Szárnyas"
 #thumb: "/images/everywhere/thumbs/raspberry-pi-5.jpg"
 #image: "/images/everywhere/thumbs/raspberry-pi-5.jpg"
