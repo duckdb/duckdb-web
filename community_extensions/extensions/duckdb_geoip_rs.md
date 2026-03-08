@@ -55,10 +55,10 @@ docs:
     * geoip_country_iso(ip : VARCHAR) -> VARCHAR
 
     All the function will return an empty value on empty/non found value
-extension_star_count: 4
-extension_star_count_pretty: 4
-extension_download_count: 339
-extension_download_count_pretty: 339
+extension_star_count: 5
+extension_star_count_pretty: 5
+extension_download_count: 349
+extension_download_count_pretty: 349
 image: '/images/community_extensions/social_preview/preview_community_extension_duckdb_geoip_rs.png'
 layout: community_extension_doc
 ---

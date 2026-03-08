@@ -38,8 +38,8 @@ docs:
 
 extension_star_count: 40
 extension_star_count_pretty: 40
-extension_download_count: 586
-extension_download_count_pretty: 586
+extension_download_count: 584
+extension_download_count_pretty: 584
 image: '/images/community_extensions/social_preview/preview_community_extension_mongo.png'
 layout: community_extension_doc
 ---
