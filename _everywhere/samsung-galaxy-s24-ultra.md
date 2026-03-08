@@ -6,6 +6,7 @@ thumb: "/images/everywhere/thumbs/samsung-galaxy-s24-ultra.jpg"
 image: "/images/everywhere/thumbs/samsung-galaxy-s24-ultra.jpg"
 excerpt: ""
 tags: ["Phones"]
+thirdparty: false
 ---
 
 The Samsung Galaxy S24 Ultra runs TPC-H SF100 without breaking a sweat.

@@ -30,7 +30,7 @@ Additional options include writing data to Parquet files and using DuckDB's abil
 
 > DuckDB handles concurrent database access requests using file locks.
 > Exercise extra caution when accessing a DuckDB file in a shared directory (e.g., from different operating systems using different file systems).
-> If you cannot guarantee file locking, consider using a DuckLake setup, e.g., [DuckLake with SQLite as the catalog database](https://ducklake.select/docs/stable/duckdb/usage/choosing_a_catalog_database#sqlite).
+> If you cannot guarantee file locking, consider using a DuckLake setup, e.g., [DuckLake with PostgreSQL as the catalog database](https://ducklake.select/).
 
 ## Optimistic Concurrency Control
 

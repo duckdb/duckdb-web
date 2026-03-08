@@ -6,6 +6,7 @@ thumb: "/images/everywhere/thumbs/framework-laptop-13.jpg"
 image: "/images/everywhere/thumbs/framework-laptop-13.jpg"
 excerpt: ""
 tags: ["PCs"]
+thirdparty: false
 ---
 
 DuckDB can run TPC-H SF10,000 on a 13-inch ultrabook.

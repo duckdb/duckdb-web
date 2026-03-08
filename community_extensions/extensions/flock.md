@@ -8,11 +8,11 @@ excerpt: |
 extension:
   name: flock
   description: LLM & RAG extension to combine analytics and semantic analysis
-  version: 0.6.0
+  version: 0.7.0
   language: SQL & C++
   build: cmake
   license: MIT
-  excluded_platforms: "windows_amd64_rtools;wasm_mvp;wasm_eh;wasm_threads"
+  excluded_platforms: "windows_amd64_rtools"
 
   maintainers:
     - anasdorbani
@@ -20,7 +20,7 @@ extension:
 
 repo:
   github: dais-polymtl/flock
-  ref: 172a46e463c6c9dbf2aae5cdce955806eb717f26
+  ref: d5dfcdffec365077ba1325ea5c08530e6719541e
 
 docs:
   hello_world: |
@@ -64,8 +64,8 @@ docs:
 
 extension_star_count: 297
 extension_star_count_pretty: 297
-extension_download_count: 447
-extension_download_count_pretty: 447
+extension_download_count: 506
+extension_download_count_pretty: 506
 image: '/images/community_extensions/social_preview/preview_community_extension_flock.png'
 layout: community_extension_doc
 ---
