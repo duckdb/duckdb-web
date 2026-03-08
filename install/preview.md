@@ -17,13 +17,13 @@ redirect_from:
   <h1>DuckDB Preview (Nightly) Installation</h1>
 </div>
 
-The preview (nightly) builds provide the latest development version of DuckDB. As such, they are constantly in flux and they are less suitable for production use than the stable releases of DuckDB. You should only use these releases if you are looking for [recent bugfixes](https://github.com/duckdb/duckdb/pulls?q=is%3Apr+is%3Amerged) or optimizations.
+The preview (nightly) builds provide development versions of DuckDB. As such, they are constantly in flux and they are less suitable for production use than the stable releases of DuckDB. You should only use these releases if you are looking for [recent bugfixes](https://github.com/duckdb/duckdb/pulls?q=is%3Apr+is%3Amerged) or optimizations.
 
 There are currently the following DuckDB versions under development:
 
-* v1.4. This is the LTS release.
-* v1.5. This is the next stable DuckDB release, to be released in early March.
-* v1.6. This version is in a very early stage of the development.
+* v1.4: the LTS release.
+* v1.5: the current stable DuckDB release.
+* v1.6: the next DuckDB version, in a very early stage of the development.
 
 ## Command Line Interface (CLI), C and C++ clients
 
