@@ -85,3 +85,14 @@ FROM read_duckdb('my-2.duckdb');
 │     3 │
 └───────┘
 ```
+
+If the extension is `.db` or `.duckdb`, you can also omit the `read_duckdb` call (similarly to how you can omit `read_csv` and `read_parquet`):
+
+```sql
+FROM 'my-2.duckdb';
+```
+
+## Limitations
+
+`read_duckdb` currently only supports reading from tables.
+Reading from views is not yet supported.
