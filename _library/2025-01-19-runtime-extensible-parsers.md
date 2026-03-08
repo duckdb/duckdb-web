@@ -12,6 +12,8 @@ pill: "CIDR 2025"
 
 Venue: CIDR 2025
 
+[Blog post on duckdb.org]({% post_url 2024-11-22-runtime-extensible-parsers %})
+
 ## Abstract
 
 Despite their central role in processing queries, parsers have not received any noticeable attention in the data systems space. State-of-the art systems are content with ancient old parser generators. These generators create monolithic, inflexible and unforgiving parsers that hinder innovation in query languages and frustrate users. We argue that parsers should be rewritten using modern abstractions like Parser Expression Grammars (PEG), which allow dynamic changes to the accepted query syntax and better error recovery. In this paper, we discuss how parsers could be re-designed using PEG, and validate our recommendations using experiments for both effectiveness and efficiency.
