@@ -4,7 +4,7 @@ title: "Announcing DuckDB 1.5.0"
 author: "The DuckDB team"
 thumb: "/images/blog/thumbs/duckdb-release-1-5-0.svg"
 image: "/images/blog/thumbs/duckdb-release-1-5-0.png"
-excerpt: "We are releasing DuckDB version 1.5.0, codenamed “Variegata”. This release comes with a friendly CLI – a new, more ergonomic command line client –, support for the VARIANT type along with many other features and optimizations. The v1.4.0 LTS line (“Andium”) will keep receiving updates until its end-of-life in September 2026."
+excerpt: "We are releasing DuckDB version 1.5.0, codenamed “Variegata”. This release comes with a friendly CLI (a new, more ergonomic command line client), support for the `VARIANT` type, a built-in `GEOMETRY` type, along with many other features and optimizations. The v1.4.0 LTS line (“Andium”) will keep receiving updates until its end-of-life in September 2026."
 tags: ["release"]
 ---
 
@@ -155,7 +155,7 @@ The initial implementation of the pager was provided by [`tobwen`](https://githu
 DuckDB v1.5 ships an experimental parser based on PEG (Parser Expression Grammars). The new parser enables better suggestions, improved error messages, and allows extensions to extend the grammar. The PEG parser is currently disabled by default but you can opt-in using:
 
 ```sql
-SET allow_parser_override_extension = 'strict';
+CALL enable_peg_parser();
 ```
 
 The PEG parser is already used for generating suggestions. You can cycle through the options using `TAB`.
