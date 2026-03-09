@@ -422,7 +422,7 @@ During checkpointing, it's now possible to run concurrent reads ([#19867](https:
 
 Aggregate functions received several optimizations. For example, the `last` aggregate function was optimized by community member [`xe-nvdk`](https://github.com/xe-nvdk) to iterate from the end of each vector batch instead of the beginning. In synthetic benchmarks, this results in a [40% speedup](https://github.com/duckdb/duckdb/pull/20567).
 
-## Installation
+## Distribution
 
 #### Python Pip
 
@@ -449,6 +449,16 @@ powershell -NoExit iex (iwr "https://install.duckdb.org/install.ps1").Content
 ```
 
 Please note that this is currently in the beta stage. If you have any feedback, please [let us know](https://github.com/duckdb/duckdb/issues).
+
+#### CLI for Linux with musl libc
+
+We are distributing CLI clients that work with [musl libc]({% link docs/stable/dev/building/linux.md %}) (e.g., for Alpine Linux, commonly used in Docker images). The archives are available [on GitHub](https://github.com/duckdb/duckdb/releases/tag/v1.5.0).
+
+Note that the musl libc CLI client requires the `libstdc++`. To install this package, run:
+
+```batch
+apk add libstdc++
+```
 
 #### Extension Sizes
 
