@@ -773,7 +773,7 @@ body.landing{
 				p{
 					color: var(--main-text-secondary-color, #666);
 					max-width: 456px;
-					margin: 0 auto 18px;
+					margin: 20px auto 18px;
 				}
 			}
 			.bottombar{
@@ -972,6 +972,10 @@ html.darkmode body.landing section.welcome .hero-bg {
 			}
 			.proof-text{
 				order: 1;
+				
+				h2{
+					margin-top: 0;
+				}
 			}	
 		} 	
 		section#quickinstall .window{
