@@ -8,7 +8,7 @@ redirect_from:
 title: Java JDBC Client
 ---
 
-> The latest stable version of the DuckDB Java (JDBC) client is {{ site.current_duckdb_java_short_version }}.
+> The latest stable version of the DuckDB Java (JDBC) client is {% if site.current_duckdb_java_short_version != "" %}{{ site.current_duckdb_java_short_version }}{% else %}{{ site.lts_duckdb_java_short_version }}{% endif %}.
 
 ## Installation
 
