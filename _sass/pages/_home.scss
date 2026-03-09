@@ -692,6 +692,7 @@ body.landing{
 		
 		.wrap.flexwrap{
 			gap: 20px;
+			
 		}
 		.proof-code{
 			width: 565px;
@@ -718,7 +719,7 @@ body.landing{
 			flex: 1;
 			text-align: center;
 			h2{
-				margin: 0 0 20px;
+				margin: 50px 0 20px 0;
 			}
 			p{
 				color: var(--main-text-secondary-color, #666);
@@ -758,6 +759,7 @@ body.landing{
 			position: relative;
 			z-index: 10;
 			gap: 20px;
+			align-items: center;
 			.install{
 				width: 565px;
 				flex-shrink: 0;
