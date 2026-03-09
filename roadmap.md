@@ -56,6 +56,6 @@ If you would like to expedite the development of these features, please [get in 
 * [`ALTER TABLE` support for adding foreign keys](https://github.com/duckdb/duckdb/discussions/4204)
 * Improvements of query profiling (especially for concurrently running queries)
 * [Materialized views](https://github.com/duckdb/duckdb/discussions/3638)
-* [Support for PL/SQL stored procedures](https://github.com/duckdb/duckdb/discussions/8104)
+* [Support for PL/SQL stored procedures](https://github.com/duckdb/duckdb/discussions/8104) (see Denis Hirn's talk at the [DuckDB Developer Meeting #1]({% post_url 2026-01-30-duckdb-developer-meeting-1 %}))
 * [XML read support](https://github.com/duckdb/duckdb/discussions/9547)
 * Guaranteeing [FIPS](https://en.wikipedia.org/wiki/FIPS_140-2)-compliance for the [database encryption]({% link docs/stable/sql/statements/attach.md %}#database-encryption)
