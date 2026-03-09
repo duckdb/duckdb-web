@@ -8,7 +8,7 @@ title: R Client
 
 > Tip To use the DuckDB R client, visit the [R installation page]({% link install/index.html %}?environment=r).
 >
-> The latest stable version of the DuckDB R client is {{ site.current_duckdb_r_version }}.
+> The latest stable version of the DuckDB R client is {% if site.current_duckdb_r_version != "" %}{{ site.current_duckdb_r_version }}{% else %}{{ site.lts_duckdb_r_version }}{% endif %}
 
 ## Installation
 
