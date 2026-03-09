@@ -57,10 +57,6 @@ html.darkmode body{
 		background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='19' height='18' fill='none' viewBox='0 0 19 18'%3E%3Cpath fill='%23FFEF00' d='M9.287.76a.5.5 0 0 1 .907 0l2.262 4.872a.5.5 0 0 0 .394.286l5.332.646a.5.5 0 0 1 .28.863l-3.934 3.657a.5.5 0 0 0-.15.462l1.033 5.271a.5.5 0 0 1-.734.533l-4.694-2.61a.5.5 0 0 0-.486 0l-4.694 2.61a.5.5 0 0 1-.734-.533l1.034-5.27a.5.5 0 0 0-.15-.463L1.017 7.427a.5.5 0 0 1 .28-.863l5.333-.646a.5.5 0 0 0 .393-.286L9.287.76Z'/%3E%3C/svg%3E");
 	}
 	
-	&.landing .select-styled:after{
-		background-image: url("data:image/svg+xml,%3Csvg width='20' height='20' viewBox='0 0 20 20' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Ccircle cx='10' cy='10' r='9.25' stroke='%23999999' stroke-width='1.5'/%3E%3Cpath d='M4.60938 8.18164L10.0637 13.636L15.5181 8.18164' stroke='%23999999' stroke-width='1.5'/%3E%3C/svg%3E%0A")
-	}
-	
 	/** LANDING PAGE BACKGROUNDS **/
 	&.landing .landing_bg_1{
 		background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='671' height='780' fill='none' viewBox='0 0 671 780'%3E%3Cpath fill='url(%23a)' d='M-90 20c0-11.046 8.954-20 20-20h721c11.046 0 20 8.954 20 20v566c0 11.046-8.954 20-20 20H310.5c-11.046 0-20 8.954-20 20v134c0 11.046-8.954 20-20 20H-70c-11.046 0-20-8.954-20-20V20Z'/%3E%3Cdefs%3E%3ClinearGradient id='a' x1='290.5' x2='290.5' y1='0' y2='780' gradientUnits='userSpaceOnUse'%3E%3Cstop stop-color='%230D0D0D'/%3E%3Cstop offset='1' stop-color='%231A1A1A'/%3E%3C/linearGradient%3E%3C/defs%3E%3C/svg%3E");
@@ -83,13 +79,6 @@ html.darkmode body{
 		&.documentation #duckdb_logo{
 			background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='39' height='38' fill='none' viewBox='0 0 39 38'%3E%3Cpath fill='%23FFF100' d='M19.318 38c-10.511 0-19-8.489-19-19s8.489-19 19-19c10.512 0 19 8.489 19 19s-8.488 19-19 19Z'/%3E%3Cpath fill='%230D0D0D' d='M29.477 16.182H25.75v5.625h3.727a2.852 2.852 0 0 0 2.83-2.83c0-1.556-1.284-2.795-2.83-2.795ZM7.49 19c0 4.34 3.534 7.875 7.875 7.875S23.24 23.34 23.24 19c0-4.341-3.534-7.876-7.875-7.876-4.34 0-7.875 3.535-7.875 7.876Z'/%3E%3C/svg%3E");
 		}
-	}
-	&.faq h3::after, 
-	&.documentation main .wrap.frequentlyaskedquestions h3::after,
-	.frequentlyaskedquestions h3::after, 
-	&.wasm .selection-foldout .selection-head h3::after,
-	&.installation .selection-head h3::after{
-		background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='none' stroke='%23fff' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.3' d='m7 9.819 5 5 5-5'/%3E%3C/svg%3E");
 	}
 	&.installation .selection-options .option.active{
 		.symbol img{
