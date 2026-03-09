@@ -501,6 +501,8 @@ h5 a {
 	}
 	.postwrap{
 		position: relative;
+		padding: 0px 15px;
+		
 		.postcontent{
 			margin: 0 auto;
 			@include blog-typography;
