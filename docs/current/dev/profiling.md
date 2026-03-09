@@ -57,7 +57,7 @@ For more information, see the [“Profiling”]({% link docs/current/configurati
 
 ## Table Functions
 
-> These table functions were introduced in DuckDB v1.4.2.
+> These table functions were introduced in DuckDB v1.5.0.
 
 DuckDB provides table functions to enable and disable profiling, consolidating multiple settings into a single call.
 
