@@ -863,8 +863,23 @@ $('body.documentation #main_content_wrap a.externallink').each(function () {
 		} 
 	});
 	// setWithExpiry('homeBanner', '', -1); // deletes content
-	
-	
+
+	/** BANNER ROTATOR **/
+	(function() {
+		var $rotator = $('.banner-rotator');
+		var $items = $rotator.find('.banner-item');
+		if ($items.length > 1) {
+			var interval = ($rotator.data('interval') || 7) * 1000;
+			var current = 0;
+			setInterval(function() {
+				$items.eq(current).removeClass('active');
+				current = (current + 1) % $items.length;
+				$items.eq(current).addClass('active');
+			}, interval);
+		}
+	})();
+
+
 	/** ADD WORD-BOXES TO CODE TABLES */
 	$('.monospace_table + table tbody td').each(function() {
 		$(this).wrapInner('<code class="language-plaintext"></code>');

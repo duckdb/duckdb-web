@@ -164,7 +164,7 @@
 	{% if page.body_class contains "duckcon7" %}
 	<script src="https://cdn.jsdelivr.net/npm/swiper@12/swiper-bundle.min.js" defer></script>
 	{% endif %}
-	<script src="/js/script.js" defer></script>
+	<script src="/js/script.js?{{ site.time | date: '%s' }}" defer></script>
 	{% if page.body_class contains "installation" %}
 	<script src="/js/install.js" defer></script>
 	{% endif %}

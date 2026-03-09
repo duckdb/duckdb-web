@@ -1,11 +1,15 @@
 <div class="banner yellow" data-banner-version="duckdb-release-2026-02-24">
     {% comment %}
     Available color classes: purple, yellow, blue
+    Add multiple .banner-item elements to rotate between them every X seconds.
     {% endcomment %}
-    <div class="content">
-        <a href="{% post_url 2026-03-09-announcing-duckdb-150 %}">DuckDB 1.5</a> is out
-        &nbsp;&nbsp; | &nbsp;&nbsp;
-        DuckCon #7 Singapore is <a href="{% link _events/2026-05-05-duckcon7.html %}">open for talk proposals</a>
+    <div class="content banner-rotator" data-interval="7">
+        <div class="banner-item active">
+            <a href="{% post_url 2026-03-09-announcing-duckdb-150 %}">DuckDB 1.5</a> is out!
+        </div>
+        <div class="banner-item">
+            DuckCon #7 Singapore is <a href="{% link _events/2026-05-05-duckcon7.html %}">open for talk proposals.</a>
+        </div>
     </div>
     <div class="close"><svg class="icon"><use href="#x"></use></svg></div>
 </div>
