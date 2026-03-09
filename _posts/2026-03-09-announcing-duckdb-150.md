@@ -8,11 +8,11 @@ excerpt: "We are releasing DuckDB version 1.5.0, codenamed “Variegata”. This
 tags: ["release"]
 ---
 
-We are proud to release DuckDB v1.5.0, named “Variegata” after the _Paradise shelduck_ (Tadorna variegata) endemic to New Zealand.
+We are proud to release DuckDB v1.5.0, codenamed “Variegata” after the _Paradise shelduck_ (Tadorna variegata) endemic to New Zealand.
 
 In this blog post, we cover the most important updates for this release around support, features and extensions. As always, there is more: for the complete release notes, see the [release page on GitHub](https://github.com/duckdb/duckdb/releases/tag/v1.5.0).
 
-> To install the new version, please visit the [installation page]({% link install/index.html %}). Note that it can take a few days to release some client libraries (e.g., Go, R, Java) due to the extra changes and review rounds required.
+> To install the new version, please visit the [installation page]({% link install/index.html %}). Note that it can take a few days to release some extensions (e.g., the [UI]({% link docs/current/core_extensions/ui.md %})) client libraries (e.g., Go, R, Java) due to the extra changes and review rounds required.
 
 With this release, we will have two DuckDB releases available: v1.4 (LTS) and v1.5 (current).
 The next release – planned for the summer – will ship a major version, DuckDB 2.0.
@@ -59,7 +59,7 @@ These prompts can be configured using bracket codes to have a maximum length, ru
 
 #### `.tables` and `DESCRIBE`
 
-To show the columns of an individual table, use the [`DESCRIBE` statement]({% link docs/stable/sql/statements/describe.md %}):
+To show the columns of an individual table, use the [`DESCRIBE` statement]({% link docs/current/sql/statements/describe.md %}):
 
 ```sql
 «memory» D ATTACH 'https://blobs.duckdb.org/data/animals.db' AS animals_db;
@@ -77,7 +77,7 @@ To show the columns of an individual table, use the [`DESCRIBE` statement]({% li
 └──────────────────────┘
 ```
 
-The [`.tables` dot command]({% link docs/stable/clients/cli/dot_commands.md %}) lists the attached catalogs, the schemas and tables in them, and the columns in each table.
+The [`.tables` dot command]({% link docs/current/clients/cli/dot_commands.md %}) lists the attached catalogs, the schemas and tables in them, and the columns in each table.
 
 ```sql
 «memory» D ATTACH 'https://blobs.duckdb.org/data/animals.db' AS animals_db;
@@ -171,7 +171,7 @@ We are planning to make the switch to the new parser in the upcoming DuckDB rele
 
 ### `VARIANT` Type
 
-DuckDB now natively supports the [`VARIANT` type](https://github.com/duckdb/duckdb/pull/18609), inspired by [Snowflake's semi-structured `VARIANT` data type](https://docs.snowflake.com/en/sql-reference/data-types-semistructured) and available [in Parquet since 2025](https://github.com/apache/parquet-format/blob/master/VariantEncoding.md). Unlike the [JSON type]({% link docs/stable/data/json/json_type.md %}), which is physically stored as text, VARIANT stores typed, binary data. Each row in a VARIANT column is self-contained with its own type information. This leads to better compression and query performance. Here are a few examples of using `VARIANT`.
+DuckDB now natively supports the [`VARIANT` type](https://github.com/duckdb/duckdb/pull/18609), inspired by [Snowflake's semi-structured `VARIANT` data type](https://docs.snowflake.com/en/sql-reference/data-types-semistructured) and available [in Parquet since 2025](https://github.com/apache/parquet-format/blob/master/VariantEncoding.md). Unlike the [JSON type]({% link docs/current/data/json/json_type.md %}), which is physically stored as text, VARIANT stores typed, binary data. Each row in a VARIANT column is self-contained with its own type information. This leads to better compression and query performance. Here are a few examples of using `VARIANT`.
 
 Store different types in the same column:
 
@@ -319,7 +319,7 @@ Other minor additions have been made to enable passing `EXTRA_HTTP_HEADERS` when
 
 ### Network Stack
 
-The default backend for the [httpfs extension]({% link docs/stable/core_extensions/httpfs/overview.md %}) has changed from [`httplib`](https://github.com/yhirose/cpp-httplib) to [`curl`](https://curl.se/). As one of the most popular and well-tested open-source projects, we expect `curl` to provide long-standing stability and security for DuckDB. Regardless of the `http` library used, `openssl` is still the backing SSL library and options such as `http_timeout`, `http_retries`, etc. are still the same.
+The default backend for the [httpfs extension]({% link docs/current/core_extensions/httpfs/overview.md %}) has changed from [`httplib`](https://github.com/yhirose/cpp-httplib) to [`curl`](https://curl.se/). As one of the most popular and well-tested open-source projects, we expect `curl` to provide long-standing stability and security for DuckDB. Regardless of the `http` library used, `openssl` is still the backing SSL library and options such as `http_timeout`, `http_retries`, etc. are still the same.
 
 Our community has been [testing the new network stack](https://github.com/duckdb/duckdb/issues/20977) for the last few weeks. Still, if you encounter any issues, please submit them to the [`duckdb-httpfs` repository](https://github.com/duckdb/duckdb-httpfs).
 
@@ -360,7 +360,7 @@ DuckDB 2.0 will disable the single arrow syntax by default and it will only be a
 
 ### Spatial Extension
 
-The [spatial extension]({% link docs/stable/core_extensions/spatial/overview.md %}) ships several important changes.
+The [spatial extension]({% link docs/current/core_extensions/spatial/overview.md %}) ships several important changes.
 
 #### Breaking Change: Flipping of Axis Order
 
