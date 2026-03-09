@@ -337,10 +337,12 @@ body.blog header .headerline .headercontent .landingmenu nav .search_icon {
 		.banner-item {
 			grid-area: 1 / 1;
 			opacity: 0;
+			pointer-events: none;
 			transition: opacity 0.6s ease-in-out;
 
 			&.active {
 				opacity: 1;
+				pointer-events: auto;
 			}
 		}
 	}
