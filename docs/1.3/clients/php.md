@@ -4,7 +4,7 @@ layout: docu
 title: PHP Client
 ---
 
-> The DuckDB PHP client is a [tertiary client]({% link docs/preview/clients/overview.md %}) and is maintained by a third-party.
+> The DuckDB PHP client is a [tertiary client]({% link docs/1.3/clients/overview.md %}) and is maintained by a third-party.
 
 Client API for PHP.
 
