@@ -71,8 +71,8 @@ docs:
 
 extension_star_count: 18
 extension_star_count_pretty: 18
-extension_download_count: 429
-extension_download_count_pretty: 429
+extension_download_count: 440
+extension_download_count_pretty: 440
 image: '/images/community_extensions/social_preview/preview_community_extension_mlpack.png'
 layout: community_extension_doc
 ---
@@ -111,6 +111,20 @@ LOAD {{ page.extension.name }};
 | mlpack_kmeans                   | table         | use kmeans unsupervised clustering                            | parameters 'clusters', and 'iterations'                             | NULL     |
 | mlpack_mlpack_version           | scalar        | returns the version string for the mlpack version used        | NULL                                                                | NULL     |
 | mlpack_armadillo_version        | scalar        | returns the version string for the armadillo version used     | NULL                                                                | NULL     |
+
+### Overloaded Functions
+
+<div class="extension_functions_table"></div>
+
+| function_name | function_type | description | comment | examples |
+|---------------|---------------|-------------|---------|----------|
+
+### Added Types
+
+<div class="extension_types_table"></div>
+
+| type_name | type_size | logical_type | type_category | internal |
+|-----------|----------:|--------------|---------------|----------|
 
 ### Added Settings
 

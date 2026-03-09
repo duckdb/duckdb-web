@@ -69,8 +69,8 @@ docs:
 
 extension_star_count: 0
 extension_star_count_pretty: 0
-extension_download_count: 392
-extension_download_count_pretty: 392
+extension_download_count: 404
+extension_download_count_pretty: 404
 image: '/images/community_extensions/social_preview/preview_community_extension_eeagrid.png'
 layout: community_extension_doc
 ---
@@ -104,5 +104,26 @@ LOAD {{ page.extension.name }};
 | EEA_GridNumAt100m   | scalar        | Returns the Grid code at 100 m resolution given an EEA reference Grid code.                                                                                        | NULL    | [SELECT EEA_GridNumAt100m(23090257455218688);]  |
 | EEA_GridNumAt10km   | scalar        | Returns the Grid code at 10 km resolution given an EEA reference Grid code.                                                                                        | NULL    | [SELECT EEA_GridNumAt10km(23090257455218688);]  |
 | EEA_GridNumAt1km    | scalar        | Returns the Grid code at 1 km resolution given an EEA reference Grid code.                                                                                         | NULL    | [SELECT EEA_GridNumAt1km(23090257455218688);]   |
+
+### Overloaded Functions
+
+<div class="extension_functions_table"></div>
+
+| function_name | function_type | description | comment | examples |
+|---------------|---------------|-------------|---------|----------|
+
+### Added Types
+
+<div class="extension_types_table"></div>
+
+| type_name | type_size | logical_type | type_category | internal |
+|-----------|----------:|--------------|---------------|----------|
+
+### Added Settings
+
+<div class="extension_settings_table"></div>
+
+| name | description | input_type | scope | aliases |
+|------|-------------|------------|-------|---------|
 
 

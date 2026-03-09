@@ -68,8 +68,8 @@ docs:
 
 extension_star_count: 5
 extension_star_count_pretty: 5
-extension_download_count: 364
-extension_download_count_pretty: 364
+extension_download_count: 377
+extension_download_count_pretty: 377
 image: '/images/community_extensions/social_preview/preview_community_extension_duckhts.png'
 layout: community_extension_doc
 ---
@@ -109,5 +109,26 @@ LOAD {{ page.extension.name }};
 | read_hts_index_raw   | table_macro   | NULL        | NULL    |          |
 | read_hts_index_spans | table_macro   | NULL        | NULL    |          |
 | read_tabix           | table         | NULL        | NULL    |          |
+
+### Overloaded Functions
+
+<div class="extension_functions_table"></div>
+
+| function_name | function_type | description | comment | examples |
+|---------------|---------------|-------------|---------|----------|
+
+### Added Types
+
+<div class="extension_types_table"></div>
+
+| type_name | type_size | logical_type | type_category | internal |
+|-----------|----------:|--------------|---------------|----------|
+
+### Added Settings
+
+<div class="extension_settings_table"></div>
+
+| name | description | input_type | scope | aliases |
+|------|-------------|------------|-------|---------|
 
 

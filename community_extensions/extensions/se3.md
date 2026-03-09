@@ -8,17 +8,17 @@ excerpt: |
 extension:
   name: se3
   description: Provides SE(3) rigid transformations (combinations of rotations and translations in 3D) as DuckDB scalar functions.
-  version: 0.1.0
+  version: 0.2.0
   language: C++
   build: cmake
   license: MIT
-  excluded_platforms: "windows_amd64_mingw;wasm_mvp;wasm_eh;wasm_threads"
+  excluded_platforms: ""
   requires_toolchains: "vcpkg"
   maintainers:
     - jokasimr
 repo:
   github: jokasimr/se3
-  ref: v0.1.0
+  ref: v0.2.0
 
 docs:
   hello_world: |
@@ -40,8 +40,8 @@ docs:
 
 extension_star_count: 0
 extension_star_count_pretty: 0
-extension_download_count: 270
-extension_download_count_pretty: 270
+extension_download_count: 323
+extension_download_count_pretty: 323
 image: '/images/community_extensions/social_preview/preview_community_extension_se3.png'
 layout: community_extension_doc
 ---
@@ -79,5 +79,39 @@ LOAD {{ page.extension.name }};
 | se3_identity         | scalar        | NULL        | NULL    |          |
 | se3_inv              | scalar        | NULL        | NULL    |          |
 | se3_make             | scalar        | NULL        | NULL    |          |
+| vadd                 | scalar        | NULL        | NULL    |          |
+| vangle               | scalar        | NULL        | NULL    |          |
+| vcos_angle           | scalar        | NULL        | NULL    |          |
+| vcross               | scalar        | NULL        | NULL    |          |
+| vdot                 | scalar        | NULL        | NULL    |          |
+| vnorm                | scalar        | NULL        | NULL    |          |
+| vnorm2               | scalar        | NULL        | NULL    |          |
+| vnormalize           | scalar        | NULL        | NULL    |          |
+| vproj                | scalar        | NULL        | NULL    |          |
+| vrej                 | scalar        | NULL        | NULL    |          |
+| vscale               | scalar        | NULL        | NULL    |          |
+| vsub                 | scalar        | NULL        | NULL    |          |
+| vvec                 | scalar        | NULL        | NULL    |          |
+
+### Overloaded Functions
+
+<div class="extension_functions_table"></div>
+
+| function_name | function_type | description | comment | examples |
+|---------------|---------------|-------------|---------|----------|
+
+### Added Types
+
+<div class="extension_types_table"></div>
+
+| type_name | type_size | logical_type | type_category | internal |
+|-----------|----------:|--------------|---------------|----------|
+
+### Added Settings
+
+<div class="extension_settings_table"></div>
+
+| name | description | input_type | scope | aliases |
+|------|-------------|------------|-------|---------|
 
 

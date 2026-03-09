@@ -92,8 +92,8 @@ docs:
 
 extension_star_count: 4
 extension_star_count_pretty: 4
-extension_download_count: 412
-extension_download_count_pretty: 412
+extension_download_count: 411
+extension_download_count_pretty: 411
 image: '/images/community_extensions/social_preview/preview_community_extension_func_apply.png'
 layout: community_extension_doc
 ---
@@ -141,5 +141,19 @@ LOAD {{ page.extension.name }};
 | function_name | function_type |                                                                                   description                                                                                    | comment |               examples               |
 |---------------|---------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|---------|--------------------------------------|
 | apply         | scalar        | Returns a list that is the result of applying the `lambda` function to each element of the input `list`. The return type is defined by the return type of the `lambda` function. | NULL    | [apply([1, 2, 3], lambda x : x + 1)] |
+
+### Added Types
+
+<div class="extension_types_table"></div>
+
+| type_name | type_size | logical_type | type_category | internal |
+|-----------|----------:|--------------|---------------|----------|
+
+### Added Settings
+
+<div class="extension_settings_table"></div>
+
+| name | description | input_type | scope | aliases |
+|------|-------------|------------|-------|---------|
 
 

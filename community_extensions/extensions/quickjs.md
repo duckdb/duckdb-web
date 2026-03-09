@@ -53,8 +53,8 @@ repo:
 
 extension_star_count: 11
 extension_star_count_pretty: 11
-extension_download_count: 459
-extension_download_count_pretty: 459
+extension_download_count: 476
+extension_download_count_pretty: 476
 image: '/images/community_extensions/social_preview/preview_community_extension_quickjs.png'
 layout: community_extension_doc
 ---
@@ -85,5 +85,26 @@ LOAD {{ page.extension.name }};
 | quickjs       | scalar        | Execute JavaScript code and return the result as a string                               | NULL    | [quickjs('1 + 2'), quickjs('"hello".toUpperCase()')]                      |
 | quickjs       | table         | Execute JavaScript code that returns an array, with each element becoming a row         | NULL    | [SELECT * FROM quickjs('[1, 2, 3].map(x => x * 2)')]                      |
 | quickjs_eval  | scalar        | Execute a JavaScript function with the provided arguments and return the result as JSON | NULL    | [quickjs_eval('(a, b) => a + b', 1, 2), quickjs_eval('(x) => x * 2', 21)] |
+
+### Overloaded Functions
+
+<div class="extension_functions_table"></div>
+
+| function_name | function_type | description | comment | examples |
+|---------------|---------------|-------------|---------|----------|
+
+### Added Types
+
+<div class="extension_types_table"></div>
+
+| type_name | type_size | logical_type | type_category | internal |
+|-----------|----------:|--------------|---------------|----------|
+
+### Added Settings
+
+<div class="extension_settings_table"></div>
+
+| name | description | input_type | scope | aliases |
+|------|-------------|------------|-------|---------|
 
 

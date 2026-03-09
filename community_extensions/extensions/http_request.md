@@ -69,8 +69,8 @@ docs:
 
 extension_star_count: 1
 extension_star_count_pretty: 1
-extension_download_count: 423
-extension_download_count_pretty: 423
+extension_download_count: 437
+extension_download_count_pretty: 437
 image: '/images/community_extensions/social_preview/preview_community_extension_http_request.png'
 layout: community_extension_doc
 ---
@@ -130,7 +130,7 @@ LOAD {{ page.extension.name }};
 <div class="extension_types_table"></div>
 
 |  type_name   | type_size | logical_type | type_category | internal |
-|--------------|----------:|--------------|---------------|---------:|
+|--------------|----------:|--------------|---------------|----------|
 | HTTP_HEADERS | 16        | MAP          | COMPOSITE     | true     |
 
 ### Added Settings

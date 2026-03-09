@@ -25,8 +25,8 @@ repo:
 
 extension_star_count: 5
 extension_star_count_pretty: 5
-extension_download_count: 3814
-extension_download_count_pretty: 3.8k
+extension_download_count: 13252
+extension_download_count_pretty: 13.3k
 image: '/images/community_extensions/social_preview/preview_community_extension_bitfilters.png'
 layout: community_extension_doc
 ---
@@ -64,5 +64,26 @@ LOAD {{ page.extension.name }};
 | xor16_filter_contains         | scalar        | Tests if a Xor16 filter may contain a value. Returns true if the value might be in the set (with possible false positives), or false if the value is definitely not in the set (no false negatives).        | NULL    | [SELECT xor16_filter_contains(filter, 42) FROM table]         |
 | xor8_filter                   | aggregate     | Creates a Xor8 filter with ~0.4% false positive rate.                                                                                                                                                       | NULL    | [SELECT xor8_filter(hash(column)) FROM table]                 |
 | xor8_filter_contains          | scalar        | Tests if a Xor8 filter may contain a value. Returns true if the value might be in the set (with possible false positives), or false if the value is definitely not in the set (no false negatives).         | NULL    | [SELECT xor8_filter_contains(filter, 42) FROM table]          |
+
+### Overloaded Functions
+
+<div class="extension_functions_table"></div>
+
+| function_name | function_type | description | comment | examples |
+|---------------|---------------|-------------|---------|----------|
+
+### Added Types
+
+<div class="extension_types_table"></div>
+
+| type_name | type_size | logical_type | type_category | internal |
+|-----------|----------:|--------------|---------------|----------|
+
+### Added Settings
+
+<div class="extension_settings_table"></div>
+
+| name | description | input_type | scope | aliases |
+|------|-------------|------------|-------|---------|
 
 

@@ -95,8 +95,8 @@ docs:
 
 extension_star_count: 6
 extension_star_count_pretty: 6
-extension_download_count: 354
-extension_download_count_pretty: 354
+extension_download_count: 363
+extension_download_count_pretty: 363
 image: '/images/community_extensions/social_preview/preview_community_extension_ducksync.png'
 layout: community_extension_doc
 ---
@@ -132,5 +132,26 @@ LOAD {{ page.extension.name }};
 | ducksync_create_cache  | table         | Define a cached query result with a source query, monitor tables for smart refresh, and optional TTL in seconds.                                                             | monitor_tables are checked for last_altered changes to determine if refresh is needed. TTL=0 means no expiry.                  | [SELECT * FROM ducksync_create_cache('customers', 'prod', 'SELECT * FROM PROD.PUBLIC.CUSTOMERS', ['PROD.PUBLIC.CUSTOMERS'], 3600);] |
 | ducksync_refresh       | table         | Refresh a cache by fetching from Snowflake and storing in DuckLake. Skips if source data unchanged (smart refresh).                                                          | Returns result=REFRESHED, SKIPPED, or ERROR with rows_refreshed and duration_ms. Use force=true to bypass smart check.         | [SELECT * FROM ducksync_refresh('customers');]                                                                                      |
 | ducksync_query         | table         | Smart query routing — rewrites SQL to use cached DuckLake tables when all referenced tables are cached; passes through to Snowflake otherwise. Returns actual query results. | Main query interface. Automatically refreshes expired caches before executing. Supports SELECT with JOINs, UNIONs, subqueries. | [SELECT * FROM ducksync_query('SELECT * FROM PROD.PUBLIC.CUSTOMERS WHERE region = ''US''', 'prod');]                                |
+
+### Overloaded Functions
+
+<div class="extension_functions_table"></div>
+
+| function_name | function_type | description | comment | examples |
+|---------------|---------------|-------------|---------|----------|
+
+### Added Types
+
+<div class="extension_types_table"></div>
+
+| type_name | type_size | logical_type | type_category | internal |
+|-----------|----------:|--------------|---------------|----------|
+
+### Added Settings
+
+<div class="extension_settings_table"></div>
+
+| name | description | input_type | scope | aliases |
+|------|-------------|------------|-------|---------|
 
 

@@ -19,7 +19,7 @@ extension:
 repo:
   github: carlopi/duckdb-magic
   andium: 6a214b48b6dc760e398c73131e00ee62f2c5f1bc
-  ref: c962b82a70ad44c93d06a9d7c2a1dbe817a5146a
+  ref: 4f384b95b16868abc42177232a43fa87719d75ab
 
 docs:
   hello_world: |
@@ -41,8 +41,8 @@ docs:
 
 extension_star_count: 7
 extension_star_count_pretty: 7
-extension_download_count: 610
-extension_download_count_pretty: 610
+extension_download_count: 627
+extension_download_count_pretty: 627
 image: '/images/community_extensions/social_preview/preview_community_extension_magic.png'
 layout: community_extension_doc
 ---
@@ -68,10 +68,32 @@ LOAD {{ page.extension.name }};
 
 <div class="extension_functions_table"></div>
 
+|       function_name       | function_type |                                                                           description                                                                            | comment |                                                             examples                                                             |
+|---------------------------|---------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------|---------|----------------------------------------------------------------------------------------------------------------------------------|
+| magic_mime                | scalar        | Returns the MIME type for the given file path using the libmagic database (e.g. 'application/json', 'text/plain').                                               | NULL    | [SELECT magic_mime('myfile.json');, SELECT file, magic_mime(file) AS mime FROM glob('data/**/*');]                               |
+| magic_required_extensions | scalar        | Returns the list of DuckDB extensions that must be loaded before reading the given file with read_any(). Returns an empty list for built-in formats (CSV, blob). | NULL    | [SELECT magic_required_extensions('myfile.json');, SELECT file, magic_required_extensions(file) AS exts FROM glob('data/**/*');] |
+| magic_type                | scalar        | Returns the file type description for the given file path using the libmagic database (e.g. 'Apache Parquet', 'JSON data').                                      | NULL    | [SELECT magic_type('myfile.parquet');, SELECT file, magic_type(file) AS type FROM glob('data/**/*');]                            |
+| read_any                  | table_macro   | NULL                                                                                                                                                             | NULL    |                                                                                                                                  |
+
+### Overloaded Functions
+
+<div class="extension_functions_table"></div>
+
 | function_name | function_type | description | comment | examples |
 |---------------|---------------|-------------|---------|----------|
-| magic_mime    | scalar        | NULL        | NULL    |          |
-| magic_type    | scalar        | NULL        | NULL    |          |
-| read_any      | table_macro   | NULL        | NULL    |          |
+
+### Added Types
+
+<div class="extension_types_table"></div>
+
+| type_name | type_size | logical_type | type_category | internal |
+|-----------|----------:|--------------|---------------|----------|
+
+### Added Settings
+
+<div class="extension_settings_table"></div>
+
+| name | description | input_type | scope | aliases |
+|------|-------------|------------|-------|---------|
 
 

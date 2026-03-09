@@ -68,8 +68,8 @@ docs:
 
 extension_star_count: 6
 extension_star_count_pretty: 6
-extension_download_count: 389
-extension_download_count_pretty: 389
+extension_download_count: 391
+extension_download_count_pretty: 391
 image: '/images/community_extensions/social_preview/preview_community_extension_crawler.png'
 layout: community_extension_doc
 ---
@@ -107,6 +107,20 @@ LOAD {{ page.extension.name }};
 | read_html             | table         | NULL        | NULL    |          |
 | sitemap               | table         | NULL        | NULL    |          |
 | stream_merge_internal | table         | NULL        | NULL    |          |
+
+### Overloaded Functions
+
+<div class="extension_functions_table"></div>
+
+| function_name | function_type | description | comment | examples |
+|---------------|---------------|-------------|---------|----------|
+
+### Added Types
+
+<div class="extension_types_table"></div>
+
+| type_name | type_size | logical_type | type_category | internal |
+|-----------|----------:|--------------|---------------|----------|
 
 ### Added Settings
 

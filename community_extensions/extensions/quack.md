@@ -36,8 +36,8 @@ docs:
 
 extension_star_count: 264
 extension_star_count_pretty: 264
-extension_download_count: 735
-extension_download_count_pretty: 735
+extension_download_count: 766
+extension_download_count_pretty: 766
 image: '/images/community_extensions/social_preview/preview_community_extension_quack.png'
 layout: community_extension_doc
 ---
@@ -67,5 +67,26 @@ LOAD {{ page.extension.name }};
 |-----------------------|---------------|-------------|---------|----------|
 | quack                 | scalar        | NULL        | NULL    |          |
 | quack_openssl_version | scalar        | NULL        | NULL    |          |
+
+### Overloaded Functions
+
+<div class="extension_functions_table"></div>
+
+| function_name | function_type | description | comment | examples |
+|---------------|---------------|-------------|---------|----------|
+
+### Added Types
+
+<div class="extension_types_table"></div>
+
+| type_name | type_size | logical_type | type_category | internal |
+|-----------|----------:|--------------|---------------|----------|
+
+### Added Settings
+
+<div class="extension_settings_table"></div>
+
+| name | description | input_type | scope | aliases |
+|------|-------------|------------|-------|---------|
 
 

@@ -24,7 +24,7 @@ repo:
 
 extension_star_count: 58
 extension_star_count_pretty: 58
-extension_download_count: 2509
+extension_download_count: 2496
 extension_download_count_pretty: 2.5k
 image: '/images/community_extensions/social_preview/preview_community_extension_lindel.png'
 layout: community_extension_doc
@@ -51,11 +51,32 @@ LOAD {{ page.extension.name }};
 
 <div class="extension_functions_table"></div>
 
-| function_name  | function_type | description | comment | examples |
-|----------------|---------------|-------------|---------|----------|
-| hilbert_decode | scalar        | NULL        | NULL    |          |
-| hilbert_encode | scalar        | NULL        | NULL    |          |
-| morton_decode  | scalar        | NULL        | NULL    |          |
-| morton_encode  | scalar        | NULL        | NULL    |          |
+| function_name  | function_type |                                                                                               description                                                                                                | comment |                    examples                    |
+|----------------|---------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|---------|------------------------------------------------|
+| hilbert_decode | scalar        | Decodes a Hilbert-encoded unsigned integer back into an array of values. The number of output elements and their type are determined by the parameters.                                                  | NULL    | [hilbert_decode(123::UBIGINT, 2, false, true)] |
+| hilbert_encode | scalar        | Encodes an array of integers or floats into a single unsigned integer using Hilbert curve mapping. Hilbert curves preserve locality better than Morton encoding, making them ideal for spatial indexing. | NULL    | [hilbert_encode([1, 2, 3]::INTEGER[3])]        |
+| morton_decode  | scalar        | Decodes a Morton (Z-order) encoded unsigned integer back into an array of values. The number of output elements and their type are determined by the parameters.                                         | NULL    | [morton_decode(123::UBIGINT, 2, false, true)]  |
+| morton_encode  | scalar        | Encodes an array of integers or floats into a single unsigned integer using Morton (Z-order) curve mapping. Morton encoding interleaves bits and is computationally simpler than Hilbert encoding.       | NULL    | [morton_encode([1, 2, 3]::INTEGER[3])]         |
+
+### Overloaded Functions
+
+<div class="extension_functions_table"></div>
+
+| function_name | function_type | description | comment | examples |
+|---------------|---------------|-------------|---------|----------|
+
+### Added Types
+
+<div class="extension_types_table"></div>
+
+| type_name | type_size | logical_type | type_category | internal |
+|-----------|----------:|--------------|---------------|----------|
+
+### Added Settings
+
+<div class="extension_settings_table"></div>
+
+| name | description | input_type | scope | aliases |
+|------|-------------|------------|-------|---------|
 
 

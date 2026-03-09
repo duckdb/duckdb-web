@@ -23,10 +23,10 @@ repo:
   andium: d3b90faa3372d4204915343546fa0556601bf243
   ref: d8bccda8f7ed5fa162515056866292b95864d747
 
-extension_star_count: 20
-extension_star_count_pretty: 20
-extension_download_count: 482
-extension_download_count_pretty: 482
+extension_star_count: 21
+extension_star_count_pretty: 21
+extension_download_count: 495
+extension_download_count_pretty: 495
 image: '/images/community_extensions/social_preview/preview_community_extension_textplot.png'
 layout: community_extension_doc
 ---
@@ -58,5 +58,26 @@ LOAD {{ page.extension.name }};
 | tp_density    | scalar        | Creates a density plot (histogram) visualization from an array of numeric values. Supports multiple styles: shaded, dots, ascii, height, circles, safety, rainbow_circle, rainbow_square, moon, sparse, and white.                | NULL    | [tp_density(list(value)), tp_density(array_agg(score), width := 40), tp_density(data, style := 'height'), tp_density(temps, style := 'rainbow_square', width := 30)]                                                                                                         |
 | tp_qr         | scalar        | Generates a text-based QR code from a string or blob. Supports configurable error correction levels and custom on/off characters.                                                                                                 | NULL    | [tp_qr('https://duckdb.org'), tp_qr(url, ecc := 'high'), tp_qr(message, on := '##', off := '  ')]                                                                                                                                                                            |
 | tp_sparkline  | scalar        | Creates a sparkline visualization from an array of numeric values. Supports three modes: 'absolute' (height-based), 'delta' (up/down/same direction), and 'trend' (direction with magnitude). Multiple themes available per mode. | NULL    | [tp_sparkline(list(value)), tp_sparkline(array_agg(price), width := 20), tp_sparkline(data, mode := 'delta', theme := 'arrows'), tp_sparkline(temps, mode := 'absolute', theme := 'utf8_blocks'), tp_sparkline(stocks, mode := 'trend', theme := 'faces')]                   |
+
+### Overloaded Functions
+
+<div class="extension_functions_table"></div>
+
+| function_name | function_type | description | comment | examples |
+|---------------|---------------|-------------|---------|----------|
+
+### Added Types
+
+<div class="extension_types_table"></div>
+
+| type_name | type_size | logical_type | type_category | internal |
+|-----------|----------:|--------------|---------------|----------|
+
+### Added Settings
+
+<div class="extension_settings_table"></div>
+
+| name | description | input_type | scope | aliases |
+|------|-------------|------------|-------|---------|
 
 

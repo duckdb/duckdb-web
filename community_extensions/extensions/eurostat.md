@@ -150,8 +150,8 @@ docs:
 
 extension_star_count: 30
 extension_star_count_pretty: 30
-extension_download_count: 367
-extension_download_count_pretty: 367
+extension_download_count: 373
+extension_download_count_pretty: 373
 image: '/images/community_extensions/social_preview/preview_community_extension_eurostat.png'
 layout: community_extension_doc
 ---
@@ -184,5 +184,26 @@ LOAD {{ page.extension.name }};
 | EUROSTAT_Endpoints              | table         | Returns the list of supported EUROSTAT API Endpoints.                                          | NULL    | [SELECT provider_id, organization, description FROM EUROSTAT_Endpoints();]                                 |
 | EUROSTAT_DataStructure          | table         | Returns information of the data structure of an EUROSTAT Dataflow.                             | NULL    | [SELECT * FROM EUROSTAT_DataStructure('ESTAT', 'DEMO_R_D2JAN', language := 'en');]                         |
 | EUROSTAT_Read                   | table         | Returns the dataset of an EUROSTAT Dataflow.                                                   | NULL    | [SELECT * FROM EUROSTAT_Read('ESTAT', 'DEMO_R_D2JAN') LIMIT 5;]                                            |
+
+### Overloaded Functions
+
+<div class="extension_functions_table"></div>
+
+| function_name | function_type | description | comment | examples |
+|---------------|---------------|-------------|---------|----------|
+
+### Added Types
+
+<div class="extension_types_table"></div>
+
+| type_name | type_size | logical_type | type_category | internal |
+|-----------|----------:|--------------|---------------|----------|
+
+### Added Settings
+
+<div class="extension_settings_table"></div>
+
+| name | description | input_type | scope | aliases |
+|------|-------------|------------|-------|---------|
 
 

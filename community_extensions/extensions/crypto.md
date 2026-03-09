@@ -25,8 +25,8 @@ repo:
 
 extension_star_count: 27
 extension_star_count_pretty: 27
-extension_download_count: 12462
-extension_download_count_pretty: 12.5k
+extension_download_count: 12660
+extension_download_count_pretty: 12.7k
 image: '/images/community_extensions/social_preview/preview_community_extension_crypto.png'
 layout: community_extension_doc
 ---
@@ -58,5 +58,26 @@ LOAD {{ page.extension.name }};
 | crypto_hash_agg     | aggregate     | Computes a cryptographic hash over multiple rows using the specified algorithm. ORDER BY is required to ensure deterministic results. Returns the same hash as crypto_hash() would for an equivalent ordered list. Returns NULL for empty result sets.                   | NULL    | [crypto_hash_agg('sha2-256', column_name ORDER BY id), crypto_hash_agg('blake3', data ORDER BY timestamp)] |
 | crypto_hmac         | scalar        | Computes an HMAC (Hash-based Message Authentication Code) of the message using the specified algorithm and key. Supports all hash algorithms except blake3, which requires exactly 32 bytes for the key.                                                                 | NULL    | [crypto_hmac('sha2-256', 'secret_key', 'message to authenticate')]                                         |
 | crypto_random_bytes | scalar        | Generates cryptographically secure random bytes using OpenSSL's RAND_bytes(). Length must be between 1 and 4,294,967,295 bytes. Each call produces different random bytes.                                                                                               | NULL    | [crypto_random_bytes(16), crypto_random_bytes(32)]                                                         |
+
+### Overloaded Functions
+
+<div class="extension_functions_table"></div>
+
+| function_name | function_type | description | comment | examples |
+|---------------|---------------|-------------|---------|----------|
+
+### Added Types
+
+<div class="extension_types_table"></div>
+
+| type_name | type_size | logical_type | type_category | internal |
+|-----------|----------:|--------------|---------------|----------|
+
+### Added Settings
+
+<div class="extension_settings_table"></div>
+
+| name | description | input_type | scope | aliases |
+|------|-------------|------------|-------|---------|
 
 

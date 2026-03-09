@@ -121,8 +121,8 @@ extended_description: |
 
 extension_star_count: 1
 extension_star_count_pretty: 1
-extension_download_count: 316
-extension_download_count_pretty: 316
+extension_download_count: 324
+extension_download_count_pretty: 324
 image: '/images/community_extensions/social_preview/preview_community_extension_brew.png'
 layout: community_extension_doc
 ---
@@ -154,5 +154,26 @@ LOAD {{ page.extension.name }};
 | brew_packages     | table         | Returns the installed packages, casks and formulas                                                     | NULL                                                           | [from brew_packages()]   |
 | brew_formulas     | table         | Returns the installed formulas                                                                         | NULL                                                           | [from brew_formulas()]   |
 | brew_dependencies | table         | Return a table with two columns : the package and the pakage that relies on it. One row per dependency | Useful to produce a graph of dependencies and security reports | [from brew_dependencies] |
+
+### Overloaded Functions
+
+<div class="extension_functions_table"></div>
+
+| function_name | function_type | description | comment | examples |
+|---------------|---------------|-------------|---------|----------|
+
+### Added Types
+
+<div class="extension_types_table"></div>
+
+| type_name | type_size | logical_type | type_category | internal |
+|-----------|----------:|--------------|---------------|----------|
+
+### Added Settings
+
+<div class="extension_settings_table"></div>
+
+| name | description | input_type | scope | aliases |
+|------|-------------|------------|-------|---------|
 
 

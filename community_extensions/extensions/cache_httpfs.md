@@ -37,10 +37,10 @@ docs:
     - Exposes function to get cache size and cleanup cache
     - Provides an option to disable / enable cache, which could act as a drop-in replacement for httpfs
 
-extension_star_count: 131
-extension_star_count_pretty: 131
-extension_download_count: 65534
-extension_download_count_pretty: 65.5k
+extension_star_count: 132
+extension_star_count_pretty: 132
+extension_download_count: 65739
+extension_download_count_pretty: 65.7k
 image: '/images/community_extensions/social_preview/preview_community_extension_cache_httpfs.png'
 layout: community_extension_doc
 ---
@@ -88,6 +88,20 @@ LOAD {{ page.extension.name }};
 | cache_httpfs_list_registered_filesystems  | table         | NULL        | NULL    |          |
 | cache_httpfs_reset_exclusion_regex        | scalar        | NULL        | NULL    |          |
 | cache_httpfs_wrap_cache_filesystem        | scalar        | NULL        | NULL    |          |
+
+### Overloaded Functions
+
+<div class="extension_functions_table"></div>
+
+| function_name | function_type | description | comment | examples |
+|---------------|---------------|-------------|---------|----------|
+
+### Added Types
+
+<div class="extension_types_table"></div>
+
+| type_name | type_size | logical_type | type_category | internal |
+|-----------|----------:|--------------|---------------|----------|
 
 ### Added Settings
 

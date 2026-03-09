@@ -173,8 +173,8 @@ docs:
 
 extension_star_count: 1
 extension_star_count_pretty: 1
-extension_download_count: 389
-extension_download_count_pretty: 389
+extension_download_count: 402
+extension_download_count_pretty: 402
 image: '/images/community_extensions/social_preview/preview_community_extension_duck_block_utils.png'
 layout: community_extension_doc
 ---
@@ -276,13 +276,27 @@ LOAD {{ page.extension.name }};
 | to_duck_block                | scalar        | NULL        | NULL    |          |
 | write_pandoc_ast             | scalar        | NULL        | NULL    |          |
 
+### Overloaded Functions
+
+<div class="extension_functions_table"></div>
+
+| function_name | function_type | description | comment | examples |
+|---------------|---------------|-------------|---------|----------|
+
 ### Added Types
 
 <div class="extension_types_table"></div>
 
 |   type_name    | type_size | logical_type | type_category | internal |
-|----------------|----------:|--------------|---------------|---------:|
+|----------------|----------:|--------------|---------------|----------|
 | duck_block     | 0         | STRUCT       | COMPOSITE     | true     |
 | duck_block_ext | 0         | STRUCT       | COMPOSITE     | true     |
+
+### Added Settings
+
+<div class="extension_settings_table"></div>
+
+| name | description | input_type | scope | aliases |
+|------|-------------|------------|-------|---------|
 
 

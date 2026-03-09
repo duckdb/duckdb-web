@@ -23,10 +23,10 @@ repo:
   andium: f4493ade6aa592402b1b80a3eec002d94254b5e9
   ref: 7b731c7870b6fe5ca9fd62dc57a8ec0bfe850cc2
 
-extension_star_count: 24
-extension_star_count_pretty: 24
-extension_download_count: 406
-extension_download_count_pretty: 406
+extension_star_count: 25
+extension_star_count_pretty: 25
+extension_download_count: 412
+extension_download_count_pretty: 412
 image: '/images/community_extensions/social_preview/preview_community_extension_evalexpr_rhai.png'
 layout: community_extension_doc
 ---
@@ -54,7 +54,28 @@ LOAD {{ page.extension.name }};
 
 | function_name | function_type |                                           description                                            | comment |                                                           examples                                                           |
 |---------------|---------------|--------------------------------------------------------------------------------------------------|---------|------------------------------------------------------------------------------------------------------------------------------|
-| evalexpr_rhai | scalar        | Evaluate a Rhai scripting language expression and return the result as JSON                      | NULL    | [evalexpr_rhai('40 + 2'), evalexpr_rhai('[1, 2, 3].map(|x| x * 2)')]                                                         |
+| evalexpr_rhai | scalar        | Evaluate a Rhai scripting language expression and return the result as JSON                      | NULL    | [evalexpr_rhai('40 + 2'), evalexpr_rhai('[1, 2, 3].map(\|x\| x * 2)')]                                                       |
 | evalexpr_rhai | scalar        | Evaluate a Rhai scripting language expression with a JSON context object accessible as 'context' | NULL    | [evalexpr_rhai('context.x + context.y', '{"x": 10, "y": 20}'), evalexpr_rhai('context.items.len()', '{"items": [1, 2, 3]}')] |
+
+### Overloaded Functions
+
+<div class="extension_functions_table"></div>
+
+| function_name | function_type | description | comment | examples |
+|---------------|---------------|-------------|---------|----------|
+
+### Added Types
+
+<div class="extension_types_table"></div>
+
+| type_name | type_size | logical_type | type_category | internal |
+|-----------|----------:|--------------|---------------|----------|
+
+### Added Settings
+
+<div class="extension_settings_table"></div>
+
+| name | description | input_type | scope | aliases |
+|------|-------------|------------|-------|---------|
 
 

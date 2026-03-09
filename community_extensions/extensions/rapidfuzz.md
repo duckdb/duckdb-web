@@ -24,8 +24,8 @@ repo:
 
 extension_star_count: 13
 extension_star_count_pretty: 13
-extension_download_count: 1228
-extension_download_count_pretty: 1.2k
+extension_download_count: 1289
+extension_download_count_pretty: 1.3k
 image: '/images/community_extensions/social_preview/preview_community_extension_rapidfuzz.png'
 layout: community_extension_doc
 ---
@@ -78,6 +78,7 @@ LOAD {{ page.extension.name }};
 | rapidfuzz_osa_normalized_similarity          | scalar        | NULL        | NULL    |          |
 | rapidfuzz_osa_similarity                     | scalar        | NULL        | NULL    |          |
 | rapidfuzz_partial_ratio                      | scalar        | NULL        | NULL    |          |
+| rapidfuzz_partial_token_set_ratio            | scalar        | NULL        | NULL    |          |
 | rapidfuzz_postfix_distance                   | scalar        | NULL        | NULL    |          |
 | rapidfuzz_postfix_normalized_distance        | scalar        | NULL        | NULL    |          |
 | rapidfuzz_postfix_normalized_similarity      | scalar        | NULL        | NULL    |          |
@@ -89,5 +90,26 @@ LOAD {{ page.extension.name }};
 | rapidfuzz_ratio                              | scalar        | NULL        | NULL    |          |
 | rapidfuzz_token_set_ratio                    | scalar        | NULL        | NULL    |          |
 | rapidfuzz_token_sort_ratio                   | scalar        | NULL        | NULL    |          |
+
+### Overloaded Functions
+
+<div class="extension_functions_table"></div>
+
+| function_name | function_type | description | comment | examples |
+|---------------|---------------|-------------|---------|----------|
+
+### Added Types
+
+<div class="extension_types_table"></div>
+
+| type_name | type_size | logical_type | type_category | internal |
+|-----------|----------:|--------------|---------------|----------|
+
+### Added Settings
+
+<div class="extension_settings_table"></div>
+
+| name | description | input_type | scope | aliases |
+|------|-------------|------------|-------|---------|
 
 

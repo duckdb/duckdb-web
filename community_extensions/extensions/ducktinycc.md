@@ -118,8 +118,8 @@ docs:
 
 extension_star_count: 0
 extension_star_count_pretty: 0
-extension_download_count: 268
-extension_download_count_pretty: 268
+extension_download_count: 323
+extension_download_count_pretty: 323
 image: '/images/community_extensions/social_preview/preview_community_extension_ducktinycc.png'
 layout: community_extension_doc
 ---
@@ -177,5 +177,26 @@ LOAD {{ page.extension.name }};
 | tcc_write_u32     | scalar        | NULL        | NULL    |          |
 | tcc_write_u64     | scalar        | NULL        | NULL    |          |
 | tcc_write_u8      | scalar        | NULL        | NULL    |          |
+
+### Overloaded Functions
+
+<div class="extension_functions_table"></div>
+
+| function_name | function_type | description | comment | examples |
+|---------------|---------------|-------------|---------|----------|
+
+### Added Types
+
+<div class="extension_types_table"></div>
+
+| type_name | type_size | logical_type | type_category | internal |
+|-----------|----------:|--------------|---------------|----------|
+
+### Added Settings
+
+<div class="extension_settings_table"></div>
+
+| name | description | input_type | scope | aliases |
+|------|-------------|------------|-------|---------|
 
 

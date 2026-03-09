@@ -49,8 +49,8 @@ docs:
     See the [GitHub repository](https://github.com/thomas-daniels/aix) or [blog post](https://thomasd.be/2026/02/01/aix-storing-querying-chess-games.html) for more details.
 extension_star_count: 12
 extension_star_count_pretty: 12
-extension_download_count: 338
-extension_download_count_pretty: 338
+extension_download_count: 353
+extension_download_count_pretty: 353
 image: '/images/community_extensions/social_preview/preview_community_extension_aixchess.png'
 layout: community_extension_doc
 ---
@@ -101,5 +101,26 @@ LOAD {{ page.extension.name }};
 | list_eval_to_mate                 | macro         | Apply eval_to_mate to all items in a list.                                             | NULL    | NULL     |
 | list_winning_chances_lichess      | macro         | Apply winning_chances_lichess to all items in a list.                                  | NULL    | NULL     |
 | clocks_to_move_times__check_nulls | scalar        | NULL                                                                                   | NULL    | NULL     |
+
+### Overloaded Functions
+
+<div class="extension_functions_table"></div>
+
+| function_name | function_type | description | comment | examples |
+|---------------|---------------|-------------|---------|----------|
+
+### Added Types
+
+<div class="extension_types_table"></div>
+
+| type_name | type_size | logical_type | type_category | internal |
+|-----------|----------:|--------------|---------------|----------|
+
+### Added Settings
+
+<div class="extension_settings_table"></div>
+
+| name | description | input_type | scope | aliases |
+|------|-------------|------------|-------|---------|
 
 

@@ -15,14 +15,14 @@ extension:
   maintainers:
     - JAicewizard
     - arjenpdevries
-  excluded_platforms: "osx_amd64;wasm_mvp;wasm_eh;wasm_threads;linux_amd64_musl"
+  excluded_platforms: "wasm_mvp;wasm_eh;wasm_threads"
   requires_toolchains: "fortran;omp"
   vcpkg_url: "https://github.com/microsoft/vcpkg.git"
-  vcpkg_commit: "54760c3439fa2fdf2f42ccd730fcf2639c3fe101" 
+  vcpkg_commit: "54760c3439fa2fdf2f42ccd730fcf2639c3fe101"
 
 repo:
   github: "duckdb-faiss-ext/duckdb-faiss-ext"
-  ref: "6b824231e6291b689328d67a22440301337bbc3f"
+  ref: "6fa7821af0afe895c2357c121cbd247ed1b9b8f2"
 
 docs:
   hello_world: |
@@ -48,8 +48,8 @@ docs:
 
 extension_star_count: 30
 extension_star_count_pretty: 30
-extension_download_count: 401
-extension_download_count_pretty: 401
+extension_download_count: 411
+extension_download_count_pretty: 411
 image: '/images/community_extensions/social_preview/preview_community_extension_faiss.png'
 layout: community_extension_doc
 ---
@@ -89,5 +89,26 @@ LOAD {{ page.extension.name }};
 | faiss_search_filter     | scalar        | NULL        | NULL    |          |
 | faiss_search_filter_set | scalar        | NULL        | NULL    |          |
 | faiss_to_gpu            | table         | NULL        | NULL    |          |
+
+### Overloaded Functions
+
+<div class="extension_functions_table"></div>
+
+| function_name | function_type | description | comment | examples |
+|---------------|---------------|-------------|---------|----------|
+
+### Added Types
+
+<div class="extension_types_table"></div>
+
+| type_name | type_size | logical_type | type_category | internal |
+|-----------|----------:|--------------|---------------|----------|
+
+### Added Settings
+
+<div class="extension_settings_table"></div>
+
+| name | description | input_type | scope | aliases |
+|------|-------------|------------|-------|---------|
 
 

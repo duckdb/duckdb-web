@@ -33,8 +33,8 @@ docs:
 
 extension_star_count: 1
 extension_star_count_pretty: 1
-extension_download_count: 339
-extension_download_count_pretty: 339
+extension_download_count: 366
+extension_download_count_pretty: 366
 image: '/images/community_extensions/social_preview/preview_community_extension_hedged_request_fs.png'
 layout: community_extension_doc
 ---
@@ -65,6 +65,20 @@ LOAD {{ page.extension.name }};
 | hedged_fs_list_filesystems | table         | NULL        | NULL    |          |
 | hedged_fs_wrap             | scalar        | NULL        | NULL    |          |
 
+### Overloaded Functions
+
+<div class="extension_functions_table"></div>
+
+| function_name | function_type | description | comment | examples |
+|---------------|---------------|-------------|---------|----------|
+
+### Added Types
+
+<div class="extension_types_table"></div>
+
+| type_name | type_size | logical_type | type_category | internal |
+|-----------|----------:|--------------|---------------|----------|
+
 ### Added Settings
 
 <div class="extension_settings_table"></div>
@@ -76,6 +90,7 @@ LOAD {{ page.extension.name }};
 | hedged_fs_get_file_size_delay_ms          | Delay in milliseconds before starting hedged request for GetFileSize operation         | UBIGINT    | GLOBAL | []      |
 | hedged_fs_get_file_type_delay_ms          | Delay in milliseconds before starting hedged request for GetFileType operation         | UBIGINT    | GLOBAL | []      |
 | hedged_fs_get_last_modified_time_delay_ms | Delay in milliseconds before starting hedged request for GetLastModifiedTime operation | UBIGINT    | GLOBAL | []      |
+| hedged_fs_get_stats_delay_ms              | Delay in milliseconds before starting hedged request for Stats operation               | UBIGINT    | GLOBAL | []      |
 | hedged_fs_get_version_tag_delay_ms        | Delay in milliseconds before starting hedged request for GetVersionTag operation       | UBIGINT    | GLOBAL | []      |
 | hedged_fs_glob_delay_ms                   | Delay in milliseconds before starting hedged request for Glob operation                | UBIGINT    | GLOBAL | []      |
 | hedged_fs_list_files_delay_ms             | Delay in milliseconds before starting hedged request for ListFiles operation           | UBIGINT    | GLOBAL | []      |

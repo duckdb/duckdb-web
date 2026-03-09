@@ -56,10 +56,10 @@ docs:
     - Named instances not supported
     - Windows Authentication not supported
 
-extension_star_count: 81
-extension_star_count_pretty: 81
-extension_download_count: 3764
-extension_download_count_pretty: 3.8k
+extension_star_count: 82
+extension_star_count_pretty: 82
+extension_download_count: 4177
+extension_download_count_pretty: 4.2k
 image: '/images/community_extensions/social_preview/preview_community_extension_mssql.png'
 layout: community_extension_doc
 ---
@@ -98,6 +98,20 @@ LOAD {{ page.extension.name }};
 | mssql_scan            | table         | NULL        | NULL    |          |
 | mssql_version         | scalar        | NULL        | NULL    |          |
 
+### Overloaded Functions
+
+<div class="extension_functions_table"></div>
+
+| function_name | function_type | description | comment | examples |
+|---------------|---------------|-------------|---------|----------|
+
+### Added Types
+
+<div class="extension_types_table"></div>
+
+| type_name | type_size | logical_type | type_category | internal |
+|-----------|----------:|--------------|---------------|----------|
+
 ### Added Settings
 
 <div class="extension_settings_table"></div>
@@ -126,6 +140,7 @@ LOAD {{ page.extension.name }};
 | mssql_insert_use_returning_output   | Use OUTPUT INSERTED for RETURNING clause                                                             | BOOLEAN    | GLOBAL | []      |
 | mssql_metadata_timeout              | Metadata query timeout in seconds (default: 300, 0 = no timeout). Increase for very large catalogs   | BIGINT     | GLOBAL | []      |
 | mssql_min_connections               | Minimum connections to maintain per context                                                          | BIGINT     | GLOBAL | []      |
+| mssql_order_pushdown                | Enable ORDER BY pushdown to SQL Server (default: false)                                              | BOOLEAN    | GLOBAL | []      |
 | mssql_query_timeout                 | Query execution timeout in seconds (0 = no timeout, default: 30)                                     | BIGINT     | GLOBAL | []      |
 | mssql_statistics_cache_ttl_seconds  | Statistics cache TTL in seconds                                                                      | BIGINT     | GLOBAL | []      |
 | mssql_statistics_level              | Statistics detail level: 0=row count, 1=+histogram min/max, 2=+NDV                                   | BIGINT     | GLOBAL | []      |
