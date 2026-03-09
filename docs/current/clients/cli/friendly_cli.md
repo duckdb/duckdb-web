@@ -8,6 +8,29 @@ title: Friendly CLI
 Along with our [Friendly SQL]({% link docs/current/sql/dialect/friendly_sql.md %}), we provice 
 **friendly CLI** features.
 
+## 8-Bit Colors
+
+Since DuckDB v1.5, the CLI supports 8-bit colors corresponding to [Xterm system colors](https://www.ditig.com/256-colors-cheat-sheet#xterm-system-colors):
+
+```.sql
+.display_colors
+```
+
+```text
+darkred1 red darkred2 red3 red4 red1 brightred indianred1 ...
+```
+
+## Dynamic Prompt
+
+The default prompts are the following:
+
+```text
+-- macOS / Linux
+{max_length:40}{color:38,5,208}{color:bold}{setting:current_database_and_schema}{color:reset} D 
+-- Windows
+{max_length:40}{color:green}{color:bold}{setting:current_database_and_schema}{color:reset} D 
+```
+
 ## Return the Result of the Last Query Using `_`
 
 You can use the `_` (underscore) table to query the result of the last query:
