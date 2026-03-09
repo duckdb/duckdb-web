@@ -86,7 +86,7 @@ The [`.tables` dot command]({% link docs/current/clients/cli/dot_commands.md %})
 ```
 
 ```text
-────────────── animals_db ───────────────
+ ────────────── animals_db ───────────────
  ───────────────── main ──────────────────
 ┌─────────────────┐┌──────────────────────┐
 │      swans      ││        ducks         │
