@@ -11,7 +11,6 @@
 						<li data-client="java">Java</li>
 						<li data-client="nodejs">Node.js</li>
 						<li data-client="odbc">ODBC</li>
-						<li data-client="r">R</li>
 						<li data-client="rust">Rust</li>
 					</ul>
 				</div>
@@ -45,32 +44,6 @@ curl https://install.duckdb.org | sh
 <div data-install="python" data-version="{{ site.current_duckdb_version }}">
 {% highlight bash %}
 pip install duckdb
-{% endhighlight %}
-</div>
-
-<div data-install="r macos" data-version="{% if site.current_duckdb_r_version != "" %}{{ site.current_duckdb_r_version }}{% else %}{{ site.lts_duckdb_r_version }}{% endif %}">
-{% highlight r %}
-install.packages("duckdb")
-{% endhighlight %}
-</div>
-
-<div data-install="r linux" data-version="{% if site.current_duckdb_r_version != "" %}{{ site.current_duckdb_r_version }}{% else %}{{ site.lts_duckdb_r_version }}{% endif %}">
-{% highlight r %}
-# install from source using CRAN
-install.packages("duckdb")
-
-# install from binaries using the Posit Public Package Manager
-options(HTTPUserAgent = sprintf("R/%s R (%s)",
-    getRversion(), paste(getRversion(), R.version["platform"],
-		R.version["arch"], R.version["os"])
-))
-install.packages("duckdb", repos="https://p3m.dev/cran/__linux__/manylinux_2_28/latest/")
-{% endhighlight %}
-</div>
-
-<div data-install="r windows" data-version="{% if site.current_duckdb_r_version != "" %}{{ site.current_duckdb_r_version }}{% else %}{{ site.lts_duckdb_r_version }}{% endif %}">
-{% highlight r %}
-install.packages("duckdb")
 {% endhighlight %}
 </div>
 

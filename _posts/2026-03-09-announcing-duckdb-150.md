@@ -422,6 +422,8 @@ During checkpointing, it's now possible to run concurrent reads ([#19867](https:
 
 Aggregate functions received several optimizations. For example, the `last` aggregate function was optimized by community member [`xe-nvdk`](https://github.com/xe-nvdk) to iterate from the end of each vector batch instead of the beginning. In synthetic benchmarks, this results in a [40% speedup](https://github.com/duckdb/duckdb/pull/20567).
 
+<!-- markdownlint-disable MD001 -->
+
 ## Distribution
 
 #### Python Pip
@@ -464,12 +466,16 @@ apk add libstdc++
 
 We reworked our build system to make the extension binaries smaller! The DuckLake extension's size was reduced by ~30%, from 17 MB to 12 MB. For smaller extensions such as Excel, the reduction is more than 60%, from 9 MB to 3 MB.
 
+<!-- markdownlint-enable MD001 -->
+
 ## Summary
 
 These were a few highlights – but there are many more features and improvements in this release.
 There have been over 6500 commits by close to 100 contributors since v1.4. The full [release notes can be found on GitHub](https://github.com/duckdb/duckdb/releases/tag/v1.5.0). We would like to thank our community for providing detailed issue reports and feedback. And again, our special thanks go to external contributors!
 
 PS: If you visited this blog post through a direct link – we also rolled out a new [landing page]({% link index.html %})!
+
+<!-- markdownlint-disable MD040 -->
 
 ## Appendix: Example Dataset
 

@@ -7,7 +7,7 @@ redirect_from:
 title: Rust Client
 ---
 
-> The latest stable version of the DuckDB Rust client is {{ site.current_duckdb_rust_version }}.
+> The latest stable version of the DuckDB Rust client is {% if site.current_duckdb_rust_version != "" %}{{ site.current_duckdb_rust_version }}{% else %}{{ site.lts_duckdb_rust_version }}{% endif %}.
 
 ## Installation
 
