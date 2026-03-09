@@ -13,7 +13,7 @@ toc: false
   <h1>Development Roadmap</h1>
 </div>
 
-_(Last updated: January 2026)_
+_(Last updated: March 2026)_
 
 The DuckDB project is governed by the [non-profit DuckDB Foundation]({% link foundation/index.html %}).
 The Foundation and [DuckDB Labs](https://duckdblabs.com) are not funded by external investors (e.g., venture capital).
@@ -34,7 +34,6 @@ This section lists the features that the DuckDB team plans to work on **in the c
     * Improved support for Delta Lake through the [`delta` extension]({% link docs/stable/core_extensions/delta.md %}).
     * In May 2025, we released [DuckLake](https://ducklake.select/), a new lakehouse format. We would like to emphasize that we are still committed to developing both the `iceberg` and `delta` extensions. We also strive to [provide interoperability]({% post_url 2025-09-17-ducklake-03 %}#interoperability-with-iceberg) between DuckLake and other lakehouse formats.
 * [`MATCH_RECOGNIZE`](https://github.com/duckdb/duckdb/discussions/3994) for pattern matching
-* [`GEOMETRY` type](https://github.com/duckdb/duckdb/pull/19136)
 * [Support for async I/O](https://github.com/duckdb/duckdb/discussions/3560)
 * [Parallel Python UDFs](https://github.com/duckdb/duckdb/issues/14817)
 
@@ -50,7 +49,6 @@ There are several items that we plan to implement at some point in the future.
 If you would like to expedite the development of these features, please [get in touch with DuckDB Labs](https://duckdblabs.com/contact/).
 
 * Go support for extensions
-* Distribution of musl libc binaries
 * Time series optimizations
 * Partition-aware optimizations
 * Sorting-aware optimizations
@@ -59,6 +57,5 @@ If you would like to expedite the development of these features, please [get in 
 * Improvements of query profiling (especially for concurrently running queries)
 * [Materialized views](https://github.com/duckdb/duckdb/discussions/3638)
 * [Support for PL/SQL stored procedures](https://github.com/duckdb/duckdb/discussions/8104)
-* [Generic ODBC catalog](https://github.com/duckdb/duckdb/discussions/6645), similarly to the existing PostgreSQL / MySQL / SQLite integrations
 * [XML read support](https://github.com/duckdb/duckdb/discussions/9547)
 * Guaranteeing [FIPS](https://en.wikipedia.org/wiki/FIPS_140-2)-compliance for the [database encryption]({% link docs/stable/sql/statements/attach.md %}#database-encryption)
