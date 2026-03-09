@@ -25,6 +25,7 @@ title: Core Extensions
 | [inet]({% link docs/stable/core_extensions/inet.md %})                   | Adds support for IP-related data types and functions                    | DuckDB&nbsp;team | Secondary         |                         |
 | [jemalloc]({% link docs/stable/core_extensions/jemalloc.md %})           | Overwrites the system allocator with jemalloc                           | DuckDB&nbsp;team | Secondary         |                         |
 | [json]({% link docs/stable/data/json/overview.md %})                     | Adds support for JSON operations                                        | DuckDB&nbsp;team | Primary           |                         |
+| [lance]({% link docs/stable/core_extensions/lance.md %})                 | Adds support for the Lance file format                                  | Third party      |                   |                         |
 | [motherduck]({% link docs/stable/core_extensions/motherduck.md %})       | Allows connecting to MotherDuck                                         | Third party      |                   | md                      |
 | [mysql]({% link docs/stable/core_extensions/mysql.md %})                 | Adds support for reading from and writing to a MySQL database           | DuckDB&nbsp;team | Secondary         | mysql_scanner           |
 | [parquet]({% link docs/stable/data/parquet/overview.md %})               | Adds support for reading and writing Parquet files                      | DuckDB&nbsp;team | Primary           |                         |

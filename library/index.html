@@ -57,10 +57,10 @@ redirect_from:
 				<a href="/library/{{ library_item.slug | default: library_item.title | slugify }}/" title="{{ library_item.title }}" class="blocklink"></a>
 				<div class="postimg custom">
 					{% if library_item.thumb %}
-						<img src="{{ library_item.thumb }}" alt="{{ library_item.title }}" class="zoom-image">
+						<img src="{{ library_item.thumb }}" alt="{{ library_item.title }}" class="zoom-image" loading="lazy">
 					{% else %}
 						{% assign placeholder_number = forloop.index | modulo: 2 | plus: 1 %}
-						<img src="/images/library/thumbs/placeholder-{{ data_source }}-{{ placeholder_number }}.svg" alt="Placeholder" class="zoom-image">
+						<img src="/images/library/thumbs/placeholder-{{ data_source }}-{{ placeholder_number }}.svg" alt="Placeholder" class="zoom-image" loading="lazy">
 					{% endif %}
 					{% if library_item.pill or library_item.episode %}
 						<div class="pill-container">

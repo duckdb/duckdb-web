@@ -1,3 +1,7 @@
+@use 'sass:color';
+@use '../abstracts/variables' as *;
+@use '../abstracts/mixins' as *;
+
 /** Card Grid Component
  *
  *  Usage:
@@ -29,13 +33,32 @@
 		.card-content{
 			padding: var(--card-content-padding, 32px 36px 36px 36px);
 			h3{
-				margin: 0 0 24px 0;
+				margin: 0 0 12px 0;
 				font-size: var(--type-headline-3, 24px);
 			}
 			p{
 				margin: 0;
 				color: var(--main-text-secondary-color, #B2B2B2);
-				font-size: var(--type-body, 16px);
+				@include body-standard;
+			}
+		}
+	}
+}
+
+@media only screen and (max-width: 940px){
+	.card-grid{
+		grid-template-columns: repeat(2, 1fr);
+	}
+}
+
+@media only screen and (max-width: 660px){
+	.card-grid{
+		grid-template-columns: 1fr;
+		&[style*="--card-columns: 4"],
+		&[style*="--card-columns:4"]{
+			grid-template-columns: repeat(2, 1fr);
+			.card .card-content{
+				padding: 16px;
 			}
 		}
 	}

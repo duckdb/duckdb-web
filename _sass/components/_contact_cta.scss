@@ -1,0 +1,27 @@
+@use '../abstracts/mixins' as *;
+
+.contact-cta{
+	margin: 0 auto;
+	text-align: center;
+	padding: 50px;
+	border-radius: 15px;
+	background: var(--main-infobox-labs-background-color, rgba(26, 26, 26, 0.60));
+	border: 1px solid var(--main-infobox-labs-border-color, rgba(51, 51, 51, 0.60));
+
+	h2{
+		@include headline-1;
+		margin: 0 0 16px;
+	}
+
+	p{
+		@include body-standard;
+		color: var(--main-text-primary-color, #F2F2F2);
+		margin: 0 0 24px;
+	}
+}
+
+@media only screen and (max-width: 660px){
+	.contact-cta{
+		padding: 32px 20px;
+	}
+}

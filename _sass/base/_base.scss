@@ -156,21 +156,6 @@ main .wrap{
 	}
 }
 
-body.landing label.onlymobile,
-body.installation div.environment.select label.onlymobile{
-	position: relative;
-	&::after{
-		content: "\E010";
-		font-family: "DuckDB-Symbol";
-		right: 10px;
-		top: 4px;
-		padding: 0 0 2px;
-		position: absolute;
-		pointer-events: none;
-		font-size: 20px;
-		color: white;
-	}
-}
 .environmentselect{
 	width: 100%;
 	/*border: 1px solid #b8b8b8;*/

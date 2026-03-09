@@ -11,6 +11,11 @@
 	body.documentation .sidenavigation {
 		width: 350px;
 	}
+	
+	.hero-bg .hideonbigscreens{
+		display: none;
+	}
+	
 }
 
 @media only screen and (max-width: 1200px) {
@@ -212,10 +217,16 @@
 			}
 		}
 	}
+	header .headerline .headercontent .header-actions{
+		display: none;
+	}
+	header .headerline .headercontent .landingmenu nav > div.mobile-only{
+		display: block;
+	}
 	body.landing header .headerline .headercontent .landingmenu nav .search_icon{
 		display: none;
 	}
-	
+
 	.opensearch{
 		aspect-ratio: 1/1;
 		justify-content: center;
@@ -685,6 +696,10 @@
 	body.landing .welcome .mainlinks ul {
 		margin-top: 60px;
 	}
+	
+	body.landing section.welcome .type{
+		border-bottom-width: 5px;
+	}
 
 	footer .sitefooter .footercontent>div {
 		width: 100%;
@@ -697,6 +712,13 @@
 	body.installation .output .result a {
 		word-break: break-word;
 	}
+	
+	.logo-grid-section .logo-grid .logo-cell{
+		padding: 18px;
+		img{
+			height: 40px;
+		}
+	} 
 
 	.pagemeta {
 		flex-wrap: wrap;

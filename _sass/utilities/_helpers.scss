@@ -158,6 +158,10 @@ a.blocklink{
 	@include tiny;
 }
 
+.micro {
+	@include micro;
+}
+
 .pre-title {
 	@include pre-title;
 }

@@ -2,6 +2,9 @@
  *
  *  Usage:
  *  --icon-grid-columns: number of columns (default: 3)
+ *
+ *  Optional: wrap the icon in .icon-box for a bordered container
+ *  Optional: add a .textbutton link after the <p> for a "Read more" style link
  */
 
 .icon-grid{
@@ -11,23 +14,53 @@
 
 	.icon-grid-item{
 		padding-right: 20px;
-		
+
 		.icon{
+			display: block;
 			width: 36px;
 			height: 36px;
 			margin-bottom: 16px;
 			color: var(--orange-50);
 			stroke-width: 1.5;
+			flex-shrink: 0;
 		}
+
+		/* Optional bordered icon box */
+		.icon-box{
+			display: inline-flex;
+			align-items: center;
+			justify-content: center;
+			width: 68px;
+			height: 68px;
+			border-radius: 10px;
+			border: 1px solid var(--doc-codebox-border-color, #e6e6e6);
+			background: var(--doc-codebox-background-color, #f2f2f2);
+			margin-bottom: 17px;
+
+			.icon{
+				margin-bottom: 0;
+			}
+		}
+
 		h3{
 			margin: 0 0 8px 0;
 			font-size: var(--type-title-2, 16px);
-			font-weight: 700;
+			font-weight: 600;
 		}
 		p{
 			margin: 0;
 			font-size: var(--type-body-small, 14px);
 			color: var(--main-text-secondary-color, #B2B2B2);
 		}
+		a.textbutton{
+			margin-top: 12px;
+			display: inline-block;
+		}
+	}
+}
+
+@media only screen and (max-width: 660px){
+	.icon-grid{
+		grid-template-columns: repeat(2, 1fr);
 	}
 }

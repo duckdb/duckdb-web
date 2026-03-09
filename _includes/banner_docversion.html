@@ -1,11 +1,10 @@
-{% if version_viewed == "stable" %}
+{% if version_viewed == "current" %}
 	<!-- this is the default and recommended version - do not show any extra warning -->
-{% elsif version_viewed == "preview" %}
-	<!-- show nightly banner -->
+{% elsif version_viewed == "stable" %}
 	<div class="banner nightly">
 		<div class="content">
 			<span class="icon_nightly"></span>
-			<span title="The page is for the preview version of DuckDB, available in the nightly builds. The features shown in the documentation may not yet be available in the stable version.">Preview version</span>
+			<span title="The page is for the LTS build of DuckDB.">LTS version</span>
 		</div>
 	</div>
 {% else %}

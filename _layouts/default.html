@@ -17,11 +17,14 @@
 
 
     <link rel="stylesheet" href="/css/main.css">
+	<link rel="preload" href="/css/webfont/SuisseIntl-Regular-WebXL.woff2" as="font" type="font/woff2" crossorigin>
 	{% if page.add_css %}
 	<link rel="stylesheet" href="/css/{{ page.add_css }}">
 	{% endif %}
 
 	{% if page.body_class contains "duckcon7" %}
+	<link rel="preconnect" href="https://api.mapbox.com" crossorigin>
+	<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
 	<link href='https://api.mapbox.com/mapbox-gl-js/v3.17.0-beta.1/mapbox-gl.css' rel='stylesheet' />
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@12/swiper-bundle.min.css" />
 	{% endif %}
@@ -149,7 +152,7 @@
 	{% include footer.html %}
 	
 	{% if page.body_class contains "landing" %}
-	<script src="/js/typewriter.js" defer></script>
+	<script src="/js/hero_animation.js" defer></script>
 	{% endif %}
 	<script src="/js/minisearch.js" defer></script>
 	<script src="/js/search.js" defer></script>
@@ -159,7 +162,7 @@
 	<script src="/js/ua-parser.min.js" defer></script>
 	{% endif %}
 	{% if page.body_class contains "duckcon7" %}
-	<script src="https://cdn.jsdelivr.net/npm/swiper@12/swiper-bundle.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/swiper@12/swiper-bundle.min.js" defer></script>
 	{% endif %}
 	<script src="/js/script.js" defer></script>
 	{% if page.body_class contains "installation" %}

@@ -10,7 +10,7 @@ GIT
 
 GIT
   remote: https://github.com/duckdb/rouge.git
-  revision: 6af538179d4aaad1128cafd95d358b8eff63df76
+  revision: f5213e12423531d64d915306269b1eb7268e6da5
   branch: duckdb
   specs:
     rouge (3.3823.1)
@@ -18,7 +18,7 @@ GIT
 GEM
   remote: https://rubygems.org/
   specs:
-    addressable (2.8.8)
+    addressable (2.8.9)
       public_suffix (>= 2.0.2, < 8.0)
     base64 (0.3.0)
     bigdecimal (4.0.1)
@@ -57,15 +57,15 @@ GEM
       octokit (>= 4, < 10)
       public_suffix (>= 3.0, < 7.0)
       typhoeus (~> 1.3)
-    google-protobuf (4.33.5-arm64-darwin)
+    google-protobuf (4.34.0-arm64-darwin)
       bigdecimal
-      rake (>= 13)
-    google-protobuf (4.33.5-x86_64-darwin)
+      rake (~> 13.3)
+    google-protobuf (4.34.0-x86_64-darwin)
       bigdecimal
-      rake (>= 13)
-    google-protobuf (4.33.5-x86_64-linux-gnu)
+      rake (~> 13.3)
+    google-protobuf (4.34.0-x86_64-linux-gnu)
       bigdecimal
-      rake (>= 13)
+      rake (~> 13.3)
     http_parser.rb (0.8.1)
     i18n (1.14.8)
       concurrent-ruby (~> 1.0)
@@ -170,7 +170,7 @@ GEM
       nokogiri (~> 1.12)
     jekyll-watch (2.2.1)
       listen (~> 3.0)
-    json (2.18.1)
+    json (2.19.1)
     kramdown (2.5.2)
       rexml (>= 3.4.4)
     kramdown-parser-gfm (1.1.0)

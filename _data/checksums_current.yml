@@ -1,0 +1,93 @@
+# Checksums for the LTS install version
+preferred_algorithms:
+  - sha512
+  - sha256
+
+artifacts:
+  cli:
+    macos:
+      x86_64:
+        filename: "duckdb_cli-osx-universal.zip"
+        hashes:
+          sha256: "TODO"
+      arm64:
+        filename: "duckdb_cli-osx-universal.zip"
+        hashes:
+          sha256: "TODO"
+    linux:
+      x86_64:
+        filename: "duckdb_cli-linux-amd64.zip"
+        hashes:
+          sha256: "TODO"
+      arm64:
+        filename: "duckdb_cli-linux-arm64.zip"
+        hashes:
+          sha256: "TODO"
+    windows:
+      x86_64:
+        filename: "duckdb_cli-windows-amd64.zip"
+        hashes:
+          sha256: "TODO"
+      arm64:
+        filename: "duckdb_cli-windows-arm64.zip"
+        hashes:
+          sha256: "TODO"
+
+  c:
+    linux:
+      x86_64:
+        filename: "libduckdb-linux-amd64.zip"
+        hashes:
+          sha256: "TODO"
+      arm64:
+        filename: "libduckdb-linux-arm64.zip"
+        hashes:
+          sha256: "TODO"
+    macos:
+      x86_64:
+        filename: "libduckdb-osx-universal.zip"
+        hashes:
+          sha256: "TODO"
+      arm64:
+        filename: "libduckdb-osx-universal.zip"
+        hashes:
+          sha256: "TODO"
+    windows:
+      x86_64:
+        filename: "libduckdb-windows-amd64.zip"
+        hashes:
+          sha256: "TODO"
+      arm64:
+        filename: "libduckdb-windows-arm64.zip"
+        hashes:
+          sha256: "TODO"
+
+  java:
+    filename: "duckdb_jdbc-1.5.0.0.jar"
+    hashes:
+      sha256: "TODO"
+
+  odbc:
+    linux:
+      x86_64:
+        filename: "duckdb_odbc-linux-amd64.zip"
+        hashes:
+          sha256: "TODO"
+      arm64:
+        filename: "duckdb_odbc-linux-arm64.zip"
+        hashes:
+          sha256: "TODO"
+    macos:
+      universal:
+        filename: "duckdb_odbc-osx-universal.zip"
+        hashes:
+          sha256: "TODO"
+    windows:
+      x86_64:
+        filename: "duckdb_odbc-windows-amd64.zip"
+        hashes:
+          sha256: "TODO"
+      arm64:
+        filename: "duckdb_odbc-windows-arm64.zip"
+        hashes:
+          sha256: "TODO"

@@ -1,0 +1,42 @@
+@use '../abstracts/variables' as *;
+@use '../abstracts/mixins' as *;
+
+body.services{
+
+	section.services-hero{
+		padding-top: 84px;
+		padding-bottom: 55px;
+		text-align: center;
+
+		.hero-text{
+			max-width: 700px;
+			margin: 0 auto;
+
+			h1{
+				@include display-1;
+				margin: 0 0 24px;
+			}
+			p{
+				@include body-standard;
+				color: var(--main-text-primary-color, #F2F2F2);
+				margin: 0 auto 24px;
+			}
+		}
+	}
+
+	section.services-cards{
+		padding: 40px 15px 75px;
+	}
+
+	section.services-cta{
+		padding: 75px 15px;
+	}
+}
+
+@media only screen and (max-width: 660px){
+	body.services{
+		section.services-hero .hero-text h1{
+			font-size: 38px;
+		}
+	}
+}

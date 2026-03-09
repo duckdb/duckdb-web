@@ -131,7 +131,7 @@ text_emotions_tokenized_rel.join(
 
 ```
 
-Now that we have tokenized and cleaned the text, we can implement keyword search by ranking the match with [similarity functions]({%link docs/stable/sql/functions/text.md %}#text-similarity-functions), such as [Jaccard](https://en.wikipedia.org/wiki/Jaccard_index):
+Now that we have tokenized and cleaned the text, we can implement keyword search by ranking the match with [similarity functions]({% link docs/stable/sql/functions/text.md %}#text-similarity-functions), such as [Jaccard](https://en.wikipedia.org/wiki/Jaccard_index):
 
 ```python
 text_token_rel = conn.table(
@@ -183,7 +183,7 @@ From the above plot, we observe repeated keywords, such as `feel - feeling`, `lo
 
 ## Full-Text Search
 
-The [Full-Text Search (FTS) DuckDB extension]({%link docs/stable/core_extensions/full_text_search.md %}) is an experimental extension, which implements two main [full-text search](https://cloud.google.com/discover/what-is-full-text-search) functionalities:
+The [Full-Text Search (FTS) DuckDB extension]({% link docs/stable/core_extensions/full_text_search.md %}) is an experimental extension, which implements two main [full-text search](https://cloud.google.com/discover/what-is-full-text-search) functionalities:
 - the `stem` function, to retrieve the word stem;
 - the `match_bm25` function, to calculate the [Best Match score](https://en.wikipedia.org/wiki/Okapi_BM25).
 

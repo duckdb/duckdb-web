@@ -7,7 +7,7 @@ redirect_from:
 - /dev/release-calendar
 - /docs/dev/release_calendar
 - /docs/stable/dev/release_calendar
-- /docs/preview/dev/release_calendar
+- /docs/current/dev/release_calendar
 title: Release Calendar
 body_class: release-calendar blog_typography post
 max_page_width: medium

@@ -4,22 +4,76 @@ title: An in-process SQL OLAP database management system
 subtitle: An In-Process Analytical Database
 description: DuckDB is an in-process SQL OLAP database management system. Simple, feature-rich, fast & open source.
 body_class: landing nowrap
-banner: false
+banner: true
 ---
 
 {% comment %}
-To add a banner, set banner: true in the front matter and define the banner content in includes/landingpage_banner.html
+To add a banner, set banner: true in the front matter and define the banner content in _includes/landingpage_banner.html
 {% endcomment %}
 
 <section class="welcome">
-	<div class="flexwrap wrap">
-		<div class="duckdb">
-			<h1 class="display-1">DuckDB is a fast <br/><div class="type" data-strings="analytical|in-process|open-source|portable">|</div> <br/>database system</h1>
-			<p>Query and transform your data anywhere <br/>using DuckDB's feature-rich SQL dialect</p>
-			<a class="button transparent arrow-down dark" href="#quickinstall">Installation</a>
-			<a class="button yellow" href="/docs/">Documentation</a>
+	<div class="hero-bg">
+		{% include hero_animation.html %}
+	</div>
+	<div class="wrap">
+		<div class="hero-content">
+			<h1 class="display-1">Run analytics<br/>where your data lives</h1>
+			<p class="hero-subtitle">DuckDB is an in&#8209;process SQL database that runs everywhere:<br/>on your laptop, on a server and even in the browser.</p>
+			<div class="hero-buttons">
+				<a class="button yellow arrow-right" href="/docs/installation/">Get DuckDB</a>
+				<a class="button transparent arrow-right" href="/docs/">Read the docs</a>
+			</div>
+			<p class="hero-social-proof">Used by data teams across Fortune 500 companies</p>
 		</div>
-		<div class="demo window">
+		<div class="hero-protocol-boxes">
+			<div class="protocol-box">
+				<div class="protocol-title">
+					<svg class="icon"><use href="#code-square-01"></use></svg>
+					<span>Friendly SQL</span>
+				</div>
+				<div class="protocol-tags">
+					<span class="tag"><a href="{% link docs/current/sql/statements/pivot.md %}">Pivot</a></span>
+					<span class="tag"><a href="{% link docs/current/guides/sql_features/asof_join.md %}">AsOf join</a></span>
+					<span class="tag"><a href="{% link docs/current/sql/query_syntax/groupby.md %}">GROUP BY ALL</a></span>
+					<span class="tag"><a href="{% link docs/current/sql/dialect/friendly_sql.md %}">…</a></span>
+				</div>
+			</div>
+			<div class="protocol-box">
+				<div class="protocol-title">
+					<svg class="icon"><use href="#puzzle-piece-02"></use></svg>
+					<span>Seamless Integrations</span>
+				</div>
+				<div class="protocol-tags">
+					<span class="tag"><a href="{% link docs/current/core_extensions/postgres.md %}">Postgres</a></span>
+					<span class="tag"><a href="{% link docs/current/core_extensions/spatial/overview.md %}">Spatial</a></span>
+					<span class="tag"><a href="{% link docs/current/core_extensions/aws.md %}">AWS</a></span>
+					<span class="tag"><a href="{% link docs/current/core_extensions/azure.md %}">Azure</a></span>
+					<span class="tag"><a href="{% link docs/current/core_extensions/iceberg/overview.md %}">Iceberg</a></span>
+					<span class="tag"><a href="{% link docs/current/core_extensions/overview.md %}">…</a></span>
+				</div>
+			</div>
+			<div class="protocol-box">
+				<div class="protocol-title">
+					<svg class="icon"><use href="#hard-drive"></use></svg>
+					<span>Native Clients</span>
+				</div>
+				<div class="protocol-tags">
+					<span class="tag"><a href="{% link docs/current/clients/cli/overview.md %}">CLI</a></span>
+					<span class="tag"><a href="{% link docs/current/clients/python/overview.md %}">Python</a></span>
+					<span class="tag"><a href="{% link docs/current/clients/go.md %}">Go</a></span>
+					<span class="tag"><a href="{% link docs/current/clients/rust.md %}">Rust</a></span>
+					<span class="tag"><a href="{% link docs/current/clients/node_neo/overview.md %}">JavaScript</a></span>
+					<span class="tag"><a href="{% link docs/current/clients/overview.md %}">…</a></span>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+
+
+<section class="proof">
+	<div class="wrap flexwrap">
+		<div class="proof-code demo window">
 			<div>
 				<div class="topbar">
 					<ul class="lang">
@@ -33,11 +87,11 @@ To add a banner, set banner: true in the front matter and define the banner cont
 				</div>
 				<div class="content haslines">
 					<div class="lines"></div>
-						<div class="code">
+					<div class="code">
 {% highlight sql %}
 {% include landing-page/sql/aggregation.sql %}
 {% endhighlight -%}
-						</div>
+					</div>
 				</div>
 				<div class="bottombar flexwrap">
 					<div class="select">
@@ -53,82 +107,83 @@ To add a banner, set banner: true in the front matter and define the banner cont
 				</div>
 			</div>
 		</div>
-	</div>
-</section>
-
-
-<section class="metrics">
-	<div class="wrap">
-		<div class="numbersbox">
-			<div>
-				<div class="number">#1</div>
-				<div class="label">open-source system<br/>in ClickBench hot runs</div>
-			</div>
-			<div class="divider"></div>
-			<div>
-				<div class="number">#3</div>
-				<div class="label">most admired DB<br/>on Stack Overflow</div>
-			</div>
-			<div class="divider"></div>
-			<div>
-				<div class="number">20+</div>
-				<div class="label">Fortune-100<br/>companies use DuckDB</div>
-			</div>
-			<div class="divider"></div>
-			<div>
-				<div class="number">25M+</div>
-				<div class="label">downloads/<br/>month</div>
-			</div>
-			<div class="divider"></div>
-			<div>
-				<div class="number">SF 100k</div>
-				<div class="label">TPC-H on a single<br/>machine</div>
-			</div>
+		<div class="proof-text">
+			<h2 class="display-2">Query files and<br/>cloud data directly</h2>
+			<p>One SQL dialect. Any data source—Parquet, JSON, S3, data lakes. No clusters. No config.</p>
+			<a class="button transparent arrow-right" href="https://shell.duckdb.org/">Live Demo</a>
 		</div>
-		<div class="numbersbox-reference">*see <a href="{% post_url 2025-10-09-benchmark-results-14-lts %}">our blog post</a> for more details</div>
 	</div>
 </section>
 
 
 <section class="whyduckdb">
-	<div class="wrap feature-list">
-		<h1 class="display-2">DuckDB at a glance</h1>
-		<div class="flexwrap">
-			<div class="featurebox">
-				<div class="icon simple"></div>
-				<h3 class="title-1">Simple</h3>
-				<p class="body-small text-secondary-color">DuckDB was designed to be simple to use. It has zero dependencies, so it can be installed in seconds and deployed in milliseconds.</p>
+	<div class="wrap">
+		<h1 class="display-2">How we built DuckDB</h1>
+		<div class="icon-grid">
+			<div class="icon-grid-item">
+				<div class="icon-box">
+					<svg class="icon"><use href="#code-circle-03"></use></svg>
+				</div>
+				<h3>Simple</h3>
+				<p>
+					We made sure that you can install DuckDB in just a few seconds,
+					and built it on familiar technologies so you can start using it immediately.
+				</p>
 				<a href="/why_duckdb#simple" class="textbutton arrow-right">Read more</a>
 			</div>
-			<div class="featurebox">
-				<div class="icon portable"></div>
-				<h3 class="title-1">Portable</h3>
-				<p class="body-small text-secondary-color">DuckDB runs on all popular operating systems and hardware architectures. It has idiomatic client APIs for major programming languages.</p>
-				<a href="/why_duckdb#portable" class="textbutton arrow-right">Read more</a>
-			</div>
-			<div class="featurebox">
-				<div class="icon featurerich"></div>
-				<h3 class="title-1">Feature-rich</h3>
-				<p class="body-small text-secondary-color">DuckDB supports multiple file formats (CSV, Parquet, and JSON), data lake formats. It can also connect to network and cloud storage.</p>
+			<div class="icon-grid-item">
+				<div class="icon-box">
+					<svg class="icon"><use href="#settings-02"></use></svg>
+				</div>
+				<h3>Feature-Rich</h3>
+				<p>
+					We support a wide range of industry standard technologies (e.g., Parquet, SQL, S3)
+					and integrated them for a seamless user experience.
+				</p>
 				<a href="/why_duckdb#feature-rich" class="textbutton arrow-right">Read more</a>
 			</div>
-			<div class="featurebox">
-				<div class="icon speed"></div>
-				<h3 class="title-1">Fast</h3>
-				<p class="body-small text-secondary-color">DuckDB runs queries at blazing speed. It uses parallel execution and can process larger-than-memory workloads.</p>
+			<div class="icon-grid-item">
+				<div class="icon-box">
+					<svg class="icon"><use href="#flash"></use></svg>
+				</div>
+				<h3>Fast</h3>
+				<p>
+					We built DuckDB on a state-of-the-art columnar storage engine.
+					We strived to enable larger-than-memory workloads so you never run out of memory.
+				</p>
 				<a href="/why_duckdb#fast" class="textbutton arrow-right">Read more</a>
 			</div>
-			<div class="featurebox">
-				<div class="icon extensible"></div>
-				<h3 class="title-1">Extensible</h3>
-				<p class="body-small text-secondary-color">DuckDB is extensible by third-party features. User contributions are available as community extensions.</p>
-				<a href="/why_duckdb#extensible" class="textbutton arrow-right">Read more</a>
-			</div>
-			<div class="featurebox">
-				<div class="icon free"></div>
-				<h3 class="title-1">Free</h3>
-				<p class="body-small text-secondary-color">DuckDB, its core extensions and the DuckLake format are <nobr>open-source</nobr> under the permissive MIT License.</p>
+			<div class="icon-grid-item">
+				<div class="icon-box">
+					<svg class="icon"><use href="#wallet-02"></use></svg>
+				</div>
+				<h3>Free</h3>
+				<p>
+					We release DuckDB, its core extensions and the DuckLake format under MIT, a permissive <nobr>open-source</nobr> license.
+				</p>
 				<a href="/why_duckdb#free" class="textbutton arrow-right">Read more</a>
+			</div>
+			<div class="icon-grid-item">
+				<div class="icon-box">
+					<svg class="icon"><use href="#luggage-02"></use></svg>
+				</div>
+				<h3>Portable</h3>
+				<p>
+					We distribute DuckDB for all popular operating systems and major CPU architectures.
+					We ship idiomatic client APIs for major programming languages.
+				</p>
+				<a href="/why_duckdb#portable" class="textbutton arrow-right">Read more</a>
+			</div>
+			<div class="icon-grid-item">
+				<div class="icon-box">
+					<svg class="icon"><use href="#puzzle-piece-02"></use></svg>
+				</div>
+				<h3>Extensible</h3>
+				<p>
+					We created a powerful extension mechanism that enables adding new features
+					and implemented many key DuckDB features as extensions.
+				</p>
+				<a href="/why_duckdb#extensible" class="textbutton arrow-right">Read more</a>
 			</div>
 		</div>
 	</div>
@@ -138,7 +193,7 @@ To add a banner, set banner: true in the front matter and define the banner cont
 
 <section class="blog">
 	<div class="wrap">
-		<h1 class="display-2">Blog</h1>
+		<h1 class="display-2">Read the blog from our engineers</h1>
 		<div class="newstileswrap">
 			{% for post in site.posts limit:2 %}
 				{% assign random_number = forloop.index | modulo: 3 | plus: 1 %}
@@ -192,16 +247,13 @@ To add a banner, set banner: true in the front matter and define the banner cont
 </section>
 
 
-<div class="landing_bg_1"></div>
-<div class="landing_bg_2"></div>
-
 
 <section class="hidden">
-	
-	
+
+
 <div class="dropdown hero-demo">
-	
-<!-- example list for SQL -->	
+
+<!-- example list for SQL -->
 <div data-language="sql">
 	<option value="sql-aggregation-query">Aggregation query</option>
 	<option value="sql-join-query">Join query</option>
@@ -210,36 +262,36 @@ To add a banner, set banner: true in the front matter and define the banner cont
 	<option value="sql-spatial-extension">Spatial extension</option>
 </div>
 
-<!-- example list for Python -->	
+<!-- example list for Python -->
 <div data-language="python">
 	<option value="python-sql-query">SQL query</option>
 	<option value="python-pandas-integration">Pandas integration</option>
 	<option value="python-udf">Custom UDFs</option>
 </div>
 
-<!-- specific example list for R -->	
+<!-- specific example list for R -->
 <div data-language="r">
 	<option value="r-sql-query">SQL query</option>
 	<option value="r-duckplyr">duckplyr</option>
 	<option value="r-dplyr-integration">dplyr integration</option>
 </div>
 
-<!-- specific example list for Java -->	
+<!-- specific example list for Java -->
 <div data-language="java">
 	<option value="java-sql-query">SQL query</option>
 	<option value="java-appender">Appender</option>
 </div>
 
-<!-- specific example list for Node.js -->	
+<!-- specific example list for Node.js -->
 <div data-language="nodejs">
 	<option value="nodejs-sql-query">SQL query</option>
 	<option value="nodejs-web-service-integration">Web service integration</option>
 </div>
 
 </div>
-	
+
 <div class="examples hero-demo">
-	
+
 <!-- ------------------- SQL ------------------- -->
 
 <div data-language="sql" data-example="sql-aggregation-query" data-buttontxt="Live demo" data-buttonurl="https://shell.duckdb.org/#queries=v0,%20%20-Create-table-from-Parquet-file%0ACREATE-TABLE-train_services-AS%0A----FROM-'https%3A%2F%2Fblobs.duckdb.org%2Ftrain_services.parquet'~%0A%0A%20%20-Get-the-top%203-busiest-train-stations%0ASELECT%0A----station_name%2C%0A----count(*)-AS-num_services%0AFROM-train_services%0AGROUP-BY-ALL%0AORDER-BY-num_services-DESC%0ALIMIT-3~%0A">
@@ -342,5 +394,5 @@ To add a banner, set banner: true in the front matter and define the banner cont
 </div>
 
 </div>
-	
+
 </section>

@@ -580,7 +580,7 @@ $('body.documentation #main_content_wrap a.externallink').each(function () {
 				var lines = Math.ceil(height / lineHeight)
 				var linenumbers = '';
 				for (i = 1; i <= lines; i++) {
-					linenumbers += i + '<br>'
+					linenumbers += '<span>' + i + '</span><br>';
 				}
 				$(this).find('.lines').html(linenumbers);
 			})
@@ -664,15 +664,22 @@ $('body.documentation #main_content_wrap a.externallink').each(function () {
 		function updateInstallation($item) {
 			updateHighlight($envTopbar, $item);
 			const activeClient = $item.attr("data-client");
-			let installation = $(
+			let $installDiv = $(
 				`#quick-installation div[data-install='${activeClient} ${OSdatid}']`
-			).html();
-			if (!installation) {
-				installation = $(
+			);
+			if (!$installDiv.length) {
+				$installDiv = $(
 					`#quick-installation div[data-install='${activeClient}']`
-				).html();
+				);
 			}
-			$(".result").html(installation);
+			$(".result").html($installDiv.html());
+			const version = $installDiv.attr("data-version");
+			const $versionSpan = $(".bottombar .version");
+			if (version) {
+				$versionSpan.text("Version of the client: " + version).show();
+			} else {
+				$versionSpan.hide();
+			}
 		}
 		
 		updateInstallation($activeEnvItem);

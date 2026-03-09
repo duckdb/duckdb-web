@@ -1,5 +1,5 @@
 {%- comment -%}
-Renders a checksum block (div.shainfo) for a given artifact if available in site.data.checksums.
+Renders a checksum block (div.shainfo) for a given artifact if available in site.data.checksums_[release_type]
 Usage examples:
   - Env + Platform + Arch:
     {% include checksum_inline.html environment="cli" platform="windows" architecture="x86_64" %}
@@ -8,14 +8,21 @@ Usage examples:
   - Env-only (for artifacts that are not platform-specific, e.g. java):
     {% include checksum_inline.html environment="java" %}
 Notes:
-- Algorithm selection follows site.data.checksums.preferred_algorithms (e.g., ["sha512","sha256"]); falls back to any available if none match.
+- Algorithm selection follows site.data.checksums_[release_type].preferred_algorithms (e.g., ["sha512","sha256"]); falls back to any available if none match.
 - Renders nothing if no checksum is found.
 {%- endcomment -%}
 
 {%- assign env = include.environment -%}
 {%- assign plat = include.platform -%}
 {%- assign arch = include.architecture -%}
-{%- assign root = site.data.checksums.artifacts -%}
+{%- if include.version == "lts" -%}
+  {%- assign checksums_data = site.data.checksums_lts -%}
+{%- elsif include.version == "current" -%}
+  {%- assign checksums_data = site.data.checksums_current -%}
+{%- else -%}
+  Error: Release type (current / LTS) not available
+{%- endif -%}
+{%- assign root = checksums_data.artifacts -%}
 
 {%- assign entry = nil -%}
 
@@ -52,7 +59,7 @@ Notes:
 {%- endif -%}
 
 {%- if entry and entry.hashes -%}
-  {%- assign preferred = site.data.checksums.preferred_algorithms -%}
+  {%- assign preferred = checksums_data.preferred_algorithms -%}
   {%- if preferred == nil -%}
     {%- assign preferred = "sha256" | split: "," -%}
   {%- endif -%}

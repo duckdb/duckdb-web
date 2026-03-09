@@ -1,0 +1,224 @@
+@use '../abstracts/variables' as *;
+@use '../abstracts/mixins' as *;
+
+body.about{
+
+	section.dark{
+		background: #1a1a1a;
+		color: #fff;
+	}
+
+	section.about-hero{
+		padding-top: 84px;
+		padding-bottom: 55px;
+		text-align: center;
+
+		.hero-text{
+			max-width: 750px;
+			margin: 0 auto;
+
+			h1{
+				@include display-1;
+				margin: 0 0 24px;
+			}
+			p{
+				@include body-standard;
+				color: var(--main-text-primary-color, #F2F2F2);
+				max-width: 700px;
+				margin: 0 auto;
+			}
+		}
+	}
+
+	section.about-founders-photo{
+		padding-top: 15px;
+		padding-bottom: 0;
+
+		.founders-photo{
+			max-width: 750px;
+			margin: 0 auto;
+			overflow: hidden;
+			border-radius: 15px;
+
+			img{
+				display: block;
+				width: 100%;
+				height: auto;
+			}
+		}
+
+		.founders-caption{
+			@include body-small;
+			color: var(--main-text-tertiary-color, #b2b2b2);
+			text-align: center;
+			margin: 8px 0 0;
+		}
+	}
+
+	section.about-story{
+		padding-top: 25px;
+		padding-bottom: 55px;
+	}
+
+	section.about-whoweare{
+		padding-top: 0;
+		padding-bottom: 105px;
+	}
+
+	.about-text-block{
+		max-width: 750px;
+		margin: 0 auto;
+
+		h2{
+			@include headline-1;
+			margin: 0 0 25px;
+		}
+
+		.body-large{
+			@include body-large;
+			p{
+				margin: 0 0 18px;
+				&:last-child{ margin-bottom: 0; }
+			}
+		}
+
+		.body-normal{
+			@include body-standard;
+			p{
+				margin: 0 0 16px;
+				&:last-child{ margin-bottom: 0; }
+			}
+		}
+	}
+
+	section.about-whatwedo{
+		padding: 75px 15px;
+
+		.section-text{
+			margin-bottom: var(--page-element-spacing-large, 50px);
+			h1{
+				@include display-2;
+				margin: 0 0 12px;
+			}
+			p{
+				@include body-standard;
+				color: var(--main-text-secondary-color, #666);
+				margin: 0;
+			}
+		}
+	}
+
+	section.about-values{
+		padding: 75px 15px;
+
+		.section-text{
+			margin-bottom: var(--page-element-spacing-large, 50px);
+			h1{
+				@include display-2;
+				margin: 0;
+			}
+		}
+
+		.icon-grid .icon-grid-item .icon{
+			color: var(--orange-50, #FF6900);
+		}
+	}
+
+	section.about-founders-detail{
+		padding: 105px 15px;
+
+		h1{
+			@include display-2;
+			margin: 0 0 50px;
+		}
+
+		.founders-grid{
+			display: grid;
+			grid-template-columns: 1fr 1fr;
+			gap: 16px;
+		}
+
+		.founder-card{
+			display: flex;
+			border-radius: 15px;
+			overflow: hidden;
+			border: 1px solid var(--main-infobox-labs-border-color, rgba(230, 230, 230, 0.6));
+			background: var(--main-infobox-labs-background-color, rgba(242, 242, 242, 0.6));
+
+			.founder-photo{
+				width: 50%;
+				flex-shrink: 0;
+
+				img{
+					width: 100%;
+					height: 100%;
+					object-fit: cover;
+					object-position: center top;
+				}
+			}
+
+			.founder-info{
+				padding: 32px;
+				display: flex;
+				flex-direction: column;
+			}
+
+			h2{
+				@include headline-3;
+				margin: 0 0 8px;
+			}
+
+			ul{
+				list-style: none;
+				padding: 0;
+				margin: 0;
+
+				li{
+					@include body-small;
+					color: var(--main-text-tertiary-color, #b2b2b2);
+					padding: 4px 0;
+					position: relative;
+					padding-left: 16px;
+
+					&::before{
+						content: "•";
+						position: absolute;
+						left: 0;
+					}
+				}
+			}
+		}
+	}
+
+	section.about-contact{
+		padding: 75px 15px;
+	}
+}
+
+
+@media only screen and (max-width: 940px){
+	body.about{
+		section.about-founders-detail .founders-grid{
+			grid-template-columns: 1fr;
+		}
+	}
+}
+
+@media only screen and (max-width: 660px){
+	body.about{
+		section.about-hero .hero-text h1{
+			font-size: 38px;
+		}
+		section.about-founders-detail .founder-card{
+			flex-direction: column;
+			.founder-photo{
+				width: 100%;
+				aspect-ratio: 1/1;
+				overflow: hidden;
+				img{
+					height: 100%;
+				}
+			}
+		}
+	}
+}

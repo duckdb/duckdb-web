@@ -15,4 +15,4 @@ We also provide a SQLite API wrapper which means that if your application is pro
 
 ## Installation
 
-The DuckDB C API can be installed as part of the `libduckdb` packages. Please see the [installation page]({% link install/index.html %}?environment=cplusplus) for details.
+The DuckDB C API can be installed as part of the `libduckdb` packages. Please see the [installation page]({% link install/index.html %}?environment=c) for details.
