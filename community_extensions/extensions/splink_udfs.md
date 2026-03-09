@@ -32,8 +32,8 @@ docs:
 
 extension_star_count: 16
 extension_star_count_pretty: 16
-extension_download_count: 772
-extension_download_count_pretty: 772
+extension_download_count: 774
+extension_download_count_pretty: 774
 image: '/images/community_extensions/social_preview/preview_community_extension_splink_udfs.png'
 layout: community_extension_doc
 ---
@@ -77,5 +77,19 @@ LOAD {{ page.extension.name }};
 |---------------------|---------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|---------|-------------------------------------------|
 | damerau_levenshtein | scalar        | Extension of Levenshtein distance to also include transposition of adjacent characters as an allowed edit operation. In other words, the minimum number of edit operations (insertions, deletions, substitutions or transpositions) required to change one string to another. Characters of different cases (e.g., `a` and `A`) are considered different. | NULL    | [damerau_levenshtein('duckdb', 'udckbd')] |
 | levenshtein         | scalar        | The minimum number of single-character edits (insertions, deletions or substitutions) required to change one string to the other. Characters of different cases (e.g., `a` and `A`) are considered different.                                                                                                                                             | NULL    | [levenshtein('duck', 'db')]               |
+
+### Added Types
+
+<div class="extension_types_table"></div>
+
+| type_name | type_size | logical_type | type_category | internal |
+|-----------|----------:|--------------|---------------|----------|
+
+### Added Settings
+
+<div class="extension_settings_table"></div>
+
+| name | description | input_type | scope | aliases |
+|------|-------------|------------|-------|---------|
 
 

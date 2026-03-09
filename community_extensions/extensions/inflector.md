@@ -25,8 +25,8 @@ repo:
 
 extension_star_count: 7
 extension_star_count_pretty: 7
-extension_download_count: 426
-extension_download_count_pretty: 426
+extension_download_count: 444
+extension_download_count_pretty: 444
 image: '/images/community_extensions/social_preview/preview_community_extension_inflector.png'
 layout: community_extension_doc
 ---
@@ -85,6 +85,20 @@ LOAD {{ page.extension.name }};
 | inflector_to_table_case          | scalar        | Converts a string to table_cases format (snake_case plural)              | NULL    | [inflector_to_table_case('FooBar')]                            |
 | inflector_to_title_case          | scalar        | Converts a string to Title Case format                                   | NULL    | [inflector_to_title_case('hello_world')]                       |
 | inflector_to_train_case          | scalar        | Converts a string to Train-Case format                                   | NULL    | [inflector_to_train_case('helloWorld')]                        |
+
+### Overloaded Functions
+
+<div class="extension_functions_table"></div>
+
+| function_name | function_type | description | comment | examples |
+|---------------|---------------|-------------|---------|----------|
+
+### Added Types
+
+<div class="extension_types_table"></div>
+
+| type_name | type_size | logical_type | type_category | internal |
+|-----------|----------:|--------------|---------------|----------|
 
 ### Added Settings
 

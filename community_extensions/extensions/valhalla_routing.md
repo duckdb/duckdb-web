@@ -111,8 +111,8 @@ docs:
 
 extension_star_count: 3
 extension_star_count_pretty: 3
-extension_download_count: 401
-extension_download_count_pretty: 401
+extension_download_count: 417
+extension_download_count_pretty: 417
 image: '/images/community_extensions/social_preview/preview_community_extension_valhalla_routing.png'
 layout: community_extension_doc
 ---
@@ -148,6 +148,20 @@ LOAD {{ page.extension.name }};
 | travel_time_request     | scalar        | NULL        | NULL    |          |
 | valhalla_build_tiles    | scalar        | NULL        | NULL    |          |
 | valhalla_route_wkb      | scalar        | NULL        | NULL    |          |
+
+### Overloaded Functions
+
+<div class="extension_functions_table"></div>
+
+| function_name | function_type | description | comment | examples |
+|---------------|---------------|-------------|---------|----------|
+
+### Added Types
+
+<div class="extension_types_table"></div>
+
+| type_name | type_size | logical_type | type_category | internal |
+|-----------|----------:|--------------|---------------|----------|
 
 ### Added Settings
 

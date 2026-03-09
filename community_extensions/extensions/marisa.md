@@ -26,8 +26,8 @@ repo:
 
 extension_star_count: 11
 extension_star_count_pretty: 11
-extension_download_count: 380
-extension_download_count_pretty: 380
+extension_download_count: 385
+extension_download_count_pretty: 385
 image: '/images/community_extensions/social_preview/preview_community_extension_marisa.png'
 layout: community_extension_doc
 ---
@@ -59,5 +59,26 @@ LOAD {{ page.extension.name }};
 | marisa_lookup        | scalar        | NULL                                               | NULL    |                                         |
 | marisa_predictive    | scalar        | NULL                                               | NULL    |                                         |
 | marisa_trie          | aggregate     | Creates a new Marisa Trie from the value supplied. | NULL    | [SELECT marisa_trie(column) FROM table] |
+
+### Overloaded Functions
+
+<div class="extension_functions_table"></div>
+
+| function_name | function_type | description | comment | examples |
+|---------------|---------------|-------------|---------|----------|
+
+### Added Types
+
+<div class="extension_types_table"></div>
+
+| type_name | type_size | logical_type | type_category | internal |
+|-----------|----------:|--------------|---------------|----------|
+
+### Added Settings
+
+<div class="extension_settings_table"></div>
+
+| name | description | input_type | scope | aliases |
+|------|-------------|------------|-------|---------|
 
 

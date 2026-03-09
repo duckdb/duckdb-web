@@ -19,10 +19,10 @@ repo:
   github: DataZooDE/anofox-forecast
   ref: 704534fd7a7cb5e40ceac7471bac3311b20e682d
 
-extension_star_count: 27
-extension_star_count_pretty: 27
-extension_download_count: 389
-extension_download_count_pretty: 389
+extension_star_count: 28
+extension_star_count_pretty: 28
+extension_download_count: 414
+extension_download_count_pretty: 414
 image: '/images/community_extensions/social_preview/preview_community_extension_anofox_forecast.png'
 layout: community_extension_doc
 ---
@@ -302,5 +302,26 @@ LOAD {{ page.extension.name }};
 | ts_validate_separator                         | table         | NULL        | NULL    |          |
 | ts_validate_timestamps_by                     | table_macro   | NULL        | NULL    |          |
 | ts_validate_timestamps_summary_by             | table_macro   | NULL        | NULL    |          |
+
+### Overloaded Functions
+
+<div class="extension_functions_table"></div>
+
+| function_name | function_type | description | comment | examples |
+|---------------|---------------|-------------|---------|----------|
+
+### Added Types
+
+<div class="extension_types_table"></div>
+
+| type_name | type_size | logical_type | type_category | internal |
+|-----------|----------:|--------------|---------------|----------|
+
+### Added Settings
+
+<div class="extension_settings_table"></div>
+
+| name | description | input_type | scope | aliases |
+|------|-------------|------------|-------|---------|
 
 

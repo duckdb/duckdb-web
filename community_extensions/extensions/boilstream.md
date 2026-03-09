@@ -109,8 +109,8 @@ docs:
 
 extension_star_count: 7
 extension_star_count_pretty: 7
-extension_download_count: 392
-extension_download_count_pretty: 392
+extension_download_count: 393
+extension_download_count_pretty: 393
 image: '/images/community_extensions/social_preview/preview_community_extension_boilstream.png'
 layout: community_extension_doc
 ---
@@ -160,6 +160,7 @@ LOAD {{ page.extension.name }};
 | ducklake_rewrite_data_files      | table         | NULL        | NULL    |          |
 | ducklake_set_commit_message      | table         | NULL        | NULL    |          |
 | ducklake_set_option              | table         | NULL        | NULL    |          |
+| ducklake_settings                | table         | NULL        | NULL    |          |
 | ducklake_snapshots               | table         | NULL        | NULL    |          |
 | ducklake_table_changes           | table_macro   | NULL        | NULL    |          |
 | ducklake_table_deletions         | table         | NULL        | NULL    |          |
@@ -172,24 +173,39 @@ LOAD {{ page.extension.name }};
 | postgres_scan                    | table         | NULL        | NULL    |          |
 | postgres_scan_pushdown           | table         | NULL        | NULL    |          |
 
+### Overloaded Functions
+
+<div class="extension_functions_table"></div>
+
+| function_name | function_type | description | comment | examples |
+|---------------|---------------|-------------|---------|----------|
+
+### Added Types
+
+<div class="extension_types_table"></div>
+
+| type_name | type_size | logical_type | type_category | internal |
+|-----------|----------:|--------------|---------------|----------|
+
 ### Added Settings
 
 <div class="extension_settings_table"></div>
 
-|              name               |                                                          description                                                          | input_type | scope  | aliases |
-|---------------------------------|-------------------------------------------------------------------------------------------------------------------------------|------------|--------|---------|
-| ducklake_max_retry_count        | The maximum amount of retry attempts for a ducklake transaction                                                               | UBIGINT    | GLOBAL | []      |
-| ducklake_retry_backoff          | Backoff factor for exponentially increasing retry wait time                                                                   | DOUBLE     | GLOBAL | []      |
-| ducklake_retry_wait_ms          | Time between retries                                                                                                          | UBIGINT    | GLOBAL | []      |
-| pg_array_as_varchar             | Read Postgres arrays as varchar - enables reading mixed dimensional arrays                                                    | BOOLEAN    | GLOBAL | []      |
-| pg_connection_cache             | Whether or not to use the connection cache                                                                                    | BOOLEAN    | GLOBAL | []      |
-| pg_connection_limit             | The maximum amount of concurrent Postgres connections                                                                         | UBIGINT    | GLOBAL | []      |
-| pg_debug_show_queries           | DEBUG SETTING: print all queries sent to Postgres to stdout                                                                   | BOOLEAN    | GLOBAL | []      |
-| pg_experimental_filter_pushdown | Whether or not to use filter pushdown                                                                                         | BOOLEAN    | GLOBAL | []      |
-| pg_null_byte_replacement        | When writing NULL bytes to Postgres, replace them with the given character                                                    | VARCHAR    | GLOBAL | []      |
-| pg_pages_per_task               | The amount of pages per task                                                                                                  | UBIGINT    | GLOBAL | []      |
-| pg_use_binary_copy              | Whether or not to use BINARY copy to read data                                                                                | BOOLEAN    | GLOBAL | []      |
-| pg_use_ctid_scan                | Whether or not to parallelize scanning using table ctids                                                                      | BOOLEAN    | GLOBAL | []      |
-| pg_use_text_protocol            | Whether or not to use TEXT protocol to read data. This is slower, but provides better compatibility with non-Postgres systems | BOOLEAN    | GLOBAL | []      |
+|                   name                   |                                                          description                                                          | input_type | scope  | aliases |
+|------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------|------------|--------|---------|
+| ducklake_default_data_inlining_row_limit | Default row limit for data inlining (0 disables inlining)                                                                     | UBIGINT    | GLOBAL | []      |
+| ducklake_max_retry_count                 | The maximum amount of retry attempts for a ducklake transaction                                                               | UBIGINT    | GLOBAL | []      |
+| ducklake_retry_backoff                   | Backoff factor for exponentially increasing retry wait time                                                                   | DOUBLE     | GLOBAL | []      |
+| ducklake_retry_wait_ms                   | Time between retries                                                                                                          | UBIGINT    | GLOBAL | []      |
+| pg_array_as_varchar                      | Read Postgres arrays as varchar - enables reading mixed dimensional arrays                                                    | BOOLEAN    | GLOBAL | []      |
+| pg_connection_cache                      | Whether or not to use the connection cache                                                                                    | BOOLEAN    | GLOBAL | []      |
+| pg_connection_limit                      | The maximum amount of concurrent Postgres connections                                                                         | UBIGINT    | GLOBAL | []      |
+| pg_debug_show_queries                    | DEBUG SETTING: print all queries sent to Postgres to stdout                                                                   | BOOLEAN    | GLOBAL | []      |
+| pg_experimental_filter_pushdown          | Whether or not to use filter pushdown                                                                                         | BOOLEAN    | GLOBAL | []      |
+| pg_null_byte_replacement                 | When writing NULL bytes to Postgres, replace them with the given character                                                    | VARCHAR    | GLOBAL | []      |
+| pg_pages_per_task                        | The amount of pages per task                                                                                                  | UBIGINT    | GLOBAL | []      |
+| pg_use_binary_copy                       | Whether or not to use BINARY copy to read data                                                                                | BOOLEAN    | GLOBAL | []      |
+| pg_use_ctid_scan                         | Whether or not to parallelize scanning using table ctids                                                                      | BOOLEAN    | GLOBAL | []      |
+| pg_use_text_protocol                     | Whether or not to use TEXT protocol to read data. This is slower, but provides better compatibility with non-Postgres systems | BOOLEAN    | GLOBAL | []      |
 
 

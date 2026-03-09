@@ -43,8 +43,8 @@ docs:
 
 extension_star_count: 4
 extension_star_count_pretty: 4
-extension_download_count: 340
-extension_download_count_pretty: 340
+extension_download_count: 364
+extension_download_count_pretty: 364
 image: '/images/community_extensions/social_preview/preview_community_extension_oast.png'
 layout: community_extension_doc
 ---
@@ -85,5 +85,26 @@ LOAD {{ page.extension.name }};
 | oast_summary         | macro         | NULL        | NULL    |          |
 | oast_timestamp       | macro         | NULL        | NULL    |          |
 | oast_validate        | scalar        | NULL        | NULL    |          |
+
+### Overloaded Functions
+
+<div class="extension_functions_table"></div>
+
+| function_name | function_type | description | comment | examples |
+|---------------|---------------|-------------|---------|----------|
+
+### Added Types
+
+<div class="extension_types_table"></div>
+
+| type_name | type_size | logical_type | type_category | internal |
+|-----------|----------:|--------------|---------------|----------|
+
+### Added Settings
+
+<div class="extension_settings_table"></div>
+
+| name | description | input_type | scope | aliases |
+|------|-------------|------------|-------|---------|
 
 

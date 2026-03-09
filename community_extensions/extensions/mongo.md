@@ -38,8 +38,8 @@ docs:
 
 extension_star_count: 40
 extension_star_count_pretty: 40
-extension_download_count: 584
-extension_download_count_pretty: 584
+extension_download_count: 633
+extension_download_count_pretty: 633
 image: '/images/community_extensions/social_preview/preview_community_extension_mongo.png'
 layout: community_extension_doc
 ---
@@ -69,5 +69,26 @@ LOAD {{ page.extension.name }};
 |-------------------|---------------|----------------------------------------------------------------------------------------------------------------------|---------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | mongo_clear_cache | table         | Clears the schema cache for all attached MongoDB databases. Useful when MongoDB schema changes.                      | NULL    | [SELECT * FROM mongo_clear_cache()]                                                                                                                                                              |
 | mongo_scan        | table         | Scans a MongoDB collection and returns its contents as a table. Supports optional filter and sample_size parameters. | NULL    | [SELECT * FROM mongo_scan('mongodb://localhost:27017', 'mydb', 'mycollection'), SELECT * FROM mongo_scan('mongodb://localhost:27017', 'mydb', 'mycollection', filter := '{"status": "active"}')] |
+
+### Overloaded Functions
+
+<div class="extension_functions_table"></div>
+
+| function_name | function_type | description | comment | examples |
+|---------------|---------------|-------------|---------|----------|
+
+### Added Types
+
+<div class="extension_types_table"></div>
+
+| type_name | type_size | logical_type | type_category | internal |
+|-----------|----------:|--------------|---------------|----------|
+
+### Added Settings
+
+<div class="extension_settings_table"></div>
+
+| name | description | input_type | scope | aliases |
+|------|-------------|------------|-------|---------|
 
 

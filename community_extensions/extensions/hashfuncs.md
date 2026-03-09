@@ -23,8 +23,8 @@ repo:
 
 extension_star_count: 12
 extension_star_count_pretty: 12
-extension_download_count: 3195
-extension_download_count_pretty: 3.2k
+extension_download_count: 3273
+extension_download_count_pretty: 3.3k
 image: '/images/community_extensions/social_preview/preview_community_extension_hashfuncs.png'
 layout: community_extension_doc
 ---
@@ -68,5 +68,26 @@ LOAD {{ page.extension.name }};
 | xxh3_64             | scalar        | Computes a 64-bit xxHash3 (XXH3_64) non-cryptographic hash of the input. Faster than XXH64 for short inputs      | NULL    | [xxh3_64('hello')]                 |
 | xxh64               | scalar        | Computes a 64-bit xxHash (XXH64) non-cryptographic hash of the input                                             | NULL    | [xxh64('hello')]                   |
 | xxh64               | scalar        | Computes a 64-bit xxHash (XXH64) non-cryptographic hash of the input with a seed                                 | NULL    | [xxh64('hello', 42)]               |
+
+### Overloaded Functions
+
+<div class="extension_functions_table"></div>
+
+| function_name | function_type | description | comment | examples |
+|---------------|---------------|-------------|---------|----------|
+
+### Added Types
+
+<div class="extension_types_table"></div>
+
+| type_name | type_size | logical_type | type_category | internal |
+|-----------|----------:|--------------|---------------|----------|
+
+### Added Settings
+
+<div class="extension_settings_table"></div>
+
+| name | description | input_type | scope | aliases |
+|------|-------------|------------|-------|---------|
 
 

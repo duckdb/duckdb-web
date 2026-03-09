@@ -29,8 +29,8 @@ docs:
     repository [here](https://github.com/gropaul/dash).
 extension_star_count: 37
 extension_star_count_pretty: 37
-extension_download_count: 349
-extension_download_count_pretty: 349
+extension_download_count: 419
+extension_download_count_pretty: 419
 image: '/images/community_extensions/social_preview/preview_community_extension_dash.png'
 layout: community_extension_doc
 ---
@@ -62,5 +62,26 @@ LOAD {{ page.extension.name }};
 | query_result  | table         | NULL        | NULL    |          |
 | start_dash    | table         | NULL        | NULL    |          |
 | stop_dash     | table         | NULL        | NULL    |          |
+
+### Overloaded Functions
+
+<div class="extension_functions_table"></div>
+
+| function_name | function_type | description | comment | examples |
+|---------------|---------------|-------------|---------|----------|
+
+### Added Types
+
+<div class="extension_types_table"></div>
+
+| type_name | type_size | logical_type | type_category | internal |
+|-----------|----------:|--------------|---------------|----------|
+
+### Added Settings
+
+<div class="extension_settings_table"></div>
+
+| name | description | input_type | scope | aliases |
+|------|-------------|------------|-------|---------|
 
 

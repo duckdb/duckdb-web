@@ -69,10 +69,10 @@ docs:
     This extension brings Lance into a familiar SQL workflow.
     For detailed setup and usage instructions, visit the [extension repository](https://github.com/lance-format/lance-duckdb).
 
-extension_star_count: 78
-extension_star_count_pretty: 78
-extension_download_count: 2535
-extension_download_count_pretty: 2.5k
+extension_star_count: 79
+extension_star_count_pretty: 79
+extension_download_count: 2049
+extension_download_count_pretty: 2.0k
 image: '/images/community_extensions/social_preview/preview_community_extension_lance.png'
 layout: community_extension_doc
 ---
@@ -103,6 +103,7 @@ LOAD {{ page.extension.name }};
 | __lance_exec                | table         | NULL        | NULL    |          |
 | __lance_namespace_scan      | table         | NULL        | NULL    |          |
 | __lance_scan                | table         | NULL        | NULL    |          |
+| __lance_truncate_table      | table         | NULL        | NULL    |          |
 | lance_cleanup_old_versions  | table         | NULL        | NULL    |          |
 | lance_column_metadata       | table         | NULL        | NULL    |          |
 | lance_compact_files         | table         | NULL        | NULL    |          |
@@ -122,5 +123,26 @@ LOAD {{ page.extension.name }};
 | lance_unset_schema_metadata | table         | NULL        | NULL    |          |
 | lance_unset_table_metadata  | table         | NULL        | NULL    |          |
 | lance_vector_search         | table         | NULL        | NULL    |          |
+
+### Overloaded Functions
+
+<div class="extension_functions_table"></div>
+
+| function_name | function_type | description | comment | examples |
+|---------------|---------------|-------------|---------|----------|
+
+### Added Types
+
+<div class="extension_types_table"></div>
+
+| type_name | type_size | logical_type | type_category | internal |
+|-----------|----------:|--------------|---------------|----------|
+
+### Added Settings
+
+<div class="extension_settings_table"></div>
+
+| name | description | input_type | scope | aliases |
+|------|-------------|------------|-------|---------|
 
 

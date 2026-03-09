@@ -84,10 +84,10 @@ docs:
 
     For more details, visit the [extension repository](https://github.com/sidequery/poached).
 
-extension_star_count: 7
-extension_star_count_pretty: 7
-extension_download_count: 633
-extension_download_count_pretty: 633
+extension_star_count: 8
+extension_star_count_pretty: 8
+extension_download_count: 49
+extension_download_count_pretty: 49
 image: '/images/community_extensions/social_preview/preview_community_extension_poached.png'
 layout: community_extension_doc
 ---
@@ -130,5 +130,26 @@ LOAD {{ page.extension.name }};
 | sql_parse_json       | scalar        | NULL        | NULL    |          |
 | sql_strip_comments   | scalar        | NULL        | NULL    |          |
 | tokenize_sql         | table         | NULL        | NULL    |          |
+
+### Overloaded Functions
+
+<div class="extension_functions_table"></div>
+
+| function_name | function_type | description | comment | examples |
+|---------------|---------------|-------------|---------|----------|
+
+### Added Types
+
+<div class="extension_types_table"></div>
+
+| type_name | type_size | logical_type | type_category | internal |
+|-----------|----------:|--------------|---------------|----------|
+
+### Added Settings
+
+<div class="extension_settings_table"></div>
+
+| name | description | input_type | scope | aliases |
+|------|-------------|------------|-------|---------|
 
 

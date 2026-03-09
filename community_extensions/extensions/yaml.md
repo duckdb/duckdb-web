@@ -90,8 +90,8 @@ docs:
 
 extension_star_count: 15
 extension_star_count_pretty: 15
-extension_download_count: 1659
-extension_download_count_pretty: 1.7k
+extension_download_count: 1961
+extension_download_count_pretty: 2.0k
 image: '/images/community_extensions/social_preview/preview_community_extension_yaml.png'
 layout: community_extension_doc
 ---
@@ -163,7 +163,14 @@ LOAD {{ page.extension.name }};
 <div class="extension_types_table"></div>
 
 | type_name | type_size | logical_type | type_category | internal |
-|-----------|----------:|--------------|---------------|---------:|
+|-----------|----------:|--------------|---------------|----------|
 | yaml      | 16        | VARCHAR      | STRING        | true     |
+
+### Added Settings
+
+<div class="extension_settings_table"></div>
+
+| name | description | input_type | scope | aliases |
+|------|-------------|------------|-------|---------|
 
 

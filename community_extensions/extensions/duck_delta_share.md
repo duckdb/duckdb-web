@@ -22,8 +22,8 @@ repo:
 
 extension_star_count: 3
 extension_star_count_pretty: 3
-extension_download_count: 412
-extension_download_count_pretty: 412
+extension_download_count: 423
+extension_download_count_pretty: 423
 image: '/images/community_extensions/social_preview/preview_community_extension_duck_delta_share.png'
 layout: community_extension_doc
 ---
@@ -54,6 +54,20 @@ LOAD {{ page.extension.name }};
 | delta_share_list       | table         | NULL        | NULL    |          |
 | delta_share_list_files | scalar        | NULL        | NULL    |          |
 | delta_share_read       | table         | NULL        | NULL    |          |
+
+### Overloaded Functions
+
+<div class="extension_functions_table"></div>
+
+| function_name | function_type | description | comment | examples |
+|---------------|---------------|-------------|---------|----------|
+
+### Added Types
+
+<div class="extension_types_table"></div>
+
+| type_name | type_size | logical_type | type_category | internal |
+|-----------|----------:|--------------|---------------|----------|
 
 ### Added Settings
 

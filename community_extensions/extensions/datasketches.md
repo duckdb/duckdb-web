@@ -25,7 +25,7 @@ repo:
 
 extension_star_count: 41
 extension_star_count_pretty: 41
-extension_download_count: 1397
+extension_download_count: 1354
 extension_download_count_pretty: 1.4k
 image: '/images/community_extensions/social_preview/preview_community_extension_datasketches.png'
 layout: community_extension_doc
@@ -143,12 +143,19 @@ LOAD {{ page.extension.name }};
 | datasketch_theta_union                     | scalar        | Returns a new Theta sketch representing the union of two sketches                                                                 | NULL    | [datasketch_theta_union(sketch1, sketch2)]                                 |
 | datasketch_theta_upper_bound               | scalar        | Returns the upper bound estimate at the given number of standard deviations (1, 2, or 3)                                          | NULL    | [datasketch_theta_upper_bound(sketch, 2)]                                  |
 
+### Overloaded Functions
+
+<div class="extension_functions_table"></div>
+
+| function_name | function_type | description | comment | examples |
+|---------------|---------------|-------------|---------|----------|
+
 ### Added Types
 
 <div class="extension_types_table"></div>
 
 |         type_name          | type_size | logical_type | type_category | internal |
-|----------------------------|----------:|--------------|---------------|---------:|
+|----------------------------|----------:|--------------|---------------|----------|
 | sketch_cpc                 | 16        | BLOB         | NULL          | true     |
 | sketch_frequent_items      | 16        | BLOB         | NULL          | true     |
 | sketch_hll                 | 16        | BLOB         | NULL          | true     |
@@ -185,5 +192,12 @@ LOAD {{ page.extension.name }};
 | sketch_tdigest_double      | 16        | BLOB         | NULL          | true     |
 | sketch_tdigest_float       | 16        | BLOB         | NULL          | true     |
 | sketch_theta               | 16        | BLOB         | NULL          | true     |
+
+### Added Settings
+
+<div class="extension_settings_table"></div>
+
+| name | description | input_type | scope | aliases |
+|------|-------------|------------|-------|---------|
 
 

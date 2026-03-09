@@ -40,8 +40,8 @@ docs:
 
 extension_star_count: 1
 extension_star_count_pretty: 1
-extension_download_count: 570
-extension_download_count_pretty: 570
+extension_download_count: 53
+extension_download_count_pretty: 53
 image: '/images/community_extensions/social_preview/preview_community_extension_fit.png'
 layout: community_extension_doc
 ---
@@ -78,5 +78,26 @@ LOAD {{ page.extension.name }};
 | fit_records         | table         | NULL        | NULL    |          |
 | fit_sessions        | table         | NULL        | NULL    |          |
 | fit_users           | table         | NULL        | NULL    |          |
+
+### Overloaded Functions
+
+<div class="extension_functions_table"></div>
+
+| function_name | function_type | description | comment | examples |
+|---------------|---------------|-------------|---------|----------|
+
+### Added Types
+
+<div class="extension_types_table"></div>
+
+| type_name | type_size | logical_type | type_category | internal |
+|-----------|----------:|--------------|---------------|----------|
+
+### Added Settings
+
+<div class="extension_settings_table"></div>
+
+| name | description | input_type | scope | aliases |
+|------|-------------|------------|-------|---------|
 
 
