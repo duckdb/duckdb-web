@@ -30,7 +30,7 @@ This section lists the features that the DuckDB team plans to work on **in the c
 * Migration and documentation to [C client API]({% link docs/stable/clients/c/overview.md %}) and [C extension API](https://github.com/duckdb/extension-template-c)
 * Rust support for extensions
 * Improvements to lakehouse formats
-    * Continuous improvement for the Iceberg format through the [`iceberg` extension]({% link docs/stable/core_extensions/iceberg/overview.md %}). Several Iceberg improvements, including write support, were released in [DuckDB v1.4 releases]({% post_url 2025-11-28-iceberg-writes-in-duckdb %}).
+    * Continuous improvement for the Iceberg format through the [`iceberg` extension]({% link docs/stable/core_extensions/iceberg/overview.md %}). Several Iceberg improvements, including write support, were released in [DuckDB v1.4 releases]({% post_url 2025-11-28-iceberg-writes-in-duckdb %}) and in [DuckDB v1.5]({% post_url 2026-03-09-announcing-duckdb-150 %}).
     * Improved support for Delta Lake through the [`delta` extension]({% link docs/stable/core_extensions/delta.md %}).
     * In May 2025, we released [DuckLake](https://ducklake.select/), a new lakehouse format. We would like to emphasize that we are still committed to developing both the `iceberg` and `delta` extensions. We also strive to [provide interoperability]({% post_url 2025-09-17-ducklake-03 %}#interoperability-with-iceberg) between DuckLake and other lakehouse formats.
 * [`MATCH_RECOGNIZE`](https://github.com/duckdb/duckdb/discussions/3994) for pattern matching
@@ -41,7 +41,7 @@ Please note that there are **no guarantees** that a particular feature will be r
 
 ## Planned Deprecations
 
-* We are [gradually phasing out]({% link docs/stable/sql/functions/lambda.md %}) the lambda syntax (`x -> x + 1`) in favor of the Pythonic `lambda x : x + 1`.
+We are [gradually phasing out]({% link docs/current/sql/functions/lambda.md %}) the lambda syntax (`x -> x + 1`) in favor of the Pythonic `lambda x : x + 1`. [DuckDB v1.5]({% post_url 2026-03-09-announcing-duckdb-150 %}) throws a warning when using the deprecated syntax and DuckDB v2.0 will throw an error (unless configured explicitly to allow the old syntax).
 
 ## Future Work / Looking for Funding
 
