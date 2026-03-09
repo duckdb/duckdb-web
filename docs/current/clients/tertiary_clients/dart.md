@@ -6,7 +6,7 @@ redirect_from:
 title: Dart Client
 ---
 
-> The latest stable version of the DuckDB Dart client is {{ site.current_duckdb_dart_version }}.
+> The latest stable version of the DuckDB Dart client is {% if site.current_duckdb_dart_version != "" %}{{ site.current_duckdb_dart_version }}{% else %}{{ site.lts_duckdb_dart_version }}{% endif %}.
 
 DuckDB.Dart is the native Dart API for DuckDB.
 
