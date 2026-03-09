@@ -8,7 +8,7 @@ title: Go Client
 
 > Tip To use the DuckDB Go client, visit the [Go installation page]({% link install/index.html %}?environment=go).
 >
-> The latest stable version of the DuckDB Go client is {{ site.current_duckdb_go_version }}.
+> The latest stable version of the DuckDB Go client is {% if site.current_duckdb_go_version != "" %}{{ site.current_duckdb_go_version }}{% else %}{{ site.lts_duckdb_go_version }}{% endif %}.
 
 The DuckDB Go client, [`duckdb-go`](https://github.com/duckdb/duckdb-go), allows using DuckDB via the `database/sql` interface.
 For examples on how to use this interface, see the [official documentation](https://pkg.go.dev/database/sql) and [tutorial](https://go.dev/doc/tutorial/database-access).
