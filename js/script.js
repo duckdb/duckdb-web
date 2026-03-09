@@ -664,15 +664,22 @@ $('body.documentation #main_content_wrap a.externallink').each(function () {
 		function updateInstallation($item) {
 			updateHighlight($envTopbar, $item);
 			const activeClient = $item.attr("data-client");
-			let installation = $(
+			let $installDiv = $(
 				`#quick-installation div[data-install='${activeClient} ${OSdatid}']`
-			).html();
-			if (!installation) {
-				installation = $(
+			);
+			if (!$installDiv.length) {
+				$installDiv = $(
 					`#quick-installation div[data-install='${activeClient}']`
-				).html();
+				);
 			}
-			$(".result").html(installation);
+			$(".result").html($installDiv.html());
+			const version = $installDiv.attr("data-version");
+			const $versionSpan = $(".bottombar .version");
+			if (version) {
+				$versionSpan.text("Latest release: DuckDB " + version).show();
+			} else {
+				$versionSpan.hide();
+			}
 		}
 		
 		updateInstallation($activeEnvItem);

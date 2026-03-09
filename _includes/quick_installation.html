@@ -24,7 +24,7 @@ curl https://install.duckdb.org | sh
 
 				<div class="bottombar">
 					<p class="system">
-						<!--<span>Latest release: DuckDB {{ site.current_duckdb_version }} | </span>-->
+						<span class="version"></span>
 						<span class="systemdetected">System detected: </span>
 					</p>
 				</div>
@@ -42,19 +42,19 @@ curl https://install.duckdb.org | sh
 
 <div id="quick-installation">
 
-<div data-install="python">
+<div data-install="python" data-version="{{ site.current_duckdb_version }}">
 {% highlight bash %}
 pip install duckdb
 {% endhighlight %}
 </div>
 
-<div data-install="r macos">
+<div data-install="r macos" data-version="{{ site.current_duckdb_r_version }}">
 {% highlight r %}
 install.packages("duckdb")
 {% endhighlight %}
 </div>
 
-<div data-install="r linux">
+<div data-install="r linux" data-version="{{ site.current_duckdb_r_version }}">
 {% highlight r %}
 # install from source using CRAN
 install.packages("duckdb")
@@ -68,57 +68,57 @@ install.packages("duckdb", repos="https://p3m.dev/cran/__linux__/manylinux_2_28/
 {% endhighlight %}
 </div>
 
-<div data-install="r windows">
+<div data-install="r windows" data-version="{{ site.current_duckdb_r_version }}">
 {% highlight r %}
 install.packages("duckdb")
 {% endhighlight %}
 </div>
 
-<div data-install="java">
+<div data-install="java" data-version="{{ site.current_duckdb_java_version }}">
 <a href="https://repo1.maven.org/maven2/org/duckdb/duckdb_jdbc/{{ site.current_duckdb_java_version }}/duckdb_jdbc-{{ site.current_duckdb_java_version }}.jar" class="download-btn" target="_blank">duckdb_jdbc-{{ site.current_duckdb_java_version }}.jar</a>
 </div>
 
-<div data-install="nodejs">
+<div data-install="nodejs" data-version="{{ site.current_duckdb_node_neo_version }}">
 {% highlight bash %}
 npm install @duckdb/node-api
 {% endhighlight %}
 </div>
 
-<div data-install="cli macos">
+<div data-install="cli macos" data-version="{{ site.current_duckdb_version }}">
 {% highlight bash %}
 curl https://install.duckdb.org | sh
 {% endhighlight %}
 </div>
 
-<div data-install="cli linux">
+<div data-install="cli linux" data-version="{{ site.current_duckdb_version }}">
 {% highlight bash %}
 curl https://install.duckdb.org | sh
 {% endhighlight %}
 </div>
 
-<div data-install="cli windows">
+<div data-install="cli windows" data-version="{{ site.current_duckdb_version }}">
 <a href="https://github.com/duckdb/duckdb/releases/download/v{{ site.current_duckdb_version }}/duckdb_cli-windows-amd64.zip" class="download-btn" target="_blank">duckdb_cli-windows-amd64.zip</a>
 </div>
 
-<div data-install="odbc macos">
+<div data-install="odbc macos" data-version="{{ site.current_duckdb_odbc_version }}">
 <a href="https://github.com/duckdb/duckdb-odbc/releases/download/v{{ site.current_duckdb_odbc_version }}/duckdb_odbc-osx-universal.zip" class="download-btn" target="_blank">duckdb_odbc-osx-universal.zip</a>
 </div>
 
-<div data-install="odbc linux">
+<div data-install="odbc linux" data-version="{{ site.current_duckdb_odbc_version }}">
 <a href="https://github.com/duckdb/duckdb-odbc/releases/download/v{{ site.current_duckdb_odbc_version }}/duckdb_odbc-linux-amd64.zip" class="download-btn" target="_blank">duckdb_odbc-linux-amd64.zip</a>
 </div>
 
-<div data-install="odbc windows">
+<div data-install="odbc windows" data-version="{{ site.current_duckdb_odbc_version }}">
 <a href="https://github.com/duckdb/duckdb-odbc/releases/download/v{{ site.current_duckdb_odbc_version }}/duckdb_odbc-windows-amd64.zip" class="download-btn" target="_blank">duckdb_odbc-windows-amd64.zip</a>
 </div>
 
-<div data-install="rust">
+<div data-install="rust" data-version="{{ site.current_duckdb_rust_version }}">
 {% highlight bash %}
 cargo add duckdb --features bundled
 {% endhighlight %}
 </div>
 
-<div data-install="go">
+<div data-install="go" data-version="{{ site.current_duckdb_go_version }}">
 {% highlight bash %}
 go get github.com/duckdb/duckdb-go/v2
 {% endhighlight %}

@@ -274,6 +274,10 @@ body.landing{
 		.bottombar{
 			padding: 15px 20px;
 			border-top: 1px solid var(--main-codebox-border-color, #E6E6E6);
+			.system{
+				display: flex;
+				column-gap: 20px; 
+			}
 			.system span{
 				color: var(--main-text-tertiary-color, #B2B2B2);
 				@include body-small;
