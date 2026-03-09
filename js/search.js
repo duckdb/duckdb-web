@@ -22,7 +22,6 @@ function loadSearchData() {
 
 	const xhr = new XMLHttpRequest();
 	xhr.open('GET', '/data/search_data.json');
-	xhr.setRequestHeader('Accept-Encoding', 'gzip, deflate');
 	xhr.onreadystatechange = function(event) {
 		if (this.readyState === 4) {
 			const { data } = JSON.parse(this.responseText);
