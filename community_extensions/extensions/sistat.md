@@ -18,7 +18,7 @@ extension:
 
 repo:
   github: fklezin/duckdb-sistat
-  ref: 820c56d80ccece57455655e1d5a07e9f9f034906
+  ref: b790887427ee4bfcc75b89b6c88bdf8a40238878
 
 docs:
   hello_world: |
@@ -45,8 +45,8 @@ docs:
 
 extension_star_count: 1
 extension_star_count_pretty: 1
-extension_download_count: null
-extension_download_count_pretty: n/a
+extension_download_count: 17
+extension_download_count_pretty: 17
 image: '/images/community_extensions/social_preview/preview_community_extension_sistat.png'
 layout: community_extension_doc
 ---

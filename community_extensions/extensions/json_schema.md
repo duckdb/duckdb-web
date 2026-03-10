@@ -23,8 +23,8 @@ repo:
 
 extension_star_count: 2
 extension_star_count_pretty: 2
-extension_download_count: 462
-extension_download_count_pretty: 462
+extension_download_count: 479
+extension_download_count_pretty: 479
 image: '/images/community_extensions/social_preview/preview_community_extension_json_schema.png'
 layout: community_extension_doc
 ---

@@ -8,7 +8,7 @@ excerpt: |
 extension:
   name: httpfs_timeout_retry
   description: Add per-operation timeout and retry for httpfs extension
-  version: 0.0.1
+  version: 0.0.2
   language: C++
   build: cmake
   license: MIT
@@ -19,7 +19,7 @@ extension:
 repo:
   github: dentiny/duckdb-httpfs-timeout-retry
   andium: d4b8b9dee28a6b36fe5eea8be3dddb8470ccd613
-  ref: dea9c7a520b88e491540c4704477305824043452
+  ref: 9b535deddf7404d38aeacb21113d888a68065eba
 
 docs:
   hello_world: |
@@ -45,8 +45,8 @@ docs:
 
 extension_star_count: 0
 extension_star_count_pretty: 0
-extension_download_count: 634
-extension_download_count_pretty: 634
+extension_download_count: 635
+extension_download_count_pretty: 635
 image: '/images/community_extensions/social_preview/preview_community_extension_httpfs_timeout_retry.png'
 layout: community_extension_doc
 ---
