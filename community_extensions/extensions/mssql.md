@@ -37,7 +37,7 @@ docs:
 
     Features:
     - Native TDS protocol (no ODBC/JDBC required)
-    - Azure [Entra ID](https://github.com/hugr-lab/mssql-extension/blob/v0.1.17/AZURE.md) authentication (Service Principal, CLI, Device Code, Environment Variables)
+    - Azure [Entra ID](https://github.com/hugr-lab/mssql-extension/blob/v0.1.18/AZURE.md) authentication (Service Principal, CLI, Device Code, Environment Variables)
     - Azure SQL Database and Microsoft Fabric support
     - Lazy metadata loading for fast connections
     - Schema, table, and view catalog integration
@@ -58,7 +58,7 @@ docs:
 
 extension_star_count: 82
 extension_star_count_pretty: 82
-extension_download_count: 4177
+extension_download_count: 4240
 extension_download_count_pretty: 4.2k
 image: '/images/community_extensions/social_preview/preview_community_extension_mssql.png'
 layout: community_extension_doc

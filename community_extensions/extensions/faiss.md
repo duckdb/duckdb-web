@@ -22,7 +22,7 @@ extension:
 
 repo:
   github: "duckdb-faiss-ext/duckdb-faiss-ext"
-  ref: "6fa7821af0afe895c2357c121cbd247ed1b9b8f2"
+  ref: "e44df640b1def08315af80c01ce6207062cc7d64"
 
 docs:
   hello_world: |
@@ -48,8 +48,8 @@ docs:
 
 extension_star_count: 30
 extension_star_count_pretty: 30
-extension_download_count: 411
-extension_download_count_pretty: 411
+extension_download_count: 434
+extension_download_count_pretty: 434
 image: '/images/community_extensions/social_preview/preview_community_extension_faiss.png'
 layout: community_extension_doc
 ---

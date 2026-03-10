@@ -8,7 +8,7 @@ excerpt: |
 extension:
   name: otlp
   description: Read OpenTelemetry metrics, logs and traces from JSON or protobuf with a ClickHouse-inspired schema
-  version: 0.3.0
+  version: e0f079f5c72c6fcbb37b09aa3653cb95f814fbf3
   language: C++
   build: cmake
   license: MIT
@@ -19,7 +19,7 @@ extension:
 
 repo:
   github: smithclay/duckdb-otlp
-  ref: 9a9b96ea360f990954e9e3d69d090fbdfcc7a64a
+  ref: v0.4.0
 
 docs:
   hello_world: |
@@ -27,21 +27,20 @@ docs:
     LOAD otlp;
 
     -- Read OTLP traces from a JSON file
-    SELECT TraceId, SpanName, ServiceName, Duration
+    SELECT trace_id, span_name, service_name, duration
     FROM read_otlp_traces('traces.jsonl')
-    WHERE Duration > 1000000000
+    WHERE duration > 1000000000
     LIMIT 10;
 
-    -- Read metrics from JSON (works in native and WASM)
-    SELECT Timestamp, ServiceName, MetricName, Value
-    FROM read_otlp_metrics('metrics.jsonl')
-    WHERE MetricType = 'gauge'
-    ORDER BY Timestamp DESC;
+    -- Read gauge metrics from JSON (works in native and WASM)
+    SELECT timestamp, service_name, metric_name, value
+    FROM read_otlp_metrics_gauge('metrics.jsonl')
+    ORDER BY timestamp DESC;
 
     -- Filter logs by severity while reading from S3
-    SELECT Timestamp, SeverityText, Body, ServiceName
+    SELECT timestamp, severity_text, body, service_name
     FROM read_otlp_logs('s3://bucket/logs-*.jsonl')
-    WHERE SeverityText = 'ERROR';
+    WHERE severity_text = 'ERROR';
 
     -- Read protobuf format (native builds only)
     SELECT * FROM read_otlp_traces('traces.pb') LIMIT 10;
@@ -55,20 +54,16 @@ docs:
     ## Features
 
     **OTLP File Reading**
-    - Table functions: `read_otlp_traces()`, `read_otlp_logs()`, `read_otlp_metrics()`
+    - Table functions: `read_otlp_traces()`, `read_otlp_logs()`, `read_otlp_metrics_gauge()`, `read_otlp_metrics_sum()`, `read_otlp_metrics_histogram()`, `read_otlp_metrics_exp_histogram()`
     - Auto-detects JSON (`.json`, `.jsonl`) and protobuf (`.pb`) formats (protobuf requires native extension)
     - Works with DuckDB file systems: local, S3, HTTP, Azure, GCS
     - Browser support via DuckDB-WASM (JSON format only)
 
     **Strongly-Typed Schemas**
     - No JSON extraction required - all fields are proper DuckDB columns
-    - Direct access: `ServiceName`, `TraceId`, `Duration`, `Value`, etc.
+    - Direct access: `service_name`, `trace_id`, `duration`, `value`, etc.
     - Compatible with OpenTelemetry ClickHouse exporter schema
     - Efficient filtering and aggregation on typed columns
-
-    **Metric Union Schema**
-    - `read_otlp_metrics()` returns a 27-column union with `MetricType`
-    - Simple `CREATE TABLE AS SELECT ... WHERE MetricType = 'gauge'` patterns split the union into typed tables
 
     ## Use Cases
 
@@ -77,13 +72,6 @@ docs:
     - **Data Pipeline Testing**: Validate telemetry data before shipping to production
     - **Local Development**: Collect and inspect OpenTelemetry data during development
     - **Data Transformation**: Export to Parquet, CSV, or other DuckDB-supported formats
-
-    ## Architecture
-
-    - **Table Functions**: `read_otlp_*` emit typed `DataChunk`s for traces, logs, and metrics
-    - **Format Detection**: Sniffs the stream and dispatches to JSON or protobuf parsers
-    - **Row Builders**: Shared conversion helpers produce ClickHouse-compatible column layouts
-    - **Protobuf Stubs**: Generated OTLP message classes ship in `src/generated/`
 
     ## Limitations
 
@@ -95,10 +83,10 @@ docs:
     - [OpenTelemetry Protocol (OTLP)](https://opentelemetry.io/docs/specs/otlp/)
     - [OpenTelemetry ClickHouse Exporter](https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/exporter/clickhouseexporter)
 
-extension_star_count: 37
-extension_star_count_pretty: 37
-extension_download_count: 451
-extension_download_count_pretty: 451
+extension_star_count: 38
+extension_star_count_pretty: 38
+extension_download_count: 466
+extension_download_count_pretty: 466
 image: '/images/community_extensions/social_preview/preview_community_extension_otlp.png'
 layout: community_extension_doc
 ---
@@ -134,5 +122,26 @@ LOAD {{ page.extension.name }};
 | read_otlp_metrics_sum           | table         | NULL        | NULL    |          |
 | read_otlp_metrics_summary       | table         | NULL        | NULL    |          |
 | read_otlp_traces                | table         | NULL        | NULL    |          |
+
+### Overloaded Functions
+
+<div class="extension_functions_table"></div>
+
+| function_name | function_type | description | comment | examples |
+|---------------|---------------|-------------|---------|----------|
+
+### Added Types
+
+<div class="extension_types_table"></div>
+
+| type_name | type_size | logical_type | type_category | internal |
+|-----------|----------:|--------------|---------------|----------|
+
+### Added Settings
+
+<div class="extension_settings_table"></div>
+
+| name | description | input_type | scope | aliases |
+|------|-------------|------------|-------|---------|
 
 

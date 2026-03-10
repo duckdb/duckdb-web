@@ -19,7 +19,7 @@ extension:
 repo:
   github: ahuarte47/duckdb-eurostat
   andium: 99a4d98217ee92592c6db002137bd4881d8d6192
-  ref: 120d3e59803e5311dbdbe5ae01b95eddcf086c0e
+  ref: 4ba23f836392ab3b0fce1d5e4b08f04a118ee426
 
 docs:
   hello_world: |
@@ -150,8 +150,8 @@ docs:
 
 extension_star_count: 30
 extension_star_count_pretty: 30
-extension_download_count: 373
-extension_download_count_pretty: 373
+extension_download_count: 400
+extension_download_count_pretty: 400
 image: '/images/community_extensions/social_preview/preview_community_extension_eurostat.png'
 layout: community_extension_doc
 ---
