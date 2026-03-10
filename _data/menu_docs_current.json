@@ -1613,6 +1613,10 @@
               "slug": "troubleshooting",
               "subsubfolderitems": [
                 {
+                  "page": "Command Line",
+                  "url": "command_line"
+                },
+                {
                   "page": "Crashes",
                   "url": "crashes"
                 },
