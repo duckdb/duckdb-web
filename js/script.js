@@ -676,7 +676,7 @@ $('body.documentation #main_content_wrap a.externallink').each(function () {
 			const version = $installDiv.attr("data-version");
 			const $versionSpan = $(".bottombar .version");
 			if (version) {
-				$versionSpan.text("Version of the client: " + version).show();
+				$versionSpan.text("Latest version: " + version).show();
 			} else {
 				$versionSpan.hide();
 			}
