@@ -37,9 +37,13 @@ function loadSearchData() {
 				miniPredictor = MiniSearch.loadJS(miniPredictorIndex, predictorOptions);
 
 				searchDataLoaded = true;
-				worker.terminate(); 
+				worker.terminate();
 
 				console.log("search_data.json successfully loaded and indexed via Web Worker.");
+
+				if (text_div.value.length > 0) {
+					perform_search(text_div.value);
+				}
 			};
 
 			worker.onerror = function(error) {
