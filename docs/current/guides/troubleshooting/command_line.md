@@ -32,7 +32,7 @@ duckdb < test.sql | cat
 └───────┘
 ```
 
-If you are piping from a file, you can also use the [`-f` argument]({% docs/current/clients/cli/arguments.md %}):
+If you are piping from a file, you can also use the [`-f` argument]({% link docs/current/clients/cli/arguments.md %}):
 
 ```bash
 duckdb -f test.sql
