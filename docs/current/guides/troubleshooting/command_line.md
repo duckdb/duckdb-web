@@ -7,7 +7,7 @@ On Linux and macOS, DuckDB v1.5.0 has a known issue that the [command line clien
 
 To demonstrate the problem, create a `test.sql` file:
 
-```batch
+```bash
 echo "SELECT 42 AS x;" > test.sql
 ```
 
@@ -20,8 +20,24 @@ $ duckdb < test.sql
 
 To work around this, add `| cat` to the end of the call:
 
-```batch
+```bash
 duckdb < test.sql | cat
+```
+```text
+┌───────┐
+│   x   │
+│ int32 │
+├───────┤
+│    42 │
+└───────┘
+```
+
+If you are piping from a file, you can also use the [`-f` argument]({% docs/current/clients/cli/arguments.md %}):
+
+```bash
+duckdb -f test.sql
+```
+```text
 ┌───────┐
 │   x   │
 │ int32 │
