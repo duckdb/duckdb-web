@@ -66,6 +66,7 @@ A REST Catalog with OAuth2 authorization can also be attached with just an `ATTA
 | `SUPPORT_NESTED_NAMESPACES` | `BOOLEAN`  | `true`               | Option for catalogs that support nested namespaces.                                                                                                                  |
 | `SUPPORT_STAGE_CREATE`      | `BOOLEAN`  | `false`              | Option for catalogs that do not support stage create.                                                                                                                |
 | `MAX_TABLE_STALENESS`       | `INTERVAL` | `NULL`               | Option for preventing unnecessary requests to the Iceberg REST Catalog. You can pass human readable interval strings. `10 minutes`, `30 seconds`, `1 year` all work. |
+| `PURGE_REQUESTED`        | `BOOLEAN` | `true`  | Option to send the [PurgeRequested](https://github.com/apache/iceberg/blob/4b4eb38cf6dda7b43faeb40eb00aa5db424d2ecb/open-api/rest-catalog-open-api.yaml#L1144) parameter when dropping a table.                                                 |
 
 The following options can only be passed to a `CREATE SECRET` statement and they require `AUTHORIZATION_TYPE` to be `OAUTH2`:
 

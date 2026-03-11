@@ -63,6 +63,7 @@ A REST Catalog with OAuth2 authorization can also be attached with just an `ATTA
 | `ACCESS_DELEGATION_MODE`      | `VARCHAR` | `vended_credentials` | Access delegation mode. Allowed values are `vended_credentials` and `none`               |
 | `SUPPORT_NESTED_NAMESPACES` | `BOOLEAN` | `true`   | Option for catalogs that support nested namespaces.                                                   |
 | `SUPPORT_STAGE_CREATE`        | `BOOLEAN` | `false`  | Option for catalogs that do not support stage create.                                                 |
+| `PURGE_REQUESTED`        | `BOOLEAN` | `true`  | Option to send the [PurgeRequested](https://github.com/apache/iceberg/blob/4b4eb38cf6dda7b43faeb40eb00aa5db424d2ecb/open-api/rest-catalog-open-api.yaml#L1144) parameter when dropping a table.                                                 |
 
 
 
