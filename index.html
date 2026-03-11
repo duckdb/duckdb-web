@@ -192,7 +192,7 @@ To add a banner, set banner: true in the front matter and define the banner cont
 
 <section class="blog">
 	<div class="wrap">
-		<h1 class="display-2">Read the blog from our engineers</h1>
+		<h1 class="display-2">Read our engineering blog</h1>
 		<div class="newstileswrap">
 			{% for post in site.posts limit:2 %}
 				{% assign random_number = forloop.index | modulo: 3 | plus: 1 %}
