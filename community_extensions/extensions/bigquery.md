@@ -8,7 +8,7 @@ excerpt: |
 extension:
   name: bigquery
   description: Integrates DuckDB with Google BigQuery, allowing direct querying and management of BigQuery datasets
-  version: 0.7.1
+  version: 0.7.2
   language: C++
   build: cmake
   license: MIT
@@ -20,7 +20,7 @@ extension:
 
 repo:
   github: hafenkran/duckdb-bigquery
-  ref: b510206066eceb89b518b6b74964a0dfdf45e2fd
+  ref: e7f096afcc24c8d319e90ff4805a078e060b96e3
 
 docs:
   hello_world: |
@@ -52,10 +52,10 @@ docs:
     It enables users to read, write, and manage their BigQuery datasets/tables directly from DuckDB using standard SQL queries.
     For detailed setup and usage instructions, visit the [extension repository](https://github.com/hafenkran/duckdb-bigquery).
 
-extension_star_count: 154
-extension_star_count_pretty: 154
-extension_download_count: 24665
-extension_download_count_pretty: 24.7k
+extension_star_count: 155
+extension_star_count_pretty: 155
+extension_download_count: 25981
+extension_download_count_pretty: 26.0k
 image: '/images/community_extensions/social_preview/preview_community_extension_bigquery.png'
 layout: community_extension_doc
 ---
@@ -91,6 +91,20 @@ LOAD {{ page.extension.name }};
 | bigquery_clear_cache | table         | Clear the internal caches to refetch the most current project information from BigQuery. | NULL    | [CALL bigquery_clear_cache();]                                                                                            |
 | bigquery_arrow_scan  | table         | NULL                                                                                     | NULL    | NULL                                                                                                                      |
 
+### Overloaded Functions
+
+<div class="extension_functions_table"></div>
+
+| function_name | function_type | description | comment | examples |
+|---------------|---------------|-------------|---------|----------|
+
+### Added Types
+
+<div class="extension_types_table"></div>
+
+| type_name | type_size | logical_type | type_category | internal |
+|-----------|----------:|--------------|---------------|----------|
+
 ### Added Settings
 
 <div class="extension_settings_table"></div>
@@ -106,7 +120,6 @@ LOAD {{ page.extension.name }};
 | bq_experimental_filter_pushdown     | Whether to use filter pushdown (currently experimental)                                                                                                                                                                                       | BOOLEAN    | GLOBAL | []      |
 | bq_experimental_use_incubating_scan | Whether to use the incubating BigQuery scan implementation. This is currently experimental and is targeted to become the default in the future. DEPRECATED: Use bq_use_legacy_scan instead. This setting will be removed in a future version. | BOOLEAN    | GLOBAL | []      |
 | bq_experimental_use_info_schema     | Whether to fetch table infos from BQ information schema (currently experimental). Can be significantly faster than fetching from REST API.                                                                                                    | BOOLEAN    | GLOBAL | []      |
-| bq_geography_as_geometry            | Whether to return BigQuery GEOGRAPHY columns as DuckDB GEOMETRY types (requires spatial extension). Default is false (returns WKT strings).                                                                                                   | BOOLEAN    | GLOBAL | []      |
 | bq_max_read_streams                 | Maximum number of read streams for BigQuery Storage Read. Set to 0 to automatically match the number of DuckDB threads. `preserve_insertion_order` must be false for parallelization to work.                                                 | BIGINT     | GLOBAL | []      |
 | bq_query_timeout_ms                 | Timeout for BigQuery queries in milliseconds                                                                                                                                                                                                  | BIGINT     | GLOBAL | []      |
 | bq_use_legacy_scan                  | Whether to use legacy scan implementation for BigQuery tables. Default is false (uses optimized Arrow-based implementation).                                                                                                                  | BOOLEAN    | GLOBAL | []      |
