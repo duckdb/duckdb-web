@@ -48,6 +48,15 @@ It's possible to generate the schema of TPC-DS without any data by setting the s
 CALL dsdgen(sf = 0);
 ```
 
+## Pre-Generated Datasets
+
+Pre-generated DuckDB databases for TPC-DS are available for download:
+
+* [`tpcds-sf10.db`](https://blobs.duckdb.org/data/tpcds-sf10.db) (2.9 GB)
+* [`tpcds-sf30.db`](https://blobs.duckdb.org/data/tpcds-sf30.db) (7.7 GB)
+* [`tpcds-sf100.db`](https://blobs.duckdb.org/data/tpcds-sf100.db) (26.6 GB)
+* [`tpcds-sf300.db`](https://blobs.duckdb.org/data/tpcds-sf300.db) (79.3 GB)
+
 ## Limitations
 
 The `tpcds(⟨query_id⟩)`{:.language-sql .highlight} function runs a fixed TPC-DS query with pre-defined bind parameters (a.k.a. substitution parameters).
