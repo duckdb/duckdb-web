@@ -323,6 +323,17 @@ $('.headercontent a, .mainlinks a, .box-link a, .footercontent a, .highlight a, 
 $('table a.externallink:contains(GitHub)').removeClass('externallink').addClass('nobg'); 
 $('.supporterboard a.externallink').removeClass('externallink').addClass('nobg'); 
 
+// Add download icon to links pointing to downloadable files
+$('a').filter(function() {
+	var href = $(this).attr('href');
+	if (!href) return false;
+	return /\.(pdf|zip|tar\.gz|csv|parquet)(\?.*)?$/i.test(href) && $(this).find('img').length === 0 && !$(this).hasClass('button');
+}).addClass("downloadlink").removeClass("externallink");
+
+$('.headercontent a, .mainlinks a, .box-link a, .footercontent a, .highlight a, .button').removeClass('downloadlink');
+$('table a.downloadlink:contains(GitHub)').removeClass('downloadlink').addClass('nobg');
+$('.supporterboard a.downloadlink').removeClass('downloadlink').addClass('nobg');
+
 // Wrap external links followed by a "." in a nobreak span
 $('body.documentation #main_content_wrap a.externallink').each(function () {
 	const link = $(this);
