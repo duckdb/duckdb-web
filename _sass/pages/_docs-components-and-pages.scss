@@ -145,19 +145,16 @@ body.documentation {
             }
         }
 
-        span.arrow {
-            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='11' height='6' fill='none' viewBox='0 0 11 6'%3E%3Cpath stroke='%23B2B2B2' d='M1.287.545 5.651 4.91 10.014.545'/%3E%3C/svg%3E");
-            text-decoration: none;
-            color: black;
-            width: 12px;
-            height: 6px;
-            background-size: contain;
-            background-repeat: no-repeat;
-            display: block;
+        svg.arrow {
+            width: 16px;
+            height: 16px;
+            fill: none;
+            color: var(--main-text-tertiary-color);
+            stroke-width: 1.6;
             transition: transform .3s;
         }
 
-        &.active span.arrow {
+        &.active svg.arrow {
             transform: rotate(-180deg);
         }
     }
@@ -256,8 +253,8 @@ body.documentation {
         height: 40px;
         
         svg.icon{
-            width: 18px;
-            height: 18px;
+            width: 16px;
+            height: 16px;
             color: var(--menu-topmenu-searchbar-shortcut-text-color, #999);
         }
 
@@ -455,16 +452,14 @@ body.documentation {
     }
 
     .chevron {
-        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='7' height='12' fill='none' viewBox='0 0 7 12'%3E%3Cpath stroke='%23D9D9D9' stroke-width='1.256' d='m1 11 5-5-5-5'/%3E%3C/svg%3E");
-        display: block;
-        width: 8px;
+        width: 16px;
         height: 40px;
         margin-right: 4px;
-        background-size: contain;
-        background-repeat: no-repeat;
-        background-position: center center;
         margin-left: auto;
         flex-shrink: 0;
+        fill: none;
+        color: var(--main-text-tertiary-color, #B2B2B2);
+        stroke-width: 1.6;
     }
 
     .symbol {

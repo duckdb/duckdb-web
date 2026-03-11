@@ -8,6 +8,7 @@
  *  --card-columns: number of cards per row (default: 3)
  *  --card-aspect-ratio: aspect ratio of image area (default: 4/3)
  *  --card-content-padding: padding of content area (default: 32px 36px 36px 36px)
+ *  data-mobile="swipe": horizontal scroll on mobile instead of stacking
  */
 
 .card-grid{
@@ -59,6 +60,28 @@
 			grid-template-columns: repeat(2, 1fr);
 			.card .card-content{
 				padding: 16px;
+			}
+		}
+
+		&[data-mobile="swipe"]{
+			display: flex;
+			gap: 0;
+			overflow-x: auto;
+			scroll-snap-type: x mandatory;
+			-webkit-overflow-scrolling: touch;
+			scrollbar-width: none;
+			margin-left: -15px;
+			margin-right: -15px;
+			&::-webkit-scrollbar{ display: none; }
+
+			.card{
+				flex: 0 0 80%;
+				margin-left: 15px;
+				scroll-snap-align: start;
+				scroll-margin-left: 15px;
+				.card-content{
+					padding: 24px;
+				}
 			}
 		}
 	}

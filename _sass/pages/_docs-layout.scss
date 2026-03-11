@@ -255,20 +255,16 @@ body.documentation {
                 background: rgba(0, 0, 0, 0.06);
             }
 
-            span {
+            svg.show {
                 transition: transform .3s;
-                display: block;
-                right: 0;
-                width: 11px;
-                height: 11px;
-                background-image: url("data:image/svg+xml,%3Csvg width='7' height='11' viewBox='0 0 7 11' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1 1L6 5.5L1 10' stroke='black' stroke-linecap='round'/%3E%3C/svg%3E%0A");
-                background-size: contain;
-                background-repeat: no-repeat;
-                background-position: center;
+                width: 16px;
+                height: 16px;
+                stroke-width: 1.6;
+                fill: none;
                 order: 2;
             }
 
-            &.opened span.show {
+            &.opened svg.show {
                 transform: rotate(90deg);
                 transition: transform .3s;
             }
