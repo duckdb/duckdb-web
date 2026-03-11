@@ -33,3 +33,30 @@
 		background-color: #4396D7;
 	}
 }
+
+/** Download Links (PDF, ZIP, etc.) **/
+#main_content_wrap a.downloadlink,
+.singleentry .content a.downloadlink{
+	display: inline;
+	word-break: break-word;
+	&::after{
+		content: "";
+		mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' fill='none' viewBox='0 0 14 14'%3E%3Cpath stroke='%23000' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M12.25 8.75v.7c0 .98 0 1.47-.19 1.845a1.75 1.75 0 0 1-.766.764c-.374.191-.864.191-1.844.191h-4.9c-.98 0-1.47 0-1.844-.19a1.75 1.75 0 0 1-.765-.766c-.191-.374-.191-.864-.191-1.844v-.7m8.167-2.917L7 8.75m0 0L4.083 5.833M7 8.75v-7'/%3E%3C/svg%3E");
+		display: inline-block;
+		-webkit-transition: all .3s;
+		-o-transition: all .3s;
+		transition: all .3s;
+		width: .875em;
+		height: .875em;
+		mask-size: contain;
+		mask-repeat: no-repeat;
+		mask-position: center center;
+		margin-left: .2em;
+		margin-right: 1px;
+		transform: translateY(.125em);
+		background-color: var(--main-text-secondary-color, #666);
+	}
+	&:hover::after{
+		background-color: #4396D7;
+	}
+}
