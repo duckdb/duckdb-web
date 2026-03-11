@@ -65,29 +65,29 @@ artifacts:
   java:
     filename: "duckdb_jdbc-1.5.0.0.jar"
     hashes:
-      sha256: "TODO"
+      sha256: "94cddbc521244bb037e89c45f45777f91cb089fa8fc6f1c2433b21e4a9976055"
 
   odbc:
     linux:
       x86_64:
         filename: "duckdb_odbc-linux-amd64.zip"
         hashes:
-          sha256: "TODO"
+          sha256: "1f24121d61e9481d0208b0f134170c562b0fd08f00c4d7f3f8b1a4223f202c48"
       arm64:
         filename: "duckdb_odbc-linux-arm64.zip"
         hashes:
-          sha256: "TODO"
+          sha256: "2d9737f0f37339b9e54fbc636e61e7b17be2b0c004fb605a851bd384034f0b01"
     macos:
       universal:
         filename: "duckdb_odbc-osx-universal.zip"
         hashes:
-          sha256: "TODO"
+          sha256: "0f1f04ec1a090608c11477407065768675d8ed67bb46d411f8b3923d0ab78209"
     windows:
       x86_64:
         filename: "duckdb_odbc-windows-amd64.zip"
         hashes:
-          sha256: "TODO"
+          sha256: "f53e79def6cf6d3cd4afffb4d5e05a789793d388144d6b850cdd69b1ce245081"
       arm64:
         filename: "duckdb_odbc-windows-arm64.zip"
         hashes:
-          sha256: "TODO"
+          sha256: "6b1bfef7f133be12f49f9555fe697289d36c4d48c515ef1afe05404e4d55bca4"

@@ -343,7 +343,7 @@ pip install duckdb=={{ site.lts_duckdb_version }}
 
 </div>
 
-{%- if site.current_duckdb_r_version == nil -%}
+{%- if site.current_duckdb_r_version != "" -%}
 <div class="current"
     data-environment="r"
     data-docs="{% link docs/stable/clients/r.md %}">
@@ -390,7 +390,7 @@ install.packages("duckdb", version="{{ site.lts_duckdb_r_version }}", repos="htt
 </div>
 
 
-{%- if site.current_duckdb_java_version == nil -%}
+{%- if site.current_duckdb_java_version != "" -%}
 <div class="current"
     data-environment="java"
     data-docs="{% link docs/stable/clients/java.md %}">
@@ -454,7 +454,7 @@ implementation("org.duckdb:duckdb_jdbc:{{ site.lts_duckdb_java_version }}")
 </div>
 
 
-{%- if site.lts_duckdb_node_neo_version == nil -%}
+{%- if site.lts_duckdb_node_neo_version != "" -%}
 <div class="current"
     data-environment="nodejs"
     data-docs="{% link docs/stable/clients/node_neo/overview.md %}">
@@ -477,7 +477,7 @@ npm install @duckdb/node-api@{{ site.lts_duckdb_node_neo_version }}
     
 </div>
 
-{%- if site.current_duckdb_rust_version == nil -%}
+{%- if site.current_duckdb_rust_version != "" -%}
 <div class="current"
     data-environment="rust"
     data-docs="{% link docs/stable/clients/rust.md %}">
@@ -499,7 +499,7 @@ cargo add duckdb@{{ site.lts_duckdb_rust_version }} --features bundled
 
 </div>
 
-{%- if site.current_duckdb_go_version == nil -%}
+{%- if site.current_duckdb_go_version != "" -%}
 <div class="current"
     data-environment="go"
     data-docs="{% link docs/stable/clients/go.md %}">
@@ -610,7 +610,7 @@ go get github.com/duckdb/duckdb-go/v2@{{ site.lts_duckdb_go_tag }}
 
 </div>
 
-{%- if site.current_duckdb_odbc_version == nil -%}
+{%- if site.current_duckdb_odbc_version != "" -%}
 <div class="current"
     data-platform="linux"
     data-environment="odbc"
