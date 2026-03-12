@@ -19,7 +19,8 @@ extension:
 repo:
   github: dentiny/duckdb-table-inspector
   andium: 13b830f3ccee4b4be3058a8211ad2f566c1ef698
-  ref: 7fb029e2cde2904a572aee40b94684dfd5f55d19
+  ref: 2f5355091bf65b7d400cdd801f7f927f967b0de7
+
 docs:
   hello_world: |
     -- List all attached persistent databases with file sizes
@@ -40,8 +41,8 @@ docs:
 
 extension_star_count: 0
 extension_star_count_pretty: 0
-extension_download_count: 363
-extension_download_count_pretty: 363
+extension_download_count: 402
+extension_download_count_pretty: 402
 image: '/images/community_extensions/social_preview/preview_community_extension_table_inspector.png'
 layout: community_extension_doc
 ---
@@ -73,5 +74,26 @@ LOAD {{ page.extension.name }};
 | inspect_column      | table         | NULL        | NULL    |          |
 | inspect_database    | table         | NULL        | NULL    |          |
 | inspect_storage     | table         | NULL        | NULL    |          |
+
+### Overloaded Functions
+
+<div class="extension_functions_table"></div>
+
+| function_name | function_type | description | comment | examples |
+|---------------|---------------|-------------|---------|----------|
+
+### Added Types
+
+<div class="extension_types_table"></div>
+
+| type_name | type_size | logical_type | type_category | internal |
+|-----------|----------:|--------------|---------------|----------|
+
+### Added Settings
+
+<div class="extension_settings_table"></div>
+
+| name | description | input_type | scope | aliases |
+|------|-------------|------------|-------|---------|
 
 

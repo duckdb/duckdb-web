@@ -20,6 +20,7 @@ extension:
 
 repo:
   github: hafenkran/duckdb-bigquery
+  andium: ec5cf7b0342e7a46f7505c1176d8e46d963d7815
   ref: e7f096afcc24c8d319e90ff4805a078e060b96e3
 
 docs:
@@ -54,8 +55,8 @@ docs:
 
 extension_star_count: 155
 extension_star_count_pretty: 155
-extension_download_count: 25981
-extension_download_count_pretty: 26.0k
+extension_download_count: 26343
+extension_download_count_pretty: 26.3k
 image: '/images/community_extensions/social_preview/preview_community_extension_bigquery.png'
 layout: community_extension_doc
 ---

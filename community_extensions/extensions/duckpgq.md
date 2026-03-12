@@ -8,7 +8,7 @@ excerpt: |
 extension:
   name: duckpgq
   description: Extension that adds support for SQL/PGQ and graph algorithms
-  version: 0.2.8
+  version: 0.3.0
   language: C++
   build: cmake
   license: MIT
@@ -17,7 +17,8 @@ extension:
 
 repo:
   github: cwida/duckpgq-extension
-  ref: 42eea114b22fad93f04cb7edf50d2b0077e464fa
+  andium: 42eea114b22fad93f04cb7edf50d2b0077e464fa
+  ref: aec2e251a1480615a50eab456a6c85fa0076dec4
 
 docs:
   hello_world: |
@@ -60,10 +61,10 @@ docs:
 
     *Disclaimer:* As this extension is part of an ongoing research project by the Database Architectures group at CWI, some features may still be under development. We appreciate your understanding and patience as we continue to improve it.
 
-extension_star_count: 367
-extension_star_count_pretty: 367
-extension_download_count: 6202
-extension_download_count_pretty: 6.2k
+extension_star_count: 370
+extension_star_count_pretty: 370
+extension_download_count: 6112
+extension_download_count_pretty: 6.1k
 image: '/images/community_extensions/social_preview/preview_community_extension_duckpgq.png'
 layout: community_extension_doc
 ---
@@ -122,5 +123,26 @@ LOAD {{ page.extension.name }};
 | summarize_property_graph     | table         | NULL        | NULL    |          |
 | weakly_connected_component   | scalar        | NULL        | NULL    |          |
 | weakly_connected_component   | table         | NULL        | NULL    |          |
+
+### Overloaded Functions
+
+<div class="extension_functions_table"></div>
+
+| function_name | function_type | description | comment | examples |
+|---------------|---------------|-------------|---------|----------|
+
+### Added Types
+
+<div class="extension_types_table"></div>
+
+| type_name | type_size | logical_type | type_category | internal |
+|-----------|----------:|--------------|---------------|----------|
+
+### Added Settings
+
+<div class="extension_settings_table"></div>
+
+| name | description | input_type | scope | aliases |
+|------|-------------|------------|-------|---------|
 
 

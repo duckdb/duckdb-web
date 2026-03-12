@@ -76,10 +76,10 @@ docs:
     - No column-level lineage (dataset-level granularity only)
     - Requires an external OpenLineage-compatible backend for event storage
 
-extension_star_count: 2
-extension_star_count_pretty: 2
-extension_download_count: 430
-extension_download_count_pretty: 430
+extension_star_count: 3
+extension_star_count_pretty: 3
+extension_download_count: 482
+extension_download_count_pretty: 482
 image: '/images/community_extensions/social_preview/preview_community_extension_duck_lineage.png'
 layout: community_extension_doc
 ---

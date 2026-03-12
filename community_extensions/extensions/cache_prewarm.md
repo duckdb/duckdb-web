@@ -8,7 +8,7 @@ excerpt: |
 extension:
   name: cache_prewarm
   description: Prewarm data blocks into DuckDB's buffer pool or OS page cache for faster queries
-  version: 0.0.1
+  version: 0.2.0
   language: C++
   build: cmake
   license: MIT
@@ -18,14 +18,26 @@ extension:
     - dentiny
 repo:
   github: dentiny/duckdb-cache-prewarm
-  ref: c959856406f2b37420b9b92ee0b045de8a49e30a
+  ref: 9b89e31a72c8bf9f38d15d4c08c5828518f744af
 docs:
   hello_world: |
     -- Prewarm a table into the buffer pool
-    SELECT prewarm('my_table');
+    SELECT prewarm('table_name');
 
-    -- Prewarm with specific mode
-    SELECT prewarm('my_table', 'read');
+    -- With explicit mode
+    SELECT prewarm('table_name', 'buffer');
+
+    -- With size limit (human-readable format)
+    SELECT prewarm('table_name', 'buffer', '1GB');
+
+    -- With qualified table name
+    SELECT prewarm('my_schema.table_name');
+
+    -- Prewarm a remote file into the on-disk cache
+    SELECT prewarm_remote('https://example.com/data/file.parquet');
+
+    -- Prewarm with a glob pattern (multiple files)
+    SELECT prewarm_remote('https://example.com/data/*.parquet');
   extended_description: |
     A DuckDB extension that preloads table data blocks into the buffer pool or OS page cache,
     inspired by PostgreSQL's pg_prewarm extension.
@@ -35,12 +47,16 @@ docs:
     - `read`: Warm OS page cache without using buffer pool
     - `prefetch`: Batch prefetch using OS hints
 
+    Remote Prewarm:
+    - `prewarm_remote` preloads remote files into the on-disk cache, requires `cache_httpfs` to be configured.
+    - Supports glob patterns and size limits.
+
     Use cases include cold start optimization and predictable query latency.
 
 extension_star_count: 3
 extension_star_count_pretty: 3
-extension_download_count: 314
-extension_download_count_pretty: 314
+extension_download_count: 342
+extension_download_count_pretty: 342
 image: '/images/community_extensions/social_preview/preview_community_extension_cache_prewarm.png'
 layout: community_extension_doc
 ---
@@ -66,8 +82,75 @@ LOAD {{ page.extension.name }};
 
 <div class="extension_functions_table"></div>
 
+|               function_name               | function_type | description | comment | examples |
+|-------------------------------------------|---------------|-------------|---------|----------|
+| cache_httpfs_add_exclusion_regex          | scalar        | NULL        | NULL    |          |
+| cache_httpfs_cache_access_info_query      | table         | NULL        | NULL    |          |
+| cache_httpfs_cache_status_query           | table         | NULL        | NULL    |          |
+| cache_httpfs_cleanup_dead_temp            | scalar        | NULL        | NULL    |          |
+| cache_httpfs_clear_cache                  | scalar        | NULL        | NULL    |          |
+| cache_httpfs_clear_cache_for_file         | scalar        | NULL        | NULL    |          |
+| cache_httpfs_clear_profile                | scalar        | NULL        | NULL    |          |
+| cache_httpfs_get_cache_config             | table         | NULL        | NULL    |          |
+| cache_httpfs_get_cache_filesystems        | table         | NULL        | NULL    |          |
+| cache_httpfs_get_cache_type               | table         | NULL        | NULL    |          |
+| cache_httpfs_get_data_cache_config        | table         | NULL        | NULL    |          |
+| cache_httpfs_get_file_handle_cache_config | table         | NULL        | NULL    |          |
+| cache_httpfs_get_glob_cache_config        | table         | NULL        | NULL    |          |
+| cache_httpfs_get_metadata_cache_config    | table         | NULL        | NULL    |          |
+| cache_httpfs_get_ondisk_data_cache_size   | scalar        | NULL        | NULL    |          |
+| cache_httpfs_get_profile                  | scalar        | NULL        | NULL    |          |
+| cache_httpfs_list_exclusion_regex         | table         | NULL        | NULL    |          |
+| cache_httpfs_list_registered_filesystems  | table         | NULL        | NULL    |          |
+| cache_httpfs_reset_exclusion_regex        | scalar        | NULL        | NULL    |          |
+| cache_httpfs_wrap_cache_filesystem        | scalar        | NULL        | NULL    |          |
+| prewarm                                   | scalar        | NULL        | NULL    |          |
+| prewarm_remote                            | scalar        | NULL        | NULL    |          |
+
+### Overloaded Functions
+
+<div class="extension_functions_table"></div>
+
 | function_name | function_type | description | comment | examples |
 |---------------|---------------|-------------|---------|----------|
-| prewarm       | scalar        | NULL        | NULL    |          |
+
+### Added Types
+
+<div class="extension_types_table"></div>
+
+| type_name | type_size | logical_type | type_category | internal |
+|-----------|----------:|--------------|---------------|----------|
+
+### Added Settings
+
+<div class="extension_settings_table"></div>
+
+|                           name                            |                                                                                                                                                                                           description                                                                                                                                                                                           | input_type | scope  | aliases |
+|-----------------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|------------|--------|---------|
+| cache_httpfs_cache_block_size                             | Block size for cache, applies to both in-memory cache filesystem and on-disk cache filesystem. It's worth noting for on-disk filesystem, all existing cache files are invalidated after config update.                                                                                                                                                                                          | UBIGINT    | GLOBAL | []      |
+| cache_httpfs_cache_directories_config                     | Advanced configuration for on-disk cache. It supports multiple directories, separated by semicolons (';'). Cache blocks will be evenly distributed under different directories deterministically.Between different runs, it's expected to provide same cache directories, otherwise it's not guaranteed cache files still exist and accessible.Overrides 'cache_httpfs_cache_directory' if set. | VARCHAR    | GLOBAL | []      |
+| cache_httpfs_cache_directory                              | The disk cache directory that stores cached data                                                                                                                                                                                                                                                                                                                                                | VARCHAR    | GLOBAL | []      |
+| cache_httpfs_clear_cache_on_write                         | Whether to clear cache entries on write operations. When enabled, write operations will invalidate cached metadata, file handles, and glob entries for the modified file, which could be expensive.Disabling this can improve write performance when many cache entries exist, but may lead to stale cache reads. By default disabled.                                                          | BOOLEAN    | GLOBAL | []      |
+| cache_httpfs_disk_cache_reader_enable_memory_cache        | Whether enable process-wise read-through/write-through cache for disk cache reader. When enabled, local cache file will be accessed with direct IO.                                                                                                                                                                                                                                             | BOOLEAN    | GLOBAL | []      |
+| cache_httpfs_disk_cache_reader_mem_cache_block_count      | Max number of cache blocks for the read-through/write-through cache for disk cache reader.                                                                                                                                                                                                                                                                                                      | UBIGINT    | GLOBAL | []      |
+| cache_httpfs_disk_cache_reader_mem_cache_timeout_millisec | Timeout in milliseconds for the read-through/write-through cache for disk cache reader.                                                                                                                                                                                                                                                                                                         | UBIGINT    | GLOBAL | []      |
+| cache_httpfs_enable_cache_validation                      | Whether to enable cache validation using version tag and last modification timestamp. When enabled, cache entries are validated against the current file version tag and modification timestamp to ensure cache consistency. By default disabled.                                                                                                                                               | BOOLEAN    | GLOBAL | []      |
+| cache_httpfs_enable_file_handle_cache                     | Whether file handle cache is enable for cache filesystem. By default enabled.                                                                                                                                                                                                                                                                                                                   | BOOLEAN    | GLOBAL | []      |
+| cache_httpfs_enable_glob_cache                            | Whether glob cache is enable for cache filesystem. By default enabled.                                                                                                                                                                                                                                                                                                                          | BOOLEAN    | GLOBAL | []      |
+| cache_httpfs_enable_metadata_cache                        | Whether metadata cache is enable for cache filesystem. By default enabled.                                                                                                                                                                                                                                                                                                                      | BOOLEAN    | GLOBAL | []      |
+| cache_httpfs_evict_policy                                 | Eviction policy for on-disk cache cache blocks. By default it's creation timestamp based ('creation_timestamp'), which deletes all cache blocks created earlier than threshold. Other supported policy include 'lru_single_proc' (LRU forsingle process access), which performs LRU-based eviction, mainly made single processusage.                                                            | VARCHAR    | GLOBAL | []      |
+| cache_httpfs_file_handle_cache_entry_size                 | Max cache size for file handle cache.                                                                                                                                                                                                                                                                                                                                                           | UBIGINT    | GLOBAL | []      |
+| cache_httpfs_file_handle_cache_entry_timeout_millisec     | Cache entry timeout in milliseconds for file handle cache.                                                                                                                                                                                                                                                                                                                                      | UBIGINT    | GLOBAL | []      |
+| cache_httpfs_glob_cache_entry_size                        | Max cache size for glob cache.                                                                                                                                                                                                                                                                                                                                                                  | UBIGINT    | GLOBAL | []      |
+| cache_httpfs_glob_cache_entry_timeout_millisec            | Cache entry timeout in milliseconds for glob cache.                                                                                                                                                                                                                                                                                                                                             | UBIGINT    | GLOBAL | []      |
+| cache_httpfs_ignore_sigpipe                               | Whether to ignore SIGPIPE for the extension. By default not ignored. Once ignored, it cannot be reverted.                                                                                                                                                                                                                                                                                       | BOOLEAN    | GLOBAL | []      |
+| cache_httpfs_in_mem_cache_block_timeout_millisec          | Data block cache entry timeout in milliseconds.                                                                                                                                                                                                                                                                                                                                                 | UBIGINT    | GLOBAL | []      |
+| cache_httpfs_max_fanout_subrequest                        | Cached httpfs performs parallel request by splittng them into small request, with request size decided by config [cache_httpfs_cache_block_size]. The setting limits the maximum request to issue for a single filesystem read request. 0 means no limit, by default we set no limit.                                                                                                           | BIGINT     | GLOBAL | []      |
+| cache_httpfs_max_in_mem_cache_block_count                 | Max in-memory cache block count for in-memory caches for all cache filesystems, so users are able to configure the maximum memory consumption. It's worth noting it should be set only once before all filesystem access, otherwise there's no affect.                                                                                                                                          | UBIGINT    | GLOBAL | []      |
+| cache_httpfs_metadata_cache_entry_size                    | Max cache size for metadata LRU cache.                                                                                                                                                                                                                                                                                                                                                          | UBIGINT    | GLOBAL | []      |
+| cache_httpfs_metadata_cache_entry_timeout_millisec        | Cache entry timeout in milliseconds for metadata LRU cache.                                                                                                                                                                                                                                                                                                                                     | UBIGINT    | GLOBAL | []      |
+| cache_httpfs_min_disk_bytes_for_cache                     | Min number of bytes on disk for the cache filesystem to enable on-disk cache; if left bytes is less than the threshold, LRU based cache file eviction will be performed.By default, 5% disk space will be reserved for other usage. When min disk bytes specified with a positive value, the default value will be overriden.                                                                   | UBIGINT    | GLOBAL | []      |
+| cache_httpfs_profile_type                                 | Profiling type for cached filesystem. There're three options available: `noop`, `temp`, and `duckdb`. `temp` option stores the latest IO operation profiling result, which potentially suffers concurrent updates; `duckdb` stores the IO operation profiling results into duckdb table, which unblocks advanced analysis.                                                                      | VARCHAR    | GLOBAL | []      |
+| cache_httpfs_type                                         | Type for cached filesystem. Currently there're two types available, one is `in_mem`, another is `on_disk`. By default we use on-disk cache. Set to `noop` to disable, which behaves exactly same as httpfs extension.                                                                                                                                                                           | VARCHAR    | GLOBAL | []      |
 
 
