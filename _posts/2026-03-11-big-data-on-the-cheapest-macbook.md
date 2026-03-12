@@ -4,7 +4,7 @@ title: "Big Data on the Cheapest MacBook"
 author: "Gábor Szárnyas"
 thumb: "/images/blog/thumbs/macbook-neo.svg"
 image: "/images/blog/thumbs/macbook-neo.jpg"
-excerpt: "How does the latest entry-level MacBook perform on database workloads? We benchmarked it to find out."
+excerpt: "How does the latest entry-level MacBook perform on database workloads? We benchmarked it using ClickBench and TPC-DS SF300. We found that it could complete both workloads, sometimes with surprisingly good results."
 tags: ["benchmark"]
 ---
 
@@ -71,6 +71,6 @@ At SF300, the memory constraint started to show. While the median query runtime 
 
 ## Should You Buy One?
 
-Here's the thing: if you are running Big Data workloads on your laptop every day, you probably shouldn't get the MacBook Neo. Yes, DuckDB runs on it, and can handle a lot of data by leveraging [out-of-core processing]({% link docs/current/guides/performance/how_to_tune_workloads.md %}#larger-than-memory-workloads-out-of-core-processing). But the MacBook Neo's disk I/O is lackluster compared to the Air and Pro models (about 1.5 GB/s compared to 3–5 GB/s), and the 8 GB memory will be limiting in the long run. If you need to process [Big Data on the move]({% post_url 2025-09-08-duckdb-on-the-framework-laptop-13 %}) and can pay up a bit, the other MacBook models will serve your needs better and there are also good options for Linux and Windows.
+Here's the thing: if you are running Big Data workloads on your laptop every day, you probably shouldn't get the MacBook Neo. Yes, DuckDB runs on it, and can handle a lot of data by leveraging [out-of-core processing]({% link docs/current/guides/performance/how_to_tune_workloads.md %}#larger-than-memory-workloads-out-of-core-processing). But the MacBook Neo's disk I/O is lackluster compared to the Air and Pro models (about 1.5 GB/s compared to 3–6 GB/s), and the 8 GB memory will be limiting in the long run. If you need to process [Big Data on the move]({% post_url 2025-09-08-duckdb-on-the-framework-laptop-13 %}) and can pay up a bit, the other MacBook models will serve your needs better and there are also good options for Linux and Windows.
 
 All that said, if you run [DuckDB in the cloud]({% link _library/2026-01-31-duckdb-in-the-cloud.md %}) and primarily use your laptop as a client, this is a great device. And you can rest assured that if you *occasionally* need to crunch some data locally, DuckDB on the MacBook Neo will be up to the challenge.
