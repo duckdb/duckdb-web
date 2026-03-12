@@ -18,7 +18,9 @@ The `markdown` mode is particularly useful for building documentation and the `l
 > that is installed by default along with the [Git for Windows](https://git-scm.com/install/windows) installation.
 > It can be enabled the following way:
 >
-> `.pager '"C:\Program Files\Git\usr\bin\less.exe" -R'`
+> ```sql
+> .pager '"C:\Program Files\Git\usr\bin\less.exe" -R'
+> ```
 
 ## List of Output Formats
 
