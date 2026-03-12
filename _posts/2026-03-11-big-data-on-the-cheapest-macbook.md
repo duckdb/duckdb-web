@@ -39,9 +39,9 @@ We only applied a small tweak: as suggested in [our performance guide]({% link d
 
 We also re-ran ClickBench with DuckDB v1.5.0 on two cloud instances, yielding the following lineup:
 
-* The MacBook Neo with 2 performance cores, 4 efficiency cores and 8 GB RAM
-* [c6a.4xlarge](https://instances.vantage.sh/aws/ec2/c6a.4xlarge) with 16 AMD EPYC vCPU cores and 32 GB RAM
-* [c8g.metal-48xl](https://instances.vantage.sh/aws/ec2/c8g.metal-48xl) with a whopping 192 Graviton4 vCPU cores and 384 GB RAM
+* The star of our show, the MacBook Neo with 2 performance cores, 4 efficiency cores and 8 GB RAM
+* [c6a.4xlarge](https://instances.vantage.sh/aws/ec2/c6a.4xlarge) with 16 AMD EPYC vCPU cores and 32 GB RAM. This instance is [popular in ClickBench](https://benchmark.clickhouse.com/#system=-&type=-&machine=+ca4e&cluster_size=-&opensource=-&hardware=+c&tuned=+n&metric=combined&queries=-) with about 80 individual results reported.
+* [c8g.metal-48xl](https://instances.vantage.sh/aws/ec2/c8g.metal-48xl) with a whopping 192 Graviton4 vCPU cores and 384 GB RAM. This instance is often at the top of the [overall ClickBench leaderboard](c8g.metal-48xl).
 
 The benchmark script first loaded the Parquet file into the database. Then, as per [ClickBench's rules](https://github.com/ClickHouse/ClickBench/blob/main/README.md#rules-and-contribution), it ran each query three times to capture both cold runs (the first run when caches are cold) and hot runs (when the system has a chance to exploit e.g. file system caching).
 
