@@ -1185,8 +1185,8 @@ In addition, it allows specifying whether `NULL` values should be moved to the b
 It has the same sorting behavior as DuckDB's `ORDER BY` clause.
 Therefore, (nested) values compare the same in `list_sort` as in `ORDER BY`.
 
-By default, if no modifiers are provided, DuckDB sorts `ASC NULLS FIRST`.
-I.e., the values are sorted in ascending order and `NULL` values are placed first.
+By default, if no modifiers are provided, DuckDB sorts `ASC NULLS LAST`.
+I.e., the values are sorted in ascending order and `NULL` values are placed last.
 This is identical to the default sort order of SQLite.
 The default sort order can be changed using [`PRAGMA` statements.](../query_syntax/orderby).
 
@@ -1202,7 +1202,7 @@ SELECT list_sort([1, 3, NULL, 5, NULL, -5]);
 ```
 
 ```sql
-[NULL, NULL, -5, 1, 3, 5]
+[-5, 1, 3, 5, NULL, NULL]
 ```
 
 This query provides the sort order.
@@ -1213,7 +1213,7 @@ SELECT list_sort([1, 3, NULL, 2], 'ASC');
 ```
 
 ```sql
-[NULL, 1, 2, 3]
+[1, 2, 3, NULL]
 ```
 
 This query provides both the sort order and the `NULL` order.
@@ -1236,7 +1236,7 @@ SELECT list_sort([1, 3, NULL, 5, NULL, -5]);
 ```
 
 ```sql
-[NULL, NULL, -5, 1, 3, 5]
+[-5, 1, 3, 5, NULL, NULL]
 ```
 
 This query provides the `NULL` sort order.
