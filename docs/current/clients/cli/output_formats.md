@@ -8,6 +8,20 @@ title: Output Formats
 The `.mode` [dot command]({% link docs/current/clients/cli/dot_commands.md %}) may be used to change the appearance of the tables returned in the terminal output. In addition to customizing the appearance, these modes have additional benefits. This can be useful for presenting DuckDB output elsewhere by redirecting the terminal [output to a file]({% link docs/current/clients/cli/dot_commands.md %}#output-writing-results-to-a-file). Using the `insert` mode will build a series of SQL statements that can be used to insert the data at a later point.
 The `markdown` mode is particularly useful for building documentation and the `latex` mode is useful for writing academic papers.
 
+> Warning Unicode handling in Windows Terminal
+> 
+> When long results are displayed in Windows Terminal the [more system utility](https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/more)
+> is used by default to provide the scrolling through the results. This utility has incomplete support of Unicode,
+> depending on the output data, in some cases it can display Unicode characters in garbled form.
+> 
+> We suggest using the [third-party less utility](https://en.wikipedia.org/wiki/Less_(Unix)) instead,
+> that is installed by default along with the [Git for Windows](https://git-scm.com/install/windows) installation.
+> It can be enabled the following way:
+>
+> ```sql
+> .pager '"C:\Program Files\Git\usr\bin\less.exe" -R'
+> ```
+
 ## List of Output Formats
 
 <!-- markdownlint-disable MD056 -->
