@@ -26,7 +26,8 @@ extension:
 
 repo:
   github: duckdb/extension-template
-  ref: 8148b0e4d1c0f4891ff357e0339224e779cd62bd
+  andium: 8148b0e4d1c0f4891ff357e0339224e779cd62bd
+  ref: 16fb110f74b233c9b4a4441534da2b65a8abf562
 
 docs:
   hello_world: |
@@ -36,8 +37,8 @@ docs:
 
 extension_star_count: 264
 extension_star_count_pretty: 264
-extension_download_count: 818
-extension_download_count_pretty: 818
+extension_download_count: 864
+extension_download_count_pretty: 864
 image: '/images/community_extensions/social_preview/preview_community_extension_quack.png'
 layout: community_extension_doc
 ---

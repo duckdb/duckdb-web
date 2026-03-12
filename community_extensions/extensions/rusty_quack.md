@@ -20,7 +20,8 @@ extension:
 
 repo:
   github: duckdb/extension-template-rs
-  ref: 2381c7e1c5026f21c92b7ffe3ae7a6b1d8d177c0
+  andium: 2381c7e1c5026f21c92b7ffe3ae7a6b1d8d177c0
+  ref: 4dda5c157b1e0079da5092f22e9e0119775f4ee9
 
 docs:
   hello_world: |
@@ -29,10 +30,10 @@ docs:
     The quack extension is based on DuckDB's [Rust Extension Template](https://github.com/duckdb/extension-template-rs/), and it's a great starting point to get started building DuckDB extensions in Rust.
 
 
-extension_star_count: 93
-extension_star_count_pretty: 93
-extension_download_count: 591
-extension_download_count_pretty: 591
+extension_star_count: 99
+extension_star_count_pretty: 99
+extension_download_count: 404
+extension_download_count_pretty: 404
 image: '/images/community_extensions/social_preview/preview_community_extension_rusty_quack.png'
 layout: community_extension_doc
 ---
@@ -61,5 +62,26 @@ LOAD {{ page.extension.name }};
 | function_name | function_type | description | comment | examples |
 |---------------|---------------|-------------|---------|----------|
 | rusty_quack   | table         | NULL        | NULL    |          |
+
+### Overloaded Functions
+
+<div class="extension_functions_table"></div>
+
+| function_name | function_type | description | comment | examples |
+|---------------|---------------|-------------|---------|----------|
+
+### Added Types
+
+<div class="extension_types_table"></div>
+
+| type_name | type_size | logical_type | type_category | internal |
+|-----------|----------:|--------------|---------------|----------|
+
+### Added Settings
+
+<div class="extension_settings_table"></div>
+
+| name | description | input_type | scope | aliases |
+|------|-------------|------------|-------|---------|
 
 
