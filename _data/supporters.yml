@@ -1,8 +1,4 @@
 gold:
-  - name: Voltron Data
-    url: https://voltrondata.com
-    logoimg: voltrondata.svg
-
   - name: MotherDuck
     url: https://motherduck.com
     logoimg: motherduck.svg
