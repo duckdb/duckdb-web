@@ -47,12 +47,19 @@ Using this, you can opt-in to newer forwards-incompatible features:
 ATTACH 'file.db' (STORAGE_VERSION 'v1.2.0');
 ```
 
-This setting specifies the minimum DuckDB version that should be able to read the database file. When database files are written with this option, the resulting files cannot be opened by older DuckDB released versions than the specified version. They can be read by the specified version and all newer versions of DuckDB.
+With the [command line client]({% link docs/current/clients/cli/overview.md %}), you can use the `-storage-version` argument:
+
+```batch
+duckdb -storage-version v1.2.0 my_database.duckdb
+```
+
+The storage version setting specifies the minimum DuckDB version that should be able to read the database file. When database files are written with this option, the resulting files cannot be opened by older DuckDB released versions than the specified version. They can be read by the specified version and all newer versions of DuckDB.
 
 If you attach to DuckDB databases, you can query the storage versions using the following command:
 
 ```sql
-SELECT database_name, tags FROM duckdb_databases();
+SELECT database_name, tags
+FROM duckdb_databases();
 ```
 
 This shows the storage versions:
@@ -120,6 +127,7 @@ To see the commits that changed each storage version, see the [commit log](https
 
 | Storage version | DuckDB version(s)               |
 |----------------:|---------------------------------|
+| 68              | v1.5.x                          |
 | 67              | v1.4.x                          |
 | 66              | v1.3.x                          |
 | 65              | v1.2.x                          |
