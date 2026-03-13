@@ -8,7 +8,7 @@ excerpt: |
 extension:
   name: fakeit
   description: The FakeIt Extension enables generation of realistic fake/test data directly in SQL queries
-  version: 0.2.2
+  version: 0.3.0
   language: Rust
   build: cargo
   license: MIT
@@ -19,7 +19,7 @@ extension:
 
 repo:
   github: tobilg/duckdb-fakeit
-  ref: b12d28c70e7c1f3e3c448a93ba96af47a51ce530
+  ref: 8361b2814578fd1967300db56299fc8f7857a6b6
 
 docs:
   hello_world: |
@@ -327,8 +327,8 @@ docs:
 
 extension_star_count: 10
 extension_star_count_pretty: 10
-extension_download_count: 407
-extension_download_count_pretty: 407
+extension_download_count: 543
+extension_download_count_pretty: 543
 image: '/images/community_extensions/social_preview/preview_community_extension_fakeit.png'
 layout: community_extension_doc
 ---
@@ -476,5 +476,26 @@ LOAD {{ page.extension.name }};
 | fakeit_words_quote                       | scalar        | Generates a random quote.                                      | NULL                         | [SELECT fakeit_words_quote();]                         |
 | fakeit_bool                              | scalar        | Generates a random boolean value.                              | NULL                         | [SELECT fakeit_bool();]                                |
 | fakeit_generator_generate                | scalar        | Custom pattern generator for creating formatted fake data.     | NULL                         | [SELECT fakeit_generator_generate();]                  |
+
+### Overloaded Functions
+
+<div class="extension_functions_table"></div>
+
+| function_name | function_type | description | comment | examples |
+|---------------|---------------|-------------|---------|----------|
+
+### Added Types
+
+<div class="extension_types_table"></div>
+
+| type_name | type_size | logical_type | type_category | internal |
+|-----------|----------:|--------------|---------------|----------|
+
+### Added Settings
+
+<div class="extension_settings_table"></div>
+
+| name | description | input_type | scope | aliases |
+|------|-------------|------------|-------|---------|
 
 

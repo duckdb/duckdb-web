@@ -18,7 +18,7 @@ extension:
 
 repo:
   github: paleolimbot/duckdb-geography
-  ref: 1f66ba5a3a0e72f53c7237987ef743605189fa69
+  ref: ceaf2dcbd5f690b0048efc20f413b540271d6188
 
 docs:
   hello_world: |
@@ -31,8 +31,8 @@ docs:
 
 extension_star_count: 42
 extension_star_count_pretty: 42
-extension_download_count: 2330
-extension_download_count_pretty: 2.3k
+extension_download_count: 2648
+extension_download_count_pretty: 2.6k
 image: '/images/community_extensions/social_preview/preview_community_extension_geography.png'
 layout: community_extension_doc
 ---
@@ -119,16 +119,30 @@ LOAD {{ page.extension.name }};
 | s2_x                            | scalar        | NULL        | NULL    |          |
 | s2_y                            | scalar        | NULL        | NULL    |          |
 
+### Overloaded Functions
+
+<div class="extension_functions_table"></div>
+
+| function_name | function_type | description | comment | examples |
+|---------------|---------------|-------------|---------|----------|
+
 ### Added Types
 
 <div class="extension_types_table"></div>
 
 |   type_name    | type_size | logical_type | type_category | internal |
-|----------------|----------:|--------------|---------------|---------:|
+|----------------|----------:|--------------|---------------|----------|
 | GEOGRAPHY      | 16        | BLOB         | NULL          | true     |
 | S2_BOX         | 0         | STRUCT       | COMPOSITE     | true     |
 | S2_CELL        | 8         | UBIGINT      | NUMERIC       | true     |
 | S2_CELL_CENTER | 8         | UBIGINT      | NUMERIC       | true     |
 | S2_CELL_UNION  | 16        | LIST         | COMPOSITE     | true     |
+
+### Added Settings
+
+<div class="extension_settings_table"></div>
+
+| name | description | input_type | scope | aliases |
+|------|-------------|------------|-------|---------|
 
 
