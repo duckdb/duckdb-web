@@ -16,12 +16,12 @@ extension:
     - jrosskopf
 repo:
   github: DataZooDE/anofox-tabular
-  ref: f5de13f6bd2aba433d3bd24f92df53852ff04798
+  ref: 6a81b9f763e412f51bd18fda6983d5a8d6def576
 
-extension_star_count: 13
-extension_star_count_pretty: 13
-extension_download_count: 350
-extension_download_count_pretty: 350
+extension_star_count: 14
+extension_star_count_pretty: 14
+extension_download_count: 356
+extension_download_count_pretty: 356
 image: '/images/community_extensions/social_preview/preview_community_extension_anofox_tabular.png'
 layout: community_extension_doc
 ---
@@ -118,6 +118,9 @@ LOAD {{ page.extension.name }};
 | anofox_tab_postal_load_data                | scalar        | NULL        | NULL    |          |
 | anofox_tab_postal_parse_address            | scalar        | NULL        | NULL    |          |
 | anofox_tab_postal_status                   | table         | NULL        | NULL    |          |
+| anofox_tab_profile_correlations            | table         | NULL        | NULL    |          |
+| anofox_tab_profile_summary                 | table         | NULL        | NULL    |          |
+| anofox_tab_profile_table                   | table         | NULL        | NULL    |          |
 | anofox_tab_schema_check                    | table         | NULL        | NULL    |          |
 | anofox_tab_vat                             | scalar        | NULL        | NULL    |          |
 | anofox_tab_vat_country_name                | scalar        | NULL        | NULL    |          |
@@ -198,6 +201,9 @@ LOAD {{ page.extension.name }};
 | postal_load_data                           | scalar        | NULL        | NULL    |          |
 | postal_parse_address                       | scalar        | NULL        | NULL    |          |
 | postal_status                              | table         | NULL        | NULL    |          |
+| profile_correlations                       | table         | NULL        | NULL    |          |
+| profile_summary                            | table         | NULL        | NULL    |          |
+| profile_table                              | table         | NULL        | NULL    |          |
 | schema_check                               | table         | NULL        | NULL    |          |
 | vat                                        | scalar        | NULL        | NULL    |          |
 | vat_country_name                           | scalar        | NULL        | NULL    |          |
@@ -211,6 +217,20 @@ LOAD {{ page.extension.name }};
 | volume                                     | table         | NULL        | NULL    |          |
 | zscore                                     | table         | NULL        | NULL    |          |
 
+### Overloaded Functions
+
+<div class="extension_functions_table"></div>
+
+| function_name | function_type | description | comment | examples |
+|---------------|---------------|-------------|---------|----------|
+
+### Added Types
+
+<div class="extension_types_table"></div>
+
+| type_name | type_size | logical_type | type_category | internal |
+|-----------|----------:|--------------|---------------|----------|
+
 ### Added Settings
 
 <div class="extension_settings_table"></div>
@@ -218,6 +238,7 @@ LOAD {{ page.extension.name }};
 |                   name                   |                                     description                                     | input_type | scope  | aliases |
 |------------------------------------------|-------------------------------------------------------------------------------------|------------|--------|---------|
 | anofox_ner_cache_size                    | LRU cache size for NER results (0 to disable)                                       | BIGINT     | GLOBAL | []      |
+| anofox_ner_device                        | OpenVINO device for NER inference: AUTO (default), CPU, GPU, GPU.0, etc.            | VARCHAR    | GLOBAL | []      |
 | anofox_ner_model                         | NER model to use: distilbert-en (fast, English) or xlm-roberta-multi (multilingual) | VARCHAR    | GLOBAL | []      |
 | anofox_pii_deep_validation               | Enable deep validation using libphonenumber for phone numbers (default: false)      | BOOLEAN    | GLOBAL | []      |
 | anofox_pii_default_mask_strategy         | Default masking strategy (REDACT, HASH, PARTIAL, ASTERISK, NONE)                    | VARCHAR    | GLOBAL | []      |

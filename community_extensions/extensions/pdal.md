@@ -11,7 +11,7 @@ extension:
   version: 0.4.0
   language: C++
   build: cmake
-  excluded_platforms: "windows_amd64_mingw;wasm_mvp;wasm_eh;wasm_threads"
+  excluded_platforms: "windows_amd64;windows_amd64_mingw;wasm_mvp;wasm_eh;wasm_threads"
   requires_toolchains: "parser_tools"
   license: MIT / Overall PDAL license (BSD) - https://pdal.org/en/latest/copyright.html
   maintainers:
@@ -19,7 +19,8 @@ extension:
 
 repo:
   github: ahuarte47/duckdb-pdal
-  ref: 47d5cfcc23405a32dd5c1ca75e1b2aa87382ede6
+  andium: 47d5cfcc23405a32dd5c1ca75e1b2aa87382ede6
+  ref: 73bf2dd8453a11c425c61f9668f8cc3bffd919c3
 
 docs:
   hello_world: |
@@ -164,8 +165,8 @@ docs:
 
 extension_star_count: 25
 extension_star_count_pretty: 25
-extension_download_count: 397
-extension_download_count_pretty: 397
+extension_download_count: 374
+extension_download_count_pretty: 374
 image: '/images/community_extensions/social_preview/preview_community_extension_pdal.png'
 layout: community_extension_doc
 ---
@@ -198,5 +199,26 @@ LOAD {{ page.extension.name }};
 | PDAL_Info          | table         | Read the metadata from point cloud file[s].                                                      | NULL    | [SELECT * FROM PDAL_Info('./test/data/autzen_trim.la*');]                                            |
 | PDAL_Pipeline      | table         | Read and import a point cloud data file, applying also a custom processing pipeline to the data. | NULL    | [SELECT * FROM PDAL_Pipeline('path/to/your/filename.las', 'path/to/your/pipeline.json');]            |
 | PDAL_PipelineTable | table         | Apply a custom processing pipeline to the input table.                                           | NULL    | [SELECT * FROM PDAL_PipelineTable((SELECT X,Y,Z FROM ...), '[ {type: filters.tail, count: 100} ]');] |
+
+### Overloaded Functions
+
+<div class="extension_functions_table"></div>
+
+| function_name | function_type | description | comment | examples |
+|---------------|---------------|-------------|---------|----------|
+
+### Added Types
+
+<div class="extension_types_table"></div>
+
+| type_name | type_size | logical_type | type_category | internal |
+|-----------|----------:|--------------|---------------|----------|
+
+### Added Settings
+
+<div class="extension_settings_table"></div>
+
+| name | description | input_type | scope | aliases |
+|------|-------------|------------|-------|---------|
 
 

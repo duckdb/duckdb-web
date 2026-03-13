@@ -8,7 +8,7 @@ excerpt: |
 extension:
   name: dns
   description: The DNS Extension enables DNS lookups and reverse DNS lookups from within DuckDB
-  version: 0.3.3
+  version: 0.4.0
   language: Rust
   build: cargo
   license: MIT
@@ -19,7 +19,7 @@ extension:
 
 repo:
   github: tobilg/duckdb-dns
-  ref: 993d86f0e171e575d9a752ecdbbbd2a11656e9d6
+  ref: a3d80fe6fe25ba5b9b6e1d053e60fd9110218396
 
 docs:
   hello_world: |
@@ -298,8 +298,8 @@ docs:
 
 extension_star_count: 16
 extension_star_count_pretty: 16
-extension_download_count: 425
-extension_download_count_pretty: 425
+extension_download_count: 540
+extension_download_count_pretty: 540
 image: '/images/community_extensions/social_preview/preview_community_extension_dns.png'
 layout: community_extension_doc
 ---
@@ -334,5 +334,26 @@ LOAD {{ page.extension.name }};
 | set_dns_concurrency_limit | scalar        | Updates the concurrency limit for DNS lookup operations to prevent TCP connection exhaustion.                                                             | NULL    | [SELECT set_dns_concurrency_limit(100);]    |
 | set_dns_cache_size        | scalar        | Updates the DNS cache size for the resolver.                                                                                                              | NULL    | [SELECT set_dns_cache_size(8192);]          |
 | corey                     | table         | Queries all TXT records for a hostname and returns them as a table with one row per TXT record.                                                           | NULL    | [SELECT * FROM corey('lastweekinaws.com');] |
+
+### Overloaded Functions
+
+<div class="extension_functions_table"></div>
+
+| function_name | function_type | description | comment | examples |
+|---------------|---------------|-------------|---------|----------|
+
+### Added Types
+
+<div class="extension_types_table"></div>
+
+| type_name | type_size | logical_type | type_category | internal |
+|-----------|----------:|--------------|---------------|----------|
+
+### Added Settings
+
+<div class="extension_settings_table"></div>
+
+| name | description | input_type | scope | aliases |
+|------|-------------|------------|-------|---------|
 
 
