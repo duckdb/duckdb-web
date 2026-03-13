@@ -8,7 +8,7 @@ excerpt: |
 extension:
   name: lsh
   description: Extension for locality-sensitive hashing (LSH)
-  version: 0.2.2
+  version: 0.2.3
   language: Rust
   build: cargo
   license: MIT
@@ -20,7 +20,7 @@ extension:
 
 repo:
   github: princeton-ddss/lsh
-  ref: d9fcfc34fc6909f35d93d481b5885b8e4989402b
+  ref: 8cf893652ecc5a333cb0bd8d980ff871f5cbd4d0
 
 docs:
   hello_world: |
@@ -42,8 +42,8 @@ docs:
 
 extension_star_count: 12
 extension_star_count_pretty: 12
-extension_download_count: 397
-extension_download_count_pretty: 397
+extension_download_count: 529
+extension_download_count_pretty: 529
 image: '/images/community_extensions/social_preview/preview_community_extension_lsh.png'
 layout: community_extension_doc
 ---
@@ -76,5 +76,26 @@ LOAD {{ page.extension.name }};
 | lsh_euclidean   | scalar        | Computes band hashes for each input point based on its Euclidean LSH signature                           | Produces list of 64-bit band hashes                  | NULL     |
 | lsh_euclidean32 | scalar        | Computes band hashes for each input point based on its Euclidean LSH signature                           | Reduces each band hash to 32 bits                    | NULL     |
 | lsh_jaccard     | scalar        | Computes Jaccard similarity for each input string pair                                                   | Accepts ngram argument, unlike core Jaccard function | NULL     |
+
+### Overloaded Functions
+
+<div class="extension_functions_table"></div>
+
+| function_name | function_type | description | comment | examples |
+|---------------|---------------|-------------|---------|----------|
+
+### Added Types
+
+<div class="extension_types_table"></div>
+
+| type_name | type_size | logical_type | type_category | internal |
+|-----------|----------:|--------------|---------------|----------|
+
+### Added Settings
+
+<div class="extension_settings_table"></div>
+
+| name | description | input_type | scope | aliases |
+|------|-------------|------------|-------|---------|
 
 

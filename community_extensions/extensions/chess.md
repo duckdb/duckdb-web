@@ -19,7 +19,7 @@ extension:
 
 repo:
   github: dotneB/duckdb-chess
-  ref: v0.5.0
+  ref: v0.6.0
 
 docs:
   hello_world: |
@@ -66,8 +66,8 @@ docs:
 
 extension_star_count: 2
 extension_star_count_pretty: 2
-extension_download_count: 323
-extension_download_count_pretty: 323
+extension_download_count: 478
+extension_download_count_pretty: 478
 image: '/images/community_extensions/social_preview/preview_community_extension_chess.png'
 layout: community_extension_doc
 ---
@@ -107,5 +107,26 @@ LOAD {{ page.extension.name }};
 | chess_timecontrol_json      | scalar        | NULL        | NULL    |          |
 | chess_timecontrol_normalize | scalar        | NULL        | NULL    |          |
 | read_pgn                    | table         | NULL        | NULL    |          |
+
+### Overloaded Functions
+
+<div class="extension_functions_table"></div>
+
+| function_name | function_type | description | comment | examples |
+|---------------|---------------|-------------|---------|----------|
+
+### Added Types
+
+<div class="extension_types_table"></div>
+
+| type_name | type_size | logical_type | type_category | internal |
+|-----------|----------:|--------------|---------------|----------|
+
+### Added Settings
+
+<div class="extension_settings_table"></div>
+
+| name | description | input_type | scope | aliases |
+|------|-------------|------------|-------|---------|
 
 

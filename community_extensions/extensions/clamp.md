@@ -93,8 +93,8 @@ docs:
 
 extension_star_count: 2
 extension_star_count_pretty: 2
-extension_download_count: 458
-extension_download_count_pretty: 458
+extension_download_count: 498
+extension_download_count_pretty: 498
 image: '/images/community_extensions/social_preview/preview_community_extension_clamp.png'
 layout: community_extension_doc
 ---

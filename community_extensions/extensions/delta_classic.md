@@ -18,7 +18,7 @@ extension:
 repo:
   github: djouallah/delta_classic
   andium: fdb489d9c28f4dc7e8690cbf92a5f9cb34733124
-  ref: 1b3fc8a2020f149e5a05965b9b27a82d509f75bd
+  ref: ff9914ee3d752b2c1c3e1ea021c7af5b922da63a
 
 docs:
   hello_world: |
@@ -47,8 +47,8 @@ docs:
 
 extension_star_count: 5
 extension_star_count_pretty: 5
-extension_download_count: 373
-extension_download_count_pretty: 373
+extension_download_count: 358
+extension_download_count_pretty: 358
 image: '/images/community_extensions/social_preview/preview_community_extension_delta_classic.png'
 layout: community_extension_doc
 ---
@@ -69,5 +69,33 @@ LOAD {{ page.extension.name }};
 ### About {{ page.extension.name }}
 {{ page.docs.extended_description }}
 {% endif %}
+
+### Added Functions
+
+<div class="extension_functions_table"></div>
+
+| function_name | function_type | description | comment | examples |
+|---------------|---------------|-------------|---------|----------|
+
+### Overloaded Functions
+
+<div class="extension_functions_table"></div>
+
+| function_name | function_type | description | comment | examples |
+|---------------|---------------|-------------|---------|----------|
+
+### Added Types
+
+<div class="extension_types_table"></div>
+
+| type_name | type_size | logical_type | type_category | internal |
+|-----------|----------:|--------------|---------------|----------|
+
+### Added Settings
+
+<div class="extension_settings_table"></div>
+
+| name | description | input_type | scope | aliases |
+|------|-------------|------------|-------|---------|
 
 
