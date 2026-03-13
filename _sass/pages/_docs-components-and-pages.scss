@@ -51,12 +51,19 @@ body.documentation {
     // Banner styles
     .banner {
 
-        &.nightly,
+        &.lts,
+        &.preview,
         &.outdated {
             .content {
                 display: flex;
                 column-gap: 20px;
                 align-items: center;
+            }
+
+            .icon {
+                width: 16px;
+                height: 16px;
+                flex-shrink: 0;
             }
 
             a {
@@ -75,28 +82,19 @@ body.documentation {
             }
         }
 
-        &.outdated span.icon_outdated {
-            background-image: url("data:image/svg+xml,%3Csvg width='19' height='22' viewBox='0 0 19 22' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M13.6088 1.67337C13.4975 1.56238 13.3467 1.50003 13.1896 1.5H5.81044C5.65327 1.50003 5.50253 1.56238 5.39125 1.67337L0.173375 6.89125C0.0623806 7.00253 3.33913e-05 7.15327 0 7.31044L0 14.6896C3.33913e-05 14.8467 0.0623806 14.9975 0.173375 15.1088L5.39125 20.3266C5.50253 20.4376 5.65327 20.5 5.81044 20.5H13.1896C13.3467 20.5 13.4975 20.4376 13.6088 20.3266L18.8266 15.1088C18.9376 14.9975 19 14.8467 19 14.6896V7.31044C19 7.15327 18.9376 7.00253 18.8266 6.89125L13.6088 1.67337Z' fill='white'/%3E%3C/svg%3E");
-            width: 19px;
-            height: 22px;
-            display: inline-block;
-            background-size: contain;
-            background-repeat: no-repeat;
-            flex-shrink: 0;
+        &.lts span,
+        &.lts .icon {
+            color: var(--doc-box-tip, #00C770);
         }
 
-        &.nightly span.icon_nightly {
-            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='15' height='14' viewBox='0 0 15 14' fill='none'%3E%3Cpath d='M7.60156 0C11.4676 0 14.6016 3.13401 14.6016 7C14.6016 10.866 11.4676 14 7.60156 14C3.73557 14 0.601562 10.866 0.601562 7C0.601562 3.13401 3.73557 0 7.60156 0ZM7.31738 2.4502C7.31735 4.02564 6.97769 5.07163 6.31445 5.72949C5.65074 6.38775 4.60428 6.71579 3.05176 6.71582V7.28418C4.60224 7.28421 5.64906 7.62106 6.31348 8.28418C6.97778 8.94741 7.31735 9.99451 7.31738 11.5498H7.88574C7.88577 9.99404 8.22268 8.94724 8.88574 8.28418C9.5488 7.62112 10.5956 7.28421 12.1514 7.28418V6.71582C10.5937 6.71579 9.54713 6.38756 8.88477 5.72949C8.22291 5.07179 7.88577 4.02595 7.88574 2.4502H7.31738Z' fill='%23FF6900'/%3E%3C/svg%3E");
-            width: 18px;
-            height: 18px;
-            display: inline-block;
-            background-size: contain;
-            background-repeat: no-repeat;
-            flex-shrink: 0;
+        &.preview span,
+        &.preview .icon {
+            color: var(--orange-50, #FF6900);
         }
 
-        &.nightly span {
-            color: var(--orange-50, #FF6900) !important;
+        &.outdated span,
+        &.outdated .icon {
+            color: var(--doc-menu-info-deprecated-border-color, #7D66FF);
         }
     }
 
