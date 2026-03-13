@@ -276,6 +276,7 @@ docker run --rm -it -v "$(pwd):/workspace" -w /workspace duckdb/duckdb
     data-environment="cli"
     data-docs="{% link docs/stable/clients/cli/overview.md %}">
 
+<h4>Direct Downloads</h4>
 {%- assign f_x86 = site.data.checksums_lts.artifacts.cli.windows.x86_64.filename -%}
 <a href="https://install.duckdb.org/v{{ site.lts_duckdb_version }}/{{ f_x86 }}" class="download-btn" download="{{ f_x86 }}" rel="noopener noreferrer">{{ f_x86 }}</a>
 {%- include checksum_inline.html environment="cli" platform="windows" architecture="x86_64" version="lts" -%}
