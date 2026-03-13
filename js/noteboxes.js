@@ -25,7 +25,10 @@ $(document).ready(function(){
 				break;
 			case "Update":
 				className = "update";
-				break;	
+				break;
+			case "Installation":
+				className = "installation";
+				break;
 			default:
 				className = "default"; 
 				break;
