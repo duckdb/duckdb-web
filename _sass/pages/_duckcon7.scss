@@ -111,6 +111,10 @@
         .hero-footer-content {
             display: inline-flex;
             gap: 50px;
+
+            @media (max-width: 800px) {
+                gap: 20px;
+            }
         }
 
         .hero-footer-column {
@@ -138,10 +142,16 @@
             border: 2px solid #F2E104;
             background: #FFF243;
 
+            @media (max-width: 800px) {
+                left: auto;
+                right: var(--hero-padding);
+                margin: 0;
+            }
+
             .icon {
                 width: 16px;
                 height: 16px;
-                fill: var(--grey-900);
+                color: black;
             }
         }
     }
