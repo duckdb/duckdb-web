@@ -306,6 +306,7 @@ $(document).ready(function(){
 		const selector = `li.opened a[href="${pathname}"]`;
 		const clonedUL = $(selector).parent().parent().clone();
 		clonedUL.find(selector).parent().remove();
+		clonedUL.find('svg').remove();
 		clonedUL.find('ul').show();
 		$('#main_content_wrap .index').append(clonedUL);
 	}

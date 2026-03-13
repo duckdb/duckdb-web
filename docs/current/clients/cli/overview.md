@@ -5,7 +5,7 @@ redirect_from:
 title: Command Line Client
 ---
 
-> Tip To use the DuckDB CLI client, visit the [CLI installation page]({% link install/index.html %}?environment=cli).
+> Installation To use the DuckDB CLI client, visit the [CLI installation page]({% link install/index.html %}?environment=cli).
 >
 > The latest stable version of the DuckDB command line client is {{ site.current_duckdb_version }}.
 

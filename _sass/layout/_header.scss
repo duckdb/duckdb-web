@@ -240,25 +240,38 @@ header .headerline {
 			}
 			/* Banner */
 			.banner {
-				border: 1px solid var(--menu-dropdown-border-color, #333);
 				border-radius: 10px;
 				background: transparent;
 				padding: 8px;
 				font-size: 12px;
 				cursor: default;
-				
-				span {
-					color: var(--doc-menu-info-deprecated-border-color, #7D66FF);
-				}
-				
+
 				.content {
-					column-gap: 10px;
+					column-gap: 6px;
 				}
-				
-				.icon_outdated {
-					background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='15' height='14' fill='none' viewBox='0 0 15 14'%3E%3Cpath fill='%237D66FF' d='M10.627.128A.438.438 0 0 0 10.318 0H4.881a.437.437 0 0 0-.309.128L.727 3.973A.438.438 0 0 0 .6 4.28v5.44c0 .115.046.227.127.309l3.845 3.844a.437.437 0 0 0 .309.128h5.437a.437.437 0 0 0 .31-.128l3.844-3.845a.438.438 0 0 0 .128-.308V4.28a.438.438 0 0 0-.128-.308L10.627.127ZM5.284 4.065 7.6 6.381l2.315-2.316a.438.438 0 1 1 .62.62L8.217 7l2.316 2.315a.439.439 0 0 1-.62.62L7.6 7.619 5.284 9.935a.438.438 0 1 1-.62-.62L6.982 7 4.665 4.685a.438.438 0 0 1 .62-.62Z'/%3E%3C/svg%3E");
-					width: 15px;
-					height: 15px;
+
+				&.lts {
+					border: 1px solid var(--doc-box-tip, #00C770);
+
+					span, .icon {
+						color: var(--doc-box-tip, #00C770);
+					}
+				}
+
+				&.preview {
+					border: 1px solid var(--orange-50, #FF6900);
+
+					span, .icon {
+						color: var(--orange-50, #FF6900);
+					}
+				}
+
+				&.outdated {
+					border: 1px solid var(--doc-menu-info-deprecated-border-color, #7D66FF);
+
+					span, .icon {
+						color: var(--doc-menu-info-deprecated-border-color, #7D66FF);
+					}
 				}
 			}
 		}
