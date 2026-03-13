@@ -14,7 +14,7 @@
     // Override the max-width for the header content
     header .headerline .headercontent {
         @include mobile-padding;
-        max-width: var(--page-max-width-large, 1150px);
+        max-width: 1184px;
     }
 
     // Override the padding for the main content
@@ -32,7 +32,7 @@
         height: 1px;
         max-width: var(--page-max-width-large, 1150px);
         margin: 150px auto;
-        background-color: var(--grey-30, #4c4c4c);
+        background-color: #333;
         border: none;
     }
 
@@ -43,12 +43,61 @@
 
         height: 100vh;
         position: relative;
-        color: var(--yellow-20);
+        color: #0D0D0D;
         
         .hero-image {
             width: 100%;
             height: 100%;
             object-fit: cover;
+        }
+
+        .hero-center {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+            z-index: 1;
+            
+            h1{
+                margin-bottom: 24px;
+            }
+        }
+
+        .hero-center-actions {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            margin-top: 24px;
+
+            .button.black {
+                background: #000;
+                border: 1px solid #000;
+                color: #fff;
+
+                &:hover {
+                    background: #222;
+                }
+            }
+
+            .button.transparent {
+                background: transparent;
+                border: 1px solid currentColor;
+                color: var(--yellow-20);
+                display: inline-flex;
+                align-items: center;
+                gap: 6px;
+
+                .icon {
+                    width: 14px;
+                    height: 14px;
+                    fill: currentColor;
+                }
+
+                &:hover {
+                    background: rgba(255, 255, 255, 0.1);
+                }
+            }
         }
 
         .hero-footer {
@@ -82,6 +131,18 @@
             bottom: var(--hero-padding);
             width: var(--hero-footer-button-size);
             height: var(--hero-footer-button-size);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            border: 2px solid #F2E104;
+            background: #FFF243;
+
+            .icon {
+                width: 16px;
+                height: 16px;
+                fill: var(--grey-900);
+            }
         }
     }
 
@@ -167,7 +228,7 @@
     }
 
     .announcement {
-        padding: 260px 0 80px;
+        padding: 80px 0 80px;
         text-align: center;
         font-family: var(--primary-font-stack);
         font-size: 38px;
