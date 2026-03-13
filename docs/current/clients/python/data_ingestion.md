@@ -178,6 +178,12 @@ con.execute("CREATE TABLE test_df_table AS SELECT * FROM test_df")
 con.execute("INSERT INTO test_df_table SELECT * FROM test_df")
 ```
 
+The precedence of objects with the same name is as follows:
+
+- Objects explicitly registered via `register()`
+- Native DuckDB tables and views
+- [Replacement scans]({% link docs/current/clients/c/replacement_scans.md %})
+
 ### Pandas DataFrames – `object` Columns
 
 `pandas.DataFrame` columns of an `object` dtype require some special care, since this stores values of arbitrary type.
@@ -191,13 +197,3 @@ The sample size can be changed by setting the `pandas_analyze_sample` config opt
 # example setting the sample size to 100k
 duckdb.execute("SET GLOBAL pandas_analyze_sample = 100_000")
 ```
-
-### Registering Objects
-
-You can register Python objects as DuckDB tables using the [`DuckDBPyConnection.register()` function]({% link docs/current/clients/python/reference/index.md %}#duckdb.DuckDBPyConnection.register).
-
-The precedence of objects with the same name is as follows:
-
-* Objects explicitly registered via `DuckDBPyConnection.register()`
-* Native DuckDB tables and views
-* [Replacement scans]({% link docs/current/clients/c/replacement_scans.md %})
