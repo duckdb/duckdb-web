@@ -601,7 +601,70 @@
 		width: 100%;
 		margin-bottom: 10px;
 	}
-	
+
+	.library-tiles .librarypreview.postpreview,
+	.everywhere-tiles .everywherepreview.postpreview {
+		display: flex;
+		flex-direction: row;
+		background: none;
+		border: none;
+		box-shadow: none;
+		.postimg {
+			width: 115px;
+			min-width: 115px;
+			max-height: 115px;
+			aspect-ratio: 1/1;
+			border-radius: 10px;
+			&::after {
+				width: 80px;
+				height: 80px;
+			}
+			.pill-container {
+				top: 8px;
+				left: 8px;
+				gap: 4px;
+				max-width: calc(100% - 16px);
+				.pill-tag ~ .pill-tag {
+					display: none;
+				}
+			}
+			.pill-tag {
+				font-size: 8px;
+				padding: 4px 8px;
+				overflow: hidden;
+				text-overflow: ellipsis;
+			}
+		}
+		.postdetails {
+			padding: 12px;
+			display: flex;
+			flex-direction: column;
+			justify-content: center;
+			min-width: 0;
+			.tags {
+				display: none;
+			}
+			h3 {
+				font-size: 16px;
+				min-height: unset;
+				margin-bottom: 8px;
+				display: -webkit-box;
+				-webkit-line-clamp: 3;
+				line-clamp: 3;
+				-webkit-box-orient: vertical;
+				overflow: hidden;
+			}
+			.meta {
+				margin-top: 0px;
+				column-gap: 16px;
+			}
+		}
+	}
+	.everywhere-tiles .everywherepreview.postpreview .postdetails .tags {
+		display: flex;
+		margin-bottom: 4px;
+	}
+
 	.newswrap .postwrap .postcontent .recentposts{
 		padding: 50px 15px;
 	}
