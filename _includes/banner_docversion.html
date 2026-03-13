@@ -1,9 +1,9 @@
 {% if version_viewed == "current" %}
 	<!-- this is the default and recommended version - do not show any extra warning -->
 {% elsif version_viewed == "stable" %}
-	<div class="banner nightly">
+	<div class="banner lts">
 		<div class="content">
-			<span class="icon_nightly"></span>
+			<svg class="icon"><use href="#clock"></use></svg>
 			<span title="The page is for the LTS build of DuckDB.">LTS version</span>
 		</div>
 	</div>
@@ -28,7 +28,7 @@
 	{% endfor %}
 	<div class="banner outdated">
 		<div class="content">
-			<span class="icon_outdated"></span>
+			<svg class="icon"><use href="#alert-octagon"></use></svg>
 			{% assign new_filename = new_url | replace: ".html", ".md" %}
 			{% capture url_exists %}{% file_exists {{ new_filename }} %}{% endcapture %}
 			{% if url_exists == "true" %}
