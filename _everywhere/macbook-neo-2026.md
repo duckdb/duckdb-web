@@ -5,7 +5,7 @@ author: "Gábor Szárnyas"
 thumb: "/images/everywhere/thumbs/macbook-neo-2026.jpg"
 image: "/images/everywhere/thumbs/macbook-neo-2026.jpg"
 excerpt: ""
-tags: ["PCs"]
+tags: ["PCs and laptops"]
 thirdparty: false
 ---
 

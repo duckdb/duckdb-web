@@ -2,10 +2,10 @@
 layout: post
 title: "MacBook Pro M1 Max (2021)"
 author: "Gábor Szárnyas"
-#thumb: "/images/everywhere/thumbs/macbook-pro-retina-2012.jpg"
-#image: "/images/everywhere/thumbs/macbook-pro-retina-2012.jpg"
+thumb: "/images/everywhere/thumbs/macbook-pro-14.jpg"
+image: "/images/everywhere/thumbs/macbook-pro-14.jpg"
 excerpt: ""
-tags: ["PCs"]
+tags: ["PCs and laptops"]
 thirdparty: false
 ---
 

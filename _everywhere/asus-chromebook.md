@@ -5,7 +5,7 @@ author: "Ladislav Dvorak"
 thumb: "/images/everywhere/thumbs/asus-chromebook.jpg"
 image: "/images/everywhere/thumbs/asus-chromebook.jpg"
 excerpt: ""
-tags: ["PCs"]
+tags: ["PCs and laptops"]
 thirdparty: true
 ---
 

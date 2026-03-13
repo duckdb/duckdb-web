@@ -2,8 +2,8 @@
 layout: post
 title: "DuckLake on Hetzner"
 author: "berndsen-io"
-#thumb: "/images/everywhere/thumbs/raspberry-pi-5.jpg"
-#image: "/images/everywhere/thumbs/raspberry-pi-5.jpg"
+thumb: "/images/everywhere/thumbs/hetzner.jpg"
+image: "/images/everywhere/thumbs/hetzner.jpg"
 excerpt: "DuckDB and DuckLake run on Hetzner"
 tags: ["Servers"]
 thirdparty: true

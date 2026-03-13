@@ -5,7 +5,7 @@ author: "Hannes Mühleisen"
 thumb: "/images/everywhere/thumbs/morefine-m700s.jpg"
 image: "/images/everywhere/thumbs/morefine-m700s.jpg"
 excerpt: ""
-tags: ["PCs"]
+tags: ["PCs and laptops"]
 thirdparty: false
 ---
 

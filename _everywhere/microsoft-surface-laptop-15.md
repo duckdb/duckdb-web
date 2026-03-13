@@ -5,7 +5,7 @@ author: "Gábor Szárnyas"
 thumb: "/images/everywhere/thumbs/microsoft-surface-laptop-15.jpg"
 image: "/images/everywhere/thumbs/microsoft-surface-laptop-15.jpg"
 excerpt: ""
-tags: ["PCs"]
+tags: ["PCs and laptops"]
 thirdparty: false
 ---
 

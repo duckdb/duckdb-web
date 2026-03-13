@@ -5,7 +5,7 @@ author: "Gábor Szárnyas"
 thumb: "/images/everywhere/thumbs/framework-laptop-13.jpg"
 image: "/images/everywhere/thumbs/framework-laptop-13.jpg"
 excerpt: ""
-tags: ["PCs"]
+tags: ["PCs and laptops"]
 thirdparty: false
 ---
 
