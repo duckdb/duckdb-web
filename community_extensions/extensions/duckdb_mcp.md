@@ -8,7 +8,7 @@ excerpt: |
 extension:
   name: duckdb_mcp
   description: Model Context Protocol (MCP) extension for DuckDB that enables seamless integration between SQL databases and MCP servers. Provides both client capabilities for accessing remote MCP resources via SQL and server capabilities for exposing database content as MCP resources.
-  version: 1.5.2
+  version: 2.0.0
   language: C++
   build: cmake
   license: MIT
@@ -17,8 +17,7 @@ extension:
     - teaguesterling
 repo:
   github: teaguesterling/duckdb_mcp
-  andium: f77fb3476a470c4ab08bdda8c89f6a9cf8f12a50
-  ref: f77fb3476a470c4ab08bdda8c89f6a9cf8f12a50
+  ref: 517383c36898d9cdb0a0d547e3a4fa8509d1f0ab
 
 docs:
   hello_world: |
@@ -75,6 +74,16 @@ docs:
     - `mcp_server_status()` - Check server status
     - `mcp_publish_table(table, uri, format)` - Publish table as resource
     - `mcp_publish_query(sql, uri, format, interval)` - Publish query results
+    - `mcp_publish_execution_tool(name, desc, sql, props, required, bindings)` - Publish execution tools with prepared parameter binding
+
+    **v2.0 Highlights**:
+    - **Execution tools** with multi-statement SQL and per-statement typed parameter binding
+    - **Typed JSON output** preserving DuckDB types (numbers, booleans) instead of stringifying
+    - **Prompt/template support** for MCP prompts list and get
+    - **JSONL and text output formats** alongside JSON and CSV
+    - **Read-only enforcement** in query, export, and describe tools
+    - **Per-instance state** replacing global singletons for safe multi-database usage
+    - Extensive security hardening and bug fixes
     
     The extension implements the complete JSON-RPC 2.0 MCP protocol with support for multiple transport mechanisms. It enables powerful use cases including database federation, remote data access, tool orchestration, and exposing database insights to external MCP-compatible systems. Perfect for integration with AI agents, data pipelines, and distributed analytical workflows.
 
@@ -119,6 +128,8 @@ LOAD {{ page.extension.name }};
 | mcp_list_prompts             | scalar        | NULL        | NULL    |          |
 | mcp_list_resources           | scalar        | NULL        | NULL    |          |
 | mcp_list_tools               | scalar        | NULL        | NULL    |          |
+| mcp_publish_execution_tool   | pragma        | NULL        | NULL    |          |
+| mcp_publish_execution_tool   | scalar        | NULL        | NULL    |          |
 | mcp_publish_query            | pragma        | NULL        | NULL    |          |
 | mcp_publish_query            | scalar        | NULL        | NULL    |          |
 | mcp_publish_resource         | pragma        | NULL        | NULL    |          |

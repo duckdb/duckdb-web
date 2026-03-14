@@ -8,7 +8,7 @@ excerpt: |
 extension:
   name: polyglot
   description: Transpile SQL from 34 different dialects into DuckDB SQL
-  version: 0.1.4
+  version: 0.1.13
   language: Rust
   build: cargo
   license: MIT
@@ -19,7 +19,7 @@ extension:
 
 repo:
   github: tobilg/duckdb-polyglot
-  ref: e4344f75f72ee3552afdd05924e0464771ed3b31
+  ref: 2ad9b1c9b3367447b13a263470654cdc52d8e360
 
 docs:
   hello_world: |
@@ -240,10 +240,10 @@ docs:
     SELECT * FROM polyglot_diff('SELECT a FROM t', 'SELECT b FROM t', 'generic');
     ```
 
-extension_star_count: 13
-extension_star_count_pretty: 13
-extension_download_count: 368
-extension_download_count_pretty: 368
+extension_star_count: 17
+extension_star_count_pretty: 17
+extension_download_count: 547
+extension_download_count_pretty: 547
 image: '/images/community_extensions/social_preview/preview_community_extension_polyglot.png'
 layout: community_extension_doc
 ---
@@ -279,5 +279,26 @@ LOAD {{ page.extension.name }};
 | polyglot_query     | table         | Transpiles a SQL query from a specified dialect and executes it, returning results with a dynamic schema.                                                | NULL    | [SELECT * FROM polyglot_query('SELECT 1 AS a, 2 AS b', 'postgresql');]          |
 | polyglot_lineage   | table         | Traces a named column's dependency graph through a SQL statement, returning each node and its source table.                                              | NULL    | [SELECT * FROM polyglot_lineage('SELECT a FROM t', 'generic', 'a');]            |
 | polyglot_diff      | table         | Compares two SQL statements at the AST level and emits each change as a row with an edit type and the affected expression.                               | NULL    | [SELECT * FROM polyglot_diff('SELECT a FROM t', 'SELECT b FROM t', 'generic');] |
+
+### Overloaded Functions
+
+<div class="extension_functions_table"></div>
+
+| function_name | function_type | description | comment | examples |
+|---------------|---------------|-------------|---------|----------|
+
+### Added Types
+
+<div class="extension_types_table"></div>
+
+| type_name | type_size | logical_type | type_category | internal |
+|-----------|----------:|--------------|---------------|----------|
+
+### Added Settings
+
+<div class="extension_settings_table"></div>
+
+| name | description | input_type | scope | aliases |
+|------|-------------|------------|-------|---------|
 
 
