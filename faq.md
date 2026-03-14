@@ -59,7 +59,8 @@ The DuckDB Foundation's [statutes]({% link pdf/deed-of-incorporation-stichting-d
 The [CWI (Centrum Wiskunde & Informatica)](https://cwi.nl/) has a seat on the board of the DuckDB Foundation
 and donations to the DuckDB Foundation directly fund DuckDB development.
 
-For more information on the organizations around DuckDB, see the next question–answer pair.
+For more information on the funding of DuckDB, see the [FOSDEM 2026 talk]({% link _library/funding-the-foss-ecosystem.md %}) by Gábor Szárnyas.
+For the organizations around DuckDB, see the next question–answer pair.
 
 </div>
 
@@ -169,6 +170,22 @@ Of course, the alternatives are also widely understood and you are welcome to us
 
 <div class="qa-wrap" markdown="1">
 
+### Is DuckDB an in-memory database?
+
+<div class="answer" markdown="1">
+
+It is a common misconception that DuckDB is an in-memory database.
+While DuckDB _can_ work in-memory, it is **not an in-memory database**.
+DuckDB can make use of available memory for caching, it also fully supports disk-based persistence and [offloading larger-than-memory operations]({% link docs/current/guides/performance/how_to_tune_workloads.md %}#larger-than-memory-workloads-out-of-core-processing) to disk.
+
+</div>
+
+</div>
+
+<!-- ----- ----- ----- ----- ----- ----- Q&A entry ----- ----- ----- ----- ----- ----- -->
+
+<div class="qa-wrap" markdown="1">
+
 ### Can DuckDB save data to disk?
 
 <div class="answer" markdown="1">
@@ -200,22 +217,6 @@ The location of the storage varies greatly depending the workload:
 Network-attached cloud storage such as [AWS EBS](https://aws.amazon.com/ebs/) also works and its performance can be fine-tuned with the guaranteed IOPS settings.
 Based on our experience, we **strongly advise against running DuckDB – or any other database management system – for read-write workloads on [network-attached storage (NAS)](https://en.wikipedia.org/wiki/Network-attached_storage).**
 These setups are often slow and result in spurious failures that are difficult to troubleshoot.
-
-</div>
-
-</div>
-
-<!-- ----- ----- ----- ----- ----- ----- Q&A entry ----- ----- ----- ----- ----- ----- -->
-
-<div class="qa-wrap" markdown="1">
-
-### Is DuckDB an in-memory database?
-
-<div class="answer" markdown="1">
-
-It is a common misconception that DuckDB is an in-memory database.
-While DuckDB _can_ work in-memory, it is **not an in-memory database**.
-DuckDB can make use of available memory for caching, it also fully supports disk-based persistence and [offloading larger-than-memory operations]({% link docs/current/guides/performance/how_to_tune_workloads.md %}#larger-than-memory-workloads-out-of-core-processing) to disk.
 
 </div>
 
@@ -309,11 +310,11 @@ If you are unsure about the DuckDB version used in a process, run the `PRAGMA ve
 <div class="answer" markdown="1">
 
 DuckDB has an the official [documentation]({% link docs/current/index.md %}), [blog]({% link news/index.html %}) and [library]({% link library/index.html %}).
-At the same time, there are a few third-party resources which can help you learn more about DuckDB:
+There are also few third-party resources which can help you learn more about DuckDB:
 
 * To discover projects using DuckDB, we recommend visiting the [`awesome-duckdb` repository](https://github.com/davidgasquez/awesome-duckdb).
 * There is a number of [DuckDB books](https://www.goodreads.com/search?utf8=%E2%9C%93&q=duckdb&search_type=books) available.
-* The [tldr pages](https://tldr.sh/) initiative has a [DuckDB entry](https://tldr.inbrowser.app/pages/common/duckdb).
+* The [tldr pages](https://tldr.sh/) have a [DuckDB entry](https://tldr.inbrowser.app/pages/common/duckdb).
 
 </div>
 
@@ -369,10 +370,10 @@ For working with large-scale datasets and/or collaborating on the same dataset, 
 
 We welcome experiments comparing DuckDB's performance to other systems.
 To ensure fair comparison, we have a few recommendations.
-First, try to use the [preview release]({% link docs/current/index.md %}), which often has significant performance improvements compared to the last current release.
+First, try to use the [preview release]({% link docs/current/index.md %}), which often has significant performance improvements compared to the last stable release.
 Second, consider consulting our DBTest 2018 paper [_Fair Benchmarking Considered Difficult: Common Pitfalls In Database Performance Testing_](https://hannes.muehleisen.org/publications/DBTEST2018-performance-testing.pdf) for guidelines on how to avoid common issues in benchmarks.
 Third, study the DuckDB [Performance Guide]({% link docs/current/guides/performance/overview.md %}), which has best practices for ensuring optimal performance.
-Finally, please report the DuckDB version (for current version, the version number, for nightly builds, the commit hash).
+Finally, please report the DuckDB version (for the stable version, the version number, for nightly builds, the commit hash).
 
 </div>
 
@@ -474,8 +475,8 @@ Currently, the official community support applies to the following components:
 
 Ths support covers the following minor versions:
 
-* latest LTS (long-term support) version, currently {{ site.lts_short_duckdb_version }}
-* the current version, currently {{ site.current_short_duckdb_version }}
+* latest LTS (long-term support) version, presently {{ site.lts_short_duckdb_version }}
+* the current version, presently {{ site.current_short_duckdb_version }}
 
 For more details, see the [DuckDB Community Support Policy](https://duckdblabs.com/community_support_policy/).
 
@@ -507,7 +508,7 @@ You can find the recent releases in the [Release Calendar]({% link release_calen
 
 <div class="answer" markdown="1">
 
-Please check the [Release Calendar]({% link release_calendar.md %}) for the planned release date of the next current version of DuckDB
+Please check the [Release Calendar]({% link release_calendar.md %}) for the planned release date of the next stable version of DuckDB
 and the [Development Roadmap]({% link roadmap.md %}) for the features planned for the upcoming year.
 
 </div>
@@ -545,7 +546,7 @@ You should be particularly cautious when downloading binaries and installation s
 
 Websites:
 
-* [`duckdb.org`](https://duckdb.org/) and [`duckdb.io`](https://duckdb.io/): DuckDB
+* [`duckdb.org`](https://duckdb.org/), [`duckdb.io`](https://duckdb.io/), [`duckdb.ai`](https://duckdb.io/): DuckDB
 * [`duckdblabs.com`](https://duckdblabs.com/): DuckDB Labs
 * [`ducklake.select`](https://ducklake.select/) and [`ducklake.dev`](https://ducklake.dev/): DuckLake
 
@@ -554,7 +555,6 @@ Social media:
 * [Bluesky](https://bsky.app/profile/duckdb.org)
 * [LinkedIn](https://www.linkedin.com/company/duckdb/)
 * [Twitter (X)](https://x.com/duckdb)
-
 
 </div>
 
