@@ -16,7 +16,8 @@ extension:
     - tlinhart
 repo:
   github: tlinhart/duckdb-elasticsearch
-  ref: ea88cc2e09378c1ceb286926755727df909699f5
+  ref: a64afda3d7dec3f5f7a294273b515f909833cddc
+  ref_next: d889b24d551e20b30874aa88eafbb5e7c92d3e90
 docs:
   hello_world: |
     -- Basic query.
@@ -106,9 +107,10 @@ LOAD {{ page.extension.name }};
 
 <div class="extension_functions_table"></div>
 
-|    function_name    | function_type | description | comment | examples |
-|---------------------|---------------|-------------|---------|----------|
-| elasticsearch_query | table         | NULL        | NULL    |          |
+|       function_name       | function_type | description | comment | examples |
+|---------------------------|---------------|-------------|---------|----------|
+| elasticsearch_clear_cache | scalar        | NULL        | NULL    |          |
+| elasticsearch_query       | table         | NULL        | NULL    |          |
 
 ### Overloaded Functions
 
@@ -128,7 +130,16 @@ LOAD {{ page.extension.name }};
 
 <div class="extension_settings_table"></div>
 
-| name | description | input_type | scope | aliases |
-|------|-------------|------------|-------|---------|
+|                   name                    |                                     description                                      | input_type | scope  | aliases |
+|-------------------------------------------|--------------------------------------------------------------------------------------|------------|--------|---------|
+| elasticsearch_batch_size                  | Number of documents fetched per scroll batch from Elasticsearch                      | INTEGER    | GLOBAL | []      |
+| elasticsearch_batch_size_threshold_factor | For small LIMITs, fetch all rows in one request if total rows <= batch_size * factor | INTEGER    | GLOBAL | []      |
+| elasticsearch_max_retries                 | Maximum number of retries for transient Elasticsearch errors                         | INTEGER    | GLOBAL | []      |
+| elasticsearch_retry_backoff_factor        | Exponential backoff factor applied between retries                                   | DOUBLE     | GLOBAL | []      |
+| elasticsearch_retry_interval              | Initial wait time between retries in milliseconds                                    | INTEGER    | GLOBAL | []      |
+| elasticsearch_sample_size                 | Number of documents to sample for array detection (0 to disable)                     | INTEGER    | GLOBAL | []      |
+| elasticsearch_scroll_time                 | Scroll context keep-alive duration for data fetching (e.g. '5m', '1h')               | VARCHAR    | GLOBAL | []      |
+| elasticsearch_timeout                     | Request timeout for Elasticsearch connections in milliseconds                        | INTEGER    | GLOBAL | []      |
+| elasticsearch_verify_ssl                  | Whether to verify SSL certificates when connecting to Elasticsearch                  | BOOLEAN    | GLOBAL | []      |
 
 

@@ -8,7 +8,7 @@ excerpt: |
 extension:
   name: snowflake
   description: Snowflake data source extension - query Snowflake databases directly from DuckDB
-  version: 0.2.0
+  version: 0.3.0
   language: C++
   build: cmake
   license: MIT
@@ -17,10 +17,10 @@ extension:
 
 repo:
   github: iqea-ai/duckdb-snowflake
-  ref: ee2388dc6c32b1231c493be4dacc9897690936de
+  ref: a2a3aed55b92e9a15dcc2f2ee57ac249dde5e07b
 
 install_notes: |
-  **Important:** This extension requires DuckDB 1.4.3 and the Apache Arrow ADBC Snowflake driver to function properly.
+  **Important:** This extension requires DuckDB 1.5.0 and the Apache Arrow ADBC Snowflake driver to function properly.
   
   **You must install the ADBC driver separately after installing this extension.** The extension will not work without the driver.
   
@@ -80,10 +80,10 @@ docs:
     for complete setup instructions.** For comprehensive usage examples, authentication methods, and 
     advanced features, visit the [extension repository](https://github.com/iqea-ai/duckdb-snowflake).
 
-extension_star_count: 42
-extension_star_count_pretty: 42
-extension_download_count: 2631
-extension_download_count_pretty: 2.6k
+extension_star_count: 49
+extension_star_count_pretty: 49
+extension_download_count: 2186
+extension_download_count_pretty: 2.2k
 image: '/images/community_extensions/social_preview/preview_community_extension_snowflake.png'
 layout: community_extension_doc
 ---
@@ -113,5 +113,26 @@ LOAD {{ page.extension.name }};
 |-------------------|---------------|--------------------------------------------------------------------------------------------------------------------------------------------------------|---------|---------------------------------------------------------------------------------------------------------|
 | snowflake_query   | table         | Execute a SQL query directly against a Snowflake database and return the results as a table. Uses the specified secret for authentication credentials. | NULL    | [SELECT * FROM snowflake_query('SELECT * FROM customers WHERE state = ''CA''', 'my_snowflake_secret');] |
 | snowflake_version | scalar        | Returns the version of the Snowflake extension.                                                                                                        | NULL    | [SELECT snowflake_version();]                                                                           |
+
+### Overloaded Functions
+
+<div class="extension_functions_table"></div>
+
+| function_name | function_type | description | comment | examples |
+|---------------|---------------|-------------|---------|----------|
+
+### Added Types
+
+<div class="extension_types_table"></div>
+
+| type_name | type_size | logical_type | type_category | internal |
+|-----------|----------:|--------------|---------------|----------|
+
+### Added Settings
+
+<div class="extension_settings_table"></div>
+
+| name | description | input_type | scope | aliases |
+|------|-------------|------------|-------|---------|
 
 
