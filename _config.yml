@@ -39,7 +39,7 @@ current_duckdb_wasm_version: "1.5.0"
 current_short_duckdb_version: "1.5"
 # LTS version information
 current_duckdb_codename: "Andium"
-lts_duckdb_csharp_version: "1.4.4"
+lts_duckdb_csharp_version: "1.5.0"
 lts_duckdb_dart_version: "1.4.4"
 lts_duckdb_go_tag: "v2.5.5"
 lts_duckdb_go_version: "1.4.4"
