@@ -59,7 +59,7 @@ The DuckDB Foundation's [statutes]({% link pdf/deed-of-incorporation-stichting-d
 The [CWI (Centrum Wiskunde & Informatica)](https://cwi.nl/) has a seat on the board of the DuckDB Foundation
 and donations to the DuckDB Foundation directly fund DuckDB development.
 
-For more information on the funding of DuckDB, see the [FOSDEM 2026 talk]({% link _library/funding-the-foss-ecosystem.md %}) by Gábor Szárnyas.
+For more information on the funding of DuckDB, see the [FOSDEM 2026 talk]({% link _library/2026-01-31-funding-the-foss-ecosystem.md %}) by Gábor Szárnyas.
 For the organizations around DuckDB, see the next question–answer pair.
 
 </div>
