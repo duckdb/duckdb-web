@@ -17,12 +17,12 @@ extension:
     - jrosskopf
 repo:
   github: DataZooDE/erpl-web
-  ref: 4e2fbe02164371d26ac255e4f40878694b1eaf56
+  ref: 11a0a174c034fadc24955d515bb1baaaa7ef2bfb
 
 extension_star_count: 25
 extension_star_count_pretty: 25
-extension_download_count: 407
-extension_download_count_pretty: 407
+extension_download_count: 384
+extension_download_count_pretty: 384
 image: '/images/community_extensions/social_preview/preview_community_extension_erpl_web.png'
 layout: community_extension_doc
 ---
@@ -116,12 +116,19 @@ LOAD {{ page.extension.name }};
 | sac_show_models               | table         | NULL        | NULL    |          |
 | sac_show_stories              | table         | NULL        | NULL    |          |
 
+### Overloaded Functions
+
+<div class="extension_functions_table"></div>
+
+| function_name | function_type | description | comment | examples |
+|---------------|---------------|-------------|---------|----------|
+
 ### Added Types
 
 <div class="extension_types_table"></div>
 
 |  type_name  | type_size | logical_type | type_category | internal |
-|-------------|----------:|--------------|---------------|---------:|
+|-------------|----------:|--------------|---------------|----------|
 | HTTP_HEADER | 16        | MAP          | COMPOSITE     | true     |
 
 ### Added Settings
