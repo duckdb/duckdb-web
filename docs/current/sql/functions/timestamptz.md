@@ -490,3 +490,7 @@ SET timezone = 'Europe/Amsterdam';
 
 SELECT TIMESTAMPTZ '2025-03-29 02:30:00+01' + INTERVAL '1 day';
 ```
+
+```text
+2025-03-30 03:30:00+02
+```
