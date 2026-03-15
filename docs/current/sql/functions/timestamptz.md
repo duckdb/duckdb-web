@@ -472,3 +472,20 @@ the result will be `NULL`.
 
 The ICU extension also supports [non-Gregorian calendars]({% link docs/current/sql/data_types/timestamp.md %}#calendar-support).
 If such a calendar is current, then the display and binning operations will use that calendar.
+
+
+### Daylight Saving Time (DST) Transitions
+
+When adding calendar intervals such as `INTERVAL '1 day'` to a
+`TIMESTAMPTZ`, the resulting local timestamp may fall on a
+non-existent time during daylight saving time transitions.
+
+DuckDB follows PostgreSQL behavior and adjusts the result forward
+to the next valid timestamp.
+
+Example:
+
+```sql
+SET timezone = 'Europe/Amsterdam';
+
+SELECT TIMESTAMPTZ '2025-03-29 02:30:00+01' + INTERVAL '1 day';
