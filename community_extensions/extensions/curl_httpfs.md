@@ -8,7 +8,7 @@ excerpt: |
 extension:
   name: curl_httpfs
   description: httpfs with connection pool, HTTP/2 and async IO. 
-  version: 0.2.5
+  version: 0.3.0
   language: C++
   build: cmake
   license: MIT
@@ -19,7 +19,7 @@ extension:
 repo:
   github: dentiny/duckdb-curl-filesystem
   andium: e5c4921e6e908d07abab3f89c0d036a22db0cd4b
-  ref: 917ea1a9cd4def560501aacefd7069b2dfea9f94
+  ref: 329e5500db369d4082ba276978bfb3d74073c75f
 
 docs:
   hello_world: |
@@ -55,5 +55,39 @@ LOAD {{ page.extension.name }};
 ### About {{ page.extension.name }}
 {{ page.docs.extended_description }}
 {% endif %}
+
+### Added Functions
+
+<div class="extension_functions_table"></div>
+
+|             function_name             | function_type | description | comment | examples |
+|---------------------------------------|---------------|-------------|---------|----------|
+| curl_httpfs_clear_metrics             | scalar        | NULL        | NULL    |          |
+| curl_httpfs_get_httpfs_tcp_connection | table         | NULL        | NULL    |          |
+| curl_httpfs_get_tcp_connection        | table         | NULL        | NULL    |          |
+| curl_httpfs_http_util_name            | scalar        | NULL        | NULL    |          |
+
+### Overloaded Functions
+
+<div class="extension_functions_table"></div>
+
+| function_name | function_type | description | comment | examples |
+|---------------|---------------|-------------|---------|----------|
+
+### Added Types
+
+<div class="extension_types_table"></div>
+
+| type_name | type_size | logical_type | type_category | internal |
+|-----------|----------:|--------------|---------------|----------|
+
+### Added Settings
+
+<div class="extension_settings_table"></div>
+
+|                name                |                                                     description                                                      | input_type | scope  | aliases |
+|------------------------------------|----------------------------------------------------------------------------------------------------------------------|------------|--------|---------|
+| curl_httpfs_client_implementation  | Select the HTTPUtil implementation to be used. Supports `multi_curl`, `curl`, `httplib`, and `default` (multi_curl). | VARCHAR    | GLOBAL | []      |
+| curl_httpfs_enable_verbose_logging | Turn on and off curl-based http util verbose logging.                                                                | BOOLEAN    | GLOBAL | []      |
 
 
