@@ -1,7 +1,7 @@
 include Jekyll
 
-# this file is used to run the external python script to generate the search index
-# we only want to run this script once, so we use the `:after_init` hook to run the script
+# this file is used to run the external python scripts to generate search indexes
+# we only want to run these scripts once, so we use the `:after_init` hook
 
 Jekyll::Hooks.register :site, :after_init do |page|
   tag = 'Search index:'
@@ -12,6 +12,14 @@ Jekyll::Hooks.register :site, :after_init do |page|
     Jekyll.logger.info(tag, "Search index generated")
   else
     Jekyll.logger.error(tag, "Failed to generate index")
+  end
+
+  Jekyll.logger.info(tag, "Generating DuckDB search index")
+
+  if system "python3 scripts/generate_search_index.py --validate"
+    Jekyll.logger.info(tag, "DuckDB search index generated")
+  else
+    Jekyll.logger.error(tag, "Failed to generate DuckDB search index")
   end
 
 end
