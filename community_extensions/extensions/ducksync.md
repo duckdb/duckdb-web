@@ -8,7 +8,7 @@ excerpt: |
 extension:
   name: ducksync
   description: Intelligent query result caching between DuckDB and Snowflake with TTL and smart refresh
-  version: 0.1.0
+  version: 0.2.0
   language: C++
   build: cmake
   license: MIT
@@ -17,8 +17,7 @@ extension:
 
 repo:
   github: danjsiegel/ducksync
-  andium: b490211394692a80da97ac609484a12302f9d2b3
-  ref: 585d4e34e188cae8b49dd970fe73ce784ea9f0f4
+  ref: fcc03a3d3bcc2b2987dd19537ea1616787295828
 
 docs:
   hello_world: |
@@ -95,8 +94,8 @@ docs:
 
 extension_star_count: 6
 extension_star_count_pretty: 6
-extension_download_count: 523
-extension_download_count_pretty: 523
+extension_download_count: 616
+extension_download_count_pretty: 616
 image: '/images/community_extensions/social_preview/preview_community_extension_ducksync.png'
 layout: community_extension_doc
 ---

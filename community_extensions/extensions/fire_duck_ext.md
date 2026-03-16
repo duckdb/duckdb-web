@@ -8,7 +8,7 @@ excerpt: |
 extension:
   name: fire_duck_ext
   description: Query Google Cloud Firestore directly from DuckDB using SQL
-  version: 0.1.1
+  version: 0.1.2
   language: C++
   build: cmake
   license: MIT
@@ -18,7 +18,7 @@ extension:
 
 repo:
   github: BorisBesky/fire_duck_ext
-  ref: 15b83084be3d51e2aa249eb05a87b5eccf42e43b
+  ref: a98168bd308dd2a90cc7ccc135a48f9694a46b4a
 
 docs:
   hello_world: |
@@ -122,9 +122,10 @@ docs:
     The fire_duck_ext extension enables direct SQL access to Google Cloud
     Firestore collections from DuckDB. It supports reading data with
     firestore_scan(), writing with firestore_update() and firestore_delete(),
-    batch operations, array transforms, collection group queries, and DuckDB
-    secret management for credential storage. Filter pushdown optimizes
-    queries by sending supported filters directly to Firestore.
+    batch operations, array transforms, collection group queries, SQL
+    ORDER BY / LIMIT pushdown, collection ID listings, and DuckDB secret
+    management for credential storage. Filter pushdown optimizes queries by
+    sending supported filters directly to Firestore.
 
     ## Authentication
     Secrets require `PROJECT_ID` and one of `SERVICE_ACCOUNT_JSON` or
@@ -211,6 +212,49 @@ docs:
     given name. For example, `firestore_scan('~orders')` reads all documents
     from every subcollection named "orders" regardless of parent path.
 
+    ## SQL ORDER BY / LIMIT Pushdown
+    `firestore_scan()` can automatically push simple SQL `ORDER BY`,
+    `LIMIT`, and `OFFSET` clauses down to Firestore, reducing the number
+    of documents fetched for sorted and top-N queries.
+
+    Supported patterns include:
+    - `ORDER BY field`
+    - `ORDER BY field DESC`
+    - `ORDER BY field1, field2`
+    - `LIMIT n`
+    - `ORDER BY ... LIMIT n`
+    - `ORDER BY ... LIMIT n OFFSET m` (pushed as `LIMIT n + m`, with
+      DuckDB applying the final offset)
+
+    Named parameters still work and take precedence over SQL pushdown:
+    - If `order_by=` is provided, that server-side ordering is used and
+      DuckDB applies any SQL `ORDER BY` afterward.
+    - If `scan_limit=` is provided, that fetch limit is used and DuckDB
+      applies any SQL `LIMIT` afterward.
+
+    Use `EXPLAIN` to verify when SQL ordering and limits are being pushed.
+    Firestore will show entries like `Firestore Pushed Order: score DESC`
+    and `Firestore Pushed Limit: 5`.
+
+    ## Collection ID Listings
+    When `firestore_scan()` is given a document path instead of a collection
+    path, it lists that document's direct subcollection IDs instead of
+    reading documents. This is useful for discovering unknown nested
+    collection names.
+
+    The result contains a single `__document_id` column, where each row is a
+    subcollection ID.
+
+    Document-path scans support:
+    - Pagination across large numbers of subcollections
+    - SQL `ORDER BY __document_id` pushdown
+    - SQL `LIMIT` pushdown
+    - Named `order_by='__document_id'` or `order_by='__document_id DESC'`,
+      plus `scan_limit=...`
+
+    Other ordering expressions still work, but they are evaluated in DuckDB
+    after fetching the subcollection IDs.
+
     ## Missing Documents
     By default, `firestore_scan()` includes phantom/missing documents —
     documents that have no fields but exist as parent paths for
@@ -221,8 +265,8 @@ docs:
 
 extension_star_count: 2
 extension_star_count_pretty: 2
-extension_download_count: 354
-extension_download_count_pretty: 354
+extension_download_count: 225
+extension_download_count_pretty: 225
 image: '/images/community_extensions/social_preview/preview_community_extension_fire_duck_ext.png'
 layout: community_extension_doc
 ---
@@ -260,8 +304,22 @@ LOAD {{ page.extension.name }};
 | firestore_array_remove | table         | Remove elements from an array field.                                | NULL    | [CALL firestore_array_remove('users', 'user123', 'tags', ['inactive']);]             |
 | firestore_array_append | table         | Append elements to an array field (allows duplicates).              | NULL    | [CALL firestore_array_append('users', 'user123', 'log', ['event1']);]                |
 | firestore_clear_cache  | table         | Clear the cached schema for all or a specific collection.           | NULL    | [CALL firestore_clear_cache();]                                                      |
-| firestore_disconnect   | table         | NULL                                                                | NULL    | NULL                                                                                 |
-| firestore_connect      | table         | NULL                                                                | NULL    | NULL                                                                                 |
+| firestore_connect      | table         | Set the session-scoped Firestore database for subsequent queries.   | NULL    | [CALL firestore_connect('analytics-db');]                                            |
+| firestore_disconnect   | table         | Clear the session-scoped Firestore database override.               | NULL    | [CALL firestore_disconnect();]                                                       |
+
+### Overloaded Functions
+
+<div class="extension_functions_table"></div>
+
+| function_name | function_type | description | comment | examples |
+|---------------|---------------|-------------|---------|----------|
+
+### Added Types
+
+<div class="extension_types_table"></div>
+
+| type_name | type_size | logical_type | type_category | internal |
+|-----------|----------:|--------------|---------------|----------|
 
 ### Added Settings
 
