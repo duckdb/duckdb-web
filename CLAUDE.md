@@ -32,6 +32,12 @@ scripts/lint.sh
 
 # Auto-fix lint issues
 scripts/lint.sh -f
+
+# Run DuckDB queries (use the CLI, not Python)
+duckdb -c "SELECT 42"
+
+# Always activate venv for Python scripts
+source venv/bin/activate
 ```
 
 Visit `http://localhost:4000/docs/` (use HTTP, not HTTPS).
