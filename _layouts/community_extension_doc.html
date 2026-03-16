@@ -5,6 +5,8 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
 	<title>{{ page.title }} – DuckDB Community Extensions</title>
 
+	{% include darkmode_init.html %}
+
 	<script src="/js/jquery-3.5.1.min.js"></script>
 	<link rel="stylesheet" href="/css/main.css?{{ site.time | date: '%s' }}">
 	<link rel="stylesheet" href="/css/communityextensions.css?{{ site.time | date: '%s' }}">
@@ -19,27 +21,7 @@
 
 	{% seo title=false %}
 	
-	<script>
-	(function() {
-		function setDarkMode() {
-			document.documentElement.classList.add("darkmode");
-			document.documentElement.classList.add('disable-transitions');
-			document.documentElement.style.backgroundColor = '#0d0d0d';
-		}
-		try {
-			var userColorSchemePref = localStorage.getItem("mode");
-			if (userColorSchemePref !== null) {
-				if (userColorSchemePref === 'dark') {
-					setDarkMode();
-				}
-				return;
-			}
-		} catch (e) {}
-		if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
-			setDarkMode();
-		}
-	})();
-	</script>
+
 </head>
 
 <body class="documentation communityextensions layout_community_extension_doc{% if page.body_class %} {{ page.body_class }} {% endif %}">
