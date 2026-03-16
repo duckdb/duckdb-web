@@ -19,7 +19,26 @@
 
 	{% seo title=false %}
 	
-	<script src="/js/determine_color_scheme.js"></script>
+	<script>
+	(function() {
+		function setDarkMode() {
+			document.documentElement.classList.add("darkmode");
+			document.documentElement.classList.add('disable-transitions');
+		}
+		try {
+			var userColorSchemePref = localStorage.getItem("mode");
+			if (userColorSchemePref !== null) {
+				if (userColorSchemePref === 'dark') {
+					setDarkMode();
+				}
+				return;
+			}
+		} catch (e) {}
+		if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+			setDarkMode();
+		}
+	})();
+	</script>
 </head>
 
 <body class="documentation communityextensions layout_community_extension_doc{% if page.body_class %} {{ page.body_class }} {% endif %}">
