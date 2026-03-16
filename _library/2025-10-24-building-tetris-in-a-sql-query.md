@@ -3,7 +3,7 @@ layout: post
 title: "Building Tetris in a SQL Query!"
 author: "Nuno Faria"
 tags: ["Talk"]
-thirdparty: true
+category: community
 excerpt: ""
 pill: "PGConf.EU 2025"
 ---

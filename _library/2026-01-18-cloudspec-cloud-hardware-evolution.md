@@ -5,7 +5,7 @@ author: "Till Steinert, Maximilian Kuschewski, Viktor Leis"
 thumb: "/images/library/thumbs/cidr.svg"
 image: "/images/library/thumbs/cidr.jpg"
 tags: ["Paper"]
-thirdparty: true
+category: community
 excerpt: ""
 pill: "CIDR 2026"
 ---

@@ -3,7 +3,7 @@ layout: post
 title: "Fast Hypothetical Updates Evaluation"
 author: "Haneen Mohammed, Alexander Yao, Charlie Summers, Hongbin Zhong, Gromit Yeuk-Yin Chan, Subrata Mitra, Lampros Flokas, Eugene Wu"
 tags: ["Paper"]
-thirdparty: true
+category: community
 excerpt: ""
 pill: "PW 25"
 ---

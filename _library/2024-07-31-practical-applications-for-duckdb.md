@@ -4,7 +4,7 @@ title: "Practical Applications for DuckDB"
 author: "Simon Aubury, Ned Letcher"
 tags: ["Podcast"]
 length: "70 min"
-thirdparty: true
+category: community
 pill: "Developer Voices by Kris Jenkins"
 ---
 

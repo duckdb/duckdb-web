@@ -6,7 +6,7 @@ thumb: "/images/library/thumbs/2025-09-09-the-hedgineer-rusty-conover.jpg"
 image: "/images/library/thumbs/2025-09-09-the-hedgineer-rusty-conover.jpg"
 tags: ["Podcast"]
 length: "60 min"
-thirdparty: true
+category: community
 pill: "The Hedgineer Podcast by Michael Watson"
 ---
 

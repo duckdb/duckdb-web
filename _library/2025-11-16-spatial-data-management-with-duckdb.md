@@ -6,7 +6,7 @@ author: "Qiusheng Wu"
 thumb: "/images/library/thumbs/spatial-data-management-with-duckdb.svg"
 image: "/images/library/thumbs/spatial-data-management-with-duckdb.png"
 tags: ["Book"]
-thirdparty: true
+category: community
 excerpt: ""
 pill: "Spatial Data Management with DuckDB"
 ---

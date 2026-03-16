@@ -7,7 +7,7 @@ thumb: "/images/library/thumbs/2025-04-17-haralampos-gavriilidis-sheetreader.jpg
 image: "/images/library/thumbs/2025-04-17-haralampos-gavriilidis-sheetreader.jpg"
 tags: ["Podcast"]
 length: "40 min"
-thirdparty: true
+category: community
 excerpt: ""
 pill: "DuckDB in Research"
 episode: "S01E05"

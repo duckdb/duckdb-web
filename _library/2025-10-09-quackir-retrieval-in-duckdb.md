@@ -5,7 +5,7 @@ author: "Yijun Ge, Zijian Chen, Jimmy Lin"
 thumb: "/images/library/thumbs/emnlp.svg"
 image: "/images/library/thumbs/emnlp.png"
 tags: ["Paper"]
-thirdparty: true
+category: community
 excerpt: ""
 pill: "EMNLP 2025"
 ---

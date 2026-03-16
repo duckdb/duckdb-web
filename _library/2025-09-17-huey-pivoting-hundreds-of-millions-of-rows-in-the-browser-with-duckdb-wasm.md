@@ -4,7 +4,7 @@ title: "Huey: Pivoting Hundreds of Millions of Rows in the Browser with DuckDB-W
 author: "Roland Bouman"
 tags: ["Talk"]
 length: "25 min"
-thirdparty: true
+category: community
 excerpt: ""
 pill: "DuckDB Amsterdam Meetup"
 ---

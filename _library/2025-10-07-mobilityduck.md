@@ -5,7 +5,7 @@ author: "Nhu Ngoc Hoang, Ngoc Hoa Pham, Viet Phuong Hoang, Esteban Zimányi"
 thumb: "/images/library/thumbs/arxiv.svg"
 image: "/images/library/thumbs/arxiv.jpg"
 tags: ["Paper"]
-thirdparty: true
+category: community
 excerpt: ""
 pill: "arXiv"
 ---

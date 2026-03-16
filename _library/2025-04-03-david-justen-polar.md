@@ -7,7 +7,7 @@ thumb: "/images/library/thumbs/2025-04-03-david-justen-polar.jpg"
 image: "/images/library/thumbs/2025-04-03-david-justen-polar.jpg"
 tags: ["Podcast"]
 length: "50 min"
-thirdparty: true
+category: community
 excerpt: ""
 pill: "DuckDB in Research"
 episode: "S01E03"

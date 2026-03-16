@@ -4,7 +4,7 @@ title: "query.farm: Growing DuckDB Community Extensions"
 author: "Lorenzo Mangani"
 tags: ["Talk"]
 length: "25 min"
-thirdparty: true
+category: community
 excerpt: ""
 pill: "DuckDB Amsterdam Meetup"
 ---

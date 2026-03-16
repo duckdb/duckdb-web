@@ -7,7 +7,7 @@ thumb: "/images/library/thumbs/2025-04-10-arjen-p-de-vries-faiss.jpg"
 image: "/images/library/thumbs/2025-04-10-arjen-p-de-vries-faiss.jpg"
 tags: ["Podcast"]
 length: "45 min"
-thirdparty: true
+category: community
 excerpt: ""
 pill: "DuckDB in Research"
 episode: "S01E04"

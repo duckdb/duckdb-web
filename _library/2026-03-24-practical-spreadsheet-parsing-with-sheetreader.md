@@ -5,7 +5,7 @@ author: "Haralampos Gavriilidis, Felix Henze, Joel Ziegler, Jonas Benn, Eleni Tz
 thumb: "/images/library/thumbs/edbt.svg"
 image: "/images/library/thumbs/edbt.jpg"
 tags: ["Paper"]
-thirdparty: true
+category: community
 excerpt: ""
 pill: "EDBT 2026"
 ---

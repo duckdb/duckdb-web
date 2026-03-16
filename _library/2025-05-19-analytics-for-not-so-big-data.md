@@ -4,7 +4,7 @@ title: "Analytics for Not-so-Big Data with DuckDB"
 author: "David Ostrovsky"
 tags: ["Talk"]
 length: "60 min"
-thirdparty: true
+category: community
 excerpt: ""
 pill: "NDC Oslo 2025"
 ---

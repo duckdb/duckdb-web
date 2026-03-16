@@ -6,7 +6,7 @@ author: "Simon Aubury, Ned Letcher"
 thumb: "/images/library/thumbs/getting-started-with-duckdb.svg"
 image: "/images/library/thumbs/getting-started-with-duckdb.png"
 tags: ["Book"]
-thirdparty: true
+category: community
 excerpt: ""
 pill: "Getting Started with DuckDB"
 ---

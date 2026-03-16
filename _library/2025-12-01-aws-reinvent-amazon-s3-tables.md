@@ -6,7 +6,7 @@ author: "Yuri Zarubin"
 #image: "/images/library/thumbs/2025-04-22-liberate-analytical-data-management-with-duckdb.jpg"
 tags: ["Talk"]
 length: "6 min"
-thirdparty: true
+category: community
 pill: "AWS re:Invent 2025"
 ---
 

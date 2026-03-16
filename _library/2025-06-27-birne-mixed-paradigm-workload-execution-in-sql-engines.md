@@ -5,7 +5,7 @@ author: "Tim Fischer, Denis Hirn"
 thumb: "/images/library/thumbs/dbpl.svg"
 image: "/images/library/thumbs/dbpl.png"
 tags: ["Paper"]
-thirdparty: true
+category: community
 excerpt: ""
 pill: "DBPL 2025"
 ---

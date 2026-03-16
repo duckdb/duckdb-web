@@ -5,7 +5,7 @@ author: "Daniel ten Wolde, Gábor Szárnyas, Peter Boncz"
 thumb: "/images/library/thumbs/vldb.svg"
 image: "/images/library/thumbs/vldb.png"
 tags: ["Paper"]
-thirdparty: true
+category: community
 excerpt: ""
 pill: "VLDB 2023"
 ---

@@ -5,7 +5,7 @@ author: "Qichen Wang, Bingnan Chen, Binyang Dai, Ke Yi, Feifei Li, Liang Lin"
 thumb: "/images/library/thumbs/sigmod.svg"
 image: "/images/library/thumbs/sigmod.png"
 tags: ["Paper"]
-thirdparty: true
+category: community
 excerpt: ""
 pill: "SIGMOD 2025"
 ---

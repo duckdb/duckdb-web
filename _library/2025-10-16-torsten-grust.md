@@ -7,7 +7,7 @@ thumb: "/images/library/thumbs/2025-10-16-torsten-grust.jpg"
 image: "/images/library/thumbs/2025-10-16-torsten-grust.jpg"
 tags: ["Podcast"]
 length: "50 min"
-thirdparty: true
+category: community
 excerpt: ""
 pill: "DuckDB in Research"
 episode: "S02E01"
