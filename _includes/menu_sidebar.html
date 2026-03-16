@@ -28,7 +28,16 @@
 					{%- if url_contains %} active opened{% endif -%}
 					{%- if item.mainfolderitems[0] %} hasSub{% endif -%}
 				">
-				{% if item.url %} <a href="{{ base_slash }}{{starting_url}}{{item.slug}}{{ item.url }}">{{ item.page }}</a> {% if item.mainfolderitems[0] %} <svg class="show"><use href="#chevron-right"></use></svg> {% endif %} {% else %} {% if item.mainfolderitems[0] %} <svg class="show"><use href="#chevron-right"></use></svg> {% endif %} {{ item.page }} {% endif %} </li>
+				{% if item.url %}
+					{% assign first_char = page.url | slice: 0 %}
+					{% if first_char == '/' %}
+						{% assign target_url = item.url %}
+					{% else %}
+						{% assign target_url = base_slash | append: starting_url | append: item.slug | append: item.url %}
+					{% endif %}
+					<a href="{{ target_url }}">{{ item.page }}</a> {% if item.mainfolderitems[0] %} <svg class="show"><use href="#chevron-right"></use></svg> {% endif %} {% else %} {% if item.mainfolderitems[0] %} <svg class="show"><use href="#chevron-right"></use></svg> {% endif %} {{ item.page }}
+				{% endif %}
+				</li>
 			
 				{% if item.mainfolderitems[0] %}
 					<ul style="display: {% if url_contains %}block;{% else %}none{% endif %}">
