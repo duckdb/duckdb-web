@@ -19,14 +19,44 @@ redirect_from:
 <div class="wrap">
 	<div class="controls filterbar" data-all-available="{{ unique_tags | join: ', ' }}">
 		<input type="text" id="search-input" placeholder="Search...">
-		<div class="filtertags">
-			<div class="filter-highlight"></div>
-			<button type="button" class="filter-btn active" data-filter="*">All</button>
-			<button type="button" class="filter-btn" data-filter=".book">Book</button>
-			<button type="button" class="filter-btn" data-filter=".paper">Paper</button>
-			<button type="button" class="filter-btn" data-filter=".podcast">Podcast</button>
-			<button type="button" class="filter-btn" data-filter=".talk">Talk</button>
+		<button type="button" class="filter-toggle" aria-label="Filter">
+			<svg class="icon icon-filter"><use href="#filter-funnel-01"></use></svg>
+			<svg class="icon icon-close"><use href="#x-close"></use></svg>
+		</button>
+		<div class="filter-group" data-filter-key="category">
+			<span class="filter-group-label">Category</span>
+			<div class="filtertags" data-attribute="data-category">
+				<div class="filter-highlight"></div>
+				<button type="button" class="filter-btn active" data-filter="*">All</button>
+				<button type="button" class="filter-btn" data-filter="core">Core</button>
+				<button type="button" class="filter-btn" data-filter="highlighted">Highlighted</button>
+				<button type="button" class="filter-btn" data-filter="community">Community</button>
+			</div>
 		</div>
+		<div class="filter-modal">
+			<div class="filter-group" data-filter-key="format">
+				<span class="filter-group-label">Format</span>
+				<div class="filtertags">
+					<div class="filter-highlight"></div>
+					<button type="button" class="filter-btn active" data-filter="*">All</button>
+					<button type="button" class="filter-btn" data-filter=".book">Book</button>
+					<button type="button" class="filter-btn" data-filter=".paper">Paper</button>
+					<button type="button" class="filter-btn" data-filter=".podcast">Podcast</button>
+					<button type="button" class="filter-btn" data-filter=".talk">Talk</button>
+				</div>
+			</div>
+			<div class="filter-group filter-group-mobile-only" data-filter-key="category">
+				<span class="filter-group-label">Category</span>
+				<div class="filtertags" data-attribute="data-category">
+					<div class="filter-highlight"></div>
+					<button type="button" class="filter-btn active" data-filter="*">All</button>
+					<button type="button" class="filter-btn" data-filter="core">Core</button>
+					<button type="button" class="filter-btn" data-filter="highlighted">Highlighted</button>
+					<button type="button" class="filter-btn" data-filter="community">Community</button>
+				</div>
+			</div>
+		</div>
+		<div class="filter-overlay"></div>
 	</div>
 </div>
 
@@ -40,9 +70,16 @@ redirect_from:
 				{% assign slugified_tag = tag | slugify %}
 				{% assign tag_classes = tag_classes | append: slugified_tag | append: " " %}
 			{% endfor %}
+			{% comment %} Determine data-category from category field (default: core) {% endcomment %}
+			{% if library_item.category %}
+				{% assign data_category = library_item.category %}
+			{% else %}
+				{% assign data_category = "core" %}
+			{% endif %}
+			{% comment %} Determine data-source for styling (backwards compat) {% endcomment %}
 			{% if library_item.title contains "ducklake" or library_item.title contains "DuckLake" %}
 				{% assign data_source = "ducklake" %}
-			{% elsif library_item.thirdparty == true %}
+			{% elsif data_category == "community" %}
 				{% assign data_source = "thirdparty" %}
 			{% else %}
 				{% assign data_source = "duckdb" %}
@@ -53,7 +90,7 @@ redirect_from:
 			{% else %}
 				{% assign data_type = "" %}
 			{% endif %}
-			<div class="librarypreview postpreview {{ tag_classes | downcase }}" data-title="{{ library_item.title | escape }}" data-source="{{ data_source }}"{% if data_type != "" %} data-type="{{ data_type }}"{% endif %}>
+			<div class="librarypreview postpreview {{ tag_classes | downcase }}" data-title="{{ library_item.title | escape }}" data-source="{{ data_source }}" data-category="{{ data_category }}"{% if data_type != "" %} data-type="{{ data_type }}"{% endif %}>
 				<a href="/library/{{ library_item.slug | default: library_item.title | slugify }}/" title="{{ library_item.title }}" class="blocklink"></a>
 				<div class="postimg custom">
 					{% if library_item.thumb %}

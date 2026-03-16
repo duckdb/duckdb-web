@@ -7,7 +7,7 @@ thumb: "/images/library/thumbs/2025-10-23-abigale-kim.jpg"
 image: "/images/library/thumbs/2025-10-23-abigale-kim.jpg"
 tags: ["Podcast"]
 length: "45 min"
-thirdparty: true
+category: community
 excerpt: ""
 pill: "DuckDB in Research"
 episode: "S02E02"

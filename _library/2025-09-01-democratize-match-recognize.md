@@ -5,7 +5,7 @@ author: "Louisa Lambrecht, Tim Findling, Samuel Heid, Marcel Knüdeler, Torsten 
 thumb: "/images/library/thumbs/vldb.svg"
 image: "/images/library/thumbs/vldb.png"
 tags: ["Paper"]
-thirdparty: true
+category: community
 excerpt: ""
 pill: "VLDB 2025"
 ---

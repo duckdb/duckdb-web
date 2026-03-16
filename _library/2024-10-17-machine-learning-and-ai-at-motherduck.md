@@ -4,7 +4,7 @@ title: "Machine Learning and AI at MotherDuck"
 author: "Till Döhmen"
 tags: ["Talk"]
 length: "25 min"
-thirdparty: true
+category: community
 excerpt: ""
 pill: "DuckDB Amsterdam Meetup"
 ---

@@ -4,7 +4,7 @@ title: "Using DuckDB in a Spreadsheet with WASM"
 author: "Chris Laffra"
 tags: ["Talk"]
 length: "25 min"
-thirdparty: true
+category: community
 excerpt: ""
 pill: "DuckDB Amsterdam Meetup"
 ---

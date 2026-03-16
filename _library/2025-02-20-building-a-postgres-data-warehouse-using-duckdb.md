@@ -4,7 +4,7 @@ title: "Building a Postgres Data Warehouse Using DuckDB"
 author: "Marco Slot"
 tags: ["Talk"]
 length: "25 min"
-thirdparty: true
+category: community
 excerpt: ""
 pill: "DuckDB Amsterdam Meetup"
 ---

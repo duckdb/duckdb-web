@@ -87,10 +87,10 @@ $(document).ready(function(){
 	
 	/** FILTER LINE  */
 	if ($('.filterbar').length !== 0) {
-		
+
 		/* CUSTOM FITROWS FUNCTION FOR ISOTOPE TO GET EQUAL HEIGHT TILES */
 		!function(t){"use strict";function i(t){var i=t.create("fitRows");return i.prototype._resetLayout=function(){if(this.x=0,this.y=0,this.maxY=0,this.row=0,this.rows=[],this._getMeasurement("gutter","outerWidth"),this.options.equalheight)for(var t=0;t<this.isotope.items.length;t++)this.isotope.items[t].css({height:"auto"})},i.prototype._getItemLayoutPosition=function(t){t.getSize();var i=this.gutter||0,s=t.size.outerWidth,o=Math.ceil(this.isotope.size.innerWidth+i);0!==this.x&&s+this.x+i>o&&(this.x=0,this.y=this.maxY+i),0===this.x&&0!==this.y&&this.row++;var e={x:this.x,y:this.y};return this.maxY=Math.max(this.maxY,this.y+t.size.outerHeight),this.x+=s+i,void 0===this.rows[this.row]?(this.rows[this.row]=[],this.rows[this.row].start=this.y,this.rows[this.row].end=this.maxY):this.rows[this.row].end=Math.max(this.rows[this.row].end,this.maxY),t.row=this.row,e},i.prototype._equalHeight=function(){for(var t=0;t<this.isotope.items.length;t++){var i=this.isotope.items[t].row,s=this.rows[i];if(s){var o=s.end-s.start;o-=this.isotope.items[t].size.borderTopWidth+this.isotope.items[t].size.borderBottomWidth,o-=this.isotope.items[t].size.marginTop+this.isotope.items[t].size.marginBottom,o-=this.gutter.height||0,!1==this.isotope.items[t].size.isBorderBox&&(o-=this.isotope.items[t].size.paddingTop+this.isotope.items[t].size.paddingBottom),this.isotope.items[t].size.height=o,this.isotope.items[t].css({height:o.toString()+"px"})}}},i.prototype._getContainerSize=function(){return this.options.equalheight&&this._equalHeight(),{height:this.maxY}},i}"function"==typeof define&&define.amd?define(["../layout-mode"],i):"object"==typeof exports?module.exports=i(require("../layout-mode")):i(t.Isotope.LayoutMode)}(window);
-		
+
 		var isLibraryOrEverywhere = $('.library-tiles, .everywhere-tiles').length > 0;
 		var gutterSize = (isLibraryOrEverywhere && window.innerWidth <= 660) ? 8 : 20;
 
@@ -105,45 +105,152 @@ $(document).ready(function(){
 				title: '[data-title]'
 			}
 		});
-	
+
+		// --- Filter highlight ---
 		function updateFilterHighlight($button) {
-			var $highlight = $('.filter-highlight');
-			if ($highlight.length) {
+			var $filtertags = $button.closest('.filtertags');
+			var $highlight = $filtertags.find('.filter-highlight');
+			if ($highlight.length && $button.is(':visible')) {
 				$highlight.css({
 					left: $button.position().left,
 					width: $button.outerWidth()
 				});
 			}
 		}
-	
-		var $activeBtn = $('.filter-btn.active');
-		updateFilterHighlight($activeBtn);
-	
-		$('.filterbar').on('click', 'button.filter-btn', function() {
-			var filterValue = $(this).attr('data-filter');
-			$grid.isotope({ filter: filterValue });
-			$('.filter-btn').removeClass('active');
-			$(this).addClass('active');
-			updateFilterHighlight($(this));
+
+		// Initialize highlights for all visible filter groups
+		$('.filtertags').each(function() {
+			var $activeBtn = $(this).find('.filter-btn.active');
+			if ($activeBtn.length) {
+				updateFilterHighlight($activeBtn);
+			}
 		});
-	
-		$('#search-input').on('input', function() {
-			var searchValue = $(this).val().toLowerCase();
-	
-			$grid.isotope({ filter: '*' });
-			$('.filter-btn').removeClass('active');
-			var $allButton = $('.filter-btn[data-filter="*"]');
-			$allButton.addClass('active');
-	
-			updateFilterHighlight($allButton);
-	
+
+		// --- Filter state per group ---
+		// Each filter-group stores its active filter value keyed by data-filter-key.
+		// Groups with data-attribute on .filtertags filter by data attribute, others by CSS class.
+		var filterState = {};
+
+		$('.filter-group').each(function() {
+			var key = $(this).attr('data-filter-key');
+			if (key) {
+				filterState[key] = '*';
+			}
+		});
+
+		function applyFilters() {
+			var searchValue = $('#search-input').val().toLowerCase();
+
 			$grid.isotope({
 				filter: function() {
-					var title = $(this).attr('data-title').toLowerCase();
-					return title.includes(searchValue);
+					var $item = $(this);
+					// Search filter
+					if (searchValue) {
+						var title = $item.attr('data-title').toLowerCase();
+						if (!title.includes(searchValue)) return false;
+					}
+					// Apply each filter group
+					for (var key in filterState) {
+						var value = filterState[key];
+						if (value === '*') continue;
+
+						// Find the filtertags that belong to this key
+						var $group = $('.filter-group[data-filter-key="' + key + '"]').not('.filter-group-mobile-only').first();
+						var $filtertags = $group.find('.filtertags');
+						var attribute = $filtertags.attr('data-attribute');
+
+						if (attribute) {
+							// Attribute-based filter (e.g., data-source)
+							var itemValue = $item.attr(attribute);
+							if (itemValue !== value) return false;
+						} else {
+							// Class-based filter (e.g., .book, .paper)
+							if (!$item.is(value)) return false;
+						}
+					}
+					return true;
 				}
 			});
+		}
+
+		// Sync duplicate filter groups (desktop ↔ mobile-only) by filter-key
+		function syncFilterGroups($clickedBtn) {
+			var $group = $clickedBtn.closest('.filter-group');
+			var key = $group.attr('data-filter-key');
+			var filterValue = $clickedBtn.attr('data-filter');
+
+			// Find all groups with the same key and sync active state
+			$('.filter-group[data-filter-key="' + key + '"]').each(function() {
+				var $otherFiltertags = $(this).find('.filtertags');
+				$otherFiltertags.find('.filter-btn').removeClass('active');
+				var $matchingBtn = $otherFiltertags.find('.filter-btn[data-filter="' + filterValue + '"]');
+				$matchingBtn.addClass('active');
+				if ($matchingBtn.is(':visible')) {
+					updateFilterHighlight($matchingBtn);
+				}
+			});
+		}
+
+		// --- Click handler for filter buttons ---
+		$('.filterbar').on('click', 'button.filter-btn', function() {
+			var $btn = $(this);
+			var $group = $btn.closest('.filter-group');
+			var key = $group.attr('data-filter-key');
+			var filterValue = $btn.attr('data-filter');
+
+			// Update state
+			if (key) {
+				filterState[key] = filterValue;
+			}
+
+			// Sync all groups with the same key
+			syncFilterGroups($btn);
+
+			applyFilters();
 		});
+
+		// --- Search input ---
+		$('#search-input').on('input', function() {
+			applyFilters();
+		});
+
+		// --- Mobile filter modal ---
+		var $filterToggle = $('.filter-toggle');
+		var $filterModal = $('.filter-modal');
+		var $filterOverlay = $('.filter-overlay');
+		var filterModalOpen = false;
+
+		function openFilterModal() {
+			filterModalOpen = true;
+			$filterToggle.addClass('is-open');
+			$filterOverlay.addClass('is-open');
+			$filterModal.addClass('is-open');
+			// Update highlights for modal buttons that are now visible
+			$filterModal.find('.filtertags').each(function() {
+				var $activeBtn = $(this).find('.filter-btn.active');
+				if ($activeBtn.length) {
+					updateFilterHighlight($activeBtn);
+				}
+			});
+		}
+
+		function closeFilterModal() {
+			filterModalOpen = false;
+			$filterToggle.removeClass('is-open');
+			$filterModal.removeClass('is-open');
+			$filterOverlay.removeClass('is-open');
+		}
+
+		function toggleFilterModal() {
+			if (filterModalOpen) {
+				closeFilterModal();
+			} else {
+				openFilterModal();
+			}
+		}
+
+		$filterToggle.on('click', toggleFilterModal);
+		$filterOverlay.on('click', closeFilterModal);
 	}
 	
 

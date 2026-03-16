@@ -4,7 +4,7 @@ title: "DuckDB in 100 Seconds"
 author: "Fireship"
 tags: ["Video"]
 length: "2 min"
-thirdparty: true
+category: community
 excerpt: ""
 ---
 

@@ -7,7 +7,7 @@ thumb: "/images/library/thumbs/2025-03-13-till-doehmen-duckdq.jpg"
 image: "/images/library/thumbs/2025-03-13-till-doehmen-duckdq.jpg"
 tags: ["Podcast"]
 length: "60 min"
-thirdparty: true
+category: community
 excerpt: ""
 pill: "DuckDB in Research"
 episode: "S01E01"

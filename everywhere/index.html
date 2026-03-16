@@ -16,14 +16,24 @@ title: DuckDB Everywhere
 <div class="wrap">
   <div class="controls filterbar" data-all-available="{{ unique_tags | join: ', ' }}">
     <input type="text" id="search-input" placeholder="Search...">
-    <div class="filtertags">
-      <div class="filter-highlight"></div>
-      <button type="button" class="filter-btn active" data-filter="*">All</button>
-      <button type="button" class="filter-btn" data-filter=".servers">Servers</button>
-      <button type="button" class="filter-btn" data-filter=".pcs">PCs and laptops</button>
-      <button type="button" class="filter-btn" data-filter=".phones">Phones</button>
-      <button type="button" class="filter-btn" data-filter=".other">Other</button>
+    <button type="button" class="filter-toggle" aria-label="Filter">
+      <svg class="icon icon-filter"><use href="#filter-funnel-01"></use></svg>
+      <svg class="icon icon-close"><use href="#x-close"></use></svg>
+    </button>
+    <div class="filter-modal">
+      <div class="filter-group" data-filter-key="category">
+        <span class="filter-group-label">Category</span>
+        <div class="filtertags">
+          <div class="filter-highlight"></div>
+          <button type="button" class="filter-btn active" data-filter="*">All</button>
+          <button type="button" class="filter-btn" data-filter=".servers">Servers</button>
+          <button type="button" class="filter-btn" data-filter=".pcs">PCs and laptops</button>
+          <button type="button" class="filter-btn" data-filter=".phones">Phones</button>
+          <button type="button" class="filter-btn" data-filter=".other">Other</button>
+        </div>
+      </div>
     </div>
+    <div class="filter-overlay"></div>
   </div>
 </div>
 

@@ -5,7 +5,7 @@ author: "Niklaus Wirth"
 thumb: "/images/library/thumbs/paper.svg"
 image: "/images/library/thumbs/paper.png"
 tags: ["Paper"]
-thirdparty: true
+category: community
 excerpt: ""
 pill: "Computer 1995"
 ---

@@ -7,7 +7,7 @@ thumb: "/images/library/thumbs/2025-11-06-paul-gross.jpg"
 image: "/images/library/thumbs/2025-11-06-paul-gross.jpg"
 tags: ["Podcast"]
 length: "50 min"
-thirdparty: true
+category: community
 excerpt: ""
 pill: "DuckDB in Research"
 episode: "S02E04"

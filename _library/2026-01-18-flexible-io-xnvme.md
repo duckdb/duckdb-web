@@ -5,7 +5,7 @@ author: "Emil Houlborg, Andreas Nicolaj Tietgen, Simon A. F. Lund, Marcel Weisgu
 thumb: "/images/library/thumbs/cidr.svg"
 image: "/images/library/thumbs/cidr.png"
 tags: ["Paper"]
-thirdparty: true
+category: community
 excerpt: ""
 pill: "CIDR 2026"
 ---

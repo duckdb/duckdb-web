@@ -4,7 +4,7 @@ title: "DataFusion + DuckLake"
 author: Zac Farrell
 tags: ["Talk"]
 length: "12 min"
-thirdparty: true
+category: community
 excerpt: ""
 pill: "Data Debug SF"
 ---

@@ -6,7 +6,7 @@ author: "Wei-Meng Lee"
 thumb: "/images/library/thumbs/duckdb-up-and-running.svg"
 image: "/images/library/thumbs/duckdb-up-and-running.png"
 tags: ["Book"]
-thirdparty: true
+category: community
 excerpt: ""
 pill: "DuckDB: Up and Running"
 ---

@@ -5,7 +5,7 @@ author: "Yizhe Zhang, Zhengyi Yang, Bocheng Han, Haoran Ning, Xin Cao, John Shep
 thumb: "/images/library/thumbs/vldb.svg"
 image: "/images/library/thumbs/vldb.png"
 tags: ["Paper"]
-thirdparty: true
+category: community
 excerpt: ""
 pill: "ADMS 2025"
 ---

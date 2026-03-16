@@ -5,7 +5,7 @@ author: "Egor Kotov, Eugeni Vidal-Tortosa, Oliva G. Cantú-Ros, Javier Burrieza-
 thumb: "/images/library/thumbs/paper.svg"
 image: "/images/library/thumbs/paper.png"
 tags: ["Paper"]
-thirdparty: true
+category: community
 excerpt: ""
 pill: "EPB 2026"
 ---

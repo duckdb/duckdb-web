@@ -4,7 +4,7 @@ title: "Integrating FileMaker and DuckDB"
 author: "Marcel Moré"
 tags: ["Talk"]
 length: "60 min"
-thirdparty: true
+category: community
 excerpt: ""
 pill: "EngageU 2024"
 ---

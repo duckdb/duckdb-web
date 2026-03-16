@@ -5,7 +5,7 @@ author: "Panagiotis Liakos, Katia Papakonstantinopoulou, Thijs Bruineman, Mark R
 thumb: "/images/library/thumbs/edbt.svg"
 image: "/images/library/thumbs/edbt.png"
 tags: ["Paper"]
-thirdparty: true
+category: community
 excerpt: ""
 pill: "EDBT 2024"
 ---

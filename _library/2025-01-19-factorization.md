@@ -5,7 +5,7 @@ author: "Paul Groß, Daniel ten Wolde, Peter Boncz"
 thumb: "/images/library/thumbs/cidr.svg"
 image: "/images/library/thumbs/cidr.png"
 tags: ["Paper"]
-thirdparty: true
+category: community
 excerpt: ""
 pill: "CIDR 2025"
 ---

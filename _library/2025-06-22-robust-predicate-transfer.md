@@ -5,7 +5,7 @@ author: "Junyi Zhao, Kai Su, Yifei Yang, Xiangyao Yu, Paraschos Koutris, Huanche
 thumb: "/images/library/thumbs/sigmod.svg"
 image: "/images/library/thumbs/sigmod.png"
 tags: ["Paper"]
-thirdparty: true
+category: community
 excerpt: ""
 pill: "SIGMOD 2025"
 ---

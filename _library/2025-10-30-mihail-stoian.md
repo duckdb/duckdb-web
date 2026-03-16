@@ -7,7 +7,7 @@ thumb: "/images/library/thumbs/2025-10-30-mihail-stoian.jpg"
 image: "/images/library/thumbs/2025-10-30-mihail-stoian.jpg"
 tags: ["Podcast"]
 length: "35 min"
-thirdparty: true
+category: community
 excerpt: ""
 pill: "DuckDB in Research"
 episode: "S02E03"
