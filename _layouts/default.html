@@ -42,7 +42,26 @@
 
 	{% seo title=false %}
 	
-	<script src="/js/determine_color_scheme.js"></script>
+	<script>
+	(function() {
+		function setDarkMode() {
+			document.documentElement.classList.add("darkmode");
+			document.documentElement.classList.add('disable-transitions');
+		}
+		try {
+			var userColorSchemePref = localStorage.getItem("mode");
+			if (userColorSchemePref !== null) {
+				if (userColorSchemePref === 'dark') {
+					setDarkMode();
+				}
+				return;
+			}
+		} catch (e) {}
+		if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+			setDarkMode();
+		}
+	})();
+	</script>
 	{% if page.body_class contains "duckcon7" %}
 	<script src='https://api.mapbox.com/mapbox-gl-js/v3.17.0-beta.1/mapbox-gl.js'></script>
 	{% endif %}
