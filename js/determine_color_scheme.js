@@ -3,6 +3,7 @@
         document.documentElement.classList.add("darkmode");
         document.documentElement.classList.add('disable-transitions');
         document.documentElement.style.backgroundColor = '#0d0d0d';
+        document.documentElement.style.colorScheme = 'dark';
     }
 
     try {

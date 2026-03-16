@@ -15,6 +15,7 @@
     <title>{{ page.title }} – DuckDB</title>
 	{% endif %}
 
+	{% include darkmode_init.html %}
 
     <link rel="stylesheet" href="/css/main.css?{{ site.time | date: '%s' }}">
 	<link rel="preload" href="/css/webfont/SuisseIntl-Regular-WebXL.woff2" as="font" type="font/woff2" crossorigin>
@@ -42,27 +43,7 @@
 
 	{% seo title=false %}
 	
-	<script>
-	(function() {
-		function setDarkMode() {
-			document.documentElement.classList.add("darkmode");
-			document.documentElement.classList.add('disable-transitions');
-			document.documentElement.style.backgroundColor = '#0d0d0d';
-		}
-		try {
-			var userColorSchemePref = localStorage.getItem("mode");
-			if (userColorSchemePref !== null) {
-				if (userColorSchemePref === 'dark') {
-					setDarkMode();
-				}
-				return;
-			}
-		} catch (e) {}
-		if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
-			setDarkMode();
-		}
-	})();
-	</script>
+
 	{% if page.body_class contains "duckcon7" %}
 	<script src='https://api.mapbox.com/mapbox-gl-js/v3.17.0-beta.1/mapbox-gl.js'></script>
 	{% endif %}
