@@ -19,7 +19,7 @@ extension:
 
 repo:
   github: CogitatorTech/gaggle
-  ref: aaf8bd403ec71632ff2b297ce6a2e23a62b448b2
+  ref: a8d64093515a390da66b961ead8e1bb088baed83
 
 docs:
   hello_world: |
@@ -52,8 +52,8 @@ docs:
 
 extension_star_count: 15
 extension_star_count_pretty: 15
-extension_download_count: 395
-extension_download_count_pretty: 395
+extension_download_count: 294
+extension_download_count_pretty: 294
 image: '/images/community_extensions/social_preview/preview_community_extension_gaggle.png'
 layout: community_extension_doc
 ---
@@ -96,5 +96,26 @@ LOAD {{ page.extension.name }};
 | gaggle_file_path           | scalar        | Resolves a specific file's local path inside a downloaded dataset.                          | Will retrieve (and cache if not downloaded). Set GAGGLE_STRICT_ONDEMAND=1 to prevent fallback to full download. | [select gaggle_file_path('owner/dataset', 'file.parquet');]                 |
 | gaggle_ls                  | table         | Lists files in the dataset's local directory; non-recursive by default.                     | Set recursive=true to walk subdirs. size is in MB. path is relative 'owner/dataset/<path>'.                     | [select * from gaggle_ls('habedi/flickr-8k-dataset-clean') limit 5;]        |
 | gaggle_last_error          | scalar        | NULL                                                                                        | NULL                                                                                                            | NULL                                                                        |
+
+### Overloaded Functions
+
+<div class="extension_functions_table"></div>
+
+| function_name | function_type | description | comment | examples |
+|---------------|---------------|-------------|---------|----------|
+
+### Added Types
+
+<div class="extension_types_table"></div>
+
+| type_name | type_size | logical_type | type_category | internal |
+|-----------|----------:|--------------|---------------|----------|
+
+### Added Settings
+
+<div class="extension_settings_table"></div>
+
+| name | description | input_type | scope | aliases |
+|------|-------------|------------|-------|---------|
 
 
