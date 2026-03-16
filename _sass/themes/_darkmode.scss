@@ -4,6 +4,10 @@ html.disable-transitions * {
 	transition: none !important;
 }
 
+html.darkmode {
+	background-color: #0d0d0d;
+}
+
 html.darkmode ::-moz-selection {
 	background: #333;
 	color: #fff;
