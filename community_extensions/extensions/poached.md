@@ -84,10 +84,10 @@ docs:
 
     For more details, visit the [extension repository](https://github.com/sidequery/poached).
 
-extension_star_count: 8
-extension_star_count_pretty: 8
-extension_download_count: 273
-extension_download_count_pretty: 273
+extension_star_count: 9
+extension_star_count_pretty: 9
+extension_download_count: 590
+extension_download_count_pretty: 590
 image: '/images/community_extensions/social_preview/preview_community_extension_poached.png'
 layout: community_extension_doc
 ---

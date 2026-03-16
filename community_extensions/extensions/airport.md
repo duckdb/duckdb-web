@@ -22,13 +22,14 @@ extension:
     \n  }\n}\n"
   version: '2025101201'
 repo:
+  andium: dc0cf5a12cbe32412e7fedf1b0a07f0e34150473
   github: query-farm/airport
-  ref: 31c249a2e300207159256d3f42bb6064647ea73a
+  ref: f52b27cdbc3759dc6de6d3feb6e0416c960272f1
 
 extension_star_count: 327
 extension_star_count_pretty: 327
-extension_download_count: 881
-extension_download_count_pretty: 881
+extension_download_count: 628
+extension_download_count_pretty: 628
 image: '/images/community_extensions/social_preview/preview_community_extension_airport.png'
 layout: community_extension_doc
 ---
@@ -62,5 +63,26 @@ LOAD {{ page.extension.name }};
 | airport_take_flight | table         | NULL        | NULL    |          |
 | airport_user_agent  | scalar        | NULL        | NULL    |          |
 | airport_version     | scalar        | NULL        | NULL    |          |
+
+### Overloaded Functions
+
+<div class="extension_functions_table"></div>
+
+| function_name | function_type | description | comment | examples |
+|---------------|---------------|-------------|---------|----------|
+
+### Added Types
+
+<div class="extension_types_table"></div>
+
+| type_name | type_size | logical_type | type_category | internal |
+|-----------|----------:|--------------|---------------|----------|
+
+### Added Settings
+
+<div class="extension_settings_table"></div>
+
+| name | description | input_type | scope | aliases |
+|------|-------------|------------|-------|---------|
 
 

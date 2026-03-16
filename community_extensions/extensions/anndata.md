@@ -8,7 +8,7 @@ excerpt: |
 extension:
   name: anndata
   description: Read AnnData (.h5ad) files for single-cell genomics data analysis, with support for local and remote (HTTP/HTTPS/S3) files
-  version: 0.13.3
+  version: 0.14.1
   language: C++
   build: cmake
   license: MIT
@@ -17,7 +17,7 @@ extension:
 
 repo:
   github: honicky/anndata-duckdb-extension
-  ref: e15dd151b1ec85661f93cee146bd27bad8c00caa
+  ref: 7cedb5abdf500434c41156878d706e58912f7406
 
 docs:
   hello_world: |
@@ -90,10 +90,38 @@ docs:
     SELECT * FROM anndata_info('file.h5ad');
     ```
 
+    ## Wildcard Multi-File Queries
+
+    All scan functions support glob patterns to query across multiple files.
+    A `_file_name` column is automatically added to identify the source file.
+
+    ```sql
+    -- Query obs metadata across all .h5ad files in a directory
+    SELECT * FROM anndata_scan_obs('samples/*.h5ad');
+
+    -- Intersection mode (default): only columns shared by all files
+    SELECT * FROM anndata_scan_obs('samples/*.h5ad', schema_mode := 'intersection');
+
+    -- Union mode: all columns, NULL where a file lacks a column
+    SELECT * FROM anndata_scan_obs('samples/*.h5ad', schema_mode := 'union');
+
+    -- Expression data across files (intersection of genes by default)
+    SELECT * FROM anndata_scan_x('samples/*.h5ad');
+
+    -- Union of genes across files
+    SELECT * FROM anndata_scan_x('samples/*.h5ad', schema_mode := 'union');
+
+    -- Works with S3 paths
+    SELECT * FROM anndata_scan_obs('s3://bucket/project/*.h5ad');
+
+    -- Multiple patterns
+    SELECT * FROM anndata_scan_obs(['batch_a/*.h5ad', 'batch_b/*.h5ad']);
+    ```
+
 extension_star_count: 7
 extension_star_count_pretty: 7
-extension_download_count: 396
-extension_download_count_pretty: 396
+extension_download_count: 345
+extension_download_count_pretty: 345
 image: '/images/community_extensions/social_preview/preview_community_extension_anndata.png'
 layout: community_extension_doc
 ---
@@ -119,19 +147,43 @@ LOAD {{ page.extension.name }};
 
 <div class="extension_functions_table"></div>
 
-|    function_name    | function_type |                                                                                              description                                                                                              | comment |                                   examples                                   |
-|---------------------|---------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|---------|------------------------------------------------------------------------------|
-| anndata_info        | table         | Returns metadata and structure information about an AnnData (.h5ad) file, including the number of observations, variables, available layers, embeddings, and other components.                        | NULL    | [SELECT * FROM anndata_info('data.h5ad');]                                   |
-| anndata_scan_obs    | table         | Scans the observation (cell) metadata from an AnnData file. Returns all columns from the obs DataFrame including cell barcodes, cell types, and other annotations.                                    | NULL    | [SELECT * FROM anndata_scan_obs('data.h5ad') LIMIT 5;]                       |
-| anndata_scan_var    | table         | Scans the variable (gene) metadata from an AnnData file. Returns all columns from the var DataFrame including gene IDs, gene names, and other annotations.                                            | NULL    | [SELECT * FROM anndata_scan_var('data.h5ad') LIMIT 5;]                       |
-| anndata_scan_x      | table         | Scans the main expression matrix (X) from an AnnData file. Returns the matrix with observation indices as rows and gene names as columns. Automatically handles both dense and sparse matrix formats. | NULL    | [SELECT obs_idx, CD3D, CD19, CD14 FROM anndata_scan_x('data.h5ad') LIMIT 5;] |
-| anndata_scan_obsm   | table         | Scans observation embeddings (obsm) from an AnnData file. Common embeddings include PCA (X_pca), UMAP (X_umap), and t-SNE (X_tsne).                                                                   | NULL    | [SELECT * FROM anndata_scan_obsm('data.h5ad', 'X_umap') LIMIT 5;]            |
-| anndata_scan_varm   | table         | Scans variable embeddings (varm) from an AnnData file. These are gene-level embeddings such as PCA loadings.                                                                                          | NULL    | [SELECT * FROM anndata_scan_varm('data.h5ad', 'PCs') LIMIT 5;]               |
-| anndata_scan_layers | table         | Scans alternative expression matrices (layers) from an AnnData file. Common layers include raw counts, normalized data, or scaled data.                                                               | NULL    | [SELECT * FROM anndata_scan_layers('data.h5ad', 'raw') LIMIT 5;]             |
-| anndata_scan_obsp   | table         | Scans observation pairwise matrices (obsp) from an AnnData file. These typically contain cell-cell distance or connectivity matrices.                                                                 | NULL    | [SELECT * FROM anndata_scan_obsp('data.h5ad', 'distances') LIMIT 5;]         |
-| anndata_scan_varp   | table         | Scans variable pairwise matrices (varp) from an AnnData file. These contain gene-gene relationship matrices.                                                                                          | NULL    | [SELECT * FROM anndata_scan_varp('data.h5ad', 'correlations') LIMIT 5;]      |
-| anndata_hello       | scalar        | NULL                                                                                                                                                                                                  | NULL    | NULL                                                                         |
-| anndata_version     | scalar        | NULL                                                                                                                                                                                                  | NULL    | NULL                                                                         |
-| anndata_scan_uns    | table         | NULL                                                                                                                                                                                                  | NULL    | NULL                                                                         |
+|     function_name     | function_type |                                                                                              description                                                                                              | comment |                                   examples                                   |
+|-----------------------|---------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|---------|------------------------------------------------------------------------------|
+| anndata_info          | table         | Returns metadata and structure information about an AnnData (.h5ad) file, including the number of observations, variables, available layers, embeddings, and other components.                        | NULL    | [SELECT * FROM anndata_info('data.h5ad');]                                   |
+| anndata_scan_obs      | table         | Scans the observation (cell) metadata from an AnnData file. Returns all columns from the obs DataFrame including cell barcodes, cell types, and other annotations.                                    | NULL    | [SELECT * FROM anndata_scan_obs('data.h5ad') LIMIT 5;]                       |
+| anndata_scan_var      | table         | Scans the variable (gene) metadata from an AnnData file. Returns all columns from the var DataFrame including gene IDs, gene names, and other annotations.                                            | NULL    | [SELECT * FROM anndata_scan_var('data.h5ad') LIMIT 5;]                       |
+| anndata_scan_x        | table         | Scans the main expression matrix (X) from an AnnData file. Returns the matrix with observation indices as rows and gene names as columns. Automatically handles both dense and sparse matrix formats. | NULL    | [SELECT obs_idx, CD3D, CD19, CD14 FROM anndata_scan_x('data.h5ad') LIMIT 5;] |
+| anndata_scan_obsm     | table         | Scans observation embeddings (obsm) from an AnnData file. Common embeddings include PCA (X_pca), UMAP (X_umap), and t-SNE (X_tsne).                                                                   | NULL    | [SELECT * FROM anndata_scan_obsm('data.h5ad', 'X_umap') LIMIT 5;]            |
+| anndata_scan_varm     | table         | Scans variable embeddings (varm) from an AnnData file. These are gene-level embeddings such as PCA loadings.                                                                                          | NULL    | [SELECT * FROM anndata_scan_varm('data.h5ad', 'PCs') LIMIT 5;]               |
+| anndata_scan_layers   | table         | Scans alternative expression matrices (layers) from an AnnData file. Common layers include raw counts, normalized data, or scaled data.                                                               | NULL    | [SELECT * FROM anndata_scan_layers('data.h5ad', 'raw') LIMIT 5;]             |
+| anndata_scan_obsp     | table         | Scans observation pairwise matrices (obsp) from an AnnData file. These typically contain cell-cell distance or connectivity matrices.                                                                 | NULL    | [SELECT * FROM anndata_scan_obsp('data.h5ad', 'distances') LIMIT 5;]         |
+| anndata_scan_varp     | table         | Scans variable pairwise matrices (varp) from an AnnData file. These contain gene-gene relationship matrices.                                                                                          | NULL    | [SELECT * FROM anndata_scan_varp('data.h5ad', 'correlations') LIMIT 5;]      |
+| anndata_hello         | scalar        | NULL                                                                                                                                                                                                  | NULL    | NULL                                                                         |
+| anndata_version       | scalar        | NULL                                                                                                                                                                                                  | NULL    | NULL                                                                         |
+| anndata_scan_raw_var  | table         | NULL                                                                                                                                                                                                  | NULL    | NULL                                                                         |
+| anndata_scan_raw_varm | table         | NULL                                                                                                                                                                                                  | NULL    | NULL                                                                         |
+| anndata_scan_raw_x    | table         | NULL                                                                                                                                                                                                  | NULL    | NULL                                                                         |
+| anndata_scan_uns      | table         | NULL                                                                                                                                                                                                  | NULL    | NULL                                                                         |
+
+### Overloaded Functions
+
+<div class="extension_functions_table"></div>
+
+| function_name | function_type | description | comment | examples |
+|---------------|---------------|-------------|---------|----------|
+
+### Added Types
+
+<div class="extension_types_table"></div>
+
+| type_name | type_size | logical_type | type_category | internal |
+|-----------|----------:|--------------|---------------|----------|
+
+### Added Settings
+
+<div class="extension_settings_table"></div>
+
+| name | description | input_type | scope | aliases |
+|------|-------------|------------|-------|---------|
 
 

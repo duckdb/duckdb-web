@@ -27,8 +27,8 @@ docs:
 
 extension_star_count: 29
 extension_star_count_pretty: 29
-extension_download_count: 598
-extension_download_count_pretty: 598
+extension_download_count: 687
+extension_download_count_pretty: 687
 image: '/images/community_extensions/social_preview/preview_community_extension_capi_quack.png'
 layout: community_extension_doc
 ---

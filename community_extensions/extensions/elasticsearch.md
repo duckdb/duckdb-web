@@ -16,7 +16,7 @@ extension:
     - tlinhart
 repo:
   github: tlinhart/duckdb-elasticsearch
-  ref: a64afda3d7dec3f5f7a294273b515f909833cddc
+  ref: 3e1603f37ae343920257123afdffe26f766512a9
   ref_next: d889b24d551e20b30874aa88eafbb5e7c92d3e90
 docs:
   hello_world: |
@@ -80,8 +80,8 @@ docs:
 
 extension_star_count: 16
 extension_star_count_pretty: 16
-extension_download_count: 587
-extension_download_count_pretty: 587
+extension_download_count: 620
+extension_download_count_pretty: 620
 image: '/images/community_extensions/social_preview/preview_community_extension_elasticsearch.png'
 layout: community_extension_doc
 ---

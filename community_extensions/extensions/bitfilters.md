@@ -23,10 +23,10 @@ repo:
   andium: 1acc412f932a9b88f1504bf76fc0cbdd891b97f3
   ref: 3ee5114aefbda6c97dc90dd10303dd6591fac9d2
 
-extension_star_count: 5
-extension_star_count_pretty: 5
-extension_download_count: 10509
-extension_download_count_pretty: 10.5k
+extension_star_count: 6
+extension_star_count_pretty: 6
+extension_download_count: 1079
+extension_download_count_pretty: 1.1k
 image: '/images/community_extensions/social_preview/preview_community_extension_bitfilters.png'
 layout: community_extension_doc
 ---

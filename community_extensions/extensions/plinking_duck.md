@@ -8,7 +8,7 @@ excerpt: |
 extension:
   name: plinking_duck
   description: Read PLINK 2 genomics file formats and run common genetic analyses directly in SQL
-  version: 0.1.1
+  version: 0.2.0
   language: C++
   build: cmake
   license: MIT
@@ -18,7 +18,7 @@ extension:
 
 repo:
   github: teaguesterling/plinking_duck
-  ref: bd45bb7d43f592f106fd4d514e8644e7ac6f672b
+  ref: 1eb5a09aad740cfc79db3bfb7bc62c78bb76ef25
 
 docs:
   hello_world: |
@@ -29,16 +29,16 @@ docs:
 
     -- Read genotypes in tidy format (one row per variant x sample)
     SELECT chrom, pos, iid, genotype
-    FROM read_pfile('cohort', tidy := true)
+    FROM read_pfile('cohort', orient := 'genotype')
     LIMIT 10;
 
     -- Compute allele frequencies
     SELECT * FROM plink_freq('cohort.pgen')
     WHERE ALT_FREQ > 0.01;
 
-    -- Hardy-Weinberg equilibrium QC filter
-    SELECT * FROM plink_hardy('cohort.pgen')
-    WHERE P_HWE > 1e-6;
+    -- Run a GWAS association test
+    SELECT * FROM plink_glm('cohort')
+    WHERE p_value < 5e-8;
 
   extended_description: |
     PlinkingDuck brings [PLINK 2](https://www.cog-genomics.org/plink/2.0/) genotype,
@@ -49,7 +49,7 @@ docs:
     - `read_pvar(path)` — variant metadata (.pvar/.bim)
     - `read_psam(path)` — sample metadata (.psam/.fam)
     - `read_pgen(path)` — binary genotypes (.pgen)
-    - `read_pfile(prefix)` — unified fileset reader with tidy mode, sample subsetting, region and variant filtering
+    - `read_pfile(prefix)` — unified fileset reader with orient modes (variant/genotype/sample), sample subsetting, region and variant filtering
 
     **Analysis functions:**
     - `plink_freq` — per-variant allele frequencies via fast genotype counting
@@ -57,6 +57,11 @@ docs:
     - `plink_missing` — per-variant or per-sample missingness rates
     - `plink_ld` — pairwise linkage disequilibrium (r², D, D')
     - `plink_score` — polygenic risk scoring with mean imputation
+    - `plink_glm` — per-variant GWAS regression (linear, logistic, Firth)
+
+    **Filter pushdown:**
+    - `af_range` / `ac_range` — filter variants by allele frequency or count
+    - `genotype_range` — filter individual genotype values
 
     All functions support projection pushdown (skip genotype decompression for
     metadata-only queries), parallel scanning, sample subsetting, and region
@@ -67,10 +72,10 @@ docs:
 
     For full documentation, see [plinking-duck.readthedocs.io](https://plinking-duck.readthedocs.io).
 
-extension_star_count: {"message":"Not Found","documentation_url":"https://docs.github.com/rest/repos/repos#get-a-repository","status":"404"}
-extension_star_count_pretty: n/a
-extension_download_count: 348
-extension_download_count_pretty: 348
+extension_star_count: 1
+extension_star_count_pretty: 1
+extension_download_count: 331
+extension_download_count_pretty: 331
 image: '/images/community_extensions/social_preview/preview_community_extension_plinking_duck.png'
 layout: community_extension_doc
 ---
@@ -99,6 +104,7 @@ LOAD {{ page.extension.name }};
 | function_name | function_type | description | comment | examples |
 |---------------|---------------|-------------|---------|----------|
 | plink_freq    | table         | NULL        | NULL    |          |
+| plink_glm     | table         | NULL        | NULL    |          |
 | plink_hardy   | table         | NULL        | NULL    |          |
 | plink_ld      | table         | NULL        | NULL    |          |
 | plink_missing | table         | NULL        | NULL    |          |
@@ -107,5 +113,27 @@ LOAD {{ page.extension.name }};
 | read_pgen     | table         | NULL        | NULL    |          |
 | read_psam     | table         | NULL        | NULL    |          |
 | read_pvar     | table         | NULL        | NULL    |          |
+
+### Overloaded Functions
+
+<div class="extension_functions_table"></div>
+
+| function_name | function_type | description | comment | examples |
+|---------------|---------------|-------------|---------|----------|
+
+### Added Types
+
+<div class="extension_types_table"></div>
+
+| type_name | type_size | logical_type | type_category | internal |
+|-----------|----------:|--------------|---------------|----------|
+
+### Added Settings
+
+<div class="extension_settings_table"></div>
+
+|             name             |                                                         description                                                         | input_type | scope  | aliases |
+|------------------------------|-----------------------------------------------------------------------------------------------------------------------------|------------|--------|---------|
+| plinking_max_matrix_elements | Maximum genotype matrix elements for orient := 'sample' pre-read (variants x samples). Default 16 billion (~16 GB of int8). | BIGINT     | GLOBAL | []      |
 
 
