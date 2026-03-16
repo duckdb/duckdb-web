@@ -489,5 +489,8 @@
         .button {
             margin: 25px 0 0;
         }
+        .button + .button {
+            margin-left: 15px;
+        }
     }
 }
