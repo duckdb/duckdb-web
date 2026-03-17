@@ -8,17 +8,17 @@ excerpt: |
 extension:
   name: pst
   description: Read Microsoft PST files with rich schemas for common MAPI types (emails, contacts, appointments, tasks)
-  version: 0.1.1
+  version: 0.1.2
   language: C++
   build: cmake
-  excluded_platforms: "windows_amd64;windows_amd64_mingw"
+  excluded_platforms: "windows_amd64_mingw"
   license: MIT
   maintainers:
     - mach-kernel
 
 repo:
   github: intellekthq/duckdb-pst
-  ref: v0.1.1
+  ref: v0.1.2
 
 docs:
   hello_world: |
@@ -79,8 +79,8 @@ docs:
 
 extension_star_count: 10
 extension_star_count_pretty: 10
-extension_download_count: 418
-extension_download_count_pretty: 418
+extension_download_count: 319
+extension_download_count_pretty: 319
 image: '/images/community_extensions/social_preview/preview_community_extension_pst.png'
 layout: community_extension_doc
 ---
@@ -116,5 +116,26 @@ LOAD {{ page.extension.name }};
 | read_pst_notes              | table         | NULL        | NULL    |          |
 | read_pst_sticky_notes       | table         | NULL        | NULL    |          |
 | read_pst_tasks              | table         | NULL        | NULL    |          |
+
+### Overloaded Functions
+
+<div class="extension_functions_table"></div>
+
+| function_name | function_type | description | comment | examples |
+|---------------|---------------|-------------|---------|----------|
+
+### Added Types
+
+<div class="extension_types_table"></div>
+
+| type_name | type_size | logical_type | type_category | internal |
+|-----------|----------:|--------------|---------------|----------|
+
+### Added Settings
+
+<div class="extension_settings_table"></div>
+
+| name | description | input_type | scope | aliases |
+|------|-------------|------------|-------|---------|
 
 

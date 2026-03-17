@@ -18,7 +18,7 @@ extension:
 
 repo:
   github: halgari/duckdb-level-pivot
-  ref: fffc3f36aa7e72698efe523070fab3af25340161
+  ref: 005c79629fbb9b6959c183249d3f722b9d300c2f
 
 docs:
   hello_world: |
@@ -61,8 +61,8 @@ docs:
 
 extension_star_count: 0
 extension_star_count_pretty: 0
-extension_download_count: 336
-extension_download_count_pretty: 336
+extension_download_count: 262
+extension_download_count_pretty: 262
 image: '/images/community_extensions/social_preview/preview_community_extension_level_pivot.png'
 layout: community_extension_doc
 ---
@@ -93,5 +93,26 @@ LOAD {{ page.extension.name }};
 | level_pivot_create_table | table         | NULL        | NULL    |          |
 | level_pivot_dirty_tables | table         | NULL        | NULL    |          |
 | level_pivot_drop_table   | table         | NULL        | NULL    |          |
+
+### Overloaded Functions
+
+<div class="extension_functions_table"></div>
+
+| function_name | function_type | description | comment | examples |
+|---------------|---------------|-------------|---------|----------|
+
+### Added Types
+
+<div class="extension_types_table"></div>
+
+| type_name | type_size | logical_type | type_category | internal |
+|-----------|----------:|--------------|---------------|----------|
+
+### Added Settings
+
+<div class="extension_settings_table"></div>
+
+| name | description | input_type | scope | aliases |
+|------|-------------|------------|-------|---------|
 
 
