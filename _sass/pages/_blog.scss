@@ -377,7 +377,7 @@ main.main-everywhere .recentposts .newstileswrap .postpreview{
 		background: var(--doc-codebox-background-color, #F2F2F2);
 		cursor: pointer;
 		position: relative;
-		z-index: 1002;
+		z-index: 502;
 		.icon {
 			width: 16px;
 			height: 16px;
@@ -1052,7 +1052,7 @@ footer{
 			top: calc(100% + 16px);
 			left: 0;
 			right: 0;
-			z-index: 1001;
+			z-index: 503;
 			background: var(--menu-dropdown-background-color, #F2F2F2);
 			border: 1px solid var(--menu-dropdown-border-color, #E6E6E6);
 			border-radius: 15px;
@@ -1092,7 +1092,7 @@ footer{
 			right: 0;
 			bottom: 0;
 			background: rgba(0, 0, 0, 0.4);
-			z-index: 1000;
+			z-index: 501;
 
 			&.is-open {
 				display: block;
