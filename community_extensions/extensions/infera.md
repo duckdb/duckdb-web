@@ -19,7 +19,7 @@ extension:
 
 repo:
   github: CogitatorTech/infera
-  ref: c0d6d058c812bb1ecf1d9ca4d435065301c45897
+  ref: 20da1e4bd70995dc22b54fe7102a7715224298d9
 
 docs:
   hello_world: |
@@ -50,8 +50,8 @@ docs:
 
 extension_star_count: 128
 extension_star_count_pretty: 128
-extension_download_count: 437
-extension_download_count_pretty: 437
+extension_download_count: 294
+extension_download_count_pretty: 294
 image: '/images/community_extensions/social_preview/preview_community_extension_infera.png'
 layout: community_extension_doc
 ---
@@ -92,5 +92,26 @@ LOAD {{ page.extension.name }};
 | infera_get_version        | scalar        | Return a JSON object with version and build information for the Infera extension.                    | NULL                                                                     | [select infera_get_version();]                                               |
 | infera_clear_cache        | scalar        | Clear the entire model cache directory to free up disk space.                                        | Returns true on success.                                                 | [select infera_clear_cache();]                                               |
 | infera_get_cache_info     | scalar        | Return cache statistics: directory path, total size in bytes, file count, and configured size limit. | Returns JSON with cache fields.                                          | [select infera_get_cache_info();]                                            |
+
+### Overloaded Functions
+
+<div class="extension_functions_table"></div>
+
+| function_name | function_type | description | comment | examples |
+|---------------|---------------|-------------|---------|----------|
+
+### Added Types
+
+<div class="extension_types_table"></div>
+
+| type_name | type_size | logical_type | type_category | internal |
+|-----------|----------:|--------------|---------------|----------|
+
+### Added Settings
+
+<div class="extension_settings_table"></div>
+
+| name | description | input_type | scope | aliases |
+|------|-------------|------------|-------|---------|
 
 

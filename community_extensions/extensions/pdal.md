@@ -11,7 +11,7 @@ extension:
   version: 0.4.0
   language: C++
   build: cmake
-  excluded_platforms: "windows_amd64;windows_amd64_mingw;wasm_mvp;wasm_eh;wasm_threads"
+  excluded_platforms: "windows_amd64_mingw;wasm_mvp;wasm_eh;wasm_threads"
   requires_toolchains: "parser_tools"
   license: MIT / Overall PDAL license (BSD) - https://pdal.org/en/latest/copyright.html
   maintainers:
@@ -20,7 +20,7 @@ extension:
 repo:
   github: ahuarte47/duckdb-pdal
   andium: 47d5cfcc23405a32dd5c1ca75e1b2aa87382ede6
-  ref: 73bf2dd8453a11c425c61f9668f8cc3bffd919c3
+  ref: b59f4628ff0bc20a464d66d56b15fa5bd9d71b38
 
 docs:
   hello_world: |
@@ -165,8 +165,8 @@ docs:
 
 extension_star_count: 25
 extension_star_count_pretty: 25
-extension_download_count: 494
-extension_download_count_pretty: 494
+extension_download_count: 589
+extension_download_count_pretty: 589
 image: '/images/community_extensions/social_preview/preview_community_extension_pdal.png'
 layout: community_extension_doc
 ---

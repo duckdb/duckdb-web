@@ -8,7 +8,7 @@ excerpt: |
 extension:
   name: onager
   description: A DuckDB extension for graph data analytics
-  version: 0.1.0-alpha.4
+  version: 0.1.0-alpha.5
   language: Rust & C++
   build: cmake
   license: MIT OR Apache-2.0
@@ -19,7 +19,7 @@ extension:
 
 repo:
   github: CogitatorTech/onager
-  ref: b6c46f7d989002d2b46cdcf392b5bed93f3cbaaf
+  ref: fc00c6420295a9c856149e67ac1077cbdfb6d3e5
 
 docs:
   hello_world: |
@@ -45,10 +45,10 @@ docs:
     For more information, visit the [GitHub repository](https://github.com/CogitatorTech/onager)
     or the [Onager documentation](https://cogitatortech.github.io/onager/).
 
-extension_star_count: 124
-extension_star_count_pretty: 124
-extension_download_count: 406
-extension_download_count_pretty: 406
+extension_star_count: 125
+extension_star_count_pretty: 125
+extension_download_count: 311
+extension_download_count_pretty: 311
 image: '/images/community_extensions/social_preview/preview_community_extension_onager.png'
 layout: community_extension_doc
 ---
@@ -140,5 +140,26 @@ LOAD {{ page.extension.name }};
 | onager_par_triangles             | table         | Parallel triangle count           | Returns: node_id, triangles. Params: (edges)                 | [select * from onager_par_triangles(edges_table);]         |
 | onager_version                   | scalar        | Extension version                 | Returns: varchar. Params: ()                                 | [select onager_version();]                                 |
 | onager_last_error                | scalar        | Last error message                | Returns: varchar. Params: ()                                 | [select onager_last_error();]                              |
+
+### Overloaded Functions
+
+<div class="extension_functions_table"></div>
+
+| function_name | function_type | description | comment | examples |
+|---------------|---------------|-------------|---------|----------|
+
+### Added Types
+
+<div class="extension_types_table"></div>
+
+| type_name | type_size | logical_type | type_category | internal |
+|-----------|----------:|--------------|---------------|----------|
+
+### Added Settings
+
+<div class="extension_settings_table"></div>
+
+| name | description | input_type | scope | aliases |
+|------|-------------|------------|-------|---------|
 
 

@@ -70,8 +70,8 @@ docs:
 
 extension_star_count: 81
 extension_star_count_pretty: 81
-extension_download_count: 2372
-extension_download_count_pretty: 2.4k
+extension_download_count: 2546
+extension_download_count_pretty: 2.5k
 image: '/images/community_extensions/social_preview/preview_community_extension_lance.png'
 layout: community_extension_doc
 ---
@@ -97,31 +97,20 @@ LOAD {{ page.extension.name }};
 
 <div class="extension_functions_table"></div>
 
-|        function_name        | function_type | description | comment | examples |
-|-----------------------------|---------------|-------------|---------|----------|
-| __lance_exec                | table         | NULL        | NULL    |          |
-| __lance_namespace_scan      | table         | NULL        | NULL    |          |
-| __lance_scan                | table         | NULL        | NULL    |          |
-| __lance_truncate_table      | table         | NULL        | NULL    |          |
-| lance_cleanup_old_versions  | table         | NULL        | NULL    |          |
-| lance_column_metadata       | table         | NULL        | NULL    |          |
-| lance_compact_files         | table         | NULL        | NULL    |          |
-| lance_config                | table         | NULL        | NULL    |          |
-| lance_create_scalar_index   | table         | NULL        | NULL    |          |
-| lance_fts                   | table         | NULL        | NULL    |          |
-| lance_hybrid_search         | table         | NULL        | NULL    |          |
-| lance_indices               | table         | NULL        | NULL    |          |
-| lance_schema_metadata       | table         | NULL        | NULL    |          |
-| lance_set_column_metadata   | table         | NULL        | NULL    |          |
-| lance_set_config            | table         | NULL        | NULL    |          |
-| lance_set_schema_metadata   | table         | NULL        | NULL    |          |
-| lance_set_table_metadata    | table         | NULL        | NULL    |          |
-| lance_table_metadata        | table         | NULL        | NULL    |          |
-| lance_unset_column_metadata | table         | NULL        | NULL    |          |
-| lance_unset_config          | table         | NULL        | NULL    |          |
-| lance_unset_schema_metadata | table         | NULL        | NULL    |          |
-| lance_unset_table_metadata  | table         | NULL        | NULL    |          |
-| lance_vector_search         | table         | NULL        | NULL    |          |
+|        function_name         | function_type | description | comment | examples |
+|------------------------------|---------------|-------------|---------|----------|
+| __lance_cleanup_old_versions | table         | NULL        | NULL    |          |
+| __lance_compact_files        | table         | NULL        | NULL    |          |
+| __lance_exec                 | table         | NULL        | NULL    |          |
+| __lance_namespace_scan       | table         | NULL        | NULL    |          |
+| __lance_optimize_index       | table         | NULL        | NULL    |          |
+| __lance_scan                 | table         | NULL        | NULL    |          |
+| __lance_set_auto_cleanup     | table         | NULL        | NULL    |          |
+| __lance_show_auto_cleanup    | table         | NULL        | NULL    |          |
+| __lance_truncate_table       | table         | NULL        | NULL    |          |
+| lance_fts                    | table         | NULL        | NULL    |          |
+| lance_hybrid_search          | table         | NULL        | NULL    |          |
+| lance_vector_search          | table         | NULL        | NULL    |          |
 
 ### Overloaded Functions
 
