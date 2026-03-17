@@ -29,8 +29,8 @@ docs:
     repository [here](https://github.com/gropaul/dash).
 extension_star_count: 39
 extension_star_count_pretty: 39
-extension_download_count: 746
-extension_download_count_pretty: 746
+extension_download_count: 716
+extension_download_count_pretty: 716
 image: '/images/community_extensions/social_preview/preview_community_extension_dash.png'
 layout: community_extension_doc
 ---
