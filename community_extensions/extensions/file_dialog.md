@@ -19,7 +19,7 @@ extension:
 
 repo:
   github: yutannihilation/duckdb-ext-file-dialog
-  ref: e0bb5d1c6ce1f152e66819c29a05c7006e8449eb
+  ref: 9c5e1f0eb777b1383d07ee9e47c67ed2dc9a3097
 
 docs:
   hello_world: |
@@ -33,8 +33,8 @@ docs:
 
 extension_star_count: 15
 extension_star_count_pretty: 15
-extension_download_count: 423
-extension_download_count_pretty: 423
+extension_download_count: 722
+extension_download_count_pretty: 722
 image: '/images/community_extensions/social_preview/preview_community_extension_file_dialog.png'
 layout: community_extension_doc
 ---
@@ -63,5 +63,26 @@ LOAD {{ page.extension.name }};
 | function_name | function_type |             description              | comment |            examples             |
 |---------------|---------------|--------------------------------------|---------|---------------------------------|
 | choose_file   | scalar        | Choose a file via native file dialog | NULL    | [FROM read_csv(choose_file());] |
+
+### Overloaded Functions
+
+<div class="extension_functions_table"></div>
+
+| function_name | function_type | description | comment | examples |
+|---------------|---------------|-------------|---------|----------|
+
+### Added Types
+
+<div class="extension_types_table"></div>
+
+| type_name | type_size | logical_type | type_category | internal |
+|-----------|----------:|--------------|---------------|----------|
+
+### Added Settings
+
+<div class="extension_settings_table"></div>
+
+| name | description | input_type | scope | aliases |
+|------|-------------|------------|-------|---------|
 
 

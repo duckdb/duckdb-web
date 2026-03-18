@@ -19,7 +19,7 @@ extension:
 
 repo:
   github: yutannihilation/duckdb-ext-st-read-multi
-  ref: 589716ea1c517acf8df45d723e728a16bed17752
+  ref: 78ab0dd03b1b4cd3715950ce51f7f47ad85a124c
 
 docs:
   hello_world: |
@@ -31,8 +31,8 @@ docs:
 
 extension_star_count: 10
 extension_star_count_pretty: 10
-extension_download_count: 411
-extension_download_count_pretty: 411
+extension_download_count: 723
+extension_download_count_pretty: 723
 image: '/images/community_extensions/social_preview/preview_community_extension_st_read_multi.png'
 layout: community_extension_doc
 ---
@@ -61,5 +61,26 @@ LOAD {{ page.extension.name }};
 | function_name | function_type |                                            description                                            | comment |                  examples                  |
 |---------------|---------------|---------------------------------------------------------------------------------------------------|---------|--------------------------------------------|
 | st_read_multi | table         | Read multiple geospatial files. Currently, only GeoJSON, GeoPackage, and Shapefile are supported. | NULL    | [FROM ST_Read_Multi('path/to/*.geojson');] |
+
+### Overloaded Functions
+
+<div class="extension_functions_table"></div>
+
+| function_name | function_type | description | comment | examples |
+|---------------|---------------|-------------|---------|----------|
+
+### Added Types
+
+<div class="extension_types_table"></div>
+
+| type_name | type_size | logical_type | type_category | internal |
+|-----------|----------:|--------------|---------------|----------|
+
+### Added Settings
+
+<div class="extension_settings_table"></div>
+
+| name | description | input_type | scope | aliases |
+|------|-------------|------------|-------|---------|
 
 

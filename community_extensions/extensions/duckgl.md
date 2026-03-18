@@ -37,10 +37,10 @@ docs:
     - GeoJSON layer rendering from spatial tables
     - SQL query execution from browser UI
 
-extension_star_count: 4
-extension_star_count_pretty: 4
-extension_download_count: 476
-extension_download_count_pretty: 476
+extension_star_count: 5
+extension_star_count_pretty: 5
+extension_download_count: 526
+extension_download_count_pretty: 526
 image: '/images/community_extensions/social_preview/preview_community_extension_duckgl.png'
 layout: community_extension_doc
 ---
