@@ -26,10 +26,13 @@ See [Build Configuration]({% link docs/current/dev/building/build_configuration.
 ```bash
 make
 make release # same as plain make
+make relassert
 make debug
 GEN=ninja make # for use with Ninja
 BUILD_BENCHMARK=1 make # build with benchmarks
 ```
+
+> `debug` buids use a lot of disk space – make sure you have at least 25 GB available.
 
 ## Platforms
 
