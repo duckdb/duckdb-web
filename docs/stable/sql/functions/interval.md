@@ -16,7 +16,7 @@ The table below shows the available mathematical operators for `INTERVAL` types.
 | Operator | Description | Example | Result |
 |:-|:--|:----|:--|
 | `+` | Addition of an `INTERVAL` | `INTERVAL 1 HOUR + INTERVAL 5 HOUR` | `INTERVAL 6 HOUR` |
-| `+` | Addition to a `DATE` | `DATE '1992-03-22' + INTERVAL 5 DAY` | `1992-03-27` |
+| `+` | Addition to a `DATE` | `DATE '1992-03-22' + INTERVAL 5 DAY` | `1992-03-27 00:00:00` |
 | `+` | Addition to a `TIMESTAMP` | `TIMESTAMP '1992-03-22 01:02:03' + INTERVAL 5 DAY` | `1992-03-27 01:02:03` |
 | `+` | Addition to a `TIME` | `TIME '01:02:03' + INTERVAL 5 HOUR` | `06:02:03` |
 | `-` | Subtraction of an `INTERVAL` | `INTERVAL 5 HOUR - INTERVAL 1 HOUR` | `INTERVAL 4 HOUR` |
