@@ -11,7 +11,7 @@ To demonstrate the problem, create a `test.sql` file:
 echo "SELECT 42 AS x;" > test.sql
 ```
 
-Piping the file to the DuckDB CLI client does not run the script:
+Piping the file to the DuckDB 1.5.0 CLI client does not run the script:
 
 ```bash
 $ duckdb < test.sql
