@@ -17,7 +17,12 @@ CREATE TABLE people (id INTEGER, name VARCHAR, salary FLOAT);
 INSERT INTO people VALUES (1, 'John', 92_000.0), (2, 'Anna', 100_000.0);
 ```
 
-The simplest upsert would be updating or inserting a whole row.
+The simplest upsert would be to use a whole row in the `USING` clause.
+This way, if there is a match,
+the row can be updated to the new row without further instuctions
+(`WHEN MATCHED THEN UPDATE`), and when there is no match,
+the row can be trivially inserted into the table
+(`WHEN NOT MATCHED THEN INSERT`).
 
 ```sql
 MERGE INTO people
