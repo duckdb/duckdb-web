@@ -33,6 +33,9 @@ scripts/lint.sh
 # Auto-fix lint issues
 scripts/lint.sh -f
 
+# Run black manually (always use --skip-string-normalization)
+black --skip-string-normalization <file>
+
 # Run DuckDB queries (use the CLI, not Python)
 duckdb -c "SELECT 42"
 
