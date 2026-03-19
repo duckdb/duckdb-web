@@ -29,7 +29,60 @@ Therefore, its use is not recommended.
 
 ## RISC-V Architectures
 
-The user [“LivingLinux” on Bluesky](https://bsky.app/profile/livinglinux.bsky.social) managed to [build DuckDB](https://bsky.app/profile/livinglinux.bsky.social/post/3lak5q7mmg42j) for a [RISC-V](https://en.wikipedia.org/wiki/RISC-V) profile and [published a video about it](https://www.youtube.com/watch?v=G6uVDH3kvNQ). The instructions to build DuckDB, including the `fts` extension, are the following:
+### Native Build (Recommended)
+
+DuckDB builds natively on RISC-V 64-bit boards without any special flags. Tested on a [BananaPi F3](https://wiki.banana-pi.org/Banana_Pi_BPI-F3) ([SpacemiT K1](https://www.spacemit.com/key-stone-k1), rv64gc, 8 cores @ 1.6 GHz, 16 GB RAM) running Debian Trixie:
+
+```bash
+sudo apt-get update
+sudo apt-get install -y git g++ cmake ninja-build
+git clone --depth=1 https://github.com/duckdb/duckdb
+cd duckdb
+mkdir build && cd build
+cmake .. -DCMAKE_BUILD_TYPE=Release
+make -j$(nproc)
+```
+
+Build time is approximately 2 hours on an 8-core SpacemiT K1. The resulting binary works out of the box:
+
+```bash
+./duckdb -c “SELECT 'Hello from RISC-V' AS message;”
+```
+
+```text
+┌───────────────────┐
+│      message      │
+│      varchar      │
+├───────────────────┤
+│ Hello from RISC-V │
+└───────────────────┘
+```
+
+Aggregation queries work as expected:
+
+```bash
+./duckdb -c “CREATE TABLE test AS SELECT range AS id, range * 3.14 AS value FROM range(1000);
+SELECT count(*) AS cnt, round(avg(value), 2) AS avg_val FROM test;”
+```
+
+```text
+┌───────┬─────────┐
+│  cnt  │ avg_val │
+│ int64 │ double  │
+├───────┼─────────┤
+│  1000 │ 1568.43 │
+└───────┴─────────┘
+```
+
+The DuckDB Python package also builds successfully from source on riscv64:
+
+```bash
+pip install duckdb --no-binary duckdb
+```
+
+### Build with RVV (RISC-V Vector Extension)
+
+On boards with [RVV 1.0](https://github.com/riscvarchive/riscv-v-spec) support (e.g., [SpacemiT K3](https://www.spacemit.com/key-stone-k3) with vlen 256), you can enable vector instructions for better performance. The user [“LivingLinux” on Bluesky](https://bsky.app/profile/livinglinux.bsky.social) [built DuckDB](https://bsky.app/profile/livinglinux.bsky.social/post/3lak5q7mmg42j) with RVV and [published a video about it](https://www.youtube.com/watch?v=G6uVDH3kvNQ):
 
 ```bash
 GEN=ninja \
@@ -39,7 +92,9 @@ GEN=ninja \
     make
 ```
 
-For those who do not have a RISC-V chip development environment, you can cross-compile DuckDB using the latest [g++-riscv64-linux-gnu](https://github.com/riscv-collab/riscv-gnu-toolchain) :
+### Cross-Compilation
+
+For those who do not have RISC-V hardware, you can cross-compile DuckDB using the [riscv-gnu-toolchain](https://github.com/riscv-collab/riscv-gnu-toolchain):
 
 ```bash
 GEN=ninja \
@@ -48,4 +103,4 @@ GEN=ninja \
     make
 ```
 
-For more reference information on DuckDB RISC-V cross-compiling, see the [mocusez/duckdb-riscv-ci](https://github.com/mocusez/duckdb-riscv-ci) and [DuckDB Pull Request #16549](https://github.com/duckdb/duckdb/pull/16549)
+For more reference information on DuckDB RISC-V cross-compiling, see the [mocusez/duckdb-riscv-ci](https://github.com/mocusez/duckdb-riscv-ci) and [DuckDB Pull Request #16549](https://github.com/duckdb/duckdb/pull/16549).
