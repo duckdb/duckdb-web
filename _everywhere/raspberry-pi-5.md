@@ -1,6 +1,7 @@
 ---
 layout: post
 title: "Raspberry Pi 5"
+date: 2025-01-17
 author: "Gábor Szárnyas"
 thumb: "/images/everywhere/thumbs/raspberry-pi-5.jpg"
 image: "/images/everywhere/thumbs/raspberry-pi-5.jpg"

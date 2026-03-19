@@ -1,6 +1,7 @@
 ---
 layout: post
 title: "DuckLake on Hetzner"
+date: 2026-03-07
 author: "berndsen-io"
 thumb: "/images/everywhere/thumbs/hetzner.jpg"
 image: "/images/everywhere/thumbs/hetzner.jpg"

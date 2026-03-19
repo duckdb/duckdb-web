@@ -1,6 +1,7 @@
 ---
 layout: post
 title: "MOREFINE M700S"
+date: 2026-01-06
 author: "Hannes Mühleisen"
 thumb: "/images/everywhere/thumbs/morefine-m700s.jpg"
 image: "/images/everywhere/thumbs/morefine-m700s.jpg"

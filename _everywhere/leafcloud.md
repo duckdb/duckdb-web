@@ -1,6 +1,7 @@
 ---
 layout: post
 title: "DuckLake on Leafcloud"
+date: 2026-03-07
 author: "Gábor Szárnyas"
 thumb: "/images/everywhere/thumbs/leafcloud.jpg"
 image: "/images/everywhere/thumbs/leafcloud.jpg"

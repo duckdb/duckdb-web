@@ -1,6 +1,7 @@
 ---
 layout: post
 title: "iPhone 17 Pro"
+date: 2025-12-18
 author: "Gábor Szárnyas"
 thumb: "/images/everywhere/thumbs/iphone-17-pro.jpg"
 image: "/images/everywhere/thumbs/iphone-17-pro.jpg"
