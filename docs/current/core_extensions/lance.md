@@ -22,7 +22,7 @@ LOAD lance;
 - [Full SQL reference](https://github.com/lance-format/lance-duckdb/blob/main/docs/sql.md)
 - [Cloud storage reference](https://github.com/lance-format/lance-duckdb/blob/main/docs/cloud.md)
 
-### Query a Lance dataset
+### Query a Lance Dataset
 
 Local file:
 
@@ -54,7 +54,7 @@ FROM 's3://bucket/path/to/dataset.lance'
 LIMIT 10;
 ```
 
-### Write a Lance dataset
+### Write a Lance Dataset
 
 Use the [`COPY ... TO ...` statement]({% link docs/current/sql/statements/copy.md %}#copy--to) to materialize query results as a Lance dataset.
 
@@ -105,7 +105,7 @@ TO 's3://⟨bucket/path/to/out.lance⟩'
 (FORMAT lance, MODE 'overwrite');
 ```
 
-### Create a Lance dataset via `CREATE TABLE` (directory namespace)
+### Create a Lance Dataset via `CREATE TABLE` (Directory Namespace)
 
 When you `ATTACH` a directory as a Lance namespace, you can create new datasets using `CREATE TABLE` (schema-only)
 or `CREATE TABLE AS SELECT` (CTAS). The dataset is written to `⟨namespace_root⟩/⟨table_name⟩.lance`{:.language-sql .highlight}.
@@ -125,7 +125,7 @@ CREATE TABLE lance_ns.main.my_dataset AS
 SELECT count(*) FROM lance_ns.main.my_dataset;
 ```
 
-### Vector search
+### Vector Search
 
 ```sql
 -- Search a vector column, returning distances in `_distance` (smaller is closer)
@@ -141,7 +141,7 @@ ORDER BY _distance ASC;
 
 See the [SQL reference for full parameter documentation](https://github.com/lance-format/lance-duckdb/blob/main/docs/sql.md#search).
 
-### Full-text search (FTS)
+### Full-Text Search (FTS)
 
 ```sql
 -- Search a text column, returning BM25-like scores in `_score`
@@ -158,7 +158,7 @@ ORDER BY _score DESC;
 
 See the [SQL reference for full parameter documentation](https://github.com/lance-format/lance-duckdb/blob/main/docs/sql.md#search).
 
-### Hybrid search (vector + FTS)
+### Hybrid Search (Vector + FTS)
 
 ```sql
 -- Combine vector and text scores, returning `_hybrid_score` in addition to `_distance` / `_score`
