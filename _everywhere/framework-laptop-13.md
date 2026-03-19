@@ -1,6 +1,7 @@
 ---
 layout: post
 title: "Framework Laptop 13"
+date: 2025-09-08
 author: "Gábor Szárnyas"
 thumb: "/images/everywhere/thumbs/framework-laptop-13.jpg"
 image: "/images/everywhere/thumbs/framework-laptop-13.jpg"

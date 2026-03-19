@@ -1,6 +1,7 @@
 ---
 layout: post
 title: "Asus Chromebook CM3001DM2"
+date: 2026-03-02
 author: "Ladislav Dvorak"
 thumb: "/images/everywhere/thumbs/asus-chromebook.jpg"
 image: "/images/everywhere/thumbs/asus-chromebook.jpg"

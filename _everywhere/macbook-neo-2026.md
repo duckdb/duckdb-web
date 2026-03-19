@@ -1,6 +1,7 @@
 ---
 layout: post
 title: "MacBook Neo (2026)"
+date: 2026-03-11
 author: "Gábor Szárnyas"
 thumb: "/images/everywhere/thumbs/macbook-neo-2026.jpg"
 image: "/images/everywhere/thumbs/macbook-neo-2026.jpg"

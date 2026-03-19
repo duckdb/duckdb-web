@@ -1,6 +1,7 @@
 ---
 layout: post
 title: "MacBook Pro M1 Max (2021)"
+date: 2025-10-09
 author: "Gábor Szárnyas"
 thumb: "/images/everywhere/thumbs/macbook-pro-14.jpg"
 image: "/images/everywhere/thumbs/macbook-pro-14.jpg"

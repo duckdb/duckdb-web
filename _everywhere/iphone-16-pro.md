@@ -1,6 +1,7 @@
 ---
 layout: post
 title: "iPhone 16 Pro Max"
+date: 2024-12-06
 author: "Hannes Mühleisen"
 thumb: "/images/everywhere/thumbs/iphone-16-pro.jpg"
 image: "/images/everywhere/thumbs/iphone-16-pro.jpg"

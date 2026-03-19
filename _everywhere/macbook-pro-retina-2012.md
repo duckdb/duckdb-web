@@ -1,6 +1,7 @@
 ---
 layout: post
 title: "MacBook Pro Retina (2012)"
+date: 2025-05-19
 author: "Hannes Mühleisen"
 thumb: "/images/everywhere/thumbs/macbook-pro-retina-2012.jpg"
 image: "/images/everywhere/thumbs/macbook-pro-retina-2012.jpg"

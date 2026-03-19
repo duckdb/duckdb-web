@@ -1,6 +1,7 @@
 ---
 layout: post
 title: "Microsoft Surface Laptop"
+date: 2025-12-09
 author: "Gábor Szárnyas"
 thumb: "/images/everywhere/thumbs/microsoft-surface-laptop-15.jpg"
 image: "/images/everywhere/thumbs/microsoft-surface-laptop-15.jpg"

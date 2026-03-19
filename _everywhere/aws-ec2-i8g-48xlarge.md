@@ -1,6 +1,7 @@
 ---
 layout: post
 title: "AWS EC2 i8x.48xlarge"
+date: 2025-10-09
 author: "Gábor Szárnyas"
 thumb: "/images/everywhere/thumbs/aws-ec2-i8g-48xlarge.jpg"
 image: "/images/everywhere/thumbs/aws-ec2-i8g-48xlarge.jpg"
