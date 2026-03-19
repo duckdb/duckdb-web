@@ -83,6 +83,8 @@ This returns:
 
 <div class="monospace_table"></div>
 
+<!-- markdownlint-disable MD034 -->
+
 | claim_name | claim_value                      |
 | ---------- | -------------------------------- |
 | iss        | https://idp.local                |
@@ -92,6 +94,8 @@ This returns:
 | admin      | true                             |
 | exp        | 1766591267                       |
 | iat        | 1766590967                       |
+
+<!-- markdownlint-enable MD034 -->
 
 ## How DuckDB.ExtensionKit Works
 
@@ -117,7 +121,7 @@ DuckDB.ExtensionKit, just like the C extension template, is currently experiment
 
 The toolkit relies on .NET Native AOT, which means extensions need to be built for specific target platforms (for example, `linux-x64`, `osx-arm64`, or `win-x64`). As with other native extensions, binaries are platform-specific and need to be built accordingly.
 
-## Build Your Own Extension in C#
+## Build Your Own Extension in C\#
 
 [DuckDB.ExtensionKit](https://github.com/Giorgi/DuckDB.ExtensionKit) is available as an open-source project on GitHub under the MIT license. The project includes example extensions that demonstrate how to define and build DuckDB extensions in C#. The repository contains a JWT-based example extension that showcases both scalar functions and table functions, as well as the full build and publishing workflow using .NET Native AOT.
 
