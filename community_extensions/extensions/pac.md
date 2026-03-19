@@ -8,7 +8,7 @@ excerpt: |
 extension:
   name: pac
   description: Automatic query privatization using the PAC Privacy framework
-  version: 0.1.0
+  version: 0.2.0
   language: C++
   build: cmake
   license: AGPL-3.0
@@ -17,55 +17,60 @@ extension:
 
 repo:
   github: cwida/pac
-  ref: 058e57f5cc36fc18d24252f362f162fdd89b235d
+  ref: 597f6d0cffb70ec85e1752c04c6b7abafb43a583
 
 docs:
   hello_world: |
-    -- Declare a privacy unit table with protected columns
-    CREATE PU TABLE employees (
-        id INTEGER, department VARCHAR, salary DECIMAL(10,2),
-        PAC_KEY (id),
-        PROTECTED (salary)
-    );
+    -- Generate TPC-H benchmark data
+    INSTALL tpch;
+    LOAD tpch;
+    CALL dbgen(sf=1);
 
-    INSERT INTO employees VALUES
-        (1, 'Engineering', 95000), (2, 'Engineering', 110000),
-        (3, 'Sales', 80000),      (4, 'Sales', 72000),
-        (5, 'Marketing', 85000),  (6, 'Marketing', 90000);
+    -- Mark customer as the privacy unit
+    ALTER TABLE customer ADD PAC_KEY (c_custkey);
+    ALTER TABLE customer SET PU;
 
-    -- Aggregates on protected columns are automatically noised
-    SELECT department, AVG(salary)::INTEGER AS avg_salary, COUNT(*) AS headcount
-    FROM employees GROUP BY department;
-    -- ┌─────────────┬────────────┬───────────┐
-    -- │ department  │ avg_salary │ headcount │
-    -- │   varchar   │   int32    │   int64   │
-    -- ├─────────────┼────────────┼───────────┤
-    -- │ Marketing   │      95601 │        15 │
-    -- │ Engineering │     109039 │        16 │
-    -- │ Sales       │      81145 │        17 │
-    -- └─────────────┴────────────┴───────────┘
+    -- Protect sensitive customer columns
+    ALTER PU TABLE customer ADD PROTECTED (c_custkey);
+    ALTER PU TABLE customer ADD PROTECTED (c_name);
+    ALTER PU TABLE customer ADD PROTECTED (c_address);
+    ALTER PU TABLE customer ADD PROTECTED (c_acctbal);
+
+    -- Define join chain: lineitem -> orders -> customer
+    ALTER TABLE orders ADD PAC_LINK (o_custkey) REFERENCES customer(c_custkey);
+    ALTER TABLE lineitem ADD PAC_LINK (l_orderkey) REFERENCES orders(o_orderkey);
+
+    -- Aggregates on linked tables are automatically noised
+    SELECT l_returnflag, l_linestatus, SUM(l_extendedprice)
+    FROM lineitem GROUP BY ALL;
 
   extended_description: |
-    PAC (Privacy-preserving Automatic Queries) is a DuckDB extension that
-    transparently adds noise to aggregate query results to protect against
-    Membership Inference Attacks. Unlike Differential Privacy, PAC requires
-    no per-query privacy analysis — just declare which columns are protected
-    and queries are privatized automatically.
-
-    **Key Features**:
-    - `CREATE PU TABLE` syntax to declare privacy units and protected columns
-    - `PAC_LINK` for privacy propagation through join chains
-    - Supports COUNT, SUM, AVG, MIN, MAX, COUNT(DISTINCT)
-    - Tunable privacy-utility tradeoff via `pac_mi` parameter
+    PAC (Probably Approximately Correct) is a DuckDB extension that automatically
+    privatizes SQL queries, protecting against Membership Inference Attacks by adding
+    calibrated noise to aggregate results. Unlike Differential Privacy, PAC works
+    transparently — no per-query privacy analysis by a specialist is needed.
 
     **How It Works**:
-    1. Mark tables with `CREATE PU TABLE`, specifying a `PAC_KEY` (privacy unit) and `PROTECTED` columns
+    1. Declare a **privacy unit** table with `CREATE PU TABLE` or `ALTER TABLE SET PU`,
+       specifying a `PAC_KEY` (unique identifier) and `PROTECTED` columns
     2. Protected columns cannot be projected directly — they can only appear inside aggregates
-    3. The extension automatically injects calibrated noise into aggregate results
-    4. Join chains propagate privacy constraints via `PAC_LINK` foreign key declarations
+    3. The extension **automatically rewrites** query plans to inject calibrated noise
+    4. Join chains propagate privacy via `PAC_LINK` foreign key declarations
 
-    **Configuration Settings**:
-    - `pac_mi`: Mutual information bound controlling the privacy-utility tradeoff (default: `1/128`)
+    **Supported Aggregates**: `SUM`, `COUNT`, `AVG`, `MIN`, `MAX`, `COUNT(DISTINCT)`
+
+    **Key Settings**:
+    - `pac_mi` — Mutual information bound controlling the privacy-utility tradeoff (default: `1/128`).
+      Lower values = more noise = more privacy. Set to `0` for deterministic (no noise) mode.
+    - `pac_seed` — RNG seed for reproducible noised results
+
+    **Privacy Propagation**: PAC automatically follows foreign key chains declared
+    with `PAC_LINK` to find the privacy unit. For example, querying `lineitem` with
+    a link chain `lineitem -> orders -> customer` will automatically join back to
+    `customer` to hash the privacy unit key, without any changes to your query.
+
+    **More information**: See the [PAC repository](https://github.com/cwida/pac) for
+    full documentation, examples, and benchmarks.
 
     **Requirements**:
     - DuckDB 1.5.0+
@@ -99,41 +104,41 @@ LOAD {{ page.extension.name }};
 
 <div class="extension_functions_table"></div>
 
-|   function_name    | function_type | description | comment | examples |
-|--------------------|---------------|-------------|---------|----------|
-| clear_pac_metadata | pragma        | NULL        | NULL    |          |
-| load_pac_metadata  | pragma        | NULL        | NULL    |          |
-| pac_avg            | aggregate     | NULL        | NULL    |          |
-| pac_coalesce       | scalar        | NULL        | NULL    |          |
-| pac_count          | aggregate     | NULL        | NULL    |          |
-| pac_div            | scalar        | NULL        | NULL    |          |
-| pac_filter         | scalar        | NULL        | NULL    |          |
-| pac_filter_eq      | scalar        | NULL        | NULL    |          |
-| pac_filter_gt      | scalar        | NULL        | NULL    |          |
-| pac_filter_gte     | scalar        | NULL        | NULL    |          |
-| pac_filter_lt      | scalar        | NULL        | NULL    |          |
-| pac_filter_lte     | scalar        | NULL        | NULL    |          |
-| pac_filter_neq     | scalar        | NULL        | NULL    |          |
-| pac_hash           | scalar        | NULL        | NULL    |          |
-| pac_max            | aggregate     | NULL        | NULL    |          |
-| pac_mean           | scalar        | NULL        | NULL    |          |
-| pac_min            | aggregate     | NULL        | NULL    |          |
-| pac_noised         | scalar        | NULL        | NULL    |          |
-| pac_noised_avg     | aggregate     | NULL        | NULL    |          |
-| pac_noised_count   | aggregate     | NULL        | NULL    |          |
-| pac_noised_div     | scalar        | NULL        | NULL    |          |
-| pac_noised_max     | aggregate     | NULL        | NULL    |          |
-| pac_noised_min     | aggregate     | NULL        | NULL    |          |
-| pac_noised_sum     | aggregate     | NULL        | NULL    |          |
-| pac_select         | scalar        | NULL        | NULL    |          |
-| pac_select_eq      | scalar        | NULL        | NULL    |          |
-| pac_select_gt      | scalar        | NULL        | NULL    |          |
-| pac_select_gte     | scalar        | NULL        | NULL    |          |
-| pac_select_lt      | scalar        | NULL        | NULL    |          |
-| pac_select_lte     | scalar        | NULL        | NULL    |          |
-| pac_select_neq     | scalar        | NULL        | NULL    |          |
-| pac_sum            | aggregate     | NULL        | NULL    |          |
-| save_pac_metadata  | pragma        | NULL        | NULL    |          |
+|   function_name    | function_type |                                       description                                        | comment |                                                    examples                                                     |
+|--------------------|---------------|------------------------------------------------------------------------------------------|---------|-----------------------------------------------------------------------------------------------------------------|
+| clear_pac_metadata | pragma        | NULL                                                                                     | NULL    |                                                                                                                 |
+| load_pac_metadata  | pragma        | NULL                                                                                     | NULL    |                                                                                                                 |
+| pac_avg            | aggregate     | [INTERNAL] Returns 64 PAC subsample counters as LIST for categorical queries.            | NULL    |                                                                                                                 |
+| pac_coalesce       | scalar        | [INTERNAL] Replaces NULL counter list with 64 zeros.                                     | NULL    |                                                                                                                 |
+| pac_count          | aggregate     | [INTERNAL] Returns 64 PAC subsample counters as LIST for categorical queries.            | NULL    |                                                                                                                 |
+| pac_div            | scalar        | [INTERNAL] Element-wise division of two counter lists.                                   | NULL    |                                                                                                                 |
+| pac_filter         | scalar        | [INTERNAL] Probabilistic filter from boolean list for categorical queries.               | NULL    |                                                                                                                 |
+| pac_filter_eq      | scalar        | [INTERNAL] Categorical comparison + probabilistic filter for PAC queries.                | NULL    |                                                                                                                 |
+| pac_filter_gt      | scalar        | [INTERNAL] Categorical comparison + probabilistic filter for PAC queries.                | NULL    |                                                                                                                 |
+| pac_filter_gte     | scalar        | [INTERNAL] Categorical comparison + probabilistic filter for PAC queries.                | NULL    |                                                                                                                 |
+| pac_filter_lt      | scalar        | [INTERNAL] Categorical comparison + probabilistic filter for PAC queries.                | NULL    |                                                                                                                 |
+| pac_filter_lte     | scalar        | [INTERNAL] Categorical comparison + probabilistic filter for PAC queries.                | NULL    |                                                                                                                 |
+| pac_filter_neq     | scalar        | [INTERNAL] Categorical comparison + probabilistic filter for PAC queries.                | NULL    |                                                                                                                 |
+| pac_hash           | scalar        | [INTERNAL] Hashes a privacy unit key for PAC subsample assignment.                       | NULL    |                                                                                                                 |
+| pac_max            | aggregate     | [INTERNAL] Returns 64 PAC subsample counters as LIST for categorical queries.            | NULL    |                                                                                                                 |
+| pac_mean           | scalar        | [INTERNAL] Computes the mean of 64 PAC subsample counters (true aggregate before noise). | NULL    |                                                                                                                 |
+| pac_min            | aggregate     | [INTERNAL] Returns 64 PAC subsample counters as LIST for categorical queries.            | NULL    |                                                                                                                 |
+| pac_noised         | scalar        | [INTERNAL] Applies PAC noise to 64-element counter list, returns scalar.                 | NULL    |                                                                                                                 |
+| pac_noised_avg     | aggregate     | Privacy-preserving AVG. Automatically injected by PAC for protected columns.             | NULL    | [SELECT c_mktsegment, pac_noised_avg(pac_hash(hash(c_custkey)), c_acctbal) FROM customer GROUP BY c_mktsegment] |
+| pac_noised_count   | aggregate     | Privacy-preserving COUNT. Automatically injected by PAC for protected columns.           | NULL    | [SELECT c_mktsegment, pac_noised_count(pac_hash(hash(c_custkey))) FROM customer GROUP BY c_mktsegment]          |
+| pac_noised_div     | scalar        | [INTERNAL] Fused counter-list division + noise for AVG.                                  | NULL    |                                                                                                                 |
+| pac_noised_max     | aggregate     | Privacy-preserving MAX. Automatically injected by PAC for protected columns.             | NULL    | [SELECT c_mktsegment, pac_noised_max(pac_hash(hash(c_custkey)), c_acctbal) FROM customer GROUP BY c_mktsegment] |
+| pac_noised_min     | aggregate     | Privacy-preserving MIN. Automatically injected by PAC for protected columns.             | NULL    | [SELECT c_mktsegment, pac_noised_min(pac_hash(hash(c_custkey)), c_acctbal) FROM customer GROUP BY c_mktsegment] |
+| pac_noised_sum     | aggregate     | Privacy-preserving SUM. Automatically injected by PAC for protected columns.             | NULL    | [SELECT c_mktsegment, pac_noised_sum(pac_hash(hash(c_custkey)), c_acctbal) FROM customer GROUP BY c_mktsegment] |
+| pac_select         | scalar        | [INTERNAL] Combines boolean mask with hash for categorical PAC queries.                  | NULL    |                                                                                                                 |
+| pac_select_eq      | scalar        | [INTERNAL] Categorical comparison + mask application for PAC queries.                    | NULL    |                                                                                                                 |
+| pac_select_gt      | scalar        | [INTERNAL] Categorical comparison + mask application for PAC queries.                    | NULL    |                                                                                                                 |
+| pac_select_gte     | scalar        | [INTERNAL] Categorical comparison + mask application for PAC queries.                    | NULL    |                                                                                                                 |
+| pac_select_lt      | scalar        | [INTERNAL] Categorical comparison + mask application for PAC queries.                    | NULL    |                                                                                                                 |
+| pac_select_lte     | scalar        | [INTERNAL] Categorical comparison + mask application for PAC queries.                    | NULL    |                                                                                                                 |
+| pac_select_neq     | scalar        | [INTERNAL] Categorical comparison + mask application for PAC queries.                    | NULL    |                                                                                                                 |
+| pac_sum            | aggregate     | [INTERNAL] Returns 64 PAC subsample counters as LIST for categorical queries.            | NULL    |                                                                                                                 |
+| save_pac_metadata  | pragma        | NULL                                                                                     | NULL    |                                                                                                                 |
 
 ### Overloaded Functions
 
@@ -153,23 +158,25 @@ LOAD {{ page.extension.name }};
 
 <div class="extension_settings_table"></div>
 
-|         name          |                                description                                | input_type | scope  | aliases |
-|-----------------------|---------------------------------------------------------------------------|------------|--------|---------|
-| enforce_m_values      | enforce per-sample arrays length equals pac_m                             | BOOLEAN    | GLOBAL | []      |
-| pac_categorical       | enable categorical query rewrites                                         | BOOLEAN    | GLOBAL | []      |
-| pac_compiled_path     | path to write compiled PAC artifacts                                      | VARCHAR    | GLOBAL | []      |
-| pac_conservative_mode | throw errors for unsupported operators (when false, skip PAC compilation) | BOOLEAN    | GLOBAL | []      |
-| pac_correction        | correction factor for PAC aggregates                                      | DOUBLE     | GLOBAL | []      |
-| pac_diffcols          | key columns and optional output path for utility diff                     | VARCHAR    | GLOBAL | []      |
-| pac_hash_repair       | pac_hash() repairs hash to exactly 32 bits set                            | BOOLEAN    | GLOBAL | []      |
-| pac_join_elimination  | eliminate final join to PU table                                          | BOOLEAN    | GLOBAL | []      |
-| pac_m                 | number of per-sample subsets (m)                                          | INTEGER    | GLOBAL | []      |
-| pac_mi                | mutual information parameter for PAC aggregates                           | DOUBLE     | GLOBAL | []      |
-| pac_noise             | apply PAC noise                                                           | BOOLEAN    | GLOBAL | []      |
-| pac_ptracking         | enable persistent secret p-tracking for query-level MIA                   | BOOLEAN    | GLOBAL | []      |
-| pac_pushdown_topk     | apply top-k before noise instead of after                                 | BOOLEAN    | GLOBAL | []      |
-| pac_seed              | deterministic RNG seed for PAC functions                                  | BIGINT     | GLOBAL | []      |
-| pac_select            | use pac_select for categorical filters below pac aggregates               | BOOLEAN    | GLOBAL | []      |
-| pac_topk_expansion    | expansion factor for top-k superset (1 = no expansion)                    | DOUBLE     | GLOBAL | []      |
+|         name          |                                                                              description                                                                              | input_type | scope  | aliases |
+|-----------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------|------------|--------|---------|
+| enforce_m_values      | [INTERNAL] Enforce per-sample array length equals pac_m                                                                                                               | BOOLEAN    | GLOBAL | []      |
+| pac_categorical       | [INTERNAL] Enable categorical query rewrites                                                                                                                          | BOOLEAN    | GLOBAL | []      |
+| pac_check             | [INTERNAL] Enforce protected column access restrictions                                                                                                               | BOOLEAN    | GLOBAL | []      |
+| pac_compiled_path     | [INTERNAL] Path to write compiled PAC artifacts                                                                                                                       | VARCHAR    | GLOBAL | []      |
+| pac_conservative_mode | [INTERNAL] Throw errors for unsupported operators (when false, skip PAC compilation)                                                                                  | BOOLEAN    | GLOBAL | []      |
+| pac_correction        | Correction factor multiplied into aggregate results (default: 1.0)                                                                                                    | DOUBLE     | GLOBAL | []      |
+| pac_diffcols          | Measure utility: specify number of key columns and optional output path (e.g. '2:out.csv')                                                                            | VARCHAR    | GLOBAL | []      |
+| pac_hash_repair       | [INTERNAL] pac_hash() repairs hash to exactly 32 bits set                                                                                                             | BOOLEAN    | GLOBAL | []      |
+| pac_join_elimination  | [INTERNAL] Eliminate final join to PU table                                                                                                                           | BOOLEAN    | GLOBAL | []      |
+| pac_m                 | [INTERNAL] Number of per-sample subsets                                                                                                                               | INTEGER    | GLOBAL | []      |
+| pac_mi                | Mutual information bound controlling privacy-utility tradeoff (default: 1/128). Lower values = more noise = more privacy. Set to 0 for deterministic (no noise) mode. | DOUBLE     | GLOBAL | []      |
+| pac_noise             | Enable/disable PAC noise application (set to false for debugging)                                                                                                     | BOOLEAN    | GLOBAL | []      |
+| pac_ptracking         | [INTERNAL] Enable persistent secret p-tracking for query-level MIA                                                                                                    | BOOLEAN    | GLOBAL | []      |
+| pac_pushdown_topk     | [INTERNAL] Apply top-k before noise instead of after                                                                                                                  | BOOLEAN    | GLOBAL | []      |
+| pac_rewrite           | [INTERNAL] Enable PAC query plan rewriting                                                                                                                            | BOOLEAN    | GLOBAL | []      |
+| pac_seed              | RNG seed for reproducible noised results                                                                                                                              | BIGINT     | GLOBAL | []      |
+| pac_select            | [INTERNAL] Use pac_select for categorical filters below pac aggregates                                                                                                | BOOLEAN    | GLOBAL | []      |
+| pac_topk_expansion    | [INTERNAL] Expansion factor for top-k superset (1 = no expansion)                                                                                                     | DOUBLE     | GLOBAL | []      |
 
 
