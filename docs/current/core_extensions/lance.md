@@ -170,3 +170,12 @@ FROM lance_hybrid_search('path/to/dataset.lance',
                          alpha = 0.5, oversample_factor = 4)
 ORDER BY _hybrid_score DESC;
 ```
+
+## Limitations
+
+The `lance` extension is currently available for the following [platforms]({% link docs/stable/dev/building/overview.md %}#supported-platforms):
+
+* `linux_amd64`
+* `linux_arm64`
+* `osx_arm64`
+* `windows_amd64`
