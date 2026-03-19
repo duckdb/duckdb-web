@@ -15,8 +15,11 @@ DuckDB runs natively on the BananaPi F3, a $100 RISC-V single-board computer pow
 The build takes approximately 2 hours with `make -j8`, and the resulting binary passes SQL queries — from simple selects to aggregations over generated datasets.
 
 ```sql
-D SELECT count(*) AS cnt, round(avg(value), 2) AS avg_val
-  FROM (SELECT range * 3.14 AS value FROM range(1000));
+SELECT count(*) AS cnt, round(avg(value), 2) AS avg_val
+FROM (SELECT range * 3.14 AS value FROM range(1000));
+```
+
+```text
 ┌───────┬─────────┐
 │  cnt  │ avg_val │
 │ int64 │ double  │
