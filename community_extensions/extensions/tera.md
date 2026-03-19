@@ -25,8 +25,8 @@ repo:
 
 extension_star_count: 8
 extension_star_count_pretty: 8
-extension_download_count: 704
-extension_download_count_pretty: 704
+extension_download_count: 740
+extension_download_count_pretty: 740
 image: '/images/community_extensions/social_preview/preview_community_extension_tera.png'
 layout: community_extension_doc
 ---
