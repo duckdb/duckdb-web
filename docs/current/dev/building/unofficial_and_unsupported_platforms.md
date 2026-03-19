@@ -46,16 +46,32 @@ make -j$(nproc)
 Build time is approximately 2 hours on an 8-core SpacemiT K1. The resulting binary works out of the box:
 
 ```bash
-./duckdb -c “SELECT 'Hello from RISC-V!' AS message;”
+./duckdb -c “SELECT 'Hello from RISC-V' AS message;”
 ```
 
 ```text
-┌─────────────────────┐
-│       message       │
-│       varchar       │
-├─────────────────────┤
-│ Hello from RISC-V!  │
-└─────────────────────┘
+┌───────────────────┐
+│      message      │
+│      varchar      │
+├───────────────────┤
+│ Hello from RISC-V │
+└───────────────────┘
+```
+
+Aggregation queries work as expected:
+
+```bash
+./duckdb -c “CREATE TABLE test AS SELECT range AS id, range * 3.14 AS value FROM range(1000);
+SELECT count(*) AS cnt, round(avg(value), 2) AS avg_val FROM test;”
+```
+
+```text
+┌───────┬─────────┐
+│  cnt  │ avg_val │
+│ int64 │ double  │
+├───────┼─────────┤
+│  1000 │ 1568.43 │
+└───────┴─────────┘
 ```
 
 The DuckDB Python package also builds successfully from source on riscv64:
