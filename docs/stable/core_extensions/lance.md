@@ -1,7 +1,7 @@
 ---
 github_repository: https://github.com/lance-format/lance-duckdb
 layout: docu
-title: Lance extension
+title: Lance Extension
 ---
 
 Support for the Lance file format is *coming soon* as a core extension.

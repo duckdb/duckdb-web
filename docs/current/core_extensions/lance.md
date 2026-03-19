@@ -3,7 +3,7 @@ github_repository: https://github.com/lance-format/lance-duckdb
 layout: docu
 redirect_from:
 - /docs/preview/core_extensions/lance
-title: Lance extension
+title: Lance Extension
 ---
 
 The `lance` extension adds support for reading and writing Lance tables. [Lance](https://github.com/lance-format/lance/) is a modern columnar data format optimized for ML/AI workloads, with native cloud storage support.
