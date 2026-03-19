@@ -45,8 +45,8 @@ docs:
     For more information, visit the [GitHub repository](https://github.com/CogitatorTech/onager)
     or the [Onager documentation](https://cogitatortech.github.io/onager/).
 
-extension_star_count: 125
-extension_star_count_pretty: 125
+extension_star_count: 126
+extension_star_count_pretty: 126
 extension_download_count: 419
 extension_download_count_pretty: 419
 image: '/images/community_extensions/social_preview/preview_community_extension_onager.png'
