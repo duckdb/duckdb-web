@@ -39,8 +39,8 @@ docs:
 
 extension_star_count: 5
 extension_star_count_pretty: 5
-extension_download_count: 526
-extension_download_count_pretty: 526
+extension_download_count: 560
+extension_download_count_pretty: 560
 image: '/images/community_extensions/social_preview/preview_community_extension_duckgl.png'
 layout: community_extension_doc
 ---
