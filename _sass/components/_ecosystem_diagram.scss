@@ -184,8 +184,8 @@
   }
 
   &.selected {
-    background: var(--interactive-installation-icon-background-selected, #d4ccff);
-    border-color: var(--interactive-installation-box-border, #beb3ff);
+    background: var(--interactive-installation-box-background, #E9E5FF);
+    border-color: var(--interactive-installation-box-border, #BEB3FF);
   }
 }
 
