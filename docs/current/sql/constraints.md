@@ -97,7 +97,7 @@ Constraint Error:
 NOT NULL constraint failed: students.id
 ```
 
-> Warning Indexes have certain limitations that might result in constraints being evaluated too eagerly, leading to constraint errors such as `violates primary key constraint` and `violates unique constraint`. See the [indexes section for more details]({% link docs/current/sql/indexes.md %}#index-limitations).
+> Warning Indexes have certain limitations that might result in constraints being evaluated too eagerly, leading to constraint errors such as `violates primary key constraint` and `violates unique constraint`. See the [Indexes page]({% link docs/current/sql/indexes.md %}#limitations-of-art-indexes) for more details.
 
 You can also define a uniqueness constraint on multiple columns:
 
