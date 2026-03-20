@@ -93,7 +93,7 @@ Then, you can use that result in a subsequent `INSERT ...` statement, or potenti
 This limitation occurs if you meet the following conditions:
 
 * A table has a `FOREIGN KEY` constraint.
-* There is an `UPDATE` on the corresponding `PRIMARY KEY` table, which DuckDB rewrites into a `DELETE` followed by an `INSERT`.
+* There is an `UPDATE` on a composite payload column (e.g., a `LIST` or a `STRUCT`), the corresponding `PRIMARY KEY` table, which DuckDB rewrites into a `DELETE` followed by an `INSERT`.
 * The to-be-deleted row exists in the foreign key table.
 
 If these hold, you'll encounter an unexpected constraint violation:
