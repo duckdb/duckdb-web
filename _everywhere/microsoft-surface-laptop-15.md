@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Microsoft Surface Laptop"
+title: "Microsoft Surface Laptop (arm64)"
 date: 2025-12-09
 author: "Gábor Szárnyas"
 thumb: "/images/everywhere/thumbs/microsoft-surface-laptop-15.jpg"
