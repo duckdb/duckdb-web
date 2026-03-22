@@ -5,16 +5,16 @@ redirect_from:
 title: MotherDuck Extension
 ---
 
-The `motherduck` (`md`) extension allows connecting to [MotherDuck](https://motherduck.com/), a cloud data warehouse built on DuckDB.
+The `motherduck` extension allows connecting to [MotherDuck](https://motherduck.com/), a cloud data warehouse built on DuckDB.
 
 ## Installing and Loading
 
 The `motherduck` extension will be transparently [autoinstalled and autoloaded]({% link docs/current/core_extensions/overview.md %}#autoloading-extensions) on first use from the official extension repository.
-If you would like to install and load it manually, run:
+If you would like to install and load it manually, you can use the `motherduck` extension name or the `md` shorthand:
 
 ```sql
-INSTALL motherduck;
-LOAD motherduck;
+INSTALL md;
+LOAD md;
 ```
 
 ## Usage

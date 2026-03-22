@@ -278,6 +278,11 @@
       if (!wasSelected) {
         icon.classList.add("selected");
       }
+
+      var href = icon.getAttribute("href");
+      if (href) {
+        window.location.href = href;
+      }
     });
   });
 
