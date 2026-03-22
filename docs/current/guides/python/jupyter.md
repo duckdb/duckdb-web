@@ -144,7 +144,7 @@ The dataframe being queried can be specified just like any other table in the `F
 ```sql
 %sql output_df << SELECT sum(i) AS total_i FROM input_df;
 ```
-> Warning When using the SQLAlchemy connection, and DuckDB >= 1.1.0, make sure to run `%sql SET python_scan_all_frames=true`, to make Pandas dataframes queryable. 
+> Warning When using the SQLAlchemy connection, make sure to run `%sql SET python_scan_all_frames=true`, to make Pandas dataframes queryable.
 
 ## Visualizing DuckDB Data
 

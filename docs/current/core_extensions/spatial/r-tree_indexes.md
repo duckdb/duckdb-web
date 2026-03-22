@@ -5,7 +5,7 @@ redirect_from:
 title: R-Tree Indexes
 ---
 
-As of DuckDB v1.1.0 the [`spatial` extension]({% link docs/current/core_extensions/spatial/overview.md %}) provides basic support for spatial indexing through the R-tree extension index type.
+The [`spatial` extension]({% link docs/current/core_extensions/spatial/overview.md %}) provides support for spatial indexing through the R-tree extension index type.
 
 ## Why Should I Use an R-Tree Index?
 

@@ -19,8 +19,6 @@ To connect to a DuckDB database via HTTPS, use the [`ATTACH` statement]({% link 
 ATTACH 'https://blobs.duckdb.org/databases/stations.duckdb' AS stations_db;
 ```
 
-> Since DuckDB version 1.1, the `ATTACH` statement creates a read-only connection to HTTP endpoints.
-> In prior versions, it is necessary to use the `READ_ONLY` flag.
 
 Then, the database can be queried using:
 
@@ -42,8 +40,6 @@ Then, use the [`ATTACH` statement]({% link docs/current/sql/statements/attach.md
 ATTACH 'https://blobs.duckdb.org/databases/stations.duckdb' AS stations_db;
 ```
 
-> Since DuckDB version 1.1, the `ATTACH` statement creates a read-only connection to HTTP endpoints.
-> In prior versions, it is necessary to use the `READ_ONLY` flag.
 
 The database can be queried using:
 
