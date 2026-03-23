@@ -6,7 +6,7 @@ redirect_from:
 title: ODBC Extension
 ---
 
-The ODBC extension allows connecting to other databases (using their [ODBC drivers](https://en.wikipedia.org/wiki/Open_Database_Connectivity)) and run queries with [odbc_query](functions#odbc_query) or copy data from DuckDB with [odbc_copy](functions#odbc_copy) functions.
+The ODBC extension allows connecting to other databases (using their [ODBC drivers](https://en.wikipedia.org/wiki/Open_Database_Connectivity)) and run queries with the [`odbc_query`](functions#odbc_query) or copy data from DuckDB with the [`odbc_copy`](functions#odbc_copy) functions.
 
 ## Installing and loading
 
