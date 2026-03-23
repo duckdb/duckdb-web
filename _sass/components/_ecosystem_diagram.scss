@@ -151,7 +151,7 @@
   max-width: calc(4 * 54.8px + 3 * 7.6px);
 }
 
-/* Icon Buttons */
+/* Icon Links */
 
 .ecosystem-icon {
   width: 54.8px;
@@ -168,6 +168,8 @@
   position: relative;
   transition: background 0.2s, border-color 0.2s;
   z-index: 10;
+  text-decoration: none;
+  color: inherit;
 
   svg {
     width: 45px;
