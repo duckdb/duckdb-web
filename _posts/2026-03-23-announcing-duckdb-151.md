@@ -4,7 +4,7 @@ title: "Announcing DuckDB 1.5.1"
 author: "The DuckDB team"
 thumb: "/images/blog/thumbs/duckdb-release-1-5-1.svg"
 image: "/images/blog/thumbs/duckdb-release-1-5-1.png"
-excerpt: "We are releasing DuckDB version 1.5.1, a patch release with bugfixes, performance improvements and support for the Lance format."
+excerpt: "We are releasing DuckDB version 1.5.1, a patch release with bugfixes, performance improvements and support for the Lance lakehouse format."
 tags: ["release"]
 ---
 
@@ -17,7 +17,7 @@ To install the new version, please visit the [installation page]({% link install
 
 ### Lance Support
 
-Thanks to the collaboration with LanceDB, DuckDB now supports reading and writing the [Lance format](https://github.com/lance-format/lance/) through the [`lance` core extension]({% link docs/current/core_extensions/lance.md %}).
+Thanks to the collaboration with LanceDB, DuckDB now supports reading and writing the [Lance lakehouse format](https://github.com/lance-format/lance/) through the [`lance` core extension]({% link docs/current/core_extensions/lance.md %}).
 
 ```sql
 INSTALL lance;
