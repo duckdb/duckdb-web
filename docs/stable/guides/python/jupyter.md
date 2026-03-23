@@ -74,7 +74,7 @@ conn = duckdb.connect()
 
 ### Connecting to DuckDB via SQLAlchemy
 
-Alternatively, you can connect to DuckDB via SQLAlchemy using `duckdb_engine`. See the [performance and feature differences](https://jupysql.ploomber.io/en/latest/tutorials/duckdb-native-sqlalchemy.html).
+Alternatively, you can connect to DuckDB via SQLAlchemy using `duckdb_engine`. See the [performance and feature differences](https://jupysql.readthedocs.io/en/latest/tutorials/duckdb-native-sqlalchemy.html).
 
 ```python
 import duckdb
