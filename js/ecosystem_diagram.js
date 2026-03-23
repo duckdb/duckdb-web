@@ -38,8 +38,9 @@
     leftTop: document.getElementById("eco-base-left-top"),
     leftBottom: document.getElementById("eco-base-left-bottom"),
     right: document.getElementById("eco-base-right"),
+    rightBottom: document.getElementById("eco-base-right-bottom"),
   };
-  var basePathArray = [basePaths.leftTop, basePaths.leftBottom, basePaths.right];
+  var basePathArray = [basePaths.leftTop, basePaths.leftBottom, basePaths.right, basePaths.rightBottom];
 
   /* --- State --- */
 
@@ -119,10 +120,12 @@
     var cL = rel(getEdgeXY("eco-box-clients", "left"));
     var cR = rel(getEdgeXY("eco-box-clients", "right"));
     var f = rel(getEdgeXY("eco-box-formats", "left"));
+    var ex = rel(getEdgeXY("eco-box-exchange", "left"));
 
     basePaths.leftTop.setAttribute("d", createRoundedOrthoPath(s.x, s.y, cL.x, cL.y - 15));
     basePaths.leftBottom.setAttribute("d", createRoundedOrthoPath(d.x, d.y, cL.x, cL.y + 15));
-    basePaths.right.setAttribute("d", createRoundedOrthoPath(cR.x, cR.y, f.x, f.y));
+    basePaths.right.setAttribute("d", createRoundedOrthoPath(cR.x, cR.y - 15, f.x, f.y));
+    basePaths.rightBottom.setAttribute("d", createRoundedOrthoPath(cR.x, cR.y + 15, ex.x, ex.y));
   }
 
   /* --- Pulse canvas --- */
