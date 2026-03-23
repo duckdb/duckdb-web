@@ -5,7 +5,7 @@
   flex-direction: column;
   align-items: center;
   gap: 50px;
-  padding: 105px 30px;
+  padding: 105px 0px;
   position: relative;
   overflow: clip;
 }
@@ -59,12 +59,14 @@
 }
 
 .ecosystem-col--center {
-  margin: 0 70px;
+  //margin: 0 70px;
+  margin: 0 115px;
 }
 
 .ecosystem-col--right {
   display: flex;
   flex-direction: column;
+  gap: 40px;
 }
 
 /* Boxes */
@@ -149,7 +151,7 @@
   max-width: calc(4 * 54.8px + 3 * 7.6px);
 }
 
-/* Icon Buttons */
+/* Icon Links */
 
 .ecosystem-icon {
   width: 54.8px;
@@ -166,6 +168,8 @@
   position: relative;
   transition: background 0.2s, border-color 0.2s;
   z-index: 10;
+  text-decoration: none;
+  color: inherit;
 
   svg {
     width: 45px;
@@ -215,7 +219,7 @@
   background: var(--doc-codebox-background-color-secondary, #EDEDED);
   border-radius: 10px;
   padding: 23px 9px;
-  margin-top: 32px;
+  margin-top: 16px;
   overflow: clip;
 
   span {
@@ -260,6 +264,12 @@
 }
 
 /* Responsive */
+
+@media only screen and (max-width: 1200px) {
+  .ecosystem-col--center {
+    margin: 0 70px;
+  }
+}
 
 @media only screen and (max-width: 1100px) {
   .ecosystem-diagram {

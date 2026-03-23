@@ -16,8 +16,7 @@ This is a practical, step-by-step guide to using DuckDB’s `MERGE` statement (i
 
 ## Prerequisites
 
-- DuckDB ≥ 1.4.0
-- Basic SQL knowledge
+* Basic SQL knowledge
 
 ## Key Terminology
 
