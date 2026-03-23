@@ -8,6 +8,8 @@ tags: ["Paper"]
 category: community
 excerpt: ""
 pill: "VLDB 2025"
+redirect_from:
+- /science/parachute
 ---
 
 [Paper (PDF)](https://www.vldb.org/pvldb/vol18/p3299-stoian.pdf)
