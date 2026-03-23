@@ -25,10 +25,10 @@ docs:
   extended_description: |
     The celestial extension provides functions for working with astronomical coordinates.
 
-extension_star_count: 0
-extension_star_count_pretty: 0
-extension_download_count: 360
-extension_download_count_pretty: 360
+extension_star_count: 1
+extension_star_count_pretty: 1
+extension_download_count: 618
+extension_download_count_pretty: 618
 image: '/images/community_extensions/social_preview/preview_community_extension_celestial.png'
 layout: community_extension_doc
 ---

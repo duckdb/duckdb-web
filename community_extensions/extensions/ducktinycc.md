@@ -116,10 +116,10 @@ docs:
 
     Community package excludes WASM and Windows targets.
 
-extension_star_count: 0
-extension_star_count_pretty: 0
-extension_download_count: 702
-extension_download_count_pretty: 702
+extension_star_count: 1
+extension_star_count_pretty: 1
+extension_download_count: 786
+extension_download_count_pretty: 786
 image: '/images/community_extensions/social_preview/preview_community_extension_ducktinycc.png'
 layout: community_extension_doc
 ---

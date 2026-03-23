@@ -51,10 +51,10 @@ repo:
   andium: 2d31ccebd7f44babc901c84ba0fe8b560647e136
   ref: fb1ec32f91a21b1bfc200646cb01bcf47c6e6eb7
 
-extension_star_count: 11
-extension_star_count_pretty: 11
-extension_download_count: 833
-extension_download_count_pretty: 833
+extension_star_count: 12
+extension_star_count_pretty: 12
+extension_download_count: 1010
+extension_download_count_pretty: 1.0k
 image: '/images/community_extensions/social_preview/preview_community_extension_quickjs.png'
 layout: community_extension_doc
 ---

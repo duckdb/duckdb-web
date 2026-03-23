@@ -8,7 +8,7 @@ excerpt: |
 extension:
   name: rate_limit_fs
   description: Perform rate and burst limit on filesystem operations
-  version: 0.0.3
+  version: 0.0.4
   language: C++
   build: cmake
   license: MIT
@@ -19,7 +19,7 @@ extension:
 repo:
   github: dentiny/duckdb-rate-limit-filesystem
   andium: 2d70a9f86b5d31fd6104980d5bfd47db82fcd020
-  ref: e9e220869fca1a8ed621ea892751d71ee77df479
+  ref: b1811bcab919a95007748095f84d8b0188e03def
 
 docs:
   hello_world: |
@@ -34,8 +34,8 @@ docs:
 
 extension_star_count: 1
 extension_star_count_pretty: 1
-extension_download_count: 692
-extension_download_count_pretty: 692
+extension_download_count: 793
+extension_download_count_pretty: 793
 image: '/images/community_extensions/social_preview/preview_community_extension_rate_limit_fs.png'
 layout: community_extension_doc
 ---
@@ -67,6 +67,7 @@ LOAD {{ page.extension.name }};
 | rate_limit_fs_clear            | scalar        | NULL        | NULL    |          |
 | rate_limit_fs_configs          | table         | NULL        | NULL    |          |
 | rate_limit_fs_list_filesystems | table         | NULL        | NULL    |          |
+| rate_limit_fs_max_requests     | scalar        | NULL        | NULL    |          |
 | rate_limit_fs_quota            | scalar        | NULL        | NULL    |          |
 | rate_limit_fs_wrap             | scalar        | NULL        | NULL    |          |
 

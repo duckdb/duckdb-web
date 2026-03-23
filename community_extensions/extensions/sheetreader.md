@@ -8,17 +8,18 @@ excerpt: |
 extension:
   name: sheetreader
   description: Fast XLSX file importer
-  version: 0.1.0
+  version: 0.2.0
   language: C++
   build: cmake
   excluded_platforms: "windows_amd64_rtools;windows_amd64_mingw"
   license: MIT
   maintainers:
+    - harrygav
     - freddie-freeloader
 
 repo:
   github: polydbms/sheetreader-duckdb
-  ref: 887013792794aaac8bffd040fcb2439dd797ad53
+  ref: e2b9366c4c409f012a6a31191e629c96628e17e6
 
 docs:
   hello_world: |
@@ -55,8 +56,7 @@ docs:
     | `force_types` | Use `types` even if they are not compatible with types determined by first/second row. <br> Cells, that are not of the column type, are set to `NULL` or coerced to string, if option is set. | `BOOLEAN` | `false` |
 
     #### More Information
-
-    SheetReader was published in the [Information Systems Journal](https://www.sciencedirect.com/science/article/abs/pii/S0306437923000194)
+    SheetReader was introduced in the **PolyDB research project** ([polydbms.org](https://polydbms.org)). The initial design and evaluation was published in the [Information Systems Journal](https://www.sciencedirect.com/science/article/abs/pii/S0306437923000194). If you use this extension in your research, consider citing the following paper:
 
     ```bibtex
     @article{DBLP:journals/is/GavriilidisHZM23,
@@ -77,10 +77,10 @@ docs:
     }
     ```
 
-extension_star_count: 53
-extension_star_count_pretty: 53
-extension_download_count: 502
-extension_download_count_pretty: 502
+extension_star_count: 56
+extension_star_count_pretty: 56
+extension_download_count: 141
+extension_download_count_pretty: 141
 image: '/images/community_extensions/social_preview/preview_community_extension_sheetreader.png'
 layout: community_extension_doc
 ---
@@ -108,6 +108,27 @@ LOAD {{ page.extension.name }};
 
 | function_name | function_type | description | comment | examples |
 |---------------|---------------|-------------|---------|----------|
-| sheetreader   | table         | NULL        | NULL    | []       |
+| sheetreader   | table         | NULL        | NULL    |          |
+
+### Overloaded Functions
+
+<div class="extension_functions_table"></div>
+
+| function_name | function_type | description | comment | examples |
+|---------------|---------------|-------------|---------|----------|
+
+### Added Types
+
+<div class="extension_types_table"></div>
+
+| type_name | type_size | logical_type | type_category | internal |
+|-----------|----------:|--------------|---------------|----------|
+
+### Added Settings
+
+<div class="extension_settings_table"></div>
+
+| name | description | input_type | scope | aliases |
+|------|-------------|------------|-------|---------|
 
 

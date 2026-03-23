@@ -68,8 +68,8 @@ docs:
 
 extension_star_count: 5
 extension_star_count_pretty: 5
-extension_download_count: 707
-extension_download_count_pretty: 707
+extension_download_count: 810
+extension_download_count_pretty: 810
 image: '/images/community_extensions/social_preview/preview_community_extension_duckhts.png'
 layout: community_extension_doc
 ---

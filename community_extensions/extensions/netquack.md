@@ -30,8 +30,8 @@ docs:
 
 extension_star_count: 37
 extension_star_count_pretty: 37
-extension_download_count: 12149
-extension_download_count_pretty: 12.1k
+extension_download_count: 22214
+extension_download_count_pretty: 22.2k
 image: '/images/community_extensions/social_preview/preview_community_extension_netquack.png'
 layout: community_extension_doc
 ---

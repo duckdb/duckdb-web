@@ -22,10 +22,10 @@ repo:
   andium: 3f9906c71e7883e0f2ee8696d9e8648750bdb76b
   ref: 9ef24770f13ad50006f0ed922ca497daaece20dc
 
-extension_star_count: 59
-extension_star_count_pretty: 59
-extension_download_count: 2896
-extension_download_count_pretty: 2.9k
+extension_star_count: 60
+extension_star_count_pretty: 60
+extension_download_count: 2985
+extension_download_count_pretty: 3.0k
 image: '/images/community_extensions/social_preview/preview_community_extension_lindel.png'
 layout: community_extension_doc
 ---
