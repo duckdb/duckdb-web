@@ -5,7 +5,7 @@
   flex-direction: column;
   align-items: center;
   gap: 50px;
-  padding: 105px 30px;
+  padding: 105px 0px;
   position: relative;
   overflow: clip;
 }
@@ -59,7 +59,8 @@
 }
 
 .ecosystem-col--center {
-  margin: 0 70px;
+  //margin: 0 70px;
+  margin: 0 115px;
 }
 
 .ecosystem-col--right {
@@ -216,7 +217,7 @@
   background: var(--doc-codebox-background-color-secondary, #EDEDED);
   border-radius: 10px;
   padding: 23px 9px;
-  margin-top: 32px;
+  margin-top: 16px;
   overflow: clip;
 
   span {
