@@ -14,7 +14,7 @@ echo "SELECT 42 AS x;" > test.sql
 Piping the file to the DuckDB 1.5.0 CLI client does not run the script:
 
 ```bash
-$ duckdb < test.sql
+duckdb < test.sql
 # does not run the script
 ```
 
@@ -23,6 +23,7 @@ To work around this, add `| cat` to the end of the call:
 ```bash
 duckdb < test.sql | cat
 ```
+
 ```text
 ┌───────┐
 │   x   │
@@ -37,6 +38,7 @@ If you are piping from a file, you can also use the [`-f` argument]({% link docs
 ```bash
 duckdb -f test.sql
 ```
+
 ```text
 ┌───────┐
 │   x   │

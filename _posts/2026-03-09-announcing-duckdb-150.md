@@ -15,7 +15,7 @@ In this blog post, we cover the most important updates for this release around s
 > To install the new version, please visit the [installation page]({% link install/index.html %}). Note that it can take a few days to release some extensions (e.g., the [UI]({% link docs/current/core_extensions/ui.md %})) client libraries (e.g., Go, R, Java) due to the extra changes and review rounds required.
 
 With this release, we will have two DuckDB releases available: v1.4 (LTS) and v1.5 (current).
-The next release – planned for September – will ship a major version, DuckDB 2.0.
+The next release – planned for September – will ship a major version, DuckDB v2.0.
 
 ## New Features
 
