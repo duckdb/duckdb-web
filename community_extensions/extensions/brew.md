@@ -8,7 +8,7 @@ excerpt: |
 extension:
   name: brew
   description: Get locally homebrew casks, packages and formulas and their dependencies as nicely types tables
-  version: 0.6.1
+  version: 0.7.0
   language: C++
   build: cmake
   license: MIT
@@ -19,21 +19,21 @@ extension:
 
 repo:
   github: adriens/duckdb-brew
-  ref: 5d7fddcd6d09f0e82804f5d175254b718c6c09f5
+  ref: 8ded0c1eb77b23a3349c7c02b631f2ede305752c
 
 docs:
   hello_world: |
     -- Get all casks
-    select * from brew_casks();
+    from brew_casks();
 
     -- Get all packages
-    select * from brew_packages();
+    from brew_packages();
     
     -- Get all formulas
-    select * from brew_formulas();
+    from brew_formulas();
 
     -- Get dependencies between packages
-    select * from brew_dependencies();
+    from brew_dependencies();
 
     -- Reporting : Find outdated packages
     SELECT name, version FROM brew_packages() WHERE outdated = true;
@@ -121,8 +121,8 @@ extended_description: |
 
 extension_star_count: 1
 extension_star_count_pretty: 1
-extension_download_count: 682
-extension_download_count_pretty: 682
+extension_download_count: 780
+extension_download_count_pretty: 780
 image: '/images/community_extensions/social_preview/preview_community_extension_brew.png'
 layout: community_extension_doc
 ---

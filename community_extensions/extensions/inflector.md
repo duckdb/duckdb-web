@@ -19,14 +19,14 @@ extension:
   requires_toolchains: rust
   version: '2025120401'
 repo:
+  andium: f6aae9315965ce5eeba233aa147ddc7f42b5dda5
   github: query-farm/inflector
-  andium: 5f2fa551e1c8ca6fdf50f8752afc637fb7a1ceee
-  ref: 2e88fdb219f28135de5e5eed56db0a2e92b54686
+  ref: cb2c34bc7386b4e91150b0116ce0a24f3cb1cf3d
 
 extension_star_count: 7
 extension_star_count_pretty: 7
-extension_download_count: 834
-extension_download_count_pretty: 834
+extension_download_count: 964
+extension_download_count_pretty: 964
 image: '/images/community_extensions/social_preview/preview_community_extension_inflector.png'
 layout: community_extension_doc
 ---
@@ -56,6 +56,7 @@ LOAD {{ page.extension.name }};
 |----------------------------------|---------------|--------------------------------------------------------------------------|---------|----------------------------------------------------------------|
 | inflect                          | scalar        | Transforms a string value using the specified case format                | NULL    | [inflect('snake', 'helloWorld')]                               |
 | inflect                          | scalar        | Transforms struct field names using the specified case format            | NULL    | [inflect('snake', {firstName: 'John', lastName: 'Doe'})]       |
+| inflect                          | scalar        | NULL                                                                     | NULL    |                                                                |
 | inflect                          | table         | Transforms column names in query results using the specified case format | NULL    | [FROM inflect('snake', SELECT firstName, lastName FROM users)] |
 | inflector_deconstantize          | scalar        | Removes the rightmost segment from a constant expression                 | NULL    | [inflector_deconstantize('Net::HTTP')]                         |
 | inflector_demodulize             | scalar        | Removes the module part from a fully qualified name                      | NULL    | [inflector_demodulize('ActiveRecord::CoreExtensions::String')] |

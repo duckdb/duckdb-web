@@ -8,7 +8,7 @@ excerpt: |
 extension:
   name: sazgar
   description: "System monitoring & SQL query routing for DuckDB - 25+ table functions for CPU, memory, disk, network, processes, Docker, GPU. Execute queries on remote databases via PostgreSQL wire protocol with SQLGlot dialect translation (PostgreSQL, MySQL, ClickHouse, Snowflake, BigQuery)."
-  version: 1.0.0
+  version: 1.1.0
   language: Rust
   build: cargo
   license: MIT
@@ -19,7 +19,7 @@ extension:
 
 repo:
   github: Angelerator/Sazgar
-  ref: 79781cfbc77286c3202d035e42bcde5dac1f204b
+  ref: e1bc94605ad475dc137f6a8227392497140d2767
 
 docs:
   hello_world: |
@@ -342,7 +342,7 @@ docs:
     - **GitHub Repository:** https://github.com/Angelerator/Sazgar
     - **License:** MIT
     - **Language:** Pure Rust 🦀
-    - **DuckDB Version:** 1.4.3+
+    - **DuckDB Version:** 1.5.0+
 
     ---
 
@@ -361,10 +361,10 @@ docs:
     SELECT * FROM sazgar_route('', 'warehouse', 'TRUE', 'SELECT * FROM sales');
     ```
 
-extension_star_count: 14
-extension_star_count_pretty: 14
-extension_download_count: 582
-extension_download_count_pretty: 582
+extension_star_count: 13
+extension_star_count_pretty: 13
+extension_download_count: 127
+extension_download_count_pretty: 127
 image: '/images/community_extensions/social_preview/preview_community_extension_sazgar.png'
 layout: community_extension_doc
 ---
@@ -418,5 +418,26 @@ LOAD {{ page.extension.name }};
 | sazgar_uptime      | table         | NULL        | NULL    |          |
 | sazgar_users       | table         | NULL        | NULL    |          |
 | sazgar_version     | table         | NULL        | NULL    |          |
+
+### Overloaded Functions
+
+<div class="extension_functions_table"></div>
+
+| function_name | function_type | description | comment | examples |
+|---------------|---------------|-------------|---------|----------|
+
+### Added Types
+
+<div class="extension_types_table"></div>
+
+| type_name | type_size | logical_type | type_category | internal |
+|-----------|----------:|--------------|---------------|----------|
+
+### Added Settings
+
+<div class="extension_settings_table"></div>
+
+| name | description | input_type | scope | aliases |
+|------|-------------|------------|-------|---------|
 
 

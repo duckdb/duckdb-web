@@ -8,7 +8,7 @@ excerpt: |
 extension:
   name: read_lines
   description: Read line-based text files with line numbers and efficient subset extraction. Supports glob patterns, line selection, and context lines around matches.
-  version: 0.1.2
+  version: 0.1.4
   language: C++
   build: cmake
   license: MIT
@@ -16,8 +16,8 @@ extension:
     - teaguesterling
 repo:
   github: teaguesterling/duckdb_read_lines
-  andium: 46612a0e56fa8153e3847249a668d211b317ffd9
-  ref: 46612a0e56fa8153e3847249a668d211b317ffd9
+  andium: 8075509bc21b936c228879ada22c8a46657109aa
+  ref: refs/tags/v0.1.4
 docs:
   hello_world: |
     -- Read all lines from a file
@@ -84,8 +84,8 @@ docs:
 
 extension_star_count: 3
 extension_star_count_pretty: 3
-extension_download_count: 808
-extension_download_count_pretty: 808
+extension_download_count: 843
+extension_download_count_pretty: 843
 image: '/images/community_extensions/social_preview/preview_community_extension_read_lines.png'
 layout: community_extension_doc
 ---

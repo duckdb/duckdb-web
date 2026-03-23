@@ -23,10 +23,10 @@ repo:
   andium: d7ff45ac116b81f5958d40783470557f27a97911
   ref: 4f1e73f77f077deed835dff3cf547b809e94d36a
 
-extension_star_count: 41
-extension_star_count_pretty: 41
-extension_download_count: 1659
-extension_download_count_pretty: 1.7k
+extension_star_count: 43
+extension_star_count_pretty: 43
+extension_download_count: 1936
+extension_download_count_pretty: 1.9k
 image: '/images/community_extensions/social_preview/preview_community_extension_datasketches.png'
 layout: community_extension_doc
 ---
