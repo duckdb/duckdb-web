@@ -299,6 +299,10 @@
 }
 
 @media only screen and (max-width: 900px) {
+  .landing .ecosystem-diagram {
+    display: none;
+  }
+
   .ecosystem-connectors,
   .ecosystem-pulse-canvas {
     display: none;
