@@ -778,6 +778,7 @@ h5 a {
 				margin-right: 15px;
 				border-radius: 200px;
 				overflow: hidden;
+				flex-shrink: 0;
 				>img{
 					display: block;
 					-o-object-fit: cover;
@@ -988,7 +989,6 @@ footer{
 	}
 	.newswrap .postwrap .infoline,
 	.newswrap .postwrap .infoline > div:not(.icon):not(.scheduled){
-		flex-wrap: wrap;
 		.scheduled + .venue{
 			margin-left: 0;
 		}
