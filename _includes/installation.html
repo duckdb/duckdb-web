@@ -234,10 +234,6 @@ pip install duckdb-cli=={{ site.lts_duckdb_version }}
 <a href="https://install.duckdb.org/v{{ site.current_duckdb_version }}/{{ f_arm }}" class="download-btn" download="{{ f_arm }}" rel="noopener noreferrer">{{ f_arm }}</a>
 {%- include checksum_inline.html environment="cli" platform="windows" architecture="arm64" version="current" -%}
 
-<div class="note">
-    Note that DuckDB on Windows requires the <a href="https://learn.microsoft.com/en-us/cpp/windows/latest-supported-vc-redist?view=msvc-170">Microsoft Visual C++ Redistributable</a>.
-</div>
-
 <div class="alternative">
 
 <h4>Package Manager</h4>
