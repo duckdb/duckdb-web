@@ -5,17 +5,17 @@ redirect_from:
 title: ODBC Extension Functions
 ---
 
-- [odbc_begin_transaction](#odbc_begin_transaction)
- - [odbc_bind_params](#odbc_bind_params)
- - [odbc_close](#odbc_close)
- - [odbc_commit](#odbc_commit)
- - [odbc_connect](#odbc_connect)
- - [odbc_copy](#odbc_copy)
- - [odbc_create_params](#odbc_create_params)
- - [odbc_list_data_sources](#odbc_list_data_sources)
- - [odbc_list_drivers](#odbc_list_drivers)
- - [odbc_query](#odbc_query)
- - [odbc_rollback](#odbc_rollback)
+- [`odbc_begin_transaction`](#odbc_begin_transaction)
+- [`odbc_bind_params`](#odbc_bind_params)
+- [`odbc_close`](#odbc_close)
+- [`odbc_commit`](#odbc_commit)
+- [`odbc_connect`](#odbc_connect)
+- [`odbc_copy`](#odbc_copy)
+- [`odbc_create_params`](#odbc_create_params)
+- [`odbc_list_data_sources`](#odbc_list_data_sources)
+- [`odbc_list_drivers`](#odbc_list_drivers)
+- [`odbc_query`](#odbc_query)
+- [`odbc_rollback`](#odbc_rollback)
 
 ### odbc_begin_transaction
 
@@ -23,11 +23,11 @@ title: ODBC Extension Functions
 odbc_begin_transaction(conn_handle BIGINT) -> VARCHAR
 ```
 
-Sets the `SQL_ATTR_AUTOCOMMIT` attribute to `SQL_AUTOCOMMIT_OFF` on the specified connection thus effectively starting an implicit transaction. [odbc_commit](#odbc_commit) or [odbc_rollback](#odbc_rollback) must be called on such connection to complete the transaction. The completion starts another implicit transaction on this connection. See [Transactions management](overview#transactions-management) for details.
+Sets the `SQL_ATTR_AUTOCOMMIT` attribute to `SQL_AUTOCOMMIT_OFF` on the specified connection thus effectively starting an implicit transaction. [`odbc_commit`](#odbc_commit) or [`odbc_rollback`](#odbc_rollback) must be called on such connection to complete the transaction. The completion starts another implicit transaction on this connection. See [Transactions management](overview#transactions-management) for details.
 
 #### Parameters:
 
- - `conn_handle` (`BIGINT`): ODBC connection handle created with [odbc_connect](#odbc_connect)
+ - `conn_handle` (`BIGINT`): ODBC connection handle created with [`odbc_connect`](#odbc_connect)
 
 #### Returns:
 
@@ -49,8 +49,8 @@ Binds specified parameter values to the specified parameters handle. Only necess
 
 #### Parameters:
 
- - `conn_handle` (`BIGINT`): ODBC connection handle created with [odbc_connect](#odbc_connect)
- - `params_handle` (`BIGINT`): parameters handle created with [odbc_create_params](#odbc_create_params)
+ - `conn_handle` (`BIGINT`): ODBC connection handle created with [`odbc_connect`](#odbc_connect)
+ - `params_handle` (`BIGINT`): parameters handle created with [`odbc_create_params`](#odbc_create_params)
  - `params` (`STRUCT`): parameters values
 
 #### Returns:
@@ -73,7 +73,7 @@ Closes specified ODBC connection to a remote DB. Does not throw errors if the co
 
 #### Parameters:
 
- - `conn_handle` (`BIGINT`): ODBC connection handle created with [odbc_connect](#odbc_connect)
+ - `conn_handle` (`BIGINT`): ODBC connection handle created with [`odbc_connect`](#odbc_connect)
 
 #### Returns:
 
@@ -91,11 +91,11 @@ SELECT odbc_close(getvariable('conn'))
 odbc_commit(conn_handle BIGINT) -> VARCHAR
 ```
 
-Calls `SQLEndTran` with `SQL_COMMIT` argument on the specified connection, completing the current transaction. [odbc_begin_transaction](#odbc_begin_transaction) must be called on this connection before this call for the completion to be effective. See [Transactions management](overview#transactions-management) for details.
+Calls `SQLEndTran` with `SQL_COMMIT` argument on the specified connection, completing the current transaction. [`odbc_begin_transaction`](#odbc_begin_transaction) must be called on this connection before this call for the completion to be effective. See [Transactions management](overview#transactions-management) for details.
 
 #### Parameters:
 
- - `conn_handle` (`BIGINT`): ODBC connection handle created with [odbc_connect](#odbc_connect)
+ - `conn_handle` (`BIGINT`): ODBC connection handle created with [`odbc_connect`](#odbc_connect)
 
 #### Returns:
 
@@ -126,7 +126,7 @@ If `username` and `password` (positional) parameters are specified, they are app
 
 #### Returns:
 
-Connection handle that can be placed into a `VARIABLE`. Connection is not closed automatically, must be closed with [odbc_close](#odbc_close).
+Connection handle that can be placed into a `VARIABLE`. Connection is not closed automatically, must be closed with [`odbc_close`](#odbc_close).
 
 #### Example:
 
@@ -158,7 +158,7 @@ Copies rows from a DuckDB accessible file or table into the remote DB.
 #### Parameters:
 
  - `conn_handle_or_string` (`BIGINT` or `VARCHAR`), one of:
-   - ODBC connection handle created with [odbc_connect](#odbc_connect)
+   - ODBC connection handle created with [`odbc_connect`](#odbc_connect)
    - ODBC connection string, intended for one-off queries, in this case new ODBC connection will be opened and will be closed automatically after the query is complete
 
 Optional named parameters (source):
@@ -264,7 +264,7 @@ None.
 
 #### Returns:
 
-Parameters handle (`BIGINT`). When the handle is passed to [odbc_query](#odbc_query) it gets tied to the underlying prepared statement and is closed automatically when the statement is closed.
+Parameters handle (`BIGINT`). When the handle is passed to [`odbc_query`](#odbc_query) it gets tied to the underlying prepared statement and is closed automatically when the statement is closed.
 
 #### Example:
 
@@ -337,18 +337,18 @@ Runs specified query in a remote DB and returns the query results table.
 #### Parameters:
 
  - `conn_handle_or_string` (`BIGINT` or `VARCHAR`), one of:
-   - ODBC connection handle created with [odbc_connect](#odbc_connect)
+   - ODBC connection handle created with [`odbc_connect`](#odbc_connect)
    - ODBC connection string, intended for one-off queries, in this case new ODBC connection will be opened and will be closed automatically after the query is complete
  - `query` (`VARCHAR`): SQL query, passed to the remote DBMS
 
 Optional named parameters that can be used to pass query parameters:
 
  - `params` (`STRUCT`): query parameters to pass to remote DBMS
- - `params_handle` (`BIGINT`): parameters handle created with [odbc_create_params](#odbc_create_params). Only used with 2-step parameters binding, see [Query parameters](#query-parameters) for details.
+ - `params_handle` (`BIGINT`): parameters handle created with [`odbc_create_params`](#odbc_create_params). Only used with 2-step parameters binding, see [Query parameters](#query-parameters) for details.
 
 Optional named parameters that can change types mapping:
 
-The extension supports a number of options that can be used to change how the query parameters are passed and how the resulting data is handled. For known DBs these options are set automatically. They also can be passed as named parameters to [odbc_query](#odbc_query) function to override the autoconfiguration:
+The extension supports a number of options that can be used to change how the query parameters are passed and how the resulting data is handled. For known DBs these options are set automatically. They also can be passed as named parameters to [`odbc_query`](#odbc_query) function to override the autoconfiguration:
 
  - `decimal_columns_as_chars` (`BOOLEAN`, default: `false`): read `DECIMAL` values as `VARCHAR`s that are parsed back into `DECIMAL`s before returning them to client
  - `decimal_columns_precision_through_ard` (`BOOLEAN`, default: `false`): when reading a `DECIMAL` specify its `precision` and `scale` through "Application Row Descriptor"
@@ -397,11 +397,11 @@ FROM odbc_query(getvariable('conn'),
 odbc_rollback(conn_handle BIGINT) -> VARCHAR
 ```
 
-Calls `SQLEndTran` with `SQL_ROLLBACK` argument on the specified connection, completing the current transaction. [odbc_begin_transaction](#odbc_begin_transaction) must be called on this connection before this call for the completion to be effective. See [Transactions management](overview#transactions-management) for details.
+Calls `SQLEndTran` with `SQL_ROLLBACK` argument on the specified connection, completing the current transaction. [`odbc_begin_transaction`](#odbc_begin_transaction) must be called on this connection before this call for the completion to be effective. See [Transactions management](overview#transactions-management) for details.
 
 #### Parameters:
 
- - `conn_handle` (`BIGINT`): ODBC connection handle created with [odbc_connect](#odbc_connect)
+ - `conn_handle` (`BIGINT`): ODBC connection handle created with [`odbc_connect`](#odbc_connect)
 
 #### Returns:
 
