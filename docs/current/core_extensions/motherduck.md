@@ -25,6 +25,10 @@ You can connect to MotherDuck by executing the following command:
 ATTACH 'md:';
 ```
 
+## Platforms
+
+The `windows_arm64` platform is currently not supported.
+
 ## MotherDuck Documentation
 
 For more details, see the [MotherDuck documentation](https://motherduck.com/docs/).
