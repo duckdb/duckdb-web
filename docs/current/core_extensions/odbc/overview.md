@@ -8,7 +8,7 @@ title: ODBC Extension
 
 The ODBC extension allows connecting to other databases (using their [ODBC drivers](https://en.wikipedia.org/wiki/Open_Database_Connectivity)) and run queries with the [`odbc_query`](functions#odbc_query) or copy data from DuckDB with the [`odbc_copy`](functions#odbc_copy) functions.
 
-## Installing and loading
+## Installing and Loading
 
 > On Linux and macOS the extension requires [unixODBC](https://en.wikipedia.org/wiki/UnixODBC) driver manager to be installed.
 > See [below](#installing-unixodbc-driver-manager-on-linux-or-macos) for installation instructions.
@@ -19,7 +19,7 @@ The extension can be installed automatically, but needs to be loaded manually wi
 LOAD odbc;
 ```
 
-## Usage example
+## Usage Example
 
 ```sql
 -- load extension
@@ -33,85 +33,85 @@ FROM odbc_query(getvariable('conn'), 'SELECT SYSTIMESTAMP FROM DUAL');
 
 -- query with parameters
 FROM odbc_query(getvariable('conn') 
-  'SELECT CAST(? AS NVARCHAR2(2)) || CAST(? AS VARCHAR2(5)) FROM DUAL',
-  params=row('🦆', 'quack'));
+    'SELECT CAST(? AS NVARCHAR2(2)) || CAST(? AS VARCHAR2(5)) FROM DUAL',
+    params=row('🦆', 'quack'));
 
 -- copy data into remote DB
 FROM odbc_copy(getvariable('conn'),
-  source_file='https://blobs.duckdb.org/nl_stations.csv',
-  dest_table='NL_TRAIN_STATIONS',
-  create_table=TRUE);
+    source_file='https://blobs.duckdb.org/nl_stations.csv',
+    dest_table='NL_TRAIN_STATIONS',
+    create_table=TRUE);
 
 -- close connection
 SELECT odbc_close(getvariable('conn'));
 ```
 
-## Installing nightly version
+## Installing the Nightly Version
 
-ODBC extension is built using the version-independent DuckDB C API. The same binary (for the specific platform, for example:  `windows_amd64`) can be installed and loaded on DuckDB version `1.2.0` or any newer version.
+ODBC extension is built using the version-independent DuckDB C API. The same binary (for the specific platform, for example: `windows_amd64`) can be installed and loaded on DuckDB version `1.2.0` or any newer version.
 
 Binaries with the most recent changes, that are published to the DuckDB nightly repository, can be installed the following way:
 
 ```sql
-INSTALL 'http://nightly-extensions.duckdb.org/v1.2.0/<platform>/odbc_scanner.duckdb_extension.gz';
+INSTALL 'http://nightly-extensions.duckdb.org/v1.2.0/⟨platform⟩/odbc_scanner.duckdb_extension.gz';
 ```
 
-> The URL with the version `1.2.0` in it should be used even if you are running later version of DuckDB
+> The URL with the version `1.2.0` in it should be used even if you are running later version of DuckDB.
 
+Where the `⟨platform⟩`{:.language-sql .highlight} is one of:
 
-Where the `<platform>` is one of:
-
- - `linux_amd64`
- - `linux_arm64`
- - `linux_amd64_musl`
- - `linux_arm64_musl`
- - `osx_amd64`
- - `osx_arm64`
- - `windows_amd64`
- - `windows_arm64`
+- `linux_amd64`
+- `linux_arm64`
+- `linux_amd64_musl`
+- `linux_arm64_musl`
+- `osx_amd64`
+- `osx_arm64`
+- `windows_amd64`
+- `windows_arm64`
 
 To update installed extension to the latest nightly version run:
 
 ```sql
-FORCE INSTALL 'http://nightly-extensions.duckdb.org/v1.2.0/<platform>/odbc_scanner.duckdb_extension.gz';
+FORCE INSTALL 'http://nightly-extensions.duckdb.org/v1.2.0/⟨platform⟩/odbc_scanner.duckdb_extension.gz';
 ```
 
 Installed version (commit ID) can be checked using the following query:
 
 ```sql
-FROM duckdb_extensions() WHERE extension_name = 'odbc_scanner';
+FROM duckdb_extensions()
+WHERE extension_name = 'odbc_scanner';
 ```
 
 To install a version built from a specific commit run:
 
 ```sql
-FORCE INSTALL 'http://nightly-extensions.duckdb.org/odbc_scanner/<7_chars_commit_id>/v1.2.0/<platform>/odbc_scanner.duckdb_extension.gz';
+FORCE INSTALL 'http://nightly-extensions.duckdb.org/odbc_scanner/⟨7_character_commit_id⟩/v1.2.0/⟨platform⟩/odbc_scanner.duckdb_extension.gz';
 ```
 
-## DBMS-specific types support status
+## Support Status of DBMS-Specific Types
 
 Tier 1:
 
- - Oracle: [types coverage status](https://github.com/duckdb/odbc-scanner/tree/main/test/sql/oracle/README.md)
- - SQL Server: [types coverage status](https://github.com/duckdb/odbc-scanner/blob/main/test/sql/mssql/README.md)
- - DB2: [types coverage status](https://github.com/duckdb/odbc-scanner/blob/main/test/sql/db2/README.md)
+- Oracle: [types coverage status](https://github.com/duckdb/odbc-scanner/tree/main/test/sql/oracle/README.md)
+- SQL Server: [types coverage status](https://github.com/duckdb/odbc-scanner/blob/main/test/sql/mssql/README.md)
+- DB2: [types coverage status](https://github.com/duckdb/odbc-scanner/blob/main/test/sql/db2/README.md)
 
- Tier 2:
+Tier 2:
 
- - PostgreSQL: basic types covered
- - MySQL/MariaDB: basic types covered
- - Firebird: [types coverage status](https://github.com/duckdb/odbc-scanner/blob/main/test/sql/firebird/README.md)
+- PostgreSQL: basic types covered
+- MySQL/MariaDB: basic types covered
+- Firebird: [types coverage status](https://github.com/duckdb/odbc-scanner/blob/main/test/sql/firebird/README.md)
 
- Tier 3:
+Tier 3:
 
- - Snowflake: [types coverage status](https://github.com/duckdb/odbc-scanner/blob/main/test/sql/snowflake/README.md)
- - ClickHouse: basic types covered
- - Spark: basic types covered
- - Arrow Flight SQL: basic types covered
+- Snowflake: [types coverage status](https://github.com/duckdb/odbc-scanner/blob/main/test/sql/snowflake/README.md)
+- ClickHouse: basic types covered
+- Spark: basic types covered
+- Arrow Flight SQL: basic types covered
 
-## Installing unixODBC driver manager on Linux or macOS
+## Installing unixODBC Driver Manager on Linux or macOS
 
-On Linux `unixODBC` can be installed using the system package manager. Depending on the Linux distribution one of the following installation commands can be used:
+On Linux `unixODBC` can be installed using the system package manager. Depending on the Linux distribution one of the following installation commands can be used.
 
 Debian, Ubuntu:
 
@@ -145,7 +145,7 @@ arch -x86_64 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebr
 /usr/local/bin/brew install unixodbc
 ```
 
-## Connection string examples
+## Connection String Examples
 
 ODBC connection can be established using a data source name in a form `DSN=data_source1_name` or without a configured data source in a form `Driver={Driver name};parameter1=values1;...`.
 
@@ -213,7 +213,7 @@ Arrow Flight SQL (Dremio ODBC + GizmoSQL):
 Driver={Dremio Flight SQL ODBC Driver};Host=127.0.0.1;Port=31337;UID=gizmosql_username;PWD=gizmosql_password;useEncryption=true;
 ```
 
-## Query parameters
+## Query Parameters
 
 When a DuckDB query is run using prepared statement, it is possible to pass input parameters from the client code. The extension allows to forward such input parameters over ODBC API to the queries to remote databases.
 
@@ -259,7 +259,7 @@ SELECT odbc_bind_params(getvariable('conn'), getvariable('params'), row(?, ?));
 
 Parameter handle is tied to the prepared statement and will be freed when the statement is destroyed.
 
-## Connections and concurrency
+## Connections and Concurrency
 
 DuckDB uses a multi-threaded execution engine to run parts of the query in parallel. ODBC drivers may or may not support
 using the same connection from different threads concurrently. To prevent possible concurrency problems the extension does not
@@ -288,7 +288,7 @@ FROM odbc_query(getvariable('conn2'), 'SELECT ''bar'' col1 FROM DUAL')
 
 Or by disabling multi-threaded execution setting `threads` DuckDB option to `1`.
 
-## Transactions management
+## Transaction Management
 
 According to ODBC specification, connections to remote DB are expected to have auto-commit mode enabled by default.
 
