@@ -6,7 +6,8 @@ thumb: "/images/library/thumbs/2025-12-11-database-school-jordan-tigani.jpg"
 image: "/images/library/thumbs/2025-12-11-database-school-jordan-tigani.jpg"
 tags: ["Podcast"]
 length: "65 min"
-category: highlighted
+category: community
+highlighted: true
 excerpt: ""
 pill: "The Database School Podcast by Aaron Francis"
 ---
