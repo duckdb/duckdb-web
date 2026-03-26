@@ -70,16 +70,18 @@ redirect_from:
 				{% assign slugified_tag = tag | slugify %}
 				{% assign tag_classes = tag_classes | append: slugified_tag | append: " " %}
 			{% endfor %}
-			{% comment %} Determine data-category from category field (default: core) {% endcomment %}
-			{% if library_item.category %}
+			{% comment %} Determine data-category for filtering {% endcomment %}
+			{% if library_item.highlighted == true %}
+				{% assign data_category = "highlighted" %}
+			{% elsif library_item.category %}
 				{% assign data_category = library_item.category %}
 			{% else %}
 				{% assign data_category = "core" %}
 			{% endif %}
-			{% comment %} Determine data-source for styling (backwards compat) {% endcomment %}
+			{% comment %} Determine data-source for styling (colors/icons) {% endcomment %}
 			{% if library_item.title contains "ducklake" or library_item.title contains "DuckLake" %}
 				{% assign data_source = "ducklake" %}
-			{% elsif data_category == "community" %}
+			{% elsif library_item.category == "community" %}
 				{% assign data_source = "thirdparty" %}
 			{% else %}
 				{% assign data_source = "duckdb" %}
