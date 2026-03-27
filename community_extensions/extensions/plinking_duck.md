@@ -8,7 +8,7 @@ excerpt: |
 extension:
   name: plinking_duck
   description: Read PLINK 2 genomics file formats and run common genetic analyses directly in SQL
-  version: 0.2.0
+  version: 0.3.0
   language: C++
   build: cmake
   license: MIT
@@ -18,7 +18,7 @@ extension:
 
 repo:
   github: teaguesterling/plinking_duck
-  ref: 1eb5a09aad740cfc79db3bfb7bc62c78bb76ef25
+  ref: 8cc702cddb90626712c82132eada7061ed9318e2
 
 docs:
   hello_world: |
@@ -58,6 +58,7 @@ docs:
     - `plink_ld` — pairwise linkage disequilibrium (r², D, D')
     - `plink_score` — polygenic risk scoring with mean imputation
     - `plink_glm` — per-variant GWAS regression (linear, logistic, Firth)
+    - `plink_pca` — principal component analysis via randomized SVD
 
     **Filter pushdown:**
     - `af_range` / `ac_range` — filter variants by allele frequency or count
@@ -108,6 +109,7 @@ LOAD {{ page.extension.name }};
 | plink_hardy   | table         | NULL        | NULL    |          |
 | plink_ld      | table         | NULL        | NULL    |          |
 | plink_missing | table         | NULL        | NULL    |          |
+| plink_pca     | table         | NULL        | NULL    |          |
 | plink_score   | table         | NULL        | NULL    |          |
 | read_pfile    | table         | NULL        | NULL    |          |
 | read_pgen     | table         | NULL        | NULL    |          |

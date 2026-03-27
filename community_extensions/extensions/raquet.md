@@ -18,7 +18,7 @@ extension:
 
 repo:
   github: jatorre/duckdb-raquet
-  ref: 63becdbf8d8899fe19e1769ff510b30ee02ed4ee
+  ref: c5ce3e292b867621da67a3f50ca0a0e4213fd4ff
 
 docs:
   hello_world: |
@@ -59,8 +59,8 @@ docs:
     - [Documentation](https://github.com/jatorre/duckdb-raquet#readme)
     - [Performance Benchmarks](https://github.com/jatorre/duckdb-raquet/blob/main/docs/PERFORMANCE_COMPARISON.md)
 
-extension_star_count: 4
-extension_star_count_pretty: 4
+extension_star_count: 5
+extension_star_count_pretty: 5
 extension_download_count: 868
 extension_download_count_pretty: 868
 image: '/images/community_extensions/social_preview/preview_community_extension_raquet.png'
