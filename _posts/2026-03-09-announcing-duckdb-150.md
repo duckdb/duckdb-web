@@ -278,6 +278,20 @@ In the meantime, please refer to the [project's README](https://github.com/duckd
 
 ## Major Changes
 
+### Breaking Change for Datetime Function
+
+The [`date_trunc`]({% docs/current/sql/functions/timestamptz.md %}#date_truncpart-timestamptz) function, when applied to a `DATE`, now returns a `TIMESTAMP` instead of a date.
+
+```sql
+-- v1.4.4:
+SELECT typeof(date_trunc('month', DATE('2026-03-27')));
+-- returns DATE
+
+-- v1.5.x:
+SELECT typeof(date_trunc('month', DATE('2026-03-27')));
+-- returns TIMESTAMP
+```
+
 ### Lakehouse Updates
 
 All of DuckDB’s supported Lakehouse formats have received some updates for v1.5.
