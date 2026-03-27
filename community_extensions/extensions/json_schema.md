@@ -17,14 +17,14 @@ extension:
   name: json_schema
   version: '2025120401'
 repo:
-  github: query-farm/json_schema
   andium: 69664ce2fb234a071c4e01690584d2c402e96705
-  ref: ecfeb13db765fd503ff8155c8c22b676b9c9dfc0
+  github: query-farm/json_schema
+  ref: 0f7d4b08ab527cafcf85232e70d83e49f7130fa3
 
 extension_star_count: 2
 extension_star_count_pretty: 2
-extension_download_count: 899
-extension_download_count_pretty: 899
+extension_download_count: 912
+extension_download_count_pretty: 912
 image: '/images/community_extensions/social_preview/preview_community_extension_json_schema.png'
 layout: community_extension_doc
 ---

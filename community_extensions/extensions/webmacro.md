@@ -84,14 +84,14 @@ extension:
   name: webmacro
   version: '2025120401'
 repo:
-  github: quackscience/duckdb-extension-webmacro
   andium: 43a4ba8fcc13219be487d0ac12d68d66ac1d8268
-  ref: c3e1b90b0c8c72295c5950b5ac286261f8e2c9be
+  github: quackscience/duckdb-extension-webmacro
+  ref: 76e83c478fad9c30e5703a194911ae96bfc2ed94
 
 extension_star_count: 15
 extension_star_count_pretty: 15
-extension_download_count: 417
-extension_download_count_pretty: 417
+extension_download_count: 278
+extension_download_count_pretty: 278
 image: '/images/community_extensions/social_preview/preview_community_extension_webmacro.png'
 layout: community_extension_doc
 ---
@@ -120,5 +120,26 @@ LOAD {{ page.extension.name }};
 |    function_name    | function_type | description | comment | examples |
 |---------------------|---------------|-------------|---------|----------|
 | load_macro_from_url | scalar        | NULL        | NULL    |          |
+
+### Overloaded Functions
+
+<div class="extension_functions_table"></div>
+
+| function_name | function_type | description | comment | examples |
+|---------------|---------------|-------------|---------|----------|
+
+### Added Types
+
+<div class="extension_types_table"></div>
+
+| type_name | type_size | logical_type | type_category | internal |
+|-----------|----------:|--------------|---------------|----------|
+
+### Added Settings
+
+<div class="extension_settings_table"></div>
+
+| name | description | input_type | scope | aliases |
+|------|-------------|------------|-------|---------|
 
 

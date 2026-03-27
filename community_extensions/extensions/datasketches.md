@@ -19,14 +19,14 @@ extension:
   name: datasketches
   version: '2025101201'
 repo:
-  github: query-farm/datasketches
   andium: d7ff45ac116b81f5958d40783470557f27a97911
-  ref: 4f1e73f77f077deed835dff3cf547b809e94d36a
+  github: query-farm/datasketches
+  ref: b9bead01b3724626f3a5713ce60f2f1eb0d49a01
 
 extension_star_count: 43
 extension_star_count_pretty: 43
-extension_download_count: 1936
-extension_download_count_pretty: 1.9k
+extension_download_count: 2206
+extension_download_count_pretty: 2.2k
 image: '/images/community_extensions/social_preview/preview_community_extension_datasketches.png'
 layout: community_extension_doc
 ---

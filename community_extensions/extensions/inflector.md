@@ -21,12 +21,12 @@ extension:
 repo:
   andium: f6aae9315965ce5eeba233aa147ddc7f42b5dda5
   github: query-farm/inflector
-  ref: cb2c34bc7386b4e91150b0116ce0a24f3cb1cf3d
+  ref: d504db6d637129b2139e5136c14f9c4a31f187ac
 
 extension_star_count: 7
 extension_star_count_pretty: 7
-extension_download_count: 964
-extension_download_count_pretty: 964
+extension_download_count: 987
+extension_download_count_pretty: 987
 image: '/images/community_extensions/social_preview/preview_community_extension_inflector.png'
 layout: community_extension_doc
 ---

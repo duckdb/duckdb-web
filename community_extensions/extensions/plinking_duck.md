@@ -72,10 +72,10 @@ docs:
 
     For full documentation, see [plinking-duck.readthedocs.io](https://plinking-duck.readthedocs.io).
 
-extension_star_count: 1
-extension_star_count_pretty: 1
-extension_download_count: 792
-extension_download_count_pretty: 792
+extension_star_count: 2
+extension_star_count_pretty: 2
+extension_download_count: 800
+extension_download_count_pretty: 800
 image: '/images/community_extensions/social_preview/preview_community_extension_plinking_duck.png'
 layout: community_extension_doc
 ---

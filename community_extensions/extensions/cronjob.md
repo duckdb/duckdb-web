@@ -70,14 +70,14 @@ extension:
   name: cronjob
   version: '2025120401'
 repo:
-  github: quackscience/duckdb-extension-cronjob
   andium: 040dbecd552e6b373fb1bb4582935d243693978e
-  ref: 91822698a42f8d8bd615d352b3a61fbcee852ba6
+  github: quackscience/duckdb-extension-cronjob
+  ref: 1892d5bb80e0d79968cd8aedd4f48f94347ce9d5
 
 extension_star_count: 47
 extension_star_count_pretty: 47
-extension_download_count: 869
-extension_download_count_pretty: 869
+extension_download_count: 906
+extension_download_count_pretty: 906
 image: '/images/community_extensions/social_preview/preview_community_extension_cronjob.png'
 layout: community_extension_doc
 ---

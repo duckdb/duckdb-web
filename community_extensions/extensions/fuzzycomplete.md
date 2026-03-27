@@ -19,14 +19,14 @@ extension:
   requires_toolchains: rust
   version: '2025120401'
 repo:
-  github: query-farm/fuzzycomplete
   andium: 74630cc8548a8ee6b32129abdc8bd70e1cf2bf87
-  ref: 24d95eff386b66695fcadc84b21744c363af74bd
+  github: query-farm/fuzzycomplete
+  ref: 8224af56b577db4fefd80f5404be974ae4693bc4
 
 extension_star_count: 26
 extension_star_count_pretty: 26
-extension_download_count: 1247
-extension_download_count_pretty: 1.2k
+extension_download_count: 1111
+extension_download_count_pretty: 1.1k
 image: '/images/community_extensions/social_preview/preview_community_extension_fuzzycomplete.png'
 layout: community_extension_doc
 ---

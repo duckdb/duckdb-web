@@ -9,7 +9,7 @@ extension:
   name: gcs
   description: DuckDB GCS Extension
   extended_description: A native GCS extension with support for standard Google auth methods
-  version: 0.0.3
+  version: 0.0.4
   language: C++
   build: cmake
   license: MIT
@@ -19,7 +19,7 @@ extension:
 
 repo:
   github: northpolesec/duckdb-gcs
-  ref: 5465cad377f83637f8233b9756062b98352e3cdd
+  ref: fb344c4914626e67de7dd63899de56856f1fff6b
 
 docs:
   hello_world: |
@@ -36,10 +36,10 @@ docs:
     └─────────────────────────────────────────┴─────────┴───────┴──────────────────────────┘
 
 
-extension_star_count: 13
-extension_star_count_pretty: 13
-extension_download_count: 18960
-extension_download_count_pretty: 19.0k
+extension_star_count: 16
+extension_star_count_pretty: 16
+extension_download_count: 17522
+extension_download_count_pretty: 17.5k
 image: '/images/community_extensions/social_preview/preview_community_extension_gcs.png'
 layout: community_extension_doc
 ---
@@ -60,6 +60,27 @@ LOAD {{ page.extension.name }};
 ### About {{ page.extension.name }}
 {{ page.docs.extended_description }}
 {% endif %}
+
+### Added Functions
+
+<div class="extension_functions_table"></div>
+
+| function_name | function_type | description | comment | examples |
+|---------------|---------------|-------------|---------|----------|
+
+### Overloaded Functions
+
+<div class="extension_functions_table"></div>
+
+| function_name | function_type | description | comment | examples |
+|---------------|---------------|-------------|---------|----------|
+
+### Added Types
+
+<div class="extension_types_table"></div>
+
+| type_name | type_size | logical_type | type_category | internal |
+|-----------|----------:|--------------|---------------|----------|
 
 ### Added Settings
 

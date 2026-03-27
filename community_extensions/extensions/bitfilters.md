@@ -19,14 +19,14 @@ extension:
   name: bitfilters
   version: '2025120401'
 repo:
-  github: query-farm/bitfilters
   andium: 1acc412f932a9b88f1504bf76fc0cbdd891b97f3
-  ref: 3ee5114aefbda6c97dc90dd10303dd6591fac9d2
+  github: query-farm/bitfilters
+  ref: 9fe672d1e7daccec6a3f1bb5165925df2cb44c6b
 
 extension_star_count: 6
 extension_star_count_pretty: 6
-extension_download_count: 1526
-extension_download_count_pretty: 1.5k
+extension_download_count: 1846
+extension_download_count_pretty: 1.8k
 image: '/images/community_extensions/social_preview/preview_community_extension_bitfilters.png'
 layout: community_extension_doc
 ---

@@ -19,14 +19,14 @@ extension:
   name: adbc_scanner
   version: '2025120801'
 repo:
+  andium: 84794a00a6837c31f0779c56f2ce0e83df1bb7b6
   github: query-farm/adbc_scanner
-  andium: 68cca9ae72e209ad0ded48ad7360d033c639ce29
-  ref: d3e7cbd5f5d92aba0048236f867caf8074c10976
+  ref: d7457a19eac107a896c8b15f7ede0b8b27cf4cc9
 
 extension_star_count: 11
 extension_star_count_pretty: 11
-extension_download_count: 882
-extension_download_count_pretty: 882
+extension_download_count: 922
+extension_download_count_pretty: 922
 image: '/images/community_extensions/social_preview/preview_community_extension_adbc_scanner.png'
 layout: community_extension_doc
 ---
