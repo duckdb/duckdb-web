@@ -77,6 +77,6 @@ technical:
   - name: Cloudflare
     url: https://www.cloudflare.com/
     logoimg: cloudflare.svg
-  - name: Namespace
-    url: https://namespace.so/
-    logoimg: namespace.svg
+  #- name: Namespace
+  #  url: https://namespace.so/
+  #  logoimg: namespace.svg
