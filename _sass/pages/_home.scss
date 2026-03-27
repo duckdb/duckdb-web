@@ -676,9 +676,14 @@ body.landing{
 						font-size: var(--type-tiny, 12px);
 						color: var(--main-text-secondary-color, #666);
 						line-height: 1.2;
+						transition: border-color 0.2s, background-color 0.2s;
 						a{
 							color: inherit;
 							text-decoration: none;
+						}
+						&:hover{
+							border: 1px solid var(--interactive-installation-box-border, rgba(204, 189, 0, 0.60));
+							background: var(--interactive-installation-box-background, rgba(241, 230, 94, 0.30));
 						}
 					}
 				}
