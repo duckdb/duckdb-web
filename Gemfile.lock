@@ -10,7 +10,7 @@ GIT
 
 GIT
   remote: https://github.com/duckdb/rouge.git
-  revision: dac3ae2896d0e420649d84d578125f130aa4a8a2
+  revision: c14bcfecf2a2aeb71842b812f4ca86e282c06d94
   branch: duckdb
   specs:
     rouge (3.3823.1)
@@ -47,9 +47,9 @@ GEM
       logger
     faraday-net_http (3.4.2)
       net-http (~> 0.5)
-    ffi (1.17.3-arm64-darwin)
-    ffi (1.17.3-x86_64-darwin)
-    ffi (1.17.3-x86_64-linux-gnu)
+    ffi (1.17.4-arm64-darwin)
+    ffi (1.17.4-x86_64-darwin)
+    ffi (1.17.4-x86_64-linux-gnu)
     forwardable-extended (2.6.0)
     github-pages-health-check (1.19.1)
       addressable (~> 2.8.7)
