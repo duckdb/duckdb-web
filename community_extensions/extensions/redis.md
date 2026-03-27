@@ -110,14 +110,14 @@ extension:
   name: redis
   version: '2025120401'
 repo:
-  github: quackscience/duckdb-extension-redis
   andium: 52d4e50c2fce74de9e9c90b15316a63350614495
-  ref: 85ce637dca20b383f01d1b19abf201d4a3215021
+  github: quackscience/duckdb-extension-redis
+  ref: 3eddcfed257f19a5b19d81f971b6ed35e5827aa3
 
-extension_star_count: 11
-extension_star_count_pretty: 11
-extension_download_count: 419
-extension_download_count_pretty: 419
+extension_star_count: 12
+extension_star_count_pretty: 12
+extension_download_count: 294
+extension_download_count_pretty: 294
 image: '/images/community_extensions/social_preview/preview_community_extension_redis.png'
 layout: community_extension_doc
 ---
@@ -161,5 +161,26 @@ LOAD {{ page.extension.name }};
 | redis_scan            | scalar        | Incrementally iterate over keys in Redis matching a pattern. Returns 'cursor:key1,key2,...'. Use cursor '0' to start, and continue until cursor returns '0'.                           | NULL    | [SELECT redis_scan('0', '*', 100, 'my_redis_secret');, SELECT redis_scan('0', 'user:*', 10, 'my_redis_secret');]     |
 | redis_set             | scalar        | Set the value of a key in Redis. Returns 'OK' on success.                                                                                                                              | NULL    | [SELECT redis_set('mykey', 'myvalue', 'my_redis_secret');]                                                           |
 | redis_type            | scalar        | Get the type of a key in Redis. Returns the type as a string (string, list, set, zset, hash, stream) or 'none' if the key does not exist.                                              | NULL    | [SELECT redis_type('mykey', 'my_redis_secret');]                                                                     |
+
+### Overloaded Functions
+
+<div class="extension_functions_table"></div>
+
+| function_name | function_type | description | comment | examples |
+|---------------|---------------|-------------|---------|----------|
+
+### Added Types
+
+<div class="extension_types_table"></div>
+
+| type_name | type_size | logical_type | type_category | internal |
+|-----------|----------:|--------------|---------------|----------|
+
+### Added Settings
+
+<div class="extension_settings_table"></div>
+
+| name | description | input_type | scope | aliases |
+|------|-------------|------------|-------|---------|
 
 

@@ -19,14 +19,14 @@ extension:
   name: stochastic
   version: '2025120401'
 repo:
-  github: query-farm/stochastic
   andium: 020205b1862e9ab919ad58b1a4a496058a478519
-  ref: 82c338edb903bc543b92841943983b5e411b1444
+  github: query-farm/stochastic
+  ref: 28d506bb26ce8432d61a1ccaceea84b2b35d9050
 
 extension_star_count: 17
 extension_star_count_pretty: 17
-extension_download_count: 870
-extension_download_count_pretty: 870
+extension_download_count: 929
+extension_download_count_pretty: 929
 image: '/images/community_extensions/social_preview/preview_community_extension_stochastic.png'
 layout: community_extension_doc
 ---

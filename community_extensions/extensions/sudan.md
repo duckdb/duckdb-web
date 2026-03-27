@@ -56,8 +56,8 @@ docs:
 
 extension_star_count: 0
 extension_star_count_pretty: 0
-extension_download_count: 356
-extension_download_count_pretty: 356
+extension_download_count: 219
+extension_download_count_pretty: 219
 image: '/images/community_extensions/social_preview/preview_community_extension_sudan.png'
 layout: community_extension_doc
 ---
@@ -83,8 +83,8 @@ LOAD {{ page.extension.name }};
 
 <div class="extension_functions_table"></div>
 
-|    function_name     | function_type | description | comment |                                                                                                                                                                                                                                                                                                                                                                                                                                                  examples                                                                                                                                                                                                                                                                                                                                                                                                                                                  |
-|----------------------|---------------|-------------|---------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+|    function_name     | function_type | description | comment | examples  |
+|----------------------|---------------|-------------|---------|-----------|
 | SUDAN_Boundaries     | table         |             | NULL    | [
 		-- Get all 18 state boundaries
 		SELECT state_name, state_name_ar, iso_code, geojson FROM SUDAN_Boundaries('state');
@@ -94,7 +94,7 @@ LOAD {{ page.extension.name }};
 
 		-- Use with spatial extension
 		SELECT state_name, ST_GeomFromGeoJSON(geojson) AS geom FROM SUDAN_Boundaries('state');
-	]                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    |
+	] |
 | SUDAN_FAO            | table         |             | NULL    | [
 		-- Sudan crop production
 		SELECT * FROM SUDAN_FAO('QCL', 'production_quantity')
@@ -102,59 +102,59 @@ LOAD {{ page.extension.name }};
 
 		-- Compare with neighbors
 		SELECT * FROM SUDAN_FAO('QCL', 'production_quantity', countries := ['SDN', 'EGY', 'ETH']);
-	]                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    |
+	] |
 | SUDAN_GeoCode        | scalar        |             | NULL    | [
 		SELECT SUDAN_GeoCode('Khartoum');     -- returns 'SD-KH'
 		SELECT SUDAN_GeoCode('الخرطوم');      -- returns 'SD-KH'
-	]                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         |
+	] |
 | SUDAN_ILO            | table         |             | NULL    | [
 		-- Unemployment rate
 		SELECT * FROM SUDAN_ILO('UNE_DEAP_SEX_AGE_RT');
 
 		-- Compare with neighbors
 		SELECT * FROM SUDAN_ILO('UNE_DEAP_SEX_AGE_RT', countries := ['SDN', 'EGY']);
-	]                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 |
+	] |
 | SUDAN_Providers      | table         |             | NULL    | [
 		SELECT provider_id, name, description FROM SUDAN_Providers();
 
 		+-----------+-----------------------------+----------------------------------------------+
-		|provider_id|           name              |                 description                  |
+		\|provider_id\|           name              \|                 description                  \|
 		+-----------+-----------------------------+----------------------------------------------+
-		| worldbank | World Bank                  | World Development Indicators and other ...   |
-		| who       | World Health Organization   | Global Health Observatory (GHO) data         |
-		| fao       | Food and Agriculture Org... | FAOSTAT agricultural statistics               |
-		| unhcr     | UNHCR                       | UN Refugee Agency displacement and pop...    |
-		| ilo       | International Labour Org... | International Labour Organization statistics |
+		\| worldbank \| World Bank                  \| World Development Indicators and other ...   \|
+		\| who       \| World Health Organization   \| Global Health Observatory (GHO) data         \|
+		\| fao       \| Food and Agriculture Org... \| FAOSTAT agricultural statistics               \|
+		\| unhcr     \| UNHCR                       \| UN Refugee Agency displacement and pop...    \|
+		\| ilo       \| International Labour Org... \| International Labour Organization statistics \|
 		+-----------+-----------------------------+----------------------------------------------+
 	] |
 | SUDAN_Search         | table         |             | NULL    | [
 		SELECT * FROM SUDAN_Search(query := 'maternal mortality');
 
 		+-----------+-----------------+------------------------------------------+
-		| provider  | indicator_id    | indicator_name                           |
+		\| provider  \| indicator_id    \| indicator_name                           \|
 		+-----------+-----------------+------------------------------------------+
-		| worldbank | SH.STA.MMRT     | Maternal mortality ratio (per 100,000)   |
-		| who       | MDG_0000000025  | Maternal mortality ratio (per 100 000)   |
+		\| worldbank \| SH.STA.MMRT     \| Maternal mortality ratio (per 100,000)   \|
+		\| who       \| MDG_0000000025  \| Maternal mortality ratio (per 100 000)   \|
 		+-----------+-----------------+------------------------------------------+
-	]                                                                                                                                                                                                                                                                                                                                                                                   |
+	] |
 | SUDAN_States         | table         |             | NULL    | [
 		SELECT state_name, state_name_ar, iso_code FROM SUDAN_States();
 
 		+------------------+------------------+---------+
-		| state_name       | state_name_ar    | iso_code|
+		\| state_name       \| state_name_ar    \| iso_code\|
 		+------------------+------------------+---------+
-		| Khartoum         | الخرطوم          | SD-KH   |
-		| Al Jazirah       | الجزيرة          | SD-GZ   |
-		| ...              | ...              | ...     |
+		\| Khartoum         \| الخرطوم          \| SD-KH   \|
+		\| Al Jazirah       \| الجزيرة          \| SD-GZ   \|
+		\| ...              \| ...              \| ...     \|
 		+------------------+------------------+---------+
-	]                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   |
+	] |
 | SUDAN_UNHCR          | table         |             | NULL    | [
 		-- UNHCR displacement data for Sudan
 		SELECT * FROM SUDAN_UNHCR('idps');
 
 		-- Compare Sudan and South Sudan refugee data
 		SELECT * FROM SUDAN_UNHCR('refugees', countries := ['SDN', 'SSD']);
-	]                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   |
+	] |
 | SUDAN_WB_Indicators  | table         |             | NULL    | [
 		-- List all indicators
 		SELECT * FROM SUDAN_WB_Indicators() LIMIT 10;
@@ -163,22 +163,22 @@ LOAD {{ page.extension.name }};
 		SELECT * FROM SUDAN_WB_Indicators(search := 'population');
 
 		+-----------------+------------------------------+----------------------------+
-		| indicator_id    | indicator_name               | source                     |
+		\| indicator_id    \| indicator_name               \| source                     \|
 		+-----------------+------------------------------+----------------------------+
-		| SP.POP.TOTL     | Population, total            | World Development Indicators|
-		| SP.POP.GROW     | Population growth (annual %) | World Development Indicators|
+		\| SP.POP.TOTL     \| Population, total            \| World Development Indicators\|
+		\| SP.POP.GROW     \| Population growth (annual %) \| World Development Indicators\|
 		+-----------------+------------------------------+----------------------------+
-	]                                                                                                                                                                                                                                             |
+	] |
 | SUDAN_WHO            | table         |             | NULL    | [
 		-- Life expectancy at birth
 		SELECT * FROM SUDAN_WHO('WHOSIS_000001') WHERE year >= 2015;
 
 		-- Compare Sudan and South Sudan
 		SELECT * FROM SUDAN_WHO('WHOSIS_000001', countries := ['SDN', 'SSD']);
-	]                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            |
+	] |
 | SUDAN_WHO_Indicators | table         |             | NULL    | [
 		SELECT * FROM SUDAN_WHO_Indicators(search := 'mortality') LIMIT 5;
-	]                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       |
+	] |
 | SUDAN_WorldBank      | table         |             | NULL    | [
 		-- Sudan population over time
 		SELECT * FROM SUDAN_WorldBank('SP.POP.TOTL');
@@ -188,10 +188,31 @@ LOAD {{ page.extension.name }};
 		WHERE year >= 2010 AND year <= 2023;
 
 		+---------------+------------------+---------+--------------+------+-----------+
-		| indicator_id  | indicator_name   | country | country_name | year | value     |
+		\| indicator_id  \| indicator_name   \| country \| country_name \| year \| value     \|
 		+---------------+------------------+---------+--------------+------+-----------+
-		| SP.POP.TOTL   | Population, total| SD      | Sudan        | 2023 | 48109006  |
+		\| SP.POP.TOTL   \| Population, total\| SD      \| Sudan        \| 2023 \| 48109006  \|
 		+---------------+------------------+---------+--------------+------+-----------+
-	]                                                                                                                                                                                                                                                |
+	] |
+
+### Overloaded Functions
+
+<div class="extension_functions_table"></div>
+
+| function_name | function_type | description | comment | examples |
+|---------------|---------------|-------------|---------|----------|
+
+### Added Types
+
+<div class="extension_types_table"></div>
+
+| type_name | type_size | logical_type | type_category | internal |
+|-----------|----------:|--------------|---------------|----------|
+
+### Added Settings
+
+<div class="extension_settings_table"></div>
+
+| name | description | input_type | scope | aliases |
+|------|-------------|------------|-------|---------|
 
 

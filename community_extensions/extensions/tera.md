@@ -19,14 +19,14 @@ extension:
   requires_toolchains: rust
   version: '2025120401'
 repo:
-  github: query-farm/tera
   andium: 5b8e2b4701c69b196cc6386d86f811a5343ffc6e
-  ref: dd8a18c16fb05e341c7e5cf47f89821ab9ce0c1e
+  github: query-farm/tera
+  ref: 3a07073805455aa1e015b096180b6ae0f7600a63
 
 extension_star_count: 8
 extension_star_count_pretty: 8
-extension_download_count: 901
-extension_download_count_pretty: 901
+extension_download_count: 887
+extension_download_count_pretty: 887
 image: '/images/community_extensions/social_preview/preview_community_extension_tera.png'
 layout: community_extension_doc
 ---

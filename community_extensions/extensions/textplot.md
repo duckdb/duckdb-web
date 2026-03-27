@@ -19,14 +19,14 @@ extension:
   name: textplot
   version: '2025120401'
 repo:
-  github: query-farm/textplot
   andium: d3b90faa3372d4204915343546fa0556601bf243
-  ref: d8bccda8f7ed5fa162515056866292b95864d747
+  github: query-farm/textplot
+  ref: f40c6a92e7cfc71506bb216824a74257f105c499
 
 extension_star_count: 22
 extension_star_count_pretty: 22
-extension_download_count: 910
-extension_download_count_pretty: 910
+extension_download_count: 904
+extension_download_count_pretty: 904
 image: '/images/community_extensions/social_preview/preview_community_extension_textplot.png'
 layout: community_extension_doc
 ---
