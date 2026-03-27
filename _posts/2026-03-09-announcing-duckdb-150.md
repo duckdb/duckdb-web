@@ -280,7 +280,7 @@ In the meantime, please refer to the [project's README](https://github.com/duckd
 
 ### Breaking Change for Datetime Function
 
-The [`date_trunc`]({% docs/current/sql/functions/timestamptz.md %}#date_truncpart-timestamptz) function, when applied to a `DATE`, now returns a `TIMESTAMP` instead of a date.
+The [`date_trunc`]({% link docs/current/sql/functions/timestamptz.md %}#date_truncpart-timestamptz) function, when applied to a `DATE`, now returns a `TIMESTAMP` instead of a date.
 
 ```sql
 -- v1.4.4:
