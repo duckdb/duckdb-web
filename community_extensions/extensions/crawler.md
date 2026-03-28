@@ -68,8 +68,8 @@ docs:
 
 extension_star_count: 6
 extension_star_count_pretty: 6
-extension_download_count: 888
-extension_download_count_pretty: 888
+extension_download_count: 883
+extension_download_count_pretty: 883
 image: '/images/community_extensions/social_preview/preview_community_extension_crawler.png'
 layout: community_extension_doc
 ---
