@@ -64,10 +64,10 @@ docs:
       English (~60%): 10/10 | Japanese (~3%): 10/10
       Korean (~1%): 10/10   | Rating >= 8.0 (~5%): 10/10
 
-extension_star_count: 47
-extension_star_count_pretty: 47
-extension_download_count: 100
-extension_download_count_pretty: 100
+extension_star_count: 49
+extension_star_count_pretty: 49
+extension_download_count: 138
+extension_download_count_pretty: 138
 image: '/images/community_extensions/social_preview/preview_community_extension_hnsw_acorn.png'
 layout: community_extension_doc
 ---

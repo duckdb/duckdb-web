@@ -137,8 +137,8 @@ docs:
 
 extension_star_count: 10
 extension_star_count_pretty: 10
-extension_download_count: 1015
-extension_download_count_pretty: 1.0k
+extension_download_count: 998
+extension_download_count_pretty: 998
 image: '/images/community_extensions/social_preview/preview_community_extension_sitting_duck.png'
 layout: community_extension_doc
 ---

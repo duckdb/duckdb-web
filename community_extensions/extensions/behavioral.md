@@ -11,7 +11,7 @@ excerpt: |
 extension:
   name: behavioral
   description: Behavioral analytics functions inspired by ClickHouse (sessionize, retention, window_funnel, sequence_match, sequence_count, sequence_match_events, sequence_next_node)
-  version: 0.2.0
+  version: 0.4.0
   language: Rust
   build: cargo
   license: MIT
@@ -22,7 +22,7 @@ extension:
 
 repo:
   github: tomtom215/duckdb-behavioral
-  ref: 8400aaa3c864eb620107ac8f6cbdc577d5c82e1f
+  ref: a0d6f5e9dd6bd15e297188e7bdcd6edc5f8e05e2
 
 docs:
   hello_world: |
@@ -49,10 +49,10 @@ docs:
     with zero unsafe code in business logic. Benchmarked at 830 Melem/s (sessionize)
     and 95 Melem/s (sequence_match) on commodity hardware.
 
-extension_star_count: 0
-extension_star_count_pretty: 0
-extension_download_count: 359
-extension_download_count_pretty: 359
+extension_star_count: 6
+extension_star_count_pretty: 6
+extension_download_count: 684
+extension_download_count_pretty: 684
 image: '/images/community_extensions/social_preview/preview_community_extension_behavioral.png'
 layout: community_extension_doc
 ---
@@ -87,5 +87,26 @@ LOAD {{ page.extension.name }};
 | sequence_next_node    | aggregate     | NULL        | NULL    |          |
 | sessionize            | aggregate     | NULL        | NULL    |          |
 | window_funnel         | aggregate     | NULL        | NULL    |          |
+
+### Overloaded Functions
+
+<div class="extension_functions_table"></div>
+
+| function_name | function_type | description | comment | examples |
+|---------------|---------------|-------------|---------|----------|
+
+### Added Types
+
+<div class="extension_types_table"></div>
+
+| type_name | type_size | logical_type | type_category | internal |
+|-----------|----------:|--------------|---------------|----------|
+
+### Added Settings
+
+<div class="extension_settings_table"></div>
+
+| name | description | input_type | scope | aliases |
+|------|-------------|------------|-------|---------|
 
 
