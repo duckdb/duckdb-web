@@ -8,7 +8,7 @@ excerpt: |
 extension:
   name: plinking_duck
   description: Read PLINK 2 genomics file formats and run common genetic analyses directly in SQL
-  version: 0.3.0
+  version: 0.4.0
   language: C++
   build: cmake
   license: MIT
@@ -18,7 +18,7 @@ extension:
 
 repo:
   github: teaguesterling/plinking_duck
-  ref: 8cc702cddb90626712c82132eada7061ed9318e2
+  ref: 50612cfc91659347291359c97cf9ae845581b82c
 
 docs:
   hello_world: |
@@ -60,9 +60,15 @@ docs:
     - `plink_glm` — per-variant GWAS regression (linear, logistic, Firth)
     - `plink_pca` — principal component analysis via randomized SVD
 
-    **Filter pushdown:**
-    - `af_range` / `ac_range` — filter variants by allele frequency or count
-    - `genotype_range` — filter individual genotype values
+    **Genotype output modes:**
+    - `genotypes='struct'` — STRUCT with named fields per sample
+    - `genotypes='counts'` — fast genotype counting (no decompression)
+    - `genotypes='stats'` — counts + AF, MAF, missingness, heterozygosity
+
+    **Flexible inputs:**
+    - Unified `variants` parameter: indices, rsids, CPRA strings/structs, ranges
+    - Parquet/CSV/table companions for variant and sample metadata
+    - `af_range` / `ac_range` / `genotype_range` filter pushdown
 
     All functions support projection pushdown (skip genotype decompression for
     metadata-only queries), parallel scanning, sample subsetting, and region
@@ -134,8 +140,10 @@ LOAD {{ page.extension.name }};
 
 <div class="extension_settings_table"></div>
 
-|             name             |                                                         description                                                         | input_type | scope  | aliases |
-|------------------------------|-----------------------------------------------------------------------------------------------------------------------------|------------|--------|---------|
-| plinking_max_matrix_elements | Maximum genotype matrix elements for orient := 'sample' pre-read (variants x samples). Default 16 billion (~16 GB of int8). | BIGINT     | GLOBAL | []      |
+|              name               |                                                          description                                                          | input_type | scope  | aliases |
+|---------------------------------|-------------------------------------------------------------------------------------------------------------------------------|------------|--------|---------|
+| plinking_max_matrix_elements    | Maximum genotype matrix elements for orient := 'sample' pre-read (variants x samples). Default 16 billion (~16 GB of int8).   | BIGINT     | GLOBAL | []      |
+| plinking_max_threads            | Maximum threads for parallel scan operations. 0 = default (hardcoded cap of 16), >0 = cap at this value.                      | BIGINT     | GLOBAL | []      |
+| plinking_use_parquet_companions | Auto-discover .pvar.parquet and .psam.parquet companion files. When true, parquet companions are preferred over text formats. | BOOLEAN    | GLOBAL | []      |
 
 
