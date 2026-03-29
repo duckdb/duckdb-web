@@ -8,7 +8,7 @@ excerpt: |
 extension:
   name: duckdb_geoip_rs
   description: Retrieve geo ip data from MMDB database
-  version: 0.1.2
+  version: 0.2.0
   language: Rust
   build: cmake
   license: MIT
@@ -19,12 +19,15 @@ extension:
 
 repo:
   github: william-billaud/duckdb-geoip-rs
-  ref: 49fdbf9e35f54dd6402c2473575880691b6ed12c
+  ref: 2de7b6b7b1f6252c91b733c0ee39e44e0ac173b5
 
 docs:
   hello_world: |
     -- Before, export mmdb path : export MAXMIND_MMDB_DIR="`pwd`"
 
+    INSTALL 'duckdb_geoip_rs' FROM community;
+    LOAD 'duckdb_geoip_rs';
+    
     -- Create sample data
     CREATE TABLE ip_list (ip VARCHAR);
     INSERT INTO ip_list VALUES ('1.1.1.1'), ('8.8.8.8'), ('80.8.8.8'), ('90.9.250.1'), ('not_anip');
@@ -45,8 +48,6 @@ docs:
   extended_description: |
     Path to a directory containing GeoLite2-City.mmdb and GeoLite2-ASN.mmdb files must be exported to MAXMIND_MMDB_DIR environment variable. Defaulting to /usr/share/GeoIP.
 
-    This extension depends on the inet core extensions, which will be automatically installed, except if you do not have access to the internet.
-
     This extension export 4 function using MaxminDB database:
 
     * geoip_asn_org(ip : VARCHAR)-> VARCHAR
@@ -55,10 +56,11 @@ docs:
     * geoip_country_iso(ip : VARCHAR) -> VARCHAR
 
     All the function will return an empty value on empty/non found value
+
 extension_star_count: 5
 extension_star_count_pretty: 5
-extension_download_count: 349
-extension_download_count_pretty: 349
+extension_download_count: 675
+extension_download_count_pretty: 675
 image: '/images/community_extensions/social_preview/preview_community_extension_duckdb_geoip_rs.png'
 layout: community_extension_doc
 ---
@@ -90,5 +92,26 @@ LOAD {{ page.extension.name }};
 | geoip_asn_org     | scalar        | NULL        | NULL    |          |
 | geoip_city        | scalar        | NULL        | NULL    |          |
 | geoip_country_iso | scalar        | NULL        | NULL    |          |
+
+### Overloaded Functions
+
+<div class="extension_functions_table"></div>
+
+| function_name | function_type | description | comment | examples |
+|---------------|---------------|-------------|---------|----------|
+
+### Added Types
+
+<div class="extension_types_table"></div>
+
+| type_name | type_size | logical_type | type_category | internal |
+|-----------|----------:|--------------|---------------|----------|
+
+### Added Settings
+
+<div class="extension_settings_table"></div>
+
+| name | description | input_type | scope | aliases |
+|------|-------------|------------|-------|---------|
 
 

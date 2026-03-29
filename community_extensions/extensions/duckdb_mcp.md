@@ -8,7 +8,7 @@ excerpt: |
 extension:
   name: duckdb_mcp
   description: Model Context Protocol (MCP) extension for DuckDB that enables seamless integration between SQL databases and MCP servers. Provides both client capabilities for accessing remote MCP resources via SQL and server capabilities for exposing database content as MCP resources.
-  version: 2.0.0
+  version: 2.1.0
   language: C++
   build: cmake
   license: MIT
@@ -17,7 +17,7 @@ extension:
     - teaguesterling
 repo:
   github: teaguesterling/duckdb_mcp
-  ref: 517383c36898d9cdb0a0d547e3a4fa8509d1f0ab
+  ref: b1eb63dc8c333ae58380f2967da08eebcd2c0cc2
 
 docs:
   hello_world: |
@@ -76,6 +76,12 @@ docs:
     - `mcp_publish_query(sql, uri, format, interval)` - Publish query results
     - `mcp_publish_execution_tool(name, desc, sql, props, required, bindings)` - Publish execution tools with prepared parameter binding
 
+    **State Introspection** (v2.1):
+    - `mcp_tools()` - Query all published tools as a table
+    - `mcp_resources()` - Query all published resources as a table
+    - `mcp_server_config()` - Server configuration as key-value pairs
+    - `mcp_list_tools()` - No-arg tool listing (works before and after server start)
+
     **v2.0 Highlights**:
     - **Execution tools** with multi-statement SQL and per-statement typed parameter binding
     - **Typed JSON output** preserving DuckDB types (numbers, booleans) instead of stringifying
@@ -128,6 +134,7 @@ LOAD {{ page.extension.name }};
 | mcp_list_prompts             | scalar        | NULL        | NULL    |          |
 | mcp_list_resources           | scalar        | NULL        | NULL    |          |
 | mcp_list_tools               | scalar        | NULL        | NULL    |          |
+| mcp_list_tools               | table         | NULL        | NULL    |          |
 | mcp_publish_execution_tool   | pragma        | NULL        | NULL    |          |
 | mcp_publish_execution_tool   | scalar        | NULL        | NULL    |          |
 | mcp_publish_query            | pragma        | NULL        | NULL    |          |
@@ -142,6 +149,8 @@ LOAD {{ page.extension.name }};
 | mcp_register_prompt_template | pragma        | NULL        | NULL    |          |
 | mcp_register_prompt_template | scalar        | NULL        | NULL    |          |
 | mcp_render_prompt_template   | scalar        | NULL        | NULL    |          |
+| mcp_resources                | table         | NULL        | NULL    |          |
+| mcp_server_config            | table         | NULL        | NULL    |          |
 | mcp_server_health            | scalar        | NULL        | NULL    |          |
 | mcp_server_send_request      | scalar        | NULL        | NULL    |          |
 | mcp_server_start             | pragma        | NULL        | NULL    |          |
@@ -150,6 +159,7 @@ LOAD {{ page.extension.name }};
 | mcp_server_stop              | pragma        | NULL        | NULL    |          |
 | mcp_server_stop              | scalar        | NULL        | NULL    |          |
 | mcp_server_test              | scalar        | NULL        | NULL    |          |
+| mcp_tools                    | table         | NULL        | NULL    |          |
 
 ### Overloaded Functions
 

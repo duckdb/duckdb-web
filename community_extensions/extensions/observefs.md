@@ -8,18 +8,19 @@ excerpt: |
 extension:
   name: observefs
   description: Provides IO observability to filesystem
-  version: 0.4.6
+  version: 0.4.8
   language: C++
   build: cmake
   license: MIT
-  excluded_platforms: "wasm_mvp;wasm_eh;wasm_threads;windows_amd64_rtools"
+  excluded_platforms: "wasm_mvp;wasm_eh;wasm_threads"
   maintainers:
     - dentiny
     - peterxcli
 
 repo:
   github: dentiny/duckdb-filesystem-observability
-  ref: cb6a1a7d88eba7f02a9690e1df4c6bf4e166a9f3
+  andium: cb6a1a7d88eba7f02a9690e1df4c6bf4e166a9f3
+  ref: 3382902ca8253357d8e2ebb76bebf7c7c17e3221
 
 docs:
   hello_world: |
@@ -35,8 +36,8 @@ docs:
 
 extension_star_count: 11
 extension_star_count_pretty: 11
-extension_download_count: 422
-extension_download_count_pretty: 422
+extension_download_count: 183
+extension_download_count_pretty: 183
 image: '/images/community_extensions/social_preview/preview_community_extension_observefs.png'
 layout: community_extension_doc
 ---
@@ -70,6 +71,20 @@ LOAD {{ page.extension.name }};
 | observefs_get_profile                             | scalar        | NULL        | NULL    |          |
 | observefs_list_registered_filesystems             | table         | NULL        | NULL    |          |
 | observefs_wrap_filesystem                         | scalar        | NULL        | NULL    |          |
+
+### Overloaded Functions
+
+<div class="extension_functions_table"></div>
+
+| function_name | function_type | description | comment | examples |
+|---------------|---------------|-------------|---------|----------|
+
+### Added Types
+
+<div class="extension_types_table"></div>
+
+| type_name | type_size | logical_type | type_category | internal |
+|-----------|----------:|--------------|---------------|----------|
 
 ### Added Settings
 
