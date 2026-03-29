@@ -8,7 +8,7 @@ excerpt: |
 extension:
   name: markdown
   description: Read, analyze, and write Markdown files with block-level document representation and inline element support
-  version: 1.4.0
+  version: 1.4.2
   language: C++
   build: cmake
   license: MIT
@@ -17,8 +17,8 @@ extension:
   vcpkg_commit: bffcbb75f71553824aa948a7e7b4f798662a6fa7
 repo:
   github: teaguesterling/duckdb_markdown
-  andium: 6468c047a3f2c2d33c6eaeeed70de6e77966be56
-  ref: 6468c047a3f2c2d33c6eaeeed70de6e77966be56
+  andium: c9e1a4d3b98a814c86295ecb2ed760be286242ba
+  ref: refs/tags/v1.4.2
 docs:
   hello_world: |
     -- Load the extension
@@ -113,8 +113,8 @@ docs:
 
 extension_star_count: 15
 extension_star_count_pretty: 15
-extension_download_count: 891
-extension_download_count_pretty: 891
+extension_download_count: 868
+extension_download_count_pretty: 868
 image: '/images/community_extensions/social_preview/preview_community_extension_markdown.png'
 layout: community_extension_doc
 ---

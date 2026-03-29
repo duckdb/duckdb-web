@@ -8,7 +8,7 @@ excerpt: |
 extension:
   name: yardstick
   description: Measure-aware SQL implementing Julian Hyde's 'Measures in SQL' paper
-  version: 0.5.2
+  version: 0.6.0
   language: C++
   build: cmake
   license: MIT
@@ -19,7 +19,7 @@ extension:
 
 repo:
   github: sidequery/yardstick
-  ref: 6001370ecf86bb2ce90b2dcc6b69f5ed8dc66093
+  ref: 8722d056d517ee46075082bbaa3fd45cc61433cf
 
 docs:
   hello_world: |
@@ -68,10 +68,10 @@ docs:
 
     For more details, visit the [extension repository](https://github.com/sidequery/yardstick).
 
-extension_star_count: 39
-extension_star_count_pretty: 39
-extension_download_count: 595
-extension_download_count_pretty: 595
+extension_star_count: 45
+extension_star_count_pretty: 45
+extension_download_count: 46
+extension_download_count_pretty: 46
 image: '/images/community_extensions/social_preview/preview_community_extension_yardstick.png'
 layout: community_extension_doc
 ---
@@ -100,5 +100,26 @@ LOAD {{ page.extension.name }};
 | function_name | function_type | description | comment | examples |
 |---------------|---------------|-------------|---------|----------|
 | yardstick     | table         | NULL        | NULL    |          |
+
+### Overloaded Functions
+
+<div class="extension_functions_table"></div>
+
+| function_name | function_type | description | comment | examples |
+|---------------|---------------|-------------|---------|----------|
+
+### Added Types
+
+<div class="extension_types_table"></div>
+
+| type_name | type_size | logical_type | type_category | internal |
+|-----------|----------:|--------------|---------------|----------|
+
+### Added Settings
+
+<div class="extension_settings_table"></div>
+
+| name | description | input_type | scope | aliases |
+|------|-------------|------------|-------|---------|
 
 
