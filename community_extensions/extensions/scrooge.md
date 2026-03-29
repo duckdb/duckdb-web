@@ -8,7 +8,7 @@ excerpt: |
 extension:
   name: scrooge
   description: Provides functionality for financial data-analysis, including data scanners for the Ethereum Blockchain and Yahoo Finance
-  version: 0.0.2
+  version: 0.0.3
   language: C++
   excluded_platforms: "windows_amd64_rtools;windows_amd64_mingw"
   build: cmake
@@ -18,7 +18,7 @@ extension:
 
 repo:
   github: pdet/Scrooge-McDuck
-  ref: 222e094570f307208258b8faf90dd401fa152acd
+  ref: 44dd20c788ee047b1295915af7d4dde59f8b0c07
 
 docs:
   hello_world: |
@@ -39,10 +39,10 @@ docs:
     More information on the supported scanners and functions can be found on Scrooge's [wiki page](https://github.com/pdet/Scrooge-McDuck/wiki).
     You can also find a ROI example of Ether on the [following blogpost](https://pdet-blog.github.io/2024/06/30/ethereum.html)
 
-extension_star_count: 141
-extension_star_count_pretty: 141
-extension_download_count: 423
-extension_download_count_pretty: 423
+extension_star_count: 157
+extension_star_count_pretty: 157
+extension_download_count: 2
+extension_download_count_pretty: 2
 image: '/images/community_extensions/social_preview/preview_community_extension_scrooge.png'
 layout: community_extension_doc
 ---
@@ -68,22 +68,101 @@ LOAD {{ page.extension.name }};
 
 <div class="extension_functions_table"></div>
 
+|     function_name     | function_type | description | comment | examples |
+|-----------------------|---------------|-------------|---------|----------|
+| ad_line               | aggregate     | NULL        | NULL    |          |
+| annualized_volatility | aggregate     | NULL        | NULL    |          |
+| atr                   | aggregate     | NULL        | NULL    |          |
+| avg_win_loss_ratio    | aggregate     | NULL        | NULL    |          |
+| bollinger_lower       | aggregate     | NULL        | NULL    |          |
+| bollinger_middle      | aggregate     | NULL        | NULL    |          |
+| bollinger_signal      | scalar        | NULL        | NULL    |          |
+| bollinger_upper       | aggregate     | NULL        | NULL    |          |
+| bollinger_width       | aggregate     | NULL        | NULL    |          |
+| bs_call               | scalar        | NULL        | NULL    |          |
+| bs_delta_call         | scalar        | NULL        | NULL    |          |
+| bs_delta_put          | scalar        | NULL        | NULL    |          |
+| bs_gamma              | scalar        | NULL        | NULL    |          |
+| bs_implied_vol        | scalar        | NULL        | NULL    |          |
+| bs_put                | scalar        | NULL        | NULL    |          |
+| bs_theta_call         | scalar        | NULL        | NULL    |          |
+| bs_theta_put          | scalar        | NULL        | NULL    |          |
+| bs_vega               | scalar        | NULL        | NULL    |          |
+| calmar_ratio          | aggregate     | NULL        | NULL    |          |
+| cmf                   | aggregate     | NULL        | NULL    |          |
+| coingecko             | table         | NULL        | NULL    |          |
+| composite_score       | scalar        | NULL        | NULL    |          |
+| cumulative_return     | aggregate     | NULL        | NULL    |          |
+| dema                  | aggregate     | NULL        | NULL    |          |
+| drawdown_duration     | aggregate     | NULL        | NULL    |          |
+| ema                   | aggregate     | NULL        | NULL    |          |
+| expectancy            | aggregate     | NULL        | NULL    |          |
+| first_s               | aggregate     | NULL        | NULL    |          |
+| fred_series           | table         | NULL        | NULL    |          |
+| information_ratio     | aggregate     | NULL        | NULL    |          |
+| is_doji               | scalar        | NULL        | NULL    |          |
+| is_engulfing          | scalar        | NULL        | NULL    |          |
+| is_evening_star       | scalar        | NULL        | NULL    |          |
+| is_hammer             | scalar        | NULL        | NULL    |          |
+| is_morning_star       | scalar        | NULL        | NULL    |          |
+| is_shooting_star      | scalar        | NULL        | NULL    |          |
+| kelly_fraction        | scalar        | NULL        | NULL    |          |
+| last_s                | aggregate     | NULL        | NULL    |          |
+| log_return            | scalar        | NULL        | NULL    |          |
+| ma_crossover_signal   | scalar        | NULL        | NULL    |          |
+| macd_line             | aggregate     | NULL        | NULL    |          |
+| max_drawdown          | aggregate     | NULL        | NULL    |          |
+| mfi                   | aggregate     | NULL        | NULL    |          |
+| momentum_score        | aggregate     | NULL        | NULL    |          |
+| obv                   | aggregate     | NULL        | NULL    |          |
+| pivot_point           | scalar        | NULL        | NULL    |          |
+| pivot_r1              | scalar        | NULL        | NULL    |          |
+| pivot_r2              | scalar        | NULL        | NULL    |          |
+| pivot_r3              | scalar        | NULL        | NULL    |          |
+| pivot_s1              | scalar        | NULL        | NULL    |          |
+| pivot_s2              | scalar        | NULL        | NULL    |          |
+| pivot_s3              | scalar        | NULL        | NULL    |          |
+| portfolio_beta        | aggregate     | NULL        | NULL    |          |
+| portfolio_correlation | aggregate     | NULL        | NULL    |          |
+| profit_factor         | aggregate     | NULL        | NULL    |          |
+| read_eth              | table         | NULL        | NULL    |          |
+| relative_strength     | aggregate     | NULL        | NULL    |          |
+| rsi                   | aggregate     | NULL        | NULL    |          |
+| rsi_signal            | scalar        | NULL        | NULL    |          |
+| sharpe_ratio          | aggregate     | NULL        | NULL    |          |
+| simple_return         | scalar        | NULL        | NULL    |          |
+| sma                   | aggregate     | NULL        | NULL    |          |
+| sortino_ratio         | aggregate     | NULL        | NULL    |          |
+| stochastic_k          | aggregate     | NULL        | NULL    |          |
+| tema                  | aggregate     | NULL        | NULL    |          |
+| timebucket            | scalar        | NULL        | NULL    |          |
+| value_at_risk         | aggregate     | NULL        | NULL    |          |
+| volatility            | aggregate     | NULL        | NULL    |          |
+| vwap                  | aggregate     | NULL        | NULL    |          |
+| win_rate              | aggregate     | NULL        | NULL    |          |
+| wma                   | aggregate     | NULL        | NULL    |          |
+| yahoo_finance         | table         | NULL        | NULL    |          |
+
+### Overloaded Functions
+
+<div class="extension_functions_table"></div>
+
 | function_name | function_type | description | comment | examples |
 |---------------|---------------|-------------|---------|----------|
-| first_s       | aggregate     | NULL        | NULL    | []       |
-| last_s        | aggregate     | NULL        | NULL    | []       |
-| read_eth      | table         | NULL        | NULL    | []       |
-| sma           | aggregate     | NULL        | NULL    | []       |
-| timebucket    | scalar        | NULL        | NULL    | []       |
-| volatility    | aggregate     | NULL        | NULL    | []       |
-| yahoo_finance | table         | NULL        | NULL    | []       |
+
+### Added Types
+
+<div class="extension_types_table"></div>
+
+| type_name | type_size | logical_type | type_category | internal |
+|-----------|----------:|--------------|---------------|----------|
 
 ### Added Settings
 
 <div class="extension_settings_table"></div>
 
-|     name     |            description             | input_type | scope  |
-|--------------|------------------------------------|------------|--------|
-| eth_node_url | URL of Ethereum node to be queried | VARCHAR    | GLOBAL |
+|     name     |            description             | input_type | scope  | aliases |
+|--------------|------------------------------------|------------|--------|---------|
+| eth_node_url | URL of Ethereum node to be queried | VARCHAR    | GLOBAL | []      |
 
 

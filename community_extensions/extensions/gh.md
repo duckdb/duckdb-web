@@ -38,8 +38,8 @@ docs:
     -- Recursively read all CSVs under a directory
     SELECT count(*) FROM read_csv('gh://duckdb/duckdb@main/data/csv/glob/**/*.csv');
 
-extension_star_count: 1
-extension_star_count_pretty: 1
+extension_star_count: 2
+extension_star_count_pretty: 2
 extension_download_count: 650
 extension_download_count_pretty: 650
 image: '/images/community_extensions/social_preview/preview_community_extension_gh.png'

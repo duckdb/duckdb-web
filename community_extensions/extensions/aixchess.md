@@ -8,7 +8,7 @@ excerpt: |
 extension:
   name: aixchess
   description: Efficiently query large chess game collections
-  version: 0.1.1
+  version: 0.2.0
   language: C++
   build: cmake
   license: GPL-3.0
@@ -20,7 +20,7 @@ extension:
 
 repo:
   github: thomas-daniels/aix
-  ref: f565c29a3dd51c219c4bc9013ad90596ec83df69
+  ref: 728e58fb70d343b6b69a9d0bc395db5309b4dc65
 
 docs:
   hello_world: |
@@ -100,7 +100,11 @@ LOAD {{ page.extension.name }};
 | list_eval_to_centipawns           | macro         | Apply eval_to_centipawns to all items in a list.                                       | NULL    | NULL     |
 | list_eval_to_mate                 | macro         | Apply eval_to_mate to all items in a list.                                             | NULL    | NULL     |
 | list_winning_chances_lichess      | macro         | Apply winning_chances_lichess to all items in a list.                                  | NULL    | NULL     |
+| is_valid_movedata                 | scalar        | NULL                                                                                   | NULL    | NULL     |
 | clocks_to_move_times__check_nulls | scalar        | NULL                                                                                   | NULL    | NULL     |
+| matches_fen                       | scalar        | NULL                                                                                   | NULL    | NULL     |
+| move_details_ext                  | scalar        | NULL                                                                                   | NULL    | NULL     |
+| move_details_ext_at               | scalar        | NULL                                                                                   | NULL    | NULL     |
 
 ### Overloaded Functions
 
