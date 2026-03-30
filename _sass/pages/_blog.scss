@@ -31,7 +31,7 @@ section.speakers,
 		background: var(--main-blogpost-background-color, #FFF);
 		-webkit-box-shadow: 0px 1px 1px 0px rgba(255, 255, 255, 0.12) inset;
 				box-shadow: 0px 1px 1px 0px rgba(255, 255, 255, 0.12) inset;
-		border-radius: 15px;
+		border-radius: var(--border-radius-box);
 		overflow: hidden;
 		.postdetails{
 			padding: 30px;
@@ -423,7 +423,7 @@ main.main-everywhere .recentposts .newstileswrap .postpreview{
 			left: 0;
 			height: calc(100% - 10px);
 			background: var(--interactive-filter-selected-background-color, #D9D9D9);
-			border-radius: 20px;
+			border-radius: 100px;
 			transition: all 0.3s ease;
 			z-index: 1;
 		}
@@ -471,9 +471,9 @@ img{
 			justify-content: center;
 }
 
-div.graphics-box, 
+div.graphics-box,
 div.graphic-box{
-	border-radius: 10px;
+	border-radius: var(--border-radius-box);
 	border: 1px solid var(--main-infographics-element-border, #D9D9D9);
 	background: var(--main-infographis-primary-background, #E6E6E6);
 	display: flex;
@@ -660,7 +660,7 @@ h5 a {
 			.supporterboard{
 				margin-top: 25px;
 				background-color: var(--doc-codebox-background-color, #F2F2F2);
-				border-radius: 15px;
+				border-radius: var(--border-radius-box);
 				border-top: 15px solid #979797;
 				&:not(:first-of-type){
 					
@@ -842,7 +842,7 @@ h5 a {
 				margin-top: 0;
 			}
 			.highlight{
-				border-radius: 10px;
+				border-radius: var(--border-radius-box);
 			}
 			.excerpt{
 				em{
@@ -1059,7 +1059,7 @@ footer{
 			z-index: 503;
 			background: var(--menu-dropdown-background-color, #F2F2F2);
 			border: 1px solid var(--menu-dropdown-border-color, #E6E6E6);
-			border-radius: 15px;
+			border-radius: var(--border-radius-box);
 			padding: 20px;
 			opacity: 0;
 			transform: translateY(10px);

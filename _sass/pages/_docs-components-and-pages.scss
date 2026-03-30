@@ -127,7 +127,7 @@ body.documentation {
             line-height: 1.3;
             cursor: pointer;
             border: 1px solid var(--menu-dropdown-border-color, #333);
-            border-radius: 10px;
+            border-radius: var(--border-radius-box);
             padding: 7px 12px;
             white-space: nowrap;
             width: auto;
@@ -236,7 +236,7 @@ body.documentation {
 
     // Search box
     .opensearch {
-        border-radius: 10px;
+        border-radius: var(--border-radius-box);
         border: 1px solid var(--menu-dropdown-border-color, #333);
         padding: 6px;
         display: flex;
@@ -260,7 +260,7 @@ body.documentation {
             @include tiny();
             color: var(--menu-topmenu-searchbar-shortcut-text-color, #999);
             padding: 5px 7px;
-            border-radius: 5px;
+            border-radius: 10px;
             border: 1px solid var(--doc-codebox-border-color, #E6E6E6);
 
             &.mac {
@@ -341,7 +341,7 @@ body.documentation {
 
     // Page metadata
     .pagemeta {
-        border-radius: 10px;
+        border-radius: var(--border-radius-box);
         background: var(--doc-codebox-background-color, #F2F2F2);
         padding: 20px;
         display: flex;
@@ -415,7 +415,7 @@ body.documentation {
 }
 
 .box-link {
-    border-radius: 10px;
+    border-radius: var(--border-radius-box);
     border: 1px solid var(--interactive-folderbox-border-color, #E6E6E6);
     background: var(--interactive-folderbox-background-color, rgba(250, 250, 250, 0.60));
     padding: 10px;
@@ -465,7 +465,7 @@ body.documentation {
         flex-shrink: 0;
         width: 40px;
         height: 40px;
-        border-radius: 7.467px;
+        border-radius: 10px;
         border: 0.747px solid var(--main-codebox-border-color, #E6E6E6);
         background: var(--main-codebox-sub-background-color, rgba(230, 230, 230, 0.60));
         display: flex;

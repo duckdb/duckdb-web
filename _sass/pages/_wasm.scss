@@ -18,7 +18,7 @@ body.wasm{
 		-o-transition: background-color .3s;
 		transition: background-color .3s;
 		margin-bottom: 8px;
-		border-radius: 10px;
+		border-radius: var(--border-radius-box);
 		border: 1px solid transparent;
 		-webkit-transition: border .3s;
 		-o-transition: border .3s;

@@ -78,7 +78,7 @@ header .headerline .headercontent .landingmenu nav .hasSub + .submenuwrap ul li 
 		.card{
 			position: relative;
 			width: calc(50% - 10px);
-			border-radius: 10px;
+			border-radius: var(--border-radius-box);
 			border: 1px solid var(--lake-infobox-border-color, rgba(204, 235, 255, 0.60));
 			background: var(--lake-infobox-primary-background-color, rgba(229, 245, 255, 0.60));
 			backdrop-filter: blur(7px);
@@ -107,7 +107,7 @@ header .headerline .headercontent .landingmenu nav .hasSub + .submenuwrap ul li 
 			position: relative;
 			width: calc( (100% - 60px) / 4);
 			padding: 30px 20px;
-			border-radius: 15px;
+			border-radius: var(--border-radius-box);
 			border: 1px solid var(--lake-infobox-border-color, rgba(204, 235, 255, 0.60));
 			background: var(--lake-infobox-primary-background-color, rgba(229, 245, 255, 0.60));
 			backdrop-filter: blur(7px);
@@ -279,7 +279,7 @@ section.architecture {
 		.client,
 		.database,
 		.storage {
-			border-radius: 15px;
+			border-radius: var(--border-radius-box);
 			border: 1px solid var(--doc-codebox-border-color, #E6E6E6);
 			background: var(--doc-codebox-background-color, #F2F2F2);
 			padding: 15px;
@@ -305,7 +305,7 @@ section.architecture {
 		
 		.database, 
 		.storage{
-			border-radius: 15px;
+			border-radius: var(--border-radius-box);
 			border: 1px solid var(--main-ribbon-border-color-blue, rgba(153, 216, 255, 0.60));
 			background: var(--lake-infobox-quaternary-background-color, rgba(178, 226, 255, 0.60));
 		}
@@ -400,7 +400,7 @@ section.architecture {
 			width: 100%;
 			height: 100%;
 			z-index: 100;
-			border-radius: 15px;
+			border-radius: var(--border-radius-box);
 			background: var(--lake-architecture-background-hover, #E5F5FF);
 			padding: 15px;
 			visibility: hidden;
@@ -485,7 +485,7 @@ section.architecture {
 		flex-direction: column;
 		gap: 15px;
 		padding: 16px;
-		border-radius: 15px;
+		border-radius: var(--border-radius-box);
 		border: 1px solid var(--lake-ribbon-border-color, rgba(153, 216, 255, 0.60));
 		background: var(--lake-infobox-tertiary-background-color, rgba(178, 226, 255, 0.60));
 		
@@ -791,7 +791,7 @@ footer .sitefooter .footercontent > div a:hover{
 
 // General Code-Highlight Styles (Todo: Remove from docu.scss 767 to 816)
 .highlight {
-	border-radius: 10px;
+	border-radius: var(--border-radius-box);
 }
 
 .highlighter-rouge + .highlighter-rouge{
@@ -852,7 +852,7 @@ div.highlight {
 	width: 100%;
 	position: relative;
 	overflow: hidden;
-	border-radius: 10px;
+	border-radius: var(--border-radius-box);
 	background: var(--doc-codebox-background-color, #F2F2F2);
 	border: 1px solid var(--doc-codebox-border-color, #D9D9D9);
 

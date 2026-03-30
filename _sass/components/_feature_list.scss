@@ -12,7 +12,7 @@
         padding: 30px 20px;
         -ms-flex-negative: 0;
             flex-shrink: 0;
-        border-radius: 15px;
+        border-radius: var(--border-radius-box);
         border: 1px solid var(--main-infobox-border-color, rgba(212, 204, 255, 0.60));
         background: var(--main-infobox-background-color, rgba(246, 245, 255, 0.60));
         -webkit-backdrop-filter: blur(7px);

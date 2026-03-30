@@ -78,12 +78,12 @@ body.installation{
 		-o-transition: background-color .3s;
 		transition: background-color .3s;
 		margin-bottom: 8px;
-		border-radius: 10px;
+		border-radius: var(--border-radius-box);
 		border: 1px solid transparent;
 		-webkit-transition: border .3s;
 		-o-transition: border .3s;
 		transition: border .3s;
-		
+
 		&.open h3::before{
 			-webkit-transform: rotate(180deg);
 				-ms-transform: rotate(180deg);
@@ -133,7 +133,7 @@ body.installation{
 		}
 
 		.option{
-			border-radius: 10px;
+			border-radius: var(--border-radius-box);
 			border: 1px solid var(--interactive-folderbox-border-color, #E6E6E6);
 			background: var(--interactive-folderbox-background-color, rgba(250, 250, 250, 0.60));
 			display: flex;
@@ -150,7 +150,7 @@ body.installation{
 			}
 			
 			.symbol {
-				border-radius: 6px;
+				border-radius: 10px;
 				border: 1px solid var(--interactive-folderbox-border-color, #E6E6E6);
 				background: var(--interactive-installation-icon-background, rgba(230, 230, 230, 0.60));
 				display: block;
@@ -384,7 +384,7 @@ body.installation{
 		pre {
 			padding: 16px; /* instead of 10px */
 			overflow: auto;
-			border-radius: 10px;
+			border-radius: var(--border-radius-box);
 			background: var(--doc-codebox-background-color, #F2F2F2);
 			white-space: pre;
 			overflow-x: auto;
@@ -439,7 +439,7 @@ body.installation{
 		figure.highlight {
 			width: 100%;
 			position: relative;
-			border-radius: 10px;
+			border-radius: var(--border-radius-box);
 			overflow: hidden;
 			transition: border-color 0.3s;
 			background: var(--doc-codebox-background-color, #F2F2F2);
@@ -500,7 +500,7 @@ body.installation{
 	.yourselection{
 		position: relative;
 		border: 1px solid var(--doc-codebox-border-color, #E6E6E6);;
-		border-radius: 15px;
+		border-radius: var(--border-radius-box);
 		margin-top: 25px;
 		.select.hide {
 			opacity: 0.4;
@@ -628,7 +628,7 @@ body.installation{
 		.result{
 			@include code-standard();
 			padding: 12px 12px 14px 14px;
-			border-radius: 10px;
+			border-radius: var(--border-radius-box);
 			border: 1px solid var(--doc-codebox-border-color, #E6E6E6);
 			background: var(--doc-codebox-background-color, #F2F2F2);
 			position: relative;
@@ -740,7 +740,7 @@ a.download-btn{
 	width: fit-content;
 	gap: 10px;
 	padding: 10px 15px 10px 10px;
-	border-radius: 10px;
+	border-radius: var(--border-radius-box);
 	border: 1px solid var(--interactive-folderbox-border-color, #E6E6E6);
 	background: var(--interactive-folderbox-background-color, rgba(250, 250, 250, 0.60));
 	transition: all .3s;
@@ -749,7 +749,7 @@ a.download-btn{
 	@include label-1;
 	
 	&:before{
-		border-radius: 6px;
+		border-radius: 10px;
 		border: 1px solid var(--interactive-folderbox-border-color, #E6E6E6);
 		background-color: var(--interactive-installation-icon-background, rgba(230, 230, 230, 0.60));
 		background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='18' height='18' fill='none' viewBox='0 0 18 18'%3E%3Cpath fill='%231A1A1A' d='M9.92.646v8.898l3.217-3.249 1.3 1.313L9 13.098l-5.437-5.49 1.3-1.313 3.218 3.25v-8.9h1.838Zm-7.816 10.21v4.642h13.792v-4.641h1.838v6.498H.267v-6.498h1.838Z'/%3E%3C/svg%3E");

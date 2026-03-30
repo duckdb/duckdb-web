@@ -38,7 +38,7 @@ body.about{
 			max-width: 750px;
 			margin: 0 auto;
 			overflow: hidden;
-			border-radius: 15px;
+			border-radius: var(--border-radius-box);
 
 			img{
 				display: block;
@@ -140,7 +140,7 @@ body.about{
 
 		.founder-card{
 			display: flex;
-			border-radius: 15px;
+			border-radius: var(--border-radius-box);
 			overflow: hidden;
 			border: 1px solid var(--main-infobox-labs-border-color, rgba(230, 230, 230, 0.6));
 			background: var(--main-infobox-labs-background-color, rgba(242, 242, 242, 0.6));
