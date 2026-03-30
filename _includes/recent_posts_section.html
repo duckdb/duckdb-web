@@ -36,9 +36,18 @@
 					
 					{% if page.collection == "library" %}
 					
+						{% comment %} Determine data-category for filtering {% endcomment %}
+						{% if item.highlighted == true %}
+							{% assign data_category = "highlighted" %}
+						{% elsif item.category %}
+							{% assign data_category = item.category %}
+						{% else %}
+							{% assign data_category = "core" %}
+						{% endif %}
+						{% comment %} Determine data-source for styling (colors/icons) {% endcomment %}
 						{% if item.title contains "ducklake" or item.title contains "DuckLake" %}
 							{% assign data_source = "ducklake" %}
-						{% elsif item.thirdparty == true %}
+						{% elsif item.category == "community" %}
 							{% assign data_source = "thirdparty" %}
 						{% else %}
 							{% assign data_source = "duckdb" %}
@@ -49,7 +58,7 @@
 						{% else %}
 							{% assign data_type = "" %}
 						{% endif %}
-						<div class="librarypreview postpreview {{ tag_classes | downcase | slugify }}" data-title="{{ item.title | escape }}" data-source="{{ data_source }}"{% if data_type != "" %} data-type="{{ data_type }}"{% endif %}>
+						<div class="librarypreview postpreview {{ tag_classes | downcase | slugify }}" data-title="{{ item.title | escape }}" data-source="{{ data_source }}" data-category="{{ data_category }}"{% if data_type != "" %} data-type="{{ data_type }}"{% endif %}>
 							<a href="/library/{{ item.slug | default: item.title | slugify }}/" title="{{ item.title }}" class="blocklink"></a>
 							<div class="postimg custom">
 								{% if item.thumb %}
