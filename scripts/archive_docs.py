@@ -13,7 +13,7 @@ old_stable_version = sys.argv[1]
 # update new stable file based on old stable file
 def update_new_stable_page(new_stable_file, old_stable_dir):
     # if the old counterpart exists, parse YAML metadata and get the "redirect_from" field
-    old_stable_file = new_stable_file.replace("docs/current", "docs/stable")
+    old_stable_file = new_stable_file.replace("docs/current", "docs/lts")
 
     new_stable_doc = frontmatter.load(new_stable_file)
 
@@ -28,16 +28,16 @@ def update_new_stable_page(new_stable_file, old_stable_dir):
 
     # replace link tags in the content
     new_stable_doc.content = new_stable_doc.content.replace(
-        f"{{% link docs/current/", f"{{% link docs/stable/"
+        f"{{% link docs/current/", f"{{% link docs/lts/"
     )
     return frontmatter.dumps(new_stable_doc)
 
 
-# copy docs/current to docs/stable, while keeping the redirects from docs/stable
+# copy docs/current to docs/lts, while keeping the redirects from docs/lts
 def archive_preview():
     src = "docs/current"
-    dst = f"docs/stable_temp"
-    old_stable = "docs/stable"
+    dst = f"docs/lts_temp"
+    old_stable = "docs/lts"
 
     os.makedirs(dst, exist_ok=True)
 
@@ -58,8 +58,8 @@ def archive_preview():
             else:
                 shutil.copy2(src_file, dst_file)
 
-    shutil.rmtree("docs/stable")
-    shutil.move("docs/stable_temp", "docs/stable")
+    shutil.rmtree("docs/lts")
+    shutil.move("docs/lts_temp", "docs/lts")
 
 
 def update_stable_page(src_file, old_stable_version):
@@ -72,15 +72,15 @@ def update_stable_page(src_file, old_stable_version):
 
     # replace link tags in the content
     doc.content = doc.content.replace(
-        f"{{% link docs/stable/", f"{{% link docs/{old_stable_version}/"
+        f"{{% link docs/lts/", f"{{% link docs/{old_stable_version}/"
     )
     return frontmatter.dumps(doc)
 
 
-# copy docs/stable to docs/<old_stable_version>
+# copy docs/lts to docs/<old_stable_version>
 # the directs should be expanded on with the version number
 def archive_stable(old_stable_version):
-    src = "docs/stable"
+    src = "docs/lts"
     dst = f"docs/{old_stable_version}"
 
     os.makedirs(dst, exist_ok=True)

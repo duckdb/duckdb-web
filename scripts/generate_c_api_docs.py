@@ -18,29 +18,29 @@ with open(duckdb_h_path, 'r') as f:
     text = f.read()
 
 docs_map = {
-    'Open Connect': 'docs/stable/clients/c/connect.md',
-    'Query Execution': 'docs/stable/clients/c/query.md',
-    'Configuration': 'docs/stable/clients/c/config.md',
-    'Result Functions': 'docs/stable/clients/c/types.md',
+    'Open Connect': 'docs/lts/clients/c/connect.md',
+    'Query Execution': 'docs/lts/clients/c/query.md',
+    'Configuration': 'docs/lts/clients/c/config.md',
+    'Result Functions': 'docs/lts/clients/c/types.md',
     'Helpers': None,
-    'Date Time Timestamp Helpers': 'docs/stable/clients/c/types.md',
-    'Hugeint Helpers': 'docs/stable/clients/c/types.md',
-    'Decimal Helpers': 'docs/stable/clients/c/types.md',
-    'Value Interface': 'docs/stable/clients/c/value.md',
-    'Logical Type Interface': 'docs/stable/clients/c/types.md',
-    'Data Chunk Interface': 'docs/stable/clients/c/data_chunk.md',
-    'Vector Interface': 'docs/stable/clients/c/vector.md',
-    'Validity Mask Functions': 'docs/stable/clients/c/vector.md',
-    'Table Functions': 'docs/stable/clients/c/table_functions.md',
-    'Table Function Bind': 'docs/stable/clients/c/table_functions.md',
-    'Table Function Init': 'docs/stable/clients/c/table_functions.md',
-    'Table Function': 'docs/stable/clients/c/table_functions.md',
-    'Replacement Scans': 'docs/stable/clients/c/replacement_scans.md',
-    'Prepared Statements': 'docs/stable/clients/c/prepared.md',
-    'Appender': 'docs/stable/clients/c/appender.md',
+    'Date Time Timestamp Helpers': 'docs/lts/clients/c/types.md',
+    'Hugeint Helpers': 'docs/lts/clients/c/types.md',
+    'Decimal Helpers': 'docs/lts/clients/c/types.md',
+    'Value Interface': 'docs/lts/clients/c/value.md',
+    'Logical Type Interface': 'docs/lts/clients/c/types.md',
+    'Data Chunk Interface': 'docs/lts/clients/c/data_chunk.md',
+    'Vector Interface': 'docs/lts/clients/c/vector.md',
+    'Validity Mask Functions': 'docs/lts/clients/c/vector.md',
+    'Table Functions': 'docs/lts/clients/c/table_functions.md',
+    'Table Function Bind': 'docs/lts/clients/c/table_functions.md',
+    'Table Function Init': 'docs/lts/clients/c/table_functions.md',
+    'Table Function': 'docs/lts/clients/c/table_functions.md',
+    'Replacement Scans': 'docs/lts/clients/c/replacement_scans.md',
+    'Prepared Statements': 'docs/lts/clients/c/prepared.md',
+    'Appender': 'docs/lts/clients/c/appender.md',
     'Arrow Interface': None,
 }
-all_api_functions = 'docs/stable/clients/c/api.md'
+all_api_functions = 'docs/lts/clients/c/api.md'
 
 
 def is_line_separator(l):

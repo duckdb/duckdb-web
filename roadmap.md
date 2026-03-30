@@ -3,7 +3,7 @@ layout: default
 title: Development Roadmap
 body_class: roadmap blog_typography post
 redirect_from:
-- /docs/stable/dev/roadmap
+- /docs/lts/dev/roadmap
 - /docs/current/dev/roadmap
 max_page_width: small
 toc: false

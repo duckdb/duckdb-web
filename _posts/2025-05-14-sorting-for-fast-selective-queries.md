@@ -27,7 +27,7 @@ Using sorting will be helpful in any of these situations:
 - You access your data via HTTP(S)
 - Your data lives in the cloud on object storage such as AWS S3
 
-This overview describes the DuckDB file format, but thanks to DuckDB's [partial reading support]({% link docs/stable/core_extensions/httpfs/https.md %}#partial-reading), these techniques can be generally applied to nearly any columnar file format or database.
+This overview describes the DuckDB file format, but thanks to DuckDB's [partial reading support]({% link docs/lts/core_extensions/httpfs/https.md %}#partial-reading), these techniques can be generally applied to nearly any columnar file format or database.
 This is a great way to speed up querying Apache Parquet files on remote endpoints – including data lakes!
 
 > Stay tuned for a subsequent post covering advanced multi-column sorting!
@@ -87,7 +87,7 @@ FROM "Table 1"
 WHERE "Column N" = 'VA';
 ```
 
-> DuckDB's [friendly SQL]({% link docs/stable/sql/dialect/friendly_sql.md %}) makes the traditional SQL `SELECT *` optional!
+> DuckDB's [friendly SQL]({% link docs/lts/sql/dialect/friendly_sql.md %}) makes the traditional SQL `SELECT *` optional!
 
 DuckDB first checks the zone map (labeled `Column N Metadata` in the diagram).
 Does `VA` fall within the range (alphabetically) of `AZ` to `PA`?
@@ -184,7 +184,7 @@ CREATE OR REPLACE TABLE sorted_table AS
     ORDER BY varchar_column_to_sort[:8];
 ```
 
-> DuckDB's [friendly SQL]({% link docs/stable/sql/dialect/friendly_sql.md %}#functions-and-expressions) allows bracket notation for string slicing!
+> DuckDB's [friendly SQL]({% link docs/lts/sql/dialect/friendly_sql.md %}#functions-and-expressions) allows bracket notation for string slicing!
 
 ### Filter by More Columns
 

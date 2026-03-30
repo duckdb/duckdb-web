@@ -18,7 +18,7 @@ Currently, the following secret types are available:
 | Secret type   | Service / protocol   | Extension                                                                         |
 | ------------- | -------------------- | --------------------------------------------------------------------------------- |
 | `azure`       | Azure Blob Storage   | [`azure`]({% link docs/current/core_extensions/azure.md %})                       |
-| `ducklake`    | DuckLake             | [`ducklake`](https://ducklake.select/docs/stable/duckdb/usage/connecting#secrets) |
+| `ducklake`    | DuckLake             | [`ducklake`](https://ducklake.select/docs/lts/duckdb/usage/connecting#secrets) |
 | `gcs`         | Google Cloud Storage | [`httpfs`]({% link docs/current/core_extensions/httpfs/s3api.md %})               |
 | `http`        | HTTP and HTTPS       | [`httpfs`]({% link docs/current/core_extensions/httpfs/https.md %})               |
 | `huggingface` | Hugging Face         | [`httpfs`]({% link docs/current/core_extensions/httpfs/hugging_face.md %})        |

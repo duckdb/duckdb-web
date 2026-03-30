@@ -12,14 +12,14 @@ def update_new_preview_page(file):
 
     # replace link tags in the content
     doc.content = doc.content.replace(
-        f"{{% link docs/stable/", f"{{% link docs/current/"
+        f"{{% link docs/lts/", f"{{% link docs/current/"
     )
     return frontmatter.dumps(doc)
 
 
-# copy docs/stable to docs/current
+# copy docs/lts to docs/current
 def copy_docs():
-    src = "docs/stable"
+    src = "docs/lts"
     dst = "docs/current"
 
     shutil.rmtree(dst)

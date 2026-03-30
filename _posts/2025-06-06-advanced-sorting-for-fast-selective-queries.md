@@ -42,7 +42,7 @@ In this post, we describe several advanced sorting strategies, compare them with
 ## The Strategy
 
 Instead of sorting precisely by one or a small number of columns, we want to sort approximately by a larger number of columns.
-That will allow queries with different `WHERE` clauses to all benefit from DuckDB's [min-max indexes (zone maps)]({% link docs/stable/sql/indexes.md %}#min-max-index-zonemap).
+That will allow queries with different `WHERE` clauses to all benefit from DuckDB's [min-max indexes (zone maps)]({% link docs/lts/sql/indexes.md %}#min-max-index-zonemap).
 This post introduces two high-level approaches with several examples of each: sorting by space filling curves, and sorting by truncated timestamps.
 
 ### Space Filling Curves
@@ -111,13 +111,13 @@ Our alternative sorting approaches are:
 
 > The Morton and Hilbert encoding functions come from the [`lindel` DuckDB community extension]({% link community_extensions/extensions/lindel.md %}), contributed by [Rusty Conover](https://github.com/rustyconover).
 > Thank you to Rusty and the folks who have built the [`lindel` Rust crate](https://crates.io/crates/lindel) upon which the DuckDB extension is based!
-> The [`spatial` extension]({% link docs/stable/core_extensions/spatial/overview.md %}) also contains an [`ST_Hilbert` function]({% link docs/stable/core_extensions/spatial/functions.md %}#st_hilbert) that works similarly.
+> The [`spatial` extension]({% link docs/lts/core_extensions/spatial/overview.md %}) also contains an [`ST_Hilbert` function]({% link docs/lts/core_extensions/spatial/functions.md %}#st_hilbert) that works similarly.
 > Thanks to [Max Gabrielsson](https://github.com/Maxxen) and the GDAL community!
 
 These plots display query runtime when pulling from a DuckDB file hosted on S3.
 These same techniques can also be successfully applied to the [DuckLake](https://ducklake.select/) integrated data lake and catalog format!
 DuckLake is the modern evolution of the cloud data lakehouse – take a minute to check out the [launch post]({% post_url 2025-05-27-ducklake %}) if you haven't yet!
-DuckLake has an [additional concept of a partition](https://ducklake.select/docs/stable/duckdb/advanced_features/partitioning), which enables entire files to be skipped.
+DuckLake has an [additional concept of a partition](https://ducklake.select/docs/lts/duckdb/advanced_features/partitioning), which enables entire files to be skipped.
 To take full advantage of DuckLake, first partition your data (by time or otherwise) and then apply the techniques in this post when loading your data.
 
 All experiments were run on an M1 MacBook Pro with DuckDB v1.2.2.
@@ -250,7 +250,7 @@ CREATE TABLE IF NOT EXISTS flights_hilbert AS
         ]::UBIGINT[2]);
 ```
 
-Alternatively, the [`spatial` extension]({% link docs/stable/core_extensions/spatial/overview.md %}) can be used to execute a Hilbert encoding.
+Alternatively, the [`spatial` extension]({% link docs/lts/core_extensions/spatial/overview.md %}) can be used to execute a Hilbert encoding.
 It requires a bounding box to be supplied, as this helps determine the granularity of the encoding for geospatial use cases.
 It performed similarly to the Hilbert approach included in the experimental results.
 

@@ -6,9 +6,9 @@ from pathlib import Path
 
 
 def generate_docs_llms_files():
-    """Generate llms.txt and llms-full.txt for the docs/stable directory"""
-    # Path to the docs/stable directory
-    docs_dir = Path('docs/stable')
+    """Generate llms.txt and llms-full.txt for the docs/lts directory"""
+    # Path to the docs/lts directory
+    docs_dir = Path('docs/lts')
 
     # Initialize content for both files
     llms_content = []
@@ -17,7 +17,7 @@ def generate_docs_llms_files():
     # Group files by directory
     file_groups = {}
 
-    # Walk through all markdown files in docs/stable
+    # Walk through all markdown files in docs/lts
     for root, _, files in os.walk(docs_dir):
         for file in files:
             if not file.endswith('.md'):
@@ -41,7 +41,7 @@ def generate_docs_llms_files():
 
             # Set website path to point to the Markdown file
             website_path = str(relative_path)
-            website_url = f"https://duckdb.org/docs/stable/{website_path}"
+            website_url = f"https://duckdb.org/docs/lts/{website_path}"
 
             # Add to file groups
             if dir_name not in file_groups:
@@ -95,7 +95,7 @@ def main():
     # Generate the docs-specific llms.txt and llms-full.txt files
     generate_docs_llms_files()
 
-    print("Generated docs/stable/llms.txt and docs/stable/llms-full.txt successfully!")
+    print("Generated docs/lts/llms.txt and docs/lts/llms-full.txt successfully!")
 
 
 if __name__ == '__main__':

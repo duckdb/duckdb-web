@@ -51,19 +51,19 @@ Visit `http://localhost:4000/docs/` (use HTTP, not HTTPS).
 Jekyll with Kramdown/GFM markdown. Navigation menus are driven by JSON data files, not auto-discovered from files.
 
 ### Documentation Versioning
-- `docs/stable/` — LTS release
 - `docs/current/` — current stable release (target for most PRs)
+- `docs/lts/` — LTS release
 - `docs/1.3/`, `docs/1.2/`, etc. — archived versions (rarely edited)
 
 The `_config_exclude_archive.yml` config is used by `serve-latest.sh` to skip archived versions for faster local builds.
 
 ### Adding a New Doc Page
-1. Create a Markdown file using `snake_case` naming in `docs/stable/`
-2. Add an entry to `_data/menu_docs_stable.json` for sidebar navigation
-3. For a new guide, also add a link in `docs/stable/guides/overview.md`
+1. Create a Markdown file using `snake_case` naming in `docs/`
+2. Add an entry to `_data/menu_docs_lts.json` for sidebar navigation
+3. For a new guide, also add a link in `docs/lts/guides/overview.md`
 
 ### Generated Pages
-Many pages under `docs/stable/sql/functions/` are auto-generated. Check `scripts/generate_all_docs.sh` before editing — do not edit generated content directly. Source data lives in the [`duckdb/duckdb`](https://github.com/duckdb/duckdb) repository.
+Many pages under `docs/lts/sql/functions/` are auto-generated. Check `scripts/generate_all_docs.sh` before editing — do not edit generated content directly. Source data lives in the [`duckdb/duckdb`](https://github.com/duckdb/duckdb) repository.
 
 ### Front Matter
 Every doc page uses Jekyll front matter:
@@ -77,7 +77,7 @@ title: Page Title
 ### Internal Links
 Always use Jekyll link tags (not relative paths):
 ```markdown
-{% link docs/stable/sql/statements/select.md %}
+{% link docs/lts/sql/statements/select.md %}
 ```
 Link tags cause build failures if the target doesn't exist, catching broken links at build time.
 
