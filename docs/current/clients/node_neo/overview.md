@@ -8,7 +8,7 @@ redirect_from:
 title: Node.js Client (Neo)
 ---
 
-> Tip To use the DuckDB Node.js client, visit the [Node.js installation page]({% link install/index.html %}?environment=nodejs).
+> Installation To use the DuckDB Node.js client, visit the [Node.js installation page]({% link install/index.html %}?environment=nodejs).
 >
 > The latest stable version of the DuckDB Node.js (Neo) client is {% if site.current_duckdb_node_neo_version != "" %}{{ site.current_duckdb_node_neo_version }}{% else %}{{ site.lts_duckdb_node_neo_version }}{% endif %}.
 

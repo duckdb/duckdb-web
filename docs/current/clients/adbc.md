@@ -8,7 +8,7 @@ redirect_from:
 title: ADBC Client
 ---
 
-> Tip To use the DuckDB ADBC client, download the [`libduckdb` archive]({% link install/index.html %}?environment=c) for your platform and follow the [instructions below](#installing-the-library).
+> Installation To use the DuckDB ADBC client, download the [`libduckdb` archive]({% link install/index.html %}?environment=c) for your platform and follow the [instructions below](#installing-the-library).
 >
 > The latest stable version of the DuckDB ADBC client is {{ site.current_duckdb_version }}.
 

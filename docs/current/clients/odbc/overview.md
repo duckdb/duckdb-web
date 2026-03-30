@@ -8,7 +8,7 @@ redirect_from:
 title: ODBC API Overview
 ---
 
-> Tip To use the DuckDB ODBC client, visit the [ODBC installation page]({% link install/index.html %}?environment=odbc).
+> Installation To use the DuckDB ODBC client, visit the [ODBC installation page]({% link install/index.html %}?environment=odbc).
 >
 > The latest stable version of the DuckDB ODBC client is {% if site.current_duckdb_odbc_short_version != "" %}{{ site.current_duckdb_odbc_short_version }}{% else %}{{ site.lts_duckdb_odbc_short_version }}{% endif %}.
 

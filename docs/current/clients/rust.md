@@ -9,7 +9,7 @@ redirect_from:
 title: Rust Client
 ---
 
-> Tip To use the DuckDB Rust client, visit the [Rust installation page]({% link install/index.html %}?environment=rust).
+> Installation To use the DuckDB Rust client, visit the [Rust installation page]({% link install/index.html %}?environment=rust).
 >
 > The latest stable version of the DuckDB Rust client is {% if site.current_duckdb_rust_version != "" %}{{ site.current_duckdb_rust_version }}{% else %}{{ site.lts_duckdb_rust_version }}{% endif %}.
 
