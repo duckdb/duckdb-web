@@ -32,7 +32,7 @@ with open(filename, "r") as f:
 
         s = s.replace(m.group(), f"]({{% link {resolved_path} %}}{anchor_text})")
 
-    # absolute paths, e.g. /docs/installation/index
+    # absolute paths, e.g. /docs/...
     for m in re.finditer(r"\]\(/([^2].*?)([#?].*?)?\)", s):
         link_path = m.group(1)
 
