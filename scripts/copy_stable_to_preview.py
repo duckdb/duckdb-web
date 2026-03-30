@@ -11,9 +11,7 @@ def update_new_preview_page(file):
         del doc["redirect_from"]
 
     # replace link tags in the content
-    doc.content = doc.content.replace(
-        f"{{% link docs/lts/", f"{{% link docs/current/"
-    )
+    doc.content = doc.content.replace(f"{{% link docs/lts/", f"{{% link docs/current/")
     return frontmatter.dumps(doc)
 
 

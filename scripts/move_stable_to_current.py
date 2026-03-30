@@ -4,7 +4,6 @@ import shutil
 import frontmatter
 
 
-
 # copy **the redirects** from docs/lts to docs/current
 def copy_redirects():
     src = "docs/lts"
@@ -30,7 +29,9 @@ def copy_redirects():
             if "redirect_from" in src_doc_frontmatter:
                 src_redirect_from = src_doc_frontmatter["redirect_from"]
                 dst_redirect_from = dst_doc_frontmatter.get("redirect_from", [])
-                dst_doc_frontmatter["redirect_from"] = sorted(dst_redirect_from + src_redirect_from)
+                dst_doc_frontmatter["redirect_from"] = sorted(
+                    dst_redirect_from + src_redirect_from
+                )
                 del src_doc_frontmatter["redirect_from"]
 
             with open(src_file, "w") as f:
@@ -40,6 +41,7 @@ def copy_redirects():
             with open(dst_file, "w") as f:
                 f.write(frontmatter.dumps(dst_doc_frontmatter))
                 f.write("\n")
+
 
 def add_stable_redirects():
     src = "docs/current"
@@ -53,7 +55,9 @@ def add_stable_redirects():
 
             doc = frontmatter.load(src_file)
             redirect_from = doc.get("redirect_from", [])
-            stable_path = "/" + os.path.join("docs/stable", rel_path, file).removesuffix(".md")
+            stable_path = "/" + os.path.join(
+                "docs/stable", rel_path, file
+            ).removesuffix(".md")
             if stable_path not in redirect_from:
                 redirect_from.append(stable_path)
             doc["redirect_from"] = sorted(redirect_from)
@@ -61,8 +65,6 @@ def add_stable_redirects():
             with open(src_file, "w") as f:
                 f.write(frontmatter.dumps(doc))
                 f.write("\n")
-
-
 
 
 copy_redirects()
