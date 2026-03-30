@@ -36,7 +36,7 @@ This section lists the features that the DuckDB team plans to work on **in the c
 * [`MATCH_RECOGNIZE`](https://github.com/duckdb/duckdb/discussions/3994) for pattern matching
 * [Support for async I/O](https://github.com/duckdb/duckdb/discussions/3560)
 * [Parallel Python UDFs](https://github.com/duckdb/duckdb/issues/14817)
-* Using the new [PEG parser]({% post_url 2024-11-22-runtime-extensible-parsers }) by default
+* Using the new [PEG parser]({% post_url 2024-11-22-runtime-extensible-parsers %}) by default
 * C++ 17 support
 * macOS installer
 * Windows installer
