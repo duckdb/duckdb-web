@@ -2,6 +2,7 @@
 layout: docu
 redirect_from:
 - /docs/preview/clients/cli/known_issues
+- /docs/stable/clients/cli/known_issues
 title: Known Issues
 ---
 

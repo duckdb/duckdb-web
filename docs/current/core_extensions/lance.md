@@ -2,8 +2,9 @@
 github_repository: https://github.com/lance-format/lance-duckdb
 layout: docu
 redirect_from:
-- /docs/preview/core_extensions/lance
 - /community_extensions/extensions/lance
+- /docs/preview/core_extensions/lance
+- /docs/stable/core_extensions/lance
 title: Lance Extension
 ---
 

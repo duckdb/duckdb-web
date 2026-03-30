@@ -1,8 +1,5 @@
 ---
 layout: docu
-redirect_from:
-- /docs/guides/import/s3_export
-- /docs/guides/network_cloud_storage/s3_export
 title: S3 Parquet Export
 ---
 

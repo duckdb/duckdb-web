@@ -3,6 +3,8 @@ layout: docu
 railroad: query_syntax/groupby.js
 redirect_from:
 - /docs/preview/sql/query_syntax/grouping_sets
+- /docs/sql/query_syntax/grouping_sets
+- /docs/stable/sql/query_syntax/grouping_sets
 title: GROUPING SETS
 ---
 

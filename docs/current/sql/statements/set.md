@@ -3,6 +3,8 @@ layout: docu
 railroad: statements/set.js
 redirect_from:
 - /docs/preview/sql/statements/set
+- /docs/sql/statements/set
+- /docs/stable/sql/statements/set
 title: SET and RESET Statements
 ---
 

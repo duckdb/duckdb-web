@@ -2,6 +2,8 @@
 layout: docu
 redirect_from:
 - /docs/preview/sql/functions/interval
+- /docs/sql/functions/interval
+- /docs/stable/sql/functions/interval
 title: Interval Functions
 ---
 

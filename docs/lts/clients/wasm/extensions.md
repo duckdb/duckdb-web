@@ -1,8 +1,5 @@
 ---
 layout: docu
-redirect_from:
-- /docs/api/wasm/extensions
-- /docs/clients/wasm/extensions
 title: Extensions
 ---
 

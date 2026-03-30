@@ -1,7 +1,5 @@
 ---
 layout: docu
-redirect_from:
-- /docs/data/json/json_functions
 title: JSON Processing Functions
 ---
 

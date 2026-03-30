@@ -1,7 +1,9 @@
 ---
 layout: docu
 redirect_from:
+- /docs/guides/snippets/sharing_macros
 - /docs/preview/guides/snippets/sharing_macros
+- /docs/stable/guides/snippets/sharing_macros
 title: Sharing Macros
 ---
 

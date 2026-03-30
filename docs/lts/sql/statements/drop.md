@@ -1,8 +1,6 @@
 ---
 layout: docu
 railroad: statements/drop.js
-redirect_from:
-  - /docs/sql/statements/drop
 title: DROP Statement
 ---
 

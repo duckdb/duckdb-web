@@ -1,8 +1,5 @@
 ---
 layout: docu
-redirect_from:
-- /docs/api/c/types
-- /docs/clients/c/types
 title: Types
 ---
 

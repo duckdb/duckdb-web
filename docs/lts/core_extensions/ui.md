@@ -1,9 +1,6 @@
 ---
 github_repository: https://github.com/duckdb/duckdb-ui
 layout: docu
-redirect_from:
-- /docs/lts/extensions/ui
-- /docs/extensions/ui
 title: UI Extension
 ---
 

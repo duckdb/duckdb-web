@@ -1,7 +1,9 @@
 ---
 layout: docu
 redirect_from:
+- /docs/guides/sql_features/full_text_search
 - /docs/preview/guides/sql_features/full_text_search
+- /docs/stable/guides/sql_features/full_text_search
 title: Full-Text Search
 ---
 

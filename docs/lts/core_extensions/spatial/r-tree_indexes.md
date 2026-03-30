@@ -1,8 +1,5 @@
 ---
 layout: docu
-redirect_from:
-- /docs/lts/extensions/spatial/r-tree_indexes
-- /docs/extensions/spatial/r-tree_indexes
 title: R-Tree Indexes
 ---
 

@@ -1,8 +1,5 @@
 ---
 layout: docu
-redirect_from:
-- /docs/api/c/api
-- /docs/clients/c/api
 title: Complete API
 ---
 

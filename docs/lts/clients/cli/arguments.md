@@ -1,8 +1,5 @@
 ---
 layout: docu
-redirect_from:
-- /docs/cli/arguments
-- /docs/clients/cli/arguments
 title: Command Line Arguments
 ---
 

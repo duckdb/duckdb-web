@@ -1,7 +1,5 @@
 ---
 layout: docu
-redirect_from:
-- /docs/dev/building/build_configuration
 title: Building Configuration
 ---
 

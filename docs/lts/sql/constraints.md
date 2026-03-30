@@ -1,8 +1,6 @@
 ---
 layout: docu
 railroad: statements/constraints.js
-redirect_from:
-  - /docs/sql/constraints
 title: Constraints
 ---
 

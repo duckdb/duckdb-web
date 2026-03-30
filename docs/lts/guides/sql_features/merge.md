@@ -1,7 +1,5 @@
 ---
 layout: docu
-redirect_from:
-- /docs/guides/sql_features/merge
 title: Merge Statement for SCD Type 2
 ---
 

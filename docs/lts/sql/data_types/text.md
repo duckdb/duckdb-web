@@ -1,8 +1,6 @@
 ---
 blurb: In DuckDB, strings can be stored in the VARCHAR field.
 layout: docu
-redirect_from:
-  - /docs/sql/data_types/text
 title: Text Types
 ---
 

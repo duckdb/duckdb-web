@@ -1,8 +1,5 @@
 ---
 layout: docu
-redirect_from:
-- /internals/overview
-- /docs/internals/overview
 title: Overview of DuckDB Internals
 ---
 

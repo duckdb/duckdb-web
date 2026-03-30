@@ -1,7 +1,5 @@
 ---
 layout: docu
-redirect_from:
-- /docs/data/json/loading_json
 title: Loading JSON
 ---
 

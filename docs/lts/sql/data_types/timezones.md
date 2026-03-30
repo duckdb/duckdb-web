@@ -1,8 +1,6 @@
 ---
 blurb: A reference list for Time Zones
 layout: docu
-redirect_from:
-  - /docs/sql/data_types/timezones
 title: Time Zone Reference List
 ---
 

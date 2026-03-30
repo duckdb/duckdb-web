@@ -2,6 +2,9 @@
 layout: docu
 redirect_from:
 - /docs/preview/core_extensions/motherduck
+- /docs/stable/core_extensions/motherduck
+- /md
+- /motherduck
 title: MotherDuck Extension
 ---
 

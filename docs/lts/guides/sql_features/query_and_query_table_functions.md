@@ -1,7 +1,5 @@
 ---
 layout: docu
-redirect_from:
-- /docs/guides/sql_features/query_and_query_table_functions
 title: query and query_table Functions
 ---
 

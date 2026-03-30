@@ -1,7 +1,5 @@
 ---
 layout: docu
-redirect_from:
-  - /docs/sql/dialect/sql_quirks
 title: SQL Quirks
 ---
 

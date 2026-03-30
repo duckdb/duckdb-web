@@ -1,7 +1,5 @@
 ---
 layout: docu
-redirect_from:
-- /docs/lts/extensions/spatial/gdal
 title: GDAL Integration
 ---
 

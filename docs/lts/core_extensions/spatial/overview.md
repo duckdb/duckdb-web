@@ -1,10 +1,6 @@
 ---
 github_repository: https://github.com/duckdb/duckdb-spatial
 layout: docu
-redirect_from:
-- /docs/lts/extensions/spatial
-- /docs/lts/extensions/spatial/overview
-- /docs/extensions/spatial
 title: Spatial Extension
 ---
 

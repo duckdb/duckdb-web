@@ -1,7 +1,5 @@
 ---
 layout: docu
-redirect_from:
-- /docs/data/parquet/encryption
 title: Parquet Encryption
 ---
 

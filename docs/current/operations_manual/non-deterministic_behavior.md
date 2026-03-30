@@ -1,7 +1,9 @@
 ---
 layout: docu
 redirect_from:
+- /docs/operations_manual/non-deterministic_behavior
 - /docs/preview/operations_manual/non-deterministic_behavior
+- /docs/stable/operations_manual/non-deterministic_behavior
 title: Non-Deterministic Behavior
 ---
 

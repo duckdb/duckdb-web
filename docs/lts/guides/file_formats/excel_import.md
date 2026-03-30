@@ -1,8 +1,5 @@
 ---
 layout: docu
-redirect_from:
-- /docs/guides/import/excel_import
-- /docs/guides/file_formats/excel_import
 title: Excel Import
 ---
 

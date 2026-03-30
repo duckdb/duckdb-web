@@ -1,7 +1,5 @@
 ---
 layout: docu
-redirect_from:
-  - /docs/sql/statements/transactions
 title: Transaction Management
 ---
 

@@ -3,6 +3,8 @@ layout: docu
 railroad: statements/createview.js
 redirect_from:
 - /docs/preview/sql/statements/create_view
+- /docs/sql/statements/create_view
+- /docs/stable/sql/statements/create_view
 title: CREATE VIEW Statement
 ---
 

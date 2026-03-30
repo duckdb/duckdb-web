@@ -1,7 +1,9 @@
 ---
 layout: docu
 redirect_from:
+- /docs/guides/performance/join_operations
 - /docs/preview/guides/performance/join_operations
+- /docs/stable/guides/performance/join_operations
 title: Join Operations
 ---
 

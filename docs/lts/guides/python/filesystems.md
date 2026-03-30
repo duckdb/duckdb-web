@@ -1,7 +1,5 @@
 ---
 layout: docu
-redirect_from:
-- /docs/guides/python/filesystems
 title: Using fsspec Filesystems
 ---
 

@@ -1,7 +1,5 @@
 ---
 layout: docu
-redirect_from:
-- /docs/operations_manual/footprint_of_duckdb/files_created_by_duckdb
 title: Files Created by DuckDB
 ---
 

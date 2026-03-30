@@ -1,8 +1,5 @@
 ---
 layout: docu
-redirect_from:
-- /docs/data/csv/multiple_files
-- /docs/data/multiple_files/overview
 title: Reading Multiple Files
 ---
 

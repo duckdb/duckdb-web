@@ -1,8 +1,5 @@
 ---
 layout: docu
-redirect_from:
-- /docs/api/c/connect
-- /docs/clients/c/connect
 title: Startup & Shutdown
 ---
 

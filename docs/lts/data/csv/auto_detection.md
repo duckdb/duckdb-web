@@ -1,10 +1,7 @@
 ---
 layout: docu
-redirect_from:
-- /docs/data/csv/auto_detection
 title: CSV Auto Detection
 ---
-
 
 When using `read_csv`, the system tries to automatically infer how to read the CSV file using the [CSV sniffer]({% post_url 2023-10-27-csv-sniffer %}).
 This step is necessary because CSV files are not self-describing and come in many different dialects. The auto-detection works roughly as follows:

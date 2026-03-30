@@ -1,8 +1,5 @@
 ---
 layout: docu
-redirect_from:
-- /docs/operations_manual/embedding_duckdb
-- /docs/lts/operations_manual/embedding_duckdb
 title: Embedding DuckDB
 ---
 

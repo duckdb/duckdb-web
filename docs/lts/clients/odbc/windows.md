@@ -1,9 +1,6 @@
 ---
 github_repository: https://github.com/duckdb/duckdb-odbc
 layout: docu
-redirect_from:
-- /docs/api/odbc/windows
-- /docs/clients/odbc/windows
 title: ODBC API on Windows
 ---
 

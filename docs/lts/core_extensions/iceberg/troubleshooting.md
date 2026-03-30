@@ -1,7 +1,5 @@
 ---
 layout: docu
-redirect_from:
-- /docs/lts/extensions/iceberg/troubleshooting
 title: Troubleshooting
 ---
 

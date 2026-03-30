@@ -1,8 +1,6 @@
 ---
 layout: docu
 railroad: expressions/subqueries.js
-redirect_from:
-  - /docs/sql/expressions/subqueries
 title: Subqueries
 ---
 

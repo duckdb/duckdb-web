@@ -1,7 +1,9 @@
 ---
 layout: docu
 redirect_from:
+- /docs/guides/performance/environment
 - /docs/preview/guides/performance/environment
+- /docs/stable/guides/performance/environment
 title: Environment
 ---
 

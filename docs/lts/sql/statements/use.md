@@ -1,8 +1,6 @@
 ---
 layout: docu
 railroad: statements/use.js
-redirect_from:
-  - /docs/sql/statements/use
 title: USE Statement
 ---
 

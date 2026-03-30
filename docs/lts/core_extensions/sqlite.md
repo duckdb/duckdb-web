@@ -1,9 +1,6 @@
 ---
 github_repository: https://github.com/duckdb/duckdb-sqlite
 layout: docu
-redirect_from:
-- /docs/extensions/sqlite
-- /docs/lts/extensions/sqlite
 title: SQLite Extension
 ---
 

@@ -1,7 +1,10 @@
 ---
 layout: docu
 redirect_from:
+- /docs/extensions/httpfs/hugging_face
+- /docs/lts/extensions/httpfs/hugging_face
 - /docs/preview/core_extensions/httpfs/hugging_face
+- /docs/stable/core_extensions/httpfs/hugging_face
 title: Hugging Face Support
 ---
 

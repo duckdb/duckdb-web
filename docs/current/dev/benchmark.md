@@ -1,7 +1,10 @@
 ---
 layout: docu
 redirect_from:
+- /dev/benchmark
+- /docs/dev/benchmark
 - /docs/preview/dev/benchmark
+- /docs/stable/dev/benchmark
 title: Benchmark Suite
 ---
 

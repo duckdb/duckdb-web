@@ -1,8 +1,6 @@
 ---
 layout: docu
 railroad: expressions/star.js
-redirect_from:
-  - /docs/sql/expressions/star
 title: Star Expression
 ---
 

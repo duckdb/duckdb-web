@@ -2,6 +2,8 @@
 layout: docu
 redirect_from:
 - /docs/preview/sql/dialect/indexing
+- /docs/sql/dialect/indexing
+- /docs/stable/sql/dialect/indexing
 title: Indexing
 ---
 
