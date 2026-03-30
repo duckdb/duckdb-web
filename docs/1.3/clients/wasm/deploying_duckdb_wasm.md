@@ -42,7 +42,7 @@ If you are deploying duckdb-wasm you can consider mirroring relevant extensions 
 SET custom_extension_repository = '⟨https://some.endpoint.org/path/to/repository⟩';
 ```
 
-Changes the default extension repository from the public `https://extensons.duckdb.org` to the one specified. Note that extensions are still signed, so the best path is downloading and serving the extensions with a similar structure to the original repository. See additional notes at https://duckdb.org/docs/stable/extensions/extension_distribution#creating-a-custom-repository.
+Changes the default extension repository from the public `https://extensons.duckdb.org` to the one specified. Note that extensions are still signed, so the best path is downloading and serving the extensions with a similar structure to the original repository. See additional notes at https://duckdb.org/docs/current/extensions/extension_distribution#creating-a-custom-repository.
 
 
 Community extensions are served at https://community-extensioions.duckdb.org, and they are signed with a different key, so they can be disabled with a one way SQL statement such as:
@@ -53,7 +53,7 @@ SET allow_community_extensions = false;
 
 This will allow loading **only** of core duckdb extensions. Note that the failure is at `LOAD` time, not at `INSTALL` time.
 
-Please review <https://duckdb.org/docs/stable/extensions/extension_distribution> for general information about extensions.
+Please review <https://duckdb.org/docs/current/extensions/extension_distribution> for general information about extensions.
 
 
 ## Security Considerations
