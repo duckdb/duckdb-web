@@ -44,7 +44,7 @@ FROM read_duckdb('https://blobs.duckdb.org/data/tpch-sf10.db', table_name = 'reg
 You can use [globbing]({% link docs/current/sql/functions/pattern_matching.md %}#globbing) to read from multiple databases.
 Two illustrate this, let's create two tables:
 
-```
+```bash
 duckdb my-1.duckdb \
     -c "CREATE TABLE numbers AS SELECT 42 AS x;" \
     -c "CREATE TABLE letters AS SELECT 'm' AS a;"
