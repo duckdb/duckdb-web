@@ -7,23 +7,23 @@ Things to remember when using DuckDB:
 - DuckDB uses a PostgreSQL-compatible SQL language. All DuckDB clients use the same SQL language.
 - DuckDB can load data from popular formats, including CSV, JSON and Parquet. DuckDB can also directly run queries on CSV, JSON and Parquet files.
 - DuckDB supports persistent storage but can also run in in-memory mode. The in-memory mode is useful when analyzing small data sets or doing data transformation steps.
-- When loading large chunks of data, use the [`SET preserve_insertion_order = false;` configuration setting](https://duckdb.org/docs/stable/sql/dialect/order_preservation) to speed up the loading process and reduce the memory load. When using DuckDB in combination with dataframe libraries such as pandas, turn this mode back on after loading by issuing `SET preserve_insertion_order = false;`.
-- DuckDB supports data lake formats such as [Delta Lake](https://duckdb.org/docs/stable/core_extensions/delta), [Iceberg](https://duckdb.org/docs/stable/core_extensions/iceberg/overview) and [DuckLake](https://duckdb.org/docs/stable/core_extensions/ducklake).
-- If a workload requires concurrent write access by multiple DuckDB clients, consider using [DuckLake](https://duckdb.org/docs/stable/core_extensions/ducklake).
+- When loading large chunks of data, use the [`SET preserve_insertion_order = false;` configuration setting](https://duckdb.org/docs/lts/sql/dialect/order_preservation) to speed up the loading process and reduce the memory load. When using DuckDB in combination with dataframe libraries such as pandas, turn this mode back on after loading by issuing `SET preserve_insertion_order = false;`.
+- DuckDB supports data lake formats such as [Delta Lake](https://duckdb.org/docs/lts/core_extensions/delta), [Iceberg](https://duckdb.org/docs/lts/core_extensions/iceberg/overview) and [DuckLake](https://duckdb.org/docs/lts/core_extensions/ducklake).
+- If a workload requires concurrent write access by multiple DuckDB clients, consider using [DuckLake](https://duckdb.org/docs/lts/core_extensions/ducklake).
 
 ## Clients
 
-- [List of DuckDB clients](https://duckdb.org/docs/stable/clients/overview)
-- [Command Line Interface](https://duckdb.org/docs/stable/clients/cli/overview)
-- [Go](https://duckdb.org/docs/stable/clients/go)
-- [Node.js](https://duckdb.org/docs/stable/clients/node_neo/overview)
-- [Python](https://duckdb.org/docs/stable/clients/python/overview)
-- [R](https://duckdb.org/docs/stable/clients/r)
-- [Rust](https://duckdb.org/docs/stable/clients/rust)
+- [List of DuckDB clients](https://duckdb.org/docs/lts/clients/overview)
+- [Command Line Interface](https://duckdb.org/docs/lts/clients/cli/overview)
+- [Go](https://duckdb.org/docs/lts/clients/go)
+- [Node.js](https://duckdb.org/docs/lts/clients/node_neo/overview)
+- [Python](https://duckdb.org/docs/lts/clients/python/overview)
+- [R](https://duckdb.org/docs/lts/clients/r)
+- [Rust](https://duckdb.org/docs/lts/clients/rust)
 
 ## Extensions
 
-- DuckDB has a powerful [extension mechanism](https://duckdb.org/docs/stable/core_extensions/overview) that allows loading additional features to DuckDB.
+- DuckDB has a powerful [extension mechanism](https://duckdb.org/docs/lts/core_extensions/overview) that allows loading additional features to DuckDB.
 
 ## Examples
 

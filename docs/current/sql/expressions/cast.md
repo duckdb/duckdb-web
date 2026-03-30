@@ -3,6 +3,8 @@ layout: docu
 railroad: expressions/cast.js
 redirect_from:
 - /docs/preview/sql/expressions/cast
+- /docs/sql/expressions/cast
+- /docs/stable/sql/expressions/cast
 title: Casting
 ---
 

@@ -1,7 +1,10 @@
 ---
 layout: docu
 redirect_from:
+- /docs/guides/import/fastly_object_storage_import
+- /docs/guides/network_cloud_storage/fastly_object_storage_import
 - /docs/preview/guides/network_cloud_storage/fastly_object_storage_import
+- /docs/stable/guides/network_cloud_storage/fastly_object_storage_import
 title: Fastly Object Storage Import
 ---
 

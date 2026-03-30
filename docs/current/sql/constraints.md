@@ -3,6 +3,8 @@ layout: docu
 railroad: statements/constraints.js
 redirect_from:
 - /docs/preview/sql/constraints
+- /docs/sql/constraints
+- /docs/stable/sql/constraints
 title: Constraints
 ---
 

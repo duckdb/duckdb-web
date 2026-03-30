@@ -1,6 +1,6 @@
 {% if version_viewed == "current" %}
 	<!-- this is the default and recommended version - do not show any extra warning -->
-{% elsif version_viewed == "stable" %}
+{% elsif version_viewed == "lts" %}
 	<div class="banner lts">
 		<div class="content">
 			<svg class="icon"><use href="#clock"></use></svg>
@@ -32,9 +32,9 @@
 			{% assign new_filename = new_url | replace: ".html", ".md" %}
 			{% capture url_exists %}{% file_exists {{ new_filename }} %}{% endcapture %}
 			{% if url_exists == "true" %}
-				<span title="Outdated documentation. Please select the stable version.">Outdated documentation</span>
+				<span title="Outdated documentation. Please select the current version.">Outdated documentation</span>
 			{% else %}
-				<span title="This page is not available in the stable version of the documentation.">Outdated documentation</span>
+				<span title="This page is not available in the current version of the documentation.">Outdated documentation</span>
 			{% endif %}
 		</div>
 	</div>

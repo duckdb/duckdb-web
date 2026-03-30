@@ -1,7 +1,10 @@
 ---
 layout: docu
 redirect_from:
+- /dev/sqllogictest/persistent_testing
+- /docs/dev/sqllogictest/persistent_testing
 - /docs/preview/dev/sqllogictest/persistent_testing
+- /docs/stable/dev/sqllogictest/persistent_testing
 title: Persistent Testing
 ---
 

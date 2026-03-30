@@ -1,7 +1,9 @@
 ---
 layout: docu
 redirect_from:
+- /docs/guides/meta/duckdb_environment
 - /docs/preview/guides/meta/duckdb_environment
+- /docs/stable/guides/meta/duckdb_environment
 title: DuckDB Environment
 ---
 

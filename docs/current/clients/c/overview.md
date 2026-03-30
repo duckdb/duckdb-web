@@ -1,7 +1,11 @@
 ---
 layout: docu
 redirect_from:
+- /docs/api/c
+- /docs/api/c/overview
+- /docs/clients/c/overview
 - /docs/preview/clients/c/overview
+- /docs/stable/clients/c/overview
 title: Overview
 ---
 

@@ -1,7 +1,7 @@
 """
 Generate a DuckDB search index for the documentation.
 
-Parses all markdown files under docs/stable/ and docs/current/,
+Parses all markdown files under docs/lts/ and docs/current/,
 chunks them (per-function for function reference pages, per-H2 section
 for conceptual pages), and builds a DuckDB file with a pre-built FTS index.
 
@@ -80,7 +80,7 @@ def breadcrumb_segment(segment):
 def build_breadcrumb(filepath, version):
     """Build a breadcrumb string from a docs file path.
 
-    e.g. docs/stable/sql/functions/numeric.md -> SQL > Functions > Numeric
+    e.g. docs/lts/sql/functions/numeric.md -> SQL > Functions > Numeric
     """
     # Strip docs/<version>/ prefix and .md suffix
     relative = filepath.removeprefix(f"docs/{version}/").removesuffix(".md")
@@ -526,7 +526,7 @@ def main():
     args = parser.parse_args()
 
     versions = [
-        ("docs/stable", "stable"),
+        ("docs/lts", "lts"),
         ("docs/current", "current"),
     ]
 

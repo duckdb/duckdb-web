@@ -2,6 +2,7 @@
 layout: docu
 redirect_from:
 - /docs/preview/guides/python/marimo
+- /docs/stable/guides/python/marimo
 title: marimo Notebooks
 ---
 

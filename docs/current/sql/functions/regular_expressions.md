@@ -3,6 +3,8 @@ layout: docu
 railroad: expressions/like.js
 redirect_from:
 - /docs/preview/sql/functions/regular_expressions
+- /docs/sql/functions/regular_expressions
+- /docs/stable/sql/functions/regular_expressions
 title: Regular Expressions
 ---
 

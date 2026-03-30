@@ -1,7 +1,9 @@
 ---
 layout: docu
 redirect_from:
+- /docs/operations_manual/securing_duckdb/overview
 - /docs/preview/operations_manual/securing_duckdb/overview
+- /docs/stable/operations_manual/securing_duckdb/overview
 title: Securing DuckDB
 ---
 

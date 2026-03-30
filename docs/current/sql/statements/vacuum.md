@@ -3,6 +3,8 @@ layout: docu
 railroad: statements/vacuum.js
 redirect_from:
 - /docs/preview/sql/statements/vacuum
+- /docs/sql/statements/vacuum
+- /docs/stable/sql/statements/vacuum
 title: VACUUM Statement
 ---
 

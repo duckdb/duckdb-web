@@ -2,6 +2,7 @@
 layout: docu
 redirect_from:
 - /docs/preview/sql/functions/geometry
+- /docs/stable/sql/functions/geometry
 title: Geometry Functions
 ---
 

@@ -1,7 +1,9 @@
 ---
 layout: docu
 redirect_from:
+- /docs/guides/python/import_pandas
 - /docs/preview/guides/python/import_pandas
+- /docs/stable/guides/python/import_pandas
 title: Import from Pandas
 ---
 

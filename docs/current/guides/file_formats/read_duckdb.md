@@ -1,5 +1,7 @@
 ---
 layout: docu
+redirect_from:
+- /docs/stable/guides/file_formats/read_duckdb
 title: Directly Read DuckDB Databases
 ---
 

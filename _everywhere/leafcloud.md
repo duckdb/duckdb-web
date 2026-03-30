@@ -10,7 +10,7 @@ tags: ["Servers"]
 thirdparty: false
 ---
 
-This tutorial is an adaptation of [“Public DuckLake on Object Storage”](https://ducklake.select/docs/stable/duckdb/guides/public_ducklake_on_object_storage) to the object storage of [Leafcloud](https://leaf.cloud/), an Amsterdam-based cloud provider.
+This tutorial is an adaptation of [“Public DuckLake on Object Storage”](https://ducklake.select/docs/lts/duckdb/guides/public_ducklake_on_object_storage) to the object storage of [Leafcloud](https://leaf.cloud/), an Amsterdam-based cloud provider.
 
 ## Setting Up the Object Store
 
@@ -94,7 +94,7 @@ This tutorial is an adaptation of [“Public DuckLake on Object Storage”](http
 
 1. Create a directory called `ducklake-storage` and navigate to this directory.
 
-2. Create a DuckLake following the [“Using a Remote Data Path” DuckLake guide](https://ducklake.select/docs/stable/duckdb/guides/using_a_remote_data_path).
+2. Create a DuckLake following the [“Using a Remote Data Path” DuckLake guide](https://ducklake.select/docs/lts/duckdb/guides/using_a_remote_data_path).
 
 3. When specifying the `DATA_PATH`, use the previously obtained path `https://leafcloud.store/.../ducklake-storage`.
 

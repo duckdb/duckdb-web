@@ -1,7 +1,10 @@
 ---
 layout: docu
 redirect_from:
+- /docs/dev/repositories
 - /docs/preview/dev/repositories
+- /docs/stable/dev/repositories
+- /internals/repositories
 title: DuckDB Repositories
 ---
 
@@ -43,4 +46,4 @@ Several components of DuckDB are maintained in separate repositories.
 
 ## Specifications
 
-* [DuckLake specification](https://ducklake.select/docs/stable/specification/introduction)
+* [DuckLake specification](https://ducklake.select/docs/lts/specification/introduction)

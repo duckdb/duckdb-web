@@ -1,7 +1,9 @@
 ---
 layout: docu
 redirect_from:
+- /docs/lakehouse_formats
 - /docs/preview/lakehouse_formats
+- /docs/stable/./lakehouse_formats
 title: Lakehouse Formats
 ---
 
@@ -13,7 +15,7 @@ DuckDB supports Iceberg, Delta, Lance and DuckLake as first-class citizens. The 
 
 |                              | DuckLake                                                              | Iceberg                                                                 | Delta                                                      | Lance                                                      |
 | ---------------------------- | :-------------------------------------------------------------------- | :---------------------------------------------------------------------- | :--------------------------------------------------------- | :--------------------------------------------------------- |
-| Extension                    | [`ducklake`](https://ducklake.select/docs/stable/duckdb/introduction) | [`iceberg`]({% link docs/stable/core_extensions/iceberg/overview.md %}) | [`delta`]({% link docs/stable/core_extensions/delta.md %}) | [`lance`]({% link docs/stable/core_extensions/lance.md %}) |
+| Extension                    | [`ducklake`](https://ducklake.select/docs/lts/duckdb/introduction) | [`iceberg`]({% link docs/lts/core_extensions/iceberg/overview.md %}) | [`delta`]({% link docs/lts/core_extensions/delta.md %}) | [`lance`]({% link docs/lts/core_extensions/lance.md %}) |
 | Read                         | ✅                                                                    | ✅                                                                      | ✅                                                         | ✅                                                         |
 | Write                        | ✅                                                                    | ✅                                                                      | ✅                                                         | ✅                                                         |
 | Deletes                      | ✅                                                                    | ✅                                                                      | ❌                                                         | ✅                                                         |

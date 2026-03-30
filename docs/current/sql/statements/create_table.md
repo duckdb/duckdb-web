@@ -3,6 +3,8 @@ layout: docu
 railroad: statements/createtable.js
 redirect_from:
 - /docs/preview/sql/statements/create_table
+- /docs/sql/statements/create_table
+- /docs/stable/sql/statements/create_table
 title: CREATE TABLE Statement
 ---
 

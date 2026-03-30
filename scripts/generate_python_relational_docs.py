@@ -22,7 +22,7 @@ from generate_python_relational_docs_methods import (
     OUTPUT_MEMBER_LIST,
 )
 
-DUCKDB_DOC_VERSION = os.getenv("DUCKDB_DOC_VERSION", "stable")
+DUCKDB_DOC_VERSION = os.getenv("DUCKDB_DOC_VERSION", "lts")
 
 redirect_from_text = """\
 redirect_from:
@@ -32,7 +32,7 @@ redirect_from:
 
 FORMATTER_TEXT = f"""---
 layout: docu
-{redirect_from_text if DUCKDB_DOC_VERSION == 'stable' else ''}
+{redirect_from_text if DUCKDB_DOC_VERSION == 'lts' else ''}
 title: Relational API
 ---
 

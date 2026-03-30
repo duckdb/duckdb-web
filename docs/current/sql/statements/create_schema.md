@@ -3,6 +3,8 @@ layout: docu
 railroad: statements/createschema.js
 redirect_from:
 - /docs/preview/sql/statements/create_schema
+- /docs/sql/statements/create_schema
+- /docs/stable/sql/statements/create_schema
 title: CREATE SCHEMA Statement
 ---
 

@@ -1,7 +1,10 @@
 ---
 layout: docu
 redirect_from:
+- /dev/sqllogictest/catch
+- /docs/dev/sqllogictest/catch
 - /docs/preview/dev/sqllogictest/catch
+- /docs/stable/dev/sqllogictest/catch
 title: Catch C/C++ Tests
 ---
 

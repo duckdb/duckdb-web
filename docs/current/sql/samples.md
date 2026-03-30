@@ -3,6 +3,8 @@ layout: docu
 railroad: statements/samples.js
 redirect_from:
 - /docs/preview/sql/samples
+- /docs/sql/samples
+- /docs/stable/sql/samples
 title: Samples
 ---
 

@@ -2,7 +2,7 @@
 layout: docu
 redirect_from:
 - /docs/sitemap
-- /docs/stable/sitemap
+- /docs/lts/sitemap
 title: Sitemap
 body_class: sitemap
 toc: false

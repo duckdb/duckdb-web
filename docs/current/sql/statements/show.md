@@ -2,6 +2,7 @@
 layout: docu
 redirect_from:
 - /docs/preview/sql/statements/show
+- /docs/stable/sql/statements/show
 title: SHOW, SHOW DATABASES, and SHOW SCHEMAS Statements
 ---
 

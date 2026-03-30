@@ -1,7 +1,9 @@
 ---
 layout: docu
 redirect_from:
+- /docs/data/parquet/tips
 - /docs/preview/data/parquet/tips
+- /docs/stable/data/parquet/tips
 title: Parquet Tips
 ---
 

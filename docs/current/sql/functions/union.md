@@ -2,6 +2,8 @@
 layout: docu
 redirect_from:
 - /docs/preview/sql/functions/union
+- /docs/sql/functions/union
+- /docs/stable/sql/functions/union
 title: Union Functions
 ---
 

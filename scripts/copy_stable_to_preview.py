@@ -11,15 +11,13 @@ def update_new_preview_page(file):
         del doc["redirect_from"]
 
     # replace link tags in the content
-    doc.content = doc.content.replace(
-        f"{{% link docs/stable/", f"{{% link docs/current/"
-    )
+    doc.content = doc.content.replace(f"{{% link docs/lts/", f"{{% link docs/current/")
     return frontmatter.dumps(doc)
 
 
-# copy docs/stable to docs/current
+# copy docs/lts to docs/current
 def copy_docs():
-    src = "docs/stable"
+    src = "docs/lts"
     dst = "docs/current"
 
     shutil.rmtree(dst)
@@ -46,5 +44,5 @@ def copy_docs():
                 shutil.copy2(src_file, dst_file)
 
 
-shutil.copy("_data/menu_docs_stable.json", f"_data/menu_docs_current.json")
+shutil.copy("_data/menu_docs_current.json", f"_data/menu_docs_current.json")
 copy_docs()

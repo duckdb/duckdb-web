@@ -1,7 +1,9 @@
 ---
 layout: docu
 redirect_from:
+- /docs/lts/extensions/spatial/functions
 - /docs/preview/core_extensions/spatial/functions
+- /docs/stable/core_extensions/spatial/functions
 title: Spatial Functions
 ---
 

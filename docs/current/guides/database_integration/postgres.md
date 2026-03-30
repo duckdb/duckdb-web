@@ -1,7 +1,10 @@
 ---
 layout: docu
 redirect_from:
+- /docs/guides/database_integration/postgres
+- /docs/guides/import/query_postgres
 - /docs/preview/guides/database_integration/postgres
+- /docs/stable/guides/database_integration/postgres
 title: PostgreSQL Import
 ---
 

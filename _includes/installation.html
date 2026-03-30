@@ -78,7 +78,7 @@
 </div>
 
 <!--<div class="aboutthispage">
-    <p>This page contains installation options for DuckDB. Binaries are available for major programming languages and <a href="{% link docs/stable/dev/building/overview.md %}#supported-platforms">platforms</a>. If there are no pre-packaged binaries available, consider <a href="{% link docs/stable/dev/building/overview.md %}">building DuckDB from source</a>.</p>
+    <p>This page contains installation options for DuckDB. Binaries are available for major programming languages and <a href="{% link docs/lts/dev/building/overview.md %}#supported-platforms">platforms</a>. If there are no pre-packaged binaries available, consider <a href="{% link docs/lts/dev/building/overview.md %}">building DuckDB from source</a>.</p>
 </div>-->
 
 
@@ -89,7 +89,7 @@
 <div class="current"
     data-platform="macos"
     data-environment="cli"
-    data-docs="{% link docs/stable/clients/cli/overview.md %}">
+    data-docs="{% link docs/lts/clients/cli/overview.md %}">
 
     <figure class="highlight">
         <pre><code class="language-bash" data-lang="bash"><span class="nb">curl </span><a href="https://install.duckdb.org">https://install.duckdb.org</a> | <span class="nb">sh</span></code></pre>
@@ -128,7 +128,7 @@ pip install duckdb-cli
 <div class="lts"
     data-platform="macos"
     data-environment="cli"
-    data-docs="{% link docs/stable/clients/cli/overview.md %}">
+    data-docs="{% link docs/lts/clients/cli/overview.md %}">
 
 {%- highlight bash -%}
 curl https://install.duckdb.org | DUCKDB_VERSION={{ site.lts_duckdb_version }} sh
@@ -155,7 +155,7 @@ pip install duckdb-cli=={{ site.lts_duckdb_version }}
 <div class="current"
     data-platform="linux"
     data-environment="cli"
-    data-docs="{% link docs/stable/clients/cli/overview.md %}">
+    data-docs="{% link docs/lts/clients/cli/overview.md %}">
 
 <figure class="highlight">
     <pre><code class="language-bash" data-lang="bash"><span class="nb">curl </span><a href="https://install.duckdb.org">https://install.duckdb.org</a> | <span class="nb">sh</span></code></pre>
@@ -191,7 +191,7 @@ docker run --rm -it -v "$(pwd):/workspace" -w /workspace duckdb/duckdb
 <div class="lts"
     data-platform="linux"
     data-environment="cli"
-    data-docs="{% link docs/stable/clients/cli/overview.md %}">
+    data-docs="{% link docs/lts/clients/cli/overview.md %}">
 
 {%- highlight bash -%}
 curl https://install.duckdb.org | DUCKDB_VERSION={{ site.lts_duckdb_version }} sh
@@ -223,7 +223,7 @@ pip install duckdb-cli=={{ site.lts_duckdb_version }}
 <div class="current"
     data-platform="windows"
     data-environment="cli"
-    data-docs="{% link docs/stable/clients/cli/overview.md %}">
+    data-docs="{% link docs/lts/clients/cli/overview.md %}">
 
 <h4>Direct Downloads</h4>
 {%- assign f_x86 = site.data.checksums_current.artifacts.cli.windows.x86_64.filename -%}
@@ -270,7 +270,7 @@ docker run --rm -it -v "$(pwd):/workspace" -w /workspace duckdb/duckdb
 <div class="lts"
     data-platform="windows"
     data-environment="cli"
-    data-docs="{% link docs/stable/clients/cli/overview.md %}">
+    data-docs="{% link docs/lts/clients/cli/overview.md %}">
 
 <h4>Direct Downloads</h4>
 {%- assign f_x86 = site.data.checksums_lts.artifacts.cli.windows.x86_64.filename -%}
@@ -314,7 +314,7 @@ docker run --rm -it -v "$(pwd):/workspace" -w /workspace duckdb/duckdb:{{ site.l
 
 <div class="current"
     data-environment="python"
-    data-docs="{% link docs/stable/clients/python/overview.md %}">
+    data-docs="{% link docs/lts/clients/python/overview.md %}">
 
 {%- highlight bash -%}
 pip install duckdb
@@ -328,7 +328,7 @@ pip install duckdb
 
 <div class="lts"
     data-environment="python"
-    data-docs="{% link docs/stable/clients/python/overview.md %}">
+    data-docs="{% link docs/lts/clients/python/overview.md %}">
 
 {%- highlight bash -%}
 pip install duckdb=={{ site.lts_duckdb_version }}
@@ -343,7 +343,7 @@ pip install duckdb=={{ site.lts_duckdb_version }}
 {%- if site.current_duckdb_r_version != "" -%}
 <div class="current"
     data-environment="r"
-    data-docs="{% link docs/stable/clients/r.md %}">
+    data-docs="{% link docs/lts/clients/r.md %}">
 
 {%- highlight r -%}
 install.packages("duckdb")
@@ -366,7 +366,7 @@ install.packages("duckdb", repos="https://p3m.dev/cran/__linux__/manylinux_2_28/
 
 <div class="lts"
     data-environment="r"
-    data-docs="{% link docs/stable/clients/r.md %}">
+    data-docs="{% link docs/lts/clients/r.md %}">
 
 {%- highlight r -%}
 install.packages("duckdb", version="{{ site.lts_duckdb_r_version }}")
@@ -390,7 +390,7 @@ install.packages("duckdb", version="{{ site.lts_duckdb_r_version }}", repos="htt
 {%- if site.current_duckdb_java_version != "" -%}
 <div class="current"
     data-environment="java"
-    data-docs="{% link docs/stable/clients/java.md %}">
+    data-docs="{% link docs/lts/clients/java.md %}">
 
 <h4>Direct Download (JAR)</h4>
 <a href="https://repo1.maven.org/maven2/org/duckdb/duckdb_jdbc/{{ site.current_duckdb_java_version }}/duckdb_jdbc-{{ site.current_duckdb_java_version }}.jar" class="download-btn" download="duckdb_jdbc-{{ site.current_duckdb_java_version }}.jar" download rel="noopener noreferrer">duckdb_jdbc-{{ site.current_duckdb_java_version }}.jar</a>
@@ -424,7 +424,7 @@ implementation("org.duckdb:duckdb_jdbc:{{ site.current_duckdb_java_version }}")
 
 <div class="lts"
     data-environment="java"
-    data-docs="{% link docs/stable/clients/java.md %}">
+    data-docs="{% link docs/lts/clients/java.md %}">
 
 <h4>Direct Download (JAR)</h4>
 <a href="https://repo1.maven.org/maven2/org/duckdb/duckdb_jdbc/{{ site.lts_duckdb_java_version }}/duckdb_jdbc-{{ site.lts_duckdb_java_version }}.jar" class="download-btn" download="duckdb_jdbc-{{ site.lts_duckdb_java_version }}.jar" download rel="noopener noreferrer">duckdb_jdbc-{{ site.lts_duckdb_java_version }}.jar</a>
@@ -458,7 +458,7 @@ implementation("org.duckdb:duckdb_jdbc:{{ site.lts_duckdb_java_version }}")
 {%- if site.lts_duckdb_node_neo_version != "" -%}
 <div class="current"
     data-environment="nodejs"
-    data-docs="{% link docs/stable/clients/node_neo/overview.md %}">
+    data-docs="{% link docs/lts/clients/node_neo/overview.md %}">
 
 {%- highlight bash -%}
 npm install @duckdb/node-api
@@ -470,7 +470,7 @@ npm install @duckdb/node-api
 
 <div class="lts"
     data-environment="nodejs"
-    data-docs="{% link docs/stable/clients/node_neo/overview.md %}">
+    data-docs="{% link docs/lts/clients/node_neo/overview.md %}">
 
 {%- highlight bash -%}
 npm install @duckdb/node-api@{{ site.lts_duckdb_node_neo_version }}
@@ -481,7 +481,7 @@ npm install @duckdb/node-api@{{ site.lts_duckdb_node_neo_version }}
 {%- if site.current_duckdb_rust_version != "" -%}
 <div class="current"
     data-environment="rust"
-    data-docs="{% link docs/stable/clients/rust.md %}">
+    data-docs="{% link docs/lts/clients/rust.md %}">
 
 {%- highlight bash -%}
 cargo add duckdb --features bundled
@@ -492,7 +492,7 @@ cargo add duckdb --features bundled
 
 <div class="lts"
     data-environment="rust"
-    data-docs="{% link docs/stable/clients/rust.md %}">
+    data-docs="{% link docs/lts/clients/rust.md %}">
 
 {%- highlight bash -%}
 cargo add duckdb@{{ site.lts_duckdb_rust_version }} --features bundled
@@ -503,7 +503,7 @@ cargo add duckdb@{{ site.lts_duckdb_rust_version }} --features bundled
 {%- if site.current_duckdb_go_version != "" -%}
 <div class="current"
     data-environment="go"
-    data-docs="{% link docs/stable/clients/go.md %}">
+    data-docs="{% link docs/lts/clients/go.md %}">
 
 {%- highlight bash -%}
 go get github.com/duckdb/duckdb-go/v2
@@ -514,7 +514,7 @@ go get github.com/duckdb/duckdb-go/v2
 
 <div class="lts"
     data-environment="go"
-    data-docs="{% link docs/stable/clients/go.md %}">
+    data-docs="{% link docs/lts/clients/go.md %}">
 
 {%- highlight bash -%}
 go get github.com/duckdb/duckdb-go/v2@{{ site.lts_duckdb_go_tag }}
@@ -527,7 +527,7 @@ go get github.com/duckdb/duckdb-go/v2@{{ site.lts_duckdb_go_tag }}
 <div class="current"
     data-platform="linux"
     data-environment="c"
-    data-docs="{% link docs/stable/clients/c/overview.md %}">
+    data-docs="{% link docs/lts/clients/c/overview.md %}">
 
 {%- assign f_x86 = site.data.checksums_current.artifacts.c.linux.x86_64.filename -%}
 <a href="https://install.duckdb.org/v{{ site.current_duckdb_version }}/{{ f_x86 }}" class="download-btn" download="{{ f_x86 }}" rel="noopener noreferrer">{{ f_x86 }}</a>
@@ -543,7 +543,7 @@ go get github.com/duckdb/duckdb-go/v2@{{ site.lts_duckdb_go_tag }}
 <div class="current"
     data-platform="macos"
     data-environment="c"
-    data-docs="{% link docs/stable/clients/c/overview.md %}">
+    data-docs="{% link docs/lts/clients/c/overview.md %}">
 
 {%- assign f = site.data.checksums_current.artifacts.c.macos.x86_64.filename -%}
 <a href="https://install.duckdb.org/v{{ site.current_duckdb_version }}/{{ f }}" class="download-btn" download="{{ f }}" rel="noopener noreferrer">{{ f }}</a>
@@ -555,7 +555,7 @@ go get github.com/duckdb/duckdb-go/v2@{{ site.lts_duckdb_go_tag }}
 <div class="current"
     data-platform="windows"
     data-environment="c"
-    data-docs="{% link docs/stable/clients/c/overview.md %}">
+    data-docs="{% link docs/lts/clients/c/overview.md %}">
 
 {%- assign f_x86 = site.data.checksums_current.artifacts.c.windows.x86_64.filename -%}
 <a href="https://install.duckdb.org/v{{ site.current_duckdb_version }}/{{ f_x86 }}" class="download-btn" download="{{ f_x86 }}" rel="noopener noreferrer">{{ f_x86 }}</a>
@@ -571,7 +571,7 @@ go get github.com/duckdb/duckdb-go/v2@{{ site.lts_duckdb_go_tag }}
 <div class="lts"
     data-platform="linux"
     data-environment="c"
-    data-docs="{% link docs/stable/clients/c/overview.md %}">
+    data-docs="{% link docs/lts/clients/c/overview.md %}">
 
 {%- assign f_x86 = site.data.checksums_lts.artifacts.c.linux.x86_64.filename -%}
 <a href="https://install.duckdb.org/v{{ site.lts_duckdb_version }}/{{ f_x86 }}" class="download-btn" download="{{ f_x86 }}" rel="noopener noreferrer">{{ f_x86 }}</a>
@@ -587,7 +587,7 @@ go get github.com/duckdb/duckdb-go/v2@{{ site.lts_duckdb_go_tag }}
 <div class="lts"
     data-platform="macos"
     data-environment="c"
-    data-docs="{% link docs/stable/clients/c/overview.md %}">
+    data-docs="{% link docs/lts/clients/c/overview.md %}">
 
 {%- assign f = site.data.checksums_lts.artifacts.c.macos.x86_64.filename -%}
 <a href="https://install.duckdb.org/v{{ site.lts_duckdb_version }}/{{ f }}" class="download-btn" download="{{ f }}" rel="noopener noreferrer">{{ f }}</a>
@@ -599,7 +599,7 @@ go get github.com/duckdb/duckdb-go/v2@{{ site.lts_duckdb_go_tag }}
 <div class="lts"
     data-platform="windows"
     data-environment="c"
-    data-docs="{% link docs/stable/clients/c/overview.md %}">
+    data-docs="{% link docs/lts/clients/c/overview.md %}">
 
 {%- assign f_x86 = site.data.checksums_lts.artifacts.c.windows.x86_64.filename -%}
 <a href="https://install.duckdb.org/v{{ site.lts_duckdb_version }}/{{ f_x86 }}" class="download-btn" download="{{ f_x86 }}" rel="noopener noreferrer">{{ f_x86 }}</a>
@@ -615,7 +615,7 @@ go get github.com/duckdb/duckdb-go/v2@{{ site.lts_duckdb_go_tag }}
 <div class="current"
     data-platform="linux"
     data-environment="odbc"
-    data-docs="{% link docs/stable/clients/odbc/overview.md %}">
+    data-docs="{% link docs/lts/clients/odbc/overview.md %}">
     
 <a href="https://github.com/duckdb/duckdb-odbc/releases/download/v{{ site.current_duckdb_odbc_version }}/duckdb_odbc-linux-amd64.zip" class="download-btn" download="duckdb_odbc-linux-amd64.zip" rel="noopener noreferrer">duckdb_odbc-linux-amd64.zip</a>
 {%- include checksum_inline.html environment="odbc" platform="linux" architecture="x86_64" version="current" -%}
@@ -629,7 +629,7 @@ go get github.com/duckdb/duckdb-go/v2@{{ site.lts_duckdb_go_tag }}
 <div class="current"
     data-platform="macos"
     data-environment="odbc"
-    data-docs="{% link docs/stable/clients/odbc/overview.md %}">
+    data-docs="{% link docs/lts/clients/odbc/overview.md %}">
     
 <a href="https://github.com/duckdb/duckdb-odbc/releases/download/v{{ site.current_duckdb_odbc_version }}/duckdb_odbc-osx-universal.zip" class="download-btn" download="duckdb_odbc-osx-universal.zip" rel="noopener noreferrer">duckdb_odbc-osx-universal.zip</a>
 {%- include checksum_inline.html environment="odbc" platform="macos" version="current" -%}
@@ -640,7 +640,7 @@ go get github.com/duckdb/duckdb-go/v2@{{ site.lts_duckdb_go_tag }}
 <div class="current"
     data-platform="windows"
     data-environment="odbc"
-    data-docs="{% link docs/stable/clients/odbc/overview.md %}">
+    data-docs="{% link docs/lts/clients/odbc/overview.md %}">
 
 <a href="https://github.com/duckdb/duckdb-odbc/releases/download/v{{ site.current_duckdb_odbc_version }}/duckdb_odbc-windows-amd64.zip" class="download-btn" download="duckdb_odbc-windows-amd64.zip" rel="noopener noreferrer">duckdb_odbc-windows-amd64.zip</a>
 {%- include checksum_inline.html environment="odbc" platform="windows" architecture="x86_64" version="current" -%}
@@ -654,7 +654,7 @@ go get github.com/duckdb/duckdb-go/v2@{{ site.lts_duckdb_go_tag }}
 <div class="lts"
     data-platform="linux"
     data-environment="odbc"
-    data-docs="{% link docs/stable/clients/odbc/overview.md %}">
+    data-docs="{% link docs/lts/clients/odbc/overview.md %}">
     
 <a href="https://github.com/duckdb/duckdb-odbc/releases/download/v{{ site.lts_duckdb_odbc_version }}/duckdb_odbc-linux-amd64.zip" class="download-btn" download="duckdb_odbc-linux-amd64.zip" rel="noopener noreferrer">duckdb_odbc-linux-amd64.zip</a>
 {%- include checksum_inline.html environment="odbc" platform="linux" architecture="x86_64" version="lts" -%}
@@ -668,7 +668,7 @@ go get github.com/duckdb/duckdb-go/v2@{{ site.lts_duckdb_go_tag }}
 <div class="lts"
     data-platform="macos"
     data-environment="odbc"
-    data-docs="{% link docs/stable/clients/odbc/overview.md %}">
+    data-docs="{% link docs/lts/clients/odbc/overview.md %}">
     
 <a href="https://github.com/duckdb/duckdb-odbc/releases/download/v{{ site.lts_duckdb_odbc_version }}/duckdb_odbc-osx-universal.zip" class="download-btn" download="duckdb_odbc-osx-universal.zip" rel="noopener noreferrer">duckdb_odbc-osx-universal.zip</a>
 {%- include checksum_inline.html environment="odbc" platform="macos" version="lts" -%}
@@ -679,7 +679,7 @@ go get github.com/duckdb/duckdb-go/v2@{{ site.lts_duckdb_go_tag }}
 <div class="lts"
     data-platform="windows"
     data-environment="odbc"
-    data-docs="{% link docs/stable/clients/odbc/overview.md %}">
+    data-docs="{% link docs/lts/clients/odbc/overview.md %}">
 
 <a href="https://github.com/duckdb/duckdb-odbc/releases/download/v{{ site.lts_duckdb_odbc_version }}/duckdb_odbc-windows-amd64.zip" class="download-btn" download="duckdb_odbc-windows-amd64.zip" rel="noopener noreferrer">duckdb_odbc-windows-amd64.zip</a>
 {%- include checksum_inline.html environment="odbc" platform="windows" architecture="x86_64" version="lts" -%}

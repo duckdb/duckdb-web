@@ -2,7 +2,10 @@
 github_repository: https://github.com/duckdb/duckdb-sqlsmith
 layout: docu
 redirect_from:
+- /docs/extensions/sqlsmith
+- /docs/lts/extensions/sqlsmith
 - /docs/preview/core_extensions/sqlsmith
+- /docs/stable/core_extensions/sqlsmith
 title: SQLSmith Extension
 ---
 
