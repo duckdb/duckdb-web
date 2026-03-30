@@ -11,7 +11,7 @@
 	}
 
 	.maincolumn{
-		border-radius: 10px;
+		border-radius: var(--border-radius-box);
 		border: 1px solid var(--doc-codebox-border-color, #E6E6E6);
 		background: var(--doc-codebox-background-color, #F2F2F2);
 		padding: 32px;
@@ -128,7 +128,7 @@
 	input[type="text"],
 	input[type="password"],
 	textarea {
-		border-radius: 10px;
+		border-radius: var(--border-radius-box);
 		border: 1px solid var(--doc-codebox-border-color, #E6E6E6);
 		background: linear-gradient(0deg, var(--main-section-background-gradient-start-color, #FAFAFA) 0%, var(--main-section-background-gradient-start-color, #FAFAFA) 100%);
 		color: var(--main-text-primary-color, #0D0D0D);
@@ -137,7 +137,7 @@
 		padding: 30px 10px 10px 10px;
 		display: block;
 		width: $width;
-		border-radius: 10px;
+		border-radius: var(--border-radius-box);
 		&:focus {
 			outline: none;
 			border: 1px solid var(--main-highlight-orange-text, #FF6900);
@@ -157,7 +157,7 @@
 	  background: linear-gradient(0deg, var(--main-section-background-gradient-start-color, #FAFAFA) 0%, var(--main-section-background-gradient-start-color, #FAFAFA) 100%);
 	  padding: 30px 10px 10px 10px;
 	  position: relative;
-	  border-radius: 10px;
+	  border-radius: var(--border-radius-box);
 	  display: flex;
 	  flex-wrap: wrap;
 	  font-family: "JetBrainsMono-Regular";
@@ -273,7 +273,7 @@
 		border: 1px solid var(--doc-codebox-border-color, #E6E6E6);
 		background: linear-gradient(0deg, var(--main-section-background-gradient-start-color, #FAFAFA) 0%, var(--main-section-background-gradient-start-color, #FAFAFA) 100%);
 		padding: 16px;
-		border-radius: 10px;
+		border-radius: var(--border-radius-box);
 
 		.bubble-label {
 			display: block;
@@ -320,7 +320,7 @@
 		background: linear-gradient(0deg, var(--main-section-background-gradient-start-color, #FAFAFA) 0%, var(--main-section-background-gradient-start-color, #FAFAFA) 100%);
 		padding: 16px;
 		padding-bottom: 0;
-		border-radius: 10px;
+		border-radius: var(--border-radius-box);
 
 		.select-label {
 			display: block;

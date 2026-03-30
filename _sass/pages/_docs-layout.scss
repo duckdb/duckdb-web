@@ -343,7 +343,7 @@ body.documentation {
     list-style: none;
     background-color: var(--menu-dropdown-background-color, #0D0D0D);
     border: 1px solid var(--menu-dropdown-border-color);
-    border-radius: 10px;
+    border-radius: var(--border-radius-box);
     padding: 2px;
     right: 0;
 
@@ -376,14 +376,14 @@ body.documentation {
                 &:hover {
                     color: var(--main-text-primary-color, #F2F2F2) !important;
                     background-color: var(--menu-dropdown-item-background-hover, #333);
-                    border-radius: 15px;
+                    border-radius: var(--border-radius-box);
                 }
             }
 
             &.current a {
                 color: var(--main-text-primary-color, #F2F2F2) !important;
                 background: var(--menu-dropdown-item-background-hover, #333);
-                border-radius: 15px;
+                border-radius: var(--border-radius-box);
             }
         }
     }

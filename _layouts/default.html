@@ -7,6 +7,8 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+    <link rel="alternate" hreflang="en" href="{{ page.url | absolute_url }}" />
+    <link rel="alternate" hreflang="x-default" href="{{ page.url | absolute_url }}" />
 	{% if page.title == "DuckDB" %}
     <title>{{ page.title }}</title>
 	{% elsif page.title == "An in-process SQL OLAP database management system" %}
@@ -42,7 +44,24 @@
 	<meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests" />
 
 	{% seo title=false %}
-	
+
+	{% if page.body_class contains "landing" %}
+	<script type="application/ld+json">
+	{
+		"@context": "https://schema.org",
+		"@type": "SoftwareApplication",
+		"name": "DuckDB",
+		"applicationCategory": "DeveloperApplication",
+		"operatingSystem": "Windows, macOS, Linux",
+		"offers": {
+			"@type": "Offer",
+			"price": "0",
+			"priceCurrency": "USD"
+		},
+		"license": "https://opensource.org/licenses/MIT"
+	}
+	</script>
+	{% endif %}
 
 	{% if page.body_class contains "duckcon7" %}
 	<script src='https://api.mapbox.com/mapbox-gl-js/v3.17.0-beta.1/mapbox-gl.js'></script>
