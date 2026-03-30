@@ -25,7 +25,7 @@ jobs:
         run: python scripts/generate_llms_txt.py
       - name: Setup Pages
         id: pages
-        uses: actions/configure-pages@v5
+        uses: actions/configure-pages@v6
       - name: Build with Jekyll
         run: bundle exec jekyll build --config _config.yml,_config_exclude_archive.yml
 
