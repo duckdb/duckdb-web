@@ -13,14 +13,14 @@ jobs:
       - uses: actions/checkout@v6
       - uses: errata-ai/vale-action@reviewdog
         with:
-          files: '_posts/,docs/stable/'
+          files: '_posts/,docs/current/'
           separator: ","
           filter_mode: added
           fail_on_error: false
       - uses: articulate/actions-markdownlint@main
         with:
           config: .markdownlint.jsonc
-          files: 'docs/stable/**/*.md _posts/*.md'
+          files: 'docs/current/**/*.md _posts/*.md'
 
   version-file:
     runs-on: ubuntu-22.04
