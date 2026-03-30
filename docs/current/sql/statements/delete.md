@@ -3,6 +3,8 @@ layout: docu
 railroad: statements/delete.js
 redirect_from:
 - /docs/preview/sql/statements/delete
+- /docs/sql/statements/delete
+- /docs/stable/sql/statements/delete
 title: DELETE Statement
 ---
 

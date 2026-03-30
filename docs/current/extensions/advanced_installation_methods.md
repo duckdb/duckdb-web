@@ -2,6 +2,7 @@
 layout: docu
 redirect_from:
 - /docs/preview/extensions/advanced_installation_methods
+- /docs/stable/extensions/advanced_installation_methods
 title: Advanced Installation Methods
 ---
 

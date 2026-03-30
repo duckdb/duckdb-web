@@ -2,6 +2,8 @@
 layout: docu
 redirect_from:
 - /docs/preview/sql/data_types/array
+- /docs/sql/data_types/array
+- /docs/stable/sql/data_types/array
 title: Array Type
 ---
 

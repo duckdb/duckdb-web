@@ -2,6 +2,7 @@
 layout: docu
 redirect_from:
 - /docs/preview/operations_manual/user_agents
+- /docs/stable/operations_manual/user_agents
 title: HTTP User-Agent
 ---
 

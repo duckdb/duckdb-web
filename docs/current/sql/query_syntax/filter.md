@@ -3,6 +3,8 @@ layout: docu
 railroad: query_syntax/filter.js
 redirect_from:
 - /docs/preview/sql/query_syntax/filter
+- /docs/sql/query_syntax/filter
+- /docs/stable/sql/query_syntax/filter
 title: FILTER Clause
 ---
 

@@ -5,6 +5,8 @@ layout: docu
 railroad: query_syntax/select.js
 redirect_from:
 - /docs/preview/sql/query_syntax/select
+- /docs/sql/query_syntax/select
+- /docs/stable/sql/query_syntax/select
 title: SELECT Clause
 ---
 

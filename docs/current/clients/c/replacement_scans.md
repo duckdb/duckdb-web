@@ -1,7 +1,10 @@
 ---
 layout: docu
 redirect_from:
+- /docs/api/c/replacement_scans
+- /docs/clients/c/replacement_scans
 - /docs/preview/clients/c/replacement_scans
+- /docs/stable/clients/c/replacement_scans
 title: Replacement Scans
 ---
 

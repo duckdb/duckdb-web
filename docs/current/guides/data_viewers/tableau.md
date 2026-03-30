@@ -1,7 +1,9 @@
 ---
 layout: docu
 redirect_from:
+- /docs/guides/data_viewers/tableau
 - /docs/preview/guides/data_viewers/tableau
+- /docs/stable/guides/data_viewers/tableau
 title: Tableau – A Data Visualization Tool
 ---
 

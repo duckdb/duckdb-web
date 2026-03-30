@@ -3,6 +3,7 @@ github_repository: https://github.com/duckdb/odbc-scanner
 layout: docu
 redirect_from:
 - /docs/preview/core_extensions/odbc/overview
+- /docs/stable/core_extensions/odbc/overview
 title: ODBC Extension
 ---
 

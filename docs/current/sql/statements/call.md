@@ -3,6 +3,8 @@ layout: docu
 railroad: statements/call.js
 redirect_from:
 - /docs/preview/sql/statements/call
+- /docs/sql/statements/call
+- /docs/stable/sql/statements/call
 title: CALL Statement
 ---
 

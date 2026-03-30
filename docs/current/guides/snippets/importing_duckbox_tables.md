@@ -1,7 +1,10 @@
 ---
 layout: docu
 redirect_from:
+- /docs/guides/file_formats/duckbox
+- /docs/guides/snippets/importing_duckbox_tables
 - /docs/preview/guides/snippets/importing_duckbox_tables
+- /docs/stable/guides/snippets/importing_duckbox_tables
 title: Importing Duckbox Tables
 ---
 

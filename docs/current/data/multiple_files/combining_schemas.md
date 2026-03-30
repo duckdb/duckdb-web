@@ -1,7 +1,9 @@
 ---
 layout: docu
 redirect_from:
+- /docs/data/multiple_files/combining_schemas
 - /docs/preview/data/multiple_files/combining_schemas
+- /docs/stable/data/multiple_files/combining_schemas
 title: Combining Schemas
 ---
 

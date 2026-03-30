@@ -1,7 +1,10 @@
 ---
 layout: docu
 redirect_from:
+- /docs/api/wasm/query
+- /docs/clients/wasm/query
 - /docs/preview/clients/wasm/query
+- /docs/stable/clients/wasm/query
 title: Query
 ---
 

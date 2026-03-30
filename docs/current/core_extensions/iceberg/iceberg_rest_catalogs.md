@@ -2,6 +2,7 @@
 layout: docu
 redirect_from:
 - /docs/preview/core_extensions/iceberg/iceberg_rest_catalogs
+- /docs/stable/core_extensions/iceberg/iceberg_rest_catalogs
 title: Iceberg REST Catalogs
 ---
 

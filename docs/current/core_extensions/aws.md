@@ -2,7 +2,10 @@
 github_repository: https://github.com/duckdb/duckdb-aws
 layout: docu
 redirect_from:
+- /docs/extensions/aws
+- /docs/lts/extensions/aws
 - /docs/preview/core_extensions/aws
+- /docs/stable/core_extensions/aws
 title: AWS Extension
 ---
 

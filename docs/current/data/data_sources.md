@@ -1,7 +1,9 @@
 ---
 layout: docu
 redirect_from:
+- /docs/data/data_sources
 - /docs/preview/data/data_sources
+- /docs/stable/data/data_sources
 title: Data Sources
 ---
 

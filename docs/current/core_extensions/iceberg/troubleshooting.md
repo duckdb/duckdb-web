@@ -1,7 +1,9 @@
 ---
 layout: docu
 redirect_from:
+- /docs/lts/extensions/iceberg/troubleshooting
 - /docs/preview/core_extensions/iceberg/troubleshooting
+- /docs/stable/core_extensions/iceberg/troubleshooting
 title: Troubleshooting
 ---
 

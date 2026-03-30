@@ -441,7 +441,7 @@ rel.show()
     "from_query": PythonRelAPIDetails(
         additional_description="""
 
-> **Warning.** Passing `params` to this method is [discouraged]({% link docs/stable/clients/python/known_issues.md %}#parameterized-queries-in-relational-api) due to significant performance overhead. Use [`execute()`]({% link docs/stable/clients/python/dbapi.md %}#prepared-statements) for parameterized queries instead.""",
+> **Warning.** Passing `params` to this method is [discouraged]({% link docs/lts/clients/python/known_issues.md %}#parameterized-queries-in-relational-api) due to significant performance overhead. Use [`execute()`]({% link docs/lts/clients/python/dbapi.md %}#prepared-statements) for parameterized queries instead.""",
         example="""
 import duckdb
 
@@ -476,14 +476,14 @@ rel.show()
             PythonRelAPIParamDetails(
                 parameter_name="params",
                 parameter_type=["object"],
-                parameter_description="Optional query parameters. **Discouraged** due to [significant performance overhead]({% link docs/stable/clients/python/known_issues.md %}#parameterized-queries-in-relational-api). Use [`execute()`]({% link docs/stable/clients/python/dbapi.md %}#prepared-statements) for parameterized queries instead.",
+                parameter_description="Optional query parameters. **Discouraged** due to [significant performance overhead]({% link docs/lts/clients/python/known_issues.md %}#parameterized-queries-in-relational-api). Use [`execute()`]({% link docs/lts/clients/python/dbapi.md %}#prepared-statements) for parameterized queries instead.",
             ),
         ],
     ),
     "query": PythonRelAPIDetails(
         additional_description="""
 
-> **Warning.** Passing `params` to this method is [discouraged]({% link docs/stable/clients/python/known_issues.md %}#parameterized-queries-in-relational-api) due to significant performance overhead. Use [`execute()`]({% link docs/stable/clients/python/dbapi.md %}#prepared-statements) for parameterized queries instead.""",
+> **Warning.** Passing `params` to this method is [discouraged]({% link docs/lts/clients/python/known_issues.md %}#parameterized-queries-in-relational-api) due to significant performance overhead. Use [`execute()`]({% link docs/lts/clients/python/dbapi.md %}#prepared-statements) for parameterized queries instead.""",
         example="""
 import duckdb
 
@@ -518,7 +518,7 @@ rel.show()
             PythonRelAPIParamDetails(
                 parameter_name="params",
                 parameter_type=["object"],
-                parameter_description="Optional query parameters. **Discouraged** due to [significant performance overhead]({% link docs/stable/clients/python/known_issues.md %}#parameterized-queries-in-relational-api). Use [`execute()`]({% link docs/stable/clients/python/dbapi.md %}#prepared-statements) for parameterized queries instead.",
+                parameter_description="Optional query parameters. **Discouraged** due to [significant performance overhead]({% link docs/lts/clients/python/known_issues.md %}#parameterized-queries-in-relational-api). Use [`execute()`]({% link docs/lts/clients/python/dbapi.md %}#prepared-statements) for parameterized queries instead.",
             ),
         ],
     ),
@@ -978,7 +978,7 @@ rel.show()
     "sql": PythonRelAPIDetails(
         additional_description="""
 
-> **Warning.** Passing `params` to this method is [discouraged]({% link docs/stable/clients/python/known_issues.md %}#parameterized-queries-in-relational-api) due to significant performance overhead. Use [`execute()`]({% link docs/stable/clients/python/dbapi.md %}#prepared-statements) for parameterized queries instead.""",
+> **Warning.** Passing `params` to this method is [discouraged]({% link docs/lts/clients/python/known_issues.md %}#parameterized-queries-in-relational-api) due to significant performance overhead. Use [`execute()`]({% link docs/lts/clients/python/dbapi.md %}#prepared-statements) for parameterized queries instead.""",
         example="""
 import duckdb
 
@@ -1013,7 +1013,7 @@ rel.show()
             PythonRelAPIParamDetails(
                 parameter_name="params",
                 parameter_type=["object"],
-                parameter_description="Optional query parameters. **Discouraged** due to [significant performance overhead]({% link docs/stable/clients/python/known_issues.md %}#parameterized-queries-in-relational-api). Use [`execute()`]({% link docs/stable/clients/python/dbapi.md %}#prepared-statements) for parameterized queries instead.",
+                parameter_description="Optional query parameters. **Discouraged** due to [significant performance overhead]({% link docs/lts/clients/python/known_issues.md %}#parameterized-queries-in-relational-api). Use [`execute()`]({% link docs/lts/clients/python/dbapi.md %}#prepared-statements) for parameterized queries instead.",
             ),
         ],
     ),

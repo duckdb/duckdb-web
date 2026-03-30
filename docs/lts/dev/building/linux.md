@@ -1,0 +1,167 @@
+---
+layout: docu
+title: Linux
+---
+
+## Prerequisites
+
+On Linux, install the required packages with the package manager of your distribution.
+
+### Ubuntu and Debian
+
+#### CLI Client
+
+On Ubuntu and Debian (and also MX Linux, Linux Mint, etc.), the requirements for building the DuckDB CLI client are the following:
+
+```bash
+sudo apt-get update
+sudo apt-get install -y git g++ cmake ninja-build libssl-dev libcurl4-openssl-dev
+git clone https://github.com/duckdb/duckdb
+cd duckdb
+GEN=ninja make
+```
+
+### Fedora, CentOS and Red Hat
+
+#### CLI Client
+
+The requirements for building the DuckDB CLI client on Fedora, CentOS, Red Hat, AlmaLinux, Rocky Linux, etc. are the following:
+
+```bash
+sudo yum install -y git g++ cmake ninja-build openssl-devel
+git clone https://github.com/duckdb/duckdb
+cd duckdb
+GEN=ninja make
+```
+
+Note that on older Red Hat-based distributions, you may have to change the package name for `g++` to `gcc-c++`,
+skip Ninja and manually configure the number of Make jobs:
+
+```bash
+sudo yum install -y git gcc-c++ cmake openssl-devel
+git clone https://github.com/duckdb/duckdb
+cd duckdb
+mkdir build
+cd build
+cmake ..
+make -j`nproc`
+```
+
+### Arch Linux
+
+The following instructions are intended for Arch Linux and Arch-based distributions (e.g., Manjaro, Omarchy).
+
+#### CLI Client
+
+DuckDB is [available in Arch's Extra package repository](https://archlinux.org/packages/extra/x86_64/duckdb/).
+To install it, run:
+
+```bash
+sudo pacman -S duckdb
+```
+
+The requirements for building the DuckDB CLI client on Arch, Manjaro, etc. are the following:
+
+```bash
+sudo pacman -S git gcc cmake ninja openssl
+git clone https://github.com/duckdb/duckdb
+cd duckdb
+GEN=ninja make
+```
+
+### Alpine Linux
+
+#### CLI Client
+
+The requirements for building the DuckDB CLI client on Alpine Linux are the following:
+
+```bash
+apk add g++ git make cmake ninja
+git clone https://github.com/duckdb/duckdb
+cd duckdb
+GEN=ninja make
+```
+
+#### Performance with musl libc
+
+Note that Alpine Linux uses [musl libc](https://musl.libc.org/) as its C standard library.
+DuckDB binaries built with musl libc have lower performance compared to the glibc variants: for some workloads, the slowdown can be more than 5×.
+Therefore, it's recommended to use glibc for performance-oriented workloads.
+
+#### Distribution for the `linux_*_musl` Platforms
+
+Starting with DuckDB v1.2.0, [_DuckDB extensions_ are distributed for the `linux_amd64_musl` platform]({% post_url 2025-02-05-announcing-duckdb-120 %}#musl-extensions) (but not yet for the `linux_arm64_musl` platform).
+However, there are no official _DuckDB binaries_ distributed for musl libc but it can be built with it manually following the instructions on this page.
+
+#### Python Client on Alpine Linux
+
+Currently, installing the DuckDB Python on Alpine Linux requires compilation from source.
+To do so, install the required packages before running `pip`:
+
+```bash
+apk add g++ py3-pip python3-dev
+pip install duckdb
+```
+
+## Using the DuckDB CLI Client on Linux
+
+Once the build finishes successfully, you can find the `duckdb` binary in the `build` directory:
+
+```bash
+build/release/duckdb
+```
+
+For different build configurations (`debug`, `relassert`, etc.), please consult the [“Build Configurations” page]({% link docs/lts/dev/building/build_configuration.md %}).
+
+## Building Extensions
+
+To build extensions, set the `BUILD_EXTENSIONS` flag to the list of extensions that you want to be built. For example:
+
+```bash
+BUILD_EXTENSIONS='autocomplete;httpfs;icu;json;tpch' GEN=ninja make
+```
+
+## Troubleshooting
+
+### R Package on Linux AArch64: `too many GOT entries` Build Error
+
+**Problem:**
+Building the R package on Linux running on an ARM64 architecture (AArch64) may result in the following error message:
+
+```console
+/usr/bin/ld: /usr/include/c++/10/bits/basic_string.tcc:206:
+warning: too many GOT entries for -fpic, please recompile with -fPIC
+```
+
+**Solution:**
+Create or edit the `~/.R/Makevars` file. This example also contains the [`MAKEFLAGS` setting to parallelize the build]({% link docs/lts/dev/building/r.md %}#the-build-only-uses-a-single-thread ):
+
+```ini
+ALL_CXXFLAGS = $(PKG_CXXFLAGS) -fPIC $(SHLIB_CXXFLAGS) $(CXXFLAGS)
+MAKEFLAGS = -j$(nproc)
+```
+
+### Building the httpfs Extension Fails
+
+**Problem:**
+When building the [`httpfs` extension]({% link docs/lts/core_extensions/httpfs/overview.md %}) on Linux, the build may fail with the following error.
+
+```console
+CMake Error at /usr/share/cmake-3.22/Modules/FindPackageHandleStandardArgs.cmake:230 (message):
+  Could NOT find OpenSSL, try to set the path to OpenSSL root folder in the
+  system variable OPENSSL_ROOT_DIR (missing: OPENSSL_CRYPTO_LIBRARY
+  OPENSSL_INCLUDE_DIR)
+```
+
+**Solution:**
+Install the `libssl-dev` library.
+
+```bash
+sudo apt-get install -y libssl-dev
+```
+
+Then, build with:
+
+```bash
+GEN=ninja BUILD_EXTENSIONS="httpfs" make
+```

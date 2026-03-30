@@ -3,6 +3,8 @@ blurb: Timestamps represent points in time.
 layout: docu
 redirect_from:
 - /docs/preview/sql/data_types/timestamp
+- /docs/sql/data_types/timestamp
+- /docs/stable/sql/data_types/timestamp
 title: Timestamp Types
 ---
 

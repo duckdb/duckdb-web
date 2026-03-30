@@ -2,6 +2,7 @@
 layout: docu
 redirect_from:
 - /docs/preview/sql/expressions/try
+- /docs/stable/sql/expressions/try
 title: TRY Expression
 ---
 
