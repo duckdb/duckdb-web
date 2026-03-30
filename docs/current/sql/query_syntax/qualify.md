@@ -4,6 +4,8 @@ layout: docu
 railroad: query_syntax/qualify.js
 redirect_from:
 - /docs/preview/sql/query_syntax/qualify
+- /docs/sql/query_syntax/qualify
+- /docs/stable/sql/query_syntax/qualify
 title: QUALIFY Clause
 ---
 

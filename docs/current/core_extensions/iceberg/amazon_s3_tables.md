@@ -1,7 +1,9 @@
 ---
 layout: docu
 redirect_from:
+- /docs/lts/extensions/iceberg/amazon_s3_tables
 - /docs/preview/core_extensions/iceberg/amazon_s3_tables
+- /docs/stable/core_extensions/iceberg/amazon_s3_tables
 title: Amazon S3 Tables
 ---
 

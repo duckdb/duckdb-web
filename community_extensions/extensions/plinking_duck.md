@@ -8,7 +8,7 @@ excerpt: |
 extension:
   name: plinking_duck
   description: Read PLINK 2 genomics file formats and run common genetic analyses directly in SQL
-  version: 0.2.0
+  version: 0.4.0
   language: C++
   build: cmake
   license: MIT
@@ -18,7 +18,7 @@ extension:
 
 repo:
   github: teaguesterling/plinking_duck
-  ref: 1eb5a09aad740cfc79db3bfb7bc62c78bb76ef25
+  ref: 50612cfc91659347291359c97cf9ae845581b82c
 
 docs:
   hello_world: |
@@ -58,10 +58,17 @@ docs:
     - `plink_ld` — pairwise linkage disequilibrium (r², D, D')
     - `plink_score` — polygenic risk scoring with mean imputation
     - `plink_glm` — per-variant GWAS regression (linear, logistic, Firth)
+    - `plink_pca` — principal component analysis via randomized SVD
 
-    **Filter pushdown:**
-    - `af_range` / `ac_range` — filter variants by allele frequency or count
-    - `genotype_range` — filter individual genotype values
+    **Genotype output modes:**
+    - `genotypes='struct'` — STRUCT with named fields per sample
+    - `genotypes='counts'` — fast genotype counting (no decompression)
+    - `genotypes='stats'` — counts + AF, MAF, missingness, heterozygosity
+
+    **Flexible inputs:**
+    - Unified `variants` parameter: indices, rsids, CPRA strings/structs, ranges
+    - Parquet/CSV/table companions for variant and sample metadata
+    - `af_range` / `ac_range` / `genotype_range` filter pushdown
 
     All functions support projection pushdown (skip genotype decompression for
     metadata-only queries), parallel scanning, sample subsetting, and region
@@ -72,10 +79,10 @@ docs:
 
     For full documentation, see [plinking-duck.readthedocs.io](https://plinking-duck.readthedocs.io).
 
-extension_star_count: 1
-extension_star_count_pretty: 1
-extension_download_count: 792
-extension_download_count_pretty: 792
+extension_star_count: 2
+extension_star_count_pretty: 2
+extension_download_count: 799
+extension_download_count_pretty: 799
 image: '/images/community_extensions/social_preview/preview_community_extension_plinking_duck.png'
 layout: community_extension_doc
 ---
@@ -108,6 +115,7 @@ LOAD {{ page.extension.name }};
 | plink_hardy   | table         | NULL        | NULL    |          |
 | plink_ld      | table         | NULL        | NULL    |          |
 | plink_missing | table         | NULL        | NULL    |          |
+| plink_pca     | table         | NULL        | NULL    |          |
 | plink_score   | table         | NULL        | NULL    |          |
 | read_pfile    | table         | NULL        | NULL    |          |
 | read_pgen     | table         | NULL        | NULL    |          |
@@ -132,8 +140,10 @@ LOAD {{ page.extension.name }};
 
 <div class="extension_settings_table"></div>
 
-|             name             |                                                         description                                                         | input_type | scope  | aliases |
-|------------------------------|-----------------------------------------------------------------------------------------------------------------------------|------------|--------|---------|
-| plinking_max_matrix_elements | Maximum genotype matrix elements for orient := 'sample' pre-read (variants x samples). Default 16 billion (~16 GB of int8). | BIGINT     | GLOBAL | []      |
+|              name               |                                                          description                                                          | input_type | scope  | aliases |
+|---------------------------------|-------------------------------------------------------------------------------------------------------------------------------|------------|--------|---------|
+| plinking_max_matrix_elements    | Maximum genotype matrix elements for orient := 'sample' pre-read (variants x samples). Default 16 billion (~16 GB of int8).   | BIGINT     | GLOBAL | []      |
+| plinking_max_threads            | Maximum threads for parallel scan operations. 0 = default (hardcoded cap of 16), >0 = cap at this value.                      | BIGINT     | GLOBAL | []      |
+| plinking_use_parquet_companions | Auto-discover .pvar.parquet and .psam.parquet companion files. When true, parquet companions are preferred over text formats. | BOOLEAN    | GLOBAL | []      |
 
 

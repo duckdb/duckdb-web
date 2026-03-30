@@ -26,7 +26,7 @@ body.search {
 	}
 
 	>div {
-		border-radius: 15px;
+		border-radius: var(--border-radius-box);
 		position: fixed;
 		top: 90px;
 		left: calc(50% - 400px);
@@ -115,7 +115,7 @@ body.search {
 		#search_results {
 			overflow-y: auto;
 			max-height: calc(100vh - 270px);
-			border-radius: 10px;
+			border-radius: var(--border-radius-box);
 			margin-top: 20px;
 
 			&::-webkit-scrollbar {
@@ -143,7 +143,7 @@ body.search {
 
 			.search_result {
 				background: var(--doc-codebox-background-color, #F2F2F2);
-				border-radius: 10px;
+				border-radius: var(--border-radius-box);
 				padding: 15px;
 				width: calc(100% - 10px);
 				margin: 0;
@@ -166,7 +166,7 @@ body.search {
 					z-index: 400;
 					top: 0;
 					left: 0;
-					border-radius: 10px;
+					border-radius: var(--border-radius-box);
 
 					&:hover {
 						background: rgba(0, 0, 0, 0.05);
@@ -235,7 +235,7 @@ input[type=submit] {
 	gap: 5px;
 	padding: 12px;
 	border: 1px solid #E6E6E6;
-	border-radius: 15px;
+	border-radius: var(--border-radius-box);
 	background: white;
 }
 .autocomplete-items div {
@@ -243,7 +243,7 @@ input[type=submit] {
 	cursor: pointer;
 	background-color: #f7f7f7;
 	border: 1px solid #E0E0E0;
-	border-radius: 15px;
+	border-radius: var(--border-radius-box);
 	font-size: 14px;
 }
 .autocomplete-items div:hover {

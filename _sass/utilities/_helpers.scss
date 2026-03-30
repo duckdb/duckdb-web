@@ -23,25 +23,43 @@ main.inactive{
 	display: block;
 }
 
-// Page width classes 
+// Page width classes
 .w-small {
 	.wrap {
-		max-width: 750px;
+		max-width: 780px;
 		margin: 0 auto;
+		padding-left: 15px;
+		padding-right: 15px;
+	}
+	.wrap .wrap {
+		padding-left: 0;
+		padding-right: 0;
 	}
 }
 
 .w-medium {
 	.wrap {
-		max-width: 950px;
+		max-width: 980px;
 		margin: 0 auto;
+		padding-left: 15px;
+		padding-right: 15px;
+	}
+	.wrap .wrap {
+		padding-left: 0;
+		padding-right: 0;
 	}
 }
 
 .w-large {
 	.wrap {
-		max-width: 1180px;
+		max-width: 1184px;
 		margin: 0 auto;
+		padding-left: 15px;
+		padding-right: 15px;
+	}
+	.wrap .wrap {
+		padding-left: 0;
+		padding-right: 0;
 	}
 }
 

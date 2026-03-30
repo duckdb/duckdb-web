@@ -3,6 +3,8 @@ layout: docu
 railroad: expressions/collate.js
 redirect_from:
 - /docs/preview/sql/expressions/collations
+- /docs/sql/expressions/collations
+- /docs/stable/sql/expressions/collations
 title: Collations
 ---
 

@@ -278,6 +278,20 @@ In the meantime, please refer to the [project's README](https://github.com/duckd
 
 ## Major Changes
 
+### Breaking Change for Datetime Function
+
+The [`date_trunc`]({% link docs/current/sql/functions/timestamptz.md %}#date_truncpart-timestamptz) function, when applied to a `DATE`, now returns a `TIMESTAMP` instead of a date.
+
+```sql
+-- v1.4.4:
+SELECT typeof(date_trunc('month', DATE('2026-03-27')));
+-- returns DATE
+
+-- v1.5.x:
+SELECT typeof(date_trunc('month', DATE('2026-03-27')));
+-- returns TIMESTAMP
+```
+
 ### Lakehouse Updates
 
 All of DuckDB’s supported Lakehouse formats have received some updates for v1.5.
@@ -454,7 +468,7 @@ Please note that this is currently in the beta stage. If you have any feedback, 
 
 #### CLI for Linux with musl libc
 
-We are distributing CLI clients that work with [musl libc]({% link docs/stable/dev/building/linux.md %}) (e.g., for Alpine Linux, commonly used in Docker images). The archives are available [on GitHub](https://github.com/duckdb/duckdb/releases/tag/v1.5.0).
+We are distributing CLI clients that work with [musl libc]({% link docs/lts/dev/building/linux.md %}) (e.g., for Alpine Linux, commonly used in Docker images). The archives are available [on GitHub](https://github.com/duckdb/duckdb/releases/tag/v1.5.0).
 
 Note that the musl libc CLI client requires the `libstdc++`. To install this package, run:
 

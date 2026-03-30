@@ -18,14 +18,14 @@ extension:
   name: rapidfuzz
   version: '2025120401'
 repo:
-  github: query-farm/rapidfuzz
   andium: eb2fe18d3f60205722521ff2ddd8eb3c932c7888
-  ref: 62a353eb3bc4919348356f02d0c8bfb353aa9e56
+  github: query-farm/rapidfuzz
+  ref: 01f607b461ee74e1b523bc3668ac2fbf2a06288a
 
-extension_star_count: 13
-extension_star_count_pretty: 13
-extension_download_count: 1669
-extension_download_count_pretty: 1.7k
+extension_star_count: 14
+extension_star_count_pretty: 14
+extension_download_count: 2097
+extension_download_count_pretty: 2.1k
 image: '/images/community_extensions/social_preview/preview_community_extension_rapidfuzz.png'
 layout: community_extension_doc
 ---

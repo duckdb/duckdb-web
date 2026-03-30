@@ -1,11 +1,15 @@
 ---
 layout: docu
 redirect_from:
+- /docs/api/c
+- /docs/api/c/overview
+- /docs/clients/c/overview
 - /docs/preview/clients/c/overview
+- /docs/stable/clients/c/overview
 title: Overview
 ---
 
-> Tip To use the DuckDB C API, download the [`libduckdb` archive]({% link install/index.html %}?environment=c) for your platform.
+> Installation To use the DuckDB C API, download the [`libduckdb` archive]({% link install/index.html %}?environment=c) for your platform.
 >
 > The latest stable version of the DuckDB C API is {{ site.current_duckdb_version }}.
 

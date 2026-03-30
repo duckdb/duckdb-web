@@ -1,7 +1,10 @@
 ---
 layout: docu
 redirect_from:
+- /docs/api/cli/syntax_highlighting
+- /docs/clients/cli/syntax_highlighting
 - /docs/preview/clients/cli/syntax_highlighting
+- /docs/stable/clients/cli/syntax_highlighting
 title: Syntax Highlighting
 ---
 

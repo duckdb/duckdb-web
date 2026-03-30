@@ -2,6 +2,7 @@
 layout: docu
 redirect_from:
 - /docs/preview/sql/functions/lambda
+- /docs/stable/sql/functions/lambda
 title: Lambda Functions
 ---
 

@@ -287,7 +287,7 @@
             width: 100%;
             height: 100%;
             object-fit: cover;
-            border-radius: 20px;
+            border-radius: var(--border-radius-box);
             overflow: hidden;
           }
           
@@ -425,7 +425,7 @@
         @include mobile-padding;
 
         .embedded-map {
-            border-radius: 20px;
+            border-radius: var(--border-radius-box);
             overflow: hidden;
             width: 100%;
             height: 438px;
@@ -481,7 +481,7 @@
     .join-us .card {
         padding: 30px;
         margin: 0 auto;
-        border-radius: 15px;
+        border-radius: var(--border-radius-box);
         border: 1px solid var(--main-infobox-border-color, rgba(212, 204, 255, 0.6));
         background-color: rgba(24, 24, 24, 0.60);
         text-align: center;

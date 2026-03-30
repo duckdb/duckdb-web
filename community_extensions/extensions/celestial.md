@@ -16,8 +16,9 @@ extension:
     - teobouvard
 
 repo:
-  github: lisa-sgs/celestial
+  github: lisa-sgs/duckdb-celestial
   ref: d6a22f954257fa3d88d5ef8ba966e2c6e6ef179a
+  andium: d6a22f954257fa3d88d5ef8ba966e2c6e6ef179a
 
 docs:
   hello_world: |
@@ -27,8 +28,8 @@ docs:
 
 extension_star_count: 1
 extension_star_count_pretty: 1
-extension_download_count: 618
-extension_download_count_pretty: 618
+extension_download_count: 648
+extension_download_count_pretty: 648
 image: '/images/community_extensions/social_preview/preview_community_extension_celestial.png'
 layout: community_extension_doc
 ---

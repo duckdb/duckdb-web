@@ -34,7 +34,7 @@ body.foundation{
 		color: inherit;
 	}
 	section{
-		padding: 105px 15px;
+		padding: 105px 0px;
 		div p:last-of-type{
 			margin-bottom: 25px;
 		}
@@ -54,7 +54,7 @@ body.foundation{
 				img{
 					width: 100%;
 					height: auto;
-					border-radius: 15px;
+					border-radius: var(--border-radius-box);
 				}
 			}
 		}
@@ -79,8 +79,8 @@ body.foundation{
 						box-sizing: border-box;
 				padding: 20px;
 				position: relative;
-				border-bottom-left-radius: 15px;
-				border-bottom-right-radius: 15px;
+				border-bottom-left-radius: var(--border-radius-box);
+				border-bottom-right-radius: var(--border-radius-box);
 				-webkit-backdrop-filter: blur(14px);
 						backdrop-filter: blur(14px);
 				.head{
@@ -141,8 +141,8 @@ body.foundation{
 					position: absolute;
 					top: -15px;
 					left: -1px;
-					border-top-right-radius: 15px;
-					border-top-left-radius: 15px;
+					border-top-right-radius: var(--border-radius-box);
+					border-top-left-radius: var(--border-radius-box);
 				}
 				.button{
 					background-color: #979797;
@@ -165,8 +165,8 @@ body.foundation{
 					position: absolute;
 					top: -15px;
 					left: -1px;
-					border-top-right-radius: 15px;
-					border-top-left-radius: 15px;
+					border-top-right-radius: var(--border-radius-box);
+					border-top-left-radius: var(--border-radius-box);
 				}
 				.button{
 					background-color: #C09600;
@@ -195,7 +195,7 @@ body.foundation{
 		.supporterboard{
 			margin-top: 25px;
 			background: var(--doc-codebox-background-color, #F2F2F2);
-			border-radius: 15px;
+			border-radius: var(--border-radius-box);
 			border-top: 15px solid #979797;
 			&:not(:first-of-type){
 				
@@ -257,7 +257,7 @@ body.foundation{
 					justify-content: space-between;
 			-webkit-backdrop-filter: blur(14px);
 					backdrop-filter: blur(14px);
-			border-radius: 15px;
+			border-radius: var(--border-radius-box);
 			.member{
 				width: 33.3%;
 				-webkit-column-gap: 10px;
@@ -449,7 +449,7 @@ body.foundation{
 	}
 	body.foundation section,
 	.pagehead h1{
-		padding: 50px 15px;
+		padding: 50px 0px;
 	}
 	
 }

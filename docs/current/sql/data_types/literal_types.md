@@ -2,6 +2,8 @@
 layout: docu
 redirect_from:
 - /docs/preview/sql/data_types/literal_types
+- /docs/sql/data_types/literal_types
+- /docs/stable/sql/data_types/literal_types
 title: Literal Types
 ---
 

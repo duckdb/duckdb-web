@@ -8,7 +8,7 @@ excerpt: |
 extension:
   name: brew
   description: Get locally homebrew casks, packages and formulas and their dependencies as nicely types tables
-  version: 0.7.0
+  version: 0.8.1
   language: C++
   build: cmake
   license: MIT
@@ -19,10 +19,19 @@ extension:
 
 repo:
   github: adriens/duckdb-brew
-  ref: 8ded0c1eb77b23a3349c7c02b631f2ede305752c
+  ref: 60c96b1ad37ef63eb800c6ecba96c8db19774fd8
 
 docs:
   hello_world: |
+    -- Get brew version
+    SELECT brew_version() as brew_version;
+
+    -- View all configuration with categories
+    SELECT name, value, category FROM brew_config();
+
+    -- Run brew doctor to check system health (categorized)
+    FROM brew_doctor();
+
     -- Get all casks
     from brew_casks();
 
@@ -121,8 +130,8 @@ extended_description: |
 
 extension_star_count: 1
 extension_star_count_pretty: 1
-extension_download_count: 780
-extension_download_count_pretty: 780
+extension_download_count: 807
+extension_download_count_pretty: 807
 image: '/images/community_extensions/social_preview/preview_community_extension_brew.png'
 layout: community_extension_doc
 ---
@@ -154,6 +163,9 @@ LOAD {{ page.extension.name }};
 | brew_packages     | table         | Returns the installed packages, casks and formulas                                                     | NULL                                                           | [from brew_packages()]   |
 | brew_formulas     | table         | Returns the installed formulas                                                                         | NULL                                                           | [from brew_formulas()]   |
 | brew_dependencies | table         | Return a table with two columns : the package and the pakage that relies on it. One row per dependency | Useful to produce a graph of dependencies and security reports | [from brew_dependencies] |
+| brew_config       | table         | NULL                                                                                                   | NULL                                                           | NULL                     |
+| brew_doctor       | table         | NULL                                                                                                   | NULL                                                           | NULL                     |
+| brew_version      | scalar        | NULL                                                                                                   | NULL                                                           | NULL                     |
 
 ### Overloaded Functions
 

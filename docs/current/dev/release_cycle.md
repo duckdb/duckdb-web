@@ -2,6 +2,7 @@
 layout: docu
 redirect_from:
 - /docs/preview/dev/release_cycle
+- /docs/stable/dev/release_cycle
 title: Release Cycle
 ---
 

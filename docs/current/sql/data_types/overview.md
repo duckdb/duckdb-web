@@ -3,6 +3,8 @@ blurb: The table below shows all the built-in general-purpose data types.
 layout: docu
 redirect_from:
 - /docs/preview/sql/data_types/overview
+- /docs/sql/data_types/overview
+- /docs/stable/sql/data_types/overview
 title: Data Types
 ---
 

@@ -3,6 +3,9 @@ layout: docu
 railroad: expressions/aggregate.js
 redirect_from:
 - /docs/preview/sql/functions/aggregates
+- /docs/sql/aggregates
+- /docs/sql/functions/aggregates
+- /docs/stable/sql/functions/aggregates
 title: Aggregate Functions
 ---
 

@@ -2,6 +2,9 @@
 layout: docu
 redirect_from:
 - /docs/preview/sql/functions/enum
+- /docs/sql/functions/enum
+- /docs/stable/sql/functions/enum
+- /docs/test/functions/enum
 title: Enum Functions
 ---
 

@@ -123,7 +123,7 @@ repository: "duckdb/duckdb-web"
 #   - vendor/gems/
 #   - vendor/ruby/
 
-star_count: '36.9k'
+star_count: '37.1k'
 
 toc:
   min_level: 1
@@ -133,5 +133,5 @@ toc:
 exclude: ['Gemfile', 'Gemfile.lock', 'node_modules', 'vendor/bundle', 'vendor/cache', 'vendor/gems', 'vendor/ruby', 'bundle']
 
 include:
-  - docs/stable/clients/python/reference/objects.inv
+  - docs/lts/clients/python/reference/objects.inv
   - docs/current/clients/python/reference/objects.inv

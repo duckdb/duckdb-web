@@ -1,7 +1,10 @@
 ---
 layout: docu
 redirect_from:
+- /docs/configuration/pragmas
 - /docs/preview/configuration/pragmas
+- /docs/sql/pragmas
+- /docs/stable/configuration/pragmas
 title: Pragmas
 ---
 

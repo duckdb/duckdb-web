@@ -1,7 +1,10 @@
 ---
 layout: docu
 redirect_from:
+- /docs/extensions/httpfs/https
+- /docs/lts/extensions/httpfs/https
 - /docs/preview/core_extensions/httpfs/https
+- /docs/stable/core_extensions/httpfs/https
 title: HTTP(S) Support
 ---
 

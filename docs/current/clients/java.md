@@ -2,11 +2,15 @@
 github_repository: https://github.com/duckdb/duckdb-java
 layout: docu
 redirect_from:
+- /docs/api/java
+- /docs/api/scala
+- /docs/clients/java
 - /docs/preview/clients/java
+- /docs/stable/clients/java
 title: Java (JDBC) Client
 ---
 
-> Tip To use the DuckDB Java (JDBC) client, visit the [Java installation page]({% link install/index.html %}?environment=java).
+> Installation To use the DuckDB Java (JDBC) client, visit the [Java installation page]({% link install/index.html %}?environment=java).
 >
 > The latest stable version of the DuckDB Java (JDBC) client is {% if site.current_duckdb_java_short_version != "" %}{{ site.current_duckdb_java_short_version }}{% else %}{{ site.lts_duckdb_java_short_version }}{% endif %}.
 

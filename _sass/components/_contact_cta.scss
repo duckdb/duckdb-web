@@ -4,7 +4,7 @@
 	margin: 0 auto;
 	text-align: center;
 	padding: 50px;
-	border-radius: 15px;
+	border-radius: var(--border-radius-box);
 	background: var(--main-infobox-labs-background-color, rgba(26, 26, 26, 0.60));
 	border: 1px solid var(--main-infobox-labs-border-color, rgba(51, 51, 51, 0.60));
 

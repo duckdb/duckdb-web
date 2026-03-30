@@ -2,6 +2,8 @@
 layout: docu
 redirect_from:
 - /docs/preview/sql/expressions/overview
+- /docs/sql/expressions/overview
+- /docs/stable/sql/expressions/overview
 title: Expressions
 ---
 

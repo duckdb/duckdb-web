@@ -64,14 +64,14 @@ extension:
   name: open_prompt
   version: '2025120401'
 repo:
-  github: quackscience/duckdb-extension-openprompt
   andium: 5328a2ff7100887263259ccc5ad8c03b8c6bc58a
-  ref: b9b0d6884f43e515fda0977fc891598d874f490f
+  github: quackscience/duckdb-extension-openprompt
+  ref: 4e42c145ab1d10a534c71f2b5ad704c6d911a280
 
 extension_star_count: 58
 extension_star_count_pretty: 58
-extension_download_count: 328
-extension_download_count_pretty: 328
+extension_download_count: 279
+extension_download_count_pretty: 279
 image: '/images/community_extensions/social_preview/preview_community_extension_open_prompt.png'
 layout: community_extension_doc
 ---
@@ -107,5 +107,26 @@ LOAD {{ page.extension.name }};
 | set_api_token   | scalar        | Set the API token for LLM authentication                               | NULL    | [set_api_token('sk-...')]                                   |
 | set_api_url     | scalar        | Set the API URL for LLM endpoint                                       | NULL    | [set_api_url('https://api.openai.com/v1/chat/completions')] |
 | set_model_name  | scalar        | Set the default model name for LLM requests                            | NULL    | [set_model_name('gpt-4')]                                   |
+
+### Overloaded Functions
+
+<div class="extension_functions_table"></div>
+
+| function_name | function_type | description | comment | examples |
+|---------------|---------------|-------------|---------|----------|
+
+### Added Types
+
+<div class="extension_types_table"></div>
+
+| type_name | type_size | logical_type | type_category | internal |
+|-----------|----------:|--------------|---------------|----------|
+
+### Added Settings
+
+<div class="extension_settings_table"></div>
+
+| name | description | input_type | scope | aliases |
+|------|-------------|------------|-------|---------|
 
 

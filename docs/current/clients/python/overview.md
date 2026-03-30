@@ -2,11 +2,15 @@
 github_repository: https://github.com/duckdb/duckdb-python
 layout: docu
 redirect_from:
+- /docs/api/python
+- /docs/api/python/overview
+- /docs/clients/python/overview
 - /docs/preview/clients/python/overview
+- /docs/stable/clients/python/overview
 title: Python API
 ---
 
-> Tip To use the DuckDB Python client, visit the [Rust installation page]({% link install/index.html %}?environment=python).
+> Installation To use the DuckDB Python client, visit the [Rust installation page]({% link install/index.html %}?environment=python).
 >
 > The latest stable version of the DuckDB Python client is {{ site.current_duckdb_version }}.
 

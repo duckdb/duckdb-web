@@ -1,11 +1,14 @@
 ---
 layout: docu
 redirect_from:
+- /docs/api/cpp
+- /docs/clients/cpp
 - /docs/preview/clients/cpp
+- /docs/stable/clients/cpp
 title: C++ API
 ---
 
-> Tip To use the DuckDB C++ API, download the [`libduckdb` archive]({% link install/index.html %}?environment=c) for your platform.
+> Installation To use the DuckDB C++ API, download the [`libduckdb` archive]({% link install/index.html %}?environment=c) for your platform.
 >
 > The latest stable version of the DuckDB C++ API is {{ site.current_duckdb_version }}.
 

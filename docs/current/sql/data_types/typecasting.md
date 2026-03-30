@@ -2,6 +2,8 @@
 layout: docu
 redirect_from:
 - /docs/preview/sql/data_types/typecasting
+- /docs/sql/data_types/typecasting
+- /docs/stable/sql/data_types/typecasting
 title: Typecasting
 ---
 

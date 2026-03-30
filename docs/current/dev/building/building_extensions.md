@@ -1,7 +1,9 @@
 ---
 layout: docu
 redirect_from:
+- /docs/dev/building/building_extensions
 - /docs/preview/dev/building/building_extensions
+- /docs/stable/dev/building/building_extensions
 title: Building Extensions
 ---
 

@@ -19,14 +19,14 @@ extension:
   name: radio
   version: '2025120401'
 repo:
-  github: query-farm/radio
   andium: 0ace6af84ec2289c23944857fd9aded06e65ec9c
-  ref: 84295b0ba94db47ae821f26f2232e6ce958520ea
+  github: query-farm/radio
+  ref: 4b3cec7b2bf09259566f3212c723549a2c4418bc
 
 extension_star_count: 36
 extension_star_count_pretty: 36
-extension_download_count: 863
-extension_download_count_pretty: 863
+extension_download_count: 846
+extension_download_count_pretty: 846
 image: '/images/community_extensions/social_preview/preview_community_extension_radio.png'
 layout: community_extension_doc
 ---

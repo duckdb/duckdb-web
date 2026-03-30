@@ -502,7 +502,7 @@ body.layout_default.blog_typography {
     div.highlight {
         width: 100%;
         position: relative;
-        border-radius: 10px;
+        border-radius: var(--border-radius-box);
         overflow: hidden;
         transition: border-color .3s;
         background: var(--doc-codebox-background-color, #F2F2F2);
@@ -545,7 +545,7 @@ body.layout_default.blog_typography {
         padding: 15px;
         overflow: auto;
         background: var(--doc-codebox-background-color, #F2F2F2);
-        border-radius: 10px;
+        border-radius: var(--border-radius-box);
     }
 
     code {

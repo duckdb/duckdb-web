@@ -1,7 +1,10 @@
 ---
 layout: docu
 redirect_from:
+- /docs/guides/performance/file-formats
+- /docs/guides/performance/file_formats
 - /docs/preview/guides/performance/file_formats
+- /docs/stable/guides/performance/file_formats
 title: File Formats
 ---
 

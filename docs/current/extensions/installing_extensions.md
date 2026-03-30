@@ -1,7 +1,10 @@
 ---
 layout: docu
 redirect_from:
+- /docs/extensions/working_with_extensions
+- /docs/lts/core_extensions/working_with_extensions
 - /docs/preview/extensions/installing_extensions
+- /docs/stable/extensions/installing_extensions
 title: Installing Extensions
 ---
 

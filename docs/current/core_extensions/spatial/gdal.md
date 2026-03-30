@@ -1,7 +1,9 @@
 ---
 layout: docu
 redirect_from:
+- /docs/lts/extensions/spatial/gdal
 - /docs/preview/core_extensions/spatial/gdal
+- /docs/stable/core_extensions/spatial/gdal
 title: GDAL Integration
 ---
 

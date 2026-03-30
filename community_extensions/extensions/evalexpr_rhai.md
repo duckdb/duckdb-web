@@ -19,14 +19,14 @@ extension:
   requires_toolchains: rust
   version: '2025120401'
 repo:
-  github: query-farm/evalexpr_rhai
   andium: f4493ade6aa592402b1b80a3eec002d94254b5e9
-  ref: 7b731c7870b6fe5ca9fd62dc57a8ec0bfe850cc2
+  github: query-farm/evalexpr_rhai
+  ref: c00bfae40225e39c66415b3bc5d8dcd64130b20f
 
 extension_star_count: 25
 extension_star_count_pretty: 25
-extension_download_count: 862
-extension_download_count_pretty: 862
+extension_download_count: 846
+extension_download_count_pretty: 846
 image: '/images/community_extensions/social_preview/preview_community_extension_evalexpr_rhai.png'
 layout: community_extension_doc
 ---

@@ -2,7 +2,10 @@
 github_repository: https://github.com/duckdb/duckdb-odbc
 layout: docu
 redirect_from:
+- /docs/api/odbc/configuration
+- /docs/clients/odbc/configuration
 - /docs/preview/clients/odbc/configuration
+- /docs/stable/clients/odbc/configuration
 title: ODBC Configuration
 ---
 

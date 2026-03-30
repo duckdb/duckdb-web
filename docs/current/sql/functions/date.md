@@ -2,6 +2,9 @@
 layout: docu
 redirect_from:
 - /docs/preview/sql/functions/date
+- /docs/sql/functions/date
+- /docs/stable/sql/functions/date
+- /docs/test/functions/date
 title: Date Functions
 ---
 
@@ -13,14 +16,14 @@ This section describes functions and operators for examining and manipulating [`
 
 The table below shows the available mathematical operators for `DATE` types.
 
-| Operator | Description | Example | Result |
-|:-|:--|:---|:--|
-| `+` | addition of days (integers) | `DATE '1992-03-22' + 5` | `1992-03-27` |
-| `+` | addition of an `INTERVAL` | `DATE '1992-03-22' + INTERVAL 5 DAY` | `1992-03-27 00:00:00` |
-| `+` | addition of a variable `INTERVAL` | `SELECT DATE '1992-03-22' + INTERVAL (d.days) DAY FROM (VALUES (5), (11)) d(days)` | `1992-03-27 00:00:00` and `1992-04-02 00:00:00` |
-| `-` | subtraction of `DATE`s | `DATE '1992-03-27' - DATE '1992-03-22'` | `5` |
-| `-` | subtraction of an `INTERVAL` | `DATE '1992-03-27' - INTERVAL 5 DAY` | `1992-03-22 00:00:00` |
-| `-` | subtraction of a variable `INTERVAL` | `SELECT DATE '1992-03-27' - INTERVAL (d.days) DAY FROM (VALUES (5), (11)) d(days)` | `1992-03-22 00:00:00` and `1992-03-16 00:00:00` |
+| Operator | Description                          | Example                                                                                                       | Result                                          |
+| :------- | :----------------------------------- | :------------------------------------------------------------------------------------------------------------ | :---------------------------------------------- |
+| `+`      | addition of days (integers)          | `DATE '1992-03-22' + 5`{:.language-sql .highlight}                                                            | `1992-03-27`                                    |
+| `+`      | addition of AN `INTERVAL`            | `DATE '1992-03-22' + INTERVAL 5 DAY`{:.language-sql .highlight}                                               | `1992-03-27 00:00:00`                           |
+| `+`      | addition of a variable `INTERVAL`    | `SELECT DATE '1992-03-22' + INTERVAL (d.days) DAY FROM (VALUES (5), (11)) d(days)`{:.language-sql .highlight} | `1992-03-27 00:00:00` and `1992-04-02 00:00:00` |
+| `-`      | subtraction of `DATE`s               | `DATE '1992-03-27' - DATE '1992-03-22'`{:.language-sql .highlight}                                            | `5`                                             |
+| `-`      | subtraction of an `INTERVAL`         | `DATE '1992-03-27' - INTERVAL 5 DAY`{:.language-sql .highlight}                                               | `1992-03-22 00:00:00`                           |
+| `-`      | subtraction of a variable `INTERVAL` | `SELECT DATE '1992-03-27' - INTERVAL (d.days) DAY FROM (VALUES (5), (11)) d(days)`{:.language-sql .highlight} | `1992-03-22 00:00:00` and `1992-03-16 00:00:00` |
 
 Adding to or subtracting from [infinite values]({% link docs/current/sql/data_types/date.md %}#special-values) produces the same infinite value.
 
@@ -29,27 +32,27 @@ Adding to or subtracting from [infinite values]({% link docs/current/sql/data_ty
 The table below shows the available functions for `DATE` types.
 Dates can also be manipulated with the [timestamp functions]({% link docs/current/sql/functions/timestamp.md %}) through type promotion.
 
-| Name | Description |
-|:--|:-------|
-| [`date_add(date, interval)`](#date_adddate-interval) | Add the interval to the date and return a `DATETIME` value. |
-| [`date_diff(part, startdate, enddate)`](#date_diffpart-startdate-enddate) | The number of [`part`]({% link docs/current/sql/functions/datepart.md %}) boundaries between `startdate` and `enddate`, inclusive of the larger date and exclusive of the smaller date. |
-| [`date_part(part, date)`](#date_partpart-date) | Get [subfield]({% link docs/current/sql/functions/datepart.md %}) (equivalent to `extract`). |
-| [`date_sub(part, startdate, enddate)`](#date_subpart-startdate-enddate) | The signed length of the interval between `startdate` and `enddate`, truncated to whole multiples of [`part`]({% link docs/current/sql/functions/datepart.md %}). |
-| [`date_trunc(part, date)`](#date_truncpart-date) | Truncate to specified [precision]({% link docs/current/sql/functions/datepart.md %}). |
-| [`dayname(date)`](#daynamedate) | The (English) name of the weekday. |
-| [`extract(part from date)`](#extractpart-from-date) | Get [subfield]({% link docs/current/sql/functions/datepart.md %}) from a date. |
-| [`greatest(date, date)`](#greatestdate-date) | The later of two dates. |
-| [`isfinite(date)`](#isfinitedate) | Returns true if the date is finite, false otherwise. |
-| [`isinf(date)`](#isinfdate) | Returns true if the date is infinite, false otherwise. |
-| [`julian(date)`](#juliandate) | Extract the Julian Day number from a date. |
-| [`last_day(date)`](#last_daydate) | The last day of the corresponding month in the date. |
-| [`least(date, date)`](#leastdate-date) | The earlier of two dates. |
-| [`make_date(year, month, day)`](#make_dateyear-month-day) | The date for the given parts. |
-| [`monthname(date)`](#monthnamedate) | The (English) name of the month. |
-| [`strftime(date, format)`](#strftimedate-format) | Converts a date to a string according to the [format string]({% link docs/current/sql/functions/dateformat.md %}). |
-| [`time_bucket(bucket_width, date[, offset])`](#time_bucketbucket_width-date-offset) | Truncate `date` to a grid of width `bucket_width`. The grid is anchored at `2000-01-01[ + offset]` when `bucket_width` is a number of months or coarser units, else `2000-01-03[ + offset]`. Note that `2000-01-03` is a Monday. |
+| Name                                                                                | Description                                                                                                                                                                                                                                                 |
+| :---------------------------------------------------------------------------------- | :---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| [`date_add(date, interval)`](#date_adddate-interval)                                | Add the interval to the date and return a `DATETIME` value.                                                                                                                                                                                                 |
+| [`date_diff(part, startdate, enddate)`](#date_diffpart-startdate-enddate)           | The number of [`part`]({% link docs/current/sql/functions/datepart.md %}) boundaries between `startdate` and `enddate`, inclusive of the larger date and exclusive of the smaller date.                                                                     |
+| [`date_part(part, date)`](#date_partpart-date)                                      | Get [subfield]({% link docs/current/sql/functions/datepart.md %}) (equivalent to `extract`).                                                                                                                                                                |
+| [`date_sub(part, startdate, enddate)`](#date_subpart-startdate-enddate)             | The signed length of the interval between `startdate` and `enddate`, truncated to whole multiples of [`part`]({% link docs/current/sql/functions/datepart.md %}).                                                                                           |
+| [`date_trunc(part, date)`](#date_truncpart-date)                                    | Truncate to specified [precision]({% link docs/current/sql/functions/datepart.md %}).                                                                                                                                                                       |
+| [`dayname(date)`](#daynamedate)                                                     | The (English) name of the weekday.                                                                                                                                                                                                                          |
+| [`extract(part from date)`](#extractpart-from-date)                                 | Get [subfield]({% link docs/current/sql/functions/datepart.md %}) from a date.                                                                                                                                                                              |
+| [`greatest(date, date)`](#greatestdate-date)                                        | The later of two dates.                                                                                                                                                                                                                                     |
+| [`isfinite(date)`](#isfinitedate)                                                   | Returns true if the date is finite, false otherwise.                                                                                                                                                                                                        |
+| [`isinf(date)`](#isinfdate)                                                         | Returns true if the date is infinite, false otherwise.                                                                                                                                                                                                      |
+| [`julian(date)`](#juliandate)                                                       | Extract the Julian Day number from a date.                                                                                                                                                                                                                  |
+| [`last_day(date)`](#last_daydate)                                                   | The last day of the corresponding month in the date.                                                                                                                                                                                                        |
+| [`least(date, date)`](#leastdate-date)                                              | The earlier of two dates.                                                                                                                                                                                                                                   |
+| [`make_date(year, month, day)`](#make_dateyear-month-day)                           | The date for the given parts.                                                                                                                                                                                                                               |
+| [`monthname(date)`](#monthnamedate)                                                 | The (English) name of the month.                                                                                                                                                                                                                            |
+| [`strftime(date, format)`](#strftimedate-format)                                    | Converts a date to a string according to the [format string]({% link docs/current/sql/functions/dateformat.md %}).                                                                                                                                          |
+| [`time_bucket(bucket_width, date[, offset])`](#time_bucketbucket_width-date-offset) | Truncate `date` to a grid of width `bucket_width`. The grid is anchored at `2000-01-01[ + offset]` when `bucket_width` is a number of months or coarser units, else `2000-01-03[ + offset]`. Note that `2000-01-03` is a Monday.                            |
 | [`time_bucket(bucket_width, date[, origin])`](#time_bucketbucket_width-date-origin) | Truncate `timestamptz` to a grid of width `bucket_width`. The grid is anchored at the `origin` timestamp, which defaults to `2000-01-01` when `bucket_width` is a number of months or coarser units, else `2000-01-03`. Note that `2000-01-03` is a Monday. |
-| [`today()`](#today) | Current date (start of current transaction) in the local time zone. |
+| [`today()`](#today)                                                                 | Current date (start of current transaction) in the local time zone.                                                                                                                                                                                         |
 
 #### `date_add(date, interval)`
 

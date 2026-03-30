@@ -5,6 +5,8 @@ layout: docu
 railroad: query_syntax/from.js
 redirect_from:
 - /docs/preview/sql/query_syntax/from
+- /docs/sql/query_syntax/from
+- /docs/stable/sql/query_syntax/from
 title: FROM and JOIN Clauses
 ---
 
@@ -124,7 +126,7 @@ WHERE i % 2 = 0;
 ### Table Functions
 
 Some functions in DuckDB return entire tables rather than individual values. These functions are accordingly called _table functions_ and can be used with a `FROM` clause like regular table references. 
-Examples include [`read_csv`]({% link docs/stable/data/csv/overview.md %}#csv-functions), [`read_parquet`]({% link docs/stable/data/parquet/overview.md %}#read_parquet-function), [`range`]({% link docs/current/sql/functions/list.md %}#rangestart-stop-step), [`generate_series`]({% link docs/current/sql/functions/list.md %}#generate_seriesstart-stop-step), [`repeat`]({% link docs/current/sql/functions/utility.md %}#repeat_rowvarargs-num_rows), [`unnest`]({% link docs/current/sql/query_syntax/unnest.md %}), and [`glob`]({% link docs/stable/sql/functions/utility.md %}#globsearch_path) (note that some of the examples here can be used as both scalar and table functions). 
+Examples include [`read_csv`]({% link docs/lts/data/csv/overview.md %}#csv-functions), [`read_parquet`]({% link docs/lts/data/parquet/overview.md %}#read_parquet-function), [`range`]({% link docs/current/sql/functions/list.md %}#rangestart-stop-step), [`generate_series`]({% link docs/current/sql/functions/list.md %}#generate_seriesstart-stop-step), [`repeat`]({% link docs/current/sql/functions/utility.md %}#repeat_rowvarargs-num_rows), [`unnest`]({% link docs/current/sql/query_syntax/unnest.md %}), and [`glob`]({% link docs/lts/sql/functions/utility.md %}#globsearch_path) (note that some of the examples here can be used as both scalar and table functions). 
 
 For example,
 

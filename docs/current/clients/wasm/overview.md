@@ -2,11 +2,15 @@
 github_repository: https://github.com/duckdb/duckdb-wasm
 layout: docu
 redirect_from:
+- /docs/api/wasm
+- /docs/api/wasm/overview
+- /docs/clients/wasm/overview
 - /docs/preview/clients/wasm/overview
+- /docs/stable/clients/wasm/overview
 title: DuckDB Wasm
 ---
 
-> Tip To use the DuckDB Wasm client, visit the [`duckdb-wasm` GitHub repository](https://github.com/duckdb/duckdb-wasm#readme).
+> Installation To use the DuckDB Wasm client, visit the [`duckdb-wasm` GitHub repository](https://github.com/duckdb/duckdb-wasm#readme).
 >
 > The latest stable version of the DuckDB WebAssembly client is {% if site.current_duckdb_wasm_version != "" %}{{ site.current_duckdb_wasm_version }}{% else %}{{ site.lts_duckdb_wasm_version }}{% endif %}.
 

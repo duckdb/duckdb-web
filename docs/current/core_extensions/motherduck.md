@@ -2,6 +2,9 @@
 layout: docu
 redirect_from:
 - /docs/preview/core_extensions/motherduck
+- /docs/stable/core_extensions/motherduck
+- /md
+- /motherduck
 title: MotherDuck Extension
 ---
 
@@ -26,6 +29,14 @@ ATTACH 'md:';
 ```
 
 ## Platforms
+
+The `motherduck` extension supports the following [platforms]({% link docs/lts/dev/building/overview.md %}#supported-platforms):
+
+* `linux_amd64`
+* `linux_arm64`
+* `osx_amd64`
+* `osx_arm64`
+* `windows_amd64`
 
 The `windows_arm64` platform is currently not supported.
 

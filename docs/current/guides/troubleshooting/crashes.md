@@ -2,6 +2,7 @@
 layout: docu
 redirect_from:
 - /docs/preview/guides/troubleshooting/crashes
+- /docs/stable/guides/troubleshooting/crashes
 title: Crashes
 ---
 

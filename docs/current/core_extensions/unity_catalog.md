@@ -2,7 +2,10 @@
 github_repository: https://github.com/duckdb/unity_catalog
 layout: docu
 redirect_from:
+- /docs/extensions/unity_catalog
+- /docs/lts/extensions/unity_catalog
 - /docs/preview/core_extensions/unity_catalog
+- /docs/stable/core_extensions/unity_catalog
 title: Unity Catalog Extension
 ---
 

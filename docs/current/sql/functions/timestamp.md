@@ -2,6 +2,8 @@
 layout: docu
 redirect_from:
 - /docs/preview/sql/functions/timestamp
+- /docs/sql/functions/timestamp
+- /docs/stable/sql/functions/timestamp
 title: Timestamp Functions
 ---
 
@@ -266,7 +268,7 @@ In general, if the function needs to examine the parts of the infinite date, the
 <div class="nostroke_table"></div>
 
 | **Description** | Converts milliseconds since the epoch to a timestamp. |
-| **Example** | `make_timestamp(1667810584123)` |
+| **Example** | `make_timestamp_ms(1667810584123)` |
 | **Result** | `2022-11-07 08:43:04.123` |
 
 #### `make_timestamp_ns(nanoseconds)`

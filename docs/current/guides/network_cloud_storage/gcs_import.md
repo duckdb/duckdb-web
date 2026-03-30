@@ -1,7 +1,10 @@
 ---
 layout: docu
 redirect_from:
+- /docs/guides/import/gcs_import
+- /docs/guides/network_cloud_storage/gcs_import
 - /docs/preview/guides/network_cloud_storage/gcs_import
+- /docs/stable/guides/network_cloud_storage/gcs_import
 title: Google Cloud Storage Import
 ---
 

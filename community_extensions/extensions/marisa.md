@@ -20,14 +20,14 @@ extension:
   name: marisa
   version: '2025120401'
 repo:
-  github: query-farm/marisa
   andium: 8feeb0b0157b7fad0694ee09c430bbabce54cbb7
-  ref: 7f1df16cbe53df651a71314ebf0ffc428ef10166
+  github: query-farm/marisa
+  ref: 13123f4de215118a4c005bfca9dde0b856e74247
 
 extension_star_count: 11
 extension_star_count_pretty: 11
-extension_download_count: 847
-extension_download_count_pretty: 847
+extension_download_count: 892
+extension_download_count_pretty: 892
 image: '/images/community_extensions/social_preview/preview_community_extension_marisa.png'
 layout: community_extension_doc
 ---

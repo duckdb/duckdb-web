@@ -157,7 +157,7 @@
 		background: var(--menu-dropdown-background-color, #F2F2F2);
 		border: 1px solid var(--menu-dropdown-border-color, #E6E6E6);
 		backdrop-filter: blur(5px);
-		border-radius: 15px;
+		border-radius: var(--border-radius-box);
 		pointer-events: none;
 		transform: translateY(10px);
 		transition: all 0.2s;
@@ -246,7 +246,7 @@
 		padding-top: 14px;
 		background: var(--menu-dropdown-background-color, #F2F2F2);
 		border: 1px solid var(--menu-dropdown-border-color, #E6E6E6);
-		border-radius: 15px;
+		border-radius: var(--border-radius-box);
 		opacity: 0;
 		pointer-events: none;
 		margin-bottom: 20px;
@@ -614,7 +614,7 @@
 			min-width: 115px;
 			max-height: 115px;
 			aspect-ratio: 1/1;
-			border-radius: 10px;
+			border-radius: var(--border-radius-box);
 			&::after {
 				width: 80px;
 				height: 80px;

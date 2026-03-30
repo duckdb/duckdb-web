@@ -18,14 +18,14 @@ extension:
   requires_toolchains: rust
   version: '2025120401'
 repo:
-  github: query-farm/lindel
   andium: 3f9906c71e7883e0f2ee8696d9e8648750bdb76b
-  ref: 9ef24770f13ad50006f0ed922ca497daaece20dc
+  github: query-farm/lindel
+  ref: 332d1515d4103cce96166bd93288b94558b9a901
 
 extension_star_count: 60
 extension_star_count_pretty: 60
-extension_download_count: 2985
-extension_download_count_pretty: 3.0k
+extension_download_count: 3091
+extension_download_count_pretty: 3.1k
 image: '/images/community_extensions/social_preview/preview_community_extension_lindel.png'
 layout: community_extension_doc
 ---

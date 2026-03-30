@@ -1,7 +1,10 @@
 ---
 layout: docu
 redirect_from:
+- /docs/api/c/query
+- /docs/clients/c/query
 - /docs/preview/clients/c/query
+- /docs/stable/clients/c/query
 title: Query
 ---
 

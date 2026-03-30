@@ -19,12 +19,12 @@ extension:
 repo:
   andium: 7680a4be752c2f0c09046eabacc384e0df66134a
   github: query-farm/hashfuncs
-  ref: 66b24d98edfcc58e8f1598b62cda07c0ba9e22f4
+  ref: 47f95ba5b13bfb98aae307012a5eba7f53235d6c
 
 extension_star_count: 12
 extension_star_count_pretty: 12
-extension_download_count: 4441
-extension_download_count_pretty: 4.4k
+extension_download_count: 5591
+extension_download_count_pretty: 5.6k
 image: '/images/community_extensions/social_preview/preview_community_extension_hashfuncs.png'
 layout: community_extension_doc
 ---

@@ -3,6 +3,7 @@ github_repository: https://github.com/satur-io/duckdb-php
 layout: docu
 redirect_from:
 - /docs/preview/clients/tertiary_clients/php
+- /docs/stable/clients/tertiary_clients/php
 title: PHP Client
 ---
 

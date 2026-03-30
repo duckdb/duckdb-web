@@ -2,6 +2,11 @@
 layout: docu
 redirect_from:
 - /docs/preview/sql/dialect/keywords_and_identifiers
+- /docs/sql/case_sensitivity
+- /docs/sql/dialect/keywords-and-identifiers
+- /docs/sql/dialect/keywords_and_identifiers
+- /docs/sql/keywords-and-identifiers
+- /docs/stable/sql/dialect/keywords_and_identifiers
 title: Keywords and Identifiers
 ---
 

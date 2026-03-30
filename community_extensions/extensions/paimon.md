@@ -18,8 +18,8 @@ extension:
 
 repo:
   github: polardb/duckdb-paimon
-  andium: a1eb46684f3000d40d49ed54aa72ce450e7bad5e
-  ref: 2e0a3888317b684e255f71a127ce7677757bd865
+  andium: d1bba0fa7767e3761de45521f3ecdaf465807c57
+  ref: 0764988fac3c37161ae465dd9232ff95213db329
 
 docs:
   hello_world: |
@@ -58,10 +58,10 @@ docs:
 
     For more information, visit the [extension repository](https://github.com/polardb/duckdb-paimon).
 
-extension_star_count: 22
-extension_star_count_pretty: 22
-extension_download_count: 483
-extension_download_count_pretty: 483
+extension_star_count: 23
+extension_star_count_pretty: 23
+extension_download_count: 656
+extension_download_count_pretty: 656
 image: '/images/community_extensions/social_preview/preview_community_extension_paimon.png'
 layout: community_extension_doc
 ---

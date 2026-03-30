@@ -1,11 +1,14 @@
 ---
 layout: docu
 redirect_from:
+- /docs/api/node_neo/overview
+- /docs/clients/node_neo/overview
 - /docs/preview/clients/node_neo/overview
+- /docs/stable/clients/node_neo/overview
 title: Node.js Client (Neo)
 ---
 
-> Tip To use the DuckDB Node.js client, visit the [Node.js installation page]({% link install/index.html %}?environment=nodejs).
+> Installation To use the DuckDB Node.js client, visit the [Node.js installation page]({% link install/index.html %}?environment=nodejs).
 >
 > The latest stable version of the DuckDB Node.js (Neo) client is {% if site.current_duckdb_node_neo_version != "" %}{{ site.current_duckdb_node_neo_version }}{% else %}{{ site.lts_duckdb_node_neo_version }}{% endif %}.
 
@@ -15,11 +18,10 @@ The primary package, [@duckdb/node-api](https://www.npmjs.com/package/@duckdb/no
 It depends on low-level bindings that adhere closely to [DuckDB's C API]({% link docs/current/clients/c/overview.md %}),
 available separately as [@duckdb/node-bindings](https://www.npmjs.com/package/@duckdb/node-bindings).
 
-## Features
-
-### Roadmap
+## Roadmap
 
 Some features are not yet complete:
+
 * Binding and appending the MAP and UNION data types
 * Appending default values row-by-row
 * User-defined types & functions
@@ -30,13 +32,17 @@ Some features are not yet complete:
 See the [issues list on GitHub](https://github.com/duckdb/duckdb-node-neo/issues)
 for the most up-to-date roadmap.
 
-### Supported Platforms
+## Platforms
 
-* Linux arm64
-* Linux x64
-* Mac OS X (Darwin) arm64 (Apple Silicon)
-* Mac OS X (Darwin) x64 (Intel)
-* Windows (Win32) x64
+The Node.js (Neo) client supports the following [platforms]({% link docs/current/dev/building/overview.md %}#supported-platforms):
+
+* `linux_amd64`
+* `linux_arm64`
+* `osx_amd64`
+* `osx_arm64`
+* `windows_amd64`
+
+The `windows_arm64` platform is currently not supported.
 
 ## Examples
 

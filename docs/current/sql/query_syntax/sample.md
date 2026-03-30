@@ -3,6 +3,8 @@ layout: docu
 railroad: query_syntax/sample.js
 redirect_from:
 - /docs/preview/sql/query_syntax/sample
+- /docs/sql/query_syntax/sample
+- /docs/stable/sql/query_syntax/sample
 title: SAMPLE Clause
 ---
 
