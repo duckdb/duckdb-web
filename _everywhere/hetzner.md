@@ -5,7 +5,7 @@ date: 2026-03-07
 author: "berndsen-io"
 thumb: "/images/everywhere/thumbs/hetzner.jpg"
 image: "/images/everywhere/thumbs/hetzner.jpg"
-excerpt: "DuckDB and DuckLake run on Hetzner"
+excerpt: "DuckDB and DuckLake run on Hetzner."
 tags: ["Servers"]
 thirdparty: true
 ---
