@@ -18,7 +18,10 @@
     * [Jekyll doesn't work on Windows](#jekyll-doesnt-work-on-windows)
     * [Cannot install dependency](#cannot-install-dependency)
     * [Jekyll fails](#jekyll-fails)
+    * [Jekyll Content Not Rendering Properly](#jekyll-content-not-rendering-properly)
     * [Bundle update fails](#bundle-update-fails)
+    * [Bundle install fails](#bundle-install-fails)
+    * [`ERROR bad URI`](#error-bad-uri)
 
 The site is built using [Jekyll](https://jekyllrb.com/) used by GitHub Pages.
 
@@ -54,7 +57,7 @@ scripts/serve-latest.sh
 
 Visit <http://localhost:4000/docs/> to browse the website.
 
-Note that to save time on building, the `serve-latest.sh` script only deploys the latest stable version and excludes the archives. To serve the full website with old versions included, run:
+Note that to save time on building, the `serve-latest.sh` script only deploys the current/lts versions and excludes the legacy versions. To serve the full website with old versions included, run:
 
 ```batch
 scripts/serve.sh

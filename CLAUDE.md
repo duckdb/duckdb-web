@@ -21,7 +21,7 @@ pip install -r requirements.txt
 ## Development Commands
 
 ```bash
-# Serve locally (latest stable only, faster — recommended for most editing)
+# Serve locally (current/lts only, faster — recommended for most editing)
 scripts/serve-latest.sh
 
 # Serve full site including all archived versions

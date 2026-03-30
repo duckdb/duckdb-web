@@ -46,5 +46,5 @@ def copy_docs():
                 shutil.copy2(src_file, dst_file)
 
 
-shutil.copy("_data/menu_docs_stable.json", f"_data/menu_docs_current.json")
+shutil.copy("_data/menu_docs_current.json", f"_data/menu_docs_current.json")
 copy_docs()

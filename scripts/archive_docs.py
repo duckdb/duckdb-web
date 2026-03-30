@@ -106,11 +106,11 @@ def archive_stable(old_stable_version):
 old_stable_version_no_dots = old_stable_version.replace(".", "")
 
 shutil.copy(
-    "_data/menu_docs_stable.json", f"_data/menu_docs_{old_stable_version_no_dots}.json"
+    "_data/menu_docs_current.json", f"_data/menu_docs_{old_stable_version_no_dots}.json"
 )
 archive_stable(old_stable_version)
 
-shutil.copy("_data/menu_docs_current.json", f"_data/menu_docs_stable.json")
+shutil.copy("_data/menu_docs_current.json", f"_data/menu_docs_current.json")
 archive_preview()
 
 shutil.move("js/stable", f"js/{old_stable_version}")
