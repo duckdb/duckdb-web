@@ -3,8 +3,6 @@ layout: docu
 railroad: statements/insert.js
 redirect_from:
 - /docs/sql/statements/insert
-- /cal/8
-- /cal/08
 title: INSERT Statement
 ---
 

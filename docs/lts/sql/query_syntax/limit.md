@@ -3,7 +3,6 @@ layout: docu
 railroad: query_syntax/orderby.js
 redirect_from:
 - /docs/sql/query_syntax/limit
-- /cal/11
 title: LIMIT and OFFSET Clauses
 ---
 
