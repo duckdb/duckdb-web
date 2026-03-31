@@ -98,10 +98,10 @@ docs:
     - Prepared statement support for parameterized query vectors
     - Configurable thresholds: hnsw_acorn_threshold, hnsw_bruteforce_threshold
 
-extension_star_count: 55
-extension_star_count_pretty: 55
-extension_download_count: 176
-extension_download_count_pretty: 176
+extension_star_count: 57
+extension_star_count_pretty: 57
+extension_download_count: 225
+extension_download_count_pretty: 225
 image: '/images/community_extensions/social_preview/preview_community_extension_hnsw_acorn.png'
 layout: community_extension_doc
 ---

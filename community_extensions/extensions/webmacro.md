@@ -88,10 +88,10 @@ repo:
   github: quackscience/duckdb-extension-webmacro
   ref: 76e83c478fad9c30e5703a194911ae96bfc2ed94
 
-extension_star_count: 14
-extension_star_count_pretty: 14
-extension_download_count: 343
-extension_download_count_pretty: 343
+extension_star_count: 15
+extension_star_count_pretty: 15
+extension_download_count: 368
+extension_download_count_pretty: 368
 image: '/images/community_extensions/social_preview/preview_community_extension_webmacro.png'
 layout: community_extension_doc
 ---

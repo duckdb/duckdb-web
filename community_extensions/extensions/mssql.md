@@ -56,10 +56,10 @@ docs:
     - Named instances not supported
     - Windows Authentication not supported
 
-extension_star_count: 87
-extension_star_count_pretty: 87
-extension_download_count: 16002
-extension_download_count_pretty: 16.0k
+extension_star_count: 88
+extension_star_count_pretty: 88
+extension_download_count: 16559
+extension_download_count_pretty: 16.6k
 image: '/images/community_extensions/social_preview/preview_community_extension_mssql.png'
 layout: community_extension_doc
 ---
