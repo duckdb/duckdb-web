@@ -10,9 +10,10 @@ excerpt: ""
 pill: "arXiv"
 ---
 
-[Paper (preprint PDF)](https://arxiv.org/pdf/2602.18775.pdf)
-
-Published on arXiv in 2026
+| | |
+|-------|-------|
+| **Paper** | [Should I Hide My Duck in the Lake? (preprint PDF)](https://arxiv.org/pdf/2602.18775.pdf) |
+| **Published** | arXiv, 2026 |
 
 ## Abstract
 

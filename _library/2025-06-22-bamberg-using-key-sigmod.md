@@ -10,9 +10,10 @@ excerpt: ""
 pill: "SIGMOD 2025"
 ---
 
-[Paper (PDF)](https://db.cs.uni-tuebingen.de/publications/2025/using-key/how-duckdb-is-using-key-to-unlock-recursive-query-performance.pdf)
-
-Venue: SIGMOD 2025
+| | |
+|-------|-------|
+| **Paper** | [How DuckDB is USING KEY to Unlock Recursive Query Performance (PDF)](https://db.cs.uni-tuebingen.de/publications/2025/using-key/how-duckdb-is-using-key-to-unlock-recursive-query-performance.pdf) |
+| **Venue** | SIGMOD 2025 |
 
 ## Abstract
 

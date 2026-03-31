@@ -13,10 +13,11 @@ pill: "DuckDB in Research"
 episode: "S01E04"
 ---
 
-## Links
-
-* [Apple Podcasts](https://podcasts.apple.com/us/podcast/arjen-p-de-vries-faiss-an-extension-for-vector-data-search/id1631350873?i=1000702996891)
-* [Spotify](https://open.spotify.com/episode/33get9iGEZXMsgKiOZ2mml)
+|-------|-------|
+| **Podcast** | DuckDB in Research |
+| **Episode** | S01E04 |
+| **Apple Podcasts** | [Listen](https://podcasts.apple.com/us/podcast/arjen-p-de-vries-faiss-an-extension-for-vector-data-search/id1631350873?i=1000702996891) |
+| **Spotify** | [Listen](https://open.spotify.com/episode/33get9iGEZXMsgKiOZ2mml) |
 
 ## Description
 

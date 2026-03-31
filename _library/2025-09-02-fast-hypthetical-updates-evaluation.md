@@ -8,9 +8,9 @@ excerpt: ""
 pill: "PW 25"
 ---
 
-[Paper (PDF)](https://dl.acm.org/doi/pdf/10.1145/3736229.3736254)
-
-Venue: ProvenanceWeek 2025
+|-------|-------|
+| **Paper** | [Fast Hypothetical Updates Evaluation (PDF)](https://dl.acm.org/doi/pdf/10.1145/3736229.3736254) |
+| **Venue** | ProvenanceWeek 2025 |
 
 ## Abstract
 

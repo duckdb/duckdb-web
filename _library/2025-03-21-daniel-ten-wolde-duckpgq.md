@@ -13,10 +13,11 @@ pill: "DuckDB in Research"
 episode: "S01E02"
 ---
 
-## Links
-
-* [Apple Podcasts](https://podcasts.apple.com/us/podcast/dani%C3%ABl-ten-wolde-duckpgq-a-graph-extension/id1631350873?i=1000700107280)
-* [Spotify](https://open.spotify.com/episode/3e3ugp27paNzKthkN9wmUe)
+|-------|-------|
+| **Podcast** | DuckDB in Research |
+| **Episode** | S01E02 |
+| **Apple Podcasts** | [Listen](https://podcasts.apple.com/us/podcast/dani%C3%ABl-ten-wolde-duckpgq-a-graph-extension/id1631350873?i=1000700107280) |
+| **Spotify** | [Listen](https://open.spotify.com/episode/3e3ugp27paNzKthkN9wmUe) |
 
 ## Description
 

@@ -10,9 +10,9 @@ excerpt: ""
 pill: "ADMS 2025"
 ---
 
-[Paper (PDF)](https://www.vldb.org/2025/Workshops/VLDB-Workshops-2025/ADMS/ADMS25-06.pdf)
-
-Venue: ADMS 2025 (Accelerating Analytics and Data Management Systems Using Modern Processor and Storage Architectures)
+|-------|-------|
+| **Paper** | [RISC-V Meets RDBMS: An Experimental Study of Database Performance on an Open Instruction Set Architecture (PDF)](https://www.vldb.org/2025/Workshops/VLDB-Workshops-2025/ADMS/ADMS25-06.pdf) |
+| **Venue** | ADMS 2025 (Accelerating Analytics and Data Management Systems Using Modern Processor and Storage Architectures) |
 
 ## Abstract
 

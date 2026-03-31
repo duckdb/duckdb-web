@@ -9,4 +9,5 @@ excerpt: ""
 pill: "Integrating Analytics with Relational Databases"
 ---
 
-[PDF](https://ir.cwi.nl/pub/29669/29669.pdf)
+|-------|-------|
+| **PDF** | [Download](https://ir.cwi.nl/pub/29669/29669.pdf) |

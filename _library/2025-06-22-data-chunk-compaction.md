@@ -10,9 +10,9 @@ excerpt: ""
 pill: "SIGMOD 2025"
 ---
 
-[Paper (PDF)](https://dl.acm.org/doi/pdf/10.1145/3709676)
-
-Venue: SIGMOD 2025
+|-------|-------|
+| **Paper** | [Data Chunk Compaction in Vectorized Execution (PDF)](https://dl.acm.org/doi/pdf/10.1145/3709676) |
+| **Venue** | SIGMOD 2025 |
 
 ## Abstract
 
