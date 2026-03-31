@@ -41,4 +41,4 @@ Several components of DuckDB are maintained in separate repositories.
 
 ## Specifications
 
-* [DuckLake specification](https://ducklake.select/docs/lts/specification/introduction)
+* [DuckLake specification](https://ducklake.select/docs/stable/specification/introduction)

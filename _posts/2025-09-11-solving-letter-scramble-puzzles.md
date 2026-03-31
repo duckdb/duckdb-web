@@ -126,7 +126,7 @@ ATTACH 'ducklake:metadata.ducklake' AS my_ducklake;
 COPY FROM DATABASE memory TO my_ducklake;
 ```
 
-DuckLake [does not support macros (functions)](https://ducklake.select/docs/lts/duckdb/unsupported_features.html#likely-to-be-supported-in-the-future), so it throws the following error:
+DuckLake [does not support macros (functions)](https://ducklake.select/docs/stable/duckdb/unsupported_features.html#likely-to-be-supported-in-the-future), so it throws the following error:
 
 ```console
 Not implemented Error:

@@ -32,7 +32,7 @@ Now that we have a definition, let's take a look at three common architectural p
 
 ## Materialized View Pattern: Cooking Our Own Materialized View with DuckDB
 
-We know that DuckDB is very fast at aggregating data on the fly and also performs very well in transactional workloads (for an OLAP system). So does DuckLake's lakehouse format, thanks to its [data inlining feature](https://ducklake.select/docs/lts/duckdb/advanced_features/data_inlining). In this section we are going to see both DuckDB and DuckLake in action, acting as a sink for Kafka and calculating new metric values based on deltas.
+We know that DuckDB is very fast at aggregating data on the fly and also performs very well in transactional workloads (for an OLAP system). So does DuckLake's lakehouse format, thanks to its [data inlining feature](https://ducklake.select/docs/stable/duckdb/advanced_features/data_inlining). In this section we are going to see both DuckDB and DuckLake in action, acting as a sink for Kafka and calculating new metric values based on deltas.
 
 > All the patterns are going to do the same thing in different ways. That is, read events from a Kafka topic and update the analytical view, which can be a persisted table or a view on top of a raw table. What happens in between is what differentiates these patterns.
 
@@ -77,8 +77,8 @@ You can check the full pipeline in [this repository](https://github.com/guillesd
 
 This pattern is very similar to 1.1 but with some specifics to DuckLake:
 
-1. We are using [DuckLake's Data Inlining](https://ducklake.select/docs/lts/duckdb/advanced_features/data_inlining) to speed up insertion without writing too many small files.
-2. The Delta Processor component can take advantage of [DuckLake's Data Change Feed](https://ducklake.select/docs/lts/duckdb/advanced_features/data_change_feed) to avoid scanning unnecessary data.
+1. We are using [DuckLake's Data Inlining](https://ducklake.select/docs/stable/duckdb/advanced_features/data_inlining) to speed up insertion without writing too many small files.
+2. The Delta Processor component can take advantage of [DuckLake's Data Change Feed](https://ducklake.select/docs/stable/duckdb/advanced_features/data_change_feed) to avoid scanning unnecessary data.
 3. We have an extra component, called “Inline Flusher”, that periodically flushes inlined data from the metadata catalog to parquet files of the specified file size (512 MB by default). This is a maintenance operation that will keep DuckLake performant.
 
 You can check the full pipeline in [this repository](https://github.com/guillesd/duckdb-streaming-patterns/blob/main/pipelines/pattern_1_2.py).
@@ -129,7 +129,7 @@ Conclusions always feel very subjective, so I rather write about some of my thou
 **The Materialized View Pattern is usually good enough.**
 My hot take is that most use cases for analytics are usually covered by the Materialized View Pattern without the need of complexity that comes with other patterns. I believe that DuckDB is very well suited for this pattern because for a small OLAP, it does incredibly well at handling large amounts of streaming inserts. In [this article](https://arrow.apache.org/blog/2025/03/10/fast-streaming-inserts-in-duckdb-with-adbc/) DuckDB was pushed to the limit and was able to handle more than one million rows inserted per second. Also note that **[materialized views are on the DuckDB's long-term roadmap]({% link roadmap.md %}#future-work)**, so this pattern will become even simpler in the near future.
 
-If you are streaming to a lakehouse, you should know that DuckLake's [Data Inlining feature](https://ducklake.select/docs/lts/duckdb/advanced_features/data_inlining) was specifically designed to deal with high-throughput inserts while solving the small file problem. This makes DuckLake a great candidate for this pattern if you have a lakehouse-like architecture.
+If you are streaming to a lakehouse, you should know that DuckLake's [Data Inlining feature](https://ducklake.select/docs/stable/duckdb/advanced_features/data_inlining) was specifically designed to deal with high-throughput inserts while solving the small file problem. This makes DuckLake a great candidate for this pattern if you have a lakehouse-like architecture.
 
 **Streaming Engines and Streaming Databases can be hard (or expensive).**
 At scale, Streaming Engines can be hard to manage. It is an evolving field and some work is being done to make forever running streaming queries easier to operate. For example, [Apache Fluss](https://fluss.apache.org/) is being built with the idea to solve some of the shortcomings described in this post. However, it does add another layer of complexity to an already complex streaming architecture.

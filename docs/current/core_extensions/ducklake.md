@@ -13,7 +13,7 @@ title: DuckLake
 > Read the [announcement blog post]({% post_url 2025-05-27-ducklake %}).
 
 The `ducklake` extension adds support for attaching to databases stored in the [DuckLake format](http://ducklake.select/). 
-The complete documentation of this extension is available at the [DuckLake website](https://ducklake.select/docs/lts/duckdb/introduction).
+The complete documentation of this extension is available at the [DuckLake website](https://ducklake.select/docs/stable/duckdb/introduction).
 
 ## Installing and Loading
 
@@ -39,7 +39,7 @@ USE my_ducklake;
 
 ## Tables
 
-In DuckDB, the `ducklake` extension stores the [catalog tables](http://ducklake.select/docs/lts/specification/tables/overview) for a DuckLake named `my_ducklake` in the `__ducklake_metadata_⟨my_ducklake⟩`{:.language-sql .highlight} catalog.
+In DuckDB, the `ducklake` extension stores the [catalog tables](http://ducklake.select/docs/stable/specification/tables/overview) for a DuckLake named `my_ducklake` in the `__ducklake_metadata_⟨my_ducklake⟩`{:.language-sql .highlight} catalog.
 
 ## Functions
 

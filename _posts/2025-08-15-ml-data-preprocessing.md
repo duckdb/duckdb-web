@@ -542,7 +542,7 @@ With `scikit-learn`, this is achieved by persisting the pipeline alongside the m
 With DuckDB, the equivalent consistency is achieved by persisting the original training data (or the metrics returned by the `scaling_params` macro, computed during training).
 Despite the (transformed) training data being much larger than the model artifacts, versioning the data and features calculated at training time is a common practice, which ensures model traceability and reproducibility.
 
-> For efficient (training) data management, one can leverage solutions that provide time travel, such as [DuckLake](https://ducklake.select/docs/lts/duckdb/usage/time_travel).
+> For efficient (training) data management, one can leverage solutions that provide time travel, such as [DuckLake](https://ducklake.select/docs/stable/duckdb/usage/time_travel).
 
 ## Conclusion
 
