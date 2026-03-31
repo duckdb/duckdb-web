@@ -10,9 +10,9 @@ excerpt: ""
 pill: "CIDR 2026"
 ---
 
-[Paper (PDF)](https://vldb.org/cidrdb/papers/2026/p6-houlborg.pdf)
-
-Venue: CIDR 2026
+|-------|-------|
+| **Paper** | [Flexible I/O for Database Management Systems with xNVMe (PDF)](https://vldb.org/cidrdb/papers/2026/p6-houlborg.pdf) |
+| **Venue** | CIDR 2026 |
 
 ## Abstract
 

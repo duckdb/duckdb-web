@@ -10,11 +10,11 @@ excerpt: ""
 pill: "arXiv"
 ---
 
-[Paper (preprint PDF)](https://arxiv.org/pdf/2512.01490.pdf)
-
-[Implementation (fork)](https://github.com/Ma-Master-DK/duckdb)
-
-Published on arXiv in 2025
+| | |
+|-------|-------|
+| **Paper** | [DuckDB on xNVMe (preprint PDF)](https://arxiv.org/pdf/2512.01490.pdf) |
+| **Implementation** | [Fork](https://github.com/Ma-Master-DK/duckdb) |
+| **Published** | arXiv, 2025 |
 
 ## Abstract
 

@@ -8,9 +8,9 @@ excerpt: ""
 pill: "VLDB 2017"
 ---
 
-[Paper (PDF)](https://www.vldb.org/pvldb/vol10/p1022-muehleisen.pdf)
-
-Venue: VLDB 2017
+|-------|-------|
+| **Paper** | [Don't Hold My Data Hostage – A Case for Client Protocol Redesign (PDF)](https://www.vldb.org/pvldb/vol10/p1022-muehleisen.pdf) |
+| **Venue** | VLDB 2017 |
 
 ## Abstract
 

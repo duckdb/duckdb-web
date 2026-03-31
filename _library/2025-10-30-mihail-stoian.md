@@ -17,11 +17,13 @@ episode: "S02E03"
 <iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/HfZuVtY5lZg?si=_hSxJ-qbVvyZZUhx" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 </div>
 
-## Podcast Links
-
-* [Apple Podcasts](https://podcasts.apple.com/us/podcast/parachute-rethinking-query-execution-and/id1631350873?i=1000734163381)
-* [Spotify](https://open.spotify.com/episode/21HQZct3VjcJBnDR2hJ6hi)
-* [Acast](https://shows.acast.com/disseminate/episodes/parachute)
+|-------|-------|
+| **Podcast** | DuckDB in Research |
+| **Episode** | S02E03 |
+| **Apple Podcasts** | [Listen](https://podcasts.apple.com/us/podcast/parachute-rethinking-query-execution-and/id1631350873?i=1000734163381) |
+| **Spotify** | [Listen](https://open.spotify.com/episode/21HQZct3VjcJBnDR2hJ6hi) |
+| **Acast** | [Listen](https://shows.acast.com/disseminate/episodes/parachute) |
+| **YouTube** | [Watch](https://www.youtube.com/watch?v=HfZuVtY5lZg) |
 
 ## Description
 

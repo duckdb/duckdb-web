@@ -12,4 +12,5 @@ pill: "DuckDB in Action"
 
 <img src="/images/library/duckdb-in-action.jpg" alt="DuckDB in Action – Book Cover" width="300" />
 
-See the book's page on [Goodreads](https://www.goodreads.com/book/show/210225037-duckdb-in-action).
+|-------|-------|
+| **Goodreads** | [DuckDB in Action](https://www.goodreads.com/book/show/210225037-duckdb-in-action) |

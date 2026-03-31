@@ -14,6 +14,10 @@ pill: "The Hedgineer Podcast by Michael Watson"
 <iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/qngRL-ozCCw?si=AZ7K1_u-1NjWOsmQ" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 </div>
 
+|-------|-------|
+| **Podcast** | The Hedgineer Podcast by Michael Watson |
+| **Guest** | Rusty Conover |
+
 ## Description
 
 In this episode of The Hedgineer Podcast, host Michael Watson is joined by special guest Rusty Conover, the world's most prolific DuckDB extension builder, for a masterclass on building the next generation of real-time, large-scale data systems.

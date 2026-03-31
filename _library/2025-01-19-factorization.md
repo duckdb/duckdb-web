@@ -10,9 +10,9 @@ excerpt: ""
 pill: "CIDR 2025"
 ---
 
-[Paper (PDF)](https://vldb.org/cidrdb/papers/2025/p21-gro.pdf)
-
-Venue: CIDR 2025
+|-------|-------|
+| **Paper** | [Adaptive Factorization Using Linear-Chained Hash Tables (PDF)](https://vldb.org/cidrdb/papers/2025/p21-gro.pdf) |
+| **Venue** | CIDR 2025 |
 
 ## Abstract
 

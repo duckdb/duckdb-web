@@ -17,11 +17,13 @@ episode: "S02E01"
 <iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/Hoo0KZ6EDq0?si=yur7QDGvscjzbbX8" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 </div>
 
-## Podcast Links
-
-* [Apple Podcasts](https://podcasts.apple.com/us/podcast/recursive-ctes-trampolines-and-teaching-databases/id1631350873?i=1000732177402)
-* [Spotify](https://open.spotify.com/episode/3MdbbJP2CzVJT7whI7l0Va?si=7a8594c2795145f1)
-* [Acast](https://shows.acast.com/disseminate/episodes/torsten-grust)
+|-------|-------|
+| **Podcast** | DuckDB in Research |
+| **Episode** | S02E01 |
+| **Apple Podcasts** | [Listen](https://podcasts.apple.com/us/podcast/recursive-ctes-trampolines-and-teaching-databases/id1631350873?i=1000732177402) |
+| **Spotify** | [Listen](https://open.spotify.com/episode/3MdbbJP2CzVJT7whI7l0Va?si=7a8594c2795145f1) |
+| **Acast** | [Listen](https://shows.acast.com/disseminate/episodes/torsten-grust) |
+| **YouTube** | [Watch](https://www.youtube.com/watch?v=Hoo0KZ6EDq0) |
 
 ## Description
 

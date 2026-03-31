@@ -13,4 +13,5 @@ pill: "Spatial Data Management with DuckDB"
 
 <img src="/images/library/spatial-data-management-with-duckdb.png" alt="Spatial Data Management with DuckDB – Book Cover" width="300" />
 
-See the book's page on [Goodreads](http://goodreads.com/book/show/244019490-spatial-data-management-with-duckdb).
+|-------|-------|
+| **Goodreads** | [Spatial Data Management with DuckDB](http://goodreads.com/book/show/244019490-spatial-data-management-with-duckdb) |

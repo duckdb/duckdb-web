@@ -10,9 +10,9 @@ excerpt: ""
 pill: "VLDB 2025"
 ---
 
-[Paper (PDF)](https://www.vldb.org/pvldb/vol18/p5351-chen.pdf)
-
-Venue: VLDB 2025
+|-------|-------|
+| **Paper** | [GooseDB: A Database Engine that Optimally Refines Top-𝑘 Queries to Satisfy Representation Constraints (PDF)](https://www.vldb.org/pvldb/vol18/p5351-chen.pdf) |
+| **Venue** | VLDB 2025 |
 
 ## Abstract
 

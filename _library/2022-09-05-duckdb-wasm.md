@@ -8,9 +8,9 @@ excerpt: ""
 pill: "VLDB 2022"
 ---
 
-[Paper (PDF)](https://www.vldb.org/pvldb/vol15/p3574-kohn.pdf)
-
-Venue: VLDB 2022
+|-------|-------|
+| **Paper** | [DuckDB-Wasm: Fast Analytical Processing for the Web (PDF)](https://www.vldb.org/pvldb/vol15/p3574-kohn.pdf) |
+| **Venue** | VLDB 2022 |
 
 ## Abstract
 

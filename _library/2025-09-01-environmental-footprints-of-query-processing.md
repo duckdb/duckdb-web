@@ -10,9 +10,9 @@ excerpt: ""
 pill: "VLDB 2025"
 ---
 
-[Paper (PDF)](https://www.vldb.org/pvldb/vol18/p4064-bachras.pdf)
-
-Venue: VLDB 2025
+|-------|-------|
+| **Paper** | [Environmental Footprints of Query Processing: A Vision for Sustainable Database Architectures (PDF)](https://www.vldb.org/pvldb/vol18/p4064-bachras.pdf) |
+| **Venue** | VLDB 2025 |
 
 ## Abstract
 

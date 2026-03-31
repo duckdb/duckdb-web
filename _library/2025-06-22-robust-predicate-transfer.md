@@ -10,9 +10,9 @@ excerpt: ""
 pill: "SIGMOD 2025"
 ---
 
-[Paper (PDF)](https://dl.acm.org/doi/pdf/10.1145/3725283)
-
-Venue: SIGMOD 2025
+|-------|-------|
+| **Paper** | [Debunking the Myth of Join Ordering: Toward Robust SQL Analytics (PDF)](https://dl.acm.org/doi/pdf/10.1145/3725283) |
+| **Venue** | SIGMOD 2025 |
 
 ## Abstract
 

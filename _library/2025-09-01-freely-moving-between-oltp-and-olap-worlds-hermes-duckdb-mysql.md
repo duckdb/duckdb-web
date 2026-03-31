@@ -10,9 +10,9 @@ excerpt: ""
 pill: "VLDB 2025"
 ---
 
-[Paper (PDF)](https://www.vldb.org/pvldb/vol18/p5113-gubner.pdf)
-
-Venue: VLDB 2025
+|-------|-------|
+| **Paper** | [Freely Moving Between the OLTP and OLAP Worlds: Hermes - A High-Performance OLAP Accelerator for MySQL (PDF)](https://www.vldb.org/pvldb/vol18/p5113-gubner.pdf) |
+| **Venue** | VLDB 2025 |
 
 ## Abstract
 
