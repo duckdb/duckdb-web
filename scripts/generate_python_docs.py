@@ -168,7 +168,7 @@ def main():
             "html_use_index": False,
             "intersphinx_mapping": {
                 "pandas": (
-                    "https://pandas.pydata.org/pandas-docs/version/1.5.1/",
+                    "https://pandas.pydata.org/pandas-docs/version/3.0/",
                     None,
                 ),
                 "pyarrow": ("https://arrow.apache.org/docs/9.0/", None),
