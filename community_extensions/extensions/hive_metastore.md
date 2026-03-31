@@ -55,8 +55,8 @@ docs:
 
 extension_star_count: 1
 extension_star_count_pretty: 1
-extension_download_count: 782
-extension_download_count_pretty: 782
+extension_download_count: 779
+extension_download_count_pretty: 779
 image: '/images/community_extensions/social_preview/preview_community_extension_hive_metastore.png'
 layout: community_extension_doc
 ---
