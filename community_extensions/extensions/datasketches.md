@@ -25,7 +25,7 @@ repo:
 
 extension_star_count: 43
 extension_star_count_pretty: 43
-extension_download_count: 2258
+extension_download_count: 2274
 extension_download_count_pretty: 2.3k
 image: '/images/community_extensions/social_preview/preview_community_extension_datasketches.png'
 layout: community_extension_doc

@@ -17,11 +17,11 @@ extension:
     - sipemu
 repo:
   github: DataZooDE/anofox-forecast
-  ref: 7c9d0df33ea9e05c59ac0fd711b378b96b0286ae
+  ref: de0f474924080667df27e928ae6035e529064326
 
 extension_star_count: 29
 extension_star_count_pretty: 29
-extension_download_count: 1274
+extension_download_count: 1266
 extension_download_count_pretty: 1.3k
 image: '/images/community_extensions/social_preview/preview_community_extension_anofox_forecast.png'
 layout: community_extension_doc
