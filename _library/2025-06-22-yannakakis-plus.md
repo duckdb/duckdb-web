@@ -10,9 +10,9 @@ excerpt: ""
 pill: "SIGMOD 2025"
 ---
 
-[Paper (PDF)](https://dl.acm.org/doi/pdf/10.1145/3725423)
-
-Venue: SIGMOD 2025
+|-------|-------|
+| **Paper** | [Yannakakis+: Practical Acyclic Query Evaluation with Theoretical Guarantees (PDF)](https://dl.acm.org/doi/pdf/10.1145/3725423) |
+| **Venue** | SIGMOD 2025 |
 
 ## Abstract
 

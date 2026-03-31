@@ -10,9 +10,10 @@ excerpt: ""
 pill: "EDBT 2026"
 ---
 
-[Paper (PDF)](https://heltzi.github.io/publications/SheetReader___Demo_EDBT26.pdf)
-
-Venue: EDBT 2026
+| | |
+|-------|-------|
+| **Paper** | [Practical Spreadsheet Parsing with SheetReader (PDF)](https://heltzi.github.io/publications/SheetReader___Demo_EDBT26.pdf) |
+| **Venue** | EDBT 2026 |
 
 ## Abstract
 

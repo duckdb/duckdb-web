@@ -8,9 +8,10 @@ excerpt: ""
 pill: "VLDB 2025"
 ---
 
-[Paper (PDF)](https://www.vldb.org/pvldb/vol18/p2748-kuiper.pdf)
-
-Venue: VLDB 2025
+| | |
+|-------|-------|
+| **Paper** | [Saving Private Hash Join (PDF)](https://www.vldb.org/pvldb/vol18/p2748-kuiper.pdf) |
+| **Venue** | VLDB 2025 |
 
 ## Abstract
 

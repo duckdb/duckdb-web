@@ -10,9 +10,10 @@ excerpt: ""
 pill: "arXiv"
 ---
 
-[Paper (preprint PDF)](https://arxiv.org/pdf/2510.07963.pdf)
-
-Published on arXiv in 2025
+| | |
+|-------|-------|
+| **Paper** | [MobilityDuck: Mobility Data Management with DuckDB (preprint PDF)](https://arxiv.org/pdf/2510.07963.pdf) |
+| **Published** | arXiv, 2025 |
 
 ## Abstract
 

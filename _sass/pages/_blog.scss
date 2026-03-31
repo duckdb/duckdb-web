@@ -317,6 +317,10 @@ section.speakers,
 	}
 }
 
+.singleentry-library .content{
+	width: 100%;
+}
+
 main.main-library .recentposts .newstileswrap .postpreview,
 main.main-science .recentposts .newstileswrap .postpreview,
 main.main-everywhere .recentposts .newstileswrap .postpreview {
@@ -807,6 +811,12 @@ h5 a {
 		}
 		.infoline + p > img{
 			width: 100%;
+		}
+		.infoline + table{
+			margin-top: 30px;
+			tbody td{
+				padding: 10px 30px 10px 10px;
+			}
 		}
 		.postpreview{
 			margin-bottom: 75px;

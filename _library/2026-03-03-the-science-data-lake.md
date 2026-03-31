@@ -10,13 +10,11 @@ excerpt: ""
 pill: "arXiv"
 ---
 
-[Paper (preprint PDF)](https://arxiv.org/pdf/2603.03126.pdf)
-
-[Implementation (GitHub)](https://github.com/J0nasW/science-datalake)
-
-[Dataset (HuggingFace)](https://huggingface.co/datasets/J0nasW/science-datalake)
-
-Published on arXiv in 2026
+|-------|-------|
+| **Paper** | [The Science Data Lake: A Unified Open Infrastructure Integrating 293 Million Papers Across Eight Scholarly Sources with Embedding-Based Ontology Alignment (Preprint PDF)](https://arxiv.org/pdf/2603.03126.pdf) |
+| **Implementation** | [GitHub](https://github.com/J0nasW/science-datalake) |
+| **Dataset** | [HuggingFace](https://huggingface.co/datasets/J0nasW/science-datalake) |
+| **Published** | arXiv, 2026 |
 
 ## Abstract
 

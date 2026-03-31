@@ -10,9 +10,9 @@ excerpt: ""
 pill: "VLDB 2025"
 ---
 
-[Paper (PDF)](https://www.vldb.org/pvldb/vol18/p1962-kim.pdf)
-
-Venue: VLDB 2025
+|-------|-------|
+| **Paper** | [Anarchy in the Database: A Survey and Evaluation of Database Management System Extensibility (PDF)](https://www.vldb.org/pvldb/vol18/p1962-kim.pdf) |
+| **Venue** | VLDB 2025 |
 
 ## Abstract
 

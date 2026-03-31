@@ -10,9 +10,10 @@ excerpt: ""
 pill: "CIDR 2024"
 ---
 
-[Paper (PDF)](https://www.cidrdb.org/cidr2024/papers/p46-atwal.pdf)
-
-Venue: CIDR 2024
+| | |
+|-------|-------|
+| **Paper** | [MotherDuck: DuckDB in the Cloud and in the Client (PDF)](https://www.cidrdb.org/cidr2024/papers/p46-atwal.pdf) |
+| **Venue** | CIDR 2024 |
 
 ## Abstract
 

@@ -13,10 +13,11 @@ pill: "DuckDB in Research"
 episode: "S01E05"
 ---
 
-## Links
-
-* [Apple Podcasts](https://podcasts.apple.com/us/podcast/haralampos-gavriilidis-sheetreader-efficient-spreadsheet/id1631350873?i=1000703848213)
-* [Spotify](https://open.spotify.com/episode/4e4UB20N9I9pyDKE7R9DIX)
+|-------|-------|
+| **Podcast** | DuckDB in Research |
+| **Episode** | S01E05 |
+| **Apple Podcasts** | [Listen](https://podcasts.apple.com/us/podcast/haralampos-gavriilidis-sheetreader-efficient-spreadsheet/id1631350873?i=1000703848213) |
+| **Spotify** | [Listen](https://open.spotify.com/episode/4e4UB20N9I9pyDKE7R9DIX) |
 
 ## Description
 

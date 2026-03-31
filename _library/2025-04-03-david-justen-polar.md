@@ -13,10 +13,11 @@ pill: "DuckDB in Research"
 episode: "S01E03"
 ---
 
-## Links
-
-* [Apple Podcasts](https://podcasts.apple.com/us/podcast/david-justen-polar-adaptive-and-non-invasive-join/id1631350873?i=1000702029640)
-* [Spotify](https://open.spotify.com/episode/4qsgT7HXfqjpllwagCqTG0)
+|-------|-------|
+| **Podcast** | DuckDB in Research |
+| **Episode** | S01E03 |
+| **Apple Podcasts** | [Listen](https://podcasts.apple.com/us/podcast/david-justen-polar-adaptive-and-non-invasive-join/id1631350873?i=1000702029640) |
+| **Spotify** | [Listen](https://open.spotify.com/episode/4qsgT7HXfqjpllwagCqTG0) |
 
 ## Description
 

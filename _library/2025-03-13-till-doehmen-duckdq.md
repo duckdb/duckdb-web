@@ -13,10 +13,11 @@ pill: "DuckDB in Research"
 episode: "S01E01"
 ---
 
-## Links
-
-* [Apple Podcasts](https://podcasts.apple.com/us/podcast/till-d%C3%B6hmen-duckdq-a-python-library-for-data/id1631350873?i=1000699017342)
-* [Spotify](https://open.spotify.com/episode/2a0bqjunF1FGaFp7w3NH7b)
+|-------|-------|
+| **Podcast** | DuckDB in Research |
+| **Episode** | S01E01 |
+| **Apple Podcasts** | [Listen](https://podcasts.apple.com/us/podcast/till-d%C3%B6hmen-duckdq-a-python-library-for-data/id1631350873?i=1000699017342) |
+| **Spotify** | [Listen](https://open.spotify.com/episode/2a0bqjunF1FGaFp7w3NH7b) |
 
 ## Description
 

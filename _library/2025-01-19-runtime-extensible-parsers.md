@@ -8,11 +8,11 @@ excerpt: ""
 pill: "CIDR 2025"
 ---
 
-[Paper (PDF)](https://vldb.org/cidrdb/papers/2025/p18-muhleisen.pdf)
-
-Venue: CIDR 2025
-
-[Blog post on duckdb.org]({% post_url 2024-11-22-runtime-extensible-parsers %})
+| | |
+|-------|-------|
+| **Paper** | [Runtime-Extensible Parsers (PDF)](https://vldb.org/cidrdb/papers/2025/p18-muhleisen.pdf) |
+| **Venue** | CIDR 2025 |
+| **Blog post** | [Blog post on duckdb.org]({% post_url 2024-11-22-runtime-extensible-parsers %}) |
 
 ## Abstract
 
