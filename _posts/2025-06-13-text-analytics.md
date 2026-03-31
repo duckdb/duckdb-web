@@ -219,7 +219,7 @@ conn.sql("""
 
 In the FTS index creation we are using the same list of English stopwords as in the tokenization process, by saving it into a table, named `english_stopwords`. The index is case insensitive due to the `lower` parameter, which will lowercase the text automatically.
 
-> Warning The index can be created only on tables and it requires a unique identifier of the text. It also needs to be rebuild when the underlying data has been modified.
+> Warning The index can be created only on tables and it requires a unique identifier of the text. It also needs to be rebuilt when the underlying data has been modified.
 
 Once the index has been created, we can rank the match between the `text` column and the phrase `excited to learn`:
 

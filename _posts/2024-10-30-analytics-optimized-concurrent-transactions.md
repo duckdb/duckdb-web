@@ -77,7 +77,7 @@ One beautiful aspect of this undo buffer scheme is that it is largely performanc
 
 ### Benchmarks
 
-Here is a small experiment, comparing DuckDB 1.1.0, [HyPer](https://www.tableau.com/products/new-features/hyper) 9.1.0, SQLite 3.43.2, and PosgreSQL 14.13 on a recent MacBook Pro, showing some of the effects that an OLAP-optimized transaction scheme will have. We should note that HyPer implements the MVCC scheme from the Neumann paper mentioned above. SQLite does not actually implement MVCC, it is mostly included as a comparison point.
+Here is a small experiment, comparing DuckDB 1.1.0, [HyPer](https://www.tableau.com/products/new-features/hyper) 9.1.0, SQLite 3.43.2, and PostgreSQL 14.13 on a recent MacBook Pro, showing some of the effects that an OLAP-optimized transaction scheme will have. We should note that HyPer implements the MVCC scheme from the Neumann paper mentioned above. SQLite does not actually implement MVCC, it is mostly included as a comparison point.
 
 We create two tables with either 1 or 100 columns, each with 10 million rows, containing the integer values 1-100 repeating.
 

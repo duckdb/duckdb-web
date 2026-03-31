@@ -46,7 +46,7 @@ To make matters worse, these tools often come with slight differences between sy
 While there are shells specialized specifically for dataframe processing, such as the [Nushell project](https://github.com/nushell/nushell), older Unix shells (e.g., the Bourne shell `sh` and Bash) are still the most wide-spread, especially on servers.
 
 At the same time, we have DuckDB, an extremely portable database system which uses the same SQL syntax on all platforms.
-With [version 1.0.0 released recently]({% post_url 2024-06-03-announcing-duckdb-100 %}), DuckDB's syntax – based on the proven and widely used PostgeSQL dialect – is now in a stable state.
+With [version 1.0.0 released recently]({% post_url 2024-06-03-announcing-duckdb-100 %}), DuckDB's syntax – based on the proven and widely used PostgreSQL dialect – is now in a stable state.
 Another attractive feature of DuckDB is that it offers an interactive shell, which aids quick debugging. Moreover, DuckDB is available in [several host languages]({% link docs/lts/clients/overview.md %}) as well as in the browser [via WebAssembly](https://shell.duckdb.org/), so if you ever decide to use your SQL scripts outside of the shell, DuckDB SQL scripts can be ported to a wide variety of environments without any changes.
 
 ## Data Processing with Unix Tools and DuckDB

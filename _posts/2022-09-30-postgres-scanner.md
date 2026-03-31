@@ -68,7 +68,7 @@ SELECT * FROM postgres_scan('dbname=myshinydb', 'public', 'mytable');
 SELECT * FROM postgres_scan_pushdown('dbname=myshinydb', 'public', 'mytable');
 ```
 
-Both functions takes three unnamed string parameters, the `libpq` connection string (see above), a Postgres schema name and a table name. The schema name is often `public`. As the name suggest, the variant with "pushdown" in the name will perform selection pushdown as described below.
+Both functions take three unnamed string parameters, the `libpq` connection string (see above), a Postgres schema name and a table name. The schema name is often `public`. As the name suggests, the variant with "pushdown" in the name will perform selection pushdown as described below.
 
 The Postgres scanner will only be able to read actual tables, views are not supported. However, you can of course recreate such views within DuckDB, the syntax should be exactly the same!
 

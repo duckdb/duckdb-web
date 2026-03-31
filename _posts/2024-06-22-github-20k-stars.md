@@ -70,4 +70,4 @@ Finally, we have a series of blog posts lined up for publication.
 These will discuss DuckDB's performance over time, the results of the user survey we conducted during the spring, DuckDB's storage format, and many more.
 Stay tuned!
 
-We are looking forward to next part of our journey and, of course, the next 10&nbsp;000 stars on GitHub.
+We are looking forward to the next part of our journey and, of course, the next 10&nbsp;000 stars on GitHub.
