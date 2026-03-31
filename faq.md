@@ -210,7 +210,7 @@ DuckDB can also save data in [DuckLake format](http://ducklake.select/) through 
 The type of storage used to run DuckDB has a [significant performance impact]({% link docs/current/guides/performance/environment.md %}#disk).
 In general, using SSDs (SATA or NVMe SSDs) leads to superior performance compared to HDDs.
 
-The location of the storage varies greatly depending the workload:
+The location of the storage varies greatly depending on the workload:
 
 * _For read-only workloads,_ the DuckDB database can be stored on local disks and remote endpoints such as [HTTPS]({% link docs/current/core_extensions/httpfs/https.md %}) and cloud object storage such as [AWS S3]({% link docs/current/core_extensions/httpfs/s3api.md %}) and similar providers.
 * _For read-write workloads,_ storing the database on instance-attached storage yields the best performance.
@@ -309,7 +309,7 @@ If you are unsure about the DuckDB version used in a process, run the `PRAGMA ve
 
 <div class="answer" markdown="1">
 
-DuckDB has an the official [documentation]({% link docs/current/index.md %}), [blog]({% link news/index.html %}) and [library]({% link library/index.html %}).
+DuckDB has the official [documentation]({% link docs/current/index.md %}), [blog]({% link news/index.html %}) and [library]({% link library/index.html %}).
 There are also few third-party resources which can help you learn more about DuckDB:
 
 * To discover projects using DuckDB, we recommend visiting the [`awesome-duckdb` repository](https://github.com/davidgasquez/awesome-duckdb).
@@ -473,7 +473,7 @@ Currently, the official community support applies to the following components:
 * [primary clients]({% link docs/current/clients/overview.md %})
 * [primary extensions]({% link docs/current/core_extensions/overview.md %})
 
-Ths support covers the following minor versions:
+This support covers the following minor versions:
 
 * latest LTS (long-term support) version, presently {{ site.lts_short_duckdb_version }}
 * the current version, presently {{ site.current_short_duckdb_version }}
@@ -546,7 +546,7 @@ You should be particularly cautious when downloading binaries and installation s
 
 Websites:
 
-* [`duckdb.org`](https://duckdb.org/), [`duckdb.io`](https://duckdb.io/), [`duckdb.ai`](https://duckdb.io/): DuckDB
+* [`duckdb.org`](https://duckdb.org/), [`duckdb.io`](https://duckdb.io/), [`duckdb.ai`](https://duckdb.ai/): DuckDB
 * [`duckdblabs.com`](https://duckdblabs.com/): DuckDB Labs
 * [`ducklake.select`](https://ducklake.select/) and [`ducklake.dev`](https://ducklake.dev/): DuckLake
 

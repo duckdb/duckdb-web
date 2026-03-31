@@ -51,7 +51,7 @@ We are [gradually phasing out]({% link docs/current/sql/functions/lambda.md %}) 
 
 ## Future Work / Looking for Funding
 
-There are several features and optimimizations that we plan to implement at some point in the future.
+There are several features and optimizations that we plan to implement at some point in the future.
 If you would like to expedite the development of these items, please [get in touch with DuckDB Labs](https://duckdblabs.com/contact/).
 
 * Go support for extensions
