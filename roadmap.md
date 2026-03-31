@@ -29,10 +29,12 @@ This section lists the features that the DuckDB team plans to work on **in the c
 
 * Migration and documentation to [C client API]({% link docs/current/clients/c/overview.md %}) and [C extension API](https://github.com/duckdb/extension-template-c)
 * Rust support for extensions
-* Improvements to lakehouse formats
-    * Continuous improvement for the Iceberg format through the [`iceberg` extension]({% link docs/current/core_extensions/iceberg/overview.md %}). Several Iceberg improvements, including write support, were released in [DuckDB v1.4 releases]({% post_url 2025-11-28-iceberg-writes-in-duckdb %}) and in [DuckDB v1.5]({% post_url 2026-03-09-announcing-duckdb-150 %}).
-    * Improved support for Delta Lake through the [`delta` extension]({% link docs/current/core_extensions/delta.md %}).
-    * In May 2025, we released [DuckLake](https://ducklake.select/), a new lakehouse format. We would like to emphasize that we are still committed to developing both the `iceberg` and `delta` extensions. We also strive to [provide interoperability]({% post_url 2025-09-17-ducklake-03 %}#interoperability-with-iceberg) between DuckLake and other lakehouse formats.
+* Continuous improvements to lakehouse formats:
+  [Iceberg]({% link docs/current/core_extensions/iceberg/overview.md %}),
+  [Delta]({% link docs/current/core_extensions/delta.md %}),
+  [Lance]({% link docs/current/core_extensions/lance.md %})
+  and
+  [DuckLake](https://ducklake.select/)
 * [`MATCH_RECOGNIZE`](https://github.com/duckdb/duckdb/discussions/3994) for pattern matching
 * [Support for async I/O](https://github.com/duckdb/duckdb/discussions/3560)
 * [Parallel Python UDFs](https://github.com/duckdb/duckdb/issues/14817)
