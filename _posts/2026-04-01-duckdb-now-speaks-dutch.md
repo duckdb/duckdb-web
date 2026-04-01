@@ -50,7 +50,7 @@ VOLGORDE PER leeftijd;
 └───────┴─────────┴──────────┴─────────┴─────────────┘
 ```
 
-Of course, no query language is complete without joins and aggregates. Let's create a second table and count the ducks per _soort_:
+Of course, no query language is complete without joins and aggregates. Let's create a second table and count the ducks per _soort:_
 
 ```sql
 MAAK TABEL soorten (soort TEKST, leefgebied TEKST);
