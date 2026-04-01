@@ -8,13 +8,13 @@ excerpt: ""
 tags: ["extensions"]
 ---
 
-Historically speaking, SQL queries have always been formulated in English. The initial name of the language was even Structured **English** Query Language (SEQUEL), before it became SQL. Now, what if the Dutch hadn't traded away New Amsterdam (current-day New York)? Would we all have been writing SQL in Dutch instead?
+Historically speaking, SQL queries have always been formulated in English. The initial name of the language was even Structured **English** Query Language (SEQUEL), before it became SQL. Now, what if the Dutch hadn't traded away New Amsterdam (present-day New York)? Would we all have been writing SQL in Dutch instead?
 
 Well, wonder no longer. Today we're releasing **EendDB**: a DuckDB extension that brings you the **Gestructureerde Zoektaal,** or GZT for short.
 
 Want joins? We've got `SAMENVOEGEN`. Aggregates? `GROEP PER`. Window functions? Those work too — though you'll have to look up the Dutch keywords in the repository yourself.
 
-You can try it out right now in DuckDB v1.5.1:
+You can try it out right now in [DuckDB v1.5.1]({% post_url 2026-03-23-announcing-duckdb-151 %}):
 
 ```sql
 INSTALL eenddb FROM community;
@@ -51,7 +51,8 @@ VOLGORDE PER leeftijd;
 └───────┴─────────┴──────────┴─────────┴─────────────┘
 ```
 
-Of course, no query language is complete without joins and aggregates. Let's create a second table and count the ducks per soort:
+Of course, no query language is complete without joins and aggregates. Let's create a second table and count the ducks per _soort_:
+
 ```sql
 MAAK TABEL soorten (soort TEKST, leefgebied TEKST);
 
@@ -66,13 +67,13 @@ GROEP PER s.leefgebied
 VOLGORDE PER aantal_eenden AFLOPEND;
 ```
 
-After we are done playing around, we obviously have to clean up after ourselves. Rather than `DROP` a table, in Dutch we like to throw it away ("Weggooien"):
+After we are done playing around, we obviously have to clean up after ourselves. Rather than `DROP` a table, in Dutch we like to throw it away (“weggooien”):
+
 ```sql
 GOOI_WEG TABEL eend;
 GOOI_WEG TABEL soorten;
 ```
 
-
-Under the hood, the parser is using DuckDB's [new experimental parser]({% post_url _posts/2026-03-09-announcing-duckdb-150 %}#peg-parser), based on [Parsing Expression Grammar]({% post_url 2024-11-22-runtime-extensible-parsers %}).
+Under the hood, the parser is using DuckDB's [new experimental parser]({% post_url 2026-03-09-announcing-duckdb-150 %}#peg-parser), based on [Parsing Expression Grammar]({% post_url 2024-11-22-runtime-extensible-parsers %}).
 
 For more examples, check out the [repository on GitHub](https://github.com/Dtenwolde/eenddb/).
