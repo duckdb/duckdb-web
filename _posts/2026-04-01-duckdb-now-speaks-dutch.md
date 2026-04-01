@@ -47,7 +47,6 @@ VOLGORDE PER leeftijd;
 │ int32 │ varchar │  int32   │  float  │   varchar   │
 ├───────┼─────────┼──────────┼─────────┼─────────────┤
 │     2 │ Daffy   │       35 │     1.5 │ Zwarte eend │
-│     4 │ Scrooge │       75 │     1.8 │ Wilde eend  │
 └───────┴─────────┴──────────┴─────────┴─────────────┘
 ```
 
@@ -65,6 +64,15 @@ VAN eend ALS e
 LINKS SAMENVOEGEN soorten ALS s OP e.soort = s.soort
 GROEP PER s.leefgebied
 VOLGORDE PER aantal_eenden AFLOPEND;
+```
+```text
+┌───────────────────┬───────────────┐
+│    leefgebied     │ aantal_eenden │
+│      varchar      │     int64     │
+├───────────────────┼───────────────┤
+│ Meren en rivieren │             3 │
+│ Kustgebieden      │             1 │
+└───────────────────┴───────────────┘
 ```
 
 After we are done playing around, we obviously have to clean up after ourselves. Rather than `DROP` a table, in Dutch we like to throw it away (“weggooien”):
