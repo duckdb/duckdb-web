@@ -10,7 +10,7 @@ tags: ["extensions"]
 
 Historically speaking, SQL queries have always been formulated in English. The initial name of the language was even Structured **English** Query Language (SEQUEL), before it became SQL. Now, what if the Dutch hadn't traded away New Amsterdam (present-day New York)? Would we all have been writing SQL in Dutch instead?
 
-Well, wonder no longer. Today we're releasing **EendDB**: a DuckDB extension that brings you the **Gestructureerde Zoektaal,** or GZT for short.
+Well, wonder no longer. Today we're releasing [**EendDB**]({% link community_extensions/extensions/eenddb.md %}): a DuckDB extension that brings you the **Gestructureerde Zoektaal,** or GZT for short.
 
 Want joins? We've got `SAMENVOEGEN`. Aggregates? `GROEP PER`. Window functions? Those work too — though you'll have to look up the Dutch keywords in the repository yourself.
 
