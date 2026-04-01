@@ -8,7 +8,7 @@ excerpt: |
 extension:
   name: duckpgq
   description: Extension that adds support for SQL/PGQ and graph algorithms
-  version: 0.3.0
+  version: 0.3.1
   language: C++
   build: cmake
   license: MIT
@@ -18,7 +18,7 @@ extension:
 repo:
   github: cwida/duckpgq-extension
   andium: 42eea114b22fad93f04cb7edf50d2b0077e464fa
-  ref: aec2e251a1480615a50eab456a6c85fa0076dec4
+  ref: 78c7a6cd5e0e03926b28ed7ec2cdb2fe333b0c0b 
 
 docs:
   hello_world: |
@@ -61,10 +61,10 @@ docs:
 
     *Disclaimer:* As this extension is part of an ongoing research project by the Database Architectures group at CWI, some features may still be under development. We appreciate your understanding and patience as we continue to improve it.
 
-extension_star_count: 381
-extension_star_count_pretty: 381
-extension_download_count: 7256
-extension_download_count_pretty: 7.3k
+extension_star_count: 382
+extension_star_count_pretty: 382
+extension_download_count: 7810
+extension_download_count_pretty: 7.8k
 image: '/images/community_extensions/social_preview/preview_community_extension_duckpgq.png'
 layout: community_extension_doc
 ---
@@ -85,64 +85,5 @@ LOAD {{ page.extension.name }};
 ### About {{ page.extension.name }}
 {{ page.docs.extended_description }}
 {% endif %}
-
-### Added Functions
-
-<div class="extension_functions_table"></div>
-
-|        function_name         | function_type | description | comment | examples |
-|------------------------------|---------------|-------------|---------|----------|
-| cheapest_path_length         | scalar        | NULL        | NULL    |          |
-| create_csr_edge              | scalar        | NULL        | NULL    |          |
-| create_csr_vertex            | scalar        | NULL        | NULL    |          |
-| create_property_graph        | table         | NULL        | NULL    |          |
-| create_vertex_table          | pragma        | NULL        | NULL    |          |
-| csr_get_w_type               | scalar        | NULL        | NULL    |          |
-| delete_csr                   | scalar        | NULL        | NULL    |          |
-| describe_property_graph      | table         | NULL        | NULL    |          |
-| drop_property_graph          | table         | NULL        | NULL    |          |
-| duckpgq_match                | table         | NULL        | NULL    |          |
-| get_csr_e                    | table         | NULL        | NULL    |          |
-| get_csr_ptr                  | table         | NULL        | NULL    |          |
-| get_csr_v                    | table         | NULL        | NULL    |          |
-| get_csr_w                    | table         | NULL        | NULL    |          |
-| get_pg_ecolnames             | table         | NULL        | NULL    |          |
-| get_pg_etablenames           | table         | NULL        | NULL    |          |
-| get_pg_vcolnames             | table         | NULL        | NULL    |          |
-| get_pg_vtablenames           | table         | NULL        | NULL    |          |
-| iterativelength              | scalar        | NULL        | NULL    |          |
-| iterativelength2             | scalar        | NULL        | NULL    |          |
-| iterativelengthbidirectional | scalar        | NULL        | NULL    |          |
-| local_clustering_coefficient | scalar        | NULL        | NULL    |          |
-| local_clustering_coefficient | table         | NULL        | NULL    |          |
-| pagerank                     | scalar        | NULL        | NULL    |          |
-| pagerank                     | table         | NULL        | NULL    |          |
-| reachability                 | scalar        | NULL        | NULL    |          |
-| shortestpath                 | scalar        | NULL        | NULL    |          |
-| show_property_graphs         | pragma        | NULL        | NULL    |          |
-| summarize_property_graph     | table         | NULL        | NULL    |          |
-| weakly_connected_component   | scalar        | NULL        | NULL    |          |
-| weakly_connected_component   | table         | NULL        | NULL    |          |
-
-### Overloaded Functions
-
-<div class="extension_functions_table"></div>
-
-| function_name | function_type | description | comment | examples |
-|---------------|---------------|-------------|---------|----------|
-
-### Added Types
-
-<div class="extension_types_table"></div>
-
-| type_name | type_size | logical_type | type_category | internal |
-|-----------|----------:|--------------|---------------|----------|
-
-### Added Settings
-
-<div class="extension_settings_table"></div>
-
-| name | description | input_type | scope | aliases |
-|------|-------------|------------|-------|---------|
 
 
