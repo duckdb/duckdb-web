@@ -4,7 +4,7 @@ title: "DuckDB Now Speaks Dutch!"
 author: "Daniël ten Wolde"
 thumb: "/images/blog/thumbs/duckdb-now-speaks-dutch.svg"
 image: "/images/blog/thumbs/duckdb-now-speaks-dutch.png"
-excerpt: ""
+excerpt: "DuckDB now speaks Dutch! Load the EendDB community extension and start writing your queries in het Nederlands."
 tags: ["extensions"]
 ---
 
