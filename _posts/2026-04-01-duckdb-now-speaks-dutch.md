@@ -37,7 +37,7 @@ TOEVOEGEN AAN eend WAARDEN
 
 SELECTEER *
 VAN eend
-WAARBIJ gewicht > 1.2
+WAARBIJ gewicht > 1.2 EN naam ZOALS '%D%'
 VOLGORDE PER leeftijd;
 ```
 
@@ -50,6 +50,29 @@ VOLGORDE PER leeftijd;
 │     4 │ Scrooge │       75 │     1.8 │ Wilde eend  │
 └───────┴─────────┴──────────┴─────────┴─────────────┘
 ```
+
+Of course, no query language is complete without joins and aggregates. Let's create a second table and count the ducks per soort:
+```sql
+MAAK TABEL soorten (soort TEKST, leefgebied TEKST);
+
+TOEVOEGEN AAN soorten WAARDEN
+    ('Wilde eend',  'Meren en rivieren'),
+    ('Zwarte eend', 'Kustgebieden');
+
+SELECTEER s.leefgebied, COUNT(*) ALS aantal_eenden
+VAN eend ALS e
+LINKS SAMENVOEGEN soorten ALS s OP e.soort = s.soort
+GROEP PER s.leefgebied
+VOLGORDE PER aantal_eenden AFLOPEND;
+```
+
+After we are done playing around, we obviously have to clean up after ourselves. Rather than `DROP`PING a table, in Dutch we like to throw it away
+("Weggooien"):
+```sql
+GOOI_WEG TABEL eend;
+GOOI_WEG TABEL soorten;
+```
+
 
 Under the hood, the parser is using DuckDB's [new experimental parser]({% post_url _posts/2026-03-09-announcing-duckdb-150 %}#peg-parser), based on [Parsing Expression Grammar]({% post_url 2024-11-22-runtime-extensible-parsers %}).
 
