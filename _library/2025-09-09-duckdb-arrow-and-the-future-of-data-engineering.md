@@ -7,6 +7,7 @@ image: "/images/library/thumbs/2025-09-09-the-hedgineer-rusty-conover.jpg"
 tags: ["Podcast"]
 length: "60 min"
 category: community
+excerpt: ""
 pill: "The Hedgineer Podcast by Michael Watson"
 ---
 

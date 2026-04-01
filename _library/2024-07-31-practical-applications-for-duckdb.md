@@ -5,6 +5,7 @@ author: "Simon Aubury, Ned Letcher"
 tags: ["Podcast"]
 length: "70 min"
 category: community
+excerpt: ""
 pill: "Developer Voices by Kris Jenkins"
 ---
 
@@ -14,4 +15,4 @@ pill: "Developer Voices by Kris Jenkins"
 
 |-------|-------|
 | **Podcast** | Developer Voices by Kris Jenkins |
-| **Guest** | Simon Aubury, Ned Letcher |
+| **Guests** | Simon Aubury, Ned Letcher |

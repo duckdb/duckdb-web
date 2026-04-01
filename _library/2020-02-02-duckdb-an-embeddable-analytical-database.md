@@ -8,6 +8,7 @@ tags: ["Talk"]
 length: "15 min"
 thirdparty: false
 pill: "FOSDEM 2020"
+excerpt: ""
 redirect_from:
 - /media/duckdb-an-embeddable-analytical-database
 ---
