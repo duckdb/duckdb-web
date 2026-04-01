@@ -18,5 +18,5 @@ redirect_from:
 
 |-------|-------|
 | **Date** | {{ page.date | date: "%Y-%m-%d" }} |
-| **Hosts** | [Hannes Mühleisen]((https://hannes.muehleisen.org/)) ([DuckDB Labs](https://duckdblabs.com/)) and [Jordan Tigani](https://motherduck.com/authors/jordan-tigani/) ([MotherDuck](https://motherduck.com/)) |
+| **Hosts** | [Hannes Mühleisen](https://hannes.muehleisen.org/) ([DuckDB Labs](https://duckdblabs.com/)) and [Jordan Tigani](https://motherduck.com/authors/jordan-tigani/) ([MotherDuck](https://motherduck.com/)) |
 | **YouTube** | [DuckLake & the Future of Open Table Formats](https://www.youtube.com/watch?v=-PYLFx3FRfQ) |

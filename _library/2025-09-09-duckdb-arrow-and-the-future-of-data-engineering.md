@@ -30,7 +30,7 @@ Join them for a detailed discussion on the nitty-gritty of modern data infrastru
 In this episode, you will learn about:
 
 * The DuckDB Revolution: What makes this "blazingly fast" in-process database a game-changer that can simplify and replace entire ETL stacks.
-A Tour of DuckDB Extensions: A look inside some of the 15 extensions Rusty has built, from Airport for integrating with Apache Arrow, to Crypto, ShellFS, and TextPlot.
+* A Tour of DuckDB Extensions: A look inside some of the 15 extensions Rusty has built, from Airport for integrating with Apache Arrow, to Crypto, ShellFS, and TextPlot.
 * Diving into Apache Arrow: An explanation of the columnar in-memory data format, zero-copy operations, and the Arrow Flight RPC mechanism for efficiently moving data.
 * The Battle of Open Table Formats: A comparison of Iceberg, Delta Lake, and the new database-centric approach of DuckLake.
 * DuckDB vs. The World: How DuckDB stacks up against KDB for financial data, ClickHouse for analytics, and its role alongside large-scale compute engines like Apache Spark.

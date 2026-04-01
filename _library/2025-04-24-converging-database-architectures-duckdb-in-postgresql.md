@@ -17,4 +17,4 @@ pill: "Data Council 2025"
 | **Date** | {{ page.date | date: "%Y-%m-%d" }} |
 | **Event** | [Data Council 2025](https://aicouncil.com/bay-2025) |
 | **Speaker** | [Marco Slot (Crunchy Data)](https://www.linkedin.com/in/marcoslot/) |
-| **YouTube** | [Converging Database Architectures DuckDB in PostgreSQL"](https://www.youtube.com/watch?v=HZArjlMB6W4) |
+| **YouTube** | [Converging Database Architectures DuckDB in PostgreSQL](https://www.youtube.com/watch?v=HZArjlMB6W4) |

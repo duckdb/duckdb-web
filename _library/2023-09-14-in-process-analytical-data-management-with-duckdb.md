@@ -19,6 +19,6 @@ redirect_from:
 
 |-------|-------|
 | **Date** | {{ page.date | date: "%Y-%m-%d" }} |
-| **Event** | [PyData Amsterdam 2023](https://amsterdam.pydata.org/)
+| **Event** | [PyData Amsterdam 2023](https://amsterdam.pydata.org/) |
 | **Guest** | [Hannes Mühleisen (DuckDB Labs)](https://hannes.muehleisen.org/) |
 | **YouTube** | [In-Process Analytical Data Management with DuckDB](https://www.youtube.com/watch?v=5ddoZR6PYNU) |
