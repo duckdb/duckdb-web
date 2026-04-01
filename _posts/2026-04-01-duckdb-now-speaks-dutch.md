@@ -60,7 +60,7 @@ TOEVOEGEN AAN soorten WAARDEN
     ('Wilde eend',  'Meren en rivieren'),
     ('Zwarte eend', 'Kustgebieden');
 
-SELECTEER s.leefgebied, COUNT(*) ALS aantal_eenden
+SELECTEER s.leefgebied, count(*) ALS aantal_eenden
 VAN eend ALS e
 LINKS SAMENVOEGEN soorten ALS s OP e.soort = s.soort
 GROEP PER s.leefgebied
