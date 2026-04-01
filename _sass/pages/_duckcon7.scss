@@ -462,7 +462,7 @@
                 position: absolute;
                 left: calc(100% + 10px);
                 display: block;
-                content: 'Pakhuis de Zwijger';
+                content: attr(data-label);
                 background-color: var(--grey-100);
                 font-size: 15px;
                 font-weight: 600;
