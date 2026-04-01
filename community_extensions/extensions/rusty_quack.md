@@ -32,8 +32,8 @@ docs:
 
 extension_star_count: 101
 extension_star_count_pretty: 101
-extension_download_count: 823
-extension_download_count_pretty: 823
+extension_download_count: 822
+extension_download_count_pretty: 822
 image: '/images/community_extensions/social_preview/preview_community_extension_rusty_quack.png'
 layout: community_extension_doc
 ---

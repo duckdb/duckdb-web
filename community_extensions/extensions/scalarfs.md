@@ -72,8 +72,8 @@ docs:
 
 extension_star_count: 6
 extension_star_count_pretty: 6
-extension_download_count: 906
-extension_download_count_pretty: 906
+extension_download_count: 903
+extension_download_count_pretty: 903
 image: '/images/community_extensions/social_preview/preview_community_extension_scalarfs.png'
 layout: community_extension_doc
 ---
