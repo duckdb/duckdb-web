@@ -66,7 +66,7 @@ GROEP PER s.leefgebied
 VOLGORDE PER aantal_eenden AFLOPEND;
 ```
 
-After we are done playing around, we obviously have to clean up after ourselves. Rather than `DROP`PING a table, in Dutch we like to throw it away ("Weggooien"):
+After we are done playing around, we obviously have to clean up after ourselves. Rather than `DROP` a table, in Dutch we like to throw it away ("Weggooien"):
 ```sql
 GOOI_WEG TABEL eend;
 GOOI_WEG TABEL soorten;
