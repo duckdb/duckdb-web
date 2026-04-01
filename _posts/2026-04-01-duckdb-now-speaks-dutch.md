@@ -2,8 +2,8 @@
 layout: post
 title: "DuckDB Now Speaks Dutch!"
 author: "Daniël ten Wolde"
-thumb: "/images/blog/thumbs/duckdb-release-1-5-1.svg"
-image: "/images/blog/thumbs/duckdb-release-1-5-1.png"
+thumb: "/images/blog/thumbs/duckdb-now-speaks-dutch.svg"
+image: "/images/blog/thumbs/duckdb-now-speaks-dutch.png"
 excerpt: ""
 tags: ["extensions"]
 ---
