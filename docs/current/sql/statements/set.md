@@ -8,7 +8,7 @@ redirect_from:
 title: SET and RESET Statements
 ---
 
-The `SET` statement modifies the provided DuckDB configuration option at the specified scope.
+The `SET` statement modifies the provided DuckDB [configuration option]({% link docs/current/configuration/overview.md %}) at the specified scope.
 
 ## Examples
 
