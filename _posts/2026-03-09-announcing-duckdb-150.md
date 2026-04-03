@@ -294,12 +294,12 @@ SELECT typeof(date_trunc('month', DATE('2026-03-27')));
 
 ### Lakehouse Updates
 
-All of DuckDB’s supported Lakehouse formats have received some updates for v1.5.
+All of DuckDB’s supported Lakehouse formats have received some updates in DuckDB v1.5.
 
 #### DuckLake
 
 The main [DuckLake](https://ducklake.select/) change for DuckDB v1.5 is updating the DuckLake specification to v0.4.
-We are aiming for this to be the same specification that ships with DuckLake 1.0, which will be released in April.
+We are aiming for this to be the same specification that ships with DuckLake v1.0, which will be released in April.
 Its main highlights include:
 
 * Macro support.  
@@ -307,7 +307,7 @@ Its main highlights include:
 * Deletion inlining and addition of partial delete files.  
 * Internal rework of DuckLake options.
 
-We'll announce more details about these features in the blog post for DuckLake v1.
+We'll announce more details about these features in the blog post for DuckLake v1.0.
 
 #### Delta Lake
 
