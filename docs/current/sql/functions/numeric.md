@@ -99,6 +99,7 @@ The table below shows the available mathematical functions.
 | [`radians(x)`](#radiansx) | Converts degrees to radians. |
 | [`random()`](#random) | Returns a random number `x` in the range `0.0 <= x < 1.0`. |
 | [`round_even(v NUMERIC, s INTEGER)`](#round_evenv-numeric-s-integer) | Alias of `roundbankers(v, s)`. Round to `s` decimal places using the [_rounding half to even_ rule](https://en.wikipedia.org/wiki/Rounding#Rounding_half_to_even). Values `s < 0` are allowed. |
+| [`roundbankers(v NUMERIC, s INTEGER)`](#round_evenv-numeric-s-integer) | Alias of `round_even(v, s)`. Round to `s` decimal places using the [_rounding half to even_ rule](https://en.wikipedia.org/wiki/Rounding#Rounding_half_to_even). Values `s < 0` are allowed. |
 | [`round(v NUMERIC, s INTEGER)`](#roundv-numeric-s-integer) | Round to `s` decimal places. Values `s < 0` are allowed. |
 | [`setseed(x)`](#setseedx) | Sets the seed to be used for the random function. |
 | [`sign(x)`](#signx) | Returns the sign of `x` as -1, 0 or 1. |
@@ -486,6 +487,14 @@ The table below shows the available mathematical functions.
 
 | **Description** | Alias of `roundbankers(v, s)`. Round to `s` decimal places using the [_rounding half to even_ rule](https://en.wikipedia.org/wiki/Rounding#Rounding_half_to_even). Values `s < 0` are allowed. |
 | **Example** | `round_even(24.5, 0)` |
+| **Result** | `24.0` |
+
+#### `roundbankers(v NUMERIC, s INTEGER)`
+
+<div class="nostroke_table"></div>
+
+| **Description** | Alias of `round_even(v, s)`. Round to `s` decimal places using the [_rounding half to even_ rule](https://en.wikipedia.org/wiki/Rounding#Rounding_half_to_even). Values `s < 0` are allowed. |
+| **Example** | `roundbankers(24.5, 0)` |
 | **Result** | `24.0` |
 
 #### `round(v NUMERIC, s INTEGER)`
