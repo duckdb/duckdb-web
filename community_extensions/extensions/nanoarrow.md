@@ -8,17 +8,17 @@ excerpt: |
 extension:
   name: nanoarrow
   description: Allows the consumption and production of the Apache Arrow interprocess communication (IPC) format, both from files and directly from stream buffers.
-  version: 1.4.0
+  version: 1.4.1
   language: C++
   build: cmake
   license: MIT
   maintainers:
-    - paleolimbot 
+    - paleolimbot
     - pdet
     - evertlammerts
 repo:
   github: paleolimbot/duckdb-nanoarrow
-  ref: 81ec79bc35090c65f6a7c9066bd373b5dd3b7e73
+  ref: 42e4199a67c4cd0789087562a025e87e7130fdc3
 
 docs:
   hello_world: |
@@ -36,17 +36,17 @@ docs:
 
 
   extended_description: |
-    The Arrow IPC library allows users to read and write data in the Arrow IPC stream format. 
-    This can be done by either reading and producing `.arrow` files or by directly reading buffers using their pointers and sizes. 
-    It is important to note that reading buffers is dangerous, as an incorrect pointer can crash the database system. 
+    The Arrow IPC library allows users to read and write data in the Arrow IPC stream format.
+    This can be done by either reading and producing `.arrow` files or by directly reading buffers using their pointers and sizes.
+    It is important to note that reading buffers is dangerous, as an incorrect pointer can crash the database system.
     This process is temporary and will be deprecated in the future, as clients (e.g., the Python DuckDB client) will have a function that internally extracts these buffers from an Arrow stream.
 
 
 
 extension_star_count: 68
 extension_star_count_pretty: 68
-extension_download_count: 53823
-extension_download_count_pretty: 53.8k
+extension_download_count: 23346
+extension_download_count_pretty: 23.3k
 image: '/images/community_extensions/social_preview/preview_community_extension_nanoarrow.png'
 layout: community_extension_doc
 ---
@@ -78,5 +78,26 @@ LOAD {{ page.extension.name }};
 | read_arrow        | table         | NULL        | NULL    |          |
 | scan_arrow_ipc    | table         | NULL        | NULL    |          |
 | to_arrow_ipc      | table         | NULL        | NULL    |          |
+
+### Overloaded Functions
+
+<div class="extension_functions_table"></div>
+
+| function_name | function_type | description | comment | examples |
+|---------------|---------------|-------------|---------|----------|
+
+### Added Types
+
+<div class="extension_types_table"></div>
+
+| type_name | type_size | logical_type | type_category | internal |
+|-----------|----------:|--------------|---------------|----------|
+
+### Added Settings
+
+<div class="extension_settings_table"></div>
+
+| name | description | input_type | scope | aliases |
+|------|-------------|------------|-------|---------|
 
 

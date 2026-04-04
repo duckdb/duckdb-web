@@ -8,7 +8,7 @@ excerpt: |
 extension:
   name: netquack
   description: DuckDB extension for parsing, extracting, and analyzing domains, URIs, and paths with ease.
-  version: 1.11.0
+  version: 1.11.1
   language: C++
   build: cmake
   license: MIT
@@ -17,8 +17,8 @@ extension:
 
 repo:
   github: hatamiarash7/duckdb-netquack
-  andium: 912f04bebd6057b093c3cae57a3bf5cbefb98980
-  ref: 912f04bebd6057b093c3cae57a3bf5cbefb98980
+  andium: b38e6e530c836c9e10564e92489765fc8fa0bd7b
+  ref: b38e6e530c836c9e10564e92489765fc8fa0bd7b
 
 docs:
   extended_description: |
@@ -76,6 +76,7 @@ LOAD {{ page.extension.name }};
 | ip_version               | scalar        | Returns `4` (IPv4), `6` (IPv6), or `NULL` (invalid)                                                                              | NULL    | [SELECT ip_version('::1');]                                                        |
 | ipcalc                   | table         | Calculating IP information from a CIDR notation                                                                                  | NULL    | [SELECT * FROM ipcalc('192.168.1.0/24');]                                          |
 | get_tranco_rank          | scalar        | Getting the Tranco rank of a domain                                                                                              | NULL    | [SELECT get_tranco_rank('cloudflare.com') as rank;]                                |
+| get_tranco_rank_category | scalar        | Getting the Tranco rank category of a domain                                                                                     | NULL    | [SELECT get_tranco_rank_category('cloudflare.com') as category;]                   |
 | normalize_url            | scalar        | Normalizes a URL by applying RFC 3986 rules (lowercasing, default port removal, dot resolution, query sorting, fragment removal) | NULL    | [SELECT normalize_url('HTTP://WWW.EXAMPLE.COM:80/a/b/../c/?z=1&a=2#frag') AS url;] |
 | extract_fragment         | scalar        | Extracts the fragment (after #) from a URL                                                                                       | NULL    | [SELECT extract_fragment('http://example.com/page#section') AS fragment;]          |
 | domain_depth             | scalar        | Returns the number of dot-separated levels in a domain                                                                           | NULL    | [SELECT domain_depth('www.example.com') AS depth;]                                 |
@@ -85,8 +86,7 @@ LOAD {{ page.extension.name }};
 | is_valid_domain          | scalar        | Validates a domain name against RFC 1035 / RFC 1123 rules                                                                        | NULL    | [SELECT is_valid_domain('example.com');]                                           |
 | extract_path_segments    | table         | Splits a URL path into individual segment rows with index and value                                                              | NULL    | [SELECT * FROM extract_path_segments('https://example.com/a/b/c');]                |
 | update_tranco            | scalar        | Update tranco data                                                                                                               | NULL    | [SELECT update_tranco(true);]                                                      |
-| get_tranco_rank_category | scalar        | NULL                                                                                                                             | NULL    | NULL                                                                               |
-| netquack_version         | table         | NULL                                                                                                                             | NULL    | NULL                                                                               |
+| netquack_version         | table         | Returns the version of Netquack                                                                                                  | NULL    | [SELECT netquack_version() as version;]                                            |
 
 ### Overloaded Functions
 
