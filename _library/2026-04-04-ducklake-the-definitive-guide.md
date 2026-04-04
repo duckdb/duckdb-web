@@ -6,6 +6,7 @@ thumb: "/images/library/thumbs/ducklake-the-definitive-guide.svg"
 image: "/images/library/ducklake-the-definitive-guide.jpg"
 tags: ["Book"]
 category: community
+highlighted: true
 excerpt: ""
 pill: "DuckLake: The Definitive Guide"
 ---
