@@ -43,8 +43,8 @@ docs:
 
 extension_star_count: 4
 extension_star_count_pretty: 4
-extension_download_count: 796
-extension_download_count_pretty: 796
+extension_download_count: 807
+extension_download_count_pretty: 807
 image: '/images/community_extensions/social_preview/preview_community_extension_oast.png'
 layout: community_extension_doc
 ---

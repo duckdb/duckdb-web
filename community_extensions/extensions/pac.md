@@ -75,10 +75,10 @@ docs:
     **Requirements**:
     - DuckDB 1.5.0+
 
-extension_star_count: 14
-extension_star_count_pretty: 14
-extension_download_count: 681
-extension_download_count_pretty: 681
+extension_star_count: 15
+extension_star_count_pretty: 15
+extension_download_count: 675
+extension_download_count_pretty: 675
 image: '/images/community_extensions/social_preview/preview_community_extension_pac.png'
 layout: community_extension_doc
 ---
