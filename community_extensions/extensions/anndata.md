@@ -118,10 +118,10 @@ docs:
     SELECT * FROM anndata_scan_obs(['batch_a/*.h5ad', 'batch_b/*.h5ad']);
     ```
 
-extension_star_count: 7
-extension_star_count_pretty: 7
-extension_download_count: 797
-extension_download_count_pretty: 797
+extension_star_count: 8
+extension_star_count_pretty: 8
+extension_download_count: 802
+extension_download_count_pretty: 802
 image: '/images/community_extensions/social_preview/preview_community_extension_anndata.png'
 layout: community_extension_doc
 ---
