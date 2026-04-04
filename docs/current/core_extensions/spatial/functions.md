@@ -2981,21 +2981,21 @@ This example creates a vector tile named 'cities' with an extent of 4096 from th
 
 However, you probably want to use the ST_AsMVTGeom function to first transform and clip your geometries to the tile extent.
 The following example assumes the geometry is in WebMercator ("EPSG:3857") coordinates.
-Replace `{z}`, `{x}`, and `{y}` with the appropriate tile coordinates, `{your table}` with your table name, and `{tile_path}` with the path to write the tile to.
+Replace `⟨z⟩`{:.language-sql .highlight}, `⟨x⟩`{:.language-sql .highlight}, and `⟨y⟩`{:.language-sql .highlight} with the appropriate tile coordinates, `⟨your_table⟩`{:.language-sql .highlight} with your table name, and `⟨tile_path⟩` with the path to write the tile to.
 
 ```sql
 COPY (
-    SELECT ST_AsMVT({{
+    SELECT ST_AsMVT({
         "geometry": ST_AsMVTGeom(
             geometry,
-            ST_Extent(ST_TileEnvelope({z}, {x}, {y})),
+            ST_Extent(ST_TileEnvelope(⟨z⟩, ⟨x⟩, ⟨y⟩)),
             4096,
             256,
             false
         )
-    }})
-    FROM {your table} WHERE ST_Intersects(geometry, ST_TileEnvelope({z}, {x}, {y}))
-) to {tile_path} (FORMAT 'BLOB');
+    })
+    FROM ⟨your_table⟩ WHERE ST_Intersects(geometry, ST_TileEnvelope(⟨z⟩, ⟨x⟩, ⟨y⟩))
+) to ⟨tile_path⟩ (FORMAT 'BLOB');
 ```
 
 ----
