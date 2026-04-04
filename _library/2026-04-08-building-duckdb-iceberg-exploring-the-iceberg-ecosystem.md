@@ -4,7 +4,7 @@ title: "Building DuckDB-Iceberg: Exploring the Iceberg Ecosystem"
 author: "Tom Ebergen (DuckDB Labs)"
 tags: ["Talk"]
 thirdparty: false
-highlighted: true
+highlighted: false
 excerpt: ""
 pill: "Iceberg Summit 2026"
 ---
