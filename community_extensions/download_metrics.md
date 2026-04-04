@@ -23,18 +23,20 @@ INTO NAME extension VALUE downloads_last_week
 ORDER BY downloads_last_week DESC;
 ```
 
-For example, to return the download counts for the weeks since September 22, 2025:
+For example, to return the download counts for the weeks since January 4, 2026:
 
 ```sql
 PIVOT (
     UNPIVOT (
         FROM read_json([
-            printf('https://community-extensions.duckdb.org/download-stats-weekly/%s.json',
-                strftime(x, '%Y/%W')
+            printf(
+                'https://community-extensions.duckdb.org/download-stats-weekly/%s/%s.json',
+                week.strftime('%Y'),
+                week.strftime('%V').regexp_replace('^0', '')
             )
-            FOR x
-            IN range(TIMESTAMP '2025-09-22', now()::TIMESTAMP, INTERVAL 1 WEEK)
-            IF strftime(x, '%W') != '53'
+            FOR week
+            IN range(TIMESTAMP '2026-01-04', now()::TIMESTAMP, INTERVAL 1 WEEK)
+            IF strftime(week, '%V') != '53'
         ], union_by_name := true)
     )
     ON COLUMNS(* EXCLUDE _last_update)
