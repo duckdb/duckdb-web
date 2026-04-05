@@ -5,6 +5,7 @@ redirect_from:
 - /docs/lts/extensions/httpfs/s3api
 - /docs/preview/core_extensions/httpfs/s3api
 - /docs/stable/core_extensions/httpfs/s3api
+- /docs/stable/extensions/httpfs/s3api
 title: S3 API Support
 ---
 
