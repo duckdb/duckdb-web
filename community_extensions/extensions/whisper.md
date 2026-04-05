@@ -297,4 +297,28 @@ LOAD {{ page.extension.name }};
 {{ page.docs.extended_description }}
 {% endif %}
 
+### Added Functions
+
+<div class="extension_functions_table"></div>
+
+
+
+### Overloaded Functions
+
+<div class="extension_functions_table"></div>
+
+
+
+### Added Types
+
+<div class="extension_types_table"></div>
+
+
+
+### Added Settings
+
+<div class="extension_settings_table"></div>
+
+
+
 

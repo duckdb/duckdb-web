@@ -170,7 +170,6 @@ LOAD {{ page.extension.name }};
 
 <div class="extension_settings_table"></div>
 
-| name | description | input_type | scope | aliases |
-|------|-------------|------------|-------|---------|
+
 
 
