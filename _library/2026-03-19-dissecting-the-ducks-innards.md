@@ -41,4 +41,4 @@ auxiliary material.  There are few queries that go beyond the core
 `SELECT`-`FROM`-`WHERE`-`GROUP BY`-`HAVING` block, however.  Should
 you require an introduction to the tabular data model and its
 query language SQL, you may find the companion course
-[*Tabular Database Systems*](({% link _library/2026-03-19-tabular-database-systems.md %})) helpful.
+[*Tabular Database Systems*]({% link _library/2026-03-19-tabular-database-systems.md %}) helpful.
