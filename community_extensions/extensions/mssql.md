@@ -56,8 +56,8 @@ docs:
     - Named instances not supported
     - Windows Authentication not supported
 
-extension_star_count: 89
-extension_star_count_pretty: 89
+extension_star_count: 90
+extension_star_count_pretty: 90
 extension_download_count: 11400
 extension_download_count_pretty: 11.4k
 image: '/images/community_extensions/social_preview/preview_community_extension_mssql.png'
@@ -102,15 +102,13 @@ LOAD {{ page.extension.name }};
 
 <div class="extension_functions_table"></div>
 
-| function_name | function_type | description | comment | examples |
-|---------------|---------------|-------------|---------|----------|
+
 
 ### Added Types
 
 <div class="extension_types_table"></div>
 
-| type_name | type_size | logical_type | type_category | internal |
-|-----------|----------:|--------------|---------------|----------|
+
 
 ### Added Settings
 

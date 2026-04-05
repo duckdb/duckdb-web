@@ -48,8 +48,8 @@ docs:
     
     For more information, like API references and usage examples, visit the project's [GitHub repository](https://github.com/CogitatorTech/infera).
 
-extension_star_count: 129
-extension_star_count_pretty: 129
+extension_star_count: 130
+extension_star_count_pretty: 130
 extension_download_count: 495
 extension_download_count_pretty: 495
 image: '/images/community_extensions/social_preview/preview_community_extension_infera.png'
@@ -97,21 +97,18 @@ LOAD {{ page.extension.name }};
 
 <div class="extension_functions_table"></div>
 
-| function_name | function_type | description | comment | examples |
-|---------------|---------------|-------------|---------|----------|
+
 
 ### Added Types
 
 <div class="extension_types_table"></div>
 
-| type_name | type_size | logical_type | type_category | internal |
-|-----------|----------:|--------------|---------------|----------|
+
 
 ### Added Settings
 
 <div class="extension_settings_table"></div>
 
-| name | description | input_type | scope | aliases |
-|------|-------------|------------|-------|---------|
+
 
 
