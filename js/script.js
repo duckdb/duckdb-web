@@ -438,7 +438,7 @@ $('.supporterboard a.externallink').removeClass('externallink').addClass('nobg')
 $('a').filter(function() {
 	var href = $(this).attr('href');
 	if (!href) return false;
-	return /\.(pdf|zip|tar\.gz|csv|parquet)(\?.*)?$/i.test(href) && $(this).find('img').length === 0 && !$(this).hasClass('button');
+	return /\.(pdf|mp3|zip|tar\.gz|csv|parquet)(\?.*)?$/i.test(href) && $(this).find('img').length === 0 && !$(this).hasClass('button');
 }).addClass("downloadlink").removeClass("externallink");
 
 $('.headercontent a, .mainlinks a, .box-link a, .footercontent a, .highlight a, .button, .ecosystem-diagram a').removeClass('downloadlink');
