@@ -6,7 +6,7 @@ author: "Gábor Szárnyas"
 thumb: "/images/everywhere/thumbs/macbook-pro-14.jpg"
 image: "/images/everywhere/thumbs/macbook-pro-14.jpg"
 excerpt: ""
-tags: ["PCs and laptops"]
+tags: ["PCs"]
 thirdparty: false
 ---
 

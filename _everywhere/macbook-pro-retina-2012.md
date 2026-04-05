@@ -6,7 +6,7 @@ author: "Hannes Mühleisen"
 thumb: "/images/everywhere/thumbs/macbook-pro-retina-2012.jpg"
 image: "/images/everywhere/thumbs/macbook-pro-retina-2012.jpg"
 excerpt: ""
-tags: ["PCs and laptops"]
+tags: ["PCs"]
 thirdparty: false
 ---
 
