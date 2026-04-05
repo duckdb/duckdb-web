@@ -173,13 +173,35 @@ After a sequence is created, you use the function `nextval` to operate on the se
 ## Limitations
 
 Due to limitations in DuckDB's dependency manager, `DROP SEQUENCE` will fail in some corner cases.
-For example, deleting a column that uses a sequence should allow the sequence to be dropped but this currently returns an error:
 
 ```sql
 CREATE SEQUENCE id_sequence START 1;
-CREATE TABLE tbl (id INTEGER DEFAULT nextval('id_sequence'), s VARCHAR);
 
-ALTER TABLE tbl DROP COLUMN id;
+CREATE TABLE tbl (
+    id INTEGER DEFAULT nextval('id_sequence'),
+    s VARCHAR
+);
+INSERT INTO tbl(s) VALUES ('default is the next value from id_sequence');
+
+ALTER TABLE tbl ALTER COLUMN id SET DEFAULT NULL;
+INSERT INTO tbl(s) VALUES ('default is NULL');
+
+SELECT * FROM tbl;
+```
+
+```text
+┌───────┬────────────────────────────────────────────┐
+│  id   │                     s                      │
+│ int32 │                  varchar                   │
+├───────┼────────────────────────────────────────────┤
+│     1 │ default is the next value from id_sequence │
+│  NULL │ default is NULL                            │
+└───────┴────────────────────────────────────────────┘
+```
+
+Even though the sequence is no longer used, attempting to drop it results in an error:
+
+```sql
 DROP SEQUENCE id_sequence;
 ```
 
@@ -190,9 +212,14 @@ table "tbl" depends on index "id_sequence".
 Use DROP...CASCADE to drop all dependents.
 ```
 
-This can be worked around by using the `CASCADE` modifier.
-The following command drops the sequence:
+As the error message suggests, you can force dropping by adding `CASCADE`. However, DuckDB currently tracks dependencies at the table level, so attempting to drop with `CASCADE` drops the entire table:
 
 ```sql
 DROP SEQUENCE id_sequence CASCADE;
+SELECT * FROM tbl;
+```
+
+```console
+Catalog Error:
+Table with name tbl does not exist!
 ```
