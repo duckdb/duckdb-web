@@ -28,7 +28,7 @@ repo:
 
 extension_star_count: 330
 extension_star_count_pretty: 330
-extension_download_count: 1042
+extension_download_count: 1041
 extension_download_count_pretty: 1.0k
 image: '/images/community_extensions/social_preview/preview_community_extension_airport.png'
 layout: community_extension_doc
@@ -68,18 +68,18 @@ LOAD {{ page.extension.name }};
 
 <div class="extension_functions_table"></div>
 
-
+This extension does not add any function overloads.
 
 ### Added Types
 
 <div class="extension_types_table"></div>
 
-
+This extension does not add any types.
 
 ### Added Settings
 
 <div class="extension_settings_table"></div>
 
-
+This extension does not add any settings.
 
 

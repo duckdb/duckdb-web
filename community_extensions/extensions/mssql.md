@@ -58,8 +58,8 @@ docs:
 
 extension_star_count: 90
 extension_star_count_pretty: 90
-extension_download_count: 11400
-extension_download_count_pretty: 11.4k
+extension_download_count: 7244
+extension_download_count_pretty: 7.2k
 image: '/images/community_extensions/social_preview/preview_community_extension_mssql.png'
 layout: community_extension_doc
 ---
@@ -102,13 +102,13 @@ LOAD {{ page.extension.name }};
 
 <div class="extension_functions_table"></div>
 
-
+This extension does not add any function overloads.
 
 ### Added Types
 
 <div class="extension_types_table"></div>
 
-
+This extension does not add any types.
 
 ### Added Settings
 

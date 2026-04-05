@@ -173,8 +173,8 @@ docs:
 
 extension_star_count: 1
 extension_star_count_pretty: 1
-extension_download_count: 805
-extension_download_count_pretty: 805
+extension_download_count: 792
+extension_download_count_pretty: 792
 image: '/images/community_extensions/social_preview/preview_community_extension_duck_block_utils.png'
 layout: community_extension_doc
 ---
@@ -280,7 +280,7 @@ LOAD {{ page.extension.name }};
 
 <div class="extension_functions_table"></div>
 
-
+This extension does not add any function overloads.
 
 ### Added Types
 
@@ -295,6 +295,6 @@ LOAD {{ page.extension.name }};
 
 <div class="extension_settings_table"></div>
 
-
+This extension does not add any settings.
 
 

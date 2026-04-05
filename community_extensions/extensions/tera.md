@@ -25,8 +25,8 @@ repo:
 
 extension_star_count: 8
 extension_star_count_pretty: 8
-extension_download_count: 821
-extension_download_count_pretty: 821
+extension_download_count: 814
+extension_download_count_pretty: 814
 image: '/images/community_extensions/social_preview/preview_community_extension_tera.png'
 layout: community_extension_doc
 ---
@@ -52,27 +52,27 @@ LOAD {{ page.extension.name }};
 
 <div class="extension_functions_table"></div>
 
-| function_name | function_type |                        description                         | comment |                                                      examples                                                      |
-|---------------|---------------|------------------------------------------------------------|---------|--------------------------------------------------------------------------------------------------------------------|
-| tera_render   | scalar        | Renders a Tera template string with JSON context variables | NULL    | [tera_render('Hello {{ name }}!', '{"name": "World"}'), tera_render('{{ value \| upper }}', '{"value": "hello"}')] |
-| tera_render   | scalar        | Renders a Tera template string without context variables   | NULL    | [tera_render('Hello World!')]                                                                                      |
+| function_name | function_type |                        description                         | comment |                                                                  examples                                                                  |
+|---------------|---------------|------------------------------------------------------------|---------|--------------------------------------------------------------------------------------------------------------------------------------------|
+| tera_render   | scalar        | Renders a Tera template string with JSON context variables | NULL    | [tera_render('Hello {{ {{ }} name {{ }} }}!', '{"name": "World"}'), tera_render('{{ {{ }} value \| upper {{ }} }}', '{"value": "hello"}')] |
+| tera_render   | scalar        | Renders a Tera template string without context variables   | NULL    | [tera_render('Hello World!')]                                                                                                              |
 
 ### Overloaded Functions
 
 <div class="extension_functions_table"></div>
 
-
+This extension does not add any function overloads.
 
 ### Added Types
 
 <div class="extension_types_table"></div>
 
-
+This extension does not add any types.
 
 ### Added Settings
 
 <div class="extension_settings_table"></div>
 
-
+This extension does not add any settings.
 
 
