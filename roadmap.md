@@ -29,7 +29,7 @@ This section lists the features that the DuckDB team plans to work on **in the c
 
 * Migration and documentation to [C client API]({% link docs/current/clients/c/overview.md %}) and [C extension API](https://github.com/duckdb/extension-template-c)
 * Rust support for extensions
-* Continuous improvements to lakehouse formats:
+* Continuous improvements to [lakehouse formats]({% link docs/current/lakehouse_formats.md %}):
   [Iceberg]({% link docs/current/core_extensions/iceberg/overview.md %}),
   [Delta]({% link docs/current/core_extensions/delta.md %}),
   [Lance]({% link docs/current/core_extensions/lance.md %})
