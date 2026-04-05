@@ -19,7 +19,7 @@ extension:
 
 repo:
   github: CogitatorTech/onager
-  ref: fc00c6420295a9c856149e67ac1077cbdfb6d3e5
+  ref: 89106a39840d4e2471e25c57d6a3fb25626d4940
 
 docs:
   hello_world: |
@@ -45,10 +45,10 @@ docs:
     For more information, visit the [GitHub repository](https://github.com/CogitatorTech/onager)
     or the [Onager documentation](https://cogitatortech.github.io/onager/).
 
-extension_star_count: 126
-extension_star_count_pretty: 126
-extension_download_count: 782
-extension_download_count_pretty: 782
+extension_star_count: 127
+extension_star_count_pretty: 127
+extension_download_count: 506
+extension_download_count_pretty: 506
 image: '/images/community_extensions/social_preview/preview_community_extension_onager.png'
 layout: community_extension_doc
 ---
@@ -145,21 +145,18 @@ LOAD {{ page.extension.name }};
 
 <div class="extension_functions_table"></div>
 
-| function_name | function_type | description | comment | examples |
-|---------------|---------------|-------------|---------|----------|
+This extension does not add any function overloads.
 
 ### Added Types
 
 <div class="extension_types_table"></div>
 
-| type_name | type_size | logical_type | type_category | internal |
-|-----------|----------:|--------------|---------------|----------|
+This extension does not add any types.
 
 ### Added Settings
 
 <div class="extension_settings_table"></div>
 
-| name | description | input_type | scope | aliases |
-|------|-------------|------------|-------|---------|
+This extension does not add any settings.
 
 
