@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Building DuckDB-Iceberg: Exploring the Iceberg Ecosystem"
-author: "Tom Ebergen (DuckDB Labs)"
+author: "Tom Ebergen"
 tags: ["Talk"]
 thirdparty: false
 highlighted: false

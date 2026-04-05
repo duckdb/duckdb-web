@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Super-Secret Next Big Thing for DuckDB"
-author: Hannes Mühleisen
+author: "Hannes Mühleisen"
 tags: ["Talk"]
 thirdparty: false
 highlighted: false
