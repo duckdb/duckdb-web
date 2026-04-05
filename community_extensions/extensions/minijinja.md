@@ -25,8 +25,8 @@ repo:
 
 extension_star_count: 5
 extension_star_count_pretty: 5
-extension_download_count: 819
-extension_download_count_pretty: 819
+extension_download_count: 820
+extension_download_count_pretty: 820
 image: '/images/community_extensions/social_preview/preview_community_extension_minijinja.png'
 layout: community_extension_doc
 ---
@@ -52,27 +52,27 @@ LOAD {{ page.extension.name }};
 
 <div class="extension_functions_table"></div>
 
-|         function_name         | function_type |                             description                              | comment |                                 examples                                  |
-|-------------------------------|---------------|----------------------------------------------------------------------|---------|---------------------------------------------------------------------------|
-| minijinja_render              | scalar        | Render a Jinja2-style template using the MiniJinja templating engine | NULL    | [minijinja_render('Hello World!')]                                        |
-| minijinja_render_with_context | scalar        | Render a Jinja2-style template with a JSON context                   | NULL    | [minijinja_render_with_context('Hello {{ name }}!', '{"name": "World"}')] |
+|         function_name         | function_type |                             description                              | comment |                                       examples                                        |
+|-------------------------------|---------------|----------------------------------------------------------------------|---------|---------------------------------------------------------------------------------------|
+| minijinja_render              | scalar        | Render a Jinja2-style template using the MiniJinja templating engine | NULL    | [minijinja_render('Hello World!')]                                                    |
+| minijinja_render_with_context | scalar        | Render a Jinja2-style template with a JSON context                   | NULL    | [minijinja_render_with_context('Hello {{ {{ }} name {{ }} }}!', '{"name": "World"}')] |
 
 ### Overloaded Functions
 
 <div class="extension_functions_table"></div>
 
-
+This extension does not add any function overloads.
 
 ### Added Types
 
 <div class="extension_types_table"></div>
 
-
+This extension does not add any types.
 
 ### Added Settings
 
 <div class="extension_settings_table"></div>
 
-
+This extension does not add any settings.
 
 

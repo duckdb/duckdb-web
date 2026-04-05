@@ -25,7 +25,7 @@ repo:
 
 extension_star_count: 43
 extension_star_count_pretty: 43
-extension_download_count: 2162
+extension_download_count: 2159
 extension_download_count_pretty: 2.2k
 image: '/images/community_extensions/social_preview/preview_community_extension_datasketches.png'
 layout: community_extension_doc
@@ -147,7 +147,7 @@ LOAD {{ page.extension.name }};
 
 <div class="extension_functions_table"></div>
 
-
+This extension does not add any function overloads.
 
 ### Added Types
 
@@ -196,6 +196,6 @@ LOAD {{ page.extension.name }};
 
 <div class="extension_settings_table"></div>
 
-
+This extension does not add any settings.
 
 

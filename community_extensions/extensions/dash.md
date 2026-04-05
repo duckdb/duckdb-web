@@ -29,8 +29,8 @@ docs:
     repository [here](https://github.com/gropaul/dash).
 extension_star_count: 45
 extension_star_count_pretty: 45
-extension_download_count: 987
-extension_download_count_pretty: 987
+extension_download_count: 1015
+extension_download_count_pretty: 1.0k
 image: '/images/community_extensions/social_preview/preview_community_extension_dash.png'
 layout: community_extension_doc
 ---
@@ -67,18 +67,18 @@ LOAD {{ page.extension.name }};
 
 <div class="extension_functions_table"></div>
 
-
+This extension does not add any function overloads.
 
 ### Added Types
 
 <div class="extension_types_table"></div>
 
-
+This extension does not add any types.
 
 ### Added Settings
 
 <div class="extension_settings_table"></div>
 
-
+This extension does not add any settings.
 
 

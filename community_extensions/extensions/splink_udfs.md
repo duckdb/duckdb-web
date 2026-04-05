@@ -32,8 +32,8 @@ docs:
 
 extension_star_count: 17
 extension_star_count_pretty: 17
-extension_download_count: 1613
-extension_download_count_pretty: 1.6k
+extension_download_count: 2314
+extension_download_count_pretty: 2.3k
 image: '/images/community_extensions/social_preview/preview_community_extension_splink_udfs.png'
 layout: community_extension_doc
 ---
@@ -82,12 +82,12 @@ LOAD {{ page.extension.name }};
 
 <div class="extension_types_table"></div>
 
-
+This extension does not add any types.
 
 ### Added Settings
 
 <div class="extension_settings_table"></div>
 
-
+This extension does not add any settings.
 
 

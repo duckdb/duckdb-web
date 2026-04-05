@@ -19,8 +19,7 @@ extension:
 
 repo:
   github: ahuarte47/duckdb-pdal
-  andium: 47d5cfcc23405a32dd5c1ca75e1b2aa87382ede6
-  ref: b59f4628ff0bc20a464d66d56b15fa5bd9d71b38
+  ref: 43bed0d6eb76f547ed2239edc657228c305c3724
 
 docs:
   hello_world: |
@@ -165,8 +164,8 @@ docs:
 
 extension_star_count: 25
 extension_star_count_pretty: 25
-extension_download_count: 801
-extension_download_count_pretty: 801
+extension_download_count: 796
+extension_download_count_pretty: 796
 image: '/images/community_extensions/social_preview/preview_community_extension_pdal.png'
 layout: community_extension_doc
 ---
@@ -204,18 +203,18 @@ LOAD {{ page.extension.name }};
 
 <div class="extension_functions_table"></div>
 
-
+This extension does not add any function overloads.
 
 ### Added Types
 
 <div class="extension_types_table"></div>
 
-
+This extension does not add any types.
 
 ### Added Settings
 
 <div class="extension_settings_table"></div>
 
-
+This extension does not add any settings.
 
 

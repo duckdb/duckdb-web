@@ -45,8 +45,8 @@ docs:
 
 extension_star_count: 0
 extension_star_count_pretty: 0
-extension_download_count: 767
-extension_download_count_pretty: 767
+extension_download_count: 758
+extension_download_count_pretty: 758
 image: '/images/community_extensions/social_preview/preview_community_extension_httpfs_timeout_retry.png'
 layout: community_extension_doc
 ---
@@ -72,19 +72,19 @@ LOAD {{ page.extension.name }};
 
 <div class="extension_functions_table"></div>
 
-
+This extension does not add any functions.
 
 ### Overloaded Functions
 
 <div class="extension_functions_table"></div>
 
-
+This extension does not add any function overloads.
 
 ### Added Types
 
 <div class="extension_types_table"></div>
 
-
+This extension does not add any types.
 
 ### Added Settings
 

@@ -96,8 +96,8 @@ docs:
 
 extension_star_count: 48
 extension_star_count_pretty: 48
-extension_download_count: 5211
-extension_download_count_pretty: 5.2k
+extension_download_count: 5005
+extension_download_count_pretty: 5.0k
 image: '/images/community_extensions/social_preview/preview_community_extension_webbed.png'
 layout: community_extension_doc
 ---
@@ -175,7 +175,7 @@ LOAD {{ page.extension.name }};
 
 <div class="extension_functions_table"></div>
 
-
+This extension does not add any function overloads.
 
 ### Added Types
 
@@ -191,6 +191,6 @@ LOAD {{ page.extension.name }};
 
 <div class="extension_settings_table"></div>
 
-
+This extension does not add any settings.
 
 

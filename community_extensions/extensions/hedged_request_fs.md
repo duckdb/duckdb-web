@@ -8,7 +8,7 @@ excerpt: |
 extension:
   name: hedged_request_fs
   description: Provides hedged request for filesystem operations
-  version: 0.0.3
+  version: 0.1.0
   language: C++
   build: cmake
   license: MIT
@@ -19,7 +19,7 @@ extension:
 repo:
   github: dentiny/duckdb-hedged-request
   andium: a94e1b63e9b1e6f94c6c7debbf1d49bc28f510f7
-  ref: 957d680184d98292f430feeb332b02f4dde61371
+  ref: 3882d63058a12dbe5dd59d50232acec36052c9b3
 
 docs:
   hello_world: |
@@ -33,8 +33,8 @@ docs:
 
 extension_star_count: 1
 extension_star_count_pretty: 1
-extension_download_count: 819
-extension_download_count_pretty: 819
+extension_download_count: 798
+extension_download_count_pretty: 798
 image: '/images/community_extensions/social_preview/preview_community_extension_hedged_request_fs.png'
 layout: community_extension_doc
 ---
@@ -69,30 +69,32 @@ LOAD {{ page.extension.name }};
 
 <div class="extension_functions_table"></div>
 
-
+This extension does not add any function overloads.
 
 ### Added Types
 
 <div class="extension_types_table"></div>
 
-
+This extension does not add any types.
 
 ### Added Settings
 
 <div class="extension_settings_table"></div>
 
-|                   name                    |                                      description                                       | input_type | scope  | aliases |
-|-------------------------------------------|----------------------------------------------------------------------------------------|------------|--------|---------|
-| hedged_fs_directory_exists_delay_ms       | Delay in milliseconds before starting hedged request for DirectoryExists operation     | UBIGINT    | GLOBAL | []      |
-| hedged_fs_file_exists_delay_ms            | Delay in milliseconds before starting hedged request for FileExists operation          | UBIGINT    | GLOBAL | []      |
-| hedged_fs_get_file_size_delay_ms          | Delay in milliseconds before starting hedged request for GetFileSize operation         | UBIGINT    | GLOBAL | []      |
-| hedged_fs_get_file_type_delay_ms          | Delay in milliseconds before starting hedged request for GetFileType operation         | UBIGINT    | GLOBAL | []      |
-| hedged_fs_get_last_modified_time_delay_ms | Delay in milliseconds before starting hedged request for GetLastModifiedTime operation | UBIGINT    | GLOBAL | []      |
-| hedged_fs_get_stats_delay_ms              | Delay in milliseconds before starting hedged request for Stats operation               | UBIGINT    | GLOBAL | []      |
-| hedged_fs_get_version_tag_delay_ms        | Delay in milliseconds before starting hedged request for GetVersionTag operation       | UBIGINT    | GLOBAL | []      |
-| hedged_fs_glob_delay_ms                   | Delay in milliseconds before starting hedged request for Glob operation                | UBIGINT    | GLOBAL | []      |
-| hedged_fs_list_files_delay_ms             | Delay in milliseconds before starting hedged request for ListFiles operation           | UBIGINT    | GLOBAL | []      |
-| hedged_fs_max_hedged_request_count        | Maximum number of hedged requests to spawn for each operation                          | UBIGINT    | GLOBAL | []      |
-| hedged_fs_open_file_delay_ms              | Delay in milliseconds before starting hedged request for OpenFile operation            | UBIGINT    | GLOBAL | []      |
+|                   name                    |                                               description                                               | input_type | scope  | aliases |
+|-------------------------------------------|---------------------------------------------------------------------------------------------------------|------------|--------|---------|
+| hedged_fs_create_directory_delay_ms       | Delay in milliseconds before starting hedged request for CreateDirectory and CreateDirectoriesRecursive | UBIGINT    | GLOBAL | []      |
+| hedged_fs_delete_delay_ms                 | Delay in milliseconds before starting hedged request for RemoveFile, TryRemoveFile, and RemoveDirectory | UBIGINT    | GLOBAL | []      |
+| hedged_fs_directory_exists_delay_ms       | Delay in milliseconds before starting hedged request for DirectoryExists operation                      | UBIGINT    | GLOBAL | []      |
+| hedged_fs_file_exists_delay_ms            | Delay in milliseconds before starting hedged request for FileExists operation                           | UBIGINT    | GLOBAL | []      |
+| hedged_fs_get_file_size_delay_ms          | Delay in milliseconds before starting hedged request for GetFileSize operation                          | UBIGINT    | GLOBAL | []      |
+| hedged_fs_get_file_type_delay_ms          | Delay in milliseconds before starting hedged request for GetFileType operation                          | UBIGINT    | GLOBAL | []      |
+| hedged_fs_get_last_modified_time_delay_ms | Delay in milliseconds before starting hedged request for GetLastModifiedTime operation                  | UBIGINT    | GLOBAL | []      |
+| hedged_fs_get_stats_delay_ms              | Delay in milliseconds before starting hedged request for Stats operation                                | UBIGINT    | GLOBAL | []      |
+| hedged_fs_get_version_tag_delay_ms        | Delay in milliseconds before starting hedged request for GetVersionTag operation                        | UBIGINT    | GLOBAL | []      |
+| hedged_fs_glob_delay_ms                   | Delay in milliseconds before starting hedged request for Glob operation                                 | UBIGINT    | GLOBAL | []      |
+| hedged_fs_list_files_delay_ms             | Delay in milliseconds before starting hedged request for ListFiles operation                            | UBIGINT    | GLOBAL | []      |
+| hedged_fs_max_hedged_request_count        | Maximum number of hedged requests to spawn for each operation                                           | UBIGINT    | GLOBAL | []      |
+| hedged_fs_open_file_delay_ms              | Delay in milliseconds before starting hedged request for OpenFile operation                             | UBIGINT    | GLOBAL | []      |
 
 

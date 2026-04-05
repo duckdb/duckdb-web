@@ -92,8 +92,8 @@ docs:
 
 extension_star_count: 4
 extension_star_count_pretty: 4
-extension_download_count: 835
-extension_download_count_pretty: 835
+extension_download_count: 829
+extension_download_count_pretty: 829
 image: '/images/community_extensions/social_preview/preview_community_extension_func_apply.png'
 layout: community_extension_doc
 ---
@@ -146,12 +146,12 @@ LOAD {{ page.extension.name }};
 
 <div class="extension_types_table"></div>
 
-
+This extension does not add any types.
 
 ### Added Settings
 
 <div class="extension_settings_table"></div>
 
-
+This extension does not add any settings.
 
 
