@@ -14,7 +14,7 @@ METRICS_DOC_TEMPLATE = REPO_ROOT / "scripts" / "metrics.md.template"
 METRICS_MARKER = "<!-- METRICS_TABLE -->"
 END_METRICS_MARKER = "<!-- END_METRICS_TABLE -->"
 GROUPS_MARKER = "<!-- GROUPS -->"
-END_GROUPS_MARKER = "<!-- END_GROUPS_TABLE -->"
+END_GROUPS_MARKER = "<!-- END_GROUPS -->"
 OPTIMIZER_MARKER = "<!-- OPTIMIZER_METRICS -->"
 END_OPTIMIZER_MARKER = "<!-- END_OPTIMIZER_METRICS -->"
 CUMULATIVE_MARKER = "<!-- CUMULATIVE_METRICS -->"
@@ -36,10 +36,10 @@ def _write_individual_metric(f, metric):
     table = f"| **Description** | {metric.description} |\n"
     table += f"| **Type** | {metric.type} |\n"
     table += f"| **Unit** | {metric.unit} |\n" if metric.unit != "--" else ""
-    table += f"| **Default** | '✅' |\n" if metric.is_default else ''
-    table += f"| **Query Node** | '✅' |\n" if is_query_node else ''
-    table += f"| **Operator Node** | '✅' |\n" if is_operator_node else ''
-    table += f"| **[Cumulative](#cumulative_metrics)** | '✅' |\n" if metric.collection_method == "cumulative" else ''
+    table += f"| **Default** | ✅ |\n" if metric.is_default else ''
+    table += f"| **Query Node** | ✅ |\n" if is_query_node else ''
+    table += f"| **Operator Node** | ✅ |\n" if is_operator_node else ''
+    table += f"| **[Cumulative](#cumulative_metrics)** | ✅ |\n" if metric.collection_method == "cumulative" else ''
     table += f"| **Child** | {metric.child} |\n" if metric.child else ''
     f.write(table + "\n")
 
@@ -87,31 +87,28 @@ def main():
     optimizers = retrieve_optimizers(OPTIMIZER_HPP)
     metric_index = build_all_metrics(metrics_json, optimizers)
 
-    # Generate metrics table
-    metrics_table = []
-
-    for metric in metric_index.defs:
-        is_operator_node = metric.group == "operator"
-        is_query_node = metric.query_root
-
-        if metric.query_root is False and metric.group != "operator":
-            is_query_node = True
-            is_operator_node = True
-
-        metrics_table.append([
-            f"[`{metric.name}`](#{metric.name})",
-            f"[{metric.group}](#{metric.group}-metrics)",
-            metric.description
-        ])
 
     with IndentedFileWriter(METRICS_DOC_PATH) as f:
-        f.write(retrieve_template(METRICS_DOC_TEMPLATE, START_OF_FILE, METRICS_MARKER))
+        f.write(retrieve_template(METRICS_DOC_TEMPLATE, START_OF_FILE, METRICS_MARKER).lstrip('\n'))
+
+        # Generate metrics table
+        metrics_table = []
+
+        for metric in metric_index.defs:
+            if metric.group == "optimizer":
+                continue
+            metrics_table.append([
+                f"[`{metric.name}`](#{metric.name.lower().replace(' ', '_')})",
+                f"[{metric.group}](#{metric.group}-metrics)",
+                metric.description
+            ])
 
         metric_table_headers = ["Name", "Group", "Description"]
+        f.write("\n")
         f.write(tabulate(metrics_table, headers=metric_table_headers, tablefmt="github"))
         f.write("\n\n")
 
-        f.write(retrieve_template(METRICS_DOC_TEMPLATE, METRICS_MARKER, END_METRICS_MARKER))
+        f.write(retrieve_template(METRICS_DOC_TEMPLATE, GROUPS_MARKER, END_GROUPS_MARKER))
         for group in metric_index.group_names:
             if group not in ("all", "default"):
                 f.write(f"- [`{group.upper()}`](#{group}-metrics)\n")
@@ -121,12 +118,12 @@ def main():
         cumulative_metrics = []
 
         for group in metric_index.group_names:
-            if group == "all" or group == "default" or group == "optimizer":
+            if group in ("all", "default", "optimizer"):
                 continue
 
             group_metrics = [m for m in metric_index.defs if m.group == group]
 
-            f.write(f"### {group.capitalize()} Metrics\n")
+            f.write(f"## {group.capitalize()} Metrics\n")
             f.write(metric_index.group_description(group) + "\n\n")
 
             for metric in group_metrics:
