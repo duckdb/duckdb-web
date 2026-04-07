@@ -14,6 +14,14 @@ Jekyll::Hooks.register :site, :after_init do |page|
     Jekyll.logger.error(tag, "Failed to generate index")
   end
 
+  Jekyll.logger.info(tag, "Building pre-generated MiniSearch index")
+
+  if system "node scripts/build_search_index.js"
+    Jekyll.logger.info(tag, "MiniSearch index built")
+  else
+    Jekyll.logger.error(tag, "Failed to build MiniSearch index")
+  end
+
   Jekyll.logger.info(tag, "Generating DuckDB search index")
 
   if system "python3 scripts/generate_search_index.py --validate"
