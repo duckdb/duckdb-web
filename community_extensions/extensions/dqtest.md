@@ -138,8 +138,8 @@ extended_description: |
   - Catch data anomalies and schema changes early
 extension_star_count: 4
 extension_star_count_pretty: 4
-extension_download_count: 912
-extension_download_count_pretty: 912
+extension_download_count: 892
+extension_download_count_pretty: 892
 image: '/images/community_extensions/social_preview/preview_community_extension_dqtest.png'
 layout: community_extension_doc
 ---
