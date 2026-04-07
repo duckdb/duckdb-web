@@ -318,7 +318,7 @@ Referenced column "s" not found in FROM clause!
 
 ### Viewing the List of Macros and Table Macros
 
-We could use the following query to display the list of macros and table macros:
+You can use the following query to display the list of macros and table macros:
 
 ```sql
 SELECT schema_name, function_name, function_type, parameters
