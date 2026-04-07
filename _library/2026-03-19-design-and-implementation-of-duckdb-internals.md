@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Dissecting the Duck's Innards"
+title: "Design and Implementation of DuckDB Internals"
 author: "Torsten Grust (University of Tübingen)"
 tags: ["Talk"]
 thirdparty: true
