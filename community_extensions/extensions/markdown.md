@@ -111,8 +111,8 @@ docs:
 
     Full test suite with 1108 passing assertions across 20 test files.
 
-extension_star_count: 15
-extension_star_count_pretty: 15
+extension_star_count: 16
+extension_star_count_pretty: 16
 extension_download_count: 907
 extension_download_count_pretty: 907
 image: '/images/community_extensions/social_preview/preview_community_extension_markdown.png'
