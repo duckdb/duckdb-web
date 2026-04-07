@@ -58,5 +58,5 @@ We do not assume any prior SQL skills.  Chapters 03 and 07 will have you read
 and modify short pieces of C, Python, or awk code.  There will be only
 fleeting glimpses at the internals of DuckDB.  If the innards of The
 Duck catch your interest, you may find the companion course
-[*Dissecting the Duck's Innards*]({% link _library/2026-03-19-dissecting-the-ducks-innards.md %}) on selected internals
+[*Design and Implementation of DuckDB Internals*]({% link _library/2026-03-19-design-and-implementation-of-duckdb-internals.md %}) on selected internals
 of the DuckDB kernel helpful.
