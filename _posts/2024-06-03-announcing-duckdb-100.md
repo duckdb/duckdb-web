@@ -53,7 +53,3 @@ Finally, we would like to thank the [excellent and amazing team at DuckDB Labs](
 So join us now in being nostalgic, teary-eyed and excited for what’s to come for DuckDB and celebrate the release of DuckDB 1.0.0 with us. We certainly will.
 
 Mark and Hannes
-
-PS: We are holding our next community event, [DuckCon #5]({% link _events/2024-08-15-duckcon5.md %}), in Seattle on August 15, only a few short weeks from today. Attendance is free. Hope to see you there!
-
-_For press inquiries, please reach out to [Gábor Szárnyas](mailto:gabor@duckdblabs.com)._
