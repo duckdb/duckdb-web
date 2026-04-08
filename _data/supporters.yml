@@ -68,6 +68,10 @@ silver:
     url: https://altertable.ai/
     logoimg: altertable.svg
 
+  - name: PostHog
+    url: https://posthog.com/
+    logoimg: posthog.svg
+
 oss:
   - name: Bloomberg
     url: https://www.bloomberg.com/company/stories/bloomberg-ospo-launches-foss-contributor-fund/
