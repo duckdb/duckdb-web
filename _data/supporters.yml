@@ -1,4 +1,8 @@
 gold:
+  - name: AWS
+    url: https://aws.amazon.com/
+    logoimg: aws.svg
+
   - name: MotherDuck
     url: https://motherduck.com
     logoimg: motherduck.svg
