@@ -18,7 +18,7 @@ The table below describes each metric and which nodes they are available for.
 
 Other than `OPERATOR_TYPE`, all metrics can be turned on or off.
 
-# All Metrics
+## All Metrics
 
 | Name                                                                  | Group                                 | Description                                                                |
 |-----------------------------------------------------------------------|---------------------------------------|----------------------------------------------------------------------------|
@@ -58,7 +58,9 @@ Other than `OPERATOR_TYPE`, all metrics can be turned on or off.
 | [`OPERATOR_TYPE`](#operator_type)                                     | [operator](#operator-metrics)         | Type of the operator                                                       |
 
 
-# Metric Groups:
+
+## Metric Groups
+
 The metrics are organized into groups, which can be used to enable or disable related metrics together.
 The following is a list of the available metric groups:
 - `ALL`: All metrics
@@ -70,8 +72,11 @@ The following is a list of the available metric groups:
 - [`OPTIMIZER`](#optimizer-metrics)
 - [`PHASE_TIMING`](#phase_timing-metrics)
 
-## Core Metrics
+
+### Core Metrics
+
 core metrics
+
 
 #### `CPU_TIME`
 
@@ -83,8 +88,16 @@ core metrics
 | **Default** | ✅ |
 | **Query Node** | ✅ |
 | **Operator Node** | ✅ |
-| **[Cumulative](#cumulative_metrics)** | ✅ |
+| **[Cumulative](#cumulative-metrics)** | ✅ |
 | **Child** | OPERATOR_TIMING |
+
+**Note:**
+
+`CPU_TIME` measures the cumulative operator timings.
+It does not include time spent in other stages, like parsing, query planning, etc.
+Thus, for some queries, the `LATENCY` in the `QUERY_ROOT` can be greater than the `CPU_TIME`.
+
+
 
 #### `CUMULATIVE_CARDINALITY`
 
@@ -96,8 +109,9 @@ core metrics
 | **Default** | ✅ |
 | **Query Node** | ✅ |
 | **Operator Node** | ✅ |
-| **[Cumulative](#cumulative_metrics)** | ✅ |
+| **[Cumulative](#cumulative-metrics)** | ✅ |
 | **Child** | OPERATOR_CARDINALITY |
+
 
 #### `CUMULATIVE_ROWS_SCANNED`
 
@@ -109,8 +123,9 @@ core metrics
 | **Default** | ✅ |
 | **Query Node** | ✅ |
 | **Operator Node** | ✅ |
-| **[Cumulative](#cumulative_metrics)** | ✅ |
+| **[Cumulative](#cumulative-metrics)** | ✅ |
 | **Child** | OPERATOR_ROWS_SCANNED |
+
 
 #### `EXTRA_INFO`
 
@@ -122,6 +137,7 @@ core metrics
 | **Query Node** | ✅ |
 | **Operator Node** | ✅ |
 
+
 #### `LATENCY`
 
 <div class="nostroke_table"></div>
@@ -132,6 +148,7 @@ core metrics
 | **Default** | ✅ |
 | **Query Node** | ✅ |
 
+
 #### `QUERY_NAME`
 
 <div class="nostroke_table"></div>
@@ -140,6 +157,7 @@ core metrics
 | **Type** | string |
 | **Default** | ✅ |
 | **Query Node** | ✅ |
+
 
 #### `RESULT_SET_SIZE`
 
@@ -153,6 +171,7 @@ core metrics
 | **Operator Node** | ✅ |
 | **Child** | RESULT_SET_SIZE |
 
+
 #### `ROWS_RETURNED`
 
 <div class="nostroke_table"></div>
@@ -164,8 +183,11 @@ core metrics
 | **Query Node** | ✅ |
 | **Child** | OPERATOR_CARDINALITY |
 
-## Execution Metrics
+
+### Execution Metrics
+
 Metrics that are collected during query execution
+
 
 #### `BLOCKED_THREAD_TIME`
 
@@ -176,6 +198,7 @@ Metrics that are collected during query execution
 | **Unit** | seconds |
 | **Default** | ✅ |
 | **Query Node** | ✅ |
+
 
 #### `SYSTEM_PEAK_BUFFER_MEMORY`
 
@@ -188,6 +211,7 @@ Metrics that are collected during query execution
 | **Query Node** | ✅ |
 | **Operator Node** | ✅ |
 
+
 #### `SYSTEM_PEAK_TEMP_DIR_SIZE`
 
 <div class="nostroke_table"></div>
@@ -199,6 +223,7 @@ Metrics that are collected during query execution
 | **Query Node** | ✅ |
 | **Operator Node** | ✅ |
 
+
 #### `TOTAL_MEMORY_ALLOCATED`
 
 <div class="nostroke_table"></div>
@@ -209,8 +234,11 @@ Metrics that are collected during query execution
 | **Default** | ✅ |
 | **Query Node** | ✅ |
 
-## File Metrics
+
+### File Metrics
+
 metrics that are collected during file operations
+
 
 #### `ATTACH_LOAD_STORAGE_LATENCY`
 
@@ -222,6 +250,7 @@ metrics that are collected during file operations
 | **Default** | ✅ |
 | **Query Node** | ✅ |
 
+
 #### `ATTACH_REPLAY_WAL_LATENCY`
 
 <div class="nostroke_table"></div>
@@ -231,6 +260,7 @@ metrics that are collected during file operations
 | **Unit** | seconds |
 | **Default** | ✅ |
 | **Query Node** | ✅ |
+
 
 #### `CHECKPOINT_LATENCY`
 
@@ -242,6 +272,7 @@ metrics that are collected during file operations
 | **Default** | ✅ |
 | **Query Node** | ✅ |
 
+
 #### `COMMIT_LOCAL_STORAGE_LATENCY`
 
 <div class="nostroke_table"></div>
@@ -251,6 +282,7 @@ metrics that are collected during file operations
 | **Unit** | seconds |
 | **Default** | ✅ |
 | **Query Node** | ✅ |
+
 
 #### `TOTAL_BYTES_READ`
 
@@ -262,6 +294,7 @@ metrics that are collected during file operations
 | **Default** | ✅ |
 | **Query Node** | ✅ |
 
+
 #### `TOTAL_BYTES_WRITTEN`
 
 <div class="nostroke_table"></div>
@@ -271,6 +304,7 @@ metrics that are collected during file operations
 | **Unit** | bytes |
 | **Default** | ✅ |
 | **Query Node** | ✅ |
+
 
 #### `WAITING_TO_ATTACH_LATENCY`
 
@@ -282,6 +316,7 @@ metrics that are collected during file operations
 | **Default** | ✅ |
 | **Query Node** | ✅ |
 
+
 #### `WAL_REPLAY_ENTRY_COUNT`
 
 <div class="nostroke_table"></div>
@@ -291,6 +326,7 @@ metrics that are collected during file operations
 | **Unit** | absolute |
 | **Default** | ✅ |
 | **Query Node** | ✅ |
+
 
 #### `WRITE_TO_WAL_LATENCY`
 
@@ -302,8 +338,11 @@ metrics that are collected during file operations
 | **Default** | ✅ |
 | **Query Node** | ✅ |
 
-## Operator Metrics
+
+### Operator Metrics
+
 metrics that are collected for each operator
+
 
 #### `OPERATOR_CARDINALITY`
 
@@ -315,6 +354,7 @@ metrics that are collected for each operator
 | **Default** | ✅ |
 | **Operator Node** | ✅ |
 
+
 #### `OPERATOR_NAME`
 
 <div class="nostroke_table"></div>
@@ -323,6 +363,7 @@ metrics that are collected for each operator
 | **Type** | string |
 | **Default** | ✅ |
 | **Operator Node** | ✅ |
+
 
 #### `OPERATOR_ROWS_SCANNED`
 
@@ -334,6 +375,7 @@ metrics that are collected for each operator
 | **Default** | ✅ |
 | **Operator Node** | ✅ |
 
+
 #### `OPERATOR_TIMING`
 
 <div class="nostroke_table"></div>
@@ -344,6 +386,7 @@ metrics that are collected for each operator
 | **Default** | ✅ |
 | **Operator Node** | ✅ |
 
+
 #### `OPERATOR_TYPE`
 
 <div class="nostroke_table"></div>
@@ -353,8 +396,31 @@ metrics that are collected for each operator
 | **Default** | ✅ |
 | **Operator Node** | ✅ |
 
-## Phase_timing Metrics
+
+### Phase_timing Metrics
+
 This group contains metrics related to the planner and the physical planner. The planner is responsible for generating the logical plan, whereas the physical planner is responsible for generating the physical plan from the logical plan.
+
+
+#### `ALL_OPTIMIZERS`
+
+<div class="nostroke_table"></div>
+
+| **Description** | Enables all optimizers |
+| **Type** | double |
+| **Query Node** | ✅ |
+
+
+#### `CUMULATIVE_OPTIMIZER_TIMING`
+
+<div class="nostroke_table"></div>
+
+| **Description** | Time spent in all optimizers |
+| **Type** | double |
+| **Unit** | milliseconds |
+| **Query Node** | ✅ |
+| **[Cumulative](#cumulative-metrics)** | ✅ |
+
 
 #### `PHYSICAL_PLANNER`
 
@@ -365,6 +431,7 @@ This group contains metrics related to the planner and the physical planner. The
 | **Unit** | milliseconds |
 | **Query Node** | ✅ |
 
+
 #### `PHYSICAL_PLANNER_COLUMN_BINDING`
 
 <div class="nostroke_table"></div>
@@ -373,6 +440,7 @@ This group contains metrics related to the planner and the physical planner. The
 | **Type** | double |
 | **Unit** | milliseconds |
 | **Query Node** | ✅ |
+
 
 #### `PHYSICAL_PLANNER_CREATE_PLAN`
 
@@ -383,6 +451,7 @@ This group contains metrics related to the planner and the physical planner. The
 | **Unit** | milliseconds |
 | **Query Node** | ✅ |
 
+
 #### `PHYSICAL_PLANNER_RESOLVE_TYPES`
 
 <div class="nostroke_table"></div>
@@ -392,6 +461,7 @@ This group contains metrics related to the planner and the physical planner. The
 | **Unit** | milliseconds |
 | **Query Node** | ✅ |
 
+
 #### `PLANNER`
 
 <div class="nostroke_table"></div>
@@ -400,6 +470,7 @@ This group contains metrics related to the planner and the physical planner. The
 | **Type** | double |
 | **Unit** | milliseconds |
 | **Query Node** | ✅ |
+
 
 #### `PLANNER_BINDING`
 
@@ -411,7 +482,9 @@ This group contains metrics related to the planner and the physical planner. The
 | **Query Node** | ✅ |
 
 
-## Optimizer Metrics
+
+### Optimizer Metrics
+
 Optimizer metrics sit at the `QUERY_ROOT` level, and measure the time taken by each [optimizer]({% link docs/current/internals/overview.md %}#optimizer).
 These metrics are only available when the specific optimizer is enabled.
 The available optimizations can be queried using the [`duckdb_optimizers()`{:.language-sql .highlight} table function]({% link docs/current/sql/meta/duckdb_table_functions.md %}#duckdb_optimizers).
@@ -420,42 +493,131 @@ Each optimizer has a corresponding metric that follows the template: `OPTIMIZER_
 For example, the `OPTIMIZER_JOIN_ORDER` metric corresponds to the `JOIN_ORDER` optimizer.
 
 Additionally, the following metrics are available to support the optimizer metrics:
-
-#### `ALL_OPTIMIZERS`
-
-<div class="nostroke_table"></div>
-
-| **Description** | Enables all optimizers |
-| **Type** | double |
-| **Query Node** | ✅ |
-
-#### `CUMULATIVE_OPTIMIZER_TIMING`
-
-<div class="nostroke_table"></div>
-
-| **Description** | Time spent in all optimizers |
-| **Type** | double |
-| **Unit** | milliseconds |
-| **Query Node** | ✅ |
+- [`ALL_OPTIMIZERS`](#all_optimizers)
+- [`CUMULATIVE_OPTIMIZER_TIMING`](#cumulative_optimizer_timing)
 
 
-# Cumulative Metrics
+## Cumulative Metrics
 
 DuckDB also supports several cumulative metrics that are available in all nodes.
 In the `QUERY_ROOT` node, these metrics represent the sum of the corresponding metrics across all operators in the query.
 The `OPERATOR` nodes represent the sum of the operator's specific metric and those of all its children recursively.
 
 These cumulative metrics can be enabled independently, even if the underlying specific metrics are disabled.
-The table below shows the cumulative metrics.
-It also depicts the metric based on which DuckDB calculates the cumulative metric.
 
-| Metric                    | Unit     | Metric calculated cumulatively |
-|---------------------------|----------|--------------------------------|
-| `CPU_TIME`                | seconds  | `OPERATOR_TIMING`              |
-| `CUMULATIVE_CARDINALITY`  | absolute | `OPERATOR_CARDINALITY`         |
-| `CUMULATIVE_ROWS_SCANNED` | absolute | `OPERATOR_ROWS_SCANNED`        |
+The following is a list of the available cumulative metrics:
+- [`CPU_TIME`](#cpu_time)
+- [`CUMULATIVE_CARDINALITY`](#cumulative_cardinality)
+- [`CUMULATIVE_ROWS_SCANNED`](#cumulative_rows_scanned)
+- [`CUMULATIVE_OPTIMIZER_TIMING`](#cumulative_optimizer_timing)
 
-`CPU_TIME` measures the cumulative operator timings.
-It does not include time spent in other stages, like parsing, query planning, etc.
-Thus, for some queries, the `LATENCY` in the `QUERY_ROOT` can be greater than the `CPU_TIME`.
 
+## Examples
+
+The following examples demonstrate how to enable custom profiling and set the output format to `json`.
+In the first example, we enable profiling and set the output to a file.
+We only enable `EXTRA_INFO`, `OPERATOR_CARDINALITY`, and `OPERATOR_TIMING`.
+
+```sql
+CREATE TABLE students (name VARCHAR, sid INTEGER);
+CREATE TABLE exams (eid INTEGER, subject VARCHAR, sid INTEGER);
+INSERT INTO students VALUES ('Mark', 1), ('Joe', 2), ('Matthew', 3);
+INSERT INTO exams VALUES (10, 'Physics', 1), (20, 'Chemistry', 2), (30, 'Literature', 3);
+
+PRAGMA enable_profiling = 'json';
+PRAGMA profiling_output = '/path/to/file.json';
+
+PRAGMA configure_profiling = '{"CPU_TIME": "false", "EXTRA_INFO": "true", "OPERATOR_CARDINALITY": "true", "OPERATOR_TIMING": "true"}';
+
+SELECT name
+FROM students
+JOIN exams USING (sid)
+WHERE name LIKE 'Ma%';
+```
+
+The file's content after executing the query:
+
+```json
+{
+    "extra_info": {},
+    "query_name": "SELECT name\nFROM students\nJOIN exams USING (sid)\nWHERE name LIKE 'Ma%';",
+    "children": [
+        {
+            "operator_timing": 0.000001,
+            "operator_cardinality": 2,
+            "operator_type": "PROJECTION",
+            "extra_info": {
+                "Projections": "name",
+                "Estimated Cardinality": "1"
+            },
+            "children": [
+                {
+                    "extra_info": {
+                        "Join Type": "INNER",
+                        "Conditions": "sid = sid",
+                        "Build Min": "1",
+                        "Build Max": "3",
+                        "Estimated Cardinality": "1"
+                    },
+                    "operator_cardinality": 2,
+                    "operator_type": "HASH_JOIN",
+                    "operator_timing": 0.00023899999999999998,
+                    "children": [
+...
+```
+
+The second example adds detailed metrics to the output.
+
+```sql
+PRAGMA profiling_mode = 'detailed';
+
+SELECT name
+FROM students
+JOIN exams USING (sid)
+WHERE name LIKE 'Ma%';
+```
+
+The contents of the outputted file:
+
+```json
+{
+  "all_optimizers": 0.001413,
+  "cumulative_optimizer_timing": 0.0014120000000000003,
+  "planner": 0.000873,
+  "planner_binding": 0.000869,
+  "physical_planner": 0.000236,
+  "physical_planner_column_binding": 0.000005,
+  "physical_planner_resolve_types": 0.000001,
+  "physical_planner_create_plan": 0.000226,
+  "optimizer_expression_rewriter": 0.000029,
+  "optimizer_filter_pullup": 0.000002,
+  "optimizer_filter_pushdown": 0.000102,
+...
+  "optimizer_column_lifetime": 0.000009999999999999999,
+  "rows_returned": 2,
+  "latency": 0.003708,
+  "cumulative_rows_scanned": 6,
+  "cumulative_cardinality": 11,
+  "extra_info": {},
+  "cpu_time": 0.000095,
+  "optimizer_build_side_probe_side": 0.000017,
+  "result_set_size": 32,
+  "blocked_thread_time": 0.0,
+  "query_name": "SELECT name\nFROM students\nJOIN exams USING (sid)\nWHERE name LIKE 'Ma%';",
+  "children": [
+    {
+      "operator_timing": 0.000001,
+      "operator_rows_scanned": 0,
+      "cumulative_rows_scanned": 6,
+      "operator_cardinality": 2,
+      "operator_type": "PROJECTION",
+      "cumulative_cardinality": 11,
+      "extra_info": {
+        "Projections": "name",
+        "Estimated Cardinality": "1"
+      },
+      "result_set_size": 32,
+      "cpu_time": 0.000095,
+      "children": [
+...
+```
