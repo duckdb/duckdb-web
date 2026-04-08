@@ -75,7 +75,3 @@ Two railway companies operate direct services between Amsterdam and Brussels, an
 
 * The [NS EuroCity Direct](https://www.nsinternational.com/en/train/amsterdam-brussels) departs from Amsterdam Zuid, operates without seat reservation and is generally cheaper.
 * The [Eurostar](https://www.eurostar.com/rw-en/train/amsterdam-to-brussels) departs from Amsterdam Centraal, has seat reservation and and a slightly more premium pricing.
-
-## Inquiries
-
-Please contact Kelly de Smit at [kelly@duckdblabs.com](mailto:kelly@duckdblabs.com) if you have any questions.

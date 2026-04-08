@@ -43,7 +43,3 @@ The presentations will take place on floor -1 in the **Godfrey Mitchell Theatre*
 |       | [Anas Dorbani](https://www.linkedin.com/in/anasdorbani/)<br>_(Polytechnique Montréal)_                             | When the duck quacks: Multimodal querying with FlockMTL                                                                      | [pdf](https://blobs.duckdb.org/events/duckdb-in-science-london-meetup/anas-dorbani-flockmtl.pdf)                       |
 | 21:00 | Talks end                                                                                                          |                                                                                                                              |                                                                                                                        |
 | 21:30 | Event ends                                                                                                         |                                                                                                                              |                                                                                                                        |
-
-## Inquiries
-
-Please contact Kelly de Smit at [kelly@duckdblabs.com](mailto:kelly@duckdblabs.com) if you have any questions.

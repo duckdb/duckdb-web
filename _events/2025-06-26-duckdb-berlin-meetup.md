@@ -37,7 +37,3 @@ Attendance is free but **please RSVP on [meetup.com](https://www.meetup.com/duck
 | 19:35 | [Marcin Rudolf](https://www.linkedin.com/in/marcinrudolf/) <br/>_(dltHub)_ | From REST API to Iceberg Lakehouse: ELT with Python, DuckDB, and dlt | [pdf](https://blobs.duckdb.org/events/duckdb-berlin-meetup/marcin-rudolf-shreyas-gowda-dlthub-from-rest-api-to-iceberg-lakehouse-elt-with-python-dlt-and-duckdb.pdf) |
 | 20:00 | [David Justen](https://d-justen.github.io/) <br/>_(TU Berlin)_             | POLAR for DuckDB: Stop Guessing, Start Adapting                      | [pdf](https://blobs.duckdb.org/events/duckdb-berlin-meetup/david-justen-polar-stop-guessing-start-adapting.pdf)                                                      |
 | 20:30 | Event ends                                                                 |                                                                      |                                                                                                                                                                      |
-
-## Inquiries
-
-Please contact Kelly de Smit at [kelly@duckdblabs.com](mailto:kelly@duckdblabs.com) if you have any questions.

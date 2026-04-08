@@ -35,8 +35,3 @@ The event starts at 18:00 and will feature three talks from DuckDB users and dev
 | 19:30 | _Drinks and snacks by [Adyen](https://www.adyen.com/)_                                                      |                                                              |                                                                                                                 |
 
 The event will be held at the Adyen Rokin office: 1012KK Amsterdam, Rokin 49 ([Apple Maps](https://maps.apple.com/place?address=Rokin%2049,%201012%20KK%20Amsterdam,%20Netherlands&coordinate=52.371375,4.893167&name=Adyen%20Rokin%20Office&place-id=I9267DC82A95CF006&map=explore), [Google Maps](https://maps.app.goo.gl/MCHMGtjFi7SD8QBb7)).
-The catering is provided by Adyen.
-
-## Inquiries
-
-Please contact Kelly de Smit at [kelly@duckdblabs.com](mailto:kelly@duckdblabs.com) if you have any questions.
