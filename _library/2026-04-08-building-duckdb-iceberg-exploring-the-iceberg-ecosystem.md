@@ -9,8 +9,6 @@ excerpt: ""
 pill: "Iceberg Summit 2026"
 ---
 
-## Upcoming Talk
-
 |-------|-------|
 | **Date** | {{ page.date | date: "%Y-%m-%d" }} |
 | **Event** | [Iceberg Summit 2026](https://events.bizzabo.com/796372) |
