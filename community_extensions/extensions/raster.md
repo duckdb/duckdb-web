@@ -8,7 +8,7 @@ excerpt: |
 extension:
   name: raster
   description: DuckDB Extension for reading and writing raster files using SQL.
-  version: 0.3.0
+  version: 0.3.1
   language: C++
   build: cmake
   excluded_platforms: "windows_amd64_mingw;wasm_mvp;wasm_eh;wasm_threads"
@@ -18,7 +18,7 @@ extension:
 
 repo:
   github: ahuarte47/duckdb-raster
-  ref: 1b36133d12b54252442e993a42a0d8cfb040f479
+  ref: df2ce5b18eb791c4f5743b65a5ecda839ca33ed0
 
 docs:
   hello_world: |
@@ -104,10 +104,10 @@ docs:
     - Compression formats for the data band BLOBs (`GZip`, `ZSTD`?).
     - Integration with DuckDB File System.
 
-extension_star_count: 0
-extension_star_count_pretty: 0
-extension_download_count: null
-extension_download_count_pretty: n/a
+extension_star_count: 14
+extension_star_count_pretty: 14
+extension_download_count: 102
+extension_download_count_pretty: 102
 image: '/images/community_extensions/social_preview/preview_community_extension_raster.png'
 layout: community_extension_doc
 ---
