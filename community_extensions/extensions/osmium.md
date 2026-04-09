@@ -14,6 +14,7 @@ extension:
   license: MIT
   maintainers:
     - jake-low
+  opt_in_platforms: "linux_amd64_musl;linux_arm64_musl"
 
 repo:
   github: jake-low/duckdb-osmium
@@ -31,10 +32,10 @@ docs:
     constructing Geometries (Point, LineString, Polygon, etc) from OSM elements, which makes it
     easy to transform OSM data into formats like GeoJSON and GeoParquet.
 
-extension_star_count: 9
-extension_star_count_pretty: 9
-extension_download_count: null
-extension_download_count_pretty: n/a
+extension_star_count: 10
+extension_star_count_pretty: 10
+extension_download_count: 93
+extension_download_count_pretty: 93
 image: '/images/community_extensions/social_preview/preview_community_extension_osmium.png'
 layout: community_extension_doc
 ---
