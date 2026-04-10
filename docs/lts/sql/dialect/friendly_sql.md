@@ -57,7 +57,7 @@ DuckDB offers several advanced SQL features and syntactic sugar to make SQL quer
 
 * [Case-insensitivity while maintaining case of entities in the catalog]({% link docs/lts/sql/dialect/keywords_and_identifiers.md %}#case-sensitivity-of-identifiers)
 * [Deduplicating identifiers]({% link docs/lts/sql/dialect/keywords_and_identifiers.md %}#deduplicating-identifiers)
-* [Underscores as digit separators in numeric literals]({% link docs/lts/sql/dialect/keywords_and_identifiers.md %}#numeric-literals)
+* [Underscores as digit separators in numeric literals]({% link docs/lts/sql/data_types/literal_types.md %}#underscores-in-numeric-literals)
 
 ## Data Types
 
