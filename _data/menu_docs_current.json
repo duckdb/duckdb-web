@@ -1731,6 +1731,10 @@
               "url": "release_cycle"
             },
             {
+              "page": "Metrics",
+              "url": "metrics"
+            },
+            {
               "page": "Profiling",
               "url": "profiling"
             },
