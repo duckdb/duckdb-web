@@ -8,7 +8,7 @@ excerpt: |
 extension:
   name: "duckhts"
   description: "DuckDB extension for reading HTS file formats via htslib"
-  version: "1.1.4"
+  version: "1.1.6"
   language: "C"
   build: "cmake"
   license: "MIT"
@@ -19,7 +19,7 @@ extension:
 
 repo:
   github: "RGenomicsETL/duckhts"
-  ref: "c9197d51159f03b87d0eb7afd5874b1a23c1ddc8"
+  ref: "975b301dde48492aa81ae4361696b15803389055"
 
 docs:
   hello_world: |
@@ -123,10 +123,10 @@ docs:
     - MSVC builds (`windows_amd64`/`windows_arm64`) are not supported; use MinGW/RTools on Windows.
 
 
-extension_star_count: 8
-extension_star_count_pretty: 8
-extension_download_count: 818
-extension_download_count_pretty: 818
+extension_star_count: 9
+extension_star_count_pretty: 9
+extension_download_count: 808
+extension_download_count_pretty: 808
 image: '/images/community_extensions/social_preview/preview_community_extension_duckhts.png'
 layout: community_extension_doc
 ---
@@ -201,7 +201,7 @@ LOAD {{ page.extension.name }};
 | read_hts_header                      | table         | NULL        | NULL    |          |
 | read_hts_index                       | table         | NULL        | NULL    |          |
 | read_hts_index_raw                   | table_macro   | NULL        | NULL    |          |
-| read_hts_index_spans                 | table_macro   | NULL        | NULL    |          |
+| read_hts_index_spans                 | table         | NULL        | NULL    |          |
 | read_tabix                           | table         | NULL        | NULL    |          |
 | sam_flag_bits                        | scalar        | NULL        | NULL    |          |
 | sam_flag_has                         | scalar        | NULL        | NULL    |          |

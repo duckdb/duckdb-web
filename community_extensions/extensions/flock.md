@@ -20,7 +20,7 @@ extension:
 
 repo:
   github: dais-polymtl/flock
-  ref: d5dfcdffec365077ba1325ea5c08530e6719541e
+  ref: ed1ee543ba6831fc6ea1de5aa9fc0b6c81dceca1
 
 docs:
   hello_world: |
@@ -62,10 +62,10 @@ docs:
 
     > *Note:* Flock is part of ongoing research by the [Data & AI Systems (DAIS) Laboratory @ Polytechnique Montréal](https://dais-polymtl.github.io/). It is under active development, and some features may evolve. Feedback and contributions are welcome!
 
-extension_star_count: 297
-extension_star_count_pretty: 297
-extension_download_count: 506
-extension_download_count_pretty: 506
+extension_star_count: 332
+extension_star_count_pretty: 332
+extension_download_count: 361
+extension_download_count_pretty: 361
 image: '/images/community_extensions/social_preview/preview_community_extension_flock.png'
 layout: community_extension_doc
 ---
@@ -108,5 +108,23 @@ LOAD {{ page.extension.name }};
 | flock_get_metrics       | scalar        | Returns usage metrics for LLM function calls in the current session       | Returns JSON with api_calls tokens and timing per function              | [SELECT flock_get_metrics();]                                                                                                                                                        |
 | flock_get_debug_metrics | scalar        | Returns detailed debug metrics including registration order               | Useful for debugging multi-function queries                             | [SELECT flock_get_debug_metrics();]                                                                                                                                                  |
 | flock_reset_metrics     | scalar        | Resets all metrics for the current session                                | Returns confirmation message                                            | [SELECT flock_reset_metrics();]                                                                                                                                                      |
+
+### Overloaded Functions
+
+<div class="extension_functions_table"></div>
+
+This extension does not add any function overloads.
+
+### Added Types
+
+<div class="extension_types_table"></div>
+
+This extension does not add any types.
+
+### Added Settings
+
+<div class="extension_settings_table"></div>
+
+This extension does not add any settings.
 
 

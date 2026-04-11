@@ -114,10 +114,10 @@ docs:
     ORDER BY hour;
     ```
 
-extension_star_count: 0
-extension_star_count_pretty: 0
-extension_download_count: 89
-extension_download_count_pretty: 89
+extension_star_count: 1
+extension_star_count_pretty: 1
+extension_download_count: 141
+extension_download_count_pretty: 141
 image: '/images/community_extensions/social_preview/preview_community_extension_pfc.png'
 layout: community_extension_doc
 ---

@@ -66,8 +66,8 @@ docs:
 
 extension_star_count: 1
 extension_star_count_pretty: 1
-extension_download_count: 659
-extension_download_count_pretty: 659
+extension_download_count: 653
+extension_download_count_pretty: 653
 image: '/images/community_extensions/social_preview/preview_community_extension_fsquery.png'
 layout: community_extension_doc
 ---

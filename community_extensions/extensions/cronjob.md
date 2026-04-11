@@ -74,10 +74,10 @@ repo:
   github: quackscience/duckdb-extension-cronjob
   ref: 1892d5bb80e0d79968cd8aedd4f48f94347ce9d5
 
-extension_star_count: 47
-extension_star_count_pretty: 47
-extension_download_count: 815
-extension_download_count_pretty: 815
+extension_star_count: 48
+extension_star_count_pretty: 48
+extension_download_count: 812
+extension_download_count_pretty: 812
 image: '/images/community_extensions/social_preview/preview_community_extension_cronjob.png'
 layout: community_extension_doc
 ---
