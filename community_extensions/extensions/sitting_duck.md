@@ -8,7 +8,7 @@ excerpt: |
 extension:
   name: sitting_duck
   description: Parse and analyze source code ASTs from 27 programming languages with tree-sitter grammars, pattern matching, and structural search
-  version: 1.5.0
+  version: 1.6.0
   language: C++
   build: cmake
   license: MIT
@@ -16,7 +16,7 @@ extension:
     - teaguesterling
 repo:
   github: teaguesterling/sitting_duck
-  ref: 96cf501d4a8d04f9718fd26e66bc807ac676a8c4
+  ref: 908927e016cbe01f0786582fb00cf8e0de9c6009
 docs:
   hello_world: |
     -- Parse Python code and find function definitions
@@ -76,10 +76,20 @@ docs:
     ```
     See: https://sitting-duck.readthedocs.io/en/latest/guide/pattern-matching/
 
+    **CSS Selector Queries (v1.6.0):**
+    Query AST nodes using CSS selector syntax — bootstrapped with sitting duck's own CSS grammar:
+    ```sql
+    SELECT name FROM ast_select('src/*.py', '.func:has(.call#execute):not(:has(try_statement))');
+    ```
+    Supports type selectors, `#name`, `.semantic` (~80 aliases), combinators, `:has()`, `:not(:has())`.
+    Bare type matching: `if` matches `if` + `if_statement` + `if_clause`.
+
     **Table Functions:**
-    - `read_ast(file_pattern, language := NULL)` - Parse source files into AST rows
+    - `read_ast(file_pattern, language := NULL)` - Parse source files into AST rows (parallel)
     - `parse_ast(content, language)` - Parse source code strings
     - `ast_match(source, pattern, lang)` - Pattern matching for code search
+    - `ast_select(source, css_selector)` - CSS selector queries
+    - `ast_type_map(language)` - Node type discovery across languages
 
     **Relational Predicates (v1.5.0):**
     - `ast_has(source, parent_type, child_type)` - Check containment relationships
@@ -144,8 +154,8 @@ docs:
 
 extension_star_count: 12
 extension_star_count_pretty: 12
-extension_download_count: 832
-extension_download_count_pretty: 832
+extension_download_count: 825
+extension_download_count_pretty: 825
 image: '/images/community_extensions/social_preview/preview_community_extension_sitting_duck.png'
 layout: community_extension_doc
 ---
@@ -175,6 +185,8 @@ LOAD {{ page.extension.name }};
 |---------------------------|---------------|-------------|---------|----------|
 | ast_ancestors             | table_macro   | NULL        | NULL    |          |
 | ast_call_arguments        | table_macro   | NULL        | NULL    |          |
+| ast_callees               | table_macro   | NULL        | NULL    |          |
+| ast_callers               | table_macro   | NULL        | NULL    |          |
 | ast_capture               | macro         | NULL        | NULL    |          |
 | ast_children              | table_macro   | NULL        | NULL    |          |
 | ast_class_members         | table_macro   | NULL        | NULL    |          |
@@ -183,6 +195,7 @@ LOAD {{ page.extension.name }};
 | ast_definition_parent     | table_macro   | NULL        | NULL    |          |
 | ast_definitions           | table_macro   | NULL        | NULL    |          |
 | ast_descendants           | table_macro   | NULL        | NULL    |          |
+| ast_exports               | table_macro   | NULL        | NULL    |          |
 | ast_follows               | table_macro   | NULL        | NULL    |          |
 | ast_function_metrics      | table_macro   | NULL        | NULL    |          |
 | ast_function_scope        | table_macro   | NULL        | NULL    |          |
@@ -191,6 +204,7 @@ LOAD {{ page.extension.name }};
 | ast_get_source_line       | macro         | NULL        | NULL    |          |
 | ast_get_source_numbered   | macro         | NULL        | NULL    |          |
 | ast_has                   | table_macro   | NULL        | NULL    |          |
+| ast_imports               | table_macro   | NULL        | NULL    |          |
 | ast_in_range              | table_macro   | NULL        | NULL    |          |
 | ast_inside                | table_macro   | NULL        | NULL    |          |
 | ast_match                 | table_macro   | NULL        | NULL    |          |
@@ -200,10 +214,14 @@ LOAD {{ page.extension.name }};
 | ast_pattern_list          | macro         | NULL        | NULL    |          |
 | ast_peek_contains_any     | scalar        | NULL        | NULL    |          |
 | ast_precedes              | table_macro   | NULL        | NULL    |          |
+| ast_resolve               | table_macro   | NULL        | NULL    |          |
 | ast_security_audit        | table_macro   | NULL        | NULL    |          |
+| ast_select                | table_macro   | NULL        | NULL    |          |
 | ast_siblings              | table_macro   | NULL        | NULL    |          |
 | ast_source_of             | table_macro   | NULL        | NULL    |          |
 | ast_supported_languages   | table         | NULL        | NULL    |          |
+| ast_type_map              | table         | NULL        | NULL    |          |
+| binds_name                | scalar        | NULL        | NULL    |          |
 | clean_pattern             | macro         | NULL        | NULL    |          |
 | detect_language           | scalar        | NULL        | NULL    |          |
 | extract_wildcard_rules    | macro         | NULL        | NULL    |          |
@@ -242,10 +260,14 @@ LOAD {{ page.extension.name }};
 | is_loop                   | macro         | NULL        | NULL    |          |
 | is_member_access          | macro         | NULL        | NULL    |          |
 | is_module_definition      | macro         | NULL        | NULL    |          |
+| is_name_declaration       | scalar        | NULL        | NULL    |          |
+| is_name_definition        | scalar        | NULL        | NULL    |          |
+| is_name_reference         | scalar        | NULL        | NULL    |          |
 | is_number_literal         | macro         | NULL        | NULL    |          |
 | is_parser_specific        | scalar        | NULL        | NULL    |          |
 | is_pattern_wildcard       | macro         | NULL        | NULL    |          |
 | is_punctuation            | scalar        | NULL        | NULL    |          |
+| is_scope                  | scalar        | NULL        | NULL    |          |
 | is_semantic_type          | scalar        | NULL        | NULL    |          |
 | is_string_literal         | macro         | NULL        | NULL    |          |
 | is_syntax_only            | scalar        | NULL        | NULL    |          |
@@ -256,6 +278,7 @@ LOAD {{ page.extension.name }};
 | is_type_reference         | macro         | NULL        | NULL    |          |
 | is_variable_definition    | macro         | NULL        | NULL    |          |
 | kind_code                 | scalar        | NULL        | NULL    |          |
+| name_role                 | scalar        | NULL        | NULL    |          |
 | parse_ast                 | table         | NULL        | NULL    |          |
 | parse_ast_flat            | table         | NULL        | NULL    |          |
 | parse_ast_hierarchical    | table         | NULL        | NULL    |          |

@@ -45,10 +45,10 @@ docs:
     For more information, visit the [GitHub repository](https://github.com/CogitatorTech/onager)
     or the [Onager documentation](https://cogitatortech.github.io/onager/).
 
-extension_star_count: 127
-extension_star_count_pretty: 127
-extension_download_count: 673
-extension_download_count_pretty: 673
+extension_star_count: 128
+extension_star_count_pretty: 128
+extension_download_count: 708
+extension_download_count_pretty: 708
 image: '/images/community_extensions/social_preview/preview_community_extension_onager.png'
 layout: community_extension_doc
 ---

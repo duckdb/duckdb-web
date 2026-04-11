@@ -29,9 +29,9 @@ docs:
     [README](https://github.com/paleolimbot/duckdb-geography/blob/main/README.md)
     and [function documentation](https://github.com/paleolimbot/duckdb-geography/blob/main/docs/function-reference.md).
 
-extension_star_count: 43
-extension_star_count_pretty: 43
-extension_download_count: 3414
+extension_star_count: 44
+extension_star_count_pretty: 44
+extension_download_count: 3402
 extension_download_count_pretty: 3.4k
 image: '/images/community_extensions/social_preview/preview_community_extension_geography.png'
 layout: community_extension_doc
