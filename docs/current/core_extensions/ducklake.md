@@ -9,8 +9,8 @@ redirect_from:
 title: DuckLake
 ---
 
-> DuckLake has been released in May 2025.
-> Read the [announcement blog post]({% post_url 2025-05-27-ducklake %}).
+> DuckLake 1.0 was been in April 2026.
+> Read the [announcement blog post](https://ducklake.select/2026/04/13/ducklake-10/).
 
 The `ducklake` extension adds support for attaching to databases stored in the [DuckLake format](http://ducklake.select/). 
 The complete documentation of this extension is available at the [DuckLake website](https://ducklake.select/docs/stable/duckdb/introduction).
@@ -186,10 +186,5 @@ Upon success, it returns a table with a single column (`Success`) and 0 rows.
 
 ## Compatibility Matrix
 
-The DuckLake specification and the `ducklake` DuckDB extension are currently released together. This may not be the case in the future, where the specification and the extension may have different release cadences. It can also be the case that the extension needs a DuckDB core update, therefore DuckDB versions are also included in this compatibility matrix.
-
-| DuckDB | DuckLake Extension | DuckLake Spec |
-|--------|--------------------|---------------|
-| 1.4.x  | 0.3                | 0.3           |
-| 1.3.x  | 0.2                | 0.2           |
-| 1.3.x  | 0.1                | 0.1           |
+The DuckLake specification and the `ducklake` DuckDB extension are currently released together.
+See the [Compatibility Matrix](https://ducklake.select/release_calendar#compatibility-matrix).
