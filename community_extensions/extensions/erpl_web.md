@@ -19,10 +19,10 @@ repo:
   github: DataZooDE/erpl-web
   ref: 331e2f04cbca0486f235d4c026374f0f6e467675
 
-extension_star_count: 26
-extension_star_count_pretty: 26
-extension_download_count: 813
-extension_download_count_pretty: 813
+extension_star_count: 27
+extension_star_count_pretty: 27
+extension_download_count: 812
+extension_download_count_pretty: 812
 image: '/images/community_extensions/social_preview/preview_community_extension_erpl_web.png'
 layout: community_extension_doc
 ---
@@ -120,8 +120,7 @@ LOAD {{ page.extension.name }};
 
 <div class="extension_functions_table"></div>
 
-| function_name | function_type | description | comment | examples |
-|---------------|---------------|-------------|---------|----------|
+This extension does not add any function overloads.
 
 ### Added Types
 

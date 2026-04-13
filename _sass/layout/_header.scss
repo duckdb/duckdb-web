@@ -240,7 +240,7 @@ header .headerline {
 			}
 			/* Banner */
 			.banner {
-				border-radius: 10px;
+				border-radius: var(--border-radius-box);
 				background: transparent;
 				padding: 8px;
 				font-size: 12px;
@@ -258,7 +258,8 @@ header .headerline {
 					}
 				}
 
-				&.preview {
+				&.preview,
+				&.nightly {
 					border: 1px solid var(--orange-50, #FF6900);
 
 					span, .icon {

@@ -39,7 +39,9 @@ USE my_ducklake;
 
 ## Tables
 
-In DuckDB, the `ducklake` extension stores the [catalog tables](http://ducklake.select/docs/stable/specification/tables/overview) for a DuckLake named `my_ducklake` in the `__ducklake_metadata_⟨my_ducklake⟩`{:.language-sql .highlight} catalog.
+In DuckDB, the `ducklake` extension stores the [catalog tables](http://ducklake.select/docs/stable/specification/tables/overview) for a DuckLake named
+`my_ducklake`{:.language-sql .highlight} in the
+`__ducklake_metadata_⟨my_ducklake⟩`{:.language-sql .highlight} catalog.
 
 ## Functions
 

@@ -313,6 +313,4 @@ While the introduction of Python UDFs is a major step forward, our work in this 
 
 2. **Types**: Scalar Python UDFs currently support most DuckDB types, with the exception of ENUM types and BIT types. We are working towards expanding the type support to ensure comprehensive functionality.
 
-As always, we are happy to hear your thoughts! Feel free to drop us an [email](mailto:pedro@duckdblabs.com;thijs@duckdblabs.com) if you have any suggestions, comments or questions.
-
-Last but not least, if you encounter any problems using our Python UDFs, please open an issue in [DuckDB's issue tracker](https://github.com/duckdb/duckdb/issues).
+If you encounter any problems using our Python UDFs, please open an issue in [DuckDB's issue tracker](https://github.com/duckdb/duckdb-python/issues).

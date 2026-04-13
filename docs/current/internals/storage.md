@@ -5,6 +5,7 @@ redirect_from:
 - /docs/preview/internals/storage
 - /docs/stable/internals/storage
 - /internals/storage
+- /storage
 title: Storage Versions and Format
 ---
 

@@ -53,6 +53,7 @@ body.documentation {
 
         &.lts,
         &.preview,
+        &.nightly,
         &.outdated {
             .content {
                 display: flex;
@@ -88,7 +89,9 @@ body.documentation {
         }
 
         &.preview span,
-        &.preview .icon {
+        &.preview .icon,
+        &.nightly span,
+        &.nightly .icon {
             color: var(--orange-50, #FF6900);
         }
 

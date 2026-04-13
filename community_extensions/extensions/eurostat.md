@@ -8,7 +8,7 @@ excerpt: |
 extension:
   name: eurostat
   description: Extension that adds support for reading data from EUROSTAT database using SQL.
-  version: 0.1.2
+  version: 0.2.1
   language: C++
   build: cmake
   excluded_platforms: "windows_amd64_mingw"
@@ -18,8 +18,7 @@ extension:
 
 repo:
   github: ahuarte47/duckdb-eurostat
-  andium: 99a4d98217ee92592c6db002137bd4881d8d6192
-  ref: 4ba23f836392ab3b0fce1d5e4b08f04a118ee426
+  ref: 097f93e5229415d7664a383ae0fb03e914ab8492
 
 docs:
   hello_world: |
@@ -150,8 +149,8 @@ docs:
 
 extension_star_count: 30
 extension_star_count_pretty: 30
-extension_download_count: 815
-extension_download_count_pretty: 815
+extension_download_count: 798
+extension_download_count_pretty: 798
 image: '/images/community_extensions/social_preview/preview_community_extension_eurostat.png'
 layout: community_extension_doc
 ---
@@ -189,21 +188,18 @@ LOAD {{ page.extension.name }};
 
 <div class="extension_functions_table"></div>
 
-| function_name | function_type | description | comment | examples |
-|---------------|---------------|-------------|---------|----------|
+This extension does not add any function overloads.
 
 ### Added Types
 
 <div class="extension_types_table"></div>
 
-| type_name | type_size | logical_type | type_category | internal |
-|-----------|----------:|--------------|---------------|----------|
+This extension does not add any types.
 
 ### Added Settings
 
 <div class="extension_settings_table"></div>
 
-| name | description | input_type | scope | aliases |
-|------|-------------|------------|-------|---------|
+This extension does not add any settings.
 
 

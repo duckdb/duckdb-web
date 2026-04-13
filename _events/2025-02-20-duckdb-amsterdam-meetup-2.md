@@ -33,7 +33,3 @@ Attendance is free. Please RSVP on [meetup.com](https://www.meetup.com/duckdb/ev
 
 The event will be held at Xebia at Wibautstraat 200, 1091 GS Amsterdam ([Apple Maps](https://maps.apple.com/?address=Wibautstraat%20200,%201091%20GS%20Amsterdam,%20Netherlands&auid=2043309577279080291&ll=52.352271,4.912916&lsp=9902&q=Xebia%20Netherlands%20BV&t=m), [Google Maps](https://maps.app.goo.gl/oA4HEGG6E21yXXKi6)).
 The catering is provided by Xebia.
-
-## Inquiries
-
-Please contact Kelly de Smit at [kelly@duckdblabs.com](mailto:kelly@duckdblabs.com) if you have any questions.

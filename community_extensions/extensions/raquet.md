@@ -8,7 +8,7 @@ excerpt: |
 extension:
   name: raquet
   description: "Raster analytics on Raquet files with QUADBIN spatial indexing, raster ingestion, and PostGIS-style functions"
-  version: 0.2.0
+  version: 0.2.2
   language: C++
   build: cmake
   license: Apache-2.0
@@ -18,7 +18,7 @@ extension:
 
 repo:
   github: jatorre/duckdb-raquet
-  ref: c5ce3e292b867621da67a3f50ca0a0e4213fd4ff
+  ref: e2a2193565a45c329be5d066556ee0aaeae77de4
 
 docs:
   hello_world: |
@@ -59,10 +59,10 @@ docs:
     - [Documentation](https://github.com/jatorre/duckdb-raquet#readme)
     - [Performance Benchmarks](https://github.com/jatorre/duckdb-raquet/blob/main/docs/PERFORMANCE_COMPARISON.md)
 
-extension_star_count: 5
-extension_star_count_pretty: 5
-extension_download_count: 667
-extension_download_count_pretty: 667
+extension_star_count: 9
+extension_star_count_pretty: 9
+extension_download_count: 678
+extension_download_count_pretty: 678
 image: '/images/community_extensions/social_preview/preview_community_extension_raquet.png'
 layout: community_extension_doc
 ---
@@ -135,21 +135,18 @@ LOAD {{ page.extension.name }};
 
 <div class="extension_functions_table"></div>
 
-| function_name | function_type | description | comment | examples |
-|---------------|---------------|-------------|---------|----------|
+This extension does not add any function overloads.
 
 ### Added Types
 
 <div class="extension_types_table"></div>
 
-| type_name | type_size | logical_type | type_category | internal |
-|-----------|----------:|--------------|---------------|----------|
+This extension does not add any types.
 
 ### Added Settings
 
 <div class="extension_settings_table"></div>
 
-| name | description | input_type | scope | aliases |
-|------|-------------|------------|-------|---------|
+This extension does not add any settings.
 
 

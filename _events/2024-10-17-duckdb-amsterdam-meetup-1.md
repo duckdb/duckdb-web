@@ -35,7 +35,3 @@ Drink and snacks are sponsored by [DuckDB Labs](https://duckdblabs.com/).
 ## Registration Process
 
 Attendance is free. Please RSVP on [meetup.com](https://www.meetup.com/duckdb/events/303482464/).
-
-## Inquiries
-
-Please contact Gábor Szárnyas at [gabor@duckdblabs.com](mailto:gabor@duckdblabs.com) if you have any questions.

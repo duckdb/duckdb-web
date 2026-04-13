@@ -20,6 +20,7 @@ title: Spatial Functions
 | [`ST_Area_Spheroid`](#st_area_spheroid) | Returns the area of a geometry in meters, using an ellipsoidal model of the earth |
 | [`ST_AsGeoJSON`](#st_asgeojson) | Returns the geometry as a GeoJSON fragment |
 | [`ST_AsHEXWKB`](#st_ashexwkb) | Returns the geometry as a HEXWKB string |
+| [`ST_AsMVTGeom`](#st_asmvtgeom) | Transform and clip geometry to a tile boundary |
 | [`ST_AsSVG`](#st_assvg) | Convert the geometry into a SVG fragment or path |
 | [`ST_AsText`](#st_astext) | Returns the geometry as a WKT string |
 | [`ST_AsWKB`](#st_aswkb) | Returns the geometry as a WKB (Well-Known-Binary) blob |
@@ -147,6 +148,7 @@ title: Spatial Functions
 
 | Function | Summary |
 | --- | --- |
+| [`ST_AsMVT`](#st_asmvt) | Make a Mapbox Vector Tile from a set of geometries and properties |
 | [`ST_CoverageInvalidEdges_Agg`](#st_coverageinvalidedges_agg) | Returns the invalid edges of a coverage geometry |
 | [`ST_CoverageSimplify_Agg`](#st_coveragesimplify_agg) | Simplifies a set of geometries while maintaining coverage |
 | [`ST_CoverageUnion_Agg`](#st_coverageunion_agg) | Unions a set of geometries while maintaining coverage |
@@ -404,6 +406,26 @@ SELECT ST_AsHexWKB('POLYGON((0 0, 0 1, 1 1, 1 0, 0 0))'::geometry);
 ----
 01030000000100000005000000000000000000000000000...
 ```
+
+----
+
+### ST_AsMVTGeom
+
+
+#### Signatures
+
+```sql
+GEOMETRY ST_AsMVTGeom (geom GEOMETRY, bounds BOX_2D, extent BIGINT, buffer BIGINT, clip_geom BOOLEAN)
+GEOMETRY ST_AsMVTGeom (geom GEOMETRY, bounds BOX_2D, extent BIGINT, buffer BIGINT)
+GEOMETRY ST_AsMVTGeom (geom GEOMETRY, bounds BOX_2D, extent BIGINT)
+GEOMETRY ST_AsMVTGeom (geom GEOMETRY, bounds BOX_2D)
+```
+
+#### Description
+
+Transform and clip geometry to a tile boundary
+
+See "ST_AsMVT" for more details
 
 ----
 
@@ -2917,6 +2939,66 @@ SELECT ST_ZMin(ST_Point(1, 2, 3))
 ----
 
 ## Aggregate Functions
+
+### ST_AsMVT
+
+
+#### Signatures
+
+```sql
+BLOB ST_AsMVT (col0 ANY)
+BLOB ST_AsMVT (col0 ANY, col1 VARCHAR)
+BLOB ST_AsMVT (col0 ANY, col1 VARCHAR, col2 INTEGER)
+BLOB ST_AsMVT (col0 ANY, col1 VARCHAR, col2 INTEGER, col3 VARCHAR)
+BLOB ST_AsMVT (col0 ANY, col1 VARCHAR, col2 INTEGER, col3 VARCHAR, col4 VARCHAR)
+```
+
+#### Description
+
+Make a Mapbox Vector Tile from a set of geometries and properties
+The function takes as input a row type (STRUCT) containing a geometry column and any number of property columns.
+It returns a single binary BLOB containing the Mapbox Vector Tile.
+
+The function has the following signature:
+
+`ST_AsMVT(row STRUCT, layer_name VARCHAR DEFAULT 'layer', extent INTEGER DEFAULT 4096, geom_column_name VARCHAR DEFAULT NULL, feature_id_column_name VARCHAR DEFAULT NULL) -> BLOB`
+
+- The first argument is a struct containing the geometry and properties.
+- The second argument is the name of the layer in the vector tile. This argument is optional and defaults to 'layer'.
+- The third argument is the extent of the tile. This argument is optional and defaults to 4096.
+- The fourth argument is the name of the geometry column in the input row. This argument is optional. If not provided, the first geometry column in the input row will be used. If multiple geometry columns are present, an error will be raised.
+- The fifth argument is the name of the feature id column in the input row. This argument is optional. If provided, the values in this column will be used as feature ids in the vector tile. The column must be of type INTEGER or BIGINT. If set to negative or NULL, a feature id will not be assigned to the corresponding feature.
+
+The input struct must contain exactly one geometry column of type GEOMETRY. It can contain any number of property columns of types VARCHAR, FLOAT, DOUBLE, INTEGER, BIGINT, or BOOLEAN.
+
+Example:
+```sql
+SELECT ST_AsMVT({'geom': geom, 'id': id, 'name': name}, 'cities', 4096, 'geom', 'id') AS tile
+FROM cities;
+ ```
+
+This example creates a vector tile named 'cities' with an extent of 4096 from the 'cities' table, using 'geom' as the geometry column and 'id' as the feature id column.
+
+However, you probably want to use the ST_AsMVTGeom function to first transform and clip your geometries to the tile extent.
+The following example assumes the geometry is in WebMercator ("EPSG:3857") coordinates.
+Replace `⟨z⟩`{:.language-sql .highlight}, `⟨x⟩`{:.language-sql .highlight}, and `⟨y⟩`{:.language-sql .highlight} with the appropriate tile coordinates, `⟨your_table⟩`{:.language-sql .highlight} with your table name, and `⟨tile_path⟩` with the path to write the tile to.
+
+```sql
+COPY (
+    SELECT ST_AsMVT({
+        "geometry": ST_AsMVTGeom(
+            geometry,
+            ST_Extent(ST_TileEnvelope(⟨z⟩, ⟨x⟩, ⟨y⟩)),
+            4096,
+            256,
+            false
+        )
+    })
+    FROM ⟨your_table⟩ WHERE ST_Intersects(geometry, ST_TileEnvelope(⟨z⟩, ⟨x⟩, ⟨y⟩))
+) to ⟨tile_path⟩ (FORMAT 'BLOB');
+```
+
+----
 
 ### ST_CoverageInvalidEdges_Agg
 

@@ -188,4 +188,4 @@ We hope you enjoyed this blog post. If you have an interesting DuckDB setup, don
 
 > Do you have a cool DuckDB setup?
 > We would like to hear about it!
-> Please post about it on social media or email it to <gabor@duckdblabs.com>.
+> Please post about it on social media or email it to [Gábor Szárnyas](mailto:gabor@duckdblabs.com).

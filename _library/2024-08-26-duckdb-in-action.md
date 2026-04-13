@@ -6,6 +6,7 @@ thumb: "/images/library/thumbs/duckdb-in-action.svg"
 image: "/images/library/thumbs/duckdb-in-action.png"
 tags: ["Book"]
 category: community
+highlighted: true
 excerpt: ""
 pill: "DuckDB in Action"
 ---

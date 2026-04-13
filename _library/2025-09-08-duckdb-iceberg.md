@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Making Iceberg Easy with DuckDB-Iceberg"
-author: "Tom Ebergen (DuckDB Labs)"
+author: "Tom Ebergen"
 thumb: "/images/library/thumbs/2025-09-08-making-iceberg-easy.jpg"
 image: "/images/library/thumbs/2025-09-08-making-iceberg-easy.jpg"
 tags: ["Talk"]

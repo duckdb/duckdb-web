@@ -1,58 +1,75 @@
-let searchDataLoaded = false; 
+let searchDataLoaded = false;
 
 const tokenize = (string) => string.split(/[\s-.]+/);
 
-// Shared options for MiniSearch instances
 const searchOptions = {
 	fields: ['title', 'text', 'category', 'blurb'],
-	storeFields: ['title', 'text', 'category', 'url', 'blurb', 'type'],
+	storeFields: ['title', 'category', 'url', 'blurb', 'type'],
 	tokenize,
 	searchOptions: { tokenize }
 };
 
-const predictorOptions = {
-	fields: ['title', 'category', 'blurb'],
-	storeFields: ['title', 'category', 'blurb', 'type'],
-	tokenize,
-	searchOptions: { tokenize }
-};
+const CACHE_KEY = 'duckdb_search_index';
+const CACHE_VERSION_KEY = 'duckdb_search_version';
+
+function loadFromCache() {
+	try {
+		var version = localStorage.getItem(CACHE_VERSION_KEY);
+		var data = localStorage.getItem(CACHE_KEY);
+		if (version && data) {
+			return { version: version, index: JSON.parse(data) };
+		}
+	} catch (e) { /* localStorage unavailable or corrupted */ }
+	return null;
+}
+
+function saveToCache(version, indexObj) {
+	try {
+		localStorage.setItem(CACHE_VERSION_KEY, version);
+		localStorage.setItem(CACHE_KEY, JSON.stringify(indexObj));
+	} catch (e) { /* quota exceeded, ignore */ }
+}
+
+function applyIndex(indexObj) {
+	miniSearch = MiniSearch.loadJS(indexObj, searchOptions);
+	searchDataLoaded = true;
+	if (text_div.value.length > 0) {
+		perform_search(text_div.value);
+	}
+}
 
 function loadSearchData() {
-	if (searchDataLoaded) return; // skip if already loaded
+	if (searchDataLoaded) return;
+	searchDataLoaded = true; // prevent concurrent loads
 
-	const xhr = new XMLHttpRequest();
-	xhr.open('GET', '/data/search_data.json');
-	xhr.onreadystatechange = function(event) {
-		if (this.readyState === 4) {
-			const { data } = JSON.parse(this.responseText);
+	var cached = loadFromCache();
+	if (cached) {
+		applyIndex(cached.index);
 
-			// Start Web Worker
-			const worker = new Worker('/js/search-worker.js');
-			worker.postMessage({ data });
-
-			worker.onmessage = function(e) {
-				const { miniSearchIndex, miniPredictorIndex } = e.data;
-
-				miniSearch = MiniSearch.loadJS(miniSearchIndex, searchOptions);
-				miniPredictor = MiniSearch.loadJS(miniPredictorIndex, predictorOptions);
-
-				searchDataLoaded = true;
-				worker.terminate();
-
-				console.log("search_data.json successfully loaded and indexed via Web Worker.");
-
-				if (text_div.value.length > 0) {
-					perform_search(text_div.value);
+		// Revalidate in background
+		fetch('/data/search_index.json')
+			.then(function (r) { return r.json(); })
+			.then(function (json) {
+				if (json.version !== cached.version) {
+					applyIndex(json.index);
+					saveToCache(json.version, json.index);
 				}
-			};
+			})
+			.catch(function () { /* offline / fetch failed, cached index is fine */ });
+		return;
+	}
 
-			worker.onerror = function(error) {
-				console.error("Search worker error:", error);
-				worker.terminate();
-			};
-		}
-	};
-	xhr.send();
+	// No cache — fetch and load
+	fetch('/data/search_index.json')
+		.then(function (r) { return r.json(); })
+		.then(function (json) {
+			applyIndex(json.index);
+			saveToCache(json.version, json.index);
+		})
+		.catch(function (err) {
+			searchDataLoaded = false;
+			console.error('Failed to load search index:', err);
+		});
 }
 
 // Event listeners to load search data only on interaction
@@ -60,9 +77,7 @@ const text_div = document.getElementById("q");
 text_div.addEventListener('focus', loadSearchData);
 text_div.addEventListener('input', loadSearchData);
 
-// Create initial search engine instances
 let miniSearch = new MiniSearch(searchOptions);
-let miniPredictor = new MiniSearch(predictorOptions);
 
 // read GET parameters (https://stackoverflow.com/questions/12049620/how-to-get-get-variables-value-in-javascript)
 // lord knows why this needs a regex and hasn't been part of the JS standard since day 1

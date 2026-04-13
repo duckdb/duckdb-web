@@ -138,6 +138,59 @@ $(document).ready(function(){
 			}
 		});
 
+		// --- URL parameter support ---
+		function readFiltersFromURL() {
+			var params = new URLSearchParams(window.location.search);
+			params.forEach(function(value, key) {
+				if (key === 'q') {
+					$('#search-input').val(value);
+				} else if (filterState.hasOwnProperty(key)) {
+					// Try matching a filter button directly, then with a leading dot
+					var matchedValue = null;
+					var $sampleGroup = $('.filter-group[data-filter-key="' + key + '"]').not('.filter-group-mobile-only').first();
+					var $sampleBtn = $sampleGroup.find('.filter-btn[data-filter="' + value + '"]');
+					if ($sampleBtn.length) {
+						matchedValue = value;
+					} else {
+						$sampleBtn = $sampleGroup.find('.filter-btn[data-filter=".' + value + '"]');
+						if ($sampleBtn.length) {
+							matchedValue = '.' + value;
+						}
+					}
+					if (matchedValue) {
+						filterState[key] = matchedValue;
+						$('.filter-group[data-filter-key="' + key + '"]').each(function() {
+							var $filtertags = $(this).find('.filtertags');
+							$filtertags.find('.filter-btn').removeClass('active');
+							var $matchingBtn = $filtertags.find('.filter-btn[data-filter="' + matchedValue + '"]');
+							if ($matchingBtn.length) {
+								$matchingBtn.addClass('active');
+								if ($matchingBtn.is(':visible')) {
+									updateFilterHighlight($matchingBtn);
+								}
+							}
+						});
+					}
+				}
+			});
+		}
+
+		function writeFiltersToURL() {
+			var params = new URLSearchParams();
+			for (var key in filterState) {
+				if (filterState[key] !== '*') {
+					// Strip leading dot from class-based selectors for cleaner URLs
+					params.set(key, filterState[key].replace(/^\./, ''));
+				}
+			}
+			var searchValue = $('#search-input').val();
+			if (searchValue) {
+				params.set('q', searchValue);
+			}
+			var newURL = window.location.pathname + (params.toString() ? '?' + params.toString() : '');
+			history.replaceState(null, '', newURL);
+		}
+
 		function applyFilters() {
 			var searchValue = $('#search-input').val().toLowerCase();
 
@@ -207,11 +260,13 @@ $(document).ready(function(){
 			syncFilterGroups($btn);
 
 			applyFilters();
+			writeFiltersToURL();
 		});
 
 		// --- Search input ---
 		$('#search-input').on('input', function() {
 			applyFilters();
+			writeFiltersToURL();
 		});
 
 		// --- Mobile filter modal ---
@@ -251,6 +306,9 @@ $(document).ready(function(){
 
 		$filterToggle.on('click', toggleFilterModal);
 		$filterOverlay.on('click', closeFilterModal);
+
+		readFiltersFromURL();
+		applyFilters();
 	}
 	
 
@@ -438,7 +496,7 @@ $('.supporterboard a.externallink').removeClass('externallink').addClass('nobg')
 $('a').filter(function() {
 	var href = $(this).attr('href');
 	if (!href) return false;
-	return /\.(pdf|zip|tar\.gz|csv|parquet)(\?.*)?$/i.test(href) && $(this).find('img').length === 0 && !$(this).hasClass('button');
+	return /\.(pdf|zip|tar\.gz|csv|parquet|mp3)(\?.*)?$/i.test(href) && $(this).find('img').length === 0 && !$(this).hasClass('button');
 }).addClass("downloadlink").removeClass("externallink");
 
 $('.headercontent a, .mainlinks a, .box-link a, .footercontent a, .highlight a, .button, .ecosystem-diagram a').removeClass('downloadlink');

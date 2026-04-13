@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "DuckLake – The SQL-Powered Lakehouse Format for the Rest of Us"
-author: "Hannes Mühleisen (DuckDB Labs)"
+author: "Hannes Mühleisen"
 thumb: "/images/library/thumbs/2025-06-19-systems-distributed.jpg"
 image: "/images/library/thumbs/2025-06-19-systems-distributed.jpg"
 tags: ["Talk"]

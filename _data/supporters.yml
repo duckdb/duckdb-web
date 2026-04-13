@@ -1,4 +1,8 @@
 gold:
+  - name: AWS
+    url: https://aws.amazon.com/
+    logoimg: aws.svg
+
   - name: MotherDuck
     url: https://motherduck.com
     logoimg: motherduck.svg
@@ -67,6 +71,10 @@ silver:
   - name: Altertable
     url: https://altertable.ai/
     logoimg: altertable.svg
+
+  - name: PostHog
+    url: https://posthog.com/
+    logoimg: posthog.svg
 
 oss:
   - name: Bloomberg

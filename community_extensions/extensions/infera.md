@@ -19,7 +19,7 @@ extension:
 
 repo:
   github: CogitatorTech/infera
-  ref: 20da1e4bd70995dc22b54fe7102a7715224298d9
+  ref: a402abc2d324b1ddacdbc561cff591faacc288af
 
 docs:
   hello_world: |
@@ -48,10 +48,10 @@ docs:
     
     For more information, like API references and usage examples, visit the project's [GitHub repository](https://github.com/CogitatorTech/infera).
 
-extension_star_count: 128
-extension_star_count_pretty: 128
-extension_download_count: 795
-extension_download_count_pretty: 795
+extension_star_count: 130
+extension_star_count_pretty: 130
+extension_download_count: 674
+extension_download_count_pretty: 674
 image: '/images/community_extensions/social_preview/preview_community_extension_infera.png'
 layout: community_extension_doc
 ---
@@ -97,21 +97,18 @@ LOAD {{ page.extension.name }};
 
 <div class="extension_functions_table"></div>
 
-| function_name | function_type | description | comment | examples |
-|---------------|---------------|-------------|---------|----------|
+This extension does not add any function overloads.
 
 ### Added Types
 
 <div class="extension_types_table"></div>
 
-| type_name | type_size | logical_type | type_category | internal |
-|-----------|----------:|--------------|---------------|----------|
+This extension does not add any types.
 
 ### Added Settings
 
 <div class="extension_settings_table"></div>
 
-| name | description | input_type | scope | aliases |
-|------|-------------|------------|-------|---------|
+This extension does not add any settings.
 
 

@@ -8,7 +8,7 @@ excerpt: |
 extension:
   name: ducktinycc
   description: DuckDB C extension for in-process JIT compiled C UDFs via TinyCC — self-contained, no external runtime required
-  version: 0.0.4
+  version: 0.1.0
   language: C
   build: cmake
   license: MIT
@@ -20,7 +20,7 @@ extension:
 
 repo:
   github: sounkou-bioinfo/DuckTinyCC
-  ref: c5160974faa374c6de40f8ea95ba01fb6d3390fc
+  ref: 11c0d30bf358b0dfbe3ac7b06f22e3c326c8284d
 
 docs:
   hello_world: |
@@ -116,12 +116,12 @@ docs:
 
     Project details and examples: https://github.com/sounkou-bioinfo/DuckTinyCC
 
-    Community package excludes WASM and Windows targets.
+    Community package excludes WASM targets.
 
 extension_star_count: 2
 extension_star_count_pretty: 2
-extension_download_count: 569
-extension_download_count_pretty: 569
+extension_download_count: 791
+extension_download_count_pretty: 791
 image: '/images/community_extensions/social_preview/preview_community_extension_ducktinycc.png'
 layout: community_extension_doc
 ---
@@ -184,21 +184,18 @@ LOAD {{ page.extension.name }};
 
 <div class="extension_functions_table"></div>
 
-| function_name | function_type | description | comment | examples |
-|---------------|---------------|-------------|---------|----------|
+This extension does not add any function overloads.
 
 ### Added Types
 
 <div class="extension_types_table"></div>
 
-| type_name | type_size | logical_type | type_category | internal |
-|-----------|----------:|--------------|---------------|----------|
+This extension does not add any types.
 
 ### Added Settings
 
 <div class="extension_settings_table"></div>
 
-| name | description | input_type | scope | aliases |
-|------|-------------|------------|-------|---------|
+This extension does not add any settings.
 
 

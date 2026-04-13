@@ -1,19 +1,19 @@
 ---
 layout: post
-title: "Building DuckDB-Iceberg: Exploring the Iceberg Ecosystem"
-author: "Tom Ebergen (DuckDB Labs)"
+title: "Exploring the Iceberg Ecosystem with DuckDB-Iceberg"
+author: "Tom Ebergen"
 tags: ["Talk"]
 thirdparty: false
+highlighted: false
 excerpt: ""
 pill: "Iceberg Summit 2026"
 ---
-
-## Upcoming Talk
 
 |-------|-------|
 | **Date** | {{ page.date | date: "%Y-%m-%d" }} |
 | **Event** | [Iceberg Summit 2026](https://events.bizzabo.com/796372) |
 | **Speaker** | Tom Ebergen (DuckDB Labs) |
+| **Slide deck** | [Download](http://blobs.duckdb.org/slides/tom-ebergen-exploring-the-iceberg-ecosystem-with-duckdb-iceberg-iceberg-summit.pdf) |
 
 ## Abstract
 

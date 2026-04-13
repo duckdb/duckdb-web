@@ -13,6 +13,7 @@ toc-depth: 2
 top-level-division: part
 variables:
   book: true
+  classoption: openany
   numbersections: false
   fontsize: 9pt
   titlepage: true
