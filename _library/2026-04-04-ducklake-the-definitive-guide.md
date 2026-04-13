@@ -11,7 +11,7 @@ excerpt: ""
 pill: "DuckLake: The Definitive Guide"
 ---
 
-<img src="/images/library/ducklake-the-definitive-guide.png" alt="DuckLake: The Definitive Guide – Book Cover" width="500" />
+<img src="{% link images/library/ducklake-the-definitive-guide.png %}" alt="DuckLake: The Definitive Guide – Book Cover" width="500" />
 
 |-------|-------|
 | **O'Reilly** | [DuckLake: The Definitive Guide](https://www.oreilly.com/library/view/ducklake-the-definitive/0642572317607/) |
