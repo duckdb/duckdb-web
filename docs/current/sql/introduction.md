@@ -16,6 +16,13 @@ This tutorial is adapted from the [PostgreSQL tutorial](https://www.postgresql.o
 
 In the examples that follow, we assume that you have installed the DuckDB Command Line Interface (CLI) shell. See the [installation page]({% link install/index.html %}?environment=cli) for information on how to install the CLI.
 
+> Tip If you are looking for a comprehensive to SQL introduction,
+> check the slide decks of the [“Tabular Database Systems” course]({% link _library/2026-03-19-tabular-database-systems.md %}):
+>
+> * [The Structured Query Language (SQL)](https://github.com/DBatUTuebingen/TaDa/blob/main/slides/TaDa-06.pdf)
+> * [More SQL (Subqueries + Embedded SQL)](https://github.com/DBatUTuebingen/TaDa/blob/main/slides/TaDa-07.pdf)
+> * [SQL: Grouping + Aggregation and Functional Dependencies](https://github.com/DBatUTuebingen/TaDa/blob/main/slides/TaDa-08.pdf)
+
 ## Concepts
 
 DuckDB is a relational database management system (RDBMS). That means it is a system for managing data stored in relations. A relation is essentially a mathematical term for a table.

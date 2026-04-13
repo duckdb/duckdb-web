@@ -7,9 +7,11 @@ thirdparty: true
 highlighted: true
 excerpt: ""
 pill: "Lecture Notes"
+redirect_from:
+- /didi
 ---
 
-A DuckDB-based course on the Design and Implementation of Database System Internals.
+A DuckDB-based course on the Design and Implementation of Database System Internals (“DiDi”).
 
 The slides and auxiliary material are available in the [GitHub repository](https://github.com/DBatUTuebingen/DiDi).
 

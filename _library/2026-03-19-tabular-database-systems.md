@@ -7,6 +7,8 @@ thirdparty: true
 highlighted: true
 excerpt: ""
 pill: "Lecture Notes"
+redirect_from:
+- /tada
 ---
 
 A DuckDB-based course on the fundamentals of relational database management systems and SQL.
@@ -16,7 +18,7 @@ The slides and auxiliary material are available in the [GitHub repository](https
 ## Overview
 
 This lecture material has been developed by [Torsten Grust](https://db.cs.uni-tuebingen.de/grust/)
-to support a 15-week course (coined *TaDa*) for undergraduate students of
+to support a 15-week course (coined “TaDa”) for undergraduate students of
 the [Database Research Group](https://db.cs.uni-tuebingen.de) at
 University of Tübingen (Germany).  You are welcome to use this
 material in any way you may see fit: skim it, study it, send suggestions
