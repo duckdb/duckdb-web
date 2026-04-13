@@ -18,4 +18,4 @@ redirect_from:
 | **Event** | [Compass AI & Data Summit](https://aidata.compasstechsummit.com/) |
 | **Speaker** | [Gábor Szárnyas (DuckDB Labs)](https://szarnyasg.org/) |
 | **Slide deck** | [Download](https://blobs.duckdb.org/slides/compass-ai-data-summit-duckdb-unplugged-gabor-szarnyas.pdf) |
-| **YouTube** | _coming later!_ |
+| **YouTube** | [DuckDB: Big Data Unplugged](https://www.youtube.com/watch?v=p9sDDO5P32c) |
