@@ -8,7 +8,7 @@ excerpt: |
 extension:
   name: maxmind
   description: Read MaxMind databases (GeoLite, GeoIP, and more)
-  version: 0.8.0
+  version: 0.9.0
   language: Zig
   build: cmake
   license: ISC
@@ -18,7 +18,7 @@ extension:
 
 repo:
   github: marselester/duckdb-maxmind
-  ref: fb1ac77c034c9e8d1fae5840439f10ce8da20282
+  ref: 2b088020f0e9afb3f6f108bc48c7a83fc8817a2c
 
 docs:
   hello_world: |
@@ -70,8 +70,8 @@ docs:
 
 extension_star_count: 4
 extension_star_count_pretty: 4
-extension_download_count: 869
-extension_download_count_pretty: 869
+extension_download_count: 860
+extension_download_count_pretty: 860
 image: '/images/community_extensions/social_preview/preview_community_extension_maxmind.png'
 layout: community_extension_doc
 ---

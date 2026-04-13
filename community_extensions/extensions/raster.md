@@ -104,10 +104,10 @@ docs:
     - Compression formats for the data band BLOBs (`GZip`, `ZSTD`?).
     - Integration with DuckDB File System.
 
-extension_star_count: 20
-extension_star_count_pretty: 20
-extension_download_count: 158
-extension_download_count_pretty: 158
+extension_star_count: 21
+extension_star_count_pretty: 21
+extension_download_count: 265
+extension_download_count_pretty: 265
 image: '/images/community_extensions/social_preview/preview_community_extension_raster.png'
 layout: community_extension_doc
 ---
