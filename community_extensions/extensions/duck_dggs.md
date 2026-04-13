@@ -8,7 +8,7 @@ excerpt: |
 extension:
   name: duck_dggs
   description: DuckDB extension for discrete global grid systems (DGGS) powered by DGGRID v8, Built against DuckDB v1.5.1.
-  version: 0.1.3
+  version: 0.1.4
   language: C++
   build: cmake
   license: MIT
@@ -17,7 +17,7 @@ extension:
 
 repo:
   github: am2222/duckdb-dggs
-  ref: 5fb9f05c2a285f6c0129ce9271beba314f2a182d
+  ref: 76879e82509152bac193a1451c96f97561e36a21
 
 docs:
   hello_world: |
@@ -35,15 +35,36 @@ docs:
     -- Cell ID → cell boundary polygon (requires the spatial extension)
     LOAD spatial;
     SELECT seqnum_to_boundary(2380, 5);
-    -- → POLYGON ((0.095 0.667, -0.922 1.336, -1.916 0.669, -1.916 -0.669, -0.922 -1.336, 0.095 -0.667, 0.095 0.667))
+    -- → POLYGON ((...))
+
+    -- Grid statistics
+    SELECT dggs_n_cells(5);
+    -- → 10242
+
+    -- Neighbors, parent, children
+    SELECT seqnum_neighbors(2380::UBIGINT, 5);
+    -- → [2412, 2413, 2381, 2348, 2347, 2379]
+
+    SELECT seqnum_parent(2380::UBIGINT, 5);
+    -- → 599
+
+    SELECT seqnum_children(599::UBIGINT, 4);
+    -- → [2380, 2412, 2413, 2381, 2348, 2347, 2379]
 
     -- Use a custom grid (ISEA3H — aperture 3 hexagons)
     SELECT geo_to_seqnum('POINT(0.0 0.0)'::GEOMETRY, 5,
         dggs_params('ISEA', 3, 'HEXAGON', 0.0, 58.28252559, 11.25));
     -- → 572
+
+    -- Mixed-aperture sequence grid
+    SELECT dggs_n_cells(3,
+        dggs_params('ISEA', 3, 'HEXAGON', 0.0, 58.28252559, 11.25, true, '3434'));
+    -- → 362
   extended_description: |
     `duck_dggs` transforms geographic coordinates (as `GEOMETRY` POINT) to and from DGGS cell
     identifiers across multiple coordinate reference frames, powered by [DGGRID v8](https://github.com/sahrk/DGGRID).
+
+    Full documentation: **https://am2222.github.io/duckdb-dggs/**
 
     All transform functions accept a `GEOMETRY` POINT (`x` = longitude°, `y` = latitude°) and a
     resolution integer. Every function has a second overload that accepts an explicit `dggs_params`
@@ -55,7 +76,11 @@ docs:
     Pass a `dggs_params` struct as the last argument to use a different grid:
 
     ```sql
+    -- Standard (6 args)
     dggs_params(projection, aperture, topology, azimuth_deg, pole_lat_deg, pole_lon_deg)
+    -- With aperture sequence (8 args)
+    dggs_params(projection, aperture, topology, azimuth_deg, pole_lat_deg, pole_lon_deg,
+                is_aperture_sequence, aperture_sequence)
     ```
 
     Common presets:
@@ -67,23 +92,46 @@ docs:
     | ISEA4T (triangles) | `dggs_params('ISEA', 4, 'TRIANGLE', 0.0, 58.28252559, 11.25)` |
     | ISEA4D (diamonds) | `dggs_params('ISEA', 4, 'DIAMOND', 0.0, 58.28252559, 11.25)` |
     | FULLER4H | `dggs_params('FULLER', 4, 'HEXAGON', 0.0, 58.28252559, 11.25)` |
+    | Mixed aperture | `dggs_params('ISEA', 3, 'HEXAGON', 0.0, 58.28252559, 11.25, true, '3437')` |
 
     **Utility functions:**
 
     - `duck_dggs_version()` — extension version string
-    - `dggs_params(projection, aperture, topology, azimuth_deg, pole_lat_deg, pole_lon_deg)` — build a grid configuration
+    - `dggs_params(...)` — build a grid configuration (6-arg or 8-arg with aperture sequence)
 
-    **Transform functions** (each has a `res` and optional `params` overload):
+    **Grid statistics** (each has `res` and optional `params` overload):
 
-    - From geo: `geo_to_seqnum`, `geo_to_geo`, `geo_to_plane`, `geo_to_projtri`, `geo_to_q2dd`, `geo_to_q2di`
-    - From seqnum: `seqnum_to_geo`, `seqnum_to_boundary`, `seqnum_to_seqnum`, `seqnum_to_plane`, `seqnum_to_projtri`, `seqnum_to_q2dd`, `seqnum_to_q2di`    - From Q2DI: `q2di_to_seqnum`, `q2di_to_geo`, `q2di_to_plane`, `q2di_to_projtri`, `q2di_to_q2dd`, `q2di_to_q2di`
+    - `dggs_n_cells` — total cell count at a resolution
+    - `dggs_cell_area_km` — average cell area in km²
+    - `dggs_cell_dist_km` — average cell spacing in km
+    - `dggs_cls_km` — characteristic length scale in km
+    - `dggs_res_info` — all stats as a struct
+
+    **Transform functions** (each has `res` and optional `params` overload):
+
+    - From GEO: `geo_to_seqnum`, `geo_to_geo`, `geo_to_plane`, `geo_to_projtri`, `geo_to_q2dd`, `geo_to_q2di`
+    - From SEQNUM: `seqnum_to_geo`, `seqnum_to_boundary`, `seqnum_to_seqnum`, `seqnum_to_plane`, `seqnum_to_projtri`, `seqnum_to_q2dd`, `seqnum_to_q2di`
+    - From Q2DI: `q2di_to_seqnum`, `q2di_to_geo`, `q2di_to_plane`, `q2di_to_projtri`, `q2di_to_q2dd`, `q2di_to_q2di`
     - From Q2DD: `q2dd_to_seqnum`, `q2dd_to_geo`, `q2dd_to_plane`, `q2dd_to_projtri`, `q2dd_to_q2dd`, `q2dd_to_q2di`
-    - From projtri: `projtri_to_seqnum`, `projtri_to_geo`, `projtri_to_plane`, `projtri_to_projtri`, `projtri_to_q2dd`, `projtri_to_q2di`
+    - From PROJTRI: `projtri_to_seqnum`, `projtri_to_geo`, `projtri_to_plane`, `projtri_to_projtri`, `projtri_to_q2dd`, `projtri_to_q2di`
 
+    **Neighbor & hierarchy functions:**
+
+    - `seqnum_neighbors` — topologically adjacent cells
+    - `seqnum_parent` — parent cell at res-1
+    - `seqnum_all_parents` — all touching parent cells at res-1
+    - `seqnum_children` — child cells at res+1
+
+    **Hierarchical index conversions:**
+
+    - `seqnum_to_zorder` / `zorder_to_seqnum` — Z-order (Morton code) indexing
+    - `seqnum_to_z3` / `z3_to_seqnum` — Z3 index (aperture 3 only)
+    - `seqnum_to_z7` / `z7_to_seqnum` — Z7 index (aperture 7 only)
+    - `seqnum_to_vertex2dd` / `vertex2dd_to_seqnum` — vertex-based 2D coordinates
 extension_star_count: 0
 extension_star_count_pretty: 0
-extension_download_count: 263
-extension_download_count_pretty: 263
+extension_download_count: 378
+extension_download_count_pretty: 378
 image: '/images/community_extensions/social_preview/preview_community_extension_duck_dggs.png'
 layout: community_extension_doc
 ---
@@ -109,41 +157,58 @@ LOAD {{ page.extension.name }};
 
 <div class="extension_functions_table"></div>
 
-|   function_name    | function_type | description | comment | examples |
-|--------------------|---------------|-------------|---------|----------|
-| dggs_params        | scalar        | NULL        | NULL    |          |
-| duck_dggs_version  | scalar        | NULL        | NULL    |          |
-| geo_to_geo         | scalar        | NULL        | NULL    |          |
-| geo_to_plane       | scalar        | NULL        | NULL    |          |
-| geo_to_projtri     | scalar        | NULL        | NULL    |          |
-| geo_to_q2dd        | scalar        | NULL        | NULL    |          |
-| geo_to_q2di        | scalar        | NULL        | NULL    |          |
-| geo_to_seqnum      | scalar        | NULL        | NULL    |          |
-| projtri_to_geo     | scalar        | NULL        | NULL    |          |
-| projtri_to_plane   | scalar        | NULL        | NULL    |          |
-| projtri_to_projtri | scalar        | NULL        | NULL    |          |
-| projtri_to_q2dd    | scalar        | NULL        | NULL    |          |
-| projtri_to_q2di    | scalar        | NULL        | NULL    |          |
-| projtri_to_seqnum  | scalar        | NULL        | NULL    |          |
-| q2dd_to_geo        | scalar        | NULL        | NULL    |          |
-| q2dd_to_plane      | scalar        | NULL        | NULL    |          |
-| q2dd_to_projtri    | scalar        | NULL        | NULL    |          |
-| q2dd_to_q2dd       | scalar        | NULL        | NULL    |          |
-| q2dd_to_q2di       | scalar        | NULL        | NULL    |          |
-| q2dd_to_seqnum     | scalar        | NULL        | NULL    |          |
-| q2di_to_geo        | scalar        | NULL        | NULL    |          |
-| q2di_to_plane      | scalar        | NULL        | NULL    |          |
-| q2di_to_projtri    | scalar        | NULL        | NULL    |          |
-| q2di_to_q2dd       | scalar        | NULL        | NULL    |          |
-| q2di_to_q2di       | scalar        | NULL        | NULL    |          |
-| q2di_to_seqnum     | scalar        | NULL        | NULL    |          |
-| seqnum_to_boundary | scalar        | NULL        | NULL    |          |
-| seqnum_to_geo      | scalar        | NULL        | NULL    |          |
-| seqnum_to_plane    | scalar        | NULL        | NULL    |          |
-| seqnum_to_projtri  | scalar        | NULL        | NULL    |          |
-| seqnum_to_q2dd     | scalar        | NULL        | NULL    |          |
-| seqnum_to_q2di     | scalar        | NULL        | NULL    |          |
-| seqnum_to_seqnum   | scalar        | NULL        | NULL    |          |
+|    function_name    | function_type | description | comment | examples |
+|---------------------|---------------|-------------|---------|----------|
+| dggs_cell_area_km   | scalar        | NULL        | NULL    |          |
+| dggs_cell_dist_km   | scalar        | NULL        | NULL    |          |
+| dggs_cls_km         | scalar        | NULL        | NULL    |          |
+| dggs_n_cells        | scalar        | NULL        | NULL    |          |
+| dggs_params         | scalar        | NULL        | NULL    |          |
+| dggs_res_info       | scalar        | NULL        | NULL    |          |
+| duck_dggs_version   | scalar        | NULL        | NULL    |          |
+| geo_to_geo          | scalar        | NULL        | NULL    |          |
+| geo_to_plane        | scalar        | NULL        | NULL    |          |
+| geo_to_projtri      | scalar        | NULL        | NULL    |          |
+| geo_to_q2dd         | scalar        | NULL        | NULL    |          |
+| geo_to_q2di         | scalar        | NULL        | NULL    |          |
+| geo_to_seqnum       | scalar        | NULL        | NULL    |          |
+| projtri_to_geo      | scalar        | NULL        | NULL    |          |
+| projtri_to_plane    | scalar        | NULL        | NULL    |          |
+| projtri_to_projtri  | scalar        | NULL        | NULL    |          |
+| projtri_to_q2dd     | scalar        | NULL        | NULL    |          |
+| projtri_to_q2di     | scalar        | NULL        | NULL    |          |
+| projtri_to_seqnum   | scalar        | NULL        | NULL    |          |
+| q2dd_to_geo         | scalar        | NULL        | NULL    |          |
+| q2dd_to_plane       | scalar        | NULL        | NULL    |          |
+| q2dd_to_projtri     | scalar        | NULL        | NULL    |          |
+| q2dd_to_q2dd        | scalar        | NULL        | NULL    |          |
+| q2dd_to_q2di        | scalar        | NULL        | NULL    |          |
+| q2dd_to_seqnum      | scalar        | NULL        | NULL    |          |
+| q2di_to_geo         | scalar        | NULL        | NULL    |          |
+| q2di_to_plane       | scalar        | NULL        | NULL    |          |
+| q2di_to_projtri     | scalar        | NULL        | NULL    |          |
+| q2di_to_q2dd        | scalar        | NULL        | NULL    |          |
+| q2di_to_q2di        | scalar        | NULL        | NULL    |          |
+| q2di_to_seqnum      | scalar        | NULL        | NULL    |          |
+| seqnum_all_parents  | scalar        | NULL        | NULL    |          |
+| seqnum_children     | scalar        | NULL        | NULL    |          |
+| seqnum_neighbors    | scalar        | NULL        | NULL    |          |
+| seqnum_parent       | scalar        | NULL        | NULL    |          |
+| seqnum_to_boundary  | scalar        | NULL        | NULL    |          |
+| seqnum_to_geo       | scalar        | NULL        | NULL    |          |
+| seqnum_to_plane     | scalar        | NULL        | NULL    |          |
+| seqnum_to_projtri   | scalar        | NULL        | NULL    |          |
+| seqnum_to_q2dd      | scalar        | NULL        | NULL    |          |
+| seqnum_to_q2di      | scalar        | NULL        | NULL    |          |
+| seqnum_to_seqnum    | scalar        | NULL        | NULL    |          |
+| seqnum_to_vertex2dd | scalar        | NULL        | NULL    |          |
+| seqnum_to_z3        | scalar        | NULL        | NULL    |          |
+| seqnum_to_z7        | scalar        | NULL        | NULL    |          |
+| seqnum_to_zorder    | scalar        | NULL        | NULL    |          |
+| vertex2dd_to_seqnum | scalar        | NULL        | NULL    |          |
+| z3_to_seqnum        | scalar        | NULL        | NULL    |          |
+| z7_to_seqnum        | scalar        | NULL        | NULL    |          |
+| zorder_to_seqnum    | scalar        | NULL        | NULL    |          |
 
 ### Overloaded Functions
 
