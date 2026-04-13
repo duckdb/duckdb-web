@@ -48,21 +48,11 @@ We noticed that the composite TPC-H score shows a **~10% improvement**, jumping 
 
 This quarter, we have quite a few exciting events lined up.
 
-### DuckCon #7
+**DuckCon #7.** On June 24, we'll host our next user conference, [DuckCon #7]({% link _events/2026-06-24-duckcon7.html %}), in Amsterdam's beautiful [Royal Tropical Institute](https://www.kit.nl/about-us/). If you have been building cool things with DuckDB, consider submitting a talk by April 22. Registrations are also open – and free!
 
-On June 24, we'll host our next user conference, [DuckCon #7]({% link _events/2026-06-24-duckcon7.html %}), in Amsterdam's beautiful [Royal Tropical Institute](https://www.kit.nl/about-us/). If you have been building cool things with DuckDB, consider submitting a talk by April 22. Registrations are also open – and free!
+**AI Council Talk.** On May 12, DuckDB co-creator Hannes Mühleisen will give a talk at AI Council 2026 titled [“Super-Secret Next Big Thing for DuckDB”]({% link _library/2026-05-12-super-secret-next-big-thing-for-duckdb.md %}). Well, at this point, we cannot tell you more than he will present the super-secret next big thing for DuckDB. But, if you cannot make it, don't worry: we'll publish the presentation afterwards.
 
-### AI Council Talk
-
-On May 12, DuckDB co-creator Hannes Mühleisen will give a talk at AI Council 2026 titled [“Super-Secret Next Big Thing for DuckDB”]({% link _library/2026-05-12-super-secret-next-big-thing-for-duckdb.md %}). Well, at this point, we cannot tell you more than he will present the super-secret next big thing for DuckDB. But, if you cannot make it, don't worry: we'll publish the presentation afterwards.
-
-### Ubuntu Summit Talk
-
-We already talked about performance on Ubuntu. In late May, Gábor Szárnyas of DuckDB Labs will give a talk titled “DuckDB: Not Quack Science” at the [Ubuntu Summit in London]({% link _library/2026-05-27-duckdb-not-quack-science.md %}).
-
-### New DuckDB Releases
-
-We plan to release a patch version of the DuckDB v1.4 LTS line, v1.4.5. We will also release DuckDB v1.5.3 in the coming months.
+**Ubuntu Summit Talk.** We already talked about performance on Ubuntu. In late May, Gábor Szárnyas of DuckDB Labs will give a talk titled [“DuckDB: Not Quack Science”]({% link _library/2026-05-27-duckdb-not-quack-science.md %}) at the [Ubuntu Summit](https://ubuntu.com/summit).
 
 ## Conclusion
 
