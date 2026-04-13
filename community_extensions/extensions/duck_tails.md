@@ -61,8 +61,8 @@ docs:
 
 extension_star_count: 15
 extension_star_count_pretty: 15
-extension_download_count: 824
-extension_download_count_pretty: 824
+extension_download_count: 854
+extension_download_count_pretty: 854
 image: '/images/community_extensions/social_preview/preview_community_extension_duck_tails.png'
 layout: community_extension_doc
 ---

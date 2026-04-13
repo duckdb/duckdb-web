@@ -35,8 +35,8 @@ docs:
 
 extension_star_count: 0
 extension_star_count_pretty: 0
-extension_download_count: 95
-extension_download_count_pretty: 95
+extension_download_count: 149
+extension_download_count_pretty: 149
 image: '/images/community_extensions/social_preview/preview_community_extension_astro.png'
 layout: community_extension_doc
 ---

@@ -84,8 +84,8 @@ docs:
 
 extension_star_count: 3
 extension_star_count_pretty: 3
-extension_download_count: 802
-extension_download_count_pretty: 802
+extension_download_count: 808
+extension_download_count_pretty: 808
 image: '/images/community_extensions/social_preview/preview_community_extension_read_lines.png'
 layout: community_extension_doc
 ---
