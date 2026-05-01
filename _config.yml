@@ -22,11 +22,11 @@ url: "https://duckdb.org" # the base hostname & protocol for your site, e.g. htt
 # Set current codename of DuckDB and version numbers of DuckDB clients
 # current version information
 current_duckdb_codename: "Variegata"
-current_duckdb_csharp_version: "1.5.2"
+current_duckdb_csharp_version: "1.5.3"
 current_duckdb_dart_version: ""
 current_duckdb_go_version: "1.5.2"
 current_duckdb_go_tag: "v2.10502.0"
-current_duckdb_hash: "8a5851971f"
+current_duckdb_hash: ""
 current_duckdb_java_short_version: "1.5.2"
 current_duckdb_java_version: "1.5.2.0"
 current_duckdb_node_neo_version: "1.5.2"
