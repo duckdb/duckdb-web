@@ -13,7 +13,9 @@ You can find the complete [release notes on GitHub](https://github.com/duckdb/du
 
 To install the new version, please visit the [installation page]({% link install/index.html %}).
 
-## TODO
+## What's New
+
+AWS: [Add web_identity chain type for IRSA support](https://github.com/duckdb/duckdb-aws/pull/136) by external contributor [Marcel Steinbach (@mst)](https://github.com/mst).
 
 TODO
 
