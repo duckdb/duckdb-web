@@ -4,7 +4,7 @@ title: "Announcing DuckDB 1.5.3"
 author: "The DuckDB team"
 thumb: "/images/blog/thumbs/duckdb-release-1-5-3.svg"
 image: "/images/blog/thumbs/duckdb-release-1-5-3.png"
-excerpt: "We are releasing DuckDB version v1.5.3 with lots of love."
+excerpt: "We are releasing DuckDB version v1.5.3 with Quack and ..."
 tags: ["release"]
 ---
 
