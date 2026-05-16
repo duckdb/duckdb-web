@@ -8,5 +8,5 @@ It is not ready for production and is subject to breaking changes until the rele
 If you experience any issues with Quack, try upgrading all your DuckDB clients to the latest version of the `quack` extension:
 
 ```sql
-FORCE INSTALL quack FROM core_nightly;
+FORCE INSTALL quack;
 ```

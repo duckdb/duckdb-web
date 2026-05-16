@@ -1917,6 +1917,10 @@
               "url": "vector"
             },
             {
+              "page": "Jemalloc",
+              "url": "jemalloc"
+            },
+            {
               "page": "Pivot",
               "url": "pivot"
             }

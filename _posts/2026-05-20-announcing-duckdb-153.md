@@ -21,10 +21,10 @@ On May 12, we introduced Quack, our new remote protocol that turns DuckDB into a
 If you are new to Quack and don't know where to start, check out the following resources:
 
 * For a high-level overview, see the [Quack explainer page]({% link quack/index.html %}).
-* For the rationale and history behind Quack, and for an introduction, see the [announcement blog post]({% post_url 2026-05-12-quack-remote-protocol %}).
+* For the rationale and history behind Quack, along with an introduction of the protocol and its features, see the [announcement blog post]({% post_url 2026-05-12-quack-remote-protocol %}).
 * For the reference manual and setup guide, check out the [Quack documentation]({% link docs/current/quack/overview.md %}).
 
-DuckDB v1.5.3 ships Quack as a core extension. This means you can now set up Quack with `INSTALL quack` from any client running DuckDB, and Quack will be transparently [autoloaded]({% link docs/current/extensions/overview.md %}#autoloading-extension) on first use.
+Starting from DuckDB v1.5.3, we ship Quack as a [core extension]({% link docs/current/core_extensions/quack.md %}). This means that you can now set up Quack with `INSTALL quack` from any client running DuckDB. What's more, Quack will be transparently [autoloaded]({% link docs/current/extensions/overview.md %}#autoloading-extension) on first use.
 
 <!-- markdownlint-disable MD001 -->
 
@@ -84,13 +84,18 @@ This was made possible through a contribution by community member [Marcel Steinb
 
 TODO
 
+## Linux
+
+The [`jemalloc` allocator]({% link docs/current/internals/jemalloc.md %}) is now part of [core DuckDB](https://github.com/duckdb/duckdb/pull/22603) instead of being shipped as an extension.
+Instead, it is a static third-party library which is included and linked by default on Linux.
+
 ## Coming Up
 
-We have quite a few events coming up in the next few weeks:
+We have two events coming up in the next few weeks:
 
 **DuckCon #7.** On June 24, we'll host our next user conference, [DuckCon #7]({% link _events/2026-06-24-duckcon7.html %}), in Amsterdam's beautiful [Royal Tropical Institute](https://www.kit.nl/about-us/).
 
-**Ubuntu Summit Talk.** Next week, Gábor Szárnyas of DuckDB Labs will give a talk titled [“DuckDB: Not Quack Science”]({% link _library/2026-05-27-duckdb-not-quack-science.md %}) at the [Ubuntu Summit](https://ubuntu.com/summit).
+**Ubuntu Summit Talk.** Next week, Gábor Szárnyas of DuckDB Labs will give a talk titled [“DuckDB: Not Quack Science”]({% link _library/2026-05-27-duckdb-not-quack-science.md %}) at the [Ubuntu Summit](https://ubuntu.com/summit). Yes, his talk will include the new [Quack](#quack) protocol.
 
 ## Conclusion
 

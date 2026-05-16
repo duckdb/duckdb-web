@@ -37,8 +37,7 @@ What do two (or more) ducks do if they want to talk to each other? They [quack](
 #### <svg class="icon"><use href="#database-01"></use></svg> DuckDB #1
 
 ```sql
-INSTALL quack FROM core_nightly;
-LOAD quack;
+INSTALL quack;
 
 CALL quack_serve(
     'quack:localhost',
@@ -58,8 +57,7 @@ CREATE TABLE hello AS
 #### <svg class="icon"><use href="#database-01"></use></svg> DuckDB #2
 
 ```sql
-INSTALL quack FROM core_nightly;
-LOAD quack;
+INSTALL quack;
 
 CREATE SECRET (
     TYPE quack,

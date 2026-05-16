@@ -128,11 +128,10 @@ Quack uses HTTP v2.0 for communication. This allows Quack to work in environment
 
 <div class="answer" markdown="1">
 
-Yes, Quack is available in DuckDB v1.5.2 as a beta release. To install and load it, run:
+Yes, Quack is available in DuckDB v1.5.3 as a beta release. To install it, run:
 
 ```sql
-INSTALL quack FROM core_nightly;
-LOAD quack;
+INSTALL quack;
 ```
 
 </div>

@@ -24,8 +24,7 @@ The stack defaults to a `t3.micro` instance; other sizes are selectable on the P
 Copy `QuackURI` and `Token` from the stack's Outputs tab and substitute below:
 
 ```sql
-INSTALL quack FROM core_nightly;
-LOAD quack;
+INSTALL quack;
 
 -- Register the credentials once per session.
 CREATE SECRET quack_credentials (
@@ -70,7 +69,7 @@ Or use the **Delete** button in the CloudFormation console.
 ### What the Stack Provisions
 
 * An `AWS::EC2::Instance` from a public AMI (per-region map baked into the template) running DuckDB, the quack extension behind nginx and the Let's Encrypt TLS.
-* An `AWS::EC2::SecurityGroup` opening ports 80 (ACME challenge) and 443 (HTTPS).
+* An `AWS::EC2::SecurityGroup` opening ports `80` (ACME challenge) and `443` (HTTPS).
 * An `AWS::CloudFormation::WaitCondition` the instance signals once the RPC server is ready.
 * CFN `Outputs` carrying the ready URI, per-instance token, and two shareable shell.duckdb.org URLs (`QueryURL`, `ConnectURL`).
 
