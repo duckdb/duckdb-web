@@ -17,17 +17,17 @@ Extensions for DuckDB are the preferred way to package additional functionality 
 
 ## How to Use a Community Extension
 
-To install and load a community extension, for example the `quack` demo extension, simply run:
+To install and load a community extension, for example the `waddle` demo extension, simply run:
 
 ```sql
-INSTALL quack FROM community;
-LOAD quack;
+INSTALL waddle FROM community;
+LOAD waddle;
 ```
 
-The `quack` extension is now loaded and ready to use
+The `waddle` extension is now loaded and ready to use
 
 ```sql
-SELECT quack('world');
+SELECT waddle('world');
 ```
 
 ## What Are Community Extensions?
