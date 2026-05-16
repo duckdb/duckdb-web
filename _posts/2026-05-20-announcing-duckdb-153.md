@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "DuckDB 1.5.3: Shipping Quack as a Core Extension"
+title: "DuckDB 1.5.3: Not an Ordinary Patch Release"
 author: "The DuckDB team"
 thumb: "/images/blog/thumbs/duckdb-release-1-5-3.svg"
 image: "/images/blog/thumbs/duckdb-release-1-5-3.png"
@@ -79,6 +79,8 @@ We plan to release the production-ready version of Quack together with [DuckDB v
 
 The [AWS extension]({% link docs/current/core_extensions/aws.md %}) now supports the [`web_identity` chain type for IAM Roles for Service Accounts (IRSA) support](https://github.com/duckdb/duckdb-aws/pull/136).
 This was made possible through a contribution by community member [Marcel Steinbach (@mst)](https://github.com/mst).
+
+[RDS IAM](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/UsingWithRDS.IAMDBAuth.html) support (ongoing)
 
 ### Iceberg
 
