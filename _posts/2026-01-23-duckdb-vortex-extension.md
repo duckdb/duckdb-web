@@ -37,9 +37,9 @@ DuckDB is a database as the name says, yes, but it is also widely used as an eng
 
 > The community has gotten very creative, though, so these days you can even read YAML and Markdown with DuckDB using [community extensions]({% link community_extensions/index.md %}).
 
-All this is possible due to the DuckDB [extension system]({% link docs/lts/extensions/overview.md %}), which makes it relatively easy to implement logic to interact with different file formats or external systems.
+All this is possible due to the DuckDB [extension system]({% link docs/current/extensions/overview.md %}), which makes it relatively easy to implement logic to interact with different file formats or external systems.
 
-The SpiralDB team built a [DuckDB extension](https://github.com/vortex-data/duckdb-vortex). Together with the [DuckDB Labs](https://duckdblabs.com/) team, we have made the extension available as a [core DuckDB extension]({% link docs/lts/core_extensions/overview.md %}), so that the community can enjoy Vortex as a first-class citizen in DuckDB.
+The SpiralDB team built a [DuckDB extension](https://github.com/vortex-data/duckdb-vortex). Together with the [DuckDB Labs](https://duckdblabs.com/) team, we have made the extension available as a [core DuckDB extension]({% link docs/current/core_extensions/overview.md %}), so that the community can enjoy Vortex as a first-class citizen in DuckDB.
 
 ### Example Usage
 

@@ -21,6 +21,8 @@
 @use '../_sass/components/icons';
 @use '../_sass/components/spinner';
 @use '../_sass/components/ecosystem_diagram';
+@use '../_sass/components/topbar';
+@use '../_sass/components/diagram_boxes';
 
 @use '../_sass/layout/header';
 @use '../_sass/layout/search';
@@ -37,6 +39,7 @@
 @use '../_sass/pages/default';
 @use '../_sass/pages/duckcon7';
 @use '../_sass/pages/webshell';
+@use '../_sass/pages/quack';
 
 @use '../_sass/themes/darkmode';
 @use '../_sass/layout/responsive';

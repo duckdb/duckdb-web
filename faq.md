@@ -264,7 +264,10 @@ Compatibility is also guaranteed between different DuckDB clients (e.g., Python 
 See the documentation on [handling concurrency]({% link docs/current/connect/concurrency.md %}#handling-concurrency)
 and the section on [“Writing to DuckDB from Multiple Processes”]({% link docs/current/connect/concurrency.md %}#writing-to-duckdb-from-multiple-processes).
 
-To work on the same data set with multiple DuckDB clients (“multi-player experience”), use the [DuckLake format](http://ducklake.select/) through the [`ducklake` extension]({% link docs/current/core_extensions/ducklake.md %} with PostgreSQL as the catatalog database.
+To work on the same data set with multiple DuckDB clients (“multi-player experience”), there are now two options:
+
+1. The [DuckLake format](http://ducklake.select/) through the [`ducklake` extension]({% link docs/current/core_extensions/ducklake.md %}) with PostgreSQL as the catatalog database. This is a [production-ready solution](https://ducklake.select/2026/04/13/ducklake-10/).
+2. The [Quack remote protocol]({% link docs/current/quack/overview.md %}), which turns DuckDB into a client-server database. Quack is in beta stage as of DuckDB v1.5.2, and is expected to become mature by [DuckDB v2.0 in autumn 2026]({% link release_calendar.md %}).
 </div>
 
 </div>

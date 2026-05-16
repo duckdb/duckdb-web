@@ -71,7 +71,7 @@ INSTALL spatial;
 LOAD spatial;
 ```
 
-With these statements, DuckDB will ensure the spatial extension is installed (ignoring the `INSTALL` statement if it is already installed), then proceed
+With these statements, DuckDB will ensure the `spatial` extension is installed (ignoring the `INSTALL` statement if it is already installed), then proceed
 to `LOAD` the spatial extension (again ignoring the statement if it is already loaded).
 
 #### Extension Repository

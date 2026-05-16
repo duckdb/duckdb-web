@@ -3,7 +3,7 @@ github_repository: https://github.com/duckdb/duckdb-avro
 layout: docu
 redirect_from:
 - /docs/extensions/avro
-- /docs/lts/extensions/avro
+- /docs/stable/extensions/avro
 - /docs/preview/core_extensions/avro
 - /docs/stable/core_extensions/avro
 title: Avro Extension

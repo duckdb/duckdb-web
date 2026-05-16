@@ -10,7 +10,7 @@ GIT
 
 GIT
   remote: https://github.com/duckdb/rouge.git
-  revision: 1fccfbb26bd2cb9fc5a4231868e2736b823e7e0d
+  revision: 202957eb5c49e7dca81b88c5c5178884b4864657
   branch: duckdb
   specs:
     rouge (3.3823.1)
@@ -118,7 +118,7 @@ GEM
       jekyll (>= 3.3, < 5.0)
     jekyll-sass-converter (3.1.0)
       sass-embedded (~> 1.75)
-    jekyll-seo-tag (2.8.0)
+    jekyll-seo-tag (2.9.0)
       jekyll (>= 3.8, < 5.0)
     jekyll-sitemap (1.4.0)
       jekyll (>= 3.7, < 5.0)
@@ -170,7 +170,7 @@ GEM
       nokogiri (~> 1.12)
     jekyll-watch (2.2.1)
       listen (~> 3.0)
-    json (2.19.4)
+    json (2.19.5)
     kramdown (2.5.2)
       rexml (>= 3.4.4)
     kramdown-parser-gfm (1.1.0)
@@ -249,7 +249,7 @@ DEPENDENCIES
   jekyll-regex-replace (= 1.1.0)
   jekyll-relative-links (= 0.7.0)
   jekyll-sass-converter (= 3.1.0)
-  jekyll-seo-tag (= 2.8.0)
+  jekyll-seo-tag (= 2.9.0)
   jekyll-sitemap (= 1.4.0)
   jekyll-swiss (= 1.0.0)
   jekyll-theme-architect (= 0.2.0)

@@ -8,7 +8,7 @@ excerpt: |
 extension:
   name: lastra
   description: Reader for the Lastra columnar time-series format
-  version: 0.1.0
+  version: 0.1.1
   language: C++
   build: cmake
   license: Apache-2.0
@@ -17,7 +17,7 @@ extension:
 
 repo:
   github: QTSurfer/duckdb-lastra
-  ref: d859527024fb3c4336d2b149f638af7753ce1a60
+  ref: ddc821958e10fdef844fb2ac6549eb44a51a3ae7
 
 docs:
   hello_world: |
@@ -36,8 +36,8 @@ docs:
 
 extension_star_count: 0
 extension_star_count_pretty: 0
-extension_download_count: 350
-extension_download_count_pretty: 350
+extension_download_count: 463
+extension_download_count_pretty: 463
 image: '/images/community_extensions/social_preview/preview_community_extension_lastra.png'
 layout: community_extension_doc
 ---

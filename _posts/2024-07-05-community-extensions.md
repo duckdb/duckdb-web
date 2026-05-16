@@ -14,13 +14,13 @@ tags: ["extensions"]
 
 ### Design Philosophy
 
-One of the main design goals of DuckDB is *simplicity*, which – to us – implies that the system should be rather nimble, very light on dependencies, and generally small enough to run on constrained platforms like [WebAssembly]({% link docs/lts/clients/wasm/overview.md %}). This goal is in direct conflict with very reasonable user requests to support advanced features like spatial data analysis, vector indexes, connectivity to various other databases, support for data formats, etc. Baking all those features into a monolithic binary is certainly possible and the route some systems take. But we want to preserve DuckDB’s simplicity. Also, shipping all possible features would be quite excessive for most users because no use cases require *all* extensions at the same time (the “Microsoft Word paradox”, where even power users only use a few features of the system, but the exact set of features vary between users).
+One of the main design goals of DuckDB is *simplicity*, which – to us – implies that the system should be rather nimble, very light on dependencies, and generally small enough to run on constrained platforms like [WebAssembly]({% link docs/current/clients/wasm/overview.md %}). This goal is in direct conflict with very reasonable user requests to support advanced features like spatial data analysis, vector indexes, connectivity to various other databases, support for data formats, etc. Baking all those features into a monolithic binary is certainly possible and the route some systems take. But we want to preserve DuckDB’s simplicity. Also, shipping all possible features would be quite excessive for most users because no use cases require *all* extensions at the same time (the “Microsoft Word paradox”, where even power users only use a few features of the system, but the exact set of features vary between users).
 
-To achieve this, DuckDB has a powerful extension mechanism, which allows users to add new functionalities to DuckDB. This mechanism allows for registering new functions, supporting new file formats and compression methods, handling new network protocols, etc. In fact, many of DuckDB’s popular features are implemented as extensions: the [Parquet reader]({% link docs/lts/data/parquet/overview.md %}), the [JSON reader]({% link docs/lts/data/json/overview.md %}), and the [HTTPS/S3 connector]({% link docs/lts/core_extensions/httpfs/overview.md %}) all use the extension mechanism.
+To achieve this, DuckDB has a powerful extension mechanism, which allows users to add new functionalities to DuckDB. This mechanism allows for registering new functions, supporting new file formats and compression methods, handling new network protocols, etc. In fact, many of DuckDB’s popular features are implemented as extensions: the [Parquet reader]({% link docs/current/data/parquet/overview.md %}), the [JSON reader]({% link docs/current/data/json/overview.md %}), and the [HTTPS/S3 connector]({% link docs/current/core_extensions/httpfs/overview.md %}) all use the extension mechanism.
 
 ### Using Extensions
 
-Since [version 0.3.2](https://github.com/duckdb/duckdb/releases/tag/v0.3.2), we have already greatly simplified the discovery and installation by hosting them on a centralized extension repository. So, for example, to install the [spatial extension]({% link docs/lts/core_extensions/spatial/overview.md %}), one can just run the following commands using DuckDB’s SQL interface:
+Since [version 0.3.2](https://github.com/duckdb/duckdb/releases/tag/v0.3.2), we have already greatly simplified the discovery and installation by hosting them on a centralized extension repository. So, for example, to install the [spatial extension]({% link docs/current/core_extensions/spatial/overview.md %}), one can just run the following commands using DuckDB’s SQL interface:
 
 ```sql
 INSTALL spatial; -- once
@@ -68,7 +68,7 @@ The `h3` extension’s documentation is available at <https://duckdb.org/communi
 
 ### Developer Experience
 
-From the developer’s perspective, the Community Extensions repository performs the steps required for publishing extensions, including building the extensions for all relevant [platforms]({% link docs/lts/dev/building/overview.md %}#supported-platforms), signing the extension binaries and serving them from the repository.
+From the developer’s perspective, the Community Extensions repository performs the steps required for publishing extensions, including building the extensions for all relevant [platforms]({% link docs/current/dev/building/overview.md %}#supported-platforms), signing the extension binaries and serving them from the repository.
 
 For the [maintainer of `h3`](https://github.com/isaacbrodsky/), the publication process required performing the following steps:
 
@@ -113,7 +113,7 @@ DuckDB Labs and the DuckDB Foundation do not vet the code within community exten
 SET allow_community_extensions = false;
 ```
 
-For more details, see the documentation’s [Securing DuckDB page]({% link docs/lts/operations_manual/securing_duckdb/securing_extensions.md %}#community-extensions).
+For more details, see the documentation’s [Securing DuckDB page]({% link docs/current/operations_manual/securing_duckdb/securing_extensions.md %}#community-extensions).
 
 ## Summary and Looking Ahead
 

@@ -704,9 +704,8 @@ body.landing{
 						}
 					}
 				}
-				&:first-child .protocol-tags .tag{
+				&.quack .protocol-tags .tag{
 					font-family: $fontMono;
-					text-transform: uppercase;
 				}
 			}
 		}
@@ -715,10 +714,11 @@ body.landing{
 	/** PROOF SECTION **/
 	section.proof{
 		// padding-top: 60px;
-		
+		z-index: 20;
+
 		.wrap.flexwrap{
 			gap: 20px;
-			
+
 		}
 		.proof-code{
 			width: 565px;

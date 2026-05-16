@@ -42,7 +42,7 @@ In this post, we describe several advanced sorting strategies, compare them with
 ## The Strategy
 
 Instead of sorting precisely by one or a small number of columns, we want to sort approximately by a larger number of columns.
-That will allow queries with different `WHERE` clauses to all benefit from DuckDB's [min-max indexes (zone maps)]({% link docs/lts/sql/indexes.md %}#min-max-index-zonemap).
+That will allow queries with different `WHERE` clauses to all benefit from DuckDB's [min-max indexes (zone maps)]({% link docs/current/sql/indexes.md %}#min-max-index-zonemap).
 This post introduces two high-level approaches with several examples of each: sorting by space filling curves, and sorting by truncated timestamps.
 
 ### Space Filling Curves
@@ -111,7 +111,7 @@ Our alternative sorting approaches are:
 
 > The Morton and Hilbert encoding functions come from the [`lindel` DuckDB community extension]({% link community_extensions/extensions/lindel.md %}), contributed by [Rusty Conover](https://github.com/rustyconover).
 > Thank you to Rusty and the folks who have built the [`lindel` Rust crate](https://crates.io/crates/lindel) upon which the DuckDB extension is based!
-> The [`spatial` extension]({% link docs/lts/core_extensions/spatial/overview.md %}) also contains an [`ST_Hilbert` function]({% link docs/lts/core_extensions/spatial/functions.md %}#st_hilbert) that works similarly.
+> The [`spatial` extension]({% link docs/current/core_extensions/spatial/overview.md %}) also contains an [`ST_Hilbert` function]({% link docs/current/core_extensions/spatial/functions.md %}#st_hilbert) that works similarly.
 > Thanks to [Max Gabrielsson](https://github.com/Maxxen) and the GDAL community!
 
 These plots display query runtime when pulling from a DuckDB file hosted on S3.
@@ -250,7 +250,7 @@ CREATE TABLE IF NOT EXISTS flights_hilbert AS
         ]::UBIGINT[2]);
 ```
 
-Alternatively, the [`spatial` extension]({% link docs/lts/core_extensions/spatial/overview.md %}) can be used to execute a Hilbert encoding.
+Alternatively, the [`spatial` extension]({% link docs/current/core_extensions/spatial/overview.md %}) can be used to execute a Hilbert encoding.
 It requires a bounding box to be supplied, as this helps determine the granularity of the encoding for geospatial use cases.
 It performed similarly to the Hilbert approach included in the experimental results.
 

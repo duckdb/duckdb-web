@@ -13,7 +13,7 @@ In this blog post, we highlight a few important fixes and convenience improvemen
 While this is a patch release, we are shipping some small features. In LTS releases, these can come in two forms:
 
 1. We add small opt-in features such as [accessing the profiler's output from the logger](#accessing-the-profilers-output-from-the-logger) in this release. These features have been highly-requested from the community and we are confident that these will not cause any issues for people upgrading to the latest release. In fact, using them carefully can help detect and understand performance regressions.
-2. Some of DuckDB's extensions that are marked as [“experimental”]({% link docs/lts/core_extensions/overview.md %}) are shipping full-fledged features. For example, this is how we have rolled out support for [Iceberg deletes and updates](#iceberg-improvements). Extensions are opt-in by nature, so if you stick to core DuckDB and its stable extensions, changes in the experimental extensions will not affect the stability of your installation.
+2. Some of DuckDB's extensions that are marked as [“experimental”]({% link docs/current/core_extensions/overview.md %}) are shipping full-fledged features. For example, this is how we have rolled out support for [Iceberg deletes and updates](#iceberg-improvements). Extensions are opt-in by nature, so if you stick to core DuckDB and its stable extensions, changes in the experimental extensions will not affect the stability of your installation.
 
 > To install the new version, please visit the [installation page]({% link install/index.html %}). Note that it can take a few hours to days for some client libraries (e.g., R, Rust) to be released due to the extra changes and review rounds required.
 
@@ -21,7 +21,7 @@ While this is a patch release, we are shipping some small features. In LTS relea
 
 ### Iceberg Improvements
 
-Similarly to the [v1.4.1 release blog post]({% post_url 2025-10-07-announcing-duckdb-141 %}#iceberg-improvements), we can start with some good news for our Iceberg users: DuckDB v1.4.2 ships a number of improvements for the [`iceberg` extension]({% link docs/lts/core_extensions/iceberg/overview.md %}). Insert, update, and delete statements are all supported now:
+Similarly to the [v1.4.1 release blog post]({% post_url 2025-10-07-announcing-duckdb-141 %}#iceberg-improvements), we can start with some good news for our Iceberg users: DuckDB v1.4.2 ships a number of improvements for the [`iceberg` extension]({% link docs/current/core_extensions/iceberg/overview.md %}). Insert, update, and delete statements are all supported now:
 
 <!-- markdownlint-disable MD040 -->
 
@@ -121,7 +121,7 @@ You can see in the output that the first `CREATE` statement took about 3 millise
 
 #### Profiler Metrics
 
-The profiler now supports [several new metrics]({% link docs/lts/dev/profiling.md %}#metrics).
+The profiler now supports [several new metrics]({% link docs/current/dev/profiling.md %}#metrics).
 These allow you the get a deeper understanding on where the execution time is spent in queries.
 
 ### Performance Improvements
@@ -133,7 +133,7 @@ DuckDB v1.4.2 also ships some small performance improvements:
 
 ### Vortex Support
 
-DuckDB now supports the [Vortex file format](https://vortex.dev/) through the [`vortex` extension]({% link docs/lts/core_extensions/vortex.md %}) on Linux and macOS.
+DuckDB now supports the [Vortex file format](https://vortex.dev/) through the [`vortex` extension]({% link docs/current/core_extensions/vortex.md %}) on Linux and macOS.
 
 To use `vortex`, first install and load the extension:
 
@@ -173,7 +173,7 @@ We also fixed several issues discovered by our [fuzzer](https://github.com/duckd
 
 ### Vulnerabilities
 
-We fixed [four vulnerabilities](https://github.com/duckdb/duckdb/security/advisories/GHSA-vmp8-hg63-v2hp) in DuckDB's [database encryption]({% link docs/lts/sql/statements/attach.md %}#database-encryption):
+We fixed [four vulnerabilities](https://github.com/duckdb/duckdb/security/advisories/GHSA-vmp8-hg63-v2hp) in DuckDB's [database encryption]({% link docs/current/sql/statements/attach.md %}#database-encryption):
 
 1. The DuckDB can fall back to an insecure random number generator (`pcg32`) to generate cryptographic keys or IVs.
 1. When clearing keys from memory, the compiler may remove the memset() and leave sensitive data on the heap

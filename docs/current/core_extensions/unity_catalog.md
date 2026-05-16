@@ -3,7 +3,7 @@ github_repository: https://github.com/duckdb/unity_catalog
 layout: docu
 redirect_from:
 - /docs/extensions/unity_catalog
-- /docs/lts/extensions/unity_catalog
+- /docs/stable/extensions/unity_catalog
 - /docs/preview/core_extensions/unity_catalog
 - /docs/stable/core_extensions/unity_catalog
 title: Unity Catalog Extension
@@ -12,7 +12,7 @@ title: Unity Catalog Extension
 The `unity_catalog` extension adds support for the [`Unity Catalog`](https://www.unitycatalog.io/) atop the
 [`Delta Lake`](https://delta.io/) format and [DuckDB Delta extension]({% link docs/current/core_extensions/delta.md %}).
 
-The `delta` extension adds support for the [Delta Lake open-source storage format](https://delta.io/). It is built using the [Delta Kernel](https://github.com/delta-incubator/delta-kernel-rs). The extension offers **read support** for Delta tables, both local and remote.
+The [`delta` extension]({% link docs/current/core_extensions/delta.md %}) adds support for the [Delta Lake open-source storage format](https://delta.io/). It is built using the [Delta Kernel](https://github.com/delta-incubator/delta-kernel-rs). The extension offers **read support** for Delta tables, both local and remote.
 
 For implementation details, see the [announcement blog post]({% post_url 2024-06-10-delta %}).
 
@@ -41,7 +41,7 @@ CREATE SECRET (
 ATTACH 'my_catalog' AS my_catalog (TYPE unity_catalog, DEFAULT_SCHEMA 'main');
 ```
 
-Where `token` comes from your Databricks or OSS Unity Catalog deployment, and `endpoint` is your Unity Catalog REST API endpoint. For more details see the [Databricks Unity Catalog](https://docs.databricks.com/aws/en/data-governance/unity-catalog) and [OSS Unity Catalog](https://docs.unitycatalog.io/) documentation.
+Where `ENDPOINT` is your Unity Catalog REST API endpoint and `TOKEN` is a suitable credential. For Databricks, `ENDPOINT` is your [Workspace URL](https://docs.databricks.com/aws/en/workspace/workspace-details#workspace-instance-names-urls-and-ids) (typically `https://⟨instance⟩.cloud.databricks.com/`) and `TOKEN` can be e.g., a [personal access token](https://docs.databricks.com/aws/en/dev-tools/auth/pat) with `unity-catalog` scope — see [Access Control in Unity Catalog](https://docs.databricks.com/aws/en/data-governance/unity-catalog/access-control/) for the full range of options. For OSS Unity Catalog, see the [OSS Unity Catalog documentation](https://docs.unitycatalog.io/).
 
 ### Reading
 

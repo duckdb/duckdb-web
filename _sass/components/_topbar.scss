@@ -1,0 +1,63 @@
+@use '../abstracts/variables' as *;
+@use '../abstracts/mixins' as *;
+
+/** Topbar / pill-tab component
+ *
+ *  Reusable pill-style tab selector with a sliding highlight bar.
+ *  Identical visuals to the .welcome .window .topbar pattern used on the
+ *  homepage and the .architecture-tabs pattern on DuckLake — but unscoped,
+ *  so it can be reused on any page (e.g. Quack "Try today" install tabs).
+ *
+ *  Markup:
+ *    <div class="topbar">
+ *      <ul>
+ *        <div class="select-highlight"></div>
+ *        <li class="active" data-target="…">Label</li>
+ *        <li data-target="…">Label</li>
+ *      </ul>
+ *    </div>
+ *
+ *  The .select-highlight is positioned absolutely behind the active <li>.
+ *  Page-level JS is responsible for setting its left/width to match.
+ */
+
+.topbar {
+	ul {
+		position: relative;
+		z-index: 0;
+		display: inline-flex;
+		align-items: flex-start;
+		list-style: none;
+		margin: 0;
+		padding: 5px;
+		border: 1px solid var(--main-codebox-border-color, #E6E6E6);
+		border-radius: 100px;
+
+		li {
+			@include label-1;
+			padding: 12px 14px;
+			border-radius: 50px;
+			color: var(--interactive-filter-unselected-text-color, #666);
+			cursor: pointer;
+			white-space: nowrap;
+			transition: background 0.2s, color 0.2s;
+
+			&:hover,
+			&.active {
+				color: var(--interactive-filter-selected-text-color, #1A1A1A);
+			}
+		}
+	}
+
+	.select-highlight {
+		position: absolute;
+		top: 5px;
+		left: 0;
+		width: 0;
+		height: calc(100% - 10px);
+		border-radius: 50px;
+		background: var(--interactive-filter-selected-background-color, #E6E6E6);
+		transition: all 0.3s ease;
+		z-index: -1;
+	}
+}

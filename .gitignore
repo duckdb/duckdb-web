@@ -320,3 +320,4 @@ duckdb_web_venv/
 
 *.duckdb
 *.duckdb.wal
+.gstack/

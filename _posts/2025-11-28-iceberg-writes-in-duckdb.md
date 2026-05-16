@@ -8,14 +8,14 @@ excerpt: "We shipped a number of features and improvements to the DuckDB-Iceberg
 tags: ["deep dive"]
 ---
 
-Over the past several months, the DuckDB Labs team has been hard at work on the [DuckDB-Iceberg extension]({% link docs/lts/core_extensions/iceberg/overview.md %}), with _full read support_ and _initial write support_ released in [v1.4.0]({% post_url 2025-09-16-announcing-duckdb-140 %}).
+Over the past several months, the DuckDB Labs team has been hard at work on the [DuckDB-Iceberg extension]({% link docs/current/core_extensions/iceberg/overview.md %}), with _full read support_ and _initial write support_ released in [v1.4.0]({% post_url 2025-09-16-announcing-duckdb-140 %}).
 Today, we are happy to announce delete and update support for Iceberg v2 tables is available in [v1.4.2]({% post_url 2025-11-12-announcing-duckdb-142 %})!
 
 The Iceberg open table format has become extremely popular in the past two years, with many databases announcing support for the open table format [originally developed at Netflix](https://softwareengineeringdaily.com/2024/03/07/iceberg-at-netflix-and-beyond-with-ryan-blue/). This past year the DuckDB team has made Iceberg integration a [priority]({% link roadmap.md %}) and today we are happy to announce another step in that direction. In this blog post we will describe the current feature set of DuckDB-Iceberg in DuckDB v1.4.2.
 
 ## Getting Started
 
-To experiment with the new DuckDB-Iceberg features, you will need to connect to your favorite Iceberg REST Catalog. There are many ways to connect to an Iceberg REST Catalog: please have a look at the [Connecting to REST Catalogs]({% link docs/lts/core_extensions/iceberg/iceberg_rest_catalogs.md %}) for connecting to catalogs like [Apache Polaris](https://polaris.apache.org/) or [Lakekeeper](https://lakekeeper.io/) and the [Connecting to S3 Tables]({% link docs/lts/core_extensions/iceberg/amazon_s3_tables.md %}) page if you would like to connect to [Amazon S3 Tables](https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-tables.html).
+To experiment with the new DuckDB-Iceberg features, you will need to connect to your favorite Iceberg REST Catalog. There are many ways to connect to an Iceberg REST Catalog: please have a look at the [Connecting to REST Catalogs]({% link docs/current/core_extensions/iceberg/iceberg_rest_catalogs.md %}) for connecting to catalogs like [Apache Polaris](https://polaris.apache.org/) or [Lakekeeper](https://lakekeeper.io/) and the [Connecting to S3 Tables]({% link docs/current/core_extensions/iceberg/amazon_s3_tables.md %}) page if you would like to connect to [Amazon S3 Tables](https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-tables.html).
 
 ```sql
 ATTACH '⟨warehouse_name⟩' AS iceberg_catalog (
@@ -190,7 +190,7 @@ FROM iceberg_catalog.default.simple_table AT (
 ## Viewing Requests to the Iceberg REST Catalog
 
 You may also be curious as to what requests DuckDB is making to the Iceberg REST Catalog.
-To do so, enable HTTP [logging]({% link docs/lts/operations_manual/logging/overview.md %}), run your workload, then select from the `HTTP` logs.
+To do so, enable HTTP [logging]({% link docs/current/operations_manual/logging/overview.md %}), run your workload, then select from the `HTTP` logs.
 
 ```sql
 CALL enable_logging('HTTP');
@@ -225,7 +225,7 @@ Here we can see calls to the Iceberg REST Catalog, followed by calls to the stor
 
 ## Transactions
 
-DuckDB is an ACID-compliant database that supports [transactions]({% link docs/lts/sql/statements/transactions.md %}).
+DuckDB is an ACID-compliant database that supports [transactions]({% link docs/current/sql/statements/transactions.md %}).
 Work on DuckDB-Iceberg has been made with this in mind. Within a transaction, the following conditions will hold for Iceberg tables.
 
 1. The first time a table is read in a transaction, its snapshot information is stored in the transaction and will remain consistent within that transaction.

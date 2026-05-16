@@ -1,7 +1,7 @@
 ---
 layout: docu
 redirect_from:
-- /docs/lts/operations_manual/embedding_duckdb
+- /docs/stable/operations_manual/embedding_duckdb
 - /docs/operations_manual/embedding_duckdb
 - /docs/preview/operations_manual/securing_duckdb/embedding_duckdb
 - /docs/stable/operations_manual/securing_duckdb/embedding_duckdb

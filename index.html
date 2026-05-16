@@ -19,26 +19,17 @@ To add a banner, set banner: true in the front matter and define the banner cont
 	<div class="wrap">
 		<div class="hero-content">
 			<h1 class="display-1">Run analytics<br/>where your data lives</h1>
-			<p class="hero-subtitle">DuckDB is a SQL database that runs everywhere:<br/>on your laptop, on a server and even in the browser</p>
+			<p class="hero-subtitle">
+				DuckDB is a SQL database that runs everywhere<br/>
+				Now with <a href="{% link quack/index.html %}">client-server support</a>
+			</p>
 			<div class="hero-buttons">
 				<a class="button yellow arrow-right" href="/install">Get DuckDB</a>
 				<a class="button transparent arrow-right" href="/docs/current">Read the docs</a>
 			</div>
-			<p class="hero-social-proof">Used by data teams in Big Tech, finance and startups</p>
+			<p class="hero-social-proof">The friendliest analytical database, loved by data teams worldwide</p>
 		</div>
 		<div class="hero-protocol-boxes">
-			<div class="protocol-box">
-				<div class="protocol-title">
-					<svg class="icon"><use href="#code-square-01"></use></svg>
-					<span>Friendly SQL</span>
-				</div>
-				<div class="protocol-tags">
-					<span class="tag"><a href="{% link docs/current/sql/statements/pivot.md %}">Pivot</a></span>
-					<span class="tag"><a href="{% link docs/current/guides/sql_features/asof_join.md %}">AsOf join</a></span>
-					<span class="tag"><a href="{% link docs/current/sql/query_syntax/groupby.md %}">GROUP BY ALL</a></span>
-					<span class="tag"><a href="{% link docs/current/sql/dialect/friendly_sql.md %}">…</a></span>
-				</div>
-			</div>
 			<div class="protocol-box">
 				<div class="protocol-title">
 					<svg class="icon"><use href="#puzzle-piece-02"></use></svg>
@@ -65,6 +56,16 @@ To add a banner, set banner: true in the front matter and define the banner cont
 					<span class="tag"><a href="{% link docs/current/clients/rust.md %}">Rust</a></span>
 					<span class="tag"><a href="{% link docs/current/clients/node_neo/overview.md %}">JavaScript</a></span>
 					<span class="tag"><a href="{% link docs/current/clients/overview.md %}">…</a></span>
+				</div>
+			</div>
+			<div class="protocol-box quack">
+				<div class="protocol-title">
+					<svg class="icon"><use href="#server-05"></use></svg>
+					<span>Remote access (beta)</span>
+				</div>
+				<div class="protocol-tags">
+					<span class="tag"><a href="{% link docs/current/quack/overview.md %}">ATTACH 'quack:...' AS db</a></span>
+					<span class="tag"><a href="{% link docs/current/quack/reference.md %}">db.query('...')</a></span>
 				</div>
 			</div>
 		</div>
@@ -120,7 +121,7 @@ To add a banner, set banner: true in the front matter and define the banner cont
 
 <section class="whyduckdb">
 	<div class="wrap">
-		<h2 class="display-2">How we built DuckDB</h2>
+		<h2 class="display-2">How we designed DuckDB</h2>
 		<div class="icon-grid">
 			<div class="icon-grid-item">
 				<div class="icon-box">

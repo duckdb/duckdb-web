@@ -8,7 +8,7 @@ excerpt: |
 extension:
   name: h5db
   description: Read HDF5 datasets and attributes
-  version: 0.5.1
+  version: 1.1.2
   language: C++
   build: cmake
   license: MIT
@@ -18,32 +18,35 @@ extension:
     - jokasimr
 repo:
   github: jokasimr/h5db
-  ref: v0.5.1
+  ref: v1.1.2
   andium: v0.3.0
 
 docs:
   hello_world: |
     FROM h5_read('file.h5', '/some/dataset', '/another');
   extended_description: |
-    This extension provides table functions for reading data and metadata from HDF5 files.
+    This extension provides functions for reading data and metadata from HDF5 files.
 
     Features include:
-    - `h5_tree()` table function to list groups and datasets in a file.
     - `h5_read()` table function to read datasets.
-    - `h5_attributes()` table function to access attributes.
-    - Multiple datasets: Read and combine multiple datasets in a single query.
+    - `h5_tree()` table function to list groups and datasets in a file, optionally including projected attributes.
+    - `h5_attributes()` table function to read attributes.
+    - `h5_ls()` table and scalar functions to list entries in groups.
+    - Multiple datasets: Read multiple datasets into separate columns.
     - Multi-dimensional arrays: Support for 1D to 4D datasets.
-    - Projection pushdown: Reads only the datasets that are actually needed.
-    - Index column: Optionally adds an `index` column that supports pushdown of constant range filters (`>`, `<=`, `BETWEEN`, etc.) for efficient selective reads.
+    - Projection pushdown: Read only the datasets that are actually needed.
+    - Index column: Optionally adds an `index` column that supports predicate pushdown of constant range filters (`>`, `<=`, `BETWEEN`, etc.) for efficient selective reads.
     - Reads datasets that are larger than memory.
-    - Remote dataset reads via the `httpfs` extension.
+    - Remote reads over HTTPS, S3, etc., via the DuckDB `httpfs` extension.
+    - Remote reads over SFTP via a built-in SFTP client.
+    - Globbing: Combine datasets from multiple files vertically (UNION ALL).
 
     For full documentation, see: [https://github.com/jokasimr/h5db](https://github.com/jokasimr/h5db).
 
 extension_star_count: 1
 extension_star_count_pretty: 1
-extension_download_count: 800
-extension_download_count_pretty: 800
+extension_download_count: 813
+extension_download_count_pretty: 813
 image: '/images/community_extensions/social_preview/preview_community_extension_h5db.png'
 layout: community_extension_doc
 ---
@@ -72,8 +75,12 @@ LOAD {{ page.extension.name }};
 | function_name | function_type | description | comment | examples |
 |---------------|---------------|-------------|---------|----------|
 | h5_alias      | scalar        | NULL        | NULL    |          |
+| h5_attr       | scalar        | NULL        | NULL    |          |
 | h5_attributes | table         | NULL        | NULL    |          |
 | h5_index      | scalar        | NULL        | NULL    |          |
+| h5_ls         | scalar        | NULL        | NULL    |          |
+| h5_ls         | table         | NULL        | NULL    |          |
+| h5_ls_swmr    | scalar        | NULL        | NULL    |          |
 | h5_read       | table         | NULL        | NULL    |          |
 | h5_rse        | scalar        | NULL        | NULL    |          |
 | h5_tree       | table         | NULL        | NULL    |          |

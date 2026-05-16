@@ -1,46 +1,63 @@
-- date: 2026-04-10
-  title: Friday, 10. April 2026
+- date: 2026-06-24
+  title: Wednesday, 24 June 2026
   sessions:
     - venue opens:
-      title: Venue opens
+      title: Warmup
       timetable:
-        - time: "14:00"
-          title: Food, Drinks and Merchandise in the Foyer <a href=https://maps.app.goo.gl/vGe9ZJcwye8zqMxo6">Pakhuis de Zwijger, Piet Heinkade 179, 1019 HC Amsterdam, Netherland<a/>
+        - time: "14:15"
+          title: Sponsor sessions (TBA)
     - first session:
       title: First session
       timetable:
         - time: "15:00"
-          title: Welcome and opening remarks
-          speaker: Hannes Mühleisen and Mark Raasveldt, DuckDB Labs
-          livestream_url: "#"
-        - time: "15:20"
-          title: "Airport for DuckDB: Letting DuckDB take Apache Arrow Flights"
-          speaker: Rusty Conover
-          livestream_url: "#"
-        - time: "15:40"
-          title: "Ibis, DuckDB, and GeoParquet: Making geospatial analytics fast, simple, and Pythonic"
-          speaker: Naty Clementi
-          livestream_url: "#"
+          title: "State of the Duck"
+          speaker: "Hannes Mühleisen and Mark Raasveldt<br>(DuckDB Labs)"
+        - time: "15:30"
+          title: "Effortlessly modernize your legacy: SQLFrame migrates PySpark to DuckDB without code changes"
+          speaker: "Nicolas Renkamp<br>(Merck KGaA)"
+        - time: "15:45"
+          title: "Phages and DuckDB: The mighty duo against the giants"
+          speaker: "Herminio Vazquez-Cano (ETH Zürich),<br>Virginie Grosboillot (U. of Ljubljana)"
         - time: "16:00"
+          title: "ggsql: A grammar of graphics for SQL"
+          speaker: "Teun van den Brand<br>(Posit PBC)"
+        - time: "16:15"
           title: Coffee break
     - second session:
       title: Second session
       timetable:
-        - time: "16:20"
-          title: Introducing a SQL-based metrics layer powered by DuckDB
-          speaker: Mike Driscoll, Rill Data
-          livestream_url: "#"
-        - time: "16:40"
-          title: Stock data analytics with DuckDB
-          speaker: "Ryan Hamilton, TimeStored"
-          livestream_url: "#"
+        - time: "16:35"
+          title: "How we built a SQL layer over our user listening history for agentic access"
+          speaker: "Kian Mehrabani<br>(Spotify)"
+        - time: "16:50"
+          title: "Grep your lakehouse: Search-first retrieval for DuckDB-powered agents"
+          speaker: "Sylvain Utard<br>(Altertable.ai)"
+        - time: "17:05"
+          title: "When the sea lion learns to quack: DuckDB as a MariaDB storage engine"
+          speaker: "Roman Nozdrin<br>(MariaDB Corporation)"
     - lightning talks:
       title: Lightning talks
       timetable:
-        - time: "17:00"
-          title: "zoekeend: A search engine for information retrieval experiments based on DuckDB"
-          speaker: Djoerd Hiemstra, Radboud University
-          livestream_url: "#"
-        - time: "17:05"
-          title: Unlocking graph analytics in DuckDB with SQL/PGQ
-          speaker: Daniël ten Wolde, CWI
+        - time: "17:20"
+          title: "Native app development using DuckDB"
+          speaker: "Milla Henriksson<br>(Toyota Gazoo Racing World Rally Team)"
+        - time: "17:26"
+          title: "Making Iceberg walk and talk like Postgres"
+          speaker: "Marco Slot<br>(Snowflake)"
+        - time: "17:32"
+          title: "DuckLake on Hetzner: Your own data lakehouse for under €15 a month"
+          speaker: "Floyd Berndsen"
+        - time: "17:38"
+          title: "DuckDB powering cancer genomics research"
+          speaker: "Thomas Visser<br>(Hartwig Medical Foundation)"
+        - time: "17:44"
+          title: "DuckDB as an analytical runtime: Building local-first analytics apps with SQLRooms"
+          speaker: "Ilya Boyandin<br>(Foursquare / GeoVisually GmbH)"
+        - time: "17:50"
+          title: "A laptop, a duck, and twenty years of wind: Auditing UK energy policy without a cluster"
+          speaker: "Barry Smart<br>(endjin)"
+    - first session:
+      title: Social event
+      timetable:
+        - time: "18:00"
+          title: "Drink and snacks"

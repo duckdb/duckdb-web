@@ -30,10 +30,10 @@ docs:
     `ngrams(list,n)`, `double_metaphone(str)`
     and faster versions of `levenshtein` and `damerau_levenshtein`.
 
-extension_star_count: 17
-extension_star_count_pretty: 17
-extension_download_count: 10745
-extension_download_count_pretty: 10.7k
+extension_star_count: 18
+extension_star_count_pretty: 18
+extension_download_count: 4294
+extension_download_count_pretty: 4.3k
 image: '/images/community_extensions/social_preview/preview_community_extension_splink_udfs.png'
 layout: community_extension_doc
 ---

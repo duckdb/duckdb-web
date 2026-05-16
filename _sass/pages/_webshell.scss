@@ -1,6 +1,4 @@
-@use 'sass:color';
 @use '../abstracts/variables' as *;
-@use '../abstracts/mixins' as *;
 
 html:has(body.layout_webshell),
 html:has(body.layout_webshell) body.layout_webshell {
@@ -46,13 +44,29 @@ body.layout_webshell {
 		padding: 0 0 20px 20px;
 		box-sizing: border-box;
 		overflow: hidden;
-		
+
 		.xterm-viewport{
 			padding-right: 20px;
 		}
 		.xterm-screen{
 			padding-top: 4px;
 		}
+
+		.xterm-fg-25,
+		.xterm-fg-27,
+		.xterm-fg-75  { color: var(--cli-keyword); }
+		.xterm-fg-28,
+		.xterm-fg-34  { color: var(--cli-functions); }
+		.xterm-fg-58,
+		.xterm-fg-94,
+		.xterm-fg-220 { color: var(--cli-string); }
+		.xterm-fg-160,
+		.xterm-fg-203 { color: var(--cli-error); }
+		.xterm-fg-163,
+		.xterm-fg-201 { color: var(--cli-number); }
+		.xterm-fg-241,
+		.xterm-fg-248 { color: var(--cli-secondary); }
+		.xterm-fg-166 { color: var(--orange-50); }
 	}
 
 	@media (min-width: 901px) {
@@ -107,6 +121,11 @@ body.layout_webshell {
 	}
 
 	header .headerline .headercontent .landingmenu nav {
+		max-height: none;
+		overflow: visible;
+	}
+
+	header .headerline .headercontent .landingmenu nav .submenuwrap {
 		max-height: calc(100vh - 110px);
 		overflow-y: auto;
 		overscroll-behavior: contain;

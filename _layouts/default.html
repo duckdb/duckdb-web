@@ -77,7 +77,7 @@
 		<div class="headerline">
 			<div class="headercontent">
 				<div class="duckdbhome">
-					<a href="{{ site.url }}/">{% if page.body_class contains "duckcon7" %}<img src="{% link images/logo-dl/duckcon7.svg %}" alt="DuckCon 7 Logo for Download" class="downloadlogo">{% else %}<img src="{% link images/logo-dl/DuckDB_Logo-horizontal.svg %}" alt="DuckDB Logo for Download" class="downloadlogo">{% endif %}</a>
+					<a href="{{ site.url }}/">{% if page.body_class contains "duckcon7" %}<img src="{% link images/logo-dl/duckcon7.svg %}" alt="DuckCon 7 Logo for Download" class="downloadlogo">{% else %}<img src="{% link images/designmanual/DuckDB_inline-lightmode.svg %}" alt="DuckDB Logo for Download" class="downloadlogo">{% endif %}</a>
 					{% if page.body_class contains "duckcon7" %}<div id="duckcon7_logo"></div>{% else %}<div id="duckdb_logo"></div>{% endif %}
 				</div>
 				<div class="landingmenu">
@@ -193,6 +193,9 @@
 	{% endif %}
 	{% if page.body_class contains "wasm" %}
 	<script src="/js/wasm.js" defer></script>
+	{% endif %}
+	{% if page.body_class contains "quack" %}
+	<script src="/js/quack.js" defer></script>
 	{% endif %}
 
 </body>

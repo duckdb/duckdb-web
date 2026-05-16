@@ -1,12 +1,16 @@
 ---
 layout: docu
 redirect_from:
+- /apis
 - /clients
+- /drivers
+- /docs/api
 - /docs/api/overview
 - /docs/clients
 - /docs/clients/overview
-- /docs/lts/clients
+- /docs/preview/clients
 - /docs/preview/clients/overview
+- /docs/stable/clients
 - /docs/stable/clients/overview
 title: Client Overview
 ---
@@ -25,7 +29,7 @@ DuckDB is an in-process database system and offers client APIs (“drivers”) f
 | [R]({% link docs/current/clients/r.md %})                                       | [Kirill Müller](https://github.com/krlmlr)      | {% include tooltip.html label="Primary" id="support_tier_primary" %}      | {% if site.current_duckdb_r_version != "" %}[{{ site.current_duckdb_r_version }}]({% link install/index.html %}?version=current&environment=r){% else %}[{{ site.lts_duckdb_r_version }}]({% link install/index.html %}?version=stable&environment=r){% endif %}                                                                                                                                                                       |
 | [Rust]({% link docs/current/clients/rust.md %})                                 | Core team                                       | {% include tooltip.html label="Primary" id="support_tier_primary" %}      | {% if site.current_duckdb_rust_version != "" %}[{{ site.current_duckdb_rust_version }}]({% link install/index.html %}?version=current&environment=rust){% else %}[{{ site.lts_duckdb_rust_version }}]({% link install/index.html %}?version=stable&environment=rust){% endif %}                                                                                                                                                        |
 | [WebAssembly (Wasm)]({% link docs/current/clients/wasm/overview.md %})          | Core team                                       | {% include tooltip.html label="Primary" id="support_tier_primary" %}      | {% if site.current_duckdb_wasm_version != "" %}[{{ site.current_duckdb_wasm_version }}](https://github.com/duckdb/duckdb-wasm#readme){% else %}[{{ site.lts_duckdb_wasm_version }}](https://github.com/duckdb/duckdb-wasm#readme){% endif %}                                                                                                                                                                                           |
-| [ADBC (Arrow)]({% link docs/current/clients/adbc.md %})                         | Core team                                       | {% include tooltip.html label="Secondary" id="support_tier_secondary" %}    | {% if site.current_duckdb_version != "" %}[{{ site.current_duckdb_version }}]({% link docs/current/clients/adbc.md %}){% else %}[{{ site.lts_duckdb_version }}]({% link docs/lts/clients/adbc.md %}){% endif %}                                                                                                                                                                                                                        |
+| [ADBC (Arrow)]({% link docs/current/clients/adbc.md %})                         | Core team                                       | {% include tooltip.html label="Secondary" id="support_tier_secondary" %}    | {% if site.current_duckdb_version != "" %}[{{ site.current_duckdb_version }}]({% link docs/current/clients/adbc.md %}){% else %}[{{ site.lts_duckdb_version }}]({% link docs/current/clients/adbc.md %}){% endif %}                                                                                                                                                                                                                        |
 | [C# (.NET)](https://duckdb.net/)                                                | [Giorgi](https://github.com/Giorgi)             | {% include tooltip.html label="Secondary" id="support_tier_secondary" %}    | {% if site.current_duckdb_csharp_version != "" %}[{{ site.current_duckdb_csharp_version }}](https://www.nuget.org/packages?q=Tags%3A%22DuckDB%22+Author%3A%22Giorgi%22&includeComputedFrameworks=true&prerel=true&sortby=relevance){% else %}[{{ site.lts_duckdb_csharp_version }}](https://www.nuget.org/packages?q=Tags%3A%22DuckDB%22+Author%3A%22Giorgi%22&includeComputedFrameworks=true&prerel=true&sortby=relevance){% endif %} |
 | [C++]({% link docs/current/clients/cpp.md %})                                   | Core team                                       | {% include tooltip.html label="Secondary" id="support_tier_secondary" %}    | {% if site.current_duckdb_version != "" %}[{{ site.current_duckdb_version }}]({% link install/index.html %}?version=current&environment=c){% else %}[{{ site.lts_duckdb_version }}]({% link install/index.html %}?version=stable&environment=c){% endif %}                                                                                                                                                                             |
 

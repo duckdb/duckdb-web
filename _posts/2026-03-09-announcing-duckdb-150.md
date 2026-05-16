@@ -468,7 +468,7 @@ Please note that this is currently in the beta stage. If you have any feedback, 
 
 #### CLI for Linux with musl libc
 
-We are distributing CLI clients that work with [musl libc]({% link docs/lts/dev/building/linux.md %}) (e.g., for Alpine Linux, commonly used in Docker images). The archives are available [on GitHub](https://github.com/duckdb/duckdb/releases/tag/v1.5.0).
+We are distributing CLI clients that work with [musl libc]({% link docs/current/dev/building/linux.md %}) (e.g., for Alpine Linux, commonly used in Docker images). The archives are available [on GitHub](https://github.com/duckdb/duckdb/releases/tag/v1.5.0).
 
 Note that the musl libc CLI client requires the `libstdc++`. To install this package, run:
 

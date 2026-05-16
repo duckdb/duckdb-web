@@ -22,14 +22,14 @@ extension:
     \n  }\n}\n"
   version: '2025101201'
 repo:
-  andium: dc0cf5a12cbe32412e7fedf1b0a07f0e34150473
+  andium: 3c12d74372ff8e7f5b4577da7dce3c36aca0bb6f
   github: query-farm/airport
-  ref: 49d97c8e2c84e5dcc75dbca16ff80d8f56e028ce
+  ref: 8c0fcc5bc4de866c2ae7b20069db0e2fb06f6d86
 
-extension_star_count: 331
-extension_star_count_pretty: 331
-extension_download_count: 2258
-extension_download_count_pretty: 2.3k
+extension_star_count: 332
+extension_star_count_pretty: 332
+extension_download_count: 820
+extension_download_count_pretty: 820
 image: '/images/community_extensions/social_preview/preview_community_extension_airport.png'
 layout: community_extension_doc
 ---

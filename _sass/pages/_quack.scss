@@ -1,0 +1,679 @@
+@use '../abstracts/variables' as *;
+@use '../abstracts/mixins' as *;
+
+/* ===========================================================================
+   Quack landing page
+   =========================================================================== */
+
+body.quack {
+
+	main {
+		--quack-codecard-bg: var(--doc-codebox-background-color, #f2f2f2);
+		--quack-codecard-border: var(--doc-codebox-border-color, #e6e6e6);
+		--quack-step-label-color: var(--main-benefit-icon-color, #998b00);
+		--quack-radius-card: 15px;
+		--quack-radius-inner: 10px;
+		--quack-text-secondary: var(--main-text-secondary-color, #666);
+	}
+
+	.section-title {
+		@include display-3;
+		text-align: center;
+		margin: 0 0 60px;
+	}
+
+	/* ----- Hero ----- */
+	.quack-hero {
+		padding: 100px 20px 75px;
+		text-align: center;
+
+		.pre-title {
+			color: var(--main-text-tertiary-color, #B2B2B2);
+		}
+
+		h1.display-2 {
+			margin: 13px auto 0;
+			max-width: 760px;
+		}
+
+		.hero-subtitle {
+			margin: 20px auto 30px;
+			max-width: 640px;
+			color: var(--main-text-secondary-color, #666);
+			font-size: 16px;
+			line-height: 1.4;
+		}
+
+		.hero-buttons {
+			display: flex;
+			flex-wrap: wrap;
+			gap: 8px;
+			justify-content: center;
+
+			.button {
+				margin-right: 0;
+			}
+		}
+
+		.quack-protocol-card {
+			margin: 75px auto 0;
+			max-width: 385px;
+			text-align: left;
+			border: 1px solid var(--main-codebox-border-color, rgba(13, 13, 13, 0.08));
+			border-radius: var(--quack-radius-card);
+			background: var(--main-codebox-main-background-color, rgba(250, 250, 250, 0.8));
+			overflow: hidden;
+		}
+
+		.quack-protocol-card-header {
+			display: flex;
+			align-items: center;
+			gap: 16px;
+			padding: 20px;
+			border-bottom: 1px solid var(--doc-codebox-button-background-color, rgba(217, 217, 217, 0.6));
+		}
+
+		.quack-protocol-icon {
+			display: inline-flex;
+			align-items: center;
+			justify-content: center;
+			padding: 10px;
+			border-radius: 10px;
+			background: var(--interactive-installation-box-background, rgba(241, 230, 94, 0.3));
+			border: 1px solid var(--interactive-installation-box-border, rgba(204, 189, 0, 0.6));
+
+			svg {
+				display: block;
+				width: 38px;
+				height: 38px;
+			}
+		}
+
+		.quack-protocol-card-title {
+			display: flex;
+			flex-direction: column;
+			gap: 4px;
+
+			h3 {
+				margin: 0;
+				font-size: var(--type-title-1, 22px);
+				font-weight: 600;
+				line-height: 1.2;
+				color: var(--main-text-primary-color-strong, #050505);
+			}
+
+			p {
+				margin: 0;
+				font-size: var(--type-body-small, 14px);
+				line-height: 1.4;
+				color: var(--quack-text-secondary);
+			}
+		}
+
+		.quack-protocol-card-meta {
+			padding: 16px 20px;
+
+			> div {
+				display: flex;
+				align-items: center;
+				flex-wrap: wrap;
+				gap: 4px;
+			}
+
+			.works-with-label {
+				margin-right: 8px;
+				font-size: var(--type-tiny, 12px);
+				letter-spacing: 0.24px;
+				color: var(--main-text-tertiary-color, #b2b2b2);
+			}
+
+			.tag {
+				display: inline-block;
+				padding: 4px 12px;
+				border: 1px solid var(--main-quaternary-color, #ccc);
+				border-radius: 60px;
+				background: var(--doc-codebox-background-color-secondary, #ededed);
+				font-size: var(--type-micro, 10px);
+				line-height: 1.2;
+				letter-spacing: 0.2px;
+				color: var(--quack-text-secondary);
+				text-decoration: none;
+				transition: border-color 0.2s, background-color 0.2s;
+			}
+
+			a.tag:hover {
+				border-color: var(--interactive-installation-box-border, rgba(204, 189, 0, 0.6));
+				background: var(--interactive-installation-box-background, rgba(241, 230, 94, 0.3));
+			}
+		}
+	}
+
+	/* ----- Introducing Quack (video section, mirrors ducklake-web .podcast) ----- */
+	.quack-introducing {
+		.wrap {
+			display: flex;
+			flex-wrap: wrap;
+			gap: 50px;
+			align-items: center;
+			max-width: 1150px;
+			margin: 0 auto;
+		}
+
+		.section-image {
+			flex: 1 1 0;
+			min-width: 0;
+		}
+
+		.section-text {
+			flex: 1 1 0;
+			min-width: 0;
+			text-align: center;
+
+			h2 {
+				@include display-3;
+				margin: 0 0 16px;
+			}
+
+			p {
+				margin: 0;
+				font-size: 16px;
+				line-height: 1.5;
+				color: var(--main-text-primary-color, #0d0d0d);
+			}
+		}
+
+		.video-thumbnail {
+			position: relative;
+			cursor: pointer;
+			border-radius: var(--quack-radius-card);
+			border: 1px solid var(--main-blogpost-border-color, var(--main-codebox-border-color, #e6e6e6));
+			overflow: hidden;
+			transition: all 0.3s ease;
+
+			img {
+				display: block;
+				width: 100%;
+				height: auto;
+				transition: all 0.3s ease;
+			}
+
+			&:hover .play-button {
+				transform: translate(-50%, -50%) scale(1.1);
+			}
+
+			.play-button {
+				position: absolute;
+				top: 50%;
+				left: 50%;
+				transform: translate(-50%, -50%);
+				transition: all 0.3s ease;
+				pointer-events: none;
+			}
+		}
+
+		.video-container {
+			position: relative;
+			width: 100%;
+			height: 0;
+			padding-bottom: 56.25%;
+			border-radius: var(--quack-radius-card);
+			overflow: hidden;
+
+			iframe {
+				position: absolute;
+				top: 0;
+				left: 0;
+				width: 100%;
+				height: 100%;
+				border: 0;
+			}
+		}
+	}
+
+	/* ----- Section wrappers ----- */
+	.quack-architecture,
+	.quack-howitworks,
+	.quack-install,
+	.quack-faq,
+	.quack-ecosystem,
+	.quack-introducing {
+		padding: 75px 0;
+	}
+
+	/* ----- Architecture diagram ----- */
+	.architecture-board {
+		display: grid;
+		grid-template-columns: 1fr 98px 1fr 98px 1fr;
+		gap: 0;
+		align-items: stretch;
+		max-width: 1150px;
+		margin: 0 auto;
+		padding: 24px;
+		background: var(--main-codebox-main-background-color, rgba(250, 250, 250, 0.8));
+		border: 1px solid var(--main-codebox-border-color, rgba(13, 13, 13, 0.08));
+		border-radius: var(--quack-radius-card);
+		box-shadow: 2px 2px 24px 0 var(--main-codebox-dropshadow, rgba(0, 0, 0, 0.03));
+		text-rendering: geometricPrecision;
+	}
+
+	.arch-col {
+		display: flex;
+		flex-direction: column;
+		gap: 16px;
+		min-width: 0;
+	}
+
+	.arch-col-header {
+		display: flex;
+		align-items: center;
+		gap: 5px;
+		padding: 0 5px 4px;
+
+		.icon {
+			width: 20px;
+			height: 20px;
+			color: var(--main-benefit-icon-color, #998b00);
+		}
+
+		h4 {
+			@include title-2;
+			margin: 0;
+			font-size: 14px;
+			font-weight: 600;
+		}
+	}
+
+	.arch-stack {
+		display: flex;
+		flex-direction: column;
+		gap: 12px;
+	}
+
+	.codecard {
+		background: var(--quack-codecard-bg);
+		border: 1px solid var(--quack-codecard-border);
+		border-radius: var(--quack-radius-inner);
+		display: flex;
+		flex-direction: column;
+		min-width: 0;
+
+		&.tall {
+			flex: 1;
+		}
+
+		&.storage {
+			padding: 0;
+		}
+	}
+
+	.codecard-header {
+		display: flex;
+		align-items: center;
+		gap: 6px;
+		padding: 12px 2px 12px 16px;
+		border-bottom: 1px solid var(--quack-codecard-border);
+		border-top-left-radius: var(--quack-radius-inner);
+		border-top-right-radius: var(--quack-radius-inner);
+		font-size: 12.5px;
+		font-weight: 600;
+	}
+
+	.chip {
+		display: inline-flex;
+		align-items: center;
+		gap: 5px;
+		font-size: 12.5px;
+		font-weight: 600;
+		color: var(--main-text-primary-color, #0d0d0d);
+	}
+
+	.plus {
+		font-weight: 600;
+		color: var(--main-text-primary-color, #0d0d0d);
+	}
+
+	.codecard-body {
+		padding: 16px 20px 16px 16px;
+
+		pre,
+		figure.highlight,
+		figure.highlight pre,
+		div.highlight {
+			background: transparent !important;
+			border: 0 !important;
+			margin: 0 !important;
+			padding: 0 !important;
+			font-size: 12px;
+			line-height: 1.3;
+			overflow-x: auto;
+		}
+
+		code {
+			font-size: 12px;
+			line-height: 1.3;
+			background: transparent;
+		}
+	}
+
+	.codecard-body + .codecard-meta {
+		border-top: 1px solid var(--quack-codecard-border);
+	}
+
+	.storage-panel .codecard-meta + .storage-tags {
+		border-top: 1px solid var(--quack-codecard-border);
+	}
+
+	.codecard-meta {
+		list-style: none;
+		margin: 0;
+		padding: 12px 16px;
+		display: flex;
+		flex-direction: column;
+		gap: 3px;
+
+		li {
+			display: flex;
+			align-items: center;
+			gap: 5px;
+			font-size: 11px;
+			letter-spacing: 0.2px;
+			color: var(--quack-text-secondary);
+
+			&.indented {
+				padding-left: 17px;
+			}
+		}
+
+		.icon {
+			width: 12px;
+			height: 12px;
+			flex-shrink: 0;
+		}
+	}
+
+	/* Connector arrows between columns */
+	.arch-connector {
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		gap: 104px;
+		padding: 0 20px;
+		min-width: 58px;
+		margin-top: 40px;
+
+		&.single {
+			justify-content: center;
+		}
+	}
+
+	.connector-row {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		gap: 12px;
+		font-family: $fontMono;
+		font-size: 12px;
+		color: var(--quack-text-secondary);
+	}
+
+	.connector-arrow {
+		width: 58px;
+		height: 22px;
+		background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='58' height='22' fill='none' viewBox='0 0 58 22'%3E%3Cpath fill='%231a1a1a' d='M58 2.887 53 0v5.774zm-58 0v.5h53.5v-1H0z'/%3E%3Cpath fill='%23b2b2b2' d='M58 2.887 53 0v5.774zm-58 0v.5h53.5v-1H0z'/%3E%3Cpath fill='%231a1a1a' d='m0 18.887 5 2.886V16zm58 0v-.5H4.5v1H58z'/%3E%3Cpath fill='%23b2b2b2' d='m0 18.887 5 2.886V16zm58 0v-.5H4.5v1H58z'/%3E%3C/svg%3E");
+		background-repeat: no-repeat;
+		background-position: center;
+	}
+
+	/* Storage tabs */
+	.storage-tabs {
+		display: flex;
+		align-items: center;
+		gap: 5px;
+		padding: 8px 2px 8px 8px;
+		border-bottom: 1px solid var(--quack-codecard-border);
+		border-top-left-radius: var(--quack-radius-inner);
+		border-top-right-radius: var(--quack-radius-inner);
+
+		.tab {
+			display: inline-flex;
+			align-items: center;
+			gap: 5px;
+			padding: 10px;
+			font-size: 12.5px;
+			font-weight: 600;
+			background: transparent;
+			border: 1px solid transparent;
+			border-radius: var(--quack-radius-inner);
+			cursor: pointer;
+			color: var(--main-text-primary-color, #0d0d0d);
+		}
+
+		.tab.active {
+			background: var(--interactive-installation-box-background, rgba(241, 230, 94, 0.3));
+			border-color: var(--interactive-installation-box-border, rgba(204, 189, 0, 0.6));
+		}
+
+		.icon {
+			width: 16px;
+			height: 16px;
+			color: var(--main-benefit-icon-color, #998b00);
+		}
+	}
+
+	.storage-panel.hidden {
+		display: none;
+	}
+
+	.storage-tags {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 4px;
+		padding: 16px;
+
+		.tag {
+			display: inline-block;
+			padding: 3px 8px;
+			border: 1px solid var(--main-quaternary-color, #ccc);
+			border-radius: 60px;
+			font-family: $fontMono;
+			font-size: var(--type-tiny, 12px);
+			line-height: 1.2;
+			text-transform: uppercase;
+			color: var(--main-text-secondary-color, #666);
+			transition: border-color 0.2s, background-color 0.2s;
+
+			a {
+				color: inherit;
+				text-decoration: none;
+			}
+
+			&:hover {
+				border: 1px solid var(--interactive-installation-box-border, rgba(204, 189, 0, 0.6));
+				background: var(--interactive-installation-box-background, rgba(241, 230, 94, 0.3));
+			}
+		}
+	}
+
+	/* ----- How it works + Ecosystem use the shared .icon-grid component ----- */
+	.icon-grid .icon-grid-item .icon {
+		color: var(--main-benefit-icon-color, #998b00);
+	}
+
+	.quack-howitworks .wrap {
+		max-width: 950px;
+	}
+
+	/* Ecosystem icons are multicolor brand SVGs — keep their own fills */
+	.quack-ecosystem .icon-grid .icon-grid-item .icon {
+		width: 38px;
+		height: 38px;
+		color: unset;
+		stroke: unset;
+		stroke-width: unset;
+	}
+
+	/* ----- Install / Try Quack today ----- */
+	.install-header {
+		text-align: center;
+		margin-bottom: 32px;
+
+		h2 {
+			margin-bottom: 16px;
+		}
+
+		p {
+			max-width: 520px;
+			margin: 0 auto;
+			font-size: 17px;
+			line-height: 1.6;
+			color: var(--main-text-secondary-color, #666);
+		}
+
+		code {
+			font-family: $fontMono;
+			font-size: 0.9em;
+		}
+	}
+
+	.install-topbar {
+		display: flex;
+		justify-content: center;
+		margin: 0 auto 40px;
+	}
+
+	.install-steps {
+		display: grid;
+		grid-template-columns: 1fr 1fr;
+		gap: 40px 20px;
+		max-width: 950px;
+		margin: 0 auto;
+
+		.step:first-child {
+			grid-column: 1 / -1;
+		}
+
+		&.hidden {
+			display: none;
+		}
+	}
+
+	.step {
+		display: flex;
+		flex-direction: column;
+		gap: 4px;
+
+		.step-label {
+			margin: 0;
+			padding-left: 8px;
+			color: var(--quack-step-label-color);
+		}
+
+		h3 {
+			margin: 0;
+			padding: 0 0 10px 8px;
+			font-size: 19px;
+			font-weight: 600;
+			color: var(--main-text-primary-color, #0d0d0d);
+		}
+
+		figure.highlight,
+		div.highlight,
+		pre.highlight {
+			background: var(--quack-codecard-bg);
+			border: 1px solid var(--quack-codecard-border);
+			border-radius: var(--quack-radius-card);
+			padding: 20px;
+			margin: 0;
+			position: relative;
+
+			pre,
+			code {
+				margin: 0;
+				padding: 0;
+				background: transparent;
+			}
+		}
+
+		code {
+			font-size: 14px;
+			line-height: 1.4;
+		}
+	}
+
+	.install-more {
+		display: flex;
+		justify-content: center;
+		margin-top: 40px;
+	}
+
+	/* ----- FAQ tweaks (built on top of .frequentlyaskedquestions) ----- */
+	.quack-faq {
+		.wrap {
+			max-width: 950px;
+			margin: 0 auto;
+		}
+
+		.qa-wrap {
+			margin-bottom: 10px;
+		}
+
+		.cta {
+			display: flex;
+			justify-content: center;
+			margin-top: 40px;
+		}
+	}
+
+	/* ----- Dark mode: connector arrows use light fills ----- */
+	@at-root html.darkmode body.quack .connector-arrow {
+		background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='58' height='22' fill='none' viewBox='0 0 58 22'%3E%3Cpath fill='%23595959' d='M58 2.887 53 0v5.774zm-58 0v.5h53.5v-1H0z'/%3E%3Cpath fill='%23e6e6e6' d='M58 2.887 53 0v5.774zm-58 0v.5h53.5v-1H0z'/%3E%3Cpath fill='%23595959' d='m0 18.887 5 2.886V16zm58 0v-.5H4.5v1H58z'/%3E%3Cpath fill='%23e6e6e6' d='m0 18.887 5 2.886V16zm58 0v-.5H4.5v1H58z'/%3E%3C/svg%3E");
+	}
+
+	/* ----- Responsive ----- */
+	@media (max-width: 980px) {
+		.architecture-board {
+			grid-template-columns: 1fr;
+		}
+
+		.arch-connector {
+			display: none;
+		}
+
+		.arch-col ~ .arch-col {
+			margin-top: 40px;
+		}
+
+		.install-steps {
+			grid-template-columns: 1fr;
+
+			.step:first-child {
+				grid-column: auto;
+			}
+		}
+
+		.quack-introducing .wrap {
+			flex-direction: column;
+		}
+
+		.hero-subtitle br {
+			display: none;
+		}
+
+		.quack-hero {
+			padding: 50px 0px 50px
+		}
+
+		.quack-architecture,
+		.quack-howitworks,
+		.quack-install,
+		.quack-faq,
+		.quack-ecosystem,
+		.quack-introducing {
+			padding: 40px 0;
+		}
+
+		.section-title {
+			margin-bottom: 36px;
+		}
+	}
+}

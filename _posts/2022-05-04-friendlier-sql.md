@@ -219,7 +219,7 @@ GROUP BY
 
 ## Function Aliases from Other Databases
 
-For many functions, DuckDB supports multiple names in order to align with other database systems. After all, ducks are pretty versatile – they can fly, swim, and walk! Most commonly, DuckDB supports PostgreSQL function names, but many SQLite names are supported, as well as some from other systems. If you are migrating your workloads to DuckDB and a different function name would be helpful, please reach out – they are very easy to add as long as the behavior is the same! See our [functions documentation]({% link docs/lts/sql/functions/overview.md %}) for details.
+For many functions, DuckDB supports multiple names in order to align with other database systems. After all, ducks are pretty versatile – they can fly, swim, and walk! Most commonly, DuckDB supports PostgreSQL function names, but many SQLite names are supported, as well as some from other systems. If you are migrating your workloads to DuckDB and a different function name would be helpful, please reach out – they are very easy to add as long as the behavior is the same! See our [functions documentation]({% link docs/current/sql/functions/overview.md %}) for details.
 
 ```sql
 SELECT
@@ -271,11 +271,11 @@ JOIN sith_count_varchar s_char
 
 There are many other features of DuckDB that make it easier to analyze data with SQL!  
 
-DuckDB [makes working with time easier in many ways]({% post_url 2022-01-06-time-zones %}), including by accepting multiple different syntaxes (from other databases) for the [`INTERVAL` data type]({% link docs/lts/sql/data_types/interval.md %}) used to specify a length of time.  
+DuckDB [makes working with time easier in many ways]({% post_url 2022-01-06-time-zones %}), including by accepting multiple different syntaxes (from other databases) for the [`INTERVAL` data type]({% link docs/current/sql/data_types/interval.md %}) used to specify a length of time.  
 
-DuckDB also implements multiple SQL clauses outside of the traditional core clauses including the [`SAMPLE` clause]({% link docs/lts/sql/query_syntax/sample.md %}) for quickly selecting a random subset of your data and the [`QUALIFY` clause]({% link docs/lts/sql/query_syntax/qualify.md %}) that allows filtering of the results of window functions (much like a `HAVING` clause does for aggregates).  
+DuckDB also implements multiple SQL clauses outside of the traditional core clauses including the [`SAMPLE` clause]({% link docs/current/sql/query_syntax/sample.md %}) for quickly selecting a random subset of your data and the [`QUALIFY` clause]({% link docs/current/sql/query_syntax/qualify.md %}) that allows filtering of the results of window functions (much like a `HAVING` clause does for aggregates).  
 
-The [`DISTINCT ON` clause]({% link docs/lts/sql/query_syntax/select.md %}#distinct-on-clause) allows DuckDB to select unique combinations of a subset of the columns in a `SELECT` clause, while returning the first row of data for columns not checked for uniqueness.
+The [`DISTINCT ON` clause]({% link docs/current/sql/query_syntax/select.md %}#distinct-on-clause) allows DuckDB to select unique combinations of a subset of the columns in a `SELECT` clause, while returning the first row of data for columns not checked for uniqueness.
 
 ## Ideas for the Future
 
@@ -287,6 +287,6 @@ In addition to what has already been implemented, several other improvements hav
 * Incremental column aliases
   * Refer to previously defined aliases in subsequent calculated columns rather than re-specifying the calculations
 * Dot operators for JSON types
-  * The JSON extension is brand new ([see our documentation!]({% link docs/lts/data/json/overview.md %})) and already implements friendly `->` and `->>` syntax
+  * The JSON extension is brand new ([see our documentation!]({% link docs/current/data/json/overview.md %})) and already implements friendly `->` and `->>` syntax
 
 Thanks for checking out DuckDB! May the Force be with you...

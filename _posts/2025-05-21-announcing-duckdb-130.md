@@ -20,12 +20,12 @@ In this blog post, we cover the most important features of the new release. Duck
 
 Now that all mainstream Linux distributions use [glibc 2.28](https://lists.gnu.org/archive/html/info-gnu/2018-08/msg00000.html) or newer, DuckDB's official Linux binaries require at least glibc 2.28 or newer. The release is [built using the `manylinux_2_28` image from Python](https://github.com/duckdb/duckdb/pull/16956), which combines an older glibc with a newer compiler. This change also implies that extensions are no longer distributed for the `linux_amd64_gcc4` platform.
 
-We highly value [portability]({% link why_duckdb.md %}#portable), so it is of course still possible to [build DuckDB from source]({% link docs/lts/dev/building/overview.md %}) for older versions of glibc.
+We highly value [portability]({% link why_duckdb.md %}#portable), so it is of course still possible to [build DuckDB from source]({% link docs/current/dev/building/overview.md %}) for older versions of glibc.
 
 ### Lambda Function Syntax
 
 Previously, lambda functions in DuckDB could be specified using the single arrow syntax: `x -> x + 1`.
-The single arrow operator is also used by the JSON extension to express [JSON extraction]({% link docs/lts/data/json/json_functions.md %}#json-extraction-functions) using the syntax `->'field'`.
+The single arrow operator is also used by the JSON extension to express [JSON extraction]({% link docs/current/data/json/json_functions.md %}#json-extraction-functions) using the syntax `->'field'`.
 The two meanings of the single arrow operator are treated the same by the binder, thus they share the same (low) precedence, necessitating extra parentheses in JSON expression with equality checks:
 
 ```sql
@@ -70,7 +70,7 @@ SELECT ['hello ''my'' world'] AS s;
 
 DuckDB version 1.2.2 returns `[hello 'my' world]` while DuckDB 1.3.0 returns `['hello \'my\' world']`.
 
-To serialize a list of strings with the old behavior, use the [`array_to_string` function]({% link docs/lts/sql/functions/list.md %}#array_to_string):
+To serialize a list of strings with the old behavior, use the [`array_to_string` function]({% link docs/current/sql/functions/list.md %}#array_to_string):
 
 ```sql
 SELECT printf('[%s]', array_to_string(
@@ -166,7 +166,7 @@ The main advantage of this feature is usability: we can use the regular shell to
 
 ### `TRY` Expression
 
-DuckDB already supported [`TRY_CAST`]({% link docs/lts/sql/expressions/cast.md %}#TRY_CAST), which was trying to cast a value but did not fail the query if this was not possible. For example:
+DuckDB already supported [`TRY_CAST`]({% link docs/current/sql/expressions/cast.md %}#TRY_CAST), which was trying to cast a value but did not fail the query if this was not possible. For example:
 
 ```sql
 SELECT TRY_CAST('asdf' AS INTEGER);
@@ -298,7 +298,7 @@ MY_SECRET=asdf duckdb -c \
 
 ### Unpacking Columns
 
-DuckDB v1.3.0 brings a further boost to the popular [`COLUMNS(*)` expression]({% link docs/lts/sql/expressions/star.md %}#columns-expression).
+DuckDB v1.3.0 brings a further boost to the popular [`COLUMNS(*)` expression]({% link docs/current/sql/expressions/star.md %}#columns-expression).
 Previously, _unpacking_ the entities into a list was possible by adding a leading `*` character:
 
 ```sql
@@ -349,7 +349,7 @@ SELECT [a::VARCHAR, b::VARCHAR] AS col_exp FROM tbl;
 
 ### Spatial `JOIN` Operator
 
-We added a new specialized join operator as part of the [`spatial` extension]({% link docs/lts/core_extensions/spatial/overview.md %}), which greatly improves the efficiency of _spatial joins_, that is, queries that `JOIN` two geometry columns using specific spatial predicate functions, such as `ST_Intersects` and `ST_Contains`.
+We added a new specialized join operator as part of the [`spatial` extension]({% link docs/current/core_extensions/spatial/overview.md %}), which greatly improves the efficiency of _spatial joins_, that is, queries that `JOIN` two geometry columns using specific spatial predicate functions, such as `ST_Intersects` and `ST_Contains`.
 
 Similarly to a `HASH_JOIN`, the `SPATIAL_JOIN` builds a temporary lookup data-structure for the smaller side of the join, except it's an R-Tree, instead of a hash table. What this means for you is that you don't need to create an index first, or do any other pre-processing to optimize your spatial joins. It's all handled by the join operator internally.
 

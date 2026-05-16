@@ -177,6 +177,15 @@ body.landing{
 			p{
 				margin: 0;
 			}
+			.cta{
+				display: flex;
+				flex-wrap: wrap;
+				justify-content: center;
+				gap: 10px;
+				a.button{
+					margin-right: 0;
+				}
+			}
 		}
 		.production-users{
 			margin-top: 60px;

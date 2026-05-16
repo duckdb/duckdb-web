@@ -97,7 +97,7 @@ We can see that the sniffer decided that quotes and escape characters are not pr
 Consequently, it decided to skip the first 4 rows (including the header) in order to read the file according to the dialect.
 
 > Tip DuckDB allows users to retrieve all errors that occur when reading a CSV file using the `reject_errors` table.
-> This is beyond the scope of this blog post, but you can find more details in the [“Reading Faulty CSV Files” documentation page]({% link docs/lts/data/csv/reading_faulty_csv_files.md %}).
+> This is beyond the scope of this blog post, but you can find more details in the [“Reading Faulty CSV Files” documentation page]({% link docs/current/data/csv/reading_faulty_csv_files.md %}).
 
 ### Loading the Example with a User-Defined CSV Dialect
 

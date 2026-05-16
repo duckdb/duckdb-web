@@ -268,7 +268,7 @@ column "j" must appear in the GROUP BY clause or must be part of an aggregate fu
 Either add it to the GROUP BY list, or use "ANY_VALUE(j)" if the exact value of "j" is not important.
 ```
 
-To work around this, add the other attributes or use the [`GROUP BY ALL` clause](https://duckdb.org/docs/sql/query_syntax/groupby#group-by-all).
+To work around this, add the other attributes or use the [`GROUP BY ALL` clause]({% link docs/current/sql/query_syntax/groupby.md %}#group-by-all).
 
 ## Behavior of Regular Expression Match Operators
 

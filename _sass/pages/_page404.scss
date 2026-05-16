@@ -20,7 +20,7 @@ body.notfound{
 		margin: 0;
 	}
 	section{
-		padding: 105px 15px;
+		padding: 105px 0;
 		div p:last-of-type{
 			margin-bottom: 25px;
 		}
@@ -96,8 +96,8 @@ body.notfound{
 		h1{
 			font-size: 35px;
 		}
-		section{
-			padding: 50px 15px;
-		}
+	}
+	body.notfound.landing section{
+		padding: 50px 0;
 	}
 }

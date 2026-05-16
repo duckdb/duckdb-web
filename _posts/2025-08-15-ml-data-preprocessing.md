@@ -21,7 +21,7 @@ CREATE TABLE financial_trx AS
     FROM read_csv('https://blobs.duckdb.org/data/financial_fraud_detection_dataset.csv');
 ```
 
-We start by analyzing the data by executing [`SUMMARIZE`]({% link docs/lts/guides/meta/summarize.md %}):
+We start by analyzing the data by executing [`SUMMARIZE`]({% link docs/current/guides/meta/summarize.md %}):
 
 ```sql
 FROM (SUMMARIZE financial_trx)
@@ -65,7 +65,7 @@ SELECT
 
 From the above data stats, we see that there are a few category columns, such as `transaction_type`, `merchant_category` and `payment_channel`. Because most machine learning models expect numerical inputs, this type of data is converted to a numerical representation. This process is called _encoding,_ and it can be done in multiple ways. In the following, we showcase a few common encoding techniques in SQL.
 
-> In this post, we use several of DuckDB's [“friendly SQL” features]({% link docs/lts/sql/dialect/friendly_sql.md %}), including the [`FROM`-first syntax]({% link docs/lts/sql/query_syntax/from.md %}) and [prefix aliases]({% post_url 2025-02-25-prefix-aliases-in-sql %}).
+> In this post, we use several of DuckDB's [“friendly SQL” features]({% link docs/current/sql/dialect/friendly_sql.md %}), including the [`FROM`-first syntax]({% link docs/current/sql/query_syntax/from.md %}) and [prefix aliases]({% post_url 2025-02-25-prefix-aliases-in-sql %}).
 
 ### One-Hot Encoding
 
@@ -94,7 +94,7 @@ ORDER BY transaction_type;
 └──────────────────┴────────────────┴────────────────┴─────────────────┴───────────────────┘
 ```
 
-Another way to one-hot encode is by using the [`PIVOT` statement]({% link docs/lts/sql/statements/pivot.md %}):
+Another way to one-hot encode is by using the [`PIVOT` statement]({% link docs/current/sql/statements/pivot.md %}):
 
 ```sql
 PIVOT financial_trx
@@ -109,7 +109,7 @@ In the above statement we:
 - we convert boolean to integer and apply max over the match;
 - we alias the transposed columns as the value of `transaction_type` suffixed by `_onehot`.
 
-If there are more category columns to be one-hot encoded then `PIVOT` can be used in subqueries or [`WITH` clauses]({% link docs/lts/sql/query_syntax/with.md %}):
+If there are more category columns to be one-hot encoded then `PIVOT` can be used in subqueries or [`WITH` clauses]({% link docs/current/sql/query_syntax/with.md %}):
 
 ```sql
 WITH onehot_trx_type AS (
@@ -132,7 +132,7 @@ INNER JOIN onehot_trx_type USING (transaction_type)
 INNER JOIN onehot_payment_channel USING (payment_channel);
 ```
 
-> In the above query we are retrieving all “onehot”-suffixed columns by using the [`LIKE` operator on column names]({% link docs/lts/sql/expressions/star.md %}#column-filtering-via-pattern-matching-operators).
+> In the above query we are retrieving all “onehot”-suffixed columns by using the [`LIKE` operator on column names]({% link docs/current/sql/expressions/star.md %}#column-filtering-via-pattern-matching-operators).
 
 ### Ordinal Encoding
 
@@ -206,7 +206,7 @@ ORDER BY trx_type_le;
 └──────────────────┴─────────────┴────────────┘
 ```
 
-Another way to achieve the above is by using [list functions]({% link docs/lts/sql/functions/list.md %}), such as `array_agg`, to create an array with the distinct values, and `list_position` to extract the position of each value in the array:
+Another way to achieve the above is by using [list functions]({% link docs/current/sql/functions/list.md %}), such as `array_agg`, to create an array with the distinct values, and `list_position` to extract the position of each value in the array:
 
 ```sql
 WITH trx_ref AS (
@@ -242,7 +242,7 @@ ORDER BY trx_type_le;
 
 One other common data preprocessing step in machine learning is to scale numerical features, such that the values of different features are brought to a similar range or distribution. _Scaling,_ also known as _feature normalization_ or _standardization,_ involves transforming features so they have comparable magnitudes; typically by rescaling them to a fixed range (like 0 to 1) or adjusting them to have zero mean and unit variance. This process is required because many algorithms rely on distance calculations or gradient updates, which can be skewed if features vary widely in scale.
 
-If encoding is performed on the initial raw data (due to the need of knowing the entire categorical values list), scaling requires to split the data into training and testing data sets, in order to avoid [data leakage](https://scikit-learn.org/stable/common_pitfalls.html#data-leakage). In DuckDB, we can split the data by [sampling]({% link docs/lts/sql/samples.md %}) it:
+If encoding is performed on the initial raw data (due to the need of knowing the entire categorical values list), scaling requires to split the data into training and testing data sets, in order to avoid [data leakage](https://scikit-learn.org/stable/common_pitfalls.html#data-leakage). In DuckDB, we can split the data by [sampling]({% link docs/current/sql/samples.md %}) it:
 
 ```sql
 SET threads = 1;
@@ -282,14 +282,14 @@ FROM
     scaling_params;
 ```
 
-The above query can be greatly simplified by using DuckDB macros. With [scalar macros]({% link docs/lts/sql/statements/create_macro.md %}#scalar-macros), we can create a function for the standard scaler transformation:
+The above query can be greatly simplified by using DuckDB macros. With [scalar macros]({% link docs/current/sql/statements/create_macro.md %}#scalar-macros), we can create a function for the standard scaler transformation:
 
 ```sql
 CREATE OR REPLACE MACRO standard_scaler(val, avg_val, std_val) AS
     (val - avg_val) / std_val;
 ```
 
-With [table macros]({% link docs/lts/sql/statements/create_macro.md %}#table-macros), we can create a function to return the scaling parameters required by the standard scaler macro:
+With [table macros]({% link docs/current/sql/statements/create_macro.md %}#table-macros), we can create a function to return the scaling parameters required by the standard scaler macro:
 
 ```sql
 CREATE OR REPLACE MACRO scaling_params(table_name, column_list) AS TABLE
@@ -301,9 +301,9 @@ CREATE OR REPLACE MACRO scaling_params(table_name, column_list) AS TABLE
 
 In the above macro definition:
 
-- any table can be provided as input parameter and queried due to [`query_table`]({% link docs/lts/guides/sql_features/query_and_query_table_functions.md %});
-- we apply aggregate functions over the list of columns provided as input parameter, by using [column expressions]({% link docs/lts/sql/expressions/star.md %}#columns-expression);
-- we generate the aggregate alias by using the original column name via the [`\0` in the alias definition]({% link docs/lts/sql/expressions/star.md %}#renaming-columns-with-regular-expressions-in-a-columns-expression).
+- any table can be provided as input parameter and queried due to [`query_table`]({% link docs/current/guides/sql_features/query_and_query_table_functions.md %});
+- we apply aggregate functions over the list of columns provided as input parameter, by using [column expressions]({% link docs/current/sql/expressions/star.md %}#columns-expression);
+- we generate the aggregate alias by using the original column name via the [`\0` in the alias definition]({% link docs/current/sql/expressions/star.md %}#renaming-columns-with-regular-expressions-in-a-columns-expression).
 
 We can now calculate the standard scaling as follows:
 
@@ -374,7 +374,7 @@ FROM financial_trx_testing,
 
 _Robust scaling_ is a data normalization technique that transforms numerical features by subtracting the median and dividing by the interquartile range (IQR). Unlike standard scaling, which uses the mean and standard deviation, robust scaling reduces the influence of outliers by focusing on the middle 50% of the data. This makes it well-suited for datasets with skewed distributions or extreme values.
 
-In DuckDB, we can calculate the quantile ranges with the [`quantile_cont` statistical aggregate]({% link docs/lts/sql/functions/aggregates.md %}#quantile_contx-pos):
+In DuckDB, we can calculate the quantile ranges with the [`quantile_cont` statistical aggregate]({% link docs/current/sql/functions/aggregates.md %}#quantile_contx-pos):
 
 ```sql
 CREATE OR REPLACE MACRO scaling_params(table_name, column_list) AS TABLE
@@ -421,7 +421,7 @@ FROM financial_trx_testing,
 
 ## Handling Missing Values
 
-It often happens that our input data is incomplete, i.e., it has missing data. Depending on the use case, such data is excluded, used as it is or filled with a constant value. In DuckDB we can use the [`coalesce` function]({% link docs/lts/sql/functions/utility.md %}#coalesceexpr-) in order to retrieve the value of the column or a default value, if the column is `NULL`.
+It often happens that our input data is incomplete, i.e., it has missing data. Depending on the use case, such data is excluded, used as it is or filled with a constant value. In DuckDB we can use the [`coalesce` function]({% link docs/current/sql/functions/utility.md %}#coalesceexpr-) in order to retrieve the value of the column or a default value, if the column is `NULL`.
 
 Some common techniques are to:
 

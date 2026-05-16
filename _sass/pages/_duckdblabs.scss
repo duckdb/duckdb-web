@@ -441,7 +441,8 @@ body.contact{
 	}
 }
 
-.newswrap .postwrap .infoline .icon{
+.newswrap .postwrap .infoline .icon,
+html.darkmode body.layout_default .newswrap .postwrap .infoline .icon{
 	background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='38' height='38' fill='none'%3E%3Cpath fill='%23FF6900' d='M19 0c10.511 0 19 8.489 19 19s-8.489 19-19 19S0 29.511 0 19 8.489 0 19 0Z'/%3E%3Cpath fill='%231A1A1A' d='M8.843 21.829h3.727v-5.625H8.843c-1.545 0-2.83 1.284-2.83 2.83 0 1.556 1.285 2.795 2.83 2.795ZM30.828 19c0-4.34-3.534-7.875-7.875-7.875-4.34 0-7.875 3.534-7.875 7.875s3.534 7.875 7.875 7.875 7.875-3.534 7.875-7.875Z'/%3E%3C/svg%3E");
 }
 

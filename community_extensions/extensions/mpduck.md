@@ -61,10 +61,10 @@ docs:
     mpduck is a DuckDB extension for reading and writing FIS Prophet files in
     `.rpt`, `.prn`, and `.fac` formats, enabling data interchange for actuarial workflows.
 
-extension_star_count: 0
-extension_star_count_pretty: 0
-extension_download_count: 430
-extension_download_count_pretty: 430
+extension_star_count: 1
+extension_star_count_pretty: 1
+extension_download_count: 483
+extension_download_count_pretty: 483
 image: '/images/community_extensions/social_preview/preview_community_extension_mpduck.png'
 layout: community_extension_doc
 ---

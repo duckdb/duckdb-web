@@ -12,11 +12,11 @@ We published the DuckDB 1.2.1 bugfix release yesterday. As usual, please consult
 
 ## New Clients Page
 
-DuckDB's client APIs (or “drivers”) are distributed through several centralized repositories, such as [CRAN](https://cran.r-project.org/web/packages/duckdb/index.html) for R and [Maven](https://central.sonatype.com/artifact/org.duckdb/duckdb_jdbc) for Java. To help users keep track of the rollout of a new DuckDB release, we reworked our [“Clients” page]({% link docs/lts/clients/overview.md %}) to show the latest version for each client. The page also clarifies the support tiers that apply to clients.
+DuckDB's client APIs (or “drivers”) are distributed through several centralized repositories, such as [CRAN](https://cran.r-project.org/web/packages/duckdb/index.html) for R and [Maven](https://central.sonatype.com/artifact/org.duckdb/duckdb_jdbc) for Java. To help users keep track of the rollout of a new DuckDB release, we reworked our [“Clients” page]({% link docs/current/clients/overview.md %}) to show the latest version for each client. The page also clarifies the support tiers that apply to clients.
 
 ## Simpler Installation
 
-In line with DuckDB's “low friction” principle, we made sure that you can install the [DuckDB command line client]({% link docs/lts/clients/cli/overview.md %}) more easily.
+In line with DuckDB's “low friction” principle, we made sure that you can install the [DuckDB command line client]({% link docs/current/clients/cli/overview.md %}) more easily.
 
 ### Installation Script on Linux and macOS
 
@@ -61,7 +61,7 @@ This feature is documented in the [DuckDB tldr page](https://tldr.inbrowser.app/
 
 ### `allowed_directories` / `allowed_paths` Options
 
-We continue to improve support for [operating DuckDB in secure environments]({% link docs/lts/operations_manual/securing_duckdb/overview.md %}). The [`allowed_directories` and `allowed_paths` options](https://github.com/duckdb/duckdb/pull/14568) allow restricting DuckDB's access to certain directories or files (resp.).
+We continue to improve support for [operating DuckDB in secure environments]({% link docs/current/operations_manual/securing_duckdb/overview.md %}). The [`allowed_directories` and `allowed_paths` options](https://github.com/duckdb/duckdb/pull/14568) allow restricting DuckDB's access to certain directories or files (resp.).
 These options allows fine-grained access control for the file system.
 For example, you can set DuckDB to only use the `/tmp` directory.
 
@@ -94,8 +94,8 @@ SELECT sum(CASE WHEN l_extendedprice > 500 THEN 1 END) FROM lineitem;
 
 ### Excel Extension
 
-Prior to DuckDB 1.2, Excel files were only supported by the [`spatial` extension]({% link docs/lts/core_extensions/spatial/overview.md %}), which is a heavyweight extension with several dependencies.
-Starting with 1.2, the [`excel` extension]({% link docs/lts/core_extensions/excel.md %}) – which was previously limited to computing a few formulas – can read and write Excel sheets. For example:
+Prior to DuckDB 1.2, Excel files were only supported by the [`spatial` extension]({% link docs/current/core_extensions/spatial/overview.md %}), which is a heavyweight extension with several dependencies.
+Starting with 1.2, the [`excel` extension]({% link docs/current/core_extensions/excel.md %}) – which was previously limited to computing a few formulas – can read and write Excel sheets. For example:
 
 ```sql
 FROM read_xlsx('test.xlsx', header = true);  
@@ -114,7 +114,7 @@ The ecosystem around DuckDB keeps growing: many projects are built both with Duc
 
 ### DuckDB File Signature
 
-DuckDB's [file signature]({% link docs/lts/internals/storage.md %}#storage-header), `DUCK` (hex: `44 55 43 4B`), is now listed on [Wikipedia](https://en.wikipedia.org/wiki/List_of_file_signatures).
+DuckDB's [file signature]({% link docs/current/internals/storage.md %}#storage-header), `DUCK` (hex: `44 55 43 4B`), is now listed on [Wikipedia](https://en.wikipedia.org/wiki/List_of_file_signatures).
 
 ### Parquet Information Sheet
 

@@ -8,7 +8,7 @@ excerpt: |
 extension:
   name: bigquery
   description: Integrates DuckDB with Google BigQuery, allowing direct querying and management of BigQuery datasets
-  version: 0.8.1
+  version: 0.9.0
   language: C++
   build: cmake
   license: MIT
@@ -21,7 +21,7 @@ extension:
 repo:
   github: hafenkran/duckdb-bigquery
   andium: ec5cf7b0342e7a46f7505c1176d8e46d963d7815
-  ref: fbff6fbb38a948bb0a2916fb30932eb64d0222c4
+  ref: c18ffbd5063b1b20ff71943dbcf3997ea3134b25
 
 docs:
   hello_world: |
@@ -53,10 +53,10 @@ docs:
     It enables users to read, write, and manage their BigQuery datasets/tables directly from DuckDB using standard SQL queries.
     For detailed setup and usage instructions, visit the [extension repository](https://github.com/hafenkran/duckdb-bigquery).
 
-extension_star_count: 160
-extension_star_count_pretty: 160
-extension_download_count: 15122
-extension_download_count_pretty: 15.1k
+extension_star_count: 161
+extension_star_count_pretty: 161
+extension_download_count: 25383
+extension_download_count_pretty: 25.4k
 image: '/images/community_extensions/social_preview/preview_community_extension_bigquery.png'
 layout: community_extension_doc
 ---
@@ -90,6 +90,7 @@ LOAD {{ page.extension.name }};
 | bigquery_execute             | table         | Execute an arbitrary GoogleSQL query in BigQuery.                                        | NULL    | [CALL bigquery_execute('bq', 'CREATE SCHEMA deluxe_dataset OPTIONS(location="us", default_table_expiration_days=3.75);')] |
 | bigquery_jobs                | table         | List jobs in a BigQuery project.                                                         | NULL    | [SELECT * FROM bigquery_jobs('bq');]                                                                                      |
 | bigquery_clear_cache         | table         | Clear the internal caches to refetch the most current project information from BigQuery. | NULL    | [CALL bigquery_clear_cache();]                                                                                            |
+| bigquery_load                | table         | NULL                                                                                     | NULL    | NULL                                                                                                                      |
 | bigquery_normalize_geography | scalar        | NULL                                                                                     | NULL    | NULL                                                                                                                      |
 
 ### Overloaded Functions
@@ -108,17 +109,18 @@ This extension does not add any types.
 
 <div class="extension_settings_table"></div>
 
-|               name                |                                                                                          description                                                                                          | input_type | scope  | aliases |
-|-----------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|------------|--------|---------|
-| bq_arrow_compression              | Compression codec for BigQuery Storage Read API. Options: UNSPECIFIED, LZ4_FRAME, ZSTD.Default is LZ4_FRAME.                                                                                  | VARCHAR    | GLOBAL | []      |
-| bq_bignumeric_as_varchar          | Read BigQuery BIGNUMERIC data type as VARCHAR                                                                                                                                                 | BOOLEAN    | GLOBAL | []      |
-| bq_curl_ca_bundle_path            | Path to the CA bundle for curl                                                                                                                                                                | VARCHAR    | GLOBAL | []      |
-| bq_debug_show_queries             | DEBUG SETTING: print all queries sent to BigQuery to stdout                                                                                                                                   | BOOLEAN    | GLOBAL | []      |
-| bq_default_location               | Default location for BigQuery queries                                                                                                                                                         | VARCHAR    | GLOBAL | []      |
-| bq_experimental_enable_sql_parser | Whether to enable BigQuery CREATE TABLE clause parsing extensions                                                                                                                             | BOOLEAN    | GLOBAL | []      |
-| bq_experimental_filter_pushdown   | Whether to use filter pushdown (currently experimental)                                                                                                                                       | BOOLEAN    | GLOBAL | []      |
-| bq_experimental_use_info_schema   | Whether to fetch table infos from BQ information schema (currently experimental). Can be significantly faster than fetching from REST API.                                                    | BOOLEAN    | GLOBAL | []      |
-| bq_max_read_streams               | Maximum number of read streams for BigQuery Storage Read. Set to 0 to automatically match the number of DuckDB threads. `preserve_insertion_order` must be false for parallelization to work. | BIGINT     | GLOBAL | []      |
-| bq_query_timeout_ms               | Timeout for BigQuery queries in milliseconds                                                                                                                                                  | BIGINT     | GLOBAL | []      |
+|                 name                 |                                                                                                                  description                                                                                                                   | input_type | scope  | aliases |
+|--------------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|------------|--------|---------|
+| bq_arrow_compression                 | Compression codec for BigQuery Storage Read API. Options: UNSPECIFIED, LZ4_FRAME, ZSTD.Default is LZ4_FRAME.                                                                                                                                   | VARCHAR    | GLOBAL | []      |
+| bq_bignumeric_as_varchar             | Read BigQuery BIGNUMERIC data type as VARCHAR                                                                                                                                                                                                  | BOOLEAN    | GLOBAL | []      |
+| bq_curl_ca_bundle_path               | Path to the CA bundle for curl                                                                                                                                                                                                                 | VARCHAR    | GLOBAL | []      |
+| bq_debug_show_queries                | DEBUG SETTING: print all queries sent to BigQuery to stdout                                                                                                                                                                                    | BOOLEAN    | GLOBAL | []      |
+| bq_default_location                  | Default location for BigQuery queries                                                                                                                                                                                                          | VARCHAR    | GLOBAL | []      |
+| bq_enable_inflight_request_windowing | Whether to allow multiple BigQuery Storage Write AppendRows requests to remain in flight before waiting for acknowledgements. Usually faster, but slightly less memory efficient because more unacknowledged requests can be buffered at once. | BOOLEAN    | GLOBAL | []      |
+| bq_experimental_enable_sql_parser    | Whether to enable BigQuery CREATE TABLE clause parsing extensions                                                                                                                                                                              | BOOLEAN    | GLOBAL | []      |
+| bq_experimental_filter_pushdown      | Whether to use filter pushdown (currently experimental)                                                                                                                                                                                        | BOOLEAN    | GLOBAL | []      |
+| bq_experimental_use_info_schema      | Whether to fetch table infos from BQ information schema (currently experimental). Can be significantly faster than fetching from REST API.                                                                                                     | BOOLEAN    | GLOBAL | []      |
+| bq_max_read_streams                  | Maximum number of read streams for BigQuery Storage Read. Set to 0 to automatically match the number of DuckDB threads. `preserve_insertion_order` must be false for parallelization to work.                                                  | BIGINT     | GLOBAL | []      |
+| bq_query_timeout_ms                  | Timeout for BigQuery queries in milliseconds                                                                                                                                                                                                   | BIGINT     | GLOBAL | []      |
 
 

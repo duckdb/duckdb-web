@@ -16,6 +16,12 @@ title: Documentation
         <span>DuckDB connection overview</span>
         <svg class="chevron"><use href="#chevron-right"></use></svg>
     </div>
+    <div class="box-link half-width">
+        <a href="{% link docs/current/quack/overview.md %}"></a>
+        <span class="symbol"><img src="{% link images/icons/quack.svg %}"></span>
+        <span>Quack remote protocol</span>
+        <svg class="chevron"><use href="#chevron-right"></use></svg>
+    </div>
 </div>
 
 ## Client APIs

@@ -3,6 +3,9 @@ layout: docu
 redirect_from:
 - /docs/preview/dev/building/overview
 - /docs/stable/dev/building/overview
+- /docs/dev/building/build_instructions
+- /build
+- /building
 title: Building DuckDB from Source
 ---
 
@@ -14,12 +17,16 @@ When you are running on an experimental platform (e.g., [Raspberry Pi]({% link d
 you can build DuckDB from source based on the [`duckdb/duckdb` repository hosted on GitHub](https://github.com/duckdb/duckdb/).
 This page explains the steps for building DuckDB.
 
-## Prerequisites
+## Build Instructions
+
+### Prerequisites
 
 DuckDB needs CMake and a C++11-compliant compiler (e.g., GCC, Apple-Clang, MSVC).
 Additionally, we recommend using the [Ninja build system](https://ninja-build.org/), which automatically parallelizes the build process.
 
-## Getting Started
+> Warning DuckDB v2.0 will require [C++17](https://github.com/duckdb/duckdb/pull/21310).
+
+### Building with the Makefile
 
 A `Makefile` wraps the build process.
 See [Build Configuration]({% link docs/current/dev/building/build_configuration.md %}) for targets and configuration flags.
@@ -34,6 +41,16 @@ BUILD_BENCHMARK=1 make # build with benchmarks
 ```
 
 > `debug` buids use a lot of disk space – make sure you have at least 25 GB available.
+
+### Speeding up Subsequent Builds
+
+You can speed up subsequent builds using [ccache](https://ccache.dev/).
+On macOS, you can install and configure it as follows:
+
+```bash
+brew install ccache
+ccache -M 50G
+```
 
 ## Platforms
 

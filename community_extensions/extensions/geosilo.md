@@ -18,12 +18,12 @@ extension:
   name: geosilo
 repo:
   github: Query-farm/geosilo
-  ref: 5d079ead4762a042e8e28cf8279cdc323fec7a04
+  ref: 5d4ea2de40e316da6325ee23c2fc01793703ad58
 
-extension_star_count: 22
-extension_star_count_pretty: 22
-extension_download_count: 454
-extension_download_count_pretty: 454
+extension_star_count: 24
+extension_star_count_pretty: 24
+extension_download_count: 472
+extension_download_count_pretty: 472
 image: '/images/community_extensions/social_preview/preview_community_extension_geosilo.png'
 layout: community_extension_doc
 ---
@@ -64,7 +64,10 @@ LOAD {{ page.extension.name }};
 | ST_YMax          | scalar        | NULL        | NULL    | NULL     |
 | ST_YMin          | scalar        | NULL        | NULL    | NULL     |
 | geosilo_decode   | scalar        | NULL        | NULL    | NULL     |
+| geosilo_decode   | scalar        | NULL        | NULL    | NULL     |
 | geosilo_encode   | scalar        | NULL        | NULL    | NULL     |
+| geosilo_encode   | scalar        | NULL        | NULL    | NULL     |
+| geosilo_metadata | scalar        | NULL        | NULL    | NULL     |
 | geosilo_metadata | scalar        | NULL        | NULL    | NULL     |
 
 ### Overloaded Functions

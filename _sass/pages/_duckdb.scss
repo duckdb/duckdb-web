@@ -42,7 +42,7 @@ body.design{
 
 		&--dark{
 			background: #0d0d0d;
-			border-color: #0d0d0d;
+			border: 1px solid var(--doc-codebox-border-color, #333);
 		}
 
 		&--clearspace{

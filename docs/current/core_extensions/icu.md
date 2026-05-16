@@ -3,7 +3,7 @@ github_directory: https://github.com/duckdb/duckdb/tree/main/extension/icu
 layout: docu
 redirect_from:
 - /docs/extensions/ice
-- /docs/lts/extensions/icu
+- /docs/stable/extensions/icu
 - /docs/preview/core_extensions/icu
 - /docs/stable/core_extensions/icu
 title: ICU Extension

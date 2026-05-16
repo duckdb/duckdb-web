@@ -186,7 +186,7 @@ Note that the default buffer size is different for different log storages:
 So for example, if you want to increase your `stdout` logging performance, simply enable buffering to greatly (>10x) speed up 
 your logging:
 
-```SQL
+```sql
 CALL enable_logging(storage = 'stdout', storage_buffer_size = 2048);
 ```
 
@@ -195,7 +195,7 @@ Simply disable the
 buffering using:
 
 ```sql
-CALL enable_logging(storage_path = '/tmp/mylogs', storage_buffer_size = 2048);
+CALL enable_logging(storage_path = '/tmp/mylogs', storage_buffer_size = 0);
 ```
 
 ### Syntactic Sugar

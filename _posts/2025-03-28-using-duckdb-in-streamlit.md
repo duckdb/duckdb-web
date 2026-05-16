@@ -92,7 +92,7 @@ duckdb_conn.execute(f"attach '{DUCKDB_EXTERNAL_LOCATION}' as ext_db")
 duckdb_conn.execute("use ext_db")
 ```
 
-More details about attaching an external database can be found in the [DuckDB documentation]({% link docs/lts/guides/network_cloud_storage/duckdb_over_https_or_s3.md %}).
+More details about attaching an external database can be found in the [DuckDB documentation]({% link docs/current/guides/network_cloud_storage/duckdb_over_https_or_s3.md %}).
 
 ### Considerations
 
@@ -105,7 +105,7 @@ Starting from this point, we will work with the external database.
 
 ## Analyzing Dutch Railway Data
 
-To analyze the data within Streamlit, we will make use of the Python [relational API]({% link docs/lts/clients/python/relational_api.md %}), by chaining queries. We start by defining a relation, which will select the needed data from `stations`:
+To analyze the data within Streamlit, we will make use of the Python [relational API]({% link docs/current/clients/python/relational_api.md %}), by chaining queries. We start by defining a relation, which will select the needed data from `stations`:
 
 ```python
 stations_selection = duckdb_conn.sql("""
@@ -166,7 +166,7 @@ The query will be executed when one of the following methods is encountered:
 - `stations_query.df()` to extract to a Pandas dataframe;  
 - `stations_query.fetchall()` to extract in a list;  
 - `stations_query.write_to()` to export the data in a file;  
-- any other calculation method, such as `.sum`, `.row_number` etc. The relational methods can be found in the [DuckDB documentation]({% link docs/lts/clients/python/reference/index.md %}).
+- any other calculation method, such as `.sum`, `.row_number` etc. The relational methods can be found in the [DuckDB documentation]({% link docs/current/clients/python/reference/index.md %}).
 
 <div align="center" style="margin:10px">
     <a href="/images/blog/duckdb-streamlit/top_5_busiest_stations.png">

@@ -123,8 +123,8 @@ docs:
 
 extension_star_count: 13
 extension_star_count_pretty: 13
-extension_download_count: 259
-extension_download_count_pretty: 259
+extension_download_count: 458
+extension_download_count_pretty: 458
 image: '/images/community_extensions/social_preview/preview_community_extension_dplyr.png'
 layout: community_extension_doc
 ---

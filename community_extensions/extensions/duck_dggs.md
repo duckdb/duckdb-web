@@ -146,10 +146,10 @@ docs:
     - `igeo7_decode_str` — verbose `base-d1.d2…d20` form showing all 20 slots (SQL macro)
     - `igeo7_string_parent` / `igeo7_string_local_pos` / `igeo7_string_is_center` — compact-string helpers (SQL macros)
 
-extension_star_count: 0
-extension_star_count_pretty: 0
-extension_download_count: 446
-extension_download_count_pretty: 446
+extension_star_count: 1
+extension_star_count_pretty: 1
+extension_download_count: 503
+extension_download_count_pretty: 503
 image: '/images/community_extensions/social_preview/preview_community_extension_duck_dggs.png'
 layout: community_extension_doc
 ---

@@ -126,7 +126,7 @@ The binary, scripts, queries, and results are [available on GitHub](https://gith
 We have seen how the decade-old MacBook Pro Retina has been able to complete a complex analytical benchmark. A newer laptop was able to significantly improve on those times.
 But absolute speedup numbers are a bit pointless here. The difference is purely _quantitative_, not _qualitative_.
 
-From a user perspective, it matters much more that those queries complete in somewhat reasonable time, not if it took 10 or 100 seconds to do so. We can tackle almost the same kind of data problems with both laptops, we just have to be willing to wait a little longer. This is especially true given DuckDB's [out-of-core capability]({% link docs/lts/guides/performance/how_to_tune_workloads.md %}), which allows it to spill query intermediates to disks if required.
+From a user perspective, it matters much more that those queries complete in somewhat reasonable time, not if it took 10 or 100 seconds to do so. We can tackle almost the same kind of data problems with both laptops, we just have to be willing to wait a little longer. This is especially true given DuckDB's [out-of-core capability]({% link docs/current/guides/performance/how_to_tune_workloads.md %}), which allows it to spill query intermediates to disks if required.
 
 What is perhaps more interesting is that back in 2012, it would have been completely feasible to have a single-node SQL engine like DuckDB that could run complex analytical SQL queries against a database of 6 billion rows in manageable time – and we did not even have to [immerse it in dry ice this time](https://youtu.be/H1N2Jr34jwU?si=xCxQqZcLs8WA_5Yl&t=1763).
 

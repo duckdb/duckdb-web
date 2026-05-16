@@ -67,7 +67,7 @@ Special care needs to be taken when using network-attached disks:
 * If you are writing to disk, it is important that the disks is reliable. As a general rule of thumb, this is true for locally attached disks, and block storage in the cloud.
 * If your workload is larger than memory and/or fast data loading is important, you need fast disks, preferrably SSD or NVMe with a fast connection.
 
-With these in mind, here are two common architectures and the related considerations when you are using DuckDB's [native database format]({% link docs/lts/internals/storage.md %}):
+With these in mind, here are two common architectures and the related considerations when you are using DuckDB's [native database format]({% link docs/current/internals/storage.md %}):
 
 **Clock storage in the colud.** DuckDB runs well on network-backed cloud disks such as [AWS EBS](https://aws.amazon.com/ebs/) for both read-only and read-write workloads.
 

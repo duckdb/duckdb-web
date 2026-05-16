@@ -987,6 +987,10 @@
               ]
             },
             {
+              "page": "PEG Parser",
+              "url": "peg_parser"
+            },
+            {
               "page": "Samples",
               "url": "samples"
             }
@@ -1171,6 +1175,10 @@
               ]
             },
             {
+              "page": "Quack",
+              "url": "quack"
+            },
+            {
               "page": "PostgreSQL",
               "url": "postgres"
             },
@@ -1223,6 +1231,50 @@
             {
               "page": "VSS",
               "url": "vss"
+            }
+          ]
+        },
+        {
+          "page": "Quack Remote Protocol",
+          "slug": "quack",
+          "subfolderitems": [
+            {
+              "page": "Overview",
+              "url": "overview"
+            },
+            {
+              "page": "Reference",
+              "url": "reference"
+            },
+            {
+              "page": "Security",
+              "url": "security"
+            },
+            {
+              "page": "Setup",
+              "slug": "setup",
+              "subsubfolderitems": [
+                {
+                  "page": "Overview",
+                  "url": "overview"
+                },
+                {
+                  "page": "Reverse Proxy",
+                  "url": "reverse_proxy"
+                },
+                {
+                  "page": "Deployment",
+                  "url": "deployment"
+                },
+                {
+                  "page": "Using from Wasm",
+                  "url": "quack_wasm"
+                }
+              ]
+            },
+            {
+              "page": "Troubleshooting",
+              "url": "troubleshooting"
             }
           ]
         },

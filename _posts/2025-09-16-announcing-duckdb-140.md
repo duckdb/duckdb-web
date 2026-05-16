@@ -78,7 +78,7 @@ Click to see the end-of-life (EOL) dates for DuckDB releases.
 ### Database Encryption
 
 Being able to encrypt DuckDB database files has been a [long-standing feature request](https://github.com/duckdb/duckdb/discussions/4512). Starting with this release, DuckDB supports encryption of its files. Encryption keys are given using the `ENCRYPTION_KEY` parameter 
-to [`ATTACH`]({% link docs/lts/sql/statements/attach.md %}), like so:
+to [`ATTACH`]({% link docs/current/sql/statements/attach.md %}), like so:
 
 ```sql
 ATTACH 'encrypted.db' AS enc_db (ENCRYPTION_KEY 'quack_quack');
@@ -92,7 +92,7 @@ Encryption support in DuckDB was implemented by [Lotte Felius (@ccfelius)](https
 
 ### `MERGE` Statement
 
-DuckDB now supports [`MERGE INTO`]({% link docs/lts/sql/statements/merge_into.md %}) as an alternative to [`INSERT INTO ... ON CONFLICT`]({% link docs/lts/sql/statements/insert.md %}#on-conflict-clause).
+DuckDB now supports [`MERGE INTO`]({% link docs/current/sql/statements/merge_into.md %}) as an alternative to [`INSERT INTO ... ON CONFLICT`]({% link docs/current/sql/statements/insert.md %}#on-conflict-clause).
 `MERGE INTO` does not require a primary key since it works on any custom merge condition. This is a very common statement in OLAP systems that do not support primary keys but still want to support upserting (i.e., `UPDATE` plus `INSERT`) functionality.
 
 In this example we use a simple condition matching on a key and we call the `RETURNING` statement to get a summary of the updated and inserted rows.
@@ -145,7 +145,7 @@ WITH deletes(item_id, delete_threshold) AS (VALUES (10, 3000))
 
 ### Iceberg Writes
 
-The [duckdb-iceberg]({% link docs/lts/core_extensions/iceberg/overview.md %}) extension now **supports writing to Iceberg**.
+The [duckdb-iceberg]({% link docs/current/core_extensions/iceberg/overview.md %}) extension now **supports writing to Iceberg**.
 
 <details markdown='1'>
 <summary markdown='span'>

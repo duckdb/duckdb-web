@@ -6,17 +6,30 @@
 		document.documentElement.style.backgroundColor = '#0d0d0d';
 		document.documentElement.style.colorScheme = 'dark';
 	}
+	function setLightMode() {
+		document.documentElement.classList.remove("darkmode");
+		document.documentElement.style.backgroundColor = '';
+		document.documentElement.style.colorScheme = '';
+	}
+	{% if page.force_dark %}
+	setDarkMode();
+	return;
+	{% endif %}
 	try {
 		var userColorSchemePref = localStorage.getItem("mode");
 		if (userColorSchemePref !== null) {
 			if (userColorSchemePref === 'dark') {
 				setDarkMode();
+			} else {
+				setLightMode();
 			}
 			return;
 		}
 	} catch (e) {}
 	if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
 		setDarkMode();
+	} else {
+		setLightMode();
 	}
 })();
 </script>

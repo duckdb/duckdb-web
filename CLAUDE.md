@@ -60,10 +60,10 @@ The `_config_exclude_archive.yml` config is used by `serve-latest.sh` to skip ar
 ### Adding a New Doc Page
 1. Create a Markdown file using `snake_case` naming in `docs/`
 2. Add an entry to `_data/menu_docs_lts.json` for sidebar navigation
-3. For a new guide, also add a link in `docs/lts/guides/overview.md`
+3. For a new guide, also add a link in `docs/current/guides/overview.md`
 
 ### Generated Pages
-Many pages under `docs/lts/sql/functions/` are auto-generated. Check `scripts/generate_all_docs.sh` before editing — do not edit generated content directly. Source data lives in the [`duckdb/duckdb`](https://github.com/duckdb/duckdb) repository.
+Many pages under `docs/current/sql/functions/` are auto-generated. Check `scripts/generate_all_docs.sh` before editing — do not edit generated content directly. Source data lives in the [`duckdb/duckdb`](https://github.com/duckdb/duckdb) repository.
 
 ### Front Matter
 Every doc page uses Jekyll front matter:
@@ -77,7 +77,7 @@ title: Page Title
 ### Internal Links
 Always use Jekyll link tags (not relative paths):
 ```markdown
-{% link docs/lts/sql/statements/select.md %}
+{% link docs/current/sql/statements/select.md %}
 ```
 Link tags cause build failures if the target doesn't exist, catching broken links at build time.
 

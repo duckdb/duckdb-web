@@ -8,7 +8,7 @@ excerpt: |
 extension:
   name: quackformers
   description: Bert-based embedding extension.
-  version: 0.1.4.3
+  version: 0.1.5.2
   language: Rust
   build: cargo
   license: MIT
@@ -19,7 +19,7 @@ extension:
 
 repo:
   github: martin-conur/quackformers
-  ref: 27e5486e7a49bff665742bf0fa6d877597e79ef0
+  ref: fae2564d2766daef094b40a6c40c86023080da43
 
 docs:
   hello_world: |
@@ -29,10 +29,10 @@ docs:
     Quackformers, a DuckDB extension embeddings. Intended to be used alongside VSS vector search for RAG-type functionalities.
     Quackformers is based on DuckDB's [Rust Extension Template](https://github.com/duckdb/extension-template-rs/)
 
-extension_star_count: 10
-extension_star_count_pretty: 10
-extension_download_count: 575
-extension_download_count_pretty: 575
+extension_star_count: 12
+extension_star_count_pretty: 12
+extension_download_count: 1015
+extension_download_count_pretty: 1.0k
 image: '/images/community_extensions/social_preview/preview_community_extension_quackformers.png'
 layout: community_extension_doc
 ---
@@ -62,5 +62,23 @@ LOAD {{ page.extension.name }};
 |---------------|---------------|----------------------------------------------------------------------|---------|--------------------------------------------|
 | embed         | scalar        | Embed text using vanilla BERT implementation, 384 output dim float32 | NULL    | [SELECT embed('Quack Quack Quack!');]      |
 | embed_jina    | scalar        | Embed text using Jina BERT implementation, 768 output dim float32    | NULL    | [SELECT embed_jina('Quack Quack Quack!');] |
+
+### Overloaded Functions
+
+<div class="extension_functions_table"></div>
+
+This extension does not add any function overloads.
+
+### Added Types
+
+<div class="extension_types_table"></div>
+
+This extension does not add any types.
+
+### Added Settings
+
+<div class="extension_settings_table"></div>
+
+This extension does not add any settings.
 
 

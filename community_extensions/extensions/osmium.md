@@ -8,7 +8,7 @@ excerpt: |
 extension:
   name: osmium
   description: Read OpenStreetMap data from OSM XML and PBF files
-  version: 0.3.1
+  version: 0.4.0
   language: C++
   build: cmake
   license: MIT
@@ -18,7 +18,7 @@ extension:
 
 repo:
   github: jake-low/duckdb-osmium
-  ref: a4ce7e50e595ffc972ec5dd72b7b193103de9937
+  ref: 8ff3ee9442abe1a45d9c6df976eb4d298fa51441
 
 docs:
   hello_world: |
@@ -34,8 +34,8 @@ docs:
 
 extension_star_count: 14
 extension_star_count_pretty: 14
-extension_download_count: 446
-extension_download_count_pretty: 446
+extension_download_count: 529
+extension_download_count_pretty: 529
 image: '/images/community_extensions/social_preview/preview_community_extension_osmium.png'
 layout: community_extension_doc
 ---

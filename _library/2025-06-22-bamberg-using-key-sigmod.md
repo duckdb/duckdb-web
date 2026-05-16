@@ -22,4 +22,4 @@ SQL’s _recursive common table expressions_ (CTEs) can express complex computat
 ## Implementation
 
 `USING KEY` is has been implemented in mainline DuckDB v1.3.0.
-For details on how to use it, read the [documentation]({% link docs/lts/sql/query_syntax/with.md %}) and the [announcement blog post]({% post_url 2025-05-23-using-key %}).
+For details on how to use it, read the [documentation]({% link docs/current/sql/query_syntax/with.md %}) and the [announcement blog post]({% post_url 2025-05-23-using-key %}).

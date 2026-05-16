@@ -86,7 +86,7 @@ EDGE TABLES (
 );
 ```
 
-During the creation of the property graph, we make a clear distinction between `VERTEX` tables and `EDGE` tables. For `VERTEX` tables, we only have to specify the name of the table. For `EDGE` tables, a little more work is required since for both the `SOURCE` and the `DESTINATION`, we need to specify the column in the edge table that forms the key for the `SOURCE` or `DESTINATION`. This is the same principle as defining a [`FOREIGN KEY` constraint]({% link docs/lts/sql/constraints.md %}#foreign-keys), linking our edge table back to the node tables it connects.
+During the creation of the property graph, we make a clear distinction between `VERTEX` tables and `EDGE` tables. For `VERTEX` tables, we only have to specify the name of the table. For `EDGE` tables, a little more work is required since for both the `SOURCE` and the `DESTINATION`, we need to specify the column in the edge table that forms the key for the `SOURCE` or `DESTINATION`. This is the same principle as defining a [`FOREIGN KEY` constraint]({% link docs/current/sql/constraints.md %}#foreign-keys), linking our edge table back to the node tables it connects.
 The `LABEL` clause gives a clean name to the relationship type. While our table is named `AccountTransferAccount`, the edges within it represent a `Transfer` relationship. This is the name we'll use in our graph queries.
 
 Now that we have created our property graph, we are ready to investigate the financial data and uncover its secrets!

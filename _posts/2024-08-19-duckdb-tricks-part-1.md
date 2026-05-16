@@ -29,8 +29,8 @@ INSERT INTO example VALUES ('foo', 10/9), ('bar', 50/7), ('qux', 9/4);
 COPY example TO 'example.csv';
 ```
 
-Wait a bit, that’s way too verbose! DuckDB’s syntax has several SQL shorthands including the [“friendly SQL” clauses]({% link docs/lts/sql/dialect/friendly_sql.md %}).
-Here, we combine the [`VALUES` clause]({% link docs/lts/sql/query_syntax/values.md %}) with the [`FROM`-first syntax]({% link docs/lts/sql/query_syntax/from.md %}#from-first-syntax), which makes the `SELECT` clause optional.
+Wait a bit, that’s way too verbose! DuckDB’s syntax has several SQL shorthands including the [“friendly SQL” clauses]({% link docs/current/sql/dialect/friendly_sql.md %}).
+Here, we combine the [`VALUES` clause]({% link docs/current/sql/query_syntax/values.md %}) with the [`FROM`-first syntax]({% link docs/current/sql/query_syntax/from.md %}#from-first-syntax), which makes the `SELECT` clause optional.
 With these, we can compress the data creation script to ~60% of its original size.
 The new formulation omits the schema definition and creates the CSV with a single command:
 
@@ -88,7 +88,7 @@ FROM 'example.csv';
 └───────────────┘
 ```
 
-A typical alternative solution is to use the [`printf`]({% link docs/lts/sql/functions/text.md %}#printf-syntax) or [`format`]({% link docs/lts/sql/functions/text.md %}#fmt-syntax) functions, e.g.:
+A typical alternative solution is to use the [`printf`]({% link docs/current/sql/functions/text.md %}#printf-syntax) or [`format`]({% link docs/current/sql/functions/text.md %}#fmt-syntax) functions, e.g.:
 
 ```sql
 SELECT printf('%.3f', x)
@@ -127,7 +127,7 @@ DESCRIBE tbl;
 └─────────────┴─────────────┴─────────┴─────────┴─────────┴─────────┘
 ```
 
-Alternatively, in the CLI client, we can run the `.schema` [dot command]({% link docs/lts/clients/cli/dot_commands.md %}):
+Alternatively, in the CLI client, we can run the `.schema` [dot command]({% link docs/current/clients/cli/dot_commands.md %}):
 
 ```plsql
 .schema
@@ -144,13 +144,13 @@ After editing the table’s name (e.g., `example` to `tbl`), this query can be u
 ## Shuffling Data
 
 Sometimes, we need to introduce some entropy into the ordering of the data by shuffling it.
-To shuffle _non-deterministically_, we can simply sort on a random value provided the [`random()` function]({% link docs/lts/sql/functions/numeric.md %}#random):
+To shuffle _non-deterministically_, we can simply sort on a random value provided the [`random()` function]({% link docs/current/sql/functions/numeric.md %}#random):
 
 ```sql
 FROM 'example.csv' ORDER BY random();
 ```
 
-Shuffling _deterministically_ is a bit more tricky. To achieve this, we can order on the [hash]({% link docs/lts/sql/functions/utility.md %}#hashvalue), of the [`rowid` pseudocolumn]({% link docs/lts/sql/statements/select.md %}#row-ids). Note that this column is only available in physical tables, so we first have to load the CSV in a table, then perform the shuffle operation as follows:
+Shuffling _deterministically_ is a bit more tricky. To achieve this, we can order on the [hash]({% link docs/current/sql/functions/utility.md %}#hashvalue), of the [`rowid` pseudocolumn]({% link docs/current/sql/statements/select.md %}#row-ids). Note that this column is only available in physical tables, so we first have to load the CSV in a table, then perform the shuffle operation as follows:
 
 ```sql
 CREATE OR REPLACE TABLE example AS FROM 'example.csv';
@@ -174,7 +174,7 @@ Note that the `+ 42` is only necessary to nudge the first row from its position 
 
 ## Specifying Types in the CSV Loader
 
-DuckDB’s CSV loader auto-detects types from a [short list]({% link docs/lts/data/csv/auto_detection.md %}#type-detection) of `BOOLEAN`, `BIGINT`, `DOUBLE`, `TIME`, `DATE`, `TIMESTAMP` and `VARCHAR`.
+DuckDB’s CSV loader auto-detects types from a [short list]({% link docs/current/data/csv/auto_detection.md %}#type-detection) of `BOOLEAN`, `BIGINT`, `DOUBLE`, `TIME`, `DATE`, `TIMESTAMP` and `VARCHAR`.
 In some cases, it’s desirable to override the detected type of a given column with a type outside of this list.
 For example, we may want to treat column `x` as a `DECIMAL` value from the get-go.
 We can do this on a per-column basis with the `types` argument of the `read_csv` function:

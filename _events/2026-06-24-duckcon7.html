@@ -8,6 +8,7 @@ image: "/images/events/thumbs/duckcon-7-amsterdam.png"
 excerpt: ""
 tags: ["DuckCon"]
 body_class: duckcon7
+force_dark: true
 venue: "Royal Tropical Institute, Amsterdam"
 description: "We're hosting DuckCon #7 in our home town of Amsterdam on Wednesday, June 24."
 toc: false
@@ -24,7 +25,7 @@ redirect_from:
   <div class="hero-center">
     <h1 class="display-1">DuckCon&nbsp;#7 Amsterdam</h1>
     <div class="hero-center-actions">
-      <a class="button black" href="https://forms.gle/hzM4qQYWWSUvyJo77" target="_blank" rel="noopener noreferrer">Submit your talk</a>
+      <a class="button black" href="https://luma.com/dj4svsmm" target="_blank">Register</a>
       <!--<a class="button transparent arrow-down" href="#speakers">Speakers</a>-->
     </div>
   </div>
@@ -37,31 +38,18 @@ redirect_from:
         <p>2026-06-24 <br/>15:00–20:00</p>
       </div>
     </div>
-    <a class="hero-footer-button" href="#announcement"><svg class="icon"><use href="#arrow-down"></use></svg></a>
+    <a class="hero-footer-button" href="#program"><svg class="icon"><use href="#arrow-down"></use></svg></a>
   </footer>
 </section>
+
+<!--
 <section class="announcement w-large" id="announcement">
-  <!--<span class="pre-title">Save the date!</span>-->
   <p class="wrap">We're hosting DuckCon #7 in the <a href="https://www.kit.nl/about-us/">Royal Tropical Institute</a>, Amsterdam, on Wednesday, June 24.</p>
 </section>
-<section class="slider">
-  <div class="swiper js-duckcon7-slider">
-    <div class="swiper-wrapper">
-      {% for image in site.data.duckcon7.intro_slider %}
-      <div class="swiper-slide">
-        <img src="{{ image.image }}" alt="{{ image.description }}">
-        <p class="text-secondary-color">{{ image.description }}</p>
-      </div>
-      {% endfor %}
-    </div>
-    <div class="swiper-button-next"></div>
-    <div class="swiper-button-prev"></div>
-  </div>
-  <hr class="divider" />
-</section>
-<!--
+-->
+
 <section class="program w-large" id="program">
-  {% include duckcon7/section_header.html title="Program" description="Discover talks, demos, and community sessions—live at DuckCon #7." %}
+  {% include duckcon7/section_header.html title="Program" description="Discover where DuckDB is headed and how our community uses it at DuckCon #7." %}
   <div class="wrap table-section">
     {% for day in site.data.duckcon7.program %}
       <h3 class="table-section-title">{{ day.title }}</h3>
@@ -91,7 +79,52 @@ redirect_from:
   </div>
   <hr class="divider" />
 </section>
--->
+
+<section class="map w-large" id="venue">
+  <div class="wrap">
+    <ul class="map-menu text-secondary-color">
+      <li>
+        <a href="https://maps.apple/p/GhSQkWc9z1s1Wf">Apple Maps</a>
+      </li>
+      <li>
+        <a href="https://maps.app.goo.gl/VsutKNqkH2S9Zk3ZA" target="_blank" rel="noopener noreferrer">Google Maps</a>
+      </li>
+    </ul>
+     <div class="js-duckcon7-map embedded-map" id="duckcon7-map" data-lat="52.3627833" data-lng="4.9205426" data-label="Royal Tropical Institute"></div>
+  </div>
+  <hr class="divider" />
+</section>
+
+<section class="sponsors" id="sponsors">
+  {% include duckcon7/section_header.html title="Sponsorship options" description="We are looking for sponsors – help us make DuckCon #7 a success!<br>See our <a href='http://blobs.duckdb.org/merch/duckcon-7-amsterdam-sponsorship-brochure.pdf'>sponsorship packages</a> and <a href='mailto:gabor@duckdblabs.com'>reach out to us</a>." %}
+  <ul class="sponsors-list">
+    <li>
+      
+    </li>
+  </ul>
+  <hr class="divider" />
+</section>
+
+<section class="slider">
+  <div class="swiper js-duckcon7-slider">
+    <div class="swiper-wrapper">
+      {% for image in site.data.duckcon7.intro_slider %}
+      <div class="swiper-slide">
+        <img src="{{ image.image }}" alt="{{ image.description }}">
+        <p class="text-secondary-color">{{ image.description }}</p>
+      </div>
+      {% endfor %}
+    </div>
+    <div class="swiper-button-next"></div>
+    <div class="swiper-button-prev"></div>
+  </div>
+  <hr class="divider" />
+</section>
+
+<section class="reach_out" id="reach_out">
+  {% include duckcon7/section_header.html title="Any questions?" description="If you have any questions or any special requirements (e.g., dietary restrictions),<br>don't hesitate to <a href='mailto:gabor@duckdblabs.com'>contact us</a>!" %}
+</section>
+
 <!--
 <section class="speakers w-large" id="speakers">
   <div class="wrap">
@@ -126,23 +159,6 @@ redirect_from:
 </section>
 -->
 <!--
-<section class="sponsors">
-  {% include duckcon7/section_header.html title="Sponsors" description="We extend our sincere thanks to DuckCon #7’s sponsors for powering this community event and supporting the future of open-source analytics." %}
-  <ul class="sponsors-list">
-    <li>
-      
-    </li>
-    <li>
-      
-    </li>
-    <li>
-      
-    </li>
-  </ul>
-  <hr class="divider" />
-</section>
--->
-<!--
 <section class="venue" id="venue">
   {% include duckcon7/section_header.html title="Venue" description="" %}
 </section>
@@ -164,7 +180,7 @@ redirect_from:
 -->
 <!--
 <section class="venue-access w-large">
-  {% include duckcon7/section_header.html title="Acessing the venue" description="" %}
+  {% include duckcon7/section_header.html title="Accessing the venue" description="" %}
   {% if site.data.duckcon7.venue_access %}
     <div class="wrap feature-list">
       <ul class="flexwrap feature-list">
@@ -181,19 +197,7 @@ redirect_from:
   {% endif %}
 </section>
 -->
-<section class="map w-large">
-  <div class="wrap">
-    <ul class="map-menu text-secondary-color">
-      <li>
-        <a href="https://maps.apple/p/I.bHFQVi7NcUbC">Apple Maps</a>
-      </li>
-      <li>
-        <a href="https://maps.app.goo.gl/5qbF1CfxVGPXsbmB8" target="_blank" rel="noopener noreferrer">Google Maps</a>
-      </li>
-    </ul>
-     <div class="js-duckcon7-map embedded-map" id="duckcon7-map" data-lat="52.3627833" data-lng="4.9205426" data-label="Royal Tropical Institute"></div>
-  </div>
-</section>
+
 <!--
 <section class="join-us">
   <div class="card max-width-small">
@@ -202,10 +206,3 @@ redirect_from:
   </div>
 </section>
 -->
-<section class="join-us">
-  <div class="card max-width-small">
-    {% include duckcon7/section_header.html title="Join us for DuckCon #7!" description="The Call for Talks and Registration for DuckCon #7 are now officially open! <br/> Submit your talk proposals until 2026-04-22 (Anywhere on Earth)." %}
-    <a class="button yellow" href="https://forms.gle/hzM4qQYWWSUvyJo77">Submit your talk</a>
-    <a class="button yellow" href="https://luma.com/dj4svsmm" target="_blank">Register</a>
-  </div>
-</section>

@@ -39,7 +39,7 @@ Thank you for contributing to the DuckDB documentation!
 
 Each new page requires at least 2 edits:
 
-* Create new Markdown file (using the `snake_case` naming convention). Please follow the format of another `.md` file in the `docs/lts` folder.
+* Create new Markdown file (using the `snake_case` naming convention). Please follow the format of another `.md` file in the `docs/current` folder.
 * Add a link to the new page within `_data/menu_docs_current.json`. This populates the side menu.
 
 The addition of a new guide requires one additional edit:
@@ -68,7 +68,7 @@ Some of this style guide is automated with GitHub Actions, but feel free to run 
 * Code blocks using the `batch` language tag automatically receive `$` prompt when rendered. To typeset a Bash code block without a prompt, use the `bash` language tag (e.g., \`\`\`batch CODE\`\`\`). The two use the same syntax highlighter, the only difference is the absence of the prompt.
 * To display blocks of text without a language (e.g., output of a script), use \`\`\`text OUTPUT\`\`\`.
 * To display error messages, use \`\`\`console ERROR MESSAGE\`\`\`.
-* Quoted blocks (lines starting with `>`) are rendered as [colored boxed](https://duckdb.org/docs/lts/data/insert). The following box types are available: `Note` (default), `Warning`, `Tip`, `Bestpractice`, `Deprecated`.
+* Quoted blocks (lines starting with `>`) are rendered as [colored boxed](https://duckdb.org/docs/current/data/insert). The following box types are available: `Note` (default), `Warning`, `Tip`, `Bestpractice`, `Deprecated`.
 * Always format SQL code, variable names, function names, etc. as code. For example, when talking about the `CREATE TABLE` statement, the keywords should be formatted as code.
 * When presenting SQL statements, do not include the DuckDB prompt (`D `).
 * SQL statements should end with a semicolon (`;`) to allow readers to quickly paste them into a SQL console.
@@ -101,7 +101,7 @@ Some of this style guide is automated with GitHub Actions, but feel free to run 
 * Commas should be placed at the end of each line.
 * _Do not_ add clauses or expressions purely for aligning lines. For example, avoid adding `WHERE 1 = 1` and `WHERE true`.
 * _Do not_ include the DuckDB prompt. For example, avoid the following: `D SELECT 42;`.
-* Employing DuckDB's syntax extensions, e.g., the [`FROM-first` syntax](https://duckdb.org/docs/sql/query_syntax/from) and [`GROUP BY ALL`](https://duckdb.org/docs/sql/query_syntax/groupby#group-by-all), is allowed but use them sparingly when introducing new features.
+* Employing DuckDB's syntax extensions, e.g., the [`FROM-first` syntax](https://duckdb.org/docs/current/sql/query_syntax/from) and [`GROUP BY ALL`](https://duckdb.org/docs/current/sql/query_syntax/groupby#group-by-all), is allowed but use them sparingly when introducing new features.
 * Larger returned tables should be formatted using the DuckDB CLI's markdown mode (`.mode markdown`) and NULL values rendered as `NULL` (`.nullvalue NULL`). For smaller tables, using the default `.mode duckbox` is acceptable.
 * Output printed on the system console should be formatted as code with the `text` language tag. For example:
    ````
@@ -141,23 +141,23 @@ Some of this style guide is automated with GitHub Actions, but feel free to run 
 
 * Where applicable, add cross-references to relevant other pages in the documentation.
 * Use Jekyll's [link tags](https://jekyllrb.com/docs/liquid/tags/#link) to link to pages.
-    * For example, to link to the Example section on the `SELECT` statement's page, use `{% link docs/lts/sql/statements/select.md %}#examples`.
+    * For example, to link to the Example section on the `SELECT` statement's page, use `{% link docs/current/sql/statements/select.md %}#examples`.
     * Link tags ensure that the documentation is only compiled and deployed if links point to existing pages.
     * Note that the paths must contain the correct extension (most often `.md`) and they must be relative to the repository root.
     * :x: ```see [the `SELECT` statement](../../sql/statements/select)```
-    * :white_check_mark: ```see [the `SELECT` statement]({% link docs/lts/sql/statements/select.md %})```
+    * :white_check_mark: ```see [the `SELECT` statement]({% link docs/current/sql/statements/select.md %})```
 * Avoid using the term "here" for links. For the rationale, see a [detailed explanation on why your links should never say "click here"](https://uxmovement.com/content/why-your-links-should-never-say-click-here/).
-    * :x: `see [here]({% link docs/lts/sql/statements/copy.md %}#copy-from)`
-    * :white_check_mark: ```see the [`COPY ... FROM` statement]({% link docs/lts/sql/statements/copy.md %}#copy-from)```
+    * :x: `see [here]({% link docs/current/sql/statements/copy.md %}#copy-from)`
+    * :white_check_mark: ```see the [`COPY ... FROM` statement]({% link docs/current/sql/statements/copy.md %}#copy-from)```
 * Reference a specific section when possible:
-    * :x: ```see the [`COPY ... FROM` statement]({% link docs/lts/sql/statements/copy.md %})```
-    * :white_check_mark: ```see the [`COPY ... FROM` statement]({% link docs/lts/sql/statements/copy.md %}#copy-from)```
+    * :x: ```see the [`COPY ... FROM` statement]({% link docs/current/sql/statements/copy.md %})```
+    * :white_check_mark: ```see the [`COPY ... FROM` statement]({% link docs/current/sql/statements/copy.md %}#copy-from)```
 * In most cases, linking related GitHub issues/discussions is discouraged. This allows the documentation to be self-contained.
 
 ## Preview, Stable and Versioned Pages
 
 * The `preview` pages under <https://duckdb.org/docs/current/> contains documentation for the latest preview (nightly) release of DuckDB.
-* The `stable` pages under <https://duckdb.org/docs/lts/> contain documentation for the latest stable release of DuckDB (e.g., v1.2). **Most pull requests should target these pages.**
+* The `stable` pages under <https://duckdb.org/docs/current/> contain documentation for the latest stable release of DuckDB (e.g., v1.2). **Most pull requests should target these pages.**
 * The versioned pages (e.g., <https://duckdb.org/docs/v1.0/>) contain documentation for old stable versions of DuckDB. We generally only accept contributions to the latest stable version. Older pages are only maintained if they contain a critical error.
 
 ## Generated Pages
@@ -170,7 +170,7 @@ Many of the documentation's pages are auto-generated. Before editing, please che
 
 ### Generated SQL Function Lists
 
-The documentation concerning SQL functions in directory `docs/lts/sql/functions/` is partly auto-generated by script [`scripts/generate_sql_function_docs.py`](scripts/generate_sql_function_docs.py).
+The documentation concerning SQL functions in directory `docs/current/sql/functions/` is partly auto-generated by script [`scripts/generate_sql_function_docs.py`](scripts/generate_sql_function_docs.py).
 Specific sections in the function documentation pages will list available functions together with their descriptions and standard examples. These sections will be generated by querying the DuckDB catalog directly. Updating the function descriptions and examples, therefore, should be done in the [`duckdb` repository](https://github.com/duckdb/duckdb) (search for files named `functions.json`).
 
 To insert a function list on a doc page, add the following two lines:

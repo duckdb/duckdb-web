@@ -671,7 +671,7 @@ if (columnType.typeId === DuckDBTypeId.UNION) {
   const unionMemberTypes = columnType.memberTypes;
 }
 
-// For the JSON type (https://duckdb.org/docs/data/json/json_type)
+// For the JSON type (https://duckdb.org/docs/current/data/json/json_type)
 if (columnType.alias === 'JSON') {
   const json = JSON.parse(columnValue);
 }

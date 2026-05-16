@@ -11,7 +11,7 @@ redirect_from:
 ---
 
 <div class="wrap pagetitle pagetitle--small">
-	<h1>DuckDB Design Manual</h1>
+	<h1 id="duckdb-design-manual">DuckDB Design Manual</h1>
 </div>
 
 <section class="intro">
@@ -76,7 +76,7 @@ redirect_from:
 		<div class="usage-example usage-example--clearspace mt-3">
 			<img src="/images/designmanual/DuckDB-clearspace.svg" style="width: 280px;">
 		</div>
-		<p class="logo-pair__caption">Minimum width: 120px digital, 25mm print.</p>
+		<p class="logo-pair__caption">Minimum width: 120 px digital, 25 mm print.</p>
 
 		<h2 class="headline-2 mt-6" id="light--dark-mode">Light & Dark Mode</h2>
 		<p>Use light-mode logos (dark elements on yellow/transparent) on white and light backgrounds. Use dark-mode logos (yellow elements on dark circle) on black, charcoal, and dark backgrounds to maintain contrast.</p>
@@ -134,6 +134,8 @@ redirect_from:
 		</div>
 
 		<h3 class="headline-3 mt-6" id="color-palette">Syntax Highlighting for CLI & Docs</h3>
+
+		<p>We use the following color palette for syntax highlighting code (including SQL snippets) in the DuckDB <a href="{% link docs/current/clients/cli/overview.md %}">command line interface (CLI) client</a> and in the documentation.</p>
 
 		<table class="syntax-highlight-table mt-4">
 			<thead>
@@ -214,7 +216,7 @@ redirect_from:
 			</tbody>
 		</table>
 
-		<p>We provide the <a href="https://en.wikipedia.org/wiki/X11_color_names">X11 color names</a> used in our <a href="({% link docs/current/clients/cli/overview.md %})">command line client</a>.</p>
+		<p>Note: The <a href="https://en.wikipedia.org/wiki/X11_color_names">X11 color names</a> are used by the CLI client for consistent rendering across terminal emulators.</p>
 
 		<h2 class="headline-2 mt-6" id="accessibility">Accessibility</h2>
 		<p>All text must meet <a href="https://www.w3.org/WAI/WCAG2AA-Conformance">WCAG AA standards</a>: 4.5:1 for normal text, 3:1 for large text (≥18pt or ≥14pt bold).</p>

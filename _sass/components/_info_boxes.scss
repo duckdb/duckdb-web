@@ -2,7 +2,7 @@
 @use '../abstracts/variables' as *;
 @use '../abstracts/mixins' as *;
 
-body.documentation,
+body.documentation #main_content_wrap,
 div.singleentry {
 	blockquote {
 		border-radius: var(--border-radius-box);
@@ -24,14 +24,15 @@ div.singleentry {
 
 		p {
 			@include body-small;
-			margin-bottom: 300px;
-			margin: 1.8em 0;
-		}
-		
-		p:last-child {
-			margin-bottom: 0!important;
+			margin: 0.8em 0 0 0;
 		}
 
+		ul {
+			font-size: var(--type-body-small, 14px);
+			margin: 0.8em 0 0 0;
+		}
+
+		p:last-child,
 		ul:last-of-type {
 			margin-bottom: 0!important;
 		}

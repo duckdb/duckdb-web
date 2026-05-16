@@ -73,7 +73,7 @@ This could provide a zero-setup, no-infrastructure, properly serverless option f
 ![Iceberg with DuckDB-Wasm](/images/blog/iceberg-wasm/duckdb-iceberg-with-duckdb-wasm-light.svg){: .lightmode-img }
 
 Luckily, DuckDB has a client that can run in any browser!
-[DuckDB-Wasm]({% link docs/lts/clients/wasm/overview.md %}) is a WebAssembly port of DuckDB, which [supports loading of extensions]({% post_url 2023-12-18-duckdb-extensions-in-wasm %}).
+[DuckDB-Wasm]({% link docs/current/clients/wasm/overview.md %}) is a WebAssembly port of DuckDB, which [supports loading of extensions]({% post_url 2023-12-18-duckdb-extensions-in-wasm %}).
 
 Interacting with an Iceberg REST Catalog requires a number of functionalities; the ability to talk to a REST API over HTTP(S), the ability to read and write `avro` and `parquet` files on object storage, and finally, the ability to negotiate authentication to access those resources on behalf of the user. All of these must be done from within a browser without calling any native components.
 
@@ -108,7 +108,7 @@ This means that:
 * you can use the familiar SQL interface with the same code snippets that can run everywhere DuckDB runs
 * if you edit the credentials and share the resulting link, you will be sharing the new credentials
 
-As of today, this works with [Amazon S3 Tables]({% link docs/lts/core_extensions/iceberg/amazon_s3_tables.md %}). This has been implemented through a collaboration with the Amazon S3 Tables team.
+As of today, this works with [Amazon S3 Tables]({% link docs/current/core_extensions/iceberg/amazon_s3_tables.md %}). This has been implemented through a collaboration with the Amazon S3 Tables team.
 To learn more about S3 Tables, how to get started and their feature set, you can take a look at their [product page](https://aws.amazon.com/s3/features/tables/) or [documentation](https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-tables.html).
 A demo of DuckDB querying S3 Tables from a browser was presented at AWS re:Invent 2025 – [see the presentation](https://www.youtube.com/watch?v=Pi82g0YGklU&t=2603s).
 

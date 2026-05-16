@@ -42,9 +42,9 @@ DuckDB's Python packages has almost 25 million monthly downloads on [PyPI alone]
 
 ## TPC-H SF 100,000
 
-DuckDB is not only fast but it is also scalable. We have recently run the queries of the [TPC-H workload]({% link docs/lts/core_extensions/tpch.md %}) on the scale factor 100,000 dataset, which is equivalent to 100,000 GB of CSV files. Obviously, processing such a dataset size requires the ability to [spill to disk]({% link docs/lts/guides/performance/how_to_tune_workloads.md %}#spilling-to-disk).
+DuckDB is not only fast but it is also scalable. We have recently run the queries of the [TPC-H workload]({% link docs/current/core_extensions/tpch.md %}) on the scale factor 100,000 dataset, which is equivalent to 100,000 GB of CSV files. Obviously, processing such a dataset size requires the ability to [spill to disk]({% link docs/current/guides/performance/how_to_tune_workloads.md %}#spilling-to-disk).
 
-We ran the experiment on an [`i8g.48xlarge` EC2 instance](https://aws.amazon.com/ec2/instance-types/i8g/), which has 1.5 TB of RAM and 192 CPU cores (AWS Graviton4, Arm64). This instance has 12 NVMe SSD disks, each 3750 GB in size. We created a RAID-0 array from them to have a single 45 TB partition and formatted it using [XFS]({% link docs/lts/guides/performance/environment.md %}#local-disk).
+We ran the experiment on an [`i8g.48xlarge` EC2 instance](https://aws.amazon.com/ec2/instance-types/i8g/), which has 1.5 TB of RAM and 192 CPU cores (AWS Graviton4, Arm64). This instance has 12 NVMe SSD disks, each 3750 GB in size. We created a RAID-0 array from them to have a single 45 TB partition and formatted it using [XFS]({% link docs/current/guides/performance/environment.md %}#local-disk).
 
 We generated the dataset with the [`tpchgen-cli`](https://github.com/clflushopt/tpchgen-rs/) tool, a pure Rust implementation of the TPC-H generator. We configured the generator to produce chunks of Parquet files and loaded them into DuckDB. The final DuckDB database was about 27 TB in size (as a single file!).
 

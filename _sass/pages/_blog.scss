@@ -170,7 +170,7 @@ section.speakers,
 				border: 1px solid var(--main-blogpost-border-color-yellow);
 			}
 			
-			&[data-source="ducklake.com"] {
+			&[data-source="ducklake.select"] {
 				border: 1px solid var(--main-blogpost-border-color-blue);
 			}
 		}
@@ -849,7 +849,16 @@ h5 a {
 			max-width: 1180px;
 			margin: 0 auto;
 			padding: 75px 15px;
-			
+
+			.content{
+				max-width: 750px;
+				margin: 0 auto;
+				@media only screen and (max-width: 800px) {
+					width: 100%;
+					max-width: unset;
+				}
+			}
+
 			h1{
 				@include display-2();
 				margin-bottom: 30px;
@@ -867,6 +876,7 @@ h5 a {
 			}
 			p > img{
 				max-width: 100%;
+				height: auto;
 				margin: 0;
 				padding: 0;
 				vertical-align: middle;
@@ -877,17 +887,13 @@ h5 a {
 		.singleentry.contains_toc{
 			display: flex;
 			justify-content: space-between;
-			
+
 			@media only screen and (max-width: 1180px) {
 				justify-content: center;
 			}
-			
+
 			.content{
-				max-width: 750px;
-				@media only screen and (max-width: 800px) {
-					width: 100%;
-					max-width: unset;
-				}
+				margin: 0;
 			}
 			
 			.toc_sidebar{

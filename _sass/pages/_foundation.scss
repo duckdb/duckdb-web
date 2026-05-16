@@ -316,7 +316,7 @@ body.foundation{
 		input[type="text"]:focus,
 		input[type="password"]:focus,
 		textarea:focus {
-			border-color: var(--main-highlight-yellow-text-color, #FFF100);
+			border-color: var(--interactive-installation-box-border);
 		}
 
 		button[type="submit"] {

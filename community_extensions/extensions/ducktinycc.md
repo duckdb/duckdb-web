@@ -8,7 +8,7 @@ excerpt: |
 extension:
   name: ducktinycc
   description: DuckDB C extension for in-process JIT compiled C UDFs via TinyCC — self-contained, no external runtime required
-  version: 0.1.0
+  version: 0.2.0
   language: C
   build: cmake
   license: MIT
@@ -20,7 +20,7 @@ extension:
 
 repo:
   github: sounkou-bioinfo/DuckTinyCC
-  ref: 11c0d30bf358b0dfbe3ac7b06f22e3c326c8284d
+  ref: 5ab6fa819a3e250d0c62a2d7ac19788ae13b6ce7
 
 docs:
   hello_world: |
@@ -107,6 +107,12 @@ docs:
       - code is compiled + relocated in-memory (no separate shared-library artifact)
       - registering the same sql_name twice in a session returns false/E_INIT_FAILED (consistent across platforms); use tcc_new_state to reset before re-registering
 
+    Scalar UDF stability:
+      - compile, quick_compile, and codegen_preview accept stability := 'consistent' | 'volatile'
+      - tinycc_bind can stage stability for a later compile; an explicit compile/quick_compile/codegen_preview stability value overrides the staged value
+      - use volatile for RNGs, counters, clocks, allocation, I/O, callbacks, or reads from mutable external memory so DuckDB re-runs the function and avoids constant-folding side effects
+      - generated helper modes set explicit helper stability internally: pure metadata/enum helpers are consistent, while allocation/free/setter/mutable-memory getter helpers are volatile
+
     Embedded runtime (self-contained):
       - libtcc1.a and all TinyCC include headers (stdarg.h, stddef.h, tccdefs.h, etc.) are baked into the extension binary at build time
       - on the first compile or quick_compile call, tcc_ensure_embedded_runtime() extracts them to a content-hash-keyed temp directory (e.g. /tmp/ducktinycc_<hash>/)
@@ -117,11 +123,18 @@ docs:
     Project details and examples: https://github.com/sounkou-bioinfo/DuckTinyCC
 
     Community package excludes WASM targets.
+    
+    Additional Notes:
+    Generated and helper functions are SQL scalar UDFs; only tcc_module(...), tcc_system_paths(...), and tcc_library_probe(...) are table functions. 
+    For library linking, we can pass short names (m, z, c), explicit filenames (libfoo.so, foo.dll, .a, .lib), or path-like values. 
+    Because DuckTinyCC uses -nostdlib by default, use library := 'c' when generated code needs libc symbols that are not otherwise injected. 
+    Pointer helpers are low-level interop tools; for most workflows, handle-based access is safer than raw tcc_dataptr
+    
 
-extension_star_count: 3
-extension_star_count_pretty: 3
-extension_download_count: 791
-extension_download_count_pretty: 791
+extension_star_count: 4
+extension_star_count_pretty: 4
+extension_download_count: 837
+extension_download_count_pretty: 837
 image: '/images/community_extensions/social_preview/preview_community_extension_ducktinycc.png'
 layout: community_extension_doc
 ---

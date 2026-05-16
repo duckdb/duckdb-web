@@ -102,7 +102,6 @@ The following dependencies are tracked and thus will raise an error if the user 
 | Depending object type | Dependent object type |
 |--|--|
 | `SCHEMA` | `FUNCTION` |
-| `SCHEMA` | `INDEX` |
 | `SCHEMA` | `MACRO TABLE` |
 | `SCHEMA` | `MACRO` |
 | `SCHEMA` | `SCHEMA` |
@@ -110,7 +109,6 @@ The following dependencies are tracked and thus will raise an error if the user 
 | `SCHEMA` | `TABLE` |
 | `SCHEMA` | `TYPE` |
 | `SCHEMA` | `VIEW` |
-| `TABLE`  | `INDEX` |
 
 ## Limitations
 

@@ -34,6 +34,13 @@ $(document).ready(function(){
 		$('html').toggleClass('darkmode', isDark);
 		$(this).attr('data-mode', isDark ? 'light' : 'dark');
 		localStorage.setItem('mode', isDark ? 'dark' : 'light');
+		if (isDark) {
+			document.documentElement.style.backgroundColor = '#0d0d0d';
+			document.documentElement.style.colorScheme = 'dark';
+		} else {
+			document.documentElement.style.backgroundColor = '';
+			document.documentElement.style.colorScheme = '';
+		}
 		document.documentElement.classList.add('disable-transitions');
 		setTimeout(() => {
 			document.documentElement.classList.remove('disable-transitions');
@@ -488,7 +495,7 @@ $('a').filter(function() {
 	return this.hostname && this.hostname !== location.hostname && $(this).find('img').length === 0 && !$(this).hasClass('button');
 }).addClass("externallink").attr('target','_blank');
 
-$('.headercontent a, .mainlinks a, .box-link a, .footercontent a, .highlight a, .button, .ecosystem-diagram a').removeClass('externallink');
+$('.headercontent a, .mainlinks a, .box-link a, .footercontent a, .highlight a, .button, .ecosystem-diagram a, a.tag, a:has(> .tag)').removeClass('externallink');
 $('table a.externallink:contains(GitHub)').removeClass('externallink').addClass('nobg'); 
 $('.supporterboard a.externallink').removeClass('externallink').addClass('nobg'); 
 

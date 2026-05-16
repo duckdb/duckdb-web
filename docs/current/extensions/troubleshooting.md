@@ -18,7 +18,7 @@ HTTP Error:
 Failed to download extension "non_existing" at URL "http://extensions.duckdb.org/v1.4.0/osx_arm64/non_existing.duckdb_extension.gz" (HTTP 404)
 
 Candidate extensions: "inet", "encodings", "core_functions", "sqlite_scanner", "postgres_scanner"
-For more info, visit https://duckdb.org/docs/lts/extensions/troubleshooting?version=v1.4.0&platform=osx_arm64&extension=non_existing
+For more info, visit https://duckdb.org/docs/stable/extensions/troubleshooting?version=v1.4.0&platform=osx_arm64&extension=non_existing
 ```
 
 There are multiple scenarios for which an extension might not be available in a given extension repository at a given time:

@@ -34,7 +34,7 @@ USE dutch_railway_network.main_main;
 
 [_Tumbling windows_](https://learn.microsoft.com/en-us/stream-analytics-query/tumbling-window-azure-stream-analytics) are fixed-size **[left-closed, right-open)** time intervals, used to calculate summaries at a certain time unit level (year, day, hour, etc.). Tumbling windows are also used to transform (irregular) fact data into time series data, by aggregating it at a regular time interval.
 
-One way of implementing tumbling windows is to use the [`date_trunc` function]({% link docs/lts/sql/functions/timestamp.md %}#date_truncpart-timestamp), which will truncate the timestamp to the specified precision. For example, in the following, we retrieve the number of services for each hour and each day in 2024:
+One way of implementing tumbling windows is to use the [`date_trunc` function]({% link docs/current/sql/functions/timestamp.md %}#date_truncpart-timestamp), which will truncate the timestamp to the specified precision. For example, in the following, we retrieve the number of services for each hour and each day in 2024:
 
 ```sql
 SELECT
@@ -76,7 +76,7 @@ ORDER BY 1;
     </a>
 </div>
 
-Another approach is to use the [`time_bucket` function]({% link docs/lts/sql/functions/timestamp.md %}#time_bucketbucket_width-timestamp-offset), which will truncate the timestamp to the bucket width provided, starting from the specified offset. For example, we calculate the number of services each quarter of an hour, starting with `00`:
+Another approach is to use the [`time_bucket` function]({% link docs/current/sql/functions/timestamp.md %}#time_bucketbucket_width-timestamp-offset), which will truncate the timestamp to the bucket width provided, starting from the specified offset. For example, we calculate the number of services each quarter of an hour, starting with `00`:
 
 ```sql
 SELECT
@@ -206,7 +206,7 @@ Can you imagine how it must have been like in the control room when within 15 mi
 ## Sliding Windows
 
 [_Sliding windows_](https://learn.microsoft.com/en-us/stream-analytics-query/sliding-window-azure-stream-analytics) are overlapping intervals, but, compared to hopping windows, they are dynamically generated from the time column analyzed, therefore changing when new records are inserted.
-Sliding windows can be implemented by using the [`RANGE` window framing]({% link docs/lts/sql/functions/window_functions.md %}#framing):
+Sliding windows can be implemented by using the [`RANGE` window framing]({% link docs/current/sql/functions/window_functions.md %}#framing):
 
 ```sql
 SELECT
@@ -244,7 +244,7 @@ A [_session window_](https://learn.microsoft.com/en-us/stream-analytics-query/se
 
 We continue the data analysis by identifying the days in which there were periods of time larger than 10 minutes in which no train was arriving/departing in/from the Amsterdam Centraal Station. In this context, a session window is the period of time in which train services run without a service inactivity gap longer than 10 minutes.
 
-We start by calculating, for each record, the previous service time, by using the [`lag` window function]({% link docs/lts/sql/functions/window_functions.md %}#lagexpr-offset-default-order-by-ordering-ignore-nulls). We observed above that there is almost no traffic during the night, therefore we include only services between 6 AM and 11 PM:
+We start by calculating, for each record, the previous service time, by using the [`lag` window function]({% link docs/current/sql/functions/window_functions.md %}#lagexpr-offset-default-order-by-ordering-ignore-nulls). We observed above that there is almost no traffic during the night, therefore we include only services between 6 AM and 11 PM:
 
 ```sql
 SELECT
@@ -259,7 +259,7 @@ FROM ams_traffic_v
 WHERE hour(station_service_time) BETWEEN 6 AND 23
 ```
 
-In the above query we also calculate the gap, in minutes, between the current service and the previous service, with [`date_diff`]({% link docs/lts/sql/functions/time.md %}#date_diffpart-starttime-endtime). If there is no previous service, the column will be `NULL`, depicting the first service session in the day:
+In the above query we also calculate the gap, in minutes, between the current service and the previous service, with [`date_diff`]({% link docs/current/sql/functions/time.md %}#date_diffpart-starttime-endtime). If there is no previous service, the column will be `NULL`, depicting the first service session in the day:
 
 ```text
 ┌──────────────────────┬───────────────────────┬─────────────┐

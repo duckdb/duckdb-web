@@ -7,7 +7,15 @@ excerpt: |
 
 docs:
   extended_description: |
-    Query Power BI Semantic Models from DuckDB using DAX/XMLA. Authenticate with Azure CLI first (`az login`), then use `SET pbi_scanner_auth_mode='azure_cli'` for session-default auth and replace the workspace and semantic model placeholders with values you can access.
+    Query Power BI Semantic Models from DuckDB using DAX via XMLA endpoint.
+
+    - The `dax_query` function executes DAX and returns results as DuckDB tables.
+    - `pbi_tables`, `pbi_columns`, `pbi_measures`, and `pbi_relationships` expose INFO.VIEW metadata results for model exploration.
+
+    The easiest way to get started is Azure CLI auth (`az login`) with `SET pbi_scanner_auth_mode = 'azure_cli'`, but Azure CLI is not required.
+
+    You may also use the DuckDB `azure` extension to create an Azure secret. More details and examples are in the [pbi_scanner repository](https://github.com/crazy-treyn/pbi_scanner).
+
   hello_world: |
     INSTALL pbi_scanner FROM community;
     LOAD pbi_scanner;
@@ -16,12 +24,13 @@ docs:
     SELECT *
     FROM dax_query(
         'Data Source=powerbi://api.powerbi.com/v1.0/myorg/Example%20Workspace;Initial Catalog=example_semantic_model;',
-        'EVALUATE ROW("probe_ok", 1)'
+        'EVALUATE TOPN(500, FactSales)'
     );
+
 extension:
   name: pbi_scanner
   description: DuckDB extension for querying Power BI Semantic Models with DAX.
-  version: '0.0.1'
+  version: '0.0.4'
   language: C++
   build: cmake
   license: MIT
@@ -30,12 +39,12 @@ extension:
     - crazy-treyn
 repo:
   github: crazy-treyn/pbi_scanner
-  ref: 20799696c1375e93a7f540123e19323b89c3850e
+  ref: 6ae413fb6d6c9eb7e9b97758f41f346ac85b45a1
 
-extension_star_count: 1
-extension_star_count_pretty: 1
-extension_download_count: null
-extension_download_count_pretty: n/a
+extension_star_count: 4
+extension_star_count_pretty: 4
+extension_download_count: 518
+extension_download_count_pretty: 518
 image: '/images/community_extensions/social_preview/preview_community_extension_pbi_scanner.png'
 layout: community_extension_doc
 ---
@@ -61,7 +70,23 @@ LOAD {{ page.extension.name }};
 
 <div class="extension_functions_table"></div>
 
-This extension does not add any functions.
+|                   function_name                    | function_type |                                           description                                            |                                                                          comment                                                                          |                                                                                  examples                                                                                  |
+|----------------------------------------------------|---------------|--------------------------------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| dax_query                                          | table         | Executes a DAX query against a Power BI Semantic Model and returns the result as a DuckDB table. | Supports named authentication parameters and DuckDB azure secret auth via secret_name or Secret= in the connection string.                                | [SELECT * FROM dax_query('Data Source=powerbi://api.powerbi.com/v1.0/myorg/Example%20Workspace;Initial Catalog=example_semantic_model;','EVALUATE TOPN(500, FactSales)');] |
+| pbi_tables                                         | table         | Returns semantic model table metadata via INFO.VIEW.TABLES().                                    | Uses the same named parameters as dax_query (auth_mode, access_token, secret_name, tenant_id, client_id, client_secret, effective_user_name, timeout_ms). | [SELECT * FROM pbi_tables('Data Source=powerbi://api.powerbi.com/v1.0/myorg/Example%20Workspace;Initial Catalog=example_semantic_model;');]                                |
+| pbi_columns                                        | table         | Returns semantic model column metadata via INFO.VIEW.COLUMNS().                                  | Uses the same named parameters as dax_query (auth_mode, access_token, secret_name, tenant_id, client_id, client_secret, effective_user_name, timeout_ms). | [SELECT * FROM pbi_columns('Data Source=powerbi://api.powerbi.com/v1.0/myorg/Example%20Workspace;Initial Catalog=example_semantic_model;');]                               |
+| pbi_measures                                       | table         | Returns semantic model measure metadata via INFO.VIEW.MEASURES().                                | Uses the same named parameters as dax_query (auth_mode, access_token, secret_name, tenant_id, client_id, client_secret, effective_user_name, timeout_ms). | [SELECT * FROM pbi_measures('Data Source=powerbi://api.powerbi.com/v1.0/myorg/Example%20Workspace;Initial Catalog=example_semantic_model;');]                              |
+| pbi_relationships                                  | table         | Returns semantic model relationship metadata via INFO.VIEW.RELATIONSHIPS().                      | Uses the same named parameters as dax_query (auth_mode, access_token, secret_name, tenant_id, client_id, client_secret, effective_user_name, timeout_ms). | [SELECT * FROM pbi_relationships('Data Source=powerbi://api.powerbi.com/v1.0/myorg/Example%20Workspace;Initial Catalog=example_semantic_model;');]                         |
+| __pbi_scanner_test_effective_execution_transport   | scalar        | NULL                                                                                             | NULL                                                                                                                                                      | NULL                                                                                                                                                                       |
+| __pbi_scanner_test_parse_binxml_double             | scalar        | NULL                                                                                             | NULL                                                                                                                                                      | NULL                                                                                                                                                                       |
+| __pbi_scanner_test_coerce_xml_text                 | scalar        | NULL                                                                                             | NULL                                                                                                                                                      | NULL                                                                                                                                                                       |
+| __pbi_scanner_test_dax_schema_probe                | scalar        | NULL                                                                                             | NULL                                                                                                                                                      | NULL                                                                                                                                                                       |
+| __pbi_scanner_test_metadata_cache_roundtrip        | scalar        | NULL                                                                                             | NULL                                                                                                                                                      | NULL                                                                                                                                                                       |
+| __pbi_scanner_test_service_principal_error_message | scalar        | NULL                                                                                             | NULL                                                                                                                                                      | NULL                                                                                                                                                                       |
+| __pbi_scanner_test_parse_chunked_double            | scalar        | NULL                                                                                             | NULL                                                                                                                                                      | NULL                                                                                                                                                                       |
+| __pbi_scanner_test_parse_streaming_sx_double       | scalar        | NULL                                                                                             | NULL                                                                                                                                                      | NULL                                                                                                                                                                       |
+| __pbi_scanner_test_coerce_xml_type                 | scalar        | NULL                                                                                             | NULL                                                                                                                                                      | NULL                                                                                                                                                                       |
+| __pbi_scanner_test_parse_binxml_first_text         | scalar        | NULL                                                                                             | NULL                                                                                                                                                      | NULL                                                                                                                                                                       |
 
 ### Overloaded Functions
 
@@ -79,6 +104,8 @@ This extension does not add any types.
 
 <div class="extension_settings_table"></div>
 
-This extension does not add any settings.
+|         name          |                                          description                                           | input_type | scope  | aliases |
+|-----------------------|------------------------------------------------------------------------------------------------|------------|--------|---------|
+| pbi_scanner_auth_mode | Default auth mode for pbi_scanner table functions (access_token, azure_cli, service_principal) | VARCHAR    | GLOBAL | []      |
 
 

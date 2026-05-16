@@ -80,7 +80,7 @@ The examples are available as [an interactive notebook over at Google Colab](htt
 
 ## Reading Multiple Parquet Files
 
-First we look at some rows in the dataset. There are three Parquet files in the `taxi/` folder. [DuckDB supports the globbing syntax]({% link docs/lts/data/parquet/overview.md %}), which allows it to query all three files simultaneously.
+First we look at some rows in the dataset. There are three Parquet files in the `taxi/` folder. [DuckDB supports the globbing syntax]({% link docs/current/data/parquet/overview.md %}), which allows it to query all three files simultaneously.
 
 ```python
 con.execute("""
@@ -131,7 +131,7 @@ import pyarrow.parquet as pq
 pq.write_table(pq.ParquetDataset('taxi/').read(), 'alltaxi.parquet', row_group_size=100000)
 ```
 
-Note that [DuckDB also has support for writing Parquet files]({% link docs/lts/data/parquet/overview.md %}#writing-to-parquet-files) using the COPY statement.
+Note that [DuckDB also has support for writing Parquet files]({% link docs/current/data/parquet/overview.md %}#writing-to-parquet-files) using the COPY statement.
 
 ## Querying the Large File
 

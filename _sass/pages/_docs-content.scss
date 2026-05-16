@@ -519,6 +519,42 @@ body.layout_default.blog_typography {
         border: 1px solid var(--doc-codebox-border-color, #D9D9D9);
     }
 
+    /* example:
+     *     {:.codebox-client}
+     *     ```sql
+     *     SELECT * FROM orders;
+     *     ``` */
+    main .wrap .codebox-client,
+    main .wrap .codebox-server,
+    main .wrap .codebox-catalog {
+        position: relative;
+        overflow: hidden;
+        border: 1px solid var(--doc-codebox-border-color, #D9D9D9);
+        border-radius: var(--border-radius-box);
+        background: var(--doc-codebox-background-color, #F2F2F2);
+
+        &::before {
+            @include label-2;
+            display: block;
+            padding: 8px 16px;
+            text-transform: uppercase;
+            color: var(--main-text-secondary-color, #666);
+            background: var(--doc-codebox-background-color-secondary, #EDEDED);
+            border-bottom: 1px solid var(--doc-codebox-border-color, #D9D9D9);
+        }
+
+        > div.highlight {
+            margin-bottom: 0;
+            border: 0;
+            border-radius: 0;
+            background: transparent;
+        }
+    }
+
+    main .wrap .codebox-client::before { content: 'Client'; }
+    main .wrap .codebox-server::before { content: 'Server'; }
+    main .wrap .codebox-catalog::before { content: 'Catalog'; }
+
     .language-text div.highlight {
         border: none;
     }

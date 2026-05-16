@@ -312,7 +312,7 @@ Here, we can see that the new implementation scales much better: the execution t
 
 The first benchmark evaluated raw sorting performance.
 In this next benchmark, we sort a _wide table_, i.e., we select many columns to be sorted by the `ORDER BY` clause.
-We sort the `lineitem` table from TPC-H which has 15 columns, by the `l_shipdate` column, at scale factors 1 (~6 million rows), 10 (~60 million rows) and 100 (~600 million rows), generated using [DuckDB's TPC-H extension]({% link docs/lts/core_extensions/tpch.md %}).
+We sort the `lineitem` table from TPC-H which has 15 columns, by the `l_shipdate` column, at scale factors 1 (~6 million rows), 10 (~60 million rows) and 100 (~600 million rows), generated using [DuckDB's TPC-H extension]({% link docs/current/core_extensions/tpch.md %}).
 
 
 We took the median execution time of 5 runs of this query for each scale factor:

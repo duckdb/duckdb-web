@@ -8,7 +8,7 @@ excerpt: |
 extension:
   name: semantic_views
   description: "Semantic views -- a declarative layer for dimensions, metrics, and relationships"
-  version: 0.7.1
+  version: 0.8.0
   language: Rust
   build: cargo
   license: MIT
@@ -19,7 +19,7 @@ extension:
 
 repo:
   github: anentropic/duckdb-semantic-views
-  ref: 74fffadf0b1ef82d8fce01cf93332823b059b1fe
+  ref: 3089b250d5dc1edb1a969f5ae7008a3b1552290f
 
 docs:
   hello_world: |
@@ -43,10 +43,10 @@ docs:
 
     Documentation: https://anentropic.github.io/duckdb-semantic-views/
 
-extension_star_count: 4
-extension_star_count_pretty: 4
-extension_download_count: 426
-extension_download_count_pretty: 426
+extension_star_count: 5
+extension_star_count_pretty: 5
+extension_download_count: 496
+extension_download_count_pretty: 496
 image: '/images/community_extensions/social_preview/preview_community_extension_semantic_views.png'
 layout: community_extension_doc
 ---
@@ -72,36 +72,25 @@ LOAD {{ page.extension.name }};
 
 <div class="extension_functions_table"></div>
 
-|                function_name                 | function_type | description | comment | examples |
-|----------------------------------------------|---------------|-------------|---------|----------|
-| alter_semantic_view_rename                   | table         | NULL        | NULL    |          |
-| alter_semantic_view_rename_if_exists         | table         | NULL        | NULL    |          |
-| alter_semantic_view_set_comment              | table         | NULL        | NULL    |          |
-| alter_semantic_view_set_comment_if_exists    | table         | NULL        | NULL    |          |
-| alter_semantic_view_unset_comment            | table         | NULL        | NULL    |          |
-| alter_semantic_view_unset_comment_if_exists  | table         | NULL        | NULL    |          |
-| create_or_replace_semantic_view_from_json    | table         | NULL        | NULL    |          |
-| create_semantic_view_from_json               | table         | NULL        | NULL    |          |
-| create_semantic_view_if_not_exists_from_json | table         | NULL        | NULL    |          |
-| describe_semantic_view                       | table         | NULL        | NULL    |          |
-| drop_semantic_view                           | table         | NULL        | NULL    |          |
-| drop_semantic_view_if_exists                 | table         | NULL        | NULL    |          |
-| explain_semantic_view                        | table         | NULL        | NULL    |          |
-| get_ddl                                      | scalar        | NULL        | NULL    |          |
-| list_semantic_views                          | table         | NULL        | NULL    |          |
-| list_terse_semantic_views                    | table         | NULL        | NULL    |          |
-| read_yaml_from_semantic_view                 | scalar        | NULL        | NULL    |          |
-| semantic_view                                | table         | NULL        | NULL    |          |
-| show_columns_in_semantic_view                | table         | NULL        | NULL    |          |
-| show_semantic_dimensions                     | table         | NULL        | NULL    |          |
-| show_semantic_dimensions_all                 | table         | NULL        | NULL    |          |
-| show_semantic_dimensions_for_metric          | table         | NULL        | NULL    |          |
-| show_semantic_facts                          | table         | NULL        | NULL    |          |
-| show_semantic_facts_all                      | table         | NULL        | NULL    |          |
-| show_semantic_materializations               | table         | NULL        | NULL    |          |
-| show_semantic_materializations_all           | table         | NULL        | NULL    |          |
-| show_semantic_metrics                        | table         | NULL        | NULL    |          |
-| show_semantic_metrics_all                    | table         | NULL        | NULL    |          |
+|            function_name            | function_type | description | comment | examples |
+|-------------------------------------|---------------|-------------|---------|----------|
+| describe_semantic_view              | table         | NULL        | NULL    |          |
+| explain_semantic_view               | table         | NULL        | NULL    |          |
+| get_ddl                             | scalar        | NULL        | NULL    |          |
+| list_semantic_views                 | table         | NULL        | NULL    |          |
+| list_terse_semantic_views           | table         | NULL        | NULL    |          |
+| read_yaml_from_semantic_view        | scalar        | NULL        | NULL    |          |
+| semantic_view                       | table         | NULL        | NULL    |          |
+| show_columns_in_semantic_view       | table         | NULL        | NULL    |          |
+| show_semantic_dimensions            | table         | NULL        | NULL    |          |
+| show_semantic_dimensions_all        | table         | NULL        | NULL    |          |
+| show_semantic_dimensions_for_metric | table         | NULL        | NULL    |          |
+| show_semantic_facts                 | table         | NULL        | NULL    |          |
+| show_semantic_facts_all             | table         | NULL        | NULL    |          |
+| show_semantic_materializations      | table         | NULL        | NULL    |          |
+| show_semantic_materializations_all  | table         | NULL        | NULL    |          |
+| show_semantic_metrics               | table         | NULL        | NULL    |          |
+| show_semantic_metrics_all           | table         | NULL        | NULL    |          |
 
 ### Overloaded Functions
 

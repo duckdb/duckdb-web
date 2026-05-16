@@ -8,7 +8,7 @@ excerpt: |
 extension:
   name: plinking_duck
   description: Read PLINK 2 genomics file formats and run common genetic analyses directly in SQL
-  version: 0.4.1
+  version: 0.5.0
   language: C++
   build: cmake
   license: MIT
@@ -18,7 +18,7 @@ extension:
 
 repo:
   github: teaguesterling/plinking_duck
-  ref: 77be4d088b52382ed3e0568a43427e355cb2d114
+  ref: ce446b086c88df40f5447ab7ce04cc867e2fe3db
 
 docs:
   hello_world: |
@@ -50,6 +50,7 @@ docs:
     - `read_psam(path)` — sample metadata (.psam/.fam)
     - `read_pgen(path)` — binary genotypes (.pgen)
     - `read_pfile(prefix)` — unified fileset reader with orient modes (variant/genotype/sample), sample subsetting, region and variant filtering
+    - `read_plink_vcf(path)` — fast biallelic genotype extraction from VCF/VCF.gz (~3x faster than htslib)
 
     **Analysis functions:**
     - `plink_freq` — per-variant allele frequencies via fast genotype counting
@@ -79,10 +80,10 @@ docs:
 
     For full documentation, see [plinking-duck.readthedocs.io](https://plinking-duck.readthedocs.io).
 
-extension_star_count: 2
-extension_star_count_pretty: 2
-extension_download_count: 820
-extension_download_count_pretty: 820
+extension_star_count: 3
+extension_star_count_pretty: 3
+extension_download_count: 828
+extension_download_count_pretty: 828
 image: '/images/community_extensions/social_preview/preview_community_extension_plinking_duck.png'
 layout: community_extension_doc
 ---
@@ -108,19 +109,20 @@ LOAD {{ page.extension.name }};
 
 <div class="extension_functions_table"></div>
 
-| function_name | function_type | description | comment | examples |
-|---------------|---------------|-------------|---------|----------|
-| plink_freq    | table         | NULL        | NULL    |          |
-| plink_glm     | table         | NULL        | NULL    |          |
-| plink_hardy   | table         | NULL        | NULL    |          |
-| plink_ld      | table         | NULL        | NULL    |          |
-| plink_missing | table         | NULL        | NULL    |          |
-| plink_pca     | table         | NULL        | NULL    |          |
-| plink_score   | table         | NULL        | NULL    |          |
-| read_pfile    | table         | NULL        | NULL    |          |
-| read_pgen     | table         | NULL        | NULL    |          |
-| read_psam     | table         | NULL        | NULL    |          |
-| read_pvar     | table         | NULL        | NULL    |          |
+| function_name  | function_type | description | comment | examples |
+|----------------|---------------|-------------|---------|----------|
+| plink_freq     | table         | NULL        | NULL    |          |
+| plink_glm      | table         | NULL        | NULL    |          |
+| plink_hardy    | table         | NULL        | NULL    |          |
+| plink_ld       | table         | NULL        | NULL    |          |
+| plink_missing  | table         | NULL        | NULL    |          |
+| plink_pca      | table         | NULL        | NULL    |          |
+| plink_score    | table         | NULL        | NULL    |          |
+| read_pfile     | table         | NULL        | NULL    |          |
+| read_pgen      | table         | NULL        | NULL    |          |
+| read_plink_vcf | table         | NULL        | NULL    |          |
+| read_psam      | table         | NULL        | NULL    |          |
+| read_pvar      | table         | NULL        | NULL    |          |
 
 ### Overloaded Functions
 

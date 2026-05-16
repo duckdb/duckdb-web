@@ -5,7 +5,7 @@
       "mainfolderitems": [
         {
           "page": "Documentation",
-          "url": "/docs/",
+          "url": "/docs",
           "subfolderitems": [
             {
               "page": "Getting Started",
@@ -13,7 +13,11 @@
             },
             {
               "page": "Installation",
-              "url": "/install/"
+              "url": "/install"
+            },
+            {
+              "page": "Quack Remote Protocol",
+              "url": "/docs/current/quack/overview"
             },
             {
               "page": "Guides",
@@ -43,23 +47,27 @@
           "subfolderitems": [
             {
               "page": "Blog",
-              "url": "/news/"
+              "url": "/news"
             },
             {
               "page": "Library",
-              "url": "/library/"
+              "url": "/library"
             },
             {
               "page": "Events",
-              "url": "/events/"
+              "url": "/events"
             },
             {
               "page": "Everywhere",
-              "url": "/everywhere/"
+              "url": "/everywhere"
             },
             {
               "page": "Webshop",
-              "url": "https://shop.duckdb.org/"
+              "url": "https://shop.duckdb.org"
+            },
+            {
+              "page": "Design",
+              "url": "/design"
             },
             {
               "page": "FAQ",

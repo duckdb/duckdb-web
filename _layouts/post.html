@@ -44,7 +44,9 @@
 
 </head>
 <body class="post layout_post{% if page.body_class %} {{ page.body_class }}{% endif %}">
-	
+
+	{% include icons.html %}
+
 	<header>
 		<div class="headerline">
 			<div class="headercontent">
@@ -114,9 +116,15 @@
 								{% endif %}
 								
 								{% if page.event == true or page.collection == "events" %}
+									{% assign event_day = page.date | date: "%Y-%m-%d" %}
+									{% assign today = site.time | date: "%Y-%m-%d" %}
 									<div class="infoline">
 										<div class="scheduled">
-											<span>Scheduled for</span>
+											{% if event_day >= today %}
+												<span>Scheduled for</span>
+											{% else %}
+												<span>Took place on</span>
+											{% endif %}
 											<span class="date">{{ page.date | date: "%B %d, %Y" }}</span>
 										</div>
 										<div class="venue"><span>at {{ page.venue }}</span></div>

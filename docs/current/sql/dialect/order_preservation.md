@@ -65,9 +65,9 @@ The following operations **do not** guarantee that the row order is preserved:
 * `JOIN`
 * `UNION`
 * `USING SAMPLE`
-* Whole-table aggregation (the input order, that is, the order in which rows are fed into [order-sensitive aggregate functions](https://duckdb.org/docs/sql/functions/aggregates.html#order-by-clause-in-aggregate-functions) is not guaranteed unless explicitly specified in the aggregate function)
+* Whole-table aggregation (the input order, that is, the order in which rows are fed into [order-sensitive aggregate functions]({% link docs/current/sql/functions/aggregates.md %}#order-by-clause-in-aggregate-functions) is not guaranteed unless explicitly specified in the aggregate function)
 * `GROUP BY` (neither in- nor output order are guaranteed)
-* `ORDER BY` (specifically, `ORDER BY` may not use a [stable algorithm](https://en.m.wikipedia.org/wiki/Stable_algorithm))
+* `ORDER BY` (specifically, `ORDER BY` may not use a [stable algorithm](https://en.wikipedia.org/wiki/Stable_algorithm))
 * Scalar subqueries
 
 ## Insertion Order

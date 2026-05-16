@@ -4,8 +4,8 @@ layout: docu
 redirect_from:
 - /docs/extensions/httpfs
 - /docs/extensions/httpfs/overview
-- /docs/lts/extensions/httpfs
-- /docs/lts/extensions/httpfs/overview
+- /docs/stable/extensions/httpfs
+- /docs/stable/extensions/httpfs/overview
 - /docs/preview/core_extensions/httpfs/overview
 - /docs/stable/core_extensions/httpfs/overview
 title: httpfs Extension for HTTP and S3 Support

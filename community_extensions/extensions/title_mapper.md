@@ -8,7 +8,7 @@ excerpt: |
 extension:
   name: title_mapper
   description: Efficiently standardizes scraped job titles to Bureau of Labor Statistics (BLS) titles using a high-performance TF-IDF algorithm.
-  version: 1.4.1.0
+  version: 1.5.2
   language: Rust
   build: cargo
   license: MIT
@@ -19,7 +19,7 @@ extension:
 
 repo:
   github: martin-conur/duckdb-title-mapper
-  ref: 48519d2d38eda1103d8cc3261c84fbbd4dc90b18
+  ref: d9b60b448f741e4f427dcd6b0eac3ce2b9148d5e
 
 docs:
   hello_world: |
@@ -51,10 +51,11 @@ docs:
     | Exec. Chef | Executive Chef |
     | Marketing Coordinator/Specialist | Marketing Specialist |
     | Licensed Practical Nurse (LPN) | Licensed Practical Nurse |
+
 extension_star_count: 2
 extension_star_count_pretty: 2
-extension_download_count: 642
-extension_download_count_pretty: 642
+extension_download_count: 868
+extension_download_count_pretty: 868
 image: '/images/community_extensions/social_preview/preview_community_extension_title_mapper.png'
 layout: community_extension_doc
 ---
@@ -83,5 +84,23 @@ LOAD {{ page.extension.name }};
 |   function_name   | function_type |                 description                 | comment |                             examples                              |
 |-------------------|---------------|---------------------------------------------|---------|-------------------------------------------------------------------|
 | standardize_title | scalar        | Returns the BLS standard title using TF-IDF | NULL    | [SELECT standardize_title(scraped_title_column) FROM your_table;] |
+
+### Overloaded Functions
+
+<div class="extension_functions_table"></div>
+
+This extension does not add any function overloads.
+
+### Added Types
+
+<div class="extension_types_table"></div>
+
+This extension does not add any types.
+
+### Added Settings
+
+<div class="extension_settings_table"></div>
+
+This extension does not add any settings.
 
 

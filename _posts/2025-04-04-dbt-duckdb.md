@@ -49,7 +49,7 @@ The purpose of processing the train services and the Netherlands cartography dat
 
 After we have [initialized](https://docs.getdbt.com/reference/commands/init) our project, we configure the connection details for DuckDB in the `profiles.yml` file. Along with specifying if the database should be in memory or persisted to disk, we also specify:
 
-- which extensions are required for the data processing, e.g., [spatial]({% link docs/lts/core_extensions/spatial/overview.md %});
+- which extensions are required for the data processing, e.g., [spatial]({% link docs/current/core_extensions/spatial/overview.md %});
 - external databases, attached from the local disk or other storage solutions.
 
 ```yaml
@@ -107,7 +107,7 @@ In `dbt` the way of storing the data in the target system is called `materializa
 - `snapshot`, implementing a [Slowly Changing Dimension Type 2](https://en.wikipedia.org/wiki/Slowly_changing_dimension) table with time validity intervals;
 - `view`, replacing the target view at each run.
 
-Another feature of using the above adapter is that the SQL dialect used in the data processing scripts has all the [friendly SQL extensions]({% link docs/lts/sql/dialect/friendly_sql.md %}) DuckDB has to offer.
+Another feature of using the above adapter is that the SQL dialect used in the data processing scripts has all the [friendly SQL extensions]({% link docs/current/sql/dialect/friendly_sql.md %}) DuckDB has to offer.
 
 To refresh the data in the `dim_nl_provinces` table, we use  the `st_read` spatial function, which reads and parses automatically the `nl_provinces` GeoJSON file, defined in `sources.yml`.
 
@@ -202,7 +202,7 @@ GROUP BY ALL
 ```
 {% endraw %}
 
-The exported files are placed in [Hive partitioned directory structure]({% link docs/lts/data/partitioning/hive_partitioning.md %}).
+The exported files are placed in [Hive partitioned directory structure]({% link docs/current/data/partitioning/hive_partitioning.md %}).
 
 ```text
 ./service_year=2024/service_month=1:
@@ -265,7 +265,7 @@ Thanks to DuckDB's ability to connect and write to a PostgreSQL database, we can
 
 To connect to a PostgreSQL database, we need to specify in `profiles.yml`:
 
-- the [`postgres` extension]({% link docs/lts/core_extensions/postgres.md %});
+- the [`postgres` extension]({% link docs/current/core_extensions/postgres.md %});
 - the PostgreSQL connection string in the `attach` section.
 
 {% raw %}

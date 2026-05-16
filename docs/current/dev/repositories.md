@@ -19,7 +19,6 @@ Several components of DuckDB are maintained in separate repositories.
 
 * [`duckdb-go`](https://github.com/duckdb/duckdb-go): Go client
 * [`duckdb-java`](https://github.com/duckdb/duckdb-java): Java (JDBC) client
-* [`duckdb-node`](https://github.com/duckdb/duckdb-node): Node.js client (deprecated)
 * [`duckdb-node-neo`](https://github.com/duckdb/duckdb-node-neo): Node.js client
 * [`duckdb-odbc`](https://github.com/duckdb/duckdb-odbc): ODBC client
 * [`duckdb-pyodide`](https://github.com/duckdb/duckdb-pyodide): Pyodide client

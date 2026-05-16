@@ -40,7 +40,7 @@ To see how this laptop performs, we ran a few benchmarks focusing on loading and
 
 ### CSV Loading
 
-To measure CSV loading performance, we used one of our favorite datasets: the [Dutch railway services]({% link docs/lts/guides/snippets/dutch_railway_datasets.md %}). We picked the [full dataset spanning the last 80 months](https://blobs.duckdb.org/nl-railway/railway-services-80-months.zip) (between Jan 2019 and Aug 2025).
+To measure CSV loading performance, we used one of our favorite datasets: the [Dutch railway services]({% link docs/current/guides/snippets/dutch_railway_datasets.md %}). We picked the [full dataset spanning the last 80 months](https://blobs.duckdb.org/nl-railway/railway-services-80-months.zip) (between Jan 2019 and Aug 2025).
 We can fetch and decompress the file as follows:
 
 ```bash

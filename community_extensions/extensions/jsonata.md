@@ -18,14 +18,14 @@ extension:
   name: jsonata
   version: 2025110901
 repo:
-  andium: f7367247a1a857842a885afdad956b64a6d3e769
+  andium: 9ff14fb21b6cd07371070c758978043e115a2eb0
   github: query-farm/jsonata
-  ref: c880410f90016ff02a5f48653234b1b1464d81fc
+  ref: 418a6f5d1d44a43ecff2067e4ac91f260c6303d3
 
 extension_star_count: 6
 extension_star_count_pretty: 6
-extension_download_count: 731
-extension_download_count_pretty: 731
+extension_download_count: 854
+extension_download_count_pretty: 854
 image: '/images/community_extensions/social_preview/preview_community_extension_jsonata.png'
 layout: community_extension_doc
 ---

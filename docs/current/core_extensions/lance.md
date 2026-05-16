@@ -175,7 +175,7 @@ ORDER BY _hybrid_score DESC;
 
 ## Limitations
 
-The `lance` extension is currently available for the following [platforms]({% link docs/lts/dev/building/overview.md %}#supported-platforms):
+The `lance` extension is currently available for the following [platforms]({% link docs/current/dev/building/overview.md %}#supported-platforms):
 
 - `linux_amd64`
 - `linux_arm64`

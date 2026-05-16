@@ -19,12 +19,12 @@ extension:
   version: 2026012700
 repo:
   github: lnkuiper/fivetran
-  ref: 1ff6cb2f6b91b7be7bda3f310b546efa605b5034
+  ref: cdd9a4104e8c76e6498661ff0948222cabbf60df
 
 extension_star_count: 0
 extension_star_count_pretty: 0
-extension_download_count: 589
-extension_download_count_pretty: 589
+extension_download_count: 6966
+extension_download_count_pretty: 7.0k
 image: '/images/community_extensions/social_preview/preview_community_extension_fivetran.png'
 layout: community_extension_doc
 ---
@@ -53,6 +53,18 @@ LOAD {{ page.extension.name }};
 |      function_name       | function_type | description | comment | examples |
 |--------------------------|---------------|-------------|---------|----------|
 | struct_to_sparse_variant | scalar        | NULL        | NULL    |          |
+
+### Overloaded Functions
+
+<div class="extension_functions_table"></div>
+
+This extension does not add any function overloads.
+
+### Added Types
+
+<div class="extension_types_table"></div>
+
+This extension does not add any types.
 
 ### Added Settings
 

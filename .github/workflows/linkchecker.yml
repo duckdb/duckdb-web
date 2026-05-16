@@ -22,7 +22,7 @@ jobs:
 
       - run: pip install linkchecker --user
 
-      - name: Link Checker ignoring the old documentation pages (and keeping the stable and preview pages)
+      - name: Link Checker ignoring the old documentation pages (and keeping the lts and current pages)
         run: |
           linkchecker https://duckdb.org/ --ignore-url 'https?://duckdb\.org/docs/[0-9]*.[0-9]*/.*' --config .github/linkchecker/linkchecker.conf --file-output html/utf-8/report.html
           echo $?

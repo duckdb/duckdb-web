@@ -36,7 +36,7 @@ This version ships a number of performance improvements and bugfixes.
 
 * [`#18997` Macro binding had slow performance for unbalanced trees](https://github.com/duckdb/duckdb/issues/18997)
 * [`#19901` Memory management has been improved during WAL replay in the presence of indexes](https://github.com/duckdb/duckdb/pull/19901)
-* The [`vortex` extension]({% link docs/lts/core_extensions/vortex.md %}) ships significant performance improvements for writing Vortex files
+* The [`vortex` extension]({% link docs/current/core_extensions/vortex.md %}) ships significant performance improvements for writing Vortex files
 
 ### Miscellaneous
 
@@ -46,7 +46,7 @@ This version ships a number of performance improvements and bugfixes.
 
 ## Azure Blob Storage Writes
 
-The [`azure` extension]({% link docs/lts/core_extensions/azure.md %}) can now [write to the Azure Blob Storage](https://github.com/duckdb/duckdb-azure/pull/131).
+The [`azure` extension]({% link docs/current/core_extensions/azure.md %}) can now [write to the Azure Blob Storage](https://github.com/duckdb/duckdb-azure/pull/131).
 This unlocks several other Azure and Fabric features, including using [OneLake](https://learn.microsoft.com/en-us/fabric/onelake/onelake-overview) instances.
 
 ## Windows Arm64
@@ -55,7 +55,7 @@ With this release, we are introducing beta support for Windows Arm64 by distribu
 
 ### Extension Distribution
 
-On Windows Arm64, you can now natively install core extensions, including complex ones like [`spatial`]({% link docs/lts/core_extensions/spatial/overview.md %}):
+On Windows Arm64, you can now natively install core extensions, including complex ones like [`spatial`]({% link docs/current/core_extensions/spatial/overview.md %}):
 
 ```batch
 duckdb

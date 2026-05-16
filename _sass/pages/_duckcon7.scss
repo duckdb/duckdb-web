@@ -178,8 +178,19 @@
             grid-template-columns: var(--first-column-width) 1.7fr 1fr 1fr;
 
             @media (max-width: 940px) {
-                grid-template-columns: var(--first-column-width) 1fr;
-                grid-template-rows: 1fr 1fr;
+                grid-template-columns: 70px 1fr;
+            }
+        }
+
+        thead tr {
+            @media (max-width: 940px) {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        thead th {
+            @media (max-width: 940px) {
+                padding-left: 0;
             }
         }
 
@@ -200,19 +211,37 @@
                 color: var(--main-text-secondary-color, #B2B2B2);
             }
 
+            td:nth-child(2) {
+                @media (max-width: 940px) {
+                    padding-bottom: 2px;
+                }
+            }
+
             td:nth-child(3) {
                 color: var(--main-text-tertiary-color);
 
                 @media (max-width: 940px) {
-                    grid-column: span 2;
-                    text-align: center;
+                    grid-column: 2;
+                    padding-top: 0;
+                }
+
+                &:empty {
+                    @media (max-width: 940px) {
+                        display: none;
+                    }
                 }
             }
 
             td:nth-child(4) {
                 @media (max-width: 940px) {
-                    grid-column: span 2;
-                    text-align: center;
+                    grid-column: 2;
+                    padding-top: 0;
+                }
+
+                &:empty {
+                    @media (max-width: 940px) {
+                        display: none;
+                    }
                 }
             }
         }
@@ -224,6 +253,10 @@
         .table-section-title {
             margin-left: calc(var(--first-column-width) + var(--td-padding));
             margin-bottom: 30px;
+
+            @media (max-width: 940px) {
+                margin-left: 0;
+            }
         }
 
         .table-title {

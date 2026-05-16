@@ -35,7 +35,7 @@ from_hf_rel.to_table("text_emotions")
 
 > How to access Hugging Face datasets with DuckDB is detailed in the post [“Access 150k+ Datasets from Hugging Face with DuckDB”]({% post_url 2024-05-29-access-150k-plus-datasets-from-hugging-face-with-duckdb %}).
 
-In the above data we have available only the identifier of an emotion (`emotion_id`), without its descriptive information. Therefore, from the list provided in the dataset description, we create a reference table by unnesting the Python list and retrieving the index for each value with the [`generate_subscripts`]({% link docs/lts/sql/query_syntax/unnest.md %}#keeping-track-of-list-entry-positions) function:
+In the above data we have available only the identifier of an emotion (`emotion_id`), without its descriptive information. Therefore, from the list provided in the dataset description, we create a reference table by unnesting the Python list and retrieving the index for each value with the [`generate_subscripts`]({% link docs/current/sql/query_syntax/unnest.md %}#keeping-track-of-list-entry-positions) function:
 ```python
 emotion_labels = ["sadness", "joy", "love", "anger", "fear", "surprise"]
 
@@ -69,7 +69,7 @@ We plot on a bar chart the emotion distribution to have an initial understanding
 
 ## Keyword Search
 
-*Keyword search* is the most basic form of text retrieval, matching exact words or phrases in text fields using SQL conditions such as `CONTAINS`, `ILIKE`, or other DuckDB [text functions]({% link docs/lts/sql/functions/text.md %}).
+*Keyword search* is the most basic form of text retrieval, matching exact words or phrases in text fields using SQL conditions such as `CONTAINS`, `ILIKE`, or other DuckDB [text functions]({% link docs/current/sql/functions/text.md %}).
 It is fast, requires no preprocessing, and works well for structured queries like filtering logs, matching tags, or finding product names.
 
 For example, getting the texts and their emotion label containing the phrase `excited to learn` is a matter of applying `filter` on the relation defined above:
@@ -101,9 +101,9 @@ text_emotions_rel.filter("text ilike '%excited to learn%'").select("""
 └─────────┴──────────────────┘
 ```
 
-One common step in text processing is to split text into tokens (keywords), where raw text is broken down into smaller units (typically words), that can be analyzed or indexed. This process, known as *tokenization*, helps convert unstructured text into a structured form suitable for keyword search. In DuckDB this process can be implemented with the [`regexp_split_to_table` function]({% link docs/lts/sql/functions/text.md %}#regexp_split_to_tablestring-regex), which will split the text based on the provided regex and return each keyword on a row.
+One common step in text processing is to split text into tokens (keywords), where raw text is broken down into smaller units (typically words), that can be analyzed or indexed. This process, known as *tokenization*, helps convert unstructured text into a structured form suitable for keyword search. In DuckDB this process can be implemented with the [`regexp_split_to_table` function]({% link docs/current/sql/functions/text.md %}#regexp_split_to_tablestring-regex), which will split the text based on the provided regex and return each keyword on a row.
 
-> This step is case sensitive, therefore it is important to convert all text to a consistent case (by applying [`lcase`]({% link docs/lts/sql/functions/text.md %}#lcasestring) or [`ucase`]({% link docs/lts/sql/functions/text.md %}#ucasestring)) before processing.
+> This step is case sensitive, therefore it is important to convert all text to a consistent case (by applying [`lcase`]({% link docs/current/sql/functions/text.md %}#lcasestring) or [`ucase`]({% link docs/current/sql/functions/text.md %}#ucasestring)) before processing.
 
 In the below code snippet we select all the keywords by splitting the text on one or more non-word characters (anything except `[a-zA-Z0-9_]`):
 
@@ -115,7 +115,7 @@ text_emotions_tokenized_rel = text_emotions_rel.select("""
 """)
 ```
 
-In the tokenization step, we usually exclude common words (such as `and`, `the`), called *stopwords*. In DuckDB we implement the exclusion by applying an [`ANTI JOIN`]({% link docs/lts/sql/query_syntax/from.md %}#semi-and-anti-joins) on a curated CSV file hosted on GitHub:
+In the tokenization step, we usually exclude common words (such as `and`, `the`), called *stopwords*. In DuckDB we implement the exclusion by applying an [`ANTI JOIN`]({% link docs/current/sql/query_syntax/from.md %}#semi-and-anti-joins) on a curated CSV file hosted on GitHub:
 
 ```python
 english_stopwords_rel = duckdb_conn.read_csv(
@@ -130,7 +130,7 @@ text_emotions_tokenized_rel.join(
 ).to_table("text_emotion_tokens")
 ```
 
-Now that we have tokenized and cleaned the text, we can implement keyword search by ranking the match with [similarity functions]({% link docs/lts/sql/functions/text.md %}#text-similarity-functions), such as [Jaccard](https://en.wikipedia.org/wiki/Jaccard_index):
+Now that we have tokenized and cleaned the text, we can implement keyword search by ranking the match with [similarity functions]({% link docs/current/sql/functions/text.md %}#text-similarity-functions), such as [Jaccard](https://en.wikipedia.org/wiki/Jaccard_index):
 
 ```python
 text_token_rel = conn.table(
@@ -182,7 +182,7 @@ From the above plot, we observe repeated keywords, such as `feel - feeling`, `lo
 
 ## Full-Text Search
 
-The [Full-Text Search (FTS) DuckDB extension]({% link docs/lts/core_extensions/full_text_search.md %}) is an experimental extension, which implements two main [full-text search](https://cloud.google.com/discover/what-is-full-text-search) functionalities:
+The [Full-Text Search (FTS) DuckDB extension]({% link docs/current/core_extensions/full_text_search.md %}) is an experimental extension, which implements two main [full-text search](https://cloud.google.com/discover/what-is-full-text-search) functionalities:
 - the `stem` function, to retrieve the word stem;
 - the `match_bm25` function, to calculate the [Best Match score](https://en.wikipedia.org/wiki/Okapi_BM25).
 
@@ -251,7 +251,7 @@ Out of the 10 returned texts, displayed above in a [table plot](https://plotly.c
 
 ## Semantic Search
 
-Compared to keyword and full-text search, *semantic search* takes into account the meaning and context of the text. Instead of just looking for exact words, it uses techniques like [vector embeddings](https://github.com/veekaybee/what_are_embeddings) to capture the underlying concepts. Semantic search, which is case insensitive, can be implemented in DuckDB, by making use of the (also experimental) [Vector Similarity Search extension]({% link docs/lts/core_extensions/vss.md %}).
+Compared to keyword and full-text search, *semantic search* takes into account the meaning and context of the text. Instead of just looking for exact words, it uses techniques like [vector embeddings](https://github.com/veekaybee/what_are_embeddings) to capture the underlying concepts. Semantic search, which is case insensitive, can be implemented in DuckDB, by making use of the (also experimental) [Vector Similarity Search extension]({% link docs/current/core_extensions/vss.md %}).
 
 The vector embeddings of a (list of) text can be calculated with the [`sentence-transformers` library](https://sbert.net/) and the [pre-trained model `all-MiniLM-L6-v2`](https://sbert.net/docs/sentence_transformer/pretrained_models.html):
 ```python
@@ -274,7 +274,7 @@ array([[ 3.14795598e-02, -6.66208193e-02,  1.05058309e-02,
         -2.50727013e-02, -3.00881546e-03,  1.55055271e-02]], dtype=float32)
 ```
 
-We register the model inference function as a [Python User Defined Function]({% link docs/lts/clients/python/function.md %}) and create a table with a column of type `FLOAT[384]` to load the embeddings into:
+We register the model inference function as a [Python User Defined Function]({% link docs/current/clients/python/function.md %}) and create a table with a column of type `FLOAT[384]` to load the embeddings into:
 
 ```python
 conn.create_function(
@@ -351,7 +351,7 @@ Interesting to observe that the phrase `i am excited to learn and feel privilege
 
 ### Similarity Joins
 
-Vector embeddings are most known for their usability in search engines, but they can be used in a variety of text analytics use cases, such as topic grouping, classification or semantic matching between documents. The VSS extension provides [vector similarity joins]({% link docs/lts/core_extensions/vss.md %}#bonus-vector-similarity-search-joins), which can be used to conduct these types of analytics.
+Vector embeddings are most known for their usability in search engines, but they can be used in a variety of text analytics use cases, such as topic grouping, classification or semantic matching between documents. The VSS extension provides [vector similarity joins]({% link docs/current/core_extensions/vss.md %}#bonus-vector-similarity-search-joins), which can be used to conduct these types of analytics.
 
 For example, we show in the below [heatmap chart](https://plotly.com/python/heatmaps/) the number of texts for each combination of emotion labels, where the x-axis corresponds to the semantic matching between the text and the emotion, the y-axis to the classified emotion, and the color indicates the count of texts assigned to each pair: 
 

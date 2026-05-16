@@ -1,0 +1,146 @@
+@use '../abstracts/variables' as *;
+@use '../abstracts/mixins' as *;
+
+/** Side-by-side diagram boxes
+ *
+ *      <div class="duck-diagram" markdown="1">
+ *
+ *      <div class="duck-diagram-box" markdown="1">
+ *
+ *      #### …
+ *
+ *      ```sql
+ *      …
+ *      ```
+ *
+ *      </div>
+ *
+ *      <div class="duck-diagram-arrow">…</div>
+ *
+ *      <div class="duck-diagram-box" markdown="1">
+ *
+ *      #### …
+ *
+ *      ```sql
+ *      …
+ *      ```
+ *
+ *      </div>
+ *
+ *      </div>
+ */
+
+$duck-diagram-radius-outer: 15px;
+$duck-diagram-radius-inner: 10px;
+
+.duck-diagram {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: stretch;
+	gap: 0;
+	margin: 24px 0;
+	padding: 24px;
+	background: var(--main-codebox-main-background-color, rgba(250, 250, 250, 0.8));
+	border: 1px solid var(--main-codebox-border-color, rgba(13, 13, 13, 0.08));
+	border-radius: $duck-diagram-radius-outer;
+	box-shadow: 2px 2px 24px 0 var(--main-codebox-dropshadow, rgba(0, 0, 0, 0.03));
+}
+
+.duck-diagram-box {
+	flex: 1 1 0;
+	min-width: 0;
+	display: flex;
+	flex-direction: column;
+}
+
+.duck-diagram-box h4,
+.newswrap .postwrap .postcontent .duck-diagram-box h4,
+body.documentation main .wrap .duck-diagram-box h4 {
+	margin: 0 0 18px;
+	padding: 0;
+	font-size: 16px;
+	font-weight: 600;
+	line-height: 1.2;
+	color: var(--main-text-primary-color, #0d0d0d);
+	background: transparent;
+	border: 0;
+
+	code {
+		font-size: 0.9em;
+	}
+
+	.icon {
+		width: 18px;
+		height: 18px;
+		margin-right: 8px;
+		vertical-align: -3px;
+		color: var(--main-benefit-icon-color, #998b00);
+	}
+}
+
+.duck-diagram-box .highlighter-rouge,
+.newswrap .postwrap .postcontent .duck-diagram-box .highlighter-rouge,
+body.documentation main .wrap .duck-diagram-box .highlighter-rouge {
+	flex: 1;
+	margin: 0;
+	display: flex;
+	flex-direction: column;
+}
+
+.duck-diagram-box .highlighter-rouge > div.highlight,
+.newswrap .postwrap .postcontent .duck-diagram-box .highlighter-rouge > div.highlight,
+body.documentation main .wrap .duck-diagram-box .highlighter-rouge > div.highlight {
+	flex: 1;
+	border-radius: $duck-diagram-radius-inner;
+}
+
+.duck-diagram-box pre,
+.duck-diagram-box pre.highlight,
+.duck-diagram-box code,
+.duck-diagram-box figure.highlight,
+.duck-diagram-box figure.highlight pre,
+.duck-diagram-box div.highlight,
+body.documentation main .wrap .duck-diagram-box pre.highlight,
+body.documentation main .wrap .duck-diagram-box code,
+.newswrap .postwrap .postcontent .duck-diagram-box pre,
+.newswrap .postwrap .postcontent .duck-diagram-box pre.highlight,
+.newswrap .postwrap .postcontent .duck-diagram-box code {
+	font-size: 12px;
+	line-height: 1.3;
+}
+
+.duck-diagram-arrow {
+	flex: 0 0 98px;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	gap: 12px;
+	padding: 0 20px;
+	font-family: $fontMono;
+	font-size: 12px;
+	color: var(--main-text-secondary-color, #666);
+
+	&::after {
+		content: "";
+		width: 58px;
+		height: 22px;
+		background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='58' height='22' fill='none' viewBox='0 0 58 22'%3E%3Cpath fill='%231a1a1a' d='M58 2.887 53 0v5.774zm-58 0v.5h53.5v-1H0z'/%3E%3Cpath fill='%23b2b2b2' d='M58 2.887 53 0v5.774zm-58 0v.5h53.5v-1H0z'/%3E%3Cpath fill='%231a1a1a' d='m0 18.887 5 2.886V16zm58 0v-.5H4.5v1H58z'/%3E%3Cpath fill='%23b2b2b2' d='m0 18.887 5 2.886V16zm58 0v-.5H4.5v1H58z'/%3E%3C/svg%3E");
+		background-repeat: no-repeat;
+		background-position: center;
+	}
+}
+
+@media (max-width: 700px) {
+	.duck-diagram {
+		flex-direction: column;
+	}
+
+	.duck-diagram-arrow {
+		display: none;
+	}
+
+	.duck-diagram-box ~ .duck-diagram-box {
+		margin-top: 32px;
+	}
+}
