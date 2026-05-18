@@ -24,7 +24,8 @@ If you are new to Quack and don't know where to start, check out the following r
 * For the rationale and history behind Quack, along with an introduction of the protocol and its features, see the [announcement blog post]({% post_url 2026-05-12-quack-remote-protocol %}).
 * For the reference manual and setup guide, check out the [Quack documentation]({% link docs/current/quack/overview.md %}).
 
-Starting from DuckDB v1.5.3, we ship Quack as a [core extension]({% link docs/current/core_extensions/quack.md %}). This means that you can now set up Quack with `INSTALL quack` from any client running DuckDB. What's more, Quack will be transparently [autoloaded]({% link docs/current/extensions/overview.md %}#autoloading-extension) on first use.
+Starting from DuckDB v1.5.3, we ship Quack as a [core extension]({% link docs/current/core_extensions/quack.md %}). This means that you can now start using Quack right away from any client running DuckDB:
+it be transparently autoinstalled and [autoloaded]({% link docs/current/extensions/overview.md %}#autoloading-extension) on first use.
 
 <!-- markdownlint-disable MD001 -->
 
@@ -35,8 +36,6 @@ Starting from DuckDB v1.5.3, we ship Quack as a [core extension]({% link docs/cu
 #### <svg class="icon"><use href="#database-01"></use></svg> DuckDB #1
 
 ```sql
-INSTALL quack;
-
 CALL quack_serve(
     'quack:localhost',
     token = 'super_secret'
@@ -55,8 +54,6 @@ CREATE TABLE hello AS
 #### <svg class="icon"><use href="#database-01"></use></svg> DuckDB #2
 
 ```sql
-INSTALL quack;
-
 CREATE SECRET (
     TYPE quack,
     TOKEN 'super_secret'
@@ -81,6 +78,10 @@ The [AWS extension]({% link docs/current/core_extensions/aws.md %}) now supports
 This was made possible through a contribution by community member [Marcel Steinbach (@mst)](https://github.com/mst).
 
 [RDS IAM](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/UsingWithRDS.IAMDBAuth.html) support (ongoing)
+
+### HTTPS extension
+
+TODO <https://github.com/duckdb/duckdb/pull/22541>
 
 ### Iceberg
 

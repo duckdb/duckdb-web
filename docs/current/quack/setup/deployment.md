@@ -24,8 +24,6 @@ The stack defaults to a `t3.micro` instance; other sizes are selectable on the P
 Copy `QuackURI` and `Token` from the stack's Outputs tab and substitute below:
 
 ```sql
-INSTALL quack;
-
 -- Register the credentials once per session.
 CREATE SECRET quack_credentials (
     TYPE quack,

@@ -10,13 +10,14 @@ The `quack` extension adds support for the [Quack remote protocol]({% link docs/
 
 ## Usage
 
-Quack is currently in a beta state. To install `quack`, run:
+Quack is currently in a beta state. Quack will be transparently autoinstalled and [autoloaded]({% link docs/current/extensions/overview.md %}#autoloading-extension) on first use.
+
+If you would like to install Quack explicitly, run:
 
 ```sql
 INSTALL quack;
 ```
 
-Quack will be transparently [autoloaded]({% link docs/current/extensions/overview.md %}#autoloading-extension) on first use.
 If you would like to load Quack explicitly, run:
 
 ```sql

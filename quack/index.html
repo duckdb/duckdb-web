@@ -266,8 +266,6 @@ curl https://install.duckdb.org | sh
 				<p class="pre-title step-label">Step 2</p>
 				<h3>Launch Quack on the server</h3>
 {% highlight sql %}
-INSTALL quack;
-
 CALL quack_serve(
     'quack:localhost',
     token = 'super_secret'
@@ -281,8 +279,6 @@ CREATE TABLE hello AS
 				<p class="pre-title step-label">Step 3</p>
 				<h3>Connect from the client</h3>
 {% highlight sql %}
-INSTALL quack;
-
 CREATE SECRET (
     TYPE quack,
     TOKEN 'super_secret'
