@@ -6,7 +6,7 @@ redirect_from:
 title: PostgreSQL Extension and the Secret Manager
 ---
 
-User credentials and other PostgreSQL DB connection details can be stored using the DuckDB [Secrets Manager]({% link docs/current/configuration/secrets_manager.md %}). The following syntax can be used to create a secret:
+User credentials and other PostgreSQL database connection details can be stored using the DuckDB [Secrets Manager]({% link docs/current/configuration/secrets_manager.md %}). The following syntax can be used to create a secret:
 
 ```sql
 CREATE SECRET (
@@ -182,10 +182,10 @@ Authentication from the `postgres` extension uses the same logic as with `psql`:
 
 The secret of type `rds` requires the `aws` extension to be installed and allows to configure AWS Credential Chain the same way as with the secret of type `s3`, see details in the [AWS extension documentation]({% link docs/current/core_extensions/aws.md %}#credential_chain-provider).
 
-## Storing Secrets inside PostgreSQL DB
+## Storing Secrets inside a PostgreSQL Database
 
 DuckDB [Secrets Manager]({% link docs/current/configuration/secrets_manager.md %}) supports pluggable Storage Providers.
-The `postgres` extension implements storing the secrets (of any type) as records in the PostgreSQL DB table.
+The `postgres` extension implements storing the secrets (of any type) as records in the PostgreSQL database table.
 
 The following example initializes the secrets storage and insers the secret into the `duckdb_secrets` table:
 
@@ -207,24 +207,24 @@ CREATE OR REPLACE SECRET s3_secret1 IN postgres_p1 (
 When `IN postgres_⟨attached_database⟩`{:.language-sql .highlight} clause of `CREATE SECRET` is specified, the secret is persisted to the `duckdb_secrets` table in the specified attached database.
 
 > Warning 
-> Secrets are written to the DB table in unencrypted binary format. It is advised to use this provider for secrets that do not include confidential credentials (like the `s3` example above). For multi-tenant scenarios it is expected that [Postgres Row-Level Security policies](https://www.postgresql.org/docs/18/ddl-rowsecurity.html) can be used to prevent users to see secrets of other users.
+> Secrets are written to the database table in unencrypted binary format. It is advised to use this provider for secrets that do not include confidential credentials (like the `s3` example above). For multi-tenant scenarios it is expected that [Postgres Row-Level Security policies](https://www.postgresql.org/docs/18/ddl-rowsecurity.html) can be used to prevent users to see secrets of other users.
 
 Different table name (for example, in a different schema) can be specified in the `SECRET_STORAGE_TABLE` parameter to the `ATTACH` command.
 
 When the default `duckdb_secrets` table is used, it is not necessary to specify the `SECRET_STORAGE_TABLE` parameter.
-When a PostgreSQL database is attached, the table with the default name `duckdb_secrets` is probed automatically. If it exists then the Secret Storage instance is registerd for this attached DB making all the stored secrets available in the current session. This allows to use such persistent secrets with "direct attach" scenarios, when only a connection string is specified to the `duckdb` command (other DuckDB clients may require slightly different syntax):
+When a PostgreSQL database is attached, the table with the default name `duckdb_secrets` is probed automatically. If it exists then the Secret Storage instance is registerd for this attached database making all the stored secrets available in the current session. This allows to use such persistent secrets with “direct attach” scenarios, when only a connection string is specified to the `duckdb` command (other DuckDB clients may require slightly different syntax):
 
 ```bash
 duckdb postgres:postgresql://username:password@127.0.0.1:5432/db1
 ```
 
-This method can also be used with [DuckLake](https://ducklake.select/) (with PostgreSQL catalog), when an S3/object storage access secret is stored in the catalog DB:
+This method can also be used with [DuckLake](https://ducklake.select/) (with PostgreSQL catalog), when an S3/object storage access secret is stored in the catalog database:
 
 ```bash
 duckdb ducklake:postgres:postgresql://username:password@127.0.0.1:5432/db1
 ```
 
-Secrets the are stored in the specific attached DB can be listed using the following query:
+Secrets the are stored in the specific attached database can be listed using the following query:
 
 ```sql
 FROM duckdb_secrets() WHERE storage = 'postgres_⟨attached_database⟩';
