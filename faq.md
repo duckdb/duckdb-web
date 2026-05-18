@@ -2,6 +2,7 @@
 layout: default
 title: Frequently Asked Questions
 body_class: faq
+max_page_width: medium
 toc: false
 ---
 
