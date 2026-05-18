@@ -51,8 +51,14 @@ body:not(.layout_default) .blog_typography{
         justify-content: center;
     }
 
-    .contentwidth {
+    > .content {
         max-width: 750px;
+        min-width: 0;
+
+        @media only screen and (max-width: 800px) {
+            width: 100%;
+            max-width: unset;
+        }
     }
 
     .toc_sidebar {
