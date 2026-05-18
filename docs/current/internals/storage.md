@@ -55,6 +55,12 @@ Using this, you can opt-in to newer forwards-incompatible features:
 ATTACH 'file.db' (STORAGE_VERSION 'v1.2.0');
 ```
 
+To initialize a database with the latest storage version, use:
+
+```sql
+ATTACH 'file.db' (STORAGE_VERSION 'latest');
+```
+
 With the [command line client]({% link docs/current/clients/cli/overview.md %}), you can use the `-storage-version` argument:
 
 ```batch
