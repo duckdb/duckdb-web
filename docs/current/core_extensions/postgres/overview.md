@@ -356,15 +356,10 @@ CALL pg_clear_cache();
 
 ## Working with hstore Columns
 
-> Warning This feature is currently only available in the nightly extension build. To use it, make sure you're running DuckDB v1.5.2, then install and load the extension as follows:
-> 
-> ```sql
-> FORCE INSTALL postgres FROM core_nightly;
-> LOAD postgres;
-> ```
-
 DuckDB will return data from [hstore](https://www.postgresql.org/docs/current/hstore.html) columns as `VARCHAR` of their text representation, like `key=>value, foo=>bar`.
-You can use the `postgres_hstore_get` function to read the value for a given key, or `postgres_hstore_to_json` to convert the whole set of key/value pairs to JSON for further processing.
+You can use the [postgres_hstore_get]({% link docs/current/core_extensions/postgres/functions.md %}#postgres_hstore_get)
+function to read the value for a given key, or [postgres_hstore_to_json]({% link docs/current/core_extensions/postgres/functions.md %}#postgres_hstore_to_json)
+to convert the whole set of key/value pairs to JSON for further processing.
 
 ```sql
 SELECT postgres_hstore_get('a=>b, c=>d', 'a');
