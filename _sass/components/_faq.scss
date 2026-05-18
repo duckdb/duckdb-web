@@ -7,7 +7,7 @@ body.faq,
 .frequentlyaskedquestions,
 body.documentation main .wrap.frequentlyaskedquestions{
 	h3{
-		@include title-1;
+		@include title-3;
 		cursor: pointer;
 		position: relative;
 		margin: 0;
@@ -100,7 +100,7 @@ section.faq{
 	}
 	.qa-wrap{
 		h3{
-			@include title-1;
+			@include title-3;
 			a{
 				color: var(--main-text-primary-color, #0D0D0D);
 			}
