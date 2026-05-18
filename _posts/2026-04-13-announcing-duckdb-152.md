@@ -45,7 +45,9 @@ A highlight of the new shell is the ability to store and list files using the `.
 
 Using the file storage feature, you can turn your browser session into workbench: you can drag-and-drop files from your local file system to upload them, create new ones using DuckDB's [`COPY ... TO` statement]({% link docs/current/sql/statements/copy.md %}#copy--to) and download the results. For more information on this feature, use the `.help` command.
 
+<!--
 <img src="{% link images/blog/online-shell-example.png %}" alt="Example use of the new online shell at shell.duckdb.org" width="800" />
+-->
 
 The new shell comes with a few built-in datasets: you're welcome to try them out and experiment.
 Your old links to `shell.duckdb.org` should still work but if you experience any problems, please submit an issue in the [`duckdb-web` repository](https://github.com/duckdb/duckdb-wasm).
