@@ -151,3 +151,14 @@ body:not(.layout_default) .blog_typography{
     overflow: hidden;
     visibility: hidden;
 }
+
+body.release-calendar #main_content_wrap {
+    table {
+        th, td {
+            white-space: nowrap;
+        }
+        th:first-child, td:first-child {
+            min-width: 40px;
+        }
+    }
+}
