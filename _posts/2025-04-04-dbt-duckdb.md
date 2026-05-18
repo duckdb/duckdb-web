@@ -265,7 +265,7 @@ Thanks to DuckDB's ability to connect and write to a PostgreSQL database, we can
 
 To connect to a PostgreSQL database, we need to specify in `profiles.yml`:
 
-- the [`postgres` extension]({% link docs/current/core_extensions/postgres.md %});
+- the [`postgres` extension]({% link docs/current/core_extensions/postgres/overview.md %});
 - the PostgreSQL connection string in the `attach` section.
 
 {% raw %}

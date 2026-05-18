@@ -771,6 +771,10 @@
                 {
                   "page": "Typecasting",
                   "url": "typecasting"
+                },
+                {
+                  "page": "Variant",
+                  "url": "variant"
                 }
               ]
             },
@@ -1180,7 +1184,17 @@
             },
             {
               "page": "PostgreSQL",
-              "url": "postgres"
+              "slug": "postgres",
+              "subsubfolderitems": [
+                {
+                  "page": "Overview",
+                  "url": "overview"
+                },
+                {
+                  "page": "Secrets",
+                  "url": "secrets"
+                }
+              ]
             },
             {
               "page": "Spatial",

@@ -427,7 +427,7 @@ DuckDB can also be deployed in novel architectures, where one traditionally coul
 These architectures include running DuckDB in browsers (using the <a href="{% link docs/current/clients/wasm/overview.md %}">WebAssembly client</a>) and on smartphones.
 Additionally, DuckDB's extensions unlock use cases such as <a href="{% link docs/current/core_extensions/spatial/overview.md %}">geospatial analysis</a> and deep integration with
 <a href="{% link docs/current/core_extensions/mysql.md %}">other</a>
-<a href="{% link docs/current/core_extensions/postgres.md %}">database</a>
+<a href="{% link docs/current/core_extensions/postgres/overview.md %}">database</a>
 <a href="{% link docs/current/core_extensions/sqlite.md %}">systems</a>.
 And finally, in some cases, DuckDB <a href="https://www.nikolasgoebel.com/2024/05/28/duckdb-doesnt-need-data">doesn't even need data to be a database</a>.
 

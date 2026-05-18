@@ -6,6 +6,8 @@ redirect_from:
 - /docs/stable/extensions/postgres
 - /docs/preview/core_extensions/postgres
 - /docs/stable/core_extensions/postgres
+- /docs/preview/core_extensions/postgres/overview
+- /docs/stable/core_extensions/postgres/overview
 title: PostgreSQL Extension
 ---
 
@@ -69,55 +71,7 @@ An example URI is `postgresql://username@hostname/dbname`.
 
 ### Configuring via Secrets
 
-PostgreSQL connection information can also be specified with [secrets](/docs/configuration/secrets_manager). The following syntax can be used to create a secret.
-
-```sql
-CREATE SECRET (
-    TYPE postgres,
-    HOST '127.0.0.1',
-    PORT 5432,
-    DATABASE postgres,
-    USER 'postgres',
-    PASSWORD ''
-);
-```
-
-The information from the secret will be used when `ATTACH` is called. We can leave the PostgreSQL connection string empty to use all of the information stored in the secret.
-
-```sql
-ATTACH '' AS postgres_db (TYPE postgres);
-```
-
-We can use the PostgreSQL connection string to override individual options. For example, to connect to a different database while still using the same credentials, we can override only the database name in the following manner.
-
-```sql
-ATTACH 'dbname=my_other_db' AS postgres_db (TYPE postgres);
-```
-
-By default, created secrets are temporary. Secrets can be persisted using the [`CREATE PERSISTENT SECRET` command]({% link docs/current/configuration/secrets_manager.md %}#persistent-secrets). Persistent secrets can be used across sessions.
-
-#### Managing Multiple Secrets
-
-Named secrets can be used to manage connections to multiple PostgreSQL database instances. Secrets can be given a name upon creation.
-
-```sql
-CREATE SECRET postgres_secret_one (
-    TYPE postgres,
-    HOST '127.0.0.1',
-    PORT 5432,
-    DATABASE postgres,
-    USER 'postgres',
-    PASSWORD ''
-);
-```
-
-The secret can then be explicitly referenced using the `SECRET` parameter in the `ATTACH`.
-
-```sql
-ATTACH '' AS postgres_db_one (TYPE postgres, SECRET postgres_secret_one);
-```
-
-> Warning Avoid including credentials directly in the connection string. If a connection error occurs, the full connection string (including your credentials) may be printed to the terminal output. For better security, store credentials using DuckDB-managed secrets.
+PostgreSQL connection information can also be specified with [secrets]({% link docs/current/configuration/secrets_manager.md %}), see details on the [corresponding page]({% link docs/current/core_extensions/postgres/secrets.md %}).
 
 ### Configuring via Environment Variables
 

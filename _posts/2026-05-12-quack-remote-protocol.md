@@ -232,7 +232,7 @@ Would you like to see the results as a table? Click here.
 
 We can see how Quack is doing great for bulk result set transfer, transferring the 60 million rows in under 5 seconds! Even the purpose-built Arrow Flight SQL protocol can’t compete here, and Postgres’ row-based protocol is rather hopeless in general.
 
-In fairness we have to mention that the standard PostgreSQL clients do not parallelize reads over multiple threads, but Quack and Arrow can. Shameless plug: DuckDB’s [PostgreSQL client]({% link docs/current/core_extensions/postgres.md %}) can also do that in some cases!
+In fairness we have to mention that the standard PostgreSQL clients do not parallelize reads over multiple threads, but Quack and Arrow can. Shameless plug: DuckDB’s [PostgreSQL client]({% link docs/current/core_extensions/postgres/overview.md %}) can also do that in some cases!
 
 ### Small Writes
 

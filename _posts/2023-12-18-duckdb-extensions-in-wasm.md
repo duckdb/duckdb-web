@@ -175,7 +175,7 @@ We see two main groups of developers using extensions with DuckDB-Wasm.
 
 ## Limitations
 
-DuckDB-Wasm extensions have a few inherent limitations. For example, it is not possible to communicate with native executables living on your machine, which is required by some extensions, such as the [`postgres` scanner extension]({% link docs/current/core_extensions/postgres.md %}).
+DuckDB-Wasm extensions have a few inherent limitations. For example, it is not possible to communicate with native executables living on your machine, which is required by some extensions, such as the [`postgres` scanner extension]({% link docs/current/core_extensions/postgres/overview.md %}).
 Moreover, compilation to Wasm may not be currently supported for some libraries you are relying on, or capabilities might not be one-to-one with local executables due to additional requirements imposed on the browser, in particular around [non-secure HTTP requests]({% link docs/current/clients/wasm/extensions.md %}#httpfs).
 
 ## Conclusions
