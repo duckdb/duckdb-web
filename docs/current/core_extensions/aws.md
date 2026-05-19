@@ -176,3 +176,32 @@ CALL load_aws_credentials('minio-testing-2', set_region = false, redact_secret =
 | loaded_access_key_id | loaded_secret_access_key     | loaded_session_token | loaded_region |
 |----------------------|------------------------------|----------------------|---------------|
 | minio_duckdb_user_2  | minio_duckdb_user_password_2 | NULL                 | NULL          |
+
+### SSO Auth Implementation
+
+Note: none of these methods are able to authenticate when using `aws sso login` to authenticate and get the parameters. A simple workaround is to use AWS' `boto3` to retrieve the credentials and pass this into the DuckDB config.
+Note: the `SESSION_TOKEN` is required for authentication which is not mentioned above.
+
+```python
+import boto3
+import duckdb
+
+session = boto3.Session(profile_name="YOUR_AWS_PROFILE")
+credentials = session.get_credentials()
+
+conn = duckdb.connect()
+conn.query("""
+    INSTALL aws;
+    LOAD aws;
+    INSTALL httpfs;
+    LOAD httpfs;
+    CREATE OR REPLACE SECRET secret (
+        TYPE S3,
+        PROVIDER config,
+        KEY_ID 'crendentials.access_key',
+        SECRET '{credentials.secret_key}',
+        SESSION_TOKEN '{credentials.token}',
+        REGION '{session.region_name}'
+    );
+""")
+```
