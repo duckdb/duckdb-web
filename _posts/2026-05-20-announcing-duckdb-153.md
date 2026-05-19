@@ -119,7 +119,7 @@ INSERT INTO pond VALUES
     (1, 'mallard', 1.2),
     (2, 'pintail', 0.9);
 INSERT INTO pond VALUES
-    (3, 'wood duck',0.7);
+    (3, 'wood duck', 0.7);
 SELECT * FROM pond ORDER BY id;
 ```
 
