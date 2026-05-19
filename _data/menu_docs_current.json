@@ -1193,6 +1193,14 @@
                 {
                   "page": "Secrets",
                   "url": "secrets"
+                },
+                {
+                  "page": "Connection Pool",
+                  "url": "connection_pool"
+                },
+                {
+                  "page": "Functions",
+                  "url": "functions"
                 }
               ]
             },
