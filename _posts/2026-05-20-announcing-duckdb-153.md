@@ -76,6 +76,8 @@ We plan to release the production-ready version of Quack together with [DuckDB v
 
 DuckLake now supports DuckDB with Quack as its catalog database ([ducklake#1151](https://github.com/duckdb/ducklake/pull/1151)).
 
+TODO
+
 ### AWS
 
 The [AWS extension]({% link docs/current/core_extensions/aws.md %}) now supports the [`web_identity` chain type for IAM Roles for Service Accounts (IRSA) support](https://github.com/duckdb/duckdb-aws/pull/136).
