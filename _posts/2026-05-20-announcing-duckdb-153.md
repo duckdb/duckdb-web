@@ -75,7 +75,7 @@ We plan to release the production-ready version of Quack together with [DuckDB v
 ### DuckLake with Quack
 
 DuckLake now supports DuckDB with Quack as its catalog database ([ducklake#1151](https://github.com/duckdb/ducklake/pull/1151)).
-
+Let the example speak for itself!
 
 <!-- markdownlint-disable MD001 -->
 
@@ -134,7 +134,7 @@ SELECT * FROM pond ORDER BY id;
 The [AWS extension]({% link docs/current/core_extensions/aws.md %}) now supports the [`web_identity` chain type for IAM Roles for Service Accounts (IRSA) support](https://github.com/duckdb/duckdb-aws/pull/136).
 This was made possible through a contribution by community member [Marcel Steinbach (@mst)](https://github.com/mst).
 
-[RDS IAM](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/UsingWithRDS.IAMDBAuth.html) support (ongoing)
+The AWS extension now also supports [IAM authentication](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/UsingWithRDS.IAMDBAuth.html) for managed PostgreSQL databases running on RDS/Aurora. For more details, see the [AWS RDS IAM Authentication section]({% link docs/current/core_extensions/postgres/secrets.md %}#aws-rds-iam-authentication) in the documentation.
 
 ### `HTTP_PROXY` Variable for the HTTPS Extension
 
@@ -147,12 +147,12 @@ Note that since the [introduction of `curl` into DuckDB's network stack]({% post
 
 The DuckDB-Iceberg extension has shipped a number of features between DuckDB v1.5.2 and v1.5.3. Most notably:
 
-* `MERGE INTO` is now supported for Iceberg tables ([duckdb-iceberg#788](https://github.com/duckdb/duckdb-iceberg/pull/788))
-* The `INSERT` and `UPDATE` statements are now supported on partitioned Iceberg tables with a `truncate` or `bucket` transform ([duckdb-iceberg#879](https://github.com/duckdb/duckdb-iceberg/pull/879))
-* [CTAS]({% link docs/current/sql/statements/create_table.md %}#create-table--as-select-ctas) statements in DuckDB-Iceberg using [ADBC]({% link docs/current/clients/adbc.md %}) are now possible via ([duckdb-iceberg#974](https://github.com/duckdb/duckdb-iceberg/pull/974))
-* We added the `iceberg_schema_properties`, `set_iceberg_schema_properties`, and `remove_iceberg_schema_properties` functions to allow getting, setting, and removing Iceberg schema properties ([duckdb-iceberg#960](https://github.com/duckdb/duckdb-iceberg/pull/960))
-* `ALTER TABLE` support has been added for Iceberg tables ([duckdb-iceberg#932](https://github.com/duckdb/duckdb-iceberg/pull/932), [duckdb-iceberg#928](https://github.com/duckdb/duckdb-iceberg/pull/928), [duckdb-iceberg#924](https://github.com/duckdb/duckdb-iceberg/pull/924), [duckdb-iceberg#912](https://github.com/duckdb/duckdb-iceberg/pull/912), [duckdb-iceberg#904](https://github.com/duckdb/duckdb-iceberg/pull/904), [duckdb-iceberg#853](https://github.com/duckdb/duckdb-iceberg/pull/853), [duckdb-iceberg#985](https://github.com/duckdb/duckdb-iceberg/pull/985), [duckdb-iceberg#981](https://github.com/duckdb/duckdb-iceberg/pull/981))
-* Support for the `GEOMETRY` type has been added for Iceberg tables ([duckdb-iceberg#968](https://github.com/duckdb/duckdb-iceberg/pull/968), [duckdb-iceberg#902](https://github.com/duckdb/duckdb-iceberg/pull/902))
+* `MERGE INTO` is now supported for Iceberg tables ([iceberg#788](https://github.com/duckdb/duckdb-iceberg/pull/788))
+* The `INSERT` and `UPDATE` statements are now supported on partitioned Iceberg tables with a `truncate` or `bucket` transform ([iceberg#879](https://github.com/duckdb/duckdb-iceberg/pull/879))
+* [CTAS]({% link docs/current/sql/statements/create_table.md %}#create-table--as-select-ctas) statements in DuckDB-Iceberg using [ADBC]({% link docs/current/clients/adbc.md %}) are now possible ([iceberg#974](https://github.com/duckdb/duckdb-iceberg/pull/974))
+* We added the `iceberg_schema_properties`, `set_iceberg_schema_properties`, and `remove_iceberg_schema_properties` functions to allow getting, setting, and removing Iceberg schema properties ([iceberg#960](https://github.com/duckdb/duckdb-iceberg/pull/960))
+* `ALTER TABLE` support has been added for Iceberg tables ([iceberg#932](https://github.com/duckdb/duckdb-iceberg/pull/932), [iceberg#928](https://github.com/duckdb/duckdb-iceberg/pull/928), [iceberg#924](https://github.com/duckdb/duckdb-iceberg/pull/924), [iceberg#912](https://github.com/duckdb/duckdb-iceberg/pull/912), [iceberg#904](https://github.com/duckdb/duckdb-iceberg/pull/904), [iceberg#853](https://github.com/duckdb/duckdb-iceberg/pull/853), [iceberg#985](https://github.com/duckdb/duckdb-iceberg/pull/985), [iceberg#981](https://github.com/duckdb/duckdb-iceberg/pull/981))
+* Support for the `GEOMETRY` type has been added for Iceberg tables ([iceberg#968](https://github.com/duckdb/duckdb-iceberg/pull/968), [iceberg#902](https://github.com/duckdb/duckdb-iceberg/pull/902))
 
 ## Development and Internals
 
