@@ -4,7 +4,7 @@ title: "DuckDB 1.5.3: Not an Ordinary Patch Release"
 author: "The DuckDB team"
 thumb: "/images/blog/thumbs/duckdb-release-1-5-3.svg"
 image: "/images/blog/thumbs/duckdb-release-1-5-3.png"
-excerpt: "We are releasing DuckDB version v1.5.3 with Quack as a core extension, several bugfixes and performance improvements."
+excerpt: "We are releasing DuckDB version v1.5.3 with Quack as a core extension, support for Quack in DuckLake, several new features for Iceberg, AWS and HTTPS, as well as many other fixes."
 tags: ["release"]
 ---
 
@@ -25,7 +25,7 @@ If you are new to Quack and don't know where to start, check out the following r
 * For the reference manual and setup guide, check out the [Quack documentation]({% link docs/current/quack/overview.md %}).
 
 Starting from DuckDB v1.5.3, we ship Quack as a [core extension]({% link docs/current/core_extensions/quack.md %}). This means that you can now start using Quack right away from any client running DuckDB:
-it be transparently autoinstalled and [autoloaded]({% link docs/current/extensions/overview.md %}#autoloading-extension) on first use.
+it will be transparently autoinstalled and [autoloaded]({% link docs/current/extensions/overview.md %}#autoloading-extension) on first use.
 
 <!-- markdownlint-disable MD001 -->
 
@@ -72,6 +72,10 @@ FROM remote.hello;
 Please note that Quack is still in beta state and breaking changes may happen in the protocol, in function names, etc.
 We plan to release the production-ready version of Quack together with [DuckDB v2.0]({% link release_calendar.md %}) in fall 2026.
 
+### DuckLake with Quack
+
+DuckLake now supports DuckDB with Quack as its catalog database ([ducklake#1151](https://github.com/duckdb/ducklake/pull/1151)).
+
 ### AWS
 
 The [AWS extension]({% link docs/current/core_extensions/aws.md %}) now supports the [`web_identity` chain type for IAM Roles for Service Accounts (IRSA) support](https://github.com/duckdb/duckdb-aws/pull/136).
@@ -79,26 +83,28 @@ This was made possible through a contribution by community member [Marcel Steinb
 
 [RDS IAM](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/UsingWithRDS.IAMDBAuth.html) support (ongoing)
 
-### HTTPS extension
+### `HTTP_PROXY` Variable for the HTTPS Extension
 
-TODO <https://github.com/duckdb/duckdb/pull/22541>
+Setting the `HTTP_PROXY` environment variable now sets the `http_proxy` DuckDB configuration option ([duckdb#22541](https://github.com/duckdb/duckdb/pull/22541)).
+This option makes sure that extensions installs are also passing through the proxy, which may come in handy in e.g. environments that use firewalls.
+
+Note that since the [introduction of `curl` into DuckDB's network stack]({% post_url 2026-03-09-announcing-duckdb-150 %}#network-stack), `curl` automatically uses `HTTP_PROXY` and `HTTPS_PROXY`, so now implicitly also DuckDB handles those parameters when the `httpfs` extension is loaded with the default `curl` backend.
 
 ### Iceberg
 
-Iceberg has shipped a number of features between **v1.5.2** and **v1.5.3**. Most notable:
+The DuckDB-Iceberg extension has shipped a number of features between DuckDB v1.5.2 and v1.5.3. Most notably:
 
-- `MERGE INTO` is now supported for Iceberg tables ([#788](https://github.com/duckdb/duckdb-iceberg/pull/788))
-- `INSERT` & `UPDATE` is now supported on partitioned Iceberg tables with a `truncate` or `bucket` transform ([#879](https://github.com/duckdb/duckdb-iceberg/pull/879))
-- CTAS statements in DuckDB-Iceberg using ADBC are now possible via ([#974](https://github.com/duckdb/duckdb-iceberg/pull/974))
-- The addition of the `iceberg_schema_properties`, `set_iceberg_schema_properties`, and `remove_iceberg_schema_properties` functions to allow getting, setting, and removing Iceberg schema properties  ([#960](https://github.com/duckdb/duckdb-iceberg/pull/960))
-- `ALTER TABLE` support has been added for Iceberg tables ([#788](https://github.com/duckdb/duckdb-iceberg/pull/932), [#928](https://github.com/duckdb/duckdb-iceberg/pull/928), [#924](https://github.com/duckdb/duckdb-iceberg/pull/924), [#912](https://github.com/duckdb/duckdb-iceberg/pull/912), [#904](https://github.com/duckdb/duckdb-iceberg/pull/904), [#853](https://github.com/duckdb/duckdb-iceberg/pull/853), [#985](https://github.com/duckdb/duckdb-iceberg/pull/985), [#981](https://github.com/duckdb/duckdb-iceberg/pull/981))
-- Support for the `GEOMETRY` type has been added for Iceberg tables ([#968](https://github.com/duckdb/duckdb-iceberg/pull/968), [#902](https://github.com/duckdb/duckdb-iceberg/pull/902))
-
+* `MERGE INTO` is now supported for Iceberg tables ([duckdb-iceberg#788](https://github.com/duckdb/duckdb-iceberg/pull/788))
+* The `INSERT` and `UPDATE` statements are now supported on partitioned Iceberg tables with a `truncate` or `bucket` transform ([duckdb-iceberg#879](https://github.com/duckdb/duckdb-iceberg/pull/879))
+* [CTAS]({% link docs/current/sql/statements/create_table.md %}#create-table--as-select-ctas) statements in DuckDB-Iceberg using [ADBC]({% link docs/current/clients/adbc.md %}) are now possible via ([duckdb-iceberg#974](https://github.com/duckdb/duckdb-iceberg/pull/974))
+* We added the `iceberg_schema_properties`, `set_iceberg_schema_properties`, and `remove_iceberg_schema_properties` functions to allow getting, setting, and removing Iceberg schema properties ([duckdb-iceberg#960](https://github.com/duckdb/duckdb-iceberg/pull/960))
+* `ALTER TABLE` support has been added for Iceberg tables ([duckdb-iceberg#932](https://github.com/duckdb/duckdb-iceberg/pull/932), [duckdb-iceberg#928](https://github.com/duckdb/duckdb-iceberg/pull/928), [duckdb-iceberg#924](https://github.com/duckdb/duckdb-iceberg/pull/924), [duckdb-iceberg#912](https://github.com/duckdb/duckdb-iceberg/pull/912), [duckdb-iceberg#904](https://github.com/duckdb/duckdb-iceberg/pull/904), [duckdb-iceberg#853](https://github.com/duckdb/duckdb-iceberg/pull/853), [duckdb-iceberg#985](https://github.com/duckdb/duckdb-iceberg/pull/985), [duckdb-iceberg#981](https://github.com/duckdb/duckdb-iceberg/pull/981))
+* Support for the `GEOMETRY` type has been added for Iceberg tables ([duckdb-iceberg#968](https://github.com/duckdb/duckdb-iceberg/pull/968), [#902](https://github.com/duckdb/duckdb-iceberg/pull/902))
 
 ## Linux
 
-The [`jemalloc` allocator]({% link docs/current/internals/jemalloc.md %}) is now part of [core DuckDB](https://github.com/duckdb/duckdb/pull/22603) instead of being shipped as an extension.
-Instead, it is a static third-party library which is included and linked by default on Linux.
+The [`jemalloc` allocator]({% link docs/current/internals/jemalloc.md %}) is now part of core DuckDB ([duckdb#22603](https://github.com/duckdb/duckdb/pull/22603)) as a static third-party library which is included and linked by default on Linux.
+Previously `jemalloc` was a statically-linked extension – the new packaging is cleaner since other DuckDB extensions can be loaded dynamically.
 
 ## Coming Up
 
