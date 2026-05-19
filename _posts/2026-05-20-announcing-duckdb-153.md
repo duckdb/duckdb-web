@@ -152,7 +152,7 @@ The DuckDB-Iceberg extension has shipped a number of features between DuckDB v1.
 * [CTAS]({% link docs/current/sql/statements/create_table.md %}#create-table--as-select-ctas) statements in DuckDB-Iceberg using [ADBC]({% link docs/current/clients/adbc.md %}) are now possible via ([duckdb-iceberg#974](https://github.com/duckdb/duckdb-iceberg/pull/974))
 * We added the `iceberg_schema_properties`, `set_iceberg_schema_properties`, and `remove_iceberg_schema_properties` functions to allow getting, setting, and removing Iceberg schema properties ([duckdb-iceberg#960](https://github.com/duckdb/duckdb-iceberg/pull/960))
 * `ALTER TABLE` support has been added for Iceberg tables ([duckdb-iceberg#932](https://github.com/duckdb/duckdb-iceberg/pull/932), [duckdb-iceberg#928](https://github.com/duckdb/duckdb-iceberg/pull/928), [duckdb-iceberg#924](https://github.com/duckdb/duckdb-iceberg/pull/924), [duckdb-iceberg#912](https://github.com/duckdb/duckdb-iceberg/pull/912), [duckdb-iceberg#904](https://github.com/duckdb/duckdb-iceberg/pull/904), [duckdb-iceberg#853](https://github.com/duckdb/duckdb-iceberg/pull/853), [duckdb-iceberg#985](https://github.com/duckdb/duckdb-iceberg/pull/985), [duckdb-iceberg#981](https://github.com/duckdb/duckdb-iceberg/pull/981))
-* Support for the `GEOMETRY` type has been added for Iceberg tables ([duckdb-iceberg#968](https://github.com/duckdb/duckdb-iceberg/pull/968), [#902](https://github.com/duckdb/duckdb-iceberg/pull/902))
+* Support for the `GEOMETRY` type has been added for Iceberg tables ([duckdb-iceberg#968](https://github.com/duckdb/duckdb-iceberg/pull/968), [duckdb-iceberg#902](https://github.com/duckdb/duckdb-iceberg/pull/902))
 
 ## Linux
 
