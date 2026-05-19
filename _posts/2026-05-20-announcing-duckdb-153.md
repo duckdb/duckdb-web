@@ -33,7 +33,7 @@ it will be transparently autoinstalled and [autoloaded]({% link docs/current/ext
 
 <div class="duck-diagram-box" markdown="1">
 
-#### <svg class="icon"><use href="#database-01"></use></svg> DuckDB #1
+#### <svg class="icon"><use href="#database-01"></use></svg> DuckDB Server
 
 ```sql
 CALL quack_serve(
@@ -51,7 +51,7 @@ CREATE TABLE hello AS
 
 <div class="duck-diagram-box" markdown="1">
 
-#### <svg class="icon"><use href="#database-01"></use></svg> DuckDB #2
+#### <svg class="icon"><use href="#database-01"></use></svg> DuckDB Client
 
 ```sql
 CREATE SECRET (
@@ -83,7 +83,7 @@ DuckLake now supports DuckDB with Quack as its catalog database ([ducklake#1151]
 
 <div class="duck-diagram-box" markdown="1">
 
-#### <svg class="icon"><use href="#database-01"></use></svg> DuckDB #1, serving as the catalog
+#### <svg class="icon"><use href="#database-01"></use></svg> DuckDB Server
 
 ```sql
 CALL quack_serve(
@@ -98,7 +98,7 @@ CALL quack_serve(
 
 <div class="duck-diagram-box" markdown="1">
 
-#### <svg class="icon"><use href="#database-01"></use></svg> DuckDB #2, using the DuckLake
+#### <svg class="icon"><use href="#database-01"></use></svg> DuckDB Client
 
 ```sql
 INSTALL ducklake;
@@ -129,7 +129,7 @@ SELECT * FROM pond ORDER BY id;
 
 <!-- markdownlint-enable MD001 -->
 
-### AWS Exension Features
+### AWS Extension Features
 
 The [AWS extension]({% link docs/current/core_extensions/aws.md %}) now supports the [`web_identity` chain type for IAM Roles for Service Accounts (IRSA) support](https://github.com/duckdb/duckdb-aws/pull/136).
 This was made possible through a contribution by community member [Marcel Steinbach (@mst)](https://github.com/mst).
@@ -154,10 +154,17 @@ The DuckDB-Iceberg extension has shipped a number of features between DuckDB v1.
 * `ALTER TABLE` support has been added for Iceberg tables ([duckdb-iceberg#932](https://github.com/duckdb/duckdb-iceberg/pull/932), [duckdb-iceberg#928](https://github.com/duckdb/duckdb-iceberg/pull/928), [duckdb-iceberg#924](https://github.com/duckdb/duckdb-iceberg/pull/924), [duckdb-iceberg#912](https://github.com/duckdb/duckdb-iceberg/pull/912), [duckdb-iceberg#904](https://github.com/duckdb/duckdb-iceberg/pull/904), [duckdb-iceberg#853](https://github.com/duckdb/duckdb-iceberg/pull/853), [duckdb-iceberg#985](https://github.com/duckdb/duckdb-iceberg/pull/985), [duckdb-iceberg#981](https://github.com/duckdb/duckdb-iceberg/pull/981))
 * Support for the `GEOMETRY` type has been added for Iceberg tables ([duckdb-iceberg#968](https://github.com/duckdb/duckdb-iceberg/pull/968), [duckdb-iceberg#902](https://github.com/duckdb/duckdb-iceberg/pull/902))
 
-## Linux
+## Development and Internals
 
-The [`jemalloc` allocator]({% link docs/current/internals/jemalloc.md %}) is now part of core DuckDB ([duckdb#22603](https://github.com/duckdb/duckdb/pull/22603)) as a static third-party library which is included and linked by default on Linux.
-Previously `jemalloc` was a statically-linked extension – the new packaging is cleaner since other DuckDB extensions can be loaded dynamically.
+## Shipping jemalloc as a Statically Linked Library
+
+The [jemalloc allocator]({% link docs/current/internals/jemalloc.md %}) is now part of core DuckDB ([duckdb#22603](https://github.com/duckdb/duckdb/pull/22603)) as a static third-party library which is included and linked by default on Linux.
+Previously jemalloc was a statically-linked extension – the new packaging is cleaner since other DuckDB extensions can be loaded dynamically.
+
+### `DISABLE_EXTENSION_LOAD` Flag
+
+The `DISABLE_EXTENSION_LOAD` compile-time flag was fixed in [duckdb#22019](https://github.com/duckdb/duckdb/pull/22019).
+When compiling DuckDB with this flag, loading extensions is disabled.
 
 ## Coming Up
 
