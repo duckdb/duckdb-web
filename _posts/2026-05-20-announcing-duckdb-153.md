@@ -4,7 +4,7 @@ title: "DuckDB 1.5.3: Not an Ordinary Patch Release"
 author: "The DuckDB team"
 thumb: "/images/blog/thumbs/duckdb-release-1-5-3.svg"
 image: "/images/blog/thumbs/duckdb-release-1-5-3.png"
-excerpt: "We are releasing DuckDB version v1.5.3 with Quack as a core extension, support for Quack in DuckLake, several new features for Iceberg, AWS and HTTPS, as well as many other fixes."
+excerpt: "We are releasing DuckDB version v1.5.3. Despite being a “patch release”, it ships a ton of features through its extensions, starting with Quack, which is now available as a core extension, support for Quack in DuckLake, and several new features for Iceberg, AWS and HTTPS."
 tags: ["release"]
 ---
 
@@ -15,7 +15,7 @@ To install the new version, please visit the [installation page]({% link install
 
 ## What's New
 
-### Quack
+### Quack as a Core Extension
 
 On May 12, we introduced Quack, our new remote protocol that turns DuckDB into a client-server database.
 If you are new to Quack and don't know where to start, check out the following resources:
@@ -76,9 +76,60 @@ We plan to release the production-ready version of Quack together with [DuckDB v
 
 DuckLake now supports DuckDB with Quack as its catalog database ([ducklake#1151](https://github.com/duckdb/ducklake/pull/1151)).
 
-TODO
 
-### AWS
+<!-- markdownlint-disable MD001 -->
+
+<div class="duck-diagram" markdown="1">
+
+<div class="duck-diagram-box" markdown="1">
+
+#### <svg class="icon"><use href="#database-01"></use></svg> DuckDB #1, serving as the catalog
+
+```sql
+CALL quack_serve(
+    'quack:localhost',
+    token => 'oogieboogie'
+);
+```
+
+</div>
+
+<div class="duck-diagram-arrow">quack:</div>
+
+<div class="duck-diagram-box" markdown="1">
+
+#### <svg class="icon"><use href="#database-01"></use></svg> DuckDB #2, using the DuckLake
+
+```sql
+INSTALL ducklake;
+
+CREATE SECRET (
+    TYPE quack, TOKEN 'oogieboogie'
+);
+ATTACH 'ducklake:quack:localhost'
+    AS lake (DATA_PATH 'data');
+USE lake;
+
+CREATE TABLE pond (
+    id INT,
+    species VARCHAR,
+    weight DOUBLE
+);
+INSERT INTO pond VALUES
+    (1, 'mallard', 1.2),
+    (2, 'pintail', 0.9);
+INSERT INTO pond VALUES
+    (3, 'wood duck',0.7);
+SELECT * FROM pond ORDER BY id;
+```
+
+</div>
+
+</div>
+
+<!-- markdownlint-enable MD001 -->
+
+### AWS Exension Features
 
 The [AWS extension]({% link docs/current/core_extensions/aws.md %}) now supports the [`web_identity` chain type for IAM Roles for Service Accounts (IRSA) support](https://github.com/duckdb/duckdb-aws/pull/136).
 This was made possible through a contribution by community member [Marcel Steinbach (@mst)](https://github.com/mst).
