@@ -85,7 +85,15 @@ TODO <https://github.com/duckdb/duckdb/pull/22541>
 
 ### Iceberg
 
-TODO
+Iceberg has shipped a number of features between **v1.5.2** and **v1.5.3**. Most notable:
+
+- `MERGE INTO` is now supported for Iceberg tables ([#788](https://github.com/duckdb/duckdb-iceberg/pull/788))
+- `INSERT` & `UPDATE` is now supported on partitioned Iceberg tables with a `truncate` or `bucket` transform ([#879](https://github.com/duckdb/duckdb-iceberg/pull/879))
+- CTAS statements in DuckDB-Iceberg using ADBC are now possible via ([#974](https://github.com/duckdb/duckdb-iceberg/pull/974))
+- The addition of the `iceberg_schema_properties`, `set_iceberg_schema_properties`, and `remove_iceberg_schema_properties` functions to allow getting, setting, and removing Iceberg schema properties  ([#960](https://github.com/duckdb/duckdb-iceberg/pull/960))
+- `ALTER TABLE` support has been added for Iceberg tables ([#788](https://github.com/duckdb/duckdb-iceberg/pull/932), [#928](https://github.com/duckdb/duckdb-iceberg/pull/928), [#924](https://github.com/duckdb/duckdb-iceberg/pull/924), [#912](https://github.com/duckdb/duckdb-iceberg/pull/912), [#904](https://github.com/duckdb/duckdb-iceberg/pull/904), [#853](https://github.com/duckdb/duckdb-iceberg/pull/853), [#985](https://github.com/duckdb/duckdb-iceberg/pull/985), [#981](https://github.com/duckdb/duckdb-iceberg/pull/981))
+- Support for the `GEOMETRY` type has been added for Iceberg tables ([#968](https://github.com/duckdb/duckdb-iceberg/pull/968), [#902](https://github.com/duckdb/duckdb-iceberg/pull/902))
+
 
 ## Linux
 
