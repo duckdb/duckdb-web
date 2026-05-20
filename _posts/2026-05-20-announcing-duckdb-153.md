@@ -156,7 +156,7 @@ The DuckDB-Iceberg extension has shipped a number of features between DuckDB v1.
 
 ## Development and Internals
 
-## Shipping jemalloc as a Statically Linked Library
+### Shipping jemalloc as a Statically Linked Library
 
 The [jemalloc allocator]({% link docs/current/internals/jemalloc.md %}) is now part of core DuckDB ([duckdb#22603](https://github.com/duckdb/duckdb/pull/22603)) as a static third-party library which is included and linked by default on Linux.
 Previously jemalloc was a statically-linked extension – the new packaging is cleaner since other DuckDB extensions can be loaded dynamically.
