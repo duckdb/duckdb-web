@@ -1184,7 +1184,25 @@
             },
             {
               "page": "PostgreSQL",
-              "url": "postgres"
+              "slug": "postgres",
+              "subsubfolderitems": [
+                {
+                  "page": "Overview",
+                  "url": "overview"
+                },
+                {
+                  "page": "Secrets",
+                  "url": "secrets"
+                },
+                {
+                  "page": "Connection Pool",
+                  "url": "connection_pool"
+                },
+                {
+                  "page": "Functions",
+                  "url": "functions"
+                }
+              ]
             },
             {
               "page": "Spatial",
@@ -1919,6 +1937,10 @@
             {
               "page": "Execution Format",
               "url": "vector"
+            },
+            {
+              "page": "Jemalloc",
+              "url": "jemalloc"
             },
             {
               "page": "Pivot",

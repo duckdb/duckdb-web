@@ -16,7 +16,7 @@ DuckDB extensions to better understand the underlying processes.
 - Patch releases are issued as needed for:
     - The latest stable version
     - The current Long Term Support (LTS) version
-- All releases are listed in the [Release Calendar](https://duckdb.org/release_calendar.html)
+- All releases are listed in the [Release Calendar]({% link release_calendar.md %})
 
 ### Terminology
 

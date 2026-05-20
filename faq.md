@@ -268,7 +268,7 @@ and the section on [“Writing to DuckDB from Multiple Processes”]({% link doc
 To work on the same data set with multiple DuckDB clients (“multi-player experience”), there are now two options:
 
 1. The [DuckLake format](http://ducklake.select/) through the [`ducklake` extension]({% link docs/current/core_extensions/ducklake.md %}) with PostgreSQL as the catatalog database. This is a [production-ready solution](https://ducklake.select/2026/04/13/ducklake-10/).
-2. The [Quack remote protocol]({% link docs/current/quack/overview.md %}), which turns DuckDB into a client-server database. Quack is in beta stage as of DuckDB v1.5.2, and is expected to become mature by [DuckDB v2.0 in autumn 2026]({% link release_calendar.md %}).
+2. The [Quack remote protocol]({% link docs/current/quack/overview.md %}), which turns DuckDB into a client-server database. Quack is in beta stage as of DuckDB v1.5.2, and is expected to become mature by [DuckDB v2.0 in fall 2026]({% link release_calendar.md %}).
 </div>
 
 </div>
@@ -428,7 +428,7 @@ DuckDB can also be deployed in novel architectures, where one traditionally coul
 These architectures include running DuckDB in browsers (using the <a href="{% link docs/current/clients/wasm/overview.md %}">WebAssembly client</a>) and on smartphones.
 Additionally, DuckDB's extensions unlock use cases such as <a href="{% link docs/current/core_extensions/spatial/overview.md %}">geospatial analysis</a> and deep integration with
 <a href="{% link docs/current/core_extensions/mysql.md %}">other</a>
-<a href="{% link docs/current/core_extensions/postgres.md %}">database</a>
+<a href="{% link docs/current/core_extensions/postgres/overview.md %}">database</a>
 <a href="{% link docs/current/core_extensions/sqlite.md %}">systems</a>.
 And finally, in some cases, DuckDB <a href="https://www.nikolasgoebel.com/2024/05/28/duckdb-doesnt-need-data">doesn't even need data to be a database</a>.
 

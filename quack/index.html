@@ -61,8 +61,8 @@ max_page_width: large
 		<div class="section-text">
 			<h2>Introducing Quack</h2>
 			<p>
-				Hannes Mühleisen introduced Quack at the AI Council 2026.
-				Watch his talk on the Super-Secret Next Big Thing for DuckDB.
+				Hannes Mühleisen introduced Quack at the AI Council 2026.<br>
+				Watch his full talk, the <a href="{% link _library/2026-05-12-super-secret-next-big-thing-for-duckdb.md %}">“Super-Secret Next Big Thing for DuckDB”</a>.
 			</p>
 		</div>
 	</div>
@@ -267,9 +267,6 @@ curl https://install.duckdb.org | sh
 				<p class="pre-title step-label">Step 2</p>
 				<h3>Launch Quack on the server</h3>
 {% highlight sql %}
-INSTALL quack FROM core_nightly;
-LOAD quack;
-
 CALL quack_serve(
     'quack:localhost',
     token = 'super_secret'
@@ -283,9 +280,6 @@ CREATE TABLE hello AS
 				<p class="pre-title step-label">Step 3</p>
 				<h3>Connect from the client</h3>
 {% highlight sql %}
-INSTALL quack FROM core_nightly;
-LOAD quack;
-
 CREATE SECRET (
     TYPE quack,
     TOKEN 'super_secret'

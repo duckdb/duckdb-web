@@ -35,7 +35,6 @@ To start listening on localhost, run:
 
 {:.codebox-server}
 ```sql
-LOAD quack;
 CALL quack_serve('quack:localhost');
 ```
 
@@ -46,7 +45,6 @@ By default the server refuses to bind anything other than a local hostname. To l
 
 {:.codebox-server}
 ```sql
-LOAD quack;
 CALL quack_serve('quack:0.0.0.0:9494', allow_other_hostname => true);
 ```
 
