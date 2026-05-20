@@ -172,7 +172,7 @@ We have two events coming up in the next few weeks:
 
 **DuckCon #7.** On June 24, we'll host our next user conference, [DuckCon #7]({% link _events/2026-06-24-duckcon7.html %}), in Amsterdam's beautiful [Royal Tropical Institute](https://www.kit.nl/about-us/).
 
-**Ubuntu Summit Talk.** Next week, Gábor Szárnyas of DuckDB Labs will give a talk titled [“DuckDB: Not Quack Science”]({% link _library/2026-05-27-duckdb-not-quack-science.md %}) at the [Ubuntu Summit](https://ubuntu.com/summit). Yes, his talk will include the new [Quack](#quack) protocol.
+**Ubuntu Summit Talk.** Next week, Gábor Szárnyas of DuckDB Labs will give a talk titled [“DuckDB: Not Quack Science”]({% link _library/2026-05-27-duckdb-not-quack-science.md %}) at the [Ubuntu Summit](https://ubuntu.com/summit). Yes, his talk will include the new [Quack](#quack-as-a-core-extension) protocol.
 
 ## Conclusion
 
