@@ -46,7 +46,10 @@
 			var iframe = container.querySelector('iframe');
 			if (iframe) {
 				var baseSrc = iframe.getAttribute('data-src') || '';
-				if (baseSrc) iframe.setAttribute('src', baseSrc + '?autoplay=1');
+				if (baseSrc) {
+					var sep = baseSrc.indexOf('?') === -1 ? '?' : '&';
+					iframe.setAttribute('src', baseSrc + sep + 'autoplay=1');
+				}
 			}
 			container.style.display = '';
 			thumb.style.display = 'none';
