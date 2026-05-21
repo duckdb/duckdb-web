@@ -29,7 +29,7 @@ In most cases, extensions will be directly linked in the resulting DuckDB execut
 
 ### `BUILD_JEMALLOC`
 
-When this flag is set, the [`jemalloc` extension]({% link docs/current/core_extensions/jemalloc.md %}) is built.
+When this flag is set, the [`jemalloc`]({% link docs/current/internals/jemalloc.md %}) is built.
 
 ### `BUILD_TPCE`
 
