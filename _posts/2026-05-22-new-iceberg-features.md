@@ -141,7 +141,7 @@ Schema properties are written through the Iceberg REST Catalog, so any other Ice
 
 ## `ALTER TABLE` Support
 
-In v1.4.2, schema evolution of Iceberg tables was a documented limitation. With v1.5.3, the `ALTER TABLE` statement is now supported against Iceberg tables, covering the most common schema-evolution operations.
+In v1.4.2, schema evolution of Iceberg tables was a documented limitation. In v1.5.3, the `ALTER TABLE` statement is now supported against Iceberg tables, covering the most common schema-evolution operations.
 
 ```sql
 -- Create the table
@@ -168,7 +168,7 @@ ALTER TABLE my_datalake.default.renamed_table
     DROP COLUMN col3;
 ```
 
-Each `ALTER TABLE` statement creates a new metadata file in the Iceberg catalog, and the changes are visible to other Iceberg-aware engines on the next read. Because Iceberg schema evolution is metadata-only, no data files are rewritten.
+Each `ALTER TABLE` statement creates a new metadata file in the Iceberg catalog, and the changes are visible to other Iceberg-aware engines on the next read. Iceberg schema evolution is metadata-only, so no data files are rewritten.
 
 ```sql
 SELECT *
@@ -194,7 +194,7 @@ The [Iceberg v3 specification](https://iceberg.apache.org/spec/#version-3) intro
 
 * `VARIANT` and `TIMESTAMP_NS` data types
 * Schema-level [default values](https://iceberg.apache.org/spec/#default-values) for columns
-* Binary deletion vectors as the on-disk format for positional deletes
+* Binary deletion vectors
 * Row lineage tracking
 
 The biggest change in practice is binary deletion vectors. In v2 tables, DuckDB-Iceberg writes positional deletes as Parquet files; in v3 tables, the same information is encoded as a much more compact binary deletion vector ([Puffin file](https://iceberg.apache.org/puffin-spec/)). DuckDB picks the right format automatically based on the table's `format-version`.
@@ -244,7 +244,6 @@ FROM iceberg_metadata(my_datalake.default.v3_table);
 
 > Note: the Geography type and Unknown type are not yet supported in DuckDB-Iceberg, we are planning to add those in the v2.0.0
 
-> Note: S3Tables does not yet support creating tables with V3 types using the Iceberg Rest endpoints. AWS is planning on supporting this endpoint sometime later this year.
 
 ## Conclusion and Future Work
 
