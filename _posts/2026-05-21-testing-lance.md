@@ -1,4 +1,4 @@
----
+œ---
 layout: post
 title: "Test-Driving the Lance Lakehouse Format in DuckDB"
 author: "LanceDB team and Guillermo Sanchez"
@@ -93,12 +93,12 @@ USING IVF_FLAT WITH (num_partitions = 1, metric_type = 'l2');
 
 The extension surface goes well beyond read-only scans. In the current implementation, DuckDB can:
 
-- Read Lance datasets with direct path scans  
-- Write and append Lance datasets with `COPY ... TO ... (FORMAT lance)`  
-- Run vector, full-text, and hybrid search with SQL functions  
-- Attach local directories or custom catalogs via REST namespaces  
-- Create, update, delete, merge, and alter tables in attached namespaces  
-- Create and manage vector, scalar, and full-text indexes  
+- Read Lance datasets with direct path scans
+- Write and append Lance datasets with `COPY ... TO ... (FORMAT lance)`
+- Run vector, full-text, and hybrid search with SQL functions
+- Attach local directories or custom catalogs via REST namespaces
+- Create, update, delete, merge, and alter tables in attached namespaces
+- Create and manage vector, scalar, and full-text indexes
 - Run maintenance operations such as compaction, cleanup, and index optimization
 
 Note that this extension is not just a file reader, but it also gives DuckDB users a way to work with Lance as an operational table format from inside SQL.
@@ -129,17 +129,17 @@ The public Hugging Face export used by the benchmark currently materializes 69,6
 
 The benchmark was run using DuckDB as the query engine for the following three storage formats:
 
-* **Parquet**: DuckDB scanning the LZ4-compressed Parquet baseline directly, with no auxiliary indexes.  
-* **DuckDB indexed**: the same baseline loaded into a DuckDB table, with DuckDB's `vss` (HNSW) and `fts` extensions layered on top, plus scalar indexes on filter columns. This is the typical “build it yourself in DuckDB” stack.  
-* **Lance native**: the same baseline written to a Lance dataset with a vector index, a full-text index, and native blob storage, queried through the DuckDB lance extension.
+- **Parquet**: DuckDB scanning the LZ4-compressed Parquet baseline directly, with no auxiliary indexes.
+- **DuckDB indexed**: the same baseline loaded into a DuckDB table, with DuckDB's `vss` (HNSW) and `fts` extensions layered on top, plus scalar indexes on filter columns. This is the typical “build it yourself in DuckDB” stack.
+- **Lance native**: the same baseline written to a Lance dataset with a vector index, a full-text index, and native blob storage, queried through the DuckDB lance extension.
 
 The workloads are aligned by task across the three paths, even though the exact SQL differs by storage/indexing backend:
 
-* `fts`: find rows by keyword search over the caption text.  
-* `vector_exact`: run nearest-neighbor search over the CLIP embedding column without using an approximate vector index.  
-* `vector_indexed`: run nearest-neighbor search over the same embedding column using the available vector index.  
-* `hybrid`: combine text search and vector search into one retrieval query, returning the best-ranked matches from both signals.  
-* `blob_read`: fetch image bytes for selected rows, which exercises random access to large binary values rather than just scalar or vector columns.
+- `fts`: find rows by keyword search over the caption text.
+- `vector_exact`: run nearest-neighbor search over the CLIP embedding column without using an approximate vector index.
+- `vector_indexed`: run nearest-neighbor search over the same embedding column using the available vector index.
+- `hybrid`: combine text search and vector search into one retrieval query, returning the best-ranked matches from both signals.
+- `blob_read`: fetch image bytes for selected rows, which exercises random access to large binary values rather than just scalar or vector columns.
 
 Each workload is run five times by default, and the tables below report the average. The full scripts and SQL queries are in the `laion_1m` benchmark directory.
 
