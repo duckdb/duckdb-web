@@ -174,4 +174,3 @@ When caches and indexes are already warm, both DuckDB and Lance are significantl
 ## Conclusion
 
 Lance is a relatively new addition to the world of open lakehouse formats. It is designed for datasets that change over time, contain more than scalar values, and need to support both search and retrieval alongside traditional scan workloads. From DuckDB, the extension makes these capabilities available through SQL, while preserving the familiar embedded workflow. The benchmark results reflect, particularly in cold runs, how Lance is a good alternative to DuckDB’s own format for vector and hybrid search.
-
