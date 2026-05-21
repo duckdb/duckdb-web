@@ -1,4 +1,4 @@
-œ---
+---
 layout: post
 title: "Test-Driving the Lance Lakehouse Format in DuckDB"
 author: "LanceDB team and Guillermo Sanchez"
