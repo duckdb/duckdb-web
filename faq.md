@@ -24,7 +24,7 @@ toc: false
 
 <div class="answer" markdown="1">
 
-DuckDB was created by [Dr. Mark Raasveldt](https://mytherin.github.io) & [Dr. Hannes Mühleisen](https://hannes.muehleisen.org) at the [Centrum Wiskunde & Informatica (CWI)](https://www.cwi.nl) in Amsterdam, the Netherlands. Mark and Hannes have set up the [DuckDB Foundation](https://duckdb.org/foundation/) that collects donations and funds development and maintenance of DuckDB. Mark and Hannes are also co-founders of [DuckDB Labs](https://www.duckdblabs.com), which provides commercial services around DuckDB, and employs several core contributors of DuckDB.
+DuckDB was created by [Dr. Mark Raasveldt](https://mytherin.github.io) & [Dr. Hannes Mühleisen](https://hannes.muehleisen.org) at the [Centrum Wiskunde & Informatica (CWI)](https://www.cwi.nl) in Amsterdam, the Netherlands. Mark and Hannes have set up the [DuckDB Foundation](https://duckdb.foundation) that collects donations and funds development and maintenance of DuckDB. Mark and Hannes are also co-founders of [DuckDB Labs](https://www.duckdblabs.com), which provides commercial services around DuckDB, and employs several core contributors of DuckDB.
 
 </div>
 
@@ -77,8 +77,8 @@ For the organizations around DuckDB, see the next question–answer pair.
 
 [**DuckDB**](https://duckdb.org/) is the name of the MIT licensed open-source project.
 
-The [**DuckDB Foundation**]({% link foundation/index.html %}) is a non-profit organization that holds the intellectual property of the DuckDB project.
-The DuckDB Foundation's [statutes]({% link pdf/deed-of-incorporation-stichting-duckdb-foundation.pdf %}) ensure DuckDB remains open-source under the MIT license in perpetuity.
+The [**DuckDB Foundation**](https://duckdb.foundation/) is a non-profit organization that holds the intellectual property of the DuckDB project.
+The DuckDB Foundation's [statutes](https://duckdb.foundation/pdf/deed-of-incorporation-stichting-duckdb-foundation.pdf) ensure DuckDB remains open-source under the MIT license in perpetuity.
 
 [**DuckDB Labs**](https://duckdblabs.com/) is a company based in Amsterdam that provides commercial support services for DuckDB.
 DuckDB Labs employs the core contributors of the DuckDB project.
