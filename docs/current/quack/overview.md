@@ -54,13 +54,13 @@ When you do this you should front the server with a TLS-terminating reverse prox
 
 Quack endpoints use the `quack:` URI scheme and `9494` as the default port. Some examples:
 
-| URI                 | Host        | Port          |
-| ------------------- | ----------- | ------------- |
-| `quack:localhost`   | `localhost` | `9494`        |
-| `quack://localhost` | `localhost` | `9494`        |
-| `quack:myhost:9000` | `myhost`    | `9000`        |
-| `quack:127.0.0.1`   | `127.0.0.1` | `9494`        |
-| `quack:[::1]:1234`  | `::1`       | `1234` (IPv6) |
+| URI                 | Host        | Port   | Comment |
+| ------------------- | ----------- | ------ | ------- |
+| `quack:localhost`   | `localhost` | `9494` |         |
+| `quack://localhost` | `localhost` | `9494` |         |
+| `quack:myhost:9000` | `myhost`    | `9000` |         |
+| `quack:127.0.0.1`   | `127.0.0.1` | `9494` |         |
+| `quack:[::1]:1234`  | `::1`       | `1234` | (IPv6)  |
 
 You can parse and validate a URI with the `quack_uri_parser(uri, ssl)` scalar function.
 
