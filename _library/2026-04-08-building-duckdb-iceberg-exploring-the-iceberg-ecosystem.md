@@ -9,6 +9,10 @@ excerpt: ""
 pill: "Iceberg Summit 2026"
 ---
 
+<div class="video-container">
+<iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/ZktCgxlJmjw?si=J6-qt0pYu4sdLDCF" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+</div>
+
 |-------|-------|
 | **Event** | [Iceberg Summit 2026](https://events.bizzabo.com/796372) |
 | **Speaker** | Tom Ebergen (DuckDB Labs) |
