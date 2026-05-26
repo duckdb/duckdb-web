@@ -135,41 +135,43 @@ SELECT uuid_extract_timestamp(uuidv7()) AS ts;
 | 2025-04-19 15:51:20.07+00 |
 
 ## Rounding
-Casting from Floating-point or Fixed-point types to Integers means that the source numbers are rounded.
+
+Casting from floating-point or fixed-point types to integers means that the source numbers are rounded.
 
 The following default rounding logic applies:
-- casting from `FLOAT` and `DOUBLE` to integers of any size: round to the nearest integer, with ties (halfs) rounded to the nearest even number ([banker's rounding](https://en.wikipedia.org/wiki/Rounding#Rounding_half_to_even)).
 
-```sql
-SELECT 2.5::FLOAT::INTEGER AS result;  -- round to even
-```
+* Casting from `FLOAT` and `DOUBLE` to integers of any size: round to the nearest integer, with ties (halfs) rounded to the nearest even number ([banker's rounding](https://en.wikipedia.org/wiki/Rounding#Rounding_half_to_even)).
 
-```text
-┌────────┐
-│ result │
-│ int32  │
-├────────┤
-│      2 │
-└────────┘
-```
+  ```sql
+  SELECT 2.5::FLOAT::INTEGER AS result;  -- round to even
+  ```
 
-- casting from `DECIMAL` to integers of any size: round to the nearest integer, with ties (halfs) rounded away from zero.
+  ```text
+  ┌────────┐
+  │ result │
+  │ int32  │
+  ├────────┤
+  │      2 │
+  └────────┘
+  ```
 
-```sql
-SELECT 2.5::DECIMAL::INTEGER AS result;  -- round away from zero
-```
+* Casting from `DECIMAL` to integers of any size: round to the nearest integer, with ties (halfs) rounded away from zero.
 
-```text
-┌────────┐
-│ result │
-│ int32  │
-├────────┤
-│      3 │
-└────────┘
-```
+  ```sql
+  SELECT 2.5::DECIMAL::INTEGER AS result;  -- round away from zero
+  SELECT 2.5::INTEGER AS result;           -- number literals are treated as DECIMALs
+  ```
+
+  ```text
+  ┌────────┐
+  │ result │
+  │ int32  │
+  ├────────┤
+  │      3 │
+  └────────┘
+  ```
 
 If non-default rounding logic is required, functions like `ceil`, `floor`, `round` and `round_even` should be used.
-
 
 ## Functions
 
