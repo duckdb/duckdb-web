@@ -383,14 +383,14 @@
 	}
 	
 	blockquote {
-		h4 {
-			@include title-2();
+		h1, h2, h3, h4, h5, h6 {
+			@include title-3;
 			margin-top: 0;
 		}
 		ul {
 			padding: 0 0 0 20px;
 		}
-		ul li, 
+		ul li,
 		ol li,
 		p {
 			@include body-standard();
