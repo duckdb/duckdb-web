@@ -15,9 +15,9 @@ toc: false
 
 _(Last updated: April 2026)_
 
-The DuckDB project is governed by the [non-profit DuckDB Foundation]({% link foundation/index.html %}).
+The DuckDB project is governed by the [non-profit DuckDB Foundation](https://duckdb.foundation/).
 The Foundation and [DuckLabs](https://ducklabs.com) are not funded by external investors (e.g., venture capital).
-Instead, the Foundation is funded by contributions from its [members]({% link foundation/index.html %}supporters),
+Instead, the Foundation is funded by contributions from its [members](https://duckdb.foundation/supporters),
 while DuckLabs' revenue is based on [commercial support and feature prioritization services](https://ducklabs.com/support).
 
 This list was compiled by the DuckDB maintainers and is based on the long-term strategic vision for the DuckDB project and general interactions with users in the open-source community (GitHub Issues and Discussions, social media, etc.).

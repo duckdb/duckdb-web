@@ -27,7 +27,7 @@ We would like to use this event to stop for a moment and revisit recent developm
 
 Besides the GitHub stars we have also observed a lot of growth in other metrics:
 
-* Each month, our website now welcomes over 3 million unique visitors – more than double than in December. We also see over 700 TB in traffic from millions of extension downloads. Thanks again to Cloudflare for [sponsoring the project]({% link foundation/index.html %}#technical-sponsors).
+* Each month, our website now welcomes over 3 million unique visitors – more than double than in December. We also see over 700 TB in traffic from millions of extension downloads. Thanks again to Cloudflare for [sponsoring the project](https://duckdb.foundation/#technical-sponsors).
 * Just in this calendar year, we rose 10 positions in the [DB Engines ranking](https://db-engines.com/en/ranking) from position 55 to 45.
 * We now count [20M+ monthly downloads in PyPI](https://pypistats.org/packages/duckdb).
 

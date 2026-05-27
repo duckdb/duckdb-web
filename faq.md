@@ -77,7 +77,7 @@ For the organizations around DuckDB, see the next question–answer pair.
 
 [**DuckDB**](https://duckdb.org/) is the name of the MIT licensed open-source project.
 
-The [**DuckDB Foundation**]({% link foundation/index.html %}) is a non-profit organization that holds the intellectual property of the DuckDB project.
+The [**DuckDB Foundation**](https://duckdb.foundation/) is a non-profit organization that holds the intellectual property of the DuckDB project.
 The DuckDB Foundation's [statutes]({% link pdf/deed-of-incorporation-stichting-duckdb-foundation.pdf %}) ensure DuckDB remains open-source under the MIT license in perpetuity.
 
 [**DuckLabs**](https://ducklabs.com/) is a company based in Amsterdam that provides commercial support services for DuckDB.
