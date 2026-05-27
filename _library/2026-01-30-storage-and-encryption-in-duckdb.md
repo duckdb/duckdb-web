@@ -15,6 +15,6 @@ pill: "DuckDB Developer Meeting #1"
 
 |-------|-------|
 | **Event** | [DuckDB Developer Meeting #1]({% link _events/2026-01-30-duckdb-developer-meeting-1.md %}) |
-| **Speaker** | [Lotte Felius](https://www.linkedin.com/in/lottefelius/) ([DuckDB Labs](https://duckdblabs.com/)) |
+| **Speaker** | [Lotte Felius](https://www.linkedin.com/in/lottefelius/) ([DuckDB Labs](https://ducklabs.com/)) |
 | **Slide deck** | [Download PDF](https://blobs.duckdb.org/events/duckdb-developer-meeting-1/storage-and-encryption-in-duckdb-lotte-felius.pdf) |
 | **YouTube** | [Watch](https://www.youtube.com/watch?v=qLjh14TzxPU) |

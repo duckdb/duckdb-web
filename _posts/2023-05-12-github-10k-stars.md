@@ -14,7 +14,7 @@ From those brave souls who were early adopters of DuckDB back in 2019 to the man
 
 We also would like to extend special thanks to the [DuckDB foundation supporters]({% link foundation/index.html %}), who through their generous donations keep DuckDB independent.
 
-For us, the maintainers of DuckDB, the past few years have also been quite eventful: We spun off from the [research group where DuckDB originated](https://www.cwi.nl/en/groups/database-architectures/) to a [successful company](https://duckdblabs.com/) with close to 20 employees and many excellent partnerships.
+For us, the maintainers of DuckDB, the past few years have also been quite eventful: We spun off from the [research group where DuckDB originated](https://www.cwi.nl/en/groups/database-architectures/) to a [successful company](https://ducklabs.com/) with close to 20 employees and many excellent partnerships.
 
 We are very much looking forward to what the future will hold for DuckDB. Things are looking bright!
 

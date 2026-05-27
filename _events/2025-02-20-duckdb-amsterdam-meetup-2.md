@@ -15,7 +15,7 @@ venue: "Xebia, Amsterdam"
      width="680"
      />
 
-We are excited to announce the [second DuckDB Amsterdam meetup](https://www.meetup.com/duckdb/events/304415344/), co-organized by [DuckDB Labs](https://duckdblabs.com/) and [Xebia](https://xebia.com/).
+We are excited to announce the [second DuckDB Amsterdam meetup](https://www.meetup.com/duckdb/events/304415344/), co-organized by [DuckDB Labs](https://ducklabs.com/) and [Xebia](https://xebia.com/).
 
 ## Registration Process
 

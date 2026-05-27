@@ -39,7 +39,7 @@ For a list of tertiary clients, see the [“Tertiary Clients” page]({% link do
 ## Support Tiers
 
 There are three tiers of support for clients.
-Primary clients are the first to receive new features and are covered by [community support](https://duckdblabs.com/community_support_policy).
+Primary clients are the first to receive new features and are covered by [community support](https://ducklabs.com/community_support_policy).
 Secondary clients receive new features but are not covered by community support.
 Finally, there are no feature or support guarantees for tertiary clients.
 
