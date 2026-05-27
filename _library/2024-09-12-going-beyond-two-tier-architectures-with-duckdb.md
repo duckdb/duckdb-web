@@ -19,5 +19,5 @@ redirect_from:
 
 |-------|-------|
 | **Podcast** | [Data Engineering for AI/ML](https://home.mlops.community/public/events/dataengforai) |
-| **Guest** | [Hannes Mühleisen (DuckDB Labs)](https://hannes.muehleisen.org/) |
+| **Guest** | [Hannes Mühleisen (DuckLabs)](https://hannes.muehleisen.org/) |
 | **YouTube** | [Going beyond Two Tier Data Architectures with DuckDB](https://www.youtube.com/watch?v=bi0XhmbkqU8) |

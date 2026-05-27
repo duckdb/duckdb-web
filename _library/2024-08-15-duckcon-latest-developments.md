@@ -19,6 +19,6 @@ redirect_from:
 
 |-------|-------|
 | **Event** | [DuckCon #5]({% link _events/2024-08-15-duckcon5.md %}) |
-| **Speakers** | [Hannes Mühleisen (DuckDB Labs)](https://hannes.muehleisen.org/) and [Mark Raasveldt (DuckDB Labs)](https://mytherin.github.io/) |
+| **Speakers** | [Hannes Mühleisen (DuckLabs)](https://hannes.muehleisen.org/) and [Mark Raasveldt (DuckLabs)](https://mytherin.github.io/) |
 | **Slide deck** | [Download](https://blobs.duckdb.org/events/duckcon5/hannes-muhleisen-mark-raasveldt-introduction-and-state-of-project.pdf) |
 | **YouTube** | [Overview and Latest Developments](https://www.youtube.com/watch?v=xX6qnP2H5wk) |

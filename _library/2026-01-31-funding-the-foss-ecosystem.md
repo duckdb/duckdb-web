@@ -13,5 +13,5 @@ at FOSDEM 2026's [“Funding the FOSS Ecosystem” developer room](https://fosde
 
 |-------|-------|
 | **Event** | [FOSDEM 2026, “Funding the FOSS Ecosystem” developer room](https://fosdem.org/2026/schedule/track/funding-the-foss-ecosystem/) |
-| **Speaker** | Gábor Szárnyas (DuckDB Labs) |
+| **Speaker** | Gábor Szárnyas (DuckLabs) |
 | **Slide deck** | [Download](https://blobs.duckdb.org/slides/gabor-szarnyas-the-funding-of-duckdb-fosdem-2026.pdf) |

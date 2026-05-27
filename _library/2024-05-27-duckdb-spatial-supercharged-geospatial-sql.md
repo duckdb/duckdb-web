@@ -15,6 +15,6 @@ pill: "GeoPython 2024"
 
 |-------|-------|
 | **Event** | GeoPython 2024 |
-| **Speaker** | [Max Gabrielsson (DuckDB Labs)](https://github.com/Maxxen) |
+| **Speaker** | [Max Gabrielsson (DuckLabs)](https://github.com/Maxxen) |
 | **Slide deck** | [Download](https://blobs.duckdb.org/papers/duckdb-spatial-geopython-2024.pdf) |
 | **YouTube** | [DuckDB Spatial: Supercharged Geospatial SQL](https://www.youtube.com/watch?v=hoyQnP8CiXE) |

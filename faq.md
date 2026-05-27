@@ -24,7 +24,7 @@ toc: false
 
 <div class="answer" markdown="1">
 
-DuckDB was created by [Dr. Mark Raasveldt](https://mytherin.github.io) & [Dr. Hannes Mühleisen](https://hannes.muehleisen.org) at the [Centrum Wiskunde & Informatica (CWI)](https://www.cwi.nl) in Amsterdam, the Netherlands. Mark and Hannes have set up the [DuckDB Foundation](https://duckdb.org/foundation/) that collects donations and funds development and maintenance of DuckDB. Mark and Hannes are also co-founders of [DuckDB Labs](https://www.ducklabs.com), which provides commercial services around DuckDB, and employs several core contributors of DuckDB.
+DuckDB was created by [Dr. Mark Raasveldt](https://mytherin.github.io) & [Dr. Hannes Mühleisen](https://hannes.muehleisen.org) at the [Centrum Wiskunde & Informatica (CWI)](https://www.cwi.nl) in Amsterdam, the Netherlands. Mark and Hannes have set up the [DuckDB Foundation](https://duckdb.org/foundation/) that collects donations and funds development and maintenance of DuckDB. Mark and Hannes are also co-founders of [DuckLabs](https://www.ducklabs.com), which provides commercial services around DuckDB, and employs several core contributors of DuckDB.
 
 </div>
 
@@ -55,7 +55,7 @@ Ducks are amazing animals. They can fly, walk and swim. They can also live off p
 DuckDB is fully open-source under the MIT license and its development takes place [on GitHub in the `duckdb/duckdb` repository](https://github.com/duckdb/duckdb).
 All components of DuckDB are available in the free version under this license: there is no “enterprise version” of DuckDB.
 
-Most of the intellectual property of DuckDB has been purposefully moved to a non-profit entity to disconnect the licensing of the project from the commercial company, DuckDB Labs.
+Most of the intellectual property of DuckDB has been purposefully moved to a non-profit entity to disconnect the licensing of the project from the commercial company, DuckLabs.
 The DuckDB Foundation's [statutes]({% link pdf/deed-of-incorporation-stichting-duckdb-foundation.pdf %}) also ensure DuckDB remains open-source under the MIT license in perpetuity.
 The [CWI (Centrum Wiskunde & Informatica)](https://cwi.nl/) has a seat on the board of the DuckDB Foundation
 and donations to the DuckDB Foundation directly fund DuckDB development.
@@ -71,7 +71,7 @@ For the organizations around DuckDB, see the next question–answer pair.
 
 <div class="qa-wrap" markdown="1">
 
-### How are DuckDB, the DuckDB Foundation, DuckDB Labs, and MotherDuck related?
+### How are DuckDB, the DuckDB Foundation, DuckLabs, and MotherDuck related?
 
 <div class="answer" markdown="1">
 
@@ -80,11 +80,11 @@ For the organizations around DuckDB, see the next question–answer pair.
 The [**DuckDB Foundation**]({% link foundation/index.html %}) is a non-profit organization that holds the intellectual property of the DuckDB project.
 The DuckDB Foundation's [statutes]({% link pdf/deed-of-incorporation-stichting-duckdb-foundation.pdf %}) ensure DuckDB remains open-source under the MIT license in perpetuity.
 
-[**DuckDB Labs**](https://ducklabs.com/) is a company based in Amsterdam that provides commercial support services for DuckDB.
-DuckDB Labs employs the core contributors of the DuckDB project.
+[**DuckLabs**](https://ducklabs.com/) is a company based in Amsterdam that provides commercial support services for DuckDB.
+DuckLabs employs the core contributors of the DuckDB project.
 
 [**MotherDuck**](https://motherduck.com/) is a venture-backed company creating a hybrid cloud/local platform using DuckDB.
-MotherDuck contracts with DuckDB Labs for development services, and DuckDB Labs owns a portion of MotherDuck.
+MotherDuck contracts with DuckLabs for development services, and DuckLabs owns a portion of MotherDuck.
 [See the partnership announcement for details](https://ducklabs.com/news/2022/11/15/motherduck-partnership).
 To learn more about MotherDuck, see the [CIDR 2024 paper on MotherDuck](https://www.cidrdb.org/cidr2024/papers/p46-atwal.pdf) and the [MotherDuck documentation](https://motherduck.com/docs).
 
@@ -450,7 +450,7 @@ Features in DuckDB can be implemented in different ways: in the main DuckDB proj
 * If you would like to implement a feature in the main DuckDB project, please discuss it with the DuckDB team on GitHub Discussions or on [our Discord server](https://discord.duckdb.org/). The team can verify whether the idea and the proposed implementation line up with the project's long-term vision.
 * If you would like to implement a feature as an extension, consider submitting it to the [Community Extensions repository]({% link community_extensions/index.md %}).
 
-Please note that DuckDB Labs, the company that employs the main DuckDB contributors, provides [consultancy services for DuckDB](https://ducklabs.com/support/), which can include implementing features in DuckDB or as DuckDB extensions.
+Please note that DuckLabs, the company that employs the main DuckDB contributors, provides [consultancy services for DuckDB](https://ducklabs.com/support/), which can include implementing features in DuckDB or as DuckDB extensions.
 
 </div>
 
@@ -550,7 +550,7 @@ You should be particularly cautious when downloading binaries and installation s
 Websites:
 
 * [`duckdb.org`](https://duckdb.org/), [`duckdb.io`](https://duckdb.io/), [`duckdb.ai`](https://duckdb.ai/): DuckDB
-* [`ducklabs.com`](https://ducklabs.com/): DuckDB Labs
+* [`ducklabs.com`](https://ducklabs.com/): DuckLabs
 * [`ducklake.select`](https://ducklake.select/) and [`ducklake.dev`](https://ducklake.dev/): DuckLake
 
 Social media:

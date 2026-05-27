@@ -11,7 +11,7 @@
       timetable:
         - time: "15:00"
           title: "State of the Duck"
-          speaker: "Hannes Mühleisen and Mark Raasveldt<br>(DuckDB Labs)"
+          speaker: "Hannes Mühleisen and Mark Raasveldt<br>(DuckLabs)"
         - time: "15:30"
           title: "Effortlessly modernize your legacy: SQLFrame migrates PySpark to DuckDB without code changes"
           speaker: "Nicolas Renkamp<br>(Merck KGaA)"

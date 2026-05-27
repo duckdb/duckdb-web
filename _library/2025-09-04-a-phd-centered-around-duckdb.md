@@ -17,6 +17,6 @@ pill: "DuckDB in Science"
 
 |-------|-------|
 | **Event** | [DuckDB in Science meetup (London)]({% link _events/2025-09-04-duckdb-science-and-education-london-meetup.md %}) |
-| **Speaker** | Laurens Kuiper (DuckDB Labs) |
+| **Speaker** | Laurens Kuiper (DuckLabs) |
 | **Slide deck** | [Download](https://blobs.duckdb.org/events/duckdb-in-science-london-meetup/laurens-kuiper-a-phd-centered-around-duckdb.pdf) |
 | **YouTube** | [Hands-On: A PhD Centered around DuckDB](https://www.youtube.com/watch?v=qUrwHCfQIfQ) |

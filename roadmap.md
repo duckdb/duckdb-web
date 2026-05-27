@@ -16,9 +16,9 @@ toc: false
 _(Last updated: April 2026)_
 
 The DuckDB project is governed by the [non-profit DuckDB Foundation]({% link foundation/index.html %}).
-The Foundation and [DuckDB Labs](https://ducklabs.com) are not funded by external investors (e.g., venture capital).
+The Foundation and [DuckLabs](https://ducklabs.com) are not funded by external investors (e.g., venture capital).
 Instead, the Foundation is funded by contributions from its [members]({% link foundation/index.html %}supporters),
-while DuckDB Labs' revenue is based on [commercial support and feature prioritization services](https://ducklabs.com/support).
+while DuckLabs' revenue is based on [commercial support and feature prioritization services](https://ducklabs.com/support).
 
 This list was compiled by the DuckDB maintainers and is based on the long-term strategic vision for the DuckDB project and general interactions with users in the open-source community (GitHub Issues and Discussions, social media, etc.).
 For details on how to request features in DuckDB, please refer to the FAQ item [“I would like feature X to be implemented in DuckDB”]({% link faq.md %}#i-would-like-feature-x-to-be-implemented-in-duckdb-how-do-i-proceed).
@@ -52,7 +52,7 @@ We are [gradually phasing out]({% link docs/current/sql/functions/lambda.md %}) 
 ## Future Work / Looking for Funding
 
 There are several features and optimizations that we plan to implement at some point in the future.
-If you would like to expedite the development of these items, please [get in touch with DuckDB Labs](https://ducklabs.com/contact/).
+If you would like to expedite the development of these items, please [get in touch with DuckLabs](https://ducklabs.com/contact/).
 
 * Go support for extensions
 * Time series optimizations

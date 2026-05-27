@@ -8,7 +8,7 @@ excerpt: "We shipped a number of features and improvements to the DuckDB-Iceberg
 tags: ["deep dive"]
 ---
 
-Over the past several months, the DuckDB Labs team has been hard at work on the [DuckDB-Iceberg extension]({% link docs/current/core_extensions/iceberg/overview.md %}), with _full read support_ and _initial write support_ released in [v1.4.0]({% post_url 2025-09-16-announcing-duckdb-140 %}).
+Over the past several months, the DuckLabs team has been hard at work on the [DuckDB-Iceberg extension]({% link docs/current/core_extensions/iceberg/overview.md %}), with _full read support_ and _initial write support_ released in [v1.4.0]({% post_url 2025-09-16-announcing-duckdb-140 %}).
 Today, we are happy to announce delete and update support for Iceberg v2 tables is available in [v1.4.2]({% post_url 2025-11-12-announcing-duckdb-142 %})!
 
 The Iceberg open table format has become extremely popular in the past two years, with many databases announcing support for the open table format [originally developed at Netflix](https://softwareengineeringdaily.com/2024/03/07/iceberg-at-netflix-and-beyond-with-ryan-blue/). This past year the DuckDB team has made Iceberg integration a [priority]({% link roadmap.md %}) and today we are happy to announce another step in that direction. In this blog post we will describe the current feature set of DuckDB-Iceberg in DuckDB v1.4.2.

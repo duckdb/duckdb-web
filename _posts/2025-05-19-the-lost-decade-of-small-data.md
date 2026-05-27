@@ -23,7 +23,7 @@ Let's turn our attention to the **2012** [Retina MacBook Pro](https://en.wikiped
 
 Side note: the MacBook Air was actually the first MacBook with an (optional) built-in SSD already back in 2008. But it did not have the CPU firepower of the Pro, sadly.
 
-Coincidentally, I still have this laptop in the [DuckDB Labs](https://ducklabs.com/) office, currently used by my kids to type their names in a massive font size or watch Bluey on YouTube when they're around. But can this relic still run modern-day DuckDB? How will its performance compare to modern MacBooks? And could we have had the data revolution that we are seeing now already back in 2012? Let's find out!
+Coincidentally, I still have this laptop in the [DuckLabs](https://ducklabs.com/) office, currently used by my kids to type their names in a massive font size or watch Bluey on YouTube when they're around. But can this relic still run modern-day DuckDB? How will its performance compare to modern MacBooks? And could we have had the data revolution that we are seeing now already back in 2012? Let's find out!
 
 ## Software
 

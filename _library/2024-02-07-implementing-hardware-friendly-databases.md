@@ -19,5 +19,5 @@ redirect_from:
 
 |-------|-------|
 | **Podcast** | [Developer Voices](https://www.youtube.com/channel/UC-0fWjosItIOD4ThhS6oyfA) |
-| **Guest** | [Hannes Mühleisen (DuckDB Labs)](https://hannes.muehleisen.org/) |
+| **Guest** | [Hannes Mühleisen (DuckLabs)](https://hannes.muehleisen.org/) |
 | **YouTube** | [Implementing Hardware-Friendly Databases](https://www.youtube.com/watch?v=pZV9FvdKmLc) |

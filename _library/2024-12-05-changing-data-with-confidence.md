@@ -19,5 +19,5 @@ redirect_from:
 
 |-------|-------|
 | **Event** | [PyData Global 2024](https://pydata.org/global2024/) |
-| **Speaker** | [Hannes Mühleisen (DuckDB Labs)](https://hannes.muehleisen.org/) |
+| **Speaker** | [Hannes Mühleisen (DuckLabs)](https://hannes.muehleisen.org/) |
 | **YouTube** | [Changing Data with Confidence](https://www.youtube.com/watch?v=7UqLMHloTsQ) |

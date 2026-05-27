@@ -4,7 +4,7 @@ title: "Announcing Vortex Support in DuckDB"
 author: "Guillermo Sanchez, SpiralDB Team"
 thumb: "/images/blog/thumbs/vortex.jpg"
 image: "/images/blog/thumbs/vortex.svg"
-excerpt: "Vortex is a new columnar file format with a very promising design. SpiralDB and DuckDB Labs have partnered to give you a very fast experience while reading and writing Vortex files!"
+excerpt: "Vortex is a new columnar file format with a very promising design. SpiralDB and DuckLabs have partnered to give you a very fast experience while reading and writing Vortex files!"
 tags: ["benchmark"]
 ---
 
@@ -39,7 +39,7 @@ DuckDB is a database as the name says, yes, but it is also widely used as an eng
 
 All this is possible due to the DuckDB [extension system]({% link docs/current/extensions/overview.md %}), which makes it relatively easy to implement logic to interact with different file formats or external systems.
 
-The SpiralDB team built a [DuckDB extension](https://github.com/vortex-data/duckdb-vortex). Together with the [DuckDB Labs](https://ducklabs.com/) team, we have made the extension available as a [core DuckDB extension]({% link docs/current/core_extensions/overview.md %}), so that the community can enjoy Vortex as a first-class citizen in DuckDB.
+The SpiralDB team built a [DuckDB extension](https://github.com/vortex-data/duckdb-vortex). Together with the [DuckLabs](https://ducklabs.com/) team, we have made the extension available as a [core DuckDB extension]({% link docs/current/core_extensions/overview.md %}), so that the community can enjoy Vortex as a first-class citizen in DuckDB.
 
 ### Example Usage
 

@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Arrow IPC Support in DuckDB"
-author: "Pedro Holanda (DuckDB Labs), Ian Cook (Columnar), Dewey Dunnington (Wherobots), Bryce Mecum (Voltron Data)"
+author: "Pedro Holanda (DuckLabs), Ian Cook (Columnar), Dewey Dunnington (Wherobots), Bryce Mecum (Voltron Data)"
 thumb: "/images/blog/thumbs/duckdb-arrow.svg"
 image: "/images/blog/thumbs/duckdb-arrow.png"
 excerpt: "DuckDB now supports consuming and producing the Arrow IPC Serialization Format through the `arrow` community extension."
@@ -238,7 +238,7 @@ pa.total_allocated_bytes()
 ## Conclusion & What's Next
 
 In this blog post, we presented the new Arrow community extension, which enables DuckDB users to interact with Arrow IPC streaming buffers and files. 
-Special thanks to [Voltron Data](https://voltrondata.com/) for enabling this extension by working with [DuckDB Labs](https://ducklabs.com/).
+Special thanks to [Voltron Data](https://voltrondata.com/) for enabling this extension by working with [DuckLabs](https://ducklabs.com/).
 Below we list our future plans for this extension:
 
 * Support for both `ZSTD` and `LZ4` compression when writing Arrow IPC. DuckDB currently only supports writing uncompressed buffers.

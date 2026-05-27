@@ -19,5 +19,5 @@ redirect_from:
 
 |-------|-------|
 | **Event** | [Databricks Data + AI Summit](https://www.databricks.com/dataaisummit/) |
-| **Speaker** | [Hannes Mühleisen (DuckDB Labs)](https://hannes.muehleisen.org/) |
+| **Speaker** | [Hannes Mühleisen (DuckLabs)](https://hannes.muehleisen.org/) |
 | **YouTube** | [Announcing DuckDB Support for Delta Lake and the Unity Catalog Extension](https://www.youtube.com/watch?v=wuP6iEYH11E) |

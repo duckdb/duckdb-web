@@ -29,7 +29,7 @@ CREATE TABLE customer (id INTEGER, name VARCHAR);
 CREATE TABLE orders (customer_id INTEGER, item VARCHAR);
 
 BEGIN TRANSACTION;
-INSERT INTO customer VALUES (42, 'DuckDB Labs');
+INSERT INTO customer VALUES (42, 'DuckLabs');
 INSERT INTO orders VALUES (42, 'stale bread');
 COMMIT;
 
@@ -81,7 +81,7 @@ We should also note that in DuckDB *schema changes are also transactional*. This
 ```sql
 CREATE TABLE customer (id INTEGER, name VARCHAR, PRIMARY KEY (id));
 
-INSERT INTO customer VALUES (42, 'DuckDB Labs');
+INSERT INTO customer VALUES (42, 'DuckLabs');
 INSERT INTO customer VALUES (42, 'Wilbur the Duck');
 ```
 
@@ -110,7 +110,7 @@ import duckdb
 con1 = duckdb.connect(":memory:mydb")
 con1.sql("CREATE TABLE customer (id INTEGER, name VARCHAR)")
 
-con1.sql("INSERT INTO customer VALUES (42, 'DuckDB Labs')")
+con1.sql("INSERT INTO customer VALUES (42, 'DuckLabs')")
 
 con1.begin()
 con1.sql("INSERT INTO customer VALUES (43, 'Wilbur the Duck')")
@@ -124,7 +124,7 @@ con2.sql("SELECT name FROM customer").show()
 # │    name     │
 # │   varchar   │
 # ├─────────────┤
-# │ DuckDB Labs │
+# │ DuckLabs │
 # └─────────────┘
 
 # commit from the first connection
@@ -137,7 +137,7 @@ con2.sql("SELECT name FROM customer").show()
 # │      name       │
 # │     varchar     │
 # ├─────────────────┤
-# │ DuckDB Labs     │
+# │ DuckLabs     │
 # │ Wilbur the Duck │
 # └─────────────────┘
 ```
@@ -157,7 +157,7 @@ import signal
 
 con = duckdb.connect("mydb.duckdb")
 con.sql("CREATE TABLE customer (id INTEGER, name VARCHAR)")
-con.sql("INSERT INTO customer VALUES (42, 'DuckDB Labs')")
+con.sql("INSERT INTO customer VALUES (42, 'DuckLabs')")
 
 # begin a transaction
 con.begin()
@@ -181,11 +181,11 @@ con.sql("SELECT name FROM customer").show()
 │    name     │
 │   varchar   │
 ├─────────────┤
-│ DuckDB Labs │
+│ DuckLabs │
 └─────────────┘
 ```
 
-In this example, we first create the customer table in the database file `mydb.duckdb`. We then insert a single row with DuckDB Labs as a first transaction. Then, we begin but *do not commit* a second transaction that adds the `Wilbur the Duck` entry. If we then kill the process and with it the database, we can see that upon restart only the `DuckDB Labs` entry has survived. This is because the second transaction was not committed and hence not subject to durability. Of course, this gets more complicated when non-clean exits such as operating system crashes have to be considered. DuckDB also guarantees durability in those circumstances, some more on this below.
+In this example, we first create the customer table in the database file `mydb.duckdb`. We then insert a single row with DuckLabs as a first transaction. Then, we begin but *do not commit* a second transaction that adds the `Wilbur the Duck` entry. If we then kill the process and with it the database, we can see that upon restart only the `DuckLabs` entry has survived. This is because the second transaction was not committed and hence not subject to durability. Of course, this gets more complicated when non-clean exits such as operating system crashes have to be considered. DuckDB also guarantees durability in those circumstances, some more on this below.
 
 ## Why ACID in OLAP?
 
