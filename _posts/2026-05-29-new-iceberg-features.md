@@ -8,7 +8,7 @@ excerpt: "DuckDB-Iceberg now has a number of new features supporting Iceberg Tab
 tags: ["deep dive"]
 ---
 
-Despite the work needed to develop the features needed for DuckLake v1.0 and Quack, the DuckDB Labs team is still hard at work on the [DuckDB-Iceberg extension]({% link docs/current/core_extensions/iceberg/overview.md %}).
+Despite the work needed to develop the features needed for DuckLake v1.0 and Quack, the DuckLabs team is still hard at work on the [DuckDB-Iceberg extension]({% link docs/current/core_extensions/iceberg/overview.md %}).
 In this blog post, we will demo some of the features that are available in [DuckDB v1.5.3]({% post_url 2026-05-20-announcing-duckdb-153 %}). Many of these features were ear marked for a future release in our last [Iceberg blog post]({% post_url 2025-11-28-iceberg-writes-in-duckdb %}) 
 
 
@@ -166,9 +166,13 @@ ALTER TABLE my_datalake.default.renamed_table
 -- Drop a column
 ALTER TABLE my_datalake.default.renamed_table
     DROP COLUMN col3;
+
+-- Set the format-version
+ALTER TABLE my_datalake.default.renamed_table
+    SET ('format-versionn'=3);
 ```
 
-Each `ALTER TABLE` statement creates a new metadata file in the Iceberg catalog, and the changes are visible to other Iceberg-aware engines on the next read. Iceberg schema evolution is metadata-only, so no data files are rewritten.
+Each `ALTER TABLE` statement will updatet the `current-schema-id` of the Iceberg table. The changes are visible to other Iceberg-aware engines the next time they query the LoadTableInformation endpoint. Iceberg schema evolution is metadata-only, so no data files are rewritten.
 
 ```sql
 SELECT *
@@ -242,12 +246,12 @@ FROM iceberg_metadata(my_datalake.default.v3_table);
 └──────────────────┴──────────────────┴─────────────┘
 ```
 
-> Note: the Geography type and Unknown type are not yet supported in DuckDB-Iceberg, we are planning to add those in the v2.0.0
+> Note: the Geography type and Unknown type are not yet supported in DuckDB-Iceberg, we are planning to add those in DuckDB v2.0.0
 
 
 ## Conclusion and Future Work
 
-With these features, DuckDB-Iceberg has closed many of the gaps called out in the [previous blog post]({% post_url 2025-11-28-iceberg-writes-in-duckdb %}): partitioned writes, schema evolution, `MERGE INTO`, and many Iceberg v3 features are now available. There is still more to come, and as always, if you would like to see a specific feature prioritized, please reach out to us in the [DuckDB-Iceberg GitHub repository](https://github.com/duckdb/duckdb-iceberg) or [get in touch](https://duckdblabs.com/contact/) with our engineers.
+With these features, DuckDB-Iceberg has closed many of the gaps called out in the [previous blog post]({% post_url 2025-11-28-iceberg-writes-in-duckdb %}): partitioned writes, schema evolution, `MERGE INTO`, and many Iceberg v3 features are now available. There is still more to come, and as always, if you would like to see a specific feature prioritized, please reach out to us in the [DuckDB-Iceberg GitHub repository](https://github.com/duckdb/duckdb-iceberg) or [get in touch](https://ducklabs.com/contact/) with our engineers.
 
 
 
