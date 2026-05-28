@@ -1,20 +1,20 @@
 ---
 layout: post
-title:  "New DuckDB-Iceberg features in v1.5.3"
+title: "New DuckDB-Iceberg Features in v1.5.3"
 author: "Tom Ebergen, Thijs Bruineman"
 thumb: "/images/blog/thumbs/iceberg-writes.svg"
 image: "/images/blog/thumbs/iceberg-writes.png"
-excerpt: "DuckDB-Iceberg now has a number of new features supporting Iceberg Tables and Iceberg Rest Catalogs."
+excerpt: "DuckDB-Iceberg now has a number of new features supporting Iceberg Tables and Iceberg REST Catalogs."
 tags: ["deep dive"]
 ---
 
-Despite the work needed to develop the features needed for DuckLake v1.0 and Quack, the DuckLabs team is still hard at work on the [DuckDB-Iceberg extension]({% link docs/current/core_extensions/iceberg/overview.md %}).
-In this blog post, we will demo some of the features that are available in [DuckDB v1.5.3]({% post_url 2026-05-20-announcing-duckdb-153 %}). Many of these features were ear marked for a future release in our last [Iceberg blog post]({% post_url 2025-11-28-iceberg-writes-in-duckdb %}) 
+Despite the work required to develop the features needed for DuckLake v1.0 and Quack, the DuckLabs team is still hard at work on the [DuckDB-Iceberg extension]({% link docs/current/core_extensions/iceberg/overview.md %}).
+In this blog post, we will demo some of the features that are available in [DuckDB v1.5.3]({% post_url 2026-05-20-announcing-duckdb-153 %}). Many of these features were earmarked for a future release in our last [Iceberg blog post]({% post_url 2025-11-28-iceberg-writes-in-duckdb %}).
 
 
 ## Getting Started
 
-To experiment with the new DuckDB-Iceberg features, you will need to connect to your favorite Iceberg REST Catalog. There are many ways to connect to an Iceberg REST Catalog: please have a look at the [Connecting to REST Catalogs]({% link docs/current/core_extensions/iceberg/iceberg_rest_catalogs.md %}) for connecting to catalogs like [Apache Polaris](https://polaris.apache.org/) or [Lakekeeper](https://lakekeeper.io/) and the [Connecting to S3 Tables]({% link docs/current/core_extensions/iceberg/amazon_s3_tables.md %}) page if you would like to connect to [Amazon S3 Tables](https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-tables.html).
+To experiment with the new DuckDB-Iceberg features, you will need to connect to your favorite Iceberg REST Catalog. There are many ways to connect to an Iceberg REST Catalog: please have a look at the [Connecting to REST Catalogs]({% link docs/current/core_extensions/iceberg/iceberg_rest_catalogs.md %}) page for connecting to catalogs like [Apache Polaris](https://polaris.apache.org/) or [Lakekeeper](https://lakekeeper.io/) and the [Connecting to S3 Tables]({% link docs/current/core_extensions/iceberg/amazon_s3_tables.md %}) page if you would like to connect to [Amazon S3 Tables](https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-tables.html).
 
 ```sql
 ATTACH '⟨warehouse_name⟩' AS my_datalake (
@@ -64,7 +64,7 @@ ORDER BY id;
 └───────┴─────────┴──────────┘
 ```
 
-You can also combine matched and not-matched branches with `WHEN MATCHED THEN DELETE` to express a delete set in the same statement. As with `UPDATE` and `DELETE`, `MERGE INTO` uses merge-on-read semantics and writes positional deletes to the Iceberg table.
+You can also combine matched and unmatched branches with `WHEN MATCHED THEN DELETE` to express a delete set in the same statement. As with `UPDATE` and `DELETE`, `MERGE INTO` uses merge-on-read semantics and writes positional deletes to the Iceberg table.
 
 ## `TRUNCATE` and `BUCKET` Support
 
@@ -145,7 +145,7 @@ In v1.4.2, schema evolution of Iceberg tables was a documented limitation. In v1
 
 ```sql
 -- Create the table
-Create table my_datalake.default.simple_table from values 
+CREATE TABLE my_datalake.default.simple_table FROM VALUES 
     (1, 'Andy'), 
     (2, 'Bob'),
     (3, 'Claire'),
@@ -169,10 +169,10 @@ ALTER TABLE my_datalake.default.renamed_table
 
 -- Set the format-version
 ALTER TABLE my_datalake.default.renamed_table
-    SET ('format-versionn'=3);
+    SET ('format-version'=3);
 ```
 
-Each `ALTER TABLE` statement will updatet the `current-schema-id` of the Iceberg table. The changes are visible to other Iceberg-aware engines the next time they query the LoadTableInformation endpoint. Iceberg schema evolution is metadata-only, so no data files are rewritten.
+Each `ALTER TABLE` statement will update the `current-schema-id` of the Iceberg table. The changes are visible to other Iceberg-aware engines the next time they query the LoadTableInformation endpoint. Iceberg schema evolution is metadata-only, so no data files are rewritten.
 
 ```sql
 SELECT *
@@ -246,7 +246,7 @@ FROM iceberg_metadata(my_datalake.default.v3_table);
 └──────────────────┴──────────────────┴─────────────┘
 ```
 
-> Note: the Geography type and Unknown type are not yet supported in DuckDB-Iceberg, we are planning to add those in DuckDB v2.0.0
+> Note: the Geography type and Unknown type are not yet supported in DuckDB-Iceberg; we are planning to add those in DuckDB v2.0.0.
 
 
 ## Conclusion and Future Work
