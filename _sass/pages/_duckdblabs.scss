@@ -11,6 +11,12 @@ footer .sitefooter .footercontent > div a:hover {
 	color: var(--orange-50);
 }
 
+.hamburger-inner,
+.hamburger-inner:after,
+.hamburger-inner:before {
+	background-color: #FF6900;
+}
+
 header .headerline .headercontent .header-actions {
 	display: flex;
 	align-items: center;

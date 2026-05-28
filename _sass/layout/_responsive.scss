@@ -36,12 +36,23 @@
 }
 
 @media only screen and (max-width: 1130px) {
+	footer .sitefooter .footercontent .footertop{
+		flex-wrap: wrap;
+		row-gap: 50px;
+	}
+	footer .sitefooter .footercontent .footerbrand{
+		width: 100%;
+		order: 2;
+	}
 	footer .sitefooter .footercontent .footernavigation{
 		width: 100%;
-		margin-bottom: 25px;
+		order: 1;
 		>div{
 			width: calc(100% / 5);
 		}
+	}
+	footer .sitefooter .footercontent .bottomline{
+		margin-top: 50px;
 	}
 }
 
@@ -443,7 +454,6 @@
 @media only screen and (max-width: 780px) {
 	footer .sitefooter .footercontent>div:first-child {
 		width: 100%;
-		margin-bottom: 30px;
 	}
 
 	header .headerline .headercontent .landingmenu nav .starcount {
@@ -580,7 +590,6 @@
 
 		>div {
 			width: 180px;
-			margin-bottom: 30px;
 
 			&:first-child {
 				width: 100%;
