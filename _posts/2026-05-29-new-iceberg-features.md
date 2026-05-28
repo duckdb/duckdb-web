@@ -2,10 +2,10 @@
 layout: post
 title: "New DuckDB-Iceberg Features in v1.5.3"
 author: "Tom Ebergen, Thijs Bruineman"
-thumb: "/images/blog/thumbs/iceberg-writes.svg"
-image: "/images/blog/thumbs/iceberg-writes.png"
+thumb: "/images/blog/thumbs/iceberg-v153.svg"
+image: "/images/blog/thumbs/iceberg-v153.png"
 excerpt: "DuckDB-Iceberg now has a number of new features supporting Iceberg Tables and Iceberg REST Catalogs."
-tags: ["deep dive"]
+tags: ["extensions"]
 ---
 
 Despite the work required to develop the features needed for DuckLake v1.0 and Quack, the DuckLabs team is still hard at work on the [DuckDB-Iceberg extension]({% link docs/current/core_extensions/iceberg/overview.md %}).
