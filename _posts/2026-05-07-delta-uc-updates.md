@@ -8,7 +8,7 @@ thumb: "/images/blog/thumbs/delta-uc-updates.svg"
 image: "/images/blog/thumbs/delta-uc-updates.jpg"
 ---
 
-Welcome back! While we here at DuckDB Labs are typically of the quacking
+Welcome back! While we here at DuckLabs are typically of the quacking
 persuasion, we’ve been busy as beavers, shoring up our Delta to prepare for
 what’s next… Unity Catalog! Let’s look at how DuckDB’s
 [Delta]({% link docs/current/core_extensions/delta.md %}) and

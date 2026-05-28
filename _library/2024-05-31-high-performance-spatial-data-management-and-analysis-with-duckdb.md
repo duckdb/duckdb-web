@@ -15,5 +15,5 @@ pill: "UTwente Seminar 2024"
 
 |-------|-------|
 | **Event** | [University of Twente seminar](https://www.utwente.nl/en/itc/about-itc/centres-of-expertise/big-geodata/talks/event/duckdb-spatial/) |
-| **Speaker** | [Max Gabrielsson (DuckDB Labs)](https://github.com/Maxxen) |
+| **Speaker** | [Max Gabrielsson (DuckLabs)](https://github.com/Maxxen) |
 | **YouTube** | [DuckDB Spatial: Supercharged Geospatial SQL](https://www.youtube.com/watch?v=hoyQnP8CiXE) |

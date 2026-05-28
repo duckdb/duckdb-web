@@ -445,17 +445,105 @@
     .sponsors {
         @include mobile-padding;
 
-        .sponsors-list {
-            @include reset-unordered-list;
-            display: flex;
-            justify-content: center;
-            margin-top: 50px;
+        .sponsors-card {
+            max-width: var(--page-max-width-large, 1150px);
+            margin: 45px auto 0;
+            padding: var(--page-margin-l, 32px);
+            border-radius: 15px;
+            border: 1px solid var(--main-infobox-border-color, rgba(51, 51, 51, 0.6));
+            background-color: var(--grey-transparent-10, rgba(26, 26, 26, 0.6));
+            text-align: center;
+        }
 
-            li {
-                @include reset-list-item;
+        .sponsors-tiers {
+            @include tiny;
+            margin: 0;
+
+            .gold {
+                color: #C09600;
+            }
+
+            .silver {
+                color: #979797;
+            }
+
+            .sep {
+                margin: 0 6px;
+                color: #808080;
             }
         }
 
+        .sponsors-logos {
+            @include reset-unordered-list;
+            --sponsors-columns: 4;
+            --sponsors-gap-x: 30px;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 40px var(--sponsors-gap-x);
+            margin-top: 30px;
+
+            @media (max-width: 640px) {
+                --sponsors-columns: 2;
+            }
+
+            .sponsor {
+                @include reset-list-item;
+                flex: 0 0 calc((100% - (var(--sponsors-columns) - 1) * var(--sponsors-gap-x)) / var(--sponsors-columns));
+                display: flex;
+                align-items: center;
+                justify-content: center;
+
+                // Tier color tints the inline SVG via currentColor
+                &.gold {
+                    color: #C09600;
+                }
+
+                &.silver {
+                    color: #979797;
+                }
+
+                svg {
+                    display: block;
+                    width: auto;
+                    height: 40px;
+                }
+
+                // Author CSS overrides any fill="…" baked into the pasted SVG,
+                // while :where() keeps specificity 0 so a logo can still opt out.
+                svg,
+                svg :where(path, rect, circle, polygon, ellipse) {
+                    fill: currentColor;
+                }
+            }
+        }
+
+        .sponsors-note {
+            @include tiny;
+            margin: 25px auto 0;
+            text-align: center;
+            color: var(--main-text-tertiary-color, #808080);
+
+            a {
+                color: inherit;
+                text-decoration: underline;
+
+                &:hover {
+                    color: var(--main-text-secondary-color, #B2B2B2);
+                }
+
+                &.downloadlink::after {
+                    background-color: currentColor !important;
+                }
+            }
+        }
+
+        // Option A (call for sponsors) – used when there are no sponsors yet
+        .sponsors-cta {
+            display: flex;
+            justify-content: center;
+            margin-top: 30px;
+        }
     }
 
     .map {

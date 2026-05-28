@@ -71,7 +71,7 @@ Quack can be beneficial in a number of scenarios, including the following:
 
 <div class="answer" markdown="1">
 
-Yes. DuckDB with Quack can handle a few thousand writes per second on a server with 8 CPUs and 32 GB RAM. See [the benchmarks in our announcement blog post](https://duckdb.org/2026/05/12/quack-remote-protocol).
+Yes. DuckDB with Quack can handle a few thousand writes per second on a server with 8 CPUs and 32 GB RAM. See [the benchmarks in our announcement blog post]({% post_url 2026-05-12-quack-remote-protocol %}).
 
 </div>
 
@@ -101,7 +101,7 @@ Yes, DuckDB as an in-process database will continue working just as it did befor
 
 <div class="answer" markdown="1">
 
-Please follow the [installation instructions](https://duckdb.org/quack) and the [documentation](https://duckdb.org/docs/current/quack/overview).
+Please follow the [installation instructions]({% link quack/index.html %}) and the [documentation]({% link docs/current/quack/overview.md %}).
 
 </div>
 
@@ -129,12 +129,13 @@ Quack uses HTTP v2.0 for communication. This allows Quack to work in environment
 
 <div class="answer" markdown="1">
 
-Yes, Quack is available in DuckDB v1.5.2 as a beta release. To install and load it, run:
+Yes, Quack is available in DuckDB v1.5.3 as a beta release. To install it, run:
 
 ```sql
-INSTALL quack FROM core_nightly;
-LOAD quack;
+INSTALL quack;
 ```
+
+Or, simply start using it as described in the [documentation]({% link docs/current/quack/overview.md %}).
 
 </div>
 
@@ -150,7 +151,7 @@ LOAD quack;
 
 <div class="answer" markdown="1">
 
-Yes, we designed Quack to be a high-performance protocol for both bulk operations and small changes. We worked on minimizing the number of round-trips required. See [the benchmarks in our announcement blog post](https://duckdb.org/2026/05/12/quack-remote-protocol).
+Yes, we designed Quack to be a high-performance protocol for both bulk operations and small changes. We worked on minimizing the number of round-trips required. See [the benchmarks in our announcement blog post]({% post_url 2026-05-12-quack-remote-protocol %}).
 
 </div>
 
@@ -164,7 +165,7 @@ Yes, we designed Quack to be a high-performance protocol for both bulk operation
 
 <div class="answer" markdown="1">
 
-Please consult the Quack documentation's [Security](https://duckdb.org/docs/current/quack/security) page and the [Securing Quack with a Reverse Proxy](http://duckdb.org/docs/current/quack/setup/reverse_proxy) page.
+Please consult the Quack documentation's [Security]({% link docs/current/quack/security.md %}) page and the [Securing Quack with a Reverse Proxy]({% link docs/current/quack/setup/reverse_proxy.md %}) page.
 
 </div>
 
@@ -206,7 +207,7 @@ Currently, DuckDB with Quack does not support distributed query processing.
 
 <div class="answer" markdown="1">
 
-Please consult the DuckDB FAQ's [“I would like feature X to be implemented in DuckDB. How do I proceed?”](https://duckdb.org/faq#i-would-like-feature-x-to-be-implemented-in-duckdb-how-do-i-proceed) entry. If you think a feature is missing from Quack, please [start a new discussion in the main DuckDB repository](https://github.com/duckdb/duckdb/discussions/new/choose).
+Please consult the DuckDB FAQ's [“I would like feature X to be implemented in DuckDB. How do I proceed?”]({% link faq.md %}#i-would-like-feature-x-to-be-implemented-in-duckdb-how-do-i-proceed) entry. If you think a feature is missing from Quack, please [start a new discussion in the main DuckDB repository](https://github.com/duckdb/duckdb/discussions/new/choose).
 
 </div>
 
@@ -222,7 +223,7 @@ Please consult the DuckDB FAQ's [“I would like feature X to be implemented in 
 
 <div class="answer" markdown="1">
 
-Not yet. Quack is currently in a beta state. You can use Quack for prototyping but it is still in development, and breaking changes are expected to happen. These may include the protocol, function names and default settings. We expect Quack to mature over the next few months and plan to release it as a stable protocol as part of [DuckDB v2.0](https://duckdb.org/release_calendar) in September 2026\.
+Not yet. Quack is currently in a beta state. You can use Quack for prototyping but it is still in development, and breaking changes are expected to happen. These may include the protocol, function names and default settings. We expect Quack to mature over the next few months and plan to release it as a stable protocol as part of [DuckDB v2.0]({% link release_calendar.md %}) in September 2026.
 
 </div>
 
@@ -266,7 +267,7 @@ Please [submit an issue in the `duckdb-quack` repository](https://github.com/duc
 
 <div class="answer" markdown="1">
 
-There are several third-party solutions providing remote access to DuckDB (e.g., the [airport extension](https://duckdb.org/community_extensions/extensions/airport) and [GizmoSQL](https://github.com/gizmodata/gizmosql) using the [Arrow Flight Protocol](https://arrow.apache.org/docs/format/Flight.html)). Quack is a clean slate implementation from the core DuckDB team. Quack, in the spirit of the DuckDB project, does not have any third-party dependencies.
+There are several third-party solutions providing remote access to DuckDB (e.g., the [airport extension]({% link community_extensions/extensions/airport.md %}) and [GizmoSQL](https://github.com/gizmodata/gizmosql) using the [Arrow Flight Protocol](https://arrow.apache.org/docs/format/Flight.html)). Quack is a clean slate implementation from the core DuckDB team. Quack, in the spirit of the DuckDB project, does not have any third-party dependencies.
 
 </div>
 

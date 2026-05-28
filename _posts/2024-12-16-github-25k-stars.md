@@ -17,7 +17,7 @@ We would like to highlight two main events that have happened this year:
 
 Besides the GitHub stars we have also observed a lot of growth in various metrics.
 
-* Each month, our website handles over 1.5 million unique visitors. In addition, we see over 300 TB in traffic from ca. 30 million extension downloads. Thanks again to Cloudflare for [sponsoring the project]({% link foundation/index.html %}#technical-sponsors) with free content delivery services!
+* Each month, our website handles over 1.5 million unique visitors. In addition, we see over 300 TB in traffic from ca. 30 million extension downloads. Thanks again to Cloudflare for [sponsoring the project](https://duckdb.foundation/#technical-sponsors) with free content delivery services!
 * In one year, we rose in the [DB Engines ranking](https://db-engines.com/en/ranking) from position 91 to 55 on the general board and from position 47 to 33 in the [relational board](https://db-engines.com/en/ranking/relational+dbms), which makes DuckDB the fastest growing relational system in the top-50.
 * We count [7.5M+ monthly downloads in PyPI](https://pypistats.org/packages/duckdb).
 * Maven Central downloads for the JDBC driver have also shot up, we now see over 500k+ downloads per month.

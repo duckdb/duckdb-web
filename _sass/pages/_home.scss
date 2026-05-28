@@ -621,6 +621,10 @@ body.landing{
 		.hero-content{
 			text-align: center;
 			max-width: 640px;
+			.hero-eyebrow{
+				margin: 0 0 12px;
+				color: var(--main-text-secondary-color, #666);
+			}
 			h1{
 				margin-bottom: 0;
 			}
@@ -676,7 +680,7 @@ body.landing{
 					}
 					span{
 						font-weight: 500;
-						font-size: var(--type-title-1, 18px);
+						font-size: var(--type-title-2, 16px);
 						color: var(--main-text-primary-color, #0d0d0d);
 						line-height: 1.2;
 					}

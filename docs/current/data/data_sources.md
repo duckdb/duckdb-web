@@ -23,7 +23,7 @@ DuckDB supports several data sources, including file formats, network protocols,
 * [Lance tables]({% link docs/current/core_extensions/lance.md %})
 * [MySQL]({% link docs/current/core_extensions/mysql.md %})
 * [Parquet]({% link docs/current/data/parquet/overview.md %})
-* [PostgreSQL]({% link docs/current/core_extensions/postgres.md %})
+* [PostgreSQL]({% link docs/current/core_extensions/postgres/overview.md %})
 * [SQLite]({% link docs/current/core_extensions/sqlite.md %})
 * [Text files]({% link docs/current/guides/file_formats/read_file.md %}#read_text)
 * [Vortex files]({% link docs/current/core_extensions/vortex.md %})

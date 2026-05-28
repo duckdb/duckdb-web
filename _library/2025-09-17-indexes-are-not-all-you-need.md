@@ -15,6 +15,6 @@ pill: "DuckDB Amsterdam Meetup"
 
 |-------|-------|
 | **Event** | [DuckDB Amsterdam Meetup #3]({% link _events/2025-09-17-duckdb-amsterdam-meetup-3.md %}) |
-| **Speaker** | Tania Bogatsch (DuckDB Labs) |
+| **Speaker** | Tania Bogatsch (DuckLabs) |
 | **Slide deck** | [Download](https://blobs.duckdb.org/events/duckdb-amsterdam-meetup3/tania-bogatsch-indexes-are-not-all-you-need.pdf) |
 | **YouTube** | [Indexes Are (Not) All You Need: Common DuckDB Pitfalls and How to Find Them](https://www.youtube.com/watch?v=RywT9_K4QWg) |

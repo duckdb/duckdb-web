@@ -188,6 +188,7 @@
       if (env === 'java') ver = attr('java-version') || ver;
       else if (env === 'odbc') ver = attr('odbc-version') || ver;
       else if (env === 'go') ver = attr('go-version') || ver;
+      else if (env === 'nodejs') ver = attr('nodejs-version') || ver;
       else if (env === 'r') ver = attr('r-version') || ver;
       else if (env === 'rust') ver = attr('rust-version') || ver;
       return ver;

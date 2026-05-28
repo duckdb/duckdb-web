@@ -1,5 +1,7 @@
 release_date,version_number,lts,codename,duck_species_primary,duck_species_secondary,duck_wikipage,blog_post,end_of_life
-2026-03-23,1.5.1,false,,,,,,
+2026-05-20,1.5.3,false,,,,,https://duckdb.org/2026/05/20/announcing-duckdb-153,
+2026-04-13,1.5.2,false,,,,,https://duckdb.org/2026/04/13/announcing-duckdb-152,
+2026-03-23,1.5.1,false,,,,,https://duckdb.org/2026/03/23/announcing-duckdb-151,
 2026-03-09,1.5.0,false,Variegata,Tadorna variegata,Paradise shelduck,https://en.wikipedia.org/wiki/Paradise_shelduck,https://duckdb.org/2026/03/09/announcing-duckdb-150,2026-09-01
 2026-01-27,1.4.4,true,,,,,https://duckdb.org/2026/01/26/announcing-duckdb-144,
 2025-12-09,1.4.3,true,,,,,https://duckdb.org/2025/12/09/announcing-duckdb-143,

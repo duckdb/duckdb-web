@@ -205,7 +205,7 @@ This release further improves on that by greatly optimizing the [out-of-core has
 
 ## Shell Improvements
 
-DuckDB has a command-line interface that is adapted from SQLite's command line interface, and therefore supports an extremely similar interface to SQLite. All of the tables in this blog post have been generated using the `.mode markdown` in the CLI.
+DuckDB has a command line interface (CLI) that is adapted from SQLite's CLI, and therefore supports a similar interface to SQLite. All of the tables in this blog post have been generated using the `.mode markdown` in the CLI.
 
 The DuckDB shell also offers several improvements over the SQLite shell, such as syntax highlighting, and this release includes a few new goodies.
 

@@ -19,6 +19,6 @@ redirect_from:
 
 |-------|-------|
 | **Event** | [GOTO Amsterdam 2024](https://gotoams.nl/2024/) |
-| **Speaker** | [Gábor Szárnyas (DuckDB Labs)](https://szarnyasg.org/) |
+| **Speaker** | [Gábor Szárnyas (DuckLabs)](https://szarnyasg.org/) |
 | **Slide deck** | [Download](https://blobs.duckdb.org/slides/goto-amsterdam-2024-duckdb-gabor-szarnyas.pdf) |
 | **YouTube** | [DuckDB: Crunching Data Anywhere from Laptops to Servers](https://www.youtube.com/watch?v=9Rdwh0rNaf0) |

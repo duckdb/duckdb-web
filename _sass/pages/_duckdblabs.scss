@@ -11,6 +11,12 @@ footer .sitefooter .footercontent > div a:hover {
 	color: var(--orange-50);
 }
 
+.hamburger-inner,
+.hamburger-inner:after,
+.hamburger-inner:before {
+	background-color: #FF6900;
+}
+
 header .headerline .headercontent .header-actions {
 	display: flex;
 	align-items: center;
@@ -171,7 +177,7 @@ body.landing section.about-cards{
 				border-right: none;
 			}
 				img{
-				height: 48px;
+				height: 40px;
 				width: auto;
 				filter: invert(1) opacity(0.5);
 			}

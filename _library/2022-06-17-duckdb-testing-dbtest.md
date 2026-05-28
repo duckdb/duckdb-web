@@ -19,5 +19,5 @@ redirect_from:
 
 |-------|-------|
 | **Event** | [DBTest 2022](https://dbtest-workshop.github.io/2022/) |
-| **Speaker** | [Mark Raasveldt (DuckDB Labs)](https://mytherin.github.io/) |
+| **Speaker** | [Mark Raasveldt (DuckLabs)](https://mytherin.github.io/) |
 | **YouTube** | [DuckDB Testing – Present and Future](https://www.youtube.com/watch?v=BgC79Zt2fPs) |

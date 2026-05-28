@@ -11,9 +11,9 @@ title: Quack Remote Protocol
 The Quack extension turns a DuckDB instance into a server that other DuckDB instances (clients) can connect to over HTTP.
 
 This page covers the protocol at a glance and walks through basic usage on both sides of the wire.
-For the full list of functions, settings, and logging knobs, see the [Reference]({% link docs/current/quack/reference.md %}). For deployment posture, TLS, and authentication / authorization, see [Security]({% link docs/current/quack/security.md %}). For user guides, see [Guides]({% link docs/current/quack/setup/overview.md %}).
+For the full list of functions, settings, and logging knobs, see the [Reference]({% link docs/current/quack/reference.md %}). For configuring TLS and authentication / authorization, see [Security]({% link docs/current/quack/security.md %}). For user guides, see [Guides]({% link docs/current/quack/setup/overview.md %}).
 
-> Warning Quack is under active development and the protocol, function names, settings, and defaults are still subject to change. This page documents the beta release of Quack, available in DuckDB v1.5.2, shipped via the `core_nightly` repository.
+> Warning Quack is under active development and the protocol, function names, settings, and defaults are still subject to change. This page documents the beta release of Quack, available in [DuckDB v1.5.3]({% post_url 2026-05-20-announcing-duckdb-153 %}), shipped via the `core` repository.
 
 ## Quack in a Nutshell
 
@@ -35,7 +35,6 @@ To start listening on localhost, run:
 
 {:.codebox-server}
 ```sql
-LOAD quack;
 CALL quack_serve('quack:localhost');
 ```
 
@@ -46,7 +45,6 @@ By default the server refuses to bind anything other than a local hostname. To l
 
 {:.codebox-server}
 ```sql
-LOAD quack;
 CALL quack_serve('quack:0.0.0.0:9494', allow_other_hostname => true);
 ```
 
@@ -56,13 +54,13 @@ When you do this you should front the server with a TLS-terminating reverse prox
 
 Quack endpoints use the `quack:` URI scheme and `9494` as the default port. Some examples:
 
-| URI                 | Host        | Port          |
-| ------------------- | ----------- | ------------- |
-| `quack:localhost`   | `localhost` | `9494`        |
-| `quack://localhost` | `localhost` | `9494`        |
-| `quack:myhost:9000` | `myhost`    | `9000`        |
-| `quack:127.0.0.1`   | `127.0.0.1` | `9494`        |
-| `quack:[::1]:1234`  | `::1`       | `1234` (IPv6) |
+| URI                 | Host        | Port   | Comment |
+| ------------------- | ----------- | ------ | ------- |
+| `quack:localhost`   | `localhost` | `9494` |         |
+| `quack://localhost` | `localhost` | `9494` |         |
+| `quack:myhost:9000` | `myhost`    | `9000` |         |
+| `quack:127.0.0.1`   | `127.0.0.1` | `9494` |         |
+| `quack:[::1]:1234`  | `::1`       | `1234` | (IPv6)  |
 
 You can parse and validate a URI with the `quack_uri_parser(uri, ssl)` scalar function.
 
@@ -202,7 +200,7 @@ FROM remote_db.query('FROM whoami()');
 │  name   │ provider │ hostname │ region  │     uptime      │            ts_now             │                        meta                        │
 │ varchar │ varchar  │ varchar  │ varchar │    interval     │   timestamp with time zone    │                        json                        │
 ├─────────┼──────────┼──────────┼─────────┼─────────────────┼───────────────────────────────┼────────────────────────────────────────────────────┤
-│ NULL    │ NULL     │ NULL     │ NULL    │ 00:04:56.832456 │ 2026-05-07 15:59:38.631715+02 │ {"duckdb_version":"v1.5.2","platform":"osx_arm64"} │
+│ NULL    │ NULL     │ NULL     │ NULL    │ 00:04:56.832456 │ 2026-05-22 15:59:38.631715+02 │ {"duckdb_version":"v1.5.3","platform":"osx_arm64"} │
 └─────────┴──────────┴──────────┴─────────┴─────────────────┴───────────────────────────────┴────────────────────────────────────────────────────┘
 ```
 

@@ -11,7 +11,7 @@ This website contains all documentation specific to community-contributed extens
 
 DuckDB is an analytical in-process SQL database management system, documented at [DuckDB documentation website]({% link docs/current/index.md %}).
 
-Community means that the extensions are created by external contributors and not maintained by [DuckDB Labs](https://duckdblabs.com/).
+Community means that the extensions are created by external contributors and not maintained by [DuckLabs](https://ducklabs.com/).
 
 Extensions for DuckDB are the preferred way to package additional functionality for DuckDB. Generic extensions are documented in the [core DuckDB documentation]({% link docs/current/core_extensions/overview.md %}).
 

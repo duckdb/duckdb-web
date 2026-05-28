@@ -5,14 +5,15 @@ title: Quack on WebAssembly
 
 ## CloudFormation Stack
 
-We provide an example template for initializing a CloudFormation stack, based on pre-baked public AMI, based at the moment on Ubuntu that will:
-* via duckdb, install and load quack, create a randomized token, and do `quack_serve` on the 0.0.0.0:1294 port.
-* setup via nginx a proxy between 0.0.0.0:1294 and the incoming :443 port
+We provide an example template for initializing a CloudFormation stack, based on pre-baked public AMI, based on Ubuntu, which will:
+
+* via DuckDB, install and load Quack, create a randomized token, and do `quack_serve` on the `0.0.0.0:1294` port.
+* setup via nginx a proxy between `0.0.0.0:1294` and the incoming `:443` port
 * obtain a valid TLS certificate via Let's Encrypt
 
 All together, this allows to expose the local `0.0.0.0:1294` port to the public EC2 instance IP via HTTPS.
 
-The template is reachable at <https://duckdb-quack-ami.s3.us-east-1.amazonaws.com/quack.yaml>, and is backed by images for (at the moment) 8 regions:
+The template is reachable at <https://duckdb-quack-ami.s3.us-east-1.amazonaws.com/quack.yaml>, and is backed by images for (at the moment) eight regions:
 
 * `us-east-1`
 * `us-east-2`

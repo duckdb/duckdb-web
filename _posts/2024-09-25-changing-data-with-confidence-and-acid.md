@@ -29,7 +29,7 @@ CREATE TABLE customer (id INTEGER, name VARCHAR);
 CREATE TABLE orders (customer_id INTEGER, item VARCHAR);
 
 BEGIN TRANSACTION;
-INSERT INTO customer VALUES (42, 'DuckDB Labs');
+INSERT INTO customer VALUES (42, 'DuckLabs');
 INSERT INTO orders VALUES (42, 'stale bread');
 COMMIT;
 
@@ -81,7 +81,7 @@ We should also note that in DuckDB *schema changes are also transactional*. This
 ```sql
 CREATE TABLE customer (id INTEGER, name VARCHAR, PRIMARY KEY (id));
 
-INSERT INTO customer VALUES (42, 'DuckDB Labs');
+INSERT INTO customer VALUES (42, 'DuckLabs');
 INSERT INTO customer VALUES (42, 'Wilbur the Duck');
 ```
 
@@ -110,7 +110,7 @@ import duckdb
 con1 = duckdb.connect(":memory:mydb")
 con1.sql("CREATE TABLE customer (id INTEGER, name VARCHAR)")
 
-con1.sql("INSERT INTO customer VALUES (42, 'DuckDB Labs')")
+con1.sql("INSERT INTO customer VALUES (42, 'DuckLabs')")
 
 con1.begin()
 con1.sql("INSERT INTO customer VALUES (43, 'Wilbur the Duck')")
@@ -124,7 +124,7 @@ con2.sql("SELECT name FROM customer").show()
 # │    name     │
 # │   varchar   │
 # ├─────────────┤
-# │ DuckDB Labs │
+# │ DuckLabs │
 # └─────────────┘
 
 # commit from the first connection
@@ -137,7 +137,7 @@ con2.sql("SELECT name FROM customer").show()
 # │      name       │
 # │     varchar     │
 # ├─────────────────┤
-# │ DuckDB Labs     │
+# │ DuckLabs     │
 # │ Wilbur the Duck │
 # └─────────────────┘
 ```
@@ -157,7 +157,7 @@ import signal
 
 con = duckdb.connect("mydb.duckdb")
 con.sql("CREATE TABLE customer (id INTEGER, name VARCHAR)")
-con.sql("INSERT INTO customer VALUES (42, 'DuckDB Labs')")
+con.sql("INSERT INTO customer VALUES (42, 'DuckLabs')")
 
 # begin a transaction
 con.begin()
@@ -181,17 +181,17 @@ con.sql("SELECT name FROM customer").show()
 │    name     │
 │   varchar   │
 ├─────────────┤
-│ DuckDB Labs │
+│ DuckLabs │
 └─────────────┘
 ```
 
-In this example, we first create the customer table in the database file `mydb.duckdb`. We then insert a single row with DuckDB Labs as a first transaction. Then, we begin but *do not commit* a second transaction that adds the `Wilbur the Duck` entry. If we then kill the process and with it the database, we can see that upon restart only the `DuckDB Labs` entry has survived. This is because the second transaction was not committed and hence not subject to durability. Of course, this gets more complicated when non-clean exits such as operating system crashes have to be considered. DuckDB also guarantees durability in those circumstances, some more on this below.
+In this example, we first create the customer table in the database file `mydb.duckdb`. We then insert a single row with DuckLabs as a first transaction. Then, we begin but *do not commit* a second transaction that adds the `Wilbur the Duck` entry. If we then kill the process and with it the database, we can see that upon restart only the `DuckLabs` entry has survived. This is because the second transaction was not committed and hence not subject to durability. Of course, this gets more complicated when non-clean exits such as operating system crashes have to be considered. DuckDB also guarantees durability in those circumstances, some more on this below.
 
 ## Why ACID in OLAP?
 
 There are two main classes of data management systems, transactional systems (OLTP) and analytical systems (OLAP). As the name implies, transactional systems are far more concerned with guaranteeing the ACID properties than analytical ones. Systems like the venerable PostgreSQL deservedly pride themselves on doing the “right thing” with regard to providing transactional guarantees by default. Even NoSQL transactional systems such as MongoDB that swore off guaranteeing the ACID principles “for performance” early on had to eventually [“roll back” to offering ACID guarantees](https://www.mongodb.com/resources/basics/databases/acid-transactions) with [one or two hurdles along the way](https://jepsen.io/analyses/mongodb-4.2.6).
 
-Analytical systems such as DuckDB – in principle – have less of an imperative to provide strong transactional guarantees. They are often not the so-called “system of record”, which is the data management system that is considered the source truth. In fact, DuckDB offers various connectors to load data from systems of record, like the [PostgreSQL scanner]({% link docs/current/core_extensions/postgres.md %}). If an OLAP database would become corrupted, it is often possible to recover from that source of truth. Of course, that first requires that users notice that something has gone wrong, which is not always simple to detect. For example, a common mistake is ingesting data from the same CSV file twice into a database because the first attempt went wrong at some point. This can lead to duplicate rows causing incorrect aggregate results. ACID prevents these kinds of problems. ACID properties enable  useful functionality in OLAP systems. For example:
+Analytical systems such as DuckDB – in principle – have less of an imperative to provide strong transactional guarantees. They are often not the so-called “system of record”, which is the data management system that is considered the source truth. In fact, DuckDB offers various connectors to load data from systems of record, like the [PostgreSQL scanner]({% link docs/current/core_extensions/postgres/overview.md %}). If an OLAP database would become corrupted, it is often possible to recover from that source of truth. Of course, that first requires that users notice that something has gone wrong, which is not always simple to detect. For example, a common mistake is ingesting data from the same CSV file twice into a database because the first attempt went wrong at some point. This can lead to duplicate rows causing incorrect aggregate results. ACID prevents these kinds of problems. ACID properties enable  useful functionality in OLAP systems. For example:
 
 **Concurrent Ingestion and Reporting.** As change is continuous, we often have data ingestion streams adding new data to a database system. In analytical systems, it is common to have a single connection append new data to a database, while other connections read from the database in order to e.g., generate graphs and reports. If these connections are isolated, then the generated graphs and aggregates will always be executed over a complete and consistent snapshot of the database, ensuring that the generated graphs and aggregates are correct.
 

@@ -26,7 +26,7 @@ Currently, the following secret types are available:
 | `huggingface` | Hugging Face         | [`httpfs`]({% link docs/current/core_extensions/httpfs/hugging_face.md %})        |
 | `iceberg`     | Iceberg REST Catalog | [`httpfs`]({% link docs/current/core_extensions/httpfs/s3api.md %}), [`iceberg`]({% link docs/current/core_extensions/iceberg/iceberg_rest_catalogs.md %}) |
 | `mysql`       | MySQL                | [`mysql`]({% link docs/current/core_extensions/mysql.md %})                       |
-| `postgres`    | PostgreSQL           | [`postgres`]({% link docs/current/core_extensions/postgres.md %})                 |
+| `postgres`    | PostgreSQL           | [`postgres`]({% link docs/current/core_extensions/postgres/overview.md %})                 |
 | `quack`       | Quack                | [`quack`]({% link docs/current/core_extensions/quack.md %})                       |
 | `r2`          | Cloudflare R2        | [`httpfs`]({% link docs/current/core_extensions/httpfs/s3api.md %})               |
 | `s3`          | AWS S3               | [`httpfs`]({% link docs/current/core_extensions/httpfs/s3api.md %})               |

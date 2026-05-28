@@ -24,7 +24,7 @@ DuckDB supports concurrency within a single process according to the following r
 
 ### Multiple Processes
 
-Writing to DuckDB's native database format from multiple processes is supported through the [Quack remote protocol]({% link docs/current/quack/overview.md %}), which turns DuckDB into a client-server database. Quack in beta stage as of DuckDB v1.5.2, and is expected to become mature by [DuckDB v2.0 in autumn 2026]({% link release_calendar.md %}).
+Writing to DuckDB's native database format from multiple processes is supported through the [Quack remote protocol]({% link docs/current/quack/overview.md %}), which turns DuckDB into a client-server database. Quack in beta stage as of DuckDB v1.5.2, and is expected to become mature by [DuckDB v2.0 in fall 2026]({% link release_calendar.md %}).
 
 For a stable solution, consider using the [DuckLake](https://ducklake.select/) format with [PostgreSQL as the catalog database](https://ducklake.select/docs/stable/duckdb/usage/choosing_a_catalog_database#postgresql). By coordinating through a central PostgreSQL catalog, DuckDB instances can achieve concurrent read-writes on the same database. The DuckLake v1.0 specification and its DuckDB implementation, both intended for production use, were [published](https://ducklake.select/2026/04/13/ducklake-10/) in April 2026.
 

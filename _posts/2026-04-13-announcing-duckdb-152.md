@@ -30,7 +30,7 @@ The [Iceberg extension]({% link docs/current/core_extensions/iceberg/overview.md
 * Updates and deletes from [partitioned tables](https://iceberg.apache.org/docs/latest/partitioning/)
 * Truncate and bucket partitions
 
-Last week, DuckDB Labs engineer Tom Ebergen gave a talk at the [Iceberg Summit](https://www.icebergsummit.org/) titled [“Building DuckDB-Iceberg: Exploring the Iceberg Ecosystem”]({% link _library/2026-04-08-building-duckdb-iceberg-exploring-the-iceberg-ecosystem.md %}), where he shared his experiences with Iceberg.
+Last week, DuckLabs engineer Tom Ebergen gave a talk at the [Iceberg Summit](https://www.icebergsummit.org/) titled [“Building DuckDB-Iceberg: Exploring the Iceberg Ecosystem”]({% link _library/2026-04-08-building-duckdb-iceberg-exploring-the-iceberg-ecosystem.md %}), where he shared his experiences with Iceberg.
 
 ## Preliminary Jepsen Test Results
 
@@ -66,7 +66,7 @@ This quarter, we have quite a few exciting events lined up.
 
 **AI Council Talk.** On May 12, DuckDB co-creator Hannes Mühleisen will give a talk at AI Council 2026 titled [“Super-Secret Next Big Thing for DuckDB”]({% link _library/2026-05-12-super-secret-next-big-thing-for-duckdb.md %}). Well, at this point, we cannot tell you more than he will present the super-secret next big thing for DuckDB. But, if you cannot make it, don't worry: we'll publish the presentation afterwards.
 
-**Ubuntu Summit Talk.** We already talked about performance on Ubuntu. In late May, Gábor Szárnyas of DuckDB Labs will give a talk titled [“DuckDB: Not Quack Science”]({% link _library/2026-05-27-duckdb-not-quack-science.md %}) at the [Ubuntu Summit](https://ubuntu.com/summit).
+**Ubuntu Summit Talk.** We already talked about performance on Ubuntu. In late May, Gábor Szárnyas of DuckLabs will give a talk titled [“DuckDB: Not Quack Science”]({% link _library/2026-05-27-duckdb-not-quack-science.md %}) at the [Ubuntu Summit](https://ubuntu.com/summit).
 
 ## Conclusion
 
