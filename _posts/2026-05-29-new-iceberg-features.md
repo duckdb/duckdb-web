@@ -9,7 +9,7 @@ tags: ["deep dive"]
 ---
 
 Despite the work needed to develop the features needed for DuckLake v1.0 and Quack, the DuckDB Labs team is still hard at work on the [DuckDB-Iceberg extension]({% link docs/current/core_extensions/iceberg/overview.md %}).
-In this blog post, we will demo some of the features that are available in TODO: insert release url, many of which were ear marked for a future release in our last [Iceberg blog post]({% post_url 2025-11-28-iceberg-writes-in-duckdb %}) 
+In this blog post, we will demo some of the features that are available in [DuckDB v1.5.3]({% post_url 2026-05-20-announcing-duckdb-153 %}). Many of these features were ear marked for a future release in our last [Iceberg blog post]({% post_url 2025-11-28-iceberg-writes-in-duckdb %}) 
 
 
 ## Getting Started
