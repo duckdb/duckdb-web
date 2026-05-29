@@ -15,5 +15,5 @@ pill: "Dijkstra Award 2024"
 
 |-------|-------|
 | **Event** | [CWI Lectures & Dijkstra Fellowship 2024](https://www.cwi.nl/en/events/dijkstra-awards/cwi-lectures-dijkstra-fellowship/) |
-| **Speaker** | [Hannes Mühleisen (DuckDB Labs)](https://hannes.muehleisen.org/) |
+| **Speaker** | [Hannes Mühleisen (DuckLabs)](https://hannes.muehleisen.org/) |
 | **YouTube** | [Leaving the Two-Tier Architecture Behind](https://www.youtube.com/watch?v=H1N2Jr34jwU) |

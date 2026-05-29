@@ -266,7 +266,7 @@ Click here to see the twitchy movie generated from “Charade”:
 <img src="https://blobs.duckdb.org/data/movie-averages.gif" width="800" />
 </details>
 
-For some added fun, we could even write a SQL query that turns a frame into a HTML table with one-pixel fields. Below is the result, let's hope your browser can render this and let's thank Cloudflare again for [sponsoring our traffic]({% link foundation/index.html %}#technical-sponsors). Here is the somewhat unholy query to generate this:
+For some added fun, we could even write a SQL query that turns a frame into a HTML table with one-pixel fields. Below is the result, let's hope your browser can render this and let's thank Cloudflare again for [sponsoring our traffic](https://duckdb.foundation/#technical-sponsors). Here is the somewhat unholy query to generate this:
 
 ```sql
 SELECT '<html><body><table style="padding:0px; margin: 0px; border-collapse: collapse;">';

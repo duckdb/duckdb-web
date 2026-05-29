@@ -17,5 +17,5 @@ pill: "EuroPython 2023"
 
 |-------|-------|
 | **Event** | [EuroPython 2023](https://ep2023.europython.eu/) |
-| **Speaker** | [Pedro Holanda (DuckDB Labs)](https://www.pedroholanda.org/) |
+| **Speaker** | [Pedro Holanda (DuckLabs)](https://www.pedroholanda.org/) |
 | **YouTube** | [DuckDB: Bringing Analytical SQL Directly to Your Python Shell](https://www.youtube.com/watch?v=egN4TwVyJss) |

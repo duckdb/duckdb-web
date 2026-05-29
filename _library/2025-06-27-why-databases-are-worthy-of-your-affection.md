@@ -19,5 +19,5 @@ redirect_from:
 
 |-------|-------|
 | **Event** | [Joy of Coding](https://joyofcoding.org/) |
-| **Speaker** | [Hannes Mühleisen](https://hannes.muehleisen.org/) (DuckDB Labs) |
+| **Speaker** | [Hannes Mühleisen](https://hannes.muehleisen.org/) (DuckLabs) |
 | **YouTube** | [Why Databases are Worthy of Your Affection](https://www.youtube.com/watch?v=BnRlYKZExDc) |

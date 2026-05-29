@@ -141,7 +141,7 @@ We are happy to report that, since the survey was conducted pre-v1.0.0 and DuckD
 * Reading Delta Lake is now possible via the [`delta` extension]({% post_url 2024-06-10-delta %}).
 * Vector search is now supported via the [`vss` extension]({% post_url 2024-05-03-vector-similarity-search-vss %}).
 
-For the rest of the requested features, several ones are in the making at DuckDB Labs. Stay tuned!
+For the rest of the requested features, several ones are in the making at DuckLabs. Stay tuned!
 
 ## User Roles
 

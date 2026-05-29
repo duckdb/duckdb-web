@@ -126,7 +126,7 @@ You may also notice that starting with version 0.9 in September 2023, the perfor
 What is happening here?
 First, don't forget to zoom in!
 Over the last year, DuckDB has still improved over 3×!
-More recently, the DuckDB Labs team focused on scalability by developing algorithms that support larger-than-memory calculations.
+More recently, the DuckLabs team focused on scalability by developing algorithms that support larger-than-memory calculations.
 We will see the fruits of those labors in the scale section later on!
 In addition, DuckDB focused exclusively on bug fixes in versions 0.10.1, 0.10.2, and 0.10.3 in preparation for an especially robust DuckDB 1.0.
 Now that those two major milestones (larger than memory calculations and DuckDB 1.0) have been accomplished, performance improvements will resume!

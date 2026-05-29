@@ -1,5 +1,5 @@
 - name: Hannes Mühleisen
-  title: CEO of DuckDB Labs
+  title: CEO of DuckLabs
   image: /images/events/duckcon7/speakers/hannes_muhleisen.jpg
   url: "#"
 
@@ -9,7 +9,7 @@
   url: "#"
 
 - name: Gábor Szárnyas
-  title: Developer Advocate, DuckDB Labs
+  title: Developer Advocate, DuckLabs
   image: /images/events/duckcon7/speakers/gabor_szarnyas.jpg
   url: "#"
 
@@ -34,6 +34,6 @@
   url: "#"
 
 - name: Mark Raasveldt
-  title: CTO of DuckDB Labs
+  title: CTO of DuckLabs
   image: /images/events/duckcon7/speakers/mark_raasveldt.jpg
   url: "#"

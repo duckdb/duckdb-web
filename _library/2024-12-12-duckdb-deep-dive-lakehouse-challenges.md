@@ -16,6 +16,6 @@ redirect_from:
 </div>
 
 |-------|-------|
-| **Guest** | [Hannes Mühleisen (DuckDB Labs)](https://hannes.muehleisen.org/) |
+| **Guest** | [Hannes Mühleisen (DuckLabs)](https://hannes.muehleisen.org/) |
 | **Spotify** | [Listen on Spotify](https://open.spotify.com/show/3mcKitYGS4VMG2eHd2PfDN) |
 | **Apple Podcasts** | [Listen on Apple Podcasts](https://podcasts.apple.com/us/podcast/hannes-muhleisen-duckdb-deep-dive-the-challenges/id1676305617?i=1000680142303) |

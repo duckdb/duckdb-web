@@ -107,7 +107,7 @@ To show that it’s feasible to publish extensions, we reached out to a few deve
 | [scrooge](https://github.com/pdet/Scrooge-McDuck)                   | Supports a set of aggregation functions and data scanners for financial data.     |
 | [shellfs](https://github.com/rustyconover/duckdb-shellfs-extension) | Allows shell commands to be used for input and output.                            |
 
-DuckDB Labs and the DuckDB Foundation do not vet the code within community extensions and, therefore, cannot guarantee that DuckDB community extensions are safe to use. The loading of community extensions can be explicitly disabled with the following one-way configuration option:
+DuckLabs and the DuckDB Foundation do not vet the code within community extensions and, therefore, cannot guarantee that DuckDB community extensions are safe to use. The loading of community extensions can be explicitly disabled with the following one-way configuration option:
 
 ```sql
 SET allow_community_extensions = false;

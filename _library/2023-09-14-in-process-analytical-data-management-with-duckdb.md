@@ -19,5 +19,5 @@ redirect_from:
 
 |-------|-------|
 | **Event** | [PyData Amsterdam 2023](https://amsterdam.pydata.org/) |
-| **Guest** | [Hannes Mühleisen (DuckDB Labs)](https://hannes.muehleisen.org/) |
+| **Guest** | [Hannes Mühleisen (DuckLabs)](https://hannes.muehleisen.org/) |
 | **YouTube** | [In-Process Analytical Data Management with DuckDB](https://www.youtube.com/watch?v=5ddoZR6PYNU) |

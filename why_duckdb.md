@@ -46,7 +46,7 @@ User contributions are available as [community extensions]({% link community_ext
 
 ### Free
 
-DuckDB's development started while the main developers were public servants in the Netherlands. We see it as our responsibility and duty to society to make the results of our work freely available to anyone in the Netherlands or elsewhere. This is why DuckDB is released under the very permissive [MIT License](https://en.wikipedia.org/wiki/MIT_License) and the project's intellectual property is held by the [DuckDB Foundation]({% link foundation/index.html %}). We invite contributions from anyone provided they adhere to our [Code of Conduct]({% link code_of_conduct.md %}).
+DuckDB's development started while the main developers were public servants in the Netherlands. We see it as our responsibility and duty to society to make the results of our work freely available to anyone in the Netherlands or elsewhere. This is why DuckDB is released under the very permissive [MIT License](https://en.wikipedia.org/wiki/MIT_License) and the project's intellectual property is held by the [DuckDB Foundation](https://duckdb.foundation/). We invite contributions from anyone provided they adhere to our [Code of Conduct]({% link code_of_conduct.md %}).
 
 ### Thoroughly Tested
 

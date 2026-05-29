@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Mitschöpfer von DuckDB: „Es war klar, dass eine neue Architektur notwendig ist”"
-author: "Hannes Mühleisen (DuckDB Labs) and Golo Roden (heise online)"
+author: "Hannes Mühleisen (DuckLabs) and Golo Roden (heise online)"
 tags: ["Paper"]
 thirdparty: false
 excerpt: ""
@@ -14,4 +14,4 @@ pill: "heise.de"
 
 > This interview is in German.
 
-An interview with Hannes Mühleisen, CEO of DuckDB Labs and co-creator of DuckDB, discussing the database's origins as a research project at CWI Amsterdam, the architectural decisions that enable its performance on single machines, and its growing ecosystem across programming languages.
+An interview with Hannes Mühleisen, CEO of DuckLabs and co-creator of DuckDB, discussing the database's origins as a research project at CWI Amsterdam, the architectural decisions that enable its performance on single machines, and its growing ecosystem across programming languages.

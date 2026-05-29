@@ -55,6 +55,9 @@ SELECT CAST(3.5 AS INTEGER);  -- 4
 SELECT CAST(-1.7 AS INTEGER); -- -2
 ```
 
+The applicable rounding rules can be found on the [`NUMERIC type page`]({% link docs/current/sql/data_types/numeric.md %}#rounding).
+
+
 ### Overflows
 
 Casting operations that would result in a value overflow throw an error. For example, the value `999` is too large to be represented by the `TINYINT` data type. Therefore, an attempt to cast that value to that type results in a runtime error:

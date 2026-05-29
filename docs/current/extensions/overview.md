@@ -99,10 +99,10 @@ To see which extensions can be autoloaded, check the [core extensions list]({% l
 
 ### Community Extensions
 
-DuckDB supports installing third-party [community extensions]({% link community_extensions/index.md %}). For example, you can install the [`avro` community extension]({% link community_extensions/extensions/avro.md %}) via:
+DuckDB supports installing third-party [community extensions]({% link community_extensions/index.md %}). For example, you can install the [`tarfs` community extension]({% link community_extensions/extensions/tarfs.md %}) via:
 
 ```sql
-INSTALL avro FROM community;
+INSTALL tarfs FROM community;
 ```
 
 Community extensions are contributed by community members but they are built, [signed]({% link docs/current/extensions/extension_distribution.md %}#signed-extensions), and distributed in a centralized repository.

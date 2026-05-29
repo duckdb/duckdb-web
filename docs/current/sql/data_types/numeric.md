@@ -35,9 +35,9 @@ The type integer is the common choice, as it offers the best balance between ran
 ## Variable-Length Integers
 
 The previously mentioned integer types all have in common that the numbers in the minimum and maximum range all have the same storage size, `UTINYINT` is 1 byte, `SMALLINT` is 2 bytes, etc.
-But sometimes you need numbers that are even bigger than what is supported by a `HUGEINT`! In these situations, you can use the `BIGNUM` type, which stores positive numbers in a similar fashion as other integer types, but uses three additional bytes to store the required size and a sign bit. A number with `N` decimal digits requires approximately `0.415 * N + 3` bytes when stored in a `BIGNUM`. 
+But sometimes you need numbers that are even bigger than what is supported by a `HUGEINT`! In these situations, you can use the `BIGNUM` type, which stores positive numbers in a similar fashion as other integer types, but uses three additional bytes to store the required size and a sign bit. A number with `N` decimal digits requires approximately `0.415 * N + 3` bytes when stored in a `BIGNUM`.
 
-Unlike variable-length integer implementations in other systems, there are limits to `BIGNUM`: the maximal and minimal representable values are approximately `±4.27e20201778`. Those are numbers with 20,201,779 decimal digits and storing a single such number requires 8 megabytes. 
+Unlike variable-length integer implementations in other systems, there are limits to `BIGNUM`: the maximal and minimal representable values are approximately `±4.27e20201778`. Those are numbers with 20,201,779 decimal digits and storing a single such number requires 8 megabytes.
 
 ## Fixed-Point Decimals
 
@@ -133,6 +133,45 @@ SELECT uuid_extract_timestamp(uuidv7()) AS ts;
 | ts                        |
 | ------------------------- |
 | 2025-04-19 15:51:20.07+00 |
+
+## Rounding
+
+Casting from floating-point or fixed-point types to integers means that the source numbers are rounded.
+
+The following default rounding logic applies:
+
+* Casting from `FLOAT` and `DOUBLE` to integers of any size: round to the nearest integer, with ties (halfs) rounded to the nearest even number ([banker's rounding](https://en.wikipedia.org/wiki/Rounding#Rounding_half_to_even)).
+
+  ```sql
+  SELECT 2.5::FLOAT::INTEGER AS result;  -- round to even
+  ```
+
+  ```text
+  ┌────────┐
+  │ result │
+  │ int32  │
+  ├────────┤
+  │      2 │
+  └────────┘
+  ```
+
+* Casting from `DECIMAL` to integers of any size: round to the nearest integer, with ties (halfs) rounded away from zero.
+
+  ```sql
+  SELECT 2.5::DECIMAL::INTEGER AS result;  -- round away from zero
+  SELECT 2.5::INTEGER AS result;           -- number literals are treated as DECIMALs
+  ```
+
+  ```text
+  ┌────────┐
+  │ result │
+  │ int32  │
+  ├────────┤
+  │      3 │
+  └────────┘
+  ```
+
+If non-default rounding logic is required, functions like `ceil`, `floor`, `round` and `round_even` should be used.
 
 ## Functions
 

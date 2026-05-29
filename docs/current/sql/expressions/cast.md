@@ -54,6 +54,8 @@ Could not convert string 'hello' to INT32
 
 The exact behavior of the cast depends on the source and destination types. For example, when casting from `VARCHAR` to any other type, the string will be attempted to be converted.
 
+Casting between numeric types might have rounding implications. The applicable rounding rules can be found on the [`NUMERIC type page`]({% link docs/current/sql/data_types/numeric.md %}#rounding).
+
 ### `TRY_CAST`
 
 `TRY_CAST` can be used when the preferred behavior is not to throw an error, but instead to return a `NULL` value. `TRY_CAST` will never throw an error, and will instead return `NULL` if a cast is not possible.

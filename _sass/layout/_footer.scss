@@ -25,6 +25,35 @@ footer{
 					column-gap: 80px;
 			-ms-flex-wrap: wrap;
 				flex-wrap: wrap;
+			.footertop{
+				width: 100%;
+				display: flex;
+				justify-content: space-between;
+				align-items: flex-start;
+				gap: 60px;
+			}
+			.footerbrand{
+				flex-shrink: 0;
+				display: flex;
+				flex-direction: column;
+				gap: 20px;
+				.footertagline{
+					@include body-small;
+					color: var(--main-text-tertiary-color, #B2B2B2);
+					margin: 0;
+					max-width: 213px;
+					a{
+						color: inherit;
+						text-decoration: underline;
+						-webkit-transition: color .3s;
+						-o-transition: color .3s;
+						transition: color .3s;
+						&:hover{
+							color: $purple;
+						}
+					}
+				}
+			}
 			.footernavigation{
 				display: -webkit-box;
 				display: -ms-flexbox;
@@ -100,6 +129,9 @@ footer{
 			}
 			.footerlogo.duckdblabs_logo{
 				width: 188.18px;
+			}
+			.footerlogo.foundation_logo{
+				width: 263px;
 			}
 			img.duckdbfooter{
 				width: 140px;

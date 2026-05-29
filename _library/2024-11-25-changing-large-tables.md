@@ -19,5 +19,5 @@ redirect_from:
 
 |-------|-------|
 | **Event** | [Forward Data](https://www.forward-data-conference.com/en) |
-| **Speaker** | [Hannes Mühleisen (DuckDB Labs)](https://hannes.muehleisen.org/) |
+| **Speaker** | [Hannes Mühleisen (DuckLabs)](https://hannes.muehleisen.org/) |
 | **YouTube** | [Changing Large Tables](https://www.youtube.com/watch?v=1QSs5XY8Hvc) |

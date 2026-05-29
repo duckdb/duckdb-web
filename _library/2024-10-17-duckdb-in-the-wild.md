@@ -17,6 +17,6 @@ redirect_from:
 
 |-------|-------|
 | **Event** | [DuckDB Amsterdam Meetup #1]({% link _events/2024-10-17-duckdb-amsterdam-meetup-1.md %}) |
-| **Speaker** | Hannes Mühleisen (DuckDB Labs) |
+| **Speaker** | Hannes Mühleisen (DuckLabs) |
 | **Slide deck** | [Download](https://blobs.duckdb.org/slides/hannes-muehleisen-duckdb-in-the-wild-duckdb-amsterdam-meetup.pdf) |
 | **YouTube** | [DuckDB in the Wild](https://www.youtube.com/watch?v=NarcDUhHwQw) |

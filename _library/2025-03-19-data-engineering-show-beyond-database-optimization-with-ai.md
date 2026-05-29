@@ -17,7 +17,7 @@ redirect_from:
 
 |-------|-------|
 | **Podcast series** | [The Data Engineering Show](https://www.dataengineeringshow.com/) |
-| **Guest** | [Hannes Mühleisen (DuckDB Labs)](https://hannes.muehleisen.org/) |
+| **Guest** | [Hannes Mühleisen (DuckLabs)](https://hannes.muehleisen.org/) |
 | **Podcast site** | [Listen on the podcast site](https://www.dataengineeringshow.com/e/18pv9vz8-beyond-database-optimization-with-ai) |
 | **Spotify** | [Listen on Spotify](https://open.spotify.com/episode/2MkvDI6jo6mEkcHuUjhI0w) |
 | **Apple Podcasts** | [Listen on Apple Podcasts](https://podcasts.apple.com/us/podcast/beyond-database-optimization-with-ai/id1561927688?i=1000699859004) |

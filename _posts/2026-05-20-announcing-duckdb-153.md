@@ -4,7 +4,7 @@ title: "DuckDB 1.5.3: Not an Ordinary Patch Release"
 author: "The DuckDB team"
 thumb: "/images/blog/thumbs/duckdb-release-1-5-3.svg"
 image: "/images/blog/thumbs/duckdb-release-1-5-3.png"
-excerpt: "We are releasing DuckDB version v1.5.3. Despite being a “patch release”, it ships a ton of features through its extensions, starting with Quack, which is now available as a core extension, support for Quack in DuckLake, and several new features for Iceberg, AWS and HTTPS."
+excerpt: "We are releasing DuckDB version v1.5.3. While updates in DuckDB itself are limited bugfixes, the upgraded extensions shipped with v1.5.3 bring a ton of new features. These include the Quack client-server protocol, which is now available as a core extension, support for Quack in DuckLake, and several new features for Iceberg, AWS and HTTPS."
 tags: ["release"]
 ---
 
@@ -14,6 +14,9 @@ You can find the complete [release notes on GitHub](https://github.com/duckdb/du
 To install the new version, please visit the [installation page]({% link install/index.html %}).
 
 ## What's New
+
+While DuckDB v1.5.3 is a patch release, its extensions brings various new features.
+We list these below.
 
 ### Quack as a Core Extension
 
@@ -172,7 +175,7 @@ We have two events coming up in the next few weeks:
 
 **DuckCon #7.** On June 24, we'll host our next user conference, [DuckCon #7]({% link _events/2026-06-24-duckcon7.html %}), in Amsterdam's beautiful [Royal Tropical Institute](https://www.kit.nl/about-us/).
 
-**Ubuntu Summit Talk.** Next week, Gábor Szárnyas of DuckDB Labs will give a talk titled [“DuckDB: Not Quack Science”]({% link _library/2026-05-27-duckdb-not-quack-science.md %}) at the [Ubuntu Summit](https://ubuntu.com/summit). Yes, his talk will include the new [Quack](#quack-as-a-core-extension) protocol.
+**Ubuntu Summit Talk.** Next week, Gábor Szárnyas of DuckLabs will give a talk titled [“DuckDB: Not Quack Science”]({% link _library/2026-05-27-duckdb-not-quack-science.md %}) at the [Ubuntu Summit](https://ubuntu.com/summit). Yes, his talk will include the new [Quack](#quack-as-a-core-extension) protocol.
 
 ## Conclusion
 

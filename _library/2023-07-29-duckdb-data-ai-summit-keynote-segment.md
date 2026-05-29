@@ -19,5 +19,5 @@ redirect_from:
 
 |-------|-------|
 | **Event** | Data + AI Summit 2023 |
-| **Speaker** | [Hannes Mühleisen (DuckDB Labs)](https://hannes.muehleisen.org/) |
+| **Speaker** | [Hannes Mühleisen (DuckLabs)](https://hannes.muehleisen.org/) |
 | **YouTube** | [DuckDB keynote segment (Data + AI Summit)](https://www.youtube.com/watch?v=AKix55rQEUU) |

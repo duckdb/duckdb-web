@@ -17,6 +17,6 @@ pill: "Apache Iceberg Europe Community Meetup"
 
 |-------|-------|
 | **Event** | [Apache Iceberg Europe Community Meetup](https://luma.com/u042b0vw) |
-| **Speaker** | Tom Ebergen (DuckDB Labs) |
+| **Speaker** | Tom Ebergen (DuckLabs) |
 | **Slide deck** | [Download](https://blobs.duckdb.org/slides/tom-ebergen-duckdb-iceberg-london-meetup.pdf) |
 | **YouTube** | [Making Iceberg Easy with DuckDB-Iceberg](https://www.youtube.com/watch?v=kJkpVXxm7hA) |
