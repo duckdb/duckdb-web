@@ -103,7 +103,7 @@ This is a (non-exhaustive) list of the available log types in DuckDB.
 By default, DuckDB logs to an in-memory log storage (`memory`). DuckDB supports different types of log storage. Currently,
 the following log storage types are implemented in core DuckDB.
 
-| Log Storage | Description                                               |
+| Log storage | Description                                               |
 |-------------|-----------------------------------------------------------|
 | `memory`    | (default) Log to an in-memory buffer                      |
 | `stdout`    | Log to the stdout of the current process (in CSV format)  |
@@ -140,14 +140,14 @@ DuckDB's log storages can log in two ways: normalized vs. denormalized.
 In denormalized logging, the log context information is appended directly to each log entry, while in normalized logging
 the log entries are stored separately with context_ids referencing the context information.
 
-| Log Storage | Normalized   |
+| Log storage | Normalized   |
 |-------------|--------------|
 | `memory`    | yes          |
 | `file`      | configurable |
 | `stdout`    | no           |
 
-For file storage, you can switch between normalized and denormalized by providing a path ending in .csv (for normalized)
-or without .csv (for denormalized). For file logging, denormalized is generally recommended since this increases performance 
+For file storage, you can switch between normalized and denormalized by providing a path ending in `.csv` (for normalized)
+or without `.csv `(for denormalized). For file logging, denormalized is generally recommended since this increases performance 
 and reduces the total size of the logs. To configure normalization of `file` log storage:
 
 ```sql
@@ -180,7 +180,7 @@ CALL enable_logging(storage_buffer_size = 0);
 
 Note that the default buffer size is different for different log storages:
 
-| Log Storage | Default buffer size           |
+| Log storage | Default buffer size           |
 |-------------|-------------------------------|
 | `memory`    | `STANDARD_VECTOR_SIZE` (2048) |
 | `file`      | `STANDARD_VECTOR_SIZE` (2048) |
