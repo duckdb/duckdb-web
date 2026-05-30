@@ -322,5 +322,5 @@ You can use the following query to display the list of macros and table macros:
 
 ```sql
 SELECT schema_name, function_name, function_type, parameters
-FROM duckdb_function();
+FROM duckdb_functions();
 ```
