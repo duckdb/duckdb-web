@@ -55,7 +55,7 @@ ODBC extension is built using the version-independent DuckDB C API. The same bin
 Binaries with the most recent changes, that are published to the DuckDB nightly repository, can be installed the following way:
 
 ```sql
-INSTALL 'http://nightly-extensions.duckdb.org/v{{ site.current_duckdb_version }}/⟨platform⟩/odbc_scanner.duckdb_extension.gz';
+INSTALL 'http://nightly-extensions.duckdb.org/v1.2.0/⟨platform⟩/odbc_scanner.duckdb_extension.gz';
 ```
 
 > The URL with the version `1.2.0` in it should be used even if you are running later version of DuckDB.
@@ -74,7 +74,7 @@ Where the `⟨platform⟩`{:.language-sql .highlight} is one of:
 To update installed extension to the latest nightly version run:
 
 ```sql
-FORCE INSTALL 'http://nightly-extensions.duckdb.org/v{{ site.current_duckdb_version }}/⟨platform⟩/odbc_scanner.duckdb_extension.gz';
+FORCE INSTALL 'http://nightly-extensions.duckdb.org/v1.2.0/⟨platform⟩/odbc_scanner.duckdb_extension.gz';
 ```
 
 Installed version (commit ID) can be checked using the following query:
@@ -87,7 +87,7 @@ WHERE extension_name = 'odbc_scanner';
 To install a version built from a specific commit run:
 
 ```sql
-FORCE INSTALL 'http://nightly-extensions.duckdb.org/odbc_scanner/⟨7_character_commit_id⟩/{{ site.current_duckdb_version }}/⟨platform⟩/odbc_scanner.duckdb_extension.gz';
+FORCE INSTALL 'http://nightly-extensions.duckdb.org/odbc_scanner/⟨7_character_commit_id⟩/v1.2.0/⟨platform⟩/odbc_scanner.duckdb_extension.gz';
 ```
 
 ## Support Status of DBMS-Specific Types
