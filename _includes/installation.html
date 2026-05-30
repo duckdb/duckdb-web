@@ -109,14 +109,6 @@ brew install duckdb
 docker run --rm -it -v "$(pwd):/workspace" -w /workspace duckdb/duckdb
 {%- endhighlight -%}
 
-<h4>Installation via Pip (Beta)</h4>
-
-<p>You can install the DuckDB CLI client via <a href="https://pip.pypa.io/en/stable/">Python's pip</a>:</p>
-
-{%- highlight bash -%}
-pip install duckdb-cli
-{%- endhighlight -%}
-
 <h4>Direct Download</h4>
 {%- assign f = site.data.checksums_current.artifacts.cli.macos.x86_64.filename -%}
 <a href="https://install.duckdb.org/v{{ site.current_duckdb_version }}/{{ f }}" class="download-btn" download="{{ f }}" rel="noopener noreferrer">{{ f }}</a>
@@ -135,14 +127,6 @@ curl https://install.duckdb.org | DUCKDB_VERSION={{ site.lts_duckdb_version }} s
 {%- endhighlight -%}
 
 <div class="alternative">
-
-<h4>Installation via Pip (Beta)</h4>
-
-<p>You can install the DuckDB CLI client via <a href="https://pip.pypa.io/en/stable/">Python's pip</a>:</p>
-
-{%- highlight bash -%}
-pip install duckdb-cli=={{ site.lts_duckdb_version }}
-{%- endhighlight -%}
 
 <h4>Direct Download</h4>
 {%- assign f = site.data.checksums_lts.artifacts.cli.macos.x86_64.filename -%}
