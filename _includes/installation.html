@@ -147,14 +147,6 @@ curl https://install.duckdb.org | DUCKDB_VERSION={{ site.lts_duckdb_version }} s
 
 <div class="alternative">
 
-<h4>Installation via Pip (Beta)</h4>
-
-<p>You can install the DuckDB CLI client via <a href="https://pip.pypa.io/en/stable/">Python's pip</a>:</p>
-
-{%- highlight bash -%}
-pip install duckdb-cli
-{%- endhighlight -%}
-
 <h4>Docker Image</h4>
 {%- highlight bash -%}
 docker run --rm -it -v "$(pwd):/workspace" -w /workspace duckdb/duckdb
@@ -195,14 +187,6 @@ curl https://install.duckdb.org | DUCKDB_VERSION={{ site.lts_duckdb_version }} s
 {%- endhighlight -%}
 
 <div class="alternative">
-
-<h4>Installation via Pip (Beta)</h4>
-
-<p>You can install the DuckDB CLI client via <a href="https://pip.pypa.io/en/stable/">Python's pip</a>:</p>
-
-{%- highlight bash -%}
-pip install duckdb-cli=={{ site.lts_duckdb_version }}
-{%- endhighlight -%}
 
 <h4>Direct Downloads</h4>
 {%- assign f_x86 = site.data.checksums_lts.artifacts.cli.linux.x86_64.filename -%}
@@ -247,14 +231,6 @@ You can install the DuckDB CLI client with a script the Run menu or the Command 
 powershell -NoExit iex (iwr "https://install.duckdb.org/install.ps1").Content
 {%- endhighlight -%}
 
-<h4>Installation via Pip (Beta)</h4>
-
-<p>You can install the DuckDB CLI client via <a href="https://pip.pypa.io/en/stable/">Python's pip</a>:</p>
-
-{%- highlight bash -%}
-pip install duckdb-cli
-{%- endhighlight -%}
-
 <h4>Docker Image (for WSL2)</h4>
 
 {%- highlight bash -%}
@@ -288,14 +264,6 @@ docker run --rm -it -v "$(pwd):/workspace" -w /workspace duckdb/duckdb
 
 {%- highlight bash -%}
 winget install DuckDB.cli --version {{ site.lts_duckdb_version }}
-{%- endhighlight -%}
-
-<h4>Installation via Pip (Beta)</h4>
-
-<p>You can install the DuckDB CLI client via <a href="https://pip.pypa.io/en/stable/">Python's pip</a>:</p>
-
-{%- highlight bash -%}
-pip install duckdb-cli
 {%- endhighlight -%}
 
 <h4>Docker Image (for WSL2)</h4>
