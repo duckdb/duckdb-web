@@ -3,7 +3,7 @@ layout: post
 title: "DuckDB: Not Quack Science"
 author: Gábor Szárnyas
 tags: ["Talk"]
-length: "45 min"
+length: "35 min"
 thirdparty: false
 excerpt: ""
 pill: "Ubuntu Summit 2026"
