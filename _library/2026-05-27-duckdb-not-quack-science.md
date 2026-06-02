@@ -9,10 +9,14 @@ excerpt: ""
 pill: "Ubuntu Summit 2026"
 ---
 
+<div class="video-container">
+<iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/q6S0Vv4u3iM?si=v31mwj6YTKybu-lt" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+</div>
+
 |-------|-------|
 | **Event** | [Ubuntu Summit 2026](https://ubuntu.com/summit) |
 | **Slides** | [Download](http://blobs.duckdb.org/slides/duckdb-ubuntu-summit-2026.pdf) |
-| **YouTube** | _coming soon_ |
+| **YouTube** | [DuckDB: Not Quack Science](https://www.youtube.com/watch?v=q6S0Vv4u3iM) |
 
 ## Abstract
 
