@@ -15,4 +15,4 @@ pill: "PyData Yerevan 2023"
 |-------|-------|
 | **Event** | [PyData Yerevan 2023](https://www.meetup.com/pydata-yerevan/events/296531182/) |
 | **Speaker** | [Gábor Szárnyas (DuckLabs)](https://szarnyasg.org/) |
-| **YouTube** | [DuckDB: The Power of a Data Warehouse in your Python Process](https://www.youtube.com/watch?v=q_SKaOeRiOI) |
+| **YouTube** | [DuckDB: The Power of a Data Warehouse in Your Python Process](https://www.youtube.com/watch?v=q_SKaOeRiOI) |
