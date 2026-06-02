@@ -329,6 +329,7 @@ The below options are applicable when writing CSV files.
 | `COMPRESSION` | The compression type for the file. By default this will be detected automatically from the file extension (e.g., `file.csv.gz` will use `gzip`, `file.csv.zst` will use `zstd`, and `file.csv` will use `none`). Options are `none`, `gzip`, `zstd`. | `VARCHAR` | `auto` |
 | `DATEFORMAT` | Specifies the date format to use when writing dates. See [Date Format]({% link docs/current/sql/functions/dateformat.md %}). | `VARCHAR` | (empty) |
 | `DELIM` or `SEP` | The character that is written to separate columns within each row. | `VARCHAR` | `,` |
+| `NEW_LINE` | The character that is written to separate each row. Use escaped strings, e.g. `E'\x1e'` | `VARCHAR` | `\n` |
 | `ESCAPE` | The character that should appear before a character that matches the `quote` value. | `VARCHAR` | `"` |
 | `FORCE_QUOTE` | The list of columns to always add quotes to, even if not required. | `VARCHAR[]` | `[]` |
 | `HEADER` | Whether or not to write a header for the CSV file. | `BOOL` | `true` |
