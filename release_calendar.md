@@ -41,8 +41,6 @@ _There are no upcoming releases announced at the moment. Please check back later
 
 <!-- markdownlint-enable MD055 MD056 MD058 -->
 
-There is no set date yet for the release of DuckDB v1.4.5. We will select the date as necessitated by the issues filed for the DuckDB v1.4.x line. If we encounter a critical issue or vulnerability, we will expedite the release of v1.4.5.
-
 For planned new features, see the [DuckDB Development Roadmap]({% link roadmap.md %}).
 
 ### LTS Releases
