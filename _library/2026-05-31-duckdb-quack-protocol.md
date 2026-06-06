@@ -4,6 +4,7 @@ title: "DuckDB Quack: Client/Server Protocol over HTTP for Multi-User Analytics"
 author: "Renato Losio (InfoQ)"
 tags: ["Paper"]
 thirdparty: true
+category: community
 excerpt: ""
 pill: "infoq.com"
 ---

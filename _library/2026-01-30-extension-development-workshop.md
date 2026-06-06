@@ -5,6 +5,7 @@ author: "Rusty Conover"
 tags: ["Talk"]
 thirdparty: true
 highlighted: true
+category: community
 excerpt: ""
 pill: "DuckDB Developer Meeting #1"
 ---
