@@ -29,6 +29,11 @@ jobs:
         unzip generated_md.zip
         cp build/docs/*.md community_extensions/extensions/.
         cp build/docs/extensions_list.md.tmp _includes/list_of_community_extensions.md
+        # Refresh the published static CSV (served at
+        # https://duckdb.org/community_extensions/community_extensions.csv).
+        # It is committed to this repo, so it must be regenerated here too;
+        # the "git add --all community_extensions" below stages it.
+        cp build/docs/community_extensions.csv community_extensions/community_extensions.csv
         rm -r generated_md.zip
         rm -rf build
 
