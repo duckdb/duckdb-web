@@ -147,6 +147,9 @@ LOAD {{ page.extension.name }};
 | function_name | function_type | description | comment | examples |
 |---------------|---------------|-------------|---------|----------|
 | read_dicom    | table         | NULL        | NULL    |          |
+| tag_element   | scalar        | NULL        | NULL    |          |
+| tag_group     | scalar        | NULL        | NULL    |          |
+| tag_name      | scalar        | NULL        | NULL    |          |
 
 ### Overloaded Functions
 
@@ -158,7 +161,9 @@ This extension does not add any function overloads.
 
 <div class="extension_types_table"></div>
 
-This extension does not add any types.
+| type_name | type_size | logical_type | type_category | internal |
+|-----------|----------:|--------------|---------------|----------|
+| DICOM_TAG | 0         | STRUCT       | COMPOSITE     | true     |
 
 ### Added Settings
 

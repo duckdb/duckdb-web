@@ -209,6 +209,15 @@ LOAD {{ page.extension.name }};
 | finetype_unpack   | scalar        | NULL        | NULL    |          |
 | finetype_validate | scalar        | NULL        | NULL    |          |
 | finetype_version  | scalar        | NULL        | NULL    |          |
+| ft_cast           | scalar        | NULL        | NULL    |          |
+| ft_detail         | scalar        | NULL        | NULL    |          |
+| ft_infer          | scalar        | NULL        | NULL    |          |
+| ft_profile        | scalar        | NULL        | NULL    |          |
+| ft_profile        | table_macro   | NULL        | NULL    |          |
+| ft_unpack         | scalar        | NULL        | NULL    |          |
+| ft_validate       | table_macro   | NULL        | NULL    |          |
+| ft_validate_text  | scalar        | NULL        | NULL    |          |
+| ft_version        | scalar        | NULL        | NULL    |          |
 
 ### Overloaded Functions
 
