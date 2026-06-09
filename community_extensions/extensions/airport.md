@@ -24,12 +24,12 @@ extension:
 repo:
   andium: 3c12d74372ff8e7f5b4577da7dce3c36aca0bb6f
   github: query-farm/airport
-  ref: 8c0fcc5bc4de866c2ae7b20069db0e2fb06f6d86
+  ref: c9ef8421e60b1096c0567945cc59a62e31f3b3d0
 
-extension_star_count: 332
-extension_star_count_pretty: 332
-extension_download_count: 820
-extension_download_count_pretty: 820
+extension_star_count: 339
+extension_star_count_pretty: 339
+extension_download_count: 689
+extension_download_count_pretty: 689
 image: '/images/community_extensions/social_preview/preview_community_extension_airport.png'
 layout: community_extension_doc
 ---
@@ -55,14 +55,17 @@ LOAD {{ page.extension.name }};
 
 <div class="extension_functions_table"></div>
 
-|    function_name    | function_type | description | comment | examples |
-|---------------------|---------------|-------------|---------|----------|
-| airport_action      | table         | NULL        | NULL    |          |
-| airport_databases   | table_macro   | NULL        | NULL    |          |
-| airport_flights     | table         | NULL        | NULL    |          |
-| airport_take_flight | table         | NULL        | NULL    |          |
-| airport_user_agent  | scalar        | NULL        | NULL    |          |
-| airport_version     | scalar        | NULL        | NULL    |          |
+|    function_name    | function_type |                                       description                                        | comment |                                    examples                                    |
+|---------------------|---------------|------------------------------------------------------------------------------------------|---------|--------------------------------------------------------------------------------|
+| airport_action      | table         | Execute an Arrow Flight action on a server with a parameter.                             | NULL    | [SELECT * FROM airport_action('grpc://localhost:8815', 'my_action', 'param');] |
+| airport_action      | table         | Execute an Arrow Flight action on a server.                                              | NULL    | [SELECT * FROM airport_action('grpc://localhost:8815', 'my_action');]          |
+| airport_databases   | table_macro   | NULL                                                                                     | NULL    |                                                                                |
+| airport_flights     | table         | List the flights available on an Arrow Flight server, filtered by criteria.              | NULL    | [SELECT * FROM airport_flights('grpc://localhost:8815', '');]                  |
+| airport_flights     | table         | List the flights available on an Arrow Flight server.                                    | NULL    | [SELECT * FROM airport_flights('grpc://localhost:8815');]                      |
+| airport_take_flight | table         | Read an Arrow Flight stream from a server using a flight descriptor (path or command).   | NULL    | [SELECT * FROM airport_take_flight('grpc://localhost:8815', ['my_table']);]    |
+| airport_take_flight | table         | Read an Arrow Flight stream from a server using internal pointers (used by the catalog). | NULL    |                                                                                |
+| airport_user_agent  | scalar        | NULL                                                                                     | NULL    |                                                                                |
+| airport_version     | scalar        | NULL                                                                                     | NULL    |                                                                                |
 
 ### Overloaded Functions
 

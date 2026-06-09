@@ -8,7 +8,7 @@ excerpt: |
 extension:
   name: us_address_standardizer
   description: US address parsing and standardization (PAGC + Rust addrust)
-  version: 0.2.0
+  version: 0.2.1
   language: C/Rust
   build: cmake
   license: MIT
@@ -20,7 +20,7 @@ extension:
 
 repo:
   github: ericmanning/duckdb-address-standardizer
-  ref: 8da70a76d3ade131a094a0e746aa5d06605e3f80
+  ref: 3421cf7326ce60e16feb932a801a62a483909c4b
 
 docs:
   hello_world: |
@@ -46,8 +46,8 @@ docs:
 
 extension_star_count: 3
 extension_star_count_pretty: 3
-extension_download_count: 459
-extension_download_count_pretty: 459
+extension_download_count: 523
+extension_download_count_pretty: 523
 image: '/images/community_extensions/social_preview/preview_community_extension_us_address_standardizer.png'
 layout: community_extension_doc
 ---

@@ -8,19 +8,18 @@ excerpt: |
 extension:
   name: cache_httpfs
   description: Read cached filesystem for httpfs
-  version: 0.13.5
+  version: 0.14.0
   language: C++
   build: cmake
   license: MIT
-  excluded_platforms: "wasm_mvp;wasm_eh;wasm_threads;windows_amd64_rtools;windows_amd64;windows_amd64_mingw"
+  excluded_platforms: "wasm_mvp;wasm_eh;wasm_threads"
   maintainers:
     - dentiny
     - DouEnergy
 
 repo:
   github: dentiny/duck-read-cache-fs
-  andium: d3618a6fd8654db431f0f357cd08c89035411ad6
-  ref: 9abd76f61524bd3d0266600eaadebd687cdfd12b
+  ref: e39e73c1e6ab0fbf823887ad31063cab7fc52e21
 
 docs:
   hello_world: |
@@ -37,10 +36,10 @@ docs:
     - Exposes function to get cache size and cleanup cache
     - Provides an option to disable / enable cache, which could act as a drop-in replacement for httpfs
 
-extension_star_count: 140
-extension_star_count_pretty: 140
-extension_download_count: 30157
-extension_download_count_pretty: 30.2k
+extension_star_count: 141
+extension_star_count_pretty: 141
+extension_download_count: 41025
+extension_download_count_pretty: 41.0k
 image: '/images/community_extensions/social_preview/preview_community_extension_cache_httpfs.png'
 layout: community_extension_doc
 ---
@@ -125,6 +124,7 @@ This extension does not add any types.
 | cache_httpfs_glob_cache_entry_timeout_millisec            | Cache entry timeout in milliseconds for glob cache.                                                                                                                                                                                                                                                                                                                                             | UBIGINT    | GLOBAL | []      |
 | cache_httpfs_ignore_sigpipe                               | Whether to ignore SIGPIPE for the extension. By default not ignored. Once ignored, it cannot be reverted.                                                                                                                                                                                                                                                                                       | BOOLEAN    | GLOBAL | []      |
 | cache_httpfs_in_mem_cache_block_timeout_millisec          | Data block cache entry timeout in milliseconds.                                                                                                                                                                                                                                                                                                                                                 | UBIGINT    | GLOBAL | []      |
+| cache_httpfs_in_mem_cache_storage                         | Storage backend for in-memory data block cache. 'extension' (default) uses an extension-managed LRU bounded by `cache_httpfs_max_in_mem_cache_block_count` and `cache_httpfs_in_mem_cache_block_timeout_millisec`. 'object_cache' parks blocks in DuckDB's per-instance ObjectCache. Must be set before any cache access for the change to take effect.                                         | VARCHAR    | GLOBAL | []      |
 | cache_httpfs_max_fanout_subrequest                        | Cached httpfs performs parallel request by splittng them into small request, with request size decided by config [cache_httpfs_cache_block_size]. The setting limits the maximum request to issue for a single filesystem read request. 0 means no limit, by default we set no limit.                                                                                                           | BIGINT     | GLOBAL | []      |
 | cache_httpfs_max_in_mem_cache_block_count                 | Max in-memory cache block count for in-memory caches for all cache filesystems, so users are able to configure the maximum memory consumption. It's worth noting it should be set only once before all filesystem access, otherwise there's no affect.                                                                                                                                          | UBIGINT    | GLOBAL | []      |
 | cache_httpfs_metadata_cache_entry_size                    | Max cache size for metadata LRU cache.                                                                                                                                                                                                                                                                                                                                                          | UBIGINT    | GLOBAL | []      |

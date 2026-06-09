@@ -43,10 +43,10 @@ docs:
 
     All functions accept an optional `language` argument (e.g. `'en'`, `'sl'`). Table IDs can be passed with or without the `.px` suffix. Data is fetched live from the official API. For reproducible results, materialize a snapshot into a local table.
 
-extension_star_count: 2
-extension_star_count_pretty: 2
-extension_download_count: 695
-extension_download_count_pretty: 695
+extension_star_count: 3
+extension_star_count_pretty: 3
+extension_download_count: 504
+extension_download_count_pretty: 504
 image: '/images/community_extensions/social_preview/preview_community_extension_sistat.png'
 layout: community_extension_doc
 ---

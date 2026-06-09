@@ -8,20 +8,20 @@ excerpt: |
 extension:
   name: miint
   description: Bioinformatics extension for microbiome research - read/write FASTQ, SAM/BAM, BIOM, GFF, Newick trees, query NCBI, and more.
-  version: '1.0.0-rc.3'
+  version: '1.0.0-rc.4'
   language: C++
   build: cmake
   license: BSD-3-Clause
-  excluded_platforms: "windows_amd64;windows_amd64_rtools"
+  excluded_platforms: "windows_amd64;windows_amd64_rtools;osx_amd64"
   maintainers:
     - wasade
   requires:
-    duckdb: "1.5.2"
-  requires_toolchains: rust
+    duckdb: "1.5.3"
+  requires_toolchains: "rust;omp"
 
 repo:
   github: the-miint/duckdb-miint
-  ref: 05bb99d7ac174e41b15cee5143cf7cf25cd6d4e9
+  ref: 1f5b77301c6d4130bb2660c5f9684d1d6afd2a4f
 
 docs:
   hello_world: |
@@ -50,15 +50,40 @@ docs:
     - `read_gff`: GFF3 annotation files
     - `read_newick`: Phylogenetic trees
     - `read_jplace`: Phylogenetic placements
+    - `read_mzml`: mzML files
+    - `read_mzxml`: mzXML files
 
     **Query NCBI directly:**
     - `read_ncbi`: Fetch sequence metadata by accession
     - `read_ncbi_fasta`: Fetch sequences from NCBI
     - `read_ncbi_annotation`: Fetch feature annotations from NCBI
 
+    **Query and submit to ENA:**
+    - `read_ena`: Fetch accession level detail (BioProject, BioSample, etc)
+    - `read_ena_attributes`: Fetch full deposited attributes (BioProject, BioSample, etc)
+    - `read_ena_sequences`: Fetch sequence data (BioProject, BioSample, etc)
+    - Complete submission and submission lifecycle management support, see docs
+
     **Alignment with SQL:**
     - `align_minimap2`: Align sequences using minimap2
     - `align_bowtie2`: Align sequences using bowtie2
+    - `align_mafft`: Align with MAFFT (parttree)
+    - `align_sortmerna`: Align with SortMeRNA
+    - `align_wfa2`: WFA2 pairwise alignment
+
+    **Sequence search, clustering, chimera checking, partitioning:**
+    - `search_sequences_vsearch`: Search a database of sequences with VSEARCH
+    - `cluster_sequences_vsearch`: De novo sequence clustering with VSEARCH
+    - `detect_chimera_uchime_denovo`: De novo chimera detection with VSEARCH
+    - `detect_chimera_uchime`: Reference based chimera detection with VSEARCH
+    - `rype_classify`: RY minimizer read partitioning
+
+    **Phylogeny estimation:**
+    - `phylogeny_fasttree`: Estimate a phylogeny with FastTree
+    - `tree_resolve_placement`: Fully resolve placements
+
+    **Mass spectrometry:**
+    - `massql`: A complete MassQL implementation
 
     **Write to standard formats:**
     - `COPY ... FORMAT FASTQ/FASTA`: Export sequences
@@ -71,13 +96,16 @@ docs:
     - Sequence identity calculation (`alignment_seq_identity`)
     - Interval compression (`compress_intervals`)
     - Woltka OGU classification (`woltka_ogu`, `woltka_ogu_per_sample`)
+    - Deblur amplicon denoising (`deblur`)
+    - UniFrac (PCoA, PERMANOVA) (`unifrac_pcoa`, `unifrac_permanova`)
+    - Faith Phylogenetic diversity (`unifrac_faith_pd`)
 
     See the [documentation](https://github.com/the-miint/duckdb-miint) for complete details.
 
 extension_star_count: 5
 extension_star_count_pretty: 5
-extension_download_count: 934
-extension_download_count_pretty: 934
+extension_download_count: 636
+extension_download_count_pretty: 636
 image: '/images/community_extensions/social_preview/preview_community_extension_miint.png'
 layout: community_extension_doc
 ---
@@ -143,8 +171,6 @@ LOAD {{ page.extension.name }};
 | alignment_is_duplicate           | scalar        | Test if read is PCR/optical duplicate (SAM flag 0x400).                                                                                                       | Also available as is_dup                                | [SELECT * FROM read_alignments('a.bam') WHERE NOT alignment_is_duplicate(flags);]                                 |
 | alignment_is_supplementary       | scalar        | Test if alignment is supplementary (SAM flag 0x800).                                                                                                          | Also available as is_supplementary                      | [SELECT * FROM read_alignments('a.bam') WHERE NOT alignment_is_supplementary(flags);]                             |
 | alignment_seq_identity           | scalar        | Calculate sequence identity between read and reference. Supports gap_compressed (default), gap_excluded, and blast methods.                                   | NULL                                                    | [SELECT alignment_seq_identity(cigar, tag_nm, tag_md) FROM read_alignments('a.bam');]                             |
-| alignment_query_length           | scalar        | Calculate total query length from a CIGAR string. Optionally includes hard-clipped bases.                                                                     | NULL                                                    | [SELECT alignment_query_length(cigar) FROM read_alignments('a.bam');]                                             |
-| alignment_query_coverage         | scalar        | Calculate proportion of query bases covered by alignment. Supports 'aligned' (default) and 'mapped' types.                                                    | NULL                                                    | [SELECT alignment_query_coverage(cigar) FROM read_alignments('a.bam');]                                           |
 | align_pairwise_score             | scalar        | Compute gap-affine pairwise alignment score using WFA2. Returns integer score (0 = identical).                                                                | Default penalties: mismatch=4, gap_open=6, gap_extend=2 | [SELECT align_pairwise_score('ACGT', 'ACAT');]                                                                    |
 | align_pairwise_cigar             | scalar        | Compute pairwise alignment score and extended CIGAR string using WFA2. Returns STRUCT(score, cigar).                                                          | Default penalties: mismatch=4, gap_open=6, gap_extend=2 | [SELECT (align_pairwise_cigar('ACGT', 'ACAT')).cigar;]                                                            |
 | align_pairwise_full              | scalar        | Compute pairwise alignment with score, CIGAR, and aligned sequences using WFA2. Returns STRUCT(score, cigar, query_aligned, subject_aligned).                 | Default penalties: mismatch=4, gap_open=6, gap_extend=2 | [SELECT align_pairwise_full('ACGT', 'AGT');]                                                                      |
@@ -191,37 +217,65 @@ LOAD {{ page.extension.name }};
 | mzml_i_norm                      | macro         | Max-normalize an intensity array by base peak intensity.                                                                                                      | Macro                                                   | [SELECT mzml_i_norm(intensity_array, base_peak_intensity) FROM read_mzml('s.mzML');]                              |
 | mzml_i_tic_norm                  | macro         | TIC-normalize an intensity array by total ion current.                                                                                                        | Macro                                                   | [SELECT mzml_i_tic_norm(intensity_array, total_ion_current) FROM read_mzml('s.mzML');]                            |
 | parse_gff_attributes             | macro         | Parse a GFF3 attribute string (semicolon-delimited key=value pairs) into a DuckDB MAP.                                                                        | Macro - helper for read_gff                             | [SELECT parse_gff_attributes('ID=gene1;Name=foo');]                                                               |
-| woltka_ogu_per_sample            | table_macro   | Compute Woltka OGU counts over alignment data for multiple samples. Accounts for multi-mapped reads.                                                          | Macro - do not quote parameters                         | [SELECT * FROM woltka_ogu_per_sample(alignments, sample_id, read_id);]                                            |
-| woltka_ogu                       | table_macro   | Compute Woltka OGU counts over alignment data for a single sample. Accounts for multi-mapped reads.                                                           | Macro - do not quote parameters                         | [SELECT * FROM woltka_ogu(alignments, read_id);]                                                                  |
+| woltka_ogu                       | table         | Compute Woltka OGU counts over alignment data for a single sample. Accounts for multi-mapped reads.                                                           | Macro - do not quote parameters                         | [SELECT * FROM woltka_ogu(alignments, read_id);]                                                                  |
 | genome_coverage                  | table_macro   | Compute genome coverage from alignment data. Compresses intervals per contig, maps to genomes, and returns proportion covered.                                | Macro - do not quote parameters                         | [SELECT * FROM genome_coverage(alignments, genome_lengths, contig_to_genome);]                                    |
 | bowtie2_available                | scalar        | Check if the bowtie2 binary is available in PATH.                                                                                                             | Returns false in non-bowtie2 builds                     | [SELECT bowtie2_available();]                                                                                     |
 | miint_version                    | scalar        | Return the MIINT extension version string.                                                                                                                    | NULL                                                    | [SELECT miint_version();]                                                                                         |
 | miint_versions                   | table         | Return a table of dependency library versions (htslib, minimap2, WFA2-lib, etc.).                                                                             | NULL                                                    | [SELECT * FROM miint_versions();]                                                                                 |
+| align_sortmerna                  | table         | NULL                                                                                                                                                          | NULL                                                    | NULL                                                                                                              |
+| ena_cancel                       | table         | NULL                                                                                                                                                          | NULL                                                    | NULL                                                                                                              |
+| ena_modify_run                   | table         | NULL                                                                                                                                                          | NULL                                                    | NULL                                                                                                              |
+| install_gpl_boundary             | scalar        | NULL                                                                                                                                                          | NULL                                                    | NULL                                                                                                              |
 | mask_dust                        | scalar        | NULL                                                                                                                                                          | NULL                                                    | NULL                                                                                                              |
+| cigar_query_coverage             | scalar        | NULL                                                                                                                                                          | NULL                                                    | NULL                                                                                                              |
 | detect_chimera_uchime_denovo     | table         | NULL                                                                                                                                                          | NULL                                                    | NULL                                                                                                              |
+| trim_quality_5p                  | scalar        | NULL                                                                                                                                                          | NULL                                                    | NULL                                                                                                              |
 | alignment_slice                  | table         | NULL                                                                                                                                                          | NULL                                                    | NULL                                                                                                              |
 | compute_coverage_depth           | aggregate     | NULL                                                                                                                                                          | NULL                                                    | NULL                                                                                                              |
+| ena_modify_experiment            | table         | NULL                                                                                                                                                          | NULL                                                    | NULL                                                                                                              |
+| phylogeny_fasttree               | table         | NULL                                                                                                                                                          | NULL                                                    | NULL                                                                                                              |
 | is_unmapped                      | scalar        | NULL                                                                                                                                                          | NULL                                                    | NULL                                                                                                              |
+| miint_warnings                   | table_macro   | NULL                                                                                                                                                          | NULL                                                    | NULL                                                                                                              |
 | read_ena_sequences               | table         | NULL                                                                                                                                                          | NULL                                                    | NULL                                                                                                              |
+| trim_adapters                    | scalar        | NULL                                                                                                                                                          | NULL                                                    | NULL                                                                                                              |
+| cigar_sequence_identity          | scalar        | NULL                                                                                                                                                          | NULL                                                    | NULL                                                                                                              |
+| ena_modify_sample                | table         | NULL                                                                                                                                                          | NULL                                                    | NULL                                                                                                              |
+| ena_searchable_fields            | table         | NULL                                                                                                                                                          | NULL                                                    | NULL                                                                                                              |
 | is_reverse                       | scalar        | NULL                                                                                                                                                          | NULL                                                    | NULL                                                                                                              |
 | is_dup                           | scalar        | NULL                                                                                                                                                          | NULL                                                    | NULL                                                                                                              |
 | search_sequences_vsearch         | table         | NULL                                                                                                                                                          | NULL                                                    | NULL                                                                                                              |
+| trim_polyx                       | scalar        | NULL                                                                                                                                                          | NULL                                                    | NULL                                                                                                              |
+| ena_upload_reads                 | table         | NULL                                                                                                                                                          | NULL                                                    | NULL                                                                                                              |
 | is_qcfail                        | scalar        | NULL                                                                                                                                                          | NULL                                                    | NULL                                                                                                              |
 | is_read1                         | scalar        | NULL                                                                                                                                                          | NULL                                                    | NULL                                                                                                              |
 | is_read2                         | scalar        | NULL                                                                                                                                                          | NULL                                                    | NULL                                                                                                              |
+| ena_hold                         | table         | NULL                                                                                                                                                          | NULL                                                    | NULL                                                                                                              |
+| ena_release                      | table         | NULL                                                                                                                                                          | NULL                                                    | NULL                                                                                                              |
 | is_secondary                     | scalar        | NULL                                                                                                                                                          | NULL                                                    | NULL                                                                                                              |
 | read_ena_attributes              | table         | NULL                                                                                                                                                          | NULL                                                    | NULL                                                                                                              |
 | read_jplace_newick               | table         | NULL                                                                                                                                                          | NULL                                                    | NULL                                                                                                              |
+| trim_quality_sliding             | scalar        | NULL                                                                                                                                                          | NULL                                                    | NULL                                                                                                              |
+| unifrac_permanova                | table         | NULL                                                                                                                                                          | NULL                                                    | NULL                                                                                                              |
+| ena_modify_project               | table         | NULL                                                                                                                                                          | NULL                                                    | NULL                                                                                                              |
 | merge_pairs_vsearch              | scalar        | NULL                                                                                                                                                          | NULL                                                    | NULL                                                                                                              |
+| trim_polyg                       | scalar        | NULL                                                                                                                                                          | NULL                                                    | NULL                                                                                                              |
 | cluster_sequences_vsearch        | table         | NULL                                                                                                                                                          | NULL                                                    | NULL                                                                                                              |
 | detect_chimera_uchime            | table         | NULL                                                                                                                                                          | NULL                                                    | NULL                                                                                                              |
+| filter_read                      | scalar        | NULL                                                                                                                                                          | NULL                                                    | NULL                                                                                                              |
 | is_mreverse                      | scalar        | NULL                                                                                                                                                          | NULL                                                    | NULL                                                                                                              |
 | is_munmap                        | scalar        | NULL                                                                                                                                                          | NULL                                                    | NULL                                                                                                              |
+| phylogeny_fasttree_available     | scalar        | NULL                                                                                                                                                          | NULL                                                    | NULL                                                                                                              |
 | read_sam                         | table         | NULL                                                                                                                                                          | NULL                                                    | NULL                                                                                                              |
 | tree_resolve_placement           | table         | NULL                                                                                                                                                          | NULL                                                    | NULL                                                                                                              |
+| cigar_query_length               | scalar        | NULL                                                                                                                                                          | NULL                                                    | NULL                                                                                                              |
+| trim_quality_3p                  | scalar        | NULL                                                                                                                                                          | NULL                                                    | NULL                                                                                                              |
+| unifrac_pcoa                     | table         | NULL                                                                                                                                                          | NULL                                                    | NULL                                                                                                              |
 | align_mafft                      | table         | NULL                                                                                                                                                          | NULL                                                    | NULL                                                                                                              |
 | is_supplementary                 | scalar        | NULL                                                                                                                                                          | NULL                                                    | NULL                                                                                                              |
+| qc_version                       | scalar        | NULL                                                                                                                                                          | NULL                                                    | NULL                                                                                                              |
 | read_ena                         | table         | NULL                                                                                                                                                          | NULL                                                    | NULL                                                                                                              |
+| unifrac_faith_pd                 | table         | NULL                                                                                                                                                          | NULL                                                    | NULL                                                                                                              |
+| align_sortmerna_rrna             | table         | NULL                                                                                                                                                          | NULL                                                    | NULL                                                                                                              |
 | deblur                           | table         | NULL                                                                                                                                                          | NULL                                                    | NULL                                                                                                              |
 | is_paired                        | scalar        | NULL                                                                                                                                                          | NULL                                                    | NULL                                                                                                              |
 | is_proper_pair                   | scalar        | NULL                                                                                                                                                          | NULL                                                    | NULL                                                                                                              |
@@ -242,6 +296,8 @@ This extension does not add any types.
 
 <div class="extension_settings_table"></div>
 
-This extension does not add any settings.
+|          name           |                                                                      description                                                                      | input_type | scope  | aliases |
+|-------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------|------------|--------|---------|
+| miint_ena_validate_only | When true, the next INSERT INTO ena.* is sent as a Webin V2 VALIDATE (server-side dry-run) instead of ADD. No accessions are returned. Default false. | BOOLEAN    | GLOBAL | []      |
 
 

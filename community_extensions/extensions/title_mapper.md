@@ -8,7 +8,7 @@ excerpt: |
 extension:
   name: title_mapper
   description: Efficiently standardizes scraped job titles to Bureau of Labor Statistics (BLS) titles using a high-performance TF-IDF algorithm.
-  version: 1.5.2
+  version: 1.5.3
   language: Rust
   build: cargo
   license: MIT
@@ -19,7 +19,7 @@ extension:
 
 repo:
   github: martin-conur/duckdb-title-mapper
-  ref: d9b60b448f741e4f427dcd6b0eac3ce2b9148d5e
+  ref: e398a958dcd8adca195966045cef0574672a3eab
 
 docs:
   hello_world: |
@@ -52,10 +52,10 @@ docs:
     | Marketing Coordinator/Specialist | Marketing Specialist |
     | Licensed Practical Nurse (LPN) | Licensed Practical Nurse |
 
-extension_star_count: 2
-extension_star_count_pretty: 2
-extension_download_count: 868
-extension_download_count_pretty: 868
+extension_star_count: 3
+extension_star_count_pretty: 3
+extension_download_count: 629
+extension_download_count_pretty: 629
 image: '/images/community_extensions/social_preview/preview_community_extension_title_mapper.png'
 layout: community_extension_doc
 ---

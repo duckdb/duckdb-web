@@ -131,10 +131,10 @@ docs:
     Pointer helpers are low-level interop tools; for most workflows, handle-based access is safer than raw tcc_dataptr
     
 
-extension_star_count: 4
-extension_star_count_pretty: 4
-extension_download_count: 837
-extension_download_count_pretty: 837
+extension_star_count: 3
+extension_star_count_pretty: 3
+extension_download_count: 577
+extension_download_count_pretty: 577
 image: '/images/community_extensions/social_preview/preview_community_extension_ducktinycc.png'
 layout: community_extension_doc
 ---

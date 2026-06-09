@@ -19,7 +19,7 @@ extension:
 
 repo:
   github: CogitatorTech/onager
-  ref: b5fe9c95964d784f3c0f187b8b76ea5b052ec90e
+  ref: d8abadf9422ffd0c15c22cbc079b20dca630474f
 
 docs:
   hello_world: |
@@ -45,10 +45,10 @@ docs:
     For more information, visit the [GitHub repository](https://github.com/CogitatorTech/onager)
     or the [Onager documentation](https://cogitatortech.github.io/onager/).
 
-extension_star_count: 131
-extension_star_count_pretty: 131
-extension_download_count: 874
-extension_download_count_pretty: 874
+extension_star_count: 133
+extension_star_count_pretty: 133
+extension_download_count: 576
+extension_download_count_pretty: 576
 image: '/images/community_extensions/social_preview/preview_community_extension_onager.png'
 layout: community_extension_doc
 ---

@@ -61,10 +61,10 @@ docs:
     | **Ergonomics** | Requires `list(col ORDER BY date)` + `unnest` to rejoin rows | Natural SQL — plugs into `OVER (PARTITION BY … ORDER BY …)` |
     | **Best for** | Backtests, full-history feature generation, large datasets | Dashboards, ad-hoc queries, mixing indicators with row-level columns |
 
-extension_star_count: 4
-extension_star_count_pretty: 4
-extension_download_count: 467
-extension_download_count_pretty: 467
+extension_star_count: 5
+extension_star_count_pretty: 5
+extension_download_count: 532
+extension_download_count_pretty: 532
 image: '/images/community_extensions/social_preview/preview_community_extension_talib.png'
 layout: community_extension_doc
 ---

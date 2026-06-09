@@ -61,10 +61,10 @@ repo:
   github: query-farm/httpclient
   ref: ae403862ff7fa4ed119f1baa855e579104eefe7b
 
-extension_star_count: 78
-extension_star_count_pretty: 78
-extension_download_count: 5141
-extension_download_count_pretty: 5.1k
+extension_star_count: 79
+extension_star_count_pretty: 79
+extension_download_count: 6748
+extension_download_count_pretty: 6.7k
 image: '/images/community_extensions/social_preview/preview_community_extension_http_client.png'
 layout: community_extension_doc
 ---
