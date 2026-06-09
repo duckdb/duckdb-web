@@ -19,7 +19,7 @@ extension:
 
 repo:
   github: Angelerator/Sazgar
-  ref: e1bc94605ad475dc137f6a8227392497140d2767
+  ref: c8b421e4aca658a34a4aab15549dab28b5df7b96
 
 docs:
   hello_world: |
@@ -241,63 +241,69 @@ docs:
         (SELECT COUNT(*) FROM sazgar_docker() WHERE state = 'running') as containers;
 
   extended_description: |
-    # 🛠️ Sazgar - System Monitoring & SQL Routing for DuckDB
+    # Sazgar - System Monitoring & SQL Routing for DuckDB
 
     **Sazgar** (Persian: سازگار, meaning "compatible/harmonious") is a comprehensive DuckDB extension that combines powerful real-time system monitoring with intelligent SQL query routing capabilities. Built in pure Rust for maximum performance and reliability.
 
     ---
 
-    ## 📊 System Monitoring Functions
+    ## System Monitoring Functions
 
     ### Core System Information
+
     | Function | Description | Key Columns |
     |----------|-------------|-------------|
-    | `sazgar_system()` | OS and host info | os_name, hostname, kernel_version |
-    | `sazgar_uptime()` | System uptime | uptime_seconds, boot_time |
-    | `sazgar_load()` | Load averages | load_1min, load_5min, load_15min |
-    | `sazgar_users()` | Logged-in users | username, terminal, login_time |
+    | `sazgar_system()` | OS and host info | os\_name, hostname, kernel\_version |
+    | `sazgar_uptime()` | System uptime | uptime\_seconds, boot\_time |
+    | `sazgar_load()` | Load averages | load\_1min, load\_5min, load\_15min |
+    | `sazgar_users()` | Logged-in users | username, terminal, login\_time |
     | `sazgar_environment()` | Environment vars | name, value |
 
     ### Resource Monitoring
+
     | Function | Description | Key Columns |
     |----------|-------------|-------------|
-    | `sazgar_memory(unit)` | RAM usage | total, used, available, usage_percent |
-    | `sazgar_cpu()` | Per-core CPU stats | core_id, frequency, usage_percent |
-    | `sazgar_disks(unit)` | Disk space | mount_point, total, used, available |
-    | `sazgar_components()` | Hardware temps | label, temperature, max_temp |
+    | `sazgar_memory(unit)` | RAM usage | total, used, available, usage\_percent |
+    | `sazgar_cpu()` | Per-core CPU stats | core\_id, frequency, usage\_percent |
+    | `sazgar_disks(unit)` | Disk space | mount\_point, total, used, available |
+    | `sazgar_components()` | Hardware temps | label, temperature, max\_temp |
     | `sazgar_gpu()` | NVIDIA GPU info | memory, temperature, utilization |
 
     ### Process & Network Monitoring
+
     | Function | Description | Key Columns |
     |----------|-------------|-------------|
-    | `sazgar_processes()` | Running processes | pid, name, cpu_usage, memory_usage |
-    | `sazgar_network()` | Network interfaces | interface, rx_bytes, tx_bytes |
+    | `sazgar_processes()` | Running processes | pid, name, cpu\_usage, memory\_usage |
+    | `sazgar_network()` | Network interfaces | interface, rx\_bytes, tx\_bytes |
     | `sazgar_ports(filter)` | Open ports | protocol, port, state, process |
     | `sazgar_docker()` | Docker containers | name, image, status, ports |
     | `sazgar_services()` | System services | name, status, pid |
 
     ### Unit Conversion
+
     All size-related functions support: `bytes`, `KB`, `KiB`, `MB`, `MiB`, `GB`, `GiB`, `TB`, `TiB`
 
     ---
 
-    ## 🔀 SQL Query Routing (v1.0.0)
+    ## SQL Query Routing (v1.0.0)
 
     Execute queries on remote PostgreSQL-compatible databases and retrieve results directly into DuckDB with **dynamic schema discovery**.
 
     ### Key Features
-    - ✅ **Returns actual data** - Query results come back to DuckDB
-    - ✅ **Dynamic schema** - Columns are discovered from your query
-    - ✅ **PostgreSQL wire protocol** - Connection layer for all backends
-    - ✅ **SQLGlot dialect translation** - Auto-converts DuckDB SQL to MySQL, ClickHouse, Snowflake, BigQuery syntax
-    - ✅ **Supported backends** - PostgreSQL, Tavana, MySQL*, ClickHouse*, Snowflake*, BigQuery*
-    - ✅ **Conditional routing** - Route based on system resources
-    - ✅ **JOIN support** - Combine remote data with local DuckDB tables
-    - ✅ **Built-in TLS** - Secure connections enabled by default (rustls, no OpenSSL needed)
-    
-    > *Non-PostgreSQL backends require PostgreSQL-compatible interface (e.g., protocol adapter)
+
+    - **Returns actual data** - Query results come back to DuckDB
+    - **Dynamic schema** - Columns are discovered from your query
+    - **PostgreSQL wire protocol** - Connection layer for all backends
+    - **SQLGlot dialect translation** - Auto-converts DuckDB SQL to MySQL, ClickHouse, Snowflake, BigQuery syntax
+    - **Supported backends** - PostgreSQL, Tavana, MySQL\*, ClickHouse\*, Snowflake\*, BigQuery\*
+    - **Conditional routing** - Route based on system resources
+    - **JOIN support** - Combine remote data with local DuckDB tables
+    - **Built-in TLS** - Secure connections enabled by default (rustls, no OpenSSL needed)
+
+    > \*Non-PostgreSQL backends require PostgreSQL-compatible interface (e.g., protocol adapter)
 
     ### Routing Functions
+
     | Function | Description |
     |----------|-------------|
     | `sazgar_target(name, conn_string)` | Register a named database target |
@@ -305,13 +311,12 @@ docs:
     | `sazgar_targets()` | List all registered targets |
 
     ### Connection String Format
-    ```
-    host=hostname port=5432 user=username password=*** dbname=database sslmode=require
-    ```
+
+    `host=hostname port=5432 user=username password=*** dbname=database sslmode=require`
 
     ---
 
-    ## 🎯 Use Cases
+    ## Use Cases
 
     1. **DevOps Dashboards** - Query system metrics with familiar SQL
     2. **Resource Monitoring** - Real-time CPU, memory, disk tracking
@@ -325,32 +330,32 @@ docs:
 
     ---
 
-    ## 🔧 Platform Support
+    ## Platform Support
 
     | Platform | Status | Notes |
     |----------|--------|-------|
-    | Linux x64 | ✅ Full | All features including ports |
-    | Linux ARM64 | ✅ Full | All features including ports |
-    | macOS x64 | ✅ Full | All features including ports |
-    | macOS ARM64 | ✅ Full | All features including ports |
-    | Windows x64 | ✅ Partial | Ports function not available |
+    | Linux x64 | Full | All features including ports |
+    | Linux ARM64 | Full | All features including ports |
+    | macOS x64 | Full | All features including ports |
+    | macOS ARM64 | Full | All features including ports |
+    | Windows x64 | Partial | Ports function not available |
 
     ---
 
-    ## 📚 Resources
+    ## Resources
 
-    - **GitHub Repository:** https://github.com/Angelerator/Sazgar
+    - **GitHub Repository:** [https://github.com/Angelerator/Sazgar](https://github.com/Angelerator/Sazgar)
     - **License:** MIT
-    - **Language:** Pure Rust 🦀
-    - **DuckDB Version:** 1.5.0+
+    - **Language:** Pure Rust
+    - **DuckDB Version:** 1.5.3+
 
     ---
 
-    ## 💡 Quick Example
+    ## Quick Example
 
     ```sql
     -- Monitor system health
-    SELECT 
+    SELECT
         (SELECT hostname FROM sazgar_system()) as server,
         (SELECT ROUND(usage_percent, 1) FROM sazgar_memory()) as mem_pct,
         (SELECT ROUND(AVG(usage_percent), 1) FROM sazgar_cpu()) as cpu_pct,
@@ -363,8 +368,8 @@ docs:
 
 extension_star_count: 13
 extension_star_count_pretty: 13
-extension_download_count: 127
-extension_download_count_pretty: 127
+extension_download_count: 322
+extension_download_count_pretty: 322
 image: '/images/community_extensions/social_preview/preview_community_extension_sazgar.png'
 layout: community_extension_doc
 ---
@@ -423,21 +428,18 @@ LOAD {{ page.extension.name }};
 
 <div class="extension_functions_table"></div>
 
-| function_name | function_type | description | comment | examples |
-|---------------|---------------|-------------|---------|----------|
+This extension does not add any function overloads.
 
 ### Added Types
 
 <div class="extension_types_table"></div>
 
-| type_name | type_size | logical_type | type_category | internal |
-|-----------|----------:|--------------|---------------|----------|
+This extension does not add any types.
 
 ### Added Settings
 
 <div class="extension_settings_table"></div>
 
-| name | description | input_type | scope | aliases |
-|------|-------------|------------|-------|---------|
+This extension does not add any settings.
 
 

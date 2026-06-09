@@ -71,10 +71,10 @@ docs:
     See https://github.com/Icemap/duckdb-vector-index for the full acceptance
     matrix, supported `WITH` options per algorithm, and persistence semantics.
 
-extension_star_count: 6
-extension_star_count_pretty: 6
-extension_download_count: 470
-extension_download_count_pretty: 470
+extension_star_count: 7
+extension_star_count_pretty: 7
+extension_download_count: 522
+extension_download_count_pretty: 522
 image: '/images/community_extensions/social_preview/preview_community_extension_vindex.png'
 layout: community_extension_doc
 ---

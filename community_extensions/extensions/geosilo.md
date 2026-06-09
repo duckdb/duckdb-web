@@ -20,10 +20,10 @@ repo:
   github: Query-farm/geosilo
   ref: 5d4ea2de40e316da6325ee23c2fc01793703ad58
 
-extension_star_count: 24
-extension_star_count_pretty: 24
-extension_download_count: 472
-extension_download_count_pretty: 472
+extension_star_count: 25
+extension_star_count_pretty: 25
+extension_download_count: 507
+extension_download_count_pretty: 507
 image: '/images/community_extensions/social_preview/preview_community_extension_geosilo.png'
 layout: community_extension_doc
 ---

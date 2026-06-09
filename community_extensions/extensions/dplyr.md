@@ -15,7 +15,7 @@ excerpt: |
 extension:
   name: dplyr
   description: R dplyr pipeline syntax support for DuckDB - transpiles dplyr verbs to SQL
-  version: 0.3.3
+  version: 0.4.0
   language: Rust & C++
   build: cmake
   license: MIT
@@ -26,7 +26,7 @@ extension:
 
 repo:
   github: mrchypark/libdplyr
-  ref: a0ce561ced49c3da1187b02bc4d9be1b1e5913ae
+  ref: 405e38282970f5079f925549d2f574060c10313a
 
 docs:
   hello_world: |
@@ -121,10 +121,10 @@ docs:
 
     For more information, visit the [GitHub repository](https://github.com/mrchypark/libdplyr).
 
-extension_star_count: 13
-extension_star_count_pretty: 13
-extension_download_count: 458
-extension_download_count_pretty: 458
+extension_star_count: 14
+extension_star_count_pretty: 14
+extension_download_count: 499
+extension_download_count_pretty: 499
 image: '/images/community_extensions/social_preview/preview_community_extension_dplyr.png'
 layout: community_extension_doc
 ---
@@ -150,9 +150,10 @@ LOAD {{ page.extension.name }};
 
 <div class="extension_functions_table"></div>
 
-| function_name | function_type | description | comment | examples |
-|---------------|---------------|-------------|---------|----------|
-| dplyr         | table         | NULL        | NULL    |          |
+|   function_name   | function_type | description | comment | examples |
+|-------------------|---------------|-------------|---------|----------|
+| dplyr             | table         | NULL        | NULL    |          |
+| dplyr_pipe_syntax | scalar        | NULL        | NULL    |          |
 
 ### Overloaded Functions
 
@@ -170,6 +171,8 @@ This extension does not add any types.
 
 <div class="extension_settings_table"></div>
 
-This extension does not add any settings.
+|       name        |                     description                      |                input_type                | scope  | aliases |
+|-------------------|------------------------------------------------------|------------------------------------------|--------|---------|
+| dplyr_pipe_syntax | The active dplyr pipe syntax for this DuckDB session | ENUM('magrittr', 'native', '%>%', '\|>') | GLOBAL | []      |
 
 

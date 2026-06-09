@@ -8,7 +8,7 @@ excerpt: |
 extension:
   name: lastra
   description: Reader for the Lastra columnar time-series format
-  version: 0.1.1
+  version: 0.2.0
   language: C++
   build: cmake
   license: Apache-2.0
@@ -17,16 +17,15 @@ extension:
 
 repo:
   github: QTSurfer/duckdb-lastra
-  ref: ddc821958e10fdef844fb2ac6549eb44a51a3ae7
+  ref: 984d6be30ecf91135a5377da904695ed66f55cf3
 
 docs:
   hello_world: |
     SELECT * FROM read_lastra('data.lastra') LIMIT 10;
   extended_description: |
     Reads Lastra (.lastra) columnar time-series files with per-column codec
-    selection. Designed for financial tick data (OHLCV), IoT sensor readings,
-    and strategy execution results.
-
+    selection. Designed for financial tick data (OHLCV), IoT sensor readings,etc.
+    
     Supported codecs: ALP (adaptive lossless floating-point), Gorilla (XOR),
     Pongo (decimal-aware), delta-varint (timestamps), ZSTD (binary).
 
@@ -36,8 +35,8 @@ docs:
 
 extension_star_count: 0
 extension_star_count_pretty: 0
-extension_download_count: 463
-extension_download_count_pretty: 463
+extension_download_count: 494
+extension_download_count_pretty: 494
 image: '/images/community_extensions/social_preview/preview_community_extension_lastra.png'
 layout: community_extension_doc
 ---
@@ -63,9 +62,10 @@ LOAD {{ page.extension.name }};
 
 <div class="extension_functions_table"></div>
 
-| function_name | function_type | description | comment | examples |
-|---------------|---------------|-------------|---------|----------|
-| read_lastra   | table         | NULL        | NULL    |          |
+| function_name  | function_type | description | comment | examples |
+|----------------|---------------|-------------|---------|----------|
+| lastra_version | scalar        | NULL        | NULL    |          |
+| read_lastra    | table         | NULL        | NULL    |          |
 
 ### Overloaded Functions
 

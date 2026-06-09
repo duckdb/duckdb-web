@@ -8,17 +8,18 @@ excerpt: |
 extension:
   name: raquet
   description: "Raster analytics on Raquet files with QUADBIN spatial indexing, raster ingestion, and PostGIS-style functions"
-  version: 0.2.4
+  version: 0.2.6
   language: C++
   build: cmake
   license: Apache-2.0
   excluded_platforms: "windows_amd64;windows_amd64_mingw;wasm_mvp;wasm_eh;wasm_threads"
   maintainers:
     - jatorre
+    - cayetanobv
 
 repo:
   github: jatorre/duckdb-raquet
-  ref: a699560ad74e86f8168aa0b80af120c36e671662
+  ref: e077a7c36f4527949cd5e36719cf4c81289d9d4b
 
 docs:
   hello_world: |
@@ -59,10 +60,10 @@ docs:
     - [Documentation](https://github.com/jatorre/duckdb-raquet#readme)
     - [Performance Benchmarks](https://github.com/jatorre/duckdb-raquet/blob/main/docs/PERFORMANCE_COMPARISON.md)
 
-extension_star_count: 11
-extension_star_count_pretty: 11
-extension_download_count: 1283
-extension_download_count_pretty: 1.3k
+extension_star_count: 13
+extension_star_count_pretty: 13
+extension_download_count: 1022
+extension_download_count_pretty: 1.0k
 image: '/images/community_extensions/social_preview/preview_community_extension_raquet.png'
 layout: community_extension_doc
 ---
@@ -122,6 +123,7 @@ LOAD {{ page.extension.name }};
 | quadbin_to_tile              | scalar        | NULL        | NULL    |          |
 | quadbin_to_wkt               | scalar        | NULL        | NULL    |          |
 | raquet_decode_band           | scalar        | NULL        | NULL    |          |
+| raquet_merge_bands           | table         | NULL        | NULL    |          |
 | raquet_parse_metadata        | scalar        | NULL        | NULL    |          |
 | raquet_pixel                 | scalar        | NULL        | NULL    |          |
 | raquet_pixel_interleaved     | scalar        | NULL        | NULL    |          |

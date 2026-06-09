@@ -8,7 +8,7 @@ excerpt: |
 extension:
   name: cache_prewarm
   description: Prewarm data blocks into DuckDB's buffer pool or OS page cache for faster queries
-  version: 0.2.2
+  version: 0.2.3
   language: C++
   build: cmake
   license: MIT
@@ -18,7 +18,7 @@ extension:
     - dentiny
 repo:
   github: dentiny/duckdb-cache-prewarm
-  ref: 1047d2a4763615299959fe4b92fb2777b9675e61
+  ref: cd156665daea7e4eb6f410eb43e18f6ea3afcf60
 docs:
   hello_world: |
     -- Prewarm a table into the buffer pool
@@ -55,8 +55,8 @@ docs:
 
 extension_star_count: 8
 extension_star_count_pretty: 8
-extension_download_count: 829
-extension_download_count_pretty: 829
+extension_download_count: 623
+extension_download_count_pretty: 623
 image: '/images/community_extensions/social_preview/preview_community_extension_cache_prewarm.png'
 layout: community_extension_doc
 ---
@@ -143,6 +143,7 @@ This extension does not add any types.
 | cache_httpfs_glob_cache_entry_timeout_millisec            | Cache entry timeout in milliseconds for glob cache.                                                                                                                                                                                                                                                                                                                                             | UBIGINT    | GLOBAL | []      |
 | cache_httpfs_ignore_sigpipe                               | Whether to ignore SIGPIPE for the extension. By default not ignored. Once ignored, it cannot be reverted.                                                                                                                                                                                                                                                                                       | BOOLEAN    | GLOBAL | []      |
 | cache_httpfs_in_mem_cache_block_timeout_millisec          | Data block cache entry timeout in milliseconds.                                                                                                                                                                                                                                                                                                                                                 | UBIGINT    | GLOBAL | []      |
+| cache_httpfs_in_mem_cache_storage                         | Storage backend for in-memory data block cache. 'extension' (default) uses an extension-managed LRU bounded by `cache_httpfs_max_in_mem_cache_block_count` and `cache_httpfs_in_mem_cache_block_timeout_millisec`. 'object_cache' parks blocks in DuckDB's per-instance ObjectCache. Must be set before any cache access for the change to take effect.                                         | VARCHAR    | GLOBAL | []      |
 | cache_httpfs_max_fanout_subrequest                        | Cached httpfs performs parallel request by splittng them into small request, with request size decided by config [cache_httpfs_cache_block_size]. The setting limits the maximum request to issue for a single filesystem read request. 0 means no limit, by default we set no limit.                                                                                                           | BIGINT     | GLOBAL | []      |
 | cache_httpfs_max_in_mem_cache_block_count                 | Max in-memory cache block count for in-memory caches for all cache filesystems, so users are able to configure the maximum memory consumption. It's worth noting it should be set only once before all filesystem access, otherwise there's no affect.                                                                                                                                          | UBIGINT    | GLOBAL | []      |
 | cache_httpfs_metadata_cache_entry_size                    | Max cache size for metadata LRU cache.                                                                                                                                                                                                                                                                                                                                                          | UBIGINT    | GLOBAL | []      |

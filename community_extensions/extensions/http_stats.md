@@ -62,10 +62,10 @@ docs:
 
     For detailed documentation, visit the [extension repository](https://github.com/tlinhart/duckdb-http-stats).
 
-extension_star_count: 0
-extension_star_count_pretty: 0
-extension_download_count: 492
-extension_download_count_pretty: 492
+extension_star_count: 1
+extension_star_count_pretty: 1
+extension_download_count: 507
+extension_download_count_pretty: 507
 image: '/images/community_extensions/social_preview/preview_community_extension_http_stats.png'
 layout: community_extension_doc
 ---

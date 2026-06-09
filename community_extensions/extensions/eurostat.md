@@ -18,7 +18,7 @@ extension:
 
 repo:
   github: ahuarte47/duckdb-eurostat
-  ref: 53c5570856578e2be8efe22cecd0b23caa709bb6
+  ref: 8a025d71e0390e4cb7425224f1159441609d958f
 
 docs:
   hello_world: |
@@ -147,10 +147,10 @@ docs:
     Time filters (e.g. `WHERE time_period >= '2000' AND time_period <= '2010'`) are also supported
     and will be encoded as range filters in the EUROSTAT API.
 
-extension_star_count: 30
-extension_star_count_pretty: 30
-extension_download_count: 814
-extension_download_count_pretty: 814
+extension_star_count: 31
+extension_star_count_pretty: 31
+extension_download_count: 597
+extension_download_count_pretty: 597
 image: '/images/community_extensions/social_preview/preview_community_extension_eurostat.png'
 layout: community_extension_doc
 ---

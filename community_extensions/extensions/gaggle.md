@@ -19,7 +19,7 @@ extension:
 
 repo:
   github: CogitatorTech/gaggle
-  ref: 29311d2a156ef75a8bdfdb53d75389d7327fa845
+  ref: bec662ceeb66f2ef88594822db900771e015f230
 
 docs:
   hello_world: |
@@ -31,7 +31,7 @@ docs:
     -- 2. List files in the dataset
     SELECT * FROM gaggle_ls('habedi/flickr-8k-dataset-clean', true) LIMIT 5;
     
-    -- 3. Read a Parquet file FROM local cache using a prepared statement
+    -- 3. Read a Parquet file from local cache using a prepared statement
     PREPARE rp as SELECT * FROM read_parquet(?) LIMIT 10;
     EXECUTE rp(gaggle_file_path('habedi/flickr-8k-dataset-clean', 'flickr8k.parquet'));
     
@@ -50,10 +50,10 @@ docs:
     
     For more information, like API references and usage examples, visit the project's [GitHub repository](https://github.com/CogitatorTech/gaggle).
 
-extension_star_count: 15
-extension_star_count_pretty: 15
-extension_download_count: 853
-extension_download_count_pretty: 853
+extension_star_count: 17
+extension_star_count_pretty: 17
+extension_download_count: 610
+extension_download_count_pretty: 610
 image: '/images/community_extensions/social_preview/preview_community_extension_gaggle.png'
 layout: community_extension_doc
 ---

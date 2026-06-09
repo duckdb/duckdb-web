@@ -19,7 +19,7 @@ extension:
 
 repo:
   github: axsaucedo/agent_data_duckdb
-  ref: 41993629dfdd259055327213f119b9b83a4a5826
+  ref: 537172a74104f520e642c20421520dcd88b865cc
 
 docs:
   hello_world: |
@@ -121,10 +121,10 @@ docs:
 
     For full documentation, see the [GitHub repository](https://github.com/axsaucedo/duckdb-claude-ext).
 
-extension_star_count: 14
-extension_star_count_pretty: 14
-extension_download_count: 636
-extension_download_count_pretty: 636
+extension_star_count: 18
+extension_star_count_pretty: 18
+extension_download_count: 604
+extension_download_count_pretty: 604
 image: '/images/community_extensions/social_preview/preview_community_extension_agent_data.png'
 layout: community_extension_doc
 ---

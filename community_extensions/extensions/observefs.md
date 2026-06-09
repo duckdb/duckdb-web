@@ -8,7 +8,7 @@ excerpt: |
 extension:
   name: observefs
   description: Provides IO observability to filesystem
-  version: 0.5.0
+  version: 0.5.1
   language: C++
   build: cmake
   license: MIT
@@ -20,7 +20,7 @@ extension:
 repo:
   github: dentiny/duckdb-filesystem-observability
   andium: cb6a1a7d88eba7f02a9690e1df4c6bf4e166a9f3
-  ref: d1423cc8882245bd2b1e554e15bf3384473b08cf
+  ref: 7a7b90e0eb33545173ddb948963f3f29709f0a4b
 
 docs:
   hello_world: |
@@ -34,10 +34,10 @@ docs:
     - Provides cache access insight to duckdb external file cache
     - Allows registering ANY duckdb compatible filesystems (i.e., azure filesystem)
 
-extension_star_count: 13
-extension_star_count_pretty: 13
-extension_download_count: 624
-extension_download_count_pretty: 624
+extension_star_count: 16
+extension_star_count_pretty: 16
+extension_download_count: 594
+extension_download_count_pretty: 594
 image: '/images/community_extensions/social_preview/preview_community_extension_observefs.png'
 layout: community_extension_doc
 ---

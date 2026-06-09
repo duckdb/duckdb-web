@@ -11,7 +11,7 @@ excerpt: |
 extension:
   name: behavioral
   description: Behavioral analytics functions inspired by ClickHouse (sessionize, retention, window_funnel, sequence_match, sequence_count, sequence_match_events, sequence_next_node)
-  version: 0.4.0
+  version: 0.6.0
   language: Rust
   build: cargo
   license: MIT
@@ -22,7 +22,7 @@ extension:
 
 repo:
   github: tomtom215/duckdb-behavioral
-  ref: a0d6f5e9dd6bd15e297188e7bdcd6edc5f8e05e2
+  ref: 7f80a96d8a26f896ca96c5ffb0c756a6d0ff7ead
 
 docs:
   hello_world: |
@@ -49,10 +49,10 @@ docs:
     with zero unsafe code in business logic. Benchmarked at 830 Melem/s (sessionize)
     and 95 Melem/s (sequence_match) on commodity hardware.
 
-extension_star_count: 8
-extension_star_count_pretty: 8
-extension_download_count: 783
-extension_download_count_pretty: 783
+extension_star_count: 11
+extension_star_count_pretty: 11
+extension_download_count: 1138
+extension_download_count_pretty: 1.1k
 image: '/images/community_extensions/social_preview/preview_community_extension_behavioral.png'
 layout: community_extension_doc
 ---
