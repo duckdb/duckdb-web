@@ -93,10 +93,10 @@ JSON files can be efficiently loaded and queried using their filename:
 SELECT * FROM 'test.json';
 ```
 
-Alternatively, use the [`read_json_auto` function]({% link docs/current/data/json/overview.md %}):
+Alternatively, use the [`read_json` function]({% link docs/current/data/json/overview.md %}):
 
 ```sql
-SELECT * FROM read_json_auto('test.json');
+SELECT * FROM read_json('test.json');
 ```
 
 Or use the [`COPY` statement]({% link docs/current/sql/statements/copy.md %}#copy--from):

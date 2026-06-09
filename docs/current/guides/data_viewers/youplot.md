@@ -30,13 +30,13 @@ By combining the [`COPY...TO`]({% link docs/current/sql/statements/copy.md %}#co
 1. First, read all data from `input.json`:
 
    ```batch
-   duckdb -s "SELECT * FROM read_json_auto('input.json')"
+   duckdb -s "SELECT * FROM read_json('input.json')"
    ```
 
 2. To prepare the data for YouPlot, write a simple aggregate:
 
    ```batch
-   duckdb -s "SELECT date, sum(purchases) AS total_purchases FROM read_json_auto('input.json') GROUP BY 1 ORDER BY 2 DESC LIMIT 10"
+   duckdb -s "SELECT date, sum(purchases) AS total_purchases FROM read_json('input.json') GROUP BY 1 ORDER BY 2 DESC LIMIT 10"
    ```
 
 3. Finally, wrap the `SELECT` in the `COPY ... TO` function with an output location of `/dev/stdout`.
@@ -50,7 +50,7 @@ By combining the [`COPY...TO`]({% link docs/current/sql/statements/copy.md %}#co
    The full DuckDB command below outputs the query in CSV format with a header:
 
    ```batch
-   duckdb -s "COPY (SELECT date, sum(purchases) AS total_purchases FROM read_json_auto('input.json') GROUP BY 1 ORDER BY 2 DESC LIMIT 10) TO '/dev/stdout' WITH (FORMAT csv, HEADER)"
+   duckdb -s "COPY (SELECT date, sum(purchases) AS total_purchases FROM read_json('input.json') GROUP BY 1 ORDER BY 2 DESC LIMIT 10) TO '/dev/stdout' WITH (FORMAT csv, HEADER)"
    ```
 
 ## Connecting DuckDB to YouPlot
@@ -58,7 +58,7 @@ By combining the [`COPY...TO`]({% link docs/current/sql/statements/copy.md %}#co
 Finally, the data can now be piped to YouPlot! Let's assume we have an `input.json` file with dates and number of purchases made by somebody on that date. Using the query above, we'll pipe the data to the `uplot` command to draw a plot of the Top 10 Purchase Dates.
 
 ```batch
-duckdb -s "COPY (SELECT date, sum(purchases) AS total_purchases FROM read_json_auto('input.json') GROUP BY 1 ORDER BY 2 DESC LIMIT 10) TO '/dev/stdout' WITH (FORMAT csv, HEADER)" \
+duckdb -s "COPY (SELECT date, sum(purchases) AS total_purchases FROM read_json('input.json') GROUP BY 1 ORDER BY 2 DESC LIMIT 10) TO '/dev/stdout' WITH (FORMAT csv, HEADER)" \
      | uplot bar -d, -H -t "Top 10 Purchase Dates"
 ```
 
@@ -74,7 +74,7 @@ Let's combine this with a quick `curl` from GitHub to see what a certain user ha
 
 ```batch
 curl -sL "https://api.github.com/users/dacort/events?per_page=100" \
-     | duckdb -s "COPY (SELECT type, count(*) AS event_count FROM read_json_auto('/dev/stdin') GROUP BY 1 ORDER BY 2 DESC LIMIT 10) TO '/dev/stdout' WITH (FORMAT csv, HEADER)" \
+     | duckdb -s "COPY (SELECT type, count(*) AS event_count FROM read_json('/dev/stdin') GROUP BY 1 ORDER BY 2 DESC LIMIT 10) TO '/dev/stdout' WITH (FORMAT csv, HEADER)" \
      | uplot bar -d, -H -t "GitHub Events for @dacort"
 ```
 
