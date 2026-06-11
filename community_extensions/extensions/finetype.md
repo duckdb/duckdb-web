@@ -173,8 +173,8 @@ docs:
 
 extension_star_count: 0
 extension_star_count_pretty: 0
-extension_download_count: 369
-extension_download_count_pretty: 369
+extension_download_count: 476
+extension_download_count_pretty: 476
 image: '/images/community_extensions/social_preview/preview_community_extension_finetype.png'
 layout: community_extension_doc
 ---
@@ -209,6 +209,15 @@ LOAD {{ page.extension.name }};
 | finetype_unpack   | scalar        | NULL        | NULL    |          |
 | finetype_validate | scalar        | NULL        | NULL    |          |
 | finetype_version  | scalar        | NULL        | NULL    |          |
+| ft_cast           | scalar        | NULL        | NULL    |          |
+| ft_detail         | scalar        | NULL        | NULL    |          |
+| ft_infer          | scalar        | NULL        | NULL    |          |
+| ft_profile        | scalar        | NULL        | NULL    |          |
+| ft_profile        | table_macro   | NULL        | NULL    |          |
+| ft_unpack         | scalar        | NULL        | NULL    |          |
+| ft_validate       | table_macro   | NULL        | NULL    |          |
+| ft_validate_text  | scalar        | NULL        | NULL    |          |
+| ft_version        | scalar        | NULL        | NULL    |          |
 
 ### Overloaded Functions
 

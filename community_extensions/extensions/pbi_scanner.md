@@ -43,8 +43,8 @@ repo:
 
 extension_star_count: 15
 extension_star_count_pretty: 15
-extension_download_count: 496
-extension_download_count_pretty: 496
+extension_download_count: 571
+extension_download_count_pretty: 571
 image: '/images/community_extensions/social_preview/preview_community_extension_pbi_scanner.png'
 layout: community_extension_doc
 ---
@@ -70,23 +70,13 @@ LOAD {{ page.extension.name }};
 
 <div class="extension_functions_table"></div>
 
-|                   function_name                    | function_type | description | comment | examples |
-|----------------------------------------------------|---------------|-------------|---------|----------|
-| __pbi_scanner_test_coerce_xml_text                 | scalar        | NULL        | NULL    |          |
-| __pbi_scanner_test_coerce_xml_type                 | scalar        | NULL        | NULL    |          |
-| __pbi_scanner_test_dax_schema_probe                | scalar        | NULL        | NULL    |          |
-| __pbi_scanner_test_effective_execution_transport   | scalar        | NULL        | NULL    |          |
-| __pbi_scanner_test_metadata_cache_roundtrip        | scalar        | NULL        | NULL    |          |
-| __pbi_scanner_test_parse_binxml_double             | scalar        | NULL        | NULL    |          |
-| __pbi_scanner_test_parse_binxml_first_text         | scalar        | NULL        | NULL    |          |
-| __pbi_scanner_test_parse_chunked_double            | scalar        | NULL        | NULL    |          |
-| __pbi_scanner_test_parse_streaming_sx_double       | scalar        | NULL        | NULL    |          |
-| __pbi_scanner_test_service_principal_error_message | scalar        | NULL        | NULL    |          |
-| dax_query                                          | table         | NULL        | NULL    |          |
-| pbi_columns                                        | table         | NULL        | NULL    |          |
-| pbi_measures                                       | table         | NULL        | NULL    |          |
-| pbi_relationships                                  | table         | NULL        | NULL    |          |
-| pbi_tables                                         | table         | NULL        | NULL    |          |
+|   function_name   | function_type | description | comment | examples |
+|-------------------|---------------|-------------|---------|----------|
+| dax_query         | table         | NULL        | NULL    |          |
+| pbi_columns       | table         | NULL        | NULL    |          |
+| pbi_measures      | table         | NULL        | NULL    |          |
+| pbi_relationships | table         | NULL        | NULL    |          |
+| pbi_tables        | table         | NULL        | NULL    |          |
 
 ### Overloaded Functions
 
@@ -104,8 +94,9 @@ This extension does not add any types.
 
 <div class="extension_settings_table"></div>
 
-|         name          |                                          description                                           | input_type | scope  | aliases |
-|-----------------------|------------------------------------------------------------------------------------------------|------------|--------|---------|
-| pbi_scanner_auth_mode | Default auth mode for pbi_scanner table functions (access_token, azure_cli, service_principal) | VARCHAR    | GLOBAL | []      |
+|            name            |                                                                                     description                                                                                     | input_type | scope  | aliases |
+|----------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|------------|--------|---------|
+| normalize_dax_column_names | When true, strip DAX square brackets and table qualifiers from dax_query and pbi_* metadata table function column names (default off; opt in via SET or normalize_dax_column_names) | BOOLEAN    | GLOBAL | []      |
+| pbi_scanner_auth_mode      | Default auth mode for pbi_scanner table functions (access_token, azure_cli, service_principal)                                                                                      | VARCHAR    | GLOBAL | []      |
 
 

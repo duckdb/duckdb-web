@@ -117,8 +117,8 @@ docs:
 
 extension_star_count: 0
 extension_star_count_pretty: 0
-extension_download_count: 490
-extension_download_count_pretty: 490
+extension_download_count: 641
+extension_download_count_pretty: 641
 image: '/images/community_extensions/social_preview/preview_community_extension_dicom.png'
 layout: community_extension_doc
 ---
@@ -147,6 +147,9 @@ LOAD {{ page.extension.name }};
 | function_name | function_type | description | comment | examples |
 |---------------|---------------|-------------|---------|----------|
 | read_dicom    | table         | NULL        | NULL    |          |
+| tag_element   | scalar        | NULL        | NULL    |          |
+| tag_group     | scalar        | NULL        | NULL    |          |
+| tag_name      | scalar        | NULL        | NULL    |          |
 
 ### Overloaded Functions
 
@@ -158,7 +161,9 @@ This extension does not add any function overloads.
 
 <div class="extension_types_table"></div>
 
-This extension does not add any types.
+| type_name | type_size | logical_type | type_category | internal |
+|-----------|----------:|--------------|---------------|----------|
+| DICOM_TAG | 0         | STRUCT       | COMPOSITE     | true     |
 
 ### Added Settings
 

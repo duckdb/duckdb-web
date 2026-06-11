@@ -1403,6 +1403,36 @@
               ]
             },
             {
+              "page": "Meta Queries",
+              "slug": "meta",
+              "subsubfolderitems": [
+                {
+                  "page": "Describe Table",
+                  "url": "describe"
+                },
+                {
+                  "page": "EXPLAIN: Inspect Query Plans",
+                  "url": "explain"
+                },
+                {
+                  "page": "EXPLAIN ANALYZE: Profile Queries",
+                  "url": "explain_analyze"
+                },
+                {
+                  "page": "List Tables",
+                  "url": "list_tables"
+                },
+                {
+                  "page": "Summarize",
+                  "url": "summarize"
+                },
+                {
+                  "page": "DuckDB Environment",
+                  "url": "duckdb_environment"
+                }
+              ]
+            },
+            {
               "page": "Network and Cloud Storage",
               "slug": "network_cloud_storage",
               "subsubfolderitems": [
@@ -1449,36 +1479,6 @@
                 {
                   "page": "Tigris Import",
                   "url": "tigris_import"
-                }
-              ]
-            },
-            {
-              "page": "Meta Queries",
-              "slug": "meta",
-              "subsubfolderitems": [
-                {
-                  "page": "Describe Table",
-                  "url": "describe"
-                },
-                {
-                  "page": "EXPLAIN: Inspect Query Plans",
-                  "url": "explain"
-                },
-                {
-                  "page": "EXPLAIN ANALYZE: Profile Queries",
-                  "url": "explain_analyze"
-                },
-                {
-                  "page": "List Tables",
-                  "url": "list_tables"
-                },
-                {
-                  "page": "Summarize",
-                  "url": "summarize"
-                },
-                {
-                  "page": "DuckDB Environment",
-                  "url": "duckdb_environment"
                 }
               ]
             },
