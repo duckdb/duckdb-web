@@ -450,7 +450,7 @@ Features in DuckDB can be implemented in different ways: in the main DuckDB proj
 * If you would like to implement a feature in the main DuckDB project, please discuss it with the DuckDB team on GitHub Discussions or on [our Discord server](https://discord.duckdb.org/). The team can verify whether the idea and the proposed implementation line up with the project's long-term vision.
 * If you would like to implement a feature as an extension, consider submitting it to the [Community Extensions repository]({% link community_extensions/index.md %}).
 
-Please note that DuckLabs, the company that employs the main DuckDB contributors, provides [consultancy services for DuckDB](https://ducklabs.com/support/), which can include implementing features in DuckDB or as DuckDB extensions.
+Please note that DuckLabs, the company that employs the main DuckDB contributors, provides [consultancy services for DuckDB](https://ducklabs.com/contact/), which can include implementing features in DuckDB or as DuckDB extensions.
 
 </div>
 
