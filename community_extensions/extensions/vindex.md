@@ -73,8 +73,8 @@ docs:
 
 extension_star_count: 7
 extension_star_count_pretty: 7
-extension_download_count: 522
-extension_download_count_pretty: 522
+extension_download_count: 660
+extension_download_count_pretty: 660
 image: '/images/community_extensions/social_preview/preview_community_extension_vindex.png'
 layout: community_extension_doc
 ---

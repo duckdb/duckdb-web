@@ -43,8 +43,8 @@ repo:
 
 extension_star_count: 15
 extension_star_count_pretty: 15
-extension_download_count: 496
-extension_download_count_pretty: 496
+extension_download_count: 571
+extension_download_count_pretty: 571
 image: '/images/community_extensions/social_preview/preview_community_extension_pbi_scanner.png'
 layout: community_extension_doc
 ---
