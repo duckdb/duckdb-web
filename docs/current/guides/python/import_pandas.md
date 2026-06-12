@@ -33,6 +33,14 @@ If the order of columns is different or not all columns are present in the DataF
 duckdb.sql("INSERT INTO my_table BY NAME SELECT * FROM my_df")
 ```
 
+Alternatively, the [`append`]({% link docs/current/clients/python/reference/index.md %}#duckdb.DuckDBPyConnection.append) method appends a DataFrame to an existing table directly, without writing a SQL query. Pass `by_name=True` to match columns by name rather than by position:
+
+```python
+con = duckdb.connect()
+con.sql("CREATE TABLE my_table (a INTEGER)")
+con.append("my_table", my_df)
+```
+
 ## See Also
 
 DuckDB also supports [exporting to Pandas]({% link docs/current/guides/python/export_pandas.md %}).
