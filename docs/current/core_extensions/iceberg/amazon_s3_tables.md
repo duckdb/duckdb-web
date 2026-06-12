@@ -52,6 +52,8 @@ ATTACH '⟨s3_tables_arn⟩' AS my_s3_tables_catalog (
 );
 ```
 
+> Warning `ENDPOINT_TYPE s3_tables` always builds an endpoint of the form `s3tables.⟨region⟩.amazonaws.com/iceberg`. This is incorrect for any region whose endpoint does not use the plain `amazonaws.com` suffix — most notably the AWS China regions (`cn-north-1`, `cn-northwest-1`), which use `amazonaws.com.cn`. For such regions, attach the catalog by passing an explicit `ENDPOINT` (with the correct host for your region) together with `AUTHORIZATION_TYPE 'sigv4'`, instead of using `ENDPOINT_TYPE`.
+
 To check whether the attachment worked, list all tables:
 
 ```sql
