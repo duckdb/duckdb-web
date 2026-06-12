@@ -352,6 +352,13 @@ The below options are applicable when writing Parquet files.
 | `ROW_GROUP_SIZE` | The target size, i.e., number of rows, of each row group. | `BIGINT` | 122880 |
 | `ROW_GROUPS_PER_FILE` | Create a new Parquet file if the current one has a specified number of row groups. If multiple threads are active, the number of row groups in a file may slightly exceed the specified number of row groups to limit the amount of locking – similarly to the behavior of `FILE_SIZE_BYTES`. However, if `per_thread_output` is set, only one thread writes to each file, and it becomes accurate again. | `BIGINT` |  (empty) |
 | `PARQUET_VERSION` | The Parquet version to use (`V1`, `V2`). | `VARCHAR` | `V1` |
+| `CHUNK_SIZE` | Alias for `ROW_GROUP_SIZE`. | `BIGINT` | 122880 |
+| `KV_METADATA` | Custom key-value metadata to embed in the file footer, supplied as a `STRUCT` of keys to values. `BLOB` values are written as raw bytes; other values are cast to string. | `STRUCT` | (empty) |
+| `SHREDDING` | A `STRUCT` mapping [`VARIANT`]({% link docs/current/sql/data_types/variant.md %}) column names to the type they should be shredded into, e.g., `{variant_col: 'STRUCT(name VARCHAR, age INTEGER)'}`. Enables typed (shredded) storage of `VARIANT` columns. | `STRUCT` | (empty) |
+| `DICTIONARY_SIZE_LIMIT` | The maximum size of the dictionary used for dictionary encoding, in number of distinct values. Set to `0` to disable dictionary encoding. | `BIGINT` | `ROW_GROUP_SIZE / 5` |
+| `WRITE_BLOOM_FILTER` | Whether to write [Bloom filters](https://en.wikipedia.org/wiki/Bloom_filter) that allow readers to skip row groups. | `BOOLEAN` | `true` |
+| `BLOOM_FILTER_FALSE_POSITIVE_RATIO` | The target false positive ratio of the written Bloom filters. | `DOUBLE` | `0.01` |
+| `GEOPARQUET_VERSION` | Which [GeoParquet](https://geoparquet.org/) metadata version to write for geometry columns (`NONE`, `V1`, `V2`, `BOTH`). `NONE` disables GeoParquet metadata. | `VARCHAR` | `V1` |
 
 Some examples of `FIELD_IDS` are as follows.
 

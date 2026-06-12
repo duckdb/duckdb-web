@@ -174,9 +174,10 @@ Zero or more copy options may be provided within parentheses following the `ATTA
 
 | Name                | Description                                                                                                                 | Type      | Default value |
 | ------------------- | --------------------------------------------------------------------------------------------------------------------------- | --------- | ------------- |
-| `ACCESS_MODE`       | Access mode of the database (`AUTOMATIC`, `READ_ONLY`, or `READ_WRITE`).                                                    | `VARCHAR` | `automatic`   |
+| `READ_ONLY`         | Attach the database in read-only mode. Use `READ_WRITE` (the default) to attach in read-write mode.                         | `BOOLEAN` | `false`       |
 | `COMPRESS`          | Whether the database is compressed. Only applicable for in-memory databases.                                                | `VARCHAR` | `false`       |
 | `TYPE`              | The file type (`DUCKDB` or `SQLITE`), or deduced from the input string literal (MySQL, PostgreSQL).                         | `VARCHAR` | `DUCKDB`      |
+| `DEFAULT_TABLE`     | The table that is queried when the attached database is referenced directly by its catalog name (e.g., `FROM ⟨db⟩`).        | `VARCHAR` | -             |
 | `BLOCK_SIZE`        | The block size of a new database file. Must be a power of two and within [16384, 262144]. Cannot be set for existing files. | `UBIGINT` | `262144`      |
 | `ROW_GROUP_SIZE`    | The row group size of a new database file.                                                                                  | `UBIGINT` | `122880`      |
 | `STORAGE_VERSION`   | The version of the storage used.                                                                                            | `VARCHAR` | `v1.0.0`      |

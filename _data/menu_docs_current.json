@@ -1127,8 +1127,16 @@
                   "url": "overview"
                 },
                 {
+                  "page": "Writing to Iceberg",
+                  "url": "writing"
+                },
+                {
                   "page": "Iceberg REST Catalogs",
                   "url": "iceberg_rest_catalogs"
+                },
+                {
+                  "page": "Functions and Settings Reference",
+                  "url": "reference"
                 },
                 {
                   "page": "Amazon S3 Tables",

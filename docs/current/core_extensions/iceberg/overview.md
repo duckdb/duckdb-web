@@ -10,8 +10,16 @@ redirect_from:
 title: Iceberg Extension
 ---
 
-The `iceberg` extension implements support for the [Apache Iceberg open table format](https://iceberg.apache.org/). 
-In this page we will go over the basic usage of the extension without the need to attach to an Iceberg catalog. For full support – including write support – see [how to attach Iceberg REST catalogs]({% link docs/current/core_extensions/iceberg/iceberg_rest_catalogs.md %}).
+The `iceberg` extension implements support for the [Apache Iceberg open table format](https://iceberg.apache.org/). There are two ways to work with Iceberg in DuckDB:
+
+* **[Individual tables](#individual-tables)** are read directly from storage, by pointing at a table's metadata. This requires no catalog and is read-only.
+* **[Catalog-managed tables](#catalog-managed-tables)** are accessed by attaching an Iceberg REST catalog. This unlocks the full feature set, including writing.
+
+This page covers the basics of both. See also:
+
+* [Iceberg REST Catalogs]({% link docs/current/core_extensions/iceberg/iceberg_rest_catalogs.md %}) – connecting to specific catalogs (Amazon S3 Tables, AWS Glue, Cloudflare R2, Polaris, Lakekeeper, BigLake).
+* [Writing to Iceberg]({% link docs/current/core_extensions/iceberg/writing.md %}) – create tables, insert, update, delete, merge, and evolve schemas.
+* [Functions and Settings Reference]({% link docs/current/core_extensions/iceberg/reference.md %}) – all table functions, scalar functions, and settings.
 
 ## Installing and Loading
 
@@ -32,9 +40,9 @@ To make sure that you have the latest version, [update your extensions]({% link 
 UPDATE EXTENSIONS;
 ```
 
-## Usage
+## Individual Tables
 
-To test the examples, download the [`iceberg_data.zip`]({% link data/iceberg_data.zip %}) file and unzip it.
+Individual Iceberg tables can be read directly from storage with the `iceberg_scan` function, without attaching to a catalog. To test the examples, download the [`iceberg_data.zip`]({% link data/iceberg_data.zip %}) file and unzip it.
 
 ### Common Parameters
 
@@ -80,7 +88,7 @@ SELECT count(*)
 FROM iceberg_scan('s3://bucketname/lineitem_iceberg/metadata/v1.metadata.json');
 ```
 
-### Access Iceberg Metadata
+### Accessing Iceberg Metadata
 
 To access Iceberg Metadata, you can use the `iceberg_metadata` function:
 
@@ -181,10 +189,80 @@ FROM iceberg_scan(
 );
 ```
 
-## Limitations
+### Time Travel
 
-* Inserts into v3 Iceberg specification tables.
-* Reads from v3 tables with v2 data types.
-* Geometry data type.
+To read a historical snapshot of a table, pass either `snapshot_from_id` or `snapshot_from_timestamp` (the two are mutually exclusive). Use [`iceberg_snapshots`](#visualizing-snapshots) to list the available snapshots:
 
-For a set of unsupported operations when attaching to an Iceberg catalog, see [Unsupported Operations]({% link docs/current/core_extensions/iceberg/iceberg_rest_catalogs.md %}#unsupported-operations).
+```sql
+-- Read a specific snapshot by id
+SELECT count(*)
+FROM iceberg_scan('data/iceberg/lineitem_iceberg', snapshot_from_id = 7635660646343998149);
+
+-- Read the snapshot that was current at a given time
+SELECT count(*)
+FROM iceberg_scan('data/iceberg/lineitem_iceberg', snapshot_from_timestamp = TIMESTAMP '2023-02-15 15:08:00');
+```
+
+### Limitations of Direct Reads
+
+* A version hint or explicit `version` is required to read a table, unless [version guessing](#guessing-metadata-versions) is enabled.
+* Only `gzip`-compressed metadata is supported (via `metadata_compression_codec = 'gzip'`).
+
+## Catalog Managed Tables
+
+For full read and write access — and to use Iceberg's catalog features — attach an Iceberg REST catalog. Most catalogs authenticate with OAuth2; store the credentials in a [secret]({% link docs/current/configuration/secrets_manager.md %}) and attach the catalog with `ATTACH ... (TYPE iceberg, ...)`:
+
+```sql
+CREATE SECRET iceberg_secret (
+    TYPE iceberg,
+    CLIENT_ID '⟨admin⟩',
+    CLIENT_SECRET '⟨password⟩',
+    OAUTH2_SERVER_URI '⟨https://catalog.example.com/v1/oauth/tokens⟩'
+);
+
+ATTACH '⟨warehouse⟩' AS my_catalog (
+    TYPE iceberg,
+    SECRET iceberg_secret,
+    ENDPOINT '⟨https://catalog.example.com⟩'
+);
+```
+
+Once attached, the catalog behaves like any other DuckDB database: reference its tables as `⟨catalog⟩.⟨schema⟩.⟨table⟩` and query or modify them with regular SQL.
+
+```sql
+SHOW ALL TABLES;
+
+SELECT count(*) FROM my_catalog.default.events;
+
+INSERT INTO my_catalog.default.events VALUES (1, 'click', now());
+```
+
+The [metadata functions]({% link docs/current/core_extensions/iceberg/reference.md %}#read-and-metadata-functions) also work on catalog tables when passed a fully qualified name, e.g., `iceberg_snapshots(my_catalog.default.events)`.
+
+* For the full set of write operations — partitioning, `UPDATE`, `DELETE`, `MERGE INTO`, `ALTER TABLE`, and table properties — see [Writing to Iceberg]({% link docs/current/core_extensions/iceberg/writing.md %}).
+* For catalog-specific setup and the complete list of `ATTACH` options and secret parameters, see [Iceberg REST Catalogs]({% link docs/current/core_extensions/iceberg/iceberg_rest_catalogs.md %}).
+
+### Time Travel
+
+On an attached catalog, time travel with the `AT` clause directly on the table:
+
+```sql
+-- Using a snapshot id
+SELECT * FROM my_catalog.default.events AT (VERSION => ⟨snapshot_id⟩);
+
+-- Using a timestamp
+SELECT * FROM my_catalog.default.events AT (TIMESTAMP => TIMESTAMP '2025-09-22 12:32:43.217');
+```
+
+## Interoperability with DuckLake
+
+The `iceberg_to_ducklake` function performs a metadata-only copy of an attached Iceberg catalog into a [DuckLake]({% link docs/current/core_extensions/ducklake.md %}) catalog, letting you query Iceberg tables as if they were DuckLake tables:
+
+```sql
+-- With an Iceberg catalog attached as my_catalog
+ATTACH 'ducklake:my_ducklake.ducklake' AS my_ducklake;
+CALL iceberg_to_ducklake('my_catalog', 'my_ducklake');
+
+-- Skip specific tables
+CALL iceberg_to_ducklake('my_catalog', 'my_ducklake', skip_tables := ['table_to_skip']);
+```

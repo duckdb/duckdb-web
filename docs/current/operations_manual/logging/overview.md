@@ -92,11 +92,25 @@ DESCRIBE FROM duckdb_logs_parsed('HTTP');
 
 This is a (non-exhaustive) list of the available log types in DuckDB.
 
-| Log Type     | Description                                              | Structured |
-|--------------|----------------------------------------------------------|------------|
-| `QueryLog`   | Logs which queries are executed in DuckDB                | No         |
-| `FileSystem` | Logs all FileSystem interaction with DuckDB's Filesystem | Yes        |
-| `HTTP`       | Logs all HTTP traffic from DuckDB's internal HTTP client | Yes        |
+| Log Type           | Description                                              | Structured |
+|--------------------|----------------------------------------------------------|------------|
+| `QueryLog`         | Logs which queries are executed in DuckDB                | No         |
+| `FileSystem`       | Logs all FileSystem interaction with DuckDB's Filesystem | Yes        |
+| `HTTP`             | Logs all HTTP traffic from DuckDB's internal HTTP client | Yes        |
+| `PhysicalOperator` | Logs events emitted by physical operators during query execution | Yes |
+| `Metrics`          | Logs profiling metrics collected during query execution  | Yes        |
+
+The structured log types expose the following schemas, which you can inspect at any time with
+`DESCRIBE FROM duckdb_logs_parsed(⟨log_type⟩)`:
+
+<div class="monospace_table"></div>
+
+| Log Type           | Schema |
+|--------------------|--------|
+| `FileSystem`       | `fs VARCHAR`, `path VARCHAR`, `op VARCHAR`, `bytes BIGINT`, `pos BIGINT` |
+| `HTTP`             | `request STRUCT(type, url, start_time, duration_ms, headers MAP)`, `response STRUCT(status, reason, headers MAP)` |
+| `PhysicalOperator` | `operator_type VARCHAR`, `parameters MAP(VARCHAR, VARCHAR)`, `class VARCHAR`, `event VARCHAR`, `info MAP(VARCHAR, VARCHAR)` |
+| `Metrics`          | `metric VARCHAR`, `value VARCHAR` |
 
 ## Log Storages
 
