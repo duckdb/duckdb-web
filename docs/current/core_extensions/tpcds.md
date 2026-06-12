@@ -43,6 +43,26 @@ PRAGMA tpcds(8);
 | ese          | -10076698.16       |
 | ought        | -10994052.78       |
 
+### Listing Queries
+
+To list all 99 queries, run:
+
+```sql
+FROM tpcds_queries();
+```
+
+This function returns a table with columns `query_nr` and `query`.
+
+### Listing Expected Answers
+
+To produce the expected results for all queries on scale factors 1 and 10, run:
+
+```sql
+FROM tpcds_answers();
+```
+
+This function returns a table with columns `query_nr`, `scale_factor` and `answer`.
+
 ## Generating the Schema
 
 It's possible to generate the schema of TPC-DS without any data by setting the scale factor to 0:
@@ -50,6 +70,19 @@ It's possible to generate the schema of TPC-DS without any data by setting the s
 ```sql
 CALL dsdgen(sf = 0);
 ```
+
+## Data Generator Parameters
+
+The data generator function `dsdgen` has the following parameters:
+
+| Name        | Type      | Description                        |
+| ----------- | --------- | ---------------------------------- |
+| `catalog`   | `VARCHAR` | Target catalog                     |
+| `keys`      | `BOOLEAN` | Generate primary and foreign keys  |
+| `overwrite` | `BOOLEAN` | (Not used)                         |
+| `schema`    | `VARCHAR` | Target schema                      |
+| `sf`        | `DOUBLE`  | Scale factor                       |
+| `suffix`    | `VARCHAR` | Append the `suffix` to table names |
 
 ## Pre-Generated Datasets
 
