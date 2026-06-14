@@ -17,7 +17,7 @@ extension:
 
 repo:
   github: nkwork9999/duck-orch
-  ref: ede922bb469032483ac4a14410ef09d600a7cf6a
+  ref: d5fd7e076d237a0d912ac0f6cedafe244f1c7ac7
 
 docs:
   hello_world: |
@@ -122,8 +122,8 @@ docs:
 
 extension_star_count: 2
 extension_star_count_pretty: 2
-extension_download_count: 686
-extension_download_count_pretty: 686
+extension_download_count: 1033
+extension_download_count_pretty: 1.0k
 image: '/images/community_extensions/social_preview/preview_community_extension_duckorch.png'
 layout: community_extension_doc
 ---
@@ -177,6 +177,7 @@ LOAD {{ page.extension.name }};
 | orch_parse_task                | scalar        | NULL        | NULL    |          |
 | orch_register                  | pragma        | NULL        | NULL    |          |
 | orch_render_mermaid            | scalar        | NULL        | NULL    |          |
+| orch_restate                   | pragma        | NULL        | NULL    |          |
 | orch_run                       | pragma        | NULL        | NULL    |          |
 | orch_run_partition             | pragma        | NULL        | NULL    |          |
 | orch_sensor_set_interval       | pragma        | NULL        | NULL    |          |

@@ -17,7 +17,7 @@ extension:
 
 repo:
   github: nkwork9999/bvh2sql
-  ref: b72eec2566c7d8f361f471d81feede4caf8e39e4
+  ref: 774970f749ccab7a6e37271363882549e6d0e2f3
 
 docs:
   hello_world: |
@@ -60,8 +60,8 @@ docs:
 
 extension_star_count: 0
 extension_star_count_pretty: 0
-extension_download_count: 795
-extension_download_count_pretty: 795
+extension_download_count: 936
+extension_download_count_pretty: 936
 image: '/images/community_extensions/social_preview/preview_community_extension_bvh2sql.png'
 layout: community_extension_doc
 ---

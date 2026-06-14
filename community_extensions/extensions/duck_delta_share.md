@@ -22,8 +22,8 @@ repo:
 
 extension_star_count: 5
 extension_star_count_pretty: 5
-extension_download_count: 835
-extension_download_count_pretty: 835
+extension_download_count: 982
+extension_download_count_pretty: 982
 image: '/images/community_extensions/social_preview/preview_community_extension_duck_delta_share.png'
 layout: community_extension_doc
 ---
