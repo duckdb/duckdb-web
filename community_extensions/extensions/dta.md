@@ -52,10 +52,10 @@ docs:
     - Stores long strings as strL entries
     - Preserves value labels from DuckDB ENUM columns
 
-extension_star_count: 0
-extension_star_count_pretty: 0
-extension_download_count: 446
-extension_download_count_pretty: 446
+extension_star_count: 1
+extension_star_count_pretty: 1
+extension_download_count: 623
+extension_download_count_pretty: 623
 image: '/images/community_extensions/social_preview/preview_community_extension_dta.png'
 layout: community_extension_doc
 ---

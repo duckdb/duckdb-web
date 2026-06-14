@@ -8,18 +8,21 @@ excerpt: |
 extension:
   name: webbed
   description: Comprehensive processing extension for web markup languages (XML and HTML) with SAX streaming for large files, intelligent schema inference, XPath-based data extraction, and HTML table parsing.
-  version: 2.1.1
+  version: 2.2.0
   language: C++
   build: cmake
   license: MIT
   requires_toolchains: vcpkg
+  # Windows excluded: DuckDB's vendored fmt fails to compile against the community runner's
+  # current MSVC STL (stdext::checked_array_iterator removed); not fixable from the extension.
+  excluded_platforms: windows_amd64;windows_amd64_mingw
   maintainers:
     - teaguesterling
   vcpkg_commit: 68a1c387f660632f2f65cdb7e8cd093a08840e5d
 repo:
   github: teaguesterling/duckdb_webbed
-  andium: 98f27251d77a41723d40f539761a3f8ee462d0c0
-  ref: 98f27251d77a41723d40f539761a3f8ee462d0c0
+  andium: 465b37b04ee974d958e5a0b7559814b84f9f373b
+  ref: 465b37b04ee974d958e5a0b7559814b84f9f373b
 docs:
   docs_url: https://duckdb-webbed.readthedocs.io
   hello_world: |
@@ -94,10 +97,10 @@ docs:
 
     Built on libxml2 for robust, standards-compliant parsing with comprehensive error handling and memory-safe RAII implementation. 68 test suites with 2511 assertions, including DOM/SAX equivalence testing. The extension supports mixed file systems, configurable schema inference, and efficient processing of large document collections.
 
-extension_star_count: 58
-extension_star_count_pretty: 58
-extension_download_count: 4279
-extension_download_count_pretty: 4.3k
+extension_star_count: 59
+extension_star_count_pretty: 59
+extension_download_count: 7632
+extension_download_count_pretty: 7.6k
 image: '/images/community_extensions/social_preview/preview_community_extension_webbed.png'
 layout: community_extension_doc
 ---
@@ -163,6 +166,7 @@ LOAD {{ page.extension.name }};
 | xml_minify                     | scalar        | NULL        | NULL    |          |
 | xml_mock_namespaces            | scalar        | NULL        | NULL    |          |
 | xml_namespaces                 | scalar        | NULL        | NULL    |          |
+| xml_oom_selftest               | scalar        | NULL        | NULL    |          |
 | xml_pretty_print               | scalar        | NULL        | NULL    |          |
 | xml_stats                      | scalar        | NULL        | NULL    |          |
 | xml_to_json                    | scalar        | NULL        | NULL    |          |

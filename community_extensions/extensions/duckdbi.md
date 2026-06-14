@@ -54,10 +54,10 @@ docs:
     string literal. The `/api/query` endpoint executes SQL against the attached DuckDB database
     and returns JSON results to the browser frontend. No external server or setup required.
 
-extension_star_count: 3
-extension_star_count_pretty: 3
-extension_download_count: 815
-extension_download_count_pretty: 815
+extension_star_count: 4
+extension_star_count_pretty: 4
+extension_download_count: 1094
+extension_download_count_pretty: 1.1k
 image: '/images/community_extensions/social_preview/preview_community_extension_duckdbi.png'
 layout: community_extension_doc
 ---
