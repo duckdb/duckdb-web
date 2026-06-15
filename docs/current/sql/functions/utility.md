@@ -53,6 +53,7 @@ The functions below are difficult to categorize into specific function types and
 | [`query_table(`*`tbl_names`*`, [`*`by_name`*`])`](#query_tabletbl_names-by_name) | Table function that returns the union of tables given in *`tbl_names`*. If the optional *`by_name`* parameter is set to `true`, it uses [`UNION ALL BY NAME`]({% link docs/current/sql/query_syntax/setops.md %}#union-all-by-name) semantics. |
 | [`read_blob(source)`](#read_blobsource) | Returns the content from `source` (a filename, a list of filenames, or a glob pattern) as a `BLOB`. See the [`read_blob` guide]({% link docs/current/guides/file_formats/read_file.md %}#read_blob) for more details. |
 | [`read_text(source)`](#read_textsource) | Returns the content from `source` (a filename, a list of filenames, or a glob pattern) as a `VARCHAR`. The file content is first validated to be valid UTF-8. If `read_text` attempts to read a file with invalid UTF-8 an error is thrown suggesting to use `read_blob` instead. See the [`read_text` guide]({% link docs/current/guides/file_formats/read_file.md %}#read_text) for more details. |
+| [`replace_type(value, source_type, target_type)`](#replace_typevalue-source_type-target_type) | Recursively casts every field of `value` that has type `source_type` to `target_type`. The types are supplied as `NULL`-typed values, e.g., `NULL::VARCHAR`. |
 | [`sha1(string)`](#sha1string) | Returns a `VARCHAR` with the SHA-1 hash of the `string`. |
 | [`sha256(string)`](#sha256string) | Returns a `VARCHAR` with the SHA-256 hash of the `string`. |
 | [`sleep_ms(milliseconds)`](#sleep_msmilliseconds) | Pause execution for the specified number of milliseconds. Returns `NULL`. |
@@ -358,6 +359,14 @@ The functions below are difficult to categorize into specific function types and
 | **Description** | Returns the content from `source` (a filename, a list of filenames, or a glob pattern) as a `VARCHAR`. The file content is first validated to be valid UTF-8. If `read_text` attempts to read a file with invalid UTF-8 an error is thrown suggesting to use `read_blob` instead. See the [`read_text` guide]({% link docs/current/guides/file_formats/read_file.md %}#read_text) for more details. |
 | **Example** | `read_text('hello.txt')` |
 | **Result** | `hello\n` |
+
+#### `replace_type(value, source_type, target_type)`
+
+<div class="nostroke_table"></div>
+
+| **Description** | Recursively casts every field of `value` that has type `source_type` to `target_type`. The source and target types are supplied as `NULL`-typed values, e.g., `NULL::VARCHAR`. Useful for converting the field types of a deeply nested value (e.g., a `STRUCT` or `LIST`) in one call. |
+| **Example** | `replace_type([{'a': '42'}], NULL::VARCHAR, NULL::INTEGER)` |
+| **Result** | `[{'a': 42}]` |
 
 #### `sha1(string)`
 

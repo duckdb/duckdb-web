@@ -78,6 +78,8 @@ The `load.sql` file contains a set of `COPY` statements that can be used to read
 
 The database can be reloaded by using the `IMPORT DATABASE` command again, or manually by running `schema.sql` followed by `load.sql` to re-load the data.
 
+> `IMPORT DATABASE` expects to import into a fresh database. `schema.sql` uses plain `CREATE` statements (without `OR REPLACE` or `IF NOT EXISTS`), so importing into a database that already contains any of the exported objects – for example a user-defined type – fails with a "already exists" error. Import into an empty database.
+
 ### Syntax
 
 <div id="rrdiagram2"></div>

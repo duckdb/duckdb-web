@@ -6,7 +6,7 @@ redirect_from:
 title: Iceberg REST Catalogs
 ---
 
-The `iceberg` extension supports attaching Iceberg REST Catalogs. Before attaching an Iceberg REST Catalog, you must install the `iceberg` extension by following the instructions located in the [overview]({% link docs/current/core_extensions/iceberg/overview.md %}).
+This page covers connecting to Iceberg REST Catalogs: authentication, the full set of `ATTACH` options, and setup instructions for specific catalogs. For the basics of attaching a catalog and querying it, see [Catalog Managed Tables]({% link docs/current/core_extensions/iceberg/overview.md %}#catalog-managed-tables); for write operations, see [Writing to Iceberg]({% link docs/current/core_extensions/iceberg/writing.md %}).
 
 If you are attaching to an Iceberg REST Catalog managed by Amazon, please see the instructions for attaching to [Amazon S3 Tables]({% link docs/current/core_extensions/iceberg/amazon_s3_tables.md %}) or [Amazon SageMaker Lakehouse]({% link docs/current/core_extensions/iceberg/amazon_sagemaker_lakehouse.md %}).
 
@@ -64,10 +64,12 @@ A REST Catalog with OAuth2 authorization can also be attached with just an `ATTA
 | `AUTHORIZATION_TYPE`        | `VARCHAR`  | `OAUTH2`             | Pass `SigV4` for Catalogs the require SigV4 authorization, `none` for catalogs that don't need authentication.                                                       |
 | `ACCESS_DELEGATION_MODE`    | `VARCHAR`  | `vended_credentials` | Access delegation mode. Allowed values are `vended_credentials` and `none`.                                                                                          |
 | `EXTRA_HTTP_HEADERS`        | `MAP`      | `NULL`               | Additional HTTP headers to send with REST Catalog requests.                                                                                                          |
-| `SUPPORT_NESTED_NAMESPACES` | `BOOLEAN`  | `true`               | Option for catalogs that support nested namespaces.                                                                                                                  |
-| `SUPPORT_STAGE_CREATE`      | `BOOLEAN`  | `false`              | Option for catalogs that do not support stage create.                                                                                                                |
+| `SUPPORT_NESTED_NAMESPACES` | `BOOLEAN`  | `false`              | Set to `true` for catalogs that support nested namespaces.                                                                                                            |
+| `SUPPORT_STAGE_CREATE`      | `BOOLEAN`  | `true`               | Set to `false` for catalogs that do not support stage create.                                                                                                         |
+| `DEFAULT_SCHEMA`            | `VARCHAR`  | `NULL`               | The default schema (namespace) to use for the attached catalog.                                                                                                       |
+| `ENCODE_ENTIRE_PREFIX`     | `BOOLEAN`  | `false`              | URL-encode the entire path prefix when communicating with the catalog.                                                                                                |
 | `MAX_TABLE_STALENESS`       | `INTERVAL` | `NULL`               | Option for preventing unnecessary requests to the Iceberg REST Catalog. You can pass human readable interval strings. `10 minutes`, `30 seconds`, `1 year` all work. |
-| `PURGE_REQUESTED`        | `BOOLEAN` | `true`  | Option to send the [PurgeRequested](https://github.com/apache/iceberg/blob/4b4eb38cf6dda7b43faeb40eb00aa5db424d2ecb/open-api/rest-catalog-open-api.yaml#L1144) parameter when dropping a table.                                                 |
+| `PURGE_REQUESTED`        | `BOOLEAN` | `false`  | Option to send the [PurgeRequested](https://github.com/apache/iceberg/blob/4b4eb38cf6dda7b43faeb40eb00aa5db424d2ecb/open-api/rest-catalog-open-api.yaml#L1144) parameter when dropping a table.                                                 |
 
 The following options can only be passed to a `CREATE SECRET` statement and they require `AUTHORIZATION_TYPE` to be `OAUTH2`:
 
@@ -77,119 +79,18 @@ The following options can only be passed to a `CREATE SECRET` statement and they
 | `OAUTH2_SCOPE`      | `VARCHAR` | `NULL`  | Requested scope for the returned OAuth Access Token. |
 
 
-### Supported Operations
+## Working with an Attached Catalog
 
-The DuckDB Iceberg extension supports the following operations when used with a REST Catalog attached:
+Once a catalog is attached, you can run the full set of read and write operations against its tables:
 
-* `CREATE/DROP SCHEMA`
-* `CREATE/DROP TABLE`
-* `INSERT INTO`
-* `UPDATE`
-* `DELETE`
-* `SELECT`
+* **Reading and metadata**: `SELECT`, time travel with the `AT` clause, and the `iceberg_metadata`, `iceberg_snapshots`, and statistics functions. See the [Functions and Settings Reference]({% link docs/current/core_extensions/iceberg/reference.md %}).
+* **Writing**: `CREATE`/`DROP SCHEMA` and `TABLE`, partitioning, `INSERT`, `UPDATE`, `DELETE`, `MERGE INTO`, `ALTER TABLE`, table properties, and `COPY FROM DATABASE`. See [Writing to Iceberg]({% link docs/current/core_extensions/iceberg/writing.md %}).
 
-Since these operations are supported, the following will also work:
+Metadata functions accept a fully qualified table name, e.g.:
 
 ```sql
-COPY FROM DATABASE duckdb_db TO iceberg_datalake;
--- Or
-COPY FROM DATABASE iceberg_datalake TO duckdb_db;
+SELECT * FROM iceberg_snapshots(my_catalog.default.t);
 ```
-
-This functionality enables deep copies between Iceberg and DuckDB storage.
-
-#### Limitations for UPDATE and DELETE
-
-The `UPDATE` and `DELETE` operations have the following limitations:
-
-* They only work on tables that are **not partitioned** and **not sorted**. Attempting these operations on partitioned or sorted tables results in an error.
-* DuckDB-Iceberg only writes **positional deletes**. Copy-on-write functionality is not yet supported.
-* DuckDB-Iceberg only supports **merge-on-read semantics**. If a table has `write.update.mode` or `write.delete.mode` properties set to something other than `merge-on-read`, the operation fails.
-
-### Metadata Operations
-
-The functions `iceberg_metadata` and `iceberg_snapshots` are also available to use with an Iceberg REST Catalog using a fully qualified path, e.g.:
-
-```sql
-SELECT * FROM iceberg_metadata(my_datalake.default.t)
-
--- Or
-SELECT * FROM iceberg_snapshots(my_datalake.default.t)
-```
-
-This functionality enables the user to do **time traveling**.
-
-```sql
--- Using a snapshot id
-SELECT * FROM my_datalake.default.t AT (VERSION => ⟨SNAPSHOT_ID⟩)
-
--- Or using a timestamp
-SELECT * FROM my_datalake.default.t AT (TIMESTAMP => TIMESTAMP '2025-09-22 12:32:43.217')
-```
-
-### Interoperability with DuckLake
-
-The DuckDB Iceberg extensions exposes a function to do metadata only copies of the Iceberg metadata to [DuckLake]({% link docs/current/core_extensions/ducklake.md %}), which enables users to query Iceberg tables as if they were DuckLake tables.
-
-```sql
--- Given that we have an Iceberg catalog attached aliased to iceberg_datalake
-ATTACH 'ducklake:my_ducklake.ducklake' AS my_ducklake;
-
-CALL iceberg_to_ducklake('iceberg_datalake', 'my_ducklake');
-```
-
-It is also possible to skip a set of tables provided the `skip_tables` parameter.
-
-```sql
-CALL iceberg_to_ducklake('iceberg_datalake', 'my_ducklake', skip_tables := ['table_to_skip']);
-```
-
-### Table Properties Functions
-
-DuckDB provides functions to view and modify [Iceberg table properties](https://iceberg.apache.org/spec/#table-metadata-fields):
-
-| Function                                                | Description                                    |
-| ------------------------------------------------------- | ---------------------------------------------- |
-| `iceberg_table_properties(table)`                       | Returns all properties of the specified table. |
-| `set_iceberg_table_properties(table, properties)`       | Sets properties on the specified table.        |
-| `remove_iceberg_table_properties(table, property_list)` | Removes properties from the specified table.   |
-
-```sql
--- View table properties
-SELECT *
-FROM iceberg_table_properties(iceberg_catalog.default.my_table);
-
--- Set table properties
-CALL set_iceberg_table_properties(
-    iceberg_catalog.default.my_table,
-    {'write.update.mode': 'merge-on-read', 'write.delete.mode': 'merge-on-read'}
-);
-
--- Remove table properties
-CALL remove_iceberg_table_properties(
-    iceberg_catalog.default.my_table,
-    ['some.property']
-);
-```
-
-You can also create a table with table properties.
-
-```sql
-CREATE TABLE test_create_table (a INTEGER)
-WITH (
-    'format-version' = '2', -- format version will be elevated to format-version when creating a table
-    'location' = 's3://path/to/data', -- location will be elevated to location when creating a table
-    'property1' = 'value1',
-    'property2' = 'value2'
-);
-```
-
-### Unsupported Operations
-
-The following operations are not supported by the DuckDB Iceberg extension:
-
-* `MERGE INTO`
-* `ALTER TABLE`
 
 ## Specific Catalog Examples
 
