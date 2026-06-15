@@ -37,10 +37,10 @@ Tables can be partitioned with the `PARTITIONED BY` clause using the [Iceberg pa
 
 | Transform | Description |
 | --- | --- |
-| `⟨column⟩` | Identity – partition by the column value directly. |
-| `year(⟨column⟩)`, `month(⟨column⟩)`, `day(⟨column⟩)`, `hour(⟨column⟩)` | Partition by a date/timestamp component. |
-| `bucket(⟨n⟩, ⟨column⟩)` | Hash the column into `n` buckets. |
-| `truncate(⟨n⟩, ⟨column⟩)` | Truncate the column value to width `n`. |
+| `⟨column⟩`{:.language-sql .highlight} | Identity – partition by the column value directly. |
+| `year(⟨column⟩)`{:.language-sql .highlight}, `month(⟨column⟩)`{:.language-sql .highlight}, `day(⟨column⟩)`{:.language-sql .highlight}, `hour(⟨column⟩)`{:.language-sql .highlight} | Partition by a date/timestamp component. |
+| `bucket(⟨n⟩, ⟨column⟩)`{:.language-sql .highlight} | Hash the column into `n` buckets. |
+| `truncate(⟨n⟩, ⟨column⟩)`{:.language-sql .highlight} | Truncate the column value to width `n`. |
 
 ```sql
 CREATE TABLE my_catalog.sales.events (
