@@ -1,17 +1,25 @@
 ---
 layout: post
-title: "Announcing DuckDB 1.4.4 LTS"
+title: "Announcing DuckDB 1.5.4 Variegata"
 author: "The DuckDB team"
-thumb: "/images/blog/thumbs/duckdb-release-1-4-4-lts.svg"
-image: "/images/blog/thumbs/duckdb-release-1-4-4-lts.jpg"
-excerpt: "Today we are releasing DuckDB 1.4.4 with bugfixes and performance improvements."
+thumb: "/images/blog/thumbs/duckdb-release-1-5-4.svg"
+image: "/images/blog/thumbs/duckdb-release-1-5-4.jpg"
+excerpt: "Today we are releasing DuckDB 1.5.4 (Variegata) with bugfixes and performance improvements."
 tags: ["release"]
 ---
 
-In this blog post, we highlight a few important fixes in DuckDB v1.4.4, the fourth patch release in [DuckDB's 1.4 LTS line]({% post_url 2025-09-16-announcing-duckdb-140 %}).
-The release ships bugfixes, performance improvements and security patches. You can find the complete [release notes on GitHub](https://github.com/duckdb/duckdb/releases/tag/v1.4.4).
+> Today we are releasing two DuckDB versions:
+> v1.4.5 LTS (Andium) and 
+> v1.5.4 (Variegata).
+> **This blog post is about the latest non-LTS version, v1.5.4 (Variegata).**
 
-To install the new version, please visit the [installation page]({% link install/index.html %}#version=lts).
+In this blog post, we highlight a few important fixes in DuckDB v1.5.4, the fifth patch release in [DuckDB's 1.5 (Variegata) line]({% post_url 2025-09-16-announcing-duckdb-140 %}).
+The release ships bugfixes, performance improvements and security patches. You can find the complete [release notes on GitHub](https://github.com/duckdb/duckdb/releases/tag/v1.5.4).
+
+To install the new version, please visit the [installation page]({% link install/index.html %}).
+
+VVV TODO everything below VVV
+
 
 ## Fixes
 
@@ -44,12 +52,3 @@ This version ships a number of performance improvements and bugfixes.
 * [`#20339` Use UTF-16 console output in Windows shell](https://github.com/duckdb/duckdb/pull/20339)
 
 ## Conclusion
-
-This post was a short summary of the changes in v1.4.4. As usual, you can find the [full release notes on GitHub](https://github.com/duckdb/duckdb/releases/tag/v1.4.4).
-We would like to thank our contributors for providing detailed issue reports and patches.
-In the coming month, we'll release DuckDB v1.5.0.
-We'll also keep v1.4 LTS updated until mid-September. We'll announce the release date of v1.4.5 in the [release calendar]({% link release_calendar.md %}) in the coming months.
-
-> Earlier today, we pushed an incorrect tag that was visible for a few minutes.
-No binaries or extensions were available under this tag and we replaced it as soon as we noticed the issue.
-Our apologies for the erroneous release.
