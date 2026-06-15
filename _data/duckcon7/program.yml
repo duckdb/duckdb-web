@@ -2,10 +2,11 @@
   title: Wednesday, 24 June 2026
   sessions:
     - venue opens:
-      title: Warmup
+      title: Sponsor session
       timetable:
         - time: "14:15"
-          title: Sponsor sessions (TBA)
+          title: So you self-hosted DuckDB. Now what? An honest look at the road to production.
+          sepaker: Mehdi Ouazza (MotherDuck)
     - first session:
       title: First session
       timetable:
