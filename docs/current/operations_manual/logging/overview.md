@@ -101,7 +101,7 @@ This is a (non-exhaustive) list of the available log types in DuckDB.
 | `Metrics`          | Logs profiling metrics collected during query execution  | Yes        |
 
 The structured log types expose the following schemas, which you can inspect at any time with
-`DESCRIBE FROM duckdb_logs_parsed(⟨log_type⟩)`:
+`DESCRIBE FROM duckdb_logs_parsed(⟨log_type⟩)`{:.language-sql .highlight}:
 
 <div class="monospace_table"></div>
 
@@ -207,9 +207,8 @@ your logging:
 CALL enable_logging(storage = 'stdout', storage_buffer_size = 2048);
 ```
 
-Or imagine you are debugging a crash in DuckDB and you want to use the `file` logger to understand what's going on:
-Simply disable the
-buffering using:
+Or imagine you are debugging a crash in DuckDB and you want to use the `file` logger to understand what's going on.
+Simply disable the buffering using:
 
 ```sql
 CALL enable_logging(storage_path = '/tmp/mylogs', storage_buffer_size = 0);
