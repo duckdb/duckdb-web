@@ -6,7 +6,7 @@
       timetable:
         - time: "14:15"
           title: So you self-hosted DuckDB. Now what? An honest look at the road to production.
-          sepaker: Mehdi Ouazza (MotherDuck)
+          speaker: Mehdi Ouazza (MotherDuck)
     - first session:
       title: First session
       timetable:
