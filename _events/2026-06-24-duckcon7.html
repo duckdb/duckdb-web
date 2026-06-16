@@ -80,6 +80,32 @@ redirect_from:
   <hr class="divider" />
 </section>
 
+<section class="speakers w-large" id="speakers">
+  <div class="wrap">
+    {% include duckcon7/section_header.html title="Speakers" description="Meet the engineers, advocates, and innovators advancing embedded analytical databases. DuckCon speakers deliver the technical depth and real-world insight you need—whether you're optimizing queries, building extensions, or scaling DuckDB in production." %}
+    <ul class="speakers-list">
+      {% for speaker in site.data.duckcon7.speakers %}
+      <li class="speaker-item">
+        <article class="postpreview">
+          <div class="postimg custom">
+            <img src="{{ speaker.image }}" alt="{{ speaker.name }}" class="zoom-image"/>
+          </div>
+          <div class="postdetails">
+            <h3 class="headline-3">{{ speaker.name }}</h3>
+            {% if speaker.title %}
+            <div class="meta text-secondary-color body-small">
+              <div class="speaker">{{ speaker.title }}</div>
+            </div>
+            {% endif %}
+          </div>
+        </article>
+      </li>
+      {% endfor %}
+    </ul>
+  </div>
+  <hr class="divider" />
+</section>
+
 <section class="map w-large" id="venue">
   <div class="wrap">
     <ul class="map-menu text-secondary-color">
@@ -152,39 +178,6 @@ Sponsors – Option A: call for sponsors (use when there are no sponsors yet)
   {% include duckcon7/section_header.html title="Any questions?" description="If you have any questions or any special requirements (e.g., dietary restrictions),<br>don't hesitate to <a href='mailto:gabor@ducklabs.com'>contact us</a>!" %}
 </section>
 
-<!--
-<section class="speakers w-large" id="speakers">
-  <div class="wrap">
-    {% include duckcon7/section_header.html title="Speakers" description="Meet the engineers, advocates, and innovators advancing embedded analytical databases. DuckCon speakers deliver the technical depth and real-world insight you need—whether you're optimizing queries, building extensions, or scaling DuckDB in production." %}
-    <ul class="speakers-list">
-      {% if site.data.duckcon7.speakers %}
-        {% for speaker in site.data.duckcon7.speakers %}
-        <li class="speaker-item">
-          <article class="postpreview">
-            <a href="{{ speaker.url }}" class="blocklink" title="{{ speaker.name }}" target="_blank" rel="noopener noreferrer"></a>
-            <div class="postimg custom">
-              {% if speaker.image %}
-                <img src="{{ speaker.image }}" alt="{{ speaker.name }}" class="zoom-image"/>
-              {% else %}
-                {% assign placeholder_number = forloop.index | modulo: 3 | plus: 1 %}
-                <img src="/images/blog/thumbs/placeholder-{{ placeholder_number }}.svg" alt="Placeholder" class="zoom-image"/>
-              {% endif %}
-            </div>
-            <div class="postdetails">
-              <h3 class="headline-3">{{ speaker.name }}</h3>
-              <div class="meta text-secondary-color body-small">
-                <div class="speaker">{{ speaker.title }}</div>
-              </div>
-            </div>
-          </article>
-        </li>
-        {% endfor %}
-      {% endif %}
-      </ul>
-  </div>
-  <hr class="divider" />
-</section>
--->
 <!--
 <section class="venue" id="venue">
   {% include duckcon7/section_header.html title="Venue" description="" %}
