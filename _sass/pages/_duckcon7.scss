@@ -390,10 +390,6 @@
         }
     }
 
-    .speakers {
-        @include mobile-padding;
-    }
-
     .speakers .speakers-list {
         @include reset-unordered-list;
         --columns: 2;
@@ -419,6 +415,10 @@
             a::after {
                 display: none !important;
             }
+
+            &:hover .postimg > img {
+                transform: none;
+            }
         }
 
         @media (min-width: 770px) {
@@ -436,10 +436,6 @@
         section.venue-access .feature-list .featurebox {
             width: 100%;
         }
-    }
-
-    .venue-access {
-        @include mobile-padding;
     }
 
     .sponsors {
@@ -550,8 +546,6 @@
     }
 
     .map {
-        @include mobile-padding;
-
         .embedded-map {
             border-radius: var(--border-radius-box);
             overflow: hidden;
