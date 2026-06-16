@@ -3,7 +3,7 @@ layout: post
 title: "Automating Database-Native Function Code Synthesis with LLMs"
 author: "Wei Zhou, Xuanhe Zhou, Qikang He, Guoliang Li, Bingsheng He, Quanqing Xu, Fan Wu"
 thumb: "/images/library/thumbs/sigmod.svg"
-image: "/images/library/thumbs/sigmod.png"
+image: "/images/library/thumbs/sigmod.jpg"
 tags: ["Paper"]
 category: community
 excerpt: ""
