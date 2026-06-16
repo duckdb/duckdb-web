@@ -5,7 +5,7 @@
       title: Sponsor track
       timetable:
         - time: "14:15"
-          title: So you self-hosted DuckDB. Now what? An honest look at the road to production.
+          title: So you self-hosted DuckDB. Now what? An honest look at the road to production
           speaker: Mehdi Ouazza<br>(MotherDuck)
     - first session:
       title: Main track, session 1
