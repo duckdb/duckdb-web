@@ -186,6 +186,15 @@ ATTACH 'quack:localhost' AS remote_db (
 );
 ```
 
+### HTTP Connection Caching
+
+By default, each Quack client request opens a fresh connection to the server — a new TCP and, with SSL, a costly TLS handshake. Connection caching reuses connections across requests, reducing per-query latency on repeated requests:
+
+{:.codebox-client}
+```sql
+SET httpfs_connection_caching = true;
+```
+
 ### Node Identity (`whoami`)
 
 Each Quack node exposes a `whoami()` table macro that surfaces basic identity and runtime info, useful when proxying to a fleet of servers or when correlating logs:
