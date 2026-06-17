@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Announcing DuckDB 1.5.4 Variegata"
+title: "Announcing DuckDB 1.5.4 (Variegata)"
 author: "The DuckDB team"
 thumb: "/images/blog/thumbs/duckdb-release-1-5-4.svg"
 image: "/images/blog/thumbs/duckdb-release-1-5-4.jpg"
