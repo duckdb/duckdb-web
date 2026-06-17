@@ -9,10 +9,11 @@ tags: ["release"]
 ---
 
 > We are simultaneously releasing two DuckDB versions:
-> v1.4.5 LTS (Andium) and 
+> v1.4.5 LTS (Andium) and
 > v1.5.4 (Variegata).
 > **This blog post is about the LTS version, v1.4.5 (Andium).**
-> For the latest stable version, read the [v1.5.4 (Variegata) announcement]({% post_url 2026-06-17-announcing-duckdb-154 %}).
+> Unless you are using specifically using the LTS version, you are likely looking for the latest stable version,
+> [v1.5.4 (Variegata)]({% post_url 2026-06-17-announcing-duckdb-154 %}).
 
 In this blog post, we highlight a few important fixes in DuckDB v1.4.5, the sixth patch release in [DuckDB's 1.4 LTS line]({% post_url 2025-09-16-announcing-duckdb-140 %}).
 The release ships bugfixes, performance improvements and security patches. You can find the full [release notes on GitHub](https://github.com/duckdb/duckdb/releases/tag/v1.4.5).
