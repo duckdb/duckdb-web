@@ -422,6 +422,10 @@
             &:hover .postimg > img {
                 transform: none;
             }
+
+            h3 {
+                min-height: 0;
+            }
         }
 
         @media (min-width: 770px) {
