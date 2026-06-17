@@ -17,14 +17,12 @@ To install the new version, please visit the [installation page]({% link install
 
 This version ships a number of performance improvements and bugfixes.
 
-* [`#20233` Function chaining not allowed in QUALIFY #20233](https://github.com/duckdb/duckdb/issues/20233)
-
 ### Correctness
 
 * [`#20008` Unexpected Result when Using Utility Function ALIAS #20008](https://github.com/duckdb/duckdb/issues/20008)
 * [`#20410` ANTI JOIN produces wrong results with materialized CTEs](https://github.com/duckdb/duckdb/issues/20410)
 * [`#20156` Streaming window unions produce incorrect results](https://github.com/duckdb/duckdb/issues/20156)
-* [`#20413` ASOF joins with `predicate` fail with different errors for FULL, RIGHT, SEMI, and ANTI join types](https://github.com/duckdb/duckdb/issues/20413)
+* [`#20413` ASOF joins with `predicate` fail with different errors for `FULL`, `RIGHT`, `SEMI`, and `ANTI` join types](https://github.com/duckdb/duckdb/issues/20413)
 * [`#20090` mode() produces corrupted UTF-8 strings in parallel execution](https://github.com/duckdb/duckdb/issues/20090)
 
 ### Crashes and Internal Errors
@@ -40,7 +38,7 @@ This version ships a number of performance improvements and bugfixes.
 
 ### Miscellaneous
 
-* [`#20233` Function chaining not allowed in QUALIFY #20233](https://github.com/duckdb/duckdb/issues/20233)
+* [`#20233` Function chaining not allowed in `QUALIFY`](https://github.com/duckdb/duckdb/issues/20233)
 * [`#20339` Use UTF-16 console output in Windows shell](https://github.com/duckdb/duckdb/pull/20339)
 
 ## Conclusion
