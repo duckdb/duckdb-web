@@ -15,7 +15,7 @@ While this is a patch release, we are shipping some small features. In LTS relea
 1. We add small opt-in features such as [accessing the profiler's output from the logger](#accessing-the-profilers-output-from-the-logger) in this release. These features have been highly-requested from the community and we are confident that these will not cause any issues for people upgrading to the latest release. In fact, using them carefully can help detect and understand performance regressions.
 2. Some of DuckDB's extensions that are marked as [“experimental”]({% link docs/current/core_extensions/overview.md %}) are shipping full-fledged features. For example, this is how we have rolled out support for [Iceberg deletes and updates](#iceberg-improvements). Extensions are opt-in by nature, so if you stick to core DuckDB and its stable extensions, changes in the experimental extensions will not affect the stability of your installation.
 
-> To install the new version, please visit the [installation page]({% link install/index.html %}). Note that it can take a few hours to days for some client libraries (e.g., R, Rust) to be released due to the extra changes and review rounds required.
+> To install the new version, please visit the [installation page]({% link install/index.html %}#version=lts). Note that it can take a few hours to days for some client libraries (e.g., R, Rust) to be released due to the extra changes and review rounds required.
 
 ## Features and Improvements
 
