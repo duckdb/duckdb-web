@@ -69,3 +69,6 @@ This version ships a number of performance improvements and bugfixes.
 This post was a short summary of the changes in v1.5.4. As usual, you can find the [full release notes on GitHub](https://github.com/duckdb/duckdb/releases/tag/v1.5.4).
 We would like to thank our contributors for providing detailed issue reports and patches.
 Stay tuned for [future DuckDB releasese]({% link release_calendar.md %}), including v2.0.0 in the fall!
+
+PS: Next week, we'll host [DuckCon #7 in Amsterdam]({% link _events/2026-06-24-duckcon7.html %}).
+Join us [in-person](https://luma.com/dj4svsmm) or on the online stream.
