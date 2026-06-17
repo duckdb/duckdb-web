@@ -62,6 +62,8 @@
             h1{
                 margin-bottom: 24px;
                 font-weight: 700;
+                line-height: 0.8;
+                letter-spacing: -0.025em;
             }
         }
 
@@ -419,6 +421,10 @@
 
             &:hover .postimg > img {
                 transform: none;
+            }
+
+            h3 {
+                min-height: 0;
             }
         }
 
