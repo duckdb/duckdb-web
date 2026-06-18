@@ -2,6 +2,8 @@
 layout: post
 title: "DuckDB: Not Quack Science"
 author: Gábor Szárnyas
+thumb: "/images/library/thumbs/2026-05-27-duckdb-not-quack-science.jpg"
+image: "/images/library/thumbs/2026-05-27-duckdb-not-quack-science.jpg"
 tags: ["Talk"]
 length: "35 min"
 thirdparty: false

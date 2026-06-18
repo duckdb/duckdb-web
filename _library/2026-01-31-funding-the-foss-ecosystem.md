@@ -2,6 +2,8 @@
 layout: post
 title: "Funding Lessons Learned Panel"
 author: "Gábor Szárnyas"
+thumb: "/images/library/thumbs/2026-01-31-funding-the-foss-ecosystem.jpg"
+image: "/images/library/thumbs/2026-01-31-funding-the-foss-ecosystem.jpg"
 tags: ["Talk"]
 thirdparty: false
 excerpt: ""
