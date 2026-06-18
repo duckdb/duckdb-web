@@ -63,31 +63,31 @@ artifacts:
           sha256: "e4959f966e8f11cd21c7cf8751b5187439e272641411eca78737974cc1ae0176"
 
   java:
-    filename: "duckdb_jdbc-1.4.4.0.jar"
+    filename: "duckdb_jdbc-1.4.5.0.jar"
     hashes:
-      sha256: "43f0cc93c892699162d46e8a45e2cbb92d92f74b933832f84c78ed551a2608df"
+      sha256: "5f11500c4fe8af47cfb15b36bb92e22597ad2109556c1564823e2db1a210072e"
 
   odbc:
     linux:
       x86_64:
         filename: "duckdb_odbc-linux-amd64.zip"
         hashes:
-          sha256: "47ccc4a40ca4d632e7f6bd4c5737522a03e105754cb28410e2395ee71cf6252b"
+          sha256: "c96143f3d4a57c2cdad1a648053ae500afb11403d0d4f0410078f4771f6e6ef0"
       arm64:
         filename: "duckdb_odbc-linux-arm64.zip"
         hashes:
-          sha256: "df53873985f5d836b52aa34ce8042808cb6e950482e587d59ebc6e58c91810b9"
+          sha256: "699c2e8b2baf97e43e5ba1b8cfdd359399e56fa781fff0bd8a962e2659429f7d"
     macos:
       universal:
         filename: "duckdb_odbc-osx-universal.zip"
         hashes:
-          sha256: "cfd795bfd9ecc4ed590369402b7f1ce82af1cff1e6d26ac5f7d79dbf878997fa"
+          sha256: "8329ccc7cb413562dc04e07ca6b6c45f804a05099a8eda4a85122d7a8e9ed65e"
     windows:
       x86_64:
         filename: "duckdb_odbc-windows-amd64.zip"
         hashes:
-          sha256: "5758950f6a35486ee54aa0ae7a0bf4bca397afc11b597047aa0cbebb56fd6d65"
+          sha256: "a84cbc0087cdf43c6193dc7e4ca55ad2b1a7faf5dfcbc1084df976f512c7dc24"
       arm64:
         filename: "duckdb_odbc-windows-arm64.zip"
         hashes:
-          sha256: "53543e502c9af0d05ae66a2d9c3db13ba0f782903fbe14b7c17a0192afa83d4e"
+          sha256: "9d8e8a921a85ccc7ce2456aab1847b9abfd54b60335f6c5f2a99fb2e24641889"
