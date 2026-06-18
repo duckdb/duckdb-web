@@ -23,10 +23,10 @@ repo:
   github: query-farm/datasketches
   ref: 6186fc8e3a8c8d78b9d890fc0a264324d9cc1c7b
 
-extension_star_count: 46
-extension_star_count_pretty: 46
-extension_download_count: 17351
-extension_download_count_pretty: 17.4k
+extension_star_count: 47
+extension_star_count_pretty: 47
+extension_download_count: 16283
+extension_download_count_pretty: 16.3k
 image: '/images/community_extensions/social_preview/preview_community_extension_datasketches.png'
 layout: community_extension_doc
 ---

@@ -160,6 +160,8 @@ SET GLOBAL quack_authorization_function  = 'read_only';
 
 A client with the right token now connects and can run `SELECT`s, but `INSERT INTO quack.t ...` issued through the standard SQL path will fail at authorization time.
 
+> Warning The prefix regex above is illustrative, not a robust read-only filter: a query like `WITH x AS (SELECT 1) INSERT INTO t SELECT * FROM x` starts with `WITH` yet still mutates data. For production read-only enforcement, attach the database in [read-only mode]({% link docs/current/sql/statements/attach.md %}#options) or use an authorization function that inspects the *parsed statement type* rather than the raw query text.
+
 ### Example: Per-User Access Control List
 
 To implement per-user access control list (ACL), create a custom authentication hook that records `sid` → `user` pairs so authorization can look up who is asking.

@@ -492,7 +492,7 @@ $(document).ready(function(){
 	
 // Add class-name to external Links
 $('a').filter(function() {
-	return this.hostname && this.hostname !== location.hostname && $(this).find('img').length === 0 && !$(this).hasClass('button');
+	return this.hostname && this.hostname !== location.hostname && $(this).find('img, svg').length === 0 && !$(this).hasClass('button');
 }).addClass("externallink").attr('target','_blank');
 
 $('.headercontent a, .mainlinks a, .box-link a, .footercontent a, .highlight a, .button, .ecosystem-diagram a, a.tag, a:has(> .tag)').removeClass('externallink');

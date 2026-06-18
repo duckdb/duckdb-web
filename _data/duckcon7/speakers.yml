@@ -1,39 +1,58 @@
+- name: Nicolas Renkamp
+  title: Merck KGaA
+  image: /images/events/duckcon7/speakers/nicolas-renkamp.jpg
+
+- name: Herminio Vazquez-Cano
+  title: ETH Zürich
+  image: /images/events/duckcon7/speakers/herminio-vazquez-cano.jpg
+
+- name: Virginie Grosboillot
+  title: University of Ljubljana
+  image: /images/events/duckcon7/speakers/virginie-grosboillot.jpg
+
+- name: Teun van den Brand
+  title: Posit PBC
+  image: /images/events/duckcon7/speakers/teun-van-den-brand.jpg
+
+- name: Kian Mehrabani
+  title: Spotify
+  image: /images/events/duckcon7/speakers/kian-mehrabani.jpg
+
+- name: Sylvain Utard
+  title: Altertable.ai
+  image: /images/events/duckcon7/speakers/sylvain-utard.jpg
+
+- name: Roman Nozdrin
+  title: MariaDB Corporation
+  image: /images/events/duckcon7/speakers/roman-nozdrin.jpg
+
+- name: Milla Henriksson
+  title: Toyota Gazoo Racing World Rally Team
+  image: /images/events/duckcon7/speakers/milla-henriksson.jpg
+
+- name: Marco Slot
+  title: Snowflake
+  image: /images/events/duckcon7/speakers/marco-slot.jpg
+
+- name: Floyd Berndsen
+  image: /images/events/duckcon7/speakers/floyd-berndsen.jpg
+
+- name: Thomas Visser
+  title: Hartwig Medical Foundation
+  image: /images/events/duckcon7/speakers/thomas-visser.jpg
+
+- name: Ilya Boyandin
+  title: Foursquare / GeoVisually GmbH
+  image: /images/events/duckcon7/speakers/ilya-boyandin.jpg
+
+- name: Barry Smart
+  title: endjin
+  image: /images/events/duckcon7/speakers/barry-smart.jpg
+
 - name: Hannes Mühleisen
-  title: CEO of DuckLabs
-  image: /images/events/duckcon7/speakers/hannes_muhleisen.jpg
-  url: "#"
-
-- name: Michael Driscoll
-  title: Principal Database Architect
-  image: /images/events/duckcon7/speakers/michael_driscoll.jpg
-  url: "#"
-
-- name: Gábor Szárnyas
-  title: Developer Advocate, DuckLabs
-  image: /images/events/duckcon7/speakers/gabor_szarnyas.jpg
-  url: "#"
-
-- name: Kaivalya Apte
-  title: Geek Narrator
-  image: /images/events/duckcon7/speakers/kaivalya_apte.jpg
-  url: "#"
-
-- name: Jordan Tigani
-  title: Chief Duck
-  image: /images/events/duckcon7/speakers/jordan_tigani.jpg
-  url: "#"
-
-- name: Benjamin Wagner
-  title: The Data Engineering Show
-  image: /images/events/duckcon7/speakers/benjamin_wagner.jpg
-  url: "#"
-
-- name: Joe Reis
-  title: Founder, Jo Reis Show
-  image: /images/events/duckcon7/speakers/joe_reis.jpg
-  url: "#"
+  title: DuckLabs
+  image: /images/events/duckcon7/speakers/hannes-muehleisen.jpg
 
 - name: Mark Raasveldt
-  title: CTO of DuckLabs
-  image: /images/events/duckcon7/speakers/mark_raasveldt.jpg
-  url: "#"
+  title: DuckLabs
+  image: /images/events/duckcon7/speakers/mark-raasveldt.jpg

@@ -49,8 +49,8 @@ docs:
 
 extension_star_count: 7
 extension_star_count_pretty: 7
-extension_download_count: 976
-extension_download_count_pretty: 976
+extension_download_count: 969
+extension_download_count_pretty: 969
 image: '/images/community_extensions/social_preview/preview_community_extension_delta_export.png'
 layout: community_extension_doc
 ---

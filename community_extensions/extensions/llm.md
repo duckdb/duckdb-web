@@ -95,8 +95,8 @@ repo:
 
 extension_star_count: 3
 extension_star_count_pretty: 3
-extension_download_count: 737
-extension_download_count_pretty: 737
+extension_download_count: 966
+extension_download_count_pretty: 966
 image: '/images/community_extensions/social_preview/preview_community_extension_llm.png'
 layout: community_extension_doc
 ---
