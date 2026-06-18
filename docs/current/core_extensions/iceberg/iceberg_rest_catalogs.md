@@ -64,6 +64,13 @@ A REST Catalog with OAuth2 authorization can also be attached with just an `ATTA
 | `AUTHORIZATION_TYPE`        | `VARCHAR`  | `OAUTH2`             | Pass `SigV4` for Catalogs the require SigV4 authorization, `none` for catalogs that don't need authentication.                                                       |
 | `ACCESS_DELEGATION_MODE`    | `VARCHAR`  | `vended_credentials` | Access delegation mode. Allowed values are `vended_credentials` and `none`.                                                                                          |
 | `EXTRA_HTTP_HEADERS`        | `MAP`      | `NULL`               | Additional HTTP headers to send with REST Catalog requests.                                                                                                          |
+| `SUPPORT_NESTED_NAMESPACES`          | `BOOLEAN`  | `true`               | Option for catalogs that support nested namespaces.                                                                                                                  |
+| `STAGE_CREATE_TABLES`                | `BOOLEAN`  | `true`               | Controls whether DuckDB uses staged CREATE TABLE. Disable for catalogs that do not support staged table creation.                                                    |
+| `DISABLE_MULTI_TABLE_COMMIT`         | `BOOLEAN`  | `false`              | Disables the multi-table transactions/commit endpoint. Enable for catalogs that reject this endpoint.                                                                |
+| `SKIP_CREATE_TABLE_METADATA_UPDATES` | `BOOLEAN`  | `false`              | Skips follow-up metadata updates after non-staged CREATE TABLE. Enable for catalogs that fully initialize metadata during table creation and reject subsequent updates. |
+| `REMOVE_FILES_ON_DELETE`             | `BOOLEAN`  | `true`               | Controls whether DuckDB removes storage files when a table is dropped.                                                                                               |
+| `MAX_TABLE_STALENESS`                | `INTERVAL` | `NULL`               | Option for preventing unnecessary requests to the Iceberg REST Catalog. You can pass human readable interval strings. `10 minutes`, `30 seconds`, `1 year` all work. |
+| `PURGE_REQUESTED`                    | `BOOLEAN`  | `true`               | Option to send the [PurgeRequested](https://github.com/apache/iceberg/blob/4b4eb38cf6dda7b43faeb40eb00aa5db424d2ecb/open-api/rest-catalog-open-api.yaml#L1144) parameter when dropping a table. |
 | `SUPPORT_NESTED_NAMESPACES` | `BOOLEAN`  | `false`              | Set to `true` for catalogs that support nested namespaces.                                                                                                            |
 | `SUPPORT_STAGE_CREATE`      | `BOOLEAN`  | `true`               | Set to `false` for catalogs that do not support stage create.                                                                                                         |
 | `DEFAULT_SCHEMA`            | `VARCHAR`  | `NULL`               | The default schema (namespace) to use for the attached catalog.                                                                                                       |
@@ -219,6 +226,30 @@ SELECT count(*) FROM biglake_public.public_data.nyc_taxicab;
 ```
 
 > Note: Google Cloud access tokens expire after 1 hour. For long-running sessions, you'll need to refresh the token periodically.
+
+### Catalogs with Limited REST Spec Support
+
+Some catalogs implement a subset of the Iceberg REST Catalog specification. Use the compatibility options below to adjust DuckDB's behavior for these catalogs.
+
+| Catalog behavior | Option to set |
+| --- | --- |
+| Does not support staged CREATE TABLE | `STAGE_CREATE_TABLES false` |
+| Rejects the multi-table transactions/commit endpoint | `DISABLE_MULTI_TABLE_COMMIT true` |
+| Fully initializes metadata on CREATE TABLE and rejects follow-up metadata updates | `SKIP_CREATE_TABLE_METADATA_UPDATES true` |
+| Does not allow DuckDB to remove storage files on DROP TABLE | `REMOVE_FILES_ON_DELETE false` |
+
+For example, to attach a [Unity Catalog Horizon](https://docs.unitycatalog.io) endpoint that does not support staged creates, rejects the transactions/commit endpoint, and manages its own metadata and storage cleanup:
+
+```sql
+ATTACH '⟨warehouse⟩' AS horizon_catalog (
+    TYPE iceberg,
+    ENDPOINT '⟨catalog_endpoint⟩',
+    STAGE_CREATE_TABLES false,
+    DISABLE_MULTI_TABLE_COMMIT true,
+    SKIP_CREATE_TABLE_METADATA_UPDATES true,
+    REMOVE_FILES_ON_DELETE false
+);
+```
 
 ## Limitations
 
