@@ -2,8 +2,8 @@
 layout: post
 title: "Quack w/ Hannes Mühleisen"
 author: Hannes Mühleisen
-#thumb: "/images/library/thumbs/2026-05-28-quack-w-hannes-muehleisen.jpg"
-#image: "/images/library/thumbs/2026-05-28-quack-w-hannes-muehleisen.jpg"
+thumb: "/images/library/thumbs/2026-05-28-quack-w-hannes-muehleisen.jpg"
+image: "/images/library/thumbs/2026-05-28-quack-w-hannes-muehleisen.jpg"
 tags: ["Podcast"]
 length: "70 min"
 thirdparty: false
