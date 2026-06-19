@@ -18,12 +18,12 @@ extension:
 
 repo:
   github: cwiq-os/cwiqduck
-  ref: a3919c00cf30cb863e5cef25dc8c2df0a1e947e2 
+  ref: b8bb1d3baa276c838a5673999f7f1b2975cb3a12 
 
 extension_star_count: 3
 extension_star_count_pretty: 3
-extension_download_count: 667
-extension_download_count_pretty: 667
+extension_download_count: 799
+extension_download_count_pretty: 799
 image: '/images/community_extensions/social_preview/preview_community_extension_cwiqduck.png'
 layout: community_extension_doc
 ---

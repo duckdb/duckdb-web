@@ -25,7 +25,7 @@ repo:
 
 extension_star_count: 15
 extension_star_count_pretty: 15
-extension_download_count: 1702
+extension_download_count: 1711
 extension_download_count_pretty: 1.7k
 image: '/images/community_extensions/social_preview/preview_community_extension_adbc_scanner.png'
 layout: community_extension_doc

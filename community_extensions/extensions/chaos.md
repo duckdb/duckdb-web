@@ -39,8 +39,8 @@ docs:
 
 extension_star_count: 1
 extension_star_count_pretty: 1
-extension_download_count: 1017
-extension_download_count_pretty: 1.0k
+extension_download_count: 1321
+extension_download_count_pretty: 1.3k
 image: '/images/community_extensions/social_preview/preview_community_extension_chaos.png'
 layout: community_extension_doc
 ---
