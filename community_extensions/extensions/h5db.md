@@ -43,10 +43,10 @@ docs:
 
     For full documentation, see the [h5db repository](https://github.com/jokasimr/h5db).
 
-extension_star_count: 1
-extension_star_count_pretty: 1
-extension_download_count: 843
-extension_download_count_pretty: 843
+extension_star_count: 2
+extension_star_count_pretty: 2
+extension_download_count: 827
+extension_download_count_pretty: 827
 image: '/images/community_extensions/social_preview/preview_community_extension_h5db.png'
 layout: community_extension_doc
 ---
@@ -72,20 +72,20 @@ LOAD {{ page.extension.name }};
 
 <div class="extension_functions_table"></div>
 
-| function_name | function_type | description | comment | examples |
-|---------------|---------------|-------------|---------|----------|
-| h5_alias      | scalar        | NULL        | NULL    |          |
-| h5_attr       | scalar        | NULL        | NULL    |          |
-| h5_attributes | table         | NULL        | NULL    |          |
-| h5_first_file | scalar        | NULL        | NULL    |          |
-| h5_index      | scalar        | NULL        | NULL    |          |
-| h5_ls         | scalar        | NULL        | NULL    |          |
-| h5_ls         | table         | NULL        | NULL    |          |
-| h5_ls_swmr    | scalar        | NULL        | NULL    |          |
-| h5_read       | table         | NULL        | NULL    |          |
-| h5_rse        | scalar        | NULL        | NULL    |          |
-| h5_tree       | table         | NULL        | NULL    |          |
-| h5db_version  | scalar        | NULL        | NULL    |          |
+| function_name | function_type |                                                   description                                                    | comment |                                     examples                                     |
+|---------------|---------------|------------------------------------------------------------------------------------------------------------------|---------|----------------------------------------------------------------------------------|
+| h5_alias      | scalar        | Renames a column definition.                                                                                     | NULL    | [FROM h5_read('data.h5', h5_alias('temperature', '/entry/temp'))]                |
+| h5_attr       | scalar        | Creates a projected HDF5 attribute definition for h5_tree() and h5_ls().                                         | NULL    | [FROM h5_tree('data.h5', h5_attr('NX_class'))]                                   |
+| h5_attributes | table         | Reads all attributes from an HDF5 object or file root.                                                           | NULL    | [FROM h5_attributes('data.h5', '/measurements')]                                 |
+| h5_first_file | scalar        | Returns the first concrete HDF5 filename from an exact path, glob, or list for planning-time use with h5_read(). | NULL    | [FROM h5_read(h5_first_file('runs/run_*.h5'), '/detector_geometry')]             |
+| h5_index      | scalar        | Creates a virtual row-index column definition for h5_read().                                                     | NULL    | [FROM h5_read('data.h5', h5_index(), '/measurements')]                           |
+| h5_ls         | scalar        | Lists entries immediately under an HDF5 group as a MAP.                                                          | NULL    | [SELECT h5_ls('data.h5', '/entry')]                                              |
+| h5_ls         | table         | Lists entries immediately under an HDF5 group as rows.                                                           | NULL    | [FROM h5_ls('data.h5', '/entry')]                                                |
+| h5_ls_swmr    | scalar        | Lists entries immediately under an HDF5 group as a MAP using SWMR read mode.                                     | NULL    | [SELECT h5_ls_swmr('data.h5', '/entry')]                                         |
+| h5_read       | table         | Reads one or more HDF5 datasets as DuckDB columns.                                                               | NULL    | [FROM h5_read('data.h5', '/measurements')]                                       |
+| h5_rse        | scalar        | Creates a run-start encoded column definition for h5_read().                                                     | NULL    | [FROM h5_read('data.h5', '/time', h5_rse('/state_run_starts', '/state_values'))] |
+| h5_tree       | table         | Recursively lists entries in an HDF5 file.                                                                       | NULL    | [FROM h5_tree('data.h5')]                                                        |
+| h5db_version  | scalar        | Returns the linked HDF5 library version used by h5db.                                                            | NULL    | [SELECT h5db_version('h5db')]                                                    |
 
 ### Overloaded Functions
 
