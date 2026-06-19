@@ -2,6 +2,8 @@
 layout: post
 title: "Introducing the New GizmoSQL iOS App"
 author: "Philip Moore"
+thumb: "/images/library/thumbs/2026-04-17-introducing-gizmosql-ios-app.jpg"
+image: "/images/library/thumbs/2026-04-17-introducing-gizmosql-ios-app.jpg"
 tags: ["Talk"]
 category: community
 excerpt: ""

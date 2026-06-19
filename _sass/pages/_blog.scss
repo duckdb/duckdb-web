@@ -34,7 +34,7 @@ section.speakers,
 		border-radius: var(--border-radius-box);
 		overflow: hidden;
 		.postdetails{
-			padding: 30px;
+			padding: 25px 24px 18px 24px;
 			.tags{
 				margin-bottom: 15px;
 				line-height: 1;
@@ -142,7 +142,7 @@ section.speakers,
 		}
 		h3{
 			margin-bottom: 15px;
-			min-height: 2em;
+			//min-height: 2em;
 			a{
 				text-decoration: none;
 				color: inherit;
@@ -207,6 +207,11 @@ section.speakers,
 					background-image: url('../images/library/type-icons/paper_thirdparty.png');
 				}
 			}
+			&[data-type="article"]{
+				.postimg::after{
+					background-image: url('../images/library/type-icons/article_thirdparty.png');
+				}
+			}
 		}
 		&[data-source="duckdb"]{
 			.postimg{
@@ -236,6 +241,11 @@ section.speakers,
 					background-image: url('../images/library/type-icons/paper_duckdb.png');
 				}
 			}
+			&[data-type="article"]{
+				.postimg::after{
+					background-image: url('../images/library/type-icons/article_duckdb.png');
+				}
+			}
 		}
 		&[data-source="ducklake"]{
 			.postimg{
@@ -263,6 +273,11 @@ section.speakers,
 			&[data-type="paper"]{
 				.postimg::after{
 					background-image: url('../images/library/type-icons/paper_ducklake.png');
+				}
+			}
+			&[data-type="article"]{
+				.postimg::after{
+					background-image: url('../images/library/type-icons/article_ducklake.png');
 				}
 			}
 		}
