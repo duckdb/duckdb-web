@@ -19,12 +19,12 @@ extension:
 repo:
   andium: 69664ce2fb234a071c4e01690584d2c402e96705
   github: query-farm/json_schema
-  ref: 2d1a686b3f331dd8d558b553be96a3037f6b5258
+  ref: 379fa4b28a41d51ea041600f4cd314f390d0ca20
 
 extension_star_count: 3
 extension_star_count_pretty: 3
-extension_download_count: 935
-extension_download_count_pretty: 935
+extension_download_count: 953
+extension_download_count_pretty: 953
 image: '/images/community_extensions/social_preview/preview_community_extension_json_schema.png'
 layout: community_extension_doc
 ---
