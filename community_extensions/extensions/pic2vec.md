@@ -114,8 +114,8 @@ docs:
 
 extension_star_count: 0
 extension_star_count_pretty: 0
-extension_download_count: 776
-extension_download_count_pretty: 776
+extension_download_count: 705
+extension_download_count_pretty: 705
 image: '/images/community_extensions/social_preview/preview_community_extension_pic2vec.png'
 layout: community_extension_doc
 ---

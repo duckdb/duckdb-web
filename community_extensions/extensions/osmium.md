@@ -32,10 +32,10 @@ docs:
     constructing Geometries (Point, LineString, Polygon, etc) from OSM elements, which makes it
     easy to transform OSM data into formats like GeoJSON and GeoParquet.
 
-extension_star_count: 20
-extension_star_count_pretty: 20
-extension_download_count: 769
-extension_download_count_pretty: 769
+extension_star_count: 22
+extension_star_count_pretty: 22
+extension_download_count: 787
+extension_download_count_pretty: 787
 image: '/images/community_extensions/social_preview/preview_community_extension_osmium.png'
 layout: community_extension_doc
 ---
