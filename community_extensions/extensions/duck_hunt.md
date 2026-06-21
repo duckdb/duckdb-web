@@ -8,17 +8,22 @@ excerpt: |
 extension:
   name: duck_hunt
   description: Parse and analyze test results, build outputs, and CI/CD pipeline logs from 110+ formats with severity filtering, format auto-detection, and context extraction
-  version: 1.9.0
+  version: 1.10.0
   language: C++
   build: cmake
   license: MIT
+  # Windows excluded: duckdb's vendored fmt (third_party/fmt) fails to compile on
+  # the build runner's MSVC (stdext::checked_array_iterator removed). Upstream
+  # issue, not duck_hunt code; no Windows artifact has ever been published for
+  # this extension. Revisit when duckdb ships a newer vendored fmt.
+  excluded_platforms: "windows_amd64;windows_amd64_mingw"
   maintainers:
     - teaguesterling
 
 repo:
   github: teaguesterling/duck_hunt
-  andium: da4f3d787f5bea20fba247b703b46abc9833ebeb
-  ref: da4f3d787f5bea20fba247b703b46abc9833ebeb
+  andium: 22c142f3dee138566589783afb56a5e7f2858886
+  ref: 22c142f3dee138566589783afb56a5e7f2858886
 
 docs:
   readme: https://duck-hunt.readthedocs.io/
@@ -175,8 +180,8 @@ docs:
 
 extension_star_count: 3
 extension_star_count_pretty: 3
-extension_download_count: 952
-extension_download_count_pretty: 952
+extension_download_count: 1376
+extension_download_count_pretty: 1.4k
 image: '/images/community_extensions/social_preview/preview_community_extension_duck_hunt.png'
 layout: community_extension_doc
 ---
