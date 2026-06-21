@@ -8,7 +8,11 @@ excerpt: |
 extension:
   name: yaml
   description: Read YAML files into DuckDB with native YAML type support, comprehensive extraction functions, and seamless JSON interoperability
-  version: 1.6.5
+  version: 1.6.6
+  # Windows excluded: DuckDB's vendored fmt fails to compile against the community
+  # runner's current MSVC STL (stdext::checked_array_iterator removed); not fixable
+  # from the extension.
+  excluded_platforms: windows_amd64;windows_amd64_mingw
   language: C++
   build: cmake
   license: MIT
@@ -20,8 +24,8 @@ extension:
   
 repo:
   github: teaguesterling/duckdb_yaml
-  andium: 9d57e9557742ede442be4095951dfa56227282b2
-  ref: 9d57e9557742ede442be4095951dfa56227282b2
+  andium: 8a1d8444af06682a3cb2933068a6a35af0fec3b2
+  ref: 8a1d8444af06682a3cb2933068a6a35af0fec3b2
 
 docs:
   hello_world: |
@@ -90,8 +94,8 @@ docs:
 
 extension_star_count: 18
 extension_star_count_pretty: 18
-extension_download_count: 12769
-extension_download_count_pretty: 12.8k
+extension_download_count: 13333
+extension_download_count_pretty: 13.3k
 image: '/images/community_extensions/social_preview/preview_community_extension_yaml.png'
 layout: community_extension_doc
 ---

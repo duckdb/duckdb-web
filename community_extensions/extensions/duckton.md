@@ -8,7 +8,7 @@ excerpt: |
 extension:
   name: duckton
   description: Turn DuckDB into a node of a trustless peer-to-peer query grid — SQL is cross-checked by independent hosts to a verifiable quorum over QUIC, with optional pay-per-query compute settled on TON
-  version: 0.5.2
+  version: 0.6.1
   language: Rust
   build: cmake
   license: Apache-2.0
@@ -19,7 +19,7 @@ extension:
 
 repo:
   github: Angelerator/duckton
-  ref: 3102f2573e6d27430c2c975d1e5bbcc18a8ab4df
+  ref: 040c45638927fb56053033409bb28bc3796f4a1b
 
 docs:
   hello_world: |
@@ -33,7 +33,7 @@ docs:
     │ protocol_version      │ 1.0.0        │
     │ min_supported_version │ 1.0.0        │
     │ schema_version        │ 1            │
-    │ extension_version     │ 0.5.2        │
+    │ extension_version     │ 0.6.1        │
     │ alpn                  │ duckdb-p2p/1 │
     └───────────────────────┴──────────────┘
 
@@ -121,6 +121,19 @@ docs:
     - Admin/economics setters: `p2p_trust`, `p2p_economics`, `p2p_wallet`,
       `p2p_block` / `p2p_unblock` / `p2p_blocklist`, and more.
 
+    ### New in v0.6.1
+    A bug-fix release over v0.6.0. It fixes a **two-node-grid hang** where a
+    requester could spin forever re-dispatching to a dual-role node that rejected a
+    full-budget job; this is now bounded by a no-progress guard plus a governor
+    served-ceiling clamp so dispatch always makes progress or fails cleanly. It also
+    hardens **secure spill**: a `max_temp_directory_size` cap, `temp_file_encryption`,
+    and temp-dir/sandbox alignment so on-disk spill stays inside the locked-down
+    sandbox and is encrypted at rest. v0.6.0 added smart size-aware routing with
+    robust failover (jobs are placed by result size and re-dispatched around slow or
+    failing hosts), a process-wide capacity governor that caps concurrent compute, an
+    optional presigned-URL credential mode for object-store access, and stronger
+    stake weighting in host selection.
+
     ### Built on solid foundations (and honest about limits)
     A Rust extension built against DuckDB's **stable C extension API** (loadable
     extension), templated with `extension-ci-tools`, Apache-2.0 licensed.
@@ -132,8 +145,8 @@ docs:
 
 extension_star_count: 0
 extension_star_count_pretty: 0
-extension_download_count: null
-extension_download_count_pretty: n/a
+extension_download_count: 19
+extension_download_count_pretty: 19
 image: '/images/community_extensions/social_preview/preview_community_extension_duckton.png'
 layout: community_extension_doc
 ---
