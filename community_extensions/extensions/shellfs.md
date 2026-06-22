@@ -25,8 +25,8 @@ repo:
 
 extension_star_count: 96
 extension_star_count_pretty: 96
-extension_download_count: 85573
-extension_download_count_pretty: 85.6k
+extension_download_count: 61918
+extension_download_count_pretty: 61.9k
 image: '/images/community_extensions/social_preview/preview_community_extension_shellfs.png'
 layout: community_extension_doc
 ---
