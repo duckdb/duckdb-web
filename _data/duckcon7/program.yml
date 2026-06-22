@@ -2,13 +2,13 @@
   title: Wednesday, 24 June 2026
   sessions:
     - venue opens:
-      title: Sponsor track
+      title: "Sponsor track (in-person)"
       timetable:
         - time: "14:15"
           title: So you self-hosted DuckDB. Now what? An honest look at the road to production
           speaker: Mehdi Ouazza<br>(MotherDuck)
     - first session:
-      title: Main track, session 1
+      title: "Main track, session 1 (in-person & streamed)"
       timetable:
         - time: "15:00"
           title: "State of the Duck"
@@ -25,7 +25,7 @@
         - time: "16:15"
           title: Coffee break
     - second session:
-      title: Main track, session 2
+      title: "Main track, session 2 (in-person & streamed)"
       timetable:
         - time: "16:35"
           title: "How we built a SQL layer over our user listening history for agentic access"
