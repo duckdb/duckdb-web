@@ -19,7 +19,7 @@ extension:
 
 repo:
   github: yutannihilation/duckdb-ext-st-read-multi
-  ref: ccc5c14e65e3b298f0646023ecdeb08d3a678463
+  ref: eb01047043beb286f7649f3c670190d680feb0b1
 
 docs:
   hello_world: |
@@ -31,8 +31,8 @@ docs:
 
 extension_star_count: 10
 extension_star_count_pretty: 10
-extension_download_count: 885
-extension_download_count_pretty: 885
+extension_download_count: 1664
+extension_download_count_pretty: 1.7k
 image: '/images/community_extensions/social_preview/preview_community_extension_st_read_multi.png'
 layout: community_extension_doc
 ---

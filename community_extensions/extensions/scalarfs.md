@@ -8,17 +8,20 @@ excerpt: |
 extension:
   name: scalarfs
   description: A collection of virtual filesystems for working with scalars
-  version: 1.4.0
+  version: 1.4.1
   language: C++
   build: cmake
   license: MIT
+  # Windows excluded: duckdb's vendored fmt fails on the build runner's MSVC
+  # (stdext checked_array_iterator removed) -- upstream, not scalarfs.
+  excluded_platforms: "windows_amd64;windows_amd64_mingw"
   maintainers:
     - teaguesterling
 repo:
   github: teaguesterling/duckdb_scalarfs
-  andium: 1e283b92ab821cc0138b5f1369fa66a86fb8c494
-  ref: 1e283b92ab821cc0138b5f1369fa66a86fb8c494
-  ref_next: 1e283b92ab821cc0138b5f1369fa66a86fb8c494
+  andium: 62ca2530e273ab9daa7d563519e1f22569e71741
+  ref: 62ca2530e273ab9daa7d563519e1f22569e71741
+  ref_next: 62ca2530e273ab9daa7d563519e1f22569e71741
 docs:
   hello_world: |
     LOAD scalarfs;
@@ -73,8 +76,8 @@ docs:
 
 extension_star_count: 8
 extension_star_count_pretty: 8
-extension_download_count: 1298
-extension_download_count_pretty: 1.3k
+extension_download_count: 1667
+extension_download_count_pretty: 1.7k
 image: '/images/community_extensions/social_preview/preview_community_extension_scalarfs.png'
 layout: community_extension_doc
 ---

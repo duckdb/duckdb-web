@@ -8,7 +8,7 @@ excerpt: |
 extension:
   name: query_condition_cache
   description: This extension provides a cache for query conditions, which is useful for repeated-query workloads like metrics monitoring dashboards, log investigations, etc.
-  version: 0.1.0
+  version: 0.1.1
   language: C++
   build: cmake
   license: MIT
@@ -20,7 +20,7 @@ extension:
 
 repo:
   github: dentiny/duckdb-query-condition-cache
-  ref: 4a601f55479509c9b6fc5418dac185217b8ce436
+  ref: 4c5646968531ae816ea929189fed455b6dfed50a
 
 docs:
   hello_world: |
@@ -28,10 +28,10 @@ docs:
   extended_description: |
     This extension enhances DuckDB core capability and improves query performance for repeated-query workloads by caching the query conditions.
 
-extension_star_count: 8
-extension_star_count_pretty: 8
-extension_download_count: 729
-extension_download_count_pretty: 729
+extension_star_count: 9
+extension_star_count_pretty: 9
+extension_download_count: 892
+extension_download_count_pretty: 892
 image: '/images/community_extensions/social_preview/preview_community_extension_query_condition_cache.png'
 layout: community_extension_doc
 ---
@@ -57,11 +57,13 @@ LOAD {{ page.extension.name }};
 
 <div class="extension_functions_table"></div>
 
-|      function_name       | function_type | description | comment | examples |
-|--------------------------|---------------|-------------|---------|----------|
-| __condition_cache_filter | scalar        | NULL        | NULL    |          |
-| condition_cache_build    | table         | NULL        | NULL    |          |
-| condition_cache_info     | table         | NULL        | NULL    |          |
+|        function_name        | function_type | description | comment | examples |
+|-----------------------------|---------------|-------------|---------|----------|
+| __condition_cache_filter    | scalar        | NULL        | NULL    |          |
+| condition_cache_build       | table         | NULL        | NULL    |          |
+| condition_cache_info        | table         | NULL        | NULL    |          |
+| condition_cache_reset_stats | scalar        | NULL        | NULL    |          |
+| condition_cache_stats       | table         | NULL        | NULL    |          |
 
 ### Overloaded Functions
 
