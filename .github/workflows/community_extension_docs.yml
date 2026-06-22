@@ -15,7 +15,7 @@ jobs:
       - generate_docs
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v6
+    - uses: actions/checkout@v7
       with:
         path: '.'
         token: ${{ secrets.GH_UPDATE_DOCS_TOKEN }}
