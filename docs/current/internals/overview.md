@@ -8,6 +8,8 @@ redirect_from:
 title: Overview of DuckDB Internals
 ---
 
+> Tip For a detailed explanation of DuckDB internals, see the [Design and Implementation of DuckDB Internals ("DiDi")]({% link _library/2026-03-19-design-and-implementation-of-duckdb-internals.md %}) library entry.
+
 On this page is a brief description of the internals of the DuckDB engine.
 
 ## Parser
