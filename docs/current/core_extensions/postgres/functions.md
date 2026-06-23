@@ -33,7 +33,7 @@ None.
 
 A table with the following columns:
 
- - `Success` (`BOOLEAN`): a flag whether the cache clearing was successfull
+ - `Success` (`BOOLEAN`): a flag whether the cache clearing was successful
 
 > Currently the table result is always returned with zero rows, so the flag value is not available.
 
@@ -130,7 +130,7 @@ Optional named parameters:
 
 A table with the following columns:
 
- - `Success` (`BOOLEAN`): a flag whether the cache clearing was successfull
+ - `Success` (`BOOLEAN`): a flag whether the cache clearing was successful
 
 > Currently the table result is always returned with zero rows, so the flag value is not available.
 
