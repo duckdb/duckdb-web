@@ -126,6 +126,7 @@
 	}
 
 	input[type="text"],
+	input[type="email"],
 	input[type="password"],
 	textarea {
 		border-radius: var(--border-radius-box);
@@ -280,7 +281,7 @@
 			color: $hl-color;
 			font-family: "JetBrainsMono-Regular";
 			font-size: 12px;
-			margin-bottom: 8px;
+			margin-bottom: 12px;
 		}
 
 		.bubbles {
@@ -288,7 +289,8 @@
 			gap: 8px;
 			flex-wrap: wrap;
 
-			input[type="radio"] {
+			input[type="radio"],
+			input[type="checkbox"] {
 				display: none;
 			}
 
@@ -307,10 +309,65 @@
 				transition: all 0.2s ease;
 			}
 
-			input[type="radio"]:checked + label {
+			input[type="radio"]:checked + label,
+			input[type="checkbox"]:checked + label {
 				background: var(--main-text-tertiary-color, #B2B2B2);
 				color: var(--main-text-primary-color, #0D0D0D);
 			}
+		}
+	}
+
+	/** CONSENT CHECKBOX **/
+	.consent {
+		display: flex;
+		align-items: flex-start;
+		gap: 12px;
+
+		input[type="checkbox"] {
+			flex: 0 0 auto;
+			appearance: none;
+			-webkit-appearance: none;
+			width: 22px;
+			height: 22px;
+			margin: 1px 0 0 0;
+			cursor: pointer;
+			position: relative;
+			border: 1px solid var(--doc-codebox-border-color, #E6E6E6);
+			border-radius: 6px;
+			background: linear-gradient(0deg, var(--main-section-background-gradient-start-color, #FAFAFA) 0%, var(--main-section-background-gradient-start-color, #FAFAFA) 100%);
+			transition: all 0.2s ease;
+
+			&:checked {
+				background: var(--main-highlight-orange-text, #FF6900);
+				border-color: var(--main-highlight-orange-text, #FF6900);
+			}
+
+			&:checked::after {
+				content: '';
+				position: absolute;
+				left: 7px;
+				top: 3px;
+				width: 5px;
+				height: 10px;
+				border: solid #fff;
+				border-width: 0 2px 2px 0;
+				transform: rotate(45deg);
+			}
+
+			&:focus-visible {
+				outline: none;
+				border-color: var(--main-highlight-orange-text, #FF6900);
+			}
+		}
+
+		label {
+			position: static;
+			pointer-events: auto;
+			cursor: pointer;
+			font-family: "SuisseIntl";
+			font-size: 16px;
+			color: var(--main-text-secondary-color, #666);
+			line-height: 1.4;
 		}
 	}
 
@@ -424,5 +481,8 @@
 @media only screen and (max-width: 690px) {
 	.form .maincolumn > h1{
 		margin-bottom: 24px;
+	}
+	.form .bubble-select .bubbles label{
+		font-size: 15px;
 	}
 }
