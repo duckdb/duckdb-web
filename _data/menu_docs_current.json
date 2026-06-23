@@ -1169,6 +1169,10 @@
               "url": "lance"
             },
             {
+              "page": "MotherDuck",
+              "url": "motherduck"
+            },
+            {
               "page": "MySQL",
               "url": "mysql"
             },
