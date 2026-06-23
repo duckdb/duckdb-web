@@ -50,8 +50,8 @@ docs:
 
 extension_star_count: 0
 extension_star_count_pretty: 0
-extension_download_count: 1268
-extension_download_count_pretty: 1.3k
+extension_download_count: 1421
+extension_download_count_pretty: 1.4k
 image: '/images/community_extensions/social_preview/preview_community_extension_altertable.png'
 layout: community_extension_doc
 ---

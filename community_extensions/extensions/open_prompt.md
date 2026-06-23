@@ -70,7 +70,7 @@ repo:
 
 extension_star_count: 60
 extension_star_count_pretty: 60
-extension_download_count: 2664
+extension_download_count: 2727
 extension_download_count_pretty: 2.7k
 image: '/images/community_extensions/social_preview/preview_community_extension_open_prompt.png'
 layout: community_extension_doc
