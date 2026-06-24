@@ -20,8 +20,8 @@ They can be created using the type name followed by a string formatted according
 | `TIMESTAMP_MS` |                                           | Naive timestamp with millisecond precision             |
 | `TIMESTAMP_S`  |                                           | Naive timestamp with second precision                  |
 | `TIMESTAMPTZ`  | `TIMESTAMP WITH TIME ZONE`                | Time zone aware timestamp with microsecond precision   |
+| `TIMESTAMPTZ_NS` |                                         | Time zone aware timestamp with nanosecond precision    |
 
-> Warning Since there is not currently a `TIMESTAMP_NS WITH TIME ZONE` data type, external columns with nanosecond precision and `WITH TIME ZONE` semantics, e.g., [Parquet timestamp columns with `isAdjustedToUTC=true`](https://github.com/apache/parquet-format/blob/master/LogicalTypes.md#instant-semantics-timestamps-normalized-to-utc), are converted to `TIMESTAMP WITH TIME ZONE` and thus lose precision when read using DuckDB.
 
 ```sql
 SELECT TIMESTAMP_NS '1992-09-20 11:30:00.123456789';
@@ -71,7 +71,16 @@ SELECT TIMESTAMPTZ '1992-09-20 12:30:00.123456789+01:00';
 1992-09-20 11:30:00.123456+00
 ```
 
-DuckDB distinguishes timestamps `WITHOUT TIME ZONE` and `WITH TIME ZONE` (of which the only current representative is `TIMESTAMP WITH TIME ZONE`).
+```sql
+SELECT TIMESTAMPTZ_NS '1992-09-20 12:30:00.123456789+01:00';
+```
+
+```text
+1992-09-20 11:30:00.123456789+00
+```
+
+DuckDB distinguishes timestamps `WITHOUT TIME ZONE` and `WITH TIME ZONE`.
+The latter is available in both microsecond (`TIMESTAMPTZ`) and nanosecond (`TIMESTAMPTZ_NS`) precision.
 
 Despite the name, a `TIMESTAMP WITH TIME ZONE` does not store time zone information. Instead, it only stores the `INT64` number of non-leap microseconds since the Unix epoch `1970-01-01 00:00:00+00`, and thus unambiguously identifies a point in absolute time, or [*instant*]({% link docs/current/sql/data_types/timestamp.md %}#instants). The reason for the labels *time zone aware* and `WITH TIME ZONE` is that timestamp arithmetic, [*binning*]({% link docs/current/sql/data_types/timestamp.md %}#temporal-binning), and string formatting for this type are performed in a [configured time zone]({% link docs/current/sql/data_types/timestamp.md %}#time-zone-support), which defaults to the system time zone and is just `UTC+00:00` in the examples above.
 
@@ -185,7 +194,7 @@ To distinguish the two hours, another range of bins containing the offset from U
 
 ### Time Zone Support
 
-The `TIMESTAMPTZ` type can be binned into calendar and clock bins using a suitable extension.
+Timestamps `WITH TIME ZONE` can be binned into calendar and clock bins using a suitable extension.
 The built-in [ICU extension]({% link docs/current/core_extensions/icu.md %}) implements all the binning and arithmetic functions using the
 [International Components for Unicode](https://icu.unicode.org) time zone and calendar functions.
 
@@ -202,7 +211,7 @@ Next, use the `SET TimeZone` command:
 SET TimeZone = 'America/Los_Angeles';
 ```
 
-Time binning operations for `TIMESTAMPTZ` will then be implemented using the given time zone.
+Time binning operations for `WITH TIME ZONE` timestamps will then be implemented using the given time zone.
 
 A list of available time zones can be pulled from the `pg_timezone_names()` table function:
 
@@ -229,7 +238,7 @@ LOAD icu;
 SET Calendar = 'japanese';
 ```
 
-Time binning operations for `TIMESTAMPTZ` will then be implemented using the given calendar.
+Time binning operations for `WITH TIME ZONE` timestamps will then be implemented using the given calendar.
 In this example, the `era` part will now report the Japanese imperial era number.
 
 A list of available calendars can be pulled from the `icu_calendar_names()` table function:
