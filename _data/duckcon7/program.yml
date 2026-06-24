@@ -2,6 +2,11 @@
   title: Wednesday, 24 June 2026
   sessions:
     - venue opens:
+      title: "Venue opens"
+      timetable:
+        - time: "13:30"
+          title: Check in at registration and collect your merch bag
+    - sponsor session:
       title: "Sponsor track (in-person)"
       timetable:
         - time: "14:15"
