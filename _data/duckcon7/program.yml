@@ -17,7 +17,7 @@
       timetable:
         - time: "15:00"
           title: "State of the Duck"
-          speaker: "Hannes Mühleisen and Mark Raasveldt<br>(DuckLabs)"
+          speaker: "Hannes Mühleisen, Mark Raasveldt<br>(DuckLabs)"
           youtube: https://youtu.be/7XkzSu-ozy4
         - time: "15:30"
           title: "Effortlessly modernize your legacy: SQLFrame migrates PySpark to DuckDB without code changes"
@@ -25,7 +25,7 @@
           youtube: https://youtu.be/jBVc1u1jL0E
         - time: "15:45"
           title: "Phages and DuckDB: The mighty duo against the giants"
-          speaker: "Virginie Grosboillot (U. of Ljubljana)<br>Herminio Vazquez-Cano (ETH Zürich)"
+          speaker: "Virginie Grosboillot (U. of Ljubljana),<br>Herminio Vazquez-Cano (ETH Zürich)"
           youtube: https://youtu.be/SbczMgSVy90
         - time: "16:00"
           title: "ggsql: A grammar of graphics for SQL"
