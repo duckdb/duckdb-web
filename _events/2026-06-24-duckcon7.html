@@ -81,7 +81,7 @@ redirect_from:
               <td>{{ talk.time }}</td>
               <td>{{ talk.title }}</td>
               <td>{{ talk.speaker }}</td>
-              <td>{% if talk.livestream_url %}<a class="button yellow" href="{{ talk.livestream_url }}" target="_blank" rel="noopener noreferrer">Join Livestream</a>{% endif %}</td>
+              <td>{% if talk.youtube %}<a class="button yellow" href="{{ talk.youtube }}" target="_blank" rel="noopener noreferrer">YouTube</a>{% endif %}</td>
             </tr>
           {% endfor %}
         </tbody>
