@@ -69,10 +69,10 @@ docs:
     methodology (Join Order Benchmark), and the architecture document covering
     the DAG construction, both passes, and operator internals.
 
-extension_star_count: 3
-extension_star_count_pretty: 3
-extension_download_count: 648
-extension_download_count_pretty: 648
+extension_star_count: 4
+extension_star_count_pretty: 4
+extension_download_count: 694
+extension_download_count_pretty: 694
 image: '/images/community_extensions/social_preview/preview_community_extension_robust.png'
 layout: community_extension_doc
 ---

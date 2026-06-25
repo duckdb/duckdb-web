@@ -8,7 +8,7 @@ excerpt: |
 extension:
   name: lpts
   description: Optimized-plan inspection and cross-system SQL transpilation
-  version: 0.9.0
+  version: 1.0.0
   language: C++
   build: cmake
   license: MIT
@@ -17,7 +17,7 @@ extension:
 
 repo:
   github: cwida/lpts
-  ref: 7a3eb5efc097ff1b749d41da3a977c0c157c52c4
+  ref: 1b8e8501ffe6a6f730ce7519577ec448e9869dcf
 
 docs:
   hello_world: |
@@ -30,14 +30,14 @@ docs:
 
     -- Return the optimized plan as readable CTE SQL.
     D PRAGMA lpts('SELECT name FROM users WHERE age > 25');
-    ┌──────────────────────────────────────────────────────────────────────────────┐
-    │ sql                                                                          │
-    │ varchar                                                                      │
-    ├──────────────────────────────────────────────────────────────────────────────┤
-    │ WITH scan_0 (t0_name) AS (SELECT name FROM memory.main.users WHERE age>25), │
-    │ projection_1 (t1_name) AS (SELECT t0_name FROM scan_0)                      │
-    │ SELECT t1_name AS "name" FROM projection_1;                                 │
-    └──────────────────────────────────────────────────────────────────────────────┘
+    WITH
+    t0_scan (t0_name) AS (
+        SELECT  "name"
+        FROM    memory.main.users
+        WHERE   (age>25)
+    )
+    SELECT  t0_name AS "name"
+    FROM    t0_scan;
 
     -- Check that the generated SQL returns the same bag of rows as the input query.
     D PRAGMA lpts_check('SELECT name FROM users WHERE age > 25');
@@ -59,29 +59,34 @@ docs:
     PRAGMA lpts('<query>');
     ```
 
-    Example:
+    ## `EXPLAIN (FORMAT SQL)`
+
+    LPTS also extends DuckDB's `EXPLAIN` with a `SQL` format. `EXPLAIN (FORMAT SQL)
+    <query>` returns the optimized logical plan rendered as equivalent CTE SQL — the
+    same output as `PRAGMA lpts`, but exposed as a first-class `EXPLAIN` statement
+    (similar to the plan-as-SQL output in Umbra). The CLI prints the SQL as plain
+    multi-line text, while JDBC, Python, and other clients receive the standard
+    two-column (`explain_key`, `explain_value`) EXPLAIN result. It honors
+    `lpts_dialect` just like `PRAGMA lpts`.
 
     ```sql
-    -- Set both input and output dialects to DuckDB for a first round trip.
-    D SET lpts_input_dialect = 'duckdb';
-    D SET lpts_dialect = 'duckdb';
-
-    D CREATE TABLE users (id INTEGER, name VARCHAR, age INTEGER);
-    D INSERT INTO users VALUES (1, 'Alice', 30), (2, 'Bob', 22), (3, 'Carol', 28);
-
-    -- Return the optimized plan as readable CTE SQL.
-    D PRAGMA lpts('SELECT name FROM users WHERE age > 25');
+    EXPLAIN (FORMAT SQL) SELECT name FROM users WHERE age > 25;
     ```
 
     ```text
-    ┌──────────────────────────────────────────────────────────────────────────────┐
-    │ sql                                                                          │
-    │ varchar                                                                      │
-    ├──────────────────────────────────────────────────────────────────────────────┤
-    │ WITH scan_0 (t0_name) AS (SELECT name FROM memory.main.users WHERE age>25), │
-    │ projection_1 (t1_name) AS (SELECT t0_name FROM scan_0)                      │
-    │ SELECT t1_name AS "name" FROM projection_1;                                 │
-    └──────────────────────────────────────────────────────────────────────────────┘
+    ┌─────────────────────────────┐
+    │┌───────────────────────────┐│
+    ││  Optimized Logical Plan   ││
+    │└───────────────────────────┘│
+    └─────────────────────────────┘
+    WITH
+    t0_scan (t0_name) AS (
+        SELECT  "name"
+        FROM    memory.main.users
+        WHERE   (age>25)
+    )
+    SELECT  t0_name AS "name"
+    FROM    t0_scan;
     ```
 
     LPTS plans the query through DuckDB, optimizes it, then serializes the
@@ -152,15 +157,15 @@ docs:
     ```
 
     ```text
-    ┌────────────────────────────────────────────────────────────────────────────────────────┐
-    │ sql                                                                                    │
-    │ varchar                                                                                │
-    ├────────────────────────────────────────────────────────────────────────────────────────┤
-    │ WITH scan_0 (t0_ts) AS (SELECT ts FROM events WHERE id>10),                           │
-    │ projection_1 (t1_day) AS (SELECT to_char(t0_ts, 'YYYY-MM-DD') FROM scan_0),            │
-    │ order_2 (t1_day) AS (SELECT t1_day FROM projection_1 ORDER BY t1_day ASC NULLS LAST)   │
-    │ SELECT t1_day AS "day" FROM order_2;                                                   │
-    └────────────────────────────────────────────────────────────────────────────────────────┘
+    WITH
+    t0_scan (ts) AS (
+        SELECT  ts
+        FROM    events
+        WHERE   (id>10)
+    )
+    SELECT    to_char(ts, 'YYYY-MM-DD') AS "day"
+    FROM      t0_scan
+    ORDER BY  to_char(ts, 'YYYY-MM-DD') ASC NULLS LAST;
     ```
 
     ```sql
@@ -214,9 +219,9 @@ docs:
     SELECT "order", strftime(ts, '%Y-%m-%d %H:%M:%S') AS formatted FROM events LIMIT 10 OFFSET 5
     ```
 
-extension_star_count: 4
-extension_star_count_pretty: 4
-extension_download_count: 1266
+extension_star_count: 5
+extension_star_count_pretty: 5
+extension_download_count: 1333
 extension_download_count_pretty: 1.3k
 image: '/images/community_extensions/social_preview/preview_community_extension_lpts.png'
 layout: community_extension_doc
@@ -269,10 +274,11 @@ This extension does not add any types.
 
 <div class="extension_settings_table"></div>
 
-|                 name                  |                                                                                     description                                                                                     | input_type | scope  | aliases |
-|---------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|------------|--------|---------|
-| lpts_dialect                          | SQL dialect for lpts output. Valid values: 'duckdb' (default), 'postgres', 'spark', 'hive', 'trino', 'presto', 'snowflake', 'bigquery', 'redshift', 'mysql', 'mariadb'              | VARCHAR    | GLOBAL | []      |
-| lpts_enable_data_dependent_optimizers | Enable LPTS planning optimizers that depend on current data, statistics, cardinality estimates, row groups, or runtime dynamic filters.                                             | BOOLEAN    | GLOBAL | []      |
-| lpts_input_dialect                    | SQL dialect for lpts input normalization. Valid values: 'duckdb' (default), 'postgres', 'spark', 'hive', 'trino', 'presto', 'snowflake', 'bigquery', 'redshift', 'mysql', 'mariadb' | VARCHAR    | GLOBAL | []      |
+|                 name                  |                                                                                            description                                                                                            | input_type | scope  | aliases |
+|---------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|------------|--------|---------|
+| lpts_dialect                          | SQL dialect for lpts output. Valid values: 'duckdb' (default), 'postgres', 'spark', 'hive', 'trino', 'presto', 'snowflake', 'bigquery', 'redshift', 'mysql', 'mariadb'                            | VARCHAR    | GLOBAL | []      |
+| lpts_enable_data_dependent_optimizers | Enable LPTS planning optimizers that depend on current data, statistics, cardinality estimates, row groups, or runtime dynamic filters.                                                           | BOOLEAN    | GLOBAL | []      |
+| lpts_input_dialect                    | SQL dialect for lpts input normalization. Valid values: 'duckdb' (default), 'postgres', 'spark', 'hive', 'trino', 'presto', 'snowflake', 'bigquery', 'redshift', 'mysql', 'mariadb'               | VARCHAR    | GLOBAL | []      |
+| lpts_merge_pipeline                   | Fuse chains of single-child pipeline operators (Limit/OrderBy/Project/Aggregate/Filter, and pushdown-free base-table scans) into one flat SELECT per query block instead of one CTE per operator. | BOOLEAN    | GLOBAL | []      |
 
 

@@ -45,7 +45,7 @@ docs:
 
 extension_star_count: 0
 extension_star_count_pretty: 0
-extension_download_count: 1104
+extension_download_count: 1106
 extension_download_count_pretty: 1.1k
 image: '/images/community_extensions/social_preview/preview_community_extension_httpfs_timeout_retry.png'
 layout: community_extension_doc

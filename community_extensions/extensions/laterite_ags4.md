@@ -8,7 +8,7 @@ excerpt: |
 extension:
   name: laterite_ags4
   description: Read AGS4 geotechnical data files as typed, UUID-keyed tables directly from SQL — born-typed columns, deterministic content-addressed keys that join across groups by construction, embedded AGS dictionary, and opt-in validation. Local, http(s):// and s3:// (with httpfs).
-  version: 0.4.1
+  version: 0.5.0
   language: Rust
   build: cargo
   license: MIT
@@ -30,7 +30,7 @@ repo:
   github: niko86/laterite-duckdb
   # Pin to the release commit SHA once the repo is pushed + tagged (community-
   # extensions pins a SHA, not a branch). Placeholder until then:
-  ref: 2f72aa6e3b4049b76a46ba2224d813e6164d1579
+  ref: 35275386640d76c0f726c8df60b48d65057a3bef
 
 docs:
   hello_world: |
@@ -71,17 +71,37 @@ docs:
       no shared state.
     - **Self-describing metadata** — `ags_groups`, `ags_headings`, `ags_dictionary`,
       `ags_relationships` expose the file's structure and the embedded AGS dictionary.
-    - **Opt-in validation** — `validate_ags(path[, edition := '4.2'])` runs a clean-room
-      AGS4 rule check; never a gate on reads.
+    - **Opt-in validation** — `validate_ags(path[, dict_version := '4.2'])` runs a clean-room
+      AGS4 rule check (error-only by default; `warnings := true` / `fyi := true` add the lower
+      tiers); never a gate on reads.
     - **Persistence** — `load_ags_script(path)` emits CREATE-TABLE DDL for an indexed,
       repeat-/remote-query store.
     - **Local or remote** — reads go through DuckDB's virtual filesystem, so local paths,
       `http(s)://` and `s3://` (with `LOAD httpfs`) all work on one code path.
 
+    ### Functions
+
+    | function | returns |
+    |---|---|
+    | `read_ags(path, group)` | one group as a typed table — `_id`, `_parent_id`, then one column per heading (typed from the file's `TYPE` row). Reads local / `http(s)://` / `s3://`. |
+    | `read_ags_text(content, group)` | the same typed table, from an **inline AGS4 string** (no filesystem). |
+    | `ags_groups(path)` | `(group, n_rows, n_headings, parent)` — the file's group list. |
+    | `ags_headings(path)` | `(group, heading, unit, ags_type, sql_type, status, is_key, ordinal)` — the per-heading schema, enriched with the dictionary's KEY status. |
+    | `ags_dictionary()` | the embedded standard AGS dictionary as a table (`group`, `heading`, `status`, `ags_type`, `unit`, `description`, …). |
+    | `ags_relationships()` | `(child, parent, shared_keys)` — the spec parent→child graph that `_parent_id` follows. |
+    | `validate_ags(path[, dict_version := '4.2'][, warnings := true][, fyi := true])` | `(rule, line, group, severity, desc)` — a clean-room AGS4 rule check; the edition auto-detects from `TRAN_AGS` unless forced, and only `error`-severity findings show unless the `warnings` / `fyi` tiers are opted in. |
+    | `certify_ags(path[, dict_version := '4.2'])` | validate, then mint a sibling `.ags.idx` certificate; returns a one-row status (`certified`, `groups`/`errors`/`warnings`/`fyi` counts, `dict_version`, `message`). |
+    | `load_ags_script(path)` | `(seq, stmt)` — CREATE-TABLE DDL to materialise every group into an indexed, repeat-/remote-queryable store. |
+
+    Readers stream lazily (≈2048-row vector chunks); a non-conforming numeric cell becomes
+    `NULL`, never an error (the born-typed behaviour). Optional arguments are **named**
+    (`dict_version := '4.2'`, `warnings := true`), the rest positional. There is no repair
+    surface — mutation stays in the `lat-check` CLI / the `laterite` library.
+
 extension_star_count: 0
 extension_star_count_pretty: 0
-extension_download_count: 183
-extension_download_count_pretty: 183
+extension_download_count: 292
+extension_download_count_pretty: 292
 image: '/images/community_extensions/social_preview/preview_community_extension_laterite_ags4.png'
 layout: community_extension_doc
 ---
@@ -113,6 +133,7 @@ LOAD {{ page.extension.name }};
 | ags_groups        | table         | NULL        | NULL    |          |
 | ags_headings      | table         | NULL        | NULL    |          |
 | ags_relationships | table         | NULL        | NULL    |          |
+| certify_ags       | table         | NULL        | NULL    |          |
 | load_ags_script   | table         | NULL        | NULL    |          |
 | read_ags          | table         | NULL        | NULL    |          |
 | read_ags_text     | table         | NULL        | NULL    |          |
