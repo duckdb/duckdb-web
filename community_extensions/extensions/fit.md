@@ -38,9 +38,9 @@ docs:
     - `fit_events(filename)` - Activity events and markers
     - `fit_users(filename)` - User profile information
 
-extension_star_count: 1
-extension_star_count_pretty: 1
-extension_download_count: 1295
+extension_star_count: 2
+extension_star_count_pretty: 2
+extension_download_count: 1315
 extension_download_count_pretty: 1.3k
 image: '/images/community_extensions/social_preview/preview_community_extension_fit.png'
 layout: community_extension_doc

@@ -8,18 +8,18 @@ excerpt: |
 extension:
   name: otlp
   description: Query OpenTelemetry traces, logs, and metrics with SQL — or stream live OTLP/HTTP into DuckDB, DuckLake, or Iceberg
-  version: 92be607837490e8246ca876619cee393bff27981
+  version: 0.6.0
   language: C++
   build: cmake
   license: MIT
-  excluded_platforms: "wasm_mvp;wasm_threads;linux_amd64_musl"
+  excluded_platforms: "wasm_mvp;wasm_threads;linux_amd64_musl;windows_amd64;windows_amd64_mingw"
   requires_toolchains: rust
   maintainers:
     - smithclay
 
 repo:
   github: smithclay/duckdb-otlp
-  ref: v0.5.0
+  ref: 5f32698962567b9e30bf79746b166e89543bffb0
 
 docs:
   hello_world: |
@@ -118,10 +118,10 @@ docs:
     - [OpenTelemetry Protocol (OTLP)](https://opentelemetry.io/docs/specs/otlp/)
     - [OpenTelemetry ClickHouse Exporter](https://github.com/open-telemetry/opentelemetry-collector-contrib/tree/main/exporter/clickhouseexporter)
 
-extension_star_count: 65
-extension_star_count_pretty: 65
-extension_download_count: 995
-extension_download_count_pretty: 995
+extension_star_count: 67
+extension_star_count_pretty: 67
+extension_download_count: 1047
+extension_download_count_pretty: 1.0k
 image: '/images/community_extensions/social_preview/preview_community_extension_otlp.png'
 layout: community_extension_doc
 ---
@@ -149,6 +149,19 @@ LOAD {{ page.extension.name }};
 
 |          function_name          | function_type | description | comment | examples |
 |---------------------------------|---------------|-------------|---------|----------|
+| otap_serve                      | table         | NULL        | NULL    |          |
+| otlp_flush                      | table         | NULL        | NULL    |          |
+| otlp_seal_list                  | table         | NULL        | NULL    |          |
+| otlp_serve                      | table         | NULL        | NULL    |          |
+| otlp_server_list                | table         | NULL        | NULL    |          |
+| otlp_stop                       | table         | NULL        | NULL    |          |
+| otlp_uri_parser                 | scalar        | NULL        | NULL    |          |
+| read_otap_logs                  | table         | NULL        | NULL    |          |
+| read_otap_metrics_exp_histogram | table         | NULL        | NULL    |          |
+| read_otap_metrics_gauge         | table         | NULL        | NULL    |          |
+| read_otap_metrics_histogram     | table         | NULL        | NULL    |          |
+| read_otap_metrics_sum           | table         | NULL        | NULL    |          |
+| read_otap_traces                | table         | NULL        | NULL    |          |
 | read_otlp_logs                  | table         | NULL        | NULL    |          |
 | read_otlp_metrics               | table         | NULL        | NULL    |          |
 | read_otlp_metrics_exp_histogram | table         | NULL        | NULL    |          |
