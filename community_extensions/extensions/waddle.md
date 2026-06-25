@@ -26,7 +26,7 @@ extension:
 
 repo:
   github: duckdb/extension-template
-  ref: 5df4b9401665d23ec5f9dd08f248df08c9075232
+  ref: cfaf3e236008e782d27f4341b0ee036002d0a449
 
 docs:
   hello_world: |
@@ -34,9 +34,9 @@ docs:
   extended_description: |
     The waddle extension is based on DuckDB's [Extension Template](https://github.com/duckdb/extension-template/), and it's a great starting point to get started building more advanced extensions.
 
-extension_star_count: 282
-extension_star_count_pretty: 282
-extension_download_count: 1606
+extension_star_count: 283
+extension_star_count_pretty: 283
+extension_download_count: 1595
 extension_download_count_pretty: 1.6k
 image: '/images/community_extensions/social_preview/preview_community_extension_waddle.png'
 layout: community_extension_doc

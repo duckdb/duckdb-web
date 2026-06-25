@@ -8,7 +8,7 @@ excerpt: |
 extension:
   name: raquet
   description: "Raster analytics on Raquet files with QUADBIN spatial indexing, raster ingestion, and PostGIS-style functions"
-  version: 0.2.6
+  version: 0.2.7
   language: C++
   build: cmake
   license: Apache-2.0
@@ -19,7 +19,7 @@ extension:
 
 repo:
   github: jatorre/duckdb-raquet
-  ref: e077a7c36f4527949cd5e36719cf4c81289d9d4b
+  ref: b6e348baa9f522a21adc647671ca79d65e7ff6a5
 
 docs:
   hello_world: |
@@ -62,7 +62,7 @@ docs:
 
 extension_star_count: 13
 extension_star_count_pretty: 13
-extension_download_count: 1571
+extension_download_count: 1636
 extension_download_count_pretty: 1.6k
 image: '/images/community_extensions/social_preview/preview_community_extension_raquet.png'
 layout: community_extension_doc
