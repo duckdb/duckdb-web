@@ -178,7 +178,7 @@
 
         tr {
             display: grid;
-            grid-template-columns: var(--first-column-width) 1.7fr 1fr 1fr;
+            grid-template-columns: var(--first-column-width) 1.7fr 1fr 0.3fr 0.3fr;
 
             @media (max-width: 940px) {
                 grid-template-columns: 70px 1fr;
@@ -235,7 +235,8 @@
                 }
             }
 
-            td:nth-child(4) {
+            td:nth-child(4),
+            td:nth-child(5) {
                 @media (max-width: 940px) {
                     grid-column: 2;
                     padding-top: 0;

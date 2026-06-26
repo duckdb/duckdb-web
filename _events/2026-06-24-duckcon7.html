@@ -73,6 +73,7 @@ redirect_from:
             <th class="title-1 table-title">{{ session.title }}</th>
             <th></th>
             <th></th>
+            <th></th>
           </tr>
         </thead>
         <tbody>
@@ -81,8 +82,9 @@ redirect_from:
               <td>{{ talk.time }}</td>
               <td>{{ talk.title }}</td>
               <td>{{ talk.speaker }}</td>
+              <td>{% if talk.slides %}<a class="button yellow" href="{{ talk.slides }}" target="_blank" rel="noopener noreferrer">Slides</a>{% endif %}</td>
               <td>{% if talk.youtube %}<a class="button yellow" href="{{ talk.youtube }}" target="_blank" rel="noopener noreferrer">YouTube</a>{% endif %}</td>
-            </tr>
+          </tr>
           {% endfor %}
         </tbody>
       </table>
