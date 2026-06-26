@@ -38,8 +38,8 @@ docs:
 
 extension_star_count: 1
 extension_star_count_pretty: 1
-extension_download_count: 1848
-extension_download_count_pretty: 1.8k
+extension_download_count: 1983
+extension_download_count_pretty: 2.0k
 image: '/images/community_extensions/social_preview/preview_community_extension_astro.png'
 layout: community_extension_doc
 ---

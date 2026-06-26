@@ -21,12 +21,12 @@ extension:
 repo:
   andium: 84794a00a6837c31f0779c56f2ce0e83df1bb7b6
   github: query-farm/adbc_scanner
-  ref: 04a17e5d9c958e083cb53aa2244c82165d96423a
+  ref: f26fc382dbcde49bd2097e69f39f5efb73af11d0
 
 extension_star_count: 18
 extension_star_count_pretty: 18
-extension_download_count: 2259
-extension_download_count_pretty: 2.3k
+extension_download_count: 2084
+extension_download_count_pretty: 2.1k
 image: '/images/community_extensions/social_preview/preview_community_extension_adbc_scanner.png'
 layout: community_extension_doc
 ---
@@ -62,6 +62,7 @@ LOAD {{ page.extension.name }};
 | adbc_execute        | scalar        | NULL        | NULL    | NULL     |
 | adbc_info           | table         | NULL        | NULL    | NULL     |
 | adbc_insert         | table         | NULL        | NULL    | NULL     |
+| adbc_profiles       | table         | NULL        | NULL    | NULL     |
 | adbc_rollback       | scalar        | NULL        | NULL    | NULL     |
 | adbc_scan           | table         | NULL        | NULL    | NULL     |
 | adbc_scan_table     | table         | NULL        | NULL    | NULL     |

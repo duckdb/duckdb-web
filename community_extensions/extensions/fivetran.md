@@ -23,8 +23,8 @@ repo:
 
 extension_star_count: 0
 extension_star_count_pretty: 0
-extension_download_count: 6709
-extension_download_count_pretty: 6.7k
+extension_download_count: 6529
+extension_download_count_pretty: 6.5k
 image: '/images/community_extensions/social_preview/preview_community_extension_fivetran.png'
 layout: community_extension_doc
 ---
