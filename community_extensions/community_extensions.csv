@@ -1,6 +1,6 @@
 name,repo,ref,description
 a5,query-farm/a5,73bd09dc70b4445bb9fe27be55495fe6d16b3f07,"Hierarchical pentagonial indexing for geospatial data that is equal-area and millimeter accurate."
-adbc_scanner,query-farm/adbc_scanner,04a17e5d9c958e083cb53aa2244c82165d96423a,"An ADBC client extension for DuckDB that can access ADBC provided data sources."
+adbc_scanner,query-farm/adbc_scanner,f26fc382dbcde49bd2097e69f39f5efb73af11d0,"An ADBC client extension for DuckDB that can access ADBC provided data sources."
 airport,query-farm/airport,c9ef8421e60b1096c0567945cc59a62e31f3b3d0,"The Airport extension brings Arrow Flight support to DuckDB, enabling DuckDB to query, modify, and store data from Arrow Flight servers."
 aixchess,thomas-daniels/aix,728e58fb70d343b6b69a9d0bc395db5309b4dc65,"Efficiently query large chess game collections"
 altertable,altertable-ai/duckdb-altertable,ed5737f8066098b9c8250c666eaf660da1c99d11,"Query Altertable's lakehouse directly from your local DuckDB."

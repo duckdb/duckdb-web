@@ -73,9 +73,9 @@ docs:
     | `schema.table` | `public.patients` | Any catalog |
     | `table` | `patients` | Any catalog and schema |
     | Wildcard `*` | `mydb.*.patients` | Match any value for that component |
-extension_star_count: 1
-extension_star_count_pretty: 1
-extension_download_count: 1148
+extension_star_count: 2
+extension_star_count_pretty: 2
+extension_download_count: 1144
 extension_download_count_pretty: 1.1k
 image: '/images/community_extensions/social_preview/preview_community_extension_table_guard.png'
 layout: community_extension_doc

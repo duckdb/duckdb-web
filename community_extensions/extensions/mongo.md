@@ -37,8 +37,8 @@ docs:
 
 extension_star_count: 52
 extension_star_count_pretty: 52
-extension_download_count: 2541
-extension_download_count_pretty: 2.5k
+extension_download_count: 2247
+extension_download_count_pretty: 2.2k
 image: '/images/community_extensions/social_preview/preview_community_extension_mongo.png'
 layout: community_extension_doc
 ---
