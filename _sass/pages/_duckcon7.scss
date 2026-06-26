@@ -208,6 +208,11 @@
 
         tbody tr {
             align-items: center;
+            transition: background 0.2s ease;
+
+            &:hover {
+                background: var(--doc-codebox-background-color);
+            }
 
             td:first-child {
                 @include code-standard;
