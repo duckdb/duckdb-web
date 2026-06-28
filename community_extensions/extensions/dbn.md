@@ -61,10 +61,10 @@ docs:
     `databento` Python decoder across every schema and DBN version. This is an
     independent reader, not affiliated with Databento.
 
-extension_star_count: 0
-extension_star_count_pretty: 0
-extension_download_count: 503
-extension_download_count_pretty: 503
+extension_star_count: 1
+extension_star_count_pretty: 1
+extension_download_count: 573
+extension_download_count_pretty: 573
 image: '/images/community_extensions/social_preview/preview_community_extension_dbn.png'
 layout: community_extension_doc
 ---

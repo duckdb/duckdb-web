@@ -164,8 +164,8 @@ docs:
 
 extension_star_count: 26
 extension_star_count_pretty: 26
-extension_download_count: 1393
-extension_download_count_pretty: 1.4k
+extension_download_count: 910
+extension_download_count_pretty: 910
 image: '/images/community_extensions/social_preview/preview_community_extension_pdal.png'
 layout: community_extension_doc
 ---
