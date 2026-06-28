@@ -8,7 +8,7 @@ excerpt: |
 extension:
   name: agent_data
   description: A DuckDB extension written in Rust for querying, analysing and inspecting AI coding agents history. Read conversations, plans, todos, history, and usage stats directly from your local agent data directories.
-  version: 0.1.0
+  version: 0.2.0
   language: Rust
   build: cargo
   license: MIT
@@ -19,7 +19,7 @@ extension:
 
 repo:
   github: axsaucedo/agent_data_duckdb
-  ref: 537172a74104f520e642c20421520dcd88b865cc
+  ref: 1b9b232056763204c12046beacd5c99a6672442e
 
 docs:
   hello_world: |
@@ -60,9 +60,7 @@ docs:
 
   extended_description: |
 
-    **Supported agents:** [Claude Code](https://docs.anthropic.com/en/docs/claude-code) (`~/.claude`) and [GitHub Copilot CLI](https://docs.github.com/en/copilot/github-copilot-in-the-cli) (`~/.copilot`).
-
-    > OpenAI Codex and Gemini CLI Coming Soon™.
+    **Supported agents:** [Claude Code](https://docs.anthropic.com/en/docs/claude-code) (`~/.claude`), Claude Desktop, [GitHub Copilot CLI](https://docs.github.com/en/copilot/github-copilot-in-the-cli) (`~/.copilot`), [OpenAI Codex](https://openai.com/codex) (`~/.codex`), and [Gemini CLI](https://github.com/google-gemini/gemini-cli) (`~/.gemini`).
 
     Written in 🦀 Rust.
 
@@ -78,17 +76,19 @@ docs:
     | `read_history()` | `~/.claude` | Claude Code |
     | `read_stats()` | `~/.claude` | Claude Code |
 
-    To read Copilot data, pass the path explicitly:
+    To read another agent's data, pass the path explicitly:
 
     ```sql
     FROM read_conversations(path='~/.copilot');
+    FROM read_conversations(path='~/.codex');
+    FROM read_conversations(path='~/.gemini');
     ```
 
     ### Available Functions
 
     All functions accept two optional parameters:
-    - **`path`** — data directory path (default: `~/.claude`). Auto-detected from folder structure (`projects/` → Claude, `session-state/` → Copilot).
-    - **`source`** — explicit provider override: `'claude'` or `'copilot'`. Use when auto-detection fails or for non-standard directory layouts.
+    - **`path`** — data directory path (default: `~/.claude`). Auto-detected from folder structure (`projects/` → Claude, `session-state/` → Copilot, dated `sessions/` → Codex, `tmp/` + `installation_id` → Gemini).
+    - **`source`** — explicit provider override: `'claude'`, `'claude-desktop'`, `'copilot'`, `'codex'`, or `'gemini'`. Use when auto-detection fails or for non-standard directory layouts.
 
     Every table includes a **`source`** column (`'claude'` or `'copilot'`) as the first column.
 
@@ -121,10 +121,10 @@ docs:
 
     For full documentation, see the [GitHub repository](https://github.com/axsaucedo/duckdb-claude-ext).
 
-extension_star_count: 19
-extension_star_count_pretty: 19
-extension_download_count: 902
-extension_download_count_pretty: 902
+extension_star_count: 20
+extension_star_count_pretty: 20
+extension_download_count: 577
+extension_download_count_pretty: 577
 image: '/images/community_extensions/social_preview/preview_community_extension_agent_data.png'
 layout: community_extension_doc
 ---
