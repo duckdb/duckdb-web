@@ -83,8 +83,8 @@ docs:
 
 extension_star_count: 2
 extension_star_count_pretty: 2
-extension_download_count: 622
-extension_download_count_pretty: 622
+extension_download_count: 534
+extension_download_count_pretty: 534
 image: '/images/community_extensions/social_preview/preview_community_extension_duck_diff.png'
 layout: community_extension_doc
 ---

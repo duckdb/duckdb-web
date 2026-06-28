@@ -9,7 +9,7 @@ extension:
   name: duck_dggs
   description: DuckDB extension for discrete global grid systems (DGGS) powered by DGGRID v8.
   
-  version: 0.1.6
+  version: 0.1.8
   language: C++
   build: cmake
   license: MIT
@@ -18,7 +18,7 @@ extension:
 
 repo:
   github: am2222/duckdb-dggs
-  ref: 25b51cb5f0bdb04ffe236956e640e3e01f8440e2
+  ref: bbcfb2518e6950b8d30bdae1e9c4280fb98bcfb1
 
 docs:
   hello_world: |
@@ -148,8 +148,8 @@ docs:
 
 extension_star_count: 1
 extension_star_count_pretty: 1
-extension_download_count: 1812
-extension_download_count_pretty: 1.8k
+extension_download_count: 1160
+extension_download_count_pretty: 1.2k
 image: '/images/community_extensions/social_preview/preview_community_extension_duck_dggs.png'
 layout: community_extension_doc
 ---
@@ -190,11 +190,13 @@ LOAD {{ page.extension.name }};
 | geo_to_q2dd                | scalar        | NULL        | NULL    |          |
 | geo_to_q2di                | scalar        | NULL        | NULL    |          |
 | geo_to_seqnum              | scalar        | NULL        | NULL    |          |
+| igeo7_authalic_to_geo      | scalar        | NULL        | NULL    |          |
 | igeo7_decode_str           | macro         | NULL        | NULL    |          |
 | igeo7_encode               | scalar        | NULL        | NULL    |          |
 | igeo7_encode_at_resolution | scalar        | NULL        | NULL    |          |
 | igeo7_first_non_zero       | scalar        | NULL        | NULL    |          |
 | igeo7_from_string          | scalar        | NULL        | NULL    |          |
+| igeo7_geo_to_authalic      | scalar        | NULL        | NULL    |          |
 | igeo7_get_base_cell        | scalar        | NULL        | NULL    |          |
 | igeo7_get_digit            | scalar        | NULL        | NULL    |          |
 | igeo7_get_neighbour        | scalar        | NULL        | NULL    |          |
