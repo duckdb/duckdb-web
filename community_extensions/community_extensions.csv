@@ -1,6 +1,7 @@
 name,repo,ref,description
 a5,query-farm/a5,73bd09dc70b4445bb9fe27be55495fe6d16b3f07,"Hierarchical pentagonial indexing for geospatial data that is equal-area and millimeter accurate."
 adbc_scanner,query-farm/adbc_scanner,f26fc382dbcde49bd2097e69f39f5efb73af11d0,"An ADBC client extension for DuckDB that can access ADBC provided data sources."
+agent_data,axsaucedo/agent_data_duckdb,1b9b232056763204c12046beacd5c99a6672442e,"A DuckDB extension written in Rust for querying, analysing and inspecting AI coding agents history. Read conversations, plans, todos, history, and usage stats directly from your local agent data directories."
 airport,query-farm/airport,c9ef8421e60b1096c0567945cc59a62e31f3b3d0,"The Airport extension brings Arrow Flight support to DuckDB, enabling DuckDB to query, modify, and store data from Arrow Flight servers."
 aixchess,thomas-daniels/aix,728e58fb70d343b6b69a9d0bc395db5309b4dc65,"Efficiently query large chess game collections"
 altertable,altertable-ai/duckdb-altertable,ed5737f8066098b9c8250c666eaf660da1c99d11,"Query Altertable's lakehouse directly from your local DuckDB."
@@ -70,6 +71,7 @@ eurostat,ahuarte47/duckdb-eurostat,519b958f00af9513669dc3fbc6773b807568526b,"Ext
 evalexpr_rhai,query-farm/evalexpr_rhai,87d9d5c2e6e78d684223a78ddb28c33e14124f8e,"Evaluate the Rhai scripting language in DuckDB"
 events,query-farm/events,d6e9afda80991072386f64825c5c11339f051e99,"A extension that hooks into database events and sends JSON-formatted notifications to external programs."
 fakeit,tobilg/duckdb-fakeit,93733f9fa4008407b06555b177b7d7857a0ab66f,"The FakeIt Extension enables generation of realistic fake/test data directly in SQL queries"
+finance,leonardovida/duckdb-finance,15bf42c1ac74ed118b6f3b014e27443869ccbab8,"SQL-native quant finance functions for DuckDB"
 finetype,meridian-online/finetype,b060785d29dab029aae4a23b514c5d1bc125f4c2,"Semantic type classification — detects 244 data types (emails, URLs, dates, UUIDs, currencies, etc.) from raw strings"
 fire_duck_ext,BorisBesky/fire_duck_ext,2ea20258af9370ea1ef6200f8ec12113aa69127c,"Query Google Cloud Firestore directly from DuckDB using SQL"
 firebird,flozer/duckdb-firebird,v0.6.1,"Federated read-only access to Firebird (3.0/4.0/5.0) databases from DuckDB, with projection + filter pushdown, INT128 / DECIMAL(38) / TIMESTAMP_TZ support, native ATTACH, and CHARACTER SET NONE handling (default win1252; strict / iso8859_1 / blob also available) with filter-pushdown correctness on transcoded columns."
