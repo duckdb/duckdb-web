@@ -10,7 +10,7 @@ excerpt: |
 extension:
   name: ducklink
   description: Run WebAssembly component extensions inside DuckDB
-  version: 0.1.0
+  version: 0.2.0
   language: Rust
   build: cargo
   license: MIT
@@ -26,13 +26,13 @@ extension:
 
 repo:
   github: tegmentum/ducklink-extension
-  ref: v0.1.0
+  ref: v0.2.0
 
 docs:
   hello_world: |
     -- The extension ships one built-in, so loading works with no component:
     LOAD ducklink;
-    SELECT ducklink_version();   -- e.g. 'ducklink 0.1.0'
+    SELECT ducklink_version();   -- e.g. 'ducklink 0.2.0'
 
     -- To expose a component's functions, point ducklink at one or more
     -- `duckdb:extension` WebAssembly components via the DUCKLINK_COMPONENTS
@@ -56,8 +56,8 @@ docs:
 
 extension_star_count: 0
 extension_star_count_pretty: 0
-extension_download_count: 161
-extension_download_count_pretty: 161
+extension_download_count: 227
+extension_download_count_pretty: 227
 image: '/images/community_extensions/social_preview/preview_community_extension_ducklink.png'
 layout: community_extension_doc
 ---
