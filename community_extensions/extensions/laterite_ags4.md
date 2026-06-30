@@ -100,8 +100,8 @@ docs:
 
 extension_star_count: 0
 extension_star_count_pretty: 0
-extension_download_count: 562
-extension_download_count_pretty: 562
+extension_download_count: 561
+extension_download_count_pretty: 561
 image: '/images/community_extensions/social_preview/preview_community_extension_laterite_ags4.png'
 layout: community_extension_doc
 ---

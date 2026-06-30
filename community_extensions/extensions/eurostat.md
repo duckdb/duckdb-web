@@ -8,7 +8,7 @@ excerpt: |
 extension:
   name: eurostat
   description: Extension that adds support for reading data from EUROSTAT database using SQL.
-  version: 0.2.1
+  version: 0.3.0
   language: C++
   build: cmake
   excluded_platforms: "windows_amd64_mingw"
@@ -18,7 +18,7 @@ extension:
 
 repo:
   github: ahuarte47/duckdb-eurostat
-  ref: 519b958f00af9513669dc3fbc6773b807568526b
+  ref: 1a4d0fc189106a0ba889a3bdcb7b2c53997d4e9a
 
 docs:
   hello_world: |
@@ -147,10 +147,10 @@ docs:
     Time filters (e.g. `WHERE time_period >= '2000' AND time_period <= '2010'`) are also supported
     and will be encoded as range filters in the EUROSTAT API.
 
-extension_star_count: 31
-extension_star_count_pretty: 31
-extension_download_count: 1103
-extension_download_count_pretty: 1.1k
+extension_star_count: 32
+extension_star_count_pretty: 32
+extension_download_count: 895
+extension_download_count_pretty: 895
 image: '/images/community_extensions/social_preview/preview_community_extension_eurostat.png'
 layout: community_extension_doc
 ---

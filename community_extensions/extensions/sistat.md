@@ -45,8 +45,8 @@ docs:
 
 extension_star_count: 3
 extension_star_count_pretty: 3
-extension_download_count: 990
-extension_download_count_pretty: 990
+extension_download_count: 804
+extension_download_count_pretty: 804
 image: '/images/community_extensions/social_preview/preview_community_extension_sistat.png'
 layout: community_extension_doc
 ---
