@@ -45,8 +45,8 @@ docs:
 
 extension_star_count: 2
 extension_star_count_pretty: 2
-extension_download_count: 956
-extension_download_count_pretty: 956
+extension_download_count: 914
+extension_download_count_pretty: 914
 image: '/images/community_extensions/social_preview/preview_community_extension_h5db.png'
 layout: community_extension_doc
 ---

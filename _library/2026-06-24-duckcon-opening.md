@@ -12,7 +12,7 @@ pill: "DuckCon #7"
 ---
 
 <div class="video-container">
-<iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/7XkzSu-ozy4?si=trcYSayWcbmY6oqk" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+<iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/iFPKNQu0FtE?si=trcYSayWcbmY6oqk" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 </div>
 
 [DuckCon #7]({% link _events/2026-06-24-duckcon7.html %}) featured several talks from DuckDB community.
