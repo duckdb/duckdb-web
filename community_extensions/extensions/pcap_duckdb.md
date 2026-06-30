@@ -45,8 +45,8 @@ docs:
 
 extension_star_count: 1
 extension_star_count_pretty: 1
-extension_download_count: 781
-extension_download_count_pretty: 781
+extension_download_count: 618
+extension_download_count_pretty: 618
 image: '/images/community_extensions/social_preview/preview_community_extension_pcap_duckdb.png'
 layout: community_extension_doc
 ---

@@ -130,8 +130,8 @@ docs:
 
 extension_star_count: 0
 extension_star_count_pretty: 0
-extension_download_count: 838
-extension_download_count_pretty: 838
+extension_download_count: 710
+extension_download_count_pretty: 710
 image: '/images/community_extensions/social_preview/preview_community_extension_zim.png'
 layout: community_extension_doc
 ---

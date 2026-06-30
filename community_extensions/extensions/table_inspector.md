@@ -41,8 +41,8 @@ docs:
 
 extension_star_count: 2
 extension_star_count_pretty: 2
-extension_download_count: 1017
-extension_download_count_pretty: 1.0k
+extension_download_count: 941
+extension_download_count_pretty: 941
 image: '/images/community_extensions/social_preview/preview_community_extension_table_inspector.png'
 layout: community_extension_doc
 ---

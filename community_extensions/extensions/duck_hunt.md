@@ -180,7 +180,7 @@ docs:
 
 extension_star_count: 3
 extension_star_count_pretty: 3
-extension_download_count: 1138
+extension_download_count: 1052
 extension_download_count_pretty: 1.1k
 image: '/images/community_extensions/social_preview/preview_community_extension_duck_hunt.png'
 layout: community_extension_doc

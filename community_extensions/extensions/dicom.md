@@ -48,8 +48,8 @@ docs:
 
 extension_star_count: 0
 extension_star_count_pretty: 0
-extension_download_count: 880
-extension_download_count_pretty: 880
+extension_download_count: 846
+extension_download_count_pretty: 846
 image: '/images/community_extensions/social_preview/preview_community_extension_dicom.png'
 layout: community_extension_doc
 ---
