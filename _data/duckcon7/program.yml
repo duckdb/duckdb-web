@@ -18,22 +18,22 @@
         - time: "15:00"
           title: "State of the Duck"
           speaker: "Hannes Mühleisen, Mark Raasveldt<br>(DuckLabs)"
-          youtube: https://youtu.be/7XkzSu-ozy4
+          youtube: https://youtu.be/iFPKNQu0FtE
           slides: https://blobs.duckdb.org/events/duckcon7/hannes-muehleisen-mark-raasveldt-duckcon7-state-of-the-duck.pdf
         - time: "15:30"
           title: "Effortlessly modernize your legacy: SQLFrame migrates PySpark to DuckDB without code changes"
           speaker: "Nicolas Renkamp<br>(Merck KGaA)"
-          youtube: https://youtu.be/jBVc1u1jL0E
+          youtube: https://youtu.be/F91vrV6urqs
           slides: https://blobs.duckdb.org/events/duckcon7/nicolas-renkamp-sqlframe-migrates-pyspark-to-duckdb.pdf
         - time: "15:45"
           title: "Phages and DuckDB: The mighty duo against the giants"
           speaker: "Virginie Grosboillot (U. of Ljubljana),<br>Herminio Vazquez-Cano (ETH Zürich)"
-          youtube: https://youtu.be/SbczMgSVy90
+          youtube: https://youtu.be/q6pTb0PZJbs
           slides: https://blobs.duckdb.org/events/duckcon7/virginie-grosboillot-herminio-vazquez-phages-and-duckdb.pdf
         - time: "16:00"
           title: "ggsql: A grammar of graphics for SQL"
           speaker: "Teun van den Brand<br>(Posit PBC)"
-          youtube: https://youtu.be/G58CxVffyw8
+          youtube: https://youtu.be/xMmuS-UwWsc
           slides: https://blobs.duckdb.org/events/duckcon7/teun-van-den-brand-ggsql.pdf
         - time: "16:15"
           title: Coffee break
@@ -43,17 +43,17 @@
         - time: "16:35"
           title: "How we built a SQL layer over our user listening history for agentic access"
           speaker: "Kian Mehrabani<br>(Spotify)"
-          youtube: https://youtu.be/m7pvG27TCdk
+          youtube: https://youtu.be/-9GY1CCJG5o
           slides: https://blobs.duckdb.org/events/duckcon7/kian-mehrabani-spotify-sql-agentic-access.pdf
         - time: "16:50"
           title: "Grep your lakehouse: Search-first retrieval for DuckDB-powered agents"
           speaker: "Sylvain Utard<br>(Altertable.ai)"
-          youtube: https://youtu.be/lywaVOsfJp8
+          youtube: https://youtu.be/g4U3_amXXwM
           slides: https://blobs.duckdb.org/events/duckcon7/sylvain-utard-grep-your-lakehouse.pdf
         - time: "17:05"
           title: "When the sea lion learns to quack: DuckDB as a MariaDB storage engine"
           speaker: "Roman Nozdrin<br>(MariaDB Corporation)"
-          youtube: https://youtu.be/y_T9-FM1Ow4
+          youtube: https://youtu.be/PVWY_hES0tE
           slides: https://blobs.duckdb.org/events/duckcon7/roman-nozdrin-duckdb-as-a-mariadb-storage-engine.pdf
     - lightning talks:
       title: Lightning talks
@@ -61,32 +61,32 @@
         - time: "17:20"
           title: "Native app development using DuckDB"
           speaker: "Milla Henriksson<br>(Toyota Gazoo Racing World Rally Team)"
-          youtube: https://youtu.be/e4AtfciGTHA
+          youtube: https://youtu.be/jMQFKnxWwz4
           slides: https://blobs.duckdb.org/events/duckcon7/milla-henriksson-native-app-development-using-duckdb.pdf
         - time: "17:26"
           title: "Making Iceberg walk and talk like Postgres"
           speaker: "Marco Slot<br>(Snowflake)"
-          youtube: https://youtu.be/ESDJRshtFSE
+          youtube: https://youtu.be/wF8I4gjltZY
           slides: https://blobs.duckdb.org/events/duckcon7/marco-slot-making-iceberg-walk-and-talk-like-postgres.pdf
         - time: "17:32"
           title: "DuckLake on Hetzner: Your own data lakehouse for under €15 a month"
           speaker: "Floyd Berndsen<br>(AllOptions)"
-          youtube: https://youtu.be/PlDhMUDymIc
+          youtube: https://youtu.be/8xH-rDt8VjA
           slides: https://blobs.duckdb.org/events/duckcon7/floyd-berndsen-ducklake-on-hetzner.pdf
         - time: "17:38"
           title: "DuckDB powering cancer genomics research"
           speaker: "Thomas Visser<br>(Hartwig Medical Foundation)"
-          youtube: https://youtu.be/5A6rwEQwHuY
+          youtube: https://youtu.be/yf_xEgZXp0A
           slides: https://blobs.duckdb.org/events/duckcon7/thomas-visser-duckdb-powering-cancer-genomics-research.pdf
         - time: "17:44"
           title: "DuckDB as an analytical runtime: Building local-first analytics apps with SQLRooms"
           speaker: "Ilya Boyandin<br>(Foursquare / GeoVisually GmbH)"
-          youtube: https://youtu.be/sRru2U5Jljc
+          youtube: https://youtu.be/fV1LXnPl4ng
           slides: https://blobs.duckdb.org/events/duckcon7/ilya-boyandin-local-first-analytics-apps-with-sqlrooms.pdf
         - time: "17:50"
           title: "A laptop, a duck, and twenty years of wind: Auditing UK energy policy without a cluster"
           speaker: "Barry Smart<br>(endjin)"
-          youtube: https://youtu.be/Ub7Zuf_lLms
+          youtube: https://youtu.be/7dUEgMLuUcI
           slides: https://blobs.duckdb.org/events/duckcon7/barry-smart-auditing-uk-energy-policy.pdf
     - first session:
       title: Social event
