@@ -8,7 +8,7 @@ excerpt: |
 extension:
   name: rdf
   description: A DuckDB extension to read and write RDF
-  version: 2.7.1
+  version: 2.7.3
   language: C++
   build: cmake
   license: MIT
@@ -17,7 +17,7 @@ extension:
 
 repo:
   github: nonodename/duck_rdf
-  ref: df32898a1b826bfa73eb8bd6aaa2e499370b77ac
+  ref: 90f94d13a1168a280230798762fe080a8886ab40
 
 docs:
   hello_world: |
@@ -133,8 +133,8 @@ docs:
 
 extension_star_count: 21
 extension_star_count_pretty: 21
-extension_download_count: 984
-extension_download_count_pretty: 984
+extension_download_count: 924
+extension_download_count_pretty: 924
 image: '/images/community_extensions/social_preview/preview_community_extension_rdf.png'
 layout: community_extension_doc
 ---
@@ -160,14 +160,15 @@ LOAD {{ page.extension.name }};
 
 <div class="extension_functions_table"></div>
 
-|    function_name    | function_type | description | comment | examples |
-|---------------------|---------------|-------------|---------|----------|
-| can_call_inside_out | scalar        | NULL        | NULL    |          |
-| is_valid_r2rml      | scalar        | NULL        | NULL    |          |
-| pivot_rdf           | table         | NULL        | NULL    |          |
-| profile_rdf         | table         | NULL        | NULL    |          |
-| read_rdf            | table         | NULL        | NULL    |          |
-| read_sparql         | table         | NULL        | NULL    |          |
+|    function_name    | function_type |                                                                                                   description                                                                                                    | comment |                                                                                 examples                                                                                 |
+|---------------------|---------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|---------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| can_call_inside_out | scalar        | Return true if the given R2RML mapping file can be executed in inside-out mode, where DuckDB runs the SQL query and the extension maps each output row to RDF triples.                                           | NULL    | [SELECT can_call_inside_out('mapping.ttl')]                                                                                                                              |
+| is_valid_r2rml      | scalar        | Return true if the given file is a syntactically valid R2RML mapping document.                                                                                                                                   | NULL    | [SELECT is_valid_r2rml('mapping.ttl')]                                                                                                                                   |
+| pivot_rdf           | table         | Read RDF triples and pivot them into a wide table where each distinct predicate becomes a column and subjects become row identifiers.                                                                            | NULL    | [SELECT * FROM pivot_rdf('data.ttl'), SELECT * FROM pivot_rdf('data.nt', prefix_expansion=true)]                                                                         |
+| profile_rdf         | table         | Profile one or more RDF files and return a predicate-level statistical summary including value counts, datatypes, and cardinalities.                                                                             | NULL    | [SELECT * FROM profile_rdf('data.nt'), SELECT * FROM profile_rdf('data/*.ttl', strict_parsing=false)]                                                                    |
+| read_rdf            | table         | Read RDF triples from one or more files (Turtle, NTriples, NQuads, TriG, or RDF/XML) into a table with columns graph, subject, predicate, object, object_datatype, and object_lang. Glob patterns are supported. | NULL    | [SELECT * FROM read_rdf('data.nt'), SELECT subject, predicate, object FROM read_rdf('*.ttl'), SELECT * FROM read_rdf('data.rdf', file_type='rdf', strict_parsing=false)] |
+| read_rdf_prefixes   | table         | Read the namespace prefix declarations from one or more RDF files. Returns prefix (local name), uri (namespace URI), and is_base (true for @base declarations) columns.                                          | NULL    | [SELECT * FROM read_rdf_prefixes('data.ttl'), SELECT prefix, uri FROM read_rdf_prefixes('*.ttl')]                                                                        |
+| read_sparql         | table         | Execute a SPARQL SELECT query against a remote endpoint and return the results as a table. Each SPARQL variable becomes a VARCHAR column. Not available in WebAssembly builds.                                   | NULL    | [SELECT * FROM read_sparql('https://dbpedia.org/sparql', 'SELECT ?s ?p ?o WHERE { ?s ?p ?o } LIMIT 10')]                                                                 |
 
 ### Overloaded Functions
 
