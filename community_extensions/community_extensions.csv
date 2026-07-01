@@ -1,5 +1,6 @@
 name,repo,ref,description
 a5,query-farm/a5,73bd09dc70b4445bb9fe27be55495fe6d16b3f07,"Hierarchical pentagonial indexing for geospatial data that is equal-area and millimeter accurate."
+adbc,columnar-tech/duckdb-adbc-client,2d19eea3af6f293e2059e4cf9370d8bcbdcaa84a,"Connects DuckDB to any database that has an Arrow Database Connectivity (ADBC) driver."
 adbc_scanner,query-farm/adbc_scanner,f26fc382dbcde49bd2097e69f39f5efb73af11d0,"An ADBC client extension for DuckDB that can access ADBC provided data sources."
 agent_data,axsaucedo/agent_data_duckdb,1b9b232056763204c12046beacd5c99a6672442e,"A DuckDB extension written in Rust for querying, analysing and inspecting AI coding agents history. Read conversations, plans, todos, history, and usage stats directly from your local agent data directories."
 airport,query-farm/airport,c9ef8421e60b1096c0567945cc59a62e31f3b3d0,"The Airport extension brings Arrow Flight support to DuckDB, enabling DuckDB to query, modify, and store data from Arrow Flight servers."
