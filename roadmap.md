@@ -28,6 +28,7 @@ For details on how to request features in DuckDB, please refer to the FAQ item [
 This section lists the features that the DuckDB team plans to work on **in the coming year**.
 
 * Using the new [PEG parser]({% post_url 2024-11-22-runtime-extensible-parsers %}) by default
+* Shipping the stable version of the [Quack protocol]({% link quack/index.html %})
 * [Support for async I/O](https://github.com/duckdb/duckdb/discussions/3560)
 * Migration and documentation to [C client API]({% link docs/current/clients/c/overview.md %}) and [C extension API](https://github.com/duckdb/extension-template-c)
 * Rust support for extensions
