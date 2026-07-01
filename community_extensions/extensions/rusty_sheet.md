@@ -66,7 +66,7 @@ docs:
 
 extension_star_count: 73
 extension_star_count_pretty: 73
-extension_download_count: 1403
+extension_download_count: 1366
 extension_download_count_pretty: 1.4k
 image: '/images/community_extensions/social_preview/preview_community_extension_rusty_sheet.png'
 layout: community_extension_doc
