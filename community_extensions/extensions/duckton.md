@@ -149,10 +149,10 @@ docs:
     Windows toolchains are excluded because the QUIC/TLS stack (quinn + rustls + ring)
     and async runtime aren't supported there.
 
-extension_star_count: 4
-extension_star_count_pretty: 4
-extension_download_count: 406
-extension_download_count_pretty: 406
+extension_star_count: 5
+extension_star_count_pretty: 5
+extension_download_count: 417
+extension_download_count_pretty: 417
 image: '/images/community_extensions/social_preview/preview_community_extension_duckton.png'
 layout: community_extension_doc
 ---
