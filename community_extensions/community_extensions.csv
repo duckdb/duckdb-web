@@ -210,5 +210,5 @@ wireduck,hyehudai/wireduck,19c4018cc8ebad08547d621bcdc25df86294ca2b,"Read and di
 yaml,teaguesterling/duckdb_yaml,8a1d8444af06682a3cb2933068a6a35af0fec3b2,"Read YAML files into DuckDB with native YAML type support, comprehensive extraction functions, and seamless JSON interoperability"
 yardstick,sidequery/yardstick,f19d73fa93f2601cfa81ca3ebad841dffcc5f609,"Measure-aware SQL implementing Julian Hyde's 'Measures in SQL' paper"
 zeek,ynadji/zeek-duckdb,ad3580e3ba6130d0da395ad283cfca4e9cbb2024,"Read Zeek network security monitor log files with automatic schema detection and type-aware parsing"
-zim,teaguesterling/duckdb_zim,3736b4c1ee0055c89a32b03626e2aa9403a4beb5,"Read .zim (Kiwix / openZIM) archives directly in DuckDB via libzim, from local files or remote S3/HTTP — offline Wikipedia, WikiMed, Stack Exchange, iFixit, and more, with a zim:// filesystem and full-text search."
+zim,teaguesterling/duckdb_zim,87d627e8b0b8f923bad1bfbb9e55dd85412632a5,"Read .zim (Kiwix / openZIM) archives directly in DuckDB via libzim, from local files or remote S3/HTTP — offline Wikipedia, WikiMed, Stack Exchange, iFixit, and more, with a zim:// filesystem and full-text search."
 zipfs,isaacbrodsky/duckdb-zipfs,5e1d66aed41bee74f69aff0f7afaea996c64a585,"Read files within zip archives"
