@@ -200,6 +200,8 @@ This extension does not add any types.
 
 <div class="extension_settings_table"></div>
 
-This extension does not add any settings.
+|               name                |                                                                                                          description                                                                                                          | input_type | scope  | aliases |
+|-----------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|------------|--------|---------|
+| zim_remote_search_max_local_index | Maximum size (bytes) of a remote ZIM's full-text index to copy locally so search works; 0 disables remote search. Larger values cover bigger archives but lengthen the first remote search (the whole index is fetched once). | UBIGINT    | GLOBAL | []      |
 
 
