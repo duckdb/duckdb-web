@@ -8,7 +8,7 @@ excerpt: |
 extension:
   name: celestial
   description: Astronomical coordinates utilities
-  version: 0.1.0
+  version: 0.2.0
   language: C++
   build: cmake
   license: Apache-2.0
@@ -17,19 +17,19 @@ extension:
 
 repo:
   github: lisa-sgs/duckdb-celestial
-  ref: d6a22f954257fa3d88d5ef8ba966e2c6e6ef179a
-  andium: d6a22f954257fa3d88d5ef8ba966e2c6e6ef179a
+  ref: 152bd83e144dd743ef06aca6843164c744e1a7c0
+  andium: 152bd83e144dd743ef06aca6843164c744e1a7c0
 
 docs:
   hello_world: |
-    SELECT spherical_angle(0, 0, 1, 0) AS radians_along_equator;
+    SELECT angular_separation_deg(204.2538292, -29.8657611, 201.3650633, -43.0191125);
   extended_description: |
     The celestial extension provides functions for working with astronomical coordinates.
 
 extension_star_count: 2
 extension_star_count_pretty: 2
-extension_download_count: 789
-extension_download_count_pretty: 789
+extension_download_count: 735
+extension_download_count_pretty: 735
 image: '/images/community_extensions/social_preview/preview_community_extension_celestial.png'
 layout: community_extension_doc
 ---
@@ -55,9 +55,9 @@ LOAD {{ page.extension.name }};
 
 <div class="extension_functions_table"></div>
 
-|  function_name  | function_type |                    description                     |                                     comment                                      |               examples                |
-|-----------------|---------------|----------------------------------------------------|----------------------------------------------------------------------------------|---------------------------------------|
-| spherical_angle | scalar        | Compute the angle between two points on the sphere | Input coordinates in radians (RA_1, DEC_1, RA2, DEC_2). Output angle in radians. | [SELECT spherical_angle(0, 0, 1, 0);] |
+|  function_name  | function_type |                                                     description                                                      |                                      comment                                      |               examples                |
+|-----------------|---------------|----------------------------------------------------------------------------------------------------------------------|-----------------------------------------------------------------------------------|---------------------------------------|
+| spherical_angle | scalar        | Compute the angle between two points on the sphere. Prefer `angular_separation_rad` to be more explicit about units. | Input coordinates in radians (RA_1, DEC_1, RA_2, DEC_2). Output angle in radians. | [SELECT spherical_angle(0, 0, 1, 0);] |
 
 ### Overloaded Functions
 

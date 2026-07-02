@@ -75,8 +75,8 @@ docs:
     | Wildcard `*` | `mydb.*.patients` | Match any value for that component |
 extension_star_count: 2
 extension_star_count_pretty: 2
-extension_download_count: 715
-extension_download_count_pretty: 715
+extension_download_count: 659
+extension_download_count_pretty: 659
 image: '/images/community_extensions/social_preview/preview_community_extension_table_guard.png'
 layout: community_extension_doc
 ---
