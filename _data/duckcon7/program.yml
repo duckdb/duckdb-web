@@ -10,8 +10,9 @@
       title: "Sponsor track (in-person)"
       timetable:
         - time: "14:15"
-          title: So you self-hosted DuckDB. Now what? An honest look at the road to production
+          title: So you self-hosted DuckDB. Now what?
           speaker: Mehdi Ouazza<br>(MotherDuck)
+          slides: https://www.mehdio.com/talks/2026-06-24-self-hosting-duckdb
     - first session:
       title: "Main track, session 1 (in-person & streamed)"
       timetable:
