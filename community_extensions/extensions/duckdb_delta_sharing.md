@@ -8,7 +8,7 @@ excerpt: |
 extension:
   name: duckdb_delta_sharing
   description: The most efficient way to query Delta Lake tables directly from DuckDB via the Delta Sharing protocol.
-  version: 0.3.2
+  version: 0.6.1
   language: C++
   build: cmake
   license: Apache-2.0
@@ -18,7 +18,7 @@ extension:
 
 repo:
   github: prequel-co/DuckDB-Delta-Sharing
-  ref: 5440afadc620643cfbffcfce0c325d32202e6cfe
+  ref: 9bcc9cc2abafcf0d5445709910dd77f6773c3555
 
 docs:
   hello_world: |
@@ -41,8 +41,11 @@ docs:
     CREATE SECRET (TYPE delta_sharing, PROVIDER env);
 
     -- Discovering Content
-    SELECT * FROM delta_share_list();
-    SELECT * FROM delta_share_list('my_share');
+    SELECT * FROM delta_share_list();                                   -- shares
+    SELECT * FROM delta_share_list('my_share');                         -- schemas in a share
+    SELECT * FROM delta_share_list('my_share', 'my_schema');            -- tables in a schema
+    SELECT * FROM delta_share_list_all_tables('my_share');              -- every table across all schemas
+    SELECT * FROM delta_share_list('my_share', 'my_schema', 'my_table');-- a table's columns
 
     -- Reading Tables
     SELECT * FROM delta_share_read('my_share', 'my_schema', 'my_table') 
@@ -78,8 +81,8 @@ docs:
 
 extension_star_count: 3
 extension_star_count_pretty: 3
-extension_download_count: 1593
-extension_download_count_pretty: 1.6k
+extension_download_count: 1454
+extension_download_count_pretty: 1.5k
 image: '/images/community_extensions/social_preview/preview_community_extension_duckdb_delta_sharing.png'
 layout: community_extension_doc
 ---
@@ -109,6 +112,7 @@ LOAD {{ page.extension.name }};
 |------------------------------|---------------|-------------|---------|----------|
 | delta_share_change_data_feed | table         | NULL        | NULL    |          |
 | delta_share_list             | table         | NULL        | NULL    |          |
+| delta_share_list_all_tables  | table         | NULL        | NULL    |          |
 | delta_share_list_files       | scalar        | NULL        | NULL    |          |
 | delta_share_read             | table         | NULL        | NULL    |          |
 
