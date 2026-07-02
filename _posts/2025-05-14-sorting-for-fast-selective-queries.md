@@ -208,7 +208,7 @@ Note that a row group size should be a power of 2.
 The minimum row group size is 2&nbsp;048, the vector size of DuckDB.
 
 ```sql
-ATTACH './smaller_row_groups.duckdb' (ROW_GROUP_SIZE 8192);
+ATTACH './smaller_row_groups.duckdb' (ROW_GROUP_SIZE 8_192);
 ```
 
 ## Sneak Peak of the Next Post in the Series
