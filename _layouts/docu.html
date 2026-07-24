@@ -184,12 +184,12 @@ Page URL: <https://duckdb.org{{ page.url }}>
 				<div class="pagemeta">
 					<div>
 						<ul>
-							{% if page.github_repository %}<li><a href="{{ page.github_repository }}"><svg class="icon"><use href="#folder-code"></use></svg>See this repository on GitHub</a></li>{% endif %}
-							{% if page.github_directory %}<li><a href="{{ page.github_directory }}"><svg class="icon"><use href="#code-snippet-02"></use></svg>See the source code of this feature on GitHub</a></li>{% endif %}
-							<li><a href="https://github.com/duckdb/duckdb-web/issues/new?title={{ issue_title | uri_escape }}&labels=issue%20found%20on%20page&body={{ issue_body | uri_escape }}" title="Create GitHub issue"><svg class="icon"><use href="#flag-01"></use></svg>Report content issue</a></li>
 							{% assign markdown_prefix = "https://raw.githubusercontent.com/duckdb/duckdb-web/refs/heads/main/" %}
 							<li><a href="{{ markdown_prefix | append: page.path }}" title="See Markdown"><svg class="icon"><use href="#file-code-01"></use></svg>See this page as Markdown</a></li>
 							<li><a href="https://github.com/duckdb/duckdb-web/edit/main/{{ page.path }}" title="Go to GitHub"><svg class="icon"><use href="#edit-02"></use></svg>Edit this page on GitHub</a></li>
+							<li><a href="https://github.com/duckdb/duckdb-web/issues/new?title={{ issue_title | uri_escape }}&labels=issue%20found%20on%20page&body={{ issue_body | uri_escape }}" title="Create GitHub issue"><svg class="icon"><use href="#flag-01"></use></svg>Report content issue</a></li>
+							{% if page.github_repository %}<li><a href="{{ page.github_repository }}"><svg class="icon"><use href="#folder-code"></use></svg>See this repository on GitHub</a></li>{% endif %}
+							{% if page.github_directory %}<li><a href="{{ page.github_directory }}"><svg class="icon"><use href="#code-snippet-02"></use></svg>See the feature's source code on GitHub</a></li>{% endif %}
 						</ul>
 					</div>
 				</div>
