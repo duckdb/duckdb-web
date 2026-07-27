@@ -100,8 +100,8 @@ docs:
 
 extension_star_count: 64
 extension_star_count_pretty: 64
-extension_download_count: 649
-extension_download_count_pretty: 649
+extension_download_count: 726
+extension_download_count_pretty: 726
 image: '/images/community_extensions/social_preview/preview_community_extension_hnsw_acorn.png'
 layout: community_extension_doc
 ---

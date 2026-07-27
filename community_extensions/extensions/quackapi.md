@@ -22,7 +22,7 @@ extension:
     FastAPI-class HTTP framework inside DuckDB — CREATE ROUTE turns SQL into
     typed, validated endpoints; one process is DB + HTTP (+ PDF/renderer via
     companion extensions).
-  version: 0.1.0
+  version: 0.1.1
   language: C++
   build: cmake
   license: MIT
@@ -38,7 +38,7 @@ extension:
 repo:
   github: asubbarao/quackapi
   # Pin to the packaging commit SHA (set by release engineer; never a branch).
-  ref: 225f812f8c49a3a5fc1040f42c3d7794260af165
+  ref: 09680f7ac665f3eeb11cf8997e562f5533eb1fac
 
 docs:
   hello_world: |
@@ -119,7 +119,9 @@ docs:
 
     - **Auth:** `CREATE AUTH … AS API_KEY | JWT (SECRET … [, ALGORITHM HS256])`,
       `REQUIRE` on routes, `quackapi_add_api_key`, `quackapi_auths`, claims as
-      `$claims_*`.
+      `$claims_*`. JWT verify is self-contained (DuckDB-bundled mbedtls +
+      `json_*` claims) — does not depend on community `crypto` (that extension
+      is hash/HMAC only, not JWT parse/exp/nbf/claims).
     - **Groups:** `CREATE GROUP … WITH (prefix=…, auth=…, tags=…)` — path prefix
       + auth inheritance (`quackapi_groups()`).
     - **Table API:** `CREATE API FOR TABLE t [AT '/path'] [KEY 'id']` → GET list
@@ -146,7 +148,8 @@ docs:
     - Serve `memory_limit` default is 256MB only when nothing is configured;
       use `memory_limit := '4GB'` / `SET quackapi_memory_limit` (never clobbers
       an operator `SET memory_limit`).
-    - Request body max 8 MiB; JWT HS256 only; table API is read-only scaffold.
+    - Request body max 8 MiB; JWT **HS256 only** (no RS256/OIDC); table API is
+      read-only scaffold.
     - Route registry is instance-scoped (re-run DDL after reopen); queue jobs
       persist in `quackapi_jobs`.
 
@@ -155,8 +158,8 @@ docs:
 
 extension_star_count: 0
 extension_star_count_pretty: 0
-extension_download_count: 92
-extension_download_count_pretty: 92
+extension_download_count: 368
+extension_download_count_pretty: 368
 image: '/images/community_extensions/social_preview/preview_community_extension_quackapi.png'
 layout: community_extension_doc
 ---

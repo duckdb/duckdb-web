@@ -327,8 +327,8 @@ docs:
 
 extension_star_count: 15
 extension_star_count_pretty: 15
-extension_download_count: 829
-extension_download_count_pretty: 829
+extension_download_count: 948
+extension_download_count_pretty: 948
 image: '/images/community_extensions/social_preview/preview_community_extension_fakeit.png'
 layout: community_extension_doc
 ---

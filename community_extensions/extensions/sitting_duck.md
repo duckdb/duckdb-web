@@ -8,7 +8,7 @@ excerpt: |
 extension:
   name: sitting_duck
   description: Parse and analyze source code ASTs from 27 programming languages with tree-sitter grammars, pattern matching, and structural search
-  version: 1.7.4
+  version: 1.9.0
   language: C++
   build: cmake
   license: MIT
@@ -16,7 +16,7 @@ extension:
     - teaguesterling
 repo:
   github: teaguesterling/sitting_duck
-  ref: f7b9c600116b3ee869d8b5a9dca9f1357d31569c
+  ref: 1da43741d781e630f42ed09e362b2040b30432b6
 docs:
   hello_world: |
     -- Parse Python code and find function definitions
@@ -94,6 +94,24 @@ docs:
     `:match()` / `:contains()` structural patterns, scope/call-graph pseudo-classes, and pseudo-element navigation.
     Bare type matching: `if` matches `if` + `if_statement` + `if_clause`.
 
+    v1.9.0 hardens the selector engine: no more silent-empty results (selectors the engine
+    can't honor now raise a clear error instead of returning 0 rows), `#name` on call nodes
+    binds uniformly across all 27 grammars, and NULL columns no longer over- or under-match.
+
+    **Parse-time filtering (v1.8.0):**
+    `max_depth :=` and `prune :=` shrink the AST at parse time, with automatic tree healing:
+    ```sql
+    SELECT * FROM read_ast('file.py', max_depth := 2);
+    SELECT * FROM read_ast('src/**/*.py', prune := ['syntax', 'comments', 'punctuation']);
+    ```
+    Prune policies: `syntax`, `comments`, `literals`, `imports`, `types`, `punctuation`,
+    `unnamed`, `leaves`, `internal`.
+
+    **Call-graph macros (v1.8.0):**
+    - `ast_get_calls(source)` - calls with caller attribution and type classification
+    - `ast_call_graph(source)` - aggregated caller→callee graph with call counts
+    - `ast_find_references(source, name)` - scope-chain-aware symbol reference resolution
+
     **Table Functions:**
     - `read_ast(file_pattern, language := NULL)` - Parse source files into AST rows (parallel)
     - `parse_ast(content, language)` - Parse source code strings (table function)
@@ -161,6 +179,8 @@ docs:
     - `peek` - Configurable source preview
     - `qualified_name` - Scope-based path unique within a file (`C[User] F[__init__]` format; v1.7.0)
     - `signature_type`, `parameters`, `modifiers`, `annotations` - Native extraction
+      (v1.8.0: `modifiers[]` populated across Python, JS, TS, Rust, Kotlin, Swift, Dart, C#;
+      `IS_EXPORTED` flag for file-level visibility)
     - `scope` - STRUCT<current, function, class, module, stack> (v1.7.4); replaces
       the v1.7.2 `scope_id` / `scope_stack` columns. `scope.function` lets you
       answer "what function is this in?" as a single column read.
@@ -179,7 +199,7 @@ docs:
 
 extension_star_count: 20
 extension_star_count_pretty: 20
-extension_download_count: 1113
+extension_download_count: 1088
 extension_download_count_pretty: 1.1k
 image: '/images/community_extensions/social_preview/preview_community_extension_sitting_duck.png'
 layout: community_extension_doc
