@@ -8,7 +8,7 @@ excerpt: |
 extension:
   name: se3
   description: Provides SE(3) rigid transformations (combinations of rotations and translations in 3D) as DuckDB scalar functions.
-  version: 0.3.1
+  version: 0.3.2
   language: C++
   build: cmake
   license: MIT
@@ -18,7 +18,7 @@ extension:
     - jokasimr
 repo:
   github: jokasimr/se3
-  ref: v0.3.1
+  ref: v0.3.2
 
 docs:
   hello_world: |
@@ -40,8 +40,8 @@ docs:
 
 extension_star_count: 0
 extension_star_count_pretty: 0
-extension_download_count: 1088
-extension_download_count_pretty: 1.1k
+extension_download_count: 1165
+extension_download_count_pretty: 1.2k
 image: '/images/community_extensions/social_preview/preview_community_extension_se3.png'
 layout: community_extension_doc
 ---

@@ -33,10 +33,10 @@ docs:
     The extension is deterministic and local: it does not call market-data
     vendors or remote pricing services.
 
-extension_star_count: 5
-extension_star_count_pretty: 5
-extension_download_count: 396
-extension_download_count_pretty: 396
+extension_star_count: 6
+extension_star_count_pretty: 6
+extension_download_count: 554
+extension_download_count_pretty: 554
 image: '/images/community_extensions/social_preview/preview_community_extension_finance.png'
 layout: community_extension_doc
 ---
