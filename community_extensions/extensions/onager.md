@@ -8,7 +8,7 @@ excerpt: |
 extension:
   name: onager
   description: A DuckDB extension for graph data analytics
-  version: 0.3.0
+  version: 0.4.0
   language: Rust & C++
   build: cmake
   license: MIT OR Apache-2.0
@@ -19,7 +19,7 @@ extension:
 
 repo:
   github: CogitatorTech/onager
-  ref: eaaf2eaeae5145cfe3094383b7586c8901d5c541
+  ref: 49ad15b52321b914eb31710788418f2c01d4ba43
 
 docs:
   hello_world: |
@@ -48,8 +48,8 @@ docs:
 
 extension_star_count: 149
 extension_star_count_pretty: 149
-extension_download_count: 852
-extension_download_count_pretty: 852
+extension_download_count: 988
+extension_download_count_pretty: 988
 image: '/images/community_extensions/social_preview/preview_community_extension_onager.png'
 layout: community_extension_doc
 ---
