@@ -269,8 +269,7 @@ FROM iceberg_metadata(my_datalake.default.v3_table);
 └──────────────────┴──────────────────┴─────────────┘
 ```
 
-> Note: the Geography type and Unknown type are not yet supported in DuckDB-Iceberg; we are planning to add those in DuckDB v2.0.0.
-
+> The Geography type and Unknown type are not yet supported in DuckDB-Iceberg; we are planning to add those in DuckDB v2.0.0.
 
 ## Conclusion and Future Work
 

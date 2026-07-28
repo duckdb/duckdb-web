@@ -230,7 +230,7 @@ ATTACH 'gs://biglake-public-nyc-taxi-iceberg' AS biglake_public (
 SELECT count(*) FROM biglake_public.public_data.nyc_taxicab;
 ```
 
-> Note: Google Cloud access tokens expire after 1 hour. For long-running sessions, you'll need to refresh the token periodically.
+> Google Cloud access tokens expire after 1 hour. For long-running sessions, you'll need to refresh the token periodically.
 
 ### Catalogs with Limited REST Spec Support
 
