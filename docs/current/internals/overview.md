@@ -8,6 +8,8 @@ redirect_from:
 title: Overview of DuckDB Internals
 ---
 
+> Tip For a detailed explanation of DuckDB internals, see the [Design and Implementation of DuckDB Internals ("DiDi")]({% link _library/2026-03-19-design-and-implementation-of-duckdb-internals.md %}) library entry.
+
 On this page is a brief description of the internals of the DuckDB engine.
 
 ## Parser
@@ -64,7 +66,7 @@ After the logical planner has created the logical query tree, the optimizers are
 
 * **Expression Rewriter**: Simplifies expressions, performs constant folding
 * **Filter Pushdown**: Pushes filters down into the query plan and duplicates filters over equivalency sets. Also prunes subtrees that are guaranteed to be empty (because of filters that statically evaluate to false).
-* **Join Order Optimizer**: Reorders joins using dynamic programming. Specifically, the `DPccp` algorithm from the paper [Dynamic Programming Strikes Back](https://15721.courses.cs.cmu.edu/spring2017/papers/14-optimizer1/p539-moerkotte.pdf) is used.
+* **Join Order Optimizer**: Reorders joins using dynamic programming. Specifically, the `DPhyp` algorithm from the paper [Dynamic Programming Strikes Back](https://15721.courses.cs.cmu.edu/spring2017/papers/14-optimizer1/p539-moerkotte.pdf) is used.
 * **Common Sub Expressions**: Extracts common subexpressions from projection and filter nodes to prevent unnecessary duplicate execution.
 * **In Clause Rewriter**: Rewrites large static IN clauses to a MARK join or INNER join.
 

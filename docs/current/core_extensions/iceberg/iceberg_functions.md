@@ -11,8 +11,6 @@ The `iceberg` extension provides the following functions:
 | `iceberg_metadata(source)`                                | Returns the manifest entries of an Iceberg table.                    |
 | `iceberg_snapshots(source)`                               | Returns the snapshots of an Iceberg table.                           |
 | `iceberg_table_properties(table)`                         | Returns all properties of the specified table.                       |
-| `set_iceberg_table_properties(table, properties)`         | Sets properties on the specified table.                              |
-| `remove_iceberg_table_properties(table, property_list)`   | Removes properties from the specified table.                         |
 | `iceberg_schema_properties(schema)`                       | Returns all properties of the specified schema.                      |
 | `set_iceberg_schema_properties(schema, properties)`       | Sets properties on the specified schema.                             |
 | `remove_iceberg_schema_properties(schema, property_list)` | Removes properties from the specified schema.                        |

@@ -7,13 +7,19 @@ body.documentation {
 
     // Logo styles
     #duckdb_logo {
-        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' id='Ebene_1' version='1.1' viewBox='0 0 190.508 38'%3E%3Cdefs%3E%3Cstyle%3E.st0%7Bfill:%231d1d1b%7D.st1%7Bfill:%23fff100%7D%3C/style%3E%3C/defs%3E%3Cpath d='M19 38C8.507 38 0 29.493 0 19S8.464 0 19 0s19 8.507 19 19-8.507 19-19 19Z' style='fill:%231a1a1a'/%3E%3Cpath d='M6.585 19c0 4.361 3.54 7.86 7.86 7.86s7.858-3.542 7.858-7.86-3.54-7.86-7.859-7.86S6.585 14.683 6.585 19ZM28.586 16.172h-3.735v5.656h3.735a2.828 2.828 0 0 0 0-5.657Z' class='st1'/%3E%3Cpath d='M70.306 22.083c0 1.685-.475 3.094-2.245 3.094s-2.246-1.41-2.246-3.094v-7.168H62.62v7.86c0 3.065 2.461 4.853 5.44 4.853 2.98 0 5.442-1.788 5.442-4.854v-7.859h-3.196v7.168ZM51.435 10.62h-4.953v16.704h4.953c5.3 0 9.286-1.728 9.286-8.364 0-6.635-3.986-8.34-9.286-8.34Zm-.138 14.124h-1.52V13.2h1.52c3.041 0 6.014.76 6.014 5.76 0 5.046-2.973 5.784-6.014 5.784ZM81.644 25.158c-1.751 0-2.995-1.451-2.995-4.054 0-2.582 1.313-3.987 2.971-3.987 1.222 0 2.328.853 2.581 2.051h3.041c-.437-3.064-3.018-4.516-5.622-4.516-3.709 0-6.22 2.719-6.22 6.497 0 3.756 2.373 6.475 6.083 6.475 2.58 0 5.137-1.129 5.875-4.517h-3.041c-.438 1.475-1.568 2.051-2.673 2.051ZM100.489 14.928h-3.572l-4.515 4.977V10.62h-3.18v16.704h3.18v-3.732l1.52-1.636 3.249 5.368h3.571l-4.7-7.649 4.447-4.747zM107.007 10.62h-4.953v16.704h4.953c5.3 0 9.286-1.728 9.286-8.364 0-6.635-3.986-8.34-9.286-8.34Zm-.138 14.124h-1.52V13.2h1.52c3.041 0 6.014.76 6.014 5.76 0 5.046-2.973 5.784-6.014 5.784ZM129.285 18.5c.853-.553 1.89-1.959 1.89-3.525 0-3.433-3.157-4.355-6.083-4.355h-6.497v16.704h6.773c3.434 0 6.406-1.336 6.406-4.93 0-2.304-1.199-3.272-2.489-3.894Zm-7.395-5.3h3.41c1.543 0 2.488.783 2.488 2.097 0 1.474-.921 2.212-2.489 2.212h-3.41V13.2Zm3.64 11.544h-3.64v-4.747h3.502c2.05 0 3.018.83 3.018 2.397 0 1.544-.945 2.35-2.88 2.35ZM144.275 10.62h-4.056v16.704h4.056c5.322 0 9.054-1.935 9.054-8.364 0-6.382-3.732-8.34-9.054-8.34Zm-.047 15.299h-2.465V12.025h2.465c3.802 0 7.466.76 7.466 6.935 0 6.176-3.664 6.959-7.466 6.959ZM160.584 14.72c-2.949 0-5.598 1.936-5.598 6.452s2.65 6.452 5.598 6.452c2.972 0 5.622-1.936 5.622-6.452s-2.65-6.451-5.622-6.451Zm0 11.59c-2.396 0-4.078-1.566-4.078-5.138 0-3.57 1.682-5.138 4.078-5.138 2.373 0 4.102 1.567 4.102 5.138 0 3.572-1.729 5.139-4.102 5.139ZM173.462 26.31c-2.142 0-4.054-1.635-4.054-5.16 0-3.41 1.912-5.116 4.032-5.116 1.82 0 3.271 1.014 3.732 2.88h1.497c-.368-2.211-2.258-4.193-5.092-4.193-3.617 0-5.69 2.604-5.69 6.45 0 3.803 2.073 6.453 5.575 6.453 2.742 0 4.84-1.66 5.322-4.217h-1.52c-.368 1.544-1.682 2.904-3.802 2.904ZM186.225 20.435l-1.752-.323c-1.382-.253-2.327-.898-2.327-2.12 0-1.497 1.798-2.027 3.157-2.027 1.751 0 3.11.876 3.41 2.35h1.497c-.299-1.958-2.096-3.617-4.77-3.617-2.786 0-4.745 1.451-4.745 3.41s1.59 2.949 3.364 3.318l1.935.369c1.682.322 3.065.829 3.065 2.28 0 1.66-1.866 2.281-3.364 2.281-1.89 0-3.502-.898-3.756-2.834h-1.497c.368 2.834 2.58 4.102 5.137 4.102 2.696 0 4.931-1.313 4.931-3.78 0-2.349-2.258-3.04-4.285-3.41Z' class='st0'/%3E%3C/svg%3E");
-        width: 190.51px;
+        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='152' height='30' fill='none' viewBox='0 0 152 30'%3E%3Cg clip-path='url(%23a)'%3E%3Cpath fill='%231a1a1a' d='M15 30C6.716 30 0 23.284 0 15S6.682 0 15 0s15 6.716 15 15-6.716 15-15 15'/%3E%3Cpath fill='%23fff100' d='M5.656 15a6.205 6.205 0 0 0 6.205 6.204c3.409 0 6.204-2.795 6.204-6.204 0-3.41-2.795-6.205-6.204-6.205-3.41 0-6.205 2.796-6.205 6.205M23.027 12.767h-2.949v4.466h2.949a2.233 2.233 0 0 0 0-4.466'/%3E%3Cpath fill='%230d0d0d' d='M55.521 17.434c0 1.33-.375 2.442-1.772 2.442s-1.773-1.112-1.773-2.442v-5.66h-2.523v6.206c0 2.42 1.943 3.83 4.296 3.83 2.352 0 4.295-1.41 4.295-3.83v-6.205h-2.523zM40.621 8.386h-3.91v13.186h3.91c4.183 0 7.33-1.365 7.33-6.602 0-5.238-3.147-6.584-7.33-6.584m-.109 11.149h-1.2v-9.112h1.2c2.4 0 4.747.6 4.747 4.547 0 3.983-2.346 4.565-4.747 4.565M64.655 19.862c-1.382 0-2.364-1.146-2.364-3.201 0-2.037 1.037-3.147 2.346-3.147.964 0 1.837.673 2.037 1.62h2.4c-.345-2.42-2.382-3.566-4.437-3.566-2.928 0-4.91 2.146-4.91 5.13 0 2.964 1.873 5.11 4.801 5.11 2.037 0 4.056-.891 4.638-3.565h-2.4c-.347 1.164-1.238 1.619-2.11 1.619M79.53 11.787h-2.819l-3.564 3.928v-7.33h-2.51v13.187h2.51v-2.947l1.2-1.291 2.564 4.238h2.82l-3.71-6.039zM84.68 8.386h-3.91v13.186h3.91c4.183 0 7.33-1.365 7.33-6.602 0-5.238-3.147-6.584-7.33-6.584m-.11 11.149h-1.2v-9.112h1.2c2.401 0 4.748.6 4.748 4.547 0 3.983-2.347 4.565-4.747 4.565M102.267 14.606c.673-.437 1.491-1.546 1.491-2.783 0-2.71-2.491-3.437-4.801-3.437h-5.129v13.186h5.347c2.71 0 5.056-1.055 5.056-3.893 0-1.818-.946-2.582-1.964-3.073m-5.838-4.183h2.692c1.218 0 1.964.618 1.964 1.655 0 1.164-.728 1.746-1.964 1.746h-2.692zm2.873 9.112H96.43v-3.747h2.764c1.619 0 2.383.655 2.383 1.891 0 1.219-.746 1.856-2.273 1.856'/%3E%3C/g%3E%3Cpath fill='%230d0d0d' d='M119.013 14.869c0-4.603-2.713-5.164-5.501-5.164h-1.74v10.347h1.74c2.788 0 5.501-.562 5.501-5.183m-9.15-6.773h3.705c4.285 0 7.391 1.628 7.391 6.773 0 5.164-3.106 6.792-7.391 6.792h-3.705zM124.148 16.665c0 2.694 1.46 3.742 3.013 3.742s3.012-1.16 3.012-3.742c0-2.694-1.459-3.742-3.012-3.742s-3.013.992-3.013 3.742m3.013-5.239c2.338 0 4.827 1.59 4.827 5.24 0 3.648-2.489 5.238-4.827 5.238s-4.828-1.59-4.828-5.239 2.489-5.239 4.828-5.239M138.062 11.426c2.47 0 3.967 1.815 4.21 3.537h-1.721c-.243-1.198-1.272-2.04-2.601-2.04-1.497 0-2.9 1.179-2.9 3.705 0 2.544 1.403 3.78 2.9 3.78 1.441 0 2.432-.974 2.676-2.021h1.759c-.356 1.89-2.133 3.517-4.491 3.517-2.9 0-4.696-2.19-4.696-5.258 0-2.993 1.889-5.22 4.864-5.22M151.656 14.532h-1.777c-.281-1.197-1.179-1.665-2.377-1.665-.991 0-2.114.355-2.114 1.272 0 .805.561 1.16 1.534 1.366l1.422.28c1.834.337 3.443 1.067 3.443 2.994 0 2.002-1.796 3.125-4.098 3.125-2.638 0-4.116-1.74-4.322-3.499h1.796c.281 1.291 1.067 2.058 2.564 2.058 1.291 0 2.339-.542 2.339-1.497 0-1.029-.955-1.422-2.04-1.665l-1.497-.3c-1.366-.299-2.862-.897-2.862-2.787 0-1.777 1.796-2.806 4.022-2.806 2.19 0 3.649 1.197 3.967 3.124'/%3E%3Cdefs%3E%3CclipPath id='a'%3E%3Cpath fill='%23fff' d='M0 0h104.337v30H0z'/%3E%3C/clipPath%3E%3C/defs%3E%3C/svg%3E");
+        width: 152px;
+        height: 30px;
     }
 
     // Header and navigation elements
     .headerline .headercontent .landingmenu nav.mobile {
         display: none;
+    }
+
+    .headerline .headercontent .options button.mode {
+        width: 33px;
+        height: 33px;
     }
 
     // GitHub badge
@@ -24,7 +30,7 @@ body.documentation {
         height: 17px;
         line-height: 17px;
         padding: 0 5px;
-        border-radius: 50px;
+        border-radius: var(--page-radius-pill);
         font-size: 10px;
         color: black;
         margin-left: 2px;
@@ -71,7 +77,7 @@ body.documentation {
                 font-size: 13px;
                 padding: 4px 9px;
                 border: 1px solid white;
-                border-radius: 50px;
+                border-radius: var(--page-radius-pill);
                 white-space: nowrap;
                 transition: all .3s;
 
@@ -103,7 +109,7 @@ body.documentation {
 
     // Main banner positioning
     main .banner {
-        top: 70px;
+        top: 55px;
         position: fixed;
 
         .content {
@@ -121,27 +127,34 @@ body.documentation {
     }
 
     div.version {
+        position: relative;
+
         .selectedversion {
+            color: var(--main-text-primary-color, #0D0D0D);
+        }
+
+        .version-suffix {
             color: var(--main-text-secondary-color, #666);
         }
 
-        >div:first-child {
+        .versiontrigger {
+            @include reset-button;
             font-size: 12px;
             line-height: 1.3;
-            cursor: pointer;
             border: 1px solid var(--menu-dropdown-border-color, #333);
-            border-radius: var(--border-radius-box);
+            border-radius: var(--page-radius-m);
             padding: 7px 12px;
             white-space: nowrap;
             width: auto;
-            height: 40px;
+            height: 33px;
             color: var(--main-text-secondary-color, #666);
             display: flex;
             align-items: center;
             gap: 5px;
             transition: border .3s;
 
-            &:hover {
+            &:hover,
+            &:focus-visible {
                 border: 1px solid var(--menu-topmenu-text-color-hover, #6A58DA);
             }
         }
@@ -161,12 +174,43 @@ body.documentation {
     }
 
     // Documentation site map
-    #docusitemaphere {
+    #main_content_wrap #docusitemaphere,
+    #main_content_wrap .index {
+
+        svg {
+            display: none;
+        }
+
+        ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        li {
+            margin: 6px 0;
+        }
+
+        li.hasSub {
+            margin-top: 12px;
+        }
+    }
+
+    #main_content_wrap #docusitemaphere {
+
+        ul ul {
+            margin: 8px 0 16px 0;
+        }
+
+        ul ul ul {
+            border-left: 1px solid var(--main-codebox-border-color, #E6E6E6);
+            padding-left: 16px;
+            margin-left: 2px;
+        }
 
         >ul>li.hasSub,
         >ul>li {
             @include title-1();
-            list-style: none;
             margin-top: 40px;
             margin-bottom: 10px;
         }
@@ -175,8 +219,22 @@ body.documentation {
             @include body-standard();
         }
 
-        >ul>ul>ul>li.hasSub {
-            margin-top: 10px;
+        >ul>ul>li,
+        >ul>ul>li.hasSub {
+            margin-top: 20px;
+        }
+    }
+
+    #main_content_wrap .index {
+
+        >ul {
+            margin: 8px 0 16px 0;
+        }
+
+        ul ul {
+            border-left: 1px solid var(--main-codebox-border-color, #E6E6E6);
+            padding-left: 16px;
+            margin: 8px 0 16px 2px;
         }
     }
 
@@ -203,7 +261,7 @@ body.documentation {
     body.documentation main .wrap a.pill {
         background-color: #F3F3F3;
         font-size: 12px;
-        border-radius: 50px;
+        border-radius: var(--page-radius-pill);
         padding: .3em .8em;
         text-decoration: none;
         margin-left: 5px;
@@ -239,11 +297,11 @@ body.documentation {
 
     // Search box
     .opensearch {
-        border-radius: var(--border-radius-box);
+        border-radius: var(--page-radius-m);
         border: 1px solid var(--menu-dropdown-border-color, #333);
-        padding: 6px;
+        padding: 5px 10px;
         display: flex;
-        gap: 5px;
+        gap: 8px;
         align-items: center;
         background-size: 15px 15px;
         background-repeat: no-repeat;
@@ -251,7 +309,7 @@ body.documentation {
         cursor: pointer;
         position: relative;
         transition: all .3s;
-        height: 40px;
+        height: 33px;
         
         svg.icon{
             width: 16px;
@@ -262,10 +320,8 @@ body.documentation {
         >.shortcut {
             @include tiny();
             color: var(--menu-topmenu-searchbar-shortcut-text-color, #999);
-            padding: 5px 7px;
-            border-radius: 10px;
-            border: 1px solid var(--doc-codebox-border-color, #E6E6E6);
-
+            border-radius: var(--page-radius-s);
+        
             &.mac {
                 display: none;
             }
@@ -344,12 +400,9 @@ body.documentation {
 
     // Page metadata
     .pagemeta {
-        border-radius: var(--border-radius-box);
-        background: var(--doc-codebox-background-color, #F2F2F2);
-        padding: 20px;
         display: flex;
         justify-content: space-between;
-        margin-top: 45px;
+        margin-top: 8em;
         width: 100%;
 
         h5 {
@@ -374,8 +427,42 @@ body.documentation {
         ul {
             margin: 0;
         }
+
+        ul li a {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            text-decoration: none;
+
+            svg.icon {
+                width: 16px;
+                height: 16px;
+                flex-shrink: 0;
+                color: var(--main-text-secondary-color, #666);
+                transition: color .3s;
+            }
+
+            &:hover svg.icon {
+                color: inherit;
+            }
+        }
     }
-    
+
+    #main_content_wrap .pagemeta ul {
+        margin-bottom: 0;
+        padding-bottom: 0;
+        padding-left: 0;
+        list-style: none;
+        display: flex;
+        flex-wrap: wrap;
+        column-gap: 24px;
+        row-gap: 6px;
+
+        @media only screen and (max-width: 900px) {
+            flex-direction: column;
+        }
+    }
+
     // Mini footer
     .bottomline{
         @include body-small;
@@ -418,20 +505,17 @@ body.documentation {
 }
 
 .box-link {
-    border-radius: var(--border-radius-box);
-    border: 1px solid var(--interactive-folderbox-border-color, #E6E6E6);
-    background: var(--interactive-folderbox-background-color, rgba(250, 250, 250, 0.60));
-    padding: 10px;
+    border-radius: var(--page-radius-box-inner);
+    padding: 5px;
     display: flex;
     align-items: center;
     position: relative;
-    gap: 10px;
+    gap: 6px;
     @include body-small();
-    //@include label-1();
-    transition: border .5s;
+    transition: background-color .2s;
 
     &:hover {
-        border-color: var(--interactive-folderbox-border-color-hover, #CCC);
+        background: var(--doc-sidebar-selected-background-color, #F2F2F2);
     }
 
     >a {
@@ -448,19 +532,16 @@ body.documentation {
         width: calc((100% - 15px) / 2);
     }
 
+    &.third-width {
+        width: calc((100% - 30px) / 3);
+    }
+
     &.full-width {
         width: 100%;
     }
 
     .chevron {
-        width: 16px;
-        height: 40px;
-        margin-right: 4px;
-        margin-left: auto;
-        flex-shrink: 0;
-        fill: none;
-        color: var(--main-text-tertiary-color, #B2B2B2);
-        stroke-width: 1.6;
+        display: none;
     }
 
     .symbol {
@@ -468,16 +549,16 @@ body.documentation {
         flex-shrink: 0;
         width: 40px;
         height: 40px;
-        border-radius: 10px;
-        border: 0.747px solid var(--main-codebox-border-color, #E6E6E6);
-        background: var(--main-codebox-sub-background-color, rgba(230, 230, 230, 0.60));
+        border-radius: var(--page-radius-box-inner);
+        border: 1px solid var(--interactive-folderbox-border-color, #E6E6E6);
+        background: var(--interactive-folderbox-background-color, rgba(250, 250, 250, 0.60));
         display: flex;
         align-items: center;
         justify-content: center;
 
         img {
-            max-width: 21px;
-            max-height: 21px;
+            max-width: 24px;
+            max-height: 24px;
             margin: 0 !important;
         }
     }

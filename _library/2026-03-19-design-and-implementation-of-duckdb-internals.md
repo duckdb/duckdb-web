@@ -5,6 +5,7 @@ author: "Torsten Grust (University of Tübingen)"
 tags: ["Talk"]
 thirdparty: true
 highlighted: true
+category: community
 excerpt: ""
 pill: "Lecture Notes"
 redirect_from:

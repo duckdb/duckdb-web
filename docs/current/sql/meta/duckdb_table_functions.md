@@ -214,7 +214,7 @@ The `duckdb_keywords()` function provides metadata about DuckDB's keywords and r
 | Column | Description | Type |
 |:-|:---|:-|
 | `keyword_name` | The keyword. | `VARCHAR` |
-| `keyword_category` | Indicates the category of the keyword. Values are `column_name`, `reserved`, `type_function` and `unreserved`. | `VARCHAR` |
+| `keyword_category` | The category of the keyword: `reserved` (cannot be used as an identifier without quoting), `unreserved` (can be used as an identifier), `column_name` (usable as a column name but not as a type or function name), or `type_function` (usable as a type or function name but not as a column name). See [Keywords and Identifiers]({% link docs/current/sql/dialect/keywords_and_identifiers.md %}). | `VARCHAR` |
 
 ## `duckdb_log_contexts`
 

@@ -8,7 +8,7 @@ excerpt: |
 extension:
   name: semantic_views
   description: "Semantic views -- a declarative layer for dimensions, metrics, and relationships"
-  version: 0.8.0
+  version: 0.11.0
   language: Rust
   build: cargo
   license: MIT
@@ -19,7 +19,7 @@ extension:
 
 repo:
   github: anentropic/duckdb-semantic-views
-  ref: 3089b250d5dc1edb1a969f5ae7008a3b1552290f
+  ref: bfaf54c0c0dd51506f4209ca8a229c5f1a408f01
 
 docs:
   hello_world: |
@@ -43,10 +43,10 @@ docs:
 
     Documentation: https://anentropic.github.io/duckdb-semantic-views/
 
-extension_star_count: 5
-extension_star_count_pretty: 5
-extension_download_count: 496
-extension_download_count_pretty: 496
+extension_star_count: 10
+extension_star_count_pretty: 10
+extension_download_count: 677
+extension_download_count_pretty: 677
 image: '/images/community_extensions/social_preview/preview_community_extension_semantic_views.png'
 layout: community_extension_doc
 ---
@@ -74,6 +74,7 @@ LOAD {{ page.extension.name }};
 
 |            function_name            | function_type | description | comment | examples |
 |-------------------------------------|---------------|-------------|---------|----------|
+| __sv_compute_create_from_yaml       | table         | NULL        | NULL    |          |
 | describe_semantic_view              | table         | NULL        | NULL    |          |
 | explain_semantic_view               | table         | NULL        | NULL    |          |
 | get_ddl                             | scalar        | NULL        | NULL    |          |

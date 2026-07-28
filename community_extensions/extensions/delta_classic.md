@@ -17,7 +17,7 @@ extension:
 
 repo:
   github: djouallah/delta_classic
-  andium: fdb489d9c28f4dc7e8690cbf92a5f9cb34733124
+  andium: 27b979b1f1c161c767f3bb24d9ee67fe28a2f16c
   ref: ff9914ee3d752b2c1c3e1ea021c7af5b922da63a
 
 docs:
@@ -47,8 +47,8 @@ docs:
 
 extension_star_count: 5
 extension_star_count_pretty: 5
-extension_download_count: 822
-extension_download_count_pretty: 822
+extension_download_count: 929
+extension_download_count_pretty: 929
 image: '/images/community_extensions/social_preview/preview_community_extension_delta_classic.png'
 layout: community_extension_doc
 ---

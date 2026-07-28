@@ -70,4 +70,18 @@ COPY
 > If multiple threads are active, the number of row groups in a file may slightly exceed the specified number of row groups to limit the amount of locking – similarly to the behavior of [`FILE_SIZE_BYTES`](../../sql/statements/copy#copy--to-options).
 > However, if `PER_THREAD_OUTPUT` is set, only one thread writes to each file, and it becomes accurate again.
 
+### Sorting Rows to Improve Row Group Pruning
+
+DuckDB writes per-column statistics, including min/max values, for every row group, and as described above the reader uses these to skip row groups that cannot match a query’s `WHERE` clause.
+Sorting the data on the columns that you filter on most often before writing makes these min/max ranges tight and non-overlapping between row groups, so that highly selective queries on those columns scan far fewer row groups:
+
+```sql
+COPY
+    (FROM 'events.parquet' ORDER BY event_time)
+    TO 'events-sorted.parquet'
+    (FORMAT parquet);
+```
+
+This pairs well with a `ROW_GROUP_SIZE` that keeps each row group focused on a narrow range of the sort key.
+
 See the [Performance Guide on “File Formats”]({% link docs/current/guides/performance/file_formats.md %}#parquet-file-sizes) for more tips.

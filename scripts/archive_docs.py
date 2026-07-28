@@ -110,7 +110,6 @@ shutil.copy(
 )
 archive_stable(old_stable_version)
 
-shutil.copy("_data/menu_docs_current.json", f"_data/menu_docs_current.json")
 archive_preview()
 
 shutil.move("js/stable", f"js/{old_stable_version}")

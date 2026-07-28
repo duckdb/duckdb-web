@@ -49,7 +49,7 @@
         padding: 8px;
         background: var(--main-tooltip-background);
         border: 1px solid var(--main-tooltip-border);
-        border-radius: 5px;
+        border-radius: var(--page-radius-s);
         color: var(--main-text-primary-color);
         font-size: var(--type-tiny);
         font-weight: 400;

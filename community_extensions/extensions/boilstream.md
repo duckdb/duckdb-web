@@ -8,7 +8,7 @@ excerpt: |
 extension:
   name: boilstream
   description: Secure remote secrets storage with OPAQUE PAKE authentication, email/password registration, MFA login, and automatic ducklake mounting
-  version: 0.5.0
+  version: 0.6.1
   language: C++, Rust
   build: cmake
   license: MIT
@@ -18,7 +18,7 @@ extension:
 
 repo:
   github: dforsber/boilstream-extension
-  ref: 45b114434ec04ffcfc2a3b0231dd9895d08336f0
+  ref: 8bb35073af2420e1d78e2c8448f4879ba61e861a
 
 docs:
   hello_world: |
@@ -69,6 +69,18 @@ docs:
     USE my_analytics;
     SHOW TABLES;
 
+    -- Create persistent secret onto BoilStream server
+    CREATE PERSISTENT SECRET s3_minio IN boilstream (
+        TYPE S3,
+        KEY_ID 'minioadmin',
+        SECRET 'minioadmin',
+        REGION 'eu-west-1',
+        ENDPOINT 'localhost:9000',
+        USE_SSL false,
+        URL_STYLE 'path',
+        SCOPE 's3://ingestion-data/'
+    );
+
   extended_description: |
     Boilstream extension provides enterprise-grade remote secrets storage for multi-tenant DuckDB deployments.
 
@@ -109,8 +121,8 @@ docs:
 
 extension_star_count: 10
 extension_star_count_pretty: 10
-extension_download_count: 807
-extension_download_count_pretty: 807
+extension_download_count: 1314
+extension_download_count_pretty: 1.3k
 image: '/images/community_extensions/social_preview/preview_community_extension_boilstream.png'
 layout: community_extension_doc
 ---
@@ -136,46 +148,53 @@ LOAD {{ page.extension.name }};
 
 <div class="extension_functions_table"></div>
 
-|          function_name           | function_type | description | comment | examples |
-|----------------------------------|---------------|-------------|---------|----------|
-| boilstream_bootstrap_session     | pragma        | NULL        | NULL    |          |
-| boilstream_buckets               | table         | NULL        | NULL    |          |
-| boilstream_create_ducklake       | pragma        | NULL        | NULL    |          |
-| boilstream_ducklakes             | table         | NULL        | NULL    |          |
-| boilstream_help                  | pragma        | NULL        | NULL    |          |
-| boilstream_login                 | pragma        | NULL        | NULL    |          |
-| boilstream_register_user         | pragma        | NULL        | NULL    |          |
-| boilstream_secrets               | table         | NULL        | NULL    |          |
-| boilstream_verify_mfa            | pragma        | NULL        | NULL    |          |
-| ducklake_add_data_files          | table         | NULL        | NULL    |          |
-| ducklake_cleanup_old_files       | table         | NULL        | NULL    |          |
-| ducklake_current_snapshot        | table         | NULL        | NULL    |          |
-| ducklake_delete_orphaned_files   | table         | NULL        | NULL    |          |
-| ducklake_expire_snapshots        | table         | NULL        | NULL    |          |
-| ducklake_flush_inlined_data      | table         | NULL        | NULL    |          |
-| ducklake_last_committed_snapshot | table         | NULL        | NULL    |          |
-| ducklake_list_files              | table         | NULL        | NULL    |          |
-| ducklake_merge_adjacent_files    | table         | NULL        | NULL    |          |
-| ducklake_options                 | table         | NULL        | NULL    |          |
-| ducklake_rewrite_data_files      | table         | NULL        | NULL    |          |
-| ducklake_scan                    | table         | NULL        | NULL    |          |
-| ducklake_set_commit_message      | table         | NULL        | NULL    |          |
-| ducklake_set_option              | table         | NULL        | NULL    |          |
-| ducklake_settings                | table         | NULL        | NULL    |          |
-| ducklake_snapshots               | table         | NULL        | NULL    |          |
-| ducklake_table_changes           | table_macro   | NULL        | NULL    |          |
-| ducklake_table_deletions         | table         | NULL        | NULL    |          |
-| ducklake_table_info              | table         | NULL        | NULL    |          |
-| ducklake_table_insertions        | table         | NULL        | NULL    |          |
-| murmur3_32                       | scalar        | NULL        | NULL    |          |
-| pg_clear_cache                   | table         | NULL        | NULL    |          |
-| postgres_attach                  | table         | NULL        | NULL    |          |
-| postgres_configure_pool          | table         | NULL        | NULL    |          |
-| postgres_execute                 | table         | NULL        | NULL    |          |
-| postgres_query                   | table         | NULL        | NULL    |          |
-| postgres_scan                    | table         | NULL        | NULL    |          |
-| postgres_scan_pushdown           | table         | NULL        | NULL    |          |
-| read_postgres_binary             | table         | NULL        | NULL    |          |
+|            function_name             | function_type | description | comment | examples |
+|--------------------------------------|---------------|-------------|---------|----------|
+| boilstream_bootstrap_session         | pragma        | NULL        | NULL    |          |
+| boilstream_buckets                   | table         | NULL        | NULL    |          |
+| boilstream_create_ducklake           | pragma        | NULL        | NULL    |          |
+| boilstream_ducklakes                 | table         | NULL        | NULL    |          |
+| boilstream_help                      | pragma        | NULL        | NULL    |          |
+| boilstream_login                     | pragma        | NULL        | NULL    |          |
+| boilstream_quack_authn               | scalar        | NULL        | NULL    |          |
+| boilstream_quack_authz               | scalar        | NULL        | NULL    |          |
+| boilstream_quack_bind_session        | scalar        | NULL        | NULL    |          |
+| boilstream_quack_debug_session_count | scalar        | NULL        | NULL    |          |
+| boilstream_register_user             | pragma        | NULL        | NULL    |          |
+| boilstream_secrets                   | table         | NULL        | NULL    |          |
+| boilstream_verify_mfa                | pragma        | NULL        | NULL    |          |
+| ducklake_add_data_files              | table         | NULL        | NULL    |          |
+| ducklake_cleanup_old_files           | table         | NULL        | NULL    |          |
+| ducklake_commit                      | table         | NULL        | NULL    |          |
+| ducklake_current_snapshot            | table         | NULL        | NULL    |          |
+| ducklake_delete_orphaned_files       | table         | NULL        | NULL    |          |
+| ducklake_expire_snapshots            | table         | NULL        | NULL    |          |
+| ducklake_flush_inlined_data          | table         | NULL        | NULL    |          |
+| ducklake_last_committed_snapshot     | table         | NULL        | NULL    |          |
+| ducklake_list_files                  | table         | NULL        | NULL    |          |
+| ducklake_merge_adjacent_files        | table         | NULL        | NULL    |          |
+| ducklake_options                     | table         | NULL        | NULL    |          |
+| ducklake_rewrite_data_files          | table         | NULL        | NULL    |          |
+| ducklake_scan                        | table         | NULL        | NULL    |          |
+| ducklake_set_commit_message          | table         | NULL        | NULL    |          |
+| ducklake_set_option                  | table         | NULL        | NULL    |          |
+| ducklake_settings                    | table         | NULL        | NULL    |          |
+| ducklake_snapshots                   | table         | NULL        | NULL    |          |
+| ducklake_table_changes               | table_macro   | NULL        | NULL    |          |
+| ducklake_table_deletions             | table         | NULL        | NULL    |          |
+| ducklake_table_info                  | table         | NULL        | NULL    |          |
+| ducklake_table_insertions            | table         | NULL        | NULL    |          |
+| murmur3_32                           | scalar        | NULL        | NULL    |          |
+| pg_clear_cache                       | table         | NULL        | NULL    |          |
+| postgres_attach                      | table         | NULL        | NULL    |          |
+| postgres_configure_pool              | table         | NULL        | NULL    |          |
+| postgres_execute                     | table         | NULL        | NULL    |          |
+| postgres_hstore_get                  | scalar        | NULL        | NULL    |          |
+| postgres_hstore_to_json              | scalar        | NULL        | NULL    |          |
+| postgres_query                       | table         | NULL        | NULL    |          |
+| postgres_scan                        | table         | NULL        | NULL    |          |
+| postgres_scan_pushdown               | table         | NULL        | NULL    |          |
+| read_postgres_binary                 | table         | NULL        | NULL    |          |
 
 ### Overloaded Functions
 
@@ -199,6 +218,7 @@ This extension does not add any types.
 | ducklake_max_retry_count                 | The maximum amount of retry attempts for a ducklake transaction                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              | UBIGINT    | GLOBAL | []      |
 | ducklake_retry_backoff                   | Backoff factor for exponentially increasing retry wait time                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  | DOUBLE     | GLOBAL | []      |
 | ducklake_retry_wait_ms                   | Time between retries                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         | UBIGINT    | GLOBAL | []      |
+| ducklake_target_file_size                | Target file size for insertion and compaction                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                | VARCHAR    | GLOBAL | []      |
 | ducklake_write_deletion_vectors          | [EXPERIMENTAL] Write Iceberg V3 deletion vectors (puffin) instead of positional delete files (parquet)                                                                                                                                                                                                                                                                                                                                                                                                                                                       | BOOLEAN    | GLOBAL | []      |
 | pg_array_as_varchar                      | Read Postgres arrays as varchar - enables reading mixed dimensional arrays                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   | BOOLEAN    | GLOBAL | []      |
 | pg_connection_cache                      | Whether or not to use the connection pooling. This option is deprecated, instead to disable the connection pooling use "SET pg_pool_max_connections=0" for newly attached Postgres databases and "FROM postgres_configure_pool(catalog_name='my_attached_postgres_db', max_connections=0)" for already attached Postgres databases.                                                                                                                                                                                                                          | BOOLEAN    | GLOBAL | []      |
@@ -207,7 +227,9 @@ This extension does not add any types.
 | pg_experimental_filter_pushdown          | Whether or not to use filter pushdown                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        | BOOLEAN    | GLOBAL | []      |
 | pg_idle_in_transaction_timeout_millis    | Postgres idle in transaction timeout in milliseconds to set on scan connections                                                                                                                                                                                                                                                                                                                                                                                                                                                                              | UINTEGER   | GLOBAL | []      |
 | pg_null_byte_replacement                 | When writing NULL bytes to Postgres, replace them with the given character                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   | VARCHAR    | GLOBAL | []      |
+| pg_oauth_token                           | OAuth bearer token for PostgreSQL OAUTHBEARER authentication. Takes priority over the PGOAUTHTOKEN environment variable                                                                                                                                                                                                                                                                                                                                                                                                                                      | VARCHAR    | GLOBAL | []      |
 | pg_pages_per_task                        | The amount of pages per task                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 | UBIGINT    | GLOBAL | []      |
+| pg_pool_acquire_mode                     | How to acquire connections from the pool: 'force' (always connect, ignore pool limit), 'wait' (block until available), 'try' (fail immediately if unavailable) (default: force)                                                                                                                                                                                                                                                                                                                                                                              | VARCHAR    | GLOBAL | []      |
 | pg_pool_enable_reaper_thread             | Whether to enable the connection pool reaper thread, that periodically scans the pool to check the 'max_lifetime_millis' and 'idle_timeout_millis' and closes the connection which exceed the specified values. Either 'max_lifetime_millis' or 'idle_timeout_millis' must be set to a non-zero value for this option to be effective. This option only applies to newly attached Postgres databases, to configure a database that is already attached use "FROM postgres_configure_pool(catalog_name='my_attached_postgres_db', enable_reaper_thread=TRUE)" | BOOLEAN    | GLOBAL | []      |
 | pg_pool_enable_thread_local_cache        | Whether to enable the connection caching in thread-local cache. Such connections are getting pinned to the threads and are not made available to other threads, while still taking the place in the pool. This option only applies to newly attached Postgres databases, to configure a database that is already attached use "FROM postgres_configure_pool(catalog_name='my_attached_postgres_db', enable_thread_local_cache=FALSE)"                                                                                                                        | BOOLEAN    | GLOBAL | []      |
 | pg_pool_health_check_query               | The query that is used to check that the connection is healthy. Setting this option to an empty string disables the health check. This option only applies to newly attached Postgres databases, to configure a database that is already attached use "FROM postgres_configure_pool(catalog_name='my_attached_postgres_db', health_check_query=SELECT 42)"                                                                                                                                                                                                   | VARCHAR    | GLOBAL | []      |

@@ -2,7 +2,7 @@
 layout: post
 title: "Mitschöpfer von DuckDB: „Es war klar, dass eine neue Architektur notwendig ist”"
 author: "Hannes Mühleisen (DuckLabs) and Golo Roden (heise online)"
-tags: ["Paper"]
+tags: ["Article"]
 thirdparty: false
 excerpt: ""
 pill: "heise.de"

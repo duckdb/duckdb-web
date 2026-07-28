@@ -11,8 +11,6 @@ body.quack {
 		--quack-codecard-bg: var(--doc-codebox-background-color, #f2f2f2);
 		--quack-codecard-border: var(--doc-codebox-border-color, #e6e6e6);
 		--quack-step-label-color: var(--main-benefit-icon-color, #998b00);
-		--quack-radius-card: 15px;
-		--quack-radius-inner: 10px;
 		--quack-text-secondary: var(--main-text-secondary-color, #666);
 	}
 
@@ -60,7 +58,7 @@ body.quack {
 			max-width: 385px;
 			text-align: left;
 			border: 1px solid var(--main-codebox-border-color, rgba(13, 13, 13, 0.08));
-			border-radius: var(--quack-radius-card);
+			border-radius: var(--page-radius-box);
 			background: var(--main-codebox-main-background-color, rgba(250, 250, 250, 0.8));
 			overflow: hidden;
 		}
@@ -78,7 +76,7 @@ body.quack {
 			align-items: center;
 			justify-content: center;
 			padding: 10px;
-			border-radius: 10px;
+			border-radius: var(--page-radius-box-inner);
 			background: var(--interactive-installation-box-background, rgba(241, 230, 94, 0.3));
 			border: 1px solid var(--interactive-installation-box-border, rgba(204, 189, 0, 0.6));
 
@@ -131,7 +129,7 @@ body.quack {
 				display: inline-block;
 				padding: 4px 12px;
 				border: 1px solid var(--main-quaternary-color, #ccc);
-				border-radius: 60px;
+				border-radius: var(--page-radius-pill);
 				background: var(--doc-codebox-background-color-secondary, #ededed);
 				font-size: var(--type-micro, 10px);
 				line-height: 1.2;
@@ -185,7 +183,7 @@ body.quack {
 		.video-thumbnail {
 			position: relative;
 			cursor: pointer;
-			border-radius: var(--quack-radius-card);
+			border-radius: var(--page-radius-box);
 			border: 1px solid var(--main-blogpost-border-color, var(--main-codebox-border-color, #e6e6e6));
 			overflow: hidden;
 			transition: all 0.3s ease;
@@ -216,7 +214,7 @@ body.quack {
 			width: 100%;
 			height: 0;
 			padding-bottom: 56.25%;
-			border-radius: var(--quack-radius-card);
+			border-radius: var(--page-radius-box);
 			overflow: hidden;
 
 			iframe {
@@ -251,7 +249,7 @@ body.quack {
 		padding: 24px;
 		background: var(--main-codebox-main-background-color, rgba(250, 250, 250, 0.8));
 		border: 1px solid var(--main-codebox-border-color, rgba(13, 13, 13, 0.08));
-		border-radius: var(--quack-radius-card);
+		border-radius: var(--page-radius-box);
 		box-shadow: 2px 2px 24px 0 var(--main-codebox-dropshadow, rgba(0, 0, 0, 0.03));
 		text-rendering: geometricPrecision;
 	}
@@ -292,7 +290,7 @@ body.quack {
 	.codecard {
 		background: var(--quack-codecard-bg);
 		border: 1px solid var(--quack-codecard-border);
-		border-radius: var(--quack-radius-inner);
+		border-radius: var(--page-radius-box-inner);
 		display: flex;
 		flex-direction: column;
 		min-width: 0;
@@ -312,8 +310,8 @@ body.quack {
 		gap: 6px;
 		padding: 12px 2px 12px 16px;
 		border-bottom: 1px solid var(--quack-codecard-border);
-		border-top-left-radius: var(--quack-radius-inner);
-		border-top-right-radius: var(--quack-radius-inner);
+		border-top-left-radius: var(--page-radius-box-inner);
+		border-top-right-radius: var(--page-radius-box-inner);
 		font-size: 12.5px;
 		font-weight: 600;
 	}
@@ -431,8 +429,8 @@ body.quack {
 		gap: 5px;
 		padding: 8px 2px 8px 8px;
 		border-bottom: 1px solid var(--quack-codecard-border);
-		border-top-left-radius: var(--quack-radius-inner);
-		border-top-right-radius: var(--quack-radius-inner);
+		border-top-left-radius: var(--page-radius-box-inner);
+		border-top-right-radius: var(--page-radius-box-inner);
 
 		.tab {
 			display: inline-flex;
@@ -443,7 +441,7 @@ body.quack {
 			font-weight: 600;
 			background: transparent;
 			border: 1px solid transparent;
-			border-radius: var(--quack-radius-inner);
+			border-radius: var(--page-radius-box-inner);
 			cursor: pointer;
 			color: var(--main-text-primary-color, #0d0d0d);
 		}
@@ -474,7 +472,7 @@ body.quack {
 			display: inline-block;
 			padding: 3px 8px;
 			border: 1px solid var(--main-quaternary-color, #ccc);
-			border-radius: 60px;
+			border-radius: var(--page-radius-pill);
 			font-family: $fontMono;
 			font-size: var(--type-tiny, 12px);
 			line-height: 1.2;
@@ -581,7 +579,7 @@ body.quack {
 		pre.highlight {
 			background: var(--quack-codecard-bg);
 			border: 1px solid var(--quack-codecard-border);
-			border-radius: var(--quack-radius-card);
+			border-radius: var(--page-radius-m);
 			padding: 20px;
 			margin: 0;
 			position: relative;

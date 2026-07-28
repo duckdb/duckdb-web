@@ -10,7 +10,7 @@ jobs:
   markdown:
     runs-on: ubuntu-22.04
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v7
       - uses: errata-ai/vale-action@reviewdog
         with:
           files: '_posts/,docs/current/'
@@ -25,7 +25,7 @@ jobs:
   version-file:
     runs-on: ubuntu-22.04
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v7
       - name: Check no trailing newline in latest_stable_version.txt
         run: |
           if [[ $(tail -c 1 data/latest_stable_version.txt | wc -l) -gt 0 ]]; then
@@ -36,7 +36,7 @@ jobs:
   python:
     runs-on: ubuntu-22.04
     steps:
-    - uses: actions/checkout@v6
+    - uses: actions/checkout@v7
     - uses: psf/black@stable
       with:
         options: "--check --skip-string-normalization --verbose --diff --color"

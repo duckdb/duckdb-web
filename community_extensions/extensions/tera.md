@@ -21,12 +21,12 @@ extension:
 repo:
   andium: 5b8e2b4701c69b196cc6386d86f811a5343ffc6e
   github: query-farm/tera
-  ref: d5a49c3113cff59cd5c4e0613cfc453ef7406660
+  ref: b6e5a399887534c0e6309c6f996b12913da9d996
 
-extension_star_count: 8
-extension_star_count_pretty: 8
-extension_download_count: 870
-extension_download_count_pretty: 870
+extension_star_count: 9
+extension_star_count_pretty: 9
+extension_download_count: 1083
+extension_download_count_pretty: 1.1k
 image: '/images/community_extensions/social_preview/preview_community_extension_tera.png'
 layout: community_extension_doc
 ---

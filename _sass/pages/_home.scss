@@ -64,7 +64,7 @@ body.landing{
 			.video-thumbnail {
 				position: relative;
 				cursor: pointer;
-				border-radius: var(--border-radius-box);
+				border-radius: var(--page-radius-box);
 				border: 1px solid var(--main-blogpost-border-color, #E6E6E6);
 				overflow: hidden;
 				transition: all .3s ease;
@@ -117,7 +117,7 @@ body.landing{
 				width: 100%;
 				height: 0;
 				padding-bottom: 56.25%; /* 16:9 aspect ratio */
-				border-radius: var(--border-radius-box);
+				border-radius: var(--page-radius-box);
 				overflow: hidden;
 				
 				iframe {
@@ -178,7 +178,7 @@ body.landing{
 		}
 	}
 	.window{
-		border-radius: var(--border-radius-box);
+		border-radius: var(--page-radius-box);
 		border: 1px solid var(--main-codebox-border-color, #E6E6E6);
 		background: var(--main-codebox-main-background-color, rgba(250, 250, 250, 0.60));
 		-webkit-backdrop-filter: blur(5px);
@@ -186,7 +186,7 @@ body.landing{
 		-webkit-box-shadow: 0px 1px 0px 0px rgba(255, 255, 255, 0.20) inset, 2px 2px 24px 0px var(--main-codebox-dropshadow, rgba(0, 0, 0, 0.05));
 				box-shadow: 0px 1px 0px 0px rgba(255, 255, 255, 0.20) inset, 2px 2px 24px 0px var(--main-codebox-dropshadow, rgba(0, 0, 0, 0.05));
 		.topbar {
-			border-radius: var(--border-radius-box) var(--border-radius-box) 0px 0px;
+			border-radius: var(--page-radius-box) var(--page-radius-box) 0px 0px;
 			ul {
 				position: relative;
 				padding: 0;
@@ -199,11 +199,11 @@ body.landing{
 				-webkit-box-align: start;
 					-ms-flex-align: start;
 						align-items: flex-start;
-				border-radius: 100px; 
+				border-radius: var(--page-radius-pill); 
 				padding: 5px;
 				li {
 					@include label-1;
-					border-radius: 50px;
+					border-radius: var(--page-radius-pill);
 					padding: 12px 14px;
 					color: var(--interactive-filter-unselected-text-color, #666);
 					cursor: pointer;
@@ -228,7 +228,7 @@ body.landing{
 				-o-transition: all 0.3s ease;
 				transition: all 0.3s ease;
 				z-index: -1;
-				border-radius: 50px;
+				border-radius: var(--page-radius-pill);
 			}
 		}
 		.content{
@@ -337,7 +337,7 @@ body.landing{
 		}
 		.foldout{
 			background: #F9F9F9;
-			border-radius: var(--border-radius-box);
+			border-radius: var(--page-radius-box);
 			position: relative;
 			-webkit-transition: all .25s;
 			-o-transition: all .25s;
@@ -409,7 +409,7 @@ body.landing{
 	  max-width: 30ch;
 	
 	  border: 1px solid $duckDByellow;
-	  border-radius: 100px;
+	  border-radius: var(--page-radius-pill);
 	  padding: 10px 14px;
 	
 	  cursor: pointer;
@@ -470,15 +470,19 @@ body.landing{
 	
 	.select-styled {
 		position: relative;
-		display: inline-block;
+		display: inline-flex;
+		align-items: center;
+		justify-content: space-between;
+		gap: 8px;
+		box-sizing: border-box;
 		color: var(--interactive-button-black-border-color, #999);
 		background: var(--menu-dropdown-background-color, #F2F2F2);
 		border: 1px solid var(--doc-codebox-border-color, #E6E6E6);
-		padding: 12px 40px 12px 20px;
+		padding: 12px 14px 12px 20px;
 		-webkit-transition: all 0.2s ease-in;
 		-o-transition: all 0.2s ease-in;
 		transition: all 0.2s ease-in;
-		border-radius: 100px;
+		border-radius: var(--page-radius-pill);
 		z-index: 710;
 		word-break: keep-all;
 		> span{
@@ -486,37 +490,34 @@ body.landing{
 			color: inherit;
 			line-height: 1;
 		}
-		&:after {
-			content: "";
-			width: 20px;
-			height: 20px;
-			position: absolute;
-			mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='20' height='20' fill='none' viewBox='0 0 20 20'%3E%3Cg stroke='%23000' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.65' clip-path='url(%23a)'%3E%3Cpath d='M10.001 18.334a8.333 8.333 0 1 0 0-16.667 8.333 8.333 0 0 0 0 16.667'/%3E%3Cpath d='m5.832 8.417 4.167 4.167 4.166-4.167'/%3E%3C/g%3E%3Cdefs%3E%3CclipPath id='a'%3E%3Cpath fill='%23fff' d='M0 0h20v20H0z'/%3E%3C/clipPath%3E%3C/defs%3E%3C/svg%3E");
-			mask-size: contain;
-			mask-position: center center;
-			mask-repeat: no-repeat;
-			background-color: var(--interactive-button-black-border-color, #999);
-			right: 10px;
-			top: 9px;
-			-webkit-transition: all .3s;
-			-o-transition: all .3s;
-			transition: all .3s;
+		svg.arrow {
+			width: 16px;
+			height: 16px;
+			flex-shrink: 0;
+			fill: none;
+			stroke-width: 2.5;
+			color: var(--interactive-button-black-border-color, #999);
+			-webkit-transition: transform .3s;
+			-o-transition: transform .3s;
+			transition: transform .3s;
 		}
 		&:hover {
 			//background-color: $select-background;
 		}
 		&:active,
 		&.active {
-			&:after {
-				-webkit-transform: rotate(180deg);
-					-ms-transform: rotate(180deg);
-						transform: rotate(180deg);
+			svg.arrow {
+				-webkit-transform: rotate(-180deg);
+					-ms-transform: rotate(-180deg);
+						transform: rotate(-180deg);
 			}
 		}
 	}
 	
 	.select-options {
-		display: none;
+		visibility: hidden;
+		opacity: 0;
+		transform: translateY(4px);
 		position: absolute;
 		top: calc(100% + 4px);
 		z-index: 700;
@@ -524,15 +525,24 @@ body.landing{
 		list-style: none;
 		background: var(--menu-dropdown-background-color, #F2F2F2);
 		border: 1px solid var(--menu-dropdown-border-color);
-		border-radius: var(--border-radius-box);
+		border-radius: var(--page-radius-box);
 		padding: 8px;
-		-webkit-filter: drop-shadow(0px 0px 5px rgba(0, 0, 0, 0.2));
-				filter: drop-shadow(0px 0px 5px rgba(0, 0, 0, 0.2));
+		transition: opacity .15s ease, transform .15s ease, visibility 0s linear .15s;
+		-webkit-filter: drop-shadow(0px 0px 5px rgba(0, 0, 0, 0.1));
+				filter: drop-shadow(0px 0px 5px rgba(0, 0, 0, 0.1));
+
+		@media (prefers-reduced-motion: reduce) {
+			transition: none;
+		}
 		li {
 			word-break: keep-all;
 			margin: 2px 0;
 			padding: 8px 12px;
 			font-weight: 450;
+			display: flex;
+			align-items: center;
+			justify-content: space-between;
+			gap: 8px;
 			-webkit-transition: all 0.15s ease-in;
 			-o-transition: all 0.15s ease-in;
 			transition: all 0.15s ease-in;
@@ -540,18 +550,38 @@ body.landing{
 			&:hover,
 			&.is-selected {
 				background: var(--menu-dropdown-item-background-hover, #E6E6E6);
-				border-radius: 50px;
+				border-radius: var(--page-radius-pill);
 			}
 			&.is-selected {
 				font-weight: 500;
+
+				svg.icon.check {
+					width: 12px;
+					height: 12px;
+					flex-shrink: 0;
+					stroke-width: 3;
+					color: var(--main-text-secondary-color, #666);
+				}
 			}
 			&[rel="hide"] {
 				display: none;
 			}
 		}
 	}
-	
-	
+
+	.select-styled.active + .select-options {
+		visibility: visible;
+		opacity: 1;
+		transform: translateY(0);
+		transition-delay: 0s;
+	}
+
+	.select-styled:focus-visible {
+		outline: none;
+		border-color: var(--menu-topmenu-text-color-hover, #6A58DA);
+	}
+
+
 	/** WELCOME / HERO SECTION **/
 	section.welcome{
 		z-index: 11;
@@ -660,7 +690,7 @@ body.landing{
 				flex-direction: column;
 				gap: 20px;
 				padding: 20px;
-				border-radius: var(--border-radius-box);
+				border-radius: var(--page-radius-box);
 				border: 1px solid var(--main-codebox-border-color, rgba(13, 13, 13, 0.08));
 				background: var(--main-codebox-main-background-color, rgba(250, 250, 250, 0.6));
 				box-shadow: 0 0 51px 0 var(--doc-codebox-background-color, #F2F2F2);
@@ -679,7 +709,7 @@ body.landing{
 						stroke-width: 1.75;
 					}
 					span{
-						font-weight: 500;
+						font-weight: 600;
 						font-size: var(--type-title-2, 16px);
 						color: var(--main-text-primary-color, #0d0d0d);
 						line-height: 1.2;
@@ -693,7 +723,7 @@ body.landing{
 						display: inline-block;
 						padding: 3px 8px;
 						border: 1px solid var(--main-quaternary-color, #ccc);
-						border-radius: 60px;
+						border-radius: var(--page-radius-pill);
 						font-size: var(--type-tiny, 12px);
 						color: var(--main-text-secondary-color, #666);
 						line-height: 1.2;
@@ -829,7 +859,7 @@ body.landing{
 			top: 40px;
 		}
 		.highlight{
-			border-radius: var(--border-radius-box);
+			border-radius: var(--page-radius-m);
 		}
 		.result a{
 			padding: 15px;
@@ -878,7 +908,7 @@ body.landing{
 		justify-content: space-around;
 		padding: 24px;
 		border: 1px solid var(--main-infobox-border-color, rgba(212, 204, 255, 0.6));
-		border-radius: var(--border-radius-box);
+		border-radius: var(--page-radius-box);
 		background: var(--main-infobox-background-color, rgba(246, 245, 255, 0.6));
 		backdrop-filter: blur(5px);
 	
@@ -1091,7 +1121,7 @@ html.darkmode body.landing section.welcome .hero-bg {
 			overflow-x: auto;
 			&::-webkit-scrollbar {width:1px; background: var(--doc-scrollbar-bg, #E6E6E6); height: 2px;}
 			&::-webkit-scrollbar-track {background: var(--doc-scrollbar-bg, #E6E6E6);}
-			&::-webkit-scrollbar-thumb {background: var(--doc-scrollbar-slider, #CCC);border-radius:2px}
+			&::-webkit-scrollbar-thumb {background: var(--doc-scrollbar-slider, #CCC);border-radius: var(--page-radius-xs)}
 			ul{
 				margin-left: 15px;
 				margin-right: 15px;

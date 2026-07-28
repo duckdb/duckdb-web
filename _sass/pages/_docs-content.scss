@@ -15,9 +15,17 @@ body.documentation {
         h3,
         h4,
         h5 {
+            color: var(--main-text-primary-color, #0D0D0D);
+
+            a {
+                color: inherit;
+            }
             a:hover {
-                color: black;
+                color: var(--main-text-primary-color, #0D0D0D);
                 text-decoration: underline;
+            }
+            &:hover svg.anchor-icon {
+                opacity: 1;
             }
             code {
                 font-family: $fontMonoXBold;
@@ -26,8 +34,8 @@ body.documentation {
 
         h1 {
             @include headline-1;
-            margin-bottom: 20px;
-            margin-top: 50px;
+            margin-bottom: 0.6em;
+            margin-top: 1.6em;
 
             code {
                 font-size: 30px;
@@ -36,8 +44,8 @@ body.documentation {
 
         h2 {
             @include headline-2;
-            margin-bottom: 20px;
-            margin-top: 40px;
+            margin-bottom: 0.6em;
+            margin-top: 1.6em;
 
             code {
                 font-size: 27px;
@@ -46,8 +54,8 @@ body.documentation {
 
         h3 {
             @include headline-3;
-            margin-bottom: 10px;
-            margin-top: 30px;
+            margin-bottom: 0.5em;
+            margin-top: 1.6em;
 
             code {
                 font-family: $fontMonoXBold;
@@ -59,8 +67,8 @@ body.documentation {
 
         h4 {
             @include title-1;
-            margin-top: 25px;
-            margin-bottom: 8px;
+            margin-top: 1.6em;
+            margin-bottom: 0.4em;
 
             code {
                 font-size: 19px;
@@ -69,40 +77,37 @@ body.documentation {
 
         h5 {
             @include title-2;
-            margin-top: 20px;
-            margin-bottom: 6px;
+            margin-top: 1.5em;
+            margin-bottom: 0.4em;
 
             code {
                 font-size: 19px;
             }
         }
 
-        // Content spacing
         p {
-            margin-top: 20px;
+            margin-top: 1em;
             margin-bottom: 0;
         }
 
-        // Spacing adjustments — text binds tight to the code below it,
-        // generous gap opens up after the code block before the next prose
         .highlighter-rouge,
         div.highlight {
-            margin-bottom: 24px;
+            margin-bottom: 1.7em;
         }
 
         h4+.highlighter-rouge,
         h5+.highlighter-rouge {
-            margin-top: 5px;
+            margin-top: 0.35em;
         }
 
         p+.highlighter-rouge,
         p+table {
-            margin-top: 8px;
+            margin-top: 0.6em;
         }
 
         p + .monospace_table,
         div + .monospace_table {
-            margin-top: 8px;
+            margin-top: 0.6em;
         }
 
         .limit-width {
@@ -142,12 +147,17 @@ body.documentation {
     // Links
     .headlinebar a,
     .wrap a {
-        color: var(--text-primary-color);
+        color: var(--main-text-primary-color, #0D0D0D);
         text-decoration: underline;
-        transition: color .3s;
+        text-decoration-color: var(--main-text-tertiary-color, #B2B2B2);
+        text-decoration-thickness: 1px;
+        text-underline-offset: 0.16em;
+        transition: color .3s, text-decoration-color .3s;
 
         &:hover {
-            color: $blue;
+            color: var(--main-link-hover-color, #998B00);
+            text-decoration-color: var(--main-link-hover-color, #998B00);
+            text-decoration-thickness: 1px;
         }
     }
 
@@ -160,7 +170,7 @@ body.documentation {
 
         &:focus,
         &:hover {
-            text-decoration: underline;
+            text-decoration-line: underline;
         }
     }
 
@@ -170,7 +180,7 @@ body.documentation {
     }
 
     p {
-        @include body-standard;
+        @include body-docs;
 
         em {
             font-family: $fontSans;
@@ -216,11 +226,12 @@ body.documentation {
         dl,
         ol,
         ul {
-            margin-bottom: 20px;
+            margin-bottom: 1.3em;
         }
-        
+
         li {
-            line-height: 1.5;
+            line-height: 1.65;
+            font-weight: 400;
         }
         
         ol {
@@ -250,7 +261,7 @@ body.documentation {
             list-style-position: outside;
             list-style-type: '\2022 \00a0\00a0';
             padding: 0 0 0 20px;
-            font-size: var(--type-body-normal, 16px);
+            font-size: var(--type-body-docs, 15px);
             
             ul {
                 padding-left: 20px;
@@ -263,7 +274,7 @@ body.documentation {
                 background-color: transparent;
 
                 &:hover {
-                    color: $blue;
+                    color: var(--main-link-hover-color, #998B00);
                 }
             }
 
@@ -277,14 +288,14 @@ body.documentation {
         }
 
         h5 {
-            margin-top: 40px;
+            margin-top: 2em;
         }
     }
 }
 
 body.documentation,
 body.post,
-body.duckcon7,
+body.duckcon,
 body.layout_default.blog_typography {
 
     // Tables
@@ -327,16 +338,16 @@ body.layout_default.blog_typography {
         }
 
         >tbody>tr:hover {
-            background: var(--doc-codebox-border-color, #E6E6E6);
+            background: var(--interactive-table-row-hover, #F2F2F2);
         }
 
         a {
-            text-decoration: underline;
+            text-decoration-line: underline;
             word-wrap: normal;
             word-break: normal;
 
             &:hover {
-                color: $blue;
+                color: var(--main-link-hover-color, #998B00);
                 cursor: pointer;
             }
 
@@ -478,7 +489,7 @@ body.layout_default.blog_typography {
     code,
     pre {
         @include code-standard;
-        border-radius: 2px;
+        border-radius: var(--page-radius-xs);
     }
 
     pre.highlight {
@@ -512,7 +523,7 @@ body.layout_default.blog_typography {
     div.highlight {
         width: 100%;
         position: relative;
-        border-radius: var(--border-radius-box);
+        border-radius: var(--page-radius-m);
         overflow: hidden;
         transition: border-color .3s;
         background: var(--doc-codebox-background-color, #F2F2F2);
@@ -530,7 +541,7 @@ body.layout_default.blog_typography {
         position: relative;
         overflow: hidden;
         border: 1px solid var(--doc-codebox-border-color, #D9D9D9);
-        border-radius: var(--border-radius-box);
+        border-radius: var(--page-radius-m);
         background: var(--doc-codebox-background-color, #F2F2F2);
 
         &::before {
@@ -578,7 +589,7 @@ body.layout_default.blog_typography {
         border: 1px solid var(--doc-codebox-border-color, #E6E6E6);
         background: var(--doc-codebox-background-color, #F2F2F2);
         font-family: $fontMonoMedium;
-        border-radius: 3px;
+        border-radius: var(--page-radius-xs);
         padding: 0px 2px;
         margin: 0;
 
@@ -591,7 +602,7 @@ body.layout_default.blog_typography {
         padding: 16px;
         overflow: auto;
         background: var(--doc-codebox-background-color, #F2F2F2);
-        border-radius: var(--border-radius-box);
+        border-radius: var(--page-radius-m);
     }
 
     code {
@@ -619,12 +630,30 @@ body.layout_default.blog_typography {
             gap: 5px;
             align-items: center;
             cursor: pointer;
-            transition: padding .3s;
+            text-decoration: underline;
+            text-decoration-color: var(--main-text-tertiary-color, #B2B2B2);
+            text-decoration-thickness: 1px;
+            text-underline-offset: 0.16em;
+            transition: color .3s, text-decoration-color .3s, padding .3s;
 
+            span,
             a{
                 color: inherit;
+                text-decoration-color: var(--main-text-tertiary-color, #B2B2B2) !important;
+                text-decoration-thickness: 1px !important;
+                text-underline-offset: 0.16em;
             }
-            
+
+            &:hover{
+                color: var(--main-link-hover-color, #998B00);
+                text-decoration-color: var(--main-link-hover-color, #998B00);
+
+                span,
+                a{
+                    text-decoration-color: var(--main-link-hover-color, #998B00) !important;
+                }
+            }
+
             &::after{
                 mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' fill='none' viewBox='0 0 14 14'%3E%3Cpath stroke='%23000' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.35' d='m2.102 5.05 4.9 4.9 4.9-4.9'/%3E%3C/svg%3E");
                 mask-size: contain;
@@ -635,11 +664,15 @@ body.layout_default.blog_typography {
                 content: "";
                 width: 14px;
                 height: 14px;
-                transition: transform .3s;
+                transition: transform .3s, background-color .3s;
                 position: absolute;
                 transform: translate(5px, 4px);
             }
-            
+
+            &:hover::after{
+                background-color: var(--main-link-hover-color, #998B00);
+            }
+
             &::marker {
                 display: none;
             }

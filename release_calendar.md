@@ -41,8 +41,6 @@ _There are no upcoming releases announced at the moment. Please check back later
 
 <!-- markdownlint-enable MD055 MD056 MD058 -->
 
-There is no set date yet for the release of DuckDB v1.4.5. We will select the date as necessitated by the issues filed for the DuckDB v1.4.x line. If we encounter a critical issue or vulnerability, we will expedite the release of v1.4.5.
-
 For planned new features, see the [DuckDB Development Roadmap]({% link roadmap.md %}).
 
 ### LTS Releases
@@ -64,12 +62,12 @@ Since version 0.4.0, only major and minor versions get a codename.
 
 <!-- markdownlint-disable MD034 MD055 MD056 MD058 -->
 
-|      | Date | Version | Blog | Codename (named after) | End of life      |
-|------|:-----|--------:|------|------------------------|------------------|
+|      | Date | Version | Blog post | Codename (named after) | End of life      |
+|------|:-----|--------:|-----------|------------------------|------------------|
 {% for row in site.data.past_releases %}
   {%- capture logo_filename %}images/release-icons/{{ row.version_number }}.svg{% endcapture -%}
   {%- capture logo_exists %}{% file_exists {{ logo_filename }} %}{% endcapture -%}
-  | {% if logo_exists == "true" %}![Logo of version {{ row.version_number }}](/{{ logo_filename }}){% endif %} | {{ row.release_date }} | [{{ row.version_number }}{% if row.lts == "true" %} LTS{% endif %}](https://github.com/duckdb/duckdb/releases/tag/v{{ row.version_number }}) | {% if row.blog_post %}[📰]({{ row.blog_post }}){% endif %} | {% if row.codename %}{{ row.codename }}{% endif %} {% if row.duck_species_primary %}{% if row.duck_wikipage %}<a href="{{ row.duck_wikipage }}">{% endif %} _({{ row.duck_species_primary }})_ {% if row.duck_wikipage %}</a>{% endif %}{% endif %} | {% if row.end_of_life %}{{ row.end_of_life }}{% endif %} |
+  | {% if logo_exists == "true" %}![Logo of version {{ row.version_number }}](/{{ logo_filename }}){% endif %} | {{ row.release_date }} | [{{ row.version_number }}{% if row.lts == "true" %} LTS{% endif %}](https://github.com/duckdb/duckdb/releases/tag/v{{ row.version_number }}) | {% if row.blog_post %}[Blog post]({{ row.blog_post }}){% endif %} | {% if row.codename %}{{ row.codename }}{% endif %} {% if row.duck_species_primary %}{% if row.duck_wikipage %}<a href="{{ row.duck_wikipage }}">{% endif %}_({{ row.duck_species_primary }})_{% if row.duck_wikipage %}</a>{% endif %}{% endif %} | {% if row.end_of_life %}{{ row.end_of_life }}{% endif %} |
 {% endfor %}
 
 <!-- markdownlint-enable MD034 MD055 MD056 MD058 -->

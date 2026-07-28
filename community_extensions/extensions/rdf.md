@@ -8,7 +8,7 @@ excerpt: |
 extension:
   name: rdf
   description: A DuckDB extension to read and write RDF
-  version: 2.7.0
+  version: 2.8.1
   language: C++
   build: cmake
   license: MIT
@@ -17,7 +17,7 @@ extension:
 
 repo:
   github: nonodename/duck_rdf
-  ref: 1e79fecbdfbd390bda11172ff87488b1c5c6526b
+  ref: 8d20bad15a216d08d932de1660a690d6e10a3d52
 
 docs:
   hello_world: |
@@ -65,7 +65,9 @@ docs:
 
     `read_rdf()` returns six columns: `subject`, `predicate`, `object` (always populated),
     and `graph`, `language_tag`, `datatype` (nullable). It accepts a file path or glob pattern;
-    multiple matched files are scanned in parallel.
+    multiple matched files are scanned in parallel. `.gz` and `.zst` compressed files are
+    supported (note that you need to load the parquet extension for the libzstd library to be 
+    loaded). The RDF format is auto-detected by file extension but can be overridden with the `file_type` parameter.
 
     ```sql
     SELECT subject, predicate FROM read_rdf('data.ttl');
@@ -129,10 +131,10 @@ docs:
     SELECT can_call_inside_out('mapping.ttl'); -- check if inside-out mode is supported
     ```
 
-extension_star_count: 19
-extension_star_count_pretty: 19
-extension_download_count: 721
-extension_download_count_pretty: 721
+extension_star_count: 26
+extension_star_count_pretty: 26
+extension_download_count: 1757
+extension_download_count_pretty: 1.8k
 image: '/images/community_extensions/social_preview/preview_community_extension_rdf.png'
 layout: community_extension_doc
 ---
@@ -158,14 +160,15 @@ LOAD {{ page.extension.name }};
 
 <div class="extension_functions_table"></div>
 
-|    function_name    | function_type | description | comment | examples |
-|---------------------|---------------|-------------|---------|----------|
-| can_call_inside_out | scalar        | NULL        | NULL    |          |
-| is_valid_r2rml      | scalar        | NULL        | NULL    |          |
-| pivot_rdf           | table         | NULL        | NULL    |          |
-| profile_rdf         | table         | NULL        | NULL    |          |
-| read_rdf            | table         | NULL        | NULL    |          |
-| read_sparql         | table         | NULL        | NULL    |          |
+|    function_name    | function_type |                                                                                                               description                                                                                                                | comment |                                                                                                      examples                                                                                                      |
+|---------------------|---------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|---------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| can_call_inside_out | scalar        | Return true if the given R2RML or YARRML mapping file can be executed in inside-out mode, where DuckDB runs the SQL query and the extension maps each output row to RDF triples.                                                         | NULL    | [SELECT can_call_inside_out('mapping.ttl')]                                                                                                                                                                        |
+| is_valid_r2rml      | scalar        | Return true if the given file is a syntactically valid R2RML or YARRML mapping document.                                                                                                                                                 | NULL    | [SELECT is_valid_r2rml('mapping.yml')]                                                                                                                                                                             |
+| pivot_rdf           | table         | Read RDF triples and pivot them into a wide table where each distinct predicate becomes a column and subjects become row identifiers. Glob patterns and lists of file paths are supported.                                               | NULL    | [SELECT * FROM pivot_rdf('data.ttl'), SELECT * FROM pivot_rdf('data.nt', prefix_expansion=true), SELECT * FROM pivot_rdf(['a.ttl', 'b.ttl'])]                                                                      |
+| profile_rdf         | table         | Profile one or more RDF files and return a predicate-level statistical summary including value counts, datatypes, and cardinalities. Glob patterns and lists of file paths are supported.                                                | NULL    | [SELECT * FROM profile_rdf('data.nt'), SELECT * FROM profile_rdf('data/*.ttl', strict_parsing=false), SELECT * FROM profile_rdf(['a.nt', 'b.nt'])]                                                                 |
+| read_rdf            | table         | Read RDF triples from one or more files (Turtle, NTriples, NQuads, TriG, or RDF/XML) into a table with columns graph, subject, predicate, object, object_datatype, and object_lang. Glob patterns and lists of file paths are supported. | NULL    | [SELECT * FROM read_rdf('data.nt'), SELECT subject, predicate, object FROM read_rdf('*.ttl'), SELECT * FROM read_rdf(['a.nt', 'b.nt']), SELECT * FROM read_rdf('data.rdf', file_type='rdf', strict_parsing=false)] |
+| read_rdf_prefixes   | table         | Read the namespace prefix declarations from one or more RDF files. Returns prefix (local name), uri (namespace URI), and is_base (true for @base declarations) columns. Glob patterns and lists of file paths are supported.             | NULL    | [SELECT * FROM read_rdf_prefixes('data.ttl'), SELECT prefix, uri FROM read_rdf_prefixes('*.ttl'), SELECT * FROM read_rdf_prefixes(['a.ttl', 'b.ttl'])]                                                             |
+| read_sparql         | table         | Execute a SPARQL SELECT query against a remote endpoint and return the results as a table. Each SPARQL variable becomes a VARCHAR column. Not available in WebAssembly builds.                                                           | NULL    | [SELECT * FROM read_sparql('https://dbpedia.org/sparql', 'SELECT ?s ?p ?o WHERE { ?s ?p ?o } LIMIT 10')]                                                                                                           |
 
 ### Overloaded Functions
 

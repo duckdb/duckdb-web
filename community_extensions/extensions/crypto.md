@@ -23,10 +23,10 @@ repo:
   github: query-farm/crypto
   ref: 8781b4cb42c79a0d23b01adfac5e867050dc36ac
 
-extension_star_count: 28
-extension_star_count_pretty: 28
-extension_download_count: 13506
-extension_download_count_pretty: 13.5k
+extension_star_count: 29
+extension_star_count_pretty: 29
+extension_download_count: 16745
+extension_download_count_pretty: 16.7k
 image: '/images/community_extensions/social_preview/preview_community_extension_crypto.png'
 layout: community_extension_doc
 ---

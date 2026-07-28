@@ -105,7 +105,6 @@
                   "page": "Caveats",
                   "url": "caveats"
                 }
-
               ]
             },
             {
@@ -443,6 +442,10 @@
                 {
                   "page": "PHP",
                   "url": "php"
+                },
+                {
+                  "page": "PHP (PDO)",
+                  "url": "php_pdo"
                 },
                 {
                   "page": "Swift",
@@ -1139,7 +1142,7 @@
                   "url": "iceberg_options"
                 },
                 {
-                  "page": "Catalogs",
+                  "page": "Iceberg Rest Catalogs",
                   "url": "catalogs"
                 },
                 {
@@ -1163,6 +1166,10 @@
             {
               "page": "Lance",
               "url": "lance"
+            },
+            {
+              "page": "MotherDuck",
+              "url": "motherduck"
             },
             {
               "page": "MySQL",
@@ -1345,6 +1352,10 @@
                 {
                   "page": "SQLite Import",
                   "url": "sqlite"
+                },
+                {
+                  "page": "Amazon RDS with IAM Authentication",
+                  "url": "rds_iam"
                 }
               ]
             },
@@ -1407,6 +1418,36 @@
               ]
             },
             {
+              "page": "Meta Queries",
+              "slug": "meta",
+              "subsubfolderitems": [
+                {
+                  "page": "Describe Table",
+                  "url": "describe"
+                },
+                {
+                  "page": "EXPLAIN: Inspect Query Plans",
+                  "url": "explain"
+                },
+                {
+                  "page": "EXPLAIN ANALYZE: Profile Queries",
+                  "url": "explain_analyze"
+                },
+                {
+                  "page": "List Tables",
+                  "url": "list_tables"
+                },
+                {
+                  "page": "Summarize",
+                  "url": "summarize"
+                },
+                {
+                  "page": "DuckDB Environment",
+                  "url": "duckdb_environment"
+                }
+              ]
+            },
+            {
               "page": "Network and Cloud Storage",
               "slug": "network_cloud_storage",
               "subsubfolderitems": [
@@ -1453,36 +1494,6 @@
                 {
                   "page": "Tigris Import",
                   "url": "tigris_import"
-                }
-              ]
-            },
-            {
-              "page": "Meta Queries",
-              "slug": "meta",
-              "subsubfolderitems": [
-                {
-                  "page": "Describe Table",
-                  "url": "describe"
-                },
-                {
-                  "page": "EXPLAIN: Inspect Query Plans",
-                  "url": "explain"
-                },
-                {
-                  "page": "EXPLAIN ANALYZE: Profile Queries",
-                  "url": "explain_analyze"
-                },
-                {
-                  "page": "List Tables",
-                  "url": "list_tables"
-                },
-                {
-                  "page": "Summarize",
-                  "url": "summarize"
-                },
-                {
-                  "page": "DuckDB Environment",
-                  "url": "duckdb_environment"
                 }
               ]
             },
@@ -1617,6 +1628,10 @@
                 {
                   "page": "Integration with Polars",
                   "url": "polars"
+                },
+                {
+                  "page": "Integration with PyTorch",
+                  "url": "pytorch"
                 },
                 {
                   "page": "Using fsspec Filesystems",
@@ -1897,6 +1912,10 @@
                 {
                   "page": "Writing Tests",
                   "url": "writing_tests"
+                },
+                {
+                  "page": "Unit Tester Configuration",
+                  "url": "test_configuration"
                 },
                 {
                   "page": "Debugging",

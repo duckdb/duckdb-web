@@ -13,12 +13,12 @@ toc: false
   <h1>Development Roadmap</h1>
 </div>
 
-_(Last updated: April 2026)_
+_(Last updated: June 2026)_
 
 The DuckDB project is governed by the [non-profit DuckDB Foundation](https://duckdb.foundation/).
 The Foundation and [DuckLabs](https://ducklabs.com) are not funded by external investors (e.g., venture capital).
 Instead, the Foundation is funded by contributions from its [members](https://duckdb.foundation/supporters),
-while DuckLabs' revenue is based on [commercial support and feature prioritization services](https://ducklabs.com/support).
+while DuckLabs' revenue is based on [commercial support and feature prioritization services](https://ducklabs.com/contact).
 
 This list was compiled by the DuckDB maintainers and is based on the long-term strategic vision for the DuckDB project and general interactions with users in the open-source community (GitHub Issues and Discussions, social media, etc.).
 For details on how to request features in DuckDB, please refer to the FAQ item [“I would like feature X to be implemented in DuckDB”]({% link faq.md %}#i-would-like-feature-x-to-be-implemented-in-duckdb-how-do-i-proceed).
@@ -27,8 +27,12 @@ For details on how to request features in DuckDB, please refer to the FAQ item [
 
 This section lists the features that the DuckDB team plans to work on **in the coming year**.
 
+* Using the new [PEG parser]({% post_url 2024-11-22-runtime-extensible-parsers %}) by default
+* Shipping the stable version of the [Quack protocol]({% link quack/index.html %})
+* [Support for async I/O](https://github.com/duckdb/duckdb/discussions/3560)
 * Migration and documentation to [C client API]({% link docs/current/clients/c/overview.md %}) and [C extension API](https://github.com/duckdb/extension-template-c)
 * Rust support for extensions
+* C++17 support
 * Continuous improvements to [lakehouse formats]({% link docs/current/lakehouse_formats.md %}):
   [Iceberg]({% link docs/current/core_extensions/iceberg/overview.md %}),
   [Delta]({% link docs/current/core_extensions/delta.md %}),
@@ -36,10 +40,7 @@ This section lists the features that the DuckDB team plans to work on **in the c
   and
   [DuckLake](https://ducklake.select/)
 * [`MATCH_RECOGNIZE`](https://github.com/duckdb/duckdb/discussions/3994) for pattern matching
-* [Support for async I/O](https://github.com/duckdb/duckdb/discussions/3560)
 * [Parallel Python UDFs](https://github.com/duckdb/duckdb/issues/14817)
-* Using the new [PEG parser]({% post_url 2024-11-22-runtime-extensible-parsers %}) by default
-* C++17 support
 * macOS installer
 * Windows installer
 

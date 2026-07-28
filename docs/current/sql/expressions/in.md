@@ -9,7 +9,7 @@ title: IN Operator
 ---
 
 The `IN` operator checks containment of the left expression inside the _collection_ on the right hand side (RHS).
-Supported collections on the RHS are tuples, lists, maps and subqueries that return a single column.
+Supported collections on the RHS are tuples, lists, and maps, as well as subqueries that return a single column. The single-column restriction applies only to subqueries; tuples, lists, and maps may themselves contain composite values.
 
 <div id="rrdiagram"></div>
 

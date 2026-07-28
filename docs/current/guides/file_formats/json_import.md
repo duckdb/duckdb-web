@@ -8,11 +8,11 @@ redirect_from:
 title: JSON Import
 ---
 
-To read data from a JSON file, use the `read_json_auto` function in the `FROM` clause of a query:
+To read data from a JSON file, use the `read_json` function in the `FROM` clause of a query:
 
 ```sql
 SELECT *
-FROM read_json_auto('input.json');
+FROM read_json('input.json');
 ```
 
 To create a new table using the result from a query, use `CREATE TABLE AS` from a `SELECT` statement:
@@ -20,7 +20,7 @@ To create a new table using the result from a query, use `CREATE TABLE AS` from 
 ```sql
 CREATE TABLE new_tbl AS
     SELECT *
-    FROM read_json_auto('input.json');
+    FROM read_json('input.json');
 ```
 
 To load data into an existing table from a query, use `INSERT INTO` from a `SELECT` statement:
@@ -28,7 +28,7 @@ To load data into an existing table from a query, use `INSERT INTO` from a `SELE
 ```sql
 INSERT INTO tbl
     SELECT *
-    FROM read_json_auto('input.json');
+    FROM read_json('input.json');
 ```
 
 Alternatively, the `COPY` statement can also be used to load data from a JSON file into an existing table:

@@ -93,6 +93,7 @@ Below are parameters that can be passed to the [`read_csv` function](#csv-functi
 | `escape` | String used to escape the `quote` character within quoted values. | `VARCHAR` | `"` |
 | `encoding` | Encoding used by the CSV file. Options are `utf-8`, `utf-16`, `latin-1`. Not available in the `COPY` statement (which always uses `utf-8`). | `VARCHAR` | `utf-8` |
 | `filename` | Add path of the containing file to each row, as a string column named `filename`. Relative or absolute paths are returned depending on the path or glob pattern provided to `read_csv`, not just filenames. Since DuckDB v1.3.0, the `filename` column is added automatically as a virtual column and this option is only kept for compatibility reasons. | `BOOL` | `false` |
+| `files_to_sniff` | Number of files used by the [CSV sniffer]({% link docs/current/data/csv/auto_detection.md %}) to detect the schema when reading multiple files. Set to `-1` to sniff all files. | `BIGINT` | `10` |
 | `force_not_null` | Do not match values in the specified columns against the `NULL` string. In the default case where the `NULL` string is empty, this means that empty values are read as zero-length strings instead of `NULL`s. | `VARCHAR[]` | `[]` |
 | `header` | First line of each file contains the column names. | `BOOL` | `false` |
 | `hive_partitioning` | Interpret the path as a [Hive partitioned path]({% link docs/current/data/partitioning/hive_partitioning.md %}). | `BOOL` | (auto-detected) |

@@ -8,19 +8,18 @@ excerpt: |
 extension:
   name: cache_httpfs
   description: Read cached filesystem for httpfs
-  version: 0.13.5
+  version: 0.14.1
   language: C++
   build: cmake
   license: MIT
-  excluded_platforms: "wasm_mvp;wasm_eh;wasm_threads;windows_amd64_rtools;windows_amd64;windows_amd64_mingw"
+  excluded_platforms: "wasm_mvp;wasm_eh;wasm_threads"
   maintainers:
     - dentiny
     - DouEnergy
 
 repo:
   github: dentiny/duck-read-cache-fs
-  andium: d3618a6fd8654db431f0f357cd08c89035411ad6
-  ref: 9abd76f61524bd3d0266600eaadebd687cdfd12b
+  ref: d07cf79315f6777f9e698f59b5d1615b6a4c313d
 
 docs:
   hello_world: |
@@ -37,10 +36,10 @@ docs:
     - Exposes function to get cache size and cleanup cache
     - Provides an option to disable / enable cache, which could act as a drop-in replacement for httpfs
 
-extension_star_count: 140
-extension_star_count_pretty: 140
-extension_download_count: 30157
-extension_download_count_pretty: 30.2k
+extension_star_count: 143
+extension_star_count_pretty: 143
+extension_download_count: 66004
+extension_download_count_pretty: 66.0k
 image: '/images/community_extensions/social_preview/preview_community_extension_cache_httpfs.png'
 layout: community_extension_doc
 ---
@@ -125,12 +124,14 @@ This extension does not add any types.
 | cache_httpfs_glob_cache_entry_timeout_millisec            | Cache entry timeout in milliseconds for glob cache.                                                                                                                                                                                                                                                                                                                                             | UBIGINT    | GLOBAL | []      |
 | cache_httpfs_ignore_sigpipe                               | Whether to ignore SIGPIPE for the extension. By default not ignored. Once ignored, it cannot be reverted.                                                                                                                                                                                                                                                                                       | BOOLEAN    | GLOBAL | []      |
 | cache_httpfs_in_mem_cache_block_timeout_millisec          | Data block cache entry timeout in milliseconds.                                                                                                                                                                                                                                                                                                                                                 | UBIGINT    | GLOBAL | []      |
+| cache_httpfs_in_mem_cache_storage                         | Storage backend for in-memory data block cache. 'extension' (default) uses an extension-managed LRU bounded by `cache_httpfs_max_in_mem_cache_block_count` and `cache_httpfs_in_mem_cache_block_timeout_millisec`. 'object_cache' parks blocks in DuckDB's per-instance ObjectCache. Must be set before any cache access for the change to take effect.                                         | VARCHAR    | GLOBAL | []      |
 | cache_httpfs_max_fanout_subrequest                        | Cached httpfs performs parallel request by splittng them into small request, with request size decided by config [cache_httpfs_cache_block_size]. The setting limits the maximum request to issue for a single filesystem read request. 0 means no limit, by default we set no limit.                                                                                                           | BIGINT     | GLOBAL | []      |
 | cache_httpfs_max_in_mem_cache_block_count                 | Max in-memory cache block count for in-memory caches for all cache filesystems, so users are able to configure the maximum memory consumption. It's worth noting it should be set only once before all filesystem access, otherwise there's no affect.                                                                                                                                          | UBIGINT    | GLOBAL | []      |
 | cache_httpfs_metadata_cache_entry_size                    | Max cache size for metadata LRU cache.                                                                                                                                                                                                                                                                                                                                                          | UBIGINT    | GLOBAL | []      |
 | cache_httpfs_metadata_cache_entry_timeout_millisec        | Cache entry timeout in milliseconds for metadata LRU cache.                                                                                                                                                                                                                                                                                                                                     | UBIGINT    | GLOBAL | []      |
 | cache_httpfs_min_disk_bytes_for_cache                     | Min number of bytes on disk for the cache filesystem to enable on-disk cache; if left bytes is less than the threshold, LRU based cache file eviction will be performed.By default, 5% disk space will be reserved for other usage. When min disk bytes specified with a positive value, the default value will be overriden.                                                                   | UBIGINT    | GLOBAL | []      |
-| cache_httpfs_profile_type                                 | Profiling type for cached filesystem. There're three options available: `noop`, `temp`, and `duckdb`. `temp` option stores the latest IO operation profiling result, which potentially suffers concurrent updates; `duckdb` stores the IO operation profiling results into duckdb table, which unblocks advanced analysis.                                                                      | VARCHAR    | GLOBAL | []      |
+| cache_httpfs_parallel_read_mode                           | Thread model used for parallel cache read subrequests. 'internal_thread_pool' (default) spawns a private thread pool per read, keeping behaviour identical to the original implementation. 'duckdb_task_scheduler' submits tasks to DuckDB's global TaskScheduler so that 'SET threads = N' caps total parallelism (including cache reads) in one place.                                        | VARCHAR    | GLOBAL | []      |
+| cache_httpfs_profile_type                                 | Profiling type for cached filesystem. There are two options available: `noop` and `temp`. `temp` option stores the latest IO operation profiling result, which potentially suffers concurrent updates.                                                                                                                                                                                          | VARCHAR    | GLOBAL | []      |
 | cache_httpfs_type                                         | Type for cached filesystem. Currently there're two types available, one is `in_mem`, another is `on_disk`. By default we use on-disk cache. Set to `noop` to disable, which behaves exactly same as httpfs extension.                                                                                                                                                                           | VARCHAR    | GLOBAL | []      |
 
 

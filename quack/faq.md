@@ -24,7 +24,7 @@ toc: false
 
 <div class="answer" markdown="1">
 
-Quack allows DuckDB to connect to a DuckDB server through the `quack:` protocol. You can think of Quack as a Remote Procedure Call (RPC) protocol for DuckDB. Quack enables DuckDB instances to talk to each other, effectively turning DuckDB into a client-server database management system, where both the client and the server are DuckDB instances.
+[Quack]({% link quack/index.html %}) allows DuckDB to connect to a DuckDB server through the `quack:` protocol. You can think of Quack as a Remote Procedure Call (RPC) protocol for DuckDB. Quack enables DuckDB instances to talk to each other, effectively turning DuckDB into a client-server database management system, where both the client and the server are DuckDB instances.
 
 </div>
 
@@ -101,7 +101,7 @@ Yes, DuckDB as an in-process database will continue working just as it did befor
 
 <div class="answer" markdown="1">
 
-Please follow the [installation instructions]({% link quack/index.html %}) and the [documentation]({% link docs/current/quack/overview.md %}).
+Please follow the [installation instructions]({% link quack/index.html %}#install) and the [documentation]({% link docs/current/quack/overview.md %}).
 
 </div>
 

@@ -26,31 +26,14 @@ LOAD aws;
 ## Configuration and Authentication
 
 The preferred way to configure and authenticate to AWS S3 endpoints is to use [secrets]({% link docs/current/sql/statements/create_secret.md %}).
+There are two S3 secret providers:
 
-### `config` Provider
+* The `config` provider, where you supply the access key and secret manually. It is part of the `httpfs` extension and is documented in the [S3 API page]({% link docs/current/core_extensions/httpfs/s3api.md %}#config-provider). Use it when you already have static credentials.
+* The `credential_chain` provider, described below, which fetches credentials automatically using the AWS SDK. It is provided by the `aws` extension and supports profiles, SSO, assumed roles, web identities (IRSA), and instance metadata.
 
-The default provider, `config` (i.e., user-configured), allows access to the S3 bucket by manually providing a key. For example:
+The full list of S3 secret parameters that apply to *both* providers (`ENDPOINT`, `REGION`, `URL_STYLE`, `USE_SSL`, `KMS_KEY_ID`, `REQUESTER_PAYS`, …) is documented in the [S3 API page]({% link docs/current/core_extensions/httpfs/s3api.md %}#overview-of-s3-secret-parameters).
 
-```sql
-CREATE OR REPLACE SECRET secret (
-    TYPE s3,
-    PROVIDER config,
-    KEY_ID '⟨AKIAIOSFODNN7EXAMPLE⟩',
-    SECRET '⟨wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY⟩',
-    REGION '⟨us-east-1⟩'
-);
-```
-
-> Tip If you get an IO Error (`Connection error for HTTP HEAD`), configure the endpoint explicitly via `ENDPOINT 's3.⟨your-region⟩.amazonaws.com'`{:.language-sql .highlight}.
-
-Now, to query using the above secret, simply query any `s3://` prefixed file:
-
-```sql
-SELECT *
-FROM 's3://⟨your-bucket⟩/⟨your_file⟩.parquet';
-```
-
-### `credential_chain` Provider
+## `credential_chain` Provider
 
 The `credential_chain` provider allows automatically fetching credentials using mechanisms provided by the AWS SDK. For example, to use the AWS SDK default provider:
 
@@ -61,7 +44,7 @@ CREATE OR REPLACE SECRET secret (
 );
 ```
 
-Again, to query a file using the above secret, simply query any `s3://` prefixed file.
+To query a file using the above secret, simply query any `s3://` prefixed file.
 
 DuckDB also allows specifying a specific chain using the `CHAIN` keyword. This takes a semicolon-separated list (`a;b;c`) of providers that will be tried in order. For example:
 
@@ -81,6 +64,7 @@ The possible values for `CHAIN` are the following:
 * [`env`](https://sdk.amazonaws.com/cpp/api/LATEST/aws-cpp-sdk-core/html/class_aws_1_1_auth_1_1_environment_a_w_s_credentials_provider.html)
 * [`instance`](https://sdk.amazonaws.com/cpp/api/LATEST/aws-cpp-sdk-core/html/class_aws_1_1_auth_1_1_instance_profile_credentials_provider.html)
 * [`process`](https://sdk.amazonaws.com/cpp/api/LATEST/aws-cpp-sdk-core/html/class_aws_1_1_auth_1_1_process_credentials_provider.html)
+* `web_identity` (for [IAM Roles for Service Accounts (IRSA)](https://docs.aws.amazon.com/eks/latest/userguide/iam-roles-for-service-accounts.html); see [Web Identity (IRSA)](#web-identity-irsa))
 
 The `credential_chain` provider also allows overriding the automatically fetched config. For example, to automatically load credentials, and then override the region, run:
 
@@ -91,6 +75,95 @@ CREATE OR REPLACE SECRET secret (
     CHAIN config,
     REGION '⟨eu-west-1⟩'
 );
+```
+
+### Selecting a Profile
+
+To load credentials based on a named profile which is not the default (from the `AWS_PROFILE` environment variable or the default profile based on AWS SDK precedence), use the `PROFILE` parameter:
+
+```sql
+CREATE OR REPLACE SECRET secret (
+    TYPE s3,
+    PROVIDER credential_chain,
+    CHAIN config,
+    PROFILE '⟨my_profile⟩'
+);
+```
+
+This approach is equivalent to the [deprecated S3 API]({% link docs/current/core_extensions/httpfs/s3api_legacy_authentication.md %})'s method `load_aws_credentials('⟨my_profile⟩')`.
+
+### Assuming a Role (STS)
+
+To assume an IAM role, pass its ARN via `ASSUME_ROLE_ARN`. An `EXTERNAL_ID` can be supplied for the role's trust policy:
+
+```sql
+CREATE OR REPLACE SECRET secret (
+    TYPE s3,
+    PROVIDER credential_chain,
+    CHAIN 'sts',
+    ASSUME_ROLE_ARN 'arn:aws:iam::⟨account_id⟩:role/⟨role⟩',
+    EXTERNAL_ID '⟨external_id⟩',
+    REGION '⟨us-east-1⟩'
+);
+```
+
+> The `sts` chain value requires an `ASSUME_ROLE_ARN` value. If the selected profile itself uses STS, use `CHAIN 'config'` instead.
+
+### Web Identity (IRSA)
+
+For [IAM Roles for Service Accounts (IRSA)](https://docs.aws.amazon.com/eks/latest/userguide/iam-roles-for-service-accounts.html) — commonly used on Amazon EKS — use the `web_identity` chain together with a role ARN and a token file. A `SESSION_NAME` can optionally be set:
+
+```sql
+CREATE OR REPLACE SECRET secret (
+    TYPE s3,
+    PROVIDER credential_chain,
+    CHAIN 'web_identity',
+    ASSUME_ROLE_ARN 'arn:aws:iam::⟨account_id⟩:role/⟨role⟩',
+    WEB_IDENTITY_TOKEN_FILE '⟨/var/run/secrets/eks.amazonaws.com/serviceaccount/token⟩'
+);
+```
+
+### Single Sign-On (SSO)
+
+DuckDB can use credentials obtained through [AWS IAM Identity Center (SSO)](https://aws.amazon.com/what-is/sso/). First authenticate on the command line (`aws sso login --profile ⟨my-sso-profile⟩`), then create a secret using the `sso` chain:
+
+```sql
+CREATE OR REPLACE SECRET secret (
+    TYPE s3,
+    PROVIDER credential_chain,
+    CHAIN 'sso',
+    PROFILE '⟨my-sso-profile⟩'
+);
+```
+
+### HTTP Proxy
+
+When credentials must be fetched through an HTTP proxy, configure it on the secret:
+
+```sql
+CREATE OR REPLACE SECRET secret (
+    TYPE s3,
+    PROVIDER credential_chain,
+    HTTP_PROXY '⟨proxy.example.com:8080⟩',
+    HTTP_PROXY_USERNAME '⟨username⟩',
+    HTTP_PROXY_PASSWORD '⟨password⟩'
+);
+```
+
+### Region Resolution
+
+If no region is provided explicitly, DuckDB resolves it from the following sources, in order:
+
+1. The `REGION` secret parameter.
+2. The `s3_region` [setting]({% link docs/current/configuration/overview.md %}) (`SET s3_region = '⟨region⟩'`).
+3. The `AWS_REGION` environment variable.
+4. The `AWS_DEFAULT_REGION` environment variable.
+5. The `region` of the profile in `~/.aws/config`.
+
+If none of these resolve, `CREATE SECRET` still succeeds, but DuckDB logs a warning:
+
+```console
+Set region explicitly using REGION 'us-east-1' in your CREATE SECRET statement, adding a region to your profile in ~/.aws/config or configure the AWS_REGION or AWS_DEFAULT_REGION environment variables.
 ```
 
 ### Validation
@@ -128,9 +201,28 @@ CREATE SECRET env_test (
 );
 ```
 
+> When `CHAIN` is `sts` or `web_identity`, `REFRESH auto` is enabled automatically, since these credentials are short-lived.
+
+## Amazon RDS (IAM Authentication)
+
+The `aws` extension can generate short-lived [IAM authentication tokens](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/UsingWithRDS.IAMDBAuth.html) for connecting to Amazon RDS and Aurora databases, exposed through a secret of type `rds`. It accepts the same [`credential_chain`](#credential_chain-provider) options as an `s3` secret, plus the required `RDS_USER`, `RDS_HOST`, `RDS_PORT`, and `REGION` parameters. Unlike an `s3` secret, an `rds` secret also requires an explicit `CHAIN`:
+
+```sql
+CREATE SECRET aws_rds_secret (
+    TYPE rds,
+    PROVIDER credential_chain,
+    REGION '⟨eu-west-1⟩',
+    RDS_USER '⟨db_user⟩',
+    RDS_HOST '⟨instance⟩.⟨identifier⟩.⟨region⟩.rds.amazonaws.com',
+    RDS_PORT '5432'
+);
+```
+
+> The `rds` secret _type_ is registered by the [`postgres` extension]({% link docs/current/core_extensions/postgres/overview.md %}), not by `aws`, so the `postgres` extension must be installed and loaded before the statement above will run. For the complete end-to-end setup — passing the secret to a connection via `AWS_RDS_SECRET`, attaching, and querying — see the [Amazon RDS with IAM authentication guide]({% link docs/current/guides/database_integration/rds_iam.md %}) or the [Postgres secrets documentation]({% link docs/current/core_extensions/postgres/secrets.md %}#aws-rds-iam-authentication).
+
 ## Legacy Features
 
-> Deprecated The `load_aws_credentials` function is deprecated.
+> Deprecated The `load_aws_credentials` function is deprecated and is removed in later releases. Use a [secret]({% link docs/current/sql/statements/create_secret.md %}) with the [`credential_chain` provider](#credential_chain-provider) instead.
 
 Prior to version 0.10.0, DuckDB did not have a [Secrets manager]({% link docs/current/sql/statements/create_secret.md %}), to load the credentials automatically, the AWS extension provided
 a special function to load the AWS credentials in the [legacy authentication method]({% link docs/current/core_extensions/httpfs/s3api_legacy_authentication.md %}).
@@ -176,32 +268,3 @@ CALL load_aws_credentials('minio-testing-2', set_region = false, redact_secret =
 | loaded_access_key_id | loaded_secret_access_key     | loaded_session_token | loaded_region |
 |----------------------|------------------------------|----------------------|---------------|
 | minio_duckdb_user_2  | minio_duckdb_user_password_2 | NULL                 | NULL          |
-
-### SSO Auth Implementation
-
-Note: none of these methods are able to authenticate when using `aws sso login` to authenticate and get the parameters. A simple workaround is to use AWS' `boto3` to retrieve the credentials and pass this into the DuckDB config.
-Note: the `SESSION_TOKEN` is required for authentication which is not mentioned above.
-
-```python
-import boto3
-import duckdb
-
-session = boto3.Session(profile_name="YOUR_AWS_PROFILE")
-credentials = session.get_credentials()
-
-conn = duckdb.connect()
-conn.query("""
-    INSTALL aws;
-    LOAD aws;
-    INSTALL httpfs;
-    LOAD httpfs;
-    CREATE OR REPLACE SECRET secret (
-        TYPE S3,
-        PROVIDER config,
-        KEY_ID 'crendentials.access_key',
-        SECRET '{credentials.secret_key}',
-        SESSION_TOKEN '{credentials.token}',
-        REGION '{session.region_name}'
-    );
-""")
-```

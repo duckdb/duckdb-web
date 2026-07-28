@@ -154,5 +154,5 @@ marimo provides several features that work well with DuckDB for analytical workf
 ## Next Steps
 
 * Read the [marimo docs](https://docs.marimo.io/).
-* Try the SQL tutorial: `marimo tutorial sql`.
-* The code for this guide is [available on GitHub](https://github.com/marimo-team/marimo/blob/main/examples/sql/duckdb_example.py). Run it with `marimo edit ⟨github_url⟩`.
+* Try the SQL tutorial: `marimo tutorial sql`{:.language-sql .highlight}.
+* The code for this guide is [available on GitHub](https://github.com/marimo-team/marimo/blob/main/examples/sql/duckdb_example.py). Run it with `marimo edit ⟨github_url⟩`{:.language-sql .highlight}.

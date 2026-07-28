@@ -3,7 +3,7 @@ layout: post
 title: "Data Chunk Compaction in Vectorized Execution"
 author: "Yiming Qiao, Huanchen Zhang"
 thumb: "/images/library/thumbs/sigmod.svg"
-image: "/images/library/thumbs/sigmod.png"
+image: "/images/library/thumbs/sigmod.jpg"
 tags: ["Paper"]
 category: community
 excerpt: ""

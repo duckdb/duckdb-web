@@ -77,7 +77,7 @@ con = duckdb.connect(database = "my-db.duckdb", read_only = True)
 con = duckdb.connect(database = ":default:")
 ```
 
-If you want to create a second connection to an existing database, you can use the `cursor()` method. This might be useful for example to allow parallel threads running queries independently. A single connection is thread-safe but is locked for the duration of the queries, effectively serializing database access in this case.
+You can obtain another handle on an existing connection with the `cursor()` method. Note that this creates another handle on the _same_ connection rather than opening a new connection, so cursors created from one connection cannot run queries at the same time. A single connection is thread-safe but is locked for the duration of each query, effectively serializing database access. See [About `cursor()`]({% link docs/current/clients/python/overview.md %}#about-cursor) for details.
 
 Connections are closed implicitly when they go out of scope or if they are explicitly closed using `close()`. Once the last connection to a database instance is closed, the database instance is closed as well.
 

@@ -12,5 +12,3 @@ icalendar
 
 ipython
 black
-
-python-frontmatter

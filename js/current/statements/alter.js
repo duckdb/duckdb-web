@@ -43,7 +43,8 @@ function GenerateAlterTable(options = {}) {
 	return Diagram([
 		AutomaticStack([
 			Keyword("ALTER TABLE"),
-			Expression("table-name"),
+			GenerateIfExists(),
+			GenerateQualifiedTableName(),
 			Choice(0, [
 				Sequence([
 					Keyword("ADD"),

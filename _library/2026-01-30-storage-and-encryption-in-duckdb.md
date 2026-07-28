@@ -5,6 +5,7 @@ author: "Lotte Felius"
 tags: ["Talk"]
 thirdparty: true
 highlighted: true
+category: community
 excerpt: ""
 pill: "DuckDB Developer Meeting #1"
 ---

@@ -8,7 +8,7 @@ excerpt: |
 extension:
   name: se3
   description: Provides SE(3) rigid transformations (combinations of rotations and translations in 3D) as DuckDB scalar functions.
-  version: 0.2.0
+  version: 0.3.2
   language: C++
   build: cmake
   license: MIT
@@ -18,7 +18,7 @@ extension:
     - jokasimr
 repo:
   github: jokasimr/se3
-  ref: v0.2.0
+  ref: v0.3.2
 
 docs:
   hello_world: |
@@ -40,8 +40,8 @@ docs:
 
 extension_star_count: 0
 extension_star_count_pretty: 0
-extension_download_count: 839
-extension_download_count_pretty: 839
+extension_download_count: 1165
+extension_download_count_pretty: 1.2k
 image: '/images/community_extensions/social_preview/preview_community_extension_se3.png'
 layout: community_extension_doc
 ---
@@ -67,31 +67,32 @@ LOAD {{ page.extension.name }};
 
 <div class="extension_functions_table"></div>
 
-|    function_name     | function_type | description | comment | examples |
-|----------------------|---------------|-------------|---------|----------|
-| qconj                | scalar        | NULL        | NULL    |          |
-| qmul                 | scalar        | NULL        | NULL    |          |
-| qnorm2               | scalar        | NULL        | NULL    |          |
-| quat_from_axis_angle | scalar        | NULL        | NULL    |          |
-| se3_apply            | scalar        | NULL        | NULL    |          |
-| se3_compose          | scalar        | NULL        | NULL    |          |
-| se3_from_axis_angle  | scalar        | NULL        | NULL    |          |
-| se3_identity         | scalar        | NULL        | NULL    |          |
-| se3_inv              | scalar        | NULL        | NULL    |          |
-| se3_make             | scalar        | NULL        | NULL    |          |
-| vadd                 | scalar        | NULL        | NULL    |          |
-| vangle               | scalar        | NULL        | NULL    |          |
-| vcos_angle           | scalar        | NULL        | NULL    |          |
-| vcross               | scalar        | NULL        | NULL    |          |
-| vdot                 | scalar        | NULL        | NULL    |          |
-| vnorm                | scalar        | NULL        | NULL    |          |
-| vnorm2               | scalar        | NULL        | NULL    |          |
-| vnormalize           | scalar        | NULL        | NULL    |          |
-| vproj                | scalar        | NULL        | NULL    |          |
-| vrej                 | scalar        | NULL        | NULL    |          |
-| vscale               | scalar        | NULL        | NULL    |          |
-| vsub                 | scalar        | NULL        | NULL    |          |
-| vvec                 | scalar        | NULL        | NULL    |          |
+|    function_name     | function_type |                                                                                                  description                                                                                                   | comment |                                                     examples                                                     |
+|----------------------|---------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|---------|------------------------------------------------------------------------------------------------------------------|
+| qconj                | scalar        | Returns the quaternion conjugate of q.                                                                                                                                                                         | NULL    | [qconj(vvec(1.0, 2.0, 3.0, 4.0))]                                                                                |
+| qmul                 | scalar        | Multiplies quaternions qA and qB.                                                                                                                                                                              | NULL    | [qmul(quat_from_axis_angle(vvec(0.0, 0.0, 1.0), pi()/2.0), quat_from_axis_angle(vvec(0.0, 1.0, 0.0), pi()/2.0))] |
+| qnorm2               | scalar        | Returns the squared norm of quaternion q.                                                                                                                                                                      | NULL    | [qnorm2(quat_from_axis_angle(vvec(0.0, 0.0, 1.0), pi()/2.0))]                                                    |
+| quat_from_axis_angle | scalar        | Constructs a unit quaternion from axis and angle in radians. Returns NULL for a zero-length axis.                                                                                                              | NULL    | [quat_from_axis_angle(vvec(0.0, 0.0, 1.0), pi()/2.0)]                                                            |
+| se3_apply            | scalar        | Applies transformation W to point p. W can be a full transformation struct, a vec3 representing only the translation part, or a quat representing only the rotation part.                                      | NULL    | [se3_apply(se3_identity(), vvec(1.0, 2.0, 3.0))]                                                                 |
+| se3_compose          | scalar        | Composes two transformations, applying W1 first and then W2. W1 and W2 can each be a full transformation struct, a vec3 representing only the translation part, or a quat representing only the rotation part. | NULL    | [se3_compose(se3_identity(), se3_identity())]                                                                    |
+| se3_from_axis_angle  | scalar        | Constructs a transform from translation t and an axis-angle rotation. Returns NULL for a zero-length axis.                                                                                                     | NULL    | [se3_from_axis_angle(vvec(1.0, 0.0, 0.0), vvec(0.0, 0.0, 1.0), pi()/2.0)]                                        |
+| se3_identity         | scalar        | Returns the identity transform.                                                                                                                                                                                | NULL    | [se3_identity()]                                                                                                 |
+| se3_inv              | scalar        | Returns the inverse transformation of W. W can be a full transformation struct, a vec3 representing only the translation part, or a quat representing only the rotation part.                                  | NULL    | [se3_inv(se3_identity())]                                                                                        |
+| se3_make             | scalar        | Constructs a transform from translation t and quaternion q.                                                                                                                                                    | NULL    | [se3_make(vvec(1.0, 2.0, 3.0), quat_from_axis_angle(vvec(0.0, 0.0, 1.0), pi()/2.0))]                             |
+| vadd                 | scalar        | Returns the element-wise sum of a and b.                                                                                                                                                                       | NULL    | [vadd(vvec(1.0, 2.0, 3.0), vvec(4.0, 5.0, 6.0))]                                                                 |
+| vangle               | scalar        | Returns the angle in radians between a and b.                                                                                                                                                                  | NULL    | [vangle(vvec(1.0, 0.0, 0.0), vvec(0.0, 1.0, 0.0))]                                                               |
+| vcos_angle           | scalar        | Returns vdot(a, b) / (vnorm(a) * vnorm(b)) without clamping.                                                                                                                                                   | NULL    | [vcos_angle(vvec(1.0, 0.0, 0.0), vvec(0.0, 1.0, 0.0))]                                                           |
+| vcross               | scalar        | Returns the 3D cross product of a and b.                                                                                                                                                                       | NULL    | [vcross(vvec(1.0, 0.0, 0.0), vvec(0.0, 1.0, 0.0))]                                                               |
+| vdot                 | scalar        | Returns the dot product of a and b.                                                                                                                                                                            | NULL    | [vdot(vvec(1.0, 2.0, 3.0), vvec(4.0, 5.0, 6.0))]                                                                 |
+| vnorm                | scalar        | Returns the Euclidean norm of v.                                                                                                                                                                               | NULL    | [vnorm(vvec(1.0, 2.0, 3.0))]                                                                                     |
+| vnorm2               | scalar        | Returns the squared Euclidean norm of v.                                                                                                                                                                       | NULL    | [vnorm2(vvec(1.0, 2.0, 3.0))]                                                                                    |
+| vnormalize           | scalar        | Returns v divided by its Euclidean norm.                                                                                                                                                                       | NULL    | [vnormalize(vvec(1.0, 2.0, 3.0))]                                                                                |
+| vproj                | scalar        | Returns the projection of a onto b.                                                                                                                                                                            | NULL    | [vproj(vvec(2.0, 2.0, 0.0), vvec(1.0, 0.0, 0.0))]                                                                |
+| vrej                 | scalar        | Returns the rejection of a from b.                                                                                                                                                                             | NULL    | [vrej(vvec(2.0, 2.0, 0.0), vvec(1.0, 0.0, 0.0))]                                                                 |
+| vscale               | scalar        | Scales vector v by scalar s.                                                                                                                                                                                   | NULL    | [vscale(vvec(1.0, 2.0, 3.0), 2.0)]                                                                               |
+| vsub                 | scalar        | Returns the element-wise difference a - b.                                                                                                                                                                     | NULL    | [vsub(vvec(4.0, 5.0, 6.0), vvec(1.0, 2.0, 3.0))]                                                                 |
+| vvec                 | scalar        | Creates a vec3 from x, y, and z components.                                                                                                                                                                    | NULL    | [vvec(1.0, 2.0, 3.0)]                                                                                            |
+| vvec                 | scalar        | Creates a vec4 from w, x, y, and z components.                                                                                                                                                                 | NULL    | [vvec(1.0, 2.0, 3.0, 4.0)]                                                                                       |
 
 ### Overloaded Functions
 

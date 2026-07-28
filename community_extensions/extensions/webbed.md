@@ -8,18 +8,21 @@ excerpt: |
 extension:
   name: webbed
   description: Comprehensive processing extension for web markup languages (XML and HTML) with SAX streaming for large files, intelligent schema inference, XPath-based data extraction, and HTML table parsing.
-  version: 2.0.0
+  version: 2.6.0
   language: C++
   build: cmake
   license: MIT
   requires_toolchains: vcpkg
+  # Windows included since v2.4.0: DuckDB v1.5.4's vendored fmt no longer uses the removed
+  # MSVC STL API (the old compile blocker), and the extension builds and passes tests on the
+  # windows_amd64 MSVC runner in CI.
   maintainers:
     - teaguesterling
   vcpkg_commit: 68a1c387f660632f2f65cdb7e8cd093a08840e5d
 repo:
   github: teaguesterling/duckdb_webbed
-  andium: 9e5b67fb362d023c228a1793e4784d67466faf6e
-  ref: 9e5b67fb362d023c228a1793e4784d67466faf6e
+  andium: ddda30f11352138b2451657419640370d1612137
+  ref: a8c75aa6853069436a25c71d05bff3ab66f5e1e7
 docs:
   docs_url: https://duckdb-webbed.readthedocs.io
   hello_world: |
@@ -92,12 +95,12 @@ docs:
 
     See https://duckdb-webbed.readthedocs.io for comprehensive documentation and examples.
 
-    Built on libxml2 for robust, standards-compliant parsing with comprehensive error handling and memory-safe RAII implementation. 68 test suites with 2511 assertions, including DOM/SAX equivalence testing. The extension supports mixed file systems, configurable schema inference, and efficient processing of large document collections.
+    Built on libxml2 for robust, standards-compliant parsing with comprehensive error handling and memory-safe RAII implementation. 91 test suites with 3011 assertions, including DOM/SAX equivalence, adversarial/security, and multi-file parallelism testing. The extension supports mixed file systems, configurable schema inference, and efficient processing of large document collections.
 
-extension_star_count: 51
-extension_star_count_pretty: 51
-extension_download_count: 5934
-extension_download_count_pretty: 5.9k
+extension_star_count: 67
+extension_star_count_pretty: 67
+extension_download_count: 18998
+extension_download_count_pretty: 19.0k
 image: '/images/community_extensions/social_preview/preview_community_extension_webbed.png'
 layout: community_extension_doc
 ---
@@ -163,6 +166,7 @@ LOAD {{ page.extension.name }};
 | xml_minify                     | scalar        | NULL        | NULL    |          |
 | xml_mock_namespaces            | scalar        | NULL        | NULL    |          |
 | xml_namespaces                 | scalar        | NULL        | NULL    |          |
+| xml_oom_selftest               | scalar        | NULL        | NULL    |          |
 | xml_pretty_print               | scalar        | NULL        | NULL    |          |
 | xml_stats                      | scalar        | NULL        | NULL    |          |
 | xml_to_json                    | scalar        | NULL        | NULL    |          |

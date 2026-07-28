@@ -207,9 +207,7 @@ def highlight_function_prototype(function_prototype, function_name):
         result += function_prototype[start:end]
         last_pos = end
     if last_pos < len(function_prototype):
-        result += process_function_part(
-            function_prototype[last_pos:start], function_name
-        )
+        result += process_function_part(function_prototype[last_pos:], function_name)
     return result
 
 
@@ -360,7 +358,7 @@ total_quick_docs = ''
 total_docs = ""
 for entry in documentation_list:
     group_name = entry[1]
-    if group_name is not current_group_name:
+    if group_name != current_group_name:
         if current_group_name is not None:
             total_quick_docs += quick_docs_end() + '\n'
 

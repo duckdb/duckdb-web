@@ -163,7 +163,7 @@ body.landing section.about-cards{
 		display: grid;
 		grid-template-columns: repeat(4, 1fr);
 		border: 1px solid var(--main-infobox-labs-border-color, rgba(51, 51, 51, 0.60));
-		border-radius: var(--border-radius-box);
+		border-radius: var(--page-radius-box);
 		overflow: hidden;
 
 		.logo-cell{
@@ -231,7 +231,7 @@ section#jobs{
 	.jobs_collection{
 		margin: 0 auto;
 		margin-top: 50px;
-		border-radius: var(--border-radius-box);
+		border-radius: var(--page-radius-box);
 		border: 1px solid var(--doc-codebox-border-color, #E6E6E6);
 		background: var(--main-codebox-main-background-color, rgba(250, 250, 250, 0.60));
 		box-shadow: 0px 0px 21px 0px rgba(255, 105, 0, 0.12);
@@ -289,7 +289,7 @@ section.support{
 			border: 1px solid var(--main-infobox-border-color, rgba(212, 204, 255, 0.60));
 			background: var(--main-infobox-background-color, rgba(246, 245, 255, 0.60));
 			backdrop-filter: blur(7px);
-			border-radius: var(--border-radius-box);
+			border-radius: var(--page-radius-box);
 			padding: 30px 20px;
 			flex-direction: column;
 			align-items: flex-start;
@@ -383,7 +383,7 @@ main.job_template{
 	}
 	.applyform{
 		width: calc(50% - 24px);
-		border-radius: var(--border-radius-box);
+		border-radius: var(--page-radius-box);
 		border: 1px solid var(--doc-codebox-border-color, #333);
 		background: var(--doc-codebox-background-color, #1A1A1A);
 		backdrop-filter: blur(7px);
@@ -607,4 +607,12 @@ html.darkmode {
 .post-list .newstiles .postpreview.external-post{
 	//border: 1px solid var(--main-marker-border-color, #FFF100);
 	border: 1px solid var(--main-blogpost-border-color, #F2F2F2);
+}
+
+
+:root,
+html.darkmode {
+	--duckdb-nav-icon: var(--labs-nav-icon);
+	--duckdb-nav-icon-hover: var(--labs-nav-icon-hover);
+	--main-link-hover-color: var(--labs-nav-icon);
 }

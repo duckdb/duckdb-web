@@ -12,8 +12,7 @@ body.documentation main .wrap.frequentlyaskedquestions{
 		position: relative;
 		margin: 0;
 		padding-right: 55px;
-		&::after{
-			content: " ";
+		.faq-icon{
 			background-color: var(--doc-codebox-button-background-color, #E6E6E6);
 			width: 30px;
 			height: 30px;
@@ -22,26 +21,26 @@ body.documentation main .wrap.frequentlyaskedquestions{
 			right: 0px;
 			top: -5px;
 			cursor: pointer;
-		}
-		&::before{
-			content: " ";
-			mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' fill='none' viewBox='0 0 14 14'%3E%3Cpath stroke='%23000' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.35' d='m2.102 5.05 4.9 4.9 4.9-4.9'/%3E%3C/svg%3E");
-			mask-size: contain;
-			mask-position: center center;
-			mask-repeat: no-repeat;
-			background-color: var(--main-text-primary-color, #0D0D0D);
-			width: 14px;
-			height: 14px;
-			position: absolute;
-			right: 8px;
-			top: 3px;
-			z-index: 1;
-			-webkit-transition: -webkit-transform .3s;
-			transition: -webkit-transform .3s;
-			-o-transition: transform .3s;
-			transition: transform .3s;
-			transition: transform .3s, -webkit-transform .3s;
-			cursor: pointer;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			-webkit-transition: background-color .3s;
+			-o-transition: background-color .3s;
+			transition: background-color .3s;
+			svg.icon{
+				width: 18px;
+				height: 18px;
+				stroke-width: 2;
+				color: var(--main-text-primary-color, #0D0D0D);
+				-webkit-transition: -webkit-transform .3s;
+				transition: -webkit-transform .3s;
+				-o-transition: transform .3s;
+				transition: transform .3s;
+				transition: transform .3s, -webkit-transform .3s;
+			}
+			&:hover{
+				background-color: var(--doc-codebox-button-background-color-hover, #b2b2b299);
+			}
 		}
 		a:hover{
 			background-color: transparent;
@@ -54,12 +53,12 @@ body.documentation main .wrap.frequentlyaskedquestions{
 		-o-transition: background-color .3s;
 		transition: background-color .3s;
 		margin-bottom: 10px;
-		border-radius: var(--border-radius-box);
+		border-radius: var(--page-radius-m);
 		border: 1px solid transparent;
 		-webkit-transition: border .3s;
 		-o-transition: border .3s;
 		transition: border .3s;
-		&.open h3::before{
+		&.open h3 .faq-icon svg.icon{
 			-webkit-transform: rotate(180deg);
 				-ms-transform: rotate(180deg);
 					transform: rotate(180deg);
@@ -76,13 +75,18 @@ body.documentation main .wrap.frequentlyaskedquestions{
 			margin-top: 0;
 		}
 		a{
-			color: inherit;
+			color: var(--main-text-primary-color, #0D0D0D);
 			text-decoration: underline;
-			-webkit-transition: color .3s;
-			-o-transition: color .3s;
-			transition: color .3s;
+			text-decoration-color: var(--main-text-tertiary-color, #B2B2B2);
+			text-decoration-thickness: 1px;
+			text-underline-offset: 0.2em;
+			-webkit-transition: color .3s, text-decoration-color .3s;
+			-o-transition: color .3s, text-decoration-color .3s;
+			transition: color .3s, text-decoration-color .3s;
 			&:hover{
-				color: $blue;
+				color: var(--main-link-hover-color, #998B00);
+				text-decoration-color: var(--main-link-hover-color, #998B00);
+				text-decoration-thickness: 1px;
 				cursor: pointer;
 			}
 		}

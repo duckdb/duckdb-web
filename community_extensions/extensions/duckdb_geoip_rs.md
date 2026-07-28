@@ -8,7 +8,7 @@ excerpt: |
 extension:
   name: duckdb_geoip_rs
   description: Retrieve geo ip data from MMDB database
-  version: 0.2.1
+  version: 0.2.3
   language: Rust
   build: cmake
   license: MIT
@@ -19,7 +19,7 @@ extension:
 
 repo:
   github: william-billaud/duckdb-geoip-rs
-  ref: 73681891f4f1de1df0fc892f4dfc6cf3c69eb2b9
+  ref: 1c760bb105ff53a0e617306139b2307d92eb1f42
 
 docs:
   hello_world: |
@@ -39,11 +39,11 @@ docs:
     │     ip     │ geoip_asn_org(ip) │ geoip_asn_num(ip) │ geoip_city(ip) │ geoip_country_iso(ip) │
     │  varchar   │      varchar      │      varchar      │    varchar     │        varchar        │
     ├────────────┼───────────────────┼───────────────────┼────────────────┼───────────────────────┤
-    │ 1.1.1.1    │ CLOUDFLARENET     │ 13335             │                │                       │
-    │ 8.8.8.8    │ GOOGLE            │ 15169             │                │ US                    │
-    │ 80.8.8.8   │ Orange            │ 3215              │                │ RE                    │
+    │ 1.1.1.1    │ Cloudflare, Inc.  │ 13335             │                │ AU                    │
+    │ 8.8.8.8    │ Google LLC        │ 15169             │                │ US                    │
+    │ 80.8.8.8   │ Orange            │ 3215              │ Le Tampon      │ RE                    │
     │ 90.9.250.1 │ Orange            │ 3215              │ Lyon           │ FR                    │
-    │ not_anip   │                   │                   │                │                       │
+    │ not_anip   │ NULL              │ NULL              │ NULL           │ NULL                  │
     └────────────┴───────────────────┴───────────────────┴────────────────┴───────────────────────┘
   extended_description: |
     Path to a directory containing GeoLite2-City.mmdb and GeoLite2-ASN.mmdb files must be exported to MAXMIND_MMDB_DIR environment variable. Defaulting to /usr/share/GeoIP.
@@ -57,10 +57,10 @@ docs:
 
     All the function will return an empty value on empty/non found value
 
-extension_star_count: 5
-extension_star_count_pretty: 5
-extension_download_count: 828
-extension_download_count_pretty: 828
+extension_star_count: 7
+extension_star_count_pretty: 7
+extension_download_count: 1083
+extension_download_count_pretty: 1.1k
 image: '/images/community_extensions/social_preview/preview_community_extension_duckdb_geoip_rs.png'
 layout: community_extension_doc
 ---

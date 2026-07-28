@@ -24,6 +24,9 @@ body.installation{
 	}
 	
 	.selection-head{
+		-webkit-user-select: none;
+		user-select: none;
+
 		h3{
 			@include title-1;
 			cursor: pointer;
@@ -34,36 +37,35 @@ body.installation{
 				@include label-1;
 				margin-left: 20px;
 			}
-			&::after{
-				content: " ";
+			.foldout-icon{
 				background-color: var(--doc-codebox-button-background-color, #E6E6E6);
 				width: 30px;
 				height: 30px;
 				border-radius: 50%;
 				position: absolute;
-				right: 0px;
-				top: -5px;
+				right: -6px;
+				top: -6px;
 				cursor: pointer;
-			}
-			&::before{
-				content: " ";
-				mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' fill='none' viewBox='0 0 14 14'%3E%3Cpath stroke='%23000' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.35' d='m2.102 5.05 4.9 4.9 4.9-4.9'/%3E%3C/svg%3E");
-				mask-size: contain;
-				mask-position: center center;
-				mask-repeat: no-repeat;
-				background-color: var(--main-text-primary-color, #0D0D0D);
-				width: 14px;
-				height: 14px;
-				position: absolute;
-				right: 8px;
-				top: 3px;
-				z-index: 1;
-				-webkit-transition: -webkit-transform .3s;
-				transition: -webkit-transform .3s;
-				-o-transition: transform .3s;
-				transition: transform .3s;
-				transition: transform .3s, -webkit-transform .3s;
-				cursor: pointer;
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				-webkit-transition: background-color .3s;
+				-o-transition: background-color .3s;
+				transition: background-color .3s;
+				svg.icon{
+					width: 18px;
+					height: 18px;
+					stroke-width: 2;
+					color: var(--main-text-primary-color, #0D0D0D);
+					-webkit-transition: -webkit-transform .3s;
+					transition: -webkit-transform .3s;
+					-o-transition: transform .3s;
+					transition: transform .3s;
+					transition: transform .3s, -webkit-transform .3s;
+				}
+				&:hover{
+					background-color: var(--doc-codebox-button-background-color-hover, #b2b2b299);
+				}
 			}
 		}
 		
@@ -78,13 +80,13 @@ body.installation{
 		-o-transition: background-color .3s;
 		transition: background-color .3s;
 		margin-bottom: 8px;
-		border-radius: var(--border-radius-box);
+		border-radius: var(--page-radius-m);
 		border: 1px solid transparent;
 		-webkit-transition: border .3s;
 		-o-transition: border .3s;
 		transition: border .3s;
 
-		&.open h3::before{
+		&.open h3 .foldout-icon svg.icon{
 			-webkit-transform: rotate(180deg);
 				-ms-transform: rotate(180deg);
 					transform: rotate(180deg);
@@ -110,10 +112,6 @@ body.installation{
 	}
 	.selection-foldout:not(.open) .selection-content{
 		display: none;
-		max-width: calc(100% - 55px);
-		>p:first-child{
-			margin-top: 0;
-		}
 	}
 	
 	.selection-head + .selection-content{
@@ -124,7 +122,7 @@ body.installation{
 		display: flex;
 		flex-wrap: wrap;
 		justify-content: flex-start;
-		gap: 8px;
+		gap: 12px;
 		
 		a.option{
 			text-decoration: none;
@@ -133,26 +131,25 @@ body.installation{
 		}
 
 		.option{
-			border-radius: var(--border-radius-box);
-			border: 1px solid var(--interactive-folderbox-border-color, #E6E6E6);
-			background: var(--interactive-folderbox-background-color, rgba(250, 250, 250, 0.60));
+			border-radius: var(--page-radius-box-inner);
 			display: flex;
-			gap: 10px;
-			height: 60px;
-			padding: 10px;
+			gap: 6px;
+			height: 50px;
+			padding: 5px 15px 5px 5px;
 			align-items: center;
 			cursor: pointer;
 			z-index: 4;
-			transition: all .3s;
+			transition: background-color .3s;
+			border: 1px solid transparent;
 			
 			.label{
 				@include label-1;
 			}
 			
 			.symbol {
-				border-radius: 10px;
+				border-radius: var(--page-radius-box-inner);
 				border: 1px solid var(--interactive-folderbox-border-color, #E6E6E6);
-				background: var(--interactive-installation-icon-background, rgba(230, 230, 230, 0.60));
+				background: var(--interactive-folderbox-background-color, rgba(250, 250, 250, 0.60));
 				display: block;
 				flex-shrink: 0;
 				width: 40px;
@@ -176,26 +173,22 @@ body.installation{
 			}
 
 			&:hover{
-				border: 1px solid var(--interactive-folderbox-border-color-hover, #CCC);
-				background: var(--interactive-folderbox-background-color-hover, rgba(242, 242, 242, 0.60));
-				.symbol{
-					border: 1px solid var(--interactive-folderbox-border-color-hover, #CCC);
-					background: var(--interactive-installation-icon-background, rgba(230, 230, 230, 0.60));
-				}
+				background: var(--menu-dropdown-item-background-hover, #E6E6E6);
+				border: 1px solid var(--menu-dropdown-item-background-hover);
 			}
 
 			&:focus-visible{
 				outline: none;
 			}
 		}
-		
+
 		.option.active{
-			border: 1px solid var(--interactive-installation-box-border, #BEB3FF);
-			background: var(--interactive-installation-box-background, #E9E5FF);
-			
+			background: var(--interactive-installation-box-background);
+			border: 1px solid var(--interactive-installation-box-border);
+
 			.symbol{
-				border: 1px solid var(--interactive-installation-box-border, #BEB3FF);
-				background: var(--interactive-installation-icon-background-selected, #D4CCFF);
+				border: 1px solid var(--interactive-installation-box-border);
+				background: var(--interactive-installation-icon-background-selected);
 			}
 		}
 	}
@@ -233,7 +226,7 @@ body.installation{
 			position: relative;
 			background: var(--interactive-filterbox-background-color, #FAFAFA);
 			border: 1px solid var(--interactive-filterbox-border-color, #E6E6E6);
-			border-radius: 50px;
+			border-radius: var(--page-radius-pill);
 			padding: 4px;
 		}
 
@@ -243,7 +236,7 @@ body.installation{
 			background: none;
 			border: none;
 			padding: 8px 14px;
-			border-radius: 50px;
+			border-radius: var(--page-radius-pill);
 			cursor: pointer;
 			@include label-1;
 			font-weight: 500;
@@ -271,7 +264,7 @@ body.installation{
 			top: 4px;
 			left: 4px;
 			height: calc(100% - 8px);
-			border-radius: 50px;
+			border-radius: var(--page-radius-pill);
 			background: var(--interactive-filter-selected-background-color, #E6E6E6);
 			transition: transform 0.3s ease, width 0.3s ease;
 			pointer-events: none;
@@ -324,7 +317,7 @@ body.installation{
 				text-decoration: none;
 				
 				border: 1px solid var(--interactive-folderbox-border-color, #E6E6E6);
-				border-radius: 50px;
+				border-radius: var(--page-radius-pill);
 				padding: 12px 20px;
 				transition: border .3s;
 				
@@ -348,7 +341,7 @@ body.installation{
 				text-decoration: none;
 				
 				border: 1px solid var(--interactive-folderbox-border-color, #E6E6E6);
-				border-radius: 50px;
+				border-radius: var(--page-radius-pill);
 				padding: 12px 20px;
 				transition: border .3s;
 				
@@ -373,7 +366,7 @@ body.installation{
 		code,
 		pre {
 			@include code-standard;
-			border-radius: 2px;
+			border-radius: var(--page-radius-xs);
 			font-family: $fontMono;
 			padding: 1px 0;
 			margin: 0;
@@ -384,7 +377,7 @@ body.installation{
 		pre {
 			padding: 16px; /* instead of 10px */
 			overflow: auto;
-			border-radius: var(--border-radius-box);
+			border-radius: var(--page-radius-box);
 			background: var(--doc-codebox-background-color, #F2F2F2);
 			white-space: pre;
 			overflow-x: auto;
@@ -426,7 +419,7 @@ body.installation{
 			border: 1px solid var(--doc-codebox-border-color, #E6E6E6);
 			background: var(--doc-codebox-background-color, #F2F2F2);
 			font-family: $fontMonoMedium;
-			border-radius: 3px;
+			border-radius: var(--page-radius-xs);
 			padding: 0 2px;
 			margin: 0;
 		
@@ -439,7 +432,7 @@ body.installation{
 		figure.highlight {
 			width: 100%;
 			position: relative;
-			border-radius: var(--border-radius-box);
+			border-radius: var(--page-radius-box);
 			overflow: hidden;
 			transition: border-color 0.3s;
 			background: var(--doc-codebox-background-color, #F2F2F2);
@@ -500,7 +493,7 @@ body.installation{
 	.yourselection{
 		position: relative;
 		border: 1px solid var(--doc-codebox-border-color, #E6E6E6);;
-		border-radius: var(--border-radius-box);
+		border-radius: var(--page-radius-box);
 		margin-top: 25px;
 		.select.hide {
 			opacity: 0.4;
@@ -569,7 +562,7 @@ body.installation{
 				border: 1px solid transparent;
 				background-color: transparent;
 				color: var(--interactive-filter-unselected-text-color, #666);
-				border-radius: 50px;
+				border-radius: var(--page-radius-pill);
 				font-weight: 500;
 				@include label-1();
 				cursor: pointer;
@@ -628,7 +621,7 @@ body.installation{
 		.result{
 			@include code-standard();
 			padding: 12px 12px 14px 14px;
-			border-radius: var(--border-radius-box);
+			border-radius: var(--page-radius-box);
 			border: 1px solid var(--doc-codebox-border-color, #E6E6E6);
 			background: var(--doc-codebox-background-color, #F2F2F2);
 			position: relative;
@@ -648,7 +641,7 @@ body.installation{
 	}
 	.sha256_btn,
 	.sha512_btn{
-		border-radius: 40px;
+		border-radius: var(--page-radius-pill);
 		border: 1px solid var(--doc-codebox-border-color, #E6E6E6);
 		background: var(--main-codebox-sub-background-color, rgba(230, 230, 230, 0.60));
 		cursor: pointer;
@@ -693,7 +686,7 @@ body.installation{
 		display: none;
 	}
 	.wrap a.sha512{
-		border-radius: 50px;
+		border-radius: var(--page-radius-pill);
 		background-color: $black300;
 		border: 1px solid $black400;
 		text-decoration: none;
@@ -740,7 +733,7 @@ a.download-btn{
 	width: fit-content;
 	gap: 10px;
 	padding: 10px 15px 10px 10px;
-	border-radius: var(--border-radius-box);
+	border-radius: var(--page-radius-box);
 	border: 1px solid var(--interactive-folderbox-border-color, #E6E6E6);
 	background: var(--interactive-folderbox-background-color, rgba(250, 250, 250, 0.60));
 	transition: all .3s;
@@ -749,7 +742,7 @@ a.download-btn{
 	@include label-1;
 	
 	&:before{
-		border-radius: 10px;
+		border-radius: var(--page-radius-box-inner);
 		border: 1px solid var(--interactive-folderbox-border-color, #E6E6E6);
 		background-color: var(--interactive-installation-icon-background, rgba(230, 230, 230, 0.60));
 		background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='18' height='18' fill='none' viewBox='0 0 18 18'%3E%3Cpath fill='%231A1A1A' d='M9.92.646v8.898l3.217-3.249 1.3 1.313L9 13.098l-5.437-5.49 1.3-1.313 3.218 3.25v-8.9h1.838Zm-7.816 10.21v4.642h13.792v-4.641h1.838v6.498H.267v-6.498h1.838Z'/%3E%3C/svg%3E");

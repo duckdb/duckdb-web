@@ -8,7 +8,7 @@ excerpt: |
 extension:
   name: flock
   description: LLM & RAG extension to combine analytics and semantic analysis
-  version: 0.7.0
+  version: 0.8.0
   language: SQL & C++
   build: cmake
   license: MIT
@@ -17,10 +17,11 @@ extension:
   maintainers:
     - anasdorbani
     - queryproc
+    - iZarrios
 
 repo:
   github: dais-polymtl/flock
-  ref: ed1ee543ba6831fc6ea1de5aa9fc0b6c81dceca1
+  ref: 8d2023062ddd116edce9d0b670a5770f8e8d1690
 
 docs:
   hello_world: |
@@ -48,7 +49,7 @@ docs:
     -- Create a variable name for the model to do the summarizing
     D CREATE MODEL('summarizer-model', 'gpt-4o', 'openai');
 
-    -- Summarize text and pass it as parameter 
+    -- Summarize text and pass it as parameter
     D SELECT llm_complete({'model_name': 'summarizer-model'}, {'prompt_name': 'summarize','context_columns': [{'data': 'We support more functions and approaches to combine relational analytics and semantic analysis. Check our repo for documentation and examples.'}}]);
 
   extended_description: |
@@ -56,16 +57,14 @@ docs:
 
     It introduces `MODEL` and `PROMPT` objects as first-class SQL entities, making it easy to define, manage, and reuse LLM interactions. Core functions like `llm_complete`, `llm_filter`, and `llm_rerank` allow you to perform generation, semantic filtering, and ranking—all from SQL.
 
-    Flock is designed for rapid prototyping of LLM-based analytics and is optimized with batching and caching features for better performance.
-
     📄 For more details and examples, see the [Flock documentation](https://dais-polymtl.github.io/flock/docs/what-is-flock).
 
-    > *Note:* Flock is part of ongoing research by the [Data & AI Systems (DAIS) Laboratory @ Polytechnique Montréal](https://dais-polymtl.github.io/). It is under active development, and some features may evolve. Feedback and contributions are welcome!
+    > *Note:* Flock is part of ongoing research by the [Data & AI Systems (DAIS) Laboratory @ Polytechnique Montréal](https://github.com/dais-polymtl). It is under active development, and some features may evolve. Feedback and contributions are welcome!
 
-extension_star_count: 338
-extension_star_count_pretty: 338
-extension_download_count: 751
-extension_download_count_pretty: 751
+extension_star_count: 351
+extension_star_count_pretty: 351
+extension_download_count: 1134
+extension_download_count_pretty: 1.1k
 image: '/images/community_extensions/social_preview/preview_community_extension_flock.png'
 layout: community_extension_doc
 ---

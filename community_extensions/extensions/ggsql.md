@@ -8,7 +8,7 @@ excerpt: |
 extension:
   name: ggsql
   description: Bindings to ggsql — Grammar of Graphics based visualizations in SQL
-  version: 0.3.1
+  version: 0.4.1
   language: C++
   build: cmake
   license: MIT
@@ -20,7 +20,7 @@ extension:
   excluded_platforms: "wasm_mvp;wasm_eh;wasm_threads"
 repo:
   github: posit-dev/ggsql-duckdb
-  ref: b58100459367e59c2933cbbb4aa8a2c7ac0e0283
+  ref: 90bb61fe551a68fdb6139504a599f3d18954172b
 docs:
   hello_world: |
     SELECT 1 AS x, 2 AS y VISUALISE x, y DRAW point;
@@ -31,10 +31,10 @@ docs:
     The session setting `ggsql_output` switches to returning a URL, the raw
     vega-lite spec, or a self-contained HTML document instead.
 
-extension_star_count: 7
-extension_star_count_pretty: 7
-extension_download_count: 489
-extension_download_count_pretty: 489
+extension_star_count: 25
+extension_star_count_pretty: 25
+extension_download_count: 888
+extension_download_count_pretty: 888
 image: '/images/community_extensions/social_preview/preview_community_extension_ggsql.png'
 layout: community_extension_doc
 ---

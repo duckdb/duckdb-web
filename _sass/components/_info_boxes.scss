@@ -5,7 +5,7 @@
 body.documentation #main_content_wrap,
 div.singleentry {
 	blockquote {
-		border-radius: var(--border-radius-box);
+		border-radius: var(--page-radius-m);
 		margin: 0;
 		padding: 0px;
 		background: var(--doc-codebox-background-color, #F2F2F2);
@@ -57,8 +57,8 @@ div.singleentry {
 			background-color: var(--doc-box-note, #999);
 			background-repeat: no-repeat;
 			background-position: center 13px;
-			border-top-left-radius: var(--border-radius-box);
-			border-bottom-left-radius: var(--border-radius-box);
+			border-top-left-radius: var(--page-radius-m);
+			border-bottom-left-radius: var(--page-radius-m);
 			@media screen and (max-width: 992px) {
 				width: 35px;
 				background-size: 50%;

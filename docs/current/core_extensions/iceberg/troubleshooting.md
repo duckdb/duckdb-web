@@ -7,10 +7,6 @@ redirect_from:
 title: Troubleshooting
 ---
 
-## Limitations
-
-* Reading tables with deletes is not yet supported.
-
 ## Curl Request Fails
 
 ### Problem

@@ -15,12 +15,14 @@ Tertiary clients come without any support guarantees.
 | [Common Lisp](https://github.com/ak-coram/cl-duckdb)               | [ak-coram](https://github.com/ak-coram)               |
 | [Crystal](https://github.com/amauryt/crystal-duckdb)               | [amauryt](https://github.com/amauryt)                 |
 | [Dart]({% link docs/current/clients/tertiary_clients/dart.md %})   | [TigerEye](https://www.tigereye.com/)                 |
-| [Elixir](https://github.com/AlexR2D2/duckdbex)                     | [AlexR2D2](https://github.com/AlexR2D2/duckdbex)      |
+| [Elixir (Duckdbex)](https://github.com/AlexR2D2/duckdbex)          | [AlexR2D2](https://github.com/AlexR2D2/duckdbex)      |
+| [Elixir (QuackDB)](https://github.com/elixir-vibe/quackdb)         | [Danila Poyarkov](https://github.com/dannote)         |
 | [Erlang](https://github.com/mmzeeman/educkdb)                      | [MM Zeeman](https://github.com/mmzeeman)              |
 | [Haskell](https://github.com/tritlo/duckdb-haskell)                | [Tritlo](https://github.com/tritlo)                   |
 | [Julia]({% link docs/current/clients/tertiary_clients/julia.md %}) | The DuckDB team                                       |
 | [Perl](https://metacpan.org/pod/DBD::DuckDB)                       | [Giuseppe Di Terlizzi](https://github.com/giterlizzi) |
 | [PHP]({% link docs/current/clients/tertiary_clients/php.md %})     | [satur-io](https://github.com/satur-io/duckdb-php)    |
+| [PHP (PDO)]({% link docs/current/clients/tertiary_clients/php_pdo.md %}) | [Thomas Bley](https://github.com/thomas-0816)   |
 | [Pyodide](https://github.com/duckdb/duckdb-pyodide)                | The DuckDB team                                       |
 | [Raku](https://raku.land/zef:bduggan/Duckie)                       | [bduggan](https://github.com/bduggan)                 |
 | [Ruby](https://suketa.github.io/ruby-duckdb/)                      | [suketa](https://github.com/suketa)                   |

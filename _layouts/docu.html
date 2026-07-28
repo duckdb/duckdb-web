@@ -83,7 +83,7 @@ Page URL: <https://duckdb.org{{ page.url }}>
 				<div class="options">
 					<div class="opensearch">
 						<svg class="icon"><use href="#search-md"></use></svg>
-						<span class="mac shortcut">⌘+k</span>
+						<span class="mac shortcut">⌘K</span>
 						<span class="win shortcut">ctrl+k</span>
 					</div>
 					
@@ -94,15 +94,18 @@ Page URL: <https://duckdb.org{{ page.url }}>
 
 					<div class="versionselect">
 						<div class="version">
+							{% assign version_viewed_suffix = "" %}
 							{% if version_viewed == "current" %}
-								{% assign version_viewed_pretty = site.current_short_duckdb_version | append: " (current)" %}
+								{% assign version_viewed_label = site.current_short_duckdb_version %}
+								{% assign version_viewed_suffix = "current" %}
 							{% elsif version_viewed == "lts" %}
-								{% assign version_viewed_pretty = site.lts_short_duckdb_version | append: " (LTS)" %}
+								{% assign version_viewed_label = site.lts_short_duckdb_version %}
+								{% assign version_viewed_suffix = "LTS" %}
 							{% else %}
-								{% assign version_viewed_pretty = version_viewed %}
+								{% assign version_viewed_label = version_viewed %}
 							{% endif %}
 
-							<div><span class="selectedversion" data-current="{{ version_viewed_pretty }}">{{ version_viewed_pretty }}</span><svg class="arrow"><use href="#chevron-down"></use></svg></div>
+							<button type="button" class="versiontrigger" aria-haspopup="listbox" aria-expanded="false"><span class="selectedversion">{{ version_viewed_label }}{% if version_viewed_suffix != "" %} <span class="version-suffix">{{ version_viewed_suffix }}</span>{% endif %}</span><svg class="arrow"><use href="#chevron-down"></use></svg></button>
 							<div class="versionsidebar">
 								<ul>
 									{% comment %} Remove the leading part, e.g., "docs/lts" or "docs/1.0" (version number) {% endcomment %}
@@ -114,15 +117,18 @@ Page URL: <https://duckdb.org{{ page.url }}>
 										{% assign filename = "docs/" | append: item.version | append: "/" | append: basename %}
 										{% capture other_version_of_page_exists %}{% file_exists {{ filename }} %}{% endcapture %}
 										{% if other_version_of_page_exists == "true" %}
+											{% assign item_suffix = "" %}
 											{% if item.version == "current" %}
 												{% assign item_text = site.current_short_duckdb_version %}
+												{% assign item_suffix = "current" %}
 											{% elsif item.version == "lts" %}
 												{% assign item_text = site.lts_short_duckdb_version %}
+												{% assign item_suffix = "LTS" %}
 											{% else %}
 												{% assign item_text = item.version %}
 											{% endif %}
 
-											<li><a href='/{{ filename | replace: ".md", "" }}'>{{ item_text }}</a></li>
+											<li{% if item.version == version_viewed %} class="current"{% endif %}><a href='/{{ filename | replace: ".md", "" }}'{% if item.version == version_viewed %} aria-current="true"{% endif %}>{{ item_text }}{% if item_suffix != "" %}<span class="version-suffix">{{ item_suffix }}</span>{% endif %}{% if item.version == version_viewed %}<svg class="icon"><use href="#check"></use></svg>{% endif %}</a></li>
 										{% endif %}
 									{% endfor %}
 								</ul>
@@ -154,8 +160,15 @@ Page URL: <https://duckdb.org{{ page.url }}>
 			<div id="main_content_wrap">
 				
 				<div class="headlinebar">
+					{% unless page.breadcrumbs == false %}
 					<div class="breadcrumbs">{% include breadcrumbs.html %}</div>
-					<div class="title">{{ page.title }}</div>
+					{% endunless %}
+					{% unless page.copy_markdown == false %}
+					<button type="button" class="copy-markdown" data-source="https://raw.githubusercontent.com/duckdb/duckdb-web/refs/heads/main/{{ page.path }}"><svg class="icon"><use href="#copy-01"></use></svg><span>Copy Markdown</span></button>
+					{% endunless %}
+					<div class="titlebar">
+						<div class="title">{{ page.title }}</div>
+					</div>
 				</div>
 				
 				{% assign ct = content | toc %}
@@ -170,14 +183,13 @@ Page URL: <https://duckdb.org{{ page.url }}>
 				{% if page.url contains '/docs/' %}
 				<div class="pagemeta">
 					<div>
-						<h5>About this page</h5>
 						<ul>
-							{% if page.github_repository %}<li><a href="{{ page.github_repository }}">See the repository of this feature on GitHub</a></li>{% endif %}
-							{% if page.github_directory %}<li><a href="{{ page.github_directory }}">See the source code of this feature on GitHub</a></li>{% endif %}
-							<li><a href="https://github.com/duckdb/duckdb-web/issues/new?title={{ issue_title | uri_escape }}&labels=issue%20found%20on%20page&body={{ issue_body | uri_escape }}" title="Create GitHub issue">Report content issue</a></li>
 							{% assign markdown_prefix = "https://raw.githubusercontent.com/duckdb/duckdb-web/refs/heads/main/" %}
-							<li><a href="{{ markdown_prefix | append: page.path }}"" title="See Markdown">See this page as Markdown</a></li>
-							<li><a href="https://github.com/duckdb/duckdb-web/edit/main/{{ page.path }}" title="Go to GitHub">Edit this page on GitHub</a></li>
+							<li><a href="{{ markdown_prefix | append: page.path }}" title="See Markdown"><svg class="icon"><use href="#file-code-01"></use></svg>See this page as Markdown</a></li>
+							<li><a href="https://github.com/duckdb/duckdb-web/edit/main/{{ page.path }}" title="Go to GitHub"><svg class="icon"><use href="#edit-02"></use></svg>Edit this page on GitHub</a></li>
+							<li><a href="https://github.com/duckdb/duckdb-web/issues/new?title={{ issue_title | uri_escape }}&labels=issue%20found%20on%20page&body={{ issue_body | uri_escape }}" title="Create GitHub issue"><svg class="icon"><use href="#flag-01"></use></svg>Report content issue</a></li>
+							{% if page.github_repository %}<li><a href="{{ page.github_repository }}"><svg class="icon"><use href="#folder-code"></use></svg>See this repository on GitHub</a></li>{% endif %}
+							{% if page.github_directory %}<li><a href="{{ page.github_directory }}"><svg class="icon"><use href="#code-snippet-02"></use></svg>See the feature's source code on GitHub</a></li>{% endif %}
 						</ul>
 					</div>
 				</div>

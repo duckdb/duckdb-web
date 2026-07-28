@@ -1,0 +1,9 @@
+<nav>
+
+    {% for item in page.duckcon_menu %}
+    <div>
+        <a href="{{ page.duckcon_event_url }}#{{ item.anchor }}">{{ item.title }}</a>
+    </div>
+    {% endfor %}
+
+</nav>

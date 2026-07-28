@@ -347,6 +347,7 @@ $(document).ready(function(){
 
     
     // FAQs
+	$('.qa-wrap h3').append('<span class="faq-icon"><svg class="icon"><use href="#chevron-down"></use></svg></span>');
 	$('.qa-wrap').click(function(event) {
 		var $qaWrap = $(this);
 		if ($(event.target).is('h3') || $(event.target).closest('h3').length) {
@@ -485,14 +486,15 @@ $(document).ready(function(){
 
 	
 	// Appending Content-List of Documentation
-	if ( $('.wrap.documentation') != 0 ) {
+	if ( $('#docusitemaphere').length ) {
 	    contentlist = $('ul.sidenav').clone()
+	    contentlist.find('svg').remove()
 	    $('#docusitemaphere').append(contentlist).find("ul").removeAttr("style")
 	}
 	
 // Add class-name to external Links
 $('a').filter(function() {
-	return this.hostname && this.hostname !== location.hostname && $(this).find('img').length === 0 && !$(this).hasClass('button');
+	return this.hostname && this.hostname !== location.hostname && $(this).find('img, svg').length === 0 && !$(this).hasClass('button');
 }).addClass("externallink").attr('target','_blank');
 
 $('.headercontent a, .mainlinks a, .box-link a, .footercontent a, .highlight a, .button, .ecosystem-diagram a, a.tag, a:has(> .tag)').removeClass('externallink');
@@ -520,6 +522,56 @@ $('a').filter(function() {
 $('.headercontent a, .mainlinks a, .box-link a, .footercontent a, .highlight a, .button, .ecosystem-diagram a').removeClass('videolink');
 $('table a.videolink:contains(GitHub)').removeClass('videolink').addClass('nobg');
 $('.supporterboard a.videolink').removeClass('videolink').addClass('nobg');
+
+// Add podcast icon to links pointing to Spotify or Apple Podcasts
+$('a').filter(function() {
+	var href = $(this).attr('href');
+	if (!href) return false;
+	return /^(https?:)?\/\/(open\.spotify\.com|podcasts\.apple\.com)\//i.test(href) && $(this).find('img').length === 0 && !$(this).hasClass('button');
+}).addClass("podcastlink").removeClass("externallink downloadlink videolink");
+
+$('.headercontent a, .mainlinks a, .box-link a, .footercontent a, .highlight a, .button, .ecosystem-diagram a').removeClass('podcastlink');
+$('.supporterboard a.podcastlink').removeClass('podcastlink').addClass('nobg');
+
+// Append sprite icons to external, download, video and podcast links, gluing the icon to the last word
+$('#main_content_wrap, .singleentry .content').find('a.externallink, a.downloadlink, a.videolink, a.podcastlink').each(function() {
+	var $a = $(this);
+	if ($a.find('svg.linkicon').length) return;
+	var icon = $a.hasClass('videolink') ? 'youtube' : ($a.hasClass('podcastlink') ? 'headphones-01' : ($a.hasClass('downloadlink') ? 'download-01' : 'link-external-02'));
+	var $svg = $('<svg class="icon linkicon"><use href="#' + icon + '"></use></svg>');
+	var contents = $a.contents();
+	var last = contents.length ? contents[contents.length - 1] : null;
+	var match = (last && last.nodeType === 3) ? last.nodeValue.match(/(\S+)(\s*)$/) : null;
+	if (match) {
+		last.nodeValue = last.nodeValue.slice(0, match.index);
+		$('<span class="linkicon-wrap"></span>').text(match[1]).append($svg).appendTo($a);
+	} else {
+		$a.append($svg);
+	}
+});
+
+// Copy the heading URL to the clipboard when the anchor-link icon is clicked
+$(document).on('click', 'svg.anchor-icon', function(e) {
+	e.preventDefault();
+	e.stopPropagation();
+	var $svg = $(this);
+	var anchor = this.closest('a');
+	var url = anchor ? anchor.href : (location.origin + location.pathname + location.hash);
+	if (navigator.clipboard && navigator.clipboard.writeText) {
+		navigator.clipboard.writeText(url);
+	}
+	var $use = $svg.find('use');
+	if (!$svg.data('original-icon')) {
+		$svg.data('original-icon', $use.attr('href'));
+	}
+	$use.attr('href', '#check');
+	$svg.addClass('copied');
+	clearTimeout($svg.data('reset-timer'));
+	$svg.data('reset-timer', setTimeout(function() {
+		$use.attr('href', $svg.data('original-icon'));
+		$svg.removeClass('copied');
+	}, 1500));
+});
 
 // Wrap external links followed by a "." in a nobreak span
 $('body.documentation #main_content_wrap a.externallink').each(function () {
@@ -604,21 +656,65 @@ $('body.documentation #main_content_wrap a.externallink').each(function () {
 	
 	
 	// CHANGE DOC VERSION
-	$('.options .version').click(function(){
-		var $this = $(this);
-		$this.toggleClass('active');
-		$this.find('.versionsidebar').slideToggle(200);
-		
-		// MAKE IT SAME AS ON START PAGE
-		var selectedVersion = $this.find('.selectedversion');
-		var currentVersion = selectedVersion.attr('data-current');
-	
-		selectedVersion.text($this.hasClass('active') ? 'Select' : currentVersion);
-	
-		$this.find('.versionsidebar li').removeClass('current') 
-			.filter(function() { 
-				return $(this).text().trim() === currentVersion; 
-			}).addClass('current');
+	function closeVersionSelect() {
+		var $open = $('.options .version.active');
+		if (!$open.length) return false;
+		$open.removeClass('active').find('.versiontrigger').attr('aria-expanded', 'false');
+		return true;
+	}
+
+	$('.options .version .versiontrigger').click(function(){
+		var $version = $(this).closest('.version');
+		var open = !$version.hasClass('active');
+		$version.toggleClass('active', open);
+		$(this).attr('aria-expanded', open ? 'true' : 'false');
+	});
+
+	$(document).on('click', function(e){
+		if ($(e.target).closest('.options .version').length) return;
+		closeVersionSelect();
+	});
+
+	$(document).on('keydown', function(e){
+		if (e.key !== 'Escape') return;
+		if (closeVersionSelect()) {
+			$('.options .version .versiontrigger').trigger('focus');
+		}
+	});
+
+	// COPY PAGE AS MARKDOWN
+	$('.headlinebar .copy-markdown').click(function(){
+		var $btn = $(this);
+		if ($btn.hasClass('copied')) return;
+
+		var markdownPromise = fetch($btn.attr('data-source')).then(function(response){
+			if (!response.ok) throw new Error('HTTP ' + response.status);
+			return response.text();
+		});
+
+		function markCopied() {
+			$btn.addClass('copied');
+			$btn.find('use').attr('href', '#check');
+			$btn.find('span').text('Copied');
+			setTimeout(function(){
+				$btn.removeClass('copied');
+				$btn.find('use').attr('href', '#copy-01');
+				$btn.find('span').text('Copy Markdown');
+			}, 2000);
+		}
+
+		if (navigator.clipboard && window.ClipboardItem) {
+			var item = new ClipboardItem({
+				'text/plain': markdownPromise.then(function(text){
+					return new Blob([text], { type: 'text/plain' });
+				})
+			});
+			navigator.clipboard.write([item]).then(markCopied);
+		} else if (navigator.clipboard) {
+			markdownPromise.then(function(text){
+				return navigator.clipboard.writeText(text);
+			}).then(markCopied);
+		}
 	});
 	
 	
@@ -890,19 +986,25 @@ $('body.documentation #main_content_wrap a.externallink').each(function () {
 	}
 	
 	/** CUSTOM SELECT ON HOME **/
-	var generateSelectBoxes = function(){   
+	function closeCustomSelects() {
+		$('div.select-styled.active').removeClass('active').attr('aria-expanded', 'false');
+	}
+
+	var generateSelectBoxes = function(){
+		var checkIcon = '<svg class="icon check"><use href="#check"></use></svg>';
+
 		$('body.landing select').each(function() {
 			var $this = $(this),
 				numberOfOptions = $(this).children('option').length;
-	
+
 			$this.addClass('select-hidden');
-			$this.after('<div class="select-styled">' + ($this.children('option:selected').text() || 'Select') + '</div>'); 
-	
+			$this.after('<div class="select-styled" role="button" tabindex="0" aria-haspopup="listbox" aria-expanded="false"><span class="label">' + ($this.children('option:selected').text() || 'Select') + '</span><svg class="arrow"><use href="#chevron-down"></use></svg></div>');
+
 			var $styledSelect = $this.next('div.select-styled');
 			var $list = $('<ul />', {
 				'class': 'select-options'
 			}).insertAfter($styledSelect);
-	
+
 			for (var i = 0; i < numberOfOptions; i++) {
 				$('<li />', {
 					text: $this.children('option').eq(i).text(),
@@ -912,49 +1014,60 @@ $('body.documentation #main_content_wrap a.externallink').each(function () {
 					$('li[rel="' + $this.children('option').eq(i).val() + '"]').addClass('is-selected');
 				}
 			}
-	
+
 			var $listItems = $list.children('li');
-	
+			$list.find('li.is-selected').append(checkIcon);
+
+			function toggleSelect() {
+				var open = !$styledSelect.hasClass('active');
+				closeCustomSelects();
+				$styledSelect.toggleClass('active', open).attr('aria-expanded', open ? 'true' : 'false');
+			}
+
 			$styledSelect.click(function(e) {
 				e.stopPropagation();
-				$('div.select-styled.active').not(this).each(function() {
-					$(this).removeClass('active').next('ul.select-options').hide();
-				});
-				$(this).toggleClass('active').next('ul.select-options').slideToggle(200); 
-				if ($(this).hasClass('active')) {
-					$(this).html('<span>Select</span>'); 
-				} else {
-					var selectedText = $this.children('option:selected').text() || 'Select';
-					$(this).html(selectedText); 
+				toggleSelect();
+			});
+
+			$styledSelect.on('keydown', function(e) {
+				if (e.key === 'Enter' || e.key === ' ') {
+					e.preventDefault();
+					toggleSelect();
 				}
 			});
-	
+
 			$listItems.click(function(e) {
 				e.stopPropagation();
 				var selectedText = $(this).text();
-				$styledSelect.html(selectedText).removeClass('active');
+				$styledSelect.find('.label').text(selectedText);
+				$styledSelect.removeClass('active').attr('aria-expanded', 'false');
 				$this.val($(this).attr('rel'));
-				$list.find('li.is-selected').removeClass('is-selected');
-				$(this).addClass('is-selected');
-				$list.hide();
+				$list.find('li.is-selected').removeClass('is-selected').find('svg.icon.check').remove();
+				$(this).addClass('is-selected').append(checkIcon);
 				updateExample();
 			});
-	
-			$(document).click(function() {
-				$styledSelect.removeClass('active');
-				$list.hide();
-				var selectedText = $this.children('option:selected').text() || 'Select';
-				$styledSelect.html(selectedText); 
-			});
-	
+
 			$this.change(function() {
 				var selectedText = $(this).children('option:selected').text() || 'Select';
-				$styledSelect.html(selectedText); 
+				$styledSelect.find('.label').text(selectedText);
 			});
 		});
 	}
-	
+
 	generateSelectBoxes();
+
+	$(document).on('click', function() {
+		closeCustomSelects();
+	});
+
+	$(document).on('keydown', function(e) {
+		if (e.key !== 'Escape') return;
+		var $open = $('div.select-styled.active');
+		if ($open.length) {
+			closeCustomSelects();
+			$open.trigger('focus');
+		}
+	});
 
 
 
@@ -1104,14 +1217,14 @@ $('body.documentation #main_content_wrap a.externallink').each(function () {
 		});
 	});
 
-	// DUCKCON7 EVENT PAGE
+	// DUCKCON EVENT PAGES
 	const MAPBOX_ACCESS_TOKEN = 'pk.eyJ1Ijoiam9uYXRoYW4tYXVjaCIsImEiOiJjbDllMHhxNHowbG50M29vZ3Y0NnZhdHY1In0.XQxUUmkkSGKUkNThK1p9Yg';
 	const MAPBOX_STYLES_URL = 'mapbox://styles/jonathan-auch/cmhz38wfd001801sbe3c06ece'
-	const $duckcon7Map = $('.js-duckcon7-map');
-	const duckcon7SliderClass = '.js-duckcon7-slider';
-	const $duckcon7Slider = $(duckcon7SliderClass);
+	const $duckconMap = $('.js-duckcon-map');
+	const duckconSliderClass = '.js-duckcon-slider';
+	const $duckconSlider = $(duckconSliderClass);
 
-	const duckcon7SliderOptions = {
+	const duckconSliderOptions = {
 		slidesPerView: "auto",
 		spaceBetween: 30,
 		centeredSlides: true,
@@ -1123,8 +1236,8 @@ $('body.documentation #main_content_wrap a.externallink').each(function () {
 	}
 
 	// Initialize the map if present on page
-	if ($duckcon7Map.length) {
-		const mapEl = $duckcon7Map[0];
+	if ($duckconMap.length) {
+		const mapEl = $duckconMap[0];
 		const lng = parseFloat(mapEl.dataset.lng);
 		const lat = parseFloat(mapEl.dataset.lat);
 		const label = mapEl.dataset.label;
@@ -1132,7 +1245,7 @@ $('body.documentation #main_content_wrap a.externallink').each(function () {
 		mapboxgl.accessToken = MAPBOX_ACCESS_TOKEN;
 
 		const map = new mapboxgl.Map({
-			container: 'duckcon7-map',
+			container: 'duckcon-map',
 			style: MAPBOX_STYLES_URL,
 			center: [lng, lat],
 			zoom: 15,
@@ -1145,7 +1258,7 @@ $('body.documentation #main_content_wrap a.externallink').each(function () {
 	}
 
 	// Initialize the slider if present on page
-	if ($duckcon7Slider.length) {
-		const slider = new Swiper(duckcon7SliderClass, duckcon7SliderOptions);
+	if ($duckconSlider.length) {
+		const slider = new Swiper(duckconSliderClass, duckconSliderOptions);
 	}
 });

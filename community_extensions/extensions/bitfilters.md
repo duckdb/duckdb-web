@@ -23,10 +23,10 @@ repo:
   github: query-farm/bitfilters
   ref: 7960084c35b12ba7bbde88b837cca3cc3f608266
 
-extension_star_count: 7
-extension_star_count_pretty: 7
-extension_download_count: 1723
-extension_download_count_pretty: 1.7k
+extension_star_count: 8
+extension_star_count_pretty: 8
+extension_download_count: 2330
+extension_download_count_pretty: 2.3k
 image: '/images/community_extensions/social_preview/preview_community_extension_bitfilters.png'
 layout: community_extension_doc
 ---

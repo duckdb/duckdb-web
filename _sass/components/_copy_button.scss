@@ -11,8 +11,8 @@ pre.highlight > button,
 .highlight button.copy{
 	position: absolute;
 	background: var(--doc-codebox-button-background-color, rgba(217, 217, 217, 0.60));
-	backdrop-filter: blur(1px);
-	border-radius: 50px;
+	backdrop-filter: blur(1.5px);
+	border-radius: var(--page-radius-pill);
 	width: 30px;
 	height: 30px;
 	top: 7px;

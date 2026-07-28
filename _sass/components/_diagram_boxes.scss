@@ -30,8 +30,6 @@
  *      </div>
  */
 
-$duck-diagram-radius-outer: 15px;
-$duck-diagram-radius-inner: 10px;
 
 .duck-diagram {
 	display: flex;
@@ -42,7 +40,7 @@ $duck-diagram-radius-inner: 10px;
 	padding: 24px;
 	background: var(--main-codebox-main-background-color, rgba(250, 250, 250, 0.8));
 	border: 1px solid var(--main-codebox-border-color, rgba(13, 13, 13, 0.08));
-	border-radius: $duck-diagram-radius-outer;
+	border-radius: var(--page-radius-box);
 	box-shadow: 2px 2px 24px 0 var(--main-codebox-dropshadow, rgba(0, 0, 0, 0.03));
 }
 
@@ -91,7 +89,7 @@ body.documentation main .wrap .duck-diagram-box .highlighter-rouge {
 .newswrap .postwrap .postcontent .duck-diagram-box .highlighter-rouge > div.highlight,
 body.documentation main .wrap .duck-diagram-box .highlighter-rouge > div.highlight {
 	flex: 1;
-	border-radius: $duck-diagram-radius-inner;
+	border-radius: var(--page-radius-box-inner);
 }
 
 .duck-diagram-box pre,

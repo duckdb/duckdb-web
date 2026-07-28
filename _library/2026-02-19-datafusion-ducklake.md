@@ -2,6 +2,8 @@
 layout: post
 title: "DataFusion + DuckLake"
 author: Zac Farrell
+thumb: "/images/library/thumbs/2026-02-19-datafusion-ducklake.jpg"
+image: "/images/library/thumbs/2026-02-19-datafusion-ducklake.jpg"
 tags: ["Talk"]
 length: "12 min"
 category: community
@@ -15,5 +17,5 @@ pill: "Data Debug SF"
 
 |-------|-------|
 | **Event** | Data Debug SF |
-| **Speaker** | Zac Farrell |
+| **Speaker** | Zac Farrell (Hotdata) |
 | **YouTube** | [DataFusion + DuckLake](https://www.youtube.com/watch?v=VtvjyMKYPEA) |

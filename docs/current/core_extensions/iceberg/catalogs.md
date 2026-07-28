@@ -64,8 +64,6 @@ A REST Catalog with OAuth2 authorization can also be attached with just an `ATTA
 
 The `iceberg` extension supports reading Iceberg tables stored in [Amazon S3 Tables](https://aws.amazon.com/s3/features/tables/).
 
-To use it, install the following extensions:
-
 You can let DuckDB detect your AWS credentials and configuration based on the default profile in your `~/.aws` directory by creating the following secret using the [Secrets Manager]({% link docs/current/configuration/secrets_manager.md %}):
 
 ```sql
@@ -74,7 +72,6 @@ CREATE SECRET (
     PROVIDER credential_chain
 );
 ```
-
 Alternatively, you can set the values manually:
 
 ```sql
@@ -86,14 +83,18 @@ CREATE SECRET (
 );
 ```
 
+For the full range of credential options (assumed roles, SSO, web identity, and more), see the [aws extension]({% link docs/current/core_extensions/aws.md %}#credential_chain-provider).
+
 Then, connect to the catalog using your S3 Tables ARN (available in the AWS Management Console) and the `ENDPOINT_TYPE s3_tables` option:
 
 ```sql
 ATTACH '⟨s3_tables_arn⟩' AS my_s3_tables_catalog (
-   TYPE ICEBERG,
+   TYPE iceberg,
    ENDPOINT_TYPE s3_tables
 );
 ```
+
+> Warning `ENDPOINT_TYPE s3_tables` always builds an endpoint of the form `s3tables.⟨region⟩.amazonaws.com/iceberg`. This is incorrect for any region whose endpoint does not use the plain `amazonaws.com` suffix — most notably the AWS China regions (`cn-north-1`, `cn-northwest-1`), which use `amazonaws.com.cn`. For such regions, attach the catalog by passing an explicit `ENDPOINT` (with the correct host for your region) together with `AUTHORIZATION_TYPE 'sigv4'`, instead of using `ENDPOINT_TYPE`.
 
 To check whether the attachment worked, list all tables:
 
@@ -118,7 +119,9 @@ Create an S3 secret using the [Secrets Manager]({% link docs/current/configurati
 CREATE SECRET (
     TYPE s3,
     PROVIDER credential_chain,
-    REGION '<region>'
+    CHAIN sts,
+    ASSUME_ROLE_ARN 'arn:aws:iam::⟨account_id⟩:role/⟨role⟩',
+    REGION 'us-east-2'
 );
 ```
 
@@ -142,6 +145,19 @@ ATTACH '⟨account_id⟩' AS glue_catalog (
     ENDPOINT_TYPE 'glue'
 );
 ```
+
+> Warning As with [Amazon S3 Tables]({% link docs/current/core_extensions/iceberg/amazon_s3_tables.md %}), `ENDPOINT_TYPE glue` always builds an endpoint of the form `glue.⟨region⟩.amazonaws.com/iceberg`, which is incorrect for regions that do not use the plain `amazonaws.com` suffix (most notably the AWS China regions `cn-north-1` and `cn-northwest-1`, which use `amazonaws.com.cn`). For such regions, attach with an explicit `ENDPOINT` (with the correct host) together with `AUTHORIZATION_TYPE 'sigv4'` instead of using `ENDPOINT_TYPE`.
+
+The warehouse identifier (the first argument to `ATTACH`) accepts the following forms:
+
+| Warehouse | Meaning |
+|---|---|
+| `:` | The default catalog of the caller's account. |
+| `⟨account_id⟩` | A 12-digit AWS account ID. |
+| `⟨account_id⟩:⟨catalog⟩` | A named catalog in the given account. |
+| `⟨catalog⟩/⟨sub_catalog⟩` | A nested (federated) catalog. |
+| `⟨account_id⟩:⟨catalog⟩/⟨sub_catalog⟩` | A nested catalog in the given account. |
+
 
 To check whether the attachment worked, list all tables:
 
@@ -298,6 +314,30 @@ SELECT count(*) FROM biglake_public.public_data.nyc_taxicab;
 ```
 
 > Note: Google Cloud access tokens expire after 1 hour. For long-running sessions, you'll need to refresh the token periodically.
+
+### Catalogs with Limited REST Spec Support
+
+Some catalogs implement a subset of the Iceberg REST Catalog specification. Use the compatibility options below to adjust DuckDB's behavior for these catalogs.
+
+| Catalog behavior | Option to set |
+| --- | --- |
+| Does not support staged CREATE TABLE | `STAGE_CREATE_TABLES false` |
+| Rejects the multi-table transactions/commit endpoint | `DISABLE_MULTI_TABLE_COMMIT true` |
+| Fully initializes metadata on CREATE TABLE and rejects follow-up metadata updates | `SKIP_CREATE_TABLE_METADATA_UPDATES true` |
+| Does not allow DuckDB to remove storage files on DROP TABLE | `REMOVE_FILES_ON_DELETE false` |
+
+For example, to attach a [Unity Catalog Horizon](https://docs.unitycatalog.io) endpoint that does not support staged creates, rejects the transactions/commit endpoint, and manages its own metadata and storage cleanup:
+
+```sql
+ATTACH '⟨warehouse⟩' AS horizon_catalog (
+    TYPE iceberg,
+    ENDPOINT '⟨catalog_endpoint⟩',
+    STAGE_CREATE_TABLES false,
+    DISABLE_MULTI_TABLE_COMMIT true,
+    SKIP_CREATE_TABLE_METADATA_UPDATES true,
+    REMOVE_FILES_ON_DELETE false
+);
+```
 
 ## Limitations
 

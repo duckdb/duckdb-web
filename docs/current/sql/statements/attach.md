@@ -165,18 +165,16 @@ ATTACH 'encrypted.db' AS enc_db (ENCRYPTION_KEY 'quack_quack', ENCRYPTION_CIPHER
 
 Database encryption implies using [storage version](#explicit-storage-versions) 1.4.0 or later.
 
-> DuckDB's encryption does not yet meet the official [NIST requirements](https://csrc.nist.gov/projects/cryptographic-standards-and-guidelines).
-> Please follow issue [`#20162` “Store and verify tag for canary encryption”](https://github.com/duckdb/duckdb/issues/20162) to track our progress towards NIST-compliance.
-
 ### Options
 
 Zero or more copy options may be provided within parentheses following the `ATTACH` statement. Parameter values can be passed in with or without wrapping in single quotes. Arbitrary expressions may be used for parameter values.
 
 | Name                | Description                                                                                                                 | Type      | Default value |
 | ------------------- | --------------------------------------------------------------------------------------------------------------------------- | --------- | ------------- |
-| `ACCESS_MODE`       | Access mode of the database (`AUTOMATIC`, `READ_ONLY`, or `READ_WRITE`).                                                    | `VARCHAR` | `automatic`   |
+| `READ_ONLY`         | Attach the database in read-only mode. Use `READ_WRITE` (the default) to attach in read-write mode.                         | `BOOLEAN` | `false`       |
 | `COMPRESS`          | Whether the database is compressed. Only applicable for in-memory databases.                                                | `VARCHAR` | `false`       |
 | `TYPE`              | The file type (`DUCKDB` or `SQLITE`), or deduced from the input string literal (MySQL, PostgreSQL).                         | `VARCHAR` | `DUCKDB`      |
+| `DEFAULT_TABLE`     | The table that is queried when the attached database is referenced directly by its catalog name (e.g., `FROM ⟨db⟩`).        | `VARCHAR` | -             |
 | `BLOCK_SIZE`        | The block size of a new database file. Must be a power of two and within [16384, 262144]. Cannot be set for existing files. | `UBIGINT` | `262144`      |
 | `ROW_GROUP_SIZE`    | The row group size of a new database file.                                                                                  | `UBIGINT` | `122880`      |
 | `STORAGE_VERSION`   | The version of the storage used.                                                                                            | `VARCHAR` | `v1.0.0`      |

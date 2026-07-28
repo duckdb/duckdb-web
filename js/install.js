@@ -6,6 +6,7 @@
     if (!$('body').hasClass('installation')) return;
 
     var $container = $('.installationselection');
+    $container.find('.selection-head h3').append('<span class="foldout-icon"><svg class="icon"><use href="#chevron-down"></use></svg></span>');
     var $result = $('#result');
     var $templates = $('.instruction-collection');
     var $inst = $('.installation-instructions');
@@ -446,7 +447,7 @@
         var $fold = $(this);
         var isOpen = $fold.hasClass('open');
         var $content = $fold.children('.selection-content');
-        if (isOpen) $content.show(); else $content.hide();
+        if (isOpen) $content.css('display', 'block'); else $content.hide();
       });
 
       $container.find('.selection-options[data-role]').each(function () {

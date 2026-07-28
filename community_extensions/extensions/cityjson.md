@@ -8,7 +8,7 @@ excerpt: |
 extension:
   name: cityjson
   description: Read, write, and query CityJSON, CityJSONSeq, and FlatCityBuf 3D city model files.
-  version: 0.1.0
+  version: 0.2.0
   language: C++
   build: cmake
   license: MIT
@@ -17,7 +17,7 @@ extension:
 
 repo:
   github: cityjson/duckdb-cityjson
-  ref: 0df88f9fb023e272b0fd3208e0f55445714b278c
+  ref: d511bdba26392bab7d4b789f294065a3fbed58d6
 
 docs:
   hello_world: |
@@ -53,15 +53,18 @@ docs:
 
     Additional features:
     - Automatic schema inference from CityJSON attributes
+    - Wide columnar layout: one WKB geometry column per Level of Detail, plus a per-object `bbox` extent
     - LOD-based geometry extraction as WKB blobs via the `lod` parameter
+    - Filter pushdown on `id`, `feature_id`, and `object_type`
+    - Streaming reads of large CityJSONSeq files and remote files over HTTP/S3/GCS
     - Support for CityJSON v2.0 and CityJSONSeq formats
 
     For more information on the CityJSON format, see https://www.cityjson.org/.
 
-extension_star_count: 5
-extension_star_count_pretty: 5
-extension_download_count: 630
-extension_download_count_pretty: 630
+extension_star_count: 9
+extension_star_count_pretty: 9
+extension_download_count: 1091
+extension_download_count_pretty: 1.1k
 image: '/images/community_extensions/social_preview/preview_community_extension_cityjson.png'
 layout: community_extension_doc
 ---

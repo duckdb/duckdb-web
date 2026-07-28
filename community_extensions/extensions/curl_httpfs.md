@@ -8,7 +8,7 @@ excerpt: |
 extension:
   name: curl_httpfs
   description: httpfs with connection pool, HTTP/2 and async IO. 
-  version: 0.4.1
+  version: 0.4.3
   language: C++
   build: cmake
   license: MIT
@@ -19,7 +19,7 @@ extension:
 repo:
   github: dentiny/duckdb-curl-filesystem
   andium: e5c4921e6e908d07abab3f89c0d036a22db0cd4b
-  ref: b4e6bf2279808cf19e935a9e5146adc696e2ab57
+  ref: 2066d056656c7b7b13dec0640c7c1254afd0fafe
 
 docs:
   hello_world: |
@@ -31,10 +31,10 @@ docs:
     - Implements TCP connection pool.
     - All network IO operations are performed in asynchronously.
 
-extension_star_count: 8
-extension_star_count_pretty: 8
-extension_download_count: 2723
-extension_download_count_pretty: 2.7k
+extension_star_count: 10
+extension_star_count_pretty: 10
+extension_download_count: 3953
+extension_download_count_pretty: 4.0k
 image: '/images/community_extensions/social_preview/preview_community_extension_curl_httpfs.png'
 layout: community_extension_doc
 ---
@@ -60,12 +60,10 @@ LOAD {{ page.extension.name }};
 
 <div class="extension_functions_table"></div>
 
-|             function_name             | function_type | description | comment | examples |
-|---------------------------------------|---------------|-------------|---------|----------|
-| curl_httpfs_clear_metrics             | scalar        | NULL        | NULL    |          |
-| curl_httpfs_get_httpfs_tcp_connection | table         | NULL        | NULL    |          |
-| curl_httpfs_get_tcp_connection        | table         | NULL        | NULL    |          |
-| curl_httpfs_http_util_name            | scalar        | NULL        | NULL    |          |
+|         function_name          | function_type | description | comment | examples |
+|--------------------------------|---------------|-------------|---------|----------|
+| curl_httpfs_get_tcp_connection | table         | NULL        | NULL    |          |
+| curl_httpfs_http_util_name     | scalar        | NULL        | NULL    |          |
 
 ### Overloaded Functions
 

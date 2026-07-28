@@ -1,5 +1,6 @@
 ---
 layout: docu
+copy_markdown: false
 title: Documentation
 ---
 

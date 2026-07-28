@@ -8,7 +8,7 @@ excerpt: |
 extension:
   name: anndata
   description: Read AnnData (.h5ad) files for single-cell genomics data analysis, with support for local and remote (HTTP/HTTPS/S3) files
-  version: 0.14.1
+  version: 0.14.3
   language: C++
   build: cmake
   license: MIT
@@ -17,7 +17,7 @@ extension:
 
 repo:
   github: honicky/anndata-duckdb-extension
-  ref: 7cedb5abdf500434c41156878d706e58912f7406
+  ref: 82b6f746ab56e39f2c69f607c1e43917ae6f0884
 
 docs:
   hello_world: |
@@ -118,10 +118,10 @@ docs:
     SELECT * FROM anndata_scan_obs(['batch_a/*.h5ad', 'batch_b/*.h5ad']);
     ```
 
-extension_star_count: 8
-extension_star_count_pretty: 8
-extension_download_count: 832
-extension_download_count_pretty: 832
+extension_star_count: 9
+extension_star_count_pretty: 9
+extension_download_count: 2308
+extension_download_count_pretty: 2.3k
 image: '/images/community_extensions/social_preview/preview_community_extension_anndata.png'
 layout: community_extension_doc
 ---

@@ -37,6 +37,7 @@ To find a list of these tools, check out the [Awesome DuckDB repository](https:/
 
 ### HTTP(S), S3 and GCP
 
+* [How to authenticate to S3 / AWS]({% link docs/current/core_extensions/aws.md %}#configuration-and-authentication)
 * [How to load a Parquet file directly from HTTP(S)]({% link docs/current/guides/network_cloud_storage/http_import.md %})
 * [How to load a Parquet file directly from S3]({% link docs/current/guides/network_cloud_storage/s3_import.md %})
 * [How to export a Parquet file to S3]({% link docs/current/guides/network_cloud_storage/s3_export.md %})
@@ -44,6 +45,8 @@ To find a list of these tools, check out the [Awesome DuckDB repository](https:/
 * [How to load a Parquet file directly from GCS]({% link docs/current/guides/network_cloud_storage/gcs_import.md %})
 * [How to load a Parquet file directly from Cloudflare R2]({% link docs/current/guides/network_cloud_storage/cloudflare_r2_import.md %})
 * [How to load an Iceberg table directly from S3]({% link docs/current/guides/network_cloud_storage/s3_iceberg_import.md %})
+* [How to connect to Amazon S3 Tables]({% link docs/current/core_extensions/iceberg/amazon_s3_tables.md %})
+* [How to connect to Amazon SageMaker Lakehouse (AWS Glue)]({% link docs/current/core_extensions/iceberg/amazon_sagemaker_lakehouse.md %})
 
 ### JSON Files
 
@@ -60,6 +63,7 @@ To find a list of these tools, check out the [Awesome DuckDB repository](https:/
 * [How to directly query a MySQL database]({% link docs/current/guides/database_integration/mysql.md %})
 * [How to directly query a PostgreSQL database]({% link docs/current/guides/database_integration/postgres.md %})
 * [How to directly query a SQLite database]({% link docs/current/guides/database_integration/sqlite.md %})
+* [How to connect to Amazon RDS / Aurora with IAM authentication]({% link docs/current/guides/database_integration/rds_iam.md %})
 
 ### Directly Reading Files
 
@@ -116,6 +120,7 @@ To find a list of these tools, check out the [Awesome DuckDB repository](https:/
 
 * [How to use Ibis to query DuckDB with or without SQL]({% link docs/current/guides/python/ibis.md %})
 * [How to use DuckDB with Polars DataFrames via Apache Arrow]({% link docs/current/guides/python/polars.md %})
+* [How to stream DuckDB query results to PyTorch via Apache Arrow]({% link docs/current/guides/python/pytorch.md %})
 
 ## SQL Features
 

@@ -134,6 +134,57 @@ ATTACH 'path/to/my-delta-table' AS my_table (TYPE delta);
 CHECKPOINT my_table;
 ```
 
+### Idempotent Appends
+
+The `delta` extension exposes an idempotent-append API that uses Delta's per-application transaction versions to give exactly-once semantics: an append tagged with an `app_id` and a version is only committed if the table's currently recorded version for that `app_id` matches the expected previous version. This lets a producer safely retry a batch without duplicating it.
+
+Within a transaction, tag the append with `delta_set_transaction_version(⟨table⟩, ⟨app_id⟩, ⟨new_version⟩, ⟨expected_previous_version⟩)`:
+
+```sql
+ATTACH 'path/to/my-delta-table' AS my_table (TYPE delta);
+
+BEGIN TRANSACTION;
+CALL delta_set_transaction_version('my_table', 'my_app_id', 1::UBIGINT, NULL::UBIGINT);
+INSERT INTO my_table VALUES (1);
+COMMIT;
+```
+
+On `COMMIT`, the version is compared-and-swapped: if another process advanced the version for `my_app_id` in the meantime, the commit fails. Aborting the transaction leaves the version unchanged. Read the current version with `delta_get_transaction_version(⟨table⟩, ⟨app_id⟩)`, which returns `NULL` if no version has been recorded yet.
+
+### Attach Options
+
+When attaching a Delta table you can pass the following options to `ATTACH`:
+
+| Option | Type | Default | Description |
+| --- | --- | --- | --- |
+| `VERSION` | `UBIGINT` | latest | Pin the attached table to a specific [table version](#time-travel). |
+| `PIN_SNAPSHOT` | `BOOLEAN` | `false` | Resolve the table snapshot once at attach time and reuse it, rather than re-resolving the latest version per query. |
+| `PUSHDOWN_PARTITION_INFO` | `BOOLEAN` | `true` | Push down partition information so that whole files can be skipped based on partition values. |
+| `PUSHDOWN_FILTERS` | `VARCHAR` | `all` | Filter pushdown mode for file skipping. One of `none`, `all`, `constant_only`, `dynamic_only`. |
+
+```sql
+ATTACH 's3://my-bucket/my-delta-table' AS my_table (
+    TYPE delta,
+    PIN_SNAPSHOT true,
+    PUSHDOWN_FILTERS 'constant_only'
+);
+```
+
+### Inspecting Scanned Files
+
+`delta_list_files` returns the data files a scan would read for a table, together with their cardinality, partition values, and whether they carry deletion vectors. This is useful for understanding the effect of [data skipping](#features):
+
+```sql
+SELECT * FROM delta_list_files('file:///some/path/on/local/machine');
+```
+
+| Column | Type | Description |
+| --- | --- | --- |
+| `data_file` | `VARCHAR` | Path to the Parquet data file. |
+| `cardinality` | `UBIGINT` | Number of rows in the file. |
+| `partitions` | `MAP(VARCHAR, VARCHAR)` | Partition column values for the file. |
+| `have_deletes` | `BOOLEAN` | Whether the file has an associated deletion vector. |
+
 ### Credential Chains in Delta
 
 DuckDB Delta uses `delta-kernel-rs` and `object_store` for some network operations.
@@ -144,6 +195,15 @@ may be inconsistent.
 
 To avoid ambiguities, we recommend that you configure exactly one available
 credential type in your production chain secrets.
+
+## Settings
+
+The `delta` extension adds the following settings:
+
+| Setting | Type | Default | Description |
+| --- | --- | --- | --- |
+| `delta_kernel_logging` | `BOOLEAN` | `false` | Forward the internal logging of the [Delta Kernel](https://github.com/delta-incubator/delta-kernel-rs) to the DuckDB logger. May impact performance even when DuckDB logging is disabled. |
+| `delta_scan_explain_files_filtered` | `BOOLEAN` | `true` | Add the filtered files to the `EXPLAIN` output. May impact the performance of `delta_scan` during `EXPLAIN ANALYZE` queries. |
 
 ## Features
 

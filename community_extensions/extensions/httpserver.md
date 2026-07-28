@@ -59,15 +59,15 @@ extension:
   - gropaul
   - rustyconover
   name: httpserver
-  version: '2025120401'
+  version: '20260707'
 repo:
   github: Query-farm/httpserver
-  ref: 8a53d8b7f4290608e0eb0d4dbfbafefaf04209e9
+  ref: ff40b661c5415359df80a3f67fb0cf78962e0c34
 
-extension_star_count: 273
-extension_star_count_pretty: 273
-extension_download_count: 2801
-extension_download_count_pretty: 2.8k
+extension_star_count: 284
+extension_star_count_pretty: 284
+extension_download_count: 2461
+extension_download_count_pretty: 2.5k
 image: '/images/community_extensions/social_preview/preview_community_extension_httpserver.png'
 layout: community_extension_doc
 ---
@@ -97,5 +97,23 @@ LOAD {{ page.extension.name }};
 |-----------------|---------------|-------------|---------|----------|
 | httpserve_start | scalar        | NULL        | NULL    |          |
 | httpserve_stop  | scalar        | NULL        | NULL    |          |
+
+### Overloaded Functions
+
+<div class="extension_functions_table"></div>
+
+This extension does not add any function overloads.
+
+### Added Types
+
+<div class="extension_types_table"></div>
+
+This extension does not add any types.
+
+### Added Settings
+
+<div class="extension_settings_table"></div>
+
+This extension does not add any settings.
 
 

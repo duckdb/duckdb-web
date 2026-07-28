@@ -1,9 +1,7 @@
 import argparse
-import os
 import sys
 from pathlib import Path
 
-from jinja2.optimizer import Optimizer
 from tabulate import tabulate
 
 REPO_ROOT = Path(__file__).resolve().parents[1]
@@ -18,7 +16,7 @@ END_GROUPS_MARKER = "<!-- END_GROUPS -->"
 OPTIMIZER_MARKER = "<!-- OPTIMIZER_METRICS -->"
 END_OPTIMIZER_MARKER = "<!-- END_OPTIMIZER_METRICS -->"
 CUMULATIVE_MARKER = "<!-- CUMULATIVE_METRICS -->"
-END_CUMALATIVE_MARKER = "<!-- END_CUMULATIVE_METRICS -->"
+END_CUMULATIVE_MARKER = "<!-- END_CUMULATIVE_METRICS -->"
 EXAMPLES_MARKER = "<!-- EXAMPLES -->"
 END_EXAMPLES_MARKER = "<!-- END_EXAMPLES -->"
 
@@ -184,7 +182,7 @@ def main():
         # write cumulative metrics
         f.write(
             retrieve_template(
-                METRICS_DOC_TEMPLATE, CUMULATIVE_MARKER, END_CUMALATIVE_MARKER
+                METRICS_DOC_TEMPLATE, CUMULATIVE_MARKER, END_CUMULATIVE_MARKER
             )
         )
         for metric in cumulative_metrics:

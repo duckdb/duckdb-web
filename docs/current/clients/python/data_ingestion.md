@@ -125,7 +125,7 @@ duckdb.sql("SELECT * FROM 'example.json'")
 Call `read_json` from within SQL:
 
 ```python
-duckdb.sql("SELECT * FROM read_json_auto('example.json')")
+duckdb.sql("SELECT * FROM read_json('example.json')")
 ```
 
 ## Directly Accessing DataFrames and Arrow Objects
