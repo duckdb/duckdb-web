@@ -13,7 +13,7 @@ In this blog post, we will demonstrate some of the features that are available i
 
 ## Getting Started
 
-To experiment with the new DuckDB-Iceberg features, you will need to connect to your favorite Iceberg REST Catalog. There are many ways to do so: please have a look at the [Connecting to REST Catalogs page]({% link docs/current/core_extensions/iceberg/iceberg_rest_catalogs.md %}), which has instructions for catalogs such as [Apache Polaris](https://polaris.apache.org/) and [Lakekeeper](https://lakekeeper.io/). If you would like to connect to [Amazon S3 Tables](https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-tables.html), please consult the [Connecting to S3 Tables page]({% link docs/current/core_extensions/iceberg/amazon_s3_tables.md %}). In any case, your `ATTACH` command will look something like this:
+To experiment with the new DuckDB-Iceberg features, you will need to connect to your favorite Iceberg REST Catalog. There are many ways to do so: please have a look at the [Connecting to REST Catalogs page]({% link docs/current/core_extensions/iceberg/catalogs.md %}), which has instructions for catalogs such as [Apache Polaris](https://polaris.apache.org/) and [Lakekeeper](https://lakekeeper.io/). If you would like to connect to [Amazon S3 Tables](https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-tables.html), please consult the [Connecting to S3 Tables page]({% link docs/current/core_extensions/iceberg/catalogs.md %}#amazon-s3-tables). In any case, your `ATTACH` command will look something like this:
 
 ```sql
 ATTACH '⟨warehouse_name⟩' AS my_datalake (
