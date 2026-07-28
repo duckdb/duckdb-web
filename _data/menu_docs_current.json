@@ -1127,16 +1127,20 @@
                   "url": "overview"
                 },
                 {
-                  "page": "Iceberg REST Catalogs",
-                  "url": "iceberg_rest_catalogs"
+                  "page": "Writing to Iceberg",
+                  "url": "writing_to_iceberg"
                 },
                 {
-                  "page": "Amazon S3 Tables",
-                  "url": "amazon_s3_tables"
+                  "page": "Iceberg Functions",
+                  "url": "iceberg_functions"
                 },
                 {
-                  "page": "Amazon SageMaker Lakehouse (AWS Glue)",
-                  "url": "amazon_sagemaker_lakehouse"
+                  "page": "Iceberg Options",
+                  "url": "iceberg_options"
+                },
+                {
+                  "page": "Catalogs",
+                  "url": "catalogs"
                 },
                 {
                   "page": "Troubleshooting",
