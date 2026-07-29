@@ -8,7 +8,7 @@ excerpt: |
 extension:
   name: mssql
   description: "Connect DuckDB to Microsoft SQL Server via native TDS (including TLS)."
-  version: "0.2.1"
+  version: "0.2.2"
   language: "C++"
   build: "cmake"
   licence: "MIT"
@@ -20,11 +20,14 @@ extension:
     - "wasm_mvp"
     - "wasm_eh"
     - "wasm_threads"
+  # vcpkg tag 2026.06.24 == the builtin-baseline in the extension's vcpkg.json
+  # (default CI vcpkg predates it and cannot resolve the baseline)
+  vcpkg_commit: "52c9e08cdf8580d2d9762f547d22b96fd81e82f2"
   test_config: '{"test_env_variables": {"SKIP_TESTS": "1"}}'
 
 repo:
   github: "hugr-lab/mssql-extension"
-  ref: "v0.2.1"
+  ref: "v0.2.2"
 
 docs:
   hello_world: |
@@ -61,8 +64,8 @@ docs:
 
 extension_star_count: 122
 extension_star_count_pretty: 122
-extension_download_count: 14021
-extension_download_count_pretty: 14.0k
+extension_download_count: 12443
+extension_download_count_pretty: 12.4k
 image: '/images/community_extensions/social_preview/preview_community_extension_mssql.png'
 layout: community_extension_doc
 ---
@@ -94,6 +97,7 @@ LOAD {{ page.extension.name }};
 | mssql_close                     | scalar        | NULL        | NULL    |          |
 | mssql_close_all                 | scalar        | NULL        | NULL    |          |
 | mssql_exec                      | scalar        | NULL        | NULL    |          |
+| mssql_invalidate_cache          | scalar        | NULL        | NULL    |          |
 | mssql_kerberos_auth_test        | scalar        | NULL        | NULL    |          |
 | mssql_kerberos_auth_test_secret | scalar        | NULL        | NULL    |          |
 | mssql_open                      | scalar        | NULL        | NULL    |          |
@@ -141,6 +145,7 @@ This extension does not add any types.
 | mssql_dml_max_parameters            | Maximum parameters per UPDATE/DELETE statement (SQL Server limit ~2100)                                              | BIGINT     | GLOBAL | []      |
 | mssql_dml_use_prepared              | Use prepared statements for UPDATE/DELETE operations                                                                 | BOOLEAN    | GLOBAL | []      |
 | mssql_enable_statistics             | Enable statistics collection from SQL Server for query optimizer                                                     | BOOLEAN    | GLOBAL | []      |
+| mssql_exec_invalidate_cache         | Invalidate the catalog cache after DDL executed via mssql_exec() (CREATE/DROP/ALTER/TRUNCATE/RENAME/EXEC)            | BOOLEAN    | GLOBAL | []      |
 | mssql_idle_timeout                  | Idle connection timeout in seconds (0 = no timeout)                                                                  | BIGINT     | GLOBAL | []      |
 | mssql_insert_batch_size             | Maximum rows per INSERT statement (SQL Server limit: 1000)                                                           | BIGINT     | GLOBAL | []      |
 | mssql_insert_max_rows_per_statement | Hard cap on rows per INSERT statement (SQL Server limit: 1000)                                                       | BIGINT     | GLOBAL | []      |

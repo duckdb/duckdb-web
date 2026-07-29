@@ -8,7 +8,7 @@ excerpt: |
 extension:
   name: firebird
   description: Federated read-only access to Firebird (3.0/4.0/5.0) databases from DuckDB, with projection + filter pushdown, INT128 / DECIMAL(38) / TIMESTAMP_TZ support, native ATTACH, and CHARACTER SET NONE handling (default win1252; strict / iso8859_1 / blob also available) with filter-pushdown correctness on transcoded columns.
-  version: 0.6.1
+  version: 1.0.1
   language: C++
   build: cmake
   license: MIT
@@ -28,7 +28,7 @@ extension:
 
 repo:
   github: flozer/duckdb-firebird
-  ref: v0.6.1
+  ref: v1.0.1
 
 docs:
   hello_world: |
@@ -173,12 +173,12 @@ docs:
     - Firebird 3.0 (apt `firebird3.0-server`, CI fixture)
     - Firebird 4.0.x (`firebirdsql/firebird:4-noble`)
     - Firebird 5.0.4 (Windows local + `firebirdsql/firebird:5-noble`)
-    - DuckDB v1.5.3 (`StorageExtension::Register` API)
+    - DuckDB v1.5.3 - v1.5.5 (`StorageExtension::Register` API)
 
 extension_star_count: 4
 extension_star_count_pretty: 4
-extension_download_count: 762
-extension_download_count_pretty: 762
+extension_download_count: 771
+extension_download_count_pretty: 771
 image: '/images/community_extensions/social_preview/preview_community_extension_firebird.png'
 layout: community_extension_doc
 ---
@@ -207,13 +207,24 @@ LOAD {{ page.extension.name }};
 |         function_name         | function_type | description | comment | examples |
 |-------------------------------|---------------|-------------|---------|----------|
 | firebird_attach_sql           | table         | NULL        | NULL    |          |
+| firebird_comments             | table         | NULL        | NULL    |          |
+| firebird_computed_columns     | table         | NULL        | NULL    |          |
+| firebird_dependencies         | table         | NULL        | NULL    |          |
+| firebird_domains              | table         | NULL        | NULL    |          |
+| firebird_explain_pushdown     | table         | NULL        | NULL    |          |
+| firebird_foreign_keys         | table         | NULL        | NULL    |          |
 | firebird_generate_dbt_sources | table         | NULL        | NULL    |          |
+| firebird_generators           | table         | NULL        | NULL    |          |
+| firebird_health               | table         | NULL        | NULL    |          |
+| firebird_index_profile        | table         | NULL        | NULL    |          |
+| firebird_indexes              | table         | NULL        | NULL    |          |
 | firebird_last_query           | table         | NULL        | NULL    |          |
 | firebird_pool_stats           | table         | NULL        | NULL    |          |
 | firebird_profile_table        | table         | NULL        | NULL    |          |
 | firebird_query_log            | table         | NULL        | NULL    |          |
 | firebird_scan                 | table         | NULL        | NULL    |          |
 | firebird_tables               | table         | NULL        | NULL    |          |
+| firebird_type_audit           | table         | NULL        | NULL    |          |
 
 ### Overloaded Functions
 

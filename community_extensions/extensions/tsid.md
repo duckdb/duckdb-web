@@ -86,14 +86,14 @@ extension:
   name: tsid
   version: '2025120401'
 repo:
-  andium: d72eb53d09523d21f93be28016a85302c4319182
+  andium: e404bc8c0d0b204b2f58e0c954881bc0f7d4ec70
   github: quackscience/duckdb-extension-tsid
   ref: 21457c7206e020f3d5f0deb3059d9ee255e312b1
 
 extension_star_count: 6
 extension_star_count_pretty: 6
-extension_download_count: 997
-extension_download_count_pretty: 997
+extension_download_count: 1128
+extension_download_count_pretty: 1.1k
 image: '/images/community_extensions/social_preview/preview_community_extension_tsid.png'
 layout: community_extension_doc
 ---

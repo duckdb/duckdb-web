@@ -214,8 +214,8 @@ docs:
 
 extension_star_count: 16
 extension_star_count_pretty: 16
-extension_download_count: 786
-extension_download_count_pretty: 786
+extension_download_count: 817
+extension_download_count_pretty: 817
 image: '/images/community_extensions/social_preview/preview_community_extension_duckhts.png'
 layout: community_extension_doc
 ---
@@ -243,6 +243,14 @@ LOAD {{ page.extension.name }};
 
 |            function_name             | function_type | description | comment | examples |
 |--------------------------------------|---------------|-------------|---------|----------|
+| _duckvep_annotate_breakend_compact   | scalar        | NULL        | NULL    |          |
+| _duckvep_annotate_breakend_rich      | scalar        | NULL        | NULL    |          |
+| _duckvep_annotate_small_compact      | scalar        | NULL        | NULL    |          |
+| _duckvep_annotate_small_hgvs         | scalar        | NULL        | NULL    |          |
+| _duckvep_annotate_small_rich         | scalar        | NULL        | NULL    |          |
+| _duckvep_annotate_small_rich_hgvs    | scalar        | NULL        | NULL    |          |
+| _duckvep_annotate_structural_compact | scalar        | NULL        | NULL    |          |
+| _duckvep_annotate_structural_rich    | scalar        | NULL        | NULL    |          |
 | are_overlapping_region_regionkey     | scalar        | NULL        | NULL    |          |
 | are_overlapping_regionkeys           | scalar        | NULL        | NULL    |          |
 | are_overlapping_regions              | scalar        | NULL        | NULL    |          |
@@ -287,10 +295,15 @@ LOAD {{ page.extension.name }};
 | duckhts_cgranges_overlaps            | table         | NULL        | NULL    |          |
 | duckhts_cgranges_overlaps_bulk       | table         | NULL        | NULL    |          |
 | duckhts_cgranges_overlaps_list       | scalar        | NULL        | NULL    |          |
+| duckhts_contig_key                   | scalar        | NULL        | NULL    |          |
 | duckhts_duckdb_supports_geometry     | macro         | NULL        | NULL    |          |
 | duckhts_duckdb_supports_variant      | macro         | NULL        | NULL    |          |
 | duckhts_duckdb_type_supported        | macro         | NULL        | NULL    |          |
+| duckhts_fastq_qc                     | aggregate     | NULL        | NULL    |          |
 | duckhts_gff_convert_parquet_sql      | macro         | NULL        | NULL    |          |
+| duckhts_htslib_feature_string        | scalar        | NULL        | NULL    |          |
+| duckhts_htslib_features              | scalar        | NULL        | NULL    |          |
+| duckhts_htslib_version               | scalar        | NULL        | NULL    |          |
 | duckhts_json_path_key                | macro         | NULL        | NULL    |          |
 | duckhts_mosdepth                     | table         | NULL        | NULL    |          |
 | duckhts_parquet_copy_sql             | macro         | NULL        | NULL    |          |
@@ -309,6 +322,15 @@ LOAD {{ page.extension.name }};
 | duckhts_simd_requested_backend       | scalar        | NULL        | NULL    |          |
 | duckhts_simd_set_backend             | table         | NULL        | NULL    |          |
 | duckhts_tabix_convert_parquet_sql    | macro         | NULL        | NULL    |          |
+| duckvep_allele_geometry              | scalar        | NULL        | NULL    |          |
+| duckvep_annotate                     | table_macro   | NULL        | NULL    |          |
+| duckvep_ensembl_regions              | table_macro   | NULL        | NULL    |          |
+| duckvep_ensembl_regulation_features  | table_macro   | NULL        | NULL    |          |
+| duckvep_ensembl_transcripts          | table_macro   | NULL        | NULL    |          |
+| duckvep_model_drop                   | scalar        | NULL        | NULL    |          |
+| duckvep_model_load                   | table         | NULL        | NULL    |          |
+| duckvep_model_receipt                | table_macro   | NULL        | NULL    |          |
+| duckvep_so_terms                     | table         | NULL        | NULL    |          |
 | encode_regionkey                     | scalar        | NULL        | NULL    |          |
 | encode_variantkey                    | scalar        | NULL        | NULL    |          |
 | extend_regionkey                     | scalar        | NULL        | NULL    |          |
@@ -343,6 +365,7 @@ LOAD {{ page.extension.name }};
 | read_bcf_appender                    | table         | NULL        | NULL    |          |
 | read_bcf_v2                          | table         | NULL        | NULL    |          |
 | read_bed                             | table         | NULL        | NULL    |          |
+| read_bigwig                          | table         | NULL        | NULL    |          |
 | read_fasta                           | table         | NULL        | NULL    |          |
 | read_fastq                           | table         | NULL        | NULL    |          |
 | read_gff                             | table         | NULL        | NULL    |          |

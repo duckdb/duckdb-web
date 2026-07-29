@@ -18,7 +18,7 @@ extension:
 
 repo:
   github: DataZooDE/anofox-scenario
-  ref: 484a9ce530cd61d7f9fd562543b46055bfc48d83
+  ref: ef43c760b1ea297d21b14b693044d29828a07ab6
 
 docs:
   hello_world: |
@@ -74,8 +74,8 @@ docs:
 
 extension_star_count: 2
 extension_star_count_pretty: 2
-extension_download_count: 621
-extension_download_count_pretty: 621
+extension_download_count: 682
+extension_download_count_pretty: 682
 image: '/images/community_extensions/social_preview/preview_community_extension_anofox_scenario.png'
 layout: community_extension_doc
 ---

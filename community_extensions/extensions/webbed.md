@@ -8,7 +8,7 @@ excerpt: |
 extension:
   name: webbed
   description: Comprehensive processing extension for web markup languages (XML and HTML) with SAX streaming for large files, intelligent schema inference, XPath-based data extraction, and HTML table parsing.
-  version: 2.6.0
+  version: 2.6.1
   language: C++
   build: cmake
   license: MIT
@@ -22,7 +22,9 @@ extension:
 repo:
   github: teaguesterling/duckdb_webbed
   andium: ddda30f11352138b2451657419640370d1612137
-  ref: a8c75aa6853069436a25c71d05bff3ab66f5e1e7
+  # andium (DuckDB v1.4.5 track) left at its prior commit; the v2.6.1
+  # structured-inline fix ships on the v1.5.x track via ref.
+  ref: refs/tags/v2.6.1
 docs:
   docs_url: https://duckdb-webbed.readthedocs.io
   hello_world: |
@@ -99,8 +101,8 @@ docs:
 
 extension_star_count: 67
 extension_star_count_pretty: 67
-extension_download_count: 18998
-extension_download_count_pretty: 19.0k
+extension_download_count: 18676
+extension_download_count_pretty: 18.7k
 image: '/images/community_extensions/social_preview/preview_community_extension_webbed.png'
 layout: community_extension_doc
 ---
