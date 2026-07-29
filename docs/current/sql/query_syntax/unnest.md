@@ -154,7 +154,7 @@ SELECT unnest([[[1, 2], [3, 4]], [[5, 6], [7, 8, 9], []], [[10, 11]]], max_depth
 
 ### Keeping Track of List Entry Positions
 
-To keep track of each entry's position within the original list, `unnest` may be combined with [`generate_subscripts`]({% link docs/current/sql/functions/list.md %}#generate_subscripts):
+For non-recursive list unnesting, [`generate_subscripts`]({% link docs/current/sql/functions/list.md %}#generate_subscriptsarr-dim) can be used to emit each entry's position within the original list:
 
 ```sql
 SELECT unnest(l) AS x, generate_subscripts(l, 1) AS index
@@ -168,6 +168,8 @@ FROM (VALUES ([1, 2, 3]), ([4, 5])) tbl(l);
 | 3 | 3     |
 | 4 | 1     |
 | 5 | 2     |
+
+`generate_subscripts` can also be used independently to return indexes for a list. It does not provide positions for recursive `unnest` output.
 
 ### Keep Column Names When Recursively Unnesting
 

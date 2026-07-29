@@ -102,9 +102,17 @@ OVERRIDES: list[DocFunction] = [
     DocFunction(
         category='list',
         name='unnest',
-        parameters=['list'],
-        description="Unnests a list by one level. Note that this is a special function that alters the cardinality of the result. See the unnest page for more details.",
+        parameters=['list', 'recursive := boolean', 'max_depth := integer'],
+        description="Unnests a list. This is a special function that alters the cardinality of the result. See the unnest page for more details, including recursive unnesting and depth limits.",
         examples=["unnest([1, 2, 3])"],
+        nr_optional_arguments=2,
+    ),
+    DocFunction(
+        category='list',
+        name='generate_subscripts',
+        parameters=['arr', 'dim'],
+        description="Generates indexes along the `dim`th dimension of `arr`. See the unnest page for an example of tracking list entry positions.",
+        examples=["generate_subscripts([4, 5, 6], 1)"],
     ),
     # macros
     DocFunction(

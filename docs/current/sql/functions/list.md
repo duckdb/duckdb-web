@@ -68,6 +68,7 @@ title: List Functions
 | [`filter(list, lambda(x))`](#list_filterlist-lambdax) | Alias for `list_filter`. |
 | [`flatten(nested_list)`](#flattennested_list) | [Flattens](#flattening) a nested list by one level. |
 | [`generate_series(start[, stop][, step])`](#generate_seriesstart-stop-step) | Creates a list of values between `start` and `stop` - the stop parameter is inclusive. |
+| [`generate_subscripts(arr, dim)`](#generate_subscriptsarr-dim) | Generates indexes along the `dim`th dimension of `arr`. See the [unnest page]({% link docs/current/sql/query_syntax/unnest.md %}) for an example of tracking list entry positions. |
 | [`grade_up(list[, col1][, col2])`](#list_grade_uplist-col1-col2) | Alias for `list_grade_up`. |
 | [`len(list)`](#lengthlist) | Alias for `length`. |
 | [`length(list)`](#lengthlist) | Returns the length of the `list`. |
@@ -143,7 +144,7 @@ title: List Functions
 | [`range(start[, stop][, step])`](#rangestart-stop-step) | Creates a list of values between `start` and `stop` - the stop parameter is exclusive. |
 | [`reduce(list, lambda(x,y)[, initial_value])`](#list_reducelist-lambdaxy-initial_value) | Alias for `list_reduce`. |
 | [`repeat(list, count)`](#repeatlist-count) | Repeats the `list` `count` number of times. |
-| [`unnest(list)`](#unnestlist) | Unnests a list by one level. Note that this is a special function that alters the cardinality of the result. See the [unnest page]({% link docs/current/sql/query_syntax/unnest.md %}) for more details. |
+| [`unnest(list[, recursive := boolean][, max_depth := integer])`](#unnestlist-recursive--boolean-max_depth--integer) | Unnests a list. This is a special function that alters the cardinality of the result. See the [unnest page]({% link docs/current/sql/query_syntax/unnest.md %}) for more details, including recursive unnesting and depth limits. |
 | [`unpivot_list(arg, ...)`](#unpivot_listarg-) | Identical to list_value, but generated as part of unpivot for better error messages. |
 
 <!-- markdownlint-enable MD056 -->
@@ -261,6 +262,14 @@ title: List Functions
 | **Description** | Creates a list of values between `start` and `stop` - the stop parameter is inclusive. |
 | **Example** | `generate_series(2, 5, 3)` |
 | **Result** | `[2, 5]` |
+
+#### `generate_subscripts(arr, dim)`
+
+<div class="nostroke_table"></div>
+
+| **Description** | Generates indexes along the `dim`th dimension of `arr`. See the [unnest page]({% link docs/current/sql/query_syntax/unnest.md %}) for an example of tracking list entry positions. |
+| **Example** | `generate_subscripts([4, 5, 6], 1)` |
+| **Result** | Multiple rows: `'1'`, `'2'`, `'3'` |
 
 #### `length(list)`
 
@@ -801,11 +810,11 @@ title: List Functions
 | **Example** | `repeat([1, 2, 3], 5)` |
 | **Result** | `[1, 2, 3, 1, 2, 3, 1, 2, 3, 1, 2, 3, 1, 2, 3]` |
 
-#### `unnest(list)`
+#### `unnest(list[, recursive := boolean][, max_depth := integer])`
 
 <div class="nostroke_table"></div>
 
-| **Description** | Unnests a list by one level. Note that this is a special function that alters the cardinality of the result. See the [unnest page]({% link docs/current/sql/query_syntax/unnest.md %}) for more details. |
+| **Description** | Unnests a list. This is a special function that alters the cardinality of the result. See the [unnest page]({% link docs/current/sql/query_syntax/unnest.md %}) for more details, including recursive unnesting and depth limits. |
 | **Example** | `unnest([1, 2, 3])` |
 | **Result** | Multiple rows: `'1'`, `'2'`, `'3'` |
 
@@ -883,6 +892,12 @@ l.list_apply(lambda x, i: {'filter': g(x, i), 'result': f(x, i)})
     .list_filter(lambda x: x.filter)
     .list_apply(lambda x: x.result)
 ```
+
+## Unnesting Functions
+
+The [`unnest`](#unnestlist-recursive--boolean-max_depth--integer) function emits list entries as rows. The [`generate_subscripts`](#generate_subscriptsarr-dim) function emits list indexes and can be used with `unnest` to keep track of list entry positions.
+
+For details on `unnest` behavior, including recursive unnesting, depth limits and examples using `generate_subscripts`, see the [Unnesting]({% link docs/current/sql/query_syntax/unnest.md %}) page.
 
 ## Range Functions
 
@@ -962,20 +977,6 @@ SELECT generate_series(2, 5, 3);
 ```text
 [2, 5]
 ```
-
-#### `generate_subscripts(arr, dim)`
-
-The `generate_subscripts(arr, dim)` function generates indexes along the `dim`th dimension of array `arr`.
-
-```sql
-SELECT generate_subscripts([4, 5, 6], 1) AS i;
-```
-
-| i |
-|--:|
-| 1 |
-| 2 |
-| 3 |
 
 ### Date Ranges
 
