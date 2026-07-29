@@ -80,8 +80,8 @@ docs:
 
 extension_star_count: 58
 extension_star_count_pretty: 58
-extension_download_count: 5720
-extension_download_count_pretty: 5.7k
+extension_download_count: 6129
+extension_download_count_pretty: 6.1k
 image: '/images/community_extensions/social_preview/preview_community_extension_snowflake.png'
 layout: community_extension_doc
 ---
@@ -107,10 +107,11 @@ LOAD {{ page.extension.name }};
 
 <div class="extension_functions_table"></div>
 
-|   function_name   | function_type |                                                                      description                                                                       | comment |                                                examples                                                 |
-|-------------------|---------------|--------------------------------------------------------------------------------------------------------------------------------------------------------|---------|---------------------------------------------------------------------------------------------------------|
-| snowflake_query   | table         | Execute a SQL query directly against a Snowflake database and return the results as a table. Uses the specified secret for authentication credentials. | NULL    | [SELECT * FROM snowflake_query('SELECT * FROM customers WHERE state = ''CA''', 'my_snowflake_secret');] |
-| snowflake_version | scalar        | Returns the version of the Snowflake extension.                                                                                                        | NULL    | [SELECT snowflake_version();]                                                                           |
+|          function_name          | function_type |                                                                      description                                                                       | comment |                                                examples                                                 |
+|---------------------------------|---------------|--------------------------------------------------------------------------------------------------------------------------------------------------------|---------|---------------------------------------------------------------------------------------------------------|
+| snowflake_query                 | table         | Execute a SQL query directly against a Snowflake database and return the results as a table. Uses the specified secret for authentication credentials. | NULL    | [SELECT * FROM snowflake_query('SELECT * FROM customers WHERE state = ''CA''', 'my_snowflake_secret');] |
+| snowflake_version               | scalar        | Returns the version of the Snowflake extension.                                                                                                        | NULL    | [SELECT snowflake_version();]                                                                           |
+| snowflake_render_pushdown_query | scalar        | NULL                                                                                                                                                   | NULL    | NULL                                                                                                    |
 
 ### Overloaded Functions
 

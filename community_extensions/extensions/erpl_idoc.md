@@ -17,12 +17,12 @@ extension:
     - jrosskopf
 repo:
   github: DataZooDE/erpl-idoc
-  ref: f96c92a39be25b4df77928cc029e76a25c21718b
+  ref: 932869fb8cc0a0d3612d428c19b0d05aa9cf9e72
 
 extension_star_count: 2
 extension_star_count_pretty: 2
-extension_download_count: 512
-extension_download_count_pretty: 512
+extension_download_count: 538
+extension_download_count_pretty: 538
 image: '/images/community_extensions/social_preview/preview_community_extension_erpl_idoc.png'
 layout: community_extension_doc
 ---

@@ -45,8 +45,8 @@ docs:
 
 extension_star_count: 3
 extension_star_count_pretty: 3
-extension_download_count: 1412
-extension_download_count_pretty: 1.4k
+extension_download_count: 1203
+extension_download_count_pretty: 1.2k
 image: '/images/community_extensions/social_preview/preview_community_extension_h5db.png'
 layout: community_extension_doc
 ---
@@ -76,16 +76,19 @@ LOAD {{ page.extension.name }};
 |---------------|---------------|------------------------------------------------------------------------------------------------------------------|---------|----------------------------------------------------------------------------------|
 | h5_alias      | scalar        | Renames a column definition.                                                                                     | NULL    | [FROM h5_read('data.h5', h5_alias('temperature', '/entry/temp'))]                |
 | h5_attr       | scalar        | Creates a projected HDF5 attribute definition for h5_tree() and h5_ls().                                         | NULL    | [FROM h5_tree('data.h5', h5_attr('NX_class'))]                                   |
+| h5_attributes | scalar        | Reads all attributes from one HDF5 object as a MAP.                                                              | NULL    | [SELECT h5_attributes('data.h5', '/measurements')]                               |
 | h5_attributes | table         | Reads all attributes from an HDF5 object or file root.                                                           | NULL    | [FROM h5_attributes('data.h5', '/measurements')]                                 |
 | h5_first_file | scalar        | Returns the first concrete HDF5 filename from an exact path, glob, or list for planning-time use with h5_read(). | NULL    | [FROM h5_read(h5_first_file('runs/run_*.h5'), '/detector_geometry')]             |
 | h5_index      | scalar        | Creates a virtual row-index column definition for h5_read().                                                     | NULL    | [FROM h5_read('data.h5', h5_index(), '/measurements')]                           |
 | h5_ls         | scalar        | Lists entries immediately under an HDF5 group as a MAP.                                                          | NULL    | [SELECT h5_ls('data.h5', '/entry')]                                              |
 | h5_ls         | table         | Lists entries immediately under an HDF5 group as rows.                                                           | NULL    | [FROM h5_ls('data.h5', '/entry')]                                                |
 | h5_ls_swmr    | scalar        | Lists entries immediately under an HDF5 group as a MAP using SWMR read mode.                                     | NULL    | [SELECT h5_ls_swmr('data.h5', '/entry')]                                         |
+| h5_read       | scalar        | Reads one HDF5 dataset as a VARIANT.                                                                             | NULL    | [SELECT h5_read('data.h5', '/entry/dataset')]                                    |
 | h5_read       | table         | Reads one or more HDF5 datasets as DuckDB columns.                                                               | NULL    | [FROM h5_read('data.h5', '/measurements')]                                       |
+| h5_ree        | scalar        | Creates a run-end encoded column definition for h5_read().                                                       | NULL    | [FROM h5_read('data.h5', '/time', h5_ree('/state_run_ends', '/state_values'))]   |
 | h5_rse        | scalar        | Creates a run-start encoded column definition for h5_read().                                                     | NULL    | [FROM h5_read('data.h5', '/time', h5_rse('/state_run_starts', '/state_values'))] |
 | h5_tree       | table         | Recursively lists entries in an HDF5 file.                                                                       | NULL    | [FROM h5_tree('data.h5')]                                                        |
-| h5db_version  | scalar        | Returns the linked HDF5 library version used by h5db.                                                            | NULL    | [SELECT h5db_version('h5db')]                                                    |
+| h5db_version  | scalar        | Returns h5db, linked HDF5, and SFTP backend library versions.                                                    | NULL    | [SELECT h5db_version()]                                                          |
 
 ### Overloaded Functions
 
@@ -103,9 +106,10 @@ This extension does not add any types.
 
 <div class="extension_settings_table"></div>
 
-|       name        |                         description                         | input_type | scope  | aliases |
-|-------------------|-------------------------------------------------------------|------------|--------|---------|
-| h5db_batch_size   | Target batch size for h5_read chunk caching (e.g. 1MB, 8MB) | VARCHAR    | GLOBAL | []      |
-| h5db_swmr_default | Default to SWMR read mode for h5db table functions          | BOOLEAN    | GLOBAL | []      |
+|             name              |                                   description                                    | input_type | scope  | aliases |
+|-------------------------------|----------------------------------------------------------------------------------|------------|--------|---------|
+| h5db_batch_size               | Target batch size for h5_read read-ahead caching (e.g. 1MB, 8MB)                 | VARCHAR    | GLOBAL | []      |
+| h5db_scalar_read_memory_limit | Estimated peak memory limit for scalar h5_read materialization (e.g. 64MB, none) | VARCHAR    | GLOBAL | []      |
+| h5db_swmr_default             | Default to SWMR read mode for h5db table functions                               | BOOLEAN    | GLOBAL | []      |
 
 

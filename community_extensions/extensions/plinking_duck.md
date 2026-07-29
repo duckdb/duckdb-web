@@ -84,8 +84,8 @@ docs:
 
 extension_star_count: 4
 extension_star_count_pretty: 4
-extension_download_count: 871
-extension_download_count_pretty: 871
+extension_download_count: 896
+extension_download_count_pretty: 896
 image: '/images/community_extensions/social_preview/preview_community_extension_plinking_duck.png'
 layout: community_extension_doc
 ---
@@ -142,10 +142,12 @@ This extension does not add any types.
 
 <div class="extension_settings_table"></div>
 
-|              name               |                                                          description                                                          | input_type | scope  | aliases |
-|---------------------------------|-------------------------------------------------------------------------------------------------------------------------------|------------|--------|---------|
-| plinking_max_matrix_elements    | Maximum genotype matrix elements for orient := 'sample' pre-read (variants x samples). Default 16 billion (~16 GB of int8).   | BIGINT     | GLOBAL | []      |
-| plinking_max_threads            | Maximum threads for parallel scan operations. 0 = default (hardcoded cap of 16), >0 = cap at this value.                      | BIGINT     | GLOBAL | []      |
-| plinking_use_parquet_companions | Auto-discover .pvar.parquet and .psam.parquet companion files. When true, parquet companions are preferred over text formats. | BOOLEAN    | GLOBAL | []      |
+|              name               |                                                                                                                                                                description                                                                                                                                                                | input_type | scope  | aliases |
+|---------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|------------|--------|---------|
+| plinking_max_matrix_elements    | Maximum genotype matrix elements for orient := 'sample' pre-read (variants x samples). Default 16 billion (~16 GB of int8).                                                                                                                                                                                                               | BIGINT     | GLOBAL | []      |
+| plinking_max_threads            | Maximum threads for parallel scan operations. 0 = default (hardcoded cap of 16), >0 = cap at this value.                                                                                                                                                                                                                                  | BIGINT     | GLOBAL | []      |
+| plinking_pgen_io                | How .pgen bytes are read: 'auto' (default — remote/VFS paths via DuckDB's VFS, local via native fopen), 'native' (always native fopen; errors on remote), 'vfs' (always via DuckDB's VFS, even local), 'localize' (download remote to a temp then native — not yet implemented).                                                          | VARCHAR    | GLOBAL | []      |
+| plinking_sample_counts_sparse   | orient := 'sample' + genotypes := 'counts'\|'stats': when true, use the sparse (pgen difflist) accumulation path — reads only the non-hom_ref carriers of rare variants (auto-falls-back to the dense full-decode path per variant). When false, always use the dense path. Toggle to A/B time both; both paths produce identical counts. | BOOLEAN    | GLOBAL | []      |
+| plinking_use_parquet_companions | Auto-discover .pvar.parquet and .psam.parquet companion files. When true, parquet companions are preferred over text formats.                                                                                                                                                                                                             | BOOLEAN    | GLOBAL | []      |
 
 
