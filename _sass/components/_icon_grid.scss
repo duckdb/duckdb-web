@@ -15,7 +15,8 @@
 	.icon-grid-item{
 		padding-right: 20px;
 
-		.icon{
+		> .icon,
+		.icon-box .icon{
 			display: block;
 			width: 24px;
 			height: 24px;

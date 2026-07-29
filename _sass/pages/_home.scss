@@ -799,7 +799,8 @@ body.landing{
 			--icon-grid-columns: 3;
 			margin-top: 0;
 			gap: 58px 20px;
-			.icon-grid-item .icon{
+			.icon-grid-item > .icon,
+			.icon-grid-item .icon-box .icon{
 				color: var(--main-benefit-icon-color, #998B00);
 				stroke-width: 1.5;
 			}

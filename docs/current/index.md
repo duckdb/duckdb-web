@@ -113,7 +113,7 @@ title: Documentation
     </div>
     <div class="box-link third-width">
         <a href="{% link docs/current/sql/statements/overview.md %}"></a>
-        <span class="symbol"><img src="{% link images/icons/attention.svg %}"></span>
+        <span class="symbol"><img src="{% link images/icons/statement.svg %}"></span>
         <span>Statements</span>
         <svg class="chevron"><use href="#chevron-right"></use></svg>
     </div>

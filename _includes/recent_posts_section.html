@@ -140,7 +140,7 @@
 										<div class="venue">{{ item.venue | default: "Venue not specified" }}</div>
 									{% else %}
 										{% if is_external %}
-											<div class="external-source">{{ item.external_post_url | extract_domain }}</div>
+											<div class="external-source">{{ item.external_post_url | extract_domain }}<svg class="icon"><use href="#link-external-02"></use></svg></div>
 										{% endif %}
 										<div class="date">{{ item.date | date: "%Y-%m-%d" }}</div>
 									{% endif %}
@@ -154,7 +154,7 @@
 			{% endfor %}
 		</div>
 		<a href="{{ site.url }}{% if page.collection == "events" %}/events/{% elsif page.collection == "library" %}/library/{% elsif page.collection == "everywhere" %}/everywhere/{% else %}/news/{% endif %}" class="button transparent arrow-right">
-			All {% if page.collection == "events" %}events{% elsif page.collection == "library" %}library resources{% elsif page.collection == "everywhere" %}everywhere posts{% else %}blog posts{% endif %} <span></span>
+			All {% if page.collection == "events" %}events{% elsif page.collection == "library" %}library resources{% elsif page.collection == "everywhere" %}everywhere posts{% else %}blog posts{% endif %} <svg class="icon"><use href="#arrow-right"></use></svg>
 		</a>
 	</div>
 </section>

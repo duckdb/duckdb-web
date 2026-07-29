@@ -35,7 +35,7 @@ redirect_from:
   <div class="hero-center">
     <h1 class="display-1">DuckCon&nbsp;#7 <br/>Amsterdam</h1>
     <div class="hero-center-actions">
-      <a class="button black arrow-down" href="#program">Program</a>
+      <a class="button black arrow-down" href="#program">Program<svg class="icon"><use href="#arrow-down"></use></svg></a>
     </div>
   </div>
   <footer class="hero-footer">
@@ -231,7 +231,7 @@ Sponsors – Option A: call for sponsors (use when there are no sponsors yet)
             <img class="icon" src="{{ venue_access.icon }}" alt="{{ venue_access.title }}" />
             <h3 class="title-1">{{ venue_access.title }}</h3>
             <p class="body-small text-secondary-color">{{ venue_access.description }}</p>
-            <a href="{{ venue_access.url }}" class="textbutton arrow-right">Read more</a>
+            <a href="{{ venue_access.url }}" class="textbutton arrow-right">Read more<svg class="icon"><use href="#arrow-right"></use></svg></a>
           </li>
         {% endfor %}
       </ul>

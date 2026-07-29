@@ -169,7 +169,7 @@ body.installation{
 			svg.icon{
 				width: 14px;
 				height: 14px;
-				stroke-width: 2.5px;
+				stroke-width: 2.2;
 			}
 
 			&:hover{
@@ -239,7 +239,6 @@ body.installation{
 			border-radius: var(--page-radius-pill);
 			cursor: pointer;
 			@include label-1;
-			font-weight: 500;
 			color: var(--interactive-filter-unselected-text-color, #666);
 			transition: color 0.3s, opacity 0.3s;
 			white-space: nowrap;
@@ -322,9 +321,16 @@ body.installation{
 				transition: border .3s;
 				
 				&:after{
-					width: 13px;
-					height: 10px;
-					background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='13' height='10' fill='none' viewBox='0 0 13 10'%3E%3Cpath fill='%23000000' d='M12.472 5 8.146 9.354 7.25 8.43l2.758-2.744H0V4.328h10.036L7.25 1.57l.896-.924L12.472 5Z'/%3E%3C/svg%3E");
+					content: none;
+				}
+
+				svg.icon{
+					width: 14px;
+					height: 14px;
+					fill: none;
+					stroke-width: 2.3;
+					margin-left: 5px;
+					vertical-align: -.15em;
 				}
 				
 				&:hover{
@@ -346,17 +352,25 @@ body.installation{
 				transition: border .3s;
 				
 				&:after{
-					width: 13px;
-					height: 9px;
-					background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='13' height='9' fill='none' viewBox='0 0 13 9'%3E%3Cpath stroke='%23000000' stroke-width='1.5' d='M1 1.5 6.5 7 12 1.5'/%3E%3C/svg%3E");
+					content: none;
 				}
-				
+
+				svg.icon{
+					width: 14px;
+					height: 14px;
+					fill: none;
+					stroke-width: 2.3;
+					margin-left: 5px;
+					vertical-align: -.15em;
+					transition: transform .3s;
+				}
+
 				&:hover{
 					border: 1px solid var(--interactive-folderbox-border-color-hover, #CCC);
 				}
 			}
 			.alternative-options[aria-expanded="true"]{
-				&:after{
+				svg.icon{
 					transform: rotate(180deg);
 				}
 			}
