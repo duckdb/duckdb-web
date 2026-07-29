@@ -80,7 +80,7 @@ redirect_from:
 					<h3>{{ post.title }}</h3>
 					<div class="meta">
 						{% if is_external %}
-							<div class="external-source">{{ post.external_post_url | extract_domain }}</div>
+							<div class="external-source">{{ post.external_post_url | extract_domain }}<svg class="icon"><use href="#link-external-02"></use></svg></div>
 						{% endif %}
 						<div class="date">{{ post.date | date: "%Y-%m-%d" }}</div>
 						<div class="author">{{ post.author }}</div>
