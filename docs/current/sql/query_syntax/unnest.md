@@ -6,6 +6,52 @@ redirect_from:
 - /docs/stable/sql/query_syntax/unnest
 title: Unnesting
 ---
+Unnesting is an operation that decomposes values of a [composite types]({% link docs/current/sql/data_types/overview.md %}#nested--composite-types) into its components.
+Values of the [`LIST`]({% link docs/current/sql/data_types/list.md %}) and [`STRUCT`]({% link docs/current/sql/data_types/struct.md %}) type may be unnested using the [`unnest()` function]({% link docs/current/sql/functions/list.md %}#unnestlist-recursive-max_depth).
+- unnesting turns a `LIST`-typed value into a table column: each list-element creates a row, and each element become a column value.
+- unnesting a `STRUCT`-typed value creates a column for each member. The member key becomes the column name, and the member value becomes a column value. Values of a `STRUCT`-type may also be unnested using [dot-star (`<struct>.*`) shorthand syntax]({% link docs/lts/sql/data_types/struct.md %}#unnest--struct), but the `unnest()` function offers some additional functionality.
+- For an [unnamed struct]({ % link /docs/current/sql/data_types/struct %}#creating-structs-with-the-row-function), the unnesting operation is the same as for a named `STRUCT`, but in this case the column name is generated based on the (1-based) ordinal position of the member, prefixed by `element`. The dot-star (`<struct>.*`) shorthand syntax is not available for unnamed structs:  Unnamed structs can only be unnested using the `unnest()` function.
+
+# Calling `unnest()`
+The `LIST` or `STRUCT` value that is to be unnested is always passed as the first - mandatory - argument to the `unnest()` function.
+The `unnest()` function has a number of optional additional arguments to control the behavior for [recursive unnesting](#recursive-unnesting).
+
+The `unnest` function can be called in the [`SELECT`-clause]({% link docs/current/sql/query_syntax/select.md %}) as if it is a scalar function.
+The `unnest` function may not be called in other contexts where one would normally be able to invoke scalar functions, like the `WHERE`, `GROUP BY`, or `ORDER BY` clauses.
+When applied to values of the `LIST`-type, `unnest()` may also appear in clauses where one could normally use a [table function](#unnest-as-table-function).
+
+## Unnesting `LIST`-typed values
+To fully understand unnesting `LIST`-typed values, it is useful to distinguish between the 'input' row that provided the `LIST`-typed value that is to be unnested, and the 'ouput' row(s) created by the unnesting operation.
+An individual invocation to `unnest()` on the `LIST`-typed value has the effect of duplicating the 'input' row while populating the field corresponding to the `unnest()` call with the element value.
+In other words, the original row becomes a repeating group for element unnnested from the `LIST`-typed value.
+Consequently, if `unnest()` gets called on an empty list (or a `NULL` value), no elements are unnested, and no 'ouput' rows are generated.
+
+### Unnesting multiple lists
+Multiple `LIST`-typed values may be unnested within the same `SELECT`-clause, so for one 'input' row there may be multiple row sets resulting from an `unnest()` invocation, and each may have its own number of rows.
+Each result becomes a column of the output table, aligning their values by ordinal position, and backfilling columns with `NULL`-values when a particular result has a smaller number of elements than any of the other results.
+In a final step, the columns of the input row are added to this result. In other words, the repeating group is created only once, and for all `unnest()` results, rather than again for each individual `unnest()` result.
+
+### Getting the element index
+Unnesting a value of the `LIST`-type yields only the element values. To also keep track of their indices (the subscripts), you can use the built-in macro [`generate_subscripts()`]({% link docs/current/sql/functions/list.md %}#generate_subscriptslist-dimension).
+The `generate_subscripts` macro takes a value of the `LIST`-type as first argument. It has a mandatory second argument, for which the value `1` must be passed. 
+
+### `unnest()` as table function
+Since a call to `unnest` on a value of the `LIST`-type yields a rowset, it may also be treated as a [table function]({% link docs/lts/sql/query_syntax/from.md %}#table-functions). 
+This means it may appear in the [`FROM`-clause]({% link docs/lts/sql/query_syntax/from.md %}) or a [`CALL`-statement]({% link docs/lts/sql/statements/call.md %}).
+
+Calls to `unnest()` in a `FROM`-clause or `CALL`-statement do not accept additional parameters, and can thus not be used for [recursive unnesting](#recursive-unnesting).
+
+# Recursive unnesting
+By default, `unnest()` only unpacks the outermost components of the composite-type value.
+Additional parameters may be passed to allow the unnesting operation to be applied to the unnested member values, and to their unnested values, and so on, recursively.
+These additional parameters are:
+- `recursive`: `BOOLEAN`, default: `FALSE`. Pass `TRUE` to recursively continue applying `unnest` to unnested member values. When explicitly passing `FALSE`, recursion is disabled. In that case, other additional parameters such as `max_depth` and `keep_parent_names` are effectively ignored
+- `max_depth`: `UINT32`, default: `1`. This controls how many levels of recursion should at most be applied. Values greater than `1` imply recursion, and in such cases `recursive` need not be explicitly passed as `TRUE`.
+- `keep_parent_names`: `BOOLEAN`, default: `FALSE`. Whether to create column names using the keys of all ancestor members. This argument is applicable only when unnesting `STRUCT`-values.
+
+Note that recursive unnesting always respects the type of the outermost call to `unnest()`: 
+- if a `LIST`-typed value is passed, then `LIST`-typed elements will be recursively unnested, while `STRUCT`-typed elements are not further unpacked.
+- if a `STRUCT`-typed value is passed, then `STRUCT`-typed member values will be recursively unnested, while `LIST`-typed member values are not further unpacked.
 
 ## Examples
 
@@ -32,8 +78,6 @@ Limit depth of recursive unnest using `max_depth`:
 ```sql
 SELECT unnest([[[1, 2], [3, 4]], [[5, 6], [7, 8, 9], []], [[10, 11]]], max_depth := 2);
 ```
-
-The `unnest` special function is used to unnest lists or structs by one level. The function can be used as a regular scalar function, but only in the `SELECT` clause. Invoking `unnest` with the `recursive` parameter will unnest lists and structs of multiple levels. The depth of unnesting can be limited using the `max_depth` parameter (which assumes `recursive` unnesting by default).
 
 ### Unnesting Lists
 

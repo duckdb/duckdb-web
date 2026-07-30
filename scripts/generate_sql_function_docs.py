@@ -23,7 +23,7 @@ class DocFunction:
     alias_of_obj: Optional[Self] = None
 
 
-DOC_VERSION = 'preview'
+DOC_VERSION = 'current'
 DOC_FILES = [
     f'docs/{DOC_VERSION}/sql/functions/array.md',
     f'docs/{DOC_VERSION}/sql/functions/blob.md',
@@ -102,11 +102,19 @@ OVERRIDES: list[DocFunction] = [
     DocFunction(
         category='list',
         name='unnest',
-        parameters=['list'],
-        description="Unnests a list by one level. Note that this is a special function that alters the cardinality of the result. See the unnest page for more details.",
-        examples=["unnest([1, 2, 3])"],
+        parameters=['list', 'recursive', 'max_depth'],
+        nr_optional_arguments=2,
+        description="Unnests the `list` to a table; Creates one row for each element, with the element as a column value. Note that this is a special function that alters the cardinality of the result. See the unnest page for more details.",
+        examples=["unnest([1, 2, 3])","unnest([[1,2],[3,4]], recursive:=true)","unnest([[1,2],[3,4]], recursive:=true, max_depth:=1)"],
     ),
     # macros
+    DocFunction(
+        category='list',
+        name='generate_subscripts',
+        parameters=['list', 'dimension'],
+        description="Unnests the `list` to a table; Creates one row for each element, with the element's (1-based) index as a column value. See the unnest page for more details.",
+        examples=["generate_subscripts([1, 2, 3], 1)"],
+    ),
     DocFunction(
         category='string',
         name='md5_number_lower',
