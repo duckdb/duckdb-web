@@ -404,6 +404,7 @@ body.documentation {
         justify-content: space-between;
         margin-top: 8em;
         width: 100%;
+        color: var(--main-text-secondary-color, #666);
 
         h5 {
             @include title-3();
@@ -433,6 +434,7 @@ body.documentation {
             align-items: center;
             gap: 6px;
             text-decoration: none;
+            color: var(--main-text-secondary-color, #666);
 
             svg.icon {
                 width: 16px;

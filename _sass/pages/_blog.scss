@@ -634,7 +634,7 @@ h5 a {
 					display: none;
 				}
 				.toc_menu{
-					height: calc(100vh - 100px);
+					max-height: calc(100vh - 100px);
 					overflow: auto;
 					-ms-overflow-style: none; 
 					scrollbar-width: none;
