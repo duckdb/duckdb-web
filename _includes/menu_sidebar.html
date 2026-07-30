@@ -2,7 +2,6 @@
 		
 	{% assign starting_url = "docs/" | append: version_viewed | append: "/" %}
 	{% assign url_parts = page.url | replace: ".html", "" | split: "/" %}
-	{% comment %} On the version root (e.g. /docs/current/) the fourth part is empty – that page is the "index" entry. {% endcomment %}
 	{% assign current_main = url_parts[3] | default: "index" %}
 
 	{%- assign menudocfile = "menu_docs_" | append: version_viewed | replace: ".", "" -%}
@@ -10,7 +9,6 @@
 	<ul class="sidenav">
 		{% if site.data[menudocfile].docsmenu %}
 			{% for item in site.data[menudocfile].docsmenu %}
-				{% comment %} An empty slug is not nil – fall back to the url so entries like "Installation" are only active on their own page. {% endcomment %}
 				{% if item.slug == nil or item.slug == "" %}
 					{% assign slug_parts = item.url | split: "/" %}
 				{% else %}
