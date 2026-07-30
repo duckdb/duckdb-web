@@ -55,7 +55,9 @@ SELECT
     typeof(1.5::DECIMAL(10,)) AS "DECIMAL(10,)";
 ```
 
-|    DECIMAL    |   DECIMAL()   |  DECIMAL(10)  | DECIMAL(10,)  |
+<div class="monospace_table"></div>
+
+| `DECIMAL` | `DECIMAL()` | `DECIMAL(10)` | `DECIMAL(10,)` |
 |:--------------|:--------------|:--------------|:--------------|
 | DECIMAL(18,3) | DECIMAL(18,3) | DECIMAL(10,0) | DECIMAL(10,0) |
 
