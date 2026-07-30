@@ -105,7 +105,11 @@ OVERRIDES: list[DocFunction] = [
         parameters=['list', 'recursive', 'max_depth'],
         nr_optional_arguments=2,
         description="Unnests the `list` to a table; Creates one row for each element, with the element as a column value. Note that this is a special function that alters the cardinality of the result. See the unnest page for more details.",
-        examples=["unnest([1, 2, 3])","unnest([[1,2],[3,4]], recursive:=true)","unnest([[1,2],[3,4]], recursive:=true, max_depth:=1)"],
+        examples=[
+            "unnest([1, 2, 3])",
+            "unnest([[1,2],[3,4]], recursive:=true)",
+            "unnest([[1,2],[3,4]], recursive:=true, max_depth:=1)"
+        ],
     ),
     # macros
     DocFunction(
