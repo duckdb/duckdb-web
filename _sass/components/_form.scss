@@ -27,6 +27,7 @@
 		flex-shrink: 0;
 
 		p{
+			@include body-small();
 			color: var(--main-text-secondary-color, #666);
 			margin: 0;
 		}
@@ -35,14 +36,14 @@
 			padding-top: 24px;
 			margin-bottom: 8px;
 			display: inline-block;
-			font-size: var(--type-title-2, 16px);
+			@include title-3();
 			column-gap: 12px;
 			align-items: center;
 			display: flex;
 
 			svg.icon{
-				width: 24px;
-				height: 24px;
+				width: 16px;
+				height: 16px;
 			}
 		}
 	}

@@ -479,6 +479,72 @@
 }
 
 @media only screen and (max-width: 720px) {
+	header .headerline{
+		height: 55px;
+	}
+
+	header .headerline .headercontent .options button.mode,
+	header .headerline .headercontent .landingmenu .hamburger{
+		width: 33px;
+		height: 33px;
+	}
+
+	#duckdb_logo,
+	#ducklake_logo,
+	#duckdblabs_logo,
+	#duckcon_logo,
+	#duckcon7_logo,
+	#foundation_logo{
+		height: 55px;
+	}
+
+	#duckdb_logo{
+		width: 104px;
+	}
+
+	#ducklake_logo{
+		width: 121px;
+	}
+
+	#duckdblabs_logo{
+		width: 122px;
+	}
+
+	#duckcon_logo{
+		width: 114px;
+	}
+
+	#duckcon7_logo{
+		width: 142px;
+	}
+
+	#foundation_logo{
+		width: 200px;
+	}
+
+	footer .sitefooter .footercontent{
+		.footerlogo{
+			width: 118px;
+			height: 30px;
+		}
+
+		.footerlogo.duckdb_logo{
+			width: 104px;
+		}
+
+		.footerlogo.ducklake_logo{
+			width: 121px;
+		}
+
+		.footerlogo.duckdblabs_logo{
+			width: 149px;
+		}
+
+		.footerlogo.foundation_logo{
+			width: 208px;
+		}
+	}
+
 	body.landing .welcome .mainlinks ul li {
 		min-width: 160px;
 	}
