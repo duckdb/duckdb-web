@@ -2,13 +2,14 @@
 		
 	{% assign starting_url = "docs/" | append: version_viewed | append: "/" %}
 	{% assign url_parts = page.url | replace: ".html", "" | split: "/" %}
+	{% assign current_main = url_parts[3] | default: "index" %}
 
 	{%- assign menudocfile = "menu_docs_" | append: version_viewed | replace: ".", "" -%}
 
 	<ul class="sidenav">
 		{% if site.data[menudocfile].docsmenu %}
 			{% for item in site.data[menudocfile].docsmenu %}
-				{% if item.slug == nil %}
+				{% if item.slug == nil or item.slug == "" %}
 					{% assign slug_parts = item.url | split: "/" %}
 				{% else %}
 					{% assign slug_parts = item.slug | split: "/" %}
@@ -44,7 +45,7 @@
 						{% for mainentry in item.mainfolderitems %}
 
 						<li class="mainentry-menu
-								{%- if url_parts[3] == mainentry.url %} active{% endif -%}
+								{%- if mainentry.url and current_main == mainentry.url %} active{% endif -%}
 								{%- if mainentry.url %} {{ mainentry.url }}{% endif -%}
 								{%- if url_parts[3] %} {{ url_parts[3]}}{% endif -%}
 								{%- if mainentry.subfolderitems[0] %} hasSub{% endif -%}

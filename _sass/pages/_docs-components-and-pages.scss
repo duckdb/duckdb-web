@@ -562,6 +562,13 @@ body.documentation {
             display: none;
         }
 
+        > svg.icon {
+            width: 22px;
+            height: 22px;
+            color: var(--main-text-primary-color, #0D0D0D);
+            stroke-width: 1.8;
+        }
+
         &:has(img)::before {
             content: "";
             width: 24px;
@@ -575,11 +582,10 @@ body.documentation {
             mask-position: center center;
         }
 
-        @each $icon in "attention", "bicycle", "c", "cli", "cpp", "database", "design", "doc",
-                       "download", "duckdb", "duckdb-labs", "ducklake", "folder", "github", "go",
-                       "java", "link", "linux", "macos", "nodejs", "odbc", "pdf", "python",
-                       "quack", "r", "rust", "scrolldown", "star", "statement", "train",
-                       "webassembly", "wheelchair", "windows", "wrench", "yaml" {
+        @each $icon in "bicycle", "c", "cli", "cpp", "design", "download", "duckdb",
+                       "duckdb-labs", "ducklake", "github", "go", "java", "linux", "macos",
+                       "nodejs", "odbc", "pdf", "python", "quack", "r", "rust", "scrolldown",
+                       "star", "train", "webassembly", "wheelchair", "windows", "yaml" {
             &:has(img[src$="/#{$icon}.svg"])::before {
                 -webkit-mask-image: url('/images/icons/#{$icon}.svg');
                 mask-image: url('/images/icons/#{$icon}.svg');
