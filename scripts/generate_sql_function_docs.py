@@ -23,7 +23,7 @@ class DocFunction:
     alias_of_obj: Optional[Self] = None
 
 
-DOC_VERSION = 'current'
+DOC_VERSION = 'preview'
 DOC_FILES = [
     f'docs/{DOC_VERSION}/sql/functions/array.md',
     f'docs/{DOC_VERSION}/sql/functions/blob.md',
