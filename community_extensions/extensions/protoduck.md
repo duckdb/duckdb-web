@@ -8,7 +8,7 @@ excerpt: |
 extension:
   name: protoduck
   description: Deserialize Protocol Buffer messages stored in DuckDB columns
-  version: 0.1.0
+  version: 0.1.1
   language: Rust
   build: cmake
   license: MIT
@@ -19,7 +19,7 @@ extension:
 
 repo:
   github: fcsnk/protoduck
-  ref: c5bbd3a20fea31ebf21bb9ca3ca8c0771f83a0ea
+  ref: 022babbb3baed4409a8e5e8d035a9b623d3ebfe5
 
 docs:
   hello_world: |
@@ -58,8 +58,8 @@ docs:
 
 extension_star_count: 1
 extension_star_count_pretty: 1
-extension_download_count: 987
-extension_download_count_pretty: 987
+extension_download_count: 1170
+extension_download_count_pretty: 1.2k
 image: '/images/community_extensions/social_preview/preview_community_extension_protoduck.png'
 layout: community_extension_doc
 ---

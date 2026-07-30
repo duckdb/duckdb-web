@@ -29,7 +29,7 @@ The following table shows which parts of the S3 API are required for each `httpf
 The preferred way to configure and authenticate to S3 endpoints is to use [secrets]({% link docs/current/sql/statements/create_secret.md %}). Multiple secret providers are available.
 
 To migrate from the [deprecated S3 API]({% link docs/current/core_extensions/httpfs/s3api_legacy_authentication.md %}), use a defined secret with a profile.
-See the [“Loading a Secret Based on a Profile” section](#loading-a-secret-based-on-a-profile).
+See [Selecting a Profile]({% link docs/current/core_extensions/aws.md %}#selecting-a-profile).
 
 ### `config` Provider
 
@@ -56,7 +56,7 @@ FROM 's3://⟨your-bucket⟩/⟨your_file⟩.parquet';
 
 ### `credential_chain` Provider
 
-The `credential_chain` provider allows automatically fetching credentials using mechanisms provided by the AWS SDK. For example, to use the AWS SDK default provider:
+The `credential_chain` provider automatically fetches credentials using the AWS SDK (profiles, SSO, assumed roles, web identities, instance metadata, and more). It is provided by the [`aws` extension]({% link docs/current/core_extensions/aws.md %}). For example, to use the AWS SDK default provider:
 
 ```sql
 CREATE OR REPLACE SECRET secret (
@@ -65,52 +65,7 @@ CREATE OR REPLACE SECRET secret (
 );
 ```
 
-Again, to query a file using the above secret, simply query any `s3://` prefixed file.
-
-DuckDB also allows specifying a specific chain using the `CHAIN` keyword. This takes a semicolon-separated list (`a;b;c`) of providers that will be tried in order. For example:
-
-```sql
-CREATE OR REPLACE SECRET secret (
-    TYPE s3,
-    PROVIDER credential_chain,
-    CHAIN 'env;config'
-);
-```
-
-The possible values for `CHAIN` are the following:
-
-* [`config`](https://sdk.amazonaws.com/cpp/api/LATEST/aws-cpp-sdk-core/html/class_aws_1_1_auth_1_1_profile_config_file_a_w_s_credentials_provider.html)
-* [`sts`](https://sdk.amazonaws.com/cpp/api/LATEST/aws-cpp-sdk-core/html/class_aws_1_1_auth_1_1_s_t_s_assume_role_web_identity_credentials_provider.html)
-* [`sso`](https://aws.amazon.com/what-is/sso/)
-* [`env`](https://sdk.amazonaws.com/cpp/api/LATEST/aws-cpp-sdk-core/html/class_aws_1_1_auth_1_1_environment_a_w_s_credentials_provider.html)
-* [`instance`](https://sdk.amazonaws.com/cpp/api/LATEST/aws-cpp-sdk-core/html/class_aws_1_1_auth_1_1_instance_profile_credentials_provider.html)
-* [`process`](https://sdk.amazonaws.com/cpp/api/LATEST/aws-cpp-sdk-core/html/class_aws_1_1_auth_1_1_process_credentials_provider.html)
-
-The `credential_chain` provider also allows overriding the automatically fetched config. For example, to automatically load credentials, and then override the region, run:
-
-```sql
-CREATE OR REPLACE SECRET secret (
-    TYPE s3,
-    PROVIDER credential_chain,
-    CHAIN config,
-    REGION '⟨eu-west-1⟩'
-);
-```
-
-#### Loading a Secret Based on a Profile
-
-To load credentials based on a profile which is not defined as a default from the `AWS_PROFILE` environment variable or as a default profile based on AWS SDK precedence, run:
-
-```sql
-CREATE OR REPLACE SECRET secret (
-    TYPE s3,
-    PROVIDER credential_chain,
-    CHAIN config,
-    PROFILE '⟨my_profile⟩'
-);
-```
-
-This approach is equivalent to the [deprecated S3 API's]({% link docs/current/core_extensions/httpfs/s3api_legacy_authentication.md %})'s method `load_aws_credentials('⟨my_profile⟩')`.
+For the full set of `credential_chain` options — `CHAIN` values, profile selection, assuming roles, SSO, web identity (IRSA), region resolution, validation, and auto-refresh — see the [AWS extension page]({% link docs/current/core_extensions/aws.md %}#credential_chain-provider).
 
 ### Overview of S3 Secret Parameters
 
@@ -124,12 +79,21 @@ Below is a complete list of the supported parameters that can be used for both t
 | `SECRET`                      | The secret of the key to use                                                          | `S3`, `GCS`, `R2` | `STRING`  | -                                           |
 | `SESSION_TOKEN`               | Optionally, a session token can be passed to use temporary credentials                | `S3`, `GCS`, `R2` | `STRING`  | -                                           |
 | `URL_COMPATIBILITY_MODE`      | Can help when URLs contain problematic characters                                     | `S3`, `GCS`, `R2` | `BOOLEAN` | `true`                                      |
-| `URL_STYLE`                   | Either `vhost` or `path`                                                              | `S3`, `GCS`, `R2` | `STRING`  | `vhost` for `S3`, `path` for `R2` and `GCS` |
+| `URL_STYLE`                   | Either `vhost` (alias `virtual`) or `path`                                            | `S3`, `GCS`, `R2` | `STRING`  | `vhost` for `S3`, `path` for `R2` and `GCS` |
 | `USE_SSL`                     | Whether to use HTTPS or HTTP                                                          | `S3`, `GCS`, `R2` | `BOOLEAN` | `true`                                      |
 | `VERIFY_SSL`                  | Whether to verify the SSL certificate of the server                                   | `S3`, `GCS`, `R2` | `BOOLEAN` | `true`                                      |
 | `ACCOUNT_ID`                  | The R2 account ID to use for generating the endpoint URL                              | `R2`              | `STRING`  | -                                           |
 | `KMS_KEY_ID`                  | AWS KMS (Key Management Service) key for Server Side Encryption S3                    | `S3`              | `STRING`  | -                                           |
 | `REQUESTER_PAYS`              | Allows use of "requester pays" S3 buckets                                             | `S3`              | `BOOLEAN` | `false`                                     |
+| `REFRESH`                     | Set to `auto` to periodically refresh credentials (see the [`aws` extension]({% link docs/current/core_extensions/aws.md %}#auto-refresh)) | `S3`, `GCS`, `R2` | `STRING`  | -                                           |
+
+### Automatic Credential Refresh
+
+Independently of the `REFRESH` secret parameter, DuckDB automatically refreshes S3 credentials when a request fails with an HTTP `401` or `403` status (for example, when temporary credentials have expired), then retries the request. This behavior is controlled by the `httpfs_enable_credential_refresh` setting (`BOOLEAN`, default `true`):
+
+```sql
+SET httpfs_enable_credential_refresh = false;
+```
 
 ### Platform-Specific Secret Types
 
@@ -202,6 +166,15 @@ FROM 's3://⟨your-bucket⟩/⟨filename⟩.⟨extension⟩';
 ### Partial Reading
 
 The `httpfs` extension supports [partial reading]({% link docs/current/core_extensions/httpfs/https.md %}#partial-reading) from S3 buckets.
+
+### Pinning Object Versions
+
+By default, a long-running query re-reads an object at whatever version is current at read time, which can change if the object is overwritten. Set `s3_version_id_pinning` (`BOOLEAN`, default `false`) to pin reads to the object version captured on the first `HEAD` request, so a query sees a consistent version even if the object is overwritten mid-query. This requires the HTTP metadata cache:
+
+```sql
+SET enable_http_metadata_cache = true;
+SET s3_version_id_pinning = true;
+```
 
 ### Reading Multiple Files
 
@@ -287,8 +260,10 @@ s3://⟨your-bucket⟩/partitioned/part_col_a=⟨val⟩/part_col_b=⟨val⟩/dat
 
 Some additional configuration options exist for the S3 upload, though the default values should suffice for most use cases.
 
-| Name | Description |
-|:---|:---|
-| `s3_uploader_max_parts_per_file` | Used for part size calculation, see [AWS docs](https://docs.aws.amazon.com/AmazonS3/latest/userguide/qfacts.html) |
-| `s3_uploader_max_filesize` | Used for part size calculation, see [AWS docs](https://docs.aws.amazon.com/AmazonS3/latest/userguide/qfacts.html) |
-| `s3_uploader_thread_limit` | Maximum number of uploader threads |
+| Name | Description | Default |
+|:---|:---|:---|
+| `s3_uploader_max_parts_per_file` | Used for part size calculation, see [AWS docs](https://docs.aws.amazon.com/AmazonS3/latest/userguide/qfacts.html) | `10000` |
+| `s3_uploader_max_filesize` | Used for part size calculation, see [AWS docs](https://docs.aws.amazon.com/AmazonS3/latest/userguide/qfacts.html) | `800GB` |
+| `s3_uploader_thread_limit` | Maximum number of uploader threads | `50` |
+
+Further S3-related settings are available and documented in the [configuration reference]({% link docs/current/configuration/overview.md %}), including `enable_global_s3_configuration`, `merge_http_secret_into_s3_request`, `s3_allow_recursive_globbing`, `httpfs_enable_credential_refresh`, `s3_version_id_pinning`, and `unsafe_disable_etag_checks`.

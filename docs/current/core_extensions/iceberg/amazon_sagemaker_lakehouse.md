@@ -59,6 +59,18 @@ ATTACH '⟨account_id⟩' AS glue_catalog (
 );
 ```
 
+> Warning As with [Amazon S3 Tables]({% link docs/current/core_extensions/iceberg/amazon_s3_tables.md %}), `ENDPOINT_TYPE glue` always builds an endpoint of the form `glue.⟨region⟩.amazonaws.com/iceberg`, which is incorrect for regions that do not use the plain `amazonaws.com` suffix (most notably the AWS China regions `cn-north-1` and `cn-northwest-1`, which use `amazonaws.com.cn`). For such regions, attach with an explicit `ENDPOINT` (with the correct host) together with `AUTHORIZATION_TYPE 'sigv4'` instead of using `ENDPOINT_TYPE`.
+
+The warehouse identifier (the first argument to `ATTACH`) accepts the following forms:
+
+| Warehouse | Meaning |
+|---|---|
+| `:` | The default catalog of the caller's account. |
+| `⟨account_id⟩` | A 12-digit AWS account ID. |
+| `⟨account_id⟩:⟨catalog⟩` | A named catalog in the given account. |
+| `⟨catalog⟩/⟨sub_catalog⟩` | A nested (federated) catalog. |
+| `⟨account_id⟩:⟨catalog⟩/⟨sub_catalog⟩` | A nested catalog in the given account. |
+
 To check whether the attachment worked, list all tables:
 
 ```sql
@@ -87,4 +99,4 @@ WITH (
 );
 ```
 
-You can learn more about the `WITH` clause at [Table Properties]({% link docs/current/core_extensions/iceberg/iceberg_rest_catalogs.md %}#table-properties-functions).
+You can learn more about the `WITH` clause at [Table Properties]({% link docs/current/core_extensions/iceberg/writing.md %}#table-properties).

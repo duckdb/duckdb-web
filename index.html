@@ -24,11 +24,11 @@ To add a banner, set banner: true in the front matter and define the banner cont
 			<h1 class="display-1">Run analytics<br/>where your data lives</h1>
 			<p class="hero-subtitle">
 				DuckDB is a SQL database that runs everywhere<br/>
-				Now with <a href="{% link quack/index.html %}">client-server support</a>
+				Now with Quack for <a href="{% link quack/index.html %}">client-server support</a>
 			</p>
 			<div class="hero-buttons">
-				<a class="button yellow arrow-right" href="/install">Get DuckDB</a>
-				<a class="button transparent arrow-right" href="/docs/current">Read the docs</a>
+				<a class="button yellow arrow-right" href="/install">Get DuckDB<svg class="icon"><use href="#arrow-right"></use></svg></a>
+				<a class="button transparent arrow-right" href="/docs/current">Read the docs<svg class="icon"><use href="#arrow-right"></use></svg></a>
 			</div>
 			<p class="hero-social-proof">The friendliest analytical database, loved by data teams worldwide</p>
 		</div>
@@ -107,7 +107,7 @@ To add a banner, set banner: true in the front matter and define the banner cont
 							<option value="sql-spatial-extension">Spatial extension</option>
 						</select>
 					</div>
-					<a class="button arrow-right livedemo" href="https://shell.duckdb.org/#queries=v0,%20%20-Create-table-from-Parquet-file%0ACREATE-TABLE-train_services-AS%0A----FROM-'https%3A%2F%2Fblobs.duckdb.org%2Ftrain_services.parquet'~%0A%0A%20%20-Get-the-top%203-busiest-train-stations%0ASELECT%0A----station_name%2C%0A----count(*)-AS-num_services%0AFROM-train_services%0AGROUP-BY-ALL%0AORDER-BY-num_services-DESC%0ALIMIT-3~%0A">Live demo</a>
+					<a class="button arrow-right livedemo" href="https://shell.duckdb.org/#queries=v0,%20%20-Create-table-from-Parquet-file%0ACREATE-TABLE-train_services-AS%0A----FROM-'https%3A%2F%2Fblobs.duckdb.org%2Ftrain_services.parquet'~%0A%0A%20%20-Get-the-top%203-busiest-train-stations%0ASELECT%0A----station_name%2C%0A----count(*)-AS-num_services%0AFROM-train_services%0AGROUP-BY-ALL%0AORDER-BY-num_services-DESC%0ALIMIT-3~%0A">Live demo<svg class="icon"><use href="#arrow-right"></use></svg></a>
 				</div>
 			</div>
 		</div>
@@ -116,7 +116,7 @@ To add a banner, set banner: true in the front matter and define the banner cont
 			<p>
 				Use DuckDB's friendly but powerful SQL dialect to query any data source (Parquet, JSON, S3, data lakes, etc.)
 			</p>
-			<a class="button transparent arrow-right" href="https://shell.duckdb.org/">Live demo</a>
+			<a class="button transparent arrow-right" href="https://shell.duckdb.org/">Live demo<svg class="icon"><use href="#arrow-right"></use></svg></a>
 		</div>
 	</div>
 </section>
@@ -135,7 +135,7 @@ To add a banner, set banner: true in the front matter and define the banner cont
 					We made sure that you can install DuckDB in just a few seconds,
 					and built it on familiar technologies so you can start using it immediately.
 				</p>
-				<a href="/why_duckdb#simple" class="textbutton arrow-right">Read more</a>
+				<a href="/why_duckdb#simple" class="textbutton arrow-right">Read more<svg class="icon"><use href="#arrow-right"></use></svg></a>
 			</div>
 			<div class="icon-grid-item">
 				<div class="icon-box">
@@ -146,7 +146,7 @@ To add a banner, set banner: true in the front matter and define the banner cont
 					We support a wide range of industry standard technologies (e.g., Parquet, SQL, S3 API)
 					and combine them into a seamless user experience.
 				</p>
-				<a href="/why_duckdb#feature-rich" class="textbutton arrow-right">Read more</a>
+				<a href="/why_duckdb#feature-rich" class="textbutton arrow-right">Read more<svg class="icon"><use href="#arrow-right"></use></svg></a>
 			</div>
 			<div class="icon-grid-item">
 				<div class="icon-box">
@@ -157,7 +157,7 @@ To add a banner, set banner: true in the front matter and define the banner cont
 					We built DuckDB on a fast columnar storage engine.
 					DuckDB can spill to disk to support workloads far larger than the available system memory.
 				</p>
-				<a href="/why_duckdb#fast" class="textbutton arrow-right">Read more</a>
+				<a href="/why_duckdb#fast" class="textbutton arrow-right">Read more<svg class="icon"><use href="#arrow-right"></use></svg></a>
 			</div>
 			<div class="icon-grid-item">
 				<div class="icon-box">
@@ -167,7 +167,7 @@ To add a banner, set banner: true in the front matter and define the banner cont
 				<p>
 					We release DuckDB, its core extensions and the DuckLake format under MIT, a permissive <nobr>open-source</nobr> license.
 				</p>
-				<a href="/why_duckdb#free" class="textbutton arrow-right">Read more</a>
+				<a href="/why_duckdb#free" class="textbutton arrow-right">Read more<svg class="icon"><use href="#arrow-right"></use></svg></a>
 			</div>
 			<div class="icon-grid-item">
 				<div class="icon-box">
@@ -178,7 +178,7 @@ To add a banner, set banner: true in the front matter and define the banner cont
 					We distribute DuckDB for all popular operating systems
 					and ship idiomatic client APIs for major programming languages.
 				</p>
-				<a href="/why_duckdb#portable" class="textbutton arrow-right">Read more</a>
+				<a href="/why_duckdb#portable" class="textbutton arrow-right">Read more<svg class="icon"><use href="#arrow-right"></use></svg></a>
 			</div>
 			<div class="icon-grid-item">
 				<div class="icon-box">
@@ -189,7 +189,7 @@ To add a banner, set banner: true in the front matter and define the banner cont
 					We created a powerful extension mechanism that enables adding new features.
 					In fact, we implemented many core DuckDB features as extensions.
 				</p>
-				<a href="/why_duckdb#extensible" class="textbutton arrow-right">Read more</a>
+				<a href="/why_duckdb#extensible" class="textbutton arrow-right">Read more<svg class="icon"><use href="#arrow-right"></use></svg></a>
 			</div>
 		</div>
 	</div>
@@ -239,7 +239,7 @@ To add a banner, set banner: true in the front matter and define the banner cont
 						<h3 class="headline-3">{{ post.title }}</h3>
 						<div class="meta text-secondary-color body-small">
 							{% if is_external %}
-								<div class="external-source">{{ post.external_post_url | extract_domain }}</div>
+								<div class="external-source">{{ post.external_post_url | extract_domain }}<svg class="icon"><use href="#link-external-02"></use></svg></div>
 							{% endif %}
 							<div class="date">{{ post.date | date: "%Y-%m-%d" }}</div>
 							<div class="author">{{ post.author | default: "Unknown Author" }}</div>
@@ -249,7 +249,7 @@ To add a banner, set banner: true in the front matter and define the banner cont
 			{% endfor %}
 		</div>
 		<a href="{{ site.url }}/news" class="button transparent arrow-right">
-			All blog posts <span></span>
+			All blog posts <svg class="icon"><use href="#arrow-right"></use></svg>
 		</a>
 	</div>
 </section>

@@ -8,7 +8,7 @@ excerpt: |
 extension:
   name: zim
   description: Read .zim (Kiwix / openZIM) archives directly in DuckDB via libzim, from local files or remote S3/HTTP — offline Wikipedia, WikiMed, Stack Exchange, iFixit, and more, with a zim:// filesystem and full-text search.
-  version: 0.5.0
+  version: 0.6.0
   language: C++
   build: cmake
   license: GPL-2.0-or-later
@@ -19,7 +19,7 @@ extension:
   vcpkg_commit: 84bab45d415d22042bd0b9081aea57f362da3f35
 repo:
   github: teaguesterling/duckdb_zim
-  ref: 87d627e8b0b8f923bad1bfbb9e55dd85412632a5
+  ref: 1faa9a3502bf174edcbac5e3eeac1840afd83561
 docs:
   hello_world: |
     -- Load the extension
@@ -135,10 +135,10 @@ docs:
     rather than being mangled. Built on [libzim](https://github.com/openzim/libzim);
     licensed GPL-2.0-or-later, inherited from libzim.
 
-extension_star_count: 2
-extension_star_count_pretty: 2
-extension_download_count: 551
-extension_download_count_pretty: 551
+extension_star_count: 3
+extension_star_count_pretty: 3
+extension_download_count: 771
+extension_download_count_pretty: 771
 image: '/images/community_extensions/social_preview/preview_community_extension_zim.png'
 layout: community_extension_doc
 ---
@@ -202,6 +202,7 @@ This extension does not add any types.
 
 |               name                |                                                                                                          description                                                                                                          | input_type | scope  | aliases |
 |-----------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|------------|--------|---------|
+| zim_max_content_size              | Maximum decompressed size (bytes) of a single ZIM entry to materialize; reads of a larger entry fail cleanly instead of allocating (decompression-bomb guard). 0 disables the cap. Lower it when reading untrusted archives.  | UBIGINT    | GLOBAL | []      |
 | zim_remote_search_max_local_index | Maximum size (bytes) of a remote ZIM's full-text index to copy locally so search works; 0 disables remote search. Larger values cover bigger archives but lengthen the first remote search (the whole index is fetched once). | UBIGINT    | GLOBAL | []      |
 
 

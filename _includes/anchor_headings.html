@@ -118,7 +118,7 @@
       {% endif %}
 
       {% capture anchor_start %}<a style="text-decoration: none;" {{ anchor }}>{% endcapture %}
-      {% capture anchor_end %}</a>{% endcapture %}
+      {% capture anchor_end %}<svg class="anchor-icon" aria-hidden="true"><use href="#link-01"></use></svg></a>{% endcapture %}
 
       <!-- In order to prevent adding extra space after a heading, we'll let the 'anchor' value contain it -->
       {% if beforeHeading %}

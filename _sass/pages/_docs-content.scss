@@ -15,9 +15,17 @@ body.documentation {
         h3,
         h4,
         h5 {
+            color: var(--main-text-primary-color, #0D0D0D);
+
+            a {
+                color: inherit;
+            }
             a:hover {
-                color: black;
+                color: var(--main-text-primary-color, #0D0D0D);
                 text-decoration: underline;
+            }
+            &:hover svg.anchor-icon {
+                opacity: 1;
             }
             code {
                 font-family: $fontMonoXBold;
@@ -139,12 +147,17 @@ body.documentation {
     // Links
     .headlinebar a,
     .wrap a {
-        color: var(--text-primary-color);
+        color: var(--main-text-primary-color, #0D0D0D);
         text-decoration: underline;
-        transition: color .3s;
+        text-decoration-color: var(--main-text-tertiary-color, #B2B2B2);
+        text-decoration-thickness: 1px;
+        text-underline-offset: 0.16em;
+        transition: color .3s, text-decoration-color .3s;
 
         &:hover {
-            color: $blue;
+            color: var(--main-link-hover-color, #998B00);
+            text-decoration-color: var(--main-link-hover-color, #998B00);
+            text-decoration-thickness: 1px;
         }
     }
 
@@ -157,7 +170,7 @@ body.documentation {
 
         &:focus,
         &:hover {
-            text-decoration: underline;
+            text-decoration-line: underline;
         }
     }
 
@@ -248,7 +261,7 @@ body.documentation {
             list-style-position: outside;
             list-style-type: '\2022 \00a0\00a0';
             padding: 0 0 0 20px;
-            font-size: var(--type-body-normal, 16px);
+            font-size: var(--type-body-docs, 15px);
             
             ul {
                 padding-left: 20px;
@@ -261,7 +274,7 @@ body.documentation {
                 background-color: transparent;
 
                 &:hover {
-                    color: $blue;
+                    color: var(--main-link-hover-color, #998B00);
                 }
             }
 
@@ -325,16 +338,16 @@ body.layout_default.blog_typography {
         }
 
         >tbody>tr:hover {
-            background: var(--doc-codebox-border-color, #E6E6E6);
+            background: var(--interactive-table-row-hover, #F2F2F2);
         }
 
         a {
-            text-decoration: underline;
+            text-decoration-line: underline;
             word-wrap: normal;
             word-break: normal;
 
             &:hover {
-                color: $blue;
+                color: var(--main-link-hover-color, #998B00);
                 cursor: pointer;
             }
 
@@ -617,12 +630,30 @@ body.layout_default.blog_typography {
             gap: 5px;
             align-items: center;
             cursor: pointer;
-            transition: padding .3s;
+            text-decoration: underline;
+            text-decoration-color: var(--main-text-tertiary-color, #B2B2B2);
+            text-decoration-thickness: 1px;
+            text-underline-offset: 0.16em;
+            transition: color .3s, text-decoration-color .3s, padding .3s;
 
+            span,
             a{
                 color: inherit;
+                text-decoration-color: var(--main-text-tertiary-color, #B2B2B2) !important;
+                text-decoration-thickness: 1px !important;
+                text-underline-offset: 0.16em;
             }
-            
+
+            &:hover{
+                color: var(--main-link-hover-color, #998B00);
+                text-decoration-color: var(--main-link-hover-color, #998B00);
+
+                span,
+                a{
+                    text-decoration-color: var(--main-link-hover-color, #998B00) !important;
+                }
+            }
+
             &::after{
                 mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' fill='none' viewBox='0 0 14 14'%3E%3Cpath stroke='%23000' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.35' d='m2.102 5.05 4.9 4.9 4.9-4.9'/%3E%3C/svg%3E");
                 mask-size: contain;
@@ -633,11 +664,15 @@ body.layout_default.blog_typography {
                 content: "";
                 width: 14px;
                 height: 14px;
-                transition: transform .3s;
+                transition: transform .3s, background-color .3s;
                 position: absolute;
                 transform: translate(5px, 4px);
             }
-            
+
+            &:hover::after{
+                background-color: var(--main-link-hover-color, #998B00);
+            }
+
             &::marker {
                 display: none;
             }

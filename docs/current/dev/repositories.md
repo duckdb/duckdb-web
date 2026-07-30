@@ -28,6 +28,7 @@ Several components of DuckDB are maintained in separate repositories.
 * [`duckdb-swift`](https://github.com/duckdb/duckdb-swift): Swift client
 * [`duckdb-wasm`](https://github.com/duckdb/duckdb-wasm): WebAssembly client
 * [`duckplyr`](https://github.com/tidyverse/duckplyr): a drop-in replacement for dplyr in R
+* [`DuckDB.jl`](https://github.com/duckdb/DuckDB.jl): Julia client
 
 ## Connectors
 

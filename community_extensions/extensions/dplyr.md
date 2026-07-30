@@ -15,7 +15,7 @@ excerpt: |
 extension:
   name: dplyr
   description: R dplyr pipeline syntax support for DuckDB - transpiles dplyr verbs to SQL
-  version: 0.4.0
+  version: 0.5.1
   language: Rust & C++
   build: cmake
   license: MIT
@@ -26,7 +26,7 @@ extension:
 
 repo:
   github: mrchypark/libdplyr
-  ref: 405e38282970f5079f925549d2f574060c10313a
+  ref: adc1c5420a477d33c57a496f292df28d83dec1bc
 
 docs:
   hello_world: |
@@ -123,8 +123,8 @@ docs:
 
 extension_star_count: 15
 extension_star_count_pretty: 15
-extension_download_count: 888
-extension_download_count_pretty: 888
+extension_download_count: 782
+extension_download_count_pretty: 782
 image: '/images/community_extensions/social_preview/preview_community_extension_dplyr.png'
 layout: community_extension_doc
 ---
@@ -171,8 +171,8 @@ This extension does not add any types.
 
 <div class="extension_settings_table"></div>
 
-|       name        |                     description                      |                input_type                | scope  | aliases |
-|-------------------|------------------------------------------------------|------------------------------------------|--------|---------|
-| dplyr_pipe_syntax | The active dplyr pipe syntax for this DuckDB session | ENUM('magrittr', 'native', '%>%', '\|>') | GLOBAL | []      |
+|       name        |                 description                  |                input_type                | scope  | aliases |
+|-------------------|----------------------------------------------|------------------------------------------|--------|---------|
+| dplyr_pipe_syntax | The active database-global dplyr pipe syntax | ENUM('magrittr', 'native', '%>%', '\|>') | GLOBAL | []      |
 
 

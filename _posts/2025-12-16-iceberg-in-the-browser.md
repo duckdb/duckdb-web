@@ -108,7 +108,7 @@ This means that:
 * you can use the familiar SQL interface with the same code snippets that can run everywhere DuckDB runs
 * if you edit the credentials and share the resulting link, you will be sharing the new credentials
 
-As of today, this works with [Amazon S3 Tables]({% link docs/current/core_extensions/iceberg/amazon_s3_tables.md %}). This has been implemented through a collaboration with the Amazon S3 Tables team.
+As of today, this works with [Amazon S3 Tables]({% link docs/current/core_extensions/iceberg/catalogs.md %}#amazon-s3-tables). This has been implemented through a collaboration with the Amazon S3 Tables team.
 To learn more about S3 Tables, how to get started and their feature set, you can take a look at their [product page](https://aws.amazon.com/s3/features/tables/) or [documentation](https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-tables.html).
 A demo of DuckDB querying S3 Tables from a browser was presented at AWS re:Invent 2025 – [see the presentation](https://www.youtube.com/watch?v=Pi82g0YGklU&t=2603s).
 

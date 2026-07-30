@@ -1,6 +1,6 @@
 on:
-  schedule:
-    - cron: "0 5 * * 1"  # run every Monday day at 5AM
+#  schedule:
+#    - cron: "0 5 * * 1"  # run every Monday day at 5AM
   workflow_dispatch: {}  # allow running manually from the github ui
 
 name: Update docs
@@ -14,7 +14,7 @@ jobs:
       - uses: actions/checkout@v7
         with:
           token: ${{ secrets.GH_UPDATE_DOCS_TOKEN }}
-      - uses: actions/setup-python@v6
+      - uses: actions/setup-python@v7
         with:
           python-version: '3.12'
           cache: 'pip'
@@ -55,12 +55,9 @@ jobs:
             git config user.name "Quack Mc Docs"
             git commit -m "chore: update docs"
             git push -f origin auto_update_docs
-            # Store the PAT in a file that can be accessed by the
-            # GitHub CLI.
-            echo "${{ secrets.GH_UPDATE_DOCS_TOKEN }}" > token.txt
             # Authorize GitHub CLI for the current repository and
             # create a pull-requests containing the updates.
-            gh auth login --with-token < token.txt
+            echo "${{ secrets.GH_UPDATE_DOCS_TOKEN }}" | gh auth login --with-token
             gh pr create \
              --body "" \
              --title "chore: update DuckDB docs" \

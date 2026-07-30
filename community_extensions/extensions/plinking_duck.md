@@ -8,7 +8,7 @@ excerpt: |
 extension:
   name: plinking_duck
   description: Read PLINK 2 genomics file formats and run common genetic analyses directly in SQL
-  version: 0.5.0
+  version: 0.8.0
   language: C++
   build: cmake
   license: MIT
@@ -18,7 +18,7 @@ extension:
 
 repo:
   github: teaguesterling/plinking_duck
-  ref: ce446b086c88df40f5447ab7ce04cc867e2fe3db
+  ref: 8c864c03a8292288e30e07dcc456b095e39a05cd
 
 docs:
   hello_world: |
@@ -46,10 +46,10 @@ docs:
     standard SQL instead of format-specific command-line tools.
 
     **File readers:**
-    - `read_pvar(path)` — variant metadata (.pvar/.bim)
+    - `read_pvar(path | [paths])` — variant metadata (.pvar/.bim); a list row-concatenates multiple files
     - `read_psam(path)` — sample metadata (.psam/.fam)
     - `read_pgen(path)` — binary genotypes (.pgen)
-    - `read_pfile(prefix)` — unified fileset reader with orient modes (variant/genotype/sample), sample subsetting, region and variant filtering
+    - `read_pfile(prefix | [prefixes])` — unified fileset reader with orient modes (variant/genotype/sample), sample subsetting, region and variant filtering; accepts a list of prefixes to read a variant-sharded fileset (identical samples) as one table
     - `read_plink_vcf(path)` — fast biallelic genotype extraction from VCF/VCF.gz (~3x faster than htslib)
 
     **Analysis functions:**
@@ -69,7 +69,9 @@ docs:
     **Flexible inputs:**
     - Unified `variants` parameter: indices, rsids, CPRA strings/structs, ranges
     - Parquet/CSV/table companions for variant and sample metadata
-    - `af_range` / `ac_range` / `genotype_range` filter pushdown
+    - `af_range` / `ac_range` filter pushdown, and `include_genotypes` (hardcall
+      category) / `genotype_range` for fast carrier lookups — in `orient := 'sample'`
+      only the matching subjects are materialized
 
     All functions support projection pushdown (skip genotype decompression for
     metadata-only queries), parallel scanning, sample subsetting, and region
@@ -80,10 +82,10 @@ docs:
 
     For full documentation, see [plinking-duck.readthedocs.io](https://plinking-duck.readthedocs.io).
 
-extension_star_count: 3
-extension_star_count_pretty: 3
-extension_download_count: 685
-extension_download_count_pretty: 685
+extension_star_count: 4
+extension_star_count_pretty: 4
+extension_download_count: 896
+extension_download_count_pretty: 896
 image: '/images/community_extensions/social_preview/preview_community_extension_plinking_duck.png'
 layout: community_extension_doc
 ---
@@ -140,10 +142,12 @@ This extension does not add any types.
 
 <div class="extension_settings_table"></div>
 
-|              name               |                                                          description                                                          | input_type | scope  | aliases |
-|---------------------------------|-------------------------------------------------------------------------------------------------------------------------------|------------|--------|---------|
-| plinking_max_matrix_elements    | Maximum genotype matrix elements for orient := 'sample' pre-read (variants x samples). Default 16 billion (~16 GB of int8).   | BIGINT     | GLOBAL | []      |
-| plinking_max_threads            | Maximum threads for parallel scan operations. 0 = default (hardcoded cap of 16), >0 = cap at this value.                      | BIGINT     | GLOBAL | []      |
-| plinking_use_parquet_companions | Auto-discover .pvar.parquet and .psam.parquet companion files. When true, parquet companions are preferred over text formats. | BOOLEAN    | GLOBAL | []      |
+|              name               |                                                                                                                                                                description                                                                                                                                                                | input_type | scope  | aliases |
+|---------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|------------|--------|---------|
+| plinking_max_matrix_elements    | Maximum genotype matrix elements for orient := 'sample' pre-read (variants x samples). Default 16 billion (~16 GB of int8).                                                                                                                                                                                                               | BIGINT     | GLOBAL | []      |
+| plinking_max_threads            | Maximum threads for parallel scan operations. 0 = default (hardcoded cap of 16), >0 = cap at this value.                                                                                                                                                                                                                                  | BIGINT     | GLOBAL | []      |
+| plinking_pgen_io                | How .pgen bytes are read: 'auto' (default — remote/VFS paths via DuckDB's VFS, local via native fopen), 'native' (always native fopen; errors on remote), 'vfs' (always via DuckDB's VFS, even local), 'localize' (download remote to a temp then native — not yet implemented).                                                          | VARCHAR    | GLOBAL | []      |
+| plinking_sample_counts_sparse   | orient := 'sample' + genotypes := 'counts'\|'stats': when true, use the sparse (pgen difflist) accumulation path — reads only the non-hom_ref carriers of rare variants (auto-falls-back to the dense full-decode path per variant). When false, always use the dense path. Toggle to A/B time both; both paths produce identical counts. | BOOLEAN    | GLOBAL | []      |
+| plinking_use_parquet_companions | Auto-discover .pvar.parquet and .psam.parquet companion files. When true, parquet companions are preferred over text formats.                                                                                                                                                                                                             | BOOLEAN    | GLOBAL | []      |
 
 

@@ -8,7 +8,7 @@ excerpt: |
 extension:
   name: query_condition_cache
   description: This extension provides a cache for query conditions, which is useful for repeated-query workloads like metrics monitoring dashboards, log investigations, etc.
-  version: 0.1.1
+  version: 0.1.2
   language: C++
   build: cmake
   license: MIT
@@ -20,7 +20,7 @@ extension:
 
 repo:
   github: dentiny/duckdb-query-condition-cache
-  ref: 4c5646968531ae816ea929189fed455b6dfed50a
+  ref: 6913ffd244ddfaa64dfe697180ab63b77a774a97
 
 docs:
   hello_world: |
@@ -28,10 +28,10 @@ docs:
   extended_description: |
     This extension enhances DuckDB core capability and improves query performance for repeated-query workloads by caching the query conditions.
 
-extension_star_count: 10
-extension_star_count_pretty: 10
-extension_download_count: 884
-extension_download_count_pretty: 884
+extension_star_count: 11
+extension_star_count_pretty: 11
+extension_download_count: 647
+extension_download_count_pretty: 647
 image: '/images/community_extensions/social_preview/preview_community_extension_query_condition_cache.png'
 layout: community_extension_doc
 ---

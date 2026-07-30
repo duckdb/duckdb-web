@@ -119,7 +119,7 @@ body:not(.layout_default) .blog_typography{
                     line-height: 1;
                     
                     &.current > a {
-                        color: $purple;
+                        color: var(--main-text-primary-color, #0D0D0D);
                     }
                 }
                 

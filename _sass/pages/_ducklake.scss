@@ -45,9 +45,6 @@ svg path{
 	transition: all .3s;
 }
 
-.textbutton:hover{
-	color: var(--blue-70, #2eafff);
-}
 
 .banner{
 	background: var(--lake-ribbon-background-color, #99D8FF);
@@ -750,12 +747,6 @@ body.manifesto{
 	}
 }
 
-/* Footer **/
-footer .sitefooter .footercontent > div a:hover{
-	color: var(--blue-70, #2eafff);
-}
-
-
 @media only screen and (min-width: 1900px) {
 	body.landing section.welcome{
 		padding: 200px 15px;
@@ -1114,4 +1105,11 @@ html.darkmode {
 			}
 		}
 	}
+}
+
+:root,
+html.darkmode {
+	--duckdb-nav-icon: var(--lake-nav-icon);
+	--duckdb-nav-icon-hover: var(--lake-nav-icon-hover);
+	--main-link-hover-color: var(--lake-nav-icon);
 }

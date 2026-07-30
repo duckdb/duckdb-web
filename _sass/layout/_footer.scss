@@ -49,7 +49,7 @@ footer{
 						-o-transition: color .3s;
 						transition: color .3s;
 						&:hover{
-							color: $purple;
+							color: var(--main-link-hover-color, #998B00);
 						}
 					}
 				}
@@ -96,7 +96,7 @@ footer{
 					-o-transition: color .3s;
 					transition: color .3s;
 					&:hover{
-						color: $purple;
+						color: var(--main-link-hover-color, #998B00);
 					}
 				}
 				span{

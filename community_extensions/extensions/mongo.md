@@ -35,10 +35,10 @@ docs:
     for efficient querying. The extension enables you to run analytical SQL queries directly against MongoDB data, including
     joins, aggregations, and complex analytical operations.
 
-extension_star_count: 54
-extension_star_count_pretty: 54
-extension_download_count: 2865
-extension_download_count_pretty: 2.9k
+extension_star_count: 55
+extension_star_count_pretty: 55
+extension_download_count: 8061
+extension_download_count_pretty: 8.1k
 image: '/images/community_extensions/social_preview/preview_community_extension_mongo.png'
 layout: community_extension_doc
 ---

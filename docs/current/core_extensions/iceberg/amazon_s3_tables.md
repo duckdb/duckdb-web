@@ -43,6 +43,8 @@ CREATE SECRET (
 );
 ```
 
+For the full range of credential options (assumed roles, SSO, web identity, and more), see the [`aws` extension]({% link docs/current/core_extensions/aws.md %}#credential_chain-provider).
+
 Then, connect to the catalog using your S3 Tables ARN (available in the AWS Management Console) and the `ENDPOINT_TYPE s3_tables` option:
 
 ```sql
@@ -66,3 +68,5 @@ You can query a table as follows:
 SELECT count(*)
 FROM my_s3_tables_catalog.⟨namespace_name⟩.⟨table_name⟩;
 ```
+
+S3 Tables is an Iceberg REST Catalog. For the full list of `ATTACH` options — and details on the compatibility flags — see [Iceberg REST Catalogs]({% link docs/current/core_extensions/iceberg/iceberg_rest_catalogs.md %}#attach-options).

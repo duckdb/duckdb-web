@@ -17,7 +17,7 @@ extension:
 repo:
   github: columnar-tech/duckdb-adbc-client
   andium: afb369c073959805a3c6691bd097b1a61bac0294
-  ref: e844a81aa9b59109998d744f8f1d3b66a90eb2e7
+  ref: e0c62ee9e6557c31fd2ea7ead773ea338567612a
 docs:
   hello_world: |
     -- Install and load the ADBC extension
@@ -123,10 +123,10 @@ docs:
     For more information see the [documentation](https://github.com/columnar-tech/duckdb-adbc-client).
 
 
-extension_star_count: 40
-extension_star_count_pretty: 40
-extension_download_count: 548
-extension_download_count_pretty: 548
+extension_star_count: 41
+extension_star_count_pretty: 41
+extension_download_count: 709
+extension_download_count_pretty: 709
 image: '/images/community_extensions/social_preview/preview_community_extension_adbc.png'
 layout: community_extension_doc
 ---

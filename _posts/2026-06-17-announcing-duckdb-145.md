@@ -46,8 +46,8 @@ To install the new version, please visit the [installation page]({% link install
 
 ### Miscellaneous
 
-* [`#23130`](https://github.com/duckdb/duckdb/pull/23130) – Backport GetLocalFileSystem improvements from [`#21983`](https://github.com/duckdb/duckdb/pull/21983)
-* [`#20727`](https://github.com/duckdb/duckdb/pull/20727) – Use FileSystem APIs in QueryProfiler::Write
+* [`#23130`](https://github.com/duckdb/duckdb/pull/23130) – Backport `GetLocalFileSystem` improvements from [`#21983`](https://github.com/duckdb/duckdb/pull/21983)
+* [`#20727`](https://github.com/duckdb/duckdb/pull/20727) – Use `FileSystem` APIs in `QueryProfiler::Write`
 
 ## Conclusion
 

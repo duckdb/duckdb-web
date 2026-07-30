@@ -6,6 +6,8 @@ tags: ["Paper"]
 thirdparty: false
 excerpt: ""
 pill: "SIGMOD 2019"
+redirect_from:
+- /library/duckdb
 ---
 
 |-------|-------|

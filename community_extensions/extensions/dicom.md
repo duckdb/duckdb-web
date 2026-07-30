@@ -20,7 +20,7 @@ extension:
 
 repo:
   github: nmontesg/duck-dicom
-  ref: v0.5.0
+  ref: v0.6.0
 
 docs:
   hello_world: |
@@ -33,8 +33,7 @@ docs:
     Communication in Medicine) directly into DuckDB. It uses the powerful DCMTK C++ library to read DICOM files and
     convert them into JSON format.
 
-    For full documentation and examples, see the project
-    [`README`](https://github.com/nmontesg/duck-dicom/blob/main/README.md).
+    For full documentation and examples, see the project [`documentation`](https://nmontesg.github.io/duck-dicom/).
     
     **Key functionality:**
 
@@ -48,8 +47,8 @@ docs:
 
 extension_star_count: 0
 extension_star_count_pretty: 0
-extension_download_count: 976
-extension_download_count_pretty: 976
+extension_download_count: 614
+extension_download_count_pretty: 614
 image: '/images/community_extensions/social_preview/preview_community_extension_dicom.png'
 layout: community_extension_doc
 ---
@@ -75,13 +74,14 @@ LOAD {{ page.extension.name }};
 
 <div class="extension_functions_table"></div>
 
-| function_name | function_type | description | comment | examples |
-|---------------|---------------|-------------|---------|----------|
-| query_dicom   | table         | NULL        | NULL    |          |
-| read_dicom    | table         | NULL        | NULL    |          |
-| tag_element   | scalar        | NULL        | NULL    |          |
-| tag_group     | scalar        | NULL        | NULL    |          |
-| tag_name      | scalar        | NULL        | NULL    |          |
+| function_name  | function_type | description | comment | examples |
+|----------------|---------------|-------------|---------|----------|
+| query_dicom    | table         | NULL        | NULL    |          |
+| read_dicom     | table         | NULL        | NULL    |          |
+| retrieve_dicom | table         | NULL        | NULL    |          |
+| tag_element    | scalar        | NULL        | NULL    |          |
+| tag_group      | scalar        | NULL        | NULL    |          |
+| tag_name       | scalar        | NULL        | NULL    |          |
 
 ### Overloaded Functions
 

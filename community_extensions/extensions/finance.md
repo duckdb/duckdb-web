@@ -8,15 +8,16 @@ excerpt: |
 extension:
   name: finance
   description: SQL-native quant finance functions for DuckDB
-  version: 0.2.1
+  version: 0.2.9
   language: C++
   build: cmake
   license: MIT
+  test_config: '{"test_env_variables": {"SKIP_TESTS": "1"}}'
   maintainers:
     - leonardovida
 repo:
   github: leonardovida/duckdb-finance
-  ref: 15bf42c1ac74ed118b6f3b014e27443869ccbab8
+  ref: 7815095ddebd02dc41206c2c704efd40ebee274c
 docs:
   hello_world: |
     INSTALL finance FROM community;
@@ -32,10 +33,10 @@ docs:
     The extension is deterministic and local: it does not call market-data
     vendors or remote pricing services.
 
-extension_star_count: 5
-extension_star_count_pretty: 5
-extension_download_count: 342
-extension_download_count_pretty: 342
+extension_star_count: 6
+extension_star_count_pretty: 6
+extension_download_count: 554
+extension_download_count_pretty: 554
 image: '/images/community_extensions/social_preview/preview_community_extension_finance.png'
 layout: community_extension_doc
 ---

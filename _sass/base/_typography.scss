@@ -7,83 +7,38 @@
 // =============================================================================
 
 
-/** External Links in Fließtext **/
+/** External, Download, Video and Podcast Links **/
 #main_content_wrap a.externallink,
-.singleentry .content a.externallink{
-	display: inline;
-	word-break: break-word;
-	&::after{
-		content: "";
-		mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' fill='none' viewBox='0 0 14 14'%3E%3Cpath stroke='%23000' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M12.25 5.25v-3.5m0 0h-3.5m3.5 0L7 7M5.833 1.75H4.55c-.98 0-1.47 0-1.844.19a1.75 1.75 0 0 0-.765.766c-.191.374-.191.864-.191 1.844v4.9c0 .98 0 1.47.19 1.845.169.329.436.597.766.764.374.191.864.191 1.844.191h4.9c.98 0 1.47 0 1.845-.19a1.75 1.75 0 0 0 .764-.766c.191-.374.191-.864.191-1.844V8.167'/%3E%3C/svg%3E");
-		display: inline-block;
-		-webkit-transition: all .3s;
-		-o-transition: all .3s;
-		transition: all .3s;
-		width: .875em;
-		height: .875em;
-		mask-size: contain;
-		mask-repeat: no-repeat;
-		mask-position: center center;
-		margin-left: .2em;
-		margin-right: 1px;
-		transform: translateY(.125em);
-		background-color: var(--main-text-secondary-color, #666);
-	}
-	&:hover::after{
-		background-color: #4396D7;
-	}
-}
-
-/** Download Links (PDF, ZIP, etc.) **/
+.singleentry .content a.externallink,
 #main_content_wrap a.downloadlink,
-.singleentry .content a.downloadlink{
+.singleentry .content a.downloadlink,
+#main_content_wrap a.videolink,
+.singleentry .content a.videolink,
+#main_content_wrap a.podcastlink,
+.singleentry .content a.podcastlink{
 	display: inline;
-	word-break: break-word;
-	&::after{
-		content: "";
-		mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' fill='none' viewBox='0 0 14 14'%3E%3Cpath stroke='%23000' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M12.25 8.75v.7c0 .98 0 1.47-.19 1.845a1.75 1.75 0 0 1-.766.764c-.374.191-.864.191-1.844.191h-4.9c-.98 0-1.47 0-1.844-.19a1.75 1.75 0 0 1-.765-.766c-.191-.374-.191-.864-.191-1.844v-.7m8.167-2.917L7 8.75m0 0L4.083 5.833M7 8.75v-7'/%3E%3C/svg%3E");
-		display: inline-block;
-		-webkit-transition: all .3s;
-		-o-transition: all .3s;
-		transition: all .3s;
+	overflow-wrap: break-word;
+
+	.linkicon-wrap{
+		white-space: nowrap;
+	}
+
+	svg.linkicon{
 		width: .875em;
 		height: .875em;
-		mask-size: contain;
-		mask-repeat: no-repeat;
-		mask-position: center center;
+		fill: none;
+		stroke-width: 2.4;
 		margin-left: .2em;
 		margin-right: 1px;
-		transform: translateY(.125em);
-		background-color: var(--main-text-secondary-color, #666);
+		vertical-align: -0.14em;
+		color: var(--main-text-secondary-color, #666);
+		-webkit-transition: color .3s;
+		-o-transition: color .3s;
+		transition: color .3s;
 	}
-	&:hover::after{
-		background-color: #4396D7;
+
+	&:hover svg.linkicon{
+		color: var(--main-link-hover-color, #998B00);
 	}
 }
 
-/** Video Links (YouTube, Vimeo) **/
-#main_content_wrap a.videolink,
-.singleentry .content a.videolink{
-	display: inline;
-	word-break: break-word;
-	&::after{
-		content: "";
-		mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' fill='none' viewBox='0 0 14 14'%3E%3Cpath stroke='%23000' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M12.587 5.658a1.48 1.48 0 0 0-1.03-1.06c-.911-.223-4.56-.223-4.56-.223s-3.648 0-4.56.244a1.47 1.47 0 0 0-1.029 1.06 15.4 15.4 0 0 0-.244 2.806c-.006.947.076 1.893.244 2.826a1.47 1.47 0 0 0 1.029 1.018c.912.244 4.56.244 4.56.244s3.649 0 4.56-.244a1.47 1.47 0 0 0 1.03-1.06q.248-1.381.243-2.784a15.4 15.4 0 0 0-.244-2.827'/%3E%3Cpath stroke='%23000' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.35' d='M5.685 6.98c0-.279 0-.418.058-.496a.3.3 0 0 1 .213-.116c.097-.007.214.069.448.22l2.3 1.478c.203.13.305.196.34.279.03.072.03.154 0 .227-.035.083-.137.148-.34.279l-2.3 1.478c-.234.151-.351.226-.448.22a.3.3 0 0 1-.213-.117c-.058-.078-.058-.217-.058-.495z'/%3E%3C/svg%3E");
-		display: inline-block;
-		-webkit-transition: all .3s;
-		-o-transition: all .3s;
-		transition: all .3s;
-		width: .875em;
-		height: .875em;
-		mask-size: contain;
-		mask-repeat: no-repeat;
-		mask-position: center center;
-		margin-left: .2em;
-		margin-right: 1px;
-		transform: translateY(.125em);
-		background-color: var(--main-text-secondary-color, #666);
-	}
-	&:hover::after{
-		background-color: #4396D7;
-	}
-}

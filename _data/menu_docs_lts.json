@@ -1515,6 +1515,10 @@
                   "url": "polars"
                 },
                 {
+                  "page": "Integration with PyTorch",
+                  "url": "pytorch"
+                },
+                {
                   "page": "Using fsspec Filesystems",
                   "url": "filesystems"
                 }

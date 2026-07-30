@@ -8,7 +8,7 @@ excerpt: |
 extension:
   name: func_apply
   description: Dynamic function invocation - call any scalar function or macro by name at runtime
-  version: 0.1.0
+  version: 0.2.0
   language: C++
   build: cmake
   license: MIT
@@ -16,8 +16,12 @@ extension:
     - teaguesterling
 repo:
   github: teaguesterling/duckdb_func_apply
+  # andium (DuckDB v1.4.5 track) intentionally left at the pre-v0.2.0 commit:
+  # v0.2.0 is a DuckDB v1.5.4 tree and is not built-verified against v1.4.5.
+  # The v0.2.0 security fix (GHSA-55g5-vp25-phpg) is delivered on the v1.5.4
+  # track via `ref`; v1.4.5 users should move to the v1.5.4 track.
   andium: 2013ac345d6f19e61ee78cacae161eb272cf1837
-  ref: 2013ac345d6f19e61ee78cacae161eb272cf1837
+  ref: refs/tags/v0.2.0
 docs:
   hello_world: |
     -- Load the extension
@@ -90,10 +94,32 @@ docs:
 
     Aggregate and table functions are not supported.
 
+    ## Security Model
+
+    `apply` and `apply_table` run on the **caller's own context** — they add no
+    privilege beyond the SQL the caller could already execute directly. They are
+    a dynamic-dispatch convenience, **not a sandbox**.
+
+    For scenarios that embed func_apply and want to restrict which functions can
+    be invoked (e.g. accepting a function name from less-trusted input), an
+    optional, opt-in policy is available. It is **per session** and defaults to
+    `none` (no restriction):
+
+    | Function | Description |
+    |----------|-------------|
+    | `func_apply_set_security_mode(mode)` | `'none'`, `'blacklist'`, `'whitelist'`, or `'validator'` |
+    | `func_apply_set_whitelist([...])` / `func_apply_set_blacklist([...])` | Set the allowed/denied function names |
+    | `func_apply_lock_security()` | Irreversibly lock the current session's policy |
+
+    The policy lives on the session's `ClientContext` and does not leak across
+    connections. Versions before 0.2.0 stored it process-globally and could
+    quote-escape injected identifiers — see security advisory
+    GHSA-55g5-vp25-phpg; upgrade to 0.2.0 (DuckDB v1.5.4 track).
+
 extension_star_count: 3
 extension_star_count_pretty: 3
-extension_download_count: 965
-extension_download_count_pretty: 965
+extension_download_count: 1329
+extension_download_count_pretty: 1.3k
 image: '/images/community_extensions/social_preview/preview_community_extension_func_apply.png'
 layout: community_extension_doc
 ---

@@ -12,14 +12,16 @@ title: Iceberg Extension
 
 The `iceberg` extension implements support for the [Apache Iceberg open table format](https://iceberg.apache.org/). There are two ways to work with Iceberg in DuckDB:
 
-* **[Individual tables](#individual-tables)** are read directly from storage, by pointing at a table's metadata. This requires no catalog and is read-only.
+* **[Individual tables](#querying-individual-tables)** are read directly from storage, by pointing at a table's metadata. This requires no catalog and is read-only.
 * **[Catalog-managed tables](#catalog-managed-tables)** are accessed by attaching an Iceberg REST catalog. This unlocks the full feature set, including writing.
 
 This page covers the basics of both. See also:
 
-* [Iceberg REST Catalogs]({% link docs/current/core_extensions/iceberg/iceberg_rest_catalogs.md %}) – connecting to specific catalogs (Amazon S3 Tables, AWS Glue, Cloudflare R2, Polaris, Lakekeeper, BigLake).
-* [Writing to Iceberg]({% link docs/current/core_extensions/iceberg/writing.md %}) – create tables, insert, update, delete, merge, and evolve schemas.
-* [Functions and Settings Reference]({% link docs/current/core_extensions/iceberg/reference.md %}) – all table functions, scalar functions, and settings.
+* [Writing to Iceberg]({% link docs/current/core_extensions/iceberg/writing_to_iceberg.md %}) describes the supported write operations, partitioning and schema evolution.
+* [Iceberg Functions]({% link docs/current/core_extensions/iceberg/iceberg_functions.md %}) documents the functions provided by the extension.
+* [Iceberg Options]({% link docs/current/core_extensions/iceberg/iceberg_options.md %}) documents the scan parameters, `ATTACH` options, secret options and settings.
+* [Catalogs]({% link docs/current/core_extensions/iceberg/catalogs.md %}) explains how to attach an Iceberg REST Catalog, with instructions for specific catalogs.
+* [Troubleshooting]({% link docs/current/core_extensions/iceberg/troubleshooting.md %}) lists common problems and their solutions.
 
 ## Installing and Loading
 
@@ -40,22 +42,13 @@ To make sure that you have the latest version, [update your extensions]({% link 
 UPDATE EXTENSIONS;
 ```
 
-## Individual Tables
+## Reading Iceberg Tables
 
 Individual Iceberg tables can be read directly from storage with the `iceberg_scan` function, without attaching to a catalog. To test the examples, download the [`iceberg_data.zip`]({% link data/iceberg_data.zip %}) file and unzip it.
 
-### Common Parameters
-
-| Parameter                    | Type        | Default                                    | Description                                                |
-| ---------------------------- | ----------- | ------------------------------------------ | ---------------------------------------------------------- |
-| `allow_moved_paths`          | `BOOLEAN`   | `false`                                    | Allows scanning Iceberg tables that are moved              |
-| `metadata_compression_codec` | `VARCHAR`   | `''`                                       | Treats metadata files as when set to `'gzip'`              |
-| `snapshot_from_id`           | `UBIGINT`   | `NULL`                                     | Access snapshot with a specific `id`                       |
-| `snapshot_from_timestamp`    | `TIMESTAMP` | `NULL`                                     | Access snapshot with a specific `timestamp`                |
-| `version`                    | `VARCHAR`   | `'?'`                                      | Provides an explicit version string, hint file or guessing |
-| `version_name_format`        | `VARCHAR`   | `'v%s%s.metadata.json,%s%s.metadata.json'` | Controls how versions are converted to metadata file names |
-
 ### Querying Individual Tables
+
+Use the [`iceberg_scan` function]({% link docs/current/core_extensions/iceberg/iceberg_functions.md %}#iceberg_scan) to read an Iceberg table from a path:
 
 ```sql
 SELECT count(*)
@@ -66,7 +59,7 @@ FROM iceberg_scan('data/iceberg/lineitem_iceberg', allow_moved_paths = true);
 |-------------:|
 | 51793        |
 
-> The `allow_moved_paths` option ensures that some path resolution is performed, 
+> The `allow_moved_paths` option ensures that some path resolution is performed,
 > which allows scanning Iceberg tables that are moved.
 
 You can also directly specify the current manifest in the query, this may be resolved from the catalog prior to the query, in this example the manifest version is a UUID.
@@ -80,6 +73,10 @@ FROM iceberg_scan('lineitem_iceberg/metadata/v1.metadata.json');
 | count_star() |
 |-------------:|
 | 60175        |
+
+For the full list of parameters accepted by `iceberg_scan`, see the [Iceberg Options]({% link docs/current/core_extensions/iceberg/iceberg_options.md %}#scan-options) page.
+
+### Reading from Object Stores
 
 The `iceberg` extension works together with the [`httpfs` extension]({% link docs/current/core_extensions/httpfs/overview.md %}) or the [`azure` extension]({% link docs/current/core_extensions/azure.md %}) to access Iceberg tables in object stores such as S3 or Azure Blob Storage.
 

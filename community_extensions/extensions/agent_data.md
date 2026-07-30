@@ -8,7 +8,7 @@ excerpt: |
 extension:
   name: agent_data
   description: A DuckDB extension written in Rust for querying, analysing and inspecting AI coding agents history. Read conversations, plans, todos, history, and usage stats directly from your local agent data directories.
-  version: 0.2.0
+  version: 0.3.0
   language: Rust
   build: cargo
   license: MIT
@@ -19,7 +19,7 @@ extension:
 
 repo:
   github: axsaucedo/agent_data_duckdb
-  ref: 1b9b232056763204c12046beacd5c99a6672442e
+  ref: 134e48d47d5a901bc923f258ad1cd29b82d3a2ff
 
 docs:
   hello_world: |
@@ -121,10 +121,10 @@ docs:
 
     For full documentation, see the [GitHub repository](https://github.com/axsaucedo/duckdb-claude-ext).
 
-extension_star_count: 21
-extension_star_count_pretty: 21
-extension_download_count: 739
-extension_download_count_pretty: 739
+extension_star_count: 23
+extension_star_count_pretty: 23
+extension_download_count: 951
+extension_download_count_pretty: 951
 image: '/images/community_extensions/social_preview/preview_community_extension_agent_data.png'
 layout: community_extension_doc
 ---

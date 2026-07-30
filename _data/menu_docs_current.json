@@ -105,7 +105,6 @@
                   "page": "Caveats",
                   "url": "caveats"
                 }
-
               ]
             },
             {
@@ -443,6 +442,10 @@
                 {
                   "page": "PHP",
                   "url": "php"
+                },
+                {
+                  "page": "PHP (PDO)",
+                  "url": "php_pdo"
                 },
                 {
                   "page": "Swift",
@@ -1128,23 +1131,19 @@
                 },
                 {
                   "page": "Writing to Iceberg",
-                  "url": "writing"
+                  "url": "writing_to_iceberg"
                 },
                 {
-                  "page": "Iceberg REST Catalogs",
-                  "url": "iceberg_rest_catalogs"
+                  "page": "Iceberg Functions",
+                  "url": "iceberg_functions"
                 },
                 {
-                  "page": "Functions and Settings Reference",
-                  "url": "reference"
+                  "page": "Iceberg Options",
+                  "url": "iceberg_options"
                 },
                 {
-                  "page": "Amazon S3 Tables",
-                  "url": "amazon_s3_tables"
-                },
-                {
-                  "page": "Amazon SageMaker Lakehouse (AWS Glue)",
-                  "url": "amazon_sagemaker_lakehouse"
+                  "page": "Iceberg Rest Catalogs",
+                  "url": "catalogs"
                 },
                 {
                   "page": "Troubleshooting",
@@ -1353,6 +1352,10 @@
                 {
                   "page": "SQLite Import",
                   "url": "sqlite"
+                },
+                {
+                  "page": "Amazon RDS with IAM Authentication",
+                  "url": "rds_iam"
                 }
               ]
             },
@@ -1625,6 +1628,10 @@
                 {
                   "page": "Integration with Polars",
                   "url": "polars"
+                },
+                {
+                  "page": "Integration with PyTorch",
+                  "url": "pytorch"
                 },
                 {
                   "page": "Using fsspec Filesystems",
@@ -1905,6 +1912,10 @@
                 {
                   "page": "Writing Tests",
                   "url": "writing_tests"
+                },
+                {
+                  "page": "Unit Tester Configuration",
+                  "url": "test_configuration"
                 },
                 {
                   "page": "Debugging",

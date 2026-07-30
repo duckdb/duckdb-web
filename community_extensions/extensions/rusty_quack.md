@@ -21,7 +21,7 @@ extension:
 repo:
   github: duckdb/extension-template-rs
   andium: 2381c7e1c5026f21c92b7ffe3ae7a6b1d8d177c0
-  ref: 0a839a1b445cc96d5321c67db9274d0ae6e9f869
+  ref: abb7b2f3f954a47f90fc37a99cda3ce0618e6094
 
 docs:
   hello_world: |
@@ -32,8 +32,8 @@ docs:
 
 extension_star_count: 111
 extension_star_count_pretty: 111
-extension_download_count: 481
-extension_download_count_pretty: 481
+extension_download_count: 826
+extension_download_count_pretty: 826
 image: '/images/community_extensions/social_preview/preview_community_extension_rusty_quack.png'
 layout: community_extension_doc
 ---

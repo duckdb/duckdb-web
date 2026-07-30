@@ -9,6 +9,9 @@ redirect_from:
 title: TPC-DS Extension
 ---
 
+> Warning The `tpcds` extension will change in DuckDB version 2.0 to make the generator compatible with with TPC-DS version 4.
+> See the [related PR](https://github.com/duckdb/duckdb/pull/21746) for more details.
+
 The `tpcds` extension implements the data generator and queries for the [TPC-DS benchmark](https://www.tpc.org/tpcds/).
 
 ## Installing and Loading
@@ -86,7 +89,8 @@ The data generator function `dsdgen` has the following parameters:
 
 ## Pre-Generated Datasets
 
-Pre-generated DuckDB databases for TPC-DS are available for download:
+Pre-generated DuckDB databases for TPC-DS are available for download. Note that these were generated with DuckDB v1.x.
+DuckDB v2.x generates slightly different TPC-DS files, compatible with TPC-DS v4.
 
 * [`tpcds-sf10.db`](https://blobs.duckdb.org/data/tpcds-sf10.db) (2.9 GB)
 * [`tpcds-sf30.db`](https://blobs.duckdb.org/data/tpcds-sf30.db) (7.7 GB)

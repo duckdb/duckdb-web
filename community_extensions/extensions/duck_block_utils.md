@@ -8,7 +8,7 @@ excerpt: |
 extension:
   name: duck_block_utils
   description: Build, transform, validate, and extract content from structured documents using the duck_block type
-  version: 1.2.1
+  version: 1.4.0
   language: C++
   build: cmake
   license: MIT
@@ -16,8 +16,11 @@ extension:
     - teaguesterling
 repo:
   github: teaguesterling/duckdb_duck_block_utils
+  # andium (DuckDB v1.4.5 track) intentionally left at the v1.2.1 commit:
+  # v1.4.0 targets a v1.5.x tree (dropped v1.4.x support) and is not built-verified
+  # against v1.4.5. v1.4.5 users should move to the v1.5.x track.
   andium: 125662df9e5450105dc9b7957ad955cb53d7beec
-  ref: 125662df9e5450105dc9b7957ad955cb53d7beec
+  ref: refs/tags/v1.4.0
 docs:
   hello_world: |
     -- Build a document programmatically
@@ -173,8 +176,8 @@ docs:
 
 extension_star_count: 1
 extension_star_count_pretty: 1
-extension_download_count: 922
-extension_download_count_pretty: 922
+extension_download_count: 1092
+extension_download_count_pretty: 1.1k
 image: '/images/community_extensions/social_preview/preview_community_extension_duck_block_utils.png'
 layout: community_extension_doc
 ---
@@ -211,6 +214,7 @@ LOAD {{ page.extension.name }};
 | db_blocks_links              | scalar        | NULL        | NULL    |          |
 | db_blocks_lint               | scalar        | NULL        | NULL    |          |
 | db_blocks_merge              | scalar        | NULL        | NULL    |          |
+| db_blocks_render_ansi        | scalar        | NULL        | NULL    |          |
 | db_blocks_reorder            | scalar        | NULL        | NULL    |          |
 | db_blocks_slice              | scalar        | NULL        | NULL    |          |
 | db_blocks_stats              | scalar        | NULL        | NULL    |          |
@@ -252,6 +256,7 @@ LOAD {{ page.extension.name }};
 | db_strikethrough             | scalar        | NULL        | NULL    |          |
 | db_subscript                 | scalar        | NULL        | NULL    |          |
 | db_superscript               | scalar        | NULL        | NULL    |          |
+| db_terminal_width            | scalar        | NULL        | NULL    |          |
 | db_text                      | scalar        | NULL        | NULL    |          |
 | db_underline                 | scalar        | NULL        | NULL    |          |
 | duck_block                   | scalar        | NULL        | NULL    |          |
@@ -261,6 +266,7 @@ LOAD {{ page.extension.name }};
 | duck_block_encoding          | scalar        | NULL        | NULL    |          |
 | duck_block_level             | scalar        | NULL        | NULL    |          |
 | duck_block_order             | scalar        | NULL        | NULL    |          |
+| duck_block_render            | pragma        | NULL        | NULL    |          |
 | duck_block_set_content       | scalar        | NULL        | NULL    |          |
 | duck_block_set_level         | scalar        | NULL        | NULL    |          |
 | duck_block_set_order         | scalar        | NULL        | NULL    |          |

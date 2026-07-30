@@ -75,7 +75,7 @@ body.landing{
 		}
 		.duckdblabs{
 			margin: 0 auto;
-			max-width: 750px;
+			max-width: 840px;
 			text-align: center;
 			display: flex;
 			flex-direction: column;
@@ -607,4 +607,12 @@ html.darkmode {
 .post-list .newstiles .postpreview.external-post{
 	//border: 1px solid var(--main-marker-border-color, #FFF100);
 	border: 1px solid var(--main-blogpost-border-color, #F2F2F2);
+}
+
+
+:root,
+html.darkmode {
+	--duckdb-nav-icon: var(--labs-nav-icon);
+	--duckdb-nav-icon-hover: var(--labs-nav-icon-hover);
+	--main-link-hover-color: var(--labs-nav-icon);
 }

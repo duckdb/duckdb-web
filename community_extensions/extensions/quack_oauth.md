@@ -17,12 +17,12 @@ extension:
     - jrosskopf
 repo:
   github: DataZooDE/quack-oauth
-  ref: 0b39e72efe1e85adce0dfe61bfb75ef4037692ff
+  ref: 8e6621f53a9c39b8f30844d11a1c5c481528985e
 
-extension_star_count: 21
-extension_star_count_pretty: 21
-extension_download_count: 667
-extension_download_count_pretty: 667
+extension_star_count: 22
+extension_star_count_pretty: 22
+extension_download_count: 1520
+extension_download_count_pretty: 1.5k
 image: '/images/community_extensions/social_preview/preview_community_extension_quack_oauth.png'
 layout: community_extension_doc
 ---
@@ -88,6 +88,8 @@ This extension does not add any types.
 | quack_oauth_provider           | First-class IdP preset: entra\|google\|keycloak\|okta\|github\|generic (R-S-12).     | VARCHAR    | GLOBAL | []      |
 | quack_oauth_renew_skew_s       | Client refreshes the access token this many seconds before expires_at (R-C-2).       | INTEGER    | GLOBAL | []      |
 | quack_oauth_server_secret_name | Name of the quack_oauth_server SECRET that check_token reads.                        | VARCHAR    | GLOBAL | []      |
+| quack_oauth_telemetry_enabled  | Enable anonymous usage telemetry, see https://erpl.io/telemetry for details.         | BOOLEAN    | GLOBAL | []      |
+| quack_oauth_telemetry_key      | PostHog API key for telemetry, see https://erpl.io/telemetry for details.            | VARCHAR    | GLOBAL | []      |
 | quack_oauth_trust_plaintext    | Allow LOAD with enabled=true even when no TLS terminator is detected (R-N-4).        | BOOLEAN    | GLOBAL | []      |
 | quack_oauth_validation_mode    | Token validation strategy: 'jwks' or 'introspect' (R-S-2).                           | VARCHAR    | GLOBAL | []      |
 

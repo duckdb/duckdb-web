@@ -8,20 +8,23 @@ excerpt: |
 extension:
   name: webbed
   description: Comprehensive processing extension for web markup languages (XML and HTML) with SAX streaming for large files, intelligent schema inference, XPath-based data extraction, and HTML table parsing.
-  version: 2.4.0
+  version: 2.6.1
   language: C++
   build: cmake
   license: MIT
   requires_toolchains: vcpkg
-  # Windows re-included for v2.4.0: DuckDB v1.5.4's vendored fmt no longer uses the removed
-  # MSVC STL API (the old compile blocker), and the extension builds on Windows in CI.
+  # Windows included since v2.4.0: DuckDB v1.5.4's vendored fmt no longer uses the removed
+  # MSVC STL API (the old compile blocker), and the extension builds and passes tests on the
+  # windows_amd64 MSVC runner in CI.
   maintainers:
     - teaguesterling
   vcpkg_commit: 68a1c387f660632f2f65cdb7e8cd093a08840e5d
 repo:
   github: teaguesterling/duckdb_webbed
   andium: ddda30f11352138b2451657419640370d1612137
-  ref: ad2a912d1758a9380a3f9759b78987dd374565ed
+  # andium (DuckDB v1.4.5 track) left at its prior commit; the v2.6.1
+  # structured-inline fix ships on the v1.5.x track via ref.
+  ref: refs/tags/v2.6.1
 docs:
   docs_url: https://duckdb-webbed.readthedocs.io
   hello_world: |
@@ -94,12 +97,12 @@ docs:
 
     See https://duckdb-webbed.readthedocs.io for comprehensive documentation and examples.
 
-    Built on libxml2 for robust, standards-compliant parsing with comprehensive error handling and memory-safe RAII implementation. 68 test suites with 2511 assertions, including DOM/SAX equivalence testing. The extension supports mixed file systems, configurable schema inference, and efficient processing of large document collections.
+    Built on libxml2 for robust, standards-compliant parsing with comprehensive error handling and memory-safe RAII implementation. 91 test suites with 3011 assertions, including DOM/SAX equivalence, adversarial/security, and multi-file parallelism testing. The extension supports mixed file systems, configurable schema inference, and efficient processing of large document collections.
 
-extension_star_count: 65
-extension_star_count_pretty: 65
-extension_download_count: 19808
-extension_download_count_pretty: 19.8k
+extension_star_count: 67
+extension_star_count_pretty: 67
+extension_download_count: 18676
+extension_download_count_pretty: 18.7k
 image: '/images/community_extensions/social_preview/preview_community_extension_webbed.png'
 layout: community_extension_doc
 ---

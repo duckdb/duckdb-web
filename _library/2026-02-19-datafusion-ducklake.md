@@ -17,5 +17,5 @@ pill: "Data Debug SF"
 
 |-------|-------|
 | **Event** | Data Debug SF |
-| **Speaker** | Zac Farrell |
+| **Speaker** | Zac Farrell (Hotdata) |
 | **YouTube** | [DataFusion + DuckLake](https://www.youtube.com/watch?v=VtvjyMKYPEA) |

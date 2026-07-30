@@ -58,12 +58,13 @@
             transform: translate(-50%, -50%);
             text-align: center;
             z-index: 1;
-            
+
             h1{
                 margin-bottom: 24px;
                 font-weight: 700;
                 line-height: 0.8;
                 letter-spacing: -0.025em;
+                color: inherit;
             }
         }
 
@@ -577,8 +578,8 @@
                     color: var(--main-text-secondary-color, #B2B2B2);
                 }
 
-                &.downloadlink::after {
-                    background-color: currentColor !important;
+                &.downloadlink svg.linkicon {
+                    color: inherit !important;
                 }
             }
         }

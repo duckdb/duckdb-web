@@ -1,6 +1,5 @@
 import frontmatter
 import sys
-from glob import glob
 from pathlib import Path
 import re
 import textwrap

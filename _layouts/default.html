@@ -28,8 +28,8 @@
 	{% if page.body_class contains "duckcon" %}
 	<link rel="preconnect" href="https://api.mapbox.com" crossorigin>
 	<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
-	<link href='https://api.mapbox.com/mapbox-gl-js/v3.17.0-beta.1/mapbox-gl.css' rel='stylesheet' />
-	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@12/swiper-bundle.min.css?2" />
+	<link href='https://api.mapbox.com/mapbox-gl-js/v3.17.0-beta.1/mapbox-gl.css' rel='stylesheet' integrity="sha384-iZHx8ei75G5yWmKdvT9TwWafArVHCZ5OvZlUQWShQGrJFq5sBlxK+tu/1cGonuYJ" crossorigin="anonymous" />
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@12/swiper-bundle.min.css?2" integrity="sha384-+eoVPirEHy8XSrf7sRozx+2OTKCWm1qfVFWnQ7qiXW6vAb+GUXRw4gq7sU+hq6HG" crossorigin="anonymous" />
 	{% endif %}
 
 	<link rel="apple-touch-icon" sizes="180x180" href="{% link images/favicon/apple-touch-icon.png %}">
@@ -64,7 +64,7 @@
 	{% endif %}
 
 	{% if page.body_class contains "duckcon" %}
-	<script src='https://api.mapbox.com/mapbox-gl-js/v3.17.0-beta.1/mapbox-gl.js'></script>
+	<script src='https://api.mapbox.com/mapbox-gl-js/v3.17.0-beta.1/mapbox-gl.js' integrity="sha384-Yy3wODAOvfT0/YULUDobkC+draTm8Y1fuJqn6+alPRUHh5X3CkeUWyzdUf8gHv9S" crossorigin="anonymous"></script>
 	{% endif %}
 </head>
 <body class="layout_default{% if page.body_class %} {{ page.body_class }}{% endif %}">
@@ -187,7 +187,7 @@
 	<script src="/js/ua-parser.min.js" defer></script>
 	{% endif %}
 	{% if page.body_class contains "duckcon" %}
-	<script src="https://cdn.jsdelivr.net/npm/swiper@12/swiper-bundle.min.js" defer></script>
+	<script src="https://cdn.jsdelivr.net/npm/swiper@12/swiper-bundle.min.js" integrity="sha384-TmUUNA9gRm9TspAqMh20CdxlcwkNFW3UyIOibSljonhpJ1UfGenJDyQvO/EbWwpW" crossorigin="anonymous" defer></script>
 	{% endif %}
 	<script src="/js/script.js?{{ site.time | date: '%s' }}" defer></script>
 	{% if page.body_class contains "installation" %}

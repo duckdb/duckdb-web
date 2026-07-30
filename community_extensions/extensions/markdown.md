@@ -8,7 +8,7 @@ excerpt: |
 extension:
   name: markdown
   description: Read, analyze, and write Markdown files with block-level document representation and inline element support
-  version: 1.4.2
+  version: 1.5.1
   language: C++
   build: cmake
   license: MIT
@@ -17,8 +17,10 @@ extension:
   vcpkg_commit: bffcbb75f71553824aa948a7e7b4f798662a6fa7
 repo:
   github: teaguesterling/duckdb_markdown
+  # andium (DuckDB v1.4.5 track) intentionally left at its prior commit; the
+  # v1.5.1 structured-inline change ships on the v1.5.x track via ref.
   andium: c9e1a4d3b98a814c86295ecb2ed760be286242ba
-  ref: refs/tags/v1.4.2
+  ref: refs/tags/v1.5.1
 docs:
   hello_world: |
     -- Load the extension
@@ -109,12 +111,12 @@ docs:
 
     Real-world benchmark: Processing 287 Markdown files (2,699 sections, 1,137 code blocks, 1,174 links) in 603ms.
 
-    Full test suite with 1108 passing assertions across 20 test files.
+    Full test suite with 1190 passing assertions across 24 test files.
 
-extension_star_count: 27
-extension_star_count_pretty: 27
-extension_download_count: 1689
-extension_download_count_pretty: 1.7k
+extension_star_count: 28
+extension_star_count_pretty: 28
+extension_download_count: 1839
+extension_download_count_pretty: 1.8k
 image: '/images/community_extensions/social_preview/preview_community_extension_markdown.png'
 layout: community_extension_doc
 ---
@@ -140,28 +142,32 @@ LOAD {{ page.extension.name }};
 
 <div class="extension_functions_table"></div>
 
-|      function_name      | function_type | description | comment | examples |
-|-------------------------|---------------|-------------|---------|----------|
-| duck_block_to_md        | scalar        | NULL        | NULL    |          |
-| duck_blocks_to_md       | scalar        | NULL        | NULL    |          |
-| duck_blocks_to_sections | scalar        | NULL        | NULL    |          |
-| md_extract_code_blocks  | scalar        | NULL        | NULL    |          |
-| md_extract_images       | scalar        | NULL        | NULL    |          |
-| md_extract_links        | scalar        | NULL        | NULL    |          |
-| md_extract_metadata     | scalar        | NULL        | NULL    |          |
-| md_extract_section      | scalar        | NULL        | NULL    |          |
-| md_extract_sections     | scalar        | NULL        | NULL    |          |
-| md_extract_table_rows   | scalar        | NULL        | NULL    |          |
-| md_extract_tables_json  | scalar        | NULL        | NULL    |          |
-| md_section_breadcrumb   | scalar        | NULL        | NULL    |          |
-| md_stats                | scalar        | NULL        | NULL    |          |
-| md_to_html              | scalar        | NULL        | NULL    |          |
-| md_to_text              | scalar        | NULL        | NULL    |          |
-| md_valid                | scalar        | NULL        | NULL    |          |
-| read_markdown           | table         | NULL        | NULL    |          |
-| read_markdown_blocks    | table         | NULL        | NULL    |          |
-| read_markdown_sections  | table         | NULL        | NULL    |          |
-| value_to_md             | scalar        | NULL        | NULL    |          |
+|         function_name         | function_type | description | comment | examples |
+|-------------------------------|---------------|-------------|---------|----------|
+| duck_block_to_md              | scalar        | NULL        | NULL    |          |
+| duck_blocks_to_md             | scalar        | NULL        | NULL    |          |
+| duck_blocks_to_sections       | scalar        | NULL        | NULL    |          |
+| md_extract_code_blocks        | scalar        | NULL        | NULL    |          |
+| md_extract_frontmatter        | scalar        | NULL        | NULL    |          |
+| md_extract_images             | scalar        | NULL        | NULL    |          |
+| md_extract_links              | scalar        | NULL        | NULL    |          |
+| md_extract_metadata           | scalar        | NULL        | NULL    |          |
+| md_extract_section            | scalar        | NULL        | NULL    |          |
+| md_extract_sections           | scalar        | NULL        | NULL    |          |
+| md_extract_table_rows         | scalar        | NULL        | NULL    |          |
+| md_extract_tables_json        | scalar        | NULL        | NULL    |          |
+| md_extract_tags               | scalar        | NULL        | NULL    |          |
+| md_extract_wikilinks          | scalar        | NULL        | NULL    |          |
+| md_section_breadcrumb         | scalar        | NULL        | NULL    |          |
+| md_stats                      | scalar        | NULL        | NULL    |          |
+| md_to_html                    | scalar        | NULL        | NULL    |          |
+| md_to_text                    | scalar        | NULL        | NULL    |          |
+| md_valid                      | scalar        | NULL        | NULL    |          |
+| parse_markdown_to_duck_blocks | scalar        | NULL        | NULL    |          |
+| read_markdown                 | table         | NULL        | NULL    |          |
+| read_markdown_blocks          | table         | NULL        | NULL    |          |
+| read_markdown_sections        | table         | NULL        | NULL    |          |
+| value_to_md                   | scalar        | NULL        | NULL    |          |
 
 ### Overloaded Functions
 

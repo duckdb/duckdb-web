@@ -119,35 +119,6 @@ Pre-generated DuckDB databases for TPC-H are available for download:
 * [`tpch-sf1000.db`](https://blobs.duckdb.org/data/tpch-sf1000.db) (265 GB)
 * [`tpch-sf3000.db`](https://blobs.duckdb.org/data/tpch-sf3000.db) (796 GB)
 
-## Resource Usage of the Data Generator
-
-Generating TPC-H datasets for large scale factors takes a significant amount of time.
-Additionally, _if the generation is performed in a single step,_ it requires a large amount of memory.
-The following table gives an estimate on the resources required to produce DuckDB database files containing the generated TPC-H dataset using 128 threads.
-
-| Scale factor | Database size | Generation time | Single-step generation's memory usage |
-| -----------: | ------------: | --------------: | ------------------------------------: |
-|          100 |         26 GB |      17 minutes |                                 71 GB |
-|          300 |         78 GB |      51 minutes |                                211 GB |
-|        1,000 |        265 GB |  2 h 53 minutes |                                647 GB |
-|        3,000 |        796 GB |  8 h 30 minutes |                               1799 GB |
-
-The numbers shown above were achieved by running the `dbgen` function in a single step, for example:
-
-```sql
-CALL dbgen(sf = 300);
-```
-
-If you have a limited amount of memory available, you can run the `dbgen` function in steps.
-For example, you may generate SF300 in 10 steps:
-
-```sql
-CALL dbgen(sf = 300, children = 10, step = 0);
-CALL dbgen(sf = 300, children = 10, step = 1);
-...
-CALL dbgen(sf = 300, children = 10, step = 9);
-```
-
 ## Limitation
 
 The `tpch(⟨query_id⟩)`{:.language-sql .highlight} function runs a fixed TPC-H query with pre-defined bind parameters (a.k.a. substitution parameters). It is not possible to change the query parameters using the `tpch` extension. To run the queries with the parameters prescribed by the TPC-H benchmark, use a TPC-H framework implementation.

@@ -8,15 +8,15 @@ excerpt: |
 extension:
   name: sitting_duck
   description: Parse and analyze source code ASTs from 27 programming languages with tree-sitter grammars, pattern matching, and structural search
-  version: 1.7.4
+  version: 1.9.0
   language: C++
   build: cmake
-  license: MIT
+  license: Apache-2.0
   maintainers:
     - teaguesterling
 repo:
   github: teaguesterling/sitting_duck
-  ref: f7b9c600116b3ee869d8b5a9dca9f1357d31569c
+  ref: 1da43741d781e630f42ed09e362b2040b30432b6
 docs:
   hello_world: |
     -- Parse Python code and find function definitions
@@ -94,6 +94,24 @@ docs:
     `:match()` / `:contains()` structural patterns, scope/call-graph pseudo-classes, and pseudo-element navigation.
     Bare type matching: `if` matches `if` + `if_statement` + `if_clause`.
 
+    v1.9.0 hardens the selector engine: no more silent-empty results (selectors the engine
+    can't honor now raise a clear error instead of returning 0 rows), `#name` on call nodes
+    binds uniformly across all 27 grammars, and NULL columns no longer over- or under-match.
+
+    **Parse-time filtering (v1.8.0):**
+    `max_depth :=` and `prune :=` shrink the AST at parse time, with automatic tree healing:
+    ```sql
+    SELECT * FROM read_ast('file.py', max_depth := 2);
+    SELECT * FROM read_ast('src/**/*.py', prune := ['syntax', 'comments', 'punctuation']);
+    ```
+    Prune policies: `syntax`, `comments`, `literals`, `imports`, `types`, `punctuation`,
+    `unnamed`, `leaves`, `internal`.
+
+    **Call-graph macros (v1.8.0):**
+    - `ast_get_calls(source)` - calls with caller attribution and type classification
+    - `ast_call_graph(source)` - aggregated caller→callee graph with call counts
+    - `ast_find_references(source, name)` - scope-chain-aware symbol reference resolution
+
     **Table Functions:**
     - `read_ast(file_pattern, language := NULL)` - Parse source files into AST rows (parallel)
     - `parse_ast(content, language)` - Parse source code strings (table function)
@@ -161,6 +179,8 @@ docs:
     - `peek` - Configurable source preview
     - `qualified_name` - Scope-based path unique within a file (`C[User] F[__init__]` format; v1.7.0)
     - `signature_type`, `parameters`, `modifiers`, `annotations` - Native extraction
+      (v1.8.0: `modifiers[]` populated across Python, JS, TS, Rust, Kotlin, Swift, Dart, C#;
+      `IS_EXPORTED` flag for file-level visibility)
     - `scope` - STRUCT<current, function, class, module, stack> (v1.7.4); replaces
       the v1.7.2 `scope_id` / `scope_stack` columns. `scope.function` lets you
       answer "what function is this in?" as a single column read.
@@ -179,7 +199,7 @@ docs:
 
 extension_star_count: 20
 extension_star_count_pretty: 20
-extension_download_count: 1024
+extension_download_count: 1020
 extension_download_count_pretty: 1.0k
 image: '/images/community_extensions/social_preview/preview_community_extension_sitting_duck.png'
 layout: community_extension_doc
@@ -206,126 +226,130 @@ LOAD {{ page.extension.name }};
 
 <div class="extension_functions_table"></div>
 
-|        function_name         | function_type | description | comment | examples |
-|------------------------------|---------------|-------------|---------|----------|
-| ast_ancestors                | table_macro   | NULL        | NULL    |          |
-| ast_call_arguments           | table_macro   | NULL        | NULL    |          |
-| ast_callees                  | table_macro   | NULL        | NULL    |          |
-| ast_callers                  | table_macro   | NULL        | NULL    |          |
-| ast_capture                  | macro         | NULL        | NULL    |          |
-| ast_children                 | table_macro   | NULL        | NULL    |          |
-| ast_class_members            | table_macro   | NULL        | NULL    |          |
-| ast_containing_line          | table_macro   | NULL        | NULL    |          |
-| ast_dead_code                | table_macro   | NULL        | NULL    |          |
-| ast_definition_parent        | table_macro   | NULL        | NULL    |          |
-| ast_definitions              | table_macro   | NULL        | NULL    |          |
-| ast_descendants              | table_macro   | NULL        | NULL    |          |
-| ast_exports                  | table_macro   | NULL        | NULL    |          |
-| ast_follows                  | table_macro   | NULL        | NULL    |          |
-| ast_function_metrics         | table_macro   | NULL        | NULL    |          |
-| ast_function_scope           | table_macro   | NULL        | NULL    |          |
-| ast_functions_containing     | table_macro   | NULL        | NULL    |          |
-| ast_get_source               | macro         | NULL        | NULL    |          |
-| ast_get_source_line          | macro         | NULL        | NULL    |          |
-| ast_get_source_numbered      | macro         | NULL        | NULL    |          |
-| ast_has                      | table_macro   | NULL        | NULL    |          |
-| ast_imports                  | table_macro   | NULL        | NULL    |          |
-| ast_in_range                 | table_macro   | NULL        | NULL    |          |
-| ast_inside                   | table_macro   | NULL        | NULL    |          |
-| ast_match                    | table_macro   | NULL        | NULL    |          |
-| ast_nesting_analysis         | table_macro   | NULL        | NULL    |          |
-| ast_not_has                  | table_macro   | NULL        | NULL    |          |
-| ast_pattern                  | table_macro   | NULL        | NULL    |          |
-| ast_pattern_list             | macro         | NULL        | NULL    |          |
-| ast_peek_contains_any        | scalar        | NULL        | NULL    |          |
-| ast_precedes                 | table_macro   | NULL        | NULL    |          |
-| ast_qualified_name_as_string | macro         | NULL        | NULL    |          |
-| ast_resolve                  | table_macro   | NULL        | NULL    |          |
-| ast_security_audit           | table_macro   | NULL        | NULL    |          |
-| ast_select                   | table_macro   | NULL        | NULL    |          |
-| ast_select_from              | table_macro   | NULL        | NULL    |          |
-| ast_select_list              | table_macro   | NULL        | NULL    |          |
-| ast_select_rules             | table_macro   | NULL        | NULL    |          |
-| ast_siblings                 | table_macro   | NULL        | NULL    |          |
-| ast_source_of                | table_macro   | NULL        | NULL    |          |
-| ast_supported_languages      | table         | NULL        | NULL    |          |
-| ast_type_map                 | table         | NULL        | NULL    |          |
-| binds_name                   | scalar        | NULL        | NULL    |          |
-| clean_pattern                | macro         | NULL        | NULL    |          |
-| detect_language              | scalar        | NULL        | NULL    |          |
-| extract_wildcard_rules       | macro         | NULL        | NULL    |          |
-| get_kind                     | scalar        | NULL        | NULL    |          |
-| get_searchable_types         | scalar        | NULL        | NULL    |          |
-| get_super_kind               | scalar        | NULL        | NULL    |          |
-| get_variadic_names           | macro         | NULL        | NULL    |          |
-| has_body                     | scalar        | NULL        | NULL    |          |
-| is_annotation                | macro         | NULL        | NULL    |          |
-| is_arithmetic                | macro         | NULL        | NULL    |          |
-| is_assignment                | macro         | NULL        | NULL    |          |
-| is_block                     | macro         | NULL        | NULL    |          |
-| is_boolean_literal           | macro         | NULL        | NULL    |          |
-| is_call                      | scalar        | NULL        | NULL    |          |
-| is_class_definition          | macro         | NULL        | NULL    |          |
-| is_comment                   | macro         | NULL        | NULL    |          |
-| is_comparison                | macro         | NULL        | NULL    |          |
-| is_conditional               | macro         | NULL        | NULL    |          |
-| is_construct                 | scalar        | NULL        | NULL    |          |
-| is_control_flow              | scalar        | NULL        | NULL    |          |
-| is_declaration_only          | scalar        | NULL        | NULL    |          |
-| is_definition                | scalar        | NULL        | NULL    |          |
-| is_directive                 | macro         | NULL        | NULL    |          |
-| is_embodied                  | scalar        | NULL        | NULL    |          |
-| is_export                    | macro         | NULL        | NULL    |          |
-| is_foreign                   | macro         | NULL        | NULL    |          |
-| is_function_call             | macro         | NULL        | NULL    |          |
-| is_function_definition       | macro         | NULL        | NULL    |          |
-| is_identifier                | scalar        | NULL        | NULL    |          |
-| is_import                    | macro         | NULL        | NULL    |          |
-| is_jump                      | macro         | NULL        | NULL    |          |
-| is_kind                      | scalar        | NULL        | NULL    |          |
-| is_list                      | macro         | NULL        | NULL    |          |
-| is_literal                   | macro         | NULL        | NULL    |          |
-| is_logical                   | macro         | NULL        | NULL    |          |
-| is_loop                      | macro         | NULL        | NULL    |          |
-| is_member_access             | macro         | NULL        | NULL    |          |
-| is_module_definition         | macro         | NULL        | NULL    |          |
-| is_name_declaration          | scalar        | NULL        | NULL    |          |
-| is_name_definition           | scalar        | NULL        | NULL    |          |
-| is_name_reference            | scalar        | NULL        | NULL    |          |
-| is_number_literal            | macro         | NULL        | NULL    |          |
-| is_parser_specific           | scalar        | NULL        | NULL    |          |
-| is_pattern_wildcard          | macro         | NULL        | NULL    |          |
-| is_punctuation               | scalar        | NULL        | NULL    |          |
-| is_scope                     | scalar        | NULL        | NULL    |          |
-| is_semantic_type             | scalar        | NULL        | NULL    |          |
-| is_string_literal            | macro         | NULL        | NULL    |          |
-| is_syntax_only               | scalar        | NULL        | NULL    |          |
-| is_type_composite            | macro         | NULL        | NULL    |          |
-| is_type_definition           | macro         | NULL        | NULL    |          |
-| is_type_generic              | macro         | NULL        | NULL    |          |
-| is_type_primitive            | macro         | NULL        | NULL    |          |
-| is_type_reference            | macro         | NULL        | NULL    |          |
-| is_variable_definition       | macro         | NULL        | NULL    |          |
-| kind_code                    | scalar        | NULL        | NULL    |          |
-| name_role                    | scalar        | NULL        | NULL    |          |
-| parse_ast                    | table         | NULL        | NULL    |          |
-| parse_ast_flat               | table         | NULL        | NULL    |          |
-| parse_ast_hierarchical       | table         | NULL        | NULL    |          |
-| parse_ast_list               | scalar        | NULL        | NULL    |          |
-| parse_ast_list_table         | table_macro   | NULL        | NULL    |          |
-| parse_html_wildcard          | macro         | NULL        | NULL    |          |
-| pattern_has_recursive        | macro         | NULL        | NULL    |          |
-| pattern_has_variadic         | macro         | NULL        | NULL    |          |
-| read_ast                     | table         | NULL        | NULL    |          |
-| read_ast_flat                | table         | NULL        | NULL    |          |
-| read_ast_hierarchical        | table         | NULL        | NULL    |          |
-| read_ast_hierarchical_new    | table         | NULL        | NULL    |          |
-| semantic_type_base           | macro         | NULL        | NULL    |          |
-| semantic_type_code           | scalar        | NULL        | NULL    |          |
-| semantic_type_to_string      | scalar        | NULL        | NULL    |          |
-| string_contains_any          | scalar        | NULL        | NULL    |          |
-| string_contains_any_i        | scalar        | NULL        | NULL    |          |
-| wildcard_capture_name        | macro         | NULL        | NULL    |          |
+|             function_name              | function_type | description | comment | examples |
+|----------------------------------------|---------------|-------------|---------|----------|
+| ast_ancestors                          | table_macro   | NULL        | NULL    |          |
+| ast_call_arguments                     | table_macro   | NULL        | NULL    |          |
+| ast_call_graph                         | table_macro   | NULL        | NULL    |          |
+| ast_callees                            | table_macro   | NULL        | NULL    |          |
+| ast_callers                            | table_macro   | NULL        | NULL    |          |
+| ast_capture                            | macro         | NULL        | NULL    |          |
+| ast_children                           | table_macro   | NULL        | NULL    |          |
+| ast_class_members                      | table_macro   | NULL        | NULL    |          |
+| ast_containing_line                    | table_macro   | NULL        | NULL    |          |
+| ast_dead_code                          | table_macro   | NULL        | NULL    |          |
+| ast_definition_parent                  | table_macro   | NULL        | NULL    |          |
+| ast_definitions                        | table_macro   | NULL        | NULL    |          |
+| ast_descendants                        | table_macro   | NULL        | NULL    |          |
+| ast_dispatch_predicate                 | macro         | NULL        | NULL    |          |
+| ast_exports                            | table_macro   | NULL        | NULL    |          |
+| ast_find_references                    | table_macro   | NULL        | NULL    |          |
+| ast_follows                            | table_macro   | NULL        | NULL    |          |
+| ast_function_metrics                   | table_macro   | NULL        | NULL    |          |
+| ast_function_scope                     | table_macro   | NULL        | NULL    |          |
+| ast_functions_containing               | table_macro   | NULL        | NULL    |          |
+| ast_get_calls                          | table_macro   | NULL        | NULL    |          |
+| ast_get_source                         | macro         | NULL        | NULL    |          |
+| ast_get_source_line                    | macro         | NULL        | NULL    |          |
+| ast_get_source_numbered                | macro         | NULL        | NULL    |          |
+| ast_has                                | table_macro   | NULL        | NULL    |          |
+| ast_imports                            | table_macro   | NULL        | NULL    |          |
+| ast_in_range                           | table_macro   | NULL        | NULL    |          |
+| ast_inside                             | table_macro   | NULL        | NULL    |          |
+| ast_match                              | table_macro   | NULL        | NULL    |          |
+| ast_nesting_analysis                   | table_macro   | NULL        | NULL    |          |
+| ast_not_has                            | table_macro   | NULL        | NULL    |          |
+| ast_pattern                            | table_macro   | NULL        | NULL    |          |
+| ast_pattern_list                       | macro         | NULL        | NULL    |          |
+| ast_peek_contains_any                  | scalar        | NULL        | NULL    |          |
+| ast_precedes                           | table_macro   | NULL        | NULL    |          |
+| ast_qualified_name_as_string           | macro         | NULL        | NULL    |          |
+| ast_resolve                            | table_macro   | NULL        | NULL    |          |
+| ast_security_audit                     | table_macro   | NULL        | NULL    |          |
+| ast_select                             | table_macro   | NULL        | NULL    |          |
+| ast_select_from                        | table_macro   | NULL        | NULL    |          |
+| ast_select_list                        | table_macro   | NULL        | NULL    |          |
+| ast_select_rules                       | table_macro   | NULL        | NULL    |          |
+| ast_siblings                           | table_macro   | NULL        | NULL    |          |
+| ast_source_of                          | table_macro   | NULL        | NULL    |          |
+| ast_supported_languages                | table         | NULL        | NULL    |          |
+| ast_type_map                           | table         | NULL        | NULL    |          |
+| binds_name                             | scalar        | NULL        | NULL    |          |
+| clean_pattern                          | macro         | NULL        | NULL    |          |
+| detect_language                        | scalar        | NULL        | NULL    |          |
+| get_kind                               | scalar        | NULL        | NULL    |          |
+| get_searchable_types                   | scalar        | NULL        | NULL    |          |
+| get_super_kind                         | scalar        | NULL        | NULL    |          |
+| has_body                               | scalar        | NULL        | NULL    |          |
+| is_annotation                          | macro         | NULL        | NULL    |          |
+| is_arithmetic                          | macro         | NULL        | NULL    |          |
+| is_assignment                          | macro         | NULL        | NULL    |          |
+| is_block                               | macro         | NULL        | NULL    |          |
+| is_boolean_literal                     | macro         | NULL        | NULL    |          |
+| is_call                                | scalar        | NULL        | NULL    |          |
+| is_class_definition                    | macro         | NULL        | NULL    |          |
+| is_comment                             | macro         | NULL        | NULL    |          |
+| is_comparison                          | macro         | NULL        | NULL    |          |
+| is_conditional                         | macro         | NULL        | NULL    |          |
+| is_construct                           | scalar        | NULL        | NULL    |          |
+| is_control_flow                        | scalar        | NULL        | NULL    |          |
+| is_declaration_only                    | scalar        | NULL        | NULL    |          |
+| is_definition                          | scalar        | NULL        | NULL    |          |
+| is_directive                           | macro         | NULL        | NULL    |          |
+| is_embodied                            | scalar        | NULL        | NULL    |          |
+| is_export                              | macro         | NULL        | NULL    |          |
+| is_exported                            | scalar        | NULL        | NULL    |          |
+| is_foreign                             | macro         | NULL        | NULL    |          |
+| is_function_call                       | macro         | NULL        | NULL    |          |
+| is_function_definition                 | macro         | NULL        | NULL    |          |
+| is_identifier                          | scalar        | NULL        | NULL    |          |
+| is_import                              | macro         | NULL        | NULL    |          |
+| is_jump                                | macro         | NULL        | NULL    |          |
+| is_kind                                | scalar        | NULL        | NULL    |          |
+| is_list                                | macro         | NULL        | NULL    |          |
+| is_literal                             | macro         | NULL        | NULL    |          |
+| is_logical                             | macro         | NULL        | NULL    |          |
+| is_loop                                | macro         | NULL        | NULL    |          |
+| is_member_access                       | macro         | NULL        | NULL    |          |
+| is_module_definition                   | macro         | NULL        | NULL    |          |
+| is_name_declaration                    | scalar        | NULL        | NULL    |          |
+| is_name_definition                     | scalar        | NULL        | NULL    |          |
+| is_name_reference                      | scalar        | NULL        | NULL    |          |
+| is_number_literal                      | macro         | NULL        | NULL    |          |
+| is_parser_specific                     | scalar        | NULL        | NULL    |          |
+| is_pattern_wildcard                    | macro         | NULL        | NULL    |          |
+| is_punctuation                         | scalar        | NULL        | NULL    |          |
+| is_scope                               | scalar        | NULL        | NULL    |          |
+| is_semantic_type                       | scalar        | NULL        | NULL    |          |
+| is_string_literal                      | macro         | NULL        | NULL    |          |
+| is_syntax_only                         | scalar        | NULL        | NULL    |          |
+| is_type_composite                      | macro         | NULL        | NULL    |          |
+| is_type_definition                     | macro         | NULL        | NULL    |          |
+| is_type_generic                        | macro         | NULL        | NULL    |          |
+| is_type_primitive                      | macro         | NULL        | NULL    |          |
+| is_type_reference                      | macro         | NULL        | NULL    |          |
+| is_variable_definition                 | macro         | NULL        | NULL    |          |
+| kind_code                              | scalar        | NULL        | NULL    |          |
+| name_role                              | scalar        | NULL        | NULL    |          |
+| parse_ast                              | table         | NULL        | NULL    |          |
+| parse_ast_flat                         | table         | NULL        | NULL    |          |
+| parse_ast_hierarchical                 | table         | NULL        | NULL    |          |
+| parse_ast_list                         | scalar        | NULL        | NULL    |          |
+| parse_ast_list_table                   | table_macro   | NULL        | NULL    |          |
+| parse_html_wildcard                    | macro         | NULL        | NULL    |          |
+| pattern_has_recursive                  | macro         | NULL        | NULL    |          |
+| pattern_has_variadic                   | macro         | NULL        | NULL    |          |
+| read_ast                               | table         | NULL        | NULL    |          |
+| read_ast_flat                          | table         | NULL        | NULL    |          |
+| read_ast_hierarchical                  | table         | NULL        | NULL    |          |
+| read_ast_hierarchical_new              | table         | NULL        | NULL    |          |
+| semantic_type_base                     | macro         | NULL        | NULL    |          |
+| semantic_type_code                     | scalar        | NULL        | NULL    |          |
+| semantic_type_to_string                | scalar        | NULL        | NULL    |          |
+| sitting_duck_enable_dynamic_predicates | pragma        | NULL        | NULL    |          |
+| string_contains_any                    | scalar        | NULL        | NULL    |          |
+| string_contains_any_i                  | scalar        | NULL        | NULL    |          |
+| wildcard_capture_name                  | macro         | NULL        | NULL    |          |
 
 ### Overloaded Functions
 

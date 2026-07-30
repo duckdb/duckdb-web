@@ -108,6 +108,7 @@ To find a list of these tools, check out the [Awesome DuckDB repository](https:/
 
 * [How to use Ibis to query DuckDB with or without SQL]({% link docs/lts/guides/python/ibis.md %})
 * [How to use DuckDB with Polars DataFrames via Apache Arrow]({% link docs/lts/guides/python/polars.md %})
+* [How to stream DuckDB query results to PyTorch via Apache Arrow]({% link docs/lts/guides/python/pytorch.md %})
 
 ## SQL Features
 

@@ -10,7 +10,7 @@ excerpt: |
 extension:
   name: ducklink
   description: Load portable WebAssembly extension modules into DuckDB from SQL
-  version: 4.3.0
+  version: 5.0.0
   language: Rust
   build: cargo
   license: MIT
@@ -26,7 +26,7 @@ extension:
 
 repo:
   github: tegmentum/ducklink-extension
-  ref: v4.3.0
+  ref: v5.0.0
 
 docs:
   hello_world: |
@@ -42,9 +42,13 @@ docs:
     --   FROM ducklink_load('aba');
     --   SELECT aba_validate('021000021');   -- true
   extended_description: |
-    ducklink turns DuckDB into a host for portable WebAssembly extension
-    modules. A module is built once against the `duckdb:extension` WIT world
-    and runs on any supported platform — no per-platform native build.
+    ducklink is a uniform extension interface for DuckDB: users ask for a
+    capability by name, and ducklink picks the best backing — a portable
+    WebAssembly component, a ducklink-hosted native `.duckdb_extension`, or
+    a matching entry in `duckdb/community-extensions` — without changing
+    the SQL you write. A module is built once against the
+    `duckdb:extension` WIT world and runs on any supported platform in
+    its WASM form; native equivalents are opted-in for hot paths.
 
     The interface is SQL-native and catalog-backed. `ducklink_load('<name>')`
     resolves a name against a curated online catalog, downloads the component
@@ -76,19 +80,35 @@ docs:
     summary/description/example override the catalog, tags union — so
     third-party modules can keep their own docs authoritative.
 
-    On Linux and macOS an advanced tier also enables a `DUCKLINK LOAD '<name>'`
-    SQL statement — an explicit alternative to `ducklink_load()` that reads
-    naturally in DDL:
+    Loading a module by catalog name uses the table function
+    `ducklink_load('aba', kind => 'wasm')` (WASM sandbox, the default) or
+    `ducklink_load('aba', kind => 'native')` (prefer the native backing).
+    `native` is the routing layer. When the catalog advertises a
+    community-extensions entry for the same capability, ducklink dispatches
+    `INSTALL <name> FROM community; LOAD <name>;` on your behalf — signed by
+    the community-extensions key, no `-unsigned` needed. Otherwise it falls
+    back to a ducklink-hosted per-platform `.duckdb_extension` file (curated
+    set, `-unsigned` required at DuckDB startup), which skips the
+    WebAssembly sandbox for ~20x the throughput on tight-loop workloads.
+    `ducklink.modules.native_available` is `true` whenever ANY native backing
+    resolves for the running host.
 
-        DUCKLINK LOAD 'aba';                    -- WASM (default)
-        DUCKLINK LOAD 'aba' NATIVE;             -- force the native build
+    When a native backing is a community extension, ducklink can re-expose its functions
+    under its own chosen names via community-native aliases, keeping downstream SQL stable
+    across backing swaps. Scalar and table aliases are registered as CREATE OR REPLACE
+    MACRO shapes (zero overhead). Aggregate aliases are registered as real C-API
+    AggregateFunctions that delegate to the community target on a sibling connection, so
+    DISTINCT, FILTER, GROUP BY, OVER (...) window aggregates, and ORDER BY inside the
+    aggregate call all propagate transparently through the alias.
 
-    Modules also come in a `NATIVE` build (curated set, per-platform
-    `.duckdb_extension` files) that skips the WebAssembly sandbox for ~20x
-    the throughput on tight-loop workloads. Native loads require DuckDB
-    started with `-unsigned`; a matching entry appears in
-    `ducklink.modules.native_available` when a native build exists for
-    the running host.
+    Catalog entries can further declare an optional `namespace` so their functions bind
+    under both DuckDB's `main` schema (bare) and a schema-qualified form (`crypto.hash(x)`
+    for `namespace: "crypto"`). Users layer session-scoped short aliases on top via
+    `ducklink_prefix('c', 'crypto')` — callable as a table function, a scalar, or through
+    the shorter `PREFIX('c','crypto')` macro (persisted in `ducklink.prefixes` and
+    replayed on the next LOAD). All four qualifier forms — bare, ducklink-alias bare,
+    namespace-qualified, and alias-qualified — bind the same underlying function set,
+    so aggregate modifiers propagate through every one of them.
 
     A built-in `ducklink_version()` scalar is always available, so the
     extension is usable and testable before any module is loaded. For
@@ -97,10 +117,10 @@ docs:
     the standalone `ducklink` host (DuckDB-compiled-to-wasm), so one artifact
     targets both directions.
 
-extension_star_count: 1
-extension_star_count_pretty: 1
-extension_download_count: 359
-extension_download_count_pretty: 359
+extension_star_count: 2
+extension_star_count_pretty: 2
+extension_download_count: 1065
+extension_download_count_pretty: 1.1k
 image: '/images/community_extensions/social_preview/preview_community_extension_ducklink.png'
 layout: community_extension_doc
 ---
@@ -126,7 +146,23 @@ LOAD {{ page.extension.name }};
 
 <div class="extension_functions_table"></div>
 
-This extension does not add any functions.
+|         function_name         | function_type | description | comment | examples |
+|-------------------------------|---------------|-------------|---------|----------|
+| PREFIX                        | macro         | NULL        | NULL    |          |
+| ducklink_cache                | table         | NULL        | NULL    |          |
+| ducklink_docs                 | table         | NULL        | NULL    |          |
+| ducklink_events               | table         | NULL        | NULL    |          |
+| ducklink_functions            | table         | NULL        | NULL    |          |
+| ducklink_help                 | scalar        | NULL        | NULL    |          |
+| ducklink_host                 | table         | NULL        | NULL    |          |
+| ducklink_host_capabilities    | table         | NULL        | NULL    |          |
+| ducklink_load                 | table         | NULL        | NULL    |          |
+| ducklink_module_compatibility | table         | NULL        | NULL    |          |
+| ducklink_modules              | table         | NULL        | NULL    |          |
+| ducklink_prefix               | scalar        | NULL        | NULL    |          |
+| ducklink_prefix               | table         | NULL        | NULL    |          |
+| ducklink_search               | table         | NULL        | NULL    |          |
+| ducklink_version              | scalar        | NULL        | NULL    |          |
 
 ### Overloaded Functions
 

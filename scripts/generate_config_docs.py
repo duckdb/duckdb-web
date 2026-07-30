@@ -2,8 +2,6 @@ import os
 import sys
 import re
 import subprocess
-import csv
-import io
 
 
 def run_duckdb_script(cmd):

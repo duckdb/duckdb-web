@@ -220,7 +220,7 @@ header .headerline {
 				align-items: center;
 				justify-content: center;
 				transition: all .3s;
-				color: var(--main-nav-icon);
+				color: var(--duckdb-nav-icon, #CCBD00);
 
 				&[data-mode="dark"] {
 					.icon-sun {
@@ -240,8 +240,8 @@ header .headerline {
 					}
 				}
 				&:hover {
-					border-color: var(--main-nav-icon-hover);
-					color: var(--main-nav-icon-hover);
+					border-color: var(--duckdb-nav-icon-hover, #998B00);
+					color: var(--duckdb-nav-icon-hover, #998B00);
 				}
 
 				.icon-sun,
@@ -429,7 +429,7 @@ body.blog header .headerline .headercontent .landingmenu nav .search_icon {
 .hamburger-inner,
 .hamburger-inner:after,
 .hamburger-inner:before {
-	background-color: var(--main-nav-icon);
+	background-color: var(--duckdb-nav-icon, #CCBD00);
 	border-radius: 0px;
 	height: 1.5px;
 	width: 16px;
@@ -449,9 +449,19 @@ body.blog header .headerline .headercontent .landingmenu nav .search_icon {
 	top: -6px;
 }
 
-.hamburger.is-active:hover, 
+.hamburger.is-active:hover,
 .hamburger:hover {
 	opacity: 1;
+}
+
+.hamburger:hover {
+	border-color: var(--duckdb-nav-icon-hover, #998B00);
+}
+
+.hamburger:hover .hamburger-inner,
+.hamburger:hover .hamburger-inner:after,
+.hamburger:hover .hamburger-inner:before {
+	background-color: var(--duckdb-nav-icon-hover, #998B00);
 }
 
 .hamburger.is-active .hamburger-inner, 

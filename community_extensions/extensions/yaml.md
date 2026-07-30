@@ -8,24 +8,26 @@ excerpt: |
 extension:
   name: yaml
   description: Read YAML files into DuckDB with native YAML type support, comprehensive extraction functions, and seamless JSON interoperability
-  version: 1.6.6
-  # Windows excluded: DuckDB's vendored fmt fails to compile against the community
-  # runner's current MSVC STL (stdext::checked_array_iterator removed); not fixable
-  # from the extension.
-  excluded_platforms: windows_amd64;windows_amd64_mingw
+  version: 1.7.0
+  # Windows fully built (no excluded_platforms). windows_amd64 (MSVC) shipped in the
+  # original v1.7.0 build; windows_amd64_mingw is now validated too — it compiles and
+  # passes the full suite on the v1.5.4 / v1.5-variegata toolchain (a real ~31-min
+  # build+test run). The earlier "fmt fails to compile vs the community MSVC STL"
+  # exclusion and the COPY-TO deadlock both proved stale/non-reproducing. Source is
+  # unchanged (same ref); this backfills the mingw platform for v1.7.0.
   language: C++
   build: cmake
   license: MIT
   maintainers:
     - teaguesterling
 
-  # yaml package issues for windows in previous vcpkg
+  # Pinned vcpkg for Windows yaml-cpp compatibility (older vcpkg had Windows build issues).
   vcpkg_commit: "656be05781442d5c4cb14978f6c7bf47b6e12b32"
   
 repo:
   github: teaguesterling/duckdb_yaml
-  andium: 8a1d8444af06682a3cb2933068a6a35af0fec3b2
-  ref: 8a1d8444af06682a3cb2933068a6a35af0fec3b2
+  andium: 4523b13794d366d727d598dd137f957c0e96caa4
+  ref: 4523b13794d366d727d598dd137f957c0e96caa4
 
 docs:
   hello_world: |
@@ -94,8 +96,8 @@ docs:
 
 extension_star_count: 21
 extension_star_count_pretty: 21
-extension_download_count: 12859
-extension_download_count_pretty: 12.9k
+extension_download_count: 14665
+extension_download_count_pretty: 14.7k
 image: '/images/community_extensions/social_preview/preview_community_extension_yaml.png'
 layout: community_extension_doc
 ---
@@ -121,38 +123,44 @@ LOAD {{ page.extension.name }};
 
 <div class="extension_functions_table"></div>
 
-|     function_name      | function_type | description | comment | examples |
-|------------------------|---------------|-------------|---------|----------|
-| copy_format_yaml       | scalar        | NULL        | NULL    |          |
-| format_yaml            | scalar        | NULL        | NULL    |          |
-| from_yaml              | scalar        | NULL        | NULL    |          |
-| parse_yaml             | table         | NULL        | NULL    |          |
-| read_yaml              | table         | NULL        | NULL    |          |
-| read_yaml_frontmatter  | table         | NULL        | NULL    |          |
-| read_yaml_objects      | table         | NULL        | NULL    |          |
-| to_yaml                | scalar        | NULL        | NULL    |          |
-| value_to_yaml          | scalar        | NULL        | NULL    |          |
-| yaml                   | scalar        | NULL        | NULL    |          |
-| yaml_agg               | aggregate     | NULL        | NULL    |          |
-| yaml_array_elements    | table         | NULL        | NULL    |          |
-| yaml_array_length      | scalar        | NULL        | NULL    |          |
-| yaml_build_object      | scalar        | NULL        | NULL    |          |
-| yaml_contains          | scalar        | NULL        | NULL    |          |
-| yaml_each              | table         | NULL        | NULL    |          |
-| yaml_exists            | scalar        | NULL        | NULL    |          |
-| yaml_extract           | scalar        | NULL        | NULL    |          |
-| yaml_extract_path      | scalar        | NULL        | NULL    |          |
-| yaml_extract_path_text | scalar        | NULL        | NULL    |          |
-| yaml_extract_string    | scalar        | NULL        | NULL    |          |
-| yaml_get_default_style | scalar        | NULL        | NULL    |          |
-| yaml_keys              | scalar        | NULL        | NULL    |          |
-| yaml_merge_patch       | scalar        | NULL        | NULL    |          |
-| yaml_set_default_style | scalar        | NULL        | NULL    |          |
-| yaml_structure         | scalar        | NULL        | NULL    |          |
-| yaml_to_json           | scalar        | NULL        | NULL    |          |
-| yaml_type              | scalar        | NULL        | NULL    |          |
-| yaml_valid             | scalar        | NULL        | NULL    |          |
-| yaml_value             | scalar        | NULL        | NULL    |          |
+|        function_name         | function_type | description | comment | examples |
+|------------------------------|---------------|-------------|---------|----------|
+| copy_format_yaml             | scalar        | NULL        | NULL    |          |
+| format_yaml                  | scalar        | NULL        | NULL    |          |
+| from_yaml                    | scalar        | NULL        | NULL    |          |
+| parse_yaml                   | table         | NULL        | NULL    |          |
+| read_yaml                    | table         | NULL        | NULL    |          |
+| read_yaml_frontmatter        | table         | NULL        | NULL    |          |
+| read_yaml_objects            | table         | NULL        | NULL    |          |
+| to_yaml                      | scalar        | NULL        | NULL    |          |
+| value_to_yaml                | scalar        | NULL        | NULL    |          |
+| yaml                         | scalar        | NULL        | NULL    |          |
+| yaml_agg                     | aggregate     | NULL        | NULL    |          |
+| yaml_array_elements          | table         | NULL        | NULL    |          |
+| yaml_array_length            | scalar        | NULL        | NULL    |          |
+| yaml_build_object            | scalar        | NULL        | NULL    |          |
+| yaml_contains                | scalar        | NULL        | NULL    |          |
+| yaml_each                    | table         | NULL        | NULL    |          |
+| yaml_exists                  | scalar        | NULL        | NULL    |          |
+| yaml_extract                 | scalar        | NULL        | NULL    |          |
+| yaml_extract_path            | scalar        | NULL        | NULL    |          |
+| yaml_extract_path_text       | scalar        | NULL        | NULL    |          |
+| yaml_extract_string          | scalar        | NULL        | NULL    |          |
+| yaml_get_default_style       | scalar        | NULL        | NULL    |          |
+| yaml_get_max_expansion_nodes | scalar        | NULL        | NULL    |          |
+| yaml_get_max_input_size      | scalar        | NULL        | NULL    |          |
+| yaml_get_max_nesting_depth   | scalar        | NULL        | NULL    |          |
+| yaml_keys                    | scalar        | NULL        | NULL    |          |
+| yaml_merge_patch             | scalar        | NULL        | NULL    |          |
+| yaml_set_default_style       | scalar        | NULL        | NULL    |          |
+| yaml_set_max_expansion_nodes | scalar        | NULL        | NULL    |          |
+| yaml_set_max_input_size      | scalar        | NULL        | NULL    |          |
+| yaml_set_max_nesting_depth   | scalar        | NULL        | NULL    |          |
+| yaml_structure               | scalar        | NULL        | NULL    |          |
+| yaml_to_json                 | scalar        | NULL        | NULL    |          |
+| yaml_type                    | scalar        | NULL        | NULL    |          |
+| yaml_valid                   | scalar        | NULL        | NULL    |          |
+| yaml_value                   | scalar        | NULL        | NULL    |          |
 
 ### Overloaded Functions
 

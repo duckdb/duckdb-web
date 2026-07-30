@@ -20,7 +20,7 @@ extension:
 repo:
   github: eddelbuettel/duckdb-mlpack
   andium: 8437d78423e3cfc65f9226606908b301c2314710
-  ref: 013bee3310127e1523763b4a4419a18027f205d6
+  ref: eb1c65298476621b2cf088a24e6633e453df66f9
 
 docs:
   hello_world: |
@@ -60,7 +60,7 @@ docs:
     It uses three tables for data, parameters and results.
   
     ### General Information
-    A pair of paramaters "mlpack_verbose" (to show additional data) and "mlpack_silent" (to suppress display of minimal summaries) can also be set.
+    A pair of parameters "mlpack_verbose" (to show additional data) and "mlpack_silent" (to suppress display of minimal summaries) can also be set.
 
     The implementation still stresses the 'minimal' part of 'a (initial) MVP demo' (where MVP stands for 'minimally viable product').
     It wraps five supervised and unsupervised machine learning methods, and provides Linux and macOS builds.
@@ -69,10 +69,10 @@ docs:
 
     For more, please see the [repo](https://github.com/eddelbuettel/duckdb-mlpack).
 
-extension_star_count: 19
-extension_star_count_pretty: 19
-extension_download_count: 710
-extension_download_count_pretty: 710
+extension_star_count: 20
+extension_star_count_pretty: 20
+extension_download_count: 1402
+extension_download_count_pretty: 1.4k
 image: '/images/community_extensions/social_preview/preview_community_extension_mlpack.png'
 layout: community_extension_doc
 ---

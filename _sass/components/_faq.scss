@@ -75,13 +75,18 @@ body.documentation main .wrap.frequentlyaskedquestions{
 			margin-top: 0;
 		}
 		a{
-			color: inherit;
+			color: var(--main-text-primary-color, #0D0D0D);
 			text-decoration: underline;
-			-webkit-transition: color .3s;
-			-o-transition: color .3s;
-			transition: color .3s;
+			text-decoration-color: var(--main-text-tertiary-color, #B2B2B2);
+			text-decoration-thickness: 1px;
+			text-underline-offset: 0.2em;
+			-webkit-transition: color .3s, text-decoration-color .3s;
+			-o-transition: color .3s, text-decoration-color .3s;
+			transition: color .3s, text-decoration-color .3s;
 			&:hover{
-				color: $blue;
+				color: var(--main-link-hover-color, #998B00);
+				text-decoration-color: var(--main-link-hover-color, #998B00);
+				text-decoration-thickness: 1px;
 				cursor: pointer;
 			}
 		}
