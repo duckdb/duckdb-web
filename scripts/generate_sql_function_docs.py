@@ -626,17 +626,17 @@ def get_function_title(func: DocFunction):
         else:
             mandatory_args = func.parameters[1 : -1 * func.nr_optional_arguments]
             optional_args = func.parameters[-1 * func.nr_optional_arguments :]
-            parameter_str = f"{":".join(mandatory_args)}{"".join(f"[:{arg}]" for arg in optional_args)}"
+            parameter_str = f"{':'.join(mandatory_args)}{''.join(f'[:{arg}]' for arg in optional_args)}"
         function_title = f"{func.parameters[0]}[{parameter_str}]"
     else:
         if func.is_variadic and len(func.parameters) == 0:
             func.parameters = ['arg']
         if func.nr_optional_arguments == 0:
-            parameter_str = f"{", ".join(func.parameters)}{', ...' if (func.is_variadic and '...' not in func.parameters) else ''}"
+            parameter_str = f"{', '.join(func.parameters)}{', ...' if (func.is_variadic and '...' not in func.parameters) else ''}"
         else:
             mandatory_args = func.parameters[: -1 * func.nr_optional_arguments]
             optional_args = func.parameters[-1 * func.nr_optional_arguments :]
-            parameter_str = f"{", ".join(mandatory_args)}{"".join(f"[, {arg}]" for arg in optional_args)}"
+            parameter_str = f"{', '.join(mandatory_args)}{''.join(f'[, {arg}]' for arg in optional_args)}"
         function_title = f"{func.name}({parameter_str})"
     return function_title
 
