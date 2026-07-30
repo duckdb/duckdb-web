@@ -33,7 +33,7 @@ In a final step, the columns of the input row are added to this result. In other
 
 ### Getting the element index
 Unnesting a value of the `LIST`-type yields only the element values. To also keep track of their indices (the subscripts), you can use the built-in macro [`generate_subscripts()`]({% link docs/current/sql/functions/list.md %}#generate_subscriptslist-dimension).
-The `generate_subscripts` macro takes a value of the `LIST`-type as first argument. It has a mandatory second argument, for which the value `1` must be passed. 
+The `generate_subscripts` macro takes a value of the `LIST`-type as first argument.
 
 ### `unnest()` as table function
 Since a call to `unnest` on a value of the `LIST`-type yields a rowset, it may also be treated as a [table function]({% link docs/lts/sql/query_syntax/from.md %}#table-functions). 
