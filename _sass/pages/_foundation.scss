@@ -344,7 +344,7 @@ body.foundation {
 	}
 
 	body.foundation .foundation-supporters .supporterboard.gold ul {
-		justify-content: space-between;
+		justify-content: center;
 		flex-wrap: wrap;
 
 		li {
@@ -375,6 +375,9 @@ body.foundation {
 	body.foundation .foundation-supporters .supporterboard.gold li {
 		width: 100%;
 		height: 80px;
+	}
+	body.foundation header .headerline .headercontent .button {
+		display: none;
 	}
 }
 

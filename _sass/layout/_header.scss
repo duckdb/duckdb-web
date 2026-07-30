@@ -286,10 +286,16 @@ header .headerline {
 
 				&.outdated {
 					border: 1px solid var(--doc-menu-info-deprecated-border-color, #7D66FF);
+					color: var(--doc-menu-info-deprecated-border-color, #7D66FF);
+					text-decoration: none;
 
 					span, .icon {
 						color: var(--doc-menu-info-deprecated-border-color, #7D66FF);
 					}
+				}
+
+				&[href] {
+					cursor: pointer;
 				}
 			}
 		}
