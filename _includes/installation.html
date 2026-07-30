@@ -334,19 +334,18 @@ install.packages("duckdb", repos="https://p3m.dev/cran/__linux__/manylinux_2_28/
     data-docs="{% link docs/lts/clients/r.md %}">
 
 {%- highlight r -%}
-install.packages("duckdb", version="{{ site.lts_duckdb_r_version }}")
+install.packages("DBI")
+install.packages("duckdb.{{ site.lts_short_duckdb_version }}", repos = "https://duckdb.r-universe.dev"))
 {%- endhighlight -%}
 
 <div class="alternative">
 
-<h4>Installing from the Posit Public Package Manager (Linux)</h4>
+<h4>Downloading package file</h4>
+
+Navigate to <a href="https://duckdb.r-universe.dev/duckdb.{{ site.lts_short_duckdb_version }}" target="_blank" rel="noopener noreferrer">https://duckdb.r-universe.dev/duckdb.{{ site.lts_short_duckdb_version }}</a> and download the package file for your platform. Then install it using:
 
 {%- highlight r -%}
-options(HTTPUserAgent = sprintf("R/%s R (%s)",
-    getRversion(),
-    paste(getRversion(), R.version["platform"], R.version["arch"], R.version["os"])
-))
-install.packages("duckdb", version="{{ site.lts_duckdb_r_version }}", repos="https://p3m.dev/cran/__linux__/manylinux_2_28/latest/")
+install.packages("path/to/downloaded/package.ext", repos = NULL)
 {%- endhighlight -%}
 </div>
 </div>
