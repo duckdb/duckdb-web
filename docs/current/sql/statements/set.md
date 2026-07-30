@@ -84,7 +84,7 @@ Configuration options can have different scopes:
 
 When not specified, the default scope for the configuration option is used. For most options this is `GLOBAL`.
 
-> Note `GLOBAL` settings apply to the current DuckDB instance. They are not written to the database file or persisted across DuckDB instances. If all connections to an instance are closed and a new instance is started, configuration options use their defaults unless they are set again.
+> `GLOBAL` settings apply to the current DuckDB instance. They are not written to the database file or persisted across DuckDB instances. If all connections to an instance are closed and a new instance is started, configuration options use their defaults unless they are set again.
 
 ## Configuration
 
