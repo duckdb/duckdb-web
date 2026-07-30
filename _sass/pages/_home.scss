@@ -255,7 +255,7 @@ body.landing{
 				-o-transition: color .3s;
 				transition: color .3s;
 			}
-			a:hover{
+			a:hover:not(.download-btn){
 				background: none!important;
 			}
 			pre{
@@ -862,8 +862,8 @@ body.landing{
 		.highlight{
 			border-radius: var(--page-radius-m);
 		}
-		.result a{
-			padding: 15px;
+		.result a.download-btn{
+			margin: 11px 0;
 		}
 	}
 	

@@ -72,7 +72,7 @@ body:not(.layout_default) .blog_typography{
         .toc_menu {
             position: sticky;
             top: 100px;
-            height: calc(100vh - 100px);
+            max-height: calc(100vh - 100px);
             overflow: auto;
             -ms-overflow-style: none;
             scrollbar-width: none;
