@@ -7,7 +7,7 @@ import subprocess
 def run_duckdb_script(cmd):
     # we pass /dev/null to the initialization script to skip reading `~/.duckdbrc`
     res = subprocess.run(
-        [db_path, "-init", "/dev/null"],
+        [db_path, "-init", os.devnull],
         input=bytearray(cmd, 'utf8'),
         stdout=subprocess.PIPE,
         stderr=subprocess.PIPE,
