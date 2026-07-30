@@ -43,6 +43,59 @@ Unlike variable-length integer implementations in other systems, there are limit
 
 The data type `DECIMAL(WIDTH, SCALE)` (also available under the alias `NUMERIC(WIDTH, SCALE)`) represents an exact fixed-point decimal value. When creating a value of type `DECIMAL`, the `WIDTH` and `SCALE` can be specified to define which size of decimal values can be held in the field. The `WIDTH` field determines how many digits can be held, and the `scale` determines the number of digits after the decimal point. For example, the type `DECIMAL(3, 2)` can fit the value `1.23`, but cannot fit the value `12.3` or the value `1.234`. The default `WIDTH` and `SCALE` is `DECIMAL(18, 3)`, if none are specified. If only the `WIDTH` is specified, the `SCALE` defaults to `0` – for example, `DECIMAL(18)` is equivalent to `DECIMAL(18, 0)` and truncates fractional digits.
 
+### Specifying the `WIDTH` and the `SCALE`
+
+Both parameters are optional, and a trailing comma after the `WIDTH` is accepted. The following spellings therefore all bind to a concrete decimal type:
+
+```sql
+SELECT
+    typeof(1.5::DECIMAL)      AS "DECIMAL",
+    typeof(1.5::DECIMAL())    AS "DECIMAL()",
+    typeof(1.5::DECIMAL(10))  AS "DECIMAL(10)",
+    typeof(1.5::DECIMAL(10,)) AS "DECIMAL(10,)";
+```
+
+|    DECIMAL    |   DECIMAL()   |  DECIMAL(10)  | DECIMAL(10,)  |
+|:--------------|:--------------|:--------------|:--------------|
+| DECIMAL(18,3) | DECIMAL(18,3) | DECIMAL(10,0) | DECIMAL(10,0) |
+
+The `NUMERIC` alias accepts the same spellings and yields the same types.
+
+Note that a bare `DECIMAL` is not an unconstrained decimal type as it is in PostgreSQL and Oracle. DuckDB always binds it to the concrete type `DECIMAL(18, 3)`, which rounds to 3 fractional digits and holds at most 15 digits before the decimal point.
+
+The `WIDTH` must be between 1 and 38, and the `SCALE` must be between 0 and 38 and may not exceed the `WIDTH`. Values outside these bounds are rejected by the binder instead of being clamped:
+
+```sql
+SELECT 1::DECIMAL(39, 2);
+```
+
+```console
+Binder Error:
+DECIMAL type width must be between 1 and 38
+```
+
+```sql
+SELECT 1::DECIMAL(18, 20);
+```
+
+```console
+Binder Error:
+DECIMAL type scale cannot be greater than width
+```
+
+Unlike PostgreSQL and Oracle, DuckDB does not support a negative `SCALE`:
+
+```sql
+SELECT 1::DECIMAL(18, -1);
+```
+
+```console
+Binder Error:
+DECIMAL type scale must be between 0 and 38
+```
+
+### Arithmetic and Internal Representation
+
 Addition, subtraction and multiplication of two fixed-point decimals returns another fixed-point decimal with the required `WIDTH` and `SCALE` to contain the exact result, or throws an error if the required `WIDTH` would exceed the maximal supported `WIDTH`, which is currently 38.
 
 Division of fixed-point decimals does not typically produce numbers with finite decimal expansion. Therefore, DuckDB uses approximate [floating-point arithmetic](#floating-point-types) for all divisions that involve fixed-point decimals and accordingly returns floating-point data types.
