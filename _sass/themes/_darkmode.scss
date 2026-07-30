@@ -145,6 +145,10 @@ html.darkmode body{
 	.box-link .symbol:has(img)::before{
 		background-color: var(--yellow-50, #FFF100);
 	}
+
+	.box-link .symbol > svg.icon{
+		color: var(--yellow-50, #FFF100);
+	}
 	
 	/** FOUNDATION **/
 	&.foundation .foundation-supporters .supporterboard > ul li img{
