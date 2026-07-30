@@ -108,7 +108,7 @@ OVERRIDES: list[DocFunction] = [
         examples=[
             "unnest([1, 2, 3])",
             "unnest([[1,2],[3,4]], recursive:=true)",
-            "unnest([[1,2],[3,4]], recursive:=true, max_depth:=1)"
+            "unnest([[1,2],[3,4]], recursive:=true, max_depth:=1)",
         ],
     ),
     # macros
