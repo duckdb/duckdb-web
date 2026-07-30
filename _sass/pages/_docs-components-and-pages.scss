@@ -557,9 +557,31 @@ body.documentation {
         justify-content: center;
 
         img {
-            max-width: 24px;
-            max-height: 24px;
-            margin: 0 !important;
+            display: none;
+        }
+
+        &:has(img)::before {
+            content: "";
+            width: 24px;
+            height: 24px;
+            background-color: var(--main-text-primary-color, #0D0D0D);
+            -webkit-mask-size: contain;
+            mask-size: contain;
+            -webkit-mask-repeat: no-repeat;
+            mask-repeat: no-repeat;
+            -webkit-mask-position: center center;
+            mask-position: center center;
+        }
+
+        @each $icon in "attention", "bicycle", "c", "cli", "cpp", "database", "design", "doc",
+                       "download", "duckdb", "duckdb-labs", "ducklake", "folder", "github", "go",
+                       "java", "link", "linux", "macos", "nodejs", "odbc", "pdf", "python",
+                       "quack", "r", "rust", "scrolldown", "star", "statement", "train",
+                       "webassembly", "wheelchair", "windows", "wrench", "yaml" {
+            &:has(img[src$="/#{$icon}.svg"])::before {
+                -webkit-mask-image: url('/images/icons/#{$icon}.svg');
+                mask-image: url('/images/icons/#{$icon}.svg');
+            }
         }
     }
     
