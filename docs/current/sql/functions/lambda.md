@@ -10,6 +10,9 @@ DuckDB lambda functions (a.k.a. 'lambdas' or 'lambda expressions') are expressio
 Lambdas are passed as argument to certain [list functions]({ % link docs/current/sql/functions/list.md % }), which evaluate the passed lambda expression against its elements. 
 The value resulting from the lambda's evaluation is then processed further by the list function to create its return value.
 
+Lamdbas may also be used in the [`COLUMNS`-clause]({% link docs/current/sql/expressions/star.md %}#columns-lambda-function). 
+In that context, the lambda function acts as a filter: it gets passed the column name, only those columns are retained for which the lambda returns `TRUE`.
+
 The syntax for a lamda expression is:
 ```sql
 lambda <parameters> : <expression>
