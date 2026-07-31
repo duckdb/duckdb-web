@@ -19,13 +19,13 @@ The practical implication of these changes is that many current DuckDB setups ne
 As an example, let's consider a simple query over a remote Parquet file. For simplicity, let's assume we only have a single thread executing.
 
 ```sql
-FROM read_parquet('s3://bucket/file.parquet')
+FROM read_parquet('s3://bucket/file.parquet');
 ```
 
 A Parquet scan is partitioned into row-group-based jobs, with each job containing one or more fetch tasks that issue byte-range requests. With synchronous I/O, the worker thread will be blocked, waiting for the data to arrive at the machine before performing actual work, such as decoding, aggregating, and so on. You can see a visual depiction in the figure below, where the thread is blocked from doing any work while it waits for the read to finish.
 
-![]({% link images/blog/async/sync-light.svg %}){: .lightmode-img }
-![]({% link images/blog/async/sync-dark.svg %}){: .darkmode-img }
+![Synchronous read]({% link images/blog/async/sync-light.svg %}){: .lightmode-img }
+![Synchronous read]({% link images/blog/async/sync-dark.svg %}){: .darkmode-img }
 *Synchronous read*{: .caption }
 
 To address this, we have been implementing asynchronous I/O pipelines in DuckDB. They are currently implemented for Parquet and for uncompressed, seekable UTF-8 CSV files, with support for other formats, such as DuckDB's native format and JSON, still to come. In the remainder of this blog post, we will give a simple explanation of how asynchronous I/O is implemented in DuckDB and provide benchmarks for both Parquet and CSV files.
@@ -37,8 +37,8 @@ To address this, we have been implementing asynchronous I/O pipelines in DuckDB.
 
 The conceptual idea of asynchronous I/O is rather simple: we should be able to start an I/O operation without blocking the worker thread that requested it. Applied to our Parquet example, the same picture would look like the following:
 
-![]({% link images/blog/async/async-light.svg %}){: .lightmode-img }
-![]({% link images/blog/async/async-dark.svg %}){: .darkmode-img }
+![Asynchronous read]({% link images/blog/async/async-light.svg %}){: .lightmode-img }
+![Asynchronous read]({% link images/blog/async/async-dark.svg %}){: .darkmode-img }
 *Asynchronous read*{: .caption }
 
 In this example, we have two `ASYNC` threads and one regular worker thread. The `ASYNC` threads keep _fetch tasks_ in flight while the worker thread decodes data. During the initial warm-up, the scan task parks, leaving the worker thread free to run other pipeline tasks. Once the first job is ready, fetching and decoding can overlap.
@@ -64,8 +64,8 @@ A Parquet job might be broken down into multiple fetch tasks depending on the qu
 
 For CSV files, we don't have the same granularity of information as we do for Parquet files. A job's fetch tasks load its starting buffer if it is not already in memory and, when the scan boundary reaches the end of that buffer, the following buffer as well (e.g., to handle lines that are split across two buffers).
 
-![]({% link images/blog/async/jobs-light.svg %}){: .lightmode-img }
-![]({% link images/blog/async/jobs-dark.svg %}){: .darkmode-img }
+![Jobs]({% link images/blog/async/jobs-light.svg %}){: .lightmode-img }
+![Jobs]({% link images/blog/async/jobs-dark.svg %}){: .darkmode-img }
 *Jobs*{: .caption }
 
 Filling the queue requires no dedicated producer thread. Any regular worker that comes looking for scan work first tops up the queue as far as it is allowed to. The limit is either given by a user-specified number of slots or by a memory budget. If there is space, a job and its fetch tasks are created. The fetch tasks are scheduled immediately on the `ASYNC` pool, while the job is admitted to the read-ahead queue in batch order.
@@ -76,8 +76,8 @@ A worker thread claims the oldest job in the queue and checks that countdown. If
 
 Claiming the job also immediately frees a queue slot, allowing any regular worker looking for scan work to produce a replacement job at the back of the queue. The figure below depicts this cycle:
 
-![]({% link images/blog/async/cycle-light.svg %}){: .lightmode-img }
-![]({% link images/blog/async/cycle-dark.svg %}){: .darkmode-img }
+![Read-ahead cycle]({% link images/blog/async/cycle-light.svg %}){: .lightmode-img }
+![Read-ahead cycle]({% link images/blog/async/cycle-dark.svg %}){: .darkmode-img }
 *Read-ahead cycle*{: .caption }
 
 ### Memory Management
@@ -115,8 +115,8 @@ The Parquet file is approximately 22 GB and has around 4,880 row groups, with ea
 
 Below we also show the network throughput over the course of the query:
 
-![]({% link images/blog/async/q6_network_throughput_3way-light.svg %}){: .lightmode-img }
-![]({% link images/blog/async/q6_network_throughput_3way-dark.svg %}){: .darkmode-img }
+![Network throughput]({% link images/blog/async/q6_network_throughput_3way-light.svg %}){: .lightmode-img }
+![Network throughput]({% link images/blog/async/q6_network_throughput_3way-dark.svg %}){: .darkmode-img }
 *Network throughput*{: .caption }
 
 In it, we run DuckDB v1.5.5 and two variations of DuckDB v2.0.0-dev. One with the read-ahead depth determined by the memory governor, and one tuned for this machine, where we cap the read-ahead at 64 in-flight jobs and adjust the I/O settings (`SET async_threads = 48; SET http_retries = 8; SET http_retry_wait_ms = 50; SET http_retry_backoff = 2`). We can see that v2.0.0-dev uses the available bandwidth much more effectively, approaching the network limit and reaching it at several points. The tuned version goes further. With fewer, hotter connections and cheap retries, the throughput variance drops to a minimum and the 25 Gbit/s network stays almost fully saturated. Its query time was 2.227 seconds, reducing the runtime of the untuned v2.0.0-dev run by 21.7% and making it about 3.7× faster than DuckDB v1.5.5. In comparison, v1.5.5 stays around 5 Gbit/s because its synchronous reads do not keep enough requests in flight to saturate the network.
