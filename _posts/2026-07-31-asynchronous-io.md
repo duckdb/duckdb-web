@@ -108,10 +108,10 @@ For compute, we used an EC2 [r7i.16xlarge](http://instances.vantage.sh/aws/ec2/r
 
 The Parquet file is approximately 22 GB and has around 4,880 row groups, with each row group containing approximately 122,880 rows. With asynchronous I/O, the mean runtime drops from 8.230 seconds to 2.844 seconds, making the query almost 3× faster.
 
-| Version                              | Q6 runtime |
-| ------------------------------------ | ---------: |
-| DuckDB v1.5.5 (synchronous)          |    8.230 s |
-| DuckDB v2.0.0-dev (asynchronous I/O) |    2.844 s |
+| Version                       | Q6 runtime |
+| ----------------------------- | ---------: |
+| v1.5.5 (synchronous)          |    8.230 s |
+| v2.0.0-dev (asynchronous I/O) |    2.844 s |
 
 Below we also show the network throughput over the course of the query:
 
@@ -129,10 +129,10 @@ One other detail worth noting is that, in all experiments, a few hundred millise
 
 Remote storage is the main target for asynchronous I/O, but cold local reads give us a useful contrast. To measure them, we ran TPC-H Query 6 over the SF100 Parquet file, this time with the file sitting on the local disk of a MacBook Pro (Apple M4 Max, 14 cores, and 36 GB of RAM). Since the benefit of asynchronous I/O on local disks comes from cold reads, we cleared the OS caches (with the macOS `purge` command) between runs, making sure every execution actually read the file from disk.
 
-| Version                              | Q6 runtime |
-| ------------------------------------ | ---------: |
-| DuckDB v1.5.5 (synchronous)          |    1.321 s |
-| DuckDB v2.0.0-dev (asynchronous I/O) |    0.883 s |
+| Version                       | Q6 runtime |
+| ----------------------------- | ---------: |
+| v1.5.5 (synchronous)          |    1.321 s |
+| v2.0.0-dev (asynchronous I/O) |    0.883 s |
 
 We can see that, for cold runs, asynchronous I/O is approximately 1.5× faster, reducing runtime by about 33%. The performance difference is much smaller than in the cases presented above, due to the SSD having much lower latency and much higher bandwidth than the EC2/S3 network. For hot runs, the difference is negligible, as there is no disk access happening if data is properly cached.
 
@@ -140,10 +140,10 @@ We can see that, for cold runs, asynchronous I/O is approximately 1.5× faster, 
 
 Partitioned datasets are a particularly relevant use case here, as partitioning can easily spread the data across many small files. To see how asynchronous I/O behaves in this setup, we also performed a Parquet run using the same TPC-H SF100 dataset. Instead of using one file, we generated 976 files with five row groups each. Each file contains approximately 615,000 rows and is around 22 MB in size.
 
-| Version                              | Q6 runtime |
-| ------------------------------------ | ---------: |
-| DuckDB v1.5.5 (synchronous)          |    9.344 s |
-| DuckDB v2.0.0-dev (asynchronous I/O) |    2.945 s |
+| Version                       | Q6 runtime |
+| ----------------------------- | ---------: |
+| v1.5.5 (synchronous)          |    9.344 s |
+| v2.0.0-dev (asynchronous I/O) |    2.945 s |
 
 We can see that v2.0.0-dev delivers a similar performance improvement here as it does for the single-file benchmark, running around 3× faster. This shows that read-ahead can also parallelize across multiple files without becoming bottlenecked by opening files or fetching their footers.
 
@@ -181,16 +181,16 @@ With the default memory configuration, DuckDB v1.5.5 keeps an average of only ab
 
 The memory results are also interesting. As we lower the limit, the memory governor reduces the read-ahead backlog, while memory-heavy operators such as those in Q18 can spill to disk. This lowers the peak physical memory used by the DuckDB process (i.e., RSS) of DuckDB v2.0.0-dev from 20.1 GB with the default configuration to 15.7 GB with a 16 GB limit and 11.5 GB with an 8 GB limit. The additional spilling and reduced read-ahead also lower average CPU utilization and increase the runtime, but v2.0.0-dev continues to saturate the network and remains substantially faster than v1.5.5 in both cases.
 
-> One might notice that the 8 GB result still peaks at 11.5 GB of RSS. This is because jemalloc keeps recently freed pages resident for about one second so they can be reused. This memory is no longer counted by DuckDB's memory manager, and v1.5.5 shows the same allocator behavior.
+> One might notice that the 8 GB result still peaks at 11.5 GB of RSS. This is because [jemalloc]({% link docs/current/internals/jemalloc.md %}) keeps recently freed pages resident for about one second so they can be reused. This memory is no longer counted by DuckDB's memory manager, and v1.5.5 shows the same allocator behavior.
 
 ### CSV
 
 The effect is larger on CSV files. The CSV file is 80.89 GB, and asynchronous I/O reduces the mean runtime from 878 seconds to just 45 seconds, making the query almost 20× faster. CSV is row-oriented, so the scan transfers substantially more data and performs fixed-size buffer reads, making concurrent remote reads especially valuable.
 
-| Version                              | Q6 runtime |
-| ------------------------------------ | ---------: |
-| DuckDB v1.5.5 (synchronous)          |  877.563 s |
-| DuckDB v2.0.0-dev (asynchronous I/O) |   45.264 s |
+| Version                       | Q6 runtime |
+| ----------------------------- | ---------: |
+| v1.5.5 (synchronous)          |  877.563 s |
+| v2.0.0-dev (asynchronous I/O) |   45.264 s |
 
 As in the other experiments, we used the default memory-governed read-ahead depth, so this run was not tuned to keep the 25 Gbit/s network saturated on average.
 
