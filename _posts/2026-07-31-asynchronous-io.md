@@ -149,16 +149,16 @@ We can see that v2.0.0-dev delivers a similar performance improvement here as it
 
 #### Large Row Groups
 
-We also wanted to see what happens at the other extreme, when a Parquet file has only a few very large row groups. For this experiment, we generated six versions of the same TPC-H SF100 `lineitem` table as a single file, changing only the requested row-group size, and ran Q6 using DuckDB v2.0.0-dev. The table below reports the runtime for each version.
+We also wanted to see what happens at the other extreme, when a Parquet file has only a few very large row groups. For this experiment, we generated six versions of the same TPC-H SF100 `lineitem` table as a single file, changing only the requested row group (RG) size, and ran Q6 using DuckDB v2.0.0-dev. The table below reports the runtime for each version.
 
-| Rows per Row Group | Row Groups | Approx. Row Group Size (MB) | Total File Size (MB) |    Time |
-| -----------------: | ---------: | --------------------------: | -------------------: | ------: |
-|            122,880 |      4,886 |                       ~4 MB |           ~21,600 MB |  2.74 s |
-|          1,966,080 |        306 |                      ~70 MB |           ~21,400 MB |  2.11 s |
-|          9,375,593 |         64 |                     ~320 MB |           ~20,500 MB |  2.27 s |
-|         62,914,560 |         10 |                   ~1,500 MB |           ~14,700 MB |  3.69 s |
-|        150,009,476 |          4 |                   ~3,200 MB |           ~12,800 MB |  8.01 s |
-|        600,037,902 |          1 |                  ~12,300 MB |           ~12,300 MB | 25.26 s |
+|   Rows / RG |   RGs | Approx. RG size (MB) | Total file size (MB) |    Time |
+| ----------: | ----: | -------------------: | -------------------: | ------: |
+|     122,880 | 4,886 |                ~4 MB |           ~21,600 MB |  2.74 s |
+|   1,966,080 |   306 |               ~70 MB |           ~21,400 MB |  2.11 s |
+|   9,375,593 |    64 |              ~320 MB |           ~20,500 MB |  2.27 s |
+|  62,914,560 |    10 |            ~1,500 MB |           ~14,700 MB |  3.69 s |
+| 150,009,476 |     4 |            ~3,200 MB |           ~12,800 MB |  8.01 s |
+| 600,037,902 |     1 |           ~12,300 MB |           ~12,300 MB | 25.26 s |
 
 At first, larger row groups decrease query times. As we increase the row-group size, request latency is amortized over much larger transfers. However, beyond a certain point, the available parallelism starts to fall. A row group is DuckDB's unit of Parquet scan parallelism, so ideally a scan should expose at least one row group per system thread. On this 64-vCPU machine, the version with 64 row groups provides exactly that and finishes in 2.27 seconds, while the fastest run comes from the version with 306 row groups, at 2.11 seconds.
 
@@ -166,16 +166,16 @@ However, with fewer row groups than threads, we lose parallelism and can no long
 
 #### Concurrent Queries
 
-The effect becomes even clearer when several queries run at the same time. For this experiment, we ran TPC-H Queries 1, 6, 9, and 18 concurrently against the same SF100 Parquet dataset on S3, using a single DuckDB instance. We picked these queries because they cover a mix of scans, aggregations, and joins, with different CPU and memory requirements. We repeated the experiment with the default memory configuration and with memory limits of 16 GB and 8 GB. The total runtime is the wall-clock time until all four queries finish.
+The effect becomes even clearer when several queries run at the same time. For this experiment, we ran TPC-H queries 1, 6, 9, and 18 concurrently against the same SF100 Parquet dataset on S3, using a single DuckDB instance. We picked these queries because they cover a mix of scans, aggregations, and joins, with different CPU and memory requirements. We repeated the experiment with the default memory configuration and with memory limits of 16 GB and 8 GB. The total runtime is the wall-clock time until all four queries finish. We report the average and peak CPU utilization (number of cores utilized), the peak bandwidth (bw.) and the peak resident set size (RSS).
 
-| Version           | Memory Limit | Total Runtime | Average CPU |   Peak CPU | Peak Bandwidth | Peak RSS |
-| ----------------- | -----------: | ------------: | ----------: | ---------: | -------------: | -------: |
-| DuckDB v1.5.5     |      default |        35.8 s |   5.9 cores | 35.7 cores |    10.7 Gbit/s |  14.5 GB |
-| DuckDB v2.0.0-dev |      default |        15.6 s |  48.1 cores | 64.0 cores |    24.9 Gbit/s |  20.1 GB |
-| DuckDB v1.5.5     |        16 GB |        35.6 s |   6.1 cores | 25.7 cores |    17.4 Gbit/s |  14.1 GB |
-| DuckDB v2.0.0-dev |        16 GB |        22.7 s |  35.2 cores | 63.4 cores |    24.8 Gbit/s |  15.7 GB |
-| DuckDB v1.5.5     |         8 GB |        35.9 s |   6.9 cores | 38.8 cores |    16.8 Gbit/s |  10.4 GB |
-| DuckDB v2.0.0-dev |         8 GB |        24.2 s |  30.3 cores | 63.7 cores |    25.0 Gbit/s |  11.5 GB |
+| Version    | Mem. limit | Runtime | Avg. CPU | Peak CPU |    Peak bw. | Peak RSS |
+| ---------- | ---------: | ------: | -------: | -------: | ----------: | -------: |
+| v1.5.5     |    default |  35.8 s |      5.9 |     35.7 | 10.7 Gbit/s |  14.5 GB |
+| v2.0.0-dev |    default |  15.6 s |     48.1 |     64.0 | 24.9 Gbit/s |  20.1 GB |
+| v1.5.5     |      16 GB |  35.6 s |      6.1 |     25.7 | 17.4 Gbit/s |  14.1 GB |
+| v2.0.0-dev |      16 GB |  22.7 s |     35.2 |     63.4 | 24.8 Gbit/s |  15.7 GB |
+| v1.5.5     |       8 GB |  35.9 s |      6.9 |     38.8 | 16.8 Gbit/s |  10.4 GB |
+| v2.0.0-dev |       8 GB |  24.2 s |     30.3 |     63.7 | 25.0 Gbit/s |  11.5 GB |
 
 With the default memory configuration, DuckDB v1.5.5 keeps an average of only about 6 of the 64 cores busy. In other words, around 90% of the machine sits idle waiting for synchronous S3 reads. DuckDB v2.0.0-dev, on the other hand, averages 48 busy cores, reaches all 64 at its peak, and saturates the 25 Gbit/s network. As a result, all four queries finish in less than half the time.
 
