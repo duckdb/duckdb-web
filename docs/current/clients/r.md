@@ -53,7 +53,7 @@ con <- dbConnect(duckdb(), dbdir = "my-db.duckdb", read_only = FALSE)
 con <- dbConnect(duckdb(), dbdir = "my-db.duckdb", read_only = TRUE)
 ```
 
-Connections are closed implicitly when they go out of scope or if they are explicitly closed using `dbDisconnect()`. To shut down the database instance associated with the connection, use `dbDisconnect(con, shutdown = TRUE)`
+Connections are closed implicitly when they go out of scope or if they are explicitly closed using `dbDisconnect()`. To shut down the database instance associated with the connection, use `duckdb_shutdown()` on the driver object returned by `duckdb()`.
 
 ### Querying
 
