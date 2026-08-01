@@ -240,9 +240,12 @@ SELECT min(COLUMNS(*)) AS "min_\0" FROM numbers;
 ### `COLUMNS` Lambda Function
 
 `COLUMNS` also supports passing in a [lambda function]({% link docs/current/sql/functions/lambda.md %}). 
-The lambda function is evaluated for all columns present in the `FROM` clause, receiving the column name as argument. 
-Only columns for which the lambda function evaluates to `TRUE` are retained, and discarded otherwise. 
-This allows the execution of arbitrary expressions in order to select and rename columns.
+The lambda function is evaluated for all columns present in the `FROM` clause. 
+Only columns for which the lambda function evaluates to `TRUE` are retained, and discarded otherwise.
+
+`COLUMNS`-clause lambdas have a mandatory parameter that receives the column name.
+Optionally, a second parameter may be declared to receive the (1-based) index of the column.
+`COLUMNS`-clause lambdas allow the execution of arbitrary expressions in order to select and rename columns.
 
 ```sql
 SELECT COLUMNS(lambda c: c LIKE '%num%') FROM numbers;
