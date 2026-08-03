@@ -142,7 +142,7 @@ There are dedicated extraction functions to get certain subfields:
 
 | **Description** | Seconds since 1970-01-01. |
 | **Example** | `epoch(DATE '1992-02-15')` |
-| **Result** | `698112000` |
+| **Result** | `698112000.0` |
 
 #### `era(date)`
 
