@@ -39,7 +39,7 @@ To connect to a DuckDB database via the S3 API, [configure the authentication]({
 Then, use the [`ATTACH` statement]({% link docs/current/sql/statements/attach.md %}) as follows:
 
 ```sql
-ATTACH 'https://blobs.duckdb.org/databases/stations.duckdb' AS stations_db;
+ATTACH 's3://duckdb-blobs/databases/stations.duckdb' AS stations_db;
 ```
 
 
