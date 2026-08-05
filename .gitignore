@@ -321,5 +321,3 @@ duckdb_web_venv/
 *.duckdb
 *.duckdb.wal
 .gstack/
-
-Gemfile.lock
