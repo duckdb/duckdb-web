@@ -12,7 +12,7 @@ The `CREATE MACRO` statement defines a named, callable SQL expression as a datab
 
 Macros may declare parameters, which can be referenced by its expression.
 Once a macro is created, it may be called by referencing its name and by passing values to its parameters; this causes its expression to be evaluated, yielding a value.
-Depending on the macro type, the value may be scalar, or a `TABLE`-value.
+Depending on the macro type, the value may be scalar, or a `TABLE` value.
 The `CREATE FUNCTION` statement is an alias for `CREATE MACRO`.
 
 The simplified syntax for creating a macro is:
@@ -22,33 +22,33 @@ CREATE [OR REPLACE] [TEMPORARY] MACRO [IF NOT EXISTS] ⟨identifier⟩( [⟨para
 ```
 
 * The identifier consists of the macro's name, which can be any valid SQL identifier. A macro may be explicitly qualified with an existing database schema. If a schema is specified, then it appears in the usual way: before the name, with a dot separating schema name and macro name. When not explicitly specified, the macro will be associated with the current schema.
-* When connected to a persistent database file, the macro will be stored in the database. The optional `TEMPORARY`-keyword indicates that the macro is not to be persisted.
-* An `OR REPLACE`-clause may occur immediately after the `CREATE`-keyword, which causes an existing macro with the same name (within the schema) to be overwritten. Without `OR REPLACE` such an attempt will fail with a `Macro Function already exists`-error.
-* An `IF NOT EXISTS`-clause my occur immediately before the identifier, and has the effect of only creating the macro if it does not aleady exist. Either the `OR REPLACE`- or the`IF NOT EXISTS`-clause may be present, but not both.
+* When connected to a persistent database file, the macro will be stored in the database. The optional `TEMPORARY` keyword indicates that the macro is not to be persisted.
+* An `OR REPLACE` clause may occur immediately after the `CREATE` keyword, which causes an existing macro with the same name (within the schema) to be overwritten. Without `OR REPLACE` such an attempt will fail with a `Macro Function already exists` error.
+* An `IF NOT EXISTS` clause may occur immediately before the identifier, and has the effect of only creating the macro if it does not already exist. Either the `OR REPLACE` or the `IF NOT EXISTS` clause may be present, but not both.
 * The macro name is followed by parentheses. If the macro has [parameters](#declaring-parameters), then they must be declared within the parentheses.
-* The `AS`-keyword appears after the right parenthesis but before the expression
-* The `TABLE`-keyword may appear right after the `AS`-keyword, directly before the expression, indicating the macro is a [table macro](#type-of-macros) and returns a resultset. When omitted, the macro is automatically a scalar macro.
-* The expression can be any valid SQL expression provided the expression's type must is aligned with the [macro's type](#types-of-macros).
+* The `AS` keyword appears after the right parenthesis but before the expression
+* The `TABLE` keyword may appear right after the `AS` keyword, directly before the expression, indicating the macro is a [table macro](#types-of-macros) and returns a result set. When omitted, the macro is automatically a scalar macro.
+* The expression can be any valid SQL expression provided the expression's type is aligned with the [macro's type](#types-of-macros).
 
-Please review the [syntax diagram](#syntax) for a more precise and detailed overview of the `CREATE MACRO`-statement. 
+Please review the [syntax diagram](#syntax) for a more precise and detailed overview of the `CREATE MACRO` statement. 
 
 ## Types of Macros
 
 The contexts where a particular macro may be called depends on the data type of its result value:
 * Scalar macros evaluate to a scalar value. For scalar macros, the expression can either be a simple expression, or a scalar subquery.
-* Table macros return a tabular result: when called, they act essentially as [table functions]({% link docs/current/sql/query_syntax/from.md %}#table-functions) and return a table value. Their expression can be a `SELECT`-statement, or a call to another table function.
+* Table macros return a tabular result: when called, they act essentially as [table functions]({% link docs/current/sql/query_syntax/from.md %}#table-functions) and return a table value. Their expression can be a `SELECT` statement, or a call to another table function.
 
 ## Declaring Parameters
 
-Macros may declare parameters. The parameter declarations appear as a comma-separated list between the parentheses before the `AS`-keyword. The simplified syntax for a sinlge parameter declaration is:
+Macros may declare parameters. The parameter declarations appear as a comma-separated list between the parentheses before the `AS` keyword. The simplified syntax for a single parameter declaration is:
 
 ```sql
 ⟨parameter-name⟩ [⟨datatype⟩] [ := ⟨default-value⟩ ]
 ```
 * The parameter name is mandatory and can be any valid SQL identifier. Parameter names must be unique within the parameter list. An attempt to define multiple parameters with the same name results in a `Duplicate parameter` error.
-* Optionally, a parameter may explicitly specify a particular datatype. This can be any of the existing DuckDB [data types]({% link docs/current/sql/data_types/overview.md %}). Note: there is no way to specify a parameter of a `TABLE`-type.
+* Optionally, a parameter may explicitly specify a particular datatype. This can be any of the existing DuckDB [data types]({% link docs/current/sql/data_types/overview.md %}). Note: there is no way to specify a parameter of a `TABLE` type.
 * A parameter can optionally specify a default value. This is done with the assignment operator `:=`, followed by the expression that is to be used as default value. 
-* The default value expression is in principle evaluated at definition-time - NOT at run-time. (There are a few exceptions, like `CURRENT_SCHEMA`. But it's best not to rely on that: if you need a default value to be dynamic, use a well-known value like `NULL` as default and use conditional logic in the expression to produce the runt-time value).
+* The default value expression is in principle evaluated at definition-time - NOT at run-time. (There are a few exceptions, like `CURRENT_SCHEMA`. But it's best not to rely on that: if you need a default value to be dynamic, use a well-known value like `NULL` as default and use conditional logic in the expression to produce the run-time value).
 * Specifying a default value expression effectively makes the parameter optional: when the macro is called, the DuckDb binder will find candidate signatures based on passed parameters, but backfilled by signatures that specify default values for missing parameters.  
 * A parameter that specifies a default value cannot appear before a definition of a parameter that does not have a default value. In other words, parameters without default values have to be defined "in the front"; any parameters with default values appear "at the back".
 * Multiple parameter declarations are separated from one another with a comma.
@@ -57,11 +57,11 @@ Macros may declare parameters. The parameter declarations appear as a comma-sepa
 
 Macros support overloading:
 
-* A single `CREATE MACRO` statement can define multiple implementations (sometimes called 'overloads'), each having its own parameterlist, `AS` keyword, and expression. Note that all of the implementations are defined in the same `CREATE MACRO` statement: it is not possible to add, remove, or alter individual implementations after the macro is created.
+* A single `CREATE MACRO` statement can define multiple implementations (sometimes called 'overloads'), each having its own parameter list, `AS` keyword, and expression. Note that all of the implementations are defined in the same `CREATE MACRO` statement: it is not possible to add, remove, or alter individual implementations after the macro is created.
 * Multiple implementations are separated from one another by a comma.
-* Each implementation must have a unique parameter-type signature: that is, in one `CREATE MACRO`-statement, all implementations having the same number of parameters must each have a unique sequence of parameter types - regardless of the parameter names. If a parameter type signature is not unique, it results in a `Ambiguity in macro overloads`-error.
+* Each implementation must have a unique parameter-type signature: that is, in one `CREATE MACRO` statement, all implementations having the same number of parameters must each have a unique sequence of parameter types - regardless of the parameter names. If a parameter type signature is not unique, it results in a `Ambiguity in macro overloads` error.
 * Overloading only applies to the parameter-types, but not to the macro type itself: for a single macro, all of its implementations are either scalar or `TABLE`.
-* When overloading table functions that are defined using a `SELECT`-statement as expression, you will probably need to wrap the `SELECT`-statement in parentheses.
+* When overloading table functions that are defined using a `SELECT` statement as expression, you will probably need to wrap the `SELECT` statement in parentheses.
 
 ## Calling Macros
 Macros are called by mentioning their name, followed by parentheses. A comma-separated list of value-expressions may appear between the parentheses - these are the actual parameters. 
@@ -70,9 +70,9 @@ If an implementation is found, the parameter values are passed and the implement
 This is similar to calling a [function]({% link docs/current/sql/functions/overview.md %}).
  
 In general, a call to a macro is valid if its expression could also appear in that context:
-* A call to a scalar macro can be used in the `SELECT`-clause or in the `WHERE`-clause of a `SELECT`-statement.
+* A call to a scalar macro can be used in the `SELECT` clause or in the `WHERE` clause of a `SELECT`statement.
 * If the expression of a scalar macro references an [aggregate function]({% link docs/current/sql/functions/aggregates.md %}), then the macro behaves like an aggregate function too.
-* A call to a table macro can appear in the`FROM`-clause of a `SELECT`-statement, or in a [`CALL`-statement]({% link docs/current/sql/statements/call.md %}).
+* A call to a table macro can appear in the `FROM` clause of a `SELECT` statement, or in a [`CALL` statement]({% link docs/current/sql/statements/call.md %}).
 
 ### Passing Parameters
 
