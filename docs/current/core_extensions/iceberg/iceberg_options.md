@@ -5,49 +5,84 @@ title: Iceberg Options
 
 This page lists the options of the `iceberg` extension: the parameters accepted by the [Iceberg functions]({% link docs/current/core_extensions/iceberg/iceberg_functions.md %}), the options of the `ATTACH` and `CREATE SECRET` statements used to [connect to a catalog]({% link docs/current/core_extensions/iceberg/catalogs.md %}), and the global settings.
 
-## Scan Options
-
-The following parameters can be passed to `iceberg_scan` and `iceberg_metadata`:
-
-| Parameter                    | Type        | Default                                    | Description                                                |
-| ---------------------------- | ----------- | ------------------------------------------ | ---------------------------------------------------------- |
-| `allow_moved_paths`          | `BOOLEAN`   | `false`                                    | Allows scanning Iceberg tables that are moved              |
-| `metadata_compression_codec` | `VARCHAR`   | `''`                                       | Treats metadata files as when set to `'gzip'`              |
-| `snapshot_from_id`           | `UBIGINT`   | `NULL`                                     | Access snapshot with a specific `id`                       |
-| `snapshot_from_timestamp`    | `TIMESTAMP` | `NULL`                                     | Access snapshot with a specific `timestamp`                |
-| `version`                    | `VARCHAR`   | `'?'`                                      | Provides an explicit version string, hint file or guessing |
-| `version_name_format`        | `VARCHAR`   | `'v%s%s.metadata.json,%s%s.metadata.json'` | Controls how versions are converted to metadata file names |
-
-> `iceberg_snapshots` does not take `allow_moved_paths`, `snapshot_from_id` or `snapshot_from_timestamp` as parameters.
-
 
 ## `ATTACH` Options
 
-A REST Catalog with OAuth2 authorization can be attached with just an `ATTACH` statement. See the complete list of `ATTACH` options for a REST Catalog below.
+To make an Iceberg Catalog (not just a single table) known to the system, you'll need to use the `ATTACH` statement.
+The options provided to the `ATTACH` are divided into categories:
 
-| Parameter                            | Type       | Default              | Description                                                                                                                                                             |
-| ------------------------------------ | ---------- | -------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `ENDPOINT_TYPE`                      | `VARCHAR`  | `NULL`               | Used for attaching S3 Tables or Glue catalogs. Allowed values are `GLUE` and `S3_TABLES`. Cannot be combined with `ENDPOINT` or `AUTHORIZATION_TYPE`.                  |
-| `ENDPOINT`                           | `VARCHAR`  | `NULL`               | URL endpoint to communicate with the REST Catalog. Cannot be used in conjunction with `ENDPOINT_TYPE`.                                                                 |
-| `SECRET`                             | `VARCHAR`  | `NULL`               | Name of the secret used to communicate with the REST Catalog.                                                                                                          |
-| `CLIENT_ID`                          | `VARCHAR`  | `NULL`               | `CLIENT_ID` used for the secret.                                                                                                                                       |
-| `CLIENT_SECRET`                      | `VARCHAR`  | `NULL`               | `CLIENT_SECRET` used for the secret.                                                                                                                                   |
-| `DEFAULT_REGION`                     | `VARCHAR`  | `NULL`               | Default region to use when communicating with the storage layer.                                                                                                      |
-| `DEFAULT_SCHEMA`                     | `VARCHAR`  | `NULL`               | The default schema (namespace) to use for the attached catalog.                                                                                                       |
-| `OAUTH2_SERVER_URI`                  | `VARCHAR`  | `NULL`               | OAuth2 server URL for getting a Bearer token.                                                                                                                          |
-| `AUTHORIZATION_TYPE`                 | `VARCHAR`  | `OAUTH2`             | Authorization scheme. Pass `SigV4` for catalogs that require SigV4 authorization, or `none` for catalogs that need no authentication. Cannot be combined with `ENDPOINT_TYPE`. |
-| `ACCESS_DELEGATION_MODE`             | `VARCHAR`  | `vended_credentials` | Access delegation mode. Allowed values are `vended_credentials` and `none`.                                                                                            |
-| `EXTRA_HTTP_HEADERS`                 | `MAP`      | `NULL`               | Additional HTTP headers to send with REST Catalog requests.                                                                                                            |
-| `SUPPORT_NESTED_NAMESPACES`          | `BOOLEAN`  | `false`              | Set to `true` for catalogs that support nested namespaces.                                                                                                             |
-| `STAGE_CREATE_TABLES`                | `BOOLEAN`  | `true`               | Controls whether DuckDB uses staged `CREATE TABLE`. Disable for catalogs that do not support staged table creation.                                                    |
-| `DISABLE_MULTI_TABLE_COMMIT`         | `BOOLEAN`  | `false`              | Disables the multi-table transactions/commit endpoint. Enable for catalogs that reject this endpoint.                                                                  |
-| `SKIP_CREATE_TABLE_METADATA_UPDATES` | `BOOLEAN`  | `false`              | Skips follow-up metadata updates after non-staged `CREATE TABLE`. Enable for catalogs that fully initialize metadata during table creation and reject subsequent updates. |
-| `REMOVE_FILES_ON_DELETE`             | `BOOLEAN`  | `true`               | Controls whether DuckDB removes storage files when a table is dropped.                                                                                                 |
-| `PURGE_REQUESTED`                    | `BOOLEAN`  | `false`              | Sends the [PurgeRequested](https://github.com/apache/iceberg/blob/4b4eb38cf6dda7b43faeb40eb00aa5db424d2ecb/open-api/rest-catalog-open-api.yaml#L1144) parameter when dropping a table. |
-| `ENCODE_ENTIRE_PREFIX`               | `BOOLEAN`  | `false`              | URL-encode the entire path prefix when communicating with the catalog.                                                                                                 |
-| `MAX_TABLE_STALENESS`                | `INTERVAL` | `NULL`               | Prevents unnecessary requests to the Iceberg REST Catalog. Accepts human-readable interval strings such as `10 minutes`, `30 seconds`, or `1 year`.                    |
+| Parameter | Type | Default | Description |
+| `ENDPOINT`                           | `VARCHAR`  | `NULL`               |                     | URL endpoint to communicate with the REST Catalog. |
+| `DEFAULT_SCHEMA`                     | `VARCHAR`  | `NULL`               |                     | The default schema (namespace) to use for the attached catalog.                                                                                                       |
+| `ACCESS_DELEGATION_MODE`             | `VARCHAR`  | `vended_credentials` |                     | Access delegation mode. Allowed values are `vended_credentials` and `none`.                                                                                            |
+| `SUPPORT_NESTED_NAMESPACES`          | `BOOLEAN`  | `false`              |                     | Set to `true` for catalogs that support nested namespaces.                                                                                                             |
+| `STAGE_CREATE_TABLES`                | `BOOLEAN`  | `true`               |                     | Controls whether DuckDB uses staged `CREATE TABLE`. Disable for catalogs that do not support staged table creation.                                                    |
+| `DISABLE_MULTI_TABLE_COMMIT`         | `BOOLEAN`  | `false`              |                     | Disables the multi-table transactions/commit endpoint. Enable for catalogs that reject this endpoint.                                                                  |
+| `SKIP_CREATE_TABLE_METADATA_UPDATES` | `BOOLEAN`  | `false`              |                     | Skips follow-up metadata updates after non-staged `CREATE TABLE`. Enable for catalogs that fully initialize metadata during table creation and reject subsequent updates. |
+| `REMOVE_FILES_ON_DELETE`             | `BOOLEAN`  | `true`               |                     | Controls whether DuckDB removes storage files when a table is dropped.                                                                                                 |
+| `PURGE_REQUESTED`                    | `BOOLEAN`  | `false`              |                     | Sends the [PurgeRequested](https://github.com/apache/iceberg/blob/4b4eb38cf6dda7b43faeb40eb00aa5db424d2ecb/open-api/rest-catalog-open-api.yaml#L1144) parameter when dropping a table. |
+| `ENCODE_ENTIRE_PREFIX`               | `BOOLEAN`  | `false`              |                     | URL-encode the entire path prefix when communicating with the catalog.                                                                                                 |
+| `MAX_TABLE_STALENESS`                | `INTERVAL` | `NULL`               |                     | Prevents unnecessary requests to the Iceberg REST Catalog. Accepts human-readable interval strings such as `10 minutes`, `30 seconds`, or `1 year`.                    |
 
-> When attaching an AWS catalog with `ENDPOINT_TYPE` (`s3_tables` or `glue`), DuckDB applies AWS-appropriate defaults: `stage_create_tables` and `remove_files_on_delete` become `false` and `purge_requested` becomes `true`, unless you set them explicitly.
+Some parameters enable others, see the list of associated additional parameters below this table.
+
+| Parameter | Type | Default | Accepted options | Description |
+| `ENDPOINT_TYPE`                      | `VARCHAR`  | `NULL`               | `S3_TABLES`, `GLUE` | A common identifier of an Iceberg Catalog type, sets certain default parameters. |
+| `AUTHORIZATION_TYPE`                 | `VARCHAR`  | `OAUTH2`             | `OAUTH2`, `SIGV4`   | The Authorization layer of the Iceberg Catalog to attach to. |
+
+### `Endpoint Type`
+
+For commonly used Iceberg Catalog providers, the `ENDPOINT_TYPE` parameter can be used to set certain parameters to default values. Acting as a shorthand for connecting to these catalogs.
+
+#### `S3 Tables`
+
+The parameters set by using the `S3_TABLES` `ENDPOINT_TYPE` are:
+| Parameter | Value |
+| `AUTHORIZATION_TYPE` | `SIGV4` |
+| `SIGV4_REGION` | The `REGION` section of the [ARN](https://docs.aws.amazon.com/IAM/latest/UserGuide/reference-arns.html) provided as the `ATTACH` path. |
+| `ENDPOINT` | `<REGION>.s3tables.amazonaws.com/iceberg` |
+| `REMOVE_FILES_ON_DELETE` | `false` (unless explicitly set) |
+| `STAGE_CREATE_TABLES` | `false` (unless explicitly set) |
+| `PURGE_REQUESTED` | `true` (unless explicitly set) |
+
+#### `Glue`
+
+The parameters set by using the `GLUE` `ENDPOINT_TYPE` are:
+| Parameter | Value |
+| `AUTHORIZATION_TYPE` | `SIGV4` |
+| `ENDPOINT` | `<REGION>.s3tables.amazonaws.com/iceberg` using the region taken from the S3/AWS credentials found with the `SECRET` parameter |
+| `REMOVE_FILES_ON_DELETE` | `false` (unless explicitly set) |
+| `STAGE_CREATE_TABLES` | `false` (unless explicitly set) |
+| `PURGE_REQUESTED` | `true` (unless explicitly set) |
+
+### `Authorization`
+
+To configure the Authorization layer for connecting to an Iceberg REST Catalog, you'll need to pass the `AUTHORIZATION_TYPE` parameter.
+These are the supported options:
+
+#### `OAUTH2` Authorization options
+
+The additional that can be provided when the `AUTHORIZATION_TYPE` is set to `OAUTH2` are the following.
+
+| Parameter           | Type       | Default  | Description                                   |
+| `SECRET`            | `VARCHAR`  | `NULL`   | The path to a `SECRET` of type `ICEBERG` to get the `CLIENT_ID` and `CLIENT_SECRET` from. |
+| `CLIENT_ID`         | `VARCHAR`  | `NULL`   | [`CLIENT_ID`](https://datatracker.ietf.org/doc/html/rfc6749#section-2.2) used in the OAuth2 authorization request.              |
+| `CLIENT_SECRET`     | `VARCHAR`  | `NULL`   | [`CLIENT_SECRET`](https://datatracker.ietf.org/doc/html/rfc6749#section-2.3.1) used in the OAuth2 authorization request.          |
+| `OAUTH2_SERVER_URI` | `VARCHAR`  | `NULL`   | The endpoint of the OAuth2 server to contact. |
+| `OAUTH2_GRANT_TYPE` | `VARCHAR`  | `NULL`   | The [grant_type](https://datatracker.ietf.org/doc/html/rfc6749#appendix-A.10) to use. |
+| `OAUTH2_SCOPE`      | `VARCHAR`  | `NULL`   | The [scope](https://datatracker.ietf.org/doc/html/rfc6749#section-3.3) to use. |
+| `DEFAULT_REGION`    | `VARCHAR`  | `NULL`   | The region to add to vended credentials if none is provided by the Catalog. |
+| `TOKEN`             | `VARCHAR`  | `NULL`   | The [Bearer Token](https://datatracker.ietf.org/doc/html/rfc6750) to use instead of making a request to the server. (disables refreshing) |
+
+#### `SIGV4` Authorization options
+
+The additional that can be provided when the `AUTHORIZATION_TYPE` is set to `SIGV4` are the following.
+
+| Parameter            | Type                    | Default  | Description                                   |
+| `SECRET`             | `VARCHAR`               | `NULL`   | The `S3` or `AWS` `SECRET` to use for signing. |
+| `SIGV4_SERVICE`      | `VARCHAR`               | `NULL`   | Override the `SERVICE` for signing requests, otherwise inferred from the `ENDPOINT` parameter. |
+| `SIGV4_REGION`       | `VARCHAR`               | `NULL`   | Override the `REGION` for signing requests, otherwise inferred from the `ENDPOINT` parameter. |
+| `EXTRA_HTTP_HEADERS` | `MAP(VARCHAR, VARCHAR)` | `NULL`   | Extra headers (key-value) sent along with the signing request. |
 
 ## Working with an Attached Catalog
 
@@ -76,6 +111,23 @@ The following options can only be passed to a `CREATE SECRET` statement and they
 | Setting                          | Type      | Default | Description                                                                                     |
 | -------------------------------- | --------- | ------- | ----------------------------------------------------------------------------------------------- |
 | `unsafe_enable_version_guessing` | `BOOLEAN` | `false` | Allows the extension to guess the latest metadata version when no version or hint file is given. |
+
+
+## Scan Options
+
+The following parameters can be passed to `iceberg_scan` and `iceberg_metadata`:
+
+| Parameter                    | Type        | Default                                    | Description                                                |
+| ---------------------------- | ----------- | ------------------------------------------ | ---------------------------------------------------------- |
+| `allow_moved_paths`          | `BOOLEAN`   | `false`                                    | Allows scanning Iceberg tables that are moved              |
+| `metadata_compression_codec` | `VARCHAR`   | `''`                                       | Treats metadata files as when set to `'gzip'`              |
+| `snapshot_from_id`           | `UBIGINT`   | `NULL`                                     | Access snapshot with a specific `id`                       |
+| `snapshot_from_timestamp`    | `TIMESTAMP` | `NULL`                                     | Access snapshot with a specific `timestamp`                |
+| `version`                    | `VARCHAR`   | `'?'`                                      | Provides an explicit version string, hint file or guessing |
+| `version_name_format`        | `VARCHAR`   | `'v%s%s.metadata.json,%s%s.metadata.json'` | Controls how versions are converted to metadata file names |
+
+> `iceberg_snapshots` does not take `allow_moved_paths`, `snapshot_from_id` or `snapshot_from_timestamp` as parameters.
+
 
 ## Selecting Metadata Versions
 
