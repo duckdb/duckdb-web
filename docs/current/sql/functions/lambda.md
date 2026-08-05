@@ -7,23 +7,25 @@ title: Lambda Functions
 ---
 
 DuckDB lambda functions (a.k.a. 'lambdas' or 'lambda expressions') are expressions that define an inline anonymous function. 
-Lambdas are passed as argument to certain [list functions]({ % link docs/current/sql/functions/list.md % }), which evaluate the passed lambda expression against its elements. 
+Lambdas are passed as argument to certain [list functions]({% link docs/current/sql/functions/list.md %}), which evaluate the passed lambda expression against its elements. 
 The value resulting from the lambda's evaluation is then processed further by the list function to create its return value.
 
-Lamdbas may also be used in the [`COLUMNS`-clause]({% link docs/current/sql/expressions/star.md %}#columns-lambda-function).
-In that context, the lambda function acts as a filter: if it evaluates to `TRUE`, the column is retained, and discarded otherwise.
-`COLUMNS`-clause lamdas have a mandatory parameter that receives the column name. Optionally, a second parameter may be declared that receives the (1-based) column index. 
+Lambdas may also be used in the [`COLUMNS` clause]({% link docs/current/sql/expressions/star.md %}#columns-lambda-function).
+In that context, the lambda function acts as a filter: if it evaluates to `true`, the column is retained, and discarded otherwise.
+`COLUMNS` clause lambdas have a mandatory parameter that receives the column name. Optionally, a second parameter may be declared that receives the (1-based) column index. 
 
-The syntax for a lamda expression is:
+The syntax for a lambda expression is:
+
 ```sql
-lambda <parameters> : <expression>
+lambda ⟨parameters⟩ : ⟨expression⟩
 ```
-- `<parameters>` is a comma-separated list of parameter names. Parameters may be given any name, and their name may be referenced in the `<expression>`.
-- The number of allowed and required parameters depends on the list function to which it is passed.
-- There is always a mandatory parameter that is used by the list function to pass the current element of the list. This is typically the first parameter.
-- There is always an optional parameter used by the list function to pass the (1-based) index of the current element. This is always the last parameter.
-- The expression must be a scalar expression. Additionally, it cannot contain a subquery, table function, and the like.
-- The expression may contain macro invocations. However, only scalar macros are allowed, and only if they do not rely on a subquery.
+
+* `⟨parameters⟩`{:.language-sql .highlight} is a comma-separated list of parameter names. Parameters may be given any name, and their name may be referenced in the `⟨expression⟩`{:.language-sql .highlight}.
+* The number of allowed and required parameters depends on the list function to which it is passed.
+* There is always a mandatory parameter that is used by the list function to pass the current element of the list. This is typically the first parameter.
+* There is always an optional parameter used by the list function to pass the (1-based) index of the current element. This is always the last parameter.
+* The expression must be a scalar expression. Additionally, it cannot contain a subquery, table function, and the like.
+* The expression may contain macro invocations. However, only scalar macros are allowed, and only if they do not rely on a subquery.
 
 For example, the following are all valid lambda functions:
 
@@ -289,7 +291,7 @@ INITIAL - 1 - a - 2 - b - 3 - c - 4 - d
 
 ## Limitations
 
-- Subqueries in lambda expressions are currently not supported.
+* Subqueries in lambda expressions are currently not supported.
   For example:
 
   ```sql
