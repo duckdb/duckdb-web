@@ -17,7 +17,7 @@ extension:
 
 repo:
   github: Dtenwolde/ldbc-data-gen
-  ref: a232c3829d81ec718d69d74f55147510ed876764 
+  ref: e7d26eac0e0feb70ec37a90112607adac807e901 
 
 docs:
   hello_world: |
@@ -56,8 +56,8 @@ docs:
 
 extension_star_count: 0
 extension_star_count_pretty: 0
-extension_download_count: 556
-extension_download_count_pretty: 556
+extension_download_count: 513
+extension_download_count_pretty: 513
 image: '/images/community_extensions/social_preview/preview_community_extension_ldbc_data_gen.png'
 layout: community_extension_doc
 ---

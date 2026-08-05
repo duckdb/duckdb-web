@@ -22,10 +22,10 @@ repo:
   github: query-farm/jsonata
   ref: aad1d6a98368714182ff50d3e1008480f9247c79
 
-extension_star_count: 6
-extension_star_count_pretty: 6
-extension_download_count: 1576
-extension_download_count_pretty: 1.6k
+extension_star_count: 7
+extension_star_count_pretty: 7
+extension_download_count: 815
+extension_download_count_pretty: 815
 image: '/images/community_extensions/social_preview/preview_community_extension_jsonata.png'
 layout: community_extension_doc
 ---

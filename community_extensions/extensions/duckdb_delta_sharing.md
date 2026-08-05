@@ -81,8 +81,8 @@ docs:
 
 extension_star_count: 3
 extension_star_count_pretty: 3
-extension_download_count: 4345
-extension_download_count_pretty: 4.3k
+extension_download_count: 4101
+extension_download_count_pretty: 4.1k
 image: '/images/community_extensions/social_preview/preview_community_extension_duckdb_delta_sharing.png'
 layout: community_extension_doc
 ---

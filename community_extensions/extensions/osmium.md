@@ -8,7 +8,7 @@ excerpt: |
 extension:
   name: osmium
   description: Read OpenStreetMap data from OSM XML and PBF files
-  version: 0.5.0
+  version: 0.5.1
   language: C++
   build: cmake
   license: MIT
@@ -18,7 +18,7 @@ extension:
 
 repo:
   github: jake-low/duckdb-osmium
-  ref: 4bc336fba5bf3003f7c1156afffd409fb4070548
+  ref: 279e97773307c991487ccee7300e20a1b09dca9a
 
 docs:
   hello_world: |
@@ -32,10 +32,10 @@ docs:
     constructing Geometries (Point, LineString, Polygon, etc) from OSM elements, which makes it
     easy to transform OSM data into formats like GeoJSON and GeoParquet.
 
-extension_star_count: 23
-extension_star_count_pretty: 23
-extension_download_count: 1778
-extension_download_count_pretty: 1.8k
+extension_star_count: 26
+extension_star_count_pretty: 26
+extension_download_count: 1054
+extension_download_count_pretty: 1.1k
 image: '/images/community_extensions/social_preview/preview_community_extension_osmium.png'
 layout: community_extension_doc
 ---
