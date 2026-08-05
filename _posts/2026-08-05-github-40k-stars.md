@@ -34,9 +34,11 @@ Besides the GitHub stars, the DuckDB community has also experienced a lot of gro
 
 Since 30 000 stars, we ran DuckDB meetups in [Amsterdam](https://duckdb.org/events/2025/09/17/duckdb-amsterdam-meetup-3/), [Berlin](https://duckdb.org/events/2025/06/26/duckdb-berlin-meetup/), and [London](https://duckdb.org/events/2025/09/04/duckdb-science-and-education-london-meetup/). We also hosted a [Developer Meeting](https://duckdb.org/events/2026/01/30/duckdb-developer-meeting-1/) focused on DuckDB internals and extension development. 
 
-Finally, we hosted [DuckCon \#7](https://duckdb.org/events/2026/06/24/duckcon7/), our largest DuckCon so far, which we also streamed online. These events allowed us to connect with our community of engineers, builders, and scientists, and learn about the many ways they are using DuckDB.
+Finally, we hosted [DuckCon #7](https://duckdb.org/events/2026/06/24/duckcon7/), our largest DuckCon so far, which we also streamed online. These events allowed us to connect with our community of engineers, builders, and scientists, and learn about the many ways they are using DuckDB.
 
-Next up, we'll host the [DuckDB Paris meetup](https://luma.com/p9n5hkvf) with [Altertable](https://altertable.ai/) and we are setting up a meetup in the United States. Stay tuned!
+Next up, we'll host the [DuckDB Paris meetup](https://luma.com/p9n5hkvf) with [Altertable](https://altertable.ai/) and we are setting up a
+[meetup in Boston]({% link _events/2026-09-03-duckdb-boston-meetup.md %}).
+Stay tuned!
 
 ## DuckDB in the Wild
 
