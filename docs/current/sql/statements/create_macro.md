@@ -61,7 +61,7 @@ Create a macro with a default parameter:
 CREATE MACRO add_default(a, b := 5) AS a + b;
 ```
 
-Create a macro `arr_append` (with a functionality equivalent to `array_append`):
+Create a macro `arr_append` (with functionality equivalent to `array_append`):
 
 ```sql
 CREATE MACRO arr_append(l, e) AS list_concat(l, list_value(e));
@@ -105,7 +105,7 @@ CREATE MACRO get_users(i) AS TABLE
     SELECT * FROM users WHERE uid IN (SELECT unnest(i));
 ```
 
-An example for how to use the `get_users` table macro is the following:
+An example of how to use the `get_users` table macro is the following:
 
 ```sql
 CREATE TABLE users AS
