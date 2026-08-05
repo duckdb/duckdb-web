@@ -6,38 +6,34 @@ redirect_from:
 title: Lambda Functions
 ---
 
-> Deprecated DuckDB v1.3 deprecated the old lambda single arrow syntax (`x -> x + 1`)
-> in favor of the Python-style syntax (`lambda x : x + 1`).
->
-> DuckDB v1.3 also introduces a new setting to configure the lambda syntax.
->
-> ```sql
-> SET lambda_syntax = 'DEFAULT';
-> SET lambda_syntax = 'ENABLE_SINGLE_ARROW';
-> SET lambda_syntax = 'DISABLE_SINGLE_ARROW';
-> ```
->
-> Currently, `DEFAULT` enables both syntax styles, i.e.,
-> the old single arrow syntax and the Python-style syntax.
->
-> DuckDB v1.5 is the last release supporting the single arrow syntax without explicitly enabling it.
->
-> DuckDB v2.0 will disable the single arrow syntax by default.
->
-> DuckDB v2.1 will remove the `lambda_syntax` flag and fully deprecates the single arrow syntax,
-> so the old behavior will no longer be possible.
+DuckDB lambda functions (a.k.a. 'lambdas' or 'lambda expressions') are expressions that define an inline anonymous function. 
+Lambdas are passed as argument to certain [list functions]({% link docs/current/sql/functions/list.md %}), which evaluate the passed lambda expression against its elements. 
+The value resulting from the lambda's evaluation is then processed further by the list function to create its return value.
 
-Lambda functions enable the use of more complex and flexible expressions in queries.
-DuckDB supports several scalar functions that operate on [`LIST`s]({% link docs/current/sql/data_types/list.md %}) and
-accept lambda functions as parameters
-in the form `lambda ⟨parameter1⟩, ⟨parameter2⟩, ... : ⟨expression⟩`{:.language-sql .highlight}.
-If the lambda function has only one parameter, then the parentheses can be omitted.
-The parameters can have any names.
+Lambdas may also be used in the [`COLUMNS` clause]({% link docs/current/sql/expressions/star.md %}#columns-lambda-function).
+In that context, the lambda function acts as a filter: if it evaluates to `true`, the column is retained, and discarded otherwise.
+`COLUMNS`-clause lambdas have a mandatory parameter that receives the column name. Optionally, a second parameter may be declared that receives the (1-based) column index. 
+
+The syntax for a lambda expression is:
+
+```sql
+lambda ⟨parameters⟩ : ⟨expression⟩
+```
+
+* `⟨parameters⟩`{:.language-sql .highlight} is a comma-separated list of parameter names. Parameters may be given any name, and their name may be referenced in the `⟨expression⟩`{:.language-sql .highlight}.
+* The number of allowed and required parameters depends on the list function to which it is passed.
+* There is always a mandatory parameter that is used by the list function to pass the current element of the list. This is typically the first parameter.
+* There is always an optional parameter used by the list function to pass the (1-based) index of the current element. This is always the last parameter.
+* The expression must be a scalar expression. Additionally, it cannot contain a subquery, table function, and the like.
+* The expression may contain macro invocations. However, only scalar macros are allowed, and only if they do not rely on a subquery.
+
 For example, the following are all valid lambda functions:
 
 * `lambda param : param > 1`{:.language-sql .highlight}
 * `lambda s : contains(concat(s, 'DB'), 'duck')`{:.language-sql .highlight}
 * `lambda acc, x : acc + x`{:.language-sql .highlight}
+
+Lambda functions enable the use of more complex and flexible expressions in queries.
 
 ## Scalar Functions That Accept Lambda Functions
 
@@ -51,14 +47,14 @@ For example, the following are all valid lambda functions:
 | [`apply(list, lambda(x))`](#list_transformlist-lambdax) | Alias for `list_transform`. |
 | [`array_apply(list, lambda(x))`](#list_transformlist-lambdax) | Alias for `list_transform`. |
 | [`array_filter(list, lambda(x))`](#list_filterlist-lambdax) | Alias for `list_filter`. |
-| [`array_reduce(list, lambda(x, y)[, initial_value])`](#list_reducelist-lambdax-y-initial_value) | Alias for `list_reduce`. |
+| [`array_reduce(list, lambda(x,y)[, initial_value])`](#list_reducelist-lambdaxy-initial_value) | Alias for `list_reduce`. |
 | [`array_transform(list, lambda(x))`](#list_transformlist-lambdax) | Alias for `list_transform`. |
 | [`filter(list, lambda(x))`](#list_filterlist-lambdax) | Alias for `list_filter`. |
 | [`list_apply(list, lambda(x))`](#list_transformlist-lambdax) | Alias for `list_transform`. |
 | [`list_filter(list, lambda(x))`](#list_filterlist-lambdax) | Constructs a list from those elements of the input `list` for which the `lambda` function returns `true`. DuckDB must be able to cast the `lambda` function's return type to `BOOL`. The return type of `list_filter` is the same as the input list's. See [`list_filter` examples]({% link docs/current/sql/functions/lambda.md %}#list_filter-examples). |
-| [`list_reduce(list, lambda(x, y)[, initial_value])`](#list_reducelist-lambdax-y-initial_value) | Reduces all elements of the input `list` into a single scalar value by executing the `lambda` function on a running result and the next list element. The `lambda` function has an optional `initial_value` argument. See [`list_reduce` examples]({% link docs/current/sql/functions/lambda.md %}#list_reduce-examples). |
+| [`list_reduce(list, lambda(x,y)[, initial_value])`](#list_reducelist-lambdaxy-initial_value) | Reduces all elements of the input `list` into a single scalar value by executing the `lambda` function on a running result and the next list element. The `lambda` function has an optional `initial_value` argument. See [`list_reduce` examples]({% link docs/current/sql/functions/lambda.md %}#list_reduce-examples). |
 | [`list_transform(list, lambda(x))`](#list_transformlist-lambdax) | Returns a list that is the result of applying the `lambda` function to each element of the input `list`. The return type is defined by the return type of the `lambda` function. See [`list_transform` examples]({% link docs/current/sql/functions/lambda.md %}#list_transform-examples). |
-| [`reduce(list, lambda(x, y)[, initial_value])`](#list_reducelist-lambdax-y-initial_value) | Alias for `list_reduce`. |
+| [`reduce(list, lambda(x,y)[, initial_value])`](#list_reducelist-lambdaxy-initial_value) | Alias for `list_reduce`. |
 
 <!-- markdownlint-enable MD056 -->
 
@@ -71,7 +67,7 @@ For example, the following are all valid lambda functions:
 | **Result** | `[5]` |
 | **Aliases** | `array_filter`, `filter` |
 
-#### `list_reduce(list, lambda(x, y)[, initial_value])`
+#### `list_reduce(list, lambda(x,y)[, initial_value])`
 
 <div class="nostroke_table"></div>
 
@@ -295,14 +291,39 @@ INITIAL - 1 - a - 2 - b - 3 - c - 4 - d
 
 ## Limitations
 
-Subqueries in lambda expressions are currently not supported.
-For example:
+* Subqueries in lambda expressions are currently not supported.
+  For example:
 
-```sql
-SELECT list_apply([1, 2, 3], lambda x: (SELECT 42) + x);
-```
+  ```sql
+  SELECT list_apply([1, 2, 3], lambda x: (SELECT 42) + x);
+  ```
+  
+  ```console
+  Binder Error:
+  subqueries in lambda expressions are not supported
+  ```
+2) The expression can contain macro calls, but only if the macro is a scalar macro. In addition, the macro must not contain a subquery or rely on another macro that contains a subquery.
+3) lambda functions must be defined inline as argument to the list function. You cannot return a lambda function from a macro (but you can invoke a macro in the lambda's expression).
 
-```console
-Binder Error:
-subqueries in lambda expressions are not supported
-```
+## Deprecated Syntax
+
+> Deprecated DuckDB v1.3 deprecated the old lambda single arrow syntax (`x -> x + 1`)
+> in favor of the Python-style syntax (`lambda x : x + 1`).
+>
+> DuckDB v1.3 also introduces a new setting to configure the lambda syntax.
+>
+> ```sql
+> SET lambda_syntax = 'DEFAULT';
+> SET lambda_syntax = 'ENABLE_SINGLE_ARROW';
+> SET lambda_syntax = 'DISABLE_SINGLE_ARROW';
+> ```
+>
+> Currently, `DEFAULT` enables both syntax styles, i.e.,
+> the old single arrow syntax and the Python-style syntax.
+>
+> DuckDB v1.5 is the last release supporting the single arrow syntax without explicitly enabling it.
+>
+> DuckDB v2.0 will disable the single arrow syntax by default.
+>
+> DuckDB v2.1 will remove the `lambda_syntax` flag and fully deprecates the single arrow syntax,
+> so the old behavior will no longer be possible.
