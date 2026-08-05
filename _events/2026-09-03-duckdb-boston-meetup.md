@@ -29,7 +29,7 @@ Please submit your talk proposals until Aug 10 (Monday) 23:59 anywhere-on-earth 
 
 ## Attendance
 
-Attendance is free but **please RSVP on [Luma](https://luma.com/kfgc4vej) as soon as you know that you are attending,** so we can get a good estimate for the attendance.
+Attendance is free but **please register on [Luma](https://luma.com/kfgc4vej) as soon as you know that you are attending,** so we can get a good estimate for the attendance.
 
 ## Timetable
 
