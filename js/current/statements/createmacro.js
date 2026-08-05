@@ -1,4 +1,27 @@
 
+function GenerateMacroParams(options = {}) {
+	return Sequence([
+		Keyword("("),
+		Optional(
+			Sequence([
+				OneOrMore(Sequence([
+					Expression("param-name"),
+					Optional(Expression("type"), "skip")
+				]), Keyword(",")),
+				Optional(Keyword(","), "skip")
+			]),
+			"skip"
+		),
+		ZeroOrMore(Sequence([
+			Expression("param-name"),
+			Optional(Expression("type"), "skip"),
+			Keyword(":="),
+			Expression("default-value")
+		]), Keyword(",")),
+		Keyword(")")
+	]);
+}
+
 function GenerateCreateMacro(options = {}) {
 	return Diagram([
 		AutomaticStack([
@@ -10,26 +33,16 @@ function GenerateCreateMacro(options = {}) {
 				Keyword("FUNCTION"),
 				]
 			),
+			GenerateIfNotExists(),
 			Optional(Sequence([
 				Expression("schema-name"),
 				Keyword(".")
 			]), "skip"),
 			Expression("macro-name"),
 			OneOrMore(Sequence([
-				Keyword("("),
-				ZeroOrMore(Sequence([
-					Expression("param-name"),
-					], "skip")
-				),
-				ZeroOrMore(Sequence([
-					Expression("param-name"),
-					Keyword(":="),
-					Expression("default-value")
-					], "skip")
-				),
-				Keyword(")"),
+				GenerateMacroParams(),
 				Keyword("AS"),
-				Optional("TABLE"),
+				Optional(Keyword("TABLE"), "skip"),
 				Expression("expr")
 			]), ",")
 		])
