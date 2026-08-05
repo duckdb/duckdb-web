@@ -24,7 +24,7 @@ We’d like to use this milestone to stop for a moment and revisit recent develo
 
 Besides the GitHub stars, the DuckDB community has also experienced a lot of growth in other metrics:
 
-* Each month, duckdb.org now welcomes over 8 million unique visitors – more than double last summer’s numbers. We also see over 2 PB (!) in traffic from millions of extension downloads. [Thanks again to Cloudflare](https://duckdb.foundation/#technical-sponsors) for sponsoring the project.
+* Each month, `duckdb.org` receives traffic from over 8 million unique visitors – more than double last summer’s numbers. We also see over 2 PB (!) in traffic from millions of extension downloads. [Thanks again to Cloudflare](https://duckdb.foundation/#technical-sponsors) for sponsoring the project.
 * DuckDB now has [50M+ monthly downloads in PyPI](https://pypistats.org/packages/duckdb), more than double the 20M we reported last time.
 
 *(As usual, we’d like to emphasize that while we’re happy to see these metrics grow, we are not glorifying them and they are not a target per se in accordance with [Goodhart’s law](https://en.wikipedia.org/wiki/Goodhart%27s_law).)*
