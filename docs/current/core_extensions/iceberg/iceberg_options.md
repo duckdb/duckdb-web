@@ -11,24 +11,26 @@ This page lists the options of the `iceberg` extension: the parameters accepted 
 To make an Iceberg Catalog (not just a single table) known to the system, you'll need to use the `ATTACH` statement.
 The options provided to the `ATTACH` are divided into categories:
 
-| Parameter | Type | Default | Description |
-| `ENDPOINT`                           | `VARCHAR`  | `NULL`               |                     | URL endpoint to communicate with the REST Catalog. |
-| `DEFAULT_SCHEMA`                     | `VARCHAR`  | `NULL`               |                     | The default schema (namespace) to use for the attached catalog.                                                                                                       |
-| `ACCESS_DELEGATION_MODE`             | `VARCHAR`  | `vended_credentials` |                     | Access delegation mode. Allowed values are `vended_credentials` and `none`.                                                                                            |
-| `SUPPORT_NESTED_NAMESPACES`          | `BOOLEAN`  | `false`              |                     | Set to `true` for catalogs that support nested namespaces.                                                                                                             |
-| `STAGE_CREATE_TABLES`                | `BOOLEAN`  | `true`               |                     | Controls whether DuckDB uses staged `CREATE TABLE`. Disable for catalogs that do not support staged table creation.                                                    |
-| `DISABLE_MULTI_TABLE_COMMIT`         | `BOOLEAN`  | `false`              |                     | Disables the multi-table transactions/commit endpoint. Enable for catalogs that reject this endpoint.                                                                  |
-| `SKIP_CREATE_TABLE_METADATA_UPDATES` | `BOOLEAN`  | `false`              |                     | Skips follow-up metadata updates after non-staged `CREATE TABLE`. Enable for catalogs that fully initialize metadata during table creation and reject subsequent updates. |
-| `REMOVE_FILES_ON_DELETE`             | `BOOLEAN`  | `true`               |                     | Controls whether DuckDB removes storage files when a table is dropped.                                                                                                 |
-| `PURGE_REQUESTED`                    | `BOOLEAN`  | `false`              |                     | Sends the [PurgeRequested](https://github.com/apache/iceberg/blob/4b4eb38cf6dda7b43faeb40eb00aa5db424d2ecb/open-api/rest-catalog-open-api.yaml#L1144) parameter when dropping a table. |
-| `ENCODE_ENTIRE_PREFIX`               | `BOOLEAN`  | `false`              |                     | URL-encode the entire path prefix when communicating with the catalog.                                                                                                 |
-| `MAX_TABLE_STALENESS`                | `INTERVAL` | `NULL`               |                     | Prevents unnecessary requests to the Iceberg REST Catalog. Accepts human-readable interval strings such as `10 minutes`, `30 seconds`, or `1 year`.                    |
+| Parameter                            | Type       | Default              | Description                                                                                                                                                                            |
+| ------------------------------------ | ---------- | -------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `ENDPOINT`                           | `VARCHAR`  | `NULL`               | URL endpoint to communicate with the REST Catalog.                                                                                                                                     |
+| `DEFAULT_SCHEMA`                     | `VARCHAR`  | `NULL`               | The default schema (namespace) to use for the attached catalog.                                                                                                                        |
+| `ACCESS_DELEGATION_MODE`             | `VARCHAR`  | `vended_credentials` | Access delegation mode. Allowed values are `vended_credentials` and `none`.                                                                                                            |
+| `SUPPORT_NESTED_NAMESPACES`          | `BOOLEAN`  | `false`              | Set to `true` for catalogs that support nested namespaces.                                                                                                                             |
+| `STAGE_CREATE_TABLES`                | `BOOLEAN`  | `true`               | Controls whether DuckDB uses staged `CREATE TABLE`. Disable for catalogs that do not support staged table creation.                                                                    |
+| `DISABLE_MULTI_TABLE_COMMIT`         | `BOOLEAN`  | `false`              | Disables the multi-table transactions/commit endpoint. Enable for catalogs that reject this endpoint.                                                                                  |
+| `SKIP_CREATE_TABLE_METADATA_UPDATES` | `BOOLEAN`  | `false`              | Skips follow-up metadata updates after non-staged `CREATE TABLE`. Enable for catalogs that fully initialize metadata during table creation and reject subsequent updates.              |
+| `REMOVE_FILES_ON_DELETE`             | `BOOLEAN`  | `true`               | Controls whether DuckDB removes storage files when a table is dropped.                                                                                                                 |
+| `PURGE_REQUESTED`                    | `BOOLEAN`  | `false`              | Sends the [PurgeRequested](https://github.com/apache/iceberg/blob/4b4eb38cf6dda7b43faeb40eb00aa5db424d2ecb/open-api/rest-catalog-open-api.yaml#L1144) parameter when dropping a table. |
+| `ENCODE_ENTIRE_PREFIX`               | `BOOLEAN`  | `false`              | URL-encode the entire path prefix when communicating with the catalog.                                                                                                                 |
+| `MAX_TABLE_STALENESS`                | `INTERVAL` | `NULL`               | Prevents unnecessary requests to the Iceberg REST Catalog. Accepts human-readable interval strings such as `10 minutes`, `30 seconds`, or `1 year`.                                    |
 
 Some parameters enable others, see the list of associated additional parameters below this table.
 
-| Parameter | Type | Default | Accepted options | Description |
-| `ENDPOINT_TYPE`                      | `VARCHAR`  | `NULL`               | `S3_TABLES`, `GLUE` | A common identifier of an Iceberg Catalog type, sets certain default parameters. |
-| `AUTHORIZATION_TYPE`                 | `VARCHAR`  | `OAUTH2`             | `OAUTH2`, `SIGV4`   | The Authorization layer of the Iceberg Catalog to attach to. |
+| Parameter            | Type      | Default  | Accepted options    | Description                                                                      |
+| -------------------- | --------- | -------- | ------------------- | -------------------------------------------------------------------------------- |
+| `ENDPOINT_TYPE`      | `VARCHAR` | `NULL`   | `S3_TABLES`, `GLUE` | A common identifier of an Iceberg Catalog type, sets certain default parameters. |
+| `AUTHORIZATION_TYPE` | `VARCHAR` | `OAUTH2` | `OAUTH2`, `SIGV4`   | The Authorization layer of the Iceberg Catalog to attach to.                     |
 
 ### `Endpoint Type`
 
@@ -38,32 +40,34 @@ For commonly used Iceberg Catalog providers, the `ENDPOINT_TYPE` parameter can b
 
 The parameters set by using the `S3_TABLES` `ENDPOINT_TYPE` are:
 
-| Parameter | Value |
-| `AUTHORIZATION_TYPE` | `SIGV4` |
-| `SIGV4_REGION` | The `REGION` section of the [ARN](https://docs.aws.amazon.com/IAM/latest/UserGuide/reference-arns.html) provided as the `ATTACH` path. |
-| `ENDPOINT` | `<REGION>.s3tables.amazonaws.com/iceberg` |
-| `REMOVE_FILES_ON_DELETE` | `false` (unless explicitly set) |
-| `STAGE_CREATE_TABLES` | `false` (unless explicitly set) |
-| `PURGE_REQUESTED` | `true` (unless explicitly set) |
+| Parameter                | Value                                                                                                                                  |
+| ------------------------ | -------------------------------------------------------------------------------------------------------------------------------------- |
+| `AUTHORIZATION_TYPE`     | `SIGV4`                                                                                                                                |
+| `SIGV4_REGION`           | The `REGION` section of the [ARN](https://docs.aws.amazon.com/IAM/latest/UserGuide/reference-arns.html) provided as the `ATTACH` path. |
+| `ENDPOINT`               | `⟨REGION⟩.s3tables.amazonaws.com/iceberg`{:.language-sql .highlight}                                                                   |
+| `REMOVE_FILES_ON_DELETE` | `false` (unless explicitly set)                                                                                                        |
+| `STAGE_CREATE_TABLES`    | `false` (unless explicitly set)                                                                                                        |
+| `PURGE_REQUESTED`        | `true` (unless explicitly set)                                                                                                         |
 
 #### `Glue`
 
 When using the `GLUE` `ENDPOINT_TYPE`, the `SECRET` parameter of type `VARCHAR` has to be set to the path of an existing S3/AWS `SECRET`.
 The parameters set by using the `GLUE` `ENDPOINT_TYPE` are:
 
-| Parameter | Value |
-| `AUTHORIZATION_TYPE` | `SIGV4` |
-| `ENDPOINT` | `<REGION>.glue.amazonaws.com/iceberg` using the region from the found `SECRET` |
-| `REMOVE_FILES_ON_DELETE` | `false` (unless explicitly set) |
-| `STAGE_CREATE_TABLES` | `false` (unless explicitly set) |
-| `PURGE_REQUESTED` | `true` (unless explicitly set) |
+| Parameter                | Value                                                                                                     |
+| ------------------------ | --------------------------------------------------------------------------------------------------------- |
+| `AUTHORIZATION_TYPE`     | `SIGV4`                                                                                                   |
+| `ENDPOINT`               | `⟨REGION⟩.glue.amazonaws.com/iceberg`{:.language-sql .highlight} using the region from the found `SECRET` |
+| `REMOVE_FILES_ON_DELETE` | `false` (unless explicitly set)                                                                           |
+| `STAGE_CREATE_TABLES`    | `false` (unless explicitly set)                                                                           |
+| `PURGE_REQUESTED`        | `true` (unless explicitly set)                                                                            |
 
 ### `Authorization`
 
 To configure the Authorization layer for connecting to an Iceberg REST Catalog, you'll need to pass the `AUTHORIZATION_TYPE` parameter.
 These are the supported options:
 
-#### `OAUTH2` Authorization options
+#### `OAUTH2` Authorization Options
 
 The additional that can be provided when the `AUTHORIZATION_TYPE` is set to `OAUTH2` are the following.
 
@@ -77,7 +81,7 @@ The additional that can be provided when the `AUTHORIZATION_TYPE` is set to `OAU
 | `DEFAULT_REGION`    | `VARCHAR`  | `NULL`   | The region to add to vended credentials if none is provided by the Catalog. |
 | `TOKEN`             | `VARCHAR`  | `NULL`   | The [Bearer Token](https://datatracker.ietf.org/doc/html/rfc6750) to use instead of making a request to the server. (disables refreshing) |
 
-#### `SIGV4` Authorization options
+#### `SIGV4` Authorization Options
 
 The additional that can be provided when the `AUTHORIZATION_TYPE` is set to `SIGV4` are the following.
 
@@ -111,8 +115,8 @@ The following options can only be passed to a `CREATE SECRET` statement and they
 
 ## Settings
 
-| Setting                          | Type      | Default | Description                                                                                     |
-| -------------------------------- | --------- | ------- | ----------------------------------------------------------------------------------------------- |
+| Setting                          | Type      | Default | Description                                                                                      |
+| -------------------------------- | --------- | ------- | ------------------------------------------------------------------------------------------------ |
 | `unsafe_enable_version_guessing` | `BOOLEAN` | `false` | Allows the extension to guess the latest metadata version when no version or hint file is given. |
 
 
