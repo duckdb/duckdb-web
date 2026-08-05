@@ -31,10 +31,10 @@ docs:
     - Implements TCP connection pool.
     - All network IO operations are performed in asynchronously.
 
-extension_star_count: 11
-extension_star_count_pretty: 11
-extension_download_count: 3821
-extension_download_count_pretty: 3.8k
+extension_star_count: 12
+extension_star_count_pretty: 12
+extension_download_count: 2612
+extension_download_count_pretty: 2.6k
 image: '/images/community_extensions/social_preview/preview_community_extension_curl_httpfs.png'
 layout: community_extension_doc
 ---

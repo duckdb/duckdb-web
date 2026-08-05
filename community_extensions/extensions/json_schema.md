@@ -21,10 +21,10 @@ repo:
   github: query-farm/json_schema
   ref: ff488f3d003b6fc26f6433699a7b1a315ec86e05
 
-extension_star_count: 3
-extension_star_count_pretty: 3
-extension_download_count: 1562
-extension_download_count_pretty: 1.6k
+extension_star_count: 4
+extension_star_count_pretty: 4
+extension_download_count: 862
+extension_download_count_pretty: 862
 image: '/images/community_extensions/social_preview/preview_community_extension_json_schema.png'
 layout: community_extension_doc
 ---

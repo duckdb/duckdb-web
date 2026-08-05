@@ -8,7 +8,7 @@ excerpt: |
 extension:
   name: eurostat
   description: Extension that adds support for reading data from EUROSTAT database using SQL.
-  version: 0.3.0
+  version: 0.4.0
   language: C++
   build: cmake
   excluded_platforms: "windows_amd64_mingw"
@@ -18,7 +18,7 @@ extension:
 
 repo:
   github: ahuarte47/duckdb-eurostat
-  ref: 95cd9a074bb80510d7fd6c6a5abe0941cceb8de6
+  ref: 50edeacba27a018a7e7a8aad25babcae67d9c363
 
 docs:
   hello_world: |
@@ -147,10 +147,10 @@ docs:
     Time filters (e.g. `WHERE time_period >= '2000' AND time_period <= '2010'`) are also supported
     and will be encoded as range filters in the EUROSTAT API.
 
-extension_star_count: 32
-extension_star_count_pretty: 32
-extension_download_count: 1156
-extension_download_count_pretty: 1.2k
+extension_star_count: 34
+extension_star_count_pretty: 34
+extension_download_count: 1004
+extension_download_count_pretty: 1.0k
 image: '/images/community_extensions/social_preview/preview_community_extension_eurostat.png'
 layout: community_extension_doc
 ---
@@ -183,6 +183,7 @@ LOAD {{ page.extension.name }};
 | EUROSTAT_Endpoints              | table         | Returns the list of supported EUROSTAT API Endpoints.                                          | NULL    | [SELECT provider_id, organization, description FROM EUROSTAT_Endpoints();]                                 |
 | EUROSTAT_DataStructure          | table         | Returns information of the data structure of an EUROSTAT Dataflow.                             | NULL    | [SELECT * FROM EUROSTAT_DataStructure('ESTAT', 'DEMO_R_D2JAN', language := 'en');]                         |
 | EUROSTAT_Read                   | table         | Returns the dataset of an EUROSTAT Dataflow.                                                   | NULL    | [SELECT * FROM EUROSTAT_Read('ESTAT', 'DEMO_R_D2JAN') LIMIT 5;]                                            |
+| EUROSTAT_DataDictionary         | table         | NULL                                                                                           | NULL    | NULL                                                                                                       |
 
 ### Overloaded Functions
 

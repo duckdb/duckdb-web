@@ -17,7 +17,7 @@ We would like to use this event to stop for a moment and revisit recent developm
 ## Recent Updates
 
 * We released [DuckDB 1.2.0]({% post_url 2025-02-05-announcing-duckdb-120 %}) and [DuckDB 1.3.0]({% post_url 2025-05-21-announcing-duckdb-130 %}), both packing many new features, performance optimizations and bugfixes.
-* We published the [DuckLake specification](https://ducklake.select/), an open format for SQL-as-a-lakehouse. For details, read the [announcement blog post]({% post_url 2025-05-27-ducklake %}) and its coverage in the [Register](https://www.theregister.com/2025/05/28/duckdb_flips_lakehouse_model_with/).
+* We published the [DuckLake specification](https://ducklake.select/), an open format for SQL-as-a-lakehouse. For details, read the [announcement blog post]({% post_url 2025-05-27-ducklake %}) and its coverage in the [Register](https://www.theregister.com/software/2025/05/28/duckdb-flips-lakehouse-model-with-bring-your-own-compute/1512016).
 * DuckDB now has a [built-in UI]({% post_url 2025-03-12-duckdb-ui %}).
 * DuckDB now supports Iceberg REST Catalog, which also allows it to connect to [Amazon S3 Tables]({% post_url 2025-03-14-preview-amazon-s3-tables %})
 * We published the much-requested [roadmap]({% link roadmap.md %}).

@@ -20,7 +20,7 @@ extension:
 repo:
   github: eddelbuettel/duckdb-mlpack
   andium: 8437d78423e3cfc65f9226606908b301c2314710
-  ref: eb1c65298476621b2cf088a24e6633e453df66f9
+  ref: ead4698674d803909b1f9c01b083ecc7ea586c3a
 
 docs:
   hello_world: |
@@ -34,7 +34,7 @@ docs:
     CREATE TABLE M (key VARCHAR, json VARCHAR);
 
     -- Train model for 'Y' on 'X' using parameters 'Z', store in 'M'
-    CREATE TEMP TABLE A AS SELECT * FROM mlpack_adaboost("X", "Y", "Z", "M");
+    CREATE TEMP TABLE A AS SELECT * FROM mlpack_adaboost_train("X", "Y", "Z", "M");
 
     -- Count by predicted group
     SELECT COUNT(*) as n, predicted FROM A GROUP BY predicted;
@@ -71,8 +71,8 @@ docs:
 
 extension_star_count: 20
 extension_star_count_pretty: 20
-extension_download_count: 1402
-extension_download_count_pretty: 1.4k
+extension_download_count: 847
+extension_download_count_pretty: 847
 image: '/images/community_extensions/social_preview/preview_community_extension_mlpack.png'
 layout: community_extension_doc
 ---

@@ -22,7 +22,7 @@ extension:
     FastAPI-class HTTP framework inside DuckDB — CREATE ROUTE turns SQL into
     typed, validated endpoints; one process is DB + HTTP (+ PDF/renderer via
     companion extensions).
-  version: 0.1.1
+  version: 0.1.2
   language: C++
   build: cmake
   license: MIT
@@ -36,7 +36,7 @@ extension:
 repo:
   github: asubbarao/quackapi
   # Pin to the packaging commit SHA (set by release engineer; never a branch).
-  ref: 32600ee3598dd69aecba6c308c476e44e5bcfce6
+  ref: 398d42cd41d3fb494420063d60b5aa367343d271
 
 docs:
   hello_world: |
@@ -135,9 +135,9 @@ docs:
 
     ## Platforms & build
 
-    Targets **DuckDB v1.5.4**. C++17; depends only on DuckDB-bundled **httplib**
-    and **mbedtls** (no vcpkg, no libcurl). CI excludes wasm and Windows MinGW/rtools/arm64. Signed community
-    binaries for linux/osx are live; windows_amd64 re-opt-in via this descriptor.
+    Targets **DuckDB v1.5.5** only. C++17; depends only on DuckDB-bundled **httplib**
+    and **mbedtls** (no vcpkg, no libcurl). CI builds linux/macOS/windows_amd64;
+    excludes wasm and Windows MinGW/rtools/arm64.
 
     ## Limits (honest)
 
@@ -153,10 +153,10 @@ docs:
     Full reference: https://github.com/asubbarao/quackapi  
     Community page draft: https://github.com/asubbarao/quackapi/blob/main/docs/community-page.md
 
-extension_star_count: 0
-extension_star_count_pretty: 0
-extension_download_count: 477
-extension_download_count_pretty: 477
+extension_star_count: 2
+extension_star_count_pretty: 2
+extension_download_count: 700
+extension_download_count_pretty: 700
 image: '/images/community_extensions/social_preview/preview_community_extension_quackapi.png'
 layout: community_extension_doc
 ---
@@ -206,6 +206,7 @@ LOAD {{ page.extension.name }};
 | quackapi_nack             | scalar        | NULL        | NULL    |          |
 | quackapi_policies         | table         | NULL        | NULL    |          |
 | quackapi_queues           | table         | NULL        | NULL    |          |
+| quackapi_request          | table         | NULL        | NULL    |          |
 | quackapi_routes           | table         | NULL        | NULL    |          |
 | quackapi_serve            | table         | NULL        | NULL    |          |
 | quackapi_servers          | table         | NULL        | NULL    |          |
@@ -229,13 +230,13 @@ This extension does not add any types.
 
 <div class="extension_settings_table"></div>
 
-|              name              |                                                                                                                               description                                                                                                                                | input_type | scope  | aliases |
-|--------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|------------|--------|---------|
-| quackapi_compression           | Enable Accept-Encoding response compression on quackapi_serve (zstd preferred, then gzip). Default true. Overridden by compression named parameter.                                                                                                                      | BOOLEAN    | GLOBAL | []      |
-| quackapi_compression_min_bytes | Minimum response body size (bytes) before compression. Default 256. Overridden by compression_min_bytes named parameter.                                                                                                                                                 | BIGINT     | GLOBAL | []      |
-| quackapi_cors_origins          | CORS allowed origins for quackapi_serve (* or comma-separated list). Empty (default) disables CORS. Overridden by cors_origins named parameter.                                                                                                                          | VARCHAR    | GLOBAL | []      |
-| quackapi_http_client           | Outbound HTTP client for httpfs/route fetches: auto\|curl\|httplib. Default auto prefers curl_httpfs (connection pool, HTTP/2, async IO) and falls back to httplib when unavailable. Overridden by http_client named parameter. Does not change the inbound HTTP server. | VARCHAR    | GLOBAL | []      |
-| quackapi_log_level             | Log verbosity for quackapi_serve: silent\|error\|warn\|info\|debug. Default info. Overridden by log_level named parameter.                                                                                                                                               | VARCHAR    | GLOBAL | []      |
-| quackapi_memory_limit          | Memory limit applied by quackapi_serve (e.g. '4GB', '512MB'). Empty (default): do not clobber a non-default DuckDB memory_limit; only apply the 256MB serve default when nothing was configured. Overridden by memory_limit named parameter.                             | VARCHAR    | GLOBAL | []      |
+|              name              |                                                                                                                                                                     description                                                                                                                                                                     | input_type | scope  | aliases |
+|--------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|------------|--------|---------|
+| quackapi_compression           | Enable Accept-Encoding response compression on quackapi_serve (zstd preferred, then gzip). Default true. Overridden by compression named parameter.                                                                                                                                                                                                 | BOOLEAN    | GLOBAL | []      |
+| quackapi_compression_min_bytes | Minimum response body size (bytes) before compression. Default 256. Overridden by compression_min_bytes named parameter.                                                                                                                                                                                                                            | BIGINT     | GLOBAL | []      |
+| quackapi_cors_origins          | CORS allowed origins for quackapi_serve (* or comma-separated list). Empty (default) disables CORS. Overridden by cors_origins named parameter.                                                                                                                                                                                                     | VARCHAR    | GLOBAL | []      |
+| quackapi_http_client           | Outbound HTTP client for httpfs/route fetches: auto\|curl\|httplib. Default auto prefers curl_httpfs (pool, HTTP/2, async) and falls back to httplib with http_client_reason on /healthz when unavailable. curl fails serve if curl_httpfs cannot INSTALL/LOAD. Overridden by http_client named parameter. Does not change the inbound HTTP server. | VARCHAR    | GLOBAL | []      |
+| quackapi_log_level             | Log verbosity for quackapi_serve: silent\|error\|warn\|info\|debug. Default info. Overridden by log_level named parameter.                                                                                                                                                                                                                          | VARCHAR    | GLOBAL | []      |
+| quackapi_memory_limit          | Memory limit applied by quackapi_serve (e.g. '4GB', '512MB'). Empty (default): do not clobber a non-default DuckDB memory_limit; only apply the 256MB serve default when nothing was configured. Overridden by memory_limit named parameter.                                                                                                        | VARCHAR    | GLOBAL | []      |
 
 

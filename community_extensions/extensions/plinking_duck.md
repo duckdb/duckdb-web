@@ -8,7 +8,7 @@ excerpt: |
 extension:
   name: plinking_duck
   description: Read PLINK 2 genomics file formats and run common genetic analyses directly in SQL
-  version: 0.8.0
+  version: 0.8.2
   language: C++
   build: cmake
   license: MIT
@@ -18,7 +18,7 @@ extension:
 
 repo:
   github: teaguesterling/plinking_duck
-  ref: 8c864c03a8292288e30e07dcc456b095e39a05cd
+  ref: b32b0cde755ee261ad4e25ca6634e9bc1c560786
 
 docs:
   hello_world: |
@@ -73,6 +73,12 @@ docs:
       category) / `genotype_range` for fast carrier lookups — in `orient := 'sample'`
       only the matching subjects are materialized
 
+    **Remote / cloud reads:**
+    - Read `.pgen` filesets directly from `s3://`, `https://`, and other DuckDB
+      filesystems (companions too) — targeted/region queries fetch only the bytes
+      they need via HTTP range reads. `plinking_pgen_io := 'localize'` downloads once
+      for remote full scans. Split-index (`.pgen.pgi`) filesets are read transparently.
+
     All functions support projection pushdown (skip genotype decompression for
     metadata-only queries), parallel scanning, sample subsetting, and region
     filtering. Legacy PLINK 1 formats (.bim/.fam) are auto-detected.
@@ -84,8 +90,8 @@ docs:
 
 extension_star_count: 4
 extension_star_count_pretty: 4
-extension_download_count: 896
-extension_download_count_pretty: 896
+extension_download_count: 790
+extension_download_count_pretty: 790
 image: '/images/community_extensions/social_preview/preview_community_extension_plinking_duck.png'
 layout: community_extension_doc
 ---
@@ -144,9 +150,10 @@ This extension does not add any types.
 
 |              name               |                                                                                                                                                                description                                                                                                                                                                | input_type | scope  | aliases |
 |---------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|------------|--------|---------|
+| plinking_localize_dir           | Directory (local) for temp copies made by plinking_pgen_io := 'localize'. Empty (default) uses DuckDB's temporary_directory, else the current directory. Created if absent (one level only — parent dirs must already exist). Temps are per-query and removed when the query's bind data is destroyed.                                    | VARCHAR    | GLOBAL | []      |
 | plinking_max_matrix_elements    | Maximum genotype matrix elements for orient := 'sample' pre-read (variants x samples). Default 16 billion (~16 GB of int8).                                                                                                                                                                                                               | BIGINT     | GLOBAL | []      |
 | plinking_max_threads            | Maximum threads for parallel scan operations. 0 = default (hardcoded cap of 16), >0 = cap at this value.                                                                                                                                                                                                                                  | BIGINT     | GLOBAL | []      |
-| plinking_pgen_io                | How .pgen bytes are read: 'auto' (default — remote/VFS paths via DuckDB's VFS, local via native fopen), 'native' (always native fopen; errors on remote), 'vfs' (always via DuckDB's VFS, even local), 'localize' (download remote to a temp then native — not yet implemented).                                                          | VARCHAR    | GLOBAL | []      |
+| plinking_pgen_io                | How .pgen bytes are read: 'auto' (default — remote/VFS paths via DuckDB's VFS, local via native fopen), 'native' (always native fopen; errors on remote), 'vfs' (always via DuckDB's VFS, even local), 'localize' (materialize a local temp copy then read natively — best for remote full scans; always copies, even a local source).    | VARCHAR    | GLOBAL | []      |
 | plinking_sample_counts_sparse   | orient := 'sample' + genotypes := 'counts'\|'stats': when true, use the sparse (pgen difflist) accumulation path — reads only the non-hom_ref carriers of rare variants (auto-falls-back to the dense full-decode path per variant). When false, always use the dense path. Toggle to A/B time both; both paths produce identical counts. | BOOLEAN    | GLOBAL | []      |
 | plinking_use_parquet_companions | Auto-discover .pvar.parquet and .psam.parquet companion files. When true, parquet companions are preferred over text formats.                                                                                                                                                                                                             | BOOLEAN    | GLOBAL | []      |
 
