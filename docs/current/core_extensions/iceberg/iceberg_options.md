@@ -69,27 +69,29 @@ These are the supported options:
 
 #### `OAUTH2` Authorization Options
 
-The additional that can be provided when the `AUTHORIZATION_TYPE` is set to `OAUTH2` are the following.
+The additional parameters that can be provided when the `AUTHORIZATION_TYPE` is set to `OAUTH2` are the following.
 
-| Parameter           | Type       | Default  | Description                                   |
-| `SECRET`            | `VARCHAR`  | `NULL`   | The path to a `SECRET` of type `ICEBERG` to get the `CLIENT_ID` and `CLIENT_SECRET` from. |
-| `CLIENT_ID`         | `VARCHAR`  | `NULL`   | [`CLIENT_ID`](https://datatracker.ietf.org/doc/html/rfc6749#section-2.2) used in the OAuth2 authorization request.              |
-| `CLIENT_SECRET`     | `VARCHAR`  | `NULL`   | [`CLIENT_SECRET`](https://datatracker.ietf.org/doc/html/rfc6749#section-2.3.1) used in the OAuth2 authorization request.          |
-| `OAUTH2_SERVER_URI` | `VARCHAR`  | `NULL`   | The endpoint of the OAuth2 server to contact. |
-| `OAUTH2_GRANT_TYPE` | `VARCHAR`  | `NULL`   | The [grant_type](https://datatracker.ietf.org/doc/html/rfc6749#appendix-A.10) to use. |
-| `OAUTH2_SCOPE`      | `VARCHAR`  | `NULL`   | The [scope](https://datatracker.ietf.org/doc/html/rfc6749#section-3.3) to use. |
-| `DEFAULT_REGION`    | `VARCHAR`  | `NULL`   | The region to add to vended credentials if none is provided by the Catalog. |
-| `TOKEN`             | `VARCHAR`  | `NULL`   | The [Bearer Token](https://datatracker.ietf.org/doc/html/rfc6750) to use instead of making a request to the server. (disables refreshing) |
+| Parameter           | Type      | Default | Description                                                                                                                               |
+| ------------------- | --------- | ------- | ----------------------------------------------------------------------------------------------------------------------------------------- |
+| `SECRET`            | `VARCHAR` | `NULL`  | The path to a `SECRET` of type `ICEBERG` to get the `CLIENT_ID` and `CLIENT_SECRET` from.                                                 |
+| `CLIENT_ID`         | `VARCHAR` | `NULL`  | [`CLIENT_ID`](https://datatracker.ietf.org/doc/html/rfc6749#section-2.2) used in the OAuth2 authorization request.                        |
+| `CLIENT_SECRET`     | `VARCHAR` | `NULL`  | [`CLIENT_SECRET`](https://datatracker.ietf.org/doc/html/rfc6749#section-2.3.1) used in the OAuth2 authorization request.                  |
+| `OAUTH2_SERVER_URI` | `VARCHAR` | `NULL`  | The endpoint of the OAuth2 server to contact.                                                                                             |
+| `OAUTH2_GRANT_TYPE` | `VARCHAR` | `NULL`  | The [grant_type](https://datatracker.ietf.org/doc/html/rfc6749#appendix-A.10) to use.                                                     |
+| `OAUTH2_SCOPE`      | `VARCHAR` | `NULL`  | The [scope](https://datatracker.ietf.org/doc/html/rfc6749#section-3.3) to use.                                                            |
+| `DEFAULT_REGION`    | `VARCHAR` | `NULL`  | The region to add to vended credentials if none is provided by the Catalog.                                                               |
+| `TOKEN`             | `VARCHAR` | `NULL`  | The [Bearer Token](https://datatracker.ietf.org/doc/html/rfc6750) to use instead of making a request to the server. (disables refreshing) |
 
 #### `SIGV4` Authorization Options
 
-The additional that can be provided when the `AUTHORIZATION_TYPE` is set to `SIGV4` are the following.
+The additional parameters that can be provided when the `AUTHORIZATION_TYPE` is set to `SIGV4` are the following.
 
-| Parameter            | Type                    | Default  | Description                                   |
-| `SECRET`             | `VARCHAR`               | `NULL`   | The `S3` or `AWS` `SECRET` to use for signing. |
-| `SIGV4_SERVICE`      | `VARCHAR`               | `NULL`   | Override the `SERVICE` for signing requests, otherwise inferred from the `ENDPOINT` parameter. |
-| `SIGV4_REGION`       | `VARCHAR`               | `NULL`   | Override the `REGION` for signing requests, otherwise inferred from the `ENDPOINT` parameter. |
-| `EXTRA_HTTP_HEADERS` | `MAP(VARCHAR, VARCHAR)` | `NULL`   | Extra headers (key-value) sent along with the signing request. |
+| Parameter            | Type                    | Default | Description                                                                                    |
+| -------------------- | ----------------------- | ------- | ---------------------------------------------------------------------------------------------- |
+| `SECRET`             | `VARCHAR`               | `NULL`  | The `S3` or `AWS` `SECRET` to use for signing.                                                 |
+| `SIGV4_SERVICE`      | `VARCHAR`               | `NULL`  | Override the `SERVICE` for signing requests, otherwise inferred from the `ENDPOINT` parameter. |
+| `SIGV4_REGION`       | `VARCHAR`               | `NULL`  | Override the `REGION` for signing requests, otherwise inferred from the `ENDPOINT` parameter.  |
+| `EXTRA_HTTP_HEADERS` | `MAP(VARCHAR, VARCHAR)` | `NULL`  | Extra headers (key-value) sent along with the signing request.                                 |
 
 ## Working with an Attached Catalog
 
