@@ -8,7 +8,7 @@ excerpt: |
 extension:
   name: duckdb_opendalfs
   description: Remote storage filesystem for DuckDB via Apache OpenDAL — S3, GCS, Azure, Hugging Face, WebDAV, SFTP, and more, with DuckDB secret-based auth.
-  version: 0.1.1
+  version: 0.2.0
   language: C++
   build: cmake
   license: MIT
@@ -19,7 +19,7 @@ extension:
 
 repo:
   github: dentiny/duckdb-opendal-filesystem
-  ref: af79119cf4ed533d0a74a3642fb9e0da5dcea948
+  ref: a376914358a47d5b21f7d3c02d4c15de136e2c14
 
 docs:
   hello_world: |
@@ -40,10 +40,10 @@ docs:
     `duckdb_opendalfs` is an extension which supports many backends (S3, GCS, Azure Blob, Hugging Face, etc)
     and secret management via `opendal_<backend>` secret types.
 
-extension_star_count: 4
-extension_star_count_pretty: 4
-extension_download_count: 593
-extension_download_count_pretty: 593
+extension_star_count: 5
+extension_star_count_pretty: 5
+extension_download_count: 582
+extension_download_count_pretty: 582
 image: '/images/community_extensions/social_preview/preview_community_extension_duckdb_opendalfs.png'
 layout: community_extension_doc
 ---
@@ -87,6 +87,16 @@ This extension does not add any types.
 
 <div class="extension_settings_table"></div>
 
-This extension does not add any settings.
+|             name              |                    description                    | input_type | scope  | aliases |
+|-------------------------------|---------------------------------------------------|------------|--------|---------|
+| opendal_io_timeout_ms         | OpenDAL I/O-operation timeout in milliseconds     | UBIGINT    | GLOBAL | []      |
+| opendal_retry_factor          | OpenDAL exponential retry factor                  | DOUBLE     | GLOBAL | []      |
+| opendal_retry_jitter          | Add jitter to OpenDAL retry delays                | BOOLEAN    | GLOBAL | []      |
+| opendal_retry_layer_enabled   | Enable the OpenDAL retry layer                    | BOOLEAN    | GLOBAL | []      |
+| opendal_retry_max_delay_ms    | Maximum OpenDAL retry delay in milliseconds       | UBIGINT    | GLOBAL | []      |
+| opendal_retry_max_times       | Maximum number of OpenDAL retry backoff delays    | UBIGINT    | GLOBAL | []      |
+| opendal_retry_min_delay_ms    | Minimum OpenDAL retry delay in milliseconds       | UBIGINT    | GLOBAL | []      |
+| opendal_timeout_layer_enabled | Enable the OpenDAL timeout layer                  | BOOLEAN    | GLOBAL | []      |
+| opendal_timeout_ms            | OpenDAL control-operation timeout in milliseconds | UBIGINT    | GLOBAL | []      |
 
 

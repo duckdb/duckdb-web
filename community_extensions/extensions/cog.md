@@ -8,7 +8,7 @@ excerpt: |
 extension:
   name: cog
   description: GDAL-free Cloud-Optimized GeoTIFF (COG) reader — query remote rasters in place over HTTP range reads, with STAC catalog integration
-  version: 0.1.0
+  version: 0.3.0
   language: Rust
   build: cargo
   license: MIT
@@ -19,7 +19,7 @@ extension:
 
 repo:
   github: st-layer/duckdb-cog
-  ref: 1d210fd7719ae44fef0ac908f4b3f6386677da52
+  ref: 5057905a3a74b0f3343de05fe2fabcf0fc0d902b
 
 docs:
   hello_world: |
@@ -62,10 +62,10 @@ docs:
     See the [README](https://github.com/st-layer/duckdb-cog) for benchmarks and
     the full SQL surface.
 
-extension_star_count: 1
-extension_star_count_pretty: 1
-extension_download_count: 12
-extension_download_count_pretty: 12
+extension_star_count: 2
+extension_star_count_pretty: 2
+extension_download_count: 147
+extension_download_count_pretty: 147
 image: '/images/community_extensions/social_preview/preview_community_extension_cog.png'
 layout: community_extension_doc
 ---
@@ -114,6 +114,7 @@ LOAD {{ page.extension.name }};
 | RS_Width                | scalar        | NULL        | NULL    |          |
 | RS_WorldToRasterCoord   | scalar        | NULL        | NULL    |          |
 | RS_ZonalStats           | scalar        | NULL        | NULL    |          |
+| cog_cache_stats         | table         | NULL        | NULL    |          |
 | cog_io_bench            | table         | NULL        | NULL    |          |
 | cog_version             | table         | NULL        | NULL    |          |
 | read_cog                | table         | NULL        | NULL    |          |

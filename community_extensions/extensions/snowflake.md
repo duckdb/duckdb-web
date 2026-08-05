@@ -8,7 +8,7 @@ excerpt: |
 extension:
   name: snowflake
   description: Snowflake data source extension - query Snowflake databases directly from DuckDB
-  version: 0.5.0
+  version: 0.5.1
   language: C++
   build: cmake
   license: MIT
@@ -17,7 +17,7 @@ extension:
 
 repo:
   github: iqea-ai/duckdb-snowflake
-  ref: bf861da14bfa5578a02f819dc5a2aadd4bd415d6
+  ref: c4da4b52630c90bd6946ecc3ea106645a2a5dd0d
 
 install_notes: |
   **Important:** This extension requires the ADBC Snowflake driver (a separate shared library) to function.
@@ -80,8 +80,8 @@ docs:
 
 extension_star_count: 58
 extension_star_count_pretty: 58
-extension_download_count: 6129
-extension_download_count_pretty: 6.1k
+extension_download_count: 5245
+extension_download_count_pretty: 5.2k
 image: '/images/community_extensions/social_preview/preview_community_extension_snowflake.png'
 layout: community_extension_doc
 ---

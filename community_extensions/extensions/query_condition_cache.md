@@ -28,10 +28,10 @@ docs:
   extended_description: |
     This extension enhances DuckDB core capability and improves query performance for repeated-query workloads by caching the query conditions.
 
-extension_star_count: 11
-extension_star_count_pretty: 11
-extension_download_count: 647
-extension_download_count_pretty: 647
+extension_star_count: 14
+extension_star_count_pretty: 14
+extension_download_count: 797
+extension_download_count_pretty: 797
 image: '/images/community_extensions/social_preview/preview_community_extension_query_condition_cache.png'
 layout: community_extension_doc
 ---
