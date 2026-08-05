@@ -37,6 +37,7 @@ For commonly used Iceberg Catalog providers, the `ENDPOINT_TYPE` parameter can b
 #### `S3 Tables`
 
 The parameters set by using the `S3_TABLES` `ENDPOINT_TYPE` are:
+
 | Parameter | Value |
 | `AUTHORIZATION_TYPE` | `SIGV4` |
 | `SIGV4_REGION` | The `REGION` section of the [ARN](https://docs.aws.amazon.com/IAM/latest/UserGuide/reference-arns.html) provided as the `ATTACH` path. |
@@ -47,10 +48,12 @@ The parameters set by using the `S3_TABLES` `ENDPOINT_TYPE` are:
 
 #### `Glue`
 
+When using the `GLUE` `ENDPOINT_TYPE`, the `SECRET` parameter of type `VARCHAR` has to be set to the path of an existing S3/AWS `SECRET`.
 The parameters set by using the `GLUE` `ENDPOINT_TYPE` are:
+
 | Parameter | Value |
 | `AUTHORIZATION_TYPE` | `SIGV4` |
-| `ENDPOINT` | `<REGION>.s3tables.amazonaws.com/iceberg` using the region taken from the S3/AWS credentials found with the `SECRET` parameter |
+| `ENDPOINT` | `<REGION>.glue.amazonaws.com/iceberg` using the region from the found `SECRET` |
 | `REMOVE_FILES_ON_DELETE` | `false` (unless explicitly set) |
 | `STAGE_CREATE_TABLES` | `false` (unless explicitly set) |
 | `PURGE_REQUESTED` | `true` (unless explicitly set) |
