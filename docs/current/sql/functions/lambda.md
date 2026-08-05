@@ -12,7 +12,7 @@ The value resulting from the lambda's evaluation is then processed further by th
 
 Lambdas may also be used in the [`COLUMNS` clause]({% link docs/current/sql/expressions/star.md %}#columns-lambda-function).
 In that context, the lambda function acts as a filter: if it evaluates to `true`, the column is retained, and discarded otherwise.
-`COLUMNS` clause lambdas have a mandatory parameter that receives the column name. Optionally, a second parameter may be declared that receives the (1-based) column index. 
+`COLUMNS`-clause lambdas have a mandatory parameter that receives the column name. Optionally, a second parameter may be declared that receives the (1-based) column index. 
 
 The syntax for a lambda expression is:
 
