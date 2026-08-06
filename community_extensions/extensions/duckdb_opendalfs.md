@@ -8,7 +8,7 @@ excerpt: |
 extension:
   name: duckdb_opendalfs
   description: Remote storage filesystem for DuckDB via Apache OpenDAL — S3, GCS, Azure, Hugging Face, WebDAV, SFTP, and more, with DuckDB secret-based auth.
-  version: 0.2.0
+  version: 0.2.1
   language: C++
   build: cmake
   license: MIT
@@ -19,7 +19,7 @@ extension:
 
 repo:
   github: dentiny/duckdb-opendal-filesystem
-  ref: a376914358a47d5b21f7d3c02d4c15de136e2c14
+  ref: 6e1479e7b8ed4f95dfe40273560f5227c5464d4c
 
 docs:
   hello_world: |
@@ -42,8 +42,8 @@ docs:
 
 extension_star_count: 5
 extension_star_count_pretty: 5
-extension_download_count: 582
-extension_download_count_pretty: 582
+extension_download_count: 595
+extension_download_count_pretty: 595
 image: '/images/community_extensions/social_preview/preview_community_extension_duckdb_opendalfs.png'
 layout: community_extension_doc
 ---

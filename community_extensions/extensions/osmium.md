@@ -34,8 +34,8 @@ docs:
 
 extension_star_count: 26
 extension_star_count_pretty: 26
-extension_download_count: 1054
-extension_download_count_pretty: 1.1k
+extension_download_count: 1003
+extension_download_count_pretty: 1.0k
 image: '/images/community_extensions/social_preview/preview_community_extension_osmium.png'
 layout: community_extension_doc
 ---

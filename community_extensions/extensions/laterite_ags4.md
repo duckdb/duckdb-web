@@ -8,7 +8,7 @@ excerpt: |
 extension:
   name: laterite_ags4
   description: Read AGS4 geotechnical data files as typed, UUID-keyed tables directly from SQL — born-typed columns, deterministic content-addressed keys that join across groups by construction, and an embedded AGS dictionary. A read-only SQL surface. Local, http(s):// and s3:// (with httpfs).
-  version: 0.7.0
+  version: 0.10.0
   language: Rust
   build: cargo
   license: MIT
@@ -35,7 +35,7 @@ repo:
   github: niko86/laterite-duckdb
   # Pin to the release commit SHA once the repo is pushed + tagged (community-
   # extensions pins a SHA, not a branch). Placeholder until then:
-  ref: 1629610de77beab11ead79be36fac4324138e7e7
+  ref: b6ef2debe3ebd6b7c72c81d0dcc9ff7b62e1ee31
 
 docs:
   hello_world: |
@@ -90,6 +90,7 @@ docs:
     | `ags_headings(path)` | `(group, heading, unit, ags_type, sql_type, status, is_key, ordinal)` — the per-heading schema, enriched with the dictionary's KEY status. |
     | `ags_dictionary()` | the embedded standard AGS dictionary as a table (`group`, `heading`, `status`, `ags_type`, `unit`, `description`, …). |
     | `ags_relationships()` | `(child, parent, shared_keys)` — the spec parent→child graph that `_parent_id` follows. |
+    | `ags_rules()` | the AGS4 numbered-rule catalogue (`rule`, `title`, `severity`, `fixable`) — the extension *lists* the rules; the CLI/library *run* them. |
     | `load_ags(path)` | `(seq, stmt)` — CREATE-TABLE DDL to materialise every group into an indexed, repeat-/remote-queryable store. |
 
     Readers stream lazily (≈2048-row vector chunks); a non-conforming numeric cell becomes
@@ -102,8 +103,8 @@ docs:
 
 extension_star_count: 0
 extension_star_count_pretty: 0
-extension_download_count: 718
-extension_download_count_pretty: 718
+extension_download_count: 610
+extension_download_count_pretty: 610
 image: '/images/community_extensions/social_preview/preview_community_extension_laterite_ags4.png'
 layout: community_extension_doc
 ---
@@ -129,16 +130,17 @@ LOAD {{ page.extension.name }};
 
 <div class="extension_functions_table"></div>
 
-|   function_name   | function_type |                                             description                                              |                                                 comment                                                  |                           examples                           |
-|-------------------|---------------|------------------------------------------------------------------------------------------------------|----------------------------------------------------------------------------------------------------------|--------------------------------------------------------------|
-| read_ags          | table         | Read one AGS4 group as a typed table — born-typed columns plus content-addressed _id/_parent_id keys | Local / http(s):// / s3:// (with LOAD httpfs); consumes a sibling .ags.idx for a fast single-group slice | [SELECT loca_id, loca_gl FROM read_ags('site.ags', 'LOCA');] |
-| read_ags_text     | table         | Read one AGS4 group as a typed table from an inline AGS4 string                                      | No filesystem — the input is a VARCHAR (already UTF-8)                                                   | [SELECT * FROM read_ags_text(ags_string, 'LOCA');]           |
-| ags_groups        | table         | List the groups in an AGS4 file with row and heading counts                                          | Returns (group, n_rows, n_headings, parent)                                                              | [SELECT * FROM ags_groups('site.ags');]                      |
-| ags_headings      | table         | The per-heading schema of an AGS4 file, enriched with dictionary KEY status                          | Returns (group, heading, unit, ags_type, sql_type, status, is_key, ordinal)                              | [SELECT * FROM ags_headings('site.ags') LIMIT 5;]            |
-| ags_dictionary    | table         | The embedded standard AGS dictionary as a table                                                      | Returns (group, heading, status, ags_type, unit, description)                                            | [SELECT * FROM ags_dictionary() LIMIT 5;]                    |
-| ags_relationships | table         | The AGS group parent-child (KEY) graph that _parent_id follows                                       | Returns (child, parent, shared_keys)                                                                     | [SELECT * FROM ags_relationships();]                         |
-| load_ags          | table         | Emit CREATE-TABLE DDL to materialise every AGS4 group into an indexed, queryable store               | Returns (seq, stmt) — run the statements to get keyed tables                                             | [SELECT stmt FROM load_ags('site.ags') ORDER BY seq;]        |
-| ags_rules         | table         | NULL                                                                                                 | NULL                                                                                                     | NULL                                                         |
+|   function_name   | function_type |                                             description                                              |                                                   comment                                                    |                               examples                                |
+|-------------------|---------------|------------------------------------------------------------------------------------------------------|--------------------------------------------------------------------------------------------------------------|-----------------------------------------------------------------------|
+| read_ags          | table         | Read one AGS4 group as a typed table — born-typed columns plus content-addressed _id/_parent_id keys | Local / http(s):// / s3:// (with LOAD httpfs); consumes a sibling .ags.idx for a fast single-group slice     | [SELECT loca_id, loca_gl FROM read_ags('site.ags', 'LOCA');]          |
+| read_ags_text     | table         | Read one AGS4 group as a typed table from an inline AGS4 string                                      | No filesystem — the input is a VARCHAR (already UTF-8)                                                       | [SELECT * FROM read_ags_text(ags_string, 'LOCA');]                    |
+| ags_groups        | table         | List the groups in an AGS4 file with row and heading counts                                          | Returns (group, n_rows, n_headings, parent)                                                                  | [SELECT * FROM ags_groups('site.ags');]                               |
+| ags_headings      | table         | The per-heading schema of an AGS4 file, enriched with dictionary KEY status                          | Returns (group, heading, unit, ags_type, sql_type, status, is_key, ordinal)                                  | [SELECT * FROM ags_headings('site.ags') LIMIT 5;]                     |
+| ags_dictionary    | table         | The embedded standard AGS dictionary as a table                                                      | Returns (group, heading, status, ags_type, unit, description)                                                | [SELECT * FROM ags_dictionary() LIMIT 5;]                             |
+| ags_relationships | table         | The AGS group parent-child (KEY) graph that _parent_id follows                                       | Returns (child, parent, shared_keys)                                                                         | [SELECT * FROM ags_relationships();]                                  |
+| ags_rules         | table         | The AGS4 numbered-rule catalogue                                                                     | Returns (rule, title, severity, fixable) — the extension *lists* the rules; the CLI and libraries *run* them | [SELECT * FROM ags_rules() WHERE fixable;]                            |
+| load_ags          | table         | Emit CREATE-TABLE DDL to materialise every AGS4 group into an indexed, queryable store               | Returns (seq, stmt) — run the statements to get keyed tables                                                 | [SELECT stmt FROM load_ags('site.ags') ORDER BY seq;]                 |
+| to_duckdb         | table         | Emit ATTACH/CREATE-TABLE/DETACH DDL to persist every AGS4 group as a standalone .duckdb file         | Returns (seq, stmt); the file matches the libraries' to_duckdb() output — keyed by _id/_parent_id            | [SELECT stmt FROM to_duckdb('site.ags', 'site.duckdb') ORDER BY seq;] |
 
 ### Overloaded Functions
 

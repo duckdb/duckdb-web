@@ -134,10 +134,10 @@ docs:
       ;
       ```
 
-extension_star_count: 0
-extension_star_count_pretty: 0
-extension_download_count: 54
-extension_download_count_pretty: 54
+extension_star_count: 12
+extension_star_count_pretty: 12
+extension_download_count: 85
+extension_download_count_pretty: 85
 image: '/images/community_extensions/social_preview/preview_community_extension_stac.png'
 layout: community_extension_doc
 ---

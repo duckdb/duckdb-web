@@ -42,8 +42,8 @@ docs:
 
 extension_star_count: 7
 extension_star_count_pretty: 7
-extension_download_count: 51
-extension_download_count_pretty: 51
+extension_download_count: 87
+extension_download_count_pretty: 87
 image: '/images/community_extensions/social_preview/preview_community_extension_motorsport_telemetry.png'
 layout: community_extension_doc
 ---

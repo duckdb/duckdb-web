@@ -64,8 +64,8 @@ docs:
     - **No union type**: not supported by `orc-rust` upstream
 extension_star_count: 4
 extension_star_count_pretty: 4
-extension_download_count: 142
-extension_download_count_pretty: 142
+extension_download_count: 163
+extension_download_count_pretty: 163
 image: '/images/community_extensions/social_preview/preview_community_extension_orc.png'
 layout: community_extension_doc
 ---

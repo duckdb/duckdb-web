@@ -18,7 +18,7 @@ extension:
 
 repo:
   github: ahuarte47/duckdb-raster
-  ref: 707dd030afd8c9d7b68a2e5f134c4c28918e5df1
+  ref: 5fb30ff6c4dae3a5189e918abc046bab95c9e60c
 
 docs:
   hello_world: |
@@ -383,8 +383,8 @@ docs:
 
 extension_star_count: 52
 extension_star_count_pretty: 52
-extension_download_count: 665
-extension_download_count_pretty: 665
+extension_download_count: 622
+extension_download_count_pretty: 622
 image: '/images/community_extensions/social_preview/preview_community_extension_raster.png'
 layout: community_extension_doc
 ---
