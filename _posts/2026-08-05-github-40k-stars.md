@@ -10,8 +10,8 @@ excerpt: "DuckDB just reached 40&nbsp;000 stars on GitHub! Here's what happened 
 
 The [`duckdb/duckdb` GitHub repository](https://github.com/duckdb/duckdb) has just passed 40&nbsp;000 stars!
 
-![Star history]({% link images/blog/star-history-20260805-dark.png %}){: .darkmode-img }
-![Star history]({% link images/blog/star-history-20260805-light.png %}){: .lightmode-img }
+![Star history]({% link images/blog/star-history-20260805-dark.svg %}){: .darkmode-img }
+![Star history]({% link images/blog/star-history-20260805-light.svg %}){: .lightmode-img }
 
 We’d like to use this milestone to stop for a moment and revisit recent developments in the DuckStack ecosystem since last summer (2025), when we surpassed [30 000 stars](https://duckdb.org/2025/06/06/github-30k-stars).
 

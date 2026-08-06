@@ -1,0 +1,67 @@
+{% comment %}
+	Blog post card.
+	include.item          post object (required)
+	include.extra_class   extra class names for the card (optional)
+	include.default_thumb fallback thumbnail path (optional)
+{% endcomment %}
+
+{% assign item = include.item %}
+{% assign cfg = site.data.post_sources %}
+
+{% assign tag_classes = "" %}
+{% for tag in item.tags %}
+	{% assign tag_classes = tag_classes | append: tag | slugify | append: " " %}
+{% endfor %}
+
+{% if item.external_post_url %}
+	{% assign is_external = true %}
+	{% assign post_link = item.external_post_url %}
+	{% assign link_target = "_blank" %}
+	{% assign source_domain = item.external_post_url | extract_domain %}
+{% else %}
+	{% assign is_external = false %}
+	{% assign post_link = item.url %}
+	{% assign link_target = "_self" %}
+	{% assign source_domain = cfg.default_domain %}
+{% endif %}
+
+{% assign source = cfg.sources[source_domain] %}
+{% assign source_icon = source.icon | default: cfg.fallback_icon %}
+{% assign source_label = source.label | default: source_domain %}
+{% assign thumb = item.thumb | default: include.default_thumb | default: "/images/blog/thumbs/placeholder-1.svg" %}
+
+<div class="postpreview {{ tag_classes }}{% if is_external %} external-post{% endif %}{% if include.extra_class %} {{ include.extra_class }}{% endif %}" data-title="{{ item.title | escape }}" data-source="{{ source_domain }}">
+	<a href="{{ post_link }}" title="{{ item.title | escape }}" class="blocklink" target="{{ link_target }}"{% if is_external %} rel="noopener noreferrer"{% endif %}></a>
+
+	<div class="postimg custom">
+		<img src="{{ thumb }}" alt="{{ item.title | escape }}" class="zoom-image" loading="lazy">
+	</div>
+
+	<div class="postdetails">
+		<h3>{{ item.title }}</h3>
+
+		<div class="meta">
+			<div class="date">{{ item.date | date: "%Y-%m-%d" }}</div>
+			{% if item.tags.size > 0 %}
+				<div class="tags">
+					{% for tag in item.tags %}<span>{{ tag }}</span>{% endfor %}
+				</div>
+			{% endif %}
+			{% if is_external %}
+				<div class="external-source">{{ source_label }}<svg class="icon"><use href="#link-external-02"></use></svg></div>
+			{% endif %}
+		</div>
+
+		{% if item.author %}
+			{% assign author_entry = site.data.authors[item.author] %}
+			<div class="byline">
+				{% if author_entry.picture %}
+					<img src="{{ author_entry.picture }}" alt="" class="source-icon author-avatar" loading="lazy">
+				{% else %}
+					<svg class="icon source-icon"><use href="#{{ source_icon }}"></use></svg>
+				{% endif %}
+				<div class="author"><span>{{ item.author }}</span></div>
+			</div>
+		{% endif %}
+	</div>
+</div>

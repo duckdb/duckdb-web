@@ -16,7 +16,9 @@ redirect_from:
 {% endfor %}
 {% assign unique_tags = all_tags | split: "," | uniq | sort %}
 
-<div class="wrap">
+<div class="wrap pagetitle">
+	<h1>{{ page.title }}</h1>
+
 	<div class="controls filterbar" data-all-available="{{ unique_tags | join: ', ' }}">
 		<input type="text" id="search-input" placeholder="Search...">
 		<!--
@@ -59,19 +61,20 @@ redirect_from:
 					{% endif %}
 				</div>
 				<div class="postdetails">
-					{% if event.tags %}
-					<div class="tags">
-						<span class="eventdate">{{ event.date | date: "%Y-%m-%d" }}</span>
-						{% for tag in event.tags %}
-							<span class="tag">{{ tag }}</span>
-						{% endfor %}
-					</div>
-					{% endif %}
 					<h3>{{ event.title }}</h3>
 					<div class="meta">
-						<div class="venue">{{ event.venue }}</div>
-						<div class="author">{{ event.author }}</div>
+						<div class="date">{{ event.date | date: "%Y-%m-%d" }}</div>
+						{% if event.tags %}
+							<div class="tags">
+								{% for tag in event.tags %}<span>{{ tag }}</span>{% endfor %}
+							</div>
+						{% endif %}
 					</div>
+					{% if event.venue %}
+						<div class="byline">
+							<div class="venue">{{ event.venue }}</div>
+						</div>
+					{% endif %}
 				</div>
 			</div>
 		{% endfor %}

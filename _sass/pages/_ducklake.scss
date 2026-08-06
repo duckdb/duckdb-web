@@ -357,10 +357,6 @@ body.landing{
 	
 }
 
-.newswrap .postwrap .infoline .icon{
-	background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='58' height='58' fill='none' viewBox='0 0 58 58'%3E%3Cpath fill='%230D0D0D' d='M29.04.257C13.193.257.297 13.152.297 29c0 15.848 12.896 28.743 28.743 28.743 15.848 0 28.743-12.895 28.743-28.743C57.783 13.152 44.888.257 29.04.257Z'/%3E%3Cpath fill='%232EAFFF' fill-rule='evenodd' d='M26.603 15.4c5.226 0 9.773 2.804 12.244 6.989h2.583v.015c3.565 0 6.572 2.867 6.58 6.506h.015c0 3.615-2.965 6.58-6.58 6.58h-1.912c-2.165 4.738-6.848 8.084-12.34 8.308l-.59.012-.731-.019c-7.51-.38-13.473-6.58-13.474-14.185v-.017c0-7.85 6.354-14.204 14.205-14.204v.014Zm0 4.312c-5.446 0-9.877 4.417-9.877 9.877v.017c0 5.445 4.416 9.877 9.877 9.877a9.876 9.876 0 0 0 9.395-6.822l.484-1.498h4.962c1.206 0 2.245-1.02 2.253-2.238h-.014c0-1.195-.998-2.209-2.253-2.209h-5.28l-.575-1.256a9.853 9.853 0 0 0-8.972-5.748Z' clip-rule='evenodd'/%3E%3C/svg%3E");
-}
-
 @keyframes spin {
 	0% { transform: translate(-50%, -50%) rotate(0deg); }
 	100% { transform: translate(-50%, -50%) rotate(360deg); }
@@ -722,11 +718,6 @@ body.manifesto{
 		margin: 0;
 		padding-left: 20px;
 	}
-	ol li,
-	ul li,
-	p{
-		@include body-large();
-	}
 	p + h4{
 		margin-top: 2em;
 	}
@@ -738,6 +729,14 @@ body.manifesto{
 			width: 100%;
 			height: auto;
 		}
+	}
+}
+
+body.manifesto{
+	ol li,
+	ul li,
+	p{
+		@include body-large();
 	}
 }
 
@@ -1077,9 +1076,6 @@ div.highlight {
 /** SPECIAL DUCKLAKE DARKMODE STYLES **/
 
 html.darkmode {
-	body .newswrap .postwrap .infoline .icon{
-		background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 38.177 38'%3E%3Cpath d='M19 0C8.507 0 0 8.507 0 19s8.507 19 19 19 19-8.507 19-19S29.493 0 19 0Z' style='fill:%232eafff;fill-rule:evenodd'/%3E%3Cpath d='M16.603 9.608a9.31 9.31 0 0 1 8.075 4.62h1.727c2.375 0 4.361 1.9 4.361 4.318 0 2.375-1.943 4.361-4.361 4.361h-1.252a9.326 9.326 0 0 1-8.161 5.484h-.864c-4.966-.259-8.895-4.361-8.895-9.37 0-5.182 4.189-9.414 9.37-9.414Zm0 2.85c-3.584 0-6.52 2.936-6.52 6.52a6.513 6.513 0 0 0 6.508 6.52h.012c2.893 0 5.355-1.9 6.218-4.491l.302-.993h3.282c.777 0 1.468-.691 1.468-1.468s-.648-1.468-1.468-1.468h-3.498l-.389-.82c-1.036-2.245-3.282-3.8-5.916-3.8Z' style='fill-rule:evenodd;fill:%231d1d1b'/%3E%3C/svg%3E")!important;
-	}
 	.banner .close{
 		filter: invert(0);
 	}
