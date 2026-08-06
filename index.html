@@ -203,49 +203,10 @@ To add a banner, set banner: true in the front matter and define the banner cont
 	<div class="wrap">
 		<h2 class="display-2">Read our engineering blog</h2>
 		<div class="newstileswrap">
-			{% for post in site.posts limit:2 %}
+			{% for post in site.posts limit:3 %}
 				{% assign random_number = forloop.index | modulo: 3 | plus: 1 %}
-				{% assign tag_classes = post.tags | join: ' ' | downcase | slugify %}
-				{% if post.external_post_url %}
-					{% assign is_external = true %}
-					{% assign post_link = post.external_post_url %}
-					{% assign link_target = "_blank" %}
-					{% assign link_rel = "noopener noreferrer" %}
-					{% assign source_domain = post.external_post_url | extract_domain %}
-				{% else %}
-					{% assign is_external = false %}
-					{% assign post_link = post.url %}
-					{% assign link_target = "_self" %}
-					{% assign link_rel = "" %}
-					{% assign source_domain = "duckdb.org" %}
-				{% endif %}
-				<div class="postpreview {{ tag_classes }}{% if is_external %} external-post{% endif %}" data-title="{{ post.title | escape }}" data-source="{{ source_domain }}">
-					<a href="{{ post_link }}" class="blocklink" title="{{ post.title }}" target="{{ link_target }}"{% if link_rel != "" %} rel="{{ link_rel }}"{% endif %}></a>
-					<div class="postimg custom">
-						{% if post.thumb %}
-							<img src="{{ post.thumb }}" alt="{{ post.title }}" class="zoom-image"/>
-						{% else %}
-							<img src="/images/blog/thumbs/placeholder-{{ random_number }}.svg" alt="Placeholder" class="zoom-image"/>
-						{% endif %}
-					</div>
-					<div class="postdetails">
-						{% if post.tags %}
-						<div class="tags">
-							{% for tag in post.tags %}
-								<span class="tag">{{ tag }}</span>
-							{% endfor %}
-						</div>
-						{% endif %}
-						<h3 class="headline-3">{{ post.title }}</h3>
-						<div class="meta text-secondary-color body-small">
-							{% if is_external %}
-								<div class="external-source">{{ post.external_post_url | extract_domain }}<svg class="icon"><use href="#link-external-02"></use></svg></div>
-							{% endif %}
-							<div class="date">{{ post.date | date: "%Y-%m-%d" }}</div>
-							<div class="author">{{ post.author | default: "Unknown Author" }}</div>
-						</div>
-					</div>
-				</div>
+				{% capture placeholder_thumb %}/images/blog/thumbs/placeholder-{{ random_number }}.svg{% endcapture %}
+				{% include post_card.html item=post default_thumb=placeholder_thumb %}
 			{% endfor %}
 		</div>
 		<a href="{{ site.url }}/news" class="button transparent arrow-right">

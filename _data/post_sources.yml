@@ -1,0 +1,20 @@
+# Maps a post source domain to its display label and sprite symbol id.
+# Add a new entry here plus a matching <symbol id="source-..."> in
+# _includes/icons/sources.svg to support another source.
+# sources.svg is hand-maintained - the generated sprite.svg is never touched.
+
+# Source used for posts hosted on this site itself.
+default_domain: duckdb.org
+
+fallback_icon: source-duckdb
+
+sources:
+  duckdb.org:
+    label: DuckDB
+    icon: source-duckdb
+  ducklabs.com:
+    label: DuckLabs
+    icon: source-ducklabs
+  ducklake.select:
+    label: DuckLake
+    icon: source-ducklake

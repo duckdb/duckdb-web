@@ -89,10 +89,16 @@
 								
 								{% if page.author and page.event == false or page.collection != "events" %}
 									<div class="infoline">
-										<div class="icon">
-											{% assign author = site.data.authors[page.author] %}
+										{% assign author = site.data.authors[page.author] %}
+										{% assign cfg = site.data.post_sources %}
+										{% assign source = cfg.sources[cfg.default_domain] %}
+										{% assign use_sprite = false %}
+										{% unless author %}{% if page.collection != "science" %}{% assign use_sprite = true %}{% endif %}{% endunless %}
+										<div class="icon{% if use_sprite %} spriteicon{% endif %}">
 											{% if author %}
 												<img src="{{ author.picture }}" alt="Author Avatar">
+											{% elsif use_sprite %}
+												<svg class="source-icon"><use href="#{{ source.icon | default: cfg.fallback_icon }}"></use></svg>
 											{% endif %}
 										</div>
 										<div>

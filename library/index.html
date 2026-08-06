@@ -16,13 +16,10 @@ redirect_from:
 {% endfor %}
 {% assign unique_tags = all_tags | split: "," | uniq | sort %}
 
-<div class="wrap">
+<div class="wrap pagetitle">
+	<h1>{{ page.title }}</h1>
+
 	<div class="controls filterbar" data-all-available="{{ unique_tags | join: ', ' }}">
-		<input type="text" id="search-input" placeholder="Search...">
-		<button type="button" class="filter-toggle" aria-label="Filter">
-			<svg class="icon icon-filter"><use href="#filter-funnel-01"></use></svg>
-			<svg class="icon icon-close"><use href="#x-close"></use></svg>
-		</button>
 		<div class="filter-group" data-filter-key="category">
 			<span class="filter-group-label">Category</span>
 			<div class="filtertags" data-attribute="data-category">
@@ -57,6 +54,11 @@ redirect_from:
 				</div>
 			</div>
 		</div>
+		<input type="text" id="search-input" placeholder="Search...">
+		<button type="button" class="filter-toggle" aria-label="Filter">
+			<svg class="icon icon-filter"><use href="#filter-funnel-01"></use></svg>
+			<svg class="icon icon-close"><use href="#x-close"></use></svg>
+		</button>
 		<div class="filter-overlay"></div>
 	</div>
 </div>
@@ -114,21 +116,23 @@ redirect_from:
 					{% endif %}
 				</div>
 				<div class="postdetails">
-					{% if library_item.tags %}
-					<div class="tags">
-						{% for tag in library_item.tags %}
-							<span class="tag">{{ tag }}</span>
-						{% endfor %}
-						{% if library_item.length %}
-						  <span class="length">{{ library_item.length }}</span>
-						{% endif %}
-					</div>
-					{% endif %}
 					<h3>{{ library_item.title }}</h3>
 					<div class="meta">
 						<div class="date">{{ library_item.date | date: "%Y-%m-%d" }}</div>
-						<div class="author">{{ library_item.author }}</div>
+						{% if library_item.tags %}
+							<div class="tags">
+								{% for tag in library_item.tags %}<span>{{ tag }}</span>{% endfor %}
+							</div>
+						{% endif %}
+						{% if library_item.length %}
+							<div class="length">{{ library_item.length }}</div>
+						{% endif %}
 					</div>
+					{% if library_item.author %}
+						<div class="byline">
+							<div class="author"><span>{{ library_item.author }}</span></div>
+						</div>
+					{% endif %}
 				</div>
 			</div>
 		{% endfor %}
