@@ -6,7 +6,7 @@ redirect_from:
 title: Geometry Functions
 ---
 
-This section describes the functions for for examining and manipulating [`GEOMETRY`]({% link docs/current/sql/data_types/geometry.md %}) values.
+This section describes the functions for examining and manipulating [`GEOMETRY`]({% link docs/current/sql/data_types/geometry.md %}) values.
 
 > The `spatial` extension provides additional functions for working with `GEOMETRY` values, which are documented in the [Spatial Functions]({% link docs/current/core_extensions/spatial/functions.md %}) section.
 
