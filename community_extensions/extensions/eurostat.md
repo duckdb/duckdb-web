@@ -8,7 +8,7 @@ excerpt: |
 extension:
   name: eurostat
   description: Extension that adds support for reading data from EUROSTAT database using SQL.
-  version: 0.4.0
+  version: 0.5.0
   language: C++
   build: cmake
   excluded_platforms: "windows_amd64_mingw"
@@ -18,7 +18,7 @@ extension:
 
 repo:
   github: ahuarte47/duckdb-eurostat
-  ref: 50edeacba27a018a7e7a8aad25babcae67d9c363
+  ref: ab635823270880d6f668b07a4cda46f00532634a
 
 docs:
   hello_world: |
@@ -149,7 +149,7 @@ docs:
 
 extension_star_count: 34
 extension_star_count_pretty: 34
-extension_download_count: 1004
+extension_download_count: 1014
 extension_download_count_pretty: 1.0k
 image: '/images/community_extensions/social_preview/preview_community_extension_eurostat.png'
 layout: community_extension_doc
