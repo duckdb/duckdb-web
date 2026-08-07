@@ -33,7 +33,7 @@ The functions `enum_code()` and `enum_range_boundary()` are exceptions; they ret
 
 <div class="nostroke_table"></div>
 
-| **Description** | Returns the numeric value backing the given enum value. |
+| **Description** | Returns the (0-based) numeric value backing the given enum value. |
 | **Example** | `enum_code('happy'::mood)` |
 | **Result** | `2` |
 
