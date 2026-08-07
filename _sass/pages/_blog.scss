@@ -1233,7 +1233,7 @@ footer{
 			flex-direction: column;
 			gap: 24px;
 			position: absolute;
-			top: calc(100% + 16px);
+			top: calc(100% + 12px);
 			left: 0;
 			right: 0;
 			z-index: 503;
@@ -1265,7 +1265,11 @@ footer{
 		}
 
 		.filter-modal .filtertags {
-			border: 1px solid var(--main-codebox-border-color, #E6E6E6);
+			width: auto;
+			max-width: none;
+			margin-left: -20px;
+			margin-right: -20px;
+			padding: 0 20px;
 		}
 
 		.filter-overlay {

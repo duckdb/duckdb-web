@@ -224,6 +224,8 @@
 				background: none;
 				transform: none;
 				li a{
+					width: -webkit-fit-content;
+					width: fit-content;
 					padding: 10px 15px;
 				}
 			}
@@ -234,6 +236,9 @@
 	}
 	header .headerline .headercontent .landingmenu nav > div.mobile-only{
 		display: block;
+	}
+	header .headerline .headercontent .landingmenu nav .search_icon{
+		height: 48px;
 	}
 	body.landing header .headerline .headercontent .landingmenu nav .search_icon{
 		display: none;
@@ -477,6 +482,14 @@
 @media only screen and (max-width: 720px) {
 	header .headerline{
 		height: 55px;
+	}
+
+	main.inactive::before {
+		top: 54px;
+	}
+
+	header .headerline .headercontent .landingmenu nav:not(.mobile) {
+		top: 70px;
 	}
 
 	header .headerline .headercontent .options button.mode,
