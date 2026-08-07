@@ -122,7 +122,7 @@ SELECT * FROM iceberg_snapshots(my_catalog.default.t);
 
 ## Scan Options
 
-The following parameters can be passed to `iceberg_column_stats`, `iceberg_metadata`, `iceberg_partition_stats`, `iceberg_snapshots`:
+The following parameters can be passed to `iceberg_scan`, `iceberg_column_stats`, `iceberg_metadata`, `iceberg_partition_stats`, `iceberg_snapshots`:
 
 | Parameter                    | Type        | Default                                    | Description                                                |
 | ---------------------------- | ----------- | ------------------------------------------ | ---------------------------------------------------------- |
