@@ -22,7 +22,7 @@ url: "https://duckdb.org" # the base hostname & protocol for your site, e.g. htt
 # Set current codename of DuckDB and version numbers of DuckDB clients
 # current version information
 current_duckdb_codename: "Variegata"
-current_duckdb_csharp_version: "1.5.3"
+current_duckdb_csharp_version: "1.5.5"
 current_duckdb_dart_version: ""
 current_duckdb_go_version: "1.5.5"
 current_duckdb_go_tag: "v2.10505.0"
@@ -33,10 +33,10 @@ current_duckdb_node_neo_version: "1.5.5"
 current_duckdb_odbc_short_version: "1.5.5"
 current_duckdb_odbc_version: "1.5.5.0"
 current_duckdb_php_version: "1.5.5"
-current_duckdb_r_version: "1.5.4"
+current_duckdb_r_version: "1.5.5"
 current_duckdb_rust_version: "1.5.5"
 current_duckdb_version: "1.5.5"
-current_duckdb_wasm_version: "1.5.4"
+current_duckdb_wasm_version: "1.5.5"
 current_short_duckdb_version: "1.5"
 # LTS version information
 lts_duckdb_codename: "Andium"
@@ -124,7 +124,7 @@ repository: "duckdb/duckdb-web"
 #   - vendor/gems/
 #   - vendor/ruby/
 
-star_count: '40.0k'
+star_count: '40.1k'
 
 toc:
   min_level: 1

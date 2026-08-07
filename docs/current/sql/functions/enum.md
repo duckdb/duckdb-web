@@ -18,11 +18,12 @@ CREATE TYPE mood AS ENUM ('sad', 'ok', 'happy', 'anxious');
 ```
 
 These functions can take `NULL` or a specific value of the type as argument(s).
-With the exception of `enum_range_boundary`, the result depends only on the type of the argument and not on its value.
+Most enum functions return a value that depends only on the type of the argument, and not on its value.
+The functions `enum_code()` and `enum_range_boundary()` are exceptions; they return a value that depends on the argument value, as well as its type.
 
 | Name | Description |
 |:--|:-------|
-| [`enum_code(enum_value)`](#enum_codeenum_value) | Returns the numeric value backing the given enum value. |
+| [`enum_code(enum_value)`](#enum_codeenum_value) | Returns the (0-based) numeric value backing the given enum value. |
 | [`enum_first(enum)`](#enum_firstenum) | Returns the first value of the input enum type. |
 | [`enum_last(enum)`](#enum_lastenum) | Returns the last value of the input enum type. |
 | [`enum_range(enum)`](#enum_rangeenum) | Returns all values of the input enum type as an array. |
@@ -32,7 +33,7 @@ With the exception of `enum_range_boundary`, the result depends only on the type
 
 <div class="nostroke_table"></div>
 
-| **Description** | Returns the numeric value backing the given enum value. |
+| **Description** | Returns the (0-based) numeric value backing the given enum value. |
 | **Example** | `enum_code('happy'::mood)` |
 | **Result** | `2` |
 

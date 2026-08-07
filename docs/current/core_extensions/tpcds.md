@@ -9,7 +9,7 @@ redirect_from:
 title: TPC-DS Extension
 ---
 
-> Warning The `tpcds` extension will change in DuckDB version 2.0 to make the generator compatible with with TPC-DS version 4.
+> Warning The `tpcds` extension will change in DuckDB version 2.0 to make the generator compatible with TPC-DS version 4.
 > See the [related PR](https://github.com/duckdb/duckdb/pull/21746) for more details.
 
 The `tpcds` extension implements the data generator and queries for the [TPC-DS benchmark](https://www.tpc.org/tpcds/).
