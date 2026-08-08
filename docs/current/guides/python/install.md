@@ -23,12 +23,4 @@ pip install duckdb --upgrade --pre
 
 ## Installing from Source
 
-The latest Python client can be installed from source from the [`tools/pythonpkg` directory in the DuckDB GitHub repository](https://github.com/duckdb/duckdb/tree/main/tools/pythonpkg).
-
-```bash
-BUILD_PYTHON=1 GEN=ninja make
-cd tools/pythonpkg
-python setup.py install
-```
-
-For detailed instructions on how to compile DuckDB from source, see the [Building guide]({% link docs/current/dev/building/python.md %}).
+Follow the [Python build guide]({% link docs/current/dev/building/python.md %}).
