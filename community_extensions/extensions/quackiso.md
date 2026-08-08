@@ -147,10 +147,10 @@ docs:
     URIs and XSD validation are deliberately absent, with the reasoning recorded
     in `docs/adr/`.
 
-extension_star_count: 1
-extension_star_count_pretty: 1
-extension_download_count: 73
-extension_download_count_pretty: 73
+extension_star_count: 2
+extension_star_count_pretty: 2
+extension_download_count: 137
+extension_download_count_pretty: 137
 image: '/images/community_extensions/social_preview/preview_community_extension_quackiso.png'
 layout: community_extension_doc
 ---

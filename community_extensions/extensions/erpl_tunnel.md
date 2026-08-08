@@ -21,10 +21,10 @@ repo:
   github: DataZooDE/erpl-tunnel
   ref: 94def6722e061ad915b6caa91e4a95226090131a
 
-extension_star_count: 1
-extension_star_count_pretty: 1
-extension_download_count: 81
-extension_download_count_pretty: 81
+extension_star_count: 2
+extension_star_count_pretty: 2
+extension_download_count: 141
+extension_download_count_pretty: 141
 image: '/images/community_extensions/social_preview/preview_community_extension_erpl_tunnel.png'
 layout: community_extension_doc
 ---

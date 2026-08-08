@@ -74,8 +74,8 @@ docs:
 
 extension_star_count: 2
 extension_star_count_pretty: 2
-extension_download_count: 857
-extension_download_count_pretty: 857
+extension_download_count: 795
+extension_download_count_pretty: 795
 image: '/images/community_extensions/social_preview/preview_community_extension_anofox_scenario.png'
 layout: community_extension_doc
 ---

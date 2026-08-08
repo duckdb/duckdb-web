@@ -63,8 +63,8 @@ docs:
 
 extension_star_count: 9
 extension_star_count_pretty: 9
-extension_download_count: 1051
-extension_download_count_pretty: 1.1k
+extension_download_count: 994
+extension_download_count_pretty: 994
 image: '/images/community_extensions/social_preview/preview_community_extension_cityjson.png'
 layout: community_extension_doc
 ---
