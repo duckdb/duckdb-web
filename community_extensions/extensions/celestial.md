@@ -8,7 +8,7 @@ excerpt: |
 extension:
   name: celestial
   description: Astronomical coordinates utilities
-  version: 0.2.0
+  version: 0.2.1
   language: C++
   build: cmake
   license: Apache-2.0
@@ -17,8 +17,8 @@ extension:
 
 repo:
   github: lisa-sgs/duckdb-celestial
-  ref: 152bd83e144dd743ef06aca6843164c744e1a7c0
-  andium: 152bd83e144dd743ef06aca6843164c744e1a7c0
+  ref: fcc3ab3615868d219ca4cff5c61e2db8a3c4beb0
+  andium: fcc3ab3615868d219ca4cff5c61e2db8a3c4beb0
 
 docs:
   hello_world: |
@@ -28,8 +28,8 @@ docs:
 
 extension_star_count: 2
 extension_star_count_pretty: 2
-extension_download_count: 1156
-extension_download_count_pretty: 1.2k
+extension_download_count: 729
+extension_download_count_pretty: 729
 image: '/images/community_extensions/social_preview/preview_community_extension_celestial.png'
 layout: community_extension_doc
 ---
