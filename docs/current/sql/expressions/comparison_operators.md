@@ -61,4 +61,16 @@ Note that `BETWEEN` and `NOT BETWEEN` are only equivalent to the examples below 
 | `expression IS NOT NULL` | `false` if expression is `NULL`, `true` otherwise |
 | `expression NOTNULL` | alias for `IS NOT NULL` (non-standard) |
 
+An explicit [collation]({% link docs/current/sql/expressions/collations.md %}) on any input to `BETWEEN` applies to the entire `BETWEEN` expression. This can differ from writing the comparisons separately, where the explicit collation applies only to the comparison that contains it:
+
+```sql
+SELECT
+    'B' NOT BETWEEN ('A' COLLATE NOCASE) AND 'a' AS between_result,
+    'B' < ('A' COLLATE NOCASE) OR 'B' > 'a' AS separate_result;
+```
+
+| between_result | separate_result |
+|:---|:---|
+| true | false |
+
 > For the expression `BETWEEN x AND y`, `x` is used as the lower bound and `y` is used as the upper bound. Therefore, if `x > y`, the result will always be `false`.
