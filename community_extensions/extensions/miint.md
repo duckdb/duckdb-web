@@ -104,8 +104,8 @@ docs:
 
 extension_star_count: 6
 extension_star_count_pretty: 6
-extension_download_count: 851
-extension_download_count_pretty: 851
+extension_download_count: 884
+extension_download_count_pretty: 884
 image: '/images/community_extensions/social_preview/preview_community_extension_miint.png'
 layout: community_extension_doc
 ---

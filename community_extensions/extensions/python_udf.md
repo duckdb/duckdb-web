@@ -68,10 +68,10 @@ docs:
     with DuckDB's core `python` extension.
     The source repository remains `duckdb-python`.
 
-extension_star_count: 5
-extension_star_count_pretty: 5
-extension_download_count: 74
-extension_download_count_pretty: 74
+extension_star_count: 6
+extension_star_count_pretty: 6
+extension_download_count: 209
+extension_download_count_pretty: 209
 image: '/images/community_extensions/social_preview/preview_community_extension_python_udf.png'
 layout: community_extension_doc
 ---
