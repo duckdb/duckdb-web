@@ -14,6 +14,6 @@ redirect_from:
 ---
 
 |-------|-------|
-| **Podcast** | [Data Engineering Podcast by Joe Reis](https://www.dataengineeringpodcast.com/) |
+| **Podcast** | [Data Engineering Podcast](https://www.dataengineeringpodcast.com/) |
 | **Speakers** | [Mark Raasveldt](https://mytherin.github.io/) (DuckLabs) and [Hannes Mühleisen](https://hannes.muehleisen.org/) (DuckLabs) |
 | **Episode site** | [Listen to the podcast episode](https://www.dataengineeringpodcast.com/episodepage/duck-lake-simplifying-the-lakehouse-ecosystem) |
