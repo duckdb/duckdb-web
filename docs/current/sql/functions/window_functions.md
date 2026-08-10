@@ -216,9 +216,13 @@ ordering applies to.
 
 ```sql
 -- Compare each athlete's time in an event with the best time to date
-SELECT event, date, athlete, time
-    first_value(time ORDER BY time DESC) OVER w AS record_time,
-    first_value(athlete ORDER BY time DESC) OVER w AS record_athlete,
+SELECT
+    event,
+    date,
+    athlete,
+    time,
+    first_value(time ORDER BY time ASC) OVER w AS record_time,
+    first_value(athlete ORDER BY time ASC) OVER w AS record_athlete,
 FROM meet_results
 WINDOW w AS (PARTITION BY event ORDER BY datetime)
 ORDER BY ALL
