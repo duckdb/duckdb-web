@@ -186,10 +186,10 @@ docs:
 
     For more information, see the [FineType documentation](https://github.com/meridian-online/finetype).
 
-extension_star_count: 2
-extension_star_count_pretty: 2
-extension_download_count: 1928
-extension_download_count_pretty: 1.9k
+extension_star_count: 3
+extension_star_count_pretty: 3
+extension_download_count: 1432
+extension_download_count_pretty: 1.4k
 image: '/images/community_extensions/social_preview/preview_community_extension_finetype.png'
 layout: community_extension_doc
 ---

@@ -122,10 +122,10 @@ docs:
       zero-copy graphs; they must first be imported through graph-header CSV or
       Parquet files.
 
-extension_star_count: 29
-extension_star_count_pretty: 29
-extension_download_count: 149
-extension_download_count_pretty: 149
+extension_star_count: 34
+extension_star_count_pretty: 34
+extension_download_count: 222
+extension_download_count_pretty: 222
 image: '/images/community_extensions/social_preview/preview_community_extension_duckgql.png'
 layout: community_extension_doc
 ---

@@ -90,8 +90,8 @@ docs:
 
 extension_star_count: 8
 extension_star_count_pretty: 8
-extension_download_count: 1009
-extension_download_count_pretty: 1.0k
+extension_download_count: 947
+extension_download_count_pretty: 947
 image: '/images/community_extensions/social_preview/preview_community_extension_scalarfs.png'
 layout: community_extension_doc
 ---
