@@ -77,4 +77,4 @@ COPY (SELECT 42 AS answer) TO 's3://⟨your-bucket⟩/sample/answer.parquet';
 SELECT * FROM read_parquet('s3://⟨your-bucket⟩/sample/*.parquet');
 ```
 
-The same SeaweedFS gateway also serves an Iceberg REST Catalog for its table buckets. See the [SeaweedFS catalog example]({% link docs/current/core_extensions/iceberg/catalogs.md %}#seaweedfs) to query Iceberg tables through it.
+SeaweedFS also supports Iceberg: table buckets store the table data as Parquet files, and the gateway's built-in Iceberg REST Catalog serves the table metadata. See the [SeaweedFS catalog example]({% link docs/current/core_extensions/iceberg/catalogs.md %}#seaweedfs) to query Iceberg tables through it.

@@ -262,7 +262,7 @@ ATTACH '⟨warehouse⟩' AS lakekeeper_catalog (
 
 ## SeaweedFS
 
-[SeaweedFS](https://github.com/seaweedfs/seaweedfs) table buckets embed an Iceberg REST Catalog in the SeaweedFS S3 gateway. Store the catalog's OAuth2 credentials in an Iceberg secret, and the S3 credentials in an S3 secret so DuckDB can read table data from the same gateway:
+[SeaweedFS](https://github.com/seaweedfs/seaweedfs) table buckets provide both halves of an Iceberg deployment: the embedded Iceberg REST Catalog serves the table metadata, and the table bucket stores the table data as Parquet files behind the same SeaweedFS S3 gateway. Store the catalog's OAuth2 credentials in an Iceberg secret, and the S3 credentials in an S3 secret so DuckDB can read the Parquet files from the same gateway:
 
 ```sql
 CREATE SECRET seaweedfs_secret (
