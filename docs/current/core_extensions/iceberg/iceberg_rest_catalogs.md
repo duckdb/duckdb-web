@@ -209,7 +209,20 @@ ATTACH '⟨table_bucket_name⟩' AS seaweedfs_catalog (
 );
 ```
 
-Reads and writes work with the default `ATTACH` options, including `CREATE TABLE`, `INSERT`, and `DROP TABLE`.
+Reads and writes work with the default `ATTACH` options, including `CREATE SCHEMA`, `CREATE TABLE`, `INSERT`, and `DROP TABLE`:
+
+```sql
+CREATE SCHEMA seaweedfs_catalog.sales;
+CREATE TABLE seaweedfs_catalog.sales.orders (id BIGINT, region VARCHAR, amount DOUBLE);
+INSERT INTO seaweedfs_catalog.sales.orders VALUES (1, 'NA', 12.5), (2, 'EU', 40.0), (3, 'APAC', 99.9);
+
+SELECT region, sum(amount) AS total
+FROM seaweedfs_catalog.sales.orders
+GROUP BY region
+ORDER BY total DESC;
+
+DROP TABLE seaweedfs_catalog.sales.orders;
+```
 
 ### Google Cloud BigLake
 
