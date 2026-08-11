@@ -16,12 +16,12 @@ extension:
     - jrosskopf
 repo:
   github: DataZooDE/anofox-tabular
-  ref: a9d45d1c6a0f0878fcf92c4aca1f2d51fa8b8979
+  ref: 53658d32f3c7e530f9e135640def86243102b824
 
 extension_star_count: 16
 extension_star_count_pretty: 16
-extension_download_count: 869
-extension_download_count_pretty: 869
+extension_download_count: 856
+extension_download_count_pretty: 856
 image: '/images/community_extensions/social_preview/preview_community_extension_anofox_tabular.png'
 layout: community_extension_doc
 ---
@@ -233,29 +233,30 @@ This extension does not add any types.
 
 <div class="extension_settings_table"></div>
 
-|                   name                   |                                        description                                        | input_type | scope  | aliases |
-|------------------------------------------|-------------------------------------------------------------------------------------------|------------|--------|---------|
-| anofox_ner_cache_size                    | LRU cache size for NER results (0 to disable)                                             | BIGINT     | GLOBAL | []      |
-| anofox_ner_device                        | OpenVINO device for NER inference: AUTO (default), CPU, GPU, GPU.0, etc.                  | VARCHAR    | GLOBAL | []      |
-| anofox_ner_model                         | NER model to use (supported: distilbert-en); must be set before the model is first loaded | VARCHAR    | GLOBAL | []      |
-| anofox_pii_deep_validation               | Enable deep validation using libphonenumber for phone numbers (default: false)            | BOOLEAN    | GLOBAL | []      |
-| anofox_pii_default_mask_strategy         | Default masking strategy (REDACT, HASH, PARTIAL, ASTERISK, NONE)                          | VARCHAR    | GLOBAL | []      |
-| anofox_pii_enabled_types                 | Comma-separated list of PII types to detect (empty = all)                                 | VARCHAR    | GLOBAL | []      |
-| anofox_pii_min_confidence                | Minimum confidence threshold for NER-based PII detection (0.0 - 1.0)                      | DOUBLE     | GLOBAL | []      |
-| anofox_tab_email_default_validation      | Default validation mode for anofox_tab_email_is_valid (regex, dns, smtp)                  | VARCHAR    | GLOBAL | []      |
-| anofox_tab_email_dns_timeout_ms          | DNS resolver timeout in milliseconds                                                      | BIGINT     | GLOBAL | []      |
-| anofox_tab_email_dns_tries               | Number of DNS queries to attempt before failing (1-10)                                    | INTEGER    | GLOBAL | []      |
-| anofox_tab_email_regex_pattern           | Regular expression used during email regex validation                                     | VARCHAR    | GLOBAL | []      |
-| anofox_tab_email_smtp_connect_timeout_ms | SMTP connect timeout in milliseconds                                                      | BIGINT     | GLOBAL | []      |
-| anofox_tab_email_smtp_helo_domain        | Domain value used during SMTP EHLO negotiation                                            | VARCHAR    | GLOBAL | []      |
-| anofox_tab_email_smtp_mail_from          | MAIL FROM address presented during SMTP verification                                      | VARCHAR    | GLOBAL | []      |
-| anofox_tab_email_smtp_port               | SMTP port used when connecting to MX hosts                                                | INTEGER    | GLOBAL | []      |
-| anofox_tab_email_smtp_read_timeout_ms    | SMTP read/write timeout in milliseconds                                                   | BIGINT     | GLOBAL | []      |
-| anofox_tab_phonenumber_default_region    | Default region code used when the region hint is NULL                                     | VARCHAR    | GLOBAL | []      |
-| anofox_tab_postal_data_path              | Directory storing libpostal assets                                                        | VARCHAR    | GLOBAL | []      |
-| anofox_tab_trace_enabled                 | Enable anofox tracing output                                                              | BOOLEAN    | GLOBAL | []      |
-| anofox_tab_trace_level                   | Minimum tracing level (trace/debug/info/warn/error/critical/off)                          | VARCHAR    | GLOBAL | []      |
-| anofox_telemetry_enabled                 | Enable or disable anonymous usage telemetry                                               | BOOLEAN    | GLOBAL | []      |
-| anofox_telemetry_key                     | PostHog API key for telemetry                                                             | VARCHAR    | GLOBAL | []      |
+|                   name                   |                                                         description                                                         | input_type | scope  | aliases |
+|------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------|------------|--------|---------|
+| anofox_ner_cache_size                    | LRU cache size for NER results (0 to disable)                                                                               | BIGINT     | GLOBAL | []      |
+| anofox_ner_device                        | OpenVINO device for NER inference: AUTO (default), CPU, GPU, GPU.0, etc.                                                    | VARCHAR    | GLOBAL | []      |
+| anofox_ner_model                         | NER model to use (supported: distilbert-en); must be set before the model is first loaded                                   | VARCHAR    | GLOBAL | []      |
+| anofox_pii_deep_validation               | Enable deep validation using libphonenumber for phone numbers (default: false)                                              | BOOLEAN    | GLOBAL | []      |
+| anofox_pii_default_mask_strategy         | Default masking strategy (REDACT, HASH, PARTIAL, ASTERISK, NONE)                                                            | VARCHAR    | GLOBAL | []      |
+| anofox_pii_enabled_types                 | Comma-separated list of PII types to detect (empty = all)                                                                   | VARCHAR    | GLOBAL | []      |
+| anofox_pii_min_confidence                | Minimum confidence threshold for NER-based PII detection (0.0 - 1.0)                                                        | DOUBLE     | GLOBAL | []      |
+| anofox_tab_email_default_validation      | Default validation mode for anofox_tab_email_is_valid (regex, dns, smtp)                                                    | VARCHAR    | GLOBAL | []      |
+| anofox_tab_email_dns_timeout_ms          | DNS resolver timeout in milliseconds                                                                                        | BIGINT     | GLOBAL | []      |
+| anofox_tab_email_dns_tries               | Number of DNS queries to attempt before failing (1-10)                                                                      | INTEGER    | GLOBAL | []      |
+| anofox_tab_email_regex_pattern           | Regular expression used during email regex validation                                                                       | VARCHAR    | GLOBAL | []      |
+| anofox_tab_email_smtp_connect_timeout_ms | SMTP connect timeout in milliseconds                                                                                        | BIGINT     | GLOBAL | []      |
+| anofox_tab_email_smtp_helo_domain        | Domain value used during SMTP EHLO negotiation                                                                              | VARCHAR    | GLOBAL | []      |
+| anofox_tab_email_smtp_mail_from          | MAIL FROM address presented during SMTP verification                                                                        | VARCHAR    | GLOBAL | []      |
+| anofox_tab_email_smtp_port               | SMTP port used when connecting to MX hosts                                                                                  | INTEGER    | GLOBAL | []      |
+| anofox_tab_email_smtp_read_timeout_ms    | SMTP read/write timeout in milliseconds                                                                                     | BIGINT     | GLOBAL | []      |
+| anofox_tab_phonenumber_default_region    | Default region code used when the region hint is NULL                                                                       | VARCHAR    | GLOBAL | []      |
+| anofox_tab_postal_data_path              | Directory storing libpostal assets                                                                                          | VARCHAR    | GLOBAL | []      |
+| anofox_tab_trace_enabled                 | Enable anofox tracing output                                                                                                | BOOLEAN    | GLOBAL | []      |
+| anofox_tab_trace_level                   | Minimum tracing level (trace/debug/info/warn/error/critical/off)                                                            | VARCHAR    | GLOBAL | []      |
+| anofox_telemetry_enabled                 | Enable or disable anonymous usage telemetry                                                                                 | BOOLEAN    | GLOBAL | []      |
+| anofox_telemetry_key                     | PostHog API key for telemetry                                                                                               | VARCHAR    | GLOBAL | []      |
+| datazoo_banner                           | Show the DataZoo feedback banner when an extension is loaded in an interactive terminal (at most once a day per extension). | BOOLEAN    | GLOBAL | []      |
 
 

@@ -8,7 +8,7 @@ excerpt: |
 extension:
   name: erpl_tunnel
   description: Reach any TCP service from DuckDB through an SSH bastion, Tailscale or NetBird — and publish local ports back onto those networks.
-  version: 2026.07.30
+  version: 2026.08.07
   language: C++
   build: cmake
   license: BSL 1.1
@@ -19,12 +19,12 @@ extension:
 
 repo:
   github: DataZooDE/erpl-tunnel
-  ref: 94def6722e061ad915b6caa91e4a95226090131a
+  ref: 08750ac79a773fd8712c686c091f8ea89c94ceac
 
 extension_star_count: 2
 extension_star_count_pretty: 2
-extension_download_count: 216
-extension_download_count_pretty: 216
+extension_download_count: 237
+extension_download_count_pretty: 237
 image: '/images/community_extensions/social_preview/preview_community_extension_erpl_tunnel.png'
 layout: community_extension_doc
 ---
@@ -78,9 +78,10 @@ This extension does not add any types.
 
 <div class="extension_settings_table"></div>
 
-|          name          |                            description                            | input_type | scope  | aliases |
-|------------------------|-------------------------------------------------------------------|------------|--------|---------|
-| erpl_telemetry_enabled | Enable ERPL telemetry, see https://erpl.io/telemetry for details. | BOOLEAN    | GLOBAL | []      |
-| erpl_telemetry_key     | Telemetry key, see https://erpl.io/telemetry for details.         | VARCHAR    | GLOBAL | []      |
+|          name          |                                                         description                                                         | input_type | scope  | aliases |
+|------------------------|-----------------------------------------------------------------------------------------------------------------------------|------------|--------|---------|
+| datazoo_banner         | Show the DataZoo feedback banner when an extension is loaded in an interactive terminal (at most once a day per extension). | BOOLEAN    | GLOBAL | []      |
+| erpl_telemetry_enabled | Enable ERPL telemetry, see https://erpl.io/telemetry for details.                                                           | BOOLEAN    | GLOBAL | []      |
+| erpl_telemetry_key     | Telemetry key, see https://erpl.io/telemetry for details.                                                                   | VARCHAR    | GLOBAL | []      |
 
 

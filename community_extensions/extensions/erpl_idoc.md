@@ -17,12 +17,12 @@ extension:
     - jrosskopf
 repo:
   github: DataZooDE/erpl-idoc
-  ref: 932869fb8cc0a0d3612d428c19b0d05aa9cf9e72
+  ref: 215ddb6197406d1ecdf65e6daf161b60a76c6e71
 
 extension_star_count: 2
 extension_star_count_pretty: 2
-extension_download_count: 633
-extension_download_count_pretty: 633
+extension_download_count: 637
+extension_download_count_pretty: 637
 image: '/images/community_extensions/social_preview/preview_community_extension_erpl_idoc.png'
 layout: community_extension_doc
 ---
@@ -84,9 +84,10 @@ This extension does not add any types.
 
 <div class="extension_settings_table"></div>
 
-|          name          |                                description                                | input_type | scope  | aliases |
-|------------------------|---------------------------------------------------------------------------|------------|--------|---------|
-| erpl_telemetry_enabled | Enable anonymous ERPL telemetry (opt-out); see https://erpl.io/telemetry. | BOOLEAN    | GLOBAL | []      |
-| erpl_telemetry_key     | PostHog project key for ERPL telemetry.                                   | VARCHAR    | GLOBAL | []      |
+|          name          |                                                         description                                                         | input_type | scope  | aliases |
+|------------------------|-----------------------------------------------------------------------------------------------------------------------------|------------|--------|---------|
+| datazoo_banner         | Show the DataZoo feedback banner when an extension is loaded in an interactive terminal (at most once a day per extension). | BOOLEAN    | GLOBAL | []      |
+| erpl_telemetry_enabled | Enable anonymous ERPL telemetry (opt-out); see https://erpl.io/telemetry.                                                   | BOOLEAN    | GLOBAL | []      |
+| erpl_telemetry_key     | PostHog project key for ERPL telemetry.                                                                                     | VARCHAR    | GLOBAL | []      |
 
 

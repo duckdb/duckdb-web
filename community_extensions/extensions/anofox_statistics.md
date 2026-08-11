@@ -16,12 +16,12 @@ extension:
   requires_toolchains: rust
 repo:
   github: DataZooDE/anofox-statistics
-  ref: v0.8.1
+  ref: v0.9.0
 
 extension_star_count: 14
 extension_star_count_pretty: 14
-extension_download_count: 700
-extension_download_count_pretty: 700
+extension_download_count: 708
+extension_download_count_pretty: 708
 image: '/images/community_extensions/social_preview/preview_community_extension_anofox_statistics.png'
 layout: community_extension_doc
 ---
@@ -396,9 +396,10 @@ This extension does not add any types.
 
 <div class="extension_settings_table"></div>
 
-|           name           |                 description                 | input_type | scope  | aliases |
-|--------------------------|---------------------------------------------|------------|--------|---------|
-| anofox_telemetry_enabled | Enable or disable anonymous usage telemetry | BOOLEAN    | GLOBAL | []      |
-| anofox_telemetry_key     | PostHog API key for telemetry               | VARCHAR    | GLOBAL | []      |
+|           name           |                                                         description                                                         | input_type | scope  | aliases |
+|--------------------------|-----------------------------------------------------------------------------------------------------------------------------|------------|--------|---------|
+| anofox_telemetry_enabled | Enable or disable anonymous usage telemetry                                                                                 | BOOLEAN    | GLOBAL | []      |
+| anofox_telemetry_key     | PostHog API key for telemetry                                                                                               | VARCHAR    | GLOBAL | []      |
+| datazoo_banner           | Show the DataZoo feedback banner when an extension is loaded in an interactive terminal (at most once a day per extension). | BOOLEAN    | GLOBAL | []      |
 
 

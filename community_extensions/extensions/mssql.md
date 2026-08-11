@@ -8,7 +8,7 @@ excerpt: |
 extension:
   name: mssql
   description: "Connect DuckDB to Microsoft SQL Server via native TDS (including TLS)."
-  version: "0.2.2"
+  version: "0.2.3"
   language: "C++"
   build: "cmake"
   licence: "MIT"
@@ -27,45 +27,51 @@ extension:
 
 repo:
   github: "hugr-lab/mssql-extension"
-  ref: "v0.2.2"
+  ref: "v0.2.3"
 
 docs:
   hello_world: |
     INSTALL mssql FROM community;
     LOAD mssql;
-    ATTACH 'mssql://sa:YourStrong!Passw0rd@localhost:1433?database=master&use_encrypt=true' AS ms;
-    SELECT * FROM ms.dbo.table LIMIT 5;
+    ATTACH 'Server=localhost,1433;Database=master;User Id=sa;Password=YourStrong!Passw0rd' AS ms (TYPE mssql);
+    SELECT * FROM ms.dbo.your_table LIMIT 5;
 
   extended_description: |
-    The mssql extension provides a DuckDB connector for Microsoft SQL Server using the native TDS protocol.
+    DuckDB connector for Microsoft SQL Server, Azure SQL and Microsoft Fabric
+    over a native TDS 7.4 implementation — no ODBC, JDBC or FreeTDS required.
+    Attach a server as a DuckDB catalog and query, join, and bulk-load it
+    alongside your local data.
 
-    The extension is experimental and may not cover all edge cases. Please report any issues on the [GitHub repository](https://github.com/hugr-lab/mssql-extension).
+    Documentation: https://hugr-lab.github.io/mssql-extension/
 
-    Features:
-    - Native TDS protocol (no ODBC/JDBC required)
-    - Azure Entra ID authentication (Service Principal, CLI, Device Code, Environment Variables)
-    - Kerberos integrated authentication on POSIX (kinit / keytab / raw credentials) and Windows SSPI (current logon session via secur32.dll)
-    - Azure SQL Database and Microsoft Fabric support
-    - Lazy metadata loading for fast connections
-    - Schema, table, and view catalog integration
-    - Projection, filter, and ORDER BY pushdown
-    - TLS/SSL encrypted connections (encrypt parameter)
-    - INSERT support with RETURNING clause
-    - UPDATE and DELETE support (requires primary key)
-    - Per-catalog connection pooling with configurable limits
-    - Eager ATTACH-time credential validation (opt-out via lazy_validation true)
-    - Custom Application Name propagated to LOGIN7 program_name
-    - DuckDB secret management for credentials
-    - ANSI-compliant connections for DDL commands
-    - COPY TO for bulk data transfer via BCP protocol (SIMD-accelerated UTF-16 transcoding via simdutf)
-    - CREATE TABLE AS SELECT (CTAS) support
-    - Named SQL Server instance resolution via SQL Server Browser (UDP 1434)
-    - XML data type read/write support
+    **Reading.** Attached tables come with schema/table catalog integration,
+    lazy metadata cache, projection / filter / ORDER BY pushdown, and a
+    columnar batch-decoded result path. Reading UTF-8-collated columns skips
+    UTF-16 transcoding entirely (TDS UTF8SUPPORT).
+
+    **Writing.** COPY TO and CTAS ship over the BCP bulk-load protocol with a
+    columnar encoder and up to 8 parallel bulk sessions — about 6× faster
+    out of the box than 0.2.2 on a wide 38M-row table, and ~9× with sized
+    string targets (`MSSQL_VARCHAR(n)` / `MSSQL_NVARCHAR(n)` annotations or
+    `mssql_default_string_length`). Heap and clustered-columnstore targets
+    (rowgroups land compressed directly), TABLOCK decided from the target's
+    actual shape. INSERT with RETURNING, UPDATE/DELETE, transactions with
+    connection pinning.
+
+    **Authentication.** SQL logins, Azure Entra ID (Service Principal, CLI,
+    Device Code), Kerberos on POSIX (kinit/keytab), Windows SSPI, TLS,
+    DuckDB secrets.
+
+    **Operations.** Per-catalog connection pooling, eager ATTACH-time
+    credential validation, named-instance resolution via SQL Server Browser,
+    custom Application Name, XML type support.
+
+    Issues and feature requests: https://github.com/hugr-lab/mssql-extension
 
 extension_star_count: 122
 extension_star_count_pretty: 122
-extension_download_count: 48034
-extension_download_count_pretty: 48.0k
+extension_download_count: 46268
+extension_download_count_pretty: 46.3k
 image: '/images/community_extensions/social_preview/preview_community_extension_mssql.png'
 layout: community_extension_doc
 ---
@@ -120,45 +126,56 @@ This extension does not add any function overloads.
 
 <div class="extension_types_table"></div>
 
-This extension does not add any types.
+|   type_name    | type_size | logical_type | type_category | internal |
+|----------------|----------:|--------------|---------------|----------|
+| MSSQL_NVARCHAR | 16        | VARCHAR      | STRING        | true     |
+| MSSQL_VARCHAR  | 16        | VARCHAR      | STRING        | true     |
 
 ### Added Settings
 
 <div class="extension_settings_table"></div>
 
-|                name                 |                                                     description                                                      | input_type | scope  | aliases |
-|-------------------------------------|----------------------------------------------------------------------------------------------------------------------|------------|--------|---------|
-| mssql_acquire_timeout               | Connection acquire timeout in seconds (0 = fail immediately)                                                         | BIGINT     | GLOBAL | []      |
-| mssql_attach_validation_timeout     | Timeout in seconds for the ATTACH-time credential round trip (0 = inherit mssql_connection_timeout). Spec 047 / US2. | BIGINT     | GLOBAL | []      |
-| mssql_browser_timeout_seconds       | SQL Server Browser UDP query timeout in seconds for named-instance resolution (default: 3)                           | BIGINT     | GLOBAL | []      |
-| mssql_catalog_cache_ttl             | Metadata cache TTL in seconds (0 = manual refresh only)                                                              | BIGINT     | GLOBAL | []      |
-| mssql_connection_cache              | Enable connection pooling and reuse                                                                                  | BOOLEAN    | GLOBAL | []      |
-| mssql_connection_limit              | Maximum connections per attached mssql database                                                                      | BIGINT     | GLOBAL | []      |
-| mssql_connection_timeout            | TCP connection timeout in seconds                                                                                    | BIGINT     | GLOBAL | []      |
-| mssql_convert_varchar_max           | Convert VARCHAR(MAX) to NVARCHAR(MAX) in table scans for UTF-8 compatibility (default: true)                         | BOOLEAN    | GLOBAL | []      |
-| mssql_copy_flush_rows               | Rows before flushing to SQL Server during COPY (default: 100000, 0=no flush until end - high memory)                 | BIGINT     | GLOBAL | []      |
-| mssql_copy_tablock                  | Use TABLOCK hint for COPY/BCP operations (default: false, set true for 15-30% performance)                           | BOOLEAN    | GLOBAL | []      |
-| mssql_ctas_drop_on_failure          | Drop table if CTAS insert phase fails (default: false, table remains for debugging)                                  | BOOLEAN    | GLOBAL | []      |
-| mssql_ctas_text_type                | Text column type for CTAS: NVARCHAR (Unicode, default) or VARCHAR (collation-dependent)                              | VARCHAR    | GLOBAL | []      |
-| mssql_ctas_use_bcp                  | Use BCP protocol for CTAS data transfer (default: true, 2-10x faster than INSERT)                                    | BOOLEAN    | GLOBAL | []      |
-| mssql_dml_batch_size                | Maximum rows per UPDATE/DELETE batch (default: 500, affects parameter count)                                         | BIGINT     | GLOBAL | []      |
-| mssql_dml_max_parameters            | Maximum parameters per UPDATE/DELETE statement (SQL Server limit ~2100)                                              | BIGINT     | GLOBAL | []      |
-| mssql_dml_use_prepared              | Use prepared statements for UPDATE/DELETE operations                                                                 | BOOLEAN    | GLOBAL | []      |
-| mssql_enable_statistics             | Enable statistics collection from SQL Server for query optimizer                                                     | BOOLEAN    | GLOBAL | []      |
-| mssql_exec_invalidate_cache         | Invalidate the catalog cache after DDL executed via mssql_exec() (CREATE/DROP/ALTER/TRUNCATE/RENAME/EXEC)            | BOOLEAN    | GLOBAL | []      |
-| mssql_idle_timeout                  | Idle connection timeout in seconds (0 = no timeout)                                                                  | BIGINT     | GLOBAL | []      |
-| mssql_insert_batch_size             | Maximum rows per INSERT statement (SQL Server limit: 1000)                                                           | BIGINT     | GLOBAL | []      |
-| mssql_insert_max_rows_per_statement | Hard cap on rows per INSERT statement (SQL Server limit: 1000)                                                       | BIGINT     | GLOBAL | []      |
-| mssql_insert_max_sql_bytes          | Maximum SQL statement size in bytes                                                                                  | BIGINT     | GLOBAL | []      |
-| mssql_insert_use_returning_output   | Use OUTPUT INSERTED for RETURNING clause                                                                             | BOOLEAN    | GLOBAL | []      |
-| mssql_login7_max_packet             | TEST-ONLY: max LOGIN7 TDS packet size in bytes for integrated auth (0 = default 4096)                                | BIGINT     | GLOBAL | []      |
-| mssql_metadata_timeout              | Metadata query timeout in seconds (default: 300, 0 = no timeout). Increase for very large catalogs                   | BIGINT     | GLOBAL | []      |
-| mssql_min_connections               | Minimum connections to maintain per context                                                                          | BIGINT     | GLOBAL | []      |
-| mssql_named_instance_resolution     | Enable SQL Server Browser (UDP 1434) resolution of host\instance connection strings                                  | BOOLEAN    | GLOBAL | []      |
-| mssql_order_pushdown                | Enable ORDER BY pushdown to SQL Server (default: false)                                                              | BOOLEAN    | GLOBAL | []      |
-| mssql_query_timeout                 | Query execution timeout in seconds (0 = no timeout, default: 30)                                                     | BIGINT     | GLOBAL | []      |
-| mssql_statistics_cache_ttl_seconds  | Statistics cache TTL in seconds                                                                                      | BIGINT     | GLOBAL | []      |
-| mssql_statistics_level              | Statistics detail level: 0=row count, 1=+histogram min/max, 2=+NDV                                                   | BIGINT     | GLOBAL | []      |
-| mssql_statistics_use_dbcc           | Allow DBCC SHOW_STATISTICS for column statistics (requires permissions)                                              | BOOLEAN    | GLOBAL | []      |
+|                name                 |                                                                                                           description                                                                                                           | input_type | scope  | aliases |
+|-------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|------------|--------|---------|
+| mssql_acquire_timeout               | Connection acquire timeout in seconds (0 = fail immediately)                                                                                                                                                                    | BIGINT     | GLOBAL | []      |
+| mssql_attach_validation_timeout     | Timeout in seconds for the ATTACH-time credential round trip (0 = inherit mssql_connection_timeout). Spec 047 / US2.                                                                                                            | BIGINT     | GLOBAL | []      |
+| mssql_browser_timeout_seconds       | SQL Server Browser UDP query timeout in seconds for named-instance resolution (default: 3)                                                                                                                                      | BIGINT     | GLOBAL | []      |
+| mssql_catalog_cache_ttl             | Metadata cache TTL in seconds (0 = manual refresh only)                                                                                                                                                                         | BIGINT     | GLOBAL | []      |
+| mssql_catalog_native_types          | Report MSSQL_VARCHAR(n)/MSSQL_NVARCHAR(n) for attached string columns instead of VARCHAR (default: true)                                                                                                                        | BOOLEAN    | GLOBAL | []      |
+| mssql_connection_cache              | Enable connection pooling and reuse                                                                                                                                                                                             | BOOLEAN    | GLOBAL | []      |
+| mssql_connection_limit              | Maximum connections per attached mssql database                                                                                                                                                                                 | BIGINT     | GLOBAL | []      |
+| mssql_connection_timeout            | TCP connection timeout in seconds                                                                                                                                                                                               | BIGINT     | GLOBAL | []      |
+| mssql_convert_varchar_max           | Convert VARCHAR(MAX) to NVARCHAR(MAX) in table scans for UTF-8 compatibility (default: true)                                                                                                                                    | BOOLEAN    | GLOBAL | []      |
+| mssql_copy_flush_rows               | Rows per bulk-load batch sent to SQL Server (default: 102400 — SQL Server's threshold for writing compressed columnstore rowgroups directly; 0 = one batch at the end, high memory)                                             | BIGINT     | GLOBAL | []      |
+| mssql_copy_parallel_writers         | Concurrent bulk-load connections a single COPY/CTAS may open (default: 0 = derive from DuckDB's thread count, capped at 8). 1 disables parallel loading. Ignored inside an explicit transaction, where the connection is pinned | BIGINT     | GLOBAL | []      |
+| mssql_copy_tablock                  | TABLOCK hint for COPY/BCP: 'auto' (by target shape — heap on, anything clustered off), 'true', or 'false'                                                                                                                       | VARCHAR    | GLOBAL | []      |
+| mssql_ctas_drop_on_failure          | Drop table if CTAS insert phase fails (default: false, table remains for debugging)                                                                                                                                             | BOOLEAN    | GLOBAL | []      |
+| mssql_ctas_text_type                | Type given to an unannotated VARCHAR column by CTAS and COPY: NVARCHAR (Unicode, default) or VARCHAR (single-byte, needs a UTF-8 collation)                                                                                     | VARCHAR    | GLOBAL | []      |
+| mssql_ctas_use_bcp                  | Use BCP protocol for CTAS data transfer (default: true, 2-10x faster than INSERT)                                                                                                                                               | BOOLEAN    | GLOBAL | []      |
+| mssql_default_string_length         | Length for an unannotated VARCHAR column created by CTAS/COPY (0 = MAX, the default)                                                                                                                                            | BIGINT     | GLOBAL | []      |
+| mssql_default_table_kind            | Shape of a table created by CTAS/COPY: HEAP (default) or COLUMNSTORE                                                                                                                                                            | VARCHAR    | GLOBAL | []      |
+| mssql_dml_batch_size                | Maximum rows per UPDATE/DELETE batch (default: 500, affects parameter count)                                                                                                                                                    | BIGINT     | GLOBAL | []      |
+| mssql_dml_max_parameters            | Maximum parameters per UPDATE/DELETE statement (SQL Server limit ~2100)                                                                                                                                                         | BIGINT     | GLOBAL | []      |
+| mssql_dml_use_prepared              | Use prepared statements for UPDATE/DELETE operations                                                                                                                                                                            | BOOLEAN    | GLOBAL | []      |
+| mssql_enable_statistics             | Enable statistics collection from SQL Server for query optimizer                                                                                                                                                                | BOOLEAN    | GLOBAL | []      |
+| mssql_exec_invalidate_cache         | Invalidate the catalog cache after DDL executed via mssql_exec() (CREATE/DROP/ALTER/TRUNCATE/RENAME/EXEC)                                                                                                                       | BOOLEAN    | GLOBAL | []      |
+| mssql_idle_timeout                  | Idle connection timeout in seconds (0 = no timeout)                                                                                                                                                                             | BIGINT     | GLOBAL | []      |
+| mssql_insert_batch_size             | Maximum rows per INSERT statement (SQL Server limit: 1000)                                                                                                                                                                      | BIGINT     | GLOBAL | []      |
+| mssql_insert_max_rows_per_statement | Hard cap on rows per INSERT statement (SQL Server limit: 1000)                                                                                                                                                                  | BIGINT     | GLOBAL | []      |
+| mssql_insert_max_sql_bytes          | Maximum SQL statement size in bytes                                                                                                                                                                                             | BIGINT     | GLOBAL | []      |
+| mssql_insert_use_returning_output   | Use OUTPUT INSERTED for RETURNING clause                                                                                                                                                                                        | BOOLEAN    | GLOBAL | []      |
+| mssql_login7_max_packet             | TEST-ONLY: max LOGIN7 TDS packet size in bytes for integrated auth (0 = default 4096)                                                                                                                                           | BIGINT     | GLOBAL | []      |
+| mssql_metadata_timeout              | Metadata query timeout in seconds (default: 300, 0 = no timeout). Increase for very large catalogs                                                                                                                              | BIGINT     | GLOBAL | []      |
+| mssql_min_connections               | Minimum connections to maintain per context                                                                                                                                                                                     | BIGINT     | GLOBAL | []      |
+| mssql_named_instance_resolution     | Enable SQL Server Browser (UDP 1434) resolution of host\instance connection strings                                                                                                                                             | BOOLEAN    | GLOBAL | []      |
+| mssql_order_pushdown                | Enable ORDER BY pushdown to SQL Server (default: false)                                                                                                                                                                         | BOOLEAN    | GLOBAL | []      |
+| mssql_query_timeout                 | Query execution timeout in seconds (0 = no timeout, default: 30)                                                                                                                                                                | BIGINT     | GLOBAL | []      |
+| mssql_reset_connection              | Reset session state (temp tables, SET options, open transactions) when a connection returns to the pool; false hands that state to the user                                                                                     | BOOLEAN    | GLOBAL | []      |
+| mssql_statistics_cache_ttl_seconds  | Statistics cache TTL in seconds                                                                                                                                                                                                 | BIGINT     | GLOBAL | []      |
+| mssql_statistics_level              | Statistics detail level: 0=row count, 1=+histogram min/max, 2=+NDV                                                                                                                                                              | BIGINT     | GLOBAL | []      |
+| mssql_statistics_use_dbcc           | Allow DBCC SHOW_STATISTICS for column statistics (requires permissions)                                                                                                                                                         | BOOLEAN    | GLOBAL | []      |
+| mssql_tds_packet_size               | TDS frame size in bytes requested at login, clamped to [512, 32767] (default: 16384)                                                                                                                                            | BIGINT     | GLOBAL | []      |
+| mssql_utf8_collation                | Collation given to VARCHAR columns created by CTAS when the server supports UTF-8 (default: Latin1_General_100_BIN2_UTF8, matching Fabric; empty inherits the database default)                                                 | VARCHAR    | GLOBAL | []      |
+| mssql_utf8_support                  | Advertise the UTF8SUPPORT feature in LOGIN7 so UTF-8 collation columns arrive as UTF-8 instead of UTF-16 (default: true)                                                                                                        | BOOLEAN    | GLOBAL | []      |
 
 

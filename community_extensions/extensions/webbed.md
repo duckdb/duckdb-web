@@ -101,8 +101,8 @@ docs:
 
 extension_star_count: 68
 extension_star_count_pretty: 68
-extension_download_count: 21616
-extension_download_count_pretty: 21.6k
+extension_download_count: 18441
+extension_download_count_pretty: 18.4k
 image: '/images/community_extensions/social_preview/preview_community_extension_webbed.png'
 layout: community_extension_doc
 ---

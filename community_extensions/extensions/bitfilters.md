@@ -25,7 +25,7 @@ repo:
 
 extension_star_count: 8
 extension_star_count_pretty: 8
-extension_download_count: 2175
+extension_download_count: 2170
 extension_download_count_pretty: 2.2k
 image: '/images/community_extensions/social_preview/preview_community_extension_bitfilters.png'
 layout: community_extension_doc

@@ -8,7 +8,7 @@ excerpt: |
 extension:
   name: splunk
   description: Read logs from a Splunk search REST API into OTLP-shaped tables
-  version: 0.1.0
+  version: 0.2.0
   language: C++
   build: cmake
   license: MIT
@@ -18,7 +18,7 @@ extension:
 
 repo:
   github: smithclay/duckdb-splunk
-  ref: 636b92030562f5c1e4a4b9d1aacd66f69ced0b6d
+  ref: 1c69eeecba53c63b0e1f5eb07c7933757daf1355
 
 docs:
   hello_world: |
@@ -73,8 +73,8 @@ docs:
 
 extension_star_count: 1
 extension_star_count_pretty: 1
-extension_download_count: 604
-extension_download_count_pretty: 604
+extension_download_count: 381
+extension_download_count_pretty: 381
 image: '/images/community_extensions/social_preview/preview_community_extension_splunk.png'
 layout: community_extension_doc
 ---
