@@ -17,12 +17,12 @@ extension:
     - jrosskopf
 repo:
   github: DataZooDE/erpl-web
-  ref: cdecc5e716bf91ad19b9c11f0e3ab6d0c5fc84a0
+  ref: 86fc8d704931ebcc4422830c6700099c168ba8f2
 
 extension_star_count: 29
 extension_star_count_pretty: 29
-extension_download_count: 887
-extension_download_count_pretty: 887
+extension_download_count: 866
+extension_download_count_pretty: 866
 image: '/images/community_extensions/social_preview/preview_community_extension_erpl_web.png'
 layout: community_extension_doc
 ---
@@ -161,15 +161,16 @@ This extension does not add any function overloads.
 
 <div class="extension_settings_table"></div>
 
-|           name           |                             description                              | input_type | scope  | aliases |
-|--------------------------|----------------------------------------------------------------------|------------|--------|---------|
-| erpl_telemetry_enabled   | Enable ERPL telemetry, see https://erpl.io/telemetry for details.    | BOOLEAN    | GLOBAL | []      |
-| erpl_telemetry_key       | Telemetry key, see https://erpl.io/telemetry for details.            | VARCHAR    | GLOBAL | []      |
-| erpl_trace_enabled       | Enable ERPL Web extension tracing functionality                      | BOOLEAN    | GLOBAL | []      |
-| erpl_trace_file_path     | Set ERPL Web extension trace file path                               | VARCHAR    | GLOBAL | []      |
-| erpl_trace_level         | Set ERPL Web extension trace level (TRACE, DEBUG, INFO, WARN, ERROR) | VARCHAR    | GLOBAL | []      |
-| erpl_trace_max_file_size | Set ERPL Web extension trace file max size in bytes                  | BIGINT     | GLOBAL | []      |
-| erpl_trace_output        | Set ERPL Web extension trace output (console, file, both)            | VARCHAR    | GLOBAL | []      |
-| erpl_trace_rotation      | Enable ERPL Web extension trace file rotation                        | BOOLEAN    | GLOBAL | []      |
+|           name           |                                                         description                                                         | input_type | scope  | aliases |
+|--------------------------|-----------------------------------------------------------------------------------------------------------------------------|------------|--------|---------|
+| datazoo_banner           | Show the DataZoo feedback banner when an extension is loaded in an interactive terminal (at most once a day per extension). | BOOLEAN    | GLOBAL | []      |
+| erpl_telemetry_enabled   | Enable ERPL telemetry, see https://erpl.io/telemetry for details.                                                           | BOOLEAN    | GLOBAL | []      |
+| erpl_telemetry_key       | Telemetry key, see https://erpl.io/telemetry for details.                                                                   | VARCHAR    | GLOBAL | []      |
+| erpl_trace_enabled       | Enable ERPL Web extension tracing functionality                                                                             | BOOLEAN    | GLOBAL | []      |
+| erpl_trace_file_path     | Set ERPL Web extension trace file path                                                                                      | VARCHAR    | GLOBAL | []      |
+| erpl_trace_level         | Set ERPL Web extension trace level (TRACE, DEBUG, INFO, WARN, ERROR)                                                        | VARCHAR    | GLOBAL | []      |
+| erpl_trace_max_file_size | Set ERPL Web extension trace file max size in bytes                                                                         | BIGINT     | GLOBAL | []      |
+| erpl_trace_output        | Set ERPL Web extension trace output (console, file, both)                                                                   | VARCHAR    | GLOBAL | []      |
+| erpl_trace_rotation      | Enable ERPL Web extension trace file rotation                                                                               | BOOLEAN    | GLOBAL | []      |
 
 

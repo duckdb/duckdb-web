@@ -8,7 +8,7 @@ excerpt: |
 extension:
   name: datadog
   description: Read logs from the Datadog Logs Search API into OTLP-shaped tables
-  version: 0.1.0
+  version: 0.2.0
   language: C++
   build: cmake
   license: MIT
@@ -18,7 +18,7 @@ extension:
 
 repo:
   github: smithclay/duckdb-datadog
-  ref: 81c7c2fb0a93a7bc46d925e543e53c640d072767
+  ref: aaf234fda701d1c4dffb75c3b9aa25a1ce32e9f9
 
 docs:
   hello_world: |
@@ -57,8 +57,8 @@ docs:
 
 extension_star_count: 2
 extension_star_count_pretty: 2
-extension_download_count: 968
-extension_download_count_pretty: 968
+extension_download_count: 407
+extension_download_count_pretty: 407
 image: '/images/community_extensions/social_preview/preview_community_extension_datadog.png'
 layout: community_extension_doc
 ---
@@ -84,9 +84,17 @@ LOAD {{ page.extension.name }};
 
 <div class="extension_functions_table"></div>
 
-|   function_name   | function_type | description | comment | examples |
-|-------------------|---------------|-------------|---------|----------|
-| read_datadog_logs | table         | NULL        | NULL    |          |
+|           function_name           | function_type | description | comment | examples |
+|-----------------------------------|---------------|-------------|---------|----------|
+| datadog_serve                     | scalar        | NULL        | NULL    |          |
+| datadog_stop                      | scalar        | NULL        | NULL    |          |
+| read_datadog_log_stats            | table         | NULL        | NULL    |          |
+| read_datadog_logs                 | table         | NULL        | NULL    |          |
+| read_datadog_metrics              | table         | NULL        | NULL    |          |
+| read_datadog_service_dependencies | table         | NULL        | NULL    |          |
+| read_datadog_traces               | table         | NULL        | NULL    |          |
+| send_datadog_logs                 | scalar        | NULL        | NULL    |          |
+| write_datadog_traces              | scalar        | NULL        | NULL    |          |
 
 ### Overloaded Functions
 

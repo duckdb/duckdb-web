@@ -8,18 +8,18 @@ excerpt: |
 extension:
   name: polyglot
   description: Transpile SQL from 34 different dialects into DuckDB SQL
-  version: 0.3.2
+  version: 0.3.3
   language: Rust
   build: cargo
   license: MIT
-  excluded_platforms: "linux_amd64_musl;windows_arm64;osx_amd64"
+  excluded_platforms: "wasm_mvp;wasm_eh;wasm_threads;linux_amd64_musl;windows_arm64;windows_amd64_mingw;osx_amd64"
   requires_toolchains: "rust;python3"
   maintainers:
     - tobilg
 
 repo:
   github: tobilg/duckdb-polyglot
-  ref: c6ec8c44cd275a57852e30f6a0c7bf537ac4c665
+  ref: 8f1666dd9c1761c368f45acc5dfc48c7e54539d9
 
 docs:
   hello_world: |
@@ -240,10 +240,10 @@ docs:
     SELECT * FROM polyglot_diff('SELECT a FROM t', 'SELECT b FROM t', 'generic');
     ```
 
-extension_star_count: 22
-extension_star_count_pretty: 22
-extension_download_count: 1543
-extension_download_count_pretty: 1.5k
+extension_star_count: 24
+extension_star_count_pretty: 24
+extension_download_count: 872
+extension_download_count_pretty: 872
 image: '/images/community_extensions/social_preview/preview_community_extension_polyglot.png'
 layout: community_extension_doc
 ---

@@ -18,7 +18,7 @@ extension:
 
 repo:
   github: DataZooDE/anofox-tabfm
-  ref: 0c7f83ee8d94c0b4d9c520bd3b49edebb8c859bb
+  ref: bc6d8aff9b8c4c741113f476d09bb337ff85f386
 
 docs:
   hello_world: |
@@ -113,8 +113,8 @@ docs:
 
 extension_star_count: 4
 extension_star_count_pretty: 4
-extension_download_count: 625
-extension_download_count_pretty: 625
+extension_download_count: 630
+extension_download_count_pretty: 630
 image: '/images/community_extensions/social_preview/preview_community_extension_anofox_tabfm.png'
 layout: community_extension_doc
 ---
@@ -201,5 +201,6 @@ This extension does not add any types.
 | anofox_tabfm_trace_level       | Diagnostic verbosity: error\|warn\|info\|debug\|trace                                                                                                                                                                                                                                                                           | VARCHAR    | GLOBAL | []      |
 | anofox_telemetry_enabled       | Enable or disable anonymous usage telemetry                                                                                                                                                                                                                                                                                     | BOOLEAN    | GLOBAL | []      |
 | anofox_telemetry_key           | PostHog API key for telemetry                                                                                                                                                                                                                                                                                                   | VARCHAR    | GLOBAL | []      |
+| datazoo_banner                 | Show the DataZoo feedback banner when an extension is loaded in an interactive terminal (at most once a day per extension).                                                                                                                                                                                                     | BOOLEAN    | GLOBAL | []      |
 
 

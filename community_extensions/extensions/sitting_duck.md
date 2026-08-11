@@ -8,7 +8,7 @@ excerpt: |
 extension:
   name: sitting_duck
   description: Parse and analyze source code ASTs from 27 programming languages with tree-sitter grammars, pattern matching, and structural search
-  version: 1.9.0
+  version: 1.10.1
   language: C++
   build: cmake
   license: Apache-2.0
@@ -16,7 +16,7 @@ extension:
     - teaguesterling
 repo:
   github: teaguesterling/sitting_duck
-  ref: 1da43741d781e630f42ed09e362b2040b30432b6
+  ref: b1489034c5c299a03bb3477acd878158c7ed1811
 docs:
   hello_world: |
     -- Parse Python code and find function definitions
@@ -93,6 +93,11 @@ docs:
     Supports type selectors, `#name`, `.semantic` (~80 aliases), combinators, `:has()`, `:not()`,
     `:match()` / `:contains()` structural patterns, scope/call-graph pseudo-classes, and pseudo-element navigation.
     Bare type matching: `if` matches `if` + `if_statement` + `if_clause`.
+
+    v1.10.0 adds runtime-loadable tree-sitter grammars (`register_language()`, off by
+    default behind `sitting_duck_enable_runtime_grammars`), `ast_to_blocks` (render code
+    structure as duck_blocks documents), and `ast_patch`/`ast_replace` (AST-anchored
+    source patching and selector-driven rewriting in SQL).
 
     v1.9.0 hardens the selector engine: no more silent-empty results (selectors the engine
     can't honor now raise a clear error instead of returning 0 rows), `#name` on call nodes
@@ -197,10 +202,10 @@ docs:
 
     **GitHub:** https://github.com/teaguesterling/sitting_duck
 
-extension_star_count: 21
-extension_star_count_pretty: 21
-extension_download_count: 857
-extension_download_count_pretty: 857
+extension_star_count: 27
+extension_star_count_pretty: 27
+extension_download_count: 855
+extension_download_count_pretty: 855
 image: '/images/community_extensions/social_preview/preview_community_extension_sitting_duck.png'
 layout: community_extension_doc
 ---
@@ -258,12 +263,15 @@ LOAD {{ page.extension.name }};
 | ast_inside                             | table_macro   | NULL        | NULL    |          |
 | ast_match                              | table_macro   | NULL        | NULL    |          |
 | ast_nesting_analysis                   | table_macro   | NULL        | NULL    |          |
+| ast_node_edit                          | macro         | NULL        | NULL    |          |
 | ast_not_has                            | table_macro   | NULL        | NULL    |          |
+| ast_patch                              | table_macro   | NULL        | NULL    |          |
 | ast_pattern                            | table_macro   | NULL        | NULL    |          |
 | ast_pattern_list                       | macro         | NULL        | NULL    |          |
 | ast_peek_contains_any                  | scalar        | NULL        | NULL    |          |
 | ast_precedes                           | table_macro   | NULL        | NULL    |          |
 | ast_qualified_name_as_string           | macro         | NULL        | NULL    |          |
+| ast_replace                            | table_macro   | NULL        | NULL    |          |
 | ast_resolve                            | table_macro   | NULL        | NULL    |          |
 | ast_security_audit                     | table_macro   | NULL        | NULL    |          |
 | ast_select                             | table_macro   | NULL        | NULL    |          |
@@ -273,6 +281,9 @@ LOAD {{ page.extension.name }};
 | ast_siblings                           | table_macro   | NULL        | NULL    |          |
 | ast_source_of                          | table_macro   | NULL        | NULL    |          |
 | ast_supported_languages                | table         | NULL        | NULL    |          |
+| ast_to_blocks                          | table_macro   | NULL        | NULL    |          |
+| ast_to_blocks_from                     | table_macro   | NULL        | NULL    |          |
+| ast_to_blocks_list                     | table_macro   | NULL        | NULL    |          |
 | ast_type_map                           | table         | NULL        | NULL    |          |
 | binds_name                             | scalar        | NULL        | NULL    |          |
 | clean_pattern                          | macro         | NULL        | NULL    |          |
@@ -343,6 +354,7 @@ LOAD {{ page.extension.name }};
 | read_ast_flat                          | table         | NULL        | NULL    |          |
 | read_ast_hierarchical                  | table         | NULL        | NULL    |          |
 | read_ast_hierarchical_new              | table         | NULL        | NULL    |          |
+| register_language                      | table         | NULL        | NULL    |          |
 | semantic_type_base                     | macro         | NULL        | NULL    |          |
 | semantic_type_code                     | scalar        | NULL        | NULL    |          |
 | semantic_type_to_string                | scalar        | NULL        | NULL    |          |
@@ -367,6 +379,8 @@ This extension does not add any types.
 
 <div class="extension_settings_table"></div>
 
-This extension does not add any settings.
+|                 name                 |                                                                  description                                                                  | input_type | scope  | aliases |
+|--------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------|------------|--------|---------|
+| sitting_duck_enable_runtime_grammars | Allow register_language() to load native tree-sitter grammar libraries, which executes arbitrary native code in-process. Disabled by default. | BOOLEAN    | GLOBAL | []      |
 
 

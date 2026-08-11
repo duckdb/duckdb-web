@@ -17,7 +17,7 @@ extension:
 
 repo:
   github: DataZooDE/anofox-similarity
-  ref: 17ece448ca4a2d3a7d73c30dd8e53055478249bc
+  ref: a1f329752f2d80ca64a92713c6eac8ee9cfc664c
 
 docs:
   hello_world: |
@@ -75,8 +75,8 @@ docs:
 
 extension_star_count: 2
 extension_star_count_pretty: 2
-extension_download_count: 215
-extension_download_count_pretty: 215
+extension_download_count: 238
+extension_download_count_pretty: 238
 image: '/images/community_extensions/social_preview/preview_community_extension_anofox_similarity.png'
 layout: community_extension_doc
 ---
@@ -163,11 +163,12 @@ This extension does not add any types.
 
 <div class="extension_settings_table"></div>
 
-|                 name                 |                                description                                | input_type | scope  | aliases |
-|--------------------------------------|---------------------------------------------------------------------------|------------|--------|---------|
-| anofox_telemetry_enabled             | Enable or disable anonymous usage telemetry                               | BOOLEAN    | GLOBAL | []      |
-| anofox_telemetry_key                 | PostHog API key for telemetry                                             | VARCHAR    | GLOBAL | []      |
-| hnsw_ef_search                       | experimental: override the ef_search parameter when scanning HNSW indexes | BIGINT     | GLOBAL | []      |
-| hnsw_enable_experimental_persistence | experimental: enable creating HNSW indexes in persistent databases        | BOOLEAN    | GLOBAL | []      |
+|                 name                 |                                                         description                                                         | input_type | scope  | aliases |
+|--------------------------------------|-----------------------------------------------------------------------------------------------------------------------------|------------|--------|---------|
+| anofox_telemetry_enabled             | Enable or disable anonymous usage telemetry                                                                                 | BOOLEAN    | GLOBAL | []      |
+| anofox_telemetry_key                 | PostHog API key for telemetry                                                                                               | VARCHAR    | GLOBAL | []      |
+| datazoo_banner                       | Show the DataZoo feedback banner when an extension is loaded in an interactive terminal (at most once a day per extension). | BOOLEAN    | GLOBAL | []      |
+| hnsw_ef_search                       | experimental: override the ef_search parameter when scanning HNSW indexes                                                   | BIGINT     | GLOBAL | []      |
+| hnsw_enable_experimental_persistence | experimental: enable creating HNSW indexes in persistent databases                                                          | BOOLEAN    | GLOBAL | []      |
 
 

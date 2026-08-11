@@ -18,7 +18,7 @@ extension:
 
 repo:
   github: DataZooDE/anofox-scenario
-  ref: ef43c760b1ea297d21b14b693044d29828a07ab6
+  ref: 7d2ca9b03ae82c8248a32d4d0ed6c4da8144c5ef
 
 docs:
   hello_world: |
@@ -74,8 +74,8 @@ docs:
 
 extension_star_count: 2
 extension_star_count_pretty: 2
-extension_download_count: 782
-extension_download_count_pretty: 782
+extension_download_count: 912
+extension_download_count_pretty: 912
 image: '/images/community_extensions/social_preview/preview_community_extension_anofox_scenario.png'
 layout: community_extension_doc
 ---
@@ -131,8 +131,9 @@ This extension does not add any types.
 
 <div class="extension_settings_table"></div>
 
-|               name                |                           description                           | input_type | scope  | aliases |
-|-----------------------------------|-----------------------------------------------------------------|------------|--------|---------|
-| anofox_scenario_telemetry_enabled | Enable or disable anonymous usage telemetry for anofox_scenario | BOOLEAN    | GLOBAL | []      |
+|               name                |                                                         description                                                         | input_type | scope  | aliases |
+|-----------------------------------|-----------------------------------------------------------------------------------------------------------------------------|------------|--------|---------|
+| anofox_scenario_telemetry_enabled | Enable or disable anonymous usage telemetry for anofox_scenario                                                             | BOOLEAN    | GLOBAL | []      |
+| datazoo_banner                    | Show the DataZoo feedback banner when an extension is loaded in an interactive terminal (at most once a day per extension). | BOOLEAN    | GLOBAL | []      |
 
 

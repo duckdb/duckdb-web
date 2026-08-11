@@ -17,7 +17,7 @@ extension:
   requires_toolchains: rust
 repo:
   github: DataZooDE/anofox-visualization
-  ref: c9848dbc96350487e10b38986b4c7ea51dfce2b1
+  ref: d9aaf93fb80497c07e0586a1cccd3f2647dda964
 docs:
   hello_world: |
     -- One scalar plus convenience macros. Pass columns; get an SVG per group.
@@ -47,8 +47,8 @@ docs:
 
 extension_star_count: 3
 extension_star_count_pretty: 3
-extension_download_count: 223
-extension_download_count_pretty: 223
+extension_download_count: 241
+extension_download_count_pretty: 241
 image: '/images/community_extensions/social_preview/preview_community_extension_anofox_visualization.png'
 layout: community_extension_doc
 ---
@@ -100,6 +100,8 @@ This extension does not add any types.
 
 <div class="extension_settings_table"></div>
 
-This extension does not add any settings.
+|      name      |                                                         description                                                         | input_type | scope  | aliases |
+|----------------|-----------------------------------------------------------------------------------------------------------------------------|------------|--------|---------|
+| datazoo_banner | Show the DataZoo feedback banner when an extension is loaded in an interactive terminal (at most once a day per extension). | BOOLEAN    | GLOBAL | []      |
 
 

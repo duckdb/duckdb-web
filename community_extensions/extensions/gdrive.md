@@ -23,7 +23,7 @@ extension:
 
 repo:
   github: DataZooDE/duckdb-gdrive
-  ref: 3dc834f02c8934dc2a3dbafb664d2f4a62157a6e
+  ref: e4d78a732f38225a9690e99828cc5c5e72a8a8d1
 
 docs:
   hello_world: |
@@ -102,8 +102,8 @@ docs:
 
 extension_star_count: 2
 extension_star_count_pretty: 2
-extension_download_count: 200
-extension_download_count_pretty: 200
+extension_download_count: 226
+extension_download_count_pretty: 226
 image: '/images/community_extensions/social_preview/preview_community_extension_gdrive.png'
 layout: community_extension_doc
 ---
@@ -157,6 +157,7 @@ This extension does not add any types.
 
 |           name            |                                                                                                                                                             description                                                                                                                                                              | input_type | scope  | aliases |
 |---------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|------------|--------|---------|
+| datazoo_banner            | Show the DataZoo feedback banner when an extension is loaded in an interactive terminal (at most once a day per extension).                                                                                                                                                                                                          | BOOLEAN    | GLOBAL | []      |
 | gdrive_adc_file           | Path to an Application Default Credentials JSON file, overriding normal discovery for PROVIDER credential_chain. Empty (default) resolves GOOGLE_APPLICATION_CREDENTIALS, then CLOUDSDK_CONFIG, then the well-known gcloud location.                                                                                                 | VARCHAR    | GLOBAL | []      |
 | gdrive_block_cache_bytes  | Total memory the shared block cache may hold (default 256 MiB). Least-recently-used blocks are evicted above this. Shared by all files and all threads.                                                                                                                                                                              | UBIGINT    | GLOBAL | []      |
 | gdrive_block_size_bytes   | Block size for cached reads (default 16 MiB, 0 to disable and read exact ranges). Drive charges roughly the same for a 1 KB and a 16 MB request, so larger blocks trade bandwidth for far fewer round trips.                                                                                                                         | UBIGINT    | GLOBAL | []      |

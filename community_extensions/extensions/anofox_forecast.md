@@ -17,12 +17,12 @@ extension:
     - sipemu
 repo:
   github: DataZooDE/anofox-forecast
-  ref: f43004a0fe746588ea143c89967623fcc0a3111c
+  ref: ebe4a822ae170d25f83ebef8c160ac297c015825
 
 extension_star_count: 37
 extension_star_count_pretty: 37
-extension_download_count: 902
-extension_download_count_pretty: 902
+extension_download_count: 882
+extension_download_count_pretty: 882
 image: '/images/community_extensions/social_preview/preview_community_extension_anofox_forecast.png'
 layout: community_extension_doc
 ---
@@ -342,8 +342,9 @@ This extension does not add any types.
 
 <div class="extension_settings_table"></div>
 
-|           name           |                           description                           | input_type | scope  | aliases |
-|--------------------------|-----------------------------------------------------------------|------------|--------|---------|
-| anofox_telemetry_enabled | Enable or disable anonymous usage telemetry for anofox_forecast | BOOLEAN    | GLOBAL | []      |
+|           name           |                                                         description                                                         | input_type | scope  | aliases |
+|--------------------------|-----------------------------------------------------------------------------------------------------------------------------|------------|--------|---------|
+| anofox_telemetry_enabled | Enable or disable anonymous usage telemetry for anofox_forecast                                                             | BOOLEAN    | GLOBAL | []      |
+| datazoo_banner           | Show the DataZoo feedback banner when an extension is loaded in an interactive terminal (at most once a day per extension). | BOOLEAN    | GLOBAL | []      |
 
 
