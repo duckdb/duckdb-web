@@ -13,7 +13,7 @@ toc: false
   <h1>Development Roadmap</h1>
 </div>
 
-_(Last updated: June 2026)_
+_(Last updated: Aug 2026)_
 
 The DuckDB project is governed by the [non-profit DuckDB Foundation](https://duckdb.foundation/).
 The Foundation and [DuckLabs](https://ducklabs.com) are not funded by external investors (e.g., venture capital).
@@ -29,7 +29,7 @@ This section lists the features that the DuckDB team plans to work on **in the c
 
 * Using the new [PEG parser]({% post_url 2024-11-22-runtime-extensible-parsers %}) by default
 * Shipping the stable version of the [Quack protocol]({% link quack/index.html %})
-* [Support for async I/O](https://github.com/duckdb/duckdb/discussions/3560)
+* [Support for async I/O]({% post_url 2026-07-31-asynchronous-io %})
 * Migration and documentation to [C client API]({% link docs/current/clients/c/overview.md %}) and [C extension API](https://github.com/duckdb/extension-template-c)
 * Rust support for extensions
 * C++17 support
