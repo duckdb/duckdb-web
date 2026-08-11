@@ -1492,6 +1492,10 @@
                   "url": "fastly_object_storage_import"
                 },
                 {
+                  "page": "SeaweedFS Import",
+                  "url": "seaweedfs_import"
+                },
+                {
                   "page": "Tigris Import",
                   "url": "tigris_import"
                 }

@@ -17,7 +17,7 @@ title: Catalogs
 
 The `iceberg` extension supports attaching Iceberg REST Catalogs. Attaching a catalog is required for [writing to Iceberg]({% link docs/current/core_extensions/iceberg/writing_to_iceberg.md %}). Before attaching an Iceberg REST Catalog, you must install the `iceberg` extension by following the instructions located in the [overview]({% link docs/current/core_extensions/iceberg/overview.md %}).
 
-The section below describes the generic way of attaching an Iceberg REST Catalog. For instructions specific to a catalog implementation, see [Amazon S3 Tables](#amazon-s3-tables), [AWS Glue](#aws-glue-amazon-sagemaker-lakehouse), [Cloudflare R2 Data Catalog](#cloudflare-r2-data-catalog), [Apache Polaris](#apache-polaris), [Lakekeeper](#lakekeeper) and [Google Cloud BigLake](#google-cloud-biglake).
+The section below describes the generic way of attaching an Iceberg REST Catalog. For instructions specific to a catalog implementation, see [Amazon S3 Tables](#amazon-s3-tables), [AWS Glue](#aws-glue-amazon-sagemaker-lakehouse), [Cloudflare R2 Data Catalog](#cloudflare-r2-data-catalog), [Apache Polaris](#apache-polaris), [Lakekeeper](#lakekeeper), [SeaweedFS](#seaweedfs) and [Google Cloud BigLake](#google-cloud-biglake).
 
 ## Attaching an Iceberg REST Catalog
 
@@ -259,6 +259,40 @@ ATTACH '⟨warehouse⟩' AS lakekeeper_catalog (
     SECRET '⟨lakekeeper_secret⟩'
 );
 ```
+
+## SeaweedFS
+
+[SeaweedFS](https://github.com/seaweedfs/seaweedfs) table buckets embed an Iceberg REST Catalog in the SeaweedFS S3 gateway. Store the catalog's OAuth2 credentials in an Iceberg secret, and the S3 credentials in an S3 secret so DuckDB can read table data from the same gateway:
+
+```sql
+CREATE SECRET seaweedfs_secret (
+    TYPE ICEBERG,
+    CLIENT_ID '⟨access_key⟩',
+    CLIENT_SECRET '⟨secret_key⟩',
+    OAUTH2_SERVER_URI 'http://⟨seaweedfs_host⟩:8181/v1/oauth/tokens'
+);
+```
+
+```sql
+CREATE SECRET seaweedfs_storage (
+    TYPE s3,
+    KEY_ID '⟨access_key⟩',
+    SECRET '⟨secret_key⟩',
+    ENDPOINT '⟨seaweedfs_host⟩:8333',
+    URL_STYLE 'path',
+    USE_SSL false
+);
+```
+
+```sql
+ATTACH '⟨table_bucket_name⟩' AS seaweedfs_catalog (
+    TYPE ICEBERG,
+    ENDPOINT 'http://⟨seaweedfs_host⟩:8181',
+    SECRET seaweedfs_secret
+);
+```
+
+Reads and writes work with the default `ATTACH` options, including `CREATE TABLE`, `INSERT`, and `DROP TABLE`.
 
 ## Google Cloud BigLake
 
