@@ -177,6 +177,53 @@ ATTACH '⟨warehouse⟩' AS lakekeeper_catalog (
 );
 ```
 
+### SeaweedFS
+
+[SeaweedFS](https://github.com/seaweedfs/seaweedfs) table buckets provide both halves of an Iceberg deployment: the embedded Iceberg REST Catalog serves the table metadata, and the table bucket stores the table data as Parquet files behind the same SeaweedFS S3 gateway. Store the catalog's OAuth2 credentials in an Iceberg secret, and the S3 credentials in an S3 secret so DuckDB can read the Parquet files from the same gateway:
+
+```sql
+CREATE SECRET seaweedfs_secret (
+    TYPE iceberg,
+    CLIENT_ID '⟨access_key⟩',
+    CLIENT_SECRET '⟨secret_key⟩',
+    OAUTH2_SERVER_URI 'http://⟨seaweedfs_host⟩:8181/v1/oauth/tokens'
+);
+```
+
+```sql
+CREATE SECRET seaweedfs_storage (
+    TYPE s3,
+    KEY_ID '⟨access_key⟩',
+    SECRET '⟨secret_key⟩',
+    ENDPOINT '⟨seaweedfs_host⟩:8333',
+    URL_STYLE 'path',
+    USE_SSL false
+);
+```
+
+```sql
+ATTACH '⟨table_bucket_name⟩' AS seaweedfs_catalog (
+    TYPE iceberg,
+    ENDPOINT 'http://⟨seaweedfs_host⟩:8181',
+    SECRET seaweedfs_secret
+);
+```
+
+Reads and writes work with the default `ATTACH` options, including `CREATE SCHEMA`, `CREATE TABLE`, `INSERT`, and `DROP TABLE`:
+
+```sql
+CREATE SCHEMA seaweedfs_catalog.sales;
+CREATE TABLE seaweedfs_catalog.sales.orders (id BIGINT, region VARCHAR, amount DOUBLE);
+INSERT INTO seaweedfs_catalog.sales.orders VALUES (1, 'NA', 12.5), (2, 'EU', 40.0), (3, 'APAC', 99.9);
+
+SELECT region, sum(amount) AS total
+FROM seaweedfs_catalog.sales.orders
+GROUP BY region
+ORDER BY total DESC;
+
+DROP TABLE seaweedfs_catalog.sales.orders;
+```
+
 ### Google Cloud BigLake
 
 To attach to a [Google Cloud BigLake](https://cloud.google.com/biglake) catalog, you can use extra HTTP headers to specify the GCP project for billing purposes.
