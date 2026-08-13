@@ -155,8 +155,8 @@ docs:
 
 extension_star_count: 2
 extension_star_count_pretty: 2
-extension_download_count: 846
-extension_download_count_pretty: 846
+extension_download_count: 949
+extension_download_count_pretty: 949
 image: '/images/community_extensions/social_preview/preview_community_extension_quackapi.png'
 layout: community_extension_doc
 ---
