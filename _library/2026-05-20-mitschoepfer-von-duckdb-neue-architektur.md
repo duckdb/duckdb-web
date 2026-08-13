@@ -11,6 +11,8 @@ pill: "heise.de"
 |-------|-------|
 | **Article** | [Mitschöpfer von DuckDB: „Es war klar, dass eine neue Architektur notwendig ist”](https://www.heise.de/blog/Mitschoepfer-von-DuckDB-Es-war-klar-dass-eine-neue-Architektur-notwendig-ist-11292015.html) |
 | **Publication** | heise online |
+| **Interviewee** | [Hannes Mühleisen (DuckLabs)](https://hannes.muehleisen.org/) |
+
 
 > This interview is in German.
 
