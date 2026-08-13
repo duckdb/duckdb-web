@@ -30,8 +30,8 @@ docs:
 
 extension_star_count: 0
 extension_star_count_pretty: 0
-extension_download_count: 599
-extension_download_count_pretty: 599
+extension_download_count: 666
+extension_download_count_pretty: 666
 image: '/images/community_extensions/social_preview/preview_community_extension_query_limiter.png'
 layout: community_extension_doc
 ---
