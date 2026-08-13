@@ -8,7 +8,7 @@ tags: ["Podcast"]
 length: "70 min"
 thirdparty: false
 excerpt: ""
-pill: "Practical Data Community lunch"
+pill: "Practical Data Community Lunch"
 ---
 
 <div class="video-container">
@@ -16,6 +16,6 @@ pill: "Practical Data Community lunch"
 </div>
 
 |-------|-------|
-| **Podcast** | [Practical Data Community lunch by Joe Reis](https://www.youtube.com/@JoeReisData) |
+| **Podcast** | [Practical Data Community Lunch by Joe Reis](https://www.youtube.com/@JoeReisData) |
 | **Guest** | [Hannes Mühleisen (DuckLabs)](https://hannes.muehleisen.org/) |
 | **YouTube** | [Quack w/ Hannes Mühleisen](https://www.youtube.com/watch?v=ACOMAyOEFYU) |
