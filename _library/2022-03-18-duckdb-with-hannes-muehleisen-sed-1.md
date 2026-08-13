@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "DuckDB with Hannes Muleisen"
+title: "DuckDB with Hannes Mühleisen"
 author: Hannes Mühleisen
 tags: ["Podcast"]
 thirdparty: false
@@ -11,4 +11,4 @@ pill: "Software Engineering Daily"
 |-------|-------|
 | **Podcast** | [Software Engineering Daily](https://softwareengineeringdaily.com/podcasts/) |
 | **Guest** | [Hannes Mühleisen (DuckLabs)](https://hannes.muehleisen.org/) |
-| **Episode site** | [DuckDB with Hannes Muleisen](https://softwareengineeringdaily.com/podcasts/duckdb-with-hannes-muleisen/) |
+| **Episode site** | [DuckDB with Hannes Mühleisen](https://softwareengineeringdaily.com/podcasts/duckdb-with-hannes-muleisen/) |
