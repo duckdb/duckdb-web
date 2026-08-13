@@ -8,7 +8,7 @@ excerpt: |
 extension:
   name: stats_duck
   description: A statistical computing toolkit for DuckDB — descriptive statistics, hypothesis tests, R-style distribution functions (d/p/q/r), OLS regression with HC and cluster-robust standard errors, grammar-of-graphics charts (VISUALIZE → Vega-Lite), and first-class readers/writers for SAS, SPSS, and Stata files, all directly in SQL.
-  version: 0.7.0
+  version: 0.8.0
   language: C++
   build: cmake
   license: Apache-2.0
@@ -17,7 +17,7 @@ extension:
 
 repo:
   github: KoliStat/the-stats-duck
-  ref: 6572642cfb6ee9331998ee375a841601414efe28
+  ref: efdd24dec2a6616f825e9f14c2919a5754554827
 
 docs:
   hello_world: |
@@ -74,10 +74,10 @@ docs:
 
     Full function reference: <https://github.com/KoliStat/the-stats-duck>.
 
-extension_star_count: 54
-extension_star_count_pretty: 54
-extension_download_count: 775
-extension_download_count_pretty: 775
+extension_star_count: 55
+extension_star_count_pretty: 55
+extension_download_count: 503
+extension_download_count_pretty: 503
 image: '/images/community_extensions/social_preview/preview_community_extension_stats_duck.png'
 layout: community_extension_doc
 ---
