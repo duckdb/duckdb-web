@@ -285,7 +285,7 @@ The table below shows the available mathematical functions.
 
 <div class="nostroke_table"></div>
 
-| **Description** | Performs integer division (`x // y`) but returns a `DOUBLE` value. |
+| **Description** | Performs integer division (`x // y`) using the floored definition and returns a `DOUBLE` value. |
 | **Example** | `fdiv(5, 2)` |
 | **Result** | `2.0` |
 
@@ -301,7 +301,7 @@ The table below shows the available mathematical functions.
 
 <div class="nostroke_table"></div>
 
-| **Description** | Calculates the modulo value. Always returns a `DOUBLE` value. |
+| **Description** | Calculates the modulo value using the floored definition. Always returns a `DOUBLE` value. |
 | **Example** | `fmod(5, 2)` |
 | **Result** | `1.0` |
 
