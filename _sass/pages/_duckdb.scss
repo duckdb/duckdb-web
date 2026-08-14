@@ -105,8 +105,16 @@ body.design{
 
 	.color-cards{
 		display: grid;
-		grid-template-columns: 1fr 1fr;
+		grid-template-columns: repeat(3, 1fr);
 		gap: 16px;
+
+		@media only screen and (max-width: 860px){
+			grid-template-columns: 1fr 1fr;
+		}
+
+		@media only screen and (max-width: 560px){
+			grid-template-columns: 1fr;
+		}
 	}
 
 	.color-code {
