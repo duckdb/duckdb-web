@@ -58,28 +58,37 @@ Below is an abridged version of our experimental SQL grammar, with the `Expressi
 Statements <- SingleStmt (';' SingleStmt )* ';'*
 SingleStmt <- SelectStmt
 SelectStmt <- SimpleSelect (SetopClause SimpleSelect)*
+
 SetopClause <-
     ('UNION' / 'EXCEPT' / 'INTERSECT') 'ALL'?
+
 SimpleSelect <- WithClause? SelectClause FromClause?
     WhereClause? GroupByClause? HavingClause?
     OrderByClause? LimitClause?
+
 WithStatement <- Identifier 'AS' SubqueryReference
 WithClause <- 'WITH' List(WithStatement)
 SelectClause <- 'SELECT' ('*' / List(AliasExpression))
 ColumnsAlias <- Parens(List(Identifier))
+
 TableReference <-
     (SubqueryReference 'AS'? Identifier ColumnsAlias?) /
     (Identifier ('AS'? Identifier)?)
+
 ExplicitJoin <- ('LEFT' / 'FULL')? 'OUTER'?
     'JOIN' TableReference 'ON' Expression
+
 FromClause <- 'FROM' TableReference
     ((',' TableReference) / ExplicitJoin)*
+
 WhereClause <- 'WHERE' Expression
 GroupByClause <- 'GROUP' 'BY' List(Expression)
 HavingClause <- 'HAVING' Expression
 SubqueryReference <- Parens(SelectStmt)
+
 OrderByExpression <- Expression ('DESC' / 'ASC')?
     ('NULLS' 'FIRST' / 'LAST')?
+
 OrderByClause <- 'ORDER' 'BY' List(OrderByExpression)
 LimitClause <- 'LIMIT' NumberLiteral
 AliasExpression <- Expression ('AS'? Identifier)?
@@ -148,8 +157,10 @@ Below we show a small set of grammar rules that are sufficient to extend our exp
 ```text
 Name <- (Identifier? ':' Identifier) / Identifier
 Edge <- ('-' / '<-') '[' Name ']' ('->' / '-')
+
 Pattern <- Parens(Name WhereClause?) Edge
-   Parens(Name WhereClause?)
+    Parens(Name WhereClause?)
+
 PropertyGraphReference <- 'GRAPH_TABLE'i '('
         Identifier ','
         'MATCH'i List(Pattern)
