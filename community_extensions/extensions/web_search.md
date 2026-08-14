@@ -17,7 +17,8 @@ extension:
 
 repo:
   github: midwork-finds-jobs/duckdb-web-search
-  ref: cbfe75a10fbe513d5e3ae30151be427f22cfb4e5
+  andium: cbfe75a10fbe513d5e3ae30151be427f22cfb4e5
+  ref: a4e07aa99050e8453b296f2572fc09e5c59f34ec
 
 docs:
   hello_world: |
@@ -76,8 +77,8 @@ docs:
 
 extension_star_count: 0
 extension_star_count_pretty: 0
-extension_download_count: 342
-extension_download_count_pretty: 342
+extension_download_count: 955
+extension_download_count_pretty: 955
 image: '/images/community_extensions/social_preview/preview_community_extension_web_search.png'
 layout: community_extension_doc
 ---
@@ -107,5 +108,23 @@ LOAD {{ page.extension.name }};
 |---------------------|---------------|-------------|---------|----------|
 | google_image_search | table         | NULL        | NULL    |          |
 | google_search       | table         | NULL        | NULL    |          |
+
+### Overloaded Functions
+
+<div class="extension_functions_table"></div>
+
+This extension does not add any function overloads.
+
+### Added Types
+
+<div class="extension_types_table"></div>
+
+This extension does not add any types.
+
+### Added Settings
+
+<div class="extension_settings_table"></div>
+
+This extension does not add any settings.
 
 

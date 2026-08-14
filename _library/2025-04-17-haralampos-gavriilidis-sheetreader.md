@@ -1,22 +1,23 @@
 ---
 layout: post
 title: "DuckDB in Research S01E05: Haralampos Gavriilidis"
-subtitle: "SheetReader: Efficient Spreadsheet Parsing"
 author: "Disseminate Podcast Series by Jack Waudby"
 thumb: "/images/library/thumbs/2025-04-17-haralampos-gavriilidis-sheetreader.jpg"
 image: "/images/library/thumbs/2025-04-17-haralampos-gavriilidis-sheetreader.jpg"
 tags: ["Podcast"]
 length: "40 min"
-thirdparty: true
+category: community
 excerpt: ""
 pill: "DuckDB in Research"
 episode: "S01E05"
 ---
 
-## Links
-
-* [Apple Podcasts](https://podcasts.apple.com/us/podcast/haralampos-gavriilidis-sheetreader-efficient-spreadsheet/id1631350873?i=1000703848213)
-* [Spotify](https://open.spotify.com/episode/4e4UB20N9I9pyDKE7R9DIX)
+|-------|-------|
+| **Podcast** | DuckDB in Research |
+| **Episode** | S01E05 |
+| **Topic** | SheetReader: Efficient Spreadsheet Parsing |
+| **Apple Podcasts** | [Listen](https://podcasts.apple.com/us/podcast/haralampos-gavriilidis-sheetreader-efficient-spreadsheet/id1631350873?i=1000703848213) |
+| **Spotify** | [Listen](https://open.spotify.com/episode/4e4UB20N9I9pyDKE7R9DIX) |
 
 ## Description
 

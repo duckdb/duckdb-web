@@ -4,7 +4,7 @@ title: "Machine Learning and AI at MotherDuck"
 author: "Till Döhmen"
 tags: ["Talk"]
 length: "25 min"
-thirdparty: true
+category: community
 excerpt: ""
 pill: "DuckDB Amsterdam Meetup"
 ---
@@ -14,7 +14,6 @@ pill: "DuckDB Amsterdam Meetup"
 </div>
 
 |-------|-------|
-| **Date** | {{ page.date | date: "%Y-%m-%d" }} |
 | **Event** | [DuckDB Amsterdam Meetup #1]({% link _events/2024-10-17-duckdb-amsterdam-meetup-1.md %}) |
 | **Speaker** | Till Döhmen (MotherDuck) |
 | **Slide deck** | [Download](https://blobs.duckdb.org/slides/till-doehmen-aiml-at-motherduck-duckdb-amsterdam-meetup.pdf) |

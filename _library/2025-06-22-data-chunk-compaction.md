@@ -3,16 +3,16 @@ layout: post
 title: "Data Chunk Compaction in Vectorized Execution"
 author: "Yiming Qiao, Huanchen Zhang"
 thumb: "/images/library/thumbs/sigmod.svg"
-image: "/images/library/thumbs/sigmod.png"
+image: "/images/library/thumbs/sigmod.jpg"
 tags: ["Paper"]
-thirdparty: true
+category: community
 excerpt: ""
 pill: "SIGMOD 2025"
 ---
 
-[Paper (PDF)](https://dl.acm.org/doi/pdf/10.1145/3709676)
-
-Venue: SIGMOD 2025
+|-------|-------|
+| **Paper** | [Data Chunk Compaction in Vectorized Execution (PDF)](https://dl.acm.org/doi/pdf/10.1145/3709676) |
+| **Venue** | SIGMOD 2025 |
 
 ## Abstract
 

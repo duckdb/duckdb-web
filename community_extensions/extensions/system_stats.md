@@ -8,7 +8,7 @@ excerpt: |
 extension:
   name: system_stats
   description: Provides table functions to access system-level statistics for monitoring purpose
-  version: 0.4.0
+  version: 0.10.0
   language: C++
   build: cmake
   license: MIT
@@ -18,7 +18,8 @@ extension:
 
 repo:
   github: dentiny/system_stats
-  ref: d1933b1a67b89a48317102bc9cb008e152526afb
+  andium: d1933b1a67b89a48317102bc9cb008e152526afb
+  ref: 925b3851a639d2b03e5867d58c8e125de8371320
 
 docs:
   hello_world: |
@@ -39,10 +40,10 @@ docs:
   extended_description: |
     The system_stats extension provides table functions to access system-level statistics (including memory, CPU, and disk) that can be used for monitoring.
 
-extension_star_count: 1
-extension_star_count_pretty: 1
-extension_download_count: 360
-extension_download_count_pretty: 360
+extension_star_count: 3
+extension_star_count_pretty: 3
+extension_download_count: 867
+extension_download_count_pretty: 867
 image: '/images/community_extensions/social_preview/preview_community_extension_system_stats.png'
 layout: community_extension_doc
 ---
@@ -75,5 +76,23 @@ LOAD {{ page.extension.name }};
 | sys_memory_info  | table         | NULL        | NULL    |          |
 | sys_network_info | table         | NULL        | NULL    |          |
 | sys_os_info      | table         | NULL        | NULL    |          |
+
+### Overloaded Functions
+
+<div class="extension_functions_table"></div>
+
+This extension does not add any function overloads.
+
+### Added Types
+
+<div class="extension_types_table"></div>
+
+This extension does not add any types.
+
+### Added Settings
+
+<div class="extension_settings_table"></div>
+
+This extension does not add any settings.
 
 

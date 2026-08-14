@@ -5,16 +5,16 @@ author: "Marius Ottosen, Magnus Keinicke Parlo, Philippe Bonnet"
 thumb: "/images/library/thumbs/arxiv.svg"
 image: "/images/library/thumbs/arxiv.jpg"
 tags: ["Paper"]
-thirdparty: true
+category: community
 excerpt: ""
 pill: "arXiv"
 ---
 
-[Paper (preprint PDF)](https://arxiv.org/abs/2512.01490)
-
-[Implementation (fork)](https://github.com/Ma-Master-DK/duckdb)
-
-Published on arXiv in 2025
+| | |
+|-------|-------|
+| **Paper** | [DuckDB on xNVMe (preprint PDF)](https://arxiv.org/pdf/2512.01490.pdf) |
+| **Implementation** | [Fork](https://github.com/Ma-Master-DK/duckdb) |
+| **Published** | arXiv, 2025 |
 
 ## Abstract
 

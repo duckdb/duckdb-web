@@ -8,7 +8,7 @@ excerpt: |
 extension:
   name: brew
   description: Get locally homebrew casks, packages and formulas and their dependencies as nicely types tables
-  version: 0.6.1
+  version: 0.8.1
   language: C++
   build: cmake
   license: MIT
@@ -19,21 +19,30 @@ extension:
 
 repo:
   github: adriens/duckdb-brew
-  ref: 5d7fddcd6d09f0e82804f5d175254b718c6c09f5
+  ref: 60c96b1ad37ef63eb800c6ecba96c8db19774fd8
 
 docs:
   hello_world: |
+    -- Get brew version
+    SELECT brew_version() as brew_version;
+
+    -- View all configuration with categories
+    SELECT name, value, category FROM brew_config();
+
+    -- Run brew doctor to check system health (categorized)
+    FROM brew_doctor();
+
     -- Get all casks
-    select * from brew_casks();
+    from brew_casks();
 
     -- Get all packages
-    select * from brew_packages();
+    from brew_packages();
     
     -- Get all formulas
-    select * from brew_formulas();
+    from brew_formulas();
 
     -- Get dependencies between packages
-    select * from brew_dependencies();
+    from brew_dependencies();
 
     -- Reporting : Find outdated packages
     SELECT name, version FROM brew_packages() WHERE outdated = true;
@@ -119,10 +128,10 @@ extended_description: |
     - Monitor and manage package updates
     - Analyze package dependencies and relationships
 
-extension_star_count: 0
-extension_star_count_pretty: 0
-extension_download_count: 254
-extension_download_count_pretty: 254
+extension_star_count: 1
+extension_star_count_pretty: 1
+extension_download_count: 805
+extension_download_count_pretty: 805
 image: '/images/community_extensions/social_preview/preview_community_extension_brew.png'
 layout: community_extension_doc
 ---
@@ -154,5 +163,26 @@ LOAD {{ page.extension.name }};
 | brew_packages     | table         | Returns the installed packages, casks and formulas                                                     | NULL                                                           | [from brew_packages()]   |
 | brew_formulas     | table         | Returns the installed formulas                                                                         | NULL                                                           | [from brew_formulas()]   |
 | brew_dependencies | table         | Return a table with two columns : the package and the pakage that relies on it. One row per dependency | Useful to produce a graph of dependencies and security reports | [from brew_dependencies] |
+| brew_config       | table         | NULL                                                                                                   | NULL                                                           | NULL                     |
+| brew_doctor       | table         | NULL                                                                                                   | NULL                                                           | NULL                     |
+| brew_version      | scalar        | NULL                                                                                                   | NULL                                                           | NULL                     |
+
+### Overloaded Functions
+
+<div class="extension_functions_table"></div>
+
+This extension does not add any function overloads.
+
+### Added Types
+
+<div class="extension_types_table"></div>
+
+This extension does not add any types.
+
+### Added Settings
+
+<div class="extension_settings_table"></div>
+
+This extension does not add any settings.
 
 

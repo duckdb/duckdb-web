@@ -5,14 +5,14 @@ author: "Tim Fischer, Denis Hirn, Torsten Grust"
 thumb: "/images/library/thumbs/vldb.svg"
 image: "/images/library/thumbs/vldb.png"
 tags: ["Paper"]
-thirdparty: true
+category: community
 excerpt: ""
 pill: "VLDB 2025"
 ---
 
-[Paper (PDF)](https://www.vldb.org/pvldb/vol17/p4696-fischer.pdf)
-
-Venue: VLDB 2025
+|-------|-------|
+| **Paper** | [SQL Engines Excel at the Execution of Imperative Programs (PDF)](https://www.vldb.org/pvldb/vol17/p4696-fischer.pdf) |
+| **Venue** | VLDB 2025 |
 
 ## Abstract
 

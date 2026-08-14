@@ -17,14 +17,14 @@ extension:
   name: hashfuncs
   version: '2025120401'
 repo:
+  andium: 7680a4be752c2f0c09046eabacc384e0df66134a
   github: query-farm/hashfuncs
-  ref: 48e11295173572e2d7f22ceb513352f4051b3def
-  ref_next: 2f3444aed451beab950937d4eedf1e5047f8c4de
+  ref: 2cff8ebf6b58df986eba2aac0992de2d6d42f458
 
-extension_star_count: 12
-extension_star_count_pretty: 12
-extension_download_count: 3144
-extension_download_count_pretty: 3.1k
+extension_star_count: 13
+extension_star_count_pretty: 13
+extension_download_count: 40867
+extension_download_count_pretty: 40.9k
 image: '/images/community_extensions/social_preview/preview_community_extension_hashfuncs.png'
 layout: community_extension_doc
 ---
@@ -50,58 +50,44 @@ LOAD {{ page.extension.name }};
 
 <div class="extension_functions_table"></div>
 
-|    function_name    | function_type |                                                   description                                                    | comment |              examples              |
-|---------------------|---------------|------------------------------------------------------------------------------------------------------------------|---------|------------------------------------|
-| murmurhash3_128     | scalar        | Computes a 128-bit MurmurHash3 (x86 variant) non-cryptographic hash of the input                                 | NULL    | [murmurhash3_128('hello')]         |
-| murmurhash3_128     | scalar        | Computes a 128-bit MurmurHash3 (x86 variant) non-cryptographic hash of the input with a seed                     | NULL    | [murmurhash3_128('hello', 42)]     |
-| murmurhash3_32      | scalar        | Computes a 32-bit MurmurHash3 non-cryptographic hash of the input                                                | NULL    | [murmurhash3_32('hello')]          |
-| murmurhash3_32      | scalar        | Computes a 32-bit MurmurHash3 non-cryptographic hash of the input with a seed                                    | NULL    | [murmurhash3_32('hello', 42)]      |
-| murmurhash3_x64_128 | scalar        | Computes a 128-bit MurmurHash3 (x64 variant) non-cryptographic hash of the input with a seed                     | NULL    | [murmurhash3_x64_128('hello', 42)] |
-| murmurhash3_x64_128 | scalar        | Computes a 128-bit MurmurHash3 (x64 variant) non-cryptographic hash of the input. Optimized for 64-bit platforms | NULL    | [murmurhash3_x64_128('hello')]     |
-| rapidhash           | scalar        | Computes a 64-bit RapidHash non-cryptographic hash of the input with a seed                                      | NULL    | [rapidhash('hello', 42)]           |
-| rapidhash           | scalar        | Computes a 64-bit RapidHash non-cryptographic hash of the input. Very fast for all input sizes                   | NULL    | [rapidhash('hello')]               |
-| xxh32               | scalar        | Computes a 32-bit xxHash (XXH32) non-cryptographic hash of the input                                             | NULL    | [xxh32('hello')]                   |
-| xxh32               | scalar        | Computes a 32-bit xxHash (XXH32) non-cryptographic hash of the input with a seed                                 | NULL    | [xxh32('hello', 42)]               |
-| xxh3_128            | scalar        | Computes a 128-bit xxHash3 (XXH3_128) non-cryptographic hash of the input                                        | NULL    | [xxh3_128('hello')]                |
-| xxh3_128            | scalar        | Computes a 128-bit xxHash3 (XXH3_128) non-cryptographic hash of the input with a seed                            | NULL    | [xxh3_128('hello', 42)]            |
-| xxh3_64             | scalar        | Computes a 64-bit xxHash3 (XXH3_64) non-cryptographic hash of the input with a seed                              | NULL    | [xxh3_64('hello', 42)]             |
-| xxh3_64             | scalar        | Computes a 64-bit xxHash3 (XXH3_64) non-cryptographic hash of the input. Faster than XXH64 for short inputs      | NULL    | [xxh3_64('hello')]                 |
-| xxh64               | scalar        | Computes a 64-bit xxHash (XXH64) non-cryptographic hash of the input                                             | NULL    | [xxh64('hello')]                   |
-| xxh64               | scalar        | Computes a 64-bit xxHash (XXH64) non-cryptographic hash of the input with a seed                                 | NULL    | [xxh64('hello', 42)]               |
+|    function_name    | function_type |                                                                                   description                                                                                    | comment |              examples              |
+|---------------------|---------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|---------|------------------------------------|
+| murmurhash3_128     | scalar        | Computes a 128-bit MurmurHash3 (x86 variant) non-cryptographic hash of the input                                                                                                 | NULL    | [murmurhash3_128('hello')]         |
+| murmurhash3_128     | scalar        | Computes a 128-bit MurmurHash3 (x86 variant) non-cryptographic hash of the input with a seed                                                                                     | NULL    | [murmurhash3_128('hello', 42)]     |
+| murmurhash3_32      | scalar        | Computes a 32-bit MurmurHash3 non-cryptographic hash of the input                                                                                                                | NULL    | [murmurhash3_32('hello')]          |
+| murmurhash3_32      | scalar        | Computes a 32-bit MurmurHash3 non-cryptographic hash of the input with a seed                                                                                                    | NULL    | [murmurhash3_32('hello', 42)]      |
+| murmurhash3_x64_128 | scalar        | Computes a 128-bit MurmurHash3 (x64 variant) non-cryptographic hash of the input with a seed                                                                                     | NULL    | [murmurhash3_x64_128('hello', 42)] |
+| murmurhash3_x64_128 | scalar        | Computes a 128-bit MurmurHash3 (x64 variant) non-cryptographic hash of the input. Optimized for 64-bit platforms                                                                 | NULL    | [murmurhash3_x64_128('hello')]     |
+| rapidhash           | scalar        | Computes a 64-bit RapidHash non-cryptographic hash of the input with a seed                                                                                                      | NULL    | [rapidhash('hello', 42)]           |
+| rapidhash           | scalar        | Computes a 64-bit RapidHash non-cryptographic hash of the input. Very fast for all input sizes                                                                                   | NULL    | [rapidhash('hello')]               |
+| xxh32               | scalar        | Computes a 32-bit xxHash (XXH32) non-cryptographic hash of the input                                                                                                             | NULL    | [xxh32('hello')]                   |
+| xxh32               | scalar        | Computes a 32-bit xxHash (XXH32) non-cryptographic hash of the input with a seed                                                                                                 | NULL    | [xxh32('hello', 42)]               |
+| xxh3_128            | scalar        | Computes a 128-bit xxHash3 (XXH3_128) non-cryptographic hash of the input                                                                                                        | NULL    | [xxh3_128('hello')]                |
+| xxh3_128            | scalar        | Computes a 128-bit xxHash3 (XXH3_128) non-cryptographic hash of the input with a seed                                                                                            | NULL    | [xxh3_128('hello', 42)]            |
+| xxh3_128_hex        | scalar        | Computes a 128-bit xxHash3 hash and returns it as a 32-character lowercase hex string in canonical byte order (low64 \|\| high64), matching Python xxhash.xxh3_128().hexdigest() | NULL    | [xxh3_128_hex('hello')]            |
+| xxh3_128_hex        | scalar        | Computes a 128-bit xxHash3 hash with a seed and returns it as a 32-character lowercase hex string in canonical byte order                                                        | NULL    | [xxh3_128_hex('hello', 42)]        |
+| xxh3_128_hex        | scalar        | NULL                                                                                                                                                                             | NULL    |                                    |
+| xxh3_64             | scalar        | Computes a 64-bit xxHash3 (XXH3_64) non-cryptographic hash of the input with a seed                                                                                              | NULL    | [xxh3_64('hello', 42)]             |
+| xxh3_64             | scalar        | Computes a 64-bit xxHash3 (XXH3_64) non-cryptographic hash of the input. Faster than XXH64 for short inputs                                                                      | NULL    | [xxh3_64('hello')]                 |
+| xxh64               | scalar        | Computes a 64-bit xxHash (XXH64) non-cryptographic hash of the input                                                                                                             | NULL    | [xxh64('hello')]                   |
+| xxh64               | scalar        | Computes a 64-bit xxHash (XXH64) non-cryptographic hash of the input with a seed                                                                                                 | NULL    | [xxh64('hello', 42)]               |
+
+### Overloaded Functions
+
+<div class="extension_functions_table"></div>
+
+This extension does not add any function overloads.
+
+### Added Types
+
+<div class="extension_types_table"></div>
+
+This extension does not add any types.
 
 ### Added Settings
 
 <div class="extension_settings_table"></div>
 
-|                 name                 |                                         description                                          | input_type | scope  | aliases |
-|--------------------------------------|----------------------------------------------------------------------------------------------|------------|--------|---------|
-| auto_fallback_to_full_download       | Allows automatically falling back to full file downloads when possible.                      | BOOLEAN    | GLOBAL | []      |
-| ca_cert_file                         | Path to a custom certificate file for self-signed certificates.                              | VARCHAR    | GLOBAL | []      |
-| enable_curl_server_cert_verification | Enable server side certificate verification for CURL backend.                                | BOOLEAN    | GLOBAL | []      |
-| enable_global_s3_configuration       | Automatically fetch AWS credentials from environment variables.                              | BOOLEAN    | GLOBAL | []      |
-| enable_server_cert_verification      | Enable server side certificate verification.                                                 | BOOLEAN    | GLOBAL | []      |
-| force_download                       | Forces upfront download of file                                                              | BOOLEAN    | GLOBAL | []      |
-| hf_max_per_page                      | Debug option to limit number of items returned in list requests                              | UBIGINT    | GLOBAL | []      |
-| http_keep_alive                      | Keep alive connections. Setting this to false can help when running into connection failures | BOOLEAN    | GLOBAL | []      |
-| http_retries                         | HTTP retries on I/O error                                                                    | UBIGINT    | GLOBAL | []      |
-| http_retry_backoff                   | Backoff factor for exponentially increasing retry wait time                                  | FLOAT      | GLOBAL | []      |
-| http_retry_wait_ms                   | Time between retries                                                                         | UBIGINT    | GLOBAL | []      |
-| http_timeout                         | HTTP timeout read/write/connection/retry (in seconds)                                        | UBIGINT    | GLOBAL | []      |
-| httpfs_client_implementation         | Select which is the HTTPUtil implementation to be used                                       | VARCHAR    | GLOBAL | []      |
-| merge_http_secret_into_s3_request    | Merges http secret params into S3 requests                                                   | BOOLEAN    | GLOBAL | []      |
-| s3_access_key_id                     | S3 Access Key ID                                                                             | VARCHAR    | GLOBAL | []      |
-| s3_endpoint                          | S3 Endpoint                                                                                  | VARCHAR    | GLOBAL | []      |
-| s3_kms_key_id                        | S3 KMS Key ID                                                                                | VARCHAR    | GLOBAL | []      |
-| s3_region                            | S3 Region                                                                                    | VARCHAR    | GLOBAL | []      |
-| s3_requester_pays                    | S3 use requester pays mode                                                                   | BOOLEAN    | GLOBAL | []      |
-| s3_secret_access_key                 | S3 Access Key                                                                                | VARCHAR    | GLOBAL | []      |
-| s3_session_token                     | S3 Session Token                                                                             | VARCHAR    | GLOBAL | []      |
-| s3_uploader_max_filesize             | S3 Uploader max filesize (between 50GB and 5TB)                                              | VARCHAR    | GLOBAL | []      |
-| s3_uploader_max_parts_per_file       | S3 Uploader max parts per file (between 1 and 10000)                                         | UBIGINT    | GLOBAL | []      |
-| s3_uploader_thread_limit             | S3 Uploader global thread limit                                                              | UBIGINT    | GLOBAL | []      |
-| s3_url_compatibility_mode            | Disable Globs and Query Parameters on S3 URLs                                                | BOOLEAN    | GLOBAL | []      |
-| s3_url_style                         | S3 URL style                                                                                 | VARCHAR    | GLOBAL | []      |
-| s3_use_ssl                           | S3 use SSL                                                                                   | BOOLEAN    | GLOBAL | []      |
-| unsafe_disable_etag_checks           | Disable checks on ETag consistency                                                           | BOOLEAN    | GLOBAL | []      |
+This extension does not add any settings.
 
 

@@ -16,7 +16,7 @@ The puzzle in the first week of September was `Clumsy Rental Red`. Let's try to 
 
 ## Letter Scrambling Macro
 
-First, let's create a [macro]({% link docs/stable/sql/statements/create_macro.md %}) that turns a string into an ordered list of unique characters:
+First, let's create a [macro]({% link docs/current/sql/statements/create_macro.md %}) that turns a string into an ordered list of unique characters:
 
 ```sql
 CREATE MACRO order_letters(s) AS 
@@ -49,7 +49,7 @@ Indeed, both expressions are weak anagrams of `Amsterdam`!
 ## Matching against Station Names
 
 To solve the puzzle, we need a list of train stations.
-Luckily, one of our go-to datasets at DuckDB is the [Dutch railway datasets]({% link docs/stable/guides/snippets/dutch_railway_datasets.md %}), including its services and train stations. We can create a table with the station names:
+Luckily, one of our go-to datasets at DuckDB is the [Dutch railway datasets]({% link docs/current/guides/snippets/dutch_railway_datasets.md %}), including its services and train stations. We can create a table with the station names:
 
 ```sql
 CREATE TABLE stations AS
@@ -75,7 +75,7 @@ Click to see the solution.
 
 ## Table Macro for Finding Weak Anagrams
 
-To find station name, which is a weak anagram to a term, we can use a [table macro]({% link docs/stable/sql/statements/create_macro.md %}#table-macros):
+To find station name, which is a weak anagram to a term, we can use a [table macro]({% link docs/current/sql/statements/create_macro.md %}#table-macros):
 
 ```sql
 CREATE MACRO find_weak_anagram(s) AS TABLE
@@ -135,7 +135,7 @@ DuckLake does not support functions
 
 There are two options to work around this problem.
 
-- If you need to keep the macros and you are using DuckDB as your catalog database for DuckLake, you can use the [DuckDB to DuckLake migration script](https://ducklake.select/docs/preview/duckdb/migrations/duckdb_to_ducklake#migration-script). This will migrate the macros into the catalog of your DuckLake.
+- If you need to keep the macros and you are using DuckDB as your catalog database for DuckLake, you can use the [DuckDB to DuckLake migration script](https://ducklake.select/docs/current/duckdb/migrations/duckdb_to_ducklake#migration-script). This will migrate the macros into the catalog of your DuckLake.
 
 - If you do not need the macros or your destination's catalog database does not support them, you can drop them with the following commands:
 

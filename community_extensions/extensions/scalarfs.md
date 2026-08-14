@@ -8,17 +8,17 @@ excerpt: |
 extension:
   name: scalarfs
   description: A collection of virtual filesystems for working with scalars
-  version: 1.3.2
+  version: 1.5.1
   language: C++
   build: cmake
   license: MIT
   maintainers:
     - teaguesterling
-
 repo:
   github: teaguesterling/duckdb_scalarfs
-  ref: "a2ddb7e34c9b7533d22155f02fd251142dbec76a"
-
+  andium: 68faa6c72054123a6c6521dd41c12f929431da50
+  ref: 03a7d8e23178a2c9fcb3a16292dd60a23e059a8d
+  ref_next: 03a7d8e23178a2c9fcb3a16292dd60a23e059a8d
 docs:
   hello_world: |
     LOAD scalarfs;
@@ -47,6 +47,16 @@ docs:
     COPY (SELECT path FROM files WHERE active) TO 'variable:paths' (FORMAT variable);
     SELECT * FROM read_csv('pathvariable:paths');  -- Read all files from the list
 
+    -- Select which files to read via a catalog macro (pathmacro:)
+    CREATE TABLE reports AS
+      SELECT * FROM (VALUES ('west', '/data/west.csv'), ('east', '/data/east.csv')) t(region, path);
+    CREATE MACRO region_files(p) AS (SELECT list(path) FROM reports WHERE region = p['region']);
+    SET allowed_pathmacro_macros = 'region_files';
+    SELECT * FROM read_csv('pathmacro:region_files?region=east');  -- reads only the east file
+
+    -- Build pathmacro: URLs safely (keys/values URL-encoded)
+    SELECT to_pathmacro_url('region_files', {region: 'west'});  -- pathmacro:region_files?region=west
+
   extended_description: |
     DuckDB's file functions (read_csv, read_json, COPY TO, etc.) expect file paths. scalarfs bridges the gap
     when your content is already in memory, allowing the same functions to work with:
@@ -54,27 +64,31 @@ docs:
     Variables — Store data in DuckDB variables and read/write them as files
     Path Variables — Use file paths stored in variables for dynamic file resolution
     Inline literals — Embed content directly in your queries without temporary files
+    Catalog macros — Select which files to read from an index/catalog via a macro (pathmacro:)
 
-    | Protocol         | Purpose                                |   Mode      |
-    |------------------|----------------------------------------|-------------|
-    | variable:        | DuckDB variable as file                | Read/Write  |
-    | pathvariable:    | File path(s) stored in variable        | Read/Write* |
-    | data:            | RFC 2397 data URI (base64/url-encoded) | Read        |
-    | data+varchar:    | Raw VARCHAR content as file            | Read        |
-    | data+blob:       | Escaped BLOB content as file           | Read        |
-    | decompress+gz:   | Gzip decompression wrapper             | Read        |
-    | decompress+zstd: | Zstd decompression wrapper             | Read        |
+    | Protocol         | Purpose                                 |   Mode      |
+    |------------------|-----------------------------------------|-------------|
+    | variable:        | DuckDB variable as file                 | Read/Write  |
+    | pathvariable:    | File path(s) stored in variable         | Read/Write* |
+    | data:            | RFC 2397 data URI (base64/url-encoded)  | Read        |
+    | data+varchar:    | Raw VARCHAR content as file             | Read        |
+    | data+blob:       | Escaped BLOB content as file            | Read        |
+    | decompress+gz:   | Gzip decompression wrapper              | Read        |
+    | decompress+zstd: | Zstd decompression wrapper              | Read        |
+    | pathmacro:        | Paths resolved by an allow-listed macro | Read/Write |
 
     * Can only write to a `pathvariable:` that's a scalar path (not lists).
+
+    Helper functions `to_pathmacro_url()` / `from_pathmacro_url()` build and parse `pathmacro:` URLs.
 
     For full documentation, see: https://scalarfs.readthedocs.io/
 
     **Note**: This extension was written primarily using Claude and Claude Code as an exercise in AI-driven development.
 
-extension_star_count: 6
-extension_star_count_pretty: 6
-extension_download_count: 706
-extension_download_count_pretty: 706
+extension_star_count: 8
+extension_star_count_pretty: 8
+extension_download_count: 920
+extension_download_count_pretty: 920
 image: '/images/community_extensions/social_preview/preview_community_extension_scalarfs.png'
 layout: community_extension_doc
 ---
@@ -100,15 +114,38 @@ LOAD {{ page.extension.name }};
 
 <div class="extension_functions_table"></div>
 
-|   function_name   | function_type | description | comment | examples |
-|-------------------|---------------|-------------|---------|----------|
-| from_blob_uri     | scalar        | NULL        | NULL    |          |
-| from_data_uri     | scalar        | NULL        | NULL    |          |
-| from_scalarfs_uri | scalar        | NULL        | NULL    |          |
-| from_varchar_uri  | scalar        | NULL        | NULL    |          |
-| to_blob_uri       | scalar        | NULL        | NULL    |          |
-| to_data_uri       | scalar        | NULL        | NULL    |          |
-| to_scalarfs_uri   | scalar        | NULL        | NULL    |          |
-| to_varchar_uri    | scalar        | NULL        | NULL    |          |
+|   function_name    | function_type | description | comment | examples |
+|--------------------|---------------|-------------|---------|----------|
+| from_blob_uri      | scalar        | NULL        | NULL    |          |
+| from_data_uri      | scalar        | NULL        | NULL    |          |
+| from_pathmacro_url | scalar        | NULL        | NULL    |          |
+| from_scalarfs_uri  | scalar        | NULL        | NULL    |          |
+| from_varchar_uri   | scalar        | NULL        | NULL    |          |
+| to_blob_uri        | scalar        | NULL        | NULL    |          |
+| to_data_uri        | scalar        | NULL        | NULL    |          |
+| to_pathmacro_url   | scalar        | NULL        | NULL    |          |
+| to_scalarfs_uri    | scalar        | NULL        | NULL    |          |
+| to_varchar_uri     | scalar        | NULL        | NULL    |          |
+
+### Overloaded Functions
+
+<div class="extension_functions_table"></div>
+
+This extension does not add any function overloads.
+
+### Added Types
+
+<div class="extension_types_table"></div>
+
+This extension does not add any types.
+
+### Added Settings
+
+<div class="extension_settings_table"></div>
+
+|              name               |                                                    description                                                     | input_type | scope  | aliases |
+|---------------------------------|--------------------------------------------------------------------------------------------------------------------|------------|--------|---------|
+| allowed_pathmacros              | Comma-separated list of scalar macros invokable via the pathmacro: filesystem                                      | VARCHAR    | GLOBAL | []      |
+| scalarfs_max_decompressed_bytes | Maximum number of bytes a scalarfs decompress+ read may materialize (decompression-bomb guard; 0 disables the cap) | UBIGINT    | GLOBAL | []      |
 
 

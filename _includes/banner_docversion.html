@@ -1,42 +1,28 @@
-{% if version_viewed == "stable" %}
+{% if version_viewed == "current" %}
 	<!-- this is the default and recommended version - do not show any extra warning -->
-{% elsif version_viewed == "preview" %}
-	<!-- show nightly banner -->
-	<div class="banner nightly">
+{% elsif version_viewed == "lts" %}
+	<div class="banner lts">
 		<div class="content">
-			<span class="icon_nightly"></span>
-			<span title="The page is for the preview version of DuckDB, available in the nightly builds. The features shown in the documentation may not yet be available in the stable version.">Preview version</span>
+			<svg class="icon"><use href="#clock"></use></svg>
+			<span title="The page is for the LTS build of DuckDB.">LTS version</span>
 		</div>
 	</div>
 {% else %}
-	<!-- show 'outdated' banner -->
-	{% assign url_parts = page.url | split: '/' %}
-	{% assign new_url = '' %}
-	{% assign skip_next = false %}
-	{% for part in url_parts %}
-		{% if part == 'archive' %}
-			{% assign skip_next = true %}
-			{% continue %}
-		{% elsif skip_next %}
-			{% assign skip_next = false %}
-			{% continue %}
-		{% else %}
-			{% assign new_url = new_url | append: part %}
-			{% unless forloop.last %}
-				{% assign new_url = new_url | append: '/' %}
-			{% endunless %}
-		{% endif %}
-	{% endfor %}
-	<div class="banner outdated">
+	<!-- show 'outdated' banner, linking to the same page in the current version -->
+	{% assign basename = page.path | regex_replace: "docs/(lts|current|\d*.\d*)/", "" %}
+	{% assign current_filename = "docs/current/" | append: basename %}
+	{% capture current_exists %}{% file_exists {{ current_filename }} %}{% endcapture %}
+	{% if current_exists == "true" %}
+		{% assign current_url = current_filename | replace: ".md", "" %}
+		{% assign banner_title = "Outdated documentation. Go to this page in the current version." %}
+	{% else %}
+		{% assign current_url = "docs/current/index" %}
+		{% assign banner_title = "Outdated documentation. This page is not available in the current version – go to the documentation home." %}
+	{% endif %}
+	<a class="banner outdated" href="/{{ current_url }}" title="{{ banner_title }}">
 		<div class="content">
-			<span class="icon_outdated"></span>
-			{% assign new_filename = new_url | replace: ".html", ".md" %}
-			{% capture url_exists %}{% file_exists {{ new_filename }} %}{% endcapture %}
-			{% if url_exists == "true" %}
-				<span title="Outdated documentation. Please select the stable version.">Outdated documentation</span>
-			{% else %}
-				<span title="This page is not available in the stable version of the documentation.">Outdated documentation</span>
-			{% endif %}
+			<svg class="icon"><use href="#alert-octagon"></use></svg>
+			<span>Outdated documentation</span>
 		</div>
-	</div>
+	</a>
 {% endif %}

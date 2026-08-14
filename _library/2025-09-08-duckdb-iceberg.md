@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Making Iceberg Easy with DuckDB-Iceberg"
-author: "Tom Ebergen (DuckDB Labs)"
+author: "Tom Ebergen"
 thumb: "/images/library/thumbs/2025-09-08-making-iceberg-easy.jpg"
 image: "/images/library/thumbs/2025-09-08-making-iceberg-easy.jpg"
 tags: ["Talk"]
@@ -16,8 +16,7 @@ pill: "Apache Iceberg Europe Community Meetup"
 </div>
 
 |-------|-------|
-| **Date** | {{ page.date | date: "%Y-%m-%d" }} |
 | **Event** | [Apache Iceberg Europe Community Meetup](https://luma.com/u042b0vw) |
-| **Speaker** | Tom Ebergen (DuckDB Labs) |
+| **Speaker** | Tom Ebergen (DuckLabs) |
 | **Slide deck** | [Download](https://blobs.duckdb.org/slides/tom-ebergen-duckdb-iceberg-london-meetup.pdf) |
 | **YouTube** | [Making Iceberg Easy with DuckDB-Iceberg](https://www.youtube.com/watch?v=kJkpVXxm7hA) |

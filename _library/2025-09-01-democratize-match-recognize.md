@@ -5,14 +5,14 @@ author: "Louisa Lambrecht, Tim Findling, Samuel Heid, Marcel Knüdeler, Torsten 
 thumb: "/images/library/thumbs/vldb.svg"
 image: "/images/library/thumbs/vldb.png"
 tags: ["Paper"]
-thirdparty: true
+category: community
 excerpt: ""
 pill: "VLDB 2025"
 ---
 
-[Paper (PDF)](https://www.vldb.org/pvldb/vol18/p5251-lambrecht.pdf)
-
-Venue: VLDB 2025
+|-------|-------|
+| **Paper** | [Democratize MATCH_RECOGNIZE! (PDF)](https://www.vldb.org/pvldb/vol18/p5251-lambrecht.pdf) |
+| **Venue** | VLDB 2025 |
 
 ## Abstract
 

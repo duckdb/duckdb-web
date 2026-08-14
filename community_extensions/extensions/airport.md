@@ -22,13 +22,14 @@ extension:
     \n  }\n}\n"
   version: '2025101201'
 repo:
+  andium: 3c12d74372ff8e7f5b4577da7dce3c36aca0bb6f
   github: query-farm/airport
-  ref: 31c249a2e300207159256d3f42bb6064647ea73a
+  ref: a7f0b7ef9add0bb000585b11a847ea9c8460d4d9
 
-extension_star_count: 323
-extension_star_count_pretty: 323
-extension_download_count: 388
-extension_download_count_pretty: 388
+extension_star_count: 346
+extension_star_count_pretty: 346
+extension_download_count: 952
+extension_download_count_pretty: 952
 image: '/images/community_extensions/social_preview/preview_community_extension_airport.png'
 layout: community_extension_doc
 ---
@@ -54,48 +55,34 @@ LOAD {{ page.extension.name }};
 
 <div class="extension_functions_table"></div>
 
-|    function_name    | function_type | description | comment | examples |
-|---------------------|---------------|-------------|---------|----------|
-| airport_action      | table         | NULL        | NULL    |          |
-| airport_databases   | table_macro   | NULL        | NULL    |          |
-| airport_flights     | table         | NULL        | NULL    |          |
-| airport_take_flight | table         | NULL        | NULL    |          |
-| airport_user_agent  | scalar        | NULL        | NULL    |          |
-| airport_version     | scalar        | NULL        | NULL    |          |
+|    function_name    | function_type |                                       description                                        | comment |                                    examples                                    |
+|---------------------|---------------|------------------------------------------------------------------------------------------|---------|--------------------------------------------------------------------------------|
+| airport_action      | table         | Execute an Arrow Flight action on a server with a parameter.                             | NULL    | [SELECT * FROM airport_action('grpc://localhost:8815', 'my_action', 'param');] |
+| airport_action      | table         | Execute an Arrow Flight action on a server.                                              | NULL    | [SELECT * FROM airport_action('grpc://localhost:8815', 'my_action');]          |
+| airport_databases   | table_macro   | NULL                                                                                     | NULL    |                                                                                |
+| airport_flights     | table         | List the flights available on an Arrow Flight server, filtered by criteria.              | NULL    | [SELECT * FROM airport_flights('grpc://localhost:8815', '');]                  |
+| airport_flights     | table         | List the flights available on an Arrow Flight server.                                    | NULL    | [SELECT * FROM airport_flights('grpc://localhost:8815');]                      |
+| airport_take_flight | table         | Read an Arrow Flight stream from a server using a flight descriptor (path or command).   | NULL    | [SELECT * FROM airport_take_flight('grpc://localhost:8815', ['my_table']);]    |
+| airport_take_flight | table         | Read an Arrow Flight stream from a server using internal pointers (used by the catalog). | NULL    |                                                                                |
+| airport_user_agent  | scalar        | NULL                                                                                     | NULL    |                                                                                |
+| airport_version     | scalar        | NULL                                                                                     | NULL    |                                                                                |
+
+### Overloaded Functions
+
+<div class="extension_functions_table"></div>
+
+This extension does not add any function overloads.
+
+### Added Types
+
+<div class="extension_types_table"></div>
+
+This extension does not add any types.
 
 ### Added Settings
 
 <div class="extension_settings_table"></div>
 
-|                 name                 |                                         description                                          | input_type | scope  | aliases |
-|--------------------------------------|----------------------------------------------------------------------------------------------|------------|--------|---------|
-| auto_fallback_to_full_download       | Allows automatically falling back to full file downloads when possible.                      | BOOLEAN    | GLOBAL | []      |
-| ca_cert_file                         | Path to a custom certificate file for self-signed certificates.                              | VARCHAR    | GLOBAL | []      |
-| enable_curl_server_cert_verification | Enable server side certificate verification for CURL backend.                                | BOOLEAN    | GLOBAL | []      |
-| enable_global_s3_configuration       | Automatically fetch AWS credentials from environment variables.                              | BOOLEAN    | GLOBAL | []      |
-| enable_server_cert_verification      | Enable server side certificate verification.                                                 | BOOLEAN    | GLOBAL | []      |
-| force_download                       | Forces upfront download of file                                                              | BOOLEAN    | GLOBAL | []      |
-| hf_max_per_page                      | Debug option to limit number of items returned in list requests                              | UBIGINT    | GLOBAL | []      |
-| http_keep_alive                      | Keep alive connections. Setting this to false can help when running into connection failures | BOOLEAN    | GLOBAL | []      |
-| http_retries                         | HTTP retries on I/O error                                                                    | UBIGINT    | GLOBAL | []      |
-| http_retry_backoff                   | Backoff factor for exponentially increasing retry wait time                                  | FLOAT      | GLOBAL | []      |
-| http_retry_wait_ms                   | Time between retries                                                                         | UBIGINT    | GLOBAL | []      |
-| http_timeout                         | HTTP timeout read/write/connection/retry (in seconds)                                        | UBIGINT    | GLOBAL | []      |
-| httpfs_client_implementation         | Select which is the HTTPUtil implementation to be used                                       | VARCHAR    | GLOBAL | []      |
-| merge_http_secret_into_s3_request    | Merges http secret params into S3 requests                                                   | BOOLEAN    | GLOBAL | []      |
-| s3_access_key_id                     | S3 Access Key ID                                                                             | VARCHAR    | GLOBAL | []      |
-| s3_endpoint                          | S3 Endpoint                                                                                  | VARCHAR    | GLOBAL | []      |
-| s3_kms_key_id                        | S3 KMS Key ID                                                                                | VARCHAR    | GLOBAL | []      |
-| s3_region                            | S3 Region                                                                                    | VARCHAR    | GLOBAL | []      |
-| s3_requester_pays                    | S3 use requester pays mode                                                                   | BOOLEAN    | GLOBAL | []      |
-| s3_secret_access_key                 | S3 Access Key                                                                                | VARCHAR    | GLOBAL | []      |
-| s3_session_token                     | S3 Session Token                                                                             | VARCHAR    | GLOBAL | []      |
-| s3_uploader_max_filesize             | S3 Uploader max filesize (between 50GB and 5TB)                                              | VARCHAR    | GLOBAL | []      |
-| s3_uploader_max_parts_per_file       | S3 Uploader max parts per file (between 1 and 10000)                                         | UBIGINT    | GLOBAL | []      |
-| s3_uploader_thread_limit             | S3 Uploader global thread limit                                                              | UBIGINT    | GLOBAL | []      |
-| s3_url_compatibility_mode            | Disable Globs and Query Parameters on S3 URLs                                                | BOOLEAN    | GLOBAL | []      |
-| s3_url_style                         | S3 URL style                                                                                 | VARCHAR    | GLOBAL | []      |
-| s3_use_ssl                           | S3 use SSL                                                                                   | BOOLEAN    | GLOBAL | []      |
-| unsafe_disable_etag_checks           | Disable checks on ETag consistency                                                           | BOOLEAN    | GLOBAL | []      |
+This extension does not add any settings.
 
 

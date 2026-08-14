@@ -18,7 +18,6 @@ redirect_from:
 </div>
 
 |-------|-------|
-| **Date** | {{ page.date | date: "%Y-%m-%d" }} |
 | **Event** | [Dutch Seminar on Data Systems Design](https://dsdsd.da.cwi.nl/) |
 | **Speaker** | [Mark Raasveldt](https://mytherin.github.io/) |
 | **YouTube** | [Push-Based Execution in DuckDB](https://www.youtube.com/watch?v=MA0OsvYFGrc) |

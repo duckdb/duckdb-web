@@ -18,7 +18,6 @@ redirect_from:
 </div>
 
 |-------|-------|
-| **Date** | {{ page.date | date: "%Y-%m-%d" }} |
 | **Event** | [Øredev](https://oredev.org/) |
-| **Speaker** | [Gábor Szárnyas (DuckDB Labs)](https://szarnyasg.org/) |
+| **Speaker** | [Gábor Szárnyas (DuckLabs)](https://szarnyasg.org/) |
 | **YouTube** | [DuckDB Meets Data Lakes](https://www.youtube.com/watch?v=AAv19oxJzdU) |

@@ -5,14 +5,14 @@ author: "Tim Fischer, Denis Hirn"
 thumb: "/images/library/thumbs/dbpl.svg"
 image: "/images/library/thumbs/dbpl.png"
 tags: ["Paper"]
-thirdparty: true
+category: community
 excerpt: ""
 pill: "DBPL 2025"
 ---
 
-[Paper (PDF)](https://dl.acm.org/doi/pdf/10.1145/3735106.3736535)
-
-Venue: DBPL at SIGMOD 2025
+|-------|-------|
+| **Paper** | [BIRNE: Mixed-paradigm Workload Execution in SQL Engines (PDF)](https://dl.acm.org/doi/pdf/10.1145/3735106.3736535) |
+| **Venue** | DBPL at SIGMOD 2025 |
 
 ## Abstract
 

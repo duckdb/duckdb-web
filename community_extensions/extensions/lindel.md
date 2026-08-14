@@ -18,14 +18,14 @@ extension:
   requires_toolchains: rust
   version: '2025120401'
 repo:
+  andium: 3fb0a957c3e497fb3513dcf4c0f70ec599bbc0d3
   github: query-farm/lindel
-  ref: 3f9906c71e7883e0f2ee8696d9e8648750bdb76b
-  ref_next: cedbd5ad0806cb9e4bc6d561a4d59be995856c38
+  ref: 7cca5986cac2dab981b41c4fa279d162823fd22f
 
-extension_star_count: 58
-extension_star_count_pretty: 58
-extension_download_count: 2492
-extension_download_count_pretty: 2.5k
+extension_star_count: 66
+extension_star_count_pretty: 66
+extension_download_count: 3470
+extension_download_count_pretty: 3.5k
 image: '/images/community_extensions/social_preview/preview_community_extension_lindel.png'
 layout: community_extension_doc
 ---
@@ -51,46 +51,29 @@ LOAD {{ page.extension.name }};
 
 <div class="extension_functions_table"></div>
 
-| function_name  | function_type | description | comment | examples |
-|----------------|---------------|-------------|---------|----------|
-| hilbert_decode | scalar        | NULL        | NULL    |          |
-| hilbert_encode | scalar        | NULL        | NULL    |          |
-| morton_decode  | scalar        | NULL        | NULL    |          |
-| morton_encode  | scalar        | NULL        | NULL    |          |
+| function_name  | function_type |                                                                                               description                                                                                                | comment |                    examples                    |
+|----------------|---------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|---------|------------------------------------------------|
+| hilbert_decode | scalar        | Decodes a Hilbert-encoded unsigned integer back into an array of values. The number of output elements and their type are determined by the parameters.                                                  | NULL    | [hilbert_decode(123::UBIGINT, 2, false, true)] |
+| hilbert_encode | scalar        | Encodes an array of integers or floats into a single unsigned integer using Hilbert curve mapping. Hilbert curves preserve locality better than Morton encoding, making them ideal for spatial indexing. | NULL    | [hilbert_encode([1, 2, 3]::INTEGER[3])]        |
+| morton_decode  | scalar        | Decodes a Morton (Z-order) encoded unsigned integer back into an array of values. The number of output elements and their type are determined by the parameters.                                         | NULL    | [morton_decode(123::UBIGINT, 2, false, true)]  |
+| morton_encode  | scalar        | Encodes an array of integers or floats into a single unsigned integer using Morton (Z-order) curve mapping. Morton encoding interleaves bits and is computationally simpler than Hilbert encoding.       | NULL    | [morton_encode([1, 2, 3]::INTEGER[3])]         |
+
+### Overloaded Functions
+
+<div class="extension_functions_table"></div>
+
+This extension does not add any function overloads.
+
+### Added Types
+
+<div class="extension_types_table"></div>
+
+This extension does not add any types.
 
 ### Added Settings
 
 <div class="extension_settings_table"></div>
 
-|                 name                 |                                         description                                          | input_type | scope  | aliases |
-|--------------------------------------|----------------------------------------------------------------------------------------------|------------|--------|---------|
-| auto_fallback_to_full_download       | Allows automatically falling back to full file downloads when possible.                      | BOOLEAN    | GLOBAL | []      |
-| ca_cert_file                         | Path to a custom certificate file for self-signed certificates.                              | VARCHAR    | GLOBAL | []      |
-| enable_curl_server_cert_verification | Enable server side certificate verification for CURL backend.                                | BOOLEAN    | GLOBAL | []      |
-| enable_global_s3_configuration       | Automatically fetch AWS credentials from environment variables.                              | BOOLEAN    | GLOBAL | []      |
-| enable_server_cert_verification      | Enable server side certificate verification.                                                 | BOOLEAN    | GLOBAL | []      |
-| force_download                       | Forces upfront download of file                                                              | BOOLEAN    | GLOBAL | []      |
-| hf_max_per_page                      | Debug option to limit number of items returned in list requests                              | UBIGINT    | GLOBAL | []      |
-| http_keep_alive                      | Keep alive connections. Setting this to false can help when running into connection failures | BOOLEAN    | GLOBAL | []      |
-| http_retries                         | HTTP retries on I/O error                                                                    | UBIGINT    | GLOBAL | []      |
-| http_retry_backoff                   | Backoff factor for exponentially increasing retry wait time                                  | FLOAT      | GLOBAL | []      |
-| http_retry_wait_ms                   | Time between retries                                                                         | UBIGINT    | GLOBAL | []      |
-| http_timeout                         | HTTP timeout read/write/connection/retry (in seconds)                                        | UBIGINT    | GLOBAL | []      |
-| httpfs_client_implementation         | Select which is the HTTPUtil implementation to be used                                       | VARCHAR    | GLOBAL | []      |
-| merge_http_secret_into_s3_request    | Merges http secret params into S3 requests                                                   | BOOLEAN    | GLOBAL | []      |
-| s3_access_key_id                     | S3 Access Key ID                                                                             | VARCHAR    | GLOBAL | []      |
-| s3_endpoint                          | S3 Endpoint                                                                                  | VARCHAR    | GLOBAL | []      |
-| s3_kms_key_id                        | S3 KMS Key ID                                                                                | VARCHAR    | GLOBAL | []      |
-| s3_region                            | S3 Region                                                                                    | VARCHAR    | GLOBAL | []      |
-| s3_requester_pays                    | S3 use requester pays mode                                                                   | BOOLEAN    | GLOBAL | []      |
-| s3_secret_access_key                 | S3 Access Key                                                                                | VARCHAR    | GLOBAL | []      |
-| s3_session_token                     | S3 Session Token                                                                             | VARCHAR    | GLOBAL | []      |
-| s3_uploader_max_filesize             | S3 Uploader max filesize (between 50GB and 5TB)                                              | VARCHAR    | GLOBAL | []      |
-| s3_uploader_max_parts_per_file       | S3 Uploader max parts per file (between 1 and 10000)                                         | UBIGINT    | GLOBAL | []      |
-| s3_uploader_thread_limit             | S3 Uploader global thread limit                                                              | UBIGINT    | GLOBAL | []      |
-| s3_url_compatibility_mode            | Disable Globs and Query Parameters on S3 URLs                                                | BOOLEAN    | GLOBAL | []      |
-| s3_url_style                         | S3 URL style                                                                                 | VARCHAR    | GLOBAL | []      |
-| s3_use_ssl                           | S3 use SSL                                                                                   | BOOLEAN    | GLOBAL | []      |
-| unsafe_disable_etag_checks           | Disable checks on ETag consistency                                                           | BOOLEAN    | GLOBAL | []      |
+This extension does not add any settings.
 
 

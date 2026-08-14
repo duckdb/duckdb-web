@@ -10,12 +10,12 @@ tags: ["meetup"]
 venue: "Adyen Rokin office, Amsterdam"
 ---
 
-<img src="/images/events/thumbs/duckdb-amsterdam-meetup-3.svg"
+<img src="{% link images/events/thumbs/duckdb-amsterdam-meetup-3.svg %}"
      alt="DuckDB Amsterdam Meetup Splashscreen"
      width="680"
      />
 
-We are excited to announce the [third DuckDB Amsterdam meetup](https://www.meetup.com/duckdb/events/308780911/), co-organized by [Adyen](https://www.adyen.com/) and [DuckDB Labs](https://duckdblabs.com/).
+We are excited to announce the [third DuckDB Amsterdam meetup](https://www.meetup.com/duckdb/events/308780911/), co-organized by [Adyen](https://www.adyen.com/) and [DuckLabs](https://ducklabs.com/).
 
 ## Registration Process
 
@@ -28,15 +28,10 @@ The event starts at 18:00 and will feature three talks from DuckDB users and dev
 |  Time | Title                                                                                                       | Presenter(s)                                                 | Slides                                                                                                          |
 | ----: | :---------------------------------------------------------------------------------------------------------- | :----------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------- |
 | 17:30 | _Venue opens_                                                                                               |                                                              |                                                                                                                 |
-| 18:00 | Opening remarks                                                                                             | Gábor Szárnyas<br>_[(DuckDB Labs)](https://duckdblabs.com/)_ |                                                                                                                 |
+| 18:00 | Opening remarks                                                                                             | Gábor Szárnyas<br>_[(DuckLabs)](https://ducklabs.com/)_ |                                                                                                                 |
 | 18:10 | [Huey: Pivoting hundreds of millions of rows in the browser with DuckDB-Wasm](https://youtu.be/qCx4hG9J3O8) | Roland Bouman                                                | [pdf](https://blobs.duckdb.org/events/duckdb-amsterdam-meetup3/roland-bouman-huey.pdf)                          |
-| 18:35 | [Indexes are (not) all you need: Common DuckDB pitfalls and how to find them](https://youtu.be/RywT9_K4QWg) | Tania Bogatsch<br>_[(DuckDB Labs)](https://duckdblabs.com/)_ | [pdf](https://blobs.duckdb.org/events/duckdb-amsterdam-meetup3/tania-bogatsch-indexes-are-not-all-you-need.pdf) |
+| 18:35 | [Indexes are (not) all you need: Common DuckDB pitfalls and how to find them](https://youtu.be/RywT9_K4QWg) | Tania Bogatsch<br>_[(DuckLabs)](https://ducklabs.com/)_ | [pdf](https://blobs.duckdb.org/events/duckdb-amsterdam-meetup3/tania-bogatsch-indexes-are-not-all-you-need.pdf) |
 | 19:00 | [query.farm: Growing DuckDB community extensions](https://youtu.be/GR9HdG-dq8Q)                             | Lorenzo Mangani<br>_[(query.farm)](https://query.farm/)_     | [pdf](https://blobs.duckdb.org/events/duckdb-amsterdam-meetup3/lorenzo-mangani-query-farm.pdf)                  |
 | 19:30 | _Drinks and snacks by [Adyen](https://www.adyen.com/)_                                                      |                                                              |                                                                                                                 |
 
 The event will be held at the Adyen Rokin office: 1012KK Amsterdam, Rokin 49 ([Apple Maps](https://maps.apple.com/place?address=Rokin%2049,%201012%20KK%20Amsterdam,%20Netherlands&coordinate=52.371375,4.893167&name=Adyen%20Rokin%20Office&place-id=I9267DC82A95CF006&map=explore), [Google Maps](https://maps.app.goo.gl/MCHMGtjFi7SD8QBb7)).
-The catering is provided by Adyen.
-
-## Inquiries
-
-Please contact Kelly de Smit at [kelly@duckdblabs.com](mailto:kelly@duckdblabs.com) if you have any questions.

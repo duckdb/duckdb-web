@@ -4,9 +4,8 @@ import re
 import json
 from textwrap import shorten
 
-
 skipped_files = [
-    'docs/preview',
+    'docs/current',
     'docs/1.3',
     'docs/1.2',
     'docs/1.1',
@@ -209,7 +208,7 @@ def extract_functions(text, full_path):
         }
 
 
-function_dir = os.path.sep.join('docs/stable/sql/functions'.split('/'))
+function_dir = os.path.sep.join('docs/current/sql/functions'.split('/'))
 files = os.listdir(function_dir)
 files.sort()
 for file in files:

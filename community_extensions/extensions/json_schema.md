@@ -17,13 +17,14 @@ extension:
   name: json_schema
   version: '2025120401'
 repo:
+  andium: 69664ce2fb234a071c4e01690584d2c402e96705
   github: query-farm/json_schema
-  ref: d506aff832d137a4eb3fa826a860e5808bf657f1
+  ref: ff488f3d003b6fc26f6433699a7b1a315ec86e05
 
-extension_star_count: 2
-extension_star_count_pretty: 2
-extension_download_count: 1492
-extension_download_count_pretty: 1.5k
+extension_star_count: 4
+extension_star_count_pretty: 4
+extension_download_count: 848
+extension_download_count_pretty: 848
 image: '/images/community_extensions/social_preview/preview_community_extension_json_schema.png'
 layout: community_extension_doc
 ---
@@ -55,5 +56,23 @@ LOAD {{ page.extension.name }};
 | json_schema_update          | scalar        | NULL        | NULL    |          |
 | json_schema_validate        | scalar        | NULL        | NULL    |          |
 | json_schema_validate_schema | scalar        | NULL        | NULL    |          |
+
+### Overloaded Functions
+
+<div class="extension_functions_table"></div>
+
+This extension does not add any function overloads.
+
+### Added Types
+
+<div class="extension_types_table"></div>
+
+This extension does not add any types.
+
+### Added Settings
+
+<div class="extension_settings_table"></div>
+
+This extension does not add any settings.
 
 

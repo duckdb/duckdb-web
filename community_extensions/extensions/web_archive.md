@@ -8,7 +8,7 @@ excerpt: |
 extension:
   name: web_archive
   description: Query Common Crawl and Wayback Machine web archive CDX APIs directly from SQL
-  version: '2026020301'
+  version: '2026062703'
   language: C++
   build: cmake
   license: MIT
@@ -18,7 +18,8 @@ extension:
 
 repo:
   github: midwork-finds-jobs/duckdb-web-archive
-  ref: 90c67cb283d668aec7154b8abd3e3001669696b7
+  andium: 33968f9147d851ff565b19546650162c73b85f5e
+  ref: fa55e897d42ad8859f9d707d793b58807a8c8e84
 
 docs:
   hello_world: |
@@ -59,10 +60,10 @@ docs:
 
     For full documentation, visit the [extension repository](https://github.com/midwork-finds-jobs/duckdb-web-archive).
 
-extension_star_count: 14
-extension_star_count_pretty: 14
-extension_download_count: 356
-extension_download_count_pretty: 356
+extension_star_count: 22
+extension_star_count_pretty: 22
+extension_download_count: 801
+extension_download_count_pretty: 801
 image: '/images/community_extensions/social_preview/preview_community_extension_web_archive.png'
 layout: community_extension_doc
 ---
@@ -92,5 +93,23 @@ LOAD {{ page.extension.name }};
 |--------------------|---------------|-------------|---------|----------|
 | common_crawl_index | table         | NULL        | NULL    |          |
 | wayback_machine    | table         | NULL        | NULL    |          |
+
+### Overloaded Functions
+
+<div class="extension_functions_table"></div>
+
+This extension does not add any function overloads.
+
+### Added Types
+
+<div class="extension_types_table"></div>
+
+This extension does not add any types.
+
+### Added Settings
+
+<div class="extension_settings_table"></div>
+
+This extension does not add any settings.
 
 

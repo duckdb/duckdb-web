@@ -1,6 +1,6 @@
 <nav>
 	<div class="search_icon">
-		<svg class="icon"><use href="#search-sm"></use></svg>
+		<svg class="icon"><use href="#search-md"></use></svg>
 	</div>
 	{% assign archive_url_slug = '/docs' %}
 	{% if site.data.secondarymenu.toc2[0] %}
@@ -14,7 +14,7 @@
 						{% if myurl == 'https' or myurl == 'http:' %}
 						<div class="external"><a href="{{ mainentry.url }}" target="_blank" class="{{ mainentry.page | downcase }}">{{ mainentry.page }} {% if mainentry.page == 'GitHub' and site.star_count %} <span class="starcount">{{ site.star_count }}</span>{% endif %}</a></div>
 						{% else %}
-						<div><a href="{{ mainentry.url | replace: '/docs', archive_url_slug }}">{{ mainentry.page }}</a></div>
+						<div><a href="{{ mainentry.url | replace: '/docs', archive_url_slug }}">{{ mainentry.page }}</a>{% if mainentry.subfolderitems[0] %}<svg class="icon chevron-down"><use href="#chevron-down"></use></svg>{% endif %}</div>
 						{% endif %}
 					{% else %}<a href="{{ mainentry.url }}">{{ mainentry.page }}</a>{% endif %}
 			    {% if mainentry.subfolderitems[0] %}</div>{% endif %}
@@ -41,5 +41,5 @@
 			{% endif %}
 		{% endfor %}
 	{% endif %}
-	<div class="onlymobile external"><a href="https://duckdblabs.com/#support" target="_blank">Support</a></div>
+	<div class="onlymobile external"><a href="https://ducklabs.com/contact" target="_blank">Support</a></div>
 </nav>

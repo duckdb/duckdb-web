@@ -13,7 +13,7 @@ pip install -r requirements.txt
 
 ### Using the DuckDB Preview Version
 
-Download the [Preview Version](https://duckdb.org/docs/installation/?version=main), extract the `duckdb` file and move it to the directory expected by the scripts:
+Download the [Preview Version](https://duckdb.org/install/preview), extract the `duckdb` file and move it to the directory expected by the scripts:
 
 ```batch
 mkdir -p build/release

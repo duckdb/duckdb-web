@@ -8,17 +8,17 @@ excerpt: |
 extension:
   name: read_stat
   description: Read data sets from SAS, Stata, and SPSS with ReadStat
-  version: 0.2.3
+  version: 0.3.0
   language: C
   build: cmake
   license: MIT
   requires_toolchains: "python3"
   maintainers:
-    - mettekou
+    - dylanmeysmans
 
 repo:
-  github: mettekou/duckdb-read-stat
-  ref: d66821b3626caddbc8da7794617747e079f2ff64
+  github: dylanmeysmans/duckdb-read-stat
+  ref: 52c29607852663fc7c318c5e0dc5dcbd2d565aa6
 
 docs:
   hello_world: |
@@ -57,10 +57,10 @@ docs:
     | `format` | The format of the input file, when its extension does not indicate it, either `'sas7bdat'`, `'xpt'`, `'sav'`, `'por'`, or `'dta'` | `VARCHAR` | `NULL` |
     | `encoding` | The character encoding of the input file, as defined by `iconv`, see https://www.gnu.org/software/libiconv/ | `VARCHAR` | `NULL` |
 
-extension_star_count: 27
-extension_star_count_pretty: 27
-extension_download_count: 375
-extension_download_count_pretty: 375
+extension_star_count: 34
+extension_star_count_pretty: 34
+extension_download_count: 1390
+extension_download_count_pretty: 1.4k
 image: '/images/community_extensions/social_preview/preview_community_extension_read_stat.png'
 layout: community_extension_doc
 ---
@@ -89,5 +89,23 @@ LOAD {{ page.extension.name }};
 | function_name | function_type | description | comment | examples |
 |---------------|---------------|-------------|---------|----------|
 | read_stat     | table         | NULL        | NULL    |          |
+
+### Overloaded Functions
+
+<div class="extension_functions_table"></div>
+
+This extension does not add any function overloads.
+
+### Added Types
+
+<div class="extension_types_table"></div>
+
+This extension does not add any types.
+
+### Added Settings
+
+<div class="extension_settings_table"></div>
+
+This extension does not add any settings.
 
 

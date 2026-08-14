@@ -8,7 +8,7 @@ excerpt: |
 extension:
   name: pdal
   description: Extension that adds support for manipulating point cloud data using SQL.
-  version: 0.4.0
+  version: 0.5.2
   language: C++
   build: cmake
   excluded_platforms: "windows_amd64_mingw;wasm_mvp;wasm_eh;wasm_threads"
@@ -19,7 +19,7 @@ extension:
 
 repo:
   github: ahuarte47/duckdb-pdal
-  ref: 47d5cfcc23405a32dd5c1ca75e1b2aa87382ede6
+  ref: 5ff71b1700ce67679af66b4120f51d797053bec6
 
 docs:
   hello_world: |
@@ -162,10 +162,10 @@ docs:
     ;
     ```
 
-extension_star_count: 25
-extension_star_count_pretty: 25
-extension_download_count: 333
-extension_download_count_pretty: 333
+extension_star_count: 27
+extension_star_count_pretty: 27
+extension_download_count: 797
+extension_download_count_pretty: 797
 image: '/images/community_extensions/social_preview/preview_community_extension_pdal.png'
 layout: community_extension_doc
 ---
@@ -198,5 +198,23 @@ LOAD {{ page.extension.name }};
 | PDAL_Info          | table         | Read the metadata from point cloud file[s].                                                      | NULL    | [SELECT * FROM PDAL_Info('./test/data/autzen_trim.la*');]                                            |
 | PDAL_Pipeline      | table         | Read and import a point cloud data file, applying also a custom processing pipeline to the data. | NULL    | [SELECT * FROM PDAL_Pipeline('path/to/your/filename.las', 'path/to/your/pipeline.json');]            |
 | PDAL_PipelineTable | table         | Apply a custom processing pipeline to the input table.                                           | NULL    | [SELECT * FROM PDAL_PipelineTable((SELECT X,Y,Z FROM ...), '[ {type: filters.tail, count: 100} ]');] |
+
+### Overloaded Functions
+
+<div class="extension_functions_table"></div>
+
+This extension does not add any function overloads.
+
+### Added Types
+
+<div class="extension_types_table"></div>
+
+This extension does not add any types.
+
+### Added Settings
+
+<div class="extension_settings_table"></div>
+
+This extension does not add any settings.
 
 

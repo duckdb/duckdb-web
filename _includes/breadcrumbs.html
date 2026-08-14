@@ -5,8 +5,10 @@
 <div id="breadcrumbs">
   {% assign crumbs = page.url | remove: '/index.html' | split: '/' %}
   {% assign offset = 3 %}
+  {% assign breadcrumb_version = version_viewed | default: "current" %}
+  {% assign version_base = "docs/" | append: breadcrumb_version %}
 
-  <span>Documentation</span>
+  <span><a href="/{{ version_base }}/index">Documentation</a></span>
 
   {% for doc_entry in menudocfile %}
     {% assign crumb = crumbs[offset] %}
@@ -14,21 +16,27 @@
       {% for main_entry in doc_entry.mainfolderitems %}
         {% assign main_entry_slug_trimmed = main_entry.slug | replace: '/', '' %}
         {% if main_entry_slug_trimmed == crumb %}
-          <span class="slash">/</span> <span>{{ main_entry.page }}</span>
+          {% assign main_path = version_base | append: "/" | append: main_entry_slug_trimmed %}
+          {% capture main_overview_exists %}{% file_exists {{ main_path }}/overview.md %}{% endcapture %}
+          <span class="slash">/</span> <span>{% if main_overview_exists == "true" %}<a href="/{{ main_path }}/overview">{{ main_entry.page }}</a>{% else %}{{ main_entry.page }}{% endif %}</span>
           {% assign offset = offset | plus:1 %}
           {% assign crumb = crumbs[offset] %}
           {% if main_entry.subfolderitems %}
             {% for sub_entry in main_entry.subfolderitems %}
               {% assign sub_entry_slug_trimmed = sub_entry.slug | replace: '/', '' %}
               {% if sub_entry_slug_trimmed == crumb %}
-                <span class="slash">/</span> <span>{{ sub_entry.page }}</span>
+                {% assign sub_path = main_path | append: "/" | append: sub_entry_slug_trimmed %}
+                {% capture sub_overview_exists %}{% file_exists {{ sub_path }}/overview.md %}{% endcapture %}
+                <span class="slash">/</span> <span>{% if sub_overview_exists == "true" %}<a href="/{{ sub_path }}/overview">{{ sub_entry.page }}</a>{% else %}{{ sub_entry.page }}{% endif %}</span>
                 {% assign offset = offset | plus:1 %}
                 {% assign crumb = crumbs[offset] %}
                 {% if sub_entry.subsubfolderitems %}
                   {% for subsub_entry in sub_entry.subsubfolderitems %}
                     {% assign subsub_entry_slug_trimmed = subsub_entry.slug | replace: '/', '' %}
                     {% if subsub_entry_slug_trimmed == crumb %}
-                      <span class="slash">/</span> <span>{{ subsub_entry.page }}</span>
+                      {% assign subsub_path = sub_path | append: "/" | append: subsub_entry_slug_trimmed %}
+                      {% capture subsub_overview_exists %}{% file_exists {{ subsub_path }}/overview.md %}{% endcapture %}
+                      <span class="slash">/</span> <span>{% if subsub_overview_exists == "true" %}<a href="/{{ subsub_path }}/overview">{{ subsub_entry.page }}</a>{% else %}{{ subsub_entry.page }}{% endif %}</span>
                     {% endif %}
                   {% endfor %}
                 {% endif %}

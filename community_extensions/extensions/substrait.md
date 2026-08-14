@@ -8,7 +8,7 @@ excerpt: |
 extension:
   name: substrait
   description: Allows conversion execution of Substrait query plans
-  version: 1.2.1
+  version: 1.5.4
   language: C++
   build: cmake
   license: Apache-2.0
@@ -20,7 +20,7 @@ extension:
 
 repo:
   github: substrait-io/duckdb-substrait-extension
-  ref: ec9f8725df7aa22bae7217ece2f221ac37563da4
+  ref: e61b3bdf6fa92120b52b583914b742b9f3c50130
 
 docs:
   hello_world: |
@@ -30,10 +30,10 @@ docs:
 redirect_from:
   - /docs/extensions/substrait
 
-extension_star_count: 42
-extension_star_count_pretty: 42
-extension_download_count: 516
-extension_download_count_pretty: 516
+extension_star_count: 67
+extension_star_count_pretty: 67
+extension_download_count: 705
+extension_download_count_pretty: 705
 image: '/images/community_extensions/social_preview/preview_community_extension_substrait.png'
 layout: community_extension_doc
 ---
@@ -61,9 +61,27 @@ LOAD {{ page.extension.name }};
 
 |    function_name    | function_type |                                         description                                         | comment | examples |
 |---------------------|---------------|---------------------------------------------------------------------------------------------|---------|----------|
-| get_substrait       | table         | Converts the provided query into a binary Substrait plan                                    | NULL    | [NULL]   |
-| get_substrait_json  | table         | Converts the provided query into a Substrait plan in JSON                                   | NULL    | [NULL]   |
-| from_substrait      | table         | Executes a binary Substrait plan (provided as bytes) against DuckDB and returns the results | NULL    | [NULL]   |
-| from_substrait_json | table         | Executes a Substrait plan written in JSON against DuckDB and returns the results            | NULL    | [NULL]   |
+| get_substrait       | table         | Converts the provided query into a binary Substrait plan                                    | NULL    | NULL     |
+| get_substrait_json  | table         | Converts the provided query into a Substrait plan in JSON                                   | NULL    | NULL     |
+| from_substrait      | table         | Executes a binary Substrait plan (provided as bytes) against DuckDB and returns the results | NULL    | NULL     |
+| from_substrait_json | table         | Executes a Substrait plan written in JSON against DuckDB and returns the results            | NULL    | NULL     |
+
+### Overloaded Functions
+
+<div class="extension_functions_table"></div>
+
+This extension does not add any function overloads.
+
+### Added Types
+
+<div class="extension_types_table"></div>
+
+This extension does not add any types.
+
+### Added Settings
+
+<div class="extension_settings_table"></div>
+
+This extension does not add any settings.
 
 

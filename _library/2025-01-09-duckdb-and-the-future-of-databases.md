@@ -18,7 +18,6 @@ redirect_from:
 </div>
 
 |-------|-------|
-| **Date** | {{ page.date | date: "%Y-%m-%d" }} |
-| **Podcast** | [Data Science Hangout by Posit](https://pos.it/dsh ) |
-| **Guest** | [Hannes Mühleisen (DuckDB Labs)](https://hannes.muehleisen.org/) |
+| **Podcast** | [Data Science Hangout by Posit](https://pos.it/dsh) |
+| **Guest** | [Hannes Mühleisen (DuckLabs)](https://hannes.muehleisen.org/) |
 | **YouTube** | [DuckDB and the Future of Databases](https://www.youtube.com/watch?v=GvgbcWtHgVY) |

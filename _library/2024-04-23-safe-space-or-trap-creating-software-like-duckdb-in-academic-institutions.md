@@ -14,7 +14,6 @@ redirect_from:
 ---
 
 |-------|-------|
-| **Date** | {{ page.date | date: "%Y-%m-%d" }} |
 | **Event** | [PyCon.DE 2024](https://2024.pycon.de/) |
-| **Speaker** | [Hannes Mühleisen (DuckDB Labs)](https://hannes.muehleisen.org/) |
+| **Speaker** | [Hannes Mühleisen (DuckLabs)](https://hannes.muehleisen.org/) |
 | **YouTube** | [Safe Space or Trap? Creating Software like DuckDB in Academic Institutions](https://www.youtube.com/watch?v=PoHfh6O43uE) |

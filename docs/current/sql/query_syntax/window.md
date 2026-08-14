@@ -1,0 +1,15 @@
+---
+layout: docu
+railroad: query_syntax/window.js
+redirect_from:
+- /docs/preview/sql/query_syntax/window
+- /docs/sql/query_syntax/window
+- /docs/stable/sql/query_syntax/window
+title: WINDOW Clause
+---
+
+The `WINDOW` clause allows you to specify named windows that can be used within [window functions]({% link docs/current/sql/functions/window_functions.md %}). These are useful when you have multiple window functions, as they allow you to avoid repeating the same window clause.
+
+## Syntax
+
+<div id="rrdiagram"></div>

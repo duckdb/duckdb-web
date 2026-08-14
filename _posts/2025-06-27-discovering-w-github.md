@@ -19,6 +19,7 @@ GitHub provides a [series of REST API](https://docs.github.com/en/rest?apiVersio
 > GitHub also has a search code API in order to match on code dependency, but it does not return all the information the search repository provides. One could use the search code API and for each result to retrieve the repository information from the repository API.
 
 In order to use the GitHub API, we create an [access token](https://docs.github.com/en/rest/search/search?apiVersion=2022-11-28#search-repositories--fine-grained-access-tokens) with read access on public repositories. With the access token, saved as an environment variable, we create a secret in DuckDB to be used by the API request:
+
 ```python
 import os
 
@@ -37,7 +38,8 @@ def get_duckdb_conn():
     return conn
 ```
 
-With the DuckDB Python client's [`read_json`]({%link docs/stable/clients/python/relational_api.md %}#read_json) function we are able to query the API response with SQL. The above secret is passed automatically by DuckDB to the API call:
+With the DuckDB Python client's [`read_json`]({% link docs/current/clients/python/relational_api.md %}#read_json) function we are able to query the API response with SQL. The above secret is passed automatically by DuckDB to the API call:
+
 ```python
 duckdb_conn = get_duckdb_conn()
 
@@ -57,11 +59,15 @@ The API call returns the following response:
 ```
 
 We can analyze the response by:
+
 - getting the list of columns with `api_response.columns`:
+
   ```text
   ['total_count', 'incomplete_results', 'items']
   ```
+
 - getting the column types `api_response.types`:
+
   ```sql
   [
       BIGINT,
@@ -69,7 +75,9 @@ We can analyze the response by:
       STRUCT(id BIGINT, node_id VARCHAR, "name" VARCHAR, full_name VARCHAR, private BOOLEAN, "owner" STRUCT(login VARCHAR, id BIGINT, node_id VARCHAR, avatar_url VARCHAR, gravatar_id VARCHAR, url VARCHAR, html_url VARCHAR, followers_url VARCHAR, following_url VARCHAR, gists_url VARCHAR, starred_url VARCHAR, subscriptions_url VARCHAR, organizations_url VARCHAR, repos_url VARCHAR, events_url VARCHAR, received_events_url VARCHAR, "type" VARCHAR, user_view_type VARCHAR, site_admin BOOLEAN), html_url VARCHAR, description VARCHAR, fork BOOLEAN, url VARCHAR, forks_url VARCHAR, keys_url VARCHAR, collaborators_url VARCHAR, teams_url VARCHAR, hooks_url VARCHAR, issue_events_url VARCHAR, events_url VARCHAR, assignees_url VARCHAR, branches_url VARCHAR, tags_url VARCHAR, blobs_url VARCHAR, git_tags_url VARCHAR, git_refs_url VARCHAR, trees_url VARCHAR, statuses_url VARCHAR, languages_url VARCHAR, stargazers_url VARCHAR, contributors_url VARCHAR, subscribers_url VARCHAR, subscription_url VARCHAR, commits_url VARCHAR, git_commits_url VARCHAR, comments_url VARCHAR, issue_comment_url VARCHAR, contents_url VARCHAR, compare_url VARCHAR, merges_url VARCHAR, archive_url VARCHAR, downloads_url VARCHAR, issues_url VARCHAR, pulls_url VARCHAR, milestones_url VARCHAR, notifications_url VARCHAR, labels_url VARCHAR, releases_url VARCHAR, deployments_url VARCHAR, created_at TIMESTAMP, updated_at TIMESTAMP, pushed_at TIMESTAMP, git_url VARCHAR, ssh_url VARCHAR, clone_url VARCHAR, svn_url VARCHAR, homepage VARCHAR, size BIGINT, stargazers_count BIGINT, watchers_count BIGINT, "language" VARCHAR, has_issues BOOLEAN, has_projects BOOLEAN, has_downloads BOOLEAN, has_wiki BOOLEAN, has_pages BOOLEAN, has_discussions BOOLEAN, forks_count BIGINT, mirror_url JSON, archived BOOLEAN, disabled BOOLEAN, open_issues_count BIGINT, license STRUCT("key" VARCHAR, "name" VARCHAR, spdx_id VARCHAR, url VARCHAR, node_id VARCHAR), allow_forking BOOLEAN, is_template BOOLEAN, web_commit_signoff_required BOOLEAN, topics VARCHAR[], visibility VARCHAR, forks BIGINT, open_issues BIGINT, watchers BIGINT, default_branch VARCHAR, permissions STRUCT("admin" BOOLEAN, maintain BOOLEAN, push BOOLEAN, triage BOOLEAN, pull BOOLEAN), score DOUBLE)[]
   ]
   ```
+
 - getting the number of items with `api_response.select("len(items)")`:
+
   ```text
   ┌────────────┐
   │ len(items) │
@@ -109,7 +117,7 @@ api_url = f"{api_url}+pushed:>={last_pushed_date}"
 duckdb_conn.read_json(f"{api_url}&per_page=100&page=1").to_table("github_raw_data")
 ```
 
-We store the first page in a table called `github_raw_data` and calculate how many pages we need to retrieve based on the total count returned by the first call. Then, with the [`insert_into`]({%link docs/stable/clients/python/relational_api.md %}#insert_into) method, we append the data from each page into `github_raw_data`:
+We store the first page in a table called `github_raw_data` and calculate how many pages we need to retrieve based on the total count returned by the first call. Then, with the [`insert_into`]({% link docs/current/clients/python/relational_api.md %}#insert_into) method, we append the data from each page into `github_raw_data`:
 
 ```python
 for page in range(2, number_pages + 1):
@@ -119,12 +127,11 @@ for page in range(2, number_pages + 1):
         .read_json(f"{api_url}&per_page=100&page={page}")
         .insert_into("github_raw_data")
     )
-
 ```
 
 ## Saving Data to a Markdown File
 
-With the data available in a table, we can continue our data processing, by using the [`unnest` function]({%link docs/stable/sql/query_syntax/unnest.md %}), which will flatten the `items` returned by the API:
+With the data available in a table, we can continue our data processing, by using the [`unnest` function]({% link docs/current/sql/query_syntax/unnest.md %}), which will flatten the `items` returned by the API:
 
 ```python
 (
@@ -133,7 +140,8 @@ With the data available in a table, we can continue our data processing, by usin
 )
 ```
 
-By using [`recursive` unnesting]({%link docs/stable/sql/query_syntax/unnest.md %}#recursive-unnest), the `STRUCT` objects within `items` will be flattened too; below is a sample of the columns derived from `items` after unnesting:
+By using [`recursive` unnesting]({% link docs/current/sql/query_syntax/unnest.md %}#recursive-unnest), the `STRUCT` objects within `items` will be flattened too; below is a sample of the columns derived from `items` after unnesting:
+
 ```text
 ['id',
  'node_id',
@@ -156,7 +164,8 @@ Our scope is to create a Markdown file containing a table, with the following fo
 - **created at**, when the repository was created;
 - **updated at**, when the repository was last updated.
 
-To retrieve the `name` field we use [`concat_ws`]({%link docs/stable/sql/functions/text.md %}#concat_wsseparator-string-) and [`concat`]({%link docs/stable/sql/functions/text.md %}#concatvalue-) functions, in order to generate the hyperlink and text with the Markdown newline character(`<br>`):
+To retrieve the `name` field we use [`concat_ws`]({% link docs/current/sql/functions/text.md %}#concat_wsseparator-string-) and [`concat`]({% link docs/current/sql/functions/text.md %}#concatvalue-) functions, in order to generate the hyperlink and text with the Markdown newline character(`<br>`):
+
 ```python
 selection_query = (
     duckdb_conn.table("github_raw_data")
@@ -173,6 +182,7 @@ selection_query = (
 )
 ```
 The above returns:
+
 ```text
 repo_details = [duckdb-web](https://github.com/duckdb/duckdb-web)<br>DuckDB website and documentation<br>**License** MIT License<br>**Owner** duckdb 
 repo_details = [duckdb](https://github.com/duckdb/duckdb)<br>DuckDB is an analytical in-process SQL database management system<br>**License** MIT License<br>**Owner** duckdb
@@ -180,6 +190,7 @@ repo_details = [duckdb](https://github.com/duckdb/duckdb)<br>DuckDB is an analyt
 ```
 
 We also calculate metrics such as stars, open issues count and forks, which we sum into a field `activity_count`. A repository will end up in the list only if it has an `activity_count` greater than 3 and if it is not a fork. From above we also see that repositories owned by DuckDB are returned, therefore we filter them out too:
+
 ```python
 selection_query.filter("""
     login != 'duckdb'
@@ -193,6 +204,7 @@ A Markdown table is similar to a CSV file, separated by pipe (`|`), but it must:
 - between the table header and the first table row there needs to be a row with dashes (called delimiter row).
 
 In order to export the data as a Markdown file we are applying a few tricks. The first one is to select the header by adding dummy columns, at the beginning and end, containing `NULL`:
+
 ```python
 duckdb_conn.sql("""
     select 
@@ -209,6 +221,7 @@ duckdb_conn.sql("""
 ```
 
 We then union the above header with the delimiter row:
+
 ```python
 .union(
     duckdb_conn.sql("""
@@ -238,8 +251,9 @@ Returning:
 ```
 
 And finally we union with the initial GitHub selection query and export the data to CSV, by disabling the header export:
+
 ```python
-(   
+(
     ...
     .union(selection_query)
 ).to_csv("./exported_records.md", sep="|", header=False)
@@ -258,7 +272,8 @@ echo '# Repositories using `duckdb`' > README.md
 cat exported_records.md >> README.md
 ```
 
-Another way to create the README file is by using the [`string_agg` function]({%link docs/stable/clients/python/relational_api.md %}#string_agg):
+Another way to create the README file is by using the [`string_agg` function]({% link docs/current/clients/python/relational_api.md %}#string_agg):
+
 ```python
 selected_data = (
     selection_query
@@ -289,23 +304,25 @@ with open('README.md', 'w') as readme_file:
     readme_file.write(f"{selected_data}|")
 ```
 
-In the above code snippet we concatenate the columns with the pipe character and then we aggregate the records into a string, separated by `|\n` in order to add a pipe and newline at the end of each line. We then use Python to write to README the title of the page, the Markdown table header, the delimiter row (by using the [`repeat` function]({%link docs/stable/sql/functions/text.md %}#repeatstring-count)) and the data itself.
+In the above code snippet we concatenate the columns with the pipe character and then we aggregate the records into a string, separated by `|\n` in order to add a pipe and newline at the end of each line. We then use Python to write to README the title of the page, the Markdown table header, the delimiter row (by using the [`repeat` function]({% link docs/current/sql/functions/text.md %}#repeatstring-count)) and the data itself.
 
 > The data size is very small, each commit having a README of approx. 35 KB.
 
 ## Automating with GitHub Workflow
 
 With [GitHub workflows](https://docs.github.com/en/actions/writing-workflows/about-workflows) we automated the above data processing steps. We first define a [Makefile](https://medium.com/@petrica.leuca/5e987d537235?sk=60425654b72d870213b4ea29bae908a9) in our project to configure the steps needed to be executed in the workflow:
+
 ```makefile
 search-repos:
-	uv run using_duckdb/search_repositories.py
+    uv run using_duckdb/search_repositories.py
 
 readme:
-	echo '# Repositories using `duckdb`' > README.md && \
-	cat exported_records.md >> README.md
+    echo '# Repositories using `duckdb`' > README.md && \
+    cat exported_records.md >> README.md
 ```
 
 In the settings of the GitHub repository we create a [repository secret](https://docs.github.com/en/actions/security-for-github-actions/security-guides/using-secrets-in-github-actions) which contains the value of the API token generated above. We can then configure an environment variable in our workflow and define the processing steps:
+
 ```yaml
 name: Search
 
@@ -370,10 +387,10 @@ Because we store the search results into the README file and we update it daily 
 
 ```makefile
 git-log:
-	echo '|Name|Topics|Stars|Open Issues|Forks|Created At|Updated At|' > git_log.md && \
-	echo '|--|--|--|--|--|--|--|' >> git_log.md && \
-	git log --follow -p --pretty=format:"" -- README.md | grep '^+|\[' | sed 's/^+//' >> git_log.md && \
-	git diff -- README.md | grep '^+|\[' | sed 's/^+//' >> git_log.md
+    echo '|Name|Topics|Stars|Open Issues|Forks|Created At|Updated At|' > git_log.md && \
+    echo '|--|--|--|--|--|--|--|' >> git_log.md && \
+    git log --follow -p --pretty=format:"" -- README.md | grep '^+|\[' | sed 's/^+//' >> git_log.md && \
+    git diff -- README.md | grep '^+|\[' | sed 's/^+//' >> git_log.md
 ```
 
 In the above Makefile command we:
@@ -396,6 +413,7 @@ The `git_log.md` contains now the entire history of appended records to the READ
 
 
 The above plot is generated with [Plotly](https://plotly.com/python/) by providing as data source a DuckDB Python relation:
+
 ```python
 px.scatter(
     duckdb_conn.read_csv(

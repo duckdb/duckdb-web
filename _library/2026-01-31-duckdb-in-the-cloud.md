@@ -2,6 +2,8 @@
 layout: post
 title: "DuckDB in the Cloud: A Simple, Powerful SQL Engine for Your Lakehouse"
 author: "Tom Ebergen"
+thumb: "/images/library/thumbs/2026-01-31-duckdb-in-the-cloud.jpg"
+image: "/images/library/thumbs/2026-01-31-duckdb-in-the-cloud.jpg"
 tags: ["Talk"]
 thirdparty: false
 excerpt: ""
@@ -15,4 +17,8 @@ titled [“DuckDB in the Cloud: A Simple, Powerful SQL Engine for Your Lakehouse
     <iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/a2KcteGKfwg?si=oXkQa-KVRKSR1eR4" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 </div>
 
-[Slides (PDF)](https://fosdem.org/2026/events/attachments/HTMKMK-duckdb-in-the-cloud/slides/266832/duckdb-in_ijvcep3.pdf)
+|-------|-------|
+| **Event** | [FOSDEM 2026, “Databases” developer room](https://fosdem.org/2026/schedule/track/databases/) |
+| **Speaker** | Tom Ebergen (DuckLabs) |
+| **Slide deck** | [Download](https://blobs.duckdb.org/slides/tom-ebergen-duckdb-in-the-cloud-fosdem-2026.pdf) |
+| **YouTube** | [DuckDB in the Cloud: A Simple, Powerful SQL Engine for Your Lakehouse](https://www.youtube.com/watch?v=a2KcteGKfwg) |

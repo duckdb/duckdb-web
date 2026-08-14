@@ -37,42 +37,46 @@ body:not(.layout_default) .blog_typography{
 
 .layout_default .wrap.fullwidth{
     max-width: unset;
+    padding: 0;
 }
 
 .layout_default #main_content_wrap.contains_toc {
     display: flex;
-    max-width: unset;
-    
-    .contentwidth {
-        max-width: 750px;
-        margin: 0 auto;
+    justify-content: space-between;
+    max-width: 1184px;
+    margin: 0 auto;
+    padding: 75px 15px;
+
+    @media only screen and (max-width: 1180px) {
+        justify-content: center;
     }
-    
+
     > .content {
-        width: 78vw;
-        @media only screen and (max-width: 1280px){
+        max-width: 750px;
+        min-width: 0;
+
+        @media only screen and (max-width: 800px) {
             width: 100%;
+            max-width: unset;
         }
     }
-    
+
     .toc_sidebar {
         position: relative;
-        width: 22vw;
-        padding: 0 20px;
-        
-        @media only screen and (max-width: 1280px) {
+        padding-top: 3px;
+
+        @media only screen and (max-width: 1180px) {
             display: none;
         }
-        
+
         .toc_menu {
             position: sticky;
             top: 100px;
-            height: calc(100vh - 100px);
+            max-height: calc(100vh - 100px);
             overflow: auto;
-            -ms-overflow-style: none; 
+            -ms-overflow-style: none;
             scrollbar-width: none;
-            margin-top: 70px;
-            
+
             &::-webkit-scrollbar {
                 display: none;
             }
@@ -115,7 +119,7 @@ body:not(.layout_default) .blog_typography{
                     line-height: 1;
                     
                     &.current > a {
-                        color: $purple;
+                        color: var(--main-text-primary-color, #0D0D0D);
                     }
                 }
                 
@@ -123,7 +127,7 @@ body:not(.layout_default) .blog_typography{
                     color: $black400;
                     text-decoration: none;
                     padding: 6px 12px;
-                    border-radius: 100px;
+                    border-radius: var(--page-radius-pill);
                     display: inline-block;
                     text-overflow: ellipsis; 
                     overflow: hidden; 
@@ -146,4 +150,15 @@ body:not(.layout_default) .blog_typography{
     height: 0;
     overflow: hidden;
     visibility: hidden;
+}
+
+body.release-calendar #main_content_wrap {
+    table {
+        th, td {
+            white-space: nowrap;
+        }
+        th:first-child, td:first-child {
+            min-width: 40px;
+        }
+    }
 }

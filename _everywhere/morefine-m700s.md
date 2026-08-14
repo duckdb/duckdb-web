@@ -1,11 +1,13 @@
 ---
 layout: post
 title: "MOREFINE M700S"
+date: 2026-01-06
 author: "Hannes Mühleisen"
 thumb: "/images/everywhere/thumbs/morefine-m700s.jpg"
 image: "/images/everywhere/thumbs/morefine-m700s.jpg"
 excerpt: ""
 tags: ["PCs"]
+thirdparty: false
 ---
 
 The MOREFINE M700S computer ships with the 8-core Loongson 3A6000 CPU, which uses the [MIPS](https://en.wikipedia.org/wiki/MIPS_architecture)-based LoongArch architecture.

@@ -8,7 +8,7 @@ excerpt: |
 extension:
   name: pivot_table
   description: Provides a spreadsheet-style pivot_table function
-  version: 0.0.2
+  version: 0.0.3
   language: C++
   build: cmake
   license: MIT
@@ -17,7 +17,7 @@ extension:
 
 repo:
   github: Alex-Monahan/pivot_table
-  ref: 3e87d43b4c15a3640b26eb8942ce5e75335c879a
+  ref: 9852c3ad9af74f4aeb61f7140bd6220fd08fa0c5
 
 docs:
   hello_world: |
@@ -25,10 +25,10 @@ docs:
   extended_description: |
     This extension, pivot_table, allow you to pivot your data using a spreadsheet-like pivot API. It is also similar to the Pandas pivot_table function. It does this solely through SQL macros - there are no C++ functions as a part of this extension.
 
-extension_star_count: 15
-extension_star_count_pretty: 15
-extension_download_count: 497
-extension_download_count_pretty: 497
+extension_star_count: 20
+extension_star_count_pretty: 20
+extension_download_count: 703
+extension_download_count_pretty: 703
 image: '/images/community_extensions/social_preview/preview_community_extension_pivot_table.png'
 layout: community_extension_doc
 ---
@@ -68,12 +68,29 @@ LOAD {{ page.extension.name }};
 | nq_list                     | macro         | NULL        | NULL    |          |
 | pivot_table                 | scalar        | NULL        | NULL    |          |
 | pivot_table                 | table_macro   | NULL        | NULL    |          |
-| pivot_table_openssl_version | scalar        | NULL        | NULL    |          |
 | pivot_table_show_sql        | table_macro   | NULL        | NULL    |          |
 | replace_zzz                 | macro         | NULL        | NULL    |          |
 | sq                          | macro         | NULL        | NULL    |          |
 | sq_concat                   | macro         | NULL        | NULL    |          |
 | sq_list                     | macro         | NULL        | NULL    |          |
 | totals_list                 | macro         | NULL        | NULL    |          |
+
+### Overloaded Functions
+
+<div class="extension_functions_table"></div>
+
+This extension does not add any function overloads.
+
+### Added Types
+
+<div class="extension_types_table"></div>
+
+This extension does not add any types.
+
+### Added Settings
+
+<div class="extension_settings_table"></div>
+
+This extension does not add any settings.
 
 

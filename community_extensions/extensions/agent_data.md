@@ -8,7 +8,7 @@ excerpt: |
 extension:
   name: agent_data
   description: A DuckDB extension written in Rust for querying, analysing and inspecting AI coding agents history. Read conversations, plans, todos, history, and usage stats directly from your local agent data directories.
-  version: 0.1.0
+  version: 0.3.0
   language: Rust
   build: cargo
   license: MIT
@@ -19,7 +19,7 @@ extension:
 
 repo:
   github: axsaucedo/agent_data_duckdb
-  ref: 1348a6d1a25ada29f78087e1469dfbff3bb095e1
+  ref: 134e48d47d5a901bc923f258ad1cd29b82d3a2ff
 
 docs:
   hello_world: |
@@ -60,9 +60,7 @@ docs:
 
   extended_description: |
 
-    **Supported agents:** [Claude Code](https://docs.anthropic.com/en/docs/claude-code) (`~/.claude`) and [GitHub Copilot CLI](https://docs.github.com/en/copilot/github-copilot-in-the-cli) (`~/.copilot`).
-
-    > OpenAI Codex and Gemini CLI Coming Soon™.
+    **Supported agents:** [Claude Code](https://docs.anthropic.com/en/docs/claude-code) (`~/.claude`), Claude Desktop, [GitHub Copilot CLI](https://docs.github.com/en/copilot/github-copilot-in-the-cli) (`~/.copilot`), [OpenAI Codex](https://openai.com/codex) (`~/.codex`), and [Gemini CLI](https://github.com/google-gemini/gemini-cli) (`~/.gemini`).
 
     Written in 🦀 Rust.
 
@@ -78,17 +76,19 @@ docs:
     | `read_history()` | `~/.claude` | Claude Code |
     | `read_stats()` | `~/.claude` | Claude Code |
 
-    To read Copilot data, pass the path explicitly:
+    To read another agent's data, pass the path explicitly:
 
     ```sql
     FROM read_conversations(path='~/.copilot');
+    FROM read_conversations(path='~/.codex');
+    FROM read_conversations(path='~/.gemini');
     ```
 
     ### Available Functions
 
     All functions accept two optional parameters:
-    - **`path`** — data directory path (default: `~/.claude`). Auto-detected from folder structure (`projects/` → Claude, `session-state/` → Copilot).
-    - **`source`** — explicit provider override: `'claude'` or `'copilot'`. Use when auto-detection fails or for non-standard directory layouts.
+    - **`path`** — data directory path (default: `~/.claude`). Auto-detected from folder structure (`projects/` → Claude, `session-state/` → Copilot, dated `sessions/` → Codex, `tmp/` + `installation_id` → Gemini).
+    - **`source`** — explicit provider override: `'claude'`, `'claude-desktop'`, `'copilot'`, `'codex'`, or `'gemini'`. Use when auto-detection fails or for non-standard directory layouts.
 
     Every table includes a **`source`** column (`'claude'` or `'copilot'`) as the first column.
 
@@ -121,10 +121,10 @@ docs:
 
     For full documentation, see the [GitHub repository](https://github.com/axsaucedo/duckdb-claude-ext).
 
-extension_star_count: 1
-extension_star_count_pretty: 1
-extension_download_count: 7
-extension_download_count_pretty: 7
+extension_star_count: 24
+extension_star_count_pretty: 24
+extension_download_count: 909
+extension_download_count_pretty: 909
 image: '/images/community_extensions/social_preview/preview_community_extension_agent_data.png'
 layout: community_extension_doc
 ---
@@ -157,5 +157,23 @@ LOAD {{ page.extension.name }};
 | read_todos         | table         | Read todo and checklist items with status tracking                      | Claude: todos/*.json, Copilot: checkpoint markdown checklists   | [SELECT content, status FROM read_todos() WHERE status != 'completed';]  |
 | read_history       | table         | Read command and prompt history                                         | Claude: history.jsonl, Copilot: command-history-state.json      | [SELECT display FROM read_history() ORDER BY line_number DESC LIMIT 10;] |
 | read_stats         | table         | Read daily activity statistics (message, session, and tool call counts) | Currently Claude only — returns empty for Copilot               | [SELECT date, message_count FROM read_stats() ORDER BY date DESC;]       |
+
+### Overloaded Functions
+
+<div class="extension_functions_table"></div>
+
+This extension does not add any function overloads.
+
+### Added Types
+
+<div class="extension_types_table"></div>
+
+This extension does not add any types.
+
+### Added Settings
+
+<div class="extension_settings_table"></div>
+
+This extension does not add any settings.
 
 

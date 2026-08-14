@@ -6,30 +6,121 @@ body.design{
 	
 	section + section{
 		margin-top: 64px;
+
+		@media (max-width: 720px) {
+			margin-top: 40px;
+		}
+	}
+
+	@media (max-width: 720px) {
+		h2{
+			margin-bottom: 16px;
+		}
 	}
 	
 	.frequentlyaskedquestions{
 		margin-top: 4*8px;
 	}
 	
+	.logo_packages .example-description{
+		font-size: var(--type-body-small, 14px);
+	}
+
 	.usage-example{
-		padding: 30px;
+		padding: 50px 30px;
 		background: white;
-		display: inline-block;
-		
+		border: 1px solid var(--doc-codebox-border-color, #e6e6e6);
+		border-radius: var(--page-radius-box);
+		display: flex;
+		align-items: center;
+		justify-content: center;
+
 		img{
 			all: unset;
 			max-width: 100%;
 		}
+
+		&--dark{
+			background: #0d0d0d;
+			border: 1px solid var(--doc-codebox-border-color, #333);
+		}
+
+		&--clearspace{
+			padding: 40px;
+		}
 	}
-	
+
+	.visual-style-image{
+		display: block;
+		width: 100%;
+		height: auto;
+	}
+
+	.logo-pair{
+		display: grid;
+		grid-template-columns: 1fr 1fr;
+		gap: 16px;
+		margin-top: 8px;
+
+		&__item{
+			display: flex;
+			flex-direction: column;
+		}
+
+		&__caption{
+			margin: 8px 0 0;
+			font-size: 13px;
+			color: var(--main-text-secondary-color, #626262);
+			text-align: center;
+		}
+	}
+
+	.logo-donts{
+		display: grid;
+		grid-template-columns: repeat(3, 1fr);
+		gap: 16px;
+
+		@media (max-width: 720px) {
+			grid-template-columns: 1fr;
+		}
+
+		&__item{
+			display: flex;
+			flex-direction: column;
+		}
+
+		&__tile{
+			position: relative;
+		}
+
+		&__mark{
+			position: absolute;
+			top: 14px;
+			right: 14px;
+			width: 24px;
+			height: 24px;
+			color: #d70000;
+		}
+	}
+
 	.color-cards{
-		display: flex;
-		justify-content: flex-start;
-		flex-wrap: wrap;
-		gap: 8px;
+		display: grid;
+		grid-template-columns: repeat(3, 1fr);
+		gap: 16px;
+
+		@media only screen and (max-width: 860px){
+			grid-template-columns: 1fr 1fr;
+		}
+
+		@media only screen and (max-width: 560px){
+			grid-template-columns: 1fr;
+		}
 	}
-	
+
+	.color-code {
+		font-family: $fontMono;
+	}
+
 	.syntax-highlight-table{
 		width: 100%;
 		max-width: 100%;
@@ -70,19 +161,48 @@ body.design{
 	}
 
 	.color-card{
-		width: 169px;
-		line-height: 1.37;
-		white-space: nowrap;
-		display: inline-block;
-		
-		strong{
-			display: inline-block;
-			margin-bottom: 8px;
-			font-weight: 700;
+		display: flex;
+		flex-direction: column;
+		gap: 10px;
+		padding: 20px;
+		min-height: 165px;
+		border-radius: var(--page-radius-box);
+		border: 1px solid rgba(0, 0, 0, 0.15);
+
+		&__category{
+			font-size: var(--type-micro, 10px);
+			font-weight: 400;
+			line-height: 1.2;
+			letter-spacing: 0.2px;
 		}
-		
-		&--main{
-			width: auto;
+
+		&__name{
+			font-size: var(--type-label-1, 14px);
+			font-weight: 600;
+			line-height: 1;
+			letter-spacing: 0.014px;
+		}
+
+		&__info{
+			display: grid;
+			grid-template-columns: 70px 1fr;
+			column-gap: 10px;
+			row-gap: 5px;
+			margin: 0;
+			font-size: var(--type-tiny, 12px);
+			font-weight: 400;
+			line-height: 1.3;
+			letter-spacing: 0.24px;
+
+			dt,
+			dd{
+				margin: 0;
+				font-weight: inherit;
+			}
+
+			@media (max-width: 720px) {
+				grid-template-columns: 42px 1fr;
+			}
 		}
 	}
 	

@@ -8,7 +8,7 @@ excerpt: |
 extension:
   name: gsheets
   description: Read and write Google Sheets using SQL
-  version: 0.0.7
+  version: 0.0.9
   language: C++
   build: cmake
   license: MIT
@@ -19,7 +19,7 @@ extension:
 
 repo:
   github: evidence-dev/duckdb_gsheets
-  ref: f44cfdd97c83489a5ffea15712fc24d0e257ff44
+  ref: a209d8a42c8e35cd571467dd7ae2eb65fcb96f75
 
 docs:
   hello_world: |
@@ -60,6 +60,9 @@ docs:
     -- Write a spreadsheet from a table by full URL
     COPY <table_name> TO 'https://docs.google.com/spreadsheets/d/11QdEasMWbETbFVxry-SsD8jVcdYIT1zBQszcF84MdE8/edit?usp=sharing' (FORMAT gsheet);
 
+    -- Create a sheet if it doesn't already exist
+    COPY <table_name> TO 'https://docs.google.com/spreadsheets/d/11QdEasMWbETbFVxry-SsD8jVcdYIT1zBQszcF84MdE8/edit' (FORMAT gsheet, sheet 'Woot', create_if_not_exists true);
+
     -- Write a spreadsheet to a specific sheet using the sheet id in the URL
     COPY <table_name> TO 'https://docs.google.com/spreadsheets/d/11QdEasMWbETbFVxry-SsD8jVcdYIT1zBQszcF84MdE8/edit?gid=1295634987#gid=1295634987' (FORMAT gsheet);
 
@@ -67,10 +70,10 @@ docs:
     The DuckDB GSheets Extension allows reading and writing of data in Google Sheets from DuckDB.
     For detailed setup and usage instructions, visit the docs at [duckdb-gsheets.com](https://duckdb-gsheets.com).
 
-extension_star_count: 332
-extension_star_count_pretty: 332
-extension_download_count: 31091
-extension_download_count_pretty: 31.1k
+extension_star_count: 349
+extension_star_count_pretty: 349
+extension_download_count: 136162
+extension_download_count_pretty: 136.2k
 image: '/images/community_extensions/social_preview/preview_community_extension_gsheets.png'
 layout: community_extension_doc
 ---
@@ -99,5 +102,23 @@ LOAD {{ page.extension.name }};
 | function_name | function_type | description | comment | examples |
 |---------------|---------------|-------------|---------|----------|
 | read_gsheet   | table         | NULL        | NULL    |          |
+
+### Overloaded Functions
+
+<div class="extension_functions_table"></div>
+
+This extension does not add any function overloads.
+
+### Added Types
+
+<div class="extension_types_table"></div>
+
+This extension does not add any types.
+
+### Added Settings
+
+<div class="extension_settings_table"></div>
+
+This extension does not add any settings.
 
 

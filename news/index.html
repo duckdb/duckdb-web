@@ -13,84 +13,53 @@ redirect_from:
 {% endfor %}
 {% assign unique_tags = all_tags | split: "," | uniq | sort %}
 
-<div class="wrap">
+<div class="wrap pagetitle">
+	<h1>{{ page.title }}</h1>
+
 	<div class="controls filterbar" data-all-available="{{ unique_tags | join: ', ' }}">
-		<input type="text" id="search-input" placeholder="Search...">
-		<div class="filtertags">
-			<div class="filter-highlight"></div>
-			<button type="button" class="filter-btn active" data-filter="*">All</button>
-			<button type="button" class="filter-btn" data-filter=".using-duckdb">Using DuckDB</button>
-			<button type="button" class="filter-btn" data-filter=".benchmark">Benchmarks</button>
-			<button type="button" class="filter-btn" data-filter=".deep-dive">Deep Dive</button>
-			<button type="button" class="filter-btn" data-filter=".extensions">Extensions</button>
-			<button type="button" class="filter-btn" data-filter=".release">Releases</button>
+		<div class="filter-group" data-filter-key="category">
+			<span class="filter-group-label">Category</span>
+			<div class="filtertags">
+				<div class="filter-highlight"></div>
+				<button type="button" class="filter-btn active" data-filter="*">All</button>
+				<button type="button" class="filter-btn" data-filter=".using-duckdb">Using DuckDB</button>
+				<button type="button" class="filter-btn" data-filter=".benchmark">Benchmarks</button>
+				<button type="button" class="filter-btn" data-filter=".deep-dive">Deep Dive</button>
+				<button type="button" class="filter-btn" data-filter=".extensions">Extensions</button>
+				<button type="button" class="filter-btn" data-filter=".release">Releases</button>
+			</div>
 		</div>
+
+		<input type="text" id="search-input" placeholder="Search ...">
+
+		<button type="button" class="filter-toggle" aria-label="Filter">
+			<svg class="icon icon-filter"><use href="#filter-funnel-01"></use></svg>
+			<svg class="icon icon-close"><use href="#x-close"></use></svg>
+		</button>
+		<div class="filter-modal">
+			<div class="filter-group filter-group-mobile-only" data-filter-key="category">
+				<span class="filter-group-label">Category</span>
+				<div class="filtertags">
+					<div class="filter-highlight"></div>
+					<button type="button" class="filter-btn active" data-filter="*">All</button>
+					<button type="button" class="filter-btn" data-filter=".using-duckdb">Using DuckDB</button>
+					<button type="button" class="filter-btn" data-filter=".benchmark">Benchmarks</button>
+					<button type="button" class="filter-btn" data-filter=".deep-dive">Deep Dive</button>
+					<button type="button" class="filter-btn" data-filter=".extensions">Extensions</button>
+					<button type="button" class="filter-btn" data-filter=".release">Releases</button>
+				</div>
+			</div>
+		</div>
+		<div class="filter-overlay"></div>
 	</div>
 </div>
 
 <div class="post-list wrap">
 	<div class="newstiles">
 		{% for post in site.posts %}
-			{% assign random_number = forloop.index | modulo: 3 | plus: 1 %} 
-			{% assign tag_classes = "" %}
-			{% for tag in post.tags %}
-				{% assign slugified_tag = tag | slugify %}
-				{% assign tag_classes = tag_classes | append: slugified_tag | append: " " %}
-			{% endfor %}
-			{% if post.external_post_url %}
-				{% assign is_external = true %}
-				{% assign post_link = post.external_post_url %}
-				{% assign link_target = "_blank" %}
-				{% assign link_rel = "noopener noreferrer" %}
-				{% assign source_domain = post.external_post_url | extract_domain %}
-			{% else %}
-				{% assign is_external = false %}
-				{% assign post_link = post.url %}
-				{% assign link_target = "_self" %}
-				{% assign link_rel = "" %}
-				{% assign source_domain = "duckdb.org" %}
-			{% endif %}
-			<div class="postpreview {{ tag_classes | downcase }}{% if is_external %} external-post{% endif %}" data-title="{{ post.title | escape }}" data-source="{{ source_domain }}">
-				<a href="{{ post_link }}" title="{{ post.title }}" class="blocklink" target="{{ link_target }}"{% if link_rel != "" %} rel="{{ link_rel }}"{% endif %}></a>
-				<div class="postimg custom">
-					{% if post.thumb %}
-						<img src="{{ post.thumb }}" alt="{{ post.title }}" class="zoom-image">
-					{% else %}
-						<img src="/images/blog/thumbs/placeholder-{{ random_number }}.svg" alt="Placeholder" class="zoom-image">
-					{% endif %}
-				</div>
-				<div class="postdetails">
-					{% if post.tags %}
-					<div class="tags">
-						{% for tag in post.tags %}
-							<span class="tag">{{ tag }}</span>
-						{% endfor %}
-					</div>
-					{% endif %}
-					<h3>{{ post.title }}</h3>
-					<div class="meta">
-						{% if is_external %}
-							<div class="external-source">{{ post.external_post_url | extract_domain }}</div>
-						{% endif %}
-						<div class="date">{{ post.date | date: "%Y-%m-%d" }}</div>
-						<div class="author">{{ post.author }}</div>
-					</div>
-				</div>
-			</div>
+			{% assign random_number = forloop.index | modulo: 3 | plus: 1 %}
+			{% capture placeholder_thumb %}/images/blog/thumbs/placeholder-{{ random_number }}.svg{% endcapture %}
+			{% include post_card.html item=post default_thumb=placeholder_thumb %}
 		{% endfor %}
 	</div>
 </div>
-
-
-{% comment %}
-{% for post in site.posts limit:15 %}
-{% capture year %}{{post.date | date: "%Y"}}{% endcapture %}
-{% capture month %}{{post.date | date: "%B"}}{% endcapture %}
-<div class="postpreview" data-year="{{year}}" data-month="{{month}}">
-	<div class="infoline"><span>{{ post.date | date: "%Y-%m-%d" }}</span><span>{{ post.author }}</span></div>
-	<h2><a href="{{ post.url }}">{{ post.title }}</a></h2>
-	{{ post.excerpt }}
-	<a href="{{ post.url }}" class="continue">continue reading <span></span></a>
-</div>
-{% endfor %}
-{% endcomment %}

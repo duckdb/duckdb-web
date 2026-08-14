@@ -9,21 +9,31 @@ title: DuckDB Everywhere
 {% endfor %}
 {% assign unique_tags = all_tags | split: "," | uniq | sort %}
 
-<div class="wrap blog_typography">
-  <p>This page contains a collection of interesting DuckDB deployments from small single-board computers to big servers.</p>
-</div>
+<div class="wrap pagetitle">
+  <h1>{{ page.title }}</h1>
 
-<div class="wrap">
+  <p class="pagetitle-intro">This page contains a collection of interesting DuckDB deployments from small single-board computers to big servers.</p>
+
   <div class="controls filterbar" data-all-available="{{ unique_tags | join: ', ' }}">
-    <input type="text" id="search-input" placeholder="Search...">
-    <div class="filtertags">
-      <div class="filter-highlight"></div>
-      <button type="button" class="filter-btn active" data-filter="*">All</button>
-      <button type="button" class="filter-btn" data-filter=".servers">Servers</button>
-      <button type="button" class="filter-btn" data-filter=".pcs">PCs</button>
-      <button type="button" class="filter-btn" data-filter=".phones">Phones</button>
-      <button type="button" class="filter-btn" data-filter=".other">Other</button>
+    <div class="filter-modal">
+      <div class="filter-group" data-filter-key="category">
+        <span class="filter-group-label">Category</span>
+        <div class="filtertags">
+          <div class="filter-highlight"></div>
+          <button type="button" class="filter-btn active" data-filter="*">All</button>
+          <button type="button" class="filter-btn" data-filter=".servers">Servers</button>
+          <button type="button" class="filter-btn" data-filter=".pcs">PCs and laptops</button>
+          <button type="button" class="filter-btn" data-filter=".phones">Phones</button>
+          <button type="button" class="filter-btn" data-filter=".other">Other</button>
+        </div>
+      </div>
     </div>
+    <input type="text" id="search-input" placeholder="Search...">
+    <button type="button" class="filter-toggle" aria-label="Filter">
+      <svg class="icon icon-filter"><use href="#filter-funnel-01"></use></svg>
+      <svg class="icon icon-close"><use href="#x-close"></use></svg>
+    </button>
+    <div class="filter-overlay"></div>
   </div>
 </div>
 
@@ -40,30 +50,25 @@ title: DuckDB Everywhere
         <a href="/everywhere/{{ item.slug | default: item.title | slugify }}/" title="{{ item.title }}" class="blocklink"></a>
         <div class="postimg custom">
           {% if item.thumb %}
-            <img src="{{ item.thumb }}" alt="{{ item.title }}" class="zoom-image">
+            <img src="{{ item.thumb }}" alt="{{ item.title }}" class="zoom-image" loading="lazy">
           {% else %}
             {% assign placeholder_number = forloop.index | modulo: 2 | plus: 1 %}
-            <img src="/images/everywhere/thumbs/placeholder-{{ placeholder_number }}.svg" alt="Placeholder" class="zoom-image">
+            <img src="/images/everywhere/thumbs/placeholder-{{ placeholder_number }}.svg" alt="Placeholder" class="zoom-image" loading="lazy">
           {% endif %}
         </div>
         <div class="postdetails">
-          {% if item.tags %}
-            <div class="tags">
-              {% for tag in item.tags %}
-                <span class="tag">{{ tag }}</span>
-              {% endfor %}
-              {% if item.length %}
-                <span class="length">{{ item.length }}</span>
-              {% endif %}
-            </div>
-          {% endif %}
           <h3>{{ item.title }}</h3>
-          <!--
           <div class="meta">
             <div class="date">{{ item.date | date: "%Y-%m-%d" }}</div>
-            <div class="author">{{ item.author }}</div>
+            {% if item.tags %}
+              <div class="tags">
+                {% for tag in item.tags %}<span>{{ tag }}</span>{% endfor %}
+              </div>
+            {% endif %}
+            {% if item.length %}
+              <div class="length">{{ item.length }}</div>
+            {% endif %}
           </div>
-          -->
         </div>
       </div>
     {% endfor %}

@@ -1,0 +1,19 @@
+{%- comment -%}
+Inline tooltip component.
+
+Usage (inline text, e.g. in Markdown tables):
+    {% include tooltip.html label="Primary" text="Primary clients are the first to receive new features and are covered by community support" %}
+
+Usage with a shared tooltip body from _data/tooltips.yml:
+    {% include tooltip.html label="Primary" id="support_tier_primary" %}
+
+Parameters:
+    label (required) — visible word/phrase that triggers the tooltip
+    text  (optional) — inline tooltip body; supports Markdown (rendered via markdownify)
+    id    (optional) — key in site.data.tooltips; used when `text` is not provided
+{%- endcomment -%}
+{%- assign _body = include.text -%}
+{%- if _body == nil and include.id -%}{%- assign _body = site.data.tooltips[include.id] -%}{%- endif -%}
+{%- assign _rendered = _body | markdownify | strip_newlines | replace: '<p>', '' | replace: '</p>', '' | strip -%}
+{%- capture _out -%}<span class="tooltip" tabindex="0"><span class="tooltip-label">{{ include.label }}</span><svg class="icon tooltip-icon" aria-hidden="true"><use href="#info-circle"></use></svg><span class="tooltip-body" role="tooltip">{{ _rendered }}</span></span>{%- endcapture -%}
+{{- _out -}}

@@ -17,7 +17,7 @@ We would like to use this event to stop for a moment and revisit recent developm
 ## Recent Updates
 
 * We released [DuckDB 1.2.0]({% post_url 2025-02-05-announcing-duckdb-120 %}) and [DuckDB 1.3.0]({% post_url 2025-05-21-announcing-duckdb-130 %}), both packing many new features, performance optimizations and bugfixes.
-* We published the [DuckLake specification](https://ducklake.select/), an open format for SQL-as-a-lakehouse. For details, read the [announcement blog post]({% post_url 2025-05-27-ducklake %}) and its coverage in the [Register](https://www.theregister.com/2025/05/28/duckdb_flips_lakehouse_model_with/).
+* We published the [DuckLake specification](https://ducklake.select/), an open format for SQL-as-a-lakehouse. For details, read the [announcement blog post]({% post_url 2025-05-27-ducklake %}) and its coverage in the [Register](https://www.theregister.com/software/2025/05/28/duckdb-flips-lakehouse-model-with-bring-your-own-compute/1512016).
 * DuckDB now has a [built-in UI]({% post_url 2025-03-12-duckdb-ui %}).
 * DuckDB now supports Iceberg REST Catalog, which also allows it to connect to [Amazon S3 Tables]({% post_url 2025-03-14-preview-amazon-s3-tables %})
 * We published the much-requested [roadmap]({% link roadmap.md %}).
@@ -27,7 +27,7 @@ We would like to use this event to stop for a moment and revisit recent developm
 
 Besides the GitHub stars we have also observed a lot of growth in other metrics:
 
-* Each month, our website now welcomes over 3 million unique visitors – more than double than in December. We also see over 700 TB in traffic from millions of extension downloads. Thanks again to Cloudflare for [sponsoring the project]({% link foundation/index.html %}#technical-sponsors).
+* Each month, our website now welcomes over 3 million unique visitors – more than double than in December. We also see over 700 TB in traffic from millions of extension downloads. Thanks again to Cloudflare for [sponsoring the project](https://duckdb.foundation/#technical-sponsors).
 * Just in this calendar year, we rose 10 positions in the [DB Engines ranking](https://db-engines.com/en/ranking) from position 55 to 45.
 * We now count [20M+ monthly downloads in PyPI](https://pypistats.org/packages/duckdb).
 

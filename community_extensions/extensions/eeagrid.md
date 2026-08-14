@@ -17,7 +17,7 @@ extension:
 
 repo:
   github: ahuarte47/duckdb-eeagrid
-  ref: 1a03fdf8e3a1f18d26bcf9a6d7a48010739dea55
+  ref: 9ee8f7680873e8b681368d2959510b08d13f242c
 
 docs:
   hello_world: |
@@ -69,8 +69,8 @@ docs:
 
 extension_star_count: 0
 extension_star_count_pretty: 0
-extension_download_count: 345
-extension_download_count_pretty: 345
+extension_download_count: 785
+extension_download_count_pretty: 785
 image: '/images/community_extensions/social_preview/preview_community_extension_eeagrid.png'
 layout: community_extension_doc
 ---
@@ -104,5 +104,23 @@ LOAD {{ page.extension.name }};
 | EEA_GridNumAt100m   | scalar        | Returns the Grid code at 100 m resolution given an EEA reference Grid code.                                                                                        | NULL    | [SELECT EEA_GridNumAt100m(23090257455218688);]  |
 | EEA_GridNumAt10km   | scalar        | Returns the Grid code at 10 km resolution given an EEA reference Grid code.                                                                                        | NULL    | [SELECT EEA_GridNumAt10km(23090257455218688);]  |
 | EEA_GridNumAt1km    | scalar        | Returns the Grid code at 1 km resolution given an EEA reference Grid code.                                                                                         | NULL    | [SELECT EEA_GridNumAt1km(23090257455218688);]   |
+
+### Overloaded Functions
+
+<div class="extension_functions_table"></div>
+
+This extension does not add any function overloads.
+
+### Added Types
+
+<div class="extension_types_table"></div>
+
+This extension does not add any types.
+
+### Added Settings
+
+<div class="extension_settings_table"></div>
+
+This extension does not add any settings.
 
 

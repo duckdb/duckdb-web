@@ -20,7 +20,8 @@ extension:
 
 repo:
   github: midwork-finds-jobs/duckdb-crawler
-  ref: f0aad857435a2ce138c567e8af11f9d4f8ae0c25
+  andium: f0aad857435a2ce138c567e8af11f9d4f8ae0c25
+  ref: 7725ede99eff1657a2cee770048be33328ae9f02
 
 docs:
   hello_world: |
@@ -65,10 +66,10 @@ docs:
 
     For full documentation see: https://github.com/midwork-finds-jobs/duckdb-crawler
 
-extension_star_count: 4
-extension_star_count_pretty: 4
-extension_download_count: 362
-extension_download_count_pretty: 362
+extension_star_count: 12
+extension_star_count_pretty: 12
+extension_download_count: 788
+extension_download_count_pretty: 788
 image: '/images/community_extensions/social_preview/preview_community_extension_crawler.png'
 layout: community_extension_doc
 ---
@@ -106,6 +107,18 @@ LOAD {{ page.extension.name }};
 | read_html             | table         | NULL        | NULL    |          |
 | sitemap               | table         | NULL        | NULL    |          |
 | stream_merge_internal | table         | NULL        | NULL    |          |
+
+### Overloaded Functions
+
+<div class="extension_functions_table"></div>
+
+This extension does not add any function overloads.
+
+### Added Types
+
+<div class="extension_types_table"></div>
+
+This extension does not add any types.
 
 ### Added Settings
 

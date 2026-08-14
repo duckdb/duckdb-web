@@ -16,8 +16,8 @@ extension:
     - taniabogatsch
 repo:
   github: taniabogatsch/duckdb-chaos
-  ref: 46ef95bf98ef008078c1cf753fa3d78e418b1456
-  ref_next: f076132edafe0a2b150d34af3ad0743bfb937c9f
+  andium: 46ef95bf98ef008078c1cf753fa3d78e418b1456
+  ref: f076132edafe0a2b150d34af3ad0743bfb937c9f
 
 docs:
   hello_world: |
@@ -37,10 +37,10 @@ docs:
 
 
 
-extension_star_count: 0
-extension_star_count_pretty: 0
-extension_download_count: 341
-extension_download_count_pretty: 341
+extension_star_count: 1
+extension_star_count_pretty: 1
+extension_download_count: 794
+extension_download_count_pretty: 794
 image: '/images/community_extensions/social_preview/preview_community_extension_chaos.png'
 layout: community_extension_doc
 ---
@@ -70,5 +70,23 @@ LOAD {{ page.extension.name }};
 |-----------------|---------------|-------------|---------|----------|
 | chaos_exception | scalar        | NULL        | NULL    |          |
 | chaos_signal    | scalar        | NULL        | NULL    |          |
+
+### Overloaded Functions
+
+<div class="extension_functions_table"></div>
+
+This extension does not add any function overloads.
+
+### Added Types
+
+<div class="extension_types_table"></div>
+
+This extension does not add any types.
+
+### Added Settings
+
+<div class="extension_settings_table"></div>
+
+This extension does not add any settings.
 
 

@@ -1,0 +1,13 @@
+---
+layout: docu
+redirect_from:
+- /docs/guides/performance
+- /docs/guides/performance/overview
+- /docs/preview/guides/performance/overview
+- /docs/stable/guides/performance/overview
+title: Performance Guide
+---
+
+DuckDB aims to automatically achieve high performance by using well-chosen default configurations and having a forgiving architecture. Of course, there are still opportunities for tuning the system for specific workloads. The Performance Guide's pages contain guidelines and tips for achieving good performance when loading and processing data with DuckDB.
+
+The guides include several microbenchmarks. You may find details about these on the [Benchmarks page]({% link docs/current/guides/performance/benchmarks.md %}).

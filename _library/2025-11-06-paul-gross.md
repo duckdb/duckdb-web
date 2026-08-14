@@ -1,13 +1,12 @@
 ---
 layout: post
 title: "DuckDB in Research S02E04: Paul Groß"
-subtitle: "Adaptive Factorization in DuckDB"
 author: "Disseminate Podcast Series by Jack Waudby"
 thumb: "/images/library/thumbs/2025-11-06-paul-gross.jpg"
 image: "/images/library/thumbs/2025-11-06-paul-gross.jpg"
 tags: ["Podcast"]
 length: "50 min"
-thirdparty: true
+category: community
 excerpt: ""
 pill: "DuckDB in Research"
 episode: "S02E04"
@@ -17,11 +16,14 @@ episode: "S02E04"
 <iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/f4e88I2fGsg?si=07p7PoGmlOa7Ig3l" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 </div>
 
-## Podcast Links
-
-* [Apple Podcasts](https://podcasts.apple.com/se/podcast/adaptive-factorization-in-duckdb-with-paul-gro%C3%9F/id1631350873?i=1000735509046)
-* [Spotify](https://open.spotify.com/episode/20kzbfeK3Q9z6F3eVT2cuD) (with video)
-* [Acast](https://shows.acast.com/disseminate/episodes/adaptive-factorization-in-duckdb-with-paul-gro)
+|-------|-------|
+| **Podcast** | DuckDB in Research |
+| **Episode** | S02E04 |
+| **Topic** | Adaptive Factorization in DuckDB |
+| **Apple Podcasts** | [Listen](https://podcasts.apple.com/se/podcast/adaptive-factorization-in-duckdb-with-paul-gro%C3%9F/id1631350873?i=1000735509046) |
+| **Spotify** | [Listen](https://open.spotify.com/episode/20kzbfeK3Q9z6F3eVT2cuD) |
+| **Acast** | [Listen](https://shows.acast.com/disseminate/episodes/adaptive-factorization-in-duckdb-with-paul-gro) |
+| **YouTube** | [Watch](https://www.youtube.com/watch?v=f4e88I2fGsg) |
 
 ## Description
 

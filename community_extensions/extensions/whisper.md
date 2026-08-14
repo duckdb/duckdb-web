@@ -8,7 +8,7 @@ excerpt: |
 extension:
   name: whisper
   description: Speech-to-text transcription using whisper.cpp, OpenAI's Whisper model
-  version: 0.1.0
+  version: 0.5.0
   language: C++
   build: cmake
   license: MIT
@@ -19,7 +19,7 @@ extension:
 
 repo:
   github: tobilg/duckdb-whisper
-  ref: dd84b1a1b4057175fd3e14d21de3100d51e13a1d
+  ref: 25d0cdfae43da4f66ea6a918b6a65addad0613a2
 
 docs:
   hello_world: |
@@ -272,10 +272,10 @@ docs:
 
     See the [GitHub repository](https://github.com/tobilg/duckdb-whisper) for full documentation.
 
-extension_star_count: 1
-extension_star_count_pretty: 1
-extension_download_count: 254
-extension_download_count_pretty: 254
+extension_star_count: 10
+extension_star_count_pretty: 10
+extension_download_count: 806
+extension_download_count_pretty: 806
 image: '/images/community_extensions/social_preview/preview_community_extension_whisper.png'
 layout: community_extension_doc
 ---
@@ -296,5 +296,29 @@ LOAD {{ page.extension.name }};
 ### About {{ page.extension.name }}
 {{ page.docs.extended_description }}
 {% endif %}
+
+### Added Functions
+
+<div class="extension_functions_table"></div>
+
+This extension does not add any functions.
+
+### Overloaded Functions
+
+<div class="extension_functions_table"></div>
+
+This extension does not add any function overloads.
+
+### Added Types
+
+<div class="extension_types_table"></div>
+
+This extension does not add any types.
+
+### Added Settings
+
+<div class="extension_settings_table"></div>
+
+This extension does not add any settings.
 
 

@@ -17,7 +17,7 @@ extension:
 
 repo:
   github: nkwork9999/bvh2sql
-  ref: 62e96ba71a1bc57175a18827a2ad807bff9bfe5f
+  ref: 774970f749ccab7a6e37271363882549e6d0e2f3
 
 docs:
   hello_world: |
@@ -60,8 +60,8 @@ docs:
 
 extension_star_count: 0
 extension_star_count_pretty: 0
-extension_download_count: 325
-extension_download_count_pretty: 325
+extension_download_count: 755
+extension_download_count_pretty: 755
 image: '/images/community_extensions/social_preview/preview_community_extension_bvh2sql.png'
 layout: community_extension_doc
 ---
@@ -90,5 +90,23 @@ LOAD {{ page.extension.name }};
 |     function_name      | function_type | description | comment | examples |
 |------------------------|---------------|-------------|---------|----------|
 | bvh_absolute_positions | table         | NULL        | NULL    |          |
+
+### Overloaded Functions
+
+<div class="extension_functions_table"></div>
+
+This extension does not add any function overloads.
+
+### Added Types
+
+<div class="extension_types_table"></div>
+
+This extension does not add any types.
+
+### Added Settings
+
+<div class="extension_settings_table"></div>
+
+This extension does not add any settings.
 
 

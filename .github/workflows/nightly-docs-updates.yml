@@ -1,6 +1,6 @@
 name: Nightly documentation updates
 
-on: []
+on: workflow_dispatch
 
 jobs:
   UpdateStarCountAndCopyStableToArchive:
@@ -8,12 +8,12 @@ jobs:
     name: Copy stable to preview
     runs-on: ubuntu-24.04
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v7
         with:
           fetch-depth: 0
 
       - name: Set up Python 3.12
-        uses: actions/setup-python@v6
+        uses: actions/setup-python@v7
         with:
           python-version: '3.12'
 
@@ -37,7 +37,7 @@ jobs:
           python scripts/get_calendar.py
 
       - name: Create PR
-        uses: peter-evans/create-pull-request@v7.0.11
+        uses: peter-evans/create-pull-request@v8.1.1
         with:
           branch: update-preview-branch
           commit-message: "Update star count, copy stable to preview"

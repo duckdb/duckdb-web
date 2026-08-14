@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "Writes in DuckDB-Iceberg"
+title: "Writes in DuckDB-Iceberg"
 author: "Tom Ebergen"
 thumb: "/images/blog/thumbs/iceberg-writes.svg"
 image: "/images/blog/thumbs/iceberg-writes.png"
@@ -8,14 +8,14 @@ excerpt: "We shipped a number of features and improvements to the DuckDB-Iceberg
 tags: ["deep dive"]
 ---
 
-Over the past several months, the DuckDB Labs team has been hard at work on the [DuckDB-Iceberg extension]({% link docs/stable/core_extensions/iceberg/overview.md %}), with _full read support_ and _initial write support_ released in [v1.4.0]({% post_url 2025-09-16-announcing-duckdb-140 %}).
+Over the past several months, the DuckLabs team has been hard at work on the [DuckDB-Iceberg extension]({% link docs/current/core_extensions/iceberg/overview.md %}), with _full read support_ and _initial write support_ released in [v1.4.0]({% post_url 2025-09-16-announcing-duckdb-140 %}).
 Today, we are happy to announce delete and update support for Iceberg v2 tables is available in [v1.4.2]({% post_url 2025-11-12-announcing-duckdb-142 %})!
 
 The Iceberg open table format has become extremely popular in the past two years, with many databases announcing support for the open table format [originally developed at Netflix](https://softwareengineeringdaily.com/2024/03/07/iceberg-at-netflix-and-beyond-with-ryan-blue/). This past year the DuckDB team has made Iceberg integration a [priority]({% link roadmap.md %}) and today we are happy to announce another step in that direction. In this blog post we will describe the current feature set of DuckDB-Iceberg in DuckDB v1.4.2.
 
 ## Getting Started
 
-To experiment with the new DuckDB-Iceberg features, you will need to connect to your favorite Iceberg REST Catalog. There are many ways to connect to an Iceberg REST Catalog: please have a look at the [Connecting to REST Catalogs]({% link docs/stable/core_extensions/iceberg/iceberg_rest_catalogs.md %}) for connecting to catalogs like [Apache Polaris](https://polaris.apache.org/) or [Lakekeeper](https://lakekeeper.io/) and the [Connecting to S3Tables]({% link docs/stable/core_extensions/iceberg/amazon_s3_tables.md %}) page if you would like to connect to [Amazon S3 Tables](https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-tables.html).
+To experiment with the new DuckDB-Iceberg features, you will need to connect to your favorite Iceberg REST Catalog. There are many ways to connect to an Iceberg REST Catalog: please have a look at the [Connecting to REST Catalogs]({% link docs/current/core_extensions/iceberg/catalogs.md %}) for connecting to catalogs like [Apache Polaris](https://polaris.apache.org/) or [Lakekeeper](https://lakekeeper.io/) and the [Connecting to S3 Tables]({% link docs/current/core_extensions/iceberg/catalogs.md %}#amazon-s3-tables) page if you would like to connect to [Amazon S3 Tables](https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-tables.html).
 
 ```sql
 ATTACH '⟨warehouse_name⟩' AS iceberg_catalog (
@@ -145,7 +145,6 @@ SELECT * FROM iceberg_snapshots(iceberg_catalog.default.simple_table);
 │               2 │ 6333537230056014119 │ 2025-11-10 17:27:35.602 │ s3://<storage_location>/simple_table/data/snap-6333537230056014119-316d09bc-549d-46bc-ae13-a9fab5cbf09b.avro │
 │               3 │ 7452040077415501383 │ 2025-11-10 17:27:52.169 │ s3://<storage_location>/simple_table/data/snap-7452040077415501383-93dee94e-9ec1-45fa-aec2-13ef434e50eb.avro │
 └─────────────────┴─────────────────────┴─────────────────────────┴──────────────────────────────────────────────────────────────────────────────────────────────────────────────┘
-
 ```
 
 ## Time Travel
@@ -156,7 +155,7 @@ Time travel is also possible via snapshot ids or timestamps using the `AT (VERSI
 -- via snapshot id
 SELECT *
 FROM iceberg_catalog.default.simple_table AT (
-	VERSION => ⟨snapshot_id⟩
+    VERSION => ⟨snapshot_id⟩
 );
 ```
 
@@ -191,7 +190,7 @@ FROM iceberg_catalog.default.simple_table AT (
 ## Viewing Requests to the Iceberg REST Catalog
 
 You may also be curious as to what requests DuckDB is making to the Iceberg REST Catalog.
-To do so, enable HTTP [logging]({% link docs/stable/operations_manual/logging/overview.md %}), run your workload, then select from the `HTTP` logs.
+To do so, enable HTTP [logging]({% link docs/current/operations_manual/logging/overview.md %}), run your workload, then select from the `HTTP` logs.
 
 ```sql
 CALL enable_logging('HTTP');
@@ -226,7 +225,7 @@ Here we can see calls to the Iceberg REST Catalog, followed by calls to the stor
 
 ## Transactions
 
-DuckDB is an ACID-compliant database that supports [transactions]({% link docs/stable/sql/statements/transactions.md %}).
+DuckDB is an ACID-compliant database that supports [transactions]({% link docs/current/sql/statements/transactions.md %}).
 Work on DuckDB-Iceberg has been made with this in mind. Within a transaction, the following conditions will hold for Iceberg tables.
 
 1. The first time a table is read in a transaction, its snapshot information is stored in the transaction and will remain consistent within that transaction.
@@ -274,7 +273,7 @@ Here we see all the same requests we saw in the previous section. However, now w
 
 ## Conclusion and Future Work
 
-With these features, DuckDB-Iceberg now has a strong base support for the Iceberg tables, which enables users to unlock the analytical powers of DuckDB on their Iceberg tables. There is still more work to come and the Iceberg table specification has many more features the DuckDB team would like to support in DuckDB-Iceberg. If you feel any feature is a priority for your analytical workloads, please reach out to us in the [DuckDB-Iceberg GitHub repository](https://github.com/duckdb/duckdb-iceberg) or [get in touch](https://duckdblabs.com/contact/) with our engineers.
+With these features, DuckDB-Iceberg now has a strong base support for the Iceberg tables, which enables users to unlock the analytical powers of DuckDB on their Iceberg tables. There is still more work to come and the Iceberg table specification has many more features the DuckDB team would like to support in DuckDB-Iceberg. If you feel any feature is a priority for your analytical workloads, please reach out to us in the [DuckDB-Iceberg GitHub repository](https://github.com/duckdb/duckdb-iceberg) or [get in touch](https://ducklabs.com/contact/) with our engineers.
 
 Below is a list of improvements planned for the near future (in no particular order):
 

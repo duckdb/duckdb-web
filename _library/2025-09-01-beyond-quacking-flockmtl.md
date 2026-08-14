@@ -5,14 +5,15 @@ author: "Anas Dorbani, Sunny Yasser, Jimmy Lin, Amine Mhedhbi"
 thumb: "/images/library/thumbs/vldb.svg"
 image: "/images/library/thumbs/vldb.png"
 tags: ["Paper"]
-thirdparty: true
+category: community
 excerpt: ""
 pill: "VLDB 2025"
 ---
 
-[Paper (PDF)](https://www.vldb.org/pvldb/vol18/p5415-mhedhbi.pdf)
-
-Venue: VLDB 2025
+| | |
+|-------|-------|
+| **Paper** | [Beyond Quacking: Deep Integration of Language Models and RAG into DuckDB (PDF)](https://www.vldb.org/pvldb/vol18/p5415-mhedhbi.pdf) |
+| **Venue** | VLDB 2025 |
 
 ## Abstract
 

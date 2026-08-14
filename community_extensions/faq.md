@@ -14,9 +14,9 @@ title: Frequently Asked Questions
 
 Similarly to other package management systems, DuckDB's Community Extensions repository contain community-contributed code,
 therefore, there are no guarantees regarding the content of extensions.
-The DuckDB Foundation and DuckDB Labs do not vet the code within community extensions and, therefore, cannot guarantee that DuckDB community extensions are safe to use.
+The DuckDB Foundation and DuckLabs do not vet the code within community extensions and, therefore, cannot guarantee that DuckDB community extensions are safe to use.
 
-For details on securing your DuckDB setup, please refer to the [Securing Extensions page]({% link docs/stable/operations_manual/securing_duckdb/securing_extensions.md %}).
+For details on securing your DuckDB setup, please refer to the [Securing Extensions page]({% link docs/current/operations_manual/securing_duckdb/securing_extensions.md %}).
 </div>
 
 </div>
@@ -35,7 +35,7 @@ The loading of community extensions can be explicitly disabled with the followin
 SET allow_community_extensions = false;
 ```
 
-For details on securing your DuckDB setup, please refer to the [Securing Extensions page]({% link docs/stable/operations_manual/securing_duckdb/securing_extensions.md %}).
+For details on securing your DuckDB setup, please refer to the [Securing Extensions page]({% link docs/current/operations_manual/securing_duckdb/securing_extensions.md %}).
 </div>
 
 </div>

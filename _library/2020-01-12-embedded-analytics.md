@@ -8,9 +8,9 @@ excerpt: ""
 pill: "CIDR 2020"
 ---
 
-[Paper (PDF)](https://hannes.muehleisen.org/publications/CIDR2020-raasveldt-muehleisen-duckdb.pdf)
-
-Venue: CIDR 2020
+|-------|-------|
+| **Paper** | [Data Management for Data Science Towards Embedded Analytics (PDF)](https://hannes.muehleisen.org/publications/CIDR2020-raasveldt-muehleisen-duckdb.pdf) |
+| **Venue** | CIDR 2020 |
 
 ## Abstract
 

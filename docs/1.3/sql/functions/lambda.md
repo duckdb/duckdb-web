@@ -25,7 +25,7 @@ title: Lambda Functions
 > so the old behavior will no longer be possible.
 
 Lambda functions enable the use of more complex and flexible expressions in queries.
-DuckDB supports several scalar functions that operate on [`LIST`s]({% link docs/preview/sql/data_types/list.md %}) and
+DuckDB supports several scalar functions that operate on [`LIST`s]({% link docs/1.3/sql/data_types/list.md %}) and
 accept lambda functions as parameters
 in the form `lambda ⟨parameter1⟩, ⟨parameter2⟩, ... : ⟨expression⟩`{:.language-sql .highlight}.
 If the lambda function has only one parameter, then the parentheses can be omitted.

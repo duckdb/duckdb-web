@@ -15,12 +15,12 @@ jobs:
       - generate_docs
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v6
+    - uses: actions/checkout@v7
       with:
         path: '.'
         token: ${{ secrets.GH_UPDATE_DOCS_TOKEN }}
 
-    - uses: actions/download-artifact@v7
+    - uses: actions/download-artifact@v8
       with:
         name: generated_markdowns
 
@@ -29,6 +29,11 @@ jobs:
         unzip generated_md.zip
         cp build/docs/*.md community_extensions/extensions/.
         cp build/docs/extensions_list.md.tmp _includes/list_of_community_extensions.md
+        # Refresh the published static CSV (served at
+        # https://duckdb.org/community_extensions/community_extensions.csv).
+        # It is committed to this repo, so it must be regenerated here too;
+        # the "git add --all community_extensions" below stages it.
+        cp build/docs/community_extensions.csv community_extensions/community_extensions.csv
         rm -r generated_md.zip
         rm -rf build
 
@@ -41,12 +46,9 @@ jobs:
         git config user.name "Quack Mc Docs"
         git commit -m "chore: update Community Extensions docs"
         git push -f origin auto_update_community_extensions_docs
-        # Store the PAT in a file that can be accessed by the
-        # GitHub CLI.
-        echo "${{ secrets.GH_UPDATE_DOCS_TOKEN }}" > token.txt
         # Authorize GitHub CLI for the current repository and
         # create a pull-requests containing the updates.
-        gh auth login --with-token < token.txt
+        echo "${{ secrets.GH_UPDATE_DOCS_TOKEN }}" | gh auth login --with-token
         gh pr create \
           --body "" \
           --title "chore: update Community Extensions docs" \

@@ -8,18 +8,18 @@ excerpt: |
 extension:
   name: infera
   description: A DuckDB extension for in-database inference
-  version: 0.3.0
+  version: 0.4.0
   language: Rust & C++
   build: cmake
   license: MIT OR Apache-2.0
   maintainers:
     - habedi
-  excluded_platforms: "windows_amd64_mingw;osx_amd64;wasm_mvp;wasm_eh;wasm_threads"
+  excluded_platforms: "windows_amd64_mingw;osx_amd64;wasm_threads"
   requires_toolchains: rust
 
 repo:
   github: CogitatorTech/infera
-  ref: c0d6d058c812bb1ecf1d9ca4d435065301c45897
+  ref: b15134d00ace5051c6ba89a53836c25249a47a64
 
 docs:
   hello_world: |
@@ -48,10 +48,10 @@ docs:
     
     For more information, like API references and usage examples, visit the project's [GitHub repository](https://github.com/CogitatorTech/infera).
 
-extension_star_count: 126
-extension_star_count_pretty: 126
-extension_download_count: 351
-extension_download_count_pretty: 351
+extension_star_count: 135
+extension_star_count_pretty: 135
+extension_download_count: 981
+extension_download_count_pretty: 981
 image: '/images/community_extensions/social_preview/preview_community_extension_infera.png'
 layout: community_extension_doc
 ---
@@ -92,5 +92,23 @@ LOAD {{ page.extension.name }};
 | infera_get_version        | scalar        | Return a JSON object with version and build information for the Infera extension.                    | NULL                                                                     | [select infera_get_version();]                                               |
 | infera_clear_cache        | scalar        | Clear the entire model cache directory to free up disk space.                                        | Returns true on success.                                                 | [select infera_clear_cache();]                                               |
 | infera_get_cache_info     | scalar        | Return cache statistics: directory path, total size in bytes, file count, and configured size limit. | Returns JSON with cache fields.                                          | [select infera_get_cache_info();]                                            |
+
+### Overloaded Functions
+
+<div class="extension_functions_table"></div>
+
+This extension does not add any function overloads.
+
+### Added Types
+
+<div class="extension_types_table"></div>
+
+This extension does not add any types.
+
+### Added Settings
+
+<div class="extension_settings_table"></div>
+
+This extension does not add any settings.
 
 

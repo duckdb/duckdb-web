@@ -16,7 +16,6 @@ pill: "PyCon US 2025"
 </div>
 
 |-------|-------|
-| **Date** | {{ page.date | date: "%Y-%m-%d" }} |
 | **Event** | [PyCon US 2025](https://us.pycon.org/2025/) |
 | **Speaker** | [Alex Monahan](https://github.com/Alex-Monahan) |
 | **YouTube** | [Taming File Zoos: Data Science with DuckDB Database Files](https://www.youtube.com/watch?v=Yq-hxgysWLQ) |

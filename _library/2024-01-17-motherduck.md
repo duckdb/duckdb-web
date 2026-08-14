@@ -5,14 +5,15 @@ author: "RJ Atwal, Peter Boncz, Ryan Boyd, Antony Courtney, Till Döhmen, Floria
 thumb: "/images/library/thumbs/cidr.svg"
 image: "/images/library/thumbs/cidr.png"
 tags: ["Paper"]
-thirdparty: true
+category: community
 excerpt: ""
 pill: "CIDR 2024"
 ---
 
-[Paper (PDF)](https://www.cidrdb.org/cidr2024/papers/p46-atwal.pdf)
-
-Venue: CIDR 2024
+| | |
+|-------|-------|
+| **Paper** | [MotherDuck: DuckDB in the Cloud and in the Client (PDF)](https://www.cidrdb.org/cidr2024/papers/p46-atwal.pdf) |
+| **Venue** | CIDR 2024 |
 
 ## Abstract
 

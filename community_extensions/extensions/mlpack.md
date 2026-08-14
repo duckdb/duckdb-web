@@ -19,8 +19,8 @@ extension:
 
 repo:
   github: eddelbuettel/duckdb-mlpack
-  ref: 8437d78423e3cfc65f9226606908b301c2314710
-  ref_next: 013bee3310127e1523763b4a4419a18027f205d6
+  andium: 8437d78423e3cfc65f9226606908b301c2314710
+  ref: ead4698674d803909b1f9c01b083ecc7ea586c3a
 
 docs:
   hello_world: |
@@ -34,7 +34,7 @@ docs:
     CREATE TABLE M (key VARCHAR, json VARCHAR);
 
     -- Train model for 'Y' on 'X' using parameters 'Z', store in 'M'
-    CREATE TEMP TABLE A AS SELECT * FROM mlpack_adaboost("X", "Y", "Z", "M");
+    CREATE TEMP TABLE A AS SELECT * FROM mlpack_adaboost_train("X", "Y", "Z", "M");
 
     -- Count by predicted group
     SELECT COUNT(*) as n, predicted FROM A GROUP BY predicted;
@@ -60,7 +60,7 @@ docs:
     It uses three tables for data, parameters and results.
   
     ### General Information
-    A pair of paramaters "mlpack_verbose" (to show additional data) and "mlpack_silent" (to suppress display of minimal summaries) can also be set.
+    A pair of parameters "mlpack_verbose" (to show additional data) and "mlpack_silent" (to suppress display of minimal summaries) can also be set.
 
     The implementation still stresses the 'minimal' part of 'a (initial) MVP demo' (where MVP stands for 'minimally viable product').
     It wraps five supervised and unsupervised machine learning methods, and provides Linux and macOS builds.
@@ -69,10 +69,10 @@ docs:
 
     For more, please see the [repo](https://github.com/eddelbuettel/duckdb-mlpack).
 
-extension_star_count: 18
-extension_star_count_pretty: 18
-extension_download_count: 342
-extension_download_count_pretty: 342
+extension_star_count: 20
+extension_star_count_pretty: 20
+extension_download_count: 897
+extension_download_count_pretty: 897
 image: '/images/community_extensions/social_preview/preview_community_extension_mlpack.png'
 layout: community_extension_doc
 ---
@@ -111,6 +111,18 @@ LOAD {{ page.extension.name }};
 | mlpack_kmeans                   | table         | use kmeans unsupervised clustering                            | parameters 'clusters', and 'iterations'                             | NULL     |
 | mlpack_mlpack_version           | scalar        | returns the version string for the mlpack version used        | NULL                                                                | NULL     |
 | mlpack_armadillo_version        | scalar        | returns the version string for the armadillo version used     | NULL                                                                | NULL     |
+
+### Overloaded Functions
+
+<div class="extension_functions_table"></div>
+
+This extension does not add any function overloads.
+
+### Added Types
+
+<div class="extension_types_table"></div>
+
+This extension does not add any types.
 
 ### Added Settings
 

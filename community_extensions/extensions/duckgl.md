@@ -17,7 +17,7 @@ extension:
 
 repo:
   github: nkwork9999/duckgl # あなたのリポジトリ名に合わせて
-  ref: 0de60a34e7bc04141fbc6b2efd6dcad6a80ac1e8
+  ref: e8bbc917f3676ff738eb41c4617201bcfd7624c9
 
 docs:
   hello_world: |
@@ -37,10 +37,10 @@ docs:
     - GeoJSON layer rendering from spatial tables
     - SQL query execution from browser UI
 
-extension_star_count: 1
-extension_star_count_pretty: 1
-extension_download_count: 598
-extension_download_count_pretty: 598
+extension_star_count: 7
+extension_star_count_pretty: 7
+extension_download_count: 707
+extension_download_count_pretty: 707
 image: '/images/community_extensions/social_preview/preview_community_extension_duckgl.png'
 layout: community_extension_doc
 ---
@@ -70,5 +70,23 @@ LOAD {{ page.extension.name }};
 |---------------|---------------|-------------|---------|----------|
 | duckgl_start  | scalar        | NULL        | NULL    |          |
 | duckgl_stop   | scalar        | NULL        | NULL    |          |
+
+### Overloaded Functions
+
+<div class="extension_functions_table"></div>
+
+This extension does not add any function overloads.
+
+### Added Types
+
+<div class="extension_types_table"></div>
+
+This extension does not add any types.
+
+### Added Settings
+
+<div class="extension_settings_table"></div>
+
+This extension does not add any settings.
 
 

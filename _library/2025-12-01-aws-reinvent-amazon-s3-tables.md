@@ -2,11 +2,10 @@
 layout: post
 title: "Amazon S3 Tables Architecture, Use Cases, and Best Practices"
 author: "Yuri Zarubin"
-#thumb: "/images/library/thumbs/2025-04-22-liberate-analytical-data-management-with-duckdb.jpg"
-#image: "/images/library/thumbs/2025-04-22-liberate-analytical-data-management-with-duckdb.jpg"
 tags: ["Talk"]
 length: "6 min"
-thirdparty: true
+category: community
+excerpt: ""
 pill: "AWS re:Invent 2025"
 ---
 
@@ -17,3 +16,8 @@ pill: "AWS re:Invent 2025"
 </div>
 
 The S3 Tables demo starts at 43:23.
+
+|-------|-------|
+| **Event** | AWS re:Invent 2025 |
+| **Speaker** | Yuri Zarubin |
+| **YouTube** | [Amazon S3 Tables Architecture, Use Cases, and Best Practices](https://www.youtube.com/watch?v=Pi82g0YGklU) |

@@ -1,13 +1,12 @@
 ---
 layout: post
 title: "DuckDB in Research S02E02: Abigale Kim"
-subtitle: "Anarchy in the Database: Abigale Kim on DuckDB and DBMS Extensibility"
 author: "Disseminate Podcast Series by Jack Waudby"
 thumb: "/images/library/thumbs/2025-10-23-abigale-kim.jpg"
 image: "/images/library/thumbs/2025-10-23-abigale-kim.jpg"
 tags: ["Podcast"]
 length: "45 min"
-thirdparty: true
+category: community
 excerpt: ""
 pill: "DuckDB in Research"
 episode: "S02E02"
@@ -17,11 +16,14 @@ episode: "S02E02"
 <iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/fJVmx8nEWNo?si=nha3_YJVlbHRvXuC" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 </div>
 
-## Podcast Links
-
-* [Apple Podcasts](https://podcasts.apple.com/us/podcast/anarchy-in-the-database-abigale-kim-on-duckdb-and/id1631350873?i=1000733086266)
-* [Spotify](https://open.spotify.com/episode/5E5vpZYoSZeCHZWTcQd2J3)
-* [Acast](https://shows.acast.com/disseminate/episodes/anarchy-in-the-database-abigale-kim-on-dbms-extensibility)
+|-------|-------|
+| **Podcast** | DuckDB in Research |
+| **Episode** | S02E02 |
+| **Topic** | Anarchy in the Database: Abigale Kim on DuckDB and DBMS Extensibility |
+| **Apple Podcasts** | [Listen](https://podcasts.apple.com/us/podcast/anarchy-in-the-database-abigale-kim-on-duckdb-and/id1631350873?i=1000733086266) |
+| **Spotify** | [Listen](https://open.spotify.com/episode/5E5vpZYoSZeCHZWTcQd2J3) |
+| **Acast** | [Listen](https://shows.acast.com/disseminate/episodes/anarchy-in-the-database-abigale-kim-on-dbms-extensibility) |
+| **YouTube** | [Watch](https://www.youtube.com/watch?v=fJVmx8nEWNo) |
 
 ## Description
 

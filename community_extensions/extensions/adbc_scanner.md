@@ -19,13 +19,14 @@ extension:
   name: adbc_scanner
   version: '2025120801'
 repo:
+  andium: 84794a00a6837c31f0779c56f2ce0e83df1bb7b6
   github: query-farm/adbc_scanner
-  ref: 3fe428eb11c7e4a724d31f244bf6bed7a4d9d0cb
+  ref: eb993fc17861091e60cbe19a719ff39cc82d025a
 
-extension_star_count: 10
-extension_star_count_pretty: 10
-extension_download_count: 273
-extension_download_count_pretty: 273
+extension_star_count: 18
+extension_star_count_pretty: 18
+extension_download_count: 1092
+extension_download_count_pretty: 1.1k
 image: '/images/community_extensions/social_preview/preview_community_extension_adbc_scanner.png'
 layout: community_extension_doc
 ---
@@ -61,6 +62,7 @@ LOAD {{ page.extension.name }};
 | adbc_execute        | scalar        | NULL        | NULL    | NULL     |
 | adbc_info           | table         | NULL        | NULL    | NULL     |
 | adbc_insert         | table         | NULL        | NULL    | NULL     |
+| adbc_profiles       | table         | NULL        | NULL    | NULL     |
 | adbc_rollback       | scalar        | NULL        | NULL    | NULL     |
 | adbc_scan           | table         | NULL        | NULL    | NULL     |
 | adbc_scan_table     | table         | NULL        | NULL    | NULL     |
@@ -68,5 +70,23 @@ LOAD {{ page.extension.name }};
 | adbc_set_autocommit | scalar        | NULL        | NULL    | NULL     |
 | adbc_table_types    | table         | NULL        | NULL    | NULL     |
 | adbc_tables         | table         | NULL        | NULL    | NULL     |
+
+### Overloaded Functions
+
+<div class="extension_functions_table"></div>
+
+This extension does not add any function overloads.
+
+### Added Types
+
+<div class="extension_types_table"></div>
+
+This extension does not add any types.
+
+### Added Settings
+
+<div class="extension_settings_table"></div>
+
+This extension does not add any settings.
 
 

@@ -72,10 +72,10 @@ docs:
         'Monthly Sales from CSV'
     ) FROM read_csv('sales.csv');
 
-extension_star_count: 17
-extension_star_count_pretty: 17
-extension_download_count: 350
-extension_download_count_pretty: 350
+extension_star_count: 23
+extension_star_count_pretty: 23
+extension_download_count: 809
+extension_download_count_pretty: 809
 image: '/images/community_extensions/social_preview/preview_community_extension_miniplot.png'
 layout: community_extension_doc
 ---
@@ -110,5 +110,23 @@ LOAD {{ page.extension.name }};
 | miniplot_openssl_version | scalar        | NULL        | NULL    |          |
 | scatter_3d_chart         | scalar        | NULL        | NULL    |          |
 | scatter_chart            | scalar        | NULL        | NULL    |          |
+
+### Overloaded Functions
+
+<div class="extension_functions_table"></div>
+
+This extension does not add any function overloads.
+
+### Added Types
+
+<div class="extension_types_table"></div>
+
+This extension does not add any types.
+
+### Added Settings
+
+<div class="extension_settings_table"></div>
+
+This extension does not add any settings.
 
 

@@ -1,22 +1,23 @@
 ---
 layout: post
 title: "DuckDB in Research S01E01: Till Döhmen"
-subtitle: "DuckDQ: A Python Library for Data Quality Checks in ML Pipelines"
 author: "Disseminate Podcast Series by Jack Waudby"
 thumb: "/images/library/thumbs/2025-03-13-till-doehmen-duckdq.jpg"
 image: "/images/library/thumbs/2025-03-13-till-doehmen-duckdq.jpg"
 tags: ["Podcast"]
 length: "60 min"
-thirdparty: true
+category: community
 excerpt: ""
 pill: "DuckDB in Research"
 episode: "S01E01"
 ---
 
-## Links
-
-* [Apple Podcasts](https://podcasts.apple.com/us/podcast/till-d%C3%B6hmen-duckdq-a-python-library-for-data/id1631350873?i=1000699017342)
-* [Spotify](https://open.spotify.com/episode/2a0bqjunF1FGaFp7w3NH7b)
+|-------|-------|
+| **Podcast** | DuckDB in Research |
+| **Episode** | S01E01 |
+| **Topic** | DuckDQ: A Python Library for Data Quality Checks in ML Pipelines |
+| **Apple Podcasts** | [Listen](https://podcasts.apple.com/us/podcast/till-d%C3%B6hmen-duckdq-a-python-library-for-data/id1631350873?i=1000699017342) |
+| **Spotify** | [Listen](https://open.spotify.com/episode/2a0bqjunF1FGaFp7w3NH7b) |
 
 ## Description
 

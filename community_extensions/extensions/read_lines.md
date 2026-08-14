@@ -8,17 +8,16 @@ excerpt: |
 extension:
   name: read_lines
   description: Read line-based text files with line numbers and efficient subset extraction. Supports glob patterns, line selection, and context lines around matches.
-  version: 0.1.2
+  version: 0.2.1
   language: C++
   build: cmake
   license: MIT
   maintainers:
     - teaguesterling
-
 repo:
   github: teaguesterling/duckdb_read_lines
-  ref: 4af06cb19e138ace8d7313ce983b2f54a961c559
-
+  andium: 8075509bc21b936c228879ada22c8a46657109aa
+  ref: refs/tags/v0.2.1
 docs:
   hello_world: |
     -- Read all lines from a file
@@ -51,9 +50,12 @@ docs:
 
     **Functions:**
     - `read_lines(path)` - Read all lines from file(s) with glob support
-    - `read_lines(path, lines)` - Read selected lines (positional argument)
-    - `read_lines_lateral(path, lines)` - Lateral join variant for file paths from table columns
+    - `read_lines(path, lines[, trim])` - Read selected lines (positional arguments)
+    - `read_lines_lateral(path[, lines[, trim]])` - Lateral join variant for file paths from table columns
     - `parse_lines(text, ...)` - Parse lines from a string
+
+    Sources may be non-seekable (pipes/streams, e.g. shellfs commands), including
+    per-row commands in a correlated lateral join.
 
     **Output Schema:**
     | Column | Type | Description |
@@ -62,6 +64,13 @@ docs:
     | content | VARCHAR | Line content (preserves original line endings) |
     | byte_offset | BIGINT | Byte position of line start |
     | file_path | VARCHAR | Source file path (read_lines only) |
+
+    **Trimming** (`trim` argument; transforms content only, never changes which rows appear):
+    - `NULL` / `false` / `'none'` - Preserve exactly (default)
+    - `true` / `'endings'` - Strip the line terminator only
+    - `'right'` - Strip terminator and trailing spaces/tabs
+    - `'left'` - Strip leading spaces/tabs, keep terminator
+    - `'both'` - Both sides
 
     **Line Selection:**
     - Single line: `42` or `lines := 42`
@@ -83,10 +92,10 @@ docs:
     - Process multiple files with glob patterns
     - Parse multi-line string columns
 
-extension_star_count: 1
-extension_star_count_pretty: 1
-extension_download_count: 92
-extension_download_count_pretty: 92
+extension_star_count: 4
+extension_star_count_pretty: 4
+extension_download_count: 774
+extension_download_count_pretty: 774
 image: '/images/community_extensions/social_preview/preview_community_extension_read_lines.png'
 layout: community_extension_doc
 ---
@@ -117,5 +126,23 @@ LOAD {{ page.extension.name }};
 | parse_lines        | table         | NULL        | NULL    |          |
 | read_lines         | table         | NULL        | NULL    |          |
 | read_lines_lateral | table         | NULL        | NULL    |          |
+
+### Overloaded Functions
+
+<div class="extension_functions_table"></div>
+
+This extension does not add any function overloads.
+
+### Added Types
+
+<div class="extension_types_table"></div>
+
+This extension does not add any types.
+
+### Added Settings
+
+<div class="extension_settings_table"></div>
+
+This extension does not add any settings.
 
 

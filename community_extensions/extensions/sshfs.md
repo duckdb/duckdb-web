@@ -8,7 +8,7 @@ excerpt: |
 extension:
   name: sshfs
   description: Allows reading and writing files over SSH
-  version: '2026020501'
+  version: '2026021601'
   language: C++
   build: cmake
   license: MIT
@@ -19,7 +19,8 @@ extension:
   vcpkg_commit: 'dd3097e305afa53f7b4312371f62058d2e665320'
 repo:
   github: midwork-finds-jobs/duckdb-sshfs
-  ref: 644366f21a80397d38979e6200fd26a544b98e7e
+  andium: 5f2e422f964010d11a0bea040ab421c4d7f7fa41
+  ref: 8c4216e8f33d7f7c3d7c3a8f171856eb7a5ac8e6
 
 docs:
   hello_world: |
@@ -56,10 +57,10 @@ docs:
 
     See: https://github.com/midwork-finds-jobs/duckdb-sshfs/blob/main/README.md for more examples and details.
 
-extension_star_count: 5
-extension_star_count_pretty: 5
-extension_download_count: 365
-extension_download_count_pretty: 365
+extension_star_count: 12
+extension_star_count_pretty: 12
+extension_download_count: 1041
+extension_download_count_pretty: 1.0k
 image: '/images/community_extensions/social_preview/preview_community_extension_sshfs.png'
 layout: community_extension_doc
 ---
@@ -80,6 +81,24 @@ LOAD {{ page.extension.name }};
 ### About {{ page.extension.name }}
 {{ page.docs.extended_description }}
 {% endif %}
+
+### Added Functions
+
+<div class="extension_functions_table"></div>
+
+This extension does not add any functions.
+
+### Overloaded Functions
+
+<div class="extension_functions_table"></div>
+
+This extension does not add any function overloads.
+
+### Added Types
+
+<div class="extension_types_table"></div>
+
+This extension does not add any types.
 
 ### Added Settings
 

@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "DuckLake & the Future of Open Table Formats"
-author: "Hannes Mühleisen (DuckDB Labs) and Jordan Tigani (MotherDuck)"
+author: "Hannes Mühleisen and Jordan Tigani"
 thumb: "/images/library/thumbs/2025-06-17-the-future-of-open-table-formats.jpg"
 image: "/images/library/thumbs/2025-06-17-the-future-of-open-table-formats.jpg"
 tags: ["Podcast"]
@@ -17,6 +17,5 @@ redirect_from:
 </div>
 
 |-------|-------|
-| **Date** | {{ page.date | date: "%Y-%m-%d" }} |
-| **Hosts** | [Hannes Mühleisen]((https://hannes.muehleisen.org/)) ([DuckDB Labs](https://duckdblabs.com/)) and [Jordan Tigani](https://motherduck.com/authors/jordan-tigani/) ([MotherDuck](https://motherduck.com/)) |
+| **Hosts** | [Hannes Mühleisen](https://hannes.muehleisen.org/) ([DuckLabs](https://ducklabs.com/)) and [Jordan Tigani](https://motherduck.com/authors/jordan-tigani/) ([MotherDuck](https://motherduck.com/)) |
 | **YouTube** | [DuckLake & the Future of Open Table Formats](https://www.youtube.com/watch?v=-PYLFx3FRfQ) |

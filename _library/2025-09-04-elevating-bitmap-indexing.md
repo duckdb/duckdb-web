@@ -14,7 +14,6 @@ pill: "DuckDB in Science"
 </div>
 
 |-------|-------|
-| **Date** | {{ page.date | date: "%Y-%m-%d" }} |
 | **Event** | [DuckDB in Science meetup (London)]({% link _events/2025-09-04-duckdb-science-and-education-london-meetup.md %}) |
 | **Speaker** | Junchang Wang (Nanjing University of Posts and Telecommunications) |
 | **Slide deck** | [Download](https://blobs.duckdb.org/events/duckdb-in-science-london-meetup/junchang-bitmap-indexing-cubit.pdf) |

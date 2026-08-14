@@ -5,14 +5,14 @@ author: "Yijun Ge, Zijian Chen, Jimmy Lin"
 thumb: "/images/library/thumbs/emnlp.svg"
 image: "/images/library/thumbs/emnlp.png"
 tags: ["Paper"]
-thirdparty: true
+category: community
 excerpt: ""
 pill: "EMNLP 2025"
 ---
 
-[Paper (PDF)](https://cs.uwaterloo.ca/~jimmylin/publications/ge-etal-2025-quackir.pdf)
-
-Venue: EMNLP 2025
+|-------|-------|
+| **Paper** | [QuackIR: Retrieval in DuckDB and Other Relational Database Management Systems (PDF)](https://cs.uwaterloo.ca/~jimmylin/publications/ge-etal-2025-quackir.pdf) |
+| **Venue** | EMNLP 2025 |
 
 ## Abstract
 

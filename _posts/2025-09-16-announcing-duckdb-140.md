@@ -12,7 +12,7 @@ We are proud to release DuckDB v1.4.0, named “Andium” after the _Andean teal
 
 In this blog post, we cover the most important updates for this release around support, features and extensions. DuckDB is moving rather quickly, and we could cover only a small fraction of the changes in this release. For the complete release notes, see the [release page on GitHub](https://github.com/duckdb/duckdb/releases/tag/v1.4.0).
 
-> To install the new version, please visit the [installation page]({% link install/index.html %}). Note that it can take a few days to release some client libraries (e.g., Go, R, Java) due to the extra changes and review rounds required.
+> To install the new version, please visit the [installation page]({% link install/index.html %}#version=lts). Note that it can take a few days to release some client libraries (e.g., Go, R, Java) due to the extra changes and review rounds required.
 
 ## Long-Term Support (LTS) Edition
 
@@ -20,8 +20,8 @@ We are delighted to see that DuckDB is used regularly in production environments
 In the past, we would automatically deprecate old DuckDB versions whenever the newer version was released. But we’re changing this today.
 
 Starting with this release, every _other_ DuckDB version is going to be a Long-Term Support (LTS) edition.
-For LTS DuckDB versions, [community support](https://duckdblabs.com/community_support_policy/) will last a year after the release (for now).
-[DuckDB Labs](https://duckdblabs.com/) is also starting to offer support for older LTS versions after their community support has expired.
+For LTS DuckDB versions, [community support](https://ducklabs.com/community_support_policy/) will last a year after the release (for now).
+[DuckLabs](https://ducklabs.com/) is also starting to offer support for older LTS versions after their community support has expired.
 
 ![DuckDB LTS support](/images/blog/lts-support-light.svg){: .lightmode-img }
 ![DuckDB LTS support](/images/blog/lts-support-dark.svg){: .darkmode-img }
@@ -78,7 +78,7 @@ Click to see the end-of-life (EOL) dates for DuckDB releases.
 ### Database Encryption
 
 Being able to encrypt DuckDB database files has been a [long-standing feature request](https://github.com/duckdb/duckdb/discussions/4512). Starting with this release, DuckDB supports encryption of its files. Encryption keys are given using the `ENCRYPTION_KEY` parameter 
-to [`ATTACH`]({% link docs/stable/sql/statements/attach.md %}), like so:
+to [`ATTACH`]({% link docs/current/sql/statements/attach.md %}), like so:
 
 ```sql
 ATTACH 'encrypted.db' AS enc_db (ENCRYPTION_KEY 'quack_quack');
@@ -92,7 +92,7 @@ Encryption support in DuckDB was implemented by [Lotte Felius (@ccfelius)](https
 
 ### `MERGE` Statement
 
-DuckDB now supports [`MERGE INTO`]({% link docs/stable/sql/statements/merge_into.md %}) as an alternative to [`INSERT INTO ... ON CONFLICT`]({% link docs/stable/sql/statements/insert.md %}#on-conflict-clause).
+DuckDB now supports [`MERGE INTO`]({% link docs/current/sql/statements/merge_into.md %}) as an alternative to [`INSERT INTO ... ON CONFLICT`]({% link docs/current/sql/statements/insert.md %}#on-conflict-clause).
 `MERGE INTO` does not require a primary key since it works on any custom merge condition. This is a very common statement in OLAP systems that do not support primary keys but still want to support upserting (i.e., `UPDATE` plus `INSERT`) functionality.
 
 In this example we use a simple condition matching on a key and we call the `RETURNING` statement to get a summary of the updated and inserted rows.
@@ -145,7 +145,7 @@ WITH deletes(item_id, delete_threshold) AS (VALUES (10, 3000))
 
 ### Iceberg Writes
 
-The [duckdb-iceberg]({% link docs/stable/core_extensions/iceberg/overview.md %}) extension now **supports writing to Iceberg**.
+The [duckdb-iceberg]({% link docs/current/core_extensions/iceberg/overview.md %}) extension now **supports writing to Iceberg**.
 
 <details markdown='1'>
 <summary markdown='span'>

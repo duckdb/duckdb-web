@@ -15,14 +15,14 @@ extension:
   maintainers:
     - JAicewizard
     - arjenpdevries
-  excluded_platforms: "osx_amd64;wasm_mvp;wasm_eh;wasm_threads;linux_amd64_musl"
+  excluded_platforms: "wasm_mvp;wasm_eh;wasm_threads"
   requires_toolchains: "fortran;omp"
   vcpkg_url: "https://github.com/microsoft/vcpkg.git"
-  vcpkg_commit: "54760c3439fa2fdf2f42ccd730fcf2639c3fe101" 
+  vcpkg_commit: "26826180d398b4bb4f0453ae9d38a1c2c4d472dc"
 
 repo:
   github: "duckdb-faiss-ext/duckdb-faiss-ext"
-  ref: "6b824231e6291b689328d67a22440301337bbc3f"
+  ref: "e44df640b1def08315af80c01ce6207062cc7d64"
 
 docs:
   hello_world: |
@@ -46,10 +46,10 @@ docs:
 
     Some (most) indices are not supported for gpus, however this is very easily resolvable. Please open an issue over at our repository in order to get this resolved!
 
-extension_star_count: 29
-extension_star_count_pretty: 29
-extension_download_count: 366
-extension_download_count_pretty: 366
+extension_star_count: 31
+extension_star_count_pretty: 31
+extension_download_count: 440
+extension_download_count_pretty: 440
 image: '/images/community_extensions/social_preview/preview_community_extension_faiss.png'
 layout: community_extension_doc
 ---
@@ -89,5 +89,23 @@ LOAD {{ page.extension.name }};
 | faiss_search_filter     | scalar        | NULL        | NULL    |          |
 | faiss_search_filter_set | scalar        | NULL        | NULL    |          |
 | faiss_to_gpu            | table         | NULL        | NULL    |          |
+
+### Overloaded Functions
+
+<div class="extension_functions_table"></div>
+
+This extension does not add any function overloads.
+
+### Added Types
+
+<div class="extension_types_table"></div>
+
+This extension does not add any types.
+
+### Added Settings
+
+<div class="extension_settings_table"></div>
+
+This extension does not add any settings.
 
 

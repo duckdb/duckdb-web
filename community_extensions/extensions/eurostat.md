@@ -8,7 +8,7 @@ excerpt: |
 extension:
   name: eurostat
   description: Extension that adds support for reading data from EUROSTAT database using SQL.
-  version: 0.1.1
+  version: 0.5.0
   language: C++
   build: cmake
   excluded_platforms: "windows_amd64_mingw"
@@ -18,8 +18,7 @@ extension:
 
 repo:
   github: ahuarte47/duckdb-eurostat
-  ref: d0ff60b1cd3e0749953fb28ad21eb1fb0ed2b0a0
-  ref_next: c628d0c65b9e87c0974de39a544958a565e61742
+  ref: ab635823270880d6f668b07a4cda46f00532634a
 
 docs:
   hello_world: |
@@ -148,10 +147,10 @@ docs:
     Time filters (e.g. `WHERE time_period >= '2000' AND time_period <= '2010'`) are also supported
     and will be encoded as range filters in the EUROSTAT API.
 
-extension_star_count: 29
-extension_star_count_pretty: 29
-extension_download_count: 270
-extension_download_count_pretty: 270
+extension_star_count: 34
+extension_star_count_pretty: 34
+extension_download_count: 783
+extension_download_count_pretty: 783
 image: '/images/community_extensions/social_preview/preview_community_extension_eurostat.png'
 layout: community_extension_doc
 ---
@@ -184,5 +183,24 @@ LOAD {{ page.extension.name }};
 | EUROSTAT_Endpoints              | table         | Returns the list of supported EUROSTAT API Endpoints.                                          | NULL    | [SELECT provider_id, organization, description FROM EUROSTAT_Endpoints();]                                 |
 | EUROSTAT_DataStructure          | table         | Returns information of the data structure of an EUROSTAT Dataflow.                             | NULL    | [SELECT * FROM EUROSTAT_DataStructure('ESTAT', 'DEMO_R_D2JAN', language := 'en');]                         |
 | EUROSTAT_Read                   | table         | Returns the dataset of an EUROSTAT Dataflow.                                                   | NULL    | [SELECT * FROM EUROSTAT_Read('ESTAT', 'DEMO_R_D2JAN') LIMIT 5;]                                            |
+| EUROSTAT_DataDictionary         | table         | NULL                                                                                           | NULL    | NULL                                                                                                       |
+
+### Overloaded Functions
+
+<div class="extension_functions_table"></div>
+
+This extension does not add any function overloads.
+
+### Added Types
+
+<div class="extension_types_table"></div>
+
+This extension does not add any types.
+
+### Added Settings
+
+<div class="extension_settings_table"></div>
+
+This extension does not add any settings.
 
 

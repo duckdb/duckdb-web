@@ -340,7 +340,7 @@ svg:not(:root) {
 
 svg {
   shape-rendering: geometricPrecision;
-  text-rendering: geometricPrecision;
+  text-rendering: auto;
   image-rendering: auto;
 }
 

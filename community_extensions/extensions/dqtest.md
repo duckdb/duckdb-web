@@ -136,10 +136,10 @@ extended_description: |
   - Enforce data contracts and expectations
   - Track data quality metrics over time
   - Catch data anomalies and schema changes early
-extension_star_count: 3
-extension_star_count_pretty: 3
-extension_download_count: 256
-extension_download_count_pretty: 256
+extension_star_count: 5
+extension_star_count_pretty: 5
+extension_download_count: 919
+extension_download_count_pretty: 919
 image: '/images/community_extensions/social_preview/preview_community_extension_dqtest.png'
 layout: community_extension_doc
 ---
@@ -169,5 +169,23 @@ LOAD {{ page.extension.name }};
 |---------------|---------------|-------------|---------|----------|
 | dq_init       | table         | NULL        | NULL    |          |
 | dq_run_tests  | table         | NULL        | NULL    |          |
+
+### Overloaded Functions
+
+<div class="extension_functions_table"></div>
+
+This extension does not add any function overloads.
+
+### Added Types
+
+<div class="extension_types_table"></div>
+
+This extension does not add any types.
+
+### Added Settings
+
+<div class="extension_settings_table"></div>
+
+This extension does not add any settings.
 
 

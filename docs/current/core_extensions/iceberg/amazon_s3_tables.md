@@ -1,0 +1,72 @@
+---
+layout: docu
+redirect_from:
+- /docs/stable/extensions/iceberg/amazon_s3_tables
+- /docs/preview/core_extensions/iceberg/amazon_s3_tables
+- /docs/stable/core_extensions/iceberg/amazon_s3_tables
+title: Amazon S3 Tables
+---
+
+> Support for S3 Tables is currently experimental.
+
+The `iceberg` extension supports reading Iceberg tables stored in [Amazon S3 Tables](https://aws.amazon.com/s3/features/tables/).
+
+## Requirements
+
+Install the following extensions:
+
+```sql
+INSTALL aws;
+INSTALL httpfs;
+INSTALL iceberg;
+```
+
+## Connecting to Amazon S3 Tables
+
+You can let DuckDB detect your AWS credentials and configuration based on the default profile in your `~/.aws` directory by creating the following secret using the [Secrets Manager]({% link docs/current/configuration/secrets_manager.md %}):
+
+```sql
+CREATE SECRET (
+    TYPE s3,
+    PROVIDER credential_chain
+);
+```
+
+Alternatively, you can set the values manually:
+
+```sql
+CREATE SECRET (
+    TYPE s3,
+    KEY_ID '⟨key_id⟩',
+    SECRET '⟨secret⟩',
+    REGION '⟨region⟩'
+);
+```
+
+For the full range of credential options (assumed roles, SSO, web identity, and more), see the [`aws` extension]({% link docs/current/core_extensions/aws.md %}#credential_chain-provider).
+
+Then, connect to the catalog using your S3 Tables ARN (available in the AWS Management Console) and the `ENDPOINT_TYPE s3_tables` option:
+
+```sql
+ATTACH '⟨s3_tables_arn⟩' AS my_s3_tables_catalog (
+   TYPE iceberg,
+   ENDPOINT_TYPE s3_tables
+);
+```
+
+> Warning `ENDPOINT_TYPE s3_tables` always builds an endpoint of the form `s3tables.⟨region⟩.amazonaws.com/iceberg`. This is incorrect for any region whose endpoint does not use the plain `amazonaws.com` suffix — most notably the AWS China regions (`cn-north-1`, `cn-northwest-1`), which use `amazonaws.com.cn`. For such regions, attach the catalog by passing an explicit `ENDPOINT` (with the correct host for your region) together with `AUTHORIZATION_TYPE 'sigv4'`, instead of using `ENDPOINT_TYPE`.
+
+To check whether the attachment worked, list all tables:
+
+```sql
+SHOW ALL TABLES;
+```
+
+You can query a table as follows:
+
+```sql
+SELECT count(*)
+FROM my_s3_tables_catalog.⟨namespace_name⟩.⟨table_name⟩;
+```
+
+S3 Tables is an Iceberg REST Catalog. For the full list of `ATTACH` options — and details on the compatibility flags — see [Iceberg REST Catalogs]({% link docs/current/core_extensions/iceberg/iceberg_rest_catalogs.md %}#attach-options).

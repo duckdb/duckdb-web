@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Arrow IPC Support in DuckDB"
-author: "Pedro Holanda (DuckDB Labs), Ian Cook (Columnar), Dewey Dunnington (Wherobots), Bryce Mecum (Voltron Data)"
+author: "Pedro Holanda (DuckLabs), Ian Cook (Columnar), Dewey Dunnington (Wherobots), Bryce Mecum (Voltron Data)"
 thumb: "/images/blog/thumbs/duckdb-arrow.svg"
 image: "/images/blog/thumbs/duckdb-arrow.png"
 excerpt: "DuckDB now supports consuming and producing the Arrow IPC Serialization Format through the `arrow` community extension."
@@ -14,7 +14,7 @@ In recent years, the [Apache Arrow project](https://arrow.apache.org/docs/) has 
 Apache Arrow powers, among others, the integration between DuckDB and Polars.
 In practice, when DuckDB produces or consumes a Polars DataFrame, it is actually using the [Arrow columnar format](https://arrow.apache.org/docs/format/Columnar.html) underneath.
 
-The importance of having such a format is also one of the main reasons DuckDB was among the pioneers in [integrating with Arrow]({% post_url 2021-12-03-duck-arrow %}) and implementing an [Arrow Database Connectivity (ADBC)](https://arrow.apache.org/adbc/) [interface]({% link docs/stable/clients/adbc.md %}) – particularly because Arrow makes this possible with no additional dependencies, thanks to its [C data interface](https://arrow.apache.org/docs/format/CDataInterface.html).
+The importance of having such a format is also one of the main reasons DuckDB was among the pioneers in [integrating with Arrow]({% post_url 2021-12-03-duck-arrow %}) and implementing an [Arrow Database Connectivity (ADBC)](https://arrow.apache.org/adbc/) [interface]({% link docs/current/clients/adbc.md %}) – particularly because Arrow makes this possible with no additional dependencies, thanks to its [C data interface](https://arrow.apache.org/docs/format/CDataInterface.html).
 
 But one limitation of Arrow's C data interface is that it exchanges data using pointers (memory addresses). This limits the possibilities if you want to exchange Arrow data between different processes or systems. To overcome this limitation, the Arrow project also specifies the [Arrow IPC format](https://arrow.apache.org/docs/format/Columnar.html#format-ipc), which allows users to efficiently serialize Arrow columnar data and pass it between processes or over a network. This data can be consumed as a stream, either directly from a memory buffer or from a file.
 
@@ -97,7 +97,7 @@ which prints:
 └─────────────────┘
 ```
 
-Thanks to [replacement scans]({% link docs/preview/sql/dialect/friendly_sql.md %}#data-import), you can omit the function `read_arrow` if the filename ends with `.arrow` or `.arrows`. For example:
+Thanks to [replacement scans]({% link docs/current/sql/dialect/friendly_sql.md %}#data-import), you can omit the function `read_arrow` if the filename ends with `.arrow` or `.arrows`. For example:
 
 ```sql
 SELECT count(*) FROM 'lineitem.arrows';
@@ -123,7 +123,7 @@ What if you want to fetch an Arrow IPC stream directly from a server into DuckDB
 npx serve -l 8008
 ```
 
-Then you can use [DuckDB's `httpfs` extension]({% link docs/stable/core_extensions/httpfs/https.md %}) to query the Arrow data over the HTTP(S) protocol:
+Then you can use [DuckDB's `httpfs` extension]({% link docs/current/core_extensions/httpfs/https.md %}) to query the Arrow data over the HTTP(S) protocol:
 
 ```sql
 INSTALL httpfs;
@@ -238,7 +238,7 @@ pa.total_allocated_bytes()
 ## Conclusion & What's Next
 
 In this blog post, we presented the new Arrow community extension, which enables DuckDB users to interact with Arrow IPC streaming buffers and files. 
-Special thanks to [Voltron Data](https://voltrondata.com/) for enabling this extension by working with [DuckDB Labs](https://duckdblabs.com/).
+Special thanks to [Voltron Data](https://voltrondata.com/) for enabling this extension by working with [DuckLabs](https://ducklabs.com/).
 Below we list our future plans for this extension:
 
 * Support for both `ZSTD` and `LZ4` compression when writing Arrow IPC. DuckDB currently only supports writing uncompressed buffers.

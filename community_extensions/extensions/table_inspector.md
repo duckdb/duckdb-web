@@ -8,7 +8,7 @@ excerpt: |
 extension:
   name: table_inspector
   description: Observability into DuckDB storage internals at the database, table, and column levels
-  version: 0.0.1
+  version: 0.1.5
   language: C++
   build: cmake
   license: MIT
@@ -18,8 +18,9 @@ extension:
     - dentiny
 repo:
   github: dentiny/duckdb-table-inspector
-  ref: 13b830f3ccee4b4be3058a8211ad2f566c1ef698
-  ref_next: 7fb029e2cde2904a572aee40b94684dfd5f55d19
+  andium: 13b830f3ccee4b4be3058a8211ad2f566c1ef698
+  ref: 7c59120e26f4a6c574558d8ce68428210d08ff15
+
 docs:
   hello_world: |
     -- List all attached persistent databases with file sizes
@@ -38,10 +39,10 @@ docs:
     It helps users understand storage usage at the database, table, and column levels,
     and addresses issues like unexpected file size or poor compression.
 
-extension_star_count: 0
-extension_star_count_pretty: 0
-extension_download_count: null
-extension_download_count_pretty: n/a
+extension_star_count: 2
+extension_star_count_pretty: 2
+extension_download_count: 906
+extension_download_count_pretty: 906
 image: '/images/community_extensions/social_preview/preview_community_extension_table_inspector.png'
 layout: community_extension_doc
 ---
@@ -67,11 +68,29 @@ LOAD {{ page.extension.name }};
 
 <div class="extension_functions_table"></div>
 
-|    function_name    | function_type | description | comment | examples |
-|---------------------|---------------|-------------|---------|----------|
-| inspect_block_usage | table         | NULL        | NULL    |          |
-| inspect_column      | table         | NULL        | NULL    |          |
-| inspect_database    | table         | NULL        | NULL    |          |
-| inspect_storage     | table         | NULL        | NULL    |          |
+|    function_name    | function_type |                          description                           |                                                              comment                                                               |                        examples                        |
+|---------------------|---------------|----------------------------------------------------------------|------------------------------------------------------------------------------------------------------------------------------------|--------------------------------------------------------|
+| inspect_storage     | table         | List all attached persistent databases with file and WAL sizes | Returns database_name, database_file_bytes, and wal_file_bytes for each non-system, non-temporary, non-in-memory attached database | [SELECT * FROM inspect_storage();]                     |
+| inspect_database    | table         | List all tables with persisted data and index sizes            | Calculates data size by counting unique persistent block IDs per table, and index size from ART allocator buffers                  | [SELECT * FROM inspect_database();]                    |
+| inspect_column      | table         | Show per-segment storage details for a column                  | Returns row_group_id, compression type, compressed_bytes, estimated_decompressed_bytes, and row_count for each segment             | [SELECT * FROM inspect_column('mytable', 'mycolumn');] |
+| inspect_block_usage | table         | Show storage breakdown by component                            | Breaks down a .duckdb file into table_data, index, metadata, and free_blocks with size_bytes, percentage, and block_count          | [SELECT * FROM inspect_block_usage();]                 |
+
+### Overloaded Functions
+
+<div class="extension_functions_table"></div>
+
+This extension does not add any function overloads.
+
+### Added Types
+
+<div class="extension_types_table"></div>
+
+This extension does not add any types.
+
+### Added Settings
+
+<div class="extension_settings_table"></div>
+
+This extension does not add any settings.
 
 

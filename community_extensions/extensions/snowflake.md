@@ -8,7 +8,7 @@ excerpt: |
 extension:
   name: snowflake
   description: Snowflake data source extension - query Snowflake databases directly from DuckDB
-  version: 0.2.0
+  version: 0.5.2
   language: C++
   build: cmake
   license: MIT
@@ -17,25 +17,22 @@ extension:
 
 repo:
   github: iqea-ai/duckdb-snowflake
-  ref: ee2388dc6c32b1231c493be4dacc9897690936de
+  ref: b61f5ad827373db9a5614e5183c1477f601cc82c
 
 install_notes: |
-  **Important:** This extension requires DuckDB 1.4.3 and the Apache Arrow ADBC Snowflake driver to function properly.
-  
-  **You must install the ADBC driver separately after installing this extension.** The extension will not work without the driver.
-  
-  For complete installation instructions, platform-specific setup, and troubleshooting, please refer to the official documentation:
-  
+  **Important:** This extension requires the ADBC Snowflake driver (a separate shared library) to function.
+
+  Install it either with the [dbc](https://docs.columnar.tech/dbc/) driver manager:
+
+      dbc install snowflake
+
+  or with the repository's installer script. No environment variable is needed in either case: the
+  extension discovers the driver next to itself, through standard ADBC driver manifests, and (on
+  Windows) through the ADBC registry keys.
+
+  For platform-specific setup and troubleshooting, see the
   **[ADBC Driver Installation Guide](https://github.com/iqea-ai/duckdb-snowflake#adbc-driver-setup)**
-  
-  The documentation includes:
-  - Step-by-step installation instructions for all platforms
-  - Automated setup scripts
-  - Manual installation procedures
-  - Driver location requirements
-  - Troubleshooting common issues
-  
-  Please visit the [extension repository](https://github.com/iqea-ai/duckdb-snowflake) for installation instructions and setup options.
+  in the [extension repository](https://github.com/iqea-ai/duckdb-snowflake).
 
 docs:
   hello_world: |
@@ -65,25 +62,26 @@ docs:
   extended_description: |
     This community-maintained extension allows DuckDB to connect to Snowflake using Arrow ADBC drivers. 
     It provides seamless connectivity between DuckDB and Snowflake, supporting multiple authentication methods 
-    (password, external browser/SSO, key pair), predicate pushdown optimization, and comprehensive SQL operations.
+    (password, key pair, OAuth, external browser/SSO, Okta), predicate pushdown optimization, and comprehensive SQL operations.
     
     **Features:**
-    - Multiple authentication methods (Password, External Browser/SSO, Key Pair)
+    - Multiple authentication methods (Password, Key Pair, OAuth, External Browser/SSO, Okta)
     - Direct SQL passthrough via `snowflake_query()` function
     - ATTACH support for mounting Snowflake databases as DuckDB catalogs
+    - Native `GEOMETRY`/`GEOGRAPHY` support via GeoArrow
     - Predicate pushdown optimization (optional)
     - Hybrid queries: join Snowflake tables with local DuckDB tables
     - Full DML read operations: SELECT with WHERE, JOIN, aggregations, subqueries
-    
-    **Prerequisites:** The Apache Arrow ADBC Snowflake driver must be installed separately. 
+
+    **Prerequisites:** The ADBC Snowflake driver must be installed separately (`dbc install snowflake` or the repository's installer script).
     **See the [ADBC Driver Installation Guide](https://github.com/iqea-ai/duckdb-snowflake#adbc-driver-setup) 
     for complete setup instructions.** For comprehensive usage examples, authentication methods, and 
     advanced features, visit the [extension repository](https://github.com/iqea-ai/duckdb-snowflake).
 
-extension_star_count: 40
-extension_star_count_pretty: 40
-extension_download_count: 1415
-extension_download_count_pretty: 1.4k
+extension_star_count: 58
+extension_star_count_pretty: 58
+extension_download_count: 5527
+extension_download_count_pretty: 5.5k
 image: '/images/community_extensions/social_preview/preview_community_extension_snowflake.png'
 layout: community_extension_doc
 ---
@@ -109,9 +107,28 @@ LOAD {{ page.extension.name }};
 
 <div class="extension_functions_table"></div>
 
-|   function_name   | function_type |                                                                      description                                                                       | comment |                                                examples                                                 |
-|-------------------|---------------|--------------------------------------------------------------------------------------------------------------------------------------------------------|---------|---------------------------------------------------------------------------------------------------------|
-| snowflake_query   | table         | Execute a SQL query directly against a Snowflake database and return the results as a table. Uses the specified secret for authentication credentials. | NULL    | [SELECT * FROM snowflake_query('SELECT * FROM customers WHERE state = ''CA''', 'my_snowflake_secret');] |
-| snowflake_version | scalar        | Returns the version of the Snowflake extension.                                                                                                        | NULL    | [SELECT snowflake_version();]                                                                           |
+|          function_name          | function_type |                                                                      description                                                                       | comment |                                                examples                                                 |
+|---------------------------------|---------------|--------------------------------------------------------------------------------------------------------------------------------------------------------|---------|---------------------------------------------------------------------------------------------------------|
+| snowflake_query                 | table         | Execute a SQL query directly against a Snowflake database and return the results as a table. Uses the specified secret for authentication credentials. | NULL    | [SELECT * FROM snowflake_query('SELECT * FROM customers WHERE state = ''CA''', 'my_snowflake_secret');] |
+| snowflake_version               | scalar        | Returns the version of the Snowflake extension.                                                                                                        | NULL    | [SELECT snowflake_version();]                                                                           |
+| snowflake_render_pushdown_query | scalar        | NULL                                                                                                                                                   | NULL    | NULL                                                                                                    |
+
+### Overloaded Functions
+
+<div class="extension_functions_table"></div>
+
+This extension does not add any function overloads.
+
+### Added Types
+
+<div class="extension_types_table"></div>
+
+This extension does not add any types.
+
+### Added Settings
+
+<div class="extension_settings_table"></div>
+
+This extension does not add any settings.
 
 

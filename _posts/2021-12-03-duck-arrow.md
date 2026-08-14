@@ -372,6 +372,6 @@ In the table above, we also depict the comparison of peak memory usage between D
 
 ## Conclusion and Feedback
 
-In this blog post, we mainly showcased how to execute queries on Arrow datasets with DuckDB. There are additional libraries that can also consume the Arrow format but they have different purposes and capabilities. As always, we are happy to hear if you want to see benchmarks with different tools for a post in the future! Feel free to drop us an [email](mailto:pedro@duckdblabs.com;jon@voltrondata.com) or share your thoughts directly in the Hacker News post.
+In this blog post, we mainly showcased how to execute queries on Arrow datasets with DuckDB. There are additional libraries that can also consume the Arrow format but they have different purposes and capabilities.
 
-Last but not least, if you encounter any problems when using our integration, please open an issue in either [DuckDB's issue tracker](https://github.com/duckdb/duckdb/issues) or [Arrow's issue tracker](https://issues.apache.org/jira/projects/ARROW/), depending on which library has a problem.
+If you encounter any problems when using our integration, please open an issue in either [DuckDB's issue tracker](https://github.com/duckdb/duckdb/issues) or [Arrow's issue tracker](https://issues.apache.org/jira/projects/ARROW/), depending on which library has a problem.

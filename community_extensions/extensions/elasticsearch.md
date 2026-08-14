@@ -16,7 +16,8 @@ extension:
     - tlinhart
 repo:
   github: tlinhart/duckdb-elasticsearch
-  ref: ea88cc2e09378c1ceb286926755727df909699f5
+  ref: 5b340f5460e22e282f469eb3e021d3cce0b9d747
+  ref_next: e89032ec14cd3746917645c7542171409a97f2f3
 docs:
   hello_world: |
     -- Basic query.
@@ -77,10 +78,10 @@ docs:
 
     For detailed documentation, visit the [extension repository](https://github.com/tlinhart/duckdb-elasticsearch).
 
-extension_star_count: 12
-extension_star_count_pretty: 12
-extension_download_count: 281
-extension_download_count_pretty: 281
+extension_star_count: 18
+extension_star_count_pretty: 18
+extension_download_count: 826
+extension_download_count_pretty: 826
 image: '/images/community_extensions/social_preview/preview_community_extension_elasticsearch.png'
 layout: community_extension_doc
 ---
@@ -106,8 +107,37 @@ LOAD {{ page.extension.name }};
 
 <div class="extension_functions_table"></div>
 
-|    function_name    | function_type | description | comment | examples |
-|---------------------|---------------|-------------|---------|----------|
-| elasticsearch_query | table         | NULL        | NULL    |          |
+|       function_name       | function_type | description | comment | examples |
+|---------------------------|---------------|-------------|---------|----------|
+| elasticsearch_clear_cache | scalar        | NULL        | NULL    |          |
+| elasticsearch_query       | table         | NULL        | NULL    |          |
+
+### Overloaded Functions
+
+<div class="extension_functions_table"></div>
+
+This extension does not add any function overloads.
+
+### Added Types
+
+<div class="extension_types_table"></div>
+
+This extension does not add any types.
+
+### Added Settings
+
+<div class="extension_settings_table"></div>
+
+|                   name                    |                                     description                                      | input_type | scope  | aliases |
+|-------------------------------------------|--------------------------------------------------------------------------------------|------------|--------|---------|
+| elasticsearch_batch_size                  | Number of documents fetched per scroll batch from Elasticsearch                      | INTEGER    | GLOBAL | []      |
+| elasticsearch_batch_size_threshold_factor | For small LIMITs, fetch all rows in one request if total rows <= batch_size * factor | INTEGER    | GLOBAL | []      |
+| elasticsearch_max_retries                 | Maximum number of retries for transient Elasticsearch errors                         | INTEGER    | GLOBAL | []      |
+| elasticsearch_retry_backoff_factor        | Exponential backoff factor applied between retries                                   | DOUBLE     | GLOBAL | []      |
+| elasticsearch_retry_interval              | Initial wait time between retries in milliseconds                                    | INTEGER    | GLOBAL | []      |
+| elasticsearch_sample_size                 | Number of documents to sample for array detection (0 to disable)                     | INTEGER    | GLOBAL | []      |
+| elasticsearch_scroll_time                 | Scroll context keep-alive duration for data fetching (e.g. '5m', '1h')               | VARCHAR    | GLOBAL | []      |
+| elasticsearch_timeout                     | Request timeout for Elasticsearch connections in milliseconds                        | INTEGER    | GLOBAL | []      |
+| elasticsearch_verify_ssl                  | Whether to verify SSL certificates when connecting to Elasticsearch                  | BOOLEAN    | GLOBAL | []      |
 
 

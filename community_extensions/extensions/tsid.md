@@ -86,14 +86,14 @@ extension:
   name: tsid
   version: '2025120401'
 repo:
+  andium: e404bc8c0d0b204b2f58e0c954881bc0f7d4ec70
   github: quackscience/duckdb-extension-tsid
-  ref: d72eb53d09523d21f93be28016a85302c4319182
-  ref_next: b7a2b2ec13f384035ea9e811a52800acf50d1932
+  ref: 21457c7206e020f3d5f0deb3059d9ee255e312b1
 
-extension_star_count: 5
-extension_star_count_pretty: 5
-extension_download_count: 362
-extension_download_count_pretty: 362
+extension_star_count: 6
+extension_star_count_pretty: 6
+extension_download_count: 1010
+extension_download_count_pretty: 1.0k
 image: '/images/community_extensions/social_preview/preview_community_extension_tsid.png'
 layout: community_extension_doc
 ---
@@ -123,5 +123,23 @@ LOAD {{ page.extension.name }};
 |-------------------|---------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|---------|---------------------------------------------------------|
 | tsid              | scalar        | Generates a new Time-Sorted Unique Identifier (TSID). TSIDs are chronologically sortable 128-bit unique identifiers that embed a timestamp, making them ideal for distributed systems and time-series data. | NULL    | [tsid()]                                                |
 | tsid_to_timestamp | scalar        | Extracts the embedded timestamp from a TSID. Returns the timestamp that was recorded when the TSID was generated.                                                                                           | NULL    | [tsid_to_timestamp('0193b9c8d23d7192bc1cc82b43e6e8f3')] |
+
+### Overloaded Functions
+
+<div class="extension_functions_table"></div>
+
+This extension does not add any function overloads.
+
+### Added Types
+
+<div class="extension_types_table"></div>
+
+This extension does not add any types.
+
+### Added Settings
+
+<div class="extension_settings_table"></div>
+
+This extension does not add any settings.
 
 

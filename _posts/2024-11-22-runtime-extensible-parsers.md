@@ -5,10 +5,16 @@ author: Hannes Mühleisen, Mark Raasveldt
 thumb: "/images/blog/thumbs/ast.svg"
 image: "/images/blog/thumbs/ast.png"
 tags: ["deep dive"]
-excerpt: "Despite their central role in processing queries, parsers have not received any noticeable attention in the data systems space. State-of-the art systems are content with ancient old parser generators. These generators create monolithic, inflexible and unforgiving parsers that hinder innovation in query languages and frustrate users. Instead, parsers should be rewritten using modern abstractions like Parser Expression Grammars (PEG), which allow dynamic changes to the accepted query syntax and better error recovery. In this post, we discuss how parsers could be re-designed using PEG, and validate our recommendations using experiments for both effectiveness and efficiency."
+excerpt: "Despite their central role in processing queries, parsers have not received any noticeable attention in the data systems space. State-of-the art systems are content with ancient old parser generators. These generators create monolithic, inflexible and unforgiving parsers that hinder innovation in query languages and frustrate users. Instead, parsers should be rewritten using modern abstractions like Parsing Expression Grammars (PEG), which allow dynamic changes to the accepted query syntax and better error recovery. In this post, we discuss how parsers could be re-designed using PEG, and validate our recommendations using experiments for both effectiveness and efficiency."
 ---
 
-> This post is a shortened version of our peer-reviewed research paper "Runtime-Extensible Parsers" that was accepted for publication and presentation at the [2025 Conference on Innovative Data Systems Research](https://www.cidrdb.org/cidr2025/index.html) (CIDR) that is going to be held in Amsterdam between January 19 and 22, 2025. You can [read the full paper]({% link pdf/CIDR2025-muehleisen-raasveldt-extensible-parsers.pdf %}) if you prefer.
+> Update In March 2026, DuckDB v1.5 [shipped an experimental parser]({% post_url 2026-03-09-announcing-duckdb-150 %}#peg-parser). You can opt-in to use it via:
+>
+> ```sql
+> CALL enable_peg_parser();
+> ```
+
+> This post is a shortened version of our peer-reviewed research paper "Runtime-Extensible Parsers" that was accepted for publication and presentation at the [2025 Conference on Innovative Data Systems Research](https://www.cidrdb.org/cidr2025/index.html) (CIDR) that is going to be held in Amsterdam between January 19 and 22, 2025. You can [read the full paper]({% link _library/2025-01-19-runtime-extensible-parsers.md %}) if you prefer.
 
 The parser is the DBMS component that is responsible for turning a query in string format into an internal representation which is usually tree-shaped. The parser defines which queries are going to be accepted at all. Every single SQL query starts its journey in a parser. Despite its prominent position in the stack, very little research has been published on parsing queries for data management systems. There seems to have been very little movement on the topic in the past decades and their implementations are largely stuck in sixty-year-old abstractions and technologies.
 
@@ -36,7 +42,7 @@ As their name suggests, parsing expression grammar consists of a set of *parsing
 
 One big advantage is that PEG parsers *do not require a compilation step* where the grammar is converted to for example a finite state automaton based on lookup tables. PEG can be executed directly on the input with minimal grammar transformation, making it feasible to re-create a parser at runtime. PEG parsers are gaining popularity, for example, the Python programming language has [recently switched to a PEG parser](https://peps.python.org/pep-0617/).
 
-Another big advantage of PEG parsers is *error handling*: the paper ["Syntax Error Recovery in Parsing Expression Grammars"](https://arxiv.org/abs/1806.11150) describes a practical technique where parser rules are annotated with "recovery" actions, which can (1) show more than a single error and (2) annotate errors with a more meaningful error message.
+Another big advantage of PEG parsers is *error handling*: the paper ["Syntax Error Recovery in Parsing Expression Grammars"](https://arxiv.org/pdf/1806.11150.pdf) describes a practical technique where parser rules are annotated with "recovery" actions, which can (1) show more than a single error and (2) annotate errors with a more meaningful error message.
 
 A possible disadvantage of memoized packrat parsing is the memory required for memoization: the amount required is *proportional to the input size*, not the stack size. Of course, memory limitations have relaxed significantly since the invention of LALR parsers sixty years ago and queries typically are not "Big Data"` themselves.
 
@@ -52,28 +58,37 @@ Below is an abridged version of our experimental SQL grammar, with the `Expressi
 Statements <- SingleStmt (';' SingleStmt )* ';'*
 SingleStmt <- SelectStmt
 SelectStmt <- SimpleSelect (SetopClause SimpleSelect)*
+
 SetopClause <-
     ('UNION' / 'EXCEPT' / 'INTERSECT') 'ALL'?
+
 SimpleSelect <- WithClause? SelectClause FromClause?
     WhereClause? GroupByClause? HavingClause?
     OrderByClause? LimitClause?
+
 WithStatement <- Identifier 'AS' SubqueryReference
 WithClause <- 'WITH' List(WithStatement)
 SelectClause <- 'SELECT' ('*' / List(AliasExpression))
 ColumnsAlias <- Parens(List(Identifier))
+
 TableReference <-
     (SubqueryReference 'AS'? Identifier ColumnsAlias?) /
     (Identifier ('AS'? Identifier)?)
+
 ExplicitJoin <- ('LEFT' / 'FULL')? 'OUTER'?
     'JOIN' TableReference 'ON' Expression
+
 FromClause <- 'FROM' TableReference
     ((',' TableReference) / ExplicitJoin)*
+
 WhereClause <- 'WHERE' Expression
 GroupByClause <- 'GROUP' 'BY' List(Expression)
 HavingClause <- 'HAVING' Expression
 SubqueryReference <- Parens(SelectStmt)
+
 OrderByExpression <- Expression ('DESC' / 'ASC')?
     ('NULLS' 'FIRST' / 'LAST')?
+
 OrderByClause <- 'ORDER' 'BY' List(OrderByExpression)
 LimitClause <- 'LIMIT' NumberLiteral
 AliasExpression <- Expression ('AS'? Identifier)?
@@ -124,7 +139,7 @@ Note that we re-use other machinery from the grammar like the `Identifier` rule 
 
 ### Extending `SELECT` with `GRAPH_TABLE`
 
-Let's now assume we would want to modify the `SELECT` syntax to add support for [SQL/PGQ graph matching patterns](https://arxiv.org/abs/2112.06217). Below is an example query in SQL/PGQ that finds the university name and year for all students called Bob:
+Let's now assume we would want to modify the `SELECT` syntax to add support for [SQL/PGQ graph matching patterns](https://arxiv.org/pdf/2112.06217.pdf). Below is an example query in SQL/PGQ that finds the university name and year for all students called Bob:
 
 ```sql
 SELECT study.classYear, study.name
@@ -142,8 +157,10 @@ Below we show a small set of grammar rules that are sufficient to extend our exp
 ```text
 Name <- (Identifier? ':' Identifier) / Identifier
 Edge <- ('-' / '<-') '[' Name ']' ('->' / '-')
+
 Pattern <- Parens(Name WhereClause?) Edge
-   Parens(Name WhereClause?)
+    Parens(Name WhereClause?)
+
 PropertyGraphReference <- 'GRAPH_TABLE'i '('
         Identifier ','
         'MATCH'i List(Pattern)

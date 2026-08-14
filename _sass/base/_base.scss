@@ -11,6 +11,10 @@
 	box-sizing: border-box;
 }
 
+html {
+	background: var(--main-body-background-color, #FAFAFA);
+}
+
 body{
 	color: var(--main-text-primary-color, #0D0D0D);
 	background: var(--main-body-background-color, #FAFAFA);
@@ -30,16 +34,26 @@ a, a:active, a:focus, button, button:active, button:focus {
   outline: none;
 }
 
+:root {
+	--main-link-hover-color: var(--duckdb-nav-icon-hover);
+}
+
 table a,
 p a,
-li a{
+li a,
+summary a{
 	color: inherit;
 	text-decoration: underline;
-	-webkit-transition: color .3s;
-	-o-transition: color .3s;
-	transition: color .3s;
+	text-decoration-color: var(--main-text-tertiary-color, #B2B2B2);
+	text-decoration-thickness: 1px;
+	text-underline-offset: 0.16em;
+	-webkit-transition: color .3s, text-decoration-color .3s;
+	-o-transition: color .3s, text-decoration-color .3s;
+	transition: color .3s, text-decoration-color .3s;
 	&:hover{
-		color: $blue;
+		color: var(--main-link-hover-color, #998B00);
+		text-decoration-color: var(--main-link-hover-color, #998B00);
+		text-decoration-thickness: 1px;
 		cursor: pointer;
 	}
 }
@@ -63,19 +77,25 @@ em.caption{
 	text-align: center;
 	display: inline-block;
 	width: 100%;
-	margin-bottom: 1.5em;
-	margin-top: 1em;
+	margin-top: 0.35em;
+	margin-bottom: 2em;
 	color: var(--main-text-tertiary-color);
 }
 
+.figure-title{
+	@include title-2();
+	margin-bottom: 12px;
+}
+
+.figure-title + p{
+	margin-top: 0!important;
+}
 
 
 .icon-24{
 	width: 24px;
 	height: 24px;
 }
-
-
 
 
 
@@ -146,6 +166,30 @@ h6{
 	@include title-3();
 }
 
+h1, h2, h3, h4, h5, h6 {
+	color: var(--main-text-primary-color, #0D0D0D);
+
+	a {
+		color: inherit;
+	}
+
+	svg.anchor-icon {
+		width: 16px;
+		height: 16px;
+		margin-left: 8px;
+		fill: none;
+		stroke-width: 2;
+		cursor: pointer;
+		color: var(--main-text-tertiary-color, #B2B2B2);
+		opacity: 0;
+		transition: opacity .3s, color .3s;
+
+		&.copied {
+			color: var(--main-text-primary-color, #0D0D0D);
+		}
+	}
+}
+
 main .wrap{
 	h2{
 		font-weight: 600;
@@ -156,21 +200,6 @@ main .wrap{
 	}
 }
 
-body.landing label.onlymobile,
-body.installation div.environment.select label.onlymobile{
-	position: relative;
-	&::after{
-		content: "\E010";
-		font-family: "DuckDB-Symbol";
-		right: 10px;
-		top: 4px;
-		padding: 0 0 2px;
-		position: absolute;
-		pointer-events: none;
-		font-size: 20px;
-		color: white;
-	}
-}
 .environmentselect{
 	width: 100%;
 	/*border: 1px solid #b8b8b8;*/
@@ -212,7 +241,6 @@ body.installation div.environment.select label.onlymobile{
 
 .layout_default{
 	#main_content_wrap{
-		padding: 0 15px;
 		margin-bottom: 100px;
 	}
 }
@@ -258,7 +286,7 @@ div.bodywrapper{
 	}
 	dt.sig-object{
 		background: var(--doc-codebox-background-color, #F2F2F2);
-		border-radius: 7px;
+		border-radius: var(--page-radius-s);
 		padding: 2px 5px 2px 5px;
 		display: inline-block;
 		&:hover{

@@ -20,7 +20,8 @@ extension:
 
 repo:
   github: midwork-finds-jobs/duckdb-valhalla-routing
-  ref: d379f55ff8d80080b5b8e927c53d3062e6a57fab
+  andium: d379f55ff8d80080b5b8e927c53d3062e6a57fab
+  ref: e73ec94493444fa0ae452474e4329dda13b4d138
 
 docs:
   hello_world: |
@@ -108,10 +109,10 @@ docs:
 
     Download OSM extracts from [Geofabrik](https://download.geofabrik.de/)
 
-extension_star_count: 2
-extension_star_count_pretty: 2
-extension_download_count: 348
-extension_download_count_pretty: 348
+extension_star_count: 8
+extension_star_count_pretty: 8
+extension_download_count: 820
+extension_download_count_pretty: 820
 image: '/images/community_extensions/social_preview/preview_community_extension_valhalla_routing.png'
 layout: community_extension_doc
 ---
@@ -147,6 +148,18 @@ LOAD {{ page.extension.name }};
 | travel_time_request     | scalar        | NULL        | NULL    |          |
 | valhalla_build_tiles    | scalar        | NULL        | NULL    |          |
 | valhalla_route_wkb      | scalar        | NULL        | NULL    |          |
+
+### Overloaded Functions
+
+<div class="extension_functions_table"></div>
+
+This extension does not add any function overloads.
+
+### Added Types
+
+<div class="extension_types_table"></div>
+
+This extension does not add any types.
 
 ### Added Settings
 

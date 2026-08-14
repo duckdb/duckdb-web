@@ -3,14 +3,14 @@ layout: post
 title: "Fast Hypothetical Updates Evaluation"
 author: "Haneen Mohammed, Alexander Yao, Charlie Summers, Hongbin Zhong, Gromit Yeuk-Yin Chan, Subrata Mitra, Lampros Flokas, Eugene Wu"
 tags: ["Paper"]
-thirdparty: true
+category: community
 excerpt: ""
 pill: "PW 25"
 ---
 
-[Paper (PDF)](https://dl.acm.org/doi/pdf/10.1145/3736229.3736254)
-
-Venue: ProvenanceWeek 2025
+|-------|-------|
+| **Paper** | [Fast Hypothetical Updates Evaluation (PDF)](https://dl.acm.org/doi/pdf/10.1145/3736229.3736254) |
+| **Venue** | ProvenanceWeek 2025 |
 
 ## Abstract
 

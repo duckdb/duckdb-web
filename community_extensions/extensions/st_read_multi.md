@@ -19,20 +19,20 @@ extension:
 
 repo:
   github: yutannihilation/duckdb-ext-st-read-multi
-  ref: 589716ea1c517acf8df45d723e728a16bed17752
+  ref: 27060866a7f71433d70d7598033ccefab9fc510c
 
 docs:
   hello_world: |
     LOAD spatial;
 
-    SELECT * REPLACE (ST_GeomFromWkb(geometry) as geometry) FROM ST_Read_Multi('path/to/*.geojson');
+    FROM ST_Read_Multi('path/to/*.geojson');
   extended_description: |
     Read multiple geospatial files. Currently, only GeoJSON, GeoPackage, and Shapefile are supported.
 
-extension_star_count: 7
-extension_star_count_pretty: 7
-extension_download_count: 349
-extension_download_count_pretty: 349
+extension_star_count: 10
+extension_star_count_pretty: 10
+extension_download_count: 980
+extension_download_count_pretty: 980
 image: '/images/community_extensions/social_preview/preview_community_extension_st_read_multi.png'
 layout: community_extension_doc
 ---
@@ -61,5 +61,23 @@ LOAD {{ page.extension.name }};
 | function_name | function_type |                                            description                                            | comment |                  examples                  |
 |---------------|---------------|---------------------------------------------------------------------------------------------------|---------|--------------------------------------------|
 | st_read_multi | table         | Read multiple geospatial files. Currently, only GeoJSON, GeoPackage, and Shapefile are supported. | NULL    | [FROM ST_Read_Multi('path/to/*.geojson');] |
+
+### Overloaded Functions
+
+<div class="extension_functions_table"></div>
+
+This extension does not add any function overloads.
+
+### Added Types
+
+<div class="extension_types_table"></div>
+
+This extension does not add any types.
+
+### Added Settings
+
+<div class="extension_settings_table"></div>
+
+This extension does not add any settings.
 
 

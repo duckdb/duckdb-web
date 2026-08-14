@@ -15,17 +15,18 @@ excerpt: |
 extension:
   name: dplyr
   description: R dplyr pipeline syntax support for DuckDB - transpiles dplyr verbs to SQL
-  version: 0.3.0
-  language: C++
+  version: 0.5.1
+  language: Rust & C++
   build: cmake
   license: MIT
+  excluded_platforms: "windows_amd64_rtools"
   requires_toolchains: "rust"
   maintainers:
     - mrchypark
 
 repo:
   github: mrchypark/libdplyr
-  ref: 42a7ff1e8fbfd7c78d8ebad44b4adf98851ee79d
+  ref: adc1c5420a477d33c57a496f292df28d83dec1bc
 
 docs:
   hello_world: |
@@ -85,28 +86,22 @@ docs:
     It transpiles dplyr pipeline syntax (using the `%>%` pipe operator) directly to SQL,
     allowing R users to write familiar data manipulation code in DuckDB.
 
-    ## Supported Functions
-    
-    ### Core Verbs
-    | Function | Description | Example |
-    | :--- | :--- | :--- |
-    | `select()` | Select/rename columns | `select(id, name)` |
-    | `filter()` | Filter rows | `filter(age > 18)` |
-    | `mutate()` | Create/modify columns | `mutate(total = price * qty)` |
-    | `rename()` | Rename columns | `rename(new = old)` |
-    | `arrange()` | Sort rows | `arrange(desc(date))` |
-    | `group_by()` | Group rows | `group_by(dept)` |
-    | `summarise()` | Aggregate data | `summarise(avg = mean(val))` |
-    | `*_join()` | Joins (inner, left, etc.) | `left_join(other, by="id")` |
-    | Set Ops | union, intersect, setdiff | `union(other)` |
-    
-    ### Helper Functions
-    *   **Aggregation**: `mean`, `sum`, `min`, `max`, `n`, `count`, `median`*, `mode`*
-    *   **Window**: `row_number`, `rank`, `lead`, `lag`, `ntile`
-    *   **Math**: `abs`, `sqrt`, `round`, `floor`, `log`, `exp`
-    *   **String**: `tolower`, `toupper`, `substr`, `trimws`
-    *   **Logic**: `ifelse`, `is.na`, `coalesce`
+    **Supported dplyr Verbs:**
+    - `select()` - Choose columns by name
+    - `filter()` - Filter rows based on conditions
+    - `mutate()` - Create new columns or modify existing ones
+    - `arrange()` - Sort rows (supports `desc()` for descending order)
+    - `group_by()` - Group data by one or more columns
+    - `summarise()` / `summarize()` - Aggregate grouped data
+    - `rename()` - Rename columns
 
+    **Aggregation Functions:**
+    - `n()` - Count rows
+    - `mean()` / `avg()` - Average
+    - `sum()` - Sum
+    - `min()` / `max()` - Minimum / Maximum
+    - `median()` / `mode()` - DuckDB-specific aggregates
+    - Other aggregate function names are passed through to DuckDB (uppercased).
 
     **Key Features:**
     - Native R dplyr syntax support with `%>%` pipe operator
@@ -126,10 +121,10 @@ docs:
 
     For more information, visit the [GitHub repository](https://github.com/mrchypark/libdplyr).
 
-extension_star_count: 5
-extension_star_count_pretty: 5
-extension_download_count: 610
-extension_download_count_pretty: 610
+extension_star_count: 15
+extension_star_count_pretty: 15
+extension_download_count: 782
+extension_download_count_pretty: 782
 image: '/images/community_extensions/social_preview/preview_community_extension_dplyr.png'
 layout: community_extension_doc
 ---
@@ -155,8 +150,29 @@ LOAD {{ page.extension.name }};
 
 <div class="extension_functions_table"></div>
 
-| function_name | function_type | description | comment | examples |
-|---------------|---------------|-------------|---------|----------|
-| dplyr         | table         | NULL        | NULL    |          |
+|   function_name   | function_type | description | comment | examples |
+|-------------------|---------------|-------------|---------|----------|
+| dplyr             | table         | NULL        | NULL    |          |
+| dplyr_pipe_syntax | scalar        | NULL        | NULL    |          |
+
+### Overloaded Functions
+
+<div class="extension_functions_table"></div>
+
+This extension does not add any function overloads.
+
+### Added Types
+
+<div class="extension_types_table"></div>
+
+This extension does not add any types.
+
+### Added Settings
+
+<div class="extension_settings_table"></div>
+
+|       name        |                 description                  |                input_type                | scope  | aliases |
+|-------------------|----------------------------------------------|------------------------------------------|--------|---------|
+| dplyr_pipe_syntax | The active database-global dplyr pipe syntax | ENUM('magrittr', 'native', '%>%', '\|>') | GLOBAL | []      |
 
 

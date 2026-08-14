@@ -8,9 +8,9 @@ excerpt: ""
 pill: "ICDE 2024"
 ---
 
-[Paper (PDF)](https://duckdb.org/pdf/ICDE2024-kuiper-boncz-muehleisen-out-of-core.pdf)
-
-Venue: ICDE 2024
+|-------|-------|
+| **Paper** | [Robust External Hash Aggregation in the Solid State Age (PDF)](https://duckdb.org/pdf/ICDE2024-kuiper-boncz-muehleisen-out-of-core.pdf) |
+| **Venue** | ICDE 2024 |
 
 ## Abstract
 

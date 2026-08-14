@@ -16,9 +16,9 @@ In this post, we will describe how time works in DuckDB and what time zone funct
 
 ## What Is Time?
 
->People assume that time is a strict progression of cause to effect,
->but actually from a non-linear, non-subjective viewpoint
->it’s more like a big ball of wibbly wobbly timey wimey stuff.  
+> People assume that time is a strict progression of cause to effect,
+> but actually from a non-linear, non-subjective viewpoint
+> it’s more like a big ball of wibbly wobbly timey wimey stuff.  
 > -- Doctor Who: Blink
 
 Time in databases can be very confusing because the way we talk about time is itself confusing.
@@ -31,7 +31,7 @@ You will often hear people (and documentation) say that database time is stored 
 This is sort of right, but it is more accurate to say that databases store *instants*.
 An instant is a point in universal time, and they are usually given as a count of some time increment from a fixed point in time (called the *epoch*).
 In DuckDB, the fixed point is the Unix epoch `1970-01-01 00:00:00 +00:00`, and the increment is microseconds (µs).
-(Note that to avoid confusion we will be using ISO-8601 y-m-d notation in this post to denote instants.)
+(Note that to avoid confusion we will be using ISO 8601 y-m-d notation in this post to denote instants.)
 In other words, a `TIMESTAMP` column contains instants.
 
 There are three other temporal types in SQL:

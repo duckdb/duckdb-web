@@ -40,24 +40,20 @@ if __name__ == '__main__':
             for item in so_duckdb_tag:
                 f.write(json.dumps(item) + '\n')
 
-        duckdb.sql(
-            '''
+        duckdb.sql('''
                 CREATE OR REPLACE TABLE SO AS
                 SELECT * FROM read_ndjson_auto('./so.json')
                 ORDER BY creation_date DESC
                 LIMIT 30
-            '''
-        )
+            ''')
 
-        new_duckdb_questions = duckdb.sql(
-            '''
+        new_duckdb_questions = duckdb.sql('''
             SELECT title, link, owner.profile_image,
                 TO_TIMESTAMP(creation_date::BIGINT) create_time,
             FROM SO
             WHERE create_time > NOW() - INTERVAL 1 DAY
             LIMIT 5
-        '''
-        )
+        ''')
 
         new_duckdb_questions.project('title, create_time').show()
 

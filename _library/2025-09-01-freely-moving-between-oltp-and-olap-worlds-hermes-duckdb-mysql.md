@@ -5,14 +5,14 @@ author: "Tim Gubner, Rune Humborstad, Manyi Lu"
 thumb: "/images/library/thumbs/vldb.svg"
 image: "/images/library/thumbs/vldb.png"
 tags: ["Paper"]
-thirdparty: true
+category: community
 excerpt: ""
 pill: "VLDB 2025"
 ---
 
-[Paper (PDF)](https://www.vldb.org/pvldb/vol18/p5113-gubner.pdf)
-
-Venue: VLDB 2025
+|-------|-------|
+| **Paper** | [Freely Moving Between the OLTP and OLAP Worlds: Hermes - A High-Performance OLAP Accelerator for MySQL (PDF)](https://www.vldb.org/pvldb/vol18/p5113-gubner.pdf) |
+| **Venue** | VLDB 2025 |
 
 ## Abstract
 

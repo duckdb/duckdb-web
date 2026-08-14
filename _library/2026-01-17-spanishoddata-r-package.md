@@ -5,18 +5,17 @@ author: "Egor Kotov, Eugeni Vidal-Tortosa, Oliva G. Cantú-Ros, Javier Burrieza-
 thumb: "/images/library/thumbs/paper.svg"
 image: "/images/library/thumbs/paper.png"
 tags: ["Paper"]
-thirdparty: true
+category: community
 excerpt: ""
 pill: "EPB 2026"
 ---
 
-[Paper (Open Access)](https://doi.org/10.1177/23998083251415040)
-
-[Supplementary Materials (PDF)](https://journals.sagepub.com/doi/suppl/10.1177/23998083251415040/suppl_file/sj-pdf-1-epb-10.1177_23998083251415040.pdf)
-
-[Reproducible R code and data](https://doi.org/10.5281/zenodo.15289979)
-
-Venue: Environment and Planning B: Urban Analytics and City Science (2026)
+| | |
+|-------|-------|
+| **Paper** | [spanishoddata: A package for accessing and working with Spanish Open Mobility Big Data (Open Access)](https://doi.org/10.1177/23998083251415040) |
+| **Supplementary** | [PDF](https://journals.sagepub.com/doi/suppl/10.1177/23998083251415040/suppl_file/sj-pdf-1-epb-10.1177_23998083251415040.pdf) |
+| **Data** | [Reproducible R code and data](https://doi.org/10.5281/zenodo.15289979) |
+| **Venue** | Environment and Planning B: Urban Analytics and City Science (2026) |
 
 ## Abstract
 

@@ -8,7 +8,7 @@ excerpt: |
 extension:
   name: fakeit
   description: The FakeIt Extension enables generation of realistic fake/test data directly in SQL queries
-  version: 0.2.2
+  version: 0.3.5
   language: Rust
   build: cargo
   license: MIT
@@ -19,7 +19,7 @@ extension:
 
 repo:
   github: tobilg/duckdb-fakeit
-  ref: b12d28c70e7c1f3e3c448a93ba96af47a51ce530
+  ref: 90ce58efcc311f65fc00cfdd29926e69d8d783d3
 
 docs:
   hello_world: |
@@ -325,10 +325,10 @@ docs:
 
     > This extension is experimental and actively being developed. See the repository for the latest updates and examples.
 
-extension_star_count: 9
-extension_star_count_pretty: 9
-extension_download_count: 321
-extension_download_count_pretty: 321
+extension_star_count: 15
+extension_star_count_pretty: 15
+extension_download_count: 866
+extension_download_count_pretty: 866
 image: '/images/community_extensions/social_preview/preview_community_extension_fakeit.png'
 layout: community_extension_doc
 ---
@@ -476,5 +476,23 @@ LOAD {{ page.extension.name }};
 | fakeit_words_quote                       | scalar        | Generates a random quote.                                      | NULL                         | [SELECT fakeit_words_quote();]                         |
 | fakeit_bool                              | scalar        | Generates a random boolean value.                              | NULL                         | [SELECT fakeit_bool();]                                |
 | fakeit_generator_generate                | scalar        | Custom pattern generator for creating formatted fake data.     | NULL                         | [SELECT fakeit_generator_generate();]                  |
+
+### Overloaded Functions
+
+<div class="extension_functions_table"></div>
+
+This extension does not add any function overloads.
+
+### Added Types
+
+<div class="extension_types_table"></div>
+
+This extension does not add any types.
+
+### Added Settings
+
+<div class="extension_settings_table"></div>
+
+This extension does not add any settings.
 
 

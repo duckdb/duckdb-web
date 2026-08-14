@@ -8,7 +8,7 @@ excerpt: |
 extension:
   name: lance
   description: Query Lance datasets directly from DuckDB.
-  version: 0.5.1
+  version: 0.5.2
   language: Rust & C++
   build: cmake
   license: Apache-2.0
@@ -19,8 +19,8 @@ extension:
 
 repo:
   github: lance-format/lance-duckdb
-  # v0.5.1
-  ref: ecddd759a99d2b965844bd3082998d6d21cb80c8
+  andium: 7d49b9195c2ab1c7dbda95c98e7b4b5c0eac81c2
+  ref: adfa8f5601d1de9fbb85f1167c3859bacc775e4d
 
 docs:
   hello_world: |
@@ -68,10 +68,10 @@ docs:
     This extension brings Lance into a familiar SQL workflow.
     For detailed setup and usage instructions, visit the [extension repository](https://github.com/lance-format/lance-duckdb).
 
-extension_star_count: 73
-extension_star_count_pretty: 73
-extension_download_count: 633
-extension_download_count_pretty: 633
+extension_star_count: 83
+extension_star_count_pretty: 83
+extension_download_count: 2175
+extension_download_count_pretty: 2.2k
 image: '/images/community_extensions/social_preview/preview_community_extension_lance.png'
 layout: community_extension_doc
 ---
@@ -97,13 +97,40 @@ LOAD {{ page.extension.name }};
 
 <div class="extension_functions_table"></div>
 
-|     function_name      | function_type | description | comment | examples |
-|------------------------|---------------|-------------|---------|----------|
-| __lance_exec           | table         | NULL        | NULL    |          |
-| __lance_namespace_scan | table         | NULL        | NULL    |          |
-| __lance_scan           | table         | NULL        | NULL    |          |
-| lance_fts              | table         | NULL        | NULL    |          |
-| lance_hybrid_search    | table         | NULL        | NULL    |          |
-| lance_vector_search    | table         | NULL        | NULL    |          |
+|        function_name         | function_type | description | comment | examples |
+|------------------------------|---------------|-------------|---------|----------|
+| __lance_cleanup_old_versions | table         | NULL        | NULL    |          |
+| __lance_compact_files        | table         | NULL        | NULL    |          |
+| __lance_exec                 | table         | NULL        | NULL    |          |
+| __lance_namespace_scan       | table         | NULL        | NULL    |          |
+| __lance_optimize_index       | table         | NULL        | NULL    |          |
+| __lance_scan                 | table         | NULL        | NULL    |          |
+| __lance_set_auto_cleanup     | table         | NULL        | NULL    |          |
+| __lance_show_auto_cleanup    | table         | NULL        | NULL    |          |
+| __lance_truncate_table       | table         | NULL        | NULL    |          |
+| lance_fts                    | table         | NULL        | NULL    |          |
+| lance_hybrid_search          | table         | NULL        | NULL    |          |
+| lance_vector_search          | table         | NULL        | NULL    |          |
+
+### Overloaded Functions
+
+<div class="extension_functions_table"></div>
+
+| function_name | function_type | description | comment | examples |
+|---------------|---------------|-------------|---------|----------|
+
+### Added Types
+
+<div class="extension_types_table"></div>
+
+| type_name | type_size | logical_type | type_category | internal |
+|-----------|----------:|--------------|---------------|----------|
+
+### Added Settings
+
+<div class="extension_settings_table"></div>
+
+| name | description | input_type | scope | aliases |
+|------|-------------|------------|-------|---------|
 
 

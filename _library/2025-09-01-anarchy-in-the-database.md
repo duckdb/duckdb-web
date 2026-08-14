@@ -5,14 +5,14 @@ author: "Abigale Kim, Marco Slot, David Andersen, Andrew Pavlo"
 thumb: "/images/library/thumbs/vldb.svg"
 image: "/images/library/thumbs/vldb.png"
 tags: ["Paper"]
-thirdparty: true
+category: community
 excerpt: ""
 pill: "VLDB 2025"
 ---
 
-[Paper (PDF)](https://www.vldb.org/pvldb/vol18/p1962-kim.pdf)
-
-Venue: VLDB 2025
+|-------|-------|
+| **Paper** | [Anarchy in the Database: A Survey and Evaluation of Database Management System Extensibility (PDF)](https://www.vldb.org/pvldb/vol18/p1962-kim.pdf) |
+| **Venue** | VLDB 2025 |
 
 ## Abstract
 

@@ -7,29 +7,38 @@
 // =============================================================================
 
 
-/** External Links in Fließtext **/
+/** External, Download, Video and Podcast Links **/
 #main_content_wrap a.externallink,
-.singleentry .content a.externallink{
+.singleentry .content a.externallink,
+#main_content_wrap a.downloadlink,
+.singleentry .content a.downloadlink,
+#main_content_wrap a.videolink,
+.singleentry .content a.videolink,
+#main_content_wrap a.podcastlink,
+.singleentry .content a.podcastlink{
 	display: inline;
-	word-break: break-word;
-	&::after{
-		content: "";
-		mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' fill='none' viewBox='0 0 12 12'%3E%3Cpath fill='%23000' fill-rule='evenodd' d='M11.8 0H6.613v1.514h2.603L3.804 6.926l1.07 1.07 5.412-5.412v2.603H11.8V0ZM5.922 1.286H0V11.8h10.33V5.878H8.815v4.408H1.514V2.8h4.408V1.286Z' clip-rule='evenodd'/%3E%3C/svg%3E");
-		display: inline-block;
-		-webkit-transition: all .3s;
-		-o-transition: all .3s;
-		transition: all .3s;
-		width: .80em;
-		height: .80em;
-		mask-size: contain;
-		mask-repeat: no-repeat;
-		mask-position: center center;
-		margin-left: .25em;
-		margin-right: 1px;
-		transform: translateY(.1em);
-		background-color: var(--main-text-secondary-color, #666);
+	overflow-wrap: break-word;
+
+	.linkicon-wrap{
+		white-space: nowrap;
 	}
-	&:hover::after{
-		background-color: #4396D7;
+
+	svg.linkicon{
+		width: .875em;
+		height: .875em;
+		fill: none;
+		stroke-width: 2.4;
+		margin-left: .2em;
+		margin-right: 1px;
+		vertical-align: -0.14em;
+		color: var(--main-text-secondary-color, #666);
+		-webkit-transition: color .3s;
+		-o-transition: color .3s;
+		transition: color .3s;
+	}
+
+	&:hover svg.linkicon{
+		color: var(--main-link-hover-color, #998B00);
 	}
 }
+

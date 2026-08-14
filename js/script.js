@@ -34,6 +34,13 @@ $(document).ready(function(){
 		$('html').toggleClass('darkmode', isDark);
 		$(this).attr('data-mode', isDark ? 'light' : 'dark');
 		localStorage.setItem('mode', isDark ? 'dark' : 'light');
+		if (isDark) {
+			document.documentElement.style.backgroundColor = '#0d0d0d';
+			document.documentElement.style.colorScheme = 'dark';
+		} else {
+			document.documentElement.style.backgroundColor = '';
+			document.documentElement.style.colorScheme = '';
+		}
 		document.documentElement.classList.add('disable-transitions');
 		setTimeout(() => {
 			document.documentElement.classList.remove('disable-transitions');
@@ -87,60 +94,228 @@ $(document).ready(function(){
 	
 	/** FILTER LINE  */
 	if ($('.filterbar').length !== 0) {
-		
+
 		/* CUSTOM FITROWS FUNCTION FOR ISOTOPE TO GET EQUAL HEIGHT TILES */
 		!function(t){"use strict";function i(t){var i=t.create("fitRows");return i.prototype._resetLayout=function(){if(this.x=0,this.y=0,this.maxY=0,this.row=0,this.rows=[],this._getMeasurement("gutter","outerWidth"),this.options.equalheight)for(var t=0;t<this.isotope.items.length;t++)this.isotope.items[t].css({height:"auto"})},i.prototype._getItemLayoutPosition=function(t){t.getSize();var i=this.gutter||0,s=t.size.outerWidth,o=Math.ceil(this.isotope.size.innerWidth+i);0!==this.x&&s+this.x+i>o&&(this.x=0,this.y=this.maxY+i),0===this.x&&0!==this.y&&this.row++;var e={x:this.x,y:this.y};return this.maxY=Math.max(this.maxY,this.y+t.size.outerHeight),this.x+=s+i,void 0===this.rows[this.row]?(this.rows[this.row]=[],this.rows[this.row].start=this.y,this.rows[this.row].end=this.maxY):this.rows[this.row].end=Math.max(this.rows[this.row].end,this.maxY),t.row=this.row,e},i.prototype._equalHeight=function(){for(var t=0;t<this.isotope.items.length;t++){var i=this.isotope.items[t].row,s=this.rows[i];if(s){var o=s.end-s.start;o-=this.isotope.items[t].size.borderTopWidth+this.isotope.items[t].size.borderBottomWidth,o-=this.isotope.items[t].size.marginTop+this.isotope.items[t].size.marginBottom,o-=this.gutter.height||0,!1==this.isotope.items[t].size.isBorderBox&&(o-=this.isotope.items[t].size.paddingTop+this.isotope.items[t].size.paddingBottom),this.isotope.items[t].size.height=o,this.isotope.items[t].css({height:o.toString()+"px"})}}},i.prototype._getContainerSize=function(){return this.options.equalheight&&this._equalHeight(),{height:this.maxY}},i}"function"==typeof define&&define.amd?define(["../layout-mode"],i):"object"==typeof exports?module.exports=i(require("../layout-mode")):i(t.Isotope.LayoutMode)}(window);
-		
+
+		var isLibraryOrEverywhere = $('.library-tiles, .everywhere-tiles').length > 0;
+		var gutterSize = (isLibraryOrEverywhere && window.innerWidth <= 660) ? 8 : 32;
+
 		var $grid = $('.newstiles').isotope({
 			itemSelector: '.postpreview',
 			layoutMode: 'fitRows',
 			fitRows: {
-				gutter: 20,
+				gutter: gutterSize,
 				equalheight: true
 			},
 			getSortData: {
 				title: '[data-title]'
 			}
 		});
-	
+
+		// --- Filter highlight ---
 		function updateFilterHighlight($button) {
-			var $highlight = $('.filter-highlight');
-			if ($highlight.length) {
+			var $filtertags = $button.closest('.filtertags');
+			var $highlight = $filtertags.find('.filter-highlight');
+			if ($highlight.length && $button.is(':visible')) {
 				$highlight.css({
 					left: $button.position().left,
 					width: $button.outerWidth()
 				});
 			}
 		}
-	
-		var $activeBtn = $('.filter-btn.active');
-		updateFilterHighlight($activeBtn);
-	
-		$('.filterbar').on('click', 'button.filter-btn', function() {
-			var filterValue = $(this).attr('data-filter');
-			$grid.isotope({ filter: filterValue });
-			$('.filter-btn').removeClass('active');
-			$(this).addClass('active');
-			updateFilterHighlight($(this));
+
+		// Initialize highlights for all visible filter groups
+		$('.filtertags').each(function() {
+			var $activeBtn = $(this).find('.filter-btn.active');
+			if ($activeBtn.length) {
+				updateFilterHighlight($activeBtn);
+			}
 		});
-	
-		$('#search-input').on('input', function() {
-			var searchValue = $(this).val().toLowerCase();
-	
-			$grid.isotope({ filter: '*' });
-			$('.filter-btn').removeClass('active');
-			var $allButton = $('.filter-btn[data-filter="*"]');
-			$allButton.addClass('active');
-	
-			updateFilterHighlight($allButton);
-	
-			$grid.isotope({
-				filter: function() {
-					var title = $(this).attr('data-title').toLowerCase();
-					return title.includes(searchValue);
+
+		// --- Filter state per group ---
+		// Each filter-group stores its active filter value keyed by data-filter-key.
+		// Groups with data-attribute on .filtertags filter by data attribute, others by CSS class.
+		var filterState = {};
+
+		$('.filter-group').each(function() {
+			var key = $(this).attr('data-filter-key');
+			if (key) {
+				filterState[key] = '*';
+			}
+		});
+
+		// --- URL parameter support ---
+		function readFiltersFromURL() {
+			var params = new URLSearchParams(window.location.search);
+			params.forEach(function(value, key) {
+				if (key === 'q') {
+					$('#search-input').val(value);
+				} else if (filterState.hasOwnProperty(key)) {
+					// Try matching a filter button directly, then with a leading dot
+					var matchedValue = null;
+					var $sampleGroup = $('.filter-group[data-filter-key="' + key + '"]').not('.filter-group-mobile-only').first();
+					var $sampleBtn = $sampleGroup.find('.filter-btn[data-filter="' + value + '"]');
+					if ($sampleBtn.length) {
+						matchedValue = value;
+					} else {
+						$sampleBtn = $sampleGroup.find('.filter-btn[data-filter=".' + value + '"]');
+						if ($sampleBtn.length) {
+							matchedValue = '.' + value;
+						}
+					}
+					if (matchedValue) {
+						filterState[key] = matchedValue;
+						$('.filter-group[data-filter-key="' + key + '"]').each(function() {
+							var $filtertags = $(this).find('.filtertags');
+							$filtertags.find('.filter-btn').removeClass('active');
+							var $matchingBtn = $filtertags.find('.filter-btn[data-filter="' + matchedValue + '"]');
+							if ($matchingBtn.length) {
+								$matchingBtn.addClass('active');
+								if ($matchingBtn.is(':visible')) {
+									updateFilterHighlight($matchingBtn);
+								}
+							}
+						});
+					}
 				}
 			});
+		}
+
+		function writeFiltersToURL() {
+			var params = new URLSearchParams();
+			for (var key in filterState) {
+				if (filterState[key] !== '*') {
+					// Strip leading dot from class-based selectors for cleaner URLs
+					params.set(key, filterState[key].replace(/^\./, ''));
+				}
+			}
+			var searchValue = $('#search-input').val();
+			if (searchValue) {
+				params.set('q', searchValue);
+			}
+			var newURL = window.location.pathname + (params.toString() ? '?' + params.toString() : '');
+			history.replaceState(null, '', newURL);
+		}
+
+		function applyFilters() {
+			var searchValue = $('#search-input').val().toLowerCase();
+
+			$grid.isotope({
+				filter: function() {
+					var $item = $(this);
+					// Search filter
+					if (searchValue) {
+						var title = $item.attr('data-title').toLowerCase();
+						if (!title.includes(searchValue)) return false;
+					}
+					// Apply each filter group
+					for (var key in filterState) {
+						var value = filterState[key];
+						if (value === '*') continue;
+
+						// Find the filtertags that belong to this key
+						var $group = $('.filter-group[data-filter-key="' + key + '"]').not('.filter-group-mobile-only').first();
+						var $filtertags = $group.find('.filtertags');
+						var attribute = $filtertags.attr('data-attribute');
+
+						if (attribute) {
+							// Attribute-based filter (e.g., data-source)
+							var itemValue = $item.attr(attribute);
+							if (itemValue !== value) return false;
+						} else {
+							// Class-based filter (e.g., .book, .paper)
+							if (!$item.is(value)) return false;
+						}
+					}
+					return true;
+				}
+			});
+		}
+
+		// Sync duplicate filter groups (desktop ↔ mobile-only) by filter-key
+		function syncFilterGroups($clickedBtn) {
+			var $group = $clickedBtn.closest('.filter-group');
+			var key = $group.attr('data-filter-key');
+			var filterValue = $clickedBtn.attr('data-filter');
+
+			// Find all groups with the same key and sync active state
+			$('.filter-group[data-filter-key="' + key + '"]').each(function() {
+				var $otherFiltertags = $(this).find('.filtertags');
+				$otherFiltertags.find('.filter-btn').removeClass('active');
+				var $matchingBtn = $otherFiltertags.find('.filter-btn[data-filter="' + filterValue + '"]');
+				$matchingBtn.addClass('active');
+				if ($matchingBtn.is(':visible')) {
+					updateFilterHighlight($matchingBtn);
+				}
+			});
+		}
+
+		// --- Click handler for filter buttons ---
+		$('.filterbar').on('click', 'button.filter-btn', function() {
+			var $btn = $(this);
+			var $group = $btn.closest('.filter-group');
+			var key = $group.attr('data-filter-key');
+			var filterValue = $btn.attr('data-filter');
+
+			// Update state
+			if (key) {
+				filterState[key] = filterValue;
+			}
+
+			// Sync all groups with the same key
+			syncFilterGroups($btn);
+
+			applyFilters();
+			writeFiltersToURL();
 		});
+
+		// --- Search input ---
+		$('#search-input').on('input', function() {
+			applyFilters();
+			writeFiltersToURL();
+		});
+
+		// --- Mobile filter modal ---
+		var $filterToggle = $('.filter-toggle');
+		var $filterModal = $('.filter-modal');
+		var $filterOverlay = $('.filter-overlay');
+		var filterModalOpen = false;
+
+		function openFilterModal() {
+			filterModalOpen = true;
+			$filterToggle.addClass('is-open');
+			$filterOverlay.addClass('is-open');
+			$filterModal.addClass('is-open');
+			// Update highlights for modal buttons that are now visible
+			$filterModal.find('.filtertags').each(function() {
+				var $activeBtn = $(this).find('.filter-btn.active');
+				if ($activeBtn.length) {
+					updateFilterHighlight($activeBtn);
+				}
+			});
+		}
+
+		function closeFilterModal() {
+			filterModalOpen = false;
+			$filterToggle.removeClass('is-open');
+			$filterModal.removeClass('is-open');
+			$filterOverlay.removeClass('is-open');
+		}
+
+		function toggleFilterModal() {
+			if (filterModalOpen) {
+				closeFilterModal();
+			} else {
+				openFilterModal();
+			}
+		}
+
+		$filterToggle.on('click', toggleFilterModal);
+		$filterOverlay.on('click', closeFilterModal);
+
+		readFiltersFromURL();
+		applyFilters();
 	}
 	
 
@@ -172,6 +347,7 @@ $(document).ready(function(){
 
     
     // FAQs
+	$('.qa-wrap h3').append('<span class="faq-icon"><svg class="icon"><use href="#chevron-down"></use></svg></span>');
 	$('.qa-wrap').click(function(event) {
 		var $qaWrap = $(this);
 		if ($(event.target).is('h3') || $(event.target).closest('h3').length) {
@@ -303,25 +479,99 @@ $(document).ready(function(){
 		const selector = `li.opened a[href="${pathname}"]`;
 		const clonedUL = $(selector).parent().parent().clone();
 		clonedUL.find(selector).parent().remove();
+		clonedUL.find('svg').remove();
 		clonedUL.find('ul').show();
 		$('#main_content_wrap .index').append(clonedUL);
 	}
 
 	
 	// Appending Content-List of Documentation
-	if ( $('.wrap.documentation') != 0 ) {
+	if ( $('#docusitemaphere').length ) {
 	    contentlist = $('ul.sidenav').clone()
+	    contentlist.find('svg').remove()
 	    $('#docusitemaphere').append(contentlist).find("ul").removeAttr("style")
 	}
 	
 // Add class-name to external Links
 $('a').filter(function() {
-	return this.hostname && this.hostname !== location.hostname && $(this).find('img').length === 0 && !$(this).hasClass('button');
+	return this.hostname && this.hostname !== location.hostname && $(this).find('img, svg').length === 0 && !$(this).hasClass('button');
 }).addClass("externallink").attr('target','_blank');
 
-$('.headercontent a, .mainlinks a, .box-link a, .footercontent a, .highlight a, .button').removeClass('externallink');
+$('.headercontent a, .mainlinks a, .box-link a, .footercontent a, .highlight a, .button, .download-btn, .ecosystem-diagram a, a.tag, a:has(> .tag)').removeClass('externallink');
 $('table a.externallink:contains(GitHub)').removeClass('externallink').addClass('nobg'); 
 $('.supporterboard a.externallink').removeClass('externallink').addClass('nobg'); 
+
+// Add download icon to links pointing to downloadable files
+$('a').filter(function() {
+	var href = $(this).attr('href');
+	if (!href) return false;
+	return /\.(pdf|zip|tar\.gz|csv|parquet|mp3)(\?.*)?$/i.test(href) && $(this).find('img').length === 0 && !$(this).hasClass('button');
+}).addClass("downloadlink").removeClass("externallink");
+
+$('.headercontent a, .mainlinks a, .box-link a, .footercontent a, .highlight a, .button, .download-btn, .ecosystem-diagram a').removeClass('downloadlink');
+$('table a.downloadlink:contains(GitHub)').removeClass('downloadlink').addClass('nobg');
+$('.supporterboard a.downloadlink').removeClass('downloadlink').addClass('nobg');
+
+// Add play icon to links pointing to YouTube or Vimeo
+$('a').filter(function() {
+	var href = $(this).attr('href');
+	if (!href) return false;
+	return /^(https?:)?\/\/(www\.|m\.)?(youtube\.com|youtu\.be|vimeo\.com)\//i.test(href) && $(this).find('img').length === 0 && !$(this).hasClass('button');
+}).addClass("videolink").removeClass("externallink downloadlink");
+
+$('.headercontent a, .mainlinks a, .box-link a, .footercontent a, .highlight a, .button, .ecosystem-diagram a').removeClass('videolink');
+$('table a.videolink:contains(GitHub)').removeClass('videolink').addClass('nobg');
+$('.supporterboard a.videolink').removeClass('videolink').addClass('nobg');
+
+// Add podcast icon to links pointing to Spotify or Apple Podcasts
+$('a').filter(function() {
+	var href = $(this).attr('href');
+	if (!href) return false;
+	return /^(https?:)?\/\/(open\.spotify\.com|podcasts\.apple\.com)\//i.test(href) && $(this).find('img').length === 0 && !$(this).hasClass('button');
+}).addClass("podcastlink").removeClass("externallink downloadlink videolink");
+
+$('.headercontent a, .mainlinks a, .box-link a, .footercontent a, .highlight a, .button, .ecosystem-diagram a').removeClass('podcastlink');
+$('.supporterboard a.podcastlink').removeClass('podcastlink').addClass('nobg');
+
+// Append sprite icons to external, download, video and podcast links, gluing the icon to the last word
+$('#main_content_wrap, .singleentry .content').find('a.externallink, a.downloadlink, a.videolink, a.podcastlink').each(function() {
+	var $a = $(this);
+	if ($a.find('svg.linkicon').length) return;
+	var icon = $a.hasClass('videolink') ? 'youtube' : ($a.hasClass('podcastlink') ? 'headphones-01' : ($a.hasClass('downloadlink') ? 'download-01' : 'link-external-02'));
+	var $svg = $('<svg class="icon linkicon"><use href="#' + icon + '"></use></svg>');
+	var contents = $a.contents();
+	var last = contents.length ? contents[contents.length - 1] : null;
+	var match = (last && last.nodeType === 3) ? last.nodeValue.match(/(\S+)(\s*)$/) : null;
+	if (match) {
+		last.nodeValue = last.nodeValue.slice(0, match.index);
+		$('<span class="linkicon-wrap"></span>').text(match[1]).append($svg).appendTo($a);
+	} else {
+		$a.append($svg);
+	}
+});
+
+// Copy the heading URL to the clipboard when the anchor-link icon is clicked
+$(document).on('click', 'svg.anchor-icon', function(e) {
+	e.preventDefault();
+	e.stopPropagation();
+	var $svg = $(this);
+	var anchor = this.closest('a');
+	var url = anchor ? anchor.href : (location.origin + location.pathname + location.hash);
+	if (navigator.clipboard && navigator.clipboard.writeText) {
+		navigator.clipboard.writeText(url);
+	}
+	var $use = $svg.find('use');
+	if (!$svg.data('original-icon')) {
+		$svg.data('original-icon', $use.attr('href'));
+	}
+	$use.attr('href', '#check');
+	$svg.addClass('copied');
+	clearTimeout($svg.data('reset-timer'));
+	$svg.data('reset-timer', setTimeout(function() {
+		$use.attr('href', $svg.data('original-icon'));
+		$svg.removeClass('copied');
+	}, 1500));
+});
 
 // Wrap external links followed by a "." in a nobreak span
 $('body.documentation #main_content_wrap a.externallink').each(function () {
@@ -406,21 +656,65 @@ $('body.documentation #main_content_wrap a.externallink').each(function () {
 	
 	
 	// CHANGE DOC VERSION
-	$('.options .version').click(function(){
-		var $this = $(this);
-		$this.toggleClass('active');
-		$this.find('.versionsidebar').slideToggle(200);
-		
-		// MAKE IT SAME AS ON START PAGE
-		var selectedVersion = $this.find('.selectedversion');
-		var currentVersion = selectedVersion.attr('data-current');
-	
-		selectedVersion.text($this.hasClass('active') ? 'Select' : currentVersion);
-	
-		$this.find('.versionsidebar li').removeClass('current') 
-			.filter(function() { 
-				return $(this).text().trim() === currentVersion; 
-			}).addClass('current');
+	function closeVersionSelect() {
+		var $open = $('.options .version.active');
+		if (!$open.length) return false;
+		$open.removeClass('active').find('.versiontrigger').attr('aria-expanded', 'false');
+		return true;
+	}
+
+	$('.options .version .versiontrigger').click(function(){
+		var $version = $(this).closest('.version');
+		var open = !$version.hasClass('active');
+		$version.toggleClass('active', open);
+		$(this).attr('aria-expanded', open ? 'true' : 'false');
+	});
+
+	$(document).on('click', function(e){
+		if ($(e.target).closest('.options .version').length) return;
+		closeVersionSelect();
+	});
+
+	$(document).on('keydown', function(e){
+		if (e.key !== 'Escape') return;
+		if (closeVersionSelect()) {
+			$('.options .version .versiontrigger').trigger('focus');
+		}
+	});
+
+	// COPY PAGE AS MARKDOWN
+	$('.headlinebar .copy-markdown').click(function(){
+		var $btn = $(this);
+		if ($btn.hasClass('copied')) return;
+
+		var markdownPromise = fetch($btn.attr('data-source')).then(function(response){
+			if (!response.ok) throw new Error('HTTP ' + response.status);
+			return response.text();
+		});
+
+		function markCopied() {
+			$btn.addClass('copied');
+			$btn.find('use').attr('href', '#check');
+			$btn.find('span').text('Copied');
+			setTimeout(function(){
+				$btn.removeClass('copied');
+				$btn.find('use').attr('href', '#copy-01');
+				$btn.find('span').text('Copy Markdown');
+			}, 2000);
+		}
+
+		if (navigator.clipboard && window.ClipboardItem) {
+			var item = new ClipboardItem({
+				'text/plain': markdownPromise.then(function(text){
+					return new Blob([text], { type: 'text/plain' });
+				})
+			});
+			navigator.clipboard.write([item]).then(markCopied);
+		} else if (navigator.clipboard) {
+			markdownPromise.then(function(text){
+				return navigator.clipboard.writeText(text);
+			}).then(markCopied);
+		}
 	});
 	
 	
@@ -576,11 +870,11 @@ $('body.documentation #main_content_wrap a.externallink').each(function () {
 			$('.window .content.haslines').each(function(){
 				var height = $(this).find('pre').height()
 				var fontSize = $(this).find('pre').css('font-size');
-				var lineHeight = 18;//Math.floor(parseInt(fontSize.replace('px','')) * 1.2);
-				var lines = Math.ceil(height / lineHeight) + 1
+				var lineHeight = 20;
+				var lines = Math.ceil(height / lineHeight)
 				var linenumbers = '';
-				for (i = 1; i < lines; i++) {
-					linenumbers += i + '<br>'
+				for (i = 1; i <= lines; i++) {
+					linenumbers += '<span>' + i + '</span><br>';
 				}
 				$(this).find('.lines').html(linenumbers);
 			})
@@ -664,15 +958,22 @@ $('body.documentation #main_content_wrap a.externallink').each(function () {
 		function updateInstallation($item) {
 			updateHighlight($envTopbar, $item);
 			const activeClient = $item.attr("data-client");
-			let installation = $(
+			let $installDiv = $(
 				`#quick-installation div[data-install='${activeClient} ${OSdatid}']`
-			).html();
-			if (!installation) {
-				installation = $(
+			);
+			if (!$installDiv.length) {
+				$installDiv = $(
 					`#quick-installation div[data-install='${activeClient}']`
-				).html();
+				);
 			}
-			$(".result").html(installation);
+			$(".result").html($installDiv.html());
+			const version = $installDiv.attr("data-version");
+			const $versionSpan = $(".bottombar .version");
+			if (version) {
+				$versionSpan.text("Latest version: " + version).show();
+			} else {
+				$versionSpan.hide();
+			}
 		}
 		
 		updateInstallation($activeEnvItem);
@@ -685,19 +986,25 @@ $('body.documentation #main_content_wrap a.externallink').each(function () {
 	}
 	
 	/** CUSTOM SELECT ON HOME **/
-	var generateSelectBoxes = function(){   
+	function closeCustomSelects() {
+		$('div.select-styled.active').removeClass('active').attr('aria-expanded', 'false');
+	}
+
+	var generateSelectBoxes = function(){
+		var checkIcon = '<svg class="icon check"><use href="#check"></use></svg>';
+
 		$('body.landing select').each(function() {
 			var $this = $(this),
 				numberOfOptions = $(this).children('option').length;
-	
+
 			$this.addClass('select-hidden');
-			$this.after('<div class="select-styled">' + ($this.children('option:selected').text() || 'Select') + '</div>'); 
-	
+			$this.after('<div class="select-styled" role="button" tabindex="0" aria-haspopup="listbox" aria-expanded="false"><span class="label">' + ($this.children('option:selected').text() || 'Select') + '</span><svg class="arrow"><use href="#chevron-down"></use></svg></div>');
+
 			var $styledSelect = $this.next('div.select-styled');
 			var $list = $('<ul />', {
 				'class': 'select-options'
 			}).insertAfter($styledSelect);
-	
+
 			for (var i = 0; i < numberOfOptions; i++) {
 				$('<li />', {
 					text: $this.children('option').eq(i).text(),
@@ -707,49 +1014,60 @@ $('body.documentation #main_content_wrap a.externallink').each(function () {
 					$('li[rel="' + $this.children('option').eq(i).val() + '"]').addClass('is-selected');
 				}
 			}
-	
+
 			var $listItems = $list.children('li');
-	
+			$list.find('li.is-selected').append(checkIcon);
+
+			function toggleSelect() {
+				var open = !$styledSelect.hasClass('active');
+				closeCustomSelects();
+				$styledSelect.toggleClass('active', open).attr('aria-expanded', open ? 'true' : 'false');
+			}
+
 			$styledSelect.click(function(e) {
 				e.stopPropagation();
-				$('div.select-styled.active').not(this).each(function() {
-					$(this).removeClass('active').next('ul.select-options').hide();
-				});
-				$(this).toggleClass('active').next('ul.select-options').slideToggle(200); 
-				if ($(this).hasClass('active')) {
-					$(this).html('<span>Select</span>'); 
-				} else {
-					var selectedText = $this.children('option:selected').text() || 'Select';
-					$(this).html(selectedText); 
+				toggleSelect();
+			});
+
+			$styledSelect.on('keydown', function(e) {
+				if (e.key === 'Enter' || e.key === ' ') {
+					e.preventDefault();
+					toggleSelect();
 				}
 			});
-	
+
 			$listItems.click(function(e) {
 				e.stopPropagation();
 				var selectedText = $(this).text();
-				$styledSelect.html(selectedText).removeClass('active');
+				$styledSelect.find('.label').text(selectedText);
+				$styledSelect.removeClass('active').attr('aria-expanded', 'false');
 				$this.val($(this).attr('rel'));
-				$list.find('li.is-selected').removeClass('is-selected');
-				$(this).addClass('is-selected');
-				$list.hide();
+				$list.find('li.is-selected').removeClass('is-selected').find('svg.icon.check').remove();
+				$(this).addClass('is-selected').append(checkIcon);
 				updateExample();
 			});
-	
-			$(document).click(function() {
-				$styledSelect.removeClass('active');
-				$list.hide();
-				var selectedText = $this.children('option:selected').text() || 'Select';
-				$styledSelect.html(selectedText); 
-			});
-	
+
 			$this.change(function() {
 				var selectedText = $(this).children('option:selected').text() || 'Select';
-				$styledSelect.html(selectedText); 
+				$styledSelect.find('.label').text(selectedText);
 			});
 		});
 	}
-	
+
 	generateSelectBoxes();
+
+	$(document).on('click', function() {
+		closeCustomSelects();
+	});
+
+	$(document).on('keydown', function(e) {
+		if (e.key !== 'Escape') return;
+		var $open = $('div.select-styled.active');
+		if ($open.length) {
+			closeCustomSelects();
+			$open.trigger('focus');
+		}
+	});
 
 
 
@@ -856,11 +1174,33 @@ $('body.documentation #main_content_wrap a.externallink').each(function () {
 		} 
 	});
 	// setWithExpiry('homeBanner', '', -1); // deletes content
-	
-	
+
+	/** BANNER ROTATOR **/
+	(function() {
+		var $rotator = $('.banner-rotator');
+		var $items = $rotator.find('.banner-item');
+		if ($items.length > 1) {
+			var interval = ($rotator.data('interval') || 7) * 1000;
+			var current = 0;
+			setInterval(function() {
+				$items.eq(current).removeClass('active');
+				current = (current + 1) % $items.length;
+				$items.eq(current).addClass('active');
+			}, interval);
+		}
+	})();
+
+
 	/** ADD WORD-BOXES TO CODE TABLES */
 	$('.monospace_table + table tbody td').each(function() {
-		$(this).wrapInner('<code class="language-plaintext"></code>');
+		var $cell = $(this);
+		var $children = $cell.contents().filter(function() {
+			return this.nodeType !== Node.TEXT_NODE || $.trim(this.nodeValue).length > 0;
+		});
+		if ($children.length === 1 && $children[0].nodeType === Node.ELEMENT_NODE && $children[0].tagName === 'CODE') {
+			return;
+		}
+		$cell.wrapInner('<code class="language-plaintext"></code>');
 	});
 	
 	/** RE-CALCULATE SELECT-ACTIVE-BUBBLES */
@@ -877,33 +1217,14 @@ $('body.documentation #main_content_wrap a.externallink').each(function () {
 		});
 	});
 
-	// DUCKCON7 EVENT PAGE
+	// DUCKCON EVENT PAGES
 	const MAPBOX_ACCESS_TOKEN = 'pk.eyJ1Ijoiam9uYXRoYW4tYXVjaCIsImEiOiJjbDllMHhxNHowbG50M29vZ3Y0NnZhdHY1In0.XQxUUmkkSGKUkNThK1p9Yg';
 	const MAPBOX_STYLES_URL = 'mapbox://styles/jonathan-auch/cmhz38wfd001801sbe3c06ece'
-	const DUCKCON7_COORDINATES = [4.922150, 52.376780];
-	
-	const $duckcon7Map = $('.js-duckcon7-map');
-	const duckcon7SliderClass = '.js-duckcon7-slider';
-	const $duckcon7Slider = $(duckcon7SliderClass);
+	const $duckconMap = $('.js-duckcon-map');
+	const duckconSliderClass = '.js-duckcon-slider';
+	const $duckconSlider = $(duckconSliderClass);
 
-	const duckcon7GeoJson = {
-		type: 'FeatureCollection',
-		features: [
-			{
-				type: 'Feature',
-				geometry: {
-					type: 'Point',
-					coordinates: DUCKCON7_COORDINATES,
-				},
-				properties: {
-					title: 'Pakhuis de Zwijger',
-					description: 'Pakhuis de Zwijger'
-				}
-			}
-		]
-	}
-
-	const duckcon7SliderOptions = {
+	const duckconSliderOptions = {
 		slidesPerView: "auto",
 		spaceBetween: 30,
 		centeredSlides: true,
@@ -915,26 +1236,48 @@ $('body.documentation #main_content_wrap a.externallink').each(function () {
 	}
 
 	// Initialize the map if present on page
-	if ($duckcon7Map.length) {
+	if ($duckconMap.length) {
+		const mapEl = $duckconMap[0];
+		const lng = parseFloat(mapEl.dataset.lng);
+		const lat = parseFloat(mapEl.dataset.lat);
+		const label = mapEl.dataset.label;
+
 		mapboxgl.accessToken = MAPBOX_ACCESS_TOKEN;
 
 		const map = new mapboxgl.Map({
-			container: 'duckcon7-map',
+			container: 'duckcon-map',
 			style: MAPBOX_STYLES_URL,
-			center: [4.922150, 52.376780],
+			center: [lng, lat],
 			zoom: 15,
 		});
 
-		for (const feature of duckcon7GeoJson.features) {
-			const marker = document.createElement('div');
-       		marker.className = 'js-marker map-marker';
-       
-  			new mapboxgl.Marker(marker).setLngLat(feature.geometry.coordinates).addTo(map);
-		}
+		const marker = document.createElement('div');
+		marker.className = 'js-marker map-marker';
+		marker.dataset.label = label;
+		new mapboxgl.Marker(marker).setLngLat([lng, lat]).addTo(map);
 	}
 
 	// Initialize the slider if present on page
-	if ($duckcon7Slider.length) {
-		const slider = new Swiper(duckcon7SliderClass, duckcon7SliderOptions);
+	if ($duckconSlider.length) {
+		const slider = new Swiper(duckconSliderClass, duckconSliderOptions);
 	}
+
+	// Author marquee: keep the scroll speed constant regardless of name length
+	$(document).on('mouseenter', '.postpreview', function() {
+		var author = this.querySelector('.byline .author, .meta .author');
+		if (!author) return;
+		var span = author.querySelector('span');
+		if (!span) return;
+
+		var distance = span.scrollWidth - author.clientWidth;
+		if (distance < 24) {
+			author.style.removeProperty('--marquee-duration');
+			return;
+		}
+
+		var SPEED = 65;
+		var MOVING = 0.92;
+		var duration = distance / SPEED / MOVING;
+		author.style.setProperty('--marquee-duration', duration.toFixed(2) + 's');
+	});
 });

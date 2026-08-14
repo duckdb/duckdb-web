@@ -40,10 +40,10 @@ docs:
     -- Select gen1 items
     SELECT * FROM list_pokemon_items();
 
-extension_star_count: 6
-extension_star_count_pretty: 6
-extension_download_count: 342
-extension_download_count_pretty: 342
+extension_star_count: 7
+extension_star_count_pretty: 7
+extension_download_count: 965
+extension_download_count_pretty: 965
 image: '/images/community_extensions/social_preview/preview_community_extension_psyduck.png'
 layout: community_extension_doc
 ---
@@ -74,5 +74,23 @@ LOAD {{ page.extension.name }};
 | list_pokemon       | table         | NULL        | NULL    |          |
 | list_pokemon_items | table         | NULL        | NULL    |          |
 | list_pokemon_moves | table         | NULL        | NULL    |          |
+
+### Overloaded Functions
+
+<div class="extension_functions_table"></div>
+
+This extension does not add any function overloads.
+
+### Added Types
+
+<div class="extension_types_table"></div>
+
+This extension does not add any types.
+
+### Added Settings
+
+<div class="extension_settings_table"></div>
+
+This extension does not add any settings.
 
 

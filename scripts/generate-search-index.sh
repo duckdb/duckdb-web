@@ -6,3 +6,4 @@ set -euo pipefail
 cd "$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )/.."
 
 duckdb-web-venv/bin/python scripts/generate_search.py
+node scripts/build_search_index.js

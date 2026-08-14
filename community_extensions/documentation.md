@@ -39,7 +39,7 @@ Extensions maintainers are encouraged to provide two optional fields in the desc
 
 ### Hosted Extension Documentation Page
 
-Each Community Extension has a documentation page at `https://duckdb.org/community_extensions/extensions/⟨extension_name⟩`{:.language-sql .highlight}. For example, this is the page for [quack]({% link community_extensions/extensions/quack.md %}).
+Each Community Extension has a documentation page at `https://duckdb.org/community_extensions/extensions/⟨extension_name⟩`{:.language-sql .highlight}. For example, this is the page for [h3]({% link community_extensions/extensions/h3.md %}).
 
 Documentation pages are generated from the fields provided in the YAML descriptor file that is part of the [Community Extensions Repository](https://github.com/duckdb/community-extensions) and from the auto-detected changes that a given extension introduces in DuckDB.
 

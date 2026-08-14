@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "DuckDB's CSV Reader and the Pollock Robustness Benchmark: Into the CSV Abyss"
-author: "Pedro Holanda, Gábor Szárnyas (DuckDB Labs); Gerardo Vitagliano (MIT)"
+author: "Pedro Holanda, Gábor Szárnyas (DuckLabs); Gerardo Vitagliano (MIT)"
 thumb: "/images/blog/thumbs/duckdb-csv-robustness.svg"
 image: "/images/blog/thumbs/duckdb-csv-robustness.png"
 excerpt: "DuckDB ships with a fast and robust CSV reader, which – we believe – can consume most CSV files found in the wild. To empirically evaluate this, we used the Pollock Benchmark, a state-of-the-art test suite designed to measure how well CSV readers can operate on non-standard files, and found that DuckDB ranks #1."
@@ -97,7 +97,7 @@ We can see that the sniffer decided that quotes and escape characters are not pr
 Consequently, it decided to skip the first 4 rows (including the header) in order to read the file according to the dialect.
 
 > Tip DuckDB allows users to retrieve all errors that occur when reading a CSV file using the `reject_errors` table.
-> This is beyond the scope of this blog post, but you can find more details in the [“Reading Faulty CSV Files” documentation page]({% link docs/stable/data/csv/reading_faulty_csv_files.md %}).
+> This is beyond the scope of this blog post, but you can find more details in the [“Reading Faulty CSV Files” documentation page]({% link docs/current/data/csv/reading_faulty_csv_files.md %}).
 
 ### Loading the Example with a User-Defined CSV Dialect
 

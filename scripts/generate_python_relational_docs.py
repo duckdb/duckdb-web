@@ -22,7 +22,7 @@ from generate_python_relational_docs_methods import (
     OUTPUT_MEMBER_LIST,
 )
 
-DUCKDB_DOC_VERSION = os.getenv("DUCKDB_DOC_VERSION", "stable")
+DUCKDB_DOC_VERSION = os.getenv("DUCKDB_DOC_VERSION", "lts")
 
 redirect_from_text = """\
 redirect_from:
@@ -32,7 +32,7 @@ redirect_from:
 
 FORMATTER_TEXT = f"""---
 layout: docu
-{redirect_from_text if DUCKDB_DOC_VERSION == 'stable' else ''}
+{redirect_from_text if DUCKDB_DOC_VERSION == 'lts' else ''}
 title: Relational API
 ---
 
@@ -128,8 +128,7 @@ def trim_code_block(s):
 
 def get_duckdb_conn():
     duckdb_conn = duckdb.connect()
-    duckdb_conn.sql(
-        """
+    duckdb_conn.sql("""
         CREATE TABLE relational_api_members (
             class_name text,
             member_name text,
@@ -144,8 +143,7 @@ def get_duckdb_conn():
             aliases text,
             primary key (class_name, member_name)
         )
-    """
-    )
+    """)
 
     return duckdb_conn
 
@@ -254,8 +252,7 @@ def generate_from_db(relational_api_table):
 
         # write section details
         section_details = (
-            relational_api_table.select(
-                """
+            relational_api_table.select("""
             section,
             section_id,
             concat('#### ', '`', member_name, '`') as header_member_name, 
@@ -270,10 +267,8 @@ def generate_from_db(relational_api_table):
             member_example,
             if( member_result is not null, '\n\n##### Result\n\n', NULL) as header_result,
             member_result
-        """
-            )
-            .select(
-                """
+        """)
+            .select("""
                 section, 
                 section_id, 
                 concat(
@@ -290,8 +285,7 @@ def generate_from_db(relational_api_table):
                     header_result, 
                     member_result
                 ) as detailed_section
-            """
-            )
+            """)
             .string_agg(
                 "detailed_section",
                 sep="\n\n----\n\n",

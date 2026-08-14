@@ -52,8 +52,8 @@ Here is a photo of our machine:
 So what is this little box capable of? We used the [TPC-H workload](https://www.tpc.org/tpch/) to find out.
 
 We first updated the Raspberry Pi OS (a fork of Debian Linux) to its latest version, 2024-11-19.
-We then compiled DuckDB [version `0024e5d4be`](https://github.com/duckdb/duckdb/commit/0024e5d4be) using the [Raspberry Pi build instructions]({% link docs/stable/dev/building/raspberry_pi.md %}).
-To make the queries easy to run, we also included the [TPC-H extension]({% link docs/stable/core_extensions/tpch.md %}) in the build:
+We then compiled DuckDB [version `0024e5d4be`](https://github.com/duckdb/duckdb/commit/0024e5d4be) using the [Raspberry Pi build instructions]({% link docs/current/dev/building/raspberry_pi.md %}).
+To make the queries easy to run, we also included the [TPC-H extension]({% link docs/current/core_extensions/tpch.md %}) in the build:
 
 ```bash
 GEN=ninja BUILD_EXTENSIONS="tpch" make
@@ -188,4 +188,4 @@ We hope you enjoyed this blog post. If you have an interesting DuckDB setup, don
 
 > Do you have a cool DuckDB setup?
 > We would like to hear about it!
-> Please post about it on social media or email it to <gabor@duckdblabs.com>.
+> Please post about it on social media or email it to [Gábor Szárnyas](mailto:gabor@ducklabs.com).

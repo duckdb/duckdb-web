@@ -9,17 +9,17 @@ extension:
   name: gcs
   description: DuckDB GCS Extension
   extended_description: A native GCS extension with support for standard Google auth methods
-  version: 0.0.3
+  version: 0.0.8
   language: C++
   build: cmake
   license: MIT
-  excluded_platforms: "wasm_mvp;wasm_eh;wasm_threads;windows_amd64_mingw;windows_amd64"
+  excluded_platforms: "wasm_mvp;wasm_eh;wasm_threads;windows_amd64_mingw"
   maintainers:
     - northpolesec
 
 repo:
   github: northpolesec/duckdb-gcs
-  ref: 5465cad377f83637f8233b9756062b98352e3cdd
+  ref: 84082773578a49454fcbdc055562d827c76c76af
 
 docs:
   hello_world: |
@@ -36,10 +36,10 @@ docs:
     └─────────────────────────────────────────┴─────────┴───────┴──────────────────────────┘
 
 
-extension_star_count: 11
-extension_star_count_pretty: 11
-extension_download_count: 13316
-extension_download_count_pretty: 13.3k
+extension_star_count: 28
+extension_star_count_pretty: 28
+extension_download_count: 31301
+extension_download_count_pretty: 31.3k
 image: '/images/community_extensions/social_preview/preview_community_extension_gcs.png'
 layout: community_extension_doc
 ---
@@ -60,6 +60,24 @@ LOAD {{ page.extension.name }};
 ### About {{ page.extension.name }}
 {{ page.docs.extended_description }}
 {% endif %}
+
+### Added Functions
+
+<div class="extension_functions_table"></div>
+
+This extension does not add any functions.
+
+### Overloaded Functions
+
+<div class="extension_functions_table"></div>
+
+This extension does not add any function overloads.
+
+### Added Types
+
+<div class="extension_types_table"></div>
+
+This extension does not add any types.
 
 ### Added Settings
 

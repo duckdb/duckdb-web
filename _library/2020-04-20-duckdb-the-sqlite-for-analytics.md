@@ -18,7 +18,6 @@ redirect_from:
 </div>
 
 |-------|-------|
-| **Date** | {{ page.date | date: "%Y-%m-%d" }} |
 | **Event** | [Quarantine 2020 Database Talks at Carnegie Mellon University](https://db.cs.cmu.edu/seminar2020/) |
 | **Speaker** | [Mark Raasveldt](https://mytherin.github.io/) |
 | **YouTube** | [The SQLite for Analytics](https://www.youtube.com/watch?v=PFUZlNQIndo) |

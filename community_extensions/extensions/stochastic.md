@@ -19,14 +19,14 @@ extension:
   name: stochastic
   version: '2025120401'
 repo:
+  andium: afba8950037068a7a43520b18f9f6f5dcc5258ba
   github: query-farm/stochastic
-  ref: 020205b1862e9ab919ad58b1a4a496058a478519
-  ref_next: 9a4a41c41919b732932d998076aebacb59acb82f
+  ref: 81e91e342a0335e602581c2eb5d5e547354a6cd2
 
-extension_star_count: 15
-extension_star_count_pretty: 15
-extension_download_count: 361
-extension_download_count_pretty: 361
+extension_star_count: 26
+extension_star_count_pretty: 26
+extension_download_count: 6126
+extension_download_count_pretty: 6.1k
 image: '/images/community_extensions/social_preview/preview_community_extension_stochastic.png'
 layout: community_extension_doc
 ---
@@ -115,6 +115,21 @@ LOAD {{ page.extension.name }};
 | dist_binomial_skewness                     | scalar        | Returns the skewness of the binomial distribution.                                                                                                                                                                              | NULL    | [dist_binomial_skewness(10, 0.5)]                           |
 | dist_binomial_support                      | scalar        | Returns the support of the binomial distribution.                                                                                                                                                                               | NULL    | [dist_binomial_support(10, 0.5)]                            |
 | dist_binomial_variance                     | scalar        | Returns the variance (σ²) of the binomial distribution.                                                                                                                                                                         | NULL    | [dist_binomial_variance(10, 0.5)]                           |
+| dist_cauchy_cdf                            | scalar        | Computes the cumulative distribution function (CDF) of the cauchy distribution. Returns the probability that a random variable X is less than or equal to x.                                                                    | NULL    | [dist_cauchy_cdf(0, 1.0, 0.5)]                              |
+| dist_cauchy_cdf_complement                 | scalar        | Computes the complementary cumulative distribution function (1 - CDF) of the cauchy distribution. Returns the probability that X > x, equivalent to the survival function.                                                      | NULL    | [dist_cauchy_cdf_complement(0, 1.0, 0.5)]                   |
+| dist_cauchy_chf                            | scalar        | Computes the cumulative hazard function of the cauchy distribution.                                                                                                                                                             | NULL    | [dist_cauchy_chf(0, 1.0, 0.5)]                              |
+| dist_cauchy_hazard                         | scalar        | Computes the hazard function of the cauchy distribution.                                                                                                                                                                        | NULL    | [dist_cauchy_hazard(0, 1.0, 0.5)]                           |
+| dist_cauchy_log_cdf                        | scalar        | Computes the natural logarithm of the cumulative distribution function (CDF) of the cauchy distribution. Returns the logarithm of the probability that a random variable X is less than or equal to x.                          | NULL    | [dist_cauchy_log_cdf(0, 1.0, 0.5)]                          |
+| dist_cauchy_log_cdf_complement             | scalar        | Computes the natural logarithm of the complementary cumulative distribution function (1 - CDF) of the cauchy distribution. Returns the logarithm of the probability that X > x, equivalent to the survival function.            | NULL    | [dist_cauchy_log_cdf_complement(0, 1.0, 0.5)]               |
+| dist_cauchy_log_pdf                        | scalar        | Computes the natural logarithm of the probability density function (log-PDF) of the cauchy distribution. Useful for numerical stability when dealing with very small probabilities.                                             | NULL    | [dist_cauchy_log_pdf(0, 1.0, 0.5)]                          |
+| dist_cauchy_median                         | scalar        | Returns the median (50th percentile) of the cauchy distribution, which equals the mean.                                                                                                                                         | NULL    | [dist_cauchy_median(0.0, 1.0)]                              |
+| dist_cauchy_mode                           | scalar        | Returns the mode (most likely value) of the cauchy distribution, which equals the mean.                                                                                                                                         | NULL    | [dist_cauchy_mode(0.0, 1.0)]                                |
+| dist_cauchy_pdf                            | scalar        | Computes the probability density function (PDF) of the cauchy distribution. Returns the probability densityat point x for a cauchy distribution with specified parameters.                                                      | NULL    | [dist_cauchy_pdf(0, 1.0, 0.5)]                              |
+| dist_cauchy_quantile                       | scalar        | Computes the quantile function (inverse CDF) of the cauchy distribution. Returns the value x such that P(X ≤ x) = p, where p is the cumulative probability.                                                                     | NULL    | [dist_cauchy_quantile(0, 1.0, 0.95)]                        |
+| dist_cauchy_quantile_complement            | scalar        | Computes the complementary quantile function of the cauchy distribution. Returns the value x such that P(X > x) = p, useful for computing upper tail quantiles.                                                                 | NULL    | [dist_cauchy_quantile_complement(0, 1.0, 0.95)]             |
+| dist_cauchy_range                          | scalar        | Returns the range of the cauchy distribution.                                                                                                                                                                                   | NULL    | [dist_cauchy_range(0.0, 1.0)]                               |
+| dist_cauchy_sample                         | scalar        | Generates random samples from the cauchy distribution with specified parameters.                                                                                                                                                | NULL    | [dist_cauchy_sample(0.0, 1.0)]                              |
+| dist_cauchy_support                        | scalar        | Returns the support of the cauchy distribution.                                                                                                                                                                                 | NULL    | [dist_cauchy_support(0.0, 1.0)]                             |
 | dist_chi_squared_cdf                       | scalar        | Computes the cumulative distribution function (CDF) of the chi_squared distribution. Returns the probability that a random variable X is less than or equal to x.                                                               | NULL    | [dist_chi_squared_cdf(5, 3.0)]                              |
 | dist_chi_squared_cdf_complement            | scalar        | Computes the complementary cumulative distribution function (1 - CDF) of the chi_squared distribution. Returns the probability that X > x, equivalent to the survival function.                                                 | NULL    | [dist_chi_squared_cdf_complement(5, 3.0)]                   |
 | dist_chi_squared_chf                       | scalar        | Computes the cumulative hazard function of the chi_squared distribution.                                                                                                                                                        | NULL    | [dist_chi_squared_chf(5, 3.0)]                              |
@@ -273,6 +288,7 @@ LOAD {{ page.extension.name }};
 | dist_logistic_quantile                     | scalar        | Computes the quantile function (inverse CDF) of the logistic distribution. Returns the value x such that P(X ≤ x) = p, where p is the cumulative probability.                                                                   | NULL    | [dist_logistic_quantile(0, 1.0, 0.95)]                      |
 | dist_logistic_quantile_complement          | scalar        | Computes the complementary quantile function of the logistic distribution. Returns the value x such that P(X > x) = p, useful for computing upper tail quantiles.                                                               | NULL    | [dist_logistic_quantile_complement(0, 1.0, 0.95)]           |
 | dist_logistic_range                        | scalar        | Returns the range of the logistic distribution.                                                                                                                                                                                 | NULL    | [dist_logistic_range(0.0, 1.0)]                             |
+| dist_logistic_sample                       | scalar        | Generates random samples from the logistic distribution with specified parameters.                                                                                                                                              | NULL    | [dist_logistic_sample(0.0, 1.0)]                            |
 | dist_logistic_skewness                     | scalar        | Returns the skewness of the logistic distribution.                                                                                                                                                                              | NULL    | [dist_logistic_skewness(0.0, 1.0)]                          |
 | dist_logistic_support                      | scalar        | Returns the support of the logistic distribution.                                                                                                                                                                               | NULL    | [dist_logistic_support(0.0, 1.0)]                           |
 | dist_logistic_variance                     | scalar        | Returns the variance (σ²) of the logistic distribution.                                                                                                                                                                         | NULL    | [dist_logistic_variance(0.0, 1.0)]                          |
@@ -353,6 +369,7 @@ LOAD {{ page.extension.name }};
 | dist_pareto_quantile                       | scalar        | Computes the quantile function (inverse CDF) of the pareto distribution. Returns the value x such that P(X ≤ x) = p, where p is the cumulative probability.                                                                     | NULL    | [dist_pareto_quantile(3.0, 1.0, 0.95)]                      |
 | dist_pareto_quantile_complement            | scalar        | Computes the complementary quantile function of the pareto distribution. Returns the value x such that P(X > x) = p, useful for computing upper tail quantiles.                                                                 | NULL    | [dist_pareto_quantile_complement(3.0, 1.0, 0.05)]           |
 | dist_pareto_range                          | scalar        | Returns the range of the pareto distribution.                                                                                                                                                                                   | NULL    | [dist_pareto_range(3.0, 1.0)]                               |
+| dist_pareto_sample                         | scalar        | Generates random samples from the pareto distribution with specified parameters.                                                                                                                                                | NULL    | [dist_pareto_sample(3.0, 1.0)]                              |
 | dist_pareto_skewness                       | scalar        | Returns the skewness of the pareto distribution.                                                                                                                                                                                | NULL    | [dist_pareto_skewness(3.0, 1.0)]                            |
 | dist_pareto_stddev                         | scalar        | Returns the standard deviation (σ) of the pareto distribution.                                                                                                                                                                  | NULL    | [dist_pareto_stddev(3.0, 1.0)]                              |
 | dist_pareto_support                        | scalar        | Returns the support of the pareto distribution.                                                                                                                                                                                 | NULL    | [dist_pareto_support(3.0, 1.0)]                             |
@@ -394,6 +411,7 @@ LOAD {{ page.extension.name }};
 | dist_rayleigh_quantile                     | scalar        | Computes the quantile function (inverse CDF) of the rayleigh distribution. Returns the value x such that P(X ≤ x) = p, where p is the cumulative probability.                                                                   | NULL    | [dist_rayleigh_quantile(1.0, 0.95)]                         |
 | dist_rayleigh_quantile_complement          | scalar        | Computes the complementary quantile function of the rayleigh distribution. Returns the value x such that P(X > x) = p, useful for computing upper tail quantiles.                                                               | NULL    | [dist_rayleigh_quantile_complement(1.0, 0.05)]              |
 | dist_rayleigh_range                        | scalar        | Returns the range of the rayleigh distribution.                                                                                                                                                                                 | NULL    | [dist_rayleigh_range(1.0)]                                  |
+| dist_rayleigh_sample                       | scalar        | Generates random samples from the rayleigh distribution with specified parameters.                                                                                                                                              | NULL    | [dist_rayleigh_sample(1.0)]                                 |
 | dist_rayleigh_skewness                     | scalar        | Returns the skewness of the rayleigh distribution.                                                                                                                                                                              | NULL    | [dist_rayleigh_skewness(1.0)]                               |
 | dist_rayleigh_stddev                       | scalar        | Returns the standard deviation (σ) of the rayleigh distribution.                                                                                                                                                                | NULL    | [dist_rayleigh_stddev(1.0)]                                 |
 | dist_rayleigh_support                      | scalar        | Returns the support of the rayleigh distribution.                                                                                                                                                                               | NULL    | [dist_rayleigh_support(1.0)]                                |
@@ -481,39 +499,22 @@ LOAD {{ page.extension.name }};
 | dist_weibull_support                       | scalar        | Returns the support of the weibull distribution.                                                                                                                                                                                | NULL    | [dist_weibull_support(1.5, 1.0)]                            |
 | dist_weibull_variance                      | scalar        | Returns the variance (σ²) of the weibull distribution.                                                                                                                                                                          | NULL    | [dist_weibull_variance(1.5, 1.0)]                           |
 
+### Overloaded Functions
+
+<div class="extension_functions_table"></div>
+
+This extension does not add any function overloads.
+
+### Added Types
+
+<div class="extension_types_table"></div>
+
+This extension does not add any types.
+
 ### Added Settings
 
 <div class="extension_settings_table"></div>
 
-|                 name                 |                                         description                                          | input_type | scope  | aliases |
-|--------------------------------------|----------------------------------------------------------------------------------------------|------------|--------|---------|
-| auto_fallback_to_full_download       | Allows automatically falling back to full file downloads when possible.                      | BOOLEAN    | GLOBAL | []      |
-| ca_cert_file                         | Path to a custom certificate file for self-signed certificates.                              | VARCHAR    | GLOBAL | []      |
-| enable_curl_server_cert_verification | Enable server side certificate verification for CURL backend.                                | BOOLEAN    | GLOBAL | []      |
-| enable_global_s3_configuration       | Automatically fetch AWS credentials from environment variables.                              | BOOLEAN    | GLOBAL | []      |
-| enable_server_cert_verification      | Enable server side certificate verification.                                                 | BOOLEAN    | GLOBAL | []      |
-| force_download                       | Forces upfront download of file                                                              | BOOLEAN    | GLOBAL | []      |
-| hf_max_per_page                      | Debug option to limit number of items returned in list requests                              | UBIGINT    | GLOBAL | []      |
-| http_keep_alive                      | Keep alive connections. Setting this to false can help when running into connection failures | BOOLEAN    | GLOBAL | []      |
-| http_retries                         | HTTP retries on I/O error                                                                    | UBIGINT    | GLOBAL | []      |
-| http_retry_backoff                   | Backoff factor for exponentially increasing retry wait time                                  | FLOAT      | GLOBAL | []      |
-| http_retry_wait_ms                   | Time between retries                                                                         | UBIGINT    | GLOBAL | []      |
-| http_timeout                         | HTTP timeout read/write/connection/retry (in seconds)                                        | UBIGINT    | GLOBAL | []      |
-| httpfs_client_implementation         | Select which is the HTTPUtil implementation to be used                                       | VARCHAR    | GLOBAL | []      |
-| merge_http_secret_into_s3_request    | Merges http secret params into S3 requests                                                   | BOOLEAN    | GLOBAL | []      |
-| s3_access_key_id                     | S3 Access Key ID                                                                             | VARCHAR    | GLOBAL | []      |
-| s3_endpoint                          | S3 Endpoint                                                                                  | VARCHAR    | GLOBAL | []      |
-| s3_kms_key_id                        | S3 KMS Key ID                                                                                | VARCHAR    | GLOBAL | []      |
-| s3_region                            | S3 Region                                                                                    | VARCHAR    | GLOBAL | []      |
-| s3_requester_pays                    | S3 use requester pays mode                                                                   | BOOLEAN    | GLOBAL | []      |
-| s3_secret_access_key                 | S3 Access Key                                                                                | VARCHAR    | GLOBAL | []      |
-| s3_session_token                     | S3 Session Token                                                                             | VARCHAR    | GLOBAL | []      |
-| s3_uploader_max_filesize             | S3 Uploader max filesize (between 50GB and 5TB)                                              | VARCHAR    | GLOBAL | []      |
-| s3_uploader_max_parts_per_file       | S3 Uploader max parts per file (between 1 and 10000)                                         | UBIGINT    | GLOBAL | []      |
-| s3_uploader_thread_limit             | S3 Uploader global thread limit                                                              | UBIGINT    | GLOBAL | []      |
-| s3_url_compatibility_mode            | Disable Globs and Query Parameters on S3 URLs                                                | BOOLEAN    | GLOBAL | []      |
-| s3_url_style                         | S3 URL style                                                                                 | VARCHAR    | GLOBAL | []      |
-| s3_use_ssl                           | S3 use SSL                                                                                   | BOOLEAN    | GLOBAL | []      |
-| unsafe_disable_etag_checks           | Disable checks on ETag consistency                                                           | BOOLEAN    | GLOBAL | []      |
+This extension does not add any settings.
 
 

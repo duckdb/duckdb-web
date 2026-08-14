@@ -12,12 +12,12 @@ Our [GitHub repository](https://github.com/duckdb/duckdb) has just passed 25,000
 
 We would like to highlight two main events that have happened this year:
 
-* We [released DuckDB 1.0.0]({% post_url 2024-06-03-announcing-duckdb-100 %}). This version introduced a stable storage format which guarantees [backwards compatibility and limited forward compatibility]({% link docs/stable/internals/storage.md %}#compatibility).
+* We [released DuckDB 1.0.0]({% post_url 2024-06-03-announcing-duckdb-100 %}). This version introduced a stable storage format which guarantees [backwards compatibility and limited forward compatibility]({% link docs/current/internals/storage.md %}#compatibility).
 * We started the [DuckDB Community Extensions project]({% post_url 2024-07-05-community-extensions %}). Community extensions allow developers to contribute packages to DuckDB and users to easily install these extensions using the simple command `INSTALL xyz FROM community`.
 
 Besides the GitHub stars we have also observed a lot of growth in various metrics.
 
-* Each month, our website handles over 1.5 million unique visitors. In addition, we see over 300 TB in traffic from ca. 30 million extension downloads. Thanks again to Cloudflare for [sponsoring the project]({% link foundation/index.html %}#technical-sponsors) with free content delivery services!
+* Each month, our website handles over 1.5 million unique visitors. In addition, we see over 300 TB in traffic from ca. 30 million extension downloads. Thanks again to Cloudflare for [sponsoring the project](https://duckdb.foundation/#technical-sponsors) with free content delivery services!
 * In one year, we rose in the [DB Engines ranking](https://db-engines.com/en/ranking) from position 91 to 55 on the general board and from position 47 to 33 in the [relational board](https://db-engines.com/en/ranking/relational+dbms), which makes DuckDB the fastest growing relational system in the top-50.
 * We count [7.5M+ monthly downloads in PyPI](https://pypistats.org/packages/duckdb).
 * Maven Central downloads for the JDBC driver have also shot up, we now see over 500k+ downloads per month.

@@ -8,7 +8,7 @@ excerpt: |
 extension:
   name: gaggle
   description: A DuckDB extension for working with Kaggle datasets
-  version: 0.1.0-alpha.5
+  version: 0.1.0-alpha.6
   language: Rust & C++
   build: cmake
   license: MIT OR Apache-2.0
@@ -19,7 +19,7 @@ extension:
 
 repo:
   github: CogitatorTech/gaggle
-  ref: aaf8bd403ec71632ff2b297ce6a2e23a62b448b2
+  ref: 67450c4490b63c6054a73dc1989fddf248aaca23
 
 docs:
   hello_world: |
@@ -31,7 +31,7 @@ docs:
     -- 2. List files in the dataset
     SELECT * FROM gaggle_ls('habedi/flickr-8k-dataset-clean', true) LIMIT 5;
     
-    -- 3. Read a Parquet file FROM local cache using a prepared statement
+    -- 3. Read a Parquet file from local cache using a prepared statement
     PREPARE rp as SELECT * FROM read_parquet(?) LIMIT 10;
     EXECUTE rp(gaggle_file_path('habedi/flickr-8k-dataset-clean', 'flickr8k.parquet'));
     
@@ -50,10 +50,10 @@ docs:
     
     For more information, like API references and usage examples, visit the project's [GitHub repository](https://github.com/CogitatorTech/gaggle).
 
-extension_star_count: 15
-extension_star_count_pretty: 15
-extension_download_count: 324
-extension_download_count_pretty: 324
+extension_star_count: 17
+extension_star_count_pretty: 17
+extension_download_count: 769
+extension_download_count_pretty: 769
 image: '/images/community_extensions/social_preview/preview_community_extension_gaggle.png'
 layout: community_extension_doc
 ---
@@ -96,5 +96,23 @@ LOAD {{ page.extension.name }};
 | gaggle_file_path           | scalar        | Resolves a specific file's local path inside a downloaded dataset.                          | Will retrieve (and cache if not downloaded). Set GAGGLE_STRICT_ONDEMAND=1 to prevent fallback to full download. | [select gaggle_file_path('owner/dataset', 'file.parquet');]                 |
 | gaggle_ls                  | table         | Lists files in the dataset's local directory; non-recursive by default.                     | Set recursive=true to walk subdirs. size is in MB. path is relative 'owner/dataset/<path>'.                     | [select * from gaggle_ls('habedi/flickr-8k-dataset-clean') limit 5;]        |
 | gaggle_last_error          | scalar        | NULL                                                                                        | NULL                                                                                                            | NULL                                                                        |
+
+### Overloaded Functions
+
+<div class="extension_functions_table"></div>
+
+This extension does not add any function overloads.
+
+### Added Types
+
+<div class="extension_types_table"></div>
+
+This extension does not add any types.
+
+### Added Settings
+
+<div class="extension_settings_table"></div>
+
+This extension does not add any settings.
 
 

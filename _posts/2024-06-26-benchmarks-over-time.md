@@ -9,7 +9,7 @@ tags: ["benchmark"]
 ---
 
 <!-- <script src="https://cdn.plot.ly/plotly-latest.min.js"></script> -->
-<script src="/js/plotly-1.58.5.min.js"></script>
+<script src="/js/plotly-cartesian-3.0.1.min.js"></script>
 
 <div id="overall_results_by_time_header" style="width:100%;height:400px;"></div>
 <script>
@@ -18,7 +18,7 @@ tags: ["benchmark"]
         .then(parsed_json => {
             let overall_results_by_time_header = document.getElementById('overall_results_by_time_header');
             parsed_json.layout = {...parsed_json.layout, "title": "Benchmark results over time"};
-            Plotly.plot( overall_results_by_time_header, parsed_json.data, parsed_json.layout );
+            Plotly.newPlot( overall_results_by_time_header, parsed_json.data, parsed_json.layout );
             });
 </script>
 
@@ -51,7 +51,7 @@ There are some limitations when looking at the performance of a system over time
 If a feature is brand new, there is no prior performance to compare to!
 As a result, this post focuses on fundamental workloads rather than DuckDB's ever-increasing set of integrations with different lakehouse data formats, cloud services, and more.
 
-The code used to run the benchmark also avoids many of DuckDB's [Friendlier SQL]({% link docs/stable/sql/dialect/friendly_sql.md %}) additions, as those have also been added more recently.
+The code used to run the benchmark also avoids many of DuckDB's [Friendlier SQL]({% link docs/current/sql/dialect/friendly_sql.md %}) additions, as those have also been added more recently.
 (When writing these queries, it felt like going back in time!)
 
 ## Benchmark Design Summary
@@ -83,7 +83,7 @@ The latest DuckDB can complete one run of the full benchmark suite in under 35 s
         .then(parsed_json => {
             let overall_results_by_time = document.getElementById('overall_results_by_time');
             parsed_json.layout = {...parsed_json.layout, "title": "Benchmark results over time"};
-            Plotly.plot( overall_results_by_time, parsed_json.data, parsed_json.layout );
+            Plotly.newPlot( overall_results_by_time, parsed_json.data, parsed_json.layout );
             });
 </script>
 
@@ -101,7 +101,7 @@ Due to the variety of uses for window functions, and their relative algorithmic 
         .then(parsed_json => {
             let overall_results_by_time_relative = document.getElementById('overall_results_by_time_relative');
             parsed_json.layout = {...parsed_json.layout, "title": "Relative benchmark results over time"};
-            Plotly.plot( overall_results_by_time_relative, parsed_json.data, parsed_json.layout );
+            Plotly.newPlot( overall_results_by_time_relative, parsed_json.data, parsed_json.layout );
             });
 </script>
 
@@ -126,7 +126,7 @@ You may also notice that starting with version 0.9 in September 2023, the perfor
 What is happening here?
 First, don't forget to zoom in!
 Over the last year, DuckDB has still improved over 3×!
-More recently, the DuckDB Labs team focused on scalability by developing algorithms that support larger-than-memory calculations.
+More recently, the DuckLabs team focused on scalability by developing algorithms that support larger-than-memory calculations.
 We will see the fruits of those labors in the scale section later on!
 In addition, DuckDB focused exclusively on bug fixes in versions 0.10.1, 0.10.2, and 0.10.3 in preparation for an especially robust DuckDB 1.0.
 Now that those two major milestones (larger than memory calculations and DuckDB 1.0) have been accomplished, performance improvements will resume!
@@ -145,7 +145,7 @@ See [DuckDB's release calendar]({% link release_calendar.md %}) for the full ver
         .then(parsed_json => {
             let overall_results_by_version = document.getElementById('overall_results_by_version');
             parsed_json.layout = {...parsed_json.layout, "title": "Benchmark results by version"};
-            Plotly.plot( overall_results_by_version, parsed_json.data, parsed_json.layout );
+            Plotly.newPlot( overall_results_by_version, parsed_json.data, parsed_json.layout );
             });
 </script>
 
@@ -158,7 +158,7 @@ If you remember the version that you last tested, you can compare how much faste
         .then(parsed_json => {
             let overall_results_by_version_relative = document.getElementById('overall_results_by_version_relative');
             parsed_json.layout = {...parsed_json.layout, "title": "Relative benchmark results by version"};
-            Plotly.plot( overall_results_by_version_relative, parsed_json.data, parsed_json.layout );
+            Plotly.newPlot( overall_results_by_version_relative, parsed_json.data, parsed_json.layout );
             });
 </script>
 
@@ -172,7 +172,7 @@ If you remember the version that you last tested, you can compare how much faste
         .then(res => res.json())
         .then(parsed_json => {
             let perf_over_time_csv_reader_area = document.getElementById('perf_over_time_csv_reader_area');
-            Plotly.plot( perf_over_time_csv_reader_area, parsed_json.data, parsed_json.layout );
+            Plotly.newPlot( perf_over_time_csv_reader_area, parsed_json.data, parsed_json.layout );
             });
 </script>
 
@@ -188,7 +188,7 @@ DuckDB has **improved CSV reader performance by nearly 3×**, while adding the a
         .then(res => res.json())
         .then(parsed_json => {
             let perf_over_time_group_by_area = document.getElementById('perf_over_time_group_by_area');
-            Plotly.plot( perf_over_time_group_by_area, parsed_json.data, parsed_json.layout );
+            Plotly.newPlot( perf_over_time_group_by_area, parsed_json.data, parsed_json.layout );
             });
 </script>
 
@@ -216,7 +216,7 @@ You can see that this was achieved while continuing to improve performance for t
         .then(res => res.json())
         .then(parsed_json => {
             let perf_over_time_join_area = document.getElementById('perf_over_time_join_area');
-            Plotly.plot( perf_over_time_join_area, parsed_json.data, parsed_json.layout );
+            Plotly.newPlot( perf_over_time_join_area, parsed_json.data, parsed_json.layout );
             });
 </script>
 
@@ -237,7 +237,7 @@ This focus has also benefitted the smaller-than-memory case and has led to the i
         .then(res => res.json())
         .then(parsed_json => {
             let perf_over_time_window_area = document.getElementById('perf_over_time_window_area');
-            Plotly.plot( perf_over_time_window_area, parsed_json.data, parsed_json.layout );
+            Plotly.newPlot( perf_over_time_window_area, parsed_json.data, parsed_json.layout );
             });
 </script>
 
@@ -260,7 +260,7 @@ We leave benchmarking that feature for future work!
         .then(res => res.json())
         .then(parsed_json => {
             let perf_over_time_export_area = document.getElementById('perf_over_time_export_area');
-            Plotly.plot( perf_over_time_export_area, parsed_json.data, parsed_json.layout );
+            Plotly.newPlot( perf_over_time_export_area, parsed_json.data, parsed_json.layout );
             });
 </script>
 
@@ -289,7 +289,7 @@ This prevents substantial unnecessary processing for high-cardinality columns wh
         .then(res => res.json())
         .then(parsed_json => {
             let perf_over_time_export_arrow_pandas_parquet = document.getElementById('perf_over_time_export_arrow_pandas_parquet');
-            Plotly.plot( perf_over_time_export_arrow_pandas_parquet, parsed_json.data, parsed_json.layout );
+            Plotly.newPlot( perf_over_time_export_arrow_pandas_parquet, parsed_json.data, parsed_json.layout );
             });
 </script>
 
@@ -309,7 +309,7 @@ It is even competitive with Apache Arrow.
         .then(res => res.json())
         .then(parsed_json => {
             let perf_over_time_scan_other_formats_area = document.getElementById('perf_over_time_scan_other_formats_area');
-            Plotly.plot( perf_over_time_scan_other_formats_area, parsed_json.data, parsed_json.layout );
+            Plotly.newPlot( perf_over_time_scan_other_formats_area, parsed_json.data, parsed_json.layout );
             });
 </script>
 
@@ -329,7 +329,7 @@ DuckDB is a great fit for this type of work!
         .then(res => res.json())
         .then(parsed_json => {
             let perf_over_time_scan_other_formats_arrow_pandas_parquet = document.getElementById('perf_over_time_scan_other_formats_arrow_pandas_parquet');
-            Plotly.plot( perf_over_time_scan_other_formats_arrow_pandas_parquet, parsed_json.data, parsed_json.layout );
+            Plotly.newPlot( perf_over_time_scan_other_formats_arrow_pandas_parquet, parsed_json.data, parsed_json.layout );
             });
 </script>
 
@@ -350,7 +350,7 @@ Analyzing larger-than-memory data is a superpower for DuckDB, allowing it to be 
         .then(res => res.json())
         .then(parsed_json => {
             let perf_over_time_scale_by_time = document.getElementById('perf_over_time_scale_by_time');
-            Plotly.plot( perf_over_time_scale_by_time, parsed_json.data, parsed_json.layout );
+            Plotly.newPlot( perf_over_time_scale_by_time, parsed_json.data, parsed_json.layout );
             });
 </script>
 
@@ -524,7 +524,7 @@ CREATE TABLE windowing_results AS
 
 The various window functions that replace the placeholder are below and are labelled to match the result graphs.
 These were selected to showcase the variety of use cases for window functions, as well as the variety of algorithms required to support the full range of the syntax.
-The DuckDB documentation contains a [full railroad diagram of the available syntax]({% link docs/stable/sql/functions/window_functions.md %}#syntax).
+The DuckDB documentation contains a [full railroad diagram of the available syntax]({% link docs/current/sql/functions/window_functions.md %}#syntax).
 If there are common use cases for window functions that are not well-covered in this benchmark, please let us know!
 
 ```sql

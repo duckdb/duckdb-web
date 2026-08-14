@@ -8,6 +8,7 @@ tags: ["Talk"]
 length: "15 min"
 thirdparty: false
 pill: "FOSDEM 2020"
+excerpt: ""
 redirect_from:
 - /media/duckdb-an-embeddable-analytical-database
 ---
@@ -17,7 +18,6 @@ redirect_from:
 </div>
 
 |-------|-------|
-| **Date** | {{ page.date | date: "%Y-%m-%d" }} |
 | **Event** | [FOSDEM 2020](https://archive.fosdem.org/2020/) |
 | **Speaker** | [Hannes Mühleisen](https://hannes.muehleisen.org/) |
 | **YouTube** | [DuckDB – An Embeddable Analytical Database](https://www.youtube.com/watch?v=nPDomZQ8jI4) |

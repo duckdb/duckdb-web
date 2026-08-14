@@ -8,7 +8,7 @@ excerpt: |
 extension:
   name: lsh
   description: Extension for locality-sensitive hashing (LSH)
-  version: 0.2.2
+  version: 0.2.5
   language: Rust
   build: cargo
   license: MIT
@@ -20,7 +20,7 @@ extension:
 
 repo:
   github: princeton-ddss/lsh
-  ref: d9fcfc34fc6909f35d93d481b5885b8e4989402b
+  ref: 66c2eb19ab6bc6f410a5fe07a5c3975d4aa158d9
 
 docs:
   hello_world: |
@@ -40,10 +40,10 @@ docs:
   extended_description: |
     For more information regarding usage, see the [documentation](https://github.com/princeton-ddss/lsh).
 
-extension_star_count: 11
-extension_star_count_pretty: 11
-extension_download_count: 350
-extension_download_count_pretty: 350
+extension_star_count: 12
+extension_star_count_pretty: 12
+extension_download_count: 843
+extension_download_count_pretty: 843
 image: '/images/community_extensions/social_preview/preview_community_extension_lsh.png'
 layout: community_extension_doc
 ---
@@ -76,5 +76,23 @@ LOAD {{ page.extension.name }};
 | lsh_euclidean   | scalar        | Computes band hashes for each input point based on its Euclidean LSH signature                           | Produces list of 64-bit band hashes                  | NULL     |
 | lsh_euclidean32 | scalar        | Computes band hashes for each input point based on its Euclidean LSH signature                           | Reduces each band hash to 32 bits                    | NULL     |
 | lsh_jaccard     | scalar        | Computes Jaccard similarity for each input string pair                                                   | Accepts ngram argument, unlike core Jaccard function | NULL     |
+
+### Overloaded Functions
+
+<div class="extension_functions_table"></div>
+
+This extension does not add any function overloads.
+
+### Added Types
+
+<div class="extension_types_table"></div>
+
+This extension does not add any types.
+
+### Added Settings
+
+<div class="extension_settings_table"></div>
+
+This extension does not add any settings.
 
 

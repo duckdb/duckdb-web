@@ -18,7 +18,8 @@ extension:
 
 repo:
   github: midwork-finds-jobs/duckdb_http_request
-  ref: d4ad6fb9728b637996de4e23e0afcaf89b5140b4
+  andium: d4ad6fb9728b637996de4e23e0afcaf89b5140b4
+  ref: 1c0324d3749d7b2d82fbf35b289cd2ca4da62934
 
 docs:
   hello_world: |
@@ -66,10 +67,10 @@ docs:
 
     Uses DuckDB's built-in httplib for HTTP connections.
 
-extension_star_count: 0
-extension_star_count_pretty: 0
-extension_download_count: 387
-extension_download_count_pretty: 387
+extension_star_count: 2
+extension_star_count_pretty: 2
+extension_download_count: 893
+extension_download_count_pretty: 893
 image: '/images/community_extensions/social_preview/preview_community_extension_http_request.png'
 layout: community_extension_doc
 ---
@@ -129,7 +130,7 @@ LOAD {{ page.extension.name }};
 <div class="extension_types_table"></div>
 
 |  type_name   | type_size | logical_type | type_category | internal |
-|--------------|----------:|--------------|---------------|---------:|
+|--------------|----------:|--------------|---------------|----------|
 | HTTP_HEADERS | 16        | MAP          | COMPOSITE     | true     |
 
 ### Added Settings

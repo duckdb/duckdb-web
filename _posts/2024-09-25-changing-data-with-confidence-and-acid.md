@@ -29,7 +29,7 @@ CREATE TABLE customer (id INTEGER, name VARCHAR);
 CREATE TABLE orders (customer_id INTEGER, item VARCHAR);
 
 BEGIN TRANSACTION;
-INSERT INTO customer VALUES (42, 'DuckDB Labs');
+INSERT INTO customer VALUES (42, 'DuckLabs');
 INSERT INTO orders VALUES (42, 'stale bread');
 COMMIT;
 
@@ -76,12 +76,12 @@ We should also note that in DuckDB *schema changes are also transactional*. This
 
 ### Consistency
 
-**Consistency** means that all of [the constraints that are defined in the database]({% link docs/stable/sql/constraints.md %}) must always hold, both before and after a transaction. The constraints can never be violated. Examples of constraints are `PRIMARY KEY` or `FOREIGN KEY` constraints.
+**Consistency** means that all of [the constraints that are defined in the database]({% link docs/current/sql/constraints.md %}) must always hold, both before and after a transaction. The constraints can never be violated. Examples of constraints are `PRIMARY KEY` or `FOREIGN KEY` constraints.
 
 ```sql
 CREATE TABLE customer (id INTEGER, name VARCHAR, PRIMARY KEY (id));
 
-INSERT INTO customer VALUES (42, 'DuckDB Labs');
+INSERT INTO customer VALUES (42, 'DuckLabs');
 INSERT INTO customer VALUES (42, 'Wilbur the Duck');
 ```
 
@@ -100,7 +100,7 @@ Having these kinds of constraints in place is a great way to make sure data *rem
 
 To avoid this problem, transactions are typically executed *interleaved*. However, as those transactions change data, one must ensure that each transaction is logically *isolated* – it only ever sees a consistent state of the database and can – for example – never read data from a transaction that has not yet committed.
 
-DuckDB does not have connections in the typical sense – as it is not a client/server database that allows separate applications to connect to it. However, DuckDB has [full multi-client support]({% link docs/stable/connect/concurrency.md %}) within a single application. The user can create multiple clients that all connect to the same DuckDB instance. The transactions can be run concurrently and they are isolated using [Snapshot Isolation](https://jepsen.io/consistency/models/snapshot-isolation).
+DuckDB does not have connections in the typical sense – as it is not a client/server database that allows separate applications to connect to it. However, DuckDB has [full multi-client support]({% link docs/current/connect/concurrency.md %}) within a single application. The user can create multiple clients that all connect to the same DuckDB instance. The transactions can be run concurrently and they are isolated using [Snapshot Isolation](https://jepsen.io/consistency/models/snapshot-isolation).
 
 The way that multiple connections are created differs per client. Below is an example where we showcase the transactionality of the system using the Python client.
 
@@ -110,7 +110,7 @@ import duckdb
 con1 = duckdb.connect(":memory:mydb")
 con1.sql("CREATE TABLE customer (id INTEGER, name VARCHAR)")
 
-con1.sql("INSERT INTO customer VALUES (42, 'DuckDB Labs')")
+con1.sql("INSERT INTO customer VALUES (42, 'DuckLabs')")
 
 con1.begin()
 con1.sql("INSERT INTO customer VALUES (43, 'Wilbur the Duck')")
@@ -124,7 +124,7 @@ con2.sql("SELECT name FROM customer").show()
 # │    name     │
 # │   varchar   │
 # ├─────────────┤
-# │ DuckDB Labs │
+# │ DuckLabs │
 # └─────────────┘
 
 # commit from the first connection
@@ -137,7 +137,7 @@ con2.sql("SELECT name FROM customer").show()
 # │      name       │
 # │     varchar     │
 # ├─────────────────┤
-# │ DuckDB Labs     │
+# │ DuckLabs     │
 # │ Wilbur the Duck │
 # └─────────────────┘
 ```
@@ -157,7 +157,7 @@ import signal
 
 con = duckdb.connect("mydb.duckdb")
 con.sql("CREATE TABLE customer (id INTEGER, name VARCHAR)")
-con.sql("INSERT INTO customer VALUES (42, 'DuckDB Labs')")
+con.sql("INSERT INTO customer VALUES (42, 'DuckLabs')")
 
 # begin a transaction
 con.begin()
@@ -181,17 +181,17 @@ con.sql("SELECT name FROM customer").show()
 │    name     │
 │   varchar   │
 ├─────────────┤
-│ DuckDB Labs │
+│ DuckLabs │
 └─────────────┘
 ```
 
-In this example, we first create the customer table in the database file `mydb.duckdb`. We then insert a single row with DuckDB Labs as a first transaction. Then, we begin but *do not commit* a second transaction that adds the `Wilbur the Duck` entry. If we then kill the process and with it the database, we can see that upon restart only the `DuckDB Labs` entry has survived. This is because the second transaction was not committed and hence not subject to durability. Of course, this gets more complicated when non-clean exits such as operating system crashes have to be considered. DuckDB also guarantees durability in those circumstances, some more on this below.
+In this example, we first create the customer table in the database file `mydb.duckdb`. We then insert a single row with DuckLabs as a first transaction. Then, we begin but *do not commit* a second transaction that adds the `Wilbur the Duck` entry. If we then kill the process and with it the database, we can see that upon restart only the `DuckLabs` entry has survived. This is because the second transaction was not committed and hence not subject to durability. Of course, this gets more complicated when non-clean exits such as operating system crashes have to be considered. DuckDB also guarantees durability in those circumstances, some more on this below.
 
 ## Why ACID in OLAP?
 
 There are two main classes of data management systems, transactional systems (OLTP) and analytical systems (OLAP). As the name implies, transactional systems are far more concerned with guaranteeing the ACID properties than analytical ones. Systems like the venerable PostgreSQL deservedly pride themselves on doing the “right thing” with regard to providing transactional guarantees by default. Even NoSQL transactional systems such as MongoDB that swore off guaranteeing the ACID principles “for performance” early on had to eventually [“roll back” to offering ACID guarantees](https://www.mongodb.com/resources/basics/databases/acid-transactions) with [one or two hurdles along the way](https://jepsen.io/analyses/mongodb-4.2.6).
 
-Analytical systems such as DuckDB – in principle – have less of an imperative to provide strong transactional guarantees. They are often not the so-called “system of record”, which is the data management system that is considered the source truth. In fact, DuckDB offers various connectors to load data from systems of record, like the [PostgreSQL scanner]({% link docs/stable/core_extensions/postgres.md %}). If an OLAP database would become corrupted, it is often possible to recover from that source of truth. Of course, that first requires that users notice that something has gone wrong, which is not always simple to detect. For example, a common mistake is ingesting data from the same CSV file twice into a database because the first attempt went wrong at some point. This can lead to duplicate rows causing incorrect aggregate results. ACID prevents these kinds of problems. ACID properties enable  useful functionality in OLAP systems. For example:
+Analytical systems such as DuckDB – in principle – have less of an imperative to provide strong transactional guarantees. They are often not the so-called “system of record”, which is the data management system that is considered the source truth. In fact, DuckDB offers various connectors to load data from systems of record, like the [PostgreSQL scanner]({% link docs/current/core_extensions/postgres/overview.md %}). If an OLAP database would become corrupted, it is often possible to recover from that source of truth. Of course, that first requires that users notice that something has gone wrong, which is not always simple to detect. For example, a common mistake is ingesting data from the same CSV file twice into a database because the first attempt went wrong at some point. This can lead to duplicate rows causing incorrect aggregate results. ACID prevents these kinds of problems. ACID properties enable  useful functionality in OLAP systems. For example:
 
 **Concurrent Ingestion and Reporting.** As change is continuous, we often have data ingestion streams adding new data to a database system. In analytical systems, it is common to have a single connection append new data to a database, while other connections read from the database in order to e.g., generate graphs and reports. If these connections are isolated, then the generated graphs and aggregates will always be executed over a complete and consistent snapshot of the database, ensuring that the generated graphs and aggregates are correct.
 
@@ -263,7 +263,7 @@ For *consistency*, a number of threads run the ACID transaction in parallel 100 
 
 To test *isolation*, one thread will run the transaction, but not commit or rollback yet. Another connection will make sure the changes are not visible to it. Another set of tests will have two threads running transactions on the same order, and ensure that one of them is aborted by the system due to the conflict.
 
-Finally, to test *durability*, a number of threads run the ACID transaction and log the results. They are allowed to complete at least 100 transactions each. Then, a failure is caused, in our case, we simply killed the process (using `SIGKILL`). Then, the database system is allowed to recover the committed changes from the [write-ahead log](https://en.wikipedia.org/wiki/Write-ahead_logging). The log is checked to ensure that there are no log entries that are not reflected in the `history` table and there are no history entries that don't have log entries, minus very few that might have been lost in flight (i.e., persisted by the database but not yet logged by the benchmark driver). Finally, the consistency is checked again.
+Finally, to test *durability*, a number of threads run the ACID transaction and log the results. They are allowed to complete at least 100 transactions each. Then, a failure is caused, in our case, we simply killed the process (using `SIGKILL`). Then, the database system is allowed to recover the committed changes from the [write-ahead log (WAL)](https://en.wikipedia.org/wiki/Write-ahead_logging). The log is checked to ensure that there are no log entries that are not reflected in the `history` table and there are no history entries that don't have log entries, minus very few that might have been lost in flight (i.e., persisted by the database but not yet logged by the benchmark driver). Finally, the consistency is checked again.
 
 **We're happy to report that DuckDB passed all tests.**
 

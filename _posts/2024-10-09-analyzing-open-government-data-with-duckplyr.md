@@ -279,4 +279,4 @@ This use case was also presented as part of [my keynote at this year's posit::co
 
 <iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/GELhdezYmP0?si=suO9fC652ooAZKOq" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 
-Finally, we should note that duckplyr is still being developed. We have taking great care in not breaking anything and will fall back on the existing dplyr implementation if anything cannot be run in DuckDB (yet). But we would love to [hear from you](https://github.com/tidyverse/duckplyr/issues) if anything does not work as expected.
+Finally, we should note that duckplyr is still being developed. We have taken great care in not breaking anything and will fall back on the existing dplyr implementation if anything cannot be run in DuckDB (yet). But we would love to [hear from you](https://github.com/tidyverse/duckplyr/issues) if anything does not work as expected.

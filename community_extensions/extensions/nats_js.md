@@ -8,7 +8,7 @@ excerpt: |
 extension:
   name: nats_js
   description: Query NATS JetStream message streams directly with SQL
-  version: 0.1.1
+  version: 0.2.1
   language: C++
   build: cmake
   license: MIT
@@ -18,7 +18,7 @@ extension:
 
 repo:
   github: brannn/duckdb-nats-jetstream
-  ref: v0.1.1
+  ref: v0.2.1
 
 docs:
   hello_world: |
@@ -56,10 +56,10 @@ docs:
     GitHub: https://github.com/brannn/duckdb-nats-jetstream
 
 
-extension_star_count: 16
-extension_star_count_pretty: 16
-extension_download_count: 357
-extension_download_count_pretty: 357
+extension_star_count: 20
+extension_star_count_pretty: 20
+extension_download_count: 777
+extension_download_count_pretty: 777
 image: '/images/community_extensions/social_preview/preview_community_extension_nats_js.png'
 layout: community_extension_doc
 ---
@@ -88,5 +88,23 @@ LOAD {{ page.extension.name }};
 | function_name | function_type | description | comment | examples |
 |---------------|---------------|-------------|---------|----------|
 | nats_scan     | table         | NULL        | NULL    |          |
+
+### Overloaded Functions
+
+<div class="extension_functions_table"></div>
+
+This extension does not add any function overloads.
+
+### Added Types
+
+<div class="extension_types_table"></div>
+
+This extension does not add any types.
+
+### Added Settings
+
+<div class="extension_settings_table"></div>
+
+This extension does not add any settings.
 
 

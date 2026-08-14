@@ -8,7 +8,7 @@ excerpt: |
 extension:
   name: fit
   description: Read Garmin .fit files using DuckDB - GPS tracks, heart rate, power metrics, and fitness device data
-  version: 1.0.0
+  version: 1.0.1
   language: C++
   build: cmake
   license: MIT
@@ -17,7 +17,7 @@ extension:
 
 repo:
   github: antoriche/duckdb-fit-extension
-  ref: 157a5762bba68e84e9affa4af17af45ef15f4be3
+  ref: d6f8a4660b3dec837ccc9b369b7a7f5a2f85bbb1
 
 docs:
   hello_world:  |
@@ -38,10 +38,10 @@ docs:
     - `fit_events(filename)` - Activity events and markers
     - `fit_users(filename)` - User profile information
 
-extension_star_count: 1
-extension_star_count_pretty: 1
-extension_download_count: 570
-extension_download_count_pretty: 570
+extension_star_count: 3
+extension_star_count_pretty: 3
+extension_download_count: 711
+extension_download_count_pretty: 711
 image: '/images/community_extensions/social_preview/preview_community_extension_fit.png'
 layout: community_extension_doc
 ---
@@ -78,5 +78,23 @@ LOAD {{ page.extension.name }};
 | fit_records         | table         | NULL        | NULL    |          |
 | fit_sessions        | table         | NULL        | NULL    |          |
 | fit_users           | table         | NULL        | NULL    |          |
+
+### Overloaded Functions
+
+<div class="extension_functions_table"></div>
+
+This extension does not add any function overloads.
+
+### Added Types
+
+<div class="extension_types_table"></div>
+
+This extension does not add any types.
+
+### Added Settings
+
+<div class="extension_settings_table"></div>
+
+This extension does not add any settings.
 
 

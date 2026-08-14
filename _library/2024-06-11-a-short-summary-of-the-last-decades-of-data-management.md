@@ -18,8 +18,7 @@ redirect_from:
 </div>
 
 |-------|-------|
-| **Date** | {{ page.date | date: "%Y-%m-%d" }} |
 | **Event** | [GOTO Amsterdam 2024](https://gotoams.nl/2024/) |
-| **Speaker** | [Hannes Mühleisen (DuckDB Labs)](https://hannes.muehleisen.org/) |
+| **Speaker** | [Hannes Mühleisen (DuckLabs)](https://hannes.muehleisen.org/) |
 | **Slide deck** | [Download](https://blobs.duckdb.org/slides/goto-amsterdam-2024-hannes-muehleisen-short-history-keynote.pdf) |
 | **YouTube** | [A Short Summary of the Last Decades of Data Management](https://www.youtube.com/watch?v=-wCzn9gKoUk) |

@@ -2,6 +2,7 @@
 layout: default
 title: Frequently Asked Questions
 body_class: faq
+max_page_width: medium
 toc: false
 ---
 
@@ -23,7 +24,7 @@ toc: false
 
 <div class="answer" markdown="1">
 
-DuckDB was created by [Dr. Mark Raasveldt](https://mytherin.github.io) & [Dr. Hannes Mühleisen](https://hannes.muehleisen.org) at the [Centrum Wiskunde & Informatica (CWI)](https://www.cwi.nl) in Amsterdam, the Netherlands. Mark and Hannes have set up the [DuckDB Foundation](https://duckdb.org/foundation/) that collects donations and funds development and maintenance of DuckDB. Mark and Hannes are also co-founders of [DuckDB Labs](https://www.duckdblabs.com), which provides commercial services around DuckDB, and employs several core contributors of DuckDB.
+DuckDB was created by [Dr. Mark Raasveldt](https://mytherin.github.io) & [Dr. Hannes Mühleisen](https://hannes.muehleisen.org) at the [Centrum Wiskunde & Informatica (CWI)](https://www.cwi.nl) in Amsterdam, the Netherlands. Mark and Hannes have set up the [DuckDB Foundation](https://duckdb.org/foundation/) that collects donations and funds development and maintenance of DuckDB. Mark and Hannes are also co-founders of [DuckLabs](https://www.ducklabs.com), which provides commercial services around DuckDB, and employs several core contributors of DuckDB.
 
 </div>
 
@@ -54,12 +55,13 @@ Ducks are amazing animals. They can fly, walk and swim. They can also live off p
 DuckDB is fully open-source under the MIT license and its development takes place [on GitHub in the `duckdb/duckdb` repository](https://github.com/duckdb/duckdb).
 All components of DuckDB are available in the free version under this license: there is no “enterprise version” of DuckDB.
 
-Most of the intellectual property of DuckDB has been purposefully moved to a non-profit entity to disconnect the licensing of the project from the commercial company, DuckDB Labs.
+Most of the intellectual property of DuckDB has been purposefully moved to a non-profit entity to disconnect the licensing of the project from the commercial company, DuckLabs.
 The DuckDB Foundation's [statutes]({% link pdf/deed-of-incorporation-stichting-duckdb-foundation.pdf %}) also ensure DuckDB remains open-source under the MIT license in perpetuity.
 The [CWI (Centrum Wiskunde & Informatica)](https://cwi.nl/) has a seat on the board of the DuckDB Foundation
 and donations to the DuckDB Foundation directly fund DuckDB development.
 
-For more information on the organizations around DuckDB, see the next question–answer pair.
+For more information on the funding of DuckDB, see the [FOSDEM 2026 talk]({% link _library/2026-01-31-funding-the-foss-ecosystem.md %}) by Gábor Szárnyas.
+For the organizations around DuckDB, see the next question–answer pair.
 
 </div>
 
@@ -69,21 +71,21 @@ For more information on the organizations around DuckDB, see the next question�
 
 <div class="qa-wrap" markdown="1">
 
-### How are DuckDB, the DuckDB Foundation, DuckDB Labs, and MotherDuck related?
+### How are DuckDB, the DuckDB Foundation, DuckLabs, and MotherDuck related?
 
 <div class="answer" markdown="1">
 
 [**DuckDB**](https://duckdb.org/) is the name of the MIT licensed open-source project.
 
-The [**DuckDB Foundation**]({% link foundation/index.html %}) is a non-profit organization that holds the intellectual property of the DuckDB project.
+The [**DuckDB Foundation**](https://duckdb.foundation/) is a non-profit organization that holds the intellectual property of the DuckDB project.
 The DuckDB Foundation's [statutes]({% link pdf/deed-of-incorporation-stichting-duckdb-foundation.pdf %}) ensure DuckDB remains open-source under the MIT license in perpetuity.
 
-[**DuckDB Labs**](https://duckdblabs.com/) is a company based in Amsterdam that provides commercial support services for DuckDB.
-DuckDB Labs employs the core contributors of the DuckDB project.
+[**DuckLabs**](https://ducklabs.com/) is a company based in Amsterdam that provides commercial support services for DuckDB.
+DuckLabs employs the core contributors of the DuckDB project.
 
 [**MotherDuck**](https://motherduck.com/) is a venture-backed company creating a hybrid cloud/local platform using DuckDB.
-MotherDuck contracts with DuckDB Labs for development services, and DuckDB Labs owns a portion of MotherDuck.
-[See the partnership announcement for details](https://duckdblabs.com/news/2022/11/15/motherduck-partnership).
+MotherDuck contracts with DuckLabs for development services, and DuckLabs owns a portion of MotherDuck.
+[See the partnership announcement for details](https://ducklabs.com/news/2022/11/15/motherduck-partnership).
 To learn more about MotherDuck, see the [CIDR 2024 paper on MotherDuck](https://www.cidrdb.org/cidr2024/papers/p46-atwal.pdf) and the [MotherDuck documentation](https://motherduck.com/docs).
 
 </div>
@@ -126,17 +128,19 @@ Please consult the [trademark guidelines for DuckDB™]({% link trademark_guidel
 
 <div class="answer" markdown="1">
 
-The following projects are officially affiliated with DuckDB:
+The following projects and events are officially affiliated with DuckDB:
 
 * the [DuckDB project](https://github.com/duckdb/duckdb)
-* all primary [client libraries]({% link docs/stable/clients/overview.md %})
-* all [core DuckDB extensions]({% link docs/stable/core_extensions/overview.md %})
+* all [primary client libraries]({% link install/index.html %})
+* all [core DuckDB extensions]({% link docs/current/core_extensions/overview.md %})
 * the [DuckDB UI](https://github.com/duckdb/duckdb-ui)
-* [MotherDuck](https://motherduck.com)
-* [`dbt-duckdb`](https://github.com/duckdb/dbt-duckdb)
-* [`pg_duckdb`](https://github.com/duckdb/pg_duckdb)
+* [MotherDuck](https://motherduck.com), a cloud data warehouse built on DuckDB, developed by the [MotherDuck Corporation](https://motherduck.com/terms-of-service/)
+* [`dbt-duckdb`](https://github.com/duckdb/dbt-duckdb), a dbt connector for DuckDB
+* [`pg_duckdb`](https://github.com/duckdb/pg_duckdb), a PostgreSQL extension for DuckDB
+* [DuckLake](https://ducklake.select), an open lakehouse format
+* [DuckCon]({% link events/index.html %}), our technical conference series
 
-Other projects are likely _not affiliated_ with the DuckDB project. Please check their websites, READMEs and licenses for more details.
+Other projects and events are likely _not affiliated_ with DuckDB. Please check their websites, descriptions and licenses for more details.
 
 </div>
 
@@ -167,14 +171,30 @@ Of course, the alternatives are also widely understood and you are welcome to us
 
 <div class="qa-wrap" markdown="1">
 
+### Is DuckDB an in-memory database?
+
+<div class="answer" markdown="1">
+
+It is a common misconception that DuckDB is an in-memory database.
+While DuckDB _can_ work in-memory, it is **not an in-memory database**.
+DuckDB can make use of available memory for caching, it also fully supports disk-based persistence and [offloading larger-than-memory operations]({% link docs/current/guides/performance/how_to_tune_workloads.md %}#larger-than-memory-workloads-out-of-core-processing) to disk.
+
+</div>
+
+</div>
+
+<!-- ----- ----- ----- ----- ----- ----- Q&A entry ----- ----- ----- ----- ----- ----- -->
+
+<div class="qa-wrap" markdown="1">
+
 ### Can DuckDB save data to disk?
 
 <div class="answer" markdown="1">
 
-DuckDB supports [persistent storage]({% link docs/stable/connect/overview.md %}#persistent-database) and stores the database as a single file, which includes all tables, views, indexes, macros, etc. present in the database.
-DuckDB's [storage format]({% link docs/stable/internals/storage.md %}) uses a compressed columnar representation, which is compact but allows for efficient bulk updates.
-DuckDB can also run in [in-memory mode]({% link docs/stable/connect/overview.md %}#in-memory-database), where no data is persisted to disk.
-DuckDB can also save data in [DuckLake format](http://ducklake.select/) through the [`ducklake` extension]({% link docs/stable/core_extensions/ducklake.md %}).
+DuckDB supports [persistent storage]({% link docs/current/connect/overview.md %}#persistent-database) and stores the database as a single file, which includes all tables, views, indexes, macros, etc. present in the database.
+DuckDB's [storage format]({% link docs/current/internals/storage.md %}) uses a compressed columnar representation, which is compact but allows for efficient bulk updates.
+DuckDB can also run in [in-memory mode]({% link docs/current/connect/overview.md %}#in-memory-database), where no data is persisted to disk.
+DuckDB can also save data in [DuckLake format](http://ducklake.select/) through the [`ducklake` extension]({% link docs/current/core_extensions/ducklake.md %}).
 
 </div>
 
@@ -188,32 +208,16 @@ DuckDB can also save data in [DuckLake format](http://ducklake.select/) through 
 
 <div class="answer" markdown="1">
 
-The type of storage used to run DuckDB has a [significant performance impact]({% link docs/stable/guides/performance/environment.md %}#disk).
+The type of storage used to run DuckDB has a [significant performance impact]({% link docs/current/guides/performance/environment.md %}#disk).
 In general, using SSDs (SATA or NVMe SSDs) leads to superior performance compared to HDDs.
 
-The location of the storage varies greatly depending the workload:
+The location of the storage varies greatly depending on the workload:
 
-* _For read-only workloads,_ the DuckDB database can be stored on local disks and remote endpoints such as [HTTPS]({% link docs/stable/core_extensions/httpfs/https.md %}) and cloud object storage such as [AWS S3]({% link docs/stable/core_extensions/httpfs/s3api.md %}) and similar providers.
+* _For read-only workloads,_ the DuckDB database can be stored on local disks and remote endpoints such as [HTTPS]({% link docs/current/core_extensions/httpfs/https.md %}) and cloud object storage such as [AWS S3]({% link docs/current/core_extensions/httpfs/s3api.md %}) and similar providers.
 * _For read-write workloads,_ storing the database on instance-attached storage yields the best performance.
 Network-attached cloud storage such as [AWS EBS](https://aws.amazon.com/ebs/) also works and its performance can be fine-tuned with the guaranteed IOPS settings.
 Based on our experience, we **strongly advise against running DuckDB – or any other database management system – for read-write workloads on [network-attached storage (NAS)](https://en.wikipedia.org/wiki/Network-attached_storage).**
 These setups are often slow and result in spurious failures that are difficult to troubleshoot.
-
-</div>
-
-</div>
-
-<!-- ----- ----- ----- ----- ----- ----- Q&A entry ----- ----- ----- ----- ----- ----- -->
-
-<div class="qa-wrap" markdown="1">
-
-### Is DuckDB an in-memory database?
-
-<div class="answer" markdown="1">
-
-It is a common misconception that DuckDB is an in-memory database.
-While DuckDB _can_ work in-memory, it is **not an in-memory database**.
-DuckDB can make use of available memory for caching, it also fully supports disk-based persistence and [offloading larger-than-memory operations]({% link docs/stable/guides/performance/how_to_tune_workloads.md %}#larger-than-memory-workloads-out-of-core-processing) to disk.
 
 </div>
 
@@ -229,7 +233,7 @@ DuckDB can make use of available memory for caching, it also fully supports disk
 
 DuckDB does not use the [Apache Arrow format](https://arrow.apache.org/) internally.
 However, DuckDB supports reading from and writing to Arrow using the [`arrow` community extension]({% link community_extensions/extensions/arrow.md %}).
-It can also run SQL queries directly on Arrow using [`pyarrow`]({% link docs/stable/guides/python/sql_on_arrow.md %}).
+It can also run SQL queries directly on Arrow using [`pyarrow`]({% link docs/current/guides/python/sql_on_arrow.md %}).
 
 </div>
 
@@ -244,7 +248,7 @@ It can also run SQL queries directly on Arrow using [`pyarrow`]({% link docs/sta
 <div class="answer" markdown="1">
 
 Since version 0.10.0 (released in February 2024), DuckDB is backwards-compatible when reading database files, i.e., newer versions of DuckDB are always able to read database files created with an older version of DuckDB.
-DuckDB also provides partial forwards-compatibility on a best-effort basis. See the [storage page]({% link docs/stable/internals/storage.md %}) for more details.
+DuckDB also provides partial forwards-compatibility on a best-effort basis. See the [storage page]({% link docs/current/internals/storage.md %}) for more details.
 Compatibility is also guaranteed between different DuckDB clients (e.g., Python and R): a database file created with one client can be read with other clients.
 
 </div>
@@ -258,10 +262,13 @@ Compatibility is also guaranteed between different DuckDB clients (e.g., Python 
 ### How does DuckDB handle concurrency? Can multiple processes write to DuckDB?
 
 <div class="answer" markdown="1">
-See the documentation on [handling concurrency]({% link docs/stable/connect/concurrency.md %}#handling-concurrency)
-and the section on [“Writing to DuckDB from Multiple Processes”]({% link docs/stable/connect/concurrency.md %}#writing-to-duckdb-from-multiple-processes).
+See the documentation on [handling concurrency]({% link docs/current/connect/concurrency.md %}#handling-concurrency)
+and the section on [“Writing to DuckDB from Multiple Processes”]({% link docs/current/connect/concurrency.md %}#writing-to-duckdb-from-multiple-processes).
 
-To work on the same data set with multiple DuckDB clients, consider using the [DuckLake format](http://ducklake.select/) through the [`ducklake` extension]({% link docs/stable/core_extensions/ducklake.md %}).
+To work on the same data set with multiple DuckDB clients (“multi-player experience”), there are now two options:
+
+1. The [DuckLake format](http://ducklake.select/) through the [`ducklake` extension]({% link docs/current/core_extensions/ducklake.md %}) with PostgreSQL as the catatalog database. This is a [production-ready solution](https://ducklake.select/2026/04/13/ducklake-10/).
+2. The [Quack remote protocol]({% link docs/current/quack/overview.md %}), which turns DuckDB into a client-server database. Quack is in beta stage as of DuckDB v1.5.2, and is expected to become mature by [DuckDB v2.0 in fall 2026]({% link release_calendar.md %}).
 </div>
 
 </div>
@@ -273,7 +280,7 @@ To work on the same data set with multiple DuckDB clients, consider using the [D
 ### Is there an official DuckDB Docker image available?
 
 <div class="answer" markdown="1">
-You can run the DuckDB command line client using the official [DuckDB Docker image]({% link docs/stable/operations_manual/duckdb_docker.md %}).
+You can run the DuckDB command line client using the official [DuckDB Docker image]({% link docs/current/operations_manual/duckdb_docker.md %}).
 
 Please note that in most cases you do not need a container to run DuckDB: you can simply deploy it [in-process]({% link why_duckdb.md %}#simple) within your client application or as a standalone command-line binary.
 </div>
@@ -306,12 +313,12 @@ If you are unsure about the DuckDB version used in a process, run the `PRAGMA ve
 
 <div class="answer" markdown="1">
 
-DuckDB has an the official [documentation]({% link docs/stable/index.md %}), [blog]({% link news/index.html %}) and [library]({% link library/index.html %}).
-At the same time, there are a few third-party resources which can help you learn more about DuckDB:
+DuckDB has the official [documentation]({% link docs/current/index.md %}), [blog]({% link news/index.html %}) and [library]({% link library/index.html %}).
+There are also few third-party resources which can help you learn more about DuckDB:
 
 * To discover projects using DuckDB, we recommend visiting the [`awesome-duckdb` repository](https://github.com/davidgasquez/awesome-duckdb).
 * There is a number of [DuckDB books](https://www.goodreads.com/search?utf8=%E2%9C%93&q=duckdb&search_type=books) available.
-* The [tldr pages](https://tldr.sh/) initiative has a [DuckDB entry](https://tldr.inbrowser.app/pages/common/duckdb).
+* The [tldr pages](https://tldr.sh/) have a [DuckDB entry](https://tldr.inbrowser.app/pages/common/duckdb).
 
 </div>
 
@@ -349,8 +356,7 @@ DuckDB is a single-node database system, hence it makes use of _vertical scalabi
 i.e., making use of more resources (CPU, memory, and disk) to support larger datasets.
 DuckDB has been tested on machines with 100+ CPU cores and terabytes of memory.
 
-DuckDB's native database format also scales for multiple terabytes of data but this needs some planning – see the [“Working with Huge Databases” page]({% link docs/stable/guides/performance/working_with_huge_databases.md %}).
-
+DuckDB's native database format also scales for multiple terabytes of data but this needs some planning – see the [“Working with Huge Databases” page]({% link docs/current/guides/performance/working_with_huge_databases.md %}).
 For working with large-scale datasets and/or collaborating on the same dataset, consider using the [DuckLake](https://ducklake.select/) lakehouse format.
 
 </div>
@@ -367,10 +373,10 @@ For working with large-scale datasets and/or collaborating on the same dataset, 
 
 We welcome experiments comparing DuckDB's performance to other systems.
 To ensure fair comparison, we have a few recommendations.
-First, try to use the [preview release]({% link docs/preview/index.md %}), which often has significant performance improvements compared to the last stable release.
+First, try to use the [preview release]({% link docs/current/index.md %}), which often has significant performance improvements compared to the last stable release.
 Second, consider consulting our DBTest 2018 paper [_Fair Benchmarking Considered Difficult: Common Pitfalls In Database Performance Testing_](https://hannes.muehleisen.org/publications/DBTEST2018-performance-testing.pdf) for guidelines on how to avoid common issues in benchmarks.
-Third, study the DuckDB [Performance Guide]({% link docs/stable/guides/performance/overview.md %}), which has best practices for ensuring optimal performance.
-Finally, please report the DuckDB version (for stable version, the version number, for nightly builds, the commit hash).
+Third, study the DuckDB [Performance Guide]({% link docs/current/guides/performance/overview.md %}), which has best practices for ensuring optimal performance.
+Finally, please report the DuckDB version (for the stable version, the version number, for nightly builds, the commit hash).
 
 </div>
 
@@ -394,10 +400,10 @@ DuckDB was designed with both data science and data engineering workloads in min
 Therefore, you can use DuckDB's SQL syntax to be highly flexible, or very precise, depending on your needs.
 
 For data science users, who often run queries in an interactive fashion, DuckDB offers several mechanisms for quickly exploring data sets.
-For example, CSV files can be loaded by [auto-inferring their schema]({% link docs/stable/data/csv/auto_detection.md %}) using `CREATE TABLE tbl AS FROM 'input.csv'`.
-Moreover, there numerous SQL shorthands known as [“friendly SQL”]({% link docs/stable/sql/dialect/friendly_sql.md %}) for more concise expressions, e.g., the [`GROUP BY ALL` clause]({% link docs/stable/sql/query_syntax/groupby.md %}#group-by-all).
+For example, CSV files can be loaded by [auto-inferring their schema]({% link docs/current/data/csv/auto_detection.md %}) using `CREATE TABLE tbl AS FROM 'input.csv'`.
+Moreover, there numerous SQL shorthands known as [“friendly SQL”]({% link docs/current/sql/dialect/friendly_sql.md %}) for more concise expressions, e.g., the [`GROUP BY ALL` clause]({% link docs/current/sql/query_syntax/groupby.md %}#group-by-all).
 
-For data engineering use cases, DuckDB allows full control over the loading process, so it is possible to define the precise schema using a `CREATE TABLE tbl ⟨schema⟩`{:.language-sql .highlight} statement and populate it using a [`COPY` statement]({% link docs/stable/sql/statements/copy.md %}) that specifies the CSV's dialect (delimiter, quotes, etc.).
+For data engineering use cases, DuckDB allows full control over the loading process, so it is possible to define the precise schema using a `CREATE TABLE tbl ⟨schema⟩`{:.language-sql .highlight} statement and populate it using a [`COPY` statement]({% link docs/current/sql/statements/copy.md %}) that specifies the CSV's dialect (delimiter, quotes, etc.).
 Most friendly SQL extensions are simple to rewrite to SQL queries that are fully compatible with PostgreSQL.
 For example, the `GROUP BY ALL` clause can be replaced with a `GROUP BY` clause and an explicit list of columns.
 
@@ -419,11 +425,11 @@ Namely, DuckDB can be used
 for interactive data analysis by a user (“data science”) and
 as pipeline component for automated data processing (“data engineering”).
 DuckDB can also be deployed in novel architectures, where one traditionally couldn't run an analytical database management system but DuckDB is available thanks to its portability.
-These architectures include running DuckDB in browsers (using the <a href="{% link docs/stable/clients/wasm/overview.md %}">WebAssembly client</a>) and on smartphones.
-Additionally, DuckDB's extensions unlock use cases such as <a href="{% link docs/stable/core_extensions/spatial/overview.md %}">geospatial analysis</a> and deep integration with
-<a href="{% link docs/stable/core_extensions/mysql.md %}">other</a>
-<a href="{% link docs/stable/core_extensions/postgres.md %}">database</a>
-<a href="{% link docs/stable/core_extensions/sqlite.md %}">systems</a>.
+These architectures include running DuckDB in browsers (using the <a href="{% link docs/current/clients/wasm/overview.md %}">WebAssembly client</a>) and on smartphones.
+Additionally, DuckDB's extensions unlock use cases such as <a href="{% link docs/current/core_extensions/spatial/overview.md %}">geospatial analysis</a> and deep integration with
+<a href="{% link docs/current/core_extensions/mysql.md %}">other</a>
+<a href="{% link docs/current/core_extensions/postgres/overview.md %}">database</a>
+<a href="{% link docs/current/core_extensions/sqlite.md %}">systems</a>.
 And finally, in some cases, DuckDB <a href="https://www.nikolasgoebel.com/2024/05/28/duckdb-doesnt-need-data">doesn't even need data to be a database</a>.
 
 </div>
@@ -438,13 +444,13 @@ And finally, in some cases, DuckDB <a href="https://www.nikolasgoebel.com/2024/0
 
 <div class="answer" markdown="1">
 
-Features in DuckDB can be implemented in different ways: in the main DuckDB project, as a [core extension]({% link docs/stable/core_extensions/overview.md %}) or a [community extension]({% link community_extensions/index.md %}). If you have a feature request for DuckDB, please follow these guidelines:
+Features in DuckDB can be implemented in different ways: in the main DuckDB project, as a [core extension]({% link docs/current/core_extensions/overview.md %}) or a [community extension]({% link community_extensions/index.md %}). If you have a feature request for DuckDB, please follow these guidelines:
 
 * If you have a feature idea, please raise an issue in the [“Ideas” section in DuckDB's GitHub Discussions](https://github.com/duckdb/duckdb/discussions/categories/ideas). The DuckDB team monitors these ideas and, over time, implements the frequently requested features. For example, we recently published the [Avro Community Extension]({% link community_extensions/extensions/avro.md %}) to support reading Avro files, which was the most requested feature in the issue tracker.
 * If you would like to implement a feature in the main DuckDB project, please discuss it with the DuckDB team on GitHub Discussions or on [our Discord server](https://discord.duckdb.org/). The team can verify whether the idea and the proposed implementation line up with the project's long-term vision.
 * If you would like to implement a feature as an extension, consider submitting it to the [Community Extensions repository]({% link community_extensions/index.md %}).
 
-Please note that DuckDB Labs, the company that employs the main DuckDB contributors, provides [consultancy services for DuckDB](https://duckdblabs.com/support/), which can include implementing features in DuckDB or as DuckDB extensions.
+Please note that DuckLabs, the company that employs the main DuckDB contributors, provides [consultancy services for DuckDB](https://ducklabs.com/contact/), which can include implementing features in DuckDB or as DuckDB extensions.
 
 </div>
 
@@ -467,15 +473,15 @@ Please note that DuckDB Labs, the company that employs the main DuckDB contribut
 While the DuckDB database is a relatively small, lean codebase, it has a large surface area with dozens of clients and extensions.
 Currently, the official community support applies to the following components:
 
-* [primary clients]({% link docs/stable/clients/overview.md %})
-* [primary extensions]({% link docs/stable/core_extensions/overview.md %})
+* [primary clients]({% link docs/current/clients/overview.md %})
+* [primary extensions]({% link docs/current/core_extensions/overview.md %})
 
-Ths support covers the following minor versions:
+This support covers the following minor versions:
 
-* latest LTS (long-term support) version, currently {{ site.current_short_duckdb_lts_version }}
-* the latest stable version, currently {{ site.current_short_duckdb_version }}
+* latest LTS (long-term support) version, presently {{ site.lts_short_duckdb_version }}
+* the current version, presently {{ site.current_short_duckdb_version }}
 
-For more details, see the [DuckDB Community Support Policy](https://duckdblabs.com/community_support_policy/).
+For more details, see the [DuckDB Community Support Policy](https://ducklabs.com/community_support_policy/).
 
 </div>
 
@@ -543,8 +549,8 @@ You should be particularly cautious when downloading binaries and installation s
 
 Websites:
 
-* [`duckdb.org`](https://duckdb.org/) and [`duckdb.io`](https://duckdb.io/): DuckDB
-* [`duckdblabs.com`](https://duckdblabs.com/): DuckDB Labs
+* [`duckdb.org`](https://duckdb.org/), [`duckdb.io`](https://duckdb.io/), [`duckdb.ai`](https://duckdb.ai/): DuckDB
+* [`ducklabs.com`](https://ducklabs.com/): DuckLabs
 * [`ducklake.select`](https://ducklake.select/) and [`ducklake.dev`](https://ducklake.dev/): DuckLake
 
 Social media:
@@ -552,7 +558,6 @@ Social media:
 * [Bluesky](https://bsky.app/profile/duckdb.org)
 * [LinkedIn](https://www.linkedin.com/company/duckdb/)
 * [Twitter (X)](https://x.com/duckdb)
-
 
 </div>
 

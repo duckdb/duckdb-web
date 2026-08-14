@@ -8,9 +8,11 @@ excerpt: ""
 pill: "CIDR 2025"
 ---
 
-[Paper (PDF)](https://vldb.org/cidrdb/papers/2025/p18-muhleisen.pdf)
-
-Venue: CIDR 2025
+| | |
+|-------|-------|
+| **Paper** | [Runtime-Extensible Parsers (PDF)](https://vldb.org/cidrdb/papers/2025/p18-muhleisen.pdf) |
+| **Venue** | CIDR 2025 |
+| **Blog post** | [Blog post on duckdb.org]({% post_url 2024-11-22-runtime-extensible-parsers %}) |
 
 ## Abstract
 
@@ -19,4 +21,4 @@ Despite their central role in processing queries, parsers have not received any 
 ## Implementation
 
 DuckDB's autocomplete is implemented using a PEG-based parser.
-There is ongoing work to rewrite DuckDB's current PostgreSQL-based parser using a PEG-based parser.
+DuckDB v1.5 [shipped an experimental parser]({% link docs/current/sql/peg_parser.md %}).

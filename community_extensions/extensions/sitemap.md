@@ -19,7 +19,8 @@ extension:
 
 repo:
   github: midwork-finds-jobs/duckdb-sitemap
-  ref: 4c873c85c3f7c8dcab6154de51aa218f61677634
+  andium: 4c873c85c3f7c8dcab6154de51aa218f61677634
+  ref: 15e96dfd6e5dfb6d70a9b7cc5a2675b3969e16b3
 
 docs:
   hello_world: |
@@ -124,8 +125,8 @@ docs:
 
 extension_star_count: 1
 extension_star_count_pretty: 1
-extension_download_count: 330
-extension_download_count_pretty: 330
+extension_download_count: 755
+extension_download_count_pretty: 755
 image: '/images/community_extensions/social_preview/preview_community_extension_sitemap.png'
 layout: community_extension_doc
 ---
@@ -146,5 +147,29 @@ LOAD {{ page.extension.name }};
 ### About {{ page.extension.name }}
 {{ page.docs.extended_description }}
 {% endif %}
+
+### Added Functions
+
+<div class="extension_functions_table"></div>
+
+This extension does not add any functions.
+
+### Overloaded Functions
+
+<div class="extension_functions_table"></div>
+
+This extension does not add any function overloads.
+
+### Added Types
+
+<div class="extension_types_table"></div>
+
+This extension does not add any types.
+
+### Added Settings
+
+<div class="extension_settings_table"></div>
+
+This extension does not add any settings.
 
 

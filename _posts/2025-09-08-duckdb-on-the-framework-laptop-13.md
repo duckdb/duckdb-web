@@ -40,7 +40,7 @@ To see how this laptop performs, we ran a few benchmarks focusing on loading and
 
 ### CSV Loading
 
-To measure CSV loading performance, we used one of our favorite datasets: the [Dutch railway services]({% link docs/stable/guides/snippets/dutch_railway_datasets.md %}). We picked the [full dataset spanning the last 80 months](https://blobs.duckdb.org/nl-railway/railway-services-80-months.zip) (between Jan 2019 and Aug 2025).
+To measure CSV loading performance, we used one of our favorite datasets: the [Dutch railway services]({% link docs/current/guides/snippets/dutch_railway_datasets.md %}). We picked the [full dataset spanning the last 80 months](https://blobs.duckdb.org/nl-railway/railway-services-80-months.zip) (between Jan 2019 and Aug 2025).
 We can fetch and decompress the file as follows:
 
 ```bash
@@ -80,7 +80,7 @@ Luckily, we could use the [`tpchgen-cli`](https://github.com/clflushopt/tpchgen-
 
 #### SF3,000
 
-We first ran all 22 TPC-H queries on the SF3,000 the dataset, which corresponds to 3 TB of CSV files.
+We first ran all 22 TPC-H queries on the SF3,000 dataset, which corresponds to 3 TB of CSV files.
 The total runtime of the queries was 47.5 minutes with a geometric mean query runtime of 86.5 seconds.
 
 During the experiments, we noticed that the laptop bottom cover heated up [above 45 degrees Celsius](https://www.notebookcheck.net/Framework-Laptop-13-5-Ryzen-AI-9-review-Skip-the-Intel-version-for-better-performance.997363.0.html): while the keyboard was still usable, you definitely won't want to keep this machine on your lap while running data crunching workloads.

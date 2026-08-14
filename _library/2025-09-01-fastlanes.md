@@ -5,14 +5,14 @@ author: "Azim Afroozeh, Peter Boncz"
 thumb: "/images/library/thumbs/vldb.svg"
 image: "/images/library/thumbs/vldb.png"
 tags: ["Paper"]
-thirdparty: true
+category: community
 excerpt: ""
 pill: "VLDB 2025"
 ---
 
-[Paper (PDF)](https://www.vldb.org/pvldb/vol18/p4629-afroozeh.pdf)
-
-Venue: VLDB 2025
+|-------|-------|
+| **Paper** | [The FastLanes File Format (PDF)](https://www.vldb.org/pvldb/vol18/p4629-afroozeh.pdf) |
+| **Venue** | VLDB 2025 |
 
 ## Abstract
 

@@ -1,9 +1,14 @@
+@use 'sass:color';
+@use '../abstracts/variables' as *;
+@use '../abstracts/mixins' as *;
+
 /** Card Grid Component
  *
  *  Usage:
  *  --card-columns: number of cards per row (default: 3)
  *  --card-aspect-ratio: aspect ratio of image area (default: 4/3)
  *  --card-content-padding: padding of content area (default: 32px 36px 36px 36px)
+ *  data-mobile="swipe": horizontal scroll on mobile instead of stacking
  */
 
 .card-grid{
@@ -12,7 +17,7 @@
 	gap: 16px;
 
 	.card{
-		border-radius: 15px;
+		border-radius: var(--page-radius-box);
 		border: 1px solid var(--main-infobox-labs-border-color, rgba(51, 51, 51, 0.60));
 		overflow: hidden;
 
@@ -29,13 +34,54 @@
 		.card-content{
 			padding: var(--card-content-padding, 32px 36px 36px 36px);
 			h3{
-				margin: 0 0 24px 0;
+				margin: 0 0 12px 0;
 				font-size: var(--type-headline-3, 24px);
 			}
 			p{
 				margin: 0;
 				color: var(--main-text-secondary-color, #B2B2B2);
-				font-size: var(--type-body, 16px);
+				@include body-standard;
+			}
+		}
+	}
+}
+
+@media only screen and (max-width: 940px){
+	.card-grid{
+		grid-template-columns: repeat(2, 1fr);
+	}
+}
+
+@media only screen and (max-width: 660px){
+	.card-grid{
+		grid-template-columns: 1fr;
+		&[style*="--card-columns: 4"],
+		&[style*="--card-columns:4"]{
+			grid-template-columns: repeat(2, 1fr);
+			.card .card-content{
+				padding: 16px;
+			}
+		}
+
+		&[data-mobile="swipe"]{
+			display: flex;
+			gap: 0;
+			overflow-x: auto;
+			scroll-snap-type: x mandatory;
+			-webkit-overflow-scrolling: touch;
+			scrollbar-width: none;
+			margin-left: -15px;
+			margin-right: -15px;
+			&::-webkit-scrollbar{ display: none; }
+
+			.card{
+				flex: 0 0 80%;
+				margin-left: 15px;
+				scroll-snap-align: start;
+				scroll-margin-left: 15px;
+				.card-content{
+					padding: 24px;
+				}
 			}
 		}
 	}

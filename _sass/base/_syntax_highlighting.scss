@@ -38,7 +38,7 @@
 	}
 
 	// keywords
-	:is(.k, .kc, .kd, .kn, .kr, .kt, .kv),
+	:is(.k, .kc, .kd, .kn, .kr, .kt, .kv, .gs),
 	// type names
 	:is(.nb, .bp, .vcb)
 	{
@@ -76,6 +76,11 @@
 	{
 		color: #d70000;
 		font-family: $fontMonoItalic;
+	}
+
+	:is(.gs)
+	{
+		text-decoration: underline;
 	}
 }
 
@@ -124,7 +129,7 @@ html.darkmode, .dark {
 		}
 
 		// keywords
-		:is(.k, .kc, .kd, .kn, .kr, .kt, .kv),
+		:is(.k, .kc, .kd, .kn, .kr, .kt, .kv, .gs),
 		// type names
 		:is(.nb, .bp, .vcb)
 		{

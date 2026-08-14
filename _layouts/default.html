@@ -1,5 +1,5 @@
 <!doctype html>
-{% if page.body_class contains "duckcon7" %}
+{% if page.body_class contains "duckcon" %}
 <html lang="en" class="darkmode">
 {% else %}
 <html lang="en">
@@ -7,6 +7,8 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+    <link rel="alternate" hreflang="en" href="{{ page.url | absolute_url }}" />
+    <link rel="alternate" hreflang="x-default" href="{{ page.url | absolute_url }}" />
 	{% if page.title == "DuckDB" %}
     <title>{{ page.title }}</title>
 	{% elsif page.title == "An in-process SQL OLAP database management system" %}
@@ -15,33 +17,54 @@
     <title>{{ page.title }} – DuckDB</title>
 	{% endif %}
 
+	{% include darkmode_init.html %}
 
-    <link rel="stylesheet" href="/css/main.css">
+    <link rel="stylesheet" href="/css/main.css?{{ site.time | date: '%s' }}">
+	<link rel="preload" href="/css/webfont/SuisseIntl-Regular-WebXL.woff2" as="font" type="font/woff2" crossorigin>
 	{% if page.add_css %}
 	<link rel="stylesheet" href="/css/{{ page.add_css }}">
 	{% endif %}
 
-	{% if page.body_class contains "duckcon7" %}
-	<link href='https://api.mapbox.com/mapbox-gl-js/v3.17.0-beta.1/mapbox-gl.css' rel='stylesheet' />
-	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@12/swiper-bundle.min.css" />
+	{% if page.body_class contains "duckcon" %}
+	<link rel="preconnect" href="https://api.mapbox.com" crossorigin>
+	<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+	<link href='https://api.mapbox.com/mapbox-gl-js/v3.17.0-beta.1/mapbox-gl.css' rel='stylesheet' integrity="sha384-iZHx8ei75G5yWmKdvT9TwWafArVHCZ5OvZlUQWShQGrJFq5sBlxK+tu/1cGonuYJ" crossorigin="anonymous" />
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@12/swiper-bundle.min.css?2" integrity="sha384-+eoVPirEHy8XSrf7sRozx+2OTKCWm1qfVFWnQ7qiXW6vAb+GUXRw4gq7sU+hq6HG" crossorigin="anonymous" />
 	{% endif %}
 
-	<link rel="apple-touch-icon" sizes="180x180" href="/images/favicon/apple-touch-icon.png">
-	<link rel="icon" type="image/png" sizes="32x32" href="/images/favicon/favicon-32x32.png">
-	<link rel="icon" type="image/png" sizes="16x16" href="/images/favicon/favicon-16x16.png">
-	<link rel="manifest" href="/images/favicon/site.webmanifest">
-	<link rel="mask-icon" href="/images/favicon/safari-pinned-tab.svg" color="#5bbad5">
-	<link rel="shortcut icon" href="/images/favicon/favicon.ico">
+	<link rel="apple-touch-icon" sizes="180x180" href="{% link images/favicon/apple-touch-icon.png %}">
+	<link rel="icon" type="image/png" sizes="32x32" href="{% link images/favicon/favicon-32x32.png %}">
+	<link rel="icon" type="image/png" sizes="16x16" href="{% link images/favicon/favicon-16x16.png %}">
+	<link rel="manifest" href="{% link images/favicon/site.webmanifest %}">
+	<link rel="mask-icon" href="{% link images/favicon/safari-pinned-tab.svg %}" color="#5bbad5">
+	<link rel="shortcut icon" href="{% link images/favicon/favicon.ico %}">
 	<meta name="msapplication-TileColor" content="#000000">
-	<meta name="msapplication-config" content="/images/favicon/browserconfig.xml">
+	<meta name="msapplication-config" content="{% link images/favicon/browserconfig.xml %}">
 	<meta name="theme-color" content="#ffffff">
 	<meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests" />
 
 	{% seo title=false %}
-	
-	<script src="/js/determine_color_scheme.js"></script>
-	{% if page.body_class contains "duckcon7" %}
-	<script src='https://api.mapbox.com/mapbox-gl-js/v3.17.0-beta.1/mapbox-gl.js'></script>
+
+	{% if page.body_class contains "landing" %}
+	<script type="application/ld+json">
+	{
+		"@context": "https://schema.org",
+		"@type": "SoftwareApplication",
+		"name": "DuckDB",
+		"applicationCategory": "DeveloperApplication",
+		"operatingSystem": "Windows, macOS, Linux",
+		"offers": {
+			"@type": "Offer",
+			"price": "0",
+			"priceCurrency": "USD"
+		},
+		"license": "https://opensource.org/licenses/MIT"
+	}
+	</script>
+	{% endif %}
+
+	{% if page.body_class contains "duckcon" %}
+	<script src='https://api.mapbox.com/mapbox-gl-js/v3.17.0-beta.1/mapbox-gl.js' integrity="sha384-Yy3wODAOvfT0/YULUDobkC+draTm8Y1fuJqn6+alPRUHh5X3CkeUWyzdUf8gHv9S" crossorigin="anonymous"></script>
 	{% endif %}
 </head>
 <body class="layout_default{% if page.body_class %} {{ page.body_class }}{% endif %}">
@@ -54,13 +77,13 @@
 		<div class="headerline">
 			<div class="headercontent">
 				<div class="duckdbhome">
-					<a href="{{ site.url }}/">{% if page.body_class contains "duckcon7" %}<img src="/images/logo-dl/duckcon7.svg" alt="DuckCon 7 Logo for Download" class="downloadlogo">{% else %}<img src="/images/logo-dl/DuckDB_Logo-horizontal.svg" alt="DuckDB Logo for Download" class="downloadlogo">{% endif %}</a>
-					{% if page.body_class contains "duckcon7" %}<div id="duckcon7_logo"></div>{% else %}<div id="duckdb_logo"></div>{% endif %}
+					<a href="{{ site.url }}/">{% if page.body_class contains "duckcon" %}<img src="{% link images/events/duckcon7/duckcon7.svg %}" alt="DuckCon 7 Logo for Download" class="downloadlogo">{% else %}<img src="{% link images/designmanual/DuckDB_inline-lightmode.svg %}" alt="DuckDB Logo for Download" class="downloadlogo">{% endif %}</a>
+					{% if page.body_class contains "duckcon-sponsorship" %}<div id="duckcon_logo"></div>{% elsif page.body_class contains "duckcon" %}<div id="duckcon7_logo"></div>{% else %}<div id="duckdb_logo"></div>{% endif %}
 				</div>
 				<div class="landingmenu">
 					
-					{% if page.body_class contains "duckcon7" %}
-						{% include duckcon7/menu.html %}
+					{% if page.body_class contains "duckcon" %}
+						{% include duckcon/menu.html %}
 					{% else %}
 						{% include menu_secondary.html %}
 					{% endif %}
@@ -72,11 +95,13 @@
 					</div>
 				</div>
 				<div class="options">
-					{% if page.body_class contains "duckcon7" %}
-						<a class="button yellow" href="https://duckdblabs.com/#support" target="_blank">Register now</a>
+					{% if page.body_class contains "duckcon-sponsorship" %}
+						<a class="button yellow" href="mailto:hello@ducklabs.com?subject=DuckCon%20%238%20Sponsorship%20Inquiry">Sponsor DuckCon</a>
+					{% elsif page.body_class contains "duckcon" and page.duckcon_register_url %}
+						<a class="button yellow" href="{{ page.duckcon_register_url }}" target="_blank">Register for free</a>
 					{% else %}
-						<a class="button yellow" href="https://duckdblabs.com/#support" target="_blank">Support</a>
-						<button class="mode" data-mode="dark">
+						<a class="button yellow" href="https://ducklabs.com/contact" target="_blank">Support</a>
+						<button class="mode" data-mode="dark" aria-label="Toggle dark mode">
 							<svg class="icon icon-sun"><use href="#sun"></use></svg>
 							<svg class="icon icon-moon"><use href="#moon-01"></use></svg>
 						</button>
@@ -107,7 +132,7 @@
 	-->
 		{% endif %}
 		
-			<div class="{% unless page.body_class contains "duckcon7" %}wrap{% endunless %} {% if page.toc == true %}fullwidth{% endif %}">
+			<div class="{% unless page.body_class contains "duckcon" %}wrap{% endunless %} {% if page.toc == true %}fullwidth{% endif %}">
 				<div id="main_content_wrap" class="{% if page.toc == true %} contains_toc{% endif %}">
 					<div class="content">
 						{% if page.toc == true %}
@@ -149,7 +174,10 @@
 	{% include footer.html %}
 	
 	{% if page.body_class contains "landing" %}
-	<script src="/js/typewriter.js" defer></script>
+	<script src="/js/hero_animation.js" defer></script>
+	{% endif %}
+	{% if page.ecosystem %}
+	<script src="/js/ecosystem_diagram.js" defer></script>
 	{% endif %}
 	<script src="/js/minisearch.js" defer></script>
 	<script src="/js/search.js" defer></script>
@@ -158,15 +186,18 @@
 	{% if page.body_class contains "landing" or page.body_class contains "installation" %}
 	<script src="/js/ua-parser.min.js" defer></script>
 	{% endif %}
-	{% if page.body_class contains "duckcon7" %}
-	<script src="https://cdn.jsdelivr.net/npm/swiper@12/swiper-bundle.min.js"></script>
+	{% if page.body_class contains "duckcon" %}
+	<script src="https://cdn.jsdelivr.net/npm/swiper@12/swiper-bundle.min.js" integrity="sha384-TmUUNA9gRm9TspAqMh20CdxlcwkNFW3UyIOibSljonhpJ1UfGenJDyQvO/EbWwpW" crossorigin="anonymous" defer></script>
 	{% endif %}
-	<script src="/js/script.js" defer></script>
+	<script src="/js/script.js?{{ site.time | date: '%s' }}" defer></script>
 	{% if page.body_class contains "installation" %}
 	<script src="/js/install.js" defer></script>
 	{% endif %}
 	{% if page.body_class contains "wasm" %}
 	<script src="/js/wasm.js" defer></script>
+	{% endif %}
+	{% if page.body_class contains "quack" %}
+	<script src="/js/quack.js" defer></script>
 	{% endif %}
 
 </body>

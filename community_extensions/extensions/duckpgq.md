@@ -8,7 +8,7 @@ excerpt: |
 extension:
   name: duckpgq
   description: Extension that adds support for SQL/PGQ and graph algorithms
-  version: 0.2.7
+  version: 0.3.1
   language: C++
   build: cmake
   license: MIT
@@ -17,7 +17,8 @@ extension:
 
 repo:
   github: cwida/duckpgq-extension
-  ref: ffeee447afd82247fd5ffd1f3f314392d6f7dab1
+  andium: 42eea114b22fad93f04cb7edf50d2b0077e464fa
+  ref: f386a6cfb90aadb0077e734377bb86740bdda71b
 
 docs:
   hello_world: |
@@ -60,10 +61,10 @@ docs:
 
     *Disclaimer:* As this extension is part of an ongoing research project by the Database Architectures group at CWI, some features may still be under development. We appreciate your understanding and patience as we continue to improve it.
 
-extension_star_count: 352
-extension_star_count_pretty: 352
-extension_download_count: 4570
-extension_download_count_pretty: 4.6k
+extension_star_count: 464
+extension_star_count_pretty: 464
+extension_download_count: 5696
+extension_download_count_pretty: 5.7k
 image: '/images/community_extensions/social_preview/preview_community_extension_duckpgq.png'
 layout: community_extension_doc
 ---
@@ -122,5 +123,23 @@ LOAD {{ page.extension.name }};
 | summarize_property_graph     | table         | NULL        | NULL    |          |
 | weakly_connected_component   | scalar        | NULL        | NULL    |          |
 | weakly_connected_component   | table         | NULL        | NULL    |          |
+
+### Overloaded Functions
+
+<div class="extension_functions_table"></div>
+
+This extension does not add any function overloads.
+
+### Added Types
+
+<div class="extension_types_table"></div>
+
+This extension does not add any types.
+
+### Added Settings
+
+<div class="extension_settings_table"></div>
+
+This extension does not add any settings.
 
 

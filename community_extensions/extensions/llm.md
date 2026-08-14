@@ -90,12 +90,13 @@ extension:
   version: '2026020501'
 repo:
   github: midwork-finds-jobs/duckdb-llm
-  ref: 2de6c4d2a7d1bc6cefe8adfac8ecb16c1e7b2f3e
+  andium: 2de6c4d2a7d1bc6cefe8adfac8ecb16c1e7b2f3e
+  ref: 18c5a54197440fcf43643c22f5de9ea9cbfe31e5
 
-extension_star_count: 1
-extension_star_count_pretty: 1
-extension_download_count: 345
-extension_download_count_pretty: 345
+extension_star_count: 3
+extension_star_count_pretty: 3
+extension_download_count: 769
+extension_download_count_pretty: 769
 image: '/images/community_extensions/social_preview/preview_community_extension_llm.png'
 layout: community_extension_doc
 ---
@@ -116,5 +117,29 @@ LOAD {{ page.extension.name }};
 ### About {{ page.extension.name }}
 {{ page.docs.extended_description }}
 {% endif %}
+
+### Added Functions
+
+<div class="extension_functions_table"></div>
+
+This extension does not add any functions.
+
+### Overloaded Functions
+
+<div class="extension_functions_table"></div>
+
+This extension does not add any function overloads.
+
+### Added Types
+
+<div class="extension_types_table"></div>
+
+This extension does not add any types.
+
+### Added Settings
+
+<div class="extension_settings_table"></div>
+
+This extension does not add any settings.
 
 

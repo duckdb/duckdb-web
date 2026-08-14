@@ -5,12 +5,14 @@ author: "Panagiotis Liakos, Katia Papakonstantinopoulou, Thijs Bruineman, Mark R
 thumb: "/images/library/thumbs/edbt.svg"
 image: "/images/library/thumbs/edbt.png"
 tags: ["Paper"]
-thirdparty: true
+category: community
 excerpt: ""
 pill: "EDBT 2024"
 ---
 
-[Paper (PDF)](https://openproceedings.org/2024/conf/edbt/paper-248.pdf)
+| | |
+|-------|-------|
+| **Paper** | [How to Make your Duck Fly: Advanced Floating Point Compression to the Rescue (PDF)](https://openproceedings.org/2024/conf/edbt/paper-248.pdf) |
 
 ## Abstract
 

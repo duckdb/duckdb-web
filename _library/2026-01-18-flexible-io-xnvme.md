@@ -5,14 +5,14 @@ author: "Emil Houlborg, Andreas Nicolaj Tietgen, Simon A. F. Lund, Marcel Weisgu
 thumb: "/images/library/thumbs/cidr.svg"
 image: "/images/library/thumbs/cidr.png"
 tags: ["Paper"]
-thirdparty: true
+category: community
 excerpt: ""
 pill: "CIDR 2026"
 ---
 
-[Paper (PDF)](https://vldb.org/cidrdb/papers/2026/p6-houlborg.pdf)
-
-Venue: CIDR 2026
+|-------|-------|
+| **Paper** | [Flexible I/O for Database Management Systems with xNVMe (PDF)](https://vldb.org/cidrdb/papers/2026/p6-houlborg.pdf) |
+| **Venue** | CIDR 2026 |
 
 ## Abstract
 

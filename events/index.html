@@ -16,15 +16,27 @@ redirect_from:
 {% endfor %}
 {% assign unique_tags = all_tags | split: "," | uniq | sort %}
 
-<div class="wrap">
+<div class="wrap pagetitle">
+	<h1>{{ page.title }}</h1>
+
 	<div class="controls filterbar" data-all-available="{{ unique_tags | join: ', ' }}">
 		<input type="text" id="search-input" placeholder="Search...">
 		<!--
-		<div class="filtertags">
-			<div class="filter-highlight"></div>
-			<button type="button" class="filter-btn active" data-filter="*">All</button>
-			<button type="button" class="filter-btn" data-filter=".duckcon">DuckCon</button>
+		<button type="button" class="filter-toggle" aria-label="Filter">
+			<svg class="icon icon-filter"><use href="#filter-funnel-01"></use></svg>
+			<svg class="icon icon-close"><use href="#x-close"></use></svg>
+		</button>
+		<div class="filter-modal">
+			<div class="filter-group" data-filter-key="category">
+				<span class="filter-group-label">Category</span>
+				<div class="filtertags">
+					<div class="filter-highlight"></div>
+					<button type="button" class="filter-btn active" data-filter="*">All</button>
+					<button type="button" class="filter-btn" data-filter=".duckcon">DuckCon</button>
+				</div>
+			</div>
 		</div>
+		<div class="filter-overlay"></div>
 		-->
 	</div>
 </div>
@@ -43,25 +55,26 @@ redirect_from:
 				<a href="/events/{{ event.date | date: '%Y/%m/%d' }}/{{ event.slug | default: event.title | slugify }}/" title="{{ event.title }}" class="blocklink"></a>
 				<div class="postimg custom">
 					{% if event.thumb %}
-						<img src="{{ event.thumb }}" alt="{{ event.title }}" class="zoom-image">
+						<img src="{{ event.thumb }}" alt="{{ event.title }}" class="zoom-image" loading="lazy">
 					{% else %}
-						<img src="/images/blog/thumbs/placeholder-{{ random_number }}.svg" alt="Placeholder" class="zoom-image">
+						<img src="/images/blog/thumbs/placeholder-{{ random_number }}.svg" alt="Placeholder" class="zoom-image" loading="lazy">
 					{% endif %}
 				</div>
 				<div class="postdetails">
-					{% if event.tags %}
-					<div class="tags">
-						<span class="eventdate">{{ event.date | date: "%Y-%m-%d" }}</span>
-						{% for tag in event.tags %}
-							<span class="tag">{{ tag }}</span>
-						{% endfor %}
-					</div>
-					{% endif %}
 					<h3>{{ event.title }}</h3>
 					<div class="meta">
-						<div class="venue">{{ event.venue }}</div>
-						<div class="author">{{ event.author }}</div>
+						<div class="date">{{ event.date | date: "%Y-%m-%d" }}</div>
+						{% if event.tags %}
+							<div class="tags">
+								{% for tag in event.tags %}<span>{{ tag }}</span>{% endfor %}
+							</div>
+						{% endif %}
 					</div>
+					{% if event.venue %}
+						<div class="byline">
+							<div class="venue">{{ event.venue }}</div>
+						</div>
+					{% endif %}
 				</div>
 			</div>
 		{% endfor %}

@@ -8,7 +8,7 @@ excerpt: |
 extension:
   name: mongo
   description: Integrates DuckDB with MongoDB, enabling direct SQL queries over MongoDB collections without exporting data or ETL
-  version: 0.1.0
+  version: 0.2.5
   language: C++
   build: cmake
   license: MIT
@@ -20,26 +20,25 @@ extension:
 
 repo:
   github: stephaniewang526/duckdb-mongo
-  ref: 4949183d23ff02ad9d836888cb56b39ac569c237
+  ref: 394033fbad98ae25964980c426326f9654343da7
 
 docs:
   hello_world: |
     -- Attach to MongoDB
     ATTACH 'host=localhost port=27017' AS mongo_db (TYPE MONGO);
-    
+
     -- Query your collections
     SELECT * FROM mongo_db.mydb.mycollection LIMIT 10;
   extended_description: |
-    The duckdb-mongo extension provides direct SQL access to MongoDB collections without requiring data export or ETL processes. 
-    It supports both standalone MongoDB instances and MongoDB Atlas clusters, with automatic schema inference and filter pushdown 
-    for efficient querying. The extension enables you to run analytical SQL queries directly against MongoDB data, including 
+    The duckdb-mongo extension provides direct SQL access to MongoDB collections without requiring data export or ETL processes.
+    It supports both standalone MongoDB instances and MongoDB Atlas clusters, with automatic schema inference and filter pushdown
+    for efficient querying. The extension enables you to run analytical SQL queries directly against MongoDB data, including
     joins, aggregations, and complex analytical operations.
 
-
-extension_star_count: 38
-extension_star_count_pretty: 38
-extension_download_count: 427
-extension_download_count_pretty: 427
+extension_star_count: 55
+extension_star_count_pretty: 55
+extension_download_count: 8061
+extension_download_count_pretty: 8.1k
 image: '/images/community_extensions/social_preview/preview_community_extension_mongo.png'
 layout: community_extension_doc
 ---
@@ -69,5 +68,23 @@ LOAD {{ page.extension.name }};
 |-------------------|---------------|----------------------------------------------------------------------------------------------------------------------|---------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | mongo_clear_cache | table         | Clears the schema cache for all attached MongoDB databases. Useful when MongoDB schema changes.                      | NULL    | [SELECT * FROM mongo_clear_cache()]                                                                                                                                                              |
 | mongo_scan        | table         | Scans a MongoDB collection and returns its contents as a table. Supports optional filter and sample_size parameters. | NULL    | [SELECT * FROM mongo_scan('mongodb://localhost:27017', 'mydb', 'mycollection'), SELECT * FROM mongo_scan('mongodb://localhost:27017', 'mydb', 'mycollection', filter := '{"status": "active"}')] |
+
+### Overloaded Functions
+
+<div class="extension_functions_table"></div>
+
+This extension does not add any function overloads.
+
+### Added Types
+
+<div class="extension_types_table"></div>
+
+This extension does not add any types.
+
+### Added Settings
+
+<div class="extension_settings_table"></div>
+
+This extension does not add any settings.
 
 

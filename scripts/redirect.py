@@ -1,6 +1,5 @@
 import frontmatter
 import sys
-from glob import glob
 from pathlib import Path
 import re
 import textwrap
@@ -31,4 +30,4 @@ for path in source.glob("**/*.md"):
     doc["redirect_from"] = doc.get("redirect_from", []) + new_redirect_entries
 
     with open(path, "w") as f:
-        f.write(frontmatter.dumps(doc))
+        f.write(frontmatter.dumps(doc) + "\n")

@@ -1,11 +1,13 @@
 ---
 layout: post
 title: "iPhone 17 Pro"
+date: 2025-10-30
 author: "Gábor Szárnyas"
 thumb: "/images/everywhere/thumbs/iphone-17-pro.jpg"
 image: "/images/everywhere/thumbs/iphone-17-pro.jpg"
 excerpt: ""
 tags: ["Phones"]
+thirdparty: false
 ---
 
 The iPhone 17 Pro can DuckDB with DuckLake – even when submerged in water.

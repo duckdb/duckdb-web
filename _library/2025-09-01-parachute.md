@@ -5,14 +5,16 @@ author: "Mihail Stoian, Andreas Zimmerer, Skander Krid, Amadou Latyr Ngom, Jiali
 thumb: "/images/library/thumbs/vldb.svg"
 image: "/images/library/thumbs/vldb.png"
 tags: ["Paper"]
-thirdparty: true
+category: community
 excerpt: ""
 pill: "VLDB 2025"
+redirect_from:
+- /science/parachute
 ---
 
-[Paper (PDF)](https://www.vldb.org/pvldb/vol18/p3299-stoian.pdf)
-
-Venue: VLDB 2025
+|-------|-------|
+| **Paper** | [Parachute: Single-Pass Bi-Directional Information Passing (PDF)](https://www.vldb.org/pvldb/vol18/p3299-stoian.pdf) |
+| **Venue** | VLDB 2025 |
 
 ## Abstract
 

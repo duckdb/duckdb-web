@@ -3,16 +3,17 @@ layout: post
 title: "How DuckDB is USING KEY to Unlock Recursive Query Performance"
 author: "Björn Bamberg, Denis Hirn, Torsten Grust"
 thumb: "/images/library/thumbs/sigmod.svg"
-image: "/images/library/thumbs/sigmod.png"
+image: "/images/library/thumbs/sigmod.jpg"
 tags: ["Paper"]
-thirdparty: true
+category: community
 excerpt: ""
 pill: "SIGMOD 2025"
 ---
 
-[Paper (PDF)](https://db.cs.uni-tuebingen.de/publications/2025/using-key/how-duckdb-is-using-key-to-unlock-recursive-query-performance.pdf)
-
-Venue: SIGMOD 2025
+| | |
+|-------|-------|
+| **Paper** | [How DuckDB is USING KEY to Unlock Recursive Query Performance (PDF)](https://db.cs.uni-tuebingen.de/publications/2025/using-key/how-duckdb-is-using-key-to-unlock-recursive-query-performance.pdf) |
+| **Venue** | SIGMOD 2025 |
 
 ## Abstract
 
@@ -21,4 +22,4 @@ SQL’s _recursive common table expressions_ (CTEs) can express complex computat
 ## Implementation
 
 `USING KEY` is has been implemented in mainline DuckDB v1.3.0.
-For details on how to use it, read the [documentation]({% link docs/stable/sql/query_syntax/with.md %}) and the [announcement blog post]({% post_url 2025-05-23-using-key %}).
+For details on how to use it, read the [documentation]({% link docs/current/sql/query_syntax/with.md %}) and the [announcement blog post]({% post_url 2025-05-23-using-key %}).

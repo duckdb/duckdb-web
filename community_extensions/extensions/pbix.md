@@ -52,10 +52,10 @@ docs:
     
     *Note:* Current limitations include the inability of the WASM version to parse `https` hosted files, and that pbix_read() will decompress the entire model in memory. 
 
-extension_star_count: 33
-extension_star_count_pretty: 33
-extension_download_count: 713
-extension_download_count_pretty: 713
+extension_star_count: 38
+extension_star_count_pretty: 38
+extension_download_count: 1063
+extension_download_count_pretty: 1.1k
 image: '/images/community_extensions/social_preview/preview_community_extension_pbix.png'
 layout: community_extension_doc
 ---
@@ -86,6 +86,18 @@ LOAD {{ page.extension.name }};
 | pbix2vpax     | scalar        | NULL        | NULL    |          |
 | pbix_meta     | table         | NULL        | NULL    |          |
 | pbix_read     | table         | NULL        | NULL    |          |
+
+### Overloaded Functions
+
+<div class="extension_functions_table"></div>
+
+This extension does not add any function overloads.
+
+### Added Types
+
+<div class="extension_types_table"></div>
+
+This extension does not add any types.
 
 ### Added Settings
 

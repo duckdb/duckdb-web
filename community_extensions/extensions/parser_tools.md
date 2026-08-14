@@ -17,8 +17,8 @@ extension:
 
 repo:
   github: hotdata-dev/duckdb_extension_parser_tools
-  ref: 4c294fa226e9994c146d073cdb2e8c5e42a9db86
-  ref_next: 6a94f2b261bdca4c8f2f8454697e2f6e7bcea9c5
+  andium: 4c294fa226e9994c146d073cdb2e8c5e42a9db86
+  ref: 6a94f2b261bdca4c8f2f8454697e2f6e7bcea9c5
 
 docs:
   hello_world: |
@@ -167,10 +167,10 @@ docs:
     Future versions may expose additional aspects of the parsed query structure.
     For more details and examples, visit the [extension repository](https://github.com/zacMode/duckdb_extension_parser_tools).
 
-extension_star_count: 23
-extension_star_count_pretty: 23
-extension_download_count: 350
-extension_download_count_pretty: 350
+extension_star_count: 27
+extension_star_count_pretty: 27
+extension_download_count: 2973
+extension_download_count_pretty: 3.0k
 image: '/images/community_extensions/social_preview/preview_community_extension_parser_tools.png'
 layout: community_extension_doc
 ---
@@ -211,5 +211,23 @@ LOAD {{ page.extension.name }};
 | parse_where          | scalar        | NULL        | NULL    |          |
 | parse_where          | table         | NULL        | NULL    |          |
 | parse_where_detailed | table         | NULL        | NULL    |          |
+
+### Overloaded Functions
+
+<div class="extension_functions_table"></div>
+
+This extension does not add any function overloads.
+
+### Added Types
+
+<div class="extension_types_table"></div>
+
+This extension does not add any types.
+
+### Added Settings
+
+<div class="extension_settings_table"></div>
+
+This extension does not add any settings.
 
 

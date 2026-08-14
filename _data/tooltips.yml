@@ -1,0 +1,19 @@
+# Central store for reusable tooltip bodies.
+#
+# Reference a key from Markdown via:
+#   {% include tooltip.html label="Primary" id="support_tier_primary" %}
+#
+# Values support Markdown.
+
+support_tier_primary: >-
+    Primary clients are the first to receive new features and are covered
+    by community support.
+
+support_tier_secondary: >-
+    Secondary clients receive new features but are not covered by community support.
+
+support_tier_primary_extension: >-
+    Primary clients are covered by community support.
+
+support_tier_secondary_extension: >-
+    Secondary extensions are supported on a best-effort basis.

@@ -17,7 +17,7 @@ extension:
 
 repo:
   github: ywelsch/duckdb-psql
-  ref: f0ee86e08020f4b7d7300da5be9c7a0f01c63dce
+  ref: 4e310a6056dff4808de4be4bd0c0e571ed6d7a5a
 
 docs:
   hello_world: |
@@ -48,10 +48,10 @@ docs:
   extended_description: |
     PSQL extends DuckDB's SQL with a pipe syntax to provide simple composable queries. It's a lightweight variant of piped languages such as PRQL and Kusto, yet leveraging the full power of DuckDB's SQL.
 
-extension_star_count: 103
-extension_star_count_pretty: 103
-extension_download_count: 412
-extension_download_count_pretty: 412
+extension_star_count: 107
+extension_star_count_pretty: 107
+extension_download_count: 806
+extension_download_count_pretty: 806
 image: '/images/community_extensions/social_preview/preview_community_extension_psql.png'
 layout: community_extension_doc
 ---
@@ -72,5 +72,29 @@ LOAD {{ page.extension.name }};
 ### About {{ page.extension.name }}
 {{ page.docs.extended_description }}
 {% endif %}
+
+### Added Functions
+
+<div class="extension_functions_table"></div>
+
+This extension does not add any functions.
+
+### Overloaded Functions
+
+<div class="extension_functions_table"></div>
+
+This extension does not add any function overloads.
+
+### Added Types
+
+<div class="extension_types_table"></div>
+
+This extension does not add any types.
+
+### Added Settings
+
+<div class="extension_settings_table"></div>
+
+This extension does not add any settings.
 
 

@@ -140,7 +140,7 @@ We don’t have to recompute the pointers if they are the same.
 Now that we’ve figured out how to deal with temporary data, it’s finally time to talk about hash aggregation.
 The first big challenge is to perform the aggregation in parallel.
 
-DuckDB uses [Morsel-Driven Parallelism](https://db.in.tum.de/~leis/papers/morsels.pdf) parallelize query execution, which essentially means that query operators, such as aggregation, must be parallelism-aware.
+DuckDB uses [Morsel-Driven Parallelism](https://db.in.tum.de/~leis/papers/morsels.pdf) to parallelize query execution, which essentially means that query operators, such as aggregation, must be parallelism-aware.
 This differs from [plan-driven parallelism](https://dl.acm.org/doi/pdf/10.1145/93605.98720), keeping operators unaware of parallelism.
 
 To briefly summarize [our first blog post on aggregation]({% post_url 2022-03-07-aggregate-hashtable %}): In DuckDB, all active threads have their own thread-local hash table, which they sink input data into.

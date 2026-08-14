@@ -1,0 +1,52 @@
+@use '../abstracts/variables' as *;
+@use '../abstracts/mixins' as *;
+
+body.logo-attributions{
+
+	section.attributions-hero{
+		padding-top: 84px;
+		padding-bottom: 55px;
+		text-align: center;
+
+		.hero-text{
+			max-width: 700px;
+			margin: 0 auto;
+
+			h1{
+				@include display-1;
+				margin: 0 0 24px;
+			}
+			p{
+				@include body-standard;
+				color: var(--main-text-primary-color, #F2F2F2);
+				margin: 0 auto;
+			}
+		}
+	}
+
+	section.attributions-logos{
+		padding: 0 15px 75px;
+
+		.logo-grid-section{
+			max-width: unset;
+			margin-top: 24px;
+
+			.logo-grid{
+				grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+			}
+
+			.logo-grid .logo-cell{
+				border-right: 1px solid var(--main-infobox-labs-border-color, rgba(51, 51, 51, 0.60));
+				border-bottom: 1px solid var(--main-infobox-labs-border-color, rgba(51, 51, 51, 0.60));
+			}
+		}
+	}
+}
+
+@media only screen and (max-width: 660px){
+	body.logo-attributions{
+		section.attributions-hero .hero-text h1{
+			font-size: 38px;
+		}
+	}
+}

@@ -1,7 +1,7 @@
 ---
 layout: post
-title: "Why Databases are Worthy of Your Affection"
-author: "Hannes Mühleisen (DuckDB Labs)"
+title: "Why Databases Are Worthy of Your Affection"
+author: "Hannes Mühleisen"
 thumb: "/images/library/thumbs/2025-06-27-joy-of-coding.jpg"
 image: "/images/library/thumbs/2025-06-27-joy-of-coding.jpg"
 tags: ["Talk"]
@@ -18,7 +18,6 @@ redirect_from:
 </div>
 
 |-------|-------|
-| **Date** | {{ page.date | date: "%Y-%m-%d" }} |
 | **Event** | [Joy of Coding](https://joyofcoding.org/) |
-| **Speaker** | [Hannes Mühleisen](https://hannes.muehleisen.org/) (DuckDB Labs) |
+| **Speaker** | [Hannes Mühleisen](https://hannes.muehleisen.org/) (DuckLabs) |
 | **YouTube** | [Why Databases are Worthy of Your Affection](https://www.youtube.com/watch?v=BnRlYKZExDc) |

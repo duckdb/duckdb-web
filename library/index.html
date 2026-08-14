@@ -1,7 +1,7 @@
 ---
 layout: postarchive
 title: DuckDB Library
-excerpt: A curated collection of books, papers, podcasts and talks podcasts exploring DuckDB.
+excerpt: A curated collection of books, papers, podcasts and talks exploring DuckDB.
 redirect_from:
 - /sci
 - /lib
@@ -16,17 +16,50 @@ redirect_from:
 {% endfor %}
 {% assign unique_tags = all_tags | split: "," | uniq | sort %}
 
-<div class="wrap">
+<div class="wrap pagetitle">
+	<h1>{{ page.title }}</h1>
+
 	<div class="controls filterbar" data-all-available="{{ unique_tags | join: ', ' }}">
-		<input type="text" id="search-input" placeholder="Search...">
-		<div class="filtertags">
-			<div class="filter-highlight"></div>
-			<button type="button" class="filter-btn active" data-filter="*">All</button>
-			<button type="button" class="filter-btn" data-filter=".book">Book</button>
-			<button type="button" class="filter-btn" data-filter=".paper">Paper</button>
-			<button type="button" class="filter-btn" data-filter=".podcast">Podcast</button>
-			<button type="button" class="filter-btn" data-filter=".talk">Talk</button>
+		<div class="filter-group" data-filter-key="category">
+			<span class="filter-group-label">Category</span>
+			<div class="filtertags" data-attribute="data-category">
+				<div class="filter-highlight"></div>
+				<button type="button" class="filter-btn active" data-filter="*">All</button>
+				<button type="button" class="filter-btn" data-filter="core">Core</button>
+				<button type="button" class="filter-btn" data-filter="highlighted">Highlighted</button>
+				<button type="button" class="filter-btn" data-filter="community">Community</button>
+			</div>
 		</div>
+		<div class="filter-modal">
+			<div class="filter-group" data-filter-key="format">
+				<span class="filter-group-label">Format</span>
+				<div class="filtertags">
+					<div class="filter-highlight"></div>
+					<button type="button" class="filter-btn active" data-filter="*">All</button>
+					<button type="button" class="filter-btn" data-filter=".article">Article</button>
+					<button type="button" class="filter-btn" data-filter=".book">Book</button>
+					<button type="button" class="filter-btn" data-filter=".paper">Paper</button>
+					<button type="button" class="filter-btn" data-filter=".podcast">Podcast</button>
+					<button type="button" class="filter-btn" data-filter=".talk">Talk</button>
+				</div>
+			</div>
+			<div class="filter-group filter-group-mobile-only" data-filter-key="category">
+				<span class="filter-group-label">Category</span>
+				<div class="filtertags" data-attribute="data-category">
+					<div class="filter-highlight"></div>
+					<button type="button" class="filter-btn active" data-filter="*">All</button>
+					<button type="button" class="filter-btn" data-filter="core">Core</button>
+					<button type="button" class="filter-btn" data-filter="highlighted">Highlighted</button>
+					<button type="button" class="filter-btn" data-filter="community">Community</button>
+				</div>
+			</div>
+		</div>
+		<input type="text" id="search-input" placeholder="Search...">
+		<button type="button" class="filter-toggle" aria-label="Filter">
+			<svg class="icon icon-filter"><use href="#filter-funnel-01"></use></svg>
+			<svg class="icon icon-close"><use href="#x-close"></use></svg>
+		</button>
+		<div class="filter-overlay"></div>
 	</div>
 </div>
 
@@ -40,9 +73,18 @@ redirect_from:
 				{% assign slugified_tag = tag | slugify %}
 				{% assign tag_classes = tag_classes | append: slugified_tag | append: " " %}
 			{% endfor %}
+			{% comment %} Determine data-category for filtering {% endcomment %}
+			{% if library_item.highlighted == true %}
+				{% assign data_category = "highlighted" %}
+			{% elsif library_item.category %}
+				{% assign data_category = library_item.category %}
+			{% else %}
+				{% assign data_category = "core" %}
+			{% endif %}
+			{% comment %} Determine data-source for styling (colors/icons) {% endcomment %}
 			{% if library_item.title contains "ducklake" or library_item.title contains "DuckLake" %}
 				{% assign data_source = "ducklake" %}
-			{% elsif library_item.thirdparty == true %}
+			{% elsif library_item.category == "community" %}
 				{% assign data_source = "thirdparty" %}
 			{% else %}
 				{% assign data_source = "duckdb" %}
@@ -53,14 +95,14 @@ redirect_from:
 			{% else %}
 				{% assign data_type = "" %}
 			{% endif %}
-			<div class="librarypreview postpreview {{ tag_classes | downcase }}" data-title="{{ library_item.title | escape }}" data-source="{{ data_source }}"{% if data_type != "" %} data-type="{{ data_type }}"{% endif %}>
+			<div class="librarypreview postpreview {{ tag_classes | downcase }}" data-title="{{ library_item.title | escape }}" data-source="{{ data_source }}" data-category="{{ data_category }}"{% if data_type != "" %} data-type="{{ data_type }}"{% endif %}>
 				<a href="/library/{{ library_item.slug | default: library_item.title | slugify }}/" title="{{ library_item.title }}" class="blocklink"></a>
 				<div class="postimg custom">
 					{% if library_item.thumb %}
-						<img src="{{ library_item.thumb }}" alt="{{ library_item.title }}" class="zoom-image">
+						<img src="{{ library_item.thumb }}" alt="{{ library_item.title }}" class="zoom-image" loading="lazy">
 					{% else %}
 						{% assign placeholder_number = forloop.index | modulo: 2 | plus: 1 %}
-						<img src="/images/library/thumbs/placeholder-{{ data_source }}-{{ placeholder_number }}.svg" alt="Placeholder" class="zoom-image">
+						<img src="/images/library/thumbs/placeholder-{{ data_source }}-{{ placeholder_number }}.svg" alt="Placeholder" class="zoom-image" loading="lazy">
 					{% endif %}
 					{% if library_item.pill or library_item.episode %}
 						<div class="pill-container">
@@ -74,21 +116,23 @@ redirect_from:
 					{% endif %}
 				</div>
 				<div class="postdetails">
-					{% if library_item.tags %}
-					<div class="tags">
-						{% for tag in library_item.tags %}
-							<span class="tag">{{ tag }}</span>
-						{% endfor %}
-						{% if library_item.length %}
-						  <span class="length">{{ library_item.length }}</span>
-						{% endif %}
-					</div>
-					{% endif %}
 					<h3>{{ library_item.title }}</h3>
 					<div class="meta">
 						<div class="date">{{ library_item.date | date: "%Y-%m-%d" }}</div>
-						<div class="author">{{ library_item.author }}</div>
+						{% if library_item.tags %}
+							<div class="tags">
+								{% for tag in library_item.tags %}<span>{{ tag }}</span>{% endfor %}
+							</div>
+						{% endif %}
+						{% if library_item.length %}
+							<div class="length">{{ library_item.length }}</div>
+						{% endif %}
 					</div>
+					{% if library_item.author %}
+						<div class="byline">
+							<div class="author"><span>{{ library_item.author }}</span></div>
+						</div>
+					{% endif %}
 				</div>
 			</div>
 		{% endfor %}
@@ -99,6 +143,7 @@ redirect_from:
 	<h2>Submission Guidelines</h2>
 	
 	<p>
+		The DuckDB library is a collection of scientific papers, podcasts, projects, talks and books that focus on DuckDB or DuckLake.
 		Submissions are welcome in the form of pull requests in the <a href="https://github.com/duckdb/duckdb-web/tree/main/_library"><code class="language-plaintext highlighter-rouge">duckdb-web</code> repository</a>.
 		You are welcome to submit both your own work and also the work of others.
 		When submitting, please follow these guidelines:
@@ -106,18 +151,10 @@ redirect_from:
 
 	<ul>
 		<li>
-			The filename should start with the release date (e.g., the podcast's, the conference's first day, or the journal issue's publication date),
-			e.g., <code class="language-plaintext highlighter-rouge">2025-09-01</code>.
+			The entry's filename should start with a date in YYYY-MM-DD format. It should capture the podcast's release date, the talk's presentation day, the book's publication day or the conference's first day.
 			If the exact release date is not easily obtainable, just use an estimated date.
 		</li>
-		<li>If available, please link the presentation slide deck of the talk or paper.</li>
-		<li>For research papers:
-			<ul>
-				<li>Papers should be about an algorithm, data structure, etc. used in DuckDB, built on top of DuckDB. Papers that study DuckDB in depth also qualify. However, papers where the use of DuckDB is limited to e.g., being the baseline for comparison or as part of their data processing toolchain, are out of scope.</li>
-				<li>Include a link to an open-access version of the paper.</li>
-				<li>Include the abstract. Make sure it doesn't have extra newlines, hyphens, or special characters.</li>
-				<li>If applicable, please add an “Implementation” section to describe the availability of the implementation (core DuckDB, community extension, fork, etc.)</li>
-			</ul>
-		</li>
+		<li>For entries describing talks and papers, please link the presentation slide deck if it's available.</li>
+		<li>If the entry has a DuckDB implementation (in core, as a community extension or as an open-source repository), please add a link pointing to this.</li>
 	</ul>
 </div>

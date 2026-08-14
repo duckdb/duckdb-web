@@ -195,7 +195,7 @@ function progressHandler(progress) {
       };
    </script>
    <script type="module">
-      import * as duckdbduckdbWasm from "https://cdn.jsdelivr.net/npm/@duckdb/duckdb-wasm@1.31.1-dev35.0/+esm";
+      import * as duckdbduckdbWasm from "https://cdn.jsdelivr.net/npm/@duckdb/duckdb-wasm@1.33.1-dev48.0/+esm";
       document.getElementById("last_query_status").innerHTML = "3/5: Instantiating DuckDB-Wasm - WebWorker component";
       if (window.updateStatusIndicator) window.updateStatusIndicator("3/5: Instantiating DuckDB-Wasm - WebWorker component");
       window.duckdbduckdbWasm = duckdbduckdbWasm;
@@ -267,10 +267,14 @@ if (append) {
       await executeQuery(conn, "DETACH __my_resource__;");
       setup_queries = "";
       if (secret_type !== "") {
-         var secret_query = "CREATE OR REPLACE SECRET __my_secret__ (TYPE "+ secret_type + ", KEY_ID '" + secret_id + "', SECRET '" + secret_key + "');";
+         var secret_query = "CREATE OR REPLACE SECRET __my_secret__ (TYPE "+ secret_type + ", KEY_ID '" + secret_id + "', SECRET '" + secret_key + "'";
          if (secret_type == "iceberg") {
-           secret_query = "CREATE OR REPLACE SECRET __my_secret__ (TYPE "+ secret_type + ", ENDPOINT '" + secret_id + "', TOKEN '" + secret_key + "');";
+           secret_query = "CREATE OR REPLACE SECRET __my_secret__ (TYPE "+ secret_type + ", ENDPOINT '" + secret_id + "', TOKEN '" + secret_key + "'";
          }
+         if (resource_type == "iceberg" && resource_path.startsWith("arn:aws:s3tables:")) {
+           secret_query += ", REGION 'us-west-1'"
+         }
+         secret_query += ");"
 
          last_res = await executeQuery(conn, secret_query, true);
          if (!last_res.is_valid) {

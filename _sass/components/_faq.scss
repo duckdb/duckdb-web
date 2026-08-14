@@ -7,29 +7,40 @@ body.faq,
 .frequentlyaskedquestions,
 body.documentation main .wrap.frequentlyaskedquestions{
 	h3{
-		@include title-1;
+		@include title-3;
 		cursor: pointer;
 		position: relative;
 		margin: 0;
 		padding-right: 55px;
-		&::after{
-			content: " ";
-			background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' fill='none'%3E%3Cpath stroke='%230D0D0D' stroke-linecap='square' stroke-width='1.5' d='m18 9.5-6 6-6-6'/%3E%3C/svg%3E");
+		.faq-icon{
 			background-color: var(--doc-codebox-button-background-color, #E6E6E6);
-			background-size: contain;
-			background-repeat: no-repeat;
-			width: 24px;
-			height: 24px;
+			width: 30px;
+			height: 30px;
 			border-radius: 50%;
 			position: absolute;
 			right: 0px;
 			top: -5px;
-			-webkit-transition: -webkit-transform .3s;
-			transition: -webkit-transform .3s;
-			-o-transition: transform .3s;
-			transition: transform .3s;
-			transition: transform .3s, -webkit-transform .3s;
 			cursor: pointer;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			-webkit-transition: background-color .3s;
+			-o-transition: background-color .3s;
+			transition: background-color .3s;
+			svg.icon{
+				width: 18px;
+				height: 18px;
+				stroke-width: 2;
+				color: var(--main-text-primary-color, #0D0D0D);
+				-webkit-transition: -webkit-transform .3s;
+				transition: -webkit-transform .3s;
+				-o-transition: transform .3s;
+				transition: transform .3s;
+				transition: transform .3s, -webkit-transform .3s;
+			}
+			&:hover{
+				background-color: var(--doc-codebox-button-background-color-hover, #b2b2b299);
+			}
 		}
 		a:hover{
 			background-color: transparent;
@@ -42,12 +53,12 @@ body.documentation main .wrap.frequentlyaskedquestions{
 		-o-transition: background-color .3s;
 		transition: background-color .3s;
 		margin-bottom: 10px;
-		border-radius: 10px;
+		border-radius: var(--page-radius-m);
 		border: 1px solid transparent;
 		-webkit-transition: border .3s;
 		-o-transition: border .3s;
 		transition: border .3s;
-		&.open h3::after{
+		&.open h3 .faq-icon svg.icon{
 			-webkit-transform: rotate(180deg);
 				-ms-transform: rotate(180deg);
 					transform: rotate(180deg);
@@ -63,6 +74,22 @@ body.documentation main .wrap.frequentlyaskedquestions{
 		>p:first-child{
 			margin-top: 0;
 		}
+		a{
+			color: var(--main-text-primary-color, #0D0D0D);
+			text-decoration: underline;
+			text-decoration-color: var(--main-text-tertiary-color, #B2B2B2);
+			text-decoration-thickness: 1px;
+			text-underline-offset: 0.2em;
+			-webkit-transition: color .3s, text-decoration-color .3s;
+			-o-transition: color .3s, text-decoration-color .3s;
+			transition: color .3s, text-decoration-color .3s;
+			&:hover{
+				color: var(--main-link-hover-color, #998B00);
+				text-decoration-color: var(--main-link-hover-color, #998B00);
+				text-decoration-thickness: 1px;
+				cursor: pointer;
+			}
+		}
 	}
 	.headlinebar{
 		margin-bottom: 40px;
@@ -77,7 +104,7 @@ section.faq{
 	}
 	.qa-wrap{
 		h3{
-			@include title-1;
+			@include title-3;
 			a{
 				color: var(--main-text-primary-color, #0D0D0D);
 			}
