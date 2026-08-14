@@ -29,8 +29,6 @@ Attendance is free but **please register on [Luma](https://luma.com/kfgc4vej) as
 
 ## Timetable
 
-The skeleton program looks as follows:
-
 | Time  | Activity                                                 |                                                                                  |
 | :---- | :------------------------------------------------------- | -------------------------------------------------------------------------------- |
 | 17:30 | Doors open                                               |                                                                                  |
