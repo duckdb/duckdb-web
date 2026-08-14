@@ -73,9 +73,9 @@ The table below shows the available mathematical functions.
 | [`even(x)`](#evenx) | Round to next even number by rounding away from zero. |
 | [`exp(x)`](#expx) | Computes `e ** x`. |
 | [`factorial(x)`](#factorialx) | See the `!` operator. Computes the product of the current integer and all integers below it. |
-| [`fdiv(x, y)`](#fdivx-y) | Performs integer division (`x // y`) but returns a `DOUBLE` value. |
+| [`fdiv(x, y)`](#fdivx-y) | Performs integer division (`x // y`) using the floored definition and returns a `DOUBLE` value. |
 | [`floor(x)`](#floorx) | Rounds the number down. |
-| [`fmod(x, y)`](#fmodx-y) | Calculates the modulo value. Always returns a `DOUBLE` value. |
+| [`fmod(x, y)`](#fmodx-y) | Calculates the modulo value using the floored definition. Always returns a `DOUBLE` value. |
 | [`gamma(x)`](#gammax) | Interpolation of the factorial of `x - 1`. Fractional inputs are allowed. |
 | [`gcd(x, y)`](#gcdx-y) | Computes the greatest common divisor of `x` and `y`. |
 | [`greatest_common_divisor(x, y)`](#greatest_common_divisorx-y) | Computes the greatest common divisor of `x` and `y`. |
