@@ -17,7 +17,7 @@ There are many database management systems (DBMS) out there. But there is [no on
 
 SQLite is the [world's most widely deployed DBMS](https://www.sqlite.org/mostdeployed.html). Simplicity in installation, and embedded in-process operation are central to its success. DuckDB adopted the ideas of simplicity and in-process operation – but later stepped out of the realm of in-process operations through the [Quack protocol]({% link quack/index.html %}).
 
-DuckDB has **no external dependencies**, neither for compilation nor during run-time. For releases, the entire source tree of DuckDB is compiled into two files, a header and an implementation file, a so-called "amalgamation". This greatly simplifies deployment and integration in other build processes. To build DuckDB, all that is required is a working C++11 compiler (note that DuckDB v2.0 will move to C++17).
+DuckDB has **no external dependencies**, neither for compilation nor during run-time. For releases, the entire source tree of DuckDB is compiled into two files, a header and an implementation file, a so-called "amalgamation". This greatly simplifies deployment and integration in other build processes. To build DuckDB, all that is required is a working C++17 compiler.
 
 For DuckDB, there is no DBMS server software to install, update and maintain. DuckDB does not run as a separate process, but completely **embedded within a host process**. For the analytical use cases that DuckDB targets, this has the additional advantage of **high-speed data transfer** to and from the database. In some cases, DuckDB can process foreign data without copying. For example, the DuckDB Python package can run queries directly on Pandas data without ever importing or copying any data.
 
