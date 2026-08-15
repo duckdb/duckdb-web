@@ -96,5 +96,3 @@ ORDER BY function_name;
 | bit_length    | scalar        | BIGINT      | [col0]                 | [VARCHAR]                        | Number of bits in a string                                                                                                               |
 | bit_position  | scalar        | INTEGER     | [substring, bitstring] | [BIT, BIT]                       | Returns first starting index of the specified substring within bits, or zero if it is not present. The first (leftmost) bit is indexed 1 |
 | bitstring     | scalar        | BIT         | [bitstring, length]    | [VARCHAR, INTEGER]               | Pads the bitstring until the specified length                                                                                            |
-
-> Currently, the description and parameter names of functions are not available in the `duckdb_functions()` function.
