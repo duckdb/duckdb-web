@@ -72,10 +72,10 @@ docs:
     **Platforms:** Linux x64/arm64, Windows (MSVC), macOS x64/arm64. WASM and mingw/rtools
     excluded (LuaJIT requires specific toolchains); linux_arm64 verified (v0.31, CI + arm64 runtime test).
 
-extension_star_count: 2
-extension_star_count_pretty: 2
-extension_download_count: 270
-extension_download_count_pretty: 270
+extension_star_count: 3
+extension_star_count_pretty: 3
+extension_download_count: 285
+extension_download_count_pretty: 285
 image: '/images/community_extensions/social_preview/preview_community_extension_luajit.png'
 layout: community_extension_doc
 ---
