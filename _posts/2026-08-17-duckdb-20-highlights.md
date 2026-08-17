@@ -316,10 +316,10 @@ So you have written your extension. But how should you distribute it? Until now,
 SET allow_extension_repositories = 'allowed';
 CREATE EXTENSION REPOSITORY my_repo FROM 'https://extensions.example.org';
 INSTALL my_ext FROM my_repo;
-LOAD my_ext;
+LOAD my_repo/my_ext;
 ```
 
-A repository is a name, a URL prefix, and one or more RSA public keys that are trusted to sign the extensions served from it. The prefix can point at anything DuckDB can read: a local path, `https`, `s3`, you name it. At `CREATE` time, DuckDB fetches the repository's public keys from `<prefix>/public_key.pem` and pins them into the repository definition, printing each key's SHA-256 fingerprint so you can compare it against one published out of band. If you would rather not trust the network at all, you can pass the key directly:
+A repository is a name, a URL prefix, and one or more RSA public keys that are trusted to sign the extensions served from it. The prefix can point at anything DuckDB can read: a local path, `https`, `s3`, you name it. At `CREATE` time, DuckDB fetches the repository's public keys and pins them into the repository definition, printing each key's SHA-256 fingerprint so you can compare it against one published out of band. If you would rather not trust the network at all, you can pass the key directly:
 
 ```sql
 CREATE EXTENSION REPOSITORY my_repo FROM 's3://my-bucket/extensions'
