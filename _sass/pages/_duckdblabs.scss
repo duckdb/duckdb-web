@@ -451,6 +451,25 @@ body.contact{
 	border: 1px solid var(--doc-codebox-border-color, #E6E6E6);
 }
 
+.postpreview .meta .source{
+	display: -webkit-box;
+	display: -ms-flexbox;
+	display: flex;
+	-webkit-box-align: center;
+		-ms-flex-align: center;
+			align-items: center;
+	gap: 8px;
+	min-width: 0;
+
+	> span{
+		min-width: 0;
+		overflow: hidden;
+		-o-text-overflow: ellipsis;
+		   text-overflow: ellipsis;
+		white-space: nowrap;
+	}
+}
+
 footer .sitefooter .footercontent .footerlogo{
 	width: 178px;
 	height: 38px;
@@ -676,7 +695,7 @@ body.newsroom{
 
 	input{
 		@include label-1();
-		height: 36px;
+		height: 44px;
 		width: 100%;
 		padding: 0 15px 0 38px;
 		border: 1px solid var(--main-infobox-labs-border-color, rgba(51, 51, 51, 0.60));
