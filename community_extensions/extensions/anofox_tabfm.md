@@ -8,7 +8,7 @@ excerpt: |
 extension:
   name: anofox_tabfm
   description: Zero-shot tabular machine learning inside DuckDB — classification, regression, synthetic-data generation and imputation with real tabular foundation models (Mitra, TabPFN v2/2.5/3, TabICL, Orion-BiX, TabFM) on ONNX Runtime, no training loop
-  version: 0.4.0
+  version: '2026.08.14'
   language: C++
   build: cmake
   license: MIT
@@ -18,7 +18,7 @@ extension:
 
 repo:
   github: DataZooDE/anofox-tabfm
-  ref: 503bc596debdb830cbfa97c176acccbc885f60bf
+  ref: 443f8544631ec689c3a2e324b14aa6d59280c939
 
 docs:
   hello_world: |
@@ -144,8 +144,8 @@ docs:
 
 extension_star_count: 4
 extension_star_count_pretty: 4
-extension_download_count: 659
-extension_download_count_pretty: 659
+extension_download_count: 678
+extension_download_count_pretty: 678
 image: '/images/community_extensions/social_preview/preview_community_extension_anofox_tabfm.png'
 layout: community_extension_doc
 ---
