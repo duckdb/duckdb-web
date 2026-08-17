@@ -108,11 +108,11 @@
 													<span class="date">{{ page.date | date: "%Y-%m-%d" }}</span>
 													{% if page.collection == "library" %}
 														{% if page.length %}
-															<span class="bullet">&middot;</span>
+															<span class="bullet">|</span>
 															<span class="readingtime">{{ page.length }}</span>
 														{% endif %}
 													{% else %}
-														<span class="bullet">&middot;</span>
+														<span class="bullet">|</span>
 														<span class="readingtime">{{ content | reading_time }}</span>
 													{% endif %}
 												</div>

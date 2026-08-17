@@ -42,11 +42,9 @@
 
 		<div class="meta">
 			<div class="date">{{ item.date | date: "%Y-%m-%d" }}</div>
-			{% if item.tags.size > 0 %}
-				<div class="tags">
-					{% for tag in item.tags %}<span>{{ tag }}</span>{% endfor %}
-				</div>
-			{% endif %}
+			{% unless is_external %}
+				<div class="readingtime">{{ item.content | reading_time }}</div>
+			{% endunless %}
 			{% if is_external %}
 				<div class="external-source">{{ source_label }}<svg class="icon"><use href="#link-external-02"></use></svg></div>
 			{% endif %}
