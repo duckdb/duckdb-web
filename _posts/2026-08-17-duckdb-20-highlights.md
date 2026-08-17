@@ -328,6 +328,10 @@ CREATE EXTENSION REPOSITORY my_repo FROM 's3://my-bucket/extensions'
 
 Pinned repositories survive restarts, support key rotation by trusting multiple keys, and can be audited at any time through the `duckdb_extension_repositories()` table function, or removed again with `DROP EXTENSION REPOSITORY`. Together with the stable C API, the extension story rounds out nicely: write your extension once, sign it, host it wherever you like, and `INSTALL` it anywhere.
 
+## Bonus: Advisory Board
+
+Starting this fall, we will add a stakeholder advisory board to the [DuckDB Foundation](https://duckdb.foundation/). The advisory board will provide input on the development roadmap of DuckDB, DuckLake, and Quack. This allows key stakeholders to have a say in the projects' direction.
+
 ## Final Thoughts
 
 These are only a few highlights, and this post is only a preview. Some details may still shift before the release this fall, and there are many more features and improvements that we could not cover here. DuckDB v2.0 will also come with a small set of breaking changes, including the new default storage format and the completed lambda syntax transition, which we will cover in detail in the release announcement.
