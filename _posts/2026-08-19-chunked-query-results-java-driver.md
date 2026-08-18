@@ -36,7 +36,7 @@ To be clear, the `ResultSet` path is not going anywhere. It is the standard, it 
 
 ## Meet `DuckDBChunkedResult`
 
-The Java driver now exposes the engine's native chunk stream directly, via the same mechanism the [C API](https://duckdb.org/docs/current/clients/c/overview) offers as `duckdb_fetch_chunk`. A query result becomes a lazily fetched sequence of data chunks, and you read column vectors out of each chunk in batches, the way the engine produced them, avoiding the per-row overhead mandated by the JDBC specification.
+The Java driver now exposes the engine's native chunk stream directly, via the same mechanism the [C API]({% link docs/current/clients/c/overview.md %}) offers as `duckdb_fetch_chunk`. A query result becomes a lazily fetched sequence of data chunks, and you read column vectors out of each chunk in batches, the way the engine produced them, avoiding the per-row overhead mandated by the JDBC specification.
 
 Here is the whole flow:
 
