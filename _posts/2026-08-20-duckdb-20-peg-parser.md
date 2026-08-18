@@ -304,7 +304,7 @@ FROM range(6) t(i)
   |> ORDER BY i DESC;
 ```
 
-```console
+```text
 ┌───────┬─────────┐
 │   i   │ doubled │
 │ int64 │  int64  │
