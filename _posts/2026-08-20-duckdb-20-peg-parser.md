@@ -104,11 +104,11 @@ This was one of the motivations behind our earlier blog post on runtime-extensib
 
 ## Going from Prototype to Production
 
-Historically, DuckDB parsed SQL using a modified version of PostgreSQL’s grammar together with a YACC/Bison-based parser. This parser infrastructure was already part of the [first commit](https://github.com/duckdb/duckdb/commit/ba75d81601913782d28a3878707d135319f38bdd) to DuckDB in 2018, and the grammar has since been extended alongside DuckSQL. For the upcoming `2.0` release, we are replacing both parts: the SQL grammar has been rewritten as a PEG, and a new parser processes queries according to that grammar. What we are **not** replacing is DuckSQL itself.
+Historically, DuckDB parsed SQL using a modified version of PostgreSQL’s grammar together with a YACC/Bison-based parser. This parser infrastructure was already part of the [first commit](https://github.com/duckdb/duckdb/commit/ba75d81601913782d28a3878707d135319f38bdd) to DuckDB in 2018, and the grammar has since been extended alongside DuckSQL. For the upcoming v2.0 release, we are replacing both parts: the SQL grammar has been rewritten as a PEG, and a new parser processes queries according to that grammar. What we are **not** replacing is DuckSQL itself.
 
 The research prototype demonstrated that a PEG-based SQL parser was feasible. Replacing DuckDB’s existing parser, however, required considerably more than parsing a representative subset of SQL. The new parser had to accept all of DuckSQL and produce the same AST expected by DuckDB’s binder.
 
-The PEG grammar first reached users in DuckDB `v1.2`, where it handled autocomplete in the CLI. Later, in DuckDB `v1.5` we introduced the complete PEG parser as an experimental, opt-in feature. Since then, the grammar, matcher, and transformer have been steadily improved to make the PEG parser the default for DuckDB `v2.0`.
+The PEG grammar first reached users in DuckDB v1.2, where it handled autocomplete in the CLI. Later, in DuckDB v1.5 we introduced the complete PEG parser as an experimental, opt-in feature. Since then, the grammar, matcher, and transformer have been steadily improved to make the PEG parser the default for DuckDB v2.0.
 
 Among other things, the parser had to support:
 
@@ -129,7 +129,7 @@ We encountered this with queries containing a large number of unmatched opening 
 SELECT ((((((((((((((((((;
 ```
 
-With the experimental PEG parser shipped in `v1.5`, adding one more opening parenthesis approximately doubled the parsing time:
+With the experimental PEG parser shipped in v1.5, adding one more opening parenthesis approximately doubled the parsing time:
 
 ```text
 18 opening parentheses:  5.303 seconds
