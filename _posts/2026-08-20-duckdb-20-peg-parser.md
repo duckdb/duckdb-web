@@ -73,14 +73,6 @@ However, over the years this parser also came with some downsides. Extending Duc
 
 This was one of the motivations behind our earlier blog post on runtime-extensible SQL parsers. In that post and the accompanying CIDR paper, we explored whether Parsing Expression Grammars (PEGs) could provide a better foundation for an extensible database parser. At the time, the PEG parser was still an experimental prototype capable of parsing only a subset of SQL. 
 
-## Outgrowing the PostgreSQL-Derived Parser
-
-When DuckDB started out, it made a lot of sense to use the PostgreSQL-derived parser and grammar. It gave DuckDB a mature, battle-tested SQL grammar based on syntax that many users were already familiar with. We adapted the parser to our needs and added a `Transformer` that converted the resulting PostgreSQL-style parse tree into DuckDB’s internal AST.
-
-However, over the years this parser also came with some downsides. Extending DuckSQL meant modifying the underlying YACC/Bison grammar. Because Bison generates an LALR(1) parser, seemingly small additions to the grammar can interact with existing rules and introduce `shift/reduce` or `reduce/reduce` conflicts. As DuckSQL grew, making changes to the grammar therefore became increasingly difficult.
-
-This was one of the motivations behind our earlier blog post on runtime-extensible SQL parsers. In that post and the accompanying CIDR paper, we explored whether Parsing Expression Grammars (PEGs) could provide a better foundation for an extensible database parser. At the time, the PEG parser was still an experimental prototype capable of parsing only a subset of SQL. Rather than repeat the motivation and limitations discussed there, in this post we focus on how we turned that research prototype into the parser that will replace DuckDB’s existing PostgreSQL-derived parser.
-
 ## A Primer on PEG Parsers
 
 Before looking at how we turned the prototype into a production parser, let us briefly revisit how a PEG describes a language.
@@ -112,8 +104,6 @@ A PEG evaluates alternatives in order. When matching `SelectFrom`, the parser fi
 In DuckDB, these rules operate on the tokens produced by the tokenizer. The matcher applies the grammar rules to those tokens and constructs a generic `ParseResult` tree, which is subsequently transformed into DuckDB’s internal AST.
 
 ## Going from Prototype to Production
-
-Historically, DuckDB parsed SQL using a modified version of PostgreSQL’s grammar together with a YACC/Bison-based parser. This parser infrastructure was already part of the [first commit](https://github.com/duckdb/duckdb/commit/ba75d81601913782d28a3878707d135319f38bdd) to DuckDB in 2018, and the grammar has since been extended alongside DuckSQL. For the upcoming v2.0 release, we are replacing both parts: the SQL grammar has been rewritten as a PEG, and a new parser processes queries according to that grammar. What we are **not** replacing is DuckSQL itself.
 
 The research prototype demonstrated that a PEG-based SQL parser was feasible. Replacing DuckDB’s existing parser, however, required considerably more than parsing a representative subset of SQL. The new parser had to accept all of DuckSQL and produce the same AST expected by DuckDB’s binder.
 
