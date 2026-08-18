@@ -4,7 +4,7 @@ title: "Reconciling JSON in DuckDB, One Patch at a Time"
 author: "Mustafa Khan"
 thumb: "/images/blog/thumbs/json-patch.svg"
 image: "/images/blog/thumbs/json-patch.jpg"
-excerpt: "DuckDB v2.0 will ship JSON functions that alolw you to easily patch apply JSON patches."
+excerpt: "DuckDB v2.0 will ship JSON functions that allow you to easily apply JSON patches."
 tags: ["extension"]
 ---
 
