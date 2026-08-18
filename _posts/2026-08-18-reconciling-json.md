@@ -10,7 +10,7 @@ tags: ["extension"]
 
 > Guest blog post by [Mustafa Khan](https://www.linkedin.com/in/mustafahasankhan/) ([Atlan](https://atlan.com/)).
 
-DuckDB's JSON extension already covers reading JSON, extracting paths, applying RFC 7396 merge patches, and the usual scalar accessors. The [upcoming v2.0]({% post_url 2026-08-17-duckdb-20-highlights %}) release will extend it with four new scalar functions: `json_merge_patch_diff` computes the inverse of an RFC 7396 merge patch, `json_deep_merge` applies patches with skip-on-null semantics, `json_normalize` canonicalizes key order, and `json_strip_nulls` recursively removes null-valued keys. You can try these primitives today by installing the [preview version of DuckDB v2.0-dev]({% link install/preview.md %}).
+DuckDB's JSON extension already covers reading JSON, extracting paths, applying RFC 7396 merge patches, and the usual scalar accessors. The [upcoming v2.0]({% post_url 2026-08-17-duckdb-20-highlights %}) release will extend it with four new scalar functions: `json_merge_patch_diff` computes the inverse of an RFC 7396 merge patch, `json_deep_merge` applies patches with skip-on-`null` semantics, `json_normalize` canonicalizes key order, and `json_strip_nulls` recursively removes `null`-valued keys. You can try these primitives today by installing the [preview version of DuckDB v2.0-dev]({% link install/preview.md %}).
 
 These primitives address a handful of recurring problems in data pipelines that reconcile state between systems. The examples in this post come from [Atlan](https://atlan.com/). Atlan is a _context layer_ for AI: a platform that gathers metadata, lineage, and semantics from a company's data systems so that data teams and AI agents can find and understand the data. Keeping that layer up to date means constantly reconciling entity documents from many upstream sources. Two upstream services may describe the same entity with different key orderings. Partial updates may carry `null` in a field to indicate either deletion or absence of data. Most events change only one or two fields out of dozens. Handling these cases in SQL previously required leaving the database. The four new functions allow you to perform the work in a single query.
 
@@ -19,7 +19,7 @@ In the rest of this post, we walk through each function, then chain them into an
 ## `json_merge_patch_diff`: The Inverse of `json_merge_patch`
 
 `json_merge_patch_diff(orig, modified)` returns the minimal RFC 7396 patch such that `json_merge_patch(orig, patch) = modified`.
-`json_merge_patch` already exists in DuckDB. It applies an RFC 7396 patch to a document: a null value in the patch deletes the key, nested objects are merged recursively, and any other value overwrites the original.
+`json_merge_patch` already exists in DuckDB. It applies an RFC 7396 patch to a document: a `null` value in the patch deletes the key, nested objects are merged recursively, and any other value overwrites the original.
 Deleted keys appear as `null` in the patch, changed and added keys appear with their new values, and unchanged keys are omitted entirely.
 
 ```sql
@@ -75,10 +75,10 @@ This function is particularly useful for CDC pipelines, where most events on a m
 
 ## `json_deep_merge`: Recursive Merge where `null` Means “Skip”
 
-The patches from the previous section are applied with `json_merge_patch`, which strictly follows RFC 7396: null in the patch deletes the key. That is the right rule for the round trip with `json_merge_patch_diff`, but it is the wrong rule when you are reconciling fragments from multiple upstreams that emit null to mean “I do not have a value for this field on this message.”
+The patches from the previous section are applied with `json_merge_patch`, which strictly follows RFC 7396: `null` in the patch deletes the key. That is the right rule for the round trip with `json_merge_patch_diff`, but it is the wrong rule when you are reconciling fragments from multiple upstreams that emit `null` to mean “I do not have a value for this field on this message.”
 `json_deep_merge` covers that case. 
 
-`json_deep_merge` follows the same recursive merge structure as `json_merge_patch`, with one difference: a `null` value in the patch means “keep the original value” instead of “delete the key”. Everything else, including handling of non-null values, nested objects, and the variadic argument shape, matches `json_merge_patch`. In the following example, we apply a patch with the key `b` set to null with `json_merge_patch` and `json_deep_merge`, respectively, resulting in two different results:
+`json_deep_merge` follows the same recursive merge structure as `json_merge_patch`, with one difference: a `null` value in the patch means “keep the original value” instead of “delete the key”. Everything else, including handling of non-null values, nested objects, and the variadic argument shape, matches `json_merge_patch`. In the following example, we apply a patch with the key `b` set to `null` with `json_merge_patch` and `json_deep_merge`, respectively, resulting in two different results:
 
 ```sql
 SELECT json_merge_patch('{"a":1,"b":2}', '{"b":null}') AS rfc_7396;
@@ -149,7 +149,7 @@ SELECT json_deep_merge(
 {"columnName":"user_id","parentColumn":"accounts.id"}
 ```
 
-Note that passing SQL `NULL` as an argument and using JSON `null` values result in different behaviors. A SQL NULL patch makes the result NULL, and a SQL NULL original is ignored, matching the behavior of `json_merge_patch`. JSON `null` inside a patch means “keep the original value for this key”.
+Note that passing SQL `NULL` as an argument and using JSON `null` values result in different behaviors. A SQL `NULL` patch makes the result `NULL`, and a SQL `NULL` original is ignored, matching the behavior of `json_merge_patch`. JSON `null` inside a patch means “keep the original value for this key”.
 
 ## `json_normalize`: Canonical Form for Hashing
 
@@ -229,7 +229,7 @@ SELECT json_strip_nulls('{"a":[{"x":1,"y":null},{"z":null}]}');
 {"a":[{"x":1},{}]}
 ```
 
-The motivating case is cleaning patches before storing them. After computing a `json_merge_patch_diff`, the patch contains `null` entries for deleted keys, which is correct under RFC 7396. If you only want to ship the additions and updates, `json_strip_nulls(json_merge_patch_diff(orig, modified))` removes those null entries from the patch. The resulting patch can add and update fields but never delete them. The same idea applies to trimming verbose API responses before hashing or storing them.
+The motivating case is cleaning patches before storing them. After computing a `json_merge_patch_diff`, the patch contains `null` entries for deleted keys, which is correct under RFC 7396. If you only want to ship the additions and updates, `json_strip_nulls(json_merge_patch_diff(orig, modified))` removes those `null` entries from the patch. The resulting patch can add and update fields but never delete them. The same idea applies to trimming verbose API responses before hashing or storing them.
 
 Under the hood, this uses `yyjson_mut_obj_iter_remove`, which deletes keys during iteration without invalidating the iterator. Calling `json_strip_nulls` on an already-clean document reduces to a parse, one pass, and a serialize.
 
@@ -314,7 +314,7 @@ The benchmark below compares each function and the full composed chain against e
 | `json_strip_nulls`      |       6.17 |       0.05 |  123.4x |
 | Full chain (composed)   |      11.11 |       1.03 |   10.8x |
 
-The benchmark methodology is as follows. Each measurement is the median of five iterations. Python timings include parse, transform, and serialize per row, with data pre-loaded into memory so disk I/O is excluded. For DuckDB, we timed the whole run from the command line and subtracted a no-op SELECT json run, so only the transformation is measured. Hardware is an Apple M3 Pro (arm64) with 18 GB RAM, Python 3.11. DuckDB runs multi-threaded by default, while the Python script is single-threaded. The benchmark code and synthetic data generator are available [on GitHub](https://github.com/mustafahasankhan/duckdb-json-bench).
+The benchmark methodology is as follows. Each measurement is the median of five iterations. Python timings include parse, transform, and serialize per row, with data pre-loaded into memory so disk I/O is excluded. For DuckDB, we timed the whole run from the command line and subtracted a no-op `SELECT json` run, so only the transformation is measured. Hardware is an Apple M3 Pro (arm64) with 18 GB RAM, Python 3.11. DuckDB runs multi-threaded by default, while the Python script is single-threaded. The benchmark code and synthetic data generator are available [on GitHub](https://github.com/mustafahasankhan/duckdb-json-bench).
 
 The speedup comes from two sources: DuckDB operates on `yyjson` trees in place, while the Python equivalent spends most of its cycles in `json.loads` and `json.dumps`. The result is a speedup of about 1-2 orders of magnitude, depending on how much transformation work the function does. `json_strip_nulls` is the extreme case, since the work after parsing reduces to a single iterator pass with an in-place delete. On the composed chain, the per-function gap narrows because the absolute work goes up on both sides, but DuckDB still finishes the full reconciliation of 500,000 event pairs in roughly one second.
 
@@ -339,7 +339,7 @@ SELECT json_normalize('{"z":1,"a":2}');
 
 ## Wrapping Up
 
-These four functions extend the DuckDB JSON extension with primitives for diffing, merging, normalizing, and stripping null values. They compose into reconciliation pipelines that previously required transformations outside SQL.
+These four functions extend the DuckDB JSON extension with primitives for diffing, merging, normalizing, and stripping `null` values. They compose into reconciliation pipelines that previously required transformations outside SQL.
 
 That's not all. The functions `json_set(json, path, value)`, `json_remove`, `json_insert`, and `json_replace` are also available in DuckDB v2.0 preview ([#23786](https://github.com/duckdb/duckdb/pull/23786)), completing the set of edit primitives defined in the SQL/JSON specification. For the implementations, see the JSON extension source in [`extension/json`](https://github.com/duckdb/duckdb/tree/main/extension/json).
 
