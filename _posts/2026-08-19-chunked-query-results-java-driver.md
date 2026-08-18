@@ -14,7 +14,7 @@ JDBC, on the other hand, was designed in 1997 around a very different idea. The 
 
 For the DuckDB Java driver, that mismatch has a concrete cost. The driver embeds the native DuckDB library and talks to it over JNI. When the engine has already produced a columnar chunk of 2,048 rows, the JDBC specification requires the driver to slice it back into rows and cells before you can read it. If your application is going to put those values right back into columnar form, such as arrays, Arrow buffers, or a machine learning feature matrix, everyone involved is doing work that nobody asked for.
 
-Starting with recent releases of the [Java driver](https://github.com/duckdb/duckdb-java/pull/682), there is a way out.
+Starting with version 1.5.3.0 of the [Java driver](https://github.com/duckdb/duckdb-java/pull/682), there is a way out.
 
 ## The Row-at-a-Time Tax
 
