@@ -310,7 +310,7 @@ SELECT add_numbers(b := 2, a := 40); -- 42: named arguments work too
 SELECT add_numbers(40, NULL);        -- NULL, without the function doing anything
 ```
 
-This binary keeps working across DuckDB versions: no re-targeting, no rebuilds. And nowadays, with all the AI tooling around, building an extension has never been easier.
+You do not need re-target or rebuild it every time a new DuckDB version comes out. And nowadays, with all the AI tooling around, building an extension has never been easier.
 
 So you have written your extension. But how should you distribute it? Until now, DuckDB could only install extensions from the built-in repositories (`core`, `core_nightly`, `community`, ...). In v2.0, you will be able to register your own trusted repositories ([#24777](https://github.com/duckdb/duckdb/pull/24777), currently work-in-progress), so an organization can host and sign its own extensions and have them install and load just like the built-in ones:
 
