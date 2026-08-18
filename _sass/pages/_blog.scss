@@ -441,7 +441,7 @@ main.main-everywhere .recentposts .newstileswrap .postpreview{
 	row-gap: 20px;
 
 	h1{
-		@include headline-2();
+		@include headline-1();
 		margin: 0;
 	}
 
@@ -901,11 +901,6 @@ h5 a {
 			padding: 105px 15px;
 			position: relative;
 			z-index: 100;
-			h1{
-				@include display-1();
-				margin-top: 0;
-				margin-bottom: 0;
-			}
 			h3{
 				margin-top: 0;
 				margin-bottom: 0;
@@ -1013,7 +1008,7 @@ h5 a {
 			}
 
 			h1{
-				@include display-2();
+				@include headline-1();
 				margin-bottom: 30px;
 				margin-top: 0;
 			}
