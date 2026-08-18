@@ -60,8 +60,6 @@ DuckDB’s SQL closely follows PostgreSQL conventions, but it has evolved consid
 
 This distinction is important when talking about the parser. The SQL dialect that DuckDB accepts and the implementation used to parse that SQL are two separate things.
 
-Historically, DuckDB parsed SQL using a modified version of PostgreSQL’s grammar together with a YACC/Bison-based parser. This parser infrastructure was already part of the [first commit](https://github.com/duckdb/duckdb/commit/ba75d81601913782d28a3878707d135319f38bdd) to DuckDB in 2018, and the grammar has since been extended alongside DuckSQL. For the upcoming `2.0` release, we are replacing both parts: the SQL grammar has been rewritten as a PEG, and a new parser processes queries according to that grammar. What we are **not** replacing is DuckSQL itself.
-
 ## A brief refresher on PEG parsers
 
 Before looking at how we turned the prototype into a production parser, let us briefly revisit how a PEG describes a language.
@@ -101,6 +99,8 @@ However, over the years this parser also came with some downsides. Extending Duc
 This was one of the motivations behind our earlier blog post on runtime-extensible SQL parsers. In that post and the accompanying CIDR paper, we explored whether Parsing Expression Grammars (PEGs) could provide a better foundation for an extensible database parser. At the time, the PEG parser was still an experimental prototype capable of parsing only a subset of SQL. Rather than repeat the motivation and limitations discussed there, in this post we focus on how we turned that research prototype into the parser that will replace DuckDB’s existing PostgreSQL-derived parser.
 
 ## Going from prototype to production
+
+Historically, DuckDB parsed SQL using a modified version of PostgreSQL’s grammar together with a YACC/Bison-based parser. This parser infrastructure was already part of the [first commit](https://github.com/duckdb/duckdb/commit/ba75d81601913782d28a3878707d135319f38bdd) to DuckDB in 2018, and the grammar has since been extended alongside DuckSQL. For the upcoming `2.0` release, we are replacing both parts: the SQL grammar has been rewritten as a PEG, and a new parser processes queries according to that grammar. What we are **not** replacing is DuckSQL itself.
 
 The research prototype demonstrated that a PEG-based SQL parser was feasible. Replacing DuckDB’s existing parser, however, required considerably more than parsing a representative subset of SQL. The new parser had to accept all of DuckSQL and produce the same AST expected by DuckDB’s binder.
 
@@ -193,7 +193,7 @@ So far, these rules are all part of DuckSQL itself. The next step is allowing ex
 
 Extensions are a central part of DuckDB. They can already add scalar and table functions, optimizer rules, query-plan rewrites, and even custom physical operators. 
 
-Extensions that add new syntax already exist, such as `psql` and `duckpgq`, but under the hood they work as fallback parsers. DuckDB first tries to parse the query itself and only calls the extension if that fails. This works well for self-contained syntax, but an extension that wants to add syntax inside SQL also has to parse the surrounding SQL itself. These fallback parsers also make it impossible to combine the syntax of multiple extensions. 
+Extensions that add new syntax already exist, such as [`psql`](https://duckdb.org/community_extensions/extensions/psql) and [`duckpgq`](https://duckdb.org/community_extensions/extensions/duckpgq), but under the hood they work as fallback parsers. DuckDB first tries to parse the query itself and only calls the extension if that fails. This works well for self-contained syntax, but an extension that wants to add syntax inside SQL also has to parse the surrounding SQL itself. These fallback parsers also make it impossible to combine the syntax of multiple extensions. 
 
 With the PEG parser, extensions can instead extend individual parts of DuckDB’s parser. They can extend the tokenizer, add grammar rules, and register custom matchers while continuing to reuse the rest of DuckSQL.
 
