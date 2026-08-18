@@ -230,9 +230,11 @@ Query planning also becomes **partition-aware** ([#22336](https://github.com/duc
 
 ## 7. Storage Format v2.0
 
-DuckDB v2.0 bumps the default [storage format version]({% link docs/current/internals/storage.md %}) to v2.0.0 ([#22875](https://github.com/duckdb/duckdb/pull/22875)). The headline change is buffer-managed ART indexes ([#21458](https://github.com/duckdb/duckdb/pull/21458), [#23605](https://github.com/duckdb/duckdb/pull/23605)): indexes are no longer pinned in memory, which means large indexed tables open instantly and their indexes are paged in on demand.
+DuckDB v2.0 bumps the default [storage format version]({% link docs/current/internals/storage.md %}) to v2.0.0 ([#22875](https://github.com/duckdb/duckdb/pull/22875)).
 
 Column metadata is now loaded lazily ([#22333](https://github.com/duckdb/duckdb/pull/22333)), so wide tables open faster too. The `DICT_FSST` string compression method is enabled by default ([#23733](https://github.com/duckdb/duckdb/pull/23733)), deletes are stored compactly ([#24336](https://github.com/duckdb/duckdb/pull/24336)), and the storage layer performs much stronger corruption validation on read. In short: databases with big indexes and wide tables open faster and use far less memory.
+
+Later this year, ART indexes will be buffer-managed ([#21458](https://github.com/duckdb/duckdb/pull/21458), [#23605](https://github.com/duckdb/duckdb/pull/23605)). This will allow ART index buffers to be evicted under memory pressure, and remove the restriction on the ART index fitting completely within memory.
 
 ## 8. A Brand New SQL Parser
 
@@ -268,38 +270,44 @@ To make this sustainable over the long run, the C API is now generated from a de
 
 So what does building an extension against the stable C API look like? Here is a complete extension: a single file that registers a vectorized scalar function, compiled once against `duckdb_extension.h`.
 
-```c
-#include "duckdb_extension.h"
+<details markdown='1'>
+<summary markdown='span'>
+See the C code registering function `add_numbers`. 
+</summary>
+<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">#include</span> <span class="cpf">"duckdb_extension.h"</span><span class="cp">
+</span>
+<span class="n">DUCKDB_EXTENSION_EXTERN</span>
 
-DUCKDB_EXTENSION_EXTERN
+<span class="c1">// a scalar function that adds two BIGINTs, one vector at a time</span>
+<span class="k">static</span> <span class="kt">void</span> <span class="nf">AddNumbers</span><span class="p">(</span><span class="n">duckdb_function_info</span> <span class="n">info</span><span class="p">,</span> <span class="n">duckdb_data_chunk</span> <span class="n">input</span><span class="p">,</span> <span class="n">duckdb_vector</span> <span class="n">output</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">idx_t</span> <span class="n">count</span> <span class="o">=</span> <span class="n">duckdb_data_chunk_get_size</span><span class="p">(</span><span class="n">input</span><span class="p">);</span>
+    <span class="kt">int64_t</span> <span class="o">*</span><span class="n">a</span> <span class="o">=</span> <span class="p">(</span><span class="kt">int64_t</span> <span class="o">*</span><span class="p">)</span> <span class="n">duckdb_vector_get_data</span><span class="p">(</span><span class="n">duckdb_data_chunk_get_vector</span><span class="p">(</span><span class="n">input</span><span class="p">,</span> <span class="mi">0</span><span class="p">));</span>
+    <span class="kt">int64_t</span> <span class="o">*</span><span class="n">b</span> <span class="o">=</span> <span class="p">(</span><span class="kt">int64_t</span> <span class="o">*</span><span class="p">)</span> <span class="n">duckdb_vector_get_data</span><span class="p">(</span><span class="n">duckdb_data_chunk_get_vector</span><span class="p">(</span><span class="n">input</span><span class="p">,</span> <span class="mi">1</span><span class="p">));</span>
+    <span class="kt">int64_t</span> <span class="o">*</span><span class="n">result</span> <span class="o">=</span> <span class="p">(</span><span class="kt">int64_t</span> <span class="o">*</span><span class="p">)</span> <span class="n">duckdb_vector_get_data</span><span class="p">(</span><span class="n">output</span><span class="p">);</span>
+    <span class="k">for</span> <span class="p">(</span><span class="n">idx_t</span> <span class="n">row</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">row</span> <span class="o">&lt;</span> <span class="n">count</span><span class="p">;</span> <span class="n">row</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">result</span><span class="p">[</span><span class="n">row</span><span class="p">]</span> <span class="o">=</span> <span class="n">a</span><span class="p">[</span><span class="n">row</span><span class="p">]</span> <span class="o">+</span> <span class="n">b</span><span class="p">[</span><span class="n">row</span><span class="p">];</span>
+    <span class="p">}</span>
+<span class="p">}</span>
 
-// a scalar function that adds two BIGINTs, one vector at a time
-static void AddNumbers(duckdb_function_info info, duckdb_data_chunk input, duckdb_vector output) {
-    idx_t count = duckdb_data_chunk_get_size(input);
-    int64_t *a = (int64_t *) duckdb_vector_get_data(duckdb_data_chunk_get_vector(input, 0));
-    int64_t *b = (int64_t *) duckdb_vector_get_data(duckdb_data_chunk_get_vector(input, 1));
-    int64_t *result = (int64_t *) duckdb_vector_get_data(output);
-    for (idx_t row = 0; row < count; row++) {
-        result[row] = a[row] + b[row];
-    }
-}
+<span class="n">DUCKDB_EXTENSION_ENTRYPOINT</span><span class="p">(</span><span class="n">duckdb_connection</span> <span class="n">con</span><span class="p">,</span>
+                            <span class="n">duckdb_extension_info</span> <span class="n">info</span><span class="p">,</span>
+                            <span class="n">duckdb_extension_access</span> <span class="o">*</span><span class="n">access</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">duckdb_scalar_function</span> <span class="n">f</span> <span class="o">=</span> <span class="n">duckdb_create_scalar_function</span><span class="p">();</span>
+    <span class="n">duckdb_scalar_function_set_name</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="s">"add_numbers"</span><span class="p">);</span>
+    <span class="n">duckdb_logical_type</span> <span class="n">bigint</span> <span class="o">=</span> <span class="n">duckdb_create_logical_type</span><span class="p">(</span><span class="n">DUCKDB_TYPE_BIGINT</span><span class="p">);</span>
+    <span class="n">duckdb_scalar_function_add_parameter</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">bigint</span><span class="p">);</span>
+    <span class="n">duckdb_scalar_function_add_parameter</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">bigint</span><span class="p">);</span>
+    <span class="n">duckdb_scalar_function_set_return_type</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">bigint</span><span class="p">);</span>
+    <span class="n">duckdb_destroy_logical_type</span><span class="p">(</span><span class="o">&amp;</span><span class="n">bigint</span><span class="p">);</span>
+    <span class="n">duckdb_scalar_function_set_function</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">AddNumbers</span><span class="p">);</span>
+    <span class="n">duckdb_register_scalar_function</span><span class="p">(</span><span class="n">con</span><span class="p">,</span> <span class="n">f</span><span class="p">);</span>
+    <span class="n">duckdb_destroy_scalar_function</span><span class="p">(</span><span class="o">&amp;</span><span class="n">f</span><span class="p">);</span>
+    <span class="k">return</span> <span class="nb">true</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>
+</details>
 
-DUCKDB_EXTENSION_ENTRYPOINT(duckdb_connection con,
-                            duckdb_extension_info info,
-                            duckdb_extension_access *access) {
-    duckdb_scalar_function f = duckdb_create_scalar_function();
-    duckdb_scalar_function_set_name(f, "add_numbers");
-    duckdb_logical_type bigint = duckdb_create_logical_type(DUCKDB_TYPE_BIGINT);
-    duckdb_scalar_function_add_parameter(f, bigint);
-    duckdb_scalar_function_add_parameter(f, bigint);
-    duckdb_scalar_function_set_return_type(f, bigint);
-    duckdb_destroy_logical_type(&bigint);
-    duckdb_scalar_function_set_function(f, AddNumbers);
-    duckdb_register_scalar_function(con, f);
-    duckdb_destroy_scalar_function(&f);
-    return true;
-}
-```
+You can use it as follows:
 
 ```sql
 LOAD add_numbers;
