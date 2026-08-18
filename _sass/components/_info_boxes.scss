@@ -32,6 +32,13 @@ div.singleentry {
 			margin: 0.8em 0 0 0;
 		}
 
+		.sr-only + p,
+		.sr-only + ul,
+		.content > p:first-child,
+		.content > ul:first-child {
+			margin-top: 0!important;
+		}
+
 		p:last-child,
 		ul:last-of-type {
 			margin-bottom: 0!important;
