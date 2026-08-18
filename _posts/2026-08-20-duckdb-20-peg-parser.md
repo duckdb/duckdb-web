@@ -8,8 +8,6 @@ excerpt: "the new parser is extensible with better error messages"
 tags: ["release"]
 ---
 
-# DuckDB’s new SQL parser
-
 At DuckDB, one of our goals is to make working with a database system as easy as possible. Users interact with the system through the widely understood Structured Query Language (SQL). Previous blog posts have covered DuckDB’s Friendly SQL, including `GROUP BY ALL` and column selection using `SELECT * EXCLUDE (...)`. Before DuckDB can execute a query using these features, however, it first has to determine whether its syntax is valid. That is the job of the *parser*, and in DuckDB `2.0` we are completely replacing it without you noticing.
 
 ## What is the role of a parser?
