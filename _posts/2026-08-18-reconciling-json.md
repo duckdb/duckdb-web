@@ -10,7 +10,7 @@ tags: ["extension"]
 
 > Guest blog post by [Mustafa Khan](https://www.linkedin.com/in/mustafahasankhan/) ([Atlan](https://atlan.com/)).
 
-DuckDB's JSON extension already covers reading JSON, extracting paths, applying RFC 7396 merge patches, and the usual scalar accessors. The [upcoming v2.0]({% post_url 2026-08-17-duckdb-20-highlights %}) release will extend it with four new scalar functions: `json_merge_patch_diff` computes the inverse of an RFC 7396 merge patch, `json_deep_merge` applies patches with skip-on-null semantics, `json_normalize` canonicalizes key order, and `json_strip_nulls` recursively removes null-valued keys. You can try these primitives today by installing the preview version of DuckDB v2.0-dev.
+DuckDB's JSON extension already covers reading JSON, extracting paths, applying RFC 7396 merge patches, and the usual scalar accessors. The [upcoming v2.0]({% post_url 2026-08-17-duckdb-20-highlights %}) release will extend it with four new scalar functions: `json_merge_patch_diff` computes the inverse of an RFC 7396 merge patch, `json_deep_merge` applies patches with skip-on-null semantics, `json_normalize` canonicalizes key order, and `json_strip_nulls` recursively removes null-valued keys. You can try these primitives today by installing the [preview version of DuckDB v2.0-dev]({% link install/preview.md %}).
 
 These primitives address a handful of recurring problems in data pipelines that reconcile state between systems. The examples in this post come from [Atlan](https://atlan.com/). Atlan is a _context layer_ for AI: a platform that gathers metadata, lineage, and semantics from a company's data systems so that data teams and AI agents can find and understand the data. Keeping that layer up to date means constantly reconciling entity documents from many upstream sources. Two upstream services may describe the same entity with different key orderings. Partial updates may carry `null` in a field to indicate either deletion or absence of data. Most events change only one or two fields out of dozens. Handling these cases in SQL previously required leaving the database. The four new functions allow you to perform the work in a single query.
 
@@ -19,7 +19,7 @@ In the rest of this post, we walk through each function, then chain them into an
 ## `json_merge_patch_diff`: The Inverse of `json_merge_patch`
 
 `json_merge_patch_diff(orig, modified)` returns the minimal RFC 7396 patch such that `json_merge_patch(orig, patch) = modified`.
-json_merge_patch already exists in DuckDB. It applies an RFC 7396 patch to a document: a null value in the patch deletes the key, nested objects are merged recursively, and any other value overwrites the original.
+`json_merge_patch` already exists in DuckDB. It applies an RFC 7396 patch to a document: a null value in the patch deletes the key, nested objects are merged recursively, and any other value overwrites the original.
 Deleted keys appear as `null` in the patch, changed and added keys appear with their new values, and unchanged keys are omitted entirely.
 
 ```sql
@@ -73,7 +73,7 @@ SELECT json_merge_patch_diff(
 
 This function is particularly useful for CDC pipelines, where most events on a metadata catalog touch one or two fields out of dozens. Shipping the output of `json_merge_patch_diff(prev_state, new_state)` downstream, instead of the full new state, cuts the change payload to a small fraction of its previous size. The diff is the change itself, so there is nothing extra to filter on the consumer side, and a `json_merge_patch` on the other end reconstructs the new state from `prev_state` and the patch.
 
-## `json_deep_merge`: Recursive Merge where `null` Means "Skip"
+## `json_deep_merge`: Recursive Merge where `null` Means “Skip”
 
 The patches from the previous section are applied with `json_merge_patch`, which strictly follows RFC 7396: null in the patch deletes the key. That is the right rule for the round trip with `json_merge_patch_diff`, but it is the wrong rule when you are reconciling fragments from multiple upstreams that emit null to mean “I do not have a value for this field on this message.”
 `json_deep_merge` covers that case. 
@@ -149,7 +149,7 @@ SELECT json_deep_merge(
 {"columnName":"user_id","parentColumn":"accounts.id"}
 ```
 
-Note that passing SQL `NULL` as an argument and using JSON `null` values result in different behaviors. A SQL NULL patch makes the result NULL, and a SQL NULL original is ignored, matching the behavior of `json_merge_patch`. JSON `null` inside a patch means "keep the original value for this key".
+Note that passing SQL `NULL` as an argument and using JSON `null` values result in different behaviors. A SQL NULL patch makes the result NULL, and a SQL NULL original is ignored, matching the behavior of `json_merge_patch`. JSON `null` inside a patch means “keep the original value for this key”.
 
 ## `json_normalize`: Canonical Form for Hashing
 
