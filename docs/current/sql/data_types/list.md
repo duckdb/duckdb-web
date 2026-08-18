@@ -78,12 +78,12 @@ such as `WHERE` and `HAVING` clauses, and return [`BOOLEAN` values]({% link docs
 
 The `LIST` ordering is defined positionally using the following rules, where `min_len = min(len(l1), len(l2))`.
 
-* **Equality.** `l1` and `l2` are equal, if for each `i` in `[1, min_len]`: `l1[i] = l2[i]`.
+* **Equality.** `l1` and `l2` are equal, if `len(l1) = len(l2)` and for each `i` in `[1, min_len]`: `l1[i] = l2[i]`.
 * **Less Than**. For the first index `i` in `[1, min_len]` where `l1[i] != l2[i]`:
-  If `l1[i] < l2[i]`, `l1` is less than `l2`.
+  If `l1[i] < l2[i]`, `l1` is less than `l2`. If all values are equal, then the longer list sorts last.
 
-`NULL` values are compared following PostgreSQL's semantics.
-Lower nesting levels are used for tie-breaking.
+`NULL` values are compared following PostgreSQL's semantics: At the top level, comparisons to `NULL`  yield `NULL`;
+At lower nesting levels `NULL`s are greater than other values.
 
 Here are some queries returning `true` for the comparison.
 
@@ -99,6 +99,10 @@ SELECT [[1], [2, 4, 5]] < [[2]] AS result;
 SELECT [ ] < [1] AS result;
 ```
 
+```sql
+SELECT [1, 2] < [1, NULL, 4] AS result;
+```
+
 These queries return `false`.
 
 ```sql
@@ -112,7 +116,7 @@ SELECT [1, 2] < [1] AS result;
 These queries return `NULL`.
 
 ```sql
-SELECT [1, 2] < [1, NULL, 4] AS result;
+SELECT NULL = [1] AS result;
 ```
 
 ## Functions
