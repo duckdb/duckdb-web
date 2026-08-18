@@ -4,7 +4,7 @@ title: "DuckDB v2.0: Your Database Deserves a Better Parser"
 author: "Daniël ten Wolde"
 thumb: "/images/blog/thumbs/duckdb-20-peg-parser.svg"
 image: "/images/blog/thumbs/duckdb-20-peg-parser.png"
-excerpt: "the new parser is extensible with better error messages"
+excerpt: "DuckDB 2.0 replaces its PostgreSQL-derived SQL parser with a PEG-based parser that is easier to evolve and can be extended at runtime."
 tags: ["release"]
 ---
 
@@ -27,9 +27,10 @@ The parser determines whether a query is syntactically valid, while the binder d
 Consider the following query:
 
 ```sql
-memory D SELECT *
-         WHERE true
-         FROM range(1);
+SELECT *
+WHERE true
+FROM range(1);
+
 Parser Error:
 syntax error at or near "FROM"
 
@@ -43,6 +44,7 @@ By comparison, the following query is syntactically valid, so it passes the pars
 
 ```sql
 memory D FROM missing_table;
+
 Catalog Error:
 Table with name missing_table does not exist!
 
@@ -58,7 +60,7 @@ DuckDB’s SQL closely follows PostgreSQL conventions, but it has evolved consid
 
 This distinction is important when talking about the parser. The SQL dialect that DuckDB accepts and the implementation used to parse that SQL are two separate things.
 
-Historically, DuckDB parsed SQL using a modified version of PostgreSQL’s grammar together with a YACC/Bison-based parser. This parser infrastructure was already part of the first commit to DuckDB in 2018, and the grammar has since been extended alongside DuckSQL. For the upcoming `2.0` release, we are replacing both parts: the SQL grammar has been rewritten as a PEG, and a new parser processes queries according to that grammar. What we are **not** replacing is DuckSQL itself.
+Historically, DuckDB parsed SQL using a modified version of PostgreSQL’s grammar together with a YACC/Bison-based parser. This parser infrastructure was already part of the [first commit](https://github.com/duckdb/duckdb/commit/ba75d81601913782d28a3878707d135319f38bdd) to DuckDB in 2018, and the grammar has since been extended alongside DuckSQL. For the upcoming `2.0` release, we are replacing both parts: the SQL grammar has been rewritten as a PEG, and a new parser processes queries according to that grammar. What we are **not** replacing is DuckSQL itself.
 
 ## A brief refresher on PEG parsers
 
@@ -110,7 +112,7 @@ Among other things, the parser had to support:
 - **Operator precedence and associativity:** For example, `SELECT true OR true AND false;` must be interpreted as `(true OR (true AND false))`, because `AND` binds more tightly than `OR`.
 - **Correct keyword classification:** Some keywords, such as `SELECT`, are `RESERVED` and cannot be used as unquoted table or column names. Other keywords may be used as identifiers depending on their context.
 - **Compatibility with DuckDB’s internal AST:** The PEG transformer must produce the same DuckDB AST structures as the transformer for the PostgreSQL-derived parse nodes wherever the language behavior is intended to remain unchanged.
-- **Correct error reporting:** For an invalid query, the parser should report where parsing failed and, where possible, prove context and a useful indication what went wrong without pointing to manual.
+- **Correct error reporting:** For an invalid query, the parser should report where parsing failed and, where possible, provide context and a useful indication what went wrong. Ideally without point to a [manual](https://duckdb.org/2024/11/22/runtime-extensible-parsers#:~:text=You%20have%20an%20error%20in%20your%20SQL%20syntax%3B%20check%20the%20manual%20that%20corresponds%20to%20your%20MySQL%20server%20version%20for%20the%20right%20syntax%20to%20use%20near%20%27SELEXT%27%20at%20line%201%2E).
 - **Performance on unusual inputs:** Besides keeping normal parsing fast, we also had to make sure that malformed queries do not suddenly take a long time to parse.
 
 ### Avoiding repeated work with packrat parsing
@@ -191,10 +193,7 @@ So far, these rules are all part of DuckSQL itself. The next step is allowing ex
 
 Extensions are a central part of DuckDB. They can already add scalar and table functions, optimizer rules, query-plan rewrites, and even custom physical operators. 
 
-Extensions that “extend” the parser exist, such as psql and duckpgq, however under the hood they work as a fallback parser. DuckDB’s own parser first tries to parse the query, and only when it rejects the query, does it trigger the parser extension. This works to some extent, but each extension effectively has to provide a complete alternative parser, and combining the syntax of multiple extensions is impossible.
-
-
-Extensions that add new syntax already exist, such as `psql` and `duckpgq`, but under the hood they work as fallback parsers. DuckDB first tries to parse the query itself and only calls the extension if that fails. This works well for self-contained syntax, but an extension that wants to add syntax inside SQL also has the parse the surrounding SQL itself. These fallback parsers also make it impossible to combine the syntax of multipe extensions. 
+Extensions that add new syntax already exist, such as `psql` and `duckpgq`, but under the hood they work as fallback parsers. DuckDB first tries to parse the query itself and only calls the extension if that fails. This works well for self-contained syntax, but an extension that wants to add syntax inside SQL also has to parse the surrounding SQL itself. These fallback parsers also make it impossible to combine the syntax of multiple extensions. 
 
 With the PEG parser, extensions can instead extend individual parts of DuckDB’s parser. They can extend the tokenizer, add grammar rules, and register custom matchers while continuing to reuse the rest of DuckSQL.
 
@@ -300,8 +299,8 @@ This is an important difference from the fallback parsers that are available tod
 With the extension registered, DuckDB can now execute queries using the new pipe syntax. For example, we can combine the pipe operators added by the extension with existing DuckSQL features such as `range()` and prefix aliases:
 
 ```sql
-memory D FROM range(6) t(i) 
-	|> WHERE i % 2 = 0 
+FROM range(6) t(i) 
+    |> WHERE i % 2 = 0 
 	|> SELECT i, doubled: i * 2 
 	|> ORDER BY i DESC;
 ┌───────┬─────────┐
