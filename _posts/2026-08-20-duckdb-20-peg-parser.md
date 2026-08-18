@@ -65,7 +65,7 @@ DuckDB’s SQL closely follows PostgreSQL conventions, but it has evolved consid
 This distinction is important when talking about the parser. The SQL dialect that DuckDB accepts and the implementation used to parse that SQL are two separate things. For DuckDB `2.0`, we are replacing the parser implementation and rewriting its grammar. What we are **not** replacing is DuckSQL itself.
 
 
-## Outgrowing the PostgreSQL-derived parser
+## Outgrowing the PostgreSQL-Derived Parser
 
 When DuckDB started out, it made a lot of sense to use the PostgreSQL-derived parser and grammar. This parser was already part of the [first commit](https://github.com/duckdb/duckdb/commit/ba75d81601913782d28a3878707d135319f38bdd) to DuckDB in 2018. It gave DuckDB a mature, battle-tested SQL grammar based on syntax that many users were already familiar with. We adapted the parser to our needs and added a `Transformer` that converted the resulting PostgreSQL-style parse tree into DuckDB’s internal AST.
 
