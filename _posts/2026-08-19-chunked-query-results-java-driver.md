@@ -4,8 +4,8 @@ title: "Chunked Query Results in the DuckDB Java Driver"
 author: "Alex Kasko, Geertjan Wielenga"
 excerpt: "The DuckDB Java driver can now return query results as a lazily fetched sequence of columnar data chunks, sidestepping JDBC's row-at-a-time ResultSet and its per-value overhead."
 tags: ["deep dive"]
-thumb: "/images/blog/thumbs/java.svg"  # TODO: thumbnail
-image: "/images/blog/thumbs/java.png"  # TODO: social image
+thumb: "/images/blog/thumbs/java.svg"
+image: "/images/blog/thumbs/java.png"
 ---
 
 DuckDB is a columnar, vectorized database. Every operator inside the engine works on *data chunks*: batches of column vectors, up to 2,048 rows at a time. This is a big part of why DuckDB is fast, because the engine amortizes interpretation overhead over thousands of values instead of paying it once per value.
@@ -56,7 +56,7 @@ try (DuckDBConnection conn = DriverManager
             // get the current chunk from the result
             DuckDBDataChunkReader chunk = res.chunk();
 
-            // iterate over the chunk columns, all indices are 0-based
+            // iterate over the chunk columns, all indexes are 0-based
             for (long col = 0; col < chunk.columnCount(); col++) {
 
                 // get a vector for the specified column
@@ -73,22 +73,22 @@ try (DuckDBConnection conn = DriverManager
 }
 ```
 
-A few things are to point out:
+A few things to point out:
 
-- **It is lazy.** `nextChunk()` pulls one chunk at a time from the engine. The full result is never materialized on the Java side, so you can stream through results far larger than your heap, the same property that makes the engine itself happy to produce them.
+* **It is lazy.** `nextChunk()` pulls one chunk at a time from the engine. The full result is never materialized on the Java side, so you can stream through results far larger than your heap, the same property that makes the engine itself happy to produce them.
 
-- **It is columnar.** Inside a chunk you work vector by vector. If your destination is columnar too, such as a `long[]`, an Arrow `VectorSchemaRoot`, or a Parquet writer, you copy values in tight, monomorphic loops instead of bouncing between columns on every row.
+* **It is columnar.** Inside a chunk you work vector by vector. If your destination is columnar too, such as a `long[]`, an Arrow `VectorSchemaRoot`, or a Parquet writer, you copy values in tight, monomorphic loops instead of bouncing between columns on every row.
 
-- **It is familiar if you have written a UDF.** Chunk contents are accessed through the same `DuckDBDataChunkReader` API that the driver's [user-defined functions](https://github.com/duckdb/duckdb-java/blob/main/UDF.MD) use to read their input vectors. Learn the API once and use it on both sides: reading function arguments inside a UDF, and reading query results outside of one.
+* **It is familiar if you have written a UDF.** Chunk contents are accessed through the same `DuckDBDataChunkReader` API that the driver's [user-defined functions](https://github.com/duckdb/duckdb-java/blob/main/UDF.MD) use to read their input vectors. Learn the API once and use it on both sides: reading function arguments inside a UDF, and reading query results outside of one.
 
-- **Watch your indices.** In keeping with JDBC tradition, statement *parameters* remain 1-based. Chunk *columns and rows* are 0-based, matching the C API and the UDF interfaces. This is a difference to keep in mind in both directions.
+* **Watch your indexes.** In keeping with JDBC tradition, statement *parameters* remain 1-based. Chunk *columns and rows* are 0-based, matching the C API and the UDF interfaces. This is a difference to keep in mind in both directions.
 
 ## Current Limitations
 
 This is the first iteration of the API, and there are two limitations you should know about before adopting it:
 
-- **Basic data types only, for now.** The scalar types are supported. Composite types (`LIST`, `STRUCT`) are not yet readable through the chunked interface. Support for them is planned for a future release.
-- **Prepared statements only.** `query()` currently exists on `DuckDBPreparedStatement`, and there is no `query(String)` convenience overload yet. Preparing the statement first is a one-line detour.
+* **Basic data types only, for now.** The scalar types are supported. Composite types (`LIST`, `STRUCT`) are not yet readable through the chunked interface. Support for them is planned for a future release.
+* **Prepared statements only.** `query()` currently exists on `DuckDBPreparedStatement`, and there is no `query(String)` convenience overload yet. Preparing the statement first is a one-line detour.
 
 If either of these blocks a use case you care about, please [open an issue](https://github.com/duckdb/duckdb-java/issues). Knowing what people actually need is the best way to prioritize.
 
