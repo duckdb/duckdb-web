@@ -71,9 +71,9 @@ artifacts:
           sha256: "006f8df62957f640a100d673432a5b6f9a7002662822a4567ed06a436ee1d801"
 
   java:
-    filename: "duckdb_jdbc-1.5.5.0.jar"
+    filename: "duckdb_jdbc-1.5.5.1.jar"
     hashes:
-      sha256: "de664e5f76d48ad71097acfb33063ffcbaf3c0dfa7f39bd1f947b2d193fe6e8e"
+      sha256: "22343dd258db1b0b51d37afc776c8dff5b19282829fa5b47f7d5d6fe02b3377a"
 
   odbc:
     linux:
