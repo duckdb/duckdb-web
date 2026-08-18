@@ -52,7 +52,7 @@ LINE 1: FROM missing_table;
 
 ## The DuckDB SQL Dialect
 
-Although a SQL standard exists, database systems support different parts of the standard and add their own syntax and behavior. The resulting variants are commonly referred to as SQL dialects. Examples include the dialects supported by PostgreSQL, Oracle, GoogleSQL for BigQuery, MySQL, MariaDB, SQLite, Spark SQL and, of course, DuckDB.
+Although a SQL standard exists, database systems support different parts of the standard and add their own syntax and behavior. The resulting variants are commonly referred to as SQL dialects. Examples include the dialects supported by PostgreSQL, Oracle, GoogleSQL for BigQuery, MySQL, MariaDB, SQLite, Spark SQL, and, of course, DuckDB.
 
 DuckDB’s SQL closely follows PostgreSQL conventions, but it has evolved considerably over the years. We have added features of our own, such as `GROUP BY ALL`, as well as features inspired by other database systems. At the same time, DuckDB does not implement every aspect of PostgreSQL’s behavior. DuckDB therefore speaks its own SQL dialect, which we will refer to as **DuckSQL** in this post, even though it remains strongly influenced by PostgreSQL.
 
@@ -108,7 +108,7 @@ Among other things, the parser had to support:
 
 - **Every statement and expression type:** Supporting the complete DuckSQL dialect includes both common syntax and the less frequently used statements.
 - **Operator precedence and associativity:** For example, `SELECT true OR true AND false;` must be interpreted as `(true OR (true AND false))`, because `AND` binds more tightly than `OR`.
-- **Correct keyword classification:** Some keywords, such as `SELECT`, are `reserved` and cannot be used as unquoted table or column names. Other keywords may be used as identifiers depending on their context.
+- **Correct keyword classification:** Some keywords, such as `SELECT`, are `RESERVED` and cannot be used as unquoted table or column names. Other keywords may be used as identifiers depending on their context.
 - **Compatibility with DuckDB’s internal AST:** The PEG transformer must produce the same DuckDB AST structures as the transformer for the PostgreSQL-derived parse nodes wherever the language behavior is intended to remain unchanged.
 - **Correct error reporting:** For an invalid query, the parser should report where parsing failed and, where possible, prove context and a useful indication what went wrong without pointing to manual.
 - **Performance on unusual inputs:** Besides keeping normal parsing fast, we also had to make sure that malformed queries do not suddenly take a long time to parse.
@@ -189,11 +189,14 @@ So far, these rules are all part of DuckSQL itself. The next step is allowing ex
 
 ## Extending the parser
 
-Extensions are a central part of DuckDB. In June 2026 `core` extensions were downloaded 160 million times, about 60 per second. They can already add scalar and table functions, optimizer rules, query-plan rewrites, and even custom physical operators. 
+Extensions are a central part of DuckDB. They can already add scalar and table functions, optimizer rules, query-plan rewrites, and even custom physical operators. 
 
 Extensions that “extend” the parser exist, such as psql and duckpgq, however under the hood they work as a fallback parser. DuckDB’s own parser first tries to parse the query, and only when it rejects the query, does it trigger the parser extension. This works to some extent, but each extension effectively has to provide a complete alternative parser, and combining the syntax of multiple extensions is impossible.
 
-With the PEG parser, extensions will instead be able to extend individual parts of DuckDB’s parser. They can extend the tokenizer, add grammar rules, and register custom matchers while continuing to reuse the rest of DuckSQL.
+
+Extensions that add new syntax already exist, such as `psql` and `duckpgq`, but under the hood they work as fallback parsers. DuckDB first tries to parse the query itself and only calls the extension if that fails. This works well for self-contained syntax, but an extension that wants to add syntax inside SQL also has the parse the surrounding SQL itself. These fallback parsers also make it impossible to combine the syntax of multipe extensions. 
+
+With the PEG parser, extensions can instead extend individual parts of DuckDB’s parser. They can extend the tokenizer, add grammar rules, and register custom matchers while continuing to reuse the rest of DuckSQL.
 
 <aside>
 ⚠️
@@ -233,7 +236,7 @@ PipeAggregateGroupOnly <- 'AGGREGATE' GroupByClause
 
 Here, `+` means that `PipeStage` must occur one or more times, so a pipe query must contain at least one pipe operator.
 
-This snippet can reuse existing grammar rules from DuckDB’s grammar, such as `GroupByClause`, reducing the number of rules developers need to implement themselves. An extension can still define its own rule where DuckDB’s existing syntax does not fit. 
+This grammar can reuse existing rules, such as `GroupByClause`, to reduce the amount of grammar the extension needs to define. An extension can still define its own rule where DuckDB’s existing syntax does not fit. 
 
 ### Registering the grammar
 
@@ -288,7 +291,7 @@ static unique_ptr<SelectStatement> TransformPipeSelectAtom(
 );
 ```
 
-Inside this function, the extension only needs to transform the new pipe-specific rules it introduced. Any DuckDB grammar rules that are reused can also reuse their existing transformations. For example, because the pipe grammar uses DuckDB’s existing `GroupByClause`, the extension does not need to parse or transform `GROUP BY` itself.
+Inside this function, the extension only needs to transform the new pipe-specific rules it introduced. For DuckDB grammar rules that the extension reuses, it can also reuse the existing transformations. For example, because the pipe grammar uses DuckDB’s existing `GroupByClause`, the extension does not need to parse or transform `GROUP BY` itself.
 
 This is an important difference from the fallback parsers that are available today. An extension no longer needs to implement expressions, table references, `GROUP BY` clauses, and the rest of SQL itself. Instead, it can add only the syntax it needs and reuse DuckDB’s grammar and transformations for everything else.
 
@@ -315,7 +318,7 @@ The extension only defines the pipe-specific structure. Expressions, table refer
 
 ## What’s next?
 
-With DuckDB `2.0`, the PEG parser is planned to completely replace the PostgreSQL-derived parser. The goal is for existing DuckSQL queries to continue working exactly as before, while giving us a parser that is easier to evolve and is designed to be extended at runtime.
+With DuckDB 2.0, the PEG parser is planned to completely replace the PostgreSQL-derived parser. The goal is for existing DuckSQL queries to continue working as before, while giving us a parser that is easier to evolve and designed to be extended at runtime.
 
 The runtime grammar extension API shown in this post is still a work in progress and may change before `2.0` is released. However, the underlying idea is already working: extensions can add their own syntax while reusing the existing DuckDB grammar and transformations instead of implementing a complete SQL parser themselves.
 
