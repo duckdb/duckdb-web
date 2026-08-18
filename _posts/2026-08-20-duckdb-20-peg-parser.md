@@ -99,7 +99,7 @@ SELECT ((((((((((((((((((;
 
 With the experimental PEG parser shipped in `v1.5`, adding one more opening parenthesis approximately doubled the parsing time:
 
-```
+```text
 18 opening parentheses:  5.303 seconds
 19 opening parentheses: 10.640 seconds
 ```
@@ -108,7 +108,7 @@ We addressed this using **packrat parsing**, a memoization technique commonly us
 
 With packrat parsing enabled, the same malformed query was rejected almost instantly:
 
-```
+```text
 19 opening parentheses: 0.001 seconds
 ```
 
@@ -126,7 +126,7 @@ Before looking at how we turned the prototype into a production parser, let us b
 
 A PEG consists of named rules that describe how an input should be matched. Consider the following rules from DuckDB’s new grammar:
 
-```r
+```text
 SelectFrom <- SelectFromClause / FromSelectClause
 SelectFromClause <- SelectClause FromClause?
 FromSelectClause <- FromClause SelectClause?
@@ -260,14 +260,14 @@ static void LoadInternal(ExtensionLoader &loader) {
 	
 	loader.RegisterKeyword(
 	  "aggregate",
-    ExtensionKeywordCategory::RESERVED
-  );
-  loader.RegisterKeyword(
-    "extend",
-    ExtensionKeywordCategory::RESERVED
-  );
+      ExtensionKeywordCategory::RESERVED
+    );
+    loader.RegisterKeyword(
+      "extend",
+      ExtensionKeywordCategory::RESERVED
+    );
 
-	loader.RegisterParserExtension(std::move(extension));
+    loader.RegisterParserExtension(std::move(extension));
 }
 ```
 
