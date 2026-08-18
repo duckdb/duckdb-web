@@ -14,7 +14,19 @@ At DuckDB, one of our goals is to make working with a database system as easy as
 
 At a high level, DuckDB processes a SQL query through the following stages: 
 
-**SQL text → Tokenizer → Parser → ParseResult tree → Transformer → DuckDB AST** → Binder → Logical Plan → Optimizer → Physical Plan → Execution
+(TODO: Add image)
+
+* SQL text
+* Tokenizer
+* Parser
+* ParseResult tree
+* Transformer
+* DuckDB AST
+* Binder
+* Logical Plan
+* Optimizer
+* Physical Plan
+* Execution
 
 In this blog, we focus on the tokenizer, parser, and transformer:
 
@@ -149,7 +161,7 @@ Turning the prototype into a production parser involved much more than translati
 
 The resulting architecture replaces the PostgreSQL-derived parser front end, while the binder and the remainder of DuckDB’s query-processing pipeline continue to operate on the same internal AST.
 
--- todo: Add figure of old vs. new architecture
+(TODO: Add figure of old vs. new architecture)
 
 ## Evolving DuckSQL
 
