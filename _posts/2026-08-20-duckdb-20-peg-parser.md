@@ -117,9 +117,9 @@ In DuckDB, these rules operate on the tokens produced by the tokenizer. The matc
 
 ## Going from Prototype to Production
 
-The research prototype demonstrated that a PEG-based SQL parser was feasible. Replacing DuckDB’s existing parser, however, required considerably more than parsing a representative subset of SQL. The new parser had to accept all of DuckSQL and produce the same AST expected by DuckDB’s binder.
+The research prototype demonstrated that a PEG-based SQL parser was feasible. Replacing DuckDB’s existing parser, however, required considerably more than parsing a subset of SQL. The new parser had to accept all of DuckSQL and produce the same AST expected by DuckDB’s binder.
 
-The PEG grammar first reached users in DuckDB v1.2, where it handled autocomplete in the CLI. Later, in DuckDB v1.5 we introduced the complete PEG parser as an experimental, opt-in feature. Since then, the grammar, matcher, and transformer have been steadily improved to make the PEG parser the default for DuckDB v2.0.
+The PEG grammar was first introduced in DuckDB v1.2, where it handled autocomplete in the CLI. Later, in DuckDB v1.5 we introduced the complete PEG parser as an experimental, opt-in feature. Since then, the grammar, matcher, and transformer have been steadily improved to make the PEG parser the default for DuckDB v2.0.
 
 Among other things, the parser had to support:
 
