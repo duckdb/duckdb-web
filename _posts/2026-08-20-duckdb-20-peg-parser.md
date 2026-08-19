@@ -354,10 +354,12 @@ FROM range(6) t(i)
 
 The extension only defines the pipe-specific syntax. Expressions, table references, `WHERE`, `SELECT`, `ORDER BY`, and other reused rules are still parsed and transformed by DuckDB itself. This means that new syntax can be combined with DuckSQL without the extension having to implement the rest of SQL again.
 
-## What’s Next?
+## To Conclude
 
-With DuckDB `v2.0`, the PEG parser is planned to completely replace the PostgreSQL-derived parser. The goal is for existing DuckSQL queries to continue working as before, while giving us a parser that is easier to evolve and designed to be extended at runtime.
+With DuckDB `v2.0`, we are replacing the PostgreSQL-derived parser with a new PEG parser. Existing DuckSQL queries should continue working as before. Under the hood, however, the new parser gives us something that is easier to evolve and designed for runtime extensibility.
 
-The runtime grammar extension API shown in this post is still a work in progress and may change before `v2.0` is released. However, the underlying idea is already working: extensions can add their own syntax while reusing the existing DuckDB grammar and transformations instead of implementing a complete SQL parser themselves.
+The runtime grammar extension API shown in this post is still a preview and may change before `v2.0` is released. However, the underlying idea is already working. Extensions can add their own syntax directly to DuckDB's grammar while reusing its existing rules and transformations. This means they no longer need to parse the rest of SQL themselves.
+
+We are excited to see what new syntax the community will create. In the meantime, we will continue evolving DuckSQL and improving the parser. 
 
 If you do find an existing query that behaves differently with the PEG parser, please let us know by [filing an issue](https://github.com/duckdb/duckdb/issues).
