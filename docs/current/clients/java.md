@@ -18,7 +18,7 @@ title: Java (JDBC) Client
 
 The DuckDB Java JDBC API can be installed from [Maven Central](https://search.maven.org/artifact/org.duckdb/duckdb_jdbc). Please see the [installation page]({% link install/index.html %}?environment=java) for details.
 
-To try features before they reach a stable release, preview (nightly) builds of the JDBC driver are published as `SNAPSHOT` versions to the Sonatype Central snapshots repository at `https://central.sonatype.com/repository/maven-snapshots/`. Add this repository to your build and depend on a `duckdb_jdbc` `SNAPSHOT` version. See the [preview builds page]({% link install/preview.md %}) for a full Maven example.
+To try features before they reach a stable release, preview (nightly) builds of the JDBC driver are published as `SNAPSHOT` versions to DuckDB's snapshot repository at `https://duckdb-staging.duckdb.org/duckdb/duckdb-java/maven`. This is an object storage repository with no browseable web page; it is consumed directly by Maven. Add the repository to your build and depend on a `duckdb_jdbc` `SNAPSHOT` version. See the [preview builds page]({% link install/preview.md %}) for a full Maven example.
 
 ## Basic API Usage
 
@@ -107,7 +107,7 @@ Alongside DuckDB's own settings, the driver recognizes a number of DuckDB-specif
 | `custom_user_agent` | Append a custom string to the user agent reported to DuckDB. |
 | `jdbc_stream_results` | Stream result sets instead of materializing them. See [Streaming Results](#streaming-results). |
 | `jdbc_auto_commit` | Set the default auto-commit mode for new connections. |
-| `jdbc_pin_db` | Keep the database instance alive after its last connection closes. Defaults to `true` for in-memory databases. |
+| `jdbc_pin_db` | Keep the database instance alive after its last connection closes. Disabled by default; enabled by default for DuckLake connections. |
 | `jdbc_instance_cache` | Reuse the process-wide database instance for the same database. Enabled by default. See [In-Memory Databases and Instance Caching](#in-memory-databases-and-instance-caching). |
 | `jdbc_ignore_unsupported_options` | Silently ignore unsupported connection options instead of throwing an error. |
 | `jdbc_jfr_memory_monitor` | Enable JFR memory monitoring for the connection's database instance. See [Memory Monitoring with JFR](#memory-monitoring-with-jfr). |
@@ -445,12 +445,33 @@ A running query can be cancelled from another thread with the standard JDBC `Sta
 For long-running queries, `DuckDBPreparedStatement.getQueryProgress()` returns a `QueryProgress` snapshot while the query executes. It is intended to be called from a separate thread and exposes `getPercentage()`, `getRowsProcessed()`, and `getTotalRowsToProcess()`.
 
 ```java
-DuckDBPreparedStatement ps =
-    (DuckDBPreparedStatement) conn.prepareStatement("SELECT count(*) FROM range(1_000_000_000)");
+import java.sql.DriverManager;
+import java.sql.SQLException;
+import java.util.concurrent.CompletableFuture;
+import org.duckdb.DuckDBConnection;
+import org.duckdb.DuckDBPreparedStatement;
+import org.duckdb.QueryProgress;
 
-// from a monitoring thread, while execute() runs on another thread
-QueryProgress progress = ps.getQueryProgress();
-System.out.println(progress.getPercentage());
+try (DuckDBConnection conn = (DuckDBConnection) DriverManager.getConnection("jdbc:duckdb:");
+     DuckDBPreparedStatement ps =
+         (DuckDBPreparedStatement) conn.prepareStatement("SELECT count(*) FROM range(1_000_000_000)")) {
+    // Run the query on a background thread so its progress can be polled while it executes.
+    CompletableFuture<Void> query = CompletableFuture.runAsync(() -> {
+        try {
+            ps.executeQuery().close();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    });
+
+    while (!query.isDone()) {
+        QueryProgress progress = ps.getQueryProgress();
+        System.out.printf("%.1f%% (%d / %d rows)%n", progress.getPercentage(),
+            progress.getRowsProcessed(), progress.getTotalRowsToProcess());
+        Thread.sleep(100);
+    }
+    query.join();
+}
 ```
 
 ### Profiling
@@ -458,8 +479,8 @@ System.out.println(progress.getPercentage());
 Cast a connection to `DuckDBConnection` and call `getProfilingInformation(ProfilerPrintFormat)` to retrieve profiling output for the most recent query on that connection, after enabling profiling with `PRAGMA enable_profiling`. The `ProfilerPrintFormat` enum selects the output format: `DEFAULT`, `TEXT`, `QUERY_TREE`, `QUERY_TREE_OPTIMIZER`, `NO_OUTPUT`, `JSON`, `HTML`, `GRAPHVIZ`, `YAML`, and `MERMAID`.
 
 ```java
-DuckDBConnection conn = (DuckDBConnection) DriverManager.getConnection("jdbc:duckdb:");
-try (Statement stmt = conn.createStatement()) {
+try (DuckDBConnection conn = (DuckDBConnection) DriverManager.getConnection("jdbc:duckdb:");
+     Statement stmt = conn.createStatement()) {
     stmt.execute("PRAGMA enable_profiling = 'json'");
     stmt.executeQuery("SELECT count(*) FROM range(1000)").close();
     String profile = conn.getProfilingInformation(ProfilerPrintFormat.JSON);
@@ -474,7 +495,9 @@ On a JFR-capable JVM (Java 11 or later, or Corretto 8u272 and later), the driver
 ```java
 Properties props = new Properties();
 props.setProperty("jdbc_jfr_memory_monitor", "analytics-db");
-Connection conn = DriverManager.getConnection("jdbc:duckdb:/tmp/my_database", props);
+try (Connection conn = DriverManager.getConnection("jdbc:duckdb:/tmp/my_database", props)) {
+    // work with the connection while a JFR recording is active
+}
 ```
 
 While a JFR recording is active with the `duckdb.MemoryUsage` event enabled, the driver periodically emits one event per DuckDB memory tag, carrying the component identifier, the memory tag, the native database address, the bytes allocated, and the bytes spilled to temporary storage. The JDBC property is only an enable and label switch; the sampling period and the enabled state are controlled by the JFR recording settings. Inspect the events with JDK Mission Control or the `jfr` command line tool.
@@ -693,7 +716,7 @@ These errors stem from the DuckDB Maven/Gradle dependency not being detected. To
 
 ### Parquet String Column Returns a Blob
 
-Parquet files written by some legacy writers do not set the `UTF8` flag on string columns, so DuckDB reads them as `BLOB` and `ResultSet.getString()` returns a `DuckDBBlobResult` instead of the expected text. Enable the [`binary_as_string`]({% link docs/current/data/parquet/overview.md %}) setting to read these columns as `VARCHAR`:
+Parquet files written by some legacy writers do not set the `UTF8` flag on string columns, so DuckDB reads them as `BLOB`. `ResultSet.getObject()` then returns a `DuckDBBlobResult` and `ResultSet.getString()` returns the bytes rendered as an escaped string rather than the expected text. Enable the [`binary_as_string`]({% link docs/current/data/parquet/overview.md %}) setting to read these columns as `VARCHAR`:
 
 ```java
 try (Statement stmt = conn.createStatement()) {
