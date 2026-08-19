@@ -181,7 +181,7 @@ date: current_date(), time: current_localtime();
 
 As a bonus, this also works with prefix aliases.
 
-Another example is the new `CONNECT` statement, introduced for Quack. It allows you to connect to a remote database and route subsequent queries to it until `DISCONNECT` is called:
+Another example is the new [`CONNECT`](https://github.com/duckdb/duckdb/pull/22732) statement, introduced for [Quack](https://duckdb.org/quack/). It allows you to connect to a remote database and route subsequent queries to it until `DISCONNECT` is called:
 
 ```sql
 CONNECT 'postgres://localhost/mydb';
@@ -189,7 +189,7 @@ SELECT count(*) FROM orders; -- Runs on the PostgreSQL server
 DISCONNECT;
 ```
 
-Another addition is new syntax for working with external resources. This will allow you to manage resources that live outside DuckDB through an extension. You will be able to create, register, inspect, connect to, or destroy a resource all from within DuckDB: 
+There will also be new syntax for working with [external resources](https://github.com/duckdb/duckdb/pull/23731). This will allow you to manage resources that live outside DuckDB through an extension. You will be able to create, register, inspect, connect to, or destroy a resource all from within DuckDB: 
 
 ```sql
 CREATE EXTERNAL RESOURCE '<resource-type>' AS <name> (...);
