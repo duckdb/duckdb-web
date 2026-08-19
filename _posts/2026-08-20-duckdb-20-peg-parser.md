@@ -8,7 +8,7 @@ excerpt: "DuckDB 2.0 replaces its PostgreSQL-derived SQL parser with a PEG-based
 tags: ["release"]
 ---
 
-At DuckDB, one of our goals is to make working with a database system as easy as possible. Users interact with the system through the widely understood Structured Query Language (SQL). Previous blog posts have covered DuckDB’s Friendly SQL, including `GROUP BY ALL` and column selection using `SELECT * EXCLUDE (...)`. Before DuckDB can execute a query using these features, however, it first has to determine whether its syntax is valid. That is the job of the *parser*, and in DuckDB v2.0 we are completely replacing it without you noticing.
+At DuckDB, one of our goals is to make working with a database system as easy as possible. Users interact with the system through the widely understood Structured Query Language (SQL). Previous blog posts have covered DuckDB’s [Friendly](https://duckdb.org/2022/05/04/friendlier-sql) [SQL](https://duckdb.org/2023/08/23/even-friendlier-sql), including `GROUP BY ALL` and column selection using `SELECT * EXCLUDE (...)`. Before DuckDB can execute a query using these features, however, it first has to determine whether its syntax is valid. That is the job of the *parser*, and in DuckDB v2.0 we are completely replacing it without you noticing.
 
 ## What is the Role of a Parser?
 
