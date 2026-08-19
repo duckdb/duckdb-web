@@ -666,3 +666,15 @@ Exception in thread "main" java.lang.ClassNotFoundException: org.duckdb.DuckDBDr
 ```
 
 These errors stem from the DuckDB Maven/Gradle dependency not being detected. To ensure that it is detected, force refresh the Maven configuration in your IDE.
+
+### Parquet String Column Returns a Blob
+
+Parquet files written by some legacy writers do not set the `UTF8` flag on string columns, so DuckDB reads them as `BLOB` and `ResultSet.getString()` returns a `DuckDBBlobResult` instead of the expected text. Enable the [`binary_as_string`]({% link docs/current/data/parquet/overview.md %}) setting to read these columns as `VARCHAR`:
+
+```java
+try (Statement stmt = conn.createStatement()) {
+    stmt.execute("SET binary_as_string = true;");
+}
+```
+
+The same option can be passed to `read_parquet` directly, for example `read_parquet('file.parquet', binary_as_string = true)`.
