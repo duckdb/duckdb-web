@@ -414,6 +414,47 @@ stmt.executeBatch();
 stmt.close();
 ```
 
+### Query Progress and Cancellation
+
+A running query can be cancelled from another thread with the standard JDBC `Statement.cancel()` method, which interrupts the query executing on the statement's connection. Setting `Statement.setQueryTimeout(seconds)` arms an automatic cancellation after the given number of seconds.
+
+For long-running queries, `DuckDBPreparedStatement.getQueryProgress()` returns a `QueryProgress` snapshot while the query executes. It is intended to be called from a separate thread and exposes `getPercentage()`, `getRowsProcessed()`, and `getTotalRowsToProcess()`.
+
+```java
+DuckDBPreparedStatement ps =
+    (DuckDBPreparedStatement) conn.prepareStatement("SELECT count(*) FROM range(1_000_000_000)");
+
+// from a monitoring thread, while execute() runs on another thread
+QueryProgress progress = ps.getQueryProgress();
+System.out.println(progress.getPercentage());
+```
+
+### Profiling
+
+Cast a connection to `DuckDBConnection` and call `getProfilingInformation(ProfilerPrintFormat)` to retrieve profiling output for the most recent query on that connection, after enabling profiling with `PRAGMA enable_profiling`. The `ProfilerPrintFormat` enum selects the output format: `DEFAULT`, `TEXT`, `QUERY_TREE`, `QUERY_TREE_OPTIMIZER`, `NO_OUTPUT`, `JSON`, `HTML`, `GRAPHVIZ`, `YAML`, and `MERMAID`.
+
+```java
+DuckDBConnection conn = (DuckDBConnection) DriverManager.getConnection("jdbc:duckdb:");
+try (Statement stmt = conn.createStatement()) {
+    stmt.execute("PRAGMA enable_profiling = 'json'");
+    stmt.executeQuery("SELECT count(*) FROM range(1000)").close();
+    String profile = conn.getProfilingInformation(ProfilerPrintFormat.JSON);
+    System.out.println(profile);
+}
+```
+
+### Memory Monitoring with JFR
+
+On a JFR-capable JVM (Java 11 or later, or Corretto 8u272 and later), the driver can emit Java Flight Recorder events describing DuckDB's internal memory usage. Monitoring is opt-in per connection: set the `jdbc_jfr_memory_monitor` property to an identifier for the connection's database instance. An absent or empty value leaves monitoring disabled.
+
+```java
+Properties props = new Properties();
+props.setProperty("jdbc_jfr_memory_monitor", "analytics-db");
+Connection conn = DriverManager.getConnection("jdbc:duckdb:/tmp/my_database", props);
+```
+
+While a JFR recording is active with the `duckdb.MemoryUsage` event enabled, the driver periodically emits one event per DuckDB memory tag, carrying the component identifier, the memory tag, the native database address, the bytes allocated, and the bytes spilled to temporary storage. The JDBC property is only an enable and label switch; the sampling period and the enabled state are controlled by the JFR recording settings. Inspect the events with JDK Mission Control or the `jfr` command line tool.
+
 ## User-Defined Functions
 
 The JDBC driver can register user-defined functions (UDFs) written in Java, including scalar functions and table functions. This section covers the common cases. For the full API, including the vectorized interface and the function registry, see the [`UDF.MD` guide](https://github.com/duckdb/duckdb-java/blob/main/UDF.MD).
