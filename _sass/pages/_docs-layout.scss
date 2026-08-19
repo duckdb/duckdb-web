@@ -327,7 +327,7 @@ body.documentation {
             color: var(--main-text-secondary-color, #666);
             overflow: visible;
 
-            >li.active {
+            >li.item-menu.active {
                 background: transparent;
             }
 

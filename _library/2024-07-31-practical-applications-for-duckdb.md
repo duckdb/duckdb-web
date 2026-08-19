@@ -14,5 +14,5 @@ pill: "Developer Voices by Kris Jenkins"
 </div>
 
 |-------|-------|
-| **Podcast** | Developer Voices by Kris Jenkins |
+| **Podcast** | [Developer Voices](https://www.developervoices.com/) |
 | **Guests** | Simon Aubury, Ned Letcher |

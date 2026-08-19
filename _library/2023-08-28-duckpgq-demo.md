@@ -10,9 +10,9 @@ excerpt: ""
 pill: "VLDB 2023"
 ---
 
-[Paper (PDF)](https://www.vldb.org/pvldb/vol16/p4034-wolde.pdf)
-
-Venue: VLDB 2023
+|-------|-------|
+| **Paper** | [DuckPGQ: Bringing SQL/PGQ to DuckDB (PDF)](https://www.vldb.org/pvldb/vol16/p4034-wolde.pdf) |
+| **Venue** | VLDB 2023 |
 
 ## Abstract
 

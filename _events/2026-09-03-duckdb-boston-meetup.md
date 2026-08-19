@@ -23,23 +23,19 @@ DuckDB is also widely used by practitioners in the U.S. east coast, including fi
 
 TBA
 
-## Call for Talks
-
-Please submit your talk proposals until Aug 10 (Monday) 23:59 anywhere-on-earth using the [submission form](https://forms.gle/uwFNt6vx6DxG7uLG8).
-
 ## Attendance
 
 Attendance is free but **please register on [Luma](https://luma.com/kfgc4vej) as soon as you know that you are attending,** so we can get a good estimate for the attendance.
 
 ## Timetable
 
-The skeleton program looks as follows:
-
-| Time  | Activity        |
-| :---- | :-------------- |
-| 17:30 | Doors open      |
-| 18:30 | Talk            |
-| 20:00 | Drinks & snacks |
+| Time  | Activity                                                 |                                                                                  |
+| :---- | :------------------------------------------------------- | -------------------------------------------------------------------------------- |
+| 17:30 | Doors open                                               |                                                                                  |
+| 18:30 | Opening remarks                                          | Gábor Szárnyas<br>_(DuckLabs)_                                                   |
+| 18:40 | Unlocking healthcare data with DuckDB and open standards | Dan Gottlieb<br>_(Boston Children's Hospital and Central Square Solutions, LLC)_ |
+| 19:05 | Windowing improvements in DuckDB v2.0                    | Richard Wesley<br>_(DuckLabs)_                                                   |
+| 19:30 | Drinks & snacks                                          |                                                                                  |
 
 ## Questions?
 

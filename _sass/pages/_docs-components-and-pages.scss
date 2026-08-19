@@ -581,16 +581,6 @@ body.documentation {
             -webkit-mask-position: center center;
             mask-position: center center;
         }
-
-        @each $icon in "bicycle", "c", "cli", "cpp", "design", "download", "duckdb",
-                       "duckdb-labs", "ducklake", "github", "go", "java", "linux", "macos",
-                       "nodejs", "odbc", "pdf", "python", "quack", "r", "rust", "scrolldown",
-                       "star", "train", "webassembly", "wheelchair", "windows", "yaml" {
-            &:has(img[src$="/#{$icon}.svg"])::before {
-                -webkit-mask-image: url('/images/icons/#{$icon}.svg');
-                mask-image: url('/images/icons/#{$icon}.svg');
-            }
-        }
     }
     
     span:not(.symbol):not(.chevron) {

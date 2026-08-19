@@ -100,8 +100,8 @@ docs:
 
 extension_star_count: 0
 extension_star_count_pretty: 0
-extension_download_count: 255
-extension_download_count_pretty: 255
+extension_download_count: 302
+extension_download_count_pretty: 302
 image: '/images/community_extensions/social_preview/preview_community_extension_opendal.png'
 layout: community_extension_doc
 ---

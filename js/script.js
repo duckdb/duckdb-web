@@ -533,6 +533,25 @@ $('a').filter(function() {
 $('.headercontent a, .mainlinks a, .box-link a, .footercontent a, .highlight a, .button, .ecosystem-diagram a').removeClass('podcastlink');
 $('.supporterboard a.podcastlink').removeClass('podcastlink').addClass('nobg');
 
+// Glue the anchor icon to the last word of a heading so it never wraps alone
+$('h1, h2, h3, h4, h5, h6').find('svg.anchor-icon').each(function() {
+	var $svg = $(this);
+	var $a = $svg.parent('a');
+	if (!$a.length || $a.find('.anchor-wrap').length) return;
+	var contents = $a.contents();
+	var last = null;
+	for (var i = contents.length - 1; i >= 0; i--) {
+		if (contents[i] === this) continue;
+		last = contents[i];
+		break;
+	}
+	if (!last || last.nodeType !== 3) return;
+	var match = last.nodeValue.match(/(\S+)(\s*)$/);
+	if (!match) return;
+	last.nodeValue = last.nodeValue.slice(0, match.index);
+	$('<span class="anchor-wrap"></span>').text(match[1]).append($svg).appendTo($a);
+});
+
 // Append sprite icons to external, download, video and podcast links, gluing the icon to the last word
 $('#main_content_wrap, .singleentry .content').find('a.externallink, a.downloadlink, a.videolink, a.podcastlink').each(function() {
 	var $a = $(this);

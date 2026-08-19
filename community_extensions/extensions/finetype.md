@@ -209,8 +209,8 @@ docs:
 
 extension_star_count: 3
 extension_star_count_pretty: 3
-extension_download_count: 1380
-extension_download_count_pretty: 1.4k
+extension_download_count: 918
+extension_download_count_pretty: 918
 image: '/images/community_extensions/social_preview/preview_community_extension_finetype.png'
 layout: community_extension_doc
 ---
@@ -236,24 +236,17 @@ LOAD {{ page.extension.name }};
 
 <div class="extension_functions_table"></div>
 
-|   function_name   | function_type | description | comment | examples |
-|-------------------|---------------|-------------|---------|----------|
-| finetype          | scalar        | NULL        | NULL    |          |
-| finetype_cast     | scalar        | NULL        | NULL    |          |
-| finetype_detail   | scalar        | NULL        | NULL    |          |
-| finetype_spike    | table         | NULL        | NULL    |          |
-| finetype_unpack   | scalar        | NULL        | NULL    |          |
-| finetype_validate | scalar        | NULL        | NULL    |          |
-| finetype_version  | scalar        | NULL        | NULL    |          |
-| ft_cast           | scalar        | NULL        | NULL    |          |
-| ft_detail         | scalar        | NULL        | NULL    |          |
-| ft_infer          | scalar        | NULL        | NULL    |          |
-| ft_profile        | scalar        | NULL        | NULL    |          |
-| ft_profile        | table_macro   | NULL        | NULL    |          |
-| ft_unpack         | scalar        | NULL        | NULL    |          |
-| ft_validate       | table_macro   | NULL        | NULL    |          |
-| ft_validate_text  | scalar        | NULL        | NULL    |          |
-| ft_version        | scalar        | NULL        | NULL    |          |
+|  function_name   | function_type | description | comment | examples |
+|------------------|---------------|-------------|---------|----------|
+| ft_cast          | scalar        | NULL        | NULL    |          |
+| ft_detail        | scalar        | NULL        | NULL    |          |
+| ft_infer         | scalar        | NULL        | NULL    |          |
+| ft_profile       | aggregate     | NULL        | NULL    |          |
+| ft_profile       | table_macro   | NULL        | NULL    |          |
+| ft_unpack        | scalar        | NULL        | NULL    |          |
+| ft_validate      | table_macro   | NULL        | NULL    |          |
+| ft_validate_text | scalar        | NULL        | NULL    |          |
+| ft_version       | scalar        | NULL        | NULL    |          |
 
 ### Overloaded Functions
 

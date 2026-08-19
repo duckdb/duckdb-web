@@ -18,6 +18,6 @@ redirect_from:
 </div>
 
 |-------|-------|
-| **Podcast** | [Developer Voices](https://www.youtube.com/channel/UC-0fWjosItIOD4ThhS6oyfA) |
+| **Podcast** | [Developer Voices](https://www.developervoices.com/) |
 | **Guest** | [Hannes Mühleisen (DuckLabs)](https://hannes.muehleisen.org/) |
 | **YouTube** | [Implementing Hardware-Friendly Databases](https://www.youtube.com/watch?v=pZV9FvdKmLc) |
