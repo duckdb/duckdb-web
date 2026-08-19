@@ -293,20 +293,31 @@ The extension alternative is now tried first. If no pipe syntax is present, it f
 Adding a grammar rule only gets us as far as a `ParseResult`. The extension still needs to transform that result into the DuckDB AST that is expected by the binder. Since `PipeSelectAtom` extends `SelectAtom`, its transformer returns a `SelectStatement`:
 
 ```cpp
-static unique_ptr<SelectStatement> TransformPipeSelectAtom(
-    ParserExtensionInfo *info,
-    PEGTransformer &transformer,
-    ParseResult &parse_result
-);
+static unique_ptr<SelectStatement>
+TransformPipeSelectAtom(PEGTransformer &transformer, ParseResult &parse_result) {
+    auto &pipe = parse_result.Cast<ListParseResult>();
+
+    // PipeSelectAtom <- PipeSource PipeStage+
+    auto statement = TransformPipeSource(transformer, pipe.GetChild(0));
+
+    auto &stages = pipe.Child<RepeatParseResult>(1);
+    for (auto &stage : stages.GetChildren()) {
+        ApplyPipeStage(transformer, stage.get(), *statement);
+    }
+
+    return statement;
+}
 ```
 
-Inside this function, the extension only needs to transform the new pipe-specific rules it introduced. For DuckDB grammar rules that the extension reuses, it can also reuse the existing transformations. For example, because the pipe grammar uses DuckDB’s existing `GroupByClause`, the extension does not need to parse or transform `GROUP BY` itself.
+The shape of the `ParseResult` follows the grammar rule we defined earlier. `PipeSelectAtom` contains a `PipeSource` and one or more `PipeStage`s. We first transform the `PipeSource` into a DuckDB `SelectStatement`. Each `PipeStage` is then applied to that statement in order. The resulting `SelectStatement` is then returned and can continue through the rest of the parser's pipeline and eventually on to the binder. 
+
+This is where reusing DuckDB's existing grammar becomes especially useful. The extension only needs to transform the new syntax it introduced. When it reuses an existing DuckDB grammar rule, such as `GroupByClause`, it can also reuse the corresponding transform function instead of having to implement `GROUP BY` itself. 
 
 This is an important difference from the fallback parsers that are available today. An extension no longer needs to implement expressions, table references, `GROUP BY` clauses, and the rest of SQL itself. Instead, it can add only the syntax it needs and reuse DuckDB’s grammar and transformations for everything else.
 
 ### Executing Pipe SQL
 
-With the extension registered, DuckDB can now execute queries using the new pipe syntax. For example, we can combine the pipe operators added by the extension with existing DuckSQL features such as `range()` and prefix aliases:
+With the extension registered, we can now execute queries using the new pipe syntax. For example, we can combine the pipe operators added by the extension with existing DuckSQL features such as `range()` and prefix aliases:
 
 ```sql
 FROM range(6) t(i) 
@@ -326,7 +337,7 @@ FROM range(6) t(i)
 └───────┴─────────┘
 ```
 
-The extension only defines the pipe-specific structure. Expressions, table references, `WHERE`, `SELECT`, `ORDER BY`, and other reused rules are still parsed and transformed by DuckDB itself. This means that new syntax can be combined with DuckSQL without the extension having to implement the rest of SQL again.
+The extension only defines the pipe-specific syntax. Expressions, table references, `WHERE`, `SELECT`, `ORDER BY`, and other reused rules are still parsed and transformed by DuckDB itself. This means that new syntax can be combined with DuckSQL without the extension having to implement the rest of SQL again.
 
 ## What’s Next?
 
