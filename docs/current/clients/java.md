@@ -165,6 +165,34 @@ try (PreparedStatement stmt = conn.prepareStatement("INSERT INTO items VALUES (?
 
 > Warning Do *not* use prepared statements to insert large amounts of data into DuckDB. See the [data import documentation]({% link docs/current/data/overview.md %}) for better options.
 
+### Reading Nested and Composite Types
+
+DuckDB's nested and composite types are read from a `ResultSet` with `getObject`, which returns an idiomatic Java object for each type:
+
+<div class="monospace_table"></div>
+
+| DuckDB type | Java type returned by `getObject` |
+|--|--|
+| `LIST`, `ARRAY` | `org.duckdb.DuckDBArray` (implements `java.sql.Array`) |
+| `STRUCT` | `org.duckdb.DuckDBStruct` (implements `java.sql.Struct`) |
+| `MAP` | `java.util.LinkedHashMap` |
+| `UNION` | the resolved member value |
+| `ENUM` | `String` |
+
+```java
+try (ResultSet rs = stmt.executeQuery("SELECT [1, 2, 3] AS l, {'a': 1, 'b': 2} AS s")) {
+    while (rs.next()) {
+        DuckDBArray list = (DuckDBArray) rs.getObject(1);
+        Object[] values = (Object[]) list.getArray();
+
+        DuckDBStruct struct = (DuckDBStruct) rs.getObject(2);
+        Map<String, Object> fields = struct.getMap();
+    }
+}
+```
+
+The DuckDB result set also exposes typed accessors as extensions to the JDBC API, including `getArray(int)`, `getStruct(int)`, `getUuid(int)`, `getHugeint(int)`, and `getJsonObject(int)`. `DuckDBStruct.getMap()` returns the struct fields keyed by name, and `DuckDBArray.getResultSet()` exposes the list elements as an index and value result set.
+
 ### Arrow Methods
 
 Refer to the [API Reference](https://javadoc.io/doc/org.duckdb/duckdb_jdbc/latest/org/duckdb/DuckDBResultSet.html#arrowExportStream(java.lang.Object,long)) for type signatures
