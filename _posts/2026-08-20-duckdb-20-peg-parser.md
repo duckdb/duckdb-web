@@ -4,7 +4,7 @@ title: "DuckDB v2.0: Your Database Deserves a Better Parser"
 author: "Daniël ten Wolde"
 thumb: "/images/blog/thumbs/duckdb-20-peg-parser.svg"
 image: "/images/blog/thumbs/duckdb-20-peg-parser.png"
-excerpt: "DuckDB 2.0 replaces its PostgreSQL-derived SQL parser with a PEG-based parser that is easier to evolve and can be extended at runtime."
+excerpt: "DuckDB v2.0 replaces its PostgreSQL-derived SQL parser with a PEG-based parser that is easier to evolve and can be extended at runtime."
 tags: ["release"]
 ---
 
@@ -74,7 +74,7 @@ Although a SQL standard exists, database systems support different parts of the 
 
 DuckDB’s SQL closely follows PostgreSQL conventions, but it has evolved considerably over the years. We have added features of our own, such as `GROUP BY ALL`, as well as features inspired by other database systems. At the same time, DuckDB does not implement every aspect of PostgreSQL’s behavior. DuckDB therefore speaks its own SQL dialect, which we will refer to as **DuckSQL** in this post, even though it remains strongly influenced by PostgreSQL.
 
-This distinction is important when talking about the parser. The SQL dialect that DuckDB accepts and the implementation used to parse that SQL are two separate things. For DuckDB `2.0`, we are replacing the parser implementation and rewriting its grammar. What we are **not** replacing is DuckSQL itself.
+This distinction is important when talking about the parser. The SQL dialect that DuckDB accepts and the implementation used to parse that SQL are two separate things. For DuckDB `v2.0`, we are replacing the parser implementation and rewriting its grammar. What we are **not** replacing is DuckSQL itself.
 
 
 ## Outgrowing the PostgreSQL-Derived Parser
@@ -121,7 +121,7 @@ In DuckDB, these rules operate on the tokens produced by the tokenizer. The matc
 
 The research prototype demonstrated that a PEG-based SQL parser was feasible. Replacing DuckDB’s existing parser, however, required considerably more than parsing a subset of SQL. The new parser had to accept all of DuckSQL and produce the same AST expected by DuckDB’s binder.
 
-The PEG grammar was first introduced in DuckDB v1.2, where it handled autocomplete in the CLI. Later, in DuckDB v1.5, we introduced the complete PEG parser as an experimental, opt-in feature. Since then, the grammar, matcher, and transformer have been steadily improved to make the PEG parser the default for DuckDB v2.0.
+The PEG grammar was first introduced in DuckDB `v1.2`, where it handled autocomplete in the CLI. Later, in DuckDB `v1.5`, we introduced the complete PEG parser as an experimental, opt-in feature. Since then, the grammar, matcher, and transformer have been steadily improved to make the PEG parser the default for DuckDB `v2.0`.
 
 Among other things, the parser had to support:
 
@@ -142,7 +142,7 @@ We encountered this with queries containing a large number of unmatched opening 
 SELECT ((((((((((((((((((;
 ```
 
-With the experimental PEG parser shipped in v1.5, adding one more opening parenthesis approximately doubled the parsing time:
+With the experimental PEG parser shipped in `v1.5`, adding one more opening parenthesis approximately doubled the parsing time:
 
 ```text
 18 opening parentheses:  5.303 seconds
@@ -167,7 +167,7 @@ The resulting architecture replaces the PostgreSQL-derived parser front end, whi
 
 ## Evolving DuckSQL
 
-With the PEG parser now in place for DuckDB v2.0, we have also continued to extend DuckSQL with new syntax.
+With the PEG parser now in place for DuckDB `v2.0`, we have also continued to extend DuckSQL with new syntax.
 
 One example is the new expression-statement syntax. Until now, executing a query consisting only of expressions always required writing a `SELECT`:
 
@@ -183,7 +183,7 @@ date: current_date(), time: current_localtime();
 
 As a bonus, this also works with prefix aliases.
 
-Another example is the new [`CONNECT`](https://github.com/duckdb/duckdb/pull/22732) statement, introduced for [Quack](https://duckdb.org/quack/). It allows you to connect to a remote database and route subsequent queries to it until `DISCONNECT` is called:
+Another example is the new [`CONNECT`](https://github.com/duckdb/duckdb/pull/22732) statement, introduced for [Quack](https://duckdb.org/quack/). It allows you to connect to a remote database and route subsequent queries to it until you run `DISCONNECT`:
 
 ```sql
 CONNECT 'postgres://localhost/mydb';
@@ -227,7 +227,7 @@ Extensions that add new syntax already exist, such as [`psql`](https://duckdb.or
 
 With the PEG parser, extensions can instead extend individual parts of DuckDB’s parser. They can extend the tokenizer, add grammar rules, and register custom matchers while continuing to reuse the rest of DuckSQL.
 
-> **Warning:** The API shown below is still a preview and may change before [DuckDB v2.0]({% post_url 2026-08-17-duckdb-20-highlights %}).
+> **Warning:** The API shown below is still a preview and may change before [DuckDB `v2.0`]({% post_url 2026-08-17-duckdb-20-highlights %}).
 
 To make this concrete, we use Google’s [pipe query syntax](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/pipe-syntax). This is an extension to SQL that adds piped data flow syntax. Pipe syntax expresses a query as a sequence of operators, where each operator consumes the result of the previous one.
 
@@ -356,8 +356,8 @@ The extension only defines the pipe-specific syntax. Expressions, table referenc
 
 ## What’s Next?
 
-With DuckDB 2.0, the PEG parser is planned to completely replace the PostgreSQL-derived parser. The goal is for existing DuckSQL queries to continue working as before, while giving us a parser that is easier to evolve and designed to be extended at runtime.
+With DuckDB `v2.0`, the PEG parser is planned to completely replace the PostgreSQL-derived parser. The goal is for existing DuckSQL queries to continue working as before, while giving us a parser that is easier to evolve and designed to be extended at runtime.
 
-The runtime grammar extension API shown in this post is still a work in progress and may change before v2.0 is released. However, the underlying idea is already working: extensions can add their own syntax while reusing the existing DuckDB grammar and transformations instead of implementing a complete SQL parser themselves.
+The runtime grammar extension API shown in this post is still a work in progress and may change before `v2.0` is released. However, the underlying idea is already working: extensions can add their own syntax while reusing the existing DuckDB grammar and transformations instead of implementing a complete SQL parser themselves.
 
 If you do find an existing query that behaves differently with the PEG parser, please let us know by [filing an issue](https://github.com/duckdb/duckdb/issues).
