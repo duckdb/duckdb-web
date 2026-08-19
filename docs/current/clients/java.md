@@ -318,7 +318,7 @@ Statement parameters remain 1-based, following the JDBC convention, while chunk 
 ### Appender
 
 The [Appender]({% link docs/current/data/appender.md %}) is available in the DuckDB JDBC driver via the `org.duckdb.DuckDBAppender` class.
-The constructor of the class requires the schema name and the table name it is applied to.
+An appender is created from a `DuckDBConnection` with the `createAppender()` method, passing the table name and, optionally, the schema and catalog it is applied to.
 The Appender is flushed when the `close()` method is called.
 
 Example:
@@ -344,6 +344,19 @@ try (var appender = conn.createAppender(DuckDBConnection.DEFAULT_SCHEMA, "tbl"))
     appender.append(20);
     appender.append(-8.1);
     appender.append("world");
+    appender.endRow();
+}
+```
+
+An appender can also be created with `createAppender(tableName)` for the default schema, or with `createAppender(catalogName, schemaName, tableName)` to target a specific catalog. Buffered rows are written to the table when the appender is closed, or earlier by calling `flush()`. Within a row, `appendNull()` writes a `NULL` and `appendDefault()` writes the column's `DEFAULT` value.
+
+Nested and collection types are appended within a row as well. Use `beginStruct()` and `endStruct()` for a `STRUCT` column, and `beginUnion(tag)` and `endUnion()` for a `UNION` column. For a `LIST` or `ARRAY` column, pass a Java array as a single value, optionally with a boolean null mask for its elements:
+
+```java
+try (var appender = conn.createAppender("list_tbl")) {
+    appender.beginRow();
+    appender.append(new int[] {1, 2, 3});               // a LIST value
+    appender.append(new int[] {4, 5}, new boolean[] {false, true}); // second element is NULL
     appender.endRow();
 }
 ```
