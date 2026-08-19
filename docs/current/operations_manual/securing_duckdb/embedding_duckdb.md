@@ -19,4 +19,4 @@ This feature is only present in the CLI client and not in any other DuckDB clien
 .sh ls
 ```
 
-> Tip Calling DuckDB's CLI client via shell commands is **not recommended** for embedding DuckDB. It is recommended to use one of the client libraries, e.g., [Python]({% link docs/current/clients/python/overview.md %}), [R]({% link docs/current/clients/r.md %}), [Java]({% link docs/current/clients/java.md %}), etc.
+> Tip Calling DuckDB's CLI client via shell commands is **not recommended** for embedding DuckDB. It is recommended to use one of the client libraries, e.g., [Python]({% link docs/current/clients/python/overview.md %}), [R]({% link docs/current/clients/r.md %}), [Java]({% link docs/current/clients/java/overview.md %}), etc.
