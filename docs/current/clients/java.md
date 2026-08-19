@@ -108,11 +108,35 @@ Alongside DuckDB's own settings, the driver recognizes a number of DuckDB-specif
 | `jdbc_stream_results` | Stream result sets instead of materializing them. See [Streaming Results](#streaming-results). |
 | `jdbc_auto_commit` | Set the default auto-commit mode for new connections. |
 | `jdbc_pin_db` | Keep the database instance alive after its last connection closes. Defaults to `true` for in-memory databases. |
-| `jdbc_instance_cache` | Reuse a single database instance across connections that open the same file. |
+| `jdbc_instance_cache` | Reuse the process-wide database instance for the same database. Enabled by default. See [In-Memory Databases and Instance Caching](#in-memory-databases-and-instance-caching). |
 | `jdbc_ignore_unsupported_options` | Silently ignore unsupported connection options instead of throwing an error. |
 | `jdbc_jfr_memory_monitor` | Enable JFR memory monitoring for the connection's database instance. See [Memory Monitoring with JFR](#memory-monitoring-with-jfr). |
 
 These properties can be passed in the `Properties` object or appended to the JDBC URL after a semicolon, for example `jdbc:duckdb:/tmp/my_database;jdbc_stream_results=true`.
+
+### In-Memory Databases and Instance Caching
+
+The JDBC URL determines whether connections share a single underlying database instance or each get their own. By default, the driver caches the database instance so that connections addressing the same database reuse it.
+
+The behavior depends on the form of the URL:
+
+<div class="monospace_table"></div>
+
+| JDBC URL | Behavior |
+|--|--|
+| `jdbc:duckdb:` or `jdbc:duckdb::memory:` | A private, uncached in-memory database. Each connection gets its own separate instance, and its data is not shared with any other connection. |
+| `jdbc:duckdb::memory:⟨label⟩` | A named in-memory database. Connections using the same label share one cached instance, keyed by `:memory:⟨label⟩`. |
+| `jdbc:duckdb:⟨path⟩` | A file-backed database. The instance is cached using the absolute path to the database file as the cache key, so connections that open the same file share one instance. |
+
+```java
+// Two connections to the same named in-memory database share their data.
+Connection conn1 = DriverManager.getConnection("jdbc:duckdb::memory:shared_db");
+Connection conn2 = DriverManager.getConnection("jdbc:duckdb::memory:shared_db");
+```
+
+Instance caching is controlled by the `jdbc_instance_cache` connection property, which is enabled by default. Setting it to `false` creates an isolated instance per connection. Disabling the cache for a file-backed database may cause local file lock conflicts if another connection has the same file open, and pinning an uncached instance with `jdbc_pin_db` does not make it reusable.
+
+> Warning Each private (uncached) in-memory database creates its own instance with an independent thread pool. Unless the `threads` option is set, that pool is initialized with `cpu_count - 1` worker threads. An application that opens many connections with the default `jdbc:duckdb:` URL can therefore create a large number of operating system threads. Use a named in-memory database or set the `threads` option to bound the thread count.
 
 ### Querying
 
