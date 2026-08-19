@@ -83,7 +83,7 @@ When DuckDB started out, it made a lot of sense to use the PostgreSQL-derived pa
 
 However, over the years this parser also came with some downsides. Extending DuckSQL meant modifying the underlying YACC/Bison grammar. Because Bison generates an LALR(1) parser, seemingly small additions to the grammar can interact with existing rules and introduce `shift/reduce` or `reduce/reduce` conflicts. As DuckSQL grew, making changes to the grammar therefore became increasingly difficult.
 
-This was one of the motivations behind our earlier blog post on runtime-extensible SQL parsers. In that post and the accompanying CIDR paper, we explored whether Parsing Expression Grammars (PEGs) could provide a better foundation for an extensible database parser. At the time, the PEG parser was still an experimental prototype capable of parsing only a subset of SQL. 
+This was one of the motivations behind our earlier [blog post](https://duckdb.org/2024/11/22/runtime-extensible-parsers) on runtime-extensible SQL parsers. In that post and the accompanying [CIDR paper](https://vldb.org/cidrdb/papers/2025/p18-muhleisen.pdf), we explored whether Parsing Expression Grammars (PEGs) could provide a better foundation for an extensible database parser. At the time, the PEG parser was still an experimental prototype capable of parsing only a subset of SQL. 
 
 ## A Primer on PEG Parsers
 
