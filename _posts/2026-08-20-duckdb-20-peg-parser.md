@@ -189,6 +189,19 @@ SELECT count(*) FROM orders; -- Runs on the PostgreSQL server
 DISCONNECT;
 ```
 
+Another addition is new syntax for working with external resources. This will allow you to manage resources that live outside DuckDB through an extension. You will be able to create, register, inspect, connect to, or destroy a resource all from within DuckDB: 
+
+```sql
+CREATE EXTERNAL RESOURCE '<resource-type>' AS <name> (...);
+REGISTER EXTERNAL RESOURCE '<resource-type>' AS <name> FROM <handle>;
+
+SHOW EXTERNAL RESOURCES;
+
+CONNECT TO EXTERNAL RESOURCE <name>;
+
+DESTROY EXTERNAL RESOURCE <name>;
+```
+
 We have also extended `COPY TO` with `PARTITION BY` and `ORDER BY` syntax:
 
 ```sql
