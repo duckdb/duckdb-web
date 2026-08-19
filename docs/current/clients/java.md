@@ -63,6 +63,8 @@ readOnlyProperty.setProperty("duckdb.read_only", "true");
 Connection conn = DriverManager.getConnection("jdbc:duckdb:/tmp/my_database", readOnlyProperty);
 ```
 
+Read-only mode can also be set through DuckDB's standard `access_mode` property, for example `access_mode=READ_ONLY`. If both `duckdb.read_only` and `access_mode` are supplied and disagree, the driver throws an error.
+
 Additional connections can be created using the `DriverManager`. A more efficient mechanism is to call the `DuckDBConnection#duplicate()` method:
 
 ```java
@@ -93,6 +95,24 @@ Properties connectionProperties = new Properties();
 connectionProperties.setProperty("temp_directory", "/path/to/temp/dir/");
 Connection conn = DriverManager.getConnection("jdbc:duckdb:/tmp/my_database", connectionProperties);
 ```
+
+Alongside DuckDB's own settings, the driver recognizes a number of DuckDB-specific JDBC connection properties:
+
+<div class="monospace_table"></div>
+
+| Property | Description |
+|--|--|
+| `duckdb.read_only` | Open the database in read-only mode. |
+| `access_mode` | Standard DuckDB access mode: `READ_ONLY`, `READ_WRITE`, or `AUTOMATIC`. |
+| `custom_user_agent` | Append a custom string to the user agent reported to DuckDB. |
+| `jdbc_stream_results` | Stream result sets instead of materializing them. See [Streaming Results](#streaming-results). |
+| `jdbc_auto_commit` | Set the default auto-commit mode for new connections. |
+| `jdbc_pin_db` | Keep the database instance alive after its last connection closes. Defaults to `true` for in-memory databases. |
+| `jdbc_instance_cache` | Reuse a single database instance across connections that open the same file. |
+| `jdbc_ignore_unsupported_options` | Silently ignore unsupported connection options instead of throwing an error. |
+| `jdbc_jfr_memory_monitor` | Enable JFR memory monitoring for the connection's database instance. See [Memory Monitoring with JFR](#memory-monitoring-with-jfr). |
+
+These properties can be passed in the `Properties` object or appended to the JDBC URL after a semicolon, for example `jdbc:duckdb:/tmp/my_database;jdbc_stream_results=true`.
 
 ### Querying
 
