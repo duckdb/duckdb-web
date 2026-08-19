@@ -113,6 +113,7 @@ SELECT *;
 
 A PEG evaluates alternatives in order. When matching `SelectFrom`, the parser first attempts `SelectFromClause`. If that does not match, it attempts `FromSelectClause`. The first successful alternative is selected. As a result, PEG grammars do not have the same `shift/reduce` and `reduce/reduce` conflicts as LALR grammars. Instead, alternatives are ordered explicitly, and that order forms part of the grammar’s behavior.
 
+We are not the only ones changing to a PEG-based parser. Python [switched](peps.python.org/pep-0617/) from its LL(1) parser with a PEG-based parser in Python 3.9, also motivated by the additional flexibility PEG provides to evolve the language. 
 In DuckDB, these rules operate on the tokens produced by the tokenizer. The matcher applies the grammar rules to those tokens and constructs a generic `ParseResult` tree, which is subsequently transformed into DuckDB’s internal AST.
 
 ## Going from Prototype to Production
