@@ -260,6 +260,61 @@ props.setProperty(DuckDBDriver.JDBC_STREAM_RESULTS, String.valueOf(true));
 Connection conn = DriverManager.getConnection("jdbc:duckdb:", props);
 ```
 
+### Chunked Results
+
+The JDBC driver can return a query result as a lazily fetched sequence of columnar data chunks via the `org.duckdb.DuckDBChunkedResult` class.
+This exposes the C API's `duckdb_fetch_chunk` function to Java and avoids the per-row overhead required by the JDBC `ResultSet` interface.
+Chunk contents are read through the same `DuckDBDataChunkReader` API that is used by [user-defined functions](https://github.com/duckdb/duckdb-java/blob/main/UDF.MD).
+
+Call `query()` on a `DuckDBPreparedStatement` to obtain a `DuckDBChunkedResult`, then advance through the chunks with `nextChunk()` and read each column vector by index.
+
+Example:
+
+```java
+import java.sql.DriverManager;
+import org.duckdb.DuckDBConnection;
+import org.duckdb.DuckDBPreparedStatement;
+import org.duckdb.DuckDBChunkedResult;
+import org.duckdb.DuckDBDataChunkReader;
+import org.duckdb.DuckDBReadableVector;
+
+try (DuckDBConnection conn = DriverManager
+        .getConnection("jdbc:duckdb:")
+        .unwrap(DuckDBConnection.class);
+     DuckDBPreparedStatement ps = conn.prepare("SELECT ? AS col1")) {
+
+    // statement parameters are 1-based
+    ps.setInt(1, 42);
+
+    try (DuckDBChunkedResult res = ps.query()) {
+
+        // advance to the next chunk, returns true on success
+        while (res.nextChunk()) {
+
+            // get the current chunk from the result
+            DuckDBDataChunkReader chunk = res.chunk();
+
+            // iterate over the chunk columns, all indices are 0-based
+            for (long col = 0; col < chunk.columnCount(); col++) {
+
+                // get a vector for the specified column
+                DuckDBReadableVector vector = chunk.vector(col);
+
+                // iterate over the vector rows
+                for (long row = 0; row < chunk.rowCount(); row++) {
+                    int val = vector.getInt(row);
+                    System.out.println(val);
+                }
+            }
+        }
+    }
+}
+```
+
+Statement parameters remain 1-based, following the JDBC convention, while chunk columns and rows are 0-based, matching the C API and the user-defined function interfaces.
+
+> The chunked result API currently supports basic data types only. Composite types such as `LIST` and `STRUCT` are not yet readable through this interface. The `query()` method is available on prepared statements only; there is no `query(String)` overload.
+
 ### Appender
 
 The [Appender]({% link docs/current/data/appender.md %}) is available in the DuckDB JDBC driver via the `org.duckdb.DuckDBAppender` class.
