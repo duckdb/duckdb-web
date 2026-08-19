@@ -70,7 +70,7 @@ LINE 1: FROM missing_table;
 
 ## The DuckDB SQL Dialect
 
-Although a SQL standard exists, database systems support different parts of the standard and add their own syntax and behavior. The resulting variants are commonly referred to as SQL dialects. Examples include the dialects supported by PostgreSQL, Oracle, GoogleSQL for BigQuery, MySQL, MariaDB, SQLite, Spark SQL, and, of course, DuckDB.
+Although a SQL standard exists, database systems support different parts of the standard and add their own syntax and behavior. The resulting variants are commonly referred to as SQL dialects. Examples include the dialects supported by [PostgreSQL](https://www.postgresql.org/docs/current/sql.html), [Oracle](https://docs.oracle.com/en/database/oracle/oracle-database/26/sqlrf/), [GoogleSQL for BigQuery](https://docs.cloud.google.com/bigquery/docs/introduction-sql), [MySQL](https://dev.mysql.com/doc/refman/8.4/en/sql-statements.html), [MariaDB](https://mariadb.com/docs/server/reference/sql-statements), [SQLite](https://sqlite.org/lang.html), [Spark SQL](https://spark.apache.org/docs/latest/sql-ref.html), and, of course, [DuckDB](https://duckdb.org/docs/current/sql/dialect/overview).
 
 DuckDB’s SQL closely follows PostgreSQL conventions, but it has evolved considerably over the years. We have added features of our own, such as `GROUP BY ALL`, as well as features inspired by other database systems. At the same time, DuckDB does not implement every aspect of PostgreSQL’s behavior. DuckDB therefore speaks its own SQL dialect, which we will refer to as **DuckSQL** in this post, even though it remains strongly influenced by PostgreSQL.
 
