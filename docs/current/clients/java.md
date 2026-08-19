@@ -71,6 +71,18 @@ Connection conn2 = ((DuckDBConnection) conn).duplicate();
 
 Multiple connections are allowed, but mixing read-write and read-only connections is unsupported.
 
+DuckDB shuts down a database when its last open connection is closed. Closing the final connection checkpoints the database, which merges the write-ahead log (the `.wal` file) into the database file and then removes it. See [Files Created by DuckDB]({% link docs/current/operations_manual/footprint_of_duckdb/files_created_by_duckdb.md %}) for details on these files.
+
+For the JDBC driver, "exiting normally" means that every `Connection` to the database has been closed with `Connection.close()` before the Java program ends. There is no separate shutdown method to call: closing all connections is sufficient. Use a try-with-resources block so that connections are closed even when an exception is thrown:
+
+```java
+try (Connection conn = DriverManager.getConnection("jdbc:duckdb:/tmp/my_database")) {
+    // work with the connection
+}
+```
+
+If the process is terminated without closing its connections, the write-ahead log is left in place. It is replayed the next time the database file is opened, so no committed data is lost, but the file is only compacted once the database is checkpointed on a clean shutdown. To force a checkpoint without closing the connection, run the [`CHECKPOINT` statement]({% link docs/current/sql/statements/checkpoint.md %}).
+
 ### Configuring Connections
 
 Configuration options can be provided to change different settings of the database system. Note that many of these
