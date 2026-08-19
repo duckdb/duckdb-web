@@ -44,13 +44,14 @@ $(document).ready(function(){
 		
 		$blockquote.wrapInner('<div class="content"></div>');
 		
-		if (className == "bestpractice") {
-			$blockquote.find('.content').prepend('<h4>Best practice</h4>');
-		} else if (className !== "default") {
-			$blockquote.find('.content').prepend('<h4>' + firstWord + '</h4>');
-		}
+		var label = (className == "bestpractice") ? 'Best practice' : firstWord;
 
-		$blockquote.prepend('<div class="symbol"></div>');
+		if (className !== "default") {
+			$blockquote.find('.content').prepend('<span class="sr-only">' + label + '</span>');
+			$blockquote.prepend('<div class="symbol" title="' + label + '"></div>');
+		} else {
+			$blockquote.prepend('<div class="symbol"></div>');
+		}
 		
 	});
 		

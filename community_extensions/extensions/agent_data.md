@@ -123,8 +123,8 @@ docs:
 
 extension_star_count: 24
 extension_star_count_pretty: 24
-extension_download_count: 909
-extension_download_count_pretty: 909
+extension_download_count: 914
+extension_download_count_pretty: 914
 image: '/images/community_extensions/social_preview/preview_community_extension_agent_data.png'
 layout: community_extension_doc
 ---

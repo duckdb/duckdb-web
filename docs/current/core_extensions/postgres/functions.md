@@ -114,7 +114,7 @@ FROM postgres_configure_pool(catalog_name = 'db1', acquire_mode = 'wait', max_co
 postgres_execute(attached_db_name VARCHAR, sql_query VARCHAR[, ⟨optional named parameters⟩]) -> TABLE
 ```
 
-Executes the the `⟨sql_query⟩`{:.language-sql .highlight} in the specified remote Postgres instance previously attached with `ATTACH ... AS ⟨attached_db_name⟩`{:.language-sql .highlight}.
+Executes the `⟨sql_query⟩`{:.language-sql .highlight} in the specified remote Postgres instance previously attached with `ATTACH ... AS ⟨attached_db_name⟩`{:.language-sql .highlight}.
 This function returns an empty result.
 
 #### Parameters

@@ -60,22 +60,23 @@ For Python, we distribute different nightly builds. Note that not all of them ar
 
 ## Java
 
-The following Maven snippet imports the SNAPSHOT version of the Java package:
+The following Maven snippet imports the latest version of the Java package.
+To determine the version number, please visit the [latest CI builds](https://github.com/duckdb/duckdb-java/actions/workflows/Java.yml) and consult the _Maven S3 Deploy_ job
 
 ```xml
 <dependencies>
     <dependency>
         <groupId>org.duckdb</groupId>
         <artifactId>duckdb_jdbc</artifactId>
-        <!-- replace the hash of the build here -->
-        <version>1.5-627976eb-SNAPSHOT</version>
+        <!-- replace the version of the build here -->
+        <version>2.0.0-alphaXXXXX-XXXXXXX</version>
     </dependency>
 </dependencies>
 
 <repositories>
     <repository>
         <id>central-snapshots</id>
-        <url>https://central.sonatype.com/repository/maven-snapshots/</url>
+        <url>https://duckdb-staging.duckdb.org/duckdb/duckdb-java/maven</url>
         <snapshots><enabled>true</enabled></snapshots>
     </repository>
 </repositories>

@@ -1,6 +1,7 @@
 ---
 layout: docu
 redirect_from:
+- /pdf
 - /docs/guides/offline-copy
 - /docs/preview/guides/offline-copy
 - /docs/stable/guides/offline-copy

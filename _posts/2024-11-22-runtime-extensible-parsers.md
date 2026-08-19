@@ -14,7 +14,7 @@ excerpt: "Despite their central role in processing queries, parsers have not rec
 > CALL enable_peg_parser();
 > ```
 
-> This post is a shortened version of our peer-reviewed research paper "Runtime-Extensible Parsers" that was accepted for publication and presentation at the [2025 Conference on Innovative Data Systems Research](https://www.cidrdb.org/cidr2025/index.html) (CIDR) that is going to be held in Amsterdam between January 19 and 22, 2025. You can [read the full paper]({% link pdf/CIDR2025-muehleisen-raasveldt-extensible-parsers.pdf %}) if you prefer.
+> This post is a shortened version of our peer-reviewed research paper "Runtime-Extensible Parsers" that was accepted for publication and presentation at the [2025 Conference on Innovative Data Systems Research](https://www.cidrdb.org/cidr2025/index.html) (CIDR) that is going to be held in Amsterdam between January 19 and 22, 2025. You can [read the full paper]({% link _library/2025-01-19-runtime-extensible-parsers.md %}) if you prefer.
 
 The parser is the DBMS component that is responsible for turning a query in string format into an internal representation which is usually tree-shaped. The parser defines which queries are going to be accepted at all. Every single SQL query starts its journey in a parser. Despite its prominent position in the stack, very little research has been published on parsing queries for data management systems. There seems to have been very little movement on the topic in the past decades and their implementations are largely stuck in sixty-year-old abstractions and technologies.
 
@@ -58,28 +58,37 @@ Below is an abridged version of our experimental SQL grammar, with the `Expressi
 Statements <- SingleStmt (';' SingleStmt )* ';'*
 SingleStmt <- SelectStmt
 SelectStmt <- SimpleSelect (SetopClause SimpleSelect)*
+
 SetopClause <-
     ('UNION' / 'EXCEPT' / 'INTERSECT') 'ALL'?
+
 SimpleSelect <- WithClause? SelectClause FromClause?
     WhereClause? GroupByClause? HavingClause?
     OrderByClause? LimitClause?
+
 WithStatement <- Identifier 'AS' SubqueryReference
 WithClause <- 'WITH' List(WithStatement)
 SelectClause <- 'SELECT' ('*' / List(AliasExpression))
 ColumnsAlias <- Parens(List(Identifier))
+
 TableReference <-
     (SubqueryReference 'AS'? Identifier ColumnsAlias?) /
     (Identifier ('AS'? Identifier)?)
+
 ExplicitJoin <- ('LEFT' / 'FULL')? 'OUTER'?
     'JOIN' TableReference 'ON' Expression
+
 FromClause <- 'FROM' TableReference
     ((',' TableReference) / ExplicitJoin)*
+
 WhereClause <- 'WHERE' Expression
 GroupByClause <- 'GROUP' 'BY' List(Expression)
 HavingClause <- 'HAVING' Expression
 SubqueryReference <- Parens(SelectStmt)
+
 OrderByExpression <- Expression ('DESC' / 'ASC')?
     ('NULLS' 'FIRST' / 'LAST')?
+
 OrderByClause <- 'ORDER' 'BY' List(OrderByExpression)
 LimitClause <- 'LIMIT' NumberLiteral
 AliasExpression <- Expression ('AS'? Identifier)?
@@ -148,8 +157,10 @@ Below we show a small set of grammar rules that are sufficient to extend our exp
 ```text
 Name <- (Identifier? ':' Identifier) / Identifier
 Edge <- ('-' / '<-') '[' Name ']' ('->' / '-')
+
 Pattern <- Parens(Name WhereClause?) Edge
-   Parens(Name WhereClause?)
+    Parens(Name WhereClause?)
+
 PropertyGraphReference <- 'GRAPH_TABLE'i '('
         Identifier ','
         'MATCH'i List(Pattern)

@@ -24,7 +24,7 @@
 }
 
 @mixin headline-1 {
-	font-size: var(--type-headline-1, 32px);
+	font-size: var(--type-headline-1, 34px);
 	font-weight: 600;
 	line-height: 1.2;
 	font-family: "SuisseIntl", sans-serif;
@@ -338,23 +338,10 @@
 		font-weight: 500;
 	}
 	
-	h2 {
-		@include headline-1();
-		margin-top: 60px;
-	}
-	
-	h3 {
-		@include headline-2();
-		margin-top: 60px;
-	}
-	
-	h4 {
-		@include headline-3();
-		margin-top: 60px;
-	}
-	
+	h2,
+	h3,
+	h4,
 	h5 {
-		@include title-1();
 		margin-top: 60px;
 	}
 

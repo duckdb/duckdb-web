@@ -140,7 +140,8 @@ section.speakers,
 				}
 			}
 			.date,
-			.length{
+			.length,
+			.readingtime{
 				white-space: nowrap;
 			}
 			.venue{
@@ -440,7 +441,7 @@ main.main-everywhere .recentposts .newstileswrap .postpreview{
 	row-gap: 20px;
 
 	h1{
-		@include headline-2();
+		@include headline-1();
 		margin: 0;
 	}
 
@@ -490,7 +491,7 @@ main.main-everywhere .recentposts .newstileswrap .postpreview{
 
 	#search-input {
 		@include label-1();
-		height: 36px;
+		height: 44px;
 		padding: 0 15px 0 40px;
 		border: 1px solid var(--main-codebox-border-color, #E6E6E6);
 		border-radius: var(--page-radius-pill);
@@ -516,9 +517,9 @@ main.main-everywhere .recentposts .newstileswrap .postpreview{
 		display: none;
 		align-items: center;
 		justify-content: center;
-		width: 36px;
-		height: 36px;
-		min-width: 36px;
+		width: 44px;
+		height: 44px;
+		min-width: 44px;
 		border-radius: 50%;
 		border: 1px solid var(--doc-codebox-border-color, #E6E6E6);
 		background: var(--doc-codebox-background-color, #F2F2F2);
@@ -555,7 +556,7 @@ main.main-everywhere .recentposts .newstileswrap .postpreview{
 		position: relative;
 		display: flex;
 		align-items: center;
-		height: 36px;
+		height: 44px;
 		overflow-x: auto;
 		flex-wrap: nowrap;
 		width: fit-content;
@@ -563,9 +564,9 @@ main.main-everywhere .recentposts .newstileswrap .postpreview{
 
 		.filter-highlight {
 			position: absolute;
-			top: 0;
+			top: 4px;
 			left: 0;
-			height: 100%;
+			height: calc(100% - 8px);
 			background: var(--interactive-filter-selected-background-color, #D9D9D9);
 			border-radius: var(--page-radius-pill);
 			transition: all 0.3s ease;
@@ -900,11 +901,6 @@ h5 a {
 			padding: 105px 15px;
 			position: relative;
 			z-index: 100;
-			h1{
-				@include display-1();
-				margin-top: 0;
-				margin-bottom: 0;
-			}
 			h3{
 				margin-top: 0;
 				margin-bottom: 0;
@@ -957,7 +953,8 @@ h5 a {
 				margin-left: 25px;
 			}
 			span.bullet{
-				margin: 0 5px;
+				margin: 0 6px;
+				color: var(--main-text-tertiary-color, #B2B2B2);
 			}
 			.publishedinfo{
 				line-height: 1;
@@ -1011,7 +1008,7 @@ h5 a {
 			}
 
 			h1{
-				@include display-2();
+				@include headline-1();
 				margin-bottom: 30px;
 				margin-top: 0;
 			}

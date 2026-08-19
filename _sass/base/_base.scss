@@ -173,6 +173,10 @@ h1, h2, h3, h4, h5, h6 {
 		color: inherit;
 	}
 
+	.anchor-wrap {
+		white-space: nowrap;
+	}
+
 	svg.anchor-icon {
 		width: 16px;
 		height: 16px;
@@ -221,7 +225,7 @@ main .wrap{
 	
 	h1,
 	.pagetitle-heading {
-		@include display-1();
+		@include headline-1();
 		margin: 0;
 	}
 	
