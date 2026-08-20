@@ -304,6 +304,10 @@
                   "url": "overview"
                 },
                 {
+                  "page": "Connect",
+                  "url": "connecting"
+                },
+                {
                   "page": "Run Queries",
                   "url": "querying"
                 },
