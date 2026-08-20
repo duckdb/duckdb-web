@@ -133,10 +133,6 @@
   > .ecosystem-box__title {
     margin-bottom: 16px;
   }
-
-  > .ecosystem-icon-grid {
-    margin-bottom: 28px;
-  }
 }
 
 /* Icon Grid */
@@ -217,7 +213,7 @@
   border: 1px solid var(--interactive-folderbox-border-color, #E6E6E6);
   background: var(--interactive-folderbox-background-color, rgba(250, 250, 250, 0.6));
   border-radius: var(--page-radius-box);
-  padding: 42px 10px;
+  padding: 24px 10px;
   margin-top: 16px;
   overflow: clip;
 
