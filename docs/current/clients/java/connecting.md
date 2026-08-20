@@ -38,13 +38,15 @@ import org.duckdb.DuckDBConnection;
 DuckDBConnection conn = (DuckDBConnection) DriverManager.getConnection("jdbc:duckdb:");
 ```
 
-Additional connections can be created using the `DriverManager`. A more efficient mechanism is to call the `DuckDBConnection#duplicate()` method, which opens another connection to the same database instance without re-reading the configuration:
+Additional connections can be created using the `DriverManager`. The `DuckDBConnection#duplicate()` method opens another connection to the same database instance without re-reading the configuration:
 
 ```java
 Connection conn2 = ((DuckDBConnection) conn).duplicate();
 ```
 
-Multiple connections are allowed, but mixing read-write and read-only connections is unsupported.
+Its main purpose is to reach a **connection-private in-memory** database instance — the one created by the plain `jdbc:duckdb:` URL — which no other URL can address. On a named in-memory or a file-backed connection, `duplicate()` is effectively the same as opening a new connection on the same URL, because those instances are shared through the [instance cache](#database-instances-and-instance-caching) anyway.
+
+Multiple connections to the same instance are allowed, but they must all be opened with the same options. Options are applied when the instance starts, as the first connection is opened, so a later connection that requests different options — a different `access_mode`, for example — is rejected. See [Database Instances and Instance Caching](#database-instances-and-instance-caching).
 
 ## JDBC URL Syntax
 
@@ -60,13 +62,13 @@ The database part determines what the connection opens:
 
 | JDBC URL | Opens |
 |--|--|
-| `jdbc:duckdb:` | A private in-memory database. |
-| `jdbc:duckdb::memory:` | The same as above, written explicitly. |
-| `jdbc:duckdb::memory:⟨label⟩` | A named in-memory database that other connections can share. |
+| `jdbc:duckdb:` | A connection-private in-memory database. |
+| `jdbc:duckdb:memory:` | The same as above, written explicitly. |
+| `jdbc:duckdb:memory:⟨label⟩` | A named in-memory database that other connections can share. |
 | `jdbc:duckdb:⟨path⟩` | A database file on disk, for example `jdbc:duckdb:/tmp/my_database`. |
 | `jdbc:duckdb:ducklake:⟨metadata_path⟩` | A [DuckLake]({% link docs/current/core_extensions/ducklake.md %}) catalog. |
 
-When using the `jdbc:duckdb:` URL alone, an **in-memory database** is created. Note that for an in-memory database no data is persisted to disk (i.e., all data is lost when you exit the Java program). If you would like to access or create a persistent database, append its file name after the path.
+When using the `jdbc:duckdb:` URL alone, a **connection-private in-memory database** is created: the instance belongs to that single connection and cannot be shared, other than through `duplicate()`. Note that for an in-memory database no data is persisted to disk (i.e., all data is lost when you exit the Java program). If you would like to access or create a persistent database, append its file name after the path.
 
 ## Read-Only Connections
 
@@ -84,7 +86,7 @@ Read-only mode can also be set through DuckDB's standard `access_mode` property,
 
 ### DuckDB Settings
 
-Any DuckDB configuration option can be supplied when a connection is opened: the driver hands every option it does not recognize as its own to DuckDB. Note that many of these settings can also be changed later on using [`PRAGMA` statements]({% link docs/current/configuration/pragmas.md %}).
+Any DuckDB configuration option can be supplied when a connection is opened: the driver hands every option it does not recognize as its own to DuckDB. Note that many of these settings can also be changed later on with a [`SET` (or `SET GLOBAL`) statement]({% link docs/current/sql/statements/set.md %}), or the equivalent [`PRAGMA`]({% link docs/current/configuration/pragmas.md %}).
 
 ```java
 Properties connectionProperties = new Properties();
@@ -135,7 +137,7 @@ Alongside DuckDB's own settings, the driver recognizes a number of DuckDB-specif
 | `custom_user_agent` | Append a custom string to the user agent reported to DuckDB. |
 | `jdbc_stream_results` | Stream result sets instead of materializing them. See [Streaming Results]({% link docs/current/clients/java/result_handling.md %}#streaming-results). |
 | `jdbc_auto_commit` | Set the default auto-commit mode for new connections. |
-| `jdbc_pin_db` | Keep the database instance alive after its last connection closes. Disabled by default; enabled by default for DuckLake connections. |
+| `jdbc_pin_db` | Keep the database instance alive after its last connection closes. Disabled by default. Enabled by default, together with `jdbc_stream_results`, for `ducklake:` URLs, so that BI tools such as Metabase do not repeatedly close and re-create the instance or accidentally materialize large DuckLake datasets. |
 | `jdbc_instance_cache` | Reuse the process-wide database instance for the same database. Enabled by default. See [Database Instances and Instance Caching](#database-instances-and-instance-caching). |
 | `jdbc_ignore_unsupported_options` | Silently ignore unsupported connection options instead of throwing an error. |
 | `jdbc_jfr_memory_monitor` | Enable JFR memory monitoring for the connection's database instance. See [Memory Monitoring with JFR]({% link docs/current/clients/java/profiling.md %}#memory-monitoring-with-jfr). |
@@ -188,14 +190,14 @@ The behavior depends on the form of the URL:
 
 | JDBC URL | Behavior |
 |--|--|
-| `jdbc:duckdb:` or `jdbc:duckdb::memory:` | A private, uncached in-memory database. Each connection gets its own separate instance, and its data is not shared with any other connection. |
-| `jdbc:duckdb::memory:⟨label⟩` | A named in-memory database. Connections using the same label share one cached instance, keyed by `:memory:⟨label⟩`. |
+| `jdbc:duckdb:` or `jdbc:duckdb:memory:` | A connection-private, uncached in-memory database. Each connection gets its own separate instance, and its data is not shared with any other connection. |
+| `jdbc:duckdb:memory:⟨label⟩` | A named in-memory database. Connections using the same label share one cached instance, keyed by `:memory:⟨label⟩`. |
 | `jdbc:duckdb:⟨path⟩` | A file-backed database. The instance is cached using the absolute path to the database file as the cache key, so connections that open the same file share one instance. On Windows and macOS the key is case-insensitive. |
 
 ```java
-// Two connections to the same named in-memory database share their data.
-Connection conn1 = DriverManager.getConnection("jdbc:duckdb::memory:shared_db");
-Connection conn2 = DriverManager.getConnection("jdbc:duckdb::memory:shared_db");
+// Two connections to the same named in-memory database point to the same database instance.
+Connection conn1 = DriverManager.getConnection("jdbc:duckdb:memory:shared_db");
+Connection conn2 = DriverManager.getConnection("jdbc:duckdb:memory:shared_db");
 ```
 
 Instance caching is controlled by the `jdbc_instance_cache` connection property, which is enabled by default. Setting it to `false` creates an isolated instance per connection. Disabling the cache for a file-backed database may cause local file lock conflicts if another connection has the same file open, and pinning an uncached instance with `jdbc_pin_db` does not make it reusable.
