@@ -217,7 +217,7 @@ Extensions that add new syntax already exist, such as [`psql`](https://duckdb.or
 
 With the PEG parser, extensions can instead extend individual parts of DuckDB’s parser. They can extend the tokenizer, add grammar rules, and register custom matchers while continuing to reuse the rest of DuckSQL.
 
-> **Warning:** The API shown below is still a preview and may change before [DuckDB v2.0]({% post_url 2026-08-17-duckdb-20-highlights %}). You can follow the ongoing development [on GitHub](https://github.com/duckdb/duckdb/pull/24919).
+> Warning The API shown below is still a preview and may change before [DuckDB v2.0]({% post_url 2026-08-17-duckdb-20-highlights %}). You can follow the ongoing development [on GitHub](https://github.com/duckdb/duckdb/pull/24919).
 
 To make this concrete, we use Google’s [pipe query syntax](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/pipe-syntax). This is an extension to SQL that adds piped data flow syntax. Pipe syntax expresses a query as a sequence of operators, where each operator consumes the result of the previous one.
 
