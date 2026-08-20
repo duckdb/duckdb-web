@@ -9,7 +9,7 @@ title: Run Queries
 
 ## Overview
 
-The DuckDB JDBC driver implements the standard JDBC API, so Java applications send queries and read result sets through the familiar `Statement`, `PreparedStatement`, and `ResultSet` interfaces. This page covers sending queries and reading DuckDB's nested and composite types. For opening the `Connection` these run on, see the [Connect page]({% link docs/current/clients/java/connecting.md %}).
+The DuckDB JDBC driver implements the standard JDBC API, so Java applications send queries and read result sets through the familiar `Statement`, `PreparedStatement`, and `ResultSet` interfaces. This page covers sending queries and reading DuckDB's nested and composite types. For opening the `Connection` these run on, see [Configure Connections]({% link docs/current/clients/java/connecting.md %}).
 
 ## Sending Queries
 
