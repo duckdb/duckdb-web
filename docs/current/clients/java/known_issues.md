@@ -47,3 +47,24 @@ try (Statement stmt = conn.createStatement()) {
 ```
 
 The same option can be passed to `read_parquet` directly, for example `read_parquet('file.parquet', binary_as_string = true)`.
+
+## GraalVM Native Image Is Not Supported
+
+The driver loads its JNI native library (`libduckdb_java`) from a static initializer in `org.duckdb.DuckDBNative`, which unpacks the bundled library to a temporary file and loads it at runtime. [GraalVM Native Image](https://www.graalvm.org/latest/reference-manual/native-image/) ahead-of-time (AOT) compilation does not reproduce this runtime loading step, so an AOT-compiled application fails when it opens a connection:
+
+```console
+Exception in thread "main" java.lang.UnsatisfiedLinkError: Can't load library: ⟨path⟩/libduckdb_java.so_osx_universal
+    at com.oracle.svm.core.jdk.NativeLibrarySupport.loadLibraryAbsolute(NativeLibrarySupport.java:100)
+    at java.lang.ClassLoader.loadLibrary(ClassLoader.java:57)
+    at java.lang.System.load(System.java:1957)
+    at org.duckdb.DuckDBNative.<clinit>(DuckDBNative.java)
+    at org.duckdb.DuckDBConnection.newConnection(DuckDBConnection.java)
+    at org.duckdb.DuckDBDriver.connect(DuckDBDriver.java)
+    ...
+```
+
+The driver runs normally as an ordinary JAR; only AOT compilation is affected. It ships no Native Image reachability metadata, so an AOT build has nothing to configure the native library and reflection automatically.
+
+The `-nolib` driver artifact loads the native library by name with `System.loadLibrary`, or from the directory alongside the JAR, instead of unpacking it from the JAR. This makes it possible to supply the library externally, but on its own it does not make an AOT build work.
+
+Native Image support is tracked in [duckdb-java issue #180](https://github.com/duckdb/duckdb-java/issues/180).
