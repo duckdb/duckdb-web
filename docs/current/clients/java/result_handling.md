@@ -82,7 +82,7 @@ Connection conn = DriverManager.getConnection("jdbc:duckdb:", props);
 
 The JDBC driver can return a query result as a lazily fetched sequence of columnar data chunks via the `org.duckdb.DuckDBChunkedResult` class.
 This exposes the C API's `duckdb_fetch_chunk` function to Java and avoids the per-row overhead required by the JDBC `ResultSet` interface.
-Chunk contents are read through the same `DuckDBDataChunkReader` API that is used by [user-defined functions](https://github.com/duckdb/duckdb-java/blob/main/UDF.MD).
+Chunk contents are read through the same `DuckDBDataChunkReader` API that is used by [user-defined functions]({% link docs/current/clients/java/functions.md %}).
 
 Call `query()` on a `DuckDBPreparedStatement` to obtain a `DuckDBChunkedResult`, then advance through the chunks with `nextChunk()` and read each column vector by index.
 
