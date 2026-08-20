@@ -339,6 +339,14 @@ COPY
     (FORMAT parquet, STRING_DICTIONARY_PAGE_SIZE_LIMIT 100_000);
 ```
 
+To split data pages below the default 100 MB cap, use `DATA_PAGE_SIZE_LIMIT` (bytes). The limit is best-effort at vector granularity:
+
+```sql
+COPY tbl
+    TO 'tbl.parquet'
+    (FORMAT parquet, DATA_PAGE_SIZE_LIMIT 1048576);
+```
+
 DuckDB's `EXPORT` command can be used to export an entire database to a series of Parquet files. See the [“`EXPORT` statement” page]({% link docs/current/sql/statements/export.md %}) for more details:
 
 Export the table contents of the entire database as Parquet:
