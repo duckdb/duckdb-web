@@ -238,11 +238,7 @@ Later this year, ART indexes will be buffer-managed ([#21458](https://github.com
 
 ## 8. A Brand New SQL Parser
 
-DuckDB has famously always used a parser derived from PostgreSQL's. We have decided that enough is enough: v2.0 ships our own modern, extensible PEG-based parser ([#22194](https://github.com/duckdb/duckdb/pull/22194)), an idea we first explored in our 2024 post on [runtime-extensible parsers]({% post_url 2024-11-22-runtime-extensible-parsers %}). This change ties into the extension ecosystem: extensions can now hook into the grammar itself, so expect extensions that expose entirely new SQL syntax. It also brings better error messages with precise source locations, and the first dialect compatibility mode:
-
-```sql
-SET dialect_compatibility_mode = 'spark';
-```
+DuckDB has famously always used a parser derived from PostgreSQL's. We have decided that enough is enough: v2.0 ships our own modern, extensible PEG-based parser ([#22194](https://github.com/duckdb/duckdb/pull/22194)), an idea we first explored in our 2024 post on [runtime-extensible parsers]({% post_url 2024-11-22-runtime-extensible-parsers %}). This change ties into the extension ecosystem: extensions can now hook into the grammar itself, so expect extensions that expose entirely new SQL syntax. It also brings better error messages with precise source locations.
 
 You should not actually notice anything from the parser swap as we designed it to be compatible with the old one. If you do notice, please file an issue.
 
