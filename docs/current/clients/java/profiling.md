@@ -63,7 +63,11 @@ try (DuckDBConnection conn = (DuckDBConnection) DriverManager.getConnection("jdb
 
 ## Memory Monitoring with JFR
 
-On a JFR-capable JVM (Java 11 or later, or [Amazon Corretto](https://aws.amazon.com/corretto/) 8u272 and later), the driver can emit [Java Flight Recorder](https://openjdk.org/jeps/328) events describing DuckDB's internal memory usage. Monitoring is opt-in per connection: set the `jdbc_jfr_memory_monitor` property to an identifier for the connection's database instance. An absent or empty value leaves monitoring disabled.
+On a [JFR-capable JVM](#requirements), the driver can emit [Java Flight Recorder](https://openjdk.org/jeps/328) events describing DuckDB's internal memory usage, so that any JFR-aware tool — JDK Mission Control, the `jfr` command line tool, continuous profilers — can ingest DuckDB memory metrics alongside the rest of the JVM signal. The feature is strictly opt-in and is a silent no-op on JVMs without JFR support: nothing is emitted unless the application both sets the JDBC property on a connection and has an active JFR recording that enables the event.
+
+### Enabling Emission
+
+Monitoring is opt-in per connection: set the `jdbc_jfr_memory_monitor` property to an identifier for the connection's database instance. The value is an arbitrary label that is attached to every event as its `component` field, so that operators can attribute memory to logical components. An absent or empty value leaves monitoring disabled.
 
 ```java
 Properties props = new Properties();
@@ -73,4 +77,96 @@ try (Connection conn = DriverManager.getConnection("jdbc:duckdb:/tmp/my_database
 }
 ```
 
-While a JFR recording is active with the `duckdb.MemoryUsage` event enabled, the driver periodically emits one event per DuckDB memory tag, carrying the component identifier, the memory tag, the native database address, the bytes allocated, and the bytes spilled to temporary storage. The JDBC property is only an enable and label switch; the sampling period and the enabled state are controlled by the JFR recording settings. Inspect the events with [JDK Mission Control](https://www.oracle.com/java/technologies/jdk-mission-control.html) or the `jfr` command line tool.
+The same option can be set in the URL:
+
+```text
+jdbc:duckdb:/tmp/my_database;jdbc_jfr_memory_monitor=analytics-db
+```
+
+<div class="monospace_table"></div>
+
+| Property value | Effect |
+|--|--|
+| absent | No events emitted for this connection. |
+| empty string | No events emitted, the same as absent. |
+| non-empty string | Events emitted, tagged with the given value. |
+
+The JDBC property is only an enable and label switch. It does not control whether JFR is recording or the sampling period; those are governed by the JFR recording settings.
+
+### Controlling the Period and Enabled State
+
+The sampling rate and enabled state are JFR-native settings. Configure them in a `.jfc` profile, through JMC, or programmatically with the `jdk.jfr.Recording` API:
+
+```java
+try (Recording r = new Recording()) {
+    r.enable("duckdb.MemoryUsage").withPeriod(Duration.ofSeconds(1));
+    r.start();
+    // ... application work ...
+    r.stop();
+    r.dump(Path.of("app.jfr"));
+}
+```
+
+The equivalent `.jfc` snippet:
+
+```xml
+<event name="duckdb.MemoryUsage">
+  <setting name="enabled">true</setting>
+  <setting name="period">1 s</setting>
+</event>
+```
+
+When no recording enables the event, the driver does no work: the underlying `duckdb_memory()` query is never issued.
+
+### Event Schema
+
+While a recording is active with the event enabled, the driver emits one `duckdb.MemoryUsage` event per DuckDB memory tag per JFR tick, with the following fields:
+
+<div class="monospace_table"></div>
+
+| Field | Type | Description |
+|--|--|--|
+| `component` | `String` | Application-supplied identifier, the `jdbc_jfr_memory_monitor` value. |
+| `tag` | `String` | DuckDB memory tag, such as `BASE_TABLE`, `HASH_TABLE`, or `ALLOCATOR`. |
+| `dbAddress` | `long` | Native address of the DuckDB instance, a stable per-instance identifier. |
+| `memoryUsageBytes` | `long` | Bytes currently allocated for this tag. |
+| `temporaryStorageBytes` | `long` | Bytes spilled to temporary storage for this tag. |
+
+The standard JFR `startTime`, `duration`, and `eventThread` fields are also present. Stack traces are disabled for this event.
+
+### Attribution
+
+The monitor is keyed on the native DuckDB instance address, the `dbAddress` field, not on the JDBC connection. There is one sample stream per distinct instance, so shared memory is not double-counted. The `component` label is captured from the first opted-in connection to an instance, and later opted-in connections to the same instance do not change it. The monitor is created when the first opted-in connection opens and torn down when the last one closes; opening a new opted-in connection afterward starts a fresh monitor.
+
+Whether two `getConnection` calls share a `dbAddress` follows the same rules as [instance caching]({% link docs/current/clients/java/connecting.md %}#database-instances-and-instance-caching):
+
+<div class="monospace_table"></div>
+
+| URL or operation | Same `dbAddress`? |
+|--|--|
+| `jdbc:duckdb:` (unnamed in-memory) | No — a fresh instance per call. |
+| `jdbc:duckdb:memory:⟨label⟩` | Yes, when `⟨label⟩` matches. |
+| `jdbc:duckdb:⟨path⟩` | Yes, when the path matches. |
+| `conn.duplicate()` | Yes, always. |
+
+Because connections that share a database instance also share a `dbAddress`, and therefore a single `component` label, per-component attribution requires each component to open a connection that resolves to a distinct instance. An unnamed in-memory `jdbc:duckdb:` URL creates a connection-private instance, which makes it the simplest choice; give each such connection a distinct `jdbc_jfr_memory_monitor` value.
+
+### Requirements
+
+The feature needs a JFR-capable JVM:
+
+* OpenJDK and HotSpot 11 and later include JFR.
+* Amazon Corretto 8, OpenJDK 8u272 and later, and several other Java 8 distributions include the JFR backport (the `jdk.jfr` package).
+* On a JVM without `jdk.jfr`, such as some stripped Java 8 builds, the feature is a silent no-op: the `jdbc_jfr_memory_monitor` property is ignored and no classes that depend on `jdk.jfr` are loaded.
+
+No additional JVM flags are required.
+
+### Inspecting a Recording
+
+Inspect a captured recording with [JDK Mission Control](https://www.oracle.com/java/technologies/jdk-mission-control.html) or the `jfr` command line tool bundled with the JDK:
+
+```bash
+jfr summary app.jfr | grep duckdb.MemoryUsage
+jfr print --events duckdb.MemoryUsage app.jfr
+jfr metadata app.jfr | sed -n '/class MemoryUsage/,/^}/p'
+```
