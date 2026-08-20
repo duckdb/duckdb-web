@@ -4,7 +4,7 @@ redirect_from:
 - /docs/clients/java/connecting
 - /docs/preview/clients/java/connecting
 - /docs/stable/clients/java/connecting
-title: Configure Connections
+title: Define Connections
 ---
 
 ## Overview
