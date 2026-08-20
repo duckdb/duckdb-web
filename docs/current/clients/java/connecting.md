@@ -40,11 +40,15 @@ DuckDBConnection conn = (DuckDBConnection) DriverManager.getConnection("jdbc:duc
 
 Additional connections can be created using the `DriverManager`. A more efficient mechanism is to call the `DuckDBConnection#duplicate()` method, which opens another connection to the same database instance without re-reading the configuration:
 
+> Actually the main purpose of `duplicate` is to open another connection to the same connection-private in-memory DB instance. `duplicate` also can be used on named in-memory and on file connections, but in these cases it is effectively the same as opening a new connection on the same URL (this is already covered below about DB instance caching).
+
 ```java
 Connection conn2 = ((DuckDBConnection) conn).duplicate();
 ```
 
 Multiple connections are allowed, but mixing read-write and read-only connections is unsupported.
+
+> Multiple connections to the same DB instance (like the same `.duckdb` file) must have not only `access_mode`, but all initial options exactly the same, otherwise second connection to the same instance will be rejected. Options are applied on the DB instance startup when the first connection is opened, so if seconds connection has different options - it is rejected.
 
 ## JDBC URL Syntax
 
@@ -66,7 +70,11 @@ The database part determines what the connection opens:
 | `jdbc:duckdb:⟨path⟩` | A database file on disk, for example `jdbc:duckdb:/tmp/my_database`. |
 | `jdbc:duckdb:ducklake:⟨metadata_path⟩` | A [DuckLake]({% link docs/current/core_extensions/ducklake.md %}) catalog. |
 
+> lets remove double-colon from examples above, it is exactly the same as single-colon, just kept for compatbility, in old versions double-colon was required.
+
 When using the `jdbc:duckdb:` URL alone, an **in-memory database** is created. Note that for an in-memory database no data is persisted to disk (i.e., all data is lost when you exit the Java program). If you would like to access or create a persistent database, append its file name after the path.
+
+> Also the important thing about in-memory connection is that it creates connection-private DB instance.
 
 ## Read-Only Connections
 
@@ -85,6 +93,8 @@ Read-only mode can also be set through DuckDB's standard `access_mode` property,
 ### DuckDB Settings
 
 Any DuckDB configuration option can be supplied when a connection is opened: the driver hands every option it does not recognize as its own to DuckDB. Note that many of these settings can also be changed later on using [`PRAGMA` statements]({% link docs/current/configuration/pragmas.md %}).
+
+> I think we may want to use `SET [GLOBAL]` instead of `PRAGMA` in new code, but not completely sure - this lies beoynd Java.
 
 ```java
 Properties connectionProperties = new Properties();
@@ -198,6 +208,8 @@ Connection conn1 = DriverManager.getConnection("jdbc:duckdb::memory:shared_db");
 Connection conn2 = DriverManager.getConnection("jdbc:duckdb::memory:shared_db");
 ```
 
+> Suggest to chaange "share their data" to "point to the same database instance"
+
 Instance caching is controlled by the `jdbc_instance_cache` connection property, which is enabled by default. Setting it to `false` creates an isolated instance per connection. Disabling the cache for a file-backed database may cause local file lock conflicts if another connection has the same file open, and pinning an uncached instance with `jdbc_pin_db` does not make it reusable.
 
 Because configuration options apply to the instance rather than to the connection, only the connection that creates the instance can set them. A later connection that reaches a cached instance and asks for a different configuration fails with:
@@ -282,3 +294,5 @@ try (Connection conn = DriverManager.getConnection("jdbc:duckdb:/tmp/my_database
 If the process is terminated without closing its connections, the write-ahead log is left in place. It is replayed the next time the database file is opened, so no committed data is lost, but the file is only compacted once the database is checkpointed on a clean shutdown. To force a checkpoint without closing the connection, run the [`CHECKPOINT` statement]({% link docs/current/sql/statements/checkpoint.md %}).
 
 Repeatedly opening and closing the last connection to a database means starting and shutting down the instance each time, including its thread pool. Applications that do this in a loop can keep the instance alive between connections with the `jdbc_pin_db` option and release it later with `DuckDBDriver.releaseDB(url)`.
+
+> Suggest to add that `jdbc_pin_db` (along with `jdbc_stream_results`) is enabled automatically for `ducklake:` URLs, mostly to make it easier to use DuckLake from BI tools (like Metabase) - to not materialize possibly huge DuckLake datasets accidentally and to prevent frequent closing/re-creating of a DB instance (this was observed on actual BI connections).
