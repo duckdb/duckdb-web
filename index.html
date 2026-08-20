@@ -13,69 +13,75 @@ To add a banner, set banner: true in the front matter and define the banner cont
 {% endcomment %}
 
 <section class="welcome">
-	<div class="hero-bg">
-		{% include hero_animation.html %}
-	</div>
 	<div class="wrap">
 		<div class="hero-content">
-			{% comment %}
-			<p class="tiny hero-eyebrow">DuckDB by DuckLabs</p>
-			{% endcomment %}
-			<h1 class="display-1">Run analytics<br/>where your data lives</h1>
-			<p class="hero-subtitle">
-				DuckDB is a SQL database that runs everywhere<br/>
-				Now with Quack for <a href="{% link quack/index.html %}">client-server support</a>
-			</p>
+			<h1 class="display-2">The universal <br/>data wrangling tool</h1>
 			<div class="hero-buttons">
 				<a class="button yellow arrow-right" href="/install">Get DuckDB<svg class="icon"><use href="#arrow-right"></use></svg></a>
 				<a class="button transparent arrow-right" href="/docs/current">Read the docs<svg class="icon"><use href="#arrow-right"></use></svg></a>
-			</div>
-			<p class="hero-social-proof">The friendliest analytical database, loved by data teams worldwide</p>
-		</div>
-		<div class="hero-protocol-boxes">
-			<div class="protocol-box">
-				<div class="protocol-title">
-					<svg class="icon"><use href="#puzzle-piece-02"></use></svg>
-					<span>Seamless integrations</span>
-				</div>
-				<div class="protocol-tags">
-					<span class="tag"><a href="{% link docs/current/core_extensions/postgres/overview.md %}">Postgres</a></span>
-					<span class="tag"><a href="{% link docs/current/core_extensions/spatial/overview.md %}">Spatial</a></span>
-					<span class="tag"><a href="{% link docs/current/core_extensions/aws.md %}">AWS</a></span>
-					<span class="tag"><a href="{% link docs/current/core_extensions/azure.md %}">Azure</a></span>
-					<span class="tag"><a href="{% link docs/current/core_extensions/iceberg/overview.md %}">Iceberg</a></span>
-					<span class="tag"><a href="{% link docs/current/core_extensions/overview.md %}">…</a></span>
-				</div>
-			</div>
-			<div class="protocol-box">
-				<div class="protocol-title">
-					<svg class="icon"><use href="#hard-drive"></use></svg>
-					<span>Native clients</span>
-				</div>
-				<div class="protocol-tags">
-					<span class="tag"><a href="{% link docs/current/clients/cli/overview.md %}">CLI</a></span>
-					<span class="tag"><a href="{% link docs/current/clients/python/overview.md %}">Python</a></span>
-					<span class="tag"><a href="{% link docs/current/clients/go.md %}">Go</a></span>
-					<span class="tag"><a href="{% link docs/current/clients/rust.md %}">Rust</a></span>
-					<span class="tag"><a href="{% link docs/current/clients/node_neo/overview.md %}">JavaScript</a></span>
-					<span class="tag"><a href="{% link docs/current/clients/overview.md %}">…</a></span>
-				</div>
-			</div>
-			<div class="protocol-box">
-				<div class="protocol-title">
-					<svg class="icon"><use href="#server-05"></use></svg>
-					<span>Remote access (beta)</span>
-				</div>
-				<div class="protocol-tags">
-					<span class="tag"><a href="{% link docs/current/quack/overview.md %}">Client-server setup</a></span>
-					<span class="tag"><a href="{% post_url 2026-05-12-quack-remote-protocol %}#benchmarks">High performance</a></span>
-				</div>
 			</div>
 		</div>
 	</div>
 </section>
 
 
+<section class="bento">
+	<div class="wrap">
+		<div class="bento-grid">
+			<div class="bento-box wide">
+				<div class="bento-title">
+					<svg class="icon"><use href="#code-square-01"></use></svg>
+					<span>Database anywhere</span>
+				</div>
+				<p>DuckDB is an analytical database system that you can deploy anywhere. It queries files directly.</p>
+				<a class="bento-link" href="/docs/current">Docs<svg class="icon"><use href="#arrow-right"></use></svg></a>
+			</div>
+			<div class="bento-box">
+				<div class="bento-title">
+					<svg class="icon"><use href="#message-chat-square"></use></svg>
+					<span>Friendly SQL</span>
+				</div>
+				<p>DuckDB has a friendly and expressive SQL dialect.</p>
+				<a class="bento-link" href="{% link docs/current/sql/dialect/friendly_sql.md %}">Explore feature list<svg class="icon"><use href="#arrow-right"></use></svg></a>
+			</div>
+			<div class="bento-box">
+				<div class="bento-title">
+					<svg class="icon"><use href="#puzzle-piece-02"></use></svg>
+					<span>Extensible</span>
+				</div>
+				<p>Extensions add new formats, integrations and functions — many core features are extensions themselves.</p>
+				<a class="bento-link" href="{% link docs/current/core_extensions/overview.md %}">Extensions<svg class="icon"><use href="#arrow-right"></use></svg></a>
+			</div>
+			<div class="bento-box">
+				<div class="bento-title">
+					<svg class="icon"><use href="#terminal-browser"></use></svg>
+					<span>Native drivers</span>
+				</div>
+				<p>DuckDB offers idiomatic APIs for all major languages.</p>
+				<a class="bento-link" href="{% link install/index.html %}">Installation<svg class="icon"><use href="#arrow-right"></use></svg></a>
+			</div>
+			<div class="bento-box wide">
+				<div class="bento-title">
+					<svg class="icon"><use href="#file-check-02"></use></svg>
+					<span>Speaks your formats</span>
+				</div>
+				<p>Parquet, CSV, JSON, Iceberg — local or in object storage. Anything else is one extension away.</p>
+				<a class="bento-link" href="{% link ecosystem/index.html %}">Ecosystem<svg class="icon"><use href="#arrow-right"></use></svg></a>
+			</div>
+			<div class="bento-box">
+				<div class="bento-title">
+					<svg class="icon"><use href="#coins-01"></use></svg>
+					<span>Free &amp; open-source</span>
+				</div>
+				<p>DuckDB is MIT licensed, governed by the independent DuckDB Foundation.</p>
+				<a class="bento-link" href="https://duckdb.foundation/">Foundation<svg class="icon"><use href="#arrow-right"></use></svg></a>
+			</div>
+		</div>
+	</div>
+</section>
+
+
+{% comment %}
 <section class="proof">
 	<div class="wrap flexwrap">
 		<div class="proof-code demo window">
@@ -112,7 +118,7 @@ To add a banner, set banner: true in the front matter and define the banner cont
 			</div>
 		</div>
 		<div class="proof-text">
-			<h2 class="display-2">Query files and<br/>cloud data directly</h2>
+			<h2 class="display-3">Query files and <br/>cloud data directly</h2>
 			<p>
 				Use DuckDB's friendly but powerful SQL dialect to query any data source (Parquet, JSON, S3, data lakes, etc.)
 			</p>
@@ -120,88 +126,253 @@ To add a banner, set banner: true in the front matter and define the banner cont
 		</div>
 	</div>
 </section>
+{% endcomment %}
 
 
-<section class="whyduckdb">
-	<div class="wrap">
-		<h2 class="display-2">How we designed DuckDB</h2>
-		<div class="icon-grid">
-			<div class="icon-grid-item">
-				<div class="icon-box">
-					<svg class="icon"><use href="#code-circle-03"></use></svg>
-				</div>
-				<h3>Simple</h3>
-				<p>
-					We made sure that you can install DuckDB in just a few seconds,
-					and built it on familiar technologies so you can start using it immediately.
-				</p>
-				<a href="/why_duckdb#simple" class="textbutton arrow-right">Read more<svg class="icon"><use href="#arrow-right"></use></svg></a>
+<section class="duckstack">
+	<div class="wrap flexwrap">
+		<div class="duckstack-intro">
+			<h2 class="display-3">One engine, whole stack</h2>
+			<p>The DuckStack offers a protocol and lakehouse fully compatible with DuckDB.</p>
+			<div class="topbar duckstack-tabs">
+				<ul>
+					<div class="select-highlight"></div>
+					<li class="active" data-stack="duckdb">DuckDB</li>
+					<li data-stack="quack">Quack</li>
+					<li data-stack="ducklake">DuckLake</li>
+					<li data-stack="iceberg">Iceberg</li>
+				</ul>
 			</div>
-			<div class="icon-grid-item">
-				<div class="icon-box">
-					<svg class="icon"><use href="#settings-02"></use></svg>
-				</div>
-				<h3>Feature-rich</h3>
-				<p>
-					We support a wide range of industry standard technologies (e.g., Parquet, SQL, S3 API)
-					and combine them into a seamless user experience.
-				</p>
-				<a href="/why_duckdb#feature-rich" class="textbutton arrow-right">Read more<svg class="icon"><use href="#arrow-right"></use></svg></a>
+		</div>
+		<div class="duckstack-card">
+			<div class="stack-panel active" data-stack="duckdb">
+				<h3 class="title-2">DuckDB</h3>
+				<p>The in-process analytical SQL database. Simple by default, fast and reliable by design — built to work anywhere and embed easily. It is the foundation the other two build on.</p>
+				<a class="stack-link" href="/docs/current">Explore DuckDB<svg class="icon"><use href="#arrow-right"></use></svg></a>
+				<svg class="stack-diagram" viewBox="0 0 517 120" role="img" aria-label="DuckDB reads a CSV file and writes a database file and Parquet">
+					<defs>
+						<linearGradient id="stack-badge-yellow" x1="0" y1="0" x2="1" y2="1">
+							<stop offset="7%" stop-color="#FDF564"/>
+							<stop offset="97%" stop-color="#FDFAC6"/>
+						</linearGradient>
+					</defs>
+					<path class="route" d="M124.5 40.5H195.5M322.5 40.5H393.5M258.5 71.5V88.5"/>
+					<circle class="dot dot-duckdb" r="3"/>
+					<g>
+						<rect class="node" x="0.5" y="24.5" width="124" height="31" rx="6"/>
+						<use class="node-icon" href="#file-04" x="11" y="33" width="14" height="14"/>
+						<text x="30" y="44.5">CSV file</text>
+					</g>
+					<g>
+						<rect class="node" x="195.5" y="2.5" width="127" height="69" rx="8"/>
+						<use class="node-icon" href="#browser" x="205" y="30" width="14" height="14"/>
+						<text x="225" y="41.5">App</text>
+						<g class="stack-badge stack-badge-duckdb">
+						<rect x="257.5" y="7.5" width="59" height="59" rx="13" fill="url(#stack-badge-yellow)" stroke="#DECA00"/>
+						<g transform="translate(263 13)">
+							<path d="M24 48C10.7265 48 0 37.2735 0 24C0 10.7265 10.7265 0 24 0C37.2735 0 48 10.7265 48 24C48 37.2735 37.2735 48 24 48Z" fill="#1A1A1A"/>
+							<path d="M36.8349 20.4238H32.1328V27.5259H36.8349C38.794 27.5259 40.4104 25.9095 40.4104 23.9504C40.4104 21.9912 38.794 20.4238 36.8349 20.4238Z" fill="#FFF100"/>
+							<path d="M9.0625 23.9995C9.0625 29.4852 13.5196 33.9424 19.0054 33.9424C24.4911 33.9424 28.9482 29.4852 28.9482 23.9995C28.9482 18.5138 24.4911 14.0566 19.0054 14.0566C13.5196 14.0566 9.0625 18.5138 9.0625 23.9995Z" fill="#FFF100"/>
+						</g>
+						</g>
+					</g>
+					<g>
+						<rect class="node" x="393.5" y="24.5" width="123" height="31" rx="6"/>
+						<use class="node-icon" href="#file-04" x="404" y="33" width="14" height="14"/>
+						<text x="423" y="44.5">Parquet</text>
+						<g transform="translate(490 32.5)"><g class="check check-parquet">
+							<path d="M7.9987 14.6673C11.6806 14.6673 14.6654 11.6826 14.6654 8.00065C14.6654 4.31875 11.6806 1.33398 7.9987 1.33398C4.3168 1.33398 1.33203 4.31875 1.33203 8.00065C1.33203 11.6826 4.3168 14.6673 7.9987 14.6673Z" fill="#2EAFFF"/>
+							<path d="M5 8L7 10L11 6" fill="none" stroke="white" stroke-linecap="round" stroke-linejoin="round"/>
+						</g></g>
+					</g>
+					<g>
+						<rect class="node" x="179.5" y="88.5" width="158" height="31" rx="6"/>
+						<use class="node-icon" href="#database-01" x="191" y="97" width="14" height="14"/>
+						<text x="210" y="108.5">Database file</text>
+						<g transform="translate(309.5 96.5)"><g class="check check-db">
+							<path d="M7.9987 14.6673C11.6806 14.6673 14.6654 11.6826 14.6654 8.00065C14.6654 4.31875 11.6806 1.33398 7.9987 1.33398C4.3168 1.33398 1.33203 4.31875 1.33203 8.00065C1.33203 11.6826 4.3168 14.6673 7.9987 14.6673Z" fill="#2EAFFF"/>
+							<path d="M5 8L7 10L11 6" fill="none" stroke="white" stroke-linecap="round" stroke-linejoin="round"/>
+						</g></g>
+					</g>
+				</svg>
 			</div>
-			<div class="icon-grid-item">
-				<div class="icon-box">
-					<svg class="icon"><use href="#flash"></use></svg>
-				</div>
-				<h3>Fast</h3>
-				<p>
-					We built DuckDB on a fast columnar storage engine.
-					DuckDB can spill to disk to support workloads far larger than the available system memory.
-				</p>
-				<a href="/why_duckdb#fast" class="textbutton arrow-right">Read more<svg class="icon"><use href="#arrow-right"></use></svg></a>
+			<div class="stack-panel" data-stack="quack">
+				<h3 class="title-2">Quack</h3>
+				<p>The client-server protocol for DuckDB. Query a remote DuckDB instance with the same SQL and the same clients — no new database to learn, no drivers to swap.</p>
+				<a class="stack-link" href="{% link docs/current/quack/overview.md %}">Explore Quack<svg class="icon"><use href="#arrow-right"></use></svg></a>
+				<svg class="stack-diagram" viewBox="0 0 517 100" role="img" aria-label="Apps and notebooks query a remote DuckDB server through Quack">
+					<defs>
+						<linearGradient id="stack-badge-yellow-q" x1="0" y1="0" x2="1" y2="1">
+							<stop offset="7%" stop-color="#FDF564"/>
+							<stop offset="97%" stop-color="#FDFAC6"/>
+						</linearGradient>
+					</defs>
+					<path class="route" d="M124.5 28H180A6 6 0 0 1 186 34A6 6 0 0 0 192 40H222.5M124.5 72H180A6 6 0 0 0 186 66A6 6 0 0 1 192 60H222.5M294.5 50H393.5"/>
+					<circle class="dot dot-quack-app" r="3"/>
+					<circle class="dot dot-quack-nb" r="3"/>
+					<circle class="dot dot-quack-srv" r="3"/>
+					<circle class="dot dot-quack-srv2" r="3"/>
+					<g>
+						<rect class="node" x="0.5" y="12.5" width="124" height="31" rx="6"/>
+						<use class="node-icon" href="#browser" x="10" y="21" width="14" height="14"/>
+						<text x="29" y="32.5">App</text>
+						<g transform="translate(100.7 21.3) scale(0.277)">
+							<path d="M24 48C10.7265 48 0 37.2735 0 24C0 10.7265 10.7265 0 24 0C37.2735 0 48 10.7265 48 24C48 37.2735 37.2735 48 24 48Z" fill="#1A1A1A"/>
+							<path d="M36.8349 20.4238H32.1328V27.5259H36.8349C38.794 27.5259 40.4104 25.9095 40.4104 23.9504C40.4104 21.9912 38.794 20.4238 36.8349 20.4238Z" fill="#FFF100"/>
+							<path d="M9.0625 23.9995C9.0625 29.4852 13.5196 33.9424 19.0054 33.9424C24.4911 33.9424 28.9482 29.4852 28.9482 23.9995C28.9482 18.5138 24.4911 14.0566 19.0054 14.0566C13.5196 14.0566 9.0625 18.5138 9.0625 23.9995Z" fill="#FFF100"/>
+						</g>
+					</g>
+					<g>
+						<rect class="node" x="0.5" y="56.5" width="124" height="31" rx="6"/>
+						<use class="node-icon" href="#book-open-01" x="10" y="65" width="14" height="14"/>
+						<text x="29" y="76.5">Notebook</text>
+						<g transform="translate(100.7 65.3) scale(0.277)">
+							<path d="M24 48C10.7265 48 0 37.2735 0 24C0 10.7265 10.7265 0 24 0C37.2735 0 48 10.7265 48 24C48 37.2735 37.2735 48 24 48Z" fill="#1A1A1A"/>
+							<path d="M36.8349 20.4238H32.1328V27.5259H36.8349C38.794 27.5259 40.4104 25.9095 40.4104 23.9504C40.4104 21.9912 38.794 20.4238 36.8349 20.4238Z" fill="#FFF100"/>
+							<path d="M9.0625 23.9995C9.0625 29.4852 13.5196 33.9424 19.0054 33.9424C24.4911 33.9424 28.9482 29.4852 28.9482 23.9995C28.9482 18.5138 24.4911 14.0566 19.0054 14.0566C13.5196 14.0566 9.0625 18.5138 9.0625 23.9995Z" fill="#FFF100"/>
+						</g>
+					</g>
+					<g class="stack-badge stack-badge-quack">
+						<rect x="222.5" y="14.5" width="71" height="71" rx="15" fill="url(#stack-badge-yellow-q)" stroke="#DECA00"/>
+						<g transform="translate(234 26)">
+							<path d="M24 0C10.7455 0 0 10.7455 0 24C0 37.2545 10.7455 48 24 48C37.2545 48 48 37.2545 48 24C48 10.7455 37.2546 0 24 0Z" fill="#1A1A1A"/>
+							<path d="M29.429 26.7786L27.2813 24.6309C26.5007 23.8496 25.2337 23.8496 24.4531 24.6309C23.6719 25.4115 23.6719 26.6784 24.4531 27.459L26.5976 29.6035L29.429 26.7786Z" fill="#FFF100"/>
+							<path d="M37.6512 35.0015L35.5423 32.8926L32.7109 35.7174L34.8231 37.8296C35.2134 38.2202 35.7254 38.4155 36.2371 38.4155C36.7489 38.4155 37.2609 38.2202 37.6512 37.8296C38.4325 37.049 38.4325 35.7821 37.6512 35.0015Z" fill="#FFF100"/>
+							<path d="M23.9997 35.9525C17.4089 35.9525 12.0469 30.5905 12.0469 24C12.0469 17.4089 17.4089 12.0469 23.9997 12.0469C30.5905 12.0469 35.9528 17.4089 35.9528 24C35.9528 30.5905 30.5905 35.9525 23.9997 35.9525ZM23.9997 15.7135C19.4307 15.7135 15.7135 19.431 15.7135 24C15.7135 28.569 19.4307 32.2858 23.9997 32.2858C28.5687 32.2858 32.2861 28.569 32.2861 24C32.2861 19.431 28.5687 15.7135 23.9997 15.7135Z" fill="#FFF100"/>
+						</g>
+					</g>
+					<g>
+						<rect class="node" x="393.5" y="34.5" width="123" height="31" rx="6"/>
+						<use class="node-icon" href="#server-04" x="403" y="43" width="14" height="14"/>
+						<text x="422" y="54.5">Server</text>
+						<g transform="translate(493.7 43.3) scale(0.277)">
+							<path d="M24 48C10.7265 48 0 37.2735 0 24C0 10.7265 10.7265 0 24 0C37.2735 0 48 10.7265 48 24C48 37.2735 37.2735 48 24 48Z" fill="#1A1A1A"/>
+							<path d="M36.8349 20.4238H32.1328V27.5259H36.8349C38.794 27.5259 40.4104 25.9095 40.4104 23.9504C40.4104 21.9912 38.794 20.4238 36.8349 20.4238Z" fill="#FFF100"/>
+							<path d="M9.0625 23.9995C9.0625 29.4852 13.5196 33.9424 19.0054 33.9424C24.4911 33.9424 28.9482 29.4852 28.9482 23.9995C28.9482 18.5138 24.4911 14.0566 19.0054 14.0566C13.5196 14.0566 9.0625 18.5138 9.0625 23.9995Z" fill="#FFF100"/>
+						</g>
+					</g>
+				</svg>
 			</div>
-			<div class="icon-grid-item">
-				<div class="icon-box">
-					<svg class="icon"><use href="#wallet-02"></use></svg>
-				</div>
-				<h3>Free</h3>
-				<p>
-					We release DuckDB, its core extensions and the DuckLake format under MIT, a permissive <nobr>open-source</nobr> license.
-				</p>
-				<a href="/why_duckdb#free" class="textbutton arrow-right">Read more<svg class="icon"><use href="#arrow-right"></use></svg></a>
+			<div class="stack-panel" data-stack="ducklake">
+				<h3 class="title-2">DuckLake</h3>
+				<p>The lakehouse format built on DuckDB. Your data lives in open Parquet files, the catalog in SQL — transactional, portable and free of lock-in.</p>
+				<a class="stack-link" href="{% link docs/current/core_extensions/ducklake.md %}">Explore DuckLake<svg class="icon"><use href="#arrow-right"></use></svg></a>
+				<svg class="stack-diagram" viewBox="0 0 517 100" role="img" aria-label="Clients read and write DuckLake tables backed by a catalog and object storage">
+					<defs>
+						<linearGradient id="stack-badge-blue-dl" x1="0" y1="0" x2="1" y2="1">
+							<stop offset="7%" stop-color="#80CDFD"/>
+							<stop offset="97%" stop-color="#C0E6FD"/>
+						</linearGradient>
+					</defs>
+					<path class="route" d="M124.5 28H180A6 6 0 0 1 186 34A6 6 0 0 0 192 40H222.5M124.5 72H180A6 6 0 0 0 186 66A6 6 0 0 1 192 60H222.5M293.5 40H324A6 6 0 0 0 330 34A6 6 0 0 1 336 28H393.5M293.5 60H324A6 6 0 0 1 330 66A6 6 0 0 0 336 72H393.5"/>
+					<circle class="dot dot-dl-c1" r="3"/>
+					<circle class="dot dot-dl-c2" r="3"/>
+					<circle class="dot dot-dl-cat" r="3"/>
+					<circle class="dot dot-dl-sto" r="3"/>
+					<g>
+						<rect class="node" x="0.5" y="12.5" width="124" height="31" rx="6"/>
+						<use class="node-icon" href="#terminal-browser" x="10" y="21" width="14" height="14"/>
+						<text x="29" y="32.5">Client</text>
+					</g>
+					<g>
+						<rect class="node" x="0.5" y="56.5" width="124" height="31" rx="6"/>
+						<use class="node-icon" href="#terminal-browser" x="10" y="65" width="14" height="14"/>
+						<text x="29" y="76.5">Client</text>
+					</g>
+					<g class="stack-badge stack-badge-dl">
+						<rect x="222.5" y="14.5" width="71" height="71" rx="15" fill="url(#stack-badge-blue-dl)" stroke="#4DBBFF"/>
+						<g transform="translate(234 26)">
+							<path fill="#1a1a1a" d="M24 0C10.768 0 0 10.768 0 24s10.768 24 24 24 24-10.768 24-24S37.232 0 24 0"/>
+							<path fill="#2eafff" fill-rule="evenodd" d="M21.333 12.012c4.364 0 8.16 2.342 10.224 5.836h2.156v.013c2.977 0 5.488 2.394 5.494 5.432h.013c0 3.019-2.476 5.494-5.495 5.494H32.13c-1.807 3.957-5.717 6.75-10.303 6.938l-.493.01-.61-.016c-6.271-.318-11.25-5.494-11.25-11.845v-.013c0-6.556 5.305-11.86 11.86-11.861zm0 3.601c-4.547 0-8.247 3.688-8.247 8.248v.013c0 4.547 3.688 8.247 8.247 8.248a8.25 8.25 0 0 0 7.844-5.697l.405-1.25h4.143c1.007 0 1.874-.852 1.882-1.87h-.013c0-.997-.833-1.843-1.88-1.844h-4.41l-.48-1.048a8.23 8.23 0 0 0-7.49-4.8" clip-rule="evenodd"/>
+						</g>
+					</g>
+					<g>
+						<rect class="node" x="393.5" y="12.5" width="123" height="31" rx="6"/>
+						<use class="node-icon" href="#database-01" x="405" y="21" width="14" height="14"/>
+						<text x="423" y="32.5">Catalog</text>
+					</g>
+					<g>
+						<rect class="node" x="393.5" y="56.5" width="123" height="31" rx="6"/>
+						<use class="node-icon" href="#hard-drive" x="405" y="65" width="14" height="14"/>
+						<text x="423" y="76.5">Storage</text>
+					</g>
+				</svg>
 			</div>
-			<div class="icon-grid-item">
-				<div class="icon-box">
-					<svg class="icon"><use href="#luggage-02"></use></svg>
-				</div>
-				<h3>Portable</h3>
-				<p>
-					We distribute DuckDB for all popular operating systems
-					and ship idiomatic client APIs for major programming languages.
-				</p>
-				<a href="/why_duckdb#portable" class="textbutton arrow-right">Read more<svg class="icon"><use href="#arrow-right"></use></svg></a>
-			</div>
-			<div class="icon-grid-item">
-				<div class="icon-box">
-					<svg class="icon"><use href="#puzzle-piece-02"></use></svg>
-				</div>
-				<h3>Extensible</h3>
-				<p>
-					We created a powerful extension mechanism that enables adding new features.
-					In fact, we implemented many core DuckDB features as extensions.
-				</p>
-				<a href="/why_duckdb#extensible" class="textbutton arrow-right">Read more<svg class="icon"><use href="#arrow-right"></use></svg></a>
+			<div class="stack-panel" data-stack="iceberg">
+				<h3 class="title-2">Iceberg</h3>
+				<p>First-class Apache Iceberg support. Read and write Iceberg tables directly from DuckDB — no extra infrastructure required.</p>
+				<a class="stack-link" href="{% link docs/current/core_extensions/iceberg/overview.md %}">Explore Iceberg<svg class="icon"><use href="#arrow-right"></use></svg></a>
+				<svg class="stack-diagram" viewBox="0 0 517 100" role="img" aria-label="Clients read and write Apache Iceberg tables backed by a catalog and object storage">
+					<defs>
+						<linearGradient id="stack-badge-blue-ib" x1="0" y1="0" x2="1" y2="1">
+							<stop offset="7%" stop-color="#80CDFD"/>
+							<stop offset="97%" stop-color="#C0E6FD"/>
+						</linearGradient>
+					</defs>
+					<path class="route" d="M124.5 28H180A6 6 0 0 1 186 34A6 6 0 0 0 192 40H222.5M124.5 72H180A6 6 0 0 0 186 66A6 6 0 0 1 192 60H222.5M293.5 40H324A6 6 0 0 0 330 34A6 6 0 0 1 336 28H393.5M293.5 60H324A6 6 0 0 1 330 66A6 6 0 0 0 336 72H393.5"/>
+					<circle class="dot dot-dl-c1" r="3"/>
+					<circle class="dot dot-dl-c2" r="3"/>
+					<circle class="dot dot-dl-cat" r="3"/>
+					<circle class="dot dot-dl-sto" r="3"/>
+					<g>
+						<rect class="node" x="0.5" y="12.5" width="124" height="31" rx="6"/>
+						<use class="node-icon" href="#terminal-browser" x="10" y="21" width="14" height="14"/>
+						<text x="29" y="32.5">Client</text>
+					</g>
+					<g>
+						<rect class="node" x="0.5" y="56.5" width="124" height="31" rx="6"/>
+						<use class="node-icon" href="#terminal-browser" x="10" y="65" width="14" height="14"/>
+						<text x="29" y="76.5">Client</text>
+					</g>
+					<g class="stack-badge stack-badge-dl">
+						<rect x="222.5" y="14.5" width="71" height="71" rx="15" fill="url(#stack-badge-blue-ib)" stroke="#4DBBFF"/>
+						<g transform="translate(234 25.5)">
+							<path fill="#fff" d="m15.906 29.944 7.954.936h.468v-7.954h-.936z"/>
+							<path fill="#287abe" d="M44.124 11.3c1.843 2.058 2.66 4.62 3.245 7.202 3.005 13.298-4.987 26.083-18.304 28.945C14.51 50.575 2.144 40.41.288 27.677a23.88 23.88 0 0 1 2.68-15.236c.235-.435.39-.956.936-1.15l6.873.114-2.344 4.956v.51c1.693 4.911 4.848 8.948 7.843 13.078.322 1.754.083 3.602.864 5.278q3.275 3.698 6.547 7.402c.16.183.354.3.554.028.997-.61 1.288-1.729 1.84-2.64 1.251-2.061 2.612-4.067 3.601-6.28l.304-.483c1.225-.476 1.998-1.573 3.082-2.24a2.11 2.11 0 0 0 1.082-2.06c-.063-2.069-.022-4.155-.025-6.216q.737-.729 1.386-1.537c1.055-1.483 2.717-2.494 3.338-4.306a.56.56 0 0 0 .554-.277c.438-.664-.033-1.221-.224-1.806-.366-1.125-1.067-2.139-1.139-3.363z"/>
+							<path fill="#b8e1f2" d="m10.78 11.404-6.874-.113c.906-2.358 2.698-4.045 4.549-5.596C11.64 3.02 15.295 1.176 19.42.43 26.595-.846 33.122.708 38.898 5.18c2.153 1.663 4.106 3.547 5.23 6.112l-6.094.133-4.987-.061V9.68l3.574-.02.116-.063-.113-.188a6.03 6.03 0 0 0-4.583-1.715c-4.914.116-9.832.047-14.746.036-1.724 0-3.158.737-4.54 1.648-1.275.056-1.297 1.144-1.627 1.976z"/>
+							<path fill="#b6e0f2" d="M8.438 16.865v-.51c2.872-.853 5.51-2.272 8.213-3.519.857-.396 2.037-.362 2.494-1.46 1.645.07 3.324-.277 4.94.217l.038 11.663h-.254c-3.156-1.35-6.29-2.751-9.473-4.028-1.975-.784-3.784-2.037-5.959-2.363"/>
+							<path fill="#90d4f0" d="M8.438 16.865c2.171.324 3.98 1.574 5.967 2.372 3.183 1.277 6.316 2.679 9.471 4.028-.251 1.183-1.423 1.465-2.16 2.16-1.682 1.59-3.693 2.801-5.297 4.489a.4.4 0 0 1-.138.033c-2.993-4.13-6.148-8.164-7.843-13.082"/>
+							<path fill="#4d8ac8" d="M34.133 22.727c0 2.072-.039 4.155.025 6.216a2.11 2.11 0 0 1-1.083 2.058c-1.084.668-1.856 1.765-3.081 2.242-1.308-1.662-2.122-3.646-3.294-5.391-.797-1.186-1.128-2.715-2.493-3.491q0-.393.014-.787l.529-.277c.238.294.573.255.883.227q4.242-.387 8.5-.797"/>
+							<path fill="#b6e0f2" d="M17.143 35.23c-.781-1.68-.554-3.524-.862-5.28a.4.4 0 0 0 .139-.034c2.493.105 4.986.169 7.463.554q0 2.91-.014 5.818-.75-.03-1.49-.16c-1.75-.272-3.44-.893-5.236-.898"/>
+							<path fill="#58afdd" d="M23.863 36.286q0-2.91.013-5.818c.574-2.012.09-4.078.314-6.095 1.368.776 1.701 2.308 2.493 3.49 1.175 1.749 1.986 3.721 3.294 5.392l-.305.482-5.571 2.562q-.12.006-.238-.014"/>
+							<path fill="#4d8ac8" d="m33.035 11.371 4.987.061c.072 1.224.773 2.239 1.139 3.363.19.588.661 1.142.224 1.806a.6.6 0 0 0-.555.277c-1.038.194-1.939.746-2.878 1.167-.939.42-1.772 1.125-2.884 1.094q0-3.855-.013-7.71z"/>
+							<path fill="#266fa8" d="M33.072 19.141c1.11.03 1.94-.675 2.884-1.094.945-.418 1.84-.972 2.879-1.166-.624 1.814-2.283 2.823-3.338 4.305a18 18 0 0 1-1.385 1.538l-8.505.8c-.31.028-.646.067-.884-.227 1.958-.906 3.93-1.781 5.868-2.732.858-.415 1.852-.612 2.481-1.424"/>
+							<path fill="#90d4f0" d="M23.869 36.286q.121.012.246 0 .066 3.18.13 6.371c-.2.277-.39.153-.554-.027a4842 4842 0 0 1-6.546-7.392c1.792 0 3.482.626 5.233.898q.74.126 1.49.15M19.157 11.384c-.469 1.108-1.649 1.063-2.494 1.46-2.703 1.246-5.341 2.665-8.214 3.518l2.347-4.956.344-.045z"/>
+							<path fill="#266fa8" d="m24.24 42.65-.13-6.373 5.57-2.562c-.988 2.216-2.349 4.22-3.6 6.28-.538.923-.843 2.042-1.84 2.654M38.84 16.886a.6.6 0 0 1 .555-.277.56.56 0 0 1-.555.277"/>
+							<path fill="#f4fafd" d="M12.75 9.386c1.385-.911 2.818-1.662 4.54-1.648 4.918 0 9.835.08 14.747-.036a6.04 6.04 0 0 1 4.588 1.718v.255l-3.602.019H14.49c-.598 0-1.203.036-1.74-.308"/>
+							<path fill="#e9f6fd" d="M12.75 9.385c.537.343 1.142.305 1.74.305h18.533v1.681l.023.061-8.952.17c-1.629-.491-3.294-.148-4.939-.217l-8.034-.02c.335-.836.355-1.925 1.63-1.98M36.621 9.661v-.255l.113.189z"/>
+							<path fill="#68c1ea" d="m24.094 11.601 8.968-.164q0 3.856.013 7.71c-.629.812-1.62 1.009-2.47 1.427-1.94.95-3.91 1.826-5.868 2.732l-.53.277-.074-.313z"/>
+						</g>
+					</g>
+					<g>
+						<rect class="node" x="393.5" y="12.5" width="123" height="31" rx="6"/>
+						<use class="node-icon" href="#database-01" x="405" y="21" width="14" height="14"/>
+						<text x="423" y="32.5">Catalog</text>
+					</g>
+					<g>
+						<rect class="node" x="393.5" y="56.5" width="123" height="31" rx="6"/>
+						<use class="node-icon" href="#hard-drive" x="405" y="65" width="14" height="14"/>
+						<text x="423" y="76.5">Storage</text>
+					</g>
+				</svg>
 			</div>
 		</div>
 	</div>
 </section>
 
-{% include ecosystem_diagram.html title="Built for your stack" subtitle="DuckDB has native clients and integrations with the data ecosystem" %}
+
+{% include ecosystem_diagram.html title="Works with your stack" subtitle="Zero dependencies. Native language clients. Direct integrations with modern data formats." %}
 
 {% include quick_installation.html %}
 
 <section class="blog">
 	<div class="wrap">
-		<h2 class="display-2">Read our engineering blog</h2>
+		<div class="blog-header">
+			<h2 class="display-3">Read our engineering blog</h2>
+			<a href="{{ site.url }}/news" class="textbutton arrow-right">
+				All blog posts <svg class="icon"><use href="#arrow-right"></use></svg>
+			</a>
+		</div>
 		<div class="newstileswrap">
 			{% for post in site.posts limit:3 %}
 				{% assign random_number = forloop.index | modulo: 3 | plus: 1 %}
@@ -209,9 +380,6 @@ To add a banner, set banner: true in the front matter and define the banner cont
 				{% include post_card.html item=post default_thumb=placeholder_thumb %}
 			{% endfor %}
 		</div>
-		<a href="{{ site.url }}/news" class="button transparent arrow-right">
-			All blog posts <svg class="icon"><use href="#arrow-right"></use></svg>
-		</a>
 	</div>
 </section>
 
