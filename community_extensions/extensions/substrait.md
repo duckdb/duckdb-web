@@ -30,10 +30,10 @@ docs:
 redirect_from:
   - /docs/extensions/substrait
 
-extension_star_count: 67
-extension_star_count_pretty: 67
-extension_download_count: 817
-extension_download_count_pretty: 817
+extension_star_count: 68
+extension_star_count_pretty: 68
+extension_download_count: 836
+extension_download_count_pretty: 836
 image: '/images/community_extensions/social_preview/preview_community_extension_substrait.png'
 layout: community_extension_doc
 ---

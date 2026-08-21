@@ -135,10 +135,10 @@ docs:
     rather than being mangled. Built on [libzim](https://github.com/openzim/libzim);
     licensed GPL-2.0-or-later, inherited from libzim.
 
-extension_star_count: 4
-extension_star_count_pretty: 4
-extension_download_count: 767
-extension_download_count_pretty: 767
+extension_star_count: 5
+extension_star_count_pretty: 5
+extension_download_count: 742
+extension_download_count_pretty: 742
 image: '/images/community_extensions/social_preview/preview_community_extension_zim.png'
 layout: community_extension_doc
 ---
