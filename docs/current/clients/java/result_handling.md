@@ -41,9 +41,12 @@ try (var conn = DriverManager.getConnection("jdbc:duckdb:");
 The following example consumes an Arrow stream produced by the Java Arrow bindings and registers it on a DuckDB connection with `registerArrowStream()`. Once registered, the stream is addressed by the name passed to that method and can be queried like any other table.
 
 ```java
+import org.apache.arrow.c.ArrowArrayStream;
+import org.apache.arrow.c.Data;
 import org.apache.arrow.memory.RootAllocator;
-import org.apache.arrow.vector.ipc.ArrowReader;
+import org.apache.arrow.vector.ipc.ArrowStreamReader;
 import org.duckdb.DuckDBConnection;
+import org.duckdb.DuckDBResultSet;
 
 // Arrow binding
 try (var allocator = new RootAllocator();

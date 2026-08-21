@@ -39,6 +39,8 @@ In JDBC, database connections are created through the standard `java.sql.DriverM
 ```java
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.Statement;
 
 Connection conn = DriverManager.getConnection("jdbc:duckdb:");
 ```

@@ -265,7 +265,7 @@ stmt.execute("CREATE SECRET (TYPE quack, TOKEN '⟨MY_QUACK_TOKEN⟩')");
 stmt.execute("ATTACH 'quack:⟨hostname⟩' AS remote_db");
 ```
 
-Once attached, remote tables behave like local ones, so the whole JDBC API applies to them. Run `USE remote_db` to make the remote catalog the default, so that unqualified table names resolve against the server. The local instance still holds its own thread pool and memory limit, and the connection is subject to the same instance rules as any other JDBC connection, so a client that only forwards queries to a server can be opened with a small `threads` value.
+Once attached, remote tables behave like local ones, so the whole JDBC API applies to them. Run [`USE`]({% link docs/current/sql/statements/use.md %}) `remote_db` to make the remote catalog the default, so that unqualified table names resolve against the server. The local instance still holds its own thread pool and memory limit, and the connection is subject to the same instance rules as any other JDBC connection, so a client that only forwards queries to a server can be opened with a small `threads` value.
 
 > Warning Quack is under active development and its protocol, function names, settings, and defaults are still subject to change. See the [Quack documentation]({% link docs/current/quack/overview.md %}) for the current state.
 

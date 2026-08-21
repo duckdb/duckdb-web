@@ -21,7 +21,6 @@ Example:
 
 ```java
 import java.sql.DriverManager;
-import java.sql.Statement;
 import org.duckdb.DuckDBConnection;
 
 DuckDBConnection conn = (DuckDBConnection) DriverManager.getConnection("jdbc:duckdb:");
@@ -46,7 +45,7 @@ try (var stmt = conn.createStatement()) {
 
 An appender can also be created with `createAppender(tableName)` for the default schema, or with `createAppender(catalogName, schemaName, tableName)` to target a specific catalog. Buffered rows are written to the table when the appender is closed, or earlier by calling `flush()`. Within a row, `appendNull()` writes a `NULL` and `appendDefault()` writes the column's `DEFAULT` value.
 
-Nested and collection types are appended within a row as well. Use `beginStruct()` and `endStruct()` for a `STRUCT` column, and `beginUnion(tag)` and `endUnion()` for a `UNION` column. For a `LIST` or `ARRAY` column, pass a Java array as a single value, optionally with a boolean null mask for its elements:
+Nested and collection types are appended within a row as well. For a `STRUCT` column, call `beginStruct()`, append each field value in declaration order, then `endStruct()`. For a `UNION` column, call `beginUnion(tag)` — where `tag` is the name of the target `UNION` member — append that member's value, then `endUnion()`. For a `LIST` or `ARRAY` column, pass a Java array as a single value, optionally with a boolean null mask where `true` marks the corresponding element as `NULL`:
 
 ```java
 try (var appender = conn.createAppender("list_tbl")) {
@@ -125,5 +124,5 @@ stmt.close();
 
 * [Appender]({% link docs/current/data/appender.md %}) — the engine-level Appender interface that the Java `DuckDBAppender` wraps.
 * [Data Import]({% link docs/current/data/overview.md %}) — DuckDB's other bulk-loading options, including reading directly from CSV, Parquet, and JSON files.
-* [Run Queries]({% link docs/current/clients/java/querying.md %}) — sending the `INSERT` and `CREATE TABLE` statements the batch writer builds on.
+* [Run Queries]({% link docs/current/clients/java/querying.md %}) — sending the [`INSERT`]({% link docs/current/sql/statements/insert.md %}) and [`CREATE TABLE`]({% link docs/current/sql/statements/create_table.md %}) statements the batch writer builds on.
 * [Define Connections]({% link docs/current/clients/java/connecting.md %}) — obtaining the `DuckDBConnection` an Appender is created from.
