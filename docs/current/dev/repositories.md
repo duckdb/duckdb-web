@@ -14,6 +14,7 @@ Several components of DuckDB are maintained in separate repositories.
 
 * [`duckdb`](https://github.com/duckdb/duckdb): core DuckDB project
 * [`duckdb-web`](https://github.com/duckdb/duckdb-web): documentation and blog
+* [`quack`](https://github.com/duckdb/duckdb-quack): Quack remote protocol
 
 ## Clients
 
