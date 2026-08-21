@@ -1,12 +1,22 @@
 $(document).ready(function(){
-	
+
+	var icons = {
+		note: "info-circle",
+		warning: "alert-triangle",
+		tip: "lightbulb-02",
+		bestpractice: "thumbs-up",
+		deprecated: "alert-circle",
+		update: "refresh-cw-02",
+		installation: "target-05"
+	};
+
 	$('#main_content_wrap blockquote, .singleentry blockquote').each(function() {
 		var $blockquote = $(this);
 		var blockquoteText = $blockquote.text().trim();
 		var firstWord = blockquoteText.split(' ')[0];
-	
+
 		var className = "";
-	
+
 		switch (firstWord) {
 			case "Note":
 				className = "note";
@@ -30,30 +40,36 @@ $(document).ready(function(){
 				className = "installation";
 				break;
 			default:
-				className = "default"; 
+				className = "";
 				break;
 		}
-		
+
+		var hasKeyword = className !== "";
+		if (!hasKeyword) {
+			className = $blockquote.closest('.singleentry').length ? "quote" : "note";
+		}
+
 		$blockquote.addClass(className);
-		
-		if (className !== "default") {
+
+		if (hasKeyword) {
 			$blockquote.find('p:first-child').html(function(_, oldHtml) {
 				return oldHtml.replace(firstWord, '').trim();
 			});
 		}
-		
-		$blockquote.wrapInner('<div class="content"></div>');
-		
-		var label = (className == "bestpractice") ? 'Best practice' : firstWord;
 
-		if (className !== "default") {
-			$blockquote.find('.content').prepend('<span class="sr-only">' + label + '</span>');
-			$blockquote.prepend('<div class="symbol" title="' + label + '"></div>');
+		$blockquote.wrapInner('<div class="content"></div>');
+
+		if (className === "quote") {
+			var $last = $blockquote.find('.content > p:last-child');
+			if (/^[–—-]/.test($last.text().trim())) {
+				$last.addClass('quote-author');
+			}
 		} else {
-			$blockquote.prepend('<div class="symbol"></div>');
+			var label = (className == "bestpractice") ? 'Best practice' : (hasKeyword ? firstWord : 'Note');
+			$blockquote.find('.content').prepend('<span class="sr-only">' + label + '</span>');
+			$blockquote.prepend('<div class="symbol" title="' + label + '"><svg class="icon"><use href="#' + icons[className] + '"></use></svg></div>');
 		}
-		
+
 	});
-		
-	
+
 });
