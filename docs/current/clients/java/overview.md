@@ -45,6 +45,16 @@ Connection conn = DriverManager.getConnection("jdbc:duckdb:");
 
 Used on its own, `jdbc:duckdb:` opens an in-memory database. Appending a file name, for example `jdbc:duckdb:/tmp/my_database`, opens a persistent database instead.
 
+To confirm that the driver is on the classpath and a connection can be opened, run a trivial query:
+
+```java
+try (Statement stmt = conn.createStatement();
+     ResultSet rs = stmt.executeQuery("SELECT 42")) {
+    rs.next();
+    System.out.println(rs.getInt(1)); // prints 42
+}
+```
+
 [Define Connections]({% link docs/current/clients/java/connecting.md %}) covers the connection lifecycle in full: the URL forms the driver accepts, DuckDB and driver configuration options, read-only mode, instance caching, threading, and shutdown.
 
 ## Further Reading

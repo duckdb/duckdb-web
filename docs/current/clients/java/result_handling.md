@@ -33,7 +33,6 @@ try (var conn = DriverManager.getConnection("jdbc:duckdb:");
             System.out.println(reader.getVectorSchemaRoot().getVector("generate_series"));
         }
     }
-    stmt.close();
 }
 ```
 

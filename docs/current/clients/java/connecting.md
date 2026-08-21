@@ -14,7 +14,7 @@ Every DuckDB feature reachable from Java starts with a `Connection`. This page c
 ## Opening a Connection
 
 In JDBC, database connections are created through the standard `java.sql.DriverManager` class.
-The driver should auto-register in the `DriverManager`. If that does not work for some reason, you can enforce registration using the following statement:
+On modern JVMs the driver registers itself with the `DriverManager` automatically when the JDBC JAR is on the classpath (through Java's [service-provider mechanism](https://docs.oracle.com/javase/8/docs/api/java/util/ServiceLoader.html)), so no setup is needed. If that does not happen for some reason, load the driver class explicitly to force registration:
 
 ```java
 Class.forName("org.duckdb.DuckDBDriver");
@@ -41,7 +41,7 @@ DuckDBConnection conn = (DuckDBConnection) DriverManager.getConnection("jdbc:duc
 Additional connections can be created using the `DriverManager`. The `DuckDBConnection#duplicate()` method opens another connection to the same database instance without re-reading the configuration:
 
 ```java
-Connection conn2 = ((DuckDBConnection) conn).duplicate();
+DuckDBConnection conn2 = ((DuckDBConnection) conn).duplicate();
 ```
 
 Its main purpose is to reach a **connection-private in-memory** database instance — the one created by the plain `jdbc:duckdb:` URL — which no other URL can address. On a named in-memory or a file-backed connection, `duplicate()` is effectively the same as opening a new connection on the same URL, because those instances are shared through the [instance cache](#database-instances-and-instance-caching) anyway.
@@ -97,7 +97,7 @@ Connection conn = DriverManager.getConnection("jdbc:duckdb:/tmp/my_database", co
 
 The available options are listed on the [Configuration page]({% link docs/current/configuration/overview.md %}) and can also be queried at runtime with `duckdb_settings()`. The driver exposes the same list through the standard `Driver.getPropertyInfo()` call, which returns one `DriverPropertyInfo` per DuckDB setting alongside the driver's own options.
 
-> Note Options passed at connection time are applied as **global** settings on the database instance. A setting that only has session scope has to be applied with a `SET` statement after connecting; setting it at connection time fails with `Could not set option "⟨name⟩" as a global option`.
+> Note Options passed at connection time are applied as **global** settings on the database instance. A setting that only has session scope has to be applied with a `SET` statement after connecting; setting it at connection time fails with `Could not set option "⟨name⟩" as a global option`. To find which settings these are, query `duckdb_settings()` and filter on `scope = 'LOCAL'`; `search_path`, `schema`, and the `enable_profiling` / `profiling_mode` family are common examples.
 
 ### Setting Options in the URL
 

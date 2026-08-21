@@ -28,18 +28,19 @@ DuckDBConnection conn = (DuckDBConnection) DriverManager.getConnection("jdbc:duc
 try (var stmt = conn.createStatement()) {
     stmt.execute("CREATE TABLE tbl (x INTEGER, y DOUBLE, s VARCHAR)");
 
-// using try-with-resources to automatically close the appender at the end of the scope
-try (var appender = conn.createAppender(DuckDBConnection.DEFAULT_SCHEMA, "tbl")) {
-    appender.beginRow();
-    appender.append(10);
-    appender.append(3.2);
-    appender.append("hello");
-    appender.endRow();
-    appender.beginRow();
-    appender.append(20);
-    appender.append(-8.1);
-    appender.append("world");
-    appender.endRow();
+    // using try-with-resources to automatically close the appender at the end of the scope
+    try (var appender = conn.createAppender(DuckDBConnection.DEFAULT_SCHEMA, "tbl")) {
+        appender.beginRow();
+        appender.append(10);
+        appender.append(3.2);
+        appender.append("hello");
+        appender.endRow();
+        appender.beginRow();
+        appender.append(20);
+        appender.append(-8.1);
+        appender.append("world");
+        appender.endRow();
+    }
 }
 ```
 
