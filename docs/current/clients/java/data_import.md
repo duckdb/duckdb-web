@@ -26,8 +26,7 @@ import org.duckdb.DuckDBConnection;
 
 DuckDBConnection conn = (DuckDBConnection) DriverManager.getConnection("jdbc:duckdb:");
 try (var stmt = conn.createStatement()) {
-    stmt.execute("CREATE TABLE tbl (x BIGINT, y FLOAT, s VARCHAR)"
-);
+    stmt.execute("CREATE TABLE tbl (x INTEGER, y DOUBLE, s VARCHAR)");
 
 // using try-with-resources to automatically close the appender at the end of the scope
 try (var appender = conn.createAppender(DuckDBConnection.DEFAULT_SCHEMA, "tbl")) {
@@ -56,6 +55,15 @@ try (var appender = conn.createAppender("list_tbl")) {
     appender.endRow();
 }
 ```
+
+### Maximizing Appender Performance
+
+The Appender is already the fastest way to bulk-load data, but a few properties of how it works determine its throughput:
+
+* **Row batching is fixed and internal.** The Appender writes rows in fixed-size batches of 2,048 rows, one DuckDB vector, and flushes a batch automatically as soon as it fills. There is no configurable flush count, so adding an application-level batch size on top of the Appender does not improve performance.
+* **Prefer primitive columns over complex types.** Nested types such as `STRUCT`, `LIST`, and `UNION` cost more per value than flat, primitive columns. A schema built from primitive columns appends fastest.
+* **Avoid allocating a Java object per row.** Boxing values or constructing a new object for every row adds allocation and garbage-collection pressure. Prefer the primitive `append()` overloads and reuse buffers where you can.
+* **Keep strings short where possible.** DuckDB stores strings of up to 12 bytes inline; longer strings are stored out of line and add a small overhead per value.
 
 ## Batch Writer
 
