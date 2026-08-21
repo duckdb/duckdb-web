@@ -901,6 +901,20 @@ h5 a {
 			padding: 105px 15px;
 			position: relative;
 			z-index: 100;
+			.blog-header{
+				display: flex;
+				align-items: center;
+				justify-content: space-between;
+				gap: 20px;
+				flex-wrap: wrap;
+				margin-bottom: 40px;
+				h2{
+					margin: 0;
+				}
+				.textbutton{
+					color: var(--main-text-secondary-color, #666);
+				}
+			}
 			h3{
 				margin-top: 0;
 				margin-bottom: 0;
