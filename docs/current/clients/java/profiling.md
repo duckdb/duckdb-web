@@ -170,3 +170,9 @@ jfr summary app.jfr | grep duckdb.MemoryUsage
 jfr print --events duckdb.MemoryUsage app.jfr
 jfr metadata app.jfr | sed -n '/class MemoryUsage/,/^}/p'
 ```
+
+## Further Reading
+
+* [Define Connections]({% link docs/current/clients/java/connecting.md %}) — the `jdbc_jfr_memory_monitor` property and the query-cancel scheduler thread the driver runs.
+* [Profiling]({% link docs/current/dev/profiling.md %}) — DuckDB's query profiling output and the formats `getProfilingInformation()` returns.
+* [Run Queries]({% link docs/current/clients/java/querying.md %}) — running the queries whose progress, timing, and profiles this page observes.

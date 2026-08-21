@@ -132,3 +132,10 @@ try (DuckDBConnection conn = DriverManager
 Statement parameters remain 1-based, following the JDBC convention, while chunk columns and rows are 0-based, matching the C API and the user-defined function interfaces.
 
 > The chunked result API currently supports basic data types only. Composite types such as `LIST` and `STRUCT` are not yet readable through this interface. The `query()` method is available on prepared statements only; there is no `query(String)` overload.
+
+## Further Reading
+
+* [Run Queries]({% link docs/current/clients/java/querying.md %}) — sending the queries whose results this page reads, and the standard `ResultSet` accessors.
+* [Define Functions]({% link docs/current/clients/java/functions.md %}) — the `DuckDBDataChunkReader` API shared with chunked results is also used to write user-defined functions.
+* [Define Connections]({% link docs/current/clients/java/connecting.md %}) — the `jdbc_stream_results` option that enables result streaming.
+* [C API]({% link docs/current/clients/c/api.md %}) — the `duckdb_fetch_chunk` function that the chunked result API exposes to Java.

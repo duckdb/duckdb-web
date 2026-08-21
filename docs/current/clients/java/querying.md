@@ -89,3 +89,10 @@ try (ResultSet rs = stmt.executeQuery("SELECT [1, 2, 3] AS l, {'a': 1, 'b': 2} A
 ```
 
 The DuckDB result set also exposes typed accessors as extensions to the JDBC API, including `getArray(int)`, `getStruct(int)`, `getUuid(int)`, `getHugeint(int)`, and `getJsonObject(int)`. `DuckDBStruct.getMap()` returns the struct fields keyed by name, and `DuckDBArray.getResultSet()` exposes the list elements as an index and value result set.
+
+## Further Reading
+
+* [Handle Results]({% link docs/current/clients/java/result_handling.md %}) — Apache Arrow interchange, result streaming, and chunked results beyond the standard `ResultSet`.
+* [Import Data]({% link docs/current/clients/java/data_import.md %}) — the Appender and batch writer, the recommended alternatives to prepared statements for bulk inserts.
+* [Prepared Statements]({% link docs/current/sql/query_syntax/prepared_statements.md %}) — DuckDB's SQL-level support for the parameterized queries used here.
+* [Define Connections]({% link docs/current/clients/java/connecting.md %}) — opening the `Connection` that these statements run on.

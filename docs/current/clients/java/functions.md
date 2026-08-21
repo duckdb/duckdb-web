@@ -313,3 +313,10 @@ When a type is declared with a Java `Class`, the driver maps it to a DuckDB type
 For types without a direct Java mapping, declare the type explicitly with `DuckDBColumnType` or `DuckDBLogicalType`. For example, `UHUGEINT` requires an explicit `DuckDBColumnType.UHUGEINT` declaration, and `DuckDBLogicalType.decimal(width, scale)` sets an explicit `DECIMAL` precision and scale.
 
 Composite types such as `LIST` and `STRUCT` are not currently supported in UDFs. Support for them is planned for a future release.
+
+## Further Reading
+
+* [Handle Results]({% link docs/current/clients/java/result_handling.md %}) — the `DuckDBDataChunkReader` API used to read a vectorized function's inputs is shared with chunked results.
+* [C API]({% link docs/current/clients/c/api.md %}) — the table function interface that the Java table function API mirrors.
+* [Run Queries]({% link docs/current/clients/java/querying.md %}) — calling registered functions from SQL.
+* [Configuration]({% link docs/current/configuration/overview.md %}) — the `preserve_insertion_order` option that parallel table functions may require.

@@ -119,3 +119,10 @@ stmt.addBatch("INSERT INTO test (x, y, z) VALUES (4, 5, 6);");
 stmt.executeBatch();
 stmt.close();
 ```
+
+## Further Reading
+
+* [Appender]({% link docs/current/data/appender.md %}) — the engine-level Appender interface that the Java `DuckDBAppender` wraps.
+* [Data Import]({% link docs/current/data/overview.md %}) — DuckDB's other bulk-loading options, including reading directly from CSV, Parquet, and JSON files.
+* [Run Queries]({% link docs/current/clients/java/querying.md %}) — sending the `INSERT` and `CREATE TABLE` statements the batch writer builds on.
+* [Define Connections]({% link docs/current/clients/java/connecting.md %}) — obtaining the `DuckDBConnection` an Appender is created from.

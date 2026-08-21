@@ -46,3 +46,11 @@ Connection conn = DriverManager.getConnection("jdbc:duckdb:");
 Used on its own, `jdbc:duckdb:` opens an in-memory database. Appending a file name, for example `jdbc:duckdb:/tmp/my_database`, opens a persistent database instead.
 
 [Define Connections]({% link docs/current/clients/java/connecting.md %}) covers the connection lifecycle in full: the URL forms the driver accepts, DuckDB and driver configuration options, read-only mode, instance caching, threading, and shutdown.
+
+## Further Reading
+
+* [Define Connections]({% link docs/current/clients/java/connecting.md %}) — the JDBC URL forms, configuration options, instance caching, threading, and connection shutdown.
+* [Run Queries]({% link docs/current/clients/java/querying.md %}) — sending queries with `Statement` and `PreparedStatement`, and reading DuckDB's nested types.
+* [Import Data]({% link docs/current/clients/java/data_import.md %}) — bulk-loading data with the Appender and the JDBC batch writer.
+* [Handle Results]({% link docs/current/clients/java/result_handling.md %}) — Apache Arrow interchange, result streaming, and chunked results.
+* [Clients Overview]({% link docs/current/clients/overview.md %}) — the other client APIs DuckDB provides alongside JDBC.

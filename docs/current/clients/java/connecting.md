@@ -284,3 +284,11 @@ try (Connection conn = DriverManager.getConnection("jdbc:duckdb:/tmp/my_database
 If the process is terminated without closing its connections, the write-ahead log is left in place. It is replayed the next time the database file is opened, so no committed data is lost, but the file is only compacted once the database is checkpointed on a clean shutdown. To force a checkpoint without closing the connection, run the [`CHECKPOINT` statement]({% link docs/current/sql/statements/checkpoint.md %}).
 
 Repeatedly opening and closing the last connection to a database means starting and shutting down the instance each time, including its thread pool. Applications that do this in a loop can keep the instance alive between connections with the `jdbc_pin_db` option and release it later with `DuckDBDriver.releaseDB(url)`.
+
+## Further Reading
+
+* [Run Queries]({% link docs/current/clients/java/querying.md %}) — using the `Connection` to send queries and read result sets.
+* [Handle Results]({% link docs/current/clients/java/result_handling.md %}) — the `jdbc_stream_results` option and other result-handling choices set at connection time.
+* [Configuration]({% link docs/current/configuration/overview.md %}) — the full list of DuckDB settings that can be passed as connection options.
+* [Files Created by DuckDB]({% link docs/current/operations_manual/footprint_of_duckdb/files_created_by_duckdb.md %}) — the database, WAL, and temporary files that connection shutdown checkpoints and cleans up.
+* [Troubleshoot]({% link docs/current/clients/java/known_issues.md %}) — workarounds for common connection and driver problems.

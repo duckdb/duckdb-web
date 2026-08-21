@@ -70,3 +70,9 @@ The driver runs normally as an ordinary JAR; only AOT compilation is affected. I
 The `-nolib` driver artifact loads the native library by name with `System.loadLibrary`, or from the directory alongside the JAR, instead of unpacking it from the JAR. This makes it possible to supply the library externally, but on its own it does not make an AOT build work.
 
 Native Image support is tracked in [duckdb-java issue #180](https://github.com/duckdb/duckdb-java/issues/180).
+
+## Further Reading
+
+* [Java (JDBC) Client]({% link docs/current/clients/java/overview.md %}) — installing the driver from Maven Central, the fix for the driver-not-found errors above.
+* [Define Connections]({% link docs/current/clients/java/connecting.md %}) — driver registration, configuration options, and instance behavior behind many connection-time errors.
+* [Parquet Files]({% link docs/current/data/parquet/overview.md %}) — the `binary_as_string` setting and other options for reading Parquet string columns correctly.
