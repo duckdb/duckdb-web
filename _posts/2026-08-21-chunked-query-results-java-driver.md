@@ -8,7 +8,7 @@ thumb: "/images/blog/thumbs/java.svg"
 image: "/images/blog/thumbs/java.png"
 ---
 
-DuckDB is a columnar, vectorized database. Every operator inside the engine works on [*data chunks*]({% link docs/current/clients/c/data_chunk.md %}): batches of column vectors, 2,048 rows at a time. That is a big part of why DuckDB is fast: the engine amortizes interpretation overhead over thousands of values instead of paying it once per value.
+DuckDB is a columnar, vectorized database. Every operator inside the engine works on [*data chunks:*]({% link docs/current/clients/c/data_chunk.md %}) batches of column vectors, 2,048 rows at a time. That is a big part of why DuckDB is fast: the engine amortizes interpretation overhead over thousands of values instead of paying it once per value.
 
 JDBC, on the other hand, was designed in 1997 around a very different idea. The `ResultSet` API hands you one row at a time (`next()`) and one value at a time (`getInt(1)`, `getString(2)`, and so on). It is a solid API, familiar to every Java developer and supported by every tool in the ecosystem, but it forces the data into a form that DuckDB never used internally.
 
