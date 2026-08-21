@@ -2,8 +2,8 @@
 layout: post
 title: "What Next for DuckDB"
 author: "Hannes Mühleisen"
-thumb: "/images/library/thumbs/2026-08-27-developer-voices.jpg"
-image: "/images/library/thumbs/2026-08-27-developer-voices.jpg"
+thumb: "/images/library/thumbs/2026-08-26-developer-voices.jpg"
+image: "/images/library/thumbs/2026-08-26-developer-voices.jpg"
 tags: ["Podcast"]
 length: "100 min"
 thirdparty: false
@@ -20,3 +20,7 @@ TODO
 | **Podcast** | [Developer Voices](https://www.developervoices.com/) |
 | **Guest** | [Hannes Mühleisen (DuckLabs)](https://hannes.muehleisen.org/) |
 | **YouTube** | [TODO]() |
+
+## Transcript
+
+TODO
