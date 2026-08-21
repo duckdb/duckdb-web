@@ -10,7 +10,17 @@ title: Instantiate DuckDB-Wasm
 
 ## Overview
 
-DuckDB-Wasm can be instantiated in several ways, depending on how your application bundles and serves its assets. Each approach resolves the `mainModule` (the WebAssembly file) and the `mainWorker` (the worker script) for the browser's capabilities, then hands them to `AsyncDuckDB`. This page shows the patterns for a jsDelivr CDN, webpack, Vite, and statically served files. Once instantiated, the `db` object is used to [import data]({% link docs/current/clients/wasm/data_ingestion.md %}) and [run queries]({% link docs/current/clients/wasm/query.md %}).
+DuckDB-Wasm can be instantiated in several ways, depending on how your application bundles and serves its assets. Each approach resolves the `mainModule` (the WebAssembly file) and the `mainWorker` (the worker script) for the browser's capabilities, then hands them to `AsyncDuckDB`. This page shows the patterns for a jsDelivr CDN, webpack, Vite and statically served files. Once instantiated, the `db` object is used to [import data]({% link docs/current/clients/wasm/data_ingestion.md %}) and [run queries]({% link docs/current/clients/wasm/query.md %}).
+
+## Bundle Selection
+
+DuckDB-Wasm ships several WebAssembly modules compiled for different browser feature sets, because post-MVP WebAssembly features reach browsers at different speeds and each one can bring a flat performance improvement. The `selectBundle` function runs dynamic browser checks and picks the fastest bundle the current browser supports:
+
+* `mvp` — the WebAssembly 1.0 (MVP) baseline, supported everywhere
+* `eh` — adds Wasm-level exception handling, which improves performance; DuckDB and DuckDB-Wasm are written in C++ and use exceptions to propagate errors, so native exception handling avoids emulating them through JavaScript
+* `coi` — adds threading for parallel query execution; it requires the page to be [cross-origin isolated]({% link docs/current/clients/wasm/deploying_duckdb_wasm.md %}#cross-origin-isolation)
+
+The examples below all call `selectBundle` so the browser receives the fastest bundle it can run. You can also inspect the selected bundle and feature set from the [web shell](https://shell.duckdb.org) with the `.features` command.
 
 ## `cdn(jsdelivr)`
 

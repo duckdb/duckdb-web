@@ -76,9 +76,11 @@ await conn.close();
 // Create a new connection
 const conn = await db.connect();
 
-// Export Parquet
-conn.send(`COPY (SELECT * FROM tbl) TO 'result-snappy.parquet' (FORMAT parquet);`);
-const parquet_buffer = await this._db.copyFileToBuffer('result-snappy.parquet');
+// Export the query result to a Parquet file in the virtual file system
+await conn.query(`COPY (SELECT * FROM tbl) TO 'result-snappy.parquet' (FORMAT parquet);`);
+
+// Copy the file contents into a buffer
+const parquet_buffer = await db.copyFileToBuffer('result-snappy.parquet');
 
 // Generate a download link
 const link = URL.createObjectURL(new Blob([parquet_buffer]));

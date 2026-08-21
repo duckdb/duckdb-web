@@ -26,19 +26,19 @@ An example deployment is <https://shell.duckdb.org>, which transpiles the main l
 
 ## JS Worker Component
 
-This is distributed as a JavaScript file in 3 different flavors, `mvp`, `eh` and `threads`, and needs to be served as is. The main library components need to be informed of the actual location.
+This is distributed as a JavaScript file in three different flavors, `mvp`, `eh` and `coi`, and needs to be served as-is. The main library component needs to be informed of the actual location.
 
-There are 3 variants for 3 different `platforms`:
+The three variants target three different WebAssembly feature sets:
 
-* `mvp` targets WebAssembly 1.0 spec
-* `eh` targets WebAssembly 1.0 spec WITH Wasm-level exceptions handling added, which improves performance
-* `threads` targets WebAssembly spec WITH exception and threading constructs
+* `mvp` targets the WebAssembly 1.0 (MVP) spec
+* `eh` targets WebAssembly with Wasm-level exception handling added, which improves performance
+* `coi` targets WebAssembly with exception handling and threading, which enables parallel query execution; it requires the deployment to be cross-origin isolated (see [Cross-Origin Isolation](#cross-origin-isolation))
 
-You could serve all 3, and feature detect, or serve a single variant and instruct duckdb-wasm library on which one to use
+You can serve all three and let the library feature-detect the best one with `selectBundle`, or serve a single variant and instruct the DuckDB-Wasm library on which one to use. The served artifacts are named after the flavor, for example `duckdb-browser-coi.worker.js`. The `coi` flavor corresponds to the `wasm_threads` extension platform.
 
 ## Wasm Worker Component
 
-Same as the JS Worker component, 3 different flavors, `mvp`, `eh` and `threads`, each one is needed by the relevant JS component. These WebAssembly modules need to be served as-is at an arbitrary [sub-] domain that is reachable from the main one.
+Same as the JS Worker component, three different flavors, `mvp`, `eh` and `coi` (for example `duckdb-coi.wasm`), each one is needed by the relevant JS component. These WebAssembly modules need to be served as-is at an arbitrary [sub-]domain that is reachable from the main one.
 
 ## DuckDB Extensions
 
@@ -51,7 +51,6 @@ SET custom_extension_repository = '⟨https://some.endpoint.org/path/to/reposito
 
 Changes the default extension repository from the public `https://extensions.duckdb.org` to the one specified. Note that extensions are still signed, so the best path is downloading and serving the extensions with a similar structure to the original repository. See our additional notes on [Creating a Custom Repository]({% link docs/current/extensions/extension_distribution.md %}#creating-a-custom-repository).
 
-
 Community extensions are served at <https://community-extensions.duckdb.org>, and they are signed with a different key, so they can be disabled with a one way SQL statement such as:
 
 ```sql
@@ -62,6 +61,16 @@ This will allow loading **only** of core duckdb extensions. Note that the failur
 
 Please review the [Extension Distribution page]({% link docs/current/extensions/extension_distribution.md %}) for general information about extensions.
 
+## Cross-Origin Isolation
+
+The `coi` bundle runs multiple threads, which relies on `SharedArrayBuffer`. Browsers only expose `SharedArrayBuffer` to pages that are [cross-origin isolated](https://web.dev/articles/coop-coep). To serve the threaded bundle, the top-level document must be delivered with the following HTTP headers:
+
+```text
+Cross-Origin-Embedder-Policy: require-corp
+Cross-Origin-Opener-Policy: same-origin
+```
+
+These headers isolate the document from other cross-origin documents and require any cross-origin resource it embeds to explicitly opt in. Because many third-party endpoints do not yet send the headers needed to be embedded under these policies, most deployments run on non-isolated pages, where DuckDB-Wasm falls back to the single-threaded `mvp` or `eh` bundle.
 
 ## Security Considerations
 
