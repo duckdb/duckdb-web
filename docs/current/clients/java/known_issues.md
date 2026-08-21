@@ -48,6 +48,8 @@ try (Statement stmt = conn.createStatement()) {
 
 The same option can be passed to `read_parquet` directly, for example `read_parquet('file.parquet', binary_as_string = true)`.
 
+This behavior is tracked in [duckdb-java issue #113](https://github.com/duckdb/duckdb-java/issues/113).
+
 ## GraalVM Native Image Is Not Supported
 
 The driver loads its JNI native library (`libduckdb_java`) from a static initializer in `org.duckdb.DuckDBNative`, which unpacks the bundled library to a temporary file and loads it at runtime. [GraalVM Native Image](https://www.graalvm.org/latest/reference-manual/native-image/) ahead-of-time (AOT) compilation does not reproduce this runtime loading step, so an AOT-compiled application fails when it opens a connection:
