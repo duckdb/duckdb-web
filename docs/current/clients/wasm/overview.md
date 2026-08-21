@@ -7,29 +7,34 @@ redirect_from:
 - /docs/clients/wasm/overview
 - /docs/preview/clients/wasm/overview
 - /docs/stable/clients/wasm/overview
-title: DuckDB Wasm
+title: DuckDB Wasm Client
 ---
 
 > Installation To use the DuckDB Wasm client, visit the [`duckdb-wasm` GitHub repository](https://github.com/duckdb/duckdb-wasm#readme).
 >
 > The latest stable version of the DuckDB WebAssembly client is {% if site.current_duckdb_wasm_version != "" %}{{ site.current_duckdb_wasm_version }}{% else %}{{ site.lts_duckdb_wasm_version }}{% endif %}.
 
-DuckDB has been compiled to WebAssembly, so it can run inside any browser on any device.
+DuckDB has been compiled to WebAssembly, so it can run inside any browser on any device. DuckDB-Wasm offers a layered API: it can be embedded as a [JavaScript + WebAssembly library](https://www.npmjs.com/package/@duckdb/duckdb-wasm), as a [Web shell](https://www.npmjs.com/package/@duckdb/duckdb-wasm-shell), or [built from source](https://github.com/duckdb/duckdb-wasm) according to your needs. This page introduces the client; the other pages in this section cover instantiating it, importing data, running queries, loading extensions, and deploying it.
 
 <!-- markdownlint-disable-next-line -->
 {% include iframe.html src="https://shell.duckdb.org" %}
 
-DuckDB-Wasm offers a layered API, it can be embedded as a [JavaScript + WebAssembly library](https://www.npmjs.com/package/@duckdb/duckdb-wasm), as a [Web shell](https://www.npmjs.com/package/@duckdb/duckdb-wasm-shell), or [built from source](https://github.com/duckdb/duckdb-wasm) according to your needs.
+## Getting Started
 
-## Getting Started with DuckDB-Wasm
+A great starting point is to read the [DuckDB-Wasm launch blog post]({% post_url 2021-10-29-duckdb-wasm %}). The [GitHub repository](https://github.com/duckdb/duckdb-wasm) is another useful resource, and the full [DuckDB-Wasm API documentation](https://shell.duckdb.org/docs/modules/index.html) documents every class and method.
 
-A great starting point is to read the [DuckDB-Wasm launch blog post]({% post_url 2021-10-29-duckdb-wasm %})!
-
-Another great resource is the [GitHub repository](https://github.com/duckdb/duckdb-wasm).
-
-For details, see the full [DuckDB-Wasm API Documentation](https://shell.duckdb.org/docs/modules/index.html).
+To use DuckDB-Wasm in an application, first [instantiate it]({% link docs/current/clients/wasm/instantiation.md %}), then [import data]({% link docs/current/clients/wasm/data_ingestion.md %}) and [run queries]({% link docs/current/clients/wasm/query.md %}) on it.
 
 ## Limitations
 
-* By default, the WebAssembly client only uses a single thread.
+* By default, the WebAssembly client only uses a single thread. Multithreading is available but still experimental.
 * The WebAssembly client has a limited amount of memory available. [WebAssembly limits the amount of available memory to 4 GB](https://v8.dev/blog/4gb-wasm-memory) and browsers may impose even stricter limits.
+
+## Further Reading
+
+* [Instantiate DuckDB-Wasm]({% link docs/current/clients/wasm/instantiation.md %}) — the bundle-selection patterns for jsDelivr, webpack, Vite, and statically served files.
+* [Import Data]({% link docs/current/clients/wasm/data_ingestion.md %}) — registering files and inserting Apache Arrow, CSV, JSON, and Parquet data.
+* [Run Queries]({% link docs/current/clients/wasm/query.md %}) — materialized and streaming queries, prepared statements, and exporting results.
+* [Load Extensions]({% link docs/current/clients/wasm/extensions.md %}) — how extension loading differs from native DuckDB and which extensions are available.
+* [Deploy DuckDB-Wasm]({% link docs/current/clients/wasm/deploying_duckdb_wasm.md %}) — the components a deployment serves and the security considerations involved.
+* [Clients Overview]({% link docs/current/clients/overview.md %}) — the other client APIs DuckDB provides alongside Wasm.

@@ -3,8 +3,12 @@ layout: docu
 redirect_from:
 - /docs/preview/clients/wasm/deploying_duckdb_wasm
 - /docs/stable/clients/wasm/deploying_duckdb_wasm
-title: Deploying DuckDB-Wasm
+title: Deploy DuckDB-Wasm
 ---
+
+## Overview
+
+Deploying DuckDB-Wasm means serving its components so that the browser can fetch and instantiate them. This page describes each component a deployment needs to serve, how the worker and WebAssembly variants relate, how extensions are served and mirrored, and the security considerations involved.
 
 A DuckDB-Wasm deployment needs to access the following components:
 
@@ -62,3 +66,10 @@ Please review the [Extension Distribution page]({% link docs/current/extensions/
 ## Security Considerations
 
 > Warning Deploying DuckDB-Wasm with access to your own data means whoever has access to SQL can access the data that DuckDB-Wasm can access. Also, DuckDB-Wasm in the default setting can access remote endpoints, so it can have a visible effect on the external world even from within the sandbox.
+
+## Further Reading
+
+* [Instantiate DuckDB-Wasm]({% link docs/current/clients/wasm/instantiation.md %}) — how the library, worker, and WebAssembly components served here are wired together at runtime.
+* [Load Extensions]({% link docs/current/clients/wasm/extensions.md %}) — how extensions are fetched, signed, and served from a custom repository.
+* [Extension Distribution]({% link docs/current/extensions/extension_distribution.md %}) — general information about extension repositories and creating a custom one.
+* [DuckDB Wasm Client]({% link docs/current/clients/wasm/overview.md %}) — the layered API and example deployments this page builds on.

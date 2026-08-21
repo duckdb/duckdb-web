@@ -5,16 +5,16 @@ redirect_from:
 - /docs/clients/wasm/data_ingestion
 - /docs/preview/clients/wasm/data_ingestion
 - /docs/stable/clients/wasm/data_ingestion
-title: Data Ingestion
+title: Import Data
 ---
 
-DuckDB-Wasm has multiple ways to import data, depending on the format of the data.
+## Overview
 
-There are two steps to import data into DuckDB.
+DuckDB-Wasm has multiple ways to import data, depending on the format of the data. There are two steps to import data into DuckDB.
 
-First, the data file is imported into a local file system using register functions ([registerEmptyFileBuffer](https://shell.duckdb.org/docs/classes/index.AsyncDuckDB.html#registerEmptyFileBuffer), [registerFileBuffer](https://shell.duckdb.org/docs/classes/index.AsyncDuckDB.html#registerFileBuffer), [registerFileHandle](https://shell.duckdb.org/docs/classes/index.AsyncDuckDB.html#registerFileHandle), [registerFileText](https://shell.duckdb.org/docs/classes/index.AsyncDuckDB.html#registerFileText), [registerFileURL](https://shell.duckdb.org/docs/classes/index.AsyncDuckDB.html#registerFileURL)).
+First, the data file is registered in a local file system using register functions ([registerFileBuffer](https://shell.duckdb.org/docs/classes/index.AsyncDuckDB.html#registerFileBuffer), [registerFileHandle](https://shell.duckdb.org/docs/classes/index.AsyncDuckDB.html#registerFileHandle), [registerFileText](https://shell.duckdb.org/docs/classes/index.AsyncDuckDB.html#registerFileText), [registerFileURL](https://shell.duckdb.org/docs/classes/index.AsyncDuckDB.html#registerFileURL)).
 
-Then, the data file is imported into DuckDB using insert functions ([insertArrowFromIPCStream](https://shell.duckdb.org/docs/classes/index.AsyncDuckDBConnection.html#insertArrowFromIPCStream), [insertArrowTable](https://shell.duckdb.org/docs/classes/index.AsyncDuckDBConnection.html#insertArrowTable), [insertCSVFromPath](https://shell.duckdb.org/docs/classes/index.AsyncDuckDBConnection.html#insertCSVFromPath), [insertJSONFromPath](https://shell.duckdb.org/docs/classes/index.AsyncDuckDBConnection.html#insertJSONFromPath)) or directly using FROM SQL query (using extensions like Parquet or [Wasm-flavored httpfs](#httpfs-wasm-flavored)).
+Then, the data file is imported into DuckDB using insert functions ([insertArrowFromIPCStream](https://shell.duckdb.org/docs/classes/index.AsyncDuckDBConnection.html#insertArrowFromIPCStream), [insertArrowTable](https://shell.duckdb.org/docs/classes/index.AsyncDuckDBConnection.html#insertArrowTable), [insertCSVFromPath](https://shell.duckdb.org/docs/classes/index.AsyncDuckDBConnection.html#insertCSVFromPath), [insertJSONFromPath](https://shell.duckdb.org/docs/classes/index.AsyncDuckDBConnection.html#insertJSONFromPath)) or directly using a `FROM` SQL query (using extensions like Parquet or [Wasm-flavored httpfs](#httpfs-wasm-flavored)).
 
 [Insert statements]({% link docs/current/data/insert.md %}) can also be used to import data.
 
@@ -39,10 +39,6 @@ await c.close();
 // More Example https://arrow.apache.org/docs/js/
 import { tableFromArrays } from 'apache-arrow';
 
-// EOS signal according to Arrow IPC streaming format
-// See https://arrow.apache.org/docs/format/Columnar.html#ipc-streaming-format
-const EOS = new Uint8Array([255, 255, 255, 255, 0, 0, 0, 0]);
-
 const arrowTable = tableFromArrays({
   id: [1, 2, 3],
   name: ['John', 'Jane', 'Jack'],
@@ -50,10 +46,12 @@ const arrowTable = tableFromArrays({
 });
 
 await c.insertArrowTable(arrowTable, { name: 'arrow_table' });
-// Write EOS
-await c.insertArrowTable(EOS, { name: 'arrow_table' });
 
 // ..., from a raw Arrow IPC stream
+// EOS signal according to Arrow IPC streaming format
+// See https://arrow.apache.org/docs/format/Columnar.html#ipc-streaming-format
+const EOS = new Uint8Array([255, 255, 255, 255, 0, 0, 0, 0]);
+
 const streamResponse = await fetch(`someapi`);
 const streamReader = streamResponse.body.getReader();
 const streamInserts = [];
@@ -184,3 +182,10 @@ await c.query(`
     INSERT INTO existing_table
     VALUES (1, 'foo'), (2, 'bar')`);
 ```
+
+## Further Reading
+
+* [Run Queries]({% link docs/current/clients/wasm/query.md %}) — querying the data imported here and exporting results.
+* [Load Extensions]({% link docs/current/clients/wasm/extensions.md %}) — the Parquet, JSON, and Wasm-flavored httpfs extensions used to read files directly in SQL.
+* [`INSERT` Statement]({% link docs/current/data/insert.md %}) — DuckDB's SQL-level `INSERT`, an alternative to the insert functions above.
+* [Instantiate DuckDB-Wasm]({% link docs/current/clients/wasm/instantiation.md %}) — creating the `db` and connection these imports run on.

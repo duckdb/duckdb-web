@@ -402,24 +402,24 @@
                   "url": "overview"
                 },
                 {
-                  "page": "Deploying DuckDB-Wasm",
-                  "url": "deploying_duckdb_wasm"
-                },
-                {
-                  "page": "Instantiation",
+                  "page": "Instantiate DuckDB-Wasm",
                   "url": "instantiation"
                 },
                 {
-                  "page": "Data Ingestion",
+                  "page": "Import Data",
                   "url": "data_ingestion"
                 },
                 {
-                  "page": "Query",
+                  "page": "Run Queries",
                   "url": "query"
                 },
                 {
-                  "page": "Extensions",
+                  "page": "Load Extensions",
                   "url": "extensions"
+                },
+                {
+                  "page": "Deploy DuckDB-Wasm",
+                  "url": "deploying_duckdb_wasm"
                 }
               ]
             },

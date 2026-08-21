@@ -5,10 +5,12 @@ redirect_from:
 - /docs/clients/wasm/instantiation
 - /docs/preview/clients/wasm/instantiation
 - /docs/stable/clients/wasm/instantiation
-title: Instantiation
+title: Instantiate DuckDB-Wasm
 ---
 
-DuckDB-Wasm has multiple ways to be instantiated depending on the use case.
+## Overview
+
+DuckDB-Wasm can be instantiated in several ways, depending on how your application bundles and serves its assets. Each approach resolves the `mainModule` (the WebAssembly file) and the `mainWorker` (the worker script) for the browser's capabilities, then hands them to `AsyncDuckDB`. This page shows the patterns for a jsDelivr CDN, webpack, Vite, and statically served files. Once instantiated, the `db` object is used to [import data]({% link docs/current/clients/wasm/data_ingestion.md %}) and [run queries]({% link docs/current/clients/wasm/query.md %}).
 
 ## `cdn(jsdelivr)`
 
@@ -78,7 +80,7 @@ const MANUAL_BUNDLES: duckdb.DuckDBBundles = {
 };
 // Select a bundle based on browser checks
 const bundle = await duckdb.selectBundle(MANUAL_BUNDLES);
-// Instantiate the asynchronous version of DuckDB-wasm
+// Instantiate the asynchronous version of DuckDB-Wasm
 const worker = new Worker(bundle.mainWorker!);
 const logger = new duckdb.ConsoleLogger();
 const db = new duckdb.AsyncDuckDB(logger, worker);
@@ -110,3 +112,10 @@ const logger = new duckdb.ConsoleLogger();
 const db = new duckdb.AsyncDuckDB(logger, worker);
 await db.instantiate(bundle.mainModule, bundle.pthreadWorker);
 ```
+
+## Further Reading
+
+* [Import Data]({% link docs/current/clients/wasm/data_ingestion.md %}) — registering files and inserting data into the instantiated database.
+* [Run Queries]({% link docs/current/clients/wasm/query.md %}) — executing queries against the `db` object created here.
+* [Deploy DuckDB-Wasm]({% link docs/current/clients/wasm/deploying_duckdb_wasm.md %}) — serving the library, worker, and WebAssembly components that these bundles reference.
+* [DuckDB Wasm Client]({% link docs/current/clients/wasm/overview.md %}) — the layered API and the examples the snippets above are drawn from.
