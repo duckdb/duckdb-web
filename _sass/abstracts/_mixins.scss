@@ -406,7 +406,8 @@
 	}
 
 	table thead th {
-		@include title-2();
+		@include body-large();
+		font-weight: 600;
 	}
 
 	table tbody td {
