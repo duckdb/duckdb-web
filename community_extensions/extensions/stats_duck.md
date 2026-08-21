@@ -74,10 +74,10 @@ docs:
 
     Full function reference: <https://github.com/KoliStat/the-stats-duck>.
 
-extension_star_count: 56
-extension_star_count_pretty: 56
-extension_download_count: 641
-extension_download_count_pretty: 641
+extension_star_count: 57
+extension_star_count_pretty: 57
+extension_download_count: 739
+extension_download_count_pretty: 739
 image: '/images/community_extensions/social_preview/preview_community_extension_stats_duck.png'
 layout: community_extension_doc
 ---

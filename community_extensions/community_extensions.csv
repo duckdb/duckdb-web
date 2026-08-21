@@ -167,7 +167,7 @@ python_udf,alitrack/duckdb-python,refs/tags/v0.2.1,"Embedded CPython UDFs for Du
 quack_oauth,DataZooDE/quack-oauth,0f30ca99ad34436e766c7aa550ef168e6eb4de8b,"Extensions providing OAuth and OpenID primitives for authentication and authorization for the DuckDB quack server."
 quackapi,asubbarao/quackapi,398d42cd41d3fb494420063d60b5aa367343d271,"FastAPI-class HTTP framework inside DuckDB — CREATE ROUTE turns SQL into typed, validated endpoints; one process is DB + HTTP (+ PDF/renderer via companion extensions)."
 quackformers,martin-conur/quackformers,4741f1a317837cd110e5801825ad7af1bbc3bd87,"Bert-based embedding extension."
-quackiso,tempoloss/quackiso,af76fc5c236c5da1ea749b2860a6010b10b3be3f,"Query ISO 20022 (camt, pacs, pain) financial messages as SQL"
+quackiso,tempoloss/quackiso,9970d1cea70d5379cf7d0692eade1ea65dccb824,"Query ISO 20022 (camt, pacs, pain) financial messages as SQL"
 quackscale,Query-farm/quackscale,06af182878fb4098806fe4e81a35310899dd0f94,"DuckDB WireGuard Extension to Quack & Ducklake over Tailscale/Headscale"
 quackstore,coginiti-dev/QuackStore,f1b582e67f96301177f4b493afcc229dfb5981ce,"QuackStore - Smart Block-Based Caching for Remote Files. Speed up repeated queries on remote data with intelligent block-level caching."
 query_condition_cache,dentiny/duckdb-query-condition-cache,6913ffd244ddfaa64dfe697180ab63b77a774a97,"This extension provides a cache for query conditions, which is useful for repeated-query workloads like metrics monitoring dashboards, log investigations, etc."

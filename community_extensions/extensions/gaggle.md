@@ -50,10 +50,10 @@ docs:
     
     For more information, like API references and usage examples, visit the project's [GitHub repository](https://github.com/CogitatorTech/gaggle).
 
-extension_star_count: 17
-extension_star_count_pretty: 17
-extension_download_count: 760
-extension_download_count_pretty: 760
+extension_star_count: 18
+extension_star_count_pretty: 18
+extension_download_count: 890
+extension_download_count_pretty: 890
 image: '/images/community_extensions/social_preview/preview_community_extension_gaggle.png'
 layout: community_extension_doc
 ---

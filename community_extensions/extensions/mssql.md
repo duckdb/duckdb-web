@@ -68,10 +68,10 @@ docs:
 
     Issues and feature requests: https://github.com/hugr-lab/mssql-extension
 
-extension_star_count: 123
-extension_star_count_pretty: 123
-extension_download_count: 57475
-extension_download_count_pretty: 57.5k
+extension_star_count: 125
+extension_star_count_pretty: 125
+extension_download_count: 56642
+extension_download_count_pretty: 56.6k
 image: '/images/community_extensions/social_preview/preview_community_extension_mssql.png'
 layout: community_extension_doc
 ---
