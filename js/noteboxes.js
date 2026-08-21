@@ -39,6 +39,9 @@ $(document).ready(function(){
 			case "Installation":
 				className = "installation";
 				break;
+			case "Quote":
+				className = "quote";
+				break;
 			default:
 				className = "";
 				break;
@@ -46,7 +49,7 @@ $(document).ready(function(){
 
 		var hasKeyword = className !== "";
 		if (!hasKeyword) {
-			className = $blockquote.closest('.singleentry').length ? "quote" : "note";
+			className = "note";
 		}
 
 		$blockquote.addClass(className);
@@ -61,7 +64,7 @@ $(document).ready(function(){
 
 		if (className === "quote") {
 			var $last = $blockquote.find('.content > p:last-child');
-			if (/^[–—-]/.test($last.text().trim())) {
+			if (/^(\u2013|\u2014|--)/.test($last.text().trim())) {
 				$last.addClass('quote-author');
 			}
 		} else {

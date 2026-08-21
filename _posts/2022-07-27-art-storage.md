@@ -358,7 +358,8 @@ ART index storage has been a long-standing issue in DuckDB, with multiple users 
 
 ## Roadmap
 
-> It's tough to make predictions, especially about the future  
+> Quote It's tough to make predictions, especially about the future
+>
 > – Yogi Berra
 
 ART Indexes are a core part of both constraint enforcement and keeping access speed up in DuckDB. And as depicted in the previous section, there are many distinct paths we can take in our bag of ART goodies, with advantages for completely different use cases.

@@ -68,7 +68,7 @@ Some of this style guide is automated with GitHub Actions, but feel free to run 
 * Code blocks using the `batch` language tag automatically receive `$` prompt when rendered. To typeset a Bash code block without a prompt, use the `bash` language tag (e.g., \`\`\`batch CODE\`\`\`). The two use the same syntax highlighter, the only difference is the absence of the prompt.
 * To display blocks of text without a language (e.g., output of a script), use \`\`\`text OUTPUT\`\`\`.
 * To display error messages, use \`\`\`console ERROR MESSAGE\`\`\`.
-* Quoted blocks (lines starting with `>`) are rendered as [colored boxed](https://duckdb.org/docs/current/data/insert). The following box types are available: `Note` (default), `Warning`, `Tip`, `Bestpractice`, `Deprecated`.
+* Quoted blocks (lines starting with `>`) are rendered as [colored boxed](https://duckdb.org/docs/current/data/insert). The following box types are available: `Note` (default), `Warning`, `Tip`, `Bestpractice`, `Deprecated`, `Quote`.
 * Always format SQL code, variable names, function names, etc. as code. For example, when talking about the `CREATE TABLE` statement, the keywords should be formatted as code.
 * When presenting SQL statements, do not include the DuckDB prompt (`D `).
 * SQL statements should end with a semicolon (`;`) to allow readers to quickly paste them into a SQL console.
