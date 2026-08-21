@@ -2,7 +2,10 @@
 		
 	{% assign starting_url = "docs/" | append: version_viewed | append: "/" %}
 	{% assign url_parts = page.url | replace: ".html", "" | split: "/" %}
-	{% assign current_main = url_parts[3] | default: "index" %}
+	{% assign current_main = url_parts[3] %}
+	{% if url_parts[1] == "docs" %}
+		{% assign current_main = url_parts[3] | default: "index" %}
+	{% endif %}
 
 	{%- assign menudocfile = "menu_docs_" | append: version_viewed | replace: ".", "" -%}
 
@@ -91,10 +94,11 @@
 
 		{% if site.data.menu_side.sidemenu %}
 			{% for item in site.data.menu_side.sidemenu %}
+				{% assign itemUrl = item.url | replace: ".html", "" %}
 				<li class="
-					{%- if pageUrl == item.url %} active{% endif -%}
+					{%- if pageUrl == itemUrl %} active{% endif -%}
 					{%- if item.mainfolderitems[0] %} hasSub{% endif -%}
-					{%- if pageUrl contains item.url %} opened{% endif -%}
+					{%- if pageUrl contains itemUrl %} opened{% endif -%}
 				">
 
 				{% if item.url %} <a href="{{ item.url }}">{{ item.page }}</a> {% if item.mainfolderitems[0] %} <svg class="show"><use href="#chevron-right"></use></svg> {% endif %} {% else %} {{ item.page }} {% if item.mainfolderitems[0] %} <svg class="show"><use href="#chevron-right"></use></svg> {% endif %} {% endif %} </li>

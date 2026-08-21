@@ -329,7 +329,7 @@ There are a few characteristics worth pointing out:
 
 ## Trying the Functions
 
-The four functions will ship in DuckDB v2.0. To try them today, install [a v2.0-dev preview build](https://duckdb.org/preview), then load the JSON extension:
+The four functions will ship in DuckDB v2.0. To try them today, install [a v2.0-dev preview build]({% link install/preview.md %}), then load the JSON extension:
 
 ```sql
 LOAD json;

@@ -8,7 +8,7 @@ excerpt: |
 extension:
   name: quackiso
   description: Query ISO 20022 (camt, pacs, pain) financial messages as SQL
-  version: 1.5.0
+  version: 1.5.1
   language: Rust
   build: cargo
   license: MIT
@@ -19,7 +19,7 @@ extension:
 
 repo:
   github: tempoloss/quackiso
-  ref: af76fc5c236c5da1ea749b2860a6010b10b3be3f
+  ref: 9970d1cea70d5379cf7d0692eade1ea65dccb824
 
 docs:
   hello_world: |
@@ -186,10 +186,10 @@ docs:
     URIs and XSD validation are deliberately absent, with the reasoning recorded
     in `docs/adr/`.
 
-extension_star_count: 2
-extension_star_count_pretty: 2
-extension_download_count: 313
-extension_download_count_pretty: 313
+extension_star_count: 4
+extension_star_count_pretty: 4
+extension_download_count: 305
+extension_download_count_pretty: 305
 image: '/images/community_extensions/social_preview/preview_community_extension_quackiso.png'
 layout: community_extension_doc
 ---

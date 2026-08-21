@@ -29,12 +29,14 @@ There are currently the following DuckDB versions under development:
 
 For the CLI, C and C++ clients, there are three preview builds available:
 
-| Platform | Architecture       | v1.4-dev                                                                        | v1.5-dev                                                                           | v2.0-dev                                                                   |
-| -------- | ------------------ | ------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------- | -------------------------------------------------------------------------- |
-| Linux    | `arm64`            | [zip](https://artifacts.duckdb.org/v1.4-andium/duckdb-binaries-linux-arm64.zip) | [zip](https://artifacts.duckdb.org/v1.5-variegata/duckdb-binaries-linux-arm64.zip) | [zip](https://artifacts.duckdb.org/latest/duckdb-binaries-linux-arm64.zip) |
-| Linux    | `x86_64`           | [zip](https://artifacts.duckdb.org/v1.4-andium/duckdb-binaries-linux-amd64.zip) | [zip](https://artifacts.duckdb.org/v1.5-variegata/duckdb-binaries-linux-amd64.zip) | [zip](https://artifacts.duckdb.org/latest/duckdb-binaries-linux-amd64.zip) |
-| macOS    | `arm64` / `x86_64` | [zip](https://artifacts.duckdb.org/v1.4-andium/duckdb-binaries-osx.zip)         | [zip](https://artifacts.duckdb.org/v1.5-variegata/duckdb-binaries-osx.zip)         | [zip](https://artifacts.duckdb.org/latest/duckdb-binaries-osx.zip)         |
-| Windows  | `arm64` / `x86_64` | [zip](https://artifacts.duckdb.org/v1.4-andium/duckdb-binaries-windows.zip)     | [zip](https://artifacts.duckdb.org/v1.5-variegata/duckdb-binaries-windows.zip)     | [zip](https://artifacts.duckdb.org/latest/duckdb-binaries-windows.zip)     |
+| Platform | Architecture       | v1.4-dev                                                                        | v1.5-dev                                                                           | v2.0-dev                                                                                          |
+| -------- | ------------------ | ------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------- |
+| Linux    | `arm64`            | [zip](https://artifacts.duckdb.org/v1.4-andium/duckdb-binaries-linux-arm64.zip) | [zip](https://artifacts.duckdb.org/v1.5-variegata/duckdb-binaries-linux-arm64.zip) | [tar.gz](https://artifacts.duckdb.org/latest/duckdb-cli-linux-arm64.tar.gz)                       |
+| Linux    | `x86_64`           | [zip](https://artifacts.duckdb.org/v1.4-andium/duckdb-binaries-linux-amd64.zip) | [zip](https://artifacts.duckdb.org/v1.5-variegata/duckdb-binaries-linux-amd64.zip) | [tar.gz](https://artifacts.duckdb.org/latest/duckdb-cli-linux-amd64.tar.gz)                       |
+| macOS    | `arm64` / `x86_64` | [zip](https://artifacts.duckdb.org/v1.4-andium/duckdb-binaries-osx.zip)         | [zip](https://artifacts.duckdb.org/v1.5-variegata/duckdb-binaries-osx.zip)         | [tar.gz](https://artifacts.duckdb.org/latest/duckdb-cli-osx-universal.tar.gz)                     |
+| Windows  | `arm64` / `x86_64` | [zip](https://artifacts.duckdb.org/v1.4-andium/duckdb-binaries-windows.zip)     | [zip](https://artifacts.duckdb.org/v1.5-variegata/duckdb-binaries-windows.zip)     | [arm64](https://artifacts.duckdb.org/latest/duckdb-cli-windows-arm64.tar.gz) / [x86_64](https://artifacts.duckdb.org/latest/duckdb-cli-windows-amd64.tar.gz) |
+
+The v2.0-dev (`latest`) CLI builds are compressed tarballs. Shared libraries ship separately as `duckdb-shared-libs-⟨platform⟩.tar.gz` on the same host (for example [linux-amd64](https://artifacts.duckdb.org/latest/duckdb-shared-libs-linux-amd64.tar.gz)). The v1.4-dev and v1.5-dev rows are still the older zip bundles.
 
 ## Python
 
@@ -60,22 +62,23 @@ For Python, we distribute different nightly builds. Note that not all of them ar
 
 ## Java
 
-The following Maven snippet imports the SNAPSHOT version of the Java package:
+The following Maven snippet imports the latest version of the Java package.
+To determine the version number, please visit the [latest CI builds](https://github.com/duckdb/duckdb-java/actions/workflows/Java.yml) and consult the _Maven S3 Deploy_ job
 
 ```xml
 <dependencies>
     <dependency>
         <groupId>org.duckdb</groupId>
         <artifactId>duckdb_jdbc</artifactId>
-        <!-- replace the hash of the build here -->
-        <version>1.5-627976eb-SNAPSHOT</version>
+        <!-- replace the version of the build here -->
+        <version>2.0.0-alphaXXXXX-XXXXXXX</version>
     </dependency>
 </dependencies>
 
 <repositories>
     <repository>
         <id>central-snapshots</id>
-        <url>https://central.sonatype.com/repository/maven-snapshots/</url>
+        <url>https://duckdb-staging.duckdb.org/duckdb/duckdb-java/maven</url>
         <snapshots><enabled>true</enabled></snapshots>
     </repository>
 </repositories>

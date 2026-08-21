@@ -238,11 +238,7 @@ Later this year, ART indexes will be buffer-managed ([#21458](https://github.com
 
 ## 8. A Brand New SQL Parser
 
-DuckDB has famously always used a parser derived from PostgreSQL's. We have decided that enough is enough: v2.0 ships our own modern, extensible PEG-based parser ([#22194](https://github.com/duckdb/duckdb/pull/22194)), an idea we first explored in our 2024 post on [runtime-extensible parsers]({% post_url 2024-11-22-runtime-extensible-parsers %}). This change ties into the extension ecosystem: extensions can now hook into the grammar itself, so expect extensions that expose entirely new SQL syntax. It also brings better error messages with precise source locations, and the first dialect compatibility mode:
-
-```sql
-SET dialect_compatibility_mode = 'spark';
-```
+DuckDB has famously always used a parser derived from PostgreSQL's. We have decided that enough is enough: v2.0 ships our own modern, extensible PEG-based parser ([#22194](https://github.com/duckdb/duckdb/pull/22194)), an idea we first explored in our 2024 post on [runtime-extensible parsers]({% post_url 2024-11-22-runtime-extensible-parsers %}). This change ties into the extension ecosystem: extensions can now hook into the grammar itself, so expect extensions that expose entirely new SQL syntax. It also brings better error messages with precise source locations.
 
 You should not actually notice anything from the parser swap as we designed it to be compatible with the old one. If you do notice, please file an issue.
 
@@ -264,59 +260,53 @@ Besides being much smaller and easier to keep up to date, the new implementation
 
 ## 10. Write Extensions Once, Host Them Yourself
 
-Extensions are one of the best things about DuckDB, but today, most of them, including our own, build against the [unstable C++ API]({% link docs/current/clients/cpp.md %}). That means extension authors have to re-target and rebuild for every DuckDB release, and community extensions can silently disappear when their authors stop keeping up. DuckDB v2.0 broadens the *stable* C API far enough that extensions can be written once, built once, published once, and keep working, essentially until the end of time.
+Extensions are one of the best things about DuckDB, but today, most of them, including our own, build against the [unstable C++ API]({% link docs/current/clients/cpp.md %}). Extension authors are required to rebuild and publish their extensions for every DuckDB release, even if the extension itself does not change. This is often a non-trivial operation for the extension author and a non-trivial coordination effort for the DuckDB team. Not rebuilding an extension means it can't be installed on the latest version of DuckDB.
 
-To make this sustainable over the long run, the C API is now generated from a declarative, versioned specification ([#24135](https://github.com/duckdb/duckdb/pull/24135)): every function in `duckdb.h`, `duckdb_extension.h`, and the extension ABI is described in YAML in the [`api_spec/` directory](https://github.com/duckdb/duckdb/tree/main/api_spec), with its full lifecycle on record, and CI verifies the committed headers against the spec so API and ABI can no longer drift apart. The release also brings unified symbol versioning ([#24435](https://github.com/duckdb/duckdb/pull/24435)), custom allocation handlers ([#23945](https://github.com/duckdb/duckdb/pull/23945)), and static linking of C API extensions into your application ([#22251](https://github.com/duckdb/duckdb/pull/22251)).
+DuckDB v2.0 will ship with a revamped C API (see [#24702](https://github.com/duckdb/duckdb/pull/24702) for part 1). The API will have a versioned [specification expressed in YAML](https://github.com/duckdb/duckdb/tree/main/api_spec) that uses an also versioned specification _schema_, and tooling for code generation ([#24135](https://github.com/duckdb/duckdb/pull/24135)). The schema lets us tag every symbol with its lifecycle and stability guarantees ([#24435](https://github.com/duckdb/duckdb/pull/24435)). A large part of the API will be marked stable and frozen, providing a stable ABI across DuckDB versions.
 
-So what does building an extension against the stable C API look like? Here is a complete extension: a single file that registers a vectorized scalar function, compiled once against `duckdb_extension.h`.
+The API itself improves over the pre-2.0 C API in a number of ways. It provides coherent error handling and a unified set of conventions around naming and ownership. It covers a much larger feature surface, including scalar, aggregate, table, cast, and copy functions with named parameters and varargs, parsing and inspecting SQL statements, prepared statements, replacement scans, custom filesystems, direct access to vector buffers, values and types, and more. It supports streaming query result consumption. With this API we want to provide the primitives to access DuckDB's most powerful features.
 
-<details markdown='1'>
-<summary markdown='span'>
-See the C code registering function `add_numbers`. 
-</summary>
-<div class="language-c highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">#include</span> <span class="cpf">"duckdb_extension.h"</span><span class="cp">
-</span>
-<span class="n">DUCKDB_EXTENSION_EXTERN</span>
+You won't need to program against the C API directly, though. We also provide a C++ API on top of it. It is a thin layer that compiles into your extension and talks only to the stable C ABI, so the binary you ship stays independent of DuckDB versions. It gives you a convenient, typed, well-documented way to access DuckDB's API. We're also working on bindings that provide the same for extension writers using Rust.
 
-<span class="c1">// a scalar function that adds two BIGINTs, one vector at a time</span>
-<span class="k">static</span> <span class="kt">void</span> <span class="nf">AddNumbers</span><span class="p">(</span><span class="n">duckdb_function_info</span> <span class="n">info</span><span class="p">,</span> <span class="n">duckdb_data_chunk</span> <span class="n">input</span><span class="p">,</span> <span class="n">duckdb_vector</span> <span class="n">output</span><span class="p">)</span> <span class="p">{</span>
-    <span class="n">idx_t</span> <span class="n">count</span> <span class="o">=</span> <span class="n">duckdb_data_chunk_get_size</span><span class="p">(</span><span class="n">input</span><span class="p">);</span>
-    <span class="kt">int64_t</span> <span class="o">*</span><span class="n">a</span> <span class="o">=</span> <span class="p">(</span><span class="kt">int64_t</span> <span class="o">*</span><span class="p">)</span> <span class="n">duckdb_vector_get_data</span><span class="p">(</span><span class="n">duckdb_data_chunk_get_vector</span><span class="p">(</span><span class="n">input</span><span class="p">,</span> <span class="mi">0</span><span class="p">));</span>
-    <span class="kt">int64_t</span> <span class="o">*</span><span class="n">b</span> <span class="o">=</span> <span class="p">(</span><span class="kt">int64_t</span> <span class="o">*</span><span class="p">)</span> <span class="n">duckdb_vector_get_data</span><span class="p">(</span><span class="n">duckdb_data_chunk_get_vector</span><span class="p">(</span><span class="n">input</span><span class="p">,</span> <span class="mi">1</span><span class="p">));</span>
-    <span class="kt">int64_t</span> <span class="o">*</span><span class="n">result</span> <span class="o">=</span> <span class="p">(</span><span class="kt">int64_t</span> <span class="o">*</span><span class="p">)</span> <span class="n">duckdb_vector_get_data</span><span class="p">(</span><span class="n">output</span><span class="p">);</span>
-    <span class="k">for</span> <span class="p">(</span><span class="n">idx_t</span> <span class="n">row</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">row</span> <span class="o">&lt;</span> <span class="n">count</span><span class="p">;</span> <span class="n">row</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
-        <span class="n">result</span><span class="p">[</span><span class="n">row</span><span class="p">]</span> <span class="o">=</span> <span class="n">a</span><span class="p">[</span><span class="n">row</span><span class="p">]</span> <span class="o">+</span> <span class="n">b</span><span class="p">[</span><span class="n">row</span><span class="p">];</span>
-    <span class="p">}</span>
-<span class="p">}</span>
+So what will an extension using the C++ API look like? Here is a complete example, though the details may still change: a single file that registers a vectorized scalar function.
 
-<span class="n">DUCKDB_EXTENSION_ENTRYPOINT</span><span class="p">(</span><span class="n">duckdb_connection</span> <span class="n">con</span><span class="p">,</span>
-                            <span class="n">duckdb_extension_info</span> <span class="n">info</span><span class="p">,</span>
-                            <span class="n">duckdb_extension_access</span> <span class="o">*</span><span class="n">access</span><span class="p">)</span> <span class="p">{</span>
-    <span class="n">duckdb_scalar_function</span> <span class="n">f</span> <span class="o">=</span> <span class="n">duckdb_create_scalar_function</span><span class="p">();</span>
-    <span class="n">duckdb_scalar_function_set_name</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="s">"add_numbers"</span><span class="p">);</span>
-    <span class="n">duckdb_logical_type</span> <span class="n">bigint</span> <span class="o">=</span> <span class="n">duckdb_create_logical_type</span><span class="p">(</span><span class="n">DUCKDB_TYPE_BIGINT</span><span class="p">);</span>
-    <span class="n">duckdb_scalar_function_add_parameter</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">bigint</span><span class="p">);</span>
-    <span class="n">duckdb_scalar_function_add_parameter</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">bigint</span><span class="p">);</span>
-    <span class="n">duckdb_scalar_function_set_return_type</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">bigint</span><span class="p">);</span>
-    <span class="n">duckdb_destroy_logical_type</span><span class="p">(</span><span class="o">&amp;</span><span class="n">bigint</span><span class="p">);</span>
-    <span class="n">duckdb_scalar_function_set_function</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">AddNumbers</span><span class="p">);</span>
-    <span class="n">duckdb_register_scalar_function</span><span class="p">(</span><span class="n">con</span><span class="p">,</span> <span class="n">f</span><span class="p">);</span>
-    <span class="n">duckdb_destroy_scalar_function</span><span class="p">(</span><span class="o">&amp;</span><span class="n">f</span><span class="p">);</span>
-    <span class="k">return</span> <span class="nb">true</span><span class="p">;</span>
-<span class="p">}</span>
-</code></pre></div></div>
-</details>
+```cpp
+#include "duckdb_cpp.hpp"
+
+using namespace duckdb_api;
+
+DUCKDB_CPP_EXTENSION_ENTRYPOINT(extension) {
+    // add_numbers(a BIGINT, b BIGINT DEFAULT 2): adds two BIGINTs, one vector at a time
+    ScalarFunction function;
+    function.SetName("add_numbers")
+        .SetSignature(FunctionSignature::Create()
+                        .AddParameter("a", LogicalType::BIGINT())
+                        .AddParameterDefault("b", LogicalType::BIGINT(), Value::Bigint(2))
+                        .SetReturnType(LogicalType::BIGINT()))
+        .SetExecCallback([](ScalarFunction::ExecInput &input) {
+            auto chunk = input.GetInputChunk();
+            auto a = chunk.GetVector(0).GetView();
+            auto b = chunk.GetVector(1).GetView();
+            auto out = input.GetResultVector().GetDataMutable<int64_t>();
+            for (idx_t i = 0; i < chunk.GetRowCount(); i++) {
+                out[i] = a.Data<int64_t>()[a.SelAt(i)] + b.Data<int64_t>()[b.SelAt(i)];
+            }
+        })
+        .Register(extension);
+}
+```
 
 You can use it as follows:
 
 ```sql
 LOAD add_numbers;
-SELECT add_numbers(40, 2);
+SELECT add_numbers(40, 2);           -- 42
+SELECT add_numbers(40);              -- 42: b falls back to its default
+SELECT add_numbers(b := 2, a := 40); -- 42: named arguments work too
+SELECT add_numbers(40, NULL);        -- NULL, without the function doing anything
 ```
 
-> For brevity, we skipped `NULL` handling here. See the [`demo_capi` extension](https://github.com/duckdb/duckdb/tree/main/extension/demo_capi) for the full version.
-
-The binary this compiles to keeps working across DuckDB versions. You do not need re-target or rebuild it every time a new DuckDB version comes out. And nowadays, with all the AI tooling around, building an extension has never been easier.
+You do not need re-target or rebuild it every time a new DuckDB version comes out. And nowadays, with all the AI tooling around, building an extension has never been easier.
 
 So you have written your extension. But how should you distribute it? Until now, DuckDB could only install extensions from the built-in repositories (`core`, `core_nightly`, `community`, ...). In v2.0, you will be able to register your own trusted repositories ([#24777](https://github.com/duckdb/duckdb/pull/24777), currently work-in-progress), so an organization can host and sign its own extensions and have them install and load just like the built-in ones:
 

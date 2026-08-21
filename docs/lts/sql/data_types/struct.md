@@ -245,7 +245,8 @@ Comparisons are done in lexicographical order, with individual entries being com
 
 Specifically:
 
-* If all values of `s1` and `s2` compare equal, then `s1` and `s2` compare equal.
+* If either `s1` or `s2`is `NULL` then the result is `NULL`.
+* else if all values of `s1` and `s2` compare equal, then `s1` and `s2` compare equal.
 * else, if `s1.value[i] < s2.value[i] OR s2.value[i] is NULL` for the first index `i` where `s1.value[i] != s2.value[i]`, then `s1` is less than `s2`, and vice versa.
 
 Structs of different types are implicitly cast to a struct type with the union of the involved keys, following the rules for [combination casting]({% link docs/lts/sql/data_types/typecasting.md %}#structs).
@@ -276,6 +277,14 @@ SELECT  {'k1': 0, 'k2': 0} < {'k2': 0, 'k3': 0};
 SELECT {'k1': 1, 'k2': 0} > {'k3': 0, 'k1': 0};
 ```
 
+```sql
+SELECT {'k1': [0]} < {'k1': [0, 0]};
+```
+
+```sql
+SELECT {'k1': 0, 'k2': 0} < {'k3': 0, 'k1': 1};
+```
+
 The following queries return `false`:
 
 ```sql
@@ -283,19 +292,21 @@ SELECT {'k1': 1, 'k2': 0} < {'k1': 0, 'k2': 1};
 ```
 
 ```sql
-SELECT {'k1': [0]} < {'k1': [0, 0]};
-```
-
-```sql
 SELECT {'k1': 1} > {'k2': 0};
 ```
 
 ```sql
-SELECT {'k1': 0, 'k2': 0} < {'k3': 0, 'k1': 1};
+SELECT  {'k1': 1, 'k2': 0} > {'k2': 0, 'k3': 0};
+```
+
+The following queries return `NULL`.
+
+```sql
+SELECT  NULL > {'k2': 0, 'k3': 0};
 ```
 
 ```sql
-SELECT  {'k1': 1, 'k2': 0} > {'k2': 0, 'k3': 0};
+SELECT {'k1': 0, 'k2': 0} < NULL;
 ```
 
 ## Updating the Schema

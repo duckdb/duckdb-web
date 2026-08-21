@@ -8,7 +8,7 @@ excerpt: |
 extension:
   name: duckgql
   description: Adds ISO GQL graph querying and graph algorithms to DuckDB
-  version: 0.1.1
+  version: 0.2.0
   language: C++
   build: cmake
   license: MIT
@@ -17,7 +17,7 @@ extension:
 
 repo:
   github: rahul-iyer/duckdb-gql
-  ref: 2e87e4ef084291b180e4fc940f99cdfade3708dd
+  ref: 44e77c6835f9e6758bb3e3bccb1a642981dbf1e7
 
 docs:
   hello_world: |
@@ -52,9 +52,15 @@ docs:
     mutations with DuckDB's native relational storage and execution engine,
     plus an explicit CSR layer for graph algorithms.
 
-    **What works in v0.1.1**
+    **What works in v0.2.0**
 
     * Managed property graphs backed by typed DuckDB vertex and edge tables.
+    * Read-only, zero-copy graph projections over existing DuckDB and DuckLake
+      tables, including multiple heterogeneous vertex and edge mappings.
+    * Live DuckLake projections that follow committed snapshots, or pinned
+      projections for reproducible analysis.
+    * Mapping-scoped integer source keys, optional edge keys, and DuckGQL-managed
+      dense element IDs, without application-maintained numeric ID ranges.
     * Inline typed graph schemas that persist in the catalog and immediately
       materialize constrained vertex and edge tables without `COPY GRAPH`.
     * Graph-header CSV, compressed CSV, and Parquet bulk import with optional
@@ -72,28 +78,30 @@ docs:
 
     **Storage and execution model**
 
-    Vertices and edges remain authoritative ordinary DuckDB tables rather than
-    entity-attribute-value rows. Nodes retain their complete label set and each
+    Managed vertices and edges remain authoritative ordinary DuckDB tables
+    rather than entity-attribute-value rows. For referenced graphs, the mapped
+    DuckDB or DuckLake source tables remain authoritative and DuckGQL persists
+    only the typed graph mapping. Nodes retain their complete label set and each
     edge has exactly one immutable type. DuckGQL lowers graph queries to native
     DuckDB relational plans, allowing DuckDB to execute scans, joins,
     aggregation, ordering, and recursive CTEs. The graph optimizer can choose
     table scans, native property indexes, node-label postings, and selective
-    fixed-hop CSR expansion. CSR snapshots are derived explicitly and are not a
-    second authoritative graph store.
+    fixed-hop CSR expansion. CSR snapshots are immutable, database-instance
+    scoped, version checked, and derived rather than authoritative.
 
     **Project status**
 
-    DuckGQL v0.1.1 is not yet a complete or conforming ISO GQL implementation.
+    DuckGQL v0.2.0 is not yet a complete or conforming ISO GQL implementation.
     Grammar recognition does not imply semantic or transactional conformance.
     The machine-readable conformance manifest currently classifies 24 feature
     families as partial and 12 as planned. Important restrictions include
-    autocommit-only graph lifecycle and CSR operations, connection-local CSR
-    snapshots, a single vertex and edge input per bulk load, and incomplete
+    autocommit-only graph lifecycle and CSR operations, a single vertex and
+    edge input per bulk load, and incomplete
     general path searches, query composition, procedures, and the complete GQL
     value/type system.
 
     See the [documentation](https://duckgql.com/docs/), inspect the
-    [conformance manifest](https://github.com/rahul-iyer/duckdb-gql/blob/v0.1.1/test/conformance/iso-gql-2024.tsv),
+    [conformance manifest](https://github.com/rahul-iyer/duckdb-gql/blob/v0.2.0/test/conformance/iso-gql-2024.tsv),
     or try the [browser playground](https://duckgql.com/).
 
   known_limitations: |
@@ -105,8 +113,9 @@ docs:
       scalar vertex-label column, and one edge-type column. Every edge row must
       contain exactly one non-empty type.
     * CSR construction and CSR algorithms are autocommit-only. Snapshots are
-      connection-local, version checked, and must be rebuilt after graph
-      mutations or direct SQL writes to the graph tables.
+      database-instance scoped and version checked. Graph mutations or direct
+      SQL writes invalidate managed snapshots; the next algorithm call rebuilds
+      the required projection automatically.
     * Weighted SSSP is not implemented. The current SSSP implementation is
       unweighted.
     * Multiple-path and undirected insertion, general runtime property maps,
@@ -118,14 +127,17 @@ docs:
       variable-length path composition, procedure semantics, query composition,
       named graph types, typed storage enforcement, and the complete GQL
       value/type system remain incomplete.
-    * Existing DuckDB and DuckLake tables cannot yet be registered directly as
-      zero-copy graphs; they must first be imported through graph-header CSV or
-      Parquet files.
+    * Referenced DuckDB and DuckLake graphs are read-only, and all mapped tables
+      must belong to one attached catalog. Source keys are currently integer
+      typed, and endpoint types must exactly match their vertex key types.
+    * One referenced table maps one static node or edge type. Composite and
+      string identities, multi-table joins for one element, mapping predicates,
+      and write-through mutations are not yet supported.
 
-extension_star_count: 43
-extension_star_count_pretty: 43
-extension_download_count: 289
-extension_download_count_pretty: 289
+extension_star_count: 47
+extension_star_count_pretty: 47
+extension_download_count: 323
+extension_download_count_pretty: 323
 image: '/images/community_extensions/social_preview/preview_community_extension_duckgql.png'
 layout: community_extension_doc
 ---
@@ -159,6 +171,7 @@ LOAD {{ page.extension.name }};
 | dfs                         | table         | NULL        | NULL    |          |
 | gql_algorithm_call          | table         | NULL        | NULL    |          |
 | gql_algorithm_result        | table         | NULL        | NULL    |          |
+| gql_algorithm_stats         | table         | NULL        | NULL    |          |
 | gql_build_csr               | table         | NULL        | NULL    |          |
 | gql_clear_properties_source | table         | NULL        | NULL    |          |
 | gql_create_property_index   | table         | NULL        | NULL    |          |
