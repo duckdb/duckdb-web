@@ -53,7 +53,7 @@ title: Documentation
         <svg class="chevron"><use href="#chevron-right"></use></svg>
     </div>
     <div class="box-link third-width">
-        <a href="{% link docs/current/clients/java.md %}"></a>
+        <a href="{% link docs/current/clients/java/overview.md %}"></a>
         <span class="symbol"><img src="{% link images/icons/java.svg %}"></span>
         <span>Java (JDBC)</span>
         <svg class="chevron"><use href="#chevron-right"></use></svg>
