@@ -43,10 +43,10 @@ docs:
 
     For full documentation, see the [h5db repository](https://github.com/jokasimr/h5db).
 
-extension_star_count: 3
-extension_star_count_pretty: 3
-extension_download_count: 759
-extension_download_count_pretty: 759
+extension_star_count: 4
+extension_star_count_pretty: 4
+extension_download_count: 738
+extension_download_count_pretty: 738
 image: '/images/community_extensions/social_preview/preview_community_extension_h5db.png'
 layout: community_extension_doc
 ---

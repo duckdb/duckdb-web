@@ -116,8 +116,8 @@ repo:
 
 extension_star_count: 13
 extension_star_count_pretty: 13
-extension_download_count: 774
-extension_download_count_pretty: 774
+extension_download_count: 871
+extension_download_count_pretty: 871
 image: '/images/community_extensions/social_preview/preview_community_extension_redis.png'
 layout: community_extension_doc
 ---
