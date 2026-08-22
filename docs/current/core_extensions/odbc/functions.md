@@ -24,7 +24,7 @@ title: ODBC Extension Functions
 odbc_begin_transaction(conn_handle BIGINT) -> VARCHAR
 ```
 
-Sets the `SQL_ATTR_AUTOCOMMIT` attribute to `SQL_AUTOCOMMIT_OFF` on the specified connection thus effectively starting an implicit transaction. [`odbc_commit`](#odbc_commit) or [`odbc_rollback`](#odbc_rollback) must be called on such connection to complete the transaction. The completion starts another implicit transaction on this connection. See [Transactions management](overview#transactions-management) for details.
+Sets the `SQL_ATTR_AUTOCOMMIT` attribute to `SQL_AUTOCOMMIT_OFF` on the specified connection thus effectively starting an implicit transaction. [`odbc_commit`](#odbc_commit) or [`odbc_rollback`](#odbc_rollback) must be called on such connection to complete the transaction. The completion starts another implicit transaction on this connection. See [Transaction management](overview#transaction-management) for details.
 
 #### Parameters:
 
@@ -46,7 +46,7 @@ SELECT odbc_begin_transaction(getvariable('conn'))
 odbc_bind_params(conn_handle BIGINT, params_handle BIGINT, params STRUCT) -> BIGINT
 ```
 
-Binds specified parameter values to the specified parameters handle. Only necessary with 2-step parameters binding, see [Query parameters](#query-parameters) for details.
+Binds specified parameter values to the specified parameters handle. Only necessary with 2-step parameters binding, see [Query parameters](overview#query-parameters) for details.
 
 #### Parameters:
 
@@ -92,7 +92,7 @@ SELECT odbc_close(getvariable('conn'))
 odbc_commit(conn_handle BIGINT) -> VARCHAR
 ```
 
-Calls `SQLEndTran` with `SQL_COMMIT` argument on the specified connection, completing the current transaction. [`odbc_begin_transaction`](#odbc_begin_transaction) must be called on this connection before this call for the completion to be effective. See [Transactions management](overview#transactions-management) for details.
+Calls `SQLEndTran` with `SQL_COMMIT` argument on the specified connection, completing the current transaction. [`odbc_begin_transaction`](#odbc_begin_transaction) must be called on this connection before this call for the completion to be effective. See [Transaction management](overview#transaction-management) for details.
 
 #### Parameters:
 
@@ -345,7 +345,7 @@ Runs specified query in a remote DB and returns the query results table.
 Optional named parameters that can be used to pass query parameters:
 
  - `params` (`STRUCT`): query parameters to pass to remote DBMS
- - `params_handle` (`BIGINT`): parameters handle created with [`odbc_create_params`](#odbc_create_params). Only used with 2-step parameters binding, see [Query parameters](#query-parameters) for details.
+ - `params_handle` (`BIGINT`): parameters handle created with [`odbc_create_params`](#odbc_create_params). Only used with 2-step parameters binding, see [Query parameters](overview#query-parameters) for details.
 
 Optional named parameters that can change types mapping:
 
@@ -398,7 +398,7 @@ FROM odbc_query(getvariable('conn'),
 odbc_rollback(conn_handle BIGINT) -> VARCHAR
 ```
 
-Calls `SQLEndTran` with `SQL_ROLLBACK` argument on the specified connection, completing the current transaction. [`odbc_begin_transaction`](#odbc_begin_transaction) must be called on this connection before this call for the completion to be effective. See [Transactions management](overview#transactions-management) for details.
+Calls `SQLEndTran` with `SQL_ROLLBACK` argument on the specified connection, completing the current transaction. [`odbc_begin_transaction`](#odbc_begin_transaction) must be called on this connection before this call for the completion to be effective. See [Transaction management](overview#transaction-management) for details.
 
 #### Parameters:
 
