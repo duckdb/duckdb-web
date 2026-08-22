@@ -14,10 +14,11 @@ Every DuckDB feature reachable from Java starts with a `Connection`. This page c
 ## Opening a Connection
 
 In JDBC, database connections are created through the standard `java.sql.DriverManager` class.
-On modern JVMs the driver registers itself with the `DriverManager` automatically when the JDBC JAR is on the classpath (through Java's [service-provider mechanism](https://docs.oracle.com/javase/8/docs/api/java/util/ServiceLoader.html)), so no setup is needed. If that does not happen for some reason, load the driver class explicitly to force registration:
+On modern JVMs the driver registers itself with the `DriverManager` automatically when the JDBC JAR is on the classpath (through Java's [service-provider mechanism](https://docs.oracle.com/javase/8/docs/api/java/util/ServiceLoader.html)), so no setup is needed. If that does not happen for some reason, load the `DuckDBDriver` class explicitly to force registration before opening a connection:
 
 ```java
 Class.forName("org.duckdb.DuckDBDriver");
+Connection conn = DriverManager.getConnection("jdbc:duckdb:");
 ```
 
 To create a DuckDB connection, call `DriverManager` with the `jdbc:duckdb:` JDBC URL prefix, like so:
