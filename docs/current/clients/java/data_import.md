@@ -45,7 +45,23 @@ try (var stmt = conn.createStatement()) {
 
 An appender can also be created with `createAppender(tableName)` for the default schema, or with `createAppender(catalogName, schemaName, tableName)` to target a specific catalog. Buffered rows are written to the table when the appender is closed, or earlier by calling `flush()`. Within a row, `appendNull()` writes a `NULL` and `appendDefault()` writes the column's `DEFAULT` value.
 
-Nested and collection types are appended within a row as well. For a `STRUCT` column, call `beginStruct()`, append each field value in declaration order, then `endStruct()`. For a `UNION` column, call `beginUnion(tag)` — where `tag` is the name of the target `UNION` member — append that member's value, then `endUnion()`. For a `LIST` or `ARRAY` column, pass a Java array as a single value, optionally with a boolean null mask where `true` marks the corresponding element as `NULL`:
+Nested and collection types are appended within a row as well. For a `STRUCT` column, call `beginStruct()`, append each field value in declaration order, then `endStruct()`. For a `UNION` column, call `beginUnion(tag)` — where `tag` is the name of the target `UNION` member — append that member's value, then `endUnion()`. The following row targets a table declared as `CREATE TABLE nested_tbl (point STRUCT(x INTEGER, y INTEGER), value UNION(num INTEGER, str VARCHAR))`:
+
+```java
+try (var appender = conn.createAppender("nested_tbl")) {
+    appender.beginRow();
+    appender.beginStruct();      // enter the STRUCT column
+    appender.append(1);          // field x
+    appender.append(2);          // field y
+    appender.endStruct();
+    appender.beginUnion("str");  // select the UNION member named "str"
+    appender.append("hello");    // its VARCHAR value; the num member is left NULL
+    appender.endUnion();
+    appender.endRow();
+}
+```
+
+For a `LIST` or `ARRAY` column, pass a Java array as a single value, optionally with a boolean null mask where `true` marks the corresponding element as `NULL`:
 
 ```java
 try (var appender = conn.createAppender("list_tbl")) {
