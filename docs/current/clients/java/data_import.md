@@ -65,6 +65,12 @@ The Appender is already the fastest way to bulk-load data, but a few properties 
 * **Avoid allocating a Java object per row.** Boxing values or constructing a new object for every row adds allocation and garbage-collection pressure. Prefer the primitive `append()` overloads and reuse buffers where you can.
 * **Keep strings short where possible.** DuckDB stores strings of up to 12 bytes inline; longer strings are stored out of line and add a small overhead per value.
 
+### Single-Value Appender (Legacy)
+
+An earlier appender, `org.duckdb.DuckDBSingleValueAppender`, created with `DuckDBConnection.createSingleValueAppender()`, writes one value at a time with typed `append()` overloads between `beginRow()` and `endRow()`. Both the class and the factory method are deprecated and retained only for backward compatibility.
+
+> Warning New code should use the `DuckDBAppender` described above, which is faster and appends nested and collection types. `DuckDBSingleValueAppender` is kept only for existing applications.
+
 ## Batch Writer
 
 The DuckDB JDBC driver offers batch write functionality.
