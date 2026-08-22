@@ -87,7 +87,138 @@ try (ResultSet rs = stmt.executeQuery("SELECT [1, 2, 3] AS l, {'a': 1, 'b': 2} A
 }
 ```
 
-The DuckDB result set also exposes typed accessors as extensions to the JDBC API, including `getArray(int)`, `getStruct(int)`, `getUuid(int)`, `getHugeint(int)`, and `getJsonObject(int)`. `DuckDBStruct.getMap()` returns the struct fields keyed by name, and `DuckDBArray.getResultSet()` exposes the list elements as an index and value result set.
+The DuckDB result set also exposes typed accessors as extensions to the JDBC API, including `getArray(int)`, `getStruct(int)`, `getUuid(int)`, `getHugeint(int)`, and `getJsonObject(int)`. `DuckDBStruct.getMap()` returns the struct fields keyed by name.
+
+`DuckDBArray.getResultSet()` exposes the list elements as an `org.duckdb.DuckDBArrayResultSet`, a read-only `ResultSet` with two columns: `INDEX`, the 1-based position of the element, and `VALUE`, the element itself. Iterate it like any other result set:
+
+```java
+try (ResultSet rs = stmt.executeQuery("SELECT [10, 20, 30] AS l")) {
+    rs.next();
+    DuckDBArray list = (DuckDBArray) rs.getObject(1);
+    try (ResultSet elements = list.getResultSet()) {
+        while (elements.next()) {
+            int index = elements.getInt("INDEX"); // 1-based position
+            int value = elements.getInt("VALUE"); // the element
+            System.out.println(index + " -> " + value);
+        }
+    }
+}
+```
+
+A `JSON` column is returned by `getObject(int)` (and `getJsonObject(int)`) as an `org.duckdb.JsonNode`, a lightweight wrapper over the raw JSON text. Query its shape with `isArray()`, `isObject()`, `isString()`, `isNumber()`, `isBoolean()`, and `isNull()`, and recover the JSON source with `toString()`:
+
+```java
+try (ResultSet rs = stmt.executeQuery("SELECT '[1, 2, 3]'::JSON AS j")) {
+    rs.next();
+    JsonNode json = (JsonNode) rs.getObject(1);
+    if (json.isArray()) {
+        System.out.println(json); // [1, 2, 3]
+    }
+}
+```
+
+## Binding Nested and Composite Parameters
+
+To bind a `LIST`/`ARRAY`, `STRUCT`, or `MAP` value as a prepared-statement parameter, build it from the `Connection` and pass it to `setObject()`. Each factory method attaches the SQL type name the driver needs to marshal the value.
+
+* `createArrayOf(typeName, elements)` — the standard JDBC method — returns an `org.duckdb.DuckDBUserArray` (a `java.sql.Array`) for a `LIST` or `ARRAY`, where `typeName` is the element type.
+* `createStruct(typeName, attributes)` — the standard JDBC method — returns an `org.duckdb.DuckDBUserStruct` (a `java.sql.Struct`), where `typeName` is the `STRUCT` type and `attributes` are the field values in declaration order.
+* `createMap(typeName, map)` — a DuckDB extension on `DuckDBConnection` — returns an `org.duckdb.DuckDBMap` (a `java.util.Map`) for a `MAP`, where `typeName` is the full map type such as `MAP(VARCHAR, INTEGER)`.
+
+```java
+import java.sql.Array;
+import java.sql.Struct;
+import java.util.Map;
+import org.duckdb.DuckDBConnection;
+
+DuckDBConnection conn = (DuckDBConnection) DriverManager.getConnection("jdbc:duckdb:");
+
+// LIST / ARRAY
+Array list = conn.createArrayOf("INTEGER", new Object[] {1, 2, 3});
+try (PreparedStatement stmt = conn.prepareStatement("SELECT ?::INTEGER[]")) {
+    stmt.setObject(1, list);
+    stmt.execute();
+}
+
+// STRUCT
+Struct point = conn.createStruct("STRUCT(x DOUBLE, y DOUBLE)", new Object[] {1.0, 2.0});
+
+// MAP
+Map<String, Integer> counts = conn.createMap("MAP(VARCHAR, INTEGER)", Map.of("a", 1, "b", 2));
+```
+
+## Binding Temporal Parameters
+
+Date and time parameters follow the same `setObject()` path. When you bind a `java.time` or `java.sql` temporal value, the driver wraps it in the matching internal holder — `java.sql.Date`/`LocalDate` become an `org.duckdb.DuckDBDate`, `Timestamp`/`LocalDateTime` become a `DuckDBTimestamp`, `OffsetDateTime` becomes a `DuckDBTimestampTZ`, and `Time`/`LocalTime` become a `DuckDBTime` — and marshals it to the corresponding DuckDB type:
+
+```java
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+
+try (PreparedStatement stmt = conn.prepareStatement("SELECT ?, ?")) {
+    stmt.setObject(1, LocalDate.of(2024, 1, 15));
+    stmt.setObject(2, LocalDateTime.of(2024, 1, 15, 12, 30));
+    stmt.execute();
+}
+```
+
+Each holder keeps its value relative to the Unix epoch (`1970-01-01`): `DuckDBDate` counts whole days through `getDaysSinceEpoch()`, while `DuckDBTimestamp`, `DuckDBTimestampTZ`, and `DuckDBTime` report microseconds through `getMicrosEpoch()` (for `DuckDBTime`, microseconds since midnight):
+
+```java
+import java.sql.Date;
+import java.sql.Time;
+import java.sql.Timestamp;
+import java.time.OffsetDateTime;
+import org.duckdb.DuckDBDate;
+import org.duckdb.DuckDBTime;
+import org.duckdb.DuckDBTimestamp;
+import org.duckdb.DuckDBTimestampTZ;
+
+long days = new DuckDBDate(Date.valueOf("2024-01-15")).getDaysSinceEpoch();                     // 19737
+long micros = new DuckDBTimestamp(Timestamp.valueOf("2024-01-15 12:30:00")).getMicrosEpoch();
+long zonedMicros = new DuckDBTimestampTZ(OffsetDateTime.parse("2024-01-15T12:30:00Z")).getMicrosEpoch();
+long timeMicros = new DuckDBTime(Time.valueOf("12:30:00")).getMicrosEpoch();
+```
+
+## Inspecting Metadata
+
+The driver implements the standard JDBC metadata interfaces, so an application can introspect the database, a result set, or a prepared statement's parameters without running catalog queries by hand.
+
+* `Connection.getMetaData()` returns an `org.duckdb.DuckDBDatabaseMetaData`, a `java.sql.DatabaseMetaData` that reports database-wide capabilities and exposes catalog objects such as `getTables()`, `getColumns()`, and `getSchemas()` as result sets built from DuckDB's system tables.
+* `ResultSet.getMetaData()` returns an `org.duckdb.DuckDBResultSetMetaData` describing the result columns — `getColumnCount()`, `getColumnName(int)`, `getColumnType(int)`, `getColumnTypeName(int)`, `getPrecision(int)`, and `getScale(int)`.
+* `PreparedStatement.getParameterMetaData()` returns an `org.duckdb.DuckDBParameterMetaData` describing the statement's parameters (1-based), including `getParameterCount()`, `getParameterType(int)`, and `getParameterTypeName(int)`.
+
+```java
+try (PreparedStatement stmt = conn.prepareStatement("SELECT * FROM items WHERE value > ?")) {
+    stmt.setDouble(1, 10.0);
+    ResultSetMetaData rsMeta = stmt.getMetaData();
+    for (int i = 1; i <= rsMeta.getColumnCount(); i++) {
+        System.out.println(rsMeta.getColumnName(i) + " : " + rsMeta.getColumnTypeName(i));
+    }
+    System.out.println("parameters: " + stmt.getParameterMetaData().getParameterCount());
+}
+```
+
+As a DuckDB extension, `DuckDBResultSetMetaData.getReturnType()` reports what a statement returns as an `org.duckdb.StatementReturnType` — `QUERY_RESULT`, `CHANGED_ROWS`, or `NOTHING`:
+
+```java
+import org.duckdb.DuckDBResultSetMetaData;
+import org.duckdb.StatementReturnType;
+
+DuckDBResultSetMetaData meta = (DuckDBResultSetMetaData) rs.getMetaData();
+StatementReturnType returnType = meta.getReturnType(); // QUERY_RESULT
+```
+
+For a `DECIMAL` column, `getPrecision(int)` and `getScale(int)` report the width and scale that DuckDB records for the type in a `DuckDBColumnTypeMetaData`. For the `value DECIMAL(10, 2)` column of the `items` table, they return `10` and `2`:
+
+```java
+try (ResultSet rs = stmt.executeQuery("SELECT value FROM items")) {
+    ResultSetMetaData rsMeta = rs.getMetaData();
+    int precision = rsMeta.getPrecision(1); // 10
+    int scale = rsMeta.getScale(1);         // 2
+    System.out.println("DECIMAL(" + precision + ", " + scale + ")");
+}
+```
 
 ## Further Reading
 
