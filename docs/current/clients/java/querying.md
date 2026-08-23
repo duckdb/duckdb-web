@@ -105,7 +105,7 @@ try (ResultSet rs = stmt.executeQuery("SELECT [10, 20, 30] AS l")) {
 }
 ```
 
-A `JSON` column is returned by `getObject(int)` (and `getJsonObject(int)`) as an `org.duckdb.JsonNode`, a lightweight wrapper over the raw JSON text. Query its shape with `isArray()`, `isObject()`, `isString()`, `isNumber()`, `isBoolean()`, and `isNull()`, and recover the JSON source with `toString()`:
+A `JSON` column is returned by `getObject(int)` (and `getJsonObject(int)`) as an `org.duckdb.JsonNode`, a lightweight wrapper over the raw JSON text. Test its type with `isArray()`, `isObject()`, `isString()`, `isNumber()`, `isBoolean()`, and `isNull()`, and recover the JSON source with `toString()`:
 
 ```java
 try (ResultSet rs = stmt.executeQuery("SELECT '[1, 2, 3]'::JSON AS j")) {
@@ -149,7 +149,7 @@ Map<String, Integer> counts = conn.createMap("MAP(VARCHAR, INTEGER)", Map.of("a"
 
 ### Binding Spatial Values
 
-The [`spatial` extension]({% link docs/current/core_extensions/spatial/overview.md %}) builds its geometry types on the same `STRUCT` and `LIST` machinery, so they are bound with the same factory methods. A `POINT_2D` is a struct of two `DOUBLE` fields, and a `LINESTRING` is a list of such points. After loading the extension, build the value with `createStruct()` (or `createArrayOf()`) and cast the parameter to `GEOMETRY`; a `GEOMETRY` result comes back as Well-Known Binary through `getBlob()`:
+The [`spatial` extension]({% link docs/current/core_extensions/spatial/overview.md %}) builds its geometry types from `STRUCT` and `LIST` types, so they are bound with the same factory methods. A `POINT_2D` is a struct of two `DOUBLE` fields, and a `LINESTRING` is a list of such points. After loading the extension, build the value with `createStruct()` (or `createArrayOf()`) and cast the parameter to `GEOMETRY`; a `GEOMETRY` result comes back as Well-Known Binary through `getBlob()`:
 
 ```java
 try (Statement stmt = conn.createStatement()) {
