@@ -147,6 +147,32 @@ Struct point = conn.createStruct("STRUCT(x DOUBLE, y DOUBLE)", new Object[] {1.0
 Map<String, Integer> counts = conn.createMap("MAP(VARCHAR, INTEGER)", Map.of("a", 1, "b", 2));
 ```
 
+### Binding Spatial Values
+
+The [`spatial` extension]({% link docs/current/core_extensions/spatial/overview.md %}) builds its geometry types on the same `STRUCT` and `LIST` machinery, so they are bound with the same factory methods. A `POINT_2D` is a struct of two `DOUBLE` fields, and a `LINESTRING` is a list of such points. After loading the extension, build the value with `createStruct()` (or `createArrayOf()`) and cast the parameter to `GEOMETRY`; a `GEOMETRY` result comes back as Well-Known Binary through `getBlob()`:
+
+```java
+try (Statement stmt = conn.createStatement()) {
+    stmt.execute("INSTALL spatial");
+    stmt.execute("LOAD spatial");
+}
+
+// POINT_2D is a STRUCT(x DOUBLE, y DOUBLE)
+Struct point = conn.createStruct("POINT_2D", new Object[] {41.1, 42.2});
+try (PreparedStatement stmt = conn.prepareStatement("SELECT ?::POINT_2D::GEOMETRY")) {
+    stmt.setObject(1, point);
+    try (ResultSet rs = stmt.executeQuery()) {
+        rs.next();
+        Blob wkb = rs.getBlob(1); // the geometry as Well-Known Binary
+    }
+}
+
+// A LINESTRING is a LIST of POINT_2D structs
+Struct p1 = conn.createStruct("POINT_2D", new Object[] {0.0, 0.0});
+Struct p2 = conn.createStruct("POINT_2D", new Object[] {1.0, 1.0});
+Array line = conn.createArrayOf("POINT_2D", new Object[] {p1, p2});
+```
+
 ## Binding Temporal Parameters
 
 Date and time parameters follow the same `setObject()` path. When you bind a `java.time` or `java.sql` temporal value, the driver wraps it in the matching internal holder — `java.sql.Date`/`LocalDate` become an `org.duckdb.DuckDBDate`, `Timestamp`/`LocalDateTime` become a `DuckDBTimestamp`, `OffsetDateTime` becomes a `DuckDBTimestampTZ`, and `Time`/`LocalTime` become a `DuckDBTime` — and marshals it to the corresponding DuckDB type:

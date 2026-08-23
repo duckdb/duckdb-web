@@ -55,7 +55,7 @@ try (var appender = conn.createAppender("nested_tbl")) {
     appender.append(2);          // field y
     appender.endStruct();
     appender.beginUnion("str");  // select the UNION member named "str"
-    appender.append("hello");    // its VARCHAR value; the num member is left NULL
+    appender.append("hello");    // its VARCHAR value
     appender.endUnion();
     appender.endRow();
 }
@@ -68,6 +68,16 @@ try (var appender = conn.createAppender("list_tbl")) {
     appender.beginRow();
     appender.append(new int[] {1, 2, 3});               // a LIST value
     appender.append(new int[] {4, 5}, new boolean[] {false, true}); // second element is NULL
+    appender.endRow();
+}
+```
+
+For a `MAP` column, pass a Java `Map` as a single value; each entry is written as a key/value pair, and a `null` map is appended as SQL `NULL`. The following row targets a table declared as `CREATE TABLE map_tbl (m MAP(VARCHAR, INTEGER))`:
+
+```java
+try (var appender = conn.createAppender("map_tbl")) {
+    appender.beginRow();
+    appender.append(Map.of("a", 1, "b", 2));            // a MAP value
     appender.endRow();
 }
 ```
