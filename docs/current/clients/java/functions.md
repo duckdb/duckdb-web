@@ -13,7 +13,7 @@ The JDBC driver can register user-defined functions (UDFs) written in Java, incl
 
 ## Scalar Functions
 
-Build a scalar function with the `DuckDBFunctions.scalarFunction()` builder and register it on a connection with `register()`. Once registered, the function can be called from SQL by the name passed to `withName()`.
+Build a scalar function with the `DuckDBFunctions.scalarFunction()` builder — which returns an `org.duckdb.DuckDBScalarFunctionBuilder` — and register it on a connection with `register()`. Once registered, the function can be called from SQL by the name passed to `withName()`. The builder is single-use: it is finalized once `register()` (or `close()`) is called.
 
 The simplest functions map directly to a Java functional interface. Pick the overload that matches the number of arguments and, for primitives, their type:
 
@@ -158,7 +158,7 @@ The `scalarFunction()` builder exposes the following methods:
 
 ## Table Functions
 
-Build a table function with the `DuckDBFunctions.tableFunction()` builder. The implementation is a `DuckDBTableFunction` with the following callbacks:
+Build a table function with the `DuckDBFunctions.tableFunction()` builder, which returns an `org.duckdb.DuckDBTableFunctionBuilder`. Like the scalar builder, it is single-use and finalized on `register()` (or `close()`). The implementation is a `DuckDBTableFunction` with the following callbacks:
 
 * `bind` runs when the statement is prepared. It registers the output columns with `addResultColumn()` and reads positional and named call parameters with `getParameter()` and `getNamedParameter()`. It may return bind data that is passed to the later callbacks.
 * `init` runs once before execution and returns the global state.
@@ -224,6 +224,59 @@ FROM java_table_basic(42, param1 = 'foobar');
 Rows are written through a `DuckDBDataChunkWriter`, the write-side counterpart to the [`DuckDBDataChunkReader`]({% link docs/current/clients/java/result_handling.md %}#chunked-results) used for reading results. Each output vector is addressed by column index, and values are set by row index with methods such as `setInt()`, `setString()`, and `setNull()`.
 
 All callback arguments, including the parameter and info objects, are valid only during callback execution and must not be retained. The Java table function interface mirrors DuckDB's [C API table functions]({% link docs/current/clients/c/api.md %}) as closely as possible.
+
+### Producing Rows in Chunks
+
+The example above writes every row in a single `apply` call, but a table function is not expected to. DuckDB calls `apply` repeatedly, each time passing a fresh output chunk that holds up to `output.capacity()` rows (2,048 by default). Fill up to that many rows, return how many you wrote, and DuckDB calls `apply` again for the next chunk until you return `0`. A cursor into the source therefore has to live in the init (or local-init) state so it survives across calls, rather than in a local variable.
+
+The `apply` below streams a bounded integer series in chunks. It also dispatches on each column's declared type with `DuckDBWritableVector.getType()`, which is convenient when the same routine populates columns of different types:
+
+```java
+// Held in the init state so the position survives across apply() calls.
+final class Series {
+    long next;
+    final long end;
+    Series(long end) { this.end = end; }
+}
+
+DuckDBFunctions.tableFunction()
+    .withName("java_series")
+    .withParameter(long.class)
+    .withFunction(new DuckDBTableFunction<Long, Series, Object>() {
+        @Override
+        public Long bind(DuckDBTableFunctionBindInfo info) throws Exception {
+            info.addResultColumn("n", Long.TYPE)
+                .addResultColumn("label", String.class);
+            return info.getParameter(0).getLong();
+        }
+
+        @Override
+        public Series init(DuckDBTableFunctionInitInfo info) throws Exception {
+            return new Series(info.getBindData());
+        }
+
+        @Override
+        public long apply(DuckDBTableFunctionCallInfo info, DuckDBDataChunkWriter output) throws Exception {
+            Series cursor = info.getInitData();
+            long row = 0;
+            // Fill at most one chunk; DuckDB calls apply() again for the rest.
+            for (; row < output.capacity() && cursor.next < cursor.end; row++, cursor.next++) {
+                for (long col = 0; col < output.columnCount(); col++) {
+                    DuckDBWritableVector vector = output.vector(col);
+                    switch (vector.getType()) {
+                        case BIGINT:  vector.setLong(row, cursor.next); break;
+                        case VARCHAR: vector.setString(row, "row-" + cursor.next); break;
+                        default:      vector.setNull(row);
+                    }
+                }
+            }
+            return row; // returning 0 tells DuckDB the scan is finished
+        }
+    })
+    .register(conn);
+```
+
+Calling `FROM java_series(5000)` drives `apply` three times — two full 2,048-row chunks and a final partial one — before the fourth call returns `0`.
 
 ### Cleaning up Resources
 

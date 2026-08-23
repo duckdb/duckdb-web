@@ -45,13 +45,39 @@ try (var stmt = conn.createStatement()) {
 
 An appender can also be created with `createAppender(tableName)` for the default schema, or with `createAppender(catalogName, schemaName, tableName)` to target a specific catalog. Buffered rows are written to the table when the appender is closed, or earlier by calling `flush()`. Within a row, `appendNull()` writes a `NULL` and `appendDefault()` writes the column's `DEFAULT` value.
 
-Nested and collection types are appended within a row as well. For a `STRUCT` column, call `beginStruct()`, append each field value in declaration order, then `endStruct()`. For a `UNION` column, call `beginUnion(tag)` — where `tag` is the name of the target `UNION` member — append that member's value, then `endUnion()`. For a `LIST` or `ARRAY` column, pass a Java array as a single value, optionally with a boolean null mask where `true` marks the corresponding element as `NULL`:
+Nested and collection types are appended within a row as well. For a `STRUCT` column, call `beginStruct()`, append each field value in declaration order, then `endStruct()`. For a `UNION` column, call `beginUnion(tag)` — where `tag` is the name of the target `UNION` member — append that member's value, then `endUnion()`. The following row targets a table declared as `CREATE TABLE nested_tbl (point STRUCT(x INTEGER, y INTEGER), value UNION(num INTEGER, str VARCHAR))`:
+
+```java
+try (var appender = conn.createAppender("nested_tbl")) {
+    appender.beginRow();
+    appender.beginStruct();      // enter the STRUCT column
+    appender.append(1);          // field x
+    appender.append(2);          // field y
+    appender.endStruct();
+    appender.beginUnion("str");  // select the UNION member named "str"
+    appender.append("hello");    // its VARCHAR value
+    appender.endUnion();
+    appender.endRow();
+}
+```
+
+For a `LIST` or `ARRAY` column, pass a Java array as a single value, optionally with a boolean null mask where `true` marks the corresponding element as `NULL`:
 
 ```java
 try (var appender = conn.createAppender("list_tbl")) {
     appender.beginRow();
     appender.append(new int[] {1, 2, 3});               // a LIST value
     appender.append(new int[] {4, 5}, new boolean[] {false, true}); // second element is NULL
+    appender.endRow();
+}
+```
+
+For a `MAP` column, pass a Java `Map` as a single value; each entry is written as a key/value pair, and a `null` map is appended as SQL `NULL`. The following row targets a table declared as `CREATE TABLE map_tbl (m MAP(VARCHAR, INTEGER))`:
+
+```java
+try (var appender = conn.createAppender("map_tbl")) {
+    appender.beginRow();
+    appender.append(Map.of("a", 1, "b", 2));            // a MAP value
     appender.endRow();
 }
 ```
@@ -64,6 +90,12 @@ The Appender is already the fastest way to bulk-load data, but a few properties 
 * **Prefer primitive columns over complex types.** Nested types such as `STRUCT`, `LIST`, and `UNION` cost more per value than flat, primitive columns. A schema built from primitive columns appends fastest.
 * **Avoid allocating a Java object per row.** Boxing values or constructing a new object for every row adds allocation and garbage-collection pressure. Prefer the primitive `append()` overloads and reuse buffers where you can.
 * **Keep strings short where possible.** DuckDB stores strings of up to 12 bytes inline; longer strings are stored out of line and add a small overhead per value.
+
+### Single-Value Appender (Legacy)
+
+An earlier appender, `org.duckdb.DuckDBSingleValueAppender`, created with `DuckDBConnection.createSingleValueAppender()`, writes one value at a time with typed `append()` overloads between `beginRow()` and `endRow()`. Both the class and the factory method are deprecated and retained only for backward compatibility.
+
+> Warning New code should use the `DuckDBAppender` described above, which is faster and appends nested and collection types. `DuckDBSingleValueAppender` is kept only for existing applications.
 
 ## Batch Writer
 
