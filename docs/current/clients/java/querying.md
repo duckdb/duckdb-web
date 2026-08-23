@@ -121,9 +121,9 @@ try (ResultSet rs = stmt.executeQuery("SELECT '[1, 2, 3]'::JSON AS j")) {
 
 To bind a `LIST`/`ARRAY`, `STRUCT`, or `MAP` value as a prepared-statement parameter, build it from the `Connection` and pass it to `setObject()`. Each factory method attaches the SQL type name the driver needs to marshal the value.
 
-* `createArrayOf(typeName, elements)` — the standard JDBC method — returns an `org.duckdb.DuckDBUserArray` (a `java.sql.Array`) for a `LIST` or `ARRAY`, where `typeName` is the element type.
-* `createStruct(typeName, attributes)` — the standard JDBC method — returns an `org.duckdb.DuckDBUserStruct` (a `java.sql.Struct`), where `typeName` is the `STRUCT` type and `attributes` are the field values in declaration order.
-* `createMap(typeName, map)` — a DuckDB extension on `DuckDBConnection` — returns an `org.duckdb.DuckDBMap` (a `java.util.Map`) for a `MAP`, where `typeName` is the full map type such as `MAP(VARCHAR, INTEGER)`.
+* `createArrayOf(typeName, elements)` — the standard JDBC method — returns an `org.duckdb.user.DuckDBUserArray` (a `java.sql.Array`) for a `LIST` or `ARRAY`, where `typeName` is the element type.
+* `createStruct(typeName, attributes)` — the standard JDBC method — returns an `org.duckdb.user.DuckDBUserStruct` (a `java.sql.Struct`), where `typeName` is the `STRUCT` type and `attributes` are the field values in declaration order.
+* `createMap(typeName, map)` — a DuckDB extension on `DuckDBConnection` — returns an `org.duckdb.user.DuckDBMap` (a `java.util.Map`) for a `MAP`, where `typeName` is the full map type such as `MAP(VARCHAR, INTEGER)`.
 
 ```java
 import java.sql.Array;
