@@ -120,6 +120,7 @@
 	.bento-box,
 	.bento-box.wide {
 		flex: 0 0 82%;
+		min-height: 170px;
 		scroll-snap-align: start;
 	}
 
