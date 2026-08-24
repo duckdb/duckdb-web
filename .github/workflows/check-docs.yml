@@ -22,7 +22,7 @@ jobs:
       - run: pip install -r requirements.txt -U --break-system-packages
       - run: pip install duckdb --pre -U --break-system-packages
       # - run: gh repo clone duckdb/duckdb
-      - uses: taiki-e/install-action@v2.85.13
+      - uses: taiki-e/install-action@v2.86.5
         with:
           tool: ripgrep
       - run: python3 scripts/check_for_missing_docs.py >> $GITHUB_STEP_SUMMARY
