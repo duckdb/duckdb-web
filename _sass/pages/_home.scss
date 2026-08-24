@@ -691,6 +691,19 @@ body.landing{
 			}
 		}
 		.stack-diagram{
+			.badge-yellow{
+				.stop-from{ stop-color: #fdf564; }
+				.stop-to{ stop-color: #fdfac6; }
+			}
+			.badge-blue{
+				.stop-from{ stop-color: #80cdfd; }
+				.stop-to{ stop-color: #c0e6fd; }
+			}
+			.badge-bg{ stroke: #deca00; }
+			.stack-badge-dl .badge-bg{ stroke: #4dbbff; }
+		}
+
+		.stack-diagram{
 			display: block;
 			width: 100%;
 			height: auto;
@@ -901,6 +914,19 @@ body.landing{
 	@keyframes stack-check-parquet{
 		0%, 64%{ opacity: 0; transform: scale(0.4); }
 		68%, 100%{ opacity: 1; transform: scale(1); }
+	}
+
+	html.darkmode & .stack-diagram{
+		.badge-yellow{
+			.stop-from{ stop-color: #322f05; }
+			.stop-to{ stop-color: #6b6605; }
+		}
+		.badge-blue{
+			.stop-from{ stop-color: #052030; }
+			.stop-to{ stop-color: #053e62; }
+		}
+		.badge-bg{ stroke: #756b00; }
+		.stack-badge-dl .badge-bg{ stroke: #004f80; }
 	}
 
 	@media (prefers-reduced-motion: reduce){

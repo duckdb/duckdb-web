@@ -151,9 +151,9 @@ To add a banner, set banner: true in the front matter and define the banner cont
 				<a class="stack-link" href="/docs/current">Explore DuckDB<svg class="icon"><use href="#arrow-right"></use></svg></a>
 				<svg class="stack-diagram" viewBox="0 0 517 120" role="img" aria-label="DuckDB reads a CSV file and writes a database file and Parquet">
 					<defs>
-						<linearGradient id="stack-badge-yellow" x1="0" y1="0" x2="1" y2="1">
-							<stop offset="7%" stop-color="#FDF564"/>
-							<stop offset="97%" stop-color="#FDFAC6"/>
+						<linearGradient id="stack-badge-yellow" class="badge-yellow" x1="0" y1="0" x2="1" y2="1">
+							<stop class="stop-from" offset="7%"/>
+							<stop class="stop-to" offset="97%"/>
 						</linearGradient>
 					</defs>
 					<path class="route" d="M124.5 40.5H195.5M322.5 40.5H393.5M258.5 71.5V88.5"/>
@@ -168,11 +168,11 @@ To add a banner, set banner: true in the front matter and define the banner cont
 						<use class="node-icon" href="#browser" x="205" y="30" width="14" height="14"/>
 						<text x="225" y="41.5">App</text>
 						<g class="stack-badge stack-badge-duckdb">
-						<rect x="257.5" y="7.5" width="59" height="59" rx="13" fill="url(#stack-badge-yellow)" stroke="#DECA00"/>
+						<rect x="257.5" y="7.5" width="59" height="59" rx="13" fill="url(#stack-badge-yellow)" class="badge-bg"/>
 						<g transform="translate(263 13)">
-							<path d="M24 48C10.7265 48 0 37.2735 0 24C0 10.7265 10.7265 0 24 0C37.2735 0 48 10.7265 48 24C48 37.2735 37.2735 48 24 48Z" fill="#1A1A1A"/>
-							<path d="M36.8349 20.4238H32.1328V27.5259H36.8349C38.794 27.5259 40.4104 25.9095 40.4104 23.9504C40.4104 21.9912 38.794 20.4238 36.8349 20.4238Z" fill="#FFF100"/>
-							<path d="M9.0625 23.9995C9.0625 29.4852 13.5196 33.9424 19.0054 33.9424C24.4911 33.9424 28.9482 29.4852 28.9482 23.9995C28.9482 18.5138 24.4911 14.0566 19.0054 14.0566C13.5196 14.0566 9.0625 18.5138 9.0625 23.9995Z" fill="#FFF100"/>
+							<path d="M24 48C10.7265 48 0 37.2735 0 24C0 10.7265 10.7265 0 24 0C37.2735 0 48 10.7265 48 24C48 37.2735 37.2735 48 24 48Z" fill="var(--main-highlight-yellow-background-color, #1a1a1a)"/>
+							<path d="M36.8349 20.4238H32.1328V27.5259H36.8349C38.794 27.5259 40.4104 25.9095 40.4104 23.9504C40.4104 21.9912 38.794 20.4238 36.8349 20.4238Z" fill="var(--main-highlight-yellow-text-color, #fff100)"/>
+							<path d="M9.0625 23.9995C9.0625 29.4852 13.5196 33.9424 19.0054 33.9424C24.4911 33.9424 28.9482 29.4852 28.9482 23.9995C28.9482 18.5138 24.4911 14.0566 19.0054 14.0566C13.5196 14.0566 9.0625 18.5138 9.0625 23.9995Z" fill="var(--main-highlight-yellow-text-color, #fff100)"/>
 						</g>
 						</g>
 					</g>
@@ -202,9 +202,9 @@ To add a banner, set banner: true in the front matter and define the banner cont
 				<a class="stack-link" href="{% link docs/current/quack/overview.md %}">Explore Quack<svg class="icon"><use href="#arrow-right"></use></svg></a>
 				<svg class="stack-diagram" viewBox="0 0 517 100" role="img" aria-label="Apps and notebooks query a remote DuckDB server through Quack">
 					<defs>
-						<linearGradient id="stack-badge-yellow-q" x1="0" y1="0" x2="1" y2="1">
-							<stop offset="7%" stop-color="#FDF564"/>
-							<stop offset="97%" stop-color="#FDFAC6"/>
+						<linearGradient id="stack-badge-yellow-q" class="badge-yellow" x1="0" y1="0" x2="1" y2="1">
+							<stop class="stop-from" offset="7%"/>
+							<stop class="stop-to" offset="97%"/>
 						</linearGradient>
 					</defs>
 					<path class="route" d="M124.5 28H180A6 6 0 0 1 186 34A6 6 0 0 0 192 40H222.5M124.5 72H180A6 6 0 0 0 186 66A6 6 0 0 1 192 60H222.5M294.5 50H393.5"/>
@@ -217,9 +217,9 @@ To add a banner, set banner: true in the front matter and define the banner cont
 						<use class="node-icon" href="#browser" x="10" y="21" width="14" height="14"/>
 						<text x="29" y="32.5">App</text>
 						<g transform="translate(100.7 21.3) scale(0.277)">
-							<path d="M24 48C10.7265 48 0 37.2735 0 24C0 10.7265 10.7265 0 24 0C37.2735 0 48 10.7265 48 24C48 37.2735 37.2735 48 24 48Z" fill="#1A1A1A"/>
-							<path d="M36.8349 20.4238H32.1328V27.5259H36.8349C38.794 27.5259 40.4104 25.9095 40.4104 23.9504C40.4104 21.9912 38.794 20.4238 36.8349 20.4238Z" fill="#FFF100"/>
-							<path d="M9.0625 23.9995C9.0625 29.4852 13.5196 33.9424 19.0054 33.9424C24.4911 33.9424 28.9482 29.4852 28.9482 23.9995C28.9482 18.5138 24.4911 14.0566 19.0054 14.0566C13.5196 14.0566 9.0625 18.5138 9.0625 23.9995Z" fill="#FFF100"/>
+							<path d="M24 48C10.7265 48 0 37.2735 0 24C0 10.7265 10.7265 0 24 0C37.2735 0 48 10.7265 48 24C48 37.2735 37.2735 48 24 48Z" fill="var(--main-highlight-yellow-background-color, #1a1a1a)"/>
+							<path d="M36.8349 20.4238H32.1328V27.5259H36.8349C38.794 27.5259 40.4104 25.9095 40.4104 23.9504C40.4104 21.9912 38.794 20.4238 36.8349 20.4238Z" fill="var(--main-highlight-yellow-text-color, #fff100)"/>
+							<path d="M9.0625 23.9995C9.0625 29.4852 13.5196 33.9424 19.0054 33.9424C24.4911 33.9424 28.9482 29.4852 28.9482 23.9995C28.9482 18.5138 24.4911 14.0566 19.0054 14.0566C13.5196 14.0566 9.0625 18.5138 9.0625 23.9995Z" fill="var(--main-highlight-yellow-text-color, #fff100)"/>
 						</g>
 					</g>
 					<g>
@@ -227,18 +227,18 @@ To add a banner, set banner: true in the front matter and define the banner cont
 						<use class="node-icon" href="#book-open-01" x="10" y="65" width="14" height="14"/>
 						<text x="29" y="76.5">Notebook</text>
 						<g transform="translate(100.7 65.3) scale(0.277)">
-							<path d="M24 48C10.7265 48 0 37.2735 0 24C0 10.7265 10.7265 0 24 0C37.2735 0 48 10.7265 48 24C48 37.2735 37.2735 48 24 48Z" fill="#1A1A1A"/>
-							<path d="M36.8349 20.4238H32.1328V27.5259H36.8349C38.794 27.5259 40.4104 25.9095 40.4104 23.9504C40.4104 21.9912 38.794 20.4238 36.8349 20.4238Z" fill="#FFF100"/>
-							<path d="M9.0625 23.9995C9.0625 29.4852 13.5196 33.9424 19.0054 33.9424C24.4911 33.9424 28.9482 29.4852 28.9482 23.9995C28.9482 18.5138 24.4911 14.0566 19.0054 14.0566C13.5196 14.0566 9.0625 18.5138 9.0625 23.9995Z" fill="#FFF100"/>
+							<path d="M24 48C10.7265 48 0 37.2735 0 24C0 10.7265 10.7265 0 24 0C37.2735 0 48 10.7265 48 24C48 37.2735 37.2735 48 24 48Z" fill="var(--main-highlight-yellow-background-color, #1a1a1a)"/>
+							<path d="M36.8349 20.4238H32.1328V27.5259H36.8349C38.794 27.5259 40.4104 25.9095 40.4104 23.9504C40.4104 21.9912 38.794 20.4238 36.8349 20.4238Z" fill="var(--main-highlight-yellow-text-color, #fff100)"/>
+							<path d="M9.0625 23.9995C9.0625 29.4852 13.5196 33.9424 19.0054 33.9424C24.4911 33.9424 28.9482 29.4852 28.9482 23.9995C28.9482 18.5138 24.4911 14.0566 19.0054 14.0566C13.5196 14.0566 9.0625 18.5138 9.0625 23.9995Z" fill="var(--main-highlight-yellow-text-color, #fff100)"/>
 						</g>
 					</g>
 					<g class="stack-badge stack-badge-quack">
-						<rect x="222.5" y="14.5" width="71" height="71" rx="15" fill="url(#stack-badge-yellow-q)" stroke="#DECA00"/>
+						<rect x="222.5" y="14.5" width="71" height="71" rx="15" fill="url(#stack-badge-yellow-q)" class="badge-bg"/>
 						<g transform="translate(234 26)">
-							<path d="M24 0C10.7455 0 0 10.7455 0 24C0 37.2545 10.7455 48 24 48C37.2545 48 48 37.2545 48 24C48 10.7455 37.2546 0 24 0Z" fill="#1A1A1A"/>
-							<path d="M29.429 26.7786L27.2813 24.6309C26.5007 23.8496 25.2337 23.8496 24.4531 24.6309C23.6719 25.4115 23.6719 26.6784 24.4531 27.459L26.5976 29.6035L29.429 26.7786Z" fill="#FFF100"/>
-							<path d="M37.6512 35.0015L35.5423 32.8926L32.7109 35.7174L34.8231 37.8296C35.2134 38.2202 35.7254 38.4155 36.2371 38.4155C36.7489 38.4155 37.2609 38.2202 37.6512 37.8296C38.4325 37.049 38.4325 35.7821 37.6512 35.0015Z" fill="#FFF100"/>
-							<path d="M23.9997 35.9525C17.4089 35.9525 12.0469 30.5905 12.0469 24C12.0469 17.4089 17.4089 12.0469 23.9997 12.0469C30.5905 12.0469 35.9528 17.4089 35.9528 24C35.9528 30.5905 30.5905 35.9525 23.9997 35.9525ZM23.9997 15.7135C19.4307 15.7135 15.7135 19.431 15.7135 24C15.7135 28.569 19.4307 32.2858 23.9997 32.2858C28.5687 32.2858 32.2861 28.569 32.2861 24C32.2861 19.431 28.5687 15.7135 23.9997 15.7135Z" fill="#FFF100"/>
+							<path d="M24 0C10.7455 0 0 10.7455 0 24C0 37.2545 10.7455 48 24 48C37.2545 48 48 37.2545 48 24C48 10.7455 37.2546 0 24 0Z" fill="var(--main-highlight-yellow-background-color, #1a1a1a)"/>
+							<path d="M29.429 26.7786L27.2813 24.6309C26.5007 23.8496 25.2337 23.8496 24.4531 24.6309C23.6719 25.4115 23.6719 26.6784 24.4531 27.459L26.5976 29.6035L29.429 26.7786Z" fill="var(--main-highlight-yellow-text-color, #fff100)"/>
+							<path d="M37.6512 35.0015L35.5423 32.8926L32.7109 35.7174L34.8231 37.8296C35.2134 38.2202 35.7254 38.4155 36.2371 38.4155C36.7489 38.4155 37.2609 38.2202 37.6512 37.8296C38.4325 37.049 38.4325 35.7821 37.6512 35.0015Z" fill="var(--main-highlight-yellow-text-color, #fff100)"/>
+							<path d="M23.9997 35.9525C17.4089 35.9525 12.0469 30.5905 12.0469 24C12.0469 17.4089 17.4089 12.0469 23.9997 12.0469C30.5905 12.0469 35.9528 17.4089 35.9528 24C35.9528 30.5905 30.5905 35.9525 23.9997 35.9525ZM23.9997 15.7135C19.4307 15.7135 15.7135 19.431 15.7135 24C15.7135 28.569 19.4307 32.2858 23.9997 32.2858C28.5687 32.2858 32.2861 28.569 32.2861 24C32.2861 19.431 28.5687 15.7135 23.9997 15.7135Z" fill="var(--main-highlight-yellow-text-color, #fff100)"/>
 						</g>
 					</g>
 					<g>
@@ -246,9 +246,9 @@ To add a banner, set banner: true in the front matter and define the banner cont
 						<use class="node-icon" href="#server-04" x="403" y="43" width="14" height="14"/>
 						<text x="422" y="54.5">Server</text>
 						<g transform="translate(493.7 43.3) scale(0.277)">
-							<path d="M24 48C10.7265 48 0 37.2735 0 24C0 10.7265 10.7265 0 24 0C37.2735 0 48 10.7265 48 24C48 37.2735 37.2735 48 24 48Z" fill="#1A1A1A"/>
-							<path d="M36.8349 20.4238H32.1328V27.5259H36.8349C38.794 27.5259 40.4104 25.9095 40.4104 23.9504C40.4104 21.9912 38.794 20.4238 36.8349 20.4238Z" fill="#FFF100"/>
-							<path d="M9.0625 23.9995C9.0625 29.4852 13.5196 33.9424 19.0054 33.9424C24.4911 33.9424 28.9482 29.4852 28.9482 23.9995C28.9482 18.5138 24.4911 14.0566 19.0054 14.0566C13.5196 14.0566 9.0625 18.5138 9.0625 23.9995Z" fill="#FFF100"/>
+							<path d="M24 48C10.7265 48 0 37.2735 0 24C0 10.7265 10.7265 0 24 0C37.2735 0 48 10.7265 48 24C48 37.2735 37.2735 48 24 48Z" fill="var(--main-highlight-yellow-background-color, #1a1a1a)"/>
+							<path d="M36.8349 20.4238H32.1328V27.5259H36.8349C38.794 27.5259 40.4104 25.9095 40.4104 23.9504C40.4104 21.9912 38.794 20.4238 36.8349 20.4238Z" fill="var(--main-highlight-yellow-text-color, #fff100)"/>
+							<path d="M9.0625 23.9995C9.0625 29.4852 13.5196 33.9424 19.0054 33.9424C24.4911 33.9424 28.9482 29.4852 28.9482 23.9995C28.9482 18.5138 24.4911 14.0566 19.0054 14.0566C13.5196 14.0566 9.0625 18.5138 9.0625 23.9995Z" fill="var(--main-highlight-yellow-text-color, #fff100)"/>
 						</g>
 					</g>
 				</svg>
@@ -259,9 +259,9 @@ To add a banner, set banner: true in the front matter and define the banner cont
 				<a class="stack-link" href="{% link docs/current/core_extensions/ducklake.md %}">Explore DuckLake<svg class="icon"><use href="#arrow-right"></use></svg></a>
 				<svg class="stack-diagram" viewBox="0 0 517 100" role="img" aria-label="Clients read and write DuckLake tables backed by a catalog and object storage">
 					<defs>
-						<linearGradient id="stack-badge-blue-dl" x1="0" y1="0" x2="1" y2="1">
-							<stop offset="7%" stop-color="#80CDFD"/>
-							<stop offset="97%" stop-color="#C0E6FD"/>
+						<linearGradient id="stack-badge-blue-dl" class="badge-blue" x1="0" y1="0" x2="1" y2="1">
+							<stop class="stop-from" offset="7%"/>
+							<stop class="stop-to" offset="97%"/>
 						</linearGradient>
 					</defs>
 					<path class="route" d="M124.5 28H180A6 6 0 0 1 186 34A6 6 0 0 0 192 40H222.5M124.5 72H180A6 6 0 0 0 186 66A6 6 0 0 1 192 60H222.5M293.5 40H324A6 6 0 0 0 330 34A6 6 0 0 1 336 28H393.5M293.5 60H324A6 6 0 0 1 330 66A6 6 0 0 0 336 72H393.5"/>
@@ -280,10 +280,10 @@ To add a banner, set banner: true in the front matter and define the banner cont
 						<text x="29" y="76.5">Client</text>
 					</g>
 					<g class="stack-badge stack-badge-dl">
-						<rect x="222.5" y="14.5" width="71" height="71" rx="15" fill="url(#stack-badge-blue-dl)" stroke="#4DBBFF"/>
+						<rect x="222.5" y="14.5" width="71" height="71" rx="15" fill="url(#stack-badge-blue-dl)" class="badge-bg"/>
 						<g transform="translate(234 26)">
-							<path fill="#1a1a1a" d="M24 0C10.768 0 0 10.768 0 24s10.768 24 24 24 24-10.768 24-24S37.232 0 24 0"/>
-							<path fill="#2eafff" fill-rule="evenodd" d="M21.333 12.012c4.364 0 8.16 2.342 10.224 5.836h2.156v.013c2.977 0 5.488 2.394 5.494 5.432h.013c0 3.019-2.476 5.494-5.495 5.494H32.13c-1.807 3.957-5.717 6.75-10.303 6.938l-.493.01-.61-.016c-6.271-.318-11.25-5.494-11.25-11.845v-.013c0-6.556 5.305-11.86 11.86-11.861zm0 3.601c-4.547 0-8.247 3.688-8.247 8.248v.013c0 4.547 3.688 8.247 8.247 8.248a8.25 8.25 0 0 0 7.844-5.697l.405-1.25h4.143c1.007 0 1.874-.852 1.882-1.87h-.013c0-.997-.833-1.843-1.88-1.844h-4.41l-.48-1.048a8.23 8.23 0 0 0-7.49-4.8" clip-rule="evenodd"/>
+							<path fill="var(--lake-highlight-blue-text-color, #1a1a1a)" d="M24 0C10.768 0 0 10.768 0 24s10.768 24 24 24 24-10.768 24-24S37.232 0 24 0"/>
+							<path fill="var(--lake-highlight-blue-background-color, #2eafff)" fill-rule="evenodd" d="M21.333 12.012c4.364 0 8.16 2.342 10.224 5.836h2.156v.013c2.977 0 5.488 2.394 5.494 5.432h.013c0 3.019-2.476 5.494-5.495 5.494H32.13c-1.807 3.957-5.717 6.75-10.303 6.938l-.493.01-.61-.016c-6.271-.318-11.25-5.494-11.25-11.845v-.013c0-6.556 5.305-11.86 11.86-11.861zm0 3.601c-4.547 0-8.247 3.688-8.247 8.248v.013c0 4.547 3.688 8.247 8.247 8.248a8.25 8.25 0 0 0 7.844-5.697l.405-1.25h4.143c1.007 0 1.874-.852 1.882-1.87h-.013c0-.997-.833-1.843-1.88-1.844h-4.41l-.48-1.048a8.23 8.23 0 0 0-7.49-4.8" clip-rule="evenodd"/>
 						</g>
 					</g>
 					<g>
@@ -304,9 +304,9 @@ To add a banner, set banner: true in the front matter and define the banner cont
 				<a class="stack-link" href="{% link docs/current/core_extensions/iceberg/overview.md %}">Explore Iceberg<svg class="icon"><use href="#arrow-right"></use></svg></a>
 				<svg class="stack-diagram" viewBox="0 0 517 100" role="img" aria-label="Clients read and write Apache Iceberg tables backed by a catalog and object storage">
 					<defs>
-						<linearGradient id="stack-badge-blue-ib" x1="0" y1="0" x2="1" y2="1">
-							<stop offset="7%" stop-color="#80CDFD"/>
-							<stop offset="97%" stop-color="#C0E6FD"/>
+						<linearGradient id="stack-badge-blue-ib" class="badge-blue" x1="0" y1="0" x2="1" y2="1">
+							<stop class="stop-from" offset="7%"/>
+							<stop class="stop-to" offset="97%"/>
 						</linearGradient>
 					</defs>
 					<path class="route" d="M124.5 28H180A6 6 0 0 1 186 34A6 6 0 0 0 192 40H222.5M124.5 72H180A6 6 0 0 0 186 66A6 6 0 0 1 192 60H222.5M293.5 40H324A6 6 0 0 0 330 34A6 6 0 0 1 336 28H393.5M293.5 60H324A6 6 0 0 1 330 66A6 6 0 0 0 336 72H393.5"/>
@@ -325,7 +325,7 @@ To add a banner, set banner: true in the front matter and define the banner cont
 						<text x="29" y="76.5">Client</text>
 					</g>
 					<g class="stack-badge stack-badge-dl">
-						<rect x="222.5" y="14.5" width="71" height="71" rx="15" fill="url(#stack-badge-blue-ib)" stroke="#4DBBFF"/>
+						<rect x="222.5" y="14.5" width="71" height="71" rx="15" fill="url(#stack-badge-blue-ib)" class="badge-bg"/>
 						<g transform="translate(234 25.5)">
 							<path fill="#fff" d="m15.906 29.944 7.954.936h.468v-7.954h-.936z"/>
 							<path fill="#287abe" d="M44.124 11.3c1.843 2.058 2.66 4.62 3.245 7.202 3.005 13.298-4.987 26.083-18.304 28.945C14.51 50.575 2.144 40.41.288 27.677a23.88 23.88 0 0 1 2.68-15.236c.235-.435.39-.956.936-1.15l6.873.114-2.344 4.956v.51c1.693 4.911 4.848 8.948 7.843 13.078.322 1.754.083 3.602.864 5.278q3.275 3.698 6.547 7.402c.16.183.354.3.554.028.997-.61 1.288-1.729 1.84-2.64 1.251-2.061 2.612-4.067 3.601-6.28l.304-.483c1.225-.476 1.998-1.573 3.082-2.24a2.11 2.11 0 0 0 1.082-2.06c-.063-2.069-.022-4.155-.025-6.216q.737-.729 1.386-1.537c1.055-1.483 2.717-2.494 3.338-4.306a.56.56 0 0 0 .554-.277c.438-.664-.033-1.221-.224-1.806-.366-1.125-1.067-2.139-1.139-3.363z"/>
