@@ -1206,6 +1206,7 @@ body.landing{
 			}
 			.duckstack-card{
 				width: 100%;
+				min-height: 0;
 			}
 		}
 		section.proof .wrap.flexwrap{
@@ -1231,7 +1232,7 @@ body.landing{
 		section#quickinstall .wrap .install{
 			width: 100%;
 			order: 2;
-			margin-top: 40px;
+			margin-top: 6px;
 		}
 		section#quickinstall .wrap .intro{
 			width: 100%;
@@ -1274,13 +1275,10 @@ body.landing{
 			width: 100%;
 		}
 		section.blog .newstileswrap{
-			row-gap: 40px;
+			row-gap: 32px;
 		}
 		section.blog .postpreview:nth-child(4){
 			display: none;
-		}
-		section.blog .newstileswrap{
-			row-gap: 0;
 		}
 		section.blog + section.upcoming-events{
 			margin-top: 40px;

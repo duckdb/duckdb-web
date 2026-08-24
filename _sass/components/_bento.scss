@@ -73,10 +73,18 @@
 		}
 	}
 
+	.bento-title,
+	p,
+	.bento-link {
+		position: relative;
+		z-index: 1;
+	}
+
 	.bento-graphic {
 		position: absolute;
 		top: 0;
 		right: 0;
+		z-index: 0;
 		pointer-events: none;
 		line-height: 0;
 
@@ -113,5 +121,14 @@
 	.bento-box.wide {
 		flex: 0 0 82%;
 		scroll-snap-align: start;
+	}
+
+	.bento-box.wide {
+		flex-basis: 92%;
+
+		.bento-graphic {
+			right: -50px;
+			opacity: 0.5;
+		}
 	}
 }

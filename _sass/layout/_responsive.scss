@@ -720,6 +720,13 @@
 		margin-bottom: 10px;
 	}
 
+	/* Flex-based tile lists need their own row spacing; the post list on the
+	   blog overview is positioned by Isotope and already has a gutter. */
+	section.blog .newstileswrap,
+	section.upcoming-events .newstileswrap {
+		row-gap: 32px;
+	}
+
 	.library-tiles .librarypreview.postpreview,
 	.everywhere-tiles .everywherepreview.postpreview {
 		display: flex;
