@@ -913,6 +913,10 @@ h5 a {
 				}
 				.textbutton{
 					color: var(--main-text-secondary-color, #666);
+
+					&:hover{
+						color: var(--main-link-hover-color, #998B00);
+					}
 				}
 			}
 			h3{
