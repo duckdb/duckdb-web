@@ -126,6 +126,10 @@
 	.bento-box.wide {
 		flex-basis: 92%;
 
+		p {
+			max-width: 220px;
+		}
+
 		.bento-graphic {
 			right: -50px;
 			opacity: 0.5;
