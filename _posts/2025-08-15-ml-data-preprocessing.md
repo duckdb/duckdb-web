@@ -2,8 +2,8 @@
 layout: post
 title: "Basic Feature Engineering with DuckDB"
 author: Petrica Leuca
-thumb: "/images/blog/thumbs/duckdb-scikit-learn-2.png"
-image: "/images/blog/thumbs/duckdb-scikit-learn-2.svg"
+thumb: "/images/blog/thumbs/duckdb-scikit-learn-2.svg"
+image: "/images/blog/thumbs/duckdb-scikit-learn-2.png"
 excerpt: "In this post, we show how to perform essential machine learning data preprocessing tasks, like missing value imputation, categorical encoding, and feature scaling, directly in DuckDB using SQL. This approach not only simplifies workflows, but also takes advantage of DuckDB’s high-performance, in-process execution engine for fast, efficient data preparation."
 tags: ["using DuckDB"]
 ---

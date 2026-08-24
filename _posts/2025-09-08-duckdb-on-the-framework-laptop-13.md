@@ -2,8 +2,8 @@
 layout: post
 title: "Big Data on the Move: DuckDB on the Framework Laptop 13"
 author: Gábor Szárnyas
-thumb: "/images/blog/thumbs/framework-laptop-13.png"
-image: "/images/blog/thumbs/framework-laptop-13.svg"
+thumb: "/images/blog/thumbs/framework-laptop-13.svg"
+image: "/images/blog/thumbs/framework-laptop-13.png"
 excerpt: "We put DuckDB through its paces on a 12-core ultrabook with 128 GB RAM, running TPC-H queries up to SF10,000."
 tags: ["benchmark"]
 ---

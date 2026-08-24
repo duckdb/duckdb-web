@@ -3,7 +3,7 @@ layout: post
 title: "Announcing Vortex Support in DuckDB"
 author: "Guillermo Sanchez, SpiralDB Team"
 thumb: "/images/blog/thumbs/vortex.jpg"
-image: "/images/blog/thumbs/vortex.svg"
+image: "/images/blog/thumbs/vortex.jpg"
 excerpt: "Vortex is a new columnar file format with a very promising design. SpiralDB and DuckLabs have partnered to give you a very fast experience while reading and writing Vortex files!"
 tags: ["benchmark"]
 ---

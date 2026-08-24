@@ -13,69 +13,77 @@ To add a banner, set banner: true in the front matter and define the banner cont
 {% endcomment %}
 
 <section class="welcome">
-	<div class="hero-bg">
-		{% include hero_animation.html %}
-	</div>
 	<div class="wrap">
 		<div class="hero-content">
-			{% comment %}
-			<p class="tiny hero-eyebrow">DuckDB by DuckLabs</p>
-			{% endcomment %}
-			<h1 class="display-1">Run analytics<br/>where your data lives</h1>
-			<p class="hero-subtitle">
-				DuckDB is a SQL database that runs everywhere<br/>
-				Now with Quack for <a href="{% link quack/index.html %}">client-server support</a>
-			</p>
+			<h1 class="display-2">Your universal <br/>data wrangling tool</h1>
 			<div class="hero-buttons">
 				<a class="button yellow arrow-right" href="/install">Get DuckDB<svg class="icon"><use href="#arrow-right"></use></svg></a>
 				<a class="button transparent arrow-right" href="/docs/current">Read the docs<svg class="icon"><use href="#arrow-right"></use></svg></a>
-			</div>
-			<p class="hero-social-proof">The friendliest analytical database, loved by data teams worldwide</p>
-		</div>
-		<div class="hero-protocol-boxes">
-			<div class="protocol-box">
-				<div class="protocol-title">
-					<svg class="icon"><use href="#puzzle-piece-02"></use></svg>
-					<span>Seamless integrations</span>
-				</div>
-				<div class="protocol-tags">
-					<span class="tag"><a href="{% link docs/current/core_extensions/postgres/overview.md %}">Postgres</a></span>
-					<span class="tag"><a href="{% link docs/current/core_extensions/spatial/overview.md %}">Spatial</a></span>
-					<span class="tag"><a href="{% link docs/current/core_extensions/aws.md %}">AWS</a></span>
-					<span class="tag"><a href="{% link docs/current/core_extensions/azure.md %}">Azure</a></span>
-					<span class="tag"><a href="{% link docs/current/core_extensions/iceberg/overview.md %}">Iceberg</a></span>
-					<span class="tag"><a href="{% link docs/current/core_extensions/overview.md %}">…</a></span>
-				</div>
-			</div>
-			<div class="protocol-box">
-				<div class="protocol-title">
-					<svg class="icon"><use href="#hard-drive"></use></svg>
-					<span>Native clients</span>
-				</div>
-				<div class="protocol-tags">
-					<span class="tag"><a href="{% link docs/current/clients/cli/overview.md %}">CLI</a></span>
-					<span class="tag"><a href="{% link docs/current/clients/python/overview.md %}">Python</a></span>
-					<span class="tag"><a href="{% link docs/current/clients/go.md %}">Go</a></span>
-					<span class="tag"><a href="{% link docs/current/clients/rust.md %}">Rust</a></span>
-					<span class="tag"><a href="{% link docs/current/clients/node_neo/overview.md %}">JavaScript</a></span>
-					<span class="tag"><a href="{% link docs/current/clients/overview.md %}">…</a></span>
-				</div>
-			</div>
-			<div class="protocol-box">
-				<div class="protocol-title">
-					<svg class="icon"><use href="#server-05"></use></svg>
-					<span>Remote access (beta)</span>
-				</div>
-				<div class="protocol-tags">
-					<span class="tag"><a href="{% link docs/current/quack/overview.md %}">Client-server setup</a></span>
-					<span class="tag"><a href="{% post_url 2026-05-12-quack-remote-protocol %}#benchmarks">High performance</a></span>
-				</div>
 			</div>
 		</div>
 	</div>
 </section>
 
 
+<section class="bento">
+	<div class="wrap">
+		<div class="bento-grid">
+			<div class="bento-box wide">
+				<div class="bento-title">
+					<svg class="icon"><use href="#code-square-01"></use></svg>
+					<span>Database anywhere</span>
+				</div>
+				<p>DuckDB is an analytical database system that you can deploy anywhere: from edge devices to servers with hundreds of cores.</p>
+				<a class="bento-link" href="{% link install/index.html %}">Install<svg class="icon"><use href="#arrow-right"></use></svg></a>
+					<div class="bento-graphic"><svg aria-hidden="true" focusable="false" fill="none" height="180" viewBox="0 0 250 180" width="250" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><clipPath id="bento-db-a"><path d="m0 0h250v180h-250z"/></clipPath><g clip-path="url(#bento-db-a)"><path d="m201.211 7.22786c-1.453-.72684-3.165-.72139-4.614.01469l-48.886 24.83795c-.739.3755-1.337.9799-1.705 1.7231l-.355.7182c-.008.0164-.012.0344-.013.0527l-.143 4.4763c-.045 1.4164.693 2.7428 1.92 3.4515l20.967 12.1064c2.787 1.6096 6.224 1.602 9.004-.0199l46.864-27.3365c1.181-.6889 1.907-1.9532 1.907-3.3204v-4.1498c0-.0485-.028-.0928-.071-.1146z" fill="var(--main-body-background-color, #fafafa)" stroke="var(--main-quaternary-color, #ccc)" stroke-linecap="round" stroke-miterlimit="10"/><path d="m201.469 3.48444c-1.59-.91817-3.55-.91541-5.138.00724l-48.8 28.35912c-2.555 1.4844-2.55 5.1754.009 6.6526l20.848 12.038c2.783 1.607 6.213 1.6022 8.992-.0124l46.877-27.2403c2.555-1.4843 2.55-5.1755-.009-6.6527z" fill="var(--main-body-background-color, #fafafa)" stroke="var(--main-quaternary-color, #ccc)" stroke-linecap="round" stroke-miterlimit="10"/><path d="m201.611 8.77586c1.079-.62823 2.842-.62823 3.93 0l10.868 6.34334c1.087.6282 1.09 1.6476.011 2.2758-1.078.6283-2.841.6283-3.929 0l-10.868-6.3433c-1.088-.6282-1.091-1.6476-.012-2.27584z" fill="var(--main-quaternary-color, #ccc)"/><g stroke="var(--main-quaternary-color, #ccc)" stroke-linecap="round" stroke-miterlimit="10"><path d="m99.2191 99.1758 63.2639 30.7642c2.41 1.171 3.939 3.616 3.939 6.295v2.453l-41.788 26.929c-2.225 1.434-5.069 1.49-7.349.144l-59.1809-34.926c-.9142-.54-1.4752-1.522-1.4752-2.584v-3.603c0-1.089.5897-2.092 1.5409-2.621z" fill="var(--main-body-background-color, #fafafa)" stroke-linejoin="round"/><path d="m99.2191 94.7305 67.2029 39.5125-41.795 26.933c-2.222 1.432-5.061 1.49-7.339.151l-59.2878-34.855c-1.9261-1.132-1.9829-3.897-.1048-5.108z" fill="var(--main-body-background-color, #fafafa)" stroke-linejoin="round"/><path d="m99.551 99.4121 58.718 34.7789-23.588 15.095-58.1654-34.743z" fill="var(--main-quinary-color, #e6e6e6)" stroke-linejoin="round"/><path d="m91.1912 130.188 18.9228 11.125-12.7887 8.242-18.923-11.125z" fill="var(--main-quinary-color, #e6e6e6)" stroke-linejoin="round"/><path d="m99.2188 94.7301 67.2032 39.5119v-49.5301c0-2.492-1.325-4.7962-3.479-6.0498l-53.203-30.9677c-4.666-2.7162-10.5212.6502-10.5212 6.0498z" fill="var(--main-body-background-color, #fafafa)" stroke-linejoin="round"/><path d="m27.8821 31.3552c.9309-.5374 2.0781-.5358 3.0074.0042l38.5856 22.4231c1.9935 1.1584 1.9894 4.0391-.0073 5.1919l-13.7727 7.9517-9.6223 5.5567c-.9308.5376-2.0781.536-3.0075-.0041l-38.5877-22.423c-1.99352-1.1584-1.98949-4.0391.00727-5.1919z" fill="var(--main-body-background-color, #fafafa)"/><path d="m9.35987 49.6307v-3.7967l3.93683 1.2933 18.301 8.3773v3.76l-2.839 1.641z" fill="var(--main-body-background-color, #fafafa)" stroke-linejoin="round"/><path d="m9.35987 45.8222 2.83893-1.6386 19.3989 11.2725-2.839 1.641z" fill="var(--main-body-background-color, #fafafa)" stroke-linejoin="round"/><path d="m56.7554 49.783c.874-.5049 2.2888-.5049 3.1581 0s.8645 1.3242-.0095 1.8291c-.8741.5049-2.2912.5049-3.1582 0-.8669-.5049-.8645-1.3242.0096-1.8291z" fill="var(--main-quinary-color, #e6e6e6)"/><path d="m4.55615 46.5037c.87407-.5049 2.2888-.5049 3.15811 0 .86932.5049.86455 1.3242-.00953 1.8291s-2.29118.5049-3.15811 0c-.86694-.5049-.86455-1.3242.00953-1.8291z" fill="var(--main-quinary-color, #e6e6e6)"/><path d="m33.3383 63.2303c.8741-.505 2.2912-.505 3.1581 0 .8669.5049.8646 1.3242-.0095 1.8291s-2.2888.5049-3.1581 0-.8646-1.3242.0095-1.8291z" fill="var(--main-quinary-color, #e6e6e6)"/><path d="m27.7914 33.156c.8741-.5049 2.2912-.5049 3.1581 0 .867.5049.8646 1.3242-.0095 1.8292-.8741.5049-2.2888.5049-3.1581 0-.8693-.505-.8646-1.3243.0095-1.8292z" fill="var(--main-quinary-color, #e6e6e6)"/><path d="m26.0583 47.724 6.3829-3.6869 6.34 3.6845-6.3829 3.6868z" fill="var(--main-quinary-color, #e6e6e6)" stroke-linejoin="round"/><path d="m36.6958 57.1944 4.3156-2.4913 4.2894 2.4936-4.3156 2.4913z" fill="var(--main-quinary-color, #e6e6e6)" stroke-linejoin="round"/><path d="m61.0035 57.8032h9.4457v5.4897l-7.75 4.4728-1.2599-.7335-8.1835-4.7562v-5.5397z" fill="var(--main-body-background-color, #fafafa)" stroke-linejoin="round"/><path d="m50.6636 63.9793 9.4458-.2125v5.6999l-7.75 4.4752-1.2599-.7335-8.1835-4.7563v-5.6494z" fill="var(--main-body-background-color, #fafafa)" stroke-linejoin="round"/><path d="m61.0035 52.0879 8.1834 4.7562 1.2623.7336-7.75 4.4728-1.2599-.7336-8.1835-4.7562z" fill="var(--main-body-background-color, #fafafa)" stroke-linejoin="round"/><path d="m62.7188 62.0684v5.6001" stroke-linejoin="round"/><path d="m52.3711 67.9785v5.6002" stroke-linejoin="round"/><path d="m28.7578 57.2109v3.3887" stroke-linejoin="round"/><path d="m50.6636 58.2617 8.1835 4.7539 1.2623.7335-7.75 4.4752-1.2599-.7336-8.1835-4.7562z" fill="var(--main-body-background-color, #fafafa)" stroke-linejoin="round"/><path d="m342.543 82.2958-71.957 43.0452-73.043-43.0452 73.07-43.0399z" fill="var(--main-body-background-color, #fafafa)" stroke-linejoin="round"/><path d="m197.543 82.2988v90.6172l73.044 40.931v-88.278z" fill="var(--main-body-background-color, #fafafa)" stroke-linejoin="round"/><path d="m320.639 82.2977-50.037 30.0883-50.79-30.0883 50.79-30.0829z" fill="var(--main-quinary-color, #e6e6e6)" stroke-linejoin="round"/><path d="m263.687 192.49-59.218-34.142v8.385l59.218 34.164z" fill="var(--main-quinary-color, #e6e6e6)" stroke-linejoin="round"/><path d="m263.687 178.684-59.218-34.153v8.395l59.218 34.161z" fill="var(--main-quinary-color, #e6e6e6)" stroke-linejoin="round"/><path d="m263.687 164.88-59.218-34.15v8.392l59.218 34.163z" fill="var(--main-quinary-color, #e6e6e6)" stroke-linejoin="round"/><path d="m227.552 108.919c-1.347-.776-2.44-.151-2.446 1.402-.007 1.554 1.078 3.43 2.426 4.206 1.347.777 2.439.152 2.446-1.395.007-1.546-1.086-3.436-2.426-4.213z" fill="var(--main-quinary-color, #e6e6e6)" stroke-linejoin="round"/><path d="m207.619 97.5934c-1.347-.7766-2.44-.1512-2.447 1.3952s1.086 3.4364 2.426 4.2124c1.34.777 2.44.152 2.447-1.402.006-1.553-1.079-3.429-2.426-4.2056z" fill="var(--main-quinary-color, #e6e6e6)" stroke-linejoin="round"/><path d="m217.576 103.393c-1.347-.776-2.44-.158-2.447 1.396-.007 1.553 1.086 3.429 2.426 4.206 1.34.776 2.447.151 2.453-1.389.007-1.539-1.085-3.429-2.432-4.213z" fill="var(--main-quinary-color, #e6e6e6)" stroke-linejoin="round"/></g></g></svg></div>
+			</div>
+			<div class="bento-box">
+				<div class="bento-title">
+					<svg class="icon"><use href="#message-chat-square"></use></svg>
+					<span>Friendly SQL</span>
+				</div>
+				<p>DuckDB has a friendly and expressive PostgreSQL-inspired query language.</p>
+				<a class="bento-link" href="{% link docs/current/sql/dialect/friendly_sql.md %}">Explore feature list<svg class="icon"><use href="#arrow-right"></use></svg></a>
+			</div>
+			<div class="bento-box">
+				<div class="bento-title">
+					<svg class="icon"><use href="#puzzle-piece-02"></use></svg>
+					<span>Extensible</span>
+				</div>
+				<p>Extensions can introduce functions and support for new formats.</p>
+				<a class="bento-link" href="{% link docs/current/core_extensions/overview.md %}">Extensions<svg class="icon"><use href="#arrow-right"></use></svg></a>
+			</div>
+			<div class="bento-box">
+				<div class="bento-title">
+					<svg class="icon"><use href="#terminal-browser"></use></svg>
+					<span>Native clients</span>
+				</div>
+				<p>DuckDB offers idiomatic and performant APIs for all major programming languages.</p>
+				<a class="bento-link" href="{% link docs/current/index.md %}">Clients<svg class="icon"><use href="#arrow-right"></use></svg></a>
+			</div>
+			<div class="bento-box wide">
+				<div class="bento-title">
+					<svg class="icon"><use href="#file-check-02"></use></svg>
+					<span>Speaks your formats</span>
+				</div>
+				<p>Read and write popular formats such as CSV, JSON, Parquet, and Iceberg – locally or in object storage.</p>
+				<a class="bento-link" href="#ecosystem">Ecosystem<svg class="icon"><use href="#arrow-right"></use></svg></a>
+					<div class="bento-graphic"><svg aria-hidden="true" focusable="false" fill="none" height="180" viewBox="0 0 250 180" width="250" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><clipPath id="bento-fmt-a"><path d="m0 0h250v180h-250z"/></clipPath><g clip-path="url(#bento-fmt-a)" stroke="var(--main-quaternary-color, #ccc)"><g stroke-miterlimit="10"><path d="m25.1802 183.38c23.1424.084 61.9005.184 71.8978.058 1.4541-.018 2.405-1.03 2.405-2.485v-71.728c0-1.943-1.575-3.518-3.5179-3.518h-70.7557c-1.943 0-3.518 1.575-3.518 3.518v70.637c0 1.938 1.5512 3.511 3.4888 3.518z" fill="var(--main-body-background-color, #fafafa)"/><path d="m57.7813 138.656v-1.285c0-3.915-1.8966-5.261-5.5674-5.261-3.2425 0-5.445 1.652-5.8732 4.833h-9.4217c.4894-6.179 6.3627-11.685 16.1515-11.685 9.4828 0 14.8667 3.854 14.6831 13.826l-.1223 7.159v3.426c0 3.609.2447 7.464.7341 9.544h-9.9111l-.1224-3.977c-2.4472 3.487-6.3627 4.772-11.0735 4.772-6.2404 0-11.3795-3.671-11.3795-9.666 0-8.076 9.1158-10.707 21.9024-11.686zm.2447 6.73v-.795c-7.0357.673-11.7465 1.468-11.7465 5.016 0 2.142 2.0189 3.549 4.6497 3.549 4.0378 0 7.0968-1.713 7.0968-7.77z"/><path d="m73.9701 159.213v-10.89h11.3183v11.501l-6.2404 9.055h-5.9956l5.3226-9.666z"/><path d="m150.899 89.3914c23.142.0848 61.9.1845 71.898.0585 1.454-.0184 2.405-1.0306 2.405-2.4847v-71.7285c0-1.9429-1.575-3.5179-3.518-3.5179h-70.756c-1.943 0-3.518 1.575-3.518 3.5179v70.6372c0 1.9376 1.551 3.5104 3.489 3.5175z" fill="var(--main-body-background-color, #fafafa)"/><path d="m196.039 68.854 2.554-5.1079" stroke-linecap="round"/><path d="m174.148 45.5056 2.372-4.0134" stroke-linecap="round"/><path d="m197.133 55.3552 2.189-4.0134" stroke-linecap="round"/><path d="m195.309 33.4648 6.749 9.4862" stroke-linecap="round"/><path d="m169.039 54.2617 5.838 12.0401" stroke-linecap="round"/><path d="m173.808 28.1948-11.075 19.1923c-.163.2827-.176.6276-.035.9218l11.293 23.5513c.125.2602.357.4529.636.5276l7.181 1.9251c.253.0679.469.2337.6.4608l2.466 4.2732c.38.6594 1.332.6594 1.713 0l4.691-8.13c.224-.3877.68-.5768 1.113-.4609l3.847 1.0314c.446.1197.916-.0859 1.131-.4951l11.879-22.6c.177-.3381.144-.7482-.085-1.0536l-13.068-17.4118c-.08-.1066-.181-.1959-.296-.2626l-7.11-4.1069c-.15-.0868-.275-.2117-.362-.362l-1.74-3.0159c-.381-.6595-1.333-.6595-1.713 0l-3.73 6.4637c-.224.3877-.68.5767-1.112.4608l-5.111-1.3701c-.433-.1159-.889.0732-1.113.4609z" fill="var(--main-body-background-color, #fafafa)" stroke-linecap="round"/><path d="m169.039 47.6944 5.329-9.0911c.132-.2254.348-.3894.601-.4561l8.901-2.3491c.338-.0892.698.0065.946.2516l5.337 5.2564c.255.2507.354.6193.26.964l-1.475 5.4243" stroke-linecap="round"/><path d="m188.377 25.4375-6.385 10.7631" stroke-linecap="round"/><path d="m204.797 48.0575-6.081 10.5194c-.131.2269-.347.3925-.601.4603l-10.228 2.7373c-.341.0912-.705-.0062-.954-.2556l-6.177-6.1687c-.25-.2499-.348-.6143-.256-.9558l1.7-6.3369" stroke-linecap="round"/><path d="m182.356 74.5117 7.48-13.1346" stroke-linecap="round"/><path d="m157 47.6934h58.376" stroke-linecap="round"/><path d="m143.856 200.118c23.142.085 61.901.184 71.898.058 1.454-.018 2.405-1.03 2.405-2.484v-71.729c0-1.943-1.575-3.518-3.518-3.518h-70.756c-1.943 0-3.518 1.575-3.518 3.518v70.637c0 1.938 1.551 3.511 3.489 3.518z" fill="var(--main-body-background-color, #fafafa)"/><path d="m85.27 133.028c23.142.085 61.901.185 71.898.059 1.454-.019 2.405-1.031 2.405-2.485v-71.7286c0-1.9429-1.575-3.5179-3.518-3.5179h-70.7558c-1.9429 0-3.518 1.575-3.518 3.5179v70.6376c0 1.937 1.5513 3.51 3.4888 3.517z" fill="var(--main-body-background-color, #fafafa)"/></g><path clip-rule="evenodd" d="m118.479 104.875c9.617 13.109 19.028-3.659 19.014-13.7436-.016-11.9228-12.101-18.5865-19.022-18.5865-11.11 0-21.6898 9.1816-21.6898 21.7439 0 13.9632 12.1278 21.6972 21.6898 21.6972-2.164-.311-9.375-1.856-9.472-18.4648-.065-11.233 3.665-15.7208 9.456-13.7465.13.0481 6.388 2.5169 6.388 10.5821 0 8.0312-6.364 10.5182-6.364 10.5182z" fill-rule="evenodd"/><path clip-rule="evenodd" d="m118.467 83.7653c-5.209-2.8189-14.139 3.0471-14.139 13.5374 0 17.1283 12.693 18.6833 14.232 18.6833 11.109 0 21.689-9.182 21.689-21.744 0-13.9631-12.127-21.6975-21.689-21.6975 2.648-.3668 14.274 2.8662 14.274 18.7557 0 10.3618-8.681 16.0028-14.327 13.5928-.13-.048-6.388-2.517-6.388-10.582 0-8.0308 6.348-10.5457 6.348-10.5457z" fill-rule="evenodd"/><path d="m202.894 153.724c.085.02.203.055.351.108.332.118.763.301 1.214.514.45.212.909.45 1.295.673.224.129.41.247.553.346-.037.05-.081.111-.136.18-.316.394-.887 1.025-1.83 2.012-1.882 1.969-5.201 5.311-10.821 10.926-3.67 3.668-7.042 7.011-9.517 9.44-1.238 1.215-2.25 2.2-2.962 2.884-.357.342-.637.606-.831.785-.018.017-.036.032-.053.047-.124-.095-.285-.228-.475-.397-.444-.394-1.02-.953-1.62-1.579l-.861-.9c-.51-.543-.789-.859-.928-1.069-.014-.022-.023-.042-.032-.057.007-.008.014-.016.022-.025 0 0 .007-.008.027-.027.019-.019.045-.043.077-.073.065-.062.152-.145.263-.247.221-.205.53-.487.912-.835.765-.697 1.826-1.658 3.083-2.792 2.514-2.27 5.814-5.236 9.106-8.188 3.293-2.951 6.578-5.889 9.062-8.101 1.242-1.107 2.284-2.031 3.026-2.686.371-.327.667-.586.874-.767.082-.07.148-.128.201-.172zm-17.482 6.657c.111.064.257.156.43.27.366.243.828.572 1.282.91s.894.68 1.218.951c.068.057.13.11.185.158-.083.08-.181.177-.297.285-.405.378-.987.907-1.689 1.536-1.403 1.259-3.278 2.916-5.163 4.565-1.885 1.648-3.779 3.288-5.219 4.515-.72.614-1.325 1.123-1.758 1.478-.165.135-.305.244-.414.329-.094-.081-.213-.183-.347-.306-.37-.336-.863-.803-1.387-1.319h.001c-.566-.558-1.021-1.048-1.321-1.415-.1-.122-.177-.227-.235-.311.105-.092.242-.21.41-.352.416-.351 1.006-.836 1.713-1.41 1.414-1.148 3.291-2.649 5.173-4.139s3.768-2.969 5.2-4.074c.717-.553 1.318-1.012 1.747-1.33.198-.147.356-.261.471-.341zm-12.949 2.01c.098.061.228.15.381.262.33.242.743.572 1.149.913.407.342.798.689 1.085.964.074.072.14.136.195.194-.181.167-.445.395-.773.664-.656.538-1.54 1.227-2.441 1.906s-1.814 1.345-2.529 1.84c-.358.248-.662.449-.886.587-.076.046-.14.081-.191.109-.002-.001-.004-.003-.006-.004-.104-.07-.246-.18-.416-.327-.338-.292-.757-.703-1.173-1.157-.44-.482-.791-.91-1.013-1.222-.042-.059-.077-.112-.107-.158.236-.178.607-.447 1.074-.776.695-.49 1.566-1.091 2.424-1.674.859-.583 1.703-1.147 2.345-1.565.322-.209.589-.38.781-.497.037-.022.071-.042.101-.059zm9.899-12.966c.08.027.191.072.327.137.294.137.665.338 1.033.556.365.217.715.443.968.63-.124.092-.273.205-.448.331-.574.414-1.396.995-2.387 1.689-1.98 1.386-4.626 3.216-7.29 5.043-2.663 1.826-5.342 3.65-7.386 5.024-1.023.687-1.885 1.26-2.507 1.666-.311.203-.56.363-.737.473-.045.027-.086.05-.12.07-.078-.045-.184-.114-.314-.212-.302-.228-.693-.57-1.113-.986l-.231-.229c-.449-.45-.696-.721-.823-.895.038-.026.084-.057.137-.092.171-.114.411-.272.712-.468.601-.391 1.438-.929 2.433-1.565 1.991-1.273 4.61-2.936 7.23-4.592 2.619-1.656 5.239-3.306 7.229-4.55.995-.622 1.832-1.142 2.433-1.512.3-.185.541-.331.712-.433.056-.034.103-.062.142-.085zm10.495-1.215c.108.036.245.092.405.164.318.144.701.341 1.067.548.348.197.669.397.903.561-.111.094-.244.207-.402.335-.496.403-1.202.961-2.049 1.62-1.692 1.32-3.942 3.044-6.2 4.757s-4.523 3.414-6.246 4.686c-.862.636-1.586 1.164-2.106 1.531-.26.184-.464.326-.608.42-.012.008-.024.014-.034.021-.098-.053-.228-.131-.383-.234-.327-.216-.739-.518-1.152-.854-.415-.337-.786-.67-1.05-.931-.065-.065-.122-.123-.17-.175.053-.048.116-.103.188-.163.286-.241.687-.546 1.131-.852.457-.314 1.706-1.186 3.35-2.337l5.722-4.017c2.035-1.432 3.926-2.733 5.333-3.675.704-.471 1.284-.851 1.699-1.112.208-.131.37-.229.483-.293.015-.009.029-.017.041-.023.021.005.047.012.078.023zm-21.291 2.526c.064.03.147.072.246.128.269.153.613.378.953.617.332.235.648.477.875.672-.065.045-.135.097-.215.151-.399.269-.967.637-1.65 1.073-1.364.871-3.179 2.003-5.005 3.126-1.827 1.122-3.661 2.234-5.065 3.064-.702.416-1.294.76-1.722.998-.214.12-.384.211-.503.271-.003.002-.008.003-.011.005-.078-.049-.182-.121-.305-.219-.206-.164-.449-.381-.697-.624l-.21-.218c-.436-.451-.674-.722-.795-.892.102-.063.245-.148.423-.254.371-.222.891-.529 1.515-.895 1.249-.731 2.908-1.695 4.609-2.678 3.207-1.856 6.545-3.77 7.557-4.325zm25.972.045c.009-.001.054-.006.174.03.262.076.687.279 1.5.703.494.257.937.515 1.252.72.038.025.073.05.106.073-.025.025-.051.054-.08.082-.269.262-.659.624-1.133 1.052-.946.856-2.214 1.969-3.499 3.076-1.284 1.106-2.58 2.204-3.585 3.029-.502.413-.929.756-1.242.996-.155.119-.279.209-.367.27-.005-.002-.011-.004-.017-.006-.107-.043-.254-.113-.434-.21-.309-.167-.686-.399-1.075-.663l-.187-.131c-.458-.322-.882-.64-1.193-.89-.06-.048-.114-.092-.163-.134.221-.201.54-.478.932-.811.809-.688 1.915-1.603 3.084-2.555 2.346-1.91 4.918-3.945 5.855-4.593l-.001-.001c.053-.037.07-.036.073-.037zm-16.308-8.783c.231.111.443.227.618.333-.158.096-.346.212-.564.342-.725.432-1.764 1.041-3.013 1.766-2.498 1.452-5.832 3.369-9.176 5.282-3.345 1.912-6.7 3.82-9.238 5.248-1.268.714-2.332 1.307-3.087 1.722-.379.208-.678.37-.886.479-.016.008-.032.015-.046.022-.042-.038-.089-.081-.14-.129-.229-.216-.539-.516-.874-.848l-.309-.308-.002.001-.47-.465.015-.008c0-.001.008-.006.026-.016s.042-.024.072-.041c.061-.034.144-.08.247-.137.207-.113.495-.269.856-.464.721-.389 1.729-.929 2.951-1.582 2.443-1.305 5.739-3.057 9.297-4.943l12.713-6.739zm3.974 2.081c.304.159.58.319.8.454-.278.192-.658.446-1.114.74-.993.641-2.323 1.473-3.668 2.296-1.345.824-2.703 1.638-3.747 2.245-.523.304-.964.554-1.286.727-.161.087-.287.151-.376.192-.001.001-.004.002-.005.002-.005-.002-.011-.003-.016-.006-.078-.032-.181-.081-.304-.149-.245-.135-.543-.325-.827-.533-.274-.202-.52-.408-.696-.578l.021-.015c.265-.182.653-.434 1.139-.737.971-.607 2.312-1.41 3.79-2.263l5.149-2.97zm3.271 1.784c.257.108.586.265.917.436.33.171.655.351.905.506.055.034.104.069.149.099-.344.299-1.263.939-2.154 1.518-.441.286-.863.551-1.188.741-.162.096-.295.169-.39.217h-.002c-.08-.035-.189-.085-.319-.152-.272-.14-.62-.335-.975-.55-.348-.211-.659-.427-.876-.603-.002-.001-.004-.003-.006-.005.057-.044.12-.093.191-.145.343-.255.812-.578 1.304-.901.492-.322 1-.64 1.419-.885.21-.123.395-.226.541-.301.073-.038.134-.067.181-.087l.002-.001c.071.022.172.06.301.113z" stroke-miterlimit="10"/></g></svg></div>
+			</div>
+			<div class="bento-box">
+				<div class="bento-title">
+					<svg class="icon"><use href="#coins-01"></use></svg>
+					<span>Free &amp; open-source</span>
+				</div>
+				<p>DuckDB and related projects are MIT-licensed, governed by the independent DuckDB Foundation.</p>
+				<a class="bento-link" href="https://duckdb.foundation/">Foundation<svg class="icon"><use href="#arrow-right"></use></svg></a>
+			</div>
+		</div>
+	</div>
+</section>
+
+
+{% comment %}
 <section class="proof">
 	<div class="wrap flexwrap">
 		<div class="proof-code demo window">
@@ -112,7 +120,7 @@ To add a banner, set banner: true in the front matter and define the banner cont
 			</div>
 		</div>
 		<div class="proof-text">
-			<h2 class="display-2">Query files and<br/>cloud data directly</h2>
+			<h2 class="display-3">Query files and <br/>cloud data directly</h2>
 			<p>
 				Use DuckDB's friendly but powerful SQL dialect to query any data source (Parquet, JSON, S3, data lakes, etc.)
 			</p>
@@ -120,88 +128,258 @@ To add a banner, set banner: true in the front matter and define the banner cont
 		</div>
 	</div>
 </section>
+{% endcomment %}
 
 
-<section class="whyduckdb">
-	<div class="wrap">
-		<h2 class="display-2">How we designed DuckDB</h2>
-		<div class="icon-grid">
-			<div class="icon-grid-item">
-				<div class="icon-box">
-					<svg class="icon"><use href="#code-circle-03"></use></svg>
-				</div>
-				<h3>Simple</h3>
-				<p>
-					We made sure that you can install DuckDB in just a few seconds,
-					and built it on familiar technologies so you can start using it immediately.
-				</p>
-				<a href="/why_duckdb#simple" class="textbutton arrow-right">Read more<svg class="icon"><use href="#arrow-right"></use></svg></a>
+<section class="duckstack">
+	<div class="wrap flexwrap">
+		<div class="duckstack-intro">
+			<h2 class="display-3">More than a query engine</h2>
+			<p>The Duck stack includes a database,<br/> a protocol, and offers first-class support<br/> for lakehouse formats.</p>
+			<div class="topbar duckstack-tabs">
+				<ul>
+					<div class="select-highlight"></div>
+					<li class="active" data-stack="duckdb">DuckDB</li>
+					<li data-stack="quack">Quack</li>
+					<li data-stack="ducklake">DuckLake</li>
+					<li data-stack="iceberg">Iceberg</li>
+				</ul>
 			</div>
-			<div class="icon-grid-item">
-				<div class="icon-box">
-					<svg class="icon"><use href="#settings-02"></use></svg>
-				</div>
-				<h3>Feature-rich</h3>
-				<p>
-					We support a wide range of industry standard technologies (e.g., Parquet, SQL, S3 API)
-					and combine them into a seamless user experience.
-				</p>
-				<a href="/why_duckdb#feature-rich" class="textbutton arrow-right">Read more<svg class="icon"><use href="#arrow-right"></use></svg></a>
+		</div>
+		<div class="duckstack-card">
+			<div class="stack-panel active" data-stack="duckdb">
+				<h3 class="title-2">DuckDB</h3>
+				<p>An analytical SQL database that can run in-process. Simple, fast, and portable. It is the stack builds on.</p>
+				<a class="stack-link" href="/docs/current">Explore DuckDB<svg class="icon"><use href="#arrow-right"></use></svg></a>
+				<svg class="stack-diagram" viewBox="0 0 517 120" role="img" aria-label="DuckDB reads a CSV file and writes a database file and Parquet">
+					<defs>
+						<linearGradient id="stack-badge-yellow" class="badge-yellow" x1="0" y1="0" x2="1" y2="1">
+							<stop class="stop-from" offset="7%"/>
+							<stop class="stop-to" offset="97%"/>
+						</linearGradient>
+					</defs>
+					<path class="route" d="M124.5 40.5H195.5M322.5 40.5H393.5M258.5 71.5V88.5"/>
+					<circle class="dot dot-duckdb" r="3"/>
+					<g>
+						<rect class="node" x="0.5" y="24.5" width="124" height="31" rx="6"/>
+						<use class="node-icon" href="#file-04" x="11" y="33" width="14" height="14"/>
+						<text x="30" y="44.5">CSV file</text>
+					</g>
+					<g>
+						<rect class="node" x="195.5" y="2.5" width="127" height="69" rx="8"/>
+						<use class="node-icon" href="#browser" x="205" y="30" width="14" height="14"/>
+						<text x="225" y="41.5">App</text>
+						<g class="stack-badge stack-badge-duckdb">
+						<rect x="258.5" y="7.5" width="59" height="59" rx="6" fill="url(#stack-badge-yellow)" class="badge-bg"/>
+						<g transform="translate(264 13)">
+							<path d="M24 48C10.7265 48 0 37.2735 0 24C0 10.7265 10.7265 0 24 0C37.2735 0 48 10.7265 48 24C48 37.2735 37.2735 48 24 48Z" fill="var(--main-highlight-yellow-background-color, #1a1a1a)"/>
+							<path d="M36.8349 20.4238H32.1328V27.5259H36.8349C38.794 27.5259 40.4104 25.9095 40.4104 23.9504C40.4104 21.9912 38.794 20.4238 36.8349 20.4238Z" fill="var(--main-highlight-yellow-text-color, #fff100)"/>
+							<path d="M9.0625 23.9995C9.0625 29.4852 13.5196 33.9424 19.0054 33.9424C24.4911 33.9424 28.9482 29.4852 28.9482 23.9995C28.9482 18.5138 24.4911 14.0566 19.0054 14.0566C13.5196 14.0566 9.0625 18.5138 9.0625 23.9995Z" fill="var(--main-highlight-yellow-text-color, #fff100)"/>
+						</g>
+						</g>
+					</g>
+					<g>
+						<rect class="node" x="393.5" y="24.5" width="123" height="31" rx="6"/>
+						<use class="node-icon" href="#file-04" x="404" y="33" width="14" height="14"/>
+						<text x="423" y="44.5">Parquet</text>
+						<g transform="translate(490 32.5)"><g class="check check-parquet">
+							<path d="M7.9987 14.6673C11.6806 14.6673 14.6654 11.6826 14.6654 8.00065C14.6654 4.31875 11.6806 1.33398 7.9987 1.33398C4.3168 1.33398 1.33203 4.31875 1.33203 8.00065C1.33203 11.6826 4.3168 14.6673 7.9987 14.6673Z" fill="#2EAFFF"/>
+							<path d="M5 8L7 10L11 6" fill="none" stroke="white" stroke-linecap="round" stroke-linejoin="round"/>
+						</g></g>
+					</g>
+					<g>
+						<rect class="node" x="179.5" y="88.5" width="158" height="31" rx="6"/>
+						<use class="node-icon" href="#database-01" x="191" y="97" width="14" height="14"/>
+						<text x="210" y="108.5">Database file</text>
+						<g transform="translate(309.5 96.5)"><g class="check check-db">
+							<path d="M7.9987 14.6673C11.6806 14.6673 14.6654 11.6826 14.6654 8.00065C14.6654 4.31875 11.6806 1.33398 7.9987 1.33398C4.3168 1.33398 1.33203 4.31875 1.33203 8.00065C1.33203 11.6826 4.3168 14.6673 7.9987 14.6673Z" fill="#2EAFFF"/>
+							<path d="M5 8L7 10L11 6" fill="none" stroke="white" stroke-linecap="round" stroke-linejoin="round"/>
+						</g></g>
+					</g>
+				</svg>
 			</div>
-			<div class="icon-grid-item">
-				<div class="icon-box">
-					<svg class="icon"><use href="#flash"></use></svg>
-				</div>
-				<h3>Fast</h3>
+			<div class="stack-panel" data-stack="quack">
+				<h3 class="title-2">Quack</h3>
 				<p>
-					We built DuckDB on a fast columnar storage engine.
-					DuckDB can spill to disk to support workloads far larger than the available system memory.
+					The client-server protocol for DuckDB. With Quack, both your client and the server are full-fledged DuckDB instances, so you can access a remote database but also run computations on the client side.
 				</p>
-				<a href="/why_duckdb#fast" class="textbutton arrow-right">Read more<svg class="icon"><use href="#arrow-right"></use></svg></a>
+				<a class="stack-link" href="{% link docs/current/quack/overview.md %}">Explore Quack<svg class="icon"><use href="#arrow-right"></use></svg></a>
+				<svg class="stack-diagram" viewBox="0 0 517 100" role="img" aria-label="Apps and notebooks query a remote DuckDB server through Quack">
+					<defs>
+						<linearGradient id="stack-badge-yellow-q" class="badge-yellow" x1="0" y1="0" x2="1" y2="1">
+							<stop class="stop-from" offset="7%"/>
+							<stop class="stop-to" offset="97%"/>
+						</linearGradient>
+					</defs>
+					<path class="route" d="M124.5 28H180A6 6 0 0 1 186 34A6 6 0 0 0 192 40H222.5M124.5 72H180A6 6 0 0 0 186 66A6 6 0 0 1 192 60H222.5M294.5 50H393.5"/>
+					<circle class="dot dot-quack-app" r="3"/>
+					<circle class="dot dot-quack-nb" r="3"/>
+					<circle class="dot dot-quack-srv" r="3"/>
+					<circle class="dot dot-quack-srv2" r="3"/>
+					<g>
+						<rect class="node" x="0.5" y="12.5" width="124" height="31" rx="6"/>
+						<use class="node-icon" href="#browser" x="10" y="21" width="14" height="14"/>
+						<text x="29" y="32.5">App</text>
+						<g transform="translate(100.7 21.3) scale(0.277)">
+							<path d="M24 48C10.7265 48 0 37.2735 0 24C0 10.7265 10.7265 0 24 0C37.2735 0 48 10.7265 48 24C48 37.2735 37.2735 48 24 48Z" fill="var(--main-highlight-yellow-background-color, #1a1a1a)"/>
+							<path d="M36.8349 20.4238H32.1328V27.5259H36.8349C38.794 27.5259 40.4104 25.9095 40.4104 23.9504C40.4104 21.9912 38.794 20.4238 36.8349 20.4238Z" fill="var(--main-highlight-yellow-text-color, #fff100)"/>
+							<path d="M9.0625 23.9995C9.0625 29.4852 13.5196 33.9424 19.0054 33.9424C24.4911 33.9424 28.9482 29.4852 28.9482 23.9995C28.9482 18.5138 24.4911 14.0566 19.0054 14.0566C13.5196 14.0566 9.0625 18.5138 9.0625 23.9995Z" fill="var(--main-highlight-yellow-text-color, #fff100)"/>
+						</g>
+					</g>
+					<g>
+						<rect class="node" x="0.5" y="56.5" width="124" height="31" rx="6"/>
+						<use class="node-icon" href="#book-open-01" x="10" y="65" width="14" height="14"/>
+						<text x="29" y="76.5">Notebook</text>
+						<g transform="translate(100.7 65.3) scale(0.277)">
+							<path d="M24 48C10.7265 48 0 37.2735 0 24C0 10.7265 10.7265 0 24 0C37.2735 0 48 10.7265 48 24C48 37.2735 37.2735 48 24 48Z" fill="var(--main-highlight-yellow-background-color, #1a1a1a)"/>
+							<path d="M36.8349 20.4238H32.1328V27.5259H36.8349C38.794 27.5259 40.4104 25.9095 40.4104 23.9504C40.4104 21.9912 38.794 20.4238 36.8349 20.4238Z" fill="var(--main-highlight-yellow-text-color, #fff100)"/>
+							<path d="M9.0625 23.9995C9.0625 29.4852 13.5196 33.9424 19.0054 33.9424C24.4911 33.9424 28.9482 29.4852 28.9482 23.9995C28.9482 18.5138 24.4911 14.0566 19.0054 14.0566C13.5196 14.0566 9.0625 18.5138 9.0625 23.9995Z" fill="var(--main-highlight-yellow-text-color, #fff100)"/>
+						</g>
+					</g>
+					<g class="stack-badge stack-badge-quack">
+						<rect x="222.5" y="14.5" width="71" height="71" rx="15" fill="url(#stack-badge-yellow-q)" class="badge-bg"/>
+						<g transform="translate(234 26)">
+							<path d="M24 0C10.7455 0 0 10.7455 0 24C0 37.2545 10.7455 48 24 48C37.2545 48 48 37.2545 48 24C48 10.7455 37.2546 0 24 0Z" fill="var(--main-highlight-yellow-background-color, #1a1a1a)"/>
+							<path d="M29.429 26.7786L27.2813 24.6309C26.5007 23.8496 25.2337 23.8496 24.4531 24.6309C23.6719 25.4115 23.6719 26.6784 24.4531 27.459L26.5976 29.6035L29.429 26.7786Z" fill="var(--main-highlight-yellow-text-color, #fff100)"/>
+							<path d="M37.6512 35.0015L35.5423 32.8926L32.7109 35.7174L34.8231 37.8296C35.2134 38.2202 35.7254 38.4155 36.2371 38.4155C36.7489 38.4155 37.2609 38.2202 37.6512 37.8296C38.4325 37.049 38.4325 35.7821 37.6512 35.0015Z" fill="var(--main-highlight-yellow-text-color, #fff100)"/>
+							<path d="M23.9997 35.9525C17.4089 35.9525 12.0469 30.5905 12.0469 24C12.0469 17.4089 17.4089 12.0469 23.9997 12.0469C30.5905 12.0469 35.9528 17.4089 35.9528 24C35.9528 30.5905 30.5905 35.9525 23.9997 35.9525ZM23.9997 15.7135C19.4307 15.7135 15.7135 19.431 15.7135 24C15.7135 28.569 19.4307 32.2858 23.9997 32.2858C28.5687 32.2858 32.2861 28.569 32.2861 24C32.2861 19.431 28.5687 15.7135 23.9997 15.7135Z" fill="var(--main-highlight-yellow-text-color, #fff100)"/>
+						</g>
+					</g>
+					<g>
+						<rect class="node" x="393.5" y="34.5" width="123" height="31" rx="6"/>
+						<use class="node-icon" href="#server-04" x="403" y="43" width="14" height="14"/>
+						<text x="422" y="54.5">Server</text>
+						<g transform="translate(493.7 43.3) scale(0.277)">
+							<path d="M24 48C10.7265 48 0 37.2735 0 24C0 10.7265 10.7265 0 24 0C37.2735 0 48 10.7265 48 24C48 37.2735 37.2735 48 24 48Z" fill="var(--main-highlight-yellow-background-color, #1a1a1a)"/>
+							<path d="M36.8349 20.4238H32.1328V27.5259H36.8349C38.794 27.5259 40.4104 25.9095 40.4104 23.9504C40.4104 21.9912 38.794 20.4238 36.8349 20.4238Z" fill="var(--main-highlight-yellow-text-color, #fff100)"/>
+							<path d="M9.0625 23.9995C9.0625 29.4852 13.5196 33.9424 19.0054 33.9424C24.4911 33.9424 28.9482 29.4852 28.9482 23.9995C28.9482 18.5138 24.4911 14.0566 19.0054 14.0566C13.5196 14.0566 9.0625 18.5138 9.0625 23.9995Z" fill="var(--main-highlight-yellow-text-color, #fff100)"/>
+						</g>
+					</g>
+				</svg>
 			</div>
-			<div class="icon-grid-item">
-				<div class="icon-box">
-					<svg class="icon"><use href="#wallet-02"></use></svg>
-				</div>
-				<h3>Free</h3>
+			<div class="stack-panel" data-stack="ducklake">
+				<h3 class="title-2">DuckLake</h3>
 				<p>
-					We release DuckDB, its core extensions and the DuckLake format under MIT, a permissive <nobr>open-source</nobr> license.
+					DuckLake is a lakehouse format built on SQL.
+					Save your data in object storage and use a SQL database as a catalog for scalability, simplicity, and speed.
 				</p>
-				<a href="/why_duckdb#free" class="textbutton arrow-right">Read more<svg class="icon"><use href="#arrow-right"></use></svg></a>
+				<a class="stack-link" href="{% link docs/current/core_extensions/ducklake.md %}">Explore DuckLake<svg class="icon"><use href="#arrow-right"></use></svg></a>
+				<svg class="stack-diagram" viewBox="0 0 517 100" role="img" aria-label="Clients read and write DuckLake tables backed by a catalog and object storage">
+					<defs>
+						<linearGradient id="stack-badge-blue-dl" class="badge-blue" x1="0" y1="0" x2="1" y2="1">
+							<stop class="stop-from" offset="7%"/>
+							<stop class="stop-to" offset="97%"/>
+						</linearGradient>
+					</defs>
+					<path class="route" d="M124.5 28H180A6 6 0 0 1 186 34A6 6 0 0 0 192 40H222.5M124.5 72H180A6 6 0 0 0 186 66A6 6 0 0 1 192 60H222.5M293.5 40H324A6 6 0 0 0 330 34A6 6 0 0 1 336 28H393.5M293.5 60H324A6 6 0 0 1 330 66A6 6 0 0 0 336 72H393.5"/>
+					<circle class="dot dot-dl-c1" r="3"/>
+					<circle class="dot dot-dl-c2" r="3"/>
+					<circle class="dot dot-dl-cat" r="3"/>
+					<circle class="dot dot-dl-sto" r="3"/>
+					<g>
+						<rect class="node" x="0.5" y="12.5" width="124" height="31" rx="6"/>
+						<use class="node-icon" href="#terminal-browser" x="10" y="21" width="14" height="14"/>
+						<text x="29" y="32.5">Client</text>
+					</g>
+					<g>
+						<rect class="node" x="0.5" y="56.5" width="124" height="31" rx="6"/>
+						<use class="node-icon" href="#terminal-browser" x="10" y="65" width="14" height="14"/>
+						<text x="29" y="76.5">Client</text>
+					</g>
+					<g class="stack-badge stack-badge-dl">
+						<rect x="222.5" y="14.5" width="71" height="71" rx="15" fill="url(#stack-badge-blue-dl)" class="badge-bg"/>
+						<g transform="translate(234 26)">
+							<path fill="var(--lake-highlight-blue-text-color, #1a1a1a)" d="M24 0C10.768 0 0 10.768 0 24s10.768 24 24 24 24-10.768 24-24S37.232 0 24 0"/>
+							<path fill="var(--lake-highlight-blue-background-color, #2eafff)" fill-rule="evenodd" d="M21.333 12.012c4.364 0 8.16 2.342 10.224 5.836h2.156v.013c2.977 0 5.488 2.394 5.494 5.432h.013c0 3.019-2.476 5.494-5.495 5.494H32.13c-1.807 3.957-5.717 6.75-10.303 6.938l-.493.01-.61-.016c-6.271-.318-11.25-5.494-11.25-11.845v-.013c0-6.556 5.305-11.86 11.86-11.861zm0 3.601c-4.547 0-8.247 3.688-8.247 8.248v.013c0 4.547 3.688 8.247 8.247 8.248a8.25 8.25 0 0 0 7.844-5.697l.405-1.25h4.143c1.007 0 1.874-.852 1.882-1.87h-.013c0-.997-.833-1.843-1.88-1.844h-4.41l-.48-1.048a8.23 8.23 0 0 0-7.49-4.8" clip-rule="evenodd"/>
+						</g>
+					</g>
+					<g>
+						<rect class="node" x="393.5" y="12.5" width="123" height="31" rx="6"/>
+						<use class="node-icon" href="#database-01" x="405" y="21" width="14" height="14"/>
+						<text x="423" y="32.5">Catalog</text>
+					</g>
+					<g>
+						<rect class="node" x="393.5" y="56.5" width="123" height="31" rx="6"/>
+						<use class="node-icon" href="#hard-drive" x="405" y="65" width="14" height="14"/>
+						<text x="423" y="76.5">Storage</text>
+					</g>
+				</svg>
 			</div>
-			<div class="icon-grid-item">
-				<div class="icon-box">
-					<svg class="icon"><use href="#luggage-02"></use></svg>
-				</div>
-				<h3>Portable</h3>
-				<p>
-					We distribute DuckDB for all popular operating systems
-					and ship idiomatic client APIs for major programming languages.
-				</p>
-				<a href="/why_duckdb#portable" class="textbutton arrow-right">Read more<svg class="icon"><use href="#arrow-right"></use></svg></a>
-			</div>
-			<div class="icon-grid-item">
-				<div class="icon-box">
-					<svg class="icon"><use href="#puzzle-piece-02"></use></svg>
-				</div>
-				<h3>Extensible</h3>
-				<p>
-					We created a powerful extension mechanism that enables adding new features.
-					In fact, we implemented many core DuckDB features as extensions.
-				</p>
-				<a href="/why_duckdb#extensible" class="textbutton arrow-right">Read more<svg class="icon"><use href="#arrow-right"></use></svg></a>
+			<div class="stack-panel" data-stack="iceberg">
+				<h3 class="title-2">Iceberg</h3>
+				<p>DuckDB has first-class Apache Iceberg support: you can read and write Iceberg tables directly from DuckDB with high performance.</p>
+				<a class="stack-link" href="{% link docs/current/core_extensions/iceberg/overview.md %}">Explore Iceberg<svg class="icon"><use href="#arrow-right"></use></svg></a>
+				<svg class="stack-diagram" viewBox="0 0 517 100" role="img" aria-label="Clients read and write Apache Iceberg tables backed by a catalog and object storage">
+					<defs>
+						<linearGradient id="stack-badge-blue-ib" class="badge-blue" x1="0" y1="0" x2="1" y2="1">
+							<stop class="stop-from" offset="7%"/>
+							<stop class="stop-to" offset="97%"/>
+						</linearGradient>
+					</defs>
+					<path class="route" d="M124.5 28H180A6 6 0 0 1 186 34A6 6 0 0 0 192 40H222.5M124.5 72H180A6 6 0 0 0 186 66A6 6 0 0 1 192 60H222.5M293.5 40H324A6 6 0 0 0 330 34A6 6 0 0 1 336 28H393.5M293.5 60H324A6 6 0 0 1 330 66A6 6 0 0 0 336 72H393.5"/>
+					<circle class="dot dot-dl-c1" r="3"/>
+					<circle class="dot dot-dl-c2" r="3"/>
+					<circle class="dot dot-dl-cat" r="3"/>
+					<circle class="dot dot-dl-sto" r="3"/>
+					<g>
+						<rect class="node" x="0.5" y="12.5" width="124" height="31" rx="6"/>
+						<use class="node-icon" href="#terminal-browser" x="10" y="21" width="14" height="14"/>
+						<text x="29" y="32.5">Client</text>
+					</g>
+					<g>
+						<rect class="node" x="0.5" y="56.5" width="124" height="31" rx="6"/>
+						<use class="node-icon" href="#terminal-browser" x="10" y="65" width="14" height="14"/>
+						<text x="29" y="76.5">Client</text>
+					</g>
+					<g class="stack-badge stack-badge-dl">
+						<rect x="222.5" y="14.5" width="71" height="71" rx="15" fill="url(#stack-badge-blue-ib)" class="badge-bg"/>
+						<g transform="translate(234 25.5)">
+							<path fill="#fff" d="m15.906 29.944 7.954.936h.468v-7.954h-.936z"/>
+							<path fill="#287abe" d="M44.124 11.3c1.843 2.058 2.66 4.62 3.245 7.202 3.005 13.298-4.987 26.083-18.304 28.945C14.51 50.575 2.144 40.41.288 27.677a23.88 23.88 0 0 1 2.68-15.236c.235-.435.39-.956.936-1.15l6.873.114-2.344 4.956v.51c1.693 4.911 4.848 8.948 7.843 13.078.322 1.754.083 3.602.864 5.278q3.275 3.698 6.547 7.402c.16.183.354.3.554.028.997-.61 1.288-1.729 1.84-2.64 1.251-2.061 2.612-4.067 3.601-6.28l.304-.483c1.225-.476 1.998-1.573 3.082-2.24a2.11 2.11 0 0 0 1.082-2.06c-.063-2.069-.022-4.155-.025-6.216q.737-.729 1.386-1.537c1.055-1.483 2.717-2.494 3.338-4.306a.56.56 0 0 0 .554-.277c.438-.664-.033-1.221-.224-1.806-.366-1.125-1.067-2.139-1.139-3.363z"/>
+							<path fill="#b8e1f2" d="m10.78 11.404-6.874-.113c.906-2.358 2.698-4.045 4.549-5.596C11.64 3.02 15.295 1.176 19.42.43 26.595-.846 33.122.708 38.898 5.18c2.153 1.663 4.106 3.547 5.23 6.112l-6.094.133-4.987-.061V9.68l3.574-.02.116-.063-.113-.188a6.03 6.03 0 0 0-4.583-1.715c-4.914.116-9.832.047-14.746.036-1.724 0-3.158.737-4.54 1.648-1.275.056-1.297 1.144-1.627 1.976z"/>
+							<path fill="#b6e0f2" d="M8.438 16.865v-.51c2.872-.853 5.51-2.272 8.213-3.519.857-.396 2.037-.362 2.494-1.46 1.645.07 3.324-.277 4.94.217l.038 11.663h-.254c-3.156-1.35-6.29-2.751-9.473-4.028-1.975-.784-3.784-2.037-5.959-2.363"/>
+							<path fill="#90d4f0" d="M8.438 16.865c2.171.324 3.98 1.574 5.967 2.372 3.183 1.277 6.316 2.679 9.471 4.028-.251 1.183-1.423 1.465-2.16 2.16-1.682 1.59-3.693 2.801-5.297 4.489a.4.4 0 0 1-.138.033c-2.993-4.13-6.148-8.164-7.843-13.082"/>
+							<path fill="#4d8ac8" d="M34.133 22.727c0 2.072-.039 4.155.025 6.216a2.11 2.11 0 0 1-1.083 2.058c-1.084.668-1.856 1.765-3.081 2.242-1.308-1.662-2.122-3.646-3.294-5.391-.797-1.186-1.128-2.715-2.493-3.491q0-.393.014-.787l.529-.277c.238.294.573.255.883.227q4.242-.387 8.5-.797"/>
+							<path fill="#b6e0f2" d="M17.143 35.23c-.781-1.68-.554-3.524-.862-5.28a.4.4 0 0 0 .139-.034c2.493.105 4.986.169 7.463.554q0 2.91-.014 5.818-.75-.03-1.49-.16c-1.75-.272-3.44-.893-5.236-.898"/>
+							<path fill="#58afdd" d="M23.863 36.286q0-2.91.013-5.818c.574-2.012.09-4.078.314-6.095 1.368.776 1.701 2.308 2.493 3.49 1.175 1.749 1.986 3.721 3.294 5.392l-.305.482-5.571 2.562q-.12.006-.238-.014"/>
+							<path fill="#4d8ac8" d="m33.035 11.371 4.987.061c.072 1.224.773 2.239 1.139 3.363.19.588.661 1.142.224 1.806a.6.6 0 0 0-.555.277c-1.038.194-1.939.746-2.878 1.167-.939.42-1.772 1.125-2.884 1.094q0-3.855-.013-7.71z"/>
+							<path fill="#266fa8" d="M33.072 19.141c1.11.03 1.94-.675 2.884-1.094.945-.418 1.84-.972 2.879-1.166-.624 1.814-2.283 2.823-3.338 4.305a18 18 0 0 1-1.385 1.538l-8.505.8c-.31.028-.646.067-.884-.227 1.958-.906 3.93-1.781 5.868-2.732.858-.415 1.852-.612 2.481-1.424"/>
+							<path fill="#90d4f0" d="M23.869 36.286q.121.012.246 0 .066 3.18.13 6.371c-.2.277-.39.153-.554-.027a4842 4842 0 0 1-6.546-7.392c1.792 0 3.482.626 5.233.898q.74.126 1.49.15M19.157 11.384c-.469 1.108-1.649 1.063-2.494 1.46-2.703 1.246-5.341 2.665-8.214 3.518l2.347-4.956.344-.045z"/>
+							<path fill="#266fa8" d="m24.24 42.65-.13-6.373 5.57-2.562c-.988 2.216-2.349 4.22-3.6 6.28-.538.923-.843 2.042-1.84 2.654M38.84 16.886a.6.6 0 0 1 .555-.277.56.56 0 0 1-.555.277"/>
+							<path fill="#f4fafd" d="M12.75 9.386c1.385-.911 2.818-1.662 4.54-1.648 4.918 0 9.835.08 14.747-.036a6.04 6.04 0 0 1 4.588 1.718v.255l-3.602.019H14.49c-.598 0-1.203.036-1.74-.308"/>
+							<path fill="#e9f6fd" d="M12.75 9.385c.537.343 1.142.305 1.74.305h18.533v1.681l.023.061-8.952.17c-1.629-.491-3.294-.148-4.939-.217l-8.034-.02c.335-.836.355-1.925 1.63-1.98M36.621 9.661v-.255l.113.189z"/>
+							<path fill="#68c1ea" d="m24.094 11.601 8.968-.164q0 3.856.013 7.71c-.629.812-1.62 1.009-2.47 1.427-1.94.95-3.91 1.826-5.868 2.732l-.53.277-.074-.313z"/>
+						</g>
+					</g>
+					<g>
+						<rect class="node" x="393.5" y="12.5" width="123" height="31" rx="6"/>
+						<use class="node-icon" href="#database-01" x="405" y="21" width="14" height="14"/>
+						<text x="423" y="32.5">Catalog</text>
+					</g>
+					<g>
+						<rect class="node" x="393.5" y="56.5" width="123" height="31" rx="6"/>
+						<use class="node-icon" href="#hard-drive" x="405" y="65" width="14" height="14"/>
+						<text x="423" y="76.5">Storage</text>
+					</g>
+				</svg>
 			</div>
 		</div>
 	</div>
 </section>
 
-{% include ecosystem_diagram.html title="Built for your stack" subtitle="DuckDB has native clients and integrations with the data ecosystem" %}
+
+{% include ecosystem_diagram.html title="Works with your stack" subtitle="DuckDB integrates directly with languages, protocols and data formats." %}
 
 {% include quick_installation.html %}
 
 <section class="blog">
 	<div class="wrap">
-		<h2 class="display-2">Read our engineering blog</h2>
+		<div class="blog-header">
+			<h2 class="display-3">Read our engineering blog</h2>
+			<a href="{{ site.url }}/news" class="textbutton arrow-right">
+				All blog posts <svg class="icon"><use href="#arrow-right"></use></svg>
+			</a>
+		</div>
 		<div class="newstileswrap">
 			{% for post in site.posts limit:3 %}
 				{% assign random_number = forloop.index | modulo: 3 | plus: 1 %}
@@ -209,9 +387,6 @@ To add a banner, set banner: true in the front matter and define the banner cont
 				{% include post_card.html item=post default_thumb=placeholder_thumb %}
 			{% endfor %}
 		</div>
-		<a href="{{ site.url }}/news" class="button transparent arrow-right">
-			All blog posts <svg class="icon"><use href="#arrow-right"></use></svg>
-		</a>
 	</div>
 </section>
 
