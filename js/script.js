@@ -1003,7 +1003,25 @@ $('body.documentation #main_content_wrap a.externallink').each(function () {
 			updateInstallation($(this));
 		});
 	}
-	
+
+	// DUCKSTACK TABS ON LANDING/HOME PAGE
+	if ($("section.duckstack .topbar").length) {
+		const $stackTopbar = $("section.duckstack .topbar");
+		const $stackItems = $stackTopbar.find("> ul > li");
+		const $stackPanels = $("section.duckstack .stack-panel");
+
+		updateHighlight($stackTopbar, $stackItems.filter(".active"));
+
+		$stackItems.click(function () {
+			$stackItems.removeClass("active");
+			$(this).addClass("active");
+			updateHighlight($stackTopbar, $(this));
+			const stack = $(this).attr("data-stack");
+			$stackPanels.removeClass("active");
+			$stackPanels.filter(`[data-stack='${stack}']`).addClass("active");
+		});
+	}
+
 	/** CUSTOM SELECT ON HOME **/
 	function closeCustomSelects() {
 		$('div.select-styled.active').removeClass('active').attr('aria-expanded', 'false');
