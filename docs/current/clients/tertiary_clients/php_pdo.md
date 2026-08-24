@@ -52,6 +52,12 @@ php -r 'print_r((new PDO("duckdb::memory:"))->query("SELECT 42 as n")->fetch(PDO
 # )
 ```
 
+## Integration into Laravel & Symfony
+
+Laravel Eloquent driver for DuckDB: [laravel-duckdb](https://github.com/thomas-0816/laravel-duckdb)
+
+Doctrine DBAL for DuckDB: [doctrine-dbal-duckdb](https://github.com/thomas-0816/doctrine-dbal-duckdb)
+
 ## Examples
 
 ### Basic usage
