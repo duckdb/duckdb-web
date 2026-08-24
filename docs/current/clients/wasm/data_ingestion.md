@@ -35,6 +35,8 @@ await conn.close();
 
 [Apache Arrow](https://arrow.apache.org/) is DuckDB-Wasm's native data protocol, so Arrow data can be inserted directly. Pass an existing `arrow.Table` to `insertArrowTable()`:
 
+> Warning Use the same major version of the [`apache-arrow`](https://www.npmjs.com/package/apache-arrow) package that DuckDB-Wasm depends on (currently `^17`). A newer major version causes Arrow inserts such as `insertArrowTable()` and `insertArrowFromIPCStream()` to fail — often silently, leaving the target table uncreated. Check DuckDB-Wasm's `apache-arrow` dependency and pin your `apache-arrow` install to match.
+
 ```ts
 import { tableFromArrays } from 'apache-arrow';
 
@@ -74,6 +76,8 @@ await Promise.all(streamInserts);
 Register the CSV text as a file, then load it with `insertCSVFromPath()`. The insert options describe the target table and, when auto-detection is disabled, the CSV dialect and column types:
 
 ```ts
+import { Int32, Utf8 } from 'apache-arrow';
+
 const csvContent = '1|foo\n2|bar\n';
 await db.registerFileText('data.csv', csvContent);
 
@@ -84,8 +88,8 @@ await conn.insertCSVFromPath('data.csv', {
     header: false,
     delimiter: '|',
     columns: {
-        col1: new arrow.Int32(),
-        col2: new arrow.Utf8(),
+        col1: new Int32(),
+        col2: new Utf8(),
     },
 });
 ```
@@ -154,19 +158,7 @@ await conn.query(`
 `);
 ```
 
-> Tip If you encounter a network error (`Failed to execute 'send' on 'XMLHttpRequest'`) when querying files from S3, configure the S3 bucket's CORS policy to allow `GET` and `HEAD` requests. For example:
-
-```json
-[
-    {
-        "AllowedHeaders": ["*"],
-        "AllowedMethods": ["GET", "HEAD"],
-        "AllowedOrigins": ["*"],
-        "ExposeHeaders": [],
-        "MaxAgeSeconds": 3000
-    }
-]
-```
+> Tip Reading a remote file makes the browser issue the request, so it is subject to the browser's CORS policy. If a query over an S3 or other remote file fails with a network error, see [Troubleshoot]({% link docs/current/clients/wasm/known_issues.md %}#network-error-when-querying-remote-files).
 
 ## Insert Statement
 
@@ -184,3 +176,4 @@ await conn.query(`
 * [Load Extensions]({% link docs/current/clients/wasm/extensions.md %}) — the Parquet, JSON, and Wasm-flavored httpfs extensions used to read files directly in SQL.
 * [`INSERT` Statement]({% link docs/current/data/insert.md %}) — DuckDB's SQL-level `INSERT`, an alternative to the insert functions above.
 * [Instantiate]({% link docs/current/clients/wasm/instantiation.md %}) — creating the `db` and connection these imports run on.
+* [Troubleshoot]({% link docs/current/clients/wasm/known_issues.md %}) — CORS network errors when reading remote files.

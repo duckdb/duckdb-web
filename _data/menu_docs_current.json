@@ -454,6 +454,10 @@
                 {
                   "page": "Deploy",
                   "url": "deploying_duckdb_wasm"
+                },
+                {
+                  "page": "Troubleshoot",
+                  "url": "known_issues"
                 }
               ]
             },

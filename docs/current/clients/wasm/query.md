@@ -10,7 +10,12 @@ title: Run Queries
 
 ## Overview
 
-DuckDB-Wasm provides functions for querying data. Queries are run sequentially. First, a connection needs to be created by calling [connect](https://shell.duckdb.org/docs/classes/index.AsyncDuckDB.html#connect). Then, queries can be run by calling [query](https://shell.duckdb.org/docs/classes/index.AsyncDuckDBConnection.html#query) to materialize the whole result, or [send](https://shell.duckdb.org/docs/classes/index.AsyncDuckDBConnection.html#send) to fetch result chunks lazily. This page covers running queries, prepared statements, converting results to JSON, and exporting to Parquet.
+DuckDB-Wasm provides functions for querying data. Queries are run sequentially:
+
+1. First, create a connection by calling [connect](https://shell.duckdb.org/docs/classes/index.AsyncDuckDB.html#connect).
+2. Then, run queries by calling [query](https://shell.duckdb.org/docs/classes/index.AsyncDuckDBConnection.html#query) to materialize the whole result, or [send](https://shell.duckdb.org/docs/classes/index.AsyncDuckDBConnection.html#send) to fetch result chunks lazily.
+
+This page covers running queries, prepared statements, converting results to JSON, and exporting to Parquet.
 
 ## Query Execution
 
@@ -103,3 +108,4 @@ await conn.close();
 * [Load Extensions]({% link docs/current/clients/wasm/extensions.md %}) — the Parquet extension used by the export example and other query-time extensions.
 * [Prepared Statements]({% link docs/current/sql/query_syntax/prepared_statements.md %}) — DuckDB's SQL-level support for the parameterized queries shown here.
 * [Instantiate]({% link docs/current/clients/wasm/instantiation.md %}) — creating the `db` that connections are opened on.
+* [Troubleshoot]({% link docs/current/clients/wasm/known_issues.md %}) — streaming results with `send()` to stay within the memory limit.

@@ -1,6 +1,7 @@
 ---
 layout: docu
 redirect_from:
+- /docs/clients/wasm/deploying_duckdb_wasm
 - /docs/preview/clients/wasm/deploying_duckdb_wasm
 - /docs/stable/clients/wasm/deploying_duckdb_wasm
 title: Deploy
@@ -41,7 +42,19 @@ You can serve all three and let the library feature-detect the best one with `se
 
 ## Wasm Worker Component
 
-Same as the JS Worker component, three different flavors, `mvp`, `eh` and `coi` (for example `duckdb-coi.wasm`), each one is needed by the relevant JS component. These WebAssembly modules need to be served as-is at an arbitrary [sub-]domain that is reachable from the main one.
+This is the DuckDB engine itself, compiled to WebAssembly and instantiated by the browser. Like the JS Worker component, it comes in the same three flavors, each paired with the JS worker of the same flavor:
+
+* `mvp` — for example `duckdb-mvp.wasm`, loaded by the `mvp` JS worker
+* `eh` — for example `duckdb-eh.wasm`, loaded by the `eh` JS worker
+* `coi` — for example `duckdb-coi.wasm`, loaded by the `coi` JS worker
+
+Each JS worker loads the WebAssembly module of its own flavor, so serve the module (or modules) that correspond to the JS workers you deploy. If you serve all three JS workers and let `selectBundle` feature-detect the best one, serve all three modules as well.
+
+When serving these files, keep the following in mind:
+
+* Serve them as-is. Unlike the main library component, they require no transpilation or bundling.
+* Serve them with the `application/wasm` content type so the browser can compile them efficiently.
+* Host them anywhere reachable from the main document — the same origin or an arbitrary [sub-]domain. The [main library component](#main-library-component) is told each module's location through the bundle definition (the `mainModule` path), so the modules do not need to sit next to the JavaScript.
 
 ## DuckDB Extensions
 
@@ -52,7 +65,7 @@ If you are deploying duckdb-wasm you can consider mirroring relevant extensions 
 SET custom_extension_repository = '⟨https://some.endpoint.org/path/to/repository⟩';
 ```
 
-Changes the default extension repository from the public `https://extensions.duckdb.org` to the one specified. Note that extensions are still signed, so the best path is downloading and serving the extensions with a similar structure to the original repository. See our additional notes on [Creating a Custom Repository]({% link docs/current/extensions/extension_distribution.md %}#creating-a-custom-repository).
+Changes the default extension repository from the public `https://extensions.duckdb.org` to the one specified. Note that extensions are still signed, so the best path is downloading and serving the extensions with a similar structure to the original repository. See the additional notes on [Creating a Custom Repository]({% link docs/current/extensions/extension_distribution.md %}#creating-a-custom-repository).
 
 Community extensions are served at <https://community-extensions.duckdb.org>, and they are signed with a different key, so they can be disabled with a one way SQL statement such as:
 
@@ -75,6 +88,11 @@ Cross-Origin-Opener-Policy: same-origin
 
 These headers isolate the document from other cross-origin documents and require any cross-origin resource it embeds to explicitly opt in. Because many third-party endpoints do not yet send the headers needed to be embedded under these policies, most deployments run on non-isolated pages, where DuckDB-Wasm falls back to the single-threaded `mvp` or `eh` bundle.
 
+For more background on why these headers are required and how they unlock `SharedArrayBuffer`, see the following resources:
+
+* [WebAssembly threads on web.dev](https://web.dev/articles/webassembly-threads)
+* [Enabling `SharedArrayBuffer` on the Chrome developer blog](https://developer.chrome.com/blog/enabling-shared-array-buffer/)
+
 ## Security Considerations
 
 > Warning Deploying DuckDB-Wasm with access to your own data means whoever has access to SQL can access the data that DuckDB-Wasm can access. Also, DuckDB-Wasm in the default setting can access remote endpoints, so it can have a visible effect on the external world even from within the sandbox.
@@ -85,3 +103,4 @@ These headers isolate the document from other cross-origin documents and require
 * [Load Extensions]({% link docs/current/clients/wasm/extensions.md %}) — how extensions are fetched, signed, and served from a custom repository.
 * [Extension Distribution]({% link docs/current/extensions/extension_distribution.md %}) — general information about extension repositories and creating a custom one.
 * [DuckDB Wasm Client]({% link docs/current/clients/wasm/overview.md %}) — the layered API and example deployments this page builds on.
+* [Troubleshoot]({% link docs/current/clients/wasm/known_issues.md %}) — cross-origin isolation for threading and other deployment-related issues.
