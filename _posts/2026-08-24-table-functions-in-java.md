@@ -182,7 +182,7 @@ This example is a MongoDB connector, but the broader point is that DuckDB can no
 
 ## Current Limitations
 
-These are limitations of the current Java table-function API, not of the toy example:
+These are limitations of the current Java table-function API:
 
 - **A Java table function cannot yet be packaged as a DuckDB extension.** A DuckDB extension is a native shared library loaded into the DuckDB process, whereas a Java table function lives in the JVM and is registered on a live connection through the driver. As a result, the function is available only to the JVM process that registered it, not to other clients or the CLI, and not to a database opened without the Java driver. Packaging JVM code as a loadable extension is technically possible, for example through a JNI or [FFM](https://openjdk.org/jeps/454) shim that embeds the JVM, or by compiling to a GraalVM native image, but neither is supported today.
 - **Bind and init objects are not managed automatically.** In the current release, the caller is responsible for the lifecycle of the objects returned from `bind` and `init`, for example closing the MongoDB client and cursor after the query completes. A [`DuckDBTableFunctionState`]({% link docs/current/clients/java/functions.md %}#cleaning-up-resources) mechanism ([contributed](https://github.com/duckdb/duckdb-java/pull/803) by a community member) manages that lifecycle for you. The returned objects implement `AutoCloseable`, and DuckDB calls `close()` when the function is done. The init object then becomes:
