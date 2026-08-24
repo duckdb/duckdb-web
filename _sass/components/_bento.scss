@@ -101,6 +101,14 @@
 	.bento-grid {
 		grid-template-columns: repeat(2, 1fr);
 	}
+
+	.bento-box.wide {
+		grid-column: auto;
+
+		.bento-graphic {
+			opacity: 0.5;
+		}
+	}
 }
 
 @media only screen and (max-width: 640px) {
