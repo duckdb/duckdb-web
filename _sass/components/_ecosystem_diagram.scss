@@ -265,18 +265,19 @@
     padding: 60px 20px;
     gap: 30px;
   }
+}
 
-  /* Side boxes: 3 icons per row */
+/* Below this width five icons no longer leave a usable gap, so fit four. */
+@media only screen and (max-width: 1050px) {
   .ecosystem-col--left .ecosystem-icon-grid,
-  .ecosystem-col--right .ecosystem-icon-grid {
-    column-gap: 7.6px;
-    max-width: calc(3 * 54.8px + 2 * 7.6px);
+  .ecosystem-col--right .ecosystem-icon-grid,
+  #eco-box-clients > .ecosystem-icon-grid {
+    column-gap: calc((100% - 4 * 54.8px) / 3 - 0.1px);
   }
 
-  /* Center box: 4 icons per row */
-  #eco-box-clients > .ecosystem-icon-grid {
-    column-gap: 7.6px;
-    max-width: calc(4 * 54.8px + 3 * 7.6px);
+  .ecosystem-duckdb-bar {
+    padding: 35px 10px;
+    margin-top: 57px;
   }
 }
 
