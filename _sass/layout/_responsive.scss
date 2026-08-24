@@ -11,11 +11,7 @@
 	body.documentation .sidenavigation {
 		width: 350px;
 	}
-	
-	.hero-bg .hideonbigscreens{
-		display: none;
-	}
-	
+
 }
 
 @media only screen and (max-width: 1200px) {
@@ -724,6 +720,13 @@
 		margin-bottom: 10px;
 	}
 
+	/* Flex-based tile lists need their own row spacing; the post list on the
+	   blog overview is positioned by Isotope and already has a gutter. */
+	section.blog .newstileswrap,
+	section.upcoming-events .newstileswrap {
+		row-gap: 32px;
+	}
+
 	.library-tiles .librarypreview.postpreview,
 	.everywhere-tiles .everywherepreview.postpreview {
 		display: flex;
@@ -856,16 +859,13 @@
 
 @media only screen and (min-device-width: 320px) and (max-device-width: 480px) {
 	body.landing section {
-		padding: 55px 15px;
+		padding: 36px 15px;
 	}
-	body.landing section.welcome{
-		padding: 120px 15px 55px 15px;
+
+	body.landing section.welcome {
+		padding: 36px 15px 55px 15px;
 	}
-	
-	body.landing section.welcome .hero-protocol-boxes{
-		margin-top: 140px;
-	}
-	
+
 	body.landing .boxlayout .box:last-child {
 		margin-bottom: 0;
 	}

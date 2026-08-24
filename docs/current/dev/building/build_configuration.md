@@ -84,7 +84,7 @@ More information about this can be found [in the README](https://github.com/duck
 
 ### `BUILD_JDBC`
 
-When this flag is set, the [Java]({% link docs/current/clients/java.md %}) package is built.
+When this flag is set, the [Java]({% link docs/current/clients/java/overview.md %}) package is built.
 
 ### `BUILD_ODBC`
 

@@ -2,8 +2,8 @@
 layout: post
 title: "10 000 Stars on GitHub"
 author: Mark Raasveldt, Hannes Mühleisen
-thumb: "/images/blog/thumbs/github-10k-stars.svg"
-image: "/images/blog/thumbs/github-10k-stars.png"
+thumb: "/images/blog/thumbs/github-stars.svg"
+image: "/images/blog/thumbs/github-stars.png"
 excerpt: ""
 tags: ["release"]
 ---

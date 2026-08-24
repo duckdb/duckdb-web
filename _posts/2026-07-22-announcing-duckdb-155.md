@@ -3,7 +3,7 @@ layout: post
 title: "Announcing DuckDB 1.5.5"
 author: "The DuckDB team"
 thumb: "/images/blog/thumbs/duckdb-release-1-5-5.svg"
-image: "/images/blog/thumbs/duckdb-release-1-5-5.jpg"
+image: "/images/blog/thumbs/duckdb-release-1-5-5.png"
 excerpt: "Today we are releasing DuckDB 1.5.5 with bugfixes and performance improvements."
 tags: ["release"]
 ---
