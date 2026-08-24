@@ -3,7 +3,7 @@ layout: docu
 redirect_from:
 - /docs/preview/clients/wasm/deploying_duckdb_wasm
 - /docs/stable/clients/wasm/deploying_duckdb_wasm
-title: Deploy DuckDB-Wasm
+title: Deploy
 ---
 
 ## Overview
@@ -12,17 +12,20 @@ Deploying DuckDB-Wasm means serving its components so that the browser can fetch
 
 A DuckDB-Wasm deployment needs to access the following components:
 
-* the DuckDB-Wasm main library component, distributed as TypeScript and compiled to JavaScript code
-* the DuckDB-Wasm Worker component, compiled to JavaScript code, possibly instantiated multiple times for threaded environments
-* the DuckDB-Wasm module, compiled as a WebAssembly file and instantiated by the browser
-* any relevant DuckDB-Wasm extension
+* **Main Library Component.** Distributed as TypeScript and compiled to JavaScript code. [For further details, see below.](#main-library-component)
+* **JS Worker Component.** Compiled to JavaScript code, possibly instantiated multiple times for threaded environments. [For further details, see below.](#js-worker-component)
+* **Wasm Worker Component.** Compiled as a WebAssembly file and instantiated by the browser. [For further details, see below.](#wasm-worker-component)
+* **DuckDB Extensions.** Any relevant extensions the deployment loads. [For further details, see below.](#duckdb-extensions)
 
 ## Main Library Component
 
-This is distributed as either TypeScript code or CommonJS JavaScript code in the `npm` duckdb-wasm package, and can be either bundled together with a given application, served in a same origin (sub-)domain and included at runtime or served from a third party CDN like jsDelivr.
-This does need some form of transpilation and can't be served as-is, given it needs to know the location of the follow up files for this to be functional.
-Details will depend on your given setup, examples can be found at <https://github.com/duckdb/duckdb-wasm/tree/main/examples>.
-An example deployment is <https://shell.duckdb.org>, which transpiles the main library component together with shell code (first approach). Or the `bare-browser` example at <https://github.com/duckdb/duckdb-wasm/tree/main/examples/bare-browser>.
+This component is distributed as TypeScript or CommonJS JavaScript in the npm [`@duckdb/duckdb-wasm`](https://www.npmjs.com/package/@duckdb/duckdb-wasm) package. You can deploy it in one of three ways:
+
+* Bundled together with your application
+* Served from a same-origin (sub-)domain and included at runtime
+* Served from a third-party CDN such as jsDelivr
+
+It cannot be served as-is: it requires transpilation, because it needs to know the location of the follow-up files — the worker and WebAssembly components — in order to work. The exact steps depend on your setup; see the [examples in the repository](https://github.com/duckdb/duckdb-wasm/tree/main/examples). For instance, the [shell.duckdb.org](https://shell.duckdb.org) deployment transpiles the main library together with the shell code (the first approach above), while the [`bare-browser` example](https://github.com/duckdb/duckdb-wasm/tree/main/examples/bare-browser) shows a minimal setup.
 
 ## JS Worker Component
 
@@ -78,7 +81,7 @@ These headers isolate the document from other cross-origin documents and require
 
 ## Further Reading
 
-* [Instantiate DuckDB-Wasm]({% link docs/current/clients/wasm/instantiation.md %}) — how the library, worker, and WebAssembly components served here are wired together at runtime.
+* [Instantiate]({% link docs/current/clients/wasm/instantiation.md %}) — how the library, worker, and WebAssembly components served here are wired together at runtime.
 * [Load Extensions]({% link docs/current/clients/wasm/extensions.md %}) — how extensions are fetched, signed, and served from a custom repository.
 * [Extension Distribution]({% link docs/current/extensions/extension_distribution.md %}) — general information about extension repositories and creating a custom one.
 * [DuckDB Wasm Client]({% link docs/current/clients/wasm/overview.md %}) — the layered API and example deployments this page builds on.

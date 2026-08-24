@@ -436,7 +436,7 @@
                   "url": "overview"
                 },
                 {
-                  "page": "Instantiate DuckDB-Wasm",
+                  "page": "Instantiate",
                   "url": "instantiation"
                 },
                 {
@@ -452,7 +452,7 @@
                   "url": "extensions"
                 },
                 {
-                  "page": "Deploy DuckDB-Wasm",
+                  "page": "Deploy",
                   "url": "deploying_duckdb_wasm"
                 }
               ]

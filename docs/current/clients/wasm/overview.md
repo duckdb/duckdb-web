@@ -25,6 +25,30 @@ A great starting point is to read the [DuckDB-Wasm launch blog post]({% post_url
 
 To use DuckDB-Wasm in an application, first [instantiate it]({% link docs/current/clients/wasm/instantiation.md %}), then [import data]({% link docs/current/clients/wasm/data_ingestion.md %}) and [run queries]({% link docs/current/clients/wasm/query.md %}) on it.
 
+## Basic API Usage
+
+The example below instantiates DuckDB-Wasm from a CDN bundle, opens a connection, runs a query, and reads the result. [Instantiate]({% link docs/current/clients/wasm/instantiation.md %}) covers the other ways to load the bundle, such as with webpack, Vite, or self-hosted files.
+
+```ts
+import * as duckdb from '@duckdb/duckdb-wasm';
+
+// Instantiate DuckDB-Wasm from a jsDelivr bundle
+const bundle = await duckdb.selectBundle(duckdb.getJsDelivrBundles());
+const worker = new Worker(bundle.mainWorker!);
+const db = new duckdb.AsyncDuckDB(new duckdb.ConsoleLogger(), worker);
+await db.instantiate(bundle.mainModule, bundle.pthreadWorker);
+
+// Open a connection and run a query
+const conn = await db.connect();
+const result = await conn.query('SELECT 42 AS answer');
+console.log(result.toArray()[0].answer); // prints 42
+
+// Release resources
+await conn.close();
+await db.terminate();
+await worker.terminate();
+```
+
 ## How DuckDB-Wasm Works
 
 DuckDB-Wasm uses [Apache Arrow](https://arrow.apache.org/) as its data protocol for both data import and query results. Arrow is a columnar, database-friendly format that the `apache-arrow` npm package implements in the browser, letting DuckDB-Wasm exchange data efficiently and interoperate with other JavaScript data tools without reimplementing SQL type logic in JavaScript.
@@ -38,9 +62,9 @@ DuckDB-Wasm is built on a virtual filesystem that treats local files, remote HTT
 
 ## Further Reading
 
-* [Instantiate DuckDB-Wasm]({% link docs/current/clients/wasm/instantiation.md %}) — the bundle-selection patterns for jsDelivr, webpack, Vite, and statically served files.
+* [Instantiate]({% link docs/current/clients/wasm/instantiation.md %}) — the bundle-selection patterns for jsDelivr, webpack, Vite, and statically served files.
 * [Import Data]({% link docs/current/clients/wasm/data_ingestion.md %}) — registering files and inserting Apache Arrow, CSV, JSON, and Parquet data.
 * [Run Queries]({% link docs/current/clients/wasm/query.md %}) — materialized and streaming queries, prepared statements, and exporting results.
 * [Load Extensions]({% link docs/current/clients/wasm/extensions.md %}) — how extension loading differs from native DuckDB and which extensions are available.
-* [Deploy DuckDB-Wasm]({% link docs/current/clients/wasm/deploying_duckdb_wasm.md %}) — the components a deployment serves and the security considerations involved.
+* [Deploy]({% link docs/current/clients/wasm/deploying_duckdb_wasm.md %}) — the components a deployment serves and the security considerations involved.
 * [Clients Overview]({% link docs/current/clients/overview.md %}) — the other client APIs DuckDB provides alongside Wasm.

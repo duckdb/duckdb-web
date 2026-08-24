@@ -5,7 +5,7 @@ redirect_from:
 - /docs/clients/wasm/instantiation
 - /docs/preview/clients/wasm/instantiation
 - /docs/stable/clients/wasm/instantiation
-title: Instantiate DuckDB-Wasm
+title: Instantiate
 ---
 
 ## Overview
@@ -23,6 +23,8 @@ DuckDB-Wasm ships several WebAssembly modules compiled for different browser fea
 The examples below all call `selectBundle` so the browser receives the fastest bundle it can run. You can also inspect the selected bundle and feature set from the [web shell](https://shell.duckdb.org) with the `.features` command.
 
 ## `cdn(jsdelivr)`
+
+The simplest way to load DuckDB-Wasm is straight from a CDN, with no build step or bundler configuration. `getJsDelivrBundles()` returns the set of bundles hosted on [jsDelivr](https://www.jsdelivr.com/package/npm/@duckdb/duckdb-wasm), and `selectBundle` picks the one that matches the browser. Because a Web Worker script must be same-origin, the CDN worker URL is wrapped in a `Blob` that `importScripts` it, and the temporary object URL is revoked once the worker has started.
 
 ```ts
 import * as duckdb from '@duckdb/duckdb-wasm';
@@ -45,6 +47,8 @@ URL.revokeObjectURL(worker_url);
 ```
 
 ## `webpack`
+
+When your application is built with [webpack](https://webpack.js.org/), let the bundler resolve and emit DuckDB-Wasm's assets instead of fetching them from a CDN. Import each `.wasm` module directly, and reference the worker scripts with `new URL(..., import.meta.url)` so that webpack fingerprints them and rewrites the paths to the emitted files. The bundles are declared manually because their final locations are known only after the build, and `selectBundle` then chooses between the `mvp` and `eh` variants at runtime.
 
 ```ts
 import * as duckdb from '@duckdb/duckdb-wasm';
@@ -70,6 +74,8 @@ await db.instantiate(bundle.mainModule, bundle.pthreadWorker);
 ```
 
 ## `vite`
+
+[Vite](https://vitejs.dev/) resolves assets a little differently: appending the `?url` suffix to an import tells Vite to return the asset's final URL rather than its contents. Import both the `.wasm` modules and the worker scripts this way, assemble them into the manual bundle definition, and let `selectBundle` select the appropriate variant for the browser at runtime.
 
 ```ts
 import * as duckdb from '@duckdb/duckdb-wasm';
@@ -99,7 +105,7 @@ await db.instantiate(bundle.mainModule, bundle.pthreadWorker);
 
 ## Statically Served
 
-It is possible to manually download the files from <https://cdn.jsdelivr.net/npm/@duckdb/duckdb-wasm/dist/>.
+If you would rather not depend on a CDN or a bundler, you can host the DuckDB-Wasm files yourself. Manually download the distribution files from <https://cdn.jsdelivr.net/npm/@duckdb/duckdb-wasm/dist/>, serve them from your own origin, and point the bundle paths at those locations. This keeps every asset on your own server, which suits offline, air-gapped, or strict content-security-policy deployments. Update the placeholder paths below to match where you serve the files.
 
 ```ts
 import * as duckdb from '@duckdb/duckdb-wasm';
@@ -127,5 +133,5 @@ await db.instantiate(bundle.mainModule, bundle.pthreadWorker);
 
 * [Import Data]({% link docs/current/clients/wasm/data_ingestion.md %}) — registering files and inserting data into the instantiated database.
 * [Run Queries]({% link docs/current/clients/wasm/query.md %}) — executing queries against the `db` object created here.
-* [Deploy DuckDB-Wasm]({% link docs/current/clients/wasm/deploying_duckdb_wasm.md %}) — serving the library, worker, and WebAssembly components that these bundles reference.
+* [Deploy]({% link docs/current/clients/wasm/deploying_duckdb_wasm.md %}) — serving the library, worker, and WebAssembly components that these bundles reference.
 * [DuckDB Wasm Client]({% link docs/current/clients/wasm/overview.md %}) — the layered API and the examples the snippets above are drawn from.

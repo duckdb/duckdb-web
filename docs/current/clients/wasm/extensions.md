@@ -108,12 +108,9 @@ Note that GET requests on the extensions needs to be [CORS enabled](https://www.
 
 Both DuckDB-Wasm and its extensions have been compiled using the latest packaged Emscripten toolchain.
 
-<!-- markdownlint-disable-next-line -->
-{% include iframe.html src="https://shell.duckdb.org" %}
-
 ## Further Reading
 
-* [Deploy DuckDB-Wasm]({% link docs/current/clients/wasm/deploying_duckdb_wasm.md %}) — serving and mirroring extensions from a custom endpoint.
+* [Deploy]({% link docs/current/clients/wasm/deploying_duckdb_wasm.md %}) — serving and mirroring extensions from a custom endpoint.
 * [Core Extensions]({% link docs/current/core_extensions/overview.md %}) — the core extensions available across all DuckDB clients.
 * [Community Extensions]({% link docs/current/extensions/community_extensions.md %}) — third-party extensions installable with `INSTALL … FROM community`.
 * [Import Data]({% link docs/current/clients/wasm/data_ingestion.md %}) — using the Parquet, JSON, and Wasm-flavored httpfs extensions to read files.
