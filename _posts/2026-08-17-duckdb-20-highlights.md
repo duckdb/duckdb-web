@@ -242,6 +242,8 @@ DuckDB has famously always used a parser derived from PostgreSQL's. We have deci
 
 You should not actually notice anything from the parser swap as we designed it to be compatible with the old one. If you do notice, please file an issue.
 
+> Update We published a new blog post on the [PEG parser]({% post_url 2026-08-20-duckdb-20-peg-parser %}).
+
 ## 9. Timezones, Calendars, and Collations Without ICU
 
 Timezone-aware timestamps, calendars, and collations in DuckDB have always been powered by the ICU library. ICU is a fine library, but we only ever used a small slice of it, while still carrying it around in every DuckDB distribution. In v2.0, the ICU library is gone entirely: the `icu` extension now implements timezones, calendars, and collations itself ([#24463](https://github.com/duckdb/duckdb/pull/24463), [#24403](https://github.com/duckdb/duckdb/pull/24403)), with the timezone data built directly from the IANA database and compressed down to around 45 kB. Everything keeps working exactly as before:
