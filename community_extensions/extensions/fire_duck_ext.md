@@ -79,8 +79,8 @@ docs:
     
 extension_star_count: 3
 extension_star_count_pretty: 3
-extension_download_count: 917
-extension_download_count_pretty: 917
+extension_download_count: 689
+extension_download_count_pretty: 689
 image: '/images/community_extensions/social_preview/preview_community_extension_fire_duck_ext.png'
 layout: community_extension_doc
 ---
