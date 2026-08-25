@@ -14,12 +14,6 @@ permalink: /history/
 
 <p class="lead">The DuckDB story now extends beyond the original database. Here is how the projects, organizations, and commercial services around it developed, and how they fit together today.</p>
 
-<p>Q2 was a busy quarter. On May 12, the DuckDB team published <a href="{% post_url 2026-05-12-quack-remote-protocol %}">a technical preview of Quack</a>, the DuckDB client-server protocol. Quack extends DuckDB into networked deployments while preserving the in-process model that shaped the database from the beginning.</p>
-
-<p>Two weeks later, on May 27, we announced that <a href="https://ducklabs.com/news/2026/05/27/duckdb-labs-becomes-ducklabs">DuckDB Labs had become DuckLabs</a>. The new name reflected a company whose work had expanded beyond DuckDB alone. It also marked the start of a more visible phase for DuckLabs, including more communication about the projects, the engineering team, and the organizations that work with them.</p>
-
-<p>The two announcements concerned different parts of the technology, but both reflected a story that had been developing for years. With all these developments, we think it's time for an update on how we got to where we are today. The best place to begin is at the origin of DuckDB itself.</p>
-
 <div class="timeline">
 
   <div class="timeline-entry">
@@ -75,13 +69,21 @@ permalink: /history/
   </div>
 
   <div class="timeline-entry">
-    <div class="timeline-marker"><span class="timeline-year">2026</span></div>
+    <div class="timeline-marker"><span class="timeline-year">2026 Q2</span></div>
     <div class="timeline-body">
-      <h2 id="the-broader-direction-becomes-explicit">The broader direction becomes explicit</h2>
+      <h2 id="the-broader-direction-becomes-explicit">Broader horizons</h2>
       <p>DuckLake reached <a href="https://ducklake.select/2026/04/13/ducklake-10/">version 1.0 on April 13, 2026</a>, establishing a production-ready specification and reference implementation.</p>
-      <p>The Quack technical preview followed in May. Quack is the DuckDB client-server protocol, designed for workloads that need remote connections or multiple clients. It is available as a beta release while the team develops it toward stable status as DuckDB v2.0.</p>
+      <p>The Quack technical preview followed in May. Quack is the DuckDB client-server protocol, designed for workloads that need remote connections or multiple clients. It is available as a beta release while the team develops it toward stable status as <a href="{% post_url 2026-08-17-duckdb-20-highlights %}">DuckDB v2.0</a>.</p>
       <p>The change from <a href="https://ducklabs.com/news/2026/05/27/duckdb-labs-becomes-ducklabs">DuckDB Labs to DuckLabs</a> came later that month. By then, the company employed more than 30 people working across DuckDB, DuckLake, Quack, extensions, language bindings, and related systems engineering.</p>
-      <p>DuckLabs' commercial role is important. Organizations can engage the company for enterprise support, feature prioritization and development, technical advisory, and engineering collaboration. These services provide direct access to the team responsible for the projects. When customer requirements belong in the open-source core, the work can be reviewed, integrated, and maintained with the rest of the project.</p>
+    </div>
+  </div>
+
+  <div class="timeline-entry">
+    <div class="timeline-marker"><span class="timeline-year">2026 Q3</span></div>
+    <div class="timeline-body">
+      <h2 id="ducklabs-to-join-aws">DuckLabs is joining AWS</h2>
+      <p>On August 26, 2026, DuckLabs announced that <a href="{% post_url 2026-08-26-prism %}">it is joining Amazon Web Services</a>. The DuckLabs team stays in Amsterdam and will keep focusing on the development of the projects – DuckDB, DuckLake and Quack.</p>
+      <p>The projects remain the intellectual property of the <a href="https://duckdb.foundation/">DuckDB Foundation</a> and open source under the MIT license. The scope of the <a href="{% link community_support.md %}">community support</a> is extended to accept larger volumes of issues and pull request, and cover more components.</p>
     </div>
   </div>
 
@@ -91,7 +93,7 @@ permalink: /history/
 
 <p>At the center is DuckDB, the open-source analytical database. DuckLabs was created by DuckDB's original co-creators and employs the core contributors who develop DuckDB and related projects. The DuckDB Foundation holds the intellectual property and protects the projects' open-source continuity.</p>
 
-<p>DuckLake extends the team's work into an open lakehouse format. Quack is the DuckDB client-server protocol, currently available as a technical preview. MotherDuck operates a managed cloud service built on DuckDB, supports the Foundation, and contributes engineering to the wider project.</p>
+<p>DuckLake extends the team's work into an open lakehouse format. Quack is the DuckDB client-server protocol, currently available as a technical preview.</p>
 
 <h2 id="several-ways-to-run-and-support-duckdb">Several ways to run and support DuckDB</h2>
 
