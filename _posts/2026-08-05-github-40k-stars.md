@@ -13,7 +13,7 @@ The [`duckdb/duckdb` GitHub repository](https://github.com/duckdb/duckdb) has ju
 ![Star history]({% link images/blog/star-history-20260805-dark.svg %}){: .darkmode-img }
 ![Star history]({% link images/blog/star-history-20260805-light.svg %}){: .lightmode-img }
 
-We’d like to use this milestone to stop for a moment and revisit recent developments in the DuckStack ecosystem since last summer (2025), when we surpassed [30 000 stars](https://duckdb.org/2025/06/06/github-30k-stars).
+We’d like to use this milestone to stop for a moment and revisit recent developments in the “Duck Stack” ecosystem since last summer (2025), when we surpassed [30 000 stars](https://duckdb.org/2025/06/06/github-30k-stars).
 
 ## Releases
 
