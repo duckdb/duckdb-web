@@ -8,13 +8,13 @@ thumb: "/images/blog/thumbs/java.svg"
 image: "/images/blog/thumbs/java.png"
 ---
 
-In a large organization, data is spread across many systems, including relational databases, document stores, message queues, data lakes, and Cloud data warehouses. Some of these systems can be reached only through a vendor SDK, usually provided in Java, or a SOAP endpoint, and many sit behind custom authentication or single sign-on that is awkward to satisfy from anything but a JVM client. The layer that ties these together is often a JVM-based distributed query engine, such as Trino, that can run a single query joining across multiple data sources. The Java clients for those systems are mature and fast, with streaming APIs and, increasingly, virtual threads for asynchronous work. They are also already in production and cleared by corporate security.
+In a large organization, data is spread across many systems, including relational databases, document stores, message queues, data lakes, and cloud data warehouses. Some of these systems can be reached only through a vendor SDK, usually provided in Java, or a [SOAP](https://en.wikipedia.org/wiki/Service-oriented_architecture) endpoint, and many sit behind custom authentication or single sign-on that is awkward to satisfy from anything but a JVM client. The layer that ties these together is often a JVM-based distributed query engine, such as [Trino](https://trino.io/), that can run a single query joining across multiple data sources. The Java clients for those systems are mature and fast, with streaming APIs and, increasingly, virtual threads for asynchronous work. They are also already in production and cleared by corporate security.
 
 Teams increasingly add DuckDB to these environments for fast single-node analytics. Because the surrounding infrastructure is Java, they use DuckDB through its [JDBC driver]({% link docs/current/clients/java/overview.md %}). But a query engine is only as useful as the data it can reach, and in these environments much of that data is accessible only through Java client libraries.
 
 ## Bringing External Data into DuckDB
 
-In these environments, some data is best processed in SQL, which DuckDB handles in a performant, low-overhead way, while other data arrives from external Java-sourced systems and is often processed in application code on top of a DuckDB result set. It is frequently more convenient, and in many cases more performant, to bring that external data into DuckDB's SQL directly. Table functions are intended for exactly that.
+In these environments, some data is best processed in SQL, which DuckDB handles in a performant, low-overhead way, while other data arrives from external Java-sourced systems and is often processed in application code on top of a DuckDB result set. It is frequently more convenient, and in many cases more performant, to bring that external data into DuckDB's SQL directly. *Table functions* are intended for exactly that.
 
 DuckDB already reads almost everything. It reads Parquet and other files directly from data lakes. It connects to tightly integrated relational databases such as PostgreSQL, MySQL, and SQLite directly. The ODBC extension reaches proprietary databases such as Oracle, SQL Server, and DB2. JSON functions can query REST-like services by treating them as remote JSON files. And community extensions cover many more systems. For anything not covered, DuckDB has always supported *table functions* as a way to plug in a custom source, and those functions could be written in C++.
 
@@ -26,7 +26,7 @@ Until now, adding a custom source in native code meant building and shipping a D
 
 This post walks through an [example project](https://github.com/staticlibs/duckdb_mongo_example/blob/master/README.md) that adds a `mongo_query()` function to DuckDB, and uses it to explain the mechanism.
 
-> MongoDB is a popular document store with a robust Java API. The `mongo_query()` function below is a deliberately minimal, illustrative example, not a production connector. There are better ways to reach MongoDB in particular, including the [ODBC extension]({% link docs/current/core_extensions/odbc/overview.md %}) and the [MongoDB community extension]({% link community_extensions/extensions/mongo.md %}). MongoDB is used here only because it is a popular system with a good Java client. The same pattern applies to any source reachable from the JVM, whether through a JDBC driver, one of the most common Java clients, a SOAP service, or a proprietary vendor SDK.
+> MongoDB is a document store with a robust Java API. The `mongo_query()` function below is a deliberately minimal, illustrative example, not a production connector. There are better ways to reach MongoDB in particular, including the [ODBC extension]({% link docs/current/core_extensions/odbc/overview.md %}) and the [MongoDB community extension]({% link community_extensions/extensions/mongo.md %}). We use MongoDB as an example because it is a popular system with a good Java client. The same pattern applies to any source reachable from the JVM, whether through a JDBC driver, one of the most common Java clients, a SOAP service, or a proprietary vendor SDK.
 
 ## The Goal
 
@@ -69,7 +69,7 @@ FROM mongo_query(
          database = 'app'
      ) AS o
 JOIN 'customers/*.csv' AS c
-    ON c.customer_id = o.customer_id
+  ON c.customer_id = o.customer_id
 GROUP BY c.region;
 ```
 
@@ -81,17 +81,17 @@ Adding a new data source no longer requires a native extension. Through the JDBC
 
 ```java
 DuckDBFunctions.tableFunction()
-        .withName("mongo_query")
-        .withParameter(String.class)   // collection name
-        .withParameter(String.class)   // Mongo filter (JSON)
-        .withNamedParameter("columns", String.class)
-        .withNamedParameter("hostname", String.class)
-        .withNamedParameter("port", Integer.class)
-        .withNamedParameter("database", String.class)
-        .withNamedParameter("username", String.class)
-        .withNamedParameter("password", String.class)
-        .withFunction(new MongoQueryFunction())
-        .register(connection);
+    .withName("mongo_query")
+    .withParameter(String.class)   // collection name
+    .withParameter(String.class)   // Mongo filter (JSON)
+    .withNamedParameter("columns", String.class)
+    .withNamedParameter("hostname", String.class)
+    .withNamedParameter("port", Integer.class)
+    .withNamedParameter("database", String.class)
+    .withNamedParameter("username", String.class)
+    .withNamedParameter("password", String.class)
+    .withFunction(new MongoQueryFunction())
+    .register(connection);
 ```
 
 This completes registration. `mongo_query(...)` is then available as a table function on that DuckDB connection and can be used in `FROM` clauses, joins, CTEs, and subqueries like any built-in function.
@@ -113,10 +113,11 @@ The example implements these in [`MongoQueryFunction.java`](https://github.com/s
 `bind` reads the call parameters and declares the output columns. Because MongoDB documents have no fixed schema, this example asks the caller to list the columns rather than inferring them from a prepared statement, and declares each one to DuckDB:
 
 ```java
-public MongoQueryBindData bind(DuckDBTableFunctionBindInfo info) throws Exception {
+public MongoQueryBindData bind(DuckDBTableFunctionBindInfo info)
+    throws Exception {
     String collectionName = info.getParameter(0).getString();
-    String queryJson       = info.getParameter(1).getString();
-    String columnsJson     = info.getNamedParameter("columns").getString();
+    String queryJson      = info.getParameter(1).getString();
+    String columnsJson    = info.getNamedParameter("columns").getString();
     // ... read hostname / port / database / credentials ...
 
     MongoClient client = MongoClients.create(settings.build());
@@ -127,7 +128,7 @@ public MongoQueryBindData bind(DuckDBTableFunctionBindInfo info) throws Exceptio
     for (BsonValue bv : BsonArray.parse(columnsJson)) {
         String name = bv.asString().getValue();
         columns.add(name);
-        info.addResultColumn(name, String.class);   // declare it to DuckDB
+        info.addResultColumn(name, String.class); // declare it to DuckDB
     }
 
     Document query = Document.parse(queryJson);
@@ -142,7 +143,8 @@ Two aspects here generalize beyond MongoDB. DuckDB never parses or interprets th
 `init` runs once and prepares the execution state that `apply` will consume. In the example it issues the query and stores the resulting cursor in a [`MongoQueryInitData`](https://github.com/staticlibs/duckdb_mongo_example/blob/master/src/main/java/org/duckdb/example/MongoQueryInitData.java). It also pins execution to a single thread with `setMaxThreads(1)`, because this post does not cover multithreaded execution:
 
 ```java
-public MongoQueryInitData init(DuckDBTableFunctionInitInfo info) throws Exception {
+public MongoQueryInitData init(DuckDBTableFunctionInitInfo info)
+    throws Exception {
     info.setMaxThreads(1);
     MongoQueryBindData bindData = info.getBindData();
     FindIterable<Document> iter = bindData.collection.find(bindData.query);
@@ -155,17 +157,23 @@ public MongoQueryInitData init(DuckDBTableFunctionInitInfo info) throws Exceptio
 `apply` reflects DuckDB's vectorized execution model. Rather than returning rows, it writes them into the output data chunk column by column, up to the chunk's capacity of 2048 rows, and returns the number of rows produced:
 
 ```java
-public long apply(DuckDBTableFunctionCallInfo info, DuckDBDataChunkWriter output) throws Exception {
+public long apply(DuckDBTableFunctionCallInfo info,
+    DuckDBDataChunkWriter output) throws Exception {
     MongoCursor<Document> cursor = info.getInitData().getResultCursor();
 
     long row = 0;
     for (; row < output.capacity() && cursor.hasNext(); row++) {
         Document doc = cursor.next();
         for (long col = 0; col < output.columnCount(); col++) {
-            copyValueFromResultSetToVector(doc, output.vector(col), row, columns.get((int) col));
+            copyValueFromResultSetToVector(
+                doc,
+                output.vector(col),
+                row,
+                columns.get((int) col)
+            );
         }
     }
-    return row;   // 0 signals "no more data"
+    return row; // 0 signals "no more data"
 }
 ```
 
@@ -175,7 +183,7 @@ Values are written into typed vectors through the vector API, using `setString`,
 
 This example is a MongoDB connector, but the broader point is that DuckDB can now be extended in pure Java, putting the rich ecosystem of Java libraries within reach as a data source:
 
-- **No native build.** The project contains no C++. It is a Maven project with two dependencies, the DuckDB JDBC driver and the MongoDB driver. Adding a new source is ordinary Java work, done with the tools a team already uses and without touching a native toolchain.
+- **No native build.** The project contains no C++ code. It is a Maven project with two dependencies, the DuckDB JDBC driver and the MongoDB driver. Adding a new source is ordinary Java work, done with the tools a team already uses and without touching a native toolchain.
 - **Reuse of the official client.** The example does not reimplement a wire protocol or query language. It uses the vendor's Java driver and passes filters through unchanged. The same applies to any system with a JDBC driver or a Java SDK, such as a REST API, a message queue, or a SOAP service.
 - **In-process access.** The data is not exported and reloaded. It is read from a cursor during query execution. Because the result is an ordinary table function, it can be joined with Parquet files, CSV globs, or attached databases in a single SQL statement, so DuckDB acts as the query layer over the source rather than a copy of it.
 - **Predicates run at the source.** The filter is written in the source's own query language and handed to its driver unchanged, so it executes at the source, against its indexes, and only matching rows cross the wire. The selective work happens remotely, and DuckDB streams back only what it needs.
@@ -188,8 +196,11 @@ These are limitations of the current Java table-function API:
 - **Bind and init objects are not managed automatically.** In the current release, the caller is responsible for the lifecycle of the objects returned from `bind` and `init`, for example closing the MongoDB client and cursor after the query completes. A [`DuckDBTableFunctionState`]({% link docs/current/clients/java/functions.md %}#cleaning-up-resources) mechanism ([contributed](https://github.com/duckdb/duckdb-java/pull/803) by a community member) manages that lifecycle for you. The init object then becomes:
 
   ```java
-  public class MongoQueryInitData implements AutoCloseable /* DuckDBTableFunctionState */ {
+  public class MongoQueryInitData implements AutoCloseable
+      /* DuckDBTableFunctionState */ {
+
       final MongoCursor<Document> cursor;
+
       // ...
       @Override
       public void close() {
