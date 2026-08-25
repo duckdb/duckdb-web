@@ -23,10 +23,10 @@ repo:
   github: query-farm/stochastic
   ref: 81e91e342a0335e602581c2eb5d5e547354a6cd2
 
-extension_star_count: 26
-extension_star_count_pretty: 26
-extension_download_count: 5595
-extension_download_count_pretty: 5.6k
+extension_star_count: 27
+extension_star_count_pretty: 27
+extension_download_count: 5208
+extension_download_count_pretty: 5.2k
 image: '/images/community_extensions/social_preview/preview_community_extension_stochastic.png'
 layout: community_extension_doc
 ---

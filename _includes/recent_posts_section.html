@@ -1,16 +1,21 @@
 <section class="blog recentposts">
 	<div class="wrap">
-		<h2 class="headline-2">
-			{% if page.collection == "events" %}
-				Other Events
-			{% elsif page.collection == "library" %}
-				Other Library Resources
-			{% elsif page.collection == "everywhere" %}
-				Other Everywhere Posts
-			{% else %}
-				Recent Posts
-			{% endif %}
-		</h2>
+		<div class="blog-header">
+			<h2 class="headline-2">
+				{% if page.collection == "events" %}
+					Other Events
+				{% elsif page.collection == "library" %}
+					Other Library Resources
+				{% elsif page.collection == "everywhere" %}
+					Other Everywhere Posts
+				{% else %}
+					Recent Posts
+				{% endif %}
+			</h2>
+			<a href="{{ site.url }}{% if page.collection == "events" %}/events/{% elsif page.collection == "library" %}/library/{% elsif page.collection == "everywhere" %}/everywhere/{% else %}/news/{% endif %}" class="textbutton arrow-right">
+			All {% if page.collection == "events" %}events{% elsif page.collection == "library" %}library resources{% elsif page.collection == "everywhere" %}everywhere posts{% else %}blog posts{% endif %} <svg class="icon"><use href="#arrow-right"></use></svg>
+		</a>
+		</div>
 		<div class="newstileswrap">
 			{% if page.collection == "events" %}
 				{% assign items = site.events | sort: "date" | reverse %}
@@ -153,8 +158,5 @@
 				{% endif %}
 			{% endfor %}
 		</div>
-		<a href="{{ site.url }}{% if page.collection == "events" %}/events/{% elsif page.collection == "library" %}/library/{% elsif page.collection == "everywhere" %}/everywhere/{% else %}/news/{% endif %}" class="button transparent arrow-right">
-			All {% if page.collection == "events" %}events{% elsif page.collection == "library" %}library resources{% elsif page.collection == "everywhere" %}everywhere posts{% else %}blog posts{% endif %} <svg class="icon"><use href="#arrow-right"></use></svg>
-		</a>
 	</div>
 </section>

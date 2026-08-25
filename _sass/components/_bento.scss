@@ -1,0 +1,165 @@
+@use '../abstracts/variables' as *;
+@use '../abstracts/mixins' as *;
+
+.bento-grid {
+	display: grid;
+	grid-template-columns: repeat(4, 1fr);
+	gap: 20px;
+}
+
+.bento-box {
+	@include glass-card;
+	position: relative;
+	display: flex;
+	flex-direction: column;
+	align-items: flex-start;
+	gap: 8px;
+	min-height: 180px;
+	padding: var(--page-box-padding-primary, 24px);
+	overflow: hidden;
+
+	&.wide {
+		grid-column: span 2;
+	}
+
+	.bento-title {
+		display: flex;
+		align-items: center;
+		gap: 8px;
+
+		.icon {
+			width: 20px;
+			height: 20px;
+			flex-shrink: 0;
+			color: var(--main-text-secondary-color, #666);
+		}
+
+		span {
+			@include title-2;
+			color: var(--main-text-primary-color, #0d0d0d);
+		}
+	}
+
+	p {
+		@include body-small;
+		color: var(--main-text-secondary-color, #666);
+		margin: 0;
+	}
+
+	&.wide p {
+		max-width: 296px;
+	}
+
+	.bento-link {
+		display: inline-flex;
+		align-items: center;
+		gap: 7px;
+		margin-top: auto;
+		padding-top: 8px;
+		font-size: var(--type-label-1, 14px);
+		font-weight: var(--type-weight-standard, 450);
+		line-height: 1;
+		color: var(--main-text-secondary-color, #666);
+		text-decoration: none;
+
+		.icon {
+			width: 14px;
+			height: 14px;
+			stroke-width: 2;
+		}
+
+		&:hover {
+			color: var(--main-text-primary-color, #0d0d0d);
+		}
+	}
+
+	.bento-title,
+	p,
+	.bento-link {
+		position: relative;
+		z-index: 1;
+	}
+
+	.bento-graphic {
+		position: absolute;
+		top: 0;
+		right: 0;
+		bottom: 0;
+		z-index: 0;
+		pointer-events: none;
+		line-height: 0;
+
+		svg {
+			display: block;
+			height: 100%;
+			width: auto;
+		}
+
+		&::after {
+			content: '';
+			position: absolute;
+			left: 0;
+			right: 0;
+			bottom: 0;
+			height: 40%;
+			background: linear-gradient(to bottom, transparent, var(--main-body-background-color, #fafafa));
+			opacity: 0.7;
+		}
+	}
+}
+
+@media only screen and (max-width: 1100px) {
+	.bento-grid {
+		grid-template-columns: repeat(2, 1fr);
+	}
+
+	.bento-box.wide {
+		grid-column: auto;
+
+		.bento-graphic {
+			opacity: 0.5;
+		}
+	}
+}
+
+@media only screen and (max-width: 640px) {
+	.bento-grid {
+		display: flex;
+		gap: 12px;
+		margin: 0 -15px;
+		padding: 0 15px;
+		overflow-x: auto;
+		scroll-snap-type: x mandatory;
+		scroll-padding-left: 15px;
+		-webkit-overflow-scrolling: touch;
+		scrollbar-width: none;
+
+		&::-webkit-scrollbar {
+			display: none;
+		}
+	}
+
+	.bento-box,
+	.bento-box.wide {
+		flex: 0 0 82%;
+		min-height: 170px;
+		scroll-snap-align: start;
+	}
+
+	.bento-box .bento-title {
+		gap: 6px;
+	}
+
+	.bento-box.wide {
+		flex-basis: 92%;
+
+		p {
+			max-width: 220px;
+		}
+
+		.bento-graphic {
+			right: -50px;
+			opacity: 0.5;
+		}
+	}
+}

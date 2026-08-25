@@ -61,10 +61,10 @@ docs:
 
     For more information on the CityJSON format, see https://www.cityjson.org/.
 
-extension_star_count: 9
-extension_star_count_pretty: 9
-extension_download_count: 923
-extension_download_count_pretty: 923
+extension_star_count: 10
+extension_star_count_pretty: 10
+extension_download_count: 995
+extension_download_count_pretty: 995
 image: '/images/community_extensions/social_preview/preview_community_extension_cityjson.png'
 layout: community_extension_doc
 ---

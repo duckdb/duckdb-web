@@ -2,7 +2,7 @@
 
 
 @mixin display-1 {
-	font-size: var(--type-display-1, 57px);
+	font-size: var(--type-display-1, 56px);
 	font-weight: 600;
 	line-height: 1.1;
 	letter-spacing: -0.00249em;
@@ -10,14 +10,14 @@
 }
 
 @mixin display-2 {
-	font-size: var(--type-display-2, 45px);
+	font-size: var(--type-display-2, 44px);
 	font-weight: 600;
 	line-height: 1.2;
 	font-family: "SuisseIntl", sans-serif;
 }
 
 @mixin display-3 {
-	font-size: var(--type-display-3, 36px);
+	font-size: var(--type-display-3, 34px);
 	font-weight: 600;
 	line-height: 1.2;
 	font-family: "SuisseIntl", sans-serif;
@@ -47,14 +47,14 @@
 }
 
 @mixin title-1 {
-	font-size: var(--type-title-1, 18px);
+	font-size: var(--type-title-1, 20px);
 	font-weight: 600;
 	line-height: 1.2;
 	font-family: "SuisseIntl", sans-serif;
 }
 
 @mixin title-2 {
-	font-size: var(--type-title-2, 16px);
+	font-size: var(--type-title-2, 17px);
 	font-weight: 600;
 	line-height: 1.2;
 	letter-spacing: 0.001em;
@@ -62,7 +62,7 @@
 }
 
 @mixin title-3 {
-	font-size: var(--type-title-3, 14px);
+	font-size: var(--type-title-3, 16px);
 	font-weight: 600;
 	line-height: 1.2;
 	letter-spacing: 0.001em;
@@ -119,7 +119,7 @@
 @mixin body-small {
 	font-size: var(--type-body-small, 14px);
 	font-weight: var(--type-weight-standard, 450);
-	line-height: 1.4;
+	line-height: 1.5;
 	letter-spacing: 0.005em;
 	font-family: "SuisseIntl", sans-serif;
 }
@@ -173,6 +173,15 @@
 	font-size: var(--type-code-large, 16px);
 	line-height: 1.5;
 	font-family: "JetBrainsMono-Regular";
+}
+
+@mixin glass-card {
+	background: var(--main-codebox-main-background-color, rgba(250, 250, 250, 0.8));
+	border: 1px solid var(--main-codebox-border-color, rgba(13, 13, 13, 0.08));
+	border-radius: var(--page-radius-box);
+	box-shadow: 0 0 30px 0 rgba(0, 0, 0, 0.03);
+	-webkit-backdrop-filter: blur(3.5px);
+	        backdrop-filter: blur(3.5px);
 }
 
 .max-width-small{
@@ -406,7 +415,8 @@
 	}
 
 	table thead th {
-		@include title-2();
+		@include body-large();
+		font-weight: 600;
 	}
 
 	table tbody td {

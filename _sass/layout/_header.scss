@@ -361,7 +361,7 @@ body.blog header .headerline .headercontent .landingmenu nav .search_icon {
 	}
 	
 	&.yellow{
-		background: var(--main-ribbon-background-color-yellow, #fffa9999);
+		background: linear-gradient(90deg, var(--main-ribbon-background-color-yellow, #fffa9999) 0%, var(--main-ribbon-background-color-yellow-2, #fff10099) 100%);
 		border-bottom: 1px solid var(--main-ribbon-border-color-yellow, #665d0099);
 	}
 	

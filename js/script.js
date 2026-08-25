@@ -1003,7 +1003,25 @@ $('body.documentation #main_content_wrap a.externallink').each(function () {
 			updateInstallation($(this));
 		});
 	}
-	
+
+	// DUCKSTACK TABS ON LANDING/HOME PAGE
+	if ($("section.duckstack .topbar").length) {
+		const $stackTopbar = $("section.duckstack .topbar");
+		const $stackItems = $stackTopbar.find("> ul > li");
+		const $stackPanels = $("section.duckstack .stack-panel");
+
+		updateHighlight($stackTopbar, $stackItems.filter(".active"));
+
+		$stackItems.click(function () {
+			$stackItems.removeClass("active");
+			$(this).addClass("active");
+			updateHighlight($stackTopbar, $(this));
+			const stack = $(this).attr("data-stack");
+			$stackPanels.removeClass("active");
+			$stackPanels.filter(`[data-stack='${stack}']`).addClass("active");
+		});
+	}
+
 	/** CUSTOM SELECT ON HOME **/
 	function closeCustomSelects() {
 		$('div.select-styled.active').removeClass('active').attr('aria-expanded', 'false');
@@ -1280,6 +1298,72 @@ $('body.documentation #main_content_wrap a.externallink').each(function () {
 	if ($duckconSlider.length) {
 		const slider = new Swiper(duckconSliderClass, duckconSliderOptions);
 	}
+
+	// QUOTE SLIDER
+	$('.quote-slider').each(function() {
+		var $wrap = $(this);
+		var $quotes = $wrap.children('blockquote.quote');
+		if ($quotes.length < 2 || typeof Swiper === 'undefined') return;
+
+		var $swiper = $('<div class="swiper"><div class="swiper-wrapper"></div></div>');
+		var $track = $swiper.find('.swiper-wrapper');
+		$quotes.each(function() {
+			$('<div class="swiper-slide"></div>').append(this).appendTo($track);
+		});
+
+		var $controls = $(
+			'<div class="quote-slider-controls">' +
+				'<button type="button" class="quote-slider-prev" aria-label="Previous quote">' +
+					'<svg class="icon"><use href="#chevron-left"></use></svg>' +
+				'</button>' +
+				'<button type="button" class="quote-slider-next" aria-label="Next quote">' +
+					'<svg class="icon"><use href="#chevron-right"></use></svg>' +
+				'</button>' +
+			'</div>'
+		);
+
+		$wrap.empty().append($controls).append($swiper);
+
+		function trailingSpace() {
+			var slide = $swiper[0].querySelector('.swiper-slide');
+			return slide ? Math.max(0, $swiper[0].clientWidth - slide.offsetWidth) : 0;
+		}
+
+		var delay = parseInt($wrap.data('autoplay'), 10);
+
+		new Swiper($swiper[0], {
+			slidesPerView: 'auto',
+			spaceBetween: 20,
+			slidesOffsetAfter: trailingSpace(),
+			autoHeight: true,
+			grabCursor: true,
+			autoplay: delay > 0 ? {
+				delay: delay,
+				disableOnInteraction: true,
+				pauseOnMouseEnter: true,
+				stopOnLastSlide: true
+			} : false,
+			navigation: {
+				nextEl: $controls.find('.quote-slider-next')[0],
+				prevEl: $controls.find('.quote-slider-prev')[0]
+			},
+			on: {
+				init: function() {
+					$wrap.toggleClass('is-end', this.isEnd);
+				},
+				resize: function() {
+					this.params.slidesOffsetAfter = trailingSpace();
+					this.update();
+				},
+				reachEnd: function() {
+					$wrap.addClass('is-end');
+				},
+				fromEdge: function() {
+					$wrap.removeClass('is-end');
+				}
+			}
+		});
+	});
 
 	// Author marquee: keep the scroll speed constant regardless of name length
 	$(document).on('mouseenter', '.postpreview', function() {
