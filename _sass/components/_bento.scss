@@ -94,6 +94,17 @@
 			height: 100%;
 			width: auto;
 		}
+
+		&::after {
+			content: '';
+			position: absolute;
+			left: 0;
+			right: 0;
+			bottom: 0;
+			height: 40%;
+			background: linear-gradient(to bottom, transparent, var(--main-body-background-color, #fafafa));
+			opacity: 0.7;
+		}
 	}
 }
 
@@ -133,6 +144,10 @@
 		flex: 0 0 82%;
 		min-height: 170px;
 		scroll-snap-align: start;
+	}
+
+	.bento-box .bento-title {
+		gap: 6px;
 	}
 
 	.bento-box.wide {

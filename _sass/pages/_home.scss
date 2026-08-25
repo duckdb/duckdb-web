@@ -662,13 +662,14 @@ body.landing{
 					display: block;
 				}
 				h3{
+					@include title-1;
 					margin: 0 0 12px;
 					color: var(--main-text-primary-color-strong, #050505);
 				}
 				p{
 					@include body-small;
 					color: var(--main-text-secondary-color, #666);
-					margin: 0 0 14px;
+					margin: 0 0 10px;
 				}
 			}
 			.stack-link{
