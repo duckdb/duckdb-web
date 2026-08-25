@@ -26,41 +26,41 @@ Starting this fall, the [DuckDB Foundation](https://duckdb.foundation/) will als
 
 ## Support Model
 
-- **Where to file tickets:** Users can file bug reports as issues on GitHub ([DuckDB](https://github.com/duckdb/duckdb/issues), [DuckLake](https://github.com/duckdb/ducklake/issues), [Quack](https://github.com/duckdb/duckdb-quack/issues), and [other repositories](https://duckdb.org/docs/current/dev/repositories)). Users can also suggest features on GitHub Discussions of the respective repositories.  
+- **Where to file tickets:** Users can file bug reports as issues on GitHub ([DuckDB](https://github.com/duckdb/duckdb/issues), [DuckLake](https://github.com/duckdb/ducklake/issues), [Quack](https://github.com/duckdb/duckdb-quack/issues), and [other repositories]({% link docs/current/dev/repositories.md %})). Users can also suggest features on GitHub Discussions of the respective repositories.
 - **Response time:** We attempt to reproduce incoming issues within a few business days. Internally, we assign issues in weekly batches. However, we are unable to guarantee that issues will be resolved (e.g., fixed) within any time frame.
 
 ## Scope
 
-- **Client APIs:**  
-  - We provide first-tier support for the command line shell as well as the C, Go, Java (JDBC), ODBC, Node.js, Python, Rust and WebAssembly client APIs.  
-  - The C++ API is intended for internal use and is not designed as a stable user-facing API. See the [Client overview page](https://duckdb.org/docs/current/clients/overview) for more details. (Note that starting from version v2.0, we will ship a stable C++ API.)  
-- **Extensions:** The community support policy only covers the primary extensions from the [core extensions](https://duckdb.org/docs/current/core_extensions/overview).  
-- **Crashes and internal errors:** Issues that cause crashes (segfault, bus error, abort) and issues that result in [internal errors](https://duckdb.org/docs/current/dev/internal_errors) get higher priority.  
-- **Platforms:** We only support the following platforms:  
-  - Linux x86_64 & aarch64 (mainstream distributions under support by distributor running with glibc). The last three Ubuntu LTS releases are safe bets (currently: Ubuntu 22.04, 24.04 and 26.04)  
-  - macOS latest  
-  - Windows 11+ on x86_64  
-- **Versions:** We support the following versions:  
-  - The latest stable version (currently v{{ site.current_duckdb_version }})  
-  - The latest LTS version (currently v{{ site.lts_duckdb_version }})  
+- **Client APIs:**
+  - We provide first-tier support for the command line shell as well as the C, Go, Java (JDBC), ODBC, Node.js, Python, Rust and WebAssembly client APIs.
+  - The C++ API is intended for internal use and is not designed as a stable user-facing API. See the [Client overview page]({% link docs/current/clients/overview.md %}) for more details. (Note that starting from version v2.0, we will ship a stable C++ API.)
+- **Extensions:** The community support policy only covers the primary extensions from the [core extensions]({% link docs/current/core_extensions/overview.md %}).
+- **Crashes and internal errors:** Issues that cause crashes (segfault, bus error, abort) and issues that result in [internal errors]({% link docs/current/dev/internal_errors.md %}) get higher priority.
+- **Platforms:** We only support the following platforms:
+  - Linux x86_64 & aarch64 (mainstream distributions under support by distributor running with glibc). The last three Ubuntu LTS releases are safe bets (currently: Ubuntu 22.04, 24.04 and 26.04)
+  - macOS latest
+  - Windows 11+ on x86_64
+- **Versions:** We support the following versions:
+  - The latest stable version (currently v{{ site.current_duckdb_version }})
+  - The latest LTS version (currently v{{ site.lts_duckdb_version }})
   - The bleeding edge version ([`main` branch](https://github.com/duckdb/duckdb/tree/main)) of DuckDB
 
 Out of scope:
 
-- **Architectures:** We [do not support](https://duckdb.org/docs/current/dev/building/unofficial_and_unsupported_platforms) 32-bit and big-endian architectures.  
-- **Debug builds:** Debug builds of DuckDB's clients and tooling are out of scope.  
-- **Internals:** We are unable to answer questions about DuckDB internals, e.g., physical operators or storage internals. In general, if an issue cannot be triggered from SQL or one of the [supported client APIs](#apis), it's probably out of scope.
+- **Architectures:** We [do not support]({% link docs/current/dev/building/unofficial_and_unsupported_platforms.md %}) 32-bit and big-endian architectures.
+- **Debug builds:** Debug builds of DuckDB's clients and tooling are out of scope.
+- **Internals:** We are unable to answer questions about DuckDB internals, e.g., physical operators or storage internals. In general, if an issue cannot be triggered from SQL or one of the [supported client APIs](#scope), it's probably out of scope.
 
 ## Issue Submission Guide
 
 There are several ways that you can help us resolve issues more quickly. The more time you can spend to reduce our team's workload regarding the issue, the more likely we can help. We receive a high volume of issues and we sometimes spend an enormous amount of time divining missing information in bug reports like schema, datasets, previous state, environment, etc. If you make sure that this information is available upon submission, we can proceed much more quickly with resolving the issue.
 
-- **Issue template:** Please follow the [issue template](https://github.com/duckdb/duckdb/blob/main/.github/ISSUE_TEMPLATE/bug_report.yml).  
-- **Data sharing:** Please make every effort to provide the data that is triggering the issue. The template advises to include all of the required data in your issue itself. Sometimes this means actually creating a dataset that you can share, which is preferably minimal in size.  
-- **Succeeding examples:** If possible, include test cases that succeed that are similar to the failure to help pinpoint the problem.  
-- **Multiple clients:** Try to replicate the issue in multiple clients (CLI preferred).  
-- **Debugging issues:** Debugging issues is a fantastic way to contribute to DuckDB\!  
-- **Background information:** Providing background information about why you are approaching your task the way you are can help DuckLabs suggest workarounds prior to a fix.  
+- **Issue template:** Please follow the [issue template](https://github.com/duckdb/duckdb/blob/main/.github/ISSUE_TEMPLATE/bug_report.yml).
+- **Data sharing:** Please make every effort to provide the data that is triggering the issue. The template advises to include all of the required data in your issue itself. Sometimes this means actually creating a dataset that you can share, which is preferably minimal in size.
+- **Succeeding examples:** If possible, include test cases that succeed that are similar to the failure to help pinpoint the problem.
+- **Multiple clients:** Try to replicate the issue in multiple clients (CLI preferred).
+- **Debugging issues:** Debugging issues is a fantastic way to contribute to DuckDB!
+- **Background information:** Providing background information about why you are approaching your task the way you are can help DuckLabs suggest workarounds prior to a fix.
 - **Conciseness:** Agentic coding tools tend to generate large amounts of text with a low information content. Please clean these up before submitting.
 
 ## LTS Releases
