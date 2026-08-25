@@ -572,11 +572,11 @@ body.layout_default.blog_typography {
 
     .language-console {
         div.highlight {
-            border: 1px solid var(--doc-warning-border-color, rgba(255, 204, 204, 0.60));
+            border: 1px solid var(--doc-box-warning-border, #FFCBA7);
         }
 
         pre {
-            background: var(--doc-warning-background-color, rgba(255, 229, 229, 0.60));
+            background: var(--doc-box-warning, #FFEFE1);
         }
     }
 
