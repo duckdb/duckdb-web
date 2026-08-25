@@ -21,7 +21,7 @@ DuckDB is also widely used by practitioners in the U.S. east coast, including fi
 
 ## Venue
 
-The venue will be hosted at the [BOS11 Amazon office in Cambrige](https://maps.app.goo.gl/9vCjSpiRkMCgiGCj8).
+The venue will be hosted at the [BOS11 Amazon office in Cambridge](https://maps.app.goo.gl/9vCjSpiRkMCgiGCj8).
 
 ## Attendance
 
