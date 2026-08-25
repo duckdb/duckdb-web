@@ -10,13 +10,13 @@ image: "/images/blog/thumbs/java.png"
 
 In a large organization, data is spread across many systems, including relational databases, document stores, message queues, data lakes, and cloud data warehouses. Some of these systems can be reached only through a vendor SDK, usually provided in Java, or a [SOAP](https://en.wikipedia.org/wiki/Service-oriented_architecture) endpoint, and many sit behind custom authentication or single sign-on that is awkward to satisfy from anything but a JVM client. The layer that ties these together is often a JVM-based distributed query engine, such as [Trino](https://trino.io/), that can run a single query joining across multiple data sources. The Java clients for those systems are mature and fast, with streaming APIs and, increasingly, virtual threads for asynchronous work. They are also already in production and cleared by corporate security.
 
-Teams increasingly add DuckDB to these environments for fast single-node analytics. Because the surrounding infrastructure is Java, they use DuckDB through its [JDBC driver]({% link docs/current/clients/java/overview.md %}). But a query engine is only as useful as the data it can reach, and in these environments much of that data is accessible only through Java client libraries.
+Teams increasingly add DuckDB to these environments for fast single-node analytics. Because the surrounding infrastructure is Java, they use the [DuckDB Java client]({% link docs/current/clients/java/overview.md %}). But a query engine is only as useful as the data it can reach, and in these environments much of that data is accessible only through Java client libraries.
 
 ## Bringing External Data into DuckDB
 
-In these environments, some data is best processed in SQL, which DuckDB handles in a performant, low-overhead way, while other data arrives from external Java-sourced systems and is often processed in application code on top of a DuckDB result set. It is frequently more convenient, and in many cases more performant, to bring that external data into DuckDB's SQL directly. *Table functions* are intended for exactly that.
+Before reaching for the DuckDB Java (JDBC) client, it is worth asking what DuckDB can already read on its own, and the answer is almost everything. It reads Parquet and other files directly from data lakes. It connects to relational databases such as PostgreSQL, MySQL, and SQLite directly. The ODBC extension reaches proprietary databases such as Oracle, SQL Server, and DB2. JSON functions can query REST-like services by treating them as remote JSON files, and community extensions cover many more systems.
 
-DuckDB already reads almost everything. It reads Parquet and other files directly from data lakes. It connects to tightly integrated relational databases such as PostgreSQL, MySQL, and SQLite directly. The ODBC extension reaches proprietary databases such as Oracle, SQL Server, and DB2. JSON functions can query REST-like services by treating them as remote JSON files. And community extensions cover many more systems. For anything not covered, DuckDB has always supported *table functions* as a way to plug in a custom source, and those functions could be written in C++.
+For a source that none of those cover, the data typically ends up in application code, processed by hand on top of a DuckDB result set. It is often more convenient, and frequently more performant, to bring that data into DuckDB's SQL directly, where it can be filtered and joined like any other table. [*Table functions*]({% link docs/current/clients/c/table_functions.md %}) are meant for exactly that. DuckDB has always let you plug in a custom source this way, but until now such a function had to be written in C++.
 
 ## Extending DuckDB in Pure Java
 
@@ -77,7 +77,7 @@ That is the heterogeneous join. A remote system reached through its Java driver 
 
 ## Table Functions in Java
 
-Adding a new data source no longer requires a native extension. Through the JDBC driver, a table function is registered entirely in Java using the `DuckDBFunctions.tableFunction()` builder. The builder declares the function name, its positional and named parameters and their types, and the implementation class. Registration in the example is done in [`MongoExample.java`](https://github.com/staticlibs/duckdb_mongo_example/blob/master/src/main/java/org/duckdb/example/MongoExample.java):
+Adding a new data source no longer requires a native extension. Through the DuckDB Java client, a table function is registered entirely in Java using the `DuckDBFunctions.tableFunction()` builder. The builder declares the function name, its positional and named parameters and their types, and the implementation class. Registration in the example is done in [`MongoExample.java`](https://github.com/staticlibs/duckdb_mongo_example/blob/master/src/main/java/org/duckdb/example/MongoExample.java):
 
 ```java
 DuckDBFunctions.tableFunction()
@@ -179,11 +179,13 @@ public long apply(DuckDBTableFunctionCallInfo info,
 
 Values are written into typed vectors through the vector API, using `setString`, `setInt`, `setDouble`, `setNull`, and related methods. DuckDB calls `apply` repeatedly, draining the source one vector-sized batch of 2048 rows at a time, so the full result does not have to be materialized in memory on either side. In the example, the BSON-to-vector conversion lives in [`MongoTypes.java`](https://github.com/staticlibs/duckdb_mongo_example/blob/master/src/main/java/org/duckdb/example/MongoTypes.java).
 
+> Writing rows into a `DuckDBDataChunkWriter` here is the mirror image of reading them out. The [previous post]({% post_url 2026-08-21-chunked-query-results-java-driver %}) covered consuming query results through the `DuckDBDataChunkReader` API, where the driver hands you chunks to read. As shown in the code snippet above, a table function uses the writer side of the same columnar model to produce them.
+
 ## Implications
 
 This example is a MongoDB connector, but the broader point is that DuckDB can now be extended in pure Java, putting the rich ecosystem of Java libraries within reach as a data source:
 
-- **No native build.** The project contains no C++ code. It is a Maven project with two dependencies, the DuckDB JDBC driver and the MongoDB driver. Adding a new source is ordinary Java work, done with the tools a team already uses and without touching a native toolchain.
+- **No native build.** The project contains no C++ code. It is a Maven project with two dependencies, the DuckDB Java client and the MongoDB driver. Adding a new source is ordinary Java work, done with the tools a team already uses and without touching a native toolchain.
 - **Reuse of the official client.** The example does not reimplement a wire protocol or query language. It uses the vendor's Java driver and passes filters through unchanged. The same applies to any system with a JDBC driver or a Java SDK, such as a REST API, a message queue, or a SOAP service.
 - **In-process access.** The data is not exported and reloaded. It is read from a cursor during query execution. Because the result is an ordinary table function, it can be joined with Parquet files, CSV globs, or attached databases in a single SQL statement, so DuckDB acts as the query layer over the source rather than a copy of it.
 - **Predicates run at the source.** The filter is written in the source's own query language and handed to its driver unchanged, so it executes at the source, against its indexes, and only matching rows cross the wire. The selective work happens remotely, and DuckDB streams back only what it needs.
