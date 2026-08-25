@@ -10,13 +10,13 @@ image: "/images/blog/thumbs/java.png"
 
 In a large organization, data is spread across many systems, including relational databases, document stores, message queues, data lakes, and cloud data warehouses. Some of these systems can be reached only through a vendor SDK, usually provided in Java, or a [SOAP](https://en.wikipedia.org/wiki/Service-oriented_architecture) endpoint, and many sit behind custom authentication or single sign-on that is awkward to satisfy from anything but a JVM client. The layer that ties these together is often a JVM-based distributed query engine, such as [Trino](https://trino.io/), that can run a single query joining across multiple data sources. The Java clients for those systems are mature and fast, with streaming APIs and, increasingly, virtual threads for asynchronous work. They are also already in production and cleared by corporate security.
 
-Teams increasingly add DuckDB to these environments for fast single-node analytics. Because the surrounding infrastructure is Java, they use the [DuckDB Java client]({% link docs/current/clients/java/overview.md %}). But a query engine is only as useful as the data it can reach, and in these environments much of that data is accessible only through Java client libraries.
+Teams increasingly add DuckDB to these environments for fast single-node analytics. Because the surrounding infrastructure is Java, they use the [DuckDB Java client]({% link docs/current/clients/java/overview.md %}) (the JDBC driver). But a query engine is only as useful as the data it can reach, and in these environments much of that data is accessible only through Java client libraries.
 
 ## Bringing External Data into DuckDB
 
-Before reaching for the DuckDB Java (JDBC) client, it is worth asking what DuckDB can already read on its own, and the answer is almost everything. It reads Parquet and other files directly from data lakes. It connects to relational databases such as PostgreSQL, MySQL, and SQLite directly. The ODBC extension reaches proprietary databases such as Oracle, SQL Server, and DB2. JSON functions can query REST-like services by treating them as remote JSON files, and community extensions cover many more systems.
+Before writing a table function to reach a new source, it is worth asking what DuckDB can already read on its own, and the answer is almost everything. It reads Parquet and other files directly from data lakes. It connects to relational databases such as PostgreSQL, MySQL, and SQLite directly. The ODBC extension reaches proprietary databases such as Oracle, SQL Server, and DB2. JSON functions can query REST-like services by treating them as remote JSON files, and community extensions cover many more systems.
 
-For a source that none of those cover, the data typically ends up in application code, processed by hand on top of a DuckDB result set. It is often more convenient, and frequently more performant, to bring that data into DuckDB's SQL directly, where it can be filtered and joined like any other table. [*Table functions*]({% link docs/current/clients/c/table_functions.md %}) are meant for exactly that. DuckDB has always let you plug in a custom source this way, but until now such a function had to be written in C++.
+For a source that none of those cover, the data typically ends up in application code, processed by hand on top of a DuckDB result set. It is often more convenient, and frequently more performant, to bring that data into DuckDB's SQL directly, where it can be filtered and joined like any other table. [*Table functions*]({% link docs/current/clients/c/table_functions.md %}) are meant for exactly that. DuckDB has always let you plug in a custom source this way, but until now that meant writing the function in C++, which in practice was the only realistic choice.
 
 ## Extending DuckDB in Pure Java
 
@@ -198,8 +198,8 @@ These are limitations of the current Java table-function API:
 - **Bind and init objects are not managed automatically.** In the current release, the caller is responsible for the lifecycle of the objects returned from `bind` and `init`, for example closing the MongoDB client and cursor after the query completes. A [`DuckDBTableFunctionState`]({% link docs/current/clients/java/functions.md %}#cleaning-up-resources) mechanism ([contributed](https://github.com/duckdb/duckdb-java/pull/803) by a community member) manages that lifecycle for you. The init object then becomes:
 
   ```java
-  public class MongoQueryInitData implements AutoCloseable
-      /* DuckDBTableFunctionState */ {
+  public class MongoQueryInitData
+      implements AutoCloseable /* DuckDBTableFunctionState */ {
 
       final MongoCursor<Document> cursor;
 
