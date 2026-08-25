@@ -34,12 +34,12 @@ Starting this fall, the [DuckDB Foundation](https://duckdb.foundation/) will als
 - **Extensions:** The community support policy only covers the primary extensions from the [core extensions](https://duckdb.org/docs/current/core_extensions/overview).  
 - **Crashes and internal errors:** Issues that cause crashes (segfault, bus error, abort) and issues that result in [internal errors](https://duckdb.org/docs/current/dev/internal_errors) get higher priority.  
 - **Platforms:** We only support the following platforms:  
-  - Linux x86\_64 & aarch64 (mainstream distributions under support by distributor running with glibc). The last three Ubuntu LTS releases are safe bets (currently: Ubuntu 22.04, 24.04 and 26.04)  
+  - Linux x86_64 & aarch64 (mainstream distributions under support by distributor running with glibc). The last three Ubuntu LTS releases are safe bets (currently: Ubuntu 22.04, 24.04 and 26.04)  
   - macOS latest  
-  - Windows 11+ on x86\_64  
+  - Windows 11+ on x86_64  
 - **Versions:** We support the following versions:  
-  - The latest stable version (currently v{{ site.current\_duckdb\_version }})  
-  - The latest LTS version (currently v{{ site.lts\_duckdb\_version }})  
+  - The latest stable version (currently v{{ site.current_duckdb_version }})  
+  - The latest LTS version (currently v{{ site.lts_duckdb_version }})  
   - The bleeding edge version ([`main` branch](https://github.com/duckdb/duckdb/tree/main)) of DuckDB
 
 Out of scope:
