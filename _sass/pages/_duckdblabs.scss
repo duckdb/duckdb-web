@@ -677,6 +677,25 @@ body.newsroom{
 	}
 }
 
+body.press-release{
+	.singleentry .release-date{
+		@include body-standard();
+		color: var(--main-text-secondary-color, #666);
+	}
+
+	.singleentry .release-date + ul.summary{
+		margin-top: 36px;
+	}
+
+	.singleentry ul.summary{
+		padding: 0 0 0 20px;
+
+		li{
+			color: var(--main-text-secondary-color, #666);
+		}
+	}
+}
+
 .searchfield{
 	position: relative;
 	display: flex;
