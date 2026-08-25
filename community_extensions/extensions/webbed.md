@@ -8,7 +8,7 @@ excerpt: |
 extension:
   name: webbed
   description: Comprehensive processing extension for web markup languages (XML and HTML) with SAX streaming for large files, intelligent schema inference, XPath-based data extraction, and HTML table parsing.
-  version: 2.6.1
+  version: 2.7.0
   language: C++
   build: cmake
   license: MIT
@@ -22,9 +22,9 @@ extension:
 repo:
   github: teaguesterling/duckdb_webbed
   andium: ddda30f11352138b2451657419640370d1612137
-  # andium (DuckDB v1.4.5 track) left at its prior commit; the v2.6.1
-  # structured-inline fix ships on the v1.5.x track via ref.
-  ref: refs/tags/v2.6.1
+  # andium (DuckDB v1.4.5 track) left at its prior commit; the v2.7.0
+  # correctness fixes ship on the v1.5.x track via ref.
+  ref: c1b32efa4b8106d04ae74d0d898d9a650461792f
 docs:
   docs_url: https://duckdb-webbed.readthedocs.io
   hello_world: |
@@ -97,12 +97,12 @@ docs:
 
     See https://duckdb-webbed.readthedocs.io for comprehensive documentation and examples.
 
-    Built on libxml2 for robust, standards-compliant parsing with comprehensive error handling and memory-safe RAII implementation. 91 test suites with 3011 assertions, including DOM/SAX equivalence, adversarial/security, and multi-file parallelism testing. The extension supports mixed file systems, configurable schema inference, and efficient processing of large document collections.
+    Built on libxml2 for robust, standards-compliant parsing with comprehensive error handling and memory-safe RAII implementation. 94 test suites with 3155 assertions, including DOM/SAX equivalence, adversarial/security, and multi-file parallelism testing. The extension supports mixed file systems, configurable schema inference, and efficient processing of large document collections.
 
 extension_star_count: 70
 extension_star_count_pretty: 70
-extension_download_count: 19517
-extension_download_count_pretty: 19.5k
+extension_download_count: 15619
+extension_download_count_pretty: 15.6k
 image: '/images/community_extensions/social_preview/preview_community_extension_webbed.png'
 layout: community_extension_doc
 ---
