@@ -65,6 +65,7 @@ body:not(.layout_default) .blog_typography{
         position: relative;
         padding-top: 3px;
 
+
         @media only screen and (max-width: 1180px) {
             display: none;
         }
@@ -161,4 +162,8 @@ body.release-calendar #main_content_wrap {
             min-width: 40px;
         }
     }
+}
+
+.layout_default #main_content_wrap:has(.pagetitle) .toc_sidebar {
+    padding-top: 65px;
 }

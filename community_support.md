@@ -1,19 +1,22 @@
 ---
 layout: default
 title: DuckDB Community Support Policy
-body_class: tmguidelines
-max_page_width: small
+body_class: history blog_typography
+toc: true
 redirect_from:
 - /support
 ---
 
-# DuckDB Community Support Policy
+<div class="wrap pagetitle">
+  <div class="pagetitle-heading" role="heading" aria-level="1">DuckDB Community Support Policy</div>
+</div>
 
 (Last updated: August 26, 2026)
 
 ## Overview
 
 We continue to be amazed by the growth of the DuckDB community. DuckDB now sees more than three million downloads each day, alongside an active and rapidly growing community across GitHub, social media, meetups, and other channels. When we started DuckDB in 2018, we could not have imagined this level of adoption. We remain deeply grateful to everyone who uses, contributes to, and supports the project.
+{: .lead }
 
 Until now, the size of our team has limited the level of support we could provide as the community grew. We have had to make difficult choices about where to focus our time, balancing the development and maintenance of DuckDB with the needs of an increasingly large and diverse user base.
 
