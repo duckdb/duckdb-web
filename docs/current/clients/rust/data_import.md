@@ -9,7 +9,7 @@ title: Import Data
 
 ## Overview
 
-The Rust client offers two ways to get data into DuckDB in bulk: the high-performance [Appender](#appender) for inserting rows from Rust, and reading directly from [data files](#reading-data-files) such as Parquet, CSV, and JSON. This page describes both.
+The Rust client offers two ways to get data into DuckDB in bulk: the high-performance [Appender](#appender) for inserting rows from Rust, and reading directly from [data files](#reading-data-files) such as Parquet, CSV, and JSON. Both are described below.
 
 ## Appender
 

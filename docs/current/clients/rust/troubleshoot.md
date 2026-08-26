@@ -40,7 +40,7 @@ Alternatively, statically link ICU by enabling the crate's `icu` feature, which 
 
 The `loadable-extension` feature builds a DuckDB extension rather than a client application. When it is enabled, entry points such as `Connection::open_in_memory()` panic if they are called outside an extension context, because there is no host DuckDB instance to attach to.
 
-Do not enable `loadable-extension` for a client application; use it only when building an extension. See [Define Functions]({% link docs/current/clients/rust/functions.md %}#building-a-loadable-extension) for how loadable extensions are built and packaged.
+Do not enable `loadable-extension` for a client application. Use it only when building an extension. See [Write User Defined Functions]({% link docs/current/clients/rust/functions.md %}#building-a-loadable-extension) for how loadable extensions are built and packaged.
 
 ## Cross-Compiling with `bundled`
 
@@ -49,5 +49,5 @@ Cross-compiling with the `bundled` feature compiles DuckDB's C++ source for the 
 ## Further Reading
 
 * [Rust Client]({% link docs/current/clients/rust/overview.md %}) — installation, the `bundled` feature, and the full list of Cargo feature flags.
-* [Define Connections]({% link docs/current/clients/rust/connecting.md %}) — opening connections, whose failures are often build or linking problems.
-* [Define Functions]({% link docs/current/clients/rust/functions.md %}) — the `loadable-extension` feature and how to package an extension correctly.
+* [Connect]({% link docs/current/clients/rust/connecting.md %}) — opening connections, whose failures are often build or linking problems.
+* [Write User Defined Functions]({% link docs/current/clients/rust/functions.md %}) — the `loadable-extension` feature and how to package an extension correctly.

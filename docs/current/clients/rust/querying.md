@@ -9,7 +9,7 @@ title: Run Queries
 
 ## Overview
 
-Queries are sent on a `Connection` with `execute()`, `execute_batch()`, and prepared statements, and results are read by mapping each row to a Rust value. This page covers sending statements, binding parameters, and turning rows into typed Rust values. For opening the `Connection` these run on, see [Define Connections]({% link docs/current/clients/rust/connecting.md %}).
+Queries are sent on a `Connection` with `execute()`, `execute_batch()`, and prepared statements, and results are read by mapping each row to a Rust value. The sections below walk through sending statements, binding parameters, and turning rows into typed Rust values. For opening the `Connection` these run on, see [Connect]({% link docs/current/clients/rust/connecting.md %}).
 
 ## Sending Statements
 
@@ -68,7 +68,7 @@ conn.query_row(
 )?;
 ```
 
-Any value bound as a parameter implements the `ToSql` trait, and any value read out of a row implements `FromSql`; the crate provides both for the standard Rust numeric, string, byte-slice, and boolean types. `Option<T>` maps to and from SQL `NULL`, so `None` binds as `NULL` and a `NULL` result reads back as `None`.
+Any value bound as a parameter implements the `ToSql` trait, and any value read out of a row implements `FromSql`. The crate provides both for the standard Rust numeric, string, byte-slice, and boolean types. `Option<T>` maps to and from SQL `NULL`, so `None` binds as `NULL` and a `NULL` result reads back as `None`.
 
 > Warning Do *not* use prepared statements to insert large amounts of data into DuckDB. See [Import Data]({% link docs/current/clients/rust/data_import.md %}) for the Appender and other faster options.
 
@@ -154,4 +154,4 @@ while let Some(row) = rows.next()? {
 * [Handle Results]({% link docs/current/clients/rust/result_handling.md %}) — reading results as Apache Arrow record batches or Polars data frames instead of row by row.
 * [Import Data]({% link docs/current/clients/rust/data_import.md %}) — the Appender, the recommended alternative to prepared statements for bulk inserts.
 * [Prepared Statements]({% link docs/current/sql/query_syntax/prepared_statements.md %}) — DuckDB's SQL-level support for the parameterized queries used here.
-* [Define Connections]({% link docs/current/clients/rust/connecting.md %}) — opening the `Connection` that these statements run on.
+* [Connect]({% link docs/current/clients/rust/connecting.md %}) — opening the `Connection` that these statements run on.

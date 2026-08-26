@@ -432,7 +432,7 @@
                   "url": "overview"
                 },
                 {
-                  "page": "Define Connections",
+                  "page": "Connect",
                   "url": "connecting"
                 },
                 {
@@ -448,7 +448,7 @@
                   "url": "result_handling"
                 },
                 {
-                  "page": "Define Functions",
+                  "page": "Write User Defined Functions",
                   "url": "functions"
                 },
                 {
@@ -457,7 +457,7 @@
                 },
                 {
                   "page": "Troubleshoot",
-                  "url": "known_issues"
+                  "url": "troubleshoot"
                 }
               ]
             },

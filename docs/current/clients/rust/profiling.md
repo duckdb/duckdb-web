@@ -9,7 +9,7 @@ title: Profile and Monitor
 
 ## Overview
 
-The Rust client can observe a running or completed query: it can retrieve per-operator [profiling metrics](#profiling) after a query runs, and [interrupt](#interrupting-queries) a long-running query from another thread. This page covers both.
+The Rust client can observe a running or completed query: it can retrieve per-operator [profiling metrics](#profiling) after a query runs, and [interrupt](#interrupting-queries) a long-running query from another thread. Both are shown below.
 
 ## Profiling
 
@@ -35,7 +35,7 @@ println!("rows returned: {}", info.metrics["ROWS_RETURNED"]);
 
 ## Interrupting Queries
 
-A long-running query can be cancelled from another thread. Call `interrupt_handle()` on the connection to get an `InterruptHandle`, which is both `Send` and `Sync`, and move it to a thread that can call `interrupt()`. The interrupted query fails with an error:
+A long-running query can be cancelled from another thread. Call `interrupt_handle()` on the connection to get an `Arc<InterruptHandle>`. `InterruptHandle` is both `Send` and `Sync`, so you can move it, or the connection, to another thread and call `interrupt()` from wherever is convenient. The interrupted query fails with an error:
 
 ```rust
 use duckdb::{Connection, Result};
@@ -62,4 +62,4 @@ fn run_query(conn: Connection) -> Result<()> {
 
 * [Profiling]({% link docs/current/dev/profiling.md %}) — DuckDB's query profiling output and the `enable_profiling` and `profiling_mode` PRAGMAs.
 * [Run Queries]({% link docs/current/clients/rust/querying.md %}) — running the queries whose metrics this page reads and whose execution it interrupts.
-* [Define Connections]({% link docs/current/clients/rust/connecting.md %}) — the `Connection` that profiling and the interrupt handle operate on.
+* [Connect]({% link docs/current/clients/rust/connecting.md %}) — the `Connection` that profiling and the interrupt handle operate on.

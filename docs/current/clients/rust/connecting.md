@@ -4,12 +4,12 @@ redirect_from:
 - /docs/clients/rust/connecting
 - /docs/preview/clients/rust/connecting
 - /docs/stable/clients/rust/connecting
-title: Define Connections
+title: Connect
 ---
 
 ## Overview
 
-Every DuckDB feature reachable from Rust starts with a `Connection`. This page covers opening in-memory and file-backed databases, configuring a database instance with `Config`, opening read-only, pooling connections across threads, the crate's thread-safety guarantees, and closing a connection.
+Every DuckDB feature reachable from Rust starts with a `Connection`. Opening in-memory and file-backed databases, configuring a database instance with `Config`, opening read-only, pooling connections across threads, the crate's thread-safety guarantees, and closing a connection are all covered below.
 
 ## Opening a Connection
 
@@ -25,7 +25,7 @@ let conn = Connection::open_in_memory()?;
 let conn = Connection::open("my_database.duckdb")?;
 ```
 
-For an in-memory database no data is persisted to disk, so all data is lost when the process exits. A file-backed database is created if the file does not exist; the extension may be `.db`, `.duckdb`, or anything else.
+For an in-memory database no data is persisted to disk, so all data is lost when the process exits. A file-backed database is created if the file does not exist. The extension may be `.db`, `.duckdb`, or anything else.
 
 ## Configuring a Connection
 
@@ -109,4 +109,4 @@ match conn.close() {
 * [Run Queries]({% link docs/current/clients/rust/querying.md %}) — using the `Connection` to send queries and read results.
 * [Configuration]({% link docs/current/configuration/overview.md %}) — the full list of DuckDB settings that can be passed to `Config`.
 * [Concurrency]({% link docs/current/connect/concurrency.md %}) — how DuckDB handles multiple connections and threads.
-* [Troubleshoot]({% link docs/current/clients/rust/known_issues.md %}) — linking and build problems encountered when opening a connection.
+* [Troubleshoot]({% link docs/current/clients/rust/troubleshoot.md %}) — linking and build problems encountered when opening a connection.

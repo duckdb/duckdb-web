@@ -17,7 +17,7 @@ title: Rust Client
 >
 > The latest stable version of the DuckDB Rust client is {% if site.current_duckdb_rust_version != "" %}{{ site.current_duckdb_rust_version }}{% else %}{{ site.lts_duckdb_rust_version }}{% endif %}.
 
-The DuckDB Rust client, [`duckdb-rs`](https://github.com/duckdb/duckdb-rs), is an ergonomic wrapper over the [DuckDB C API](https://github.com/duckdb/duckdb/blob/main/src/include/duckdb.h) that exposes an interface modeled on [rusqlite](https://github.com/rusqlite/rusqlite). It supports type-safe queries, bulk loading with the Appender, [Apache Arrow](https://arrow.apache.org/) interchange, user-defined functions, and building DuckDB extensions in Rust. This page covers installation; the other pages in this section cover connecting and each feature in detail.
+The DuckDB Rust client, [`duckdb-rs`](https://github.com/duckdb/duckdb-rs), is an ergonomic wrapper over the [DuckDB C API](https://github.com/duckdb/duckdb/blob/main/src/include/duckdb.h) that exposes an interface modeled on [rusqlite](https://github.com/rusqlite/rusqlite). It supports type-safe queries, bulk loading with the Appender, [Apache Arrow](https://arrow.apache.org/) interchange, user-defined functions, and building DuckDB extensions in Rust. This page focuses on installation. The other pages in this section cover connecting and each feature in detail.
 
 ## Installation
 
@@ -27,14 +27,14 @@ The DuckDB Rust client is published on [crates.io](https://crates.io/crates/duck
 cargo add duckdb --features bundled
 ```
 
-The equivalent `Cargo.toml` entry pins the version. Starting with DuckDB v1.5.0 the crate version has the form `1.⟨major_minor_patch⟩.x`; a tilde requirement receives patch releases without changing the bundled DuckDB version:
+The equivalent `Cargo.toml` entry pins the version. Starting with DuckDB v1.5.0 the crate version has the form `1.⟨major_minor_patch⟩.x`. A tilde requirement receives patch releases without changing the bundled DuckDB version:
 
 ```toml
 [dependencies]
 duckdb = { version = "~1.10505.0", features = ["bundled"] }
 ```
 
-The `bundled` feature is the simplest way to get started. Without it, the [`libduckdb-sys`](https://crates.io/crates/libduckdb-sys) crate links against a system DuckDB library instead of compiling one, which is covered in [Troubleshoot]({% link docs/current/clients/rust/known_issues.md %}#linking-against-a-system-library).
+The `bundled` feature is the simplest way to get started. Without it, the [`libduckdb-sys`](https://crates.io/crates/libduckdb-sys) crate links against a system DuckDB library instead of compiling one, which is covered in [Troubleshoot]({% link docs/current/clients/rust/troubleshoot.md %}#linking-against-a-system-library).
 
 To track the latest bindings before they are released on crates.io, depend on the `main` branch or a specific commit from git. The bundled DuckDB version is whatever that commit vendors:
 
@@ -163,7 +163,7 @@ Each statically links the matching bundled extension. All imply `bundled-cmake`,
 | Feature | Enables |
 |--|--|
 | `polars` | Exchange query results as [Polars](https://pola.rs/) data frames. See [Handle Results]({% link docs/current/clients/rust/result_handling.md %}#polars-data-frames). |
-| `r2d2` | A connection pool through the [`r2d2`](https://crates.io/crates/r2d2) crate. See [Define Connections]({% link docs/current/clients/rust/connecting.md %}#connection-pooling). |
+| `r2d2` | A connection pool through the [`r2d2`](https://crates.io/crates/r2d2) crate. See [Connect]({% link docs/current/clients/rust/connecting.md %}#connection-pooling). |
 | `chrono` | `ToSql` and `FromSql` conversions for `chrono` date and time types. |
 | `rust_decimal` | `ToSql` and `FromSql` conversions for `rust_decimal::Decimal`. |
 | `serde_json` | `ToSql` and `FromSql` conversions for `serde_json::Value`. |
@@ -191,11 +191,11 @@ Each statically links the matching bundled extension. All imply `bundled-cmake`,
 
 ## Further Reading
 
-* [Define Connections]({% link docs/current/clients/rust/connecting.md %}) — opening in-memory and file-backed databases, `Config` options, connection pooling, and thread safety.
+* [Connect]({% link docs/current/clients/rust/connecting.md %}) — opening in-memory and file-backed databases, `Config` options, connection pooling, and thread safety.
 * [Run Queries]({% link docs/current/clients/rust/querying.md %}) — `execute()`, prepared statements, parameter binding, and mapping rows to Rust types.
 * [Import Data]({% link docs/current/clients/rust/data_import.md %}) — bulk loading with the Appender and reading directly from Parquet, CSV, and JSON files.
 * [Handle Results]({% link docs/current/clients/rust/result_handling.md %}) — Apache Arrow and Polars result interchange.
-* [Define Functions]({% link docs/current/clients/rust/functions.md %}) — user-defined scalar and table functions, and loadable extensions.
+* [Write User Defined Functions]({% link docs/current/clients/rust/functions.md %}) — user-defined scalar and table functions, and loadable extensions.
 * [Profile and Monitor]({% link docs/current/clients/rust/profiling.md %}) — query profiling and interrupting long-running queries.
-* [Troubleshoot]({% link docs/current/clients/rust/known_issues.md %}) — linking, the ICU extension, and extension-versus-client build issues.
+* [Troubleshoot]({% link docs/current/clients/rust/troubleshoot.md %}) — linking, the ICU extension, and extension-versus-client build issues.
 * [Clients Overview]({% link docs/current/clients/overview.md %}) — the other client APIs DuckDB provides alongside Rust.

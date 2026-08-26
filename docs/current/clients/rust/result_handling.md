@@ -9,7 +9,7 @@ title: Handle Results
 
 ## Overview
 
-Beyond reading a result set [row by row]({% link docs/current/clients/rust/querying.md %}#mapping-rows-to-rust-values), the Rust client can hand a query result to [Apache Arrow](https://arrow.apache.org/) as a stream of record batches, register an Arrow batch as a queryable table, and return results as [Polars](https://pola.rs/) data frames. This page covers each of these columnar result-handling options.
+Beyond reading a result set [row by row]({% link docs/current/clients/rust/querying.md %}#mapping-rows-to-rust-values), the Rust client can hand a query result to [Apache Arrow](https://arrow.apache.org/) as a stream of record batches, register an Arrow batch as a queryable table, and return results as [Polars](https://pola.rs/) data frames. Each of these columnar result-handling options is described below.
 
 ## Apache Arrow
 
@@ -17,7 +17,7 @@ DuckDB is columnar, and its native way to return a result to Rust in bulk is [Ap
 
 ### Reading a Result as Arrow
 
-Call `query_arrow()` on a prepared statement to get an iterator of `RecordBatch`. Collecting it materializes the whole result; iterating it reads one batch at a time:
+Call `query_arrow()` on a prepared statement to get an iterator of `RecordBatch`. Collecting it materializes the whole result, while iterating it reads one batch at a time:
 
 ```rust
 use duckdb::{Connection, Result};
@@ -89,5 +89,5 @@ To combine the chunks into a single `DataFrame`, use [`accumulate_dataframes_ver
 ## Further Reading
 
 * [Run Queries]({% link docs/current/clients/rust/querying.md %}) — sending the queries whose results this page reads, and reading them row by row.
-* [Define Functions]({% link docs/current/clients/rust/functions.md %}) — writing table functions, of which the built-in `ArrowVTab` is one.
+* [Write User Defined Functions]({% link docs/current/clients/rust/functions.md %}) — writing table functions, of which the built-in `ArrowVTab` is one.
 * [Import Data]({% link docs/current/clients/rust/data_import.md %}) — appending Arrow record batches into a table with the `appender-arrow` feature.

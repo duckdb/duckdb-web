@@ -4,12 +4,12 @@ redirect_from:
 - /docs/clients/rust/functions
 - /docs/preview/clients/rust/functions
 - /docs/stable/clients/rust/functions
-title: Define Functions
+title: Write User Defined Functions
 ---
 
 ## Overview
 
-The Rust client can register user-defined functions written in Rust: scalar functions with the `vscalar` feature and table functions with the `vtab` feature. Both operate on DuckDB's columnar data chunks, so a single call processes a batch of rows. This page covers building and registering both, and points to the template for packaging them as a loadable extension.
+The Rust client can register user-defined functions written in Rust: scalar functions with the `vscalar` feature and table functions with the `vtab` feature. Both operate on DuckDB's columnar data chunks, so a single call processes a batch of rows. The sections below build and register each, then point to a template for packaging them as a loadable extension.
 
 ## Scalar Functions
 
@@ -82,7 +82,7 @@ A table function is a type that implements the `VTab` trait, registered with `re
 
 * `bind` runs once when the statement is prepared. It declares the result columns with `add_result_column()` and reads the call's arguments with `get_parameter()`, returning read-only bind data.
 * `init` runs once before execution and returns per-scan state, such as a cursor.
-* `func` produces one chunk of rows per call. It fills the output vectors and sets the chunk length; a length of `0` ends the scan. DuckDB calls it repeatedly until the scan is done, so a large result is delivered over several calls.
+* `func` produces one chunk of rows per call. It fills the output vectors and sets the chunk length. A length of `0` ends the scan. DuckDB calls it repeatedly until the scan is done, so a large result is delivered over several calls.
 * `parameters` declares the function's parameter types.
 
 The crate's [`vtab` example](https://github.com/duckdb/duckdb-rs/blob/main/crates/duckdb/examples/vtab.rs) defines a `numbers(BIGINT)` function that returns one row per integer in `0..count`, over columns of increasing complexity. Its skeleton, showing the bind data, init state, and per-chunk execution model:
@@ -169,7 +169,7 @@ Because `func` claims its slice of the result with an atomic `fetch_add`, the sc
 
 ## Building a Loadable Extension
 
-The functions above are registered on a `Connection` inside a client application. The same `VScalar` and `VTab` interfaces can instead be packaged as a [loadable DuckDB extension]({% link docs/current/core_extensions/overview.md %}) that any DuckDB client can `LOAD`. This uses the `loadable-extension` feature and the `duckdb_entrypoint_c_api` macro to declare the extension entry point; the crate's [`hello-ext` example](https://github.com/duckdb/duckdb-rs/tree/main/crates/duckdb/examples/hello-ext) registers a `hello(name)` table function this way.
+The functions above are registered on a `Connection` inside a client application. The same `VScalar` and `VTab` interfaces can instead be packaged as a [loadable DuckDB extension]({% link docs/current/core_extensions/overview.md %}) that any DuckDB client can `LOAD`. This uses the `loadable-extension` feature and the `duckdb_entrypoint_c_api` macro to declare the extension entry point. The crate's [`hello-ext` example](https://github.com/duckdb/duckdb-rs/tree/main/crates/duckdb/examples/hello-ext) registers a `hello(name)` table function this way.
 
 > Warning Enable `loadable-extension` only when building an extension. In a client application, that feature makes calls such as `Connection::open_in_memory()` panic, because they run outside an extension context.
 
