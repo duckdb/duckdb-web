@@ -48,8 +48,8 @@ permalink: /history/
   <div class="timeline-entry">
     <div class="timeline-marker"><span class="timeline-year">2024</span></div>
     <div class="timeline-body">
-      <h2 id="duckdb-reaches-10">DuckDB Reaches 1.0</h2>
-      <p>On June 3, 2024, the team <a href="{% post_url 2024-06-03-announcing-duckdb-100 %}">released DuckDB 1.0.0</a>.</p>
+      <h2 id="duckdb-reaches-10">DuckDB Reaches v1.0</h2>
+      <p>On June 3, 2024, the team <a href="{% post_url 2024-06-03-announcing-duckdb-100 %}">released DuckDB v1.0.0</a>.</p>
       <p>The release emphasized stability rather than a long list of new features. DuckDB had gained backward compatibility for its storage format, extensive testing across the engine, and a more cautious approach to changes in the SQL dialect and C API. Version 1.0 expressed the team's confidence that developers could build applications on DuckDB with clearer expectations about compatibility over time.</p>
       <p>It was also a marker of adoption. Six years after the first code was written, DuckDB had moved from a research project into production systems, data workflows, and embedded products across a growing community.</p>
       <p>Later that year, MotherDuck made significant contributions to the <a href="{% post_url 2024-12-18-duckdb-node-neo-client %}">new DuckDB Node.js client</a>, another example of technical work shared across the ecosystem.</p>
