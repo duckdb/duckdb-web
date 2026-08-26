@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "ATD DuckDB Article"
+title: "DuckDB and the changing physics of analytics"
 author: "Andy Warfield (AWS)"
 thumb: "/images/library/thumbs/2026-08-26-all-things-distributed.jpg"
 image: "/images/library/thumbs/2026-08-26-all-things-distributed.jpg"
