@@ -76,7 +76,7 @@ header .headerline {
 					line-height: 70px;
 					
 					&:hover {
-						color: var(--menu-topmenu-text-color-hover, #6A58DA);
+						color: var(--main-link-hover, #665d00);
 					}
 				}
 				
@@ -120,7 +120,7 @@ header .headerline {
 			
 							&:hover {
 								background: var(--menu-dropdown-item-background-hover, #E6E6E6);
-								color: var(--menu-topmenu-text-color-hover, #6A58DA);
+								color: var(--main-link-hover, #665d00);
 							}
 						}
 						/*
@@ -157,7 +157,7 @@ header .headerline {
 					}
 				
 					&:hover {
-						color: var(--menu-topmenu-text-color-hover, #6A58DA);
+						color: var(--main-link-hover, #665d00);
 
 						&+.submenuwrap,
 						&+.submenuwrap:hover {
@@ -170,7 +170,7 @@ header .headerline {
 						}
 						
 						a {
-							color: var(--menu-topmenu-text-color-hover, #6A58DA);
+							color: var(--main-link-hover, #665d00);
 						}
 					}
 				}
@@ -185,7 +185,7 @@ header .headerline {
 					display: none;
 					
 					&:hover {
-						color: var(--menu-topmenu-text-color-hover, #6A58DA);
+						color: var(--main-link-hover, #665d00);
 					} 
 					
 					svg.icon{
@@ -326,7 +326,7 @@ header .headerline {
 }
 
 a.github:hover .starcount {
-	color: var(--menu-topmenu-text-color-hover, #6A58DA);
+	color: var(--main-link-hover, #665d00);
 
 	&::before {
 		scale: 1.25;
@@ -368,6 +368,11 @@ body.blog header .headerline .headercontent .landingmenu nav .search_icon {
 	&.blue{
 		background: var(--main-ribbon-background-color-blue, #99d8ff99);
 		border-bottom: 1px solid var(--main-ribbon-border-color-blue, #153a5199);
+	}
+	
+	&.orange{
+		background: linear-gradient(90deg, var(--main-ribbon-background-color-orange, rgba(65, 36, 16, 0.60)) 0%, var(--main-ribbon-background-color-orange-2, rgba(121, 69, 32, 0.60)) 100%), var(--main-body-background-color, #0D0D0D);
+		border-bottom: 1px solid var(--main-ribbon-border-color-orange, rgba(81, 46, 21, 0.60));
 	}
 	
 	a {

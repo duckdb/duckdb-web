@@ -155,7 +155,7 @@ body.documentation {
 
             &:hover,
             &:focus-visible {
-                border: 1px solid var(--menu-topmenu-text-color-hover, #6A58DA);
+                border: 1px solid var(--main-link-hover, #665d00);
             }
         }
 
@@ -328,7 +328,7 @@ body.documentation {
         }
 
         &:hover {
-            border: 1px solid var(--menu-topmenu-text-color-hover, #6A58DA);
+            border: 1px solid var(--main-link-hover, #665d00);
             color: var(--menu-topmenu-searchbar-shortcut-text-color, #999);
             svg.icon{
                 
