@@ -4,6 +4,8 @@ title: "How DuckDB Runs Recursive CTEs Faster"
 author: "Denis Hirn"
 excerpt: "DuckDB's recursive CTE engine now treats recursion as one long-lived computation: it retains eligible epoch-invariant state, chooses execution modes from exact frontier cardinalities and physical work, probes keyed state directly and gives `USING KEY ... UNION` changed-key semantics."
 tags: ["deep dive"]
+thumb: "/images/blog/thumbs/recursive-queries.svg"
+image: "/images/blog/thumbs/recursive-queries.jpg"
 ---
 
 When I implemented [DuckDB's first recursive CTE operator](https://github.com/duckdb/duckdb/pull/404) in 2020, correctness determined the design: evaluate the non-recursive term once, then evaluate the recursive term until the next working table is empty. That established the right semantic contract, but reusable runtime state was scoped too narrowly. Across iterations, the recursive input changes while most of the machinery that evaluates it remains reusable. The implementation nevertheless treated every iteration almost like a new query and repeatedly paid for pipeline scheduling, operator setup, execution and teardown. I have wanted to remove that mismatch ever since.
@@ -188,7 +190,7 @@ Eligibility establishes correctness; observed cardinality determines whether the
 
 The cost of proving an unchanged value constrains this policy. For a wide workload with 102,400 unique existing-key updates, median runtime increases by 0.913 milliseconds, or 6%, under the new `UNION` semantics. The executor must compare finalized values where the previous implementation forwarded candidates without proving a change. Aggregate-specific shortcuts for `min` and `max` would place aggregate semantics in the recursive executor, so we do not use them. An aggregate-level change-reporting contract could put that responsibility in the aggregate interface. The current interface provides no such contract.
 
-The large motivating workload was an LDBC SF100 pathfinding query. It generated about 21 million aggregate candidates, but epoch-level aggregation produced only 3.7 million observable keyed results. The adaptive path preaggregated 17 million candidates. On matched Release builds immediately before and after the changed-key work, query time fell from a median of 19.319 to 2.948 seconds, a 6.55× speedup, while peak resident memory fell from 3.918 to 2.663 GB.
+The large motivating workload was an [LDBC](https://ldbcouncil.org) SF100 pathfinding query. It generated about 21 million aggregate candidates, but epoch-level aggregation produced only 3.7 million observable keyed results. The adaptive path preaggregated 17 million candidates. On matched Release builds immediately before and after the changed-key work, query time fell from a median of 19.319 to 2.948 seconds, a 6.55× speedup, while peak resident memory fell from 3.918 to 2.663 GB.
 
 The wider regression suite bounds that result. In the same build comparison, the geometric mean across 63 recursive benchmarks improved by 5.5%, and 60 were within ±2%. Duplicate fan-in and duplicate-heavy preaggregation improved substantially; the wide unique-key case above is the one stable loss. For this reason, we classify work per epoch instead of applying the strategy that wins the motivating query to every workload.
 
