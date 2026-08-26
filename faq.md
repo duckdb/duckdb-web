@@ -80,8 +80,8 @@ For the organizations around DuckDB, see the next question–answer pair.
 The [**DuckDB Foundation**](https://duckdb.foundation/) is a non-profit organization that holds the intellectual property of the DuckDB project.
 The DuckDB Foundation's [statutes]({% link pdf/deed-of-incorporation-stichting-duckdb-foundation.pdf %}) ensure DuckDB remains open-source under the MIT license in perpetuity.
 
-[**DuckLabs**](https://ducklabs.com/) is a company based in Amsterdam that provides commercial support services for DuckDB.
-DuckLabs employs the core contributors of the DuckDB project.
+[**DuckLabs**](https://ducklabs.com/) is based in Amsterdam that provides commercial support services for DuckDB.
+DuckLabs employs the core contributors of the DuckDB project. DuckLabs [will join AWS from September 2026]({% post_url 2026-08-26-ducklabs-to-join-aws %}).
 
 [**MotherDuck**](https://motherduck.com/) is a venture-backed company creating a hybrid cloud/local platform using DuckDB.
 MotherDuck contracts with DuckLabs for development services, and DuckLabs owns a portion of MotherDuck.
