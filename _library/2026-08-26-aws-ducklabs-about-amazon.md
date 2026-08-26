@@ -12,5 +12,5 @@ pill: "About Amazon blog"
 ---
 
 |-------|-------|
-| **Article** | [AWS and DuckLabs: Building the Future of Analytics Together](https://aws.amazon.com/blogs/big-data/aws-and-ducklabs-building-the-future-of-analytics-together/) |
-| **Publication** | [About Amazon blog](https://www.aboutamazon.com/news/company-news/aws-ducklabs) |
+| **Article** | [AWS to acquire DuckLabs, the Amsterdam-based company behind DuckDB](https://www.aboutamazon.com/news/company-news/aws-ducklabs) |
+| **Publication** | [About Amazon blog](https://www.aboutamazon.com/news/company-news/) |
