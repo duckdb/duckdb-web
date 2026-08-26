@@ -8,7 +8,7 @@ excerpt: |
 extension:
   name: quackscale
   description: DuckDB WireGuard Extension to Quack & Ducklake over Tailscale/Headscale
-  version: 1.0.5
+  version: 1.0.6
   language: c++
   build: cmake
   license: MIT
@@ -19,7 +19,7 @@ extension:
 
 repo:
   github: Query-farm/quackscale
-  ref: 06af182878fb4098806fe4e81a35310899dd0f94
+  ref: 7c5f55c844ce35b2d350d387a062c015f1082abc
 
 docs:
   hello_world: |
@@ -64,10 +64,10 @@ extended_description: |
 
       
 
-extension_star_count: 24
-extension_star_count_pretty: 24
-extension_download_count: 670
-extension_download_count_pretty: 670
+extension_star_count: 23
+extension_star_count_pretty: 23
+extension_download_count: 652
+extension_download_count_pretty: 652
 image: '/images/community_extensions/social_preview/preview_community_extension_quackscale.png'
 layout: community_extension_doc
 ---
