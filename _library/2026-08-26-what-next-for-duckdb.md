@@ -131,7 +131,7 @@ I think it's a community extension. I'm not sure who built it, but it exists and
 
 *So maybe I should point people at the previous episode if they want to get all the details of how we get to there. But we left the last episode with DuckDB as a local, very fast, very easy to use, single-file database. To me it was SQLite but for analytics.*
 
-That's absolutely the tagline that we went with, and I think it's still a good tagline. I think we may want to talk about the journey so far since then, but it's now changed a bit, more into an ecosystem. I would argue it used to be "SQLite for analytics" and now people call it “the Duck stack”. Yeah. And that is true, right? We did a lot outside the single-node database. Of course, that's still a very core thing we do and we still push it like crazy, but we have done more things, we have put tentacles out.
+That's absolutely the tagline that we went with, and I think it's still a good tagline. I think we may want to talk about the journey so far since then, but it's now changed a bit, more into an ecosystem. I would argue it used to be "SQLite for analytics" and now people call it “the Duck Stack”. Yeah. And that is true, right? We did a lot outside the single-node database. Of course, that's still a very core thing we do and we still push it like crazy, but we have done more things, we have put tentacles out.
 
 ### [00:16:46] The Trouble with Database Protocols
 

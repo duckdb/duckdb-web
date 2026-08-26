@@ -11,4 +11,7 @@ toc: false
 pill: "All Things Distributed"
 ---
 
-Check the [All Things Distributed blog](https://www.allthingsdistributed.com/articles.html) for a DuckDB post!
+|-------|-------|
+| **Article** | [DuckDB and the changing physics of analytics](https://www.allthingsdistributed.com/2026/08/duckdb-and-the-changing-physics-of-analytics.html) |
+| **Publication** | [All Things Distributed](https://www.allthingsdistributed.com) |
+| **Author** | [Andy Warfield (AWS)](https://www.linkedin.com/in/andywarfield) |
