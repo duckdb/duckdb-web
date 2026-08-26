@@ -137,10 +137,10 @@ docs:
       at 100M rows (`GPUDB_JOIN_ROWS_MAX_M`), and TPC-H SF50-scale pair
       uploads need `GPUDB_UPLOAD_POOL_MAX_MB` raised to 10–12 GB.
 
-extension_star_count: 15
-extension_star_count_pretty: 15
-extension_download_count: 394
-extension_download_count_pretty: 394
+extension_star_count: 16
+extension_star_count_pretty: 16
+extension_download_count: 400
+extension_download_count_pretty: 400
 image: '/images/community_extensions/social_preview/preview_community_extension_gpudb.png'
 layout: community_extension_doc
 ---
