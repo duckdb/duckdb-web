@@ -19,7 +19,7 @@ extension:
 
 repo:
   github: yutannihilation/duckdb-ext-file-dialog
-  ref: 1dc7e177e2cbb4605604d17efba8c09734389872
+  ref: 08546d24088402cb9e8bbc36f405e1f48f4b6cce
 
 docs:
   hello_world: |
@@ -31,10 +31,10 @@ docs:
   extended_description: |
     This extension is a tiny utility to choose a file interactively.
 
-extension_star_count: 15
-extension_star_count_pretty: 15
-extension_download_count: 905
-extension_download_count_pretty: 905
+extension_star_count: 16
+extension_star_count_pretty: 16
+extension_download_count: 1191
+extension_download_count_pretty: 1.2k
 image: '/images/community_extensions/social_preview/preview_community_extension_file_dialog.png'
 layout: community_extension_doc
 ---

@@ -50,4 +50,4 @@ Finally, there are no feature or support guarantees for tertiary clients.
 ## Compatibility
 
 All DuckDB clients support the same DuckDB SQL syntax and use the same on-disk [database format]({% link docs/current/internals/storage.md %}).
-[DuckDB extensions]({% link docs/current/extensions/overview.md %}) are also portable between clients with some exceptions (see [Wasm extensions]({% link docs/current/clients/wasm/extensions.md %}#list-of-officially-available-extensions)).
+[DuckDB extensions]({% link docs/current/extensions/overview.md %}) are also portable between clients with some exceptions (see [Wasm extensions]({% link docs/current/clients/wasm/extensions.md %}#available-extensions)).

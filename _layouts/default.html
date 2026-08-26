@@ -27,9 +27,10 @@
 
 	{% if page.body_class contains "duckcon" %}
 	<link rel="preconnect" href="https://api.mapbox.com" crossorigin>
-	<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
 	<link href='https://api.mapbox.com/mapbox-gl-js/v3.17.0-beta.1/mapbox-gl.css' rel='stylesheet' integrity="sha384-iZHx8ei75G5yWmKdvT9TwWafArVHCZ5OvZlUQWShQGrJFq5sBlxK+tu/1cGonuYJ" crossorigin="anonymous" />
-	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@12/swiper-bundle.min.css?2" integrity="sha384-+eoVPirEHy8XSrf7sRozx+2OTKCWm1qfVFWnQ7qiXW6vAb+GUXRw4gq7sU+hq6HG" crossorigin="anonymous" />
+	{% endif %}
+	{% if page.body_class contains "duckcon" or page.content contains "quote-slider" %}
+	<link rel="stylesheet" href="/css/swiper-bundle.min.css">
 	{% endif %}
 
 	<link rel="apple-touch-icon" sizes="180x180" href="{% link images/favicon/apple-touch-icon.png %}">
@@ -100,7 +101,7 @@
 					{% elsif page.body_class contains "duckcon" and page.duckcon_register_url %}
 						<a class="button yellow" href="{{ page.duckcon_register_url }}" target="_blank">Register for free</a>
 					{% else %}
-						<a class="button yellow" href="https://ducklabs.com/contact" target="_blank">Support</a>
+						<a class="button yellow" href="{% link community_support.md %}" target="_blank">Support</a>
 						<button class="mode" data-mode="dark" aria-label="Toggle dark mode">
 							<svg class="icon icon-sun"><use href="#sun"></use></svg>
 							<svg class="icon icon-moon"><use href="#moon-01"></use></svg>
@@ -183,8 +184,8 @@
 	{% if page.body_class contains "landing" or page.body_class contains "installation" %}
 	<script src="/js/ua-parser.min.js" defer></script>
 	{% endif %}
-	{% if page.body_class contains "duckcon" %}
-	<script src="https://cdn.jsdelivr.net/npm/swiper@12/swiper-bundle.min.js" integrity="sha384-TmUUNA9gRm9TspAqMh20CdxlcwkNFW3UyIOibSljonhpJ1UfGenJDyQvO/EbWwpW" crossorigin="anonymous" defer></script>
+	{% if page.body_class contains "duckcon" or page.content contains "quote-slider" %}
+	<script src="/js/swiper-bundle.min.js" defer></script>
 	{% endif %}
 	<script src="/js/script.js?{{ site.time | date: '%s' }}" defer></script>
 	{% if page.body_class contains "installation" %}

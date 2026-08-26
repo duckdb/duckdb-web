@@ -157,7 +157,7 @@ The resulting architecture replaces the PostgreSQL-derived parser front end, whi
 
 ## Evolving DuckSQL
 
-With the PEG parser now in place for DuckDB v2.0, we have also continued to extend DuckSQL with new syntax.
+With the PEG parser now in place for [DuckDB v2.0]({% post_url 2026-08-17-duckdb-20-highlights %}), we have also continued to extend DuckSQL with new syntax.
 
 One example is the new expression-statement syntax. Until now, executing a query consisting only of expressions always required writing a `SELECT`:
 

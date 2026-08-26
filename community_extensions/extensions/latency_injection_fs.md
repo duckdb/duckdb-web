@@ -33,8 +33,8 @@ docs:
 
 extension_star_count: 0
 extension_star_count_pretty: 0
-extension_download_count: 722
-extension_download_count_pretty: 722
+extension_download_count: 726
+extension_download_count_pretty: 726
 image: '/images/community_extensions/social_preview/preview_community_extension_latency_injection_fs.png'
 layout: community_extension_doc
 ---

@@ -217,6 +217,8 @@ SELECT count(*) FROM reachable;
 
 As you can see, DuckDB v2.0 is about 40× faster (!) for the same recursive query.
 
+> Update We published a blog post on [how we are speeding up recursive CTEs in DuckDB v2.0]({% post_url 2026-08-25-how-duckdb-runs-recursive-ctes-faster %}).
+
 Row-group pruning has been massively expanded: [min-max indexes (zone maps)]({% link docs/current/sql/indexes.md %}#min-max-index-zonemap %}) and [Parquet Bloom filters]({% post_url 2025-03-07-parquet-bloom-filters-in-duckdb %}) now skip data for structs, lists, decimals, UUIDs, `IN` filters, and even function predicates:
 
 ```sql
@@ -241,6 +243,8 @@ Later this year, ART indexes will be buffer-managed ([#21458](https://github.com
 DuckDB has famously always used a parser derived from PostgreSQL's. We have decided that enough is enough: v2.0 ships our own modern, extensible PEG-based parser ([#22194](https://github.com/duckdb/duckdb/pull/22194)), an idea we first explored in our 2024 post on [runtime-extensible parsers]({% post_url 2024-11-22-runtime-extensible-parsers %}). This change ties into the extension ecosystem: extensions can now hook into the grammar itself, so expect extensions that expose entirely new SQL syntax. It also brings better error messages with precise source locations.
 
 You should not actually notice anything from the parser swap as we designed it to be compatible with the old one. If you do notice, please file an issue.
+
+> Update We published a new blog post on the [PEG parser]({% post_url 2026-08-20-duckdb-20-peg-parser %}).
 
 ## 9. Timezones, Calendars, and Collations Without ICU
 

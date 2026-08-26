@@ -108,9 +108,72 @@ div.singleentry {
 				line-height: 1.5;
 			}
 
-			.quote-author {
+			p.quote-author {
+				@include body-small();
 				color: var(--main-text-secondary-color, #666);
 				margin-top: 20px;
+			}
+		}
+	}
+
+	.quote-slider {
+		$slide-width: 84%;
+
+		margin: 30px 0;
+
+		.swiper {
+			overflow: hidden;
+			-webkit-mask-image: linear-gradient(to right, #000 0, #000 $slide-width, transparent 99%);
+			mask-image: linear-gradient(to right, #000 0, #000 $slide-width, transparent 99%);
+		}
+
+		&.is-end .swiper {
+			-webkit-mask-image: none;
+			mask-image: none;
+		}
+
+		.swiper-slide {
+			width: $slide-width;
+			height: auto;
+		}
+
+		blockquote.quote {
+			margin: 0;
+			height: 100%;
+		}
+	}
+
+	.quote-slider-controls {
+		display: flex;
+		gap: 4px;
+		margin-top: 8px;
+
+		button {
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			padding: 0;
+			border: 0;
+			background: transparent;
+			color: var(--main-text-secondary-color, #666);
+			cursor: pointer;
+			transition: color .2s;
+
+			&:hover {
+				color: var(--main-text-primary-color, #0D0D0D);
+			}
+
+			&.swiper-button-disabled {
+				color: var(--main-quaternary-color, #CCC);
+				cursor: default;
+			}
+
+			svg {
+				width: 20px;
+				height: 20px;
+				fill: none;
+				stroke: currentColor;
+				stroke-width: 2;
 			}
 		}
 	}

@@ -146,21 +146,6 @@ Other projects and events are likely _not affiliated_ with DuckDB. Please check 
 
 </div>
 
-<!-- ----- ----- ----- ----- ----- ----- Q&A entry ----- ----- ----- ----- ----- ----- -->
-
-<div class="qa-wrap" markdown="1">
-
-### What is the official name of the project?
-
-<div class="answer" markdown="1">
-
-In official communication, we refer to DuckDB exclusively as “DuckDB” and avoid other names and spellings such as “DDB”, “the Duck” and “DuckDb”.
-Of course, the alternatives are also widely understood and you are welcome to use them, but using “DuckDB” is preferred.
-
-</div>
-
-</div>
-
 <!-- ################################################################################# -->
 <!-- ################################################################################# -->
 <!-- ################################################################################# -->
@@ -558,6 +543,26 @@ Social media:
 * [Bluesky](https://bsky.app/profile/duckdb.org)
 * [LinkedIn](https://www.linkedin.com/company/duckdb/)
 * [Twitter (X)](https://x.com/duckdb)
+
+</div>
+
+</div>
+
+<!-- ################################################################################# -->
+<!-- ################################################################################# -->
+<!-- ################################################################################# -->
+
+## Prism
+
+<!-- ----- ----- ----- ----- ----- ----- Q&A entry ----- ----- ----- ----- ----- ----- -->
+
+<div class="qa-wrap" markdown="1">
+
+### Whoop-whoop?
+
+<div class="answer" markdown="1">
+
+Whoop!
 
 </div>
 
