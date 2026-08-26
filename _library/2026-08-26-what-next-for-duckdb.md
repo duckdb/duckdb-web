@@ -8,20 +8,22 @@ tags: ["Podcast"]
 length: "100 min"
 thirdparty: false
 excerpt: ""
-toc: false
+toc: true
 pill: "Developer Voices by Kris Jenkins"
 ---
 
 <div class="video-container">
-<iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/MoKgo2ajW9Q?si=u_DMOqM7NgftcqOi" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+<iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/C3l4CsP1Ak0?si=u_DMOqM7NgftcqOi" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 </div>
 
 |-------|-------|
 | **Podcast** | [Developer Voices](https://www.developervoices.com/) |
 | **Guest** | [Hannes Mühleisen (DuckLabs)](https://hannes.muehleisen.org/) |
-| **YouTube** | [What Next For DuckDB](https://www.youtube.com/watch?v=MoKgo2ajW9Q) |
+| **YouTube** | [What Next For DuckDB](https://www.youtube.com/watch?v=C3l4CsP1Ak0) |
 
 ## Transcript
+
+### [00:00:01] Introduction
 
 *I'm joined today by a returning guest, Hannes Mühleisen. Hannes, how are you?*
 
@@ -43,6 +45,8 @@ Interesting.
 
 Yeah, it's been a while.
 
+### [00:01:04] Previously on Developer Voice
+
 *So for those that haven't watched the previous episode, let's just start with a recap of what's DuckDB and why does it exist? Because aren't there a lot of databases, my friend?*
 
 There are many databases, but obviously they're all wrong. So, DuckDB – we like to describe it as a universal data wrangling tool. We have thought about this quite a lot: what it is, what we think it is. But this idea of giving people confidence to work with data, that's really our guiding principle. And it's also why DuckDB was built from scratch, because we realized that there were really not a lot of database developers that had put user or developer experience really first. And so that was really our principle that we started DuckDB with. We said this needs to be trivial to set up, this needs to be friendly in its error messages, and the SQL dialect and all these things, like principle of least surprise, and it needs to not have the most conservative defaults but the most reasonable defaults, and all these things, right? And when we looked at these requirements, we realized that we really couldn't just take something else and repackage it. It went very deep. And that's why about eight years ago we started on this lovely journey. Mark Raasveldt, my co-creator of DuckDB, and I started on this journey of building a database from scratch, which is a bit of a daft idea in retrospect.
@@ -59,6 +63,8 @@ It's also the case for system software like databases or operating systems or th
 
 That's fair. We did do a bunch of stuff in DuckDB so that we don't have to do everything, right? So it's not a monolith. They have all these plugins – extensions, we call them – that you can install and build and whatever. So there is a chance that we will get to some sort of stable state with the core itself. But I'm also a very realistic person, so I think we will be doing this for a while. Fine. I'm fine with that.
 
+### [00:05:03] Focus on User Experience
+
 *So I want to pick you up on the thing you just said about usability, right? Because I think it's a very difficult bridge to construct, and I do think you've constructed it. I want to know how. Plenty of people would say, "Let's make a database that's user friendly," and they would succeed, but it would be technically scrap. So I'm not going to single out any particular databases, but there were some, particularly in the NoSQL movement, that were incredibly easy to use, didn't work very well, didn't actually save your data to the disk, and things like that. And then you've got academics like you saying, "Oh, we should do a database properly," and they don't succeed in usability at all.*
 
 Yeah, I think that's an excellent point, and I agree with you. I think one of the tragedies we observed before starting DuckDB is that the state of research and the state of practice were about 20, 30 years apart from each other. And indeed we saw exactly what you described. So I think the reason why we managed this is because I am actually a bit of an insider and outsider. I'm a bit of a – what do you call this ugly duck thing? Like a weird duck. There's some expression in English.
@@ -73,9 +79,9 @@ So I didn't come from the database orthodoxy. I did my PhD on something in distr
 
 Ants are amazing. But then this weird thing in my life happened where I moved to Amsterdam and I needed a job, and in a gigantic overestimation of my own skills I was like, okay, I have used a database before, I can probably work at this database research lab here that has currently a job opening. So they ended up hiring me, which – I still am amazed they hired me. I don't know why. And I actually led that lab later, and I wouldn't have hired me. So it's one of these car crashes of history. But the result was that I wasn't educated like everybody else, because a PhD in databases is a very structured thing. You go to this seminar, you go to those conferences, you talk to those people, these are the senior people in the community, and there's a sort of orthodoxy that's instilled in everybody. And user friendliness is not one of them in the curriculum. It's not in there at all.
 
-And so I think that was why – because I wasn't really an outsider, I mean I'm still a computer scientist, I'm still a nerd, I still like stuff, right? And I still appreciate the orthodoxy of databases, but it is not absolute to me. Maybe I should say: if you think about research, you want to have impact. And I realized very early on that in order to have impact you need to appeal to as many people as possible. And how do you do that? Well, by being user friendly, right? And that is really a great driver, because it has benefits in every direction. Your papers get accepted because people know you. You get grants accepted because you can show that your software gets downloaded a gazillion times each day – that's a pretty good impact statement, right? Your papers get read. And so there's really a beneficial – what is it called? A virtuous circle. Yeah, when you go for maximum impact. And I mean, I got grumpy department heads telling me my H-factor was down the toilet, you know.
+And so I think that was why – because I wasn't really an outsider, I mean I'm still a computer scientist, I'm still a nerd, I still like stuff, right? And I still appreciate the orthodoxy of databases, but it is not absolute to me. Maybe I should say: if you think about research, you want to have impact. And I realized very early on that in order to have impact you need to appeal to as many people as possible. And how do you do that? Well, by being user friendly, right? And that is really a great driver, because it has benefits in every direction. Your papers get accepted because people know you. You get grants accepted because you can show that your software gets downloaded a gazillion times each day – that's a pretty good impact statement, right? Your papers get read. And so there's really a beneficial – what is it called? A virtuous circle. Yeah, when you go for maximum impact. And I mean, I got grumpy department heads telling me my [h-factor](https://en.wikipedia.org/wiki/H-index) was down the toilet, you know.
 
-*H-factor. Yeah, I heard this term, H-factor.*
+*Yeah, I heard this term, h-factor.*
 
 This is something academics do. It's terrible. So, okay, minor rant: if you are a manager of multiple people and you are too lazy to actually make a call on who is good and who is bad, then you come up with some metric, right? Right. And one of those is – I think it's called officially the H-index. I don't even know what it's properly called, because I don't care about it. But it's a way of looking at your publications as a researcher and then how many times they are cited, and then there is some math going on to average all this into a single number, and that's your worth as a researcher. A bit questionable, maybe.
 
@@ -87,7 +93,7 @@ Yes. And then your department head, you know who to give the promotion to, right
 
 I mean, this metric is not at all susceptible – not at all hackable, right? Nobody would ever do anything like that, right?
 
-*So career-wise, you've just destroyed your H-factor and gone into making user-friendly databases.*
+*So career-wise, you've just destroyed your h-factor and gone into making user-friendly databases.*
 
 Correct. It was a gamble, absolutely a gamble. If this hadn't worked, I would have had to find somewhere else to work than research. Amazingly, it worked. But that's a different story. It was a gamble for sure. But I only took the gamble when they couldn't fire me anymore, when I got tenure at the institute.
 
@@ -98,6 +104,8 @@ It's a very hard thing to get, let me tell you. It's rough.
 *I'm trying to get tenure as a podcast, but apparently they haven't taken my application seriously yet.*
 
 No, the government should maybe get in on this.
+
+### [00:11:08] Choosing a Single-Node Database
 
 *Okay, so anyway, you've started to break out of that management loop. We talked a lot about how this was built, but I think one more thing as a recap: DuckDB is a sort of local, just-point-it-at-a-file analytics database. What makes that the choice you went after? Because there are lots of kinds of databases, and you just said you had a background in distributed systems. You could have done a peer-to-peer network database. Why go for something that's kind of small?*
 
@@ -124,6 +132,8 @@ I think it's a community extension. I'm not sure who built it, but it exists and
 *So maybe I should point people at the previous episode if they want to get all the details of how we get to there. But we left the last episode with DuckDB as a local, very fast, very easy to use, single-file database. To me it was SQLite but for analytics.*
 
 That's absolutely the tagline that we went with, and I think it's still a good tagline. I think we may want to talk about the journey so far since then, but it's now changed a bit, more into an ecosystem. I would argue it used to be "SQLite for analytics" and now people call it “the Duck stack”. Yeah. And that is true, right? We did a lot outside the single-node database. Of course, that's still a very core thing we do and we still push it like crazy, but we have done more things, we have put tentacles out.
+
+### [00:16:46] The Trouble with Database Protocols
 
 *This is exactly where I want to go, right? Because one thing you decided to go from that was a client-server model.*
 
@@ -203,7 +213,13 @@ So it is a very interesting problem. There are some approaches in research, or i
 
 *I'm sometimes surprised that the whole thing isn't just another standard set of SQL queries, because a lot of times authentication is recursive SQL.*
 
-Right, that is a great way of doing it. I think that's not typically how it goes. Typically this is a completely orthogonal thing in an engine, and I don't think it's a great idea. And there are some ideas internally on how to make this more of a SQL-y thing. But I'm not sure yet where this is going. It's also not something that I am particularly excited about, honestly. To be quite honest with you, every enterprise is enterprise-y in its own different way, and they have the money to solve this, so they should just leave me alone. Yeah, so you're just giving them the access points. I give them the way of doing it.
+Right, that is a great way of doing it. I think that's not typically how it goes. Typically this is a completely orthogonal thing in an engine, and I don't think it's a great idea. And there are some ideas internally on how to make this more of a SQL-y thing. But I'm not sure yet where this is going. It's also not something that I am particularly excited about, honestly. To be quite honest with you, every enterprise is enterprise-y in its own different way, and they have the money to solve this, so they should just leave me alone.
+
+*Yeah, so you're just giving them the access points.*
+
+I give them the way of doing it.
+
+### [00:33:50] DuckDB's Extension Mechanism
 
 *But this leads to something we didn't talk about last time, but I wanted to know how it works under the hood, which is DuckDB's whole extension mechanism.*
 
@@ -224,6 +240,8 @@ So the callback has to conform to a function signature for scalar functions, and
 It's a C function, and we are currently moving – we had two APIs. We had an internal C++ one and we had a public-facing C API, but we are currently moving everything to this public-facing C API, because it gives us cross-version stability, which is very nice. And so basically you program in this API, and this API is quite extensive. You can create functions, you can create types, you can create other kinds of functions like aggregate functions or window functions or table-producing functions. You can add settings. You can add optimizers – actually, you can add whole optimizers. You can add logical and physical operators. So you can do things like, here's my new fancy join type and this should trigger in this and this circumstance. You can ship your operator for it, you can ship your optimizer that detects that circumstance and adds the operator. There's lots of things you can do there.
 
 And actually, it's interesting that you bring this up, because in our next release, 2.0, which is coming in October, we think, we are finally adding the last bit of the puzzle, which is the pluggable parser. That's another paper we wrote, two years ago I think, because we had everything in DuckDB was already pluggable except for the parser, because parsers are ancient technology from the sixties usually. Yeah, LALR(1) – Knuth himself has written about this, so you can kind of get an idea how old it is. And so the last puzzle piece for extensions was: can you actually change the query language? And I'm happy to report that in the next version of DuckDB you can actually change the parser. So we've completely ripped out the Postgres-based parser we had before and rewritten it into something else.
+
+### [00:39:48] Details of the New SQL Parser
 
 *Okay, you're going to have to give me some details on that, because parsing SQL – it's like the final boss of parsing, I reckon.*
 
@@ -323,6 +341,8 @@ Yeah. It's like there's this old C joke: `#define true false`. Hide that somewhe
 
 We don't condone. No.
 
+### [00:53:22] The Iceberg Format
+
 *Okay. So you've got quite an extension mechanism built up, and extending the parser. That leads me to one specific extension I wanted to talk about, because you're in the analytics space. It's something of the hotness in the analytics world at the moment, which is Iceberg. I know since we last talked you got Iceberg read and write support. But what I'm not sure of is how DuckDB plays in a world where it sort of gives up the analytics to a larger distributed system, right?*
 
 Yeah, Iceberg is interesting. It's something where, I think, this was also one of these things where we looked at it when it first bubbled up and thought, what is this? And then people kept asking for it, and then we had again to go back on our convictions and say fine – but we're going to complain the whole way. So, Iceberg is a great idea, to fix this problem of naked Parquet files on S3 being the way you store data, this whole data lake idea, right? And so that's one ingredient, and the other ingredient you need is change. People always treat change as an afterthought, right? It's like, oh, the data has to change.
@@ -401,6 +421,8 @@ My prediction is that the people that built Iceberg, the Tabular people that got
 
 Oh, right. But we didn't do that. So we added dependencies between extensions. The Iceberg extension uses the Parquet extension. We also have an extension that reads Avro files, because obviously Iceberg uses Avro files for the metadata. It also uses JSON, because it wasn't enough to have Avro files as a metadata format, it also added JSON as a metadata format. So then the Iceberg extension also depends on the JSON reader, and we had to figure out how to do extension dependencies, let's say, to get this Iceberg stuff to work well. But it works, it's fine.
 
+### [01:03:35] The Avro File Format
+
 *Okay, then I'm going to pick you up on your Avro thing, because you said the problem with Postgres and lots of database protocols is that they're putting the type in every row, right? And this is one of the things that Avro completely fixes – it puts all the metadata first, then just streams out compact binary data. I would have thought you'd love Avro.*
 
 No, I don't, regrettably not. I also built an Avro reader from scratch, by the way, to understand Avro. And I've also built a Thrift reader from scratch to understand Thrift.
@@ -414,6 +436,8 @@ Nah, I love serialization. One of the joys in my life is to figure out how to ta
 But the problem with Avro is that every value still has a type prefix, because there are things like unions and structs and they have to say which field is actually there and which is not. So there's still a byte that will tell you which field is actually there or not. That's fine. My structural problem with Avro is that you cannot read it without the schema, whereas a Thrift file you can read without the schema. They were such bit pinchers that they removed the structural information that would be required to decode it without knowing the schema. The Thrift guys have that, and protobuf. And so that means that an Avro file is completely useless without the schema, and you cannot build a generic Avro reader, which would be really nice.
 
 So that is my gripe with Avro. There are other problems: they chunk a bunch of rows together in one compression block in the file, which means that to read a single row you have to decompress that whole block, which kind of defeats the purpose of a row-based format – at which point you might as well use Parquet. The idea is right, but in the execution, let's say, there were some problems. But yeah, it is what Iceberg uses, which is why we have a reader for it.
+
+### [01:06:40] The Duck Stack: DuckDB, Quack, DuckLake
 
 *This almost makes me wonder if you've come up with the “duck” format for solving these. You clearly have strong opinions on the way that data should be serialized. Why is there not “.duck”?*
 
@@ -445,6 +469,8 @@ It's a replacement. It's not a proof of concept – we released 1.0 of DuckLake 
 
 We use the same Parquet files underneath. So you can actually take an Iceberg table and, fairly cheaply, with a metadata-only operation, import it into DuckLake and vice versa. So we use the same format for data files. Okay, they're just Parquet, with some little asterisks on them. And then we also use a compatible format for the deletions. The way Iceberg stores deletes is with additional files that tell you which rows are deleted from the data file, so we are compatible there. Because we figured, we don't have to break compatibility where we don't need to. We're pragmatic people. We don't break things just because we want to break things. We usually do things because we think they're better that way. And DuckLake is definitely one of these things where we looked at this Iceberg spec and we thought, this cannot be the state of data engineering in the year of our lord 2024, or whatever it was.
 
+### [01:10:48] The Future of Iceberg and DuckLake
+
 *Right. What do you think's going to happen then? Because you get the sense that they're already starting to pull metadata into the database. Do you think you're just ahead in the race to a similar position, with metadata as a database?*
 
 It's very fascinating. If they end up doing what we proposed, I consider this a massive win. I could also see that DuckLake gets way more adoption, right? That's also possible. It depends a bit – if a large player would say, "Hey, we're betting on DuckLake," that would also be very good. There are multiple ways for this to have impact. It's already having impact. We already crossed the first bar, of it being ignored by the world – that hasn't happened. It is absolutely part of that world. And now the question is just, what is the endgame from here? Is it going to go into obscurity? Are the other guys adopting it? Any of those paths I consider a win, right? If our tiny team of database-crazy people from Amsterdam can make that kind of thing happen, shove Silicon Valley around, then I consider that a massive win.
@@ -452,6 +478,8 @@ It's very fascinating. If they end up doing what we proposed, I consider this a 
 *Yeah, we've got to influence those people across in California sometimes.*
 
 Right? Sometimes.
+
+### [01:12:14] From Local Tool to Enterprise Adoption
 
 *Please. Absolutely. Okay, so that kind of puts you in a new space, doesn't it? Again, I think of DuckDB as this small thing in my command line toolkit, but now you're getting out into the enterprise world.*
 
@@ -474,6 +502,8 @@ Yeah, there's a talk at DuckCon, and as far as I remember, that's what they do: 
 *Which you can only do reasonably with a database that's backed by a single file. So you pick SQLite or DuckDB, right?*
 
 Right but it's analytics, so you probably want to use DuckDB, because SQLite isn't. Yeah. So that was something that was presented at DuckCon a couple of weeks ago in Amsterdam. We also saw somebody talking about how they changed their big pharma data analysis workflows from Spark to DuckDB and saved hundreds of millions – I don't remember the number. But you see a lot more enterprise adoption. I wouldn't have expected that somebody like Spotify or big pharma would suddenly bet on DuckDB, and I think that has been the story for the last maybe two years: just this massive adoption. And it's also something that pushed our download numbers – right now for DuckDB we're beyond a million a day, which is totally wild. That's crazy.
+
+### [01:15:55] Recent Changes around the Company
 
 *How has that changed life for you, for the company? Because you are a kind of rebel academic building an open source database, and now suddenly you're thrust into the enterprise world. Are you going to be going all corporate and ringing the bell at NASDAQ and all this stuff?*
 
@@ -502,6 +532,8 @@ Right. And I think we have been doing extremely well in many ways. We have never
 *Not many companies can say that, even the huge ones.*
 
 Exactly. But it's also clear that we have to do something different.
+
+### [01:20:03] Joining Amazong Web Services
 
 *So what are you going to do? Are you going to spin up your sales team and become that kind of guy?*
 
@@ -608,6 +640,8 @@ That's also true.
 *We'll get you back in 18 months and see how it's actually gone in reality.*
 
 Happy to.
+
+### [01:38:30] DuckDB v2.0
 
 *So there's one more technical question I wanted to ask, because in a way it's surprising you haven't got it already. I saw it coming in the pipeline: triggers. Is that a coming DuckDB feature?*
 
