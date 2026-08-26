@@ -8,7 +8,7 @@ excerpt: |
 extension:
   name: three_d
   description: 3D solid processing for city models — enclosed volume, validation, distance, and measurement of polyhedral solids.
-  version: 0.1.0
+  version: 0.2.0
   language: C++
   build: cmake
   license: MIT
@@ -17,22 +17,27 @@ extension:
     - HideBa
 
 repo:
-  github: cityjson/duckdb-3d-extension
-  ref: a08f2406d96f8364b7957fa296825d6e4256dc0e
+  github: cityjson/duckdb-3d
+  ref: 679ee0905cb75074e58d11c04fa690669441e6fd
 
 docs:
   hello_world: |
     -- Build a 3D solid from WKB (e.g. produced by the cityjson extension) and measure it.
-    -- ST_3DFromWKB accepts optional CityJSON geometry_properties to recover shell structure.
+    -- ST_3DFromWKB accepts an optional geometry_properties sidecar, which restores the
+    -- shell structure that WKB alone cannot carry (interior cavities, multi-solid parts).
     SELECT
-        ST_3DVolume(solid)                  AS volume_m3,
-        ST_3DSurfaceArea(solid)             AS surface_m2,
-        ST_Area(solid)                      AS footprint_m2,
-        ST_ZMax(solid) - ST_ZMin(solid)     AS height_m,
-        ST_3DIsClosed(solid)                AS closed
-    FROM (SELECT ST_3DFromWKB(geometry, geometry_properties) AS solid FROM buildings);
+        ST_3DVolume(solid)                        AS volume_m3,
+        ST_3DSurfaceArea(solid)                   AS surface_m2,
+        ST_3DFootprintArea(solid)                 AS footprint_m2,
+        ST_3DZMax(solid) - ST_3DZMin(solid)       AS height_m,
+        ST_3DIsClosed(solid)                      AS closed
+    FROM (
+        SELECT ST_3DFromWKB(geometry_lod2_2, geometry_properties_lod2_2) AS solid
+        FROM buildings
+    );
 
-    -- Validate a solid before measuring it (ST_3DVolume requires a valid solid).
+    -- Validate a solid before measuring it: ST_3DVolume requires a valid solid and
+    -- raises rather than returning a plausible-looking wrong number.
     SELECT ST_3DValidationReport(solid) AS report FROM buildings;
 
     -- 3D distance between two geometries (GEOM_3D, built from WKB with ST_Geom3DFromWKB).
@@ -52,30 +57,40 @@ docs:
     - `GEOM_3D` — general 3D geometry (points, lines, polygons, multis, polyhedral surfaces)
       for the class-generic accessor, distance, and serialization functions.
 
-    Function families (PostGIS-style `ST_*` / `ST_3D*` names, a curated 3D subset):
-    - Import / export: `ST_3DFromWKB`, `ST_3DTryFromWKB`, `ST_3DAsWKB`, `ST_Geom3DFromWKB`,
-      `ST_AsText`, `ST_AsGeoJSON`, `ST_AsBinary`
+    Function families (PostGIS-style names, a curated 3D subset). 3D operations use `ST_3D*`
+    names so that `three_d` and DuckDB's `spatial` extension load together in any order; only
+    the handful of names `spatial` does not define stay un-prefixed:
+    - Import / export: `ST_3DFromWKB`, `ST_3DTryFromWKB`, `ST_Geom3DFromWKB`, `ST_3DAsWKB`,
+      `ST_3DAsText`, `ST_3DAsGeoJSON`, `ST_3DAsBinary`
     - Introspection: `ST_3DBounds`, `ST_3DNumSolids`, `ST_3DNumShells`, `ST_3DNumFaces`,
-      `ST_GeometryType`, `ST_NDims`, `ST_HasZ`, `ST_X`, `ST_Y`, `ST_Z`, `ST_ZMin`, `ST_ZMax`,
-      `ST_CoordDim`, `ST_Dimension`, `ST_NumGeometries`
+      `ST_3DGeometryType`, `ST_3DDimension`, `ST_3DNumGeometries`, `ST_3DHasZ`, `ST_3DX`,
+      `ST_3DY`, `ST_3DZ`, `ST_3DZMin`, `ST_3DZMax`, `ST_NDims`, `ST_CoordDim`, `ST_IsPlanar`
     - Validation: `ST_3DIsClosed`, `ST_3DIsManifold`, `ST_3DIsOriented`,
-      `ST_3DValidationReport`, `ST_IsPlanar`
-    - Measurement: `ST_3DVolume`, `ST_3DSurfaceArea` / `ST_3DArea`, `ST_Area` (footprint),
+      `ST_3DValidationReport`
+    - Measurement: `ST_3DVolume`, `ST_3DSurfaceArea` / `ST_3DArea`, `ST_3DFootprintArea`,
       `ST_3DPerimeter`, `ST_3DLength`
     - Distance: `ST_3DDistance`, `ST_3DDWithin`, `ST_3DMaxDistance`, `ST_3DDFullyWithin`,
       `ST_3DIntersects`, `ST_3DClosestPoint`, `ST_3DShortestLine`
-    - Transform / construct: `ST_Translate`, `ST_Scale`, `ST_RotateX/Y/Z`, `ST_Force3D`,
-      `ST_ConvexHull`, `ST_3DCentroid`, `ST_3DExtrude`, `ST_MakeSolid`
+    - Transform / construct: `ST_3DTranslate`, `ST_3DScale`, `ST_3DRotateX`, `ST_3DRotateY`,
+      `ST_3DRotateZ`, `ST_3DTransform`, `ST_Force3D`, `ST_3DConvexHull`, `ST_3DCentroid`,
+      `ST_3DExtrude`, `ST_MakeSolid`
+
+    Geometry is never silently repaired: validity is reported, and functions with a
+    precondition raise instead of guessing. `ST_3DValidationReport` returns the counts
+    (open edges, non-manifold edges, degenerate faces, orientation errors) behind the verdict.
+
+    The single-argument constructors accept DuckDB's native `GEOMETRY` as well as a `BLOB` of
+    WKB, so a GeoParquet column can be passed straight to `ST_Geom3DFromWKB` without a cast.
 
     It composes with the `cityjson` extension: read CityJSON / CityJSONSeq with
-    `read_cityjson(..., lod => '...')` to get `geometry` (WKB) plus `geometry_properties`
-    (JSON), then pipe both into `ST_3DFromWKB`. The extension is experimental and under active
-    development; APIs and payload formats may change.
+    `read_cityjson(..., lod => '...')` to get a per-LoD `geometry_lod*` column (WKB) alongside
+    its `geometry_properties_lod*` sidecar, then pipe both into `ST_3DFromWKB`. The extension
+    is experimental and under active development; APIs and payload formats may change.
 
-extension_star_count: 1
-extension_star_count_pretty: 1
-extension_download_count: 556
-extension_download_count_pretty: 556
+extension_star_count: 3
+extension_star_count_pretty: 3
+extension_download_count: 426
+extension_download_count_pretty: 426
 image: '/images/community_extensions/social_preview/preview_community_extension_three_d.png'
 layout: community_extension_doc
 ---
@@ -101,74 +116,65 @@ LOAD {{ page.extension.name }};
 
 <div class="extension_functions_table"></div>
 
-|      function_name      | function_type | description | comment | examples |
-|-------------------------|---------------|-------------|---------|----------|
-| st_3darea               | scalar        | NULL        | NULL    |          |
-| st_3daswkb              | scalar        | NULL        | NULL    |          |
-| st_3dbounds             | scalar        | NULL        | NULL    |          |
-| st_3dcentroid           | scalar        | NULL        | NULL    |          |
-| st_3dclosestpoint       | scalar        | NULL        | NULL    |          |
-| st_3ddfullywithin       | scalar        | NULL        | NULL    |          |
-| st_3ddistance           | scalar        | NULL        | NULL    |          |
-| st_3ddwithin            | scalar        | NULL        | NULL    |          |
-| st_3dextrude            | scalar        | NULL        | NULL    |          |
-| st_3dfromwkb            | scalar        | NULL        | NULL    |          |
-| st_3dintersects         | scalar        | NULL        | NULL    |          |
-| st_3disclosed           | scalar        | NULL        | NULL    |          |
-| st_3dismanifold         | scalar        | NULL        | NULL    |          |
-| st_3disoriented         | scalar        | NULL        | NULL    |          |
-| st_3dlength             | scalar        | NULL        | NULL    |          |
-| st_3dmaxdistance        | scalar        | NULL        | NULL    |          |
-| st_3dnumfaces           | scalar        | NULL        | NULL    |          |
-| st_3dnumshells          | scalar        | NULL        | NULL    |          |
-| st_3dnumsolids          | scalar        | NULL        | NULL    |          |
-| st_3dperimeter          | scalar        | NULL        | NULL    |          |
-| st_3dshortestline       | scalar        | NULL        | NULL    |          |
-| st_3dsurfacearea        | scalar        | NULL        | NULL    |          |
-| st_3dtryfromwkb         | scalar        | NULL        | NULL    |          |
-| st_3dvalidationreport   | scalar        | NULL        | NULL    |          |
-| st_3dvolume             | scalar        | NULL        | NULL    |          |
-| st_area                 | scalar        | NULL        | NULL    |          |
-| st_asgeojson            | scalar        | NULL        | NULL    |          |
-| st_aswkblinez           | scalar        | NULL        | NULL    |          |
-| st_aswkbmultilinez      | scalar        | NULL        | NULL    |          |
-| st_aswkbmultipointz     | scalar        | NULL        | NULL    |          |
-| st_aswkbmultipolygonz   | scalar        | NULL        | NULL    |          |
-| st_aswkbopentetra       | scalar        | NULL        | NULL    |          |
-| st_aswkbpointz          | scalar        | NULL        | NULL    |          |
-| st_aswkbpolygonz        | scalar        | NULL        | NULL    |          |
-| st_aswkbpolyhedraltetra | scalar        | NULL        | NULL    |          |
-| st_aswkbwarpedpolygonz  | scalar        | NULL        | NULL    |          |
-| st_convexhull           | scalar        | NULL        | NULL    |          |
-| st_coorddim             | scalar        | NULL        | NULL    |          |
-| st_dimension            | scalar        | NULL        | NULL    |          |
-| st_force3d              | scalar        | NULL        | NULL    |          |
-| st_geom3dfromwkb        | scalar        | NULL        | NULL    |          |
-| st_geometrytype         | scalar        | NULL        | NULL    |          |
-| st_hasz                 | scalar        | NULL        | NULL    |          |
-| st_isplanar             | scalar        | NULL        | NULL    |          |
-| st_makesolid            | scalar        | NULL        | NULL    |          |
-| st_ndims                | scalar        | NULL        | NULL    |          |
-| st_numgeometries        | scalar        | NULL        | NULL    |          |
-| st_rotatex              | scalar        | NULL        | NULL    |          |
-| st_rotatey              | scalar        | NULL        | NULL    |          |
-| st_rotatez              | scalar        | NULL        | NULL    |          |
-| st_scale                | scalar        | NULL        | NULL    |          |
-| st_translate            | scalar        | NULL        | NULL    |          |
-| st_x                    | scalar        | NULL        | NULL    |          |
-| st_y                    | scalar        | NULL        | NULL    |          |
-| st_z                    | scalar        | NULL        | NULL    |          |
-| st_zmax                 | scalar        | NULL        | NULL    |          |
-| st_zmin                 | scalar        | NULL        | NULL    |          |
+|     function_name     | function_type | description | comment | examples |
+|-----------------------|---------------|-------------|---------|----------|
+| st_3darea             | scalar        | NULL        | NULL    |          |
+| st_3dasbinary         | scalar        | NULL        | NULL    |          |
+| st_3dasgeojson        | scalar        | NULL        | NULL    |          |
+| st_3dastext           | scalar        | NULL        | NULL    |          |
+| st_3daswkb            | scalar        | NULL        | NULL    |          |
+| st_3dbounds           | scalar        | NULL        | NULL    |          |
+| st_3dcentroid         | scalar        | NULL        | NULL    |          |
+| st_3dclosestpoint     | scalar        | NULL        | NULL    |          |
+| st_3dconvexhull       | scalar        | NULL        | NULL    |          |
+| st_3ddfullywithin     | scalar        | NULL        | NULL    |          |
+| st_3ddimension        | scalar        | NULL        | NULL    |          |
+| st_3ddistance         | scalar        | NULL        | NULL    |          |
+| st_3ddwithin          | scalar        | NULL        | NULL    |          |
+| st_3dextrude          | scalar        | NULL        | NULL    |          |
+| st_3dfootprintarea    | scalar        | NULL        | NULL    |          |
+| st_3dfromwkb          | scalar        | NULL        | NULL    |          |
+| st_3dgeometrytype     | scalar        | NULL        | NULL    |          |
+| st_3dhasz             | scalar        | NULL        | NULL    |          |
+| st_3dintersects       | scalar        | NULL        | NULL    |          |
+| st_3disclosed         | scalar        | NULL        | NULL    |          |
+| st_3dismanifold       | scalar        | NULL        | NULL    |          |
+| st_3disoriented       | scalar        | NULL        | NULL    |          |
+| st_3dlength           | scalar        | NULL        | NULL    |          |
+| st_3dmaxdistance      | scalar        | NULL        | NULL    |          |
+| st_3dnumfaces         | scalar        | NULL        | NULL    |          |
+| st_3dnumgeometries    | scalar        | NULL        | NULL    |          |
+| st_3dnumshells        | scalar        | NULL        | NULL    |          |
+| st_3dnumsolids        | scalar        | NULL        | NULL    |          |
+| st_3dperimeter        | scalar        | NULL        | NULL    |          |
+| st_3drotatex          | scalar        | NULL        | NULL    |          |
+| st_3drotatey          | scalar        | NULL        | NULL    |          |
+| st_3drotatez          | scalar        | NULL        | NULL    |          |
+| st_3dscale            | scalar        | NULL        | NULL    |          |
+| st_3dshortestline     | scalar        | NULL        | NULL    |          |
+| st_3dsurfacearea      | scalar        | NULL        | NULL    |          |
+| st_3dtransform        | scalar        | NULL        | NULL    |          |
+| st_3dtranslate        | scalar        | NULL        | NULL    |          |
+| st_3dtryfromwkb       | scalar        | NULL        | NULL    |          |
+| st_3dvalidationreport | scalar        | NULL        | NULL    |          |
+| st_3dvolume           | scalar        | NULL        | NULL    |          |
+| st_3dx                | scalar        | NULL        | NULL    |          |
+| st_3dy                | scalar        | NULL        | NULL    |          |
+| st_3dz                | scalar        | NULL        | NULL    |          |
+| st_3dzmax             | scalar        | NULL        | NULL    |          |
+| st_3dzmin             | scalar        | NULL        | NULL    |          |
+| st_coorddim           | scalar        | NULL        | NULL    |          |
+| st_force3d            | scalar        | NULL        | NULL    |          |
+| st_geom3dfromwkb      | scalar        | NULL        | NULL    |          |
+| st_isplanar           | scalar        | NULL        | NULL    |          |
+| st_makesolid          | scalar        | NULL        | NULL    |          |
+| st_ndims              | scalar        | NULL        | NULL    |          |
 
 ### Overloaded Functions
 
 <div class="extension_functions_table"></div>
 
-| function_name | function_type |                            description                             | comment |                                        examples                                         |
-|---------------|---------------|--------------------------------------------------------------------|---------|-----------------------------------------------------------------------------------------|
-| st_asbinary   | scalar        | Returns the Well-Known Binary (WKB) representation of the geometry | NULL    | [st_asbinary(ST_GeomFromWKB(X'01010000000000000000000000000000000000000000000000000'))] |
-| st_astext     | scalar        | Returns the Well-Known Text (WKT) representation of the geometry   | NULL    | [ST_AsText(ST_GeomFromWKB(X'01010000000000000000000000000000000000000000000000'))]      |
+This extension does not add any function overloads.
 
 ### Added Types
 
