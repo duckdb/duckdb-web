@@ -21,6 +21,7 @@
                 <div class="option" aria-checked="false" tabindex="-1" data-value="r"><span class="symbol"><img src="/images/icons/r.svg" aria-hidden="true"></span><span class="label">R</span></div>
                 <div class="option" aria-checked="false" tabindex="-1" data-value="rust"><span class="symbol"><img src="/images/icons/rust.svg" aria-hidden="true"></span><span class="label">Rust</span></div>
                 <div class="option" aria-checked="false" tabindex="-1" data-value="odbc"><span class="symbol"><img src="/images/icons/odbc.svg" aria-hidden="true"></span><span class="label">ODBC</span></div>
+                <div class="option" aria-checked="false" tabindex="-1" data-value="wasm" data-display-label="WebAssembly (Wasm)"><span class="symbol"><img src="/images/icons/webassembly.svg" aria-hidden="true"></span><span class="label">Wasm</span></div>
                 <a class="option" href="{% link docs/current/clients/overview.md %}" tabindex="-1"><span class="label">More</span><svg class="icon arrow-right" aria-hidden="true"><use href="#arrow-right"></use></svg></a>
             </div>
         </div>
@@ -42,7 +43,7 @@
     </div>
     
     
-    <div class="installation-instructions" data-core-version="{{ site.current_duckdb_version }}" data-java-version="{{ site.current_duckdb_java_short_version }}" data-odbc-version="{{ site.current_duckdb_odbc_short_version }}" data-nodejs-version="{{ site.current_duckdb_node_neo_version }}" data-go-version="{{ site.current_duckdb_go_version }}" data-r-version="{{ site.current_duckdb_r_version }}" data-rust-version="{{ site.current_duckdb_rust_version }}" data-lts-core-version="{{ site.lts_duckdb_version }}" data-lts-java-version="{{ site.lts_duckdb_java_short_version }}" data-lts-odbc-version="{{ site.lts_duckdb_odbc_short_version }}" data-lts-nodejs-version="{{ site.lts_duckdb_node_neo_version }}" data-lts-go-version="{{ site.lts_duckdb_go_version }}" data-lts-r-version="{{ site.lts_duckdb_r_version }}" data-lts-rust-version="{{ site.lts_duckdb_rust_version }}">
+    <div class="installation-instructions" data-core-version="{{ site.current_duckdb_version }}" data-java-version="{{ site.current_duckdb_java_short_version }}" data-odbc-version="{{ site.current_duckdb_odbc_short_version }}" data-nodejs-version="{{ site.current_duckdb_node_neo_version }}" data-go-version="{{ site.current_duckdb_go_version }}" data-r-version="{{ site.current_duckdb_r_version }}" data-rust-version="{{ site.current_duckdb_rust_version }}" data-wasm-version="{{ site.current_duckdb_wasm_version }}" data-lts-core-version="{{ site.lts_duckdb_version }}" data-lts-java-version="{{ site.lts_duckdb_java_short_version }}" data-lts-odbc-version="{{ site.lts_duckdb_odbc_short_version }}" data-lts-nodejs-version="{{ site.lts_duckdb_node_neo_version }}" data-lts-go-version="{{ site.lts_duckdb_go_version }}" data-lts-r-version="{{ site.lts_duckdb_r_version }}" data-lts-rust-version="{{ site.lts_duckdb_rust_version }}" data-lts-wasm-version="{{ site.lts_duckdb_wasm_version }}">
         
         <h2>Installation
             <span class="version-switch">
@@ -438,7 +439,29 @@ npm install @duckdb/node-api
 {%- highlight bash -%}
 npm install @duckdb/node-api@{{ site.lts_duckdb_node_neo_version }}
 {%- endhighlight -%}
-    
+
+</div>
+
+{%- if site.current_duckdb_wasm_version != "" -%}
+<div class="current"
+    data-environment="wasm"
+    data-docs="{% link docs/current/clients/wasm/overview.md %}">
+
+{%- highlight bash -%}
+npm install @duckdb/duckdb-wasm
+{%- endhighlight -%}
+
+</div>
+{%- endif -%}
+
+<div class="lts"
+    data-environment="wasm"
+    data-docs="{% link docs/lts/clients/wasm/overview.md %}">
+
+{%- highlight bash -%}
+npm install @duckdb/duckdb-wasm@{{ site.lts_duckdb_wasm_version }}
+{%- endhighlight -%}
+
 </div>
 
 {%- if site.current_duckdb_rust_version != "" -%}

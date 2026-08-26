@@ -217,6 +217,8 @@ SELECT count(*) FROM reachable;
 
 As you can see, DuckDB v2.0 is about 40× faster (!) for the same recursive query.
 
+> Update We published a blog post on [how we are speeding up recursive CTEs in DuckDB v2.0]({% post_url 2026-08-25-how-duckdb-runs-recursive-ctes-faster %}).
+
 Row-group pruning has been massively expanded: [min-max indexes (zone maps)]({% link docs/current/sql/indexes.md %}#min-max-index-zonemap %}) and [Parquet Bloom filters]({% post_url 2025-03-07-parquet-bloom-filters-in-duckdb %}) now skip data for structs, lists, decimals, UUIDs, `IN` filters, and even function predicates:
 
 ```sql

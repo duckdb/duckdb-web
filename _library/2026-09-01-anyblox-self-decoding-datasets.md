@@ -4,6 +4,7 @@ title: "AnyBlox: A Framework for Self-Decoding Datasets"
 author: "Mateusz Gienieczko, Maximilian Kuschewski, Thomas Neumann, Viktor Leis, Jana Giceva"
 tags: ["Paper"]
 thirdparty: true
+published: false
 category: community
 excerpt: ""
 pill: "VLDB 2025"
