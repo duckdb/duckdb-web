@@ -7,7 +7,6 @@ author: "Amazon Staff"
 tags: ["Article"]
 thirdparty: false
 excerpt: ""
-toc: false
 pill: "About Amazon blog"
 ---
 

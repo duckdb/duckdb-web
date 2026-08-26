@@ -7,7 +7,6 @@ image: "/images/library/thumbs/2026-08-26-all-things-distributed.jpg"
 tags: ["Article"]
 thirdparty: false
 excerpt: ""
-toc: false
 pill: "All Things Distributed"
 ---
 

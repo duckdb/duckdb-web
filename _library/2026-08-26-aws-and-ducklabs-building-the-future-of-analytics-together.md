@@ -7,7 +7,6 @@ author: "Mai-Lan Tomsen Bukovec (AWS)"
 tags: ["Article"]
 thirdparty: false
 excerpt: ""
-toc: false
 pill: "AWS Big Data Blog"
 ---
 

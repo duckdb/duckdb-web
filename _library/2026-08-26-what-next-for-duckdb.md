@@ -8,7 +8,6 @@ tags: ["Podcast"]
 length: "100 min"
 thirdparty: false
 excerpt: ""
-toc: true
 pill: "Developer Voices by Kris Jenkins"
 ---
 
