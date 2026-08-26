@@ -192,6 +192,7 @@
       else if (env === 'nodejs') ver = attr('nodejs-version') || ver;
       else if (env === 'r') ver = attr('r-version') || ver;
       else if (env === 'rust') ver = attr('rust-version') || ver;
+      else if (env === 'wasm') ver = attr('wasm-version') || ver;
       return ver;
     }
 
