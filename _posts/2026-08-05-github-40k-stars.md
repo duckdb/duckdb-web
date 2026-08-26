@@ -13,7 +13,7 @@ The [`duckdb/duckdb` GitHub repository](https://github.com/duckdb/duckdb) has ju
 ![Star history]({% link images/blog/star-history-20260805-dark.svg %}){: .darkmode-img }
 ![Star history]({% link images/blog/star-history-20260805-light.svg %}){: .lightmode-img }
 
-We’d like to use this milestone to stop for a moment and revisit recent developments in the DuckStack ecosystem since last summer (2025), when we surpassed [30 000 stars](https://duckdb.org/2025/06/06/github-30k-stars).
+We’d like to use this milestone to stop for a moment and revisit recent developments in the “Duck Stack” ecosystem since last summer (2025), when we surpassed [30&nbsp;000 stars](https://duckdb.org/2025/06/06/github-30k-stars).
 
 ## Releases
 
@@ -32,7 +32,7 @@ Besides the GitHub stars, the DuckDB community has also experienced a lot of gro
 
 ## Events
 
-Since 30 000 stars, we ran DuckDB meetups in [Amsterdam](https://duckdb.org/events/2025/09/17/duckdb-amsterdam-meetup-3/), [Berlin](https://duckdb.org/events/2025/06/26/duckdb-berlin-meetup/), and [London](https://duckdb.org/events/2025/09/04/duckdb-science-and-education-london-meetup/). We also hosted a [Developer Meeting](https://duckdb.org/events/2026/01/30/duckdb-developer-meeting-1/) focused on DuckDB internals and extension development. 
+Since 30&nbsp;000 stars, we ran DuckDB meetups in [Amsterdam](https://duckdb.org/events/2025/09/17/duckdb-amsterdam-meetup-3/), [Berlin](https://duckdb.org/events/2025/06/26/duckdb-berlin-meetup/), and [London](https://duckdb.org/events/2025/09/04/duckdb-science-and-education-london-meetup/). We also hosted a [Developer Meeting](https://duckdb.org/events/2026/01/30/duckdb-developer-meeting-1/) focused on DuckDB internals and extension development.
 
 Finally, we hosted [DuckCon #7](https://duckdb.org/events/2026/06/24/duckcon7/), our largest DuckCon so far, which we also streamed online. These events allowed us to connect with our community of engineers, builders, and scientists, and learn about the many ways they are using DuckDB.
 
@@ -42,7 +42,7 @@ Stay tuned!
 
 ## DuckDB in the Wild
 
-Here are just a few of the projects, extensions, and announcements that happened in the DuckDB community since the last 10 000-star milestone:
+Here are just a few of the projects, extensions, and announcements that happened in the DuckDB community since the last 10&nbsp;000-star milestone:
 
 * **Blog:** Petrica Leuca shows you [how to use DuckDB for keyword, full-text, and semantic similarity search](https://duckdb.org/2025/06/13/text-analytics) with embeddings for lightweight text analytics.
 * **Video:** GizmoEdge: [A distributed DuckDB engine for IoT](https://www.youtube.com/watch?v=xlvjN_eFJvM) (from the first DuckDB Developer Meeting) by Philip Moore.
@@ -59,4 +59,4 @@ Here are just a few of the projects, extensions, and announcements that happened
 
 ## Closing Thoughts
 
-We would like to extend a heartfelt **thank you** to the DuckDB community of users and contributors. We look forward to growing the community around the “DuckStack” and hope the GitHub stars follow. We'll report back when we reach 50 000 stars.
+We would like to extend a heartfelt **thank you** to the DuckDB community of users and contributors. We look forward to growing the community around the “DuckStack” and hope the GitHub stars follow. We'll report back when we reach 50&nbsp;000 stars.

@@ -8,7 +8,7 @@ excerpt: |
 extension:
   name: altertable
   description: Query Altertable's lakehouse directly from your local DuckDB.
-  version: 0.4.0
+  version: 0.5.0
   language: C++
   build: cmake
   excluded_platforms: wasm_mvp;wasm_eh;wasm_threads
@@ -19,14 +19,19 @@ extension:
   requires_toolchains: "vcpkg;parser_tools"
 repo:
   github: altertable-ai/duckdb-altertable
-  ref: c3fa5a0d8dfcda92b768629168949d81a0a275ed
+  ref: 2d2be3fc58758f13899770bc37682fb9e333e888
 docs:
   hello_world: |
     INSTALL altertable FROM community;
     LOAD altertable;
 
-    -- Attach an Altertable catalog using Arrow Flight SQL
-    ATTACH 'user=my-user password=my-pass catalog=my-altertable-catalog' AS db (TYPE ALTERTABLE);
+    -- Attach an Altertable database
+    CREATE SECRET my_altertable (
+        TYPE altertable,
+        USER 'my-user',
+        PASSWORD 'my-pass'
+    );
+    ATTACH 'catalog=my-altertable-catalog' AS db (TYPE ALTERTABLE, SECRET my_altertable);
 
     -- Query remote Altertable tables with standard SQL
     SELECT * FROM db.main.events;
@@ -45,13 +50,13 @@ docs:
     Features include:
     - `ATTACH` support for remote Altertable databases
     - direct reads from attached schemas and tables
-    - attached writes with `CREATE TABLE`, `CREATE TABLE AS`, and `INSERT`
+    - attached writes with `CREATE TABLE`, `CREATE TABLE AS`, `INSERT`, `UPDATE` and `DELETE`
     - DuckDB secrets support for storing Altertable credentials
 
 extension_star_count: 0
 extension_star_count_pretty: 0
-extension_download_count: 761
-extension_download_count_pretty: 761
+extension_download_count: 805
+extension_download_count_pretty: 805
 image: '/images/community_extensions/social_preview/preview_community_extension_altertable.png'
 layout: community_extension_doc
 ---

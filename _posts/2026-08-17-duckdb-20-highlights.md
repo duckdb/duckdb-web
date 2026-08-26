@@ -172,7 +172,7 @@ And **recursive CTEs with [`USING KEY`]({% post_url 2025-05-23-using-key %}) agg
 ```sql
 WITH RECURSIVE tbl(a, b) USING KEY (a, avg(b)) AS (
     SELECT 1, 5
-    UNION
+    UNION ALL
     SELECT a, b - 1 FROM tbl WHERE b > 0
 )
 TABLE tbl;
