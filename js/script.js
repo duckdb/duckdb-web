@@ -1322,7 +1322,7 @@ $('body.documentation #main_content_wrap a.externallink').each(function () {
 			'</div>'
 		);
 
-		$wrap.empty().append($controls).append($swiper);
+		$wrap.empty().append($swiper).append($controls);
 
 		function trailingSpace() {
 			var slide = $swiper[0].querySelector('.swiper-slide');
@@ -1335,8 +1335,8 @@ $('body.documentation #main_content_wrap a.externallink').each(function () {
 			slidesPerView: 'auto',
 			spaceBetween: 20,
 			slidesOffsetAfter: trailingSpace(),
-			autoHeight: true,
 			grabCursor: true,
+			slideToClickedSlide: true,
 			autoplay: delay > 0 ? {
 				delay: delay,
 				disableOnInteraction: true,

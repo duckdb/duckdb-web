@@ -108,7 +108,8 @@ div.singleentry {
 				line-height: 1.5;
 			}
 
-			.quote-author {
+			p.quote-author {
+				@include body-small();
 				color: var(--main-text-secondary-color, #666);
 				margin-top: 20px;
 			}
@@ -117,20 +118,13 @@ div.singleentry {
 
 	.quote-slider {
 		$slide-width: 84%;
-		$peek-fade: 32px;
-
-		$fade-right: linear-gradient(to right, #000 0, #000 $slide-width, transparent 99%);
-		$fade-down: linear-gradient(to bottom, #000 0, #000 calc(100% - #{$peek-fade}), transparent 100%);
-		$peek-only: linear-gradient(to right, #000 0, #000 $slide-width, transparent $slide-width);
 
 		margin: 30px 0;
 
 		.swiper {
 			overflow: hidden;
-			-webkit-mask-image: $fade-right, $fade-down, $peek-only;
-			-webkit-mask-composite: source-in, source-over, source-over;
-			mask-image: $fade-right, $fade-down, $peek-only;
-			mask-composite: intersect, add, add;
+			-webkit-mask-image: linear-gradient(to right, #000 0, #000 $slide-width, transparent 99%);
+			mask-image: linear-gradient(to right, #000 0, #000 $slide-width, transparent 99%);
 		}
 
 		&.is-end .swiper {
@@ -152,7 +146,7 @@ div.singleentry {
 	.quote-slider-controls {
 		display: flex;
 		gap: 4px;
-		margin-bottom: 8px;
+		margin-top: 8px;
 
 		button {
 			display: flex;

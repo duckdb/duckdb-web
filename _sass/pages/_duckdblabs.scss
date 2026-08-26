@@ -70,9 +70,6 @@ body.landing{
 				
 			}
 		}
-		h1{
-			@include display-1();
-		}
 		.duckdblabs{
 			margin: 0 auto;
 			max-width: 840px;
@@ -770,10 +767,17 @@ body.press-release{
 	.press-card-meta{
 		display: flex;
 		align-items: center;
-		gap: 24px;
-		margin-bottom: 12px;
+		flex-wrap: wrap;
+		column-gap: 8px;
+		row-gap: 6px;
 		@include tiny();
 		color: var(--main-text-secondary-color, #666);
+
+		> * + *::before{
+			content: "|";
+			margin-right: 8px;
+			color: var(--main-text-tertiary-color, #B2B2B2);
+		}
 
 		.source{
 			display: inline-flex;
@@ -792,6 +796,10 @@ body.press-release{
 	.press-card-title{
 		@include title-2();
 		margin: 0;
+	}
+
+	.press-card-title + .press-card-meta{
+		margin-top: 12px;
 	}
 
 	&:hover{
