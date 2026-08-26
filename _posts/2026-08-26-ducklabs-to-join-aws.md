@@ -12,4 +12,4 @@ DuckLabs today has announced that they will be joining Amazon Web Services as a 
 
 DuckDB, DuckLake, Quack, and all the other extensions will remain free and open source software under the MIT license under the stewardship of the non-profit [DuckDB Foundation](https://duckdb.foundation). DuckDB and related projects will continue to be developed at a very high pace. The Foundation will set up a stakeholder advisory board which can influence the direction of the projects. We are lifting the limitations of [community support]({% link community_support.md %}). Please consult the [blog post on ducklabs.com](https://ducklabs.com/news/2026/08/26/ducklabs-to-join-aws) and download the [media kit](https://ducklabs.com/media/DuckLabs-Media-Kit.zip) for more information.
 
-PS: Next week, we’ll host the [DuckDB Boston meetup]({% link _events/2026-09-03-duckdb-boston-meetup.md %}) in – surprise – an AWS office in Cambridge. If you’re nearby, consider dropping by!
+PS: Next week, we’ll host the [DuckDB meetup]({% link _events/2026-09-03-duckdb-boston-meetup.md %}) in Boston. If you’re nearby, consider dropping by!
