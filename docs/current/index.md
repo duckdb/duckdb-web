@@ -83,7 +83,7 @@ title: Documentation
         <svg class="chevron"><use href="#chevron-right"></use></svg>
     </div>
     <div class="box-link third-width">
-        <a href="{% link docs/current/clients/rust.md %}"></a>
+        <a href="{% link docs/current/clients/rust/overview.md %}"></a>
         <span class="symbol"><img src="{% link images/icons/rust.svg %}"></span>
         <span>Rust</span>
         <svg class="chevron"><use href="#chevron-right"></use></svg>

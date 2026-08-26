@@ -452,7 +452,41 @@
             },
             {
               "page": "Rust",
-              "url": "rust"
+              "slug": "rust",
+              "subsubfolderitems": [
+                {
+                  "page": "Overview",
+                  "url": "overview"
+                },
+                {
+                  "page": "Define Connections",
+                  "url": "connecting"
+                },
+                {
+                  "page": "Import Data",
+                  "url": "data_import"
+                },
+                {
+                  "page": "Run Queries",
+                  "url": "querying"
+                },
+                {
+                  "page": "Handle Results",
+                  "url": "result_handling"
+                },
+                {
+                  "page": "Define Functions",
+                  "url": "functions"
+                },
+                {
+                  "page": "Profile and Monitor",
+                  "url": "profiling"
+                },
+                {
+                  "page": "Troubleshoot",
+                  "url": "known_issues"
+                }
+              ]
             },
             {
               "page": "Swift",
