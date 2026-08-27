@@ -73,23 +73,23 @@ To download the CLI or the C/C++ libraries as a package, use the following links
 
 For Python, we distribute different nightly builds. Note that not all of them are available at all times and a few days can be skipped when nightly builds fail.
 
-* v1.4-dev:
+### Python v1.4-dev
 
-  ```batch
-  pip install "duckdb<1.5.0" --pre --upgrade
-  ```
+```batch
+pip install "duckdb<1.5.0" --pre --upgrade
+```
 
-* v1.5-dev:
+### Python v1.5-dev
 
-  ```batch
-  pip install "duckdb<1.6.0" --pre --upgrade
-  ```
+```batch
+pip install "duckdb<1.6.0" --pre --upgrade
+```
 
-* v2.0-dev:
+### Python v2.0-dev
 
-  ```batch
-  pip install duckdb --pre --upgrade
-  ```
+```batch
+pip install duckdb --pre --upgrade
+```
 
 ## Java
 
