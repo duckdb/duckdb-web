@@ -455,7 +455,7 @@ I have some rants there.
 
 So the first part of Iceberg is this metadata level of files that tells you which versions exist of that table, which files are part of it, which schema exists, that kind of stuff. And then on top of that you have the Iceberg catalog stuff, and those are not files, that is a service, right? And that's a REST API kind of thing that indeed does tell you which tables exist and where they live, and gives you credentials to maybe read from S3, things like that. So there are two layers there. And actually the file metadata stuff was first, and later on they tacked on the REST API. It's also called the Iceberg REST catalog. That came later.
 
-So that's kind of Iceberg, and yes, it is quite popular. People like it. I think the reason people like it is they don't want to be locked in. And Databricks has been pushing very hard on this. They have their own variant of Iceberg, which is called Delta, but they've also bought the Iceberg company, so it's a Databricks thing at this point. And they have been pushing on this a lot for business reasons. But in principle, the idea that people want to own their data and make sense of it, and it not being locked down.
+So that's kind of Iceberg, and yes, it is quite popular. People like it. I think the reason people like it is they don't want to be locked in. But in principle, the idea that people want to own their data and make sense of it, and it not being locked down.
 
 *And sometimes being able to query it from lots of different places without having to move all the data from vendor A to vendor B.*
 
