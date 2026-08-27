@@ -11,7 +11,7 @@ redirect_from:
   <div class="pagetitle-heading" role="heading" aria-level="1">DuckDB Community Support Policy</div>
 </div>
 
-(Last updated: August 26, 2026)
+(Last updated: August 27, 2026)
 
 ## Overview
 
@@ -32,7 +32,7 @@ Starting this fall, the [DuckDB Foundation](https://duckdb.foundation/) will als
 ## Scope
 
 - **Client APIs:**
-  - We provide first-tier support for the command line shell as well as the C, Go, Java (JDBC), ODBC, Node.js, Python, Rust and WebAssembly client APIs.
+  - We provide first-tier support for the command line shell as well as the C, Go, Java (JDBC), ODBC, Node.js, Python, R, Rust and WebAssembly client APIs.
   - The C++ API is intended for internal use and is not designed as a stable user-facing API. See the [Client overview page]({% link docs/current/clients/overview.md %}) for more details. (Note that starting from version v2.0, we will ship a stable C++ API.)
 - **Extensions:** The community support policy only covers the primary extensions from the [core extensions]({% link docs/current/core_extensions/overview.md %}).
 - **Crashes and internal errors:** Issues that cause crashes (segfault, bus error, abort) and issues that result in [internal errors]({% link docs/current/dev/internal_errors.md %}) get higher priority.
