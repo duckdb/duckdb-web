@@ -7,7 +7,7 @@ thumb: "/images/events/thumbs/duckdb-boston-meetup.svg"
 image: "/images/events/thumbs/duckdb-boston-meetup.png"
 excerpt: ""
 tags: ["meetup"]
-venue: "BOS11, Cambridge"
+venue: "W Boston"
 ---
 
 <img src="{% link images/events/thumbs/duckdb-boston-meetup.svg %}"
@@ -21,7 +21,7 @@ DuckDB is also widely used by practitioners in the U.S. east coast, including fi
 
 ## Venue
 
-The venue will be hosted at the [BOS11 Amazon office in Cambridge](https://maps.app.goo.gl/9vCjSpiRkMCgiGCj8).
+W Boston hotel, [100 Stuart St, Boston, MA 02116](https://maps.app.goo.gl/wJDP3WBGfBEfUeP26).
 
 ## Attendance
 

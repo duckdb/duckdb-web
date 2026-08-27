@@ -346,6 +346,7 @@ $docuh5: 18px;
   --main-codebox-border-color: #0d0d0d14;
   --main-codebox-dropshadow: #00000008;
   --main-codebox-main-background-color: #fafafacc;
+  --main-codebox-main-background-color-gradient: #fafafa00;
   --main-codebox-sub-background-color: #0d0d0d14;
   --main-highlight-orange-background: var(--grey-10);
   --main-highlight-orange-text: var(--orange-50);
@@ -570,6 +571,7 @@ html.darkmode {
   --main-codebox-border-color: var(--grey-20);
   --main-codebox-dropshadow: #ffffff0a;
   --main-codebox-main-background-color: #141414cc;
+  --main-codebox-main-background-color-gradient: #14141400;
   --main-codebox-sub-background-color: var(--grey-transparent-20);
   --main-highlight-orange-background: var(--grey-10);
   --main-highlight-orange-text: var(--orange-50);
