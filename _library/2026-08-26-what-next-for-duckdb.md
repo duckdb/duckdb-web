@@ -12,8 +12,63 @@ pill: "Developer Voices by Kris Jenkins"
 ---
 
 <div class="video-container">
-<iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/C3l4CsP1Ak0?si=u_DMOqM7NgftcqOi" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+<iframe id="yt-player" width="560" height="315" src="https://www.youtube-nocookie.com/embed/C3l4CsP1Ak0?si=u_DMOqM7NgftcqOi&enablejsapi=1" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 </div>
+
+<script src="https://www.youtube.com/iframe_api"></script>
+<script>
+  var ytPlayer, ytReady = false, pendingSeek = null;
+  function onYouTubeIframeAPIReady() {
+    var frame = document.getElementById('yt-player');
+    frame.src = frame.src + '&origin=' + encodeURIComponent(window.location.origin);
+    ytPlayer = new YT.Player('yt-player', {
+      events: {
+        onReady: function () {
+          ytReady = true;
+          if (pendingSeek !== null) {
+            doSeek(pendingSeek);
+            pendingSeek = null;
+          }
+        }
+      }
+    });
+  }
+  function doSeek(seconds) {
+    ytPlayer.seekTo(seconds, true);
+    ytPlayer.playVideo();
+  }
+  function seekYouTube(seconds) {
+    document.getElementById('yt-player').scrollIntoView({ behavior: 'smooth', block: 'center' });
+    if (ytReady) {
+      doSeek(seconds);
+    } else {
+      pendingSeek = seconds;
+    }
+  }
+  document.addEventListener('DOMContentLoaded', function () {
+    var re = /^\[(\d{1,2}):(\d{2}):(\d{2})\]$/;
+    document.querySelectorAll('.content p').forEach(function (p) {
+      var text = p.textContent.trim();
+      var m = text.match(re);
+      if (!m) return;
+      var seconds = (+m[1]) * 3600 + (+m[2]) * 60 + (+m[3]);
+      var a = document.createElement('a');
+      a.href = '#';
+      a.className = 'yt-seek';
+      a.textContent = text;
+      a.title = 'Jump to ' + m[0].slice(1, -1) + ' in the video';
+      a.addEventListener('click', function (e) {
+        e.preventDefault();
+        seekYouTube(seconds);
+      });
+      p.textContent = '';
+      p.appendChild(a);
+    });
+  });
+</script>
+<style>
+  .yt-seek { font-family: monospace; }
+</style>
 
 |-------|-------|
 | **Podcast** | [Developer Voices](https://www.developervoices.com/) |
@@ -22,9 +77,21 @@ pill: "Developer Voices by Kris Jenkins"
 
 ## Transcript
 
-### Introduction
+### Prelude
 
-<!-- [00:00:01] -->
+[00:00:00]
+
+Since we first had DuckDB on the show a couple of years ago now, I've become a real fan of it. It's a really fast local analytics database. Think SQLite, but for analysis rather than transactions. And it's fast in two senses. There's the CPU sense, you can give it a billion-line CSV file, or a billion-record JSON file, and it can process through it in seconds. But it's also fast in the user-friendly sense. You can query those files as though they were already tables in the database. It just works. You don't lose half an hour to figuring out the right create table schema before you can do the job you  actually wanted to do. Their goal was fast and user-friendly, and full disclosure, I am a fan.
+
+I think they succeeded very, very well. But success comes with its own problems, doesn't it? If you build something and nobody likes it and it fails, it's sort of freeing. You're free to go and do something else. But if you build something people like, before you know it, you've got feature requests and pull requests coming in. You've got users and maybe customers to attend to. Maybe you end up with staff to manage. Maybe, and in my opinion, this is the worst-case scenario of success, you get pulled away from building good tech, and you have to spend all your time managing an enterprise sales and marketing team, or appeasing shareholders. And the money of that is nice, but it hardly sounds fulfilling. That set of problems, the problems of success, have been visiting DuckDB since we last talked to them. So I thought we'd bring back the co-creator of DuckDB, Hannes Mühleisen, to discuss them. What problems has success brought him? How do you accept a slew of new features that the community wants merged without becoming responsible for maintaining them forever more?
+
+His answer was they had to build an extension mechanism. But that in turn has forced them to do a complete rewrite of their SQL parser. And writing an SQL parser, a fully featured one, is parsing on hard mode. We talk about how Hannes swore he would never do a client server version, but then he had to walk that back, because you can't claim to be a user-friendly database if all your users are demanding client server and you ignore them. And we also talk about how DuckDB needed to support Iceberg to be a competitive analytics database, but how they found enough problems with it that they felt compelled to create a competing version of the same idea.
+
+So in this episode, if you want to learn about PEG parsers, DuckLake, and why all  database wire formats are wrong, we get into the technical details. But around that, we also talk a lot about the reality of building a successful project, including some big news, how they're avoiding the trap of becoming a company ruled by their enterprise sales team by being acquired by AWS. Well, will that work? The answer to that is a mixture of hopes, fears, contractual terms, and friendly agreements. But we'll get there. Let's dive in. I'm your host, Kris Jenkins. This is Developer Voices. And today's voice is Hannes Mühleisen. 
+
+### What Is DuckDB, And Why Build One From Scratch?
+
+[00:03:38]
 
 *I'm joined today by a returning guest, Hannes Mühleisen. Hannes, how are you?*
 
@@ -46,10 +113,6 @@ Interesting.
 
 Yeah, it's been a while.
 
-### Previously on Developer Voice
-
-<!-- [00:01:04] -->
-
 *So for those that haven't watched the previous episode, let's just start with a recap of what's DuckDB and why does it exist? Because aren't there a lot of databases, my friend?*
 
 There are many databases, but obviously they're all wrong. So, DuckDB – we like to describe it as a universal data wrangling tool. We have thought about this quite a lot: what it is, what we think it is. But this idea of giving people confidence to work with data, that's really our guiding principle. And it's also why DuckDB was built from scratch, because we realized that there were really not a lot of database developers that had put user or developer experience really first. And so that was really our principle that we started DuckDB with. We said this needs to be trivial to set up, this needs to be friendly in its error messages, and the SQL dialect and all these things, like principle of least surprise, and it needs to not have the most conservative defaults but the most reasonable defaults, and all these things, right? And when we looked at these requirements, we realized that we really couldn't just take something else and repackage it. It went very deep. And that's why about eight years ago we started on this lovely journey. Mark Raasveldt, my co-creator of DuckDB, and I started on this journey of building a database from scratch, which is a bit of a daft idea in retrospect.
@@ -66,9 +129,9 @@ It's also the case for system software like databases or operating systems or th
 
 That's fair. We did do a bunch of stuff in DuckDB so that we don't have to do everything, right? So it's not a monolith. They have all these plugins – extensions, we call them – that you can install and build and whatever. So there is a chance that we will get to some sort of stable state with the core itself. But I'm also a very realistic person, so I think we will be doing this for a while. Fine. I'm fine with that.
 
-### Focus on User Experience
+### Making A Database Both Fast And User-Friendly
 
-<!--  [00:05:03] -->
+[00:08:38]
 
 *So I want to pick you up on the thing you just said about usability, right? Because I think it's a very difficult bridge to construct, and I do think you've constructed it. I want to know how. Plenty of people would say, "Let's make a database that's user friendly," and they would succeed, but it would be technically scrap. So I'm not going to single out any particular databases, but there were some, particularly in the NoSQL movement, that were incredibly easy to use, didn't work very well, didn't actually save your data to the disk, and things like that. And then you've got academics like you saying, "Oh, we should do a database properly," and they don't succeed in usability at all.*
 
@@ -110,11 +173,13 @@ It's a very hard thing to get, let me tell you. It's rough.
 
 No, the government should maybe get in on this.
 
-### Choosing a Single-Node Database
+*Okay, so anyway, you've started to break out of that management loop. We talked a lot about how this was built, but I think one more thing as a recap: DuckDB is a sort of local, just-point-it-at-a-file analytics database.*
 
-<!-- [00:11:08] -->
+### Why Single-Node Beats Distributed
 
-*Okay, so anyway, you've started to break out of that management loop. We talked a lot about how this was built, but I think one more thing as a recap: DuckDB is a sort of local, just-point-it-at-a-file analytics database. What makes that the choice you went after? Because there are lots of kinds of databases, and you just said you had a background in distributed systems. You could have done a peer-to-peer network database. Why go for something that's kind of small?*
+[00:15:05]
+
+*What makes that the choice you went after? Because there are lots of kinds of databases, and you just said you had a background in distributed systems. You could have done a peer-to-peer network database. Why go for something that's kind of small?*
 
 That's a great question, and I think that was also because there was actually nothing in that space. One answer is that back in 2016, 2017 there was a lot of choice on distributed stuff. Why make another one, right? And remember what I said about this needing to be friendly and easy to use. Distributed systems are the exact opposite of being easy to use. I have set up these things myself and it is an absolute nightmare, right? You're installing software on 32 computers at the same time, and then one of them says, "Oh, I don't like your permissions," and then everything crashes down and you have to grep logs on 32 machines. It's an absolute nightmare.
 
@@ -140,9 +205,9 @@ I think it's a community extension. I'm not sure who built it, but it exists and
 
 That's absolutely the tagline that we went with, and I think it's still a good tagline. I think we may want to talk about the journey so far since then, but it's now changed a bit, more into an ecosystem. I would argue it used to be "SQLite for analytics" and now people call it “the Duck Stack”. Yeah. And that is true, right? We did a lot outside the single-node database. Of course, that's still a very core thing we do and we still push it like crazy, but we have done more things, we have put tentacles out.
 
-### The Trouble with Database Protocols
+### Quack, And Why Database Wire Protocols Are Terrible
 
-<!-- [00:16:46] -->
+[00:20:22]
 
 *This is exactly where I want to go, right? Because one thing you decided to go from that was a client-server model.*
 
@@ -196,7 +261,11 @@ Correct. And I think this is a very nice way of putting it. If you tell people w
 
 There was actually a good example recently. There was somebody, Rusty, one of the valued community members in DuckDB, and he said, guys, sometimes DuckDB doesn't have a defined result set order. For example, if you read from a source that doesn't define a result set order, and you then put an `OFFSET` without an `ORDER BY` – so SQL has this `OFFSET` thing where you can say give me everything from row 10,000 to row 20,000 of the result. If you have a non-deterministic input order and you have no sorting criteria on the query and you specify an `OFFSET`, the results are completely non-deterministic. Which is by definition – yeah, this is very true. And I was about to write back "you're holding it wrong," and then I thought about it for a couple of hours, and days, I don't know, and I went back: no, we need to fix this. And now – I pushed a pull request a couple of weeks ago where, in this situation, it will show you a warning saying, hey, this is non-deterministic, you can make it deterministic by adding an `ORDER BY`, but just be warned. We've told you. And that's the same thinking as with this Quack thing, right? It's not about being right, it's about solving people's problems with data.
 
-*Yeah. But doesn't it open up a whole host of problems that you hadn't originally designed for? Because by the time you've got client-server, now you need to worry about concurrent writers, which is where databases just explode.*
+### Hidden Costs of Going Client-Server
+
+[00:30:32]
+
+*But doesn't it open up a whole host of problems that you hadn't originally designed for? Because by the time you've got client-server, now you need to worry about concurrent writers, which is where databases just explode.*
 
 Actually, we had support for concurrent writers for a long time. We just didn't have support for concurrent processes writing to the same database file. These are two different things. DuckDB has supported concurrent writers from different threads in the same process for a long time, so that wasn't something we had to add. We have also greatly improved this recently, where now you can commit while checkpointing, things like that. The concurrent writer thing wasn't so much the issue with Quack. The problem – client-server is quite ugly in the failure modes, let's say. So we suddenly have to deal with the fact that the connection goes away, and it goes away in various ways. You pull the cable, the other side stops responding, you're running into all these timeouts, you have to clean up resources but you don't really know when, because the other guy might still be coming back or not, we don't know. There is exhaustion of file descriptors when there are too many connections. You have all sorts of interesting systems problems that we haven't had before, and we spent quite a lot of time trying to work around them.
 
@@ -228,9 +297,9 @@ Right, that is a great way of doing it. I think that's not typically how it goes
 
 I give them the way of doing it.
 
-### DuckDB's Extension Mechanism
+### How DuckDB's Extension Mechanism Works
 
-<!-- [00:33:50] -->
+[00:37:32]
 
 *But this leads to something we didn't talk about last time, but I wanted to know how it works under the hood, which is DuckDB's whole extension mechanism.*
 
@@ -250,11 +319,13 @@ So the callback has to conform to a function signature for scalar functions, and
 
 It's a C function, and we are currently moving – we had two APIs. We had an internal C++ one and we had a public-facing C API, but we are currently moving everything to this public-facing C API, because it gives us cross-version stability, which is very nice. And so basically you program in this API, and this API is quite extensive. You can create functions, you can create types, you can create other kinds of functions like aggregate functions or window functions or table-producing functions. You can add settings. You can add optimizers – actually, you can add whole optimizers. You can add logical and physical operators. So you can do things like, here's my new fancy join type and this should trigger in this and this circumstance. You can ship your operator for it, you can ship your optimizer that detects that circumstance and adds the operator. There's lots of things you can do there.
 
-And actually, it's interesting that you bring this up, because in our next release, 2.0, which is coming in October, we think, we are finally adding the last bit of the puzzle, which is the pluggable parser. That's another paper we wrote, two years ago I think, because we had everything in DuckDB was already pluggable except for the parser, because parsers are ancient technology from the sixties usually. Yeah, LALR(1) – Knuth himself has written about this, so you can kind of get an idea how old it is. And so the last puzzle piece for extensions was: can you actually change the query language? And I'm happy to report that in the next version of DuckDB you can actually change the parser. So we've completely ripped out the Postgres-based parser we had before and rewritten it into something else.
+And actually, it's interesting that you bring this up, because in our next release, 2.0, which is coming in October, we think, we are finally adding the last bit of the puzzle, which is the pluggable parser. 
 
-### Details of the New SQL Parser
+### Why SQL Is the Final Boss of Parsing
 
-<!-- [00:39:48] -->
+[00:42:40]
+
+That's another paper we wrote, two years ago I think, because we had everything in DuckDB was already pluggable except for the parser, because parsers are ancient technology from the sixties usually. Yeah, LALR(1) – Knuth himself has written about this, so you can kind of get an idea how old it is. And so the last puzzle piece for extensions was: can you actually change the query language? And I'm happy to report that in the next version of DuckDB you can actually change the parser. So we've completely ripped out the Postgres-based parser we had before and rewritten it into something else.
 
 *Okay, you're going to have to give me some details on that, because parsing SQL – it's like the final boss of parsing, I reckon.*
 
@@ -297,6 +368,10 @@ And then the biggest problem was it wasn't extensible. This was a monolith that 
 So we ended up rewriting the parser from scratch, accepting that memory is slightly bigger than it was in '63. And whether parsing takes a microsecond or a millisecond really doesn't matter, right? We have some more space in this whole thing now.
 
 *And if you have to hold lots of potential parse trees before you commit to one of them, that uses up memory, but not much.*
+
+### Rewriting DuckDB's Parser with PEG
+
+[00:50:14]
 
 Not a lot, no. And so we've written this into something called a PEG parser, which is a much more recent abstraction, which is also something Python has switched to, by the way. They did this too. Okay. They switched a couple of years ago, or maybe not that long ago – I think two or three years ago – Guido himself switched Python from a `yacc` parser to a PEG parser. So PEG is like a recursive descent kind of thing. It's a greedy, different abstraction, but it works better. And the nice thing is you can modify that at runtime. So now you can load an extension into DuckDB and that can say, hey, here's my new parsing rule and here's the transformer that tells you what kind of logical tree I want to make out of this parsed set of symbols. So that's very elegant.
 
@@ -354,9 +429,9 @@ Yeah. It's like there's this old C joke: `#define true false`. Hide that somewhe
 
 We don't condone. No.
 
-### The Iceberg Format
+### Iceberg, And Why DuckDB Had to Support It
 
-<!-- [00:53:22] -->
+[00:57:02]
 
 *Okay. So you've got quite an extension mechanism built up, and extending the parser. That leads me to one specific extension I wanted to talk about, because you're in the analytics space. It's something of the hotness in the analytics world at the moment, which is Iceberg. I know since we last talked you got Iceberg read and write support. But what I'm not sure of is how DuckDB plays in a world where it sort of gives up the analytics to a larger distributed system, right?*
 
@@ -436,9 +511,9 @@ My prediction is that the people that built Iceberg, the Tabular people that got
 
 Oh, right. But we didn't do that. So we added dependencies between extensions. The Iceberg extension uses the Parquet extension. We also have an extension that reads Avro files, because obviously Iceberg uses Avro files for the metadata. It also uses JSON, because it wasn't enough to have Avro files as a metadata format, it also added JSON as a metadata format. So then the Iceberg extension also depends on the JSON reader, and we had to figure out how to do extension dependencies, let's say, to get this Iceberg stuff to work well. But it works, it's fine.
 
-### The Avro File Format
+### The Trouble With Avro
 
-<!-- [01:03:35] -->
+[01:06:52]
 
 *Okay, then I'm going to pick you up on your Avro thing, because you said the problem with Postgres and lots of database protocols is that they're putting the type in every row, right? And this is one of the things that Avro completely fixes – it puts all the metadata first, then just streams out compact binary data. I would have thought you'd love Avro.*
 
@@ -454,11 +529,11 @@ But the problem with Avro is that every value still has a type prefix, because t
 
 So that is my gripe with Avro. There are other problems: they chunk a bunch of rows together in one compression block in the file, which means that to read a single row you have to decompress that whole block, which kind of defeats the purpose of a row-based format – at which point you might as well use Parquet. The idea is right, but in the execution, let's say, there were some problems. But yeah, it is what Iceberg uses, which is why we have a reader for it.
 
-### The Duck Stack: DuckDB, Quack, DuckLake
+*This almost makes me wonder if you've come up with the “duck” format for solving these. You clearly have strong opinions on the way that data should be serialized. Why is there not `.duck`?*
 
-<!-- [01:06:40] -->
+### DuckLake: Put The Metadata in a Database
 
-*This almost makes me wonder if you've come up with the “duck” format for solving these. You clearly have strong opinions on the way that data should be serialized. Why is there not “.duck”?*
+[01:10:05]
 
 We do have a DuckDB storage format – DuckDB has its own storage format.
 
@@ -488,10 +563,6 @@ It's a replacement. It's not a proof of concept – we released 1.0 of DuckLake 
 
 We use the same Parquet files underneath. So you can actually take an Iceberg table and, fairly cheaply, with a metadata-only operation, import it into DuckLake and vice versa. So we use the same format for data files. Okay, they're just Parquet, with some little asterisks on them. And then we also use a compatible format for the deletions. The way Iceberg stores deletes is with additional files that tell you which rows are deleted from the data file, so we are compatible there. Because we figured, we don't have to break compatibility where we don't need to. We're pragmatic people. We don't break things just because we want to break things. We usually do things because we think they're better that way. And DuckLake is definitely one of these things where we looked at this Iceberg spec and we thought, this cannot be the state of data engineering in the year of our lord 2024, or whatever it was.
 
-### The Future of Iceberg and DuckLake
-
-<!-- [01:10:48] -->
-
 *Right. What do you think's going to happen then? Because you get the sense that they're already starting to pull metadata into the database. Do you think you're just ahead in the race to a similar position, with metadata as a database?*
 
 It's very fascinating. If they end up doing what we proposed, I consider this a massive win. I could also see that DuckLake gets way more adoption, right? That's also possible. It depends a bit – if a large player would say, "Hey, we're betting on DuckLake," that would also be very good. There are multiple ways for this to have impact. It's already having impact. We already crossed the first bar, of it being ignored by the world – that hasn't happened. It is absolutely part of that world. And now the question is just, what is the endgame from here? Is it going to go into obscurity? Are the other guys adopting it? Any of those paths I consider a win, right? If our tiny team of database-crazy people from Amsterdam can make that kind of thing happen, shove Silicon Valley around, then I consider that a massive win.
@@ -500,9 +571,9 @@ It's very fascinating. If they end up doing what we proposed, I consider this a 
 
 Right? Sometimes.
 
-### From Local Tool to Enterprise Adoption
+### From Laptop Tool To Enterprise Data Stack
 
-<!-- [01:12:14] -->
+[01:15:29]
 
 *Please. Absolutely. Okay, so that kind of puts you in a new space, doesn't it? Again, I think of DuckDB as this small thing in my command line toolkit, but now you're getting out into the enterprise world.*
 
@@ -525,10 +596,6 @@ Yeah, there's a talk at DuckCon, and as far as I remember, that's what they do: 
 *Which you can only do reasonably with a database that's backed by a single file. So you pick SQLite or DuckDB, right?*
 
 Right but it's analytics, so you probably want to use DuckDB, because SQLite isn't. Yeah. So that was something that was presented at DuckCon a couple of weeks ago in Amsterdam. We also saw somebody talking about how they changed their big pharma data analysis workflows from Spark to DuckDB and saved hundreds of millions – I don't remember the number. But you see a lot more enterprise adoption. I wouldn't have expected that somebody like Spotify or big pharma would suddenly bet on DuckDB, and I think that has been the story for the last maybe two years: just this massive adoption. And it's also something that pushed our download numbers – right now for DuckDB we're beyond a million a day, which is totally wild. That's crazy.
-
-### Recent Changes around the Company
-
-<!-- [01:15:55] -->
 
 *How has that changed life for you, for the company? Because you are a kind of rebel academic building an open source database, and now suddenly you're thrust into the enterprise world. Are you going to be going all corporate and ringing the bell at NASDAQ and all this stuff?*
 
@@ -558,9 +625,9 @@ Right. And I think we have been doing extremely well in many ways. We have never
 
 Exactly. But it's also clear that we have to do something different.
 
-### Joining Amazong Web Services
+### The Big News: DuckLabs Joins AWS
 
-<!-- [01:20:03] -->
+[01:23:18]
 
 *So what are you going to do? Are you going to spin up your sales team and become that kind of guy?*
 
@@ -612,6 +679,10 @@ But the resources – there are some things I'm excited about. Resources in term
 
 Absolutely.
 
+### The Missing Feedback Loop of Real Workloads
+
+[01:32:28]
+
 But I think what's also super interesting, and something we've always been locked out of, is the ability to see real-world workloads. And that's really a problem – maybe I should talk about this a little bit. So, you worked at Snowflake. Snowflake sees every single query that people run, right? They might pretend they don't, but they do.
 
 *I'm not sure how much I can say legally, but that is a valuable source of intel. Any reasonable person would assume that.*
@@ -644,6 +715,10 @@ Fun story: I talked to some founders of some big database companies that I canno
 
 Right. And I think AWS is kind of big enough for that to be maybe a little bit more disconnected, where we can really push on technological excellence and know that that will spill over – much like they already do in other areas, like with the CPUs, which is something I find quite impressive, where they're building their own CPUs for the data centers, the Graviton thing, and they push everybody. This is something that people benefit from: it's more efficient, it's nice to the planet. So I think it's really going to be fascinating. Obviously I don't know a lot yet – by the time we're recording this, we're in the final stages of negotiations. But it's going to happen.
 
+### What It's Like Having A Boss Again
+
+[01:38:36]
+
 *Okay, one more question about that before we get to another technical thing I want to talk about. I just want to know, because you don't often hear this story: how does that affect you? You are the co-founder of a successful company that's been profitable every month for five years. You're a big fish in your own pond. And I can see the pros and cons, but how does it feel for you?*
 
 Oh, it's super fascinating, because one idea I really had to come to terms with is having a boss again.
@@ -668,9 +743,9 @@ That's also true.
 
 Happy to.
 
-### DuckDB v2.0
+### Triggers, Stored Procedures And DuckDB 2.0
 
-<!-- [01:38:30] -->
+[01:41:44]
 
 *So there's one more technical question I wanted to ask, because in a way it's surprising you haven't got it already. I saw it coming in the pipeline: triggers. Is that a coming DuckDB feature?*
 
@@ -702,4 +777,12 @@ We can do a follow-up. Yeah, there are lots of exciting things coming, for sure.
 
 Thank you so much, Kris. Absolute pleasure talking to you.
 
-*Always. Cheers.*  
+*Always. Cheers.* 
+
+### Outro
+
+[01:45:02]
+
+I hope the deal works out really well. I'm told it's being inked pretty much as we speak. So may you live in interesting times. However it plays out, I think you'll end up writing more code than if you'd gone down the enterprise sales management route. So I think the world's a better place. As always, you'll find links to everything we discussed in the show notes, including a link to the previous episode where we really got into the weeds of how you build an analytics database from scratch. Personally, my homework is to go and learn more about PEG parsers because I'm a fan of parser combinators and I don't know much about PEG parsers. I'll go and make that my holiday reading.
+
+Before we all go away and learn stuff, please do take a moment to like, rate and share this episode and make sure you're subscribed because we'll be back soon with, I think, a compiler expert. Stay tuned for that. But until then, I've been your host, Kris Jenkins. This has been Developer Voices with Hannes Mühleisen. Thanks for listening.
