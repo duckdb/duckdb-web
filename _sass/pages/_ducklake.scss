@@ -166,7 +166,7 @@ body.landing{
 		position: relative;
 		.ducklake{
 			margin: 0 auto;
-			max-width: min(770px, 100%);
+			max-width: min(630px, 100%);
 			text-align: center;
 			display: flex;
 			flex-direction: column;
@@ -331,7 +331,7 @@ body.landing{
 		}
 	}
 	h1{
-		@include display-1();
+		@include display-2();
 	}
 	h2{
 		@include display-3();
@@ -811,9 +811,6 @@ body.manifesto{
 		flex: none;
 		width: 100%;
 		order: 1;
-	}
-	body.landing h1{
-		max-width: unset;
 	}
 	body.documentation #ducklake_logo{
 		background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='38' height='38' fill='none'%3E%3Cpath fill='%231A1A1A' d='M19 0C8.524 0 0 8.524 0 19s8.524 19 19 19 19-8.524 19-19S29.476 0 19 0Z'/%3E%3Cpath fill='%232EAFFF' fill-rule='evenodd' d='M17.39 9.66a9.376 9.376 0 0 1 8.093 4.62h1.707v.01c2.357 0 4.345 1.895 4.35 4.3h.01c0 2.39-1.96 4.35-4.35 4.35h-1.264c-1.43 3.132-4.526 5.344-8.157 5.492l-.39.008-.483-.013A9.384 9.384 0 0 1 8 19.05v-.01c0-5.19 4.2-9.39 9.39-9.39v.01Zm0 2.85c-3.6 0-6.53 2.92-6.53 6.53v.01a6.531 6.531 0 0 0 12.74 2.02l.32-.99h3.28c.797 0 1.484-.674 1.49-1.48h-.01c0-.79-.66-1.46-1.49-1.46H23.7l-.38-.83a6.513 6.513 0 0 0-5.93-3.8Z' clip-rule='evenodd'/%3E%3C/svg%3E");
