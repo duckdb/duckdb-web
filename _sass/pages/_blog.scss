@@ -1185,6 +1185,10 @@ footer{
 			margin-left: 0;
 		}
 	}
+	.newswrap .postwrap .infoline:has(.scheduled){
+		flex-wrap: wrap;
+		row-gap: 2px;
+	}
 	.infoline .scheduled,
 	.publishedinfo{
 		width: 100%;
