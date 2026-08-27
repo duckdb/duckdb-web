@@ -183,6 +183,12 @@ SELECT regexp_extract('abc', '([a-z])(b)', 1); -- a
 SELECT regexp_extract('abc', '([a-z])(b)', 2); -- b
 ```
 
+There is also an overload that takes regex options as the third argument, with no group required:
+
+```sql
+SELECT regexp_extract('ABC', 'abc', 'i'); -- ABC
+```
+
 The `regexp_extract` function also supports a `name_list` argument, which is a `LIST` of strings. Using `name_list`, the `regexp_extract` will return the corresponding capture groups as fields of a `STRUCT`:
 
 ```sql
