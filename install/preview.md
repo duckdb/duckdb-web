@@ -56,7 +56,7 @@ To download the CLI or the C/C++ libraries as a package, use the following links
 To install the preview build on Linux and macOS, run:
 
 ```bash
-curl https://install.duckdb.org | DUCKDB_VERSION=alpha sh
+curl https://install.duckdb.org | DUCKDB_VERSION=alpha bash
 ```
 
 To download the CLI or the C/C++ libraries as a package, use the following links:

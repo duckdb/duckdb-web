@@ -23,7 +23,7 @@ In line with DuckDB's “low friction” principle, we made sure that you can in
 DuckDB can now be installed on UNIX-like systems with an installation script:
 
 ```batch
-curl https://install.duckdb.org | sh
+curl https://install.duckdb.org | bash
 ```
 
 The script determines your operating system and architecture, fetches the tag of latest release, and if not present downloads the latest available DuckDB binary to `~/.duckdb/cli` (the `~/.duckdb` folder is already used to store extensions).
