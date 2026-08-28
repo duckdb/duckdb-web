@@ -13,18 +13,35 @@ This page collects common issues encountered when using the DuckDB Rust client, 
 
 ## Linking against a System Library
 
-The [`bundled` feature]({% link docs/current/clients/rust/overview.md %}#feature-flags) compiles DuckDB from the source shipped with the crate, so nothing else is needed to build. Without `bundled`, the underlying [`libduckdb-sys`](https://crates.io/crates/libduckdb-sys) crate links against a system DuckDB library, which it locates through `pkg-config` or, on the MSVC ABI, [Vcpkg](https://github.com/microsoft/vcpkg). If no library is found the build fails.
+The [`bundled` feature]({% link docs/current/clients/rust/overview.md %}#feature-flags) compiles DuckDB from the source shipped with the crate, so nothing else is needed to build, and it is the simplest choice for most applications. Without `bundled`, the underlying [`libduckdb-sys`](https://crates.io/crates/libduckdb-sys) crate links against a DuckDB library already on the system, which it locates through `pkg-config` or, on the MSVC ABI, [Vcpkg](https://github.com/microsoft/vcpkg). If no library is found, the build fails. There are three ways to build without `bundled`.
 
-To link against a DuckDB library at a known location, set `DUCKDB_LIB_DIR` (and, if the header is elsewhere, `DUCKDB_INCLUDE_DIR`). For example, using the prebuilt library from a DuckDB release:
+### Point at a Library You Already Have
+
+Set `DUCKDB_LIB_DIR` to the directory containing the library, and `DUCKDB_INCLUDE_DIR` to the directory containing `duckdb.h` if it is elsewhere. For example, using a prebuilt library from a [DuckDB release](https://github.com/duckdb/duckdb/releases):
 
 ```bash
-export DUCKDB_LIB_DIR=/path/to/libduckdb
+wget https://github.com/duckdb/duckdb/releases/download/v1.5.5/libduckdb-osx-universal.zip
+unzip libduckdb-osx-universal.zip -d libduckdb
+
+export DUCKDB_LIB_DIR=$PWD/libduckdb
 export DUCKDB_INCLUDE_DIR=$DUCKDB_LIB_DIR
-export LD_LIBRARY_PATH=$DUCKDB_LIB_DIR   # DYLD_FALLBACK_LIBRARY_PATH on macOS
+export DYLD_FALLBACK_LIBRARY_PATH=$DUCKDB_LIB_DIR   # LD_LIBRARY_PATH on Linux
 cargo build
 ```
 
-Alternatively, set `DUCKDB_DOWNLOAD_LIB=1` to have the build download a prebuilt library automatically. For most applications, enabling `bundled` is the simplest choice.
+On Linux, use the matching `libduckdb-linux-amd64.zip` or `libduckdb-linux-arm64.zip` archive and set `LD_LIBRARY_PATH` instead.
+
+### Let the Build Download a Library
+
+Set `DUCKDB_DOWNLOAD_LIB=1` and the build script downloads the prebuilt DuckDB library matching the crate's version from GitHub Releases, caches it under `target/`, and adds it to the linker search path. Leave `DUCKDB_STATIC` unset, because the downloaded archives contain only the dynamic library:
+
+```bash
+DUCKDB_DOWNLOAD_LIB=1 cargo build
+```
+
+### Use a Package Manager
+
+If DuckDB is installed through `pkg-config` or Vcpkg, the build finds it automatically. `vcpkg` uses static libraries by default; set `VCPKGRS_DYNAMIC=1` to link dynamically instead.
 
 ## ICU Extension Is Excluded from the Bundled Build
 
