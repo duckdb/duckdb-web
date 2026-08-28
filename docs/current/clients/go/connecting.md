@@ -98,16 +98,16 @@ db.SetMaxIdleConns(0)
 DuckDB runs in the same process as the Go application, so all of its memory is held by that process. Closing the `database/sql` objects is what frees DuckDB's memory and, for a persistent database, flushes the [write-ahead log]({% link docs/current/internals/storage.md %}) to disk. Always close every object that has a `Close()` method, which `defer` makes convenient:
 
 ```go
-db, err := sql.Open("duckdb", "")
+db, _ := sql.Open("duckdb", "")
 defer db.Close()
 
-conn, err := db.Conn(context.Background())
+conn, _ := db.Conn(context.Background())
 defer conn.Close()
 
-rows, err := conn.QueryContext(context.Background(), "SELECT 42")
+rows, _ := conn.QueryContext(context.Background(), "SELECT 42")
 defer rows.Close() // or drain the rows until Next() returns false
 
-connector, err := duckdb.NewConnector("", nil)
+connector, _ := duckdb.NewConnector("", nil)
 defer connector.Close() // if the connector is passed to sql.OpenDB
 ```
 
