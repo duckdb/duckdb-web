@@ -42,6 +42,8 @@ appender.Append<string>("Hannes");
 appender.EndRow();
 ```
 
+For more information, see the [C++ client]({% link docs/current/clients/cpp.md %}).
+
 ### Java (JDBC)
 
 An appender is created from a `DuckDBConnection` with `createAppender()`, and rows are built with `beginRow()`, `append()`, and `endRow()`. Using try-with-resources flushes and closes it at the end of the scope:
@@ -54,6 +56,8 @@ try (var appender = conn.createAppender(DuckDBConnection.DEFAULT_SCHEMA, "tbl"))
     appender.endRow();
 }
 ```
+
+For more information, see the [Java Appender API]({% link docs/current/clients/java/data_import.md %}#appender).
 
 ### Go
 
@@ -69,6 +73,8 @@ err = appender.AppendRow(1, "hello")
 err = appender.Flush()
 ```
 
+For more information, see the [Go Appender API]({% link docs/current/clients/go.md %}#appender).
+
 ### Rust
 
 Create an appender from a `Connection` with `appender()`, then push rows built with the `params!` macro:
@@ -79,9 +85,11 @@ app.append_row(params![1, "hello"])?;
 app.flush()?;
 ```
 
+For more information, see the [Rust Appender API]({% link docs/current/clients/rust/data_import.md %}#appender).
+
 ### C
 
-See the [C Appender API]({% link docs/current/clients/c/appender.md %}).
+For more information, see the [C Appender API]({% link docs/current/clients/c/appender.md %}).
 
 ## Date, Time and Timestamps
 
