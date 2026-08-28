@@ -146,6 +146,30 @@ SELECT currval('serial') AS currval;
 |--------:|
 | 1       |
 
+### Setting the Sequence Value
+
+Use `setval` to set a sequence to a given value (Postgres-style). The optional third argument `is_called` defaults to `true`: the next `nextval` returns `value + increment`. If `is_called` is `false`, the next `nextval` returns `value`.
+
+```sql
+CREATE SEQUENCE serial START 1;
+SELECT setval('serial', 42);
+SELECT nextval('serial');
+```
+
+| nextval |
+|--------:|
+| 43      |
+
+```sql
+CREATE SEQUENCE serial START 1;
+SELECT setval('serial', 42, false);
+SELECT nextval('serial');
+```
+
+| nextval |
+|--------:|
+| 42      |
+
 ## Syntax
 
 <div id="rrdiagram"></div>
