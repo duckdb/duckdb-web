@@ -13,7 +13,7 @@ You can install the [DuckDB CLI client]({% link docs/current/clients/cli/overvie
 To use the [DuckDB install script](https://install.duckdb.org) on Linux and macOS, run:
 
 ```bash
-curl https://install.duckdb.org | sh
+curl https://install.duckdb.org | bash
 ```
 
 <!-- markdownlint-disable MD040 MD046 -->
@@ -66,7 +66,7 @@ export PATH="~/.duckdb/cli/latest":$PATH
 You can install [past DuckDB releases]({% link release_calendar.md %}#past-releases) (all the way back to v1.0.0) using the `DUCKDB_VERSION` variable. For example, to install v1.2.2, run:
 
 ```bash
-curl https://install.duckdb.org | DUCKDB_VERSION=1.2.2 sh
+curl https://install.duckdb.org | DUCKDB_VERSION=1.2.2 bash
 ```
 
 ## Windows

@@ -24,7 +24,7 @@ To run this experiment, we purchased the 13" modular laptop by [Framework](https
 We installed [Omarchy 2.0](https://omarchy.org/), an Arch Linux-based distribution with a vibrant community and first-class support for Framework laptops. Assembling the laptop and installing Omarchy took less than an hour in total. Installing the DuckDB command line client only took seconds using the installer script:
 
 ```bash
-curl https://install.duckdb.org | sh
+curl https://install.duckdb.org | bash
 ```
 
 We changed the theme to _[Osaka Jade](https://github.com/Justikun/omarchy-osaka-jade-theme)_ for a more Matrix-like look and got to work:
