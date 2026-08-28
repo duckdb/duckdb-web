@@ -9,7 +9,12 @@ title: Run Queries
 
 ## Overview
 
-Queries are sent on a `Connection` with `execute()`, `execute_batch()`, and prepared statements, and results are read by mapping each row to a Rust value. The sections below walk through sending statements, binding parameters, and turning rows into typed Rust values. For opening the `Connection` these run on, see [Connect]({% link docs/current/clients/rust/connecting.md %}).
+A `Connection` runs SQL through two families of methods:
+
+* The `execute_*` methods (`execute()` and `execute_batch()`) send statements that do not return rows, such as `INSERT` or DDL, and report the number of affected rows.
+* The `query_*` methods (`query()`, `query_map()`, and `query_row()`) run statements that return rows and hand each `Row` back to be mapped into a Rust value.
+
+Prepared statements work with both. The sections below walk through sending statements, binding parameters, and turning rows into typed Rust values. For opening the `Connection` these run on, see [Connect]({% link docs/current/clients/rust/connecting.md %}).
 
 ## Sending Statements
 
