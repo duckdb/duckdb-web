@@ -158,7 +158,7 @@ await conn.query(`
 `);
 ```
 
-> Tip Reading a remote file makes the browser issue the request, so it is subject to the browser's CORS policy. If a query over an S3 or other remote file fails with a network error, see [Troubleshoot]({% link docs/current/clients/wasm/known_issues.md %}#network-error-when-querying-remote-files).
+> Tip Reading a remote file makes the browser issue the request, so it is subject to the browser's CORS policy. If a query over an S3 or other remote file fails with a network error, see [Troubleshoot]({% link docs/current/clients/wasm/troubleshoot.md %}#network-error-when-querying-remote-files).
 
 ## Insert Statement
 
@@ -176,4 +176,4 @@ await conn.query(`
 * [Load Extensions]({% link docs/current/clients/wasm/extensions.md %}) — the Parquet, JSON, and Wasm-flavored httpfs extensions used to read files directly in SQL.
 * [`INSERT` Statement]({% link docs/current/data/insert.md %}) — DuckDB's SQL-level `INSERT`, an alternative to the insert functions above.
 * [Instantiate]({% link docs/current/clients/wasm/instantiation.md %}) — creating the `db` and connection these imports run on.
-* [Troubleshoot]({% link docs/current/clients/wasm/known_issues.md %}) — CORS network errors when reading remote files.
+* [Troubleshoot]({% link docs/current/clients/wasm/troubleshoot.md %}) — CORS network errors when reading remote files.

@@ -304,23 +304,23 @@
                   "url": "overview"
                 },
                 {
-                  "page": "Define Connections",
+                  "page": "Connect",
                   "url": "connecting"
-                },
-                {
-                  "page": "Run Queries",
-                  "url": "querying"
                 },
                 {
                   "page": "Import Data",
                   "url": "data_import"
                 },
                 {
+                  "page": "Run Queries",
+                  "url": "querying"
+                },
+                {
                   "page": "Handle Results",
                   "url": "result_handling"
                 },
                 {
-                  "page": "Define Functions",
+                  "page": "Write User Defined Functions",
                   "url": "functions"
                 },
                 {
@@ -329,7 +329,7 @@
                 },
                 {
                   "page": "Troubleshoot",
-                  "url": "known_issues"
+                  "url": "troubleshoot"
                 }
               ]
             },
@@ -491,7 +491,7 @@
                 },
                 {
                   "page": "Troubleshoot",
-                  "url": "known_issues"
+                  "url": "troubleshoot"
                 }
               ]
             },

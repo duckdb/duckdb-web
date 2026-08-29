@@ -4,7 +4,7 @@ redirect_from:
 - /docs/clients/java/connecting
 - /docs/preview/clients/java/connecting
 - /docs/stable/clients/java/connecting
-title: Define Connections
+title: Connect
 ---
 
 ## Overview
@@ -292,4 +292,4 @@ Repeatedly opening and closing the last connection to a database means starting 
 * [Handle Results]({% link docs/current/clients/java/result_handling.md %}) — the `jdbc_stream_results` option and other result-handling choices set at connection time.
 * [Configuration]({% link docs/current/configuration/overview.md %}) — the full list of DuckDB settings that can be passed as connection options.
 * [Files Created by DuckDB]({% link docs/current/operations_manual/footprint_of_duckdb/files_created_by_duckdb.md %}) — the database, WAL, and temporary files that connection shutdown checkpoints and cleans up.
-* [Troubleshoot]({% link docs/current/clients/java/known_issues.md %}) — workarounds for common connection and driver problems.
+* [Troubleshoot]({% link docs/current/clients/java/troubleshoot.md %}) — workarounds for common connection and driver problems.
