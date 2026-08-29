@@ -191,7 +191,7 @@ SELECT postgres_hstore_to_json('z=>1, a=>2, m=>3')
 postgres_query(attached_db_name VARCHAR, sql_query VARCHAR[, ⟨optional named parameters⟩]) -> TABLE
 ```
 
-Executes the query in the speicifed remote DB that was previosly attached with `ATTACH .. AS ⟨attached_db_name⟩`{:.language-sql .highlight} and return the query result as a table.
+Executes the query in the specified remote DB that was previously attached with `ATTACH .. AS ⟨attached_db_name⟩`{:.language-sql .highlight} and returns the query result as a table.
 
 #### Parameters
 
