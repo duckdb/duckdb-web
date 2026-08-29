@@ -81,7 +81,7 @@ In particular:
 * Requests are always upgraded to HTTPS.
 * Because of the browser's CORS policy, any request for data must target a site that allows (using CORS headers) the site hosting the DuckDB-Wasm instance to access that data.
 
-The [MDN website](https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS) is a great resource for more information regarding CORS. If a query over a remote file fails with a network error, see [Troubleshoot]({% link docs/current/clients/wasm/known_issues.md %}#network-error-when-querying-remote-files).
+The [MDN website](https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS) is a great resource for more information regarding CORS. If a query over a remote file fails with a network error, see [Troubleshoot]({% link docs/current/clients/wasm/troubleshoot.md %}#network-error-when-querying-remote-files).
 
 ## Extension Signing
 
@@ -104,7 +104,7 @@ DuckDB-Wasm extensions are served pre-compressed using Brotli compression. While
 
 As with regular DuckDB, if you use `SET custom_extension_repository = 'https://some.url.com'`, subsequent loads will be attempted at `https://some.url.com/duckdb-wasm/$duckdb_version_hash/$duckdb_platform/$name.duckdb_extension.wasm`.
 
-Note that `GET` requests for the extensions must be [CORS enabled](https://www.w3.org/wiki/CORS_Enabled) for a browser to allow the connection; see [Troubleshoot]({% link docs/current/clients/wasm/known_issues.md %}#extension-fails-to-load-from-a-custom-repository) if a load fails.
+Note that `GET` requests for the extensions must be [CORS enabled](https://www.w3.org/wiki/CORS_Enabled) for a browser to allow the connection; see [Troubleshoot]({% link docs/current/clients/wasm/troubleshoot.md %}#extension-fails-to-load-from-a-custom-repository) if a load fails.
 
 ## Tooling
 
@@ -116,4 +116,4 @@ Both DuckDB-Wasm and its extensions have been compiled using the latest packaged
 * [Core Extensions]({% link docs/current/core_extensions/overview.md %}) — the core extensions available across all DuckDB clients.
 * [Community Extensions]({% link docs/current/extensions/community_extensions.md %}) — third-party extensions installable with `INSTALL … FROM community`.
 * [Import Data]({% link docs/current/clients/wasm/data_ingestion.md %}) — using the Parquet, JSON, and Wasm-flavored httpfs extensions to read files.
-* [Troubleshoot]({% link docs/current/clients/wasm/known_issues.md %}) — CORS errors when loading extensions from a custom repository.
+* [Troubleshoot]({% link docs/current/clients/wasm/troubleshoot.md %}) — CORS errors when loading extensions from a custom repository.

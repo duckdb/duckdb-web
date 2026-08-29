@@ -103,4 +103,4 @@ For more background on why these headers are required and how they unlock `Share
 * [Load Extensions]({% link docs/current/clients/wasm/extensions.md %}) — how extensions are fetched, signed, and served from a custom repository.
 * [Extension Distribution]({% link docs/current/extensions/extension_distribution.md %}) — general information about extension repositories and creating a custom one.
 * [DuckDB Wasm Client]({% link docs/current/clients/wasm/overview.md %}) — the layered API and example deployments this page builds on.
-* [Troubleshoot]({% link docs/current/clients/wasm/known_issues.md %}) — cross-origin isolation for threading and other deployment-related issues.
+* [Troubleshoot]({% link docs/current/clients/wasm/troubleshoot.md %}) — cross-origin isolation for threading and other deployment-related issues.

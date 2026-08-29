@@ -88,7 +88,7 @@ Because DuckDB understands file formats such as Parquet, it reads only the bytes
 * By default, the WebAssembly client only uses a single thread. Multithreading is available but still experimental.
 * The WebAssembly client has a limited amount of memory available. [WebAssembly limits the amount of available memory to 4 GB](https://v8.dev/blog/4gb-wasm-memory) and browsers may impose even stricter limits.
 
-See [Troubleshoot]({% link docs/current/clients/wasm/known_issues.md %}) for workarounds when you run into these limits.
+See [Troubleshoot]({% link docs/current/clients/wasm/troubleshoot.md %}) for workarounds when you run into these limits.
 
 ## Further Reading
 
@@ -97,5 +97,5 @@ See [Troubleshoot]({% link docs/current/clients/wasm/known_issues.md %}) for wor
 * [Run Queries]({% link docs/current/clients/wasm/query.md %}) — materialized and streaming queries, prepared statements, and exporting results.
 * [Load Extensions]({% link docs/current/clients/wasm/extensions.md %}) — how extension loading differs from native DuckDB and which extensions are available.
 * [Deploy]({% link docs/current/clients/wasm/deploying_duckdb_wasm.md %}) — the components a deployment serves and the security considerations involved.
-* [Troubleshoot]({% link docs/current/clients/wasm/known_issues.md %}) — common issues and their workarounds, including CORS errors, memory limits, and threading.
+* [Troubleshoot]({% link docs/current/clients/wasm/troubleshoot.md %}) — common issues and their workarounds, including CORS errors, memory limits, and threading.
 * [Clients Overview]({% link docs/current/clients/overview.md %}) — the other client APIs DuckDB provides alongside Wasm.
