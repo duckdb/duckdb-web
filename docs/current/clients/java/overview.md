@@ -18,7 +18,9 @@ title: Java (JDBC) Client
 >
 > The latest stable version of the DuckDB Java (JDBC) client is {% if site.current_duckdb_java_short_version != "" %}{{ site.current_duckdb_java_short_version }}{% else %}{{ site.lts_duckdb_java_short_version }}{% endif %}.
 
-The DuckDB Java (JDBC) client lets Java applications query DuckDB through the standard JDBC API, extended with DuckDB-specific features for bulk loading, [Apache Arrow](https://arrow.apache.org/) interchange, user-defined functions, and profiling. This page covers installation; the other pages in this section cover connecting and each feature in detail.
+The DuckDB Java (JDBC) client lets Java applications query DuckDB through the standard JDBC API, extended with DuckDB-specific features for bulk loading, [Apache Arrow](https://arrow.apache.org/) interchange, user-defined functions, and profiling. The driver also supports ahead-of-time compilation with [GraalVM Native Image]({% link docs/current/clients/java/deploy_native_image.md %}). 
+
+This page covers installation; the other pages in this section cover connecting and each feature in detail.
 
 ## Installation
 
@@ -65,4 +67,5 @@ try (Statement stmt = conn.createStatement();
 * [Run Queries]({% link docs/current/clients/java/querying.md %}) — sending queries with `Statement` and `PreparedStatement`, and reading DuckDB's nested types.
 * [Import Data]({% link docs/current/clients/java/data_import.md %}) — bulk-loading data with the Appender and the JDBC batch writer.
 * [Handle Results]({% link docs/current/clients/java/result_handling.md %}) — Apache Arrow interchange, result streaming, and chunked results.
+* [Deploy as Native Image]({% link docs/current/clients/java/deploy_native_image.md %}) — building standalone executables with GraalVM Native Image.
 * [Clients Overview]({% link docs/current/clients/overview.md %}) — the other client APIs DuckDB provides alongside JDBC.
