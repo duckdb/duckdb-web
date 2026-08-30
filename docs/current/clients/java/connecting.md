@@ -9,7 +9,7 @@ title: Connect
 
 ## Overview
 
-Every DuckDB feature reachable from Java starts with a `Connection`. This page covers the JDBC URL forms the driver accepts, how DuckDB and driver options are passed and which of them win, how connections come to share (or not share) an underlying database instance, how DuckDB's threads relate to that instance, and how to reach a remote DuckDB server over [Quack]({% link docs/current/quack/overview.md %}).
+Every DuckDB feature reachable from Java starts with a `Connection`. This page covers the JDBC URL forms the driver accepts, how DuckDB and driver options are passed and which of them win, how connections come to share (or not share) an underlying database instance, how DuckDB's threads relate to that instance, how to open or attach a [DuckLake]({% link docs/current/core_extensions/ducklake.md %}), and how to reach a remote DuckDB server over [Quack]({% link docs/current/quack/overview.md %}).
 
 ## Opening a Connection
 
@@ -242,6 +242,98 @@ Two consequences are worth calling out for Java applications:
 > Note Upcoming DuckDB v2.0 adds a second pool of `ASYNC` threads dedicated to blocking I/O, sized at four times the number of system threads and capped at 256. On a 16-core machine, this raises the default per-instance thread count from roughly 15 to roughly 80, which makes bounding the number of instances and setting `threads` explicitly more important. See the [asynchronous I/O blog post]({% post_url 2026-07-31-asynchronous-io %}) for details.
 
 Separately from DuckDB's pools, the driver starts a single daemon thread named `duckdb-query-cancel-scheduler-thread` in the JVM the first time it is loaded. It is shared by the whole process and is used to fire `Statement.setQueryTimeout()` cancellations. Applications that unload the driver, for example in an application server, can stop it with `DuckDBDriver.shutdownQueryCancelScheduler()`.
+
+## Connect to a DuckLake
+
+[DuckLake]({% link docs/current/core_extensions/ducklake.md %}) stores table data as Parquet files and its metadata in a catalog database, which can be a DuckDB file, a SQLite file, or a PostgreSQL server. From JDBC there are two ways to reach a lake: attach it to an ordinary connection, or open it directly as the connection's default catalog with the `ducklake:` URL form.
+
+### Attach a DuckLake
+
+The [`ATTACH`]({% link docs/current/sql/statements/attach.md %}) statement works from any JDBC connection and is the only way to pass DuckLake options such as `DATA_PATH`. Use it when the lake is created for the first time, or when the application also needs a local database of its own:
+
+```java
+try (Connection conn = DriverManager.getConnection("jdbc:duckdb:");
+     Statement stmt = conn.createStatement()) {
+    stmt.execute("ATTACH 'ducklake:metadata.ducklake' AS lake (DATA_PATH 'lake_files/')");
+    stmt.execute("USE lake");
+
+    stmt.execute("CREATE TABLE IF NOT EXISTS events (id INTEGER, payload VARCHAR)");
+    stmt.execute("INSERT INTO events VALUES (1, 'hello'), (2, 'world')");
+
+    try (ResultSet rs = stmt.executeQuery("SELECT count(*) FROM events")) {
+        rs.next();
+        System.out.println(rs.getLong(1));
+    }
+}
+```
+
+The `ducklake` extension is autoloaded on the first `ATTACH`; an explicit `INSTALL ducklake; LOAD ducklake;` is only needed on systems where autoloading is disabled.
+
+### Open a DuckLake Directly
+
+Once a lake exists, it can be opened as the connection's default catalog by placing the DuckLake path after the `jdbc:duckdb:` prefix. Tables are then addressed without a catalog prefix and no `USE` statement is needed:
+
+```java
+try (Connection conn = DriverManager.getConnection("jdbc:duckdb:ducklake:metadata.ducklake");
+     Statement stmt = conn.createStatement();
+     ResultSet rs = stmt.executeQuery("SELECT id, payload FROM events ORDER BY id")) {
+    while (rs.next()) {
+        System.out.println(rs.getInt(1) + " " + rs.getString(2));
+    }
+}
+```
+
+The part after `ducklake:` selects the catalog database:
+
+| JDBC URL | Catalog database |
+|----|----|
+| `jdbc:duckdb:ducklake:⟨path⟩.ducklake` | A DuckDB file. |
+| `jdbc:duckdb:ducklake:sqlite:⟨path⟩.sqlite` | A SQLite file. |
+| `jdbc:duckdb:ducklake:postgres:⟨connection_string⟩` | A PostgreSQL server, for example `postgresql://user:password@host:5432/lake_catalog`. |
+
+`ATTACH` options cannot be supplied in the JDBC URL, so a lake opened this way uses the `DATA_PATH` that was recorded when it was created. Everything after the first `;` is still parsed as [connection options](#setting-options-in-the-url), which means a PostgreSQL connection string must not itself contain a semicolon.
+
+For `ducklake:` URLs the driver changes two defaults, so that BI tools such as Metabase, which open and close connections frequently, do not restart the database instance on every request or accidentally materialize a large table:
+
+- `jdbc_pin_db` is enabled, keeping the instance alive after the last connection closes. Release it with `DuckDBDriver.releaseDB(url)` when the application shuts down.
+- `jdbc_stream_results` is enabled. See [Streaming Results]({% link docs/current/clients/java/result_handling.md %}#streaming-results) for the consequences.
+
+Either default can be overridden by setting the option explicitly, for example `jdbc:duckdb:ducklake:metadata.ducklake;jdbc_pin_db=false`.
+
+### Object Storage Credentials
+
+When the data files live on S3, GCS, or another remote file system, the credentials are provided through a [secret]({% link docs/current/configuration/secrets_manager.md %}), created after the connection is opened:
+
+```java
+try (Connection conn = DriverManager.getConnection("jdbc:duckdb:");
+     Statement stmt = conn.createStatement()) {
+    stmt.execute("CREATE SECRET (TYPE s3, KEY_ID '⟨key⟩', SECRET '⟨secret⟩', REGION 'us-east-1')");
+    stmt.execute("ATTACH 'ducklake:postgres:postgresql://user:password@host:5432/lake_catalog' AS lake "
+                 + "(DATA_PATH 's3://my-bucket/lake/')");
+    stmt.execute("USE lake");
+    // ...
+}
+```
+
+In tools that only offer a JDBC URL field, the same statements can be run from a file with the [`session_init_sql_file`](#running-sql-at-connection-startup) option. The lake is opened before the init file runs, which is fine: opening a lake only reads the catalog database, and the data files are first touched when a table is queried. A temporary secret is visible to every connection on the instance, so it can go in either part of the file; putting it below the marker makes it independent of whether the instance was already initialized:
+
+```sql
+/* DUCKDB_CONNECTION_INIT_BELOW_MARKER */
+CREATE OR REPLACE TEMPORARY SECRET s3_lake (
+    TYPE s3,
+    KEY_ID '⟨key⟩',
+    SECRET '⟨secret⟩',
+    REGION 'us-east-1'
+);
+```
+
+```text
+jdbc:duckdb:ducklake:postgres:postgresql://user:password@host:5432/lake_catalog;session_init_sql_file=/etc/duckdb/lake_init.sql
+```
+
+> Warning The JDBC URL and the init file both contain credentials. Treat them as secrets in the same way as the database password.
+
+Once attached or opened, DuckLake tables behave like local tables, so the whole JDBC API applies to them, including the [Appender]({% link docs/current/clients/java/data_import.md %}#appender). Note that DuckLake, like other lakehouse formats, does not support indexes, primary keys, or `UNIQUE` and `CHECK` constraints; see the [DuckLake documentation](https://ducklake.select/docs/stable/duckdb/introduction) for the full list of differences.
 
 ## Connecting to a Quack Server
 
