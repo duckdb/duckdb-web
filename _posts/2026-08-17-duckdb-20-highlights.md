@@ -266,6 +266,8 @@ Besides being much smaller and easier to keep up to date, the new implementation
 
 Extensions are one of the best things about DuckDB, but today, most of them, including our own, build against the [unstable C++ API]({% link docs/current/clients/cpp.md %}). Extension authors are required to rebuild and publish their extensions for every DuckDB release, even if the extension itself does not change. This is often a non-trivial operation for the extension author and a non-trivial coordination effort for the DuckDB team. Not rebuilding an extension means it can't be installed on the latest version of DuckDB.
 
+### Developing Extensions
+
 DuckDB v2.0 will ship with a revamped C API (see [#24702](https://github.com/duckdb/duckdb/pull/24702) for part 1). The API will have a versioned [specification expressed in YAML](https://github.com/duckdb/duckdb/tree/main/api_spec) that uses an also versioned specification _schema_, and tooling for code generation ([#24135](https://github.com/duckdb/duckdb/pull/24135)). The schema lets us tag every symbol with its lifecycle and stability guarantees ([#24435](https://github.com/duckdb/duckdb/pull/24435)). A large part of the API will be marked stable and frozen, providing a stable ABI across DuckDB versions.
 
 The API itself improves over the pre-2.0 C API in a number of ways. It provides coherent error handling and a unified set of conventions around naming and ownership. It covers a much larger feature surface, including scalar, aggregate, table, cast, and copy functions with named parameters and varargs, parsing and inspecting SQL statements, prepared statements, replacement scans, custom filesystems, direct access to vector buffers, values and types, and more. It supports streaming query result consumption. With this API we want to provide the primitives to access DuckDB's most powerful features.
@@ -312,11 +314,16 @@ SELECT add_numbers(40, NULL);        -- NULL, without the function doing anythin
 
 You do not need re-target or rebuild it every time a new DuckDB version comes out. And nowadays, with all the AI tooling around, building an extension has never been easier.
 
+### Distributing Extensions
+
 So you have written your extension. But how should you distribute it? Until now, DuckDB could only install extensions from the built-in repositories (`core`, `core_nightly`, `community`, ...). In v2.0, you will be able to register your own trusted repositories ([#24777](https://github.com/duckdb/duckdb/pull/24777), currently work-in-progress), so an organization can host and sign its own extensions and have them install and load just like the built-in ones:
 
 ```sql
 SET allow_extension_repositories = 'allowed';
-CREATE EXTENSION REPOSITORY my_repo FROM 'https://extensions.example.org';
+
+CREATE EXTENSION REPOSITORY my_repo
+    WITH PREFIX 'https://extensions.example.org';
+
 INSTALL my_ext FROM my_repo;
 LOAD my_repo/my_ext;
 ```
@@ -324,11 +331,14 @@ LOAD my_repo/my_ext;
 A repository is a name, a URL prefix, and one or more RSA public keys that are trusted to sign the extensions served from it. The prefix can point at anything DuckDB can read: a local path, `https`, `s3`, you name it. At `CREATE` time, DuckDB fetches the repository's public keys and pins them into the repository definition, printing each key's SHA-256 fingerprint so you can compare it against one published out of band. If you would rather not trust the network at all, you can pass the key directly:
 
 ```sql
-CREATE EXTENSION REPOSITORY my_repo FROM 's3://my-bucket/extensions'
+CREATE EXTENSION REPOSITORY my_repo
+    WITH PREFIX 'https://extensions.example.org';
     USING PUBLIC KEY '-----BEGIN PUBLIC KEY----- ...';
 ```
 
 Pinned repositories survive restarts, support key rotation by trusting multiple keys, and can be audited at any time through the `duckdb_extension_repositories()` table function, or removed again with `DROP EXTENSION REPOSITORY`. Together with the stable C API, the extension story rounds out nicely: write your extension once, sign it, host it wherever you like, and `INSTALL` it anywhere.
+
+> Update This feature is now available in the [preview build]({% link install/preview.md %}).
 
 ## Bonus: DuckDB Foundation – Advisory Board
 
