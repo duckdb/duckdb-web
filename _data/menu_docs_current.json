@@ -328,6 +328,10 @@
                   "url": "profiling"
                 },
                 {
+                  "page": "Deploy as Native Image",
+                  "url": "deploy_native_image"
+                },
+                {
                   "page": "Troubleshoot",
                   "url": "troubleshoot"
                 }
