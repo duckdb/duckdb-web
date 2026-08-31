@@ -13,4 +13,5 @@ pill: "Better Stack"
 </div>
 
 |-------|-------|
+| **Channel** | [Better Stack](https://betterstack.com/) |
 | **YouTube** | [DuckDB Is Becoming Unstoppable...](https://www.youtube.com/watch?v=dKbV8MEzVPA) |
