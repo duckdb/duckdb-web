@@ -11,6 +11,19 @@ title: SHOW, SHOW DATABASES, and SHOW SCHEMAS Statements
 The `SHOW` statement is an alias for [`DESCRIBE`]({% link docs/current/sql/statements/describe.md %}).
 It shows the schema of a table, view or query.
 
+`SHOW` can also print a [configuration setting]({% link docs/current/configuration/overview.md %}) when the name is not a table (Postgres-style):
+
+```sql
+SET threads = 42;
+SHOW threads;
+```
+
+| threads |
+|---------|
+| 42      |
+
+If both a table and a setting share the name, `SHOW` describes the table (deprecated; use `DESCRIBE` for tables). `DESCRIBE` never resolves a setting.
+
 ## `SHOW DATABASES` Statement
 
 The `SHOW DATABASES` statement shows a list of all attached databases:
