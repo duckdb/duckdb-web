@@ -162,10 +162,10 @@ docs:
     ;
     ```
 
-extension_star_count: 27
-extension_star_count_pretty: 27
-extension_download_count: 828
-extension_download_count_pretty: 828
+extension_star_count: 28
+extension_star_count_pretty: 28
+extension_download_count: 626
+extension_download_count_pretty: 626
 image: '/images/community_extensions/social_preview/preview_community_extension_pdal.png'
 layout: community_extension_doc
 ---

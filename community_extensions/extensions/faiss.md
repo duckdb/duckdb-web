@@ -42,14 +42,14 @@ docs:
     -- Get 10 results
     SELECT id, UNNEST(FAISS_SEARCH('name', 10, data)) FROM queries;
   extended_description: |
-    The FAISS extension allows DuckDB users to store vector data in faiss, and query this data, making reliable vector search more accessible. On all linux platforms, this platform also supports GPU indexes, you can move a supported index to the GPU using `CALL FAISS_MOVE_GPU({index_name}, {gpu number})`. Currently only CUDA is supported, note that GPU support may be split into a seperate extension in the future.
+    The FAISS extension allows DuckDB users to store vector data in faiss, and query this data, making reliable vector search more accessible. On all linux platforms, this platform also supports GPU indexes, you can move a supported index to the GPU using `CALL FAISS_MOVE_GPU({index_name}, {gpu number})`. Currently only CUDA is supported, note that GPU support may be split into a separate extension in the future.
 
     Some (most) indices are not supported for gpus, however this is very easily resolvable. Please open an issue over at our repository in order to get this resolved!
 
 extension_star_count: 31
 extension_star_count_pretty: 31
-extension_download_count: 771
-extension_download_count_pretty: 771
+extension_download_count: 411
+extension_download_count_pretty: 411
 image: '/images/community_extensions/social_preview/preview_community_extension_faiss.png'
 layout: community_extension_doc
 ---

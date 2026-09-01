@@ -8,7 +8,7 @@ excerpt: |
 extension:
   name: fire_duck_ext
   description: Query Google Cloud Firestore directly from DuckDB using SQL
-  version: 0.2.1
+  version: 0.3.0
   language: C++
   build: cmake
   license: MIT
@@ -18,7 +18,7 @@ extension:
 
 repo:
   github: BorisBesky/fire_duck_ext
-  ref: 072e51e59b2fdb3daeac4a5c62aca8d8eeb617cb
+  ref: bd8a57c48d7fe2d8da0caf4a2bbf6a42c92fb578 
 
 docs:
   hello_world: |
@@ -48,19 +48,27 @@ docs:
 
   extended_description: |
     fire_duck_ext lets you work with Google Cloud Firestore directly from DuckDB
-    using SQL. Scan collections with firestore_scan(), including collection-group
+    using SQL. Read with firestore_scan(), which also covers collection-group
     queries (firestore_scan('~collection')) and subcollection-ID discovery
     (firestore_scan('collection/doc_id')). Write with firestore_insert(),
     firestore_update(), firestore_delete(), their batch counterparts
     (firestore_update_batch(), firestore_delete_batch()), and the array-transform
     functions firestore_array_union(), firestore_array_remove(), and
-    firestore_array_append(). WHERE filters and SQL ORDER BY / LIMIT are pushed
-    down to Firestore where possible to reduce data transferred.
+    firestore_array_append().
+
+    WHERE filters, SQL ORDER BY / LIMIT, the column projection, and a bare
+    COUNT(*) are pushed down to Firestore where possible. A query then
+    transfers only what it uses: matching rows, selected fields, and for a
+    count, no documents at all.
+
+    Scans stream a page at a time, so a collection of any size can be read
+    without holding it in memory, and the page size adapts when documents turn
+    out to be unusually large. Settings cover paging, schema sampling, and
+    optional parallel scanning.
 
     Firestore's schemaless documents are mapped to typed DuckDB columns
-    automatically, with configurable handling for nested maps (map_encoding)
-    and fields that only appear in some documents (schema_sample_size,
-    unmapped_column, columns).
+    automatically, with configurable handling for nested maps and for fields
+    that appear in only some documents.
 
     Secrets require PROJECT_ID and one of: a service-account key **file path**
     (SERVICE_ACCOUNT_JSON, admin access, bypasses Security Rules via IAM,
@@ -74,13 +82,13 @@ docs:
     The extension also builds and runs under DuckDB-WASM using API-key or
     Firebase-user auth (service-account auth needs OpenSSL and is native-only).
 
-    See the project (https://github.com/BorisBesky/fire_duck_ext) for the full parameter reference, type mapping,
-    pushdown semantics, and platform notes.
-    
+    See the project README for the parameter and settings reference, type
+    mapping, pushdown semantics, and platform notes.
+
 extension_star_count: 3
 extension_star_count_pretty: 3
-extension_download_count: 691
-extension_download_count_pretty: 691
+extension_download_count: 639
+extension_download_count_pretty: 639
 image: '/images/community_extensions/social_preview/preview_community_extension_fire_duck_ext.png'
 layout: community_extension_doc
 ---
@@ -137,9 +145,12 @@ This extension does not add any types.
 
 <div class="extension_settings_table"></div>
 
-|             name             |                                 description                                  | input_type | scope  | aliases |
-|------------------------------|------------------------------------------------------------------------------|------------|--------|---------|
-| firestore_schema_cache_ttl   | Schema cache TTL in seconds (0 to disable caching)                           | BIGINT     | GLOBAL | []      |
-| firestore_schema_sample_size | Documents sampled to infer a collection's schema (-1 samples every document) | BIGINT     | GLOBAL | []      |
+|             name             |                                                                                                          description                                                                                                           | input_type | scope  | aliases |
+|------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|------------|--------|---------|
+| firestore_max_threads        | Maximum threads one scan may split across, reading separate document-key ranges. 1 (the default) disables parallel scanning; raise it for collections whose document ids spread over the key space, such as Firestore auto-ids | BIGINT     | GLOBAL | []      |
+| firestore_page_byte_budget   | Uncompressed bytes one page may weigh before the scan requests fewer documents per round trip (0 disables the guard)                                                                                                           | BIGINT     | GLOBAL | []      |
+| firestore_page_size          | Documents requested per Firestore round trip (1-1000; lower it for collections of large documents)                                                                                                                             | BIGINT     | GLOBAL | []      |
+| firestore_schema_cache_ttl   | Schema cache TTL in seconds (0 to disable caching)                                                                                                                                                                             | BIGINT     | GLOBAL | []      |
+| firestore_schema_sample_size | Documents sampled to infer a collection's schema (-1 samples every document)                                                                                                                                                   | BIGINT     | GLOBAL | []      |
 
 

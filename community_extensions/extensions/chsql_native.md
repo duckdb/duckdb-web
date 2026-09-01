@@ -8,7 +8,7 @@ excerpt: |
 extension:
   name: chsql_native
   description: ClickHouse Native Client & File Reader for chsql
-  version: 0.1.3
+  version: 0.1.5
   language: Rust
   build: cmake
   license: MIT
@@ -19,8 +19,8 @@ extension:
     - adubovikov
 
 repo:
-  github: quackscience/duckdb-extension-clickhouse-native
-  ref: 2674d67f6715b4fb7d49f9a7f12c382a5f013f33
+  github: Query-farm/duckdb-extension-clickhouse-native
+  ref: b4eb00a862edb20cd5b8c8dc05aa683385c8dfa1
 
 docs:
   hello_world: |
@@ -117,10 +117,10 @@ docs:
     
     > This extension is experimental and potentially unstable. Do not use in production. See README for full examples.
 
-extension_star_count: 16
-extension_star_count_pretty: 16
-extension_download_count: 495
-extension_download_count_pretty: 495
+extension_star_count: 21
+extension_star_count_pretty: 21
+extension_download_count: 2761
+extension_download_count_pretty: 2.8k
 image: '/images/community_extensions/social_preview/preview_community_extension_chsql_native.png'
 layout: community_extension_doc
 ---
@@ -150,5 +150,23 @@ LOAD {{ page.extension.name }};
 |-------------------|---------------|-------------|---------|----------|
 | clickhouse_native | table         | NULL        | NULL    |          |
 | clickhouse_scan   | table         | NULL        | NULL    |          |
+
+### Overloaded Functions
+
+<div class="extension_functions_table"></div>
+
+This extension does not add any function overloads.
+
+### Added Types
+
+<div class="extension_types_table"></div>
+
+This extension does not add any types.
+
+### Added Settings
+
+<div class="extension_settings_table"></div>
+
+This extension does not add any settings.
 
 

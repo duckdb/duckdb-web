@@ -8,7 +8,7 @@ excerpt: |
 extension:
   name: fusion_scanner
   description: Query Oracle Fusion from DuckDB through BI Publisher, with SSO, an ATTACH-able catalog and cached metadata
-  version: 0.1.0
+  version: 0.3.0
   language: C++
   build: cmake
   license: MIT
@@ -16,14 +16,63 @@ extension:
   excluded_platforms: "wasm_mvp;wasm_eh;wasm_threads;windows_amd64_mingw"
   maintainers:
     - krokozyab
+
 repo:
   github: krokozyab/ofquack
-  ref: 114c79c3f339e9cd5dab8ef568e4a7cb8bce2516
+  ref: 8490c817869f4049b9372e9520cf081a4c80f5b4
+
+docs:
+  hello_world: |
+    -- The connection lives in a secret, so credentials stay out of SQL text
+    -- and query history.
+    CREATE SECRET fusion (
+        TYPE oracle_fusion,
+        ENDPOINT 'https://<your-fusion-host>',
+        REPORT_PATH '/Custom/Financials/RP_ARB.xdo',
+        USERNAME '<user>',
+        PASSWORD '<password>'
+    );
+
+    SELECT * FROM oracle_fusion_query(
+        'SELECT currency_code, name FROM FND_CURRENCIES_TL WHERE rownum < 10'
+    );
+
+    -- Or attach it and query tables by name.
+    ATTACH 'fusion' AS f (TYPE oracle_fusion);
+    SELECT * FROM f.main.GL_JE_HEADERS LIMIT 10;
+  extended_description: |
+    Oracle Fusion exposes no SQL endpoint. This extension reaches its database
+    the way Oracle leaves open: a SELECT is wrapped in a SOAP `runReport` call
+    to BI Publisher, a report runs it through `dbms_xmlgen`, and the rows come
+    back as XML.
+
+    That detour requires a report deployed on the Fusion side — `DM_ARB.xdm`
+    and `RP_ARB.xdo`, taking a `p_sql` parameter. The extension cannot work
+    against a stock instance. See the repository for the catalog archives.
+
+    Read-only by construction: BI Publisher cannot write.
+
+    **Credentials** live in a DuckDB secret. Where the instance is behind
+    corporate single sign-on, `PROVIDER browser` opens a browser, lets the
+    person sign in however their organisation requires, and collects the token
+    Fusion issues to that session — no client secret, no registered
+    application, and no password in the process. Tokens are kept in memory
+    only.
+
+    **ATTACH** exposes Fusion's tables as an ordinary read-only catalog, typed
+    from Fusion's own dictionary. Attaching costs no request; resolving a table
+    costs that table's columns. Metadata is cached on disk between sessions,
+    because every dictionary read is a SOAP call measured in seconds.
+
+    **Large results** are paged by rewriting the statement, and transient
+    failures are retried with exponential backoff. Requests to one host are
+    serialised: each `runReport` opens a BI Publisher session that the server
+    holds on to, and a handful of parallel scans leaves hundreds behind.
 
 extension_star_count: 6
 extension_star_count_pretty: 6
-extension_download_count: 80
-extension_download_count_pretty: 80
+extension_download_count: 378
+extension_download_count_pretty: 378
 image: '/images/community_extensions/social_preview/preview_community_extension_fusion_scanner.png'
 layout: community_extension_doc
 ---
@@ -61,7 +110,6 @@ LOAD {{ page.extension.name }};
 | oracle_fusion_columns           | table         | NULL        | NULL    |          |
 | oracle_fusion_query             | table         | NULL        | NULL    |          |
 | oracle_fusion_tables            | table         | NULL        | NULL    |          |
-| oracle_fusion_wsdl_query        | table         | NULL        | NULL    |          |
 
 ### Overloaded Functions
 
