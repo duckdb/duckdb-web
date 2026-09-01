@@ -11,7 +11,7 @@ excerpt: ""
 pill: "Developer Voices by Kris Jenkins"
 ---
 
-<div class="video-container">
+<div class="video-container sticky">
 <iframe id="yt-player" width="560" height="315" src="https://www.youtube-nocookie.com/embed/C3l4CsP1Ak0?si=u_DMOqM7NgftcqOi&enablejsapi=1" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 </div>
 
@@ -38,7 +38,6 @@ pill: "Developer Voices by Kris Jenkins"
     ytPlayer.playVideo();
   }
   function seekYouTube(seconds) {
-    document.getElementById('yt-player').scrollIntoView({ behavior: 'smooth', block: 'center' });
     if (ytReady) {
       doSeek(seconds);
     } else {
@@ -55,7 +54,8 @@ pill: "Developer Voices by Kris Jenkins"
       var a = document.createElement('a');
       a.href = '#';
       a.className = 'yt-seek';
-      a.textContent = text;
+      a.innerHTML = '<svg class="icon"><use href="#play"></use></svg>';
+      a.appendChild(document.createTextNode(text.slice(1, -1)));
       a.title = 'Jump to ' + m[0].slice(1, -1) + ' in the video';
       a.addEventListener('click', function (e) {
         e.preventDefault();
@@ -65,9 +65,40 @@ pill: "Developer Voices by Kris Jenkins"
       p.appendChild(a);
     });
   });
+
+  document.addEventListener('click', function (e) {
+    if (e.target.closest('svg.anchor-icon')) return;
+    var a = e.target.closest('h2 > a[href^="#"], h3 > a[href^="#"], h4 > a[href^="#"]');
+    if (!a) return;
+    e.preventDefault();
+    e.stopPropagation();
+    history.replaceState(null, '', a.href);
+  }, true);
 </script>
 <style>
-  .yt-seek { font-family: monospace; }
+  .newswrap .postwrap .postcontent h2 + p:has(> .yt-seek),
+  .newswrap .postwrap .postcontent h3 + p:has(> .yt-seek),
+  .newswrap .postwrap .postcontent h4 + p:has(> .yt-seek) {
+    margin-top: 0;
+  }
+  .newswrap .postwrap .postcontent h2:has(+ p > .yt-seek),
+  .newswrap .postwrap .postcontent h3:has(+ p > .yt-seek),
+  .newswrap .postwrap .postcontent h4:has(+ p > .yt-seek) {
+    margin-bottom: 6px;
+  }
+  .yt-seek {
+    font-family: "JetBrainsMono-Bold", monospace;
+    font-size: var(--type-code-large, 16px);
+    text-decoration: none;
+  }
+  .yt-seek svg.icon {
+    width: .9em;
+    height: .9em;
+    margin-right: .35em;
+    vertical-align: -.1em;
+    fill: currentColor;
+    stroke: none;
+  }
 </style>
 
 |-------|-------|

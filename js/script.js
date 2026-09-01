@@ -326,6 +326,9 @@ $(document).ready(function(){
 		.not('[href="#"]')
 		.not('[href="#0"]')
 		.click(function(event) {
+			if (event.target.closest('svg.anchor-icon')) {
+				return;
+			}
 			if ($(this).parent().hasClass('toc-entry')) {
 				scrollspeed = 100;
 			}
@@ -338,8 +341,10 @@ $(document).ready(function(){
 	
 				if (target.length) {
 					// event.preventDefault();
+					var stickyVideo = document.querySelector('.video-container.sticky');
+					var stickyOffset = stickyVideo ? stickyVideo.offsetHeight + 20 : 0;
 					$('html, body').animate({
-						scrollTop: target.offset().top - 90
+						scrollTop: target.offset().top - 90 - stickyOffset
 					}, scrollspeed);
 				}
 			}
