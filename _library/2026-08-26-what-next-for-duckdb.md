@@ -104,6 +104,7 @@ pill: "Developer Voices by Kris Jenkins"
 |-------|-------|
 | **Podcast** | [Developer Voices](https://www.developervoices.com/) |
 | **Guest** | [Hannes Mühleisen (DuckLabs)](https://hannes.muehleisen.org/) |
+| **Spotify** | [Listen](https://open.spotify.com/episode/1UQYSOc6tWWCqAAKkHTmNP) |
 | **YouTube** | [What Next For DuckDB](https://www.youtube.com/watch?v=C3l4CsP1Ak0) |
 
 ## Transcript

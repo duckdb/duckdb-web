@@ -15,4 +15,6 @@ pill: "Developer Voices by Kris Jenkins"
 
 |-------|-------|
 | **Podcast** | [Developer Voices](https://www.developervoices.com/) |
+| **Spotify** | [Listen](https://open.spotify.com/episode/70X2Be5t702KtHOAlF7nAH) |
+| **YouTube** | [Practical Applications for DuckDB](https://www.youtube.com/watch?v=_nA3uDx1rlg) |
 | **Guests** | Simon Aubury, Ned Letcher |
