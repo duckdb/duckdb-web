@@ -38,7 +38,7 @@ Conversion Error:
 Failed to cast value to numerical: {} when casting from source column j
 ```
 
-Here, the condition is parsed as `((1 = 1 AND j)->>'field') IS NOT NULL`. Parenthesizing the extraction, i.e., `(j->>'field') IS NOT NULL`, or using the equivalent function instead of the operator, i.e., `json_extract_string(j, 'field') IS NOT NULL`, avoids the issue.
+Here, the condition is parsed as `((1 = 1 AND j)->>'field') IS NOT NULL`. Parenthesizing the extraction, i.e., `(j->>'field') IS NOT NULL`, or using the equivalent function instead of the operator, i.e., `json_extract_string(j, 'field') IS NOT NULL`, avoids the issue. In DuckDB v2.0.0 and later, the arrow operators bind more tightly and this example works without parentheses.
 
 > Warning DuckDB's JSON data type uses [0-based indexing]({% link docs/current/data/json/overview.md %}#indexing).
 
