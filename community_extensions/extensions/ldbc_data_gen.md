@@ -56,8 +56,8 @@ docs:
 
 extension_star_count: 0
 extension_star_count_pretty: 0
-extension_download_count: 723
-extension_download_count_pretty: 723
+extension_download_count: 802
+extension_download_count_pretty: 802
 image: '/images/community_extensions/social_preview/preview_community_extension_ldbc_data_gen.png'
 layout: community_extension_doc
 ---

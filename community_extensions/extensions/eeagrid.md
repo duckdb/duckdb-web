@@ -67,10 +67,10 @@ docs:
 
     The extension provides functions to calculate grid cell identifiers (`INT64`) from XY coordinates based on the `EPSG:3035` coordinate reference system, and vice versa. Please see the [function table](docs/functions.md) for the current implementation status.
 
-extension_star_count: 0
-extension_star_count_pretty: 0
-extension_download_count: 1007
-extension_download_count_pretty: 1.0k
+extension_star_count: 1
+extension_star_count_pretty: 1
+extension_download_count: 638
+extension_download_count_pretty: 638
 image: '/images/community_extensions/social_preview/preview_community_extension_eeagrid.png'
 layout: community_extension_doc
 ---

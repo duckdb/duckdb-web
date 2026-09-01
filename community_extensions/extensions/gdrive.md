@@ -102,8 +102,8 @@ docs:
 
 extension_star_count: 2
 extension_star_count_pretty: 2
-extension_download_count: 357
-extension_download_count_pretty: 357
+extension_download_count: 342
+extension_download_count_pretty: 342
 image: '/images/community_extensions/social_preview/preview_community_extension_gdrive.png'
 layout: community_extension_doc
 ---

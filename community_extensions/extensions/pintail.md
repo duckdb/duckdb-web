@@ -33,10 +33,10 @@ docs:
     adjacent-cell operations implemented in C++17. Decode functions return
     GEOMETRY(EPSG:4326) and do not require DuckDB Spatial, GEOS, or PROJ.
 
-extension_star_count: 1
-extension_star_count_pretty: 1
-extension_download_count: 80
-extension_download_count_pretty: 80
+extension_star_count: 2
+extension_star_count_pretty: 2
+extension_download_count: 334
+extension_download_count_pretty: 334
 image: '/images/community_extensions/social_preview/preview_community_extension_pintail.png'
 layout: community_extension_doc
 ---

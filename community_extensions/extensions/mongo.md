@@ -8,19 +8,19 @@ excerpt: |
 extension:
   name: mongo
   description: Integrates DuckDB with MongoDB, enabling direct SQL queries over MongoDB collections without exporting data or ETL
-  version: 0.2.5
+  version: 0.2.8
   language: C++
   build: cmake
   license: MIT
   maintainers:
     - stephaniewang526
   # Optional: specify vcpkg commit if needed
-  vcpkg_commit: "9aa0650e5c8d23fe66701bafb3ec03ac732a3ff1"
+  vcpkg_commit: "f74a2eade17a628413746557d04db25ccf6e76f9"
   excluded_platforms: wasm_mvp;wasm_eh;wasm_threads;windows_amd64_mingw;
 
 repo:
   github: stephaniewang526/duckdb-mongo
-  ref: 394033fbad98ae25964980c426326f9654343da7
+  ref: 42e8bd1a4bc03924b0d746c55ecf227b86b546fe
 
 docs:
   hello_world: |
@@ -35,10 +35,10 @@ docs:
     for efficient querying. The extension enables you to run analytical SQL queries directly against MongoDB data, including
     joins, aggregations, and complex analytical operations.
 
-extension_star_count: 55
-extension_star_count_pretty: 55
-extension_download_count: 8061
-extension_download_count_pretty: 8.1k
+extension_star_count: 57
+extension_star_count_pretty: 57
+extension_download_count: 2863
+extension_download_count_pretty: 2.9k
 image: '/images/community_extensions/social_preview/preview_community_extension_mongo.png'
 layout: community_extension_doc
 ---
@@ -85,6 +85,8 @@ This extension does not add any types.
 
 <div class="extension_settings_table"></div>
 
-This extension does not add any settings.
+|           name           |                                                                                              description                                                                                              | input_type | scope  | aliases |
+|--------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|------------|--------|---------|
+| mongo_enable_direct_scan | Allow mongo_scan to use a connection string that is not from an attached MongoDB database. When false, mongo_scan is only allowed if the connection string exactly matches an attached Mongo catalog. | BOOLEAN    | GLOBAL | []      |
 
 

@@ -8,7 +8,7 @@ excerpt: |
 extension:
   name: markdown
   description: Read, analyze, and write Markdown files with block-level document representation and inline element support
-  version: 1.6.0
+  version: 1.7.0
   language: C++
   build: cmake
   license: MIT
@@ -21,7 +21,7 @@ repo:
   # change since -- v1.5.1 structured inline blocks, the v1.5.2 UTF-8 truncation
   # fix, and v1.6.0 -- ships on the v1.5.x track via ref, which is a v1.5.4 tree.
   andium: c9e1a4d3b98a814c86295ecb2ed760be286242ba
-  ref: 3e8e0d59abce16c227f5d52d26fd094c9448917a
+  ref: 340c0cd59701f74e9ec29d7e4515c4c3b1bf27b1
 docs:
   hello_world: |
     -- Load the extension
@@ -114,10 +114,10 @@ docs:
 
     Full test suite with 1190 passing assertions across 24 test files.
 
-extension_star_count: 28
-extension_star_count_pretty: 28
-extension_download_count: 1081
-extension_download_count_pretty: 1.1k
+extension_star_count: 29
+extension_star_count_pretty: 29
+extension_download_count: 1302
+extension_download_count_pretty: 1.3k
 image: '/images/community_extensions/social_preview/preview_community_extension_markdown.png'
 layout: community_extension_doc
 ---

@@ -15,7 +15,7 @@ excerpt: |
 extension:
   name: dplyr
   description: R dplyr pipeline syntax support for DuckDB - transpiles dplyr verbs to SQL
-  version: 0.5.1
+  version: 0.6.0
   language: Rust & C++
   build: cmake
   license: MIT
@@ -26,7 +26,7 @@ extension:
 
 repo:
   github: mrchypark/libdplyr
-  ref: adc1c5420a477d33c57a496f292df28d83dec1bc
+  ref: 5285d3f51803d6a1a4bf7b62f40cfaf9b9215733
 
 docs:
   hello_world: |
@@ -123,8 +123,8 @@ docs:
 
 extension_star_count: 15
 extension_star_count_pretty: 15
-extension_download_count: 782
-extension_download_count_pretty: 782
+extension_download_count: 506
+extension_download_count_pretty: 506
 image: '/images/community_extensions/social_preview/preview_community_extension_dplyr.png'
 layout: community_extension_doc
 ---

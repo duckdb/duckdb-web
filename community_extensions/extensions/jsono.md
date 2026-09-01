@@ -8,7 +8,7 @@ excerpt: |
 extension:
   name: jsono
   description: Analytics-optimized JSON storage — parse one time and read many times, and shred hot paths into typed columns for pushdown and row-group pruning
-  version: 0.1.1
+  version: 0.1.2
   language: C++
   build: cmake
   license: MIT
@@ -17,7 +17,7 @@ extension:
 
 repo:
   github: Flamefork/duckdb-jsono
-  ref: v0.1.1
+  ref: 2de74326d63862c3c5c60a919e136d19b412d0ca
 
 docs:
   hello_world: |
@@ -83,8 +83,8 @@ docs:
 
 extension_star_count: 0
 extension_star_count_pretty: 0
-extension_download_count: 367
-extension_download_count_pretty: 367
+extension_download_count: 327
+extension_download_count_pretty: 327
 image: '/images/community_extensions/social_preview/preview_community_extension_jsono.png'
 layout: community_extension_doc
 ---

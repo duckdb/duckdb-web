@@ -55,16 +55,15 @@ extension:
   - Okabintaro
   - rustyconover
   name: http_client
-  version: '2025120401'
+  version: '2026082701'
 repo:
-  andium: e9730fc28af6757f663246f06956a8cab7ad9a55
   github: query-farm/httpclient
-  ref: ae403862ff7fa4ed119f1baa855e579104eefe7b
+  ref: b13df7a2c53dc1180b4aa6d6899c99742f4ee919
 
 extension_star_count: 80
 extension_star_count_pretty: 80
-extension_download_count: 4201
-extension_download_count_pretty: 4.2k
+extension_download_count: 3955
+extension_download_count_pretty: 4.0k
 image: '/images/community_extensions/social_preview/preview_community_extension_http_client.png'
 layout: community_extension_doc
 ---

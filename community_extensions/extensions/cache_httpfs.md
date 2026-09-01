@@ -36,10 +36,10 @@ docs:
     - Exposes function to get cache size and cleanup cache
     - Provides an option to disable / enable cache, which could act as a drop-in replacement for httpfs
 
-extension_star_count: 147
-extension_star_count_pretty: 147
-extension_download_count: 84780
-extension_download_count_pretty: 84.8k
+extension_star_count: 150
+extension_star_count_pretty: 150
+extension_download_count: 95632
+extension_download_count_pretty: 95.6k
 image: '/images/community_extensions/social_preview/preview_community_extension_cache_httpfs.png'
 layout: community_extension_doc
 ---
