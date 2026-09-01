@@ -26,6 +26,20 @@ For example:
 SELECT ((JSON '{"field": 42}')->'field') = 42;
 ```
 
+The low precedence also applies when an extraction is combined with other conditions in a `WHERE` clause: `AND` and `OR` bind more tightly than the arrow operators, so the condition preceding the extraction is absorbed into the arrow operator's left operand, and the query fails with an error message that does not mention precedence. For example:
+
+```sql
+SELECT count(*) FROM (VALUES ('{}'::JSON)) t(j)
+WHERE 1 = 1 AND j->>'field' IS NOT NULL;
+```
+
+```console
+Conversion Error:
+Failed to cast value to numerical: {} when casting from source column j
+```
+
+Here, the condition is parsed as `((1 = 1 AND j)->>'field') IS NOT NULL`. Parenthesizing the extraction, i.e., `(j->>'field') IS NOT NULL`, or using the equivalent function instead of the operator, i.e., `json_extract_string(j, 'field') IS NOT NULL`, avoids the issue.
+
 > Warning DuckDB's JSON data type uses [0-based indexing]({% link docs/current/data/json/overview.md %}#indexing).
 
 Examples:
