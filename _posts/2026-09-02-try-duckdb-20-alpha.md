@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Try DuckDB v2.0-dev"
+title: "Try DuckDB v2.0-alpha"
 author: "The DuckDB team"
 thumb: "/images/blog/thumbs/duckdb-preview-2-0.svg"
 image: "/images/blog/thumbs/duckdb-preview-2-0.png"
@@ -60,13 +60,13 @@ We'll add other clients gradually to this list. Each new client that moves to 2.
 
 In DuckDB v2.0, the [`quack` extension]({% link quack/index.html %}) will move from version 0.x to 1.0. The new version will unlock higher throughput for queries (both server to client *and* client to server), and better compatibility.
 
-Other core extensions, like `httpfs`, `ducklake`, `iceberg` or `spatial` are also available in the preview stage – please report any issues that you might encounter.
+Other core extensions, like `httpfs`, `ducklake`, `iceberg` or `spatial` are also available in the alpha stage – please report any issues that you might encounter.
 
 Community extensions can already be tested by providing a `ref_next` SHA, and that will allow extensions to be tested against the `v2.0-cyanoptera` branch before the release date. If no `ref_next` is provided, the `ref` SHA will be used once v2.0.0 is finalized.
 
 ## Can I Help?
 
-Yes, you can! DuckDB preview clients are explicitly **not** production ready, but you can already install them and throw some SQL queries at them to see whether your existing workloads work. Most are expected to be fine, some are expected to complete visibly faster, and some might result in an error. For the next few weeks, we are particularly interested in the latter group: are there environments, situations or queries where DuckDB v2.0 preview releases are not there yet?
+Yes, you can! DuckDB alpha clients are explicitly **not** production ready, but you can already install them and throw some SQL queries at them to see whether your existing workloads work. Most are expected to be fine, some are expected to complete visibly faster, and some might result in an error. For the next few weeks, we are particularly interested in the latter group: are there environments, situations or queries where DuckDB v2.0 alpha releases are not there yet?
 
 If you find an issue, please open a bug report, either to duckdb/duckdb or to the relevant client or extension, and submit a reproducible issue.
 
