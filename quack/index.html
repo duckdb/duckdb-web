@@ -53,7 +53,7 @@ max_page_width: large
 					<svg class="icon"><use href="#server-05"></use></svg>
 					<span>Client-server setup</span>
 				</div>
-				<p>You can take any two DuckDB processes on a network and turn them into client and server by using the Quack extension. The Quack protocol supports the full DuckDB feature set – over the wire.</p>
+				<p>Quack allows two DuckDB processes to talk to each other over the network, enabling a client-server setup (and more). The Quack protocol supports the full DuckDB feature set.</p>
 				<a class="bento-link" href="{% link docs/current/quack/setup/overview.md %}">Set up Quack<svg class="icon"><use href="#arrow-right"></use></svg></a>
 			</div>
 			<div class="bento-box wide">
@@ -61,7 +61,7 @@ max_page_width: large
 					<svg class="icon"><use href="#zap"></use></svg>
 					<span>Optimized for performance</span>
 				</div>
-				<p>We designed the Quack protocol for performance. We minimized the number of round trips, and ensured that the protocol can handle small updates and large batches just as well.</p>
+				<p>We designed the Quack protocol for performance. We minimized the number of round trips, and ensured that the protocol can handle both small updates and large batches of changes.</p>
 				<a class="bento-link" href="{% post_url 2026-05-12-quack-remote-protocol %}#benchmarks">See the benchmarks<svg class="icon"><use href="#arrow-right"></use></svg></a>
 			</div>
 		</div>
