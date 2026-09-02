@@ -47,8 +47,8 @@ docs:
     Works with both DuckDB and SQLite-backed DuckLake catalogs, and
     supports all storage backends including local filesystem and ABFSS.
 
-extension_star_count: 7
-extension_star_count_pretty: 7
+extension_star_count: 8
+extension_star_count_pretty: 8
 extension_download_count: 649
 extension_download_count_pretty: 649
 image: '/images/community_extensions/social_preview/preview_community_extension_delta_export.png'
