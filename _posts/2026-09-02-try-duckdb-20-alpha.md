@@ -18,11 +18,14 @@ The DuckDB ecosystem has `duckdb/duckdb` at its center: it's a dependency for mo
 
 ## Clients
 
-On the client side, the Python and CLI clients are already available as alpha versions.
+Several DuckDB clients are already available as [alpha versions]({% link install/preview.md %}).
+
+### CLI
+
 To install the command-line client on Linux or macOS, run:
 
 ```batch
-curl https://install.duckdb.org | DUCKDB_VERSION=alpha sh
+curl https://install.duckdb.org | DUCKDB_VERSION=alpha bash
 ```
 
 ```batch
@@ -37,6 +40,8 @@ curl https://install.duckdb.org | DUCKDB_VERSION=alpha sh
 │ v2.0.0-alpha39764 │
 └───────────────────┘
 ```
+
+### Python
 
 To install the Python client, run:
 
