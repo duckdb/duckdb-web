@@ -134,10 +134,10 @@ docs:
       string identities, multi-table joins for one element, mapping predicates,
       and write-through mutations are not yet supported.
 
-extension_star_count: 49
-extension_star_count_pretty: 49
-extension_download_count: 350
-extension_download_count_pretty: 350
+extension_star_count: 50
+extension_star_count_pretty: 50
+extension_download_count: 355
+extension_download_count_pretty: 355
 image: '/images/community_extensions/social_preview/preview_community_extension_duckgql.png'
 layout: community_extension_doc
 ---

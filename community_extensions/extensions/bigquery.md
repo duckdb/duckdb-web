@@ -55,8 +55,8 @@ docs:
 
 extension_star_count: 168
 extension_star_count_pretty: 168
-extension_download_count: 28458
-extension_download_count_pretty: 28.5k
+extension_download_count: 28205
+extension_download_count_pretty: 28.2k
 image: '/images/community_extensions/social_preview/preview_community_extension_bigquery.png'
 layout: community_extension_doc
 ---

@@ -8,7 +8,7 @@ excerpt: |
 extension:
   name: orc
   description: A DuckDB extension for reading Apache ORC files, written in pure Rust. Supports all ORC primitives, struct, list, map types and all compression codecs (Zlib, Snappy, LZO, LZ4, ZSTD).
-  version: 0.1.3
+  version: 0.2.0
   language: Rust
   build: cargo
   license: MIT
@@ -19,7 +19,7 @@ extension:
 
 repo:
   github: alitrack/duckdb_orc
-  ref: 1dab6ffc2f2b401b765c87727a31e00a502152e6
+  ref: 891ecbdc8a5802b16a364909cb295dcd8694932c
 
 docs:
   hello_world: |
@@ -57,15 +57,16 @@ docs:
 
     ### Known Limitations
 
-    - **Write support**: `orc-rust` 0.8+ has `ArrowWriter` but compression is not yet implemented (uncompressed only). Write support will be added to `duckdb_orc` once `orc-rust` supports compressed writes.
-    - **Single-threaded scan**: currently single-threaded sequential scan. ~5x slower than DuckDB's native Parquet reader on large single files. Multi-file globs also read sequentially. Stripe-level parallelism is planned.
+    - **Write support**: `COPY tbl TO 'file.orc' (FORMAT orc)` writes with ZSTD compression. Supported types: bool, int8-64, float32/64, date, timestamp, varchar, blob. List/Struct/Map/Decimal rejected cleanly (upstream `orc-rust` writer doesn't encode them yet).
+    - **Write column names**: output columns are `column_N` — the DuckDB C API COPY bind does not expose source column names.
+    - **Parallel scan**: multi-stripe files read in parallel across threads (caps at CPU count).
     - **No filter pushdown**: blocked by missing DuckDB C API
       (`duckdb_table_function_supports_filter_pushdown` not exposed)
     - **No union type**: not supported by `orc-rust` upstream
 extension_star_count: 4
 extension_star_count_pretty: 4
-extension_download_count: 333
-extension_download_count_pretty: 333
+extension_download_count: 362
+extension_download_count_pretty: 362
 image: '/images/community_extensions/social_preview/preview_community_extension_orc.png'
 layout: community_extension_doc
 ---

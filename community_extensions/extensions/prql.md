@@ -52,8 +52,8 @@ docs:
 
 extension_star_count: 330
 extension_star_count_pretty: 330
-extension_download_count: 1047
-extension_download_count_pretty: 1.0k
+extension_download_count: 1065
+extension_download_count_pretty: 1.1k
 image: '/images/community_extensions/social_preview/preview_community_extension_prql.png'
 layout: community_extension_doc
 ---

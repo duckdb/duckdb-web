@@ -23,7 +23,7 @@ extension:
 
 repo:
   github: DataZooDE/duckdb-gdrive
-  ref: e4d78a732f38225a9690e99828cc5c5e72a8a8d1
+  ref: 73b8a5e729f29338d883b5277b99644be66c8c4b
 
 docs:
   hello_world: |
@@ -86,6 +86,14 @@ docs:
     drive, because Drive has no path addressing and each segment otherwise
     costs an API call.
 
+    Credentials come from Application Default Credentials by default, which
+    now includes **workload identity federation** — so a workload running in
+    Kubernetes or another federated environment authenticates with the
+    short-lived token its platform provides, and needs no downloaded
+    service-account key to store, mount or rotate. A key file
+    (`PROVIDER service_account`) and an interactive user credential
+    (`gcloud auth application-default login`) both still work.
+
     Two behaviours are deliberately strict. Drive permits two files with the
     same name in one folder, so a path is not a unique identifier: rather than
     pick one and make results depend on Drive's internal ordering, ambiguity
@@ -100,10 +108,10 @@ docs:
     object storage under a hot workload. On a workstation, Google Drive for
     desktop plus ordinary local paths is simpler and faster.
 
-extension_star_count: 2
-extension_star_count_pretty: 2
-extension_download_count: 342
-extension_download_count_pretty: 342
+extension_star_count: 3
+extension_star_count_pretty: 3
+extension_download_count: 351
+extension_download_count_pretty: 351
 image: '/images/community_extensions/social_preview/preview_community_extension_gdrive.png'
 layout: community_extension_doc
 ---

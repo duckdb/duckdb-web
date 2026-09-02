@@ -51,10 +51,10 @@ docs:
 
     **Install:** `INSTALL ml FROM community;`
 
-extension_star_count: 6
-extension_star_count_pretty: 6
-extension_download_count: 334
-extension_download_count_pretty: 334
+extension_star_count: 7
+extension_star_count_pretty: 7
+extension_download_count: 336
+extension_download_count_pretty: 336
 image: '/images/community_extensions/social_preview/preview_community_extension_ml.png'
 layout: community_extension_doc
 ---

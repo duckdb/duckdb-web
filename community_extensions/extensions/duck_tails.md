@@ -59,10 +59,10 @@ docs:
 
     The extension supports mixed file systems, allowing you to combine git://, local files, S3, and other DuckDB-supported protocols in a single query. Built with libgit2 for robust git operations and comprehensive error handling.
 
-extension_star_count: 22
-extension_star_count_pretty: 22
-extension_download_count: 983
-extension_download_count_pretty: 983
+extension_star_count: 23
+extension_star_count_pretty: 23
+extension_download_count: 1049
+extension_download_count_pretty: 1.0k
 image: '/images/community_extensions/social_preview/preview_community_extension_duck_tails.png'
 layout: community_extension_doc
 ---
