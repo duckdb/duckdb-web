@@ -16,21 +16,17 @@ body.quack {
 
 	.section-title {
 		@include display-3;
-		text-align: center;
-		margin: 0 0 60px;
+		text-align: left;
+		margin: 0 0 32px;
 	}
 
 	/* ----- Hero ----- */
 	.quack-hero {
-		padding: 100px 20px 75px;
+		padding: 85px 0;
 		text-align: center;
 
-		.pre-title {
-			color: var(--main-text-tertiary-color, #B2B2B2);
-		}
-
 		h1.display-2 {
-			margin: 13px auto 0;
+			margin: 0 auto;
 			max-width: 760px;
 		}
 
@@ -40,6 +36,10 @@ body.quack {
 			color: var(--main-text-secondary-color, #666);
 			font-size: 16px;
 			line-height: 1.4;
+
+			@media only screen and (max-width: 480px) {
+				max-width: 340px;
+			}
 		}
 
 		.hero-buttons {
@@ -53,97 +53,6 @@ body.quack {
 			}
 		}
 
-		.quack-protocol-card {
-			margin: 75px auto 0;
-			max-width: 385px;
-			text-align: left;
-			border: 1px solid var(--main-codebox-border-color, rgba(13, 13, 13, 0.08));
-			border-radius: var(--page-radius-box);
-			background: var(--main-codebox-main-background-color, rgba(250, 250, 250, 0.8));
-			overflow: hidden;
-		}
-
-		.quack-protocol-card-header {
-			display: flex;
-			align-items: center;
-			gap: 16px;
-			padding: 20px;
-			border-bottom: 1px solid var(--doc-codebox-button-background-color, rgba(217, 217, 217, 0.6));
-		}
-
-		.quack-protocol-icon {
-			display: inline-flex;
-			align-items: center;
-			justify-content: center;
-			padding: 10px;
-			border-radius: var(--page-radius-box-inner);
-			background: var(--interactive-installation-box-background, rgba(241, 230, 94, 0.3));
-			border: 1px solid var(--interactive-installation-box-border, rgba(204, 189, 0, 0.6));
-
-			svg {
-				display: block;
-				width: 38px;
-				height: 38px;
-			}
-		}
-
-		.quack-protocol-card-title {
-			display: flex;
-			flex-direction: column;
-			gap: 4px;
-
-			h3 {
-				margin: 0;
-				font-size: var(--type-title-1, 22px);
-				font-weight: 600;
-				line-height: 1.2;
-				color: var(--main-text-primary-color-strong, #050505);
-			}
-
-			p {
-				margin: 0;
-				font-size: var(--type-body-small, 14px);
-				line-height: 1.4;
-				color: var(--quack-text-secondary);
-			}
-		}
-
-		.quack-protocol-card-meta {
-			padding: 16px 20px;
-
-			> div {
-				display: flex;
-				align-items: center;
-				flex-wrap: wrap;
-				gap: 4px;
-			}
-
-			.works-with-label {
-				margin-right: 8px;
-				font-size: var(--type-tiny, 12px);
-				letter-spacing: 0.24px;
-				color: var(--main-text-tertiary-color, #b2b2b2);
-			}
-
-			.tag {
-				display: inline-block;
-				padding: 4px 12px;
-				border: 1px solid var(--main-quaternary-color, #ccc);
-				border-radius: var(--page-radius-pill);
-				background: var(--doc-codebox-background-color-secondary, #ededed);
-				font-size: var(--type-micro, 10px);
-				line-height: 1.2;
-				letter-spacing: 0.2px;
-				color: var(--quack-text-secondary);
-				text-decoration: none;
-				transition: border-color 0.2s, background-color 0.2s;
-			}
-
-			a.tag:hover {
-				border-color: var(--interactive-installation-box-border, rgba(204, 189, 0, 0.6));
-				background: var(--interactive-installation-box-background, rgba(241, 230, 94, 0.3));
-			}
-		}
 	}
 
 	/* ----- Introducing Quack (video section, mirrors ducklake-web .podcast) ----- */
@@ -152,7 +61,7 @@ body.quack {
 			display: flex;
 			flex-wrap: wrap;
 			gap: 50px;
-			align-items: center;
+			align-items: flex-start;
 			max-width: 1150px;
 			margin: 0 auto;
 		}
@@ -165,7 +74,7 @@ body.quack {
 		.section-text {
 			flex: 1 1 0;
 			min-width: 0;
-			text-align: center;
+			text-align: left;
 
 			h2 {
 				@include display-3;
@@ -230,12 +139,11 @@ body.quack {
 
 	/* ----- Section wrappers ----- */
 	.quack-architecture,
-	.quack-howitworks,
 	.quack-install,
 	.quack-faq,
 	.quack-ecosystem,
 	.quack-introducing {
-		padding: 75px 0;
+		padding: 64px 0;
 	}
 
 	/* ----- Architecture diagram ----- */
@@ -492,17 +400,174 @@ body.quack {
 		}
 	}
 
-	/* ----- How it works + Ecosystem use the shared .icon-grid component ----- */
-	.icon-grid .icon-grid-item .icon {
-		color: var(--main-benefit-icon-color, #998b00);
+	.quack-protocol-card {
+		display: flex;
+		flex-direction: column;
+		margin: 0;
+		text-align: left;
+		border: 1px solid var(--main-codebox-border-color, rgba(13, 13, 13, 0.08));
+		border-radius: var(--page-radius-box);
+		background: var(--main-codebox-main-background-color, rgba(250, 250, 250, 0.8));
+		overflow: hidden;
 	}
 
-	.quack-howitworks .wrap {
-		max-width: 950px;
+	.quack-protocol-card-header {
+		display: flex;
+		align-items: center;
+		gap: 16px;
+		padding: var(--page-box-padding-primary, 24px);
+		padding-bottom: calc(var(--page-box-padding-primary, 24px) / 2);
+		border-bottom: 1px solid var(--doc-codebox-button-background-color, rgba(217, 217, 217, 0.6));
+	}
+
+	.quack-protocol-icon {
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+		padding: 10px;
+		border-radius: var(--page-radius-box-inner);
+		background: var(--interactive-installation-box-background, rgba(241, 230, 94, 0.3));
+		border: 1px solid var(--interactive-installation-box-border, rgba(204, 189, 0, 0.6));
+
+		svg {
+			display: block;
+			width: 38px;
+			height: 38px;
+		}
+	}
+
+	.quack-protocol-card-title {
+		display: flex;
+		flex-direction: column;
+		gap: 4px;
+
+		h3 {
+			margin: 0;
+			font-size: var(--type-title-1, 22px);
+			font-weight: 600;
+			line-height: 1.2;
+			color: var(--main-text-primary-color-strong, #050505);
+		}
+
+		p {
+			margin: 0;
+			font-size: var(--type-body-small, 14px);
+			line-height: 1.4;
+			color: var(--quack-text-secondary);
+		}
+	}
+
+	.quack-protocol-card-meta {
+		display: flex;
+		flex-direction: column;
+		flex: 1 1 auto;
+		padding: var(--page-box-padding-primary, 24px);
+		padding-top: calc(var(--page-box-padding-primary, 24px) / 2);
+
+		.bento-link {
+			display: inline-flex;
+			align-items: center;
+			align-self: flex-start;
+			gap: 7px;
+			margin-top: auto;
+			padding-top: 16px;
+			font-size: var(--type-label-1, 14px);
+			font-weight: var(--type-weight-standard, 450);
+			line-height: 1;
+			color: var(--main-text-secondary-color, #666);
+			text-decoration: none;
+
+			.icon {
+				width: 14px;
+				height: 14px;
+				fill: none;
+				stroke: currentColor;
+				stroke-width: 2;
+			}
+
+			&:hover {
+				color: var(--main-text-primary-color, #0d0d0d);
+			}
+		}
+
+		> div {
+			display: flex;
+			align-items: center;
+			flex-wrap: wrap;
+			gap: 4px;
+		}
+
+		.works-with-label {
+			margin-right: 8px;
+			font-size: var(--type-tiny, 12px);
+			letter-spacing: 0.24px;
+			color: var(--main-text-tertiary-color, #b2b2b2);
+		}
+
+		.tag {
+			display: inline-block;
+			padding: 4px 12px;
+			border: 1px solid var(--main-quaternary-color, #ccc);
+			border-radius: var(--page-radius-pill);
+			background: var(--doc-codebox-background-color-secondary, #ededed);
+			font-size: var(--type-micro, 10px);
+			line-height: 1.2;
+			letter-spacing: 0.2px;
+			color: var(--quack-text-secondary);
+			text-decoration: none;
+			transition: border-color 0.2s, background-color 0.2s;
+		}
+
+		a.tag:hover {
+			border-color: var(--interactive-installation-box-border, rgba(204, 189, 0, 0.6));
+			background: var(--interactive-installation-box-background, rgba(241, 230, 94, 0.3));
+		}
+	}
+
+	.quack-bento {
+		padding: 0 0 64px;
+
+		.bento-grid {
+			grid-template-columns: repeat(3, 1fr);
+		}
+
+		@media only screen and (max-width: 900px) {
+			.bento-grid {
+				grid-template-columns: 1fr;
+			}
+		}
+
+		@media only screen and (max-width: 640px) {
+			.bento-grid {
+				display: grid;
+				gap: 12px;
+				margin: 0;
+				padding: 0;
+				overflow-x: visible;
+			}
+		}
+
+		.bento-box.wide {
+			grid-column: auto;
+		}
+
+		.bento-box p {
+			max-width: none;
+		}
+	}
+
+	.quack-ecosystem .bento-grid {
+		grid-template-columns: repeat(3, 1fr);
+	}
+
+	.quack-ecosystem .bento-box .bento-title {
+		flex-direction: column;
+		align-items: flex-start;
+		gap: 12px;
 	}
 
 	/* Ecosystem icons are multicolor brand SVGs — keep their own fills */
-	.quack-ecosystem .icon-grid .icon-grid-item .icon {
+	.quack-ecosystem .bento-box .bento-title .icon {
 		width: 38px;
 		height: 38px;
 		color: unset;
@@ -512,8 +577,27 @@ body.quack {
 
 	/* ----- Install / Try Quack today ----- */
 	.install-header {
-		text-align: center;
+		display: flex;
+		align-items: flex-start;
+		justify-content: space-between;
+		gap: 20px;
+		flex-wrap: wrap;
+		text-align: left;
 		margin-bottom: 32px;
+
+		.textbutton {
+			margin-top: 14px;
+			color: var(--main-text-secondary-color, #666);
+
+			@media only screen and (max-width: 900px) {
+				margin-top: 0;
+				margin-bottom: 18px;
+			}
+
+			&:hover {
+				color: var(--main-link-hover-color, #998B00);
+			}
+		}
 
 		h2 {
 			margin-bottom: 16px;
@@ -521,7 +605,7 @@ body.quack {
 
 		p {
 			max-width: 520px;
-			margin: 0 auto;
+			margin: 0;
 			font-size: 17px;
 			line-height: 1.6;
 			color: var(--main-text-secondary-color, #666);
@@ -541,14 +625,8 @@ body.quack {
 
 	.install-steps {
 		display: grid;
-		grid-template-columns: 1fr 1fr;
+		grid-template-columns: repeat(3, 1fr);
 		gap: 40px 20px;
-		max-width: 950px;
-		margin: 0 auto;
-
-		.step:first-child {
-			grid-column: 1 / -1;
-		}
 
 		&.hidden {
 			display: none;
@@ -577,12 +655,23 @@ body.quack {
 		figure.highlight,
 		div.highlight,
 		pre.highlight {
+			flex: 1 1 auto;
 			background: var(--quack-codecard-bg);
 			border: 1px solid var(--quack-codecard-border);
 			border-radius: var(--page-radius-m);
 			padding: 20px;
 			margin: 0;
 			position: relative;
+
+			button.copy {
+				opacity: 0;
+				transition: opacity .2s;
+			}
+
+			&:hover button.copy,
+			button.copy:focus-visible {
+				opacity: 1;
+			}
 
 			pre,
 			code {
@@ -598,17 +687,59 @@ body.quack {
 		}
 	}
 
-	.install-more {
-		display: flex;
-		justify-content: center;
-		margin-top: 40px;
-	}
 
 	/* ----- FAQ tweaks (built on top of .frequentlyaskedquestions) ----- */
 	.quack-faq {
+		display: grid;
+		grid-template-columns: 1fr 2fr;
+		grid-template-rows: auto 1fr;
+		column-gap: 20px;
+		max-width: 1150px;
+		margin: 0 auto;
+
 		.wrap {
-			max-width: 950px;
-			margin: 0 auto;
+			grid-column: 1;
+			width: 100%;
+			max-width: none;
+			margin: 0;
+		}
+
+		.section-title {
+			margin-bottom: 0;
+		}
+
+		.frequentlyaskedquestions {
+			grid-column: 2;
+			grid-row: 1 / span 2;
+			max-width: none;
+			margin: 0;
+		}
+
+		@media only screen and (max-width: 900px) {
+			grid-template-columns: 1fr;
+			grid-template-rows: none;
+
+			.wrap,
+			.frequentlyaskedquestions,
+			.cta {
+				grid-column: 1;
+			}
+
+			.wrap {
+				grid-row: 1;
+			}
+
+			.cta {
+				grid-row: 2;
+			}
+
+			.frequentlyaskedquestions {
+				grid-row: 3;
+			}
+
+			.section-title {
+				margin-bottom: 16px;
+			}
 		}
 
 		.qa-wrap {
@@ -616,9 +747,25 @@ body.quack {
 		}
 
 		.cta {
+			grid-column: 1;
+			grid-row: 2;
+			align-self: start;
 			display: flex;
-			justify-content: center;
+			justify-content: flex-start;
 			margin-top: 40px;
+
+			@media only screen and (max-width: 900px) {
+				margin-top: 0;
+				margin-bottom: 32px;
+			}
+
+			.textbutton {
+				color: var(--main-text-secondary-color, #666);
+
+				&:hover {
+					color: var(--main-link-hover-color, #998B00);
+				}
+			}
 		}
 	}
 
@@ -643,10 +790,6 @@ body.quack {
 
 		.install-steps {
 			grid-template-columns: 1fr;
-
-			.step:first-child {
-				grid-column: auto;
-			}
 		}
 
 		.quack-introducing .wrap {
@@ -658,16 +801,19 @@ body.quack {
 		}
 
 		.quack-hero {
-			padding: 50px 0px 50px
+			padding: 36px 0 55px;
+		}
+
+		.quack-bento {
+			padding: 0 0 36px;
 		}
 
 		.quack-architecture,
-		.quack-howitworks,
 		.quack-install,
 		.quack-faq,
 		.quack-ecosystem,
 		.quack-introducing {
-			padding: 40px 0;
+			padding: 36px 0;
 		}
 
 		.section-title {
