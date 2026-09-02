@@ -10,35 +10,59 @@ max_page_width: large
 
 <section class="quack-hero">
 	<div class="wrap">
-		<p class="pre-title">Beta release available now</p>
-		<h1 class="display-2">Quack: Turn DuckDB<br>into a client-server database</h1>
-		<p class="hero-subtitle">
-			The Quack protocol unlocks multi-client access for DuckDB,<br>
-			turning it into a general-purpose database system
-		</p>
-		<div class="hero-buttons">
-			<a class="button yellow arrow-right" href="{% post_url 2026-05-12-quack-remote-protocol %}" target="_blank" rel="noopener">Read the announcement<svg class="icon"><use href="#arrow-right"></use></svg></a>
-			<a class="button transparent arrow-right" href="{% link docs/current/quack/overview.md %}">Get started<svg class="icon"><use href="#arrow-right"></use></svg></a>
+		<div class="hero-content">
+			<h1 class="display-2">Quack: Turn DuckDB<br>into a client-server database</h1>
+			<p class="hero-subtitle">
+				The Quack protocol unlocks multi-client access for DuckDB,<br>
+				turning it into a general-purpose database system
+			</p>
+			<div class="hero-buttons">
+				<a class="button yellow" href="{% post_url 2026-05-12-quack-remote-protocol %}">Read the announcement</a>
+				<a class="button transparent" href="{% link docs/current/quack/overview.md %}">Get started</a>
+			</div>
 		</div>
 
-		<div class="quack-protocol-card">
-			<div class="quack-protocol-card-header">
-				<div class="quack-protocol-icon">
-					<svg xmlns="http://www.w3.org/2000/svg" width="38" height="38" fill="none" viewBox="0 0 38 38"><path fill="var(--main-highlight-yellow-background-color)" d="M19 0C8.507 0 0 8.507 0 19s8.507 19 19 19 19-8.507 19-19S29.493 0 19 0"/><path fill="var(--main-highlight-yellow-text-color)" d="m23.3 21.2-1.7-1.7a1.583 1.583 0 1 0-2.24 2.238l1.698 1.698zM29.809 27.709l-1.67-1.67-2.241 2.237 1.672 1.672c.309.31.714.464 1.12.464a1.583 1.583 0 0 0 1.12-2.703"/><path fill="var(--main-highlight-yellow-text-color)" d="M19 28.463c-5.218 0-9.463-4.245-9.463-9.463S13.782 9.537 19 9.537s9.463 4.245 9.463 9.463-4.245 9.463-9.463 9.463m0-16.023A6.567 6.567 0 0 0 12.44 19 6.567 6.567 0 0 0 19 25.56 6.567 6.567 0 0 0 25.56 19 6.57 6.57 0 0 0 19 12.44"/></svg>
+	</div>
+</section>
+
+<section class="quack-bento">
+	<div class="wrap">
+		<div class="bento-grid">
+			<div class="quack-protocol-card">
+				<div class="quack-protocol-card-header">
+					<div class="quack-protocol-icon">
+						<svg xmlns="http://www.w3.org/2000/svg" width="38" height="38" fill="none" viewBox="0 0 38 38"><path fill="var(--main-highlight-yellow-background-color)" d="M19 0C8.507 0 0 8.507 0 19s8.507 19 19 19 19-8.507 19-19S29.493 0 19 0"/><path fill="var(--main-highlight-yellow-text-color)" d="m23.3 21.2-1.7-1.7a1.583 1.583 0 1 0-2.24 2.238l1.698 1.698zM29.809 27.709l-1.67-1.67-2.241 2.237 1.672 1.672c.309.31.714.464 1.12.464a1.583 1.583 0 0 0 1.12-2.703"/><path fill="var(--main-highlight-yellow-text-color)" d="M19 28.463c-5.218 0-9.463-4.245-9.463-9.463S13.782 9.537 19 9.537s9.463 4.245 9.463 9.463-4.245 9.463-9.463 9.463m0-16.023A6.567 6.567 0 0 0 12.44 19 6.567 6.567 0 0 0 19 25.56 6.567 6.567 0 0 0 25.56 19 6.57 6.57 0 0 0 19 12.44"/></svg>
+					</div>
+					<div class="quack-protocol-card-title">
+						<h3>Quack protocol</h3>
+						<p>Client-server access · Beta release</p>
+					</div>
 				</div>
-				<div class="quack-protocol-card-title">
-					<h3>Quack protocol</h3>
-					<p>Client-server access · Beta release</p>
+				<div class="quack-protocol-card-meta">
+					<div>
+						<span class="works-with-label">Storage</span>
+						<a class="tag" href="{% link docs/current/internals/storage.md %}">DuckDB files</a>
+						<a class="tag" href="https://ducklake.select/" target="_blank" rel="noopener">DuckLake</a>
+						<a class="tag" href="{% link docs/current/data/data_sources.md %}">Flat files</a>
+					</div>
+					<a class="bento-link" href="{% link docs/current/quack/reference.md %}">Protocol reference<svg class="icon"><use href="#arrow-right"></use></svg></a>
 				</div>
 			</div>
-			<div class="quack-protocol-card-meta">
-				<!-- <span class="tag">Storage</span> -->
-				<div>
-					<span class="works-with-label">Storage</span>
-					<a class="tag" href="{% link docs/current/internals/storage.md %}">DuckDB database file</a>
-					<a class="tag" href="https://ducklake.select/" target="_blank" rel="noopener">DuckLake</a>
-					<a class="tag" href="{% link docs/current/data/data_sources.md %}" target="_blank">Flat files</a>
+			<div class="bento-box wide">
+				<div class="bento-title">
+					<svg class="icon"><use href="#server-05"></use></svg>
+					<span>Client-server setup</span>
 				</div>
+				<p>You can take any two DuckDB processes on a network and turn them into client and server by using the Quack extension. The Quack protocol supports the full DuckDB feature set – over the wire.</p>
+				<a class="bento-link" href="{% link docs/current/quack/setup/overview.md %}">Set up Quack<svg class="icon"><use href="#arrow-right"></use></svg></a>
+			</div>
+			<div class="bento-box wide">
+				<div class="bento-title">
+					<svg class="icon"><use href="#zap"></use></svg>
+					<span>Optimized for performance</span>
+				</div>
+				<p>We designed the Quack protocol for performance. We minimized the number of round trips, and ensured that the protocol can handle small updates and large batches just as well.</p>
+				<a class="bento-link" href="{% post_url 2026-05-12-quack-remote-protocol %}#benchmarks">See the benchmarks<svg class="icon"><use href="#arrow-right"></use></svg></a>
 			</div>
 		</div>
 	</div>
@@ -47,6 +71,13 @@ max_page_width: large
 
 <section class="quack-introducing podcast">
 	<div class="wrap flexwrap">
+		<div class="section-text">
+			<h2>Introducing Quack</h2>
+			<p>
+				Hannes Mühleisen introduced Quack at AI Council 2026.<br>
+				Watch his talk, the “Super-Secret Next Big Thing for DuckDB”.
+			</p>
+		</div>
 		<div class="section-image">
 			<div class="video-thumbnail" data-video-id="">
 				<img src="{{ site.baseurl }}/images/quack/quack-release-thumbnail.jpg" alt="Thumbnail: Introducing Quack">
@@ -55,15 +86,8 @@ max_page_width: large
 				</div>
 			</div>
 			<div class="video-container" style="display: none;">
-				<iframe data-src="https://www.youtube-nocookie.com/embed/L_lttD-d1wc?si=Gd8WfFnRfXEV-M1o" title="YouTube video player" width="560" height="315" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+				<iframe data-src="https://www.youtube-nocookie.com/embed/L_lttD-d1wc" title="YouTube video player" width="560" height="315" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 			</div>
-		</div>
-		<div class="section-text">
-			<h2>Introducing Quack</h2>
-			<p>
-				Hannes Mühleisen introduced Quack at AI Council 2026.<br>
-				Watch his talk, the “Super-Secret Next Big Thing for DuckDB”.
-			</p>
 		</div>
 	</div>
 </section>
@@ -213,35 +237,21 @@ CALL quack_serve();
 			</div>
 
 		</div>
+
 	</div>
 </section>
 
-
-<section class="quack-howitworks">
-	<div class="wrap">
-		<h2 class="section-title">How it works</h2>
-		<div class="icon-grid" style="--icon-grid-columns: 2;">
-			<div class="icon-grid-item">
-				<svg class="icon"><use href="#server-05"></use></svg>
-				<h3>Client-server setup</h3>
-				<p>You can take any two DuckDB processes on a network and turn them into client and server by using the Quack extension. The Quack protocol supports the full DuckDB feature set – over the wire.</p>
-			</div>
-			<div class="icon-grid-item">
-				<svg class="icon"><use href="#zap"></use></svg>
-				<h3>Optimized for performance</h3>
-				<p>We designed the Quack protocol for performance. We minimized the number of round trips, and ensured that the protocol can handle small updates and large batches just as well.</p>
-			</div>
-		</div>
-	</div>
-</section>
 
 
 
 <section class="quack-install" id="install">
 	<div class="wrap">
 		<div class="install-header">
-			<h2 class="section-title">Try Quack today</h2>
-			<p>Install and configure Quack in seconds</p>
+			<div>
+				<h2 class="section-title">Try Quack today</h2>
+				<p>Install and configure Quack in seconds</p>
+			</div>
+			<a class="textbutton arrow-right" href="{% link docs/current/quack/setup/deployment.md %}">More deployment options<svg class="icon"><use href="#arrow-right"></use></svg></a>
 		</div>
 
 		<!--
@@ -329,10 +339,6 @@ aws cloudformation create-stack \
 		</div>
 	</div>
 
-	<div class="install-more">
-		<a class="button transparent arrow-right" href="{% link docs/current/quack/setup/deployment.md %}">More deployment options<svg class="icon"><use href="#arrow-right"></use></svg></a>
-	</div>
-
 
 </section>
 
@@ -403,28 +409,37 @@ aws cloudformation create-stack \
 	</div>
 
 	<div class="cta">
-		<a class="button black" href="{% link quack/faq.md %}">More FAQs</a>
+		<a class="textbutton arrow-right" href="{% link quack/faq.md %}">More FAQs<svg class="icon"><use href="#arrow-right"></use></svg></a>
 	</div>
 </section>
 
 <section class="quack-ecosystem">
 	<div class="wrap">
 		<h2 class="section-title">Quack in the DuckDB ecosystem</h2>
-		<div class="icon-grid">
-			<div class="icon-grid-item">
-				<svg class="icon" xmlns="http://www.w3.org/2000/svg" width="38" height="38" fill="none" viewBox="0 0 38 38"><path fill="var(--main-highlight-yellow-background-color)" d="M19 38C8.489 38 0 29.511 0 19S8.489 0 19 0s19 8.489 19 19-8.489 19-19 19"/><path fill="var(--main-highlight-yellow-text-color)" d="M29.159 16.182h-3.727v5.625h3.727c1.545 0 2.83-1.284 2.83-2.83 0-1.556-1.285-2.795-2.83-2.795M7.172 19c0 4.34 3.534 7.875 7.875 7.875 4.34 0 7.875-3.534 7.875-7.875s-3.534-7.875-7.875-7.875S7.172 14.659 7.172 19"/></svg>
-				<h3>Client-server DuckDB</h3>
+		<div class="bento-grid">
+			<div class="bento-box">
+				<div class="bento-title">
+					<svg class="icon" xmlns="http://www.w3.org/2000/svg" width="38" height="38" fill="none" viewBox="0 0 38 38"><path fill="var(--main-highlight-yellow-background-color)" d="M19 38C8.489 38 0 29.511 0 19S8.489 0 19 0s19 8.489 19 19-8.489 19-19 19"/><path fill="var(--main-highlight-yellow-text-color)" d="M29.159 16.182h-3.727v5.625h3.727c1.545 0 2.83-1.284 2.83-2.83 0-1.556-1.285-2.795-2.83-2.795M7.172 19c0 4.34 3.534 7.875 7.875 7.875 4.34 0 7.875-3.534 7.875-7.875s-3.534-7.875-7.875-7.875S7.172 14.659 7.172 19"/></svg>
+					<span>Client-server DuckDB</span>
+				</div>
 				<p>Quack turns DuckDB into a client-server database for multi-writer and remote access.</p>
+				<a class="bento-link" href="{% link docs/current/quack/overview.md %}">Read the docs<svg class="icon"><use href="#arrow-right"></use></svg></a>
 			</div>
-			<div class="icon-grid-item">
-				<svg class="icon" xmlns="http://www.w3.org/2000/svg" width="38" height="38" fill="none" viewBox="0 0 38 38"><path fill="var(--lake-highlight-blue-text-color)" d="M19 1.004c9.939 0 17.996 8.058 17.996 17.996S28.939 36.996 19 36.996 1.005 28.938 1.005 19C1.004 9.061 9.062 1.004 19 1.004"/><path fill="var(--lake-highlight-blue-background-color)" fill-rule="evenodd" d="M17.32 9.973a8.82 8.82 0 0 1 7.648 4.377h1.636c2.25 0 4.13 1.8 4.13 4.09 0 2.249-1.84 4.13-4.13 4.13h-1.186a8.83 8.83 0 0 1-7.73 5.195h-.818c-4.704-.246-8.426-4.131-8.426-8.876 0-4.907 3.968-8.916 8.876-8.916m0 2.7c-3.395 0-6.176 2.78-6.176 6.176a6.17 6.17 0 0 0 6.176 6.175c2.74 0 5.071-1.8 5.89-4.253l.285-.94h3.109c.736 0 1.39-.655 1.39-1.392s-.613-1.39-1.39-1.39H23.29l-.368-.777c-.982-2.127-3.108-3.6-5.603-3.6" clip-rule="evenodd"/></svg>
-				<h3>DuckLake server</h3>
+			<div class="bento-box">
+				<div class="bento-title">
+					<svg class="icon" xmlns="http://www.w3.org/2000/svg" width="38" height="38" fill="none" viewBox="0 0 38 38"><path fill="var(--lake-highlight-blue-text-color)" d="M19 1.004c9.939 0 17.996 8.058 17.996 17.996S28.939 36.996 19 36.996 1.005 28.938 1.005 19C1.004 9.061 9.062 1.004 19 1.004"/><path fill="var(--lake-highlight-blue-background-color)" fill-rule="evenodd" d="M17.32 9.973a8.82 8.82 0 0 1 7.648 4.377h1.636c2.25 0 4.13 1.8 4.13 4.09 0 2.249-1.84 4.13-4.13 4.13h-1.186a8.83 8.83 0 0 1-7.73 5.195h-.818c-4.704-.246-8.426-4.131-8.426-8.876 0-4.907 3.968-8.916 8.876-8.916m0 2.7c-3.395 0-6.176 2.78-6.176 6.176a6.17 6.17 0 0 0 6.176 6.175c2.74 0 5.071-1.8 5.89-4.253l.285-.94h3.109c.736 0 1.39-.655 1.39-1.392s-.613-1.39-1.39-1.39H23.29l-.368-.777c-.982-2.127-3.108-3.6-5.603-3.6" clip-rule="evenodd"/></svg>
+					<span>DuckLake server</span>
+				</div>
 				<p>Quack supports querying DuckLake and other data lake formats.</p>
+				<a class="bento-link" href="https://ducklake.select/" target="_blank" rel="noopener">Explore DuckLake<svg class="icon"><use href="#arrow-right"></use></svg></a>
 			</div>
-			<div class="icon-grid-item">
-				<svg class="icon" xmlns="http://www.w3.org/2000/svg" width="38" height="38" fill="none" viewBox="0 0 38 38"><path fill="var(--main-highlight-purple-background, #1A1A1A)" d="M19 38C8.489 38 0 29.511 0 19S8.489 0 19 0s19 8.489 19 19-8.489 19-19 19"/><path fill="var(--main-highlight-purple-text-color)" d="M29.159 16.182h-3.727v5.625h3.727c1.545 0 2.83-1.284 2.83-2.83 0-1.556-1.285-2.795-2.83-2.795M7.172 19c0 4.34 3.534 7.875 7.875 7.875 4.34 0 7.875-3.534 7.875-7.875s-3.534-7.875-7.875-7.875S7.172 14.659 7.172 19"/></svg>
-				<h3>Community extensions</h3>
+			<div class="bento-box">
+				<div class="bento-title">
+					<svg class="icon" xmlns="http://www.w3.org/2000/svg" width="38" height="38" fill="none" viewBox="0 0 38 38"><path fill="var(--main-highlight-purple-background, #1A1A1A)" d="M19 38C8.489 38 0 29.511 0 19S8.489 0 19 0s19 8.489 19 19-8.489 19-19 19"/><path fill="var(--main-highlight-purple-text-color)" d="M29.159 16.182h-3.727v5.625h3.727c1.545 0 2.83-1.284 2.83-2.83 0-1.556-1.285-2.795-2.83-2.795M7.172 19c0 4.34 3.534 7.875 7.875 7.875 4.34 0 7.875-3.534 7.875-7.875s-3.534-7.875-7.875-7.875S7.172 14.659 7.172 19"/></svg>
+					<span>Community extensions</span>
+				</div>
 				<p>Quack works with all DuckDB extensions, including the Community Extension ecosystem.</p>
+				<a class="bento-link" href="/community_extensions/">Browse extensions<svg class="icon"><use href="#arrow-right"></use></svg></a>
 			</div>
 		</div>
 	</div>
