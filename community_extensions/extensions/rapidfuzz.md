@@ -24,8 +24,8 @@ repo:
 
 extension_star_count: 18
 extension_star_count_pretty: 18
-extension_download_count: 8114
-extension_download_count_pretty: 8.1k
+extension_download_count: 8269
+extension_download_count_pretty: 8.3k
 image: '/images/community_extensions/social_preview/preview_community_extension_rapidfuzz.png'
 layout: community_extension_doc
 ---

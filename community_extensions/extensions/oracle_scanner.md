@@ -22,10 +22,10 @@ repo:
   # The commit tagged v0.2.0, pinned by SHA so what is built cannot move.
   ref: 60bb95fa0bba53ec7446aa810042e2055758ef64
 
-extension_star_count: 0
-extension_star_count_pretty: 0
-extension_download_count: 492
-extension_download_count_pretty: 492
+extension_star_count: 1
+extension_star_count_pretty: 1
+extension_download_count: 372
+extension_download_count_pretty: 372
 image: '/images/community_extensions/social_preview/preview_community_extension_oracle_scanner.png'
 layout: community_extension_doc
 ---

@@ -68,10 +68,10 @@ docs:
     └───────────┘
     ```
 
-extension_star_count: 7
-extension_star_count_pretty: 7
-extension_download_count: 650
-extension_download_count_pretty: 650
+extension_star_count: 8
+extension_star_count_pretty: 8
+extension_download_count: 648
+extension_download_count_pretty: 648
 image: '/images/community_extensions/social_preview/preview_community_extension_maxmind.png'
 layout: community_extension_doc
 ---

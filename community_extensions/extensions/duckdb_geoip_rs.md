@@ -57,8 +57,8 @@ docs:
 
     All the function will return an empty value on empty/non found value
 
-extension_star_count: 8
-extension_star_count_pretty: 8
+extension_star_count: 9
+extension_star_count_pretty: 9
 extension_download_count: 711
 extension_download_count_pretty: 711
 image: '/images/community_extensions/social_preview/preview_community_extension_duckdb_geoip_rs.png'
