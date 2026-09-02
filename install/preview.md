@@ -1,6 +1,6 @@
 ---
 layout: default
-title: DuckDB Preview (Nightly) Installation
+title: DuckDB Preview (Alpha/Nightly) Installation
 excerpt: DuckDB preview installation page
 body_class: blog_typography nightly_install
 max_page_width: medium
@@ -14,7 +14,7 @@ redirect_from:
 ---
 
 <div class="wrap pagetitle pagetitle--small">
-  <h1>DuckDB Preview (Nightly) Installation</h1>
+  <h1>DuckDB Preview (Alpha/Nightly) Installation</h1>
 </div>
 
 The preview (nightly) builds provide development versions of DuckDB. As such, they are constantly in flux and they are less suitable for production use than the stable releases of DuckDB. You should only use these releases if you are looking for [recent bugfixes](https://github.com/duckdb/duckdb/pulls?q=is%3Apr+is%3Amerged) or optimizations.
@@ -93,6 +93,9 @@ pip install duckdb --pre --upgrade
 
 ## Java
 
+We are working on delivering you the latest Java client. Stay tuned.
+
+<!--
 The following Maven snippet imports the latest version of the Java package.
 To determine the version number, please visit the [latest CI builds](https://github.com/duckdb/duckdb-java/actions/workflows/Java.yml) and consult the _Maven S3 Deploy_ job's _Deploy snapshot to S3_ task.
 
@@ -101,8 +104,7 @@ To determine the version number, please visit the [latest CI builds](https://git
     <dependency>
         <groupId>org.duckdb</groupId>
         <artifactId>duckdb_jdbc</artifactId>
-        <!-- this is the latest build as of 2026-09-02 -->
-        <!-- replace the version of the build here -->
+        this is the latest build as of 2026-09-02
         <version>828-a07f265</version>
     </dependency>
 </dependencies>
@@ -115,6 +117,7 @@ To determine the version number, please visit the [latest CI builds](https://git
     </repository>
 </repositories>
 ```
+-->
 
 ## Node.js (Neo)
 

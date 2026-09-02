@@ -59,6 +59,8 @@ This prints the versions of both the Python client (currently 1.6-dev) and the u
 1.6.0.dev365 (with duckdb 2.0.0-alpha38615)
 ```
 
+### More Clients
+
 We'll gradually add other clients to this list. Each new client that moves to 2.0 improves coverage for the DuckDB project, given that different clients will often have very different test environments and setups.
 
 ## Extensions
