@@ -12,7 +12,7 @@ tags: ["release"]
 
 A few weeks ago, we published a [preview of DuckDB v2.0]({% post_url 2026-08-17-duckdb-20-highlights %}).
 
-Today, we branched off `v2.0-cyanoptera` from the `main` development branch in the `duckdb/duckdb` repository. This marks a feature freeze – in the coming weeks, development work will focus on testing, bugfixing and iterating toward the best DuckDB release to date: v2.0 Cyanoptera, [projected for mid-October]({% link release_calendar.md %}).
+Today, we branched off `v2.0-cyanoptera` from the `main` development branch in the `duckdb/duckdb` repository. This marks a feature freeze – in the coming weeks, development work will focus on testing, bugfixing and iterating toward the best DuckDB release to date: v2.0 Cyanoptera, [projected for the second half of October]({% link release_calendar.md %}).
 
 The DuckDB ecosystem has `duckdb/duckdb` at its center: it's a dependency for most other work, so stabilizing it unlocks work across the other repositories. There are two main directions: clients and extensions.
 
