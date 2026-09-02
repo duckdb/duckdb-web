@@ -81,8 +81,8 @@ docs:
     | `table_diff_summary(left, right, pk := ...)` | one row | counts (and percentages) per status |
     | `schema_diff(left, right)` | table | per-column name/type comparison — reads no rows |
 
-extension_star_count: 7
-extension_star_count_pretty: 7
+extension_star_count: 8
+extension_star_count_pretty: 8
 extension_download_count: 870
 extension_download_count_pretty: 870
 image: '/images/community_extensions/social_preview/preview_community_extension_duck_diff.png'

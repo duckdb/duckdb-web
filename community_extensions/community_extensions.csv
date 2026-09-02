@@ -2,7 +2,7 @@ name,repo,ref,description
 a5,query-farm/a5,960ca3652954e1b360ce32f3e334705060a80f03,"Hierarchical pentagonial indexing for geospatial data that is equal-area and millimeter accurate."
 adbc,columnar-tech/duckdb-adbc-client,e0c62ee9e6557c31fd2ea7ead773ea338567612a,"Connects DuckDB to any database that has an Arrow Database Connectivity (ADBC) driver."
 adbc_scanner,query-farm/adbc_scanner,021d0be27bd50b7d0920e759f5b7179909b59987,"An ADBC client extension for DuckDB that can access ADBC provided data sources."
-agent_data,axsaucedo/agent_data_duckdb,134e48d47d5a901bc923f258ad1cd29b82d3a2ff,"A DuckDB extension written in Rust for querying, analysing and inspecting AI coding agents history. Read conversations, plans, todos, history, and usage stats directly from your local agent data directories."
+agent_data,axsaucedo/agent_data_duckdb,ca2c0b85d1065aa58cea6211e6d1e982f340b3bf,"A DuckDB extension written in Rust for querying, analysing and inspecting AI coding agents history. Read conversations, plans, todos, history, and usage stats directly from your local agent data directories."
 airport,query-farm/airport,a7f0b7ef9add0bb000585b11a847ea9c8460d4d9,"The Airport extension brings Arrow Flight support to DuckDB, enabling DuckDB to query, modify, and store data from Arrow Flight servers."
 aixchess,thomas-daniels/aix,728e58fb70d343b6b69a9d0bc395db5309b4dc65,"Efficiently query large chess game collections"
 altertable,altertable-ai/duckdb-altertable,0def150caa4c82b4e6886be99117584d529bd4ce,"Query Altertable's lakehouse directly from your local DuckDB."
