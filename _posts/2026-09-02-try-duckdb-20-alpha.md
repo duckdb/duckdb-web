@@ -37,7 +37,7 @@ curl https://install.duckdb.org | DUCKDB_VERSION=alpha bash
 │      version      │
 │      varchar      │
 ├───────────────────┤
-│ v2.0.0-alpha39764 │
+│ v2.0.0-alpha39998 │
 └───────────────────┘
 ```
 
@@ -56,7 +56,7 @@ python3 -c "import duckdb; print(duckdb.version())"
 This prints the versions of both the Python client (currently 1.6-dev) and the underlying DuckDB library (2.0.0-alpha):
 
 ```text
-1.6.0.dev365 (with duckdb 2.0.0-alpha38615)
+1.6.0.dev379 (with duckdb 2.0.0-alpha39998)
 ```
 
 ### More Clients
