@@ -8,7 +8,7 @@ excerpt: |
 extension:
   name: duckflight
   description: Query DuckDB from PostgreSQL and Arrow Flight SQL clients, including psql, ADBC, and Airport
-  version: 0.1.2
+  version: 0.1.3
   language: Rust
   build: cargo
   license: MIT
@@ -19,7 +19,7 @@ extension:
 
 repo:
   github: sidequery/duckflight-extension
-  ref: 379f43acbf604cf9eac3dff9b9703599a8cd6865
+  ref: 088037be08cc486beecfd98b38eec099456e7a0f
 
 docs:
   hello_world: |
@@ -45,8 +45,8 @@ docs:
     tokens, and optional TLS. See the
     [quick start and authentication guide](https://github.com/sidequery/duckflight-extension/blob/main/docs/AUTHENTICATION.md).
 
-extension_star_count: 2
-extension_star_count_pretty: 2
+extension_star_count: 4
+extension_star_count_pretty: 4
 extension_download_count: null
 extension_download_count_pretty: n/a
 image: '/images/community_extensions/social_preview/preview_community_extension_duckflight.png'
