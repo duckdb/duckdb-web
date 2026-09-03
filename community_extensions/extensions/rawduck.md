@@ -49,8 +49,8 @@ docs:
 
 extension_star_count: 32
 extension_star_count_pretty: 32
-extension_download_count: 685
-extension_download_count_pretty: 685
+extension_download_count: 698
+extension_download_count_pretty: 698
 image: '/images/community_extensions/social_preview/preview_community_extension_rawduck.png'
 layout: community_extension_doc
 ---
