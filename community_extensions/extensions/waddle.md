@@ -18,7 +18,7 @@ extension:
   # (Optional) param that specifies required extra toolchains
   requires_toolchains: "rust"
   # (Optional) param that specifies a precise vcpkg commit to use
-  vcpkg_commit: "ce613c41372b23b1f51333815feb3edd87ef8a8b"
+  vcpkg_commit: "84bab45d415d22042bd0b9081aea57f362da3f35"
   # (Optional) this extension requires additional custom toolchain setup
   custom_toolchain_script: true
   # (Optional) ';' separated list of additional platforms
@@ -34,10 +34,10 @@ docs:
   extended_description: |
     The waddle extension is based on DuckDB's [Extension Template](https://github.com/duckdb/extension-template/), and it's a great starting point to get started building more advanced extensions.
 
-extension_star_count: 286
-extension_star_count_pretty: 286
-extension_download_count: 830
-extension_download_count_pretty: 830
+extension_star_count: 289
+extension_star_count_pretty: 289
+extension_download_count: 302
+extension_download_count_pretty: 302
 image: '/images/community_extensions/social_preview/preview_community_extension_waddle.png'
 layout: community_extension_doc
 ---
