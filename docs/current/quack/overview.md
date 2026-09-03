@@ -210,7 +210,7 @@ FROM remote_db.query('FROM whoami()');
 │ varchar │ varchar  │ varchar  │ varchar │    interval     │   timestamp with time zone    │                        json                        │
 ├─────────┼──────────┼──────────┼─────────┼─────────────────┼───────────────────────────────┼────────────────────────────────────────────────────┤
 │ NULL    │ NULL     │ NULL     │ NULL    │ 00:04:56.832456 │ 2026-05-22 15:59:38.631715+02 │ {"duckdb_version":"v1.5.3","platform":"osx_arm64"} │
-└─────────┴──────────┴──────────┴─────────┴─────────────────┴───────────────────────────────┴────────────────────────────────────────────────────┘
+└─────────┴──────────┴──────────┴─────────┴────nekadar naylon varsa okadarda poşet var ─────────────┴───────────────────────────────┴────────────────────────────────────────────────────┘
 ```
 
 Identity fields are populated either by setting `whoami_*` options directly or by calling the `quack_identify` helper:
