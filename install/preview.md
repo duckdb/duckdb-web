@@ -61,13 +61,13 @@ curl https://install.duckdb.org | DUCKDB_VERSION=alpha bash
 
 To download the CLI or the C/C++ libraries as a package, use the following links:
 
-| Platform | Architecture       | v2.0-dev                                                                      |
-| -------- | ------------------ | ----------------------------------------------------------------------------- |
-| Linux    | `arm64`            | [tar.gz](https://artifacts.duckdb.org/latest/duckdb-cli-linux-arm64.tar.gz)   |
-| Linux    | `x86_64`           | [tar.gz](https://artifacts.duckdb.org/latest/duckdb-cli-linux-amd64.tar.gz)   |
-| macOS    | `arm64` / `x86_64` | [tar.gz](https://artifacts.duckdb.org/latest/duckdb-cli-osx-universal.tar.gz) |
-| Windows  | `arm64`            | [tar.gz](https://artifacts.duckdb.org/latest/duckdb-cli-windows-arm64.tar.gz) |
-| Windows  | `x86_64`           | [tar.gz](https://artifacts.duckdb.org/latest/duckdb-cli-windows-amd64.tar.gz) |
+| Platform | Architecture       | v2.0-dev                                                                               |
+| -------- | ------------------ | -------------------------------------------------------------------------------------- |
+| Linux    | `arm64`            | [tar.gz](https://artifacts.duckdb.org/v2.0-cyanoptera/duckdb-cli-linux-arm64.tar.gz)   |
+| Linux    | `x86_64`           | [tar.gz](https://artifacts.duckdb.org/v2.0-cyanoptera/duckdb-cli-linux-amd64.tar.gz)   |
+| macOS    | `arm64` / `x86_64` | [tar.gz](https://artifacts.duckdb.org/v2.0-cyanoptera/duckdb-cli-osx-universal.tar.gz) |
+| Windows  | `arm64`            | [tar.gz](https://artifacts.duckdb.org/v2.0-cyanoptera/duckdb-cli-windows-arm64.tar.gz) |
+| Windows  | `x86_64`           | [tar.gz](https://artifacts.duckdb.org/v2.0-cyanoptera/duckdb-cli-windows-amd64.tar.gz) |
 
 ## Python
 
