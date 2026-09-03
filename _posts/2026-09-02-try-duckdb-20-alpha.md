@@ -41,6 +41,11 @@ curl https://install.duckdb.org | DUCKDB_VERSION=alpha bash
 └───────────────────┘
 ```
 
+On Windows, download the tarball, extract it and run `duckdb.exe`:
+
+* [DuckDB v2.0-alpha for Windows AMD64 (x86_64)](https://artifacts.duckdb.org/v2.0-cyanoptera/duckdb-cli-windows-amd64.tar.gz)
+* [DuckDB v2.0-alpha for Windows AArch64 (arm64)](https://artifacts.duckdb.org/v2.0-cyanoptera/duckdb-cli-windows-arm64.tar.gz)
+
 ### Python
 
 To install the Python client, run:
