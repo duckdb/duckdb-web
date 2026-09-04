@@ -8,7 +8,7 @@ excerpt: |
 extension:
   name: duckdb_rphonetic
   description: Phonetic algorithms for German and European name matching
-  version: 0.1.0
+  version: 0.2.0
   language: Rust
   build: cmake
   license: Apache-2.0
@@ -18,9 +18,9 @@ extension:
     - guizmaii
 
 repo:
-  github: guizmaii-opensource/duckdb-rphonetic
-  # v0.1.0
-  ref: b74284d0dfc71c94859468aef6ac4bbd0981dd19
+  github: guizmaii-opensource/duckdb_rphonetic
+  # v0.2.0
+  ref: ac89f6debd3f5339df18553fc504b682f05d1185
 
 docs:
   hello_world: |
@@ -57,15 +57,17 @@ docs:
     `rphonetic`, which yields `cologne_phonetic('Dieter') = '227'`; Apache
     Commons Codec yields `27`. The two differ on 36 of a 279-name test corpus.
     Every divergence is committed to the repository and pinned by a test, so the
-    output cannot change silently. The published reference vectors
+    output cannot change silently. An `H` carries no code at all and, since
+    0.2.0, never breaks a run: `cologne_phonetic('Mülhler') = '657'`, the same
+    as `Müller`, on which both implementations agree. The published reference vectors
     (`Müller-Lüdenscheidt` -> `65752682`, `Wikipedia` -> `3412`,
     `Breschnew` -> `17863`) are unaffected. Daitch-Mokotoff agrees with
     Commons Codec on all 279 names.
 
 extension_star_count: 0
 extension_star_count_pretty: 0
-extension_download_count: 365
-extension_download_count_pretty: 365
+extension_download_count: 371
+extension_download_count_pretty: 371
 image: '/images/community_extensions/social_preview/preview_community_extension_duckdb_rphonetic.png'
 layout: community_extension_doc
 ---

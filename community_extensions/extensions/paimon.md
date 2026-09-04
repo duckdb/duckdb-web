@@ -8,18 +8,18 @@ excerpt: |
 extension:
   name: paimon
   description: Query Apache Paimon tables directly from DuckDB
-  version: 0.1.0
+  version: 0.1.1
   language: C++
   build: cmake
   license: Apache-2.0
-  excluded_platforms: "linux_amd64_gcc4;linux_amd64_musl;osx_amd64;osx_arm64;windows_amd64;windows_amd64_mingw;windows_amd64_rtools;windows_arm64;windows_arm64_mingw;wasm_mvp;wasm_eh;wasm_threads"
+  excluded_platforms: "linux_amd64_gcc4;linux_amd64_musl;osx_amd64;windows_amd64;windows_amd64_mingw;windows_amd64_rtools;windows_arm64;windows_arm64_mingw;wasm_mvp;wasm_eh;wasm_threads"
   maintainers:
     - mrdrivingduck
 
 repo:
   github: polardb/duckdb-paimon
-  andium: d1bba0fa7767e3761de45521f3ecdaf465807c57
-  ref: 0764988fac3c37161ae465dd9232ff95213db329
+  andium: 543e43a91edf05ab796e67e19a3cb7240e52bcf6
+  ref: 5e89198235c8be6a402f2b02ef54f249914eee29
 
 docs:
   hello_world: |
@@ -60,8 +60,8 @@ docs:
 
 extension_star_count: 44
 extension_star_count_pretty: 44
-extension_download_count: 1071
-extension_download_count_pretty: 1.1k
+extension_download_count: 1239
+extension_download_count_pretty: 1.2k
 image: '/images/community_extensions/social_preview/preview_community_extension_paimon.png'
 layout: community_extension_doc
 ---
@@ -87,7 +87,10 @@ LOAD {{ page.extension.name }};
 
 <div class="extension_functions_table"></div>
 
-This extension does not add any functions.
+|  function_name   | function_type | description | comment | examples |
+|------------------|---------------|-------------|---------|----------|
+| paimon_scan      | table         | NULL        | NULL    |          |
+| paimon_snapshots | table         | NULL        | NULL    |          |
 
 ### Overloaded Functions
 

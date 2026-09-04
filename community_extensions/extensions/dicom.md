@@ -47,8 +47,8 @@ docs:
 
 extension_star_count: 0
 extension_star_count_pretty: 0
-extension_download_count: 607
-extension_download_count_pretty: 607
+extension_download_count: 613
+extension_download_count_pretty: 613
 image: '/images/community_extensions/social_preview/preview_community_extension_dicom.png'
 layout: community_extension_doc
 ---

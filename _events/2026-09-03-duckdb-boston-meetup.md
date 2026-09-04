@@ -29,13 +29,13 @@ Attendance is free but **please register on [Luma](https://luma.com/kfgc4vej) as
 
 ## Timetable
 
-| Time  | Activity                                                 |                                                                                  |
-| :---- | :------------------------------------------------------- | -------------------------------------------------------------------------------- |
-| 17:30 | Doors open                                               |                                                                                  |
-| 18:30 | Opening remarks                                          | Gábor Szárnyas<br>_(DuckLabs)_                                                   |
-| 18:40 | Unlocking healthcare data with DuckDB and open standards | Dan Gottlieb<br>_(Boston Children's Hospital and Central Square Solutions, LLC)_ |
-| 19:05 | Windowing improvements in DuckDB v2.0                    | Richard Wesley<br>_(DuckLabs)_                                                   |
-| 19:30 | Drinks & snacks                                          |                                                                                  |
+| Time  | Activity                                                                                                                                    |                                                                                  |
+| :---- | :------------------------------------------------------------------------------------------------------------------------------------------ | -------------------------------------------------------------------------------- |
+| 17:30 | Doors open                                                                                                                                  |                                                                                  |
+| 18:30 | [Opening remarks](http://blobs.duckdb.org/events/duckdb-boston/meetup/gabor-szarnyas-opening.pdf)                                           | Gábor Szárnyas<br>_(DuckLabs)_                                                   |
+| 18:40 | [Unlocking healthcare data with DuckDB and open standards](http://blobs.duckdb.org/events/duckdb-boston/meetup/dan-gottlieb-healthcare.pdf) | Dan Gottlieb<br>_(Boston Children's Hospital and Central Square Solutions, LLC)_ |
+| 19:05 | [Windowing improvements in DuckDB v2.0](http://blobs.duckdb.org/events/duckdb-boston/meetup/richard-wesley-windowing.pdf)                   | Richard Wesley<br>_(DuckLabs)_                                                   |
+| 19:30 | Drinks & snacks                                                                                                                             |                                                                                  |
 
 ## Questions?
 

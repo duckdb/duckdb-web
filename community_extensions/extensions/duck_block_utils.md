@@ -8,7 +8,7 @@ excerpt: |
 extension:
   name: duck_block_utils
   description: Build, transform, validate, and extract content from structured documents using the duck_block type
-  version: 1.6.1
+  version: 2.0.0
   language: C++
   build: cmake
   license: MIT
@@ -16,40 +16,42 @@ extension:
     - teaguesterling
 repo:
   github: teaguesterling/duckdb_duck_block_utils
-  # andium (DuckDB v1.4.5 track) intentionally left at the v1.2.1 commit:
-  # v1.4.0 targets a v1.5.x tree (dropped v1.4.x support) and is not built-verified
-  # against v1.4.5. v1.4.5 users should move to the v1.5.x track.
+  # andium (DuckDB v1.4.5 track) intentionally left at the v1.2.1 commit. The tree
+  # this release is built from targets DuckDB v1.5.5 and carries no v1.4.x support,
+  # so advancing this pin would point a v1.4.5 build at a tree that cannot build for
+  # it. v1.4.5 users should move to the v1.5.x track.
   andium: 125662df9e5450105dc9b7957ad955cb53d7beec
-  ref: 078a9b343824510fcc1c087b46fa0f48969bad8f
+  ref: 3f2a0f0a88325e20f4a4a0441fb7f8e3bcc9f18b
 docs:
   hello_world: |
     -- Build a document programmatically
-    SELECT db_assemble([
-        db_heading(1, 'Hello World'),
-        db_paragraph([
-            db_text('This is '),
-            db_bold('important'),
-            db_text(' content.')
+    SELECT duck_blocks_assemble([
+        duck_block_heading(1, 'Hello World'),
+        duck_block_paragraph([
+            duck_block_text('This is '),
+            duck_block_bold('important'),
+            duck_block_text(' content.')
         ]),
-        db_code('sql', 'SELECT * FROM documents')
+        duck_block_code('sql', 'SELECT * FROM documents')
     ]);
 
-    -- Works with markdown extension for reading/writing files
+    -- Render it as plain text
+    SELECT duck_blocks_to_text(duck_blocks_assemble([
+        duck_block_heading(1, 'Hello World'),
+        duck_block_paragraph('Some prose.')
+    ]));
+
+    -- Works with the markdown extension for reading and writing files
     LOAD markdown;
     LOAD duck_block_utils;
 
-    -- Extract table of contents from markdown
-    SELECT * FROM db_blocks_toc(
+    -- Table of contents from a markdown file
+    SELECT * FROM duck_blocks_toc_rows(
         (SELECT list(b) FROM read_markdown_blocks('README.md') b)
     );
 
-    -- Convert blocks to plain text
-    SELECT db_blocks_to_text(
-        (SELECT list(b) FROM read_markdown_blocks('doc.md') b)
-    );
-
     -- Validate document structure
-    SELECT db_blocks_validate(
+    SELECT duck_blocks_validate(
         (SELECT list(b) FROM read_markdown_blocks('doc.md') b)
     );
 
@@ -60,124 +62,149 @@ docs:
 
     **Documentation:** [duck-block-utils.readthedocs.io](https://duck-block-utils.readthedocs.io)
 
+    ## 2.0.0 is a breaking rename
+
+    Every `db_*` function was renamed to `duck_block_*` (builders) or `duck_blocks_*`
+    (operations on a list). 54 names present in 1.6.1 are gone and there is no alias
+    path, so 1.6.1 queries must be updated. The mapping is mechanical:
+
+    ```sql
+    db_heading(1, 'Title')      ->  duck_block_heading(1, 'Title')
+    db_assemble(blocks)         ->  duck_blocks_assemble(blocks)
+    db_blocks_to_text(blocks)   ->  duck_blocks_to_text(blocks)
+    db_page                     ->  page_break
+    ```
+
     ## The duck_block Type
 
-    A unified struct for both block-level and inline elements:
+    A unified struct for block-level, inline and metadata-value elements:
 
     ```sql
     STRUCT(
-        kind VARCHAR,                       -- 'block' or 'inline'
+        kind VARCHAR,                       -- 'block', 'inline' or 'value'
         element_type VARCHAR,               -- 'heading', 'paragraph', 'bold', 'link', etc.
-        content VARCHAR,                    -- Text content (NULL if element has children)
-        level INTEGER,                      -- Structural depth (1=block, 2+=inline children)
-        encoding VARCHAR,                   -- 'text', 'json', 'html', etc.
-        attributes MAP(VARCHAR, VARCHAR),   -- Element-specific metadata
-        element_order INTEGER               -- Position in document
+        content VARCHAR,                    -- text, iff the element has a single text child
+        level INTEGER,                      -- depth in a depth-first ordering; top is 1
+        encoding VARCHAR,                   -- 'text', 'json', 'yaml', 'html', 'xml',
+                                            --   'latex', 'markdown', 'toml'
+        attributes MAP(VARCHAR, VARCHAR),   -- element-specific metadata
+        element_order INTEGER               -- position in the document
     )
     ```
 
-    ## V2 API Design
+    `level` is structural depth, never a heading rank - a heading's rank lives in
+    `attributes['heading_level']`. `content` is populated if and only if an element has
+    a single text child; a heading additionally keeps a flattened title alongside its
+    rich children.
 
-    All builder functions return `LIST(duck_block)` for uniform composition:
+    ## Builders
+
+    All builder functions return `LIST(duck_block)` so they compose by nesting:
 
     ```sql
-    -- Builders can be nested naturally
-    SELECT db_paragraph([
-        db_text('Click '),
-        db_link('https://example.com', 'here'),
-        db_text(' for more.')
+    SELECT duck_block_paragraph([
+        duck_block_text('Click '),
+        duck_block_link('https://example.com', 'here'),
+        duck_block_text(' for more.')
     ]);
     ```
 
-    ## Block Builders
+    | Function | Description |
+    |----------|-------------|
+    | `duck_block_heading(level, content)` | Heading (h1-h6) |
+    | `duck_block_paragraph(content)` | Paragraph |
+    | `duck_block_code(language, content)` | Fenced code block |
+    | `duck_block_blockquote(content)` | Block quote |
+    | `duck_block_list_block(ordered, items[])` | Ordered or unordered list |
+    | `duck_block_hr()` | Horizontal rule |
+    | `duck_block_image(src, alt, title)` | Image |
+    | `duck_block_metadata(content)` | Metadata blob (YAML frontmatter) |
+    | `duck_block_raw(format, content)` | Raw content block |
+    | `duck_block_text(content)` | Plain text |
+    | `duck_block_bold(content)` | Bold |
+    | `duck_block_italic(content)` | Italic |
+    | `duck_block_link(href, content)` | Hyperlink |
+    | `duck_block_inline_code(content)` | Inline code |
+    | `duck_block_math(content)` | Math |
+    | `duck_block_strikethrough(content)` | Strikethrough |
+    | `duck_block_superscript(content)` / `duck_block_subscript(content)` | Super/subscript |
+
+    ## Assembly
 
     | Function | Description |
     |----------|-------------|
-    | `db_heading(level, content)` | Create heading (h1-h6) |
-    | `db_paragraph(content)` | Create paragraph |
-    | `db_code(language, content)` | Create fenced code block |
-    | `db_blockquote(content)` | Create block quote |
-    | `db_list_block(ordered, items[])` | Create ordered/unordered list |
-    | `db_hr()` | Create horizontal rule |
-    | `db_image(src, alt, title)` | Create image block |
-    | `db_metadata(content)` | Create YAML frontmatter |
-    | `db_raw(format, content)` | Create raw content block |
+    | `duck_blocks_assemble(blocks[])` | Combine blocks into a document |
+    | `duck_blocks_document(blocks[])` | Alias for assemble |
+    | `duck_block_section(level, title, children[])` | Section with a heading |
+    | `duck_blocks_concat(a, b)` | Concatenate block lists |
+    | `duck_blocks_rebase_levels(blocks, offset)` | Shift heading levels |
 
-    ## Inline Builders
+    ## Query and extraction
 
     | Function | Description |
     |----------|-------------|
-    | `db_text(content)` | Plain text |
-    | `db_bold(content)` | Bold/strong text |
-    | `db_italic(content)` | Italic/emphasis text |
-    | `db_link(href, content)` | Hyperlink |
-    | `db_inline_code(content)` | Inline code |
-    | `db_math(content)` | Math expression |
-    | `db_strikethrough(content)` | Strikethrough text |
-    | `db_superscript(content)` | Superscript |
-    | `db_subscript(content)` | Subscript |
-
-    ## Assembly Functions
-
-    | Function | Description |
-    |----------|-------------|
-    | `db_assemble(blocks[])` | Combine blocks into document |
-    | `db_document(blocks[])` | Alias for db_assemble |
-    | `db_section(level, title, children[])` | Create section with heading |
-    | `db_concat(blocks1, blocks2)` | Concatenate block lists |
-    | `db_rebase_levels(blocks, offset)` | Adjust heading levels |
-
-    ## Extraction Functions
-
-    | Function | Description |
-    |----------|-------------|
-    | `db_blocks_to_text(blocks)` | Extract plain text |
-    | `db_blocks_headings(blocks)` | Extract heading hierarchy |
-    | `db_blocks_toc(blocks)` | Generate table of contents |
+    | `duck_blocks_to_text(blocks)` | Plain text |
+    | `duck_blocks_headings(blocks)` | Heading hierarchy |
+    | `duck_blocks_toc_rows(blocks)` | Table of contents, one row per entry |
+    | `duck_blocks_get_section(blocks, pattern)` | One section by title or id |
+    | `duck_blocks_sections_like(blocks, term)` | Sections whose text matches |
+    | `duck_blocks_page_rows(blocks)` | Page boundaries, separate from the outline |
+    | `duck_blocks_get_pages(blocks, first, last)` | A page range |
+    | `duck_blocks_links(blocks)` | Every link |
+    | `duck_blocks_stats(blocks)` / `duck_blocks_structure(blocks)` | Document shape |
+    | `duck_blocks_diff(before, after)` | ADDED / REMOVED / MOVED between two versions |
 
     ## Validation
 
     | Function | Description |
     |----------|-------------|
-    | `db_blocks_validate(blocks)` | Validate document structure |
+    | `duck_blocks_validate(blocks)` | Spec conformance: valid, plus errors |
+    | `duck_blocks_lint(blocks)` | Advisory conformance warnings |
+    | `duck_blocks_quality(blocks)` | Document quality, which is NOT conformance |
+    | `duck_block_spec_version()` | The spec version this build implements |
 
-    ## Pandoc Integration
-
-    Convert between Pandoc JSON AST and duck_block without requiring Pandoc:
+    ## Rendering
 
     | Function | Description |
     |----------|-------------|
-    | `pandoc_inlines_to_db_inlines(json)` | Parse Pandoc inline AST |
-    | `db_inlines_to_pandoc(blocks)` | Convert to Pandoc inline AST |
+    | `duck_blocks_render_ansi(blocks, width)` | Terminal rendering with themes |
 
-    ## Ecosystem Integration
+    ## Pandoc integration
 
-    Duck Block Utils works seamlessly with other DuckDB document extensions:
+    Convert between Pandoc's JSON AST and `duck_block` without invoking Pandoc:
 
-    - **[duckdb_markdown](https://github.com/teaguesterling/duckdb_markdown)** - Read markdown files with `read_markdown_blocks()`, write with `COPY ... TO ... (FORMAT markdown, MARKDOWN_MODE duck_block)`
+    | Function | Description |
+    |----------|-------------|
+    | `pandoc_ast_to_blocks(json)` | Parse a Pandoc AST |
+    | `duck_blocks_to_pandoc_ast(blocks)` | Emit a full Pandoc document |
+    | `duck_blocks_to_pandoc_blocks(blocks)` | Emit just the block list |
+    | `read_pandoc_ast(path)` / `write_pandoc_ast(path, blocks)` | Read and write AST files |
+
+    ## Ecosystem
+
+    - **[duckdb_markdown](https://github.com/teaguesterling/duckdb_markdown)** - `read_markdown_blocks()`, and `COPY ... TO ... (FORMAT markdown, MARKDOWN_MODE duck_block)`
     - **[duckdb_webbed](https://github.com/teaguesterling/duckdb_webbed)** - HTML parsing and generation
 
     ```sql
-    -- Read markdown, manipulate with duck_block_utils, write back
+    -- Read markdown, append to it, write it back
     LOAD markdown;
     LOAD duck_block_utils;
 
-    -- Add a disclaimer to all documents
     COPY (
-        SELECT block.* FROM (
-            SELECT unnest(db_assemble([
-                (SELECT list(b) FROM read_markdown_blocks('doc.md') b),
-                db_hr(),
-                db_paragraph('Generated by DuckDB')
-            ])) as block
-        )
+        SELECT unnest(duck_blocks_concat(
+            (SELECT list(b) FROM read_markdown_blocks('doc.md') b),
+            duck_blocks_assemble([
+                duck_block_hr(),
+                duck_block_paragraph('Generated by DuckDB')
+            ])
+        )) AS block
     ) TO 'output.md' (FORMAT markdown, MARKDOWN_MODE duck_block);
     ```
 
 extension_star_count: 1
 extension_star_count_pretty: 1
-extension_download_count: 684
-extension_download_count_pretty: 684
+extension_download_count: 700
+extension_download_count_pretty: 700
 image: '/images/community_extensions/social_preview/preview_community_extension_duck_block_utils.png'
 layout: community_extension_doc
 ---
@@ -203,84 +230,101 @@ LOAD {{ page.extension.name }};
 
 <div class="extension_functions_table"></div>
 
-|        function_name         | function_type | description | comment | examples |
-|------------------------------|---------------|-------------|---------|----------|
-| db_assemble                  | scalar        | NULL        | NULL    |          |
-| db_blockquote                | scalar        | NULL        | NULL    |          |
-| db_blocks_code_blocks        | scalar        | NULL        | NULL    |          |
-| db_blocks_exclude            | scalar        | NULL        | NULL    |          |
-| db_blocks_filter             | scalar        | NULL        | NULL    |          |
-| db_blocks_headings           | scalar        | NULL        | NULL    |          |
-| db_blocks_links              | scalar        | NULL        | NULL    |          |
-| db_blocks_lint               | scalar        | NULL        | NULL    |          |
-| db_blocks_merge              | scalar        | NULL        | NULL    |          |
-| db_blocks_render_ansi        | scalar        | NULL        | NULL    |          |
-| db_blocks_reorder            | scalar        | NULL        | NULL    |          |
-| db_blocks_slice              | scalar        | NULL        | NULL    |          |
-| db_blocks_stats              | scalar        | NULL        | NULL    |          |
-| db_blocks_structure          | scalar        | NULL        | NULL    |          |
-| db_blocks_to_text            | scalar        | NULL        | NULL    |          |
-| db_blocks_toc                | scalar        | NULL        | NULL    |          |
-| db_blocks_validate           | scalar        | NULL        | NULL    |          |
-| db_bold                      | scalar        | NULL        | NULL    |          |
-| db_cite                      | scalar        | NULL        | NULL    |          |
-| db_code                      | scalar        | NULL        | NULL    |          |
-| db_concat                    | scalar        | NULL        | NULL    |          |
-| db_div                       | scalar        | NULL        | NULL    |          |
-| db_document                  | scalar        | NULL        | NULL    |          |
-| db_heading                   | scalar        | NULL        | NULL    |          |
-| db_hr                        | scalar        | NULL        | NULL    |          |
-| db_image                     | scalar        | NULL        | NULL    |          |
-| db_inline_code               | scalar        | NULL        | NULL    |          |
-| db_inline_image              | scalar        | NULL        | NULL    |          |
-| db_inlines_to_pandoc         | scalar        | NULL        | NULL    |          |
-| db_italic                    | scalar        | NULL        | NULL    |          |
-| db_linebreak                 | scalar        | NULL        | NULL    |          |
-| db_link                      | scalar        | NULL        | NULL    |          |
-| db_list                      | scalar        | NULL        | NULL    |          |
-| db_list_block                | scalar        | NULL        | NULL    |          |
-| db_list_item                 | scalar        | NULL        | NULL    |          |
-| db_math                      | scalar        | NULL        | NULL    |          |
-| db_metadata                  | scalar        | NULL        | NULL    |          |
-| db_note                      | scalar        | NULL        | NULL    |          |
-| db_paragraph                 | scalar        | NULL        | NULL    |          |
-| db_quoted                    | scalar        | NULL        | NULL    |          |
-| db_raw                       | scalar        | NULL        | NULL    |          |
-| db_raw_inline                | scalar        | NULL        | NULL    |          |
-| db_rebase_levels             | scalar        | NULL        | NULL    |          |
-| db_section                   | scalar        | NULL        | NULL    |          |
-| db_smallcaps                 | scalar        | NULL        | NULL    |          |
-| db_softbreak                 | scalar        | NULL        | NULL    |          |
-| db_space                     | scalar        | NULL        | NULL    |          |
-| db_span                      | scalar        | NULL        | NULL    |          |
-| db_strikethrough             | scalar        | NULL        | NULL    |          |
-| db_subscript                 | scalar        | NULL        | NULL    |          |
-| db_superscript               | scalar        | NULL        | NULL    |          |
-| db_terminal_width            | scalar        | NULL        | NULL    |          |
-| db_text                      | scalar        | NULL        | NULL    |          |
-| db_underline                 | scalar        | NULL        | NULL    |          |
-| duck_block                   | scalar        | NULL        | NULL    |          |
-| duck_block_aliases           | pragma        | NULL        | NULL    |          |
-| duck_block_attr              | scalar        | NULL        | NULL    |          |
-| duck_block_content           | scalar        | NULL        | NULL    |          |
-| duck_block_encoding          | scalar        | NULL        | NULL    |          |
-| duck_block_level             | scalar        | NULL        | NULL    |          |
-| duck_block_order             | scalar        | NULL        | NULL    |          |
-| duck_block_render            | pragma        | NULL        | NULL    |          |
-| duck_block_set_content       | scalar        | NULL        | NULL    |          |
-| duck_block_set_level         | scalar        | NULL        | NULL    |          |
-| duck_block_set_order         | scalar        | NULL        | NULL    |          |
-| duck_block_type              | scalar        | NULL        | NULL    |          |
-| duck_block_valid             | scalar        | NULL        | NULL    |          |
-| duck_blocks_to_pandoc_ast    | scalar        | NULL        | NULL    |          |
-| duck_blocks_to_pandoc_blocks | scalar        | NULL        | NULL    |          |
-| pandoc_ast                   | table         | NULL        | NULL    |          |
-| pandoc_ast_to_blocks         | scalar        | NULL        | NULL    |          |
-| pandoc_inlines_to_db_inlines | scalar        | NULL        | NULL    |          |
-| pandoc_inlines_to_text       | scalar        | NULL        | NULL    |          |
-| read_pandoc_ast              | scalar        | NULL        | NULL    |          |
-| to_duck_block                | scalar        | NULL        | NULL    |          |
-| write_pandoc_ast             | scalar        | NULL        | NULL    |          |
+|         function_name         | function_type | description | comment | examples |
+|-------------------------------|---------------|-------------|---------|----------|
+| duck_block                    | scalar        | NULL        | NULL    |          |
+| duck_block_aliases            | pragma        | NULL        | NULL    |          |
+| duck_block_attr               | scalar        | NULL        | NULL    |          |
+| duck_block_blockquote         | scalar        | NULL        | NULL    |          |
+| duck_block_bold               | scalar        | NULL        | NULL    |          |
+| duck_block_cite               | scalar        | NULL        | NULL    |          |
+| duck_block_code               | scalar        | NULL        | NULL    |          |
+| duck_block_content            | scalar        | NULL        | NULL    |          |
+| duck_block_div                | scalar        | NULL        | NULL    |          |
+| duck_block_doc_macros         | pragma        | NULL        | NULL    |          |
+| duck_block_encoding           | scalar        | NULL        | NULL    |          |
+| duck_block_encoding_names     | scalar        | NULL        | NULL    |          |
+| duck_block_ensure_extension   | scalar        | NULL        | NULL    |          |
+| duck_block_heading            | scalar        | NULL        | NULL    |          |
+| duck_block_hr                 | scalar        | NULL        | NULL    |          |
+| duck_block_image              | scalar        | NULL        | NULL    |          |
+| duck_block_inline_code        | scalar        | NULL        | NULL    |          |
+| duck_block_inline_image       | scalar        | NULL        | NULL    |          |
+| duck_block_italic             | scalar        | NULL        | NULL    |          |
+| duck_block_kind_names         | scalar        | NULL        | NULL    |          |
+| duck_block_level              | scalar        | NULL        | NULL    |          |
+| duck_block_linebreak          | scalar        | NULL        | NULL    |          |
+| duck_block_link               | scalar        | NULL        | NULL    |          |
+| duck_block_list               | scalar        | NULL        | NULL    |          |
+| duck_block_list_block         | scalar        | NULL        | NULL    |          |
+| duck_block_list_item          | scalar        | NULL        | NULL    |          |
+| duck_block_math               | scalar        | NULL        | NULL    |          |
+| duck_block_metadata           | scalar        | NULL        | NULL    |          |
+| duck_block_note               | scalar        | NULL        | NULL    |          |
+| duck_block_order              | scalar        | NULL        | NULL    |          |
+| duck_block_paragraph          | scalar        | NULL        | NULL    |          |
+| duck_block_plain              | scalar        | NULL        | NULL    |          |
+| duck_block_quoted             | scalar        | NULL        | NULL    |          |
+| duck_block_raw                | scalar        | NULL        | NULL    |          |
+| duck_block_raw_inline         | scalar        | NULL        | NULL    |          |
+| duck_block_render             | pragma        | NULL        | NULL    |          |
+| duck_block_section            | scalar        | NULL        | NULL    |          |
+| duck_block_set_content        | scalar        | NULL        | NULL    |          |
+| duck_block_set_level          | scalar        | NULL        | NULL    |          |
+| duck_block_set_order          | scalar        | NULL        | NULL    |          |
+| duck_block_smallcaps          | scalar        | NULL        | NULL    |          |
+| duck_block_softbreak          | scalar        | NULL        | NULL    |          |
+| duck_block_space              | scalar        | NULL        | NULL    |          |
+| duck_block_span               | scalar        | NULL        | NULL    |          |
+| duck_block_spec_version       | scalar        | NULL        | NULL    |          |
+| duck_block_strikethrough      | scalar        | NULL        | NULL    |          |
+| duck_block_subscript          | scalar        | NULL        | NULL    |          |
+| duck_block_superscript        | scalar        | NULL        | NULL    |          |
+| duck_block_terminal_width     | scalar        | NULL        | NULL    |          |
+| duck_block_text               | scalar        | NULL        | NULL    |          |
+| duck_block_type               | scalar        | NULL        | NULL    |          |
+| duck_block_type_names         | scalar        | NULL        | NULL    |          |
+| duck_block_underline          | scalar        | NULL        | NULL    |          |
+| duck_block_valid              | scalar        | NULL        | NULL    |          |
+| duck_blocks_assemble          | scalar        | NULL        | NULL    |          |
+| duck_blocks_code_blocks       | scalar        | NULL        | NULL    |          |
+| duck_blocks_concat            | scalar        | NULL        | NULL    |          |
+| duck_blocks_diff              | table_macro   | NULL        | NULL    |          |
+| duck_blocks_document          | scalar        | NULL        | NULL    |          |
+| duck_blocks_exclude           | scalar        | NULL        | NULL    |          |
+| duck_blocks_filter            | scalar        | NULL        | NULL    |          |
+| duck_blocks_get_pages         | macro         | NULL        | NULL    |          |
+| duck_blocks_get_section       | macro         | NULL        | NULL    |          |
+| duck_blocks_headings          | scalar        | NULL        | NULL    |          |
+| duck_blocks_inlines_to_pandoc | scalar        | NULL        | NULL    |          |
+| duck_blocks_links             | scalar        | NULL        | NULL    |          |
+| duck_blocks_lint              | scalar        | NULL        | NULL    |          |
+| duck_blocks_merge             | scalar        | NULL        | NULL    |          |
+| duck_blocks_normalize         | scalar        | NULL        | NULL    |          |
+| duck_blocks_page_rows         | table_macro   | NULL        | NULL    |          |
+| duck_blocks_quality           | table_macro   | NULL        | NULL    |          |
+| duck_blocks_rebase_levels     | scalar        | NULL        | NULL    |          |
+| duck_blocks_render_ansi       | scalar        | NULL        | NULL    |          |
+| duck_blocks_reorder           | scalar        | NULL        | NULL    |          |
+| duck_blocks_sections_like     | table_macro   | NULL        | NULL    |          |
+| duck_blocks_slice             | scalar        | NULL        | NULL    |          |
+| duck_blocks_stamp             | scalar        | NULL        | NULL    |          |
+| duck_blocks_stats             | scalar        | NULL        | NULL    |          |
+| duck_blocks_structure         | scalar        | NULL        | NULL    |          |
+| duck_blocks_to_pandoc_ast     | scalar        | NULL        | NULL    |          |
+| duck_blocks_to_pandoc_blocks  | scalar        | NULL        | NULL    |          |
+| duck_blocks_to_text           | scalar        | NULL        | NULL    |          |
+| duck_blocks_toc               | scalar        | NULL        | NULL    |          |
+| duck_blocks_toc_rows          | table_macro   | NULL        | NULL    |          |
+| duck_blocks_validate          | scalar        | NULL        | NULL    |          |
+| duck_blocks_version           | scalar        | NULL        | NULL    |          |
+| pandoc_ast                    | table         | NULL        | NULL    |          |
+| pandoc_ast_to_blocks          | scalar        | NULL        | NULL    |          |
+| pandoc_inlines_to_db_inlines  | scalar        | NULL        | NULL    |          |
+| pandoc_inlines_to_text        | scalar        | NULL        | NULL    |          |
+| read_pandoc_ast               | scalar        | NULL        | NULL    |          |
+| to_duck_block                 | scalar        | NULL        | NULL    |          |
+| write_pandoc_ast              | scalar        | NULL        | NULL    |          |
 
 ### Overloaded Functions
 
