@@ -1536,6 +1536,10 @@
                   "url": "http_import"
                 },
                 {
+                  "page": "HTTP CSV Import",
+                  "url": "http_csv_import"
+                },
+                {
                   "page": "S3 Parquet Import",
                   "url": "s3_import"
                 },
