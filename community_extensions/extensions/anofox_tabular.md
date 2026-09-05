@@ -20,8 +20,8 @@ repo:
 
 extension_star_count: 19
 extension_star_count_pretty: 19
-extension_download_count: 661
-extension_download_count_pretty: 661
+extension_download_count: 692
+extension_download_count_pretty: 692
 image: '/images/community_extensions/social_preview/preview_community_extension_anofox_tabular.png'
 layout: community_extension_doc
 ---

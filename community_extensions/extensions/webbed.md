@@ -104,10 +104,10 @@ docs:
 
     Built on libxml2 for robust, standards-compliant parsing with comprehensive error handling and memory-safe RAII implementation. 100 test suites with 3828 assertions, including DOM/SAX equivalence, adversarial/security, and multi-file parallelism testing. The extension supports mixed file systems, configurable schema inference, and efficient processing of large document collections.
 
-extension_star_count: 72
-extension_star_count_pretty: 72
-extension_download_count: 15664
-extension_download_count_pretty: 15.7k
+extension_star_count: 73
+extension_star_count_pretty: 73
+extension_download_count: 14894
+extension_download_count_pretty: 14.9k
 image: '/images/community_extensions/social_preview/preview_community_extension_webbed.png'
 layout: community_extension_doc
 ---

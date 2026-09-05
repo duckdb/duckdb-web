@@ -45,10 +45,10 @@ docs:
     tokens, and optional TLS. See the
     [quick start and authentication guide](https://github.com/sidequery/duckflight-extension/blob/main/docs/AUTHENTICATION.md).
 
-extension_star_count: 4
-extension_star_count_pretty: 4
-extension_download_count: null
-extension_download_count_pretty: n/a
+extension_star_count: 9
+extension_star_count_pretty: 9
+extension_download_count: 111
+extension_download_count_pretty: 111
 image: '/images/community_extensions/social_preview/preview_community_extension_duckflight.png'
 layout: community_extension_doc
 ---

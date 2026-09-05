@@ -36,10 +36,10 @@ docs:
     via cfitsio) for reading astronomical catalogs and images directly
     from SQL.
 
-extension_star_count: 2
-extension_star_count_pretty: 2
-extension_download_count: 886
-extension_download_count_pretty: 886
+extension_star_count: 3
+extension_star_count_pretty: 3
+extension_download_count: 660
+extension_download_count_pretty: 660
 image: '/images/community_extensions/social_preview/preview_community_extension_astro.png'
 layout: community_extension_doc
 ---

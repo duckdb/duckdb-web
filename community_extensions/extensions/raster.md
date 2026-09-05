@@ -381,10 +381,10 @@ docs:
     - `GEOMETRY_COLUMN`: The name of the column that contains the geometry of the tiles. This column will be used to determine the spatial location and the resolution of the tiles in the output raster file.
     - `DATABAND_COLUMNS`: A list with the names of the columns that contain the data of the bands. The order of the columns in the list will determine the order of the bands in the output raster file.
 
-extension_star_count: 53
-extension_star_count_pretty: 53
-extension_download_count: 753
-extension_download_count_pretty: 753
+extension_star_count: 54
+extension_star_count_pretty: 54
+extension_download_count: 797
+extension_download_count_pretty: 797
 image: '/images/community_extensions/social_preview/preview_community_extension_raster.png'
 layout: community_extension_doc
 ---

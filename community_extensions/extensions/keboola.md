@@ -61,8 +61,8 @@ docs:
 
 extension_star_count: 0
 extension_star_count_pretty: 0
-extension_download_count: 4951
-extension_download_count_pretty: 5.0k
+extension_download_count: 4318
+extension_download_count_pretty: 4.3k
 image: '/images/community_extensions/social_preview/preview_community_extension_keboola.png'
 layout: community_extension_doc
 ---

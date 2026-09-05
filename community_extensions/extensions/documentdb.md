@@ -34,8 +34,8 @@ docs:
     an ETL step, while remaining compatible with the broader DuckDB extension model.
 extension_star_count: 0
 extension_star_count_pretty: 0
-extension_download_count: 97
-extension_download_count_pretty: 97
+extension_download_count: 207
+extension_download_count_pretty: 207
 image: '/images/community_extensions/social_preview/preview_community_extension_documentdb.png'
 layout: community_extension_doc
 ---
