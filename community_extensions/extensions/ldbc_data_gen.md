@@ -54,10 +54,10 @@ docs:
 
     The generator is designed for reproducible benchmark data generation and local validation workflows without requiring Spark.
 
-extension_star_count: 0
-extension_star_count_pretty: 0
-extension_download_count: 697
-extension_download_count_pretty: 697
+extension_star_count: 1
+extension_star_count_pretty: 1
+extension_download_count: 721
+extension_download_count_pretty: 721
 image: '/images/community_extensions/social_preview/preview_community_extension_ldbc_data_gen.png'
 layout: community_extension_doc
 ---
