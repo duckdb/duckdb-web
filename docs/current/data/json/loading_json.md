@@ -200,6 +200,7 @@ Besides the `maximum_object_size`, `format`, `ignore_errors` and `compression`, 
 | `union_by_name` | Whether the schemas of multiple JSON files should be [unified]({% link docs/current/data/multiple_files/combining_schemas.md %}) | `BOOL` | `false` |
 | `map_inference_threshold` | Controls the threshold for number of columns whose schema will be auto-detected; if JSON schema auto-detection would infer a `STRUCT` type for a field that has _more_ than this threshold number of subfields, it infers a `MAP` type instead. Set to `-1` to disable `MAP` inference. | `BIGINT` | `200` |
 | `field_appearance_threshold` | The JSON reader divides the number of appearances of each JSON field by the auto-detection sample size. If the average over the fields of an object is less than this threshold, it will default to using a `MAP` type with value type of merged field types. | `DOUBLE` | `0.1` |
+| `geojson` | When `true`, parse GeoJSON geometry objects as `GEOMETRY` instead of `JSON`/`STRUCT`. Stray GeoJSON fragments in ordinary JSON are not inferred unless this is set. | `BOOL` | `false` |
 
 Note that DuckDB can convert JSON arrays directly to its internal `LIST` type, and missing keys become `NULL`:
 
@@ -347,6 +348,17 @@ We can also create a table from the auto-detected schema:
 CREATE TABLE numbers AS
     FROM 'numbers.json';
 ```
+
+## GeoJSON
+
+The `json` extension can read [GeoJSON](https://geojson.org/) when you opt in. Pass `geojson := true` to `read_json` so geometry objects become `GEOMETRY` (the `spatial` type) instead of generic JSON:
+
+```sql
+SELECT *
+FROM read_json('features.geojson', geojson := true);
+```
+
+`.geojson` / `.geojsonl` files are also recognized as JSON replacements. Convert with `st_geomfromgeojson` / `st_asgeojson`. Writing FeatureCollections is documented on the [Writing JSON]({% link docs/current/data/json/writing_json.md %}) page.
 
 ### Parameters
 
