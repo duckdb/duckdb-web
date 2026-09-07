@@ -172,6 +172,15 @@ EXECUTE v1('lineitem.json');
 
 The `COPY ... TO` function can be called specifying either a table name, or a query. When a table name is specified, the contents of the entire table will be written into the resulting file. When a query is specified, the query is executed and the result of the query is written to the resulting file.
 
+`COPY ... TO` can also be used as a CTE body. The CTE returns the number of rows written. `COPY ... FROM` cannot be used as a CTE body.
+
+```sql
+WITH copied(rows_written) AS (
+    COPY lineitem TO 'lineitem.csv' (FORMAT CSV, HEADER)
+)
+SELECT rows_written FROM copied;
+```
+
 Copy the contents of the `lineitem` table to a CSV file with a header:
 
 ```sql
