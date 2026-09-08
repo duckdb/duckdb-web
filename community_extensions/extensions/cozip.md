@@ -8,39 +8,48 @@ excerpt: |
 extension:
   name: cozip
   description: Cloud-Optimized ZIP reader for DuckDB
-  version: 1.2.0
+  version: 2.0.1
   language: C++
   build: cmake
   license: MIT
+  excluded_platforms: "wasm_mvp;wasm_eh;wasm_threads"
   maintainers:
     - csaybar
     - ryali93
 repo:
   github: asterisk-labs/cozip_reader
-  ref: 593d2853a294c33dc1c505c5d7c504159b332489
+  ref: 7af22df789f3ece8301492b7e229b968664fcd56
 docs:
   hello_world: |
     INSTALL cozip FROM community;
     LOAD cozip;
 
-    SELECT *
-    FROM read_cozip('https://huggingface.co/datasets/Major-TOM/Core-VIIRS-Nighttime-Light/resolve/main/2024/MAJORTOM-VIIRS-NTL_2024_median_000.zip')
-    LIMIT 10;
+    -- One row per sample, one column per file, ready for a dataloader.
+    SELECT * FROM read_taco('https://example.org/cloudsen12.zip') LIMIT 10;
+
+    -- A Flat-profile archive is a plain manifest instead.
+    SELECT * FROM read_flat('https://example.org/dataset.zip') LIMIT 10;
+
   extended_description: |
-    cozip replaces the ZIP Central Directory scan with a Parquet metadata
-    file located through a fixed 51-byte header at byte 0 of the archive.
-    read_cozip(path) reads that Parquet directly through a virtual
-    cozip-subfile filesystem, so range requests flow lazily through the
-    underlying transport. Works on local files and remote URLs (HTTPS, S3,
-    GCS, Azure, HuggingFace), on native and WebAssembly. Every row gets
-    an extra cozip:gdal_vsi column with a /vsisubfile/ path that opens
-    the referenced inner file in GDAL or rasterio without re-downloading
-    the archive.
+    cozip puts an index at byte 0 of a ZIP archive, so a reader reaches any
+    file inside it in one range request instead of scanning the Central
+    Directory. This extension reads both cozip profiles without downloading
+    the archive, over HTTPS, S3, GCS, Azure or HuggingFace.
+
+    read_flat(path) returns the Flat-profile manifest: one row per entry with
+    name, offset, size and whatever columns the writer added.
+
+    read_taco(path) returns one row per sample with one column per file in the
+    contract. Pass pivoted := false for one row per file. It reads .zip,
+    FOLDER, and TACOCAT datasets.
+
+    Every data column holds a GDAL /vsisubfile/ path that opens the referenced
+    file in GDAL, rasterio or terra without extracting the archive.
 
 extension_star_count: 7
 extension_star_count_pretty: 7
-extension_download_count: 664
-extension_download_count_pretty: 664
+extension_download_count: 900
+extension_download_count_pretty: 900
 image: '/images/community_extensions/social_preview/preview_community_extension_cozip.png'
 layout: community_extension_doc
 ---
@@ -69,8 +78,17 @@ LOAD {{ page.extension.name }};
 |   function_name   | function_type | description | comment | examples |
 |-------------------|---------------|-------------|---------|----------|
 | cozip_offset_size | scalar        | NULL        | NULL    |          |
+| cozip_profile     | scalar        | NULL        | NULL    |          |
 | cozip_vsi_base    | scalar        | NULL        | NULL    |          |
 | read_cozip        | table_macro   | NULL        | NULL    |          |
+| read_flat         | table_macro   | NULL        | NULL    |          |
+| read_taco         | table_macro   | NULL        | NULL    |          |
+| taco_collection   | scalar        | NULL        | NULL    |          |
+| taco_contract     | table_macro   | NULL        | NULL    |          |
+| taco_derived      | scalar        | NULL        | NULL    |          |
+| taco_levels       | scalar        | NULL        | NULL    |          |
+| taco_sql          | scalar        | NULL        | NULL    |          |
+| taco_structure    | scalar        | NULL        | NULL    |          |
 
 ### Overloaded Functions
 

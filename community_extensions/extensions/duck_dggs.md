@@ -9,7 +9,7 @@ extension:
   name: duck_dggs
   description: DuckDB extension for discrete global grid systems (DGGS) powered by DGGRID v8.
   
-  version: 0.1.8
+  version: 0.1.9 # x-release-please-version
   language: C++
   build: cmake
   license: MIT
@@ -18,7 +18,7 @@ extension:
 
 repo:
   github: am2222/duckdb-dggs
-  ref: bbcfb2518e6950b8d30bdae1e9c4280fb98bcfb1
+  ref: 998d9a9f749f427a31cb83a1f237fd11dc899579
 
 docs:
   hello_world: |
@@ -145,11 +145,12 @@ docs:
     - `igeo7_is_valid` — false only for the `UINT64_MAX` invalid-neighbour sentinel
     - `igeo7_decode_str` — verbose `base-d1.d2…d20` form showing all 20 slots (SQL macro)
     - `igeo7_string_parent` / `igeo7_string_local_pos` / `igeo7_string_is_center` — compact-string helpers (SQL macros)
+    - `igeo7_geo_to_authalic` / `igeo7_authalic_to_geo` — remap each vertex's latitude in a `GEOMETRY` between WGS84 geodetic and authalic (equal-area sphere) using the Karney 2022 order-6 polynomial Fourier series; useful before equal-area binning of lon/lat data
 
 extension_star_count: 1
 extension_star_count_pretty: 1
-extension_download_count: 891
-extension_download_count_pretty: 891
+extension_download_count: 440
+extension_download_count_pretty: 440
 image: '/images/community_extensions/social_preview/preview_community_extension_duck_dggs.png'
 layout: community_extension_doc
 ---

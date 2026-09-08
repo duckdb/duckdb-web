@@ -8,7 +8,7 @@ excerpt: |
 extension:
   name: markdown
   description: Read, analyze, and write Markdown files with block-level document representation and inline element support
-  version: 1.7.0
+  version: 1.8.0
   language: C++
   build: cmake
   license: MIT
@@ -18,10 +18,9 @@ extension:
 repo:
   github: teaguesterling/duckdb_markdown
   # andium (DuckDB v1.4.5 track) intentionally left at its prior commit; every
-  # change since -- v1.5.1 structured inline blocks, the v1.5.2 UTF-8 truncation
-  # fix, and v1.6.0 -- ships on the v1.5.x track via ref, which is a v1.5.4 tree.
+  # change since ships on the v1.5.x track via ref, which is a v1.5.4 tree.
   andium: c9e1a4d3b98a814c86295ecb2ed760be286242ba
-  ref: 340c0cd59701f74e9ec29d7e4515c4c3b1bf27b1
+  ref: 75e9d0bc00549d9af7d140920843ecc539f9ac44
 docs:
   hello_world: |
     -- Load the extension
@@ -112,11 +111,11 @@ docs:
 
     Real-world benchmark: Processing 287 Markdown files (2,699 sections, 1,137 code blocks, 1,174 links) in 603ms.
 
-    Full test suite with 1190 passing assertions across 24 test files.
+    Full test suite with 1818 passing assertions across 50 test files.
 
 extension_star_count: 29
 extension_star_count_pretty: 29
-extension_download_count: 1105
+extension_download_count: 1071
 extension_download_count_pretty: 1.1k
 image: '/images/community_extensions/social_preview/preview_community_extension_markdown.png'
 layout: community_extension_doc

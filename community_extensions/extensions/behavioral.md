@@ -58,8 +58,8 @@ docs:
 
 extension_star_count: 13
 extension_star_count_pretty: 13
-extension_download_count: 6621
-extension_download_count_pretty: 6.6k
+extension_download_count: 12859
+extension_download_count_pretty: 12.9k
 image: '/images/community_extensions/social_preview/preview_community_extension_behavioral.png'
 layout: community_extension_doc
 ---

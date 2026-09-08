@@ -20,12 +20,12 @@ extension:
 repo:
   andium: 3fb0a957c3e497fb3513dcf4c0f70ec599bbc0d3
   github: query-farm/lindel
-  ref: 7cca5986cac2dab981b41c4fa279d162823fd22f
+  ref: 6435106a0d895ff63a72aaf5da5d7312980e8a54
 
 extension_star_count: 66
 extension_star_count_pretty: 66
-extension_download_count: 3265
-extension_download_count_pretty: 3.3k
+extension_download_count: 3239
+extension_download_count_pretty: 3.2k
 image: '/images/community_extensions/social_preview/preview_community_extension_lindel.png'
 layout: community_extension_doc
 ---

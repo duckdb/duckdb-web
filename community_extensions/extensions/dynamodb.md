@@ -37,7 +37,7 @@ docs:
     WHERE createdAt::timestamp > '2026-05-01 00:00:00'::TIMESTAMP;
     
 
-extended_description: |
+  extended_description: |
     This extension adds support for querying DynamoDB tables directly from DuckDB. 
     It implements filter pushdown on partition keys, sort keys, and GSIs to minimize read capacity consumption, with remaining filtering and all aggregation handled by DuckDB's execution engine.
     For a detailed description take a look at the [extension repository](https://github.com/lukaswelsch/duckdb-dynamodb). 
@@ -53,10 +53,10 @@ extended_description: |
     - **hybrid_threshold (0.8)**: Attributes must appear in this percent of samples to be a column
     - **sample_size (200)**: How many rows should be checked to infer the schema from.
 
-extension_star_count: 0
-extension_star_count_pretty: 0
-extension_download_count: null
-extension_download_count_pretty: n/a
+extension_star_count: 2
+extension_star_count_pretty: 2
+extension_download_count: 258
+extension_download_count_pretty: 258
 image: '/images/community_extensions/social_preview/preview_community_extension_dynamodb.png'
 layout: community_extension_doc
 ---

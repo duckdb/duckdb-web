@@ -8,7 +8,7 @@ excerpt: |
 extension:
   name: dash
   description: A fully visual data explorer and GUI for DuckDB. Create interactive dashboards and DAG pipelines.
-  version: 0.3.0
+  version: 0.4.1
   language: C++
   build: cmake
   license: MIT
@@ -17,7 +17,7 @@ extension:
 
 repo:
   github: gropaul/dash
-  ref: c2c520e4667a42b3d5d6fa72b0f21f20b15bbdc1
+  ref: 112fe847a75097306ee37a7d8d3c35747f5bc816
 
 docs:
   hello_world: |
@@ -35,10 +35,10 @@ docs:
     Dash also supports interactive widgets: Visualize a query as a Dropdown, and macros referencing it will automatically filter to the selected value.
     
     →  [GitHub](https://github.com/gropaul/dash) · [Web Version](https://www.app.dash.builders/) · [Documentation & Demo](https://www.dash.builders/)
-extension_star_count: 102
-extension_star_count_pretty: 102
-extension_download_count: 921
-extension_download_count_pretty: 921
+extension_star_count: 103
+extension_star_count_pretty: 103
+extension_download_count: 954
+extension_download_count_pretty: 954
 image: '/images/community_extensions/social_preview/preview_community_extension_dash.png'
 layout: community_extension_doc
 ---
@@ -67,6 +67,7 @@ LOAD {{ page.extension.name }};
 | function_name | function_type | description | comment | examples |
 |---------------|---------------|-------------|---------|----------|
 | dash          | pragma        | NULL        | NULL    |          |
+| dash_home     | pragma        | NULL        | NULL    |          |
 | query_result  | table         | NULL        | NULL    |          |
 | start_dash    | table         | NULL        | NULL    |          |
 | stop_dash     | table         | NULL        | NULL    |          |

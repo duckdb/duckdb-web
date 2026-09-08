@@ -18,12 +18,12 @@ extension:
   name: geosilo
 repo:
   github: Query-farm/geosilo
-  ref: 9faee3aacf67ba5dae40a98cc9bb440b289617d8
+  ref: d088741d5b3a2bd2a574da54930cae58e6a9d20c
 
 extension_star_count: 25
 extension_star_count_pretty: 25
-extension_download_count: 621
-extension_download_count_pretty: 621
+extension_download_count: 748
+extension_download_count_pretty: 748
 image: '/images/community_extensions/social_preview/preview_community_extension_geosilo.png'
 layout: community_extension_doc
 ---

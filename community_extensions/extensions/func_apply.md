@@ -8,7 +8,7 @@ excerpt: |
 extension:
   name: func_apply
   description: Dynamic function invocation - call any scalar function or macro by name at runtime
-  version: 0.2.0
+  version: 0.3.0
   language: C++
   build: cmake
   license: MIT
@@ -17,11 +17,12 @@ extension:
 repo:
   github: teaguesterling/duckdb_func_apply
   # andium (DuckDB v1.4.5 track) intentionally left at the pre-v0.2.0 commit:
-  # v0.2.0 is a DuckDB v1.5.4 tree and is not built-verified against v1.4.5.
-  # The v0.2.0 security fix (GHSA-55g5-vp25-phpg) is delivered on the v1.5.4
-  # track via `ref`; v1.4.5 users should move to the v1.5.4 track.
+  # v0.3.0, like v0.2.0 before it, is a DuckDB v1.5.4 tree and is not
+  # build-verified against v1.4.5. The v0.2.0 security fix
+  # (GHSA-55g5-vp25-phpg) is delivered on the v1.5.4 track via `ref`;
+  # v1.4.5 users should move to the v1.5.4 track.
   andium: 2013ac345d6f19e61ee78cacae161eb272cf1837
-  ref: refs/tags/v0.2.0
+  ref: ed51705a1db83eb382423aff564fe8373c2322b7
 docs:
   hello_world: |
     -- Load the extension
@@ -118,8 +119,8 @@ docs:
 
 extension_star_count: 3
 extension_star_count_pretty: 3
-extension_download_count: 931
-extension_download_count_pretty: 931
+extension_download_count: 788
+extension_download_count_pretty: 788
 image: '/images/community_extensions/social_preview/preview_community_extension_func_apply.png'
 layout: community_extension_doc
 ---

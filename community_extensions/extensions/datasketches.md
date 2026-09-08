@@ -21,12 +21,12 @@ extension:
 repo:
   andium: d758a5a4e8dc40119ced5e74660ee841960f1788
   github: query-farm/datasketches
-  ref: 44e63f87c97cd3c33714dbfbccfd5a582ced4fac
+  ref: 02bdbbe8552ea02c544c9e4c81cbf0d17c7f2533
 
-extension_star_count: 49
-extension_star_count_pretty: 49
-extension_download_count: 82597
-extension_download_count_pretty: 82.6k
+extension_star_count: 50
+extension_star_count_pretty: 50
+extension_download_count: 71853
+extension_download_count_pretty: 71.9k
 image: '/images/community_extensions/social_preview/preview_community_extension_datasketches.png'
 layout: community_extension_doc
 ---

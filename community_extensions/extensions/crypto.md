@@ -21,12 +21,12 @@ extension:
 repo:
   andium: 0840a76e0a50c4c6e27f5432221166c829c00413
   github: query-farm/crypto
-  ref: d00273663b08101a78f58f84f933439b02ab2240
+  ref: 7d71c89b04d5e4b1c74d69621c1b607f69436cbe
 
 extension_star_count: 31
 extension_star_count_pretty: 31
-extension_download_count: 16398
-extension_download_count_pretty: 16.4k
+extension_download_count: 17371
+extension_download_count_pretty: 17.4k
 image: '/images/community_extensions/social_preview/preview_community_extension_crypto.png'
 layout: community_extension_doc
 ---
