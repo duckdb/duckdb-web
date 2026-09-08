@@ -21,12 +21,12 @@ extension:
 repo:
   andium: 57a34490474678f4d8706418d4a1c568da44068c
   github: query-farm/bitfilters
-  ref: 600e013ae543a81b25eaa65ed616ae9b5f1bb618
+  ref: 53bc84994882fdde2834e913b2367f9296040c79
 
 extension_star_count: 9
 extension_star_count_pretty: 9
-extension_download_count: 1702
-extension_download_count_pretty: 1.7k
+extension_download_count: 1762
+extension_download_count_pretty: 1.8k
 image: '/images/community_extensions/social_preview/preview_community_extension_bitfilters.png'
 layout: community_extension_doc
 ---

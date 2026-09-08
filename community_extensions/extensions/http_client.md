@@ -57,13 +57,14 @@ extension:
   name: http_client
   version: '2026082701'
 repo:
+  andium: e9730fc28af6757f663246f06956a8cab7ad9a55
   github: query-farm/httpclient
-  ref: b13df7a2c53dc1180b4aa6d6899c99742f4ee919
+  ref: f0fedb2be88aebe9a972f5d4d0deac6f1372e766
 
 extension_star_count: 80
 extension_star_count_pretty: 80
-extension_download_count: 3914
-extension_download_count_pretty: 3.9k
+extension_download_count: 4479
+extension_download_count_pretty: 4.5k
 image: '/images/community_extensions/social_preview/preview_community_extension_http_client.png'
 layout: community_extension_doc
 ---

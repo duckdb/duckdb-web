@@ -177,8 +177,8 @@ docs:
 
 extension_star_count: 4
 extension_star_count_pretty: 4
-extension_download_count: 616
-extension_download_count_pretty: 616
+extension_download_count: 654
+extension_download_count_pretty: 654
 image: '/images/community_extensions/social_preview/preview_community_extension_firebird.png'
 layout: community_extension_doc
 ---

@@ -8,7 +8,7 @@ excerpt: |
 extension:
   name: duckdb_mcp
   description: Model Context Protocol (MCP) extension for DuckDB that enables seamless integration between SQL databases and MCP servers. Provides both client capabilities for accessing remote MCP resources via SQL and server capabilities for exposing database content as MCP resources.
-  version: 2.2.0
+  version: 2.3.0
   language: C++
   build: cmake
   license: Apache-2.0
@@ -17,7 +17,7 @@ extension:
     - teaguesterling
 repo:
   github: teaguesterling/duckdb_mcp
-  ref: 7db1650a1b4c04914ae724dd43244e690094ffc0
+  ref: a6b8648e4e0ec121da534b704b962ac41e2638bf
 
 docs:
   hello_world: |
@@ -95,8 +95,8 @@ docs:
 
 extension_star_count: 63
 extension_star_count_pretty: 63
-extension_download_count: 775
-extension_download_count_pretty: 775
+extension_download_count: 965
+extension_download_count_pretty: 965
 image: '/images/community_extensions/social_preview/preview_community_extension_duckdb_mcp.png'
 layout: community_extension_doc
 ---
@@ -177,15 +177,16 @@ This extension does not add any types.
 
 <div class="extension_settings_table"></div>
 
-|         name         |                                                   description                                                    | input_type | scope  | aliases |
-|----------------------|------------------------------------------------------------------------------------------------------------------|------------|--------|---------|
-| allowed_mcp_commands | Colon-delimited list of executable paths allowed for MCP servers (security: executable paths only, no arguments) | VARCHAR    | GLOBAL | []      |
-| allowed_mcp_urls     | Space-delimited list of URL prefixes allowed for MCP servers                                                     | VARCHAR    | GLOBAL | []      |
-| mcp_console_logging  | Enable MCP logging to console/stderr                                                                             | BOOLEAN    | GLOBAL | []      |
-| mcp_disable_serving  | Disable MCP server functionality entirely (client-only mode)                                                     | BOOLEAN    | GLOBAL | []      |
-| mcp_lock_servers     | Lock MCP server configuration to prevent runtime changes (security feature)                                      | BOOLEAN    | GLOBAL | []      |
-| mcp_log_file         | Path to MCP log file (empty for no file logging)                                                                 | VARCHAR    | GLOBAL | []      |
-| mcp_log_level        | MCP logging level (trace, debug, info, warn, error, off)                                                         | VARCHAR    | GLOBAL | []      |
-| mcp_server_file      | Path to MCP server configuration file                                                                            | VARCHAR    | GLOBAL | []      |
+|          name          |                                                                                       description                                                                                        | input_type | scope  | aliases |
+|------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|------------|--------|---------|
+| allowed_mcp_commands   | Colon-delimited list of executable paths allowed for MCP servers (security: executable paths only, no arguments)                                                                         | VARCHAR    | GLOBAL | []      |
+| allowed_mcp_urls       | Space-delimited list of URL prefixes allowed for MCP servers                                                                                                                             | VARCHAR    | GLOBAL | []      |
+| mcp_allow_all_commands | INSECURE opt-in: when true, allow spawning ANY command if no allowed_mcp_commands allowlist is set. Default false = deny-all (fail-closed). Prefer setting allowed_mcp_commands instead. | BOOLEAN    | GLOBAL | []      |
+| mcp_console_logging    | Enable MCP logging to console/stderr                                                                                                                                                     | BOOLEAN    | GLOBAL | []      |
+| mcp_disable_serving    | Disable MCP server functionality entirely (client-only mode)                                                                                                                             | BOOLEAN    | GLOBAL | []      |
+| mcp_lock_servers       | Lock MCP server configuration to prevent runtime changes (security feature)                                                                                                              | BOOLEAN    | GLOBAL | []      |
+| mcp_log_file           | Path to MCP log file (empty for no file logging)                                                                                                                                         | VARCHAR    | GLOBAL | []      |
+| mcp_log_level          | MCP logging level (trace, debug, info, warn, error, off)                                                                                                                                 | VARCHAR    | GLOBAL | []      |
+| mcp_server_file        | Path to MCP server configuration file                                                                                                                                                    | VARCHAR    | GLOBAL | []      |
 
 

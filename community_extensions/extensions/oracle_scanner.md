@@ -8,7 +8,7 @@ excerpt: |
 extension:
   name: oracle_scanner
   description: Read and write Oracle Database with no Oracle client
-  version: '0.2.0'
+  version: '0.2.2'
   language: C++
   build: cmake
   license: Apache-2.0
@@ -19,13 +19,13 @@ extension:
 
 repo:
   github: krokozyab/quack-oracle
-  # The commit tagged v0.2.0, pinned by SHA so what is built cannot move.
-  ref: 60bb95fa0bba53ec7446aa810042e2055758ef64
+  # The commit tagged v0.2.2, pinned by SHA so what is built cannot move.
+  ref: 8a368747f710366fd69bb715089e69165292e685
 
 extension_star_count: 2
 extension_star_count_pretty: 2
-extension_download_count: 374
-extension_download_count_pretty: 374
+extension_download_count: 649
+extension_download_count_pretty: 649
 image: '/images/community_extensions/social_preview/preview_community_extension_oracle_scanner.png'
 layout: community_extension_doc
 ---

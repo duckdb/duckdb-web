@@ -21,12 +21,12 @@ extension:
 repo:
   andium: db7e2017352a63d43da4c9391321fb66f4d1e18b
   github: query-farm/textplot
-  ref: 5bf843f223966519c8f1c7a7bd94e5ae5cfb4e98
+  ref: ea239eeb23dbdb75c252af93fbecc358207a5218
 
 extension_star_count: 27
 extension_star_count_pretty: 27
-extension_download_count: 690
-extension_download_count_pretty: 690
+extension_download_count: 860
+extension_download_count_pretty: 860
 image: '/images/community_extensions/social_preview/preview_community_extension_textplot.png'
 layout: community_extension_doc
 ---

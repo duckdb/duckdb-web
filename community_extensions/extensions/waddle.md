@@ -36,8 +36,8 @@ docs:
 
 extension_star_count: 289
 extension_star_count_pretty: 289
-extension_download_count: 302
-extension_download_count_pretty: 302
+extension_download_count: 710
+extension_download_count_pretty: 710
 image: '/images/community_extensions/social_preview/preview_community_extension_waddle.png'
 layout: community_extension_doc
 ---

@@ -21,12 +21,12 @@ extension:
 repo:
   andium: 0ace6af84ec2289c23944857fd9aded06e65ec9c
   github: query-farm/radio
-  ref: ca2f4c3109e4f3afa115923862601a8b4cc3c619
+  ref: 212e56969007de6d1534fca053dad0e6f9389484
 
 extension_star_count: 43
 extension_star_count_pretty: 43
-extension_download_count: 769
-extension_download_count_pretty: 769
+extension_download_count: 941
+extension_download_count_pretty: 941
 image: '/images/community_extensions/social_preview/preview_community_extension_radio.png'
 layout: community_extension_doc
 ---

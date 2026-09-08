@@ -8,7 +8,7 @@ excerpt: |
 extension:
   name: raster
   description: DuckDB extension for reading and writing geospatial raster data using SQL.
-  version: 1.5.0
+  version: 1.6.0
   language: C++
   build: cmake
   excluded_platforms: "wasm_mvp;wasm_eh;wasm_threads"
@@ -18,7 +18,7 @@ extension:
 
 repo:
   github: ahuarte47/duckdb-raster
-  ref: a2690f6b67dbd2555cf971cd9b9fceb9a977d9be
+  ref: 614d8b06216434ac5d58baf0e85f9f72a82c904d
 
 docs:
   hello_world: |
@@ -381,10 +381,10 @@ docs:
     - `GEOMETRY_COLUMN`: The name of the column that contains the geometry of the tiles. This column will be used to determine the spatial location and the resolution of the tiles in the output raster file.
     - `DATABAND_COLUMNS`: A list with the names of the columns that contain the data of the bands. The order of the columns in the list will determine the order of the bands in the output raster file.
 
-extension_star_count: 53
-extension_star_count_pretty: 53
-extension_download_count: 753
-extension_download_count_pretty: 753
+extension_star_count: 54
+extension_star_count_pretty: 54
+extension_download_count: 857
+extension_download_count_pretty: 857
 image: '/images/community_extensions/social_preview/preview_community_extension_raster.png'
 layout: community_extension_doc
 ---
@@ -452,6 +452,8 @@ LOAD {{ page.extension.name }};
 | RT_RasterValues     | scalar        | Returns the values in a band of a datacube at the specified array of pixel coordinates (column, row).                                                                                                | NULL    | [SELECT RT_RasterValues(databand_1, 0, [10, 11], [20, 21], -9999.0) FROM RT_Read('path/to/raster/file.tif');]                                    |
 | RT_Read             | table         | Opens a raster file (or a mosaic of raster files) and returns a table with the raster data. Supports filter pushdown on all non-BLOB columns.                                                        | NULL    | [SELECT * FROM RT_Read('path/to/raster/file.tif');]                                                                                              |
 | RT_ReadCells        | table         | Reads a raster file (or a mosaic of raster files) and returns a table with one row per value cell in the raster.                                                                                     | NULL    | [SELECT id, x, y, geometry, col, row, band_1, band_2, band_3 FROM RT_ReadCells('path/to/raster/file.tif');]                                      |
+| RT_Metadata         | scalar        | NULL                                                                                                                                                                                                 | NULL    | NULL                                                                                                                                             |
+| RT_Stats            | scalar        | NULL                                                                                                                                                                                                 | NULL    | NULL                                                                                                                                             |
 | RT_Cube2ArrayInt32  | scalar        | NULL                                                                                                                                                                                                 | NULL    | NULL                                                                                                                                             |
 | RT_Cube2TypeUInt64  | scalar        | NULL                                                                                                                                                                                                 | NULL    | NULL                                                                                                                                             |
 | RT_Cube2TypeInt8    | scalar        | NULL                                                                                                                                                                                                 | NULL    | NULL                                                                                                                                             |
