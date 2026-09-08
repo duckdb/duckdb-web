@@ -27,18 +27,7 @@ There are currently the following DuckDB versions under development:
 
 ## Command Line Interface (CLI), C and C++ Clients
 
-For the CLI, C and C++ clients, there are three preview builds available
-
-### v1.4-dev
-
-To download the CLI or the C/C++ libraries as a package, use the following links:
-
-| Platform | Architecture       | v1.4-dev                                                                        |
-| -------- | ------------------ | ------------------------------------------------------------------------------- |
-| Linux    | `arm64`            | [zip](https://artifacts.duckdb.org/v1.4-andium/duckdb-binaries-linux-arm64.zip) |
-| Linux    | `x86_64`           | [zip](https://artifacts.duckdb.org/v1.4-andium/duckdb-binaries-linux-amd64.zip) |
-| macOS    | `arm64` / `x86_64` | [zip](https://artifacts.duckdb.org/v1.4-andium/duckdb-binaries-osx.zip)         |
-| Windows  | `arm64` / `x86_64` | [zip](https://artifacts.duckdb.org/v1.4-andium/duckdb-binaries-windows.zip)     |
+For the CLI, C and C++ clients, there are two preview builds available: v1.5-dev and v2.0-dev.
 
 ### v1.5-dev
 
@@ -71,7 +60,7 @@ To download the v2.0-dev CLI as an archive, use the following links:
 | Windows  | `arm64`            | [tar.gz](https://artifacts.duckdb.org/v2.0-cyanoptera/duckdb-cli-windows-arm64.tar.gz) |
 | Windows  | `x86_64`           | [tar.gz](https://artifacts.duckdb.org/v2.0-cyanoptera/duckdb-cli-windows-amd64.tar.gz) |
 
-#### v2.0-dev Libraries
+#### v2.0-dev C/C++ Libraries
 
 To download the v2.0-dev C/C++ libraries as an archive, use the following links:
 
@@ -109,7 +98,6 @@ pip install duckdb --pre --upgrade
 
 We are working on delivering you the latest Java client. Stay tuned.
 
-<!--
 The following Maven snippet imports the latest version of the Java package.
 To determine the version number, please visit the [latest CI builds](https://github.com/duckdb/duckdb-java/actions/workflows/Java.yml) and consult the _Maven S3 Deploy_ job's _Deploy snapshot to S3_ task.
 
@@ -118,20 +106,17 @@ To determine the version number, please visit the [latest CI builds](https://git
     <dependency>
         <groupId>org.duckdb</groupId>
         <artifactId>duckdb_jdbc</artifactId>
-        this is the latest build as of 2026-09-02
-        <version>828-a07f265</version>
+        <version>2.0.0-alpha38615-276d6db</version>
     </dependency>
 </dependencies>
 
 <repositories>
     <repository>
-        <id>central-snapshots</id>
-        <url>https://duckdb-staging.duckdb.org/duckdb/duckdb-java/maven</url>
-        <snapshots><enabled>true</enabled></snapshots>
+        <id>duckdb</id>
+        <url>https://duckdb-staging.duckdb.org/duckdb/duckdb-java/maven/</url>
     </repository>
 </repositories>
 ```
--->
 
 ## Node.js (Neo)
 
