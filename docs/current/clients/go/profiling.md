@@ -85,4 +85,3 @@ After the storage is registered and selected with `SET logging_storage`, DuckDB 
 * [Profiling]({% link docs/current/dev/profiling.md %}) — DuckDB's query profiling output, the `enable_profiling` and `profiling_mode` PRAGMAs, and its logging.
 * [Run Queries]({% link docs/current/clients/go/querying.md %}) — running the queries whose metrics this page reads.
 * [Connect]({% link docs/current/clients/go/connecting.md %}) — checking out the connection that profiling operates on, and the connector that log storage is registered on.
-</content>

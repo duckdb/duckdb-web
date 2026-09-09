@@ -13,10 +13,11 @@ The Go client works through the standard [`database/sql`](https://pkg.go.dev/dat
 
 ## Opening a Database
 
-`sql.Open()` takes the driver name `duckdb` and a [data source name (DSN)](#data-source-names). An empty DSN opens an in-memory database; a file path opens a persistent database, creating the file if it does not exist:
+`sql.Open()` takes the driver name `duckdb` and a [data source name (DSN)](#data-source-names). An empty DSN, or the DSN `:memory:`, opens an in-memory database; a file path opens a persistent database, creating the file if it does not exist:
 
 ```go
 // In-memory database: nothing is persisted to disk.
+// An empty DSN and ":memory:" are equivalent.
 db, err := sql.Open("duckdb", "")
 if err != nil {
     log.Fatal(err)
@@ -65,7 +66,7 @@ db := sql.OpenDB(connector)
 defer db.Close()
 ```
 
-Pass `nil` as the callback when no initialization is needed. A `Connector` is also the entry point for the [Appender]({% link docs/current/clients/go/data_import.md %}#appender), [Arrow]({% link docs/current/clients/go/result_handling.md %}), and [replacement scans]({% link docs/current/clients/go/functions.md %}#replacement-scans), which operate on an individual connection obtained from it.
+Pass `nil` as the callback when no initialization is needed. A `Connector` is also the entry point for the [Appender]({% link docs/current/clients/go/data_import.md %}#appender) and [Arrow]({% link docs/current/clients/go/result_handling.md %}) interfaces, which operate on an individual connection obtained from it, and for [replacement scans]({% link docs/current/clients/go/functions.md %}#replacement-scans) and [log storage]({% link docs/current/clients/go/profiling.md %}#log-storage), which are registered on the `Connector` itself.
 
 ## Connection-Local Operations
 
@@ -119,4 +120,3 @@ Failing to close a persistent database can leave changes in the write-ahead log 
 * [Configuration]({% link docs/current/configuration/overview.md %}) — the full list of DuckDB settings that can be passed in the DSN or the connector callback.
 * [Concurrency]({% link docs/current/connect/concurrency.md %}) — how DuckDB handles multiple connections and threads.
 * [Troubleshoot]({% link docs/current/clients/go/troubleshoot.md %}) — cgo, linking, and other build problems encountered when opening a database.
-</content>

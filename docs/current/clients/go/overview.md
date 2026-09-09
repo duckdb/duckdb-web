@@ -51,15 +51,15 @@ import "github.com/duckdb/duckdb-go/v2"
 
 ## Versioning
 
-Starting with DuckDB v1.5.0, the `duckdb-go` version encodes the DuckDB version it bundles in its second semantic-versioning component. The format is `v2.⟨major_minor_patch⟩.x`: for example, DuckDB v1.5.0 maps to `duckdb-go` v2.10500.x, and DuckDB {{ site.current_duckdb_go_version }} maps to v2.10505.0. The [README](https://github.com/duckdb/duckdb-go#readme) has the full mapping table for earlier releases.
+Starting with DuckDB v1.5.0, the `duckdb-go` version encodes the DuckDB version it bundles in its second semantic-versioning component. That component is the DuckDB `major`, `minor`, and `patch` numbers concatenated, with `minor` and `patch` each zero-padded to two digits: DuckDB v1.5.0 maps to `duckdb-go` v2.10500.x, and DuckDB {{ site.current_duckdb_go_version }} maps to v2.10505.0. The [README](https://github.com/duckdb/duckdb-go#readme) has the full mapping table for earlier releases.
 
-For the LTS release line that stays on DuckDB 1.4 Andium, use the `v1.4-andium` branch.
+The LTS release line that stays on DuckDB 1.4 Andium is published as its own tags, which still follow the client's older versioning scheme. Select one in `go.mod` the same way as any other version; see the [releases page](https://github.com/duckdb/duckdb-go/releases) for the available tags.
 
 > This project moved from `github.com/marcboeker/go-duckdb` to `github.com/duckdb/duckdb-go` starting with v2.5.0. All versions prior to v2.5.0 use the old import paths. See [Migrating from `marcboeker/go-duckdb`](#migrating-from-marcboekergo-duckdb) below.
 
 ## Basic API Usage
 
-Open a database with `sql.Open()`, passing the driver name `duckdb` and a [data source name (DSN)](#data-source-names). An empty DSN opens an in-memory database, and a file path opens (or creates) a persistent database. From there, `Exec`, `Query`, and `QueryRow` run statements exactly as they do for any `database/sql` driver:
+Open a database with `sql.Open()`, passing the driver name `duckdb` and a [data source name (DSN)](#data-source-names). An empty DSN, or the DSN `:memory:`, opens an in-memory database, and a file path opens (or creates) a persistent database. From there, `Exec`, `Query`, and `QueryRow` run statements exactly as they do for any `database/sql` driver:
 
 ```go
 package main
@@ -112,7 +112,7 @@ This example follows the client's [`simple` example](https://github.com/duckdb/d
 The DSN passed to `sql.Open()` is the database path followed by optional [DuckDB configuration options]({% link docs/current/configuration/overview.md %}) as URL-style query parameters:
 
 ```go
-// In-memory database.
+// In-memory database: an empty DSN and ":memory:" are equivalent.
 db, err := sql.Open("duckdb", "")
 
 // Persistent database, created if it does not exist.
@@ -133,7 +133,7 @@ Some client features are gated behind Go [build tags](https://pkg.go.dev/go/buil
 | Build tag | Enables |
 |--|--|
 | `duckdb_arrow` | The [Apache Arrow interface]({% link docs/current/clients/go/result_handling.md %}). It is a heavy dependency, so it is opt-in. |
-| `duckdb_use_lib` | Dynamically link against a `libduckdb` library on the system instead of statically linking the bundled one. See [Troubleshoot]({% link docs/current/clients/go/troubleshoot.md %}#linking-a-dynamic-library). |
+| `duckdb_use_lib` | Dynamically link against a DuckDB library on the system instead of statically linking the bundled one. See [Troubleshoot]({% link docs/current/clients/go/troubleshoot.md %}#linking-a-dynamic-library). |
 | `duckdb_use_static_lib` | Statically link against a custom DuckDB static library instead of the bundled one. See [Troubleshoot]({% link docs/current/clients/go/troubleshoot.md %}#linking-a-custom-static-library). |
 
 ## Bundled Extensions
@@ -168,12 +168,10 @@ Moving to v2 also introduced a few breaking changes, including opt-in Arrow supp
 * [Import Data]({% link docs/current/clients/go/data_import.md %}) — bulk loading with the Appender and reading directly from Parquet, CSV, and JSON files.
 * [Handle Results]({% link docs/current/clients/go/result_handling.md %}) — the Apache Arrow interface for columnar result exchange.
 * [Write User Defined Functions]({% link docs/current/clients/go/functions.md %}) — scalar and table user-defined functions, and replacement scans.
-* [Profile and Monitor]({% link docs/current/clients/go/profiling.md %}) — query profiling and log storage.
+* [Profile and Monitor]({% link docs/current/clients/go/profiling.md %}) — query profiling and logging.
 * [Troubleshoot]({% link docs/current/clients/go/troubleshoot.md %}) — linking, cgo, Windows setup, and other build and runtime issues.
 * [Clients Overview]({% link docs/current/clients/overview.md %}) — the other client APIs DuckDB provides alongside Go.
 
 ## Acknowledgements
 
 We would like to thank [Marc Boeker](https://github.com/marcboeker) for the initial implementation of the DuckDB Go client and for his continued work on it as part of this joint effort with the DuckDB team.
-</content>
-</invoke>

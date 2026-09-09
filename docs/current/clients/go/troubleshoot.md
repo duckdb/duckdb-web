@@ -113,4 +113,3 @@ Starting with v2, scanning a [`JSON`]({% link docs/current/data/json/overview.md
 * [Go Client]({% link docs/current/clients/go/overview.md %}) — installation, build tags, and the bundled extensions.
 * [Connect]({% link docs/current/clients/go/connecting.md %}) — opening databases and the connection lifetime, whose failures are often build or linking problems.
 * [Run Queries]({% link docs/current/clients/go/querying.md %}) — parameter binding, including the `duckdb.Typed()` hint and JSON scanning.
-</content>

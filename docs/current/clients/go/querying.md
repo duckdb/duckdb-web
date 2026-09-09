@@ -174,4 +174,3 @@ This follows the client's [`json` example](https://github.com/duckdb/duckdb-go/t
 * [Import Data]({% link docs/current/clients/go/data_import.md %}) — the Appender, the recommended alternative to prepared statements for bulk inserts.
 * [Prepared Statements]({% link docs/current/sql/query_syntax/prepared_statements.md %}) — DuckDB's SQL-level support for the parameterized queries used here.
 * [Connect]({% link docs/current/clients/go/connecting.md %}) — opening the database that these statements run on.
-</content>

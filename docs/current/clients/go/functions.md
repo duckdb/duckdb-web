@@ -9,7 +9,7 @@ title: Write User Defined Functions
 
 ## Overview
 
-The Go client can register user-defined functions written in Go: [scalar functions](#scalar-functions) that map input rows to a single output value, and [table functions](#table-functions) that produce a set of rows. It can also register a [replacement scan](#replacement-scans) that rewrites an unresolved table name into a query. All three are registered on a connection checked out with `db.Conn()`, and the function is then callable from SQL like any built-in. The sections below build and register each.
+The Go client can register user-defined functions written in Go: [scalar functions](#scalar-functions) that map input rows to a single output value, and [table functions](#table-functions) that produce a set of rows. It can also register a [replacement scan](#replacement-scans) that rewrites an unresolved table name into a query. Scalar and table functions are registered on a connection checked out with `db.Conn()`, while a replacement scan is registered on a `Connector`; in each case the function is then callable from SQL like any built-in. The sections below build and register each.
 
 ## Scalar Functions
 
@@ -174,4 +174,3 @@ Returning an error from the callback surfaces it as a query error. This is the m
 * [Run Queries]({% link docs/current/clients/go/querying.md %}) — calling registered functions from SQL.
 * [Handle Results]({% link docs/current/clients/go/result_handling.md %}) — registering an Arrow stream as a queryable view, a related way to expose external data.
 * [Connect]({% link docs/current/clients/go/connecting.md %}) — checking out the connection that functions are registered on, and the connector for replacement scans.
-</content>

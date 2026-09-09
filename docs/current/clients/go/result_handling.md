@@ -85,4 +85,3 @@ DuckDB scans the registered view like any other table, so it can be filtered, jo
 * [Run Queries]({% link docs/current/clients/go/querying.md %}) — sending the queries whose results this page reads, and reading them row by row.
 * [Build Tags]({% link docs/current/clients/go/overview.md %}#build-tags) — the `duckdb_arrow` tag that enables the Arrow interface, and the other build tags.
 * [Write User Defined Functions]({% link docs/current/clients/go/functions.md %}) — replacement scans, another way to expose external data to SQL.
-</content>

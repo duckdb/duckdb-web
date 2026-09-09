@@ -127,4 +127,3 @@ _, err := db.ExecContext(ctx, `CREATE TABLE data AS SELECT * FROM read_parquet('
 * [Data Import]({% link docs/current/data/overview.md %}) — DuckDB's full set of bulk-loading options.
 * [Run Queries]({% link docs/current/clients/go/querying.md %}) — sending the `CREATE TABLE` and `COPY` statements the file readers build on.
 * [Connect]({% link docs/current/clients/go/connecting.md %}) — creating the `Connector` and connection the Appender operates on.
-</content>
