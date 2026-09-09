@@ -4,11 +4,9 @@ title: "DuckDB Skills for Claude Code"
 author: "The DuckDB team"
 thumb: "/images/blog/thumbs/macbook-pro.svg"
 image: "/images/blog/thumbs/macbook-pro.png"
-excerpt: "We published duckdb-skills, a Claude Code plugin that teaches the agent to use the DuckDB CLI for reading files, running queries, looking up documentation and searching its own session logs."
+excerpt: "The duckdb-skills plugin gives Claude Code a growing number of skills that use the DuckDB CLI to read data files, run queries, convert formats, explore object storage, work with spatial data, search the documentation and recall earlier sessions."
 tags: ["using DuckDB"]
 ---
-
-*TL;DR: The [`duckdb-skills`](https://github.com/duckdb/duckdb-skills) plugin gives Claude Code a growing number of skills that use the DuckDB CLI to read data files, run queries, convert formats, explore object storage, work with spatial data, search the documentation and recall earlier sessions.*
 
 More likely than not, you've been using AI tools such as Claude Code for day-to-day work. You may have noticed that when AI needs to look at a data file, it makes use of Python, writes a small script, runs it, and then reads the output.
 This works, although it is slow, and the agent guesses column names and types and doesn't really check them.
@@ -33,17 +31,17 @@ Each skill wraps a common data task behind a `/duckdb-skills:<skill-name>` slash
 
 Reading, querying and converting data:
 
-* **`read-file`** reads and profiles any data file (CSV, JSON, Parquet, Avro, Excel, spatial, SQLite, Jupyter) on local disk or in S3, GCS, Azure or HTTPS.
-    * "What columns does variants.parquet have?"
-    * "How many rows are in the CSV file at that URL?"
+* **`attach-db`** attaches a DuckDB database and records it in the session state, so the other skills can use it.
+    * "Attach my_analytics.duckdb and show me its tables."
 * **`query`** runs SQL or a plain-English question against attached databases or a file.
     * "Show me the first 10 rows of the sales table."
     * "What are the top 5 customers by revenue?"
+* **`read-file`** reads and profiles any data file (CSV, JSON, Parquet, Avro, Excel, spatial, SQLite, Jupyter) on local disk or in S3, GCS, Azure or HTTPS.
+    * "What columns does variants.parquet have?"
+    * "How many rows are in the CSV file at that URL?"
 * **`convert-file`** converts a file from one format to another.
     * "Convert sales.csv to Parquet."
     * "Save data.json as an Excel file."
-* **`attach-db`** attaches a DuckDB database and records it in the session state.
-    * "Attach my_analytics.duckdb and show me its tables."
 
 Remote and spatial data:
 
