@@ -29,7 +29,9 @@ The skills are then available as `/duckdb-skills:<skill-name>` in all subsequent
 
 ## What's in the Plugin
 
-Each skill wraps a common data task behind a `/duckdb-skills:<skill-name>` slash command:
+Each skill wraps a common data task behind a `/duckdb-skills:<skill-name>` slash command, grouped here by what they do.
+
+Reading, querying and converting data:
 
 * **`read-file`** reads and profiles any data file (CSV, JSON, Parquet, Avro, Excel, spatial, SQLite, Jupyter) on local disk or in S3, GCS, Azure or HTTPS.
     * `/duckdb-skills:read-file variants.parquet what columns does it have?`
@@ -42,17 +44,26 @@ Each skill wraps a common data task behind a `/duckdb-skills:<skill-name>` slash
     * `/duckdb-skills:convert-file data.json data.xlsx`
 * **`attach-db`** attaches a DuckDB database and records it in the session state.
     * `/duckdb-skills:attach-db my_analytics.duckdb`
+
+Remote and spatial data:
+
 * **`s3-explore`** lists and queries data on S3, R2, GCS, MinIO or any S3-compatible storage without downloading it.
     * `/duckdb-skills:s3-explore s3://my-bucket/`
     * `/duckdb-skills:s3-explore s3://my-bucket/data.parquet how many rows?`
 * **`spatial`** answers spatial questions: distances, nearest neighbors, spatial joins and geographic lookups, including free Overture Maps data.
     * `/duckdb-skills:spatial what are the 5 closest cafes to this point?`
     * `/duckdb-skills:spatial districts.geojson which districts overlap?`
+
+Documentation and session context:
+
 * **`duckdb-docs`** searches the DuckDB and [DuckLake](https://ducklake.select/) documentation and blog posts.
     * `/duckdb-skills:duckdb-docs window functions`
     * `/duckdb-skills:duckdb-docs "how do I read a CSV with custom delimiters?"`
 * **`read-memories`** searches past Claude Code session logs for earlier decisions, conventions and open TODOs.
     * `/duckdb-skills:read-memories duckdb --here`
+
+Setup:
+
 * **`install-duckdb`** installs or updates extensions, including community extensions.
     * `/duckdb-skills:install-duckdb spatial httpfs`
     * `/duckdb-skills:install-duckdb --update`
@@ -60,10 +71,6 @@ Each skill wraps a common data task behind a `/duckdb-skills:<skill-name>` slash
 The skills share a single per-project `state.sql` file, a plain SQL script of `ATTACH`, `USE` and `LOAD` statements, secrets and macros, so a session can be restored with `duckdb -init state.sql`.
 
 For session-state details and local development instructions, see the [README](https://github.com/duckdb/duckdb-skills#readme).
-
-## Platform Support
-
-The skills have been tested on macOS and Linux. On Windows, some shell commands and path handling may not work yet; we intend to address this in a later release.
 
 ## Conclusion
 
