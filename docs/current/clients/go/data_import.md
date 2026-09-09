@@ -45,7 +45,7 @@ Each argument to `AppendRow()` is a column value in table-column order, and its 
 
 > Warning The appender buffers rows and flushes them to DuckDB in chunks, so a constraint violation such as a `NOT NULL` or foreign-key failure may surface only when the buffer is flushed rather than from the `AppendRow()` call that added the offending row. Call `Flush()` and check its error to force pending rows in before relying on them, and always check the error from `Close()`, which performs a final flush.
 
-The following is the client's complete [`appender` example](https://github.com/duckdb/duckdb-go/tree/main/examples/appender), which creates the table through a `*sql.DB` opened on the same connector, appends a row, then reads it back:
+The following follows the client's [`appender` example](https://github.com/duckdb/duckdb-go/tree/main/examples/appender), which creates the table through a `*sql.DB` opened on the same connector, appends a row, then reads it back:
 
 ```go
 package main

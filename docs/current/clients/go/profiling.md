@@ -72,13 +72,15 @@ err = duckdb.RegisterLogStorage(connector, "my_log_storage", duckdb.LoggerCallba
 })
 check(err)
 
-// Activate the registered storage, then DuckDB forwards log calls to the callback.
+// Enable logging, then point it at the registered storage.
 db := sql.OpenDB(connector)
+_, err = db.Exec(`CALL enable_logging(level = 'info')`)
+check(err)
 _, err = db.Exec(`SET logging_storage = 'my_log_storage'`)
 check(err)
 ```
 
-After the storage is registered and selected with `SET logging_storage`, DuckDB forwards all log calls to the callback.
+Logging is off by default, so enable it with `CALL enable_logging()` in addition to selecting the storage with `SET logging_storage`. Once both are set, DuckDB forwards all log calls to the callback.
 
 ## Further Reading
 
