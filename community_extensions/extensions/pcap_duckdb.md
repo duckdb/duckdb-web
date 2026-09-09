@@ -19,7 +19,7 @@ extension:
   maintainers:
     - siara-in
   requires_toolchains: "vcpkg"
-  vcpkg_commit: 84bab45d415d22042bd0b9081aea57f362da3f35
+  vcpkg_commit: cd61e1e26a038e82d6550a3ebbe0fbbfe7da78e3 # Release 2026.06.24
 repo:
   github: siara-in/pcap_duckdb
   ref: 6e96e3de4d9edf1836211a065dbaef574f2f1e3e

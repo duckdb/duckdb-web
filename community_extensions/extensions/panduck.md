@@ -15,9 +15,7 @@ extension:
   requires_toolchains: vcpkg
   maintainers:
     - teaguesterling
-  # The default pin from extension-ci-tools v1.5.5, which is what panduck's own
-  # distribution pipeline builds green against on every platform including wasm.
-  vcpkg_commit: 84bab45d415d22042bd0b9081aea57f362da3f35
+  vcpkg_commit: cd61e1e26a038e82d6550a3ebbe0fbbfe7da78e3 # Release 2026.06.24
 repo:
   github: teaguesterling/duckdb_panduck
   ref: a57402beff9805d69c1590733224fc9a71b5b08b

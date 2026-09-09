@@ -13,7 +13,7 @@ extension:
   build: cmake
   license: MIT
   excluded_platforms: "wasm_mvp;wasm_eh;wasm_threads;windows_amd64_mingw;windows_amd64;windows_arm64"
-  vcpkg_commit: "84bab45d415d22042bd0b9081aea57f362da3f35"
+  vcpkg_commit: "cd61e1e26a038e82d6550a3ebbe0fbbfe7da78e3" # Release 2026.06.24
   requires_toolchains: "parser_tools"
   maintainers:
     - ilum-cloud

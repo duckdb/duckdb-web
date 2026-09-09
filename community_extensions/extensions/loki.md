@@ -15,9 +15,7 @@ extension:
   # cpp-httplib + OpenSSL do live HTTP(S) at scan time, which the WebAssembly
   # targets cannot do — exclude them rather than ship a binary that can't connect.
   excluded_platforms: "wasm_mvp;wasm_eh;wasm_threads"
-  # Pin the vcpkg baseline the extension is tested against (currently also the
-  # community pipeline default) so openssl/cpp-httplib/yyjson resolve reproducibly.
-  vcpkg_commit: "84bab45d415d22042bd0b9081aea57f362da3f35"
+  vcpkg_commit: "cd61e1e26a038e82d6550a3ebbe0fbbfe7da78e3" # Release 2026.06.24
   maintainers:
     - prochac
 

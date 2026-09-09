@@ -14,11 +14,7 @@ extension:
   license: BSL 1.1
   excluded_platforms: "windows_amd64_rtools;windows_amd64_mingw;wasm_mvp;wasm_eh;wasm_threads;"
   requires_toolchains: "go"
-  # vcpkg.json pins builtin-baseline 84bab45d to hold openssl at 3.5.0: the newer
-  # 3.6.0 requires Linux kernel headers the arm64 build container does not carry.
-  # Without this the non-v1.5.5 builds would use the older default pin, which
-  # predates that baseline.
-  vcpkg_commit: 84bab45d415d22042bd0b9081aea57f362da3f35
+  vcpkg_commit: cd61e1e26a038e82d6550a3ebbe0fbbfe7da78e3 # Release 2026.06.24
   maintainers:
     - jrosskopf
 
