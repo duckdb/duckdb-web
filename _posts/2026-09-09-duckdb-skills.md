@@ -29,7 +29,7 @@ The skills are then available as `/duckdb-skills:<skill-name>` in all subsequent
 
 ## What's in the Plugin
 
-Each skill wraps a common data task behind a `/duckdb-skills:<skill-name>` slash command, grouped here by what they do.
+Each skill wraps a common data task behind a `/duckdb-skills:<skill-name>` slash command, grouped here by what they do. You do not have to type the slash command, though: each skill also has a description that tells Claude Code when it applies, so you can simply ask in plain language (for example, "convert this CSV to Parquet" or "how far is the nearest station?") and the agent will pick the right skill on its own.
 
 Reading, querying and converting data:
 
