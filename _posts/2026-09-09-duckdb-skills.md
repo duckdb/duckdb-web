@@ -34,39 +34,39 @@ Each skill wraps a common data task behind a `/duckdb-skills:<skill-name>` slash
 Reading, querying and converting data:
 
 * **`read-file`** reads and profiles any data file (CSV, JSON, Parquet, Avro, Excel, spatial, SQLite, Jupyter) on local disk or in S3, GCS, Azure or HTTPS.
-    * `/duckdb-skills:read-file variants.parquet what columns does it have?`
-    * `/duckdb-skills:read-file https://example.com/data.csv how many rows?`
+    * "What columns does variants.parquet have?"
+    * "How many rows are in the CSV file at that URL?"
 * **`query`** runs SQL or a plain-English question against attached databases or a file.
-    * `/duckdb-skills:query FROM sales LIMIT 10`
-    * `/duckdb-skills:query "what are the top 5 customers by revenue?"`
+    * "Show me the first 10 rows of the sales table."
+    * "What are the top 5 customers by revenue?"
 * **`convert-file`** converts a file from one format to another.
-    * `/duckdb-skills:convert-file sales.csv sales.parquet`
-    * `/duckdb-skills:convert-file data.json data.xlsx`
+    * "Convert sales.csv to Parquet."
+    * "Save data.json as an Excel file."
 * **`attach-db`** attaches a DuckDB database and records it in the session state.
-    * `/duckdb-skills:attach-db my_analytics.duckdb`
+    * "Attach my_analytics.duckdb and show me its tables."
 
 Remote and spatial data:
 
 * **`s3-explore`** lists and queries data on S3, R2, GCS, MinIO or any S3-compatible storage without downloading it.
-    * `/duckdb-skills:s3-explore s3://my-bucket/`
-    * `/duckdb-skills:s3-explore s3://my-bucket/data.parquet how many rows?`
+    * "What's in s3://my-bucket/?"
+    * "How many rows are in s3://my-bucket/data.parquet?"
 * **`spatial`** answers spatial questions: distances, nearest neighbors, spatial joins and geographic lookups, including free Overture Maps data.
-    * `/duckdb-skills:spatial what are the 5 closest cafes to this point?`
-    * `/duckdb-skills:spatial districts.geojson which districts overlap?`
+    * "What are the 5 closest cafes to this point?"
+    * "Which districts in districts.geojson overlap?"
 
 Documentation and session context:
 
 * **`duckdb-docs`** searches the DuckDB and [DuckLake](https://ducklake.select/) documentation and blog posts.
-    * `/duckdb-skills:duckdb-docs window functions`
-    * `/duckdb-skills:duckdb-docs "how do I read a CSV with custom delimiters?"`
+    * "How do window functions work in DuckDB?"
+    * "How do I read a CSV with custom delimiters?"
 * **`read-memories`** searches past Claude Code session logs for earlier decisions, conventions and open TODOs.
-    * `/duckdb-skills:read-memories duckdb --here`
+    * "What did we decide about the DuckDB schema in earlier sessions?"
 
 Setup:
 
 * **`install-duckdb`** installs or updates extensions, including community extensions.
-    * `/duckdb-skills:install-duckdb spatial httpfs`
-    * `/duckdb-skills:install-duckdb --update`
+    * "Install the spatial and httpfs extensions."
+    * "Update my DuckDB extensions."
 
 The skills share a single per-project `state.sql` file, a plain SQL script of `ATTACH`, `USE` and `LOAD` statements, secrets and macros, so a session can be restored with `duckdb -init state.sql`.
 
