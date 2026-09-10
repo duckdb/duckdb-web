@@ -7,6 +7,7 @@ thumb: "/images/events/thumbs/duckdb-amsterdam-meetup-1.svg"
 image: "/images/events/thumbs/duckdb-amsterdam-meetup-1.png"
 excerpt: ""
 tags: ["meetup"]
+labels: [official]
 venue: "Miro, Amsterdam"
 redirect_from:
   - 2024/10/17/duckdb-amsterdam-meetup-1

@@ -7,6 +7,7 @@ thumb: "/images/events/thumbs/duckdb-boston-meetup.svg"
 image: "/images/events/thumbs/duckdb-boston-meetup.png"
 excerpt: ""
 tags: ["meetup"]
+labels: [official]
 venue: "W Boston"
 ---
 

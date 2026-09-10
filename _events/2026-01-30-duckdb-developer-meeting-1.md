@@ -7,6 +7,7 @@ thumb: "/images/events/thumbs/duckdb-developer-meeting-1.svg"
 image: "/images/events/thumbs/duckdb-developer-meeting-1.png"
 excerpt: ""
 tags: ["meetup"]
+labels: [official]
 venue: "Pakhuis de Zwijger, Amsterdam"
 ---
 

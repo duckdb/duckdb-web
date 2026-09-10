@@ -7,6 +7,7 @@ thumb: "/images/events/thumbs/duckdb-amsterdam-meetup-3.svg"
 image: "/images/events/thumbs/duckdb-amsterdam-meetup-3.png"
 excerpt: ""
 tags: ["meetup"]
+labels: [official]
 venue: "Adyen Rokin office, Amsterdam"
 ---
 

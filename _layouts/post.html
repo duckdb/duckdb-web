@@ -125,7 +125,7 @@
 								{% endif %}
 								
 								{% if page.event == true or page.collection == "events" %}
-									{% assign event_day = page.date | date: "%Y-%m-%d" %}
+									{% assign event_day = page.end_date | default: page.date | date: "%Y-%m-%d" %}
 									{% assign today = site.time | date: "%Y-%m-%d" %}
 									<div class="infoline">
 										<div class="scheduled">

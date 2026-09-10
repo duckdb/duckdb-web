@@ -201,6 +201,8 @@ $(document).ready(function(){
 		function applyFilters() {
 			var searchValue = $('#search-input').val().toLowerCase();
 
+			$grid.closest('.events-section').removeClass('is-empty');
+
 			$grid.isotope({
 				filter: function() {
 					var $item = $(this);
@@ -229,6 +231,14 @@ $(document).ready(function(){
 						}
 					}
 					return true;
+				}
+			});
+
+			$grid.each(function() {
+				var iso = $(this).data('isotope');
+				var $section = $(this).closest('.events-section');
+				if (iso && $section.length) {
+					$section.toggleClass('is-empty', iso.filteredItems.length === 0);
 				}
 			});
 		}

@@ -1089,10 +1089,10 @@ h5 a {
 				margin-bottom: 0;
 			}
 			>section{
-				padding: 105px 15px;
+				padding: 0;
 			}
-			>section:nth-child(even){
-				background-color: #F9F9F9;
+			.events-upcoming:not(.is-empty) + .events-past{
+				padding-top: 64px;
 			}
 		}
 	}
@@ -1344,5 +1344,15 @@ footer{
 		animation: none;
 		width: auto;
 		text-overflow: ellipsis;
+	}
+}
+
+.post-list .events-section{
+	h2{
+		@include headline-3();
+		margin: 0 0 24px;
+	}
+	&.is-empty{
+		display: none;
 	}
 }
