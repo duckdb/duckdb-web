@@ -8,7 +8,7 @@ excerpt: |
 extension:
   name: panduck
   description: Read documents natively into the duck_block vocabulary -- DOCX, ODT, EPUB, RTF, LaTeX, Org, RST, ipynb, MediaWiki and Textile -- and write them back as Pandoc JSON, without linking Pandoc
-  version: 0.2.0
+  version: 0.4.1
   language: C++
   build: cmake
   license: MIT
@@ -20,7 +20,11 @@ extension:
   vcpkg_commit: 84bab45d415d22042bd0b9081aea57f362da3f35
 repo:
   github: teaguesterling/duckdb_panduck
-  ref: a57402beff9805d69c1590733224fc9a71b5b08b
+  ref: c8aee8a04204d3e91a7932eef7de8c7d0dca7750
+  # SAME COMMIT AS `ref`, deliberately. Without ref_next, scripts/build.py prints
+  # "Skipping prerelease validation" and the PR passes green having never built against
+  # DuckDB v2.0 -- a green that means "did not look". panduck v0.2.0 merged that way.
+  ref_next: c8aee8a04204d3e91a7932eef7de8c7d0dca7750
 docs:
   hello_world: |
     LOAD panduck;
@@ -40,6 +44,16 @@ docs:
 
     -- Outline any supported document
     SELECT * FROM doc_toc('report.docx');
+
+    -- Pull one section out, by heading or by a fragment of one
+    SELECT * FROM doc_section('report.docx', 'Methods');
+    SELECT * FROM doc_section('report.docx', 'Meth', match := 'contains');
+
+    -- ...or find the section by what it SAYS rather than what it is called
+    SELECT * FROM doc_search_sections('report.docx', 'p < 0.05');
+
+    -- Render one back out (md, html or text)
+    SELECT doc_render('report.docx', 'md');
 
     -- Write back out as Pandoc JSON that a real pandoc accepts
     SELECT panduck_write_pandoc_ast('doc.json',
@@ -116,9 +130,12 @@ docs:
 
     ## Scope
 
-    This is an early release. Ten readers are implemented and tested against reference
-    implementations, with 2034 test assertions, differential validation against a real
-    pandoc on every fixture, and eight checks in CI.
+    This is an early release. Ten native readers are implemented and tested against
+    reference implementations -- RTF, DOCX, ODT, EPUB, LaTeX, Org, RST, ipynb, MediaWiki,
+    Textile -- plus a Pandoc AST reader, with 2384 test assertions, differential validation
+    against a real pandoc on every fixture, and eight checks in CI. PDF, Markdown and HTML
+    are read by delegating to the pdf, markdown and webbed extensions rather than by a
+    reader here.
 
     The readers were audited over five rounds before this release, each round asking a
     question the previous one could not answer -- does a construct come back at all, do
@@ -164,21 +181,28 @@ LOAD {{ page.extension.name }};
 |----------------------------------|---------------|-------------|---------|----------|
 | doc_container                    | table_macro   | NULL        | NULL    |          |
 | doc_render                       | macro         | NULL        | NULL    |          |
+| doc_search_sections              | table_macro   | NULL        | NULL    |          |
 | doc_section                      | table_macro   | NULL        | NULL    |          |
 | doc_toc                          | table_macro   | NULL        | NULL    |          |
 | panduck_block_cols               | macro         | NULL        | NULL    |          |
 | panduck_blocks_to_pandoc_ast     | scalar        | NULL        | NULL    |          |
 | panduck_blocks_to_pandoc_blocks  | scalar        | NULL        | NULL    |          |
+| panduck_builtin_format_for       | scalar        | NULL        | NULL    |          |
 | panduck_can_read                 | scalar        | NULL        | NULL    |          |
+| panduck_dependencies             | table_macro   | NULL        | NULL    |          |
 | panduck_duck_block_spec_at_least | macro         | NULL        | NULL    |          |
 | panduck_duck_block_type          | scalar        | NULL        | NULL    |          |
 | panduck_ensure_extension         | scalar        | NULL        | NULL    |          |
 | panduck_format_for               | scalar        | NULL        | NULL    |          |
+| panduck_function_exists          | scalar        | NULL        | NULL    |          |
 | panduck_glob                     | scalar        | NULL        | NULL    |          |
 | panduck_is_glob                  | macro         | NULL        | NULL    |          |
 | panduck_latex_tokens             | table         | NULL        | NULL    |          |
 | panduck_pandoc_api_version       | scalar        | NULL        | NULL    |          |
+| panduck_pandoc_ast_json          | scalar        | NULL        | NULL    |          |
 | panduck_pandoc_ast_map           | table         | NULL        | NULL    |          |
+| panduck_pandoc_ast_to_blocks     | scalar        | NULL        | NULL    |          |
+| panduck_pdf_blocks_impl          | table_macro   | NULL        | NULL    |          |
 | panduck_policy_format            | macro         | NULL        | NULL    |          |
 | panduck_quote                    | macro         | NULL        | NULL    |          |
 | panduck_read_arms                | macro         | NULL        | NULL    |          |
@@ -193,6 +217,7 @@ LOAD {{ page.extension.name }};
 | panduck_register_doc_reader      | table         | NULL        | NULL    |          |
 | panduck_register_table_reader    | table         | NULL        | NULL    |          |
 | panduck_registry_key_for         | scalar        | NULL        | NULL    |          |
+| panduck_render_format            | macro         | NULL        | NULL    |          |
 | panduck_render_params            | scalar        | NULL        | NULL    |          |
 | panduck_resolved_format          | macro         | NULL        | NULL    |          |
 | panduck_source_list              | macro         | NULL        | NULL    |          |
