@@ -6,6 +6,7 @@ redirect_from:
 - /docs/sql/query_syntax/sample
 - /docs/stable/sql/query_syntax/sample
 title: SAMPLE Clause
+tested: true
 ---
 
 The `SAMPLE` clause allows you to run the query on a sample from the base table. This can significantly speed up processing of queries, at the expense of accuracy in the result. Samples can also be used to quickly see a snapshot of the data when exploring a dataset. The sample clause is applied right after anything in the `FROM` clause (i.e., after any joins, but before the `WHERE` clause or any aggregates). See the [`SAMPLE`]({% link docs/current/sql/samples.md %}) page for more information.
@@ -13,6 +14,13 @@ The `SAMPLE` clause allows you to run the query on a sample from the base table.
 ## Examples
 
 Select a sample of 1% of the addresses table using default (system) sampling:
+
+<!-- test:setup
+CREATE TABLE addresses (city VARCHAR, street_name VARCHAR, income INTEGER);
+INSERT INTO addresses VALUES
+    ('Amsterdam', 'Damrak', 50000), ('Amsterdam', 'Kalverstraat', 65000),
+    ('Rotterdam', 'Coolsingel', 45000), ('Rotterdam', 'Coolsingel', 55000);
+-->
 
 ```sql
 SELECT *

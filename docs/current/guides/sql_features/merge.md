@@ -5,6 +5,7 @@ redirect_from:
 - /docs/preview/guides/sql_features/merge
 - /docs/stable/guides/sql_features/merge
 title: Merge Statement for SCD Type 2
+tested: true
 ---
 
 This is a practical, step-by-step guide to using DuckDB’s `MERGE` statement (introduced in v1.4.0) to perform upserts and build [Slowly Changing Dimension Type 2 (SCD Type 2) tables](https://en.wikipedia.org/wiki/Slowly_changing_dimension). Type 2 SCDs let you keep full historical versions of records while clearly identifying the current version, perfect for audit trails, data warehousing, and analytical workloads. Type 2 SCDs are practical when you want to know previous values of your primary key data, when it changed and for how long it was in a particular state.
@@ -92,6 +93,8 @@ INSERT INTO master_ducks VALUES
 ### Step 3: Perform the Merge Statement
 
 This statement will perform the merge, it will check for differences between the data of target and source and follow the `WHEN MATCHED` or `WHEN NOT MATCHED` logic specified.
+
+<!-- test:run-only rows carry CURRENT_DATE, which moves; see test/docs/FINDINGS.md for the assertion failure this triggers on 2.0 -->
 
 ```sql
 MERGE INTO master_ducks AS target
@@ -186,6 +189,8 @@ Returns:
 - The field that will change is `location`, it is currently `Pond A` and will be updated to `Pond B`.
 
 To view the current row of data:
+
+<!-- test:run-only the dates in the result move with CURRENT_DATE -->
 
 ```sql
 SELECT * FROM master_ducks where duck_name = 'Quackers' and is_current = true;

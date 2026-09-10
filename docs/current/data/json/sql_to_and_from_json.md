@@ -5,6 +5,7 @@ redirect_from:
 - /docs/preview/data/json/sql_to_and_from_json
 - /docs/stable/data/json/sql_to_and_from_json
 title: SQL to/from JSON
+tested: true
 ---
 
 DuckDB provides functions to serialize and deserialize `SELECT` statements between SQL and JSON, as well as executing JSON serialized statements.

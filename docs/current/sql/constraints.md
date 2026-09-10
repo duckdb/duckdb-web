@@ -6,6 +6,7 @@ redirect_from:
 - /docs/sql/constraints
 - /docs/stable/sql/constraints
 title: Constraints
+tested: true
 ---
 
 In SQL, constraints can be specified for tables. Constraints enforce certain properties over data that is inserted into a table. Constraints can be specified along with the schema of the table as part of the [`CREATE TABLE` statement]({% link docs/current/sql/statements/create_table.md %}). In certain cases, constraints can also be added to a table using the [`ALTER TABLE` statement]({% link docs/current/sql/statements/alter_table.md %}), but this is not currently supported for all constraints.

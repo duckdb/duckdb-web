@@ -1,6 +1,7 @@
 ---
 layout: post  
 title: "Friendlier SQL with DuckDB"
+tested: true
 author: Alex Monahan
 excerpt: "DuckDB offers several extensions to the SQL syntax. For a full list of these features, see the [Friendly SQL documentation page](/docs/guides/sql_features/friendly_sql)."
 tags: ["using DuckDB"]
@@ -15,6 +16,37 @@ However, SQL is not famous for being user-friendly. DuckDB aims to change that! 
 ## `SELECT * EXCLUDE`
 
 A traditional SQL `SELECT` query requires that requested columns be explicitly specified, with one notable exception: the `*` wildcard. `SELECT *` allows SQL to return all relevant columns. This adds tremendous flexibility, especially when building queries on top of one another. However, we are often interested in *almost* all columns. In DuckDB, simply specify which columns to `EXCLUDE`:
+
+<!-- test:setup
+CREATE TABLE star_wars (
+    episode INTEGER, long_long_ago VARCHAR,
+    jar_jar_binks INTEGER, midichlorians INTEGER
+);
+INSERT INTO star_wars VALUES (4, 'in a galaxy far, far away', 0, 0);
+CREATE TABLE firefly (episode INTEGER, cancellation VARCHAR);
+INSERT INTO firefly VALUES (1, 'too soon');
+CREATE TABLE star_wars_owned_by_disney (title VARCHAR, movie_count INTEGER, show_count INTEGER);
+INSERT INTO star_wars_owned_by_disney VALUES ('Star Wars', 9, 3);
+CREATE TABLE star_wars_locations (
+    systems VARCHAR, planets VARCHAR, cities VARCHAR, cantinas VARCHAR,
+    booths INTEGER, scum INTEGER, villainy INTEGER
+);
+INSERT INTO star_wars_locations VALUES ('Tatoo', 'Tatooine', 'Mos Eisley', 'Chalmun''s', 12, 40, 2);
+CREATE TABLE star_wars_universe (name VARCHAR, age INTEGER, civility INTEGER);
+INSERT INTO star_wars_universe VALUES ('Chewbacca', 200, 7), ('Greedo', 30, 1);
+CREATE TABLE oops (
+    only_imperial_storm_troopers_are_so_precise INTEGER,
+    turns_out_a_parsec_is_a_distance INTEGER,
+    mistakes INTEGER
+);
+INSERT INTO oops VALUES (1, 12, 3);
+CREATE TABLE luke_whats_wrong (x_wing VARCHAR, proton_torpedoes INTEGER, targeting_computer VARCHAR);
+INSERT INTO luke_whats_wrong VALUES ('Red Five', 2, 'off');
+CREATE TABLE squadron_one (tie_fighter VARCHAR);
+INSERT INTO squadron_one VALUES ('green_one');
+CREATE TABLE squadron_two (tie_fighter VARCHAR);
+INSERT INTO squadron_two VALUES ('green_two');
+-->
 
 ```sql
 SELECT * EXCLUDE (jar_jar_binks, midichlorians) FROM star_wars;

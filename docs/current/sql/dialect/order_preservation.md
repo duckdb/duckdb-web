@@ -5,6 +5,7 @@ redirect_from:
 - /docs/sql/dialect/order_preservation
 - /docs/stable/sql/dialect/order_preservation
 title: Order Preservation
+tested: true
 ---
 
 For many operations, DuckDB preserves the order of rows, similarly to data frame libraries such as Pandas.

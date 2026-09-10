@@ -6,6 +6,7 @@ redirect_from:
 - /docs/sql/expressions/case
 - /docs/stable/sql/expressions/case
 title: CASE Expression
+tested: true
 ---
 
 <div id="rrdiagram"></div>

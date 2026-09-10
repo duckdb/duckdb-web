@@ -6,6 +6,7 @@ redirect_from:
 - /docs/sql/data_types/overview
 - /docs/stable/sql/data_types/overview
 title: Data Types
+tested: true
 ---
 
 ## General-Purpose Data Types

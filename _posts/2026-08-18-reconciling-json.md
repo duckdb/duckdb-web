@@ -1,6 +1,7 @@
 ---
 layout: post
 title: "Reconciling JSON in DuckDB, One Patch at a Time"
+tested: true
 author: "Mustafa Khan"
 thumb: "/images/blog/thumbs/json-patch.svg"
 image: "/images/blog/thumbs/json-patch.png"

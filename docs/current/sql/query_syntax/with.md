@@ -6,6 +6,7 @@ redirect_from:
 - /docs/sql/query_syntax/with
 - /docs/stable/sql/query_syntax/with
 title: WITH Clause
+tested: true
 ---
 
 The `WITH` clause allows you to specify common table expressions (CTEs).

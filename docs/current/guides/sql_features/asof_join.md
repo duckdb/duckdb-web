@@ -5,6 +5,7 @@ redirect_from:
 - /docs/preview/guides/sql_features/asof_join
 - /docs/stable/guides/sql_features/asof_join
 title: AsOf Join
+tested: true
 ---
 
 ## What is an AsOf Join?

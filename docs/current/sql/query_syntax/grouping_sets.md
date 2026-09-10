@@ -6,6 +6,7 @@ redirect_from:
 - /docs/sql/query_syntax/grouping_sets
 - /docs/stable/sql/query_syntax/grouping_sets
 title: GROUPING SETS
+tested: true
 ---
 
 `GROUPING SETS`, `ROLLUP` and `CUBE` can be used in the `GROUP BY` clause to perform a grouping over multiple dimensions within the same query.
@@ -14,6 +15,13 @@ Note that this syntax is not compatible with [`GROUP BY ALL`]({% link docs/curre
 ## Examples
 
 Compute the average income along the provided four different dimensions:
+
+<!-- test:setup
+CREATE TABLE addresses (city VARCHAR, street_name VARCHAR, income INTEGER);
+INSERT INTO addresses VALUES
+    ('Amsterdam', 'Damrak', 50000), ('Amsterdam', 'Kalverstraat', 65000),
+    ('Rotterdam', 'Coolsingel', 45000), ('Rotterdam', 'Coolsingel', 55000);
+-->
 
 ```sql
 -- the syntax () denotes the empty set (i.e., computing an ungrouped aggregate)

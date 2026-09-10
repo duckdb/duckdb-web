@@ -1,6 +1,7 @@
 ---
 layout: post
 title: "Vertical Stacking as the Relational Model Intended: UNION ALL BY NAME"
+tested: true
 author: "Alex Monahan"
 thumb: "/images/blog/thumbs/union-all-by-name.svg"
 image: "/images/blog/thumbs/union-all-by-name.png"

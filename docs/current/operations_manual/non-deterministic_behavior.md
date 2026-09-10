@@ -5,6 +5,7 @@ redirect_from:
 - /docs/preview/operations_manual/non-deterministic_behavior
 - /docs/stable/operations_manual/non-deterministic_behavior
 title: Non-Deterministic Behavior
+tested: true
 ---
 
 Several operators in DuckDB exhibit non-deterministic behavior.

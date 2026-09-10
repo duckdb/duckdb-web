@@ -1,6 +1,7 @@
 ---
 layout: post
 title: "Announcing DuckDB 1.1.0"
+tested: true
 author: The DuckDB team
 thumb: "/images/blog/thumbs/duckdb-release-1-1-0.svg"
 image: "/images/blog/thumbs/duckdb-release-1-1-0.png"
@@ -131,6 +132,12 @@ FROM histogram(
 [**SQL variables.**](https://github.com/duckdb/duckdb/pull/13084) This release introduces support for variables that can be defined in SQL. Variables can hold a single value of any type – including nested types like lists or structs. Variables can be set as literals, or from scalar subqueries.
 
 The value stored within variables can be read using `getvariable`. When used in a query, `getvariable` is treated as a literal during query planning and optimization. This allows variables to be used in places where we normally cannot read values from within tables, for example, when specifying which CSV files to read:
+
+<!-- test:setup
+COPY (SELECT 42 AS a) TO 'test.csv';
+COPY (SELECT 84 AS a) TO 'test2.csv';
+CREATE TABLE csv_files AS SELECT unnest(['test.csv', 'test2.csv']) AS file;
+-->
 
 ```sql
 SET VARIABLE list_of_files = (SELECT LIST(file) FROM csv_files);
@@ -320,7 +327,7 @@ We can now [push filters on columns through window functions that are partitione
 ```sql
 CREATE TABLE tbl2 AS SELECT range i FROM range(10);
 SELECT i
-FROM (SELECT i, SUM(i) OVER (PARTITION BY i) FROM tbl)
+FROM (SELECT i, SUM(i) OVER (PARTITION BY i) FROM tbl2)
 WHERE i > 5;
 ```
 

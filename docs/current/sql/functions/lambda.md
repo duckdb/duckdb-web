@@ -4,6 +4,7 @@ redirect_from:
 - /docs/preview/sql/functions/lambda
 - /docs/stable/sql/functions/lambda
 title: Lambda Functions
+tested: true
 ---
 
 DuckDB lambda functions (a.k.a. 'lambdas' or 'lambda expressions') are expressions that define an inline anonymous function. 

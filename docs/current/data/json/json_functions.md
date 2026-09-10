@@ -5,6 +5,7 @@ redirect_from:
 - /docs/preview/data/json/json_functions
 - /docs/stable/data/json/json_functions
 title: JSON Processing Functions
+tested: true
 ---
 
 ## JSON Extraction Functions
@@ -167,6 +168,8 @@ FROM extracted;
 ```
 
 ## JSON Scalar Functions
+
+<!-- test:setup DROP TABLE IF EXISTS example; -->
 
 The following scalar JSON functions can be used to gain information about the stored JSON values.
 With the exception of `json_valid(json)`, all JSON functions produce an error when invalid JSON is supplied.
@@ -420,6 +423,8 @@ SELECT json_group_structure(j) FROM example2;
 
 ## Transforming JSON to Nested Types
 
+<!-- test:setup DROP TABLE IF EXISTS example; -->
+
 In many cases, it is inefficient to extract values from JSON one-by-one.
 Instead, we can “extract” all values at once, transforming JSON to the nested types `LIST` and `STRUCT`.
 
@@ -471,6 +476,8 @@ Failed to cast value: "anatidae"
 ```
 
 ## JSON Table Functions
+
+<!-- test:setup DROP TABLE IF EXISTS example; -->
 
 DuckDB implements two JSON table functions that take a JSON value and produce a table from it.
 

@@ -1,6 +1,7 @@
 ---
 layout: post
 title: "DuckDB Tricks – Part 2"
+tested: true
 author: "Gábor Szárnyas"
 thumb: "/images/blog/thumbs/duckdb-tricks.svg"
 image: "/images/blog/thumbs/duckdb-tricks.png"

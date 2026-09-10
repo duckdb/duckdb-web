@@ -1,6 +1,7 @@
 ---
 layout: post
 title: "Even Friendlier SQL with DuckDB"
+tested: true
 author: Alex Monahan
 excerpt: DuckDB continues to push the boundaries of SQL syntax to both simplify queries and make more advanced analyses possible. Highlights include dynamic column selection, queries that start with the FROM clause, function chaining, and list comprehensions. We boldly go where no SQL engine has gone before! For more details, see the documentation for [friendly SQL features](/docs/guides/sql_features/friendly_sql).
 tags: ["using DuckDB"]
@@ -31,7 +32,7 @@ When working with incremental calculated expressions in a select statement, trad
 SELECT 
     'These are the voyages of the starship Enterprise...' AS intro,
     instr('These are the voyages of the starship Enterprise...', 'starship')
-        AS starship_loc
+        AS starship_loc,
     substr('These are the voyages of the starship Enterprise...',
     instr('These are the voyages of the starship Enterprise...', 'starship')
         + len('starship') + 1) AS trimmed_intro;
@@ -77,6 +78,8 @@ Databases typically prefer strictness in column definitions and flexibility in t
 No longer do you need to know all of your column names up front! DuckDB can select and even modify columns based on regular expression pattern matching, `EXCLUDE` or `REPLACE` modifiers, and even lambda functions (see the [section on lambda functions below](#list-lambda-functions) for details!).
 
 Let’s take a look at some facts gathered about the first season of Star Trek. Using DuckDB’s [`httpfs` extension]({% link docs/current/core_extensions/httpfs/overview.md %}), we can query a CSV dataset directly from GitHub. It has several columns so let’s `DESCRIBE` it.
+
+<!-- test:run-only the remote CSV renamed a column after this post was published -->
 
 ```sql
 INSTALL httpfs;
@@ -209,7 +212,7 @@ SELECT
     COLUMNS(lambda col: col LIKE '%warp%')
 FROM trek_facts
 WHERE
-    COLUMNS(lambda col: LIKE '%warp%') >= 2;
+    COLUMNS(lambda col: col LIKE '%warp%') >= 2;
 ```
 
 
@@ -225,6 +228,8 @@ WHERE
 The first installment in the series mentioned JSON dot notation references as future work. However, the team has gone even further! Instead of referring to JSON-typed columns using dot notation, JSON can now be [automatically parsed]({% post_url 2023-03-03-json %}) into DuckDB’s native types for significantly faster performance, compression, as well as that friendly dot notation!
 
 First, install and load the `httpfs` and `json` extensions if they don't come bundled with the client you are using. Then query a remote JSON file directly as if it were a table!
+
+<!-- test:run-only the remote JSON file's contents change over time -->
 
 ```sql
 INSTALL httpfs;
@@ -246,6 +251,8 @@ Now for some new SQL capabilities beyond the ideas from the prior post!
 ## `FROM` First in `SELECT` Statements
 
 When building a query, the first thing you need to know is where your data is coming `FROM`. Well then why is that the second clause in a `SELECT` statement?? No longer! DuckDB is building SQL as it should have always been – putting the `FROM` clause first! This addresses one of the longest standing complaints about SQL, and the DuckDB team implemented it in 2 days. 
+
+<!-- test:setup CREATE TABLE my_table AS SELECT 42 AS my_column; -->
 
 ```sql
 FROM my_table SELECT my_column;

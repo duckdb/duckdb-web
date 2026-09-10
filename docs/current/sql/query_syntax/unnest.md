@@ -5,6 +5,7 @@ redirect_from:
 - /docs/sql/query_syntax/unnest
 - /docs/stable/sql/query_syntax/unnest
 title: Unnesting
+tested: true
 ---
 
 Unnesting is an operation that decomposes values of a [composite types]({% link docs/current/sql/data_types/overview.md %}#nested--composite-types) into its components.

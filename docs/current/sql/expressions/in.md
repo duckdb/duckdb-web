@@ -6,6 +6,7 @@ redirect_from:
 - /docs/sql/expressions/in
 - /docs/stable/sql/expressions/in
 title: IN Operator
+tested: true
 ---
 
 The `IN` operator checks containment of the left expression inside the _collection_ on the right hand side (RHS).

@@ -5,6 +5,7 @@ redirect_from:
 - /docs/sql/data_types/struct
 - /docs/stable/sql/data_types/struct
 title: Struct Data Type
+tested: true
 ---
 
 Conceptually, a `STRUCT` column contains an ordered list of columns called “entries”. The entries are referenced by name using strings. This document refers to those entry names as keys. Each row in the `STRUCT` column must have the same keys. The names of the struct entries are part of the *schema*. Each row in a `STRUCT` column must have the same layout. The names of the struct entries are case-insensitive.
@@ -136,6 +137,11 @@ Referring to structs with dot notation can be ambiguous with referring to schema
 
 ### No Dots
 
+<!-- test:setup
+CREATE TABLE tbl (part1 STRUCT(part2 STRUCT(part3 INTEGER)));
+INSERT INTO tbl VALUES ({'part2': {'part3': 42}});
+-->
+
 ```sql
 SELECT part1
 FROM tbl;
@@ -181,11 +187,15 @@ SELECT * FROM t1;
 
 The table will contain a single entry:
 
-```sql
+<!-- test:result -->
+
+```text
 {'v': a, 'i': 42}
 ```
 
 The following produces the same result as above:
+
+<!-- test:setup DROP TABLE t1; -->
 
 ```sql
 CREATE TABLE t1 AS (

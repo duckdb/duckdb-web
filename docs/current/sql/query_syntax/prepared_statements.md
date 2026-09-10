@@ -5,6 +5,7 @@ redirect_from:
 - /docs/sql/query_syntax/prepared_statements
 - /docs/stable/sql/query_syntax/prepared_statements
 title: Prepared Statements
+tested: true
 ---
 
 DuckDB supports prepared statements where parameters are substituted when the query is executed.

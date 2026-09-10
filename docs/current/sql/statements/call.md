@@ -6,6 +6,7 @@ redirect_from:
 - /docs/sql/statements/call
 - /docs/stable/sql/statements/call
 title: CALL Statement
+tested: true
 ---
 
 The `CALL` statement invokes the given [table function]({% link docs/current/sql/query_syntax/from.md %}#table-functions) and returns the results. 

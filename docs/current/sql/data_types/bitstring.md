@@ -6,6 +6,7 @@ redirect_from:
 - /docs/sql/data_types/bitstring
 - /docs/stable/sql/data_types/bitstring
 title: Bitstring Type
+tested: true
 ---
 
 | Name | Aliases | Description |
