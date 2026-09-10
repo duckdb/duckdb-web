@@ -7,6 +7,7 @@ thumb: "/images/events/thumbs/duckdb-amsterdam-meetup-2.svg"
 image: "/images/events/thumbs/duckdb-amsterdam-meetup-2.png"
 excerpt: ""
 tags: ["meetup"]
+labels: [official]
 venue: "Xebia, Amsterdam"
 ---
 

@@ -7,6 +7,7 @@ thumb: "/images/events/thumbs/duckdb-science-meetup.svg"
 image: "/images/events/thumbs/duckdb-science-meetup.png"
 excerpt: ""
 tags: ["meetup"]
+labels: [official]
 venue: "One Great George Street, London"
 ---
 

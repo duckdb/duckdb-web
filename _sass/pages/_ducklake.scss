@@ -153,7 +153,7 @@ body.landing header .headerline{
 
 
 section.features .icon-grid .icon{
-	color: var(--blue-70);
+	color: var(--main-text-secondary-color, #666);
 }
 
 /** Landing page styles **/
@@ -162,7 +162,7 @@ body.landing{
 	overflow-x: clip;
 	section.welcome{
 		background: linear-gradient(180deg, var(--lake-animated-column-background-gradient-start) 0%, var(--main-body-background-color) 100%);
-		padding: 100px 15px;
+		padding: 85px 15px;
 		position: relative;
 		.ducklake{
 			margin: 0 auto;
@@ -306,7 +306,7 @@ body.landing{
 	section.podcast{
 		.wrap{
 			gap: 50px;
-			align-items: center;
+			align-items: flex-start;
 			.section-image{
 				flex: 1 1 0;
 				min-width: 0;
@@ -324,10 +324,9 @@ body.landing{
 	}
 	section{
 		.section-text{
-			//max-width: 640px;
 			max-width: 700px;
-			text-align: center;
-			margin: 0 auto;
+			text-align: left;
+			margin: 0;
 		}
 	}
 	h1{
@@ -335,7 +334,7 @@ body.landing{
 	}
 	h2{
 		@include display-3();
-		text-align: center;
+		text-align: left;
 	}
 	h3{
 		@include display-3();
@@ -345,16 +344,76 @@ body.landing{
 		margin-top: 50px;
 	}
 	.faq{
-		.frequentlyaskedquestions{
-			max-width: 950px;
-			margin: 50px auto 0;
+		display: grid;
+		grid-template-columns: 1fr 2fr;
+		grid-template-rows: auto 1fr;
+		column-gap: 20px;
+		max-width: 1150px;
+		margin: 0 auto;
+
+		.wrap{
+			grid-column: 1;
+			width: 100%;
+			max-width: none;
+			margin: 0;
 		}
+
+		.frequentlyaskedquestions{
+			grid-column: 2;
+			grid-row: 1 / span 2;
+			max-width: none;
+			margin: 0;
+		}
+
 		.cta{
-			margin-top: 50px;
-			text-align: center;
+			grid-column: 1;
+			grid-row: 2;
+			align-self: start;
+			text-align: left;
+
+			@media only screen and (max-width: 900px) {
+				margin-bottom: 32px;
+			}
+
+			.textbutton{
+				color: var(--main-text-secondary-color, #666);
+
+				&:hover{
+					color: var(--main-link-hover-color, #998B00);
+				}
+			}
+		}
+
+		@media only screen and (max-width: 900px) {
+			grid-template-columns: 1fr;
+			grid-template-rows: none;
+
+			.wrap,
+			.frequentlyaskedquestions,
+			.cta{
+				grid-column: 1;
+			}
+
+			.wrap{
+				grid-row: 1;
+			}
+
+			.cta{
+				grid-row: 2;
+			}
+
+			.frequentlyaskedquestions{
+				grid-row: 3;
+			}
 		}
 	}
-	
+
+	@media only screen and (min-width: 641px){
+		section.features-bento .bento-box.wide:nth-child(5) p{
+			max-width: 280px;
+		}
+	}
+
 }
 
 @keyframes spin {
@@ -466,9 +525,9 @@ section.architecture {
 				gap: 5px;
 				padding-left: 3px;
 				svg.icon{
-					width: 20px;
-					height: 20px;
-					color: var(--blue-70);
+					width: 16px;
+					height: 16px;
+					color: var(--main-text-secondary-color, #666);
 					flex-shrink: 0;
 				}
 			}
@@ -565,7 +624,7 @@ section.architecture {
 						width: 14px;
 						height: 14px;
 						flex-shrink: 0;
-						color: var(--blue-70, #2eafff);
+						color: var(--main-text-secondary-color, #666);
 						flex-shrink: 0;
 					}
 				}
@@ -659,9 +718,9 @@ section.architecture {
 			gap: 5px;
 			padding-bottom: 4px;
 			svg.icon{
-				width: 20px;
-				height: 20px;
-				color: var(--blue-70);
+				width: 16px;
+				height: 16px;
+				color: var(--main-text-secondary-color, #666);
 				flex-shrink: 0;
 			}
 		}
@@ -947,7 +1006,6 @@ body.manifesto{
 	body.landing section.podcast .wrap .section-text{
 		width: 100%;
 		order: 1;
-		text-align: center;
 	}
 	.topbar{ 
 		.hoverlabel{

@@ -1,0 +1,43 @@
+{% assign event = include.event %}
+{% assign random_number = include.index | modulo: 3 | plus: 1 %}
+{% assign label_classes = event.labels | join: " " | downcase %}
+{% if event.external_post_url %}
+	{% assign is_external = true %}
+	{% assign event_link = event.external_post_url %}
+	{% assign link_target = "_blank" %}
+{% else %}
+	{% assign is_external = false %}
+	{% assign event_date = event.date | date: "%Y/%m/%d" %}
+	{% assign event_slug = event.slug | default: event.title | slugify %}
+	{% assign event_link = "/events/" | append: event_date | append: "/" | append: event_slug | append: "/" %}
+	{% assign link_target = "_self" %}
+{% endif %}
+<div class="eventpreview postpreview {{ label_classes }}{% if is_external %} external-post{% endif %}" data-title="{{ event.title | escape }}">
+	<a href="{{ event_link }}" title="{{ event.title }}" class="blocklink" target="{{ link_target }}"{% if is_external %} rel="noopener noreferrer"{% endif %}></a>
+	<div class="postimg custom">
+		{% if event.thumb %}
+			<img src="{{ event.thumb }}" alt="{{ event.title }}" class="zoom-image" loading="lazy">
+		{% else %}
+			<img src="/images/blog/thumbs/placeholder-{{ random_number }}.svg" alt="Placeholder" class="zoom-image" loading="lazy">
+		{% endif %}
+	</div>
+	<div class="postdetails">
+		<h3>{{ event.title }}</h3>
+		<div class="meta">
+			<div class="date">{{ event.date | date: "%Y-%m-%d" }}</div>
+			{% if event.tags %}
+				<div class="tags">
+					{% for tag in event.tags %}<span>{{ tag }}</span>{% endfor %}
+				</div>
+			{% endif %}
+			{% if is_external %}
+				<div class="external-source">{{ event.external_post_url | extract_domain }}<svg class="icon"><use href="#link-external-02"></use></svg></div>
+			{% endif %}
+		</div>
+		{% if event.venue %}
+			<div class="byline">
+				<div class="venue">{{ event.venue }}</div>
+			</div>
+		{% endif %}
+	</div>
+</div>

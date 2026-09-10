@@ -7,6 +7,7 @@ thumb: "/images/events/thumbs/duckdb-berlin-meetup.svg"
 image: "/images/events/thumbs/duckdb-berlin-meetup.png"
 excerpt: ""
 tags: ["meetup"]
+labels: [official]
 venue: "Dorint Kurfürstendamm Berlin, Opéra room, 2nd floor"
 ---
 
