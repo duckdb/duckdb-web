@@ -24,6 +24,7 @@ The options provided to the `ATTACH` are divided into categories:
 | `PURGE_REQUESTED`                    | `BOOLEAN`  | `false`              | Sends the [PurgeRequested](https://github.com/apache/iceberg/blob/4b4eb38cf6dda7b43faeb40eb00aa5db424d2ecb/open-api/rest-catalog-open-api.yaml#L1144) parameter when dropping a table. |
 | `ENCODE_ENTIRE_PREFIX`               | `BOOLEAN`  | `false`              | URL-encode the entire path prefix when communicating with the catalog.                                                                                                                 |
 | `MAX_TABLE_STALENESS`                | `INTERVAL` | `NULL`               | Prevents unnecessary requests to the Iceberg REST Catalog. Accepts human-readable interval strings such as `10 minutes`, `30 seconds`, or `1 year`.                                    |
+| `DEFAULT_TABLE_LOCATION_FROM_NAMESPACE` | `BOOLEAN` | `false`            | If enabled, a `CREATE TABLE` without an explicit `WITH ('location' = …)` clause derives the table location as `⟨namespace location⟩/⟨table name⟩` from the namespace's `location` property. An explicit `WITH ('location' = …)` clause still takes precedence, and if the namespace has no `location` property the behavior is unchanged. Useful for catalogs such as AWS Glue that do not assign a table location server-side. |
 
 Some parameters enable others, see the list of associated additional parameters below this table.
 
@@ -61,6 +62,9 @@ The parameters set by using the `GLUE` `ENDPOINT_TYPE` are:
 | `REMOVE_FILES_ON_DELETE` | `false` (unless explicitly set)                                                                           |
 | `STAGE_CREATE_TABLES`    | `false` (unless explicitly set)                                                                           |
 | `PURGE_REQUESTED`        | `true` (unless explicitly set)                                                                            |
+
+AWS Glue does not assign a table location server-side, so a `CREATE TABLE` without an explicit `WITH ('location' = …)` clause is rejected.
+Either provide an explicit location per table, or set [`DEFAULT_TABLE_LOCATION_FROM_NAMESPACE`](#attach-options) to `true` to derive the location from the namespace's `location` property.
 
 ### `Authorization`
 
