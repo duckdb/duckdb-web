@@ -8,6 +8,7 @@ redirect_from:
 - /docs/sql/functions/char
 - /docs/sql/functions/char/
 title: Text Functions
+tested: true
 ---
 
 <!-- markdownlint-disable MD001 -->

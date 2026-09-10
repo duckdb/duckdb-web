@@ -5,6 +5,7 @@ redirect_from:
 - /docs/sql/data_types/map
 - /docs/stable/sql/data_types/map
 title: Map Type
+tested: true
 ---
 
 `MAP`s are similar to `STRUCT`s in that they are an ordered list of key-value pairs. However, `MAP`s do not need to have the same keys present for each row, and thus are suitable for use cases where the schema is unknown beforehand or varies per row.

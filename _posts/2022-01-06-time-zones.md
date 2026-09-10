@@ -1,6 +1,7 @@
 ---
 layout: post  
 title: "DuckDB Time Zones: Supporting Calendar Extensions"
+tested: true
 author: Richard Wesley
 excerpt: The DuckDB ICU extension now provides time zone support.
 tags: ["extensions"]
@@ -167,6 +168,8 @@ SELECT * FROM duckdb_settings() WHERE name = 'TimeZone';
 ```text
 TimeZone    Europe/Amsterdam    The current time zone   VARCHAR
 ```
+
+<!-- test:run-only the columns below are separated by single spaces, which cannot be told apart from a value containing a space -->
 
 ```sql
 -- Choose a time zone.

@@ -5,6 +5,7 @@ redirect_from:
 - /docs/sql/data_types/union
 - /docs/stable/sql/data_types/union
 title: Union Type
+tested: true
 ---
 
 A `UNION` *type* (not to be confused with the SQL [`UNION` operator]({% link docs/current/sql/query_syntax/setops.md %}#union-all-by-name)) is a nested type capable of holding one of multiple “alternative” values, much like the `union` in C. The main difference is that these `UNION` types are *tagged unions* and thus always carry a discriminator “tag” which signals which alternative it is currently holding, even if the inner value itself is null. `UNION` types are thus more similar to C++17's `std::variant`, Rust's `Enum` or the “sum type” present in most functional languages.

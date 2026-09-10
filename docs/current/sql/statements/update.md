@@ -6,6 +6,7 @@ redirect_from:
 - /docs/sql/statements/update
 - /docs/stable/sql/statements/update
 title: UPDATE Statement
+tested: true
 ---
 
 The `UPDATE` statement modifies the values of rows in a table.
@@ -13,6 +14,13 @@ The `UPDATE` statement modifies the values of rows in a table.
 ## Examples
 
 For every row where `i` is `NULL`, set the value to 0 instead:
+
+<!-- test:setup
+CREATE TABLE tbl (i INTEGER, j INTEGER);
+INSERT INTO tbl VALUES (0, 1), (1, 2);
+CREATE TABLE new_tbl (i INTEGER, j INTEGER, id INTEGER);
+INSERT INTO new_tbl VALUES (5, 6, 1);
+-->
 
 ```sql
 UPDATE tbl

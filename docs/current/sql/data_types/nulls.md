@@ -6,6 +6,7 @@ redirect_from:
 - /docs/sql/data_types/nulls
 - /docs/stable/sql/data_types/nulls
 title: NULL Values
+tested: true
 ---
 
 `NULL` values are special values that are used to represent missing data in SQL. Columns of any type can contain `NULL` values. Logically, a `NULL` value can be seen as “the value of this field is unknown”.
@@ -118,6 +119,8 @@ For details, see the [`IN` documentation]({% link docs/current/sql/expressions/i
 `NULL` values are ignored in most aggregate functions.
 
 Aggregate functions that do not ignore `NULL` values include: `first`, `last`, `list` and `array_agg`. To exclude `NULL` values from those aggregate functions, the [`FILTER` clause]({% link docs/current/sql/query_syntax/filter.md %}) can be used.
+
+<!-- test:setup DROP TABLE IF EXISTS integers; -->
 
 ```sql
 CREATE TABLE integers (i INTEGER);

@@ -6,6 +6,7 @@ redirect_from:
 - /docs/sql/data_types/numeric
 - /docs/stable/sql/data_types/numeric
 title: Numeric Types
+tested: true
 ---
 
 ## Fixed-Width Integer Types
@@ -180,6 +181,8 @@ functions.
 
 To generate a UUIDv7 value, use the [`uuidv7()`]({% link docs/current/sql/functions/utility.md %}#uuidv7) function.
 To retrieve the timestamp from a UUIDv7 value, use the [`uuid_extract_timestamp` function]({% link docs/current/sql/functions/utility.md %}#uuid_extract_timestampuuidv7):
+
+<!-- test:run-only the timestamp is the moment the value was generated -->
 
 ```sql
 SELECT uuid_extract_timestamp(uuidv7()) AS ts;

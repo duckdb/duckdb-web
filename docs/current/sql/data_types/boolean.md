@@ -6,6 +6,7 @@ redirect_from:
 - /docs/sql/data_types/boolean
 - /docs/stable/sql/data_types/boolean
 title: Boolean Type
+tested: true
 ---
 
 | Name | Aliases | Description |

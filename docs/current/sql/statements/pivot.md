@@ -8,6 +8,7 @@ redirect_from:
 - /docs/sql/statements/pivot
 - /docs/stable/sql/statements/pivot
 title: PIVOT Statement
+tested: true
 ---
 
 The `PIVOT` statement allows distinct values within a column to be separated into their own columns.

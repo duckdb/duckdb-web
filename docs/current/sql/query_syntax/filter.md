@@ -6,6 +6,7 @@ redirect_from:
 - /docs/sql/query_syntax/filter
 - /docs/stable/sql/query_syntax/filter
 title: FILTER Clause
+tested: true
 ---
 
 The `FILTER` clause may optionally follow an aggregate function in a `SELECT` statement. This will filter the rows of data that are fed into the aggregate function in the same way that a `WHERE` clause filters rows, but localized to the specific aggregate function.
@@ -110,6 +111,8 @@ However, the `CASE WHEN` approach will not work as expected when using an aggreg
 
 “Pivot” the data out by year (move each year out to a separate column):
 
+<!-- test:run-only `first` picks an arbitrary row from a parallel scan -->
+
 ```sql
 SELECT
     first(i) FILTER (year = 2022) AS "2022",
@@ -127,6 +130,8 @@ FROM stacked_data;
 | 1474561 | 25804801 | 50749441 | 76431361 | 87500001 |
 
 This will produce `NULL` values whenever the first evaluation of the `CASE WHEN` clause returns a `NULL`:
+
+<!-- test:run-only `first` picks an arbitrary row from a parallel scan -->
 
 ```sql
 SELECT

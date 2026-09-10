@@ -5,6 +5,7 @@ redirect_from:
 - /docs/sql/data_types/typecasting
 - /docs/stable/sql/data_types/typecasting
 title: Typecasting
+tested: true
 ---
 
 Typecasting is an operation that converts a value in one particular data type to the closest corresponding value in another data type.
@@ -82,6 +83,8 @@ SELECT CAST(42.5 AS VARCHAR);
 ```
 
 Casting from `VARCHAR` to another data type is supported, but can raise an error at runtime if DuckDB cannot parse and convert the provided text to the target data type.
+
+<!-- test:error -->
 
 ```sql
 SELECT CAST('NotANumber' AS INTEGER);

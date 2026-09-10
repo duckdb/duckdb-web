@@ -7,6 +7,7 @@ redirect_from:
 - /docs/sql/data_types/blob
 - /docs/stable/sql/data_types/blob
 title: Blob Type
+tested: true
 ---
 
 | Name | Aliases | Description |

@@ -6,6 +6,7 @@ redirect_from:
 - /docs/sql/expressions/cast
 - /docs/stable/sql/expressions/cast
 title: Casting
+tested: true
 ---
 
 <div id="rrdiagram"></div>

@@ -8,6 +8,7 @@ redirect_from:
 - /docs/sql/statements/unpivot
 - /docs/stable/sql/statements/unpivot
 title: UNPIVOT Statement
+tested: true
 ---
 
 The `UNPIVOT` statement allows multiple columns to be stacked into fewer columns.
@@ -220,6 +221,8 @@ Below is the full syntax diagram of the `UNPIVOT` statement.
 ## SQL Standard `UNPIVOT` Syntax
 
 The full syntax diagram is below, but the SQL Standard `UNPIVOT` syntax can be summarized as:
+
+<!-- test:skip syntax summary in square brackets, not a runnable statement -->
 
 ```sql
 FROM [dataset]

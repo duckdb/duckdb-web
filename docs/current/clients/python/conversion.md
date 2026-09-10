@@ -79,7 +79,7 @@ my_list_value = [
 
 Will become `VARCHAR[]` because 12345 can convert to `VARCHAR` but `test` can not convert to `INTEGER`.
 
-```sql
+```text
 [12345, test]
 ```
 

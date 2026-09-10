@@ -6,6 +6,7 @@ redirect_from:
 - /docs/sql/expressions/subqueries
 - /docs/stable/sql/expressions/subqueries
 title: Subqueries
+tested: true
 ---
 
 Subqueries are parenthesized query expressions that appear as part of a larger, outer query. Subqueries are usually based on `SELECT ... FROM`, but in DuckDB other query constructs such as [`PIVOT`]({% link docs/current/sql/statements/pivot.md %}) can also appear as a subquery.
@@ -208,6 +209,8 @@ WHERE grade =
 | 8     | CS     |
 
 The subquery uses a column from the parent query (`grades_parent.course`). Conceptually, we can see the subquery as a function where the correlated column is a parameter to that function:
+
+<!-- test:skip illustrative pseudo-query; the `?` parameter is never bound -->
 
 ```sql
 SELECT min(grade)

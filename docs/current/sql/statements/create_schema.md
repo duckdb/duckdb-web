@@ -6,6 +6,7 @@ redirect_from:
 - /docs/sql/statements/create_schema
 - /docs/stable/sql/statements/create_schema
 title: CREATE SCHEMA Statement
+tested: true
 ---
 
 The `CREATE SCHEMA` statement creates a schema in the catalog. The default schema is `main`.

@@ -1,6 +1,7 @@
 ---
 layout: docu
 railroad: expressions/star.js
+tested: true
 redirect_from:
 - /docs/preview/sql/expressions/star
 - /docs/sql/expressions/star
@@ -13,6 +14,13 @@ title: Star Expression
 <div id="rrdiagram"></div>
 
 The `*` expression can be used in a `SELECT` statement to select all columns that are projected in the `FROM` clause.
+
+<!-- test:setup
+CREATE TABLE tbl (id INTEGER, col INTEGER, col1 INTEGER, col2 INTEGER);
+CREATE TABLE other_tbl (id INTEGER, other INTEGER);
+INSERT INTO tbl VALUES (1, 10, 1000, 2000);
+INSERT INTO other_tbl VALUES (1, 5);
+-->
 
 ```sql
 SELECT *
@@ -221,6 +229,8 @@ SELECT COLUMNS('(\w{3}).*') AS '\1' FROM numbers;
 | 3  | NULL |
 
 To remove a colon (`:`) character in the middle of a column name, run:
+
+<!-- test:setup DROP TABLE tbl; -->
 
 ```sql
 CREATE TABLE tbl ("Foo:Bar" INTEGER, "Foo:Baz" INTEGER, "Foo:Qux" INTEGER);

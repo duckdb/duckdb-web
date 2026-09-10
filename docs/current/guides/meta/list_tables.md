@@ -5,6 +5,7 @@ redirect_from:
 - /docs/preview/guides/meta/list_tables
 - /docs/stable/guides/meta/list_tables
 title: List Tables
+tested: true
 ---
 
 The `SHOW TABLES` command can be used to obtain a list of all tables within the selected schema.

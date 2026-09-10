@@ -6,6 +6,7 @@ redirect_from:
 - /docs/sql/statements/create_type
 - /docs/stable/sql/statements/create_type
 title: CREATE TYPE Statement
+tested: true
 ---
 
 The `CREATE TYPE` statement defines a new type in the catalog.

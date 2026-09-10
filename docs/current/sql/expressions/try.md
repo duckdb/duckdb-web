@@ -4,6 +4,7 @@ redirect_from:
 - /docs/preview/sql/expressions/try
 - /docs/stable/sql/expressions/try
 title: TRY Expression
+tested: true
 ---
 
 The `TRY` expression ensures that errors caused by the input rows in the child (scalar) expression result in `NULL` for those rows, instead of causing the query to throw an error.

@@ -6,6 +6,7 @@ redirect_from:
 - /docs/sql/expressions/collations
 - /docs/stable/sql/expressions/collations
 title: Collations
+tested: true
 ---
 
 <div id="rrdiagram"></div>
@@ -155,6 +156,8 @@ The collations we have seen so far are not region-dependent, and do not follow a
 
 Loading this extension will add a number of language and region specific collations to your database. These can be queried using the `PRAGMA collations` command, or by querying the `pragma_collations` function.
 
+<!-- test:skip the collation list depends on the ICU build shipped with each release -->
+
 ```sql
 PRAGMA collations;
 SELECT list(collname) FROM pragma_collations();
@@ -165,6 +168,8 @@ SELECT list(collname) FROM pragma_collations();
 ```
 
 These collations can then be used as the other collations would be used before. They can also be combined with the `NOCASE` collation. For example, to use the German collation rules you could use the following code snippet:
+
+<!-- test:skip the result below is written as prose, not as the CLI's one row per line -->
 
 ```sql
 CREATE TABLE strings (s VARCHAR COLLATE DE);

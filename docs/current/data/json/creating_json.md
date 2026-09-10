@@ -5,6 +5,7 @@ redirect_from:
 - /docs/preview/data/json/creating_json
 - /docs/stable/data/json/creating_json
 title: Creating JSON
+tested: true
 ---
 
 ## JSON Creation Functions

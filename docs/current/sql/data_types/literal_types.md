@@ -5,6 +5,7 @@ redirect_from:
 - /docs/sql/data_types/literal_types
 - /docs/stable/sql/data_types/literal_types
 title: Literal Types
+tested: true
 ---
 
 DuckDB has special literal types for representing `NULL`, integer and string literals in queries. These have their own binding and conversion rules.
@@ -136,6 +137,8 @@ To escape a single quote (apostrophe) character in a string literal, use `''`. F
 
 To enable some common escape sequences, such as `\n` for the newline character, prefix a string literal with `e` (or `E`).
 
+<!-- test:run-only the value contains a newline, which a line-based .test file cannot express -->
+
 ```sql
 SELECT e'Hello\nworld' AS msg;
 ```
@@ -165,6 +168,8 @@ The following backslash escape sequences are supported:
 
 DuckDB supports dollar-quoted string literals, which are surrounded by double-dollar symbols (`$$`):
 
+<!-- test:run-only the value contains a newline, which a line-based .test file cannot express -->
+
 ```sql
 SELECT $$Hello
 world$$ AS msg;
@@ -190,6 +195,8 @@ SELECT $$The price is $9.95$$ AS msg;
 | The price is $9.95 |
 
 Even more, you can insert alphanumeric tags in the double-dollar symbols to allow for the use of regular double-dollar symbols *within* the string literal:
+
+<!-- test:run-only the value contains a newline, which a line-based .test file cannot express -->
 
 ```sql
 SELECT $tag$ this string can contain newlines,

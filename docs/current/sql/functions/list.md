@@ -5,6 +5,7 @@ redirect_from:
 - /docs/sql/functions/list
 - /docs/stable/sql/functions/list
 title: List Functions
+tested: true
 ---
 
 <!-- markdownlint-disable MD001 -->
@@ -878,6 +879,8 @@ SELECT [4, 5, 6] AS l, [x FOR x, i IN l IF i != 2] AS filtered;
 
 Under the hood, `[f(x) FOR x IN l IF g(x)]` is translated to:
 
+<!-- test:skip expression fragment, not a standalone statement -->
+
 ```sql
 l.list_apply(lambda x, i: {'filter': g(x, i), 'result': f(x, i)})
     .list_filter(lambda x: x.filter)
@@ -1203,7 +1206,7 @@ This query uses the default sort order and the default `NULL` order.
 SELECT list_sort([1, 3, NULL, 5, NULL, -5]);
 ```
 
-```sql
+```text
 [-5, 1, 3, 5, NULL, NULL]
 ```
 
@@ -1214,7 +1217,7 @@ The `NULL` order uses the configurable default value.
 SELECT list_sort([1, 3, NULL, 2], 'ASC');
 ```
 
-```sql
+```text
 [1, 2, 3, NULL]
 ```
 
@@ -1224,7 +1227,7 @@ This query provides both the sort order and the `NULL` order.
 SELECT list_sort([1, 3, NULL, 2], 'DESC', 'NULLS FIRST');
 ```
 
-```sql
+```text
 [NULL, 3, 2, 1]
 ```
 
@@ -1237,7 +1240,7 @@ This query uses the default `NULL` sort order.
 SELECT list_sort([1, 3, NULL, 5, NULL, -5]);
 ```
 
-```sql
+```text
 [-5, 1, 3, 5, NULL, NULL]
 ```
 
@@ -1247,7 +1250,7 @@ This query provides the `NULL` sort order.
 SELECT list_reverse_sort([1, 3, NULL, 2], 'NULLS LAST');
 ```
 
-```sql
+```text
 [3, 2, 1, NULL]
 ```
 

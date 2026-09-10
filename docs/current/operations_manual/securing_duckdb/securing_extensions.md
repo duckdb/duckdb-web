@@ -5,6 +5,7 @@ redirect_from:
 - /docs/preview/operations_manual/securing_duckdb/securing_extensions
 - /docs/stable/operations_manual/securing_duckdb/securing_extensions
 title: Securing Extensions
+tested: true
 ---
 
 DuckDB has a powerful extension mechanism, which has the same privileges as the user running DuckDB's (parent) process.

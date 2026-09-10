@@ -7,6 +7,7 @@ redirect_from:
 - /docs/sql/data_types/enum
 - /docs/stable/sql/data_types/enum
 title: Enum Data Type
+tested: true
 ---
 
 | Name | Description |
@@ -44,11 +45,18 @@ You can also create an enum using a `SELECT` statement that returns a single col
 The set of values from the select statement will be deduplicated automatically,
 and `NULL` values will be ignored:
 
+<!-- test:setup
+CREATE TABLE sales_data (amount INTEGER, region VARCHAR);
+INSERT INTO sales_data VALUES (10, 'north'), (20, 'south'), (30, NULL);
+-->
+
 ```sql
 CREATE TYPE region AS ENUM (SELECT region FROM sales_data);
 ```
 
 If you are importing data from a file, you can create an enum for a `VARCHAR` column before importing:
+
+<!-- test:setup COPY (SELECT 10 AS amount, 'north' AS region UNION ALL SELECT 20, 'south') TO 'sales_data.csv'; -->
 
 ```sql
 CREATE TYPE region AS ENUM (SELECT region FROM 'sales_data.csv');
@@ -59,6 +67,8 @@ COPY sales_data FROM 'sales_data.csv';
 ## Using Enums
 
 Enum values are case-sensitive, so 'maltese' and 'Maltese' are considered different values:
+
+<!-- test:error the last statement in this block is shown failing on purpose -->
 
 ```sql
 CREATE TYPE breed AS ENUM ('maltese', 'Maltese');
@@ -84,6 +94,8 @@ INSERT INTO person VALUES
 ```
 
 The following query will fail since the mood type does not have a `quackity-quack` value.
+
+<!-- test:error -->
 
 ```sql
 INSERT INTO person VALUES ('Hannes', 'quackity-quack');
@@ -156,6 +168,8 @@ WHERE current_mood = 'bogus';
 ```
 
 If you want to enforce type-safety, cast to the enum explicitly:
+
+<!-- test:error -->
 
 ```sql
 SELECT * FROM person
