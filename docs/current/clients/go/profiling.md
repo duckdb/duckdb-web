@@ -58,7 +58,7 @@ Which metrics are collected depends on the `profiling_mode` set on the connectio
 
 ## Log Storage
 
-DuckDB can forward its [log messages]({% link docs/current/dev/profiling.md %}) to a custom storage registered from Go. Register one on a `Connector` with `duckdb.RegisterLogStorage()`, giving it a name and a `duckdb.LoggerCallbacks` whose `DefaultLoggerCallback` receives each entry's level, type, and message:
+DuckDB can forward its [log messages]({% link docs/current/operations_manual/logging/overview.md %}) to a custom storage registered from Go. Register one on a `Connector` with `duckdb.RegisterLogStorage()`, giving it a name and a `duckdb.LoggerCallbacks` whose `DefaultLoggerCallback` receives each entry's level, type, and message:
 
 ```go
 connector, err := duckdb.NewConnector("", nil)
@@ -84,6 +84,7 @@ Logging is off by default, so enable it with `CALL enable_logging()` in addition
 
 ## Further Reading
 
-* [Profiling]({% link docs/current/dev/profiling.md %}) — DuckDB's query profiling output, the `enable_profiling` and `profiling_mode` PRAGMAs, and its logging.
+* [Profiling]({% link docs/current/dev/profiling.md %}) — DuckDB's query profiling output and the `enable_profiling` and `profiling_mode` PRAGMAs.
+* [Logging]({% link docs/current/operations_manual/logging/overview.md %}) — enabling logging with `enable_logging` and querying log entries through `duckdb_logs`.
 * [Run Queries]({% link docs/current/clients/go/querying.md %}) — running the queries whose metrics this page reads.
 * [Connect]({% link docs/current/clients/go/connecting.md %}) — checking out the connection that profiling operates on, and the connector that log storage is registered on.

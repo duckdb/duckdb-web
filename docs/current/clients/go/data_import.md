@@ -63,13 +63,16 @@ func main() {
     if err != nil {
         log.Fatal(err)
     }
+    defer c.Close()
 
     con, err := c.Connect(context.Background())
     if err != nil {
         log.Fatal(err)
     }
+    defer con.Close()
 
     db := sql.OpenDB(c)
+    defer db.Close()
     if _, err := db.Exec(`CREATE TABLE users (name VARCHAR, age INTEGER)`); err != nil {
         log.Fatal(err)
     }
@@ -102,10 +105,13 @@ func main() {
 
 ### Targeting Other Schemas and Column Subsets
 
-Two more constructors target tables outside the default schema or append only some columns:
+The package provides more constructors for targeting other catalogs and schemas, selecting a subset of columns, or transforming batches as they are appended. Each takes a `driver.Conn` as its first argument:
 
-* `duckdb.NewAppender()` takes a catalog, a schema, and a table name, for appending to a table in a specific catalog and schema.
-* `duckdb.NewAppenderWithColumns()` takes a catalog, a schema, a table, and a list of column names, so that only those columns are supplied and the rest take their defaults.
+* `duckdb.NewAppender(driverConn, catalog, schema, table)` appends to all columns of the specified table.
+* `duckdb.NewTableAppender(driverConn, query, catalog, schema, table, columnNames)` runs an `INSERT`, `DELETE`, `UPDATE`, or `MERGE INTO` query for each buffered batch. It infers the input types from the named columns in the target table. Pass an empty column-name slice to use all columns.
+* `duckdb.NewQueryAppender(driverConn, query, temporaryTable, columnTypes, columnNames)` also runs a query for each batch, but lets the caller specify the temporary input table's name, column types, and column names.
+
+`duckdb.NewAppenderWithColumns(driverConn, catalog, schema, table, columnNames)` can also append a subset of columns, leaving other columns at their default values or `NULL`. It is retained mostly for backward compatibility. Prefer `NewTableAppender` for this case because its query-based appender is more performant.
 
 ## Reading Data Files
 

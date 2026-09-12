@@ -67,7 +67,18 @@ Once registered, the function is called from SQL by the name passed to `Register
 SELECT my_length('hello world');
 ```
 
-Set `VariadicTypeInfo` in the config to accept a variable number of trailing arguments; use `duckdb.TYPE_ANY` for it to accept any type. To register several overloads under one name, for example one taking a `VARCHAR` and another taking a `LIST`, implement each as its own `ScalarFunc` and register them together with `duckdb.RegisterScalarUDFSet()`:
+Set `VariadicTypeInfo` in the config to accept a variable number of trailing arguments. The field takes a `duckdb.TypeInfo`, so use `duckdb.NewTypeInfo(duckdb.TYPE_ANY)` to accept arguments of any type:
+
+```go
+anyType, err := duckdb.NewTypeInfo(duckdb.TYPE_ANY)
+check(err)
+
+config := duckdb.ScalarFuncConfig{
+    VariadicTypeInfo: anyType,
+}
+```
+
+To register several overloads under one name, for example one taking a `VARCHAR` and another taking a `LIST`, implement each as its own `ScalarFunc` and register them together with `duckdb.RegisterScalarUDFSet()`:
 
 ```go
 check(duckdb.RegisterScalarUDFSet(conn, "my_length", varcharUDF, listUDF))

@@ -11,6 +11,27 @@ title: Troubleshoot
 
 This page collects common issues encountered when using the DuckDB Go client, together with their workarounds. Because the client uses [cgo](https://pkg.go.dev/cmd/cgo) to embed DuckDB, most build problems are cgo or linker problems. If you run into a problem that is not covered here, search the [client's issue tracker](https://github.com/duckdb/duckdb-go/issues) on GitHub.
 
+## Classifying DuckDB Errors
+
+The client returns a `*duckdb.Error` for errors reported by DuckDB. Use [`errors.As`](https://pkg.go.dev/errors#As) to handle these errors by category without parsing their messages:
+
+```go
+_, err := db.Exec(query)
+if err != nil {
+    var duckdbError *duckdb.Error
+    if errors.As(err, &duckdbError) {
+        switch duckdbError.Type {
+        case duckdb.ErrorTypeCatalog:
+            // Handle a missing table, view, or other catalog entry.
+        case duckdb.ErrorTypeConstraint:
+            // Handle a constraint violation.
+        }
+    }
+}
+```
+
+`duckdb.Error.Type` is a `duckdb.ErrorType`. Other categories include `ErrorTypeBinder`, `ErrorTypeParser`, `ErrorTypeConversion`, `ErrorTypeIO`, `ErrorTypeOutOfRange`, and `ErrorTypeInvalidInput`. The `Msg` field contains the error message.
+
 ## `undefined: conn` and Other cgo Errors
 
 An `undefined: conn` error while building means the Go compiler has decided cgo is unavailable, so the DuckDB bindings were not compiled. There are two common causes:
@@ -95,14 +116,6 @@ row := db.QueryRow(query,
 ```
 
 See [Run Queries]({% link docs/current/clients/go/querying.md %}#forcing-a-parameter-type) for the full example.
-
-## Temporary Tables Persist Longer Than Expected
-
-Temporary objects such as [temporary tables]({% link docs/current/sql/statements/create_table.md %}#temporary-tables) are scoped to a connection. When code closes a connection, `database/sql` may keep it as an idle connection in the pool instead of tearing it down, so a temporary table can outlive the code that created it. Disable idle connections so that closing a connection actually closes it:
-
-```go
-db.SetMaxIdleConns(0)
-```
 
 ## Scanning JSON Values
 

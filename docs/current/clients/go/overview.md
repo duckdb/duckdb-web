@@ -13,8 +13,6 @@ redirect_from:
 title: Go Client
 ---
 
-> Installation To use the DuckDB Go client, visit the [Go installation page]({% link install/index.html %}?environment=go).
->
 > The latest stable release of the DuckDB Go client bundles DuckDB {% if site.current_duckdb_go_version != "" %}{{ site.current_duckdb_go_version }}{% else %}{{ site.lts_duckdb_go_version }}{% endif %}. Its own version tag encodes that DuckDB version; see [Versioning](#versioning) below.
 
 The DuckDB Go client, [`duckdb-go`](https://github.com/duckdb/duckdb-go), is a SQL driver that conforms to Go's built-in [`database/sql`](https://pkg.go.dev/database/sql) interface, so DuckDB is used through the same API as any other Go SQL database. On top of `database/sql`, the client adds DuckDB-specific interfaces for the [Appender]({% link docs/current/clients/go/data_import.md %}#appender), [Apache Arrow]({% link docs/current/clients/go/result_handling.md %}), [user-defined functions]({% link docs/current/clients/go/functions.md %}), and [profiling]({% link docs/current/clients/go/profiling.md %}). This page focuses on installation. The other pages in this section cover connecting and each feature in detail.
@@ -28,6 +26,8 @@ The client is a Go module. Add it to a project with `go get`, using the `/v2` ma
 ```batch
 go get github.com/duckdb/duckdb-go/v2
 ```
+
+To copy the module's dependencies into the project's `vendor` directory, including the pre-built DuckDB libraries from `duckdb-go-bindings`, run `go mod vendor`.
 
 DuckDB is written in C++, so the client uses [cgo](https://pkg.go.dev/cmd/cgo) and requires a C compiler to build. By default it statically links a pre-built DuckDB library into the binary, so no separate DuckDB installation is needed. Pre-built libraries ship for macOS (amd64, arm64), Linux (amd64, arm64), and Windows (amd64). Other platforms, custom builds, and dynamic linking are covered in [Troubleshoot]({% link docs/current/clients/go/troubleshoot.md %}#linking-duckdb).
 

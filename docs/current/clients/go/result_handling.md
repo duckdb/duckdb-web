@@ -38,12 +38,12 @@ if err != nil {
 }
 defer conn.Close()
 
-arrow, err := duckdb.NewArrowFromConn(conn)
+ar, err := duckdb.NewArrowFromConn(conn)
 if err != nil {
     log.Fatal(err)
 }
 
-reader, err := arrow.QueryContext(context.Background(), "SELECT * FROM generate_series(1, 10)")
+reader, err := ar.QueryContext(context.Background(), "SELECT * FROM generate_series(1, 10)")
 if err != nil {
     log.Fatal(err)
 }
@@ -66,13 +66,13 @@ if err := reader.Err(); err != nil {
 An Arrow stream produced elsewhere in a program, an `array.RecordReader`, can be registered as a DuckDB view and queried in SQL. `RegisterView()` takes the reader and a view name, and returns a `release` function that unregisters the view; call it when the view is no longer needed:
 
 ```go
-release, err := arrow.RegisterView(reader, "my_arrow_view")
+release, err := ar.RegisterView(reader, "my_arrow_view")
 if err != nil {
     log.Fatal(err)
 }
 defer release()
 
-result, err := arrow.QueryContext(context.Background(),
+result, err := ar.QueryContext(context.Background(),
     "SELECT count(*) FROM my_arrow_view")
 ```
 
