@@ -73,7 +73,7 @@ err = appender.AppendRow(1, "hello")
 err = appender.Flush()
 ```
 
-For more information, see the [Go Appender API]({% link docs/current/clients/go.md %}#appender).
+For more information, see the [Go Appender API]({% link docs/current/clients/go/data_import.md %}#appender).
 
 ### Rust
 
@@ -137,7 +137,7 @@ In this case, the entire append operation fails and no rows are inserted.
 Each client's documentation covers its full Appender API, including constructors for non-default schemas and catalogs and any client-specific features:
 
 * [C]({% link docs/current/clients/c/appender.md %})
-* [Go]({% link docs/current/clients/go.md %}#appender)
+* [Go]({% link docs/current/clients/go/data_import.md %}#appender)
 * [Java (JDBC)]({% link docs/current/clients/java/data_import.md %}#appender)
 * [Julia]({% link docs/current/clients/tertiary_clients/julia.md %}#appender-api)
 * [Rust]({% link docs/current/clients/rust/data_import.md %}#appender)

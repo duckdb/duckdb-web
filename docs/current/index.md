@@ -47,7 +47,7 @@ title: Documentation
         <svg class="chevron"><use href="#chevron-right"></use></svg>
     </div>
     <div class="box-link third-width">
-        <a href="{% link docs/current/clients/go.md %}"></a>
+        <a href="{% link docs/current/clients/go/overview.md %}"></a>
         <span class="symbol"><img src="{% link images/icons/go.svg %}"></span>
         <span>Go</span>
         <svg class="chevron"><use href="#chevron-right"></use></svg>
