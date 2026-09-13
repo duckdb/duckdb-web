@@ -66,8 +66,8 @@ repo:
 
 extension_star_count: 285
 extension_star_count_pretty: 285
-extension_download_count: 3597
-extension_download_count_pretty: 3.6k
+extension_download_count: 3662
+extension_download_count_pretty: 3.7k
 image: '/images/community_extensions/social_preview/preview_community_extension_httpserver.png'
 layout: community_extension_doc
 ---

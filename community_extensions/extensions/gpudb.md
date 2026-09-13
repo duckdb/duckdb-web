@@ -184,10 +184,10 @@ docs:
       run natively). The resident functions are serialised across
       connections.
 
-extension_star_count: 19
-extension_star_count_pretty: 19
-extension_download_count: 429
-extension_download_count_pretty: 429
+extension_star_count: 20
+extension_star_count_pretty: 20
+extension_download_count: 440
+extension_download_count_pretty: 440
 image: '/images/community_extensions/social_preview/preview_community_extension_gpudb.png'
 layout: community_extension_doc
 ---
