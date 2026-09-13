@@ -8,7 +8,7 @@ excerpt: |
 extension:
   name: duck_block_utils
   description: Build, transform, validate, and extract content from structured documents using the duck_block type
-  version: 3.0.1
+  version: 3.1.0
   language: C++
   build: cmake
   license: MIT
@@ -21,7 +21,8 @@ repo:
   # so advancing this pin would point a v1.4.5 build at a tree that cannot build for
   # it. v1.4.5 users should move to the v1.5.x track.
   andium: 125662df9e5450105dc9b7957ad955cb53d7beec
-  ref: 959965034939352e6e6389da7c202b365d924fa5
+  ref: 6c1c2e51fdc79c18adca059d84c846cb234854ba
+  ref_next: 6c1c2e51fdc79c18adca059d84c846cb234854ba
 docs:
   hello_world: |
     -- Build a document programmatically
@@ -159,6 +160,8 @@ docs:
     | Function | Description |
     |----------|-------------|
     | `duck_blocks_validate(blocks)` | Spec conformance: valid, plus errors |
+    | `duck_blocks_repair(blocks)` | Deterministic fixes for the list-level rules: wrap orphans, rebase, renumber |
+    | `duck_block_implicit_parent(type, kind)` | The wrapper a fragment of that element gets, from the spec table |
     | `duck_blocks_lint(blocks)` | Advisory conformance warnings |
     | `duck_blocks_quality(blocks)` | Document quality, which is NOT conformance |
     | `duck_block_spec_version()` | The spec version this build implements |
@@ -203,8 +206,8 @@ docs:
 
 extension_star_count: 2
 extension_star_count_pretty: 2
-extension_download_count: 1019
-extension_download_count_pretty: 1.0k
+extension_download_count: 1120
+extension_download_count_pretty: 1.1k
 image: '/images/community_extensions/social_preview/preview_community_extension_duck_block_utils.png'
 layout: community_extension_doc
 ---
@@ -248,6 +251,7 @@ LOAD {{ page.extension.name }};
 | duck_block_heading              | scalar        | NULL        | NULL    |          |
 | duck_block_hr                   | scalar        | NULL        | NULL    |          |
 | duck_block_image                | scalar        | NULL        | NULL    |          |
+| duck_block_implicit_parent      | scalar        | NULL        | NULL    |          |
 | duck_block_inline_code          | scalar        | NULL        | NULL    |          |
 | duck_block_inline_image         | scalar        | NULL        | NULL    |          |
 | duck_block_italic               | scalar        | NULL        | NULL    |          |
@@ -311,6 +315,7 @@ LOAD {{ page.extension.name }};
 | duck_blocks_rebase_levels       | scalar        | NULL        | NULL    |          |
 | duck_blocks_render_ansi         | scalar        | NULL        | NULL    |          |
 | duck_blocks_reorder             | scalar        | NULL        | NULL    |          |
+| duck_blocks_repair              | scalar        | NULL        | NULL    |          |
 | duck_blocks_sections_like       | table_macro   | NULL        | NULL    |          |
 | duck_blocks_sections_like_text  | table_macro   | NULL        | NULL    |          |
 | duck_blocks_slice               | scalar        | NULL        | NULL    |          |

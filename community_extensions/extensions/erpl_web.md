@@ -21,8 +21,8 @@ repo:
 
 extension_star_count: 31
 extension_star_count_pretty: 31
-extension_download_count: 900
-extension_download_count_pretty: 900
+extension_download_count: 922
+extension_download_count_pretty: 922
 image: '/images/community_extensions/social_preview/preview_community_extension_erpl_web.png'
 layout: community_extension_doc
 ---

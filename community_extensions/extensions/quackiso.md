@@ -300,8 +300,8 @@ docs:
 
 extension_star_count: 5
 extension_star_count_pretty: 5
-extension_download_count: 434
-extension_download_count_pretty: 434
+extension_download_count: 455
+extension_download_count_pretty: 455
 image: '/images/community_extensions/social_preview/preview_community_extension_quackiso.png'
 layout: community_extension_doc
 ---

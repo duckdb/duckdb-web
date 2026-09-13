@@ -128,8 +128,8 @@ docs:
 
 extension_star_count: 8
 extension_star_count_pretty: 8
-extension_download_count: 766
-extension_download_count_pretty: 766
+extension_download_count: 777
+extension_download_count_pretty: 777
 image: '/images/community_extensions/social_preview/preview_community_extension_duck_geoarrow.png'
 layout: community_extension_doc
 ---

@@ -43,10 +43,10 @@ docs:
 
     Documentation: https://anentropic.github.io/duckdb-semantic-views/
 
-extension_star_count: 13
-extension_star_count_pretty: 13
-extension_download_count: 810
-extension_download_count_pretty: 810
+extension_star_count: 15
+extension_star_count_pretty: 15
+extension_download_count: 831
+extension_download_count_pretty: 831
 image: '/images/community_extensions/social_preview/preview_community_extension_semantic_views.png'
 layout: community_extension_doc
 ---
