@@ -1786,6 +1786,10 @@
                 {
                   "page": "Copying an In-Memory Database to a File",
                   "url": "copy_in-memory_database_to_file"
+                },
+                {
+                  "page": "Calculating a Database Checksum",
+                  "url": "database_checksum"
                 }
               ]
             },
