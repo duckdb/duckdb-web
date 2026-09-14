@@ -38,6 +38,10 @@ a, a:active, a:focus, button, button:active, button:focus {
 	--main-link-hover-color: var(--duckdb-nav-icon-hover);
 }
 
+table{
+	font-variant-numeric: tabular-nums;
+}
+
 table a,
 p a,
 li a,
