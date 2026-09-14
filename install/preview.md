@@ -25,6 +25,8 @@ There are currently the following DuckDB versions under development:
 * v1.5: the current stable DuckDB release.
 * v2.0: the next DuckDB version, in an early stage of the development.
 
+Note that for most users, we recommend the [stable DuckDB releases]({% link install/index.html %}).
+
 ## Command Line Interface (CLI), C and C++ Clients
 
 For the CLI, C and C++ clients, there are two preview builds available: v1.5-dev and v2.0-dev.
