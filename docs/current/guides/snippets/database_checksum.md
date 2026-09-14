@@ -23,7 +23,7 @@ You need to call this macro for all tables. In the CLI, you can do so by dynamic
 
 ```sql
 .mode list
-.header off
+.headers off
 .once checksum_all_tables.sql
 SELECT printf('CREATE OR REPLACE TABLE table_checksums (checksum UHUGEINT);')
 UNION ALL
