@@ -226,7 +226,7 @@ FROM produce
   |> WHERE
         item != 'bananas'
         AND category IN ('fruit', 'nut')
-  |> AGGREGATE COUNT(*) AS num_items, SUM(sales) AS total_sales
+  |> AGGREGATE count(*) AS num_items, sum(sales) AS total_sales
      GROUP BY item
   |> ORDER BY item DESC;
 ```
