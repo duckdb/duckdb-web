@@ -6,7 +6,7 @@ author: "Bruno Verachten"
 thumb: "/images/everywhere/thumbs/bananapi-f3.jpg"
 image: "/images/everywhere/thumbs/bananapi-f3.jpg"
 excerpt: ""
-tags: ["Single-board computers"]
+tags: ["Other"]
 thirdparty: true
 ---
 
