@@ -181,11 +181,9 @@ The `duckdb_functions()` function provides metadata about the functions (includi
 | `macro_definition` | If this is a [macro]({% link docs/current/sql/statements/create_macro.md %}), the SQL expression that defines it. | `VARCHAR` |
 | `has_side_effects` | `false` if this is a pure function. `true` if this function changes the database state (like sequence functions `nextval()` and `curval()`). | `BOOLEAN` |
 | `internal` | `true` if the function is built-in (defined by DuckDB or an extension), `false` if it was defined using the [`CREATE MACRO` statement]({% link docs/current/sql/statements/create_macro.md %}). | `BOOLEAN` |
-| `extension_name` | The name of the extension that provides this function, or `NULL` if none. | `VARCHAR` |
 | `function_oid` | The internal identifier for this function. | `BIGINT` |
 | `examples` | Examples of using the function. Used to generate the documentation. | `VARCHAR[]` |
 | `stability` | The stability of the function (`CONSISTENT`, `VOLATILE`, `CONSISTENT_WITHIN_QUERY` or `NULL`) | `VARCHAR` |
-| `categories` | Categories of the function. Used to generate the documentation. | `VARCHAR[]` |
 
 ## `duckdb_indexes`
 
