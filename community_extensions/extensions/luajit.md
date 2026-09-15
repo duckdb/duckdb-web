@@ -8,7 +8,7 @@ excerpt: |
 extension:
   name: luajit
   description: "In-process LuaJIT UDFs for DuckDB — JIT-compiled, parallel (per-thread states), trusted sandbox, GROUP BY aggregates, LIST/STRUCT/MAP bridges, embedded Fennel compiler"
-  version: 0.32.3
+  version: 0.32.4
   language: C
   build: cmake
   license: MIT
@@ -18,7 +18,7 @@ extension:
 
 repo:
   github: alitrack/duckdb-luajit
-  ref: dbdfd5e1e93a1929934c7b9555dc4e0075770161
+  ref: a9482be3adf85919bc11ef4957ecbda5d4957012
 
 docs:
   hello_world: |
@@ -72,10 +72,10 @@ docs:
     **Platforms:** Linux x64/arm64, Windows (MSVC), macOS x64/arm64. WASM and mingw/rtools
     excluded (LuaJIT requires specific toolchains); linux_arm64 verified (v0.31, CI + arm64 runtime test).
 
-extension_star_count: 6
-extension_star_count_pretty: 6
-extension_download_count: 594
-extension_download_count_pretty: 594
+extension_star_count: 7
+extension_star_count_pretty: 7
+extension_download_count: 479
+extension_download_count_pretty: 479
 image: '/images/community_extensions/social_preview/preview_community_extension_luajit.png'
 layout: community_extension_doc
 ---
