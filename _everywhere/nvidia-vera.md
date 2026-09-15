@@ -12,7 +12,7 @@ thirdparty: true
 
 We ran the full TPC-H benchmark with the scale factor 1,000 dataset using the [`duckdb-tpch` project](https://github.com/duckdb/duckdb-tpch).
 Our setup included two server platforms: Intel Xeon and Nvidia Vera.
-We also compared two DuckDB versions: the latest stable version (v1.5.5) and the upcoming release's alpha version (v2.0.0-alpha), with the latter shipping several optimizations that make complex workloads such as TPC-H faster.
+We also compared two DuckDB versions: the latest stable version (v1.5.5) and the upcoming release's [alpha version]({% post_url 2026-09-02-try-duckdb-20-alpha %}) (v2.0.0-alpha), with the latter shipping several optimizations that make complex workloads such as TPC-H faster.
 
 ## Platforms
 
@@ -52,7 +52,7 @@ SET allocator_background_threads = true;
 
 ## DuckDB Versions
 
-We ran DuckDB using the Python client:
+We ran DuckDB using the Python client and benchmarked two DuckDB versions:
 
 * DuckDB v1.5.5
 * DuckDB v2.0.0-alpha (Python package: `1.6.0.dev379`)
