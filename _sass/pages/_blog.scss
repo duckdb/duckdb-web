@@ -167,6 +167,9 @@ section.speakers,
 				}
 			}
 			.tags{
+				display: flex;
+				flex-wrap: wrap;
+				align-items: center;
 				margin-bottom: 0;
 				line-height: inherit;
 				span{
