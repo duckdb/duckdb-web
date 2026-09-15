@@ -101,10 +101,10 @@ docs:
     **read-only SQL surface** — validation, certification and repair stay in the `lat`
     CLI / the `laterite` library.
 
-extension_star_count: 1
-extension_star_count_pretty: 1
-extension_download_count: 778
-extension_download_count_pretty: 778
+extension_star_count: 2
+extension_star_count_pretty: 2
+extension_download_count: 685
+extension_download_count_pretty: 685
 image: '/images/community_extensions/social_preview/preview_community_extension_laterite_ags4.png'
 layout: community_extension_doc
 ---

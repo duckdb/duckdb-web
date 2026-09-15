@@ -8,7 +8,7 @@ excerpt: |
 extension:
   name: duckflight
   description: Query DuckDB from PostgreSQL and Arrow Flight SQL clients, including psql, ADBC, and Airport
-  version: 0.1.5
+  version: 0.1.6
   language: Rust
   build: cargo
   license: MIT
@@ -19,7 +19,7 @@ extension:
 
 repo:
   github: sidequery/duckflight-extension
-  ref: 24f4b3ca9d30cb688cf168ca50bbf733eeb70181
+  ref: a4cfbfa9865054a3c4d57338b9501685ced47141
 
 docs:
   hello_world: |
@@ -43,12 +43,29 @@ docs:
 
     Both listeners require authentication. A single `duckflight.toml` configures users, access
     tokens, and optional TLS. See the
-    [quick start and authentication guide](https://github.com/sidequery/duckflight-extension/blob/main/docs/AUTHENTICATION.md).
+    [quick start and authentication guide](https://github.com/sidequery/duckflight-extension/blob/main/README.md#authentication-setup).
+
+    Server-control functions:
+
+    | Function | Purpose |
+    | --- | --- |
+    | `duckflight_pg_serve(address, config_file)` | Starts an authenticated PostgreSQL listener; returns its protocol and bound address. |
+    | `duckflight_flight_serve(address, config_file)` | Starts an authenticated Arrow Flight SQL listener; returns its protocol and bound address. |
+    | `duckflight_stop(protocol, address)` | Stops the specified listener and returns its status. |
+    | `duckflight_servers()` | Lists running listeners and their bound addresses. |
+    | `duckflight_core_status()` | Reports whether the runtime loaded, its ABI version, and status details. |
+
+    The automatically detected functions below also include PostgreSQL compatibility macros
+    and internal session/catalog helpers installed by the runtime. These support PostgreSQL
+    queries and client metadata discovery; they are not additional server controls or a complete
+    implementation of PostgreSQL functions. Their catalog comments describe each helper.
+    DuckDB 1.5.5 does not expose function-description setters through the table-function C API,
+    so the five native server functions are documented above.
 
 extension_star_count: 12
 extension_star_count_pretty: 12
-extension_download_count: 428
-extension_download_count_pretty: 428
+extension_download_count: 460
+extension_download_count_pretty: 460
 image: '/images/community_extensions/social_preview/preview_community_extension_duckflight.png'
 layout: community_extension_doc
 ---
@@ -74,56 +91,58 @@ LOAD {{ page.extension.name }};
 
 <div class="extension_functions_table"></div>
 
-|        function_name         | function_type | description | comment | examples |
-|------------------------------|---------------|-------------|---------|----------|
-| array_ndims                  | macro         | NULL        | NULL    |          |
-| array_remove                 | macro         | NULL        | NULL    |          |
-| array_replace                | macro         | NULL        | NULL    |          |
-| btrim                        | macro         | NULL        | NULL    |          |
-| cardinality                  | macro         | NULL        | NULL    |          |
-| div                          | macro         | NULL        | NULL    |          |
-| duckflight_core_status       | table         | NULL        | NULL    |          |
-| duckflight_current_database  | macro         | NULL        | NULL    |          |
-| duckflight_current_user      | macro         | NULL        | NULL    |          |
-| duckflight_database_oid      | macro         | NULL        | NULL    |          |
-| duckflight_flight_serve      | table         | NULL        | NULL    |          |
-| duckflight_pg_serve          | table         | NULL        | NULL    |          |
-| duckflight_pg_stat_activity  | table_macro   | NULL        | NULL    |          |
-| duckflight_pg_stat_ssl       | table_macro   | NULL        | NULL    |          |
-| duckflight_runtime_databases | table_macro   | NULL        | NULL    |          |
-| duckflight_servers           | table         | NULL        | NULL    |          |
-| duckflight_session_pid       | macro         | NULL        | NULL    |          |
-| duckflight_stop              | table         | NULL        | NULL    |          |
-| duckflight_visible_database  | macro         | NULL        | NULL    |          |
-| every                        | macro         | NULL        | NULL    |          |
-| format                       | macro         | NULL        | NULL    |          |
-| initcap                      | macro         | NULL        | NULL    |          |
-| json_agg                     | macro         | NULL        | NULL    |          |
-| json_extract_path            | macro         | NULL        | NULL    |          |
-| json_extract_path_text       | macro         | NULL        | NULL    |          |
-| json_object_agg              | macro         | NULL        | NULL    |          |
-| json_typeof                  | macro         | NULL        | NULL    |          |
-| jsonb_array_length           | macro         | NULL        | NULL    |          |
-| jsonb_set                    | macro         | NULL        | NULL    |          |
-| octet_length                 | macro         | NULL        | NULL    |          |
-| pg_div                       | macro         | NULL        | NULL    |          |
-| quote_ident                  | macro         | NULL        | NULL    |          |
-| quote_literal                | macro         | NULL        | NULL    |          |
-| quote_nullable               | macro         | NULL        | NULL    |          |
-| to_char                      | macro         | NULL        | NULL    |          |
-| to_date                      | macro         | NULL        | NULL    |          |
-| to_json                      | macro         | NULL        | NULL    |          |
-| to_jsonb                     | macro         | NULL        | NULL    |          |
-| to_timestamp                 | macro         | NULL        | NULL    |          |
-| width_bucket                 | macro         | NULL        | NULL    |          |
+|         function_name         | function_type | description |                                                 comment                                                 | examples |
+|-------------------------------|---------------|-------------|---------------------------------------------------------------------------------------------------------|----------|
+| array_ndims                   | macro         | NULL        | PostgreSQL compatibility: Returns the number of array dimensions from its type.                         |          |
+| array_remove                  | macro         | NULL        | PostgreSQL compatibility: Filters array elements using inequality with the supplied value.              |          |
+| array_replace                 | macro         | NULL        | PostgreSQL compatibility: Replaces matching array elements with a new value.                            |          |
+| btrim                         | macro         | NULL        | PostgreSQL compatibility: Trims the specified characters from both ends of a string.                    |          |
+| cardinality                   | macro         | NULL        | PostgreSQL compatibility: Returns the length of the first array dimension.                              |          |
+| div                           | macro         | NULL        | PostgreSQL compatibility: Divides two numbers and truncates the result to an integer.                   |          |
+| duckflight_array_lower        | macro         | NULL        | NULL                                                                                                    |          |
+| duckflight_array_upper        | macro         | NULL        | NULL                                                                                                    |          |
+| duckflight_core_status        | table         | NULL        | NULL                                                                                                    |          |
+| duckflight_current_database   | macro         | NULL        | Internal session helper: Supplies the PostgreSQL-facing database name for compatibility queries.        |          |
+| duckflight_current_user       | macro         | NULL        | Internal session helper: Supplies the PostgreSQL-facing user name for compatibility queries.            |          |
+| duckflight_database_oid       | macro         | NULL        | Internal catalog helper: Maps a database name to a PostgreSQL-compatible object identifier.             |          |
+| duckflight_flight_serve       | table         | NULL        | NULL                                                                                                    |          |
+| duckflight_pg_generate_series | table_macro   | NULL        | Internal query helper: Generates a series with PostgreSQL-compatible result typing.                     |          |
+| duckflight_pg_serve           | table         | NULL        | NULL                                                                                                    |          |
+| duckflight_pg_stat_activity   | table_macro   | NULL        | Internal catalog helper: Supplies PostgreSQL-compatible session activity rows.                          |          |
+| duckflight_pg_stat_ssl        | table_macro   | NULL        | Internal catalog helper: Supplies PostgreSQL-compatible session TLS metadata.                           |          |
+| duckflight_runtime_databases  | table_macro   | NULL        | Internal catalog helper: Supplies runtime database names for PostgreSQL catalog queries.                |          |
+| duckflight_servers            | table         | NULL        | NULL                                                                                                    |          |
+| duckflight_session_pid        | macro         | NULL        | Internal session helper: Supplies the PostgreSQL session process identifier.                            |          |
+| duckflight_stop               | table         | NULL        | NULL                                                                                                    |          |
+| duckflight_visible_database   | macro         | NULL        | Internal session helper: Identifies the DuckDB database exposed by compatibility catalog views.         |          |
+| every                         | macro         | NULL        | PostgreSQL compatibility: Computes Boolean AND across input rows.                                       |          |
+| format                        | macro         | NULL        | PostgreSQL compatibility: Substitutes one value into %I identifier and %s string placeholders.          |          |
+| initcap                       | macro         | NULL        | PostgreSQL compatibility: Capitalizes space-separated words.                                            |          |
+| json_agg                      | macro         | NULL        | PostgreSQL compatibility: Aggregates input values into a JSON array.                                    |          |
+| json_extract_path             | macro         | NULL        | PostgreSQL compatibility: Extracts a JSON value at the supplied object path.                            |          |
+| json_extract_path_text        | macro         | NULL        | PostgreSQL compatibility: Extracts text at the supplied JSON object path.                               |          |
+| json_object_agg               | macro         | NULL        | PostgreSQL compatibility: Aggregates key-value pairs into a JSON object.                                |          |
+| json_typeof                   | macro         | NULL        | PostgreSQL compatibility: Reports a JSON value type using PostgreSQL-style names.                       |          |
+| jsonb_array_length            | macro         | NULL        | PostgreSQL compatibility: Returns the number of elements in a JSON array.                               |          |
+| jsonb_set                     | macro         | NULL        | PostgreSQL compatibility: Applies a JSON merge patch using the supplied path as an object key.          |          |
+| octet_length                  | macro         | NULL        | PostgreSQL compatibility: Returns the byte length of a blob or UTF-8 string.                            |          |
+| pg_div                        | macro         | NULL        | PostgreSQL compatibility: Uses truncated division for integer operands and ordinary division otherwise. |          |
+| pg_typeof                     | macro         | NULL        | PostgreSQL compatibility: Reports a value type using PostgreSQL-style names.                            |          |
+| quote_ident                   | macro         | NULL        | PostgreSQL compatibility: Quotes an SQL identifier when required by the shim identifier rules.          |          |
+| quote_literal                 | macro         | NULL        | PostgreSQL compatibility: Quotes a string as an SQL literal, escaping single quotes.                    |          |
+| quote_nullable                | macro         | NULL        | PostgreSQL compatibility: Quotes a value as an SQL literal or returns the text NULL.                    |          |
+| to_char                       | macro         | NULL        | PostgreSQL compatibility: Formats dates, timestamps, or numbers using supported format patterns.        |          |
+| to_date                       | macro         | NULL        | PostgreSQL compatibility: Parses a date using supported format patterns.                                |          |
+| to_json                       | macro         | NULL        | PostgreSQL compatibility: Converts a value to JSON.                                                     |          |
+| to_jsonb                      | macro         | NULL        | PostgreSQL compatibility: Converts a value to DuckDB JSON for PostgreSQL jsonb-style queries.           |          |
+| to_timestamp                  | macro         | NULL        | PostgreSQL compatibility: Parses a timestamp with time zone using supported format patterns.            |          |
+| width_bucket                  | macro         | NULL        | PostgreSQL compatibility: Assigns a number to an equal-width bucket, including out-of-range buckets.    |          |
 
 ### Overloaded Functions
 
 <div class="extension_functions_table"></div>
 
-| function_name | function_type | description | comment | examples |
-|---------------|---------------|-------------|---------|----------|
-| pg_typeof     | macro         | NULL        | NULL    |          |
+This extension does not add any function overloads.
 
 ### Added Types
 

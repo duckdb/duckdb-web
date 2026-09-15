@@ -8,7 +8,7 @@ excerpt: |
 extension:
   name: markdown
   description: Read, analyze, and write Markdown files with block-level document representation and inline element support
-  version: 1.8.0
+  version: 1.9.1
   language: C++
   build: cmake
   license: MIT
@@ -20,7 +20,12 @@ repo:
   # andium (DuckDB v1.4.5 track) intentionally left at its prior commit; every
   # change since ships on the v1.5.x track via ref, which is a v1.5.4 tree.
   andium: c9e1a4d3b98a814c86295ecb2ed760be286242ba
-  ref: 75e9d0bc00549d9af7d140920843ecc539f9ac44
+  ref: 2ba1321c5c2b97f55d667a9aab4c0e55e1bfbf22
+  # ref_next is what makes the PRERELEASE leg actually build against DuckDB
+  # v2.0. Without it build_next.yml prints "Skipping prerelease validation" and
+  # the PR passes green having verified nothing on that line. Same commit as
+  # ref: this tag builds on both.
+  ref_next: 2ba1321c5c2b97f55d667a9aab4c0e55e1bfbf22
 docs:
   hello_world: |
     -- Load the extension
@@ -111,12 +116,12 @@ docs:
 
     Real-world benchmark: Processing 287 Markdown files (2,699 sections, 1,137 code blocks, 1,174 links) in 603ms.
 
-    Full test suite with 1818 passing assertions across 50 test files.
+    Full test suite with 1948 passing assertions across 54 test files.
 
-extension_star_count: 30
-extension_star_count_pretty: 30
-extension_download_count: 1227
-extension_download_count_pretty: 1.2k
+extension_star_count: 31
+extension_star_count_pretty: 31
+extension_download_count: 1266
+extension_download_count_pretty: 1.3k
 image: '/images/community_extensions/social_preview/preview_community_extension_markdown.png'
 layout: community_extension_doc
 ---
