@@ -12,7 +12,7 @@ thirdparty: true
 
 DuckDB runs natively on the BananaPi F3, a $100 RISC-V single-board computer powered by the SpacemiT K1 SoC (8 cores @ 1.6 GHz, rv64gc, 16 GB RAM).
 
-The build takes approximately 2 hours with `make -j8`, and the resulting binary passes SQL queries — from simple selects to aggregations over generated datasets.
+The build takes approximately 2 hours with `make -j8`, and the resulting binary passes SQL queries – from simple selects to aggregations over generated datasets.
 
 ```sql
 SELECT count(*) AS cnt, round(avg(value), 2) AS avg_val

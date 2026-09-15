@@ -6,12 +6,12 @@ author: "The DuckDB and NVIDIA teams"
 thumb: "/images/everywhere/thumbs/nvidia-vera.jpg"
 image: "/images/everywhere/thumbs/nvidia-vera.jpg"
 excerpt: ""
-tags: ["PCs"]
+tags: ["Servers"]
 thirdparty: true
 ---
 
 We ran the full TPC-H benchmark with the scale factor 1,000 dataset using the [`duckdb-tpch` project](https://github.com/duckdb/duckdb-tpch).
-Our setup included two server platforms: x86 baseline (Intel Xeon 6) and NVIDIA Vera.
+Our setup included two server platforms: an x86 baseline (Intel Xeon 6) and NVIDIA Vera.
 We also compared two DuckDB versions: the latest stable version (v1.5.5) and the upcoming release's [alpha version]({% post_url 2026-09-02-try-duckdb-20-alpha %}) (v2.0.0-alpha), with the latter shipping several optimizations that make complex workloads such as TPC-H faster.
 
 ## Platforms
@@ -22,7 +22,7 @@ We ran the benchmark on a server with an Intel Xeon 6 CPU.
 
 * **CPU:** Intel Xeon 6 CPU, 96 cores with [hyper-threading](https://en.wikipedia.org/wiki/Hyper-threading)
 * **Memory:** 768 GB
-* **Disk:** 1 NVMe SSD disk with 3TB+ storage, formatted to ext4
+* **Disk:** 1 NVMe SSD with 3 TB+ storage, formatted to ext4
 * **Operating system:** Ubuntu 26.04
 
 DuckDB flags:
@@ -37,9 +37,9 @@ SET allocator_background_threads = true;
 
 We conducted the benchmark on a dual-socket system but restricted DuckDB to a single socket.
 
-* **CPU:** NVIDIA Vera CPU, 88 cores with [Spatial Multithreading](https://alphaeloper.nvidia.com/blog/inside-nvidia-vera-cpu-olympus-cores-built-for-maximum-single-threaded-performance-in-agentic-ai/)
+* **CPU:** NVIDIA Vera CPU, 88 cores with [Spatial Multithreading](https://developer.nvidia.com/blog/inside-nvidia-vera-cpu-olympus-cores-built-for-maximum-single-threaded-performance-in-agentic-ai/)
 * **Memory:** 768 GB
-* **Disk:** 1 NVMe SSD disk with 3TB+ storage, formatted to ext4
+* **Disk:** 1 NVMe SSD with 3 TB+ storage, formatted to ext4
 * **Operating system:** Ubuntu 26.04
 
 DuckDB flags:
@@ -59,7 +59,7 @@ We ran DuckDB using the Python client and benchmarked two DuckDB versions:
 
 ## Benchmark Methodology
 
-We perform an initial warmup run and discard its result, then conduct three runs and take the median value of the QphH@SF composite scores.
+We performed an initial warmup run and discarded its result, then conducted three runs and took the median value of the QphH@SF composite scores.
 
 ## Benchmark Results
 
@@ -72,8 +72,7 @@ We perform an initial warmup run and discard its result, then conduct three runs
 | Run 3            | 1,673,422.48     | 2,109,782.19     | 2,482,589.73     | 3,052,102.87     |
 | **Median score** | **1,673,422.48** | **2,109,782.19** | **2,482,589.73** | **3,073,292.99** |
 
-The results show a 24–26% improvement for DuckDB v2.0.0-alpha over DuckDB v1.5.5,
-and a 46–48% performance advantage for the Vera platform over the Xeon baseline.
+The results show two key findings. First, the Vera platform has a 46–48% performance advantage on TPC-H SF1,000 over the x86 baseline (Xeon 6). Second, DuckDB v2.0.0-alpha shows a 24–26% improvement over DuckDB v1.5.5 on both CPUs – and this is something all users will benefit from once [DuckDB v2.0.0 is out]({% link release_calendar.md %}).
 
 We'll share more details in an upcoming blog post.
 Stay tuned!
