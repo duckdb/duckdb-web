@@ -11,12 +11,12 @@ thirdparty: true
 ---
 
 We ran the full TPC-H benchmark with the scale factor 1,000 dataset using the [`duckdb-tpch` project](https://github.com/duckdb/duckdb-tpch).
-Our setup included two server platforms: Intel Xeon and NVIDIA Vera.
+Our setup included two server platforms: x86 baseline (Intel Xeon 6) and NVIDIA Vera.
 We also compared two DuckDB versions: the latest stable version (v1.5.5) and the upcoming release's [alpha version]({% post_url 2026-09-02-try-duckdb-20-alpha %}) (v2.0.0-alpha), with the latter shipping several optimizations that make complex workloads such as TPC-H faster.
 
 ## Platforms
 
-### Intel Xeon 6
+### x86 Baseline: Intel Xeon 6
 
 We ran the benchmark on a server with an Intel Xeon 6 CPU.
 
