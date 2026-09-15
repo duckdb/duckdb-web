@@ -1,8 +1,8 @@
 ---
 layout: post
-title: "Nvidia Vera"
+title: "NVIDIA Vera"
 date: 2026-09-15
-author: "The DuckDB and Nvidia teams"
+author: "The DuckDB and NVIDIA teams"
 thumb: "/images/everywhere/thumbs/nvidia-vera.jpg"
 image: "/images/everywhere/thumbs/nvidia-vera.jpg"
 excerpt: ""
@@ -11,7 +11,7 @@ thirdparty: true
 ---
 
 We ran the full TPC-H benchmark with the scale factor 1,000 dataset using the [`duckdb-tpch` project](https://github.com/duckdb/duckdb-tpch).
-Our setup included two server platforms: Intel Xeon and Nvidia Vera.
+Our setup included two server platforms: Intel Xeon and NVIDIA Vera.
 We also compared two DuckDB versions: the latest stable version (v1.5.5) and the upcoming release's [alpha version]({% post_url 2026-09-02-try-duckdb-20-alpha %}) (v2.0.0-alpha), with the latter shipping several optimizations that make complex workloads such as TPC-H faster.
 
 ## Platforms
@@ -33,11 +33,11 @@ SET block_allocator_memory = '500G';
 SET allocator_background_threads = true;
 ```
 
-### Nvidia Vera
+### NVIDIA Vera
 
 We conducted the benchmark on a dual-socket system but restricted DuckDB to a single socket.
 
-* **CPU:** Nvidia Vera CPU, 88 cores with [Spatial Multithreading](https://alphaeloper.nvidia.com/blog/inside-nvidia-vera-cpu-olympus-cores-built-for-maximum-single-threaded-performance-in-agentic-ai/)
+* **CPU:** NVIDIA Vera CPU, 88 cores with [Spatial Multithreading](https://alphaeloper.nvidia.com/blog/inside-nvidia-vera-cpu-olympus-cores-built-for-maximum-single-threaded-performance-in-agentic-ai/)
 * **Memory:** 768 GB
 * **Disk:** 1 NVMe SSD disk with 3TB+ storage, formatted to ext4
 * **Operating system:** Ubuntu 26.04
