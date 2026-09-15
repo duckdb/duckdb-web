@@ -19,6 +19,7 @@ extension:
 repo:
   github: paleolimbot/duckdb-nanoarrow
   ref: 42e4199a67c4cd0789087562a025e87e7130fdc3
+  ref_next: 2507666f14fedfbad6783bc1d74cbdf177d69b8f
 
 docs:
   hello_world: |
@@ -43,8 +44,8 @@ docs:
 
 
 
-extension_star_count: 77
-extension_star_count_pretty: 77
+extension_star_count: 78
+extension_star_count_pretty: 78
 extension_download_count: 19902
 extension_download_count_pretty: 19.9k
 image: '/images/community_extensions/social_preview/preview_community_extension_nanoarrow.png'
