@@ -293,7 +293,41 @@
             },
             {
               "page": "Go",
-              "url": "go"
+              "slug": "go",
+              "subsubfolderitems": [
+                {
+                  "page": "Overview",
+                  "url": "overview"
+                },
+                {
+                  "page": "Connect",
+                  "url": "connecting"
+                },
+                {
+                  "page": "Import Data",
+                  "url": "data_import"
+                },
+                {
+                  "page": "Run Queries",
+                  "url": "querying"
+                },
+                {
+                  "page": "Handle Results",
+                  "url": "result_handling"
+                },
+                {
+                  "page": "Write User Defined Functions",
+                  "url": "functions"
+                },
+                {
+                  "page": "Profile and Monitor",
+                  "url": "profiling"
+                },
+                {
+                  "page": "Troubleshoot",
+                  "url": "troubleshoot"
+                }
+              ]
             },
             {
               "page": "Java (JDBC)",
@@ -1786,6 +1820,10 @@
                 {
                   "page": "Copying an In-Memory Database to a File",
                   "url": "copy_in-memory_database_to_file"
+                },
+                {
+                  "page": "Calculating a Database Checksum",
+                  "url": "database_checksum"
                 }
               ]
             },
