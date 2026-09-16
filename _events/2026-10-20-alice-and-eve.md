@@ -2,6 +2,8 @@
 layout: post
 title: "Alice and Eve"
 author: "Kate Labunets, Maartje de Graaf"
+thumb: "/images/events/thumbs/alice-and-eve.svg"
+image: "/images/events/thumbs/alice-and-eve.png"
 excerpt: ""
 tags: ["sponsored"]
 labels: [community]

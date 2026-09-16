@@ -2,6 +2,8 @@
 layout: post
 title: "PyData Amsterdam"
 author: "NumFOCUS"
+thumb: "/images/events/thumbs/pydata-amsterdam.svg"
+image: "/images/events/thumbs/pydata-amsterdam.png"
 excerpt: ""
 tags: ["sponsored"]
 labels: [community]
