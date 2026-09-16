@@ -262,6 +262,18 @@ git fetch --tags upstream
 git push --tags
 ```
 
-### Platform-Specific Issues
+### Platform-Specific Requirements
 
-**Windows compilation:** Ensure you have Visual Studio 2019+ with C++ support installed.
+#### Linux
+
+On Ubuntu, make sure you have the a C/C++ compiler installed and configure the environment variables to point to them:
+
+```bash
+sudo apt install -y gcc-16 g++-16
+export CC=gcc-16
+export CXX=g++-16
+```
+
+#### Windows
+
+Ensure you have Visual Studio 2019+ with C++ support installed.
