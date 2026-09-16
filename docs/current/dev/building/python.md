@@ -183,6 +183,12 @@ Build for specific Python version:
 uv build -p 3.9
 ```
 
+To install the wheel, run:
+
+```bash
+uv pip install dist/duckdb-*.whl
+```
+
 ### Cleaning Build Artifacts
 
 ```bash
