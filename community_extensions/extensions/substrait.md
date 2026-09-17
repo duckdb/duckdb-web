@@ -33,8 +33,8 @@ redirect_from:
 
 extension_star_count: 69
 extension_star_count_pretty: 69
-extension_download_count: 912
-extension_download_count_pretty: 912
+extension_download_count: 826
+extension_download_count_pretty: 826
 image: '/images/community_extensions/social_preview/preview_community_extension_substrait.png'
 layout: community_extension_doc
 ---
