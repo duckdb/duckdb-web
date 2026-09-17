@@ -91,12 +91,14 @@ The following Maven snippet imports the latest version of the Java package.
 To determine the version number, please visit the [latest CI builds](https://github.com/duckdb/duckdb-java/actions/workflows/Java.yml) and search for a _Java JDBC_ task that succeeded.
 In that job, consult the _Maven S3 Deploy_ job's _Deploy snapshot to S3_ task.
 
+### Maven
+
 ```xml
 <dependencies>
     <dependency>
         <groupId>org.duckdb</groupId>
         <artifactId>duckdb_jdbc</artifactId>
-        <version>2.0.0-alpha38615-276d6db</version>
+        <version>{{ site.preview_duckdb_java_version }}</version>
     </dependency>
 </dependencies>
 
@@ -107,6 +109,38 @@ In that job, consult the _Maven S3 Deploy_ job's _Deploy snapshot to S3_ task.
     </repository>
 </repositories>
 ```
+
+#### Gradle (Groovy)
+
+```groovy
+repositories {
+    maven {
+        url 'https://duckdb-staging.duckdb.org/duckdb/duckdb-java/maven/'
+    }
+}
+
+dependencies {
+    implementation 'org.duckdb:duckdb_jdbc:{{ site.preview_duckdb_java_version }}'
+}
+```
+
+### Gradle (Kotlin)
+
+```kotlin
+repositories {
+    maven {
+        url = uri("https://duckdb-staging.duckdb.org/duckdb/duckdb-java/maven/")
+    }
+}
+
+dependencies {
+    implementation("org.duckdb:duckdb_jdbc:{{ site.preview_duckdb_java_version }}")
+}
+```
+
+### Direct Download
+
+Download: [`jar`](https://duckdb-staging.duckdb.org/duckdb/duckdb-java/maven/org/duckdb/duckdb_jdbc/{{ site.preview_duckdb_java_version }}/duckdb_jdbc-{{ site.preview_duckdb_java_version }}.jar)
 
 ## ODBC
 
