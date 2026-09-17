@@ -98,8 +98,6 @@ pip install duckdb --pre --upgrade
 
 ## Java
 
-We are working on delivering you the latest Java client. Stay tuned.
-
 The following Maven snippet imports the latest version of the Java package.
 To determine the version number, please visit the [latest CI builds](https://github.com/duckdb/duckdb-java/actions/workflows/Java.yml) and consult the _Maven S3 Deploy_ job's _Deploy snapshot to S3_ task.
 
