@@ -238,6 +238,7 @@ body.documentation {
             list-style-position: inside;
             list-style: decimal;
             padding-left: 20px;
+            font-size: var(--type-body-docs, 15px);
         }
         
         dl {
