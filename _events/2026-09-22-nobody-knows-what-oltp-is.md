@@ -2,9 +2,11 @@
 layout: post
 title: "Nobody Knows What OLTP Is: DuckDB Moves to the Middle"
 author: "Hannes Mühleisen"
+thumb: "/images/events/thumbs/rows-and-columns-summit.svg"
+image: "/images/events/thumbs/rows-and-columns-summit.png"
 excerpt: ""
 tags: ["talk"]
-labels: [core]
+labels: [community, talk]
 venue: "Contemporary Jewish Museum, San Francisco"
 ---
 

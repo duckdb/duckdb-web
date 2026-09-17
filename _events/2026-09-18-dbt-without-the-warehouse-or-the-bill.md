@@ -2,9 +2,11 @@
 layout: post
 title: "dbt Without the Warehouse (or the Bill): DuckDB End to End"
 author: "Hannes Mühleisen"
+thumb: "/images/events/thumbs/dbt-summit.svg"
+image: "/images/events/thumbs/dbt-summit.png"
 excerpt: ""
 tags: ["talk"]
-labels: [core]
+labels: [community, talk]
 venue: "The Cosmopolitan, Las Vegas"
 ---
 
