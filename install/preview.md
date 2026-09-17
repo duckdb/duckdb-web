@@ -110,7 +110,7 @@ In that job, consult the _Maven S3 Deploy_ job's _Deploy snapshot to S3_ task.
 </repositories>
 ```
 
-#### Gradle (Groovy)
+### Gradle (Groovy)
 
 ```groovy
 repositories {
