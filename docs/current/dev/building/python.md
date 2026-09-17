@@ -57,29 +57,49 @@ git config --local core.hooksPath .githooks/
 
 ### 1. Platform-Specific Setup
 
-**All Platforms:**
+#### All Platforms
+
 - Python 3.9+ supported
 - uv >= 0.8.0 required
 - CMake and Ninja (installed via UV)
 - C++ compiler toolchain
 
-**Linux (Ubuntu 24.04):**
+#### Linux
+
+On Ubuntu, install the following packages:
 
 ```bash
 sudo apt-get update
-sudo apt-get install ccache
+sudo apt-get install ccache gcc-16 g++-16
 ```
 
-**macOS:**
+On Fedora, Red Hat, Amazon Linux, etc., run:
 
 ```bash
-# Xcode command line tools
+sudo dnf install ccache gcc gcc-c++
+```
+
+Make sure the compiler are set using:
+
+```bash
+export CC=gcc-16
+export CXX=g++-16
+```
+
+#### macOS
+
+Make sure that you have Xcode command line tools installed:
+
+```bash
 xcode-select --install
 ```
 
-**Windows:**
-- Visual Studio 2019+ with C++ support
-- Git for Windows
+#### Windows
+
+Ensure you have the following installed:
+
+* Visual Studio 2019+ with C++ support
+* Git for Windows
 
 ### 2. Install Dependencies and Build
 
@@ -183,6 +203,12 @@ Build for specific Python version:
 uv build -p 3.9
 ```
 
+To install the wheel, run:
+
+```bash
+uv pip install dist/duckdb-*.whl
+```
+
 ### Cleaning Build Artifacts
 
 ```bash
@@ -255,7 +281,3 @@ git remote add upstream https://github.com/duckdb/duckdb-python.git
 git fetch --tags upstream
 git push --tags
 ```
-
-### Platform-Specific Issues
-
-**Windows compilation:** Ensure you have Visual Studio 2019+ with C++ support installed.
