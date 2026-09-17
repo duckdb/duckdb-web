@@ -82,6 +82,6 @@ Community extensions can already be tested by providing a `ref_next` SHA, which 
 
 Yes, you can! DuckDB alpha clients are explicitly **not** production-ready, but you can already install them and throw some SQL queries at them to see whether your existing workloads work. Most are expected to be fine, some are expected to complete visibly faster, and some might result in an error. For the next few weeks, we are particularly interested in the latter group: are there environments, situations or queries where the DuckDB v2.0 alpha releases fall short?
 
-If you find an issue, please open a bug report with a reproducible example, either in `duckdb/duckdb` or in the repository of the relevant client or extension.
+If you find an issue, please open a bug report with a reproducible example, either in [`duckdb/duckdb`](https://github.com/duckdb/duckdb/issues/new/choose) or in the repository of the relevant client or extension.
 
 DuckDB's main strength is its community: [given enough eyeballs, all bugs are shallow](https://en.wikipedia.org/wiki/Linus%27s_law), and your bug reports translate to stability gains for every user.
