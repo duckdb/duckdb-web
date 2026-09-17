@@ -40,10 +40,10 @@ docs:
     Tree-model files, multi-file scans, automatic table discovery, parallel
     scans, and FIELD predicate pushdown are not yet implemented.
 
-extension_star_count: 5
-extension_star_count_pretty: 5
-extension_download_count: 473
-extension_download_count_pretty: 473
+extension_star_count: 6
+extension_star_count_pretty: 6
+extension_download_count: 478
+extension_download_count_pretty: 478
 image: '/images/community_extensions/social_preview/preview_community_extension_tsfile.png'
 layout: community_extension_doc
 ---

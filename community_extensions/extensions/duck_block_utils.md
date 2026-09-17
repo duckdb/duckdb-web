@@ -8,7 +8,7 @@ excerpt: |
 extension:
   name: duck_block_utils
   description: Build, transform, validate, and extract content from structured documents using the duck_block type
-  version: 3.2.0
+  version: 3.3.0
   language: C++
   build: cmake
   license: MIT
@@ -21,8 +21,8 @@ repo:
   # so advancing this pin would point a v1.4.5 build at a tree that cannot build for
   # it. v1.4.5 users should move to the v1.5.x track.
   andium: 125662df9e5450105dc9b7957ad955cb53d7beec
-  ref: 079123dc2ddbacf256da261c78652bb5d1455858
-  ref_next: 079123dc2ddbacf256da261c78652bb5d1455858
+  ref: 95a84e6dbfb25d1925df2ad402f978c438a3f724
+  ref_next: 95a84e6dbfb25d1925df2ad402f978c438a3f724
 docs:
   hello_world: |
     -- Build a document programmatically
@@ -162,7 +162,8 @@ docs:
     | `duck_blocks_validate(blocks)` | Spec conformance: valid, plus errors |
     | `duck_blocks_repair(blocks)` | Deterministic fixes for the list-level rules: wrap orphans, rebase, renumber |
     | `duck_block_implicit_parent(type, kind)` | The wrapper a fragment of that element gets, from the spec table |
-    | `duck_block_is_body(kind, element_type)` | Is this element body text: block or inline, and not the metadata blob |
+    | `duck_block_is_body(kind, element_type)` | Per-row half of the body rule: block or inline, and not the metadata blob |
+    | `duck_blocks_body(blocks)` | The body rows only: no value or metadata subtree, element_order kept |
     | `duck_blocks_lint(blocks)` | Advisory conformance warnings |
     | `duck_blocks_quality(blocks)` | Document quality, which is NOT conformance |
     | `duck_block_spec_version()` | The spec version this build implements |
@@ -207,7 +208,7 @@ docs:
 
 extension_star_count: 2
 extension_star_count_pretty: 2
-extension_download_count: 1098
+extension_download_count: 1117
 extension_download_count_pretty: 1.1k
 image: '/images/community_extensions/social_preview/preview_community_extension_duck_block_utils.png'
 layout: community_extension_doc
@@ -255,6 +256,7 @@ LOAD {{ page.extension.name }};
 | duck_block_implicit_parent      | scalar        | NULL        | NULL    |          |
 | duck_block_inline_code          | scalar        | NULL        | NULL    |          |
 | duck_block_inline_image         | scalar        | NULL        | NULL    |          |
+| duck_block_is_body              | scalar        | NULL        | NULL    |          |
 | duck_block_italic               | scalar        | NULL        | NULL    |          |
 | duck_block_kind_names           | scalar        | NULL        | NULL    |          |
 | duck_block_level                | scalar        | NULL        | NULL    |          |
@@ -292,6 +294,7 @@ LOAD {{ page.extension.name }};
 | duck_block_underline            | scalar        | NULL        | NULL    |          |
 | duck_block_valid                | scalar        | NULL        | NULL    |          |
 | duck_blocks_assemble            | scalar        | NULL        | NULL    |          |
+| duck_blocks_body                | scalar        | NULL        | NULL    |          |
 | duck_blocks_code_blocks         | scalar        | NULL        | NULL    |          |
 | duck_blocks_code_blocks_structs | scalar        | NULL        | NULL    |          |
 | duck_blocks_concat              | scalar        | NULL        | NULL    |          |

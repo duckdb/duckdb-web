@@ -117,10 +117,10 @@ docs:
     quote-escape injected identifiers — see security advisory
     GHSA-55g5-vp25-phpg; upgrade to 0.2.0 (DuckDB v1.5.4 track).
 
-extension_star_count: 4
-extension_star_count_pretty: 4
-extension_download_count: 726
-extension_download_count_pretty: 726
+extension_star_count: 5
+extension_star_count_pretty: 5
+extension_download_count: 996
+extension_download_count_pretty: 996
 image: '/images/community_extensions/social_preview/preview_community_extension_func_apply.png'
 layout: community_extension_doc
 ---
