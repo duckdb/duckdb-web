@@ -88,7 +88,8 @@ To download the v2.0-dev command-line client, use the following links:
 ## Java
 
 The following Maven snippet imports the latest version of the Java package.
-To determine the version number, please visit the [latest CI builds](https://github.com/duckdb/duckdb-java/actions/workflows/Java.yml) and consult the _Maven S3 Deploy_ job's _Deploy snapshot to S3_ task.
+To determine the version number, please visit the [latest CI builds](https://github.com/duckdb/duckdb-java/actions/workflows/Java.yml) and search for a _Java JDBC_ task that succeeded.
+In that job, consult the _Maven S3 Deploy_ job's _Deploy snapshot to S3_ task.
 
 ```xml
 <dependencies>
