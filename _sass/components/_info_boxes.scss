@@ -3,6 +3,7 @@
 @use '../abstracts/mixins' as *;
 
 body.documentation #main_content_wrap,
+body.layout_default #main_content_wrap,
 div.singleentry {
 	blockquote {
 		display: flex;
