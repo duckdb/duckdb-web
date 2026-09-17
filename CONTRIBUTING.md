@@ -77,7 +77,7 @@ Some of this style guide is automated with GitHub Actions, but feel free to run 
 * Do not introduce hard line breaks if possible. Therefore, avoid using the `<br/>` HTML tag and avoid [double spaces at the end of a line in Markdown](https://spec.commonmark.org/0.28/#hard-line-breaks).
 * Single and double quote characters (`'` and `"`) are not converted to smart quotation marks automatically. To insert these, use `“` `”` and `‘` `’`.
 * When referencing other articles, put their titles in quotes, e.g., `see the [“Lightweight Compression in DuckDB” blog post]({% post_url 2022-10-28-lightweight-compression %})`.
-* For unordered lists, use `*`. If the list has multiple levels, use **4 spaces** for indentation.
+* For unordered lists, prefer using an asterisk (`*`) over a dash/hypen (`-`). If the list has multiple levels, use **4 spaces** for indentation.
     * **Note:** YAML front matter (between `---` markers) requires `-` for lists as per YAML syntax. The `*` marker is only for Markdown content.
 
 > [!TIP]

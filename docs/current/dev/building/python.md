@@ -41,9 +41,9 @@ git fetch --all
 ```
 
 **Important notes:**
-- DuckDB is vendored as a git submodule and must be initialized
-- DuckDB version determination depends on local availability of git tags
-- If switching between branches with different submodule refs, add the git hooks:
+* DuckDB is vendored as a git submodule and must be initialized
+* DuckDB version determination depends on local availability of git tags
+* If switching between branches with different submodule refs, add the git hooks:
 
 ```bash
 git config --local core.hooksPath .githooks/
@@ -59,10 +59,10 @@ git config --local core.hooksPath .githooks/
 
 #### All Platforms
 
-- Python 3.9+ supported
-- uv >= 0.8.0 required
-- CMake and Ninja (installed via UV)
-- C++ compiler toolchain
+* Python 3.9+ supported
+* uv >= 0.8.0 required
+* CMake and Ninja (installed via UV)
+* C++ compiler toolchain
 
 #### Linux
 
@@ -114,9 +114,9 @@ uv sync --no-build-isolation
 ```
 
 **Why two steps?**
-- `uv sync` performs editable installs by default with scikit-build-core using a persistent build-dir
-- The build happens in an isolated, ephemeral environment where cmake's paths point to non-existing directories
-- Installing dependencies first, then building without isolation ensures proper cmake integration
+* `uv sync` performs editable installs by default with scikit-build-core using a persistent build-dir
+* The build happens in an isolated, ephemeral environment where cmake's paths point to non-existing directories
+* Installing dependencies first, then building without isolation ensures proper cmake integration
 
 ### 3. Enable Pre-Commit Hooks
 
@@ -224,10 +224,10 @@ For CLion users, the project can be configured for C++ debugging of the Python e
 
 In **Settings** → **Build, Execution, Deployment** → **CMake**, create a Debug profile:
 
-- **Name:** Debug
-- **Build type:** Debug  
-- **Generator:** Ninja
-- **CMake Options:**
+* **Name:** Debug
+* **Build type:** Debug
+* **Generator:** Ninja
+* **CMake Options:**
   ```text
   -DCMAKE_PREFIX_PATH=$CMakeProjectDir$/.venv;$CMAKE_PREFIX_PATH
   ```
@@ -236,11 +236,11 @@ In **Settings** → **Build, Execution, Deployment** → **CMake**, create a Deb
 
 Create a **CMake Application** run configuration:
 
-- **Name:** Python Debug
-- **Target:** `All targets`
-- **Executable:** `⟨PROJECT_DIR⟩/.venv/bin/python3`{:.language-sql .highlight}
-- **Program arguments:** `$FilePath$`
-- **Working directory:** `$ProjectFileDir$`
+* **Name:** Python Debug
+* **Target:** `All targets`
+* **Executable:** `⟨PROJECT_DIR⟩/.venv/bin/python3`{:.language-sql .highlight}
+* **Program arguments:** `$FilePath$`
+* **Working directory:** `$ProjectFileDir$`
 
 This allows setting C++ breakpoints and debugging Python scripts that use the DuckDB extension.
 
