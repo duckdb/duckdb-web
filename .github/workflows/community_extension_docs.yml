@@ -27,6 +27,7 @@ jobs:
     - name: Generate docs
       run: |
         unzip generated_md.zip
+        rm -f community_extensions/extensions/*.md
         cp build/docs/*.md community_extensions/extensions/.
         cp build/docs/extensions_list.md.tmp _includes/list_of_community_extensions.md
         # Refresh the published static CSV (served at
