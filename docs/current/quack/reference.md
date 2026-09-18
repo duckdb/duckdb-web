@@ -23,6 +23,7 @@ For a tour of the protocol, start with the [Overview]({% link docs/current/quack
 | ----------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------- |
 | `quack_query(uri, query, token := 'token_value', disable_ssl := false)` | Run `query` on remote `uri`, stream result back. Pass `token` to override any matching quack secret on the client side. |
 | `quack_query_by_name(catalog, query)`                                   | Run `query` against an already-attached Quack catalog (used by `⟨catalog⟩.query()`{:.language-sql .highlight}).         |
+| `quack_clear_cache()`                                                   | Clear the cache. This also forces the DuckDB client to refresh its catalog.                                             |
 
 ### Utility
 
