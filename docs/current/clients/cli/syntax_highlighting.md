@@ -14,49 +14,38 @@ SQL queries that are written in the shell are automatically highlighted using sy
 
 ![Image showing syntax highlighting in the shell](/images/syntax_highlighting_screenshot.png)
 
-There are several components of a query that are highlighted in different colors. The colors can be configured using [dot commands]({% link docs/current/clients/cli/dot_commands.md %}).
+There are several components of a query that are highlighted in different colors. The colors can be configured using the `.highlight_colors` [dot command]({% link docs/current/clients/cli/dot_commands.md %}):
 Syntax highlighting can also be disabled entirely using the `.highlight off` command.
 
-Below is a list of components that can be configured.
+Below is a list of query components that can be configured.
+|          Type           |       Component         | Default color |
+|-------------------------|-------------------------|---------------|
+| Keywords                | `keyword`               | `green`       |
+| Numeric constants       | `numeric_constant`      | `yellow`      |
+| String constants        | `string_constant`       | `yellow`      |
+| Comments                | `comment`               | `gray`        |
+| Errors                  | `error`                 | `red`         |
+| Continuation            | `continuation`          | `gray`        |
+| Continuation (Selected) | `continuation_selected` | `green`       |
 
-|          Type           |   Command   |  Default color  |
-|-------------------------|-------------|-----------------|
-| Keywords                | `.keyword`  | `green`         |
-| Constants and literals  | `.constant` | `yellow`        |
-| Comments                | `.comment`  | `brightblack`   |
-| Errors                  | `.error`    | `red`           |
-| Continuation            | `.cont`     | `brightblack`   |
-| Continuation (Selected) | `.cont_sel` | `green`         |
+Colors are specified by name. The following basic colors are supported by all terminals:
 
-The components can be configured using either a supported color name (e.g., `.keyword red`), or by directly providing a terminal code to use for rendering (e.g., `.keywordcode \033[31m`). Below is a list of supported color names and their corresponding terminal codes.
+`black`, `red`, `green`, `yellow`, `blue`, `magenta`, `cyan`, `brightgray`, `gray`, `brightred`, `brightgreen`, `brightyellow`, `brightblue`, `brightmagenta`, `brightcyan`, `white`
 
-|     Color     | Terminal code |
-|---------------|---------------|
-| red           | `\033[31m`    |
-| green         | `\033[32m`    |
-| yellow        | `\033[33m`    |
-| blue          | `\033[34m`    |
-| magenta       | `\033[35m`    |
-| cyan          | `\033[36m`    |
-| white         | `\033[37m`    |
-| brightblack   | `\033[90m`    |
-| brightred     | `\033[91m`    |
-| brightgreen   | `\033[92m`    |
-| brightyellow  | `\033[93m`    |
-| brightblue    | `\033[94m`    |
-| brightmagenta | `\033[95m`    |
-| brightcyan    | `\033[96m`    |
-| brightwhite   | `\033[97m`    |
+In addition, 8-bit colors can be used. Run `.display_colors` to list all available color names, see [8-Bit Colors]({% link docs/current/clients/cli/friendly_cli.md %}#8-bit-colors).
+
+The optional intensity can be `standard`, `bold`, `underline` or `bold_underline`.
 
 For example, here is an alternative set of syntax highlighting colors:
 
 ```text
-.keyword brightred
-.constant brightwhite
-.comment cyan
-.error yellow
-.cont blue
-.cont_sel brightblue
+.highlight_colors keyword brightred bold
+.highlight_colors numeric_constant white
+.highlight_colors string_constant white
+.highlight_colors comment cyan
+.highlight_colors error yellow
+.highlight_colors continuation blue
+.highlight_colors continuation_selected brightblue
 ```
 
 If you wish to start up the CLI with a different set of colors every time, you can place these commands in the `~/.duckdbrc` file that is loaded on start-up of the CLI.

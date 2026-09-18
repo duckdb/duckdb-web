@@ -22,8 +22,6 @@ Dot commands are available in the DuckDB CLI client. To use one of these command
 | `.cd ⟨DIRECTORY⟩`{:.language-sql .highlight}                          | Change the working directory to `DIRECTORY`                                                                                                                                |
 | `.changes ⟨on/off⟩`{:.language-sql .highlight}                        | Show number of rows changed by SQL                                                                                                                                         |
 | `.columns`{:.language-sql .highlight}                                 | Column-wise rendering of query results                                                                                                                                     |
-| `.constant ⟨COLOR⟩`{:.language-sql .highlight}                        | Sets the syntax highlighting color used for constant values                                                                                                                |
-| `.constantcode ⟨CODE⟩`{:.language-sql .highlight}                     | Sets the syntax highlighting terminal code used for constant values                                                                                                        |
 | `.databases`{:.language-sql .highlight}                               | List names and files of attached databases                                                                                                                                 |
 | `.dump ⟨TABLE⟩`{:.language-sql .highlight}                            | Render database content as SQL. `TABLE` is a [`LIKE` pattern]({% link docs/current/sql/functions/pattern_matching.md %}) for the tables to dump                            |
 | `.echo ⟨on/off⟩`{:.language-sql .highlight}                           | Turn command echo `on` or `off`                                                                                                                                            |
@@ -31,13 +29,11 @@ Dot commands are available in the DuckDB CLI client. To use one of these command
 | `.headers ⟨on/off⟩`{:.language-sql .highlight}                        | Turn display of headers `on` or `off`. Does not apply to duckbox mode                                                                                                      |
 | `.help ⟨-all⟩ ⟨PATTERN⟩`{:.language-sql .highlight}                   | Show help text for `PATTERN`. Use `.help shortcuts` to display keyboard shortcuts                                                                                          |
 | `.highlight ⟨on/off⟩`{:.language-sql .highlight}                      | Toggle syntax highlighting in the shell `on` / `off`. See the [query syntax highlighting section](#configuring-the-query-syntax-highlighter) for more details              |
-| `.highlight_colors ⟨COMPONENT⟩ ⟨COLOR⟩`{:.language-sql .highlight}    | Configure the color of each component in (duckbox only). See the [result syntax highlighting section](#configuring-the-query-syntax-highlighter) for more details          |
+| `.highlight_colors ⟨COMPONENT⟩ ⟨COLOR⟩`{:.language-sql .highlight}    | Configure the color of each query and result component. See the [Syntax Highlighting page]({% link docs/current/clients/cli/syntax_highlighting.md %}) for details         |
 | `.highlight_mode ⟨mixed/dark/light⟩`{:.language-sql .highlight}       | Toggle the highlight mode. See the [dark/light mode section]({% link docs/current/clients/cli/friendly_cli.md %}#darklight-mode) for details                               |
 | `.highlight_results ⟨on/off⟩`{:.language-sql .highlight}              | Toggle highlighting in result tables `on` / `off` (duckbox only). See the [result syntax highlighting section](#configuring-the-query-syntax-highlighter) for more details |
 | `.import ⟨FILE⟩ ⟨TABLE⟩`{:.language-sql .highlight}                   | Import data from `FILE` into `TABLE`. Supports `--csv`, `--json`, `--parquet` options                                                                                     |
 | `.indexes ⟨TABLE⟩`{:.language-sql .highlight}                         | Show names of indexes                                                                                                                                                      |
-| `.keyword ⟨COLOR⟩`{:.language-sql .highlight}                         | Sets the syntax highlighting color used for keywords                                                                                                                       |
-| `.keywordcode ⟨CODE⟩`{:.language-sql .highlight}                      | Sets the syntax highlighting terminal code used for keywords                                                                                                               |
 | `.large_number_rendering ⟨all/footer/off⟩`{:.language-sql .highlight} | Toggle readable rendering of large numbers (duckbox only, default: `footer`)                                                                                               |
 | `.last`{:.language-sql .highlight}                                    | Render the last result without truncating. Useful for navigating with the pager                                                                                            |
 | `.log ⟨FILE/off⟩`{:.language-sql .highlight}                          | Turn logging `on` or `off`. `FILE` can be `stderr` / `stdout`                                                                                                              |
@@ -283,37 +279,16 @@ To turn on the highlighter:
 .highlight on
 ```
 
-To configure the color used to highlight constants:
+To configure the color used to highlight a component of the query, use the `.highlight_colors` command.
+For example, to highlight keywords in red and constants in yellow:
 
 ```sql
-.constant [red|green|yellow|blue|magenta|cyan|white|brightblack|brightred|brightgreen|brightyellow|brightblue|brightmagenta|brightcyan|brightwhite]
+.highlight_colors keyword red
+.highlight_colors numeric_constant yellow
+.highlight_colors string_constant yellow
 ```
 
-```sql
-.constantcode ⟨terminal_code⟩
-```
-
-For example:
-
-```sql
-.constantcode 033[31m
-```
-
-To configure the color used to highlight keywords:
-
-```sql
-.keyword [red|green|yellow|blue|magenta|cyan|white|brightblack|brightred|brightgreen|brightyellow|brightblue|brightmagenta|brightcyan|brightwhite]
-```
-
-```sql
-.keywordcode ⟨terminal_code⟩
-```
-
-For example:
-
-```sql
-.keywordcode 033[31m
-```
+See the [Syntax Highlighting page]({% link docs/current/clients/cli/syntax_highlighting.md %}) for the list of components and colors.
 
 ### Configuring the Result Syntax Highlighter
 
