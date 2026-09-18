@@ -180,7 +180,8 @@ div.singleentry {
 	}
 }
 
-div.singleentry {
+div.singleentry,
+body.blog_typography #main_content_wrap {
 	blockquote .symbol {
 		margin-top: 4px;
 	}
