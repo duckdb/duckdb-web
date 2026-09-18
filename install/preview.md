@@ -13,7 +13,7 @@ redirect_from:
 ---
 
 <div class="wrap pagetitle pagetitle--small">
-  <h1>DuckDB Preview (Alpha/Nightly) Installation</h1>
+  <div class="pagetitle-heading" role="heading" aria-level="1">DuckDB Preview (Alpha/Nightly) Installation</div>
 </div>
 
 The preview (nightly) builds provide development versions of DuckDB. As such, they are constantly in flux and they are less suitable for production use than the stable releases of DuckDB. You should only use these releases if you are looking for [recent bugfixes](https://github.com/duckdb/duckdb/pulls?q=is%3Apr+is%3Amerged) or optimizations.
@@ -140,7 +140,7 @@ dependencies {
 
 ### Direct Download
 
-Download: [jar](https://duckdb-staging.duckdb.org/duckdb/duckdb-java/maven/org/duckdb/duckdb_jdbc/{{ site.preview_duckdb_java_version }}/duckdb_jdbc-{{ site.preview_duckdb_java_version }}.jar)
+<a href="https://duckdb-staging.duckdb.org/duckdb/duckdb-java/maven/org/duckdb/duckdb_jdbc/{{ site.preview_duckdb_java_version }}/duckdb_jdbc-{{ site.preview_duckdb_java_version }}.jar" class="download-btn">duckdb_jdbc-{{ site.preview_duckdb_java_version }}.jar</a>
 
 ## ODBC
 
