@@ -82,8 +82,8 @@ docs:
     deduplication, and a FOLIO Source Record Storage bridge
     (`marc_parse_json`) for in-place analytics on an ATTACHed FOLIO database.
 
-extension_star_count: 1
-extension_star_count_pretty: 1
+extension_star_count: 3
+extension_star_count_pretty: 3
 extension_download_count: 485
 extension_download_count_pretty: 485
 image: '/images/community_extensions/social_preview/preview_community_extension_marc21.png'
