@@ -682,6 +682,10 @@
                   "url": "profiling"
                 },
                 {
+                  "page": "PREPARE, EXECUTE, and DEALLOCATE",
+                  "url": "prepare"
+                },
+                {
                   "page": "SELECT",
                   "url": "select"
                 },
