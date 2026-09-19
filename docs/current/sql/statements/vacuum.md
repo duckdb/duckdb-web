@@ -32,11 +32,6 @@ Calling `VACUUM` on a given table-column pair rebuilds statistics for the table 
 
 ```sql
 VACUUM my_table(my_column);
-```
-
-Rebuild statistics for the table and column:
-
-```sql
 VACUUM ANALYZE my_table(my_column);
 ```
 
