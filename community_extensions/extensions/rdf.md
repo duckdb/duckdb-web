@@ -146,10 +146,10 @@ docs:
     SELECT can_call_inside_out('mapping.ttl'); -- check if inside-out mode is supported
     ```
 
-extension_star_count: 35
-extension_star_count_pretty: 35
-extension_download_count: 1024
-extension_download_count_pretty: 1.0k
+extension_star_count: 36
+extension_star_count_pretty: 36
+extension_download_count: 1058
+extension_download_count_pretty: 1.1k
 image: '/images/community_extensions/social_preview/preview_community_extension_rdf.png'
 layout: community_extension_doc
 ---

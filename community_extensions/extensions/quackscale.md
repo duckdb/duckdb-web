@@ -67,8 +67,8 @@ extended_description: |
 
 extension_star_count: 24
 extension_star_count_pretty: 24
-extension_download_count: 687
-extension_download_count_pretty: 687
+extension_download_count: 730
+extension_download_count_pretty: 730
 image: '/images/community_extensions/social_preview/preview_community_extension_quackscale.png'
 layout: community_extension_doc
 ---

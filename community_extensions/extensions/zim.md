@@ -8,7 +8,7 @@ excerpt: |
 extension:
   name: zim
   description: Read and write .zim (Kiwix / openZIM) archives directly in DuckDB via libzim, from local files or remote S3/HTTP — offline Wikipedia, WikiMed, Stack Exchange, iFixit, and more, with a zim:// filesystem, full-text search, and COPY TO for building archives from any query.
-  version: 0.9.0
+  version: 0.9.1
   language: C++
   build: cmake
   license: GPL-2.0-or-later
@@ -19,7 +19,11 @@ extension:
   vcpkg_commit: 84bab45d415d22042bd0b9081aea57f362da3f35
 repo:
   github: teaguesterling/duckdb_zim
-  ref: 2aca66d7c460c8470661bed02c9f5fe3a8db21d1
+  ref: ce892d5515bcbe5993f2efbe0f22a302a4121e3c
+  # ref_next: the community registry builds every descriptor carrying it against
+  # the v2.0 line (build_next.yml, v2.0-cyanoptera). Same commit as ref: zim builds
+  # and passes its full suite there as of v0.9.1.
+  ref_next: ce892d5515bcbe5993f2efbe0f22a302a4121e3c
 docs:
   hello_world: |
     -- Load the extension
@@ -158,10 +162,10 @@ docs:
     rather than being mangled. Built on [libzim](https://github.com/openzim/libzim);
     licensed GPL-2.0-or-later, inherited from libzim.
 
-extension_star_count: 6
-extension_star_count_pretty: 6
-extension_download_count: 997
-extension_download_count_pretty: 997
+extension_star_count: 7
+extension_star_count_pretty: 7
+extension_download_count: 935
+extension_download_count_pretty: 935
 image: '/images/community_extensions/social_preview/preview_community_extension_zim.png'
 layout: community_extension_doc
 ---

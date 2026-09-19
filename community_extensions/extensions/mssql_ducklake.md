@@ -8,7 +8,7 @@ excerpt: |
 extension:
   name: mssql_ducklake
   description: "DuckLake with its catalog in Microsoft SQL Server or Azure SQL - embedded DuckLake, native TDS through the mssql extension."
-  version: "0.1.0"
+  version: "0.1.1"
   language: "C++"
   build: "cmake"
   licence: "MIT"
@@ -26,7 +26,7 @@ extension:
 
 repo:
   github: "hugr-lab/mssql-ducklake"
-  ref: "a37cbfd8ed84f20f450996306e8ae2555dc20ea9"
+  ref: "b48599044bd75b61748997e4d47e42d4f0ae9350"
 
 docs:
   hello_world: |
@@ -48,8 +48,8 @@ docs:
 
 extension_star_count: 10
 extension_star_count_pretty: 10
-extension_download_count: 445
-extension_download_count_pretty: 445
+extension_download_count: 789
+extension_download_count_pretty: 789
 image: '/images/community_extensions/social_preview/preview_community_extension_mssql_ducklake.png'
 layout: community_extension_doc
 ---
