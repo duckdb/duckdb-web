@@ -4,7 +4,7 @@ title: "DuckDB Now Ships Inside dbt v2"
 author: "The DuckDB team"
 thumb: "/images/blog/thumbs/duckdb-dbt.svg"
 image: "/images/blog/thumbs/duckdb-dbt.png"
-excerpt: "dbt v2, which runs on the Rust-based Fusion engine, now ships with a built-in DuckDB adapter. This post covers setup, DuckLake and Iceberg catalogs, querying dbt's Parquet metadata with DuckDB, plus other v2 features that matter to DuckDB users, including migrating to dbt v2."
+excerpt: "dbt v2, which runs on the new Rust-based Fusion engine, is the first dbt release that ships with a built-in DuckDB adapter. This post covers setup, DuckLake and Iceberg catalogs, querying dbt's Parquet metadata with DuckDB, plus other v2 features that matter to DuckDB users, including migrating to dbt v2."
 tags: ["using DuckDB"]
 ---
 
