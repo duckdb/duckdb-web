@@ -1,146 +1,230 @@
 ---
 layout: post
-title: "DuckDB Now Ships Inside dbt v2"
+title: "DuckDB and Hugging Face: Querying Datasets Directly"
 author: "The DuckDB team"
-thumb: "/images/blog/thumbs/duckdb-dbt.svg"
-image: "/images/blog/thumbs/duckdb-dbt.png"
-excerpt: "dbt v2, which runs on the Rust-based Fusion engine, now ships with a built-in DuckDB adapter. This post covers setup, DuckLake and Iceberg catalogs, querying dbt's Parquet metadata with DuckDB, plus other v2 features that matter to DuckDB users, including migrating to dbt v2."
-tags: ["using DuckDB"]
+thumb: "/images/blog/thumbs/hugging-face.svg"
+image: "/images/blog/thumbs/hugging-face.png"
+excerpt: "Hugging Face hosts hundreds of thousands of datasets, and DuckDB can read them directly, exactly where they are and without downloading anything, over the DuckDB `hf://` protocol. This post looks at how the integration came about, how it works, and the use cases it is a good fit for."
+tags: ["extensions"]
 ---
 
-[dbt](https://www.getdbt.com/) is the tool many data teams use to manage their SQL transformations: you write each model as a `SELECT` statement, and dbt works out the order to run them in and builds the resulting tables and views in your database. 
+[Hugging Face](https://huggingface.co/) is where much of the machine learning community publishes and finds its datasets, while DuckDB is the in-process analytical database that queries files like CSV and Parquet directly, with no server or warehous to install or run. 
 
-[dbt-duckdb](https://github.com/duckdb/dbt-duckdb/blob/master/README.md), the dbt adapter for DuckDB, received its [first pull request](https://github.com/duckdb/dbt-duckdb/pull/3) on August 27, 2021, and in the meantime [has 1.4k stars on GitHub](https://github.com/duckdb/dbt-duckdb). You install one Python package, point it at a file, and you have a working project, without having needed to sign up to (and pay for) servers or warehouses. 
-
-When dbt Labs [announced the new Rust-based Fusion engine](https://www.getdbt.com/blog/dbt-launch-showcase-2025-recap) in May 2025, DuckDB initially wasn't supported out of the box. That has changed with dbt v2, which ships with a DuckDB adapter built in. Here is how to set it up and what else is new.
+Did you know that, since DuckDB [v0.10.3](https://github.com/duckdb/duckdb/releases/tag/v0.10.3) (released on May 22, 2024), you can point a `SELECT` at a dataset on the [Hugging Face Hub](https://huggingface.co/docs/hub), using the DuckDB `hf://` protocol, and query it, without downloading it first? This post covers how that integration came about, how it works, and the use cases it fits.
 
 ## Background
 
-dbt Labs announced the new Rust-based Fusion engine on [May 28, 2025](https://www.getdbt.com/licenses-faq#may-28-2025). Two days later, a user, [ran-codes](https://github.com/ran-codes), opened a [GitHub issue](https://github.com/dbt-labs/dbt/issues/13193) asking for a DuckDB adapter:
+On the [Hugging Face Hub](https://huggingface.co/docs/hub), each dataset is a git repository holding its data as plain files, usually CSV, JSONL, or Parquet. The [`cais/mmlu`](https://huggingface.co/datasets/cais/mmlu) benchmark and the [`datasets-examples/doc-formats-csv-1`](https://huggingface.co/datasets/datasets-examples/doc-formats-csv-1) repository used later in this post are two such examples: you can browse their files and commit history in the browser, the same way you would any git repository. 
 
-<blockquote class="quote">
-<p><b>"There is a huge community utilizing the DuckDB adaptor to run DBT. For me personally, I was able to learn and start using DBT just because of the light-weight setup for the dbt-duckdb workflow and it has allowed me to get over the learning curve to start using DBT."</b></p>
-<p class="quote-author">— <a href="https://github.com/dbt-labs/dbt/issues/13193">ran-codes, on GitHub</a></p>
-</blockquote>
+Before the Hugging Face integration, getting at that data from DuckDB meant downloading the files first, or loading them with the Hugging Face [`datasets`](https://huggingface.co/docs/datasets) library, before they could be read and analyzed. Either way, the data had to be copied out of the [Hugging Face Hub](https://huggingface.co/docs/hub) before you could query it.
 
-At the time of this writing, the issue resulted in 146 ❤️ and 21 👍 reactions. The adapter is now built into dbt v2.
+DuckDB was already able to read remote files over HTTP through its [`httpfs` extension]({% link docs/current/core_extensions/httpfs/overview.md %}), so reading a URL directly was not new. Hugging Face datasets are also increasingly published as Parquet, the columnar format DuckDB reads natively and can scan without materializing everything in memory.
 
-On June 1, 2026, dbt Labs released the [first alpha of dbt Core 2.0](https://docs.getdbt.com/blog/dbt-core-v2-is-here), built on the same foundations as Fusion, and open-sourced a large part of the Fusion code. That code moved into the dbt-core repository under Apache 2.0, and the dbt-fusion repository was archived. There are two distributions of v2, both free to install locally and both running on the same engine.
+DuckDB and Hugging Face [worked together]({% post_url 2024-05-29-access-150k-plus-datasets-from-hugging-face-with-duckdb %}) to add the [`hf://` path scheme]({% link docs/lts/core_extensions/httpfs/hugging_face.md %}) on top of `httpfs`, [announced in May 2024]({% post_url 2024-05-29-access-150k-plus-datasets-from-hugging-face-with-duckdb %}) with DuckDB [v0.10.3](https://github.com/duckdb/duckdb/releases/tag/v0.10.3). As a result, DuckDB can resolve a dataset repository to the files inside it, so that a query can read and analyze them exactly where they are located, instead of via a downloaded copy.
 
-[dbt 2.0.0](https://github.com/dbt-labs/dbt/releases/tag/v2.0.0) was released on September 14, 2026. That release also renamed the CLI branding from Fusion and dbt-core to dbt (proprietary) and dbt-oss (open source). So “Fusion” is now mostly the name of the engine, and the thing you install is just called dbt.
+## Reading Hugging Face Datasets Directly
 
-## Setup
-
-In dbt v1, an adapter was a standalone Python package. In v2, adapters live inside a Rust monorepo and connect through [ADBC drivers](https://docs.getdbt.com/docs/contribute-dbt-adapters-v2). 
-
-The DuckDB adapter is now built into v2, so after you [install dbt](https://docs.getdbt.com/docs/local/install-dbt?version=2.0) there is nothing else to add. dbt also publishes a [DuckDB quickstart guide](https://docs.getdbt.com/guides/duckdb) for getting a project running locally. 
-
-A basic profile looks the same as before:
-
-```yaml
-my_project:
-  target: dev
-  outputs:
-    dev:
-      type: duckdb
-      path: ./warehouse.duckdb
-```
-
-## DuckLake and Iceberg Catalogs
-
-v2 adds [catalog support](https://docs.getdbt.com/docs/build/iceberg/adapters/duckdb-iceberg-support) that the Python adapter doesn't have. dbt's DuckDB docs flag it as "dbt v2 only"; the legacy Python adapter instead attached DuckLake through the profile's [`attach` block](https://docs.getdbt.com/reference/resource-configs/duckdb-configs). 
-
-With `catalogs.yml` you can configure [DuckLake](https://ducklake.select/), Iceberg REST, and local filesystem catalogs, with [catalog-aware materializations](https://github.com/dbt-labs/dbt/releases/tag/v2.0.0-alpha.4). This requires the v2 engine with the `use_catalogs_v2` flag enabled and isn't available in the Python adapter. dbt [generates and runs the `ATTACH` statements](https://docs.getdbt.com/docs/build/iceberg/adapters/duckdb-iceberg-support) for you.
-
-A DuckLake catalog is defined in `catalogs.yml`:
-
-```yaml
-catalogs:
-  - name: local_lake
-    type: ducklake
-    table_format: default
-    config:
-      duckdb:
-        metadata_path: metadata.ducklake
-        data_path: s3://my-bucket/lake
-```
-
-Enable the flag in `dbt_project.yml`, then reference the catalog from a model:
-
-```yaml
-flags:
-  use_catalogs_v2: true
-```
-
-```sql
-{% raw %}{{ config(materialized = 'table', catalog_name = 'local_lake') }}{% endraw %}
-select * from {% raw %}{{ ref('customers') }}{% endraw %}
-```
-
-The example above follows the DuckDB [catalog support documentation](https://docs.getdbt.com/docs/build/iceberg/adapters/duckdb-iceberg-support).
-
-## dbt Metadata as Parquet
-
-v2 also [writes its metadata as Parquet](https://docs.getdbt.com/docs/build/dbt-information-schema?version=2.0) as an alternative to the large JSON files, and these (as well as the large JSON files) can be queried directly with DuckDB. 
-
-dbt calls this the Information Schema, a v2 feature that stores the manifest as Parquet instead of JSON. Running `dbt parse --generate-info-schema` writes a set of Parquet files to `target/info_schema/v1/`, so you can list your models without parsing `manifest.json`. 
-
-These are the same artifacts dbt ships as test fixtures, so you can query one straight from the dbt repository using DuckDB without running dbt first:
-
-```sql
-SELECT name, materialized, schema_name
-FROM 'https://raw.githubusercontent.com/dbt-labs/dbt/main/crates/dbt-docs-server/web/src/test/fixtures/parquet/dbt.models.parquet';
-```
-
-For the above, this lists the three models in the fixture, along with how each is materialized and the schema it lands in:
+The examples below cover the common cases. [DuckDB's Hugging Face docs]({% link docs/lts/core_extensions/httpfs/hugging_face.md %}) are the full reference. The scheme maps a Hugging Face dataset repository onto a path DuckDB can read:
 
 ```text
-┌─────────────────┬──────────────┬─────────────┐
-│      name       │ materialized │ schema_name │
-│     varchar     │   varchar    │   varchar   │
-├─────────────────┼──────────────┼─────────────┤
-│ my_second_model │ view         │ main        │
-│ my_third_model  │ view         │ main        │
-│ my_first_model  │ view         │ main        │
-└─────────────────┴──────────────┴─────────────┘
+hf://datasets/⟨my_username⟩/⟨my_dataset⟩/⟨path_to_file⟩
 ```
 
-Why would you do this? On a large project, the JSON [`manifest.json`](https://docs.getdbt.com/reference/artifacts/manifest-json) can grow to hundreds of megabytes, and reading it means loading and parsing the whole file just to answer a simple question. (Although, [DuckDB can do this too](https://duckdb.org/docs/lts/data/json/json_functions).) The Parquet files are columnar, so DuckDB reads only the columns you select and can filter them without materializing everything in memory. That makes it practical to ask questions about the project itself: which models are materialized as tables rather than views, which schema each one lands in, or which models are missing tests.
+Reading a file is then just a query. This reads the CSV file from the [`datasets-examples/doc-formats-csv-1`](https://huggingface.co/datasets/datasets-examples/doc-formats-csv-1) repository:
 
-This is useful in a CI check or an audit script, where you want to enforce conventions across a project without standing up dbt or the warehouse. Because the files are located on disk after a `dbt parse`, you can point DuckDB at them directly and treat your project's metadata as just another dataset to query.
-
-## SQL Comprehension and Column-Level Lineage
-
-dbt models [combine SQL with Jinja templating](https://docs.getdbt.com/docs/build/jinja-macros), which earlier versions compiled into a query string [without inspecting the SQL itself](https://www.getdbt.com/blog/dbt-labs-acquires-sdf-labs). The v2 engine instead has a [native understanding of SQL across multiple engine dialects](https://docs.getdbt.com/docs/fusion/about-fusion). That means it can catch invalid column references and type mismatches [before a query reaches the warehouse](https://docs.getdbt.com/docs/fusion/about-fusion), rather than surfacing them only when the model runs against DuckDB.
-
-That same analysis produces [column-level lineage](https://docs.getdbt.com/docs/collaborate/column-level-lineage) locally, without a dbt platform account. Running [`dbt compile`](https://docs.getdbt.com/reference/commands/compile) with `--generate-info-schema --static-analysis strict` writes a `dbt.column_lineage` file into the [Information Schema](https://docs.getdbt.com/docs/build/dbt-information-schema?version=2.0) Parquet directory covered above, so you can trace which upstream columns feed each model with a plain DuckDB query.
-
-## Faster Local Development
-
-v2 is distributed as a [compiled Rust binary](https://docs.getdbt.com/blog/dbt-core-v2-is-here) rather than a set of Python packages, so there is no Python dependency tree to resolve before a run. dbt describes the engine as the foundation for [fast builds](https://docs.getdbt.com/docs/fusion/about-fusion) on large projects, where parsing and compiling happen inside that single native executable.
-
-The [dbt VS Code extension](https://docs.getdbt.com/docs/install-dbt-extension) builds on the same SQL comprehension. As you edit models, it gives you [autocomplete, hover information, and inline errors](https://docs.getdbt.com/docs/dbt-extension-features), so mistakes show up in the editor instead of after a round trip to the warehouse. The extension is [published on the VS Code Marketplace](https://marketplace.visualstudio.com/items?itemName=dbtLabsInc.dbt).
-
-## Bundled DuckDB and Native Functions
-
-v2 ships a [pinned DuckDB version](https://github.com/dbt-labs/dbt/releases/tag/v2.0.0-alpha.3), rather than relying on whatever version pip resolves for the [Python adapter](https://github.com/duckdb/dbt-duckdb/blob/master/README.md). Pinning the version is what enables the [read-write Iceberg REST catalog support](https://github.com/dbt-labs/dbt/releases/tag/v2.0.0-alpha.4) [described above](#ducklake-and-iceberg-catalogs), which depends on features from that specific DuckDB build.
-
-Bundling DuckDB also lets dbt push work down into the database. Some adapter logic that used to be a SQL macro is now [implemented as a native DuckDB extension function](https://github.com/dbt-labs/dbt/releases/tag/v2.0.0-alpha.4), such as `array_except`, which is exposed as `sf_array_except`.
-
-## Migrating
-
-A low-risk first step is to test the v2 parser while still on dbt v1.12, which ships an [opt-in v2 parser](https://docs.getdbt.com/reference/global-configs/parsing#opt-in-v2-parser). dbt's docs describe this as a way to catch compatibility issues early before fully migrating. Run the following command to check whether your project parses:
-
-```batch
-dbt parse --use-v2-parser
+```sql
+SELECT *
+FROM 'hf://datasets/datasets-examples/doc-formats-csv-1/data.csv';
 ```
 
-If it does, follow the [install guide](https://docs.getdbt.com/docs/local/install-dbt?version=2.0) to switch. The [dbt-autofix](https://github.com/dbt-labs/dbt-autofix) package handles many of the required changes, and there is an [upgrade guide for v2](https://docs.getdbt.com/docs/dbt-versions/core-upgrade/upgrading-to-v2).
+| kind    | sound |
+| ------- | ----- |
+| dog     | woof  |
+| cat     | meow  |
+| pokemon | pika  |
+| human   | hello |
+
+Here `datasets-examples` is the user or organization, `doc-formats-csv-1` is the dataset repository, and `data.csv` is the file inside it. The same example data is published in the [`doc-formats-jsonl-1`](https://huggingface.co/datasets/datasets-examples/doc-formats-jsonl-1) and [`doc-formats-parquet-1`](https://huggingface.co/datasets/datasets-examples/doc-formats-parquet-1) repositories, so these queries return the same four rows:
+
+```sql
+SELECT *
+FROM 'hf://datasets/datasets-examples/doc-formats-jsonl-1/data.jsonl';
+```
+
+```sql
+SELECT *
+FROM 'hf://datasets/datasets-examples/doc-formats-parquet-1/data/train-00000-of-00001.parquet';
+```
+
+DuckDB infers the format from the file, reads only what the query needs, and returns rows. Nothing is downloaded to a local copy first.
+
+### Querying Many Files at Once
+
+Datasets are often split across many files. A [glob pattern]({% link docs/current/data/multiple_files/overview.md %}#multi-file-reads-and-globs) lets you treat a whole directory as one table. The [`cais/mmlu`](https://huggingface.co/datasets/cais/mmlu) benchmark stores its `astronomy` task across three Parquet files (`dev`, `test`, and `validation`), and this counts the rows across all of them:
+
+```sql
+SELECT count(*) AS count
+FROM 'hf://datasets/cais/mmlu/astronomy/*.parquet';
+```
+
+| count |
+| ----: |
+|   173 |
+
+Because DuckDB reads Parquet column by column, you can filter across all those files without pulling every row into memory:
+
+```sql
+SELECT count(*) AS count
+FROM 'hf://datasets/cais/mmlu/astronomy/*.parquet'
+WHERE question LIKE '%planet%';
+```
+
+| count |
+| ----: |
+|    21 |
+
+### Versions and the `~parquet` Branch
+
+Each Hugging Face dataset is a git repository, so it has branches and revisions. You can pin a query to a specific one with an `@` suffix:
+
+```sql
+SELECT *
+FROM 'hf://datasets/datasets-examples/doc-formats-csv-1@~parquet/**/*.parquet';
+```
+
+| kind    | sound |
+| ------- | ----- |
+| dog     | woof  |
+| cat     | meow  |
+| pokemon | pika  |
+| human   | hello |
+
+The `~parquet` revision is worth knowing about. Hugging Face automatically converts every dataset into Parquet on this special branch to make it efficient to scan. That means even a dataset published as CSV or JSONL usually has a columnar version ready, which is exactly what DuckDB reads fastest.
+
+### Saving a Local Copy
+
+If you are going to query the same data repeatedly, materialize it once so you are not hitting the remote endpoint each time:
+
+```sql
+CREATE TABLE data AS
+    SELECT *
+    FROM 'hf://datasets/datasets-examples/doc-formats-csv-1/data.csv';
+```
+
+After that, the data lives in the local table and queries no longer touch the [Hugging Face Hub](https://huggingface.co/docs/hub):
+
+```sql
+SELECT *
+FROM data;
+```
+
+| kind    | sound |
+| ------- | ----- |
+| dog     | woof  |
+| cat     | meow  |
+| pokemon | pika  |
+| human   | hello |
+
+### Private and Gated Datasets
+
+Public datasets need no setup. For private or gated ones, store a Hugging Face token in DuckDB's [Secrets Manager]({% link docs/current/configuration/secrets_manager.md %}). You can pass the token directly:
+
+```sql
+CREATE SECRET hf_token (
+    TYPE huggingface,
+    TOKEN 'your_hf_token'
+);
+```
+
+Or let DuckDB pick it up from `~/.cache/huggingface/token`, where the Hugging Face tooling stores it:
+
+```sql
+CREATE SECRET hf_token (
+    TYPE huggingface,
+    PROVIDER credential_chain
+);
+```
+
+## Typical Use Cases
+
+The integration is a good fit whenever you want to look at data on the [Hugging Face Hub](https://huggingface.co/docs/hub) without committing to a download or a pipeline.
+
+* **Exploring a dataset before you use it.** Before training or finetuning on a dataset, you usually want to know what is in it: how many rows there are, how many are unique, what the columns look like. A single query against an `hf://` path answers that, reading only the columns you ask for:
+
+    ```sql
+    SELECT
+        count(*) AS questions,
+        count(DISTINCT question) AS distinct_questions,
+        avg(len(choices)) AS avg_choices
+    FROM 'hf://datasets/cais/mmlu/astronomy/*.parquet';
+    ```
+
+    | questions | distinct_questions | avg_choices |
+    | --------: | -----------------: | ----------: |
+    |       173 |                166 |         4.0 |
+
+* **Filtering and sampling for training.** Large datasets often need to be narrowed to a subset, one language, one topic, one quality threshold, before they are useful. Express that as a `WHERE` clause and write the result straight to a local Parquet file with `COPY`:
+
+    ```sql
+    COPY (
+        SELECT question, choices, answer
+        FROM 'hf://datasets/cais/mmlu/astronomy/*.parquet'
+        WHERE question LIKE '%planet%'
+    ) TO 'astronomy_planets.parquet';
+    ```
+
+    This turns a remote dataset into a focused local file, here the 21 astronomy questions that mention a planet.
+
+* **Working with benchmarks and evaluation sets.** Benchmarks like [MMLU](https://huggingface.co/datasets/cais/mmlu) ship as many small files grouped by task. You can read several tasks as one table and compute per-task statistics:
+
+    ```sql
+    SELECT subject, count(*) AS questions
+    FROM read_parquet([
+        'hf://datasets/cais/mmlu/astronomy/test-00000-of-00001.parquet',
+        'hf://datasets/cais/mmlu/anatomy/test-00000-of-00001.parquet'
+    ])
+    GROUP BY subject
+    ORDER BY subject;
+    ```
+
+    | subject   | questions |
+    | --------- | --------: |
+    | anatomy   |       135 |
+    | astronomy |       152 |
+
+* **Joining Hugging Face Hub data with your own.** Because an `hf://` path behaves like any other table source, you can join a public dataset against your own tables. Here a small lookup table maps each numeric answer to a choice letter:
+
+    ```sql
+    SELECT l.letter AS correct_choice, count(*) AS n
+    FROM 'hf://datasets/cais/mmlu/astronomy/*.parquet' AS m
+    JOIN (VALUES (0, 'A'), (1, 'B'), (2, 'C'), (3, 'D')) AS l(idx, letter)
+        ON m.answer = l.idx
+    GROUP BY l.letter
+    ORDER BY l.letter;
+    ```
+
+    | correct_choice |  n |
+    | -------------- | -: |
+    | A              | 35 |
+    | B              | 32 |
+    | C              | 48 |
+    | D              | 58 |
+
+* **Reproducible analysis.** Pinning a query to a specific commit means it reads the same data every time it runs, which matters for anything you need to reproduce later. Add the revision with an `@` suffix:
+
+    ```sql
+    SELECT count(*) AS count
+    FROM 'hf://datasets/cais/mmlu@c30699e8356da336a370243923dbaf21066bb9fe/astronomy/*.parquet';
+    ```
+
+    | count |
+    | ----: |
+    |   173 |
 
 ## Conclusion
 
-The DuckDB adapter is now part of dbt v2 and needs no separate install, and the Python versions of dbt Core remain available if you'd rather not move or not move yet. Either way, running dbt on DuckDB means you develop, test, and publish your models on your own machine.
+The [`hf://` protocol]({% link docs/lts/core_extensions/httpfs/hugging_face.md %}) lets you query a dataset on the [Hugging Face Hub](https://huggingface.co/docs/hub) by putting its path in a `SELECT`, with no download step, no server, and no separate tooling. 
 
-Beyond removing the separate install, v2 is where DuckDB picks up several new capabilities: catalog support for DuckLake and Iceberg, metadata written as queryable Parquet, native SQL comprehension with column-level lineage, and a pinned DuckDB build.
+If you work with datasets on the [Hugging Face Hub](https://huggingface.co/docs/hub), that covers a lot of day-to-day tasks: inspecting a new dataset, carving a training subset out of a large one, or running a quick check across a benchmark.
 
-If you've already been using dbt-duckdb, upgrading to v2 means one less package to install and all of the above to build on. And if you haven't, a single dbt install and a few lines of profile are enough to start building models directly on your laptop, without servers or warehouses.
+For further reading, see the original [announcement post]({% post_url 2024-05-29-access-150k-plus-datasets-from-hugging-face-with-duckdb %}), [DuckDB's Hugging Face docs]({% link docs/lts/core_extensions/httpfs/hugging_face.md %}), and Hugging Face's own [DuckDB guide](https://huggingface.co/docs/hub/datasets-duckdb).
