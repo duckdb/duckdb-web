@@ -4,13 +4,13 @@ title: "DuckDB and Hugging Face: Querying Datasets Directly"
 author: "The DuckDB team"
 thumb: "/images/blog/thumbs/hugging-face.svg"
 image: "/images/blog/thumbs/hugging-face.png"
-excerpt: "Hugging Face hosts hundreds of thousands of datasets, and DuckDB can read them directly, exactly where they are and without downloading anything, over the DuckDB `hf://` protocol. This post looks at how the integration came about, how it works, and the use cases it is a good fit for."
+excerpt: "Hugging Face hosts hundreds of thousands of datasets, and DuckDB can read them directly, exactly where they are and without downloading anything, over the DuckDB `hf://` protocol. This post looks at how the integration works and the scenarios where it works best."
 tags: ["extensions"]
 ---
 
 [Hugging Face](https://huggingface.co/) is where much of the machine learning community publishes and finds its datasets, while DuckDB is the in-process analytical database that queries files like CSV and Parquet directly, with no server or warehous to install or run. 
 
-Did you know that, since DuckDB [v0.10.3](https://github.com/duckdb/duckdb/releases/tag/v0.10.3) (released on May 22, 2024), you can point a `SELECT` at a dataset on the [Hugging Face Hub](https://huggingface.co/docs/hub), using the DuckDB `hf://` protocol, and query it, without downloading it first? This post covers how that integration came about, how it works, and the use cases it fits.
+Did you know that, since DuckDB [v0.10.3](https://github.com/duckdb/duckdb/releases/tag/v0.10.3) (released on May 22, 2024), you can point a `SELECT` at a dataset on the [Hugging Face Hub](https://huggingface.co/docs/hub), using the DuckDB `hf://` protocol, and query it, without downloading it first? This post covers how that integration works and the use cases it fits.
 
 ## Background
 
@@ -56,7 +56,7 @@ SELECT *
 FROM 'hf://datasets/datasets-examples/doc-formats-parquet-1/data/train-00000-of-00001.parquet';
 ```
 
-DuckDB infers the format from the file, reads only what the query needs, and returns rows. Nothing is downloaded to a local copy first.
+DuckDB infers the format from the file and reads only the columns that the query actually needs. And, nothing is downloaded to a local copy first.
 
 ### Querying Many Files at Once
 
@@ -99,7 +99,7 @@ FROM 'hf://datasets/datasets-examples/doc-formats-csv-1@~parquet/**/*.parquet';
 | pokemon | pika  |
 | human   | hello |
 
-The `~parquet` revision is worth knowing about. Hugging Face automatically converts every dataset into Parquet on this special branch to make it efficient to scan. That means even a dataset published as CSV or JSONL usually has a columnar version ready, which is exactly what DuckDB reads fastest.
+Hugging Face automatically converts every dataset into Parquet on this special `~parquet` branch to make it efficient to scan. So even a dataset published as CSV or JSONL usually has a columnar version ready, which is what DuckDB reads fastest.
 
 ### Saving a Local Copy
 
@@ -149,7 +149,7 @@ CREATE SECRET hf_token (
 
 The integration is a good fit whenever you want to look at data on the [Hugging Face Hub](https://huggingface.co/docs/hub) without committing to a download or a pipeline.
 
-* **Exploring a dataset before you use it.** Before training or finetuning on a dataset, you usually want to know what is in it: how many rows there are, how many are unique, what the columns look like. A single query against an `hf://` path answers that, reading only the columns you ask for:
+* **Exploring a dataset before you use it.** Before training or finetuning on a dataset, you usually want to know what is in it: the row count, how many rows are unique, and what the columns look like. A single query against an `hf://` path answers that, reading only the columns you ask for:
 
   ```sql
   SELECT
@@ -163,7 +163,7 @@ The integration is a good fit whenever you want to look at data on the [Hugging 
   | --------: | -----------------: | ----------: |
   |       173 |                166 |         4.0 |
 
-* **Filtering and sampling for training.** Large datasets often need to be narrowed to a subset, one language, one topic, one quality threshold, before they are useful. Express that as a `WHERE` clause and write the result straight to a local Parquet file with `COPY`:
+* **Filtering and sampling for training.** Large datasets often need to be narrowed to a subset, say a single language or the rows above some quality threshold, before they are useful. Express that as a `WHERE` clause and write the result straight to a local Parquet file with `COPY`:
 
   ```sql
   COPY (
@@ -223,8 +223,8 @@ The integration is a good fit whenever you want to look at data on the [Hugging 
 
 ## Conclusion
 
-The [`hf://` protocol]({% link docs/lts/core_extensions/httpfs/hugging_face.md %}) lets you query a dataset on the [Hugging Face Hub](https://huggingface.co/docs/hub) by putting its path in a `SELECT`, with no download step, no server, and no separate tooling. 
+The [`hf://` protocol]({% link docs/lts/core_extensions/httpfs/hugging_face.md %}) lets you query a dataset on the [Hugging Face Hub](https://huggingface.co/docs/hub) by putting its path in a `SELECT`, with no download step and no server to run.
 
-If you work with datasets on the [Hugging Face Hub](https://huggingface.co/docs/hub), that covers a lot of day-to-day tasks: inspecting a new dataset, carving a training subset out of a large one, or running a quick check across a benchmark.
+If you work with datasets on the [Hugging Face Hub](https://huggingface.co/docs/hub), that covers a lot of day-to-day tasks, from inspecting a new dataset to creating a training subset out of a larger one.
 
 For further reading, see the original [announcement post]({% post_url 2024-05-29-access-150k-plus-datasets-from-hugging-face-with-duckdb %}), [DuckDB's Hugging Face docs]({% link docs/lts/core_extensions/httpfs/hugging_face.md %}), and Hugging Face's own [DuckDB guide](https://huggingface.co/docs/hub/datasets-duckdb).
