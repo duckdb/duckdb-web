@@ -23,7 +23,7 @@ dbt Labs announced the new Rust-based Fusion engine on [May 28, 2025](https://ww
 <p class="quote-author">— <a href="https://github.com/dbt-labs/dbt/issues/13193">ran-codes, on GitHub</a></p>
 </blockquote>
 
-At the time of this writing, the issue drew 146 ❤️ and 21 👍 reactions. The adapter is now built into dbt v2.
+At the time of this writing, the issue resulted in 146 ❤️ and 21 👍 reactions. The adapter is now built into dbt v2.
 
 On June 1, 2026, dbt Labs released the [first alpha of dbt Core 2.0](https://docs.getdbt.com/blog/dbt-core-v2-is-here), built on the same foundations as Fusion, and open-sourced a large part of the Fusion code. That code moved into the dbt-core repository under Apache 2.0, and the dbt-fusion repository was archived. There are two distributions of v2, both free to install locally and both running on the same engine.
 
@@ -107,7 +107,7 @@ For the above, this lists the three models in the fixture, along with how each i
 
 Why would you do this? On a large project, the JSON [`manifest.json`](https://docs.getdbt.com/reference/artifacts/manifest-json) can grow to hundreds of megabytes, and reading it means loading and parsing the whole file just to answer a simple question. (Although, [DuckDB can do this too](https://duckdb.org/docs/lts/data/json/json_functions).) The Parquet files are columnar, so DuckDB reads only the columns you select and can filter them without materializing everything in memory. That makes it practical to ask questions about the project itself: which models are materialized as tables rather than views, which schema each one lands in, or which models are missing tests.
 
-This is useful in a CI check or an audit script, where you want to enforce conventions across a project without standing up dbt or the warehouse. Because the files sit on disk after a `dbt parse`, you can point DuckDB at them directly and treat your project's metadata as just another dataset to query.
+This is useful in a CI check or an audit script, where you want to enforce conventions across a project without standing up dbt or the warehouse. Because the files are located on disk after a `dbt parse`, you can point DuckDB at them directly and treat your project's metadata as just another dataset to query.
 
 ## SQL Comprehension and Column-Level Lineage
 
