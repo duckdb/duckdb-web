@@ -55,10 +55,10 @@ docs:
 
     For detailed setup and usage instructions, visit the [extension repository](https://github.com/stephaniewang526/duckdb-mongo).
 
-extension_star_count: 58
-extension_star_count_pretty: 58
-extension_download_count: 2319
-extension_download_count_pretty: 2.3k
+extension_star_count: 59
+extension_star_count_pretty: 59
+extension_download_count: 2550
+extension_download_count_pretty: 2.5k
 image: '/images/community_extensions/social_preview/preview_community_extension_mongo.png'
 layout: community_extension_doc
 ---
