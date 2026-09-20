@@ -26,7 +26,7 @@ DuckDB and Hugging Face [worked together]({% post_url 2024-05-29-access-150k-plu
 
 The examples below cover the common cases. [DuckDB's Hugging Face docs]({% link docs/lts/core_extensions/httpfs/hugging_face.md %}) are the full reference. The scheme maps a Hugging Face dataset repository onto a path DuckDB can read:
 
-```text
+```sql
 hf://datasets/⟨my_username⟩/⟨my_dataset⟩/⟨path_to_file⟩
 ```
 
@@ -151,75 +151,75 @@ The integration is a good fit whenever you want to look at data on the [Hugging 
 
 * **Exploring a dataset before you use it.** Before training or finetuning on a dataset, you usually want to know what is in it: how many rows there are, how many are unique, what the columns look like. A single query against an `hf://` path answers that, reading only the columns you ask for:
 
-    ```sql
-    SELECT
-        count(*) AS questions,
-        count(DISTINCT question) AS distinct_questions,
-        avg(len(choices)) AS avg_choices
-    FROM 'hf://datasets/cais/mmlu/astronomy/*.parquet';
-    ```
+  ```sql
+  SELECT
+      count(*) AS questions,
+      count(DISTINCT question) AS distinct_questions,
+      avg(len(choices)) AS avg_choices
+  FROM 'hf://datasets/cais/mmlu/astronomy/*.parquet';
+  ```
 
-    | questions | distinct_questions | avg_choices |
-    | --------: | -----------------: | ----------: |
-    |       173 |                166 |         4.0 |
+  | questions | distinct_questions | avg_choices |
+  | --------: | -----------------: | ----------: |
+  |       173 |                166 |         4.0 |
 
 * **Filtering and sampling for training.** Large datasets often need to be narrowed to a subset, one language, one topic, one quality threshold, before they are useful. Express that as a `WHERE` clause and write the result straight to a local Parquet file with `COPY`:
 
-    ```sql
-    COPY (
-        SELECT question, choices, answer
-        FROM 'hf://datasets/cais/mmlu/astronomy/*.parquet'
-        WHERE question LIKE '%planet%'
-    ) TO 'astronomy_planets.parquet';
-    ```
+  ```sql
+  COPY (
+      SELECT question, choices, answer
+      FROM 'hf://datasets/cais/mmlu/astronomy/*.parquet'
+      WHERE question LIKE '%planet%'
+  ) TO 'astronomy_planets.parquet';
+  ```
 
-    This turns a remote dataset into a focused local file, here the 21 astronomy questions that mention a planet.
+  This turns a remote dataset into a focused local file, here the 21 astronomy questions that mention a planet.
 
 * **Working with benchmarks and evaluation sets.** Benchmarks like [MMLU](https://huggingface.co/datasets/cais/mmlu) ship as many small files grouped by task. You can read several tasks as one table and compute per-task statistics:
 
-    ```sql
-    SELECT subject, count(*) AS questions
-    FROM read_parquet([
-        'hf://datasets/cais/mmlu/astronomy/test-00000-of-00001.parquet',
-        'hf://datasets/cais/mmlu/anatomy/test-00000-of-00001.parquet'
-    ])
-    GROUP BY subject
-    ORDER BY subject;
-    ```
+  ```sql
+  SELECT subject, count(*) AS questions
+  FROM read_parquet([
+      'hf://datasets/cais/mmlu/astronomy/test-00000-of-00001.parquet',
+      'hf://datasets/cais/mmlu/anatomy/test-00000-of-00001.parquet'
+  ])
+  GROUP BY subject
+  ORDER BY subject;
+  ```
 
-    | subject   | questions |
-    | --------- | --------: |
-    | anatomy   |       135 |
-    | astronomy |       152 |
+  | subject   | questions |
+  | --------- | --------: |
+  | anatomy   |       135 |
+  | astronomy |       152 |
 
 * **Joining Hugging Face Hub data with your own.** Because an `hf://` path behaves like any other table source, you can join a public dataset against your own tables. Here a small lookup table maps each numeric answer to a choice letter:
 
-    ```sql
-    SELECT l.letter AS correct_choice, count(*) AS n
-    FROM 'hf://datasets/cais/mmlu/astronomy/*.parquet' AS m
-    JOIN (VALUES (0, 'A'), (1, 'B'), (2, 'C'), (3, 'D')) AS l(idx, letter)
-        ON m.answer = l.idx
-    GROUP BY l.letter
-    ORDER BY l.letter;
-    ```
+  ```sql
+  SELECT l.letter AS correct_choice, count(*) AS n
+  FROM 'hf://datasets/cais/mmlu/astronomy/*.parquet' AS m
+  JOIN (VALUES (0, 'A'), (1, 'B'), (2, 'C'), (3, 'D')) AS l(idx, letter)
+    ON m.answer = l.idx
+  GROUP BY l.letter
+  ORDER BY l.letter;
+  ```
 
-    | correct_choice |  n |
-    | -------------- | -: |
-    | A              | 35 |
-    | B              | 32 |
-    | C              | 48 |
-    | D              | 58 |
+  | correct_choice |  n |
+  | -------------- | -: |
+  | A              | 35 |
+  | B              | 32 |
+  | C              | 48 |
+  | D              | 58 |
 
 * **Reproducible analysis.** Pinning a query to a specific commit means it reads the same data every time it runs, which matters for anything you need to reproduce later. Add the revision with an `@` suffix:
 
-    ```sql
-    SELECT count(*) AS count
-    FROM 'hf://datasets/cais/mmlu@c30699e8356da336a370243923dbaf21066bb9fe/astronomy/*.parquet';
-    ```
+  ```sql
+  SELECT count(*) AS count
+  FROM 'hf://datasets/cais/mmlu@c30699e8356da336a370243923dbaf21066bb9fe/astronomy/*.parquet';
+  ```
 
-    | count |
-    | ----: |
-    |   173 |
+  | count |
+  | ----: |
+  |   173 |
 
 ## Conclusion
 
