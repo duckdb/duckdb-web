@@ -53,10 +53,10 @@ docs:
     from the default build. Corresponding source and rebuilding instructions are
     described in [REDISTRIBUTION.md](https://github.com/AstroVela/duckdb-lerobot/blob/v1.5-variegata/REDISTRIBUTION.md).
 
-extension_star_count: 1
-extension_star_count_pretty: 1
-extension_download_count: 72
-extension_download_count_pretty: 72
+extension_star_count: 2
+extension_star_count_pretty: 2
+extension_download_count: 343
+extension_download_count_pretty: 343
 image: '/images/community_extensions/social_preview/preview_community_extension_lerobot.png'
 layout: community_extension_doc
 ---
