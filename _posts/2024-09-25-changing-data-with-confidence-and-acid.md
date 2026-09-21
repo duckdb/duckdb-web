@@ -267,7 +267,7 @@ Finally, to test *durability*, a number of threads run the ACID transaction and 
 
 **We're happy to report that DuckDB passed all tests.**
 
-Our scripts to run the benchmark are [available on GitHub](https://github.com/hannes/duckdb-tpch-power-test). We are planning to perform a formal audit of our results in the future. We will update this post when that happens.
+Our scripts to run the benchmark are [available on GitHub](https://github.com/hannes/duckdb-tpch). We are planning to perform a formal audit of our results in the future. We will update this post when that happens.
 
 ## Conclusion
 
