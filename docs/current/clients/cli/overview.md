@@ -6,7 +6,6 @@ redirect_from:
 - /docs/api/cli/overview
 - /docs/clients/cli
 - /docs/clients/cli/overview
-- /docs/preview/clients/cli/overview
 - /docs/stable/clients/cli/overview
 title: Command Line Client
 ---

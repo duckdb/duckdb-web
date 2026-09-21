@@ -3,7 +3,6 @@ layout: docu
 redirect_from:
 - /docs/api/c/config
 - /docs/clients/c/config
-- /docs/preview/clients/c/config
 - /docs/stable/clients/c/config
 title: Configuration
 ---

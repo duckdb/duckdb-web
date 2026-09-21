@@ -1,7 +1,6 @@
 ---
 layout: docu
 redirect_from:
-- /docs/preview/operations_manual/logging/overview
 - /docs/stable/operations_manual/logging/overview
 title: Logging
 ---

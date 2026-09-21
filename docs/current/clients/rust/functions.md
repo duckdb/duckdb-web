@@ -2,7 +2,6 @@
 layout: docu
 redirect_from:
 - /docs/clients/rust/functions
-- /docs/preview/clients/rust/functions
 - /docs/stable/clients/rust/functions
 title: Write User Defined Functions
 ---

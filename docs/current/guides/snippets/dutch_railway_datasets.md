@@ -1,7 +1,6 @@
 ---
 layout: docu
 redirect_from:
-- /docs/preview/guides/snippets/dutch_railway_datasets
 - /docs/stable/guides/snippets/dutch_railway_datasets
 title: Dutch Railway Datasets
 ---

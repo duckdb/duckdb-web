@@ -3,7 +3,6 @@ layout: docu
 redirect_from:
 - /docs/extensions/spatial/r-tree_indexes
 - /docs/stable/extensions/spatial/r-tree_indexes
-- /docs/preview/core_extensions/spatial/r-tree_indexes
 - /docs/stable/core_extensions/spatial/r-tree_indexes
 title: R-Tree Indexes
 ---

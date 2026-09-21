@@ -2,7 +2,6 @@
 layout: docu
 railroad: expressions/like.js
 redirect_from:
-- /docs/preview/sql/functions/pattern_matching
 - /docs/sql/functions/pattern_matching
 - /docs/sql/functions/patternmatching
 - /docs/stable/sql/functions/pattern_matching

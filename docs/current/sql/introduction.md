@@ -1,7 +1,6 @@
 ---
 layout: docu
 redirect_from:
-- /docs/preview/sql/introduction
 - /docs/sql/introduction
 - /docs/stable/sql/introduction
 title: SQL Introduction

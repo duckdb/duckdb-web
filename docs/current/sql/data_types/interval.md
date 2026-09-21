@@ -3,7 +3,6 @@ blurb: Intervals represent periods of time measured in months, days, microsecond
   or a combination thereof.
 layout: docu
 redirect_from:
-- /docs/preview/sql/data_types/interval
 - /docs/sql/data_types/interval
 - /docs/stable/sql/data_types/interval
 title: Interval Type

@@ -2,7 +2,6 @@
 layout: docu
 redirect_from:
 - /docs/clients/java/querying
-- /docs/preview/clients/java/querying
 - /docs/stable/clients/java/querying
 title: Run Queries
 ---

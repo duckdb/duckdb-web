@@ -2,7 +2,6 @@
 layout: docu
 redirect_from:
 - /docs/internals/storage
-- /docs/preview/internals/storage
 - /docs/stable/internals/storage
 - /internals/storage
 - /storage

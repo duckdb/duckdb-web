@@ -3,7 +3,6 @@ layout: docu
 redirect_from:
 - /dev/sqllogictest/loops
 - /docs/dev/sqllogictest/loops
-- /docs/preview/dev/sqllogictest/loops
 - /docs/stable/dev/sqllogictest/loops
 title: Loops
 ---

@@ -2,7 +2,6 @@
 layout: docu
 redirect_from:
 - /docs/guides/python/import_arrow
-- /docs/preview/guides/python/import_arrow
 - /docs/stable/guides/python/import_arrow
 title: Import from Apache Arrow
 ---

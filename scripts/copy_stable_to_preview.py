@@ -10,16 +10,17 @@ def update_new_preview_page(file):
         del doc["redirect_from"]
 
     # replace link tags in the content
-    doc.content = doc.content.replace(f"{{% link docs/lts/", f"{{% link docs/current/")
+    doc.content = doc.content.replace(
+        f"{{% link docs/current/", f"{{% link docs/preview/"
+    )
     return frontmatter.dumps(doc)
 
 
-# copy docs/lts to docs/current
+# copy docs/current to docs/preview
 def copy_docs():
-    src = "docs/lts"
-    dst = "docs/current"
+    src = "docs/current"
+    dst = "docs/preview"
 
-    shutil.rmtree(dst)
     os.makedirs(dst)
 
     for root, dirs, files in os.walk(src):

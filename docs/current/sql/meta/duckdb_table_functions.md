@@ -1,7 +1,6 @@
 ---
 layout: docu
 redirect_from:
-- /docs/preview/sql/meta/duckdb_table_functions
 - /docs/sql/duckdb_table_functions
 - /docs/sql/meta/duckdb_table_functions
 - /docs/stable/sql/meta/duckdb_table_functions

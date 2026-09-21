@@ -1,7 +1,6 @@
 ---
 layout: docu
 redirect_from:
-- /docs/preview/core_extensions/odbc/functions
 - /docs/stable/core_extensions/odbc/functions
 title: ODBC Extension Functions
 ---

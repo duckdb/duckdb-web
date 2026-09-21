@@ -7,6 +7,13 @@
 			<span title="The page is for the LTS build of DuckDB.">LTS version</span>
 		</div>
 	</div>
+{% elsif version_viewed == "preview" %}
+	<div class="banner preview">
+		<div class="content">
+			<svg class="icon"><use href="#clock"></use></svg>
+			<span title="The page is for the preview build of DuckDB.">Preview version</span>
+		</div>
+	</div>
 {% else %}
 	<!-- show 'outdated' banner, linking to the same page in the current version -->
 	{% assign basename = page.path | regex_replace: "docs/(lts|current|\d*.\d*)/", "" %}

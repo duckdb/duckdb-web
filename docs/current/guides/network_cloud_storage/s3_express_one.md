@@ -3,7 +3,6 @@ layout: docu
 redirect_from:
 - /docs/guides/import/s3_express_one
 - /docs/guides/network_cloud_storage/s3_express_one
-- /docs/preview/guides/network_cloud_storage/s3_express_one
 - /docs/stable/guides/network_cloud_storage/s3_express_one
 title: S3 Express One
 ---

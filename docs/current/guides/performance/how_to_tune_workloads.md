@@ -3,7 +3,6 @@ layout: docu
 redirect_from:
 - /docs/guides/performance/how-to-tune-workloads
 - /docs/guides/performance/how_to_tune_workloads
-- /docs/preview/guides/performance/how_to_tune_workloads
 - /docs/stable/guides/performance/how_to_tune_workloads
 title: Tuning Workloads
 ---

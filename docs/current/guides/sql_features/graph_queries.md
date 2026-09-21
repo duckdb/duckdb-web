@@ -1,7 +1,6 @@
 ---
 layout: docu
 redirect_from:
-- /docs/preview/guides/sql_features/graph_queries
 - /docs/stable/guides/sql_features/graph_queries
 title: Graph Queries
 ---

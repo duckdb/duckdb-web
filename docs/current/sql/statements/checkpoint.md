@@ -2,7 +2,6 @@
 layout: docu
 railroad: statements/checkpoint.js
 redirect_from:
-- /docs/preview/sql/statements/checkpoint
 - /docs/sql/statements/checkpoint
 - /docs/stable/sql/statements/checkpoint
 title: CHECKPOINT Statement

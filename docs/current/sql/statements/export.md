@@ -2,7 +2,6 @@
 layout: docu
 railroad: statements/export.js
 redirect_from:
-- /docs/preview/sql/statements/export
 - /docs/sql/statements/export
 - /docs/stable/sql/statements/export
 title: EXPORT and IMPORT DATABASE Statements

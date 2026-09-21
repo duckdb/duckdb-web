@@ -2,7 +2,6 @@
 layout: docu
 redirect_from:
 - /docs/clients/java/known_issues
-- /docs/preview/clients/java/known_issues
 - /docs/stable/clients/java/known_issues
 title: Troubleshoot
 ---

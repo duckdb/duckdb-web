@@ -1,7 +1,6 @@
 ---
 layout: docu
 redirect_from:
-- /docs/preview/sql/functions/numeric
 - /docs/sql/functions/numeric
 - /docs/stable/sql/functions/numeric
 - /docs/test/functions/math

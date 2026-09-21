@@ -2,7 +2,6 @@
 layout: docu
 redirect_from:
 - /docs/clients/java/connecting
-- /docs/preview/clients/java/connecting
 - /docs/stable/clients/java/connecting
 title: Connect
 ---

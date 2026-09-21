@@ -1,7 +1,6 @@
 ---
 layout: docu
 redirect_from:
-- /docs/preview/guides/database_integration/rds_iam
 - /docs/stable/guides/database_integration/rds_iam
 title: Amazon RDS with IAM Authentication
 ---

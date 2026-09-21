@@ -3,7 +3,6 @@ layout: docu
 redirect_from:
 - /docs/cli/arguments
 - /docs/clients/cli/arguments
-- /docs/preview/clients/cli/arguments
 - /docs/stable/clients/cli/arguments
 title: Command Line Arguments
 ---

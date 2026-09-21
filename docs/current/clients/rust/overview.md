@@ -6,8 +6,6 @@ redirect_from:
 - /docs/clients/rust
 - /docs/clients/rust/overview
 - /docs/current/clients/rust
-- /docs/preview/clients/rust
-- /docs/preview/clients/rust/overview
 - /docs/stable/clients/rust
 - /docs/stable/clients/rust/overview
 title: Rust Client

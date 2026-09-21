@@ -4,7 +4,6 @@ redirect_from:
 - /docs/data/parquet
 - /docs/data/parquet/overview
 - /docs/extensions/parquet
-- /docs/preview/data/parquet/overview
 - /docs/stable/data/parquet/overview
 title: Reading and Writing Parquet Files
 ---

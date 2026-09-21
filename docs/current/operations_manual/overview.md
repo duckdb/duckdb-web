@@ -2,7 +2,6 @@
 layout: docu
 redirect_from:
 - /docs/operations_manual/overview
-- /docs/preview/operations_manual/overview
 - /docs/stable/operations_manual/overview
 title: Overview
 ---

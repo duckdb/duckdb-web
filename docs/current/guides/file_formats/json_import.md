@@ -3,7 +3,6 @@ layout: docu
 redirect_from:
 - /docs/guides/file_formats/json_import
 - /docs/guides/import/json_import
-- /docs/preview/guides/file_formats/json_import
 - /docs/stable/guides/file_formats/json_import
 title: JSON Import
 ---
