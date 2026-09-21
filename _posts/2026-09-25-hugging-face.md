@@ -8,7 +8,7 @@ excerpt: "Hugging Face hosts hundreds of thousands of datasets, and DuckDB can r
 tags: ["extensions"]
 ---
 
-[Hugging Face](https://huggingface.co/) is where much of the machine learning community publishes and finds its datasets, while DuckDB is the in-process analytical database that queries files like CSV and Parquet directly, with no server or warehous to install or run. 
+[Hugging Face](https://huggingface.co/) is where much of the machine learning community publishes and finds its datasets, while DuckDB is the in-process analytical database that queries files like CSV and Parquet directly, with no server or warehouse to install or run. 
 
 Did you know that, since DuckDB [v0.10.3](https://github.com/duckdb/duckdb/releases/tag/v0.10.3) (released on May 22, 2024), you can point a `SELECT` at a dataset on the [Hugging Face Hub](https://huggingface.co/docs/hub), using the DuckDB `hf://` protocol, and query it, without downloading it first? This post covers how that integration works and the use cases it fits.
 
@@ -149,7 +149,7 @@ CREATE SECRET hf_token (
 
 The integration is a good fit whenever you want to look at data on the [Hugging Face Hub](https://huggingface.co/docs/hub) without committing to a download or a pipeline.
 
-* **Exploring a dataset before you use it.** Before training or finetuning on a dataset, you usually want to know what is in it: the row count, how many rows are unique, and what the columns look like. A single query against an `hf://` path answers that, reading only the columns you ask for:
+* **Exploring a dataset before you use it.** Before training or finetuning a dataset, you usually want to know what is in it: the row count, how many rows are unique, and what the columns look like. A single query against an `hf://` path answers that, reading only the columns you ask for:
 
   ```sql
   SELECT
