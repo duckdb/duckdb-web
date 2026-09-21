@@ -1,227 +1,236 @@
 ---
 layout: post
-title: "Importing 2.7 Million MongoDB Records into DuckDB from Java"
-author: "Guest Author, Geertjan Wielenga, Alex Kasko"
-excerpt: "When the analytics screen running on our main MongoDB database got too slow, we moved a year of data into DuckDB on the same server. Getting the data in was the hard part. This is the story of every method we tried, and why a table function written in pure Java is the one we shipped."
+title: "Importing Data into DuckDB with Java - Practical Experience"
+author: "John Nadar, Geertjan Wielenga, Alex Kasko"
+excerpt: "When the analytics screen running on our main operational database got too slow, we moved a year of data into DuckDB on the same server. Getting the data in was the hard part. This is the story of every method we tried, and why a table function written in pure Java is the one we shipped."
 tags: ["using DuckDB"]
 thumb: "/images/blog/thumbs/java.svg"
 image: "/images/blog/thumbs/java.png"
 ---
 
-> This is a guest post. The author is a Java developer who maintains the analytics features of a vulnerability management application. The technical editing was done by Alex Kasko, maintainer of the DuckDB Java client.
+> Guest blog post by [John Nadar](https://github.com/jonadar98).
 
-## TL;DR
+## The Analytics Screen Problem
 
-We store vulnerability data for our customers in MongoDB, and the analytics screen ran its aggregations straight against that collection. By about 2.7 million records it was too slow, and months of tuning queries and adding indexes had not fixed it. So we decided to copy one year of data into DuckDB on the same server and run the analytics there.
+At a company I work for we store vulnerabilities data for other companies as a collection of JSON documents in MongoDB. Our analytics screen was working fine at first but as our data volume increased - the response times start getting slow. For many months we did a lot of query optimization, restructuring, index additions, and saw significant improvement. But still the execution time for few scenarios was in 10s of seconds: for example, when returning the count of closed or open vulnerabilities or when getting top 10 vulnerable business units for last 6 months. The main issue was in our MS Excel export feature which was taking 2-3 minutes for 50k records; also the performance was not very consistent. So we needed to find an alternative.
 
-Getting the data in was the hard part. The obvious tool, the [MongoDB community extension]({% link community_extensions/extensions/mongo.md %}), was also the fastest thing I tried, but it is unreviewed native C++, and as a Java team with strict security audits and a fast DuckDB upgrade cadence we could not ship it. So the real question was whether I could match it from pure Java, with no native code. The Appender and exporting to files both fell short. What finally worked was a table function written in Java, following the [Table Functions in Java]({% post_url 2026-08-25-table-functions-in-java %}) post: it hit the same import time and the same 3.34 GB file as the extension, a parallel version beat it, and the whole import stayed a single SQL statement with nothing but Java in the build. This post walks through every attempt and why the table function won.
+The plan was to import our 1 year record in an alternative database and query on it. The requirements were to run all the queries in 1s or less and export 50k records in Excel format in 10s. Anything more than that will run in background.
 
-## Why We Looked at DuckDB
+Due to internal requirements the analytical database needs to run on the same server as MongoDB. It should be actively developed, should be free and open-source and should work well with limited resources - and DuckDB checked all the boxes.
 
-Our analytics screen ran aggregations over the vulnerability data: how many vulnerabilities are open or closed, the ten most affected business units over the last six months, and similar reports. There was also an export to Excel.
+## Sample Data Set and Code Snippets
 
-When the collection was small this was fine. As it grew, some queries took tens of seconds. We spent months on query optimization, restructuring and new indexes, and the numbers improved a lot, but a few scenarios were still stuck in the tens of seconds. The Excel export was the worst of it, two to three minutes for 50,000 records, and the response times were not consistent from one run to the next.
+To be able to share my performance measurement results I prepared an anonymised dataset that roughly corresponds to the data I was importing. The size of the dataset was reduced multiple times over the real one to allow running the experiments on it faster.
 
-So we set two targets. Every query on the analytics screen should finish in one second or less, and an export of 50,000 records should complete in ten seconds. Anything slower would move to a background job.
+The dataset is available at this link: [vulnerability_sample.csv.zst](TODO: link on duckdb.org), it contains 485k records with 24 fields. Two notable fields in it are `VARCHAR` "description" and "references" that contain long strings, with corresponding median length of 5k and 2.5k characters and with many recods there being up to 32k characters. These long fields make many operations on this dataset quite expensive.
 
-There were constraints outside performance too. The company was cutting costs, so a new server was out of the question. Whatever we chose had to run next to MongoDB on the same machine, and it had to be free, open source and actively developed. DuckDB checked every box.
+Also, along with DuckLabs editors, we prepared a number of code snippets to illustrate the data import in Java. These snippets are significantly simplified compared with actual code we run. Still their performance characteristics more or less matched the real ones. The code snippets are available in this GitHub repository [staticlibs/duckdb_java_data_import](https://github.com/staticlibs/duckdb_java_data_import).
 
-A note on the numbers before I start. I have rounded them so the setup is easy to reproduce. The collection holds about 2.7 million documents with roughly 50 fields each. Two of those fields hold long text, a description and a list of references, and for the customer whose data I tested with they run from 15,000 to 32,000 characters. An average record is about 8 KB and the largest are around 60 KB. My workstation has 4 cores, 32 GB of RAM and 38 GB of free SSD space. I gave DuckDB 4 threads and a 12 GB memory limit, and the JVM 4 GB of heap.
+## MongoDB Community Extension
 
-```sql
-SET threads = 4;
-SET memory_limit = '12GB';
-```
-
-## The MongoDB Community Extension
-
-My first proof of concept used the [MongoDB community extension]({% link community_extensions/extensions/mongo.md %}). It takes minutes to set up, and the entire import is a single statement:
+I was looking at options to copy the data from MongoDB and found the [`mongo` community extension](https://duckdb.org/community_extensions/extensions/mongo). My first POC was created using that and it was very simple to setup and use, it looked like the following snippet:
 
 ```sql
 INSTALL mongo FROM community;
-LOAD mongo;
-ATTACH 'host=localhost port=27017' AS mongo_db (TYPE MONGO);
-
-CREATE OR REPLACE TABLE vulnerability AS
-    SELECT ⟨columns⟩
-    FROM mongo_db.vulndb.vulnerability
-    ORDER BY ⟨sort columns⟩; -- the columns the analytics screen filters and groups on
+ATTACH 'host=localhost port=27017 database=db1' AS m (TYPE MONGO);
+CREATE OR REPLACE TABLE m.vuln1 AS FROM 'vulnerability_sample.csv.zst';
 ```
 
-It consistently took 18 to 20 minutes to copy the 2.7 million documents, and the queries afterward were fast. Group and count queries came back in under 100 ms, and exporting 50,000 records took less than 5 seconds. Sorting the data during the import made query times better still. The one exception is queries that project the long text columns. Sorting a result that includes them is much slower even when they are not in the `ORDER BY` or the `WHERE` clause. I reported that in [duckdb/duckdb#24935](https://github.com/duckdb/duckdb/issues/24935).
+On the sample data this method took 55 seconds.
 
-### File Size and `storage_compatibility_version`
+I was quickly able to get it up and running and import the data into DuckDB. I ran many of our analytical queries and it was very fast, sub 100ms for `GROUP BY` and `COUNT` queries and I was able to export 50k records in less than 5s. The only exceptions was when large text columns were projected those caused a degradation in performance, I have raised an [issue](https://github.com/duckdb/duckdb/issues/24935) for that.
 
-The first database file was about 19 GB. Sorting brought it down to 15 GB. Then I set the storage format to the latest version:
+Sorting the data gave further query performance improvement and combined with: `SET storage_compatibility_version = 'latest'` resulted into the database file size reduction.
 
-```sql
-SET storage_compatibility_version = 'latest';
-```
+Thus the `mongo` community extension may be the easiest, pain free and performant way to setup a MongoDB to DuckDB pipeline.
 
-The same data now took 3.34 GB. At first I thought I had made a mistake and lost some records, but the data was all there. The default value is `v0.10.2`, which keeps the file readable by old DuckDB releases and does not use the newer compression. If you do not need to open the file with an old version of DuckDB, set this before you load anything. It is easy to miss, and for us it was the difference between 15 GB and 3.34 GB.
+But we decided against using it because of no future-proof gurantees with community extensions. DuckDB is a fast moving project which is constantly improving and we did not want to be held back from updating to new DuckDB version just because an extension was not updated and can no longer be built.
 
-### Why I Didn't Ship It
+The only real option with the community extension was to build it locally - effectively to maintain an internal fork of it. While that was a possibility, we decided against it. The burden of maintaining a C++ code base was a major factor. And besides that, we prefer our data ingestion pipeline to be written in Java, that is much easier for us to maintain, to be able to reuse parts of this pipeline to other internal data sources that we use from Java and that don't have ready-to-use DuckDB extensions for them.
 
-The community extension is the simplest and fastest way I found to move data from MongoDB into DuckDB. I still did not use it, for three reasons.
+Below I am describing 3 ingestion approaches I tried, using the `mongo` extension performance numbers as a reference point.
 
-Community extensions are not reviewed by the DuckDB team, and the documentation says so plainly: DuckLabs and the DuckDB Foundation do not vet the code within community extensions and cannot guarantee they are safe to use. Our internal security audits are strict and take anywhere from a day to several days per finding. So when I presented the proof of concept, the decision was to try everything else before running unreviewed native code inside the database process.
+Besides these 3 there were other attemts that were aborted early. The notable one being the intermediate export from Mongo into NDJSON or CSV files and import of these files directly from DuckDB. That attempt, while looking promising at first, was aborted due to the lack of disk space for intermediate data copies.
 
-The extension is also built against a specific DuckDB version, and at the time there was no build for 1.5.5, the release we wanted. We are still moving fast and did not want our upgrade schedule tied to a third-party extension.
+## Standard JDBC Batch Inserts
 
-Finally, nobody on the team writes C++. All our projects are Java, so building the extension ourselves and keeping an internal fork was not something we seriously considered.
+The initial attempt on the data import with Java was done with using `INSERT` queries with standard JDBC `executeBatch` API.
 
-That left the extension as the benchmark to beat from Java: about 20 minutes to import, a 3.34 GB file, and sub-second queries.
-
-## The Appender
-
-The plan for the [Appender]({% link docs/current/clients/java/data_import.md %}#appender) was to load every row into a table first, then build the final sorted table with `CREATE TABLE AS SELECT`.
-
-My first version used four threads reading from MongoDB into a queue that held 50,000 documents, and one thread draining that queue into an Appender. The readers filled the queue faster than the single Appender could empty it. Loading the unsorted table took 22 minutes, and I had not even started sorting.
-
-The second version used four Appender threads, each with its own duplicated connection and transaction, fed by four queues. That needed a fair amount of coordination code. If one thread fails, the others have to stop, and at the end either all four transactions commit or all of them roll back.
+For simplicity, in this and following examples the period of data to import is split in day-sized batches. With each batch fetched from Mongo separately. This approach is imperfect (the number of records per day may be quite different, a single query from Mongo may be more performant), but is very easy to implement in parallel form and was found to not skew the results too much. So for `executeBatch` a worker like this can be used:
 
 ```java
-try (DuckDBConnection conn =
-         (DuckDBConnection) DriverManager.getConnection("jdbc:duckdb:dest.duckdb")) {
-    conn.setAutoCommit(false);
-    try (DuckDBAppender appender = conn.createAppender("main", "vulnerability_raw")) {
-        Document doc;
-        while ((doc = queue.take()) != POISON_PILL) {
-            appender.beginRow();
-            appender.append(doc.getString("company_id"));
-            appender.append(doc.getString("business_unit"));
-            // ... the remaining columns
-            appender.endRow();
+public class InsertWorker implements Runnable {
+    Queue<LocalDate> queue; // concurrent queue distributed between worker threads
+    MongoCollection<Document> collection; // Mongo query interface
+    Connection connection; // DuckDB connection
+    PreparedStatement ps; // DuckDB prepared statement
+
+    @Override
+    public void run() {
+        this.ps = connection.prepareStatement("INSERT INTO staging VALUES(?, ?, ...)");
+        for (;;) {
+            LocalDate day = queue.poll();
+            if (day == null) {// input queue exhausted
+                break;
+            }
+            insertDayRecords(day, collection, ps);
+        } 
+        // error handling omitted
+    }
+
+    static void insertDayRecords(LocalDate day, MongoCollection<Document> collection, PreparedStatement ps) {
+        MongoCursor<Document> docs = collection.find(Filters.and( // other filters omittted 
+                Filters.gte("updated_date", day.atStartOfDay().toInstant(ZoneOffset.UTC)),
+                Filters.lt("updated_date", day.plusDays(1).atStartOfDay().toInstant(ZoneOffset.UTC))
+        )).iterator();
+        int count = 0;
+        while (docs.hasNext()) {
+            Document doc = docs.next();
+            ps.setString(1, doc.getObjectId("_id").toString());
+            ps.setString(2, doc.getString("vendor"));
+            // other 22 fields omitted
+            ps.addBatch();
+            count++;
+        }
+        if (count > 0) {
+            ps.executeBatch();
         }
     }
-    conn.commit();
 }
 ```
 
-The four-thread version took 18 minutes. That is four minutes saved for code that made my head hurt, and the sort still had to run afterward. The unsorted load alone already took about as long as the whole extension run, and adding the sort on top of that would put it over, so I stopped here.
+Note, that it is not necessary to change anything about transactions handling, like disabling auto-commit, because we call `executeBatch` on all the records of the chosen day and this `executeBatch` call will start and commit the single transaction for us automatically.
 
-## Exporting to NDJSON and CSV
+Running 8 of such workers in parallel we import data into a table in a staging DuckDB database file. And then copy the staging table into the final database file adding `ORDER BY updated_date DESC` sorting, that was found to drastically improve the resulting database file size.
 
-The next idea was to keep JDBC out of the bulk of the work. I would write the documents to files from Java, then load the files with `read_json` or `read_csv`.
+Overall time with this approach on the sample data was 3 min 37 seconds. With the last `CREATE TABLE ... AS FROM ... ORDER BY` taking about 30 seconds.
 
-Writing four NDJSON files in parallel took 14 minutes and produced 24 GB. Replacing Mongo's `RawBsonDocument.toJson()` with [Apache Fory](https://fory.apache.org/) for serialization cut that to 9 minutes, and compressing the output with zstd saved about another minute. The import was the problem:
+The 3.5x slower performance comparing with the `mongo` extension is largely caused by the lack of real "batch" insert support in DuckDB. The `executeBatch` is implemented on Java level. And while the statement is prepared only once per batch, the each entry in the batch is run in a separate database level `INSERT`, thus incurring per-row cost. To solve this the Appender was tried next.
 
-```sql
-CREATE OR REPLACE TABLE vulnerability AS
-    SELECT ⟨columns⟩
-    FROM read_json('export/*.ndjson.zst')
-    ORDER BY ⟨sort columns⟩;
+## Java Appender Interface
+
+DuckDB [Appender](https://duckdb.org/docs/current/data/appender) is exposed in Java with the `Connection#createAppender` method. The worker for Appender can be structured very similar to the batch insert worker above:
+
+```java
+public class AppendWorker implements Runnable {
+    Queue<LocalDate> queue; // concurrent queue distributed between worker threads
+    MongoCollection<Document> collection; // Mongo query interface
+    Connection connection; // DuckDB connection
+    DuckDBAppender appender; // Appender insatnce
+
+    @Override
+    public void run() {
+        this.appender = connection.createAppender("staging_db", "main", "vuln1");
+        for (;;) {
+            LocalDate day = queue.poll();
+            if (day == null) {// input queue exhausted
+                break;
+            }
+            appendDayRecords(day, collection, appender);
+        }
+        // error handling omitted
+    }
+
+    static void appendDayRecords(LocalDate day, MongoCollection<Document> collection, DuckDBAppender appender) throws Exception {
+        MongoCursor<Document> docs = collection.find(...).iterator();
+        int count = 0;
+        while (docs.hasNext()) {
+            Document doc = docs.next();
+            appender.beginRow();
+            appender.append(doc.getObjectId("_id").toString());
+            appender.append(doc.getString("vendor"));
+            // other 22 fields omitted
+            appender.endRow();
+            count++;
+        }
+        if (count > 0) {
+            appender.flush();
+        }
+    }
+}
 ```
 
-This ran for more than 20 minutes and then failed because the disk filled up. The export files, the growing database file, and the temporary files DuckDB writes while sorting did not fit into the 38 GB I had. The partial database was already over 10 GB when the import died, well above the 3.34 GB the extension produced.
+Unlike the `executeBatch`, the Appender in DuckDB is doing actual batching - a [Data Chunk](https://duckdb.org/docs/lts/clients/c/data_chunk) of 2048 rows is prepared in Java and then flushed to DuckDB at once.
 
-CSV was quicker to write, 8 minutes for 21 GB, and failed the same way during the import. Even ignoring the disk, the total would have been write time plus import time, and the write alone was already close to half of the extension's whole run. I dropped this approach.
+Overall time with this approach on the sample data was 2 min 2 seconds. It is still 2x (or 1.5x if we exclude final CTAS with sorting) slower than the `mongo` extension. On real data this performance was not acceptable so I continued the experiments.
 
-## A Table Function in Java
+## COPY over a Java Table Function
 
-After giving up on the Appender, and pretty much convinced I could not beat the extension, I did the thing I should have done at the start. I asked an AI assistant to read the MongoDB extension's source and tell me how it worked. The answer was that it is a table function. I searched for table functions properly for the first time and found the [Table Functions in Java]({% post_url 2026-08-25-table-functions-in-java %}) post, published a few days earlier.
+After accepting defeat with the `Appender` and on the verge of giving up, thinking I cannot beat the mongo extension, I did what I should have done much earlier. I looked inside the `mongo` community extension code to find out what it is doing internally so I can redo it in Java. It appeared that the extension was using user-defined table functions. So I searched properly regarding table functions for the first time and found two following resources that appeared to be very helpful:
 
-I had actually seen table functions mentioned before, in a [benchmark of DuckDB from Java](https://sqg.dev/blog/java-duckdb-benchmark/), but the examples there looked complicated and I did not follow up. In hindsight that cost me several days. The post from the DuckDB team was easy to follow, and I had a single-threaded table function reading from MongoDB working quickly.
+ - [Benchmarking DuckDB From Java: Fast INSERT, UPDATE, and DELETE](https://sqg.dev/blog/java-duckdb-benchmark/)
+ - [DuckDB Table Functions in Java](https://duckdb.org/2026/08/25/table-functions-in-java)
 
-The function is registered with the `DuckDBFunctions.tableFunction()` builder and implemented as a `DuckDBTableFunction` with the three callbacks from that post: `bind` declares the result columns, `init` opens the MongoDB cursor, and `apply` fills one chunk of up to 2048 rows per call. Simplified:
+Based on them the following parallel table function can be used with sample data:
 
 ```java
 DuckDBFunctions.tableFunction()
-    .withName("mongo_vulnerability")
-    .withFunction(new VulnerabilityFunction())
-    .register(connection);
+            .withName("vuln_import")
+            .withParameters(LocalDate.class, LocalDate.class)
+            .withFunction(new ImportFunction())
+            .register(conn);
+stmt.execute("SET preserve_insertion_order = FALSE"); // necessary to allow parallel import
+stmt.execute("CREATE TABLE staging.vuln1 AS FROM vuln_import('2026-02-13'::DATE, '2026-08-13'::DATE)");
 ```
 
+Where the key parts of the `ImportFunction` are (see the full example in [duckdb_java_data_import](https://github.com/staticlibs/duckdb_java_data_import) repo):
+
 ```java
-public class VulnerabilityFunction implements DuckDBTableFunction {
+public class ImportFunction implements DuckDBTableFunction<BindData, GlobalData, LocalData> {
 
-    static final List<String> COLUMNS = List.of("company_id", "business_unit", /* ... */);
-
+    @Override
     public BindData bind(DuckDBTableFunctionBindInfo info) {
-        for (String name : COLUMNS) {
-            info.addResultColumn(name, String.class);
-        }
-        return new BindData(mongoCollection());
+        LocalDate from = info.getParameter(0).getLocalDate();
+        LocalDate to = info.getParameter(1).getLocalDate();
+
+        info.addResultColumn("_id", String.class);
+        info.addResultColumn("vendor", String.class);
+        // other 22 columns omitted
+        return new BindData(from, to);
     }
 
-    public InitData init(DuckDBTableFunctionInitInfo info) {
-        info.setMaxThreads(1);
-        BindData bindData = info.getBindData();
-        return new InitData(bindData.collection.find().cursor());
+    @Override
+    public GlobalData init(DuckDBTableFunctionInitInfo info) {
+        BindData bdata = info.getBindData();
+        info.setMaxThreads(8);
+        // open connection to Mongo, prepare days queue
+        return new GlobalData(client, collection, queue);
     }
 
+    @Override
     public long apply(DuckDBTableFunctionCallInfo info, DuckDBDataChunkWriter output) {
-        MongoCursor<Document> cursor = info.getInitData().cursor;
-        long row = 0;
-        for (; row < output.capacity() && cursor.hasNext(); row++) {
-            Document doc = cursor.next();
-            for (int col = 0; col < COLUMNS.size(); col++) {
-                String value = doc.getString(COLUMNS.get(col));
-                if (value == null) {
-                    output.vector(col).setNull(row);
-                } else {
-                    output.vector(col).setString(row, value);
-                }
+        GlobalData gdata = info.getInitData();
+        LocalData ldata = info.getLocalInitData();
+
+        while (ldata.cursor == null || !ldata.cursor.hasNext()) {
+            LocalDate day = gdata.queue.poll();
+            if (day == null) { // input queue exhausted
+                return 0;
             }
+            // fetch the day data from Mongo
+            ldata.cursor = gdata.collection.find(...).iterator();
         }
-        return row; // 0 means no more data
+
+        long row = 0;
+        for (; ldata.cursor.hasNext() && row < output.capacity(); row++) {
+            Document doc = ldata.cursor.next();
+            output.vector(0).setString(row, doc.getObjectId("_id").toString());
+            output.vector(1).setString(row, doc.getString("vendor"));
+            // other 22 fields omitted
+        }
+        return row;
     }
 }
+
 ```
 
-The non-string columns use `setInt`, `setLong`, `setTimestamp` and so on. The list-of-references field is joined into one comma-separated value here and split with `string_split` on the SQL side, because nested types are not supported in the vector API yet.
+We are using our table function as data source on which we are running the CTAS query. `apply` method is invoked by DuckDB repeateadly, each time it can write up to 2048 (`output.capacity()`) rows to the output. The source is considered to be exhausted, when there are no more "days" in the input queue and 0 records count is returned from `apply`.
 
-With that in place the import is one SQL statement again, and it reads exactly like the extension version:
+To make the query over this function to run in parallel we need two bits:
 
-```sql
-CREATE OR REPLACE TABLE vulnerability AS
-    SELECT ⟨columns⟩
-    FROM mongo_vulnerability()
-    ORDER BY ⟨sort columns⟩;
-```
+ - `info.setMaxThreads(8)` in `globalInit`: tells DuckDB that function supports multiple parallel `apply` calls
+ - `SET preserve_insertion_order = FALSE`: tells DuckDB that there is no need to preserve the order in which records (data chunks) are read from table function when inserting them into the newely created table. If this flag is not set to `FALSE` - DuckDB will only call the `apply` from a single thread to preserve the order. In our case we are doing sorting as a post-processing step after the import, so do not need to preserve the order.
 
-Fetching, loading and sorting all happened in that one query in 20 minutes, less than the single-threaded Appender needed for the unsorted load on its own. The database file was 3.34 GB, the same as the extension. The code was shorter than the multi-threaded Appender and had no transaction handling at all, since a single `CREATE TABLE AS` commits or rolls back on its own.
+With this approach the overall time on the sample data was 1 minute 27 seconds. That is still slower than the `mongo` extension, but if we exclude 30 seconds of sorting time (that is offloaded to Mongo in `mongo` extension approach) - the resulting time will be almost the same. Note, that we still can offload the sorting to Mongo if we give up the parallel processing and run the table function in a single thread mode.
 
-### Missing Fields and Uninitialized Vectors
-
-The `setNull` branch above was not in my first version. MongoDB does not return a field that is missing from a document, so my first attempt walked the fields each document actually had and wrote those into the vectors. Documents that were missing a field left a slot behind that I never wrote.
-
-The result was baffling. Sometimes the JVM died right after the first chunk, with no exception and no stack trace. Sometimes it failed with an out of memory error. Neither pointed anywhere near the real cause, and it took me a while to find it.
-
-The reason is how a string is stored in a vector. Each entry holds a length, a short prefix and a pointer to the string data. An entry I never wrote contained whatever happened to be in that memory. On read, DuckDB either followed a garbage pointer and crashed, or read a garbage length and tried to allocate a huge string, which failed with out of memory. The fix is to write every slot of every vector in every chunk, and to call `setNull` when a document does not have the field.
-
-At the time the Java API had no guard against this. It does now: output vectors passed to Java table function and scalar callbacks (and to the Appender) are zeroed between invocations, so a slot you forget to write can no longer crash the JVM. The change landed in [duckdb-java#864](https://github.com/duckdb/duckdb-java/pull/864) and was backported to the 1.5 branch in [duckdb-java#865](https://github.com/duckdb/duckdb-java/pull/865). You still want to call `setNull` for a missing field, otherwise it comes through as an empty string or a zero rather than `NULL`, but the silent crash is gone.
-
-### Running It in Parallel
-
-To use all four cores, `init` first runs a `$bucketAuto` aggregation that splits the collection into four `_id` ranges of roughly equal size, and `setMaxThreads(1)` becomes `setMaxThreads(4)`. The `initLocal` callback then opens one MongoDB cursor per thread, each over one range, and `apply` reads from the cursor of the thread it runs on. Four MongoDB queries run at once, and DuckDB merges the chunks.
-
-```java
-List<Document> buckets = collection.aggregate(List.of(
-    new Document("$bucketAuto",
-        new Document("groupBy", "$_id").append("buckets", 4))
-)).into(new ArrayList<>());
-```
-
-With four threads the full import dropped from 20 minutes to 16, faster than the extension, with the same file size and the same query performance afterward.
-
-## Summary
-
-| Method                          | Time to sorted table  | Result                                 |
-|---------------------------------|----------------------:|----------------------------------------|
-| MongoDB community extension     | 18 to 20 min          | Not allowed by security policy         |
-| Appender, 1 writer thread       | 22 min (unsorted)     | Too slow before sorting                |
-| Appender, 4 writer threads      | 18 min (unsorted)     | Too slow, complex transaction handling |
-| Export to NDJSON, `read_json`   | 9 min + failed import | Ran out of disk during sort            |
-| Export to CSV, `read_csv`       | 8 min + failed import | Ran out of disk during sort            |
-| Java table function, 1 thread   | 20 min                | Works, one statement, 3.34 GB file     |
-| Java table function, 4 threads  | 16 min                | Final choice                           |
-
-The parallel table function is what we settled on for the ingestion pipeline. A few things I took away from this:
-
-* Set `storage_compatibility_version` to `latest` before loading data if you do not need to open the file with an old DuckDB version. For us it was the difference between 15 GB and 3.34 GB.
-* Sorting during the import with `CREATE TABLE AS ... ORDER BY` costs time but pays off in query speed and compression. On a machine with little free disk, avoid intermediate files so the sort has room for its temporary data.
-* If a table function can produce a row, fill every column of that row. A missing field has to become `NULL` explicitly.
-* If the source can be read as a cursor from Java, a table function is the simplest way into DuckDB. It removed both the staging table and the export files, and it needed no native code.
-
-Two things are still open. The sorting slowdown when long text columns are in the projection is being looked at by the DuckDB team. And nested types are not yet supported in the vector API. The comma-separated workaround is fine for a list of strings, but our other collections hold arrays of nested documents, which need list and struct support. That is planned, and I hope to help with it.
+On real data (where I did not use day-sized Mongo queries) the performance was close to the `mongo` extension. As a result we got a robust ingestion pipeline written in pure Java and learned how to use DuckDB with user-defined table functions in practice.
