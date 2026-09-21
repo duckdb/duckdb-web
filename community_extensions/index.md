@@ -3,6 +3,8 @@ layout: community_extension_doc
 title: Community Extensions
 excerpt: |
   List of Community contributed open-source DuckDB extension 
+redirect_from:
+- /ce
 ---
 
 Welcome to the documentation for the DuckDB Community Extensions.
