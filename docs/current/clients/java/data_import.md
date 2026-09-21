@@ -2,7 +2,6 @@
 layout: docu
 redirect_from:
 - /docs/clients/java/data_import
-- /docs/preview/clients/java/data_import
 - /docs/stable/clients/java/data_import
 title: Import Data
 ---

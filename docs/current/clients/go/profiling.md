@@ -2,7 +2,6 @@
 layout: docu
 redirect_from:
 - /docs/clients/go/profiling
-- /docs/preview/clients/go/profiling
 - /docs/stable/clients/go/profiling
 title: Profile and Monitor
 ---

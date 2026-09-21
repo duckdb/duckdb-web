@@ -3,7 +3,6 @@ layout: docu
 redirect_from:
 - /docs/api/python/dbapi
 - /docs/clients/python/dbapi
-- /docs/preview/clients/python/dbapi
 - /docs/stable/clients/python/dbapi
 title: Python DB API
 ---

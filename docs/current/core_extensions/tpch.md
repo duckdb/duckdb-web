@@ -4,7 +4,6 @@ layout: docu
 redirect_from:
 - /docs/extensions/tpch
 - /docs/stable/extensions/tpch
-- /docs/preview/core_extensions/tpch
 - /docs/stable/core_extensions/tpch
 title: TPC-H Extension
 ---

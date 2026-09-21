@@ -3,7 +3,6 @@ layout: docu
 redirect_from:
 - /dev/sqllogictest/intro
 - /docs/dev/sqllogictest/intro
-- /docs/preview/dev/sqllogictest/intro
 - /docs/stable/dev/sqllogictest/intro
 title: sqllogictest Introduction
 ---

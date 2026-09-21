@@ -2,7 +2,6 @@
 layout: docu
 redirect_from:
 - /docs/clients/go/result_handling
-- /docs/preview/clients/go/result_handling
 - /docs/stable/clients/go/result_handling
 title: Handle Results
 ---

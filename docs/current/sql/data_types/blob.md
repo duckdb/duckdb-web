@@ -3,7 +3,6 @@ blurb: The blob (Binary Large OBject) type represents an arbitrary binary object
   in the database system.
 layout: docu
 redirect_from:
-- /docs/preview/sql/data_types/blob
 - /docs/sql/data_types/blob
 - /docs/stable/sql/data_types/blob
 title: Blob Type

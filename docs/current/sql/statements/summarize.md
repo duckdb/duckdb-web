@@ -1,7 +1,6 @@
 ---
 layout: docu
 redirect_from:
-- /docs/preview/sql/statements/summarize
 - /docs/sql/statements/summarize
 - /docs/stable/sql/statements/summarize
 title: SUMMARIZE Statement

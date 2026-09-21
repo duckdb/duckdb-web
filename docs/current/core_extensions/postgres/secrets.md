@@ -1,7 +1,6 @@
 ---
 layout: docu
 redirect_from:
-- /docs/preview/core_extensions/postgres/secrets
 - /docs/stable/core_extensions/postgres/secrets
 title: PostgreSQL Extension and the Secret Manager
 ---

@@ -2,7 +2,6 @@
 layout: docu
 redirect_from:
 - /docs/extensions/community_extensions
-- /docs/preview/extensions/community_extensions
 - /docs/stable/extensions/community_extensions
 title: Community Extensions
 ---

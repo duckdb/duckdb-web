@@ -2,7 +2,6 @@
 layout: docu
 redirect_from:
 - /docs/dev/building/raspberry_pi
-- /docs/preview/dev/building/raspberry_pi
 - /docs/stable/dev/building/raspberry_pi
 title: Raspberry Pi
 ---

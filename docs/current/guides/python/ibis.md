@@ -2,7 +2,6 @@
 layout: docu
 redirect_from:
 - /docs/guides/python/ibis
-- /docs/preview/guides/python/ibis
 - /docs/stable/guides/python/ibis
 title: Integration with Ibis
 ---

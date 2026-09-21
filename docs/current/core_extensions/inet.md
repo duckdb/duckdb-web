@@ -4,7 +4,6 @@ layout: docu
 redirect_from:
 - /docs/extensions/inet
 - /docs/stable/extensions/inet
-- /docs/preview/core_extensions/inet
 - /docs/stable/core_extensions/inet
 title: inet Extension
 tested: true

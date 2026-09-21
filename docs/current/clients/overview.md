@@ -8,8 +8,6 @@ redirect_from:
 - /docs/api/overview
 - /docs/clients
 - /docs/clients/overview
-- /docs/preview/clients
-- /docs/preview/clients/overview
 - /docs/stable/clients
 - /docs/stable/clients/overview
 title: Client Overview

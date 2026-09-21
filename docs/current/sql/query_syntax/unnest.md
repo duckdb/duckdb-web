@@ -1,7 +1,6 @@
 ---
 layout: docu
 redirect_from:
-- /docs/preview/sql/query_syntax/unnest
 - /docs/sql/query_syntax/unnest
 - /docs/stable/sql/query_syntax/unnest
 title: Unnesting

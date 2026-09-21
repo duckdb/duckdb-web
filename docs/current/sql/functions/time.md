@@ -1,7 +1,6 @@
 ---
 layout: docu
 redirect_from:
-- /docs/preview/sql/functions/time
 - /docs/sql/functions/time
 - /docs/stable/sql/functions/time
 title: Time Functions

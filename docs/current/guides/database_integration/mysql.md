@@ -3,7 +3,6 @@ layout: docu
 redirect_from:
 - /docs/guides/database_integration/mysql
 - /docs/guides/import/query_mysql
-- /docs/preview/guides/database_integration/mysql
 - /docs/stable/guides/database_integration/mysql
 title: MySQL Import
 ---

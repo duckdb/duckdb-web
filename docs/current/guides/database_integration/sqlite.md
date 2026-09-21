@@ -3,7 +3,6 @@ layout: docu
 redirect_from:
 - /docs/guides/database_integration/sqlite
 - /docs/guides/import/query_sqlite
-- /docs/preview/guides/database_integration/sqlite
 - /docs/stable/guides/database_integration/sqlite
 title: SQLite Import
 ---

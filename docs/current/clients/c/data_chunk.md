@@ -3,7 +3,6 @@ layout: docu
 redirect_from:
 - /docs/api/c/data_chunk
 - /docs/clients/c/data_chunk
-- /docs/preview/clients/c/data_chunk
 - /docs/stable/clients/c/data_chunk
 title: Data Chunks
 ---

@@ -2,7 +2,6 @@
 layout: docu
 railroad: statements/setvariable.js
 redirect_from:
-- /docs/preview/sql/statements/set_variable
 - /docs/sql/statements/set_variable
 - /docs/stable/sql/statements/set_variable
 title: SET VARIABLE and RESET VARIABLE Statements

@@ -4,7 +4,6 @@ layout: docu
 redirect_from:
 - /docs/extensions/full_text_search
 - /docs/stable/extensions/full_text_search
-- /docs/preview/core_extensions/full_text_search
 - /docs/stable/core_extensions/full_text_search
 title: Full-Text Search Extension
 ---

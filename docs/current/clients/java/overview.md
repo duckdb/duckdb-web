@@ -7,8 +7,6 @@ redirect_from:
 - /docs/clients/java
 - /docs/clients/java/overview
 - /docs/current/clients/java
-- /docs/preview/clients/java
-- /docs/preview/clients/java/overview
 - /docs/stable/clients/java
 - /docs/stable/clients/java/overview
 title: Java (JDBC) Client

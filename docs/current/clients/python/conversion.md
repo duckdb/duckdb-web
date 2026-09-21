@@ -4,7 +4,6 @@ redirect_from:
 - /docs/api/python/conversion
 - /docs/api/python/result_conversion
 - /docs/clients/python/conversion
-- /docs/preview/clients/python/conversion
 - /docs/stable/clients/python/conversion
 title: Conversion between DuckDB and Python
 ---
