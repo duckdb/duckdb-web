@@ -358,7 +358,7 @@ ART index storage has been a long-standing issue in DuckDB, with multiple users 
 
 ## Roadmap
 
-> Quote It's tough to make predictions, especially about the future
+> Quote It's tough to make predictions, especially about the future.
 >
 > -- Yogi Berra
 
