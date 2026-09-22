@@ -479,7 +479,7 @@ body.layout_default.blog_typography {
 
             thead th {
                 position: sticky;
-                top: 69px;
+                top: calc(69px + var(--docbanner-height, 0px));
                 z-index: 10;
                 background: var(--main-body-background-color, #FAFAFA);
                 box-shadow: inset 0 -1px 0 var(--doc-codebox-border-color, #E6E6E6);           }

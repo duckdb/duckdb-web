@@ -58,12 +58,9 @@ Page URL: <https://duckdb.org{{ page.url }}>
 	{% assign version_viewed = url_version_parts[0] %}
 {% endif %}
 
-<body class="documentation layout_docu{% if page.body_class %} {{ page.body_class }}{% endif %-}
-{-% if version_viewed == "current" %}current
-{-% elsif version_viewed == "lts" %}lts
-{-% elsif version_viewed == "preview" %}preview
-{-% else %}outdated
-{-% endif %}">
+<body class="documentation layout_docu{% if page.body_class %} {{ page.body_class }}{% endif %} {% if version_viewed == "current" %}current{% elsif version_viewed == "lts" %}lts{% elsif version_viewed == "preview" %}preview{% else %}outdated{% endif %}">
+
+	{% if page.url contains '/docs/' %}{% unless page.url contains '/docs/installation/' %}{% include banner_docversion.html %}{% endunless %}{% endif %}
 
 	<header>
 		<div class="headerline">
@@ -90,8 +87,6 @@ Page URL: <https://duckdb.org{{ page.url }}>
 					
 					{% if page.url contains '/docs/' %}
 					{% unless page.url contains '/docs/installation/' %}
-
-					{% include banner_docversion.html %}
 
 					<div class="versionselect">
 						<div class="version">
