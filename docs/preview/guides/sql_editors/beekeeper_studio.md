@@ -3,7 +3,7 @@ layout: docu
 title: Beekeeper Studio SQL Editor
 ---
 
-[Beekeeper Studio]([https://www.beekeeperstudio.io/](https://www.beekeeperstudio.io/db/duckdb-client/)) is a free, open-source SQL editor and database manager with a modern, easy-to-use interface. It is available for Windows, macOS, and Linux, and also offers a paid Ultimate tier with cloud sync and team-sharing features. Beekeeper Studio connects to DuckDB natively rather than through a JDBC or ODBC driver, so no separate driver installation is required.
+[Beekeeper Studio](https://www.beekeeperstudio.io/db/duckdb-client/) is a free, open-source SQL editor and database manager with a modern, easy-to-use interface. It is available for Windows, macOS, and Linux, and also offers a paid Ultimate tier with cloud sync and team-sharing features. Beekeeper Studio connects to DuckDB natively rather than through a JDBC or ODBC driver, so no separate driver installation is required.
 
 ## Installing Beekeeper Studio
 
@@ -23,17 +23,17 @@ title: Beekeeper Studio SQL Editor
 
     <img src="{% link images/guides/Beekeeper_Studio_database_file.png %}" alt="Beekeeper Studio Database File" title="Beekeeper Studio Database File"/>
 
-5. Optionally, name the connection and choose a color for the connection.
+4. Optionally, name the connection and choose a color for the connection.
 
-6. Click **Connect**.
+5. Click **Connect**.
 
     <img src="{% link images/guides/Beekeeper_Studio_connect.png %}" alt="Beekeeper Studio Connect" title="Beekeeper Studio Connect"/>
 
-7. Once connected, you can browse tables and views in the left-hand sidebar.
+6. Once connected, you can browse tables and views in the left-hand sidebar.
 
     <img src="{% link images/guides/Beekeeper_Studio_object_tree.png %}" alt="Beekeeper Studio Object Tree" title="Beekeeper Studio Object Tree"/>
 
-8. Open a new SQL tab, write a query, and run it to see the results.
+7. Open a new SQL tab, write a query, and run it to see the results.
 
     <img src="{% link images/guides/Beekeeper_Studio_query_results.png %}" alt="Beekeeper Studio Query Results" title="Beekeeper Studio Query Results"/>
 
