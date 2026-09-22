@@ -8,18 +8,19 @@ excerpt: |
 extension:
   name: system_stats
   description: Provides table functions to access system-level statistics for monitoring purpose
-  version: 0.10.0
-  language: C++
+  version: 1.0.0
+  language: Rust & C++
   build: cmake
   license: MIT
-  excluded_platforms: "wasm_mvp;wasm_eh;wasm_threads;windows_amd64_rtools;windows_amd64;windows_amd64_mingw"
+  excluded_platforms: "wasm_mvp;wasm_eh;wasm_threads"
+  requires_toolchains: rust
   maintainers:
     - dentiny
 
 repo:
   github: dentiny/system_stats
   andium: d1933b1a67b89a48317102bc9cb008e152526afb
-  ref: 925b3851a639d2b03e5867d58c8e125de8371320
+  ref: f297785fdb42441a3e185a89e93bb47e811ab254
 
 docs:
   hello_world: |
@@ -42,8 +43,8 @@ docs:
 
 extension_star_count: 5
 extension_star_count_pretty: 5
-extension_download_count: 813
-extension_download_count_pretty: 813
+extension_download_count: 844
+extension_download_count_pretty: 844
 image: '/images/community_extensions/social_preview/preview_community_extension_system_stats.png'
 layout: community_extension_doc
 ---
@@ -69,13 +70,13 @@ LOAD {{ page.extension.name }};
 
 <div class="extension_functions_table"></div>
 
-|  function_name   | function_type | description | comment | examples |
-|------------------|---------------|-------------|---------|----------|
-| sys_cpu_info     | table         | NULL        | NULL    |          |
-| sys_disk_info    | table         | NULL        | NULL    |          |
-| sys_memory_info  | table         | NULL        | NULL    |          |
-| sys_network_info | table         | NULL        | NULL    |          |
-| sys_os_info      | table         | NULL        | NULL    |          |
+|  function_name   | function_type |                                               description                                               | comment |                    examples                    |
+|------------------|---------------|---------------------------------------------------------------------------------------------------------|---------|------------------------------------------------|
+| sys_cpu_info     | table         | Returns processor identity, architecture, core counts, cache sizes, and byte order for the host system. | NULL    | [SELECT * FROM sys_cpu_info();]                |
+| sys_disk_info    | table         | Returns mounted filesystem capacity and usage, optionally converted to the requested unit.              | NULL    | [SELECT * FROM sys_disk_info(unit = 'GiB');]   |
+| sys_memory_info  | table         | Returns physical memory and swap usage for the host system, optionally converted to the requested unit. | NULL    | [SELECT * FROM sys_memory_info(unit = 'GiB');] |
+| sys_network_info | table         | Returns IPv4 addresses and traffic counters for the host system's network interfaces.                   | NULL    | [SELECT * FROM sys_network_info();]            |
+| sys_os_info      | table         | Returns operating system, host, process, handle, thread, architecture, and uptime information.          | NULL    | [SELECT * FROM sys_os_info();]                 |
 
 ### Overloaded Functions
 

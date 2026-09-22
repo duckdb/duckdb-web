@@ -20,6 +20,14 @@ repo:
   # v1.5.4 tree, so v0.4.0 ships on the v1.5.x track only.
   andium: 8075509bc21b936c228879ada22c8a46657109aa
   ref: de60f5dab22b4c40aacfa1af58977600b89bd98a
+  # ref_next makes the PRERELEASE leg actually build against DuckDB v2.0.
+  # Without it scripts/build.py prints "Skipping prerelease validation" and the
+  # run passes green having verified nothing on that line.
+  #
+  # Deliberately NOT the same commit as ref. v0.4.0 (ref) guards its entry point on DUCKDB_BUILD_LOADABLE_EXTENSION, which v2.0 consumes but never defines, so the extension exported no entry point and wasm/macOS failed to link.
+  # ref_next therefore points at main, which carries the fix, while ref keeps
+  # shipping the released version on the stable line.
+  ref_next: a908e4b34f29fefc0794058439150740fca1da40
 docs:
   hello_world: |
     -- Read all lines from a file
@@ -96,8 +104,8 @@ docs:
 
 extension_star_count: 6
 extension_star_count_pretty: 6
-extension_download_count: 1226
-extension_download_count_pretty: 1.2k
+extension_download_count: 1329
+extension_download_count_pretty: 1.3k
 image: '/images/community_extensions/social_preview/preview_community_extension_read_lines.png'
 layout: community_extension_doc
 ---

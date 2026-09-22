@@ -8,7 +8,7 @@ excerpt: |
 extension:
   name: duck_block_utils
   description: Build, transform, validate, and extract content from structured documents using the duck_block type
-  version: 3.3.0
+  version: 3.4.0
   language: C++
   build: cmake
   license: MIT
@@ -21,8 +21,8 @@ repo:
   # so advancing this pin would point a v1.4.5 build at a tree that cannot build for
   # it. v1.4.5 users should move to the v1.5.x track.
   andium: 125662df9e5450105dc9b7957ad955cb53d7beec
-  ref: 95a84e6dbfb25d1925df2ad402f978c438a3f724
-  ref_next: 95a84e6dbfb25d1925df2ad402f978c438a3f724
+  ref: 39941a70c7d4e48d5e70ffdaddb680793e59968a
+  ref_next: 39941a70c7d4e48d5e70ffdaddb680793e59968a
 docs:
   hello_world: |
     -- Build a document programmatically
@@ -85,7 +85,8 @@ docs:
         kind VARCHAR,                       -- 'block', 'inline' or 'value'
         element_type VARCHAR,               -- 'heading', 'paragraph', 'bold', 'link', etc.
         content VARCHAR,                    -- text, iff the element has a single text child
-        level INTEGER,                      -- depth in a depth-first ordering; top is 1
+        level INTEGER,                      -- depth in a depth-first ordering; top is 1 (0 is the
+                                            --   optional explicit document root)
         encoding VARCHAR,                   -- 'text', 'json', 'yaml', 'html', 'xml',
                                             --   'latex', 'markdown', 'toml'
         attributes MAP(VARCHAR, VARCHAR),   -- element-specific metadata
@@ -208,8 +209,8 @@ docs:
 
 extension_star_count: 2
 extension_star_count_pretty: 2
-extension_download_count: 1034
-extension_download_count_pretty: 1.0k
+extension_download_count: 1294
+extension_download_count_pretty: 1.3k
 image: '/images/community_extensions/social_preview/preview_community_extension_duck_block_utils.png'
 layout: community_extension_doc
 ---
@@ -235,113 +236,114 @@ LOAD {{ page.extension.name }};
 
 <div class="extension_functions_table"></div>
 
-|          function_name          | function_type | description | comment | examples |
-|---------------------------------|---------------|-------------|---------|----------|
-| duck_block                      | scalar        | NULL        | NULL    |          |
-| duck_block_aliases              | pragma        | NULL        | NULL    |          |
-| duck_block_attr                 | scalar        | NULL        | NULL    |          |
-| duck_block_blockquote           | scalar        | NULL        | NULL    |          |
-| duck_block_bold                 | scalar        | NULL        | NULL    |          |
-| duck_block_cite                 | scalar        | NULL        | NULL    |          |
-| duck_block_code                 | scalar        | NULL        | NULL    |          |
-| duck_block_content              | scalar        | NULL        | NULL    |          |
-| duck_block_div                  | scalar        | NULL        | NULL    |          |
-| duck_block_doc_macros           | pragma        | NULL        | NULL    |          |
-| duck_block_encoding             | scalar        | NULL        | NULL    |          |
-| duck_block_encoding_names       | scalar        | NULL        | NULL    |          |
-| duck_block_ensure_extension     | scalar        | NULL        | NULL    |          |
-| duck_block_heading              | scalar        | NULL        | NULL    |          |
-| duck_block_hr                   | scalar        | NULL        | NULL    |          |
-| duck_block_image                | scalar        | NULL        | NULL    |          |
-| duck_block_implicit_parent      | scalar        | NULL        | NULL    |          |
-| duck_block_inline_code          | scalar        | NULL        | NULL    |          |
-| duck_block_inline_image         | scalar        | NULL        | NULL    |          |
-| duck_block_is_body              | scalar        | NULL        | NULL    |          |
-| duck_block_italic               | scalar        | NULL        | NULL    |          |
-| duck_block_kind_names           | scalar        | NULL        | NULL    |          |
-| duck_block_level                | scalar        | NULL        | NULL    |          |
-| duck_block_linebreak            | scalar        | NULL        | NULL    |          |
-| duck_block_link                 | scalar        | NULL        | NULL    |          |
-| duck_block_list                 | scalar        | NULL        | NULL    |          |
-| duck_block_list_block           | scalar        | NULL        | NULL    |          |
-| duck_block_list_item            | scalar        | NULL        | NULL    |          |
-| duck_block_math                 | scalar        | NULL        | NULL    |          |
-| duck_block_metadata             | scalar        | NULL        | NULL    |          |
-| duck_block_note                 | scalar        | NULL        | NULL    |          |
-| duck_block_order                | scalar        | NULL        | NULL    |          |
-| duck_block_paragraph            | scalar        | NULL        | NULL    |          |
-| duck_block_plain                | scalar        | NULL        | NULL    |          |
-| duck_block_quoted               | scalar        | NULL        | NULL    |          |
-| duck_block_raw                  | scalar        | NULL        | NULL    |          |
-| duck_block_raw_inline           | scalar        | NULL        | NULL    |          |
-| duck_block_render               | pragma        | NULL        | NULL    |          |
-| duck_block_section              | scalar        | NULL        | NULL    |          |
-| duck_block_set_content          | scalar        | NULL        | NULL    |          |
-| duck_block_set_level            | scalar        | NULL        | NULL    |          |
-| duck_block_set_order            | scalar        | NULL        | NULL    |          |
-| duck_block_smallcaps            | scalar        | NULL        | NULL    |          |
-| duck_block_softbreak            | scalar        | NULL        | NULL    |          |
-| duck_block_space                | scalar        | NULL        | NULL    |          |
-| duck_block_span                 | scalar        | NULL        | NULL    |          |
-| duck_block_spec_version         | scalar        | NULL        | NULL    |          |
-| duck_block_strikethrough        | scalar        | NULL        | NULL    |          |
-| duck_block_subscript            | scalar        | NULL        | NULL    |          |
-| duck_block_superscript          | scalar        | NULL        | NULL    |          |
-| duck_block_terminal_width       | scalar        | NULL        | NULL    |          |
-| duck_block_text                 | scalar        | NULL        | NULL    |          |
-| duck_block_type                 | scalar        | NULL        | NULL    |          |
-| duck_block_type_names           | scalar        | NULL        | NULL    |          |
-| duck_block_underline            | scalar        | NULL        | NULL    |          |
-| duck_block_valid                | scalar        | NULL        | NULL    |          |
-| duck_blocks_assemble            | scalar        | NULL        | NULL    |          |
-| duck_blocks_body                | scalar        | NULL        | NULL    |          |
-| duck_blocks_code_blocks         | scalar        | NULL        | NULL    |          |
-| duck_blocks_code_blocks_structs | scalar        | NULL        | NULL    |          |
-| duck_blocks_concat              | scalar        | NULL        | NULL    |          |
-| duck_blocks_diff                | table_macro   | NULL        | NULL    |          |
-| duck_blocks_document            | scalar        | NULL        | NULL    |          |
-| duck_blocks_exclude             | scalar        | NULL        | NULL    |          |
-| duck_blocks_filter              | scalar        | NULL        | NULL    |          |
-| duck_blocks_get_pages           | macro         | NULL        | NULL    |          |
-| duck_blocks_get_pages_text      | macro         | NULL        | NULL    |          |
-| duck_blocks_get_section         | macro         | NULL        | NULL    |          |
-| duck_blocks_get_section_text    | macro         | NULL        | NULL    |          |
-| duck_blocks_headings            | scalar        | NULL        | NULL    |          |
-| duck_blocks_headings_structs    | scalar        | NULL        | NULL    |          |
-| duck_blocks_inlines_to_pandoc   | scalar        | NULL        | NULL    |          |
-| duck_blocks_links               | scalar        | NULL        | NULL    |          |
-| duck_blocks_links_structs       | scalar        | NULL        | NULL    |          |
-| duck_blocks_lint                | scalar        | NULL        | NULL    |          |
-| duck_blocks_merge               | scalar        | NULL        | NULL    |          |
-| duck_blocks_normalize           | scalar        | NULL        | NULL    |          |
-| duck_blocks_page_rows           | table_macro   | NULL        | NULL    |          |
-| duck_blocks_quality             | table_macro   | NULL        | NULL    |          |
-| duck_blocks_rebase_levels       | scalar        | NULL        | NULL    |          |
-| duck_blocks_render_ansi         | scalar        | NULL        | NULL    |          |
-| duck_blocks_reorder             | scalar        | NULL        | NULL    |          |
-| duck_blocks_repair              | scalar        | NULL        | NULL    |          |
-| duck_blocks_sections_like       | table_macro   | NULL        | NULL    |          |
-| duck_blocks_sections_like_text  | table_macro   | NULL        | NULL    |          |
-| duck_blocks_slice               | scalar        | NULL        | NULL    |          |
-| duck_blocks_stamp               | scalar        | NULL        | NULL    |          |
-| duck_blocks_stats               | scalar        | NULL        | NULL    |          |
-| duck_blocks_structure           | scalar        | NULL        | NULL    |          |
-| duck_blocks_to_match_text       | macro         | NULL        | NULL    |          |
-| duck_blocks_to_pandoc_ast       | scalar        | NULL        | NULL    |          |
-| duck_blocks_to_pandoc_blocks    | scalar        | NULL        | NULL    |          |
-| duck_blocks_to_text             | scalar        | NULL        | NULL    |          |
-| duck_blocks_toc                 | scalar        | NULL        | NULL    |          |
-| duck_blocks_toc_rows            | table_macro   | NULL        | NULL    |          |
-| duck_blocks_toc_structs         | scalar        | NULL        | NULL    |          |
-| duck_blocks_validate            | scalar        | NULL        | NULL    |          |
-| duck_blocks_version             | scalar        | NULL        | NULL    |          |
-| pandoc_ast                      | table         | NULL        | NULL    |          |
-| pandoc_ast_to_blocks            | scalar        | NULL        | NULL    |          |
-| pandoc_inlines_to_db_inlines    | scalar        | NULL        | NULL    |          |
-| pandoc_inlines_to_text          | scalar        | NULL        | NULL    |          |
-| read_pandoc_ast                 | scalar        | NULL        | NULL    |          |
-| to_duck_block                   | scalar        | NULL        | NULL    |          |
-| write_pandoc_ast                | scalar        | NULL        | NULL    |          |
+|          function_name          | function_type |                               description                                | comment |                                                                   examples                                                                   |
+|---------------------------------|---------------|--------------------------------------------------------------------------|---------|----------------------------------------------------------------------------------------------------------------------------------------------|
+| duck_block                      | scalar        | Construct a duck_block struct.                                           | NULL    | [duck_block('paragraph', 'Hello world'), duck_block('heading', 'Title', 1, 'text', MAP {'id': 'title'}, 1)]                                  |
+| duck_block_aliases              | pragma        | NULL                                                                     | NULL    |                                                                                                                                              |
+| duck_block_attr                 | scalar        | Get an attribute value by key from a duck_block struct.                  | NULL    | [duck_block_attr(duck_block('heading', 'Title', 1, 'text', MAP {'id': 'title'}, 1), 'id')]                                                   |
+| duck_block_blockquote           | scalar        | NULL                                                                     | NULL    |                                                                                                                                              |
+| duck_block_bold                 | scalar        | NULL                                                                     | NULL    |                                                                                                                                              |
+| duck_block_cite                 | scalar        | NULL                                                                     | NULL    |                                                                                                                                              |
+| duck_block_code                 | scalar        | NULL                                                                     | NULL    |                                                                                                                                              |
+| duck_block_content              | scalar        | Get the content field of a duck_block struct.                            | NULL    | [duck_block_content(duck_block('paragraph', 'Hello'))]                                                                                       |
+| duck_block_div                  | scalar        | NULL                                                                     | NULL    |                                                                                                                                              |
+| duck_block_doc_macros           | pragma        | NULL                                                                     | NULL    |                                                                                                                                              |
+| duck_block_encoding             | scalar        | Get the encoding field of a duck_block struct.                           | NULL    | [duck_block_encoding(duck_block('paragraph', 'Hello'))]                                                                                      |
+| duck_block_encoding_names       | scalar        | Return the list of valid duck_block encoding names.                      | NULL    | [duck_block_encoding_names()]                                                                                                                |
+| duck_block_ensure_extension     | scalar        | Ensure specified extension is loaded.                                    | NULL    | [duck_block_ensure_extension('json')]                                                                                                        |
+| duck_block_heading              | scalar        | NULL                                                                     | NULL    |                                                                                                                                              |
+| duck_block_hr                   | scalar        | Build a horizontal rule block (V2).                                      | NULL    | [duck_block_hr()]                                                                                                                            |
+| duck_block_image                | scalar        | NULL                                                                     | NULL    |                                                                                                                                              |
+| duck_block_implicit_parent      | scalar        | Return the implicit parent element type for an element type.             | NULL    | [duck_block_implicit_parent('block', 'paragraph')]                                                                                           |
+| duck_block_inline_code          | scalar        | Build an inline code element from text (V2).                             | NULL    | [duck_block_inline_code('foo()')]                                                                                                            |
+| duck_block_inline_image         | scalar        | NULL                                                                     | NULL    |                                                                                                                                              |
+| duck_block_is_body              | scalar        | Return true if the element kind and type represent body content.         | NULL    | [duck_block_is_body('block', 'paragraph')]                                                                                                   |
+| duck_block_italic               | scalar        | NULL                                                                     | NULL    |                                                                                                                                              |
+| duck_block_kind_names           | scalar        | Return the list of valid duck_block kind names.                          | NULL    | [duck_block_kind_names()]                                                                                                                    |
+| duck_block_level                | scalar        | Get the level field of a duck_block struct.                              | NULL    | [duck_block_level(duck_block('paragraph', 'Hello'))]                                                                                         |
+| duck_block_linebreak            | scalar        | Build a hard line break inline element (V2).                             | NULL    | [duck_block_linebreak()]                                                                                                                     |
+| duck_block_link                 | scalar        | NULL                                                                     | NULL    |                                                                                                                                              |
+| duck_block_list                 | scalar        | NULL                                                                     | NULL    |                                                                                                                                              |
+| duck_block_list_block           | scalar        | NULL                                                                     | NULL    |                                                                                                                                              |
+| duck_block_list_item            | scalar        | NULL                                                                     | NULL    |                                                                                                                                              |
+| duck_block_math                 | scalar        | NULL                                                                     | NULL    |                                                                                                                                              |
+| duck_block_metadata             | scalar        | Build a document metadata block from YAML string (V2).                   | NULL    | [duck_block_metadata('title: Document
+author: Me')]                                                                                                                                |
+| duck_block_note                 | scalar        | NULL                                                                     | NULL    |                                                                                                                                              |
+| duck_block_order                | scalar        | Get the element_order field of a duck_block struct.                      | NULL    | [duck_block_order(duck_block('paragraph', 'Hello'))]                                                                                         |
+| duck_block_paragraph            | scalar        | NULL                                                                     | NULL    |                                                                                                                                              |
+| duck_block_plain                | scalar        | NULL                                                                     | NULL    |                                                                                                                                              |
+| duck_block_quoted               | scalar        | NULL                                                                     | NULL    |                                                                                                                                              |
+| duck_block_raw                  | scalar        | NULL                                                                     | NULL    |                                                                                                                                              |
+| duck_block_raw_inline           | scalar        | NULL                                                                     | NULL    |                                                                                                                                              |
+| duck_block_render               | pragma        | NULL                                                                     | NULL    |                                                                                                                                              |
+| duck_block_section              | scalar        | NULL                                                                     | NULL    |                                                                                                                                              |
+| duck_block_set_content          | scalar        | Return a copy of the duck_block struct with content updated.             | NULL    | [duck_block_set_content(duck_block('paragraph', 'Hello'), 'World')]                                                                          |
+| duck_block_set_level            | scalar        | Return a copy of the duck_block struct with level updated.               | NULL    | [duck_block_set_level(duck_block('paragraph', 'Hello'), 2)]                                                                                  |
+| duck_block_set_order            | scalar        | Return a copy of the duck_block struct with element_order updated.       | NULL    | [duck_block_set_order(duck_block('paragraph', 'Hello'), 2)]                                                                                  |
+| duck_block_smallcaps            | scalar        | NULL                                                                     | NULL    |                                                                                                                                              |
+| duck_block_softbreak            | scalar        | Build a soft line break inline element (V2).                             | NULL    | [duck_block_softbreak()]                                                                                                                     |
+| duck_block_space                | scalar        | Build a whitespace space inline element (V2).                            | NULL    | [duck_block_space()]                                                                                                                         |
+| duck_block_span                 | scalar        | NULL                                                                     | NULL    |                                                                                                                                              |
+| duck_block_spec_version         | scalar        | Return the current duck_blocks specification version.                    | NULL    | [duck_block_spec_version()]                                                                                                                  |
+| duck_block_strikethrough        | scalar        | NULL                                                                     | NULL    |                                                                                                                                              |
+| duck_block_subscript            | scalar        | NULL                                                                     | NULL    |                                                                                                                                              |
+| duck_block_superscript          | scalar        | NULL                                                                     | NULL    |                                                                                                                                              |
+| duck_block_terminal_width       | scalar        | Detect current terminal width in columns.                                | NULL    | [duck_block_terminal_width()]                                                                                                                |
+| duck_block_text                 | scalar        | Build a text inline element (V2).                                        | NULL    | [duck_block_text('Hello world')]                                                                                                             |
+| duck_block_type                 | scalar        | Get the element_type field of a duck_block struct.                       | NULL    | [duck_block_type(duck_block('paragraph', 'Hello'))]                                                                                          |
+| duck_block_type_names           | scalar        | Return the list of valid duck_block element type names.                  | NULL    | [duck_block_type_names()]                                                                                                                    |
+| duck_block_underline            | scalar        | NULL                                                                     | NULL    |                                                                                                                                              |
+| duck_block_valid                | scalar        | Check if a duck_block struct is valid according to the duck_blocks spec. | NULL    | [duck_block_valid(duck_block('paragraph', 'Hello'))]                                                                                         |
+| duck_blocks_assemble            | scalar        | NULL                                                                     | NULL    |                                                                                                                                              |
+| duck_blocks_body                | scalar        | Extract body blocks excluding non-body/metadata elements.                | NULL    | [duck_blocks_body(blocks)]                                                                                                                   |
+| duck_blocks_code_blocks         | scalar        | Extract code blocks from a block list.                                   | NULL    | [duck_blocks_code_blocks(blocks)]                                                                                                            |
+| duck_blocks_code_blocks_structs | scalar        | Extract code blocks as list of structs.                                  | NULL    | [duck_blocks_code_blocks_structs(blocks)]                                                                                                    |
+| duck_blocks_concat              | scalar        | Concatenate two block lists.                                             | NULL    | [duck_blocks_concat(blocks1, blocks2)]                                                                                                       |
+| duck_blocks_diff                | table_macro   | NULL                                                                     | NULL    |                                                                                                                                              |
+| duck_blocks_document            | scalar        | NULL                                                                     | NULL    |                                                                                                                                              |
+| duck_blocks_exclude             | scalar        | Exclude specified element types from a list of duck_blocks.              | NULL    | [duck_blocks_exclude(blocks, ['raw', 'metadata'])]                                                                                           |
+| duck_blocks_filter              | scalar        | Filter a list of duck_blocks to only include specified element types.    | NULL    | [duck_blocks_filter(blocks, ['heading', 'paragraph'])]                                                                                       |
+| duck_blocks_get_pages           | macro         | NULL                                                                     | NULL    |                                                                                                                                              |
+| duck_blocks_get_pages_text      | macro         | NULL                                                                     | NULL    |                                                                                                                                              |
+| duck_blocks_get_section         | macro         | NULL                                                                     | NULL    |                                                                                                                                              |
+| duck_blocks_get_section_text    | macro         | NULL                                                                     | NULL    |                                                                                                                                              |
+| duck_blocks_headings            | scalar        | Extract heading blocks from a block list.                                | NULL    | [duck_blocks_headings(blocks)]                                                                                                               |
+| duck_blocks_headings_structs    | scalar        | Extract headings as list of structs.                                     | NULL    | [duck_blocks_headings_structs(blocks)]                                                                                                       |
+| duck_blocks_inlines_to_pandoc   | scalar        | NULL                                                                     | NULL    |                                                                                                                                              |
+| duck_blocks_links               | scalar        | Extract links from a block list.                                         | NULL    | [duck_blocks_links(blocks)]                                                                                                                  |
+| duck_blocks_links_structs       | scalar        | Extract links as list of structs.                                        | NULL    | [duck_blocks_links_structs(blocks)]                                                                                                          |
+| duck_blocks_lint                | scalar        | Lint a block list for structural style and issues.                       | NULL    | [duck_blocks_lint(blocks)]                                                                                                                   |
+| duck_blocks_merge               | scalar        | Merge two lists of duck_blocks and renumber element orders.              | NULL    | [duck_blocks_merge(blocks1, blocks2)]                                                                                                        |
+| duck_blocks_normalize           | scalar        | Normalize block hierarchy by collapsing lone plain blocks into parent.   | NULL    | [duck_blocks_normalize(blocks)]                                                                                                              |
+| duck_blocks_page_rows           | table_macro   | NULL                                                                     | NULL    |                                                                                                                                              |
+| duck_blocks_quality             | table_macro   | NULL                                                                     | NULL    |                                                                                                                                              |
+| duck_blocks_rebase_levels       | scalar        | Rebase hierarchy levels of a list of blocks.                             | NULL    | [duck_blocks_rebase_levels(blocks, 1)]                                                                                                       |
+| duck_blocks_render_ansi         | scalar        | NULL                                                                     | NULL    |                                                                                                                                              |
+| duck_blocks_reorder             | scalar        | Renumber element_order sequentially from 1 for a list of duck_blocks.    | NULL    | [duck_blocks_reorder(blocks)]                                                                                                                |
+| duck_blocks_repair              | scalar        | Repair and normalize block structure and levels.                         | NULL    | [duck_blocks_repair(blocks)]                                                                                                                 |
+| duck_blocks_sections_like       | table_macro   | NULL                                                                     | NULL    |                                                                                                                                              |
+| duck_blocks_sections_like_text  | table_macro   | NULL                                                                     | NULL    |                                                                                                                                              |
+| duck_blocks_slice               | scalar        | Slice a list of duck_blocks by 1-based index range.                      | NULL    | [duck_blocks_slice(blocks, 1, 5)]                                                                                                            |
+| duck_blocks_stamp               | scalar        | Stamp duck_blocks list with current spec version metadata.               | NULL    | [duck_blocks_stamp(blocks)]                                                                                                                  |
+| duck_blocks_stats               | scalar        | Compute summary statistics of elements in block list.                    | NULL    | [duck_blocks_stats(blocks)]                                                                                                                  |
+| duck_blocks_structure           | scalar        | Analyze structural composition of a block list.                          | NULL    | [duck_blocks_structure(blocks)]                                                                                                              |
+| duck_blocks_to_match_text       | macro         | NULL                                                                     | NULL    |                                                                                                                                              |
+| duck_blocks_to_pandoc_ast       | scalar        | Convert duck_blocks to complete Pandoc AST struct.                       | NULL    | [duck_blocks_to_pandoc_ast(blocks)]                                                                                                          |
+| duck_blocks_to_pandoc_blocks    | scalar        | Convert duck_blocks to Pandoc blocks JSON string.                        | NULL    | [duck_blocks_to_pandoc_blocks(blocks)]                                                                                                       |
+| duck_blocks_to_text             | scalar        | NULL                                                                     | NULL    |                                                                                                                                              |
+| duck_blocks_toc                 | scalar        | Extract table of contents as bullet list blocks.                         | NULL    | [duck_blocks_toc(blocks)]                                                                                                                    |
+| duck_blocks_toc_rows            | table_macro   | NULL                                                                     | NULL    |                                                                                                                                              |
+| duck_blocks_toc_structs         | scalar        | Extract table of contents as list of structs.                            | NULL    | [duck_blocks_toc_structs(blocks)]                                                                                                            |
+| duck_blocks_validate            | scalar        | Validate structural correctness of block list.                           | NULL    | [duck_blocks_validate(blocks)]                                                                                                               |
+| duck_blocks_version             | scalar        | Return the stamped spec version of a duck_blocks list.                   | NULL    | [duck_blocks_version(blocks)]                                                                                                                |
+| pandoc_ast                      | table         | Table function returning Pandoc AST rows.                                | NULL    | [SELECT * FROM pandoc_ast(blocks)]                                                                                                           |
+| pandoc_ast_to_blocks            | scalar        | Parse Pandoc AST JSON into duck_blocks.                                  | NULL    | [pandoc_ast_to_blocks('{"blocks":[]}')]                                                                                                      |
+| pandoc_inlines_to_db_inlines    | scalar        | Parse Pandoc inlines JSON into duck_blocks.                              | NULL    | [pandoc_inlines_to_db_inlines('[{"t":"Str","c":"hi"}]')]                                                                                     |
+| pandoc_inlines_to_text          | scalar        | NULL                                                                     | NULL    |                                                                                                                                              |
+| read_pandoc_ast                 | scalar        | Read Pandoc AST JSON file into duck_blocks.                              | NULL    | [read_pandoc_ast('document.json')]                                                                                                           |
+| to_duck_block                   | scalar        | Convert a compatible struct to a duck_block struct.                      | NULL    | [to_duck_block({'element_type': 'paragraph', 'content': 'Hello', 'level': 1, 'encoding': 'text', 'attributes': MAP {}, 'element_order': 1})] |
+| write_pandoc_ast                | scalar        | Write duck_blocks to file as Pandoc AST JSON.                            | NULL    | [write_pandoc_ast('out.json', blocks)]                                                                                                       |
 
 ### Overloaded Functions
 
