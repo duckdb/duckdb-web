@@ -4,8 +4,8 @@ title: "Importing Data into DuckDB with Java - Practical Experience"
 author: "John Nadar, Geertjan Wielenga, Alex Kasko"
 excerpt: "When the analytics screen running on our main operational database got too slow, we moved a year of data into DuckDB on the same server. Getting the data in was the hard part. This is the story of every method we tried, and why a table function written in pure Java is the one we shipped."
 tags: ["using DuckDB"]
-thumb: "/images/blog/thumbs/java.svg"
-image: "/images/blog/thumbs/java.png"
+thumb: "/images/blog/thumbs/mongodb.svg"
+image: "/images/blog/thumbs/mongodb.png"
 ---
 
 > Guest blog post by [John Nadar](https://github.com/jonadar98).
