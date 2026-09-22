@@ -607,22 +607,13 @@ $(document).on('click', 'svg.anchor-icon', function(e) {
 	}, 1500));
 });
 
-// Wrap external links followed by a "." in a nobreak span
-$('body.documentation #main_content_wrap a.externallink').each(function () {
-	const link = $(this);
-	const next = link[0].nextSibling;
-
-	if (next?.nodeType === 3 && next.nodeValue.trim().startsWith('.')) {
-		const text = next.nodeValue;
-		const dotIndex = text.indexOf('.');
-		const dot = text[dotIndex];
-		const rest = text.slice(dotIndex + 1);
-
-		next.remove();
-		link.wrap('<span class="nobreak"></span>');
-		link.after(dot);
-		if (rest) link.parent().after(document.createTextNode(rest));
-	}
+// Glue trailing punctuation to the link icon with a word joiner so it never wraps alone
+$('#main_content_wrap, .singleentry .content').find('a.externallink, a.downloadlink, a.videolink, a.podcastlink').each(function () {
+	var next = this.nextSibling;
+	if (!next || next.nodeType !== 3) return;
+	var match = next.nodeValue.match(/^\s*[.,;:)]/);
+	if (!match) return;
+	next.nodeValue = '\u2060' + next.nodeValue.slice(match[0].length - 1);
 });
 	
 	// FOUNDATION PAGE SCRIPTS
