@@ -23,6 +23,7 @@ For a list of dot commands available in the CLI shell, see the [Dot Commands pag
 | `-box`                 | Set [output mode]({% link docs/preview/clients/cli/output_formats.md %}) to `box`                                                                                                                                                                                                                                                                        |
 | `-column`              | Set [output mode]({% link docs/preview/clients/cli/output_formats.md %}) to `column`                                                                                                                                                                                                                                                                     |
 | `-cmd COMMAND`         | Run `COMMAND` before reading `stdin`                                                                                                                                                                                                                                                                                                                     |
+| `-connect [TYPE[:SECRET]]` | Connect to a remote database. The default type is `quack`. A named secret can be provided after the type                                                                                                                                                                                                                                           |
 | `-c COMMAND`           | Run `COMMAND` and exit                                                                                                                                                                                                                                                                                                                                   |
 | `-csv`                 | Set [output mode]({% link docs/preview/clients/cli/output_formats.md %}) to `csv`                                                                                                                                                                                                                                                                        |
 | `-echo`                | Print commands before execution                                                                                                                                                                                                                                                                                                                          |
@@ -45,6 +46,7 @@ For a list of dot commands available in the CLI shell, see the [Dot Commands pag
 | `-readonly`            | Open the database read-only. This option also supports attaching to remote databases via HTTPS                                                                                                                                                                                                                                                           |
 | `-s COMMAND`           | Run `COMMAND` and exit                                                                                                                                                                                                                                                                                                                                   |
 | `-separator SEP`       | Set output column separator to `SEP`. Default: `                                                                                                                                                                                                                                                                                                         | ` |
+| `-serve [quack[:SECRET]]` | Serve the opened database with [Quack]({% link docs/preview/quack/overview.md %}). A named secret can be provided after the type                                                                                                                                                                                                                       |
 | `-storage-version VER` | Database [storage compatibility version]({% link docs/preview/internals/storage.md %}#storag-version_table) to use. To use the latest storage version, pass `-storage-version latest`                                                                                                                                                                    |
 | `-table`               | Set [output mode]({% link docs/preview/clients/cli/output_formats.md %}) to `table`                                                                                                                                                                                                                                                                      |
 | `-ui`                  | Loads and starts the [DuckDB UI]({% link docs/preview/core_extensions/ui.md %}). If the UI is not yet installed, it installs the `ui` extension                                                                                                                                                                                                          |
@@ -52,6 +54,35 @@ For a list of dot commands available in the CLI shell, see the [Dot Commands pag
 | `-version`             | Show DuckDB version                                                                                                                                                                                                                                                                                                                                      |
 
 <!-- markdownlint-enable MD056 -->
+
+## Serving and Connecting to Remote Databases
+
+The `-serve` argument starts a [Quack]({% link docs/preview/quack/overview.md %}) server for the database opened by the CLI. Without a database path or additional configuration, it serves an in-memory database on `localhost:9494`:
+
+```batch
+duckdb -serve
+```
+
+To serve a persistent database, provide its path before `-serve`:
+
+```batch
+duckdb analytics.duckdb -serve
+```
+
+The `-connect` argument connects the CLI to a remote database. It defaults to Quack's unnamed secret:
+
+```batch
+duckdb -connect
+```
+
+Both arguments accept a connection type and an optional named secret in the form `TYPE:SECRET`. Only the `quack` type can be served. For example, after creating a persistent Quack secret named `analytics`, serve or connect with:
+
+```batch
+duckdb analytics.duckdb -serve quack:analytics
+duckdb -connect quack:analytics
+```
+
+The `-connect` argument cannot be combined with a local database path because the CLI acts as a client for the remote database.
 
 ## Passing a Sequence of Arguments
 
