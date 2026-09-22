@@ -1768,6 +1768,10 @@
                 {
                   "page": "DBeaver SQL IDE",
                   "url": "dbeaver"
+                },
+                {
+                  "page": "LibreDB Studio SQL Editor",
+                  "url": "libredb_studio"
                 }
               ]
             },
