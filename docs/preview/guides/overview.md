@@ -125,6 +125,7 @@ To find a list of these tools, check out the [Awesome DuckDB repository](https:/
 
 ## SQL Editors and IDEs
 
+* [How to set up the Beekeeper Studio SQL editor]({% link docs/preview/guides/sql_editors/beekeeper_studio.md %})
 * [How to set up the DBeaver SQL IDE]({% link docs/preview/guides/sql_editors/dbeaver.md %})
 * [How to set up the LibreDB Studio SQL editor]({% link docs/preview/guides/sql_editors/libredb_studio.md %})
 
