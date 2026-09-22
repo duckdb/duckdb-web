@@ -1,35 +1,31 @@
-{% if version_viewed == "current" %}
-	<!-- this is the default and recommended version - do not show any extra warning -->
-{% elsif version_viewed == "lts" %}
-	<div class="banner lts">
-		<div class="content">
-			<svg class="icon"><use href="#clock"></use></svg>
-			<span title="The page is for the LTS build of DuckDB.">LTS version</span>
-		</div>
-	</div>
-{% elsif version_viewed == "preview" %}
-	<div class="banner preview">
-		<div class="content">
-			<svg class="icon"><use href="#clock"></use></svg>
-			<span title="The page is for the preview build of DuckDB.">Preview version</span>
-		</div>
-	</div>
-{% else %}
-	<!-- show 'outdated' banner, linking to the same page in the current version -->
-	{% assign basename = page.path | regex_replace: "docs/(lts|current|\d*.\d*)/", "" %}
+{% if version_viewed != "current" %}
+	{% assign basename = page.path | regex_replace: "docs/(lts|current|preview|\d*.\d*)/", "" %}
 	{% assign current_filename = "docs/current/" | append: basename %}
 	{% capture current_exists %}{% file_exists {{ current_filename }} %}{% endcapture %}
 	{% if current_exists == "true" %}
 		{% assign current_url = current_filename | replace: ".md", "" %}
-		{% assign banner_title = "Outdated documentation. Go to this page in the current version." %}
+		{% assign current_link_text = "Switch to the current version" %}
 	{% else %}
 		{% assign current_url = "docs/current/index" %}
-		{% assign banner_title = "Outdated documentation. This page is not available in the current version – go to the documentation home." %}
+		{% assign current_link_text = "Switch to the current documentation" %}
 	{% endif %}
-	<a class="banner outdated" href="/{{ current_url }}" title="{{ banner_title }}">
+	{% if version_viewed == "lts" %}
+		{% assign banner_class = "lts" %}
+		{% assign banner_icon = "clock" %}
+		{% capture banner_text %}This page is for DuckDB {{ site.lts_short_duckdb_version }} (LTS).{% endcapture %}
+	{% elsif version_viewed == "preview" %}
+		{% assign banner_class = "preview" %}
+		{% assign banner_icon = "beaker-02" %}
+		{% capture banner_text %}This page is for DuckDB {{ site.preview_short_duckdb_version }} (preview).{% endcapture %}
+	{% else %}
+		{% assign banner_class = "outdated" %}
+		{% assign banner_icon = "alert-octagon" %}
+		{% capture banner_text %}This page is for DuckDB {{ version_viewed }}, which is outdated.{% endcapture %}
+	{% endif %}
+	<div class="banner docversion {{ banner_class }}">
 		<div class="content">
-			<svg class="icon"><use href="#alert-octagon"></use></svg>
-			<span>Outdated documentation</span>
+			<svg class="icon"><use href="#{{ banner_icon }}"></use></svg>
+			<span>{{ banner_text }} <a href="/{{ current_url }}">{{ current_link_text }}</a>.</span>
 		</div>
-	</a>
+	</div>
 {% endif %}

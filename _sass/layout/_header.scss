@@ -251,53 +251,6 @@ header .headerline {
 				}
 
 			}
-			/* Banner */
-			.banner {
-				border-radius: var(--page-radius-m);
-				background: transparent;
-				padding: 0 8px;
-				height: 33px;
-				box-sizing: border-box;
-				display: flex;
-				align-items: center;
-				font-size: 12px;
-				cursor: default;
-
-				.content {
-					column-gap: 6px;
-				}
-
-				&.lts {
-					border: 1px solid #00C770;
-
-					span, .icon {
-						color: #00C770;
-					}
-				}
-
-				&.preview,
-				&.nightly {
-					border: 1px solid var(--orange-50, #FF6900);
-
-					span, .icon {
-						color: var(--orange-50, #FF6900);
-					}
-				}
-
-				&.outdated {
-					border: 1px solid var(--doc-menu-info-deprecated-border-color, #7D66FF);
-					color: var(--doc-menu-info-deprecated-border-color, #7D66FF);
-					text-decoration: none;
-
-					span, .icon {
-						color: var(--doc-menu-info-deprecated-border-color, #7D66FF);
-					}
-				}
-
-				&[href] {
-					cursor: pointer;
-				}
-			}
 		}
 	}
 }
