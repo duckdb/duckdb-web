@@ -36,7 +36,7 @@ SELECT
     area,
     round(avg(sunbed_price), 0) AS avg_sunbed_price_eur,
     count(*) AS clubs
-FROM read_csv('https://raw.githubusercontent.com/shiftdylson1/marbella-price-data/main/beach-clubs/beach-clubs.csv')
+    FROM 'http://blobs.duckdb.org/data/beach-clubs.csv'
 WHERE sunbed_price IS NOT NULL
 GROUP BY area
 ORDER BY avg_sunbed_price_eur DESC;
