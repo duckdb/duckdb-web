@@ -39,7 +39,7 @@ VACUUM FULL;
 
 ```console
 Not implemented Error:
-Full vacuum option
+FULL is not yet implemented
 ```
 
 ## Vacuum with Indexes

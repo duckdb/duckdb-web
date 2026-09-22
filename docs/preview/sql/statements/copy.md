@@ -168,6 +168,15 @@ EXECUTE v1('lineitem.json');
 
 The `COPY ... TO` function can be called specifying either a table name, or a query. When a table name is specified, the contents of the entire table will be written into the resulting file. When a query is specified, the query is executed and the result of the query is written to the resulting file.
 
+`COPY ... TO` can also be used as a CTE body. The CTE returns the number of rows written. `COPY ... FROM` cannot be used as a CTE body.
+
+```sql
+WITH copied(rows_written) AS (
+    COPY lineitem TO 'lineitem.csv' (FORMAT CSV, HEADER)
+)
+SELECT rows_written FROM copied;
+```
+
 Copy the contents of the `lineitem` table to a CSV file with a header:
 
 ```sql
@@ -351,6 +360,7 @@ The below options are applicable when writing Parquet files.
 | `CHUNK_SIZE` | Alias for `ROW_GROUP_SIZE`. | `BIGINT` | 122880 |
 | `KV_METADATA` | Custom key-value metadata to embed in the file footer, supplied as a `STRUCT` of keys to values. `BLOB` values are written as raw bytes; other values are cast to string. | `STRUCT` | (empty) |
 | `SHREDDING` | A `STRUCT` mapping [`VARIANT`]({% link docs/preview/sql/data_types/variant.md %}) column names to the type they should be shredded into, e.g., `{variant_col: 'STRUCT(name VARCHAR, age INTEGER)'}`. Enables typed (shredded) storage of `VARIANT` columns. | `STRUCT` | (empty) |
+| `DATA_PAGE_SIZE_LIMIT` | Target uncompressed size of Parquet data pages, in bytes. Pages may still be larger at vector granularity. | `UBIGINT` | `104857600` (100 MiB) |
 | `DICTIONARY_SIZE_LIMIT` | The maximum size of the dictionary used for dictionary encoding, in number of distinct values. Set to `0` to disable dictionary encoding. | `BIGINT` | `ROW_GROUP_SIZE / 5` |
 | `WRITE_BLOOM_FILTER` | Whether to write [Bloom filters](https://en.wikipedia.org/wiki/Bloom_filter) that allow readers to skip row groups. | `BOOLEAN` | `true` |
 | `BLOOM_FILTER_FALSE_POSITIVE_RATIO` | The target false positive ratio of the written Bloom filters. | `DOUBLE` | `0.01` |

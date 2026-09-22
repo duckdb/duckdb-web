@@ -152,13 +152,15 @@ There are a number of options exposed that can be passed to the `read_parquet` f
 | `file_row_number` | Whether or not to include the `file_row_number` column. | `BOOL` | `false` |
 | `hive_partitioning` | Whether or not to interpret the path as a [Hive partitioned path]({% link docs/preview/data/partitioning/hive_partitioning.md %}). | `BOOL` | (auto-detected) |
 | `union_by_name` | Whether the columns of multiple schemas should be [unified by name]({% link docs/preview/data/multiple_files/combining_schemas.md %}), rather than by position. | `BOOL` | `false` |
-| `schema` | Allows you to read a Parquet file as if it has the supplied schema. Field IDs are required. | `MAP` | `NULL` |
+| `schema` | Allows you to read a Parquet file as if it has the supplied schema. The `MAP` can be keyed by field-id (`INTEGER`) or by column name (`VARCHAR`). | `MAP` | `NULL` |
 
 ## Using the `schema` Parameter
 
 The `schema` parameter allows you to read the Parquet file using a specific schema. This is useful for renaming, adding, deleting, reordering, or casting columns when reading Parquet files.
 
-To use the `schema` parameter, field IDs are required. To make them available when creating the Parquet using DuckDB, use:
+The `MAP` can be keyed by field-id or by column name.
+
+To map by field-id, field IDs are required. To make them available when creating the Parquet using DuckDB, use:
 
 ```sql
 COPY (SELECT 42::INTEGER AS i) TO 'integers.parquet' (FIELD_IDS {i: 0});
@@ -171,6 +173,27 @@ SELECT *
 FROM read_parquet('integers.parquet', schema = MAP {
                     0: {name: 'renamed_i', type: 'BIGINT', default_value: NULL},
                     1: {name: 'new_column', type: 'UTINYINT', default_value: 43}
+                  });
+```
+
+```text
+┌───────────┬────────────┐
+│ renamed_i │ new_column │
+│   int64   │   uint8    │
+├───────────┼────────────┤
+│        42 │         43 │
+└───────────┴────────────┘
+```
+
+You can also key the `MAP` by column name. Field IDs are not required:
+
+```sql
+COPY (SELECT 42::INTEGER AS i) TO 'integers.parquet';
+
+SELECT *
+FROM read_parquet('integers.parquet', schema = MAP {
+                    'i': {name: 'renamed_i', type: 'BIGINT', default_value: NULL},
+                    'j': {name: 'new_column', type: 'UTINYINT', default_value: 43}
                   });
 ```
 
@@ -331,6 +354,14 @@ COPY
     lineitem
     TO 'lineitem-with-custom-dictionary-size.parquet'
     (FORMAT parquet, STRING_DICTIONARY_PAGE_SIZE_LIMIT 100_000);
+```
+
+To split data pages below the default 100 MiB cap, use `DATA_PAGE_SIZE_LIMIT` (bytes). The limit is best-effort at vector granularity. E.g., to set the limit to 1 MiB, use:
+
+```sql
+COPY tbl
+    TO 'tbl.parquet'
+    (FORMAT parquet, DATA_PAGE_SIZE_LIMIT 1_048_576);
 ```
 
 DuckDB's `EXPORT` command can be used to export an entire database to a series of Parquet files. See the [“`EXPORT` statement” page]({% link docs/preview/sql/statements/export.md %}) for more details:
