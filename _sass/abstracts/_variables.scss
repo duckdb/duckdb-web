@@ -240,6 +240,8 @@ $docuh5: 18px;
   --doc-box-best-practice-border: #b6e3ff;
   --doc-box-deprecated: #f2f0ff;
   --doc-box-deprecated-border: #d1c9ff;
+  --doc-box-new: #fffbe0;
+  --doc-box-new-border: #f3e88f;
   --doc-box-note: var(--doc-codebox-background-color);
   --doc-box-note-border: var(--doc-codebox-border-color);
   --doc-box-tip: #e5f9f1;
@@ -465,6 +467,8 @@ html.darkmode {
   --doc-box-best-practice-border: #153a51;
   --doc-box-deprecated: #221d3d;
   --doc-box-deprecated-border: #2f2277;
+  --doc-box-new: #2a2707;
+  --doc-box-new-border: #5c5210;
   --doc-box-note: var(--doc-codebox-background-color);
   --doc-box-note-border: var(--doc-codebox-border-color);
   --doc-box-tip: #0f271c;

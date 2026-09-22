@@ -7,7 +7,9 @@ $(document).ready(function(){
 		bestpractice: "thumbs-up",
 		deprecated: "alert-circle",
 		update: "refresh-cw-02",
-		installation: "target-05"
+		installation: "settings-02",
+		quote: "quotation_mark",
+		new: "stars-01"
 	};
 
 	$('#main_content_wrap blockquote, .singleentry blockquote').each(function() {
@@ -42,6 +44,9 @@ $(document).ready(function(){
 			case "Quote":
 				className = "quote";
 				break;
+			case "New":
+				className = "new";
+				break;
 			default:
 				className = "";
 				break;
@@ -67,6 +72,8 @@ $(document).ready(function(){
 			if (/^(\u2013|\u2014|--)/.test($last.text().trim())) {
 				$last.addClass('quote-author');
 			}
+			$blockquote.find('.content').prepend('<span class="sr-only">Quote</span>');
+			$blockquote.prepend('<div class="symbol" title="Quote"><svg class="icon"><use href="#' + icons.quote + '"></use></svg></div>');
 		} else {
 			var label = (className == "bestpractice") ? 'Best practice' : (hasKeyword ? firstWord : 'Note');
 			$blockquote.find('.content').prepend('<span class="sr-only">' + label + '</span>');
