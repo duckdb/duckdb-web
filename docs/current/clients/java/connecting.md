@@ -247,7 +247,7 @@ Separately from DuckDB's pools, the driver starts a single daemon thread named `
 
 ## Connect to a DuckLake
 
-[DuckLake]({% link docs/current/core_extensions/ducklake.md %}) stores table data as Parquet files and its metadata in a catalog database, which can be a DuckDB file, a SQLite file, or a PostgreSQL server. From JDBC there are two ways to reach a lake: attach it to an ordinary connection, or open it directly as the connection's default catalog with the `ducklake:` URL form.
+[DuckLake]({% link docs/current/core_extensions/ducklake.md %}) stores table data as Parquet files and its metadata in a catalog database, which can be a DuckDB file, a SQLite file, or a PostgreSQL server. From JDBC there are two ways to reach a lake: attach it to an ordinary connection, or open it directly as the connection's default database with the `ducklake:` URL form.
 
 ### Attach a DuckLake
 
@@ -273,7 +273,7 @@ The `ducklake` extension is autoloaded on the first `ATTACH`; an explicit `INSTA
 
 ### Open a DuckLake Directly
 
-Once a lake exists, it can be opened as the connection's default catalog by placing the DuckLake path after the `jdbc:duckdb:` prefix. Tables are then addressed without a catalog prefix and no `USE` statement is needed:
+Once a lake exists, it can be opened as the connection's default database by placing the DuckLake path after the `jdbc:duckdb:` prefix. Tables are then addressed without a catalog prefix and no `USE` statement is needed:
 
 ```java
 try (Connection conn = DriverManager.getConnection("jdbc:duckdb:ducklake:metadata.ducklake");
@@ -334,6 +334,27 @@ jdbc:duckdb:ducklake:postgres:postgresql://user:password@host:5432/lake_catalog;
 ```
 
 > Warning The JDBC URL and the init file both contain credentials. Treat them as secrets in the same way as the database password.
+
+### Read-Only Lakes on Object Storage
+
+When both the catalog database and the data files live in object storage, the whole lake can be attached read-only without any local files, a setup often called a “frozen” lake. This works for a DuckDB or SQLite catalog file served over [`s3://`]({% link docs/current/core_extensions/httpfs/s3api.md %}), [`gcs://`]({% link docs/current/guides/network_cloud_storage/gcs_import.md %}), or [`https://`]({% link docs/current/core_extensions/httpfs/https.md %}). The catalog file is given as the `ATTACH` target with `TYPE ducklake`, and `READ_ONLY` is required because the remote file cannot be written:
+
+```java
+try (Connection conn = DriverManager.getConnection("jdbc:duckdb:");
+     Statement stmt = conn.createStatement()) {
+    stmt.execute("CREATE SECRET (TYPE s3, KEY_ID '⟨key⟩', SECRET '⟨secret⟩', REGION 'us-east-1')");
+    stmt.execute("ATTACH 's3://my-bucket/lake/catalog.duckdb' AS lake (TYPE ducklake, READ_ONLY)");
+    stmt.execute("USE lake");
+
+    try (ResultSet rs = stmt.executeQuery("SELECT id, payload FROM events ORDER BY id")) {
+        while (rs.next()) {
+            System.out.println(rs.getInt(1) + " " + rs.getString(2));
+        }
+    }
+}
+```
+
+A SQLite catalog is attached the same way, with the file name ending in `.sqlite`. A publicly hosted lake served over `https://` needs no secret at all, so its catalog can be attached directly, for example `ATTACH 'https://⟨host⟩/catalog.duckdb' AS lake (TYPE ducklake, READ_ONLY)`. The `DATA_PATH` recorded in the catalog must point at a location the reader can also reach, such as the same bucket or public host.
 
 Once attached or opened, DuckLake tables behave like local tables, so the whole JDBC API applies to them, including the [Appender]({% link docs/current/clients/java/data_import.md %}#appender). Note that DuckLake, like other lakehouse formats, does not support indexes, primary keys, or `UNIQUE` and `CHECK` constraints; see the [DuckLake documentation](https://ducklake.select/docs/stable/duckdb/introduction) for the full list of differences.
 
