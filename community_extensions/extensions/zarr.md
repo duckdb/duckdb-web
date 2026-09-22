@@ -93,10 +93,10 @@ docs:
     GROUP BY label;
     ```
 
-extension_star_count: 58
-extension_star_count_pretty: 58
-extension_download_count: 755
-extension_download_count_pretty: 755
+extension_star_count: 59
+extension_star_count_pretty: 59
+extension_download_count: 765
+extension_download_count_pretty: 765
 image: '/images/community_extensions/social_preview/preview_community_extension_zarr.png'
 layout: community_extension_doc
 ---

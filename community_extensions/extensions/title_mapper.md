@@ -54,8 +54,8 @@ docs:
 
 extension_star_count: 4
 extension_star_count_pretty: 4
-extension_download_count: 805
-extension_download_count_pretty: 805
+extension_download_count: 934
+extension_download_count_pretty: 934
 image: '/images/community_extensions/social_preview/preview_community_extension_title_mapper.png'
 layout: community_extension_doc
 ---

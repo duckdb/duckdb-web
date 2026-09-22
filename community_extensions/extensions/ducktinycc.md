@@ -133,8 +133,8 @@ docs:
 
 extension_star_count: 4
 extension_star_count_pretty: 4
-extension_download_count: 1131
-extension_download_count_pretty: 1.1k
+extension_download_count: 1170
+extension_download_count_pretty: 1.2k
 image: '/images/community_extensions/social_preview/preview_community_extension_ducktinycc.png'
 layout: community_extension_doc
 ---

@@ -8,7 +8,7 @@ excerpt: |
 extension:
   name: netquack
   description: DuckDB extension for parsing, extracting, and analyzing domains, URIs, and paths with ease.
-  version: 1.13.0
+  version: 1.14.0
   language: C++
   build: cmake
   license: MIT
@@ -17,8 +17,8 @@ extension:
 
 repo:
   github: hatamiarash7/duckdb-netquack
-  andium: 3e41ef474b9deb5303538965d07712e803d8c732
-  ref: 3e41ef474b9deb5303538965d07712e803d8c732
+  andium: 01da71e6a9014f2817fb6c206847bc1c0058e1e7
+  ref: 01da71e6a9014f2817fb6c206847bc1c0058e1e7
 
 docs:
   extended_description: |
@@ -30,8 +30,8 @@ docs:
 
 extension_star_count: 43
 extension_star_count_pretty: 43
-extension_download_count: 5404
-extension_download_count_pretty: 5.4k
+extension_download_count: 5605
+extension_download_count_pretty: 5.6k
 image: '/images/community_extensions/social_preview/preview_community_extension_netquack.png'
 layout: community_extension_doc
 ---
@@ -69,6 +69,7 @@ LOAD {{ page.extension.name }};
 | extract_tld              | scalar        | Extracting the top-level domain from a URL                                                                                       | NULL    | [SELECT extract_tld('a.example.com') as tld;]                                      |
 | extract_port             | scalar        | Extracting the port from a URL                                                                                                   | NULL    | [SELECT extract_port('https://example.com:8080') as port;]                         |
 | extract_extension        | scalar        | Extracting the file extension from a URL                                                                                         | NULL    | [SELECT extract_extension('https://example.com/path/file.txt') as extension;]      |
+| parse_uri                | scalar        | Parse and returns every URI component in a single STRUCT call                                                                    | NULL    | [SELECT parse_uri('https://example.com:8080/path?q=1#section') AS uri;]            |
 | is_valid_ip              | scalar        | Validates IPv4 and IPv6 addresses                                                                                                | NULL    | [SELECT is_valid_ip('192.168.1.1');]                                               |
 | is_private_ip            | scalar        | Checks if an IP belongs to a private/reserved range (15 IPv4 + 7 IPv6 ranges)                                                    | NULL    | [SELECT is_private_ip('10.0.0.1');]                                                |
 | ip_to_int                | scalar        | Converts IPv4 to 32-bit unsigned integer                                                                                         | NULL    | [SELECT ip_to_int('192.168.1.1');]                                                 |
@@ -85,6 +86,8 @@ LOAD {{ page.extension.name }};
 | is_valid_url             | scalar        | Checks whether a string is a well-formed URL with scheme, authority, and host                                                    | NULL    | [SELECT is_valid_url('https://example.com');]                                      |
 | is_valid_domain          | scalar        | Validates a domain name against RFC 1035 / RFC 1123 rules                                                                        | NULL    | [SELECT is_valid_domain('example.com');]                                           |
 | extract_path_segments    | table         | Splits a URL path into individual segment rows with index and value                                                              | NULL    | [SELECT * FROM extract_path_segments('https://example.com/a/b/c');]                |
+| url_encode               | scalar        | Percent-encodes a string per RFC 3986 (unreserved characters pass through)                                                       | NULL    | [SELECT url_encode('hello world');]                                                |
+| url_decode               | scalar        | Decodes a percent-encoded string back to its original form (also decodes + as space)                                             | NULL    | [SELECT url_decode('hello%20world');]                                              |
 | update_tranco            | scalar        | Update tranco data                                                                                                               | NULL    | [SELECT update_tranco(true);]                                                      |
 | netquack_version         | table         | Returns the version of Netquack                                                                                                  | NULL    | [SELECT netquack_version() as version;]                                            |
 
