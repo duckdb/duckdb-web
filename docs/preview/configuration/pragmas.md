@@ -616,7 +616,14 @@ SET ieee_floating_point_ops = false;
 
 In this case, floating point division by zero (e.g., `1.0 / 0.0`, `0.0 / 0.0` and `-1.0 / 0.0`) will all return `NULL`.
 
-Integer division by zero (`1 // 0`, `1 % 0`, `INTERVAL '1' DAY / 0`) errors by default. `SET null_on_division_by_zero = true` restores the previous `NULL` result.
+> New The semantics of integer divison by zero are changing will change in DuckDB 2.0.
+
+Integer division by zero (`1 // 0`, `1 % 0`, `INTERVAL '1' DAY / 0`) errors by default.
+To return `NULL`, similarly to DuckDB 1.x, use:
+
+```sql
+SET null_on_division_by_zero = true;
+```
 
 ## Query Verification (for Development)
 

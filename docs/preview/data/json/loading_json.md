@@ -347,6 +347,8 @@ CREATE TABLE numbers AS
 
 ## GeoJSON
 
+> New This feature will be introduced in DuckDB 2.0.
+
 The `json` extension can read [GeoJSON](https://geojson.org/) when you opt in. Pass `geojson := true` to `read_json` so geometry objects become `GEOMETRY` (the `spatial` type) instead of generic JSON:
 
 ```sql
