@@ -8,6 +8,8 @@ excerpt: "DuckDB instances can now talk to each other using the Quack remote pro
 tags: ["release"]
 ---
 
+> Update In October 2026, Quack was released as a stable protocol in [DuckDB 2.0]({% post_url 2026-10-21-announcing-duckdb-200 %}).
+
 <div class="video-container">
 <iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/L_lttD-d1wc?si=Gd8WfFnRfXEV-M1o" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 </div>
