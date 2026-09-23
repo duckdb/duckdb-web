@@ -53,3 +53,17 @@ To clean up, drop the interim tables:
 DROP TABLE IF EXISTS t1;
 DROP TABLE IF EXISTS t2;
 ```
+
+## Configuring the Join Order Optimizer
+
+DuckDB's join order optimizer computes the optimal join order exactly using a dynamic programming algorithm. As the number of tables in a join grows, exact enumeration becomes expensive, so for large joins the optimizer switches to an approximate (greedy) algorithm. The `approximate_join_order_threshold` [setting]({% link docs/preview/configuration/overview.md %}) controls when this happens: joins with at least this many tables are ordered approximately, while joins with fewer tables are ordered exactly. The default value is 12.
+
+For example, to use the exact algorithm for joins of up to 15 tables, run:
+
+```sql
+SET approximate_join_order_threshold = 16;
+```
+
+Raising the threshold can lead to better join orders for queries with many joins at the cost of longer optimization times. Lowering it reduces optimization time for large joins.
+
+> Even below the threshold, the optimizer falls back to the approximate algorithm if exact enumeration exceeds its internal budget.
