@@ -60,6 +60,26 @@ SELECT first(amount ORDER BY date ASC)
 FROM sales;
 ```
 
+Downsample a series of 100 points to 5 points that preserve its visual shape using the [`lttb()` aggregate function](#lttbx-y-n):
+
+```sql
+SELECT unnest(lttb(x, sin(x), 5 ORDER BY x)) AS point
+FROM range(0, 100) t(x);
+```
+
+```text
+┌───────────────────────────────────────┐
+│                 point                 │
+│      struct(x double, y double)       │
+├───────────────────────────────────────┤
+│ {'x': 0.0, 'y': 0.0}                  │
+│ {'x': 30.0, 'y': -0.9880316240928618} │
+│ {'x': 33.0, 'y': 0.9999118601072672}  │
+│ {'x': 96.0, 'y': 0.9835877454343449}  │
+│ {'x': 99.0, 'y': -0.9992068341863537} │
+└───────────────────────────────────────┘
+```
+
 ## Syntax
 
 <div id="rrdiagram"></div>
@@ -140,6 +160,7 @@ The table below shows the available general aggregate functions.
 | [`histogram_values(source, boundaries)`](#histogram_valuessource-col_name-technique-bin_count) | Returns the upper boundaries of the bins and their counts. |
 | [`last(arg)`](#lastarg) | Returns the last value of a column. This function is [affected by ordering](#order-by-clause-in-aggregate-functions). |
 | [`list(arg)`](#listarg) | Returns a `LIST` containing all the values of a column. This function is [affected by ordering](#order-by-clause-in-aggregate-functions). |
+| [`lttb(x, y, n)`](#lttbx-y-n) | Downsamples the series of `(x, y)` points to at most `n` representative points using the Largest-Triangle-Three-Buckets (LTTB) algorithm. This function is [affected by ordering](#order-by-clause-in-aggregate-functions). |
 | [`max(arg)`](#maxarg) | Returns the maximum value present in `arg`. This function is [unaffected by distinctness](#distinct-clause-in-aggregate-functions). |
 | [`max(arg, n)`](#maxarg-n) | Returns a `LIST` containing the `arg` values for the "top" `n` rows ordered by `arg` descending. |
 | [`min(arg)`](#minarg) | Returns the minimum value present in `arg`. This function is [unaffected by distinctness](#distinct-clause-in-aggregate-functions). |
@@ -348,6 +369,15 @@ The table below shows the available general aggregate functions.
 | **Description** | Returns a `LIST` containing all the values of a column. This function is [affected by ordering](#order-by-clause-in-aggregate-functions). |
 | **Example** | `list(A)` |
 | **Alias(es)** | `array_agg` |
+
+#### `lttb(x, y, n)`
+
+> New This feature is going to be introduced in DuckDB 2.0.
+
+<div class="nostroke_table"></div>
+
+| **Description** | Downsamples the series of `(x, y)` points to at most `n` representative points using the Largest-Triangle-Three-Buckets (LTTB) algorithm, which preserves the visual shape of the series. Returns a `LIST` of `STRUCT`s with fields `x` and `y`, always including the first and the last point. `x` and `y` each accept `FLOAT`, `DOUBLE`, or any `TIMESTAMP` type, while the triangle computations are performed using `DOUBLE` arithmetic. `n` has to be a constant with `n >= 2`. Points where `x` or `y` is `NULL` are ignored and empty groups return `NULL`. The points have to be sorted on `x`, so `ORDER BY x` is required in practice. This function is [affected by ordering](#order-by-clause-in-aggregate-functions). |
+| **Example** | `lttb(x, y, 5 ORDER BY x)` |
 
 #### `max(arg)`
 
