@@ -372,7 +372,7 @@ The table below shows the available general aggregate functions.
 
 #### `lttb(x, y, n)`
 
-> New This feature is going to be introduced in DuckDB 2.0.
+> New This feature will be introduced in DuckDB 2.0.
 
 <div class="nostroke_table"></div>
 
