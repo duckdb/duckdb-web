@@ -40,6 +40,7 @@ To find a list of these tools, check out the [Awesome DuckDB repository](https:/
 * [How to load an Iceberg table directly from S3]({% link docs/preview/guides/network_cloud_storage/s3_iceberg_import.md %})
 * [How to connect to Amazon S3 Tables]({% link docs/preview/core_extensions/iceberg/amazon_s3_tables.md %})
 * [How to connect to Amazon SageMaker Lakehouse (AWS Glue)]({% link docs/preview/core_extensions/iceberg/amazon_sagemaker_lakehouse.md %})
+* [How to share a DuckDB database that only stores views]({% link docs/preview/guides/network_cloud_storage/duckdb_views_only.md %})
 
 ### JSON Files
 

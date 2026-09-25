@@ -1606,6 +1606,10 @@
                   "url": "duckdb_over_https_or_s3"
                 },
                 {
+                  "page": "Share a Views-Only Database",
+                  "url": "duckdb_views_only"
+                },
+                {
                   "page": "Fastly Object Storage Import",
                   "url": "fastly_object_storage_import"
                 },
