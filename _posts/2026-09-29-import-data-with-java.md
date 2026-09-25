@@ -1,18 +1,18 @@
 ---
 layout: post
 title: "Importing Data using Java Table Functions"
-author: "John Nadar, Geertjan Wielenga, Alex Kasko"
+author: "Guest Author, Geertjan Wielenga, Alex Kasko"
 excerpt: "When the analytics screen running on our main operational database got too slow, we moved a year of data into DuckDB on the same server. Getting the data in was the hard part. This is the story of every method we tried, and why a table function written in pure Java is the one we shipped."
 tags: ["using DuckDB"]
 thumb: "/images/blog/thumbs/mongodb.svg"
 image: "/images/blog/thumbs/mongodb.png"
 ---
 
-> Guest blog post by [John Nadar](https://github.com/jonadar98).
+> Guest blog post by a DuckDB user.
 
 ## The Analytics Screen Problem
 
-At the company where I work, we store vulnerability data for our clients as a collection of JSON documents in MongoDB. Initially, our analytics screen performed well, but as our data volume increased, response times began to slow. For many months we did a lot of query optimization, restructuring, index additions, and saw significant improvement. However, execution times for certain scenarios remained in the tens of seconds, for example, when returning counts of closed/open vulnerabilities or when getting the top 10 most vulnerable business units for last six months. The main issue was in our MS Excel export feature which was taking 2-3 minutes for 50,000 records, and performance was often inconsistent. So we needed to find an alternative.
+At the company where I work, we store vulnerability data for our clients as a collection of documents in MongoDB. Initially, our analytics screen performed well, but as our data volume increased, response times began to slow. For many months we did a lot of query optimization, restructuring, index additions, and saw significant improvement. However, execution times for certain scenarios remained in the tens of seconds, for example, when returning counts of closed/open vulnerabilities or when getting the top 10 most vulnerable business units for last six months. The main issue was in our MS Excel export feature which was taking 2-3 minutes for 50,000 records, and performance was often inconsistent. So we needed to find an alternative.
 
 The plan was to import one year record into an alternative database and run analytical queries on it. The requirements were to run all the queries under one second or less and export 50,000 records in Excel format under ten seconds. Anything more than that would be handled in background.
 
