@@ -257,6 +257,14 @@ The following statement returns information on the metadata store (`block_id`, `
 PRAGMA metadata_info;
 ```
 
+#### Extension Versions
+
+The following statement returns the name, version, and install mode of each loaded extension (`extension_name`, `extension_version`, `install_mode`, and `installed_from`):
+
+```sql
+PRAGMA extension_versions;
+```
+
 ## Progress Bar
 
 Show progress bar when running queries:
