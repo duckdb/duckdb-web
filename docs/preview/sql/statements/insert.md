@@ -215,6 +215,8 @@ INSERT INTO tbl VALUES (1, 42);
 INSERT INTO tbl VALUES (1, 52), (1, 62) ON CONFLICT DO UPDATE SET j = EXCLUDED.j;
 ```
 
+> Warning When a single `INSERT` statement contains multiple to-be-inserted rows that share the same conflict target, DuckDB applies only one update per conflicting key, and the row that wins is not guaranteed to be the last one in insertion order. In the example above, `j` ends up as `52` (the first of the two conflicting rows) rather than `62`. If you need last-writer-wins semantics, deduplicate the input before inserting, for example by keeping only the last row per key with a [window function]({% link docs/preview/sql/functions/window_functions.md %}).
+
 #### Examples
 
 An example using `DO UPDATE` is the following:
