@@ -82,6 +82,19 @@ When not specified, the default scope for the configuration option is used. For 
 
 > `GLOBAL` settings apply to the current DuckDB instance. They are not written to the database file or persisted across DuckDB instances. If all connections to an instance are closed and a new instance is started, configuration options use their defaults unless they are set again.
 
+For example, the `TimeZone` option has a default scope of `GLOBAL`, so the following two statements are equivalent, and both change the time zone for every session connected to the instance:
+
+```sql
+SET TimeZone = 'UTC';
+SET GLOBAL TimeZone = 'UTC';
+```
+
+To change the time zone for the current session only, without affecting other sessions on the same instance, use the `SESSION` scope explicitly:
+
+```sql
+SET SESSION TimeZone = 'UTC';
+```
+
 ## Configuration
 
 See the [Configuration]({% link docs/preview/configuration/overview.md %}) page for the full list of configuration options.
