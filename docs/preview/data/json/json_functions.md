@@ -360,6 +360,8 @@ SELECT json_structure('["duck", {"family": "anatidae"}]');
 ["JSON"]
 ```
 
+> Because JSON has no native temporal or UUID types, `json_structure` reports `DATE`, `TIME`, `TIMESTAMP`, and `UUID` values as `VARCHAR`, since that is how they are represented in JSON. If you feed this structure back into [`from_json`](#transforming-json-to-nested-types), these columns are produced as `VARCHAR`. To recover the original types, replace the relevant `"VARCHAR"` entries in the structure with the desired type name, for example `"DATE"`.
+
 ```sql
 SELECT json_contains('{"key": "value"}', '"value"');
 ```
