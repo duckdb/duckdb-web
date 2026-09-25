@@ -27,6 +27,16 @@ SELECT count(*)
 FROM 'https://domain.tld/file.parquet';
 ```
 
+DuckDB's own [database format]({% link docs/preview/internals/storage.md %}) supports partial reading just as well as Parquet. Because the format is block-based and stores per-column and per-row-group statistics, DuckDB uses HTTP range requests to fetch only the blocks required by a query when a remote database file is attached read-only:
+
+```sql
+ATTACH 'https://domain.tld/file.duckdb' AS db (READ_ONLY);
+SELECT column_a
+FROM db.tbl;
+```
+
+As with Parquet, queries that only need the metadata, such as `count(*)`, do not read any table data.
+
 ## Scanning Multiple Files
 
 Scanning multiple files over HTTP(S) is also supported:
