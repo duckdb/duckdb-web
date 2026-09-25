@@ -32,6 +32,7 @@ The table below shows the available scalar functions for `INTERVAL` types.
 | [`datepart(part, interval)`](#datepartpart-interval) | Alias of `date_part`. |
 | [`extract(part FROM interval)`](#extractpart-from-interval) | Alias of `date_part`. |
 | [`epoch(interval)`](#epochinterval) | Get total number of seconds, as double precision floating point number, in interval. |
+| [`normalized_interval(interval)`](#normalized_intervalinterval) | Normalizes an interval so that units that overflow their range are carried over into the next larger unit. |
 | [`to_centuries(integer)`](#to_centuriesinteger) | Construct a century interval. |
 | [`to_days(integer)`](#to_daysinteger) | Construct a day interval. |
 | [`to_decades(integer)`](#to_decadesinteger) | Construct a decade interval. |
@@ -79,6 +80,14 @@ The table below shows the available scalar functions for `INTERVAL` types.
 | **Description** | Get total number of seconds, as double precision floating point number, in interval. |
 | **Example** | `epoch(INTERVAL 5 HOUR)` |
 | **Result** | `18000.0` |
+
+#### `normalized_interval(interval)`
+
+<div class="nostroke_table"></div>
+
+| **Description** | Normalizes an interval so that units that overflow their range are carried over into the next larger unit. |
+| **Example** | `normalized_interval(INTERVAL '30 days')` |
+| **Result** | `INTERVAL 1 MONTH` |
 
 #### `to_centuries(integer)`
 
