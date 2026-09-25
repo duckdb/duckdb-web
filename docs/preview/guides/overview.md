@@ -30,7 +30,7 @@ To find a list of these tools, check out the [Awesome DuckDB repository](https:/
 
 ### HTTP(S), S3 and GCP
 
-* [How to authenticate to S3 / AWS]({% link docs/preview/core_extensions/aws.md %}#configuration-and-authentication)
+* [How to authenticate to S3 / AWS]({% link docs/preview/core_extensions/httpfs/authentication.md %})
 * [How to load a Parquet file directly from HTTP(S)]({% link docs/preview/guides/network_cloud_storage/http_import.md %})
 * [How to load a Parquet file directly from S3]({% link docs/preview/guides/network_cloud_storage/s3_import.md %})
 * [How to export a Parquet file to S3]({% link docs/preview/guides/network_cloud_storage/s3_export.md %})
@@ -40,6 +40,7 @@ To find a list of these tools, check out the [Awesome DuckDB repository](https:/
 * [How to load an Iceberg table directly from S3]({% link docs/preview/guides/network_cloud_storage/s3_iceberg_import.md %})
 * [How to connect to Amazon S3 Tables]({% link docs/preview/core_extensions/iceberg/amazon_s3_tables.md %})
 * [How to connect to Amazon SageMaker Lakehouse (AWS Glue)]({% link docs/preview/core_extensions/iceberg/amazon_sagemaker_lakehouse.md %})
+* [How to share a DuckDB database that only stores views]({% link docs/preview/guides/network_cloud_storage/duckdb_views_only.md %})
 
 ### JSON Files
 

@@ -48,6 +48,8 @@ DuckDB Community extensions are conceptually similar to a package manager such a
 
 ## Security Considerations for Using Community Extensions
 
+> Warning Community extensions are contributed by third parties. They are not written, audited, or maintained by Duck Labs, and they run with the same privileges as DuckDB itself, including access to your data, filesystem, and network. Signing proves only that an extension was built by the Community Extension CI from the published source. It does not certify that the code is safe or free of bugs. Install and load community extensions only if you trust their author and source.
+
 DuckDB Community Extensions are signed, so that on LOAD a check is performed to prove a given extensions has been built by the Community Extension CI.
 
 For more information on extensions and how to use them, check the [“Securing Extensions”]({% link docs/current/operations_manual/securing_duckdb/securing_extensions.md %}) and [“Installing Extensions”]({% link docs/current/extensions/installing_extensions.md %}) pages.

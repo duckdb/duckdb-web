@@ -102,3 +102,5 @@ hello
 42
 [{"world":84}]
 ```
+
+> The `-init` script (or the default `~/.duckdbrc` when `-init` is not given) is an exception: it always runs at startup, before any `-cmd`, `-c`, or `-s` command, regardless of where it appears on the command line. You therefore cannot use a `-cmd` argument to inject configuration that takes effect before the init script runs. To set configuration that the init script depends on, place it at the top of the init script itself.

@@ -75,7 +75,7 @@ network drives such as [SMB](https://en.wikipedia.org/wiki/Server_Message_Block)
 [Samba](https://en.wikipedia.org/wiki/Samba_(software)).
 Based on user reports, running read-write workloads on network-attached storage can result in slow and unpredictable performance,
 as well as spurious errors caused by the underlying file system.
-Instead of using DuckDB's native database format, consider using the [DuckLake lakehouse format](https://ducklake.select/).
+Instead of using DuckDB's native database format in this setting, consider using the [DuckLake lakehouse format]({% link docs/preview/core_extensions/ducklake.md %}). DuckLake keeps the data in immutable Parquet files on object storage and the transactional metadata in a separate catalog database, which avoids the concurrent read-write access patterns on a single large file that network-attached storage handles poorly.
 
 ## Operating System
 

@@ -26,6 +26,21 @@ If you are on a development version of DuckDB, that is any version for which `PR
 
 When in doubt, consider raising an issue in [`duckdb/duckdb`](https://github.com/duckdb/duckdb).
 
+## `HTTP 451` Errors
+
+An `HTTP 451` (“Unavailable For Legal Reasons”) error when installing an extension means that the extension repository is not served to your location:
+
+```console
+HTTP Error:
+Failed to download extension "..." at URL "https://extensions.duckdb.org/..." (HTTP 451)
+```
+
+The default extension repository is distributed through a content delivery network that restricts access from certain regions for legal reasons, so the same `INSTALL` command can succeed from one network and fail from another. To work around this, you can:
+
+* Connect from a network in a non-restricted region (for example, through a VPN).
+* [Download the extension manually](#manual-process-to-download-extensions-via-the-browser) from an allowed location and install it from the local file.
+* Install from a different [extension repository]({% link docs/preview/extensions/installing_extensions.md %}#extension-repositories), such as a self-hosted mirror.
+
 ## Manual Process to Download Extensions via the Browser
 
 To check if an extension is available, consider trying to download the relevant extension resource, for example via your browser visiting <https://extensions.duckdb.org/v1.4.4/osx_arm64/spatial.duckdb_extension.gz> or any other link that has been provided. Note that `http://` has been deprecated in favor of `https://`.

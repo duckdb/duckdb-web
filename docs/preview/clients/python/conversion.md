@@ -254,6 +254,8 @@ DuckDB's Python client provides multiple additional methods that can be used to 
 
 > Deprecated `fetch_arrow_table()` and `fetch_record_batch()` are deprecated. Use `to_arrow_table()` and `to_arrow_reader()` instead.
 
+DuckDB has a single `INTERVAL` type that stores months, days, and microseconds, so it maps onto Arrow's `month_day_nano_interval` type. On import, every Arrow interval and duration type, including `duration[s]`, `duration[ms]`, `duration[us]`, and `duration[ns]`, is read into that one `INTERVAL` type. As a result, a `duration` column that is passed through DuckDB and read back as Arrow is returned as a `month_day_nano_interval` rather than as its original `duration` type. This is expected: the resolution and unit of the original Arrow type are not preserved.
+
 ### Polars
 
 * `pl()` fetches the data as a Polars DataFrame

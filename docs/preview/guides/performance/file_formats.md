@@ -97,3 +97,17 @@ Then, you can adjust `read_csv` command, by e.g., applying [filename expansion (
 ```sql
 FROM read_csv('part-*.csv', auto_detect=false, delim=',', quote='"', escape='"', new_line='\n', skip=0, header=true, columns={'hello': 'BIGINT', 'world': 'VARCHAR'});
 ```
+
+## Reducing Storage Size with DuckLake
+
+Storing data in [DuckLake]({% link docs/preview/core_extensions/ducklake.md %}) can significantly reduce storage size compared to CSV files or even DuckDB's native format, because DuckLake writes the data as Parquet files whose compression settings you control. Before copying data into a DuckLake catalog, set the Parquet compression options on the attached catalog:
+
+```sql
+ATTACH 'ducklake:metadata.ducklake' AS d;
+CALL d.set_option('parquet_compression', 'zstd');
+CALL d.set_option('parquet_version', 2);
+CALL d.set_option('parquet_compression_level', 22);
+COPY FROM DATABASE services TO d;
+```
+
+Using a heavyweight `zstd` compression level trades a longer write time for smaller files, so it is most beneficial for data that is written once and read many times.

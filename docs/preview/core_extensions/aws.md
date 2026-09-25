@@ -20,6 +20,8 @@ LOAD aws;
 
 ## Configuration and Authentication
 
+> Tip For an overview of the available methods and guidance on which one to use, see the [S3 and AWS Authentication]({% link docs/preview/core_extensions/httpfs/authentication.md %}) page.
+
 The preferred way to configure and authenticate to AWS S3 endpoints is to use [secrets]({% link docs/preview/sql/statements/create_secret.md %}).
 There are two S3 secret providers:
 
@@ -120,7 +122,17 @@ CREATE OR REPLACE SECRET secret (
 
 ### Single Sign-On (SSO)
 
-DuckDB can use credentials obtained through [AWS IAM Identity Center (SSO)](https://aws.amazon.com/what-is/sso/). First authenticate on the command line (`aws sso login --profile ⟨my-sso-profile⟩`), then create a secret using the `sso` chain:
+DuckDB can use credentials obtained through [AWS IAM Identity Center](https://aws.amazon.com/what-is/sso/) (formerly AWS SSO). DuckDB does not perform the sign-in itself: it reads the short-lived token that the [AWS CLI](https://docs.aws.amazon.com/cli/latest/userguide/cli-configure-sso.html) caches after you sign in. The setup therefore has three steps.
+
+First, configure an SSO-enabled profile in `~/.aws/config`, either by running `aws configure sso` or by adding an `sso_session` and `sso_account_id` to the profile manually.
+
+Second, sign in from the command line, which opens a browser to complete authentication and caches a temporary token locally:
+
+```batch
+aws sso login --profile ⟨my-sso-profile⟩
+```
+
+Third, create a secret that uses the `sso` chain and points at that profile. DuckDB then picks up the cached token automatically:
 
 ```sql
 CREATE OR REPLACE SECRET secret (
@@ -130,6 +142,8 @@ CREATE OR REPLACE SECRET secret (
     PROFILE '⟨my-sso-profile⟩'
 );
 ```
+
+The token expires after the SSO session's configured lifetime. When it does, run `aws sso login` again. You do not need to recreate the secret.
 
 ### HTTP Proxy
 

@@ -88,9 +88,8 @@ SELECT 'abc' SIMILAR TO '(b|c).*';   -- false
 SELECT 'abc' NOT SIMILAR TO 'abc';   -- false
 ```
 
-> In PostgreSQL, `~` is equivalent to `SIMILAR TO`
-> and `!~` is equivalent to `NOT SIMILAR TO`.
-> In DuckDB, these equivalences do not hold currently,
+> In PostgreSQL, the `~` and `!~` operators perform POSIX regular expression matching, not `SIMILAR TO` matching.
+> DuckDB follows the same partial-matching semantics by default,
 > see the [PostgreSQL compatibility page]({% link docs/preview/sql/dialect/postgresql_compatibility.md %}).
 
 ## Globbing
@@ -202,9 +201,13 @@ README.md
 DuckDB's regular expression support is documented on the [Regular Expressions page]({% link docs/preview/sql/functions/regular_expressions.md %}).
 DuckDB supports some PostgreSQL-style operators for regular expression matching:
 
-| PostgreSQL-style | Equivalent expression                                                                                    |
-| :--------------- | :------------------------------------------------------------------------------------------------------- |
-| `~`              | [`regexp_full_match`]({% link docs/preview/sql/functions/text.md %}#regexp_full_matchstring-regex)       |
-| `!~`             | `NOT` [`regexp_full_match`]({% link docs/preview/sql/functions/text.md %}#regexp_full_matchstring-regex) |
-| `~*`             | (not supported)                                                                                          |
-| `!~*`            | (not supported)                                                                                          |
+| PostgreSQL-style | Equivalent expression                                                                                                        |
+| :--------------- | :--------------------------------------------------------------------------------------------------------------------------- |
+| `~`              | [`regexp_matches`]({% link docs/preview/sql/functions/text.md %}#regexp_matchesstring-regex-options)                         |
+| `!~`             | `NOT` [`regexp_matches`]({% link docs/preview/sql/functions/text.md %}#regexp_matchesstring-regex-options)                   |
+| `~*`             | [`regexp_matches`]({% link docs/preview/sql/functions/text.md %}#regexp_matchesstring-regex-options) with case-insensitive matching       |
+| `!~*`            | `NOT` [`regexp_matches`]({% link docs/preview/sql/functions/text.md %}#regexp_matchesstring-regex-options) with case-insensitive matching |
+
+By default, these operators perform partial matching, following PostgreSQL's semantics.
+This is controlled by the deprecated `regex_match_operator_semantics` setting.
+Setting it to `full` restores the legacy behavior in which `~` and `!~` map to [`regexp_full_match`]({% link docs/preview/sql/functions/text.md %}#regexp_full_matchstring-regex), but this setting is deprecated and will be removed in a future release.
