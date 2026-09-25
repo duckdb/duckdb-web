@@ -3,6 +3,22 @@ layout: docu
 title: Tuning Workloads
 ---
 
+DuckDB aims to perform well out of the box, so most workloads do not require any tuning.
+When tuning is worthwhile, there is no single configuration or magic number that is optimal for every workload: the right settings depend on what you are optimizing for and on the characteristics of your data, hardware, and environment.
+Rather than copying a fixed value, identify which of the concerns below match your workload, apply the corresponding change, and measure its effect.
+
+| If your priority is… | Consider | Covered in |
+|:--|:--|:--|
+| Loading or exporting data larger than memory | Disabling `preserve_insertion_order` | [The `preserve_insertion_order` option](#the-preserve_insertion_order-option) |
+| Using all available cores | Row group sizing and the `threads` setting | [Parallelism](#parallelism-multi-core-processing) |
+| Processing data larger than memory | Configuring the spill-to-disk directory | [Larger-than-memory workloads](#larger-than-memory-workloads-out-of-core-processing) |
+| Diagnosing a slow query | Inspecting the query plan | [Profiling](#profiling) |
+| Running the same query many times with different parameters | Prepared statements | [Prepared statements](#prepared-statements) |
+| Reading files over a slow or unreliable network | Raising `threads` and minimizing IO | [Querying remote files](#querying-remote-files) |
+| Running many small queries | Reusing a single connection | [Best practices for using connections](#best-practices-for-using-connections) |
+
+The rest of this page covers each of these areas in detail. See the [configuration reference]({% link docs/preview/configuration/overview.md %}) for the full list of available settings.
+
 ## The `preserve_insertion_order` Option
 
 When importing or exporting datasets (from/to the Parquet or CSV formats), which are much larger than the available memory, an out of memory error may occur:
