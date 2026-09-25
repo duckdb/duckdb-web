@@ -1230,6 +1230,10 @@
                   "url": "s3api"
                 },
                 {
+                  "page": "S3 and AWS Authentication",
+                  "url": "authentication"
+                },
+                {
                   "page": "Legacy Authentication Scheme for S3 API",
                   "url": "s3api_legacy_authentication"
                 }
