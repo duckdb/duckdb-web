@@ -82,3 +82,5 @@ To change this setting, use:
 ```sql
 SET preserve_insertion_order = false;
 ```
+
+Disabling this setting can reduce memory usage when importing or exporting datasets larger than memory. See the [`preserve_insertion_order` option in the workload tuning guide]({% link docs/preview/guides/performance/how_to_tune_workloads.md %}#the-preserve_insertion_order-option) for details.

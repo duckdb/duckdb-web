@@ -18,6 +18,7 @@ SET preserve_insertion_order = false;
 ```
 
 This allows the system to re-order any results that do not contain `ORDER BY` clauses, potentially reducing memory usage.
+For details on which operations preserve row order and which do not, see the [Order Preservation page]({% link docs/preview/sql/dialect/order_preservation.md %}).
 
 ## Parallelism (Multi-Core Processing)
 
