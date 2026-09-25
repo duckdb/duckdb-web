@@ -56,6 +56,36 @@ The results below show that joining on `BIGINT` columns is approx. 1.8× faster 
 
 > Bestpractice Avoid representing numeric values as strings, especially if you intend to perform e.g., join operations on them.
 
+### Encoding Repeated Strings as a Dimension Table
+
+When a wide string column has only a few distinct values that repeat across many rows, you can replace it with a small integer key that references a separate _dimension table_. This is the same idea as a star schema, and it keeps the large _fact table_ narrow, which speeds up grouping and joining. (For a fixed, known set of values, the [`ENUM` type]({% link docs/preview/sql/data_types/enum.md %}) achieves a similar effect automatically.)
+
+First, build a dimension table that assigns an integer key to each distinct value. Sorting the values keeps the keys stable and improves compression:
+
+```sql
+CREATE OR REPLACE TABLE dim_table AS
+    SELECT
+        field_name,
+        (row_number() OVER (ORDER BY field_name))::INTEGER AS field_pk
+    FROM (SELECT DISTINCT field_name FROM fact_table);
+```
+
+Then run the aggregation using the integer keys and join the strings back in only at the end, once the result set is small:
+
+```sql
+WITH rollup AS (
+    SELECT field_pk, count(*) AS count
+    FROM fact_table
+    NATURAL JOIN dim_table
+    GROUP BY ALL
+)
+SELECT rollup.* EXCLUDE (field_pk), field_name
+FROM rollup
+NATURAL JOIN dim_table;
+```
+
+> Bestpractice DuckDB already applies [dictionary encoding]({% link docs/preview/internals/storage.md %}) to string columns in storage, so this technique mainly pays off for query-heavy workloads that repeatedly group or join on a low-cardinality string column.
+
 ## Constraints
 
 DuckDB allows defining [constraints]({% link docs/preview/sql/constraints.md %}) such as `UNIQUE`, `PRIMARY KEY`, and `FOREIGN KEY`. These constraints can be beneficial for ensuring data integrity but they have a negative effect on load performance as they necessitate building indexes and performing checks. Moreover, they _very rarely improve the performance of queries_ as DuckDB does not rely on these indexes for join and aggregation operators (see [indexing]({% link docs/preview/guides/performance/indexing.md %}) for more details).
