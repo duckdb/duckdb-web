@@ -234,6 +234,20 @@ SELECT
 | ---- | ------- |
 | true | false   |
 
+Table macros can be overloaded in the same way. When an implementation is defined using a `SELECT` statement, wrap that statement in parentheses:
+
+```sql
+CREATE MACRO tbl_range
+    (n) AS TABLE (SELECT * FROM range(n)),
+    (start, stop) AS TABLE (SELECT * FROM range(start, stop));
+```
+
+```sql
+SELECT count(*) AS one_arg FROM tbl_range(3);
+SELECT count(*) AS two_args FROM tbl_range(3, 8);
+```
+
+The first call returns `3`, the second returns `5`.
 
 ## Syntax
 
