@@ -120,6 +120,14 @@ Alternatively, pin a version at attach time:
 ATTACH 's3://my-bucket/my-delta-table' AS my_table (TYPE delta, VERSION 5);
 ```
 
+A table attached at a version is read-only: an `INSERT` into it fails.
+
+`delta_scan` takes the version as a named parameter:
+
+```sql
+SELECT * FROM delta_scan('s3://my-bucket/my-delta-table', version => 5);
+```
+
 ### Checkpointing
 
 To compact the Delta log of an attached table into a checkpoint file:
@@ -152,7 +160,7 @@ When attaching a Delta table you can pass the following options to `ATTACH`:
 
 | Option | Type | Default | Description |
 | --- | --- | --- | --- |
-| `VERSION` | `UBIGINT` | latest | Pin the attached table to a specific [table version](#time-travel). |
+| `VERSION` | `UBIGINT` | latest | Pin the attached table to a specific [table version](#time-travel). The attached table is read-only. |
 | `PIN_SNAPSHOT` | `BOOLEAN` | `false` | Resolve the table snapshot once at attach time and reuse it, rather than re-resolving the latest version per query. |
 | `PUSHDOWN_PARTITION_INFO` | `BOOLEAN` | `true` | Push down partition information so that whole files can be skipped based on partition values. |
 | `PUSHDOWN_FILTERS` | `VARCHAR` | `all` | Filter pushdown mode for file skipping. One of `none`, `all`, `constant_only`, `dynamic_only`. |
