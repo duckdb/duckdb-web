@@ -29,7 +29,8 @@ If we are reading from a file in which we cannot jump – such as a `.gz` compre
 ## `sniff_csv` Function
 
 It is possible to run the CSV sniffer as a separate step using the `sniff_csv(filename)` function, which returns the detected CSV properties as a table with a single row.
-The `sniff_csv` function accepts an optional `sample_size` parameter to configure the number of rows sampled.
+
+Besides the commonly used `sample_size` parameter, which configures the number of rows sampled, `sniff_csv` accepts the same named parameters as the [`read_csv` function]({% link docs/preview/data/csv/overview.md %}#parameters). Any parameter you pass is treated as fixed: the sniffer uses the value you provide and only detects the properties you did not specify. For example, passing `ignore_errors = true` lets the sniffer skip malformed lines while it detects the dialect. The `auto_detect` parameter must be `true` (its default) for `sniff_csv`; passing `auto_detect = false` results in an error. In addition, `sniff_csv` accepts a `force_match` (`BOOLEAN`) parameter that is not available in `read_csv`.
 
 ```sql
 FROM sniff_csv('my_file.csv');
