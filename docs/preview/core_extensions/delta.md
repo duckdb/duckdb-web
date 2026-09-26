@@ -303,6 +303,11 @@ The `delta` extension supports:
 - blind appends (`INSERT INTO`)
 - cloud storage (AWS S3, Azure, GCS) with secrets
 
+## Limitations
+
+* Tables with a column of one of Delta's interval types (`interval year to month` or `interval day to second`), or of type `geometry` or `geography`, cannot be read. The scan fails with an error rather than leaving the column out.
+* Writes to a table that declares column defaults are refused, because DuckDB does not fill in the defaults.
+
 ## Supported Platforms
 
 The `delta` extension currently only supports the following platforms:
