@@ -33,6 +33,14 @@ FROM (SELECT unnest({'a': 42, 'b': {'a': 88, 'b': 99}}, recursive := true));
 |---:|----:|---:|
 | 42 | 88  | 99 |
 
+## Identifier Resolution
+
+Identifiers can be *qualified* to remove ambiguity. A fully qualified column reference has the form `⟨database⟩.⟨schema⟩.⟨table⟩.⟨column⟩`, and any leading part can be omitted when the remaining name is unambiguous. Table names can likewise be qualified as `⟨database⟩.⟨schema⟩.⟨table⟩`.
+
+When a name is not fully qualified, DuckDB resolves it using the catalog search path. The search path is controlled by the `schema` and `search_path` [configuration options]({% link docs/preview/configuration/overview.md %}#local-configuration-options): `schema` sets a single default `⟨catalog⟩.⟨schema⟩` entry, while `search_path` sets a comma-separated list of such entries that are searched in order. Both options write to the same catalog search path, and each entry may be a bare schema or a `⟨catalog⟩.⟨schema⟩` pair.
+
+For a detailed description of how database and schema names are resolved, including the default database and schema and how to change the search path, see [Name Qualification]({% link docs/preview/sql/statements/attach.md %}#name-qualification) on the `ATTACH` page.
+
 ## Database Names
 
 Database names are subject to the rules for [identifiers](#identifiers).
