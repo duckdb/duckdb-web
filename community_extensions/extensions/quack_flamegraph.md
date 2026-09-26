@@ -63,8 +63,8 @@ docs:
 
 extension_star_count: 1
 extension_star_count_pretty: 1
-extension_download_count: 576
-extension_download_count_pretty: 576
+extension_download_count: 640
+extension_download_count_pretty: 640
 image: '/images/community_extensions/social_preview/preview_community_extension_quack_flamegraph.png'
 layout: community_extension_doc
 ---

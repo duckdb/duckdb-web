@@ -60,10 +60,10 @@ docs:
     parsers memory-map native files and table functions produce vectorized
     DuckDB output.
 
-extension_star_count: 8
-extension_star_count_pretty: 8
-extension_download_count: 577
-extension_download_count_pretty: 577
+extension_star_count: 9
+extension_star_count_pretty: 9
+extension_download_count: 854
+extension_download_count_pretty: 854
 image: '/images/community_extensions/social_preview/preview_community_extension_motorsport_telemetry.png'
 layout: community_extension_doc
 ---

@@ -104,8 +104,8 @@ docs:
 
 extension_star_count: 8
 extension_star_count_pretty: 8
-extension_download_count: 575
-extension_download_count_pretty: 575
+extension_download_count: 613
+extension_download_count_pretty: 613
 image: '/images/community_extensions/social_preview/preview_community_extension_quackhole.png'
 layout: community_extension_doc
 ---

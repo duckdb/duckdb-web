@@ -8,7 +8,7 @@ excerpt: |
 extension:
   name: func_apply
   description: Dynamic function invocation - call any scalar function or macro by name at runtime
-  version: 0.3.0
+  version: 0.3.2
   language: C++
   build: cmake
   license: MIT
@@ -16,13 +16,16 @@ extension:
     - teaguesterling
 repo:
   github: teaguesterling/duckdb_func_apply
+  ref: ba9851692caa74e37db9088ad0fab2dff0e13c60
+  # ref_next == ref (deliberate): validate the shipped release on DuckDB
+  # v2.0-cyanoptera (carries the v2.0 compat fixes) instead of skipping it.
+  ref_next: ba9851692caa74e37db9088ad0fab2dff0e13c60
   # andium (DuckDB v1.4.5 track) intentionally left at the pre-v0.2.0 commit:
   # v0.3.0, like v0.2.0 before it, is a DuckDB v1.5.4 tree and is not
   # build-verified against v1.4.5. The v0.2.0 security fix
   # (GHSA-55g5-vp25-phpg) is delivered on the v1.5.4 track via `ref`;
   # v1.4.5 users should move to the v1.5.4 track.
   andium: 2013ac345d6f19e61ee78cacae161eb272cf1837
-  ref: ed51705a1db83eb382423aff564fe8373c2322b7
 docs:
   hello_world: |
     -- Load the extension
@@ -119,8 +122,8 @@ docs:
 
 extension_star_count: 5
 extension_star_count_pretty: 5
-extension_download_count: 1433
-extension_download_count_pretty: 1.4k
+extension_download_count: 1203
+extension_download_count_pretty: 1.2k
 image: '/images/community_extensions/social_preview/preview_community_extension_func_apply.png'
 layout: community_extension_doc
 ---
@@ -146,28 +149,27 @@ LOAD {{ page.extension.name }};
 
 <div class="extension_functions_table"></div>
 
-|         function_name          | function_type | description | comment | examples |
-|--------------------------------|---------------|-------------|---------|----------|
-| apply_table                    | table         | NULL        | NULL    |          |
-| apply_table_with               | table         | NULL        | NULL    |          |
-| apply_with                     | scalar        | NULL        | NULL    |          |
-| func_apply_get_security_config | scalar        | NULL        | NULL    |          |
-| func_apply_lock_security       | scalar        | NULL        | NULL    |          |
-| func_apply_set_blacklist       | scalar        | NULL        | NULL    |          |
-| func_apply_set_block_default   | scalar        | NULL        | NULL    |          |
-| func_apply_set_on_block        | scalar        | NULL        | NULL    |          |
-| func_apply_set_security_mode   | scalar        | NULL        | NULL    |          |
-| func_apply_set_validator       | scalar        | NULL        | NULL    |          |
-| func_apply_set_whitelist       | scalar        | NULL        | NULL    |          |
-| function_exists                | scalar        | NULL        | NULL    |          |
+|         function_name          | function_type |                                            description                                            | comment |                        examples                        |
+|--------------------------------|---------------|---------------------------------------------------------------------------------------------------|---------|--------------------------------------------------------|
+| apply                          | scalar        | NULL                                                                                              | NULL    |                                                        |
+| apply_table                    | table         | Dynamically invoke a table function by name with variable arguments.                              | NULL    | [SELECT * FROM apply_table('range', 5)]                |
+| apply_table_with               | table         | Dynamically invoke a table function with structured args and kwargs.                              | NULL    | [SELECT * FROM apply_table_with('range', args := [5])] |
+| apply_with                     | scalar        | Dynamically invoke a scalar function with a list of positional args and struct of kwargs.         | NULL    | [apply_with('upper', args := ['hello'])]               |
+| func_apply_get_security_config | scalar        | Get the current security configuration as a JSON string.                                          | NULL    | [func_apply_get_security_config()]                     |
+| func_apply_lock_security       | scalar        | Lock the current security configuration to prevent further modifications.                         | NULL    | [func_apply_lock_security()]                           |
+| func_apply_set_blacklist       | scalar        | Set the list of disallowed functions in blacklist security mode.                                  | NULL    | [func_apply_set_blacklist(['system', 'read_csv'])]     |
+| func_apply_set_block_default   | scalar        | Set the default return value when a blocked function is encountered.                              | NULL    | [func_apply_set_block_default('BLOCKED')]              |
+| func_apply_set_on_block        | scalar        | Set behavior when a blocked function is called ('error', 'null', or 'default').                   | NULL    | [func_apply_set_on_block('error')]                     |
+| func_apply_set_security_mode   | scalar        | Set the security mode for dynamic function execution ('permissive', 'whitelist', or 'blacklist'). | NULL    | [func_apply_set_security_mode('permissive')]           |
+| func_apply_set_validator       | scalar        | Set a custom SQL validator function to check candidate function invocations.                      | NULL    | [func_apply_set_validator('my_validator')]             |
+| func_apply_set_whitelist       | scalar        | Set the list of allowed functions in whitelist security mode.                                     | NULL    | [func_apply_set_whitelist(['upper', 'lower', 'abs'])]  |
+| function_exists                | scalar        | Check if a function exists in the catalog.                                                        | NULL    | [function_exists('upper')]                             |
 
 ### Overloaded Functions
 
 <div class="extension_functions_table"></div>
 
-| function_name | function_type |                                                                                   description                                                                                    | comment |               examples               |
-|---------------|---------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|---------|--------------------------------------|
-| apply         | scalar        | Returns a list that is the result of applying the `lambda` function to each element of the input `list`. The return type is defined by the return type of the `lambda` function. | NULL    | [apply([1, 2, 3], lambda x : x + 1)] |
+This extension does not add any function overloads.
 
 ### Added Types
 

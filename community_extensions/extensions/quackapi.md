@@ -22,7 +22,7 @@ extension:
     FastAPI-class HTTP framework inside DuckDB — CREATE ROUTE turns SQL into
     typed, validated endpoints; one process is DB + HTTP (+ PDF/renderer via
     companion extensions).
-  version: 0.1.2
+  version: 0.1.3
   language: C++
   build: cmake
   license: MIT
@@ -36,7 +36,7 @@ extension:
 repo:
   github: asubbarao/quackapi
   # Pin to the packaging commit SHA (set by release engineer; never a branch).
-  ref: 398d42cd41d3fb494420063d60b5aa367343d271
+  ref: ed4552bb201d4fa9bef933b3f96829304e2d8c46
 
 docs:
   hello_world: |
@@ -155,8 +155,8 @@ docs:
 
 extension_star_count: 4
 extension_star_count_pretty: 4
-extension_download_count: 991
-extension_download_count_pretty: 991
+extension_download_count: 898
+extension_download_count_pretty: 898
 image: '/images/community_extensions/social_preview/preview_community_extension_quackapi.png'
 layout: community_extension_doc
 ---
@@ -182,37 +182,49 @@ LOAD {{ page.extension.name }};
 
 <div class="extension_functions_table"></div>
 
-|       function_name       | function_type | description | comment | examples |
-|---------------------------|---------------|-------------|---------|----------|
-| quack_from_express        | table         | NULL        | NULL    |          |
-| quack_from_express_models | table         | NULL        | NULL    |          |
-| quack_from_fastapi        | table         | NULL        | NULL    |          |
-| quack_from_fastapi_models | table         | NULL        | NULL    |          |
-| quack_from_gin            | table         | NULL        | NULL    |          |
-| quack_from_gin_models     | table         | NULL        | NULL    |          |
-| quack_from_rails          | table         | NULL        | NULL    |          |
-| quack_from_rails_models   | table         | NULL        | NULL    |          |
-| quack_from_x_sql          | scalar        | NULL        | NULL    |          |
-| quack_from_x_sql_relpath  | scalar        | NULL        | NULL    |          |
-| quackapi_ack              | scalar        | NULL        | NULL    |          |
-| quackapi_add_api_key      | table         | NULL        | NULL    |          |
-| quackapi_authentication   | scalar        | NULL        | NULL    |          |
-| quackapi_authorization    | scalar        | NULL        | NULL    |          |
-| quackapi_auths            | table         | NULL        | NULL    |          |
-| quackapi_dequeue          | table         | NULL        | NULL    |          |
-| quackapi_enqueue          | scalar        | NULL        | NULL    |          |
-| quackapi_groups           | table         | NULL        | NULL    |          |
-| quackapi_http_util_name   | scalar        | NULL        | NULL    |          |
-| quackapi_nack             | scalar        | NULL        | NULL    |          |
-| quackapi_policies         | table         | NULL        | NULL    |          |
-| quackapi_queues           | table         | NULL        | NULL    |          |
-| quackapi_request          | table         | NULL        | NULL    |          |
-| quackapi_routes           | table         | NULL        | NULL    |          |
-| quackapi_serve            | table         | NULL        | NULL    |          |
-| quackapi_servers          | table         | NULL        | NULL    |          |
-| quackapi_stop             | table         | NULL        | NULL    |          |
-| quackapi_streams          | table         | NULL        | NULL    |          |
-| quackapi_verify_auth      | scalar        | NULL        | NULL    |          |
+|          function_name          | function_type | description | comment | examples |
+|---------------------------------|---------------|-------------|---------|----------|
+| quack_from_express              | table         | NULL        | NULL    |          |
+| quack_from_express_models       | table         | NULL        | NULL    |          |
+| quack_from_fastapi              | table         | NULL        | NULL    |          |
+| quack_from_fastapi_models       | table         | NULL        | NULL    |          |
+| quack_from_gin                  | table         | NULL        | NULL    |          |
+| quack_from_gin_models           | table         | NULL        | NULL    |          |
+| quack_from_rails                | table         | NULL        | NULL    |          |
+| quack_from_rails_models         | table         | NULL        | NULL    |          |
+| quack_from_x_sql                | scalar        | NULL        | NULL    |          |
+| quack_from_x_sql_relpath        | scalar        | NULL        | NULL    |          |
+| quackapi_ack                    | scalar        | NULL        | NULL    |          |
+| quackapi_add_api_key            | table         | NULL        | NULL    |          |
+| quackapi_apply_middleware       | table         | NULL        | NULL    |          |
+| quackapi_authentication         | scalar        | NULL        | NULL    |          |
+| quackapi_authorization          | scalar        | NULL        | NULL    |          |
+| quackapi_auths                  | table         | NULL        | NULL    |          |
+| quackapi_dequeue                | table         | NULL        | NULL    |          |
+| quackapi_enqueue                | scalar        | NULL        | NULL    |          |
+| quackapi_fetch                  | scalar        | NULL        | NULL    |          |
+| quackapi_fetch                  | table         | NULL        | NULL    |          |
+| quackapi_graphql_routes         | table         | NULL        | NULL    |          |
+| quackapi_graphql_tables         | table         | NULL        | NULL    |          |
+| quackapi_groups                 | table         | NULL        | NULL    |          |
+| quackapi_http_pool              | table         | NULL        | NULL    |          |
+| quackapi_http_util_name         | scalar        | NULL        | NULL    |          |
+| quackapi_last_write_timeout_sec | scalar        | NULL        | NULL    |          |
+| quackapi_middlewares            | table         | NULL        | NULL    |          |
+| quackapi_nack                   | scalar        | NULL        | NULL    |          |
+| quackapi_parallel_fetch         | table         | NULL        | NULL    |          |
+| quackapi_policies               | table         | NULL        | NULL    |          |
+| quackapi_post                   | scalar        | NULL        | NULL    |          |
+| quackapi_queues                 | table         | NULL        | NULL    |          |
+| quackapi_renew                  | scalar        | NULL        | NULL    |          |
+| quackapi_request                | table         | NULL        | NULL    |          |
+| quackapi_routes                 | table         | NULL        | NULL    |          |
+| quackapi_serve                  | table         | NULL        | NULL    |          |
+| quackapi_servers                | table         | NULL        | NULL    |          |
+| quackapi_stop                   | table         | NULL        | NULL    |          |
+| quackapi_streams                | table         | NULL        | NULL    |          |
+| quackapi_verify_auth            | scalar        | NULL        | NULL    |          |
+| quackapi_wait                   | table         | NULL        | NULL    |          |
 
 ### Overloaded Functions
 
@@ -235,8 +247,13 @@ This extension does not add any types.
 | quackapi_compression           | Enable Accept-Encoding response compression on quackapi_serve (zstd preferred, then gzip). Default true. Overridden by compression named parameter.                                                                                                                                                                                                 | BOOLEAN    | GLOBAL | []      |
 | quackapi_compression_min_bytes | Minimum response body size (bytes) before compression. Default 256. Overridden by compression_min_bytes named parameter.                                                                                                                                                                                                                            | BIGINT     | GLOBAL | []      |
 | quackapi_cors_origins          | CORS allowed origins for quackapi_serve (* or comma-separated list). Empty (default) disables CORS. Overridden by cors_origins named parameter.                                                                                                                                                                                                     | VARCHAR    | GLOBAL | []      |
+| quackapi_graphql_allow_all     | Explicit legacy opt-in to public GraphQL catalog exposure                                                                                                                                                                                                                                                                                           | BOOLEAN    | GLOBAL | []      |
 | quackapi_http_client           | Outbound HTTP client for httpfs/route fetches: auto\|curl\|httplib. Default auto prefers curl_httpfs (pool, HTTP/2, async) and falls back to httplib with http_client_reason on /healthz when unavailable. curl fails serve if curl_httpfs cannot INSTALL/LOAD. Overridden by http_client named parameter. Does not change the inbound HTTP server. | VARCHAR    | GLOBAL | []      |
 | quackapi_log_level             | Log verbosity for quackapi_serve: silent\|error\|warn\|info\|debug. Default info. Overridden by log_level named parameter.                                                                                                                                                                                                                          | VARCHAR    | GLOBAL | []      |
+| quackapi_max_pending_requests  | Maximum queued HTTP connections                                                                                                                                                                                                                                                                                                                     | BIGINT     | GLOBAL | []      |
+| quackapi_max_response_bytes    | Maximum uncompressed response bytes                                                                                                                                                                                                                                                                                                                 | BIGINT     | GLOBAL | []      |
 | quackapi_memory_limit          | Memory limit applied by quackapi_serve (e.g. '4GB', '512MB'). Empty (default): do not clobber a non-default DuckDB memory_limit; only apply the 256MB serve default when nothing was configured. Overridden by memory_limit named parameter.                                                                                                        | VARCHAR    | GLOBAL | []      |
+| quackapi_pg_dsn                | Postgres DSN for the native libpq handler path (thread-local PGconn). Empty (default) keeps DuckDB-only execution. Overridden by pg_dsn named parameter on quackapi_serve / quackapi_request.                                                                                                                                                       | VARCHAR    | GLOBAL | []      |
+| quackapi_query_timeout_ms      | Maximum query execution time in milliseconds                                                                                                                                                                                                                                                                                                        | BIGINT     | GLOBAL | []      |
 
 

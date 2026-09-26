@@ -8,7 +8,7 @@ excerpt: |
 extension:
   name: duckrouting
   description: Graph routing for DuckDB - shortest paths, flow, spanning trees and more, following pgRouting's semantics and powered by the Boost Graph Library.
-  version: 0.1.1
+  version: 0.1.2
   language: C++
   build: cmake
   license: MIT
@@ -17,7 +17,7 @@ extension:
 
 repo:
   github: am2222/duckrouting
-  ref: 01c09d5e59a106e1661bc1cf46737311ae91260d
+  ref: 509ece151c166dfc3fc07ea6a63f92286eae45aa
 
 docs:
   hello_world: |
@@ -92,10 +92,10 @@ docs:
     extension. Run `INSTALL spatial; LOAD spatial;` before calling one; spatial is
     not needed for anything else.
 
-extension_star_count: 2
-extension_star_count_pretty: 2
-extension_download_count: null
-extension_download_count_pretty: n/a
+extension_star_count: 3
+extension_star_count_pretty: 3
+extension_download_count: 334
+extension_download_count_pretty: 334
 image: '/images/community_extensions/social_preview/preview_community_extension_duckrouting.png'
 layout: community_extension_doc
 ---

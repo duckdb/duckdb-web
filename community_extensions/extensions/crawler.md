@@ -8,7 +8,7 @@ excerpt: |
 extension:
   name: crawler
   description: SQL-native web crawler with HTML extraction and MERGE support
-  version: '2026020501'
+  version: '2026092202'
   language: C++
   build: cmake
   license: MIT
@@ -21,7 +21,7 @@ extension:
 repo:
   github: midwork-finds-jobs/duckdb-crawler
   andium: f0aad857435a2ce138c567e8af11f9d4f8ae0c25
-  ref: 7725ede99eff1657a2cee770048be33328ae9f02
+  ref: ce2679bc70f65b0d3525262066ece014b8d8f1c9
 
 docs:
   hello_world: |
@@ -32,7 +32,7 @@ docs:
 
     Features:
     - `crawl()` table function with automatic rate limiting and robots.txt compliance
-    - `crawl_url()` for LATERAL joins
+    - LATERAL join support: `FROM urls u, LATERAL crawl(u.url)`
     - `sitemap()` for XML sitemap parsing
     - `read_html()` for Google Sheets-style IMPORTHTML (tables, lists, JS variables)
     - `jq()` and `htmlpath()` functions for CSS selector-based extraction
@@ -68,8 +68,8 @@ docs:
 
 extension_star_count: 16
 extension_star_count_pretty: 16
-extension_download_count: 832
-extension_download_count_pretty: 832
+extension_download_count: 861
+extension_download_count_pretty: 861
 image: '/images/community_extensions/social_preview/preview_community_extension_crawler.png'
 layout: community_extension_doc
 ---
@@ -98,12 +98,10 @@ LOAD {{ page.extension.name }};
 |     function_name     | function_type | description | comment | examples |
 |-----------------------|---------------|-------------|---------|----------|
 | crawl                 | table         | NULL        | NULL    |          |
-| crawl_stream          | table         | NULL        | NULL    |          |
-| crawl_url             | table         | NULL        | NULL    |          |
 | css_select            | scalar        | NULL        | NULL    |          |
-| discover              | scalar        | NULL        | NULL    |          |
 | htmlpath              | scalar        | NULL        | NULL    |          |
 | jq                    | scalar        | NULL        | NULL    |          |
+| page_info             | scalar        | NULL        | NULL    |          |
 | read_html             | table         | NULL        | NULL    |          |
 | sitemap               | table         | NULL        | NULL    |          |
 | stream_merge_internal | table         | NULL        | NULL    |          |

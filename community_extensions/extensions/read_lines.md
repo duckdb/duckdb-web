@@ -8,7 +8,7 @@ excerpt: |
 extension:
   name: read_lines
   description: Read line-based text files with line numbers and efficient subset extraction. Supports glob patterns, line selection with context, and GitHub-style '#L12-24' fragments so a line range can be attached to any path, including URIs served by other extensions.
-  version: 0.4.0
+  version: 0.4.2
   language: C++
   build: cmake
   license: MIT
@@ -16,18 +16,14 @@ extension:
     - teaguesterling
 repo:
   github: teaguesterling/duckdb_read_lines
+  ref: a908e4b34f29fefc0794058439150740fca1da40
+  # ref_next == ref (deliberate): validate the shipped release on DuckDB
+  # v2.0-cyanoptera. v0.4.2 carries the v2.0 entrypoint fix (#15: emit the
+  # extension entry point unconditionally) that the prior refs lacked.
+  ref_next: a908e4b34f29fefc0794058439150740fca1da40
   # andium (DuckDB v1.4.5 track) intentionally left at its prior commit; ref is a
   # v1.5.4 tree, so v0.4.0 ships on the v1.5.x track only.
   andium: 8075509bc21b936c228879ada22c8a46657109aa
-  ref: de60f5dab22b4c40aacfa1af58977600b89bd98a
-  # ref_next makes the PRERELEASE leg actually build against DuckDB v2.0.
-  # Without it scripts/build.py prints "Skipping prerelease validation" and the
-  # run passes green having verified nothing on that line.
-  #
-  # Deliberately NOT the same commit as ref. v0.4.0 (ref) guards its entry point on DUCKDB_BUILD_LOADABLE_EXTENSION, which v2.0 consumes but never defines, so the extension exported no entry point and wasm/macOS failed to link.
-  # ref_next therefore points at main, which carries the fix, while ref keeps
-  # shipping the released version on the stable line.
-  ref_next: a908e4b34f29fefc0794058439150740fca1da40
 docs:
   hello_world: |
     -- Read all lines from a file
@@ -104,7 +100,7 @@ docs:
 
 extension_star_count: 6
 extension_star_count_pretty: 6
-extension_download_count: 1329
+extension_download_count: 1267
 extension_download_count_pretty: 1.3k
 image: '/images/community_extensions/social_preview/preview_community_extension_read_lines.png'
 layout: community_extension_doc
@@ -131,11 +127,15 @@ LOAD {{ page.extension.name }};
 
 <div class="extension_functions_table"></div>
 
-|   function_name    | function_type | description | comment | examples |
-|--------------------|---------------|-------------|---------|----------|
-| parse_lines        | table         | NULL        | NULL    |          |
-| read_lines         | table         | NULL        | NULL    |          |
-| read_lines_lateral | table         | NULL        | NULL    |          |
+|   function_name    | function_type |                               description                               | comment |                                   examples                                   |
+|--------------------|---------------|-------------------------------------------------------------------------|---------|------------------------------------------------------------------------------|
+| parse_lines        | table         | Parse lines from a text string with line numbers and subset extraction. | NULL    | [SELECT * FROM parse_lines('hello\nworld')]                                  |
+| read_lines         | table         | Read line-based text files with line numbers and subset extraction.     | NULL    | [SELECT * FROM read_lines('server.log')]                                     |
+| read_lines         | table         | Read selected lines from line-based text files.                         | NULL    | [SELECT * FROM read_lines('server.log', '100-200')]                          |
+| read_lines         | table         | Read selected lines with trimming mode from line-based text files.      | NULL    | [SELECT * FROM read_lines('server.log', '100-200', 'both')]                  |
+| read_lines_lateral | table         | Read lines in a correlated lateral join for paths from table columns.   | NULL    | [SELECT * FROM paths_table p, read_lines_lateral(p.path)]                    |
+| read_lines_lateral | table         | Read selected lines in a correlated lateral join.                       | NULL    | [SELECT * FROM paths_table p, read_lines_lateral(p.path, '100-200')]         |
+| read_lines_lateral | table         | Read selected lines with trimming mode in a correlated lateral join.    | NULL    | [SELECT * FROM paths_table p, read_lines_lateral(p.path, '100-200', 'both')] |
 
 ### Overloaded Functions
 

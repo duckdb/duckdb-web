@@ -21,7 +21,7 @@ repo:
   ref_next: ac5b197b4ce3aa49ffdcb99a6e987555a1081c16
 
 docs:
-  hello_world:
+  hello_world: |
     -- single table
     SELECT count(*) FROM mmcif_scan('https://files.rcsb.org/download/1AMB.cif.gz', 'atom_site');
     -- 438
@@ -55,8 +55,8 @@ extended_description: |
 
 extension_star_count: 1
 extension_star_count_pretty: 1
-extension_download_count: 666
-extension_download_count_pretty: 666
+extension_download_count: 630
+extension_download_count_pretty: 630
 image: '/images/community_extensions/social_preview/preview_community_extension_mmcif.png'
 layout: community_extension_doc
 ---

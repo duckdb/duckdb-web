@@ -8,7 +8,7 @@ excerpt: |
 extension:
   name: duckdb_mcp
   description: Model Context Protocol (MCP) extension for DuckDB that enables seamless integration between SQL databases and MCP servers. Provides both client capabilities for accessing remote MCP resources via SQL and server capabilities for exposing database content as MCP resources.
-  version: 2.3.0
+  version: 2.3.2
   language: C++
   build: cmake
   license: Apache-2.0
@@ -17,7 +17,12 @@ extension:
     - teaguesterling
 repo:
   github: teaguesterling/duckdb_mcp
-  ref: a6b8648e4e0ec121da534b704b962ac41e2638bf
+  ref: 6f9c4ba1d2f1040c2a4638dabcd66da630a763ad
+  # ref_next == ref (deliberate): v2.3.2 carries the DuckDB v2.0 fix (#91: reach the
+  # result collection through a compat shim; v2.0 changed MaterializedQueryResult access).
+  # Setting ref_next == ref makes test_against_latest build+test the SHIPPED release on
+  # v2.0-cyanoptera, rather than skipping it (v2.3.1 shipped unvalidated on v2.0).
+  ref_next: 6f9c4ba1d2f1040c2a4638dabcd66da630a763ad
 
 docs:
   hello_world: |
@@ -95,8 +100,8 @@ docs:
 
 extension_star_count: 66
 extension_star_count_pretty: 66
-extension_download_count: 981
-extension_download_count_pretty: 981
+extension_download_count: 1197
+extension_download_count_pretty: 1.2k
 image: '/images/community_extensions/social_preview/preview_community_extension_duckdb_mcp.png'
 layout: community_extension_doc
 ---
@@ -122,44 +127,44 @@ LOAD {{ page.extension.name }};
 
 <div class="extension_functions_table"></div>
 
-|        function_name         | function_type | description | comment | examples |
-|------------------------------|---------------|-------------|---------|----------|
-| mcp_call_tool                | scalar        | NULL        | NULL    |          |
-| mcp_config_begin             | pragma        | NULL        | NULL    |          |
-| mcp_config_end               | pragma        | NULL        | NULL    |          |
-| mcp_get_diagnostics          | scalar        | NULL        | NULL    |          |
-| mcp_get_prompt               | scalar        | NULL        | NULL    |          |
-| mcp_get_resource             | scalar        | NULL        | NULL    |          |
-| mcp_list_prompt_templates    | scalar        | NULL        | NULL    |          |
-| mcp_list_prompts             | scalar        | NULL        | NULL    |          |
-| mcp_list_resources           | scalar        | NULL        | NULL    |          |
-| mcp_list_tools               | scalar        | NULL        | NULL    |          |
-| mcp_list_tools               | table         | NULL        | NULL    |          |
-| mcp_publish_execution_tool   | pragma        | NULL        | NULL    |          |
-| mcp_publish_execution_tool   | scalar        | NULL        | NULL    |          |
-| mcp_publish_query            | pragma        | NULL        | NULL    |          |
-| mcp_publish_query            | scalar        | NULL        | NULL    |          |
-| mcp_publish_resource         | pragma        | NULL        | NULL    |          |
-| mcp_publish_resource         | scalar        | NULL        | NULL    |          |
-| mcp_publish_table            | pragma        | NULL        | NULL    |          |
-| mcp_publish_table            | scalar        | NULL        | NULL    |          |
-| mcp_publish_tool             | pragma        | NULL        | NULL    |          |
-| mcp_publish_tool             | scalar        | NULL        | NULL    |          |
-| mcp_reconnect_server         | scalar        | NULL        | NULL    |          |
-| mcp_register_prompt_template | pragma        | NULL        | NULL    |          |
-| mcp_register_prompt_template | scalar        | NULL        | NULL    |          |
-| mcp_render_prompt_template   | scalar        | NULL        | NULL    |          |
-| mcp_resources                | table         | NULL        | NULL    |          |
-| mcp_server_config            | table         | NULL        | NULL    |          |
-| mcp_server_health            | scalar        | NULL        | NULL    |          |
-| mcp_server_send_request      | scalar        | NULL        | NULL    |          |
-| mcp_server_start             | pragma        | NULL        | NULL    |          |
-| mcp_server_start             | scalar        | NULL        | NULL    |          |
-| mcp_server_status            | scalar        | NULL        | NULL    |          |
-| mcp_server_stop              | pragma        | NULL        | NULL    |          |
-| mcp_server_stop              | scalar        | NULL        | NULL    |          |
-| mcp_server_test              | scalar        | NULL        | NULL    |          |
-| mcp_tools                    | table         | NULL        | NULL    |          |
+|        function_name         | function_type |                                       description                                       | comment |                                                                                   examples                                                                                    |
+|------------------------------|---------------|-----------------------------------------------------------------------------------------|---------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| mcp_call_tool                | scalar        | Call a tool provided by an attached MCP server.                                         | NULL    | [mcp_call_tool('server', 'tool_name', '{"arg": 1}')]                                                                                                                          |
+| mcp_config_begin             | pragma        | NULL                                                                                    | NULL    |                                                                                                                                                                               |
+| mcp_config_end               | pragma        | NULL                                                                                    | NULL    |                                                                                                                                                                               |
+| mcp_get_diagnostics          | scalar        | Get internal diagnostics and connection states for the MCP extension.                   | NULL    | [mcp_get_diagnostics()]                                                                                                                                                       |
+| mcp_get_prompt               | scalar        | Get a rendered prompt template from an attached MCP server.                             | NULL    | [mcp_get_prompt('server', 'prompt_name', '{"arg": 1}')]                                                                                                                       |
+| mcp_get_resource             | scalar        | Get content of a resource from an attached MCP server.                                  | NULL    | [mcp_get_resource('server', 'resource://uri')]                                                                                                                                |
+| mcp_list_prompt_templates    | scalar        | List all registered prompt templates.                                                   | NULL    | [mcp_list_prompt_templates()]                                                                                                                                                 |
+| mcp_list_prompts             | scalar        | List available prompt templates from an attached MCP server.                            | NULL    | [mcp_list_prompts('server')]                                                                                                                                                  |
+| mcp_list_resources           | scalar        | List available resources from an attached MCP server.                                   | NULL    | [mcp_list_resources('server')]                                                                                                                                                |
+| mcp_list_tools               | scalar        | List available tools from an attached MCP server.                                       | NULL    | [mcp_list_tools('server')]                                                                                                                                                    |
+| mcp_list_tools               | table         | List registered MCP tools on the embedded server (alias for mcp_tools).                 | NULL    | [SELECT * FROM mcp_list_tools()]                                                                                                                                              |
+| mcp_publish_execution_tool   | pragma        | NULL                                                                                    | NULL    |                                                                                                                                                                               |
+| mcp_publish_execution_tool   | scalar        | Publish an execution tool that runs SQL queries against DuckDB with parameter bindings. | NULL    | [mcp_publish_execution_tool('exec_query', 'Execute parameterized query', 'SELECT $val', '{"val": {"type": "string"{% raw %}}}{% endraw %}', '["val"]', '{"val": "VARCHAR"}')] |
+| mcp_publish_query            | pragma        | NULL                                                                                    | NULL    |                                                                                                                                                                               |
+| mcp_publish_query            | scalar        | Publish a DuckDB SQL query as an MCP resource.                                          | NULL    | [mcp_publish_query('top_users', 'SELECT * FROM users LIMIT 10', 'Top 10 users', 300)]                                                                                         |
+| mcp_publish_resource         | pragma        | NULL                                                                                    | NULL    |                                                                                                                                                                               |
+| mcp_publish_resource         | scalar        | Publish static text or JSON content as an MCP resource.                                 | NULL    | [mcp_publish_resource('resource://docs', 'Documentation text', 'text/plain', 'Doc resource')]                                                                                 |
+| mcp_publish_table            | pragma        | NULL                                                                                    | NULL    |                                                                                                                                                                               |
+| mcp_publish_table            | scalar        | Publish a DuckDB table or view as an MCP resource.                                      | NULL    | [mcp_publish_table('my_table', 'resource://my_table', 'My data table')]                                                                                                       |
+| mcp_publish_tool             | pragma        | NULL                                                                                    | NULL    |                                                                                                                                                                               |
+| mcp_publish_tool             | scalar        | Publish a parameterized SQL query as an MCP tool.                                       | NULL    | [mcp_publish_tool('get_user', 'Get user by ID', 'SELECT * FROM users WHERE id = $id', '{"id": {"type": "integer"{% raw %}}}{% endraw %}', '["id"]')]                          |
+| mcp_reconnect_server         | scalar        | Reconnect to an attached MCP server.                                                    | NULL    | [mcp_reconnect_server('server')]                                                                                                                                              |
+| mcp_register_prompt_template | pragma        | NULL                                                                                    | NULL    |                                                                                                                                                                               |
+| mcp_register_prompt_template | scalar        | Register a prompt template with parameters for the MCP server.                          | NULL    | [mcp_register_prompt_template('greeting', 'Greeting prompt', 'Hello {% raw %}{{{% endraw %}name{% raw %}}}{% endraw %}!')]                                                    |
+| mcp_render_prompt_template   | scalar        | Render a registered prompt template with arguments.                                     | NULL    | [mcp_render_prompt_template('greeting', '{"name": "Alice"}')]                                                                                                                 |
+| mcp_resources                | table         | List registered MCP resources on the embedded server.                                   | NULL    | [SELECT * FROM mcp_resources()]                                                                                                                                               |
+| mcp_server_config            | table         | Get configuration key-value pairs of the embedded MCP server.                           | NULL    | [SELECT * FROM mcp_server_config()]                                                                                                                                           |
+| mcp_server_health            | scalar        | Check the health and connection status of an attached MCP server.                       | NULL    | [mcp_server_health('server')]                                                                                                                                                 |
+| mcp_server_send_request      | scalar        | Send a JSON-RPC request to the running embedded MCP server.                             | NULL    | [mcp_server_send_request('{"jsonrpc": "2.0", "method": "tools/list", "id": 1}')]                                                                                              |
+| mcp_server_start             | pragma        | NULL                                                                                    | NULL    |                                                                                                                                                                               |
+| mcp_server_start             | scalar        | Start the embedded MCP server.                                                          | NULL    | [mcp_server_start('stdio')]                                                                                                                                                   |
+| mcp_server_status            | scalar        | Get the current running status and statistics of the embedded MCP server.               | NULL    | [mcp_server_status()]                                                                                                                                                         |
+| mcp_server_stop              | pragma        | NULL                                                                                    | NULL    |                                                                                                                                                                               |
+| mcp_server_stop              | scalar        | Stop the embedded MCP server.                                                           | NULL    | [mcp_server_stop()]                                                                                                                                                           |
+| mcp_server_test              | scalar        | Test MCP server protocol handling with a raw JSON-RPC request.                          | NULL    | [mcp_server_test('{"jsonrpc": "2.0", "method": "ping", "id": 1}')]                                                                                                            |
+| mcp_tools                    | table         | List registered MCP tools on the embedded server.                                       | NULL    | [SELECT * FROM mcp_tools()]                                                                                                                                                   |
 
 ### Overloaded Functions
 

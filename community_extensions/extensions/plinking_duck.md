@@ -8,7 +8,7 @@ excerpt: |
 extension:
   name: plinking_duck
   description: Read PLINK 2 genomics file formats and run common genetic analyses directly in SQL
-  version: 0.9.0
+  version: 0.9.2
   language: C++
   build: cmake
   license: MIT
@@ -18,7 +18,10 @@ extension:
 
 repo:
   github: teaguesterling/plinking_duck
-  ref: 0859a3c3c38daef417d666313516074a375f6631
+  ref: e35b263bdc4abaa8639bdb35118be892af370561
+  # ref_next == ref (deliberate): validate the shipped release on DuckDB
+  # v2.0-cyanoptera (carries the v2.0 compat fixes) instead of skipping it.
+  ref_next: e35b263bdc4abaa8639bdb35118be892af370561
 
 docs:
   hello_world: |
@@ -90,8 +93,8 @@ docs:
 
 extension_star_count: 6
 extension_star_count_pretty: 6
-extension_download_count: 984
-extension_download_count_pretty: 984
+extension_download_count: 999
+extension_download_count_pretty: 999
 image: '/images/community_extensions/social_preview/preview_community_extension_plinking_duck.png'
 layout: community_extension_doc
 ---
@@ -117,20 +120,20 @@ LOAD {{ page.extension.name }};
 
 <div class="extension_functions_table"></div>
 
-| function_name  | function_type | description | comment | examples |
-|----------------|---------------|-------------|---------|----------|
-| plink_freq     | table         | NULL        | NULL    |          |
-| plink_glm      | table         | NULL        | NULL    |          |
-| plink_hardy    | table         | NULL        | NULL    |          |
-| plink_ld       | table         | NULL        | NULL    |          |
-| plink_missing  | table         | NULL        | NULL    |          |
-| plink_pca      | table         | NULL        | NULL    |          |
-| plink_score    | table         | NULL        | NULL    |          |
-| read_pfile     | table         | NULL        | NULL    |          |
-| read_pgen      | table         | NULL        | NULL    |          |
-| read_plink_vcf | table         | NULL        | NULL    |          |
-| read_psam      | table         | NULL        | NULL    |          |
-| read_pvar      | table         | NULL        | NULL    |          |
+| function_name  | function_type |                                 description                                 | comment |                                      examples                                       |
+|----------------|---------------|-----------------------------------------------------------------------------|---------|-------------------------------------------------------------------------------------|
+| plink_freq     | table         | Compute allele frequencies and counts from PLINK files.                     | NULL    | [SELECT * FROM plink_freq('data/cohort.pgen')]                                      |
+| plink_glm      | table         | Fit generalized linear models (linear/logistic regression) across variants. | NULL    | [SELECT * FROM plink_glm('data/cohort.pgen', phenotype := 'trait')]                 |
+| plink_hardy    | table         | Compute Hardy-Weinberg equilibrium exact test statistics.                   | NULL    | [SELECT * FROM plink_hardy('data/cohort.pgen')]                                     |
+| plink_ld       | table         | Compute pairwise linkage disequilibrium metrics.                            | NULL    | [SELECT * FROM plink_ld('data/cohort.pgen', window_kb := 500, r2_threshold := 0.2)] |
+| plink_missing  | table         | Compute missingness rates per variant or per sample.                        | NULL    | [SELECT * FROM plink_missing('data/cohort.pgen', mode := 'variant')]                |
+| plink_pca      | table         | Compute principal components analysis from PLINK files.                     | NULL    | [SELECT * FROM plink_pca('data/cohort.pgen', n_pcs := 10)]                          |
+| plink_score    | table         | Compute polygenic risk scores from variant weights.                         | NULL    | [SELECT * FROM plink_score('data/cohort.pgen', weights := 'weights.tsv')]           |
+| read_pfile     | table         | Read PLINK dataset files into tabular format.                               | NULL    | [SELECT * FROM read_pfile('data/cohort.pgen')]                                      |
+| read_pgen      | table         | Read PLINK .pgen or .bed genotype files into tabular format.                | NULL    | [SELECT * FROM read_pgen('data/cohort.pgen')]                                       |
+| read_plink_vcf | table         | Read VCF files using PLINK engine into tabular format.                      | NULL    | [SELECT * FROM read_plink_vcf('data/cohort.vcf.gz')]                                |
+| read_psam      | table         | Read PLINK .psam or .fam sample files into tabular format.                  | NULL    | [SELECT * FROM read_psam('data/cohort.psam')]                                       |
+| read_pvar      | table         | Read PLINK .pvar or .bim variant files into tabular format.                 | NULL    | [SELECT * FROM read_pvar('data/cohort.pvar')]                                       |
 
 ### Overloaded Functions
 

@@ -56,10 +56,10 @@ docs:
     OpenSSL and filesystem or metadata access. For complete usage and IAM requirements, visit the
     [extension repository](https://github.com/smithclay/duckdb-cloudwatch).
 
-extension_star_count: 1
-extension_star_count_pretty: 1
-extension_download_count: 587
-extension_download_count_pretty: 587
+extension_star_count: 2
+extension_star_count_pretty: 2
+extension_download_count: 629
+extension_download_count_pretty: 629
 image: '/images/community_extensions/social_preview/preview_community_extension_cloudwatch.png'
 layout: community_extension_doc
 ---

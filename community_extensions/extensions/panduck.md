@@ -8,7 +8,7 @@ excerpt: |
 extension:
   name: panduck
   description: Read documents natively into the duck_block vocabulary -- DOCX, ODT, EPUB, RTF, LaTeX, Org, RST, ipynb, MediaWiki and Textile -- and write them back as Pandoc JSON, without linking Pandoc
-  version: 0.5.3
+  version: 0.5.5
   language: C++
   build: cmake
   license: MIT
@@ -20,7 +20,7 @@ extension:
   vcpkg_commit: 84bab45d415d22042bd0b9081aea57f362da3f35
 repo:
   github: teaguesterling/duckdb_panduck
-  ref: 4dc698503e5b56a4c17999eca1c5dc72a177add7
+  ref: 3f8ea38e871fde26349954e59a0e709cf847928c
   # THE SAME COMMIT AS `ref`, measured rather than defaulted: panduck's own pipeline on this
   # commit built v2.0-cyanoptera green on all nine platform targets, and DuckDB `main` as an
   # advisory canary. 0.5.0 needed a separate ref_next for a missing catalog.hpp include; that
@@ -29,7 +29,7 @@ repo:
   # ref_next STAYS SET even when it equals ref: without it scripts/build.py prints "Skipping
   # prerelease validation" and test_against_latest never runs -- a green that means "did not
   # look". panduck v0.2.0 merged that way, and the job has since caught two real defects.
-  ref_next: 4dc698503e5b56a4c17999eca1c5dc72a177add7
+  ref_next: 3f8ea38e871fde26349954e59a0e709cf847928c
 docs:
   hello_world: |
     LOAD panduck;
@@ -146,7 +146,7 @@ docs:
 
     This is an early release. Ten native readers are implemented and tested against
     reference implementations -- RTF, DOCX, ODT, EPUB, LaTeX, Org, RST, ipynb, MediaWiki,
-    Textile -- plus a Pandoc AST reader, with 2931 test assertions, differential validation
+    Textile -- plus a Pandoc AST reader, with 3108 test assertions, differential validation
     against a real pandoc on every fixture, and eleven jobs in CI. PDF, Markdown and HTML
     are read by delegating to the pdf, markdown and webbed extensions rather than by a
     reader here.
@@ -164,8 +164,8 @@ docs:
 
 extension_star_count: 3
 extension_star_count_pretty: 3
-extension_download_count: 716
-extension_download_count_pretty: 716
+extension_download_count: 732
+extension_download_count_pretty: 732
 image: '/images/community_extensions/social_preview/preview_community_extension_panduck.png'
 layout: community_extension_doc
 ---
@@ -191,80 +191,80 @@ LOAD {{ page.extension.name }};
 
 <div class="extension_functions_table"></div>
 
-|          function_name           | function_type | description | comment | examples |
-|----------------------------------|---------------|-------------|---------|----------|
-| doc_container                    | table_macro   | NULL        | NULL    |          |
-| doc_render                       | macro         | NULL        | NULL    |          |
-| doc_search_sections              | table_macro   | NULL        | NULL    |          |
-| doc_section                      | table_macro   | NULL        | NULL    |          |
-| doc_toc                          | table_macro   | NULL        | NULL    |          |
-| panduck_block_cols               | macro         | NULL        | NULL    |          |
-| panduck_blocks_to_pandoc_ast     | scalar        | NULL        | NULL    |          |
-| panduck_blocks_to_pandoc_blocks  | scalar        | NULL        | NULL    |          |
-| panduck_blocks_to_pandoc_json    | scalar        | NULL        | NULL    |          |
-| panduck_builtin_format_for       | scalar        | NULL        | NULL    |          |
-| panduck_can_read                 | scalar        | NULL        | NULL    |          |
-| panduck_dependencies             | table_macro   | NULL        | NULL    |          |
-| panduck_duck_block_spec_at_least | macro         | NULL        | NULL    |          |
-| panduck_duck_block_type          | scalar        | NULL        | NULL    |          |
-| panduck_ensure_extension         | scalar        | NULL        | NULL    |          |
-| panduck_expand_embedded          | macro         | NULL        | NULL    |          |
-| panduck_expand_embedded_impl     | macro         | NULL        | NULL    |          |
-| panduck_format_for               | scalar        | NULL        | NULL    |          |
-| panduck_function_exists          | scalar        | NULL        | NULL    |          |
-| panduck_glob                     | scalar        | NULL        | NULL    |          |
-| panduck_is_glob                  | macro         | NULL        | NULL    |          |
-| panduck_latex_tokens             | table         | NULL        | NULL    |          |
-| panduck_pandoc_api_version       | scalar        | NULL        | NULL    |          |
-| panduck_pandoc_ast_json          | scalar        | NULL        | NULL    |          |
-| panduck_pandoc_ast_map           | table         | NULL        | NULL    |          |
-| panduck_pandoc_ast_to_blocks     | scalar        | NULL        | NULL    |          |
-| panduck_pdf_blocks_impl          | table_macro   | NULL        | NULL    |          |
-| panduck_policy_format            | macro         | NULL        | NULL    |          |
-| panduck_quote                    | macro         | NULL        | NULL    |          |
-| panduck_read_arms                | macro         | NULL        | NULL    |          |
-| panduck_read_arms_opt            | macro         | NULL        | NULL    |          |
-| panduck_read_blocks              | macro         | NULL        | NULL    |          |
-| panduck_reader_enabled           | scalar        | NULL        | NULL    |          |
-| panduck_reader_extension_for     | scalar        | NULL        | NULL    |          |
-| panduck_reader_function_for      | scalar        | NULL        | NULL    |          |
-| panduck_reader_kind_for          | scalar        | NULL        | NULL    |          |
-| panduck_reader_option_for        | scalar        | NULL        | NULL    |          |
-| panduck_reader_registry          | table         | NULL        | NULL    |          |
-| panduck_register_doc_reader      | table         | NULL        | NULL    |          |
-| panduck_register_table_reader    | table         | NULL        | NULL    |          |
-| panduck_registry_key_for         | scalar        | NULL        | NULL    |          |
-| panduck_render_format            | macro         | NULL        | NULL    |          |
-| panduck_render_params            | scalar        | NULL        | NULL    |          |
-| panduck_renumber_blocks          | macro         | NULL        | NULL    |          |
-| panduck_resolved_format          | macro         | NULL        | NULL    |          |
-| panduck_source_list              | macro         | NULL        | NULL    |          |
-| panduck_supported_extensions     | table         | NULL        | NULL    |          |
-| panduck_supported_paths          | macro         | NULL        | NULL    |          |
-| panduck_version                  | scalar        | NULL        | NULL    |          |
-| panduck_wrap_expand              | macro         | NULL        | NULL    |          |
-| panduck_write_pandoc_ast         | scalar        | NULL        | NULL    |          |
-| read_docx_blocks                 | table         | NULL        | NULL    |          |
-| read_epub_blocks                 | table         | NULL        | NULL    |          |
-| read_ipynb_blocks                | table         | NULL        | NULL    |          |
-| read_ipynb_blocks_string         | table         | NULL        | NULL    |          |
-| read_latex_blocks                | table         | NULL        | NULL    |          |
-| read_latex_blocks_string         | table         | NULL        | NULL    |          |
-| read_mediawiki_blocks            | table         | NULL        | NULL    |          |
-| read_mediawiki_blocks_string     | table         | NULL        | NULL    |          |
-| read_odt_blocks                  | table         | NULL        | NULL    |          |
-| read_org_blocks                  | table         | NULL        | NULL    |          |
-| read_org_blocks_string           | table         | NULL        | NULL    |          |
-| read_pandoc_blocks               | table         | NULL        | NULL    |          |
-| read_pandoc_blocks_string        | table         | NULL        | NULL    |          |
-| read_panduck_doc                 | table_macro   | NULL        | NULL    |          |
-| read_panduck_table               | table_macro   | NULL        | NULL    |          |
-| read_pdf_blocks                  | table_macro   | NULL        | NULL    |          |
-| read_rst_blocks                  | table         | NULL        | NULL    |          |
-| read_rst_blocks_string           | table         | NULL        | NULL    |          |
-| read_rtf_blocks                  | table         | NULL        | NULL    |          |
-| read_textile_blocks              | table         | NULL        | NULL    |          |
-| read_textile_blocks_string       | table         | NULL        | NULL    |          |
+|          function_name           | function_type |                                              description                                               | comment |                                                   examples                                                    |
+|----------------------------------|---------------|--------------------------------------------------------------------------------------------------------|---------|---------------------------------------------------------------------------------------------------------------|
+| doc_container                    | table_macro   | NULL                                                                                                   | NULL    |                                                                                                               |
+| doc_render                       | macro         | NULL                                                                                                   | NULL    |                                                                                                               |
+| doc_search_sections              | table_macro   | NULL                                                                                                   | NULL    |                                                                                                               |
+| doc_section                      | table_macro   | NULL                                                                                                   | NULL    |                                                                                                               |
+| doc_toc                          | table_macro   | NULL                                                                                                   | NULL    |                                                                                                               |
+| panduck_block_cols               | macro         | NULL                                                                                                   | NULL    |                                                                                                               |
+| panduck_blocks_to_pandoc_ast     | scalar        | Convert a list of duck_blocks into a Pandoc AST document struct.                                       | NULL    | [panduck_blocks_to_pandoc_ast(blocks)]                                                                        |
+| panduck_blocks_to_pandoc_blocks  | scalar        | Convert a list of duck_blocks into a JSON array string of Pandoc block elements.                       | NULL    | [panduck_blocks_to_pandoc_blocks(blocks)]                                                                     |
+| panduck_blocks_to_pandoc_json    | scalar        | Convert a list of duck_blocks into a Pandoc AST JSON string.                                           | NULL    | [panduck_blocks_to_pandoc_json(blocks)]                                                                       |
+| panduck_builtin_format_for       | scalar        | Return the native builtin format name for a file path or URI.                                          | NULL    | [panduck_builtin_format_for('doc.docx')]                                                                      |
+| panduck_can_read                 | scalar        | Check if panduck can read a given file path or URI.                                                    | NULL    | [panduck_can_read('doc.docx')]                                                                                |
+| panduck_dependencies             | table_macro   | NULL                                                                                                   | NULL    |                                                                                                               |
+| panduck_duck_block_spec_at_least | macro         | NULL                                                                                                   | NULL    |                                                                                                               |
+| panduck_duck_block_type          | scalar        | Return the SQL type definition string for duck_blocks.                                                 | NULL    | [panduck_duck_block_type()]                                                                                   |
+| panduck_ensure_extension         | scalar        | Ensure that a required DuckDB extension is loaded.                                                     | NULL    | [panduck_ensure_extension('fts')]                                                                             |
+| panduck_expand_embedded          | macro         | NULL                                                                                                   | NULL    |                                                                                                               |
+| panduck_expand_embedded_impl     | macro         | NULL                                                                                                   | NULL    |                                                                                                               |
+| panduck_format_for               | scalar        | Return the document format name for a file path or URI.                                                | NULL    | [panduck_format_for('doc.docx')]                                                                              |
+| panduck_function_exists          | scalar        | Check if a scalar or table function exists in the catalog.                                             | NULL    | [panduck_function_exists('read_docx_blocks')]                                                                 |
+| panduck_glob                     | scalar        | Glob files matching pattern.                                                                           | NULL    | [panduck_glob('docs/*.docx')]                                                                                 |
+| panduck_is_glob                  | macro         | NULL                                                                                                   | NULL    |                                                                                                               |
+| panduck_latex_tokens             | table         | Tokenize a LaTeX string and return the sequence of LaTeX tokens.                                       | NULL    | [SELECT * FROM panduck_latex_tokens('\textbf{hello}')]                                                        |
+| panduck_pandoc_api_version       | scalar        | Return the Pandoc API version supported by the panduck extension as [major, minor, patch].             | NULL    | [panduck_pandoc_api_version()]                                                                                |
+| panduck_pandoc_ast_json          | scalar        | Convert a list of duck_blocks into a Pandoc AST JSON string (alias for panduck_blocks_to_pandoc_json). | NULL    | [panduck_pandoc_ast_json(blocks)]                                                                             |
+| panduck_pandoc_ast_map           | table         | Return the complete constructor set of Pandoc AST types mapped to DuckDB duck_block element types.     | NULL    | [SELECT * FROM panduck_pandoc_ast_map()]                                                                      |
+| panduck_pandoc_ast_to_blocks     | scalar        | Convert a Pandoc AST JSON string into a list of duck_blocks.                                           | NULL    | [panduck_pandoc_ast_to_blocks('{"pandoc-api-version": [1,23,1], "meta": {}, "blocks": []}')]                  |
+| panduck_pdf_blocks_impl          | table_macro   | NULL                                                                                                   | NULL    |                                                                                                               |
+| panduck_policy_format            | macro         | NULL                                                                                                   | NULL    |                                                                                                               |
+| panduck_quote                    | macro         | NULL                                                                                                   | NULL    |                                                                                                               |
+| panduck_read_arms                | macro         | NULL                                                                                                   | NULL    |                                                                                                               |
+| panduck_read_arms_opt            | macro         | NULL                                                                                                   | NULL    |                                                                                                               |
+| panduck_read_blocks              | macro         | NULL                                                                                                   | NULL    |                                                                                                               |
+| panduck_reader_enabled           | scalar        | Check if the reader for a specified format is currently enabled.                                       | NULL    | [panduck_reader_enabled('docx')]                                                                              |
+| panduck_reader_extension_for     | scalar        | Return the required extension name to read a file path or URI.                                         | NULL    | [panduck_reader_extension_for('doc.docx')]                                                                    |
+| panduck_reader_function_for      | scalar        | Return the reader table function name that handles a file path or URI.                                 | NULL    | [panduck_reader_function_for('doc.docx')]                                                                     |
+| panduck_reader_kind_for          | scalar        | Return the reader kind ('doc' or 'table') for a file path or URI.                                      | NULL    | [panduck_reader_kind_for('doc.docx')]                                                                         |
+| panduck_reader_option_for        | scalar        | Look up a reader configuration option for a given format.                                              | NULL    | [panduck_reader_option_for('docx', 'toc', NULL)]                                                              |
+| panduck_reader_registry          | table         | Return the table of all registered format readers and handlers.                                        | NULL    | [SELECT * FROM panduck_reader_registry()]                                                                     |
+| panduck_register_doc_reader      | table         | Register a custom document block reader for a file format or extension.                                | NULL    | [SELECT * FROM panduck_register_doc_reader('custom', 'read_custom', ['.custom'])]                             |
+| panduck_register_table_reader    | table         | Register a custom table reader for a file format or extension.                                         | NULL    | [SELECT * FROM panduck_register_table_reader('custom', 'read_custom_tbl', ['.custom'])]                       |
+| panduck_registry_key_for         | scalar        | Return the registry match key for a file path or URI.                                                  | NULL    | [panduck_registry_key_for('doc.docx')]                                                                        |
+| panduck_render_format            | macro         | NULL                                                                                                   | NULL    |                                                                                                               |
+| panduck_render_params            | scalar        | Render named parameters map into SQL argument string.                                                  | NULL    | [panduck_render_params(MAP {'opt': 'val'})]                                                                   |
+| panduck_renumber_blocks          | macro         | NULL                                                                                                   | NULL    |                                                                                                               |
+| panduck_resolved_format          | macro         | NULL                                                                                                   | NULL    |                                                                                                               |
+| panduck_source_list              | macro         | NULL                                                                                                   | NULL    |                                                                                                               |
+| panduck_supported_extensions     | table         | Return list of supported document formats and extensions in panduck.                                   | NULL    | [SELECT * FROM panduck_supported_extensions()]                                                                |
+| panduck_supported_paths          | macro         | NULL                                                                                                   | NULL    |                                                                                                               |
+| panduck_version                  | scalar        | Return the version of the panduck extension.                                                           | NULL    | [panduck_version()]                                                                                           |
+| panduck_wrap_expand              | macro         | NULL                                                                                                   | NULL    |                                                                                                               |
+| panduck_write_pandoc_ast         | scalar        | Write a list of duck_blocks out to disk as a Pandoc AST JSON file.                                     | NULL    | [panduck_write_pandoc_ast('output.json', blocks)]                                                             |
+| read_docx_blocks                 | table         | Read a DOCX document and return structured document blocks.                                            | NULL    | [SELECT * FROM read_docx_blocks('document.docx')]                                                             |
+| read_epub_blocks                 | table         | Read an EPUB document and return structured document blocks.                                           | NULL    | [SELECT * FROM read_epub_blocks('book.epub')]                                                                 |
+| read_ipynb_blocks                | table         | Read a Jupyter Notebook (.ipynb) file and return structured document blocks.                           | NULL    | [SELECT * FROM read_ipynb_blocks('notebook.ipynb')]                                                           |
+| read_ipynb_blocks_string         | table         | Parse a Jupyter Notebook JSON string and return structured document blocks.                            | NULL    | [SELECT * FROM read_ipynb_blocks_string('{"cells": [], "metadata": {}, "nbformat": 4, "nbformat_minor": 2}')] |
+| read_latex_blocks                | table         | Read a LaTeX document and return structured document blocks.                                           | NULL    | [SELECT * FROM read_latex_blocks('document.tex')]                                                             |
+| read_latex_blocks_string         | table         | Parse a LaTeX string and return structured document blocks.                                            | NULL    | [SELECT * FROM read_latex_blocks_string('\section{Title}\n\textbf{Bold}')]                                    |
+| read_mediawiki_blocks            | table         | Read a MediaWiki wikitext document and return structured document blocks.                              | NULL    | [SELECT * FROM read_mediawiki_blocks('document.wiki')]                                                        |
+| read_mediawiki_blocks_string     | table         | Parse a MediaWiki wikitext string and return structured document blocks.                               | NULL    | [SELECT * FROM read_mediawiki_blocks_string('== Section ==\n'''Bold'''')]                                     |
+| read_odt_blocks                  | table         | Read an ODT document and return structured document blocks.                                            | NULL    | [SELECT * FROM read_odt_blocks('document.odt')]                                                               |
+| read_org_blocks                  | table         | Read an Emacs Org-mode document and return structured document blocks.                                 | NULL    | [SELECT * FROM read_org_blocks('document.org')]                                                               |
+| read_org_blocks_string           | table         | Parse an Emacs Org-mode string and return structured document blocks.                                  | NULL    | [SELECT * FROM read_org_blocks_string('* Heading\nParagraph')]                                                |
+| read_pandoc_blocks               | table         | Read a Pandoc AST JSON file and return structured document blocks.                                     | NULL    | [SELECT * FROM read_pandoc_blocks('document.json')]                                                           |
+| read_pandoc_blocks_string        | table         | Parse a Pandoc AST JSON string and return structured document blocks.                                  | NULL    | [SELECT * FROM read_pandoc_blocks_string('{"pandoc-api-version": [1,23,1], "meta": {}, "blocks": []}')]       |
+| read_panduck_doc                 | table_macro   | NULL                                                                                                   | NULL    |                                                                                                               |
+| read_panduck_table               | table_macro   | NULL                                                                                                   | NULL    |                                                                                                               |
+| read_pdf_blocks                  | table_macro   | NULL                                                                                                   | NULL    |                                                                                                               |
+| read_rst_blocks                  | table         | Read a reStructuredText (RST) document and return structured document blocks.                          | NULL    | [SELECT * FROM read_rst_blocks('document.rst')]                                                               |
+| read_rst_blocks_string           | table         | Parse a reStructuredText (RST) string and return structured document blocks.                           | NULL    | [SELECT * FROM read_rst_blocks_string('Title\n=====\n\nParagraph')]                                           |
+| read_rtf_blocks                  | table         | Read an RTF file and return structured document blocks.                                                | NULL    | [SELECT * FROM read_rtf_blocks('document.rtf')]                                                               |
+| read_textile_blocks              | table         | Read a Textile document and return structured document blocks.                                         | NULL    | [SELECT * FROM read_textile_blocks('document.textile')]                                                       |
+| read_textile_blocks_string       | table         | Parse a Textile string and return structured document blocks.                                          | NULL    | [SELECT * FROM read_textile_blocks_string('h1. Header\n\n*bold*')]                                            |
 
 ### Overloaded Functions
 
