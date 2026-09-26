@@ -8,7 +8,7 @@ excerpt: |
 extension:
   name: markdown
   description: Read, analyze, and write Markdown files with block-level document representation and inline element support
-  version: 1.9.3
+  version: 1.9.5
   language: C++
   build: cmake
   license: MIT
@@ -20,12 +20,12 @@ repo:
   # andium (DuckDB v1.4.5 track) intentionally left at its prior commit; every
   # change since ships on the v1.5.x track via ref, which is a v1.5.4 tree.
   andium: c9e1a4d3b98a814c86295ecb2ed760be286242ba
-  ref: b923ad8938833fa225dbeed9e1e5a72b6f5dadb3
+  ref: 437e204507c83e90a8b9a499007a9b2433ae6a31
   # ref_next is what makes the PRERELEASE leg actually build against DuckDB
   # v2.0. Without it build_next.yml prints "Skipping prerelease validation" and
   # the PR passes green having verified nothing on that line. Same commit as
   # ref: this tag builds on both.
-  ref_next: b923ad8938833fa225dbeed9e1e5a72b6f5dadb3
+  ref_next: 437e204507c83e90a8b9a499007a9b2433ae6a31
 docs:
   hello_world: |
     -- Load the extension
@@ -120,8 +120,8 @@ docs:
 
 extension_star_count: 31
 extension_star_count_pretty: 31
-extension_download_count: 1263
-extension_download_count_pretty: 1.3k
+extension_download_count: 1393
+extension_download_count_pretty: 1.4k
 image: '/images/community_extensions/social_preview/preview_community_extension_markdown.png'
 layout: community_extension_doc
 ---
@@ -147,32 +147,44 @@ LOAD {{ page.extension.name }};
 
 <div class="extension_functions_table"></div>
 
-|         function_name         | function_type | description | comment | examples |
-|-------------------------------|---------------|-------------|---------|----------|
-| duck_block_to_md              | scalar        | NULL        | NULL    |          |
-| duck_blocks_to_md             | scalar        | NULL        | NULL    |          |
-| duck_blocks_to_sections       | scalar        | NULL        | NULL    |          |
-| md_extract_code_blocks        | scalar        | NULL        | NULL    |          |
-| md_extract_frontmatter        | scalar        | NULL        | NULL    |          |
-| md_extract_images             | scalar        | NULL        | NULL    |          |
-| md_extract_links              | scalar        | NULL        | NULL    |          |
-| md_extract_metadata           | scalar        | NULL        | NULL    |          |
-| md_extract_section            | scalar        | NULL        | NULL    |          |
-| md_extract_sections           | scalar        | NULL        | NULL    |          |
-| md_extract_table_rows         | scalar        | NULL        | NULL    |          |
-| md_extract_tables_json        | scalar        | NULL        | NULL    |          |
-| md_extract_tags               | scalar        | NULL        | NULL    |          |
-| md_extract_wikilinks          | scalar        | NULL        | NULL    |          |
-| md_section_breadcrumb         | scalar        | NULL        | NULL    |          |
-| md_stats                      | scalar        | NULL        | NULL    |          |
-| md_to_html                    | scalar        | NULL        | NULL    |          |
-| md_to_text                    | scalar        | NULL        | NULL    |          |
-| md_valid                      | scalar        | NULL        | NULL    |          |
-| parse_markdown_to_duck_blocks | scalar        | NULL        | NULL    |          |
-| read_markdown                 | table         | NULL        | NULL    |          |
-| read_markdown_blocks          | table         | NULL        | NULL    |          |
-| read_markdown_sections        | table         | NULL        | NULL    |          |
-| value_to_md                   | scalar        | NULL        | NULL    |          |
+|         function_name         | function_type |                                    description                                     | comment |                                                                              examples                                                                               |
+|-------------------------------|---------------|------------------------------------------------------------------------------------|---------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| duck_block_to_md              | scalar        | Convert a single duck_block struct to Markdown text.                               | NULL    | [duck_block_to_md({'kind': 'container', 'element_type': 'paragraph', 'content': 'hello', 'level': 0, 'encoding': 'text', 'attributes': map(), 'element_order': 0})] |
+| duck_blocks_to_md             | scalar        | Convert a list of duck_blocks to Markdown text.                                    | NULL    | [duck_blocks_to_md([])]                                                                                                                                             |
+| duck_blocks_to_sections       | scalar        | Convert a list of duck_blocks into structured sections.                            | NULL    | [duck_blocks_to_sections([])]                                                                                                                                       |
+| md_extract_code_blocks        | scalar        | Extract fenced and indented code blocks from Markdown content.                     | NULL    | [md_extract_code_blocks('```sql
+SELECT 1;
+```')]                                                                                                                                                              |
+| md_extract_frontmatter        | scalar        | Extract the raw YAML frontmatter text block from Markdown.                         | NULL    | [md_extract_frontmatter('---
+title: Test
+---
+# Body')]                                                                                                                                                           |
+| md_extract_images             | scalar        | Extract images from Markdown content.                                              | NULL    | [md_extract_images('![Logo](logo.png)')]                                                                                                                            |
+| md_extract_links              | scalar        | Extract hyperlinks from Markdown content.                                          | NULL    | [md_extract_links('[DuckDB](https://duckdb.org)')]                                                                                                                  |
+| md_extract_metadata           | scalar        | Extract YAML frontmatter from Markdown text as a MAP.                              | NULL    | [md_extract_metadata('---
+title: Test
+---
+# Body')]                                                                                                                                                           |
+| md_extract_section            | scalar        | NULL                                                                               | NULL    |                                                                                                                                                                     |
+| md_extract_sections           | scalar        | NULL                                                                               | NULL    |                                                                                                                                                                     |
+| md_extract_table_rows         | scalar        | Extract table cell rows from Markdown content.                                     | NULL    | [md_extract_table_rows('\| a \| b \|
+\|---\|---\|
+\| 1 \| 2 \|')]                                                                                                                                                     |
+| md_extract_tables_json        | scalar        | Extract tables from Markdown content as structured objects.                        | NULL    | [md_extract_tables_json('\| a \| b \|
+\|---\|---\|
+\| 1 \| 2 \|')]                                                                                                                                                     |
+| md_extract_tags               | scalar        | Extract hashtag tags from Markdown content.                                        | NULL    | [md_extract_tags('Tag #important text')]                                                                                                                            |
+| md_extract_wikilinks          | scalar        | Extract wiki-style links and embeds from Markdown content.                         | NULL    | [md_extract_wikilinks('[[Page Name]]')]                                                                                                                             |
+| md_section_breadcrumb         | scalar        | Generate a breadcrumb string combining file path and section identifier.           | NULL    | [md_section_breadcrumb('doc.md', 'intro')]                                                                                                                          |
+| md_stats                      | scalar        | NULL                                                                               | NULL    |                                                                                                                                                                     |
+| md_to_html                    | scalar        | Convert Markdown text to HTML.                                                     | NULL    | [md_to_html('# Title')]                                                                                                                                             |
+| md_to_text                    | scalar        | Convert Markdown text to plain text.                                               | NULL    | [md_to_text('# Title')]                                                                                                                                             |
+| md_valid                      | scalar        | Validate markdown content.                                                         | NULL    | [md_valid('# Hello')]                                                                                                                                               |
+| parse_markdown_to_duck_blocks | scalar        | Parse Markdown text into a list of canonical duck_block structs.                   | NULL    | [parse_markdown_to_duck_blocks('# Hello')]                                                                                                                          |
+| read_markdown                 | table         | Read Markdown documents from files into table format with frontmatter and content. | NULL    | [SELECT * FROM read_markdown('README.md')]                                                                                                                          |
+| read_markdown_blocks          | table         | Read Markdown files parsed into atomic block elements.                             | NULL    | [SELECT * FROM read_markdown_blocks('README.md')]                                                                                                                   |
+| read_markdown_sections        | table         | Read Markdown files split by headings into structured sections.                    | NULL    | [SELECT * FROM read_markdown_sections('README.md')]                                                                                                                 |
+| value_to_md                   | scalar        | Convert any value to a Markdown formatted string.                                  | NULL    | [value_to_md(42)]                                                                                                                                                   |
 
 ### Overloaded Functions
 

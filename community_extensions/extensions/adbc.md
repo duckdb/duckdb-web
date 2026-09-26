@@ -8,7 +8,7 @@ excerpt: |
 extension:
   name: adbc
   description: Connects DuckDB to any database that has an Arrow Database Connectivity (ADBC) driver.
-  version: '0.0.1'
+  version: '0.0.2'
   language: C++
   build: cmake
   license: Apache-2.0
@@ -16,8 +16,8 @@ extension:
     - columnar-tech
 repo:
   github: columnar-tech/duckdb-adbc-client
-  andium: afb369c073959805a3c6691bd097b1a61bac0294
-  ref: e0c62ee9e6557c31fd2ea7ead773ea338567612a
+  andium: 4234c581082cfa435c78fbe78c7f8815fe8d9dd8  
+  ref: 42e2b1b6a42b0089bcfd3ba1c0057d557a05f924
 docs:
   hello_world: |
     -- Install and load the ADBC extension
@@ -53,7 +53,7 @@ docs:
     │          │         │         │  min_age, min_players,        │  VARCHAR, BIGINT, BIGINT,      │           │
     │          │         │         │  max_players, list_price]     │  BIGINT, VARCHAR]              │           │
     └──────────┴─────────┴─────────┴───────────────────────────────┴────────────────────────────────┴───────────┘
-    -- Read directly from the attached ADBC table (no projection or predicate pushdown, use read_adbc for that)
+    -- Read directly from the attached ADBC table (no predicate pushdown, use read_adbc for that)
     D SELECT * FROM games;
     ┌───────┬────────────┬─────────────────────┬─────────┬─────────┬─────────────┬─────────────┬────────────┐
     │  id   │    name    │      inventor       │  year   │ min_age │ min_players │ max_players │ list_price │
@@ -111,22 +111,22 @@ docs:
     By building on Arrow, ADBC enables:
     1. **Lightning-fast (zero-copy) data transfer** between column-oriented analytical databases, bypassing the slow column-to-row and row-to-column conversions typical of legacy row-based APIs like ODBC or JDBC.
     2. **Seamless interoperability** with a large and growing ecosystem of Arrow-compatible systems.
-    ### Key Capabilities
+    # Key Capabilities
     * Supports catalog lookups, `SELECT`, `INSERT`, `COPY`, and `CREATE TABLE AS` (`CTAS`) statements directly on attached databases.
     * Supports custom delimiters with `ATTACH` (e.g., `DELIMITER '[]'`) to support systems with different table/schema delimiters.
     * Supports built-in connection pooling for each attached database (tunable with `adbc_connection_pool_size`)
     * Support streaming bulk ingest for `INSERT`, `COPY`, and CTAS statements, keeping memory usage low even for data sets that exceed main memory (tunable with `adbc_insert_buffer_size`).
-    ### Known Limitations
+    # Known Limitations
     * Operates exclusively in **Autocommit Mode**.
-    * Predicate and projection pushdowns are not automatically performed for attached tables; use direct `read_adbc()` queries to push projections and predicates to remote ADBC databases.
+    * Predicate pushdowns are not automatically performed for attached tables; use direct `read_adbc()` queries to push predicates to remote ADBC databases.
     * Concurrent ADBC operations within a single process are not supported. Mixing ADBC reads and writes in the same SQL statement is also restricted by default unless explicitly permitted via `adbc_mix_reads_writes`.
     For more information see the [documentation](https://github.com/columnar-tech/duckdb-adbc-client).
 
 
 extension_star_count: 48
 extension_star_count_pretty: 48
-extension_download_count: 1100
-extension_download_count_pretty: 1.1k
+extension_download_count: 1206
+extension_download_count_pretty: 1.2k
 image: '/images/community_extensions/social_preview/preview_community_extension_adbc.png'
 layout: community_extension_doc
 ---
@@ -152,11 +152,11 @@ LOAD {{ page.extension.name }};
 
 <div class="extension_functions_table"></div>
 
-|  function_name   | function_type | description | comment | examples |
-|------------------|---------------|-------------|---------|----------|
-| adbc_clear_cache | table         | NULL        | NULL    |          |
-| adbc_execute     | table         | NULL        | NULL    |          |
-| read_adbc        | table         | NULL        | NULL    |          |
+|  function_name   | function_type |                                                                   description                                                                    | comment |                              examples                               |
+|------------------|---------------|--------------------------------------------------------------------------------------------------------------------------------------------------|---------|---------------------------------------------------------------------|
+| adbc_clear_cache | table         | Clears DuckDB's locally cached metadata for attached ADBC databases. Forces catalog and schema information to be fetched from the ADBC database. | NULL    | [CALL adbc_clear_cache();]                                          |
+| adbc_execute     | table         | Executes an SQL statement (e.g. DROP TABLE, CREATE INDEX) against a remote ADBC database.                                                        | NULL    | [CALL adbc_execute('profile://mydb', 'DROP TABLE games');]          |
+| read_adbc        | table         | Executes a SQL query against a remote database via an ADBC connection profile URI and returns the result as a DuckDB table.                      | NULL    | [SELECT * FROM read_adbc('profile://mydb', 'SELECT * FROM games');] |
 
 ### Overloaded Functions
 

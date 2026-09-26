@@ -8,7 +8,7 @@ excerpt: |
 extension:
   name: webbed
   description: Comprehensive processing extension for web markup languages (XML and HTML) with SAX streaming for large files, intelligent schema inference, XPath-based data extraction, and HTML table parsing.
-  version: 2.9.1
+  version: 2.9.2
   language: C++
   build: cmake
   license: MIT
@@ -24,7 +24,7 @@ repo:
   andium: ddda30f11352138b2451657419640370d1612137
   # andium (DuckDB v1.4.5 track) left at its prior commit; v2.9.1 ships on the
   # v1.5.x track via ref and is verified against DuckDB 2.0 (main) as well.
-  ref: cdd866f0b6b6be7927a3bb56e2c16e18fe04e9b4
+  ref: 4b70396efc17cb74a3723a7d1ee650aa5e4fa064
   # ref_next is what makes the PRERELEASE leg actually build against DuckDB
   # v2.0. Without it build_next.yml prints "Skipping prerelease validation" and
   # the PR passes green having verified nothing on that line. Same commit as
@@ -111,8 +111,8 @@ docs:
 
 extension_star_count: 76
 extension_star_count_pretty: 76
-extension_download_count: 18917
-extension_download_count_pretty: 18.9k
+extension_download_count: 19419
+extension_download_count_pretty: 19.4k
 image: '/images/community_extensions/social_preview/preview_community_extension_webbed.png'
 layout: community_extension_doc
 ---
@@ -138,56 +138,56 @@ LOAD {{ page.extension.name }};
 
 <div class="extension_functions_table"></div>
 
-|         function_name          | function_type | description | comment | examples |
-|--------------------------------|---------------|-------------|---------|----------|
-| duck_blocks_to_html            | scalar        | NULL        | NULL    |          |
-| html_escape                    | scalar        | NULL        | NULL    |          |
-| html_extract_images            | scalar        | NULL        | NULL    |          |
-| html_extract_links             | scalar        | NULL        | NULL    |          |
-| html_extract_table_rows        | scalar        | NULL        | NULL    |          |
-| html_extract_tables            | table         | NULL        | NULL    |          |
-| html_extract_tables_json       | scalar        | NULL        | NULL    |          |
-| html_extract_text              | scalar        | NULL        | NULL    |          |
-| html_to_duck_blocks            | scalar        | NULL        | NULL    |          |
-| html_unescape                  | scalar        | NULL        | NULL    |          |
-| json_to_xml                    | scalar        | NULL        | NULL    |          |
-| parse_html                     | scalar        | NULL        | NULL    |          |
-| parse_html                     | table         | NULL        | NULL    |          |
-| parse_html_blocks              | table         | NULL        | NULL    |          |
-| parse_html_objects             | table         | NULL        | NULL    |          |
-| parse_xml                      | table         | NULL        | NULL    |          |
-| parse_xml_objects              | table         | NULL        | NULL    |          |
-| read_html                      | table         | NULL        | NULL    |          |
-| read_html_blocks               | table         | NULL        | NULL    |          |
-| read_html_objects              | table         | NULL        | NULL    |          |
-| read_xml                       | table         | NULL        | NULL    |          |
-| read_xml_objects               | table         | NULL        | NULL    |          |
-| to_xml                         | scalar        | NULL        | NULL    |          |
-| xml                            | scalar        | NULL        | NULL    |          |
-| xml_add_namespace_declarations | scalar        | NULL        | NULL    |          |
-| xml_common_namespaces          | scalar        | NULL        | NULL    |          |
-| xml_detect_prefixes            | scalar        | NULL        | NULL    |          |
-| xml_extract_all_text           | scalar        | NULL        | NULL    |          |
-| xml_extract_attributes         | scalar        | NULL        | NULL    |          |
-| xml_extract_cdata              | scalar        | NULL        | NULL    |          |
-| xml_extract_comments           | scalar        | NULL        | NULL    |          |
-| xml_extract_elements           | scalar        | NULL        | NULL    |          |
-| xml_extract_elements_string    | scalar        | NULL        | NULL    |          |
-| xml_extract_text               | scalar        | NULL        | NULL    |          |
-| xml_find_undefined_prefixes    | scalar        | NULL        | NULL    |          |
-| xml_libxml2_version            | scalar        | NULL        | NULL    |          |
-| xml_lookup_namespace           | scalar        | NULL        | NULL    |          |
-| xml_minify                     | scalar        | NULL        | NULL    |          |
-| xml_mock_namespaces            | scalar        | NULL        | NULL    |          |
-| xml_namespaces                 | scalar        | NULL        | NULL    |          |
-| xml_oom_selftest               | scalar        | NULL        | NULL    |          |
-| xml_pretty_print               | scalar        | NULL        | NULL    |          |
-| xml_stats                      | scalar        | NULL        | NULL    |          |
-| xml_to_json                    | scalar        | NULL        | NULL    |          |
-| xml_valid                      | scalar        | NULL        | NULL    |          |
-| xml_validate_schema            | scalar        | NULL        | NULL    |          |
-| xml_well_formed                | scalar        | NULL        | NULL    |          |
-| xml_wrap_fragment              | scalar        | NULL        | NULL    |          |
+|         function_name          | function_type |                                                description                                                 | comment |                                                                                 examples                                                                                 |
+|--------------------------------|---------------|------------------------------------------------------------------------------------------------------------|---------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| duck_blocks_to_html            | scalar        | Convert a list of duck_block structures back into an HTML document string.                                 | NULL    | [duck_blocks_to_html(html_to_duck_blocks('<h1>Title</h1>'))]                                                                                                             |
+| html_escape                    | scalar        | Escape special characters for HTML embedding.                                                              | NULL    | [html_escape('<hello & world>')]                                                                                                                                         |
+| html_extract_images            | scalar        | Extract all image tags (<img>) from HTML as a list of structs.                                             | NULL    | [html_extract_images('<img src="logo.png" alt="Logo" />')]                                                                                                               |
+| html_extract_links             | scalar        | Extract all hyperlink tags (<a>) from HTML as a list of structs.                                           | NULL    | [html_extract_links('<a href="https://duckdb.org">DuckDB</a>')]                                                                                                          |
+| html_extract_table_rows        | scalar        | Extract rows and cells from all tables in HTML as a list of structs.                                       | NULL    | [html_extract_table_rows('<table><tr><td>A</td></tr></table>')]                                                                                                          |
+| html_extract_tables            | table         | Extract all HTML tables from an HTML string as structured rows.                                            | NULL    | [SELECT * FROM html_extract_tables('<table><tr><td>A</td></tr></table>')]                                                                                                |
+| html_extract_tables_json       | scalar        | Extract all tables from HTML as JSON structures.                                                           | NULL    | [html_extract_tables_json('<table><tr><th>H</th></tr><tr><td>V</td></tr></table>')]                                                                                      |
+| html_extract_text              | scalar        | NULL                                                                                                       | NULL    |                                                                                                                                                                          |
+| html_to_duck_blocks            | scalar        | Parse an HTML document into a list of duck_block structures.                                               | NULL    | [html_to_duck_blocks('<h1>Title</h1><p>Text</p>'), html_to_duck_blocks('<table>...</table>', capture_attributes := true)]                                                |
+| html_unescape                  | scalar        | Decode HTML entities in a string.                                                                          | NULL    | [html_unescape('&lt;hello&amp;world&gt;')]                                                                                                                               |
+| json_to_xml                    | scalar        | Convert a JSON string to XML.                                                                              | NULL    | [json_to_xml('{"root": {"item": "Hello"{% raw %}}}{% endraw %}')]                                                                                                        |
+| parse_html                     | scalar        | Parse an HTML string into an HTML type.                                                                    | NULL    | [parse_html('<div>Hello</div>')]                                                                                                                                         |
+| parse_html                     | table         | Parse an HTML string with automatic schema inference and return tabular data.                              | NULL    | [SELECT * FROM parse_html('<div><p>Paragraph</p></div>')]                                                                                                                |
+| parse_html_blocks              | table         | Parse an HTML string and return each element as a duck_block row.                                          | NULL    | [SELECT * FROM parse_html_blocks('<h1>Hello</h1><p>World</p>')]                                                                                                          |
+| parse_html_objects             | table         | Parse an HTML string and return raw HTML object content.                                                   | NULL    | [SELECT * FROM parse_html_objects('<div><span>A</span></div>')]                                                                                                          |
+| parse_xml                      | table         | Parse an XML string with automatic schema inference and return tabular data.                               | NULL    | [SELECT * FROM parse_xml('<root><item id="1">A</item></root>')]                                                                                                          |
+| parse_xml_objects              | table         | Parse an XML string and return raw XML object content.                                                     | NULL    | [SELECT * FROM parse_xml_objects('<root><item>1</item></root>')]                                                                                                         |
+| read_html                      | table         | Read an HTML file with automatic schema inference and return tabular data.                                 | NULL    | [SELECT * FROM read_html('page.html')]                                                                                                                                   |
+| read_html_blocks               | table         | Read an HTML file and return each element as a duck_block row.                                             | NULL    | [SELECT * FROM read_html_blocks('page.html')]                                                                                                                            |
+| read_html_objects              | table         | Read an HTML file and return raw HTML object content.                                                      | NULL    | [SELECT * FROM read_html_objects('page.html')]                                                                                                                           |
+| read_xml                       | table         | Read an XML file with automatic schema inference and return tabular data.                                  | NULL    | [SELECT * FROM read_xml('data.xml'), SELECT * FROM read_xml('data.xml', record_element := '//item')]                                                                     |
+| read_xml_objects               | table         | Read an XML file and return raw XML object content.                                                        | NULL    | [SELECT * FROM read_xml_objects('data.xml')]                                                                                                                             |
+| to_xml                         | scalar        | NULL                                                                                                       | NULL    |                                                                                                                                                                          |
+| xml                            | scalar        | Cast or convert a string to XML.                                                                           | NULL    | [xml('<root>value</root>')]                                                                                                                                              |
+| xml_add_namespace_declarations | scalar        | Inject xmlns namespace declarations into an XML document root element.                                     | NULL    | [xml_add_namespace_declarations('<root/>', map(['ns'], ['http://example.com']))]                                                                                         |
+| xml_common_namespaces          | scalar        | Return a map of common, well-known namespace prefixes and their URIs.                                      | NULL    | [xml_common_namespaces()]                                                                                                                                                |
+| xml_detect_prefixes            | scalar        | Detect namespace prefixes used within an XPath expression.                                                 | NULL    | [xml_detect_prefixes('//ns:item/other:tag')]                                                                                                                             |
+| xml_extract_all_text           | scalar        | Extract all concatenated text content from an XML document or fragment.                                    | NULL    | [xml_extract_all_text('<root><a/><b/></root>')]                                                                                                                          |
+| xml_extract_attributes         | scalar        | Extract attributes from elements matching an XPath expression as a list of structs.                        | NULL    | [xml_extract_attributes('<root><item id="1" val="a"/></root>', '//item')]                                                                                                |
+| xml_extract_cdata              | scalar        | Extract CDATA sections from an XML document as a list of structs with content and line numbers.            | NULL    | [xml_extract_cdata('<root><![CDATA[some raw content]]></root>')]                                                                                                         |
+| xml_extract_comments           | scalar        | Extract comments from an XML document as a list of structs with content and line numbers.                  | NULL    | [xml_extract_comments('<!-- a comment --><root/>')]                                                                                                                      |
+| xml_extract_elements           | scalar        | Extract XML fragments matching an XPath expression as a list of XML fragments.                             | NULL    | [xml_extract_elements('<root><item>A</item><item>B</item></root>', '//item')]                                                                                            |
+| xml_extract_elements_string    | scalar        | Extract XML elements matching an XPath expression as a single concatenated string.                         | NULL    | [xml_extract_elements_string('<root><item>A</item></root>', '//item')]                                                                                                   |
+| xml_extract_text               | scalar        | Extract text content matching an XPath expression from XML as a list of strings.                           | NULL    | [xml_extract_text('<root><item>Hello</item></root>', '//item'), xml_extract_text('<root xmlns:ns="uri"><ns:item>A</ns:item></root>', '//ns:item', map(['ns'], ['uri']))] |
+| xml_find_undefined_prefixes    | scalar        | Find namespace prefixes used in an XPath expression that are not declared in the XML document.             | NULL    | [xml_find_undefined_prefixes('<root/>', '//ns:item')]                                                                                                                    |
+| xml_libxml2_version            | scalar        | Return the linked libxml2 version.                                                                         | NULL    | [xml_libxml2_version('test')]                                                                                                                                            |
+| xml_lookup_namespace           | scalar        | Lookup URI for a well-known namespace prefix.                                                              | NULL    | [xml_lookup_namespace('soap')]                                                                                                                                           |
+| xml_minify                     | scalar        | Minify an XML string by removing unnecessary whitespace.                                                   | NULL    | [xml_minify('<root>\n  <child>value</child>\n</root>')]                                                                                                                  |
+| xml_mock_namespaces            | scalar        | Generate mock namespace URI mappings for a list of prefixes.                                               | NULL    | [xml_mock_namespaces(['ns', 'other'])]                                                                                                                                   |
+| xml_namespaces                 | scalar        | Extract all declared namespace prefixes and URIs from an XML document as a MAP.                            | NULL    | [xml_namespaces('<root xmlns:a="http://example.com"/>')]                                                                                                                 |
+| xml_oom_selftest               | scalar        | Internal regression self-test for libxml2 memory handling.                                                 | NULL    | [xml_oom_selftest()]                                                                                                                                                     |
+| xml_pretty_print               | scalar        | Format and indent an XML string.                                                                           | NULL    | [xml_pretty_print('<root><child>value</child></root>')]                                                                                                                  |
+| xml_stats                      | scalar        | Compute statistics (element count, attribute count, max depth, size, namespace count) for an XML document. | NULL    | [xml_stats('<root><item a="1"/></root>')]                                                                                                                                |
+| xml_to_json                    | scalar        | Convert an XML string to JSON.                                                                             | NULL    | [xml_to_json('<root><item>Hello</item></root>'), xml_to_json('<root a="1"><item>Hello</item></root>', attr_mode := 'prefixed')]                                          |
+| xml_valid                      | scalar        | Check if an XML string or document is well-formed.                                                         | NULL    | [xml_valid('<root></root>'), xml_valid('<unclosed>')]                                                                                                                    |
+| xml_validate_schema            | scalar        | Validate an XML string against an XSD schema string.                                                       | NULL    | [xml_validate_schema(xml_doc, xsd_schema)]                                                                                                                               |
+| xml_well_formed                | scalar        | Check if an XML string or document is well-formed.                                                         | NULL    | [xml_well_formed('<root><child/></root>')]                                                                                                                               |
+| xml_wrap_fragment              | scalar        | Wrap XML fragment content in an enclosing root tag.                                                        | NULL    | [xml_wrap_fragment('<a>1</a><b>2</b>', 'root')]                                                                                                                          |
 
 ### Overloaded Functions
 

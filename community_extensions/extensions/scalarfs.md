@@ -8,7 +8,7 @@ excerpt: |
 extension:
   name: scalarfs
   description: A collection of virtual filesystems for working with scalars
-  version: 1.6.0
+  version: 1.6.1
   language: C++
   build: cmake
   license: MIT
@@ -17,7 +17,7 @@ extension:
 repo:
   github: teaguesterling/duckdb_scalarfs
   andium: 68faa6c72054123a6c6521dd41c12f929431da50
-  ref: 4863e4e33cf80792bcd0ebd72e6d5580aacd0e2a
+  ref: 0ee19182b2a83c8b9c998018e464723b9fb7d1f3
   ref_next: 4863e4e33cf80792bcd0ebd72e6d5580aacd0e2a
 docs:
   hello_world: |
@@ -87,8 +87,8 @@ docs:
 
 extension_star_count: 10
 extension_star_count_pretty: 10
-extension_download_count: 1337
-extension_download_count_pretty: 1.3k
+extension_download_count: 1233
+extension_download_count_pretty: 1.2k
 image: '/images/community_extensions/social_preview/preview_community_extension_scalarfs.png'
 layout: community_extension_doc
 ---
@@ -114,18 +114,19 @@ LOAD {{ page.extension.name }};
 
 <div class="extension_functions_table"></div>
 
-|   function_name    | function_type | description | comment | examples |
-|--------------------|---------------|-------------|---------|----------|
-| from_blob_uri      | scalar        | NULL        | NULL    |          |
-| from_data_uri      | scalar        | NULL        | NULL    |          |
-| from_pathmacro_url | scalar        | NULL        | NULL    |          |
-| from_scalarfs_uri  | scalar        | NULL        | NULL    |          |
-| from_varchar_uri   | scalar        | NULL        | NULL    |          |
-| to_blob_uri        | scalar        | NULL        | NULL    |          |
-| to_data_uri        | scalar        | NULL        | NULL    |          |
-| to_pathmacro_url   | scalar        | NULL        | NULL    |          |
-| to_scalarfs_uri    | scalar        | NULL        | NULL    |          |
-| to_varchar_uri     | scalar        | NULL        | NULL    |          |
+|   function_name    | function_type |                                  description                                   | comment |                      examples                      |
+|--------------------|---------------|--------------------------------------------------------------------------------|---------|----------------------------------------------------|
+| from_blob_uri      | scalar        | Decode a blob: URI to its string payload.                                      | NULL    | [from_blob_uri('blob:68656c6c6f')]                 |
+| from_data_uri      | scalar        | Decode an RFC 2397 data: URI to its payload string.                            | NULL    | [from_data_uri('data:text/plain;base64,aGVsbG8=')] |
+| from_pathmacro_url | scalar        | Parse a pathmacro: URL into a struct containing macro name and parameters map. | NULL    | [from_pathmacro_url('pathmacro:my_macro?key=val')] |
+| from_scalarfs_uri  | scalar        | Decode any scalarfs-compatible URI to its string payload.                      | NULL    | [from_scalarfs_uri('varchar:hello%20world')]       |
+| from_varchar_uri   | scalar        | Decode a varchar: URI to its string payload.                                   | NULL    | [from_varchar_uri('varchar:hello%20world')]        |
+| to_blob_uri        | scalar        | Encode a string as a hex-encoded blob: URI.                                    | NULL    | [to_blob_uri('hello world')]                       |
+| to_data_uri        | scalar        | Encode a string into an RFC 2397 data: URI.                                    | NULL    | [to_data_uri('hello world')]                       |
+| to_pathmacro_url   | scalar        | Construct a pathmacro: URL from a macro name and parameters struct/map.        | NULL    | [to_pathmacro_url('my_macro', {'key': 'val'})]     |
+| to_pathmacro_url   | scalar        | Construct a pathmacro: URL from a macro name.                                  | NULL    | [to_pathmacro_url('my_macro')]                     |
+| to_scalarfs_uri    | scalar        | NULL                                                                           | NULL    |                                                    |
+| to_varchar_uri     | scalar        | Encode a string as a percent-encoded varchar: URI.                             | NULL    | [to_varchar_uri('hello world')]                    |
 
 ### Overloaded Functions
 

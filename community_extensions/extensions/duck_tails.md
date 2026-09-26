@@ -8,7 +8,7 @@ excerpt: |
 extension:
   name: duck_tails
   description: Smart Development Intelligence for DuckDB - Git-aware data analysis capabilities that allow querying git history, accessing files at any revision, and performing version-aware data analysis with SQL.
-  version: 1.7.0
+  version: 1.7.1
   language: C++
   build: cmake
   license: MIT
@@ -18,7 +18,7 @@ extension:
     - teaguesterling
 repo:
   github: teaguesterling/duck_tails
-  ref: 1223e5d94f08832319c9dcad67b380da122fc509
+  ref: bfcbe4b7bd3f200bbcda903b2af3fdce2ac9a033
   ref_next: 1223e5d94f08832319c9dcad67b380da122fc509
 
 docs:
@@ -62,8 +62,8 @@ docs:
 
 extension_star_count: 26
 extension_star_count_pretty: 26
-extension_download_count: 1351
-extension_download_count_pretty: 1.4k
+extension_download_count: 1661
+extension_download_count_pretty: 1.7k
 image: '/images/community_extensions/social_preview/preview_community_extension_duck_tails.png'
 layout: community_extension_doc
 ---
@@ -89,34 +89,43 @@ LOAD {{ page.extension.name }};
 
 <div class="extension_functions_table"></div>
 
-|    function_name     | function_type | description | comment | examples |
-|----------------------|---------------|-------------|---------|----------|
-| diff_text            | scalar        | NULL        | NULL    |          |
-| git_blame            | table         | NULL        | NULL    |          |
-| git_blame_each       | table         | NULL        | NULL    |          |
-| git_blame_hunks      | table         | NULL        | NULL    |          |
-| git_blame_hunks_each | table         | NULL        | NULL    |          |
-| git_branches         | table         | NULL        | NULL    |          |
-| git_branches_each    | table         | NULL        | NULL    |          |
-| git_diff_tree        | table         | NULL        | NULL    |          |
-| git_diff_tree_each   | table         | NULL        | NULL    |          |
-| git_log              | table         | NULL        | NULL    |          |
-| git_log_each         | table         | NULL        | NULL    |          |
-| git_parents          | table         | NULL        | NULL    |          |
-| git_parents_each     | table         | NULL        | NULL    |          |
-| git_read             | table         | NULL        | NULL    |          |
-| git_read_each        | table         | NULL        | NULL    |          |
-| git_status           | table         | NULL        | NULL    |          |
-| git_status_each      | table         | NULL        | NULL    |          |
-| git_tags             | table         | NULL        | NULL    |          |
-| git_tags_each        | table         | NULL        | NULL    |          |
-| git_tree             | table         | NULL        | NULL    |          |
-| git_tree_each        | table         | NULL        | NULL    |          |
-| git_uri              | scalar        | NULL        | NULL    |          |
-| read_git_diff        | table         | NULL        | NULL    |          |
-| text_diff            | scalar        | NULL        | NULL    |          |
-| text_diff_lines      | table         | NULL        | NULL    |          |
-| text_diff_stats      | scalar        | NULL        | NULL    |          |
+|    function_name     | function_type |                                 description                                 | comment |                       examples                       |
+|----------------------|---------------|-----------------------------------------------------------------------------|---------|------------------------------------------------------|
+| diff_text            | scalar        | Compute unified diff between two text strings.                              | NULL    | [diff_text('old text', 'new text')]                  |
+| git_blame            | table         | Show line-by-line git blame annotations for a file.                         | NULL    | [SELECT * FROM git_blame('README.md')]               |
+| git_blame_each       | table         | NULL                                                                        | NULL    |                                                      |
+| git_blame_hunks      | table         | Show git blame hunk annotations for a file.                                 | NULL    | [SELECT * FROM git_blame_hunks('README.md')]         |
+| git_blame_hunks_each | table         | NULL                                                                        | NULL    |                                                      |
+| git_branches         | table         | List git branches from current directory repository.                        | NULL    | [SELECT * FROM git_branches()]                       |
+| git_branches         | table         | NULL                                                                        | NULL    |                                                      |
+| git_branches_each    | table         | NULL                                                                        | NULL    |                                                      |
+| git_diff_tree        | table         | Show diff of working tree changes in current repository.                    | NULL    | [SELECT * FROM git_diff_tree()]                      |
+| git_diff_tree        | table         | NULL                                                                        | NULL    |                                                      |
+| git_diff_tree_each   | table         | NULL                                                                        | NULL    |                                                      |
+| git_log              | table         | Read git commit log from current directory.                                 | NULL    | [SELECT * FROM git_log()]                            |
+| git_log              | table         | NULL                                                                        | NULL    |                                                      |
+| git_log_each         | table         | NULL                                                                        | NULL    |                                                      |
+| git_parents          | table         | List parent commits for HEAD in current repository.                         | NULL    | [SELECT * FROM git_parents()]                        |
+| git_parents          | table         | NULL                                                                        | NULL    |                                                      |
+| git_parents_each     | table         | NULL                                                                        | NULL    |                                                      |
+| git_read             | table         | NULL                                                                        | NULL    |                                                      |
+| git_read_each        | table         | NULL                                                                        | NULL    |                                                      |
+| git_status           | table         | Show working tree status for current directory repository.                  | NULL    | [SELECT * FROM git_status()]                         |
+| git_status           | table         | NULL                                                                        | NULL    |                                                      |
+| git_status_each      | table         | LATERAL table function to show git working tree status for input repo path. | NULL    | [SELECT * FROM repos, LATERAL git_status_each(path)] |
+| git_tags             | table         | List git tags from current directory repository.                            | NULL    | [SELECT * FROM git_tags()]                           |
+| git_tags             | table         | NULL                                                                        | NULL    |                                                      |
+| git_tags_each        | table         | NULL                                                                        | NULL    |                                                      |
+| git_tree             | table         | List files in git tree for repository path or URI.                          | NULL    | [SELECT * FROM git_tree('.')]                        |
+| git_tree             | table         | NULL                                                                        | NULL    |                                                      |
+| git_tree_each        | table         | NULL                                                                        | NULL    |                                                      |
+| git_uri              | scalar        | Construct a canonical git:// URI from repo path, file path, and commit ref. | NULL    | [git_uri('.', 'README.md', 'HEAD')]                  |
+| read_git_diff        | table         | NULL                                                                        | NULL    |                                                      |
+| text_diff            | scalar        | Compute unified diff between two text strings.                              | NULL    | [text_diff('old text', 'new text')]                  |
+| text_diff_lines      | table         | Parse diff string into rows of individual line changes.                     | NULL    | [SELECT * FROM text_diff_lines('@@ -1 +1 @@
+-old
++new')]                                              |
+| text_diff_stats      | scalar        | NULL                                                                        | NULL    |                                                      |
 
 ### Overloaded Functions
 

@@ -8,7 +8,7 @@ excerpt: |
 extension:
   name: duck_hunt
   description: Parse and analyze test results, build outputs, and CI/CD pipeline logs from 110+ formats with severity filtering, format auto-detection, and context extraction
-  version: 1.12.0
+  version: 1.13.0
   language: C++
   build: cmake
   license: Apache-2.0
@@ -23,7 +23,13 @@ extension:
 repo:
   github: teaguesterling/duck_hunt
   andium: 68ca1c4676f706980a6503c19b789f5224596b4d
-  ref: 68ca1c4676f706980a6503c19b789f5224596b4d
+  ref: 3cb555ef05078cf741a419a324e68bef7ce4c8b7
+  # ref_next == ref (deliberate): makes the prerelease leg actually BUILD+TEST
+  # v1.13.0 against DuckDB v2.0-cyanoptera. Without ref_next, test_against_latest
+  # is skipped -- a green that verified nothing on the v2.0 line. v1.13.0 carries
+  # the v2.0 fix (#69: return QueryResult base; v2.0 removed MaterializedQueryResult),
+  # so this validates the next line rather than skipping it.
+  ref_next: 3cb555ef05078cf741a419a324e68bef7ce4c8b7
 
 docs:
   readme: https://duck-hunt.readthedocs.io/
@@ -180,8 +186,8 @@ docs:
 
 extension_star_count: 8
 extension_star_count_pretty: 8
-extension_download_count: 1195
-extension_download_count_pretty: 1.2k
+extension_download_count: 1421
+extension_download_count_pretty: 1.4k
 image: '/images/community_extensions/social_preview/preview_community_extension_duck_hunt.png'
 layout: community_extension_doc
 ---
@@ -207,20 +213,21 @@ LOAD {{ page.extension.name }};
 
 <div class="extension_functions_table"></div>
 
-|          function_name           | function_type | description | comment | examples |
-|----------------------------------|---------------|-------------|---------|----------|
-| duck_hunt_detect_format          | scalar        | NULL        | NULL    |          |
-| duck_hunt_diagnose_parse         | table         | NULL        | NULL    |          |
-| duck_hunt_diagnose_read          | table         | NULL        | NULL    |          |
-| duck_hunt_formats                | table         | NULL        | NULL    |          |
-| duck_hunt_load_parser_config     | scalar        | NULL        | NULL    |          |
-| duck_hunt_match_command_patterns | table_macro   | NULL        | NULL    |          |
-| duck_hunt_unload_parser          | scalar        | NULL        | NULL    |          |
-| parse_duck_hunt_log              | table         | NULL        | NULL    |          |
-| parse_duck_hunt_workflow_log     | table         | NULL        | NULL    |          |
-| read_duck_hunt_log               | table         | NULL        | NULL    |          |
-| read_duck_hunt_workflow_log      | table         | NULL        | NULL    |          |
-| status_badge                     | scalar        | NULL        | NULL    |          |
+|          function_name           | function_type |                                      description                                      | comment |                             examples                              |
+|----------------------------------|---------------|---------------------------------------------------------------------------------------|---------|-------------------------------------------------------------------|
+| duck_hunt_detect_format          | scalar        | Detect the log format of a text sample.                                               | NULL    | [duck_hunt_detect_format('=== RUN TestFoo')]                      |
+| duck_hunt_diagnose_parse         | table         | Diagnose log parsing issues for string content across all known format parsers.       | NULL    | [SELECT * FROM duck_hunt_diagnose_parse('sample log content')]    |
+| duck_hunt_diagnose_read          | table         | Diagnose log parsing issues for a log file path across all known format parsers.      | NULL    | [SELECT * FROM duck_hunt_diagnose_read('build.log')]              |
+| duck_hunt_formats                | table         | List all supported log and test output formats in duck_hunt.                          | NULL    | [SELECT * FROM duck_hunt_formats()]                               |
+| duck_hunt_load_parser_config     | scalar        | Load a dynamic JSON parser configuration into duck_hunt.                              | NULL    | [duck_hunt_load_parser_config('{}')]                              |
+| duck_hunt_match_command_patterns | table_macro   | NULL                                                                                  | NULL    |                                                                   |
+| duck_hunt_unload_parser          | scalar        | Unload a dynamic parser from duck_hunt.                                               | NULL    | [duck_hunt_unload_parser('custom_fmt')]                           |
+| parse_duck_hunt_log              | table         | Parse test and validation log text content into structured validation events.         | NULL    | [SELECT * FROM parse_duck_hunt_log('PASSED: test_foo')]           |
+| parse_duck_hunt_workflow_log     | table         | Parse workflow log text into structured steps and events.                             | NULL    | [SELECT * FROM parse_duck_hunt_workflow_log('##[group]Run step')] |
+| read_duck_hunt_log               | table         | Read and parse test and validation logs from files into structured validation events. | NULL    | [SELECT * FROM read_duck_hunt_log('test.log')]                    |
+| read_duck_hunt_workflow_log      | table         | Read and parse workflow logs (GitHub Actions, GitLab CI, etc.) into steps and events. | NULL    | [SELECT * FROM read_duck_hunt_workflow_log('workflow.log')]       |
+| status_badge                     | scalar        | Generate a status badge string from test execution status.                            | NULL    | [status_badge('passed')]                                          |
+| status_badge                     | scalar        | NULL                                                                                  | NULL    |                                                                   |
 
 ### Overloaded Functions
 

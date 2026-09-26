@@ -8,7 +8,7 @@ excerpt: |
 extension:
   name: urlpattern
   description: WHATWG URLPattern API for matching and extracting components from URLs using pattern syntax
-  version: 0.4.1
+  version: 0.4.2
   language: C++
   build: cmake
   license: MIT
@@ -19,11 +19,14 @@ extension:
 
 repo:
   github: teaguesterling/duckdb_urlpattern
+  ref: 0b7dae3e564ffdaeb90f36407c8ab97e56d1175b
+  # ref_next == ref (deliberate): make test_against_latest build+test this release
+  # against DuckDB v2.0-cyanoptera instead of skipping the prerelease leg.
+  ref_next: 0b7dae3e564ffdaeb90f36407c8ab97e56d1175b
   andium: bc9864b9fad37bffe15f7499fc5b9021e970eaf8
   # andium (DuckDB v1.4.5 track) left at the pre-v1.5-variegata commit;
   # v0.4.1 targets the v1.5.x line and ships on that track via ref.
   # raw commit for refs/tags/v0.4.1 (catalog refs must not be movable tags)
-  ref: 33d5e8970db776331f957678a4cb0a0542e59601
   # ref_next makes the PRERELEASE leg actually build against DuckDB v2.0.
   # Without it scripts/build.py prints "Skipping prerelease validation" and the
   # run passes green having verified nothing on that line.
@@ -36,7 +39,6 @@ repo:
   # src/include/duckdb_compat.hpp. ref_next therefore points at current main,
   # so the prerelease leg validates the code that actually compiles on v2.0,
   # while ref keeps shipping the released v0.4.1 on the stable line.
-  ref_next: 0b7dae3e564ffdaeb90f36407c8ab97e56d1175b
 
 docs:
   hello_world: |
@@ -92,8 +94,8 @@ docs:
 
 extension_star_count: 9
 extension_star_count_pretty: 9
-extension_download_count: 779
-extension_download_count_pretty: 779
+extension_download_count: 804
+extension_download_count_pretty: 804
 image: '/images/community_extensions/social_preview/preview_community_extension_urlpattern.png'
 layout: community_extension_doc
 ---
@@ -119,37 +121,37 @@ LOAD {{ page.extension.name }};
 
 <div class="extension_functions_table"></div>
 
-|    function_name    | function_type | description | comment | examples |
-|---------------------|---------------|-------------|---------|----------|
-| url_build           | scalar        | NULL        | NULL    |          |
-| url_hash            | scalar        | NULL        | NULL    |          |
-| url_host            | scalar        | NULL        | NULL    |          |
-| url_hostname        | scalar        | NULL        | NULL    |          |
-| url_href            | scalar        | NULL        | NULL    |          |
-| url_modify          | scalar        | NULL        | NULL    |          |
-| url_origin          | scalar        | NULL        | NULL    |          |
-| url_parse           | scalar        | NULL        | NULL    |          |
-| url_password        | scalar        | NULL        | NULL    |          |
-| url_pathname        | scalar        | NULL        | NULL    |          |
-| url_port            | scalar        | NULL        | NULL    |          |
-| url_protocol        | scalar        | NULL        | NULL    |          |
-| url_resolve         | scalar        | NULL        | NULL    |          |
-| url_search          | scalar        | NULL        | NULL    |          |
-| url_search_param    | scalar        | NULL        | NULL    |          |
-| url_search_params   | scalar        | NULL        | NULL    |          |
-| url_username        | scalar        | NULL        | NULL    |          |
-| url_valid           | scalar        | NULL        | NULL    |          |
-| urlpattern          | scalar        | NULL        | NULL    |          |
-| urlpattern_exec     | scalar        | NULL        | NULL    |          |
-| urlpattern_extract  | scalar        | NULL        | NULL    |          |
-| urlpattern_hash     | scalar        | NULL        | NULL    |          |
-| urlpattern_hostname | scalar        | NULL        | NULL    |          |
-| urlpattern_init     | scalar        | NULL        | NULL    |          |
-| urlpattern_pathname | scalar        | NULL        | NULL    |          |
-| urlpattern_port     | scalar        | NULL        | NULL    |          |
-| urlpattern_protocol | scalar        | NULL        | NULL    |          |
-| urlpattern_search   | scalar        | NULL        | NULL    |          |
-| urlpattern_test     | scalar        | NULL        | NULL    |          |
+|    function_name    | function_type |                                       description                                       | comment |                                    examples                                     |
+|---------------------|---------------|-----------------------------------------------------------------------------------------|---------|---------------------------------------------------------------------------------|
+| url_build           | scalar        | Build a URL string from named component parameters.                                     | NULL    | [url_build(protocol := 'https', hostname := 'example.com', pathname := '/api')] |
+| url_hash            | scalar        | Get the hash/fragment component of a URL.                                               | NULL    | [url_hash('https://example.com#section')]                                       |
+| url_host            | scalar        | Get the host (hostname and port) component of a URL.                                    | NULL    | [url_host('https://example.com:8080')]                                          |
+| url_hostname        | scalar        | Get the hostname component of a URL.                                                    | NULL    | [url_hostname('https://example.com:8080')]                                      |
+| url_href            | scalar        | Get the normalized full href of a URL.                                                  | NULL    | [url_href('https://example.com/path')]                                          |
+| url_modify          | scalar        | Modify components of an existing URL string.                                            | NULL    | [url_modify('https://example.com/api', pathname := '/v2')]                      |
+| url_origin          | scalar        | Get the origin (scheme + host) of a URL.                                                | NULL    | [url_origin('https://example.com/path')]                                        |
+| url_parse           | scalar        | Parse a URL string into a STRUCT of its components.                                     | NULL    | [url_parse('https://user:pass@example.com:8080/path?q=1#hash')]                 |
+| url_password        | scalar        | Get the password component of a URL.                                                    | NULL    | [url_password('https://user:pass@example.com')]                                 |
+| url_pathname        | scalar        | Get the pathname component of a URL.                                                    | NULL    | [url_pathname('https://example.com/api/v1')]                                    |
+| url_port            | scalar        | Get the port component of a URL.                                                        | NULL    | [url_port('https://example.com:8080')]                                          |
+| url_protocol        | scalar        | Get the protocol component of a URL.                                                    | NULL    | [url_protocol('https://example.com')]                                           |
+| url_resolve         | scalar        | Resolve a relative URL against a base URL.                                              | NULL    | [url_resolve('https://example.com/dir/', '../other')]                           |
+| url_search          | scalar        | Get the query string component of a URL.                                                | NULL    | [url_search('https://example.com?q=1')]                                         |
+| url_search_param    | scalar        | Extract the value of a specific query parameter from a URL.                             | NULL    | [url_search_param('https://example.com?a=1&b=2', 'a')]                          |
+| url_search_params   | scalar        | Extract all query search parameters from a URL as a MAP.                                | NULL    | [url_search_params('https://example.com?a=1&b=2')]                              |
+| url_username        | scalar        | Get the username component of a URL.                                                    | NULL    | [url_username('https://user:pass@example.com')]                                 |
+| url_valid           | scalar        | Check if a URL string is valid.                                                         | NULL    | [url_valid('https://example.com')]                                              |
+| urlpattern          | scalar        | Construct a URLPATTERN from a pattern string.                                           | NULL    | [urlpattern('/users/:id')]                                                      |
+| urlpattern_exec     | scalar        | Execute pattern matching on a URL and return matched components and groups as a STRUCT. | NULL    | [urlpattern_exec(urlpattern('/users/:id'), '/users/123')]                       |
+| urlpattern_extract  | scalar        | Extract matched component value from a URL using URLPattern.                            | NULL    | [urlpattern_extract(urlpattern('/users/:id'), '/users/123', 'id')]              |
+| urlpattern_hash     | scalar        | Get the hash/fragment pattern of a URLPattern.                                          | NULL    | [urlpattern_hash(urlpattern('https://example.com/*#*'))]                        |
+| urlpattern_hostname | scalar        | Get the hostname pattern of a URLPattern.                                               | NULL    | [urlpattern_hostname(urlpattern('https://example.com/*'))]                      |
+| urlpattern_init     | scalar        | Initialize a URLPATTERN with named component patterns.                                  | NULL    | [urlpattern_init(pathname := '/users/:id')]                                     |
+| urlpattern_pathname | scalar        | Get the pathname pattern of a URLPattern.                                               | NULL    | [urlpattern_pathname(urlpattern('/users/:id'))]                                 |
+| urlpattern_port     | scalar        | Get the port pattern of a URLPattern.                                                   | NULL    | [urlpattern_port(urlpattern('https://example.com:8080/*'))]                     |
+| urlpattern_protocol | scalar        | Get the protocol pattern of a URLPattern.                                               | NULL    | [urlpattern_protocol(urlpattern('https://example.com/*'))]                      |
+| urlpattern_search   | scalar        | Get the search/query pattern of a URLPattern.                                           | NULL    | [urlpattern_search(urlpattern('https://example.com/*?q=*'))]                    |
+| urlpattern_test     | scalar        | Test if a URL matches a URLPattern.                                                     | NULL    | [urlpattern_test(urlpattern('/users/:id'), '/users/123')]                       |
 
 ### Overloaded Functions
 
