@@ -88,6 +88,15 @@ Samples require a *sample size*, which is an indication of how many elements wil
 
 Samples are probabilistic, that is to say, samples can be different between runs *unless* the seed is specifically specified. Specifying the seed *only* guarantees that the sample is the same if multi-threading is not enabled (i.e., `SET threads = 1`). In the case of multiple threads running over a sample, samples are not necessarily consistent even with a fixed seed.
 
+## Reproducible Samples
+
+Sampling is probabilistic, so a query returns a different sample on each run unless the seed is fixed. The seed is a non-negative integer and can be specified in two equivalent ways:
+
+* With the `REPEATABLE` keyword after the method form, e.g., `USING SAMPLE reservoir(50 ROWS) REPEATABLE (100)`.
+* As the second value in the parenthesized method form, e.g., `USING SAMPLE 20% (system, 377)`.
+
+As noted above, fixing the seed only guarantees a reproducible sample when DuckDB runs single-threaded (`SET threads = 1`). With multiple threads, samples are not necessarily consistent even with a fixed seed.
+
 ## Sampling Methods
 
 ### `reservoir`
@@ -115,7 +124,7 @@ The *expected* number of rows is still equal to the specified percentage of the 
 
 ## Table Samples
 
-The `TABLESAMPLE` and `USING SAMPLE` clauses are identical in terms of syntax and effect, with one important difference: tablesamples sample directly from the table for which they are specified, whereas the sample clause samples after the entire from clause has been resolved. This is relevant when there are joins present in the query plan.
+The `TABLESAMPLE` and `USING SAMPLE` clauses use the same internal syntax (sample size, method, and optional seed), but they differ in where they are written and what they sample. The `TABLESAMPLE` clause is written directly after a table expression, following its alias if one is present, and samples only that table. The `USING SAMPLE` clause is written at the end of the `SELECT` statement body and samples the result of the entire `FROM` clause, after all joins have been resolved. This distinction is relevant when there are joins present in the query plan. `TABLESAMPLE` can be applied to any table expression in the `FROM` clause, including tables that participate in a join.
 
 The `TABLESAMPLE` clause is essentially equivalent to creating a subquery with the `USING SAMPLE` clause, i.e., the following two queries are identical:
 
