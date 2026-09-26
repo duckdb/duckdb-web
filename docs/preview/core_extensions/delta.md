@@ -96,6 +96,40 @@ SELECT *
 FROM delta_scan('gs://my-bucket/my-delta-table');
 ```
 
+### Creating Tables
+
+To create a new Delta table, attach the location where it should live and create a table with the same name as the attached database:
+
+```sql
+ATTACH 's3://my-bucket/my-new-table' AS my_new_table (TYPE delta);
+CREATE TABLE my_new_table.my_new_table (id BIGINT, region VARCHAR)
+PARTITIONED BY (region);
+INSERT INTO my_new_table VALUES (1, 'eu');
+```
+
+The new table can be read and written right away, without attaching it again. `CREATE TABLE ... IF NOT EXISTS` leaves an existing table untouched.
+
+The following are not supported:
+
+* `CREATE OR REPLACE TABLE` and `CREATE TABLE ... AS SELECT`. To fill a new table, create it and then `INSERT` into it.
+* `NOT NULL` and other constraints, and `SORTED BY`.
+* Column types that Delta has no equivalent for, such as unsigned integers.
+* A table whose columns are all partition columns.
+
+#### Table Properties
+
+Options in a `WITH` clause become Delta table properties:
+
+```sql
+ATTACH 's3://my-bucket/my-new-table' AS my_new_table (TYPE delta);
+CREATE TABLE my_new_table.my_new_table (id BIGINT, name VARCHAR)
+WITH ('delta.enableDeletionVectors' = 'true', 'delta.appendOnly' = 'true');
+```
+
+The [Delta Kernel](https://github.com/delta-incubator/delta-kernel-rs) validates each property and enables the table features it requires, so the table's protocol follows from its properties. Values can be any constant expression; `NULL` is not allowed. The only option that is not a table property is `location`, which may repeat the attached path but cannot name a different one.
+
+To create a table with [column mapping](#column-mapping), set `'delta.columnMapping.mode'` to `'name'` or `'id'`. A column-mapped table cannot have nested columns (`STRUCT`, `LIST` or `MAP`) or partition columns, because DuckDB cannot write to such tables yet. The same applies to properties that imply column mapping, such as `'delta.enableIcebergCompatV3'`.
+
 ### Appending Data
 
 To append rows to a Delta table, attach it and use `INSERT INTO`:
@@ -265,6 +299,7 @@ The `delta` extension supports:
 - all primitive types
 - structs
 - VARIANT type
+- creating tables (`CREATE TABLE`)
 - blind appends (`INSERT INTO`)
 - cloud storage (AWS S3, Azure, GCS) with secrets
 
