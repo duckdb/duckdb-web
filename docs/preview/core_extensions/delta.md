@@ -133,7 +133,7 @@ INSERT INTO my_table SELECT * FROM other_table;
 
 ### Time Travel
 
-To read a table as it was at an earlier version or point in time, use the `AT` clause, an `ATTACH` option, or a `delta_scan` parameter:
+To read a table as it was at an earlier version or point in time, use the `AT` clause, an `ATTACH` option or a `delta_scan` parameter:
 
 ```sql
 -- Query an attached table
@@ -268,7 +268,7 @@ The `delta` extension supports:
 ## Limitations
 
 * `CREATE OR REPLACE TABLE` and `CREATE TABLE ... AS SELECT` are not supported. Create the table, then `INSERT` into it.
-* `CREATE TABLE` does not support constraints (including `NOT NULL`), `SORTED BY`, column types without a Delta equivalent such as unsigned integers, or a table whose columns are all partition columns.
+* `CREATE TABLE` does not support constraints (including `NOT NULL`), `SORTED BY`, column types without a Delta equivalent such as unsigned integers or a table whose columns are all partition columns.
 * Tables with an interval (`interval year to month` or `interval day to second`), `geometry` or `geography` column cannot be read.
 * Writing to a table that declares column defaults is not supported.
 

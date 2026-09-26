@@ -111,7 +111,7 @@ INSERT INTO my_table SELECT * FROM other_table;
 
 ### Time Travel
 
-To read a table as it was at an earlier version, use the `AT` clause, an `ATTACH` option, or a `delta_scan` parameter:
+To read a table as it was at an earlier version, use the `AT` clause, an `ATTACH` option or a `delta_scan` parameter:
 
 ```sql
 -- Query an attached table
