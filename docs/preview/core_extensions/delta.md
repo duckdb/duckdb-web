@@ -120,13 +120,40 @@ Alternatively, pin a version at attach time:
 ATTACH 's3://my-bucket/my-delta-table' AS my_table (TYPE delta, VERSION 5);
 ```
 
-A table attached at a version is read-only: an `INSERT` into it fails.
+A table attached at a version or a [timestamp](#time-travel-by-timestamp) is read-only: an `INSERT` into it fails.
 
 `delta_scan` takes the version as a named parameter:
 
 ```sql
 SELECT * FROM delta_scan('s3://my-bucket/my-delta-table', version => 5);
 ```
+
+#### Time Travel by Timestamp
+
+To read a table as it was at a point in time, give a timestamp instead of a version, in any of the same three places:
+
+```sql
+SELECT * FROM my_table AT (TIMESTAMP => TIMESTAMPTZ '2026-09-01 12:00:00+00');
+```
+
+```sql
+ATTACH 's3://my-bucket/my-delta-table' AS my_table_then (
+    TYPE delta,
+    TIMESTAMP TIMESTAMPTZ '2026-09-01 12:00:00+00'
+);
+```
+
+```sql
+SELECT *
+FROM delta_scan('s3://my-bucket/my-delta-table', timestamp => TIMESTAMPTZ '2026-09-01 12:00:00+00');
+```
+
+* A timestamp reads the latest version committed at or before it. A timestamp before the table's first commit is an error.
+* A timestamp without a time zone is interpreted in the session's `TimeZone`.
+* A timestamp later than `now()` is refused.
+* A version and a timestamp cannot both be given.
+* Within a transaction, a timestamp resolves once: every later read of the same instant sees the same version, even if the table receives new commits in the meantime.
+* A version or timestamp given to `ATTACH` is the default for queries on that table. An `AT` clause overrides it, in either unit.
 
 ### Checkpointing
 
@@ -161,6 +188,7 @@ When attaching a Delta table you can pass the following options to `ATTACH`:
 | Option | Type | Default | Description |
 | --- | --- | --- | --- |
 | `VERSION` | `UBIGINT` | latest | Pin the attached table to a specific [table version](#time-travel). The attached table is read-only. |
+| `TIMESTAMP` | `TIMESTAMP WITH TIME ZONE` | latest | Pin the attached table to the version current at a [point in time](#time-travel-by-timestamp). Cannot be combined with `VERSION`. The attached table is read-only. |
 | `PIN_SNAPSHOT` | `BOOLEAN` | `false` | Resolve the table snapshot once at attach time and reuse it, rather than re-resolving the latest version per query. |
 | `PUSHDOWN_PARTITION_INFO` | `BOOLEAN` | `true` | Push down partition information so that whole files can be skipped based on partition values. |
 | `PUSHDOWN_FILTERS` | `VARCHAR` | `all` | Filter pushdown mode for file skipping. One of `none`, `all`, `constant_only`, `dynamic_only`. |
