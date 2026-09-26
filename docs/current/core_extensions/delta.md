@@ -184,6 +184,21 @@ SELECT * FROM delta_list_files('file:///some/path/on/local/machine');
 | `partitions` | `MAP(VARCHAR, VARCHAR)` | Partition column values for the file. |
 | `have_deletes` | `BOOLEAN` | Whether the file has an associated deletion vector. |
 
+### Column Mapping
+
+Delta tables with [column mapping](https://github.com/delta-io/delta/blob/master/PROTOCOL.md#column-mapping) enabled are read as the Delta protocol specifies for each mode: in `id` mode, columns are matched by Parquet field ID; in `name` mode, by physical column name.
+
+The protocol requires every data file of an `id`-mode table to carry Parquet field IDs, but some writers, including older DuckDB versions, wrote files without them. The `delta_column_mapping_policy` setting decides how such files are read:
+
+* `strict`: refuse the file with an error that names it.
+* `lenient`: match the file's columns by physical name, or failing that by logical name, and log a warning under the `delta.ColumnMapping` log type. The names have to cover every column in the file, otherwise the read fails.
+
+> Warning The default differs between DuckDB versions. In DuckDB 1.5, the default is `lenient`, so tables whose `id`-mode files lack field IDs keep reading by name as in earlier 1.5 releases. Starting with DuckDB 2.0, the default is `strict` and such files are refused. To keep the current behavior after upgrading, set the policy explicitly:
+
+```sql
+SET delta_column_mapping_policy = 'lenient';
+```
+
 ### Credential Chains in Delta
 
 DuckDB Delta uses `delta-kernel-rs` and `object_store` for some network operations.
@@ -201,6 +216,7 @@ The `delta` extension adds the following settings:
 
 | Setting | Type | Default | Description |
 | --- | --- | --- | --- |
+| `delta_column_mapping_policy` | `VARCHAR` | `lenient` | How to read a data file of a column-mapped table that does not conform to the Delta protocol, such as an `id`-mode file without Parquet field IDs: `strict` refuses the file, `lenient` matches its columns by name and logs a warning. See [Column Mapping](#column-mapping). |
 | `delta_kernel_logging` | `BOOLEAN` | `false` | Forward the internal logging of the [Delta Kernel](https://github.com/delta-incubator/delta-kernel-rs) to the DuckDB logger. May impact performance even when DuckDB logging is disabled. |
 | `delta_scan_explain_files_filtered` | `BOOLEAN` | `true` | Add the filtered files to the `EXPLAIN` output. May impact the performance of `delta_scan` during `EXPLAIN ANALYZE` queries. |
 
