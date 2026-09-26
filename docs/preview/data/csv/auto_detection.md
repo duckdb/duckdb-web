@@ -29,27 +29,30 @@ If we are reading from a file in which we cannot jump – such as a `.gz` compre
 ## `sniff_csv` Function
 
 It is possible to run the CSV sniffer as a separate step using the `sniff_csv(filename)` function, which returns the detected CSV properties as a table with a single row.
-The `sniff_csv` function accepts an optional `sample_size` parameter to configure the number of rows sampled.
+
+Besides the commonly used `sample_size` parameter, which configures the number of rows sampled, `sniff_csv` accepts the same named parameters as the [`read_csv` function]({% link docs/preview/data/csv/overview.md %}#parameters). Any parameter you pass is treated as fixed: the sniffer uses the value you provide and only detects the properties you did not specify. For example, passing `ignore_errors = true` lets the sniffer skip malformed lines while it detects the dialect. The `auto_detect` parameter must be `true` (its default) for `sniff_csv`; passing `auto_detect = false` results in an error. In addition, `sniff_csv` accepts a `force_match` (`BOOLEAN`) parameter that is not available in `read_csv`.
 
 ```sql
 FROM sniff_csv('my_file.csv');
 FROM sniff_csv('my_file.csv', sample_size = 1000);
 ```
 
-| Column name        | Description                                   | Example                                                           |
-|--------------------|-----------------------------------------------|-------------------------------------------------------------------|
-| `Delimiter`        | Delimiter                                     | `,`                                                               |
-| `Quote`            | Quote character                               | `"`                                                               |
-| `Escape`           | Escape                                        | `\`                                                               |
-| `NewLineDelimiter` | New-line delimiter                            | `\r\n`                                                            |
-| `Comment`          | Comment character                             | `#`                                                               |
-| `SkipRows`         | Number of rows skipped                        | 1                                                                 |
-| `HasHeader`        | Whether the CSV has a header                  | `true`                                                            |
-| `Columns`          | Column types encoded as a `LIST` of `STRUCT`s | `({'name': 'VARCHAR', 'age': 'BIGINT'})`                          |
-| `DateFormat`       | Date format                                   | `%d/%m/%Y`                                                        |
-| `TimestampFormat`  | Timestamp Format                              | `%Y-%m-%dT%H:%M:%S.%f`                                            |
-| `UserArguments`    | Arguments used to invoke `sniff_csv`          | `sample_size = 1000`                                              |
-| `Prompt`           | Prompt ready to be used to read the CSV       | `FROM read_csv('my_file.csv', auto_detect=false, delim=',', ...)` |
+The `read_csv` parameter column lists the corresponding [`read_csv` parameter]({% link docs/preview/data/csv/overview.md %}#parameters), so the sniffed values can be passed directly to `read_csv`.
+
+| Column name        | Description                                   | `read_csv` parameter | Example                                                           |
+|--------------------|-----------------------------------------------|----------------------|-------------------------------------------------------------------|
+| `Delimiter`        | Delimiter                                     | `delim`              | `,`                                                               |
+| `Quote`            | Quote character                               | `quote`              | `"`                                                               |
+| `Escape`           | Escape                                        | `escape`             | `\`                                                               |
+| `NewLineDelimiter` | New-line delimiter                            | `new_line`           | `\r\n`                                                            |
+| `Comment`          | Comment character                             | `comment`            | `#`                                                               |
+| `SkipRows`         | Number of rows skipped                        | `skip`               | 1                                                                 |
+| `HasHeader`        | Whether the CSV has a header                  | `header`             | `true`                                                            |
+| `Columns`          | Column types encoded as a `LIST` of `STRUCT`s | `columns`            | `({'name': 'VARCHAR', 'age': 'BIGINT'})`                          |
+| `DateFormat`       | Date format                                   | `dateformat`         | `%d/%m/%Y`                                                        |
+| `TimestampFormat`  | Timestamp Format                              | `timestampformat`    | `%Y-%m-%dT%H:%M:%S.%f`                                            |
+| `UserArguments`    | Arguments used to invoke `sniff_csv`          | (none)               | `sample_size = 1000`                                              |
+| `Prompt`           | Prompt ready to be used to read the CSV       | (none)               | `FROM read_csv('my_file.csv', auto_detect=false, delim=',', ...)` |
 
 ### Prompt
 

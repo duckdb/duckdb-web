@@ -169,7 +169,7 @@ Zero or more copy options may be provided within parentheses following the `ATTA
 | ------------------- | --------------------------------------------------------------------------------------------------------------------------- | --------- | ------------- |
 | `READ_ONLY`         | Attach the database in read-only mode. Use `READ_WRITE` (the default) to attach in read-write mode.                         | `BOOLEAN` | `false`       |
 | `COMPRESS`          | Whether the database is compressed. Only applicable for in-memory databases.                                                | `VARCHAR` | `false`       |
-| `TYPE`              | The file type (`DUCKDB` or `SQLITE`), or deduced from the input string literal (MySQL, PostgreSQL).                         | `VARCHAR` | `DUCKDB`      |
+| `TYPE`              | The type of the attached database, e.g., `DUCKDB`, `SQLITE`, `POSTGRES`, `MYSQL`. If omitted, the type is deduced from the path. See [Database Type](#database-type).                         | `VARCHAR` | `DUCKDB`      |
 | `DEFAULT_TABLE`     | The table that is queried when the attached database is referenced directly by its catalog name (e.g., `FROM ⟨db⟩`).        | `VARCHAR` | -             |
 | `BLOCK_SIZE`        | The block size of a new database file. Must be a power of two and within [16384, 262144]. Cannot be set for existing files. | `UBIGINT` | `262144`      |
 | `ROW_GROUP_SIZE`    | The row group size of a new database file.                                                                                  | `UBIGINT` | `122880`      |
@@ -177,6 +177,17 @@ Zero or more copy options may be provided within parentheses following the `ATTA
 | `ENCRYPTION_KEY`    | The encryption key used for encrypting the database.                                                                        | `VARCHAR` | -             |
 | `ENCRYPTION_CIPHER` | The encryption cipher used for encrypting the database (`CBC`, `CTR` or `GCM`).                                             | `VARCHAR` | -             |
 | `RECOVERY_MODE`     | Recovery mode for the database. `no_wal_writes` disables WAL writes, improving performance at the cost of crash recovery.   | `VARCHAR` | -             |
+
+### Database Type
+
+The `TYPE` option specifies which storage engine backs the attached database. The type name is case-insensitive. Native DuckDB storage uses `DUCKDB` (the default). Other types are provided by extensions, for example `SQLITE` (via the [`sqlite` extension]({% link docs/preview/core_extensions/sqlite.md %})), `POSTGRES` (via the [`postgres` extension]({% link docs/preview/core_extensions/postgres/overview.md %})), and `MYSQL` (via the [`mysql` extension]({% link docs/preview/core_extensions/mysql.md %})). If the extension that provides the type is not already loaded, it is [autoloaded]({% link docs/preview/extensions/overview.md %}#autoloading-extensions).
+
+When `TYPE` is not specified, DuckDB deduces the type from the path in two steps:
+
+1. If the path begins with a recognized scheme prefix followed by a colon, such as `sqlite:file.db`, `postgres:dbname=postgres`, or `mysql:db=mysql`, the scheme determines the type. The prefix must be at least two characters long and must not be followed by `//`, so URLs such as `https://…` are not treated as type prefixes.
+2. Otherwise, DuckDB inspects the file contents. A SQLite header selects the `SQLITE` type, and a DuckDB database file uses the native `DUCKDB` type.
+
+> Warning Passing `TYPE DUCKDB` explicitly fixes the type to native DuckDB storage and disables the path-based deduction described above. If you attach a path that carries a scheme prefix for another engine but also pass `TYPE DUCKDB`, the prefix is ignored and the statement does not have the intended effect.
 
 ## `DETACH`
 
