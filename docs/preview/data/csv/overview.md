@@ -89,7 +89,7 @@ Below are parameters that can be passed to the [`read_csv` function](#csv-functi
 | `encoding` | Encoding used by the CSV file. Options are `utf-8`, `utf-16`, `latin-1`. Not available in the `COPY` statement (which always uses `utf-8`). | `VARCHAR` | `utf-8` |
 | `filename` | Add path of the containing file to each row, as a string column named `filename`. Relative or absolute paths are returned depending on the path or glob pattern provided to `read_csv`, not just filenames. Since DuckDB v1.3.0, the `filename` column is added automatically as a virtual column and this option is only kept for compatibility reasons. | `BOOL` | `false` |
 | `files_to_sniff` | Number of files used by the [CSV sniffer]({% link docs/preview/data/csv/auto_detection.md %}) to detect the schema when reading multiple files. Set to `-1` to sniff all files. | `BIGINT` | `10` |
-| `force_not_null` | Do not match values in the specified columns against the `NULL` string. In the default case where the `NULL` string is empty, this means that empty values are read as zero-length strings instead of `NULL`s. | `VARCHAR[]` | `[]` |
+| `force_not_null` | A list of column names whose values are not matched against the `NULL` string (see `nullstr` or `null`). In the default case where the `NULL` string is empty, empty values in these columns are read as zero-length strings instead of `NULL`s. If a value in one of these columns matches the `NULL` string but the column is not of type `VARCHAR`, an error is raised. | `VARCHAR[]` | `[]` |
 | `header` | First line of each file contains the column names. | `BOOL` | `false` |
 | `hive_partitioning` | Interpret the path as a [Hive partitioned path]({% link docs/preview/data/partitioning/hive_partitioning.md %}). | `BOOL` | (auto-detected) |
 | `ignore_errors` | Ignore any parsing errors encountered. | `BOOL` | `false` |
@@ -98,7 +98,7 @@ Below are parameters that can be passed to the [`read_csv` function](#csv-functi
 | `new_line` | New line character(s). Options are `'\r'`,`'\n'`, or `'\r\n'`. The CSV parser only distinguishes between single-character and double-character line delimiters. Therefore, it does not differentiate between `'\r'` and `'\n'`.| `VARCHAR` | (empty) |
 | `normalize_names` | Normalize column names. This removes any non-alphanumeric characters from them. Column names that are reserved SQL keywords are prefixed with an underscore character (`_`). | `BOOL` | `false` |
 | `null_padding` | Pad the remaining columns on the right with `NULL` values when a line lacks columns. | `BOOL` | `false` |
-| `nullstr` or `null` | Strings that represent a `NULL` value. | `VARCHAR` or `VARCHAR[]` | (empty) |
+| `nullstr` or `null` | Strings that represent a `NULL` value. Accepts a single string or a list of strings. Matching against these strings can be suppressed for specific columns with `force_not_null`. | `VARCHAR` or `VARCHAR[]` | (empty) |
 | `parallel` | Use the parallel CSV reader. | `BOOL` | `true` |
 | `quote` | String used to quote values. | `VARCHAR` | `"` |
 | `rejects_scan` | Name of the [temporary table where information on faulty scans is stored]({% link docs/preview/data/csv/reading_faulty_csv_files.md %}#reject-scans). | `VARCHAR` | `reject_scans` |
