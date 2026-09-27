@@ -38,8 +38,8 @@ docs:
 
 extension_star_count: 152
 extension_star_count_pretty: 152
-extension_download_count: 75233
-extension_download_count_pretty: 75.2k
+extension_download_count: 53582
+extension_download_count_pretty: 53.6k
 image: '/images/community_extensions/social_preview/preview_community_extension_cache_httpfs.png'
 layout: community_extension_doc
 ---
