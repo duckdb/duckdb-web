@@ -127,10 +127,10 @@ docs:
     This is an independent implementation of the Apache Ossie file format. It is not affiliated
     with, endorsed by, or an official product of the Apache Software Foundation.
 
-extension_star_count: 3
-extension_star_count_pretty: 3
-extension_download_count: 924
-extension_download_count_pretty: 924
+extension_star_count: 7
+extension_star_count_pretty: 7
+extension_download_count: 752
+extension_download_count_pretty: 752
 image: '/images/community_extensions/social_preview/preview_community_extension_ossie.png'
 layout: community_extension_doc
 ---
