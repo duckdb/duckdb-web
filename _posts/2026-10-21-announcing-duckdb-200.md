@@ -8,3 +8,5 @@ excerpt: "Today we are proud and happy to release DuckDB 2.0.0."
 tags: ["release"]
 ---
 
+
+TODO: windows performance improvements
