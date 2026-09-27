@@ -22,7 +22,7 @@ Several DuckDB clients are already available as [alpha versions]({% link install
 
 ### CLI
 
-To install the command-line client on Linux or macOS, run:
+To install the command line client on Linux or macOS, run:
 
 ```batch
 curl https://install.duckdb.org | DUCKDB_VERSION=alpha bash

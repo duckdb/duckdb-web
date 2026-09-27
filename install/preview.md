@@ -52,9 +52,9 @@ pip install duckdb --pre --upgrade
 
 ### v1.5-dev CLI
 
-To download the CLI client, use the following links:
+To download the v1.5-dev command line client, use the following links:
 
-| Platform | Architecture       | v1.5-dev                                                                           |
+| Platform | Architecture       | v1.5-dev CLI client                                                                |
 | -------- | ------------------ | ---------------------------------------------------------------------------------- |
 | Linux    | `arm64`            | [zip](https://artifacts.duckdb.org/v1.5-variegata/duckdb-binaries-linux-arm64.zip) |
 | Linux    | `x86_64`           | [zip](https://artifacts.duckdb.org/v1.5-variegata/duckdb-binaries-linux-amd64.zip) |
@@ -73,9 +73,9 @@ curl https://install.duckdb.org | DUCKDB_VERSION=alpha bash
 
 #### v2.0-dev Packages
 
-To download the v2.0-dev command-line client, use the following links:
+To download the v2.0-dev command line client, use the following links:
 
-| Platform | Architecture       | v2.0-dev                                                                               |
+| Platform | Architecture       | v2.0-dev CLI client                                                                    |
 | -------- | ------------------ | -------------------------------------------------------------------------------------- |
 | Linux    | `arm64`            | [tar.gz](https://artifacts.duckdb.org/v2.0-cyanoptera/duckdb-cli-linux-arm64.tar.gz)   |
 | Linux    | `x86_64`           | [tar.gz](https://artifacts.duckdb.org/v2.0-cyanoptera/duckdb-cli-linux-amd64.tar.gz)   |
@@ -146,7 +146,7 @@ dependencies {
 
 For ODBC, the preview builds are based on the `main` branch of the [`duckdb/duckdb-odbc` repository](https://github.com/duckdb/duckdb-odbc/).
 
-| Platform | Architecture       | Download                                                                    |
+| Platform | Architecture       | ODBC client                                                                 |
 | -------- | ------------------ | --------------------------------------------------------------------------- |
 | Linux    | `arm64`            | [zip](https://artifacts.duckdb.org/duckdb-odbc/main/odbc-linux-arm64.zip)   |
 | Linux    | `x86_64`           | [zip](https://artifacts.duckdb.org/duckdb-odbc/main/odbc-linux-amd64.zip)   |
@@ -169,7 +169,7 @@ pak::pak("duckdb/duckdb-r")
 
 To download the C/C++ libraries, use the following links:
 
-| Platform | Architecture       | v1.5-dev                                                                           |
+| Platform | Architecture       | v1.5-dev C/C++ library                                                             |
 | -------- | ------------------ | ---------------------------------------------------------------------------------- |
 | Linux    | `arm64`            | [zip](https://artifacts.duckdb.org/v1.5-variegata/duckdb-binaries-linux-arm64.zip) |
 | Linux    | `x86_64`           | [zip](https://artifacts.duckdb.org/v1.5-variegata/duckdb-binaries-linux-amd64.zip) |
@@ -181,7 +181,7 @@ To download the C/C++ libraries, use the following links:
 
 To download the v2.0-dev C/C++ libraries, use the following links:
 
-| Platform | Architecture       | v2.0-dev                                                                                       |
+| Platform | Architecture       | v2.0-dev C/C++ library                                                                         |
 | -------- | ------------------ | ---------------------------------------------------------------------------------------------- |
 | Linux    | `arm64`            | [tar.gz](https://artifacts.duckdb.org/v2.0-cyanoptera/duckdb-shared-libs-linux-arm64.tar.gz)   |
 | Linux    | `x86_64`           | [tar.gz](https://artifacts.duckdb.org/v2.0-cyanoptera/duckdb-shared-libs-linux-amd64.tar.gz)   |
