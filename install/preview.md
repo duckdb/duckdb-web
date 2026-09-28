@@ -61,7 +61,7 @@ To download the v1.5-dev command line client, use the following links:
 | macOS    | `arm64` / `x86_64` | [zip](https://artifacts.duckdb.org/v1.5-variegata/duckdb-binaries-osx.zip)         |
 | Windows  | `arm64` / `x86_64` | [zip](https://artifacts.duckdb.org/v1.5-variegata/duckdb-binaries-windows.zip)     |
 
-### v2.0-dev
+### v2.0-dev CLI
 
 #### macOS and Linux Install Script
 
