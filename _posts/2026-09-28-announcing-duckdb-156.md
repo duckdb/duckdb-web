@@ -15,46 +15,43 @@ To install the new version, please visit the [installation page]({% link install
 
 Here are the most important fixes from the DuckDB v1.5.6 release, organized by category:
 
-TODO -- update all these --
-
 ## Correctness
 
-* [`#23693`](https://github.com/duckdb/duckdb/pull/23693) – Fix swapped min/max for multi-row-group 128-bit `DECIMAL` in `RETURN_STATS`
+* [`#24240`](https://github.com/duckdb/duckdb/pull/24240) – Fix `LIMIT` pushdown through a volatile projection with an `OFFSET`
+* [`#24239`](https://github.com/duckdb/duckdb/pull/24239) – Don't push filters on volatile groups through aggregates
+* [`#24119`](https://github.com/duckdb/duckdb/pull/24119) – Fix `UNNEST` pushdown
+* [`#24399`](https://github.com/duckdb/duckdb/pull/24399) – Preserve `NULL`s in Top-N window elimination when the `ORDER BY` expression has no column references
+* [`#24551`](https://github.com/duckdb/duckdb/pull/24551) – Fix Top-N window elimination for nullable ordering expressions
+* [`#25831`](https://github.com/duckdb/duckdb/pull/25831) – Fix wrong results from common subplan elimination with `UNION ALL` arms sharing a join subtree
+* [`#25714`](https://github.com/duckdb/duckdb/pull/25714) – Fix silent truncation of very long integer literals into `HUGEINT`
+* [`#25766`](https://github.com/duckdb/duckdb/pull/25766) – Fix `max` on Hive partition column after file pruning
+* [`#24438`](https://github.com/duckdb/duckdb/pull/24438) – Fix ICU `strptime` leaking time zone state between rows
+* [`#24845`](https://github.com/duckdb/duckdb/pull/24845) – Fix `GEOMETRY` row group pruning with `NULL`s and empty geometries
+* [`#25728`](https://github.com/duckdb/duckdb/pull/25728) – Fix reading and writing `TIME_NS` values in Parquet
+* [`#26027`](https://github.com/duckdb/duckdb/pull/26027) – Fix Parquet v2 value count mismatch for `NULL`s in a list that fills a page
+* [`#26162`](https://github.com/duckdb/duckdb/pull/26162) – Fix Parquet `VARIANT` shredding for `REQUIRED` fields and element groups
 
 ### Crashes and Internal Errors
 
-* [`#23517`](https://github.com/duckdb/duckdb/pull/23517) – Fix min/max aggregate stats when row groups are filtered, which caused a crash
-* [`#23351`](https://github.com/duckdb/duckdb/pull/23351) – Fix deadlock in `TemporaryMemoryManager`
-* [`#23566`](https://github.com/duckdb/duckdb/pull/23566) – Fix C API scalar bind subquery crash
-* [`#23757`](https://github.com/duckdb/duckdb/pull/23757) – Fix segfault in external hash aggregate when radix bits grow after going external
-* [`#23861`](https://github.com/duckdb/duckdb/pull/23861) – Fix concurrent `ALTER` and `INSERT` crash
-* [`#23593`](https://github.com/duckdb/duckdb/pull/23593) – Fixed unsafe iteration when parent is `NULL` in string cast
-* [`#23341`](https://github.com/duckdb/duckdb/pull/23341) – Add additional guards to `DICT_FSST` to prevent exception during compression with small block sizes
+* [`#25103`](https://github.com/duckdb/duckdb/pull/25103) – Fix crash in Top-N with `LIMIT 0`
+* [`#24427`](https://github.com/duckdb/duckdb/pull/24427) – Fix segfault in `url_decode` with `TRY()` on dictionary-encoded columns
+* [`#24447`](https://github.com/duckdb/duckdb/pull/24447) – Fix failed checkpoint marker recovery
+* [`#25490`](https://github.com/duckdb/duckdb/pull/25490) – Close the main WAL handle before renaming over it during WAL recovery
 
 ### Generic Bugfixes
 
-* [`#23458`](https://github.com/duckdb/duckdb/pull/23458) – Fix false RLE corruption error
-* [`#23534`](https://github.com/duckdb/duckdb/pull/23534) – Fix Arrow type extension bugs
-* [`#23507`](https://github.com/duckdb/duckdb/pull/23507) – Fix `ALTER TABLE ADD COLUMN IF NOT EXISTS ... DEFAULT` regression
-* [`#23714`](https://github.com/duckdb/duckdb/pull/23714) – Fix `DROP COLUMN` corrupting per-column metadata block bookkeeping
-* [`#23808`](https://github.com/duckdb/duckdb/pull/23808) – Fix `ALTER` dependency preservation in DependencyManager
-* [`#23790`](https://github.com/duckdb/duckdb/pull/23790) – `TryLookupEntry` now uses default schema as fallback
-* [`#23354`](https://github.com/duckdb/duckdb/pull/23354) – Prevent `NULL MAP` keys in `MultiFileReader` due to missing default values
-* [`#23803`](https://github.com/duckdb/duckdb/pull/23803) – Fix malformed JSON when rendering via duckbox
-* [`#23879`](https://github.com/duckdb/duckdb/pull/23879) – Fix reset of `empty_range` in the `TIMESTAMP` `range()` table function
-* [`#23479`](https://github.com/duckdb/duckdb/pull/23479) – Fix eviction node memory leak when using external files
-
-### Performance
-
-* [`#23483`](https://github.com/duckdb/duckdb/pull/23483) – Enable `ALP` and `ALP_RD` for storage version v1.5.0 and up with smaller block sizes
+* [`#24065`](https://github.com/duckdb/duckdb/pull/24065) – Automatically roll back failed implicitly-wrapped multi-statements on all paths
+* [`#25693`](https://github.com/duckdb/duckdb/pull/25693) – Fix dead node counting in ART indexes
+* [`#25573`](https://github.com/duckdb/duckdb/pull/25573) – Report the real storage version when opening a DuckDB v2.0+ database file
+* [`#25808`](https://github.com/duckdb/duckdb/pull/25808) – Reject invalid UTF-8 produced by `printf`'s `%c` conversion
 
 ### Miscellaneous
 
-* [`#21293`](https://github.com/duckdb/duckdb/pull/21293) – Add support for `duckdb://` URI scheme in ADBC
-* [`#23230`](https://github.com/duckdb/duckdb/pull/23230) – Support the ADBC Statistics API
-* [`#23316`](https://github.com/duckdb/duckdb/pull/23316) – Add request body length to HTTP logs
-* [`#23327`](https://github.com/duckdb/duckdb/pull/23327) – Show transport errors in HTTP log
-* [`#23752`](https://github.com/duckdb/duckdb/pull/23752) – Include extension header in libduckdb archives
+* [`#26102`](https://github.com/duckdb/duckdb/pull/26102) – Add `enable_optimistic_write` setting
+* [`#25283`](https://github.com/duckdb/duckdb/pull/25283) – Harden temporary file reads
+* [`#24362`](https://github.com/duckdb/duckdb/pull/24362) – Unify C API symbol versioning for clients and extensions, stabilize all v1 APIs
+* [`#25214`](https://github.com/duckdb/duckdb/pull/25214) – Always quote identifiers in error messages
+* [`#24127`](https://github.com/duckdb/duckdb/pull/24127) – Remove the Julia client from the main repository in favor of [`duckdb/DuckDB.jl`](https://github.com/duckdb/DuckDB.jl)
 
 ## Conclusion
 
