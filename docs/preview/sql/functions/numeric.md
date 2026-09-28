@@ -36,7 +36,7 @@ There are two division operators: `/` and `//`.
 They are equivalent when at least one of the operands is a `FLOAT` or a `DOUBLE`.
 When both operands are integers, `/` performs floating points division (`5 / 2 = 2.5`) while `//` performs integer division (`5 // 2 = 2`).
 
-Integer division (`//`), modulo (`%`), and `INTERVAL / 0` throw an `Invalid Input Error` on division by zero instead of returning `NULL`. Wrap the expression in `TRY(...)` to return `NULL` for that expression, or `SET null_on_division_by_zero = true` to restore the old `NULL` result for all divisions by zero.
+Integer division (`//`), modulo (`%`), and `INTERVAL / 0` throw an `Invalid Input Error` on division by zero instead of returning `NULL`. Wrap the expression in `TRY(...)` to return `NULL` for that expression, or `SET error_on_division_by_zero = false` to restore the old `NULL` result for all divisions by zero.
 
 ### Supported Types
 

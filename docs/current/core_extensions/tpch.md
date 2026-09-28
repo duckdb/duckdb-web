@@ -5,6 +5,7 @@ redirect_from:
 - /docs/extensions/tpch
 - /docs/stable/extensions/tpch
 - /docs/stable/core_extensions/tpch
+- /tpch
 title: TPC-H Extension
 ---
 
