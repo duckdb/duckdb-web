@@ -63,7 +63,7 @@ To download the v1.5-dev command line client, use the following links:
 
 ### v2.0-dev CLI
 
-#### macOS and Linux Install Script
+#### v2.0-dev macOS and Linux Install Script
 
 To install the preview build on Linux and macOS, run:
 
@@ -71,7 +71,7 @@ To install the preview build on Linux and macOS, run:
 curl https://install.duckdb.org | DUCKDB_VERSION=alpha bash
 ```
 
-#### v2.0-dev Packages
+#### v2.0-dev CLI Packages
 
 To download the v2.0-dev command line client, use the following links:
 
@@ -82,8 +82,6 @@ To download the v2.0-dev command line client, use the following links:
 | macOS    | `arm64` / `x86_64` | [tar.gz](https://artifacts.duckdb.org/v2.0-cyanoptera/duckdb-cli-osx-universal.tar.gz) |
 | Windows  | `arm64`            | [tar.gz](https://artifacts.duckdb.org/v2.0-cyanoptera/duckdb-cli-windows-arm64.tar.gz) |
 | Windows  | `x86_64`           | [tar.gz](https://artifacts.duckdb.org/v2.0-cyanoptera/duckdb-cli-windows-amd64.tar.gz) |
-
-> Warning Extensions are not yet available for the Windows client. Stay tuned!
 
 ## Java
 
