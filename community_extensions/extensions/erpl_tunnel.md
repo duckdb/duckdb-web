@@ -28,8 +28,8 @@ repo:
 
 extension_star_count: 4
 extension_star_count_pretty: 4
-extension_download_count: 646
-extension_download_count_pretty: 646
+extension_download_count: 745
+extension_download_count_pretty: 745
 image: '/images/community_extensions/social_preview/preview_community_extension_erpl_tunnel.png'
 layout: community_extension_doc
 ---
