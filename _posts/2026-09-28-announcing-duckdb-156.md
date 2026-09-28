@@ -69,6 +69,7 @@ That's more than 6× faster!
 ![Windows performance on v1.5.6 vs. v2.0.0-dev]({% link images/blog/windows-tpch-sf300.svg %})
 
 This improvement is thanks to several optimizations, including a [switch to the `clang-cl` compiler](https://github.com/duckdb/duckdb/pull/24391) and a [new allocator](https://github.com/duckdb/duckdb/pull/24036).
+That said, please do not expect a 6× speedup to generalize to all workloads – but rest assured that you should see significant improvements.
 
 ## Conclusion
 
