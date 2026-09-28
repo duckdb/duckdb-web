@@ -8,14 +8,16 @@ excerpt: "Today we are releasing DuckDB 1.5.5 with bugfixes and performance impr
 tags: ["release"]
 ---
 
-In this blog post, we highlight a few important fixes in DuckDB v1.5.5, the sixth patch release in [DuckDB's 1.5 (Variegata) line]({% post_url 2026-03-09-announcing-duckdb-150 %}).
+In this blog post, we highlight a few important fixes in DuckDB v1.5.5, the fifth patch release in [DuckDB's 1.5 (Variegata) line]({% post_url 2026-03-09-announcing-duckdb-150 %}).
 The release ships bugfixes, performance improvements and security patches. You can find the full [release notes on GitHub](https://github.com/duckdb/duckdb/releases/tag/v1.5.5).
 
 To install the new version, please visit the [installation page]({% link install/index.html %}).
 
+## Fixes
+
 Here are the most important fixes from the DuckDB v1.5.5 release, organized by category:
 
-## Correctness
+### Correctness
 
 * [`#23693`](https://github.com/duckdb/duckdb/pull/23693) – Fix swapped min/max for multi-row-group 128-bit `DECIMAL` in `RETURN_STATS`
 

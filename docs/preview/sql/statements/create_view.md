@@ -23,20 +23,26 @@ CREATE OR REPLACE VIEW view1 AS SELECT 42;
 Create a view and replace the column names:
 
 ```sql
-CREATE VIEW view1(a) AS SELECT 42;
+CREATE VIEW view1 (a) AS SELECT 42;
 ```
+
+> New The `SECURE VIEW` feature will be introduced in DuckDB 2.0.
 
 Create a secure view (hides internals from functions such as `stats()` and `EXPLAIN ANALYZE`):
 
 ```sql
 CREATE SECURE VIEW users AS
-    SELECT username FROM all_users WHERE access_level = 'standard';
+    SELECT username
+    FROM all_users
+    WHERE access_level = 'standard';
 ```
 
 The SQL query behind an existing view can be read using the [`duckdb_views()` function]({% link docs/preview/sql/meta/duckdb_table_functions.md %}#duckdb_views) like this:
 
 ```sql
-SELECT sql FROM duckdb_views() WHERE view_name = 'view1';
+SELECT sql
+FROM duckdb_views()
+WHERE view_name = 'view1';
 ```
 
 ## Syntax

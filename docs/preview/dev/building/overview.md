@@ -15,6 +15,8 @@ This page explains the steps for building DuckDB.
 
 ### Prerequisites
 
+> New DuckDB 2.0 requires a C++17-compiler, while earlier versions required a C++11 compiler.
+
 DuckDB needs CMake and a C++17-compliant compiler (e.g., GCC, Apple-Clang, MSVC).
 Additionally, we recommend using the [Ninja build system](https://ninja-build.org/), which automatically parallelizes the build process.
 

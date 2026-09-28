@@ -180,6 +180,8 @@ SELECT regexp_extract('abc', '([a-z])(b)', 1); -- a
 SELECT regexp_extract('abc', '([a-z])(b)', 2); -- b
 ```
 
+> New The following feature will be introduced in DuckDB 2.0.
+
 There is also an overload that takes regex options as the third argument, with no group required:
 
 ```sql

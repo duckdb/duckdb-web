@@ -183,6 +183,8 @@ The `duckdb_functions()` function provides metadata about the functions (includi
 | `stability` | The stability of the function (`CONSISTENT`, `VOLATILE`, `CONSISTENT_WITHIN_QUERY` or `NULL`) | `VARCHAR` |
 | `categories` | Categories of the function. Used to generate the documentation. | `VARCHAR[]` |
 
+> New The `extension_name` and `categories` columns will be introduced in DuckDB 2.0.
+
 ## `duckdb_indexes`
 
 The `duckdb_indexes()` function provides metadata about secondary indexes available in the DuckDB instance.

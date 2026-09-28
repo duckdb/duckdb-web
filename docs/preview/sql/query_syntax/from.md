@@ -568,6 +568,54 @@ SELECT * FROM t1 NATURAL JOIN (VALUES (2), (4)) _(x);
 | 2 |
 | 4 |
 
+### Specifying the Join Type Explicitly
+
+> New This feature will be introduced in DuckDB 2.0.
+
+The `JOIN BY (TYPE ⟨join_type⟩)`{:.language-sql .highlight} syntax allows you to explicitly select the join type, including DuckDB's internal join types that have no syntax in standard SQL:
+
+```sql
+SELECT ...
+FROM ⟨left_table⟩
+JOIN BY (TYPE ⟨join_type⟩) ⟨right_table⟩ ON ⟨condition⟩;
+```
+
+The join type name is case-insensitive and it can optionally have a `_join` suffix, e.g., `mark` and `MARK_JOIN` are equivalent. The supported join types are the following:
+
+| Join type    | Description |
+|--------------|-------------|
+| `inner`      | Inner join. |
+| `left`       | Left outer join. |
+| `right`      | Right outer join. |
+| `full`       | Full outer join. |
+| `semi`       | [Semi join](#semi-and-anti-joins): returns the rows of the left side that have a match. |
+| `anti`       | [Anti join](#semi-and-anti-joins): returns the rows of the left side that have no match. |
+| `right_semi` | Returns the rows of the right side that have a match. |
+| `right_anti` | Returns the rows of the right side that have no match. |
+| `mark`       | Returns all rows of the left side along with a `BOOLEAN` column `__mark_join_marker`, which has the same three-valued result as an [`IN` expression]({% link docs/preview/sql/expressions/in.md %}). |
+| `single`     | Returns all rows of the left side paired with their matching row from the right side (or `NULL` if there is no match). Similarly to scalar subqueries, it throws an error if a left row has more than one match (see the [`scalar_subquery_error_on_multiple_rows` setting]({% link docs/preview/configuration/overview.md %})). |
+
+For example, to run a mark join:
+
+```sql
+CREATE TABLE t1 (a INTEGER);
+INSERT INTO t1 VALUES (1), (2), (3), (NULL);
+CREATE TABLE t2 (b INTEGER);
+INSERT INTO t2 VALUES (2), (3), (NULL);
+
+SELECT a, __mark_join_marker
+FROM t1
+JOIN BY (TYPE mark) t2 ON (a = b)
+ORDER BY a NULLS LAST;
+```
+
+| a    | __mark_join_marker |
+|-----:|--------------------|
+| 1    | NULL               |
+| 2    | true               |
+| 3    | true               |
+| NULL | NULL               |
+
 ## `FROM`-First Syntax
 
 DuckDB's SQL supports the `FROM`-first syntax, i.e., it allows putting the `FROM` clause before the `SELECT` clause or completely omitting the `SELECT` clause. We use the following example to demonstrate it:
