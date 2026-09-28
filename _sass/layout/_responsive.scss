@@ -252,7 +252,7 @@
 	body.documentation .sidenavigation {
 		position: fixed;
 		right: 15px;
-		top: 75px;
+		top: calc(75px + var(--docbanner-height, 0px));
 		width: calc(100% - 30px);
 		transform: translateY(10px);
 		transition: all .3s;
@@ -263,7 +263,7 @@
 		opacity: 0;
 		pointer-events: none;
 		margin-bottom: 20px;
-		height: calc(100vh - 90px);
+		height: calc(100vh - 90px - var(--docbanner-height, 0px));
 		height: -moz-available;
 		height: -webkit-fill-available;
 		height: fill-available;
@@ -272,7 +272,7 @@
 			transform: translateX(0);
 			opacity: 1;
 			pointer-events: all;
-			max-height: calc(100svh - 110px);
+			max-height: calc(100svh - 110px - var(--docbanner-height, 0px));
 			overflow: auto;
 		}
 		.sidenav {
@@ -324,24 +324,6 @@
 		main .wrap #main_content_wrap{
 			padding-right: 0;
 		}
-	}
-	
-	body.documentation.outdated main .wrap #main_content_wrap,
-	body.documentation.stable main .wrap #main_content_wrap{
-		padding-top: 40px;
-	}
-	
-	header .headerline .headercontent .options .banner{
-		position: fixed;
-		width: auto;
-		left: 50%;
-		transform: translateX(-50%);
-		top: 65px;
-		background: var(--main-body-background-color, #FAFAFA);
-		backdrop-filter: blur(15px);
-		justify-content: center;
-		z-index: 500;
-		display: none;
 	}
 	
 	.library-tiles .librarypreview.postpreview,
@@ -481,7 +463,7 @@
 	}
 
 	main.inactive::before {
-		top: 54px;
+		top: calc(54px + var(--docbanner-height, 0px));
 	}
 
 	header .headerline .headercontent .landingmenu nav:not(.mobile) {

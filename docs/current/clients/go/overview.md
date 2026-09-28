@@ -6,8 +6,6 @@ redirect_from:
 - /docs/clients/go
 - /docs/clients/go/overview
 - /docs/current/clients/go
-- /docs/preview/clients/go
-- /docs/preview/clients/go/overview
 - /docs/stable/clients/go
 - /docs/stable/clients/go/overview
 title: Go Client

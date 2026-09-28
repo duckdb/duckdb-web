@@ -1,7 +1,6 @@
 ---
 layout: docu
 redirect_from:
-- /docs/preview/sql/statements/describe
 - /docs/sql/statements/describe
 - /docs/stable/sql/statements/describe
 title: DESCRIBE Statement

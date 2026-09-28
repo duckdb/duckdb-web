@@ -1,7 +1,6 @@
 ---
 layout: docu
 redirect_from:
-- /docs/preview/extensions/extension_distribution
 - /docs/stable/extensions/extension_distribution
 title: Extension Distribution
 ---

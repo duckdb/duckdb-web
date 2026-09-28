@@ -682,6 +682,10 @@
                   "url": "profiling"
                 },
                 {
+                  "page": "PREPARE, EXECUTE, and DEALLOCATE",
+                  "url": "prepare"
+                },
+                {
                   "page": "SELECT",
                   "url": "select"
                 },
@@ -1568,6 +1572,10 @@
                 {
                   "page": "HTTP Parquet Import",
                   "url": "http_import"
+                },
+                {
+                  "page": "HTTP CSV Import",
+                  "url": "http_csv_import"
                 },
                 {
                   "page": "S3 Parquet Import",

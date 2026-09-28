@@ -17,12 +17,12 @@ extension:
     - jrosskopf
 repo:
   github: DataZooDE/erpl-web
-  ref: 0b137d74dbcc4135b6dfe8b469cc93fe7d3a50f5
+  ref: 63accb0213fe7fc3aaecde1805babbdc0c0f08d5
 
 extension_star_count: 31
 extension_star_count_pretty: 31
-extension_download_count: 803
-extension_download_count_pretty: 803
+extension_download_count: 949
+extension_download_count_pretty: 949
 image: '/images/community_extensions/social_preview/preview_community_extension_erpl_web.png'
 layout: community_extension_doc
 ---

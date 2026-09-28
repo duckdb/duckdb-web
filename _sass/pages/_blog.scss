@@ -977,6 +977,9 @@ h5 a {
 				align-items: flex-start;
 				flex-direction: column;
 			}
+			&:has(.scheduled){
+				align-items: baseline;
+			}
 			span{
 				@include body-small();
 			}

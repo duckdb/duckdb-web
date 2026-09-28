@@ -14,6 +14,6 @@ DuckDB can complete all [TPC-H]({% link docs/current/core_extensions/tpch.md %})
 
 The laptop is powered by the MediaTek Kompanio 520 (MT8186), which features 2 Arm Cortex-A76 performance cores (up to 2.2 GHz) and 6 Arm Cortex-A55 efficiency cores (up to 2.0 GHz), with a 256 KB L2 cache per CPU package. The machine ships with 8 GB of LPDDR4X RAM soldered to the board and 128 GB of eMMC storage.
 
-The benchmark was run using DuckDB v1.5.1, downloaded as a pre-compiled binary — compiling DuckDB from source was not feasible due to the limited RAM available in the Crostini container (approximately 6.5 GB). We could not test TPC-H SF300 dataset because the 128 GB eMMC storage was insufficient to hold the database file.
+The benchmark was run using DuckDB v1.5.1, downloaded as a pre-compiled binary – compiling DuckDB from source was not feasible due to the limited RAM available in the Crostini container (approximately 6.5 GB). We could not test TPC-H SF300 dataset because the 128 GB eMMC storage was insufficient to hold the database file.
 
 ![Asus Chromebook CM3001DM2 running TPC-H queries with DuckDB]({% link images/everywhere/asus_chromebook_running_tpch_duckdb.jpg %})

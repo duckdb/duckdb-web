@@ -2,7 +2,6 @@
 layout: docu
 redirect_from:
 - /docs/clients/go/functions
-- /docs/preview/clients/go/functions
 - /docs/stable/clients/go/functions
 title: Write User Defined Functions
 ---
@@ -113,7 +112,7 @@ func bindTableUDF(namedArgs map[string]any, args ...any) (duckdb.RowTableSource,
 func (udf *incrementTableUDF) ColumnInfos() []duckdb.ColumnInfo {
     t, err := duckdb.NewTypeInfo(duckdb.TYPE_BIGINT)
     check(err)
-    return []duckdb.ColumnInfo{{Name: "result", T: t}}
+    return []duckdb.ColumnInfo{% raw %}{{Name: "result", T: t}}{% endraw %}
 }
 
 func (udf *incrementTableUDF) Init() {}

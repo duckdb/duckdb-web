@@ -73,8 +73,8 @@ docs:
 
 extension_star_count: 2
 extension_star_count_pretty: 2
-extension_download_count: 834
-extension_download_count_pretty: 834
+extension_download_count: 1056
+extension_download_count_pretty: 1.1k
 image: '/images/community_extensions/social_preview/preview_community_extension_splunk.png'
 layout: community_extension_doc
 ---

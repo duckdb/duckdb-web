@@ -2,7 +2,6 @@
 layout: docu
 redirect_from:
 - /docs/data/json/json_type
-- /docs/preview/data/json/json_type
 - /docs/sql/data_types/json
 - /docs/stable/data/json/json_type
 title: JSON Type

@@ -2,7 +2,6 @@
 layout: docu
 redirect_from:
 - /docs/guides/python/pytorch
-- /docs/preview/guides/python/pytorch
 - /docs/stable/guides/python/pytorch
 title: Integration with PyTorch
 ---

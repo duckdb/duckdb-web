@@ -1,7 +1,6 @@
 ---
 layout: docu
 redirect_from:
-- /docs/preview/clients/tertiary_clients/julia
 - /docs/stable/clients/tertiary_clients/julia
 github_repository: https://github.com/duckdb/DuckDB.jl
 title: Julia Client

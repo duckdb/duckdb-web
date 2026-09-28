@@ -3,7 +3,6 @@ layout: docu
 redirect_from:
 - /dev/metrics
 - /docs/dev/metrics
-- /docs/preview/dev/metrics
 - /docs/stable/dev/metrics
 title: Metrics
 ---

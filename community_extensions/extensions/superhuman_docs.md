@@ -38,10 +38,10 @@ docs:
 
     For configuration options, type mappings, mutation semantics, and usage examples, see the [extension repository](https://github.com/its-felix/duckdb-superhuman-docs).
 
-extension_star_count: 1
-extension_star_count_pretty: 1
-extension_download_count: 503
-extension_download_count_pretty: 503
+extension_star_count: 2
+extension_star_count_pretty: 2
+extension_download_count: 667
+extension_download_count_pretty: 667
 image: '/images/community_extensions/social_preview/preview_community_extension_superhuman_docs.png'
 layout: community_extension_doc
 ---

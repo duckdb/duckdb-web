@@ -1,7 +1,6 @@
 ---
 layout: docu
 redirect_from:
-- /docs/preview/sql/dialect/sql_quirks
 - /docs/sql/dialect/sql_quirks
 - /docs/stable/sql/dialect/sql_quirks
 title: SQL Quirks

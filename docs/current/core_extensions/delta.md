@@ -4,7 +4,6 @@ layout: docu
 redirect_from:
   - /docs/extensions/delta
   - /docs/stable/extensions/delta
-  - /docs/preview/core_extensions/delta
   - /docs/stable/core_extensions/delta
 title: Delta Extension
 ---

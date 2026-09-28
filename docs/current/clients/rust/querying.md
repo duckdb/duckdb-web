@@ -2,7 +2,6 @@
 layout: docu
 redirect_from:
 - /docs/clients/rust/querying
-- /docs/preview/clients/rust/querying
 - /docs/stable/clients/rust/querying
 title: Run Queries
 ---

@@ -4,7 +4,6 @@ layout: docu
 redirect_from:
 - /docs/extensions/azure
 - /docs/stable/extensions/azure
-- /docs/preview/core_extensions/azure
 - /docs/stable/core_extensions/azure
 title: Azure Extension
 ---

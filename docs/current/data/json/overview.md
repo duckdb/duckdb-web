@@ -4,7 +4,6 @@ redirect_from:
 - /docs/data/json
 - /docs/data/json/overview
 - /docs/extensions/json
-- /docs/preview/data/json/overview
 - /docs/stable/data/json/overview
 title: JSON Overview
 ---

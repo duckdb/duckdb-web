@@ -2,7 +2,6 @@
 layout: docu
 redirect_from:
 - /docs/dev/building/python
-- /docs/preview/dev/building/python
 - /docs/stable/dev/building/python
 title: Python
 ---
@@ -41,9 +40,9 @@ git fetch --all
 ```
 
 **Important notes:**
-- DuckDB is vendored as a git submodule and must be initialized
-- DuckDB version determination depends on local availability of git tags
-- If switching between branches with different submodule refs, add the git hooks:
+* DuckDB is vendored as a git submodule and must be initialized
+* DuckDB version determination depends on local availability of git tags
+* If switching between branches with different submodule refs, add the git hooks:
 
 ```bash
 git config --local core.hooksPath .githooks/
@@ -57,29 +56,49 @@ git config --local core.hooksPath .githooks/
 
 ### 1. Platform-Specific Setup
 
-**All Platforms:**
-- Python 3.9+ supported
-- uv >= 0.8.0 required
-- CMake and Ninja (installed via UV)
-- C++ compiler toolchain
+#### All Platforms
 
-**Linux (Ubuntu 24.04):**
+* Python 3.9+ supported
+* uv >= 0.8.0 required
+* CMake and Ninja (installed via UV)
+* C++ compiler toolchain
+
+#### Linux
+
+On Ubuntu, install the following packages:
 
 ```bash
 sudo apt-get update
-sudo apt-get install ccache
+sudo apt-get install ccache gcc-16 g++-16
 ```
 
-**macOS:**
+On Fedora, Red Hat, Amazon Linux, etc., run:
 
 ```bash
-# Xcode command line tools
+sudo dnf install ccache gcc gcc-c++
+```
+
+Make sure the compiler are set using:
+
+```bash
+export CC=gcc-16
+export CXX=g++-16
+```
+
+#### macOS
+
+Make sure that you have Xcode command line tools installed:
+
+```bash
 xcode-select --install
 ```
 
-**Windows:**
-- Visual Studio 2019+ with C++ support
-- Git for Windows
+#### Windows
+
+Ensure you have the following installed:
+
+* Visual Studio 2019+ with C++ support
+* Git for Windows
 
 ### 2. Install Dependencies and Build
 
@@ -94,9 +113,9 @@ uv sync --no-build-isolation
 ```
 
 **Why two steps?**
-- `uv sync` performs editable installs by default with scikit-build-core using a persistent build-dir
-- The build happens in an isolated, ephemeral environment where cmake's paths point to non-existing directories
-- Installing dependencies first, then building without isolation ensures proper cmake integration
+* `uv sync` performs editable installs by default with scikit-build-core using a persistent build-dir
+* The build happens in an isolated, ephemeral environment where cmake's paths point to non-existing directories
+* Installing dependencies first, then building without isolation ensures proper cmake integration
 
 ### 3. Enable Pre-Commit Hooks
 
@@ -183,6 +202,12 @@ Build for specific Python version:
 uv build -p 3.9
 ```
 
+To install the wheel, run:
+
+```bash
+uv pip install dist/duckdb-*.whl
+```
+
 ### Cleaning Build Artifacts
 
 ```bash
@@ -198,10 +223,10 @@ For CLion users, the project can be configured for C++ debugging of the Python e
 
 In **Settings** → **Build, Execution, Deployment** → **CMake**, create a Debug profile:
 
-- **Name:** Debug
-- **Build type:** Debug  
-- **Generator:** Ninja
-- **CMake Options:**
+* **Name:** Debug
+* **Build type:** Debug
+* **Generator:** Ninja
+* **CMake Options:**
   ```text
   -DCMAKE_PREFIX_PATH=$CMakeProjectDir$/.venv;$CMAKE_PREFIX_PATH
   ```
@@ -210,11 +235,11 @@ In **Settings** → **Build, Execution, Deployment** → **CMake**, create a Deb
 
 Create a **CMake Application** run configuration:
 
-- **Name:** Python Debug
-- **Target:** `All targets`
-- **Executable:** `⟨PROJECT_DIR⟩/.venv/bin/python3`{:.language-sql .highlight}
-- **Program arguments:** `$FilePath$`
-- **Working directory:** `$ProjectFileDir$`
+* **Name:** Python Debug
+* **Target:** `All targets`
+* **Executable:** `⟨PROJECT_DIR⟩/.venv/bin/python3`{:.language-sql .highlight}
+* **Program arguments:** `$FilePath$`
+* **Working directory:** `$ProjectFileDir$`
 
 This allows setting C++ breakpoints and debugging Python scripts that use the DuckDB extension.
 
@@ -255,7 +280,3 @@ git remote add upstream https://github.com/duckdb/duckdb-python.git
 git fetch --tags upstream
 git push --tags
 ```
-
-### Platform-Specific Issues
-
-**Windows compilation:** Ensure you have Visual Studio 2019+ with C++ support installed.

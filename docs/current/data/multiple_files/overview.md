@@ -3,7 +3,6 @@ layout: docu
 redirect_from:
 - /docs/data/csv/multiple_files
 - /docs/data/multiple_files/overview
-- /docs/preview/data/multiple_files/overview
 - /docs/stable/data/multiple_files/overview
 title: Reading Multiple Files
 ---
@@ -81,6 +80,21 @@ FROM read_parquet('dir/**/*.parquet');
 ## Multi-File Reads and Globs
 
 DuckDB can also read a series of Parquet files and treat them as if they were a single table. Note that this only works if the Parquet files have the same schema. You can specify which Parquet files you want to read using a list parameter, glob pattern matching syntax, or a combination of both.
+
+### Directory Paths
+
+The `read_parquet` function accepts a local directory path and recursively reads files with the `.parquet` extension, including files in subdirectories:
+
+```sql
+SELECT *
+FROM read_parquet('dir');
+```
+
+This reads the same files as `read_parquet('dir/**/*.parquet')`. A trailing slash on the directory path is optional. In contrast, `read_parquet('dir/*.parquet')` reads only files directly inside `dir`.
+
+Files with other extensions are ignored by directory discovery, even if they contain Parquet data. To read those files, supply their filenames explicitly. If the directory contains no matching files, the query raises an error.
+
+Directory paths do not change how schemas are combined. When files have different columns, use `union_by_name = true` as described in [combining schemas]({% link docs/current/data/multiple_files/combining_schemas.md %}).
 
 ### List Parameter
 

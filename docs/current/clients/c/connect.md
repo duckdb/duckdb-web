@@ -3,7 +3,6 @@ layout: docu
 redirect_from:
 - /docs/api/c/connect
 - /docs/clients/c/connect
-- /docs/preview/clients/c/connect
 - /docs/stable/clients/c/connect
 title: Startup & Shutdown
 ---

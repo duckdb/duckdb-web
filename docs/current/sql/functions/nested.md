@@ -1,7 +1,6 @@
 ---
 layout: docu
 redirect_from:
-- /docs/preview/sql/functions/nested
 - /docs/sql/functions/nested
 - /docs/stable/sql/functions/nested
 - /docs/test/functions/nested

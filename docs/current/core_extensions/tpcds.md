@@ -4,8 +4,8 @@ layout: docu
 redirect_from:
 - /docs/extensions/tpcds
 - /docs/stable/extensions/tpcds
-- /docs/preview/core_extensions/tpcds
 - /docs/stable/core_extensions/tpcds
+- /tpcds
 title: TPC-DS Extension
 ---
 

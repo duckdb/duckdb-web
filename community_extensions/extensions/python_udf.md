@@ -70,8 +70,8 @@ docs:
 
 extension_star_count: 8
 extension_star_count_pretty: 8
-extension_download_count: 449
-extension_download_count_pretty: 449
+extension_download_count: 626
+extension_download_count_pretty: 626
 image: '/images/community_extensions/social_preview/preview_community_extension_python_udf.png'
 layout: community_extension_doc
 ---

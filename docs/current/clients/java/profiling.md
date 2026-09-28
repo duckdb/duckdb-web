@@ -2,7 +2,6 @@
 layout: docu
 redirect_from:
 - /docs/clients/java/profiling
-- /docs/preview/clients/java/profiling
 - /docs/stable/clients/java/profiling
 title: Profile and Monitor
 ---

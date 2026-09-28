@@ -28,8 +28,8 @@ docs:
 
 extension_star_count: 6
 extension_star_count_pretty: 6
-extension_download_count: 1210
-extension_download_count_pretty: 1.2k
+extension_download_count: 1628
+extension_download_count_pretty: 1.6k
 image: '/images/community_extensions/social_preview/preview_community_extension_decimal_arithmetic.png'
 layout: community_extension_doc
 ---

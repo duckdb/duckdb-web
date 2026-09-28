@@ -90,10 +90,10 @@ docs:
 
     Vendors the official `duckdb-ui`; targets DuckDB v1.5.3.
 
-extension_star_count: 11
-extension_star_count_pretty: 11
-extension_download_count: 993
-extension_download_count_pretty: 993
+extension_star_count: 12
+extension_star_count_pretty: 12
+extension_download_count: 1133
+extension_download_count_pretty: 1.1k
 image: '/images/community_extensions/social_preview/preview_community_extension_harbor.png'
 layout: community_extension_doc
 ---

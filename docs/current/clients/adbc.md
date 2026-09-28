@@ -3,7 +3,6 @@ layout: docu
 redirect_from:
 - /docs/api/adbc
 - /docs/clients/adbc
-- /docs/preview/clients/adbc
 - /docs/stable/clients/adbc
 title: ADBC Client
 ---

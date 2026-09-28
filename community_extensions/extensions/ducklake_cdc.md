@@ -22,10 +22,10 @@ repo:
   github: "elei-io/ducklake-cdc-extension"
   ref: "f909296f3fe11c95177b24796fcae683d75a9d08"
 
-extension_star_count: 17
-extension_star_count_pretty: 17
-extension_download_count: 889
-extension_download_count_pretty: 889
+extension_star_count: 18
+extension_star_count_pretty: 18
+extension_download_count: 1213
+extension_download_count_pretty: 1.2k
 image: '/images/community_extensions/social_preview/preview_community_extension_ducklake_cdc.png'
 layout: community_extension_doc
 ---

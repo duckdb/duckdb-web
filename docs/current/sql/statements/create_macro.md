@@ -2,7 +2,6 @@
 layout: docu
 railroad: statements/createmacro.js
 redirect_from:
-- /docs/preview/sql/statements/create_macro
 - /docs/sql/statements/create_macro
 - /docs/stable/sql/statements/create_macro
 title: CREATE MACRO Statement

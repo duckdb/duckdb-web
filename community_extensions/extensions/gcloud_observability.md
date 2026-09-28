@@ -50,8 +50,8 @@ docs:
 
 extension_star_count: 1
 extension_star_count_pretty: 1
-extension_download_count: 482
-extension_download_count_pretty: 482
+extension_download_count: 631
+extension_download_count_pretty: 631
 image: '/images/community_extensions/social_preview/preview_community_extension_gcloud_observability.png'
 layout: community_extension_doc
 ---

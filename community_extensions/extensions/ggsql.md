@@ -31,10 +31,10 @@ docs:
     The session setting `ggsql_output` switches to returning a URL, the raw
     vega-lite spec, or a self-contained HTML document instead.
 
-extension_star_count: 31
-extension_star_count_pretty: 31
-extension_download_count: 747
-extension_download_count_pretty: 747
+extension_star_count: 32
+extension_star_count_pretty: 32
+extension_download_count: 1191
+extension_download_count_pretty: 1.2k
 image: '/images/community_extensions/social_preview/preview_community_extension_ggsql.png'
 layout: community_extension_doc
 ---

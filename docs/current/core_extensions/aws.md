@@ -4,7 +4,6 @@ layout: docu
 redirect_from:
 - /docs/extensions/aws
 - /docs/stable/extensions/aws
-- /docs/preview/core_extensions/aws
 - /docs/stable/core_extensions/aws
 title: AWS Extension
 ---

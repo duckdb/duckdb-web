@@ -4,7 +4,6 @@ layout: docu
 redirect_from:
 - /docs/api/odbc/macos
 - /docs/clients/odbc/macos
-- /docs/preview/clients/odbc/macos
 - /docs/stable/clients/odbc/macos
 title: ODBC API on macOS
 ---

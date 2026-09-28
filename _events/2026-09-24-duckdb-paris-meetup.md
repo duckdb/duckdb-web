@@ -2,6 +2,8 @@
 layout: post
 title: "DuckDB Paris Meetup"
 author: "Taktile, Altertable, nao"
+thumb: "/images/events/thumbs/duckdb-paris-meetup.svg"
+image: "/images/events/thumbs/duckdb-paris-meetup.png"
 excerpt: ""
 tags: ["meetup"]
 labels: [community]
