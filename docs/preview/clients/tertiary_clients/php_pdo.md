@@ -13,7 +13,7 @@ title: PHP Client (PDO)
 [pdo_duckdb](https://github.com/thomas-0816/pdo-duckdb-php) is a native DuckDB database driver for the [PHP Data Objects (PDO)](https://www.php.net/manual/en/book.pdo.php) interface.
 
 Any application or framework compatible with PDO can directly use `pdo_duckdb`.\
-It is thread safe and fully tested with php-cli, php-fpm, FrankenPHP (PHP-ZTS), TrueAsync and Swoole.
+It is thread safe and fully tested with php-cli, php-fpm, mod_php, FrankenPHP (PHP-ZTS), TrueAsync and Swoole.
 
 As a native PHP extension, it is implemented in C/C++ and does not require PHP FFI or preloading.\
 The [release packages](https://github.com/thomas-0816/pdo-duckdb-php/releases/latest) contain pre-compiled binaries for all supported platforms and DuckDB is directly included.\
