@@ -137,7 +137,7 @@ The [toolchain](https://github.com/duckdb/extension-ci-tools) used to compile Du
 dependencies required to build your extension. If this is the case, please just open a PR adding toolchain components as [optional extras](https://github.com/duckdb/extension-ci-tools/pull/53).
 
 Alternatively, you can try adding the installation of the required dependencies through the [Makefile](https://github.com/duckdb/extension-template/blob/main/Makefile) in your extension repository.
-However, you should be warned that this could potentially lead to a more fragile build system with a corresponding increased maintainance load as DuckDB and its toolchain is updated.
+However, you should be warned that this could potentially lead to a more fragile build system with a corresponding increased maintenance load as DuckDB and its toolchain is updated.
 
 </div>
 
