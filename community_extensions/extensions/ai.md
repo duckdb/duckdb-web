@@ -53,10 +53,10 @@ docs:
     contacted when an `ai_*` function that needs one is executed. Full docs:
     https://github.com/leonardovida/duckdb-ai
 
-extension_star_count: 15
-extension_star_count_pretty: 15
-extension_download_count: 1060
-extension_download_count_pretty: 1.1k
+extension_star_count: 16
+extension_star_count_pretty: 16
+extension_download_count: 1203
+extension_download_count_pretty: 1.2k
 image: '/images/community_extensions/social_preview/preview_community_extension_ai.png'
 layout: community_extension_doc
 ---
