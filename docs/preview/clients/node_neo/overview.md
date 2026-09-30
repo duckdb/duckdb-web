@@ -137,6 +137,20 @@ connection.closeSync();
 const result = await connection.run('from test_all_types()');
 ```
 
+The SQL string may contain multiple statements separated by semicolons. In that case, all of the statements are executed in order, and the returned result is the result of the *last* statement:
+
+```ts
+const reader = await connection.runAndReadAll(
+  `create table t (id integer);
+   insert into t values (1);
+   from t;`
+);
+reader.getRows();
+// [ [1] ]
+```
+
+To run multiple statements and access each statement's result individually, use [`extractStatements`](#extract-statements) instead.
+
 ### Parameterize SQL
 
 ```ts
