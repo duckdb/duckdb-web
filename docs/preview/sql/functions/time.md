@@ -22,6 +22,7 @@ The table below shows the available scalar functions for `TIME` types.
 
 | Name | Description |
 |:--|:-------|
+| [`current_localtime()`](#current_localtime) | Current time (start of current transaction) in the local time zone, as a `TIME` value without a time zone. |
 | [`date_diff(part, starttime, endtime)`](#date_diffpart-starttime-endtime) | The number of [`part`]({% link docs/preview/sql/functions/datepart.md %}) boundaries between `starttime` and `endtime`, inclusive of the larger time and exclusive of the smaller time. |
 | [`date_part(part, time)`](#date_partpart-time) | Get [subfield]({% link docs/preview/sql/functions/datepart.md %}) (equivalent to `extract`). |
 | [`date_sub(part, starttime, endtime)`](#date_subpart-starttime-endtime) | The signed length of the interval between `starttime` and `endtime`, truncated to whole multiples of [`part`]({% link docs/preview/sql/functions/datepart.md %}). |
@@ -30,6 +31,15 @@ The table below shows the available scalar functions for `TIME` types.
 | [`make_time(bigint, bigint, double)`](#make_timebigint-bigint-double) | The time for the given parts. |
 
 The only [date parts]({% link docs/preview/sql/functions/datepart.md %}) that are defined for times are `epoch`, `hours`, `minutes`, `seconds`, `milliseconds` and `microseconds`.
+
+#### `current_localtime()`
+
+<div class="nostroke_table"></div>
+
+| **Description** | Current time (start of current transaction) in the local time zone, as a `TIME` value without a time zone. |
+| **Example** | `current_localtime()` |
+| **Result** | `06:09:59.988` |
+| **Alias** | `localtime` (no parentheses necessary) |
 
 #### `date_diff(part, starttime, endtime)`
 

@@ -386,6 +386,92 @@ SELECT json_contains('{"top_key": {"key": "value"}}', '{"key": "value"}');
 true
 ```
 
+## JSON Patching and Normalization Functions
+
+The following scalar functions compute, apply and clean up JSON patches. They complement the [`json_merge_patch` function]({% link docs/preview/data/json/creating_json.md %}), which applies a [RFC 7396](https://datatracker.ietf.org/doc/html/rfc7396) merge patch to a JSON document.
+
+| Function                                          | Description                                                                                                                                                                                                                                                                                  |
+| :------------------------------------------------ | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `json_deep_merge(json, patch[, ...])`             | Recursively merge one or more `patch` documents into `json`, applied left to right. Works like `json_merge_patch`, except that a JSON `null` value in a patch keeps the original value instead of deleting the key. A SQL `NULL` patch returns `NULL`, while a SQL `NULL` `json` is ignored. |
+| `json_merge_patch_diff(json_orig, json_modified)` | Return the minimal RFC 7396 merge patch such that `json_merge_patch(json_orig, patch)` equals `json_modified`. Deleted keys appear as `null`, changed and added keys appear with their new values, and unchanged keys are omitted. Nested objects are diffed recursively.                    |
+| `json_normalize(json)`                            | Return `json` in a canonical form by recursively sorting the keys of every object, including objects nested inside arrays. The order of array elements is preserved and scalar values are returned unchanged.                                                                                |
+| `json_strip_nulls(json)`                          | Recursively remove all keys whose value is JSON `null`, including in objects nested inside arrays. `null` array elements are kept and scalar values are returned unchanged.                                                                                                                  |
+
+Compute the patch between two documents:
+
+```sql
+SELECT json_merge_patch_diff('{"a": 1, "b": 2, "c": 3}', '{"a": 1, "b": 99, "d": 4}');
+```
+
+```text
+{"c":null,"b":99,"d":4}
+```
+
+Applying the diff using `json_merge_patch` reconstructs the modified document:
+
+```sql
+SELECT json_merge_patch(
+    '{"a": 1, "b": 2, "c": 3}',
+    json_merge_patch_diff('{"a": 1, "b": 2, "c": 3}', '{"a": 1, "b": 99, "d": 4}')
+) = '{"a":1,"b":99,"d":4}' AS round_trips;
+```
+
+```text
+true
+```
+
+`json_deep_merge` treats JSON `null` values in the patch as “keep the original value”, while `json_merge_patch` deletes the key:
+
+```sql
+SELECT
+    json_merge_patch('{"a": {"x": 1, "y": 2}}', '{"a": {"y": null, "z": 3}}') AS merge_patch,
+    json_deep_merge('{"a": {"x": 1, "y": 2}}', '{"a": {"y": null, "z": 3}}') AS deep_merge;
+```
+
+<div class="monospace_table"></div>
+
+|     merge_patch     |        deep_merge         |
+| ------------------- | ------------------------- |
+| {"a":{"x":1,"z":3}} | {"a":{"x":1,"y":2,"z":3}} |
+
+`json_deep_merge` accepts any number of patches:
+
+```sql
+SELECT json_deep_merge('{"a": 1}', '{"a": null}', '{"a": 2}');
+```
+
+```text
+{"a":2}
+```
+
+Normalize the key order of a document, e.g., to compare or hash documents that only differ in key order:
+
+```sql
+SELECT json_normalize('{"c": {"b": {"z": 1, "a": 2}, "a": 3}, "a": 4}');
+```
+
+```text
+{"a":4,"c":{"a":3,"b":{"a":2,"z":1}}}
+```
+
+```sql
+SELECT md5(json_normalize('{"z": 1, "a": 2}')) = md5(json_normalize('{"a": 2, "z": 1}')) AS same_hash;
+```
+
+```text
+true
+```
+
+Remove `null`-valued keys recursively:
+
+```sql
+SELECT json_strip_nulls('{"a": [{"x": 1, "y": null}, {"z": null}], "b": null}');
+```
+
+```text
+{"a":[{"x":1},{}]}
+```
+
 ## JSON Aggregate Functions
 
 There are three JSON aggregate functions.
