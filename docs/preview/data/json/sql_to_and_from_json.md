@@ -10,6 +10,7 @@ DuckDB provides functions to serialize and deserialize `SELECT` statements betwe
 |:------|:-|:---------|
 | `json_deserialize_sql(json)` | Scalar  | Deserialize one or many `json` serialized statements back to an equivalent SQL string. |
 | `json_execute_serialized_sql(varchar)` | Table | Execute `json` serialized statements and return the resulting rows. Only one statement at a time is supported for now. |
+| `json_serialize_plan(varchar, skip_default := boolean, format := boolean, optimize := boolean)` | Scalar | Serialize the bound logical query plan of a set of semicolon-separated (`;`) statements to JSON. If `optimize` is `true`, the optimized plan is serialized. |
 | `json_serialize_sql(varchar, skip_default := boolean, skip_empty := boolean, skip_null := boolean, format := boolean)` | Scalar | Serialize a set of semicolon-separated (`;`) select statements to an equivalent list of `json` serialized statements. |
 | `PRAGMA json_execute_serialized_sql(varchar)` | Pragma | Pragma version of the `json_execute_serialized_sql` function. |
 
@@ -99,4 +100,22 @@ SELECT * FROM json_execute_serialized_sql(json_serialize_sql('TOTALLY NOT VALID 
 ```console
 Parser Error:
 Error parsing json: parser: syntax error at or near "TOTALLY"
+```
+
+Serializing the bound logical plan of a statement with `json_serialize_plan`:
+
+```sql
+SELECT json_serialize_plan('SELECT 1 + 2', format := true);
+```
+
+```text
+{
+    "error": false,
+    "plans": [
+        {
+            "type": "LOGICAL_PROJECTION",
+            ...
+        }
+    ]
+}
 ```

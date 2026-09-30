@@ -370,9 +370,11 @@ FROM read_json('features.geojson', geojson := true);
 | `filename` | Whether or not an extra `filename` column should be included in the result. | `BOOL` | `false` |
 | `format` | Can be one of `auto, unstructured, newline_delimited, array` | `VARCHAR` | `array` |
 | `hive_partitioning` | Whether or not to interpret the path as a [Hive partitioned path]({% link docs/preview/data/partitioning/hive_partitioning.md %}). | `BOOL` | `false` |
+| `hive_types` | If Hive partitioning is enabled, `hive_types` can be used to specify the logical types of the Hive partitioning columns as a struct (e.g., `{'year': 'INTEGER'}`). | `STRUCT` | (auto-detected) |
 | `ignore_errors` | Whether to ignore parse errors (only possible when `format` is `newline_delimited`) | `BOOL` | `false` |
 | `maximum_depth` | Maximum nesting depth to which the automatic schema detection detects types. Set to -1 to fully detect nested JSON types | `BIGINT` | `-1` |
 | `maximum_object_size` | The maximum size of a JSON object (in bytes) | `UINTEGER` | `16777216` |
+| `maximum_sample_files` | The maximum number of JSON files sampled for auto-detection. | `BIGINT` | `32` |
 | `records` | Can be one of `auto`, `true`, `false` | `VARCHAR` | `records` |
 | `sample_size` | Option to define number of sample objects for automatic JSON type detection. Set to -1 to scan the entire input file | `UBIGINT` | `20480` |
 | `timestampformat` | Specifies the date format to use when parsing timestamps. See [Date Format]({% link docs/preview/sql/functions/dateformat.md %}) | `VARCHAR` | `iso`|

@@ -191,6 +191,7 @@ We support two kinds of notations to describe locations within JSON: [JSON Point
 | `json_array_length(json[, path])`           | Return the number of elements in the JSON array `json`, or `0` if it is not a JSON array. If `path` is specified, return the number of elements in the JSON array at the given `path`. If `path` is a `LIST`, the result will be `LIST` of array lengths.                          |
 | `json_contains(json_haystack, json_needle)` | Returns `true` if `json_needle` is contained in `json_haystack`. Both parameters are of JSON type, but `json_needle` can also be a numeric value or a string, however the string must be wrapped in double quotes.                                                                 |
 | `json_keys(json[, path])`                   | Returns the keys of `json` as a `LIST` of `VARCHAR`, if `json` is a JSON object. If `path` is specified, return the keys of the JSON object at the given `path`. If `path` is a `LIST`, the result will be `LIST` of `LIST` of `VARCHAR`.                                          |
+| `json_pretty(json)`                         | Return `json` in a pretty-printed, indented format.                                                                                                                                                                                                                               |
 | `json_structure(json)`                      | Return the structure of `json`. Defaults to `JSON` if the structure is inconsistent (e.g., incompatible types in an array).                                                                                                                                                        |
 | `json_type(json[, path])`                   | Return the type of the supplied `json`, which is one of `ARRAY`, `BIGINT`, `BOOLEAN`, `DOUBLE`, `OBJECT`, `UBIGINT`, `VARCHAR` and `NULL`. If `path` is specified, return the type of the element at the given `path`. If `path` is a `LIST`, the result will be `LIST` of types. |
 | `json_valid(json)`                          | Return whether `json` is valid JSON.                                                                                                                                                                                                                                               |
@@ -358,6 +359,8 @@ SELECT json_structure('["duck", {"family": "anatidae"}]');
 ```text
 ["JSON"]
 ```
+
+> Because JSON has no native temporal or UUID types, `json_structure` reports `DATE`, `TIME`, `TIMESTAMP`, and `UUID` values as `VARCHAR`, since that is how they are represented in JSON. If you feed this structure back into [`from_json`](#transforming-json-to-nested-types), these columns are produced as `VARCHAR`. To recover the original types, replace the relevant `"VARCHAR"` entries in the structure with the desired type name, for example `"DATE"`.
 
 ```sql
 SELECT json_contains('{"key": "value"}', '"value"');

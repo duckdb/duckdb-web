@@ -269,11 +269,8 @@ To work around this, add the other attributes or use the [`GROUP BY ALL` clause]
 
 PostgreSQL supports the [POSIX regular expression matching operators]({% link docs/preview/sql/functions/pattern_matching.md %}) `~` (case-sensitive partial regex matching) and `~*` (case-insensitive partial regex matching) as well as their negated variants, `!~` and `!~*`, respectively.
 
-In DuckDB, `~` is equivalent to [`regexp_full_match`]({% link docs/preview/sql/functions/text.md %}#regexp_full_matchstring-regex) and `!~` is equivalent to `NOT regexp_full_match`.
-The operators `~*` and `!~*` are not supported.
-
-The table below shows that the correspondence between these functions in PostgreSQL and DuckDB is almost non-existent.
-Avoid using the POSIX regular expression matching operators in DuckDB.
+By default, DuckDB follows the same semantics: `~` maps to [`regexp_matches`]({% link docs/preview/sql/functions/text.md %}#regexp_matchesstring-regex-options) (case-sensitive partial matching), `~*` performs case-insensitive partial matching, and `!~` and `!~*` are their negated variants.
+The results therefore match PostgreSQL:
 
 <div class="monospace_table"></div>
 
@@ -281,9 +278,11 @@ Avoid using the POSIX regular expression matching operators in DuckDB.
 
 | Expression          | PostgreSQL | DuckDB |
 | :------------------ | ---------- | ------ |
-| `'aaa' ~ '(a|b)'`   | true       | false  |
-| `'AAA' ~* '(a|b)'`  | true       | error  |
-| `'aaa' !~ '(a|b)'`  | false      | true   |
-| `'AAA' !~* '(a|b)'` | false      | error  |
+| `'aaa' ~ '(a|b)'`   | true       | true   |
+| `'AAA' ~* '(a|b)'`  | true       | true   |
+| `'aaa' !~ '(a|b)'`  | false      | false  |
+| `'AAA' !~* '(a|b)'` | false      | false  |
 
 <!-- markdownlint-enable MD056 -->
+
+The legacy behavior, in which `~` mapped to [`regexp_full_match`]({% link docs/preview/sql/functions/text.md %}#regexp_full_matchstring-regex) and `~*` and `!~*` were unsupported, can be restored using the deprecated `regex_match_operator_semantics` setting with the value `full`.

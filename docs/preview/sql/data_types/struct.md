@@ -251,12 +251,12 @@ The `STRUCT` type can be compared using all the [comparison operators]({% link d
 These comparisons can be used in [logical expressions]({% link docs/preview/sql/expressions/logical_operators.md %})
 such as `WHERE` and `HAVING` clauses, and return [`BOOLEAN` values]({% link docs/preview/sql/data_types/boolean.md %}).
 
-Comparisons are done in lexicographical order, with individual entries being compared as usual except that `NULL` values are treated as larger than all other values.
+Comparisons are done in lexicographical order over the entries, following PostgreSQL's [`IS NOT DISTINCT FROM` semantics]({% link docs/preview/sql/expressions/comparison_operators.md %}#comparison-operators): corresponding entries are compared position by position, and two `NULL` entries in the same position are considered equal (not distinct) so the comparison moves on to the next position. For ordering purposes, a `NULL` entry is treated as larger than any non-`NULL` value.
 
 Specifically:
 
-* If all values of `s1` and `s2` compare equal, then `s1` and `s2` compare equal.
-* else, if `s1.value[i] < s2.value[i] OR s2.value[i] is NULL` for the first index `i` where `s1.value[i] != s2.value[i]`, then `s1` is less than `s2`, and vice versa.
+* If every entry of `s1` is not distinct from the corresponding entry of `s2` (treating two `NULL`s as equal), then `s1` and `s2` compare equal.
+* else, for the first index `i` where `s1.value[i]` is distinct from `s2.value[i]`, if `s1.value[i] < s2.value[i] OR s2.value[i] IS NULL`, then `s1` is less than `s2`, and vice versa.
 
 Structs of different types are implicitly cast to a struct type with the union of the involved keys, following the rules for [combination casting]({% link docs/preview/sql/data_types/typecasting.md %}#structs).
 

@@ -20,6 +20,8 @@ The following table shows which parts of the S3 API are required for each `httpf
 
 ## Configuration and Authentication
 
+> Tip For an overview of the available methods and guidance on which one to use, see the [S3 and AWS Authentication]({% link docs/preview/core_extensions/httpfs/authentication.md %}) page.
+
 The preferred way to configure and authenticate to S3 endpoints is to use [secrets]({% link docs/preview/sql/statements/create_secret.md %}). Multiple secret providers are available.
 
 To migrate from the [deprecated S3 API]({% link docs/preview/core_extensions/httpfs/s3api_legacy_authentication.md %}), use a defined secret with a profile.

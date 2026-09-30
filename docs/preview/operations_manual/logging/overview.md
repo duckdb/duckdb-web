@@ -47,6 +47,20 @@ The log level can be set using:
 CALL enable_logging(level = 'debug');
 ```
 
+## Warnings
+
+DuckDB emits warnings, for example when you use deprecated syntax or a deprecated setting, through the logging system at the `WARN` level. In the CLI, warnings are printed by default. To capture them from any client, or to inspect them after the fact, enable logging and query the `duckdb_logs` view, filtering on the log level:
+
+```sql
+CALL enable_logging(level = 'warn');
+-- Run some queries that may emit warnings...
+SELECT timestamp, message
+FROM duckdb_logs
+WHERE level = 'WARN';
+```
+
+The default log level is `INFO`, which already includes warnings, so calling `enable_logging()` without a `level` also captures warnings. Setting `level = 'warn'` excludes lower-severity `INFO` messages.
+
 ## Log Types
 
 In DuckDB, log messages can have an associated log type. Log types allow two main things:
