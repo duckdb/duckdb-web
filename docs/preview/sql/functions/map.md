@@ -21,6 +21,7 @@ title: Map Functions
 | [`map_values(map)`](#map_valuesmap) | Return a list of all values in the map. |
 | [`map()`](#map) | Returns an empty map. |
 | [`map[entry]`](#mapentry) | Returns the value for a given `key` or `NULL` if the `key` is not contained in the map. The type of the key provided in the second parameter must match the type of the map's keys; else, an error is thrown. |
+| [`switch(key, map)`](#switchkey-map) | Returns the value for a given `key` in the `map`, or `NULL` if the `key` is not present. An optional third argument, `switch(key, map, default)`, returns `default` instead of `NULL` when the `key` is not present. |
 
 #### `cardinality(map)`
 
@@ -137,3 +138,11 @@ title: Map Functions
 | **Example** | `map([100, 5], ['a', 'b'])[100]` |
 | **Result** | `a` |
 | **Aliases** | `map_extract_value(map, key)` |
+
+#### `switch(key, map)`
+
+<div class="nostroke_table"></div>
+
+| **Description** | Returns the value for a given `key` in the `map`, or `NULL` if the `key` is not present. This is equivalent to [`map_extract_value(map, key)`](#map_extract_valuemap-key) with the arguments reversed. An optional third argument, `switch(key, map, default)`, returns `default` instead of `NULL` when the `key` is not present. |
+| **Example** | `switch('key1', MAP {'key1': 10, 'key2': 20})` |
+| **Result** | `10` |
