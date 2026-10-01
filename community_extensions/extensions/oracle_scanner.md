@@ -8,7 +8,7 @@ excerpt: |
 extension:
   name: oracle_scanner
   description: Read and write Oracle Database with no Oracle client
-  version: '0.2.2'
+  version: '0.3.0'
   language: C++
   build: cmake
   license: Apache-2.0
@@ -19,13 +19,13 @@ extension:
 
 repo:
   github: krokozyab/quack-oracle
-  # The commit tagged v0.2.2, pinned by SHA so what is built cannot move.
-  ref: 8a368747f710366fd69bb715089e69165292e685
+  # The commit tagged v0.3.0, pinned by SHA so what is built cannot move.
+  ref: 87694354dac3a8a6edb3dc31226e1c13dc9cf335
 
 extension_star_count: 3
 extension_star_count_pretty: 3
-extension_download_count: 745
-extension_download_count_pretty: 745
+extension_download_count: 776
+extension_download_count_pretty: 776
 image: '/images/community_extensions/social_preview/preview_community_extension_oracle_scanner.png'
 layout: community_extension_doc
 ---
@@ -51,28 +51,28 @@ LOAD {{ page.extension.name }};
 
 <div class="extension_functions_table"></div>
 
-|       function_name        | function_type | description | comment | examples |
-|----------------------------|---------------|-------------|---------|----------|
-| oracle_arguments           | table         | NULL        | NULL    |          |
-| oracle_call                | table         | NULL        | NULL    |          |
-| oracle_call_auto           | table         | NULL        | NULL    |          |
-| oracle_call_cursors        | table         | NULL        | NULL    |          |
-| oracle_call_implicit       | table         | NULL        | NULL    |          |
-| oracle_call_inout_number   | table         | NULL        | NULL    |          |
-| oracle_call_inout_varchar  | table         | NULL        | NULL    |          |
-| oracle_call_named          | table         | NULL        | NULL    |          |
-| oracle_call_named_function | table         | NULL        | NULL    |          |
-| oracle_call_number         | table         | NULL        | NULL    |          |
-| oracle_call_number_args    | table         | NULL        | NULL    |          |
-| oracle_call_out_number     | table         | NULL        | NULL    |          |
-| oracle_call_out_varchar    | table         | NULL        | NULL    |          |
-| oracle_close_call          | table         | NULL        | NULL    |          |
-| oracle_cursor              | table         | NULL        | NULL    |          |
-| oracle_execute             | table         | NULL        | NULL    |          |
-| oracle_execute_many        | table         | NULL        | NULL    |          |
-| oracle_query               | table         | NULL        | NULL    |          |
-| oracle_scan_parallel       | table         | NULL        | NULL    |          |
-| oracle_scanner_version     | scalar        | NULL        | NULL    |          |
+|       function_name        | function_type |                                                                       description                                                                        | comment |                                                                                                          examples                                                                                                          |
+|----------------------------|---------------|----------------------------------------------------------------------------------------------------------------------------------------------------------|---------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| oracle_arguments           | table         | Lists the arguments of every overload of an Oracle procedure or function, with the reason for any argument type this client cannot bind.                 | NULL    | [SELECT * FROM oracle_arguments('demo', 'QUACK_DEMO_ADD');]                                                                                                                                                                |
+| oracle_call                | table         | Calls an Oracle procedure whose only argument is an OUT SYS_REFCURSOR, and returns a cursor handle rather than the cursor's rows.                        | NULL    | [SELECT * FROM oracle_call('demo', 'QUACK_DEMO_LIST', 'P_ROWS');]                                                                                                                                                          |
+| oracle_call_auto           | table         | Reads an Oracle procedure's or function's signature from the data dictionary and calls it with the given values in argument declaration order.           | NULL    | [SELECT * FROM oracle_call_auto('demo', 'QUACK_DEMO_ADD', ['2', '3']);]                                                                                                                                                    |
+| oracle_call_cursors        | table         | Calls an Oracle procedure whose arguments are the listed OUT SYS_REFCURSORs, and returns a cursor handle for each.                                       | NULL    | [SELECT * FROM oracle_call_cursors('demo', 'QUACK_DEMO_LIST', ['P_ROWS']);]                                                                                                                                                |
+| oracle_call_implicit       | table         | Calls an Oracle procedure that takes no arguments and returns a cursor handle for each implicit result set it returns.                                   | NULL    | [SELECT * FROM oracle_call_implicit('demo', 'QUACK_DEMO_IMPLICIT');]                                                                                                                                                       |
+| oracle_call_inout_number   | table         | Passes a NUMBER, given as text, to an Oracle procedure's only argument, an IN OUT, and returns the updated value as text.                                | NULL    | [SELECT * FROM oracle_call_inout_number('demo', 'QUACK_DEMO_DOUBLE', 'P_VALUE', '21');]                                                                                                                                    |
+| oracle_call_inout_varchar  | table         | Passes a VARCHAR2 to an Oracle procedure's only argument, an IN OUT, and returns the updated value.                                                      | NULL    | [SELECT * FROM oracle_call_inout_varchar('demo', 'QUACK_DEMO_SHOUT', 'P_TEXT', 'quack');]                                                                                                                                  |
+| oracle_call_named          | table         | Calls an Oracle procedure with arguments whose names, directions, types and values are given explicitly, and returns its OUT values and cursor handles.  | NULL    | [SELECT * FROM oracle_call_named('demo', 'QUACK_DEMO_GREET', [{'name': 'P_NAME', 'direction': 'in', 'type': 'varchar', 'value': 'world'}, {'name': 'P_GREETING', 'direction': 'out', 'type': 'varchar', 'value': NULL}]);] |
+| oracle_call_named_function | table         | Calls an Oracle function with the given return type and explicitly described arguments, and returns its result and OUT values.                           | NULL    | [SELECT * FROM oracle_call_named_function('demo', 'QUACK_DEMO_ADD', 'number', [{'name': 'P_A', 'direction': 'in', 'type': 'number', 'value': '2'}, {'name': 'P_B', 'direction': 'in', 'type': 'number', 'value': '3'}]);]  |
+| oracle_call_number         | table         | Calls an Oracle function that takes no arguments and returns NUMBER, and returns its result as text.                                                     | NULL    | [SELECT * FROM oracle_call_number('demo', 'QUACK_DEMO_ANSWER');]                                                                                                                                                           |
+| oracle_call_number_args    | table         | Calls an Oracle function that returns NUMBER with named IN arguments taken from a STRUCT, and returns its result as text.                                | NULL    | [SELECT * FROM oracle_call_number_args('demo', 'QUACK_DEMO_ADD', {P_A: 2, P_B: 3});]                                                                                                                                       |
+| oracle_call_out_number     | table         | Calls an Oracle procedure whose only argument is a NUMBER OUT, and returns that value as text.                                                           | NULL    | [SELECT * FROM oracle_call_out_number('demo', 'QUACK_DEMO_COUNT_DEPARTMENTS', 'P_COUNT');]                                                                                                                                 |
+| oracle_call_out_varchar    | table         | Calls an Oracle procedure whose only argument is a VARCHAR2 OUT, and returns that value.                                                                 | NULL    | [SELECT * FROM oracle_call_out_varchar('demo', 'QUACK_DEMO_MOTTO', 'P_TEXT');]                                                                                                                                             |
+| oracle_close_call          | table         | Closes the remaining registered cursors of the whole call a cursor handle belongs to, and returns closed.                                                | NULL    | [SELECT * FROM oracle_close_call(getvariable('oracle_close_handle'));]                                                                                                                                                     |
+| oracle_cursor              | table         | Consumes a cursor handle created earlier on the same DuckDB connection and returns the cursor's rows.                                                    | NULL    | [SELECT * FROM oracle_cursor(getvariable('oracle_example_handle'));]                                                                                                                                                       |
+| oracle_execute             | table         | Runs one Oracle INSERT, UPDATE or DELETE with optional positional or named bind parameters, commits it in Oracle, and returns affected_rows.             | NULL    | [SELECT * FROM oracle_execute('demo', 'INSERT INTO QUACK_DEMO_LOG (LABEL, AMOUNT) VALUES (:label, :amount)', {'label': 'example', 'amount': 1.5});]                                                                        |
+| oracle_execute_many        | table         | Runs one Oracle INSERT, UPDATE or DELETE once for each bind record in a list using array DML, commits it in Oracle, and returns the total affected_rows. | NULL    | [SELECT * FROM oracle_execute_many('demo', 'INSERT INTO QUACK_DEMO_LOG (LABEL, AMOUNT) VALUES (:label, :amount)', [{'label': 'a', 'amount': 1.5}, {'label': 'b', 'amount': 2.5}]);]                                        |
+| oracle_query               | table         | Runs an Oracle SELECT query with optional positional or named bind parameters and returns its rows.                                                      | NULL    | [SELECT * FROM oracle_query('demo', 'SELECT :1 AS value FROM dual', [42]);]                                                                                                                                                |
+| oracle_scan_parallel       | table         | Reads one Oracle table through several sessions in ranges of an integral NUMBER key, all at a single SCN.                                                | NULL    | [SELECT * FROM oracle_scan_parallel('demo', 'QUACK_DEMO_DEPARTMENTS', 'DEPARTMENT_ID', shards := 4);]                                                                                                                      |
+| oracle_scanner_version     | scalar        | Returns the version of this oracle_scanner build.                                                                                                        | NULL    | [oracle_scanner_version()]                                                                                                                                                                                                 |
 
 ### Overloaded Functions
 

@@ -8,16 +8,18 @@ excerpt: |
 extension:
   name: lua
   description: Evaluate Lua scripts within queries
-  version: 1.5.5
+  version: 1.5.6
   language: C++
   build: cmake
   license: MIT
+  requires_toolchains: "python3"
+  vcpkg_commit: cd61e1e26a038e82d6550a3ebbe0fbbfe7da78e3
   maintainers:
     - isaacbrodsky
 
 repo:
   github: isaacbrodsky/duckdb-lua
-  ref: 8c72b730b66db7a275f01c15d27bcb4074790eb4
+  ref: f630ad32898fd1c67a155dc3b061f7d83a57f3b2
 
 docs:
   hello_world: |
@@ -27,8 +29,8 @@ docs:
 
 extension_star_count: 13
 extension_star_count_pretty: 13
-extension_download_count: 1181
-extension_download_count_pretty: 1.2k
+extension_download_count: 1305
+extension_download_count_pretty: 1.3k
 image: '/images/community_extensions/social_preview/preview_community_extension_lua.png'
 layout: community_extension_doc
 ---
@@ -57,6 +59,7 @@ LOAD {{ page.extension.name }};
 | function_name | function_type | description | comment | examples |
 |---------------|---------------|-------------|---------|----------|
 | lua           | scalar        | NULL        | NULL    |          |
+| lua_json      | scalar        | NULL        | NULL    |          |
 
 ### Overloaded Functions
 
@@ -74,8 +77,6 @@ This extension does not add any types.
 
 <div class="extension_settings_table"></div>
 
-|       name       |                   description                    | input_type | scope  | aliases |
-|------------------|--------------------------------------------------|------------|--------|---------|
-| lua_context_name | Global context variable name. Default: 'context' | VARCHAR    | GLOBAL | []      |
+This extension does not add any settings.
 
 

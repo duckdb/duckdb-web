@@ -8,7 +8,7 @@ excerpt: |
 extension:
   name: erpl_tunnel
   description: Reach any TCP service from DuckDB through an SSH bastion, Tailscale or NetBird — and publish local ports back onto those networks.
-  version: 2026.08.22
+  version: 2026.09.26
   language: C++
   build: cmake
   license: BSL 1.1
@@ -24,12 +24,12 @@ extension:
 
 repo:
   github: DataZooDE/erpl-tunnel
-  ref: 01e6ebecdeab583cd7fdf5800856ff950a9f0fdf
+  ref: 8f5589b7bf0b589788e77eb48610db4fb729eb35
 
 extension_star_count: 4
 extension_star_count_pretty: 4
-extension_download_count: 741
-extension_download_count_pretty: 741
+extension_download_count: 748
+extension_download_count_pretty: 748
 image: '/images/community_extensions/social_preview/preview_community_extension_erpl_tunnel.png'
 layout: community_extension_doc
 ---
@@ -55,17 +55,17 @@ LOAD {{ page.extension.name }};
 
 <div class="extension_functions_table"></div>
 
-|    function_name     | function_type |                                        description                                         | comment |                  examples                   |
-|----------------------|---------------|--------------------------------------------------------------------------------------------|---------|---------------------------------------------|
-| tunnel_close         | pragma        | NULL                                                                                       | NULL    |                                             |
-| tunnel_close_all     | pragma        | NULL                                                                                       | NULL    |                                             |
-| tunnel_create        | pragma        | NULL                                                                                       | NULL    |                                             |
-| tunnel_export        | pragma        | NULL                                                                                       | NULL    |                                             |
-| tunnel_import        | pragma        | NULL                                                                                       | NULL    |                                             |
-| tunnel_mesh_activate | pragma        | NULL                                                                                       | NULL    |                                             |
-| tunnel_peers         | table         | Enumerate mesh peers for a tunnel secret (peer-local, no API token).                       | NULL    | [SELECT * FROM tunnel_peers(secret = 'ts')] |
-| tunnel_self          | table         | Show this node's own mesh identity (name/ip/tags) for a tunnel secret.                     | NULL    | [SELECT * FROM tunnel_self(secret = 'ts')]  |
-| tunnels              | table         | List all active tunnels (SSH and mesh) with their backend, connection details, and status. | NULL    | [SELECT * FROM tunnels()]                   |
+|    function_name     | function_type |                                                                                                                   description                                                                                                                    | comment |                                                     examples                                                     |
+|----------------------|---------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|---------|------------------------------------------------------------------------------------------------------------------|
+| tunnel_close         | pragma        | Close one tunnel by id; idempotent, and reports whether the tunnel was still open.                                                                                                                                                               | NULL    | [PRAGMA tunnel_close(1);]                                                                                        |
+| tunnel_close_all     | pragma        | Close every open tunnel; idempotent.                                                                                                                                                                                                             | NULL    | [PRAGMA tunnel_close_all;]                                                                                       |
+| tunnel_create        | pragma        | Deprecated alias of tunnel_import, kept so existing scripts keep working; use tunnel_import instead.                                                                                                                                             | NULL    | [PRAGMA tunnel_create(secret = 'bastion', remote_host = 'db.internal', remote_port = 5432, local_port = 15432);] |
+| tunnel_export        | pragma        | Publish a local port onto the network; returns (tunnel_id, remote_port, message). Named parameters: secret, local_port, local_host, remote_port, remote_host, timeout. Over a mesh backend there is no host to name, so remote_host is rejected. | NULL    | [PRAGMA tunnel_export(secret = 'ts', local_port = 9494);]                                                        |
+| tunnel_import        | pragma        | Bring a remote service to a local port; returns (tunnel_id, message). Named parameters: secret, remote_host, remote_port, local_port, timeout, bind_all. Binds 127.0.0.1 unless bind_all is true.                                                | NULL    | [PRAGMA tunnel_import(secret = 'bastion', remote_host = 'db.internal', remote_port = 5432, local_port = 15432);] |
+| tunnel_mesh_activate | pragma        | Advanced -- force-load a mesh backend ('tailscale' or 'netbird') now. Normally automatic on first tunnel_import/tunnel_peers; use only to surface auth errors early or to pin the one mesh for this process.                                     | NULL    | [PRAGMA tunnel_mesh_activate('tailscale');]                                                                      |
+| tunnel_peers         | table         | Enumerate mesh peers for a tunnel secret (peer-local, no API token).                                                                                                                                                                             | NULL    | [SELECT * FROM tunnel_peers(secret = 'ts')]                                                                      |
+| tunnel_self          | table         | Show this node's own mesh identity (name/ip/tags) for a tunnel secret.                                                                                                                                                                           | NULL    | [SELECT * FROM tunnel_self(secret = 'ts')]                                                                       |
+| tunnels              | table         | List all active tunnels (SSH and mesh) with their backend, connection details, and status.                                                                                                                                                       | NULL    | [SELECT * FROM tunnels()]                                                                                        |
 
 ### Overloaded Functions
 

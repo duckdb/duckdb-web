@@ -8,7 +8,7 @@ excerpt: |
 extension:
   name: scalarfs
   description: A collection of virtual filesystems for working with scalars
-  version: 1.6.1
+  version: 1.6.2
   language: C++
   build: cmake
   license: MIT
@@ -17,8 +17,14 @@ extension:
 repo:
   github: teaguesterling/duckdb_scalarfs
   andium: 68faa6c72054123a6c6521dd41c12f929431da50
-  ref: 0ee19182b2a83c8b9c998018e464723b9fb7d1f3
-  ref_next: 4863e4e33cf80792bcd0ebd72e6d5580aacd0e2a
+  ref: 6fc4d68397c521e1fda56bd164ce4f2f3aabda5c
+  # ref_next omitted (skips the v2.0-cyanoptera prerelease leg). scalarfs is clean
+  # of family C (0 named_parameters) and builds against duckdb main, but v2.0-
+  # cyanoptera removed QueryResult::GetValue, which pathmacro_filesystem.cpp uses
+  # (cyanoptera build error at pathmacro_filesystem.cpp:147). That is a separate
+  # v2.0 fix, out of scope for the v1.5.6 restoration; the prerelease leg is
+  # deploy:false and never publishes. Restore ref_next once the v2.0 GetValue
+  # change is handled (after v2.0.0 tags).
 docs:
   hello_world: |
     LOAD scalarfs;
@@ -87,7 +93,7 @@ docs:
 
 extension_star_count: 10
 extension_star_count_pretty: 10
-extension_download_count: 1080
+extension_download_count: 1079
 extension_download_count_pretty: 1.1k
 image: '/images/community_extensions/social_preview/preview_community_extension_scalarfs.png'
 layout: community_extension_doc

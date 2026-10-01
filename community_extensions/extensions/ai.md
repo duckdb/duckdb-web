@@ -8,7 +8,7 @@ excerpt: |
 extension:
   name: ai
   description: AI functions for SQL — completions, classification, extraction, embeddings, and read-only SQL generation across local and hosted model providers
-  version: 0.5.0
+  version: 0.6.0
   language: C++
   build: cmake
   license: MIT
@@ -18,7 +18,7 @@ extension:
 
 repo:
   github: leonardovida/duckdb-ai
-  ref: c32196fea3535927fd9f2acb34ca8e7b691b6b3a
+  ref: 44020c8a1e869aa1614827c4f6ac865c1ce9b804
 
 docs:
   hello_world: |
@@ -55,7 +55,7 @@ docs:
 
 extension_star_count: 16
 extension_star_count_pretty: 16
-extension_download_count: 1203
+extension_download_count: 1199
 extension_download_count_pretty: 1.2k
 image: '/images/community_extensions/social_preview/preview_community_extension_ai.png'
 layout: community_extension_doc
@@ -109,6 +109,7 @@ LOAD {{ page.extension.name }};
 | ai_fix_sql                 | table         | Rewrites a broken query as one corrected read-only DuckDB SELECT, or rewrites one line with mode := 'line'.   | NULL    | [SELECT * FROM ai_fix_sql('SELEC 42');, SELECT * FROM ai_fix_sql('SELECT amout FROM sales', error := 'column amout not found', fix_attempts := 2);] |
 | ai_generate_chunks         | table         | Splits text into deterministic fixed or recursive Unicode-aware chunks.                                       | NULL    | [SELECT * FROM ai_generate_chunks('First paragraph. Second paragraph.');]                                                                           |
 | ai_is_read_only_sql        | scalar        | Returns whether SQL is one parser-valid read-only SELECT statement.                                           | NULL    | [SELECT ai_is_read_only_sql('SELECT 42');]                                                                                                          |
+| ai_jev                     | scalar        | Evaluates named Jev criteria in row batches and returns a typed STRUCT.                                       | NULL    | [SELECT ai_jev('charged twice', {team: MAP {'billing': 'Payments', 'other': 'Other'{% raw %}}}{% endraw %});]                                       |
 | ai_model_prices            | table         | Returns the built-in provider/model pricing catalog.                                                          | NULL    | [SELECT * FROM ai_model_prices();]                                                                                                                  |
 | ai_models                  | table         | Lists registered external model profiles without credential material.                                         | NULL    | [SELECT * FROM ai_models();]                                                                                                                        |
 | ai_parse_document          | table         | Parses a BLOB through a normalized remote document-parser profile.                                            | NULL    | [SELECT * FROM ai_parse_document(read_blob('document.pdf').content, 'application/pdf', 'documents');]                                               |

@@ -17,7 +17,7 @@ extension:
 
 repo:
   github: ahuarte47/duckdb-stac
-  ref: 4a5eaa99c81cc393f3dabf9536795c43ede9c6a9
+  ref: 3d03c58655ce9ccd810ee80f6674a606a5c63c03
 
 docs:
   hello_world: |
@@ -136,8 +136,8 @@ docs:
 
 extension_star_count: 24
 extension_star_count_pretty: 24
-extension_download_count: 963
-extension_download_count_pretty: 963
+extension_download_count: 982
+extension_download_count_pretty: 982
 image: '/images/community_extensions/social_preview/preview_community_extension_stac.png'
 layout: community_extension_doc
 ---

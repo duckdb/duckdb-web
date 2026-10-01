@@ -13,11 +13,11 @@ extension:
   build: cmake
   license: Apache-2.0
   maintainers:
-    - columnar-tech
+    - SamArch27, columnar-tech
 repo:
   github: columnar-tech/duckdb-adbc-client
-  andium: 4234c581082cfa435c78fbe78c7f8815fe8d9dd8  
-  ref: 42e2b1b6a42b0089bcfd3ba1c0057d557a05f924
+  andium: c30888194e57d78017cbde379abb117e82538fe6
+  ref: d4b19a7b3d291464eb54b2d50e185466234225d9
 docs:
   hello_world: |
     -- Install and load the ADBC extension
@@ -125,7 +125,7 @@ docs:
 
 extension_star_count: 48
 extension_star_count_pretty: 48
-extension_download_count: 1203
+extension_download_count: 1238
 extension_download_count_pretty: 1.2k
 image: '/images/community_extensions/social_preview/preview_community_extension_adbc.png'
 layout: community_extension_doc

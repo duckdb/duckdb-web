@@ -8,7 +8,7 @@ excerpt: |
 extension:
   name: flock
   description: LLM & RAG extension to combine analytics and semantic analysis
-  version: 0.8.1
+  version: 0.9.0
   language: SQL & C++
   build: cmake
   license: MIT
@@ -21,7 +21,7 @@ extension:
 
 repo:
   github: dais-polymtl/flock
-  ref: adf457edbf74d95cc70fa35d778479d186a7360c
+  ref: b719767de598fc784f037f2342d0a5167deed2d8
 
 docs:
   hello_world: |
@@ -63,8 +63,8 @@ docs:
 
 extension_star_count: 359
 extension_star_count_pretty: 359
-extension_download_count: 1339
-extension_download_count_pretty: 1.3k
+extension_download_count: 2748
+extension_download_count_pretty: 2.7k
 image: '/images/community_extensions/social_preview/preview_community_extension_flock.png'
 layout: community_extension_doc
 ---
@@ -107,6 +107,7 @@ LOAD {{ page.extension.name }};
 | flock_get_metrics       | scalar        | Returns usage metrics for LLM function calls in the current session       | Returns JSON with api_calls tokens and timing per function              | [SELECT flock_get_metrics();]                                                                                                                                                        |
 | flock_get_debug_metrics | scalar        | Returns detailed debug metrics including registration order               | Useful for debugging multi-function queries                             | [SELECT flock_get_debug_metrics();]                                                                                                                                                  |
 | flock_reset_metrics     | scalar        | Resets all metrics for the current session                                | Returns confirmation message                                            | [SELECT flock_reset_metrics();]                                                                                                                                                      |
+| ai_classify             | scalar        | NULL                                                                      | NULL                                                                    | NULL                                                                                                                                                                                 |
 
 ### Overloaded Functions
 
