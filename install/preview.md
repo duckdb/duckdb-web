@@ -71,17 +71,27 @@ To install the preview build on Linux and macOS, run:
 curl https://install.duckdb.org | DUCKDB_VERSION=alpha bash
 ```
 
+#### v2.0-dev Windows PowerShell Script
+
+To install the preview build on Windows, run:
+
+```powershell
+$env:DUCKDB_VERSION = "alpha"; irm https://install.duckdb.org/install.ps1 | iex
+```
+
+> DuckDB on Windows requires the [Microsoft Visual C++ Redistributable](https://learn.microsoft.com/en-us/cpp/windows/latest-supported-vc-redist?view=msvc-170).
+
 #### v2.0-dev CLI Packages
 
 To download the v2.0-dev command line client, use the following links:
 
-| Platform | Architecture       | v2.0-dev CLI client                                                                    |
-| -------- | ------------------ | -------------------------------------------------------------------------------------- |
-| Linux    | `arm64`            | [tar.gz](https://artifacts.duckdb.org/v2.0-cyanoptera/duckdb-cli-linux-arm64.tar.gz)   |
-| Linux    | `x86_64`           | [tar.gz](https://artifacts.duckdb.org/v2.0-cyanoptera/duckdb-cli-linux-amd64.tar.gz)   |
-| macOS    | `arm64` / `x86_64` | [tar.gz](https://artifacts.duckdb.org/v2.0-cyanoptera/duckdb-cli-osx-universal.tar.gz) |
-| Windows  | `arm64`            | [tar.gz](https://artifacts.duckdb.org/v2.0-cyanoptera/duckdb-cli-windows-arm64.tar.gz) |
-| Windows  | `x86_64`           | [tar.gz](https://artifacts.duckdb.org/v2.0-cyanoptera/duckdb-cli-windows-amd64.tar.gz) |
+| Platform | Architecture       | v2.0-dev CLI client                                                                                                                                             |
+| -------- | ------------------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Linux    | `arm64`            | [tar.gz](https://artifacts.duckdb.org/v2.0-cyanoptera/duckdb-cli-linux-arm64.tar.gz)                                                                            |
+| Linux    | `x86_64`           | [tar.gz](https://artifacts.duckdb.org/v2.0-cyanoptera/duckdb-cli-linux-amd64.tar.gz)                                                                            |
+| macOS    | `arm64` / `x86_64` | [tar.gz](https://artifacts.duckdb.org/v2.0-cyanoptera/duckdb-cli-osx-universal.tar.gz)                                                                          |
+| Windows  | `arm64`            | [tar.gz](https://duckdb-staging.duckdb.org/{{ site.duckdb_windows_alpha_release }}/duckdb/duckdb/github_release/duckdb-cli-windows-arm64.tar.gz) |
+| Windows  | `x86_64`           | [tar.gz](https://duckdb-staging.duckdb.org/{{ site.duckdb_windows_alpha_release }}/duckdb/duckdb/github_release/duckdb-cli-windows-amd64.tar.gz) |
 
 ## Java
 
