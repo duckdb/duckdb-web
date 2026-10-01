@@ -1,12 +1,14 @@
 ---
 layout: post
-title: "Try DuckDB v2.0-alpha"
+title: "Try DuckDB v2.0-dev"
 author: "The DuckDB team"
 thumb: "/images/blog/thumbs/duckdb-preview-2-0.svg"
 image: "/images/blog/thumbs/duckdb-preview-2-0.png"
 excerpt: "DuckDB's development team in Amsterdam has started getting DuckDB v2.0 ready for release in October. If you like shiny new things, try out the alpha releases now and report anything that might not be working as expected!"
 tags: ["release"]
 ---
+
+> Update You can now select the [2.0.0-dev version on the installation page]({% link install/index.html %}?version=preview).
 
 ## The State of DuckDB v2.0
 
@@ -18,7 +20,7 @@ The DuckDB ecosystem has `duckdb/duckdb` at its center: it's a dependency for mo
 
 ## Clients
 
-Several DuckDB clients are already available as [alpha versions]({% link install/preview.md %}).
+Several DuckDB clients are already available as [alpha versions]({% link install/index.html %}?version=preview).
 
 ### CLI
 
@@ -43,8 +45,8 @@ curl https://install.duckdb.org | DUCKDB_VERSION=alpha bash
 
 On Windows, download the tarball, extract it and run `duckdb.exe`:
 
-* [DuckDB v2.0-alpha for Windows AMD64 (x86_64)](https://artifacts.duckdb.org/v2.0-cyanoptera/duckdb-cli-windows-amd64.tar.gz)
-* [DuckDB v2.0-alpha for Windows AArch64 (arm64)](https://artifacts.duckdb.org/v2.0-cyanoptera/duckdb-cli-windows-arm64.tar.gz)
+* [DuckDB v2.0-dev for Windows AMD64 (x86_64)](https://artifacts.duckdb.org/v2.0-cyanoptera/duckdb-cli-windows-amd64.tar.gz)
+* [DuckDB v2.0-dev for Windows AArch64 (arm64)](https://artifacts.duckdb.org/v2.0-cyanoptera/duckdb-cli-windows-arm64.tar.gz)
 
 ### Python
 
@@ -58,7 +60,7 @@ pip install duckdb --pre --upgrade
 python3 -c "import duckdb; print(duckdb.version())"
 ```
 
-This prints the versions of both the Python client (currently 1.6-dev) and the underlying DuckDB library (2.0.0-alpha):
+This prints the versions of both the Python client (currently 1.6-dev) and the underlying DuckDB library (2.0.0-dev):
 
 ```text
 1.6.0.dev379 (with duckdb 2.0.0-alpha39998)
