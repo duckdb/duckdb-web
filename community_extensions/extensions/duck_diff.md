@@ -17,7 +17,7 @@ extension:
 
 repo:
   github: avaitla/duck_diff
-  ref: 9afb9a05ab3ab1b1cfbc27a8fdf2e81b157ed0b4
+  ref: 68ace706fe6196ae7fdb30ef0b30581c0434bd7d
 
 docs:
   hello_world: |
@@ -83,7 +83,7 @@ docs:
 
 extension_star_count: 8
 extension_star_count_pretty: 8
-extension_download_count: 1291
+extension_download_count: 1298
 extension_download_count_pretty: 1.3k
 image: '/images/community_extensions/social_preview/preview_community_extension_duck_diff.png'
 layout: community_extension_doc

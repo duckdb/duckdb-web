@@ -8,7 +8,7 @@ excerpt: |
 extension:
   name: mmcif
   description: Read and write protein structure mmcif files using SQL
-  version: 0.0.1
+  version: 0.0.2
   language: C++
   build: cmake
   license: Apache-2.0
@@ -17,7 +17,7 @@ extension:
 
 repo:
   github: i-VRESSE/duckdb-mmcif
-  ref: 55b11e2bc2031491b3ea59adf5d26011b13ecc70
+  ref: 2461a5dbbbe87495417720fd61e2998af47240a9
   ref_next: ac5b197b4ce3aa49ffdcb99a6e987555a1081c16
 
 docs:
@@ -55,8 +55,8 @@ extended_description: |
 
 extension_star_count: 1
 extension_star_count_pretty: 1
-extension_download_count: 940
-extension_download_count_pretty: 940
+extension_download_count: 948
+extension_download_count_pretty: 948
 image: '/images/community_extensions/social_preview/preview_community_extension_mmcif.png'
 layout: community_extension_doc
 ---
@@ -82,11 +82,12 @@ LOAD {{ page.extension.name }};
 
 <div class="extension_functions_table"></div>
 
-|    function_name    | function_type | description | comment | examples |
-|---------------------|---------------|-------------|---------|----------|
-| mmcif_relationships | table         | NULL        | NULL    |          |
-| mmcif_scan          | table         | NULL        | NULL    |          |
-| mmcif_tables        | table         | NULL        | NULL    |          |
+|    function_name    | function_type |                                                      description                                                      | comment |                                              examples                                               |
+|---------------------|---------------|-----------------------------------------------------------------------------------------------------------------------|---------|-----------------------------------------------------------------------------------------------------|
+| mmcif_columns       | table         | List the categories and columns in an mmCIF file, with their dictionary documentation links and inferred types.       | NULL    | [SELECT * FROM mmcif_columns('https://files.rcsb.org/download/1AMB.cif.gz'); -- 342 rows]           |
+| mmcif_relationships | table         | List the parent/child key relationships between the categories in an mmCIF file, each side as a (table, column) pair. | NULL    | [SELECT * FROM mmcif_relationships('https://files.rcsb.org/download/1AMB.cif.gz'); -- 86 rows]      |
+| mmcif_scan          | table         | Scan one mmCIF category as a table, reading its rows directly from a .cif or .cif.gz file.                            | NULL    | [SELECT * FROM mmcif_scan('https://files.rcsb.org/download/1AMB.cif.gz', 'atom_site'); -- 438 rows] |
+| mmcif_tables        | table         | List the categories in an mmCIF file with their dictionary documentation links and column counts.                     | NULL    | [SELECT * FROM mmcif_tables('https://files.rcsb.org/download/1AMB.cif.gz');]                        |
 
 ### Overloaded Functions
 

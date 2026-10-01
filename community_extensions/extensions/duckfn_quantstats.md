@@ -8,7 +8,7 @@ excerpt: |
 extension:
   name: duckfn_quantstats
   description: Complete quantstats HTML tearsheets from SQL - one long table in, one full report per instrument out, benchmarks included
-  version: 0.1.0
+  version: 0.2.0
   language: Rust
   build: cargo
   license: MIT
@@ -18,16 +18,16 @@ extension:
 
 repo:
   github: shijianjs/duckfn-quantstats
-  ref: 2c2c1a47a15d2649d214a8bf1351c7be5426d6bb
+  ref: 826de25deb55c42d8b63ec22ea4a6bd49f6f3de4
 
 docs:
   hello_world: |
-    -- demo/prices.csv is a committed snapshot of daily closes for GOOGL, MSFT and the S&P 500 index (SPX)
-    CREATE TABLE prices AS
-    SELECT * FROM read_csv('https://raw.githubusercontent.com/shijianjs/duckfn-quantstats/main/demo/prices.csv');
-
-    -- 1. The whole table in one call: one report per instrument, opened in the system default browser
-    --    once it has been generated
+    -- One long table in, one full quantstats tearsheet per instrument out - and no GROUP BY anywhere.
+    -- prices.csv is a snapshot of daily closes for GOOGL, MSFT and the S&P 500 index (SPX); it is
+    -- committed to the repository and served at the URL below.
+    WITH prices AS (
+        SELECT * FROM read_csv('https://shijianjs.github.io/duckfn-quantstats/demo/prices.csv')
+    )
     SELECT (r).symbol, (r).strategy_title, length((r).html) AS html_bytes, (r).file_path
     FROM (
         SELECT unnest(qs_html_reports_by_prices(
@@ -38,8 +38,11 @@ docs:
         FROM prices
     );
 
-    -- 2. With a benchmark: SPX is just another symbol in the table (name it in the options),
-    --    and it gets no report of its own
+    -- With a benchmark: SPX is just another symbol of that table, named in the options. It is input
+    -- only and gets no report of its own.
+    WITH prices AS (
+        SELECT * FROM read_csv('https://shijianjs.github.io/duckfn-quantstats/demo/prices.csv')
+    )
     SELECT (r).symbol, (r).file_path
     FROM (
         SELECT unnest(qs_html_reports_by_prices(
@@ -74,8 +77,17 @@ docs:
     named STRUCT (`qs_html_report_options`, created at load time) evaluated **per row**, which is how
     each instrument gets its own `title` / `strategy_title` — build it out of the `symbol` column:
     `{'title': symbol, 'strategy_title': symbol, 'benchmark': ['SPX']}::qs_html_report_options`.
-    Other keys: `rf` (annualized risk-free rate), `periods_per_year`, `match_dates`, `output_dir` and
-    `open_in_browser`.
+    Other keys: `rf` (annualized risk-free rate), `periods_per_year`, `match_dates`, `lang`,
+    `output_dir` and `open_in_browser`.
+
+    With `lang` the report's own fixed texts (headings, metric names, chart titles, months, the
+    legend) come out in that language, each one carrying a short note the browser pops up from the
+    element it sits on. `en`, `zh-CN`, `ja`, `de`, `fr` and `es` are built in; `'en'` keeps the English
+    text and only adds notes, and leaving the key unset leaves the report untouched. The table lives in the running
+    DuckDB process: `qs_set_translation(lang, [{key, label, description}])` overwrites or deletes
+    entries (a NULL `label` deletes one, a NULL list deletes the language, a NULL `description` keeps the
+    existing note) and `qs_list_translations()` lists the whole table. Nothing is persisted — reloading
+    the extension restores the built-in data.
 
     With `output_dir` each report is also written through DuckDB's VFS — local disk, `s3://…` once
     `httpfs` is loaded, and the wasm build's file system all take the same path — under a name the
@@ -88,12 +100,13 @@ docs:
     C API in 1.5. On wasm, `output_dir` works and `open_in_browser` is ignored (there is no browser
     process to launch; the HTML string comes back to the host as it is).
 
-    Development notes, the full option table and the error paths: <https://github.com/shijianjs/duckfn-quantstats>.
+    The full option table, the error paths and the development notes:
+    <https://shijianjs.github.io/duckfn-quantstats/docs/intro>.
 
 extension_star_count: 0
 extension_star_count_pretty: 0
-extension_download_count: 540
-extension_download_count_pretty: 540
+extension_download_count: 644
+extension_download_count_pretty: 644
 image: '/images/community_extensions/social_preview/preview_community_extension_duckfn_quantstats.png'
 layout: community_extension_doc
 ---
@@ -119,10 +132,12 @@ LOAD {{ page.extension.name }};
 
 <div class="extension_functions_table"></div>
 
-|       function_name       | function_type |                                                       description                                                       |                                                                               comment                                                                               |                                                                                                                                  examples                                                                                                                                   |
-|---------------------------|---------------|-------------------------------------------------------------------------------------------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| qs_html_reports           | aggregate     | Renders one quantstats HTML report per symbol from a long table of periodic returns                                     | Groups by symbol internally, so the SQL needs no GROUP BY; a benchmark is just another symbol of the same table, serves as input only and gets no report of its own | [SELECT unnest(qs_html_reports(symbol, trade_date, daily_return, NULL)) FROM daily_returns; SELECT unnest(qs_html_reports(symbol, trade_date, daily_return, {'benchmark': ['SPX'], 'title': symbol, 'output_dir': 'reports/'}::qs_html_report_options)) FROM daily_returns] |
-| qs_html_reports_by_prices | aggregate     | Renders one quantstats HTML report per symbol from a long table of prices or NAVs, differencing them into returns first | The value column is a level, not a change: every symbol, the benchmark included, is converted with price_t / price_{t-1} - 1 before rendering                       | [SELECT unnest(qs_html_reports_by_prices(symbol, date, price, NULL)) FROM prices; SELECT unnest(qs_html_reports_by_prices(symbol, date, price, {'benchmark': ['SPX'], 'title': symbol, 'output_dir': 'reports/'}::qs_html_report_options)) FROM prices]                     |
+|       function_name       | function_type |                                                       description                                                       |                                                                                                                                  comment                                                                                                                                   |                                                                                                                                  examples                                                                                                                                   |
+|---------------------------|---------------|-------------------------------------------------------------------------------------------------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| qs_html_reports           | aggregate     | Renders one quantstats HTML report per symbol from a long table of periodic returns                                     | Groups by symbol internally, so the SQL needs no GROUP BY; a benchmark is just another symbol of the same table, serves as input only and gets no report of its own                                                                                                        | [SELECT unnest(qs_html_reports(symbol, trade_date, daily_return, NULL)) FROM daily_returns; SELECT unnest(qs_html_reports(symbol, trade_date, daily_return, {'benchmark': ['SPX'], 'title': symbol, 'output_dir': 'reports/'}::qs_html_report_options)) FROM daily_returns] |
+| qs_html_reports_by_prices | aggregate     | Renders one quantstats HTML report per symbol from a long table of prices or NAVs, differencing them into returns first | The value column is a level, not a change: every symbol, the benchmark included, is converted with price_t / price_{t-1} - 1 before rendering                                                                                                                              | [SELECT unnest(qs_html_reports_by_prices(symbol, date, price, NULL)) FROM prices; SELECT unnest(qs_html_reports_by_prices(symbol, date, price, {'benchmark': ['SPX'], 'title': symbol, 'output_dir': 'reports/'}::qs_html_report_options)) FROM prices]                     |
+| qs_list_translations      | table         | Lists the translations of this DuckDB process, ordered by lang and key                                                  | Reflects the built-in data plus every qs_set_translation() call of this process; nothing is persisted, so reloading the extension restores the built-in table                                                                                                              | [SELECT * FROM qs_list_translations() WHERE key LIKE 'metric.%']                                                                                                                                                                                                            |
+| qs_set_translation        | scalar        | Overwrites or deletes translations of one language in this DuckDB process, entry by entry                               | Setting 'label' to NULL or an empty string deletes that key and its note; a NULL entries list deletes the whole language; a NULL 'description' keeps the existing note. Nothing is persisted: reloading the extension or restarting the process restores the built-in data | [SELECT qs_set_translation('de', [{'key': 'month.jan', 'label': 'Januar', 'description': 'January'}]); SELECT qs_set_translation('zh-CN', NULL)]                                                                                                                            |
 
 ### Overloaded Functions
 
@@ -137,6 +152,7 @@ This extension does not add any function overloads.
 |       type_name        | type_size | logical_type | type_category | internal |
 |------------------------|----------:|--------------|---------------|----------|
 | qs_html_report_options | 0         | STRUCT       | COMPOSITE     | false    |
+| qs_translation_entry   | 0         | STRUCT       | COMPOSITE     | false    |
 
 ### Added Settings
 
