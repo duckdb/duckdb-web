@@ -3,6 +3,8 @@ layout: docu
 title: I/O
 ---
 
+> Warning DuckDB ships with safe defaults. The configuration options described on this page are advanced options, so proceed with caution when changing them.
+
 Starting with v2.0, DuckDB supports asynchronous I/O. Instead of blocking a worker thread until requested data arrives, DuckDB issues reads in the background and keeps multiple requests in flight while worker threads process data that has already arrived. This can significantly speed up queries when synchronous I/O does not saturate the available bandwidth, e.g., when reading data from object storage such as S3.
 
 For a detailed explanation of the design and benchmark results, see the [“Asynchronous I/O in DuckDB” blog post]({% post_url 2026-07-31-asynchronous-io %}).
@@ -62,3 +64,21 @@ SET http_retry_backoff = 2;
 ```
 
 As the row group is the unit of parallelism for Parquet scans, asynchronous I/O works best if Parquet files have at least as many row groups as the number of threads. Files with only a few very large row groups cannot keep enough requests in flight to saturate the network.
+
+## Synchronizing Writes to Disk
+
+When DuckDB persists changes to a database on the local file system, it asks the operating system to flush the written data to stable storage. The `fsync_mode` configuration option controls how this is done. It can have three values:
+
+* `STANDARD` (default): uses the regular sync call of the platform, i.e., `fdatasync` or `fsync` on Unix-like systems and `FlushFileBuffers` on Windows.
+* `FULL`: on macOS, uses `F_FULLFSYNC`, which also instructs the drive to flush its write cache and thus guarantees durability in case of a power failure. If the file system does not support `F_FULLFSYNC`, DuckDB falls back to the `STANDARD` behavior. On other platforms, `FULL` is equivalent to `STANDARD`.
+* `NONE`: skips the sync call. Writes are handed over to the operating system, which flushes them to disk at its own pace.
+
+For example, to disable syncing for a performance-critical workload, run:
+
+```sql
+SET fsync_mode = 'NONE';
+```
+
+The option is global, i.e., it applies to the whole DuckDB instance.
+
+> Warning Setting `fsync_mode` to `NONE` may cause data loss or database corruption if the operating system crashes or the machine loses power. Only use it if the database can be recreated from other sources.
