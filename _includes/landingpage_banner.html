@@ -1,12 +1,25 @@
-<div class="banner yellow" data-banner-version="aws">
+<div class="banner yellow" data-banner-version="try-20">
     {% comment %}
     Available color classes: purple, yellow, blue
     Add multiple .banner-item elements to rotate between them every X seconds.
     {% endcomment %}
     <div class="content banner-rotator" data-interval="7">
         <div class="banner-item active">
-            <a href="{% post_url 2026-08-26-ducklabs-to-join-aws %}">DuckLabs to Join AWS, Projects to Remain Open Source</a>
+            <a href="{% post_url 2026-09-02-try-duckdb-20-alpha %}">We are releasing DuckDB v2.0 this month. Try the preview builds now!</a>
         </div>
     </div>
     <div class="close"><svg class="icon"><use href="#x"></use></svg></div>
+    {% comment %}
+    Hide the banner on Windows. The script runs inline to avoid a flash before script.js loads,
+    and sits inside the div so that the ".banner + header" CSS selector still matches.
+    {% endcomment %}
+    <script>
+        (function() {
+            var platform = (navigator.userAgentData && navigator.userAgentData.platform) || '';
+            var fallback = (navigator.platform || '') + ' ' + (navigator.userAgent || '');
+            if (platform === 'Windows' || /Win(dows|32|64)/.test(fallback)) {
+                document.currentScript.parentElement.classList.add('hidden-on-windows');
+            }
+        })();
+    </script>
 </div>
