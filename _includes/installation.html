@@ -317,9 +317,14 @@ docker run --rm -it -v "$(pwd):/workspace" -w /workspace duckdb/duckdb:{{ site.l
     data-environment="cli"
     data-docs="{% link docs/preview/clients/cli/overview.md %}">
 
+<h4>Powershell Script</h4>
+{%- highlight powershell -%}
+$env:DUCKDB_VERSION = "alpha"; irm https://install.duckdb.org/install.ps1 | iex
+{%- endhighlight -%}
+
 <h4>Direct Downloads</h4>
-<a href="https://artifacts.duckdb.org/v2.0-cyanoptera/duckdb-cli-windows-amd64.tar.gz" class="download-btn" download="duckdb-cli-windows-amd64.tar.gz" rel="noopener noreferrer">duckdb-cli-windows-amd64.tar.gz</a>
-<a href="https://artifacts.duckdb.org/v2.0-cyanoptera/duckdb-cli-windows-arm64.tar.gz" class="download-btn" download="duckdb-cli-windows-arm64.tar.gz" rel="noopener noreferrer">duckdb-cli-windows-arm64.tar.gz</a>
+<a href="https://duckdb-staging.duckdb.org/96063b9e39/v2.0.0-alpha43763/duckdb/duckdb/github_release/duckdb-cli-windows-amd64.tar.gz" class="download-btn" download="duckdb-cli-windows-amd64.tar.gz" rel="noopener noreferrer">duckdb-cli-windows-amd64.tar.gz</a>
+<a href="https://duckdb-staging.duckdb.org/96063b9e39/v2.0.0-alpha43763/duckdb/duckdb/github_release/duckdb-cli-windows-arm64.tar.gz" class="download-btn" download="duckdb-cli-windows-arm64.tar.gz" rel="noopener noreferrer">duckdb-cli-windows-arm64.tar.gz</a>
 
 <div class="note">
     DuckDB on Windows requires the <a href="https://learn.microsoft.com/en-us/cpp/windows/latest-supported-vc-redist?view=msvc-170">Microsoft Visual C++ Redistributable</a>.
