@@ -443,16 +443,29 @@ install.packages("path/to/downloaded/package.ext", repos = NULL)
 
 <p>See the <a href="https://central.sonatype.com/artifact/org.duckdb/duckdb_jdbc">Maven Central entry</a>.</p>
 
-<h4>Gradle</h4>
-
-{%- highlight groovy -%}
-implementation("org.duckdb:duckdb_jdbc:{{ site.current_duckdb_java_version }}")
-{%- endhighlight -%}
-
 <div class="note">
     DuckDB on Windows requires the <a href="https://learn.microsoft.com/en-us/cpp/windows/latest-supported-vc-redist?view=msvc-170">Microsoft Visual C++ Redistributable</a>.
 </div>
 
+<div class="alternative">
+
+<h4>Gradle (Groovy)</h4>
+
+{%- highlight groovy -%}
+dependencies {
+    implementation 'org.duckdb:duckdb_jdbc:{{ site.current_duckdb_java_version }}'
+}
+{%- endhighlight -%}
+
+<h4>Gradle (Kotlin)</h4>
+
+{%- highlight kotlin -%}
+dependencies {
+    implementation("org.duckdb:duckdb_jdbc:{{ site.current_duckdb_java_version }}")
+}
+{%- endhighlight -%}
+
+</div>
 </div>
 {%- endif -%}
 
@@ -477,16 +490,29 @@ implementation("org.duckdb:duckdb_jdbc:{{ site.current_duckdb_java_version }}")
 
 <p>See the <a href="https://central.sonatype.com/artifact/org.duckdb/duckdb_jdbc/{{ site.lts_duckdb_java_version }}/overview">Maven Central entry</a>.</p>
 
-<h4>Gradle</h4>
-
-{%- highlight groovy -%}
-implementation("org.duckdb:duckdb_jdbc:{{ site.lts_duckdb_java_version }}")
-{%- endhighlight -%}
-
 <div class="note">
     DuckDB on Windows requires the <a href="https://learn.microsoft.com/en-us/cpp/windows/latest-supported-vc-redist?view=msvc-170">Microsoft Visual C++ Redistributable</a>.
 </div>
 
+<div class="alternative">
+
+<h4>Gradle (Groovy)</h4>
+
+{%- highlight groovy -%}
+dependencies {
+    implementation 'org.duckdb:duckdb_jdbc:{{ site.lts_duckdb_java_version }}'
+}
+{%- endhighlight -%}
+
+<h4>Gradle (Kotlin)</h4>
+
+{%- highlight kotlin -%}
+dependencies {
+    implementation("org.duckdb:duckdb_jdbc:{{ site.lts_duckdb_java_version }}")
+}
+{%- endhighlight -%}
+
+</div>
 </div>
 
 <div class="preview"
