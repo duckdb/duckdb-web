@@ -14,7 +14,7 @@ body.documentation {
     &.lts,
     &.preview,
     &.outdated {
-        --docbanner-height: 37px;
+        --docbanner-height: 42px;
     }
 
     // Version banner
@@ -24,9 +24,9 @@ body.documentation {
         left: 0;
         z-index: 900;
         box-sizing: border-box;
-        min-height: 36px;
-        padding: 8px 20px;
-        line-height: 20px;
+        min-height: 42px;
+        padding: 12px 20px;
+        line-height: 1.2em;
 
         .content {
             display: flex;
@@ -38,17 +38,12 @@ body.documentation {
             width: 16px;
             height: 16px;
             flex-shrink: 0;
-            margin-top: 2px;
             color: var(--main-text-secondary-color, #666);
         }
 
         a {
             text-decoration: underline;
             text-underline-offset: 2px;
-
-            &:hover {
-                text-decoration: none;
-            }
         }
 
         &.lts {
@@ -67,7 +62,7 @@ body.documentation {
         }
 
         @media only screen and (max-width: 980px) {
-            padding: 8px 15px;
+            padding: 12px 15px;
         }
     }
 

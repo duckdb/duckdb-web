@@ -39,9 +39,15 @@ header .headerline {
 		/* Logo */
 		.duckdbhome {
 			font-size: 20px;
-			position: relative; 
-			
+			position: relative;
+			align-self: stretch;
+			display: flex;
+			align-items: center;
+
 			a {
+				position: absolute;
+				inset: 0;
+				z-index: 999;
 				text-decoration: none;
 				transition: color .3s;
 			}
