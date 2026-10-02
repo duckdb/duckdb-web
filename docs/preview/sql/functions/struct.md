@@ -10,6 +10,7 @@ title: Struct Functions
 | [`struct.entry`](#structentry) | Dot notation that serves as an alias for `struct_extract` from named `STRUCT`s. |
 | [`struct[entry]`](#structentry) | Bracket notation that serves as an alias for `struct_extract` from named `STRUCT`s. |
 | [`struct[idx]`](#structidx) | Bracket notation that serves as an alias for `struct_extract` from unnamed `STRUCT`s (tuples), using an index (1-based). |
+| [`remap_struct(input, target_type, mapping, defaults)`](#remap_structinput-target_type-mapping-defaults) | Remap a nested value into the shape given by `target_type`, renaming and reordering fields, descending into nested types, and filling missing fields from `defaults`. |
 | [`row(any, ...)`](#rowany-) | Create an unnamed `STRUCT` (tuple) containing the argument values. |
 | [`struct_concat(structs...)`](#struct_concatstructs) | Merge the multiple `structs` into a single `STRUCT`. |
 | [`struct_contains(struct, entry)`](#struct_containsstruct-entry) | Check if the `STRUCT` contains the specified entry. |
@@ -45,6 +46,16 @@ title: Struct Functions
 | **Description** | Bracket notation that serves as an alias for `struct_extract` from unnamed `STRUCT`s (tuples), using an index (1-based). |
 | **Example** | `(row(42, 84))[1]` |
 | **Result** | `42` |
+
+#### `remap_struct(input, target_type, mapping, defaults)`
+
+<div class="nostroke_table"></div>
+
+| **Description** | Remap a nested `input` value (a `STRUCT`, `LIST`, or `MAP`) into the shape declared by `target_type` (a typed `NULL`, e.g. `NULL::STRUCT(v1 INT, v2 INT)`), renaming and reordering fields, descending into nested types, and filling target fields that have no source counterpart from `defaults`. `mapping` is a `STRUCT` keyed by target field name whose values name the source field to read from; `defaults` is a `STRUCT` of constant values for the remaining target fields. Every target field must be covered by either `mapping` or `defaults`. |
+| **Example** | `remap_struct({'i': 1, 'j': 2}, NULL::STRUCT(v1 INT, v2 INT, v3 INT), {'v1': 'j', 'v3': 'i'}, {'v2': NULL::INTEGER})` |
+| **Result** | `{'v1': 2, 'v2': NULL, 'v3': 1}` |
+
+To remap a target field that is itself a `STRUCT`, give its mapping value as `ROW(source_field, {inner_mapping})`, and nest its defaults the same way. A `LIST`'s single child is addressed by the mapping key `'list'`, and a `MAP`'s children by the keys `'key'` and `'value'`.
 
 #### `row(any, ...)`
 

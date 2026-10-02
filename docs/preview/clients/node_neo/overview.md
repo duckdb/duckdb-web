@@ -137,6 +137,20 @@ connection.closeSync();
 const result = await connection.run('from test_all_types()');
 ```
 
+The SQL string may contain multiple statements separated by semicolons. In that case, all of the statements are executed in order, and the returned result is the result of the *last* statement:
+
+```ts
+const reader = await connection.runAndReadAll(
+  `create table t (id integer);
+   insert into t values (1);
+   from t;`
+);
+reader.getRows();
+// [ [1] ]
+```
+
+To run multiple statements and access each statement's result individually, use [`extractStatements`](#extract-statements) instead.
+
 ### Parameterize SQL
 
 ```ts
@@ -287,6 +301,49 @@ const columns = reader.getColumns();
 const columnsObject = reader.getColumnsObject();
 // { i: [0, 1, 2], n: [10, 11, 12] }
 ```
+
+### Result Value Types
+
+By default, each result value is represented in JavaScript as shown below. A DuckDB `NULL` is always represented as JavaScript `null`, regardless of the column's type.
+
+Types represented as a JavaScript primitive:
+
+<div class="monospace_table"></div>
+
+| DuckDB type | JavaScript representation |
+|--|--|
+| `BOOLEAN` | `boolean` |
+| `TINYINT`, `SMALLINT`, `INTEGER`, `UTINYINT`, `USMALLINT`, `UINTEGER` | `number` |
+| `FLOAT`, `DOUBLE` | `number` |
+| `BIGINT`, `HUGEINT`, `UBIGINT`, `UHUGEINT` | `bigint` |
+| `VARCHAR`, `ENUM` | `string` |
+
+Types represented as a specialized object (see [Inspect Data Values](#inspect-data-values) for their properties):
+
+<div class="monospace_table"></div>
+
+| DuckDB type | JavaScript representation |
+|--|--|
+| `ARRAY` | `DuckDBArrayValue` |
+| `BIT` | `DuckDBBitValue` |
+| `BLOB` | `DuckDBBlobValue` |
+| `DATE` | `DuckDBDateValue` |
+| `DECIMAL` | `DuckDBDecimalValue` |
+| `INTERVAL` | `DuckDBIntervalValue` |
+| `LIST` | `DuckDBListValue` |
+| `MAP` | `DuckDBMapValue` |
+| `STRUCT` | `DuckDBStructValue` |
+| `TIME` | `DuckDBTimeValue` |
+| `TIME WITH TIME ZONE` | `DuckDBTimeTZValue` |
+| `TIMESTAMP` | `DuckDBTimestampValue` |
+| `TIMESTAMP WITH TIME ZONE` | `DuckDBTimestampTZValue` |
+| `TIMESTAMP_S` | `DuckDBTimestampSecondsValue` |
+| `TIMESTAMP_MS` | `DuckDBTimestampMillisValue` |
+| `TIMESTAMP_NS` | `DuckDBTimestampNanosValue` |
+| `UNION` | `DuckDBUnionValue` |
+| `UUID` | `DuckDBUUIDValue` |
+
+To retrieve values as JavaScript built-ins or as values that can be losslessly serialized to JSON instead of these specialized objects, use the `JS` or `Json` result methods described in [Convert Result Data](#convert-result-data).
 
 ### Convert Result Data
 
