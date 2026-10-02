@@ -181,6 +181,18 @@ Zero or more copy options may be provided within parentheses following the `ATTA
 | `ENCRYPTION_CIPHER` | The encryption cipher used for encrypting the database (`CBC`, `CTR` or `GCM`).                                             | `VARCHAR` | -             |
 | `RECOVERY_MODE`     | Recovery mode for the database. `no_wal_writes` disables WAL writes, improving performance at the cost of crash recovery.   | `VARCHAR` | -             |
 
+### Attaching Data Files Directly
+
+A Parquet, CSV, or JSON file can be attached directly, not only a DuckDB database file. This creates a database that exposes the file through two views: one named `file` and one named after the database alias.
+
+```sql
+ATTACH 'people.parquet' AS people;
+SELECT * FROM people.file;
+SELECT * FROM people.people;
+```
+
+Both views are defined as `SELECT * FROM '⟨path⟩'`, so the data is read from the file each time a view is queried. Because the views wrap the file rather than a stored table, they are read-only. To change the data, write a new file.
+
 ## `DETACH`
 
 The `DETACH` statement allows previously attached database files to be closed and detached, releasing any locks held on the database file.
