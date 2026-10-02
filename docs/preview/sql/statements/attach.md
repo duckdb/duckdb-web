@@ -178,6 +178,8 @@ Zero or more copy options may be provided within parentheses following the `ATTA
 | `ENCRYPTION_CIPHER` | The encryption cipher used for encrypting the database (`CBC`, `CTR` or `GCM`).                                             | `VARCHAR` | -             |
 | `RECOVERY_MODE`     | Recovery mode for the database. `no_wal_writes` disables WAL writes, improving performance at the cost of crash recovery.   | `VARCHAR` | -             |
 
+> The options above apply when attaching DuckDB and SQLite database files. Attaching a database managed by another system accepts additional type-specific options, such as `SECRET` and `SCHEMA`. See the relevant extension page for the full list: [PostgreSQL]({% link docs/preview/core_extensions/postgres/overview.md %}), [MySQL]({% link docs/preview/core_extensions/mysql.md %}), and [Iceberg REST Catalogs]({% link docs/preview/core_extensions/iceberg/iceberg_rest_catalogs.md %}#attach-options).
+
 ### Database Type
 
 The `TYPE` option specifies which storage engine backs the attached database. The type name is case-insensitive. Native DuckDB storage uses `DUCKDB` (the default). Other types are provided by extensions, for example `SQLITE` (via the [`sqlite` extension]({% link docs/preview/core_extensions/sqlite.md %})), `POSTGRES` (via the [`postgres` extension]({% link docs/preview/core_extensions/postgres/overview.md %})), and `MYSQL` (via the [`mysql` extension]({% link docs/preview/core_extensions/mysql.md %})). If the extension that provides the type is not already loaded, it is [autoloaded]({% link docs/preview/extensions/overview.md %}#autoloading-extensions).
