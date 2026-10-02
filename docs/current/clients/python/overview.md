@@ -257,7 +257,7 @@ Avoid using `duckdb.sql()` or sharing a single connection across threads.
 
 #### About `cursor()` 
 
-A [`DuckDBPyConnection.cursor()` method]({% link docs/current/clients/python/reference/index.md %}#duckdb.DuckDBPyConnection.cursor) creates another handle on the same connection. It does not open a new connection. Therefore, all cursors created from one connection cannot run queries at the same time.
+A single `DuckDBPyConnection` object is not safe for concurrent use: calls on the same handle from multiple threads are serialized. The [`DuckDBPyConnection.cursor()` method]({% link docs/current/clients/python/reference/index.md %}#duckdb.DuckDBPyConnection.cursor) creates a new connection to the same database instance, with its own session settings and transaction context. Because cursors share the underlying instance but not their session state, they can execute queries in parallel. To run queries concurrently, create one cursor per thread.
 
 ### Community Extensions
 
