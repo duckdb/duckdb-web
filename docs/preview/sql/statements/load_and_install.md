@@ -30,6 +30,8 @@ INSTALL h3 FROM community;
 
 The `LOAD` statement loads an installed DuckDB extension into the current session.
 
+When [`autoinstall_known_extensions`]({% link docs/preview/extensions/overview.md %}#autoloading-extensions) is enabled (the default), `LOAD` first installs the extension if it is a known extension that is not yet installed, so an explicit `INSTALL` is not always required. Loading an extension also installs and loads any extensions it depends on. For example, loading [`iceberg`]({% link docs/preview/core_extensions/iceberg/overview.md %}) also installs the [`avro`]({% link docs/preview/core_extensions/avro.md %}) extension that it depends on.
+
 ### Examples
 
 Load the [`httpfs`]({% link docs/preview/core_extensions/httpfs/overview.md %}) extension:
