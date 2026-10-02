@@ -181,6 +181,8 @@ Zero or more copy options may be provided within parentheses following the `ATTA
 | `ENCRYPTION_CIPHER` | The encryption cipher used for encrypting the database (`CBC`, `CTR` or `GCM`).                                             | `VARCHAR` | -             |
 | `RECOVERY_MODE`     | Recovery mode for the database. `no_wal_writes` disables WAL writes, improving performance at the cost of crash recovery.   | `VARCHAR` | -             |
 
+> The options above apply when attaching DuckDB and SQLite database files. Attaching a database managed by another system accepts additional type-specific options, such as `SECRET` and `SCHEMA`. See the relevant extension page for the full list: [PostgreSQL]({% link docs/current/core_extensions/postgres/overview.md %}), [MySQL]({% link docs/current/core_extensions/mysql.md %}), and [Iceberg REST Catalogs]({% link docs/current/core_extensions/iceberg/iceberg_rest_catalogs.md %}#attach-options).
+
 ## `DETACH`
 
 The `DETACH` statement allows previously attached database files to be closed and detached, releasing any locks held on the database file.
