@@ -30,8 +30,8 @@ docs:
 
 extension_star_count: 19
 extension_star_count_pretty: 19
-extension_download_count: 846
-extension_download_count_pretty: 846
+extension_download_count: 844
+extension_download_count_pretty: 844
 image: '/images/community_extensions/social_preview/preview_community_extension_query_condition_cache.png'
 layout: community_extension_doc
 ---

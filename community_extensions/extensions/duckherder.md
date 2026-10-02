@@ -33,8 +33,8 @@ docs:
 
 extension_star_count: 140
 extension_star_count_pretty: 140
-extension_download_count: 803
-extension_download_count_pretty: 803
+extension_download_count: 819
+extension_download_count_pretty: 819
 image: '/images/community_extensions/social_preview/preview_community_extension_duckherder.png'
 layout: community_extension_doc
 ---
