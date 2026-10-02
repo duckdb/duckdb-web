@@ -37,6 +37,7 @@ Other than `OPERATOR_TYPE`, all metrics can be turned on or off.
 | [`ATTACH_REPLAY_WAL_LATENCY`](#attach_replay_wal_latency)             | [file](#file-metrics)                 | Time spent replaying the WAL file.                                         |
 | [`CHECKPOINT_LATENCY`](#checkpoint_latency)                           | [file](#file-metrics)                 | Time spent running checkpoints                                             |
 | [`COMMIT_LOCAL_STORAGE_LATENCY`](#commit_local_storage_latency)       | [file](#file-metrics)                 | Time spent committing the transaction-local storage.                       |
+| [`CUMULATIVE_VACUUM_TIME`](#cumulative_vacuum_time)                   | [file](#file-metrics)                 | Cumulative time spent on checkpoint vacuum tasks and vacuum-triggered index rebuilds. |
 | [`TOTAL_BYTES_READ`](#total_bytes_read)                               | [file](#file-metrics)                 | The total bytes read by the file system.                                   |
 | [`TOTAL_BYTES_WRITTEN`](#total_bytes_written)                         | [file](#file-metrics)                 | The total bytes written by the file system.                                |
 | [`WAITING_TO_ATTACH_LATENCY`](#waiting_to_attach_latency)             | [file](#file-metrics)                 | Time spent waiting to ATTACH a file.                                       |
@@ -280,6 +281,17 @@ metrics that are collected during file operations
 | **Type** | double |
 | **Unit** | seconds |
 | **Default** | ✅ |
+| **Query Node** | ✅ |
+
+
+#### `CUMULATIVE_VACUUM_TIME`
+
+<div class="nostroke_table"></div>
+
+| **Description** | Cumulative time spent on checkpoint vacuum tasks and vacuum-triggered index rebuilds. |
+| **Type** | double |
+| **Unit** | seconds |
+| **Default** | ❌ |
 | **Query Node** | ✅ |
 
 
