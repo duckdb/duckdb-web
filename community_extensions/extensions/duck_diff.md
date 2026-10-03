@@ -14,6 +14,7 @@ extension:
   license: MIT
   maintainers:
     - avaitla
+  opt_in_platforms: "linux_amd64_musl;linux_arm64_musl"
 
 repo:
   github: avaitla/duck_diff
