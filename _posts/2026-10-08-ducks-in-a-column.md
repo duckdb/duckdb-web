@@ -8,8 +8,6 @@ excerpt: "DuckDB is fast because it keeps its ducks in a column. In this post, w
 tags: ["using DuckDB"]
 ---
 
-> **TL;DR:** DuckDB stores and processes data column by column, so a query that touches three columns out of fifty only reads those three. In this post, we show DuckDB features that build on this design: querying files directly, selecting and transforming columns in bulk with `EXCLUDE`, `REPLACE` and `COLUMNS()`, aggregating with `GROUP BY ALL`, `FILTER` and `PIVOT`, looking at neighboring rows with window functions and `ASOF JOIN`, and writing partitioned, sorted Parquet files that are fast to query later.
-
 ## Why Columns?
 
 DuckDB is fast because it keeps its ducks in a column. Instead of storing each row as one record, it stores each column on its own, so a query that touches three columns out of fifty only reads those three.
