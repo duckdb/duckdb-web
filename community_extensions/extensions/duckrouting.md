@@ -94,8 +94,8 @@ docs:
 
 extension_star_count: 3
 extension_star_count_pretty: 3
-extension_download_count: 888
-extension_download_count_pretty: 888
+extension_download_count: 922
+extension_download_count_pretty: 922
 image: '/images/community_extensions/social_preview/preview_community_extension_duckrouting.png'
 layout: community_extension_doc
 ---
