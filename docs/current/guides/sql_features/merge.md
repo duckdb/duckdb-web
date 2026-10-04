@@ -2,7 +2,6 @@
 layout: docu
 redirect_from:
 - /docs/guides/sql_features/merge
-- /docs/preview/guides/sql_features/merge
 - /docs/stable/guides/sql_features/merge
 title: Merge Statement for SCD Type 2
 tested: true

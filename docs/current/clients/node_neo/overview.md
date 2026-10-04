@@ -4,7 +4,6 @@ github_repository: https://github.com/duckdb/duckdb-node-neo/
 redirect_from:
 - /docs/api/node_neo/overview
 - /docs/clients/node_neo/overview
-- /docs/preview/clients/node_neo/overview
 - /docs/stable/clients/node_neo/overview
 title: Node.js Client (Neo)
 ---

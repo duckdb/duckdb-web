@@ -2,7 +2,6 @@
 layout: docu
 redirect_from:
 - /docs/clients/rust/known_issues
-- /docs/preview/clients/rust/known_issues
 - /docs/stable/clients/rust/known_issues
 title: Troubleshoot
 ---

@@ -8,7 +8,7 @@ excerpt: |
 extension:
   name: scalarfs
   description: A collection of virtual filesystems for working with scalars
-  version: 1.6.0
+  version: 1.6.2
   language: C++
   build: cmake
   license: MIT
@@ -17,8 +17,14 @@ extension:
 repo:
   github: teaguesterling/duckdb_scalarfs
   andium: 68faa6c72054123a6c6521dd41c12f929431da50
-  ref: 4863e4e33cf80792bcd0ebd72e6d5580aacd0e2a
-  ref_next: 4863e4e33cf80792bcd0ebd72e6d5580aacd0e2a
+  ref: 6fc4d68397c521e1fda56bd164ce4f2f3aabda5c
+  # ref_next omitted (skips the v2.0-cyanoptera prerelease leg). scalarfs is clean
+  # of family C (0 named_parameters) and builds against duckdb main, but v2.0-
+  # cyanoptera removed QueryResult::GetValue, which pathmacro_filesystem.cpp uses
+  # (cyanoptera build error at pathmacro_filesystem.cpp:147). That is a separate
+  # v2.0 fix, out of scope for the v1.5.6 restoration; the prerelease leg is
+  # deploy:false and never publishes. Restore ref_next once the v2.0 GetValue
+  # change is handled (after v2.0.0 tags).
 docs:
   hello_world: |
     LOAD scalarfs;
@@ -87,8 +93,8 @@ docs:
 
 extension_star_count: 10
 extension_star_count_pretty: 10
-extension_download_count: 1077
-extension_download_count_pretty: 1.1k
+extension_download_count: 1257
+extension_download_count_pretty: 1.3k
 image: '/images/community_extensions/social_preview/preview_community_extension_scalarfs.png'
 layout: community_extension_doc
 ---
@@ -114,18 +120,19 @@ LOAD {{ page.extension.name }};
 
 <div class="extension_functions_table"></div>
 
-|   function_name    | function_type | description | comment | examples |
-|--------------------|---------------|-------------|---------|----------|
-| from_blob_uri      | scalar        | NULL        | NULL    |          |
-| from_data_uri      | scalar        | NULL        | NULL    |          |
-| from_pathmacro_url | scalar        | NULL        | NULL    |          |
-| from_scalarfs_uri  | scalar        | NULL        | NULL    |          |
-| from_varchar_uri   | scalar        | NULL        | NULL    |          |
-| to_blob_uri        | scalar        | NULL        | NULL    |          |
-| to_data_uri        | scalar        | NULL        | NULL    |          |
-| to_pathmacro_url   | scalar        | NULL        | NULL    |          |
-| to_scalarfs_uri    | scalar        | NULL        | NULL    |          |
-| to_varchar_uri     | scalar        | NULL        | NULL    |          |
+|   function_name    | function_type |                                  description                                   | comment |                      examples                      |
+|--------------------|---------------|--------------------------------------------------------------------------------|---------|----------------------------------------------------|
+| from_blob_uri      | scalar        | Decode a blob: URI to its string payload.                                      | NULL    | [from_blob_uri('blob:68656c6c6f')]                 |
+| from_data_uri      | scalar        | Decode an RFC 2397 data: URI to its payload string.                            | NULL    | [from_data_uri('data:text/plain;base64,aGVsbG8=')] |
+| from_pathmacro_url | scalar        | Parse a pathmacro: URL into a struct containing macro name and parameters map. | NULL    | [from_pathmacro_url('pathmacro:my_macro?key=val')] |
+| from_scalarfs_uri  | scalar        | Decode any scalarfs-compatible URI to its string payload.                      | NULL    | [from_scalarfs_uri('varchar:hello%20world')]       |
+| from_varchar_uri   | scalar        | Decode a varchar: URI to its string payload.                                   | NULL    | [from_varchar_uri('varchar:hello%20world')]        |
+| to_blob_uri        | scalar        | Encode a string as a hex-encoded blob: URI.                                    | NULL    | [to_blob_uri('hello world')]                       |
+| to_data_uri        | scalar        | Encode a string into an RFC 2397 data: URI.                                    | NULL    | [to_data_uri('hello world')]                       |
+| to_pathmacro_url   | scalar        | Construct a pathmacro: URL from a macro name and parameters struct/map.        | NULL    | [to_pathmacro_url('my_macro', {'key': 'val'})]     |
+| to_pathmacro_url   | scalar        | Construct a pathmacro: URL from a macro name.                                  | NULL    | [to_pathmacro_url('my_macro')]                     |
+| to_scalarfs_uri    | scalar        | NULL                                                                           | NULL    |                                                    |
+| to_varchar_uri     | scalar        | Encode a string as a percent-encoded varchar: URI.                             | NULL    | [to_varchar_uri('hello world')]                    |
 
 ### Overloaded Functions
 

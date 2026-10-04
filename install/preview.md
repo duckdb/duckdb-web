@@ -13,7 +13,7 @@ redirect_from:
 ---
 
 <div class="wrap pagetitle pagetitle--small">
-  <h1>DuckDB Preview (Alpha/Nightly) Installation</h1>
+  <div class="pagetitle-heading" role="heading" aria-level="1">DuckDB Preview (Alpha/Nightly) Installation</div>
 </div>
 
 The preview (nightly) builds provide development versions of DuckDB. As such, they are constantly in flux and they are less suitable for production use than the stable releases of DuckDB. You should only use these releases if you are looking for [recent bugfixes](https://github.com/duckdb/duckdb/pulls?q=is%3Apr+is%3Amerged) or optimizations.
@@ -52,18 +52,18 @@ pip install duckdb --pre --upgrade
 
 ### v1.5-dev CLI
 
-To download the CLI client, use the following links:
+To download the v1.5-dev command line client, use the following links:
 
-| Platform | Architecture       | v1.5-dev                                                                           |
+| Platform | Architecture       | v1.5-dev CLI client                                                                |
 | -------- | ------------------ | ---------------------------------------------------------------------------------- |
 | Linux    | `arm64`            | [zip](https://artifacts.duckdb.org/v1.5-variegata/duckdb-binaries-linux-arm64.zip) |
 | Linux    | `x86_64`           | [zip](https://artifacts.duckdb.org/v1.5-variegata/duckdb-binaries-linux-amd64.zip) |
 | macOS    | `arm64` / `x86_64` | [zip](https://artifacts.duckdb.org/v1.5-variegata/duckdb-binaries-osx.zip)         |
 | Windows  | `arm64` / `x86_64` | [zip](https://artifacts.duckdb.org/v1.5-variegata/duckdb-binaries-windows.zip)     |
 
-### v2.0-dev
+### v2.0-dev CLI
 
-#### macOS and Linux Install Script
+#### v2.0-dev macOS and Linux Install Script
 
 To install the preview build on Linux and macOS, run:
 
@@ -71,19 +71,27 @@ To install the preview build on Linux and macOS, run:
 curl https://install.duckdb.org | DUCKDB_VERSION=alpha bash
 ```
 
-#### v2.0-dev Packages
+#### v2.0-dev Windows PowerShell Script
 
-To download the v2.0-dev command-line client, use the following links:
+To install the preview build on Windows, run:
 
-| Platform | Architecture       | v2.0-dev                                                                               |
-| -------- | ------------------ | -------------------------------------------------------------------------------------- |
-| Linux    | `arm64`            | [tar.gz](https://artifacts.duckdb.org/v2.0-cyanoptera/duckdb-cli-linux-arm64.tar.gz)   |
-| Linux    | `x86_64`           | [tar.gz](https://artifacts.duckdb.org/v2.0-cyanoptera/duckdb-cli-linux-amd64.tar.gz)   |
-| macOS    | `arm64` / `x86_64` | [tar.gz](https://artifacts.duckdb.org/v2.0-cyanoptera/duckdb-cli-osx-universal.tar.gz) |
-| Windows  | `arm64`            | [tar.gz](https://artifacts.duckdb.org/v2.0-cyanoptera/duckdb-cli-windows-arm64.tar.gz) |
-| Windows  | `x86_64`           | [tar.gz](https://artifacts.duckdb.org/v2.0-cyanoptera/duckdb-cli-windows-amd64.tar.gz) |
+```powershell
+$env:DUCKDB_VERSION = "alpha"; irm https://install.duckdb.org/install.ps1 | iex
+```
 
-> Warning Extensions are not yet available for the Windows client. Stay tuned!
+> DuckDB on Windows requires the [Microsoft Visual C++ Redistributable](https://learn.microsoft.com/en-us/cpp/windows/latest-supported-vc-redist?view=msvc-170).
+
+#### v2.0-dev CLI Packages
+
+To download the v2.0-dev command line client, use the following links:
+
+| Platform | Architecture       | v2.0-dev CLI client                                                                                                                                             |
+| -------- | ------------------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Linux    | `arm64`            | [tar.gz](https://artifacts.duckdb.org/v2.0-cyanoptera/duckdb-cli-linux-arm64.tar.gz)                                                                            |
+| Linux    | `x86_64`           | [tar.gz](https://artifacts.duckdb.org/v2.0-cyanoptera/duckdb-cli-linux-amd64.tar.gz)                                                                            |
+| macOS    | `arm64` / `x86_64` | [tar.gz](https://artifacts.duckdb.org/v2.0-cyanoptera/duckdb-cli-osx-universal.tar.gz)                                                                          |
+| Windows  | `arm64`            | [tar.gz](https://duckdb-staging.duckdb.org/{{ site.duckdb_windows_alpha_release }}/duckdb/duckdb/github_release/duckdb-cli-windows-arm64.tar.gz) |
+| Windows  | `x86_64`           | [tar.gz](https://duckdb-staging.duckdb.org/{{ site.duckdb_windows_alpha_release }}/duckdb/duckdb/github_release/duckdb-cli-windows-amd64.tar.gz) |
 
 ## Java
 
@@ -140,13 +148,13 @@ dependencies {
 
 ### Direct Download
 
-Download: [jar](https://duckdb-staging.duckdb.org/duckdb/duckdb-java/maven/org/duckdb/duckdb_jdbc/{{ site.preview_duckdb_java_version }}/duckdb_jdbc-{{ site.preview_duckdb_java_version }}.jar)
+<a href="https://duckdb-staging.duckdb.org/duckdb/duckdb-java/maven/org/duckdb/duckdb_jdbc/{{ site.preview_duckdb_java_version }}/duckdb_jdbc-{{ site.preview_duckdb_java_version }}.jar" class="download-btn">duckdb_jdbc-{{ site.preview_duckdb_java_version }}.jar</a>
 
 ## ODBC
 
 For ODBC, the preview builds are based on the `main` branch of the [`duckdb/duckdb-odbc` repository](https://github.com/duckdb/duckdb-odbc/).
 
-| Platform | Architecture       | Download                                                                    |
+| Platform | Architecture       | ODBC client                                                                 |
 | -------- | ------------------ | --------------------------------------------------------------------------- |
 | Linux    | `arm64`            | [zip](https://artifacts.duckdb.org/duckdb-odbc/main/odbc-linux-arm64.zip)   |
 | Linux    | `x86_64`           | [zip](https://artifacts.duckdb.org/duckdb-odbc/main/odbc-linux-amd64.zip)   |
@@ -169,7 +177,7 @@ pak::pak("duckdb/duckdb-r")
 
 To download the C/C++ libraries, use the following links:
 
-| Platform | Architecture       | v1.5-dev                                                                           |
+| Platform | Architecture       | v1.5-dev C/C++ library                                                             |
 | -------- | ------------------ | ---------------------------------------------------------------------------------- |
 | Linux    | `arm64`            | [zip](https://artifacts.duckdb.org/v1.5-variegata/duckdb-binaries-linux-arm64.zip) |
 | Linux    | `x86_64`           | [zip](https://artifacts.duckdb.org/v1.5-variegata/duckdb-binaries-linux-amd64.zip) |
@@ -181,7 +189,7 @@ To download the C/C++ libraries, use the following links:
 
 To download the v2.0-dev C/C++ libraries, use the following links:
 
-| Platform | Architecture       | v2.0-dev                                                                                       |
+| Platform | Architecture       | v2.0-dev C/C++ library                                                                         |
 | -------- | ------------------ | ---------------------------------------------------------------------------------------------- |
 | Linux    | `arm64`            | [tar.gz](https://artifacts.duckdb.org/v2.0-cyanoptera/duckdb-shared-libs-linux-arm64.tar.gz)   |
 | Linux    | `x86_64`           | [tar.gz](https://artifacts.duckdb.org/v2.0-cyanoptera/duckdb-shared-libs-linux-amd64.tar.gz)   |

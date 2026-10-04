@@ -122,10 +122,10 @@ docs:
     **Architecture:** Rust (core logic, zero external chemistry crates) + C++ (DuckDB
     integration via FFI).
 
-extension_star_count: 3
-extension_star_count_pretty: 3
-extension_download_count: 858
-extension_download_count_pretty: 858
+extension_star_count: 4
+extension_star_count_pretty: 4
+extension_download_count: 1474
+extension_download_count_pretty: 1.5k
 image: '/images/community_extensions/social_preview/preview_community_extension_ducksmiles.png'
 layout: community_extension_doc
 ---

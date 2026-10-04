@@ -8,7 +8,7 @@ excerpt: |
 extension:
   name: huggingface
   description: Discover, query, profile, and estimate the storage of Hugging Face datasets
-  version: 0.1.1
+  version: 0.1.2
   language: C++
   build: cmake
   license: MIT
@@ -18,7 +18,7 @@ extension:
 
 repo:
   github: dentiny/duckdb-huggingface
-  ref: 3af098eab0955db299d6e494e4345f4ab0a6c498
+  ref: a1e27e1ff779371e90b701c21a36c16fabbb31d3
 
 docs:
   hello_world: |
@@ -42,8 +42,8 @@ docs:
 
 extension_star_count: 1
 extension_star_count_pretty: 1
-extension_download_count: 516
-extension_download_count_pretty: 516
+extension_download_count: 732
+extension_download_count_pretty: 732
 image: '/images/community_extensions/social_preview/preview_community_extension_huggingface.png'
 layout: community_extension_doc
 ---
@@ -69,33 +69,33 @@ LOAD {{ page.extension.name }};
 
 <div class="extension_functions_table"></div>
 
-|               function_name               | function_type | description | comment | examples |
-|-------------------------------------------|---------------|-------------|---------|----------|
-| cache_httpfs_add_exclusion_regex          | scalar        | NULL        | NULL    |          |
-| cache_httpfs_cache_access_info_query      | table         | NULL        | NULL    |          |
-| cache_httpfs_cache_status_query           | table         | NULL        | NULL    |          |
-| cache_httpfs_cleanup_dead_temp            | scalar        | NULL        | NULL    |          |
-| cache_httpfs_clear_cache                  | scalar        | NULL        | NULL    |          |
-| cache_httpfs_clear_cache_for_file         | scalar        | NULL        | NULL    |          |
-| cache_httpfs_clear_profile                | scalar        | NULL        | NULL    |          |
-| cache_httpfs_get_cache_config             | table         | NULL        | NULL    |          |
-| cache_httpfs_get_cache_filesystems        | table         | NULL        | NULL    |          |
-| cache_httpfs_get_cache_type               | table         | NULL        | NULL    |          |
-| cache_httpfs_get_data_cache_config        | table         | NULL        | NULL    |          |
-| cache_httpfs_get_file_handle_cache_config | table         | NULL        | NULL    |          |
-| cache_httpfs_get_glob_cache_config        | table         | NULL        | NULL    |          |
-| cache_httpfs_get_metadata_cache_config    | table         | NULL        | NULL    |          |
-| cache_httpfs_get_ondisk_data_cache_size   | scalar        | NULL        | NULL    |          |
-| cache_httpfs_get_profile                  | scalar        | NULL        | NULL    |          |
-| cache_httpfs_list_exclusion_regex         | table         | NULL        | NULL    |          |
-| cache_httpfs_list_registered_filesystems  | table         | NULL        | NULL    |          |
-| cache_httpfs_reset_exclusion_regex        | scalar        | NULL        | NULL    |          |
-| cache_httpfs_wrap_cache_filesystem        | scalar        | NULL        | NULL    |          |
-| hf_dataset_estimate                       | table         | NULL        | NULL    |          |
-| hf_files                                  | table         | NULL        | NULL    |          |
-| hf_profile                                | table         | NULL        | NULL    |          |
-| hf_scan                                   | table         | NULL        | NULL    |          |
-| huggingface_internal_blob_size            | scalar        | NULL        | NULL    |          |
+|               function_name               | function_type |                                                  description                                                  | comment |                                             examples                                             |
+|-------------------------------------------|---------------|---------------------------------------------------------------------------------------------------------------|---------|--------------------------------------------------------------------------------------------------|
+| cache_httpfs_add_exclusion_regex          | scalar        | Adds a regular expression for remote paths that should bypass the cache.                                      | NULL    | [SELECT cache_httpfs_add_exclusion_regex('.*\.tmp$');]                                           |
+| cache_httpfs_cache_access_info_query      | table         | Returns hit, miss, byte, and latency statistics for each cache entity.                                        | NULL    | [SELECT * FROM cache_httpfs_cache_access_info_query();]                                          |
+| cache_httpfs_cache_status_query           | table         | Returns cached data entries with their local path, remote path, byte range, and cache type.                   | NULL    | [SELECT * FROM cache_httpfs_cache_status_query();]                                               |
+| cache_httpfs_cleanup_dead_temp            | scalar        | Deletes stale temporary cache files and returns the number deleted.                                           | NULL    | [SELECT cache_httpfs_cleanup_dead_temp();]                                                       |
+| cache_httpfs_clear_cache                  | scalar        | Clears all data, metadata, file handle, glob, and profile caches.                                             | NULL    | [SELECT cache_httpfs_clear_cache();]                                                             |
+| cache_httpfs_clear_cache_for_file         | scalar        | Clears cached entries for one remote file.                                                                    | NULL    | [SELECT cache_httpfs_clear_cache_for_file('s3://bucket/file.parquet');]                          |
+| cache_httpfs_clear_profile                | scalar        | Clears cache profile statistics for the current connection.                                                   | NULL    | [SELECT cache_httpfs_clear_profile();]                                                           |
+| cache_httpfs_get_cache_config             | table         | Returns all current cache_httpfs configuration values.                                                        | NULL    | [SELECT * FROM cache_httpfs_get_cache_config();]                                                 |
+| cache_httpfs_get_cache_filesystems        | table         | Lists filesystem implementations currently wrapped by cache_httpfs.                                           | NULL    | [SELECT * FROM cache_httpfs_get_cache_filesystems();]                                            |
+| cache_httpfs_get_cache_type               | table         | Returns the active cache type and whether caching is enabled.                                                 | NULL    | [SELECT * FROM cache_httpfs_get_cache_type();]                                                   |
+| cache_httpfs_get_data_cache_config        | table         | Returns the current data cache configuration.                                                                 | NULL    | [SELECT * FROM cache_httpfs_get_data_cache_config();]                                            |
+| cache_httpfs_get_file_handle_cache_config | table         | Returns the current file handle cache configuration.                                                          | NULL    | [SELECT * FROM cache_httpfs_get_file_handle_cache_config();]                                     |
+| cache_httpfs_get_glob_cache_config        | table         | Returns the current glob cache configuration.                                                                 | NULL    | [SELECT * FROM cache_httpfs_get_glob_cache_config();]                                            |
+| cache_httpfs_get_metadata_cache_config    | table         | Returns the current metadata cache configuration.                                                             | NULL    | [SELECT * FROM cache_httpfs_get_metadata_cache_config();]                                        |
+| cache_httpfs_get_ondisk_data_cache_size   | scalar        | Returns the total size in bytes of files in the configured on-disk cache directories.                         | NULL    | [SELECT cache_httpfs_get_ondisk_data_cache_size();]                                              |
+| cache_httpfs_get_profile                  | scalar        | Returns human-readable cache profile statistics for the current connection.                                   | NULL    | [SELECT cache_httpfs_get_profile();]                                                             |
+| cache_httpfs_list_exclusion_regex         | table         | Lists the path exclusion regular expressions.                                                                 | NULL    | [SELECT * FROM cache_httpfs_list_exclusion_regex();]                                             |
+| cache_httpfs_list_registered_filesystems  | table         | Lists filesystem implementations registered with DuckDB.                                                      | NULL    | [SELECT * FROM cache_httpfs_list_registered_filesystems();]                                      |
+| cache_httpfs_reset_exclusion_regex        | scalar        | Removes all path exclusion regular expressions.                                                               | NULL    | [SELECT cache_httpfs_reset_exclusion_regex();]                                                   |
+| cache_httpfs_wrap_cache_filesystem        | scalar        | Wraps a registered DuckDB filesystem with the cache filesystem.                                               | NULL    | [SELECT cache_httpfs_wrap_cache_filesystem('AzureBlobStorageFileSystem');]                       |
+| hf_dataset_estimate                       | table         | Estimates Parquet and external-blob storage for a Hugging Face dataset from sampled rows and blob references. | NULL    | [SELECT * FROM hf_dataset_estimate('owner/dataset', blob_column = 'images');]                    |
+| hf_files                                  | table         | Discovers matching Parquet files in a Hugging Face dataset and reports file and optional external-blob sizes. | NULL    | [SELECT * FROM hf_files('ibm/duorc', config = 'ParaphraseRC', split = 'train');]                 |
+| hf_profile                                | table         | Summarizes file counts, row counts, row-group counts, and Parquet storage for a Hugging Face dataset.         | NULL    | [SELECT * FROM hf_profile('ibm/duorc', config = 'ParaphraseRC', split = 'train');]               |
+| hf_scan                                   | table         | Scans matching Parquet files in a Hugging Face dataset, with projection and filter pushdown.                  | NULL    | [SELECT * FROM hf_scan('ibm/duorc', config = 'ParaphraseRC', split = 'train') LIMIT 10;]         |
+| huggingface_internal_blob_size            | scalar        | Returns the byte size of a Hugging Face or HTTP object, or NULL when its size cannot be resolved.             | NULL    | [SELECT huggingface_internal_blob_size('hf://datasets/owner/dataset@~parquet/file.parquet', 1);] |
 
 ### Overloaded Functions
 

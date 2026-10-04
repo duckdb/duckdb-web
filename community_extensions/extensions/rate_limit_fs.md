@@ -8,7 +8,7 @@ excerpt: |
 extension:
   name: rate_limit_fs
   description: Perform rate and burst limit on filesystem operations
-  version: 0.0.9
+  version: 0.0.10
   language: C++
   build: cmake
   license: MIT
@@ -19,7 +19,7 @@ extension:
 repo:
   github: dentiny/duckdb-rate-limit-filesystem
   andium: 2d70a9f86b5d31fd6104980d5bfd47db82fcd020
-  ref: 25f05ab2a8bfe5ecb9af1cc1e44353cfd0d9d07b
+  ref: b538c832a75fbfd856eb35ee74f3442cc8833105
 
 docs:
   hello_world: |
@@ -34,8 +34,8 @@ docs:
 
 extension_star_count: 2
 extension_star_count_pretty: 2
-extension_download_count: 1043
-extension_download_count_pretty: 1.0k
+extension_download_count: 1091
+extension_download_count_pretty: 1.1k
 image: '/images/community_extensions/social_preview/preview_community_extension_rate_limit_fs.png'
 layout: community_extension_doc
 ---
@@ -61,15 +61,15 @@ LOAD {{ page.extension.name }};
 
 <div class="extension_functions_table"></div>
 
-|         function_name          | function_type | description | comment | examples |
-|--------------------------------|---------------|-------------|---------|----------|
-| rate_limit_fs_burst            | scalar        | NULL        | NULL    |          |
-| rate_limit_fs_clear            | scalar        | NULL        | NULL    |          |
-| rate_limit_fs_configs          | table         | NULL        | NULL    |          |
-| rate_limit_fs_list_filesystems | table         | NULL        | NULL    |          |
-| rate_limit_fs_max_requests     | scalar        | NULL        | NULL    |          |
-| rate_limit_fs_quota            | scalar        | NULL        | NULL    |          |
-| rate_limit_fs_wrap             | scalar        | NULL        | NULL    |          |
+|         function_name          | function_type |                                           description                                           | comment |                                              examples                                               |
+|--------------------------------|---------------|-------------------------------------------------------------------------------------------------|---------|-----------------------------------------------------------------------------------------------------|
+| rate_limit_fs_burst            | scalar        | Sets the burst capacity for read or write operations on a rate-limited filesystem.              | NULL    | [SELECT rate_limit_fs_burst('RateLimitFileSystem - LocalFileSystem', 'read', 10485760);]            |
+| rate_limit_fs_clear            | scalar        | Clears one or more rate-limit settings; '*' selects every filesystem or operation.              | NULL    | [SELECT rate_limit_fs_clear('RateLimitFileSystem - LocalFileSystem', 'read');]                      |
+| rate_limit_fs_configs          | table         | Returns all configured filesystem operation quotas, modes, burst limits, and concurrency caps.  | NULL    | [SELECT * FROM rate_limit_fs_configs();]                                                            |
+| rate_limit_fs_list_filesystems | table         | Lists the filesystem implementations registered with DuckDB's virtual filesystem.               | NULL    | [SELECT * FROM rate_limit_fs_list_filesystems();]                                                   |
+| rate_limit_fs_max_requests     | scalar        | Sets the maximum number of concurrent requests for a filesystem operation, or -1 for unlimited. | NULL    | [SELECT rate_limit_fs_max_requests('RateLimitFileSystem - LocalFileSystem', 'read', 10);]           |
+| rate_limit_fs_quota            | scalar        | Sets the sustained rate limit for a filesystem operation in blocking or non-blocking mode.      | NULL    | [SELECT rate_limit_fs_quota('RateLimitFileSystem - LocalFileSystem', 'read', 1048576, 'blocking');] |
+| rate_limit_fs_wrap             | scalar        | Wraps a registered filesystem with rate limiting and registers the wrapped filesystem.          | NULL    | [SELECT rate_limit_fs_wrap('LocalFileSystem');]                                                     |
 
 ### Overloaded Functions
 

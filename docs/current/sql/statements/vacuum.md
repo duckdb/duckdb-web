@@ -2,7 +2,6 @@
 layout: docu
 railroad: statements/vacuum.js
 redirect_from:
-- /docs/preview/sql/statements/vacuum
 - /docs/sql/statements/vacuum
 - /docs/stable/sql/statements/vacuum
 title: VACUUM Statement
@@ -32,11 +31,6 @@ Calling `VACUUM` on a given table-column pair rebuilds statistics for the table 
 
 ```sql
 VACUUM my_table(my_column);
-```
-
-Rebuild statistics for the table and column:
-
-```sql
 VACUUM ANALYZE my_table(my_column);
 ```
 

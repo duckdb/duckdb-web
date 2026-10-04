@@ -96,12 +96,10 @@ DuckDB supports automatic intra-query parallelization through pipeline paralleli
 
 ```sql
 COPY (
-   SELECT 
-     * 
+   SELECT * 
    FROM lineitem 
-   WHERE 
-     ctid BETWEEN '(P_MIN,0)'::tid AND '(P_MAX,0)'::tid
-   ) TO STDOUT (FORMAT binary);
+   WHERE ctid BETWEEN '(P_MIN,0)'::tid AND '(P_MAX,0)'::tid
+) TO STDOUT (FORMAT binary);
 ```
 
 This way, we can efficiently scan the table in parallel while not relying on the schema in any way. Because page size is fixed in Postgres, this also has the added bonus of equalizing the effort to read a subset of the page independent of the number of columns in each row. 

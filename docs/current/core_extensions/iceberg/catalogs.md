@@ -2,14 +2,11 @@
 layout: docu
 redirect_from:
 - /docs/stable/extensions/iceberg/amazon_s3_tables
-- /docs/preview/core_extensions/iceberg/amazon_s3_tables
 - /docs/stable/core_extensions/iceberg/amazon_s3_tables
 - /docs/current/core_extensions/iceberg/amazon_s3_tables
 - /docs/stable/extensions/iceberg/amazon_sagemaker_lakehouse
-- /docs/preview/core_extensions/iceberg/amazon_sagemaker_lakehouse
 - /docs/stable/core_extensions/iceberg/amazon_sagemaker_lakehouse
 - /docs/current/core_extensions/iceberg/amazon_sagemaker_lakehouse
-- /docs/preview/core_extensions/iceberg/iceberg_rest_catalogs
 - /docs/stable/core_extensions/iceberg/iceberg_rest_catalogs
 - /docs/current/core_extensions/iceberg/iceberg_rest_catalogs
 title: Catalogs

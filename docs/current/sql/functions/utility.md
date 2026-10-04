@@ -1,7 +1,6 @@
 ---
 layout: docu
 redirect_from:
-- /docs/preview/sql/functions/utility
 - /docs/sql/functions/utility
 - /docs/stable/sql/functions/utility
 - /docs/test/functions/utility

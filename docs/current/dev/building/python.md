@@ -2,7 +2,6 @@
 layout: docu
 redirect_from:
 - /docs/dev/building/python
-- /docs/preview/dev/building/python
 - /docs/stable/dev/building/python
 title: Python
 ---

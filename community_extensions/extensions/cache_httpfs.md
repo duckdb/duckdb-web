@@ -8,7 +8,7 @@ excerpt: |
 extension:
   name: cache_httpfs
   description: Read cached filesystem for httpfs
-  version: 0.14.2
+  version: 0.14.3
   language: C++
   build: cmake
   license: MIT
@@ -19,7 +19,7 @@ extension:
 
 repo:
   github: dentiny/duck-read-cache-fs
-  ref: 933957df0631fc62d62cb851ece11aa26f72f08a
+  ref: 57ad2686b50c7338477dbb63bb6880631b8e66b2
 
 docs:
   hello_world: |
@@ -36,10 +36,10 @@ docs:
     - Exposes function to get cache size and cleanup cache
     - Provides an option to disable / enable cache, which could act as a drop-in replacement for httpfs
 
-extension_star_count: 151
-extension_star_count_pretty: 151
-extension_download_count: 96091
-extension_download_count_pretty: 96.1k
+extension_star_count: 153
+extension_star_count_pretty: 153
+extension_download_count: 51086
+extension_download_count_pretty: 51.1k
 image: '/images/community_extensions/social_preview/preview_community_extension_cache_httpfs.png'
 layout: community_extension_doc
 ---
@@ -65,28 +65,28 @@ LOAD {{ page.extension.name }};
 
 <div class="extension_functions_table"></div>
 
-|               function_name               | function_type | description | comment | examples |
-|-------------------------------------------|---------------|-------------|---------|----------|
-| cache_httpfs_add_exclusion_regex          | scalar        | NULL        | NULL    |          |
-| cache_httpfs_cache_access_info_query      | table         | NULL        | NULL    |          |
-| cache_httpfs_cache_status_query           | table         | NULL        | NULL    |          |
-| cache_httpfs_cleanup_dead_temp            | scalar        | NULL        | NULL    |          |
-| cache_httpfs_clear_cache                  | scalar        | NULL        | NULL    |          |
-| cache_httpfs_clear_cache_for_file         | scalar        | NULL        | NULL    |          |
-| cache_httpfs_clear_profile                | scalar        | NULL        | NULL    |          |
-| cache_httpfs_get_cache_config             | table         | NULL        | NULL    |          |
-| cache_httpfs_get_cache_filesystems        | table         | NULL        | NULL    |          |
-| cache_httpfs_get_cache_type               | table         | NULL        | NULL    |          |
-| cache_httpfs_get_data_cache_config        | table         | NULL        | NULL    |          |
-| cache_httpfs_get_file_handle_cache_config | table         | NULL        | NULL    |          |
-| cache_httpfs_get_glob_cache_config        | table         | NULL        | NULL    |          |
-| cache_httpfs_get_metadata_cache_config    | table         | NULL        | NULL    |          |
-| cache_httpfs_get_ondisk_data_cache_size   | scalar        | NULL        | NULL    |          |
-| cache_httpfs_get_profile                  | scalar        | NULL        | NULL    |          |
-| cache_httpfs_list_exclusion_regex         | table         | NULL        | NULL    |          |
-| cache_httpfs_list_registered_filesystems  | table         | NULL        | NULL    |          |
-| cache_httpfs_reset_exclusion_regex        | scalar        | NULL        | NULL    |          |
-| cache_httpfs_wrap_cache_filesystem        | scalar        | NULL        | NULL    |          |
+|               function_name               | function_type |                                         description                                         | comment |                                  examples                                  |
+|-------------------------------------------|---------------|---------------------------------------------------------------------------------------------|---------|----------------------------------------------------------------------------|
+| cache_httpfs_add_exclusion_regex          | scalar        | Adds a regular expression for remote paths that should bypass the cache.                    | NULL    | [SELECT cache_httpfs_add_exclusion_regex('.*\.tmp$');]                     |
+| cache_httpfs_cache_access_info_query      | table         | Returns hit, miss, byte, and latency statistics for each cache entity.                      | NULL    | [SELECT * FROM cache_httpfs_cache_access_info_query();]                    |
+| cache_httpfs_cache_status_query           | table         | Returns cached data entries with their local path, remote path, byte range, and cache type. | NULL    | [SELECT * FROM cache_httpfs_cache_status_query();]                         |
+| cache_httpfs_cleanup_dead_temp            | scalar        | Deletes stale temporary cache files and returns the number deleted.                         | NULL    | [SELECT cache_httpfs_cleanup_dead_temp();]                                 |
+| cache_httpfs_clear_cache                  | scalar        | Clears all data, metadata, file handle, glob, and profile caches.                           | NULL    | [SELECT cache_httpfs_clear_cache();]                                       |
+| cache_httpfs_clear_cache_for_file         | scalar        | Clears cached entries for one remote file.                                                  | NULL    | [SELECT cache_httpfs_clear_cache_for_file('s3://bucket/file.parquet');]    |
+| cache_httpfs_clear_profile                | scalar        | Clears cache profile statistics for the current connection.                                 | NULL    | [SELECT cache_httpfs_clear_profile();]                                     |
+| cache_httpfs_get_cache_config             | table         | Returns all current cache_httpfs configuration values.                                      | NULL    | [SELECT * FROM cache_httpfs_get_cache_config();]                           |
+| cache_httpfs_get_cache_filesystems        | table         | Lists filesystem implementations currently wrapped by cache_httpfs.                         | NULL    | [SELECT * FROM cache_httpfs_get_cache_filesystems();]                      |
+| cache_httpfs_get_cache_type               | table         | Returns the active cache type and whether caching is enabled.                               | NULL    | [SELECT * FROM cache_httpfs_get_cache_type();]                             |
+| cache_httpfs_get_data_cache_config        | table         | Returns the current data cache configuration.                                               | NULL    | [SELECT * FROM cache_httpfs_get_data_cache_config();]                      |
+| cache_httpfs_get_file_handle_cache_config | table         | Returns the current file handle cache configuration.                                        | NULL    | [SELECT * FROM cache_httpfs_get_file_handle_cache_config();]               |
+| cache_httpfs_get_glob_cache_config        | table         | Returns the current glob cache configuration.                                               | NULL    | [SELECT * FROM cache_httpfs_get_glob_cache_config();]                      |
+| cache_httpfs_get_metadata_cache_config    | table         | Returns the current metadata cache configuration.                                           | NULL    | [SELECT * FROM cache_httpfs_get_metadata_cache_config();]                  |
+| cache_httpfs_get_ondisk_data_cache_size   | scalar        | Returns the total size in bytes of files in the configured on-disk cache directories.       | NULL    | [SELECT cache_httpfs_get_ondisk_data_cache_size();]                        |
+| cache_httpfs_get_profile                  | scalar        | Returns human-readable cache profile statistics for the current connection.                 | NULL    | [SELECT cache_httpfs_get_profile();]                                       |
+| cache_httpfs_list_exclusion_regex         | table         | Lists the path exclusion regular expressions.                                               | NULL    | [SELECT * FROM cache_httpfs_list_exclusion_regex();]                       |
+| cache_httpfs_list_registered_filesystems  | table         | Lists filesystem implementations registered with DuckDB.                                    | NULL    | [SELECT * FROM cache_httpfs_list_registered_filesystems();]                |
+| cache_httpfs_reset_exclusion_regex        | scalar        | Removes all path exclusion regular expressions.                                             | NULL    | [SELECT cache_httpfs_reset_exclusion_regex();]                             |
+| cache_httpfs_wrap_cache_filesystem        | scalar        | Wraps a registered DuckDB filesystem with the cache filesystem.                             | NULL    | [SELECT cache_httpfs_wrap_cache_filesystem('AzureBlobStorageFileSystem');] |
 
 ### Overloaded Functions
 

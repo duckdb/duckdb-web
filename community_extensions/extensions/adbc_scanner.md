@@ -21,10 +21,10 @@ extension:
 repo:
   andium: 84794a00a6837c31f0779c56f2ce0e83df1bb7b6
   github: query-farm/adbc_scanner
-  ref: 415d12f5caf49b01d2b325a9322d3e439a5b1ec5
+  ref: 3485fb0893b624e57d572aa27e37857749a75d6a
 
-extension_star_count: 21
-extension_star_count_pretty: 21
+extension_star_count: 25
+extension_star_count_pretty: 25
 extension_download_count: 1776
 extension_download_count_pretty: 1.8k
 image: '/images/community_extensions/social_preview/preview_community_extension_adbc_scanner.png'
@@ -54,20 +54,20 @@ LOAD {{ page.extension.name }};
 
 |    function_name    | function_type | description | comment | examples |
 |---------------------|---------------|-------------|---------|----------|
-| adbc_clear_cache    | scalar        | NULL        | NULL    | NULL     |
+| adbc_clear_cache    | table         | NULL        | NULL    | NULL     |
 | adbc_columns        | table         | NULL        | NULL    | NULL     |
-| adbc_commit         | scalar        | NULL        | NULL    | NULL     |
+| adbc_commit         | table         | NULL        | NULL    | NULL     |
 | adbc_connect        | scalar        | NULL        | NULL    | NULL     |
-| adbc_disconnect     | scalar        | NULL        | NULL    | NULL     |
-| adbc_execute        | scalar        | NULL        | NULL    | NULL     |
+| adbc_disconnect     | table         | NULL        | NULL    | NULL     |
+| adbc_execute        | table         | NULL        | NULL    | NULL     |
 | adbc_info           | table         | NULL        | NULL    | NULL     |
 | adbc_insert         | table         | NULL        | NULL    | NULL     |
 | adbc_profiles       | table         | NULL        | NULL    | NULL     |
-| adbc_rollback       | scalar        | NULL        | NULL    | NULL     |
+| adbc_rollback       | table         | NULL        | NULL    | NULL     |
 | adbc_scan           | table         | NULL        | NULL    | NULL     |
 | adbc_scan_table     | table         | NULL        | NULL    | NULL     |
 | adbc_schema         | table         | NULL        | NULL    | NULL     |
-| adbc_set_autocommit | scalar        | NULL        | NULL    | NULL     |
+| adbc_set_autocommit | table         | NULL        | NULL    | NULL     |
 | adbc_table_types    | table         | NULL        | NULL    | NULL     |
 | adbc_tables         | table         | NULL        | NULL    | NULL     |
 

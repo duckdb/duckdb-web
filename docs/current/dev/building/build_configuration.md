@@ -2,7 +2,6 @@
 layout: docu
 redirect_from:
 - /docs/dev/building/build_configuration
-- /docs/preview/dev/building/build_configuration
 - /docs/stable/dev/building/build_configuration
 title: Building Configuration
 ---

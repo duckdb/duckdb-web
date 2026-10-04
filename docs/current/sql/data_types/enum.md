@@ -3,7 +3,6 @@ blurb: The Enum type represents a dictionary data structure with all possible un
   values of a column.
 layout: docu
 redirect_from:
-- /docs/preview/sql/data_types/enum
 - /docs/sql/data_types/enum
 - /docs/stable/sql/data_types/enum
 title: Enum Data Type

@@ -4,7 +4,6 @@ redirect_from:
 - /docs/data/parquet
 - /docs/data/parquet/overview
 - /docs/extensions/parquet
-- /docs/preview/data/parquet/overview
 - /docs/stable/data/parquet/overview
 title: Reading and Writing Parquet Files
 ---
@@ -43,6 +42,15 @@ Use list parameter to read three Parquet files and treat them as a single table:
 SELECT *
 FROM read_parquet(['file1.parquet', 'file2.parquet', 'file3.parquet']);
 ```
+
+Read Parquet files from a local directory, including its subdirectories:
+
+```sql
+SELECT *
+FROM read_parquet('test');
+```
+
+A directory path recursively reads files with the `.parquet` extension. To read only files directly inside the directory, use `test/*.parquet` instead. See [directory paths]({% link docs/current/data/multiple_files/overview.md %}#directory-paths) for details.
 
 Read all files that match the glob pattern:
 

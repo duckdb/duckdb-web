@@ -3,7 +3,6 @@ layout: docu
 redirect_from:
 - /docs/api/python/types
 - /docs/clients/python/types
-- /docs/preview/clients/python/types
 - /docs/stable/clients/python/types
 title: Types API
 ---

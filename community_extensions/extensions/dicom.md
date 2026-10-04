@@ -10,7 +10,7 @@ extension:
   name: dicom
   description: |
     DuckDB integration with medical imaging data (DICOM - Digital Imaging and Communication in Medicine).
-  version: 0.7.0
+  version: 0.7.2
   language: C++
   build: cmake
   excluded_platforms: "wasm_mvp;wasm_eh;wasm_threads"
@@ -20,7 +20,7 @@ extension:
 
 repo:
   github: nmontesg/duck-dicom
-  ref: v0.7.0
+  ref: 73df5583e9661a2c13663aa4b233c2e436e28dca
 
 docs:
   hello_world: |
@@ -45,10 +45,10 @@ docs:
     * `query_dicom()` and `retrieve_dicom()` - Table functions to query and retrieve DICOM datasets from a remote
     modalities directly into DuckDB using C-FIND and C-MOVE commands.
 
-extension_star_count: 1
-extension_star_count_pretty: 1
-extension_download_count: 724
-extension_download_count_pretty: 724
+extension_star_count: 2
+extension_star_count_pretty: 2
+extension_download_count: 1015
+extension_download_count_pretty: 1.0k
 image: '/images/community_extensions/social_preview/preview_community_extension_dicom.png'
 layout: community_extension_doc
 ---

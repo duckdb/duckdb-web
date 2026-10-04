@@ -2,7 +2,6 @@
 layout: docu
 redirect_from:
 - /docs/clients/java/functions
-- /docs/preview/clients/java/functions
 - /docs/stable/clients/java/functions
 title: Write User Defined Functions
 ---

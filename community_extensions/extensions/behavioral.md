@@ -56,10 +56,10 @@ docs:
     with zero unsafe code in business logic. Benchmarked at 830 Melem/s (sessionize)
     and 95 Melem/s (sequence_match) on commodity hardware.
 
-extension_star_count: 14
-extension_star_count_pretty: 14
-extension_download_count: 3054
-extension_download_count_pretty: 3.1k
+extension_star_count: 16
+extension_star_count_pretty: 16
+extension_download_count: 3589
+extension_download_count_pretty: 3.6k
 image: '/images/community_extensions/social_preview/preview_community_extension_behavioral.png'
 layout: community_extension_doc
 ---

@@ -8,7 +8,7 @@ excerpt: |
 extension:
   name: ai
   description: AI functions for SQL — completions, classification, extraction, embeddings, and read-only SQL generation across local and hosted model providers
-  version: 0.4.25
+  version: 0.6.0
   language: C++
   build: cmake
   license: MIT
@@ -18,7 +18,7 @@ extension:
 
 repo:
   github: leonardovida/duckdb-ai
-  ref: d7348163604ecc21396d5991b1991b6127cb2a47
+  ref: 44020c8a1e869aa1614827c4f6ac865c1ce9b804
 
 docs:
   hello_world: |
@@ -53,10 +53,10 @@ docs:
     contacted when an `ai_*` function that needs one is executed. Full docs:
     https://github.com/leonardovida/duckdb-ai
 
-extension_star_count: 12
-extension_star_count_pretty: 12
-extension_download_count: 730
-extension_download_count_pretty: 730
+extension_star_count: 16
+extension_star_count_pretty: 16
+extension_download_count: 1232
+extension_download_count_pretty: 1.2k
 image: '/images/community_extensions/social_preview/preview_community_extension_ai.png'
 layout: community_extension_doc
 ---
@@ -92,7 +92,7 @@ LOAD {{ page.extension.name }};
 | ai_classify_result         | scalar        | Classifies into zero or more labels and returns STRUCT(value, error, metadata).                               | NULL    | [SELECT ai_classify_result(review, ['shipping', 'pricing', 'quality']) FROM reviews;]                                                               |
 | ai_clear_cache             | table         | Clears per-database in-memory response and generated-SQL caches.                                              | NULL    | [SELECT * FROM ai_clear_cache();]                                                                                                                   |
 | ai_clear_usage             | table         | Clears the per-database usage event buffer.                                                                   | NULL    | [SELECT * FROM ai_clear_usage();]                                                                                                                   |
-| ai_complete                | scalar        | Calls a completion model and returns the response text.                                                       | NULL    | [SELECT ai_complete('Say hello');, SELECT ai_complete('Say hello', provider := 'ollama', model := 'llama3.2');]                                     |
+| ai_complete                | scalar        | Calls a completion model and returns the response text.                                                       | NULL    | [SELECT ai_complete('Say hello');, SELECT ai_complete('Say hello', provider := 'ollama', model := 'qwen3.8:27b');]                                  |
 | ai_complete_json           | scalar        | Calls a completion model and validates the response as a JSON object or array.                                | NULL    | [SELECT ai_complete_json('Return a JSON object with one key named ok');]                                                                            |
 | ai_complete_record         | table         | Calls a completion model and projects a JSON object response into typed columns from a JSON Schema.           | NULL    | [SELECT * FROM ai_complete_record('Describe a duck', '{"type": "object", "properties": {"name": {"type": "string"{% raw %}}}{% endraw %}}');]       |
 | ai_completion_request_json | scalar        | Returns the completion request JSON without making a network call.                                            | NULL    | [SELECT ai_completion_request_json('Say hello');]                                                                                                   |
@@ -109,12 +109,14 @@ LOAD {{ page.extension.name }};
 | ai_fix_sql                 | table         | Rewrites a broken query as one corrected read-only DuckDB SELECT, or rewrites one line with mode := 'line'.   | NULL    | [SELECT * FROM ai_fix_sql('SELEC 42');, SELECT * FROM ai_fix_sql('SELECT amout FROM sales', error := 'column amout not found', fix_attempts := 2);] |
 | ai_generate_chunks         | table         | Splits text into deterministic fixed or recursive Unicode-aware chunks.                                       | NULL    | [SELECT * FROM ai_generate_chunks('First paragraph. Second paragraph.');]                                                                           |
 | ai_is_read_only_sql        | scalar        | Returns whether SQL is one parser-valid read-only SELECT statement.                                           | NULL    | [SELECT ai_is_read_only_sql('SELECT 42');]                                                                                                          |
+| ai_jev                     | scalar        | Evaluates named Jev criteria in row batches and returns a typed STRUCT.                                       | NULL    | [SELECT ai_jev('charged twice', {team: MAP {'billing': 'Payments', 'other': 'Other'{% raw %}}}{% endraw %});]                                       |
 | ai_model_prices            | table         | Returns the built-in provider/model pricing catalog.                                                          | NULL    | [SELECT * FROM ai_model_prices();]                                                                                                                  |
 | ai_models                  | table         | Lists registered external model profiles without credential material.                                         | NULL    | [SELECT * FROM ai_models();]                                                                                                                        |
 | ai_parse_document          | table         | Parses a BLOB through a normalized remote document-parser profile.                                            | NULL    | [SELECT * FROM ai_parse_document(read_blob('document.pdf').content, 'application/pdf', 'documents');]                                               |
 | ai_prep_search             | table         | Creates retrieval and context-enriched embedding chunks from text or Markdown.                                | NULL    | [SELECT * FROM ai_prep_search('# Guide
 DuckDB runs in process.', title := 'Guide');]                                                                                                       |
 | ai_provider_base_url       | scalar        | Returns the default base URL for a supported provider.                                                        | NULL    | [SELECT ai_provider_base_url('openai');]                                                                                                            |
+| ai_provider_call           | scalar        | Calls a provider with a native JSON request and returns its full JSON response; tools are not executed.       | NULL    | [SELECT ai_provider_call('{"model":"hy3","messages":[{"role":"user","content":"Hello"}]}', provider := 'hunyuan');]                                 |
 | ai_provider_protocol       | scalar        | Returns the internal protocol used for a supported provider.                                                  | NULL    | [SELECT ai_provider_protocol('openai');]                                                                                                            |
 | ai_provision_endpoint      | table         | Plans or explicitly submits guarded endpoint provisioning through the control plane.                          | NULL    | [SELECT * FROM ai_provision_endpoint('support_model');]                                                                                             |
 | ai_query_data              | table         | Generates one read-only SELECT at bind time and executes it as a subquery.                                    | NULL    | [SELECT * FROM ai_query_data('total sales by region');, SELECT * FROM ai_query_data('total sales by region', include_tables := ['main.sales']);]    |

@@ -3,7 +3,6 @@ layout: docu
 redirect_from:
 - /dev/sqllogictest/multiple_connections
 - /docs/dev/sqllogictest/multiple_connections
-- /docs/preview/dev/sqllogictest/multiple_connections
 - /docs/stable/dev/sqllogictest/multiple_connections
 title: Multiple Connections
 ---

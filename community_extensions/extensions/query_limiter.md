@@ -8,7 +8,7 @@ excerpt: |
 extension:
   name: query_limiter
   description: Reject queries before physical execution when estimated table scans exceed a configured row budget
-  version: 0.1.1
+  version: 0.1.2
   language: C++
   build: cmake
   license: MIT
@@ -18,7 +18,7 @@ extension:
 
 repo:
   github: dentiny/duckdb-query-limiter
-  ref: aab6fe9d71d8914ea31c9f4d459cc24a746aa51b
+  ref: 8febc919c9240343112b6a54468074fe48628ea1
 
 docs:
   hello_world: |
@@ -30,8 +30,8 @@ docs:
 
 extension_star_count: 1
 extension_star_count_pretty: 1
-extension_download_count: 693
-extension_download_count_pretty: 693
+extension_download_count: 790
+extension_download_count_pretty: 790
 image: '/images/community_extensions/social_preview/preview_community_extension_query_limiter.png'
 layout: community_extension_doc
 ---
@@ -57,7 +57,9 @@ LOAD {{ page.extension.name }};
 
 <div class="extension_functions_table"></div>
 
-This extension does not add any functions.
+|     function_name      | function_type |                                                description                                                | comment |                          examples                          |
+|------------------------|---------------|-----------------------------------------------------------------------------------------------------------|---------|------------------------------------------------------------|
+| query_limiter_estimate | scalar        | Plans one SQL statement without executing it and returns its estimated table-scan rows and unknown scans. | NULL    | [SELECT query_limiter_estimate('SELECT * FROM my_table');] |
 
 ### Overloaded Functions
 

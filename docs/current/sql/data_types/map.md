@@ -1,7 +1,6 @@
 ---
 layout: docu
 redirect_from:
-- /docs/preview/sql/data_types/map
 - /docs/sql/data_types/map
 - /docs/stable/sql/data_types/map
 title: Map Type

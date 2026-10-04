@@ -18,7 +18,7 @@ extension:
 
 repo:
   github: ahuarte47/duckdb-raster
-  ref: e6a1d39c2f5fff58e6a735aeccbc5a9815a786a3
+  ref: 396c75ab69f4b5903d9186546f90ecd48561737e
 
 docs:
   hello_world: |
@@ -381,10 +381,10 @@ docs:
     - `GEOMETRY_COLUMN`: The name of the column that contains the geometry of the tiles. This column will be used to determine the spatial location and the resolution of the tiles in the output raster file.
     - `DATABAND_COLUMNS`: A list with the names of the columns that contain the data of the bands. The order of the columns in the list will determine the order of the bands in the output raster file.
 
-extension_star_count: 57
-extension_star_count_pretty: 57
-extension_download_count: 825
-extension_download_count_pretty: 825
+extension_star_count: 59
+extension_star_count_pretty: 59
+extension_download_count: 1101
+extension_download_count_pretty: 1.1k
 image: '/images/community_extensions/social_preview/preview_community_extension_raster.png'
 layout: community_extension_doc
 ---

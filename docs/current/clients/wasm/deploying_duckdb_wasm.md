@@ -2,7 +2,6 @@
 layout: docu
 redirect_from:
 - /docs/clients/wasm/deploying_duckdb_wasm
-- /docs/preview/clients/wasm/deploying_duckdb_wasm
 - /docs/stable/clients/wasm/deploying_duckdb_wasm
 title: Deploy
 ---

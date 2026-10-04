@@ -20,7 +20,7 @@ extension:
 
 repo:
   github: axsaucedo/agent_data_duckdb
-  ref: ca2c0b85d1065aa58cea6211e6d1e982f340b3bf
+  ref: eee469d54330287d674e2189c8a9ef550653ee7a
 
 docs:
   hello_world: |
@@ -123,10 +123,10 @@ docs:
 
     For full documentation, see the [GitHub repository](https://github.com/axsaucedo/duckdb-claude-ext).
 
-extension_star_count: 25
-extension_star_count_pretty: 25
-extension_download_count: 992
-extension_download_count_pretty: 992
+extension_star_count: 27
+extension_star_count_pretty: 27
+extension_download_count: 926
+extension_download_count_pretty: 926
 image: '/images/community_extensions/social_preview/preview_community_extension_agent_data.png'
 layout: community_extension_doc
 ---
@@ -159,6 +159,7 @@ LOAD {{ page.extension.name }};
 | read_todos         | table         | Read todo and checklist items with status tracking                      | Claude: todos/*.json, Copilot: checkpoint markdown checklists   | [SELECT content, status FROM read_todos() WHERE status != 'completed';]  |
 | read_history       | table         | Read command and prompt history                                         | Claude: history.jsonl, Copilot: command-history-state.json      | [SELECT display FROM read_history() ORDER BY line_number DESC LIMIT 10;] |
 | read_stats         | table         | Read daily activity statistics (message, session, and tool call counts) | Currently Claude only — returns empty for Copilot               | [SELECT date, message_count FROM read_stats() ORDER BY date DESC;]       |
+| read_events        | table         | NULL                                                                    | NULL                                                            | NULL                                                                     |
 
 ### Overloaded Functions
 
