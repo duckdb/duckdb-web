@@ -125,7 +125,7 @@ title: Documentation
         <svg class="chevron"><use href="#chevron-right"></use></svg>
     </div>
     <div class="box-link third-width">
-        <a href="{% link install/index.html %}"></a>
+        <a href="{% link install/index.html %}?version=preview"></a>
         <span class="symbol"><svg class="icon"><use href="#download-01"></use></svg></span>
         <span>Installation</span>
         <svg class="chevron"><use href="#chevron-right"></use></svg>
