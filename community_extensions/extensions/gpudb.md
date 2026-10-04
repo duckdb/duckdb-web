@@ -23,7 +23,7 @@ extension:
 
 repo:
   github: singhpratech/duckdbgpumetaldbram
-  ref: b712f4b7624b83873ca9c221f70a4a9b5ce5f3f7  # the commit the v0.7.0 tag points at
+  ref: b712f4b7624b83873ca9c221f70a4a9b5ce5f3f7  # the commit the v0.7.0 tag points at; rebuilt unchanged for DuckDB 1.5.6 (stable C API, no source change)
 
 docs:
   hello_world: |
@@ -225,10 +225,10 @@ docs:
     * Whole-column min / max on a stored table stays a native win —
       DuckDB answers it from zonemap statistics without scanning.
 
-extension_star_count: 25
-extension_star_count_pretty: 25
-extension_download_count: 672
-extension_download_count_pretty: 672
+extension_star_count: 27
+extension_star_count_pretty: 27
+extension_download_count: 667
+extension_download_count_pretty: 667
 image: '/images/community_extensions/social_preview/preview_community_extension_gpudb.png'
 layout: community_extension_doc
 ---
