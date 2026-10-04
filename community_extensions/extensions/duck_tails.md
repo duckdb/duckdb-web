@@ -104,6 +104,7 @@ LOAD {{ page.extension.name }};
 
 |    function_name     | function_type |                                 description                                 | comment |                       examples                       |
 |----------------------|---------------|-----------------------------------------------------------------------------|---------|------------------------------------------------------|
+| diff_lines           | scalar        | NULL                                                                        | NULL    |                                                      |
 | diff_text            | scalar        | Compute unified diff between two text strings.                              | NULL    | [diff_text('old text', 'new text')]                  |
 | git_blame            | table         | Show line-by-line git blame annotations for a file.                         | NULL    | [SELECT * FROM git_blame('README.md')]               |
 | git_blame_each       | table         | NULL                                                                        | NULL    |                                                      |
