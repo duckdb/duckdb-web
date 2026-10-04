@@ -73,9 +73,9 @@ docs:
     v1.5.6 (v1.5.2/v1.5.3 support was dropped in v0.15.0 — see CHANGELOG.md).
     Full change history in this repo's CHANGELOG.md.
 
-extension_star_count: 2
-extension_star_count_pretty: 2
-extension_download_count: 1053
+extension_star_count: 3
+extension_star_count_pretty: 3
+extension_download_count: 1075
 extension_download_count_pretty: 1.1k
 image: '/images/community_extensions/social_preview/preview_community_extension_salesforce.png'
 layout: community_extension_doc
