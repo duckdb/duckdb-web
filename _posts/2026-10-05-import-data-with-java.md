@@ -22,7 +22,7 @@ Due to internal requirements, the analytical database had to run on the same ser
 
 To share my performance measurement results, I have prepared an anonymized dataset that roughly corresponds to the data used in our production environment. The size of this dataset has been scaled down significantly from the original to allow for faster experimentation.
 
-The dataset is available at this link: [vulnerability_sample.csv.zst](TODO: link on duckdb.org), it contains 485168 records with 24 fields. Two notable fields are the `VARCHAR` "description" and "references"which contain long strings with median lengths of 5,000 and 2,500 characters, respectively. Some records contain strings as large as 32,000 characters, making many operations on this dataset computationally expensive.
+The dataset is available within this link: [vulnerability_sample.csv.zst](https://github.com/duckdb/duckdb/issues/24935), it contains 485168 records with 24 fields. Two notable fields are the `VARCHAR` "description" and "references"which contain long strings with median lengths of 5,000 and 2,500 characters, respectively. Some records contain strings as large as 32,000 characters, making many operations on this dataset computationally expensive.
 
 Additionally, along with DuckLabs editors, I have prepared several code snippets to illustrate data import in Java. While these snippets are significantly simplified compared to the code we run, their performance characteristics more or less matched the real ones. The code snippets are available in this GitHub repository [staticlibs/duckdb_java_data_import](https://github.com/staticlibs/duckdb_java_data_import).
 
