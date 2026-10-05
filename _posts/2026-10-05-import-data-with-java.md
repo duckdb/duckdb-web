@@ -14,9 +14,9 @@ image: "/images/blog/thumbs/mongodb.png"
 
 At the company where I work, we store vulnerability data for our clients as a collection of documents in MongoDB. Initially, our analytics screen performed well, but as our data volume increased, response times began to slow. For many months we did a lot of query optimization, restructuring, index additions, and saw significant improvement. However, execution times for certain scenarios remained in the tens of seconds, for example, when returning counts of closed/open vulnerabilities or when getting the top 10 most vulnerable business units for last six months. The main issue was in our MS Excel export feature which was taking 2-3 minutes for 50,000 records, and performance was often inconsistent. So we needed to find an alternative.
 
-The plan was to import one year record into an alternative database and run analytical queries on it. The requirements were to run all the queries under one second or less and export 50,000 records in Excel format under ten seconds. Anything more than that would be handled in background.
+The plan was to import one year of records into an alternative database and run analytical queries on it. The requirements were to run all the queries in one second or less and export 50,000 records in Excel format under ten seconds. Anything more than that would be handled in background.
 
-Due to internal requirements, the analytical database had to run on the same server as MongoDB. It needed to be actively developed, free, open-source and capabale of working well with limited resources - and DuckDB checked all the boxes.
+Due to internal requirements, the analytical database had to run on the same server as MongoDB. It needed to be actively developed, free, open-source and capable of working well with limited resources - and DuckDB checked all the boxes.
 
 ## Sample Data Set and Code Snippets
 
@@ -42,7 +42,7 @@ I was quickly able to get it up and running and import the data into DuckDB. I r
 
 Sorting the data provided further query performance improvements, and using `SET storage_compatibility_version = 'latest'` resulted in a significant reduction in the database file size.
 
-Ultimately, the `mongo` community extension appears to be the easiest, most painless, and performant ways to set up a MongoDB-to-DuckDB pipeline.
+Ultimately, the `mongo` community extension appears to be the easiest, most painless, and most performant way to set up a MongoDB-to-DuckDB pipeline.
 
 However, we decided against using it due to the lack of "future-proof" guarantees associated with community extensions. DuckDB is a fast- moving project which is constantly improving, and we did not want to be held back from updating to new DuckDB version simply because an extension was not updated and can no longer be built.
 
@@ -111,14 +111,14 @@ The performance being 3.5x slower compared to the `mongo` extension is largely d
 
 ## Java Appender Interface
 
-The next attemp was to use the [Appender](https://duckdb.org/docs/current/clients/java/data_import#appender) interface, that is exposed in Java with the `Connection#createAppender` method. The worker for Appender can be structured very similar to the batch insert worker above:
+The next attempt was to use the [Appender](https://duckdb.org/docs/current/clients/java/data_import#appender) interface, that is exposed in Java with the `Connection#createAppender` method. The worker for Appender can be structured very similar to the batch insert worker above:
 
 ```java
 public class AppendWorker implements Runnable {
     Queue<LocalDate> queue; // concurrent queue distributed between worker threads
     MongoCollection<Document> collection; // Mongo query interface
     Connection connection; // DuckDB connection
-    DuckDBAppender appender; // Appender insatnce
+    DuckDBAppender appender; // Appender instance
 
     @Override
     public void run() {
@@ -233,6 +233,6 @@ To make the query over this function to run in parallel we need two bits:
  - `info.setMaxThreads(8)` in `globalInit`: tells DuckDB that function supports multiple concurrent `apply` calls
  - `SET preserve_insertion_order = FALSE`: tells DuckDB that it is not necessary to maintain the original order of records as they are read from the table function during insertion. If this flag is not set to FALSE, DuckDB will restrict apply calls to a single thread to preserve order. Since we perform sorting as a post-processing step after the import, preserving the insertion order is unnecessary.
 
-With this approach, the total execution time on the sample data was 1 minute and 27 seconds. While it does not achieve the `mongo` extension time (it is not an apples-to-apples comparison due to day-sized queries and post-procesing sorting) - it incurs the least overhead among all Java approaches I tried.
+With this approach, the total execution time on the sample data was 1 minute and 27 seconds. While it does not achieve the `mongo` extension time (it is not an apples-to-apples comparison due to day-sized queries and post-processing sorting) - it incurs the least overhead among all Java approaches I tried.
 
 On real data, due to storage space restrictions, I ended up with a non-parallel version of the table function, where `ORDER BY` was run in the same `CREATE TABLE` query without intermediate copies. It allowed me to achieve the import times on-par with the `mongo` extension. And as a result we got a robust ingestion pipeline written in pure Java that can be adapted for other data sources.
