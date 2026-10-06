@@ -23,8 +23,8 @@ repo:
   github: query-farm/fuzzycomplete
   ref: 97468339d6f834e74a8abd2ddb0ff8e74cb2cd9f
 
-extension_star_count: 30
-extension_star_count_pretty: 30
+extension_star_count: 31
+extension_star_count_pretty: 31
 extension_download_count: 2651
 extension_download_count_pretty: 2.7k
 image: '/images/community_extensions/social_preview/preview_community_extension_fuzzycomplete.png'
