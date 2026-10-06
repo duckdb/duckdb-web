@@ -24,7 +24,7 @@ To share my performance measurement results, I have prepared an anonymized datas
 
 The dataset is available within this link: [vulnerability_sample.csv.zst](https://github.com/duckdb/duckdb/issues/24935), it contains 485168 records with 24 fields. Two notable fields are the `VARCHAR` "description" and "references", which contain long strings with median lengths of 5,000 and 2,500 characters, respectively. Some records contain strings as large as 32,000 characters, making many operations on this dataset computationally expensive.
 
-Additionally, along with the Duck Labs team, I have prepared several code snippets to illustrate data import in Java. While these snippets are significantly simplified compared to the code we run, their performance characteristics more or less matched the real ones. The code snippets are available in this GitHub repository [staticlibs/duckdb_java_data_import](https://github.com/staticlibs/duckdb_java_data_import).
+Additionally, along with the DuckLabs team, I have prepared several code snippets to illustrate data import in Java. While these snippets are significantly simplified compared to the code we run, their performance characteristics more or less matched the real ones. The code snippets are available in this GitHub repository [staticlibs/duckdb_java_data_import](https://github.com/staticlibs/duckdb_java_data_import).
 
 ## MongoDB Community Extension
 
