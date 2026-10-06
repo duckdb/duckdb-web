@@ -70,7 +70,7 @@ redirect_from:
 
 	{% if upcoming_count > 0 %}
 	<section class="events-section events-upcoming">
-		<h2>Upcoming events</h2>
+		<h2>Upcoming Events</h2>
 		<div class="newstiles">
 			{% assign upcoming_events = site.events | sort: 'date' %}
 			{% for event in upcoming_events %}
@@ -85,7 +85,7 @@ redirect_from:
 
 	{% if past_count > 0 %}
 	<section class="events-section events-past">
-		<h2>Past events</h2>
+		<h2>Past Events</h2>
 		<div class="newstiles">
 			{% assign past_events = site.events | sort: 'date' | reverse %}
 			{% for event in past_events %}
