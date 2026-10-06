@@ -538,7 +538,7 @@ INSERT INTO exams VALUES (10, 'Physics', 1), (20, 'Chemistry', 2), (30, 'Literat
 PRAGMA enable_profiling = 'json';
 PRAGMA profiling_output = '/path/to/file.json';
 
-PRAGMA configure_profiling = '{"CPU_TIME": "false", "EXTRA_INFO": "true", "OPERATOR_CARDINALITY": "true", "OPERATOR_TIMING": "true"}';
+PRAGMA custom_profiling_settings = '{"CPU_TIME": "false", "EXTRA_INFO": "true", "OPERATOR_CARDINALITY": "true", "OPERATOR_TIMING": "true"}';
 
 SELECT name
 FROM students
