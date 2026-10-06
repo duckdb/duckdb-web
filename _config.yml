@@ -55,7 +55,6 @@ lts_duckdb_rust_version: "1.4.5"
 lts_duckdb_version: "1.4.5"
 lts_duckdb_wasm_version: "1.4.4"
 lts_short_duckdb_version: "1.4"
-duckdb_alpha_release: "db0ecec124/v2.0.0-alpha44357"
 # preview version information
 preview_duckdb_version: "2.0.0-dev"
 preview_short_duckdb_version: "2.0-dev"
