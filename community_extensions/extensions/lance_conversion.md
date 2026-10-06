@@ -8,7 +8,7 @@ excerpt: |
 extension:
   name: lance_conversion
   description: Stream any DuckDB query into Lance datasets with Blob v2 storage and scalar, vector, text, and Bloom filter indexes
-  version: 0.1.2
+  version: 0.1.3
   language: C++ & Rust
   build: cmake
   license: MIT
@@ -19,7 +19,7 @@ extension:
 
 repo:
   github: dentiny/duckdb_lance_conversion
-  ref: a4cb23dd4df9f00edcbf1687521a5860d41c802d
+  ref: a7f1227109d4f59911e3bd94598ba6cd44efff3c
 
 docs:
   hello_world: |
@@ -70,6 +70,14 @@ docs:
     COPY replacement TO 'events.lance' (FORMAT LANCE, OVERWRITE);
     ```
 
+    When row order need not be preserved, every DuckDB thread runs its own
+    Lance writer, and all writers commit as one dataset version. Use
+    `PRESERVE_ORDER false` for the fastest writes:
+
+    ```sql
+    COPY events TO 'events.lance' (FORMAT LANCE, PRESERVE_ORDER false);
+    ```
+
     `SAMPLE_PERCENT` and `SAMPLE_ROWS` write a random sample of the source
     rows instead of every row:
 
@@ -104,8 +112,8 @@ docs:
 
 extension_star_count: 0
 extension_star_count_pretty: 0
-extension_download_count: 786
-extension_download_count_pretty: 786
+extension_download_count: 781
+extension_download_count_pretty: 781
 image: '/images/community_extensions/social_preview/preview_community_extension_lance_conversion.png'
 layout: community_extension_doc
 ---
