@@ -8,7 +8,7 @@ excerpt: |
 extension:
   name: func_apply
   description: Dynamic function invocation - call any scalar function or macro by name at runtime
-  version: 0.3.2
+  version: 0.3.3
   language: C++
   build: cmake
   license: MIT
@@ -16,10 +16,13 @@ extension:
     - teaguesterling
 repo:
   github: teaguesterling/duckdb_func_apply
-  ref: ba9851692caa74e37db9088ad0fab2dff0e13c60
+  ref: 3ba0d303de29032a83290c3961838a1ae883642b
   # ref_next == ref (deliberate): validate the shipped release on DuckDB
   # v2.0-cyanoptera (carries the v2.0 compat fixes) instead of skipping it.
-  ref_next: ba9851692caa74e37db9088ad0fab2dff0e13c60
+  # v0.3.3 (tag v0.3.3) completes the family-C named_parameter -> FunctionSignature
+  # typed-kwargs port; verified by a real cyanoptera CI leg (build AND test on
+  # v2.0) on this exact commit, plus a version-drift guard.
+  ref_next: 3ba0d303de29032a83290c3961838a1ae883642b
   # andium (DuckDB v1.4.5 track) intentionally left at the pre-v0.2.0 commit:
   # v0.3.0, like v0.2.0 before it, is a DuckDB v1.5.4 tree and is not
   # build-verified against v1.4.5. The v0.2.0 security fix
@@ -122,8 +125,8 @@ docs:
 
 extension_star_count: 5
 extension_star_count_pretty: 5
-extension_download_count: 1363
-extension_download_count_pretty: 1.4k
+extension_download_count: 1460
+extension_download_count_pretty: 1.5k
 image: '/images/community_extensions/social_preview/preview_community_extension_func_apply.png'
 layout: community_extension_doc
 ---

@@ -4,7 +4,7 @@ Sitemap: https://duckdb.org/sitemap.xml
 
 User-agent: *
 {% for version in site.data.versions -%}
-{% if version.version != "current" and version.version != "lts" %}
+{% if version.version != "current" and version.version != "lts" and version.version != "preview" %}
 Disallow: /docs/{{ version.version }}
 {%- endif %}
 {%- endfor %}

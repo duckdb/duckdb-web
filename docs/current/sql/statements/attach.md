@@ -192,6 +192,7 @@ SELECT * FROM people.people;
 ```
 
 Both views are defined as `SELECT * FROM '⟨path⟩'`, so the data is read from the file each time a view is queried. Because the views wrap the file rather than a stored table, they are read-only. To change the data, write a new file.
+> The options above apply when attaching DuckDB and SQLite database files. Attaching a database managed by another system accepts additional type-specific options, such as `SECRET` and `SCHEMA`. See the relevant extension page for the full list: [PostgreSQL]({% link docs/current/core_extensions/postgres/overview.md %}), [MySQL]({% link docs/current/core_extensions/mysql.md %}), and [Iceberg REST Catalogs]({% link docs/current/core_extensions/iceberg/iceberg_rest_catalogs.md %}#attach-options).
 
 ## `DETACH`
 

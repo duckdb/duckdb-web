@@ -7,7 +7,7 @@ excerpt: |
 
 extension:
   name: anofox_tabular
-  version: 2026.09.26
+  version: 2026.10.04
   description: A duckdb extension which combines data quality and data preparation tools for tabular data.
   language: C++
   build: cmake
@@ -17,12 +17,12 @@ extension:
     - jrosskopf
 repo:
   github: DataZooDE/anofox-tabular
-  ref: 4ff962d8fec1838a8fb825a6d60a9f287bbf1185
+  ref: bf4ff3e1a9cb9023131d4a3e61886673b012c1cd
 
 extension_star_count: 19
 extension_star_count_pretty: 19
-extension_download_count: 821
-extension_download_count_pretty: 821
+extension_download_count: 933
+extension_download_count_pretty: 933
 image: '/images/community_extensions/social_preview/preview_community_extension_anofox_tabular.png'
 layout: community_extension_doc
 ---

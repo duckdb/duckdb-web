@@ -8,7 +8,7 @@ excerpt: |
 extension:
   name: stac
   description: DuckDB extension for reading data from SpatioTemporal Asset Catalogs (STAC) using SQL.
-  version: 0.2.2
+  version: 0.3.0
   language: C++
   build: cmake
   license: MIT
@@ -17,7 +17,7 @@ extension:
 
 repo:
   github: ahuarte47/duckdb-stac
-  ref: 3d03c58655ce9ccd810ee80f6674a606a5c63c03
+  ref: e7bd5a1ea81f4e9b0f3cc59ec8c3773febc4fc12
 
 docs:
   hello_world: |
@@ -136,8 +136,8 @@ docs:
 
 extension_star_count: 24
 extension_star_count_pretty: 24
-extension_download_count: 1003
-extension_download_count_pretty: 1.0k
+extension_download_count: 1106
+extension_download_count_pretty: 1.1k
 image: '/images/community_extensions/social_preview/preview_community_extension_stac.png'
 layout: community_extension_doc
 ---
@@ -163,12 +163,15 @@ LOAD {{ page.extension.name }};
 
 <div class="extension_functions_table"></div>
 
-| function_name | function_type | description | comment | examples  |
-|---------------|---------------|-------------|---------|-----------|
-| STAC_Read     | table         |             | NULL    | [
+|  function_name   | function_type | description | comment | examples  |
+|------------------|---------------|-------------|---------|-----------|
+| STAC_Collections | table         |             | NULL    | [
+		SELECT * FROM STAC_Collections('https://example.com/stac/catalog.json');
+	] |
+| STAC_Read        | table         |             | NULL    | [
 		SELECT * FROM STAC_Read('https://example.com/stac/collection.json');
 	] |
-| STAC_Search   | table         |             | NULL    | [
+| STAC_Search      | table         |             | NULL    | [
 		SELECT * FROM STAC_Search('https://example.com/stac/collection.json', collections:='my_collection', bbox:=[-180, -90, 180, 90], max_items:=10);
 	] |
 

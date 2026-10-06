@@ -89,7 +89,7 @@ SELECT printf('[%s]', array_to_string(
 ### Minor SQL Parser Changes
 
 * The term `AT` now needs quotes to be used as an identifier as it is used for [time travel in Iceberg](https://github.com/duckdb/duckdb-iceberg/pull/225).
-* `LAMBDA` is now a reserved keyword due to the change in lambda syntax.
+* `lambda` is now a reserved keyword due to the change in lambda syntax.
 * `GRANT` is no longer a reserved keyword.
 
 ## New Features

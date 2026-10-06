@@ -8,7 +8,7 @@ excerpt: |
 extension:
   name: finance
   description: SQL-native quant finance functions for DuckDB
-  version: 0.2.20
+  version: 0.2.22
   language: C++
   build: cmake
   license: MIT
@@ -17,7 +17,7 @@ extension:
     - leonardovida
 repo:
   github: leonardovida/duckdb-finance
-  ref: fd8b5531301879f3324ed47350887b8671a28905
+  ref: 0aaf8a0ef5bd68cebb441e6825ce241417b6cd77
 docs:
   hello_world: |
     INSTALL finance FROM community;
@@ -35,8 +35,8 @@ docs:
 
 extension_star_count: 8
 extension_star_count_pretty: 8
-extension_download_count: 955
-extension_download_count_pretty: 955
+extension_download_count: 1034
+extension_download_count_pretty: 1.0k
 image: '/images/community_extensions/social_preview/preview_community_extension_finance.png'
 layout: community_extension_doc
 ---
@@ -173,7 +173,7 @@ LOAD {{ page.extension.name }};
 | fin_dv01                           | scalar        | NULL        | NULL    |          |
 | fin_dx                             | macro         | NULL        | NULL    |          |
 | fin_efficient_frontier             | table         | NULL        | NULL    |          |
-| fin_ema                            | macro         | NULL        | NULL    |          |
+| fin_ema                            | aggregate     | NULL        | NULL    |          |
 | fin_ema_halflife                   | macro         | NULL        | NULL    |          |
 | fin_entropy                        | macro         | NULL        | NULL    |          |
 | fin_equal_weights                  | scalar        | NULL        | NULL    |          |
@@ -449,6 +449,7 @@ LOAD {{ page.extension.name }};
 | fin_ztest_mean                     | macro         | NULL        | NULL    |          |
 | finance_cvar_internal              | aggregate     | NULL        | NULL    |          |
 | finance_trimmed_mean_internal      | aggregate     | NULL        | NULL    |          |
+| finance_vector_multiply_internal   | scalar        | NULL        | NULL    |          |
 | finance_weighted_mean_internal     | aggregate     | NULL        | NULL    |          |
 | finance_weighted_quantile_internal | aggregate     | NULL        | NULL    |          |
 | finance_weighted_var_internal      | aggregate     | NULL        | NULL    |          |
