@@ -60,6 +60,7 @@ duckdb_alpha_release: "db0ecec124/v2.0.0-alpha44357"
 preview_duckdb_version: "2.0.0-dev"
 preview_short_duckdb_version: "2.0-dev"
 preview_duckdb_java_version: "2.0.0-alpha43678-891"
+preview_duckdb_odbc_version: "8957914a"
 # more Jekyll config
 livereload: true
 highlighter: rouge
