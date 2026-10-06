@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Faster String Aggregations with Dimension Tables"
-author: "DuckDB Team"
+author: "DuckDB team"
 thumb: "/images/blog/thumbs/dimension-table.svg"
 image: "/images/blog/thumbs/dimension-table.png"
 excerpt: "When a query groups on long, repeated strings, move the strings into a small dimension table with sorted, narrow integer keys. Aggregate on the keys, then join the strings back in at the very end. The query works as before, though on small fixed-width integers instead of variable-length text."
