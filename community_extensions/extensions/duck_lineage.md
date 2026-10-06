@@ -149,15 +149,19 @@ This extension does not add any types.
 
 <div class="extension_settings_table"></div>
 
-|                 name                  |                               description                                | input_type | scope  | aliases |
-|---------------------------------------|--------------------------------------------------------------------------|------------|--------|---------|
-| duck_lineage_api_key                  | API Key for OpenLineage backend                                          | VARCHAR    | GLOBAL | []      |
-| duck_lineage_debug                    | Enable debug logging for OpenLineage events                              | BOOLEAN    | GLOBAL | []      |
-| duck_lineage_exclude_dataset_prefixes | Comma-separated prefixes of dataset names to exclude from lineage events | VARCHAR    | GLOBAL | []      |
-| duck_lineage_max_queue_size           | Maximum number of events to queue before dropping                        | BIGINT     | GLOBAL | []      |
-| duck_lineage_max_retries              | Maximum retry attempts for failed HTTP requests                          | BIGINT     | GLOBAL | []      |
-| duck_lineage_namespace                | Namespace for OpenLineage events                                         | VARCHAR    | GLOBAL | []      |
-| duck_lineage_timeout                  | HTTP request timeout in seconds                                          | BIGINT     | GLOBAL | []      |
-| duck_lineage_url                      | URL of the OpenLineage backend                                           | VARCHAR    | GLOBAL | []      |
+|                 name                  |                                                                       description                                                                        | input_type | scope  | aliases |
+|---------------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------|------------|--------|---------|
+| duck_lineage_api_key                  | API Key for OpenLineage backend                                                                                                                          | VARCHAR    | GLOBAL | []      |
+| duck_lineage_ca_cert_dir              | Path to a directory of CA certificates used to verify the OpenLineage backend's TLS certificate                                                          | VARCHAR    | GLOBAL | []      |
+| duck_lineage_ca_cert_file             | Path to a CA certificate bundle used to verify the OpenLineage backend's TLS certificate (falls back to the global ca_cert_file setting and CA env vars) | VARCHAR    | GLOBAL | []      |
+| duck_lineage_debug                    | Enable debug logging for OpenLineage events                                                                                                              | BOOLEAN    | GLOBAL | []      |
+| duck_lineage_exclude_dataset_prefixes | Comma-separated prefixes of dataset names to exclude from lineage events                                                                                 | VARCHAR    | GLOBAL | []      |
+| duck_lineage_max_queue_size           | Maximum number of events to queue before dropping                                                                                                        | BIGINT     | GLOBAL | []      |
+| duck_lineage_max_retries              | Maximum retry attempts for failed HTTP requests                                                                                                          | BIGINT     | GLOBAL | []      |
+| duck_lineage_namespace                | Namespace for OpenLineage events                                                                                                                         | VARCHAR    | GLOBAL | []      |
+| duck_lineage_proxy                    | Proxy URL to route OpenLineage requests through (empty honors proxy env vars)                                                                            | VARCHAR    | GLOBAL | []      |
+| duck_lineage_ssl_verify               | Verify the OpenLineage backend's TLS certificate (disable only for development/testing)                                                                  | BOOLEAN    | GLOBAL | []      |
+| duck_lineage_timeout                  | HTTP request timeout in seconds                                                                                                                          | BIGINT     | GLOBAL | []      |
+| duck_lineage_url                      | URL of the OpenLineage backend                                                                                                                           | VARCHAR    | GLOBAL | []      |
 
 
