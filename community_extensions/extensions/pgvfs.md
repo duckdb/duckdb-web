@@ -77,8 +77,8 @@ docs:
     [how it works](https://pgvfs.adonm.dev/how-it-works.html) and
     [performance](https://pgvfs.adonm.dev/performance.html).
 
-extension_star_count: 2
-extension_star_count_pretty: 2
+extension_star_count: 3
+extension_star_count_pretty: 3
 extension_download_count: 209
 extension_download_count_pretty: 209
 image: '/images/community_extensions/social_preview/preview_community_extension_pgvfs.png'
