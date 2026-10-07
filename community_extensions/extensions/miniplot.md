@@ -74,8 +74,8 @@ docs:
 
 extension_star_count: 25
 extension_star_count_pretty: 25
-extension_download_count: 1210
-extension_download_count_pretty: 1.2k
+extension_download_count: 1095
+extension_download_count_pretty: 1.1k
 image: '/images/community_extensions/social_preview/preview_community_extension_miniplot.png'
 layout: community_extension_doc
 ---
@@ -104,12 +104,17 @@ LOAD {{ page.extension.name }};
 |      function_name       | function_type | description | comment | examples |
 |--------------------------|---------------|-------------|---------|----------|
 | area_chart               | scalar        | NULL        | NULL    |          |
+| area_chart_html          | scalar        | NULL        | NULL    |          |
 | bar_chart                | scalar        | NULL        | NULL    |          |
+| bar_chart_html           | scalar        | NULL        | NULL    |          |
 | line_chart               | scalar        | NULL        | NULL    |          |
+| line_chart_html          | scalar        | NULL        | NULL    |          |
 | miniplot                 | scalar        | NULL        | NULL    |          |
 | miniplot_openssl_version | scalar        | NULL        | NULL    |          |
 | scatter_3d_chart         | scalar        | NULL        | NULL    |          |
+| scatter_3d_chart_html    | scalar        | NULL        | NULL    |          |
 | scatter_chart            | scalar        | NULL        | NULL    |          |
+| scatter_chart_html       | scalar        | NULL        | NULL    |          |
 
 ### Overloaded Functions
 

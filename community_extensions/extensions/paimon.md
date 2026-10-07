@@ -74,8 +74,8 @@ docs:
 
 extension_star_count: 48
 extension_star_count_pretty: 48
-extension_download_count: 5513
-extension_download_count_pretty: 5.5k
+extension_download_count: 5703
+extension_download_count_pretty: 5.7k
 image: '/images/community_extensions/social_preview/preview_community_extension_paimon.png'
 layout: community_extension_doc
 ---

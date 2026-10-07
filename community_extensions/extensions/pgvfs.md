@@ -79,8 +79,8 @@ docs:
 
 extension_star_count: 2
 extension_star_count_pretty: 2
-extension_download_count: 167
-extension_download_count_pretty: 167
+extension_download_count: 209
+extension_download_count_pretty: 209
 image: '/images/community_extensions/social_preview/preview_community_extension_pgvfs.png'
 layout: community_extension_doc
 ---

@@ -49,8 +49,8 @@ docs:
 
 extension_star_count: 1
 extension_star_count_pretty: 1
-extension_download_count: 983
-extension_download_count_pretty: 983
+extension_download_count: 988
+extension_download_count_pretty: 988
 image: '/images/community_extensions/social_preview/preview_community_extension_s2raster.png'
 layout: community_extension_doc
 ---
