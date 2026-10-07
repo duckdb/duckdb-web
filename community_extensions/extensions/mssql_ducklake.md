@@ -46,8 +46,8 @@ docs:
 
     Experimental. The catalog is shaped for SQL Server on creation (primary keys, UTF-8 binary collation, indexes, forced parameterization), commits go to the server as T-SQL, and the 1000-table benchmark runs at 1.5x of the PostgreSQL backend's time with commits at parity; what is not there yet is on the limitations page.
 
-extension_star_count: 11
-extension_star_count_pretty: 11
+extension_star_count: 12
+extension_star_count_pretty: 12
 extension_download_count: 979
 extension_download_count_pretty: 979
 image: '/images/community_extensions/social_preview/preview_community_extension_mssql_ducklake.png'
