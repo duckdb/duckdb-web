@@ -21,7 +21,7 @@ extension:
 repo:
   andium: 84794a00a6837c31f0779c56f2ce0e83df1bb7b6
   github: query-farm/adbc_scanner
-  ref: 3485fb0893b624e57d572aa27e37857749a75d6a
+  ref: 03b5b7fd29200029d25e63d181d0995dbafc6b07
 
 extension_star_count: 25
 extension_star_count_pretty: 25
@@ -52,24 +52,19 @@ LOAD {{ page.extension.name }};
 
 <div class="extension_functions_table"></div>
 
-|    function_name    | function_type | description | comment | examples |
-|---------------------|---------------|-------------|---------|----------|
-| adbc_clear_cache    | table         | NULL        | NULL    | NULL     |
-| adbc_columns        | table         | NULL        | NULL    | NULL     |
-| adbc_commit         | table         | NULL        | NULL    | NULL     |
-| adbc_connect        | scalar        | NULL        | NULL    | NULL     |
-| adbc_disconnect     | table         | NULL        | NULL    | NULL     |
-| adbc_execute        | table         | NULL        | NULL    | NULL     |
-| adbc_info           | table         | NULL        | NULL    | NULL     |
-| adbc_insert         | table         | NULL        | NULL    | NULL     |
-| adbc_profiles       | table         | NULL        | NULL    | NULL     |
-| adbc_rollback       | table         | NULL        | NULL    | NULL     |
-| adbc_scan           | table         | NULL        | NULL    | NULL     |
-| adbc_scan_table     | table         | NULL        | NULL    | NULL     |
-| adbc_schema         | table         | NULL        | NULL    | NULL     |
-| adbc_set_autocommit | table         | NULL        | NULL    | NULL     |
-| adbc_table_types    | table         | NULL        | NULL    | NULL     |
-| adbc_tables         | table         | NULL        | NULL    | NULL     |
+|  function_name   | function_type | description | comment | examples |
+|------------------|---------------|-------------|---------|----------|
+| adbc_clear_cache | table         | NULL        | NULL    | NULL     |
+| adbc_columns     | table         | NULL        | NULL    | NULL     |
+| adbc_execute     | table         | NULL        | NULL    | NULL     |
+| adbc_info        | table         | NULL        | NULL    | NULL     |
+| adbc_insert      | table         | NULL        | NULL    | NULL     |
+| adbc_profiles    | table         | NULL        | NULL    | NULL     |
+| adbc_scan        | table         | NULL        | NULL    | NULL     |
+| adbc_scan_table  | table         | NULL        | NULL    | NULL     |
+| adbc_schema      | table         | NULL        | NULL    | NULL     |
+| adbc_table_types | table         | NULL        | NULL    | NULL     |
+| adbc_tables      | table         | NULL        | NULL    | NULL     |
 
 ### Overloaded Functions
 
