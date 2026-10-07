@@ -2,8 +2,8 @@
 layout: post
 title: "A DuckDB Database with No Data in It"
 author: "The DuckDB team"
-thumb: "/images/blog/thumbs/duckdb-views-only.svg"
-image: "/images/blog/thumbs/duckdb-views-only.png"
+thumb: "/images/blog/thumbs/no-data.svg"
+image: "/images/blog/thumbs/no-data.png"
 excerpt: "A DuckDB database file does not have to hold any data. It can store nothing but view definitions that point at Parquet files on object storage, so a few hundred kilobytes behave like a shared catalog over a whole data lake. This post shows how to build one, host it, and attach it read-only."
 tags: ["using DuckDB"]
 ---
