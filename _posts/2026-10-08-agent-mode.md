@@ -8,6 +8,20 @@ excerpt: "The DuckDB v2.0 CLI has an agent mode that gets AI coding agents to a 
 tags: ["using DuckDB"]
 ---
 
+## Let's Ask Claude
+
+We asked Claude to measure the effect of agent mode. In the experiment, Claude Code answered the 22 TPC-H questions on a scale factor 100 dataset. The questions were phrased in plain English, without any SQL. Each question was answered three times with agent mode and three times with `-no-agent`. All 132 runs produced the correct answer. With agent mode, the DuckDB output the model read went from 123.6k to 50.8k tokens, a 59% reduction. Claude summarized the result as follows:
+
+> Quote “Agent mode fixes the things about a terminal shell that quietly mislead a model. When I answered the 22 TPC-H questions through the DuckDB CLI, agent mode cut the tokens I read back by 60 percent, and every answer was still right.”
+>
+> -- Claude Fable 5.1
+
+The savings did not show up in the total cost or runtime. Each turn re-reads the agent’s system prompt, which is much larger than the query output, so the saved tokens amount to about 0.5% of the total input. The agent mode runs also took slightly more turns (237 vs. 224). Claude wrote up the setup, the full results and a follow-up experiment in a [report](https://github.com/hannes/agent-mode-experiment/blob/main/REPORT.md).
+
+
+## Background
+
+
 The DuckDB CLI was built for a person sitting at a terminal. Its default renderer pads columns so they line up, draws borders around the result and prints the column types under the names:
 
 ```text
@@ -214,16 +228,6 @@ To see what the agent sees, run a query through a pipe with the flag set:
 ```bash
 duckdb -agent -c "SUMMARIZE FROM 'my_data.parquet'" | cat
 ```
-
-## How Well Does It Work?
-
-We asked Claude to measure the effect of agent mode. In the experiment, Claude Code answered the 22 TPC-H questions on a scale factor 100 dataset. The questions were phrased in plain English, without any SQL. Each question was answered three times with agent mode and three times with `-no-agent`. All 132 runs produced the correct answer. With agent mode, the DuckDB output the model read went from 123.6k to 50.8k tokens, a 59% reduction. Claude summarized the result as follows:
-
-> Quote “Agent mode fixes the things about a terminal shell that quietly mislead a model. When I answered the 22 TPC-H questions through the DuckDB CLI, agent mode cut the tokens I read back by 60 percent, and every answer was still right.”
->
-> -- Claude Fable 5.1
-
-The savings did not show up in the total cost or runtime. Each turn re-reads the agent’s system prompt, which is much larger than the query output, so the saved tokens amount to about 0.5% of the total input. The agent mode runs also took slightly more turns (237 vs. 224). Claude wrote up the setup, the full results and a follow-up experiment in a [report](https://github.com/hannes/agent-mode-experiment/blob/main/REPORT.md).
 
 ## Conclusion
 
