@@ -280,6 +280,9 @@ The table below shows the available mathematical functions.
 | **Example** | `factorial(4)` |
 | **Result** | `24` |
 
+> Note
+> In DuckDB v2.0, the `!` operator binds more tightly than in earlier versions. For example, `SELECT 2 * 3!;` now returns `12` (`2 * (3!)`), while in v1.5 it returned `720` (`(2 * 3)!`). Use parentheses to get the old behavior, e.g., `SELECT (2 * 3)!;`.
+
 #### `fdiv(x, y)`
 
 <div class="nostroke_table"></div>
