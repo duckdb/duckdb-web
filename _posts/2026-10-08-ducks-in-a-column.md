@@ -6,7 +6,7 @@ authors:
 thumb: "/images/blog/thumbs/ducks-column.svg"
 image: "/images/blog/thumbs/ducks-column.png"
 excerpt: "DuckDB is fast because it keeps its ducks in a column. In this post, we walk through DuckDB features that lean on columnar execution: reading files in place, column-level SQL, aggregation shortcuts, window functions, ASOF joins and writing well-organized Parquet. Each one rewards you for touching only the columns you need."
-tags: ["using DuckDB"]
+tag: using-duckdb
 ---
 
 ## Why Columns?
