@@ -2,11 +2,12 @@
 layout: post
 title: "DuckDB Tricks – Part 1"
 tested: true
-author: "Gábor Szárnyas"
+authors:
+  - Gábor Szárnyas
 thumb: "/images/blog/thumbs/duckdb-tricks.svg"
 image: "/images/blog/thumbs/duckdb-tricks.png"
 excerpt: "We use a simple example data set to present a few tricks that are useful when using DuckDB."
-tags: ["using DuckDB"]
+tag: using-duckdb
 ---
 
 In this blog post, we present five simple DuckDB operations that we found particularly useful for interactive use cases.

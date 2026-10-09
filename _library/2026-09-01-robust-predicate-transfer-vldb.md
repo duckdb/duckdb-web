@@ -1,12 +1,14 @@
 ---
 layout: post
 title: "Robust Predicate Transfer with Dynamic Execution"
-author: "Yiming Qiao, Peter Boncz, Huanchen Zhang"
-tags: ["Paper"]
-thirdparty: true
+authors:
+  - Yiming Qiao
+  - Peter Boncz
+  - Huanchen Zhang
+tag: paper
 category: community
 excerpt: ""
-pill: "VLDB 2026"
+venue: "VLDB 2026"
 ---
 
 | | |

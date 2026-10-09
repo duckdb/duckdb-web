@@ -1,14 +1,14 @@
 ---
 layout: post
 title: "DuckDB in Action"
-author: "Mark Needham, Michael Hunger, Michael Simons"
-thumb: "/images/library/thumbs/duckdb-in-action.svg"
-image: "/images/library/thumbs/duckdb-in-action.png"
-tags: ["Book"]
+authors:
+  - Mark Needham
+  - Michael Hunger
+  - Michael Simons
+tag: book
 category: community
-highlighted: true
 excerpt: ""
-pill: "DuckDB in Action"
+venue: "DuckDB in Action"
 ---
 
 <div class="graphics-box">

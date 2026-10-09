@@ -1,11 +1,12 @@
 ---
 layout: post
 title: "DuckDB 1.5.3: Not an Ordinary Patch Release"
-author: "The DuckDB team"
+authors:
+  - The DuckDB team
 thumb: "/images/blog/thumbs/duckdb-release-1-5-3.svg"
 image: "/images/blog/thumbs/duckdb-release-1-5-3.png"
 excerpt: "We are releasing DuckDB version v1.5.3. While updates in DuckDB itself are limited bugfixes, the upgraded extensions shipped with v1.5.3 bring a ton of new features. These include the Quack client-server protocol, which is now available as a core extension, support for Quack in DuckLake, and several new features for Iceberg, AWS and HTTPS."
-tags: ["release"]
+tag: release
 ---
 
 In this blog post, we highlight a few important features shipped in DuckDB v1.5.3, the third patch release in [DuckDB's v1.5 line]({% post_url 2026-03-09-announcing-duckdb-150 %}).

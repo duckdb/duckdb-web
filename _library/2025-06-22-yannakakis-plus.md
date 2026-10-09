@@ -1,13 +1,17 @@
 ---
 layout: post
 title: "Yannakakis+: Practical Acyclic Query Evaluation with Theoretical Guarantees"
-author: "Qichen Wang, Bingnan Chen, Binyang Dai, Ke Yi, Feifei Li, Liang Lin"
-thumb: "/images/library/thumbs/sigmod.svg"
-image: "/images/library/thumbs/sigmod.jpg"
-tags: ["Paper"]
+authors:
+  - Qichen Wang
+  - Bingnan Chen
+  - Binyang Dai
+  - Ke Yi
+  - Feifei Li
+  - Liang Lin
+tag: paper
 category: community
 excerpt: ""
-pill: "SIGMOD 2025"
+venue: "SIGMOD 2025"
 ---
 
 |-------|-------|

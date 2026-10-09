@@ -1,0 +1,78 @@
+# Filter buttons and headings for the post overview pages, plus display labels for the `tag` front matter value.
+# `value` is the class a card carries; `label` is the button text; `heading` replaces the page title when the filter is active.
+
+blog:
+  filters:
+    - value: using-duckdb
+      label: Using DuckDB
+      heading: Using DuckDB
+    - value: benchmark
+      label: Benchmarks
+      heading: Benchmarks
+    - value: deep-dive
+      label: Deep dive
+      heading: Deep Dives
+    - value: extensions
+      label: Extensions
+      heading: Extensions
+    - value: release
+      label: Releases
+      heading: Releases
+
+library:
+  core_toggle: Core only
+  filters:
+    - value: article
+      label: Article
+      heading: Articles
+    - value: book
+      label: Book
+      heading: Books
+    - value: paper
+      label: Paper
+      heading: Papers
+    - value: podcast
+      label: Podcast
+      heading: Podcasts
+    - value: talk
+      label: Talk
+      heading: Talks
+    - value: everywhere
+      label: Everywhere
+      heading: Everywhere
+
+events:
+  filters:
+    - value: official
+      label: Official
+      heading: Official Events
+    - value: community
+      label: Community
+      heading: Community Events
+    - value: talk
+      label: Talk
+      heading: Talks
+    - value: sponsored
+      label: Sponsored
+      heading: Sponsored Events
+
+tag_labels:
+  using-duckdb: Using DuckDB
+  benchmark: Benchmark
+  deep-dive: Deep Dive
+  extensions: Extensions
+  release: Release
+  duckcon: DuckCon
+  article: Article
+  book: Book
+  paper: Paper
+  podcast: Podcast
+  talk: Talk
+  meetup: Meetup
+  conference: Conference
+  workshop: Workshop
+  everywhere: Everywhere
+  pcs: PCs
+  servers: Servers
+  phones: Phones
+  other: Other

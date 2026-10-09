@@ -63,3 +63,13 @@ title: DBeaver SQL IDE
     * Note: If you are in a corporate environment or behind a firewall, before clicking download, click the “Download Configuration” link to configure your proxy settings.
 
     <img src="/images/guides/DBeaver_download_driver_files_from_driver_settings.png" alt="DBeaver Download Driver Files 2" title="DBeaver Download Driver Files 2" />
+
+## Manual Driver Installation
+
+If DBeaver cannot download the driver itself, for example when it runs without write access to its own directories or without internet access, you can download the JDBC driver manually and point DBeaver at the local file:
+
+1. Open the [`org.duckdb:duckdb_jdbc` artifact on Maven Central](https://central.sonatype.com/artifact/org.duckdb/duckdb_jdbc/versions) and download the `.jar` file for the version you want.
+2. In DBeaver, go to Database > Driver Manager, select DuckDB, and click “Edit”.
+3. On the “Libraries” tab, click “Add File” and select the `.jar` file you downloaded. Remove any other entries in the list, or move the downloaded file to the top.
+4. Click “Find Class” and confirm that `org.duckdb.DuckDBDriver` is detected, then click “OK”.
+5. Return to the main DBeaver window and continue with step 7 above.

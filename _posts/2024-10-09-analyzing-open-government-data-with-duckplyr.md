@@ -1,11 +1,12 @@
 ---
 layout: post
 title: "Analyzing Open Government Data with duckplyr"
-author: "Hannes Mühleisen"
+authors:
+  - Hannes Mühleisen
 thumb: "/images/blog/thumbs/duckplyr.svg"
 image: "/images/blog/thumbs/duckplyr.png"
 excerpt: "We use the duckplyr R library to clean and analyze an Open Data set published by the government of New Zealand."
-tags: ["using DuckDB"]
+tag: using-duckdb
 ---
 
 > For the duckplyr documentation, visit [`duckplyr.tidyverse.org`](https://duckplyr.tidyverse.org/).

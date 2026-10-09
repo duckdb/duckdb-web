@@ -1,14 +1,15 @@
 ---
 layout: post
 title: "In-Process Analytical Data Management with DuckDB"
-author: Hannes Mühleisen
-thumb: "/images/library/thumbs/2023-09-14-in-process-analytical-data-management-with-duckdb.jpg"
-image: "/images/library/thumbs/2023-09-14-in-process-analytical-data-management-with-duckdb.jpg"
-tags: ["Talk"]
+authors:
+  - Hannes Mühleisen
+thumb: "/images/library/thumbs/2023-09-14-in-process-analytical-data-management-with-duckdb.png"
+image: "/images/library/thumbs/2023-09-14-in-process-analytical-data-management-with-duckdb.png"
+tag: talk
+category: core
 length: "20 min"
-thirdparty: false
 excerpt: ""
-pill: "PyData 2023"
+venue: "PyData 2023"
 redirect_from:
 - /media/in-process-analytical-data-management-with-duckdb
 ---

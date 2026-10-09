@@ -1,11 +1,12 @@
 ---
 layout: post
 title: "Announcing DuckDB 1.4.3 LTS"
-author: "The DuckDB team"
+authors:
+  - The DuckDB team
 thumb: "/images/blog/thumbs/duckdb-release-1-4-3-lts.svg"
 image: "/images/blog/thumbs/duckdb-release-1-4-3-lts.png"
 excerpt: "Today we are releasing DuckDB 1.4.3. Along with bugfixes, we are shipping native extensions and Python support for Windows Arm64."
-tags: ["release"]
+tag: release
 ---
 
 In this blog post, we highlight a few important fixes in DuckDB v1.4.3, the third patch release in [DuckDB's 1.4 LTS line]({% post_url 2025-09-16-announcing-duckdb-140 %}).

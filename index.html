@@ -382,9 +382,7 @@ To add a banner, set banner: true in the front matter and define the banner cont
 		</div>
 		<div class="newstileswrap">
 			{% for post in site.posts limit:3 %}
-				{% assign random_number = forloop.index | modulo: 3 | plus: 1 %}
-				{% capture placeholder_thumb %}/images/blog/thumbs/placeholder-{{ random_number }}.svg{% endcapture %}
-				{% include post_card.html item=post default_thumb=placeholder_thumb %}
+				{% include card.html item=post %}
 			{% endfor %}
 		</div>
 	</div>

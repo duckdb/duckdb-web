@@ -1,13 +1,13 @@
 ---
 layout: post
 title: "DuckDB + dbt: The Death of the Data Pipeline"
-author: "Sylvain Utard"
-tags: ["Talk"]
+authors:
+  - Sylvain Utard
+tag: talk
 length: "11 min"
 category: community
 excerpt: ""
-pill: "DuckDB Paris Meetup"
-thirdparty: true
+venue: "DuckDB Paris Meetup"
 ---
 
 <div class="video-container">

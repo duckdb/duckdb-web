@@ -1,13 +1,14 @@
 ---
 layout: post
 title: "Nobody Knows What OLTP Is: DuckDB Moves to the Middle"
-author: "Hannes Mühleisen"
+authors:
+  - Hannes Mühleisen
 thumb: "/images/events/thumbs/rows-and-columns-summit.svg"
 image: "/images/events/thumbs/rows-and-columns-summit.png"
 excerpt: ""
-tags: ["talk"]
-labels: [community, talk]
-venue: "Contemporary Jewish Museum, San Francisco"
+tag: talk
+category: community
+location: "Contemporary Jewish Museum, San Francisco"
 ---
 
 Hannes Mühleisen, co-creator of DuckDB, will give a talk at the [Rows & Columns Summit](https://rowsandcolumnssummit.com/), a practitioner-focused, single-track conference exploring the architecture question that won't go away: OLTP and OLAP, together or apart? The talk is scheduled for 1:30 PM on September 22, 2026.

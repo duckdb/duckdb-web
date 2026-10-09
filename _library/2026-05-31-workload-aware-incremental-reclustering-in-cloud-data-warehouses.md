@@ -1,13 +1,15 @@
 ---
 layout: post
 title: "Workload-Aware Incremental Reclustering in Cloud Data Warehouses"
-author: "Yipeng Liu, Renfei Zhou, Jiaqi Yan, Huanchen Zhang"
-thumb: "/images/library/thumbs/sigmod.svg"
-image: "/images/library/thumbs/sigmod.jpg"
-tags: ["Paper"]
+authors:
+  - Yipeng Liu
+  - Renfei Zhou
+  - Jiaqi Yan
+  - Huanchen Zhang
+tag: paper
 category: community
 excerpt: ""
-pill: "SIGMOD 2026"
+venue: "SIGMOD 2026"
 ---
 
 | | |

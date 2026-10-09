@@ -1,13 +1,19 @@
 ---
 layout: post
 title: "Flexible I/O for Database Management Systems with xNVMe"
-author: "Emil Houlborg, Andreas Nicolaj Tietgen, Simon A. F. Lund, Marcel Weisgut, Tilmann Rabl, Javier González, Vivek Shah, Pınar Tözün"
-thumb: "/images/library/thumbs/cidr.svg"
-image: "/images/library/thumbs/cidr.png"
-tags: ["Paper"]
+authors:
+  - Emil Houlborg
+  - Andreas Nicolaj Tietgen
+  - Simon A. F. Lund
+  - Marcel Weisgut
+  - Tilmann Rabl
+  - Javier González
+  - Vivek Shah
+  - Pınar Tözün
+tag: paper
 category: community
 excerpt: ""
-pill: "CIDR 2026"
+venue: "CIDR 2026"
 ---
 
 |-------|-------|

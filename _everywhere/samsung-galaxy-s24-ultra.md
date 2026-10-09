@@ -2,12 +2,13 @@
 layout: post
 title: "Samsung Galaxy S24 Ultra"
 date: 2024-12-06
-author: "Gábor Szárnyas"
-thumb: "/images/everywhere/thumbs/samsung-galaxy-s24-ultra.jpg"
-image: "/images/everywhere/thumbs/samsung-galaxy-s24-ultra.jpg"
+authors:
+  - Gábor Szárnyas
+thumb: "/images/everywhere/thumbs/samsung-galaxy-s24-ultra.png"
+image: "/images/everywhere/thumbs/samsung-galaxy-s24-ultra.png"
 excerpt: ""
-tags: ["Phones"]
-thirdparty: false
+tag: phones
+category: core
 ---
 
 The Samsung Galaxy S24 Ultra runs TPC-H SF100 without breaking a sweat.

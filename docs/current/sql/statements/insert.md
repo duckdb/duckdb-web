@@ -336,13 +336,15 @@ INSERT INTO tbl
 |--:|---:|-----:|
 | 1 | 20 | 4500 |
 
-When a conflict target is provided, you can further filter this with a `WHERE` clause, that should be met by all conflicts.
+The `DO UPDATE SET` action may be further restricted with a `WHERE` clause, which is checked for each conflicting row. Conflicting rows that do not meet the condition are left unchanged. This `WHERE` clause is part of the `DO UPDATE SET` action and must appear after it, as shown below.
 
 ```sql
 INSERT INTO tbl
     VALUES (1, 40, 700)
     ON CONFLICT (i) DO UPDATE SET k = 2 * EXCLUDED.k WHERE k < 100;
 ```
+
+> Warning DuckDB does not support PostgreSQL's partial-index predicate on the conflict target, i.e., a `WHERE` clause placed directly after the conflict target as in `ON CONFLICT (i) WHERE ... DO UPDATE SET ...`. Attempting this returns a `Binder Error`.
 
 ## `RETURNING` Clause
 

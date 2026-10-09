@@ -1,12 +1,13 @@
 ---
 layout: post
 title: "Embedding OLAP, Everywhere: Lessons from Okta"
-author: Jake Thomas
-tags: ["Talk"]
+authors:
+  - Jake Thomas
+tag: talk
+category: community
 length: "25 min"
-thirdparty: true
 excerpt: ""
-pill: "Data Council 2025"
+venue: "Data Council 2025"
 ---
 
 <div class="video-container">

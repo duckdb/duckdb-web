@@ -1,11 +1,12 @@
 ---
 layout: post
 title: "DuckDB: The Power of a Data Warehouse in Your Python Process"
-author: Gábor Szárnyas
-tags: ["Talk"]
-thirdparty: false
+authors:
+  - Gábor Szárnyas
+tag: talk
+category: core
 excerpt: ""
-pill: "PyData Yerevan 2023"
+venue: "PyData Yerevan 2023"
 ---
 
 <div class="video-container">

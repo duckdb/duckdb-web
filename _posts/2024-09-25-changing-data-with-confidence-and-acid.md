@@ -1,11 +1,13 @@
 ---
 layout: post
 title: "Changing Data with Confidence and ACID"
-author: "Hannes Mühleisen, Mark Raasveldt"
+authors:
+  - Hannes Mühleisen
+  - Mark Raasveldt
 thumb: "/images/blog/thumbs/acid.svg"
 image: "/images/blog/thumbs/acid.png"
 excerpt: "Transactions are key features in database management systems and are also beneficial for data analysis workloads. DuckDB supports fully ACID transactions, confirmed by the TPC-H benchmark's test suite."
-tags: ["using DuckDB"]
+tag: using-duckdb
 ---
 
 The great quote “Everything changes and nothing stays the same” from [Heraclitus, according to Socrates, according to Plato](https://latin.stackexchange.com/a/9473) is not very controversial: change is as old as the universe. Yet somehow, when dealing with data, we often consider change as merely an afterthought.

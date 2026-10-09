@@ -7,6 +7,7 @@ excerpt: |
 
 extension:
   name: anofox_visualization
+  version: 2026.09.26
   description: Render charts and dashboards straight from SQL — the ggplot-rs grammar of graphics, emitted as SVG.
   language: C++
   build: cmake
@@ -17,7 +18,7 @@ extension:
   requires_toolchains: rust
 repo:
   github: DataZooDE/anofox-visualization
-  ref: d9aaf93fb80497c07e0586a1cccd3f2647dda964
+  ref: 36c6689d4fc461b2b724d6f07054fc44cdf1662b
 docs:
   hello_world: |
     -- One scalar plus convenience macros. Pass columns; get an SVG per group.
@@ -45,10 +46,10 @@ docs:
     read-only dashboard serving, and a CLI — is available from a source build of
     the project at https://github.com/DataZooDE/anofox-visualization.
 
-extension_star_count: 6
-extension_star_count_pretty: 6
-extension_download_count: 639
-extension_download_count_pretty: 639
+extension_star_count: 7
+extension_star_count_pretty: 7
+extension_download_count: 636
+extension_download_count_pretty: 636
 image: '/images/community_extensions/social_preview/preview_community_extension_anofox_visualization.png'
 layout: community_extension_doc
 ---
@@ -74,15 +75,15 @@ LOAD {{ page.extension.name }};
 
 <div class="extension_functions_table"></div>
 
-| function_name  | function_type | description | comment | examples |
-|----------------|---------------|-------------|---------|----------|
-| anofox_area    | macro         | NULL        | NULL    |          |
-| anofox_bar     | macro         | NULL        | NULL    |          |
-| anofox_line    | macro         | NULL        | NULL    |          |
-| anofox_render  | scalar        | NULL        | NULL    |          |
-| anofox_scatter | macro         | NULL        | NULL    |          |
-| anofox_xy      | macro         | NULL        | NULL    |          |
-| anofox_xyc     | macro         | NULL        | NULL    |          |
+| function_name  | function_type |                                                                                                                                     description                                                                                                                                     | comment |                                                      examples                                                       |
+|----------------|---------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|---------|---------------------------------------------------------------------------------------------------------------------|
+| anofox_area    | macro         | Render an area chart of two columns as SVG. Shorthand for anofox_xy(x, y, kind := 'AREACHART').                                                                                                                                                                                     | NULL    | [SELECT anofox_area(x, y) FROM (VALUES ('Jan', 10), ('Feb', 20)) t(x, y)]                                           |
+| anofox_bar     | macro         | Render a bar chart of two columns as SVG. Shorthand for anofox_xy(x, y, kind := 'BARCHART').                                                                                                                                                                                        | NULL    | [SELECT anofox_bar(x, y) FROM (VALUES ('Jan', 10), ('Feb', 20)) t(x, y)]                                            |
+| anofox_line    | macro         | Render a line chart of two columns as SVG. Shorthand for anofox_xy(x, y, kind := 'LINECHART').                                                                                                                                                                                      | NULL    | [SELECT anofox_line(x, y) FROM (VALUES ('Jan', 10), ('Feb', 20)) t(x, y)]                                           |
+| anofox_render  | scalar        | Render a chart specification to an SVG string. The spec is JSON carrying 'rows' (the data), 'roles' (which column plays which part: XAXIS, BARCHART, CATEGORY, ...) and optional 'width' and 'height'. The anofox_bar/_line/_scatter/_area/_xy/_xyc macros build this spec for you. | NULL    | [anofox_render(json_object('rows', to_json([{c0: 'Jan', c1: 10}]), 'roles', '[[0,"XAXIS"],[1,"BARCHART"]]'::JSON))] |
+| anofox_scatter | macro         | Render a scatter plot of two columns as SVG. Shorthand for anofox_xy(x, y, kind := 'SCATTER').                                                                                                                                                                                      | NULL    | [SELECT anofox_scatter(x, y) FROM (VALUES (1.5, 10), (2.5, 20)) t(x, y)]                                            |
+| anofox_xy      | macro         | Aggregate two columns into a single-series chart and render it as SVG. 'kind' selects the mark (BARCHART, LINECHART, SCATTER, AREACHART); x becomes the axis and y the value.                                                                                                       | NULL    | [SELECT anofox_xy(x, y, kind := 'LINECHART') FROM (VALUES ('Jan', 10), ('Feb', 20)) t(x, y)]                        |
+| anofox_xyc     | macro         | Aggregate three columns into a multi-series chart and render it as SVG, with 'series' splitting the data into categories.                                                                                                                                                           | NULL    | [SELECT anofox_xyc(x, y, s) FROM (VALUES ('Jan', 10, 'EU'), ('Jan', 8, 'US')) t(x, y, s)]                           |
 
 ### Overloaded Functions
 

@@ -1,14 +1,15 @@
 ---
 layout: post
 title: "DuckDB Won by Refusing to Scale Out"
-author: Hannes Mühleisen
-thumb: "/images/library/thumbs/2024-10-29-data-talks-on-the-rocks-ep5.jpg"
-image: "/images/library/thumbs/2024-10-29-data-talks-on-the-rocks-ep5.jpg"
-tags: ["Podcast"]
+authors:
+  - Hannes Mühleisen
+thumb: "/images/library/thumbs/2024-10-29-data-talks-on-the-rocks-ep5.png"
+image: "/images/library/thumbs/2024-10-29-data-talks-on-the-rocks-ep5.png"
+tag: podcast
+category: core
 length: "80 min"
-thirdparty: false
 excerpt: ""
-pill: "Data Talks on the Rocks by Rill Data"
+venue: "Data Talks on the Rocks by Rill Data"
 redirect_from:
 - /media/data-talks-on-the-rocks-ep5
 ---

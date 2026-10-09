@@ -1,12 +1,12 @@
 ---
 layout: post
 title: "DuckDB flips lakehouse model with bring-your-own compute and metadata RDBMS"
-author: "Lindsay Clark (The Register)"
-tags: ["Article"]
-thirdparty: true
+authors:
+  - Lindsay Clark
+tag: article
 category: community
 excerpt: ""
-pill: "theregister.com"
+venue: "theregister.com"
 ---
 
 |-------|-------|

@@ -1,14 +1,15 @@
 ---
 layout: post
 title: "DuckDB: Not Quack Science"
-author: Gábor Szárnyas
-thumb: "/images/library/thumbs/2026-05-27-duckdb-not-quack-science.jpg"
-image: "/images/library/thumbs/2026-05-27-duckdb-not-quack-science.jpg"
-tags: ["Talk"]
+authors:
+  - Gábor Szárnyas
+thumb: "/images/library/thumbs/2026-05-27-duckdb-not-quack-science.png"
+image: "/images/library/thumbs/2026-05-27-duckdb-not-quack-science.png"
+tag: talk
+category: core
 length: "35 min"
-thirdparty: false
 excerpt: ""
-pill: "Ubuntu Summit 2026"
+venue: "Ubuntu Summit 2026"
 ---
 
 <div class="video-container">

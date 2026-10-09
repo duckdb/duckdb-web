@@ -1,14 +1,15 @@
 ---
 layout: post
 title: "What Next for DuckDB"
-author: "Hannes Mühleisen"
-thumb: "/images/library/thumbs/2026-08-26-developer-voices.jpg"
-image: "/images/library/thumbs/2026-08-26-developer-voices.jpg"
-tags: ["Podcast"]
+authors:
+  - Hannes Mühleisen
+thumb: "/images/library/thumbs/2026-08-26-what-next-for-duckdb.png"
+image: "/images/library/thumbs/2026-08-26-what-next-for-duckdb.png"
+tag: podcast
+category: core
 length: "100 min"
-thirdparty: false
 excerpt: ""
-pill: "Developer Voices by Kris Jenkins"
+venue: "Developer Voices by Kris Jenkins"
 ---
 
 <div class="video-container sticky">

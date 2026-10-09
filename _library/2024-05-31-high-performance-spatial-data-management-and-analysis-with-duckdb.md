@@ -1,12 +1,13 @@
 ---
 layout: post
 title: "High-Performance Spatial Data Management and Analysis with DuckDB"
-author: Max Gabrielsson
-tags: ["Talk"]
+authors:
+  - Max Gabrielsson
+tag: talk
+category: core
 length: "70 min"
-thirdparty: false
 excerpt: ""
-pill: "UTwente Seminar 2024"
+venue: "UTwente Seminar 2024"
 ---
 
 <div class="video-container">

@@ -137,6 +137,29 @@ SET python_enable_replacements = false;
 
 DuckDB supports querying multiple types of Apache Arrow objects including [tables](https://arrow.apache.org/docs/python/generated/pyarrow.Table.html), [datasets](https://arrow.apache.org/docs/python/generated/pyarrow.dataset.Dataset.html), [RecordBatchReaders](https://arrow.apache.org/docs/python/generated/pyarrow.ipc.RecordBatchStreamReader.html) and [scanners](https://arrow.apache.org/docs/python/generated/pyarrow.dataset.Scanner.html). See the Python [guides]({% link docs/preview/guides/overview.md %}#python-client) for more examples.
 
+DuckDB can also consume any object that implements the [Arrow PyCapsule interface](https://arrow.apache.org/docs/format/CDataInterface/PyCapsuleInterface.html) through an `__arrow_c_stream__` method, even if it is not a native Arrow object. Such objects can be queried directly through replacement scans and passed to `duckdb.from_arrow()`:
+
+```python
+import duckdb
+import pyarrow as pa
+
+class MyArrowStream:
+    def __init__(self, table):
+        self._table = table
+
+    def __arrow_c_stream__(self, requested_schema=None):
+        return self._table.__arrow_c_stream__(requested_schema)
+
+obj = MyArrowStream(pa.table({"i": [1, 2, 3]}))
+print(duckdb.sql("SELECT sum(i) AS s FROM obj").fetchall())
+print(duckdb.from_arrow(obj).fetchall())
+```
+
+```text
+[(6,)]
+[(1,), (2,), (3,)]
+```
+
 ```python
 import duckdb
 import pandas as pd

@@ -1,11 +1,12 @@
 ---
 layout: post
 title: "Machine Learning Prototyping with DuckDB and scikit-learn"
-author: Petrica Leuca
+authors:
+  - Petrica Leuca
 thumb: "/images/blog/thumbs/duckdb-scikit-learn.svg"
 image: "/images/blog/thumbs/duckdb-scikit-learn.png"
 excerpt: "In this post, we prototype a machine learning workflow using DuckDB for data handling and scikit-learn for modeling."
-tags: ["using DuckDB"]
+tag: using-duckdb
 ---
 
 ## Introduction

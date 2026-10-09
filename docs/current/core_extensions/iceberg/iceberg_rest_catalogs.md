@@ -142,7 +142,7 @@ To attach to a [Polaris](https://polaris.apache.org) catalog, use the following 
 CREATE SECRET polaris_secret (
     TYPE iceberg,
     CLIENT_ID '⟨admin⟩',
-    CLIENT_SECRET '⟨password⟩',
+    CLIENT_SECRET '⟨password⟩'
 );
 ```
 

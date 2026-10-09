@@ -1,12 +1,15 @@
 ---
 layout: post
 title: "TurboLynx: Schemaless Graph Engine Strikes Back for General-Purpose Analytics"
-author: "Taesung Lee, Jaehyun Ha, Byungchul Tak, Wook-Shin Han"
-tags: ["Paper"]
-thirdparty: true
+authors:
+  - Taesung Lee
+  - Jaehyun Ha
+  - Byungchul Tak
+  - Wook-Shin Han
+tag: paper
 category: community
 excerpt: ""
-pill: "VLDB 2026"
+venue: "VLDB 2026"
 ---
 
 | | |

@@ -1,13 +1,12 @@
 ---
 layout: post
 title: "The Science Data Lake: A Unified Open Infrastructure Integrating 293 Million Papers Across Eight Scholarly Sources with Embedding-Based Ontology Alignment"
-author: "Jonas Wilinski"
-thumb: "/images/library/thumbs/arxiv.svg"
-image: "/images/library/thumbs/arxiv.jpg"
-tags: ["Paper"]
+authors:
+  - Jonas Wilinski
+tag: paper
 category: community
 excerpt: ""
-pill: "arXiv"
+venue: "arXiv"
 ---
 
 |-------|-------|

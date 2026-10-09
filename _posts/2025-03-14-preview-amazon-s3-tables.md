@@ -1,11 +1,14 @@
 ---
 layout: post
 title: "Preview: Amazon S3 Tables in DuckDB"
-author: "Sam Ansmink, Tom Ebergen, Gábor Szárnyas"
+authors:
+  - Sam Ansmink
+  - Tom Ebergen
+  - Gábor Szárnyas
 thumb: "/images/blog/thumbs/amazon-s3-tables.svg"
 image: "/images/blog/thumbs/amazon-s3-tables.png"
 excerpt: "We are happy to announce a new preview feature that adds support for Apache Iceberg REST Catalogs, enabling DuckDB users to connect to Amazon S3 Tables and Amazon SageMaker Lakehouse with ease."
-tags: ["extensions"]
+tag: extensions
 ---
 
 > The AWS Storage Blog also published a post on this feature, see [Streamlining access to tabular datasets stored in Amazon S3 Tables with DuckDB](https://aws.amazon.com/blogs/storage/streamlining-access-to-tabular-datasets-stored-in-amazon-s3-tables-with-duckdb/).

@@ -1,11 +1,12 @@
 ---
 layout: post
 title: "DuckDB and Hugging Face: Querying Datasets Directly"
-author: "The DuckDB team"
+authors:
+  - The DuckDB team
 thumb: "/images/blog/thumbs/hugging-face.svg"
 image: "/images/blog/thumbs/hugging-face.png"
 excerpt: "Hugging Face hosts hundreds of thousands of datasets, and DuckDB can read them directly, exactly where they are and without downloading anything, over the DuckDB `hf://` protocol. This post looks at how the integration works and the scenarios where it works best."
-tags: ["extensions"]
+tag: extensions
 ---
 
 [Hugging Face](https://huggingface.co/) is where much of the machine learning community publishes and finds its datasets, while DuckDB is the in-process analytical database that queries files like CSV and Parquet directly, with no server or warehouse to install or run. 

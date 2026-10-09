@@ -1,13 +1,14 @@
 ---
 layout: post
 title: "dbt Without the Warehouse (or the Bill): DuckDB End to End"
-author: "Hannes Mühleisen"
+authors:
+  - Hannes Mühleisen
 thumb: "/images/events/thumbs/dbt-summit.svg"
 image: "/images/events/thumbs/dbt-summit.png"
 excerpt: ""
-tags: ["talk"]
-labels: [community, talk]
-venue: "The Cosmopolitan, Las Vegas"
+tag: talk
+category: community
+location: "The Cosmopolitan, Las Vegas"
 ---
 
 Hannes Mühleisen, co-creator of DuckDB, will give a talk at [dbt Summit](https://www.getdbt.com/dbt-summit) (formerly Coalesce), dbt Labs' annual conference for the analytics engineering community. The talk is scheduled for 10:00 AM PT on Friday, September 18, 2026, in Level 3, Gracia 4.

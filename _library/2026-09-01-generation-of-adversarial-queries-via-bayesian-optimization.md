@@ -1,12 +1,18 @@
 ---
 layout: post
 title: "Generation of Adversarial Queries via Bayesian Optimization"
-author: "Jeffrey Tao, Yimeng Zeng, Natalie Maus, Haydn Jones, Osbert Bastani, Jacob R. Gardner, Ryan Marcus"
-tags: ["Paper"]
-thirdparty: true
+authors:
+  - Jeffrey Tao
+  - Yimeng Zeng
+  - Natalie Maus
+  - Haydn Jones
+  - Osbert Bastani
+  - Jacob R. Gardner
+  - Ryan Marcus
+tag: paper
 category: community
 excerpt: ""
-pill: "AIDB@VLDB 2026"
+venue: "AIDB@VLDB 2026"
 ---
 
 |-------|-------|

@@ -1,12 +1,13 @@
 ---
 layout: post
 title: "Using DuckDB in a Spreadsheet with WASM"
-author: "Chris Laffra"
-tags: ["Talk"]
+authors:
+  - Chris Laffra
+tag: talk
 length: "25 min"
 category: community
 excerpt: ""
-pill: "DuckDB Amsterdam Meetup"
+venue: "DuckDB Amsterdam Meetup"
 ---
 
 <div class="video-container">

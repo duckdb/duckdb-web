@@ -1,13 +1,18 @@
 ---
 layout: post
 title: "RISC-V Meets RDBMS: An Experimental Study of Database Performance on an Open Instruction Set Architecture"
-author: "Yizhe Zhang, Zhengyi Yang, Bocheng Han, Haoran Ning, Xin Cao, John Shepherd, Guanfeng Liu"
-thumb: "/images/library/thumbs/vldb.svg"
-image: "/images/library/thumbs/vldb.png"
-tags: ["Paper"]
+authors:
+  - Yizhe Zhang
+  - Zhengyi Yang
+  - Bocheng Han
+  - Haoran Ning
+  - Xin Cao
+  - John Shepherd
+  - Guanfeng Liu
+tag: paper
 category: community
 excerpt: ""
-pill: "ADMS 2025"
+venue: "ADMS 2025"
 ---
 
 |-------|-------|

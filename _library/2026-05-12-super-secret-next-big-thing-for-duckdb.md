@@ -1,15 +1,15 @@
 ---
 layout: post
 title: "Quack: The Super-Secret Next Big Thing for DuckDB"
-author: "Hannes Mühleisen"
-thumb: "/images/library/thumbs/2026-05-12-super-secret-next-big-thing-for-duckdb.jpg"
-image: "/images/library/thumbs/2026-05-12-super-secret-next-big-thing-for-duckdb.jpg"
-tags: ["Talk"]
-thirdparty: false
-highlighted: false
+authors:
+  - Hannes Mühleisen
+thumb: "/images/library/thumbs/2026-05-12-super-secret-next-big-thing-for-duckdb.png"
+image: "/images/library/thumbs/2026-05-12-super-secret-next-big-thing-for-duckdb.png"
+tag: talk
+category: core
 excerpt: ""
 length: "30 min"
-pill: "AI Council 2026"
+venue: "AI Council 2026"
 ---
 
 <div class="video-container">

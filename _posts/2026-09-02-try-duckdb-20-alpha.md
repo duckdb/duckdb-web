@@ -1,11 +1,12 @@
 ---
 layout: post
 title: "Try DuckDB v2.0-dev"
-author: "The DuckDB team"
+authors:
+  - The DuckDB team
 thumb: "/images/blog/thumbs/duckdb-preview-2-0.svg"
 image: "/images/blog/thumbs/duckdb-preview-2-0.png"
 excerpt: "DuckDB's development team in Amsterdam has started getting DuckDB v2.0 ready for release in October. If you like shiny new things, try out the alpha releases now and report anything that might not be working as expected!"
-tags: ["release"]
+tag: release
 ---
 
 > Update You can now select the [2.0.0-dev version on the installation page]({% link install/index.html %}?version=preview).

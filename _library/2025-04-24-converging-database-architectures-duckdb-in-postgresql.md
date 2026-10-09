@@ -1,12 +1,13 @@
 ---
 layout: post
 title: "Converging Database Architectures DuckDB in PostgreSQL"
-author: Marco Slot
-tags: ["Talk"]
+authors:
+  - Marco Slot
+tag: talk
+category: core
 length: "40 min"
-thirdparty: false
 excerpt: ""
-pill: "Data Council 2025"
+venue: "Data Council 2025"
 ---
 
 <div class="video-container">

@@ -1,13 +1,16 @@
 ---
 layout: post
 title: "AWS and DuckLabs: Building the Future of Analytics Together"
-author: "Mai-Lan Tomsen Bukovec (AWS)"
+authors:
+  - Mai-Lan Tomsen Bukovec
 #thumb: "/images/library/thumbs/2026-08-26-all-things-distributed.jpg"
 #image: "/images/library/thumbs/2026-08-26-all-things-distributed.jpg"
-tags: ["Article"]
-thirdparty: false
+thumb: "/images/library/thumbs/2026-08-26-aws-and-ducklabs-building-the-future-of-analytics-together.png"
+image: "/images/library/thumbs/2026-08-26-aws-and-ducklabs-building-the-future-of-analytics-together.png"
+tag: article
+category: core
 excerpt: ""
-pill: "AWS Big Data Blog"
+venue: "AWS Big Data Blog"
 ---
 
 |-------|-------|

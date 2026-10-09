@@ -1,8 +1,9 @@
 ---
 layout: post
 title: "Spatial Joins in DuckDB"
-author: "Max Gabrielsson"
-tags: ["deep dive"]
+authors:
+  - Max Gabrielsson
+tag: deep-dive
 thumb: "/images/blog/thumbs/spatial-joins.svg"
 image: "/images/blog/thumbs/spatial-joins.png"
 excerpt: "DuckDB v1.3.0 significantly improved the scalability of geospatial joins with a dedicated `SPATIAL_JOIN` operator."

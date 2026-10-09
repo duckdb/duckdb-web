@@ -1,22 +1,17 @@
 ---
 layout: post
-event: true
 title: "DuckDB Amsterdam Meetup #1"
-author: "DuckDB meetup organizers"
+authors:
+  - DuckDB meetup organizers
 thumb: "/images/events/thumbs/duckdb-amsterdam-meetup-1.svg"
 image: "/images/events/thumbs/duckdb-amsterdam-meetup-1.png"
 excerpt: ""
-tags: ["meetup"]
-labels: [official]
-venue: "Miro, Amsterdam"
+tag: meetup
+category: core
+location: "Miro, Amsterdam"
 redirect_from:
   - 2024/10/17/duckdb-amsterdam-meetup-1
 ---
-
-<img src="{% link images/events/thumbs/duckdb-amsterdam-meetup-1.svg %}"
-     alt="DuckDB Amsterdam Meetup Splashscreen"
-     width="680"
-     />
 
 We are excited to announce the [first DuckDB Amsterdam meetup](https://www.meetup.com/duckdb/events/303482464/), co-organized by [DuckLabs](https://ducklabs.com/) and [Miro](https://miro.com/).
 

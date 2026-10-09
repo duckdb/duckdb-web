@@ -1,11 +1,12 @@
 ---
 layout: post
 title: "Using DuckDB in Streamlit"
-author: Petrica Leuca
+authors:
+  - Petrica Leuca
 thumb: "/images/blog/thumbs/duckdb-streamlit.svg"
 image: "/images/blog/thumbs/duckdb-streamlit.png"
 excerpt: "We use a real-world railway dataset to demonstrate the integration of DuckDB and Streamlit, including the database connection management, the DuckDB Python relational API and responsiveness in interactive map charts."
-tags: ["using DuckDB"]
+tag: using-duckdb
 ---
 
 ## Introduction

@@ -1,11 +1,12 @@
 ---
 layout: post
 title: "DuckDB.ExtensionKit: Building DuckDB Extensions in C#"
-author: "Giorgi Dalakishvili"
+authors:
+  - Giorgi Dalakishvili
 thumb: "/images/blog/thumbs/duckdb-extensionkit-csharp.jpg"
 image: "/images/blog/thumbs/duckdb-extensionkit-csharp.jpg"
 excerpt: "DuckDB.ExtensionKit brings DuckDB extension development to the .NET ecosystem. By building on DuckDB's stable C Extension API and leveraging .NET Native AOT compilation, it lets C# developers define scalar and table functions, which can be shipped as native DuckDB extensions."
-tags: ["extensions"]
+tag: extensions
 ---
 
 ## Introduction

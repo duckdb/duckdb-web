@@ -1,14 +1,15 @@
 ---
 layout: post
 title: "Minus Three Tier: Data Architecture Turned Upside Down"
-author: Hannes Mühleisen
-thumb: "/images/library/thumbs/2025-09-26-data-architecture-turned-upside-down.jpg"
-image: "/images/library/thumbs/2025-09-26-data-architecture-turned-upside-down.jpg"
-tags: ["Talk"]
+authors:
+  - Hannes Mühleisen
+thumb: "/images/library/thumbs/2025-09-26-data-architecture-turned-upside-down.png"
+image: "/images/library/thumbs/2025-09-26-data-architecture-turned-upside-down.png"
+tag: talk
+category: core
 length: "40 min"
-thirdparty: false
 excerpt: ""
-pill: "PyData 2025"
+venue: "PyData 2025"
 redirect_from:
 - /media/data-architecture-turned-upside-down
 ---

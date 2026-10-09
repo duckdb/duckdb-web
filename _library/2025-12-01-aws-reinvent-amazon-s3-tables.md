@@ -1,12 +1,15 @@
 ---
 layout: post
 title: "Amazon S3 Tables Architecture, Use Cases, and Best Practices"
-author: "Yuri Zarubin"
-tags: ["Talk"]
+authors:
+  - Yuri Zarubin
+thumb: "/images/library/thumbs/2025-12-01-aws-reinvent-amazon-s3-tables.png"
+image: "/images/library/thumbs/2025-12-01-aws-reinvent-amazon-s3-tables.png"
+tag: talk
 length: "6 min"
 category: community
 excerpt: ""
-pill: "AWS re:Invent 2025"
+venue: "AWS re:Invent 2025"
 ---
 
 <div class="video-container">

@@ -1,12 +1,13 @@
 ---
 layout: post
 title: "Can Learned Query Optimizers Adapt Across DBMS Architectures? A Case Study with Balsa and DuckDB"
-author: "Wangshu Hong, Ryan Marcus"
-tags: ["Paper"]
-thirdparty: true
+authors:
+  - Wangshu Hong
+  - Ryan Marcus
+tag: paper
 category: community
 excerpt: ""
-pill: "AIDB@VLDB 2026"
+venue: "AIDB@VLDB 2026"
 ---
 
 |-------|-------|

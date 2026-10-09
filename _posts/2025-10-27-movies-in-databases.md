@@ -1,7 +1,9 @@
 ---
 layout: post
 title: "Relational Charades: Turning Movies into Tables"
-author: "Hannes Mühleisen"
+authors:
+  - Hannes Mühleisen
+tag: using-duckdb
 thumb: "/images/blog/thumbs/movies-in-databases.svg"
 image: "/images/blog/thumbs/movies-in-databases.png"
 excerpt: "You can store and even process videos in DuckDB. In this post, we show you how."

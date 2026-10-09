@@ -1,11 +1,12 @@
 ---
 layout: post
 title: "Redesigning DuckDB's Sort, Again"
-author: "Laurens Kuiper"
+authors:
+  - Laurens Kuiper
 thumb: "/images/blog/thumbs/sorting-again.svg"
 image: "/images/blog/thumbs/sorting-again.png"
 excerpt: "After four years, we've decided to redesign DuckDB's sort implementation, again. In this post, we present and evaluate the new design."
-tags: ["deep dive"]
+tag: deep-dive
 ---
 
 [DuckDB v1.4.0 was just released]({% post_url 2025-09-16-announcing-duckdb-140 %}), which includes a complete redesign of DuckDB's sort implementation.

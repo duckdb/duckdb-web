@@ -117,3 +117,14 @@ Will result in the following output when running `./build/release/duckdb`:
 v0.10.1-dev843 09ea97d0a9
 ...
 ```
+
+### Building without Git
+
+Git and Python are optional dependencies for building DuckDB from source.
+DuckDB normally derives its version and commit hash from Git, so `OVERRIDE_GIT_DESCRIBE` is primarily useful when building from sources that are not a complete Git checkout.
+The version and commit hash are resolved as follows:
+
+* If `OVERRIDE_GIT_DESCRIBE` is set to a full `git describe --tags --long` string (for example, `v1.0.0-843-g09ea97d0a9`), the version, the development iteration, and the commit hash are all extracted from it.
+* If `OVERRIDE_GIT_DESCRIBE` is set to a version only (for example, `v1.0.0`), the remaining details are filled in from the current Git commit when Git is available.
+* If `OVERRIDE_GIT_DESCRIBE` is not set and Git is available, DuckDB runs `git describe --tags --long` to determine the version and commit hash.
+* If `OVERRIDE_GIT_DESCRIBE` is not set and Git is not available, DuckDB falls back to a placeholder version and commit hash, and logs a message during the CMake configuration step. The build still succeeds.

@@ -1,14 +1,14 @@
 ---
 layout: post
-event: true
 title: "DuckDB Developer Meeting #1"
-author: "The DuckDB team"
+authors:
+  - The DuckDB team
 thumb: "/images/events/thumbs/duckdb-developer-meeting-1.svg"
 image: "/images/events/thumbs/duckdb-developer-meeting-1.png"
 excerpt: ""
-tags: ["meetup"]
-labels: [official]
-venue: "Pakhuis de Zwijger, Amsterdam"
+tag: meetup
+category: core
+location: "Pakhuis de Zwijger, Amsterdam"
 ---
 
 <img src="{% link images/events/duckdb-developer-meeting-1-splashscreen.svg %}"

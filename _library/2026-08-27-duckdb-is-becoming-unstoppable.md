@@ -1,11 +1,12 @@
 ---
 layout: post
 title: "DuckDB Is Becoming Unstoppable..."
-author: "Better Stack"
-tags: ["Video"]
+authors:
+  - Better Stack
+tag: talk
 category: community
 excerpt: ""
-pill: "Better Stack"
+venue: "Better Stack"
 ---
 
 <div class="video-container">

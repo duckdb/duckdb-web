@@ -1,13 +1,13 @@
 ---
 layout: post
 title: "DuckDB Embedded Database System (CMU Advanced Database Systems)"
-author: "Andy Pavlo"
-tags: ["Talk"]
+authors:
+  - Andy Pavlo
+tag: talk
 length: "60 min"
-thirdparty: true
 category: community
 excerpt: ""
-pill: "CMU Advanced Database Systems"
+venue: "CMU Advanced Database Systems"
 ---
 
 <div class="video-container">

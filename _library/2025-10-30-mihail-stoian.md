@@ -1,14 +1,15 @@
 ---
 layout: post
 title: "DuckDB in Research S02E03: Mihail Stoian"
-author: "Disseminate Podcast Series by Jack Waudby"
-thumb: "/images/library/thumbs/2025-10-30-mihail-stoian.jpg"
-image: "/images/library/thumbs/2025-10-30-mihail-stoian.jpg"
-tags: ["Podcast"]
+authors:
+  - Disseminate Podcast Series by Jack Waudby
+thumb: "/images/library/thumbs/2025-10-30-mihail-stoian.png"
+image: "/images/library/thumbs/2025-10-30-mihail-stoian.png"
+tag: podcast
 length: "35 min"
 category: community
 excerpt: ""
-pill: "DuckDB in Research"
+venue: "DuckDB in Research"
 episode: "S02E03"
 ---
 

@@ -2,12 +2,13 @@
 layout: post
 title: "DuckLake on Hetzner"
 date: 2026-03-07
-author: "berndsen-io"
-thumb: "/images/everywhere/thumbs/hetzner.jpg"
-image: "/images/everywhere/thumbs/hetzner.jpg"
+authors:
+  - berndsen-io
+thumb: "/images/everywhere/thumbs/hetzner.png"
+image: "/images/everywhere/thumbs/hetzner.png"
 excerpt: "DuckDB and DuckLake run on Hetzner."
-tags: ["Servers"]
-thirdparty: true
+tag: servers
+category: community
 ---
 
 See the [ducklake-hetzner](https://github.com/berndsen-io/ducklake-hetzner) project:

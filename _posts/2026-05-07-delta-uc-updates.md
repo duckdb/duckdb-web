@@ -1,9 +1,10 @@
 ---
 layout: post
 title: "Delta Grows Up: Writes, Unity Catalog and Time Travel"
-author: "Ben Fleis"
+authors:
+  - Ben Fleis
 excerpt: "DuckDB's Delta and Unity Catalog extensions shed their experimental tags — now with writes, Unity Catalog and time travel support."
-tags: ["extensions"]
+tag: extensions
 thumb: "/images/blog/thumbs/delta-uc-updates.svg"
 image: "/images/blog/thumbs/delta-uc-updates.jpg"
 ---

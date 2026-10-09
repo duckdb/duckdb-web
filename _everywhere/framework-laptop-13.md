@@ -2,12 +2,13 @@
 layout: post
 title: "Framework Laptop 13"
 date: 2025-09-08
-author: "Gábor Szárnyas"
-thumb: "/images/everywhere/thumbs/framework-laptop-13.jpg"
-image: "/images/everywhere/thumbs/framework-laptop-13.jpg"
+authors:
+  - Gábor Szárnyas
+thumb: "/images/everywhere/thumbs/framework-laptop-13.png"
+image: "/images/everywhere/thumbs/framework-laptop-13.png"
 excerpt: ""
-tags: ["PCs"]
-thirdparty: false
+tag: pcs
+category: core
 ---
 
 DuckDB can run TPC-H SF10,000 on a 13-inch ultrabook.

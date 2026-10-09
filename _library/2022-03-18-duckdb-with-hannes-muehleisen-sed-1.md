@@ -1,11 +1,12 @@
 ---
 layout: post
 title: "DuckDB with Hannes Mühleisen"
-author: Hannes Mühleisen
-tags: ["Podcast"]
-thirdparty: false
+authors:
+  - Hannes Mühleisen
+tag: podcast
+category: core
 excerpt: ""
-pill: "Software Engineering Daily"
+venue: "Software Engineering Daily"
 ---
 
 |-------|-------|

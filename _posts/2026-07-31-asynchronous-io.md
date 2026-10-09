@@ -1,9 +1,10 @@
 ---
 layout: post
 title: "Asynchronous I/O in DuckDB: Work, Thread, Work"
-author: "Pedro Holanda"
+authors:
+  - Pedro Holanda
 excerpt: "Starting with v2.0, scheduled for fall 2026, DuckDB will support asynchronous reads of Parquet and CSV files. This can significantly speed up queries when synchronous I/O does not saturate the available bandwidth, as is typical in EC2/S3 compute-storage setups."
-tags: ["deep dive"]
+tag: deep-dive
 thumb: "/images/blog/thumbs/async.svg"
 image: "/images/blog/thumbs/async.jpg"
 ---

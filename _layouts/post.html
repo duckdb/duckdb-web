@@ -93,54 +93,49 @@
 								<h2>{{ page.subtitle }}</h2>
 								{% endif %}
 								
-								{% if page.author and page.event == false or page.collection != "events" %}
-									<div class="infoline">
-										{% assign author = site.data.authors[page.author] %}
-										{% assign cfg = site.data.post_sources %}
-										{% assign source = cfg.sources[cfg.default_domain] %}
-										{% assign use_sprite = false %}
-										{% unless author %}{% if page.collection != "science" %}{% assign use_sprite = true %}{% endif %}{% endunless %}
-										<div class="icon{% if use_sprite %} spriteicon{% endif %}">
-											{% if author %}
-												<img src="{{ author.picture }}" alt="Author Avatar">
-											{% elsif use_sprite %}
-												<svg class="source-icon"><use href="#{{ source.icon | default: cfg.fallback_icon }}"></use></svg>
-											{% endif %}
-										</div>
-										<div>
-											<span class="author">{{ page.author }}</span>
-											{% if page.event != true and page.collection != "events" %}
-												<div class="publishedinfo">
-													<span class="date">{{ page.date | date: "%Y-%m-%d" }}</span>
-													{% if page.collection == "library" %}
-														{% if page.length %}
-															<span class="bullet">|</span>
-															<span class="readingtime">{{ page.length }}</span>
-														{% endif %}
-													{% else %}
-														<span class="bullet">|</span>
-														<span class="readingtime">{{ content | reading_time }}</span>
-													{% endif %}
-												</div>
-											{% endif %}
-										</div>
-									</div>
-								{% endif %}
-								
-								{% if page.event == true or page.collection == "events" %}
-									{% assign event_day = page.end_date | default: page.date | date: "%Y-%m-%d" %}
-									{% assign today = site.time | date: "%Y-%m-%d" %}
-									<div class="infoline">
-										<div class="scheduled">
-											{% if event_day >= today %}
-												<span>Scheduled for</span>
+								<div class="postheader">
+									<div class="postheader-meta">
+										{% if page.collection == "events" %}
+											{% assign event_day = page.end_date | default: page.date | date: "%Y-%m-%d" %}
+											{% assign today = site.time | date: "%Y-%m-%d" %}
+											{% if page.venue %}<span class="venue">{{ page.venue }}</span>{% endif %}
+											<span class="date">{% if event_day >= today %}Scheduled for{% else %}Took place on{% endif %} {{ page.date | date: "%B %d, %Y" }}</span>
+											{% if page.location %}<span class="location">at {{ page.location }}</span>{% endif %}
+										{% else %}
+											<span class="date">{{ page.date | date: "%Y-%m-%d" }}</span>
+											{% if page.collection == "library" %}
+												{% if page.length %}<span class="readingtime">{{ page.length }}</span>{% endif %}
 											{% else %}
-												<span>Took place on</span>
+												<span class="readingtime">{{ content | reading_time }} read</span>
 											{% endif %}
-											<span class="date">{{ page.date | date: "%B %d, %Y" }}</span>
-										</div>
-										<div class="venue"><span>at {{ page.venue }}</span></div>
+										{% endif %}
 									</div>
+									{% if page.authors.size > 4 %}
+										<p class="postheader-authorlist">{{ page.authors | join: ", " }}</p>
+									{% elsif page.authors and page.authors.size > 0 %}
+										<div class="postheader-authors">
+											{% for post_author_name in page.authors %}
+												{% assign post_author = site.data.authors[post_author_name] %}
+												<div class="postheader-author">
+													{% if post_author.picture %}
+														<img src="{{ post_author.picture }}" alt="" class="avatar" loading="lazy">
+													{% elsif post_author.icon %}
+														<svg class="avatar"><use href="#{{ post_author.icon }}"></use></svg>
+													{% else %}
+														<svg class="avatar" aria-hidden="true"><use href="#avatar-placeholder"></use></svg>
+													{% endif %}
+													<div class="postheader-author-text">
+														<span class="name">{{ post_author_name }}</span>
+														{% if post_author.role %}<span class="role">{{ post_author.role }}</span>{% endif %}
+													</div>
+												</div>
+											{% endfor %}
+										</div>
+									{% endif %}
+								</div>
+
+								{% if page.thumb and page.collection != "library" %}
+									<img src="{{ page.thumb }}" alt="" class="postheader-thumb">
 								{% endif %}
 								
 								{% if page.excerpt != "" %}
@@ -149,7 +144,8 @@
 									</div>
 								{% endif %}
 								
-								{% include anchor_headings.html html=content %}
+								{% assign post_content = content | regex_replace: "<th>[[:space:]]*</th>", "<th></th>" %}
+								{% include anchor_headings.html html=post_content %}
 							</div>
 						</div>
 						

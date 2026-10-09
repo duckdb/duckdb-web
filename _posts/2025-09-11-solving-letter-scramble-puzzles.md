@@ -2,8 +2,9 @@
 layout: post
 title: "Solving Letter Scramble Puzzles with DuckDB"
 tested: true
-author: "Gábor Szárnyas"
-tags: ["using DuckDB"]
+authors:
+  - Gábor Szárnyas
+tag: using-duckdb
 thumb: "/images/blog/thumbs/letter-scramble-puzzle.svg"
 image: "/images/blog/thumbs/letter-scramble-puzzle.png"
 excerpt: "In this lighthearted post, we solve a puzzle type that's on display in Dutch trains."

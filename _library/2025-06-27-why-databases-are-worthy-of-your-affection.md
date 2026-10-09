@@ -1,14 +1,15 @@
 ---
 layout: post
 title: "Why Databases Are Worthy of Your Affection"
-author: "Hannes Mühleisen"
-thumb: "/images/library/thumbs/2025-06-27-joy-of-coding.jpg"
-image: "/images/library/thumbs/2025-06-27-joy-of-coding.jpg"
-tags: ["Talk"]
+authors:
+  - Hannes Mühleisen
+thumb: "/images/library/thumbs/2025-06-27-why-databases-are-worthy-of-your-affection.png"
+image: "/images/library/thumbs/2025-06-27-why-databases-are-worthy-of-your-affection.png"
+tag: talk
+category: core
 length: "35 min"
-thirdparty: false
 excerpt: ""
-pill: "Joy of Coding 2025"
+venue: "Joy of Coding 2025"
 redirect_from:
 - /media/joy-of-coding
 ---

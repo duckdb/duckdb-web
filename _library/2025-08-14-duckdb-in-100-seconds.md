@@ -1,8 +1,9 @@
 ---
 layout: post
 title: "DuckDB in 100 Seconds"
-author: "Fireship"
-tags: ["Video"]
+authors:
+  - Fireship
+tag: talk
 length: "2 min"
 category: community
 excerpt: ""

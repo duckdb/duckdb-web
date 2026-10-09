@@ -1,13 +1,13 @@
 ---
 layout: post
 title: "DuckDB + Apache Iceberg at Taktile"
-author: "Tom Larkworthy"
-tags: ["Talk"]
+authors:
+  - Tom Larkworthy
+tag: talk
 length: "13 min"
 category: community
 excerpt: ""
-pill: "DuckDB Paris Meetup"
-thirdparty: true
+venue: "DuckDB Paris Meetup"
 ---
 
 <div class="video-container">

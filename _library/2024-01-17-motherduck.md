@@ -1,13 +1,32 @@
 ---
 layout: post
 title: "MotherDuck: DuckDB in the Cloud and in the Client"
-author: "RJ Atwal, Peter Boncz, Ryan Boyd, Antony Courtney, Till Döhmen, Florian Gerlinghoff, Jeff Huang, Joseph Hwang, Raphael Hyde, Elena Felder, Jacob Lacouture, Yves LeMaout, Boaz Leskes, Yao Liu, Alex Monahan, Dan Perkins, Tino Tereshko, Jordan Tigani, Nick Ursa, Stephanie Wang, Yannick Welsch"
-thumb: "/images/library/thumbs/cidr.svg"
-image: "/images/library/thumbs/cidr.png"
-tags: ["Paper"]
+authors:
+  - RJ Atwal
+  - Peter Boncz
+  - Ryan Boyd
+  - Antony Courtney
+  - Till Döhmen
+  - Florian Gerlinghoff
+  - Jeff Huang
+  - Joseph Hwang
+  - Raphael Hyde
+  - Elena Felder
+  - Jacob Lacouture
+  - Yves LeMaout
+  - Boaz Leskes
+  - Yao Liu
+  - Alex Monahan
+  - Dan Perkins
+  - Tino Tereshko
+  - Jordan Tigani
+  - Nick Ursa
+  - Stephanie Wang
+  - Yannick Welsch
+tag: paper
 category: community
 excerpt: ""
-pill: "CIDR 2024"
+venue: "CIDR 2024"
 ---
 
 | | |

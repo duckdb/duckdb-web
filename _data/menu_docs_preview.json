@@ -1892,6 +1892,10 @@
               "url": "overview"
             },
             {
+              "page": "Backup Extension Repositories",
+              "url": "backup_extension_repositories"
+            },
+            {
               "page": "DuckDB's Footprint",
               "slug": "footprint_of_duckdb",
               "subsubfolderitems": [

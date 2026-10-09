@@ -2,9 +2,10 @@
 layout: post  
 title: "Friendlier SQL with DuckDB"
 tested: true
-author: Alex Monahan
+authors:
+  - Alex Monahan
 excerpt: "DuckDB offers several extensions to the SQL syntax. For a full list of these features, see the [Friendly SQL documentation page](/docs/guides/sql_features/friendly_sql)."
-tags: ["using DuckDB"]
+tag: using-duckdb
 ---
 
 <img src="{% link images/blog/duck_chewbacca.png %}" alt="Chewbacca_the_duck" title="Chewbacca the duck is pretty friendly" width="200"/>

@@ -1,13 +1,14 @@
 ---
 layout: post
 title: "DuckLake: The SQL-Powered Lakehouse Format"
-author: "Hannes Mühleisen"
-thumb: "/images/library/thumbs/2025-08-27-open-lakehouse-meetup.jpg"
-image: "/images/library/thumbs/2025-08-27-open-lakehouse-meetup.jpg"
-tags: ["Talk"]
-thirdparty: false
+authors:
+  - Hannes Mühleisen
+thumb: "/images/library/thumbs/2025-08-27-ducklake-open-lakehouse-meetup.png"
+image: "/images/library/thumbs/2025-08-27-ducklake-open-lakehouse-meetup.png"
+tag: talk
+category: core
 excerpt: ""
-pill: "Open Lakehouse Meetup 2025"
+venue: "Open Lakehouse Meetup 2025"
 redirect_from:
 - /media/open-lakehouse-meetup
 ---

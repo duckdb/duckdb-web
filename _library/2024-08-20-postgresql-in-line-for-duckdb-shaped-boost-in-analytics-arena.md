@@ -1,12 +1,12 @@
 ---
 layout: post
 title: "PostgreSQL in line for DuckDB-shaped boost in analytics arena"
-author: "Lindsay Clark (The Register)"
-tags: ["Article"]
-thirdparty: true
+authors:
+  - Lindsay Clark
+tag: article
 category: community
 excerpt: ""
-pill: "theregister.com"
+venue: "theregister.com"
 ---
 
 |-------|-------|

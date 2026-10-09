@@ -1,13 +1,14 @@
 ---
 layout: post
 title: "DuckPGQ: Bringing SQL/PGQ to DuckDB"
-author: "Daniel ten Wolde, Gábor Szárnyas, Peter Boncz"
-thumb: "/images/library/thumbs/vldb.svg"
-image: "/images/library/thumbs/vldb.png"
-tags: ["Paper"]
+authors:
+  - Daniel ten Wolde
+  - Gábor Szárnyas
+  - Peter Boncz
+tag: paper
 category: community
 excerpt: ""
-pill: "VLDB 2023"
+venue: "VLDB 2023"
 ---
 
 |-------|-------|

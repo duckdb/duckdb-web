@@ -1,9 +1,9 @@
 ---
 layout: post
 title: "DuckDB File Storage Inspection"
-author: "dentiny"
-tags: ["Website"]
-thirdparty: true
+authors:
+  - dentiny
+tag: article
 category: community
 excerpt: ""
 ---

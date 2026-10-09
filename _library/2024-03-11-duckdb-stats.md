@@ -1,8 +1,9 @@
 ---
 layout: post
 title: "DuckDB Stats"
-author: "Mehdi Ouazza"
-tags: ["Website"]
+authors:
+  - Mehdi Ouazza
+tag: article
 category: community
 excerpt: ""
 ---

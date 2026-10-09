@@ -1,12 +1,13 @@
 ---
 layout: post
 title: "Huey: Pivoting Hundreds of Millions of Rows in the Browser with DuckDB-Wasm"
-author: "Roland Bouman"
-tags: ["Talk"]
+authors:
+  - Roland Bouman
+tag: talk
 length: "25 min"
 category: community
 excerpt: ""
-pill: "DuckDB Amsterdam Meetup"
+venue: "DuckDB Amsterdam Meetup"
 ---
 
 <div class="video-container">

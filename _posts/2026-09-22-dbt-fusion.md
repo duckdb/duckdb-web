@@ -1,11 +1,12 @@
 ---
 layout: post
 title: "DuckDB Now Ships inside dbt v2"
-author: "Geertjan Wielenga"
+authors:
+  - Geertjan Wielenga
 thumb: "/images/blog/thumbs/duckdb-dbt.svg"
 image: "/images/blog/thumbs/duckdb-dbt.png"
 excerpt: "dbt v2, which runs on the new Rust-based Fusion engine, is the first dbt release that ships with a built-in DuckDB adapter. This post covers setup, DuckLake and Iceberg catalogs, querying dbt's Parquet metadata with DuckDB, plus other v2 features that matter to DuckDB users, including migrating to dbt v2."
-tags: ["using DuckDB"]
+tag: using-duckdb
 ---
 
 [dbt](https://www.getdbt.com/) is the tool many data teams use to manage their SQL transformations: you write each model as a `SELECT` statement, and dbt works out the order to run them in from the references between models, builds the resulting tables and views in your database, and can test them along the way. 

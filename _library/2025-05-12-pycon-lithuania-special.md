@@ -1,14 +1,15 @@
 ---
 layout: post
 title: "PyCon Lithuania Special"
-author: Gábor Szárnyas
-thumb: "/images/library/thumbs/2025-05-12-pycon-lithuania-special.jpg"
-image: "/images/library/thumbs/2025-05-12-pycon-lithuania-special.jpg"
-tags: ["Podcast"]
+authors:
+  - Gábor Szárnyas
+thumb: "/images/library/thumbs/2025-05-12-pycon-lithuania-special.png"
+image: "/images/library/thumbs/2025-05-12-pycon-lithuania-special.png"
+tag: podcast
+category: core
 length: "55 min"
-thirdparty: false
 excerpt: ""
-pill: "PyCon LT 2025"
+venue: "PyCon LT 2025"
 redirect_from:
 - /media/pycon-lithuania-special
 ---

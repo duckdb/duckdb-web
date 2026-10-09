@@ -1,0 +1,106 @@
+{% comment %}
+	Unified card for blog posts, library entries, everywhere entries and events.
+	include.item         document (required)
+	include.extra_class  extra class names for the card (optional)
+{% endcomment %}
+
+{% assign item = include.item %}
+{% assign coll = item.collection %}
+{% assign cfg = site.data.post_sources %}
+{% assign tag_labels = site.data.post_types.tag_labels %}
+
+{% if item.external_post_url %}
+	{% assign is_external = true %}
+	{% assign card_link = item.external_post_url %}
+	{% assign source_domain = item.external_post_url | extract_domain %}
+{% else %}
+	{% assign is_external = false %}
+	{% assign card_link = item.url %}
+	{% assign source_domain = cfg.default_domain %}
+{% endif %}
+{% assign source = cfg.sources[source_domain] %}
+{% assign source_icon = source.icon | default: cfg.fallback_icon %}
+{% assign source_label = source.label | default: source_domain %}
+
+{% if coll == "events" %}
+	{% if item.category == "core" %}{% assign filter_classes = "official" %}{% else %}{% assign filter_classes = "community" %}{% endif %}
+	{% if item.tag == "talk" %}{% assign filter_classes = filter_classes | append: " talk" %}{% endif %}
+	{% if item.sponsored %}{% assign filter_classes = filter_classes | append: " sponsored" %}{% endif %}
+{% elsif coll == "everywhere" %}
+	{% assign filter_classes = "everywhere" %}
+{% else %}
+	{% assign filter_classes = item.tag %}
+{% endif %}
+
+{% if item.title contains "DuckLake" or item.title contains "ducklake" %}
+	{% assign placeholder_source = "ducklake" %}
+{% elsif item.category == "community" %}
+	{% assign placeholder_source = "community" %}
+{% else %}
+	{% assign placeholder_source = "duckdb" %}
+{% endif %}
+{% if placeholder_source == "community" %}{% assign type_icon_source = "thirdparty" %}{% else %}{% assign type_icon_source = placeholder_source %}{% endif %}
+{% assign placeholder_variant = item.title | size | modulo: 3 | plus: 1 %}
+{% capture placeholder_thumb %}/images/placeholders/placeholder-{{ placeholder_source }}-{{ placeholder_variant }}.svg{% endcapture %}
+{% assign thumb = item.thumb | default: placeholder_thumb %}
+
+{% assign author_names = item.authors | join: ", " %}
+{% capture search_text %}{{ item.title }} {{ author_names }} {{ item.venue }}{% endcapture %}
+
+<div class="postpreview {{ filter_classes }}{% if is_external %} external-post{% endif %}{% if include.extra_class %} {{ include.extra_class }}{% endif %}" data-title="{{ item.title | escape }}" data-search="{{ search_text | strip | downcase | escape }}" data-core="{% if item.category == 'community' %}false{% else %}true{% endif %}">
+	<a href="{{ card_link }}" title="{{ item.title | escape }}" class="blocklink"{% if is_external %} target="_blank" rel="noopener noreferrer"{% endif %}></a>
+
+	<div class="postimg custom">
+		<img src="{{ thumb }}" alt="{{ item.title | escape }}" class="zoom-image" loading="lazy">
+		{% assign known_type_icons = "article,book,paper,podcast,talk" | split: "," %}
+		{% if coll == "library" and known_type_icons contains item.tag %}
+			<span class="type-icon" aria-hidden="true"><img src="/images/library/type-icons/{{ item.tag }}_{{ type_icon_source }}.png" alt="" loading="lazy"></span>
+		{% elsif coll == "everywhere" %}
+			<span class="type-icon" aria-hidden="true"><img src="/images/library/type-icons/everywhere.png" alt="" loading="lazy"></span>
+		{% endif %}
+	</div>
+
+	<div class="postdetails">
+		<h3>{{ item.title }}</h3>
+
+		<div class="meta">
+			<div class="date">{{ item.date | date: "%Y-%m-%d" }}</div>
+			{% if coll == "posts" %}
+				{% if is_external %}
+					<div class="external-source">{{ source_label }}<svg class="icon"><use href="#link-external-02"></use></svg></div>
+				{% else %}
+					<div class="readingtime">{{ item.content | reading_time }}</div>
+				{% endif %}
+			{% elsif coll == "events" %}
+				{% if item.venue %}
+					<div class="venue">{{ item.venue }}</div>
+				{% elsif item.tag %}
+					<div class="tag">{{ tag_labels[item.tag] | default: item.tag }}</div>
+				{% endif %}
+				{% if item.location %}<div class="location">{{ item.location }}</div>{% endif %}
+			{% else %}
+				{% if coll == "everywhere" %}<div class="tag">{{ tag_labels.everywhere }}</div>{% endif %}
+				{% if item.tag %}<div class="tag">{{ tag_labels[item.tag] | default: item.tag }}</div>{% endif %}
+				{% if item.venue %}<div class="venue">{{ item.venue }}{% if item.episode %} {{ item.episode }}{% endif %}</div>{% endif %}
+			{% endif %}
+		</div>
+
+		{% if item.authors and item.authors.size > 0 %}
+			<div class="byline">
+				<div class="avatars">
+					{% for card_author_name in item.authors limit: 3 %}
+						{% assign card_author = site.data.authors[card_author_name] %}
+						{% if card_author.picture %}
+							<img src="{{ card_author.picture }}" alt="" class="avatar" loading="lazy">
+						{% elsif card_author.icon %}
+							<svg class="icon avatar"><use href="#{{ card_author.icon }}"></use></svg>
+						{% else %}
+							<svg class="avatar" aria-hidden="true"><use href="#avatar-placeholder"></use></svg>
+						{% endif %}
+					{% endfor %}
+				</div>
+				<div class="author"><span>{{ author_names }}</span></div>
+			</div>
+		{% endif %}
+	</div>
+</div>

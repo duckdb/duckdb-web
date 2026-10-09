@@ -2,12 +2,13 @@
 layout: post
 title: "NVIDIA Vera"
 date: 2026-09-15
-author: "The DuckDB and NVIDIA teams"
-thumb: "/images/everywhere/thumbs/nvidia-vera.jpg"
-image: "/images/everywhere/thumbs/nvidia-vera.jpg"
+authors:
+  - The DuckDB and NVIDIA teams
+thumb: "/images/everywhere/thumbs/nvidia-vera.png"
+image: "/images/everywhere/thumbs/nvidia-vera.png"
 excerpt: ""
-tags: ["Servers"]
-thirdparty: true
+tag: servers
+category: community
 ---
 
 We ran the full TPC-H benchmark with the scale factor 1,000 dataset using the [`duckdb-tpch` project](https://github.com/duckdb/duckdb-tpch).

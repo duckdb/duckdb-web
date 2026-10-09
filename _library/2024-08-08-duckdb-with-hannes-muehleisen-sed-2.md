@@ -1,14 +1,15 @@
 ---
 layout: post
 title: "DuckDB with Hannes Mühleisen"
-author: Hannes Mühleisen
-thumb: "/images/library/thumbs/2024-08-08-duckdb-with-hannes-muehleisen.jpg"
-image: "/images/library/thumbs/2024-08-08-duckdb-with-hannes-muehleisen.jpg"
-tags: ["Podcast"]
+authors:
+  - Hannes Mühleisen
+thumb: "/images/library/thumbs/2024-08-08-duckdb-with-hannes-muehleisen-sed-2.png"
+image: "/images/library/thumbs/2024-08-08-duckdb-with-hannes-muehleisen-sed-2.png"
+tag: podcast
+category: core
 length: "45 min"
-thirdparty: false
 excerpt: ""
-pill: "Software Engineering Daily"
+venue: "Software Engineering Daily"
 redirect_from:
 - /media/duckdb-with-hannes-muehleisen
 ---

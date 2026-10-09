@@ -1,9 +1,12 @@
 ---
 layout: post
 title: "From Waddle to Flying: Quickly Expanding DuckDB's Functionality with Scalar Python UDFs"
-author: Pedro Holanda, Thijs Bruineman, Phillip Cloud
+authors:
+  - Pedro Holanda
+  - Thijs Bruineman
+  - Phillip Cloud
 excerpt: DuckDB now supports vectorized Scalar Python User Defined Functions (UDFs). By implementing Python UDFs, users can easily expand the functionality of DuckDB while taking advantage of DuckDB's fast execution model, SQL and data safety.
-tags: ["using DuckDB"]
+tag: using-duckdb
 ---
 
 <img src="{% link images/blog/bird-dance.gif %}"

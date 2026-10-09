@@ -1,12 +1,18 @@
 ---
 layout: post
 title: "One Join Order Does Not Fit All: Reducing Intermediate Results with Per-Split Query Plans"
-author: "Yujun He, Hangdong Zhao, Simon Frisk, Yifei Yang, Kevin Kristensen, Paraschos Koutris, Xiangyao Yu"
-tags: ["Paper"]
-thirdparty: true
+authors:
+  - Yujun He
+  - Hangdong Zhao
+  - Simon Frisk
+  - Yifei Yang
+  - Kevin Kristensen
+  - Paraschos Koutris
+  - Xiangyao Yu
+tag: paper
 category: community
 excerpt: ""
-pill: "VLDB 2026"
+venue: "VLDB 2026"
 ---
 
 | | |

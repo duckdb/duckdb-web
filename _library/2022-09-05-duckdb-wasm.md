@@ -1,11 +1,16 @@
 ---
 layout: post
 title: "DuckDB-Wasm: Fast Analytical Processing for the Web"
-author: "André Kohn, Dominik Moritz, Mark Raasveldt, Hannes Mühleisen, Thomas Neumann"
-tags: ["Paper"]
-thirdparty: false
+authors:
+  - André Kohn
+  - Dominik Moritz
+  - Mark Raasveldt
+  - Hannes Mühleisen
+  - Thomas Neumann
+tag: paper
+category: core
 excerpt: ""
-pill: "VLDB 2022"
+venue: "VLDB 2022"
 ---
 
 |-------|-------|

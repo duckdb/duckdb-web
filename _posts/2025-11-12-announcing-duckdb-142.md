@@ -1,11 +1,12 @@
 ---
 layout: post
 title: "Announcing DuckDB 1.4.2 LTS"
-author: "The DuckDB team"
+authors:
+  - The DuckDB team
 thumb: "/images/blog/thumbs/duckdb-release-1-4-2-lts.svg"
 image: "/images/blog/thumbs/duckdb-release-1-4-2-lts.png"
 excerpt: "Today we are releasing DuckDB 1.4.2, the second patch release of our LTS edition. The new release ships several bugfixes and performance optimizations. We also fixed vulnerabilities in DuckDB's database encryption, and introduced some (opt-in) logger/profiler features that help users understand performance, and full write support through the Iceberg extension."
-tags: ["release"]
+tag: release
 ---
 
 In this blog post, we highlight a few important fixes and convenience improvements in DuckDB v1.4.2, the second patch release in [DuckDB's 1.4 LTS line]({% post_url 2025-09-16-announcing-duckdb-140 %}). To see the complete list of updates, please consult the [release notes on GitHub](https://github.com/duckdb/duckdb/releases/tag/v1.4.2).

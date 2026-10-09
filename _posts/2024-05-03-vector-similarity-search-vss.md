@@ -1,11 +1,12 @@
 ---
 layout: post
 title: "Vector Similarity Search in DuckDB"
-author: Max Gabrielsson
+authors:
+  - Max Gabrielsson
 thumb: "/images/blog/thumbs/vss.svg"
 image: "/images/blog/thumbs/vss.png"
 excerpt: "This blog post shows a preview of DuckDB's new `vss` extension, which introduces support for HNSW (Hierarchical Navigable Small Worlds) indexes to accelerate vector similarity search."
-tags: ["extensions"]
+tag: extensions
 ---
 
 In DuckDB v0.10.0, we introduced the [`ARRAY` data type]({% link docs/current/sql/data_types/array.md %}), which stores fixed-sized lists, to complement the existing variable-size [`LIST` data type]({% link docs/current/sql/data_types/list.md %}).

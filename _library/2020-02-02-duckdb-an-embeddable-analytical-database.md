@@ -1,13 +1,14 @@
 ---
 layout: post
 title: "DuckDB – An Embeddable Analytical Database"
-author: Hannes Mühleisen
-thumb: "/images/library/thumbs/2020-02-02-duckdb-an-embeddable-analytical-database.jpg"
-image: "/images/library/thumbs/2020-02-02-duckdb-an-embeddable-analytical-database.jpg"
-tags: ["Talk"]
+authors:
+  - Hannes Mühleisen
+thumb: "/images/library/thumbs/2020-02-02-duckdb-an-embeddable-analytical-database.png"
+image: "/images/library/thumbs/2020-02-02-duckdb-an-embeddable-analytical-database.png"
+tag: talk
+category: core
 length: "15 min"
-thirdparty: false
-pill: "FOSDEM 2020"
+venue: "FOSDEM 2020"
 excerpt: ""
 redirect_from:
 - /media/duckdb-an-embeddable-analytical-database

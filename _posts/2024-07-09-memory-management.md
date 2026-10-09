@@ -1,11 +1,12 @@
 ---
 layout: post
 title: "Memory Management in DuckDB"
-author: "Mark Raasveldt"
+authors:
+  - Mark Raasveldt
 thumb: "/images/blog/thumbs/memory-management.svg"
 image: "/images/blog/thumbs/memory-management.png"
 excerpt: ""
-tags: ["deep dive"]
+tag: deep-dive
 ---
 
 Memory is an important resource when processing large amounts of data. Memory is a fast caching layer that can provide immense speed-ups to query processing. However, memory is finite and expensive, and when working with large data sets there is generally not enough memory available to keep all necessary data structures cached. Managing memory effectively is critical for a high-performance query engine – as memory must be utilized in order to provide that high performance, but we must be careful so that we do not use excessive memory which can cause out-of-memory errors or can cause the ominous [OOM killer](https://en.wikipedia.org/wiki/Out_of_memory#Recovery) to zap the process out of existence.

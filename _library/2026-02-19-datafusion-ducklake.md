@@ -1,14 +1,15 @@
 ---
 layout: post
 title: "DataFusion + DuckLake"
-author: Zac Farrell
-thumb: "/images/library/thumbs/2026-02-19-datafusion-ducklake.jpg"
-image: "/images/library/thumbs/2026-02-19-datafusion-ducklake.jpg"
-tags: ["Talk"]
+authors:
+  - Zac Farrell
+thumb: "/images/library/thumbs/2026-02-19-datafusion-ducklake.png"
+image: "/images/library/thumbs/2026-02-19-datafusion-ducklake.png"
+tag: talk
 length: "12 min"
 category: community
 excerpt: ""
-pill: "Data Debug SF"
+venue: "Data Debug SF"
 ---
 
 <div class="video-container">

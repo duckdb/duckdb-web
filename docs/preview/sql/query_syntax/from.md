@@ -435,7 +435,7 @@ for (i = 0; i < n; i++) {
 ```
 
 It is difficult to express this in standard SQL because
-relational tables are not ordered, but imported tables such as [data frames]({% link docs/preview/clients/python/data_ingestion.md %}#pandas-dataframes-–-object-columns)
+relational tables are not ordered, but imported tables such as [data frames]({% link docs/preview/clients/python/data_ingestion.md %}#pandas-dataframes--object-columns)
 or disk files (like [CSVs]({% link docs/preview/data/csv/overview.md %}) or [Parquet files]({% link docs/preview/data/parquet/overview.md %})) do have a natural ordering.
 
 Connecting them using this ordering is called a _positional join:_

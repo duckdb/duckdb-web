@@ -1,12 +1,13 @@
 ---
 layout: post
 title: "Ducks Love Running in Circles"
-author: "Torsten Grust"
-tags: ["Talk"]
+authors:
+  - Torsten Grust
+tag: talk
+category: core
 length: "15 min"
-thirdparty: false
 excerpt: ""
-pill: "DuckDB in Science"
+venue: "DuckDB in Science"
 ---
 
 <div class="video-container">

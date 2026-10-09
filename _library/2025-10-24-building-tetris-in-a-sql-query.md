@@ -1,11 +1,12 @@
 ---
 layout: post
 title: "Building Tetris in a SQL Query!"
-author: "Nuno Faria"
-tags: ["Talk"]
+authors:
+  - Nuno Faria
+tag: talk
 category: community
 excerpt: ""
-pill: "PGConf.EU 2025"
+venue: "PGConf.EU 2025"
 ---
 
 |-------|-------|

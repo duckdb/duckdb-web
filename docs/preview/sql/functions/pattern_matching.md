@@ -210,4 +210,4 @@ DuckDB supports some PostgreSQL-style operators for regular expression matching:
 
 By default, these operators perform partial matching, following PostgreSQL's semantics.
 This is controlled by the deprecated `regex_match_operator_semantics` setting.
-Setting it to `full` restores the legacy behavior in which `~` and `!~` map to [`regexp_full_match`]({% link docs/preview/sql/functions/text.md %}#regexp_full_matchstring-regex), but this setting is deprecated and will be removed in a future release.
+Setting it to `full` restores the legacy behavior in which `~` and `!~` map to [`regexp_full_match`]({% link docs/preview/sql/functions/text.md %}#regexp_full_matchstring-regex-col2), but this setting is deprecated and will be removed in a future release.

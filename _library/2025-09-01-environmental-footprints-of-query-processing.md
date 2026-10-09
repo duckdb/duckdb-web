@@ -1,13 +1,13 @@
 ---
 layout: post
 title: "Environmental Footprints of Query Processing: A Vision for Sustainable Database Architectures"
-author: "Michail Bachras, Hans-Arno Jacobsen"
-thumb: "/images/library/thumbs/vldb.svg"
-image: "/images/library/thumbs/vldb.png"
-tags: ["Paper"]
+authors:
+  - Michail Bachras
+  - Hans-Arno Jacobsen
+tag: paper
 category: community
 excerpt: ""
-pill: "VLDB 2025"
+venue: "VLDB 2025"
 ---
 
 |-------|-------|

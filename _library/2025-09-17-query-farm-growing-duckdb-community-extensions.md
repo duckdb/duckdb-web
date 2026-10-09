@@ -1,12 +1,13 @@
 ---
 layout: post
 title: "query.farm: Growing DuckDB Community Extensions"
-author: "Lorenzo Mangani"
-tags: ["Talk"]
+authors:
+  - Lorenzo Mangani
+tag: talk
 length: "25 min"
 category: community
 excerpt: ""
-pill: "DuckDB Amsterdam Meetup"
+venue: "DuckDB Amsterdam Meetup"
 ---
 
 <div class="video-container">

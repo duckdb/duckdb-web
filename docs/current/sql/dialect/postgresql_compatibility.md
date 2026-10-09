@@ -217,6 +217,10 @@ Instead, please use the [`strptime` function]({% link docs/current/sql/functions
 
 Most parts extracted by the [`date_part` function]({% link docs/current/sql/functions/datepart.md %}) are returned as integers. Since there are no infinite integer values in DuckDB, `NULL`s are returned for infinite timestamps.
 
+### `pg_size_pretty` Function
+
+DuckDB's `pg_size_pretty` function (an alias of [`format_bytes`]({% link docs/current/sql/functions/text.md %}#format_bytesinteger)) formats sizes using binary (IEC) units such as `KiB` and `MiB`, whereas PostgreSQL uses `kB` and `MB`. For example, `pg_size_pretty(1024)` returns `1.0 KiB` in DuckDB and `1024 bytes` in PostgreSQL, and `pg_size_pretty(1048576)` returns `1.0 MiB` in DuckDB and `1024 kB` in PostgreSQL.
+
 ## Resolution of Type Names in the Schema
 
 For [`CREATE TABLE` statements]({% link docs/current/sql/statements/create_table.md %}), DuckDB attempts to resolve type names in the schema where a table is created. For example:
@@ -273,7 +277,7 @@ To work around this, add the other attributes or use the [`GROUP BY ALL` clause]
 
 PostgreSQL supports the [POSIX regular expression matching operators]({% link docs/current/sql/functions/pattern_matching.md %}) `~` (case-sensitive partial regex matching) and `~*` (case-insensitive partial regex matching) as well as their negated variants, `!~` and `!~*`, respectively.
 
-In DuckDB, `~` is equivalent to [`regexp_full_match`]({% link docs/current/sql/functions/text.md %}#regexp_full_matchstring-regex) and `!~` is equivalent to `NOT regexp_full_match`.
+In DuckDB, `~` is equivalent to [`regexp_full_match`]({% link docs/current/sql/functions/text.md %}#regexp_full_matchstring-regex-col2) and `!~` is equivalent to `NOT regexp_full_match`.
 The operators `~*` and `!~*` are not supported.
 
 The table below shows that the correspondence between these functions in PostgreSQL and DuckDB is almost non-existent.

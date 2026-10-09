@@ -1,11 +1,13 @@
 ---
 layout: post
 title: "Analytics-Optimized Concurrent Transactions"
-author: "Mark Raasveldt, Hannes Mühleisen"
+authors:
+  - Mark Raasveldt
+  - Hannes Mühleisen
 thumb: "/images/blog/thumbs/acid.svg"
 image: "/images/blog/thumbs/acid.png"
 excerpt: "DuckDB employs unique analytics-optimized optimistic multi-version concurrency control techniques. These allow DuckDB to perform large-scale in-place updates efficiently."
-tags: ["deep dive"]
+tag: deep-dive
 toc: false
 ---
 

@@ -12,7 +12,7 @@ DuckDB allows you to quickly generate synthetic datasets. To do so, you may use:
 * hash functions, e.g.,
   [`hash`]({% link docs/current/sql/functions/utility.md %}#hashvalue),
   [`md5`]({% link docs/current/sql/functions/utility.md %}#md5string),
-  [`sha256`]({% link docs/current/sql/functions/utility.md %}#sha256value)
+  [`sha256`]({% link docs/current/sql/functions/utility.md %}#sha256string)
 * the [Faker Python package](https://faker.readthedocs.io/) via the [Python function API]({% link docs/current/clients/python/function.md %})
 * using [cross products (Cartesian products)]({% link docs/current/sql/query_syntax/from.md %}#cross-product-joins-cartesian-product)
 

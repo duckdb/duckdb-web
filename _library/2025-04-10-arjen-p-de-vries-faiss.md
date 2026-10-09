@@ -1,14 +1,15 @@
 ---
 layout: post
 title: "DuckDB in Research S01E04: Arjen P. de Vries"
-author: "Disseminate Podcast Series by Jack Waudby"
-thumb: "/images/library/thumbs/2025-04-10-arjen-p-de-vries-faiss.jpg"
-image: "/images/library/thumbs/2025-04-10-arjen-p-de-vries-faiss.jpg"
-tags: ["Podcast"]
+authors:
+  - Disseminate Podcast Series by Jack Waudby
+thumb: "/images/library/thumbs/2025-04-10-arjen-p-de-vries-faiss.png"
+image: "/images/library/thumbs/2025-04-10-arjen-p-de-vries-faiss.png"
+tag: podcast
 length: "45 min"
 category: community
 excerpt: ""
-pill: "DuckDB in Research"
+venue: "DuckDB in Research"
 episode: "S01E04"
 ---
 

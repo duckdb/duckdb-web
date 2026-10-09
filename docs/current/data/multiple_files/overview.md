@@ -130,6 +130,33 @@ SELECT *
 FROM read_parquet('test/*.parquet');
 ```
 
+#### Handling Patterns That Match No Files
+
+If a glob pattern does not match any files, the read functions raise an error:
+
+```sql
+SELECT *
+FROM read_parquet('test/*.parquet');
+```
+
+```console
+IO Error:
+No files found that match the pattern "test/*.parquet"
+```
+
+To handle this case gracefully, use the [`glob` function](#glob-function-to-find-filenames) to check whether any files match before reading. Unlike the read functions, `glob` returns an empty result instead of raising an error when nothing matches:
+
+```sql
+SELECT count(*) AS matches
+FROM glob('test/*.parquet');
+```
+
+| matches |
+|--------:|
+| 0       |
+
+Your application can then skip the read when `matches` is `0`.
+
 ### List of Globs
 
 The glob syntax and the list input parameter can be combined to scan files that meet one of multiple patterns.

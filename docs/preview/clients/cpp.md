@@ -70,7 +70,30 @@ if (result->HasError()) {
 }
 ```
 
-If successful, other fields are set: the type of statement that was just executed (e.g., `StatementType::INSERT_STATEMENT`) is contained in `statement_type`. The high-level (“Logical type”/“SQL type”) types of the result set columns are in `types`. The names of the result columns are in the `names` string vector. In case multiple result sets are returned, for example because the result set contained multiple statements, the result set can be chained using the `next` field.
+If successful, other fields are set: the type of statement that was just executed (e.g., `StatementType::INSERT_STATEMENT`) is returned by `GetStatementType()`. The high-level (“Logical type”/“SQL type”) types of the result set columns are returned by `GetTypes()`. The names of the result columns are returned by `GetNames()` as a vector of strings. In case multiple result sets are returned, for example because the result set contained multiple statements, the result set can be chained using the `next` field.
+
+Because `Query()` returns a `MaterializedQueryResult`, the result set can be traversed directly by index. Use `ColumnCount()` and `RowCount()` for the dimensions, and `GetValue(column, row)` to retrieve an individual value as a `duckdb::Value`:
+
+```cpp
+auto result = con.Query("SELECT * FROM integers");
+if (result->HasError()) {
+    cerr << result->GetError() << endl;
+} else {
+    // Print the column names as a header row
+    for (idx_t col_idx = 0; col_idx < result->ColumnCount(); col_idx++) {
+        cout << result->GetNames()[col_idx];
+        cout << (col_idx + 1 < result->ColumnCount() ? "\t" : "\n");
+    }
+    // Iterate over every row and column of the materialized result
+    for (idx_t row_idx = 0; row_idx < result->RowCount(); row_idx++) {
+        for (idx_t col_idx = 0; col_idx < result->ColumnCount(); col_idx++) {
+            // GetValue returns a duckdb::Value; ToString renders it (NULL values become "NULL")
+            cout << result->GetValue(col_idx, row_idx).ToString();
+            cout << (col_idx + 1 < result->ColumnCount() ? "\t" : "\n");
+        }
+    }
+}
+```
 
 DuckDB also supports prepared statements in the C++ API with the `Prepare()` method. This returns an instance of `PreparedStatement`. This instance can be used to execute the prepared statement with parameters. Below is an example:
 

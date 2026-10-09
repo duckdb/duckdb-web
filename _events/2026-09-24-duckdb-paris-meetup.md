@@ -1,13 +1,16 @@
 ---
 layout: post
 title: "DuckDB Paris Meetup"
-author: "Taktile, Altertable, nao"
+authors:
+  - Taktile
+  - Altertable
+  - nao
 thumb: "/images/events/thumbs/duckdb-paris-meetup.svg"
 image: "/images/events/thumbs/duckdb-paris-meetup.png"
 excerpt: ""
-tags: ["meetup"]
-labels: [community]
-venue: "Algolia, Paris"
+tag: meetup
+category: community
+location: "Algolia, Paris"
 ---
 
 The DuckDB Paris meetup is hosted by DuckDB and Altertable at Algolia’s Paris office, and features talks, demos, food and drinks.

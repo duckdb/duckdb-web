@@ -136,6 +136,25 @@ Below is a table of the columns returned by `parquet_kv_metadata`.
 | key       | BLOB    |
 | value     | BLOB    |
 
+### GeoParquet Metadata
+
+[GeoParquet](https://geoparquet.org/) files store their geospatial metadata (the primary geometry column, its encoding, the coordinate reference system, and more) under the `geo` key of the Parquet key-value metadata. Because `parquet_kv_metadata` returns the key and value as `BLOB`s that contain JSON, use the [`decode` function]({% link docs/current/sql/functions/blob.md %}) to turn them into strings and the [JSON extraction operators]({% link docs/current/data/json/json_functions.md %}#json-extraction-functions) to read individual fields:
+
+```sql
+SELECT
+    decode(value)->>'$.version' AS version,
+    decode(value)->>'$.primary_column' AS primary_column,
+    decode(value)->>'$.columns.geometry.encoding' AS encoding
+FROM parquet_kv_metadata('file.parquet')
+WHERE decode(key) = 'geo';
+```
+
+| version | primary_column | encoding |
+| ------- | -------------- | -------- |
+| 1.0.0   | geometry       | WKB      |
+
+When the file embeds a coordinate reference system, it is stored as [PROJJSON](https://proj.org/en/stable/specifications/projjson.html) under the geometry column's `crs` key, for example `decode(value)->>'$.columns.geometry.crs.id.code'`.
+
 ## Full Metadata
 
 The `parquet_full_metadata` function returns all metadata for a Parquet file in a single row, combining the results of `parquet_file_metadata`, `parquet_metadata`, `parquet_schema`, and `parquet_kv_metadata` as nested struct arrays:

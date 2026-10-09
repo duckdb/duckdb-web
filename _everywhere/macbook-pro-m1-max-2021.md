@@ -2,12 +2,13 @@
 layout: post
 title: "MacBook Pro M1 Max (2021)"
 date: 2025-10-09
-author: "Gábor Szárnyas"
-thumb: "/images/everywhere/thumbs/macbook-pro-14.jpg"
-image: "/images/everywhere/thumbs/macbook-pro-14.jpg"
+authors:
+  - Gábor Szárnyas
+thumb: "/images/everywhere/thumbs/macbook-pro-m1-max-2021.png"
+image: "/images/everywhere/thumbs/macbook-pro-m1-max-2021.png"
 excerpt: ""
-tags: ["PCs"]
-thirdparty: false
+tag: pcs
+category: core
 ---
 
 DuckDB v1.4.4 on the 2021 MacBook Pro M1 Max with 64 GB RAM can complete all queries of the [TPC-DS workload]({% link docs/current/core_extensions/tpcds.md %}) on the SF1,000 dataset (which uses 1 TiB of space when stored in CSV format).

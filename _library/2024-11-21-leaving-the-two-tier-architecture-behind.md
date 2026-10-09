@@ -1,12 +1,13 @@
 ---
 layout: post
 title: "Leaving the Two-Tier Architecture Behind"
-author: Hannes Mühleisen
-tags: ["Talk"]
+authors:
+  - Hannes Mühleisen
+tag: talk
+category: core
 length: "45 min"
-thirdparty: false
 excerpt: ""
-pill: "Dijkstra Award 2024"
+venue: "Dijkstra Award 2024"
 ---
 
 <div class="video-container">

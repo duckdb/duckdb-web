@@ -1,13 +1,13 @@
 ---
 layout: post
 title: "Getting Started with DuckDB"
-author: "Simon Aubury, Ned Letcher"
-thumb: "/images/library/thumbs/getting-started-with-duckdb.svg"
-image: "/images/library/thumbs/getting-started-with-duckdb.png"
-tags: ["Book"]
+authors:
+  - Simon Aubury
+  - Ned Letcher
+tag: book
 category: community
 excerpt: ""
-pill: "Getting Started with DuckDB"
+venue: "Getting Started with DuckDB"
 ---
 
 <div class="graphics-box">

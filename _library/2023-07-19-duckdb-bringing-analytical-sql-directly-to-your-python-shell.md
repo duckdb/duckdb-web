@@ -1,14 +1,15 @@
 ---
 layout: post
 title: "DuckDB: Bringing Analytical SQL Directly to Your Python Shell"
-author: Pedro Holanda
-thumb: "/images/library/thumbs/2023-07-19-duckdb-bringing-analytical-sql-directly-to-your-python-shell.jpg"
-image: "/images/library/thumbs/2023-07-19-duckdb-bringing-analytical-sql-directly-to-your-python-shell.jpg"
-tags: ["Talk"]
+authors:
+  - Pedro Holanda
+thumb: "/images/library/thumbs/2023-07-19-duckdb-bringing-analytical-sql-directly-to-your-python-shell.png"
+image: "/images/library/thumbs/2023-07-19-duckdb-bringing-analytical-sql-directly-to-your-python-shell.png"
+tag: talk
+category: core
 length: "40 min"
-thirdparty: false
 excerpt: ""
-pill: "EuroPython 2023"
+venue: "EuroPython 2023"
 ---
 
 <div class="video-container">

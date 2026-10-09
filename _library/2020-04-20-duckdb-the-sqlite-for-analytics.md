@@ -1,14 +1,15 @@
 ---
 layout: post
 title: "The SQLite for Analytics"
-author: Mark Raasveldt
-thumb: "/images/library/thumbs/2024-04-27-duckdb-the-sqlite-for-analytics.jpg"
-image: "/images/library/thumbs/2024-04-27-duckdb-the-sqlite-for-analytics.jpg"
-tags: ["Talk"]
+authors:
+  - Mark Raasveldt
+thumb: "/images/library/thumbs/2020-04-20-duckdb-the-sqlite-for-analytics.png"
+image: "/images/library/thumbs/2020-04-20-duckdb-the-sqlite-for-analytics.png"
+tag: talk
+category: core
 length: "65 min"
-thirdparty: false
 excerpt: ""
-pill: "Quarantine 2020 Database Talks at CMU"
+venue: "Quarantine 2020 Database Talks at CMU"
 redirect_from:
 - /media/duckdb-the-sqlite-for-analytics
 ---

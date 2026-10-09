@@ -1,13 +1,14 @@
 ---
 layout: post
 title: "QuackIR: Retrieval in DuckDB and Other Relational Database Management Systems"
-author: "Yijun Ge, Zijian Chen, Jimmy Lin"
-thumb: "/images/library/thumbs/emnlp.svg"
-image: "/images/library/thumbs/emnlp.png"
-tags: ["Paper"]
+authors:
+  - Yijun Ge
+  - Zijian Chen
+  - Jimmy Lin
+tag: paper
 category: community
 excerpt: ""
-pill: "EMNLP 2025"
+venue: "EMNLP 2025"
 ---
 
 |-------|-------|

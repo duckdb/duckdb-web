@@ -1,11 +1,12 @@
 ---
 layout: post
 title: "How DuckDB Runs Recursive CTEs Faster"
-author: "Denis Hirn"
+authors:
+  - Denis Hirn
 excerpt: "DuckDB's recursive CTE engine now treats recursion as one long-lived computation: it retains eligible epoch-invariant state, chooses execution modes from exact frontier cardinalities and physical work, probes keyed state directly and gives `USING KEY ... UNION` changed-key semantics."
-tags: ["deep dive"]
+tag: deep-dive
 thumb: "/images/blog/thumbs/recursive-queries.svg"
-image: "/images/blog/thumbs/recursive-queries.jpg"
+image: "/images/blog/thumbs/recursive-queries.png"
 ---
 
 When I implemented [DuckDB's first recursive CTE operator](https://github.com/duckdb/duckdb/pull/404) in 2020, correctness determined the design: evaluate the non-recursive term once, then evaluate the recursive term until the next working table is empty. That established the right semantic contract, but reusable runtime state was scoped too narrowly. Across iterations, the recursive input changes while most of the machinery that evaluates it remains reusable. The implementation nevertheless treated every iteration almost like a new query and repeatedly paid for pipeline scheduling, operator setup, execution and teardown. I have wanted to remove that mismatch ever since.

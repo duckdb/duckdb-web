@@ -1,12 +1,13 @@
 ---
 layout: post
 title: "Elevating Bitmap Indexing in OLAP DBMSs"
-author: "Junchang Wang"
-tags: ["Talk"]
+authors:
+  - Junchang Wang
+tag: talk
+category: core
 length: "10 min"
-thirdparty: false
 excerpt: ""
-pill: "DuckDB in Science"
+venue: "DuckDB in Science"
 ---
 
 <div class="video-container">

@@ -1,11 +1,12 @@
 ---
 layout: post
 title: "Lightweight Text Analytics Workflows with DuckDB"
-author: Petrica Leuca
+authors:
+  - Petrica Leuca
 thumb: "/images/blog/thumbs/text-analytics.svg"
 image: "/images/blog/thumbs/text-analytics.png"
 excerpt: "In this post, we demonstrate how to use DuckDB for keyword, full-text, and semantic similarity search with embeddings."
-tags: ["using DuckDB"]
+tag: using-duckdb
 ---
 
 ## Introduction

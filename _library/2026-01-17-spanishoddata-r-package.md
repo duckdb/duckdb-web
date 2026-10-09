@@ -1,13 +1,18 @@
 ---
 layout: post
 title: "spanishoddata: A package for accessing and working with Spanish Open Mobility Big Data"
-author: "Egor Kotov, Eugeni Vidal-Tortosa, Oliva G. Cantú-Ros, Javier Burrieza-Galán, Ricardo Herranz, Tania Gullón Muñoz-Repiso, Robin Lovelace"
-thumb: "/images/library/thumbs/paper.svg"
-image: "/images/library/thumbs/paper.png"
-tags: ["Paper"]
+authors:
+  - Egor Kotov
+  - Eugeni Vidal-Tortosa
+  - Oliva G. Cantú-Ros
+  - Javier Burrieza-Galán
+  - Ricardo Herranz
+  - Tania Gullón Muñoz-Repiso
+  - Robin Lovelace
+tag: paper
 category: community
 excerpt: ""
-pill: "EPB 2026"
+venue: "EPB 2026"
 ---
 
 | | |

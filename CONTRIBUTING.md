@@ -53,6 +53,39 @@ Before creating a pull request, please perform the following steps:
 
 When creating a PR, please check the box to "Allow edits from maintainers". This allows the maintainers to make small adjustments before merging a pull request.
 
+## Blog Posts, Library Entries, Events and Everywhere Entries
+
+Blog posts (`_posts`), library entries (`_library`), events (`_events`) and Everywhere entries (`_everywhere`) share one front matter schema, so that their cards and filters work the same on every overview page.
+Each folder contains a `.template.md` file to start from.
+
+```yaml
+layout: post
+title: "DuckPGQ: Efficient Property Graph Queries in an Analytical RDBMS"
+authors:
+  - Daniel ten Wolde
+  - Tavneet Singh
+  - Gábor Szárnyas
+  - Peter Boncz
+excerpt: ""
+tag: paper
+category: community
+venue: "CIDR 2023"
+```
+
+* `authors` is always a list, even for a single person. Write names exactly as in [`_data/authors.yml`](_data/authors.yml) to show an avatar and, if set there, a `role` below the name on the post page. Organizations such as `DuckDB` or `The DuckDB team` are valid entries.
+* `tag` holds exactly one lowercase value, which is the filter value on the overview page:
+    * blog: `using-duckdb`, `benchmark`, `deep-dive`, `extensions`, `release`
+    * library: `article`, `book`, `paper`, `podcast`, `talk`
+    * events: `meetup`, `conference`, `workshop`, `talk`, `duckcon`
+    * Everywhere: `servers`, `pcs`, `phones`, `other`
+* `category` is `core` or `community` for library entries, events and Everywhere entries. Official DuckDB events are `core`. Blog posts do not use `category`.
+* `thumb` is the card image in a 1.91:1 format, `image` is the social media preview (PNG or JPG). Without `thumb`, the card shows a placeholder in the color of its source (DuckDB, DuckLake or community), e.g. for papers that have no thumbnail yet.
+* `venue` is the conference, series or publication (e.g., `VLDB 2025`, `Data Engineering Podcast`). Events additionally use `location` for the physical place, `sponsored: true` for sponsored events and optionally `end_date`.
+* Library entries may add `episode` and `length`. Blog posts may add `external_post_url`.
+* Labels and headings for the filters are defined in [`_data/post_types.yml`](_data/post_types.yml).
+
+When a talk event has taken place, it can be moved to `_library` with its front matter unchanged; `location` and `sponsored` are ignored there.
+
 ## Style Guide
 
 Please adhere the following style guide when submitting a pull request.

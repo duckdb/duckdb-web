@@ -1,14 +1,15 @@
 ---
 layout: post
 title: "DuckDB: Big Data Unplugged"
-author: Gábor Szárnyas
-thumb: "/images/library/thumbs/2025-11-13-duckdb-big-data-unplugged.jpg"
-image: "/images/library/thumbs/2025-11-13-duckdb-big-data-unplugged.jpg"
-tags: ["Talk"]
+authors:
+  - Gábor Szárnyas
+thumb: "/images/library/thumbs/2025-11-13-duckdb-big-data-unplugged.png"
+image: "/images/library/thumbs/2025-11-13-duckdb-big-data-unplugged.png"
+tag: talk
+category: core
 length: "30 min"
-thirdparty: false
 excerpt: ""
-pill: "Compass AI & Data Summit 2025"
+venue: "Compass AI & Data Summit 2025"
 redirect_from:
 - /media/duckdb-big-data-unplugged
 ---

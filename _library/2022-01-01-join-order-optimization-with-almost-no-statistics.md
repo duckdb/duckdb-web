@@ -1,11 +1,12 @@
 ---
 layout: post
 title: "Join Order Optimization with (Almost) No Statistics"
-author: "Tom Ebergen"
-tags: ["Book"]
-thirdparty: false
+authors:
+  - Tom Ebergen
+tag: book
+category: core
 excerpt: ""
-pill: "MSc Thesis 2022"
+venue: "MSc Thesis 2022"
 ---
 
 |-------|-------|

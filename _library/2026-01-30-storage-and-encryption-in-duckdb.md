@@ -1,13 +1,12 @@
 ---
 layout: post
 title: "Storage and Encryption in DuckDB"
-author: "Lotte Felius"
-tags: ["Talk"]
-thirdparty: true
-highlighted: true
+authors:
+  - Lotte Felius
+tag: talk
 category: community
 excerpt: ""
-pill: "DuckDB Developer Meeting #1"
+venue: "DuckDB Developer Meeting #1"
 ---
 
 <div class="video-container">

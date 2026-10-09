@@ -1,14 +1,15 @@
 ---
 layout: post
 title: "Quack w/ Hannes Mühleisen"
-author: Hannes Mühleisen
-thumb: "/images/library/thumbs/2026-05-28-quack-w-hannes-muehleisen.jpg"
-image: "/images/library/thumbs/2026-05-28-quack-w-hannes-muehleisen.jpg"
-tags: ["Podcast"]
+authors:
+  - Hannes Mühleisen
+thumb: "/images/library/thumbs/2026-05-28-quack-w-hannes-muehleisen.png"
+image: "/images/library/thumbs/2026-05-28-quack-w-hannes-muehleisen.png"
+tag: podcast
+category: core
 length: "70 min"
-thirdparty: false
 excerpt: ""
-pill: "Practical Data Community Lunch"
+venue: "Practical Data Community Lunch"
 ---
 
 <div class="video-container">

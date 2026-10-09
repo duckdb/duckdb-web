@@ -1,20 +1,15 @@
 ---
 layout: post
-event: true
 title: "DuckDB Amsterdam Meetup #3"
-author: "DuckDB meetup organizers"
+authors:
+  - DuckDB meetup organizers
 thumb: "/images/events/thumbs/duckdb-amsterdam-meetup-3.svg"
 image: "/images/events/thumbs/duckdb-amsterdam-meetup-3.png"
 excerpt: ""
-tags: ["meetup"]
-labels: [official]
-venue: "Adyen Rokin office, Amsterdam"
+tag: meetup
+category: core
+location: "Adyen Rokin office, Amsterdam"
 ---
-
-<img src="{% link images/events/thumbs/duckdb-amsterdam-meetup-3.svg %}"
-     alt="DuckDB Amsterdam Meetup Splashscreen"
-     width="680"
-     />
 
 We are excited to announce the [third DuckDB Amsterdam meetup](https://www.meetup.com/duckdb/events/308780911/), co-organized by [Adyen](https://www.adyen.com/) and [DuckLabs](https://ducklabs.com/).
 

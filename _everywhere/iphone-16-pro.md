@@ -2,12 +2,13 @@
 layout: post
 title: "iPhone 16 Pro Max"
 date: 2024-12-06
-author: "Hannes Mühleisen"
-thumb: "/images/everywhere/thumbs/iphone-16-pro.jpg"
-image: "/images/everywhere/thumbs/iphone-16-pro.jpg"
+authors:
+  - Hannes Mühleisen
+thumb: "/images/everywhere/thumbs/iphone-16-pro.png"
+image: "/images/everywhere/thumbs/iphone-16-pro.png"
 excerpt: ""
-tags: ["Phones"]
-thirdparty: false
+tag: phones
+category: core
 ---
 
 The iPhone 16 Pro Max can run DuckDB using the Swift client.

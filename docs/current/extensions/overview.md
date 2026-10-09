@@ -45,6 +45,8 @@ FROM 'test.json';
 
 To make the DuckDB distribution lightweight, only a few essential extensions are built-in, varying slightly per distribution. Which extension is built-in on which platform is documented in the [list of core extensions]({% link docs/current/core_extensions/overview.md %}#default-extensions).
 
+> Most of DuckDB's scalar and aggregate functions are provided by the `core_functions` extension, which is built in and loaded by default in the standard distributions (such as the CLI). Minimal embeddings that do not load any extensions by default may need to run `LOAD core_functions;` explicitly. Some extensions depend on it as well, for example [DuckLake]({% link docs/current/core_extensions/ducklake.md %}), which otherwise fails with an error such as `Binder Error: Failed to load DuckLake table data. Referenced table "system" not found!`.
+
 ## Installing More Extensions
 
 To make an extension that is not built-in available in DuckDB, two steps need to happen:

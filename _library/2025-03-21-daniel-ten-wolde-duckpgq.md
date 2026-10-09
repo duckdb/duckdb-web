@@ -1,14 +1,15 @@
 ---
 layout: post
 title: "DuckDB in Research S01E02: Daniël ten Wolde"
-author: "Disseminate Podcast Series by Jack Waudby"
-thumb: "/images/library/thumbs/2025-03-21-daniel-ten-wolde-duckpgq.jpg"
-image: "/images/library/thumbs/2025-03-21-daniel-ten-wolde-duckpgq.jpg"
-tags: ["Podcast"]
+authors:
+  - Disseminate Podcast Series by Jack Waudby
+thumb: "/images/library/thumbs/2025-03-21-daniel-ten-wolde-duckpgq.png"
+image: "/images/library/thumbs/2025-03-21-daniel-ten-wolde-duckpgq.png"
+tag: podcast
 length: "50 min"
 category: community
 excerpt: ""
-pill: "DuckDB in Research"
+venue: "DuckDB in Research"
 episode: "S01E02"
 ---
 

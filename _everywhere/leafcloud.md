@@ -2,12 +2,13 @@
 layout: post
 title: "DuckLake on Leafcloud"
 date: 2026-03-07
-author: "Gábor Szárnyas"
-thumb: "/images/everywhere/thumbs/leafcloud.jpg"
-image: "/images/everywhere/thumbs/leafcloud.jpg"
+authors:
+  - Gábor Szárnyas
+thumb: "/images/everywhere/thumbs/leafcloud.png"
+image: "/images/everywhere/thumbs/leafcloud.png"
 excerpt: ""
-tags: ["Servers"]
-thirdparty: false
+tag: servers
+category: core
 ---
 
 This tutorial is an adaptation of [“Public DuckLake on Object Storage”](https://ducklake.select/docs/stable/duckdb/guides/public_ducklake_on_object_storage) to the object storage of [Leafcloud](https://leaf.cloud/), an Amsterdam-based cloud provider.

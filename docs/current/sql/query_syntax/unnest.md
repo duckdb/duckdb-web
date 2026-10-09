@@ -8,7 +8,7 @@ tested: true
 ---
 
 Unnesting is an operation that decomposes values of a [composite types]({% link docs/current/sql/data_types/overview.md %}#nested--composite-types) into its components.
-Values of the [`LIST`]({% link docs/current/sql/data_types/list.md %}) and [`STRUCT`]({% link docs/current/sql/data_types/struct.md %}) type may be unnested using the [`unnest()` function]({% link docs/current/sql/functions/list.md %}#unnestlist-recursive-max_depth).
+Values of the [`LIST`]({% link docs/current/sql/data_types/list.md %}) and [`STRUCT`]({% link docs/current/sql/data_types/struct.md %}) type may be unnested using the [`unnest()` function]({% link docs/current/sql/functions/list.md %}#unnestlist).
 
 * Unnesting turns a `LIST`-typed value into a table column: each list-element creates a row, and each element become a column value.
 * Unnesting a `STRUCT`-typed value creates a column for each member. The member key becomes the column name, and the member value becomes a column value. Values of a `STRUCT`-type may also be unnested using [dot-star (`⟨struct⟩.*`{:.language-sql .highlight}) shorthand syntax]({% link docs/current/sql/data_types/struct.md %}#unnest--struct), but the `unnest()` function offers some additional functionality.
@@ -37,7 +37,7 @@ Each result becomes a column of the output table, aligning their values by ordin
 In a final step, the columns of the input row are added to this result. In other words, the repeating group is created only once, and for all `unnest()` results, rather than again for each individual `unnest()` result.
 
 ### Getting the Element Index
-Unnesting a value of the `LIST`-type yields only the element values. To also keep track of their indices (the subscripts), you can use the built-in macro [`generate_subscripts()`]({% link docs/current/sql/functions/list.md %}#generate_subscriptslist-dimension).
+Unnesting a value of the `LIST`-type yields only the element values. To also keep track of their indices (the subscripts), you can use the built-in macro [`generate_subscripts()`]({% link docs/current/sql/functions/list.md %}#generate_subscriptsarr-dim).
 The `generate_subscripts` macro takes a value of the `LIST`-type as first argument.
 
 ### `unnest()` as Table Function
@@ -207,7 +207,7 @@ SELECT unnest([[[1, 2], [3, 4]], [[5, 6], [7, 8, 9], []], [[10, 11]]], max_depth
 
 ### Keeping Track of List Entry Positions
 
-To keep track of each entry's position within the original list, `unnest` may be combined with [`generate_subscripts`]({% link docs/current/sql/functions/list.md %}#generate_subscripts):
+To keep track of each entry's position within the original list, `unnest` may be combined with [`generate_subscripts`]({% link docs/current/sql/functions/list.md %}#generate_subscriptsarr-dim):
 
 ```sql
 SELECT unnest(l) AS x, generate_subscripts(l, 1) AS index

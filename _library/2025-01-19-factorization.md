@@ -1,13 +1,14 @@
 ---
 layout: post
 title: "Adaptive Factorization Using Linear-Chained Hash Tables"
-author: "Paul Groß, Daniel ten Wolde, Peter Boncz"
-thumb: "/images/library/thumbs/cidr.svg"
-image: "/images/library/thumbs/cidr.png"
-tags: ["Paper"]
+authors:
+  - Paul Groß
+  - Daniel ten Wolde
+  - Peter Boncz
+tag: paper
 category: community
 excerpt: ""
-pill: "CIDR 2025"
+venue: "CIDR 2025"
 ---
 
 |-------|-------|

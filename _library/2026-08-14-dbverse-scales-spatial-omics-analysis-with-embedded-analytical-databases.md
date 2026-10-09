@@ -1,12 +1,17 @@
 ---
 layout: post
 title: "dbverse Scales Spatial Omics Analysis with Embedded Analytical Databases"
-author: "Edward C. Ruiz, Veronica Jarzabek, Jiaji G. Chen, Timur Rizvanov, Iqra Amin, Ruben Dries"
-tags: ["Paper"]
-thirdparty: true
+authors:
+  - Edward C. Ruiz
+  - Veronica Jarzabek
+  - Jiaji G. Chen
+  - Timur Rizvanov
+  - Iqra Amin
+  - Ruben Dries
+tag: paper
 category: community
 excerpt: ""
-pill: "bioRxiv"
+venue: "bioRxiv"
 ---
 
 | | |

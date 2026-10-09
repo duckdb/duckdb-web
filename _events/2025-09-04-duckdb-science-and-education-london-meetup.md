@@ -1,20 +1,15 @@
 ---
 layout: post
-event: true
 title: "DuckDB in Science Meetup (London)"
-author: "DuckDB meetup organizers"
+authors:
+  - DuckDB meetup organizers
 thumb: "/images/events/thumbs/duckdb-science-meetup.svg"
 image: "/images/events/thumbs/duckdb-science-meetup.png"
 excerpt: ""
-tags: ["meetup"]
-labels: [official]
-venue: "One Great George Street, London"
+tag: meetup
+category: core
+location: "One Great George Street, London"
 ---
-
-<img src="{% link images/events/thumbs/duckdb-science-meetup.svg %}"
-     alt="DuckDB in Science Meetup Splashscreen"
-     width="680"
-     />
 
 We are excited to announce the DuckDB London meetup, which will take place during the week of the prestigious [VLDB 2025 conference](https://vldb.org/2025/). This meetup will specifically focus on DuckDB's role in science. It will include deep dive talks from the developers of DuckDB and uses of DuckDB in science from members of the research community.
 

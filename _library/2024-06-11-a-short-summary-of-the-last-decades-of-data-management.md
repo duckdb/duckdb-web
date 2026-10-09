@@ -1,14 +1,15 @@
 ---
 layout: post
 title: "A Short Summary of the Last Decades of Data Management"
-author: Hannes Mühleisen
-thumb: "/images/library/thumbs/2024-06-11-a-short-summary-of-the-last-decades-of-data-management.jpg"
-image: "/images/library/thumbs/2024-06-11-a-short-summary-of-the-last-decades-of-data-management.jpg"
-tags: ["Talk"]
+authors:
+  - Hannes Mühleisen
+thumb: "/images/library/thumbs/2024-06-11-a-short-summary-of-the-last-decades-of-data-management.png"
+image: "/images/library/thumbs/2024-06-11-a-short-summary-of-the-last-decades-of-data-management.png"
+tag: talk
+category: core
 length: "50 min"
-thirdparty: false
 excerpt: ""
-pill: "GOTO Amsterdam 2024"
+venue: "GOTO Amsterdam 2024"
 redirect_from:
 - /media/a-short-summary-of-the-last-decades-of-data-management
 ---

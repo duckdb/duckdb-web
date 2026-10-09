@@ -26,6 +26,16 @@ To use a mix of colors suitable for both dark and light backgrounds:
 .highlight_mode mixed
 ```
 
+The mode can also be selected when launching the CLI using the `-dark-mode` and `-light-mode` [command line arguments]({% link docs/current/clients/cli/arguments.md %}):
+
+```batch
+duckdb -dark-mode
+```
+
+```batch
+duckdb -light-mode
+```
+
 ## 8-Bit Colors
 
 Since DuckDB v1.5, the CLI supports 8-bit colors corresponding to [Xterm system colors](https://www.ditig.com/256-colors-cheat-sheet#xterm-system-colors):

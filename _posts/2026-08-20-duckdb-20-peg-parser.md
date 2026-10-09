@@ -1,11 +1,12 @@
 ---
 layout: post
 title: "DuckDB v2.0: Your Database Deserves a Better Parser"
-author: "Daniël ten Wolde"
+authors:
+  - Daniël ten Wolde
 thumb: "/images/blog/thumbs/duckdb-20-peg-parser.svg"
 image: "/images/blog/thumbs/duckdb-20-peg-parser.png"
 excerpt: "DuckDB v2.0 replaces its PostgreSQL-derived SQL parser with a PEG-based parser that is easier to evolve and can be extended at runtime."
-tags: ["release"]
+tag: release
 ---
 
 At DuckDB, one of our goals is to make working with a database system as easy as possible. Users interact with the system through the widely understood Structured Query Language (SQL). Previous blog posts have covered DuckDB’s [friendly](https://duckdb.org/2022/05/04/friendlier-sql) [SQL](https://duckdb.org/2023/08/23/even-friendlier-sql), including `GROUP BY ALL` and column selection using `SELECT * EXCLUDE (...)`. Before DuckDB can execute a query using these features, however, it first has to determine whether its syntax is valid. That is the job of the *parser*, and in DuckDB v2.0 we are completely replacing it without you noticing.

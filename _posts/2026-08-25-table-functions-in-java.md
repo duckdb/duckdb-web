@@ -1,9 +1,11 @@
 ---
 layout: post
 title: "DuckDB Table Functions in Java"
-author: "Geertjan Wielenga, Alex Kasko"
+authors:
+  - Geertjan Wielenga
+  - Alex Kasko
 excerpt: "The DuckDB Java client can register table functions written in pure Java, exposing any Java-accessible data source as a SQL table. That turns DuckDB into a single-node query engine for heterogeneous joins across remote systems and local files, with no export step."
-tags: ["deep dive"]
+tag: deep-dive
 thumb: "/images/blog/thumbs/java.svg"
 image: "/images/blog/thumbs/java.png"
 ---

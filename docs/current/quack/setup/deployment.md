@@ -7,7 +7,7 @@ This page collects deployment recipes for running a public-facing Quack server. 
 
 ## On AWS EC2
 
-The fastest way to get a public-facing Quack server is the one-click [AWS CloudFormation](https://aws.amazon.com/cloudformation/) template maintained alongside the extension. It provisions a small EC2 instance running DuckDB, the quack extension behind nginx and Let's Encrypt TLS. As its output, it surfaces the per-instance token and connection URI.
+The fastest way to get a public-facing Quack server is the one-click [AWS CloudFormation](https://console.aws.amazon.com/cloudformation/home?region=us-east-1#/stacks/quickcreate?templateURL=https://duckdb-quack-infra.s3.us-east-1.amazonaws.com/quack.yaml&stackName=quack-demo) template maintained alongside the extension. It provisions a small EC2 instance running DuckDB, the quack extension behind nginx and Let's Encrypt TLS. As its output, it surfaces the per-instance token and connection URI.
 
 ### One-Click Launch
 

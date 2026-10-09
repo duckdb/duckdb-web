@@ -1,12 +1,12 @@
 ---
 layout: post
 title: "Amazon Aurora PostgreSQL now supports direct querying of Apache Iceberg and Parquet data in your data lake"
-author: "Esra Kayabali (AWS)"
-tags: ["Article"]
-thirdparty: true
+authors:
+  - Esra Kayabali
+tag: article
 category: community
 excerpt: ""
-pill: "AWS News Blog"
+venue: "AWS News Blog"
 ---
 
 |-------|-------|

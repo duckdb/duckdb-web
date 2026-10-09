@@ -128,17 +128,16 @@ Please consult the [trademark guidelines for DuckDB™]({% link trademark_guidel
 
 <div class="answer" markdown="1">
 
-The following projects and events are officially affiliated with DuckDB:
+The following projects, domains and events are officially affiliated with DuckDB:
 
-* the [DuckDB project](https://github.com/duckdb/duckdb)
+* [DuckDB (`duckdb.org`)](https://duckdb.org/)
+* [DuckLake (`ducklake.select`)](https://ducklake.select), an open lakehouse format
+* [Quack (`quack.duckdb.org`)](https://quack.duckdb.org/)
 * all [primary client libraries]({% link install/index.html %})
-* all [core DuckDB extensions]({% link docs/current/core_extensions/overview.md %})
-* the [DuckDB UI](https://github.com/duckdb/duckdb-ui)
-* [MotherDuck](https://motherduck.com), a cloud data warehouse built on DuckDB, developed by the [MotherDuck Corporation](https://motherduck.com/terms-of-service/)
+* all [core DuckDB extensions]({% link docs/current/core_extensions/overview.md %}), including the [DuckDB UI](https://github.com/duckdb/duckdb-ui)
 * [`dbt-duckdb`](https://github.com/duckdb/dbt-duckdb), a dbt connector for DuckDB
-* [`pg_duckdb`](https://github.com/duckdb/pg_duckdb), a PostgreSQL extension for DuckDB
-* [DuckLake](https://ducklake.select), an open lakehouse format
-* [DuckCon]({% link events/index.html %}), our technical conference series
+* [DuckCon (`duckcon.org`)](https://duckcon.org/), our technical conference series
+* [DuckDB Backup (`duckdb-backup.org`))](https://www.duckdb-backup.org/)
 
 Other projects and events are likely _not affiliated_ with DuckDB. Please check their websites, descriptions and licenses for more details.
 

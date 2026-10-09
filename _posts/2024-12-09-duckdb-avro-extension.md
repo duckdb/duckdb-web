@@ -1,11 +1,12 @@
 ---
 layout: post
 title: "The DuckDB Avro Extension"
-author: "Hannes Mühleisen"
+authors:
+  - Hannes Mühleisen
 thumb: "/images/blog/thumbs/avro.svg"
 image: "/images/blog/thumbs/avro.png"
 excerpt: "DuckDB now supports reading Avro files."
-tags: ["extensions"]
+tag: extensions
 ---
 
 > Update Avro support is now available through the [`avro` core extension]({% link docs/current/core_extensions/avro.md %}).

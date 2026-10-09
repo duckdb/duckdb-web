@@ -1,12 +1,13 @@
 ---
 layout: post
 title: "DuckDB Internals"
-author: Mark Raasveldt
-tags: ["Talk"]
+authors:
+  - Mark Raasveldt
+tag: talk
+category: core
 length: "80 min"
-thirdparty: false
 excerpt: ""
-pill: "CMU Advanced Databases / Spring 2023"
+venue: "CMU Advanced Databases / Spring 2023"
 ---
 
 <div class="video-container">

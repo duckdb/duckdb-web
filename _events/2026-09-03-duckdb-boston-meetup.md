@@ -1,20 +1,15 @@
 ---
 layout: post
-event: true
 title: "DuckDB Boston Meetup"
-author: "DuckDB meetup organizers"
+authors:
+  - DuckDB meetup organizers
 thumb: "/images/events/thumbs/duckdb-boston-meetup.svg"
 image: "/images/events/thumbs/duckdb-boston-meetup.png"
 excerpt: ""
-tags: ["meetup"]
-labels: [official]
-venue: "W Boston"
+tag: meetup
+category: core
+location: "W Boston"
 ---
-
-<img src="{% link images/events/thumbs/duckdb-boston-meetup.svg %}"
-     alt="DuckDB Boston Meetup Splashscreen"
-     width="680"
-     />
 
 We are excited to announce the DuckDB Boston meetup, which will take place during the week of the [VLDB 2026 conference](https://vldb.org/2026/).
 Every year, VLDB attracts hundreds of database researchers, some of whom already use [DuckDB in their scientific work]({% link library/index.html %}/?format=paper).

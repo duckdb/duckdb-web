@@ -1,9 +1,11 @@
 ---
 layout: post
 title: "Chunked Query Results in the DuckDB Java Driver"
-author: "Geertjan Wielenga, Alex Kasko"
+authors:
+  - Geertjan Wielenga
+  - Alex Kasko
 excerpt: "The DuckDB Java driver can now return query results as a lazily fetched sequence of columnar data chunks, avoiding JDBC's row-at-a-time ResultSet and its per-value overhead."
-tags: ["deep dive"]
+tag: deep-dive
 thumb: "/images/blog/thumbs/java.svg"
 image: "/images/blog/thumbs/java.png"
 ---

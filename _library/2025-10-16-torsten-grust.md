@@ -1,14 +1,15 @@
 ---
 layout: post
 title: "DuckDB in Research S02E01: Torsten Grust"
-author: "Disseminate Podcast Series by Jack Waudby"
-thumb: "/images/library/thumbs/2025-10-16-torsten-grust.jpg"
-image: "/images/library/thumbs/2025-10-16-torsten-grust.jpg"
-tags: ["Podcast"]
+authors:
+  - Disseminate Podcast Series by Jack Waudby
+thumb: "/images/library/thumbs/2025-10-16-torsten-grust.png"
+image: "/images/library/thumbs/2025-10-16-torsten-grust.png"
+tag: podcast
 length: "50 min"
 category: community
 excerpt: ""
-pill: "DuckDB in Research"
+venue: "DuckDB in Research"
 episode: "S02E01"
 ---
 

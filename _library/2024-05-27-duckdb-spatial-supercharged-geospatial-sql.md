@@ -1,12 +1,13 @@
 ---
 layout: post
 title: "DuckDB Spatial: Supercharged Geospatial SQL"
-author: Max Gabrielsson
-tags: ["Talk"]
+authors:
+  - Max Gabrielsson
+tag: talk
+category: core
 length: "30 min"
-thirdparty: false
 excerpt: ""
-pill: "GeoPython 2024"
+venue: "GeoPython 2024"
 ---
 
 <div class="video-container">

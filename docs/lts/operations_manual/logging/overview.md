@@ -6,6 +6,8 @@ title: Logging
 DuckDB implements a logging mechanism that provides users with detailed information about events such as query execution,
 performance metrics and system events.
 
+> Warning Logs may contain sensitive information, including secrets and credentials. Enable logging with care and consider where logs are stored and who can access them. Review their contents before sharing them.
+
 ## Basics
 
 The DuckDB logging mechanism can be enabled or disabled using a special function, `enable_logging`. Logs are stored in a special view

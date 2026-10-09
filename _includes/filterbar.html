@@ -1,0 +1,47 @@
+{% comment %}
+	Page title with a single filter bar for post overview pages.
+	include.types  key in _data/post_types.yml (blog, library, events)
+{% endcomment %}
+
+{% assign cfg = site.data.post_types[include.types] %}
+
+{% capture filter_buttons %}
+	<div class="filter-highlight"></div>
+	<button type="button" class="filter-btn active" data-filter="*">All</button>
+	{% for filter in cfg.filters %}
+		<button type="button" class="filter-btn" data-filter=".{{ filter.value }}" data-heading="{{ filter.heading }}">{{ filter.label }}</button>
+	{% endfor %}
+{% endcapture %}
+
+<div class="wrap pagetitle">
+	<h1>{{ page.title }}</h1>
+
+	<div class="controls filterbar">
+		<div class="filter-group">
+			<div class="filtertags">{{ filter_buttons }}</div>
+		</div>
+
+		<input type="text" id="search-input" placeholder="Search" aria-label="Search">
+
+		{% if cfg.core_toggle %}
+			<label class="core-toggle">
+				<input type="checkbox" id="core-toggle">
+				<span class="switch" aria-hidden="true"></span>
+				<span class="core-toggle-label">{{ cfg.core_toggle }}</span>
+			</label>
+		{% endif %}
+
+		<button type="button" class="filter-toggle" aria-label="Filter">
+			<svg class="icon icon-filter"><use href="#filter-funnel-01"></use></svg>
+			<svg class="icon icon-close"><use href="#x-close"></use></svg>
+		</button>
+		<div class="filter-modal">
+			<div class="filter-group filter-group-mobile-only">
+				<div class="filtertags">{{ filter_buttons }}</div>
+			</div>
+		</div>
+		<div class="filter-overlay"></div>
+	</div>
+
+	<p class="filter-empty" hidden>No entries match your selection.</p>
+</div>

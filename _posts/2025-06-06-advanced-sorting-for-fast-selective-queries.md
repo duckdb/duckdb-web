@@ -1,11 +1,12 @@
 ---
 layout: post
 title: "Faster Dashboards with Multi-Column Approximate Sorting"
-author: "Alex Monahan"
+authors:
+  - Alex Monahan
 thumb: "/images/blog/thumbs/indexing-tips.svg"
 image: "/images/blog/thumbs/indexing-tips.png"
 excerpt: "With any columnar data format, using advanced multi-column sorting when loading data can improve performance on a wide variety of selective read queries. Space filling curve encodings like Morton (Z-Order) and Hilbert approximately sort multiple columns together. Sorting by rounded timestamps adds additional benefits when filtering on recent data."
-tags: ["deep dive"]
+tag: deep-dive
 ---
 
 <!--
