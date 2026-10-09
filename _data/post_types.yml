@@ -18,6 +18,9 @@ blog:
     - value: release
       label: Releases
       heading: Releases
+    - value: case-studies
+      label: Case studies
+      heading: Case Studies
 
 library:
   core_toggle: Core only
