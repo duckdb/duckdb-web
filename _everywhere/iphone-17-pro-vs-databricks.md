@@ -3,8 +3,8 @@ layout: post
 title: "iPhone 17 Pro vs. Databricks"
 date: 2026-10-07
 author: "George Fraser"
-thumb: "/images/everywhere/thumbs/iphone-17-pro.jpg"
-image: "/images/everywhere/thumbs/iphone-17-pro.jpg"
+thumb: "/images/everywhere/thumbs/iphone-17-pro.png"
+image: "/images/everywhere/thumbs/iphone-17-pro.png"
 excerpt: "An iPhone 17 Pro running DuckDB outperforms Databricks Serverless SQL clusters on TPC-H at most scale factors up to SF200."
 tags: ["Phones"]
 thirdparty: true
