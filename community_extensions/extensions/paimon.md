@@ -8,7 +8,7 @@ excerpt: |
 extension:
   name: paimon
   description: Query Apache Paimon tables directly from DuckDB
-  version: 0.1.1
+  version: 0.1.2
   language: C++
   build: cmake
   license: Apache-2.0
@@ -18,8 +18,8 @@ extension:
 
 repo:
   github: polardb/duckdb-paimon
-  andium: 543e43a91edf05ab796e67e19a3cb7240e52bcf6
-  ref: 5e89198235c8be6a402f2b02ef54f249914eee29
+  andium: a3ede9fc9b1a51f8de125e9ceff106533a71b236
+  ref: e49d491a103e30399d2d0cdc9c2f7efaf138d200
 
 docs:
   hello_world: |
@@ -72,10 +72,10 @@ docs:
 
     For more information, visit the [extension repository](https://github.com/polardb/duckdb-paimon).
 
-extension_star_count: 47
-extension_star_count_pretty: 47
-extension_download_count: 4123
-extension_download_count_pretty: 4.1k
+extension_star_count: 49
+extension_star_count_pretty: 49
+extension_download_count: 5974
+extension_download_count_pretty: 6.0k
 image: '/images/community_extensions/social_preview/preview_community_extension_paimon.png'
 layout: community_extension_doc
 ---
@@ -101,10 +101,12 @@ LOAD {{ page.extension.name }};
 
 <div class="extension_functions_table"></div>
 
-|  function_name   | function_type | description | comment | examples |
-|------------------|---------------|-------------|---------|----------|
-| paimon_scan      | table         | NULL        | NULL    |          |
-| paimon_snapshots | table         | NULL        | NULL    |          |
+|  function_name   | function_type |                                                                                                                               description                                                                                                                               | comment |                                                               examples                                                               |
+|------------------|---------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|---------|--------------------------------------------------------------------------------------------------------------------------------------|
+| paimon_scan      | table         | Read a Paimon table, optionally at a historical snapshot using either snapshot_from_id or snapshot_from_timestamp, but not both. manifest_format and file_format are deprecated; formats are detected from the table schema. debug_expected_splits is for testing only. | NULL    | [SELECT * FROM paimon_scan('./data', 'testdb', 'testtbl');]                                                                          |
+| paimon_scan      | table         | Read a Paimon table, optionally at a historical snapshot using either snapshot_from_id or snapshot_from_timestamp, but not both. manifest_format and file_format are deprecated; formats are detected from the table schema. debug_expected_splits is for testing only. | NULL    | [SELECT * FROM paimon_scan('./data/testdb.db/testtbl');, SELECT * FROM paimon_scan('./data/testdb.db/testtbl', snapshot_from_id=2);] |
+| paimon_snapshots | table         | List a Paimon table's snapshots, including snapshot IDs, commit times and record counts. manifest_format is deprecated; the format is detected from the table schema.                                                                                                   | NULL    | [SELECT * FROM paimon_snapshots('./data', 'testdb', 'testtbl');]                                                                     |
+| paimon_snapshots | table         | List a Paimon table's snapshots, including snapshot IDs, commit times and record counts. manifest_format is deprecated; the format is detected from the table schema.                                                                                                   | NULL    | [SELECT * FROM paimon_snapshots('./data/testdb.db/testtbl');]                                                                        |
 
 ### Overloaded Functions
 

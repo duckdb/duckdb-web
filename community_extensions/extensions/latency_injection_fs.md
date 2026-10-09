@@ -8,7 +8,7 @@ excerpt: |
 extension:
   name: latency_injection_fs
   description: Used to inject simulated latency to filesystem operations
-  version: 0.1.3
+  version: 0.1.4
   language: C++
   build: cmake
   license: MIT
@@ -19,7 +19,7 @@ extension:
 repo:
   github: dentiny/duckdb-filesystem-latency-injection
   andium: a0dc5543de71f77e981f2be946ca5399db670f45
-  ref: 88f34426ce0531c48a81773eff566bf94cc2c594
+  ref: 5f45999f1b9e62dafd48ee5f2623fec04f326dec
 
 docs:
   hello_world: |
@@ -33,8 +33,8 @@ docs:
 
 extension_star_count: 1
 extension_star_count_pretty: 1
-extension_download_count: 1065
-extension_download_count_pretty: 1.1k
+extension_download_count: 953
+extension_download_count_pretty: 953
 image: '/images/community_extensions/social_preview/preview_community_extension_latency_injection_fs.png'
 layout: community_extension_doc
 ---
@@ -60,10 +60,10 @@ LOAD {{ page.extension.name }};
 
 <div class="extension_functions_table"></div>
 
-|           function_name            | function_type | description | comment | examples |
-|------------------------------------|---------------|-------------|---------|----------|
-| latency_inject_fs_list_filesystems | table         | NULL        | NULL    |          |
-| latency_inject_fs_wrap             | scalar        | NULL        | NULL    |          |
+|           function_name            | function_type |                                                 description                                                 | comment |                       examples                        |
+|------------------------------------|---------------|-------------------------------------------------------------------------------------------------------------|---------|-------------------------------------------------------|
+| latency_inject_fs_list_filesystems | table         | Returns the names of filesystems currently wrapped by the latency injection filesystem.                     | NULL    | [SELECT * FROM latency_inject_fs_list_filesystems();] |
+| latency_inject_fs_wrap             | scalar        | Wraps a registered DuckDB filesystem with latency injection using the current latency_inject_fs_* settings. | NULL    | [SELECT latency_inject_fs_wrap('HTTPFileSystem');]    |
 
 ### Overloaded Functions
 

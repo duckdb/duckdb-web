@@ -8,7 +8,7 @@ excerpt: |
 extension:
   name: duck_tails
   description: Smart Development Intelligence for DuckDB - Git-aware data analysis capabilities that allow querying git history, accessing files at any revision, and performing version-aware data analysis with SQL.
-  version: 1.7.1
+  version: 1.8.0
   language: C++
   build: cmake
   license: MIT
@@ -18,8 +18,21 @@ extension:
     - teaguesterling
 repo:
   github: teaguesterling/duck_tails
-  ref: bfcbe4b7bd3f200bbcda903b2af3fdce2ac9a033
-  ref_next: 1223e5d94f08832319c9dcad67b380da122fc509
+  # ref and ref_next are deliberately the SAME commit (v1.8.0, f5f55ba). duck_tails
+  # now builds from ONE source tree against both DuckDB lines: the v2.0 removal of
+  # TableFunction::named_parameters is handled by named_parameter_compat.hpp, which
+  # declares via GetSignature().WithTypedKwargs() on v2.0 and the flat map on v1.5.
+  #
+  # Evidence at this ref: clean builds with 0 errors against v1.5.6 AND against
+  # v2.0-cyanoptera, with `All tests passed` (1270 assertions / 71 cases) on EACH
+  # line, plus an explicit extension LOAD with every declared named parameter bound.
+  # That load check matters: Declare-vs-Extend ordering throws at LOAD time, not
+  # build time, so a build-only check cannot catch it.
+  #
+  # Upstream CI on main (run 37102404149) is green across all seven v2.0-cyanoptera
+  # legs: linux amd64+arm64, osx amd64+arm64, windows_amd64 and windows_amd64_mingw.
+  ref: f5f55bac3afc63ef93bba8ce41c65a9dceefdac5
+  ref_next: f5f55bac3afc63ef93bba8ce41c65a9dceefdac5
 
 docs:
   hello_world: |
@@ -60,10 +73,10 @@ docs:
 
     The extension supports mixed file systems, allowing you to combine git://, local files, S3, and other DuckDB-supported protocols in a single query. Built with libgit2 for robust git operations and comprehensive error handling.
 
-extension_star_count: 26
-extension_star_count_pretty: 26
-extension_download_count: 2120
-extension_download_count_pretty: 2.1k
+extension_star_count: 27
+extension_star_count_pretty: 27
+extension_download_count: 3049
+extension_download_count_pretty: 3.0k
 image: '/images/community_extensions/social_preview/preview_community_extension_duck_tails.png'
 layout: community_extension_doc
 ---
@@ -91,6 +104,7 @@ LOAD {{ page.extension.name }};
 
 |    function_name     | function_type |                                 description                                 | comment |                       examples                       |
 |----------------------|---------------|-----------------------------------------------------------------------------|---------|------------------------------------------------------|
+| diff_lines           | scalar        | NULL                                                                        | NULL    |                                                      |
 | diff_text            | scalar        | Compute unified diff between two text strings.                              | NULL    | [diff_text('old text', 'new text')]                  |
 | git_blame            | table         | Show line-by-line git blame annotations for a file.                         | NULL    | [SELECT * FROM git_blame('README.md')]               |
 | git_blame_each       | table         | NULL                                                                        | NULL    |                                                      |

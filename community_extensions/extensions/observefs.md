@@ -8,7 +8,7 @@ excerpt: |
 extension:
   name: observefs
   description: Provides IO observability to filesystem
-  version: 0.5.3
+  version: 0.5.4
   language: C++
   build: cmake
   license: MIT
@@ -20,7 +20,7 @@ extension:
 repo:
   github: dentiny/duckdb-filesystem-observability
   andium: cb6a1a7d88eba7f02a9690e1df4c6bf4e166a9f3
-  ref: 5c6fde24e9fa0e3a36d5df291ac8d9414f870b0d
+  ref: c8a307e4969797e9427af20f2d76fed8f7d93d19
 
 docs:
   hello_world: |
@@ -36,8 +36,8 @@ docs:
 
 extension_star_count: 18
 extension_star_count_pretty: 18
-extension_download_count: 5145
-extension_download_count_pretty: 5.1k
+extension_download_count: 4666
+extension_download_count_pretty: 4.7k
 image: '/images/community_extensions/social_preview/preview_community_extension_observefs.png'
 layout: community_extension_doc
 ---
@@ -63,14 +63,14 @@ LOAD {{ page.extension.name }};
 
 <div class="extension_functions_table"></div>
 
-|                   function_name                   | function_type | description | comment | examples |
-|---------------------------------------------------|---------------|-------------|---------|----------|
-| observefs_clear                                   | scalar        | NULL        | NULL    |          |
-| observefs_clear_external_file_cache_access_record | scalar        | NULL        | NULL    |          |
-| observefs_external_file_cache_access_record       | table         | NULL        | NULL    |          |
-| observefs_get_profile                             | scalar        | NULL        | NULL    |          |
-| observefs_list_registered_filesystems             | table         | NULL        | NULL    |          |
-| observefs_wrap_filesystem                         | scalar        | NULL        | NULL    |          |
+|                   function_name                   | function_type |                               description                                | comment |                         examples                          |
+|---------------------------------------------------|---------------|--------------------------------------------------------------------------|---------|-----------------------------------------------------------|
+| observefs_clear                                   | scalar        | Clears collected I/O observability metrics for all wrapped filesystems.  | NULL    | [observefs_clear()]                                       |
+| observefs_clear_external_file_cache_access_record | scalar        | Clears the recorded external file cache hit and miss counts.             | NULL    | [observefs_clear_external_file_cache_access_record()]     |
+| observefs_external_file_cache_access_record       | table         | Returns recorded external file cache hit, miss, and partial-hit counts.  | NULL    | [observefs_external_file_cache_access_record()]           |
+| observefs_get_profile                             | scalar        | Returns a human-readable profile of I/O metrics for wrapped filesystems. | NULL    | [observefs_get_profile()]                                 |
+| observefs_list_registered_filesystems             | table         | Lists the filesystem implementations registered with DuckDB.             | NULL    | [observefs_list_registered_filesystems()]                 |
+| observefs_wrap_filesystem                         | scalar        | Wraps a registered filesystem with I/O observability instrumentation.    | NULL    | [observefs_wrap_filesystem('AzureBlobStorageFileSystem')] |
 
 ### Overloaded Functions
 

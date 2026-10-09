@@ -141,7 +141,7 @@ The table below shows the available general aggregate functions.
 | [`histogram(arg)`](#histogramarg) | Returns a `MAP` of key-value pairs representing buckets and counts. |
 | [`histogram(arg, boundaries)`](#histogramarg-boundaries) | Returns a `MAP` of key-value pairs representing the provided upper `boundaries` and counts of elements in the corresponding bins (left-open and right-closed partitions) of the datatype. A boundary at the largest value of the datatype is automatically added when elements larger than all provided `boundaries` appear, see [`is_histogram_other_bin`]({% link docs/current/sql/functions/utility.md %}#is_histogram_other_binarg). Boundaries may be provided, e.g., via [`equi_width_bins`]({% link docs/current/sql/functions/utility.md %}#equi_width_binsminmaxbincountnice). |
 | [`histogram_exact(arg, elements)`](#histogram_exactarg-elements) | Returns a `MAP` of key-value pairs representing the requested elements and their counts. A catch-all element specific to the data-type is automatically added to count other elements when they appear, see [`is_histogram_other_bin`]({% link docs/current/sql/functions/utility.md %}#is_histogram_other_binarg). |
-| [`histogram_values(source, boundaries)`](#histogram_valuessource-col_name-technique-bin_count) | Returns the upper boundaries of the bins and their counts. |
+| [`histogram_values(source, col_name, technique, bin_count)`](#histogram_valuessource-col_name-technique-bin_count) | A table macro (not an aggregate function) returning the upper boundary of each bin and its count for a column; see the detailed entry for the available `technique` values. |
 | [`last(arg)`](#lastarg) | Returns the last value of a column. This function is [affected by ordering](#order-by-clause-in-aggregate-functions). |
 | [`list(arg)`](#listarg) | Returns a `LIST` containing all the values of a column. This function is [affected by ordering](#order-by-clause-in-aggregate-functions). |
 | [`max(arg)`](#maxarg) | Returns the maximum value present in `arg`. This function is [unaffected by distinctness](#distinct-clause-in-aggregate-functions). |
@@ -335,7 +335,7 @@ The table below shows the available general aggregate functions.
 
 <div class="nostroke_table"></div>
 
-| **Description** | Returns the upper boundaries of the bins and their counts. |
+| **Description** | A table macro (not an aggregate function) that computes a histogram over column `col_name` of table `source`, returning the upper boundary of each bin and its count. The optional `technique` argument selects the binning method and is one of `auto`, `sample`, `equi-height`, `equi-width`, or `equi-width-nice`. The optional `bin_count` argument sets the number of bins. |
 | **Example** | `histogram_values(integers, i, bin_count := 2)` |
 
 #### `last(arg)`

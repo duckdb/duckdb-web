@@ -133,6 +133,14 @@ When ingesting data via `StatementBindStream`, the ingestion mode can be set usi
 
 Before using DuckDB as an ADBC driver, you must install the `libduckdb` shared library on your system and make it available to your application. This library contains the core DuckDB engine that the ADBC driver interfaces with.
 
+> Note Alternatively, you can install the DuckDB ADBC driver using [dbc](https://docs.columnar.tech/dbc/), a command-line tool for installing and managing ADBC drivers:
+>
+> ```batch
+> dbc install duckdb
+> ```
+>
+> This installs an unmodified copy of the official `libduckdb` release (with identical checksums) along with a [driver manifest](https://arrow.apache.org/adbc/current/format/driver_manifests.html), so ADBC driver managers can load the driver by name (`duckdb`) instead of by path. See the [dbc documentation](https://docs.columnar.tech/dbc/guides/installing/#version-constraints) for how to install previous versions. The [ADBC quickstarts](https://github.com/columnar-tech/adbc-quickstarts/tree/by-database/duckdb) contain simple runnable examples of using DuckDB through ADBC in more than 10 languages.
+
 ### Downloading libduckdb
 
 Download the appropriate `libduckdb` library for your platform from the [DuckDB releases page](https://github.com/duckdb/duckdb/releases):

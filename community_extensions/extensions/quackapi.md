@@ -153,10 +153,10 @@ docs:
     Full reference: https://github.com/asubbarao/quackapi  
     Community page draft: https://github.com/asubbarao/quackapi/blob/main/docs/community-page.md
 
-extension_star_count: 5
-extension_star_count_pretty: 5
-extension_download_count: 910
-extension_download_count_pretty: 910
+extension_star_count: 6
+extension_star_count_pretty: 6
+extension_download_count: 915
+extension_download_count_pretty: 915
 image: '/images/community_extensions/social_preview/preview_community_extension_quackapi.png'
 layout: community_extension_doc
 ---

@@ -244,11 +244,9 @@
 
       var toggleLeft = $versionSwitch.find('.version-switch-toggle').offset().left;
       var btnLeft = $active.offset().left;
-      var padding = 4;
-
       $versionSlider.css({
         width: $active.outerWidth() + 'px',
-        transform: 'translateX(' + (btnLeft - toggleLeft - padding) + 'px)'
+        transform: 'translateX(' + (btnLeft - toggleLeft) + 'px)'
       });
     }
 

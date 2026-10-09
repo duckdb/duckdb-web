@@ -12,6 +12,10 @@ venue: "The Cosmopolitan, Las Vegas"
 
 Hannes Mühleisen, co-creator of DuckDB, will give a talk at [dbt Summit](https://www.getdbt.com/dbt-summit) (formerly Coalesce), dbt Labs' annual conference for the analytics engineering community. The talk is scheduled for 10:00 AM PT on Friday, September 18, 2026, in Level 3, Gracia 4.
 
+## Watch Online
+
+To watch the talk online, [register for the online edition of dbt Summit](https://www.getdbt.com/dbt-summit/registration/online).
+
 ## Venue
 
 The Cosmopolitan of Las Vegas, 3708 Las Vegas Blvd S, Las Vegas, NV 89109.

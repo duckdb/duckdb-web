@@ -104,8 +104,8 @@ docs:
 
 extension_star_count: 1
 extension_star_count_pretty: 1
-extension_download_count: 1348
-extension_download_count_pretty: 1.3k
+extension_download_count: 821
+extension_download_count_pretty: 821
 image: '/images/community_extensions/social_preview/preview_community_extension_trino_parity.png'
 layout: community_extension_doc
 ---

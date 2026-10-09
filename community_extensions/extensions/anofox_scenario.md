@@ -7,6 +7,7 @@ excerpt: |
 
 extension:
   name: anofox_scenario
+  version: 2026.09.26
   description: Git-like branching for analytical databases. Attach isolated what-if scenarios as catalogs, edit them with ordinary SQL on copy-on-write delta storage, branch, diff, and merge them back.
   language: C++
   build: cmake
@@ -18,7 +19,7 @@ extension:
 
 repo:
   github: DataZooDE/anofox-scenario
-  ref: 7d2ca9b03ae82c8248a32d4d0ed6c4da8144c5ef
+  ref: 6bc258ce58d6162dddee8329b4f228ebb49827ba
 
 docs:
   hello_world: |
@@ -74,8 +75,8 @@ docs:
 
 extension_star_count: 6
 extension_star_count_pretty: 6
-extension_download_count: 1323
-extension_download_count_pretty: 1.3k
+extension_download_count: 1086
+extension_download_count_pretty: 1.1k
 image: '/images/community_extensions/social_preview/preview_community_extension_anofox_scenario.png'
 layout: community_extension_doc
 ---
@@ -101,19 +102,21 @@ LOAD {{ page.extension.name }};
 
 <div class="extension_functions_table"></div>
 
-|     function_name      | function_type | description | comment | examples |
-|------------------------|---------------|-------------|---------|----------|
-| scenario_create        | table         | NULL        | NULL    |          |
-| scenario_diff          | table         | NULL        | NULL    |          |
-| scenario_diff_summary  | table         | NULL        | NULL    |          |
-| scenario_drop          | table         | NULL        | NULL    |          |
-| scenario_freeze        | table         | NULL        | NULL    |          |
-| scenario_list          | table         | NULL        | NULL    |          |
-| scenario_merge         | table         | NULL        | NULL    |          |
-| scenario_merge_preview | table         | NULL        | NULL    |          |
-| scenario_migrate       | table         | NULL        | NULL    |          |
-| scenario_refresh       | table         | NULL        | NULL    |          |
-| scenario_unfreeze      | table         | NULL        | NULL    |          |
+|     function_name      | function_type |                                                                                                                                  description                                                                                                                                  | comment |                                     examples                                     |
+|------------------------|---------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|---------|----------------------------------------------------------------------------------|
+| scenario_create        | table         | Register a scenario. 'materialized' mode copies every base table, the default 'delta' mode stores only what changed; from_scenario branches off an existing scenario; base uses another attached catalog; key_columns declares row identity for tables without a primary key. | NULL    | [CALL scenario_create('optimistic');]                                            |
+| scenario_create        | table         | Register a scenario. 'materialized' mode copies every base table, the default 'delta' mode stores only what changed; from_scenario branches off an existing scenario; base uses another attached catalog; key_columns declares row identity for tables without a primary key. | NULL    | [CALL scenario_create('price_increase', 'Analyzing 10% price increase impact');] |
+| scenario_diff          | table         | Diff a scenario against its origin, returning the primary key columns plus change_type ('added', 'removed' or 'modified'), column_name, old_value and new_value.                                                                                                              | NULL    | [SELECT * FROM scenario_diff('price_increase', 'products');]                     |
+| scenario_diff          | table         | Diff any two sides against each other -- 'main' or any scenario name -- where old_value comes from side a and new_value from side b.                                                                                                                                          | NULL    | [SELECT * FROM scenario_diff('main', 'price_increase', 'products');]             |
+| scenario_diff_summary  | table         | Summarise a scenario's changes per table as rows_added, rows_modified and rows_removed.                                                                                                                                                                                       | NULL    | [SELECT * FROM scenario_diff_summary('price_increase');]                         |
+| scenario_drop          | table         | Remove a scenario and its delta or materialized tables. Refuses while the scenario is attached or while branches of it still exist.                                                                                                                                           | NULL    | [CALL scenario_drop('price_increase_eu');]                                       |
+| scenario_freeze        | table         | Reject writes to a scenario while leaving reads working; a frozen materialized scenario is a snapshot.                                                                                                                                                                        | NULL    | [CALL scenario_freeze('q2_approved');]                                           |
+| scenario_list          | table         | List every registered scenario as (scenario_id, name, mode, frozen, parent, created_at, description).                                                                                                                                                                         | NULL    | [SELECT * FROM scenario_list();]                                                 |
+| scenario_merge         | table         | Apply a scenario's changes back to its base tables.                                                                                                                                                                                                                           | NULL    | [SELECT * FROM scenario_merge('price_increase', on_conflict := 'abort');]        |
+| scenario_merge_preview | table         | Show the actions a merge would take as (table_name, key, action, conflict). Streaming, with no side effects.                                                                                                                                                                  | NULL    | [SELECT * FROM scenario_merge_preview('price_increase');]                        |
+| scenario_migrate       | table         | Migrate a legacy v0.1 scenario database into the v2 layout. One-way.                                                                                                                                                                                                          | NULL    | [SELECT * FROM scenario_migrate();]                                              |
+| scenario_refresh       | table         | Create delta tables for base tables that were added after the scenario itself was created.                                                                                                                                                                                    | NULL    | [SELECT * FROM scenario_refresh('price_increase');]                              |
+| scenario_unfreeze      | table         | Allow writes to a scenario again, reversing scenario_freeze.                                                                                                                                                                                                                  | NULL    | [CALL scenario_unfreeze('q2_approved');]                                         |
 
 ### Overloaded Functions
 

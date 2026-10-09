@@ -16,19 +16,23 @@ it simple to run notebooks as scripts.
 
 To get started, install marimo and DuckDB from your terminal:
 
-```batch
-pip install "marimo[sql]" # or uv add "marimo[sql]"
+```bash
+pip install "marimo[sql]"
+# or
+uv add "marimo[sql]"
 ```
 
 Install supporting libraries:
 
-```batch
-pip install "polars[pyarrow]" # or uv add "polars[pyarrow]"
+```bash
+pip install "polars[pyarrow]"
+# or
+uv add "polars[pyarrow]"
 ```
 
 Run a tutorial:
 
-```batch
+```bash
 marimo tutorial sql
 ```
 

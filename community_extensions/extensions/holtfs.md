@@ -50,10 +50,10 @@ docs:
     For usage and benchmark notes, see the
     [duckdb-holtfs documentation](https://github.com/feichai0017/duckdb-holtfs).
 
-extension_star_count: 1
-extension_star_count_pretty: 1
-extension_download_count: 865
-extension_download_count_pretty: 865
+extension_star_count: 2
+extension_star_count_pretty: 2
+extension_download_count: 901
+extension_download_count_pretty: 901
 image: '/images/community_extensions/social_preview/preview_community_extension_holtfs.png'
 layout: community_extension_doc
 ---

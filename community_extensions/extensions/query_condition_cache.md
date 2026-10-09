@@ -8,7 +8,7 @@ excerpt: |
 extension:
   name: query_condition_cache
   description: This extension provides a cache for query conditions, which is useful for repeated-query workloads like metrics monitoring dashboards, log investigations, etc.
-  version: 0.1.2
+  version: 0.1.3
   language: C++
   build: cmake
   license: MIT
@@ -20,7 +20,7 @@ extension:
 
 repo:
   github: dentiny/duckdb-query-condition-cache
-  ref: 6913ffd244ddfaa64dfe697180ab63b77a774a97
+  ref: 8d934bc5796bea4fd6eb059143d4e71b4feaa4b9
 
 docs:
   hello_world: |
@@ -30,8 +30,8 @@ docs:
 
 extension_star_count: 19
 extension_star_count_pretty: 19
-extension_download_count: 837
-extension_download_count_pretty: 837
+extension_download_count: 908
+extension_download_count_pretty: 908
 image: '/images/community_extensions/social_preview/preview_community_extension_query_condition_cache.png'
 layout: community_extension_doc
 ---
@@ -57,13 +57,13 @@ LOAD {{ page.extension.name }};
 
 <div class="extension_functions_table"></div>
 
-|        function_name        | function_type | description | comment | examples |
-|-----------------------------|---------------|-------------|---------|----------|
-| __condition_cache_filter    | scalar        | NULL        | NULL    |          |
-| condition_cache_build       | table         | NULL        | NULL    |          |
-| condition_cache_info        | table         | NULL        | NULL    |          |
-| condition_cache_reset_stats | scalar        | NULL        | NULL    |          |
-| condition_cache_stats       | table         | NULL        | NULL    |          |
+|        function_name        | function_type |                                                 description                                                 | comment |                                  examples                                  |
+|-----------------------------|---------------|-------------------------------------------------------------------------------------------------------------|---------|----------------------------------------------------------------------------|
+| __condition_cache_filter    | scalar        | Internal optimizer filter that checks whether the cache permits scanning a row ID's vector.                 | NULL    | [SELECT __condition_cache_filter(0);]                                      |
+| condition_cache_build       | table         | Builds or replaces a query condition cache for rows in a table that match a SQL predicate.                  | NULL    | [SELECT * FROM condition_cache_build('events', 'event_type = ''error''');] |
+| condition_cache_info        | table         | Returns row-group and vector coverage for a cached table and SQL predicate, or zeroes when no entry exists. | NULL    | [SELECT * FROM condition_cache_info('events', 'event_type = ''error''');]  |
+| condition_cache_reset_stats | scalar        | Resets query condition cache hit and access counters and returns true.                                      | NULL    | [SELECT condition_cache_reset_stats();]                                    |
+| condition_cache_stats       | table         | Returns query condition cache memory use, hit count, and access count.                                      | NULL    | [SELECT * FROM condition_cache_stats();]                                   |
 
 ### Overloaded Functions
 

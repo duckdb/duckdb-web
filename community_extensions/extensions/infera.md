@@ -19,7 +19,7 @@ extension:
 
 repo:
   github: CogitatorTech/infera
-  ref: b15134d00ace5051c6ba89a53836c25249a47a64
+  ref: fd67b27a544a7cf30e23993759ae42aaac91864a
 
 docs:
   hello_world: |
@@ -48,10 +48,10 @@ docs:
     
     For more information, like API references and usage examples, visit the project's [GitHub repository](https://github.com/CogitatorTech/infera).
 
-extension_star_count: 137
-extension_star_count_pretty: 137
-extension_download_count: 869
-extension_download_count_pretty: 869
+extension_star_count: 136
+extension_star_count_pretty: 136
+extension_download_count: 1022
+extension_download_count_pretty: 1.0k
 image: '/images/community_extensions/social_preview/preview_community_extension_infera.png'
 layout: community_extension_doc
 ---

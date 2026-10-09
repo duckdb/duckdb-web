@@ -8,7 +8,7 @@ excerpt: |
 extension:
   name: semantic_views
   description: "Semantic views -- a declarative layer for dimensions, metrics, and relationships"
-  version: 0.12.1
+  version: 0.13.0
   language: Rust
   build: cargo
   license: MIT
@@ -19,7 +19,7 @@ extension:
 
 repo:
   github: anentropic/duckdb-semantic-views
-  ref: a064166f0e07aad5a5650f6cfeb8b2207e4f804a
+  ref: 27e6271218f3ee9687e9f15cae6e85171eded45c
 
 docs:
   hello_world: |
@@ -43,10 +43,10 @@ docs:
 
     Documentation: https://anentropic.github.io/duckdb-semantic-views/
 
-extension_star_count: 17
-extension_star_count_pretty: 17
-extension_download_count: 1956
-extension_download_count_pretty: 2.0k
+extension_star_count: 18
+extension_star_count_pretty: 18
+extension_download_count: 1768
+extension_download_count_pretty: 1.8k
 image: '/images/community_extensions/social_preview/preview_community_extension_semantic_views.png'
 layout: community_extension_doc
 ---
@@ -72,26 +72,26 @@ LOAD {{ page.extension.name }};
 
 <div class="extension_functions_table"></div>
 
-|            function_name            | function_type | description | comment | examples |
-|-------------------------------------|---------------|-------------|---------|----------|
-| __sv_compute_create_from_yaml       | table         | NULL        | NULL    |          |
-| describe_semantic_view              | table         | NULL        | NULL    |          |
-| explain_semantic_view               | table         | NULL        | NULL    |          |
-| get_ddl                             | scalar        | NULL        | NULL    |          |
-| list_semantic_views                 | table         | NULL        | NULL    |          |
-| list_terse_semantic_views           | table         | NULL        | NULL    |          |
-| read_yaml_from_semantic_view        | scalar        | NULL        | NULL    |          |
-| semantic_view                       | table         | NULL        | NULL    |          |
-| show_columns_in_semantic_view       | table         | NULL        | NULL    |          |
-| show_semantic_dimensions            | table         | NULL        | NULL    |          |
-| show_semantic_dimensions_all        | table         | NULL        | NULL    |          |
-| show_semantic_dimensions_for_metric | table         | NULL        | NULL    |          |
-| show_semantic_facts                 | table         | NULL        | NULL    |          |
-| show_semantic_facts_all             | table         | NULL        | NULL    |          |
-| show_semantic_materializations      | table         | NULL        | NULL    |          |
-| show_semantic_materializations_all  | table         | NULL        | NULL    |          |
-| show_semantic_metrics               | table         | NULL        | NULL    |          |
-| show_semantic_metrics_all           | table         | NULL        | NULL    |          |
+|            function_name            | function_type |                                                                                                                                                                                 description                                                                                                                                                                                 | comment |                                                                                    examples                                                                                     |
+|-------------------------------------|---------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|---------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| __sv_compute_create_from_yaml       | table         | Internal helper behind CREATE SEMANTIC VIEW ... FROM YAML FILE. Use that statement instead; this function is not for direct use. The search_path parameter is reserved for the extension, which fills it in where needed; do not pass it.                                                                                                                                   | NULL    |                                                                                                                                                                                 |
+| describe_semantic_view              | table         | Backs DESCRIBE SEMANTIC VIEW: returns a semantic view's definition as one row per property of each table, relationship, fact, dimension, metric and materialization. Use that statement rather than calling this directly. The search_path parameter is reserved for the extension, which fills it in where needed; do not pass it.                                         | NULL    | [DESCRIBE SEMANTIC VIEW sales;]                                                                                                                                                 |
+| explain_semantic_view               | table         | Shows how semantic_view() would answer the same arguments: the generated SQL, the materialization routing decision and the DuckDB query plan, as rows of text, without running the data query. The search_path parameter is reserved for the extension, which fills it in where needed; do not pass it.                                                                     | NULL    | [SELECT * FROM explain_semantic_view('sales', dimensions := ['region'], metrics := ['revenue']);]                                                                               |
+| get_ddl                             | scalar        | Returns the CREATE OR REPLACE SEMANTIC VIEW statement that recreates a stored semantic view. object_type must be 'SEMANTIC_VIEW'; pass true as the optional third argument (use_fully_qualified_names) to schema-qualify the view name in the output.                                                                                                                       | NULL    | [SELECT GET_DDL('SEMANTIC_VIEW', 'sales');, SELECT GET_DDL('SEMANTIC_VIEW', 'sales', true);]                                                                                    |
+| list_semantic_views                 | table         | Backs SHOW SEMANTIC VIEWS: lists every registered semantic view with its creation time, database, schema and comment. Use that statement to list views; call this directly only to use the listing as a FROM source. The search_path parameter is reserved for the extension, which fills it in where needed; do not pass it.                                               | NULL    | [SHOW SEMANTIC VIEWS;, SELECT GET_DDL('SEMANTIC_VIEW', '"' \|\| replace(schema_name, '"', '""') \|\| '"."' \|\| replace(name, '"', '""') \|\| '"') FROM list_semantic_views();] |
+| list_terse_semantic_views           | table         | Backs SHOW TERSE SEMANTIC VIEWS: lists every registered semantic view without the comment column. Use that statement rather than calling this directly. The search_path parameter is reserved for the extension, which fills it in where needed; do not pass it.                                                                                                            | NULL    | [SHOW TERSE SEMANTIC VIEWS;]                                                                                                                                                    |
+| read_yaml_from_semantic_view        | scalar        | Returns a stored semantic view's definition as YAML, suitable for re-import with CREATE SEMANTIC VIEW ... FROM YAML.                                                                                                                                                                                                                                                        | NULL    | [SELECT READ_YAML_FROM_SEMANTIC_VIEW('sales');]                                                                                                                                 |
+| semantic_view                       | table         | Queries a semantic view: returns the requested dimensions, metrics and/or facts, generating the joins and GROUP BY from the view definition. Pass at least one of dimensions, metrics or facts; where_clause filters rows before aggregation. The search_path parameter is reserved for the extension, which fills it in where needed; do not pass it.                      | NULL    | [SELECT * FROM semantic_view('sales', dimensions := ['region'], metrics := ['revenue']);]                                                                                       |
+| show_columns_in_semantic_view       | table         | Backs SHOW COLUMNS IN SEMANTIC VIEW: lists a semantic view's queryable dimensions, facts and metrics with their kind and expression (data_type is the declared type, empty for views created since v0.10.0). Use that statement rather than calling this directly. The search_path parameter is reserved for the extension, which fills it in where needed; do not pass it. | NULL    | [SHOW COLUMNS IN SEMANTIC VIEW sales;]                                                                                                                                          |
+| show_semantic_dimensions            | table         | Backs SHOW SEMANTIC DIMENSIONS IN <view>: lists the dimensions of one semantic view. Use that statement rather than calling this directly. The search_path parameter is reserved for the extension, which fills it in where needed; do not pass it.                                                                                                                         | NULL    | [SHOW SEMANTIC DIMENSIONS IN sales;]                                                                                                                                            |
+| show_semantic_dimensions_all        | table         | Backs SHOW SEMANTIC DIMENSIONS without IN: lists the dimensions of every semantic view. Use that statement rather than calling this directly. The search_path parameter is reserved for the extension, which fills it in where needed; do not pass it.                                                                                                                      | NULL    | [SHOW SEMANTIC DIMENSIONS;]                                                                                                                                                     |
+| show_semantic_dimensions_for_metric | table         | Backs SHOW SEMANTIC DIMENSIONS IN <view> FOR METRIC <metric>: lists the dimensions that can be combined with a metric without a fan trap, and which ones a window metric requires. Use that statement rather than calling this directly. The search_path parameter is reserved for the extension, which fills it in where needed; do not pass it.                           | NULL    | [SHOW SEMANTIC DIMENSIONS IN sales FOR METRIC revenue;]                                                                                                                         |
+| show_semantic_facts                 | table         | Backs SHOW SEMANTIC FACTS IN <view>: lists the facts of one semantic view. Use that statement rather than calling this directly. The search_path parameter is reserved for the extension, which fills it in where needed; do not pass it.                                                                                                                                   | NULL    | [SHOW SEMANTIC FACTS IN sales;]                                                                                                                                                 |
+| show_semantic_facts_all             | table         | Backs SHOW SEMANTIC FACTS without IN: lists the facts of every semantic view. Use that statement rather than calling this directly. The search_path parameter is reserved for the extension, which fills it in where needed; do not pass it.                                                                                                                                | NULL    | [SHOW SEMANTIC FACTS;]                                                                                                                                                          |
+| show_semantic_materializations      | table         | Backs SHOW SEMANTIC MATERIALIZATIONS IN <view>: lists the materializations declared in one semantic view. Use that statement rather than calling this directly. The search_path parameter is reserved for the extension, which fills it in where needed; do not pass it.                                                                                                    | NULL    | [SHOW SEMANTIC MATERIALIZATIONS IN sales;]                                                                                                                                      |
+| show_semantic_materializations_all  | table         | Backs SHOW SEMANTIC MATERIALIZATIONS without IN: lists the materializations of every semantic view. Use that statement rather than calling this directly. The search_path parameter is reserved for the extension, which fills it in where needed; do not pass it.                                                                                                          | NULL    | [SHOW SEMANTIC MATERIALIZATIONS;]                                                                                                                                               |
+| show_semantic_metrics               | table         | Backs SHOW SEMANTIC METRICS IN <view>: lists the metrics of one semantic view. Use that statement rather than calling this directly. The search_path parameter is reserved for the extension, which fills it in where needed; do not pass it.                                                                                                                               | NULL    | [SHOW SEMANTIC METRICS IN sales;]                                                                                                                                               |
+| show_semantic_metrics_all           | table         | Backs SHOW SEMANTIC METRICS without IN: lists the metrics of every semantic view. Use that statement rather than calling this directly. The search_path parameter is reserved for the extension, which fills it in where needed; do not pass it.                                                                                                                            | NULL    | [SHOW SEMANTIC METRICS;]                                                                                                                                                        |
 
 ### Overloaded Functions
 

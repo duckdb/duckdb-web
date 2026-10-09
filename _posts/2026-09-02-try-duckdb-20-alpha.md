@@ -43,10 +43,20 @@ curl https://install.duckdb.org | DUCKDB_VERSION=alpha bash
 └───────────────────┘
 ```
 
-On Windows, download the tarball, extract it and run `duckdb.exe`:
+On Windows, run the following PowerShell script:
 
-* [DuckDB v2.0-dev for Windows AMD64 (x86_64)](https://artifacts.duckdb.org/v2.0-cyanoptera/duckdb-cli-windows-amd64.tar.gz)
-* [DuckDB v2.0-dev for Windows AArch64 (arm64)](https://artifacts.duckdb.org/v2.0-cyanoptera/duckdb-cli-windows-arm64.tar.gz)
+```powershell
+$env:DUCKDB_VERSION = "alpha"; irm https://install.duckdb.org/install.ps1 | iex
+```
+
+Alternatively, download the tarball, extract it and run `duckdb.exe`:
+
+<!-- markdownlint-disable MD034 -->
+
+* [DuckDB v2.0-dev for Windows AMD64 (x86_64)](https://duckdb-staging.duckdb.org/{{ site.duckdb_windows_alpha_release }}/duckdb/duckdb/github_release/duckdb-cli-windows-amd64.tar.gz)
+* [DuckDB v2.0-dev for Windows AArch64 (arm64)](https://duckdb-staging.duckdb.org/{{ site.duckdb_windows_alpha_release }}/duckdb/duckdb/github_release/duckdb-cli-windows-arm64.tar.gz)
+
+<!-- markdownlint-enable MD034 -->
 
 ### Python
 

@@ -19,7 +19,7 @@ extension:
 
 repo:
   github: martin-conur/quackformers
-  ref: 1efe59f23cb497225ab72bb5fb8d95808a152d55
+  ref: 11d58564c794c0ae884339207f294c1ad4756e4b
 docs:
   hello_world: |
     SELECT embed('this is an embeddable sentence'); -- This is vanilla BERT (https://huggingface.co/sentence-transformers/all-MiniLM-L6-v2)
@@ -30,7 +30,7 @@ docs:
 
 extension_star_count: 16
 extension_star_count_pretty: 16
-extension_download_count: 1159
+extension_download_count: 1160
 extension_download_count_pretty: 1.2k
 image: '/images/community_extensions/social_preview/preview_community_extension_quackformers.png'
 layout: community_extension_doc
@@ -57,10 +57,7 @@ LOAD {{ page.extension.name }};
 
 <div class="extension_functions_table"></div>
 
-| function_name | function_type |                             description                              | comment |                  examples                  |
-|---------------|---------------|----------------------------------------------------------------------|---------|--------------------------------------------|
-| embed         | scalar        | Embed text using vanilla BERT implementation, 384 output dim float32 | NULL    | [SELECT embed('Quack Quack Quack!');]      |
-| embed_jina    | scalar        | Embed text using Jina BERT implementation, 768 output dim float32    | NULL    | [SELECT embed_jina('Quack Quack Quack!');] |
+This extension does not add any functions.
 
 ### Overloaded Functions
 

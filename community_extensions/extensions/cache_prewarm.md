@@ -8,7 +8,7 @@ excerpt: |
 extension:
   name: cache_prewarm
   description: Prewarm data blocks into DuckDB's buffer pool or OS page cache for faster queries
-  version: 0.2.5
+  version: 0.2.6
   language: C++
   build: cmake
   license: MIT
@@ -18,7 +18,7 @@ extension:
     - dentiny
 repo:
   github: dentiny/duckdb-cache-prewarm
-  ref: 58444ddbe81c75e59cde0027b31a9ac655118df5
+  ref: f90ba97ea40acd219913a4193bb6818a54c15076
 docs:
   hello_world: |
     -- Prewarm a table into the buffer pool
@@ -55,8 +55,8 @@ docs:
 
 extension_star_count: 11
 extension_star_count_pretty: 11
-extension_download_count: 1160
-extension_download_count_pretty: 1.2k
+extension_download_count: 996
+extension_download_count_pretty: 996
 image: '/images/community_extensions/social_preview/preview_community_extension_cache_prewarm.png'
 layout: community_extension_doc
 ---
@@ -82,30 +82,35 @@ LOAD {{ page.extension.name }};
 
 <div class="extension_functions_table"></div>
 
-|               function_name               | function_type | description | comment | examples |
-|-------------------------------------------|---------------|-------------|---------|----------|
-| cache_httpfs_add_exclusion_regex          | scalar        | NULL        | NULL    |          |
-| cache_httpfs_cache_access_info_query      | table         | NULL        | NULL    |          |
-| cache_httpfs_cache_status_query           | table         | NULL        | NULL    |          |
-| cache_httpfs_cleanup_dead_temp            | scalar        | NULL        | NULL    |          |
-| cache_httpfs_clear_cache                  | scalar        | NULL        | NULL    |          |
-| cache_httpfs_clear_cache_for_file         | scalar        | NULL        | NULL    |          |
-| cache_httpfs_clear_profile                | scalar        | NULL        | NULL    |          |
-| cache_httpfs_get_cache_config             | table         | NULL        | NULL    |          |
-| cache_httpfs_get_cache_filesystems        | table         | NULL        | NULL    |          |
-| cache_httpfs_get_cache_type               | table         | NULL        | NULL    |          |
-| cache_httpfs_get_data_cache_config        | table         | NULL        | NULL    |          |
-| cache_httpfs_get_file_handle_cache_config | table         | NULL        | NULL    |          |
-| cache_httpfs_get_glob_cache_config        | table         | NULL        | NULL    |          |
-| cache_httpfs_get_metadata_cache_config    | table         | NULL        | NULL    |          |
-| cache_httpfs_get_ondisk_data_cache_size   | scalar        | NULL        | NULL    |          |
-| cache_httpfs_get_profile                  | scalar        | NULL        | NULL    |          |
-| cache_httpfs_list_exclusion_regex         | table         | NULL        | NULL    |          |
-| cache_httpfs_list_registered_filesystems  | table         | NULL        | NULL    |          |
-| cache_httpfs_reset_exclusion_regex        | scalar        | NULL        | NULL    |          |
-| cache_httpfs_wrap_cache_filesystem        | scalar        | NULL        | NULL    |          |
-| prewarm                                   | scalar        | NULL        | NULL    |          |
-| prewarm_remote                            | scalar        | NULL        | NULL    |          |
+|               function_name               | function_type |                                                         description                                                          | comment |                                  examples                                  |
+|-------------------------------------------|---------------|------------------------------------------------------------------------------------------------------------------------------|---------|----------------------------------------------------------------------------|
+| cache_httpfs_add_exclusion_regex          | scalar        | Adds a regular expression for remote paths that should bypass the cache.                                                     | NULL    | [SELECT cache_httpfs_add_exclusion_regex('.*\.tmp$');]                     |
+| cache_httpfs_cache_access_info_query      | table         | Returns hit, miss, byte, and latency statistics for each cache entity.                                                       | NULL    | [SELECT * FROM cache_httpfs_cache_access_info_query();]                    |
+| cache_httpfs_cache_status_query           | table         | Returns cached data entries with their local path, remote path, byte range, and cache type.                                  | NULL    | [SELECT * FROM cache_httpfs_cache_status_query();]                         |
+| cache_httpfs_cleanup_dead_temp            | scalar        | Deletes stale temporary cache files and returns the number deleted.                                                          | NULL    | [SELECT cache_httpfs_cleanup_dead_temp();]                                 |
+| cache_httpfs_clear_cache                  | scalar        | Clears all data, metadata, file handle, glob, and profile caches.                                                            | NULL    | [SELECT cache_httpfs_clear_cache();]                                       |
+| cache_httpfs_clear_cache_for_file         | scalar        | Clears cached entries for one remote file.                                                                                   | NULL    | [SELECT cache_httpfs_clear_cache_for_file('s3://bucket/file.parquet');]    |
+| cache_httpfs_clear_profile                | scalar        | Clears cache profile statistics for the current connection.                                                                  | NULL    | [SELECT cache_httpfs_clear_profile();]                                     |
+| cache_httpfs_get_cache_config             | table         | Returns all current cache_httpfs configuration values.                                                                       | NULL    | [SELECT * FROM cache_httpfs_get_cache_config();]                           |
+| cache_httpfs_get_cache_filesystems        | table         | Lists filesystem implementations currently wrapped by cache_httpfs.                                                          | NULL    | [SELECT * FROM cache_httpfs_get_cache_filesystems();]                      |
+| cache_httpfs_get_cache_type               | table         | Returns the active cache type and whether caching is enabled.                                                                | NULL    | [SELECT * FROM cache_httpfs_get_cache_type();]                             |
+| cache_httpfs_get_data_cache_config        | table         | Returns the current data cache configuration.                                                                                | NULL    | [SELECT * FROM cache_httpfs_get_data_cache_config();]                      |
+| cache_httpfs_get_file_handle_cache_config | table         | Returns the current file handle cache configuration.                                                                         | NULL    | [SELECT * FROM cache_httpfs_get_file_handle_cache_config();]               |
+| cache_httpfs_get_glob_cache_config        | table         | Returns the current glob cache configuration.                                                                                | NULL    | [SELECT * FROM cache_httpfs_get_glob_cache_config();]                      |
+| cache_httpfs_get_metadata_cache_config    | table         | Returns the current metadata cache configuration.                                                                            | NULL    | [SELECT * FROM cache_httpfs_get_metadata_cache_config();]                  |
+| cache_httpfs_get_ondisk_data_cache_size   | scalar        | Returns the total size in bytes of files in the configured on-disk cache directories.                                        | NULL    | [SELECT cache_httpfs_get_ondisk_data_cache_size();]                        |
+| cache_httpfs_get_profile                  | scalar        | Returns human-readable cache profile statistics for the current connection.                                                  | NULL    | [SELECT cache_httpfs_get_profile();]                                       |
+| cache_httpfs_list_exclusion_regex         | table         | Lists the path exclusion regular expressions.                                                                                | NULL    | [SELECT * FROM cache_httpfs_list_exclusion_regex();]                       |
+| cache_httpfs_list_registered_filesystems  | table         | Lists filesystem implementations registered with DuckDB.                                                                     | NULL    | [SELECT * FROM cache_httpfs_list_registered_filesystems();]                |
+| cache_httpfs_reset_exclusion_regex        | scalar        | Removes all path exclusion regular expressions.                                                                              | NULL    | [SELECT cache_httpfs_reset_exclusion_regex();]                             |
+| cache_httpfs_wrap_cache_filesystem        | scalar        | Wraps a registered DuckDB filesystem with the cache filesystem.                                                              | NULL    | [SELECT cache_httpfs_wrap_cache_filesystem('AzureBlobStorageFileSystem');] |
+| prewarm                                   | scalar        | Preloads a local DuckDB table into the buffer pool or operating system page cache and returns the number of bytes prewarmed. | NULL    | [SELECT prewarm('events');]                                                |
+| prewarm                                   | scalar        | Preloads a local DuckDB table into the buffer pool or operating system page cache and returns the number of bytes prewarmed. | NULL    | [SELECT prewarm('events', 'buffer', '1GB');]                               |
+| prewarm                                   | scalar        | Preloads a local DuckDB table into the buffer pool or operating system page cache and returns the number of bytes prewarmed. | NULL    | [SELECT prewarm('events', 'buffer', 1000000);]                             |
+| prewarm                                   | scalar        | Preloads a local DuckDB table into the buffer pool or operating system page cache and returns the number of bytes prewarmed. | NULL    | [SELECT prewarm('events', 'prefetch');]                                    |
+| prewarm_remote                            | scalar        | Preloads files matching a path or URL pattern into the cache_httpfs cache and returns the number of bytes prewarmed.         | NULL    | [SELECT prewarm_remote('https://example.com/data.parquet');]               |
+| prewarm_remote                            | scalar        | Preloads files matching a path or URL pattern into the cache_httpfs cache and returns the number of bytes prewarmed.         | NULL    | [SELECT prewarm_remote('https://example.com/data.parquet', '100MB');]      |
+| prewarm_remote                            | scalar        | Preloads files matching a path or URL pattern into the cache_httpfs cache and returns the number of bytes prewarmed.         | NULL    | [SELECT prewarm_remote('https://example.com/data.parquet', 1000000);]      |
 
 ### Overloaded Functions
 

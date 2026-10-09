@@ -10,10 +10,10 @@ The DuckDB Python package has its own repository at [`duckdb/duckdb-python`](htt
 This guide assumes:
 
 1. You have a working copy of the DuckDB Python package source (including git submodules and tags)
-2. You have [Astral UV](https://docs.astral.sh/uv/) version >= 0.8.0 installed
+2. You have [Astral uv](https://docs.astral.sh/uv/) version >= 0.8.0 installed
 3. You run commands from the root of the `duckdb-python` source
 
-We are opinionated about using **Astral UV** for Python environment and dependency management. While using pip for a development environment with an editable install without build isolation is possible, we don't provide guidance for that approach in this guide.
+We are opinionated about using **Astral uv** for Python environment and dependency management. While using pip for a development environment with an editable install without build isolation is possible, we don't provide guidance for that approach in this guide.
 
 We use **CLion** as our IDE. This guide doesn't include specific instructions for other IDEs, but the setup should be similar.
 

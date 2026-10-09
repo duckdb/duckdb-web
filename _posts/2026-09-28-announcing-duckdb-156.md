@@ -68,8 +68,37 @@ That's more than 6× faster!
 
 ![Windows performance on v1.5.6 vs. v2.0.0-dev]({% link images/blog/windows-tpch-sf300.svg %})
 
+The detailed results are as follows:
+
+<div class="monospace_table"></div>
+
+| Query | v1.5.6 (s) | v2.0.0-dev (s) |
+| ----: | ---------: | -------------: |
+|     1 |     17.590 |         19.954 |
+|     2 |      1.065 |          1.972 |
+|     3 |      4.282 |          8.787 |
+|     4 |      5.310 |          8.386 |
+|     5 |      4.562 |          6.097 |
+|     6 |      1.167 |          1.057 |
+|     7 |      5.091 |          3.405 |
+|     8 |      4.986 |          5.359 |
+|     9 |     16.662 |         17.505 |
+|    10 |     60.919 |          7.619 |
+|    11 |      6.797 |          0.674 |
+|    12 |      3.350 |          2.579 |
+|    13 |    174.847 |         13.256 |
+|    14 |     20.044 |          2.001 |
+|    15 |     22.836 |          1.807 |
+|    16 |     43.019 |          1.953 |
+|    17 |      4.958 |          2.805 |
+|    18 |    230.175 |         11.453 |
+|    19 |     23.013 |          2.416 |
+|    20 |     24.303 |          2.391 |
+|    21 |     67.344 |          5.766 |
+|    22 |     79.726 |          1.533 |
+
 This improvement is thanks to several optimizations, including a [switch to the `clang-cl` compiler](https://github.com/duckdb/duckdb/pull/24391) and a [new allocator](https://github.com/duckdb/duckdb/pull/24036).
-That said, please do not expect a 6× speedup to generalize to all workloads – but rest assured that you should see significant improvements.
+That said, you can observe that there are some regressions for the time being (we are working on them!) and the 6× speedup may not generalize to all workloads – but rest assured that you should see significant improvements for most workloads on Windows once you upgrade to DuckDB v2.0.
 
 ## Conclusion
 

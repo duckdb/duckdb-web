@@ -47,10 +47,10 @@ docs:
 
     Check out the [RawDuck README](https://github.com/quackscience/rawduck) for more examples and details.
 
-extension_star_count: 37
-extension_star_count_pretty: 37
-extension_download_count: 891
-extension_download_count_pretty: 891
+extension_star_count: 38
+extension_star_count_pretty: 38
+extension_download_count: 886
+extension_download_count_pretty: 886
 image: '/images/community_extensions/social_preview/preview_community_extension_rawduck.png'
 layout: community_extension_doc
 ---

@@ -58,7 +58,8 @@ lts_short_duckdb_version: "1.4"
 # preview version information
 preview_duckdb_version: "2.0.0-dev"
 preview_short_duckdb_version: "2.0-dev"
-preview_duckdb_java_version: "2.0.0-alpha43385-881"
+preview_duckdb_java_version: "2.0.0-alpha44738-892"
+preview_duckdb_odbc_version: "8f79c4f6"
 # more Jekyll config
 livereload: true
 highlighter: rouge
@@ -128,7 +129,7 @@ repository: "duckdb/duckdb-web"
 #   - vendor/gems/
 #   - vendor/ruby/
 
-star_count: '41.8k'
+star_count: '42.0k'
 
 toc:
   min_level: 1
