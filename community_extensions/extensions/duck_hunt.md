@@ -8,7 +8,7 @@ excerpt: |
 extension:
   name: duck_hunt
   description: Parse and analyze test results, build outputs, and CI/CD pipeline logs from 110+ formats with severity filtering, format auto-detection, and context extraction
-  version: 1.13.0
+  version: 1.13.3
   language: C++
   build: cmake
   license: Apache-2.0
@@ -23,13 +23,15 @@ extension:
 repo:
   github: teaguesterling/duck_hunt
   andium: 68ca1c4676f706980a6503c19b789f5224596b4d
-  ref: 3cb555ef05078cf741a419a324e68bef7ce4c8b7
-  # ref_next == ref (deliberate): makes the prerelease leg actually BUILD+TEST
-  # v1.13.0 against DuckDB v2.0-cyanoptera. Without ref_next, test_against_latest
-  # is skipped -- a green that verified nothing on the v2.0 line. v1.13.0 carries
-  # the v2.0 fix (#69: return QueryResult base; v2.0 removed MaterializedQueryResult),
-  # so this validates the next line rather than skipping it.
-  ref_next: 3cb555ef05078cf741a419a324e68bef7ce4c8b7
+  ref: 60f840ae4d3420b41ad6a5013cf03f0f1d4072db
+  # ref_next == ref (deliberate): v1.13.3 (tag v1.13.3) completes the family-C
+  # migration (named_parameters -> FunctionSignature typed-kwargs shim) AND fixes
+  # missing-file tolerance on the v2.0/macOS build (a narrow catch(const
+  # IOException&) in the in-out read path that missed the open exception there,
+  # broadened to catch(const std::exception&)). The v2.0-cyanoptera prerelease leg
+  # now BUILDS AND TESTS on this exact commit instead of skipping vacuously; v1.13.2
+  # built but failed 3 missing-file tests on v2.0/macOS, which this ref fixes.
+  ref_next: 60f840ae4d3420b41ad6a5013cf03f0f1d4072db
 
 docs:
   readme: https://duck-hunt.readthedocs.io/
@@ -186,8 +188,8 @@ docs:
 
 extension_star_count: 8
 extension_star_count_pretty: 8
-extension_download_count: 1497
-extension_download_count_pretty: 1.5k
+extension_download_count: 1800
+extension_download_count_pretty: 1.8k
 image: '/images/community_extensions/social_preview/preview_community_extension_duck_hunt.png'
 layout: community_extension_doc
 ---

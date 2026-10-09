@@ -8,7 +8,7 @@ excerpt: |
 extension:
   name: lance_conversion
   description: Stream any DuckDB query into Lance datasets with Blob v2 storage and scalar, vector, text, and Bloom filter indexes
-  version: 0.1.0
+  version: 0.1.4
   language: C++ & Rust
   build: cmake
   license: MIT
@@ -19,7 +19,7 @@ extension:
 
 repo:
   github: dentiny/duckdb_lance_conversion
-  ref: 1f27cbb0fd97df46a1510f6552b9637db808089d
+  ref: 2d0dd959003fb5d7b105fed4cecff2b4f58645f2
 
 docs:
   hello_world: |
@@ -63,11 +63,49 @@ docs:
     ) TO 'archive.lance' (FORMAT LANCE);
     ```
 
+    `read_huggingface` fetches only the projected Parquet columns and decodes
+    row groups in the background. `max_read_parallelism` bounds concurrent
+    row-group reads, and `read_ahead_bytes` caps the decoded data each one may
+    queue (`0` disables read-ahead):
+
+    ```sql
+    SELECT id, package_name
+    FROM read_huggingface(
+      'lhoestq/demo1',
+      max_read_parallelism = 8,
+      read_ahead_bytes = 67108864
+    );
+    ```
+
+    Storage timeouts and retries for S3 and Hugging Face I/O are configured
+    through the `lance_conversion_storage_*` settings:
+
+    ```sql
+    SET lance_conversion_storage_io_timeout_ms = 30000;
+    SET lance_conversion_storage_retry_max_times = 5;
+    ```
+
     Lance writes support Create (the default), Append, and Overwrite modes:
 
     ```sql
     COPY new_events TO 'events.lance' (FORMAT LANCE, APPEND);
     COPY replacement TO 'events.lance' (FORMAT LANCE, OVERWRITE);
+    ```
+
+    When row order need not be preserved, every DuckDB thread runs its own
+    Lance writer, and all writers commit as one dataset version. Use
+    `PRESERVE_ORDER false` for the fastest writes:
+
+    ```sql
+    COPY events TO 'events.lance' (FORMAT LANCE, PRESERVE_ORDER false);
+    ```
+
+    `SAMPLE_PERCENT` and `SAMPLE_ROWS` write a random sample of the source
+    rows instead of every row:
+
+    ```sql
+    COPY events TO 'events_10pct.lance' (FORMAT LANCE, SAMPLE_PERCENT 10);
+    COPY events TO 'events_sample.lance' (FORMAT LANCE, SAMPLE_ROWS 1000);
     ```
 
     Blob v2 layout, data file sizing, and indexes are configurable directly
@@ -96,8 +134,8 @@ docs:
 
 extension_star_count: 0
 extension_star_count_pretty: 0
-extension_download_count: 391
-extension_download_count_pretty: 391
+extension_download_count: 790
+extension_download_count_pretty: 790
 image: '/images/community_extensions/social_preview/preview_community_extension_lance_conversion.png'
 layout: community_extension_doc
 ---

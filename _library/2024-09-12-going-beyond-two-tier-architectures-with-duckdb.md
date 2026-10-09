@@ -1,14 +1,15 @@
 ---
 layout: post
 title: "Going beyond Two Tier Data Architectures with DuckDB"
-author: Hannes Mühleisen
-thumb: "/images/library/thumbs/2024-09-12-going-beyond-two-tier-architectures-with-duckdb.jpg"
-image: "/images/library/thumbs/2024-09-12-going-beyond-two-tier-architectures-with-duckdb.jpg"
-tags: ["Talk"]
+authors:
+  - Hannes Mühleisen
+thumb: "/images/library/thumbs/2024-09-12-going-beyond-two-tier-architectures-with-duckdb.png"
+image: "/images/library/thumbs/2024-09-12-going-beyond-two-tier-architectures-with-duckdb.png"
+tag: talk
+category: core
 length: "30 min"
-thirdparty: false
 excerpt: ""
-pill: "Data Engineering for AI/ML"
+venue: "Data Engineering for AI/ML"
 redirect_from:
 - /media/going-beyond-two-tier-architectures-with-duckdb
 ---

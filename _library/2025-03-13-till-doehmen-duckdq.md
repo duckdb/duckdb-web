@@ -1,14 +1,15 @@
 ---
 layout: post
 title: "DuckDB in Research S01E01: Till Döhmen"
-author: "Disseminate Podcast Series by Jack Waudby"
-thumb: "/images/library/thumbs/2025-03-13-till-doehmen-duckdq.jpg"
-image: "/images/library/thumbs/2025-03-13-till-doehmen-duckdq.jpg"
-tags: ["Podcast"]
+authors:
+  - Disseminate Podcast Series by Jack Waudby
+thumb: "/images/library/thumbs/2025-03-13-till-doehmen-duckdq.png"
+image: "/images/library/thumbs/2025-03-13-till-doehmen-duckdq.png"
+tag: podcast
 length: "60 min"
 category: community
 excerpt: ""
-pill: "DuckDB in Research"
+venue: "DuckDB in Research"
 episode: "S01E01"
 ---
 

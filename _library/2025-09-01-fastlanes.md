@@ -1,13 +1,13 @@
 ---
 layout: post
 title: "The FastLanes File Format"
-author: "Azim Afroozeh, Peter Boncz"
-thumb: "/images/library/thumbs/vldb.svg"
-image: "/images/library/thumbs/vldb.png"
-tags: ["Paper"]
+authors:
+  - Azim Afroozeh
+  - Peter Boncz
+tag: paper
 category: community
 excerpt: ""
-pill: "VLDB 2025"
+venue: "VLDB 2025"
 ---
 
 |-------|-------|

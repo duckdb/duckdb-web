@@ -1,11 +1,12 @@
 ---
 layout: post
 title: "Creating a SQL-Only Extension for Excel-Style Pivoting in DuckDB"
-author: "Alex Monahan"
+authors:
+  - Alex Monahan
 thumb: "/images/blog/thumbs/dynamic-sql.svg"
 image: "/images/blog/thumbs/dynamic-sql.png"
 excerpt: "Easily create sharable extensions using only SQL macros that can apply to any table and any columns. We demonstrate the power of this capability with the pivot_table extension that provides Excel-style pivoting."
-tags: ["extensions"]
+tag: extensions
 ---
 
 ## The Power of SQL-Only Extensions

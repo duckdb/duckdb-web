@@ -1,11 +1,13 @@
 ---
 layout: post
 title: "DuckLabs to Join AWS, Projects to Remain Open Source"
-author: "Mark Raasveldt and Hannes Mühleisen"
+authors:
+  - Mark Raasveldt
+  - Hannes Mühleisen
 excerpt: "DuckLabs will join Amazon Web Services (AWS), which is expected to be effective in early September. The projects will remain open-source under the MIT license."
-tags: ["deep dive"]
+tag: deep-dive
 thumb: "/images/blog/thumbs/ducklabs-aws.svg"
-image: "/images/blog/thumbs/ducklabs-aws.jpg"
+image: "/images/blog/thumbs/ducklabs-aws.png"
 ---
 
 DuckLabs today has announced that they will be joining Amazon Web Services as a new subsidiary. The big news for DuckDB and related projects like DuckLake is that there are no changes for our projects’ roadmap, licensing, and governance model!

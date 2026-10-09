@@ -1,11 +1,12 @@
 ---
 layout: post
 title: "Announcing DuckDB 1.4.5 LTS (Andium)"
-author: "The DuckDB team"
+authors:
+  - The DuckDB team
 thumb: "/images/blog/thumbs/duckdb-release-1-4-5-lts.svg"
 image: "/images/blog/thumbs/duckdb-release-1-4-5-lts.png"
 excerpt: "Today we are releasing DuckDB 1.4.5 LTS with bugfixes and performance improvements."
-tags: ["release"]
+tag: release
 ---
 
 > We are simultaneously releasing two DuckDB versions:

@@ -2,10 +2,6 @@
 @use '../abstracts/variables' as *;
 @use '../abstracts/mixins' as *;
 
-img.downloadlogo{
-	width: 180px;
-}
-
 header .headerline .headercontent .landingmenu nav a:hover,
 footer .sitefooter .footercontent > div a:hover {
 	color: var(--orange-50);

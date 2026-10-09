@@ -8,7 +8,7 @@ excerpt: |
 extension:
   name: webbed
   description: Comprehensive processing extension for web markup languages (XML and HTML) with SAX streaming for large files, intelligent schema inference, XPath-based data extraction, and HTML table parsing.
-  version: 2.9.2
+  version: 2.9.4
   language: C++
   build: cmake
   license: MIT
@@ -22,14 +22,17 @@ extension:
 repo:
   github: teaguesterling/duckdb_webbed
   andium: ddda30f11352138b2451657419640370d1612137
-  # andium (DuckDB v1.4.5 track) left at its prior commit; v2.9.1 ships on the
-  # v1.5.x track via ref and is verified against DuckDB 2.0 (main) as well.
-  ref: 4b70396efc17cb74a3723a7d1ee650aa5e4fa064
+  # andium (DuckDB v1.4.5 track) left at its prior commit; v2.9.3 ships on the
+  # v1.5.x track via ref and is verified against DuckDB v2.0-cyanoptera as well.
+  ref: 171603404298b69398a7d90b0086bb71c3bee975
   # ref_next is what makes the PRERELEASE leg actually build against DuckDB
   # v2.0. Without it build_next.yml prints "Skipping prerelease validation" and
   # the PR passes green having verified nothing on that line. Same commit as
-  # ref: this tag builds on both.
-  ref_next: cdd866f0b6b6be7927a3bb56e2c16e18fe04e9b4
+  # ref: v2.9.4 (tag v2.9.4) adds SAX huge-file streaming (XML_PARSE_HUGE),
+  # described parse errors, and out-of-sample VARCHAR widening; it builds green
+  # on both the v1.5.6 and v2.0-cyanoptera lines (verified by the cyanoptera CI
+  # leg on this exact commit).
+  ref_next: 171603404298b69398a7d90b0086bb71c3bee975
 docs:
   docs_url: https://duckdb-webbed.readthedocs.io
   hello_world: |
@@ -111,8 +114,8 @@ docs:
 
 extension_star_count: 76
 extension_star_count_pretty: 76
-extension_download_count: 20162
-extension_download_count_pretty: 20.2k
+extension_download_count: 21324
+extension_download_count_pretty: 21.3k
 image: '/images/community_extensions/social_preview/preview_community_extension_webbed.png'
 layout: community_extension_doc
 ---

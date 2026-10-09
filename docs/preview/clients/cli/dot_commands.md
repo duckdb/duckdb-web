@@ -32,6 +32,7 @@ Dot commands are available in the DuckDB CLI client. To use one of these command
 | `.large_number_rendering ⟨all/footer/off⟩`{:.language-sql .highlight} | Toggle readable rendering of large numbers (duckbox only, default: `footer`)                                                                                                     |
 | `.last`{:.language-sql .highlight}                                    | Render the last result without truncating. Useful for navigating with the pager                                                                                                  |
 | `.log ⟨FILE/off⟩`{:.language-sql .highlight}                          | Turn logging `on` or `off`. `FILE` can be `stderr` / `stdout`                                                                                                                    |
+| `.manual ⟨FUNCTION⟩`{:.language-sql .highlight}                       | Show the manual page (signatures, descriptions and examples) for a SQL function. See the [manual section](#displaying-function-documentation)                                    |
 | `.maxrows ⟨COUNT⟩`{:.language-sql .highlight}                         | Sets the maximum number of rows for display. Only for [duckbox mode]({% link docs/preview/clients/cli/output_formats.md %})                                                      |
 | `.maxwidth ⟨COUNT⟩`{:.language-sql .highlight}                        | Sets the maximum width in characters. 0 defaults to terminal width. Only for [duckbox mode]({% link docs/preview/clients/cli/output_formats.md %})                               |
 | `.mode ⟨MODE⟩ ⟨TABLE⟩`{:.language-sql .highlight}                     | Set [output mode]({% link docs/preview/clients/cli/output_formats.md %})                                                                                                         |
@@ -103,7 +104,7 @@ The terminal will then display:
 | back to the terminal |
 ```
 
-A common output format is CSV, or comma separated values. DuckDB supports [SQL syntax to export data as CSV or Parquet]({% link docs/preview/sql/statements/copy.md %}#copy-to), but the CLI-specific commands may be used to write a CSV instead if desired.
+A common output format is CSV, or comma separated values. DuckDB supports [SQL syntax to export data as CSV or Parquet]({% link docs/preview/sql/statements/copy.md %}#copy--to), but the CLI-specific commands may be used to write a CSV instead if desired.
 
 ```sql
 .mode csv
@@ -192,6 +193,51 @@ The `--newlines` option allows unescaped newline characters in the output:
 
 ```sql
 .dump --newlines
+```
+
+## Displaying Function Documentation
+
+The `.manual` command displays a manual page for a SQL function, including its signatures (overloads), description and examples. This information is retrieved from the [`duckdb_functions()` table function]({% link docs/preview/sql/meta/duckdb_table_functions.md %}#duckdb_functions).
+
+```sql
+.manual map
+```
+
+```text
+  ────────────────────────────────────────────────────────────────────────────────────────────────
+  system.main                                   map                                scalar function
+
+  SIGNATURE
+
+        map() -> MAP("NULL", "NULL")
+
+        map(keys K[], values V[]) -> MAP(K, V)
+
+  DESCRIPTION
+
+        Creates a map from a set of keys and values
+
+  EXAMPLES
+
+        map(['key1', 'key2'], ['val1', 'val2'])
+```
+
+If the overloads of a function have different descriptions or examples, the signatures are numbered and the descriptions and examples refer to these numbers.
+If multiple functions match the name (e.g., `range` is both a scalar function and a table function), a separate manual page is shown for each of them.
+Long output is shown using the [pager]({% link docs/preview/clients/cli/output_formats.md %}#paging) if it is enabled.
+
+The function name may be qualified with a schema and a database name, i.e., `⟨database⟩.⟨schema⟩.⟨function⟩`{:.language-sql .highlight}. Each part of the name is matched case-insensitively as a [`LIKE` pattern]({% link docs/preview/sql/functions/pattern_matching.md %}#like), so wildcards can be used:
+
+```sql
+.manual list_%
+```
+
+If no function matches the name, the CLI suggests similarly named functions.
+
+The manual page can also be displayed directly from the command line using the `-manual` [argument]({% link docs/preview/clients/cli/arguments.md %}):
+
+```batch
+duckdb -manual regexp_extract
 ```
 
 ## Progress Bar

@@ -65,6 +65,10 @@ To avoid binary compatibility issues, the binary extensions distributed by DuckD
 This means that DuckDB can automatically detect binary compatibility between it and a loadable extension.
 When trying to load an extension that was compiled for a different version or platform, DuckDB will throw an error and refuse to load the extension.
 
+DuckDB stores this compatibility information in a metadata footer appended to the end of the extension binary.
+
+> Warning Do not run [`strip`](https://sourceware.org/binutils/docs/binutils/strip.html) on an extension binary. Stripping removes or corrupts the appended metadata footer, after which DuckDB reports the metadata as invalid and refuses to load the extension. On some platforms, `strip` fails outright because the footer extends beyond the binary's segments.
+
 ## Creating a Custom Repository
 
 You can create a custom DuckDB extension repository.

@@ -168,6 +168,8 @@ EXECUTE v1('lineitem.json');
 
 The `COPY ... TO` function can be called specifying either a table name, or a query. When a table name is specified, the contents of the entire table will be written into the resulting file. When a query is specified, the query is executed and the result of the query is written to the resulting file.
 
+> `COPY ... TO` overwrites the destination file if it already exists, without raising an error. There is no need to delete the file or add overwrite guard code beforehand. By default (controlled by the [`USE_TMP_FILE` option](#copy--to-options)), DuckDB writes to a temporary file first and only replaces an existing destination once the write completes successfully, so an interrupted write does not corrupt the previous file. Reading from and writing to the same file in a single statement is not guaranteed to be safe, however, and should be avoided.
+
 > New Support for `COPY ...` blocks in CTEs will be introduced in DuckDB 2.0.
 
 `COPY ... TO` can also be used as a [CTE]({% link docs/preview/sql/query_syntax/with.md %}) body. The CTE returns the number of rows written. `COPY ... FROM` cannot be used as a CTE body.
@@ -493,7 +495,7 @@ TO 'array_false.json' (FORMAT json, ARRAY false);
 
 The `BLOB` format option allows you to select a single column of a DuckDB table into a `.blob` file.
 The column must be cast to the `BLOB` data type. For details on typecasting, see the 
-[Casting Operations Matrix]({% link docs/preview/sql/data_types/typecasting.md %}#Casting-Operations-Matrix).
+[Casting Operations Matrix]({% link docs/preview/sql/data_types/typecasting.md %}#casting-operations-matrix).
 
 The below options are applicable when writing `BLOB` files.
 

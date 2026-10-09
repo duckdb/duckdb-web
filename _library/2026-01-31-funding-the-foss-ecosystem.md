@@ -1,13 +1,14 @@
 ---
 layout: post
 title: "Funding Lessons Learned Panel"
-author: "Gábor Szárnyas"
-thumb: "/images/library/thumbs/2026-01-31-funding-the-foss-ecosystem.jpg"
-image: "/images/library/thumbs/2026-01-31-funding-the-foss-ecosystem.jpg"
-tags: ["Talk"]
-thirdparty: false
+authors:
+  - Gábor Szárnyas
+thumb: "/images/library/thumbs/2026-01-31-funding-the-foss-ecosystem.png"
+image: "/images/library/thumbs/2026-01-31-funding-the-foss-ecosystem.png"
+tag: talk
+category: core
 excerpt: ""
-pill: "FOSDEM 2026"
+venue: "FOSDEM 2026"
 ---
 
 Gábor Szárnyas participated in the [panel discussion](https://fosdem.org/2026/schedule/event/KQEWP9-funding_lessons_learned_panel/)

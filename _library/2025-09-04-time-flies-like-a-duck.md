@@ -1,14 +1,15 @@
 ---
 layout: post
 title: "Time Flies like a Duck"
-author: "Richard Wesley"
-thumb: "/images/library/thumbs/2025-09-04-time-flies-like-a-duck.jpg"
-image: "/images/library/thumbs/2025-09-04-time-flies-like-a-duck.jpg"
-tags: ["Talk"]
+authors:
+  - Richard Wesley
+thumb: "/images/library/thumbs/2025-09-04-time-flies-like-a-duck.png"
+image: "/images/library/thumbs/2025-09-04-time-flies-like-a-duck.png"
+tag: talk
+category: core
 length: "20 min"
-thirdparty: false
 excerpt: ""
-pill: "DuckDB in Science"
+venue: "DuckDB in Science"
 ---
 
 <div class="video-container">

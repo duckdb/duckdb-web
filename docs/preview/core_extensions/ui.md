@@ -6,10 +6,6 @@ title: UI Extension
 
 The `ui` extension adds a user interface for your local DuckDB instance.
 
-The UI is built and maintained by [MotherDuck](https://motherduck.com/).
-An overview of its features can be found
-in the [MotherDuck documentation](https://motherduck.com/docs/getting-started/motherduck-quick-tour/).
-
 ## Usage
 
 To start the UI from the command line:
@@ -149,6 +145,12 @@ Then, open a notebook and attach to the database:
 ATTACH 'test.db' (READ_ONLY) AS my_db;
 USE my_db;
 ```
+
+## Notes
+
+The UI is built and maintained by [MotherDuck](https://motherduck.com/).
+An overview of the UI's features can be found
+in the [MotherDuck documentation](https://motherduck.com/docs/getting-started/motherduck-quick-tour/).
 
 ## Limitations
 

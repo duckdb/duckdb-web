@@ -1,9 +1,10 @@
 ---
 layout: post
 title: "Planning AsOf Joins"
-author: "Richard Wesley"
+authors:
+  - Richard Wesley
 excerpt: "AsOf Joins are a great example of how DuckDB can choose different implementations for an expensive operation."
-tags: ["deep dive"]
+tag: deep-dive
 thumb: "/images/blog/thumbs/asof-join.svg"
 image: "/images/blog/thumbs/asof-join.png"
 ---

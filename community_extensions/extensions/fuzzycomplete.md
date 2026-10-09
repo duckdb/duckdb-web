@@ -21,12 +21,12 @@ extension:
 repo:
   andium: 74630cc8548a8ee6b32129abdc8bd70e1cf2bf87
   github: query-farm/fuzzycomplete
-  ref: 97468339d6f834e74a8abd2ddb0ff8e74cb2cd9f
+  ref: 8b89b19bbed0c7338a2a5e1dfc08eea88290e0ee
 
-extension_star_count: 30
-extension_star_count_pretty: 30
-extension_download_count: 1408
-extension_download_count_pretty: 1.4k
+extension_star_count: 31
+extension_star_count_pretty: 31
+extension_download_count: 2601
+extension_download_count_pretty: 2.6k
 image: '/images/community_extensions/social_preview/preview_community_extension_fuzzycomplete.png'
 layout: community_extension_doc
 ---

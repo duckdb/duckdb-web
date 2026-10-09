@@ -1,11 +1,15 @@
 ---
 layout: post
 title: Saving Private Hash Join
-author: "Laurens Kuiper, Paul Groß, Peter Boncz, Hannes Mühleisen"
-tags: ["Paper"]
-thirdparty: false
+authors:
+  - Laurens Kuiper
+  - Paul Groß
+  - Peter Boncz
+  - Hannes Mühleisen
+tag: paper
+category: core
 excerpt: ""
-pill: "VLDB 2025"
+venue: "VLDB 2025"
 ---
 
 | | |

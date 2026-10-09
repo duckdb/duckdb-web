@@ -1,13 +1,12 @@
 ---
 layout: post
 title: "DuckDB Extensions: The Past, the Present, and the Future"
-author: "Sam Ansmink"
-tags: ["Talk"]
-thirdparty: true
-highlighted: true
+authors:
+  - Sam Ansmink
+tag: talk
 category: community
 excerpt: ""
-pill: "DuckDB Developer Meeting #1"
+venue: "DuckDB Developer Meeting #1"
 ---
 
 <div class="video-container">

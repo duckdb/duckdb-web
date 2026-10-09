@@ -103,25 +103,24 @@ $(document).ready(function(){
 		/* CUSTOM FITROWS FUNCTION FOR ISOTOPE TO GET EQUAL HEIGHT TILES */
 		!function(t){"use strict";function i(t){var i=t.create("fitRows");return i.prototype._resetLayout=function(){if(this.x=0,this.y=0,this.maxY=0,this.row=0,this.rows=[],this._getMeasurement("gutter","outerWidth"),this.options.equalheight)for(var t=0;t<this.isotope.items.length;t++)this.isotope.items[t].css({height:"auto"})},i.prototype._getItemLayoutPosition=function(t){t.getSize();var i=this.gutter||0,s=t.size.outerWidth,o=Math.ceil(this.isotope.size.innerWidth+i);0!==this.x&&s+this.x+i>o&&(this.x=0,this.y=this.maxY+i),0===this.x&&0!==this.y&&this.row++;var e={x:this.x,y:this.y};return this.maxY=Math.max(this.maxY,this.y+t.size.outerHeight),this.x+=s+i,void 0===this.rows[this.row]?(this.rows[this.row]=[],this.rows[this.row].start=this.y,this.rows[this.row].end=this.maxY):this.rows[this.row].end=Math.max(this.rows[this.row].end,this.maxY),t.row=this.row,e},i.prototype._equalHeight=function(){for(var t=0;t<this.isotope.items.length;t++){var i=this.isotope.items[t].row,s=this.rows[i];if(s){var o=s.end-s.start;o-=this.isotope.items[t].size.borderTopWidth+this.isotope.items[t].size.borderBottomWidth,o-=this.isotope.items[t].size.marginTop+this.isotope.items[t].size.marginBottom,o-=this.gutter.height||0,!1==this.isotope.items[t].size.isBorderBox&&(o-=this.isotope.items[t].size.paddingTop+this.isotope.items[t].size.paddingBottom),this.isotope.items[t].size.height=o,this.isotope.items[t].css({height:o.toString()+"px"})}}},i.prototype._getContainerSize=function(){return this.options.equalheight&&this._equalHeight(),{height:this.maxY}},i}"function"==typeof define&&define.amd?define(["../layout-mode"],i):"object"==typeof exports?module.exports=i(require("../layout-mode")):i(t.Isotope.LayoutMode)}(window);
 
-		var isLibraryOrEverywhere = $('.library-tiles, .everywhere-tiles').length > 0;
-		var gutterSize = (isLibraryOrEverywhere && window.innerWidth <= 660) ? 8 : 32;
-
 		var $grid = $('.newstiles').isotope({
 			itemSelector: '.postpreview',
 			layoutMode: 'fitRows',
 			fitRows: {
-				gutter: gutterSize,
+				gutter: 32,
 				equalheight: true
-			},
-			getSortData: {
-				title: '[data-title]'
 			}
 		});
 
-		// --- Filter highlight ---
+		var $heading = $('.pagetitle h1').first();
+		var defaultHeading = $.trim($heading.text());
+		var $search = $('#search-input');
+		var $coreToggle = $('#core-toggle');
+		var $empty = $('.filter-empty');
+		var activeFilter = '*';
+
 		function updateFilterHighlight($button) {
-			var $filtertags = $button.closest('.filtertags');
-			var $highlight = $filtertags.find('.filter-highlight');
+			var $highlight = $button.closest('.filtertags').find('.filter-highlight');
 			if ($highlight.length && $button.is(':visible')) {
 				$highlight.css({
 					left: $button.position().left,
@@ -130,163 +129,83 @@ $(document).ready(function(){
 			}
 		}
 
-		// Initialize highlights for all visible filter groups
-		$('.filtertags').each(function() {
-			var $activeBtn = $(this).find('.filter-btn.active');
-			if ($activeBtn.length) {
-				updateFilterHighlight($activeBtn);
-			}
-		});
+		function setActiveFilter(value) {
+			activeFilter = value;
+			$('.filterbar .filtertags').each(function() {
+				var $buttons = $(this).find('.filter-btn').removeClass('active');
+				var $match = $buttons.filter('[data-filter="' + value + '"]').addClass('active');
+				updateFilterHighlight($match);
+			});
+			var heading = $('.filterbar .filter-btn.active').first().attr('data-heading');
+			$heading.text(heading || defaultHeading);
+		}
 
-		// --- Filter state per group ---
-		// Each filter-group stores its active filter value keyed by data-filter-key.
-		// Groups with data-attribute on .filtertags filter by data attribute, others by CSS class.
-		var filterState = {};
-
-		$('.filter-group').each(function() {
-			var key = $(this).attr('data-filter-key');
-			if (key) {
-				filterState[key] = '*';
-			}
-		});
-
-		// --- URL parameter support ---
 		function readFiltersFromURL() {
 			var params = new URLSearchParams(window.location.search);
-			params.forEach(function(value, key) {
-				if (key === 'q') {
-					$('#search-input').val(value);
-				} else if (filterState.hasOwnProperty(key)) {
-					// Try matching a filter button directly, then with a leading dot
-					var matchedValue = null;
-					var $sampleGroup = $('.filter-group[data-filter-key="' + key + '"]').not('.filter-group-mobile-only').first();
-					var $sampleBtn = $sampleGroup.find('.filter-btn[data-filter="' + value + '"]');
-					if ($sampleBtn.length) {
-						matchedValue = value;
-					} else {
-						$sampleBtn = $sampleGroup.find('.filter-btn[data-filter=".' + value + '"]');
-						if ($sampleBtn.length) {
-							matchedValue = '.' + value;
-						}
-					}
-					if (matchedValue) {
-						filterState[key] = matchedValue;
-						$('.filter-group[data-filter-key="' + key + '"]').each(function() {
-							var $filtertags = $(this).find('.filtertags');
-							$filtertags.find('.filter-btn').removeClass('active');
-							var $matchingBtn = $filtertags.find('.filter-btn[data-filter="' + matchedValue + '"]');
-							if ($matchingBtn.length) {
-								$matchingBtn.addClass('active');
-								if ($matchingBtn.is(':visible')) {
-									updateFilterHighlight($matchingBtn);
-								}
-							}
-						});
-					}
-				}
-			});
+			var type = params.get('type');
+			if (type && $('.filterbar .filter-btn[data-filter=".' + type + '"]').length) {
+				setActiveFilter('.' + type);
+			}
+			if (params.get('q')) {
+				$search.val(params.get('q'));
+			}
+			if (params.get('core') === '1') {
+				$coreToggle.prop('checked', true);
+			}
 		}
 
 		function writeFiltersToURL() {
 			var params = new URLSearchParams();
-			for (var key in filterState) {
-				if (filterState[key] !== '*') {
-					// Strip leading dot from class-based selectors for cleaner URLs
-					params.set(key, filterState[key].replace(/^\./, ''));
-				}
+			if (activeFilter !== '*') {
+				params.set('type', activeFilter.replace(/^\./, ''));
 			}
-			var searchValue = $('#search-input').val();
-			if (searchValue) {
-				params.set('q', searchValue);
+			if ($coreToggle.is(':checked')) {
+				params.set('core', '1');
 			}
-			var newURL = window.location.pathname + (params.toString() ? '?' + params.toString() : '');
-			history.replaceState(null, '', newURL);
+			if ($search.val()) {
+				params.set('q', $search.val());
+			}
+			history.replaceState(null, '', window.location.pathname + (params.toString() ? '?' + params.toString() : ''));
 		}
 
 		function applyFilters() {
-			var searchValue = $('#search-input').val().toLowerCase();
+			var searchValue = $search.val().toLowerCase().trim();
+			var coreOnly = $coreToggle.is(':checked');
 
 			$grid.closest('.events-section').removeClass('is-empty');
 
 			$grid.isotope({
 				filter: function() {
 					var $item = $(this);
-					// Search filter
-					if (searchValue) {
-						var title = $item.attr('data-title').toLowerCase();
-						if (!title.includes(searchValue)) return false;
-					}
-					// Apply each filter group
-					for (var key in filterState) {
-						var value = filterState[key];
-						if (value === '*') continue;
-
-						// Find the filtertags that belong to this key
-						var $group = $('.filter-group[data-filter-key="' + key + '"]').not('.filter-group-mobile-only').first();
-						var $filtertags = $group.find('.filtertags');
-						var attribute = $filtertags.attr('data-attribute');
-
-						if (attribute) {
-							// Attribute-based filter (e.g., data-source)
-							var itemValue = $item.attr(attribute);
-							if (itemValue !== value) return false;
-						} else {
-							// Class-based filter (e.g., .book, .paper)
-							if (!$item.is(value)) return false;
-						}
-					}
+					if (activeFilter !== '*' && !$item.is(activeFilter)) return false;
+					if (coreOnly && $item.attr('data-core') !== 'true') return false;
+					if (searchValue && ($item.attr('data-search') || '').indexOf(searchValue) === -1) return false;
 					return true;
 				}
 			});
 
+			var visible = 0;
 			$grid.each(function() {
 				var iso = $(this).data('isotope');
-				var $section = $(this).closest('.events-section');
-				if (iso && $section.length) {
-					$section.toggleClass('is-empty', iso.filteredItems.length === 0);
-				}
+				var count = iso ? iso.filteredItems.length : 0;
+				visible += count;
+				$(this).closest('.events-section').toggleClass('is-empty', count === 0);
 			});
+			$empty.prop('hidden', visible > 0);
 		}
 
-		// Sync duplicate filter groups (desktop ↔ mobile-only) by filter-key
-		function syncFilterGroups($clickedBtn) {
-			var $group = $clickedBtn.closest('.filter-group');
-			var key = $group.attr('data-filter-key');
-			var filterValue = $clickedBtn.attr('data-filter');
-
-			// Find all groups with the same key and sync active state
-			$('.filter-group[data-filter-key="' + key + '"]').each(function() {
-				var $otherFiltertags = $(this).find('.filtertags');
-				$otherFiltertags.find('.filter-btn').removeClass('active');
-				var $matchingBtn = $otherFiltertags.find('.filter-btn[data-filter="' + filterValue + '"]');
-				$matchingBtn.addClass('active');
-				if ($matchingBtn.is(':visible')) {
-					updateFilterHighlight($matchingBtn);
-				}
-			});
-		}
-
-		// --- Click handler for filter buttons ---
 		$('.filterbar').on('click', 'button.filter-btn', function() {
-			var $btn = $(this);
-			var $group = $btn.closest('.filter-group');
-			var key = $group.attr('data-filter-key');
-			var filterValue = $btn.attr('data-filter');
-
-			// Update state
-			if (key) {
-				filterState[key] = filterValue;
-			}
-
-			// Sync all groups with the same key
-			syncFilterGroups($btn);
-
+			setActiveFilter($(this).attr('data-filter'));
 			applyFilters();
 			writeFiltersToURL();
 		});
 
-		// --- Search input ---
-		$('#search-input').on('input', function() {
+		$search.on('input', function() {
+			applyFilters();
+			writeFiltersToURL();
+		});
+
+		$coreToggle.on('change', function() {
 			applyFilters();
 			writeFiltersToURL();
 		});
@@ -295,40 +214,24 @@ $(document).ready(function(){
 		var $filterToggle = $('.filter-toggle');
 		var $filterModal = $('.filter-modal');
 		var $filterOverlay = $('.filter-overlay');
-		var filterModalOpen = false;
 
-		function openFilterModal() {
-			filterModalOpen = true;
-			$filterToggle.addClass('is-open');
-			$filterOverlay.addClass('is-open');
-			$filterModal.addClass('is-open');
-			// Update highlights for modal buttons that are now visible
-			$filterModal.find('.filtertags').each(function() {
-				var $activeBtn = $(this).find('.filter-btn.active');
-				if ($activeBtn.length) {
-					updateFilterHighlight($activeBtn);
-				}
-			});
-		}
-
-		function closeFilterModal() {
-			filterModalOpen = false;
-			$filterToggle.removeClass('is-open');
-			$filterModal.removeClass('is-open');
-			$filterOverlay.removeClass('is-open');
-		}
-
-		function toggleFilterModal() {
-			if (filterModalOpen) {
-				closeFilterModal();
-			} else {
-				openFilterModal();
+		function setFilterModal(open) {
+			$filterToggle.toggleClass('is-open', open);
+			$filterModal.toggleClass('is-open', open);
+			$filterOverlay.toggleClass('is-open', open);
+			if (open) {
+				updateFilterHighlight($filterModal.find('.filter-btn.active'));
 			}
 		}
 
-		$filterToggle.on('click', toggleFilterModal);
-		$filterOverlay.on('click', closeFilterModal);
+		$filterToggle.on('click', function() {
+			setFilterModal(!$filterModal.hasClass('is-open'));
+		});
+		$filterOverlay.on('click', function() {
+			setFilterModal(false);
+		});
 
+		setActiveFilter(activeFilter);
 		readFiltersFromURL();
 		applyFilters();
 	}

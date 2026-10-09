@@ -66,9 +66,11 @@ CSV loading, i.e., importing CSV files to the database, is a very common, and ye
 
 The DuckDB CSV reader can automatically infer which configuration flags to use by analyzing the CSV file using the [CSV sniffer]({% post_url 2023-10-27-csv-sniffer %}). This will work correctly in most situations, and should be the first option attempted. In rare situations where the CSV reader cannot figure out the correct configuration it is possible to manually configure the CSV reader to correctly parse the CSV file. See the [auto detection page]({% link docs/preview/data/csv/auto_detection.md %}) for more information.
 
+> Auto-detection (`auto_detect`) is enabled by default. Setting an option explicitly does not turn auto-detection off: the sniffer still detects every option you did not specify, and your explicit value overrides the sniffer only for that option. To disable auto-detection completely, set `auto_detect = false`.
+
 ## Parameters
 
-Below are parameters that can be passed to the [`read_csv` function](#csv-functions). Where meaningfully applicable, these parameters can also be passed to the [`COPY` statement]({% link docs/preview/sql/statements/copy.md %}#copy-to).
+Below are parameters that can be passed to the [`read_csv` function](#csv-functions). Where meaningfully applicable, these parameters can also be passed to the [`COPY` statement]({% link docs/preview/sql/statements/copy.md %}#copy--to).
 
 | Name | Description | Type | Default |
 |:--|:-----|:-|:-|
@@ -179,7 +181,7 @@ Multiple files can be read at once by providing a glob or a list of files. Refer
 
 ## Writing Using the `COPY` Statement
 
-The [`COPY` statement]({% link docs/preview/sql/statements/copy.md %}#copy-to) can be used to load data from a CSV file into a table. This statement has the same syntax as the one used in PostgreSQL. To load the data using the `COPY` statement, we must first create a table with the correct schema (which matches the order of the columns in the CSV file and uses types that fit the values in the CSV file). `COPY` detects the CSV's configuration options automatically.
+The [`COPY` statement]({% link docs/preview/sql/statements/copy.md %}#copy--to) can be used to load data from a CSV file into a table. This statement has the same syntax as the one used in PostgreSQL. To load the data using the `COPY` statement, we must first create a table with the correct schema (which matches the order of the columns in the CSV file and uses types that fit the values in the CSV file). `COPY` detects the CSV's configuration options automatically.
 
 ```sql
 CREATE TABLE ontime (

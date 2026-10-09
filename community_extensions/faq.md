@@ -12,7 +12,7 @@ title: Frequently Asked Questions
 
 <div class="answer" markdown="1">
 
-Similarly to other package management systems, DuckDB's Community Extensions repository contain community-contributed code,
+Similarly to other package management systems, DuckDB's Community Extensions repository contains community-contributed code,
 therefore, there are no guarantees regarding the content of extensions.
 The DuckDB Foundation and DuckLabs do not vet the code within community extensions and, therefore, cannot guarantee that DuckDB community extensions are safe to use.
 
@@ -48,7 +48,7 @@ For details on securing your DuckDB setup, please refer to the [Securing Extensi
 
 <div class="answer" markdown="1">
 
-Writing a DuckDB extension as a collection of SQL macro is already done be a few extensions. The [`pivot_table`]({% link community_extensions/extensions/pivot_table.md %}) and [`chsql`]({% link community_extensions/extensions/chsql.md %}) extensions for example follow this pattern.
+Writing a DuckDB extension as a collection of SQL macros is already done by a few extensions. The [`pivot_table`]({% link community_extensions/extensions/pivot_table.md %}) and [`chsql`]({% link community_extensions/extensions/chsql.md %}) extensions for example follow this pattern.
 
 Currently some C++ wrapper code is required, but this is possibly the simplest way to build a community extension *and* the best way to package a set of utility macros to be safely distributed.
 
@@ -97,7 +97,7 @@ We are working on adding Go support for extensions.
 
 <div class="answer" markdown="1">
 
-DuckDB's [Extension Template](https://github.com/duckdb/extension-template) is based on the DuckDB C++ API and uses DuckDB's CMake-based build system. The DuckDB team will currently only provide support for extensions written using this framework. However, note that CMake is pretty flexible: for example, several [Rust-based](#how-to-write-my-extension-in-rust) examples already exist.
+DuckDB's [Extension Template](https://github.com/duckdb/extension-template) is based on the DuckDB C++ API and uses DuckDB's CMake-based build system. The DuckDB team will currently only provide support for extensions written using this framework. However, note that CMake is pretty flexible: for example, several [Rust-based](#can-i-write-extensions-in-rust) examples already exist.
 
 The old [C Extension API](https://github.com/duckdb/duckdb/pull/12682) was available in DuckDB v1.1 to v1.5.
 
@@ -118,10 +118,10 @@ DuckDB v2.0 ships a new C Extension API.
 Currently, DuckDB extensions must have a unique name. For this reason, PRs that introduce naming collisions will not be accepted and will require
 a rename. To resolve this, manual namespacing would be the solution, for example by prefixing your vendor name to the extension name: `⟨vendor_name⟩_⟨extension_name⟩`{:.language-sql .highlight}.
 
-Note that in general the DuckDB Foundation may refuse certain extension names or to force an existing community extension to be renamed.
+Note that in general the DuckDB Foundation may refuse certain extension names or force an existing community extension to be renamed.
 For example, if a core DuckDB extension of the same name exists or is created, the community extension of the same name has to be renamed to avoid confusion (“am I loading the community extension or the core extension?”).
 The multi-faceted nature of extension names requires us to also consider historical extension names, trademarks, etc.
-Hence, the DuckDB Foundation reserves the rights to make the decision on extension names on a case-by-case basis.
+Hence, the DuckDB Foundation reserves the right to make the decision on extension names on a case-by-case basis.
 
 </div>
 
@@ -139,7 +139,7 @@ The [toolchain](https://github.com/duckdb/extension-ci-tools) used to compile Du
 dependencies required to build your extension. If this is the case, please just open a PR adding toolchain components as [optional extras](https://github.com/duckdb/extension-ci-tools/pull/53).
 
 Alternatively, you can try adding the installation of the required dependencies through the [Makefile](https://github.com/duckdb/extension-template/blob/main/Makefile) in your extension repository.
-However, you should be warned that this could potentially lead to a more fragile build system with a corresponding increased maintainance load as DuckDB and its toolchain is updated.
+However, you should be warned that this could potentially lead to a more fragile build system with a corresponding increased maintenance load as DuckDB and its toolchain are updated.
 
 </div>
 

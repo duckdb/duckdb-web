@@ -19,7 +19,7 @@ extension:
 
 repo:
   github: neuesql/atm_talib
-  ref: 53c4312814729d037f865126025cc4235aa4afea
+  ref: baebee616765169eab9efac31d469d64f8aecf79
 
 docs:
   hello_world: |
@@ -39,6 +39,7 @@ docs:
     FROM ohlc;
   extended_description: |
     100+ TA-Lib indicators as native DuckDB functions: overlap studies
+
     | Category | Count | Examples |
     |----------|-------|---------|
     | 🔀 Overlap Studies | 8+ | `t_sma`, `t_ema`, `t_wma`, `t_dema`, `t_tema` |
@@ -54,7 +55,7 @@ docs:
     Every function is registered in two forms:
     - Scalar (`t_*`): pass pre-collected lists, returns a list
     - Aggregate/window (`ta_*`): use with `OVER()` for row-by-row results
-    
+
     | | 🏎️ Scalar `t_*` | 🧑‍💻 Aggregate `ta_*` |
     |---|---|---|
     | **Performance** | ⚡ Fast — one pass over the full series, O(N) | 🐢 Slower — recomputes per window frame, ~O(N × window) |
@@ -63,8 +64,8 @@ docs:
 
 extension_star_count: 8
 extension_star_count_pretty: 8
-extension_download_count: 977
-extension_download_count_pretty: 977
+extension_download_count: 926
+extension_download_count_pretty: 926
 image: '/images/community_extensions/social_preview/preview_community_extension_talib.png'
 layout: community_extension_doc
 ---

@@ -1,14 +1,14 @@
 ---
 layout: post
 title: "Exploring the Iceberg Ecosystem with DuckDB-Iceberg"
-author: "Tom Ebergen"
-thumb: "/images/library/thumbs/2026-04-08-building-duckdb-iceberg-exploring-the-iceberg-ecosystem.jpg"
-image: "/images/library/thumbs/2026-04-08-building-duckdb-iceberg-exploring-the-iceberg-ecosystem.jpg"
-tags: ["Talk"]
-thirdparty: false
-highlighted: false
+authors:
+  - Tom Ebergen
+thumb: "/images/library/thumbs/2026-04-08-building-duckdb-iceberg-exploring-the-iceberg-ecosystem.png"
+image: "/images/library/thumbs/2026-04-08-building-duckdb-iceberg-exploring-the-iceberg-ecosystem.png"
+tag: talk
+category: core
 excerpt: ""
-pill: "Iceberg Summit 2026"
+venue: "Iceberg Summit 2026"
 ---
 
 |-------|-------|

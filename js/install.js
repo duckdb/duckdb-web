@@ -23,6 +23,9 @@
     var $versionBtns = $versionSwitch.find('.version-switch-option');
     var $versionSlider = $versionSwitch.find('.version-switch-slider');
 
+    var VERSIONS = ['current', 'lts', 'preview'];
+    var VERSION_LABELS = { current: 'current', lts: 'LTS', preview: 'preview' };
+
     var state = {
       platform: null,
       environment: null,
@@ -55,7 +58,7 @@
         state.platform = sanitizeParam(params.get('platform'));
         state.environment = sanitizeParam(params.get('environment'));
         var v = sanitizeParam(params.get('version'));
-        if (v === 'lts' || v === 'current') state.version = v;
+        if (VERSIONS.indexOf(v) >= 0) state.version = v;
       } catch (e) {}
     }
 
@@ -64,7 +67,7 @@
         var params = new URLSearchParams(window.location.search);
         setOrDelete(params, 'platform', state.platform);
         setOrDelete(params, 'environment', state.environment);
-        setOrDelete(params, 'version', state.version === 'lts' ? 'lts' : null);
+        setOrDelete(params, 'version', state.version !== 'current' ? state.version : null);
         var newQuery = params.toString();
         var newUrl = window.location.pathname + (newQuery ? '?' + newQuery : '') + window.location.hash;
         var prevQuery = window.location.search.replace(/^\?/, '');
@@ -196,33 +199,35 @@
       return ver;
     }
 
+    function versionAttrPrefix(v) {
+      return v === 'current' ? 'data-' : 'data-' + v + '-';
+    }
+
     function updateVersionButtons() {
-      var currentVer = getVersionForEnv('data-');
-      var ltsVer = getVersionForEnv('data-lts-');
       $versionBtns.each(function () {
         var v = $(this).data('version');
-        if (v === 'current' && currentVer) {
-          $(this).text(currentVer + ' (current)');
-        } else if (v === 'lts' && ltsVer) {
-          $(this).text(ltsVer + ' (LTS)');
-        }
+        var ver = getVersionForEnv(versionAttrPrefix(v));
+        if (ver) $(this).text(ver + ' (' + VERSION_LABELS[v] + ')');
       });
       positionSlider();
     }
 
-    function updateVersionToggle() {
+    function hasVersion(v) {
       var envSel = '[data-environment="' + cssEscape(state.environment) + '"]';
-      var hasCurrent = $templates.find(envSel + '.current').length > 0;
-      var hasLts = $templates.find(envSel + '.lts').length > 0;
+      return $templates.find(envSel + '.' + v).length > 0;
+    }
 
+    function updateVersionToggle() {
       // Auto-select available version if current selection is unavailable
-      if (!hasCurrent && state.version === 'current') state.version = 'lts';
-      if (!hasLts && state.version === 'lts') state.version = 'current';
+      if (!hasVersion(state.version)) {
+        var fallback = VERSIONS.filter(hasVersion)[0];
+        if (fallback) state.version = fallback;
+      }
 
       $versionBtns.each(function () {
         var v = $(this).data('version');
         var isActive = v === state.version;
-        var isAvailable = (v === 'current') ? hasCurrent : hasLts;
+        var isAvailable = hasVersion(v);
 
         $(this).toggleClass('active', isActive)
           .attr('aria-checked', String(isActive))
@@ -239,11 +244,9 @@
 
       var toggleLeft = $versionSwitch.find('.version-switch-toggle').offset().left;
       var btnLeft = $active.offset().left;
-      var padding = 4;
-
       $versionSlider.css({
         width: $active.outerWidth() + 'px',
-        transform: 'translateX(' + (btnLeft - toggleLeft - padding) + 'px)'
+        transform: 'translateX(' + (btnLeft - toggleLeft) + 'px)'
       });
     }
 
@@ -305,9 +308,13 @@
       var $match = findTemplate(e, p, v);
       if ($match.length) return $match;
 
-      // Fallback: try the other version (for clients with only one version)
-      var altV = v === 'current' ? 'lts' : 'current';
-      return findTemplate(e, p, altV);
+      // Fallback: try the other versions (for clients with only some versions)
+      for (var i = 0; i < VERSIONS.length; i++) {
+        if (VERSIONS[i] === v) continue;
+        $match = findTemplate(e, p, VERSIONS[i]);
+        if ($match.length) return $match;
+      }
+      return $();
     }
 
     function environmentRequiresPlatform(environment) {
@@ -348,6 +355,7 @@
       }
 
       updateMore($tpl);
+      $inst.find('.preview-note').toggle($tpl.hasClass('preview'));
       $inst.show();
     }
 
@@ -480,8 +488,12 @@
         var key = e.key || e.keyCode;
         if (key === 'ArrowRight' || key === 'ArrowLeft' || key === 39 || key === 37) {
           e.preventDefault();
-          var $other = $versionBtns.not(this).first();
-          $other.trigger('click').focus();
+          var $enabled = $versionBtns.filter(':not(:disabled)');
+          var idx = $enabled.index(this);
+          if (idx < 0) return;
+          var dir = (key === 'ArrowRight' || key === 39) ? 1 : -1;
+          var $next = $enabled.eq((idx + dir + $enabled.length) % $enabled.length);
+          $next.trigger('click').focus();
         }
       });
 

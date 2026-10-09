@@ -1,12 +1,12 @@
 ---
 layout: post
 title: "DuckDB promises greater stability with 1.0 release"
-author: "Lindsay Clark (The Register)"
-tags: ["Article"]
-thirdparty: true
+authors:
+  - Lindsay Clark
+tag: article
 category: community
 excerpt: ""
-pill: "theregister.com"
+venue: "theregister.com"
 ---
 
 |-------|-------|

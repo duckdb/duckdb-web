@@ -1,11 +1,12 @@
 ---
 layout: post
 title: "Sorting on Insert for Fast Selective Queries"
-author: "Alex Monahan"
+authors:
+  - Alex Monahan
 thumb: "/images/blog/thumbs/indexing-tips.svg"
 image: "/images/blog/thumbs/indexing-tips.png"
 excerpt: "Sorting data when loading can speed up selective read queries by an order of magnitude, thanks to DuckDB's automatic min-max indexes (also known as zone maps). This approach applies to most columnar file formats and databases as well. This post unpacks the DuckDB file structure as an example of a columnar data format and gives practical advice for using sorting to improve the speed of queries."
-tags: ["deep dive"]
+tag: deep-dive
 ---
 
 The fastest way to read data is to not read data.

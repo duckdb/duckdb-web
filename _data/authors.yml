@@ -1,3 +1,19 @@
+# Maps an author name, exactly as written in the `authors` front matter list, to an avatar.
+# Use `picture` for a person's photo or `icon` for a sprite symbol from _includes/icons/sources.svg (organizations).
+# Optional `role` is shown below the name in the header of single posts.
+
+DuckDB:
+  icon: source-duckdb
+
+The DuckDB team:
+  icon: source-duckdb
+
+DuckDB meetup organizers:
+  icon: source-duckdb
+
+DuckLabs:
+  icon: source-ducklabs
+
 Alex Monahan:
   picture: /images/blog/authors/alex_monahan.jpg
 
@@ -19,7 +35,7 @@ Hannes Mühleisen:
 Laurens Kuiper:
   picture: /images/blog/authors/laurens_kuiper.jpg
 
-Maia Degraaf:
+Maia de Graaf:
   picture: /images/blog/authors/maja.png
 
 Mark Raasveldt:

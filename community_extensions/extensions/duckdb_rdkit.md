@@ -20,10 +20,10 @@ repo:
   ref: aeb2f466efee14eb67096da8ebcfda566189eb6a
 
 
-extension_star_count: 15
-extension_star_count_pretty: 15
-extension_download_count: 915
-extension_download_count_pretty: 915
+extension_star_count: 16
+extension_star_count_pretty: 16
+extension_download_count: 775
+extension_download_count_pretty: 775
 image: '/images/community_extensions/social_preview/preview_community_extension_duckdb_rdkit.png'
 layout: community_extension_doc
 ---

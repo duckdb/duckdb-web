@@ -1,11 +1,12 @@
 ---
 layout: post
 title: "CSV Files: Dethroning Parquet as the Ultimate Storage File Format — or Not?"
-author: "Pedro Holanda"
+authors:
+  - Pedro Holanda
 thumb: "/images/blog/thumbs/csv-vs-parquet.svg"
 image: "/images/blog/thumbs/csv-vs-parquet.png"
 excerpt: "Data analytics primarily uses two types of storage format files: human-readable text files like CSV and performance-driven binary files like Parquet. This blog post compares these two formats in an ultimate showdown of performance and flexibility, where there can be only one winner."
-tags: ["benchmark"]
+tag: benchmark
 ---
 
 ## File Formats

@@ -8,7 +8,7 @@ excerpt: |
 extension:
   name: zipfs
   description: Read files within zip archives
-  version: 1.5.5
+  version: 1.5.6
   language: C++
   build: cmake
   license: MIT
@@ -17,7 +17,7 @@ extension:
 
 repo:
   github: isaacbrodsky/duckdb-zipfs
-  ref: 2da467a0e6a71d84fe0e8c628540987c60d1d40a
+  ref: a40876c4195f50af1b269a56d69cfc8e07d7c32c
 
 docs:
   hello_world: |
@@ -25,10 +25,10 @@ docs:
   extended_description: |
     The zipfs extension adds support for reading files from within zip files and other archives.
 
-extension_star_count: 69
-extension_star_count_pretty: 69
-extension_download_count: 15079
-extension_download_count_pretty: 15.1k
+extension_star_count: 71
+extension_star_count_pretty: 71
+extension_download_count: 15713
+extension_download_count_pretty: 15.7k
 image: '/images/community_extensions/social_preview/preview_community_extension_zipfs.png'
 layout: community_extension_doc
 ---
@@ -54,10 +54,10 @@ LOAD {{ page.extension.name }};
 
 <div class="extension_functions_table"></div>
 
-|  function_name   | function_type | description | comment | examples |
-|------------------|---------------|-------------|---------|----------|
-| archive_contents | table         | NULL        | NULL    |          |
-| zip_contents     | table         | NULL        | NULL    |          |
+|  function_name   | function_type |                   description                    | comment |                                                                    examples                                                                     |
+|------------------|---------------|--------------------------------------------------|---------|-------------------------------------------------------------------------------------------------------------------------------------------------|
+| archive_contents | table         | Returns a table of the files in the archive.     | NULL    | [SELECT * FROM archive_contents('example.zip');, SELECT file_name, file_size, is_directory, is_encrypted FROM archive_contents('example.zip');] |
+| zip_contents     | table         | Returns a table of the files in the zip archive. | NULL    | [SELECT * FROM zip_contents('example.zip');, SELECT file_name, file_size, is_directory, is_encrypted FROM zip_contents('example.zip');]         |
 
 ### Overloaded Functions
 

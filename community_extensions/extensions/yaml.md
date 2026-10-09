@@ -21,8 +21,8 @@ extension:
 repo:
   github: teaguesterling/duckdb_yaml
   andium: 0bdc812c064fa7b85617f75680d9c1177263f741
-  ref: b31163a230c9ae6ecaa1bb9ca248e832f44357c9
-  ref_next: 40f5f94afc70d68d7b7db44c0ea74601afe42fa9
+  ref: 84f5de21e39eab9994c691d1ed06ade04d9e02df
+  ref_next: 84f5de21e39eab9994c691d1ed06ade04d9e02df
 
 docs:
   hello_world: |
@@ -91,8 +91,8 @@ docs:
 
 extension_star_count: 22
 extension_star_count_pretty: 22
-extension_download_count: 17563
-extension_download_count_pretty: 17.6k
+extension_download_count: 22336
+extension_download_count_pretty: 22.3k
 image: '/images/community_extensions/social_preview/preview_community_extension_yaml.png'
 layout: community_extension_doc
 ---

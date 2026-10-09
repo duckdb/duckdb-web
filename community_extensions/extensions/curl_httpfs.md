@@ -8,7 +8,7 @@ excerpt: |
 extension:
   name: curl_httpfs
   description: httpfs with connection pool, HTTP/2 and async IO. 
-  version: 0.4.4
+  version: 0.4.5
   language: C++
   build: cmake
   license: MIT
@@ -19,7 +19,7 @@ extension:
 repo:
   github: dentiny/duckdb-curl-filesystem
   andium: e5c4921e6e908d07abab3f89c0d036a22db0cd4b
-  ref: 2a52801f1f99791ddc3e27c683733d681c1e5cfe
+  ref: f2539567158a273f6e4609af9790ef531a664979
 
 docs:
   hello_world: |
@@ -33,8 +33,8 @@ docs:
 
 extension_star_count: 13
 extension_star_count_pretty: 13
-extension_download_count: 4179
-extension_download_count_pretty: 4.2k
+extension_download_count: 3170
+extension_download_count_pretty: 3.2k
 image: '/images/community_extensions/social_preview/preview_community_extension_curl_httpfs.png'
 layout: community_extension_doc
 ---
@@ -60,10 +60,10 @@ LOAD {{ page.extension.name }};
 
 <div class="extension_functions_table"></div>
 
-|         function_name          | function_type | description | comment | examples |
-|--------------------------------|---------------|-------------|---------|----------|
-| curl_httpfs_get_tcp_connection | table         | NULL        | NULL    |          |
-| curl_httpfs_http_util_name     | scalar        | NULL        | NULL    |          |
+|         function_name          | function_type |                                    description                                    | comment |                     examples                      |
+|--------------------------------|---------------|-----------------------------------------------------------------------------------|---------|---------------------------------------------------|
+| curl_httpfs_get_tcp_connection | table         | Returns active system TCP connection counts grouped by remote IP address.         | NULL    | [SELECT * FROM curl_httpfs_get_tcp_connection();] |
+| curl_httpfs_http_util_name     | scalar        | Returns the name of the HTTP client implementation currently used by curl_httpfs. | NULL    | [SELECT curl_httpfs_http_util_name();]            |
 
 ### Overloaded Functions
 

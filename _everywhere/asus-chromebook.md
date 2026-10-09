@@ -2,12 +2,13 @@
 layout: post
 title: "Asus Chromebook CM3001DM2"
 date: 2026-03-02
-author: "Ladislav Dvorak"
-thumb: "/images/everywhere/thumbs/asus-chromebook.jpg"
-image: "/images/everywhere/thumbs/asus-chromebook.jpg"
+authors:
+  - Ladislav Dvorak
+thumb: "/images/everywhere/thumbs/asus-chromebook.png"
+image: "/images/everywhere/thumbs/asus-chromebook.png"
 excerpt: "DuckDB can complete all TPC-H SF100 queries on the Asus Chromebook CM3001DM2, an ARM-based Chromebook with 8 GB of RAM, running via ChromeOS's Linux container environment."
-tags: ["PCs"]
-thirdparty: true
+tag: pcs
+category: community
 ---
 
 DuckDB can complete all [TPC-H]({% link docs/current/core_extensions/tpch.md %}) SF100 queries on the [Asus Chromebook CM30 Detachable (CM3001)](https://www.asus.com/laptops/for-home/chromebook/asus-chromebook-cm30-detachable-cm3001/techspec/), running via Crostini, ChromeOS's built-in Linux container environment.

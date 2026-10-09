@@ -7,6 +7,7 @@ excerpt: |
 
 extension:
   name: gdrive
+  version: 2026.09.26
   description: Query files in Google Drive directly with a gdrive:// filesystem
   language: C++
   build: cmake
@@ -23,7 +24,7 @@ extension:
 
 repo:
   github: DataZooDE/duckdb-gdrive
-  ref: 73b8a5e729f29338d883b5277b99644be66c8c4b
+  ref: 3755d9ea6f03387d8546e3eb1500ea58758a3528
 
 docs:
   hello_world: |
@@ -108,10 +109,10 @@ docs:
     object storage under a hot workload. On a workstation, Google Drive for
     desktop plus ordinary local paths is simpler and faster.
 
-extension_star_count: 5
-extension_star_count_pretty: 5
-extension_download_count: 803
-extension_download_count_pretty: 803
+extension_star_count: 6
+extension_star_count_pretty: 6
+extension_download_count: 802
+extension_download_count_pretty: 802
 image: '/images/community_extensions/social_preview/preview_community_extension_gdrive.png'
 layout: community_extension_doc
 ---
@@ -142,7 +143,7 @@ LOAD {{ page.extension.name }};
 | file_size          | scalar        | Byte length of the file at `path`, or NULL if it does not exist. Reads only metadata for ordinary files -- unlike read_blob, which downloads the body. NOTE: a native Google Doc or Sheet has no stored byte size, so its size is the length of the EXPORT (see gdrive_docs_export_mime) and obtaining it downloads that export. Unlike read_blob(), which reports the same number but downloads the whole body to do it.                                                                                                                                                                                          | NULL    | [SELECT file_size('gdrive://data/part.parquet')]                              |
 | gdrive_reset_stats | table         | Zero the process-wide Drive API call counters reported by gdrive_stats(). Use it to measure exactly what ONE operation costs: reset, run the query, then read gdrive_stats(). Affects the whole process, so it will disturb a concurrent measurement in another connection.                                                                                                                                                                                                                                                                                                                                        | NULL    | [CALL gdrive_reset_stats()]                                                   |
 | gdrive_stats       | table         | Drive API call counters, one row per metric: files_get, files_list, files_media, files_export, files_create, files_update, files_delete (calls by kind), cache_hits/cache_misses (the path-resolution cache that mitigates R-1 amplification), retries (retried HTTP attempts across all kinds), and total (sum of the files_* kind counters), and path_cache_entries (a GAUGE: the live size of the path->id cache, bounded by gdrive_path_cache_entries). Process-wide, not reset between queries -- call it before and after an operation and diff the two snapshots to measure that operation's amplification. | NULL    | [SELECT * FROM gdrive_stats()]                                                |
-| gdrive_version     | scalar        | NULL                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               | NULL    |                                                                               |
+| gdrive_version     | scalar        | Returns the version of the loaded gdrive extension.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                | NULL    | [SELECT gdrive_version()]                                                     |
 | move_file          | scalar        | Rename/move `source` to `target`, returning true on success and raising on failure. Dispatches on the path's scheme through DuckDB's virtual filesystem. Both paths must live on the SAME filesystem -- this is a rename, not a copy, and it does not move bytes between schemes. Its main use is publishing a fully-written temporary file under its final name.                                                                                                                                                                                                                                                  | NULL    | [SELECT move_file('gdrive://staging/part.tmp', 'gdrive://data/part.parquet')] |
 | remove_file        | scalar        | Delete the file at `path`, returning true if it existed and was removed and false if it did not exist. Dispatches on the path's scheme through DuckDB's virtual filesystem, so it works for gdrive://, s3://, gs:// and local paths alike. For a gdrive:// path the file is moved to the trash unless gdrive_permanent_delete is set. Errors other than not-found are raised, not returned as false.                                                                                                                                                                                                               | NULL    | [SELECT remove_file('gdrive://reports/old.parquet')]                          |
 | write_blob         | scalar        | Write `content` to `path`, replacing any existing file, and return the number of bytes written. The inverse of read_blob(): together they give SQL a byte-exact round trip for any filesystem DuckDB can reach, including gdrive://, with no CSV/Parquet encoding in between. Accepts arbitrary binary content -- a BLOB, not a VARCHAR -- so it is safe for images and PDFs as well as text.                                                                                                                                                                                                                      | NULL    | [SELECT write_blob('gdrive://notes/readme.md', '# Title'::BLOB)]              |

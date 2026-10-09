@@ -1,11 +1,13 @@
 ---
 layout: post
 title: "Data Management for Data Science Towards Embedded Analytics"
-author: "Hannes Mühleisen, Mark Raasveldt"
-tags: ["Paper"]
-thirdparty: false
+authors:
+  - Hannes Mühleisen
+  - Mark Raasveldt
+tag: paper
+category: core
 excerpt: ""
-pill: "CIDR 2020"
+venue: "CIDR 2020"
 ---
 
 |-------|-------|

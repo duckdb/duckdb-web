@@ -1,12 +1,13 @@
 ---
 layout: post
 title: "DuckLake – The SQL-Powered Lakehouse Format for the Rest of Us"
-author: "Hannes Mühleisen"
-thumb: "/images/library/thumbs/2025-06-19-systems-distributed.jpg"
-image: "/images/library/thumbs/2025-06-19-systems-distributed.jpg"
-tags: ["Talk"]
+authors:
+  - Hannes Mühleisen
+thumb: "/images/library/thumbs/2025-06-19-ducklake-the-sql-powered-lakehouse-format-for-the-rest-of-us.png"
+image: "/images/library/thumbs/2025-06-19-ducklake-the-sql-powered-lakehouse-format-for-the-rest-of-us.png"
+tag: talk
+category: core
 length: "55 min"
-thirdparty: false
 excerpt: "Systems Distributed 2025"
 redirect_from:
 - /media/systems-distributed

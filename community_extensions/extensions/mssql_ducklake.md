@@ -8,7 +8,7 @@ excerpt: |
 extension:
   name: mssql_ducklake
   description: "DuckLake with its catalog in Microsoft SQL Server or Azure SQL - embedded DuckLake, native TDS through the mssql extension."
-  version: "0.1.1"
+  version: "0.1.2"
   language: "C++"
   build: "cmake"
   licence: "MIT"
@@ -26,7 +26,7 @@ extension:
 
 repo:
   github: "hugr-lab/mssql-ducklake"
-  ref: "b48599044bd75b61748997e4d47e42d4f0ae9350"
+  ref: "93a676d05098a6fc1289070adfbfcd96ee8c6dfc"
 
 docs:
   hello_world: |
@@ -46,10 +46,10 @@ docs:
 
     Experimental. The catalog is shaped for SQL Server on creation (primary keys, UTF-8 binary collation, indexes, forced parameterization), commits go to the server as T-SQL, and the 1000-table benchmark runs at 1.5x of the PostgreSQL backend's time with commits at parity; what is not there yet is on the limitations page.
 
-extension_star_count: 10
-extension_star_count_pretty: 10
-extension_download_count: 773
-extension_download_count_pretty: 773
+extension_star_count: 12
+extension_star_count_pretty: 12
+extension_download_count: 1003
+extension_download_count_pretty: 1.0k
 image: '/images/community_extensions/social_preview/preview_community_extension_mssql_ducklake.png'
 layout: community_extension_doc
 ---

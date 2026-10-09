@@ -1,11 +1,14 @@
 ---
 layout: post
 title: "Iceberg in the Browser"
-author: "Carlo Piovesan, Tom Ebergen, Gábor Szárnyas"
+authors:
+  - Carlo Piovesan
+  - Tom Ebergen
+  - Gábor Szárnyas
 thumb: "/images/blog/thumbs/iceberg-in-the-browser.svg"
 image: "/images/blog/thumbs/iceberg-in-the-browser.png"
 excerpt: "DuckDB is the first end-to-end interface to Iceberg REST Catalogs within a browser tab. You can now read and write tables in Iceberg catalogs without needing to manage any infrastructure – directly from your browser!"
-tags: ["deep dive"]
+tag: deep-dive
 ---
 
 In this post, we describe the current patterns for interacting with Iceberg Catalogs, and pose the question: could it be done from a browser?

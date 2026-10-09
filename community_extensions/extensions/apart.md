@@ -8,7 +8,7 @@ excerpt: |
 extension:
   name: apart
   description: Evaluate affine decision trees in SQL
-  version: 0.1.0
+  version: 0.2.0
   language: C++
   build: cmake
   license: MIT
@@ -17,7 +17,7 @@ extension:
 
 repo:
   github: jokasimr/apart
-  ref: 470d3a3e76ab8cb28822dc4c87f24768e4a977ad
+  ref: 0b216f8d1604ba731f21b20aad72ab4614370634
 
 docs:
   hello_world: |
@@ -50,10 +50,10 @@ docs:
     See the [documentation](https://github.com/jokasimr/apart#readme) and
     [example use cases](https://github.com/jokasimr/apart/tree/main/examples).
 
-extension_star_count: 0
-extension_star_count_pretty: 0
-extension_download_count: 649
-extension_download_count_pretty: 649
+extension_star_count: 1
+extension_star_count_pretty: 1
+extension_download_count: 544
+extension_download_count_pretty: 544
 image: '/images/community_extensions/social_preview/preview_community_extension_apart.png'
 layout: community_extension_doc
 ---
