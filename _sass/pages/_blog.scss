@@ -140,7 +140,7 @@ section.speakers,
 				height: 15px;
 				flex: none;
 				stroke: none;
-				border: 1px solid var(--main-quaternary-color, #CCC);
+				border: 1px solid var(--main-body-background-color, #FAFAFA);
 				border-radius: 50%;
 				-o-object-fit: cover;
 				   object-fit: cover;
@@ -288,7 +288,6 @@ section.speakers,
 		max-width: 300px;
 		background: transparent;
 		position: relative;
-		font-weight: 500;
 		background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='15' height='15' fill='none' viewBox='0 0 15 15'%3E%3Cpath stroke='%23727272' stroke-width='1.5' d='M10.073 9.692 14 13.62'/%3E%3Ccircle cx='5.923' cy='6.303' r='5.173' stroke='%23727272' stroke-width='1.5'/%3E%3C/svg%3E");
 		background-repeat: no-repeat;
 		background-position: 18px center;
