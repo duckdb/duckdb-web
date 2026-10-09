@@ -1,11 +1,12 @@
 ---
 layout: post
 title: "Announcing DuckDB 1.3.0"
-author: "The DuckDB team"
+authors:
+  - The DuckDB team
 thumb: "/images/blog/thumbs/duckdb-release-1-3-0.svg"
 image: "/images/blog/thumbs/duckdb-release-1-3-0.png"
 excerpt: "The DuckDB team is happy to announce that today we're releasing DuckDB version 1.3.0, codenamed “Ossivalis”."
-tags: ["release"]
+tag: release
 ---
 
 > To install the new version, please visit the [installation guide]({% link install/index.html %}). Note that it can take a few hours to days to release some client libraries (e.g., Go, R, Java) and extensions (e.g., the UI) due to the extra changes and review rounds required.

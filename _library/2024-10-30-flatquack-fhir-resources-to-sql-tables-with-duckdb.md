@@ -1,12 +1,12 @@
 ---
 layout: post
 title: "FlatQuack: FHIR Resources to SQL Tables with DuckDB"
-author: "Dan Gottlieb"
-tags: ["Talk"]
-thirdparty: true
+authors:
+  - Dan Gottlieb
+tag: talk
 category: community
 excerpt: ""
-pill: "Analytics on FHIR 2024"
+venue: "Analytics on FHIR 2024"
 ---
 
 <div class="video-container">

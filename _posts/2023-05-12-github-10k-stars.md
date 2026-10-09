@@ -1,11 +1,13 @@
 ---
 layout: post
 title: "10 000 Stars on GitHub"
-author: Mark Raasveldt, Hannes Mühleisen
+authors:
+  - Mark Raasveldt
+  - Hannes Mühleisen
 thumb: "/images/blog/thumbs/github-stars.svg"
 image: "/images/blog/thumbs/github-stars.png"
 excerpt: ""
-tags: ["release"]
+tag: release
 ---
 
 Today, DuckDB reached 10 000 stars on [GitHub](https://github.com/duckdb/duckdb). We would like to pause for a second to express our gratitude to [everyone who contributed](https://github.com/duckdb/duckdb/graphs/contributors) to DuckDB and of course all its users. When we started working on DuckDB back in 2018, we would have never dreamt of getting this kind of adoption in such a short time.

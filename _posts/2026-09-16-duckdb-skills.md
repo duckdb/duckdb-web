@@ -1,11 +1,12 @@
 ---
 layout: post
 title: "DuckDB Skills for Claude Code"
-author: "The DuckDB team"
+authors:
+  - The DuckDB team
 thumb: "/images/blog/thumbs/claude-skills.svg"
 image: "/images/blog/thumbs/claude-skills.png"
 excerpt: "The duckdb-skills plugin gives Claude Code a growing number of skills that use the DuckDB CLI to read data files, run queries, convert formats, explore object storage, work with spatial data, search the documentation and recall earlier sessions."
-tags: ["using DuckDB"]
+tag: using-duckdb
 ---
 
 More likely than not, you've been using AI tools such as Claude Code for day-to-day work. You may have noticed that when AI needs to look at a data file, it makes use of Python, writes a small script, runs it, and then reads the output.

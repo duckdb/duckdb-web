@@ -1,11 +1,12 @@
 ---
 layout: post
 title: "Writes in DuckDB-Iceberg"
-author: "Tom Ebergen"
+authors:
+  - Tom Ebergen
 thumb: "/images/blog/thumbs/iceberg-writes.svg"
 image: "/images/blog/thumbs/iceberg-writes.png"
 excerpt: "We shipped a number of features and improvements to the DuckDB-Iceberg extension: insert, update, and delete statements are all supported now."
-tags: ["deep dive"]
+tag: deep-dive
 ---
 
 Over the past several months, the DuckLabs team has been hard at work on the [DuckDB-Iceberg extension]({% link docs/current/core_extensions/iceberg/overview.md %}), with _full read support_ and _initial write support_ released in [v1.4.0]({% post_url 2025-09-16-announcing-duckdb-140 %}).

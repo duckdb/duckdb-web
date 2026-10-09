@@ -1,12 +1,14 @@
 ---
 layout: post
 title: "Window Function Optimization: Co-Evaluation and Other Techniques"
-author: "Daniel Lindner, Felix Naumann, Alberto Lerner"
-tags: ["Paper"]
-thirdparty: true
+authors:
+  - Daniel Lindner
+  - Felix Naumann
+  - Alberto Lerner
+tag: paper
 category: community
 excerpt: ""
-pill: "VLDB 2026"
+venue: "VLDB 2026"
 ---
 
 | | |

@@ -1,13 +1,15 @@
 ---
 layout: post
 title: "PyData Amsterdam"
-author: "NumFOCUS"
+authors:
+  - NumFOCUS
 thumb: "/images/events/thumbs/pydata-amsterdam.svg"
 image: "/images/events/thumbs/pydata-amsterdam.png"
 excerpt: ""
-tags: ["conference"]
-labels: [community, sponsored]
-venue: "NDSM Loods, Amsterdam"
+tag: conference
+category: community
+sponsored: true
+location: "NDSM Loods, Amsterdam"
 ---
 
 PyData Amsterdam is a community conference organized by [NumFOCUS](https://numfocus.org/), bringing together users and developers of data science tools in the Python ecosystem.

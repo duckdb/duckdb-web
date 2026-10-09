@@ -2,12 +2,13 @@
 layout: post
 title: "MacBook Pro Retina (2012)"
 date: 2025-05-19
-author: "Hannes Mühleisen"
-thumb: "/images/everywhere/thumbs/macbook-pro-retina-2012.jpg"
-image: "/images/everywhere/thumbs/macbook-pro-retina-2012.jpg"
+authors:
+  - Hannes Mühleisen
+thumb: "/images/everywhere/thumbs/macbook-pro-retina-2012.png"
+image: "/images/everywhere/thumbs/macbook-pro-retina-2012.png"
 excerpt: ""
-tags: ["PCs"]
-thirdparty: false
+tag: pcs
+category: core
 ---
 
 DuckDB can be compiled on the first MacBook Pro Retina and run TPC-H scale factor 1000.

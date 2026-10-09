@@ -26,7 +26,7 @@
 @mixin headline-1 {
 	font-size: var(--type-headline-1, 34px);
 	font-weight: 600;
-	line-height: 1.2;
+	line-height: 1.15;
 	font-family: "SuisseIntl", sans-serif;
 }
 
@@ -328,7 +328,8 @@
 
 @mixin blog-typography {
 	p, ul li, ol li {
-		@include body-large();
+		@include body-standard();
+		font-weight: 400;
 		margin: 1.65em 0;
 		i, em {
 			font-family: $fontSans;
@@ -346,6 +347,18 @@
 		font-weight: 500;
 	}
 	
+	h2 {
+		@include headline-3();
+	}
+
+	h3 {
+		@include title-1();
+	}
+
+	h4 {
+		@include title-2();
+	}
+
 	h2,
 	h3,
 	h4,
@@ -382,6 +395,7 @@
 		ol li,
 		p {
 			@include body-standard();
+			font-weight: 400;
 		}
 		p {
 			margin: .8em 0;
@@ -408,12 +422,17 @@
 	}
 
 	table thead th {
-		@include body-large();
+		@include body-standard();
 		font-weight: 600;
+	}
+
+	table thead:not(:has(th:not(:empty))) {
+		display: none;
 	}
 
 	table tbody td {
 		@include body-standard();
+		font-weight: 400;
 		padding: 10px;
 		vertical-align: middle;
 	}
@@ -476,7 +495,7 @@
 	
 	code,
 	pre {
-		@include code-large;
+		@include code-standard;
 	}
 
 	p code,

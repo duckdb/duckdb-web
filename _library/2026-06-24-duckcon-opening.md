@@ -1,14 +1,16 @@
 ---
 layout: post
 title: "DuckCon #7 – State of the Duck"
-author: Hannes Mühleisen and Mark Raasveldt
-thumb: "/images/library/thumbs/2026-06-24-duckcon-opening.jpg"
-image: "/images/library/thumbs/2026-06-24-duckcon-opening.jpg"
+authors:
+  - Hannes Mühleisen
+  - Mark Raasveldt
 excerpt: ""
-thirdparty: false
-tags: ["Talk"]
+thumb: "/images/library/thumbs/2026-06-24-duckcon-opening.png"
+image: "/images/library/thumbs/2026-06-24-duckcon-opening.png"
+tag: talk
+category: core
 length: "30 min"
-pill: "DuckCon #7"
+venue: "DuckCon #7"
 ---
 
 <div class="video-container">

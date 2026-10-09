@@ -1,11 +1,12 @@
 ---
 layout: post
 title: "Parquet Bloom Filters in DuckDB"
-author: "Hannes Mühleisen"
+authors:
+  - Hannes Mühleisen
 thumb: "/images/blog/thumbs/bloom-filters.svg"
 image: "/images/blog/thumbs/bloom-filters.png"
 excerpt: "DuckDB now supports reading and writing Parquet Bloom filters."
-tags: ["deep dive"]
+tag: deep-dive
 ---
 
 One of the key features of the Parquet file format is the ability for readers to *selectively* read only the data that is relevant to a particular query. To support this, Parquet files contain column *statistics*, most notably the minimum and maximum value for each column in each row group. If a query is filtering with a particular value, and the data is – as it is often – somewhat sorted, a reader can “prove” that a particular row group cannot contain values relevant to the query. DuckDB heavily leverages this, and is able to – even when querying remote endpoints – selectively only read the parts of a Parquet file relevant to a query. For details on how this works, see our by now ancient blog post [“Querying Parquet with precision using DuckDB”]({% post_url 2021-06-25-querying-parquet %}).

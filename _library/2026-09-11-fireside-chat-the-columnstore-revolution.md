@@ -1,14 +1,15 @@
 ---
 layout: post
 title: "Fireside Chat: The Columnstore Revolution"
-author: "Hannes Mühleisen"
-thumb: "/images/library/thumbs/2026-09-11-fireside-chat-the-columnstore-revolution.jpg"
-image: "/images/library/thumbs/2026-09-11-fireside-chat-the-columnstore-revolution.jpg"
-tags: ["Talk"]
+authors:
+  - Hannes Mühleisen
+thumb: "/images/library/thumbs/2026-09-11-fireside-chat-the-columnstore-revolution.png"
+image: "/images/library/thumbs/2026-09-11-fireside-chat-the-columnstore-revolution.png"
+tag: talk
+category: core
 length: "28 min"
-thirdparty: false
 excerpt: ""
-pill: "Percona Live 2026"
+venue: "Percona Live 2026"
 ---
 
 <div class="video-container">

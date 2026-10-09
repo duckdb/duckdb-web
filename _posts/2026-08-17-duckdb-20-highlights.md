@@ -1,11 +1,13 @@
 ---
 layout: post
 title: "A Preview of DuckDB v2.0"
-author: "Mark Raasveldt and Hannes Mühleisen"
+authors:
+  - Mark Raasveldt
+  - Hannes Mühleisen
 thumb: "/images/blog/thumbs/duckdb-preview-2-0.svg"
 image: "/images/blog/thumbs/duckdb-preview-2-0.png"
 excerpt: "DuckDB v2.0 is coming this fall. In this post, we preview its headline features: DuckDB as a server, triggers, the VARIANT type, asynchronous I/O, a new SQL parser, a new storage format, and much more."
-tags: ["release"]
+tag: release
 ---
 
 DuckDB v2.0 will be named “Cyanoptera” after the [cinnamon teal](https://en.wikipedia.org/wiki/Cinnamon_teal) *(Anas cyanoptera),* a strikingly reddish-brown duck found in the western Americas.

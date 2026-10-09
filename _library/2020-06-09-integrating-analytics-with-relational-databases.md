@@ -1,11 +1,12 @@
 ---
 layout: post
 title: "Integrating Analytics with Relational Databases"
-author: "Mark Raasveldt"
-tags: ["Book"]
-thirdparty: false
+authors:
+  - Mark Raasveldt
+tag: book
+category: core
 excerpt: ""
-pill: "Integrating Analytics with Relational Databases"
+venue: "Integrating Analytics with Relational Databases"
 ---
 
 <div class="graphics-box">

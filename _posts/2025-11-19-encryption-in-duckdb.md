@@ -1,11 +1,13 @@
 ---
 layout: post
 title: "Data-at-Rest Encryption in DuckDB"
-author: "Lotte Felius, Hannes Mühleisen"
+authors:
+  - Lotte Felius
+  - Hannes Mühleisen
 thumb: "/images/blog/thumbs/encryption-in-duckdb.svg"
 image: "/images/blog/thumbs/encryption-in-duckdb.png"
 excerpt: "DuckDB v1.4 ships database encryption capabilities. In this blog post, we dive into the implementation details of the encryption, show how to use it and demonstrate its performance implications."
-tags: ["deep dive"]
+tag: deep-dive
 ---
 
 > If you would like to use encryption in DuckDB, we recommend using the latest stable version, v1.4.2. For more details, see the [latest release blog post]({% post_url 2025-11-12-announcing-duckdb-142 %}#vulnerabilities).

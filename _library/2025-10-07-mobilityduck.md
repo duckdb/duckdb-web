@@ -1,13 +1,15 @@
 ---
 layout: post
 title: "MobilityDuck: Mobility Data Management with DuckDB"
-author: "Nhu Ngoc Hoang, Ngoc Hoa Pham, Viet Phuong Hoang, Esteban Zimányi"
-thumb: "/images/library/thumbs/arxiv.svg"
-image: "/images/library/thumbs/arxiv.jpg"
-tags: ["Paper"]
+authors:
+  - Nhu Ngoc Hoang
+  - Ngoc Hoa Pham
+  - Viet Phuong Hoang
+  - Esteban Zimányi
+tag: paper
 category: community
 excerpt: ""
-pill: "arXiv"
+venue: "arXiv"
 ---
 
 | | |

@@ -1,13 +1,15 @@
 ---
 layout: post
 title: "GooseDB: A Database Engine that Optimally Refines Top-𝑘 Queries to Satisfy Representation Constraints"
-author: "Zixuan Chen, Jinyang Li, H. V. Jagadish, Mirek Riedewald"
-thumb: "/images/library/thumbs/vldb.svg"
-image: "/images/library/thumbs/vldb.png"
-tags: ["Paper"]
+authors:
+  - Zixuan Chen
+  - Jinyang Li
+  - H. V. Jagadish
+  - Mirek Riedewald
+tag: paper
 category: community
 excerpt: ""
-pill: "VLDB 2025"
+venue: "VLDB 2025"
 ---
 
 |-------|-------|

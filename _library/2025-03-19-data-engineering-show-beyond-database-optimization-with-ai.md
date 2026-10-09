@@ -1,12 +1,13 @@
 ---
 layout: post
 title: "Beyond Database Optimization with AI"
-author: Hannes Mühleisen
-tags: ["Podcast"]
+authors:
+  - Hannes Mühleisen
+tag: podcast
+category: core
 length: "40 min"
-thirdparty: false
 excerpt: ""
-pill: "The Data Engineering Show"
+venue: "The Data Engineering Show"
 redirect_from:
 - /media/data-engineering-show-beyond-database-optimization-with-ai
 ---
