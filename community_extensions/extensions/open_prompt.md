@@ -66,7 +66,7 @@ extension:
 repo:
   andium: 5328a2ff7100887263259ccc5ad8c03b8c6bc58a
   github: quackscience/duckdb-extension-openprompt
-  ref: 4e42c145ab1d10a534c71f2b5ad704c6d911a280
+  ref: a99c1f62d72eb46d3b632b76a6534540ff297254
 
 extension_star_count: 62
 extension_star_count_pretty: 62
