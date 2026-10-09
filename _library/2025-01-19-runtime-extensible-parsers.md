@@ -1,11 +1,13 @@
 ---
 layout: post
 title: "Runtime-Extensible Parsers"
-author: "Hannes Mühleisen, Mark Raasveldt"
-tags: ["Paper"]
-thirdparty: false
+authors:
+  - Hannes Mühleisen
+  - Mark Raasveldt
+tag: paper
+category: core
 excerpt: ""
-pill: "CIDR 2025"
+venue: "CIDR 2025"
 ---
 
 | | |

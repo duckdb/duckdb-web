@@ -1,11 +1,12 @@
 ---
 layout: post
 title: "Benchmarking Ourselves over Time at DuckDB"
-author: Alex Monahan
+authors:
+  - Alex Monahan
 thumb: "/images/blog/thumbs/benchmarking-duckdb.svg"
 image: "/images/blog/thumbs/benchmarking-duckdb.png"
 excerpt: "In the last 3 years, DuckDB has become 3-25× faster and can analyze ~10× larger datasets all on the same hardware."
-tags: ["benchmark"]
+tag: benchmark
 ---
 
 <!-- <script src="https://cdn.plot.ly/plotly-latest.min.js"></script> -->

@@ -326,14 +326,6 @@
 		}
 	}
 	
-	.library-tiles .librarypreview.postpreview,
-	.science-tiles .sciencepreview.postpreview,
-	.everywhere-tiles .everywherepreview.postpreview,
-	main.main-library .recentposts .newstileswrap .postpreview,
-	main.main-science .recentposts .newstileswrap .postpreview {
-		width: calc(50% - 16px);
-	}
-	
 	.notonmobile {
 		display: none;
 	}
@@ -696,11 +688,6 @@
 
 	section.blog .postpreview,
 	section.upcoming-events .postpreview,
-	.library-tiles .librarypreview.postpreview,
-	.science-tiles .sciencepreview.postpreview,
-	.everywhere-tiles .everywherepreview.postpreview,
-	main.main-library .recentposts .newstileswrap .postpreview,
-	main.main-science .recentposts .newstileswrap .postpreview,
 	.post-list .newstiles .postpreview,
 	.newswrap .postwrap .recentposts .postpreview,
 	.newswrap .postwrap .postcontent .recentposts .postpreview {
@@ -711,63 +698,6 @@
 	section.blog .newstileswrap,
 	section.upcoming-events .newstileswrap {
 		row-gap: 32px;
-	}
-
-	.library-tiles .librarypreview.postpreview,
-	.everywhere-tiles .everywherepreview.postpreview {
-		display: flex;
-		flex-direction: row;
-		background: none;
-		border: none;
-		box-shadow: none;
-		.postimg {
-			width: 115px;
-			min-width: 115px;
-			max-height: 115px;
-			aspect-ratio: 1/1;
-			border-radius: var(--page-radius-m);
-			&::after {
-				width: 80px;
-				height: 80px;
-			}
-			.pill-container {
-				top: 8px;
-				left: 8px;
-				gap: 4px;
-				max-width: calc(100% - 16px);
-				.pill-tag ~ .pill-tag {
-					display: none;
-				}
-			}
-			.pill-tag {
-				font-size: 8px;
-				padding: 4px 8px;
-				overflow: hidden;
-				text-overflow: ellipsis;
-			}
-		}
-		.postdetails {
-			padding: 12px;
-			display: flex;
-			flex-direction: column;
-			justify-content: center;
-			min-width: 0;
-			h3 {
-				font-size: var(--type-title-3, 16px);
-				min-height: unset;
-				display: -webkit-box;
-				-webkit-line-clamp: 3;
-				line-clamp: 3;
-				-webkit-box-orient: vertical;
-				overflow: hidden;
-			}
-			h3 + .meta {
-				margin-top: 8px;
-			}
-			.byline {
-				margin-top: 8px;
-			}
-		}
 	}
 
 	.newswrap .postwrap .postcontent .recentposts{

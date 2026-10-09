@@ -1,12 +1,14 @@
 ---
 layout: post
 title: "DuckLake: The Lakehouse That's Just SQL and Parquet"
-author: Pedro Holanda and Guillermo Sanchez Dionis
-tags: ["Podcast"]
+authors:
+  - Pedro Holanda
+  - Guillermo Sanchez Dionis
+tag: podcast
+category: core
 length: "70 min"
-thirdparty: false
 excerpt: ""
-pill: "Talk Python to Me"
+venue: "Talk Python to Me"
 ---
 
 <div class="video-container">

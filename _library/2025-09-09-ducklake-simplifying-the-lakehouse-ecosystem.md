@@ -1,14 +1,16 @@
 ---
 layout: post
 title: "DuckLake: Simplifying the Lakehouse Ecosystem"
-author: "Hannes Mühleisen and Mark Raasveldt"
-thumb: "/images/library/thumbs/2025-09-09-data-engineering-podcast.jpg"
-image: "/images/library/thumbs/2025-09-09-data-engineering-podcast.jpg"
-tags: ["Podcast"]
+authors:
+  - Hannes Mühleisen
+  - Mark Raasveldt
+thumb: "/images/library/thumbs/2025-09-09-ducklake-simplifying-the-lakehouse-ecosystem.png"
+image: "/images/library/thumbs/2025-09-09-ducklake-simplifying-the-lakehouse-ecosystem.png"
+tag: podcast
+category: core
 length: "70 min"
-thirdparty: false
 excerpt: ""
-pill: "Data Engineering Podcast"
+venue: "Data Engineering Podcast"
 redirect_from:
 - /media/data-engineering-podcast
 ---

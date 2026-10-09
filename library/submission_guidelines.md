@@ -14,6 +14,7 @@ Submissions are welcome in the form of pull requests in the [`duckdb-web` reposi
 You are welcome to submit both your own work and also the work of others.
 When submitting, please follow these guidelines:
 
+* Start from the [`.template.md`](https://github.com/duckdb/duckdb-web/blob/main/_library/.template.md) file in the `_library` folder. Set `tag` to `article`, `book`, `paper`, `podcast` or `talk`, `category` to `core` or `community`, list every author under `authors`, and put the conference, series or publication into `venue`.
 * The entry's filename should start with a date in YYYY-MM-DD format. It should capture the podcast's release date, the talk's presentation day, the book's publication day or the conference's first day. If the exact release date is not easily obtainable, just use an estimated date.
 * For entries describing talks and papers, please link the presentation slide deck if it's available.
 * If the entry has a DuckDB implementation (in core, as a community extension or as an open-source repository), please add a link pointing to this.

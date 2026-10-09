@@ -1,11 +1,13 @@
 ---
 layout: post
 title: "DuckDB: An Embeddable Analytical Database"
-author: "Hannes Mühleisen, Mark Raasveldt"
-tags: ["Paper"]
-thirdparty: false
+authors:
+  - Hannes Mühleisen
+  - Mark Raasveldt
+tag: paper
+category: core
 excerpt: ""
-pill: "SIGMOD 2019"
+venue: "SIGMOD 2019"
 redirect_from:
 - /library/duckdb
 ---

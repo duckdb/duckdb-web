@@ -1,12 +1,12 @@
 ---
 layout: post
 title: "DuckDB Quack: Client/Server Protocol over HTTP for Multi-User Analytics"
-author: "Renato Losio (InfoQ)"
-tags: ["Article"]
-thirdparty: true
+authors:
+  - Renato Losio
+tag: article
 category: community
 excerpt: ""
-pill: "infoq.com"
+venue: "infoq.com"
 ---
 
 |-------|-------|

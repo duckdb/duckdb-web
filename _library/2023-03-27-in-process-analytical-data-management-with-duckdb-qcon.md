@@ -1,12 +1,13 @@
 ---
 layout: post
 title: "In-Process Analytical Data Management with DuckDB"
-author: Hannes Mühleisen
-tags: ["Talk"]
+authors:
+  - Hannes Mühleisen
+tag: talk
+category: core
 length: "30 min"
-thirdparty: false
 excerpt: ""
-pill: "QCon London 2023"
+venue: "QCon London 2023"
 ---
 
 |-------|-------|

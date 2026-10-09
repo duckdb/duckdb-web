@@ -1,11 +1,12 @@
 ---
 layout: post
 title: "Query Engines: Gatekeepers of the Parquet File Format"
-author: "Laurens Kuiper"
+authors:
+  - Laurens Kuiper
 thumb: "/images/blog/thumbs/parquet-encodings.svg"
 image: "/images/blog/thumbs/parquet-encodings.png"
 excerpt: "Mainstream query engines do not support reading newer Parquet encodings, forcing systems like DuckDB to default to writing older encodings, thereby sacrificing compression."
-tags: ["using DuckDB"]
+tag: using-duckdb
 ---
 
 ## The Apache® Parquet™ Format

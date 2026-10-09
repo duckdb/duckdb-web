@@ -1,13 +1,14 @@
 ---
 layout: post
 title: "AWS to acquire DuckLabs, the Amsterdam-based company behind DuckDB"
-author: "Amazon Staff"
-thumb: "/images/library/thumbs/2026-08-26-amazon-news.jpg"
-image: "/images/library/thumbs/2026-08-26-amazon-news.jpg"
-tags: ["Article"]
-thirdparty: false
+authors:
+  - Amazon Staff
+thumb: "/images/library/thumbs/2026-08-26-aws-ducklabs-about-amazon.png"
+image: "/images/library/thumbs/2026-08-26-aws-ducklabs-about-amazon.png"
+tag: article
+category: core
 excerpt: ""
-pill: "About Amazon blog"
+venue: "About Amazon blog"
 ---
 
 |-------|-------|

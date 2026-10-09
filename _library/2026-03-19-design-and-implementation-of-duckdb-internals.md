@@ -1,6 +1,9 @@
 ---
 layout: post
 title: "Design and Implementation of DuckDB Internals"
+authors:
+  - Torsten Grust
+tag: talk
 author: "Torsten Grust (University of Tübingen)"
 thumb: "/images/library/thumbs/2026-03-19-tabular-database-systems.jpg"
 image: "/images/library/thumbs/2026-03-19-tabular-database-systems.jpg"
@@ -9,7 +12,7 @@ thirdparty: true
 highlighted: true
 category: community
 excerpt: ""
-pill: "Lecture Notes"
+venue: "Lecture Notes"
 redirect_from:
 - /didi
 ---

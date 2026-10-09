@@ -1,11 +1,12 @@
 ---
 layout: post
 title: "Analytics over Postgres Data with DuckDB"
-author: "Alex Kasko"
+authors:
+  - Alex Kasko
 excerpt: ""
-tags: ["talk"]
-labels: [community, talk]
-venue: "Doggett's Coat and Badge, London"
+tag: talk
+category: community
+location: "Doggett's Coat and Badge, London"
 ---
 
 Alex Kasko from DuckLabs will give a lightning talk at the [London PostgreSQL Meetup Group's “New Postgres Tools for Analytics” event](https://www.meetup.com/london-postgresql-meetup-group/events/316581290/). The talk is scheduled for 8:00 PM BST on October 7, 2026.

@@ -1,11 +1,12 @@
 ---
 layout: post
 title: "Processing Trillions of Records at Okta with Mini Serverless Databases"
-author: Jake Thomas
-tags: ["Talk"]
-thirdparty: true
+authors:
+  - Jake Thomas
+tag: talk
+category: community
 excerpt: ""
-pill: "Data Council 2024"
+venue: "Data Council 2024"
 ---
 
 <div class="video-container">

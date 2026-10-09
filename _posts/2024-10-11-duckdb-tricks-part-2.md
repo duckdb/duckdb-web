@@ -2,11 +2,12 @@
 layout: post
 title: "DuckDB Tricks – Part 2"
 tested: true
-author: "Gábor Szárnyas"
+authors:
+  - Gábor Szárnyas
 thumb: "/images/blog/thumbs/duckdb-tricks.svg"
 image: "/images/blog/thumbs/duckdb-tricks.png"
 excerpt: "We continue our “DuckDB tricks” series, focusing on queries that clean, transform and summarize data."
-tags: ["using DuckDB"]
+tag: using-duckdb
 ---
 
 ## Overview

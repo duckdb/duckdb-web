@@ -1,14 +1,15 @@
 ---
 layout: post
 title: "DuckDB: Harnessing In-Process Analytics for Data Science and Beyond"
-author: Gábor Szárnyas
-thumb: "/images/library/thumbs/2023-11-09-oredev.jpg"
-image: "/images/library/thumbs/2023-11-09-oredev.jpg"
-tags: ["talk"]
+authors:
+  - Gábor Szárnyas
+thumb: "/images/library/thumbs/2023-11-09-harnessing-in-process-analytics-oredev.png"
+image: "/images/library/thumbs/2023-11-09-harnessing-in-process-analytics-oredev.png"
+tag: talk
+category: core
 length: "40 min"
-thirdparty: false
 excerpt: ""
-pill: "Øredev 2023"
+venue: "Øredev 2023"
 redirect_from:
 - /media/oredev
 ---

@@ -1,11 +1,12 @@
 ---
 layout: post
 title: "DuckDB Community Extensions"
-author: "The DuckDB team"
+authors:
+  - The DuckDB team
 thumb: "/images/blog/thumbs/community-extensions.svg"
 image: "/images/blog/thumbs/community-extensions.png"
 excerpt: "DuckDB extensions can now be published as [DuckDB Community Extensions](https://duckdb.org/community_extensions/). The repository makes it easier for users to install extensions using the `INSTALL extension_name FROM community` syntax. Extension developers avoid the burdens of compilation and distribution."
-tags: ["extensions"]
+tag: extensions
 ---
 
 > To browse existing community extensions, visit the [DuckDB Community Extensions documentation page](https://duckdb.org/community_extensions/).

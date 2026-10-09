@@ -2,11 +2,12 @@
 layout: post
 title: "Reconciling JSON in DuckDB, One Patch at a Time"
 tested: true
-author: "Mustafa Khan"
+authors:
+  - Mustafa Khan
 thumb: "/images/blog/thumbs/json-patch.svg"
 image: "/images/blog/thumbs/json-patch.png"
 excerpt: "DuckDB v2.0 will ship JSON functions that allow you to easily apply JSON patches."
-tags: ["extension"]
+tag: extensions
 ---
 
 > Guest blog post by [Mustafa Khan](https://www.linkedin.com/in/mustafahasankhan/) ([Atlan](https://atlan.com/)).

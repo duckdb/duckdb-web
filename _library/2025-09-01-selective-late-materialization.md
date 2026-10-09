@@ -1,14 +1,16 @@
 ---
 layout: post
 title: "Selective Late Materialization in Modern Analytical Databases"
-author: "Yihao Liu, Shaoxuan Tang, Yulong Hui, Hangrui Zhou, Huanchen Zhang"
-thumb: "/images/library/thumbs/vldb.svg"
-image: "/images/library/thumbs/vldb.png"
-tags: ["Paper"]
-thirdparty: true
+authors:
+  - Yihao Liu
+  - Shaoxuan Tang
+  - Yulong Hui
+  - Hangrui Zhou
+  - Huanchen Zhang
+tag: paper
 category: community
 excerpt: ""
-pill: "VLDB 2025"
+venue: "VLDB 2025"
 ---
 
 |-------|-------|

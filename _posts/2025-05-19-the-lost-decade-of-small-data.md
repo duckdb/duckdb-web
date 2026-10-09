@@ -1,11 +1,12 @@
 ---
 layout: post
 title: "The Lost Decade of Small Data?"
-author: "Hannes Mühleisen"
+authors:
+  - Hannes Mühleisen
 thumb: "/images/blog/thumbs/macbook-pro.svg"
 image: "/images/blog/thumbs/macbook-pro.png"
 excerpt: "We benchmark DuckDB on a 2012 MacBook Pro to decide: did we lose a decade chasing distributed architectures for data analytics?"
-tags: ["benchmark"]
+tag: benchmark
 ---
 
 Much has been said, not in the very least by ourselves, about how [data is actually not that “Big”](https://youtu.be/-wCzn9gKoUk?si=npV0awLO3nQZvrlS&t=2637) and how the speed of hardware innovation is outpacing the growth of useful datasets. We may have gone so far to [predict a data singularity in the near future](https://youtu.be/GELhdezYmP0?si=Rj3JZfoKW8JQDaci&t=2494), where 99% of useful datasets can be comfortably queried on a single node. As it was [recently shown](https://www.fivetran.com/blog/how-do-people-use-snowflake-and-redshift), the median scan in Amazon Redshift and Snowflake reads a doable 100 MB of data, and the 99.9-percentile reads less than 300 GB. So the singularity might be closer than we think.

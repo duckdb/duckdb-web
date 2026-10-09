@@ -1,12 +1,13 @@
 ---
 layout: post
 title: "DuckDB in the Wild"
-author: "Hannes Mühleisen"
-tags: ["Talk"]
+authors:
+  - Hannes Mühleisen
+tag: talk
+category: core
 length: "25 min"
-thirdparty: false
 excerpt: ""
-pill: "DuckDB Amsterdam Meetup"
+venue: "DuckDB Amsterdam Meetup"
 redirect_from:
 - /media/duckdb-in-the-wild
 ---

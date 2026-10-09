@@ -1,11 +1,13 @@
 ---
 layout: post
 title: "New DuckDB-Iceberg Features in v1.5.3"
-author: "Tom Ebergen, Thijs Bruineman"
+authors:
+  - Tom Ebergen
+  - Thijs Bruineman
 thumb: "/images/blog/thumbs/iceberg-in-v153.svg"
 image: "/images/blog/thumbs/iceberg-in-v153.jpg"
 excerpt: "DuckDB-Iceberg now has a number of new features supporting Iceberg Tables and Iceberg REST Catalogs: `MERGE INTO`, `ALTER TABLE`, partition transforms, V3 support, and others!"
-tags: ["extensions"]
+tag: extensions
 ---
 
 Despite the work required to develop the features needed for DuckLake v1.0 and Quack, the DuckLabs team is still hard at work on the [DuckDB-Iceberg extension]({% link docs/current/core_extensions/iceberg/overview.md %}).
