@@ -33,7 +33,45 @@ Values of a particular data type cannot always be cast to any arbitrary target d
 The following matrix describes which conversions are supported.
 When implicit casting is allowed, it implies that explicit casting is also possible.
 
-![Typecasting matrix](/images/typecasting-matrix.png)
+The matrix is generated from the documented DuckDB version by [`scripts/generate_typecasting_matrix.py`](https://github.com/duckdb/duckdb-web/blob/main/scripts/generate_typecasting_matrix.py); do not edit it by hand.
+Implicit casts are added by the system only where the conversion is generally lossless, so they are also *safe* to reverse, with the notable exception of casts from wide integer or `DECIMAL` types to `FLOAT` or `DOUBLE`, which can lose precision. Explicit-only casts may lose information or fail for particular values.
+
+<!-- BEGIN GENERATED TYPECASTING MATRIX -->
+
+In the matrix below, rows are the source type and columns are the target type. `I` marks a cast the system also performs *implicitly*; `E` marks a cast that is only available *explicitly* (with `CAST` or `::`); an empty cell marks an unsupported cast. Even where a cast is supported, it may still fail at runtime for a particular value (for example, out of range or unparseable input).
+
+Column abbreviations: `BOOL` (BOOLEAN), `I8` (TINYINT), `I16` (SMALLINT), `I32` (INTEGER), `I64` (BIGINT), `I128` (HUGEINT), `U8` (UTINYINT), `U16` (USMALLINT), `U32` (UINTEGER), `U64` (UBIGINT), `U128` (UHUGEINT), `F32` (FLOAT), `F64` (DOUBLE), `DEC` (DECIMAL(18, 3)), `STR` (VARCHAR), `BLOB` (BLOB), `BIT` (BIT), `UUID` (UUID), `DATE` (DATE), `TIME` (TIME), `TS` (TIMESTAMP), `TSTZ` (TIMESTAMP WITH TIME ZONE), `TTZ` (TIME WITH TIME ZONE), `IVL` (INTERVAL).
+
+<div class="monospace_table"></div>
+
+| From \ To | BOOL | I8 | I16 | I32 | I64 | I128 | U8 | U16 | U32 | U64 | U128 | F32 | F64 | DEC | STR | BLOB | BIT | UUID | DATE | TIME | TS | TSTZ | TTZ | IVL |
+|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|
+| `BOOLEAN` | I | E | E | E | E | E | E | E | E | E | E | E | E | E | E |  | E |  |  |  |  |  |  |  |
+| `TINYINT` | E | I | I | I | I | I | E | E | E | E | E | I | I | I | E |  | E |  |  |  |  |  |  |  |
+| `SMALLINT` | E | E | I | I | I | I | E | E | E | E | E | I | I | I | E |  | E |  |  |  |  |  |  |  |
+| `INTEGER` | E | E | E | I | I | I | E | E | E | E | E | I | I | I | E |  | E |  |  |  |  |  |  |  |
+| `BIGINT` | E | E | E | E | I | I | E | E | E | E | E | I | I | I | E |  | E |  |  |  |  |  |  |  |
+| `HUGEINT` | E | E | E | E | E | I | E | E | E | E | E | I | I | I | E |  | E |  |  |  |  |  |  |  |
+| `UTINYINT` | E | E | I | I | I | I | I | I | I | I | I | I | I | I | E |  | E |  |  |  |  |  |  |  |
+| `USMALLINT` | E | E | E | I | I | I | E | I | I | I | I | I | I | I | E |  | E |  |  |  |  |  |  |  |
+| `UINTEGER` | E | E | E | E | I | I | E | E | I | I | I | I | I | I | E |  | E |  |  |  |  |  |  |  |
+| `UBIGINT` | E | E | E | E | E | I | E | E | E | I | I | I | I | I | E |  | E |  |  |  |  |  |  |  |
+| `UHUGEINT` | E | E | E | E | E | E | E | E | E | E | I | I | I | I | E |  | E |  |  |  |  |  |  |  |
+| `FLOAT` | E | E | E | E | E | E | E | E | E | E | E | I | I | E | E |  | E |  |  |  |  |  |  |  |
+| `DOUBLE` | E | E | E | E | E | E | E | E | E | E | E | E | I | E | E |  | E |  |  |  |  |  |  |  |
+| `DECIMAL(18, 3)` | E | E | E | E | E | E | E | E | E | E | E | I | I | I | E |  |  |  |  |  |  |  |  |  |
+| `VARCHAR` | E | E | E | E | E | E | E | E | E | E | E | E | E | E | I | E | E | E | E | E | E | E | E | E |
+| `BLOB` |  |  |  |  |  |  |  |  |  |  |  |  |  |  | E | I | E | E |  |  |  |  |  |  |
+| `BIT` | E | E | E | E | E | E | E | E | E | E | E | E | E |  | E | E | I |  |  |  |  |  |  |  |
+| `UUID` |  |  |  |  |  |  |  |  |  |  |  |  |  |  | E | E |  | I |  |  |  |  |  |  |
+| `DATE` |  |  |  |  |  |  |  |  |  |  |  |  |  |  | E |  |  |  | I |  | I | I |  |  |
+| `TIME` |  |  |  |  |  |  |  |  |  |  |  |  |  |  | E |  |  |  |  | I |  |  | E |  |
+| `TIMESTAMP` |  |  |  |  |  |  |  |  |  |  |  |  |  |  | E |  |  |  | E | E | I | I | E |  |
+| `TIMESTAMP WITH TIME ZONE` |  |  |  |  |  |  |  |  |  |  |  |  |  |  | E |  |  |  | E |  | E | I | E |  |
+| `TIME WITH TIME ZONE` |  |  |  |  |  |  |  |  |  |  |  |  |  |  | E |  |  |  |  | E |  |  | I |  |
+| `INTERVAL` |  |  |  |  |  |  |  |  |  |  |  |  |  |  | E |  |  |  |  |  |  |  |  | I |
+
+<!-- END GENERATED TYPECASTING MATRIX -->
 
 Even though a casting operation is supported based on the source and target data type, it does not necessarily mean the cast operation will succeed at runtime.
 
