@@ -21,7 +21,7 @@ extension:
 repo:
   andium: 4fef6d3d58068ce8ef6ed002441e0eca002cf372
   github: query-farm/shellfs
-  ref: 4f724fccb7bcf37ab0cdf0cbcaa9630b2b8480ae
+  ref: fd80ab07ff1f2f2793218abb96f876d0875fb2c6
 
 extension_star_count: 97
 extension_star_count_pretty: 97
