@@ -39,10 +39,10 @@ docs:
     It helps users understand storage usage at the database, table, and column levels,
     and addresses issues like unexpected file size or poor compression.
 
-extension_star_count: 4
-extension_star_count_pretty: 4
-extension_download_count: 1208
-extension_download_count_pretty: 1.2k
+extension_star_count: 5
+extension_star_count_pretty: 5
+extension_download_count: 1300
+extension_download_count_pretty: 1.3k
 image: '/images/community_extensions/social_preview/preview_community_extension_table_inspector.png'
 layout: community_extension_doc
 ---
