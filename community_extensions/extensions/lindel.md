@@ -20,7 +20,7 @@ extension:
 repo:
   andium: 3fb0a957c3e497fb3513dcf4c0f70ec599bbc0d3
   github: query-farm/lindel
-  ref: 6435106a0d895ff63a72aaf5da5d7312980e8a54
+  ref: 6f8501a9213852286053946981f23b467a45bcd6
 
 extension_star_count: 68
 extension_star_count_pretty: 68
@@ -51,12 +51,12 @@ LOAD {{ page.extension.name }};
 
 <div class="extension_functions_table"></div>
 
-| function_name  | function_type |                                                                                               description                                                                                                | comment |                    examples                    |
-|----------------|---------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|---------|------------------------------------------------|
-| hilbert_decode | scalar        | Decodes a Hilbert-encoded unsigned integer back into an array of values. The number of output elements and their type are determined by the parameters.                                                  | NULL    | [hilbert_decode(123::UBIGINT, 2, false, true)] |
-| hilbert_encode | scalar        | Encodes an array of integers or floats into a single unsigned integer using Hilbert curve mapping. Hilbert curves preserve locality better than Morton encoding, making them ideal for spatial indexing. | NULL    | [hilbert_encode([1, 2, 3]::INTEGER[3])]        |
-| morton_decode  | scalar        | Decodes a Morton (Z-order) encoded unsigned integer back into an array of values. The number of output elements and their type are determined by the parameters.                                         | NULL    | [morton_decode(123::UBIGINT, 2, false, true)]  |
-| morton_encode  | scalar        | Encodes an array of integers or floats into a single unsigned integer using Morton (Z-order) curve mapping. Morton encoding interleaves bits and is computationally simpler than Hilbert encoding.       | NULL    | [morton_encode([1, 2, 3]::INTEGER[3])]         |
+| function_name  | function_type |                                                                                                                           description                                                                                                                           | comment |                                                     examples                                                      |
+|----------------|---------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|---------|-------------------------------------------------------------------------------------------------------------------|
+| hilbert_decode | scalar        | Decodes a Hilbert-encoded unsigned integer back into an array of values. The number of output elements and their type are determined by the parameters. Keep the encoded key unsigned; return_unsigned selects signed or unsigned integer coordinates.          | NULL    | [hilbert_decode(123::UBIGINT, 2, false, true), hilbert_decode(hilbert_encode([-1]::INTEGER[1]), 1, false, false)] |
+| hilbert_encode | scalar        | Encodes an array of integers or floats into a single unsigned integer using Hilbert curve mapping. Hilbert curves preserve locality better than Morton encoding, making them ideal for spatial indexing.                                                        | NULL    | [hilbert_encode([1, 2, 3]::INTEGER[3])]                                                                           |
+| morton_decode  | scalar        | Decodes a Morton (Z-order) encoded unsigned integer back into an array of values. The number of output elements and their type are determined by the parameters. Keep the encoded key unsigned; return_unsigned selects signed or unsigned integer coordinates. | NULL    | [morton_decode(123::UBIGINT, 2, false, true), morton_decode(morton_encode([-1]::INTEGER[1]), 1, false, false)]    |
+| morton_encode  | scalar        | Encodes an array of integers or floats into a single unsigned integer using Morton (Z-order) curve mapping. Morton encoding interleaves bits and is computationally simpler than Hilbert encoding.                                                              | NULL    | [morton_encode([1, 2, 3]::INTEGER[3])]                                                                            |
 
 ### Overloaded Functions
 

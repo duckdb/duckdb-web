@@ -18,7 +18,7 @@ extension:
   name: geosilo
 repo:
   github: Query-farm/geosilo
-  ref: d088741d5b3a2bd2a574da54930cae58e6a9d20c
+  ref: e6aaca0fc2784a35a967dd044761483a8b3bda86
 
 extension_star_count: 25
 extension_star_count_pretty: 25
