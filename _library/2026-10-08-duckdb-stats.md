@@ -1,9 +1,9 @@
 ---
 layout: post
 title: "duckdb_stats: A Statistical Inference Layer for DuckDB"
-author: "lihongyan (alitrack)"
-tags: ["Project"]
-thirdparty: true
+authors:
+  - "lihongyan (alitrack)"
+tag: project
 category: community
 excerpt: ""
 ---

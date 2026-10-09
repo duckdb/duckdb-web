@@ -52,7 +52,8 @@
 
 	<div class="postimg custom">
 		<img src="{{ thumb }}" alt="{{ item.title | escape }}" class="zoom-image" loading="lazy">
-		{% if coll == "library" and item.tag %}
+		{% assign known_type_icons = "article,book,paper,podcast,talk" | split: "," %}
+		{% if coll == "library" and known_type_icons contains item.tag %}
 			<span class="type-icon" aria-hidden="true"><img src="/images/library/type-icons/{{ item.tag }}_{{ type_icon_source }}.png" alt="" loading="lazy"></span>
 		{% elsif coll == "everywhere" %}
 			<span class="type-icon" aria-hidden="true"><img src="/images/library/type-icons/everywhere.png" alt="" loading="lazy"></span>
