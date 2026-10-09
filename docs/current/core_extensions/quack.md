@@ -10,7 +10,7 @@ The `quack` extension adds support for the [Quack remote protocol]({% link docs/
 
 ## Usage
 
-Quack is currently in a beta state. Quack will be transparently autoinstalled and [autoloaded]({% link docs/current/extensions/overview.md %}#autoloading-extension) on first use.
+Quack is currently in a beta state. Quack will be transparently autoinstalled and [autoloaded]({% link docs/current/extensions/overview.md %}#autoloading-extensions) on first use.
 
 If you would like to install Quack explicitly, run:
 

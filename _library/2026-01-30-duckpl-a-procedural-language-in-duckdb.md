@@ -1,13 +1,12 @@
 ---
 layout: post
 title: "DuckPL: A Procedural Language in DuckDB"
-author: "Denis Hirn"
-tags: ["Talk"]
-thirdparty: true
-highlighted: true
+authors:
+  - Denis Hirn
+tag: talk
 category: community
 excerpt: ""
-pill: "DuckDB Developer Meeting #1"
+venue: "DuckDB Developer Meeting #1"
 ---
 
 <div class="video-container">

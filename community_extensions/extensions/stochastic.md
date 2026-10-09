@@ -21,12 +21,12 @@ extension:
 repo:
   andium: afba8950037068a7a43520b18f9f6f5dcc5258ba
   github: query-farm/stochastic
-  ref: 234c881432f73b18b2ba6e7c7dd604b0e8d95540
+  ref: abdab24201d911501b924744c13c30739b4f6c28
 
-extension_star_count: 28
-extension_star_count_pretty: 28
-extension_download_count: 5937
-extension_download_count_pretty: 5.9k
+extension_star_count: 29
+extension_star_count_pretty: 29
+extension_download_count: 6481
+extension_download_count_pretty: 6.5k
 image: '/images/community_extensions/social_preview/preview_community_extension_stochastic.png'
 layout: community_extension_doc
 ---

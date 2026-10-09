@@ -1,6 +1,8 @@
 ---
 ---
 
+@use '../_sass/abstracts/mixins' as *;
+
 $ce_purple: #A293FF;
 $ce_purplelight: #f2f0fe;
 
@@ -15,6 +17,11 @@ html.darkmode body.documentation.communityextensions #duckdb_logo{
 
 body.documentation.communityextensions{
 	--main-link-hover-color: var(--main-ce-link-hover, #5647B8);
+}
+
+body.documentation.communityextensions .maintainers{
+	@include body-docs;
+	margin-top: 1em;
 }
 
 @media only screen and (min-width: 781px) and (max-width: 1380px) {

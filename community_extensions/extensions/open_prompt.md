@@ -66,12 +66,12 @@ extension:
 repo:
   andium: 5328a2ff7100887263259ccc5ad8c03b8c6bc58a
   github: quackscience/duckdb-extension-openprompt
-  ref: 4e42c145ab1d10a534c71f2b5ad704c6d911a280
+  ref: a99c1f62d72eb46d3b632b76a6534540ff297254
 
 extension_star_count: 62
 extension_star_count_pretty: 62
-extension_download_count: 964
-extension_download_count_pretty: 964
+extension_download_count: 1118
+extension_download_count_pretty: 1.1k
 image: '/images/community_extensions/social_preview/preview_community_extension_open_prompt.png'
 layout: community_extension_doc
 ---

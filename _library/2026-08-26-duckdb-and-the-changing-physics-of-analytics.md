@@ -1,13 +1,14 @@
 ---
 layout: post
 title: "DuckDB and the changing physics of analytics"
-author: "Andy Warfield (AWS)"
-thumb: "/images/library/thumbs/2026-08-26-all-things-distributed.jpg"
-image: "/images/library/thumbs/2026-08-26-all-things-distributed.jpg"
-tags: ["Article"]
-thirdparty: false
+authors:
+  - Andy Warfield
+thumb: "/images/library/thumbs/2026-08-26-duckdb-and-the-changing-physics-of-analytics.png"
+image: "/images/library/thumbs/2026-08-26-duckdb-and-the-changing-physics-of-analytics.png"
+tag: article
+category: core
 excerpt: ""
-pill: "All Things Distributed"
+venue: "All Things Distributed"
 ---
 
 |-------|-------|

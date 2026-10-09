@@ -21,11 +21,11 @@ extension:
 repo:
   andium: dd070c55ee8a09aa6443f8bfe947a88aaee0315f
   github: query-farm/minijinja
-  ref: a4e836bf4878f0d754cef3bac1e1920affb69bac
+  ref: afa3be307799b04aaa2c2af2830b2729934f2501
 
 extension_star_count: 7
 extension_star_count_pretty: 7
-extension_download_count: 1168
+extension_download_count: 1199
 extension_download_count_pretty: 1.2k
 image: '/images/community_extensions/social_preview/preview_community_extension_minijinja.png'
 layout: community_extension_doc

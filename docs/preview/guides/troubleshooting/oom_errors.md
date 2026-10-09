@@ -13,11 +13,11 @@ Out of memory errors mainly occur in two forms:
 
 ### `OutOfMemoryException`
 
-Most of the time DuckDB runs out of memory with an `OutOfMemoryException`.
+Most of the time DuckDB runs out of memory with an `OutOfMemoryException` followed by a message from the memory allocator.
 For example:
 
 ```console
-duckdb.duckdb.OutOfMemoryException: Out of Memory Error: failed to pin block of size 256.0 KiB (476.7 MiB/476.8 MiB used)
+Out of Memory Error: failed to pin block of size 256.0 KiB (476.7 MiB/476.8 MiB used)
 ```
 
 ### OOM Reaper (Linux)

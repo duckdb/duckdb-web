@@ -224,10 +224,6 @@ body.installation{
 		.version-switch-toggle{
 			display: inline-flex;
 			position: relative;
-			background: var(--interactive-filterbox-background-color, #FAFAFA);
-			border: 1px solid var(--interactive-filterbox-border-color, #E6E6E6);
-			border-radius: var(--page-radius-pill);
-			padding: 4px;
 		}
 
 		.version-switch-option{
@@ -235,16 +231,17 @@ body.installation{
 			z-index: 1;
 			background: none;
 			border: none;
-			padding: 8px 14px;
+			padding: 12px 14px;
 			border-radius: var(--page-radius-pill);
 			cursor: pointer;
 			@include label-1;
 			color: var(--interactive-filter-unselected-text-color, #666);
-			transition: color 0.3s, opacity 0.3s;
+			transition: color 0.2s, opacity 0.3s;
 			white-space: nowrap;
 
+			&:hover:not(:disabled),
 			&.active{
-				color: var(--main-text-primary-color, #0D0D0D);
+				color: var(--interactive-filter-selected-text-color, #1A1A1A);
 			}
 
 			&:disabled{
@@ -260,9 +257,9 @@ body.installation{
 
 		.version-switch-slider{
 			position: absolute;
-			top: 4px;
-			left: 4px;
-			height: calc(100% - 8px);
+			top: calc(50% - 18px);
+			left: 0;
+			height: 36px;
 			border-radius: var(--page-radius-pill);
 			background: var(--interactive-filter-selected-background-color, #E6E6E6);
 			transition: transform 0.3s ease, width 0.3s ease;

@@ -22,21 +22,21 @@ url: "https://duckdb.org" # the base hostname & protocol for your site, e.g. htt
 # Set current codename of DuckDB and version numbers of DuckDB clients
 # current version information
 current_duckdb_codename: "Variegata"
-current_duckdb_csharp_version: "1.5.5"
+current_duckdb_csharp_version: "1.5.6"
 current_duckdb_dart_version: ""
-current_duckdb_go_version: "1.5.5"
-current_duckdb_go_tag: "v2.10505.0"
-current_duckdb_hash: "d8cdaa33fd"
-current_duckdb_java_short_version: "1.5.5"
-current_duckdb_java_version: "1.5.5.1"
-current_duckdb_node_neo_version: "1.5.5"
-current_duckdb_odbc_short_version: "1.5.5"
-current_duckdb_odbc_version: "1.5.5.0"
-current_duckdb_php_version: "1.5.5"
-current_duckdb_r_version: "1.5.5"
-current_duckdb_rust_version: "1.5.5"
-current_duckdb_version: "1.5.5"
-current_duckdb_wasm_version: "1.5.5"
+current_duckdb_go_version: "1.5.6"
+current_duckdb_go_tag: "v2.10506.0"
+current_duckdb_hash: "069cc9f9b5"
+current_duckdb_java_short_version: "1.5.6"
+current_duckdb_java_version: "1.5.6.0"
+current_duckdb_node_neo_version: "1.5.6"
+current_duckdb_odbc_short_version: "1.5.6"
+current_duckdb_odbc_version: "1.5.6.0"
+current_duckdb_php_version: "1.5.6"
+current_duckdb_r_version: "1.5.6"
+current_duckdb_rust_version: "1.5.6"
+current_duckdb_version: "1.5.6"
+current_duckdb_wasm_version: "1.5.6"
 current_short_duckdb_version: "1.5"
 # LTS version information
 lts_duckdb_codename: "Andium"
@@ -56,8 +56,10 @@ lts_duckdb_version: "1.4.5"
 lts_duckdb_wasm_version: "1.4.4"
 lts_short_duckdb_version: "1.4"
 # preview version information
+preview_duckdb_version: "2.0.0-dev"
 preview_short_duckdb_version: "2.0-dev"
-preview_duckdb_java_version: "2.0.0-alpha43385-881"
+preview_duckdb_java_version: "2.0.0-alpha44738-892"
+preview_duckdb_odbc_version: "8f79c4f6"
 # more Jekyll config
 livereload: true
 highlighter: rouge
@@ -127,7 +129,7 @@ repository: "duckdb/duckdb-web"
 #   - vendor/gems/
 #   - vendor/ruby/
 
-star_count: '41.8k'
+star_count: '42.0k'
 
 toc:
   min_level: 1

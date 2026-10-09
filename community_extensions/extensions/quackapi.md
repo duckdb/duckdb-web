@@ -36,7 +36,7 @@ extension:
 repo:
   github: asubbarao/quackapi
   # Pin to the packaging commit SHA (set by release engineer; never a branch).
-  ref: ed4552bb201d4fa9bef933b3f96829304e2d8c46
+  ref: 269c7b22e6d379be4ab18e26182c8b15ec8be463
 
 docs:
   hello_world: |
@@ -135,7 +135,7 @@ docs:
 
     ## Platforms & build
 
-    Targets **DuckDB v1.5.5** only. C++17; depends only on DuckDB-bundled **httplib**
+    Targets **DuckDB v1.5.6** only. C++17; depends only on DuckDB-bundled **httplib**
     and **mbedtls** (no vcpkg, no libcurl). CI builds linux/macOS/windows_amd64;
     excludes wasm and Windows MinGW/rtools/arm64.
 
@@ -153,10 +153,10 @@ docs:
     Full reference: https://github.com/asubbarao/quackapi  
     Community page draft: https://github.com/asubbarao/quackapi/blob/main/docs/community-page.md
 
-extension_star_count: 4
-extension_star_count_pretty: 4
-extension_download_count: 1022
-extension_download_count_pretty: 1.0k
+extension_star_count: 6
+extension_star_count_pretty: 6
+extension_download_count: 915
+extension_download_count_pretty: 915
 image: '/images/community_extensions/social_preview/preview_community_extension_quackapi.png'
 layout: community_extension_doc
 ---
@@ -218,11 +218,14 @@ LOAD {{ page.extension.name }};
 | quackapi_queues                 | table         | NULL        | NULL    |          |
 | quackapi_renew                  | scalar        | NULL        | NULL    |          |
 | quackapi_request                | table         | NULL        | NULL    |          |
+| quackapi_requests               | table         | NULL        | NULL    |          |
 | quackapi_routes                 | table         | NULL        | NULL    |          |
 | quackapi_serve                  | table         | NULL        | NULL    |          |
 | quackapi_servers                | table         | NULL        | NULL    |          |
 | quackapi_stop                   | table         | NULL        | NULL    |          |
 | quackapi_streams                | table         | NULL        | NULL    |          |
+| quackapi_telemetry_flush        | table         | NULL        | NULL    |          |
+| quackapi_telemetry_status       | table         | NULL        | NULL    |          |
 | quackapi_verify_auth            | scalar        | NULL        | NULL    |          |
 | quackapi_wait                   | table         | NULL        | NULL    |          |
 
@@ -244,16 +247,20 @@ This extension does not add any types.
 
 |              name              |                                                                                                                                                                     description                                                                                                                                                                     | input_type | scope  | aliases |
 |--------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|------------|--------|---------|
-| quackapi_compression           | Enable Accept-Encoding response compression on quackapi_serve (zstd preferred, then gzip). Default true. Overridden by compression named parameter.                                                                                                                                                                                                 | BOOLEAN    | GLOBAL | []      |
-| quackapi_compression_min_bytes | Minimum response body size (bytes) before compression. Default 256. Overridden by compression_min_bytes named parameter.                                                                                                                                                                                                                            | BIGINT     | GLOBAL | []      |
+| quackapi_compression           | Response compression mode on quackapi_serve: auto, gzip, zstd or off. Default auto (zstd preferred, then gzip). Overridden by compression named parameter.                                                                                                                                                                                          | VARCHAR    | GLOBAL | []      |
+| quackapi_compression_min_bytes | Minimum response body size (bytes) before compression. Default 1024. Overridden by compression_min_bytes named parameter.                                                                                                                                                                                                                           | BIGINT     | GLOBAL | []      |
 | quackapi_cors_origins          | CORS allowed origins for quackapi_serve (* or comma-separated list). Empty (default) disables CORS. Overridden by cors_origins named parameter.                                                                                                                                                                                                     | VARCHAR    | GLOBAL | []      |
 | quackapi_graphql_allow_all     | Explicit legacy opt-in to public GraphQL catalog exposure                                                                                                                                                                                                                                                                                           | BOOLEAN    | GLOBAL | []      |
 | quackapi_http_client           | Outbound HTTP client for httpfs/route fetches: auto\|curl\|httplib. Default auto prefers curl_httpfs (pool, HTTP/2, async) and falls back to httplib with http_client_reason on /healthz when unavailable. curl fails serve if curl_httpfs cannot INSTALL/LOAD. Overridden by http_client named parameter. Does not change the inbound HTTP server. | VARCHAR    | GLOBAL | []      |
+| quackapi_log_headers           | Comma-separated request-header allowlist for access-log maps; empty (default) avoids retaining headers. Overridden by log_headers named parameter.                                                                                                                                                                                                  | VARCHAR    | GLOBAL | []      |
 | quackapi_log_level             | Log verbosity for quackapi_serve: silent\|error\|warn\|info\|debug. Default info. Overridden by log_level named parameter.                                                                                                                                                                                                                          | VARCHAR    | GLOBAL | []      |
+| quackapi_log_query             | Preserve a redacted raw query string in access logs; default false. Overridden by log_query named parameter.                                                                                                                                                                                                                                        | BOOLEAN    | GLOBAL | []      |
 | quackapi_max_pending_requests  | Maximum queued HTTP connections                                                                                                                                                                                                                                                                                                                     | BIGINT     | GLOBAL | []      |
 | quackapi_max_response_bytes    | Maximum uncompressed response bytes                                                                                                                                                                                                                                                                                                                 | BIGINT     | GLOBAL | []      |
 | quackapi_memory_limit          | Memory limit applied by quackapi_serve (e.g. '4GB', '512MB'). Empty (default): do not clobber a non-default DuckDB memory_limit; only apply the 256MB serve default when nothing was configured. Overridden by memory_limit named parameter.                                                                                                        | VARCHAR    | GLOBAL | []      |
 | quackapi_pg_dsn                | Postgres DSN for the native libpq handler path (thread-local PGconn). Empty (default) keeps DuckDB-only execution. Overridden by pg_dsn named parameter on quackapi_serve / quackapi_request.                                                                                                                                                       | VARCHAR    | GLOBAL | []      |
 | quackapi_query_timeout_ms      | Maximum query execution time in milliseconds                                                                                                                                                                                                                                                                                                        | BIGINT     | GLOBAL | []      |
+| quackapi_request_ring          | Number of recent TCP requests retained by quackapi_requests(). Default 10000; zero disables the in-memory ring. Overridden by request_ring named parameter.                                                                                                                                                                                         | BIGINT     | GLOBAL | []      |
+| quackapi_slow_request_ms       | Requests at or above this duration are logged at warn level. Default 1000ms. Overridden by slow_request_ms named parameter.                                                                                                                                                                                                                         | BIGINT     | GLOBAL | []      |
 
 

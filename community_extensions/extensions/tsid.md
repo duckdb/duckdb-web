@@ -88,12 +88,12 @@ extension:
 repo:
   andium: e404bc8c0d0b204b2f58e0c954881bc0f7d4ec70
   github: quackscience/duckdb-extension-tsid
-  ref: 21457c7206e020f3d5f0deb3059d9ee255e312b1
+  ref: 186b60f519f443362c940b8014c8b0f480421ed5
 
 extension_star_count: 7
 extension_star_count_pretty: 7
-extension_download_count: 1286
-extension_download_count_pretty: 1.3k
+extension_download_count: 1061
+extension_download_count_pretty: 1.1k
 image: '/images/community_extensions/social_preview/preview_community_extension_tsid.png'
 layout: community_extension_doc
 ---

@@ -7,6 +7,14 @@ DuckDB lets you quickly generate synthetic datasets by combining a few building 
 
 ## Generating Rows
 
+* [range functions]({% link docs/preview/sql/functions/list.md %}#range-functions)
+* hash functions, e.g.,
+  [`hash`]({% link docs/preview/sql/functions/utility.md %}#hashvalue),
+  [`md5`]({% link docs/preview/sql/functions/utility.md %}#md5string),
+  [`sha256`]({% link docs/preview/sql/functions/utility.md %}#sha256string)
+* the [Faker Python package](https://faker.readthedocs.io/) via the [Python function API]({% link docs/preview/clients/python/function.md %})
+* using [cross products (Cartesian products)]({% link docs/preview/sql/query_syntax/from.md %}#cross-product-joins-cartesian-product)
+
 ### `range` and `generate_series`
 
 The [range functions]({% link docs/preview/sql/functions/list.md %}#range-functions) turn a start, stop, and step into a table of rows, which is the usual starting point for a synthetic dataset:

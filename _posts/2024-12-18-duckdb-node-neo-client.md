@@ -1,11 +1,12 @@
 ---
 layout: post
 title: "DuckDB Node Neo Client"
-author: "Jeff Raymakers"
+authors:
+  - Jeff Raymakers
 thumb: "/images/blog/thumbs/nodejs.svg"
 image: "/images/blog/thumbs/nodejs.png"
 excerpt: "The new DuckDB Node client, “Neo”, provides a powerful and friendly way to use your favorite database"
-tags: ["using DuckDB"]
+tag: using-duckdb
 ---
 
 Meet the newest DuckDB client API: [DuckDB Node “Neo”]({% link docs/current/clients/node_neo/overview.md %})!

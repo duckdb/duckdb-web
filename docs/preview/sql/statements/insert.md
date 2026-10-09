@@ -215,6 +215,8 @@ INSERT INTO tbl VALUES (1, 42);
 INSERT INTO tbl VALUES (1, 52), (1, 62) ON CONFLICT DO UPDATE SET j = EXCLUDED.j;
 ```
 
+> Warning When a single `INSERT` statement contains multiple to-be-inserted rows that share the same conflict target, DuckDB applies only one update per conflicting key, and the row that wins is not guaranteed to be the last one in insertion order. In the example above, `j` ends up as `52` (the first of the two conflicting rows) rather than `62`. If you need last-writer-wins semantics, deduplicate the input before inserting, for example by keeping only the last row per key with a [window function]({% link docs/preview/sql/functions/window_functions.md %}).
+
 #### Examples
 
 An example using `DO UPDATE` is the following:
@@ -333,13 +335,15 @@ INSERT INTO tbl
 |--:|---:|-----:|
 | 1 | 20 | 4500 |
 
-When a conflict target is provided, you can further filter this with a `WHERE` clause, that should be met by all conflicts.
+The `DO UPDATE SET` action may be further restricted with a `WHERE` clause, which is checked for each conflicting row. Conflicting rows that do not meet the condition are left unchanged. This `WHERE` clause is part of the `DO UPDATE SET` action and must appear after it, as shown below.
 
 ```sql
 INSERT INTO tbl
     VALUES (1, 40, 700)
     ON CONFLICT (i) DO UPDATE SET k = 2 * EXCLUDED.k WHERE k < 100;
 ```
+
+> Warning DuckDB does not support PostgreSQL's partial-index predicate on the conflict target, i.e., a `WHERE` clause placed directly after the conflict target as in `ON CONFLICT (i) WHERE ... DO UPDATE SET ...`. Attempting this returns a `Binder Error`.
 
 ## `RETURNING` Clause
 

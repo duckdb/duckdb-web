@@ -1,12 +1,12 @@
 ---
 layout: post
 title: "DuckDB's Creator Tells LDS Why SQL Won"
-author: "Let's Data Science"
-tags: ["Article"]
-thirdparty: false
+authors:
+  - "Let's Data Science"
+tag: article
 category: community
 excerpt: ""
-pill: "letsdatascience.com"
+venue: "letsdatascience.com"
 ---
 
 |-------|-------|

@@ -1,13 +1,18 @@
 ---
 layout: post
 title: "Parachute: Single-Pass Bi-Directional Information Passing"
-author: "Mihail Stoian, Andreas Zimmerer, Skander Krid, Amadou Latyr Ngom, Jialin Ding, Tim Kraska, Andreas Kipf"
-thumb: "/images/library/thumbs/vldb.svg"
-image: "/images/library/thumbs/vldb.png"
-tags: ["Paper"]
+authors:
+  - Mihail Stoian
+  - Andreas Zimmerer
+  - Skander Krid
+  - Amadou Latyr Ngom
+  - Jialin Ding
+  - Tim Kraska
+  - Andreas Kipf
+tag: paper
 category: community
 excerpt: ""
-pill: "VLDB 2025"
+venue: "VLDB 2025"
 redirect_from:
 - /science/parachute
 ---

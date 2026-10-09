@@ -1,14 +1,15 @@
 ---
 layout: post
 title: "DuckDB: Crunching Data Anywhere from Laptops to Servers"
-author: Gábor Szárnyas
-thumb: "/images/library/thumbs/2024-06-12-duckdb-crunching-data-anywhere-from-laptops-to-servers.jpg"
-image: "/images/library/thumbs/2024-06-12-duckdb-crunching-data-anywhere-from-laptops-to-servers.jpg"
-tags: ["Talk"]
+authors:
+  - Gábor Szárnyas
+thumb: "/images/library/thumbs/2024-06-12-duckdb-crunching-data-anywhere-from-laptops-to-servers.png"
+image: "/images/library/thumbs/2024-06-12-duckdb-crunching-data-anywhere-from-laptops-to-servers.png"
+tag: talk
+category: core
 length: "35 min"
-thirdparty: false
 excerpt: ""
-pill: "GOTO Amsterdam 2024"
+venue: "GOTO Amsterdam 2024"
 redirect_from:
 - /media/duckdb-crunching-data-anywhere-from-laptops-to-servers
 ---

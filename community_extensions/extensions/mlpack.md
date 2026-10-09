@@ -12,7 +12,7 @@ extension:
   language: C++
   build: cmake
   license: MIT
-  excluded_platforms: "windows_amd64_mingw;windows_amd64;wasm_mvp;wasm_eh;wasm_threads"
+  excluded_platforms: "windows_amd64_mingw;windows_amd64;wasm_mvp;wasm_eh;wasm_threads;osx_amd64"
   requires_toolchains: "fortran;omp"    
   maintainers:
     - eddelbuettel
@@ -20,7 +20,7 @@ extension:
 repo:
   github: eddelbuettel/duckdb-mlpack
   andium: 8437d78423e3cfc65f9226606908b301c2314710
-  ref: ead4698674d803909b1f9c01b083ecc7ea586c3a
+  ref: b62f9267ca5dfe8292ca8c47da527cb4b52ede96
 
 docs:
   hello_world: |
@@ -71,8 +71,8 @@ docs:
 
 extension_star_count: 21
 extension_star_count_pretty: 21
-extension_download_count: 886
-extension_download_count_pretty: 886
+extension_download_count: 1464
+extension_download_count_pretty: 1.5k
 image: '/images/community_extensions/social_preview/preview_community_extension_mlpack.png'
 layout: community_extension_doc
 ---

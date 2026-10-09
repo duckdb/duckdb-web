@@ -1,12 +1,13 @@
 ---
 layout: post
 title: "Analytics for Not-so-Big Data with DuckDB"
-author: "David Ostrovsky"
-tags: ["Talk"]
+authors:
+  - David Ostrovsky
+tag: talk
 length: "60 min"
 category: community
 excerpt: ""
-pill: "NDC Oslo 2025"
+venue: "NDC Oslo 2025"
 ---
 
 <div class="video-container">

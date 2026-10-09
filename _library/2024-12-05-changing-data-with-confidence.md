@@ -1,14 +1,15 @@
 ---
 layout: post
 title: "Changing Data with Confidence"
-author: Hannes Mühleisen
-thumb: "/images/library/thumbs/2024-12-05-changing-data-with-confidence.jpg"
-image: "/images/library/thumbs/2024-12-05-changing-data-with-confidence.jpg"
-tags: ["Talk"]
+authors:
+  - Hannes Mühleisen
+thumb: "/images/library/thumbs/2024-12-05-changing-data-with-confidence.png"
+image: "/images/library/thumbs/2024-12-05-changing-data-with-confidence.png"
+tag: talk
+category: core
 length: "30 min"
-thirdparty: false
 excerpt: ""
-pill: "PyData Global 2024"
+venue: "PyData Global 2024"
 redirect_from:
 - /media/changing-data-with-confidence
 ---

@@ -1,12 +1,13 @@
 ---
 layout: post
 title: "Efficient CSV Parsing - On the Complexity of Simple Things"
-author: Pedro Holanda
-tags: ["Talk"]
+authors:
+  - Pedro Holanda
+tag: talk
+category: core
 length: "50 min"
-thirdparty: false
 excerpt: ""
-pill: "Dutch Seminar on Data Systems Design"
+venue: "Dutch Seminar on Data Systems Design"
 ---
 
 <div class="video-container">

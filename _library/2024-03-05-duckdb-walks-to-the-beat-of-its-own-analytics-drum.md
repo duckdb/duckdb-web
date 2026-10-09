@@ -1,12 +1,12 @@
 ---
 layout: post
 title: "DuckDB Walks to the Beat of Its Own Analytics Drum"
-author: "Alex Woodie (BigDATAwire)"
-tags: ["Article"]
-thirdparty: true
+authors:
+  - Alex Woodie
+tag: article
 category: community
 excerpt: ""
-pill: "hpcwire.com"
+venue: "hpcwire.com"
 ---
 
 |-------|-------|

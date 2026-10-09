@@ -162,10 +162,10 @@ docs:
     roundtrip ledger rather than hidden -- including several where pandoc is the one
     losing information.
 
-extension_star_count: 3
-extension_star_count_pretty: 3
-extension_download_count: 740
-extension_download_count_pretty: 740
+extension_star_count: 4
+extension_star_count_pretty: 4
+extension_download_count: 870
+extension_download_count_pretty: 870
 image: '/images/community_extensions/social_preview/preview_community_extension_panduck.png'
 layout: community_extension_doc
 ---

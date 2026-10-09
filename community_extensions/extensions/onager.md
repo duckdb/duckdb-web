@@ -19,7 +19,7 @@ extension:
 
 repo:
   github: CogitatorTech/onager
-  ref: 49ad15b52321b914eb31710788418f2c01d4ba43
+  ref: ab472a7da9e85ff1e2d0d23feae2c824d876ce30
 
 docs:
   hello_world: |
@@ -46,10 +46,10 @@ docs:
     or the [Onager documentation](https://cogitatortech.github.io/onager/).
     You can also try Onager in your browser [here](https://cogitatortech.github.io/onager/playground/).
 
-extension_star_count: 150
-extension_star_count_pretty: 150
-extension_download_count: 1085
-extension_download_count_pretty: 1.1k
+extension_star_count: 151
+extension_star_count_pretty: 151
+extension_download_count: 963
+extension_download_count_pretty: 963
 image: '/images/community_extensions/social_preview/preview_community_extension_onager.png'
 layout: community_extension_doc
 ---

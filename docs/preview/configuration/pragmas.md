@@ -142,6 +142,12 @@ Set the memory limit for the buffer manager:
 SET memory_limit = '1GB';
 ```
 
+The memory limit can also be specified as a percentage of the total system memory:
+
+```sql
+SET memory_limit = '60%';
+```
+
 > Warning The specified memory limit is only applied to the buffer manager.
 > For most queries, the buffer manager handles the majority of the data processed.
 > However, certain in-memory data structures such as [vectors]({% link docs/preview/internals/vector.md %}) and query results are allocated outside of the buffer manager.
@@ -255,6 +261,14 @@ The following statement returns information on the metadata store (`block_id`, `
 
 ```sql
 PRAGMA metadata_info;
+```
+
+#### Extension Versions
+
+The following statement returns the name, version, and install mode of each loaded extension (`extension_name`, `extension_version`, `install_mode`, and `installed_from`):
+
+```sql
+PRAGMA extension_versions;
 ```
 
 ## Progress Bar
@@ -616,13 +630,13 @@ SET ieee_floating_point_ops = false;
 
 In this case, floating point division by zero (e.g., `1.0 / 0.0`, `0.0 / 0.0` and `-1.0 / 0.0`) will all return `NULL`.
 
-> New The semantics of integer divison by zero are changing will change in DuckDB 2.0.
+> New The semantics of integer division by zero will change in DuckDB 2.0.
 
 Integer division by zero (`1 // 0`, `1 % 0`, `INTERVAL '1' DAY / 0`) errors by default.
 To return `NULL`, similarly to DuckDB 1.x, use:
 
 ```sql
-SET null_on_division_by_zero = true;
+SET error_on_division_by_zero = false;
 ```
 
 ## Query Verification (for Development)

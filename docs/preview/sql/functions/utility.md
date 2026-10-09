@@ -29,12 +29,14 @@ The functions below are difficult to categorize into specific function types and
 | [`equi_width_bins(min, max, bincount, nice := false)`](#equi_width_binsmin-max-bincount-nice--false) | Returns the upper boundaries of a partition of the interval `[min, max]` into `bin_count` equal-sized subintervals (for use with, e.g., [`histogram`]({% link docs/preview/sql/functions/aggregates.md %}#histogramargboundaries)). If `nice = true`, then `min`, `max` and `bincount` may be adjusted to produce more aesthetically pleasing results. |
 | [`force_checkpoint(database)`](#force_checkpointdatabase) | Synchronize WAL with file for (optional) database interrupting transactions. |
 | [`gen_random_uuid()`](#gen_random_uuid) | Return a random UUID similar to this: `eeccb8c5-9943-b2bb-bb5e-222f4e14b687`. |
+| [`get_block_size(database)`](#get_block_sizedatabase) | Returns the block size of the attached database with the given name. |
 | [`getenv(var)`](#getenvvar) | Returns the value of the environment variable `var`. Only available in the [command line client]({% link docs/preview/clients/cli/overview.md %}). |
 | [`getvariable('variable_name')`](#getvariablevariable_name) | Returns the value of the SQL variable named `variable_name`, or `NULL` if it is not set. |
 | [`hash(value)`](#hashvalue) | Returns a `UBIGINT` with a hash of `value`. The used hash function may change across DuckDB versions.|
 | [`icu_sort_key(string, collator)`](#icu_sort_keystring-collator) | Surrogate [sort key](https://unicode-org.github.io/icu/userguide/collation/architecture.html#sort-keys) used to sort special characters according to the specific locale. Collator parameter is optional. Only available when the ICU extension is installed. |
 | [`if(a, b, c)`](#ifa-b-c) | Ternary conditional operator. |
 | [`ifnull(expr, other)`](#ifnullexpr-other) | A two-argument version of coalesce. |
+| [`in_search_path(database_name, schema_name)`](#in_search_pathdatabase_name-schema_name) | Returns whether or not the given database and schema are in the search path. |
 | [`is_histogram_other_bin(arg)`](#is_histogram_other_binarg) | Returns `true` when `arg` is the "catch-all element" of its datatype for the purpose of the [`histogram_exact`]({% link docs/preview/sql/functions/aggregates.md %}#histogram_exactargelements) function, which is equal to the "right-most boundary" of its datatype for the purpose of the [`histogram`]({% link docs/preview/sql/functions/aggregates.md %}#histogramargboundaries) function. |
 | [`md5(string)`](#md5string) | Returns the MD5 hash of the `string` as a `VARCHAR`. |
 | [`md5_number(string)`](#md5_numberstring) | Returns the MD5 hash of the `string` as a `UHUGEINT`. |
@@ -206,6 +208,14 @@ The functions below are difficult to categorize into specific function types and
 | **Example** | `gen_random_uuid()` |
 | **Result** | various |
 
+#### `get_block_size(database)`
+
+<div class="nostroke_table"></div>
+
+| **Description** | Returns the block size of the attached database with the given name. |
+| **Example** | `get_block_size('file_db')` |
+| **Result** | `262144` |
+
 #### `getenv(var)`
 
 | **Description** | Returns the value of the environment variable `var`. Only available in the [command line client]({% link docs/preview/clients/cli/overview.md %}). |
@@ -249,6 +259,14 @@ The functions below are difficult to categorize into specific function types and
 | **Description** | A two-argument version of coalesce. |
 | **Example** | `ifnull(NULL, 'default_string')` |
 | **Result** | `default_string` |
+
+#### `in_search_path(database_name, schema_name)`
+
+<div class="nostroke_table"></div>
+
+| **Description** | Returns whether or not the given database and schema are in the search path. |
+| **Example** | `in_search_path('memory', 'main')` |
+| **Result** | `true` |
 
 #### `is_histogram_other_bin(arg)`
 
@@ -464,8 +482,20 @@ A [table function]({% link docs/preview/sql/query_syntax/from.md %}#table-functi
 
 | Name | Description |
 |:--|:-------|
+| [`generate_series(start, stop, step)`](#generate_seriesstart-stop-step) | Returns a table of values between `start` and `stop` (inclusive), incrementing by `step`. |
 | [`glob(search_path)`](#globsearch_path) | Return filenames found at the location indicated by the *search_path* in a single column named `file`. The *search_path* may contain [glob pattern matching syntax]({% link docs/preview/sql/functions/pattern_matching.md %}). |
+| [`range(start, stop, step)`](#rangestart-stop-step) | Returns a table of values between `start` and `stop` (exclusive), incrementing by `step`. |
+| [`repeat(value, count)`](#repeatvalue-count) | Returns a table with `count` rows, each containing `value`. |
 | [`repeat_row(varargs, num_rows)`](#repeat_rowvarargs-num_rows) | Returns a table with `num_rows` rows, each containing the fields defined in `varargs`. |
+| [`unnest(list)`](#unnestlist) | Returns a table with one row per element of `list`. |
+
+#### `generate_series(start, stop, step)`
+
+<div class="nostroke_table"></div>
+
+| **Description** | Returns a table of values between `start` and `stop`, incrementing by `step`. The `stop` parameter is inclusive, and the `stop` and `step` arguments are optional. See the [list variant]({% link docs/preview/sql/functions/list.md %}#generate_series) for the available argument combinations. |
+| **Example** | `generate_series(2, 5)` |
+| **Result** | 4 rows: `2, 3, 4, 5` |
 
 #### `glob(search_path)`
 
@@ -475,6 +505,22 @@ A [table function]({% link docs/preview/sql/query_syntax/from.md %}#table-functi
 | **Example** | `glob('*')` |
 | **Result** | (table of filenames) |
 
+#### `range(start, stop, step)`
+
+<div class="nostroke_table"></div>
+
+| **Description** | Returns a table of values between `start` and `stop`, incrementing by `step`. The `stop` parameter is exclusive, and the `start` and `step` arguments are optional. See the [list variant]({% link docs/preview/sql/functions/list.md %}#range) for the available argument combinations. |
+| **Example** | `range(2, 5)` |
+| **Result** | 3 rows: `2, 3, 4` |
+
+#### `repeat(value, count)`
+
+<div class="nostroke_table"></div>
+
+| **Description** | Returns a table with `count` rows, each containing `value`. |
+| **Example** | `repeat('foo', 3)` |
+| **Result** | 3 rows of `'foo'` |
+
 #### `repeat_row(varargs, num_rows)`
 
 <div class="nostroke_table"></div>
@@ -482,3 +528,11 @@ A [table function]({% link docs/preview/sql/query_syntax/from.md %}#table-functi
 | **Description** | Returns a table with `num_rows` rows, each containing the fields defined in `varargs`. |
 | **Example** | `repeat_row(1, 2, 'foo', num_rows = 3)` |
 | **Result** | 3 rows of `1, 2, 'foo'` |
+
+#### `unnest(list)`
+
+<div class="nostroke_table"></div>
+
+| **Description** | Returns a table with one row per element of `list`. See [Unnesting]({% link docs/preview/sql/query_syntax/unnest.md %}) for details, including recursive unnesting of nested lists and structs. |
+| **Example** | `unnest([1, 2, 3])` |
+| **Result** | 3 rows: `1, 2, 3` |

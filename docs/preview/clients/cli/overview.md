@@ -137,6 +137,16 @@ These include the default `duckbox` mode, `csv` and `json` mode for ingestion by
 By default, the DuckDB CLI sends results to the terminal's standard output. However, this can be modified using either the `.output` or `.once` commands.
 For details, see the documentation for the [output dot command]({% link docs/preview/clients/cli/dot_commands.md %}#output-writing-results-to-a-file).
 
+#### Displaying Function Documentation
+
+The `.manual` command shows the signatures, description and examples of a SQL function:
+
+```sql
+.manual regexp_extract
+```
+
+For details, see the documentation for the [manual dot command]({% link docs/preview/clients/cli/dot_commands.md %}#displaying-function-documentation).
+
 #### Reading SQL from a File
 
 The DuckDB CLI can read both SQL commands and dot commands from an external file instead of the terminal using the `.read` command. This allows for a number of commands to be run in sequence and allows command sequences to be saved and reused.

@@ -2,12 +2,13 @@
 layout: post
 title: "Steam Deck"
 date: 2025-03-04
-author: "Alejandro Wainzinger"
-thumb: "/images/everywhere/thumbs/steam-deck.jpg"
-image: "/images/everywhere/thumbs/steam-deck.jpg"
+authors:
+  - Alejandro Wainzinger
+thumb: "/images/everywhere/thumbs/steam-deck.png"
+image: "/images/everywhere/thumbs/steam-deck.png"
 excerpt: ""
-tags: ["Other"]
-thirdparty: true
+tag: other
+category: community
 ---
 
 DuckDB runs on the [Steam Deck](https://store.steampowered.com/steamdeck), as shown [on](https://bsky.app/profile/xevix.bsky.social/post/3lj5buuj4xk2v) [Bluesky](https://bsky.app/profile/xevix.bsky.social/post/3ljjtctagqk2l).

@@ -62,6 +62,10 @@
               ]
             },
             {
+              "page": "IO",
+              "url": "io"
+            },
+            {
               "page": "JSON Files",
               "slug": "json",
               "subsubfolderitems": [
@@ -1230,6 +1234,10 @@
                   "url": "s3api"
                 },
                 {
+                  "page": "S3 and AWS Authentication",
+                  "url": "authentication"
+                },
+                {
                   "page": "Legacy Authentication Scheme for S3 API",
                   "url": "s3api_legacy_authentication"
                 }
@@ -1606,6 +1614,10 @@
                   "url": "duckdb_over_https_or_s3"
                 },
                 {
+                  "page": "Share a Views-Only Database",
+                  "url": "duckdb_views_only"
+                },
+                {
                   "page": "Fastly Object Storage Import",
                   "url": "fastly_object_storage_import"
                 },
@@ -1878,6 +1890,10 @@
             {
               "page": "Overview",
               "url": "overview"
+            },
+            {
+              "page": "Backup Extension Repositories",
+              "url": "backup_extension_repositories"
             },
             {
               "page": "DuckDB's Footprint",

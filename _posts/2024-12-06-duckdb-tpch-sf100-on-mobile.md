@@ -1,11 +1,14 @@
 ---
 layout: post
 title: "DuckDB: Running TPC-H SF100 on Mobile Phones"
-author: "Gábor Szárnyas, Laurens Kuiper, Hannes Mühleisen"
+authors:
+  - Gábor Szárnyas
+  - Laurens Kuiper
+  - Hannes Mühleisen
 thumb: "/images/blog/thumbs/mobile-benchmarks.svg"
 image: "/images/blog/thumbs/mobile-benchmarks.png"
 excerpt: "DuckDB runs on mobile platforms such as iOS and Android, and completes the TPC-H benchmark faster than state-of-the-art research systems on big iron machines 20 years ago."
-tags: ["benchmark"]
+tag: benchmark
 ---
 
 A few weeks ago, we set out to perform a series of experiments to answer two simple questions:

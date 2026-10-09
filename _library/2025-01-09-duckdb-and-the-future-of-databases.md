@@ -1,14 +1,15 @@
 ---
 layout: post
 title: "DuckDB and the Future of Databases"
-author: Hannes Mühleisen
-thumb: "/images/library/thumbs/2025-01-09-duckdb-and-the-future-of-databases.jpg"
-image: "/images/library/thumbs/2025-01-09-duckdb-and-the-future-of-databases.jpg"
-tags: ["Podcast"]
+authors:
+  - Hannes Mühleisen
+thumb: "/images/library/thumbs/2025-01-09-duckdb-and-the-future-of-databases.png"
+image: "/images/library/thumbs/2025-01-09-duckdb-and-the-future-of-databases.png"
+tag: podcast
+category: core
 length: "60 min"
-thirdparty: false
 excerpt: ""
-pill: "Posit – Data Science Hangout"
+venue: "Posit – Data Science Hangout"
 redirect_from:
 - /media/duckdb-and-the-future-of-databases
 ---

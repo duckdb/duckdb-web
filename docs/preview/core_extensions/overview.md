@@ -43,3 +43,13 @@ The **Maintainer** column denotes whether the extension is maintained by the Duc
 For the extensions maintained by the DuckDB team, the **Support tier** column denotes the extension's support status.
 _Primary extensions_ are covered by [community support](https://ducklabs.com/community_support_policy/).
 _Secondary extensions_ are supported on a best-effort basis. That said, they still receive frequent bugfixes/updates and are shipped with new DuckDB releases.
+
+## Backup Repository
+
+The `core` repository is mirrored at `http://extensions.duckdb-backup.org`. If `extensions.duckdb.org` is unavailable, DuckDB automatically falls back to the backup server. To use the backup server manually, run:
+
+```sql
+SET custom_extension_repository = 'http://extensions.duckdb-backup.org';
+```
+
+For details, see [Backup Extension Repositories]({% link docs/preview/operations_manual/backup_extension_repositories.md %}).

@@ -8,7 +8,7 @@ excerpt: |
 extension:
   name: raster
   description: DuckDB extension for reading and writing geospatial raster data using SQL.
-  version: 1.6.1
+  version: 1.6.2
   language: C++
   build: cmake
   excluded_platforms: "wasm_mvp;wasm_eh;wasm_threads"
@@ -18,7 +18,7 @@ extension:
 
 repo:
   github: ahuarte47/duckdb-raster
-  ref: e6a1d39c2f5fff58e6a735aeccbc5a9815a786a3
+  ref: cc1503eb8007fe8d2b288845eb9a55354172c594
 
 docs:
   hello_world: |
@@ -381,10 +381,10 @@ docs:
     - `GEOMETRY_COLUMN`: The name of the column that contains the geometry of the tiles. This column will be used to determine the spatial location and the resolution of the tiles in the output raster file.
     - `DATABAND_COLUMNS`: A list with the names of the columns that contain the data of the bands. The order of the columns in the list will determine the order of the bands in the output raster file.
 
-extension_star_count: 58
-extension_star_count_pretty: 58
-extension_download_count: 950
-extension_download_count_pretty: 950
+extension_star_count: 59
+extension_star_count_pretty: 59
+extension_download_count: 1146
+extension_download_count_pretty: 1.1k
 image: '/images/community_extensions/social_preview/preview_community_extension_raster.png'
 layout: community_extension_doc
 ---

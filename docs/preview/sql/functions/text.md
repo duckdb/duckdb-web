@@ -720,7 +720,7 @@ This section describes functions and operators for examining and manipulating [`
 
 <div class="nostroke_table"></div>
 
-| **Description** | Strips accents from `string`. |
+| **Description** | Strips accents from `string`. Only combining diacritical marks are removed. Characters that are distinct letters in their own right rather than accented variants, such as `ø`, `ł`, and `ß`, are left unchanged (e.g., `strip_accents('großmøller')` returns `großmøller`). |
 | **Example** | `strip_accents('mühleisen')` |
 | **Result** | `muhleisen` |
 

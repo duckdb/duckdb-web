@@ -1,13 +1,17 @@
 ---
 layout: post
 title: "Practical Spreadsheet Parsing with SheetReader"
-author: "Haralampos Gavriilidis, Felix Henze, Joel Ziegler, Jonas Benn, Eleni Tzirita Zacharatou, Volker Markl"
-thumb: "/images/library/thumbs/edbt.svg"
-image: "/images/library/thumbs/edbt.jpg"
-tags: ["Paper"]
+authors:
+  - Haralampos Gavriilidis
+  - Felix Henze
+  - Joel Ziegler
+  - Jonas Benn
+  - Eleni Tzirita Zacharatou
+  - Volker Markl
+tag: paper
 category: community
 excerpt: ""
-pill: "EDBT 2026"
+venue: "EDBT 2026"
 ---
 
 | | |

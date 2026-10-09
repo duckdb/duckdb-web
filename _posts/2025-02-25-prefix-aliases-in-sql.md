@@ -1,11 +1,12 @@
 ---
 layout: post
 title: "Prefix Aliases in SQL"
-author: "Hannes Mühleisen"
+authors:
+  - Hannes Mühleisen
 excerpt: "You can now put your aliases first in DuckDB's SQL dialect with a colon, e.g., `SELECT a: 42;`"
 thumb: "/images/blog/thumbs/prefix-aliases.svg"
 image: "/images/blog/thumbs/prefix-aliases.png"
-tags: ["using DuckDB"]
+tag: using-duckdb
 redirect_from:
 - /cal/1
 - /cal/01

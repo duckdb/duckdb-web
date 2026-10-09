@@ -1,10 +1,12 @@
 ---
 layout: post
 title: "Runtime-Extensible SQL Parsers Using PEG"
-author: Hannes Mühleisen, Mark Raasveldt
+authors:
+  - Hannes Mühleisen
+  - Mark Raasveldt
 thumb: "/images/blog/thumbs/ast.svg"
 image: "/images/blog/thumbs/ast.png"
-tags: ["deep dive"]
+tag: deep-dive
 excerpt: "Despite their central role in processing queries, parsers have not received any noticeable attention in the data systems space. State-of-the art systems are content with ancient old parser generators. These generators create monolithic, inflexible and unforgiving parsers that hinder innovation in query languages and frustrate users. Instead, parsers should be rewritten using modern abstractions like Parsing Expression Grammars (PEG), which allow dynamic changes to the accepted query syntax and better error recovery. In this post, we discuss how parsers could be re-designed using PEG, and validate our recommendations using experiments for both effectiveness and efficiency."
 ---
 

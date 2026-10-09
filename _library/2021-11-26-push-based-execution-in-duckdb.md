@@ -1,14 +1,15 @@
 ---
 layout: post
 title: "Push-Based Execution in DuckDB"
-author: Mark Raasveldt
-thumb: "/images/library/thumbs/2021-11-26-push-based-execution-in-duckdb.jpg"
-image: "/images/library/thumbs/2021-11-26-push-based-execution-in-duckdb.jpg"
-tags: ["Talk"]
+authors:
+  - Mark Raasveldt
+thumb: "/images/library/thumbs/2021-11-26-push-based-execution-in-duckdb.png"
+image: "/images/library/thumbs/2021-11-26-push-based-execution-in-duckdb.png"
+tag: talk
+category: core
 length: "20 min"
-thirdparty: false
 excerpt: ""
-pill: "Dutch Seminar on Data Systems Design"
+venue: "Dutch Seminar on Data Systems Design"
 redirect_from:
 - /media/push-based-execution-in-duckdb
 ---

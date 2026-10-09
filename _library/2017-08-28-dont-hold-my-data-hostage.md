@@ -1,11 +1,13 @@
 ---
 layout: post
 title: "Don't Hold My Data Hostage – A Case for Client Protocol Redesign"
-author: "Mark Raasveldt, Hannes Mühleisen"
-tags: ["Paper"]
-thirdparty: false
+authors:
+  - Mark Raasveldt
+  - Hannes Mühleisen
+tag: paper
+category: core
 excerpt: ""
-pill: "VLDB 2017"
+venue: "VLDB 2017"
 ---
 
 |-------|-------|

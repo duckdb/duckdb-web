@@ -19,12 +19,12 @@ extension:
 repo:
   andium: 7680a4be752c2f0c09046eabacc384e0df66134a
   github: query-farm/hashfuncs
-  ref: 0dec80693d1d7cd550fbefb7a39a5920a4b830bd
+  ref: 741f1cfd28826aa63d1d28f1216a7d7cf39b2849
 
-extension_star_count: 14
-extension_star_count_pretty: 14
-extension_download_count: 56965
-extension_download_count_pretty: 57.0k
+extension_star_count: 15
+extension_star_count_pretty: 15
+extension_download_count: 55259
+extension_download_count_pretty: 55.3k
 image: '/images/community_extensions/social_preview/preview_community_extension_hashfuncs.png'
 layout: community_extension_doc
 ---
@@ -64,7 +64,7 @@ LOAD {{ page.extension.name }};
 | xxh32               | scalar        | Computes a 32-bit xxHash (XXH32) non-cryptographic hash of the input with a seed                                                                                                 | NULL    | [xxh32('hello', 42)]               |
 | xxh3_128            | scalar        | Computes a 128-bit xxHash3 (XXH3_128) non-cryptographic hash of the input                                                                                                        | NULL    | [xxh3_128('hello')]                |
 | xxh3_128            | scalar        | Computes a 128-bit xxHash3 (XXH3_128) non-cryptographic hash of the input with a seed                                                                                            | NULL    | [xxh3_128('hello', 42)]            |
-| xxh3_128_hex        | scalar        | Computes a 128-bit xxHash3 hash and returns it as a 32-character lowercase hex string in canonical byte order (low64 \|\| high64), matching Python xxhash.xxh3_128().hexdigest() | NULL    | [xxh3_128_hex('hello')]            |
+| xxh3_128_hex        | scalar        | Computes a 128-bit xxHash3 hash and returns it as a 32-character lowercase hex string in canonical byte order (high64 \|\| low64), matching Python xxhash.xxh3_128().hexdigest() | NULL    | [xxh3_128_hex('hello')]            |
 | xxh3_128_hex        | scalar        | Computes a 128-bit xxHash3 hash with a seed and returns it as a 32-character lowercase hex string in canonical byte order                                                        | NULL    | [xxh3_128_hex('hello', 42)]        |
 | xxh3_128_hex        | scalar        | NULL                                                                                                                                                                             | NULL    |                                    |
 | xxh3_64             | scalar        | Computes a 64-bit xxHash3 (XXH3_64) non-cryptographic hash of the input with a seed                                                                                              | NULL    | [xxh3_64('hello', 42)]             |

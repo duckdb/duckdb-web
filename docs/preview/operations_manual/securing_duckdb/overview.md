@@ -186,6 +186,8 @@ With this configuration, `memory_limit` and `threads` can still be changed, whil
 
 [Secrets]({% link docs/preview/configuration/secrets_manager.md %}) are used to manage credentials to log into third party services like AWS or Azure. DuckDB can show a list of secrets using the `duckdb_secrets()` table function. This will redact any sensitive information such as security keys by default. The `allow_unredacted_secrets` option can be set to show all information contained within a security key. It is recommended not to turn on this option if you are running untrusted SQL input.
 
+> The `allow_unredacted_secrets` option can only be set when the database is instantiated. It cannot be changed at runtime. Setting it with `SET` after the database is running fails with `Cannot change allow_unredacted_secrets setting while database is running`. Provide it as a startup configuration option instead, for example via the `config` argument when connecting from a client.
+
 Queries can access the secrets defined in the Secrets Manager. For example, if there is a secret defined to authenticate with a user, who has write privileges to a given AWS S3 bucket, queries may write to that bucket. This is applicable for both persistent and temporary secrets.
 
 [Persistent secrets]({% link docs/preview/configuration/secrets_manager.md %}#persistent-secrets) are stored in unencrypted binary format on the disk. These have the same permissions as SSH keys, `600`, i.e., only the user who is running the DuckDB (parent) process can read and write them.

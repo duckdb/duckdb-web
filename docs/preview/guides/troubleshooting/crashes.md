@@ -28,9 +28,26 @@ There are a few major types of crashes:
   The database must be restarted prior to being used again.
   ```
 
-* **Out of memory errors:** A DuckDB crash can also be a symptom of the operating system killing the process.
+* **Out of memory errors:** In rare cases, DuckDB can crash due to memory exhaustion. This crash can also be a symptom of the operating system killing the process.
   For example, many Linux distributions run an [OOM reaper or OOM killer process](https://learn.redhat.com/t5/Platform-Linux/Out-of-Memory-Killer/td-p/48828), which kills processes to free up their memory and thus prevents the operating system from running out of memory.
-  If your DuckDB session is killed by the OOM reaper, consult the [“OOM errors” page]({% link docs/preview/guides/troubleshooting/oom_errors.md %})
+  If your DuckDB session runs out of memory, consult the [“OOM errors” page]({% link docs/preview/guides/troubleshooting/oom_errors.md %}).
+
+* **Corrupted database or WAL file:** DuckDB displays the following error:
+
+  ```console
+  Corrupt database file: computed checksum [...] does not match stored checksum [...] in block at location [...]
+  ```
+
+  If the WAL file gets corrupted, DuckDB will display:
+
+  ```console
+  Failure while replaying WAL file "[...].wal":
+  Corrupt WAL file: entry at byte position [...] computed checksum [...] does not match stored checksum [...]
+  ```
+
+  Similarly to internal errors, calls to a database after encountering these errors will return a `FATAL error`.
+
+  Most often the checksum error is the symptom of a faulty disk. If you encounter such an error with DuckDB, please run a disk check on the machine and attempt to can reproduce the issue on different computers. If you can reproduce the issue on different setups, report it in the [issue tracker](https://github.com/duckdb/duckdb/issues).
 
 ## Recovering Data
 

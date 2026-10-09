@@ -7,7 +7,7 @@ title: query and query_table Functions
 ---
 
 The [`query_table`]({% link docs/current/sql/functions/utility.md %}#query_tabletbl_name)
-and [`query`]({% link docs/current/sql/functions/utility.md %}#queryquery_string_literal)
+and [`query`]({% link docs/current/sql/functions/utility.md %}#queryquery_string)
 functions enable powerful and more dynamic SQL.
 
 The `query_table` function returns the table whose name is specified by its string argument; the `query` function returns the table obtained by executing the query specified by its string argument.

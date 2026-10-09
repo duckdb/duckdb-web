@@ -2,12 +2,13 @@
 layout: post
 title: "BananaPi F3 (RISC-V)"
 date: 2026-03-19
-author: "Bruno Verachten"
-thumb: "/images/everywhere/thumbs/bananapi-f3.jpg"
-image: "/images/everywhere/thumbs/bananapi-f3.jpg"
+authors:
+  - Bruno Verachten
+thumb: "/images/everywhere/thumbs/bananapi-f3.png"
+image: "/images/everywhere/thumbs/bananapi-f3.png"
 excerpt: ""
-tags: ["Other"]
-thirdparty: true
+tag: other
+category: community
 ---
 
 DuckDB runs natively on the BananaPi F3, a $100 RISC-V single-board computer powered by the SpacemiT K1 SoC (8 cores @ 1.6 GHz, rv64gc, 16 GB RAM).

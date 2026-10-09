@@ -1,15 +1,16 @@
 ---
 layout: post
 title: "AWS Acquires DuckLabs (Ep 90)"
-author: "Matt Housley and Tony Baer"
+authors:
+  - Matt Housley
+  - Tony Baer
 #thumb: "/images/library/thumbs/2026-08-26-its-about-data-aws-acquires-ducklabs.jpg"
 #image: "/images/library/thumbs/2026-08-26-its-about-data-aws-acquires-ducklabs.jpg"
-tags: ["Podcast"]
+tag: podcast
 length: "24 min"
 category: community
 excerpt: ""
-pill: "It's About Data by dbInsight"
-thirdparty: true
+venue: "It's About Data by dbInsight"
 ---
 
 <div class="video-container">

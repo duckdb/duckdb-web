@@ -6,14 +6,14 @@ title: PHP Client (PDO)
 
 > The PHP DuckDB PDO extension is a tertiary client and is maintained by a third-party.
 >
-> To use `pdo_duckdb`, follow the [instructions below](#installation).
+> To use `pdo_duckdb`, follow the [instructions below](#installation-and-setup).
 >
 > The latest version of `pdo_duckdb` supports DuckDB {{ site.current_duckdb_php_version }}.
 
-`pdo_duckdb` is a native DuckDB database driver for the [PHP Data Objects (PDO)](https://www.php.net/manual/en/book.pdo.php) interface.
+[pdo_duckdb](https://github.com/thomas-0816/pdo-duckdb-php) is a native DuckDB database driver for the [PHP Data Objects (PDO)](https://www.php.net/manual/en/book.pdo.php) interface.
 
 Any application or framework compatible with PDO can directly use `pdo_duckdb`.\
-It is thread safe and fully tested with FrankenPHP (PHP-ZTS), TrueAsync and Swoole.
+It is thread safe and fully tested with php-cli, php-fpm, mod_php, FrankenPHP (PHP-ZTS), TrueAsync and Swoole.
 
 As a native PHP extension, it is implemented in C/C++ and does not require PHP FFI or preloading.\
 The [release packages](https://github.com/thomas-0816/pdo-duckdb-php/releases/latest) contain pre-compiled binaries for all supported platforms and DuckDB is directly included.\
@@ -21,7 +21,7 @@ DuckDB extensions work the same way as they do in DuckDB CLI.
 
 Supported PHP versions: [8.2 or newer](https://www.php.net/supported-versions.php)
 
-Operating systems: Ubuntu 24+, Debian 12+, Fedora 42+, openSUSE 16+, AmazonLinux 2023+, Wolfi OS, Windows Server 2022+ (x64), macOS 14+ (arm64)
+Operating systems: Ubuntu 22+, Debian 12+, Fedora 42+, openSUSE 16+, AmazonLinux 2023+, Arch, Alma, Rocky, Alpine, Wolfi OS, Windows Server 2022+ (x64) and macOS 15+ (arm64)
 
 All DuckDB types are supported:\
 Text, Numeric, Date, Time, Interval, JSON, Array, Struct, Map, List, Enum, Variant, Geometry, Union, Bitstring, Blob and Boolean
@@ -30,7 +30,7 @@ GitHub: [pdo-duckdb-php](https://github.com/thomas-0816/pdo-duckdb-php)
 
 Packagist: [pdo-duckdb-php](https://packagist.org/packages/thomas-0816/pdo-duckdb-php)
 
-## Installation
+## Installation and setup
 
 `pdo_duckdb` is fully compatible with the PHP Installer for Extensions ([PIE](https://github.com/php/pie)) and can be installed with:
 
@@ -49,6 +49,19 @@ php -r 'print_r((new PDO("duckdb::memory:"))->query("SELECT 42 as n")->fetch(PDO
 # (
 #     [n] => 42
 # )
+```
+
+## Installation and load on demand
+
+```bash
+pie install --skip-enable-extension thomas-0816/pdo-duckdb-php
+```
+
+Testing:
+
+```php
+php -d extension=pdo_duckdb -m | grep duckdb
+php -d extension=pdo_duckdb -r 'print_r((new PDO("duckdb::memory:"))->query("SELECT 42 as n")->fetch(PDO::FETCH_ASSOC));'
 ```
 
 ## Integration into Laravel & Symfony
@@ -238,3 +251,5 @@ print_r($statement->fetch(PDO::FETCH_ASSOC));
 #     [id] => 1
 # )
 ```
+
+More examples can be found in the [readme](https://github.com/thomas-0816/pdo-duckdb-php).

@@ -8,7 +8,7 @@ excerpt: |
 extension:
   name: fusion_scanner
   description: Query Oracle Fusion from DuckDB through BI Publisher, with SSO, an ATTACH-able catalog and cached metadata
-  version: 0.3.0
+  version: 0.3.1
   language: C++
   build: cmake
   license: MIT
@@ -19,7 +19,7 @@ extension:
 
 repo:
   github: krokozyab/ofquack
-  ref: 8490c817869f4049b9372e9520cf081a4c80f5b4
+  ref: 6850e13b516756a3872714a0118dd380788ff7b9
 
 docs:
   hello_world: |
@@ -48,7 +48,8 @@ docs:
 
     That detour requires a report deployed on the Fusion side — `DM_ARB.xdm`
     and `RP_ARB.xdo`, taking a `p_sql` parameter. The extension cannot work
-    against a stock instance. See the repository for the catalog archives.
+    against a stock instance. The repository's README links the catalog
+    archives, which live in the ofjdbc repository.
 
     Read-only by construction: BI Publisher cannot write.
 
@@ -71,8 +72,8 @@ docs:
 
 extension_star_count: 7
 extension_star_count_pretty: 7
-extension_download_count: 640
-extension_download_count_pretty: 640
+extension_download_count: 840
+extension_download_count_pretty: 840
 image: '/images/community_extensions/social_preview/preview_community_extension_fusion_scanner.png'
 layout: community_extension_doc
 ---
@@ -98,18 +99,18 @@ LOAD {{ page.extension.name }};
 
 <div class="extension_functions_table"></div>
 
-|          function_name          | function_type | description | comment | examples |
-|---------------------------------|---------------|-------------|---------|----------|
-| fusion_scanner_cache_invalidate | table         | NULL        | NULL    |          |
-| fusion_scanner_cache_status     | table         | NULL        | NULL    |          |
-| fusion_scanner_cache_warm       | table         | NULL        | NULL    |          |
-| fusion_scanner_sso_login        | table         | NULL        | NULL    |          |
-| fusion_scanner_sso_logout       | table         | NULL        | NULL    |          |
-| fusion_scanner_sso_status       | table         | NULL        | NULL    |          |
-| fusion_scanner_version          | scalar        | NULL        | NULL    |          |
-| oracle_fusion_columns           | table         | NULL        | NULL    |          |
-| oracle_fusion_query             | table         | NULL        | NULL    |          |
-| oracle_fusion_tables            | table         | NULL        | NULL    |          |
+|          function_name          | function_type |                                                                                 description                                                                                 | comment |                                                        examples                                                         |
+|---------------------------------|---------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------|---------|-------------------------------------------------------------------------------------------------------------------------|
+| fusion_scanner_cache_invalidate | table         | Removes an instance's dictionary from the metadata cache, or only one table's columns when table_name is given.                                                             | NULL    | [SELECT * FROM fusion_scanner_cache_invalidate(table_name := 'AP_INVOICES_ALL')]                                        |
+| fusion_scanner_cache_status     | table         | Reports where the Oracle Fusion metadata cache lives, whether it can be written, and how much of an instance's dictionary it holds.                                         | NULL    | [SELECT * FROM fusion_scanner_cache_status()]                                                                           |
+| fusion_scanner_cache_warm       | table         | Fetches into the metadata cache the columns of Fusion tables whose names match pattern, a case-insensitive LIKE, up to max_tables of them (200 by default, 0 for no limit). | NULL    | [SELECT * FROM fusion_scanner_cache_warm(pattern := 'AP\_%')]                                                           |
+| fusion_scanner_sso_login        | table         | Signs in to Oracle Fusion through a browser window and caches the token for the host, reusing a still-valid token unless force := true.                                     | NULL    | [SELECT * FROM fusion_scanner_sso_login()]                                                                              |
+| fusion_scanner_sso_logout       | table         | Forgets the sign-in token this process holds for the Fusion host; the browser profile, and the session it keeps, is left alone.                                             | NULL    | [SELECT * FROM fusion_scanner_sso_logout()]                                                                             |
+| fusion_scanner_sso_status       | table         | Reports whether a sign-in token is cached for the Fusion host and when it expires, without ever returning the token itself.                                                 | NULL    | [SELECT * FROM fusion_scanner_sso_status()]                                                                             |
+| fusion_scanner_version          | scalar        | Returns the loaded fusion_scanner version and the date and time it was built.                                                                                               | NULL    | [fusion_scanner_version()]                                                                                              |
+| oracle_fusion_columns           | table         | Lists the columns of a Fusion table or view with their Oracle type, the DuckDB type they map to, and whether that mapping can lose values.                                  | NULL    | [SELECT * FROM oracle_fusion_columns('AP_INVOICES_ALL')]                                                                |
+| oracle_fusion_query             | table         | Runs a SQL query in Oracle Fusion through the BI Publisher report and returns its rows, paging the result and inferring column types from the first page.                   | NULL    | [SELECT * FROM oracle_fusion_query('SELECT invoice_num, invoice_amount FROM ap_invoices_all FETCH FIRST 10 ROWS ONLY')] |
+| oracle_fusion_tables            | table         | Lists the tables and views in Oracle Fusion's dictionary, caching the list on disk after the first call.                                                                    | NULL    | [SELECT * FROM oracle_fusion_tables()]                                                                                  |
 
 ### Overloaded Functions
 

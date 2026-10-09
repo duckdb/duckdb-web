@@ -1,14 +1,15 @@
 ---
 layout: post
 title: "DuckDB in Research S01E05: Haralampos Gavriilidis"
-author: "Disseminate Podcast Series by Jack Waudby"
-thumb: "/images/library/thumbs/2025-04-17-haralampos-gavriilidis-sheetreader.jpg"
-image: "/images/library/thumbs/2025-04-17-haralampos-gavriilidis-sheetreader.jpg"
-tags: ["Podcast"]
+authors:
+  - Disseminate Podcast Series by Jack Waudby
+thumb: "/images/library/thumbs/2025-04-17-haralampos-gavriilidis-sheetreader.png"
+image: "/images/library/thumbs/2025-04-17-haralampos-gavriilidis-sheetreader.png"
+tag: podcast
 length: "40 min"
 category: community
 excerpt: ""
-pill: "DuckDB in Research"
+venue: "DuckDB in Research"
 episode: "S01E05"
 ---
 
