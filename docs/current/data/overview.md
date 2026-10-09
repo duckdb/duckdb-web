@@ -2,7 +2,6 @@
 layout: docu
 redirect_from:
 - /docs/data/overview
-- /docs/preview/data/overview
 - /docs/stable/data/overview
 title: Importing Data
 ---
@@ -115,6 +114,21 @@ Since DuckDB v1.3.0, the CSV, JSON and Parquet readers support the `filename` vi
 COPY (FROM (VALUES (42), (43)) t(x)) TO 'test.parquet';
 SELECT *, filename FROM 'test.parquet';
 ```
+
+### Returning the File Index
+
+The CSV, JSON and Parquet readers also support the `file_index` virtual column, which returns the zero-based index of the file that each row came from, in the order the files were read:
+
+```sql
+COPY (FROM (VALUES (42)) t(x)) TO 'a.parquet';
+COPY (FROM (VALUES (43)) t(x)) TO 'b.parquet';
+SELECT x, file_index FROM read_parquet(['a.parquet', 'b.parquet']);
+```
+
+| x  | file_index |
+|---:|-----------:|
+| 42 | 0          |
+| 43 | 1          |
 
 ## Appender
 

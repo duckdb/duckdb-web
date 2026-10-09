@@ -2,7 +2,6 @@
 layout: docu
 railroad: statements/indexes.js
 redirect_from:
-- /docs/preview/sql/indexes
 - /docs/sql/indexes
 - /docs/stable/sql/indexes
 title: Indexes

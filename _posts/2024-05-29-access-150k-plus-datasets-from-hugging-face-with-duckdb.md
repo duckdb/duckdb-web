@@ -1,11 +1,12 @@
 ---
 layout: post
 title: "Access 150k+ Datasets from Hugging Face with DuckDB"
-author: The Hugging Face and DuckDB teams
+authors:
+  - The Hugging Face and DuckDB teams
 thumb: "/images/blog/thumbs/hugging-face.svg"
 image: "/images/blog/thumbs/hugging-face.png"
 excerpt: "DuckDB can now read data from [Hugging Face](https://huggingface.co/) via the `hf://` prefix."
-tags: ["extensions"]
+tag: extensions
 ---
 
 We are excited to announce that we added support for `hf://` paths in DuckDB, providing access to more than 150,000 datasets for artificial intelligence. We worked with Hugging Face to democratize the access, manipulation, and exploration of datasets used to train and evaluate AI models.

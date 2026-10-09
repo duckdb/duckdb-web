@@ -5,7 +5,6 @@ redirect_from:
 - /docs/api/python
 - /docs/api/python/overview
 - /docs/clients/python/overview
-- /docs/preview/clients/python/overview
 - /docs/stable/clients/python/overview
 title: Python API
 ---
@@ -19,7 +18,7 @@ title: Python API
 The DuckDB Python API can be installed using [pip](https://pip.pypa.io): `pip install duckdb`. Please see the [installation page]({% link install/index.html %}?environment=python) for details. It is also possible to install DuckDB using [conda](https://docs.conda.io): `conda install python-duckdb -c conda-forge`.
 
 **Python version:**
-DuckDB requires Python 3.9 or newer.
+DuckDB requires Python 3.10 or newer.
 
 ## Basic API Usage
 
@@ -258,7 +257,7 @@ Avoid using `duckdb.sql()` or sharing a single connection across threads.
 
 #### About `cursor()` 
 
-A [`DuckDBPyConnection.cursor()` method]({% link docs/current/clients/python/reference/index.md %}#duckdb.DuckDBPyConnection.cursor) creates another handle on the same connection. It does not open a new connection. Therefore, all cursors created from one connection cannot run queries at the same time.
+A single `DuckDBPyConnection` object is not safe for concurrent use: calls on the same handle from multiple threads are serialized. The [`DuckDBPyConnection.cursor()` method]({% link docs/current/clients/python/reference/index.md %}#duckdb.DuckDBPyConnection.cursor) creates a new connection to the same database instance, with its own session settings and transaction context. Because cursors share the underlying instance but not their session state, they can execute queries in parallel. To run queries concurrently, create one cursor per thread.
 
 ### Community Extensions
 

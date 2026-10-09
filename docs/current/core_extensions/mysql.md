@@ -4,7 +4,6 @@ layout: docu
 redirect_from:
 - /docs/extensions/mysql
 - /docs/stable/extensions/mysql
-- /docs/preview/core_extensions/mysql
 - /docs/stable/core_extensions/mysql
 title: MySQL Extension
 ---

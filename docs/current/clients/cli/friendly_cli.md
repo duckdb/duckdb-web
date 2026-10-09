@@ -1,7 +1,6 @@
 ---
 layout: docu
 redirect_from:
-- /docs/preview/clients/cli/friendly
 - /docs/stable/clients/cli/friendly_cli
 title: Friendly CLI
 ---
@@ -25,6 +24,16 @@ To use a mix of colors suitable for both dark and light backgrounds:
 
 ```sql
 .highlight_mode mixed
+```
+
+The mode can also be selected when launching the CLI using the `-dark-mode` and `-light-mode` [command line arguments]({% link docs/current/clients/cli/arguments.md %}):
+
+```batch
+duckdb -dark-mode
+```
+
+```batch
+duckdb -light-mode
 ```
 
 ## 8-Bit Colors

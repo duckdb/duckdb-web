@@ -4,17 +4,6 @@ import re
 import json
 from textwrap import shorten
 
-skipped_files = [
-    'docs/current',
-    'docs/1.3',
-    'docs/1.2',
-    'docs/1.1',
-    'docs/1.0',
-    'docs/0.10',
-    'docs/0.9',
-    'docs/0.8',
-]
-
 file_list = []
 skip_types = [marko.block.HTMLBlock, marko.inline.Image, marko.inline.InlineHTML]
 
@@ -77,8 +66,6 @@ def get_url(fname):
 
 
 def index_file(fname):
-    if fname in skipped_files:
-        return
     if not fname.endswith('.md'):
         return
     with open(fname, 'r') as f:
@@ -141,8 +128,6 @@ def index_file(fname):
 
 
 def index_dir(dirname):
-    if dirname in skipped_files:
-        return
     files = os.listdir(dirname)
     for file in files:
         full_path = os.path.join(dirname, file)
@@ -152,7 +137,9 @@ def index_dir(dirname):
             index_dir(full_path)
 
 
-index_dir('docs')
+# only index the current docs; other versions (lts, preview, archives) would
+# produce duplicate results pointing outside of /docs/current/
+index_dir('docs/current')
 index_dir('_posts')
 
 

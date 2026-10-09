@@ -54,69 +54,6 @@ body.documentation {
         }
     }
 
-    // Banner styles
-    .banner {
-
-        &.lts,
-        &.preview,
-        &.nightly,
-        &.outdated {
-            .content {
-                display: flex;
-                column-gap: 20px;
-                align-items: center;
-            }
-
-            .icon {
-                width: 16px;
-                height: 16px;
-                flex-shrink: 0;
-            }
-
-            a {
-                font-size: 13px;
-                padding: 4px 9px;
-                border: 1px solid white;
-                border-radius: var(--page-radius-pill);
-                white-space: nowrap;
-                transition: all .3s;
-
-                &:hover {
-                    background: white;
-                    color: $purple;
-                    text-decoration: none;
-                }
-            }
-        }
-
-        &.lts span,
-        &.lts .icon {
-            color: #00C770;
-        }
-
-        &.preview span,
-        &.preview .icon,
-        &.nightly span,
-        &.nightly .icon {
-            color: var(--orange-50, #FF6900);
-        }
-
-        &.outdated span,
-        &.outdated .icon {
-            color: var(--doc-menu-info-deprecated-border-color, #7D66FF);
-        }
-    }
-
-    // Main banner positioning
-    main .banner {
-        top: 55px;
-        position: fixed;
-
-        .content {
-            padding-right: 35px;
-        }
-    }
-
     // Version select dropdown
     div.versionselect {
         position: relative;

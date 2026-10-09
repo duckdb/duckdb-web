@@ -2,7 +2,6 @@
 layout: docu
 redirect_from:
 - /docs/data/json/json_functions
-- /docs/preview/data/json/json_functions
 - /docs/stable/data/json/json_functions
 title: JSON Processing Functions
 tested: true
@@ -180,6 +179,37 @@ SELECT
     extracted_list[2] AS species
 FROM extracted;
 ```
+
+### Processing Extracted Arrays with Lambda Functions
+
+When a path with a wildcard such as `[*]` extracts a JSON array into a `LIST`, the result can be processed further with [lambda functions]({% link docs/current/sql/functions/lambda.md %}). For example, use `list_transform` to uppercase each extracted species name:
+
+```sql
+SELECT list_transform(j->>'$.species[*]', lambda s: upper(s)) AS names
+FROM example;
+```
+
+<div class="monospace_table"></div>
+
+| names                     |
+| ------------------------- |
+| [DUCK, GOOSE, SWAN, NULL] |
+
+To drop the `NULL` entries and combine the remaining names into a single string, chain `list_filter` and `list_reduce`:
+
+```sql
+SELECT list_reduce(
+    list_filter(j->>'$.species[*]', lambda s: s IS NOT NULL),
+    lambda acc, s: acc || ', ' || s
+) AS names
+FROM example;
+```
+
+<div class="monospace_table"></div>
+
+| names             |
+| ----------------- |
+| duck, goose, swan |
 
 ## JSON Scalar Functions
 

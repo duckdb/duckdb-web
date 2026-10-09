@@ -3,7 +3,6 @@ layout: docu
 redirect_from:
 - /docs/guides/import/s3_express_one
 - /docs/guides/network_cloud_storage/s3_express_one
-- /docs/preview/guides/network_cloud_storage/s3_express_one
 - /docs/stable/guides/network_cloud_storage/s3_express_one
 title: S3 Express One
 ---
@@ -72,7 +71,7 @@ FROM 's3://express-bucket-name--use1-az5--x-s3/my-file.parquet';
 
 ## Performance
 
-The following experiments were run on a `c7gd.12xlarge` instance using the [LDBC SF300 Comments `creationDate` Parquet file](https://blobs.duckdb.org/data/ldbc-sf300-comments-creationDate.parquet) (also used in the [microbenchmarks of the performance guide]({% link docs/current/guides/performance/benchmarks.md %}#data-sets)).
+The following experiments were run on a `c7gd.12xlarge` instance using the [LDBC SF300 Comments `creationDate` Parquet file](https://blobs.duckdb.org/data/ldbc-sf300-comments-creationDate.parquet) (also used in the [microbenchmarks of the performance guide]({% link docs/current/guides/performance/benchmarks.md %}#datasets)).
 
 | Experiment | File size | Runtime |
 |:-----|--:|--:|

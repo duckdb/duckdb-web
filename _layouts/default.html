@@ -78,8 +78,8 @@
 		<div class="headerline">
 			<div class="headercontent">
 				<div class="duckdbhome">
-					<a href="{{ site.url }}/">{% if page.body_class contains "duckcon" %}<img src="{% link images/events/duckcon7/duckcon7.svg %}" alt="DuckCon 7 Logo for Download" class="downloadlogo">{% else %}<img src="{% link images/designmanual/DuckDB_inline-lightmode.svg %}" alt="DuckDB Logo for Download" class="downloadlogo">{% endif %}</a>
-					{% if page.body_class contains "duckcon-sponsorship" %}<div id="duckcon_logo"></div>{% elsif page.body_class contains "duckcon" %}<div id="duckcon7_logo"></div>{% else %}<div id="duckdb_logo"></div>{% endif %}
+					<a href="{{ site.url }}/">{% if page.body_class contains "duckcon" %}<img src="{% link images/events/duckcon8/duckcon8.svg %}" alt="DuckCon #8 Logo" class="downloadlogo">{% else %}<img src="{% link images/designmanual/DuckDB_inline-lightmode.svg %}" alt="DuckDB Logo for Download" class="downloadlogo">{% endif %}</a>
+					{% if page.body_class contains "duckcon" %}<div id="duckcon8_logo"></div>{% else %}<div id="duckdb_logo"></div>{% endif %}
 				</div>
 				<div class="landingmenu">
 					
@@ -96,9 +96,7 @@
 					</div>
 				</div>
 				<div class="options">
-					{% if page.body_class contains "duckcon-sponsorship" %}
-						<a class="button yellow" href="mailto:hello@ducklabs.com?subject=DuckCon%20%238%20Sponsorship%20Inquiry">Sponsor DuckCon</a>
-					{% elsif page.body_class contains "duckcon" and page.duckcon_register_url %}
+					{% if page.body_class contains "duckcon" and page.duckcon_register_url %}
 						<a class="button yellow" href="{{ page.duckcon_register_url }}" target="_blank">Register for free</a>
 					{% else %}
 						<a class="button yellow" href="{% link community_support.md %}" target="_blank">Support</a>

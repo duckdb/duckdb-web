@@ -1,13 +1,12 @@
 ---
 layout: post
 title: "Spatial Data Management with DuckDB"
-author: "Qiusheng Wu"
-thumb: "/images/library/thumbs/spatial-data-management-with-duckdb.svg"
-image: "/images/library/thumbs/spatial-data-management-with-duckdb.png"
-tags: ["Book"]
+authors:
+  - Qiusheng Wu
+tag: book
 category: community
 excerpt: ""
-pill: "Spatial Data Management with DuckDB"
+venue: "Spatial Data Management with DuckDB"
 ---
 
 <div class="graphics-box">

@@ -1,7 +1,6 @@
 ---
 layout: docu
 redirect_from:
-- /docs/preview/sql/functions/numeric
 - /docs/sql/functions/numeric
 - /docs/stable/sql/functions/numeric
 - /docs/test/functions/math
@@ -280,6 +279,8 @@ The table below shows the available mathematical functions.
 | **Description** | See the `!` operator. Computes the product of the current integer and all integers below it. |
 | **Example** | `factorial(4)` |
 | **Result** | `24` |
+
+> Note In DuckDB v2.0, the `!` operator binds more tightly than in earlier versions. For example, `SELECT 2 * 3!;` now returns `12` (`2 * (3!)`), while in v1.5 it returned `720` (`(2 * 3)!`). Use parentheses to get the old behavior, e.g., `SELECT (2 * 3)!;`.
 
 #### `fdiv(x, y)`
 

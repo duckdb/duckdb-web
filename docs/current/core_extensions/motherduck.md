@@ -1,7 +1,6 @@
 ---
 layout: docu
 redirect_from:
-- /docs/preview/core_extensions/motherduck
 - /docs/stable/core_extensions/motherduck
 - /md
 - /motherduck
@@ -12,7 +11,7 @@ The `motherduck` extension allows connecting to [MotherDuck](https://motherduck.
 
 ## Installing and Loading
 
-The `motherduck` extension will be transparently [autoinstalled and autoloaded]({% link docs/current/core_extensions/overview.md %}#autoloading-extensions) on first use from the official extension repository.
+The `motherduck` extension will be transparently [autoinstalled and autoloaded]({% link docs/current/extensions/overview.md %}#autoloading-extensions) on first use from the official extension repository.
 If you would like to install and load it manually, you can use the `motherduck` extension name or the `md` shorthand:
 
 ```sql
@@ -30,7 +29,7 @@ ATTACH 'md:';
 
 ## Platforms
 
-The `motherduck` extension supports the following [platforms]({% link docs/current/dev/building/overview.md %}#supported-platforms):
+The `motherduck` extension supports the following [platforms]({% link docs/current/dev/building/overview.md %}#platforms):
 
 * `linux_amd64`
 * `linux_arm64`

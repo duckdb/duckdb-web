@@ -1,12 +1,13 @@
 ---
 layout: post
 title: "Anarchy in the Database: A Survey and Evaluation of Database Management System Extensibility"
-author: "Abigale Kim"
-tags: ["Talk"]
+authors:
+  - Abigale Kim
+tag: talk
+category: core
 length: "10 min"
-thirdparty: false
 excerpt: ""
-pill: "DuckDB in Science"
+venue: "DuckDB in Science"
 ---
 
 <div class="video-container">

@@ -1,11 +1,12 @@
 ---
 layout: post
 title: "Fully Local Data Transformation with dbt and DuckDB"
-author: Petrica Leuca
+authors:
+  - Petrica Leuca
 thumb: "/images/blog/thumbs/duckdb-dbt.svg"
 image: "/images/blog/thumbs/duckdb-dbt.png"
 excerpt: "In this post, we implement data transformation and reverse ETL pipelines with DuckDB and dbt using the `dbt-duckdb` adapter."
-tags: ["using DuckDB"]
+tag: using-duckdb
 ---
 
 ## Introduction

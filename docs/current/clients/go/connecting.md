@@ -2,7 +2,6 @@
 layout: docu
 redirect_from:
 - /docs/clients/go/connecting
-- /docs/preview/clients/go/connecting
 - /docs/stable/clients/go/connecting
 title: Connect
 ---

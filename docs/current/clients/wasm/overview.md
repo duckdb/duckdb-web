@@ -5,7 +5,6 @@ redirect_from:
 - /docs/api/wasm
 - /docs/api/wasm/overview
 - /docs/clients/wasm/overview
-- /docs/preview/clients/wasm/overview
 - /docs/stable/clients/wasm/overview
 title: DuckDB Wasm Client
 ---

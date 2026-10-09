@@ -2,7 +2,6 @@
 layout: docu
 redirect_from:
 - /docs/internals/vector
-- /docs/preview/internals/vector
 - /docs/stable/internals/vector
 - /internals/vector
 title: Execution Format
@@ -126,6 +125,28 @@ For example, consider this mock representation of a Vector of type `BIGINT[][]`:
          "type": "bigint",
          "data": "int64_t"
       }
+   }
+}
+```
+
+### Array Vectors
+
+[Array vectors]({% link docs/current/sql/data_types/array.md %}) store fixed-size lists.
+Unlike list vectors, they do not use per-row `list_entry_t` entries, because every row has the same, fixed number of elements.
+Instead, an array vector stores a single child Vector that holds the values of all rows laid out contiguously.
+The elements of row `i` occupy the child positions in the range `[i * array_size, (i + 1) * array_size)`, where `array_size` is the fixed length of the array type.
+
+Like list vectors, array vectors can be nested: the child of an array vector can itself be an array vector or a list vector.
+
+For example, consider this mock representation of a Vector of type `INTEGER[3]`:
+
+```json
+{
+   "type": "array",
+   "array_size": 3,
+   "child": {
+      "type": "integer",
+      "data": "int32_t"
    }
 }
 ```

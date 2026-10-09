@@ -3,7 +3,6 @@ layout: docu
 redirect_from:
 - /docs/guides/file_formats/parquet_export
 - /docs/guides/import/parquet_export
-- /docs/preview/guides/file_formats/parquet_export
 - /docs/stable/guides/file_formats/parquet_export
 title: Parquet Export
 ---

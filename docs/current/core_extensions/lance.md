@@ -3,7 +3,6 @@ github_repository: https://github.com/lance-format/lance-duckdb
 layout: docu
 redirect_from:
 - /community_extensions/extensions/lance
-- /docs/preview/core_extensions/lance
 - /docs/stable/core_extensions/lance
 title: Lance Extension
 ---
@@ -175,7 +174,7 @@ ORDER BY _hybrid_score DESC;
 
 ## Limitations
 
-The `lance` extension is currently available for the following [platforms]({% link docs/current/dev/building/overview.md %}#supported-platforms):
+The `lance` extension is currently available for the following [platforms]({% link docs/current/dev/building/overview.md %}#platforms):
 
 - `linux_amd64`
 - `linux_arm64`

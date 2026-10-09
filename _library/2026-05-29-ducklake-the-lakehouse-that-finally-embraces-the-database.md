@@ -1,11 +1,12 @@
 ---
 layout: post
 title: "DuckLake: The Lakehouse That Finally Embraces the Database"
-author: "Graziano Montanaro"
-tags: ["Talk"]
+authors:
+  - Graziano Montanaro
+tag: talk
 category: community
 excerpt: ""
-pill: "PyCon Italia 2026"
+venue: "PyCon Italia 2026"
 ---
 
 <div class="video-container">

@@ -1,7 +1,6 @@
 ---
 layout: docu
 redirect_from:
-- /docs/preview/core_extensions/iceberg/iceberg_rest_catalogs
 - /docs/stable/core_extensions/iceberg/iceberg_rest_catalogs
 title: Iceberg REST Catalogs
 ---
@@ -143,7 +142,7 @@ To attach to a [Polaris](https://polaris.apache.org) catalog, use the following 
 CREATE SECRET polaris_secret (
     TYPE iceberg,
     CLIENT_ID '⟨admin⟩',
-    CLIENT_SECRET '⟨password⟩',
+    CLIENT_SECRET '⟨password⟩'
 );
 ```
 

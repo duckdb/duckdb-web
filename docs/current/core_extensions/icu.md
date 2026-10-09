@@ -4,7 +4,6 @@ layout: docu
 redirect_from:
 - /docs/extensions/ice
 - /docs/stable/extensions/icu
-- /docs/preview/core_extensions/icu
 - /docs/stable/core_extensions/icu
 title: ICU Extension
 ---

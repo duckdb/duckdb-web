@@ -17,7 +17,7 @@ extension:
 
 repo:
   github: nkwork9999/duck-orch
-  ref: a5f55790e10c872c439ff58ba9cbe4ee82f9d0e8
+  ref: d9bc95f49410c86f3f07a2bf8d2982aecbbf3dd7
 
 docs:
   hello_world: |
@@ -146,10 +146,10 @@ docs:
     Rust while the
     C++ layer handles DuckDB-internal calls.
 
-extension_star_count: 3
-extension_star_count_pretty: 3
-extension_download_count: 981
-extension_download_count_pretty: 981
+extension_star_count: 4
+extension_star_count_pretty: 4
+extension_download_count: 928
+extension_download_count_pretty: 928
 image: '/images/community_extensions/social_preview/preview_community_extension_duckorch.png'
 layout: community_extension_doc
 ---

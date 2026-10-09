@@ -1,11 +1,12 @@
 ---
 layout: post
 title: "Announcing DuckDB 1.4.1 LTS"
-author: "The DuckDB team"
+authors:
+  - The DuckDB team
 thumb: "/images/blog/thumbs/duckdb-release-1-4-1-lts.svg"
 image: "/images/blog/thumbs/duckdb-release-1-4-1-lts.png"
 excerpt: "Today we are releasing DuckDB 1.4.1, the first patch release of our LTS edition."
-tags: ["release"]
+tag: release
 ---
 
 In this blog post, we highlight a few important fixes and convenience improvements in DuckDB v1.4.1, the first patch release in [DuckDB's 1.4 LTS line]({% post_url 2025-09-16-announcing-duckdb-140 %}).

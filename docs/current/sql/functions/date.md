@@ -1,7 +1,6 @@
 ---
 layout: docu
 redirect_from:
-- /docs/preview/sql/functions/date
 - /docs/sql/functions/date
 - /docs/stable/sql/functions/date
 - /docs/test/functions/date

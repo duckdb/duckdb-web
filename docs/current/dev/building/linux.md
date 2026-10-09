@@ -2,7 +2,6 @@
 layout: docu
 redirect_from:
 - /docs/dev/building/linux
-- /docs/preview/dev/building/linux
 - /docs/stable/dev/building/linux
 title: Linux
 ---

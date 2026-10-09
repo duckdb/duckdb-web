@@ -1,11 +1,12 @@
 ---
 layout: post
 title: "DuckDB on LoongArch"
-author: "Hannes Mühleisen"
+authors:
+  - Hannes Mühleisen
 thumb: "/images/blog/thumbs/morefine-m700s.svg"
 image: "/images/blog/thumbs/morefine-m700s.jpg"
 excerpt: "In today's “What's on your desk?” episode, we test a Loongson CPU with the LoongArch architecture."
-tags: ["benchmark"]
+tag: benchmark
 ---
 
 It’s not every day that a new CPU architecture arrives on your desk. I grew up on the [Intel 486](https://en.wikipedia.org/wiki/I486) back in the early 90s. I also still remember AMD releasing its [64-bit x86 extension](https://en.wikipedia.org/wiki/X86-64#History) in 2000. Then not a lot happened until Apple released the ARM-based M1 architecture in 2020. But today is the day again (for me), with the long-awaited arrival of the “MOREFINE M700S” in our office.

@@ -2,7 +2,6 @@
 layout: docu
 railroad: statements/update.js
 redirect_from:
-- /docs/preview/sql/statements/update
 - /docs/sql/statements/update
 - /docs/stable/sql/statements/update
 title: UPDATE Statement
@@ -40,6 +39,20 @@ SET i = 1, j = 2;
 <div id="rrdiagram"></div>
 
 `UPDATE` changes the values of the specified columns in all rows that satisfy the condition. Only the columns to be modified need be mentioned in the `SET` clause; columns not explicitly modified retain their previous values.
+
+## `RETURNING` Clause
+
+The `RETURNING` clause returns the values of the rows that were updated. It uses the same syntax as the `SELECT` clause, except the `DISTINCT` modifier is not supported. The returned values reflect the state of the rows after the update.
+
+```sql
+CREATE TABLE tbl (i INTEGER, j INTEGER);
+INSERT INTO tbl VALUES (0, 1), (1, 2);
+UPDATE tbl SET j = j + 10 WHERE i = 1 RETURNING *;
+```
+
+| i | j  |
+|--:|---:|
+| 1 | 12 |
 
 ## Update from Other Table
 

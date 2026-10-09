@@ -1,12 +1,23 @@
 ---
 layout: post
 title: "Rethinking Analytical Processing in the GPU Era"
-author: "Bobbi Yogatama, Yifei Yang, Kevin Kristensen, Devesh Sarda, Abigale Kim, Adrian Cockcroft, Yu Teng, Joshua Patterson, Gregory Kimball, Wes McKinney, Weiwei Gong, Xiangyao Yu"
-thumb: "/images/library/thumbs/arxiv.svg"
-image: "/images/library/thumbs/arxiv.png"
+authors:
+  - Bobbi Yogatama
+  - Yifei Yang
+  - Kevin Kristensen
+  - Devesh Sarda
+  - Abigale Kim
+  - Adrian Cockcroft
+  - Yu Teng
+  - Joshua Patterson
+  - Gregory Kimball
+  - Wes McKinney
+  - Weiwei Gong
+  - Xiangyao Yu
+tag: paper
 category: community
 excerpt: ""
-pill: "arXiv"
+venue: "arXiv"
 ---
 
 | | |

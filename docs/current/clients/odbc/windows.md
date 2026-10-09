@@ -4,7 +4,6 @@ layout: docu
 redirect_from:
 - /docs/api/odbc/windows
 - /docs/clients/odbc/windows
-- /docs/preview/clients/odbc/windows
 - /docs/stable/clients/odbc/windows
 title: ODBC API on Windows
 ---

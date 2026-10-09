@@ -1,14 +1,15 @@
 ---
 layout: post
 title: "DuckDB in Research S01E03: David Justen"
-author: "Disseminate Podcast Series by Jack Waudby"
-thumb: "/images/library/thumbs/2025-04-03-david-justen-polar.jpg"
-image: "/images/library/thumbs/2025-04-03-david-justen-polar.jpg"
-tags: ["Podcast"]
+authors:
+  - Disseminate Podcast Series by Jack Waudby
+thumb: "/images/library/thumbs/2025-04-03-david-justen-polar.png"
+image: "/images/library/thumbs/2025-04-03-david-justen-polar.png"
+tag: podcast
 length: "50 min"
 category: community
 excerpt: ""
-pill: "DuckDB in Research"
+venue: "DuckDB in Research"
 episode: "S01E03"
 ---
 

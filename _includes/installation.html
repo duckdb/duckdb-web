@@ -43,7 +43,7 @@
     </div>
     
     
-    <div class="installation-instructions" data-core-version="{{ site.current_duckdb_version }}" data-java-version="{{ site.current_duckdb_java_short_version }}" data-odbc-version="{{ site.current_duckdb_odbc_short_version }}" data-nodejs-version="{{ site.current_duckdb_node_neo_version }}" data-go-version="{{ site.current_duckdb_go_version }}" data-r-version="{{ site.current_duckdb_r_version }}" data-rust-version="{{ site.current_duckdb_rust_version }}" data-wasm-version="{{ site.current_duckdb_wasm_version }}" data-lts-core-version="{{ site.lts_duckdb_version }}" data-lts-java-version="{{ site.lts_duckdb_java_short_version }}" data-lts-odbc-version="{{ site.lts_duckdb_odbc_short_version }}" data-lts-nodejs-version="{{ site.lts_duckdb_node_neo_version }}" data-lts-go-version="{{ site.lts_duckdb_go_version }}" data-lts-r-version="{{ site.lts_duckdb_r_version }}" data-lts-rust-version="{{ site.lts_duckdb_rust_version }}" data-lts-wasm-version="{{ site.lts_duckdb_wasm_version }}">
+    <div class="installation-instructions" data-core-version="{{ site.current_duckdb_version }}" data-java-version="{{ site.current_duckdb_java_short_version }}" data-odbc-version="{{ site.current_duckdb_odbc_short_version }}" data-nodejs-version="{{ site.current_duckdb_node_neo_version }}" data-go-version="{{ site.current_duckdb_go_version }}" data-r-version="{{ site.current_duckdb_r_version }}" data-rust-version="{{ site.current_duckdb_rust_version }}" data-wasm-version="{{ site.current_duckdb_wasm_version }}" data-lts-core-version="{{ site.lts_duckdb_version }}" data-lts-java-version="{{ site.lts_duckdb_java_short_version }}" data-lts-odbc-version="{{ site.lts_duckdb_odbc_short_version }}" data-lts-nodejs-version="{{ site.lts_duckdb_node_neo_version }}" data-lts-go-version="{{ site.lts_duckdb_go_version }}" data-lts-r-version="{{ site.lts_duckdb_r_version }}" data-lts-rust-version="{{ site.lts_duckdb_rust_version }}" data-lts-wasm-version="{{ site.lts_duckdb_wasm_version }}" data-preview-core-version="{{ site.preview_duckdb_version }}">
         
         <h2>Installation
             <span class="version-switch">
@@ -51,6 +51,7 @@
                 <span class="version-switch-toggle" role="radiogroup" aria-label="Version selection">
                     <button class="version-switch-option active" data-version="current" role="radio" aria-checked="true" type="button">{{ site.current_duckdb_version }} (current)</button>
                     <button class="version-switch-option" data-version="lts" role="radio" aria-checked="false" type="button">{{ site.lts_duckdb_version }} (LTS)</button>
+                    <button class="version-switch-option" data-version="preview" role="radio" aria-checked="false" type="button">{{ site.preview_duckdb_version }} (preview)</button>
                     <span class="version-switch-slider"></span>
                 </span>
             </span>
@@ -68,9 +69,8 @@
 
 
 
-<div class="note">
-    This page contains links to the current stable and the LTS versions.
-    For the preview version, please visit the <a href="{% link install/preview.md %}">preview (nightly) page</a>.
+<div class="note preview-note" style="display: none;">
+    The preview version is a development build of the next DuckDB release. It is constantly in flux and less suitable for production use than the current and LTS versions.
 </div>
 
 
@@ -133,6 +133,23 @@ curl https://install.duckdb.org | DUCKDB_VERSION={{ site.lts_duckdb_version }} b
 {%- assign f = site.data.checksums_lts.artifacts.cli.macos.x86_64.filename -%}
 <a href="https://install.duckdb.org/v{{ site.lts_duckdb_version }}/{{ f }}" class="download-btn" download="{{ f }}" rel="noopener noreferrer">{{ f }}</a>
 {%- include checksum_inline.html environment="cli" platform="macos" version="lts" -%}
+
+</div>
+</div>
+
+<div class="preview"
+    data-platform="macos"
+    data-environment="cli"
+    data-docs="{% link docs/preview/clients/cli/overview.md %}">
+
+{%- highlight bash -%}
+curl https://install.duckdb.org | DUCKDB_VERSION=alpha bash
+{%- endhighlight -%}
+
+<div class="alternative">
+
+<h4>Direct Download</h4>
+<a href="https://artifacts.duckdb.org/staged/v2.0-cyanoptera/duckdb-cli-osx-universal.tar.gz" class="download-btn" download="duckdb-cli-osx-universal.tar.gz" rel="noopener noreferrer">duckdb-cli-osx-universal.tar.gz</a>
 
 </div>
 </div>
@@ -201,6 +218,24 @@ curl https://install.duckdb.org | DUCKDB_VERSION={{ site.lts_duckdb_version }} b
 </div>
 </div>
 
+<div class="preview"
+    data-platform="linux"
+    data-environment="cli"
+    data-docs="{% link docs/preview/clients/cli/overview.md %}">
+
+{%- highlight bash -%}
+curl https://install.duckdb.org | DUCKDB_VERSION=alpha bash
+{%- endhighlight -%}
+
+<div class="alternative">
+
+<h4>Direct Downloads</h4>
+<a href="https://artifacts.duckdb.org/staged/v2.0-cyanoptera/duckdb-cli-linux-amd64.tar.gz" class="download-btn" download="duckdb-cli-linux-amd64.tar.gz" rel="noopener noreferrer">duckdb-cli-linux-amd64.tar.gz</a>
+<a href="https://artifacts.duckdb.org/staged/v2.0-cyanoptera/duckdb-cli-linux-arm64.tar.gz" class="download-btn" download="duckdb-cli-linux-arm64.tar.gz" rel="noopener noreferrer">duckdb-cli-linux-arm64.tar.gz</a>
+
+</div>
+</div>
+
 
 <div class="current"
     data-platform="windows"
@@ -256,7 +291,7 @@ docker run --rm -it -v "$(pwd):/workspace" -w /workspace duckdb/duckdb
 {%- include checksum_inline.html environment="cli" platform="windows" architecture="arm64" version="lts" -%}
 
 <div class="note">
-    Note that DuckDB on Windows requires the <a href="https://learn.microsoft.com/en-us/cpp/windows/latest-supported-vc-redist?view=msvc-170">Microsoft Visual C++ Redistributable</a>.
+    DuckDB on Windows requires the <a href="https://learn.microsoft.com/en-us/cpp/windows/latest-supported-vc-redist?view=msvc-170">Microsoft Visual C++ Redistributable</a>.
 </div>
 
 <div class="alternative">
@@ -277,6 +312,26 @@ docker run --rm -it -v "$(pwd):/workspace" -w /workspace duckdb/duckdb:{{ site.l
 
 </div>
 
+<div class="preview"
+    data-platform="windows"
+    data-environment="cli"
+    data-docs="{% link docs/preview/clients/cli/overview.md %}">
+
+<h4>Powershell Script</h4>
+{%- highlight powershell -%}
+$env:DUCKDB_VERSION = "alpha"; irm https://install.duckdb.org/install.ps1 | iex
+{%- endhighlight -%}
+
+<h4>Direct Downloads</h4>
+<a href="https://artifacts.duckdb.org/staged/v2.0-cyanoptera/duckdb-cli-windows-amd64.tar.gz" class="download-btn" download="duckdb-cli-windows-amd64.tar.gz" rel="noopener noreferrer">duckdb-cli-windows-amd64.tar.gz</a>
+<a href="https://artifacts.duckdb.org/staged/v2.0-cyanoptera/duckdb-cli-windows-arm64.tar.gz" class="download-btn" download="duckdb-cli-windows-arm64.tar.gz" rel="noopener noreferrer">duckdb-cli-windows-arm64.tar.gz</a>
+
+<div class="note">
+    DuckDB on Windows requires the <a href="https://learn.microsoft.com/en-us/cpp/windows/latest-supported-vc-redist?view=msvc-170">Microsoft Visual C++ Redistributable</a>.
+</div>
+
+</div>
+
 
 <div class="current"
     data-environment="python"
@@ -287,7 +342,7 @@ pip install duckdb
 {%- endhighlight -%}
 
 <div class="note">
-    Note that DuckDB on Windows requires the <a href="https://learn.microsoft.com/en-us/cpp/windows/latest-supported-vc-redist?view=msvc-170">Microsoft Visual C++ Redistributable</a>.
+    DuckDB on Windows requires the <a href="https://learn.microsoft.com/en-us/cpp/windows/latest-supported-vc-redist?view=msvc-170">Microsoft Visual C++ Redistributable</a>.
 </div>
 
 </div>
@@ -301,7 +356,21 @@ pip install duckdb=={{ site.lts_duckdb_version }}
 {%- endhighlight -%}
 
 <div class="note">
-    Note that DuckDB on Windows requires the <a href="https://learn.microsoft.com/en-us/cpp/windows/latest-supported-vc-redist?view=msvc-170">Microsoft Visual C++ Redistributable</a>.
+    DuckDB on Windows requires the <a href="https://learn.microsoft.com/en-us/cpp/windows/latest-supported-vc-redist?view=msvc-170">Microsoft Visual C++ Redistributable</a>.
+</div>
+
+</div>
+
+<div class="preview"
+    data-environment="python"
+    data-docs="{% link docs/preview/clients/python/overview.md %}">
+
+{%- highlight bash -%}
+pip install duckdb --pre --upgrade
+{%- endhighlight -%}
+
+<div class="note">
+    DuckDB on Windows requires the <a href="https://learn.microsoft.com/en-us/cpp/windows/latest-supported-vc-redist?view=msvc-170">Microsoft Visual C++ Redistributable</a>.
 </div>
 
 </div>
@@ -352,6 +421,7 @@ install.packages("path/to/downloaded/package.ext", repos = NULL)
 </div>
 
 
+
 {%- if site.current_duckdb_java_version != "" -%}
 <div class="current"
     data-environment="java"
@@ -373,16 +443,29 @@ install.packages("path/to/downloaded/package.ext", repos = NULL)
 
 <p>See the <a href="https://central.sonatype.com/artifact/org.duckdb/duckdb_jdbc">Maven Central entry</a>.</p>
 
-<h4>Gradle</h4>
-
-{%- highlight groovy -%}
-implementation("org.duckdb:duckdb_jdbc:{{ site.current_duckdb_java_version }}")
-{%- endhighlight -%}
-
 <div class="note">
-    Note that DuckDB on Windows requires the <a href="https://learn.microsoft.com/en-us/cpp/windows/latest-supported-vc-redist?view=msvc-170">Microsoft Visual C++ Redistributable</a>.
+    DuckDB on Windows requires the <a href="https://learn.microsoft.com/en-us/cpp/windows/latest-supported-vc-redist?view=msvc-170">Microsoft Visual C++ Redistributable</a>.
 </div>
 
+<div class="alternative">
+
+<h4>Gradle (Groovy)</h4>
+
+{%- highlight groovy -%}
+dependencies {
+    implementation 'org.duckdb:duckdb_jdbc:{{ site.current_duckdb_java_version }}'
+}
+{%- endhighlight -%}
+
+<h4>Gradle (Kotlin)</h4>
+
+{%- highlight kotlin -%}
+dependencies {
+    implementation("org.duckdb:duckdb_jdbc:{{ site.current_duckdb_java_version }}")
+}
+{%- endhighlight -%}
+
+</div>
 </div>
 {%- endif -%}
 
@@ -407,16 +490,94 @@ implementation("org.duckdb:duckdb_jdbc:{{ site.current_duckdb_java_version }}")
 
 <p>See the <a href="https://central.sonatype.com/artifact/org.duckdb/duckdb_jdbc/{{ site.lts_duckdb_java_version }}/overview">Maven Central entry</a>.</p>
 
-<h4>Gradle</h4>
-
-{%- highlight groovy -%}
-implementation("org.duckdb:duckdb_jdbc:{{ site.lts_duckdb_java_version }}")
-{%- endhighlight -%}
-
 <div class="note">
-    Note that DuckDB on Windows requires the <a href="https://learn.microsoft.com/en-us/cpp/windows/latest-supported-vc-redist?view=msvc-170">Microsoft Visual C++ Redistributable</a>.
+    DuckDB on Windows requires the <a href="https://learn.microsoft.com/en-us/cpp/windows/latest-supported-vc-redist?view=msvc-170">Microsoft Visual C++ Redistributable</a>.
 </div>
 
+<div class="alternative">
+
+<h4>Gradle (Groovy)</h4>
+
+{%- highlight groovy -%}
+dependencies {
+    implementation 'org.duckdb:duckdb_jdbc:{{ site.lts_duckdb_java_version }}'
+}
+{%- endhighlight -%}
+
+<h4>Gradle (Kotlin)</h4>
+
+{%- highlight kotlin -%}
+dependencies {
+    implementation("org.duckdb:duckdb_jdbc:{{ site.lts_duckdb_java_version }}")
+}
+{%- endhighlight -%}
+
+</div>
+</div>
+
+<div class="preview"
+    data-environment="java"
+    data-docs="{% link docs/preview/clients/java/overview.md %}">
+
+<h4>Direct Download (JAR)</h4>
+<a href="https://duckdb-staging.duckdb.org/duckdb/duckdb-java/maven/org/duckdb/duckdb_jdbc/{{ site.preview_duckdb_java_version }}/duckdb_jdbc-{{ site.preview_duckdb_java_version }}.jar" class="download-btn" download="duckdb_jdbc-{{ site.preview_duckdb_java_version }}.jar" rel="noopener noreferrer">duckdb_jdbc-{{ site.preview_duckdb_java_version }}.jar</a>
+
+<h4>Maven</h4>
+
+{%- highlight xml -%}
+<dependencies>
+    <dependency>
+        <groupId>org.duckdb</groupId>
+        <artifactId>duckdb_jdbc</artifactId>
+        <version>{{ site.preview_duckdb_java_version }}</version>
+    </dependency>
+</dependencies>
+
+<repositories>
+    <repository>
+        <id>duckdb</id>
+        <url>https://duckdb-staging.duckdb.org/duckdb/duckdb-java/maven/</url>
+    </repository>
+</repositories>
+{%- endhighlight -%}
+
+<p>To find the latest version number, visit the <a href="https://github.com/duckdb/duckdb-java/actions/workflows/Java.yml">latest CI builds</a> and search for a <em>Java JDBC</em> task that succeeded. In that job, consult the <em>Maven S3 Deploy</em> job's <em>Deploy snapshot to S3</em> task.</p>
+
+<div class="note">
+    DuckDB on Windows requires the <a href="https://learn.microsoft.com/en-us/cpp/windows/latest-supported-vc-redist?view=msvc-170">Microsoft Visual C++ Redistributable</a>.
+</div>
+
+<div class="alternative">
+
+<h4>Gradle (Groovy)</h4>
+
+{%- highlight groovy -%}
+repositories {
+    maven {
+        url 'https://duckdb-staging.duckdb.org/duckdb/duckdb-java/maven/'
+    }
+}
+
+dependencies {
+    implementation 'org.duckdb:duckdb_jdbc:{{ site.preview_duckdb_java_version }}'
+}
+{%- endhighlight -%}
+
+<h4>Gradle (Kotlin)</h4>
+
+{%- highlight kotlin -%}
+repositories {
+    maven {
+        url = uri("https://duckdb-staging.duckdb.org/duckdb/duckdb-java/maven/")
+    }
+}
+
+dependencies {
+    implementation("org.duckdb:duckdb_jdbc:{{ site.preview_duckdb_java_version }}")
+}
+{%- endhighlight -%}
+
+</div>
 </div>
 
 
@@ -597,6 +758,37 @@ go get github.com/duckdb/duckdb-go/v2@{{ site.lts_duckdb_go_tag }}
 
 </div>
 
+<div class="preview"
+    data-platform="linux"
+    data-environment="c"
+    data-docs="{% link docs/preview/clients/c/overview.md %}">
+
+<a href="https://artifacts.duckdb.org/staged/v2.0-cyanoptera/duckdb-shared-libs-linux-amd64.tar.gz" class="download-btn" download="duckdb-shared-libs-linux-amd64.tar.gz" rel="noopener noreferrer">duckdb-shared-libs-linux-amd64.tar.gz</a>
+<a href="https://artifacts.duckdb.org/staged/v2.0-cyanoptera/duckdb-shared-libs-linux-arm64.tar.gz" class="download-btn" download="duckdb-shared-libs-linux-arm64.tar.gz" rel="noopener noreferrer">duckdb-shared-libs-linux-arm64.tar.gz</a>
+
+</div>
+
+
+<div class="preview"
+    data-platform="macos"
+    data-environment="c"
+    data-docs="{% link docs/preview/clients/c/overview.md %}">
+
+<a href="https://artifacts.duckdb.org/staged/v2.0-cyanoptera/duckdb-shared-libs-osx-universal.tar.gz" class="download-btn" download="duckdb-shared-libs-osx-universal.tar.gz" rel="noopener noreferrer">duckdb-shared-libs-osx-universal.tar.gz</a>
+
+</div>
+
+
+<div class="preview"
+    data-platform="windows"
+    data-environment="c"
+    data-docs="{% link docs/preview/clients/c/overview.md %}">
+
+<a href="https://artifacts.duckdb.org/staged/v2.0-cyanoptera/duckdb-shared-libs-windows-amd64.tar.gz" class="download-btn" download="duckdb-shared-libs-windows-amd64.tar.gz" rel="noopener noreferrer">duckdb-shared-libs-windows-amd64.tar.gz</a>
+<a href="https://artifacts.duckdb.org/staged/v2.0-cyanoptera/duckdb-shared-libs-windows-arm64.tar.gz" class="download-btn" download="duckdb-shared-libs-windows-arm64.tar.gz" rel="noopener noreferrer">duckdb-shared-libs-windows-arm64.tar.gz</a>
+
+</div>
+
 {%- if site.current_duckdb_odbc_version != "" -%}
 <div class="current"
     data-platform="linux"
@@ -672,6 +864,37 @@ go get github.com/duckdb/duckdb-go/v2@{{ site.lts_duckdb_go_tag }}
 
 <a href="https://github.com/duckdb/duckdb-odbc/releases/download/v{{ site.lts_duckdb_odbc_version }}/duckdb_odbc-windows-arm64.zip" class="download-btn" download="duckdb_odbc-windows-amd64.zip" rel="noopener noreferrer">duckdb_odbc-windows-arm64.zip</a>
 {%- include checksum_inline.html environment="odbc" platform="windows" architecture="arm64" version="lts" -%}
+
+</div>
+
+<div class="preview"
+    data-platform="linux"
+    data-environment="odbc"
+    data-docs="{% link docs/preview/clients/odbc/overview.md %}">
+
+<a href="https://duckdb-staging.duckdb.org/{{ site.preview_duckdb_odbc_version }}/duckdb/duckdb-odbc/github_release/duckdb_odbc-linux-amd64.zip" class="download-btn" download="odbc-linux-amd64.zip" rel="noopener noreferrer">odbc-linux-amd64.zip</a>
+<a href="https://duckdb-staging.duckdb.org/{{ site.preview_duckdb_odbc_version }}/duckdb/duckdb-odbc/github_release/duckdb_odbc-linux-arm64.zip" class="download-btn" download="odbc-linux-arm64.zip" rel="noopener noreferrer">odbc-linux-arm64.zip</a>
+
+</div>
+
+
+<div class="preview"
+    data-platform="macos"
+    data-environment="odbc"
+    data-docs="{% link docs/preview/clients/odbc/overview.md %}">
+
+<a href="https://duckdb-staging.duckdb.org/{{ site.preview_duckdb_odbc_version }}/duckdb/duckdb-odbc/github_release/duckdb_odbc-osx-universal.zip" class="download-btn" download="odbc-osx-universal.zip" rel="noopener noreferrer">odbc-osx-universal.zip</a>
+
+</div>
+
+
+<div class="preview"
+    data-platform="windows"
+    data-environment="odbc"
+    data-docs="{% link docs/preview/clients/odbc/overview.md %}">
+
+<a href="https://duckdb-staging.duckdb.org/{{ site.preview_duckdb_odbc_version }}/duckdb/duckdb-odbc/github_release/duckdb_odbc-windows-amd64.zip" class="download-btn" download="odbc-windows-amd64.zip" rel="noopener noreferrer">odbc-windows-amd64.zip</a>
+<a href="https://duckdb-staging.duckdb.org/{{ site.preview_duckdb_odbc_version }}/duckdb/duckdb-odbc/github_release/duckdb_odbc-windows-arm64.zip" class="download-btn" download="odbc-windows-arm64.zip" rel="noopener noreferrer">odbc-windows-arm64.zip</a>
 
 </div>
 

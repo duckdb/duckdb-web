@@ -1,7 +1,6 @@
 ---
 layout: docu
 redirect_from:
-- /docs/preview/core_extensions/postgres/connection_pool
 - /docs/stable/core_extensions/postgres/connection_pool
 title: PostgreSQL Extension Connection Pool
 ---

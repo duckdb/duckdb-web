@@ -249,10 +249,10 @@ docs:
     - MSVC builds (`windows_amd64`/`windows_arm64`) are not supported; use MinGW/RTools on Windows.
 
 
-extension_star_count: 17
-extension_star_count_pretty: 17
-extension_download_count: 1048
-extension_download_count_pretty: 1.0k
+extension_star_count: 19
+extension_star_count_pretty: 19
+extension_download_count: 1386
+extension_download_count_pretty: 1.4k
 image: '/images/community_extensions/social_preview/preview_community_extension_duckhts.png'
 layout: community_extension_doc
 ---

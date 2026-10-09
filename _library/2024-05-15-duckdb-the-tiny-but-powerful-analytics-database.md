@@ -1,12 +1,12 @@
 ---
 layout: post
 title: "DuckDB: The Tiny but Powerful Analytics Database"
-author: "Serdar Yegulalp (InfoWorld)"
-tags: ["Article"]
-thirdparty: true
+authors:
+  - Serdar Yegulalp
+tag: article
 category: community
 excerpt: ""
-pill: "infoworld.com"
+venue: "infoworld.com"
 ---
 
 |-------|-------|

@@ -1,13 +1,12 @@
 ---
 layout: post
 title: "Extension Development Workshop"
-author: "Rusty Conover"
-tags: ["Talk"]
-thirdparty: true
-highlighted: true
+authors:
+  - Rusty Conover
+tag: talk
 category: community
 excerpt: ""
-pill: "DuckDB Developer Meeting #1"
+venue: "DuckDB Developer Meeting #1"
 ---
 
 **Part 1**

@@ -252,7 +252,7 @@
 	body.documentation .sidenavigation {
 		position: fixed;
 		right: 15px;
-		top: 75px;
+		top: calc(75px + var(--docbanner-height, 0px));
 		width: calc(100% - 30px);
 		transform: translateY(10px);
 		transition: all .3s;
@@ -263,7 +263,7 @@
 		opacity: 0;
 		pointer-events: none;
 		margin-bottom: 20px;
-		height: calc(100vh - 90px);
+		height: calc(100vh - 90px - var(--docbanner-height, 0px));
 		height: -moz-available;
 		height: -webkit-fill-available;
 		height: fill-available;
@@ -272,7 +272,7 @@
 			transform: translateX(0);
 			opacity: 1;
 			pointer-events: all;
-			max-height: calc(100svh - 110px);
+			max-height: calc(100svh - 110px - var(--docbanner-height, 0px));
 			overflow: auto;
 		}
 		.sidenav {
@@ -324,32 +324,6 @@
 		main .wrap #main_content_wrap{
 			padding-right: 0;
 		}
-	}
-	
-	body.documentation.outdated main .wrap #main_content_wrap,
-	body.documentation.stable main .wrap #main_content_wrap{
-		padding-top: 40px;
-	}
-	
-	header .headerline .headercontent .options .banner{
-		position: fixed;
-		width: auto;
-		left: 50%;
-		transform: translateX(-50%);
-		top: 65px;
-		background: var(--main-body-background-color, #FAFAFA);
-		backdrop-filter: blur(15px);
-		justify-content: center;
-		z-index: 500;
-		display: none;
-	}
-	
-	.library-tiles .librarypreview.postpreview,
-	.science-tiles .sciencepreview.postpreview,
-	.everywhere-tiles .everywherepreview.postpreview,
-	main.main-library .recentposts .newstileswrap .postpreview,
-	main.main-science .recentposts .newstileswrap .postpreview {
-		width: calc(50% - 16px);
 	}
 	
 	.notonmobile {
@@ -481,7 +455,7 @@
 	}
 
 	main.inactive::before {
-		top: 54px;
+		top: calc(54px + var(--docbanner-height, 0px));
 	}
 
 	header .headerline .headercontent .landingmenu nav:not(.mobile) {
@@ -500,6 +474,7 @@
 	#duckdblabs_logo,
 	#duckcon_logo,
 	#duckcon7_logo,
+	#duckcon8_logo,
 	#foundation_logo{
 		height: 55px;
 	}
@@ -523,6 +498,10 @@
 
 	#duckcon7_logo{
 		width: 142px;
+	}
+
+	#duckcon8_logo{
+		width: 134px;
 	}
 
 	#foundation_logo{
@@ -709,11 +688,6 @@
 
 	section.blog .postpreview,
 	section.upcoming-events .postpreview,
-	.library-tiles .librarypreview.postpreview,
-	.science-tiles .sciencepreview.postpreview,
-	.everywhere-tiles .everywherepreview.postpreview,
-	main.main-library .recentposts .newstileswrap .postpreview,
-	main.main-science .recentposts .newstileswrap .postpreview,
 	.post-list .newstiles .postpreview,
 	.newswrap .postwrap .recentposts .postpreview,
 	.newswrap .postwrap .postcontent .recentposts .postpreview {
@@ -724,63 +698,6 @@
 	section.blog .newstileswrap,
 	section.upcoming-events .newstileswrap {
 		row-gap: 32px;
-	}
-
-	.library-tiles .librarypreview.postpreview,
-	.everywhere-tiles .everywherepreview.postpreview {
-		display: flex;
-		flex-direction: row;
-		background: none;
-		border: none;
-		box-shadow: none;
-		.postimg {
-			width: 115px;
-			min-width: 115px;
-			max-height: 115px;
-			aspect-ratio: 1/1;
-			border-radius: var(--page-radius-m);
-			&::after {
-				width: 80px;
-				height: 80px;
-			}
-			.pill-container {
-				top: 8px;
-				left: 8px;
-				gap: 4px;
-				max-width: calc(100% - 16px);
-				.pill-tag ~ .pill-tag {
-					display: none;
-				}
-			}
-			.pill-tag {
-				font-size: 8px;
-				padding: 4px 8px;
-				overflow: hidden;
-				text-overflow: ellipsis;
-			}
-		}
-		.postdetails {
-			padding: 12px;
-			display: flex;
-			flex-direction: column;
-			justify-content: center;
-			min-width: 0;
-			h3 {
-				font-size: var(--type-title-3, 16px);
-				min-height: unset;
-				display: -webkit-box;
-				-webkit-line-clamp: 3;
-				line-clamp: 3;
-				-webkit-box-orient: vertical;
-				overflow: hidden;
-			}
-			h3 + .meta {
-				margin-top: 8px;
-			}
-			.byline {
-				margin-top: 8px;
-			}
-		}
 	}
 
 	.newswrap .postwrap .postcontent .recentposts{
@@ -926,9 +843,6 @@
 		#duckdb_logo{
 			width: 38px;
 			background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='38' height='38' fill='none' viewBox='0 0 38 38'%3E%3Cpath fill='%230D0D0D' d='M19 38C8.489 38 0 29.511 0 19S8.489 0 19 0s19 8.489 19 19-8.489 19-19 19Z'/%3E%3Cpath fill='%23FFF100' d='M29.159 16.182h-3.727v5.625h3.727c1.545 0 2.83-1.284 2.83-2.83 0-1.556-1.285-2.795-2.83-2.795ZM7.172 19c0 4.34 3.534 7.875 7.875 7.875 4.34 0 7.875-3.535 7.875-7.875 0-4.341-3.534-7.876-7.875-7.876S7.172 14.66 7.172 19Z'/%3E%3C/svg%3E");
-		}
-		img.downloadlogo{
-			width: 44px;
 		}
 	}
 	

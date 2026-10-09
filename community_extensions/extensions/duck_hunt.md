@@ -8,7 +8,7 @@ excerpt: |
 extension:
   name: duck_hunt
   description: Parse and analyze test results, build outputs, and CI/CD pipeline logs from 110+ formats with severity filtering, format auto-detection, and context extraction
-  version: 1.12.0
+  version: 1.13.3
   language: C++
   build: cmake
   license: Apache-2.0
@@ -23,7 +23,15 @@ extension:
 repo:
   github: teaguesterling/duck_hunt
   andium: 68ca1c4676f706980a6503c19b789f5224596b4d
-  ref: 68ca1c4676f706980a6503c19b789f5224596b4d
+  ref: 60f840ae4d3420b41ad6a5013cf03f0f1d4072db
+  # ref_next == ref (deliberate): v1.13.3 (tag v1.13.3) completes the family-C
+  # migration (named_parameters -> FunctionSignature typed-kwargs shim) AND fixes
+  # missing-file tolerance on the v2.0/macOS build (a narrow catch(const
+  # IOException&) in the in-out read path that missed the open exception there,
+  # broadened to catch(const std::exception&)). The v2.0-cyanoptera prerelease leg
+  # now BUILDS AND TESTS on this exact commit instead of skipping vacuously; v1.13.2
+  # built but failed 3 missing-file tests on v2.0/macOS, which this ref fixes.
+  ref_next: 60f840ae4d3420b41ad6a5013cf03f0f1d4072db
 
 docs:
   readme: https://duck-hunt.readthedocs.io/
@@ -180,8 +188,8 @@ docs:
 
 extension_star_count: 8
 extension_star_count_pretty: 8
-extension_download_count: 1135
-extension_download_count_pretty: 1.1k
+extension_download_count: 1800
+extension_download_count_pretty: 1.8k
 image: '/images/community_extensions/social_preview/preview_community_extension_duck_hunt.png'
 layout: community_extension_doc
 ---
@@ -207,20 +215,21 @@ LOAD {{ page.extension.name }};
 
 <div class="extension_functions_table"></div>
 
-|          function_name           | function_type | description | comment | examples |
-|----------------------------------|---------------|-------------|---------|----------|
-| duck_hunt_detect_format          | scalar        | NULL        | NULL    |          |
-| duck_hunt_diagnose_parse         | table         | NULL        | NULL    |          |
-| duck_hunt_diagnose_read          | table         | NULL        | NULL    |          |
-| duck_hunt_formats                | table         | NULL        | NULL    |          |
-| duck_hunt_load_parser_config     | scalar        | NULL        | NULL    |          |
-| duck_hunt_match_command_patterns | table_macro   | NULL        | NULL    |          |
-| duck_hunt_unload_parser          | scalar        | NULL        | NULL    |          |
-| parse_duck_hunt_log              | table         | NULL        | NULL    |          |
-| parse_duck_hunt_workflow_log     | table         | NULL        | NULL    |          |
-| read_duck_hunt_log               | table         | NULL        | NULL    |          |
-| read_duck_hunt_workflow_log      | table         | NULL        | NULL    |          |
-| status_badge                     | scalar        | NULL        | NULL    |          |
+|          function_name           | function_type |                                      description                                      | comment |                             examples                              |
+|----------------------------------|---------------|---------------------------------------------------------------------------------------|---------|-------------------------------------------------------------------|
+| duck_hunt_detect_format          | scalar        | Detect the log format of a text sample.                                               | NULL    | [duck_hunt_detect_format('=== RUN TestFoo')]                      |
+| duck_hunt_diagnose_parse         | table         | Diagnose log parsing issues for string content across all known format parsers.       | NULL    | [SELECT * FROM duck_hunt_diagnose_parse('sample log content')]    |
+| duck_hunt_diagnose_read          | table         | Diagnose log parsing issues for a log file path across all known format parsers.      | NULL    | [SELECT * FROM duck_hunt_diagnose_read('build.log')]              |
+| duck_hunt_formats                | table         | List all supported log and test output formats in duck_hunt.                          | NULL    | [SELECT * FROM duck_hunt_formats()]                               |
+| duck_hunt_load_parser_config     | scalar        | Load a dynamic JSON parser configuration into duck_hunt.                              | NULL    | [duck_hunt_load_parser_config('{}')]                              |
+| duck_hunt_match_command_patterns | table_macro   | NULL                                                                                  | NULL    |                                                                   |
+| duck_hunt_unload_parser          | scalar        | Unload a dynamic parser from duck_hunt.                                               | NULL    | [duck_hunt_unload_parser('custom_fmt')]                           |
+| parse_duck_hunt_log              | table         | Parse test and validation log text content into structured validation events.         | NULL    | [SELECT * FROM parse_duck_hunt_log('PASSED: test_foo')]           |
+| parse_duck_hunt_workflow_log     | table         | Parse workflow log text into structured steps and events.                             | NULL    | [SELECT * FROM parse_duck_hunt_workflow_log('##[group]Run step')] |
+| read_duck_hunt_log               | table         | Read and parse test and validation logs from files into structured validation events. | NULL    | [SELECT * FROM read_duck_hunt_log('test.log')]                    |
+| read_duck_hunt_workflow_log      | table         | Read and parse workflow logs (GitHub Actions, GitLab CI, etc.) into steps and events. | NULL    | [SELECT * FROM read_duck_hunt_workflow_log('workflow.log')]       |
+| status_badge                     | scalar        | Generate a status badge string from test execution status.                            | NULL    | [status_badge('passed')]                                          |
+| status_badge                     | scalar        | NULL                                                                                  | NULL    |                                                                   |
 
 ### Overloaded Functions
 

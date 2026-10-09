@@ -4,7 +4,6 @@ layout: docu
 redirect_from:
 - /docs/extensions/vss
 - /docs/stable/extensions/vss
-- /docs/preview/core_extensions/vss
 - /docs/stable/core_extensions/vss
 title: Vector Similarity Search Extension
 ---
@@ -48,7 +47,7 @@ FROM my_vector_table;
 [{'vec': [1.0, 2.0, 3.0]}, {'vec': [2.0, 2.0, 3.0]}, {'vec': [1.0, 2.0, 4.0]}]
 ```
 
-Note how we pass the table name as the first argument to [`min_by`]({% link docs/current/sql/functions/aggregates.md %}#min_byarg-val-n) to return a struct containing the entire matched row.
+Note how we pass the table name as the first argument to [`min_by`]({% link docs/current/sql/functions/aggregates.md %}#arg_minarg-val-n) to return a struct containing the entire matched row.
 
 We can verify that the index is being used by checking the `EXPLAIN` output and looking for the `HNSW_INDEX_SCAN` node in the plan:
 

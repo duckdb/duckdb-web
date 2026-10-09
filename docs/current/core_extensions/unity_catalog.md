@@ -4,7 +4,6 @@ layout: docu
 redirect_from:
 - /docs/extensions/unity_catalog
 - /docs/stable/extensions/unity_catalog
-- /docs/preview/core_extensions/unity_catalog
 - /docs/stable/core_extensions/unity_catalog
 title: Unity Catalog Extension
 ---

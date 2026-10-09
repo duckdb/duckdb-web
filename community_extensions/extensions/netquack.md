@@ -8,7 +8,7 @@ excerpt: |
 extension:
   name: netquack
   description: DuckDB extension for parsing, extracting, and analyzing domains, URIs, and paths with ease.
-  version: 1.13.0
+  version: 1.15.1
   language: C++
   build: cmake
   license: MIT
@@ -17,8 +17,8 @@ extension:
 
 repo:
   github: hatamiarash7/duckdb-netquack
-  andium: 3e41ef474b9deb5303538965d07712e803d8c732
-  ref: 3e41ef474b9deb5303538965d07712e803d8c732
+  andium: 1864ff04183fcaeba566cd3740b68a80282519d9
+  ref: 1864ff04183fcaeba566cd3740b68a80282519d9
 
 docs:
   extended_description: |
@@ -30,8 +30,8 @@ docs:
 
 extension_star_count: 43
 extension_star_count_pretty: 43
-extension_download_count: 5404
-extension_download_count_pretty: 5.4k
+extension_download_count: 4122
+extension_download_count_pretty: 4.1k
 image: '/images/community_extensions/social_preview/preview_community_extension_netquack.png'
 layout: community_extension_doc
 ---
@@ -57,36 +57,59 @@ LOAD {{ page.extension.name }};
 
 <div class="extension_functions_table"></div>
 
-|      function_name       | function_type |                                                           description                                                            | comment |                                      examples                                      |
-|--------------------------|---------------|----------------------------------------------------------------------------------------------------------------------------------|---------|------------------------------------------------------------------------------------|
-| extract_domain           | scalar        | Extracting the main domain from a URL                                                                                            | NULL    | [SELECT extract_domain('a.example.com') as domain;]                                |
-| extract_host             | scalar        | Extracting the hostname from a URL                                                                                               | NULL    | [SELECT extract_host('https://b.a.example.com/path/path') as host;]                |
-| extract_path             | scalar        | Extracting the path from a URL                                                                                                   | NULL    | [SELECT extract_path('example.com/path/path/image.png') as path;]                  |
-| extract_query_string     | scalar        | Extracting the query string from a URL                                                                                           | NULL    | [SELECT extract_query_string('example.com?key=value') as query;]                   |
-| extract_query_parameters | table         | Extracting the query parameters from a URL                                                                                       | NULL    | [SELECT * FROM extract_query_parameters('example.com?key=value&key2=value2');]     |
-| extract_schema           | scalar        | Extracting the schema from a URL                                                                                                 | NULL    | [SELECT extract_schema('mailto:someone@example.com') as schema;]                   |
-| extract_subdomain        | scalar        | Extracting the subdomain from a URL                                                                                              | NULL    | [SELECT extract_subdomain('test.example.com.ac') as dns_record;]                   |
-| extract_tld              | scalar        | Extracting the top-level domain from a URL                                                                                       | NULL    | [SELECT extract_tld('a.example.com') as tld;]                                      |
-| extract_port             | scalar        | Extracting the port from a URL                                                                                                   | NULL    | [SELECT extract_port('https://example.com:8080') as port;]                         |
-| extract_extension        | scalar        | Extracting the file extension from a URL                                                                                         | NULL    | [SELECT extract_extension('https://example.com/path/file.txt') as extension;]      |
-| is_valid_ip              | scalar        | Validates IPv4 and IPv6 addresses                                                                                                | NULL    | [SELECT is_valid_ip('192.168.1.1');]                                               |
-| is_private_ip            | scalar        | Checks if an IP belongs to a private/reserved range (15 IPv4 + 7 IPv6 ranges)                                                    | NULL    | [SELECT is_private_ip('10.0.0.1');]                                                |
-| ip_to_int                | scalar        | Converts IPv4 to 32-bit unsigned integer                                                                                         | NULL    | [SELECT ip_to_int('192.168.1.1');]                                                 |
-| int_to_ip                | scalar        | Converts integer back to IPv4 dotted-quad notation                                                                               | NULL    | [SELECT int_to_ip(3232235777::UBIGINT);]                                           |
-| ip_version               | scalar        | Returns `4` (IPv4), `6` (IPv6), or `NULL` (invalid)                                                                              | NULL    | [SELECT ip_version('::1');]                                                        |
-| ipcalc                   | table         | Calculating IP information from a CIDR notation                                                                                  | NULL    | [SELECT * FROM ipcalc('192.168.1.0/24');]                                          |
-| get_tranco_rank          | scalar        | Getting the Tranco rank of a domain                                                                                              | NULL    | [SELECT get_tranco_rank('cloudflare.com') as rank;]                                |
-| get_tranco_rank_category | scalar        | Getting the Tranco rank category of a domain                                                                                     | NULL    | [SELECT get_tranco_rank_category('cloudflare.com') as category;]                   |
-| normalize_url            | scalar        | Normalizes a URL by applying RFC 3986 rules (lowercasing, default port removal, dot resolution, query sorting, fragment removal) | NULL    | [SELECT normalize_url('HTTP://WWW.EXAMPLE.COM:80/a/b/../c/?z=1&a=2#frag') AS url;] |
-| extract_fragment         | scalar        | Extracts the fragment (after #) from a URL                                                                                       | NULL    | [SELECT extract_fragment('http://example.com/page#section') AS fragment;]          |
-| domain_depth             | scalar        | Returns the number of dot-separated levels in a domain                                                                           | NULL    | [SELECT domain_depth('www.example.com') AS depth;]                                 |
-| base64_encode            | scalar        | Encodes a string into Base64 format                                                                                              | NULL    | [SELECT base64_encode('Hello World') AS encoded;]                                  |
-| base64_decode            | scalar        | Decodes a Base64-encoded string back to its original form                                                                        | NULL    | [SELECT base64_decode('SGVsbG8gV29ybGQ=') AS decoded;]                             |
-| is_valid_url             | scalar        | Checks whether a string is a well-formed URL with scheme, authority, and host                                                    | NULL    | [SELECT is_valid_url('https://example.com');]                                      |
-| is_valid_domain          | scalar        | Validates a domain name against RFC 1035 / RFC 1123 rules                                                                        | NULL    | [SELECT is_valid_domain('example.com');]                                           |
-| extract_path_segments    | table         | Splits a URL path into individual segment rows with index and value                                                              | NULL    | [SELECT * FROM extract_path_segments('https://example.com/a/b/c');]                |
-| update_tranco            | scalar        | Update tranco data                                                                                                               | NULL    | [SELECT update_tranco(true);]                                                      |
-| netquack_version         | table         | Returns the version of Netquack                                                                                                  | NULL    | [SELECT netquack_version() as version;]                                            |
+|      function_name       | function_type |                                                           description                                                            | comment |                                         examples                                         |
+|--------------------------|---------------|----------------------------------------------------------------------------------------------------------------------------------|---------|------------------------------------------------------------------------------------------|
+| extract_domain           | scalar        | Extracting the main domain from a URL                                                                                            | NULL    | [SELECT extract_domain('a.example.com') as domain;]                                      |
+| extract_host             | scalar        | Extracting the hostname from a URL                                                                                               | NULL    | [SELECT extract_host('https://b.a.example.com/path/path') as host;]                      |
+| extract_path             | scalar        | Extracting the path from a URL                                                                                                   | NULL    | [SELECT extract_path('example.com/path/path/image.png') as path;]                        |
+| extract_query_string     | scalar        | Extracting the query string from a URL                                                                                           | NULL    | [SELECT extract_query_string('example.com?key=value') as query;]                         |
+| extract_query_parameters | table         | Extracting the query parameters from a URL                                                                                       | NULL    | [SELECT * FROM extract_query_parameters('example.com?key=value&key2=value2');]           |
+| extract_schema           | scalar        | Extracting the schema from a URL                                                                                                 | NULL    | [SELECT extract_schema('mailto:someone@example.com') as schema;]                         |
+| extract_subdomain        | scalar        | Extracting the subdomain from a URL                                                                                              | NULL    | [SELECT extract_subdomain('test.example.com.ac') as dns_record;]                         |
+| extract_sld              | scalar        | Extracts the label just before the public suffix (second-level domain) from a URL.                                               | NULL    | [SELECT extract_sld('https://mail.google.co.uk/inbox');]                                 |
+| extract_tld              | scalar        | Extracting the top-level domain from a URL                                                                                       | NULL    | [SELECT extract_tld('a.example.com') as tld;]                                            |
+| extract_port             | scalar        | Extracting the port from a URL                                                                                                   | NULL    | [SELECT extract_port('https://example.com:8080') as port;]                               |
+| extract_extension        | scalar        | Extracting the file extension from a URL                                                                                         | NULL    | [SELECT extract_extension('https://example.com/path/file.txt') as extension;]            |
+| parse_uri                | scalar        | Parse and returns every URI component in a single STRUCT call                                                                    | NULL    | [SELECT parse_uri('https://example.com:8080/path?q=1#section') AS uri;]                  |
+| is_valid_ip              | scalar        | Validates IPv4 and IPv6 addresses                                                                                                | NULL    | [SELECT is_valid_ip('192.168.1.1');]                                                     |
+| is_private_ip            | scalar        | Checks if an IP belongs to a private/reserved range (15 IPv4 + 7 IPv6 ranges)                                                    | NULL    | [SELECT is_private_ip('10.0.0.1');]                                                      |
+| ip_to_int                | scalar        | Converts IPv4 to 32-bit unsigned integer                                                                                         | NULL    | [SELECT ip_to_int('192.168.1.1');]                                                       |
+| int_to_ip                | scalar        | Converts integer back to IPv4 dotted-quad notation                                                                               | NULL    | [SELECT int_to_ip(3232235777::UBIGINT);]                                                 |
+| ip_version               | scalar        | Returns `4` (IPv4), `6` (IPv6), or `NULL` (invalid)                                                                              | NULL    | [SELECT ip_version('::1');]                                                              |
+| ip_in_range              | scalar        | Returns true if the IP address falls within the given IPv4 or IPv6 CIDR block.                                                   | NULL    | [SELECT ip_in_range('192.168.1.100', '192.168.1.0/24');]                                 |
+| ip_to_ptr                | scalar        | Builds the reverse DNS (in-addr.arpa / ip6.arpa) name for an IPv4 or IPv6 address.                                               | NULL    | [SELECT ip_to_ptr('192.168.1.1');]                                                       |
+| ipv6_compress            | scalar        | Formats an IPv6 address in its shortest RFC 5952 canonical form.                                                                 | NULL    | [SELECT ipv6_compress('2001:0db8:0000:0000:0000:0000:0000:0001');]                       |
+| ipv6_expand              | scalar        | Expands an IPv6 address to eight zero-padded hexadecimal groups.                                                                 | NULL    | [SELECT ipv6_expand('2001:db8::1');]                                                     |
+| is_ipv4_mapped           | scalar        | Returns true if the address is an IPv4-mapped IPv6 address (::ffff:0:0/96).                                                      | NULL    | [SELECT is_ipv4_mapped('::ffff:192.168.1.1');]                                           |
+| ip_type                  | scalar        | Classifies an IP as public, private, loopback, link_local, multicast, cgnat, documentation, or reserved.                         | NULL    | [SELECT ip_type('100.64.0.1');]                                                          |
+| is_bogon                 | scalar        | Returns true if the IP is not globally routable (any ip_type other than public).                                                 | NULL    | [SELECT is_bogon('10.0.0.1');]                                                           |
+| ip_anonymize             | scalar        | Truncates an IP for privacy by zeroing all bits after /24 (IPv4) or /48 (IPv6).                                                  | NULL    | [SELECT ip_anonymize('192.168.1.123');]                                                  |
+| ipcalc                   | table         | Calculating IP information from a CIDR notation                                                                                  | NULL    | [SELECT * FROM ipcalc('192.168.1.0/24');]                                                |
+| get_tranco_rank          | scalar        | Getting the Tranco rank of a domain                                                                                              | NULL    | [SELECT get_tranco_rank('cloudflare.com') as rank;]                                      |
+| get_tranco_rank_category | scalar        | Getting the Tranco rank category of a domain                                                                                     | NULL    | [SELECT get_tranco_rank_category('cloudflare.com') as category;]                         |
+| tranco_list              | table         | Returns the cached Tranco list as rows of rank, domain, and category for joins.                                                  | NULL    | [SELECT * FROM tranco_list() LIMIT 10;]                                                  |
+| normalize_url            | scalar        | Normalizes a URL by applying RFC 3986 rules (lowercasing, default port removal, dot resolution, query sorting, fragment removal) | NULL    | [SELECT normalize_url('HTTP://WWW.EXAMPLE.COM:80/a/b/../c/?z=1&a=2#frag') AS url;]       |
+| extract_fragment         | scalar        | Extracts the fragment (after #) from a URL                                                                                       | NULL    | [SELECT extract_fragment('http://example.com/page#section') AS fragment;]                |
+| domain_depth             | scalar        | Returns the number of dot-separated levels in a domain                                                                           | NULL    | [SELECT domain_depth('www.example.com') AS depth;]                                       |
+| base64_encode            | scalar        | Encodes a string into Base64 format                                                                                              | NULL    | [SELECT base64_encode('Hello World') AS encoded;]                                        |
+| base64_decode            | scalar        | Decodes a Base64-encoded string back to its original form                                                                        | NULL    | [SELECT base64_decode('SGVsbG8gV29ybGQ=') AS decoded;]                                   |
+| is_valid_url             | scalar        | Checks whether a string is a well-formed URL with scheme, authority, and host                                                    | NULL    | [SELECT is_valid_url('https://example.com');]                                            |
+| is_valid_domain          | scalar        | Validates a domain name against RFC 1035 / RFC 1123 rules                                                                        | NULL    | [SELECT is_valid_domain('example.com');]                                                 |
+| is_public_suffix         | scalar        | Returns true if the domain is exactly a public suffix in the Public Suffix List (e.g. co.uk).                                    | NULL    | [SELECT is_public_suffix('co.uk');]                                                      |
+| is_known_tld             | scalar        | Returns true if the label is a top-level domain listed in the Public Suffix List.                                                | NULL    | [SELECT is_known_tld('com');]                                                            |
+| extract_path_segments    | table         | Splits a URL path into individual segment rows with index and value                                                              | NULL    | [SELECT * FROM extract_path_segments('https://example.com/a/b/c');]                      |
+| url_encode               | scalar        | Percent-encodes a string per RFC 3986 (unreserved characters pass through)                                                       | NULL    | [SELECT url_encode('hello world');]                                                      |
+| url_decode               | scalar        | Decodes a percent-encoded string back to its original form (also decodes + as space)                                             | NULL    | [SELECT url_decode('hello%20world');]                                                    |
+| defang                   | scalar        | Defangs a URL, email, or IP in CyberChef style so it is not clickable (hxxps[://]example[.]com).                                 | NULL    | [SELECT defang('https://example.com:443/path');]                                         |
+| refang                   | scalar        | Restores a defanged URL, email, or IP (e.g. hxxps[://]example[.]com) to its original form.                                       | NULL    | [SELECT refang('hxxps[://]example[.]com[:]443/path');]                                   |
+| url_to_surt              | scalar        | Converts a URL to a Sort-friendly URI Reordering Transform (SURT) key as used by web archives.                                   | NULL    | [SELECT url_to_surt('https://www.example.com/Path/?b=2&a=1');]                           |
+| surt_to_url              | scalar        | Converts a SURT key back into a URL, assuming http when the SURT carries no scheme.                                              | NULL    | [SELECT surt_to_url('com,example)/path?a=1&b=2');]                                       |
+| extract_urls             | scalar        | Extracts every scheme://... URL found in free text, in order of appearance.                                                      | NULL    | [SELECT extract_urls('Visit https://example.com/login or ftp://files.example.org now');] |
+| extract_domains          | scalar        | Extracts every lowercased domain name with a known TLD found in free text, in order of appearance.                               | NULL    | [SELECT extract_domains('Mail from alerts@Example.com about login.bad-site.net');]       |
+| extract_ips              | scalar        | Extracts every valid IPv4 and IPv6 address found in free text, in order of appearance.                                           | NULL    | [SELECT extract_ips('Blocked 203.0.113.5:443 and 2001:db8::1 at the edge');]             |
+| update_tranco            | scalar        | Update tranco data                                                                                                               | NULL    | [SELECT update_tranco(true);]                                                            |
+| netquack_version         | table         | Returns the version of Netquack                                                                                                  | NULL    | [SELECT netquack_version() as version;]                                                  |
+| ip_anonymize             | scalar        | Truncates an IP for privacy by zeroing all bits after /24 (IPv4) or /48 (IPv6).                                                  | NULL    | [SELECT ip_anonymize('192.168.1.123');]                                                  |
 
 ### Overloaded Functions
 

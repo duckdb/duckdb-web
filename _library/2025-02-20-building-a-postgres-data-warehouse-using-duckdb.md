@@ -1,12 +1,13 @@
 ---
 layout: post
 title: "Building a Postgres Data Warehouse Using DuckDB"
-author: "Marco Slot"
-tags: ["Talk"]
+authors:
+  - Marco Slot
+tag: talk
 length: "25 min"
 category: community
 excerpt: ""
-pill: "DuckDB Amsterdam Meetup"
+venue: "DuckDB Amsterdam Meetup"
 ---
 
 <div class="video-container">

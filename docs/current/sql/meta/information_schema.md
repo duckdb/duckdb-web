@@ -1,7 +1,6 @@
 ---
 layout: docu
 redirect_from:
-- /docs/preview/sql/meta/information_schema
 - /docs/sql/information_schema
 - /docs/sql/meta/information_schema
 - /docs/stable/sql/meta/information_schema

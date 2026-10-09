@@ -4,7 +4,6 @@ redirect_from:
 - /docs/api/cli/dot-commands
 - /docs/api/cli/dot_commands
 - /docs/clients/cli/dot_commands
-- /docs/preview/clients/cli/dot_commands
 - /docs/stable/clients/cli/dot_commands
 title: Dot Commands
 ---
@@ -112,7 +111,7 @@ The terminal will then display:
 | back to the terminal |
 ```
 
-A common output format is CSV, or comma separated values. DuckDB supports [SQL syntax to export data as CSV or Parquet]({% link docs/current/sql/statements/copy.md %}#copy-to), but the CLI-specific commands may be used to write a CSV instead if desired.
+A common output format is CSV, or comma separated values. DuckDB supports [SQL syntax to export data as CSV or Parquet]({% link docs/current/sql/statements/copy.md %}#copy--to), but the CLI-specific commands may be used to write a CSV instead if desired.
 
 ```sql
 .mode csv

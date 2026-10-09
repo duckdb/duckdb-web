@@ -3,7 +3,6 @@ layout: docu
 redirect_from:
 - /docs/api/c/types
 - /docs/clients/c/types
-- /docs/preview/clients/c/types
 - /docs/stable/clients/c/types
 title: Types
 ---

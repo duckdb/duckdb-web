@@ -3,7 +3,6 @@ blurb: The SELECT statement retrieves rows from the database.
 layout: docu
 railroad: statements/select.js
 redirect_from:
-- /docs/preview/sql/statements/select
 - /docs/sql/statements/select
 - /docs/stable/sql/statements/select
 title: SELECT Statement

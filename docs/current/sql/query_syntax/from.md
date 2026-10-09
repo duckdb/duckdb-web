@@ -4,7 +4,6 @@ blurb: The FROM clause can contain a single table, a combination of multiple tab
 layout: docu
 railroad: query_syntax/from.js
 redirect_from:
-- /docs/preview/sql/query_syntax/from
 - /docs/sql/query_syntax/from
 - /docs/stable/sql/query_syntax/from
 title: FROM and JOIN Clauses
@@ -439,7 +438,7 @@ for (i = 0; i < n; i++) {
 ```
 
 It is difficult to express this in standard SQL because
-relational tables are not ordered, but imported tables such as [data frames]({% link docs/current/clients/python/data_ingestion.md %}#pandas-dataframes-–-object-columns)
+relational tables are not ordered, but imported tables such as [data frames]({% link docs/current/clients/python/data_ingestion.md %}#pandas-dataframes--object-columns)
 or disk files (like [CSVs]({% link docs/current/data/csv/overview.md %}) or [Parquet files]({% link docs/current/data/parquet/overview.md %})) do have a natural ordering.
 
 Connecting them using this ordering is called a _positional join:_

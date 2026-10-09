@@ -1,12 +1,13 @@
 ---
 layout: post
 title: "Indexes Are (Not) All You Need: Common DuckDB Pitfalls and How to Find Them"
-author: "Tania Bogatsch"
-tags: ["Talk"]
+authors:
+  - Tania Bogatsch
+tag: talk
+category: core
 length: "25 min"
-thirdparty: false
 excerpt: ""
-pill: "DuckDB Amsterdam Meetup"
+venue: "DuckDB Amsterdam Meetup"
 ---
 
 <div class="video-container">

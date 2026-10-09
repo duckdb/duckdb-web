@@ -1,7 +1,6 @@
 ---
 layout: docu
 redirect_from:
-- /docs/preview/sql/data_types/array
 - /docs/sql/data_types/array
 - /docs/stable/sql/data_types/array
 title: Array Type
@@ -18,7 +17,7 @@ To store variable-length lists, use the [`LIST` type]({% link docs/current/sql/d
 
 ## Creating Arrays
 
-Arrays can be created using the [`array_value(expr, ...)` function]({% link docs/current/sql/functions/array.md %}#array_valueindex).
+Arrays can be created using the [`array_value(expr, ...)` function]({% link docs/current/sql/functions/array.md %}#array_valuearg-).
 
 Construct with the `array_value` function:
 

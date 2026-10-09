@@ -2,7 +2,6 @@
 layout: docu
 redirect_from:
 - /docs/clients/rust/data_import
-- /docs/preview/clients/rust/data_import
 - /docs/stable/clients/rust/data_import
 title: Import Data
 ---

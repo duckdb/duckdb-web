@@ -1,12 +1,13 @@
 ---
 layout: post
 title: "Integrating FileMaker and DuckDB"
-author: "Marcel Moré"
-tags: ["Talk"]
+authors:
+  - Marcel Moré
+tag: talk
 length: "60 min"
 category: community
 excerpt: ""
-pill: "EngageU 2024"
+venue: "EngageU 2024"
 ---
 
 <div class="video-container">

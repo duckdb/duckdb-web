@@ -1,14 +1,15 @@
 ---
 layout: post
 title: "Deep Dive into DuckDB"
-author: Mark Raasveldt
-thumb: "/images/library/thumbs/2023-11-25-deep-dive-into-duckdb.jpg"
-image: "/images/library/thumbs/2023-11-25-deep-dive-into-duckdb.jpg"
-tags: ["Podcast"]
+authors:
+  - Mark Raasveldt
+thumb: "/images/library/thumbs/2023-11-25-deep-dive-into-duckdb.png"
+image: "/images/library/thumbs/2023-11-25-deep-dive-into-duckdb.png"
+tag: podcast
+category: core
 length: "65 min"
-thirdparty: false
 excerpt: ""
-pill: "The Geek Narrator"
+venue: "The Geek Narrator"
 redirect_from:
 - /media/deep-dive-into-duckdb
 ---

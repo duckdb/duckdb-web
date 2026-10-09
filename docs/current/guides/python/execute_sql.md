@@ -2,7 +2,6 @@
 layout: docu
 redirect_from:
 - /docs/guides/python/execute_sql
-- /docs/preview/guides/python/execute_sql
 - /docs/stable/guides/python/execute_sql
 title: Executing SQL in Python
 ---
@@ -48,3 +47,25 @@ con.sql("CREATE TABLE integers (i INTEGER)")
 con.sql("INSERT INTO integers VALUES (42)")
 con.sql("SELECT * FROM integers").show()
 ```
+
+## Query Parameters
+
+To parameterize a query, pass the values separately from the SQL string using the `execute` method. Use `?` for positional parameters, supplying the values as a list:
+
+```python
+con.execute("SELECT * FROM integers WHERE i = ?", [42]).fetchall()
+```
+
+Named parameters use the `$name` syntax, with the values supplied as a dictionary:
+
+```python
+con.execute("SELECT * FROM integers WHERE i = $value", {"value": 42}).fetchall()
+```
+
+To run the same parameterized statement for many sets of values, for example when inserting multiple rows, use `executemany`:
+
+```python
+con.executemany("INSERT INTO integers VALUES (?)", [[1], [2], [3]])
+```
+
+The `duckdb.sql` function also accepts parameters through its `params` keyword argument.

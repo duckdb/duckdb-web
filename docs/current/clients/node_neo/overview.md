@@ -4,7 +4,6 @@ github_repository: https://github.com/duckdb/duckdb-node-neo/
 redirect_from:
 - /docs/api/node_neo/overview
 - /docs/clients/node_neo/overview
-- /docs/preview/clients/node_neo/overview
 - /docs/stable/clients/node_neo/overview
 title: Node.js Client (Neo)
 ---
@@ -35,15 +34,16 @@ for the most up-to-date roadmap.
 
 ## Platforms
 
-The Node.js (Neo) client supports the following [platforms]({% link docs/current/dev/building/overview.md %}#supported-platforms):
+The Node.js (Neo) client supports the following [platforms]({% link docs/current/dev/building/overview.md %}#platforms):
 
 * `linux_amd64`
+* `linux_amd64_musl`
 * `linux_arm64`
+* `linux_arm64_musl`
 * `osx_amd64`
 * `osx_arm64`
 * `windows_amd64`
-
-The `windows_arm64` platform is currently not supported.
+* `windows_arm64`
 
 ## Examples
 

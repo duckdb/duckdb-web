@@ -8,7 +8,7 @@ excerpt: |
 extension:
   name: hedged_request_fs
   description: Provides hedged request for filesystem operations
-  version: 0.2.3
+  version: 0.2.4
   language: C++
   build: cmake
   license: MIT
@@ -19,7 +19,7 @@ extension:
 repo:
   github: dentiny/duckdb-hedged-request
   andium: a94e1b63e9b1e6f94c6c7debbf1d49bc28f510f7
-  ref: 56bcbab8ce0a074dfabd21251805eeb71b678bc0
+  ref: 202960e150ce53b83c57b1fd7fa3ce8205b29498
 
 docs:
   hello_world: |
@@ -33,8 +33,8 @@ docs:
 
 extension_star_count: 2
 extension_star_count_pretty: 2
-extension_download_count: 1057
-extension_download_count_pretty: 1.1k
+extension_download_count: 1010
+extension_download_count_pretty: 1.0k
 image: '/images/community_extensions/social_preview/preview_community_extension_hedged_request_fs.png'
 layout: community_extension_doc
 ---
@@ -60,10 +60,10 @@ LOAD {{ page.extension.name }};
 
 <div class="extension_functions_table"></div>
 
-|       function_name        | function_type | description | comment | examples |
-|----------------------------|---------------|-------------|---------|----------|
-| hedged_fs_list_filesystems | table         | NULL        | NULL    |          |
-| hedged_fs_wrap             | scalar        | NULL        | NULL    |          |
+|       function_name        | function_type |                                        description                                        | comment |                   examples                    |
+|----------------------------|---------------|-------------------------------------------------------------------------------------------|---------|-----------------------------------------------|
+| hedged_fs_list_filesystems | table         | Lists the names of all filesystem subsystems currently registered with DuckDB.            | NULL    | [SELECT * FROM hedged_fs_list_filesystems();] |
+| hedged_fs_wrap             | scalar        | Wraps a registered filesystem subsystem with hedged requests and returns true on success. | NULL    | [SELECT hedged_fs_wrap('S3FileSystem');]      |
 
 ### Overloaded Functions
 

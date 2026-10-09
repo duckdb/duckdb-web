@@ -1,11 +1,13 @@
 ---
 layout: post
 title: "Announcing DuckDB 0.10.0"
-author: Mark Raasveldt, Hannes Mühleisen
+authors:
+  - Mark Raasveldt
+  - Hannes Mühleisen
 thumb: "/images/blog/thumbs/duckdb-release-0-10-0.svg"
 image: "/images/blog/thumbs/duckdb-release-0-10-0.png"
 excerpt: "The DuckDB team is happy to announce the latest DuckDB release (0.10.0). This release is named Fusca after the [Velvet scoter](https://en.wikipedia.org/wiki/Velvet_scoter) native to Europe."
-tags: ["release"]
+tag: release
 ---
 
 <img src="{% link images/blog/velvet-scoter-duck.jpg %}"
@@ -344,7 +346,7 @@ As a user, you don't have to do anything to make use of the new ALP compression 
 
 ## CLI Improvements
 
-The command-line client has seen a lot of work this release. In particular, multi-line editing has been made the default mode, and has seen many improvements. The query history is now also multi-line. [Syntax highlighting has improved]({% link docs/current/clients/cli/syntax_highlighting.md %}) – missing brackets and unclosed quotes are highlighted as errors, and matching brackets are highlighted when the cursor moves over them. Compatibility with read-line has also been [greatly extended]({% link docs/current/clients/cli/editing.md %}).
+The command line client has seen a lot of work this release. In particular, multi-line editing has been made the default mode, and has seen many improvements. The query history is now also multi-line. [Syntax highlighting has improved]({% link docs/current/clients/cli/syntax_highlighting.md %}) – missing brackets and unclosed quotes are highlighted as errors, and matching brackets are highlighted when the cursor moves over them. Compatibility with read-line has also been [greatly extended]({% link docs/current/clients/cli/editing.md %}).
 
 <img src="{% link images/syntax_highlighting_screenshot.png %}"
      alt="Image showing syntax highlighting in the shell"

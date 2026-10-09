@@ -2,7 +2,6 @@
 layout: docu
 railroad: statements/createsequence.js
 redirect_from:
-- /docs/preview/sql/statements/create_sequence
 - /docs/sql/statements/create_sequence
 - /docs/stable/sql/statements/create_sequence
 title: CREATE SEQUENCE Statement
@@ -229,4 +228,28 @@ SELECT * FROM tbl;
 ```console
 Catalog Error:
 Table with name tbl does not exist!
+```
+
+For the same reason, `CREATE OR REPLACE SEQUENCE` fails when the sequence is referenced by another object, such as a column `DEFAULT` value, because the replacement first drops the existing sequence:
+
+<!-- test:skip reuses the dependency set up above -->
+
+```sql
+CREATE OR REPLACE SEQUENCE id_sequence;
+```
+
+```console
+Dependency Error:
+Cannot drop entry "id_sequence" because there are entries that depend on it.
+table "tbl" depends on index "id_sequence".
+Use DROP...CASCADE to drop all dependents.
+```
+
+To replace the sequence, first remove the dependency, for example by dropping the column default:
+
+<!-- test:skip follows the example above -->
+
+```sql
+ALTER TABLE tbl ALTER COLUMN id DROP DEFAULT;
+CREATE OR REPLACE SEQUENCE id_sequence;
 ```

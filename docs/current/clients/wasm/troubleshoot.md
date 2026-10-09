@@ -2,7 +2,6 @@
 layout: docu
 redirect_from:
 - /docs/clients/wasm/known_issues
-- /docs/preview/clients/wasm/known_issues
 - /docs/stable/clients/wasm/known_issues
 title: Troubleshoot
 ---

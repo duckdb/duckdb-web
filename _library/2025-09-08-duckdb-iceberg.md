@@ -1,14 +1,15 @@
 ---
 layout: post
 title: "Making Iceberg Easy with DuckDB-Iceberg"
-author: "Tom Ebergen"
-thumb: "/images/library/thumbs/2025-09-08-making-iceberg-easy.jpg"
-image: "/images/library/thumbs/2025-09-08-making-iceberg-easy.jpg"
-tags: ["Talk"]
+authors:
+  - Tom Ebergen
+thumb: "/images/library/thumbs/2025-09-08-duckdb-iceberg.png"
+image: "/images/library/thumbs/2025-09-08-duckdb-iceberg.png"
+tag: talk
+category: core
 length: "15 min"
-thirdparty: false
 excerpt: ""
-pill: "Apache Iceberg Europe Community Meetup"
+venue: "Apache Iceberg Europe Community Meetup"
 ---
 
 <div class="video-container">

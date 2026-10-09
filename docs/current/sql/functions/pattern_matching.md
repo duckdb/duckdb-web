@@ -2,7 +2,6 @@
 layout: docu
 railroad: expressions/like.js
 redirect_from:
-- /docs/preview/sql/functions/pattern_matching
 - /docs/sql/functions/pattern_matching
 - /docs/sql/functions/patternmatching
 - /docs/stable/sql/functions/pattern_matching
@@ -209,7 +208,7 @@ DuckDB supports some PostgreSQL-style operators for regular expression matching:
 
 | PostgreSQL-style | Equivalent expression                                                                                    |
 | :--------------- | :------------------------------------------------------------------------------------------------------- |
-| `~`              | [`regexp_full_match`]({% link docs/current/sql/functions/text.md %}#regexp_full_matchstring-regex)       |
-| `!~`             | `NOT` [`regexp_full_match`]({% link docs/current/sql/functions/text.md %}#regexp_full_matchstring-regex) |
+| `~`              | [`regexp_full_match`]({% link docs/current/sql/functions/text.md %}#regexp_full_matchstring-regex-col2)       |
+| `!~`             | `NOT` [`regexp_full_match`]({% link docs/current/sql/functions/text.md %}#regexp_full_matchstring-regex-col2) |
 | `~*`             | (not supported)                                                                                          |
 | `!~*`            | (not supported)                                                                                          |

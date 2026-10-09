@@ -1,7 +1,6 @@
 ---
 layout: docu
 redirect_from:
-- /docs/preview/dev/building/overview
 - /docs/stable/dev/building/overview
 - /docs/dev/building/build_instructions
 - /build

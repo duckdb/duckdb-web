@@ -3,7 +3,6 @@ layout: docu
 redirect_from:
 - /docs/data/csv/multiple_files
 - /docs/data/multiple_files/overview
-- /docs/preview/data/multiple_files/overview
 - /docs/stable/data/multiple_files/overview
 title: Reading Multiple Files
 ---
@@ -82,6 +81,21 @@ FROM read_parquet('dir/**/*.parquet');
 
 DuckDB can also read a series of Parquet files and treat them as if they were a single table. Note that this only works if the Parquet files have the same schema. You can specify which Parquet files you want to read using a list parameter, glob pattern matching syntax, or a combination of both.
 
+### Directory Paths
+
+The `read_parquet` function accepts a local directory path and recursively reads files with the `.parquet` extension, including files in subdirectories:
+
+```sql
+SELECT *
+FROM read_parquet('dir');
+```
+
+This reads the same files as `read_parquet('dir/**/*.parquet')`. A trailing slash on the directory path is optional. In contrast, `read_parquet('dir/*.parquet')` reads only files directly inside `dir`.
+
+Files with other extensions are ignored by directory discovery, even if they contain Parquet data. To read those files, supply their filenames explicitly. If the directory contains no matching files, the query raises an error.
+
+Directory paths do not change how schemas are combined. When files have different columns, use `union_by_name = true` as described in [combining schemas]({% link docs/current/data/multiple_files/combining_schemas.md %}).
+
 ### List Parameter
 
 The `read_parquet` function can accept a list of filenames as the input parameter.
@@ -115,6 +129,33 @@ Read all files that match the glob pattern:
 SELECT *
 FROM read_parquet('test/*.parquet');
 ```
+
+#### Handling Patterns That Match No Files
+
+If a glob pattern does not match any files, the read functions raise an error:
+
+```sql
+SELECT *
+FROM read_parquet('test/*.parquet');
+```
+
+```console
+IO Error:
+No files found that match the pattern "test/*.parquet"
+```
+
+To handle this case gracefully, use the [`glob` function](#glob-function-to-find-filenames) to check whether any files match before reading. Unlike the read functions, `glob` returns an empty result instead of raising an error when nothing matches:
+
+```sql
+SELECT count(*) AS matches
+FROM glob('test/*.parquet');
+```
+
+| matches |
+|--------:|
+| 0       |
+
+Your application can then skip the read when `matches` is `0`.
 
 ### List of Globs
 

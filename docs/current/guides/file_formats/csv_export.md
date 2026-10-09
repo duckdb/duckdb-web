@@ -3,7 +3,6 @@ layout: docu
 redirect_from:
 - /docs/guides/file_formats/csv_export
 - /docs/guides/import/csv_export
-- /docs/preview/guides/file_formats/csv_export
 - /docs/stable/guides/file_formats/csv_export
 title: CSV Export
 ---

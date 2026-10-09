@@ -4,7 +4,6 @@ layout: docu
 redirect_from:
 - /docs/extensions/azure
 - /docs/stable/extensions/azure
-- /docs/preview/core_extensions/azure
 - /docs/stable/core_extensions/azure
 title: Azure Extension
 ---
@@ -13,7 +12,7 @@ The `azure` extension is a loadable extension that adds a filesystem abstraction
 
 ## Installing and Loading
 
-The `azure` extension will be transparently [autoloaded]({% link docs/current/core_extensions/overview.md %}#autoloading-extensions) on first use from the official extension repository.
+The `azure` extension will be transparently [autoloaded]({% link docs/current/extensions/overview.md %}#autoloading-extensions) on first use from the official extension repository.
 If you would like to install and load it manually, run:
 
 ```sql

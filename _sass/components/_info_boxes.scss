@@ -8,7 +8,7 @@ div.singleentry {
 	blockquote {
 		display: flex;
 		align-items: flex-start;
-		gap: 12px;
+		gap: 10px;
 		margin: 20px 0;
 		padding: 14px 12px;
 		border-radius: var(--page-radius-s, 6px);
@@ -97,9 +97,17 @@ div.singleentry {
 			border-color: var(--doc-box-update-border, #ECD7C6);
 		}
 
+		&.new {
+			background: var(--doc-box-new, #FFFBE0);
+			border-color: var(--doc-box-new-border, #F3E88F);
+		}
+
 		&.quote {
-			display: block;
 			padding: 18px 20px;
+
+			.symbol {
+				margin-top: 4px;
+			}
 			border-radius: var(--page-radius-m, 10px);
 			background: var(--doc-codebox-background-color, #F2F2F2);
 			border-color: var(--doc-codebox-border-color, #E6E6E6);

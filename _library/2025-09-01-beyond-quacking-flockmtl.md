@@ -1,13 +1,15 @@
 ---
 layout: post
 title: "Beyond Quacking: Deep Integration of Language Models and RAG into DuckDB"
-author: "Anas Dorbani, Sunny Yasser, Jimmy Lin, Amine Mhedhbi"
-thumb: "/images/library/thumbs/vldb.svg"
-image: "/images/library/thumbs/vldb.png"
-tags: ["Paper"]
+authors:
+  - Anas Dorbani
+  - Sunny Yasser
+  - Jimmy Lin
+  - Amine Mhedhbi
+tag: paper
 category: community
 excerpt: ""
-pill: "VLDB 2025"
+venue: "VLDB 2025"
 ---
 
 | | |
@@ -21,4 +23,5 @@ Knowledge-intensive analytical applications retrieve context from both structure
 
 ## Implementation
 
-FlockMTL is available as a [DuckDB community extension]({% link community_extensions/extensions/flockmtl.md %}).
+FlockMTL was available as a DuckDB community extension.
+It has now been deprecated and superseded by the [Flock community extension]({% link community_extensions/extensions/flock.md %}).
