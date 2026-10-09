@@ -30,7 +30,7 @@ for the most up-to-date roadmap.
 
 ## Platforms
 
-The Node.js (Neo) client supports the following [platforms]({% link docs/preview/dev/building/overview.md %}#supported-platforms):
+The Node.js (Neo) client supports the following [platforms]({% link docs/preview/dev/building/overview.md %}#platforms):
 
 * `linux_amd64`
 * `linux_amd64_musl`

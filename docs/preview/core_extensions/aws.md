@@ -8,7 +8,7 @@ The `aws` extension adds functionality, e.g., authentication, on top of the `htt
 
 ## Installing and Loading
 
-The `aws` extension will be transparently [autoloaded]({% link docs/preview/core_extensions/overview.md %}#autoloading-extensions) on first use from the official extension repository.
+The `aws` extension will be transparently [autoloaded]({% link docs/preview/extensions/overview.md %}#autoloading-extensions) on first use from the official extension repository.
 If you would like to install and load it manually, run:
 
 ```sql

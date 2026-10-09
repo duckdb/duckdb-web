@@ -289,4 +289,4 @@ The results therefore match PostgreSQL:
 
 <!-- markdownlint-enable MD056 -->
 
-The legacy behavior, in which `~` mapped to [`regexp_full_match`]({% link docs/preview/sql/functions/text.md %}#regexp_full_matchstring-regex) and `~*` and `!~*` were unsupported, can be restored using the deprecated `regex_match_operator_semantics` setting with the value `full`.
+The legacy behavior, in which `~` mapped to [`regexp_full_match`]({% link docs/preview/sql/functions/text.md %}#regexp_full_matchstring-regex-col2) and `~*` and `!~*` were unsupported, can be restored using the deprecated `regex_match_operator_semantics` setting with the value `full`.
