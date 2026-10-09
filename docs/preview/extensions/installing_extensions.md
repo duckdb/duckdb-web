@@ -67,6 +67,18 @@ DuckDB contains the following predefined repositories:
 | `local_build_debug`   | `./build/debug/repository`               | Repository created when building DuckDB from source in debug mode (for development)    |
 | `local_build_release` | `./build/release/repository`             | Repository created when building DuckDB from source in release mode (for development)  |
 
+### Backup Repositories
+
+The `core` and `community` repositories are mirrored at `http://extensions.duckdb-backup.org` and `http://community-extensions.duckdb-backup.org`. If the primary server is unavailable, DuckDB automatically falls back to the backup server. This does not apply to repositories set via `custom_extension_repository` or `INSTALL ... FROM '⟨url⟩'`.
+
+To use the backup server manually, run:
+
+```sql
+SET custom_extension_repository = 'http://extensions.duckdb-backup.org';
+```
+
+For details, see [Backup Extension Repositories]({% link docs/preview/operations_manual/backup_extension_repositories.md %}).
+
 ## Working with Multiple Repositories
 
 When working with extensions from different repositories, especially mixing `core` and `core_nightly`, it is important to know the origins and version of the different extensions.
