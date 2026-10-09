@@ -67,6 +67,18 @@ DuckDB contains the following predefined repositories:
 | `local_build_debug`   | `./build/debug/repository`               | Repository created when building DuckDB from source in debug mode (for development)    |
 | `local_build_release` | `./build/release/repository`             | Repository created when building DuckDB from source in release mode (for development)  |
 
+### Backup Repositories
+
+The `core` and `community` repositories are mirrored at `http://extensions.duckdb-backup.org` and `http://community-extensions.duckdb-backup.org`. If the primary server is unavailable, DuckDB automatically falls back to the backup server. This does not apply to repositories set via `custom_extension_repository` or `INSTALL ... FROM '⟨url⟩'`.
+
+To use the backup server manually, run:
+
+```sql
+SET custom_extension_repository = 'http://extensions.duckdb-backup.org';
+```
+
+For details, see [Backup Extension Repositories]({% link docs/preview/operations_manual/backup_extension_repositories.md %}).
+
 ## Working with Multiple Repositories
 
 When working with extensions from different repositories, especially mixing `core` and `core_nightly`, it is important to know the origins and version of the different extensions.
@@ -138,7 +150,7 @@ By default, extensions are installed under the user's home directory:
 ```
 
 For stable DuckDB releases, the `⟨duckdb_version⟩`{:.language-sql .highlight} will be equal to the version tag of that release. For nightly DuckDB builds, it will be equal
-to the short git hash of the build. So for example, the extensions for DuckDB version v0.10.3 on macOS ARM64 (Apple Silicon) are installed to `~/.duckdb/extensions/v0.10.3/osx_arm64/`.
+to the first 10 characters of the build's commit hash. So for example, the extensions for DuckDB version v0.10.3 on macOS ARM64 (Apple Silicon) are installed to `~/.duckdb/extensions/v0.10.3/osx_arm64/`.
 An example installation path for a nightly DuckDB build could be `~/.duckdb/extensions/fc2e4b26a6/linux_amd64`.
 
 To change the default location where DuckDB stores its extensions, use the `extension_directory` configuration option:

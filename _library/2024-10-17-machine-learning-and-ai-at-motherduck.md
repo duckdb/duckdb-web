@@ -1,12 +1,13 @@
 ---
 layout: post
 title: "Machine Learning and AI at MotherDuck"
-author: "Till Döhmen"
-tags: ["Talk"]
+authors:
+  - Till Döhmen
+tag: talk
 length: "25 min"
 category: community
 excerpt: ""
-pill: "DuckDB Amsterdam Meetup"
+venue: "DuckDB Amsterdam Meetup"
 ---
 
 <div class="video-container">

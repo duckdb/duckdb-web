@@ -1,12 +1,14 @@
 ---
 layout: post
 title: "DuckLake & the Future of Open Table Formats"
-author: "Hannes Mühleisen and Jordan Tigani"
-thumb: "/images/library/thumbs/2025-06-17-the-future-of-open-table-formats.jpg"
-image: "/images/library/thumbs/2025-06-17-the-future-of-open-table-formats.jpg"
-tags: ["Podcast"]
+authors:
+  - Hannes Mühleisen
+  - Jordan Tigani
+thumb: "/images/library/thumbs/2025-06-17-the-future-of-open-table-formats.png"
+image: "/images/library/thumbs/2025-06-17-the-future-of-open-table-formats.png"
+tag: podcast
+category: core
 length: "60 min"
-thirdparty: false
 excerpt: ""
 redirect_from:
 - /media/the-future-of-open-table-formats

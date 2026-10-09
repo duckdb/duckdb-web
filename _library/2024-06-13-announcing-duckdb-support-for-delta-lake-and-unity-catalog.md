@@ -1,14 +1,15 @@
 ---
 layout: post
 title: "Announcing DuckDB Support for Delta Lake and the Unity Catalog Extension"
-author: Hannes Mühleisen
-thumb: "/images/library/thumbs/2024-06-13-announcing-duckdb-support-for-delta-lake-and-unity-catalog.jpg"
-image: "/images/library/thumbs/2024-06-13-announcing-duckdb-support-for-delta-lake-and-unity-catalog.jpg"
-tags: ["Talk"]
+authors:
+  - Hannes Mühleisen
+thumb: "/images/library/thumbs/2024-06-13-announcing-duckdb-support-for-delta-lake-and-unity-catalog.png"
+image: "/images/library/thumbs/2024-06-13-announcing-duckdb-support-for-delta-lake-and-unity-catalog.png"
+tag: talk
+category: core
 length: "5 min"
-thirdparty: false
 excerpt: ""
-pill: "Data + AI Summit 2024"
+venue: "Data + AI Summit 2024"
 redirect_from:
 - /media/announcing-duckdb-support-for-delta-lake-and-unity-catalog
 ---

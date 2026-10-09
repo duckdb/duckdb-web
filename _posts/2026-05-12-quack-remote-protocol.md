@@ -1,11 +1,12 @@
 ---
 layout: post
 title: "Quack: The DuckDB Client-Server Protocol"
-author: "The DuckDB team"
+authors:
+  - The DuckDB team
 thumb: "/images/blog/thumbs/quack-release.svg"
 image: "/images/blog/thumbs/quack-release.jpg"
 excerpt: "DuckDB instances can now talk to each other using the Quack remote protocol. This lets you run DuckDB in a client-server setup with multiple concurrent writers. In DuckDB's spirit, Quack is simple to set up and builds on proven technologies such as HTTP. It's also fast, which allows it to support workloads ranging from bulk operations to small transactions."
-tags: ["release"]
+tag: release
 ---
 
 <div class="video-container">

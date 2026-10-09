@@ -14,6 +14,7 @@ extension:
   license: MIT
   maintainers:
     - avaitla
+  opt_in_platforms: "linux_amd64_musl;linux_arm64_musl"
 
 repo:
   github: avaitla/duck_diff
@@ -83,8 +84,8 @@ docs:
 
 extension_star_count: 8
 extension_star_count_pretty: 8
-extension_download_count: 1314
-extension_download_count_pretty: 1.3k
+extension_download_count: 1051
+extension_download_count_pretty: 1.1k
 image: '/images/community_extensions/social_preview/preview_community_extension_duck_diff.png'
 layout: community_extension_doc
 ---

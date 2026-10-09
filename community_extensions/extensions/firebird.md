@@ -8,7 +8,7 @@ excerpt: |
 extension:
   name: firebird
   description: The first Firebird extension in the DuckDB Community Extensions registry. Federated read-only access to Firebird (3.0/4.0/5.0) databases from DuckDB, with projection + filter pushdown, INT128 / DECIMAL(38) / TIMESTAMP_TZ support, native ATTACH, and CHARACTER SET NONE handling (default win1252; strict / iso8859_1 / blob also available) with filter-pushdown correctness on transcoded columns.
-  version: 1.1.0
+  version: 1.2.0
   language: C++
   build: cmake
   license: MIT
@@ -28,8 +28,8 @@ extension:
 
 repo:
   github: flozer/duckdb-firebird
-  # v1.1.0 (immutable commit pin)
-  ref: eda29b89509d873ef4ddde401875a7a000be591a
+  # v1.2.0 (immutable commit pin)
+  ref: 371cfe2776b4782d955a8f18ad27af3c927c75a4
 
 docs:
   hello_world: |
@@ -109,6 +109,13 @@ docs:
       `duckdb_functions()` with real parameter names, a description,
       a runnable example, and categories (v1.0.2), so SQL-connected
       agents and tools can find and use them without reading the docs.
+    - Legacy NONE-text pushdown and diagnostics (v1.2.0): `none_pushdown`
+      pushes `=`/`IN` over CHARACTER SET NONE columns via charset
+      introducers; `firebird_unpushed_mode` fails fast on residual
+      filters; `numeric_widen_int64` lifts NUMERIC(18,s) to
+      DECIMAL(38,s); `firebird_dummy_packet_interval` keepalive with
+      fetch-failure context; `bytes_read_estimate` in the telemetry and
+      per catalog.
     - Row estimate and scan advisories (v1.1.0): `firebird_profile_table`
       reports `estimated_rows` (cheap PK-range upper bound, or an opt-in
       exact `COUNT(*)` via `exact_row_count=true`) and structured
@@ -195,8 +202,8 @@ docs:
 
 extension_star_count: 5
 extension_star_count_pretty: 5
-extension_download_count: 857
-extension_download_count_pretty: 857
+extension_download_count: 1187
+extension_download_count_pretty: 1.2k
 image: '/images/community_extensions/social_preview/preview_community_extension_firebird.png'
 layout: community_extension_doc
 ---
@@ -242,7 +249,7 @@ LOAD {{ page.extension.name }};
 | firebird_query_log            | table         | Returns the bounded per-session log of Firebird scans (opt-in via SET firebird_query_log_size = N), with the same telemetry columns as firebird_last_query().                                                                                                                                                | NULL    | [SELECT * FROM firebird_query_log();]                                                                         |
 | firebird_scan                 | table         | Reads a Firebird table into DuckDB with projection and predicate pushdown, optional parallel PK-range partitioning (partitions=N), ROWS paging, and CHARACTER SET NONE decoding.                                                                                                                             | NULL    | [SELECT * FROM firebird_scan('database=C:/data/erp.fdb user=APP_READONLY password=secret', 'CUSTOMER');]      |
 | firebird_tables               | table         | Lists the Firebird tables visible to a connection, without attaching the database.                                                                                                                                                                                                                           | NULL    | [SELECT * FROM firebird_tables('database=C:/data/erp.fdb user=APP_READONLY password=secret');]                |
-| firebird_type_audit           | table         | Reports per-column type and charset fidelity findings (NONE charset, DECFLOAT as VARCHAR, INT128, timezone types, text BLOBs) for an attached catalog; only columns with a caveat are emitted.                                                                                                               | NULL    | [SELECT * FROM firebird_type_audit('fb');]                                                                    |
+| firebird_type_audit           | table         | Reports per-column type and charset fidelity findings (NONE charset, DECFLOAT as VARCHAR, widenable int64 NUMERIC/DECIMAL, INT128, timezone types, text BLOBs) for an attached catalog; only columns with a caveat are emitted.                                                                              | NULL    | [SELECT * FROM firebird_type_audit('fb');]                                                                    |
 
 ### Overloaded Functions
 
@@ -260,11 +267,13 @@ This extension does not add any types.
 
 <div class="extension_settings_table"></div>
 
-|             name              |                                                                                description                                                                                 | input_type | scope  | aliases |
-|-------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------|------------|--------|---------|
-| firebird_pool_enabled         | Enable the per-ATTACH FirebirdConnectionPool. When false, every Acquire opens a fresh connection and Release destroys it.                                                  | BOOLEAN    | GLOBAL | []      |
-| firebird_pool_idle_timeout_ms | How long (in milliseconds) a released connection may sit in the idle queue before it is discarded on the next Acquire. 0 = no expiry (default). Clock starts at Release(). | BIGINT     | GLOBAL | []      |
-| firebird_pool_max_size        | Maximum number of idle connections kept in the pool. 0 = unlimited (default). Caps the idle queue, not active leases.                                                      | BIGINT     | GLOBAL | []      |
-| firebird_query_log_size       | Maximum entries kept by firebird_query_log() per session. 0 disables the log (default).                                                                                    | BIGINT     | GLOBAL | []      |
+|              name              |                                                                                                                                                                                                description                                                                                                                                                                                                | input_type | scope  | aliases |
+|--------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|------------|--------|---------|
+| firebird_dummy_packet_interval | Keepalive interval, in SECONDS, sent to Firebird as isc_dpb_dummy_packet_interval on every connection (0 = disabled, default). Helps when NAT/firewall idle timeouts drop long fetches (-504 cursor lost / -902 connection shutdown). Effectiveness depends on the server honoring the per-attachment DPB value; on some server versions the server-side DummyPacketInterval setting is required instead. | BIGINT     | GLOBAL | []      |
+| firebird_pool_enabled          | Enable the per-ATTACH FirebirdConnectionPool. When false, every Acquire opens a fresh connection and Release destroys it.                                                                                                                                                                                                                                                                                 | BOOLEAN    | GLOBAL | []      |
+| firebird_pool_idle_timeout_ms  | How long (in milliseconds) a released connection may sit in the idle queue before it is discarded on the next Acquire. 0 = no expiry (default). Clock starts at Release().                                                                                                                                                                                                                                | BIGINT     | GLOBAL | []      |
+| firebird_pool_max_size         | Maximum number of idle connections kept in the pool. 0 = unlimited (default). Caps the idle queue, not active leases.                                                                                                                                                                                                                                                                                     | BIGINT     | GLOBAL | []      |
+| firebird_query_log_size        | Maximum entries kept by firebird_query_log() per session. 0 disables the log (default).                                                                                                                                                                                                                                                                                                                   | BIGINT     | GLOBAL | []      |
+| firebird_unpushed_mode         | What to do when a Firebird scan keeps filters in DuckDB that were not pushed down to Firebird (see not_pushed_reasons in firebird_last_query()). 'silent' (default) does nothing, 'warn' emits a warning, 'error' fails the query with an actionable message.                                                                                                                                             | VARCHAR    | GLOBAL | []      |
 
 

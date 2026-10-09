@@ -1,9 +1,10 @@
 ---
 layout: post
 title: "Correlated Subqueries in SQL"
-author: Mark Raasveldt
+authors:
+  - Mark Raasveldt
 excerpt: ""
-tags: ["using DuckDB"]
+tag: using-duckdb
 ---
 
 Subqueries in SQL are a powerful abstraction that allow simple queries to be used as composable building blocks. They allow you to break down complex problems into smaller parts, and subsequently make it easier to write, understand and maintain large and complex queries.

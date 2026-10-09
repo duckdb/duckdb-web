@@ -8,7 +8,7 @@ excerpt: |
 extension:
   name: whisper
   description: Speech-to-text transcription using whisper.cpp, OpenAI's Whisper model
-  version: 0.5.0
+  version: 0.6.0
   language: C++
   build: cmake
   license: MIT
@@ -19,7 +19,7 @@ extension:
 
 repo:
   github: tobilg/duckdb-whisper
-  ref: 25d0cdfae43da4f66ea6a918b6a65addad0613a2
+  ref: d6ca92023f952818f7568d599fc1a63696c32343
 
 docs:
   hello_world: |
@@ -235,7 +235,7 @@ docs:
     ### Model Management Functions
 
     - `whisper_list_models()` - Lists all available models and download status
-    - `whisper_download_model(model_name)` - Returns download instructions
+    - `whisper_download_model(model_name)` - Downloads a model into the model directory
 
     ### Utility Functions
 
@@ -274,8 +274,8 @@ docs:
 
 extension_star_count: 12
 extension_star_count_pretty: 12
-extension_download_count: 866
-extension_download_count_pretty: 866
+extension_download_count: 927
+extension_download_count_pretty: 927
 image: '/images/community_extensions/social_preview/preview_community_extension_whisper.png'
 layout: community_extension_doc
 ---

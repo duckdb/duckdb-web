@@ -8,7 +8,7 @@ excerpt: |
 extension:
   name: raster
   description: DuckDB extension for reading and writing geospatial raster data using SQL.
-  version: 1.6.1
+  version: 1.6.2
   language: C++
   build: cmake
   excluded_platforms: "wasm_mvp;wasm_eh;wasm_threads"
@@ -18,7 +18,7 @@ extension:
 
 repo:
   github: ahuarte47/duckdb-raster
-  ref: 396c75ab69f4b5903d9186546f90ecd48561737e
+  ref: cc1503eb8007fe8d2b288845eb9a55354172c594
 
 docs:
   hello_world: |
@@ -383,7 +383,7 @@ docs:
 
 extension_star_count: 59
 extension_star_count_pretty: 59
-extension_download_count: 1101
+extension_download_count: 1146
 extension_download_count_pretty: 1.1k
 image: '/images/community_extensions/social_preview/preview_community_extension_raster.png'
 layout: community_extension_doc

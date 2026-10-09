@@ -17,7 +17,7 @@ See the [data types overview]({% link docs/current/sql/data_types/overview.md %}
 
 ## Creating Lists
 
-Lists can be created using the [`list_value(expr, ...)`]({% link docs/current/sql/functions/list.md %}#list_valueany-) function or the equivalent bracket notation `[expr, ...]`. The expressions can be constants or arbitrary expressions. To create a list from a table column, use the [`list`]({% link docs/current/sql/functions/aggregates.md %}#general-aggregate-functions) aggregate function.
+Lists can be created using the [`list_value(expr, ...)`]({% link docs/current/sql/functions/list.md %}#list_valuearg-) function or the equivalent bracket notation `[expr, ...]`. The expressions can be constants or arbitrary expressions. To create a list from a table column, use the [`list`]({% link docs/current/sql/functions/aggregates.md %}#general-aggregate-functions) aggregate function.
 
 List of integers:
 

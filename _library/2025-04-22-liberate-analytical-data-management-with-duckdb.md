@@ -1,14 +1,15 @@
 ---
 layout: post
 title: "Liberate Analytical Data Management with DuckDB"
-author: Hannes Mühleisen
-thumb: "/images/library/thumbs/2025-04-22-liberate-analytical-data-management-with-duckdb.jpg"
-image: "/images/library/thumbs/2025-04-22-liberate-analytical-data-management-with-duckdb.jpg"
-tags: ["Talk"]
+authors:
+  - Hannes Mühleisen
+thumb: "/images/library/thumbs/2025-04-22-liberate-analytical-data-management-with-duckdb.png"
+image: "/images/library/thumbs/2025-04-22-liberate-analytical-data-management-with-duckdb.png"
+tag: talk
+category: core
 length: "35 min"
-thirdparty: false
 excerpt: ""
-pill: "Data Council 2025"
+venue: "Data Council 2025"
 redirect_from:
 - /media/liberate-analytical-data-management-with-duckdb
 ---

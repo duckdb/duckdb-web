@@ -1,13 +1,13 @@
 ---
 layout: post
 title: "Why DuckDB Is the Missing Piece of Your Agentic Setup"
-author: "Christophe Blefari"
-tags: ["Talk"]
+authors:
+  - Christophe Blefari
+tag: talk
 length: "20 min"
 category: community
 excerpt: ""
-pill: "DuckDB Paris Meetup"
-thirdparty: true
+venue: "DuckDB Paris Meetup"
 ---
 
 <div class="video-container">

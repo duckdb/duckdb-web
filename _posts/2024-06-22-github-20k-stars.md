@@ -1,11 +1,12 @@
 ---
 layout: post
 title: "20 000 Stars on GitHub"
-author: "The DuckDB team"
+authors:
+  - The DuckDB team
 thumb: "/images/blog/thumbs/github-stars.svg"
 image: "/images/blog/thumbs/github-stars.png"
 excerpt: ""
-tags: ["release"]
+tag: release
 ---
 
 DuckDB reached 20&nbsp;000 stars today on [GitHub](https://github.com/duckdb/duckdb).

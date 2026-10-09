@@ -1,14 +1,13 @@
 ---
 layout: post
 title: "DuckLake: The Definitive Guide"
-author: "Matt Martin, Alex Monahan"
-thumb: "/images/library/thumbs/ducklake-the-definitive-guide.svg"
-image: "/images/library/ducklake-the-definitive-guide.jpg"
-tags: ["Book"]
+authors:
+  - Matt Martin
+  - Alex Monahan
+tag: book
 category: community
-highlighted: true
 excerpt: ""
-pill: "DuckLake: The Definitive Guide"
+venue: "DuckLake: The Definitive Guide"
 ---
 
 <div class="graphics-box">

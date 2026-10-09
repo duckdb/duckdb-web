@@ -1,16 +1,21 @@
 ---
 layout: post
 title: "Alice and Eve"
-author: "Kate Labunets, Maartje de Graaf"
+authors:
+  - Kate Labunets
+  - Maartje de Graaf
 thumb: "/images/events/thumbs/alice-and-eve.svg"
 image: "/images/events/thumbs/alice-and-eve.png"
 excerpt: ""
-tags: ["workshop"]
-labels: [community, sponsored]
-venue: "Neude11 Utrecht Public Library"
+tag: workshop
+category: community
+sponsored: true
+location: "Neude11 Utrecht Public Library"
 ---
 
-[Alice & Eve](https://alice-and-eve.github.io/2026/) is a free one-day workshop celebrating women studying and working in computing. The seventh edition is hosted by Utrecht University and features keynote talks, a poster contest, an exhibition on women in computing, and ample networking opportunities. DuckLabs is a gold sponsor of the event, and Nantia Makrynioti will give a talk titled _“DuckDB: From academic research to AWS.”_
+> DuckLabs is a gold sponsor of this event.
+
+[Alice & Eve](https://alice-and-eve.github.io/2026/) is a free one-day workshop celebrating women studying and working in computing. The seventh edition is hosted by Utrecht University and features keynote talks, a poster contest, an exhibition on women in computing, and ample networking opportunities. Nantia Makrynioti will give a talk titled _“DuckDB: From academic research to AWS.”_
 
 ## Venue
 

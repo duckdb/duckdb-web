@@ -17,7 +17,7 @@ extension:
 
 repo:
   github: nkwork9999/miniplot
-  ref: 32fc16fb4beec1fe5c3b1a705a00426e8dc3863a
+  ref: f5030419abf8716b9f922b0427e9e92887ff0269
 
 docs:
   hello_world: |
@@ -72,10 +72,10 @@ docs:
         'Monthly Sales from CSV'
     ) FROM read_csv('sales.csv');
 
-extension_star_count: 25
-extension_star_count_pretty: 25
-extension_download_count: 1167
-extension_download_count_pretty: 1.2k
+extension_star_count: 26
+extension_star_count_pretty: 26
+extension_download_count: 1142
+extension_download_count_pretty: 1.1k
 image: '/images/community_extensions/social_preview/preview_community_extension_miniplot.png'
 layout: community_extension_doc
 ---
@@ -104,12 +104,17 @@ LOAD {{ page.extension.name }};
 |      function_name       | function_type | description | comment | examples |
 |--------------------------|---------------|-------------|---------|----------|
 | area_chart               | scalar        | NULL        | NULL    |          |
+| area_chart_html          | scalar        | NULL        | NULL    |          |
 | bar_chart                | scalar        | NULL        | NULL    |          |
+| bar_chart_html           | scalar        | NULL        | NULL    |          |
 | line_chart               | scalar        | NULL        | NULL    |          |
+| line_chart_html          | scalar        | NULL        | NULL    |          |
 | miniplot                 | scalar        | NULL        | NULL    |          |
 | miniplot_openssl_version | scalar        | NULL        | NULL    |          |
 | scatter_3d_chart         | scalar        | NULL        | NULL    |          |
+| scatter_3d_chart_html    | scalar        | NULL        | NULL    |          |
 | scatter_chart            | scalar        | NULL        | NULL    |          |
+| scatter_chart_html       | scalar        | NULL        | NULL    |          |
 
 ### Overloaded Functions
 

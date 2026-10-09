@@ -1,11 +1,12 @@
 ---
 layout: post
 title: "DuckDB Now Speaks Dutch!"
-author: "Daniël ten Wolde"
+authors:
+  - Daniël ten Wolde
 thumb: "/images/blog/thumbs/duckdb-now-speaks-dutch.svg"
 image: "/images/blog/thumbs/duckdb-now-speaks-dutch.png"
 excerpt: "DuckDB now speaks Dutch! Load the EendDB community extension and start writing your queries in het Nederlands."
-tags: ["extensions"]
+tag: extensions
 ---
 
 Historically speaking, SQL queries have always been formulated in English. The initial name of the language was even Structured **English** Query Language (SEQUEL), before it became SQL. Now, what if the Dutch hadn't traded away New Amsterdam (present-day New York)? Would we all have been writing SQL in Dutch instead?

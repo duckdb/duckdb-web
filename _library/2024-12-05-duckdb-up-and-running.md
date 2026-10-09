@@ -1,13 +1,12 @@
 ---
 layout: post
 title: "DuckDB: Up and Running"
-author: "Wei-Meng Lee"
-thumb: "/images/library/thumbs/duckdb-up-and-running.svg"
-image: "/images/library/thumbs/duckdb-up-and-running.png"
-tags: ["Book"]
+authors:
+  - Wei-Meng Lee
+tag: book
 category: community
 excerpt: ""
-pill: "DuckDB: Up and Running"
+venue: "DuckDB: Up and Running"
 ---
 
 <div class="graphics-box">

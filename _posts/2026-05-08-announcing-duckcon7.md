@@ -1,11 +1,12 @@
 ---
 layout: post
 title: "Announcing the Program of DuckCon #7 Amsterdam"
-author: Gábor Szárnyas
+authors:
+  - Gábor Szárnyas
 thumb: "/images/events/thumbs/duckcon-7-amsterdam.svg"
 image: "/images/events/thumbs/duckcon-7-amsterdam.png"
 excerpt: "We are hosting DuckCon #7 in Amsterdam on June 24, 2026. Join us at the Royal Tropical Institute for talks, lightning sessions, and a borrel."
-tags: ["DuckCon"]
+tag: duckcon
 ---
 
 <img src="{% link images/events/thumbs/duckcon-7-amsterdam.svg %}"

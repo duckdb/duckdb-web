@@ -1,11 +1,12 @@
 ---
 layout: post
 title: "Big Data on the Cheapest MacBook"
-author: "Gábor Szárnyas"
+authors:
+  - Gábor Szárnyas
 thumb: "/images/blog/thumbs/macbook-neo.svg"
 image: "/images/blog/thumbs/macbook-neo.jpg"
 excerpt: "How does the latest entry-level MacBook perform on database workloads? We benchmarked it using ClickBench and TPC-DS SF300. We found that it could complete both workloads, sometimes with surprisingly good results."
-tags: ["benchmark"]
+tag: benchmark
 ---
 
 Apple released the [MacBook Neo](https://en.wikipedia.org/wiki/MacBook_Neo) today and there is no shortage of tech reviews explaining whether it's the right device for you if you are a student, a photographer or a writer.

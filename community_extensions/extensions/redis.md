@@ -112,12 +112,12 @@ extension:
 repo:
   andium: 52d4e50c2fce74de9e9c90b15316a63350614495
   github: quackscience/duckdb-extension-redis
-  ref: 72ac89b6a1f3ff0db79df58f3aae6a9040c84014
+  ref: ba3af666aa45e68928428b8be24cd2eabf5bab66
 
 extension_star_count: 17
 extension_star_count_pretty: 17
-extension_download_count: 1147
-extension_download_count_pretty: 1.1k
+extension_download_count: 989
+extension_download_count_pretty: 989
 image: '/images/community_extensions/social_preview/preview_community_extension_redis.png'
 layout: community_extension_doc
 ---

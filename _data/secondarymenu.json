@@ -58,10 +58,6 @@
               "url": "/events"
             },
             {
-              "page": "Everywhere",
-              "url": "/everywhere"
-            },
-            {
               "page": "Webshop",
               "url": "https://shop.duckdb.org"
             },

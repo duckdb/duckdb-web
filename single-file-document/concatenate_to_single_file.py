@@ -381,7 +381,8 @@ def add_blog_posts(blog_root, of):
 
         doc_title = doc["title"]
         doc_excerpt = doc["excerpt"]
-        doc_author = doc["author"]
+        doc_authors = doc.get("authors") or [doc.get("author", "")]
+        doc_author = ", ".join(doc_authors)
         doc_date = blog_post_file.split("/")[-1][0:10]
         doc_body = doc.content
 
@@ -393,7 +394,7 @@ def add_blog_posts(blog_root, of):
         doc_body = change_links(doc_body)
         doc_body = cleanup_doc(doc_body)
 
-        if ',' in doc_author or ' and ' in doc_author:
+        if len(doc_authors) > 1:
             author_field = "Authors"
         else:
             author_field = "Author"

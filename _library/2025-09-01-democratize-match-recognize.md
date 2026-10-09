@@ -1,13 +1,16 @@
 ---
 layout: post
 title: "Democratize MATCH_RECOGNIZE!"
-author: "Louisa Lambrecht, Tim Findling, Samuel Heid, Marcel Knüdeler, Torsten Grust"
-thumb: "/images/library/thumbs/vldb.svg"
-image: "/images/library/thumbs/vldb.png"
-tags: ["Paper"]
+authors:
+  - Louisa Lambrecht
+  - Tim Findling
+  - Samuel Heid
+  - Marcel Knüdeler
+  - Torsten Grust
+tag: paper
 category: community
 excerpt: ""
-pill: "VLDB 2025"
+venue: "VLDB 2025"
 ---
 
 |-------|-------|

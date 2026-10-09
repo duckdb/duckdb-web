@@ -17,7 +17,7 @@ extension:
 
 repo:
   github: oglego/duckdb_clamp
-  ref: f714928f05bd16e187c585d17fdcb3ea93f653dd
+  ref: 8e21b27a80a2ebfda2b786d06ca50a4123b3faa5
 
 docs:
   hello_world: |
@@ -65,6 +65,11 @@ docs:
     SELECT fract(-0.1);          -- Returns 0.9
     SELECT fract(10);            -- Returns 0.0
 
+    -- Step function (returns 0 if value < edge, otherwise 1)
+    SELECT step(0.5, 0.25);      -- Returns 0.0
+    SELECT step(0.5, 0.5);       -- Returns 1.0
+    SELECT step(5,6);            -- Returns 1
+
   extended_description: |
     The Clamp extension provides functions for numerical restriction:
 
@@ -85,6 +90,8 @@ docs:
 
     7. **fract(value)**: Return the fractional part of a number.
 
+    8. **step(edge, value)**: Return 0 if `value < edge`, otherwise return 1.
+
     This extension ensures safe handling of edge cases including:
     - NaN values
     - NULLs
@@ -93,8 +100,8 @@ docs:
 
 extension_star_count: 2
 extension_star_count_pretty: 2
-extension_download_count: 1107
-extension_download_count_pretty: 1.1k
+extension_download_count: 1010
+extension_download_count_pretty: 1.0k
 image: '/images/community_extensions/social_preview/preview_community_extension_clamp.png'
 layout: community_extension_doc
 ---
@@ -120,15 +127,16 @@ LOAD {{ page.extension.name }};
 
 <div class="extension_functions_table"></div>
 
-| function_name | function_type | description | comment | examples |
-|---------------|---------------|-------------|---------|----------|
-| clamp         | scalar        | NULL        | NULL    |          |
-| clamp01       | scalar        | NULL        | NULL    |          |
-| clip          | scalar        | NULL        | NULL    |          |
-| fract         | scalar        | NULL        | NULL    |          |
-| pingpong      | scalar        | NULL        | NULL    |          |
-| saturate      | scalar        | NULL        | NULL    |          |
-| wrap          | scalar        | NULL        | NULL    |          |
+| function_name | function_type |                                                                                             description                                                                                              | comment |       examples        |
+|---------------|---------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|---------|-----------------------|
+| clamp         | scalar        | Restricts value to the range [min_val, max_val]. Returns min_val if value is below it and max_val if value is above it. Returns NaN if any argument is NaN and raises an error if min_val > max_val. | NULL    | [clamp(15, 0, 10)]    |
+| clamp01       | scalar        | Alias of saturate. Restricts value to the range [0, 1].                                                                                                                                              | NULL    | [clamp01(1.5)]        |
+| clip          | scalar        | Alias of clamp. Restricts value to the range [min_val, max_val].                                                                                                                                     | NULL    | [clip(15, 0, 10)]     |
+| fract         | scalar        | Returns the fractional part of value, computed as value - floor(value). For example the result for -1.25 is 0.75. Always returns 0 for integers.                                                     | NULL    | [fract(3.75)]         |
+| pingpong      | scalar        | Bounces value back and forth between min_val and max_val, producing a triangle wave. Raises an error if min_val >= max_val.                                                                          | NULL    | [pingpong(12, 0, 10)] |
+| saturate      | scalar        | Restricts value to the range [0, 1]. Returns 0 for values below 0 and 1 for values above 1.                                                                                                          | NULL    | [saturate(1.5)]       |
+| step          | scalar        | Threshold function that returns 0 if value < edge, otherwise 1. Returns NaN if either argument is NaN.                                                                                               | NULL    | [step(0.5, 0.75)]     |
+| wrap          | scalar        | Wraps value into the half-open range [min_val, max_val) using modular arithmetic, which is useful for cyclic values such as angles. Raises an error if min_val >= max_val.                           | NULL    | [wrap(370, 0, 360)]   |
 
 ### Overloaded Functions
 

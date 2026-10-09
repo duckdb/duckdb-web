@@ -8,13 +8,13 @@ excerpt: |
 # Submission file for https://github.com/duckdb/community-extensions
 #
 # Live in duckdb/community-extensions since #2037 (v0.9.2). This update jumps
-# from v0.15.1 straight to v0.18.0 — see the PR description for what changed
-# in between (v0.16.0, v0.17.0, v0.17.1, v0.18.0).
+# from v0.18.0 straight to v0.19.0 — see the PR description for what the
+# intermediate releases delivered.
 
 extension:
   name: salesforce
   description: Read-only access to Salesforce orgs as DuckDB SQL tables over the official REST and Bulk APIs — OAuth refresh-token or JWT-bearer auth (credentials from inline options, environment variables, or an SFDX auth URL), native ATTACH, projection + predicate pushdown, COUNT pushdown, explicit server-side aggregates with GROUP BY, lazy/auto/Bulk transports with PK chunking (Bulk blob/base64 compatibility guard), a per-job API quota governor, parent + grandparent relationship STRUCT columns with diagnostics, queryAll (archived + deleted), Tooling-API fast schema, and metadata helpers (manual cache refresh, picklist values, record types). Requires DuckDB v1.5.4 or newer.
-  version: 0.18.0
+  version: 0.19.0
   language: C++
   build: cmake
   license: MIT
@@ -30,8 +30,8 @@ extension:
 repo:
   github: flozer/duckdb-salesforce
   # community-extensions CI checks out exactly this ref to build + sign.
-  # tag v0.18.0
-  ref: 6a03b024e62f4e98781267786a5d46800edea8f8
+  # tag v0.19.0
+  ref: af02412221eabff0fbcadf1b40544ac47248f238
 
 docs:
   hello_world: |
@@ -72,11 +72,20 @@ docs:
     is unambiguous. Built and tested against DuckDB v1.5.4, v1.5.5 and
     v1.5.6 (v1.5.2/v1.5.3 support was dropped in v0.15.0 — see CHANGELOG.md).
     Full change history in this repo's CHANGELOG.md.
+    Since v0.19.0, salesforce_deleted_ids(catalog, object, since, until)
+    surfaces the ids deleted in the org within a window (Replication API
+    getDeleted for exact deletion timestamps; a queryAll IsDeleted scan as
+    fallback for wider windows), salesforce_bulk_resume(catalog, job_id)
+    re-streams the results of an existing Bulk query job (recovery without
+    re-running it), salesforce_scan(catalog, object, filter, ...) scans an
+    sObject directly with per-call overrides, transient HTTP failures retry
+    with tunable sf_retry_max/sf_retry_backoff_ms, and well-known Salesforce
+    errorCodes surface with embedded remedy hints.
 
-extension_star_count: 2
-extension_star_count_pretty: 2
-extension_download_count: 1053
-extension_download_count_pretty: 1.1k
+extension_star_count: 3
+extension_star_count_pretty: 3
+extension_download_count: 978
+extension_download_count_pretty: 978
 image: '/images/community_extensions/social_preview/preview_community_extension_salesforce.png'
 layout: community_extension_doc
 ---
@@ -105,7 +114,9 @@ LOAD {{ page.extension.name }};
 |          function_name           | function_type |                                                                                                                                                                                                             description                                                                                                                                                                                                              | comment |                                                                                    examples                                                                                    |
 |----------------------------------|---------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|---------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | salesforce_aggregate             | table         | Runs an explicit server-side SOQL aggregate over an attached catalog - SELECT <aggregates> FROM <object> [WHERE <filter>] [GROUP BY <group_by>] - with optional positional filter and group_by arguments (3 to 5 total) and one VARCHAR column per aggregate term; opt-in, not transparent pushdown.                                                                                                                                 | NULL    | [SELECT * FROM salesforce_aggregate('sf', 'Account', 'COUNT(Id) n', 'IsDeleted = false', 'Industry');]                                                                         |
+| salesforce_bulk_resume           | table         | Re-streams the result rows of an existing Bulk API 2.0 query job by id, so a load that died mid-stream can resume without re-running the query. Columns come from the job's CSV header (VARCHAR); rows stream page-by-page following the Sforce-Locator. Read-only; invalid or expired job ids fail fast.                                                                                                                            | NULL    | [SELECT * FROM salesforce_bulk_resume('sf', '7504x00000ABCDef');]                                                                                                              |
 | salesforce_decode                | table         | Decodes a fields-describe JSON array plus a records JSON array into typed DuckDB rows; utility surface of the scan's JSON-to-vector conversion.                                                                                                                                                                                                                                                                                      | NULL    | [SELECT * FROM salesforce_decode('[{"name":"Name","type":"string"}]', '[{"Name":"Acme"}]');]                                                                                   |
+| salesforce_deleted_ids           | table         | Returns the ids deleted in the org for an sObject within a time window, so a watermark-based incremental load can sweep deletes (deletes do not update SystemModstamp). Windows up to 15 minutes use the Replication API getDeleted() with exact deleted_date; wider windows fall back to a queryAll IsDeleted scan (deleted_date NULL; the recycle bin holds rows ~15 days).                                                        | NULL    | [SELECT * FROM salesforce_deleted_ids('sf', 'Lead', since := '2026-09-30T00:00:00');]                                                                                          |
 | salesforce_describe              | table         | Fetches the REST describe metadata (fields, types, relationships) for a single Salesforce sObject without an ATTACH; credentials are passed as the named parameters client_id, client_secret, refresh_token, login_url and api_version.                                                                                                                                                                                              | NULL    | [SELECT * FROM salesforce_describe('Account', client_id := '<client_id>', client_secret := '<client_secret>', refresh_token := '<refresh_token>');]                            |
 | salesforce_describe_calls        | table         | TEST ONLY: returns the number of sObject describes issued since ATTACH, proving the metadata cache is reused.                                                                                                                                                                                                                                                                                                                        | NULL    | [SELECT * FROM salesforce_describe_calls();]                                                                                                                                   |
 | salesforce_global_describe_calls | table         | TEST ONLY: returns the number of global describe (GET /sobjects) calls issued since ATTACH, proving object-list discovery caching.                                                                                                                                                                                                                                                                                                   | NULL    | [SELECT * FROM salesforce_global_describe_calls();]                                                                                                                            |
@@ -127,6 +138,7 @@ LOAD {{ page.extension.name }};
 | salesforce_report                | table         | Runs a tabular Salesforce report synchronously and returns its fact rows plus run diagnostics; capped at 2,000 rows, for discovery and validation rather than large extraction.                                                                                                                                                                                                                                                      | NULL    | [SELECT * FROM salesforce_report('sf', '00O...');]                                                                                                                             |
 | salesforce_report_soql           | table         | Returns a best-effort, describe-validated candidate SOQL translation of a report with explainability columns (translatable, translation_status, blocked_by, confidence); reports translatable = false instead of an unverified SOQL.                                                                                                                                                                                                 | NULL    | [SELECT * FROM salesforce_report_soql('sf', '00O...');]                                                                                                                        |
 | salesforce_reports               | table         | Lists the Salesforce report definitions visible to the authenticated user, for Report Bridge discovery and validation.                                                                                                                                                                                                                                                                                                               | NULL    | [SELECT * FROM salesforce_reports('sf');]                                                                                                                                      |
+| salesforce_scan                  | table         | Scans an sObject directly using the credentials of an attached catalog, without the catalog table layer. The optional where argument is raw SOQL appended to the query (no ';', no nested SELECT); projection and plan predicates push down as on catalog tables. Named parameters query_mode ('query'/'queryAll'), transport ('rest'/'bulk'/'auto') and chunks (1-8) override per call without touching session settings.           | NULL    | [SELECT * FROM salesforce_scan('sf', 'Lead', where := 'Status 'Open'') LIMIT 10;]                                                                                              |
 | salesforce_tooling_calls         | table         | TEST ONLY: returns the number of Tooling API schema queries issued since ATTACH, proving fast-schema batching (sf_schema_source = 'tooling').                                                                                                                                                                                                                                                                                        | NULL    | [SELECT * FROM salesforce_tooling_calls();]                                                                                                                                    |
 | sf_url_encode                    | scalar        | Percent-encodes a string for safe use as a literal inside a SOQL query or a Salesforce REST URL.                                                                                                                                                                                                                                                                                                                                     | NULL    | [sf_url_encode('Acme & Sons')]                                                                                                                                                 |
 
@@ -193,6 +205,8 @@ This extension does not add any types.
 | sf_quota_reserve_pct           | Quota governor: keep this %% of DailyApiRequests.Max in reserve (default 10).                                                                                                                                                                                                                                                                             | BIGINT     | GLOBAL | []      |
 | sf_relationship_depth          | Parent traversal depth when sf_relationships='parent': 1 (default, parent only) or 2 (also grandparent, nested STRUCT). Capped at 2.                                                                                                                                                                                                                      | BIGINT     | GLOBAL | []      |
 | sf_relationships               | Parent relationship traversal: 'off' (default) or 'parent' (expose each single-target parent as a STRUCT column, e.g. SELECT Account.Name FROM sf.Contact). Polymorphic/child relationships not expanded.                                                                                                                                                 | VARCHAR    | GLOBAL | []      |
+| sf_retry_backoff_ms            | Linear backoff base between transient HTTP retries: attempt N sleeps backoff_ms * N before retrying. Clamped to [0,60000]. Default 200.                                                                                                                                                                                                                   | BIGINT     | GLOBAL | []      |
+| sf_retry_max                   | Maximum attempts for transient HTTP failures (429, 5xx, connection errors) before failing a call. Clamped to [1,10]. Default 3. Raise for runs over flaky links; the 401 refresh path is separate and always applies.                                                                                                                                     | BIGINT     | GLOBAL | []      |
 | sf_schema_source               | Schema discovery: 'describe' (default, REST, authoritative) or 'tooling' (fast batched Tooling API FieldDefinition; falls back to REST describe per object on error/absent/ambiguous type; coarser types; fields default non-filterable unless Tooling marks them filterable).                                                                            | VARCHAR    | GLOBAL | []      |
 
 

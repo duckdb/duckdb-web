@@ -1,11 +1,12 @@
 ---
 layout: post
 title: "Announcing DuckDB 1.5.5"
-author: "The DuckDB team"
+authors:
+  - The DuckDB team
 thumb: "/images/blog/thumbs/duckdb-release-1-5-5.svg"
 image: "/images/blog/thumbs/duckdb-release-1-5-5.png"
 excerpt: "Today we are releasing DuckDB 1.5.5 with bugfixes and performance improvements."
-tags: ["release"]
+tag: release
 ---
 
 In this blog post, we highlight a few important fixes in DuckDB v1.5.5, the fifth patch release in [DuckDB's 1.5 (Variegata) line]({% post_url 2026-03-09-announcing-duckdb-150 %}).

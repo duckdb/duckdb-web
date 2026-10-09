@@ -1,5 +1,5 @@
 <div class="wrap pagetitle pagetitle--small mb-5">
-    <h1>DuckDB installation</h1>
+    <h1>DuckDB Installation</h1>
 </div>
 
 <div class="installationselection">
@@ -149,7 +149,7 @@ curl https://install.duckdb.org | DUCKDB_VERSION=alpha bash
 <div class="alternative">
 
 <h4>Direct Download</h4>
-<a href="https://artifacts.duckdb.org/v2.0-cyanoptera/duckdb-cli-osx-universal.tar.gz" class="download-btn" download="duckdb-cli-osx-universal.tar.gz" rel="noopener noreferrer">duckdb-cli-osx-universal.tar.gz</a>
+<a href="https://artifacts.duckdb.org/staged/v2.0-cyanoptera/duckdb-cli-osx-universal.tar.gz" class="download-btn" download="duckdb-cli-osx-universal.tar.gz" rel="noopener noreferrer">duckdb-cli-osx-universal.tar.gz</a>
 
 </div>
 </div>
@@ -230,8 +230,8 @@ curl https://install.duckdb.org | DUCKDB_VERSION=alpha bash
 <div class="alternative">
 
 <h4>Direct Downloads</h4>
-<a href="https://artifacts.duckdb.org/v2.0-cyanoptera/duckdb-cli-linux-amd64.tar.gz" class="download-btn" download="duckdb-cli-linux-amd64.tar.gz" rel="noopener noreferrer">duckdb-cli-linux-amd64.tar.gz</a>
-<a href="https://artifacts.duckdb.org/v2.0-cyanoptera/duckdb-cli-linux-arm64.tar.gz" class="download-btn" download="duckdb-cli-linux-arm64.tar.gz" rel="noopener noreferrer">duckdb-cli-linux-arm64.tar.gz</a>
+<a href="https://artifacts.duckdb.org/staged/v2.0-cyanoptera/duckdb-cli-linux-amd64.tar.gz" class="download-btn" download="duckdb-cli-linux-amd64.tar.gz" rel="noopener noreferrer">duckdb-cli-linux-amd64.tar.gz</a>
+<a href="https://artifacts.duckdb.org/staged/v2.0-cyanoptera/duckdb-cli-linux-arm64.tar.gz" class="download-btn" download="duckdb-cli-linux-arm64.tar.gz" rel="noopener noreferrer">duckdb-cli-linux-arm64.tar.gz</a>
 
 </div>
 </div>
@@ -323,8 +323,8 @@ $env:DUCKDB_VERSION = "alpha"; irm https://install.duckdb.org/install.ps1 | iex
 {%- endhighlight -%}
 
 <h4>Direct Downloads</h4>
-<a href="https://duckdb-staging.duckdb.org/{{ site.duckdb_windows_alpha_release }}/duckdb/duckdb/github_release/duckdb-cli-windows-amd64.tar.gz" class="download-btn" download="duckdb-cli-windows-amd64.tar.gz" rel="noopener noreferrer">duckdb-cli-windows-amd64.tar.gz</a>
-<a href="https://duckdb-staging.duckdb.org/{{ site.duckdb_windows_alpha_release }}/duckdb/duckdb/github_release/duckdb-cli-windows-arm64.tar.gz" class="download-btn" download="duckdb-cli-windows-arm64.tar.gz" rel="noopener noreferrer">duckdb-cli-windows-arm64.tar.gz</a>
+<a href="https://artifacts.duckdb.org/staged/v2.0-cyanoptera/duckdb-cli-windows-amd64.tar.gz" class="download-btn" download="duckdb-cli-windows-amd64.tar.gz" rel="noopener noreferrer">duckdb-cli-windows-amd64.tar.gz</a>
+<a href="https://artifacts.duckdb.org/staged/v2.0-cyanoptera/duckdb-cli-windows-arm64.tar.gz" class="download-btn" download="duckdb-cli-windows-arm64.tar.gz" rel="noopener noreferrer">duckdb-cli-windows-arm64.tar.gz</a>
 
 <div class="note">
     DuckDB on Windows requires the <a href="https://learn.microsoft.com/en-us/cpp/windows/latest-supported-vc-redist?view=msvc-170">Microsoft Visual C++ Redistributable</a>.
@@ -519,6 +519,9 @@ dependencies {
     data-environment="java"
     data-docs="{% link docs/preview/clients/java/overview.md %}">
 
+<h4>Direct Download (JAR)</h4>
+<a href="https://duckdb-staging.duckdb.org/duckdb/duckdb-java/maven/org/duckdb/duckdb_jdbc/{{ site.preview_duckdb_java_version }}/duckdb_jdbc-{{ site.preview_duckdb_java_version }}.jar" class="download-btn" download="duckdb_jdbc-{{ site.preview_duckdb_java_version }}.jar" rel="noopener noreferrer">duckdb_jdbc-{{ site.preview_duckdb_java_version }}.jar</a>
+
 <h4>Maven</h4>
 
 {%- highlight xml -%}
@@ -573,9 +576,6 @@ dependencies {
     implementation("org.duckdb:duckdb_jdbc:{{ site.preview_duckdb_java_version }}")
 }
 {%- endhighlight -%}
-
-<h4>Direct Download (JAR)</h4>
-<a href="https://duckdb-staging.duckdb.org/duckdb/duckdb-java/maven/org/duckdb/duckdb_jdbc/{{ site.preview_duckdb_java_version }}/duckdb_jdbc-{{ site.preview_duckdb_java_version }}.jar" class="download-btn" download="duckdb_jdbc-{{ site.preview_duckdb_java_version }}.jar" rel="noopener noreferrer">duckdb_jdbc-{{ site.preview_duckdb_java_version }}.jar</a>
 
 </div>
 </div>
@@ -763,8 +763,8 @@ go get github.com/duckdb/duckdb-go/v2@{{ site.lts_duckdb_go_tag }}
     data-environment="c"
     data-docs="{% link docs/preview/clients/c/overview.md %}">
 
-<a href="https://artifacts.duckdb.org/v2.0-cyanoptera/duckdb-shared-libs-linux-amd64.tar.gz" class="download-btn" download="duckdb-shared-libs-linux-amd64.tar.gz" rel="noopener noreferrer">duckdb-shared-libs-linux-amd64.tar.gz</a>
-<a href="https://artifacts.duckdb.org/v2.0-cyanoptera/duckdb-shared-libs-linux-arm64.tar.gz" class="download-btn" download="duckdb-shared-libs-linux-arm64.tar.gz" rel="noopener noreferrer">duckdb-shared-libs-linux-arm64.tar.gz</a>
+<a href="https://artifacts.duckdb.org/staged/v2.0-cyanoptera/duckdb-shared-libs-linux-amd64.tar.gz" class="download-btn" download="duckdb-shared-libs-linux-amd64.tar.gz" rel="noopener noreferrer">duckdb-shared-libs-linux-amd64.tar.gz</a>
+<a href="https://artifacts.duckdb.org/staged/v2.0-cyanoptera/duckdb-shared-libs-linux-arm64.tar.gz" class="download-btn" download="duckdb-shared-libs-linux-arm64.tar.gz" rel="noopener noreferrer">duckdb-shared-libs-linux-arm64.tar.gz</a>
 
 </div>
 
@@ -774,7 +774,7 @@ go get github.com/duckdb/duckdb-go/v2@{{ site.lts_duckdb_go_tag }}
     data-environment="c"
     data-docs="{% link docs/preview/clients/c/overview.md %}">
 
-<a href="https://artifacts.duckdb.org/v2.0-cyanoptera/duckdb-shared-libs-osx-universal.tar.gz" class="download-btn" download="duckdb-shared-libs-osx-universal.tar.gz" rel="noopener noreferrer">duckdb-shared-libs-osx-universal.tar.gz</a>
+<a href="https://artifacts.duckdb.org/staged/v2.0-cyanoptera/duckdb-shared-libs-osx-universal.tar.gz" class="download-btn" download="duckdb-shared-libs-osx-universal.tar.gz" rel="noopener noreferrer">duckdb-shared-libs-osx-universal.tar.gz</a>
 
 </div>
 
@@ -784,8 +784,8 @@ go get github.com/duckdb/duckdb-go/v2@{{ site.lts_duckdb_go_tag }}
     data-environment="c"
     data-docs="{% link docs/preview/clients/c/overview.md %}">
 
-<a href="https://artifacts.duckdb.org/v2.0-cyanoptera/duckdb-shared-libs-windows-amd64.tar.gz" class="download-btn" download="duckdb-shared-libs-windows-amd64.tar.gz" rel="noopener noreferrer">duckdb-shared-libs-windows-amd64.tar.gz</a>
-<a href="https://artifacts.duckdb.org/v2.0-cyanoptera/duckdb-shared-libs-windows-arm64.tar.gz" class="download-btn" download="duckdb-shared-libs-windows-arm64.tar.gz" rel="noopener noreferrer">duckdb-shared-libs-windows-arm64.tar.gz</a>
+<a href="https://artifacts.duckdb.org/staged/v2.0-cyanoptera/duckdb-shared-libs-windows-amd64.tar.gz" class="download-btn" download="duckdb-shared-libs-windows-amd64.tar.gz" rel="noopener noreferrer">duckdb-shared-libs-windows-amd64.tar.gz</a>
+<a href="https://artifacts.duckdb.org/staged/v2.0-cyanoptera/duckdb-shared-libs-windows-arm64.tar.gz" class="download-btn" download="duckdb-shared-libs-windows-arm64.tar.gz" rel="noopener noreferrer">duckdb-shared-libs-windows-arm64.tar.gz</a>
 
 </div>
 
@@ -872,8 +872,8 @@ go get github.com/duckdb/duckdb-go/v2@{{ site.lts_duckdb_go_tag }}
     data-environment="odbc"
     data-docs="{% link docs/preview/clients/odbc/overview.md %}">
 
-<a href="https://artifacts.duckdb.org/duckdb-odbc/main/odbc-linux-amd64.zip" class="download-btn" download="odbc-linux-amd64.zip" rel="noopener noreferrer">odbc-linux-amd64.zip</a>
-<a href="https://artifacts.duckdb.org/duckdb-odbc/main/odbc-linux-arm64.zip" class="download-btn" download="odbc-linux-arm64.zip" rel="noopener noreferrer">odbc-linux-arm64.zip</a>
+<a href="https://duckdb-staging.duckdb.org/{{ site.preview_duckdb_odbc_version }}/duckdb/duckdb-odbc/github_release/duckdb_odbc-linux-amd64.zip" class="download-btn" download="odbc-linux-amd64.zip" rel="noopener noreferrer">odbc-linux-amd64.zip</a>
+<a href="https://duckdb-staging.duckdb.org/{{ site.preview_duckdb_odbc_version }}/duckdb/duckdb-odbc/github_release/duckdb_odbc-linux-arm64.zip" class="download-btn" download="odbc-linux-arm64.zip" rel="noopener noreferrer">odbc-linux-arm64.zip</a>
 
 </div>
 
@@ -883,7 +883,7 @@ go get github.com/duckdb/duckdb-go/v2@{{ site.lts_duckdb_go_tag }}
     data-environment="odbc"
     data-docs="{% link docs/preview/clients/odbc/overview.md %}">
 
-<a href="https://artifacts.duckdb.org/duckdb-odbc/main/odbc-osx-universal.zip" class="download-btn" download="odbc-osx-universal.zip" rel="noopener noreferrer">odbc-osx-universal.zip</a>
+<a href="https://duckdb-staging.duckdb.org/{{ site.preview_duckdb_odbc_version }}/duckdb/duckdb-odbc/github_release/duckdb_odbc-osx-universal.zip" class="download-btn" download="odbc-osx-universal.zip" rel="noopener noreferrer">odbc-osx-universal.zip</a>
 
 </div>
 
@@ -893,8 +893,8 @@ go get github.com/duckdb/duckdb-go/v2@{{ site.lts_duckdb_go_tag }}
     data-environment="odbc"
     data-docs="{% link docs/preview/clients/odbc/overview.md %}">
 
-<a href="https://artifacts.duckdb.org/duckdb-odbc/main/odbc-windows-amd64.zip" class="download-btn" download="odbc-windows-amd64.zip" rel="noopener noreferrer">odbc-windows-amd64.zip</a>
-<a href="https://artifacts.duckdb.org/duckdb-odbc/main/odbc-windows-arm64.zip" class="download-btn" download="odbc-windows-arm64.zip" rel="noopener noreferrer">odbc-windows-arm64.zip</a>
+<a href="https://duckdb-staging.duckdb.org/{{ site.preview_duckdb_odbc_version }}/duckdb/duckdb-odbc/github_release/duckdb_odbc-windows-amd64.zip" class="download-btn" download="odbc-windows-amd64.zip" rel="noopener noreferrer">odbc-windows-amd64.zip</a>
+<a href="https://duckdb-staging.duckdb.org/{{ site.preview_duckdb_odbc_version }}/duckdb/duckdb-odbc/github_release/duckdb_odbc-windows-arm64.zip" class="download-btn" download="odbc-windows-arm64.zip" rel="noopener noreferrer">odbc-windows-arm64.zip</a>
 
 </div>
 

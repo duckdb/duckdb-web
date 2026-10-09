@@ -1,20 +1,15 @@
 ---
 layout: post
-event: true
 title: "DuckDB Amsterdam Meetup #2"
-author: "DuckDB meetup organizers"
+authors:
+  - DuckDB meetup organizers
 thumb: "/images/events/thumbs/duckdb-amsterdam-meetup-2.svg"
 image: "/images/events/thumbs/duckdb-amsterdam-meetup-2.png"
 excerpt: ""
-tags: ["meetup"]
-labels: [official]
-venue: "Xebia, Amsterdam"
+tag: meetup
+category: core
+location: "Xebia, Amsterdam"
 ---
-
-<img src="{% link images/events/thumbs/duckdb-amsterdam-meetup-2.svg %}"
-     alt="DuckDB Amsterdam Meetup Splashscreen"
-     width="680"
-     />
 
 We are excited to announce the [second DuckDB Amsterdam meetup](https://www.meetup.com/duckdb/events/304415344/), co-organized by [DuckLabs](https://ducklabs.com/) and [Xebia](https://xebia.com/).
 

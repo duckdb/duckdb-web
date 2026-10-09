@@ -1,8 +1,9 @@
 ---
 layout: post
 title: "Optimizers: The Low-Key MVP"
-author: Tom Ebergen
-tags: ["deep dive"]
+authors:
+  - Tom Ebergen
+tag: deep-dive
 thumb: "/images/blog/thumbs/query-optimization.svg"
 image: "/images/blog/thumbs/query-optimization.png"
 excerpt: "The query optimizer is an important part of any analytical database system as it provides considerable performance improvements compared to hand-optimized queries, even as the state of your data changes."

@@ -1,14 +1,15 @@
 ---
 layout: post
 title: "Changing Large Tables"
-author: Hannes Mühleisen
-thumb: "/images/library/thumbs/2024-11-25-changing-large-tables.jpg"
-image: "/images/library/thumbs/2024-11-25-changing-large-tables.jpg"
-tags: ["Talk"]
+authors:
+  - Hannes Mühleisen
+thumb: "/images/library/thumbs/2024-11-25-changing-large-tables.png"
+image: "/images/library/thumbs/2024-11-25-changing-large-tables.png"
+tag: talk
+category: core
 length: "20 min"
-thirdparty: false
 excerpt: ""
-pill: "Forward Data 2024"
+venue: "Forward Data 2024"
 redirect_from:
 - /media/changing-large-tables
 ---

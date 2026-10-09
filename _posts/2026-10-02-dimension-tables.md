@@ -1,11 +1,12 @@
 ---
 layout: post
 title: "Faster String Aggregations with Dimension Tables"
-author: "DuckDB Team"
+authors:
+  - The DuckDB team
 thumb: "/images/blog/thumbs/dimension-table.svg"
 image: "/images/blog/thumbs/dimension-table.png"
 excerpt: "When a query groups on long, repeated strings, move the strings into a small dimension table with sorted, narrow integer keys. Aggregate on the keys, then join the strings back in at the very end. The query works as before, though on small fixed-width integers instead of variable-length text."
-tags: ["using DuckDB"]
+tag: using-duckdb
 ---
 
 Analytical workloads are full of repeated strings: product names, country names, station names, user agents, category labels. Take DuckDB's public train services dataset, which has one row for every stop a Dutch railway train makes. The data comes from the open datasets published by the [Rijden de Treinen *(Are the trains running?)* application](https://www.rijdendetreinen.nl/en/open-data/). You can query it straight from its URL:

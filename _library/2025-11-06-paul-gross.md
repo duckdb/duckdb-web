@@ -1,14 +1,15 @@
 ---
 layout: post
 title: "DuckDB in Research S02E04: Paul Groß"
-author: "Disseminate Podcast Series by Jack Waudby"
-thumb: "/images/library/thumbs/2025-11-06-paul-gross.jpg"
-image: "/images/library/thumbs/2025-11-06-paul-gross.jpg"
-tags: ["Podcast"]
+authors:
+  - Disseminate Podcast Series by Jack Waudby
+thumb: "/images/library/thumbs/2025-11-06-paul-gross.png"
+image: "/images/library/thumbs/2025-11-06-paul-gross.png"
+tag: podcast
 length: "50 min"
 category: community
 excerpt: ""
-pill: "DuckDB in Research"
+venue: "DuckDB in Research"
 episode: "S02E04"
 ---
 

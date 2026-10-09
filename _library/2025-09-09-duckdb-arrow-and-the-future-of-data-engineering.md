@@ -1,14 +1,15 @@
 ---
 layout: post
 title: "DuckDB, Apache Arrow, & the Future of Data Engineering with Rusty Conover"
-author: "Rusty Conover"
-thumb: "/images/library/thumbs/2025-09-09-the-hedgineer-rusty-conover.jpg"
-image: "/images/library/thumbs/2025-09-09-the-hedgineer-rusty-conover.jpg"
-tags: ["Podcast"]
+authors:
+  - Rusty Conover
+thumb: "/images/library/thumbs/2025-09-09-duckdb-arrow-and-the-future-of-data-engineering.png"
+image: "/images/library/thumbs/2025-09-09-duckdb-arrow-and-the-future-of-data-engineering.png"
+tag: podcast
 length: "60 min"
 category: community
 excerpt: ""
-pill: "The Hedgineer Podcast by Michael Watson"
+venue: "The Hedgineer Podcast by Michael Watson"
 ---
 
 <div class="video-container">

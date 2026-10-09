@@ -1,13 +1,13 @@
 ---
 layout: post
 title: "Should I Hide My Duck in the Lake?"
-author: "Jonas Dann, Gustavo Alonso"
-thumb: "/images/library/thumbs/arxiv.svg"
-image: "/images/library/thumbs/arxiv.jpg"
-tags: ["Paper"]
+authors:
+  - Jonas Dann
+  - Gustavo Alonso
+tag: paper
 category: community
 excerpt: ""
-pill: "arXiv"
+venue: "arXiv"
 ---
 
 | | |
