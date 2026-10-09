@@ -46,8 +46,8 @@ docs:
 
 extension_star_count: 8
 extension_star_count_pretty: 8
-extension_download_count: 395
-extension_download_count_pretty: 395
+extension_download_count: 445
+extension_download_count_pretty: 445
 image: '/images/community_extensions/social_preview/preview_community_extension_magic.png'
 layout: community_extension_doc
 ---

@@ -23,4 +23,5 @@ Knowledge-intensive analytical applications retrieve context from both structure
 
 ## Implementation
 
-FlockMTL is available as a [DuckDB community extension]({% link community_extensions/extensions/flockmtl.md %}).
+FlockMTL was available as a DuckDB community extension.
+It has now been deprecated and superseded by the [Flock community extension]({% link community_extensions/extensions/flock.md %}).
