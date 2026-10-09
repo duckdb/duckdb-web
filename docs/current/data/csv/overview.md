@@ -72,7 +72,7 @@ The DuckDB CSV reader can automatically infer which configuration flags to use b
 
 ## Parameters
 
-Below are parameters that can be passed to the [`read_csv` function](#csv-functions). Where meaningfully applicable, these parameters can also be passed to the [`COPY` statement]({% link docs/current/sql/statements/copy.md %}#copy-to).
+Below are parameters that can be passed to the [`read_csv` function](#csv-functions). Where meaningfully applicable, these parameters can also be passed to the [`COPY` statement]({% link docs/current/sql/statements/copy.md %}#copy--to).
 
 | Name | Description | Type | Default |
 |:--|:-----|:-|:-|
@@ -183,7 +183,7 @@ Multiple files can be read at once by providing a glob or a list of files. Refer
 
 ## Writing Using the `COPY` Statement
 
-The [`COPY` statement]({% link docs/current/sql/statements/copy.md %}#copy-to) can be used to load data from a CSV file into a table. This statement has the same syntax as the one used in PostgreSQL. To load the data using the `COPY` statement, we must first create a table with the correct schema (which matches the order of the columns in the CSV file and uses types that fit the values in the CSV file). `COPY` detects the CSV's configuration options automatically.
+The [`COPY` statement]({% link docs/current/sql/statements/copy.md %}#copy--to) can be used to load data from a CSV file into a table. This statement has the same syntax as the one used in PostgreSQL. To load the data using the `COPY` statement, we must first create a table with the correct schema (which matches the order of the columns in the CSV file and uses types that fit the values in the CSV file). `COPY` detects the CSV's configuration options automatically.
 
 ```sql
 CREATE TABLE ontime (
