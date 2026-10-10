@@ -60,9 +60,11 @@ LOAD {{ page.extension.name }};
 
 <div class="extension_functions_table"></div>
 
-| function_name | function_type | description | comment | examples |
-|---------------|---------------|-------------|---------|----------|
-| ggsql         | scalar        | NULL        | NULL    |          |
+| function_name | function_type |                                                                                  description                                                                                  | comment |                                        examples                                        |
+|---------------|---------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|---------|----------------------------------------------------------------------------------------|
+| ggsql         | scalar        | Executes a ggsql query (SQL plus VISUALISE/DRAW clauses) and returns the plot in the format selected by the ggsql_output setting (browser URL, vega-lite spec, HTML, or SVG). | NULL    | [ggsql('SELECT range AS x, range*range AS y FROM range(10) VISUALISE x, y DRAW line')] |
+| ggsql_run     | table         | Executes a ggsql query and returns the plot as a one-row table; used for binary output modes ('pdf', 'hep') where the result column is typed as BLOB.                         | NULL    | [SELECT plot FROM ggsql_run('SELECT range AS x FROM range(10) VISUALISE x DRAW line')] |
+| ggsql_save    | scalar        | Renders a ggsql query straight to a file; the writer is inferred from the file extension (.svg, .pdf, .hep, .html, .json) and the output path is returned.                    | NULL    | [ggsql_save('SELECT range AS x FROM range(10) VISUALISE x DRAW line', 'plot.svg')]     |
 
 ### Overloaded Functions
 
@@ -80,8 +82,9 @@ This extension does not add any types.
 
 <div class="extension_settings_table"></div>
 
-|     name     |                                                                                                        description                                                                                                         | input_type | scope  | aliases |
-|--------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|------------|--------|---------|
-| ggsql_output | Output mode for ggsql queries. 'silent' (default) opens the browser and emits no rows; 'url' opens the browser and returns the plot URL; 'spec' returns the vega-lite JSON; 'html' returns a self-contained HTML document. | VARCHAR    | GLOBAL | []      |
+|         name         |                                                                                                                                                   description                                                                                                                                                    | input_type | scope  | aliases |
+|----------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|------------|--------|---------|
+| ggsql_output         | Output mode for ggsql queries. 'silent' (default) opens the browser and emits no rows; 'url' opens the browser and returns the plot URL; 'spec' returns the vega-lite JSON; 'html' returns a self-contained HTML document; 'svg' returns SVG text; 'pdf' and 'hep' return binary payloads (BLOB from ggsql_run). | VARCHAR    | GLOBAL | []      |
+| ggsql_writer_options | Options for ggsql's writers, as semicolon-separated key=value pairs, e.g. 'width=800;height=600'. Applies to the 'svg', 'pdf', 'hep', 'html' modes and the browser display; must be empty for 'spec'. Shared keys: width, height, units, dpi, background.                                                        | VARCHAR    | GLOBAL | []      |
 
 

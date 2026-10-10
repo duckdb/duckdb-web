@@ -6,7 +6,7 @@ excerpt: |
   Adds templating to DuckDB, enabling dynamic generation of text, HTML, and reports directly within SQL queries using the MiniJinja engine.
 
 docs:
-  extended_description: For more information regarding usage, see the [documentation](https://query.farm/duckdb_extension_minijinja.html).
+  extended_description: For more information regarding usage, see the [documentation](https://query.farm/products/extensions/minijinja/).
 extension:
   build: cmake
   description: Adds templating to DuckDB, enabling dynamic generation of text, HTML,

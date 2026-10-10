@@ -6,7 +6,7 @@ excerpt: |
   Evaluate the Rhai scripting language in DuckDB
 
 docs:
-  extended_description: For more information regarding usage, see the [documentation](https://query.farm/duckdb_extension_evalexpr_rhai.html).
+  extended_description: For more information regarding usage, see the [documentation](https://query.farm/products/extensions/evalexpr_rhai/).
 extension:
   build: cmake
   description: Evaluate the Rhai scripting language in DuckDB

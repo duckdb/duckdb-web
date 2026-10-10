@@ -6,7 +6,7 @@ excerpt: |
   Add comprehensive statistical distribution functions to DuckDB, enabling advanced statistical analysis, probability calculations, and random sampling directly within SQL queries.
 
 docs:
-  extended_description: For more information regarding usage, see the [documentation](https://query.farm/duckdb_extension_stochastic.html).
+  extended_description: For more information regarding usage, see the [documentation](https://query.farm/products/extensions/stochastic/).
 extension:
   build: cmake
   description: Add comprehensive statistical distribution functions to DuckDB, enabling

@@ -6,7 +6,7 @@ excerpt: |
   Provides high-performance, space-efficient probabilistic data structures—including quotient, XOR, and binary fuse filters—for fast approximate set membership testing with no false negatives and configurable false positive rates.
 
 docs:
-  extended_description: For more information regarding usage, see the [documentation](https://query.farm/duckdb_extension_bitfilters.html).
+  extended_description: For more information regarding usage, see the [documentation](https://query.farm/products/extensions/bitfilters/).
 extension:
   build: cmake
   description: "Provides high-performance, space-efficient probabilistic data structures\u2014\

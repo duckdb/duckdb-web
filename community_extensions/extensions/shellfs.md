@@ -6,7 +6,7 @@ excerpt: |
   Allow shell commands to be used for input and output
 
 docs:
-  extended_description: For more information regarding usage, see the [documentation](https://query.farm/duckdb_extension_shellfs.html).
+  extended_description: For more information regarding usage, see the [documentation](https://query.farm/products/extensions/shellfs/).
 extension:
   build: cmake
   description: Allow shell commands to be used for input and output

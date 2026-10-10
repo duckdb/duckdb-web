@@ -6,8 +6,7 @@ excerpt: |
   DuckDB HTTP Cronjob Extension
 
 docs:
-  extended_description: This extension is experimental and potentially unstable. Do
-    not use it in production.
+  extended_description: For more information regarding usage, see the [documentation](https://query.farm/products/extensions/cronjob/).
   hello_world: "-- Every 15 seconds during hours 1-4\nSELECT cron('SELECT now()',\
     \ '*/15 * 1-4 * * *');\n\n-- Every 2 hours (at minute 0, second 0) during hours\
     \ 1-4\nSELECT cron('SELECT version()', '0 0 */2 1-4 * *');\n\n-- Every 5 minute\
@@ -67,6 +66,7 @@ extension:
   license: MIT
   maintainers:
   - lmangani
+  - rustyconover
   name: cronjob
   version: '2025120401'
 repo:

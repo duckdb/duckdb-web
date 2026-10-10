@@ -6,7 +6,7 @@ excerpt: |
   Linearization/Delinearization, Z-Order, Hilbert and Morton Curves
 
 docs:
-  extended_description: For more information regarding usage, see the [documentation](https://query.farm/duckdb_extension_lindel.html).
+  extended_description: For more information regarding usage, see the [documentation](https://query.farm/products/extensions/lindel/).
 extension:
   build: cmake
   description: Linearization/Delinearization, Z-Order, Hilbert and Morton Curves
