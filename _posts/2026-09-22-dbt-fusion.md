@@ -19,9 +19,9 @@ When dbt Labs [announced the new Rust-based Fusion engine](https://www.getdbt.co
 
 dbt Labs announced the new Rust-based Fusion engine on [May 28, 2025](https://www.getdbt.com/licenses-faq#may-28-2025). Two days later, a user, [ran-codes](https://github.com/ran-codes), opened a [GitHub issue](https://github.com/dbt-labs/dbt/issues/13193) asking for a DuckDB adapter:
 
-> Quote “There is a huge community utilizing the DuckDB adaptor to run DBT. For me personally, I was able to learn and start using DBT just because of the light-weight setup for the dbt-duckdb workflow and it has allowed me to get over the learning curve to start using DBT.”
+> Quote There is a huge community utilizing the DuckDB adaptor to run DBT. For me personally, I was able to learn and start using DBT just because of the light-weight setup for the dbt-duckdb workflow and it has allowed me to get over the learning curve to start using DBT.
 >
-> -- <a href="https://github.com/dbt-labs/dbt/issues/13193">ran-codes, on GitHub
+> -- ran-codes, [on GitHub](https://github.com/dbt-labs/dbt/issues/13193)
 
 At the time of this writing, the issue resulted in 146 ❤️ and 21 👍 reactions. The adapter is now built into dbt v2.
 

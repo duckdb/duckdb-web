@@ -9,8 +9,9 @@ image: "/images/blog/thumbs/movies-in-databases.png"
 excerpt: "You can store and even process videos in DuckDB. In this post, we show you how."
 ---
 
-<p style="text-align: right"><i>“Your scientists were so preoccupied with whether they could,<br/> they didn't stop to think if they should.”</i><br/>
-   Dr. Ian Malcolm, Jurassic Park (1993)</p>
+> Quote Your scientists were so preoccupied with whether they could, they didn't stop to think if they should.
+>
+> -- Dr. Ian Malcolm, Jurassic Park (1993)
 
 Here at team DuckDB, we *love* tables. Tables are a timeless elegant abstraction that precedes literature by [about a thousand years](https://www.youtube.com/watch?v=-wCzn9gKoUk). Relational tables specifically can represent *any* kind of information imaginable. But just because something *can* be done it is not always a great idea to do so. Can we build a rocket propelled by a nuclear chain reaction that irradiates the land it flies over? [Yes](https://en.wikipedia.org/wiki/Project_Pluto). Should we? Probably not.
 

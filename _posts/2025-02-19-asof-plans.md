@@ -9,8 +9,9 @@ thumb: "/images/blog/thumbs/asof-join.svg"
 image: "/images/blog/thumbs/asof-join.png"
 ---
 
-<p>“I love it when a plan comes together.”<br/>
-  — Hannibal Smith, <cite>The A-Team</cite></p>
+> Quote I love it when a plan comes together.
+>
+> -- Hannibal Smith, *The A-Team*
 
 ## Introduction
 
