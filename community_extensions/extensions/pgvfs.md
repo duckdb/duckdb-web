@@ -88,8 +88,8 @@ docs:
 
 extension_star_count: 3
 extension_star_count_pretty: 3
-extension_download_count: 272
-extension_download_count_pretty: 272
+extension_download_count: 281
+extension_download_count_pretty: 281
 image: '/images/community_extensions/social_preview/preview_community_extension_pgvfs.png'
 layout: community_extension_doc
 ---
