@@ -182,6 +182,13 @@ This extension does not add any types.
 
 <div class="extension_settings_table"></div>
 
-This extension does not add any settings.
+|                    name                     |                            description                            | input_type | scope  | aliases |
+|---------------------------------------------|-------------------------------------------------------------------|------------|--------|---------|
+| lance_conversion_storage_io_timeout_ms      | IO operation and body method timeout per attempt (ms)             | BIGINT     | GLOBAL | []      |
+| lance_conversion_storage_retry_factor       | Storage exponential retry backoff multiplier for reads and writes | DOUBLE     | GLOBAL | []      |
+| lance_conversion_storage_retry_max_delay_ms | Maximum exponential retry backoff (ms)                            | BIGINT     | GLOBAL | []      |
+| lance_conversion_storage_retry_max_times    | Maximum retries after the initial attempt (0 disables retries)    | BIGINT     | GLOBAL | []      |
+| lance_conversion_storage_retry_min_delay_ms | Initial exponential retry backoff (ms)                            | BIGINT     | GLOBAL | []      |
+| lance_conversion_storage_timeout_ms         | Control operation timeout per attempt (ms)                        | BIGINT     | GLOBAL | []      |
 
 

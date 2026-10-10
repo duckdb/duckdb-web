@@ -6,6 +6,7 @@ excerpt: |
   DuckDB Time-Sortable ID generator
 
 docs:
+  extended_description: For more information regarding usage, see the [documentation](https://query.farm/products/extensions/tsid/).
   hello_world: "-- Generate a new time-sortable ID (accepts an optional seed string)\n\
     D SELECT tsid();\n\u250C\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\
     \u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\
@@ -83,6 +84,7 @@ extension:
   license: MIT
   maintainers:
   - lmangani
+  - rustyconover
   name: tsid
   version: '2025120401'
 repo:

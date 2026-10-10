@@ -6,7 +6,7 @@ excerpt: |
   The JSONata extension for DuckDB enables expressive, JSON-focused querying and transformation directly within SQL using the powerful JSONata expression language.
 
 docs:
-  extended_description: For more information regarding usage, see the [documentation](https://query.farm/duckdb_extension_jsonata.html).
+  extended_description: For more information regarding usage, see the [documentation](https://query.farm/products/extensions/jsonata/).
 extension:
   build: cmake
   description: The JSONata extension for DuckDB enables expressive, JSON-focused querying

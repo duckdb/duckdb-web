@@ -6,7 +6,7 @@ excerpt: |
   Powerful string case transformation and inflection capabilities directly to your SQL queries.
 
 docs:
-  extended_description: For more information regarding usage, see the [documentation](https://query.farm/duckdb_extension_inflector.html).
+  extended_description: For more information regarding usage, see the [documentation](https://query.farm/products/extensions/inflector/).
 extension:
   build: cmake
   description: Powerful string case transformation and inflection capabilities directly
