@@ -187,7 +187,7 @@ This is because the `prices` table is really an example of what in temporal anal
 The rows of an event table contain timestamps and what happened at that time (i.e., events).
 The events in the `prices` table are changes to the price of a stock.
 Another common example of an event table is a structured log file:
-Each row of the log records when something "happened" – usually a change to a part of the system.
+Each row of the log records when something “happened” – usually a change to a part of the system.
 
 Event tables are difficult to work with because each fact only has the start time.
 In order to know whether the fact is still true (or true at a specific time) you need the end time as well.
@@ -221,7 +221,7 @@ where the timestamps are assumed to be the start of the state transitions.
 But AsOf can now use any inequality, which allows it to handle other types of event tables.
 
 To explore this, let's use two very simple tables with no equality conditions.
-The build side will just have four integer "timestamps" with alphabetic values:
+The build side will just have four integer “timestamps” with alphabetic values:
 
 
 | Time | Value |
@@ -355,7 +355,7 @@ the ordering field value will be the probe value, not the build value.
 For a natural join, this is not an issue because all the conditions are equalities,
 but for AsOf, one side has to be chosen.
 Since AsOf can be viewed as a lookup function,
-it is more natural to return the "function arguments" than the function internals.
+it is more natural to return the “function arguments” than the function internals.
 
 ### Under the Hood
 
@@ -547,7 +547,7 @@ Now the runtime improvement of AsOf over IEJoin is huge (~500×)
 because it can leverage the partitioning to eliminate almost all of the equality mismatches.
 
 The Hash Join implementation does much better here because 
-the optimizer notices that the probe side is smaller and builds the hash table on the "probe" table.
+the optimizer notices that the probe side is smaller and builds the hash table on the “probe” table.
 Also, the probe values here are unique, so the hash table chains are minimal.
 
 ### Window with Ranking

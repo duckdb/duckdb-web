@@ -25,7 +25,7 @@ Due to internal requirements, the analytical database had to run on the same ser
 
 To share my performance measurement results, I have prepared an anonymized dataset that roughly corresponds to the data used in our production environment. The size of this dataset has been scaled down significantly from the original to allow for faster experimentation.
 
-The dataset is available within this link: [vulnerability_sample.csv.zst](https://github.com/duckdb/duckdb/issues/24935), it contains 485168 records with 24 fields. Two notable fields are the `VARCHAR` "description" and "references", which contain long strings with median lengths of 5,000 and 2,500 characters, respectively. Some records contain strings as large as 32,000 characters, making many operations on this dataset computationally expensive.
+The dataset is available within this link: [vulnerability_sample.csv.zst](https://github.com/duckdb/duckdb/issues/24935), it contains 485168 records with 24 fields. Two notable fields are the `VARCHAR` “description” and “references”, which contain long strings with median lengths of 5,000 and 2,500 characters, respectively. Some records contain strings as large as 32,000 characters, making many operations on this dataset computationally expensive.
 
 Additionally, along with the DuckLabs team, I have prepared several code snippets to illustrate data import in Java. While these snippets are significantly simplified compared to the code we run, their performance characteristics more or less matched the real ones. The code snippets are available in this GitHub repository [staticlibs/duckdb_java_data_import](https://github.com/staticlibs/duckdb_java_data_import).
 
@@ -47,7 +47,7 @@ Sorting the data provided further query performance improvements, and using `SET
 
 Ultimately, the `mongo` community extension appears to be the easiest, most painless, and most performant way to set up a MongoDB-to-DuckDB pipeline.
 
-However, we decided against using it due to the lack of "future-proof" guarantees associated with community extensions. DuckDB is a fast- moving project which is constantly improving, and we did not want to be held back from updating to new DuckDB version simply because an extension was not updated and can no longer be built.
+However, we decided against using it due to the lack of “future-proof” guarantees associated with community extensions. DuckDB is a fast- moving project which is constantly improving, and we did not want to be held back from updating to new DuckDB version simply because an extension was not updated and can no longer be built.
 
 The only real option for using the community extension would have been to build it locally - effectively maintaining an internal fork of it. While possible, we decided against this for two reasons. First, the burden of maintaining a C++ codebase was a major concern. Second, we prefer our data ingestion pipelines to be written in Java, that is much easier for us to maintain, and to be able to reuse parts of this pipeline across other internal data sources that we use from Java and that do not have ready-to-use DuckDB extensions.
 
@@ -110,7 +110,7 @@ By running eight of these workers in parallel, we import data into a staging Duc
 
 With this approach, the total execution time on the sample data was 3 minutes and 37 seconds, with the final `CREATE TABLE... AS... ORDER BY` operation taking approximately 30 seconds.
 
-The performance being 3.5x slower compared to the `mongo` extension is largely due to the lack of native "batch" insert support in DuckDB. The `executeBatch` is implemented on Java level. And while the statement is prepared only once per batch, the each entry in the batch is run in a separate database-level `INSERT`, thereby incurring a per-row overhead.
+The performance being 3.5x slower compared to the `mongo` extension is largely due to the lack of native “batch” insert support in DuckDB. The `executeBatch` is implemented on Java level. And while the statement is prepared only once per batch, the each entry in the batch is run in a separate database-level `INSERT`, thereby incurring a per-row overhead.
 
 ## Java Appender Interface
 

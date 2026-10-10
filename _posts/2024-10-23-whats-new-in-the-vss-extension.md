@@ -35,7 +35,7 @@ These will now be accelerated with the use of the HNSW index instead, making the
 
 For completeness we've also added the equivalent distance functions for the dynamically-sized [`LIST` datatype]({% link docs/current/sql/data_types/list.md %}) (prefixed with `list_` instead of `array_`) and changed the `<=>` binary operator to now be an alias of `array_cosine_distance`, matching the semantics of the [`pgvector` extension](https://github.com/pgvector/pgvector) for PostgreSQL.
 
-## Index Accelerated "Top-K" Aggregates
+## Index Accelerated “Top-K” Aggregates
 
 Another cool thing that's happened in core DuckDB since last time is that DuckDB now has extra overloads for the [`min_by`]({% link docs/current/sql/functions/aggregates.md %}#min_byarg-val-n) and [`max_by`]({% link docs/current/sql/functions/aggregates.md %}#max_byarg-val-n) aggregate functions (and their aliases `arg_min` and `arg_max`)
 These new overloads take an optional third `n` argument that specifies the number of top-k (or top-`n`) elements to keep and outputs them into a sorted `LIST` value. Here's an example:

@@ -56,7 +56,7 @@ Cafés that are somewhat close in both latitude and longitude will receive a sim
 This will allow us to quickly execute queries like “Find all cafés within this rectangular region on a map”.
 (A rectangular region like that is called a bounding box in geospatial-land!)
 The [GIF at the top of this post](#hilbert-curve) shows various levels of granularity of a Hilbert encoding – imagine if the x axis were longitude and the y axis were latitude.
-The "zig-zag" line of the Hilbert algorithm is the list of cafés, sorted approximately.
+The “zig-zag” line of the Hilbert algorithm is the list of cafés, sorted approximately.
 
 Both Morton and Hilbert operate on integers or floats, but this post outlines a way to use them to sort `VARCHAR` columns as well.
 A SQL macro is used to convert the first few characters of a `VARCHAR` column into an integer as a pre-processing step.
@@ -521,7 +521,7 @@ The way to interpret this is that for selective queries to work effectively, eac
 Smaller is better!
 However, there are likely diminishing returns when this metric is below the number of threads DuckDB is using.
 
-> Other database systems measure a similar metric called "Clustering Depth".
+> Other database systems measure a similar metric called “Clustering Depth”.
 
 <div id="number_of_rowgroups_per_value" style="width:100%;height:400px;min-width:720px;"></div>
 <script>
@@ -653,7 +653,7 @@ The `rowgroup_id_count` column is a measurement of how many distinct row groups 
 When storing data in a columnar file format like a DuckDB database or a Parquet file, approximately sorting by multiple columns can lead to fast read queries across a variety of query patterns.
 Sorting using the Hilbert encoding provided high performance across multiple workloads, and sorting by year and then by Hilbert performed well when also filtering by time.
 
-Thanks to the "Number of Row Groups per Value" calculation, we can measure the sortedness of any table by any column, and it was predictive of the experimental performance we observed.
+Thanks to the “Number of Row Groups per Value” calculation, we can measure the sortedness of any table by any column, and it was predictive of the experimental performance we observed.
 This way we can experiment with different sorting approaches and quickly forecast their effectiveness, without having to benchmark read workloads each time.
 
 Using these approaches can greatly speed up dashboard interactivity when users are unpredictable (which we always are!).

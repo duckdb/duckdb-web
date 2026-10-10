@@ -42,7 +42,7 @@ Which yields:
 
 In other words: `c_birth_country` is ordered descendingly, and where `c_birth_country` is equal, we sort on `c_birth_year` ascendingly.
 By specifying `NULLS LAST`, null values are treated as the lowest value in the `c_birth_year` column.
-Whole rows are thus reordered, not just the columns in the `ORDER BY` clause. The columns that are not in the `ORDER BY` clause we call "payload columns".
+Whole rows are thus reordered, not just the columns in the `ORDER BY` clause. The columns that are not in the `ORDER BY` clause we call “payload columns”.
 Therefore, payload column `c_customer_sk` has to be reordered too.
 
 It is easy to implement something that can evaluate the example query using any sorting implementation, for instance, __C++__'s `std::sort`.
@@ -110,7 +110,7 @@ The trick is to convert these to a binary string that encodes the sorting order:
 
 The binary string is fixed-size because this makes it much easier to move it around during sorting. 
 
-The string "GERMANY" is shorter than "NETHERLANDS", therefore it is padded with `00000000`'s.
+The string “GERMANY” is shorter than “NETHERLANDS”, therefore it is padded with `00000000`'s.
 All bits in column `c_birth_country` are subsequently inverted because this column is sorted descendingly.
 If a string is too long we encode its prefix and only look at the whole string if the prefixes are equal.
 
@@ -197,12 +197,12 @@ This is not something we actively do in our sorting implementation, but rather s
 It uses a least-recently-used queue to decide which blocks to write.
 More on how to properly use this queue in [the appendix](#zigzag).
 
-When we need a block, we "pin" it, which reads it from disk if it is not loaded already.
+When we need a block, we “pin” it, which reads it from disk if it is not loaded already.
 Accessing disk is much slower than accessing memory, therefore it is crucial that we minimize the number of reads and writes.
 
 Unloading data to disk is easy for fixed-size columns like integers, but more difficult for variable-sized columns like strings.
 Our row layout uses fixed-size rows, which cannot fit strings with arbitrary sizes.
-Therefore, strings are represented by a pointer, which points into a separate block of memory where the actual string data lives, a so-called "string heap".
+Therefore, strings are represented by a pointer, which points into a separate block of memory where the actual string data lives, a so-called “string heap”.
 
 We have changed our heap to also store strings row-by-row in buffer-managed blocks:
 
@@ -219,7 +219,7 @@ When we load the block back into memory, the pointers will have changed.
 
 This is where our row-wise layout comes into play.
 The 8-byte `pointer` field is overwritten with an 8-byte `offset` field, denoting where in the heap block strings of this row can be found.
-This technique is called ["pointer swizzling"](https://en.wikipedia.org/wiki/Pointer_swizzling).
+This technique is called [“pointer swizzling”](https://en.wikipedia.org/wiki/Pointer_swizzling).
 When we swizzle the pointers, the row layout and heap block look like this:
 
 <img src="{% link images/blog/sorting/heap_swizzled-light.svg %}" alt="Pointers are 'swizzled': replaced by offsets" title="DuckDB's 'swizzled' row layout heap" class="lightmode-img" />
@@ -228,7 +228,7 @@ When we swizzle the pointers, the row layout and heap block look like this:
 The pointers to the subsequent string values are also overwritten with an 8-byte relative offset, denoting how far this string is offset from the start of the row in the heap (hence every `stringA` has an offset of `0`: It is the first string in the row).
 Using relative offsets within rows rather than absolute offsets is very useful during sorting, as these relative offsets stay constant, and do not need to be updated when a row is copied.
 
-When the blocks need to be scanned to read the sorted result, we "unswizzle" the pointers, making them point to the string again.
+When the blocks need to be scanned to read the sorted result, we “unswizzle” the pointers, making them point to the string again.
 
 With this dual-purpose row-wise representation, we can easily copy around both the fixed-size rows and the variable-sized rows in the heap.
 Besides having the buffer manager load/unload blocks, the only difference between in-memory and external sorting is that we swizzle/unswizzle pointers to the heap blocks, and copy data from the heap blocks during merge sort. 
@@ -416,7 +416,7 @@ As expected, ordering by strings is more expensive than ordering by integers, ex
 Pandas has only a slightly bigger difference between ordering by integers and ordering by strings than ClickHouse and DuckDB.
 This difference is explained by an expensive comparator between strings.
 Pandas uses [NumPy](https://numpy.org)'s sort, which is efficiently implemented in __C__.
-However, when this sorts strings, it has to use virtual function calls to compare a Python string object, which is slower than a simple "`<`" between integers in __C__.
+However, when this sorts strings, it has to use virtual function calls to compare a Python string object, which is slower than a simple “`<`” between integers in __C__.
 Nevertheless, Pandas performs well on the `customer` table.
 
 In our next experiment, we will see how the payload type affects performance.
