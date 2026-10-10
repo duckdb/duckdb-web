@@ -235,6 +235,7 @@ talib,neuesql/atm_talib,baebee616765169eab9efac31d469d64f8aecf79,"Technical Anal
 tera,query-farm/tera,704c3cb69d10524ef5b1686500c300773058845c,"Adds templating to DuckDB, enabling dynamic generation of text, HTML, and reports directly within SQL queries using the Tera engine."
 textplot,query-farm/textplot,ea239eeb23dbdb75c252af93fbecc358207a5218,"Enables text-based data visualization directly in SQL queries, including ASCII/Unicode bar charts, density plots, and sparklines for lightweight analytics and dashboards."
 three_d,cityjson/duckdb-3d,679ee0905cb75074e58d11c04fa690669441e6fd,"3D solid processing for city models — enclosed volume, validation, distance, and measurement of polyhedral solids."
+tributary,query-farm/tributary,cb1fb527ea29628b976a0b2b819bc0692d9d226b,"Enable DuckDB to interact with Apache Kafka"
 trino_parity,brikk/duckdb-trino-parity-extension,dbdb85c502f82ddecab0779df092a6d1817f0b5a,"Native Trino-compatible scalar functions (trino_*) for the cases where DuckDB's built-ins diverge from Trino on Unicode and byte-level inputs — Trino's simple per-code-point case mapping, code-point reverse, Java-whitespace trim, NFC normalize, and raw-bytes xxhash64/sha512/hmac_sha256"
 tsfile,TimechoLab/tsfile-duckdb,9840c600fec9aefec3d9351d8ee27c643033b752,"Query and write Apache TsFile table-model files from DuckDB"
 tsid,quackscience/duckdb-extension-tsid,186b60f519f443362c940b8014c8b0f480421ed5,"DuckDB Time-Sortable ID generator"
