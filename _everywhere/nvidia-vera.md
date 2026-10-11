@@ -60,7 +60,7 @@ We ran DuckDB using the Python client and benchmarked two DuckDB versions:
 
 ## Benchmark Methodology
 
-We performed an initial warmup run and discarded its result, then conducted three runs and took the median value of the QphH@SF composite scores.
+We performed an initial warmup run and discarded its result, then conducted three runs and took the median value of the _QphH@Size_ composite scores.
 
 ## Benchmark Results
 
