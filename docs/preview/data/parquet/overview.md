@@ -167,7 +167,7 @@ There are a number of options exposed that can be passed to the `read_parquet` f
 
 The `schema` parameter allows you to read the Parquet file using a specific schema. This is useful for renaming, adding, deleting, reordering, or casting columns when reading Parquet files.
 
-> New The following feature will be introduced in DuckDB 2.0.
+> New The following feature is introduced in DuckDB 2.0.
 
 The `MAP` can be keyed by field-id or by column name.
 
@@ -196,7 +196,7 @@ FROM read_parquet('integers.parquet', schema = MAP {
 └───────────┴────────────┘
 ```
 
-> New The following feature will be introduced in DuckDB 2.0.
+> New The following feature is introduced in DuckDB 2.0.
 
 You can also key the `MAP` by column name. Field IDs are not required:
 
@@ -369,7 +369,7 @@ COPY
     (FORMAT parquet, STRING_DICTIONARY_PAGE_SIZE_LIMIT 100_000);
 ```
 
-> New The following feature will be introduced in DuckDB 2.0.
+> New The following feature is introduced in DuckDB 2.0.
 
 To split data pages below the default 100 MiB cap, use `DATA_PAGE_SIZE_LIMIT` (bytes). The limit is best-effort at vector granularity. E.g., to set the limit to 1 MiB, use:
 
