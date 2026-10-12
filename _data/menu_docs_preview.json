@@ -1788,6 +1788,10 @@
                 {
                   "page": "LibreDB Studio SQL Editor",
                   "url": "libredb_studio"
+                },
+                {
+                  "page": "VisuaLeaf SQL Editor",
+                  "url": "visualeaf"
                 }
               ]
             },
