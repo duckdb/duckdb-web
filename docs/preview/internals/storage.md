@@ -38,7 +38,11 @@ Check [`EXPORT` documentation]({% link docs/preview/sql/statements/export.md %})
 
 ### Default Storage Version
 
-By default, DuckDB versions v1.0 to v1.5 create a DuckDB database file with [version 64](#storage-version-table), corresponding to v1.0.0. To use newer storage, set an [explicit storage version](#explicit-storage-versions).
+> New Starting with DuckDB 2.0, new database files use the v2.0.0 storage format by default.
+
+DuckDB versions v1.0 to v1.5 create a DuckDB database file with [version 64](#storage-version-table), corresponding to v1.0.0. Starting with DuckDB 2.0, new database files are created with [version 69](#storage-version-table), corresponding to v2.0.0. On older versions you can opt in to a newer format by setting an [explicit storage version](#explicit-storage-versions).
+
+> Warning A file created with the v2.0.0 storage format cannot be opened by DuckDB versions prior to v2.0.0. To write a file that older versions can still read, create it with an [explicit storage version](#explicit-storage-versions).
 
 ### Explicit Storage Versions
 
