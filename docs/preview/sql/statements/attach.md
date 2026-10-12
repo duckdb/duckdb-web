@@ -161,6 +161,34 @@ ATTACH 'encrypted.db' AS enc_db (ENCRYPTION_KEY 'quack_quack', ENCRYPTION_CIPHER
 
 Database encryption implies using [storage version](#explicit-storage-versions) 1.4.0 or later.
 
+### Expressions in Paths and Options
+
+> New Using expressions for the database path will be introduced in DuckDB 2.0. In earlier versions, the path had to be a string literal.
+
+The database path and the [option values](#options) can be arbitrary scalar expressions rather than string literals. DuckDB evaluates these expressions while binding the `ATTACH` statement, so you can build them from [variables]({% link docs/preview/sql/statements/set_variable.md %}), [environment variables]({% link docs/preview/sql/functions/utility.md %}#getenvvar) or string concatenation. This keeps credentials and environment-specific identifiers, such as account numbers, out of your SQL scripts.
+
+Read the database path from a variable:
+
+```sql
+SET VARIABLE db_path = 'file.db';
+ATTACH getvariable('db_path') AS file_db;
+```
+
+Build the path by concatenating a variable, for example an account number read from the environment:
+
+```sql
+SET VARIABLE account_id = '123456789012';
+ATTACH 'account_' || getvariable('account_id') || '.db' AS account_db;
+```
+
+Read the path from an environment variable using `getenv()`, which is available in the [CLI client]({% link docs/preview/clients/cli/overview.md %}) only:
+
+```sql
+ATTACH getenv('DATABASE_PATH') AS env_db;
+```
+
+The path expression must not evaluate to `NULL`.
+
 ### Options
 
 Zero or more copy options may be provided within parentheses following the `ATTACH` statement. Parameter values can be passed in with or without wrapping in single quotes. Arbitrary expressions may be used for parameter values.
