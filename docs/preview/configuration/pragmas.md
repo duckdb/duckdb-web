@@ -417,20 +417,24 @@ SET profiling_mode = 'all';
 
 ### Custom Metrics
 
-By default, profiling enables all metrics except those activated by detailed profiling.
+> New The `tracked_metrics` setting is introduced in DuckDB 2.0, replacing the `custom_profiling_settings` `PRAGMA` used in earlier versions.
 
-Using the `custom_profiling_settings` `PRAGMA`, each metric, including those from detailed profiling, can be individually enabled or disabled.
-This `PRAGMA` accepts a JSON object with metric names as keys and Boolean values to toggle them on or off.
-Settings specified by this `PRAGMA` override the default behavior.
+By default, profiling collects all metrics. To collect only a subset, use the `tracked_metrics` setting, which accepts a list of metric glob patterns. A metric is collected if its name matches any of the patterns. The default value, `['*']`, matches all metrics.
 
-> Note This only affects the metrics when the `enable_profiling` is set to `json` or `no_output`.
+> Note This only affects the metrics when `enable_profiling` is set to `json` or `no_output`.
 > The `query_tree` and `query_tree_optimizer` always use a default set of metrics.
 
-In the following example, the `CPU_TIME` metric is disabled.
-The `EXTRA_INFO`, `OPERATOR_CARDINALITY`, and `OPERATOR_TIMING` metrics are enabled.
+Metric names are grouped by stage and written in `group.metric` form, for example `query.cpu_time` or `operator.timing`. The following example collects only the query-level metrics and every operator metric:
 
 ```sql
-SET custom_profiling_settings = '{"CPU_TIME": "false", "EXTRA_INFO": "true", "OPERATOR_CARDINALITY": "true", "OPERATOR_TIMING": "true"}';
+SET tracked_metrics = ['query.*', 'operator.*'];
+```
+
+To list all available metric names, their types, and units, query the `duckdb_available_metrics()` table function:
+
+```sql
+SELECT metric_name, metric_type, unit
+FROM duckdb_available_metrics();
 ```
 
 The profiling documentation contains an overview of the available [metrics]({% link docs/preview/dev/profiling.md %}#metrics).
