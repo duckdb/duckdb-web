@@ -101,6 +101,37 @@ FROM
 
 Generally, it is not recommended to use explicit materialization hints, as DuckDB's query optimizer is capable of deciding when to materialize or inline a CTE based on the query structure and the heuristics mentioned above. However, in some cases, it may be beneficial to use `MATERIALIZED` or `NOT MATERIALIZED` to control the behavior explicitly.
 
+## Data-Modifying CTEs
+
+> New Support for data-modifying statements in CTEs is introduced in DuckDB 2.0.
+
+A CTE body can be a data-modifying statement: [`INSERT`]({% link docs/preview/sql/statements/insert.md %}), [`UPDATE`]({% link docs/preview/sql/statements/update.md %}), [`DELETE`]({% link docs/preview/sql/statements/delete.md %}), or [`COPY`]({% link docs/preview/sql/statements/copy.md %}#copy--to). This lets you chain modifications into a single pipeline. A data-modifying CTE that is followed by other statements should use a [`RETURNING` clause]({% link docs/preview/sql/statements/insert.md %}#returning-clause) so that its result can be referenced.
+
+Move rows from one table to another in a single statement by combining a `DELETE` and an `INSERT`:
+
+```sql
+WITH moved AS MATERIALIZED (
+    DELETE FROM staging
+    RETURNING *
+)
+INSERT INTO archive
+SELECT * FROM moved;
+```
+
+Count the rows affected by an `UPDATE`:
+
+```sql
+WITH updated AS (
+    UPDATE orders
+    SET status = 'shipped'
+    WHERE status = 'ready'
+    RETURNING *
+)
+SELECT count(*) AS shipped FROM updated;
+```
+
+> Bestpractice Mark a data-modifying CTE as [`MATERIALIZED`](#cte-materialization) when later parts of the query depend on the modification having already run, so that it is not inlined or executed more than once.
+
 ## Recursive CTEs
 
 `WITH RECURSIVE` allows the definition of CTEs which can refer to themselves. Note that the query must be formulated in a way that ensures termination, otherwise, it may run into an infinite loop.
