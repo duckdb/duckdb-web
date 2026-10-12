@@ -646,6 +646,10 @@
                   "url": "create_view"
                 },
                 {
+                  "page": "CREATE TRIGGER",
+                  "url": "create_trigger"
+                },
+                {
                   "page": "CREATE TYPE",
                   "url": "create_type"
                 },
