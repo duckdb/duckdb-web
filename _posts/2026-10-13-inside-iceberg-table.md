@@ -36,7 +36,9 @@ Each part of that command maps to something DuckDB relies on later:
 * `-v /data/lake:/data/lake` mounts a host directory into the container, so the metadata, manifest and Parquet files survive after the container stops and you can read them directly.
 * `-e CATALOG_WAREHOUSE=/data/lake` tells the catalog where to write those files, which is why every path in the output below begins with `/data/lake`.
 
-Run the examples below in the local DuckDB [CLI]({% link docs/current/clients/cli/overview.md %}), not in the browser-based [DuckDB Shell](https://shell.duckdb.org/), because a page served from the web cannot reach a catalog on your own `localhost`. With the fixture running, attach it like this:
+> Note Run the examples below in the local DuckDB [CLI]({% link docs/current/clients/cli/overview.md %}), not in the browser-based [DuckDB Shell](https://shell.duckdb.org/), because a page served from the web cannot reach a catalog on your own `localhost`.
+
+With the fixture running, attach it like this:
 
 ```sql
 ATTACH 'warehouse' AS lake (
@@ -193,7 +195,9 @@ ORDER BY seq;
 
 In the last row, after the delete, `total-records` is still 12,000 and there are still four data files. The delete did not touch the data files. It added one *delete file* with 1,000 entries. We will get to that file in a moment.
 
-The metadata file grows with every commit, because it keeps the snapshot list and a log of previous metadata files. On a table that receives thousands of small commits, it can become large enough to slow down loading the table. Expiring old snapshots, which most catalogs and engines can do, keeps it in check.
+> Note The Iceberg spec treats these `summary` fields as optional, so an engine is free to leave any of them out. The counters above are populated by DuckDB, but a table written by another engine may be missing some of them, in which case the field reads as `NULL`. Treat them as a convenient hint rather than a guarantee.
+
+> Tip The metadata file grows with every commit, because it keeps the snapshot list and a log of previous metadata files. On a table that receives thousands of small commits, it can become large enough to slow down loading the table. Expiring old snapshots, which most catalogs and engines can do, keeps it in check.
 
 ## Layer 2: The Manifest List
 
@@ -293,6 +297,7 @@ The manifests also store, for every data file, the lower and upper bound of each
 
 ```sql
 SELECT
+    column_name,
     regexp_replace(file_path, '.*/data/', '') AS file,
     lower_bound,
     upper_bound
@@ -302,21 +307,48 @@ ORDER BY file;
 ```
 
 ```text
-┌──────────────────────────────────────────────────────────────────────────────┬─────────────┬─────────────┐
-│                                     file                                     │ lower_bound │ upper_bound │
-│                                   varchar                                    │   varchar   │   varchar   │
-├──────────────────────────────────────────────────────────────────────────────┼─────────────┼─────────────┤
-│ service_date=2026-10-01/01a12bb2-ad80-7cf4-8f63-beee9619f7c0.parquet         │ 3           │ 9000        │
-│ service_date=2026-10-02/01a12bb2-ad7f-7690-bda8-690b622b119a.parquet         │ 1           │ 8998        │
-│ service_date=2026-10-02/58a752c7-9925-4add-99ca-785505e17589-deletes.parquet │ NULL        │ NULL        │
-│ service_date=2026-10-03/01a12bb2-ad80-71f7-b4cd-58684f05b129.parquet         │ 2           │ 8999        │
-│ service_date=2026-10-04/01a12bb2-adbe-790f-bde9-50db3acba4b2.parquet         │ 9001        │ 12000       │
-└──────────────────────────────────────────────────────────────────────────────┴─────────────┴─────────────┘
+┌─────────────┬──────────────────────────────────────────────────────────────────────────────┬─────────────┬─────────────┐
+│ column_name │                                     file                                     │ lower_bound │ upper_bound │
+│   varchar   │                                   varchar                                    │   varchar   │   varchar   │
+├─────────────┼──────────────────────────────────────────────────────────────────────────────┼─────────────┼─────────────┤
+│ service_id  │ service_date=2026-10-01/01a12bb2-ad80-7cf4-8f63-beee9619f7c0.parquet         │ 3           │ 9000        │
+│ service_id  │ service_date=2026-10-02/01a12bb2-ad7f-7690-bda8-690b622b119a.parquet         │ 1           │ 8998        │
+│ service_id  │ service_date=2026-10-02/58a752c7-9925-4add-99ca-785505e17589-deletes.parquet │ NULL        │ NULL        │
+│ service_id  │ service_date=2026-10-03/01a12bb2-ad80-71f7-b4cd-58684f05b129.parquet         │ 2           │ 8999        │
+│ service_id  │ service_date=2026-10-04/01a12bb2-adbe-790f-bde9-50db3acba4b2.parquet         │ 9001        │ 12000       │
+└─────────────┴──────────────────────────────────────────────────────────────────────────────┴─────────────┴─────────────┘
 ```
 
 These bounds are what DuckDB uses to skip files when you filter on a column that is not the partition column. A query with `WHERE service_id > 10000` only has to open the file for October 4, because the bounds of the other three files rule them out. 
 
 The ranges for the first three days overlap almost completely, because the rows were spread over the days round-robin. Data that is written in the order of a commonly filtered column gets narrower bounds and more skipping.
+
+## Partition Statistics
+
+The bounds above are per column, per data file. For the partition column there is a coarser view, one row per manifest, that the manifest list keeps so a reader can skip an entire manifest before opening any of its files. [`iceberg_partition_stats`]({% link docs/current/core_extensions/iceberg/reference.md %}) returns it:
+
+```sql
+SELECT
+    partition_field_name,
+    partition_field_transform,
+    lower_bound,
+    upper_bound
+FROM iceberg_partition_stats(lake.demo.services)
+ORDER BY lower_bound;
+```
+
+```text
+┌─────────────────────────┬───────────────────────────┬─────────────┬─────────────┐
+│  partition_field_name   │ partition_field_transform │ lower_bound │ upper_bound │
+│         varchar         │          varchar          │   varchar   │   varchar   │
+├─────────────────────────┼───────────────────────────┼─────────────┼─────────────┤
+│ identity_service_date_2 │ identity                  │ 2026-10-01  │ 2026-10-03  │
+│ identity_service_date_2 │ identity                  │ 2026-10-02  │ 2026-10-02  │
+│ identity_service_date_2 │ identity                  │ 2026-10-04  │ 2026-10-04  │
+└─────────────────────────┴───────────────────────────┴─────────────┴─────────────┘
+```
+
+There is one row per manifest, so the bounds trace the three writes: the first insert spread three days across one manifest, the second insert added October 4, and the delete touched only October 2. The `partition_field_transform` is `identity` because we partitioned on the date column directly. A query with `WHERE service_date = DATE '2026-10-04'` can rule out the first and third manifests on these bounds alone, without reading a single manifest entry.
 
 ## Layer 4: Data Files and Delete Files
 
