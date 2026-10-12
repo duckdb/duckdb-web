@@ -98,3 +98,7 @@ COPY events TO 'events.parquet' (
 ### Reading Snowflake VARIANT from Parquet
 
 DuckDB can read shredded `VARIANT` Parquet files produced by Snowflake, automatically reconstructing the variant values from the shredded columns.
+
+## Functions
+
+See the [Variant Functions page]({% link docs/preview/sql/functions/variant.md %}) for the functions that operate on `VARIANT` values.

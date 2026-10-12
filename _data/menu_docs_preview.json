@@ -1050,6 +1050,10 @@
                   "url": "utility"
                 },
                 {
+                  "page": "Variant Functions",
+                  "url": "variant"
+                },
+                {
                   "page": "Window Functions",
                   "url": "window_functions"
                 }
