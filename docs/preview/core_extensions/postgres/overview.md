@@ -38,6 +38,8 @@ By default, all schemas are attached. When working with large instances, it can 
 ATTACH 'dbname=postgres user=postgres host=127.0.0.1' AS db (TYPE postgres, SCHEMA 'public');
 ```
 
+> Warning Avoid including credentials, such as a password, directly in the connection string. If a connection error occurs, the full connection string, including your credentials, may appear in the resulting error message. For better security, store credentials using [secrets]({% link docs/preview/configuration/secrets_manager.md %}) instead, as described in [Configuring via Secrets](#configuring-via-secrets).
+
 > Deprecated The old `postgres_attach` function is deprecated. It is recommended to switch over to the new `ATTACH` syntax.
 
 ### Configuration
