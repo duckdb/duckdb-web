@@ -270,6 +270,10 @@
                   "url": "output_formats"
                 },
                 {
+                  "page": "Agent Mode",
+                  "url": "agent_mode"
+                },
+                {
                   "page": "Editing",
                   "url": "editing"
                 },
