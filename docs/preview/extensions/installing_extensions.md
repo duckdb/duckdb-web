@@ -138,8 +138,8 @@ FORCE INSTALL httpfs FROM core;
 ## Installing Extensions through Client APIs
 
 For many clients, using SQL to load and install extensions is the preferred method. However, some clients have a dedicated
-API to install and load extensions. For example, the [Python client]({% link docs/preview/clients/python/overview.md %}#loading-and-installing-extensions), has dedicated `install_extension(name: str)` and `load_extension(name: str)` methods. For more details on a specific client API, refer
-to the [Client API documentation]({% link docs/preview/clients/overview.md %})
+API to install and load extensions. For example, the [Python client]({% link docs/preview/drivers/python/overview.md %}#loading-and-installing-extensions), has dedicated `install_extension(name: str)` and `load_extension(name: str)` methods. For more details on a specific client API, refer
+to the [Client API documentation]({% link docs/preview/drivers/overview.md %})
 
 ## Installation Location
 

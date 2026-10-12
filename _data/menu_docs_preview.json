@@ -176,8 +176,8 @@
           "url": "lakehouse_formats"
         },
         {
-          "page": "Client APIs",
-          "slug": "clients",
+          "page": "Drivers",
+          "slug": "drivers",
           "subfolderitems": [
             {
               "page": "Overview",
@@ -538,7 +538,7 @@
               ]
             },
             {
-              "page": "Tertiary Clients",
+              "page": "Tertiary Drivers",
               "slug": "tertiary_clients",
               "subsubfolderitems": [
                 {

@@ -67,11 +67,11 @@ BUILD_PYTHON=1 make debug
 
 ### `BUILD_PYTHON`
 
-When this flag is set, the [Python]({% link docs/preview/clients/python/overview.md %}) package is built.
+When this flag is set, the [Python]({% link docs/preview/drivers/python/overview.md %}) package is built.
 
 ### `BUILD_SHELL`
 
-When this flag is set, the [CLI]({% link docs/preview/clients/cli/overview.md %}) is built, this is usually enabled by default.
+When this flag is set, the [CLI]({% link docs/preview/drivers/cli/overview.md %}) is built, this is usually enabled by default.
 
 ### `BUILD_BENCHMARK`
 
@@ -80,11 +80,11 @@ More information about this can be found [in the README](https://github.com/duck
 
 ### `BUILD_JDBC`
 
-When this flag is set, the [Java]({% link docs/preview/clients/java/overview.md %}) package is built.
+When this flag is set, the [Java]({% link docs/preview/drivers/java/overview.md %}) package is built.
 
 ### `BUILD_ODBC`
 
-When this flag is set, the [ODBC]({% link docs/preview/clients/odbc/overview.md %}) package is built.
+When this flag is set, the [ODBC]({% link docs/preview/drivers/odbc/overview.md %}) package is built.
 
 ## Miscellaneous Flags
 

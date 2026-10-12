@@ -140,7 +140,7 @@ curl https://install.duckdb.org | DUCKDB_VERSION={{ site.lts_duckdb_version }} b
 <div class="preview"
     data-platform="macos"
     data-environment="cli"
-    data-docs="{% link docs/preview/clients/cli/overview.md %}">
+    data-docs="{% link docs/preview/drivers/cli/overview.md %}">
 
 {%- highlight bash -%}
 curl https://install.duckdb.org | DUCKDB_VERSION=alpha bash
@@ -221,7 +221,7 @@ curl https://install.duckdb.org | DUCKDB_VERSION={{ site.lts_duckdb_version }} b
 <div class="preview"
     data-platform="linux"
     data-environment="cli"
-    data-docs="{% link docs/preview/clients/cli/overview.md %}">
+    data-docs="{% link docs/preview/drivers/cli/overview.md %}">
 
 {%- highlight bash -%}
 curl https://install.duckdb.org | DUCKDB_VERSION=alpha bash
@@ -315,7 +315,7 @@ docker run --rm -it -v "$(pwd):/workspace" -w /workspace duckdb/duckdb:{{ site.l
 <div class="preview"
     data-platform="windows"
     data-environment="cli"
-    data-docs="{% link docs/preview/clients/cli/overview.md %}">
+    data-docs="{% link docs/preview/drivers/cli/overview.md %}">
 
 <h4>Powershell Script</h4>
 {%- highlight powershell -%}
@@ -363,7 +363,7 @@ pip install duckdb=={{ site.lts_duckdb_version }}
 
 <div class="preview"
     data-environment="python"
-    data-docs="{% link docs/preview/clients/python/overview.md %}">
+    data-docs="{% link docs/preview/drivers/python/overview.md %}">
 
 {%- highlight bash -%}
 pip install duckdb --pre --upgrade
@@ -517,7 +517,7 @@ dependencies {
 
 <div class="preview"
     data-environment="java"
-    data-docs="{% link docs/preview/clients/java/overview.md %}">
+    data-docs="{% link docs/preview/drivers/java/overview.md %}">
 
 <h4>Direct Download (JAR)</h4>
 <a href="https://duckdb-staging.duckdb.org/duckdb/duckdb-java/maven/org/duckdb/duckdb_jdbc/{{ site.preview_duckdb_java_version }}/duckdb_jdbc-{{ site.preview_duckdb_java_version }}.jar" class="download-btn" download="duckdb_jdbc-{{ site.preview_duckdb_java_version }}.jar" rel="noopener noreferrer">duckdb_jdbc-{{ site.preview_duckdb_java_version }}.jar</a>
@@ -761,7 +761,7 @@ go get github.com/duckdb/duckdb-go/v2@{{ site.lts_duckdb_go_tag }}
 <div class="preview"
     data-platform="linux"
     data-environment="c"
-    data-docs="{% link docs/preview/clients/c/overview.md %}">
+    data-docs="{% link docs/preview/drivers/c/overview.md %}">
 
 <a href="https://artifacts.duckdb.org/staged/v2.0-cyanoptera/duckdb-shared-libs-linux-amd64.tar.gz" class="download-btn" download="duckdb-shared-libs-linux-amd64.tar.gz" rel="noopener noreferrer">duckdb-shared-libs-linux-amd64.tar.gz</a>
 <a href="https://artifacts.duckdb.org/staged/v2.0-cyanoptera/duckdb-shared-libs-linux-arm64.tar.gz" class="download-btn" download="duckdb-shared-libs-linux-arm64.tar.gz" rel="noopener noreferrer">duckdb-shared-libs-linux-arm64.tar.gz</a>
@@ -772,7 +772,7 @@ go get github.com/duckdb/duckdb-go/v2@{{ site.lts_duckdb_go_tag }}
 <div class="preview"
     data-platform="macos"
     data-environment="c"
-    data-docs="{% link docs/preview/clients/c/overview.md %}">
+    data-docs="{% link docs/preview/drivers/c/overview.md %}">
 
 <a href="https://artifacts.duckdb.org/staged/v2.0-cyanoptera/duckdb-shared-libs-osx-universal.tar.gz" class="download-btn" download="duckdb-shared-libs-osx-universal.tar.gz" rel="noopener noreferrer">duckdb-shared-libs-osx-universal.tar.gz</a>
 
@@ -782,7 +782,7 @@ go get github.com/duckdb/duckdb-go/v2@{{ site.lts_duckdb_go_tag }}
 <div class="preview"
     data-platform="windows"
     data-environment="c"
-    data-docs="{% link docs/preview/clients/c/overview.md %}">
+    data-docs="{% link docs/preview/drivers/c/overview.md %}">
 
 <a href="https://artifacts.duckdb.org/staged/v2.0-cyanoptera/duckdb-shared-libs-windows-amd64.tar.gz" class="download-btn" download="duckdb-shared-libs-windows-amd64.tar.gz" rel="noopener noreferrer">duckdb-shared-libs-windows-amd64.tar.gz</a>
 <a href="https://artifacts.duckdb.org/staged/v2.0-cyanoptera/duckdb-shared-libs-windows-arm64.tar.gz" class="download-btn" download="duckdb-shared-libs-windows-arm64.tar.gz" rel="noopener noreferrer">duckdb-shared-libs-windows-arm64.tar.gz</a>
@@ -870,7 +870,7 @@ go get github.com/duckdb/duckdb-go/v2@{{ site.lts_duckdb_go_tag }}
 <div class="preview"
     data-platform="linux"
     data-environment="odbc"
-    data-docs="{% link docs/preview/clients/odbc/overview.md %}">
+    data-docs="{% link docs/preview/drivers/odbc/overview.md %}">
 
 <a href="https://duckdb-staging.duckdb.org/{{ site.preview_duckdb_odbc_version }}/duckdb/duckdb-odbc/github_release/duckdb_odbc-linux-amd64.zip" class="download-btn" download="odbc-linux-amd64.zip" rel="noopener noreferrer">odbc-linux-amd64.zip</a>
 <a href="https://duckdb-staging.duckdb.org/{{ site.preview_duckdb_odbc_version }}/duckdb/duckdb-odbc/github_release/duckdb_odbc-linux-arm64.zip" class="download-btn" download="odbc-linux-arm64.zip" rel="noopener noreferrer">odbc-linux-arm64.zip</a>
@@ -881,7 +881,7 @@ go get github.com/duckdb/duckdb-go/v2@{{ site.lts_duckdb_go_tag }}
 <div class="preview"
     data-platform="macos"
     data-environment="odbc"
-    data-docs="{% link docs/preview/clients/odbc/overview.md %}">
+    data-docs="{% link docs/preview/drivers/odbc/overview.md %}">
 
 <a href="https://duckdb-staging.duckdb.org/{{ site.preview_duckdb_odbc_version }}/duckdb/duckdb-odbc/github_release/duckdb_odbc-osx-universal.zip" class="download-btn" download="odbc-osx-universal.zip" rel="noopener noreferrer">odbc-osx-universal.zip</a>
 
@@ -891,7 +891,7 @@ go get github.com/duckdb/duckdb-go/v2@{{ site.lts_duckdb_go_tag }}
 <div class="preview"
     data-platform="windows"
     data-environment="odbc"
-    data-docs="{% link docs/preview/clients/odbc/overview.md %}">
+    data-docs="{% link docs/preview/drivers/odbc/overview.md %}">
 
 <a href="https://duckdb-staging.duckdb.org/{{ site.preview_duckdb_odbc_version }}/duckdb/duckdb-odbc/github_release/duckdb_odbc-windows-amd64.zip" class="download-btn" download="odbc-windows-amd64.zip" rel="noopener noreferrer">odbc-windows-amd64.zip</a>
 <a href="https://duckdb-staging.duckdb.org/{{ site.preview_duckdb_odbc_version }}/duckdb/duckdb-odbc/github_release/duckdb_odbc-windows-arm64.zip" class="download-btn" download="odbc-windows-arm64.zip" rel="noopener noreferrer">odbc-windows-arm64.zip</a>

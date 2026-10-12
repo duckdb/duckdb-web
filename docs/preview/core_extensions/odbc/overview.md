@@ -4,7 +4,7 @@ layout: docu
 title: ODBC Extension
 ---
 
-> Please note that DuckDB also offers an [ODBC client]({% link docs/preview/clients/odbc/overview.md %}), which allows you to connect _to DuckDB_ via ODBC from other applications.
+> Please note that DuckDB also offers an [ODBC client]({% link docs/preview/drivers/odbc/overview.md %}), which allows you to connect _to DuckDB_ via ODBC from other applications.
 
 The `odbc_scanner` extension allows connecting to other databases (using their [ODBC drivers](https://en.wikipedia.org/wiki/Open_Database_Connectivity)) and run queries with the [`odbc_query`]({% link docs/preview/core_extensions/odbc/functions.md %}#odbc_query) or copy data from DuckDB with the [`odbc_copy`]({% link docs/preview/core_extensions/odbc/functions.md %}#odbc_copy) functions.
 The extension is also available under the alias `odbc`.

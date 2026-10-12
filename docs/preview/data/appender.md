@@ -38,7 +38,7 @@ appender.Append<string>("Hannes");
 appender.EndRow();
 ```
 
-For more information, see the [C++ client]({% link docs/preview/clients/cpp.md %}).
+For more information, see the [C++ client]({% link docs/preview/drivers/cpp.md %}).
 
 ### Java (JDBC)
 
@@ -53,7 +53,7 @@ try (var appender = conn.createAppender(DuckDBConnection.DEFAULT_SCHEMA, "tbl"))
 }
 ```
 
-For more information, see the [Java Appender API]({% link docs/preview/clients/java/data_import.md %}#appender).
+For more information, see the [Java Appender API]({% link docs/preview/drivers/java/data_import.md %}#appender).
 
 ### Go
 
@@ -69,7 +69,7 @@ err = appender.AppendRow(1, "hello")
 err = appender.Flush()
 ```
 
-For more information, see the [Go Appender API]({% link docs/preview/clients/go/data_import.md %}#appender).
+For more information, see the [Go Appender API]({% link docs/preview/drivers/go/data_import.md %}#appender).
 
 ### Rust
 
@@ -81,11 +81,11 @@ app.append_row(params![1, "hello"])?;
 app.flush()?;
 ```
 
-For more information, see the [Rust Appender API]({% link docs/preview/clients/rust/data_import.md %}#appender).
+For more information, see the [Rust Appender API]({% link docs/preview/drivers/rust/data_import.md %}#appender).
 
 ### C
 
-For more information, see the [C Appender API]({% link docs/preview/clients/c/appender.md %}).
+For more information, see the [C Appender API]({% link docs/preview/drivers/c/appender.md %}).
 
 ## Date, Time and Timestamps
 
@@ -132,9 +132,9 @@ In this case, the entire append operation fails and no rows are inserted.
 
 Each client's documentation covers its full Appender API, including constructors for non-default schemas and catalogs and any client-specific features:
 
-* [C]({% link docs/preview/clients/c/appender.md %})
-* [Go]({% link docs/preview/clients/go/data_import.md %}#appender)
-* [Java (JDBC)]({% link docs/preview/clients/java/data_import.md %}#appender)
-* [Julia]({% link docs/preview/clients/tertiary_clients/julia.md %}#appender-api)
-* [Rust]({% link docs/preview/clients/rust/data_import.md %}#appender)
-* [Node.js]({% link docs/preview/clients/node_neo/overview.md %}#append-to-table)
+* [C]({% link docs/preview/drivers/c/appender.md %})
+* [Go]({% link docs/preview/drivers/go/data_import.md %}#appender)
+* [Java (JDBC)]({% link docs/preview/drivers/java/data_import.md %}#appender)
+* [Julia]({% link docs/preview/drivers/tertiary_clients/julia.md %}#appender-api)
+* [Rust]({% link docs/preview/drivers/rust/data_import.md %}#appender)
+* [Node.js]({% link docs/preview/drivers/node_neo/overview.md %}#append-to-table)
