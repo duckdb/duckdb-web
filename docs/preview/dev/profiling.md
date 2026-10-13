@@ -51,7 +51,7 @@ For more information, see the [“Profiling”]({% link docs/preview/configurati
 | [`profiling_coverage`]({% link docs/preview/configuration/pragmas.md %}#profiling-coverage)                                                                                        | Set the operators to profile                    | `SELECT`                                                 | `SELECT`, `ALL`                                                                                                                                                    |
 | [`profiling_output`]({% link docs/preview/configuration/pragmas.md %}#profiling-output)                                                                                            | Set a profiling output file                     | Console                                                  | A filepath                                                                                                                                                         |
 | [`profiling_mode`]({% link docs/preview/configuration/pragmas.md %}#profiling-mode)                                                                                                | Toggle additional optimizer and planner metrics | `standard`                                               | `standard`, `detailed`, `all`                                                                                                                                       |
-| [`custom_profiling_settings`]({% link docs/preview/configuration/pragmas.md %}#custom-metrics)                                                                                     | Enable or disable specific metrics              | All metrics except those activated by detailed profiling | A JSON object that matches the following: `{"METRIC_NAME": "boolean", ...}`. ([List of all available metrics]({% link docs/preview/dev/metrics.md %}#all-metrics)) |
+| [`tracked_metrics`]({% link docs/preview/configuration/pragmas.md %}#custom-metrics)                                                                                               | Select which metrics to collect                 | `['*']` (all metrics)                                    | A list of metric glob patterns, e.g. `['query.*', 'optimizer.*']`. ([List of all available metrics]({% link docs/preview/dev/metrics.md %}#all-metrics)) |
 | [`disable_profiling`]({% link docs/preview/configuration/pragmas.md %}#disable-profiling), [`disable_profile`]({% link docs/preview/configuration/pragmas.md %}#disable-profiling) | Turn off profiling                              |                                                          |                                                                                                                                                                    |
 
 ## Table Functions
@@ -70,7 +70,7 @@ CALL enable_profiling(
     save_location := '/path/to/output.json',
     coverage := 'select',
     mode := 'standard',
-    metrics := ['QUERY_NAME', 'LATENCY', 'OPERATOR_TIMING']
+    metrics := ['query.sql', 'query.total_time', 'operator.timing']
 );
 ```
 
@@ -85,7 +85,7 @@ CALL enable_profiling(
 All parameters are optional and named. You can also pass metrics as an unnamed parameter:
 
 ```sql
-CALL enable_profiling(['LATENCY', 'RESULT_SET_SIZE']);
+CALL enable_profiling(['query.total_time', 'query.total_intermediate_size_bytes']);
 ```
 
 ### `disable_profiling()`
@@ -99,6 +99,13 @@ CALL disable_profiling();
 ## Metrics
 
 DuckDB supports a wide range of metrics that can be enabled or disabled independently. To learn more and to see the full list of available metrics, refer to the [metrics documentation]({% link docs/preview/dev/metrics.md %}#all-metrics).
+
+> New In DuckDB 2.0, the set of collected metrics is controlled with the `tracked_metrics` setting, which takes a list of metric glob patterns such as `['query.*', 'optimizer.*']`. This replaces the `custom_profiling_settings` `PRAGMA` used in earlier versions. The available metric names, types, and units can be listed with the `duckdb_available_metrics()` table function:
+>
+> ```sql
+> SELECT metric_name, metric_type, unit
+> FROM duckdb_available_metrics();
+> ```
 
 ## Detailed Profiling
 
