@@ -121,7 +121,7 @@ libtpch_extension.a           libtpcds_extension.a
 
 A pinned build can be installed with `DUCKDB_STAGED`, for example `DUCKDB_STAGED=31adc8b766/v2.0.0-alpha42839` or simply `DUCKDB_STAGED=31adc8b766`.
 
-> Note For DuckDB v2.0 and later, most artifacts are distributed as `.tar.gz` files instead of `.zip` files ([`duckdb#24773`](https://github.com/duckdb/duckdb/pull/24773)).
+> For DuckDB v2.0 and later, most artifacts are distributed as `.tar.gz` files instead of `.zip` files ([`duckdb#24773`](https://github.com/duckdb/duckdb/pull/24773)).
 
 ## Reference Implementations for Clients
 
