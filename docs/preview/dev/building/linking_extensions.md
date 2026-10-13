@@ -138,7 +138,7 @@ They provide a path forward for anyone maintaining a binding or an application t
 | Go | Planned, not yet started | [`duckdb-go-bindings#112`](https://github.com/duckdb/duckdb-go-bindings/issues/112) |
 | Wasm | Not yet migrated | pending (pinned to the DuckDB v1.5 `v1.5-variegata` line at the time of writing) |
 
-> Note The Python pull request is the clearest end-to-end example: it restores static linking of the default `BUILD_EXTENSIONS` set by calling `duckdb_register_static_extensions()` and shows how to override the linked set.
+> The Python pull request is the clearest end-to-end example: it restores static linking of the default `BUILD_EXTENSIONS` set by calling `duckdb_register_static_extensions()` and shows how to override the linked set.
 
 ## See Also
 
