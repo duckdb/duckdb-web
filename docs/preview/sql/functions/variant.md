@@ -19,6 +19,7 @@ This section describes functions that operate on the [`VARIANT` type]({% link do
 | [`variant_array_length(v)`](#variant_array_lengthv) | Return the number of elements in a `VARIANT` array. |
 | [`variant_exists(v, key)`](#variant_existsv-key) | Return whether the given key exists in a `VARIANT` object. |
 | [`variant_contains(haystack, needle)`](#variant_containshaystack-needle) | Return whether the `needle` `VARIANT` is contained in the `haystack` `VARIANT`. |
+| [`variant_comparator(v)`](#variant_comparatorv) | Return a binary sort key that orders a `VARIANT` value by the logical ordering of `VARIANT` values. |
 
 #### `variant_typeof(v)`
 
@@ -83,6 +84,29 @@ This section describes functions that operate on the [`VARIANT` type]({% link do
 | **Description** | Return whether the `needle` `VARIANT` is contained in the `haystack` `VARIANT`. |
 | **Example** | `variant_contains('{"user": {"id": 42}}'::JSON::VARIANT, '{"user": {"id": 42}}'::JSON::VARIANT)` |
 | **Result** | `true` |
+
+#### `variant_comparator(v)`
+
+<div class="nostroke_table"></div>
+
+| **Description** | Return a binary sort key (a `BLOB`) that orders a `VARIANT` value according to the logical ordering of `VARIANT` values. This is used internally so that `VARIANT`s compare and sort consistently with the corresponding native DuckDB types, rather than by their internal byte representation. |
+| **Example** | `variant_comparator({'a': 1, 'b': 2}::VARIANT)` |
+| **Result** | A `BLOB` sort key |
+
+Values are ordered first by type bucket (for example, booleans before numbers, numbers before strings) and then by value within a bucket, so that sorting a `VARIANT` column matches the order of the underlying values:
+
+```sql
+SELECT i
+FROM range(-2, 2) t(i)
+ORDER BY i::VARIANT;
+```
+
+| i |
+|--:|
+| -2 |
+| -1 |
+| 0 |
+| 1 |
 
 ## Example
 
