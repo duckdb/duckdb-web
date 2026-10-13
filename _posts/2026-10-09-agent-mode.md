@@ -85,7 +85,11 @@ Agents mark the commands they run with environment variables. There is no single
 
 Agent mode turns on when three things are true: one of these variables is set, stdout is not a terminal, and no output format was given on the command line. If you pass `-csv`, `-json` or `-markdown`, you asked for a specific format, and agent mode stays out of the way.
 
-Two flags override detection. `-agent` forces the mode on and `-no-agent` forces it off. The two combine with format flags, so `duckdb -agent -csv` keeps the agent behavior and only changes how the rows are printed. The `.show` command reports whether the mode is active and which agent was detected:
+Two flags override detection. `-agent` forces the mode on and `-no-agent` forces it off. The two combine with format flags, so `duckdb -agent -csv` keeps the agent behavior and only changes how the rows are printed. 
+
+The `DUCKDB_AGENT_MODE` environment variable does the same from the environment, for when the command line cannot be changed, such as a script run from an agent's shell. It accepts `1`/`on`/`true`/`yes` and `0`/`off`/`false`/`no`; `auto`, empty or unset leaves the decision to detection. The flags take precedence over the variable. 
+
+The `.show` command reports whether the mode is active and which agent was detected:
 
 ```text
 agent: claude-code
@@ -239,4 +243,5 @@ The current behavior is a first attempt, and the conventions around agents are a
 ## Further Reading
 
 * [Shell: agent mode, render for AI coding agents when one is detected](https://github.com/duckdb/duckdb/pull/26167) (pull request #26167)
+* [Shell: `DUCKDB_AGENT_MODE=1/0` forces agent mode on or off](https://github.com/duckdb/duckdb/pull/26416) (pull request #26416)
 * [Shell: proposal to add `.mode llm`](https://github.com/carlopi/duckdb/pull/117) (Carlo Piovesan’s proposal, the basis for the byte budget and early stop)
