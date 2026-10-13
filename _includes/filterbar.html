@@ -25,23 +25,24 @@
 
 		<input type="text" id="search-input" placeholder="Search" aria-label="Search">
 
-		{% if cfg.core_toggle %}
-			<label class="core-toggle">
-				<input type="checkbox" id="core-toggle">
-				<span class="switch" aria-hidden="true"></span>
-				<span class="core-toggle-label">{{ cfg.core_toggle }}</span>
-			</label>
-		{% endif %}
-
-		{% if cfg.filters.size > 0 %}
+		{% if cfg.filters.size > 0 or cfg.core_toggle %}
 		<button type="button" class="filter-toggle" aria-label="Filter">
 			<svg class="icon icon-filter"><use href="#filter-funnel-01"></use></svg>
 			<svg class="icon icon-close"><use href="#x-close"></use></svg>
 		</button>
 		<div class="filter-modal">
+			{% if cfg.filters.size > 0 %}
 			<div class="filter-group filter-group-mobile-only">
 				<div class="filtertags">{{ filter_buttons }}</div>
 			</div>
+			{% endif %}
+			{% if cfg.core_toggle %}
+			<label class="core-toggle">
+				<input type="checkbox" id="core-toggle">
+				<span class="switch" aria-hidden="true"></span>
+				<span class="core-toggle-label">{{ cfg.core_toggle }}</span>
+			</label>
+			{% endif %}
 		</div>
 		<div class="filter-overlay"></div>
 		{% endif %}

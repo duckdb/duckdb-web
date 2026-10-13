@@ -543,6 +543,26 @@
 	list-style: none;
 }
 
+@mixin scroll-x-faded($inset) {
+	$scrollbar-height: 2px;
+	$fade: linear-gradient(to right, transparent, #000 $inset, #000 calc(100% - #{$inset}), transparent);
+	$scrollbar: linear-gradient(#000, #000) bottom / 100% $scrollbar-height no-repeat;
+	overflow-x: auto;
+	overscroll-behavior: contain;
+	padding-bottom: 8px;
+	-webkit-mask: $scrollbar, $fade;
+	        mask: $scrollbar, $fade;
+
+	&::-webkit-scrollbar {
+		height: $scrollbar-height;
+		background: var(--doc-scrollbar-bg, #E6E6E6);
+	}
+	&::-webkit-scrollbar-thumb {
+		background: var(--doc-scrollbar-slider, #CCC);
+		border-radius: var(--page-radius-xs);
+	}
+}
+
 @mixin logo {
 	background-size: contain;
 	background-repeat: no-repeat;
