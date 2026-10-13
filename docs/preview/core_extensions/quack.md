@@ -8,7 +8,9 @@ The `quack` extension adds support for the [Quack remote protocol]({% link docs/
 
 ## Usage
 
-Quack is currently in a beta state. Quack will be transparently autoinstalled and [autoloaded]({% link docs/preview/extensions/overview.md %}#autoloading-extensions) on first use.
+> New The `quack` extension graduates to stable status in DuckDB 2.0. It was previously released as a preview.
+
+Quack is transparently autoinstalled and [autoloaded]({% link docs/preview/extensions/overview.md %}#autoloading-extensions) on first use.
 
 If you would like to install Quack explicitly, run:
 
@@ -21,8 +23,3 @@ If you would like to load Quack explicitly, run:
 ```sql
 LOAD quack;
 ```
-
-## Limitations
-
-> Warning As of DuckDB v1.5.3, `quack` is in an experimental state. The protocol, the function names, and implementation details are all subject to change.
-> Quack is expected to reach stable status in DuckDB v2.0.0, scheduled for [September 2026]({% link release_calendar.md %}#upcoming-releases).

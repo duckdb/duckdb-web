@@ -570,7 +570,7 @@ SELECT * FROM t1 NATURAL JOIN (VALUES (2), (4)) _(x);
 
 ### Specifying the Join Type Explicitly
 
-> New This feature will be introduced in DuckDB 2.0.
+> New This feature is introduced in DuckDB 2.0.
 
 The `JOIN BY (TYPE ⟨join_type⟩)`{:.language-sql .highlight} syntax allows you to explicitly select the join type, including DuckDB's internal join types that have no syntax in standard SQL:
 
