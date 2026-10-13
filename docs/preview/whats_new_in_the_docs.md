@@ -90,6 +90,7 @@ Additional 2.0 features documented across the site, grouped by area.
 * [The `lttb` aggregate]({% link docs/preview/sql/functions/aggregates.md %}#lttbx-y-n) for downsampling time series data
 * [The new `extension_name` column in `duckdb_functions`]({% link docs/preview/sql/meta/duckdb_table_functions.md %}#duckdb_functions)
 * [The `decimal_division` function]({% link docs/preview/sql/functions/numeric.md %}#decimal_divisionx-y) for exact decimal division
+* [The `decimal_average` aggregate]({% link docs/preview/sql/functions/aggregates.md %}#decimal_averagearg) for exact decimal averages
 * [Renaming a view with `ALTER TABLE ... RENAME TO`]({% link docs/preview/sql/statements/alter_table.md %}#rename-table) for PostgreSQL compatibility
 * [`EXCEPT` as a synonym for `EXCLUDE`]({% link docs/preview/sql/expressions/star.md %}#exclude-clause) in star expressions
 * [No-argument `GROUPING_ID()` and `GROUPING()`]({% link docs/preview/sql/query_syntax/grouping_sets.md %}#identifying-grouping-sets-with-grouping_id) defaulting to all `GROUP BY` columns
