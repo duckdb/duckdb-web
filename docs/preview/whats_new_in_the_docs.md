@@ -91,6 +91,7 @@ Additional 2.0 features documented across the site, grouped by area.
 * [The new `extension_name` column in `duckdb_functions`]({% link docs/preview/sql/meta/duckdb_table_functions.md %}#duckdb_functions)
 * [The `decimal_division` function]({% link docs/preview/sql/functions/numeric.md %}#decimal_divisionx-y) for exact decimal division
 * [Renaming a view with `ALTER TABLE ... RENAME TO`]({% link docs/preview/sql/statements/alter_table.md %}#rename-table) for PostgreSQL compatibility
+* [`EXCEPT` as a synonym for `EXCLUDE`]({% link docs/preview/sql/expressions/star.md %}#exclude-clause) in star expressions
 
 ### Data Import and Export
 
