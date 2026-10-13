@@ -602,6 +602,16 @@ Don't run a `CHECKPOINT` on shutdown:
 PRAGMA disable_checkpoint_on_shutdown;
 ```
 
+#### Checkpoint on Detach
+
+> New As of DuckDB 2.0, the `checkpoint_on_detach` setting controls whether a `CHECKPOINT` runs when a database is detached:
+
+```sql
+SET checkpoint_on_detach = 'ENABLED';
+```
+
+The accepted values are `ENABLED` (request a checkpoint on detach), `DISABLED` (never checkpoint on detach), and `DEFAULT` (defer to the global `checkpoint_on_shutdown` behavior). A requested checkpoint still does not occur while another connection references the database. This is a per-session setting.
+
 ## Temp Directory for Spilling Data to Disk
 
 By default, DuckDB uses a temporary directory named `⟨database_file_name⟩.tmp`{:.language-sql .highlight} to spill to disk, located in the same directory as the database file. To change this, use:

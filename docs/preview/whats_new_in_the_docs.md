@@ -116,6 +116,7 @@ Additional 2.0 features documented across the site, grouped by area.
 
 * [Setting `max_memory` as a percentage]({% link docs/preview/configuration/pragmas.md %}#memory-limit) of total system memory
 * [The `max_execution_time` setting]({% link docs/preview/configuration/pragmas.md %}#maximum-execution-time) for bounding query wall-clock time
+* [The `checkpoint_on_detach` setting]({% link docs/preview/configuration/pragmas.md %}#checkpoint-on-detach) controlling checkpoints when detaching a database
 * [The metrics layer]({% link docs/preview/dev/profiling.md %}#metrics) and the [`tracked_metrics` setting]({% link docs/preview/configuration/pragmas.md %}#custom-metrics)
 * [IEEE floating-point operation semantics]({% link docs/preview/configuration/pragmas.md %}#ieee-floating-point-operation-semantics) for integer division by zero
 
