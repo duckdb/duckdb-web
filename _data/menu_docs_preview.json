@@ -1310,6 +1310,10 @@
               "url": "lance"
             },
             {
+              "page": "Legacy Parser",
+              "url": "legacy_parser"
+            },
+            {
               "page": "MotherDuck",
               "url": "motherduck"
             },
@@ -1914,6 +1918,10 @@
             {
               "page": "Overview",
               "url": "overview"
+            },
+            {
+              "page": "Migrating to DuckDB v2.0",
+              "url": "migration"
             },
             {
               "page": "Backup Extension Repositories",
