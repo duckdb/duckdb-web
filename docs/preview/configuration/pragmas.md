@@ -164,6 +164,16 @@ Set the amount of threads for parallel query execution:
 SET threads = 4;
 ```
 
+#### Maximum Execution Time
+
+> New As of DuckDB 2.0, the `max_execution_time` setting bounds the wall-clock time of a query in milliseconds. When the limit is exceeded, the query is aborted with the error `Query exceeded maximum execution time`. The default is `0`, meaning no limit.
+
+```sql
+SET max_execution_time = 5000;
+```
+
+This is a per-connection setting with a global fallback: a local value overrides a value set with `SET GLOBAL`, and `RESET max_execution_time` restores the global value.
+
 ## Collations
 
 List all available collations:
