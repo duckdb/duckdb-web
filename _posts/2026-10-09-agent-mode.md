@@ -85,9 +85,11 @@ Agents mark the commands they run with environment variables. There is no single
 
 Agent mode turns on when three things are true: one of these variables is set, stdout is not a terminal, and no output format was given on the command line. If you pass `-csv`, `-json` or `-markdown`, you asked for a specific format, and agent mode stays out of the way.
 
-Two flags override detection. `-agent` forces the mode on and `-no-agent` forces it off. The two combine with format flags, so `duckdb -agent -csv` keeps the agent behavior and only changes how the rows are printed. 
+Two flags override detection. `-agent` forces the mode on and `-no-agent` forces it off. The two combine with format flags, so `duckdb -agent -csv` keeps the agent behavior and only changes how the rows are printed. The `DUCKDB_AGENT_MODE` environment variable does the same from the environment, for when the command line cannot be changed, such as a script run from an agent’s shell. For example, to manually enable agent mode, run:
 
-The `DUCKDB_AGENT_MODE` environment variable does the same from the environment, for when the command line cannot be changed, such as a script run from an agent's shell. It accepts `1`/`on`/`true`/`yes` and `0`/`off`/`false`/`no`; `auto`, empty or unset leaves the decision to detection. The flags take precedence over the variable. 
+```bash
+DUCKDB_AGENT_MODE=1 duckdb
+```
 
 The `.show` command reports whether the mode is active and which agent was detected:
 
@@ -226,7 +228,7 @@ If you do not want the startup line, add `.startup_text none` to your `~/.duckdb
 
 If you use a coding agent, there is nothing to configure. Agents such as Claude Code, Codex, Cursor, Gemini CLI and GitHub Copilot already set one of the environment variables from the table above, and they capture a command's output through a pipe rather than a terminal. Those are two of the three conditions for agent mode. 
 
-So as long as the `duckdb` binary on the agent's path is v2.0 or newer and the agent does not request a specific output format with a flag such as `-csv`, `-json` or `-markdown`, the mode turns on by itself. A format flag is treated as a deliberate choice, so it switches agent mode off: the CLI assumes you want exactly that format and does not override it. 
+So as long as the `duckdb` binary on the agent’s path is v2.0 or newer and the agent does not request a specific output format with a flag such as `-csv`, `-json` or `-markdown`, the mode turns on by itself. A format flag is treated as a deliberate choice, so it switches agent mode off: the CLI assumes you want exactly that format and does not override it.
 
 To see what the agent sees, run a query through a pipe with the flag set:
 
