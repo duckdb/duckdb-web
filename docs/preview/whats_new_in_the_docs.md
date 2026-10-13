@@ -119,6 +119,7 @@ Additional 2.0 features documented across the site, grouped by area.
 * [The `checkpoint_on_detach` setting]({% link docs/preview/configuration/pragmas.md %}#checkpoint-on-detach) controlling checkpoints when detaching a database
 * [Deprecation of implicit identifier-to-string conversion]({% link docs/preview/sql/dialect/sql_quirks.md %}#implicit-conversion-of-identifiers-in-table-function-arguments) in table function arguments, with the `table_function_identifier_conversion` setting
 * [Removal of the `enable_http_logging` and `http_logging_output` settings]({% link docs/preview/operations_manual/logging/overview.md %}#logging-specific-types) in favor of the unified logging framework
+* [The `http_client_pool_capacity` setting]({% link docs/preview/data/io.md %}#tuning) for sizing the asynchronous HTTP client pool
 * [The metrics layer]({% link docs/preview/dev/profiling.md %}#metrics) and the [`tracked_metrics` setting]({% link docs/preview/configuration/pragmas.md %}#custom-metrics)
 * [IEEE floating-point operation semantics]({% link docs/preview/configuration/pragmas.md %}#ieee-floating-point-operation-semantics) for integer division by zero
 
