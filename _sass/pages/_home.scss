@@ -2,6 +2,8 @@
 @use '../abstracts/variables' as *;
 @use '../abstracts/mixins' as *;
 
+$quickinstall-padding: 20px;
+
 body.landing{
 	
 	@include body-standard;
@@ -194,17 +196,16 @@ body.landing{
 				display: -webkit-inline-box;
 				display: -ms-inline-flexbox;
 				display: inline-flex;
-				border: 1px solid var(--main-codebox-border-color, #E6E6E6);
 				list-style: none;
 				-webkit-box-align: start;
 					-ms-flex-align: start;
 						align-items: flex-start;
-				border-radius: var(--page-radius-pill); 
-				padding: 5px;
+				border-radius: var(--page-radius-pill);
 				li {
 					@include label-1;
 					border-radius: var(--page-radius-pill);
-					padding: 12px 14px;
+					padding: 12px 16px;
+					margin-right: -4px;
 					color: var(--interactive-filter-unselected-text-color, #666);
 					cursor: pointer;
 					-webkit-transition: background 0.2s, color 0.2s;
@@ -214,14 +215,17 @@ body.landing{
 					&:hover, &.active {
 						color: var(--interactive-filter-selected-text-color, #1A1A1A);
 					}
+					&:last-child {
+						margin-right: 0;
+					}
 				}
 			}
 		
 			.select-highlight {
 				position: absolute;
 				background: var(--interactive-filter-selected-background-color, #E6E6E6);
-				height: calc(100% - 10px);
-				top: 5px;
+				height: 100%;
+				top: 0;
 				left: 0;
 				width: 0;
 				-webkit-transition: all 0.3s ease;
@@ -632,16 +636,6 @@ body.landing{
 				margin: 0 0 24px;
 			}
 		}
-		.duckstack-tabs{
-			ul{
-				border: none;
-				padding: 0;
-			}
-			.select-highlight{
-				top: calc(50% - 18px);
-				height: 36px;
-			}
-		}
 		.duckstack-card{
 			width: 565px;
 			min-height: 340px;
@@ -1029,20 +1023,45 @@ body.landing{
 					margin: 20px 0 18px;
 				}
 			}
+		}
+		.window{
+			display: flex;
+			flex-direction: column;
+			gap: 16px;
+			padding: $quickinstall-padding;
+			.topbar ul{
+				margin: 0;
+			}
+			.content{
+				padding: 0;
+			}
+			.result.content{
+				display: flex;
+				flex-direction: column;
+				justify-content: center;
+				min-height: calc(19.6px + 2 * 16px + 2px);
+			}
+			.result.content .highlight{
+				position: relative;
+				margin: 0;
+				padding: 16px;
+				border-radius: var(--page-radius-m);
+			}
+			button.copy{
+				top: 50%;
+				right: 16px;
+				transform: translateY(-50%);
+			}
+			.result a.download-btn{
+				margin: 0;
+			}
 			.bottombar{
 				border: 0;
-				padding-top: 0;
+				padding: 0 4px;
+				.system span{
+					@include tiny;
+				}
 			}
-		}
-		.window button.copy{
-			right: 30px;
-			top: 40px;
-		}
-		.highlight{
-			border-radius: var(--page-radius-m);
-		}
-		.result a.download-btn{
-			margin: 11px 0;
 		}
 	}
 	
@@ -1302,24 +1321,12 @@ body.landing{
 		label.onlymobile{
 			display: none!important;
 		}
-		.window .topbar{
-			width: calc(100% - 0px);
-			position: relative;
-			-ms-scroll-chaining: none;
-				overscroll-behavior: contain;
-			overflow-x: auto;
-			&::-webkit-scrollbar {width:1px; background: var(--doc-scrollbar-bg, #E6E6E6); height: 2px;}
-			&::-webkit-scrollbar-track {background: var(--doc-scrollbar-bg, #E6E6E6);}
-			&::-webkit-scrollbar-thumb {background: var(--doc-scrollbar-slider, #CCC);border-radius: var(--page-radius-xs)}
+		section#quickinstall .window .topbar{
+			margin: 0 (-$quickinstall-padding);
+			@include scroll-x-faded($quickinstall-padding);
 			ul{
-				margin-left: 15px;
-				margin-right: 15px;
-				margin-top: 15px;
-				margin-bottom: 10px;
+				margin: 0 $quickinstall-padding;
 			}
-		}
-		.window .topbar ul li{
-			white-space: nowrap;
 		}
 	}
 	body.landing section.metrics{

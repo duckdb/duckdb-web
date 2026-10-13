@@ -2,6 +2,9 @@
 @use '../abstracts/variables' as *;
 @use '../abstracts/mixins' as *;
 
+$filter-btn-height: 38px;
+$filter-modal-padding: 20px;
+
 /** BLOG STYLES **/
 
 section.blog .postpreview:nth-child(4){
@@ -400,7 +403,6 @@ section.speakers,
 		position: relative;
 		display: flex;
 		align-items: center;
-		height: 44px;
 		overflow-x: auto;
 		flex-wrap: nowrap;
 		width: fit-content;
@@ -408,9 +410,9 @@ section.speakers,
 
 		.filter-highlight {
 			position: absolute;
-			top: 4px;
+			top: 0;
 			left: 0;
-			height: calc(100% - 8px);
+			height: $filter-btn-height;
 			background: var(--interactive-filter-selected-background-color, #D9D9D9);
 			border-radius: var(--page-radius-pill);
 			transition: all 0.3s ease;
@@ -424,8 +426,9 @@ section.speakers,
 			z-index: 2;
 			background: none;
 			border: none;
-			height: 100%;
-			padding: 0 15px;
+			height: $filter-btn-height;
+			padding: 0 16px;
+			margin-right: -4px;
 			color: var(--interactive-filter-unselected-text-color, #666);
 			cursor: pointer;
 			border-radius: var(--page-radius-pill);
@@ -434,6 +437,10 @@ section.speakers,
 			&.active,
 			&:hover {
 				color: var(--interactive-filter-selected-text-color, #1A1A1A);
+			}
+
+			&:last-child {
+				margin-right: 0;
 			}
 		}
 	}
@@ -1218,7 +1225,7 @@ footer{
 			background: var(--menu-dropdown-background-color, #F2F2F2);
 			border: 1px solid var(--menu-dropdown-border-color, #E6E6E6);
 			border-radius: var(--page-radius-box);
-			padding: 20px;
+			padding: $filter-modal-padding;
 			opacity: 0;
 			transform: translateY(10px);
 			pointer-events: none;
@@ -1245,9 +1252,9 @@ footer{
 		.filter-modal .filtertags {
 			width: auto;
 			max-width: none;
-			margin-left: -20px;
-			margin-right: -20px;
-			padding: 0 20px;
+			margin: 0 (-$filter-modal-padding);
+			padding: 0 $filter-modal-padding;
+			@include scroll-x-faded($filter-modal-padding);
 		}
 
 		.filter-overlay {

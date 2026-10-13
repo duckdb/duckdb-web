@@ -792,14 +792,6 @@ body.manifesto{
 }
 
 body.manifesto{
-	ol li,
-	ul li,
-	p{
-		@include body-large();
-	}
-}
-
-body.manifesto{
 	.pagetitle{
 		padding-bottom: 10px;
 	}
@@ -994,9 +986,6 @@ body.manifesto{
 		}
 	}
 
-	body.landing .window .content{
-		padding: 15px;
-	}
 	body.landing section#quickinstall .wrap .install,
 	body.landing section.podcast .wrap .section-image{
 		width: 100%;
@@ -1007,15 +996,6 @@ body.manifesto{
 		width: 100%;
 		order: 1;
 	}
-	.topbar{ 
-		.hoverlabel{
-			display: none;
-		}
-		ul{
-			margin-left: 15px;
-		}
-	}
-
 }
 
 @media only screen and (max-width: 550px) {
