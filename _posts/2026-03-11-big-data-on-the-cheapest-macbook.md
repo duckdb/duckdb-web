@@ -4,7 +4,7 @@ title: "Big Data on the Cheapest MacBook"
 authors:
   - Gábor Szárnyas
 thumb: "/images/blog/thumbs/macbook-neo.svg"
-image: "/images/blog/thumbs/macbook-neo.jpg"
+image: "/images/blog/thumbs/macbook-neo.png"
 excerpt: "How does the latest entry-level MacBook perform on database workloads? We benchmarked it using ClickBench and TPC-DS SF300. We found that it could complete both workloads, sometimes with surprisingly good results."
 tag: benchmark
 ---
