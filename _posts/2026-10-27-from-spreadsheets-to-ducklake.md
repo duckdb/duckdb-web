@@ -112,7 +112,7 @@ ATTACH '⟨aws_account_id⟩' AS glue_catalog (
 
 Matt has been testing the DuckDB v2.0 alpha and has not run into any regressions so far. Several features stand out for him.
 
-**Dynamic `ATTACH` statements.** While writing the book, Matt needed to attach AWS Glue catalogs in examples. Up to v1.5, the `ATTACH` path had to be a literal, so the account number had to be hard-coded in the script – calling `getenv` raised an error. 
+**Dynamic `ATTACH` statements.** While writing the book, Matt needed to attach AWS Glue catalogs in examples. Up to v1.5, the `ATTACH` path had to be a literal, so the account number had to be hard-coded in the script, as calling `getenv` raised an error. 
 
 Matt filed a feature request, and a pull request followed within two days. In v2.0, `ATTACH` accepts expressions, so account IDs, usernames, passwords and connection strings can come from environment variables at runtime instead of living in the script:
 
@@ -123,23 +123,23 @@ ATTACH getenv('AWS_ACCOUNT_ID') AS glue_catalog (
 );
 ```
 
-**Asynchronous I/O.** This is the feature Matt calls a game changer. In his [benchmarks, published on his Substack](https://performancede.substack.com/p/duckdb-20-and-s3-file-read-performance), reading 1,000 and 10,000 files from Amazon S3 consistently took 67–70% less time with the v2.0 alpha. 
+**Asynchronous I/O.** This is the feature Matt calls a game changer. In his [benchmarks, published on his Substack](https://performancede.substack.com/p/duckdb-20-and-s3-file-read-performance), reading 1,000 and 10,000 files from Amazon S3 consistently took 67% to 70% less time with the v2.0 alpha. 
 
-Much of the time used to go into sequential requests to list and fetch files; v2.0 issues these in the background. No code changes are needed: a query like the following simply runs faster on v2.0.
+Much of the time used to go into sequential requests to list and fetch files. In v2.0, DuckDB issues these in the background. No code changes are needed: a query like the following simply runs faster on v2.0.
 
 ```sql
 SELECT count(*) AS num_events
 FROM read_json('s3://⟨bucket⟩/logs/*.json');
 ```
 
-For workloads such as log analytics over large numbers of raw files in S3, Google Cloud Storage or Azure, where teams would traditionally spin up a wide Spark cluster, a single DuckDB process can now keep up – with less overhead and lower cost.
+For workloads such as log analytics over large numbers of raw files in S3, Google Cloud Storage or Azure, where teams would traditionally spin up a wide Spark cluster, a single DuckDB process can now keep up, with less overhead and lower cost.
 
 **Quack.** The [Quack remote protocol]({% link docs/current/quack/overview.md %}) turns a DuckDB instance into a server that other DuckDB instances can connect to over HTTP. Matt likes the cleaner connect and disconnect syntax in v2.0 and the official DuckLake support. 
 
-He has built a [DuckDB-Wasm dashboard that talks via Quack to a DuckLake hosted on an Amazon EC2 instance](https://performancede.substack.com/p/serving-a-ducklake-on-ec2-via-quack). End users only need the Quack address and a token – no AWS credentials and no knowledge of the DuckLake behind it. The Wasm build is still on v1.5 and will be updated for the v2.0 release.
+He has built a [DuckDB-Wasm dashboard that talks via Quack to a DuckLake hosted on an Amazon EC2 instance](https://performancede.substack.com/p/serving-a-ducklake-on-ec2-via-quack). End users only need the Quack address and a token, with no AWS credentials and no knowledge of the DuckLake behind it. The Wasm build is still on v1.5 and will be updated for the v2.0 release.
 
 ## Conclusion
 
-Matt's path – from spreadsheets and macros, through MPP warehouses and Spark, to DuckDB and DuckLake – reflects a theme we hear often: most data work does not need a cluster, and removing friction is worth more than raw scale. 
+Matt's path, from spreadsheets and macros, through MPP warehouses and Spark, to DuckDB and DuckLake, reflects a theme we hear often: most data work does not need a cluster, and removing friction is worth more than raw scale. 
 
 We would like to thank Matt for the conversation and, if you are reading this, are using DuckDB, and would like to share your story, drop us a line at [quack@duckdb.org](mailto:quack@duckdb.org).
