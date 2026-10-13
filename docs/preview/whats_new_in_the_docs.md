@@ -92,6 +92,7 @@ Additional 2.0 features documented across the site, grouped by area.
 * [The `decimal_division` function]({% link docs/preview/sql/functions/numeric.md %}#decimal_divisionx-y) for exact decimal division
 * [The `decimal_average` aggregate]({% link docs/preview/sql/functions/aggregates.md %}#decimal_averagearg) for exact decimal averages
 * [The `variant_group_object` aggregate]({% link docs/preview/sql/functions/variant.md %}#variant_group_objectkey-value) for building `VARIANT` objects
+* [The `variant_group_array` function]({% link docs/preview/sql/functions/variant.md %}#variant_group_arrayx) for collecting values into a `VARIANT` array
 * [Renaming a view with `ALTER TABLE ... RENAME TO`]({% link docs/preview/sql/statements/alter_table.md %}#rename-table) for PostgreSQL compatibility
 * [`EXCEPT` as a synonym for `EXCLUDE`]({% link docs/preview/sql/expressions/star.md %}#exclude-clause) in star expressions
 * [No-argument `GROUPING_ID()` and `GROUPING()`]({% link docs/preview/sql/query_syntax/grouping_sets.md %}#identifying-grouping-sets-with-grouping_id) defaulting to all `GROUP BY` columns
