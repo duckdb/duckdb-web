@@ -99,6 +99,7 @@ Additional 2.0 features documented across the site, grouped by area.
 * [Backtick-quoted identifiers]({% link docs/preview/sql/dialect/keywords_and_identifiers.md %}#identifiers) as an alternative to double quotes
 * [`DEFERRED` primary key and unique constraints]({% link docs/preview/sql/constraints.md %}#deferred-constraints) checked at commit time
 * [`EXPLAIN (SQL)`]({% link docs/preview/sql/statements/profiling.md %}#explain-sql) rendering the optimized plan as executable SQL
+* [Empty `STRUCT` types]({% link docs/preview/sql/data_types/struct.md %}#creating-structs)
 
 ### Data Import and Export
 
