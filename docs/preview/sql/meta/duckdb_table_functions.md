@@ -56,6 +56,8 @@ The `duckdb_columns()` function provides metadata about the columns available in
 | `internal` | `true` if this column is built-in, `false` if it is user-defined. | `BOOLEAN` |
 | `column_default` | The default value of the column (expressed in SQL)| `VARCHAR` |
 | `is_nullable` | `true` if the column can hold `NULL` values; `false` if the column cannot hold `NULL`-values. | `BOOLEAN` |
+| `is_generated` | `true` if the column is a [generated column]({% link docs/preview/sql/statements/create_table.md %}#generated-columns), `false` otherwise. Available as of DuckDB 2.0. | `BOOLEAN` |
+| `generation_expression` | If the column is a generated column, the expression used to compute it; `NULL` otherwise. Available as of DuckDB 2.0. | `VARCHAR` |
 | `data_type` | The name of the column data type. | `VARCHAR` |
 | `data_type_id` | The internal identifier of the column data type. | `BIGINT` |
 | `character_maximum_length` | Always `NULL`. DuckDB [text types]({% link docs/preview/sql/data_types/text.md %}) do not enforce a value length restriction based on a length type parameter. | `INTEGER` |
