@@ -20,10 +20,10 @@ repo:
   github: query-farm/events
   ref: d6e9afda80991072386f64825c5c11339f051e99
 
-extension_star_count: 3
-extension_star_count_pretty: 3
-extension_download_count: 174
-extension_download_count_pretty: 174
+extension_star_count: 4
+extension_star_count_pretty: 4
+extension_download_count: 367
+extension_download_count_pretty: 367
 image: '/images/community_extensions/social_preview/preview_community_extension_events.png'
 layout: community_extension_doc
 ---

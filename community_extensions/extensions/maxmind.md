@@ -8,7 +8,7 @@ excerpt: |
 extension:
   name: maxmind
   description: Read MaxMind databases (GeoLite, GeoIP, and more)
-  version: 0.10.0
+  version: 0.11.0
   language: Zig
   build: cmake
   license: ISC
@@ -18,7 +18,7 @@ extension:
 
 repo:
   github: marselester/duckdb-maxmind
-  ref: dc2e6e60f619403c4714e95f014f6444a2653f9c
+  ref: 6d0327c9b8bd90f19c4287dcf634301e79f8557e
 
 docs:
   hello_world: |
@@ -70,8 +70,8 @@ docs:
 
 extension_star_count: 9
 extension_star_count_pretty: 9
-extension_download_count: 1078
-extension_download_count_pretty: 1.1k
+extension_download_count: 880
+extension_download_count_pretty: 880
 image: '/images/community_extensions/social_preview/preview_community_extension_maxmind.png'
 layout: community_extension_doc
 ---
@@ -97,26 +97,28 @@ LOAD {{ page.extension.name }};
 
 <div class="extension_functions_table"></div>
 
-|     function_name     | function_type | description | comment | examples |
-|-----------------------|---------------|-------------|---------|----------|
-| extension_version     | scalar        | NULL        | NULL    |          |
-| geoip_anonymous_ip    | scalar        | NULL        | NULL    |          |
-| geoip_anonymous_plus  | scalar        | NULL        | NULL    |          |
-| geoip_city            | scalar        | NULL        | NULL    |          |
-| geoip_connection_type | scalar        | NULL        | NULL    |          |
-| geoip_country         | scalar        | NULL        | NULL    |          |
-| geoip_densityincome   | scalar        | NULL        | NULL    |          |
-| geoip_domain          | scalar        | NULL        | NULL    |          |
-| geoip_enterprise      | scalar        | NULL        | NULL    |          |
-| geoip_ip_risk         | scalar        | NULL        | NULL    |          |
-| geoip_isp             | scalar        | NULL        | NULL    |          |
-| geoip_static_ip_score | scalar        | NULL        | NULL    |          |
-| geoip_user_count      | scalar        | NULL        | NULL    |          |
-| geolite_asn           | scalar        | NULL        | NULL    |          |
-| geolite_city          | scalar        | NULL        | NULL    |          |
-| geolite_country       | scalar        | NULL        | NULL    |          |
-| mmdb_record           | scalar        | NULL        | NULL    |          |
-| read_mmdb             | table         | NULL        | NULL    |          |
+|      function_name      | function_type | description | comment | examples |
+|-------------------------|---------------|-------------|---------|----------|
+| extension_version       | scalar        | NULL        | NULL    |          |
+| geoip_anonymous_ip      | scalar        | NULL        | NULL    |          |
+| geoip_anonymous_plus    | scalar        | NULL        | NULL    |          |
+| geoip_city              | scalar        | NULL        | NULL    |          |
+| geoip_connection_type   | scalar        | NULL        | NULL    |          |
+| geoip_country           | scalar        | NULL        | NULL    |          |
+| geoip_densityincome     | scalar        | NULL        | NULL    |          |
+| geoip_domain            | scalar        | NULL        | NULL    |          |
+| geoip_enterprise        | scalar        | NULL        | NULL    |          |
+| geoip_ip_risk           | scalar        | NULL        | NULL    |          |
+| geoip_isp               | scalar        | NULL        | NULL    |          |
+| geoip_regions           | scalar        | NULL        | NULL    |          |
+| geoip_residential_proxy | scalar        | NULL        | NULL    |          |
+| geoip_static_ip_score   | scalar        | NULL        | NULL    |          |
+| geoip_user_count        | scalar        | NULL        | NULL    |          |
+| geolite_asn             | scalar        | NULL        | NULL    |          |
+| geolite_city            | scalar        | NULL        | NULL    |          |
+| geolite_country         | scalar        | NULL        | NULL    |          |
+| mmdb_record             | scalar        | NULL        | NULL    |          |
+| read_mmdb               | table         | NULL        | NULL    |          |
 
 ### Overloaded Functions
 

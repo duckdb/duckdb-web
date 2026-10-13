@@ -86,10 +86,10 @@ docs:
     [how it works](https://pgvfs.adonm.dev/how-it-works.html) and
     [performance](https://pgvfs.adonm.dev/performance.html).
 
-extension_star_count: 3
-extension_star_count_pretty: 3
-extension_download_count: 281
-extension_download_count_pretty: 281
+extension_star_count: 4
+extension_star_count_pretty: 4
+extension_download_count: 301
+extension_download_count_pretty: 301
 image: '/images/community_extensions/social_preview/preview_community_extension_pgvfs.png'
 layout: community_extension_doc
 ---
