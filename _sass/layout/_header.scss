@@ -37,7 +37,9 @@ header .headerline {
 		display: flex;
 		justify-content: space-between;
 		/* Logo */
-		.duckdbhome {
+		.duckdbhome,
+		.ducklakehome,
+		.duckdblabshome {
 			font-size: 20px;
 			position: relative;
 			align-self: stretch;

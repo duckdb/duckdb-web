@@ -792,14 +792,6 @@ body.manifesto{
 }
 
 body.manifesto{
-	ol li,
-	ul li,
-	p{
-		@include body-large();
-	}
-}
-
-body.manifesto{
 	.pagetitle{
 		padding-bottom: 10px;
 	}

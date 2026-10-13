@@ -17,9 +17,11 @@
 	<h1>{{ page.title }}</h1>
 
 	<div class="controls filterbar">
+		{% if cfg.filters.size > 0 %}
 		<div class="filter-group">
 			<div class="filtertags">{{ filter_buttons }}</div>
 		</div>
+		{% endif %}
 
 		<input type="text" id="search-input" placeholder="Search" aria-label="Search">
 
@@ -31,6 +33,7 @@
 			</label>
 		{% endif %}
 
+		{% if cfg.filters.size > 0 %}
 		<button type="button" class="filter-toggle" aria-label="Filter">
 			<svg class="icon icon-filter"><use href="#filter-funnel-01"></use></svg>
 			<svg class="icon icon-close"><use href="#x-close"></use></svg>
@@ -41,6 +44,7 @@
 			</div>
 		</div>
 		<div class="filter-overlay"></div>
+		{% endif %}
 	</div>
 
 	<p class="filter-empty" hidden>No entries match your selection.</p>

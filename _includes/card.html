@@ -40,8 +40,9 @@
 	{% assign placeholder_source = "duckdb" %}
 {% endif %}
 {% if placeholder_source == "community" %}{% assign type_icon_source = "thirdparty" %}{% else %}{% assign type_icon_source = placeholder_source %}{% endif %}
+{% if coll == "library" %}{% assign placeholder_dir = "/images/placeholders/library" %}{% else %}{% assign placeholder_dir = "/images/placeholders" %}{% endif %}
 {% assign placeholder_variant = item.title | size | modulo: 3 | plus: 1 %}
-{% capture placeholder_thumb %}/images/placeholders/placeholder-{{ placeholder_source }}-{{ placeholder_variant }}.svg{% endcapture %}
+{% capture placeholder_thumb %}{{ placeholder_dir }}/placeholder-{{ placeholder_source }}-{{ placeholder_variant }}.svg{% endcapture %}
 {% assign thumb = item.thumb | default: placeholder_thumb %}
 
 {% assign author_names = item.authors | join: ", " %}
