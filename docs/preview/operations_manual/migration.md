@@ -67,11 +67,11 @@ To move an existing database file to the v2.0.0 storage format, open it with the
 
 For details on this and other conversion methods, including `COPY FROM DATABASE`, see [How to Move between Storage Formats]({% link docs/preview/internals/storage.md %}#how-to-move-between-storage-formats).
 
-> This section is tracking the following pull requests: [duckdb#22875](https://github.com/duckdb/duckdb/pull/22875).
+> This section is tracking the following pull request: [duckdb#22875](https://github.com/duckdb/duckdb/pull/22875).
 
 ### Lambda Syntax
 
-DuckDB v2.0.0 completes the lambda syntax transition that began in v1.3.
+DuckDB v2.0.0 completes the lambda syntax transition that began in [v1.3]({% post_url 2025-05-21-announcing-duckdb-130 %}).
 The old single arrow syntax (`x -> x + 1`) is now disabled by default in favor of the Python-style syntax (`lambda x : x + 1`).
 
 ```sql
@@ -99,7 +99,7 @@ It is designed to be compatible with the previous parser, so queries that parsed
 If a query that parsed on an earlier version fails on v2.0.0, please [file an issue](https://github.com/duckdb/duckdb/issues).
 For details, see the [PEG parser page]({% link docs/preview/sql/peg_parser.md %}).
 
-If you would like to revert to the old parser, use the [legacy_parser extension](https://github.com/duckdb/duckdb-legacy-parser).
+If you would like to revert to the old parser, use the [`legacy_parser` extension]({% link docs/preview/core_extensions/legacy_parser.md %}).
 To install and activate it, run the following commands:
 
 ```sql
@@ -108,7 +108,7 @@ LOAD legacy_parser;
 SET enable_legacy_parser = true;
 ```
 
-> This section is tracking the following pull requests: [duckdb#22194](https://github.com/duckdb/duckdb/pull/22194), reported in [duckdb#7675](https://github.com/duckdb/duckdb/issues/7675).
+> This section is tracking the following pull request: [duckdb#22194](https://github.com/duckdb/duckdb/pull/22194), reported in isue [duckdb#7675](https://github.com/duckdb/duckdb/issues/7675).
 
 ### C and C++ Extension API
 
