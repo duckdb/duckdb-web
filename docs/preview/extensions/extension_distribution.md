@@ -22,7 +22,7 @@ All official extensions are distributed for the following platforms.
 Some extensions are distributed for the following platforms:
 
 * `windows_amd64_mingw`
-* `wasm_eh` and `wasm_mvp` (see [DuckDB-Wasm's extensions]({% link docs/preview/clients/wasm/extensions.md %}))
+* `wasm_eh` and `wasm_mvp` (see [DuckDB-Wasm's extensions]({% link docs/preview/drivers/wasm/extensions.md %}))
 
 For platforms outside the ones listed above, we do not officially distribute extensions (e.g., `linux_arm64_android`).
 
@@ -44,7 +44,7 @@ which itself is supported through an extension ([`httpfs`]({% link docs/preview/
 > Consult the [Securing DuckDB page]({% link docs/preview/operations_manual/securing_duckdb/securing_extensions.md %}) for guidelines on how to set up DuckDB in a secure manner.
 
 If you wish to load your own extensions or extensions from third-parties you will need to enable the `allow_unsigned_extensions` flag.
-To load unsigned extensions using the [CLI client]({% link docs/preview/clients/cli/overview.md %}), pass the `-unsigned` flag to it on startup:
+To load unsigned extensions using the [CLI client]({% link docs/preview/drivers/cli/overview.md %}), pass the `-unsigned` flag to it on startup:
 
 ```batch
 duckdb -unsigned
@@ -56,8 +56,8 @@ Now any extension can be loaded, signed or not:
 LOAD './some/local/ext.duckdb_extension';
 ```
 
-For client APIs, the `allow_unsigned_extensions` database configuration options needs to be set, see the respective [Client API docs]({% link docs/preview/clients/overview.md %}).
-For example, for the Python client, see the [Loading and Installing Extensions section in the Python API documentation]({% link docs/preview/clients/python/overview.md %}#loading-and-installing-extensions).
+For client APIs, the `allow_unsigned_extensions` database configuration options needs to be set, see the respective [Client API docs]({% link docs/preview/drivers/overview.md %}).
+For example, for the Python client, see the [Loading and Installing Extensions section in the Python API documentation]({% link docs/preview/drivers/python/overview.md %}#loading-and-installing-extensions).
 
 ## Binary Compatibility
 

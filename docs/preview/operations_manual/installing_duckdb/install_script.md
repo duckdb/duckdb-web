@@ -3,7 +3,7 @@ layout: docu
 title: Install Script
 ---
 
-You can install the [DuckDB CLI client]({% link docs/preview/clients/cli/overview.md %}) using an install script.
+You can install the [DuckDB CLI client]({% link docs/preview/drivers/cli/overview.md %}) using an install script.
 
 ## Linux and macOS
 

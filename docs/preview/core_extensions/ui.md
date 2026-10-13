@@ -111,8 +111,8 @@ properly.
 
 ### Opening a CSV File with the DuckDB UI
 
-Using the [DuckDB CLI client]({% link docs/preview/clients/cli/overview.md %}),
-you can start the UI with a CSV available as a view using the [`-cmd` argument]({% link docs/preview/clients/cli/arguments.md %}):
+Using the [DuckDB CLI client]({% link docs/preview/drivers/cli/overview.md %}),
+you can start the UI with a CSV available as a view using the [`-cmd` argument]({% link docs/preview/drivers/cli/arguments.md %}):
 
 ```batch
 duckdb -cmd "CREATE VIEW ⟨view_name⟩ AS FROM '⟨filename⟩.csv';" -ui

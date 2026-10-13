@@ -93,7 +93,7 @@ You can often isolate the issue to a smaller problem.
 #### Reproducing in Plain SQL
 
 Issues can also occur due to differences in client libraries.
-To understand whether this is the case, try reproducing the issue using plain SQL queries with the [DuckDB CLI client]({% link docs/preview/clients/cli/overview.md %}).
+To understand whether this is the case, try reproducing the issue using plain SQL queries with the [DuckDB CLI client]({% link docs/preview/drivers/cli/overview.md %}).
 If you cannot reproduce the issue in the command line client, it is likely related to the client library.
 
 #### Different Hardware Setup

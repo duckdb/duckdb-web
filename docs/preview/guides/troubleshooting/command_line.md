@@ -26,7 +26,7 @@ duckdb duckdb:https://blobs.duckdb.org/data/tpch-sf1.db
 
 ## Piped Scripts Not Running in v1.5.0
 
-On Linux and macOS, DuckDB v1.5.0 has a known issue that the [command line client]({% link docs/preview/clients/cli/overview.md %}) does not interpret piped scripts ([#21243](https://github.com/duckdb/duckdb/issues/21243)).
+On Linux and macOS, DuckDB v1.5.0 has a known issue that the [command line client]({% link docs/preview/drivers/cli/overview.md %}) does not interpret piped scripts ([#21243](https://github.com/duckdb/duckdb/issues/21243)).
 
 To demonstrate the problem, create a `test.sql` file:
 
@@ -56,7 +56,7 @@ duckdb < test.sql | cat
 └───────┘
 ```
 
-If you are piping from a file, you can also use the [`-f` argument]({% link docs/preview/clients/cli/arguments.md %}):
+If you are piping from a file, you can also use the [`-f` argument]({% link docs/preview/drivers/cli/arguments.md %}):
 
 ```bash
 duckdb -f test.sql

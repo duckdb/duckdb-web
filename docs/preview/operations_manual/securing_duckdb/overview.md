@@ -36,7 +36,7 @@ as memory, disk, CPU, or network.
 
 > Warning Even non-SQL input into DuckDB can easily have unintended consequences. When building security-sensitive applications with DuckDB, always make sure you properly understand the impact of feeding untrusted input into DuckDB.
 
-Besides SQL, DuckDB also has several non-SQL APIs that can be used to interact with the database. For example, there is a [relational API]({% link docs/preview/clients/python/relational_api.md %}) in Python that allows building queries programmatically.
+Besides SQL, DuckDB also has several non-SQL APIs that can be used to interact with the database. For example, there is a [relational API]({% link docs/preview/drivers/python/relational_api.md %}) in Python that allows building queries programmatically.
 
 These APIs accept user input such as file paths, table names, column names, and filter expressions. While they don't execute raw SQL strings, they still trigger DuckDB operations that can read files, access the network, and use system resources.
 
@@ -93,8 +93,8 @@ the ["Untrusted SQL Input"](#untrusted-sql-input) section.
 
 ### Safe Mode (CLI)
 
-DuckDB's CLI client supports [“safe mode”]({% link docs/preview/clients/cli/safe_mode.md %}), which prevents DuckDB from accessing external files other than the database file.
-This can be activated via a command line argument or a [dot command]({% link docs/preview/clients/cli/dot_commands.md %}):
+DuckDB's CLI client supports [“safe mode”]({% link docs/preview/drivers/cli/safe_mode.md %}), which prevents DuckDB from accessing external files other than the database file.
+This can be activated via a command line argument or a [dot command]({% link docs/preview/drivers/cli/dot_commands.md %}):
 
 ```batch
 duckdb -safe ...

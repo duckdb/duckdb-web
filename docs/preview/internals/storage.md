@@ -55,7 +55,7 @@ To initialize a database with the latest storage version, use:
 ATTACH 'file.db' (STORAGE_VERSION 'latest');
 ```
 
-With the [command line client]({% link docs/preview/clients/cli/overview.md %}), you can use the `-storage-version` argument:
+With the [command line client]({% link docs/preview/drivers/cli/overview.md %}), you can use the `-storage-version` argument:
 
 ```batch
 duckdb -storage-version v1.2.0 my_database.duckdb

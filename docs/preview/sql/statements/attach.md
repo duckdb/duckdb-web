@@ -214,7 +214,7 @@ ATTACH ':memory:' AS memory_db;
 USE memory_db;
 ```
 
-> Warning Closing the connection, e.g., invoking the [`close()` function in Python]({% link docs/preview/clients/python/dbapi.md %}#connection), does not release the locks held on the database files as the file handles are held by the main DuckDB instance (in Python's case, the `duckdb` module).
+> Warning Closing the connection, e.g., invoking the [`close()` function in Python]({% link docs/preview/drivers/python/dbapi.md %}#connection), does not release the locks held on the database files as the file handles are held by the main DuckDB instance (in Python's case, the `duckdb` module).
 
 ### `DETACH` Syntax
 

@@ -83,7 +83,7 @@ import pandas as pd
 # Import jupysql Jupyter extension to create SQL cells
 %load_ext sql
 ```
-Either connect to a new [in-memory DuckDB]({% link docs/preview/clients/python/dbapi.md %}#in-memory-connection), the [default connection]({% link docs/preview/clients/python/dbapi.md %}#default-connection), or a file-backed database:
+Either connect to a new [in-memory DuckDB]({% link docs/preview/drivers/python/dbapi.md %}#in-memory-connection), the [default connection]({% link docs/preview/drivers/python/dbapi.md %}#default-connection), or a file-backed database:
 
 ```sql
 %sql duckdb:///:memory:
@@ -97,7 +97,7 @@ Either connect to a new [in-memory DuckDB]({% link docs/preview/clients/python/d
 %sql duckdb:///path/to/file.db
 ```
 
-> The `%sql` command and `duckdb.sql` share the same [default connection]({% link docs/preview/clients/python/dbapi.md %}) if you provide `duckdb:///:default:` as the SQLAlchemy connection string.
+> The `%sql` command and `duckdb.sql` share the same [default connection]({% link docs/preview/drivers/python/dbapi.md %}) if you provide `duckdb:///:default:` as the SQLAlchemy connection string.
 
 ## Querying DuckDB
 

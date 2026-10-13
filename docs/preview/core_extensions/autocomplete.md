@@ -4,12 +4,12 @@ layout: docu
 title: AutoComplete Extension
 ---
 
-The `autocomplete` extension adds support for autocomplete in the [CLI client]({% link docs/preview/clients/cli/overview.md %}).
+The `autocomplete` extension adds support for autocomplete in the [CLI client]({% link docs/preview/drivers/cli/overview.md %}).
 The extension is shipped by default with the CLI client.
 
 ## Behavior
 
-For the behavior of the `autocomplete` extension, see the [documentation of the CLI client]({% link docs/preview/clients/cli/autocomplete.md %}).
+For the behavior of the `autocomplete` extension, see the [documentation of the CLI client]({% link docs/preview/drivers/cli/autocomplete.md %}).
 
 ## Functions
 

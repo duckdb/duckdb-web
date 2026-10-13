@@ -5,7 +5,7 @@ title: Connect
 
 ## Connect or Create a Database
 
-To use DuckDB, you must first create a connection to a database. The exact syntax varies between the [client APIs]({% link docs/preview/clients/overview.md %}) but it typically involves passing an argument to configure persistence.
+To use DuckDB, you must first create a connection to a database. The exact syntax varies between the [client APIs]({% link docs/preview/drivers/overview.md %}) but it typically involves passing an argument to configure persistence.
 
 Starting from DuckDB v1.5.2, you can use the [Quack protocol]({% link docs/preview/quack/overview.md %}) to set up a client-server connection. Note that Quack is currently experimental and is expected to mature by fall 2026.
 
