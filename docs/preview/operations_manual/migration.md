@@ -11,12 +11,13 @@ This page provides guidance on migrating existing deployments to DuckDB v2.0.0.
 
 Before migrating to DuckDB v2.0.0, assess whether your workload is mission-critical.
 For such workloads, consider waiting for upcoming patch releases, which address issues that surface shortly after a major release.
+To help facilitate this, the DuckDB development team extended [support for DuckDB v1.5 into early 2027]({% link release_calendar.md %}).
 
 > Bestpractice In all cases, we recommend setting up a shadow system that tracks your existing workload. This lets you test DuckDB v2.0.0 in an environment outside of your production system before switching over.
 
 For simple deployments, migrating is straightforward.
 Complex deployments, especially those that run many DuckDB processes, require more care.
-The most common source of issues is the storage format, which is described first below.
+We expect the most common source of issues to be the storage format, which is described first below.
 
 ## Breaking Changes
 
@@ -66,7 +67,7 @@ To move an existing database file to the v2.0.0 storage format, open it with the
 
 For details on this and other conversion methods, including `COPY FROM DATABASE`, see [How to Move between Storage Formats]({% link docs/preview/internals/storage.md %}#how-to-move-between-storage-formats).
 
-Tracking: [duckdb#22875](https://github.com/duckdb/duckdb/pull/22875).
+> This section is tracking the following pull requests: [duckdb#22875](https://github.com/duckdb/duckdb/pull/22875).
 
 ### Lambda Syntax
 
@@ -89,7 +90,7 @@ SET lambda_syntax = 'ENABLE_SINGLE_ARROW';
 This flag is a temporary bridge: DuckDB v2.1 will remove it and the single arrow syntax entirely.
 For details, see [Deprecated Syntax]({% link docs/preview/sql/functions/lambda.md %}#deprecated-syntax).
 
-Tracking: [duckdb#22682](https://github.com/duckdb/duckdb/pull/22682), [duckdb#13389](https://github.com/duckdb/duckdb/pull/13389).
+> This section is tracking the following pull requests: [duckdb#22682](https://github.com/duckdb/duckdb/pull/22682), [duckdb#13389](https://github.com/duckdb/duckdb/pull/13389).
 
 ### SQL Parser
 
@@ -98,7 +99,16 @@ It is designed to be compatible with the previous parser, so queries that parsed
 If a query that parsed on an earlier version fails on v2.0.0, please [file an issue](https://github.com/duckdb/duckdb/issues).
 For details, see the [PEG parser page]({% link docs/preview/sql/peg_parser.md %}).
 
-Tracking: [duckdb#22194](https://github.com/duckdb/duckdb/pull/22194), reported in [duckdb#7675](https://github.com/duckdb/duckdb/issues/7675).
+If you would like to revert to the old parser, use the [legacy_parser extension](https://github.com/duckdb/duckdb-legacy-parser).
+To install and activate it, run the following commands:
+
+```sql
+INSTALL legacy_parser;
+LOAD legacy_parser;
+SET enable_legacy_parser = true;
+```
+
+> This section is tracking the following pull requests: [duckdb#22194](https://github.com/duckdb/duckdb/pull/22194), reported in [duckdb#7675](https://github.com/duckdb/duckdb/issues/7675).
 
 ### C and C++ Extension API
 
@@ -107,15 +117,16 @@ Extensions built against the previous unstable C++ API must be rebuilt for v2.0.
 If you depend on third-party extensions, confirm that a v2.0.0-compatible build is available before upgrading.
 For background on extension stability levels, see [Versioning of Extensions]({% link docs/preview/extensions/versioning_of_extensions.md %}); for the C API reference, see the [C API page]({% link docs/preview/clients/c/api.md %}).
 
-Tracking: [duckdb#24702](https://github.com/duckdb/duckdb/pull/24702), [duckdb#24135](https://github.com/duckdb/duckdb/pull/24135), [duckdb#24435](https://github.com/duckdb/duckdb/pull/24435).
+> This section is tracking the following pull requests: [duckdb#24702](https://github.com/duckdb/duckdb/pull/24702), [duckdb#24135](https://github.com/duckdb/duckdb/pull/24135), [duckdb#24435](https://github.com/duckdb/duckdb/pull/24435).
 
 ### ICU Removed from the Core Build
 
-DuckDB v2.0.0 removes the ICU library dependency.
-Timezones, calendars, and collations are now implemented natively by the [`icu` extension]({% link docs/preview/core_extensions/icu.md %}), and continue to behave as before.
+DuckDB v2.0.0 removes the dependency on the [ICU library](https://github.com/unicode-org/icu).
+Time zones, calendars, and collations are now implemented natively by the [`icu` extension]({% link docs/preview/core_extensions/icu.md %}), and will continue to behave as before.
 No query changes are required, but if you ship a custom build, note that ICU is no longer bundled.
+If you find that ICU's behavior changed, please [file an issue](https://github.com/duckdb/duckdb/issues).
 
-Tracking: [duckdb#24463](https://github.com/duckdb/duckdb/pull/24463), [duckdb#24403](https://github.com/duckdb/duckdb/pull/24403).
+> This section is tracking the following pull requests: [duckdb#24463](https://github.com/duckdb/duckdb/pull/24463), [duckdb#24403](https://github.com/duckdb/duckdb/pull/24403).
 
 ## What's New in v2.0
 
