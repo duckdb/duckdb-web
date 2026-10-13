@@ -371,6 +371,10 @@ The below options are applicable when writing Parquet files.
 | `WRITE_BLOOM_FILTER` | Whether to write [Bloom filters](https://en.wikipedia.org/wiki/Bloom_filter) that allow readers to skip row groups. | `BOOLEAN` | `true` |
 | `BLOOM_FILTER_FALSE_POSITIVE_RATIO` | The target false positive ratio of the written Bloom filters. | `DOUBLE` | `0.01` |
 | `GEOPARQUET_VERSION` | Which [GeoParquet](https://geoparquet.org/) metadata version to write for geometry columns (`NONE`, `V1`, `V2`, `BOTH`). `NONE` disables GeoParquet metadata. | `VARCHAR` | `V1` |
+| `TIMESTAMP_IS_ADJUSTED_TO_UTC` | Controls the `isAdjustedToUTC` flag written for timestamp columns. With `AUTO`, the flag is set to `true` for `TIMESTAMP WITH TIME ZONE` columns and `false` for other timestamp types. Added in DuckDB 2.0. | `VARCHAR` (`AUTO`, `TRUE`, `FALSE`) | `AUTO` |
+| `WRITE_TIMESTAMP_AS_INT96` | When `true`, writes `TIMESTAMP` columns using the legacy Parquet `INT96` physical type for compatibility with older readers. Added in DuckDB 2.0. | `BOOLEAN` | `false` |
+
+> New As of DuckDB 2.0, the `TIMESTAMP_IS_ADJUSTED_TO_UTC` and `WRITE_TIMESTAMP_AS_INT96` options control how timestamp columns are written to Parquet files.
 
 Some examples of `FIELD_IDS` are as follows.
 
