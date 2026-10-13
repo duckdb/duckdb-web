@@ -96,6 +96,7 @@ Additional 2.0 features documented across the site, grouped by area.
 * [Renaming a view with `ALTER TABLE ... RENAME TO`]({% link docs/preview/sql/statements/alter_table.md %}#rename-table) for PostgreSQL compatibility
 * [`EXCEPT` as a synonym for `EXCLUDE`]({% link docs/preview/sql/expressions/star.md %}#exclude-clause) in star expressions
 * [No-argument `GROUPING_ID()` and `GROUPING()`]({% link docs/preview/sql/query_syntax/grouping_sets.md %}#identifying-grouping-sets-with-grouping_id) defaulting to all `GROUP BY` columns
+* [Backtick-quoted identifiers]({% link docs/preview/sql/dialect/keywords_and_identifiers.md %}#identifiers) as an alternative to double quotes
 
 ### Data Import and Export
 
