@@ -6,7 +6,7 @@ title: Statically Linking Extensions
 This page is for client and binding authors, and for anyone who embeds `libduckdb` in their own application.
 It describes how statically linking extensions changed in DuckDB v2.0 and what builders on top of DuckDB need to do.
 
-> Note This change is independent of the new C API. It applies even if you continue to build against the existing (v1) C API: the difference is in how extension archives are linked and registered, not in which API your bindings call.
+> This change is independent of the new C API. It applies even if you continue to build against the existing (v1) C API: the difference is in how extension archives are linked and registered, not in which API your bindings call.
 
 ## What Changed in DuckDB v2.0
 
