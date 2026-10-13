@@ -110,6 +110,7 @@ Additional 2.0 features documented across the site, grouped by area.
 * [The `PARTITION_PATH` copy option]({% link docs/preview/data/partitioning/partitioned_writes.md %}#custom-partition-paths) for computing custom partition subdirectories
 * [The `ORDER_BY` copy option]({% link docs/preview/data/partitioning/partitioned_writes.md %}#sorting-rows-within-partitions) for sorting rows before writing
 * [The `TIMESTAMP_IS_ADJUSTED_TO_UTC` and `WRITE_TIMESTAMP_AS_INT96` Parquet writing options]({% link docs/preview/sql/statements/copy.md %}#parquet-options) for controlling how timestamps are written
+* [The `file_row_group_number` virtual column]({% link docs/preview/data/parquet/overview.md %}#the-file_row_group_number-virtual-column) for Parquet row group pruning
 
 ### Clients
 
