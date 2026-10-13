@@ -614,6 +614,10 @@
                   "url": "comment_on"
                 },
                 {
+                  "page": "CONNECT and DISCONNECT",
+                  "url": "connect"
+                },
+                {
                   "page": "COPY",
                   "url": "copy"
                 },
