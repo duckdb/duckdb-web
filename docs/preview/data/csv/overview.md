@@ -106,6 +106,7 @@ Below are parameters that can be passed to the [`read_csv` function](#csv-functi
 | `rejects_scan` | Name of the [temporary table where information on faulty scans is stored]({% link docs/preview/data/csv/reading_faulty_csv_files.md %}#reject-scans). | `VARCHAR` | `reject_scans` |
 | `rejects_table` | Name of the [temporary table where information on faulty lines is stored]({% link docs/preview/data/csv/reading_faulty_csv_files.md %}#reject-errors). | `VARCHAR` | `reject_errors` |
 | `rejects_limit` | Upper limit on the number of faulty lines per file that are recorded in the rejects table. Setting this to `0` means that no limit is applied. | `BIGINT` | `0` |
+| `rejects_line_size_limit` | Maximum number of characters of a rejected line that are stored in the `csv_line` column of the [reject errors table]({% link docs/preview/data/csv/reading_faulty_csv_files.md %}#reject-errors). Longer lines are truncated. Setting this to `0` disables truncation and stores the full line. Added in DuckDB 2.0. | `BIGINT` | `10000` |
 | `sample_size` | Number of sample lines for [auto detection of parameters]({% link docs/preview/data/csv/auto_detection.md %}). | `BIGINT` | 20480 |
 | `sep` | Delimiter character used to separate columns within each line, e.g., `,` `;` `\t`. The delimiter character can be up to 4 bytes, e.g., 🦆. Alias for `delim`. | `VARCHAR` | `,` |
 | `skip` | Number of lines to skip at the start of each file. | `BIGINT` | 0 |
