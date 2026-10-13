@@ -1168,6 +1168,10 @@
               "url": "extension_distribution"
             },
             {
+              "page": "Extension Repositories",
+              "url": "extension_repositories"
+            },
+            {
               "page": "Versioning of Extensions",
               "url": "versioning_of_extensions"
             },
