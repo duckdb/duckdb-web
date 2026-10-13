@@ -13,7 +13,7 @@ Most Iceberg REST Catalogs authenticate via OAuth2. You can use the existing Duc
 
 ```sql
 CREATE SECRET iceberg_secret (
-    TYPE ICEBERG,
+    TYPE iceberg,
     CLIENT_ID '⟨admin⟩',
     CLIENT_SECRET '⟨password⟩',
     OAUTH2_SERVER_URI '⟨http://iceberg_rest_catalog_url.com/v1/oauth/tokens⟩'
@@ -24,7 +24,7 @@ If you already have a Bearer token, you can pass it directly to your `CREATE SEC
 
 ```sql
 CREATE SECRET iceberg_secret (
-    TYPE ICEBERG,
+    TYPE iceberg,
     TOKEN '⟨bearer_token⟩'
 );
 ```
@@ -34,7 +34,7 @@ You can attach the Iceberg catalog with the following [`ATTACH`]({% link docs/pr
 ```sql
 LOAD httpfs;
 ATTACH '⟨warehouse⟩' AS iceberg_catalog (
-   TYPE ICEBERG,
+   TYPE iceberg,
    SECRET iceberg_secret, -- pass a specific secret name to prevent ambiguity
    ENDPOINT '⟨https://rest_endpoint.com⟩'
 );
@@ -119,7 +119,7 @@ Then, connect to the catalog:
 
 ```sql
 ATTACH '⟨account_id⟩' AS glue_catalog (
-    TYPE ICEBERG,
+    TYPE iceberg,
     ENDPOINT 'glue.⟨REGION⟩.amazonaws.com/iceberg',
     AUTHORIZATION_TYPE 'sigv4'
 );
@@ -129,7 +129,7 @@ Or alternatively:
 
 ```sql
 ATTACH '⟨account_id⟩' AS glue_catalog (
-    TYPE ICEBERG,
+    TYPE iceberg,
     ENDPOINT_TYPE 'glue'
 );
 ```
@@ -183,7 +183,7 @@ To attach to an [R2 Cloudflare](https://developers.cloudflare.com/r2/data-catalo
 
 ```sql
 CREATE SECRET r2_secret (
-    TYPE ICEBERG,
+    TYPE iceberg,
     TOKEN '⟨r2_token⟩'
 );
 ```
@@ -192,7 +192,7 @@ You can create a token by following the [create an API token](https://developers
 
 ```sql
 ATTACH '⟨warehouse⟩' AS my_r2_catalog (
-    TYPE ICEBERG,
+    TYPE iceberg,
     ENDPOINT '⟨catalog-uri⟩'
 );
 ```
@@ -212,7 +212,7 @@ To attach to a [Polaris](https://polaris.apache.org) catalog, use the following 
 
 ```sql
 CREATE SECRET polaris_secret (
-    TYPE ICEBERG,
+    TYPE iceberg,
     CLIENT_ID '⟨admin⟩',
     CLIENT_SECRET '⟨password⟩',
 );
@@ -220,7 +220,7 @@ CREATE SECRET polaris_secret (
 
 ```sql
 ATTACH 'quickstart_catalog' AS polaris_catalog (
-    TYPE ICEBERG,
+    TYPE iceberg,
     ENDPOINT '⟨polaris_rest_catalog_endpoint⟩',
     ACCESS_DELEGATION_MODE 'vended_credentials'
 );
@@ -232,7 +232,7 @@ To attach to a [Lakekeeper](https://docs.lakekeeper.io) catalog the following co
 
 ```sql
 CREATE SECRET lakekeeper_secret (
-    TYPE ICEBERG,
+    TYPE iceberg,
     CLIENT_ID '⟨admin⟩',
     CLIENT_SECRET '⟨password⟩',
     OAUTH2_SCOPE '⟨scope⟩',
@@ -242,7 +242,7 @@ CREATE SECRET lakekeeper_secret (
 
 ```sql
 ATTACH '⟨warehouse⟩' AS lakekeeper_catalog (
-    TYPE ICEBERG,
+    TYPE iceberg,
     ENDPOINT '⟨lakekeeper_irc_url⟩',
     SECRET '⟨lakekeeper_secret⟩'
 );
@@ -254,7 +254,7 @@ ATTACH '⟨warehouse⟩' AS lakekeeper_catalog (
 
 ```sql
 CREATE SECRET seaweedfs_secret (
-    TYPE ICEBERG,
+    TYPE iceberg,
     CLIENT_ID '⟨access_key⟩',
     CLIENT_SECRET '⟨secret_key⟩',
     OAUTH2_SERVER_URI 'http://⟨seaweedfs_host⟩:8181/v1/oauth/tokens'
@@ -274,7 +274,7 @@ CREATE SECRET seaweedfs_storage (
 
 ```sql
 ATTACH '⟨table_bucket_name⟩' AS seaweedfs_catalog (
-    TYPE ICEBERG,
+    TYPE iceberg,
     ENDPOINT 'http://⟨seaweedfs_host⟩:8181',
     SECRET seaweedfs_secret
 );
@@ -309,7 +309,7 @@ Then create a secret with the token and extra headers:
 
 ```sql
 CREATE SECRET biglake_secret (
-    TYPE ICEBERG,
+    TYPE iceberg,
     TOKEN '⟨your_access_token⟩',
     EXTRA_HTTP_HEADERS MAP {
         'x-goog-user-project': '⟨your_gcp_project_id⟩'
@@ -321,7 +321,7 @@ Attach to the BigLake catalog:
 
 ```sql
 ATTACH '⟨gs://your-biglake-bucket⟩' AS biglake_catalog (
-    TYPE ICEBERG,
+    TYPE iceberg,
     ENDPOINT 'https://biglake.googleapis.com/iceberg/v1/restcatalog',
     SECRET biglake_secret
 );
@@ -331,7 +331,7 @@ Example using the [BigLake public dataset](https://opensource.googleblog.com/202
 
 ```sql
 CREATE SECRET biglake_public_secret (
-    TYPE ICEBERG,
+    TYPE iceberg,
     TOKEN '⟨your_access_token⟩',
     EXTRA_HTTP_HEADERS MAP {
         'x-goog-user-project': '⟨your_gcp_project_id⟩'
@@ -339,7 +339,7 @@ CREATE SECRET biglake_public_secret (
 );
 
 ATTACH 'gs://biglake-public-nyc-taxi-iceberg' AS biglake_public (
-    TYPE ICEBERG,
+    TYPE iceberg,
     ENDPOINT 'https://biglake.googleapis.com/iceberg/v1/restcatalog',
     SECRET biglake_public_secret
 );
