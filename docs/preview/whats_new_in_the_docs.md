@@ -98,6 +98,7 @@ Additional 2.0 features documented across the site, grouped by area.
 ### Clients
 
 * [CLI agent mode]({% link docs/preview/clients/cli/agent_mode.md %}), an interactive assistant in the command line client
+* [CLI command history]({% link docs/preview/clients/cli/dot_commands.md %}#command-history): the `.history` command and the `shell_history()` table function
 
 ### Configuration and Profiling
 

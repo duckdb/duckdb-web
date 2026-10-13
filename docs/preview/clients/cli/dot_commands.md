@@ -27,6 +27,7 @@ Dot commands are available in the DuckDB CLI client. To use one of these command
 | `.highlight_colors ⟨COMPONENT⟩ ⟨COLOR⟩`{:.language-sql .highlight}    | Configure the color of each query and result component. See the [Syntax Highlighting page]({% link docs/preview/clients/cli/syntax_highlighting.md %}) for details               |
 | `.highlight_mode ⟨mixed/dark/light⟩`{:.language-sql .highlight}       | Toggle the highlight mode. See the [dark/light mode section]({% link docs/preview/clients/cli/friendly_cli.md %}#darklight-mode) for details                                     |
 | `.highlight_results ⟨on/off⟩`{:.language-sql .highlight}              | Toggle highlighting in result tables `on` / `off` (duckbox only). See the [result syntax highlighting section](#configuring-the-query-syntax-highlighter) for more details       |
+| `.history ⟨N⟩`{:.language-sql .highlight}                             | Show the command history with syntax highlighting. If `N` is given, only the last `N` entries are shown. See the [command history section](#command-history)                     |
 | `.import ⟨FILE⟩ ⟨TABLE⟩`{:.language-sql .highlight}                   | Import data from `FILE` into `TABLE`. Supports `--csv`, `--json`, `--parquet` options                                                                                            |
 | `.indexes ⟨TABLE⟩`{:.language-sql .highlight}                         | Show names of indexes                                                                                                                                                            |
 | `.large_number_rendering ⟨all/footer/off⟩`{:.language-sql .highlight} | Toggle readable rendering of large numbers (duckbox only, default: `footer`)                                                                                                     |
@@ -196,6 +197,30 @@ The `--newlines` option allows unescaped newline characters in the output:
 ```sql
 .dump --newlines
 ```
+
+## Command History
+
+> New As of DuckDB 2.0, the `.history` dot command and the `shell_history()` table function are available in the command line client.
+
+The `.history` command shows the previously executed statements with syntax highlighting:
+
+```sql
+.history
+```
+
+To show only the last `⟨N⟩` entries, pass a count:
+
+```sql
+.history 10
+```
+
+The same information is available as a table through the `shell_history()` table function, which returns one row per history entry with a numeric `id` column and the statement text in a `sql` column:
+
+```sql
+FROM shell_history();
+```
+
+The history reflects the interactive shell session, so it is only populated in interactive use.
 
 ## Displaying Function Documentation
 
