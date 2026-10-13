@@ -30,12 +30,15 @@ The `EXPLAIN [ANALYZE]` statement allows exporting to several formats:
 * `html` – produces an HTML output, which can be rendered with [treeflex](https://dumptyd.github.io/treeflex/)
 * `json` – produces a JSON output
 * `mermaid` – produces a [Mermaid](https://mermaid.js.org/) flowchart
+* `web` – opens the query graph in a web browser (command line client only)
 
 To specify a format, use the `FORMAT` tag:
 
 ```sql
 EXPLAIN (FORMAT html) SELECT 42 AS x;
 ```
+
+> New As of DuckDB 2.0, the `web` format is available in the [command line client]({% link docs/preview/clients/cli/overview.md %}). `EXPLAIN ANALYZE (FORMAT WEB)` renders the query graph and opens it in a web browser, and the [`.web`]({% link docs/preview/clients/cli/dot_commands.md %}) dot command does the same for the previous query. Both are disabled in [safe mode]({% link docs/preview/clients/cli/safe_mode.md %}).
 
 ## Pragmas
 

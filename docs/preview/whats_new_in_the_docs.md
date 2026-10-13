@@ -124,6 +124,7 @@ Additional 2.0 features documented across the site, grouped by area.
 * [The `http_client_pool_capacity` setting]({% link docs/preview/data/io.md %}#tuning) for sizing the asynchronous HTTP client pool
 * [The metrics layer]({% link docs/preview/dev/profiling.md %}#metrics) and the [`tracked_metrics` setting]({% link docs/preview/configuration/pragmas.md %}#custom-metrics)
 * [IEEE floating-point operation semantics]({% link docs/preview/configuration/pragmas.md %}#ieee-floating-point-operation-semantics) for integer division by zero
+* [The `web` profiling format]({% link docs/preview/dev/profiling.md %}#the-format-option) and the CLI [`.web`]({% link docs/preview/clients/cli/dot_commands.md %}) command for opening query graphs in a browser
 
 ### Building
 

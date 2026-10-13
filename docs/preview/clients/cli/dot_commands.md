@@ -61,6 +61,7 @@ Dot commands are available in the DuckDB CLI client. To use one of these command
 | `.system ⟨CMD⟩ ⟨ARGS...⟩`{:.language-sql .highlight}                  | Run `CMD` with `ARGS...` in a system shell                                                                                                                                       |
 | `.tables ⟨TABLE⟩`{:.language-sql .highlight}                          | List tables [matching `LIKE` pattern]({% link docs/preview/sql/functions/pattern_matching.md %}) `TABLE` with column names, types and row counts, grouped by database and schema |
 | `.timer ⟨on/off⟩`{:.language-sql .highlight}                          | Turn SQL timer `on` or `off`. SQL statements separated by `;` but _not_ separated via newline are measured together                                                              |
+| `.web`{:.language-sql .highlight}                                     | Render the query graph of the previous query and open it in a web browser. Equivalent to `EXPLAIN ANALYZE (FORMAT WEB)`. Disabled in [safe mode]({% link docs/preview/clients/cli/safe_mode.md %})               |
 | `.width ⟨NUM1⟩ ⟨NUM2⟩ ...`{:.language-sql .highlight}                 | Set minimum column widths for columnar output                                                                                                                                    |
 
 ## Using the `.help` Command
