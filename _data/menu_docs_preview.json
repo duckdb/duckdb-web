@@ -1916,6 +1916,10 @@
               "url": "overview"
             },
             {
+              "page": "Migrating to DuckDB v2.0",
+              "url": "migration"
+            },
+            {
               "page": "Backup Extension Repositories",
               "url": "backup_extension_repositories"
             },
