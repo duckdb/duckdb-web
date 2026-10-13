@@ -108,6 +108,7 @@ Additional 2.0 features documented across the site, grouped by area.
 * [Writing GeoJSON]({% link docs/preview/data/json/writing_json.md %}#geojson) and [loading GeoJSON]({% link docs/preview/data/json/loading_json.md %}#geojson)
 * [The Parquet `schema` parameter]({% link docs/preview/data/parquet/overview.md %}#using-the-schema-parameter) and [new Parquet writing options]({% link docs/preview/data/parquet/overview.md %}#writing-to-parquet-files)
 * [The `PARTITION_PATH` copy option]({% link docs/preview/data/partitioning/partitioned_writes.md %}#custom-partition-paths) for computing custom partition subdirectories
+* [The `ORDER_BY` copy option]({% link docs/preview/data/partitioning/partitioned_writes.md %}#sorting-rows-within-partitions) for sorting rows before writing
 
 ### Clients
 
