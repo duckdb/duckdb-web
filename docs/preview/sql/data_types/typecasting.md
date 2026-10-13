@@ -73,7 +73,7 @@ Column abbreviations: `BOOL` (BOOLEAN), `I8` (TINYINT), `I16` (SMALLINT), `I32` 
 
 <!-- END GENERATED TYPECASTING MATRIX -->
 
-Even though a casting operation is supported based on the source and target data type, it does not necessarily mean the cast operation will succeed at runtime.
+Even though a casting operation is supported based on the source and target data type, a cast operation may still fail at runtime if it would result in an invalid target value, for example due to [overflows](#overflows).
 
 > Deprecated Prior to version 0.10.0, DuckDB allowed any type to be implicitly cast to `VARCHAR` during function binding.
 > Version 0.10.0 introduced a [breaking change which no longer allows implicit casts to `VARCHAR`]({% post_url 2024-02-13-announcing-duckdb-0100 %}#breaking-sql-changes).

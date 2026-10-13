@@ -143,6 +143,6 @@ title: Map Functions
 
 <div class="nostroke_table"></div>
 
-| **Description** | Returns the value for a given `key` in the `map`, or `NULL` if the `key` is not present. This is equivalent to [`map_extract_value(map, key)`](#map_extract_valuemap-key) with the arguments reversed. An optional third argument, `switch(key, map, default)`, returns `default` instead of `NULL` when the `key` is not present. |
+| **Description** | Returns the value for a given `key` in the `map`, or `NULL` if the `key` is not present. This is equivalent to [`map_extract_value(map, key)`](#map_extract_valuemap-key). An optional third argument, `switch(key, map, default)`, returns `default` instead of `NULL` when the `key` is not present. |
 | **Example** | `switch('key1', MAP {'key1': 10, 'key2': 20})` |
 | **Result** | `10` |
