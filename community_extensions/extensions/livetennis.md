@@ -54,10 +54,10 @@ docs:
 
     This extension is maintained by the Live Tennis API team.
 
-extension_star_count: 1
-extension_star_count_pretty: 1
-extension_download_count: 743
-extension_download_count_pretty: 743
+extension_star_count: {"message":"Not Found","documentation_url":"https://docs.github.com/rest","status":"404"}
+extension_star_count_pretty: n/a
+extension_download_count: 647
+extension_download_count_pretty: 647
 image: '/images/community_extensions/social_preview/preview_community_extension_livetennis.png'
 layout: community_extension_doc
 ---
