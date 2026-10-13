@@ -99,6 +99,7 @@ Additional 2.0 features documented across the site, grouped by area.
 
 * [CLI agent mode]({% link docs/preview/clients/cli/agent_mode.md %}), an interactive assistant in the command line client
 * [CLI command history]({% link docs/preview/clients/cli/dot_commands.md %}#command-history): the `.history` command and the `shell_history()` table function
+* [Pretty-printed, highlighted `.schema` output]({% link docs/preview/clients/cli/dot_commands.md %}#querying-the-database-schema) with `--no-indent` to restore the single-line form
 
 ### Configuration and Profiling
 

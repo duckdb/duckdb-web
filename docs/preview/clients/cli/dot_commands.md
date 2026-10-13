@@ -52,7 +52,7 @@ Dot commands are available in the DuckDB CLI client. To use one of these command
 | `.read ⟨FILE⟩`{:.language-sql .highlight}                             | Read input from `FILE`                                                                                                                                                           |
 | `.rows`{:.language-sql .highlight}                                    | Row-wise rendering of query results (default)                                                                                                                                    |
 | `.safe_mode`{:.language-sql .highlight}                               | Activates [safe mode]({% link docs/preview/clients/cli/safe_mode.md %})                                                                                                          |
-| `.schema ⟨PATTERN⟩`{:.language-sql .highlight}                        | Show the `CREATE` statements matching `PATTERN`                                                                                                                                  |
+| `.schema ⟨OPTIONS⟩ ⟨PATTERN⟩`{:.language-sql .highlight}              | Show the `CREATE` statements matching `PATTERN`. Pretty-prints and highlights by default; use `--no-indent` (alias `--no-format`) for the stored single-line form                |
 | `.separator ⟨COL⟩ ⟨ROW⟩`{:.language-sql .highlight}                   | Change the column and row separators                                                                                                                                             |
 | `.shell ⟨CMD⟩ ⟨ARGS...⟩`{:.language-sql .highlight}                   | Run `CMD` with `ARGS...` in a system shell                                                                                                                                       |
 | `.show`{:.language-sql .highlight}                                    | Show the current values for various settings                                                                                                                                     |
@@ -168,15 +168,39 @@ fliers   walkers
 
 The `.schema` command will show all of the SQL statements used to define the schema of the database.
 
+> New As of DuckDB 2.0, `.schema` pretty-prints and highlights its output by default. Use `--no-indent` (alias `--no-format`) to restore the earlier single-line form.
+
+By default the statements are pretty-printed with indentation and, on an interactive terminal, syntax highlighting:
+
 ```sql
 .schema
 ```
 
 ```sql
-CREATE TABLE fliers (animal VARCHAR);
-CREATE TABLE swimmers (animal VARCHAR);
-CREATE TABLE walkers (animal VARCHAR);
+CREATE TABLE fliers(
+    animal VARCHAR
+);
+CREATE TABLE swimmers(
+    animal VARCHAR
+);
+CREATE TABLE walkers(
+    animal VARCHAR
+);
 ```
+
+To print the statements as they are stored, one per line and without formatting, use `--no-indent` (or its alias `--no-format`):
+
+```sql
+.schema --no-indent
+```
+
+```sql
+CREATE TABLE fliers(animal VARCHAR);
+CREATE TABLE swimmers(animal VARCHAR);
+CREATE TABLE walkers(animal VARCHAR);
+```
+
+The `--indent` option (alias `--format`) forces pretty-printing, which is the default.
 
 ## Dumping Database Content as SQL
 
