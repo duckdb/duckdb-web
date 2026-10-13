@@ -36,6 +36,7 @@ DuckDB offers several advanced SQL features and syntactic sugar to make SQL quer
 * Defining SQL-level variables:
     * [`SET VARIABLE`]({% link docs/preview/sql/statements/set_variable.md %}#set-variable)
     * [`RESET VARIABLE`]({% link docs/preview/sql/statements/set_variable.md %}#reset-variable)
+    * [The `$name` shorthand for reading variables]({% link docs/preview/sql/statements/set_variable.md %}#the-name-shorthand)
 
 ## Query Features
 
