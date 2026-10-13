@@ -309,6 +309,18 @@ The `duckdb_secret_types()` lists secret types that are supported in the current
 | `default_provider` | The default secret provider, e.g., `config`. | `VARCHAR` |
 | `extension` | The extension that registered the secret type, e.g., `aws`. | `VARCHAR` |
 
+## `duckdb_secret_type_parameters`
+
+> New The `duckdb_secret_type_parameters()` function is available as of DuckDB 2.0. It lists the parameters that each secret type and provider accepts.
+
+| Column | Description | Type |
+|:-|:---|:-|
+| `type` | The name of the secret type, e.g., `s3`. | `VARCHAR` |
+| `provider` | The secret provider, e.g., `config`. | `VARCHAR` |
+| `name` | The name of the parameter. | `VARCHAR` |
+| `parameter_type` | The data type of the parameter. | `VARCHAR` |
+| `description` | A description of the parameter. Currently always `NULL`. | `VARCHAR` |
+
 ## `duckdb_secrets`
 
 The `duckdb_secrets()` function provides metadata about the secrets available in the DuckDB instance.

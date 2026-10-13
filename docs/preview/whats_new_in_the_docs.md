@@ -89,6 +89,7 @@ Additional 2.0 features documented across the site, grouped by area.
 * [`TIMESTAMPTZ_NS`]({% link docs/preview/sql/data_types/timestamp.md %}#timestamp-types), time zone aware timestamps with nanosecond precision
 * [The `lttb` aggregate]({% link docs/preview/sql/functions/aggregates.md %}#lttbx-y-n) for downsampling time series data
 * [The new `extension_name` column in `duckdb_functions`]({% link docs/preview/sql/meta/duckdb_table_functions.md %}#duckdb_functions)
+* [The `duckdb_secret_type_parameters()` function]({% link docs/preview/sql/meta/duckdb_table_functions.md %}#duckdb_secret_type_parameters) listing the parameters each secret type accepts
 * [The `decimal_division` function]({% link docs/preview/sql/functions/numeric.md %}#decimal_divisionx-y) for exact decimal division
 * [The `decimal_average` aggregate]({% link docs/preview/sql/functions/aggregates.md %}#decimal_averagearg) for exact decimal averages
 * [The `variant_group_object` aggregate]({% link docs/preview/sql/functions/variant.md %}#variant_group_objectkey-value) for building `VARIANT` objects
