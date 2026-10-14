@@ -36,8 +36,8 @@ docs:
 
 extension_star_count: 18
 extension_star_count_pretty: 18
-extension_download_count: 3106
-extension_download_count_pretty: 3.1k
+extension_download_count: 4543
+extension_download_count_pretty: 4.5k
 image: '/images/community_extensions/social_preview/preview_community_extension_observefs.png'
 layout: community_extension_doc
 ---

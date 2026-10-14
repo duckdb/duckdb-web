@@ -8,7 +8,7 @@ excerpt: |
 extension:
   name: clickhouse_scanner
   description: Read and write ClickHouse tables directly from DuckDB.
-  version: 0.1.0
+  version: 0.2.0
   language: C++
   build: cmake
   license: MIT
@@ -20,7 +20,7 @@ extension:
 
 repo:
   github: altertable-ai/duckdb-clickhouse
-  ref: 36d412bff2394e2b41149b42298be06e627701d8
+  ref: bb11b7ce640de14b9f7565f588bfd3cd08c99266
 
 docs:
   hello_world: |
@@ -59,8 +59,8 @@ docs:
 
 extension_star_count: 1
 extension_star_count_pretty: 1
-extension_download_count: 373
-extension_download_count_pretty: 373
+extension_download_count: 379
+extension_download_count_pretty: 379
 image: '/images/community_extensions/social_preview/preview_community_extension_clickhouse_scanner.png'
 layout: community_extension_doc
 ---

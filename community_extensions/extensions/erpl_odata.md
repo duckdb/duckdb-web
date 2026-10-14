@@ -21,8 +21,8 @@ repo:
 
 extension_star_count: 31
 extension_star_count_pretty: 31
-extension_download_count: 300
-extension_download_count_pretty: 300
+extension_download_count: 307
+extension_download_count_pretty: 307
 image: '/images/community_extensions/social_preview/preview_community_extension_erpl_odata.png'
 layout: community_extension_doc
 ---

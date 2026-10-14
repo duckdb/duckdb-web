@@ -8,7 +8,7 @@ excerpt: |
 extension:
   name: lance_conversion
   description: Stream any DuckDB query into Lance datasets with Blob v2 storage and scalar, vector, text, and Bloom filter indexes
-  version: 0.1.4
+  version: 0.1.5
   language: C++ & Rust
   build: cmake
   license: MIT
@@ -19,7 +19,7 @@ extension:
 
 repo:
   github: dentiny/duckdb_lance_conversion
-  ref: 2d0dd959003fb5d7b105fed4cecff2b4f58645f2
+  ref: 282997bb96f4c9ac03bd3064a5d5c6d7c1fdc327
 
 docs:
   hello_world: |
@@ -134,8 +134,8 @@ docs:
 
 extension_star_count: 0
 extension_star_count_pretty: 0
-extension_download_count: 671
-extension_download_count_pretty: 671
+extension_download_count: 655
+extension_download_count_pretty: 655
 image: '/images/community_extensions/social_preview/preview_community_extension_lance_conversion.png'
 layout: community_extension_doc
 ---

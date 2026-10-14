@@ -8,7 +8,7 @@ excerpt: |
 extension:
   name: mmcif
   description: Read and write protein structure mmcif files using SQL
-  version: 0.1.0
+  version: 0.2.0
   language: C++
   build: cmake
   license: Apache-2.0
@@ -17,8 +17,8 @@ extension:
 
 repo:
   github: i-VRESSE/duckdb-mmcif
-  ref: ac26e1fca1dbaff42cf25de829fc736e393347b7
-  ref_next: ac5b197b4ce3aa49ffdcb99a6e987555a1081c16
+  ref: 199a8dee2ab13919d0cb8e7f46a49fbc192200cd
+  ref_next: 4bdc8d545e1ea49ad838f812f281c78530ca6140
 
 docs:
   hello_world: |
@@ -55,8 +55,8 @@ extended_description: |
 
 extension_star_count: 1
 extension_star_count_pretty: 1
-extension_download_count: 681
-extension_download_count_pretty: 681
+extension_download_count: 666
+extension_download_count_pretty: 666
 image: '/images/community_extensions/social_preview/preview_community_extension_mmcif.png'
 layout: community_extension_doc
 ---
