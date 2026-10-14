@@ -94,6 +94,21 @@ Statement-level triggers can expose the rows involved in the change as transitio
 
 A table can have multiple triggers for the same event. They fire in the order in which they were created.
 
+### Returning Rows
+
+A data modification statement on a table with triggers can still include a [`RETURNING` clause]({% link docs/preview/sql/statements/insert.md %}#returning-clause). The trigger fires as part of the statement, and the `RETURNING` clause reports the rows affected by the statement itself:
+
+```sql
+CREATE TABLE t (id INTEGER);
+CREATE TABLE log (id INTEGER);
+
+CREATE TRIGGER trg_log AFTER INSERT ON t
+FOR EACH ROW
+    INSERT INTO log VALUES (NEW.id);
+
+INSERT INTO t VALUES (1), (2) RETURNING id;
+```
+
 ## Inspecting Triggers
 
 The triggers defined in the catalog can be listed with the [`duckdb_triggers()` function]({% link docs/preview/sql/meta/duckdb_table_functions.md %}):
