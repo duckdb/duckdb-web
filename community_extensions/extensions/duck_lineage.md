@@ -104,7 +104,7 @@ docs:
 
 extension_star_count: 81
 extension_star_count_pretty: 81
-extension_download_count: 1955
+extension_download_count: 1963
 extension_download_count_pretty: 2.0k
 image: '/images/community_extensions/social_preview/preview_community_extension_duck_lineage.png'
 layout: community_extension_doc
