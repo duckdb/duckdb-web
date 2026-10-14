@@ -42,7 +42,7 @@ FROM check_peg_parser('SELECT 42');
 
 > New The `legacy_parser` extension is introduced in DuckDB 2.0.
 
-For exceptional cases, DuckDB 2.0 can fall back to the legacy PostgreSQL-style parser through the `legacy_parser` extension. Setting the following option autoloads the extension and switches from the default PEG parser to the legacy parser:
+For exceptional cases, DuckDB 2.0 can fall back to the legacy PostgreSQL-style parser through the [`legacy_parser` extension]({% link docs/preview/core_extensions/legacy_parser.md %}). Setting the following option autoloads the extension and switches from the default PEG parser to the legacy parser:
 
 ```sql
 SET enable_legacy_parser = true;
