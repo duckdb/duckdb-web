@@ -314,6 +314,10 @@ ATTACH 'host=localhost database=mysql' AS mysqldb (TYPE mysql);
 CALL mysql_execute('mysqldb', 'CREATE TABLE my_table (i INTEGER)');
 ```
 
+### Routing a Session to MySQL
+
+> New As of DuckDB 2.0, you can route an entire session to an attached MySQL database with the [`CONNECT` statement]({% link docs/preview/sql/statements/connect.md %}). While connected, the remote pushdown optimizer ships queries directly to the MySQL server instead of pulling tables over the wire, and `DISCONNECT` returns the session to the local database.
+
 ## Settings
 
 | Name | Description | Default |
