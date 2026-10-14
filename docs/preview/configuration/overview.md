@@ -141,6 +141,8 @@ Each entry in the search path is a schema. An entry may be qualified with a cata
 
 ## Asynchronous I/O Settings
 
+> New Asynchronous I/O, along with the settings that tune it, is introduced in DuckDB 2.0.
+
 A few settings that tune asynchronous I/O do not appear in the reference list below. The `async_threads` and `read_ahead_depth` settings control the size of the asynchronous thread pool and the read-ahead budget used when reading from object storage and HTTP servers. They are documented on the [I/O page]({% link docs/preview/data/io.md %}), together with the related `http_client_pool_capacity` setting.
 
 ## Configuration Reference
