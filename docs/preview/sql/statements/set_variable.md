@@ -28,6 +28,17 @@ SELECT 20 + getvariable('my_var') AS total;
 |------:|
 | 50    |
 
+> New The `$⟨variable⟩` shorthand is introduced in DuckDB 2.0.
+
+As a shorthand for `getvariable`, a variable can be referenced directly with the `$⟨variable⟩` syntax anywhere an expression is allowed:
+
+```sql
+SET VARIABLE my_var = 30;
+SELECT 20 + $my_var AS total;
+```
+
+Variable names that are not valid identifiers can be quoted, for example `$"my var"`.
+
 If `SET VARIABLE` is invoked on an existing variable, it will overwrite its value:
 
 ```sql

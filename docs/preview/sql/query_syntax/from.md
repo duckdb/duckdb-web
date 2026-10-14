@@ -520,6 +520,30 @@ FROM trades t
 ASOF LEFT JOIN prices p USING (symbol, "when");
 ```
 
+### Nearest Joins
+
+> New Support for nearest joins is introduced in DuckDB 2.0.
+
+A nearest join matches each left side row with the top-k right side rows according to a similarity or distance measure. This turns top-k similarity search into a join clause, which is handy for vector and embedding workloads.
+
+The join is written as `NEAREST ⟨k⟩ BY SIMILARITY ⟨expression⟩` (higher is closer) or `NEAREST ⟨k⟩ BY DISTANCE ⟨expression⟩` (lower is closer). Prefixing it with `APPROX` performs an approximate search, which can be faster for large inputs:
+
+```sql
+SELECT q.user_id, t.product_id
+FROM users q
+    INNER JOIN products t APPROX NEAREST 2
+    BY SIMILARITY array_cosine_similarity(q.embedding, t.embedding);
+```
+
+Nearest joins can be combined with the regular join types, for example `LEFT JOIN`:
+
+```sql
+SELECT q.user_id, t.product_id
+FROM users q
+    LEFT JOIN products t NEAREST 1
+    BY DISTANCE array_distance(q.embedding, t.embedding);
+```
+
 ### Self-Joins
 
 DuckDB allows self-joins for all types of joins.
