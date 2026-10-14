@@ -77,6 +77,64 @@ COPY orders TO 'orders'
 (FORMAT parquet, PARTITION_BY (year, month), OVERWRITE_OR_IGNORE, FILENAME_PATTERN 'file_{uuid}');
 ```
 
+### Custom Partition Paths
+
+> New As of DuckDB 2.0, the `PARTITION_PATH` option gives full control over the subdirectory that each partition is written to, replacing the default `col=value` Hive layout.
+
+By default, the `PARTITION_BY` clause writes each partition to a `col=value` subdirectory following the [Hive partitioning]({% link docs/preview/data/partitioning/hive_partitioning.md %}) convention. The `PARTITION_PATH` option replaces this with an expression over the `PARTITION_BY` columns that computes the output subdirectory for each partition:
+
+```sql
+COPY sales TO 'sales'
+(FORMAT parquet, PARTITION_BY (region),
+    PARTITION_PATH CASE
+        WHEN region = 'eu' THEN 'europe'
+        ELSE 'region=' || coalesce(region, 'unknown')
+    END);
+```
+
+The expression is evaluated once per partition and its result is cast to `VARCHAR`. The resulting path must be relative (no leading `/`), non-empty, and must not contain `..` segments. `PARTITION_PATH` requires `PARTITION_BY` and cannot be combined with `HIVE_FILE_PATTERN`.
+
+Two helper functions are available to build Hive-style paths inside a `PARTITION_PATH` expression:
+
+* `hive_partition_component(name, value)` returns a URL-encoded `name=value` component. A `NULL` value produces `__HIVE_DEFAULT_PARTITION__`:
+
+    ```sql
+    SELECT hive_partition_component('year', 2024);
+    ```
+
+    ```text
+    year=2024
+    ```
+
+    ```sql
+    SELECT hive_partition_component('a/b', 'c d');
+    ```
+
+    ```text
+    a%2Fb=c%20d
+    ```
+
+* `path_join(path, ...)` joins its arguments with the platform path separator:
+
+    ```sql
+    SELECT path_join('dir', 'subdir', 'file.txt');
+    ```
+
+    ```text
+    dir/subdir/file.txt
+    ```
+
+### Sorting Rows Within Partitions
+
+> New As of DuckDB 2.0, the `ORDER_BY` copy option sorts the rows before they are written. When combined with `PARTITION_BY`, the rows are sorted within each partition:
+
+```sql
+COPY orders TO 'orders'
+(FORMAT parquet, PARTITION_BY (year, month), ORDER_BY (amount DESC NULLS LAST));
+```
+
+Each expression in the list can optionally be followed by `ASC` or `DESC` and `NULLS FIRST` or `NULLS LAST`.
+
 ### Overwriting
 
 By default the partitioned write will not allow overwriting existing directories.

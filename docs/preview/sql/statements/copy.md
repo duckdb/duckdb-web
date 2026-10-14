@@ -284,6 +284,8 @@ With few exceptions, the below options are applicable to all formats written wit
 | `PER_THREAD_OUTPUT` | When `true`, the `COPY` command generates one file per thread, rather than one file in total. This allows for faster parallel writing. | `BOOL` | `false` |
 | `FILE_SIZE_BYTES` | If this parameter is set, the `COPY` process creates a directory which will contain the exported files. If a file exceeds the set limit (specified as bytes such as `1000` or in human-readable format such as `1k`), the process creates a new file in the directory. This parameter works in combination with `PER_THREAD_OUTPUT`. Note that the size is used as an approximation, and files can be occasionally slightly over the limit. | `VARCHAR` or `BIGINT` | (empty) |
 | `PARTITION_BY` | The columns to partition by using a Hive partitioning scheme, see the [partitioned writes section]({% link docs/preview/data/partitioning/partitioned_writes.md %}). | `VARCHAR[]` | (empty) |
+| `PARTITION_PATH` | An expression over the `PARTITION_BY` columns that computes the output subdirectory for each partition, replacing the default `col=value` Hive layout. The result must be a relative path (no leading `/`, no `..` segments) and non-empty. Requires `PARTITION_BY` and cannot be combined with `HIVE_FILE_PATTERN`. See the [partitioned writes section]({% link docs/preview/data/partitioning/partitioned_writes.md %}#custom-partition-paths). Added in DuckDB 2.0. | `VARCHAR` | (empty) |
+| `ORDER_BY` | A parenthesized list of expressions to sort the rows by before writing, each optionally followed by `ASC` or `DESC` and `NULLS FIRST` or `NULLS LAST`. When combined with `PARTITION_BY`, the rows are sorted within each partition. Added in DuckDB 2.0. | expression list | (empty) |
 | `PRESERVE_ORDER` | Whether or not to [preserve order]({% link docs/preview/sql/dialect/order_preservation.md %}) during the copy operation. Defaults to the value of the `preserve_insertion_order` [configuration option]({% link docs/preview/configuration/overview.md %}). | `BOOL`| (*) |
 | `RETURN_FILES` | Whether or not to include the created filepath(s) (as a `files VARCHAR[]` column) in the query result. | `BOOL` | `false` |
 | `RETURN_STATS` | Whether or not to return the files and their column statistics that were written as part of the `COPY` statement. | `BOOL`| `false` |
@@ -369,6 +371,10 @@ The below options are applicable when writing Parquet files.
 | `WRITE_BLOOM_FILTER` | Whether to write [Bloom filters](https://en.wikipedia.org/wiki/Bloom_filter) that allow readers to skip row groups. | `BOOLEAN` | `true` |
 | `BLOOM_FILTER_FALSE_POSITIVE_RATIO` | The target false positive ratio of the written Bloom filters. | `DOUBLE` | `0.01` |
 | `GEOPARQUET_VERSION` | Which [GeoParquet](https://geoparquet.org/) metadata version to write for geometry columns (`NONE`, `V1`, `V2`, `BOTH`). `NONE` disables GeoParquet metadata. | `VARCHAR` | `V1` |
+| `TIMESTAMP_IS_ADJUSTED_TO_UTC` | Controls the `isAdjustedToUTC` flag written for timestamp columns. With `AUTO`, the flag is set to `true` for `TIMESTAMP WITH TIME ZONE` columns and `false` for other timestamp types. Added in DuckDB 2.0. | `VARCHAR` (`AUTO`, `TRUE`, `FALSE`) | `AUTO` |
+| `WRITE_TIMESTAMP_AS_INT96` | When `true`, writes `TIMESTAMP` columns using the legacy Parquet `INT96` physical type for compatibility with older readers. Added in DuckDB 2.0. | `BOOLEAN` | `false` |
+
+> New As of DuckDB 2.0, the `TIMESTAMP_IS_ADJUSTED_TO_UTC` and `WRITE_TIMESTAMP_AS_INT96` options control how timestamp columns are written to Parquet files.
 
 Some examples of `FIELD_IDS` are as follows.
 

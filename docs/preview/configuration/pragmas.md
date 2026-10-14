@@ -148,6 +148,8 @@ The memory limit can also be specified as a percentage of the total system memor
 SET memory_limit = '60%';
 ```
 
+> New As of DuckDB 2.0, `max_memory` (and its alias `memory_limit`) accepts a percentage of the total system memory. The percentage must be between 0 and 100 and is computed relative to the total system memory. Values that cannot be parsed as a valid percentage raise an error.
+
 > Warning The specified memory limit is only applied to the buffer manager.
 > For most queries, the buffer manager handles the majority of the data processed.
 > However, certain in-memory data structures such as [vectors]({% link docs/preview/internals/vector.md %}) and query results are allocated outside of the buffer manager.
@@ -161,6 +163,16 @@ Set the amount of threads for parallel query execution:
 ```sql
 SET threads = 4;
 ```
+
+#### Maximum Execution Time
+
+> New As of DuckDB 2.0, the `max_execution_time` setting bounds the wall-clock time of a query in milliseconds. When the limit is exceeded, the query is aborted with the error `Query exceeded maximum execution time`. The default is `0`, meaning no limit.
+
+```sql
+SET max_execution_time = 5000;
+```
+
+This is a per-connection setting with a global fallback: a local value overrides a value set with `SET GLOBAL`, and `RESET max_execution_time` restores the global value.
 
 ## Collations
 
@@ -589,6 +601,16 @@ Don't run a `CHECKPOINT` on shutdown:
 ```sql
 PRAGMA disable_checkpoint_on_shutdown;
 ```
+
+#### Checkpoint on Detach
+
+> New As of DuckDB 2.0, the `checkpoint_on_detach` setting controls whether a `CHECKPOINT` runs when a database is detached:
+
+```sql
+SET checkpoint_on_detach = 'ENABLED';
+```
+
+The accepted values are `ENABLED` (request a checkpoint on detach), `DISABLED` (never checkpoint on detach), and `DEFAULT` (defer to the global `checkpoint_on_shutdown` behavior). A requested checkpoint still does not occur while another connection references the database. This is a per-session setting.
 
 ## Temp Directory for Spilling Data to Disk
 

@@ -6,6 +6,11 @@
       "url": "/install/"
     },
     {
+      "page": "What's New in the Docs for 2.0",
+      "slug": "",
+      "url": "/docs/preview/whats_new_in_the_docs"
+    },
+    {
       "page": "Documentation",
       "slug": "",
       "mainfolderitems": [
