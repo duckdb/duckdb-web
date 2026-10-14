@@ -175,7 +175,7 @@ The CSV Reject Errors Table returns the following information:
 | `column_idx` | If the error happens in a specific column, the index of the column. | `UBIGINT` |
 | `column_name` | If the error happens in a specific column, the name of the column. | `VARCHAR` |
 | `error_type` | The type of the error that happened. | `ENUM` |
-| `csv_line` | The original CSV line. | `VARCHAR` |
+| `csv_line` | The original CSV line, truncated to `rejects_line_size_limit` characters. | `VARCHAR` |
 | `error_message` | The error message produced by DuckDB. | `VARCHAR` |
 
 ## Parameters
@@ -188,6 +188,9 @@ The parameters listed below are used in the `read_csv` function to configure the
 | `rejects_scan` | Name of a temporary table where the information of the scan information of faulty CSV file are stored. | `VARCHAR` | reject_scans |
 | `rejects_table` | Name of a temporary table where the information of the faulty lines of a CSV file are stored. | `VARCHAR` | reject_errors |
 | `rejects_limit` | Upper limit on the number of faulty records from a CSV file that will be recorded in the rejects table. 0 is used when no limit should be applied. | `BIGINT` | 0 |
+| `rejects_line_size_limit` | Maximum number of characters of a rejected line stored in the `csv_line` column. Longer lines are truncated, and `0` disables truncation, storing the full line. | `BIGINT` | 10000 |
+
+> New As of DuckDB 2.0, the `rejects_line_size_limit` parameter bounds how many characters of each rejected line are stored in the `csv_line` column of the reject errors table.
 
 To store the information of the faulty CSV lines in a rejects table, the user must simply set the `store_rejects` option to true. For example:
 

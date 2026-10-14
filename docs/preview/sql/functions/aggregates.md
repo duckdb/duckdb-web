@@ -150,6 +150,7 @@ The table below shows the available general aggregate functions.
 | [`count()`](#count) | Returns the number of rows. |
 | [`count(arg)`](#countarg) | Returns the number of rows where `arg` is not `NULL`. |
 | [`countif(arg)`](#countifarg) | Returns the number of rows where `arg` is `true`. |
+| [`decimal_average(arg)`](#decimal_averagearg) | Computes the average of a `DECIMAL` column using exact integer arithmetic with banker's rounding, returning a `DECIMAL` with the same width and scale as the input. |
 | [`favg(arg)`](#favgarg) | Calculates the average using a more accurate floating point summation (Kahan Sum). This function is [affected by ordering](#order-by-clause-in-aggregate-functions). |
 | [`first(arg)`](#firstarg) | Returns the first value (null or non-null) from `arg`. This function is [affected by ordering](#order-by-clause-in-aggregate-functions). |
 | [`fsum(arg)`](#fsumarg) | Calculates the sum using a more accurate floating point summation (Kahan Sum). This function is [affected by ordering](#order-by-clause-in-aggregate-functions). |
@@ -295,6 +296,15 @@ The table below shows the available general aggregate functions.
 
 | **Description** | Returns the number of rows where `arg` is `true`. |
 | **Example** | `countif(A)` |
+
+#### `decimal_average(arg)`
+
+<div class="nostroke_table"></div>
+
+| **Description** | Computes the average of a `DECIMAL` column using exact integer arithmetic with [banker's rounding](https://en.wikipedia.org/wiki/Rounding#Rounding_half_to_even), returning a `DECIMAL` with the same width and scale as the input. `NULL` values are ignored. |
+| **Example** | `decimal_average(A)` |
+
+> New The `decimal_average` function was added in DuckDB 2.0.
 
 #### `favg(arg)`
 

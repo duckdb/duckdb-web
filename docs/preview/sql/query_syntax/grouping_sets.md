@@ -203,6 +203,8 @@ Which returns these results:
 
 Note that the number of expressions passed to `GROUPING_ID()`, or the order in which they are passed is independent from the actual group definitions appearing in the `GROUPING SETS`-clause (or the groups implied by `ROLLUP` and `CUBE`). As long as the expressions passed to `GROUPING_ID()` are expressions that appear somewhere in the `GROUPING SETS`-clause, `GROUPING_ID()` will set a bit corresponding to the position of the expression whenever that expression is rolled up to a super-aggregate.
 
+> New As of DuckDB 2.0, calling `GROUPING_ID()` or `GROUPING()` with no arguments defaults to using all columns in the `GROUP BY` clause, in `GROUP BY` order. This is equivalent to listing every grouping column explicitly.
+
 ## Syntax
 
 <div id="rrdiagram"></div>

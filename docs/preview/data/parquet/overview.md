@@ -221,6 +221,21 @@ FROM read_parquet('integers.parquet', schema = MAP {
 
 > The `schema` parameter cannot be combined with `union_by_name = true`.
 
+## The `file_row_group_number` Virtual Column
+
+> New As of DuckDB 2.0, the `file_row_group_number` virtual column exposes the Parquet row group that each row belongs to.
+
+The `file_row_group_number` column returns the file-relative index of the row group that each row was read from, starting at `0` and restarting for every file. It enables row-group-level pruning and inspection:
+
+```sql
+SELECT file_row_group_number, count(*)
+FROM read_parquet('test.parquet')
+GROUP BY file_row_group_number
+ORDER BY file_row_group_number;
+```
+
+This complements the `file_row_number` column, which returns the file-relative row index.
+
 ## Partial Reading
 
 DuckDB supports projection pushdown into the Parquet file itself. That is to say, when querying a Parquet file, only the columns required for the query are read. This allows you to read only the part of the Parquet file that you are interested in. This will be done automatically by DuckDB.

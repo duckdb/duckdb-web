@@ -114,6 +114,8 @@ RENAME TO integers_old;
 
 The `RENAME TO` clause renames an entire table, changing its name in the schema. Note that any views that rely on the table are **not** automatically updated.
 
+> New As of DuckDB 2.0, `ALTER TABLE ⟨view⟩ RENAME TO ⟨new_name⟩` can also rename a view, for compatibility with PostgreSQL. The equivalent [`ALTER VIEW ⟨view⟩ RENAME TO ⟨new_name⟩`]({% link docs/preview/sql/statements/alter_view.md %}) continues to work as well.
+
 ## `RENAME COLUMN`
 
 To rename a column of a table, use the `RENAME` or `RENAME COLUMN` clauses:

@@ -90,3 +90,19 @@ Due to case-insensitivity, it's not possible to use `SELECT a FROM 'file.parquet
 ### `USING SAMPLE`
 
 The `USING SAMPLE` clause is syntactically placed after the `WHERE` and `GROUP BY` clauses (same as the `LIMIT` clause) but is semantically applied before both (unlike the `LIMIT` clause).
+
+### Implicit Conversion of Identifiers in Table Function Arguments
+
+DuckDB historically allowed a bare, unbound identifier to be used as a table function argument, implicitly converting it to a string literal. For example, `glob(no_such_file.csv)` was treated as `glob('no_such_file.csv')`.
+
+> Deprecated As of DuckDB 2.0, this implicit conversion is deprecated. By default DuckDB still converts the identifier but logs a warning; use an explicit string literal instead, for example `glob('no_such_file.csv')`.
+
+The behavior is controlled by the `table_function_identifier_conversion` setting:
+
+* `DEFAULT`: convert the identifier but log a warning.
+* `ENABLE_IMPLICIT_STRING`: convert silently (the previous behavior).
+* `DISABLE_IMPLICIT_STRING`: raise a binder error instead of converting.
+
+```sql
+SET table_function_identifier_conversion = 'DISABLE_IMPLICIT_STRING';
+```

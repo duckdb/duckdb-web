@@ -19,6 +19,8 @@ This section describes functions that operate on the [`VARIANT` type]({% link do
 | [`variant_array_length(v)`](#variant_array_lengthv) | Return the number of elements in a `VARIANT` array. |
 | [`variant_exists(v, key)`](#variant_existsv-key) | Return whether the given key exists in a `VARIANT` object. |
 | [`variant_contains(haystack, needle)`](#variant_containshaystack-needle) | Return whether the `needle` `VARIANT` is contained in the `haystack` `VARIANT`. |
+| [`variant_group_object(key, value)`](#variant_group_objectkey-value) | Aggregate. Return a `VARIANT` object built from all `key`, `value` pairs in the group. |
+| [`variant_group_array(x)`](#variant_group_arrayx) | Aggregate. Collect all values of `x` into a `VARIANT` array. |
 
 #### `variant_typeof(v)`
 
@@ -83,6 +85,26 @@ This section describes functions that operate on the [`VARIANT` type]({% link do
 | **Description** | Return whether the `needle` `VARIANT` is contained in the `haystack` `VARIANT`. |
 | **Example** | `variant_contains('{"user": {"id": 42}}'::JSON::VARIANT, '{"user": {"id": 42}}'::JSON::VARIANT)` |
 | **Result** | `true` |
+
+#### `variant_group_object(key, value)`
+
+<div class="nostroke_table"></div>
+
+| **Description** | Aggregate function. Returns a `VARIANT` object containing all `key`, `value` pairs in the group, where `key` is a `VARCHAR` and `value` is a `VARIANT`. A `NULL` key or a duplicate key raises an error. |
+| **Example** | `variant_group_object('duck', 'goose'::VARIANT)` |
+| **Result** | `{'duck': goose}` |
+
+> New The `variant_group_object` aggregate was added in DuckDB 2.0.
+
+#### `variant_group_array(x)`
+
+<div class="nostroke_table"></div>
+
+| **Description** | Collects all values of `x` into a `VARIANT` array, preserving order. Defined as a macro equivalent to `list(x)::VARIANT`, so it has aggregate semantics and also works as a window function. `NULL` values are kept as `VARIANT` nulls. |
+| **Example** | `variant_group_array(i)` |
+| **Result** | `[0, 1, 2, 3]` |
+
+> New The `variant_group_array` function was added in DuckDB 2.0.
 
 ## Example
 
