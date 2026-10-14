@@ -44,6 +44,17 @@ DuckDB versions v1.0 to v1.5 create a DuckDB database file with [version 64](#st
 
 > Warning A file created with the v2.0.0 storage format cannot be opened by DuckDB versions prior to v2.0.0. To write a file that older versions can still read, create it with an [explicit storage version](#explicit-storage-versions).
 
+### What's New in the v2.0.0 Format
+
+> New The v2.0.0 storage format, used by default from DuckDB 2.0, introduces several improvements over earlier versions.
+
+Compared to earlier storage versions, the v2.0.0 format:
+
+* loads column metadata lazily, so databases with wide tables and large indexes open faster and use less memory;
+* enables the `DICT_FSST` string compression method by default (see [Compression](#compression));
+* stores row deletions more compactly; and
+* performs stronger corruption validation when reading data.
+
 ### Explicit Storage Versions
 
 [DuckDB v1.2.0 introduced the `STORAGE_VERSION` option]({% post_url 2025-02-05-announcing-duckdb-120 %}#explicit-storage-versions), which allows explicitly specifying the storage version.
