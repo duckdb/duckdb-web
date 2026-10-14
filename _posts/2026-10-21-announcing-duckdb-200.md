@@ -71,9 +71,8 @@ As always, DuckDB's SQL dialect keeps growing. A few favorites from this release
 * Nested schemas allow schemas within schemas, e.g., `CREATE SCHEMA finance.reports`.
 * The `$⟨variable⟩` shorthand lets you write `$x` anywhere an expression is allowed, instead of `getvariable(...)`.
 * JSON mutation functions `json_set`, `json_insert`, `json_replace` and `json_remove` modify JSON documents in place.
-* Recursive CTEs with `USING KEY` aggregation enable iterative algorithms in pure SQL.
 
-There is more: SQL-standard `FETCH FIRST`, `OVERLAY()`, `UNNEST` in `GROUP BY` and well-defined `MERGE` / `UPDATE ... FROM` semantics for multi-matched rows.
+There is more: SQL-standard `FETCH FIRST`, `UNNEST` in `GROUP BY` and well-defined `MERGE` / `UPDATE ... FROM` semantics for multi-matched rows.
 
 ### Asynchronous I/O
 
