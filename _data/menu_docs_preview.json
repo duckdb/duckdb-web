@@ -2011,6 +2011,10 @@
           "slug": "dev",
           "subfolderitems": [
             {
+              "page": "Overview",
+              "url": "overview"
+            },
+            {
               "page": "DuckDB Repositories",
               "url": "repositories"
             },
