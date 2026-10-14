@@ -52,8 +52,8 @@ docs:
     indexes UNUSABLE until they are rebuilt.
     Benchmark, type mapping and limitations: https://github.com/hugues31/oraduck
 
-extension_star_count: 2
-extension_star_count_pretty: 2
+extension_star_count: 3
+extension_star_count_pretty: 3
 extension_download_count: 661
 extension_download_count_pretty: 661
 image: '/images/community_extensions/social_preview/preview_community_extension_oraduck.png'

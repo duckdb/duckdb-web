@@ -8,11 +8,11 @@ excerpt: |
 extension:
   name: laterite_ags4
   description: Read AGS4 geotechnical data files as typed, UUID-keyed tables directly from SQL — born-typed columns, deterministic content-addressed keys that join across groups by construction, and an embedded AGS dictionary. A read-only SQL surface. Local, http(s):// and s3:// (with httpfs).
-  version: 0.11.0
+  version: 0.15.0
   language: Rust
   build: cargo
   license: MIT
-  # wasm is BUILT for all three variants (wasm_mvp / wasm_eh / wasm_threads). The
+  # wasm is BUILT for wasm_mvp and wasm_eh (wasm_threads is excluded, below). The
   # C-API extension (official duckdb-rs crate) compiles to a
   # wasm32-unknown-emscripten staticlib example (src/wasm_lib.rs) that
   # extension-ci-tools emcc-links as an emscripten SIDE_MODULE. Building on the
@@ -23,10 +23,13 @@ extension:
   # filesystem; browser SQL-over-AGS is also served by the dedicated
   # `laterite-ags4-wasm` package.
   #
-  # wasm_threads is enabled now the bulk-memory-opt blocker is gone on every
-  # variant (mvp + eh landed in the initial 0.7.0 cut; threads links clean on the
-  # same duckdb-crate path). linux_amd64_musl stays excluded (untested).
-  excluded_platforms: "linux_amd64_musl"
+  # wasm_threads is excluded (#50): it links, but does not LOAD. Every
+  # wasm_threads extension build gets a non-shared memory (DuckDB's own core
+  # extensions too; duckdb/extension-ci-tools#391), which duckdb-wasm's threads
+  # runtime (shared memory) refuses. For this Rust extension a fix would also
+  # need +atomics std, i.e. nightly build-std, not stable Rust.
+  # linux_amd64_musl stays excluded (untested).
+  excluded_platforms: "linux_amd64_musl;wasm_threads"
   requires_toolchains: "rust"
   maintainers:
     - niko86
@@ -35,7 +38,7 @@ repo:
   github: niko86/laterite-duckdb
   # Pin to the release commit SHA once the repo is pushed + tagged (community-
   # extensions pins a SHA, not a branch). Placeholder until then:
-  ref: bae75a0daf8d026e282f5892ef535e32ed828d74
+  ref: 6f878ec7dd2aacad3cca7e605a6020db1b0ef819
 
 docs:
   hello_world: |
@@ -103,8 +106,8 @@ docs:
 
 extension_star_count: 2
 extension_star_count_pretty: 2
-extension_download_count: 1193
-extension_download_count_pretty: 1.2k
+extension_download_count: 484
+extension_download_count_pretty: 484
 image: '/images/community_extensions/social_preview/preview_community_extension_laterite_ags4.png'
 layout: community_extension_doc
 ---
@@ -130,17 +133,17 @@ LOAD {{ page.extension.name }};
 
 <div class="extension_functions_table"></div>
 
-|   function_name   | function_type |                                             description                                              |                                                   comment                                                    |                               examples                                |
-|-------------------|---------------|------------------------------------------------------------------------------------------------------|--------------------------------------------------------------------------------------------------------------|-----------------------------------------------------------------------|
-| read_ags          | table         | Read one AGS4 group as a typed table — born-typed columns plus content-addressed _id/_parent_id keys | Local / http(s):// / s3:// (with LOAD httpfs); consumes a sibling .ags.idx for a fast single-group slice     | [SELECT loca_id, loca_gl FROM read_ags('site.ags', 'LOCA');]          |
-| read_ags_text     | table         | Read one AGS4 group as a typed table from an inline AGS4 string                                      | No filesystem — the input is a VARCHAR (already UTF-8)                                                       | [SELECT * FROM read_ags_text(ags_string, 'LOCA');]                    |
-| ags_groups        | table         | List the groups in an AGS4 file with row and heading counts                                          | Returns (group, n_rows, n_headings, parent)                                                                  | [SELECT * FROM ags_groups('site.ags');]                               |
-| ags_headings      | table         | The per-heading schema of an AGS4 file, enriched with dictionary KEY status                          | Returns (group, heading, unit, ags_type, sql_type, status, is_key, ordinal)                                  | [SELECT * FROM ags_headings('site.ags') LIMIT 5;]                     |
-| ags_dictionary    | table         | The embedded standard AGS dictionary as a table                                                      | Returns (group, heading, status, ags_type, unit, description)                                                | [SELECT * FROM ags_dictionary() LIMIT 5;]                             |
-| ags_relationships | table         | The AGS group parent-child (KEY) graph that _parent_id follows                                       | Returns (child, parent, shared_keys)                                                                         | [SELECT * FROM ags_relationships();]                                  |
-| ags_rules         | table         | The AGS4 numbered-rule catalogue                                                                     | Returns (rule, title, severity, fixable) — the extension *lists* the rules; the CLI and libraries *run* them | [SELECT * FROM ags_rules() WHERE fixable;]                            |
-| load_ags          | table         | Emit CREATE-TABLE DDL to materialise every AGS4 group into an indexed, queryable store               | Returns (seq, stmt) — run the statements to get keyed tables                                                 | [SELECT stmt FROM load_ags('site.ags') ORDER BY seq;]                 |
-| to_duckdb         | table         | Emit ATTACH/CREATE-TABLE/DETACH DDL to persist every AGS4 group as a standalone .duckdb file         | Returns (seq, stmt); the file matches the libraries' to_duckdb() output — keyed by _id/_parent_id            | [SELECT stmt FROM to_duckdb('site.ags', 'site.duckdb') ORDER BY seq;] |
+|   function_name   | function_type |                                                                     description                                                                     |                                                              comment                                                               |                               examples                                |
+|-------------------|---------------|-----------------------------------------------------------------------------------------------------------------------------------------------------|------------------------------------------------------------------------------------------------------------------------------------|-----------------------------------------------------------------------|
+| read_ags          | table         | Read one AGS4 group as a typed table — born-typed columns plus content-addressed _id/_parent_id keys (standard and file-declared DICT groups alike) | Local / http(s):// / s3:// (with LOAD httpfs); consumes a sibling .ags.idx for a fast single-group slice                           | [SELECT loca_id, loca_gl FROM read_ags('site.ags', 'LOCA');]          |
+| read_ags_text     | table         | Read one AGS4 group as a typed table from an inline AGS4 string                                                                                     | No filesystem — the input is a VARCHAR (already UTF-8)                                                                             | [SELECT * FROM read_ags_text(ags_string, 'LOCA');]                    |
+| ags_groups        | table         | List the groups in an AGS4 file with row and heading counts                                                                                         | Returns (group, n_rows, n_headings, parent)                                                                                        | [SELECT * FROM ags_groups('site.ags');]                               |
+| ags_headings      | table         | The per-heading schema of an AGS4 file, enriched with effective-dictionary KEY status and parentage                                                 | Returns (group, heading, unit, ags_type, sql_type, status, is_key, ordinal)                                                        | [SELECT * FROM ags_headings('site.ags') LIMIT 5;]                     |
+| ags_dictionary    | table         | The embedded standard AGS dictionary as a table                                                                                                     | Returns (group, parent, heading, status, ags_type, sql_type, unit, description, ordinal)                                           | [SELECT * FROM ags_dictionary() LIMIT 5;]                             |
+| ags_relationships | table         | The AGS group parent-child (KEY) graph that _parent_id follows                                                                                      | Returns (child, parent, shared_keys)                                                                                               | [SELECT * FROM ags_relationships();]                                  |
+| ags_rules         | table         | The AGS4 numbered-rule catalogue                                                                                                                    | Returns (rule, title, checks, severity, fixable, observations) — the extension *lists* the rules; the CLI and libraries *run* them | [SELECT * FROM ags_rules() WHERE fixable;]                            |
+| load_ags          | table         | Emit CREATE-TABLE DDL to materialise every AGS4 group into an indexed, queryable store                                                              | Returns (seq, stmt) — run the statements to get keyed tables                                                                       | [SELECT stmt FROM load_ags('site.ags') ORDER BY seq;]                 |
+| to_duckdb         | table         | Emit ATTACH/CREATE-TABLE/DETACH DDL to persist every AGS4 group as a standalone .duckdb file                                                        | Returns (seq, stmt); the file matches the libraries' to_duckdb() output — keyed by _id/_parent_id                                  | [SELECT stmt FROM to_duckdb('site.ags', 'site.duckdb') ORDER BY seq;] |
 
 ### Overloaded Functions
 
