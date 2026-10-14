@@ -133,7 +133,7 @@ If you find that ICU's behavior changed, please [file an issue](https://github.c
 Beyond the breaking changes above, DuckDB v2.0.0 adds a large set of new features.
 Rather than repeat the feature documentation here, this section points to where each new feature is covered in full.
 For the complete tour, see the [preview announcement]({% post_url 2026-08-17-duckdb-20-highlights %}) and the detailed release announcement.
-The [What's New in the Docs for 2.0 page](/docs/preview/whats_new_in_the_docs) links every high-level new feature to its documentation, organized by theme:
+The [What's New in the Docs for 2.0 page]({% link docs/preview/whats_new_in_the_docs.md %}) links every high-level new feature to its documentation, organized by theme:
 
 * DuckDB as a server with the [`quack` extension]({% link docs/preview/core_extensions/quack.md %}) and the `CONNECT` statement
 * The [`VARIANT` type]({% link docs/preview/sql/data_types/variant.md %}) for semi-structured data
