@@ -4,7 +4,9 @@ layout: docu
 title: ICU Extension
 ---
 
-The `icu` extension contains an easy-to-use version of the collation/timezone part of the [ICU library](https://github.com/unicode-org/icu).
+The `icu` extension provides collation, time zone, and calendar support.
+
+> New In DuckDB 2.0, the dependency on the external [ICU library](https://github.com/unicode-org/icu) was removed. The `icu` extension now implements collations, time zones, and calendars natively, with time zone data built directly from the [IANA Time Zone Database](https://www.iana.org/time-zones). Behavior is unchanged, and the native implementation is smaller and faster. If you ship a custom build, note that ICU is no longer bundled.
 
 ## Installing and Loading
 
