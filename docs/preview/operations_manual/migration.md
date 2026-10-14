@@ -131,14 +131,19 @@ If you find that ICU's behavior changed, please [file an issue](https://github.c
 ## What's New in v2.0
 
 Beyond the breaking changes above, DuckDB v2.0.0 adds a large set of new features.
-For the full tour, see the [preview announcement]({% post_url 2026-08-17-duckdb-20-highlights %}) and the detailed release announcement.
-Highlights with documentation include:
+Rather than repeat the feature documentation here, this section points to where each new feature is covered in full.
+For the complete tour, see the [preview announcement]({% post_url 2026-08-17-duckdb-20-highlights %}) and the detailed release announcement.
+The [What's New in the Docs for 2.0 page](/docs/preview/whats_new_in_the_docs) links every high-level new feature to its documentation, organized by theme:
 
-* DuckDB as a server with the [`quack` extension]({% link docs/preview/quack/overview.md %})
-* The [`VARIANT` type]({% link docs/preview/sql/data_types/variant.md %})
-* The [`MERGE` statement]({% link docs/preview/sql/statements/merge_into.md %})
-* [Recursive CTEs with `USING KEY`]({% link docs/preview/sql/query_syntax/with.md %}#recursive-ctes-with-using-key)
-* [Asynchronous I/O]({% link docs/preview/data/io.md %})
+* DuckDB as a server with the [`quack` extension]({% link docs/preview/core_extensions/quack.md %}) and the `CONNECT` statement
+* The [`VARIANT` type]({% link docs/preview/sql/data_types/variant.md %}) for semi-structured data
+* Triggers that run actions automatically in response to table changes
+* SQL dialect additions, including the [`MERGE` statement]({% link docs/preview/sql/statements/merge_into.md %}), [recursive CTEs with `USING KEY`]({% link docs/preview/sql/query_syntax/with.md %}#recursive-ctes-with-using-key), data-modifying CTEs and nested schemas
+* [Asynchronous I/O]({% link docs/preview/data/io.md %}) for faster reads from object storage
+* Optimizer and engine improvements that speed up existing queries, including on Windows
+* Self-hostable [extension repositories]({% link docs/preview/extensions/extension_distribution.md %}) for signing and distributing your own extensions
+
+Several of the headline v2.0.0 changes are covered in [Breaking Changes](#breaking-changes) above: the new default [storage format](#storage-format), the [PEG-based SQL parser](#sql-parser), the reworked [C and C++ extension API](#c-and-c-extension-api), and the native timezone, calendar and collation support left after [ICU was removed from the core build](#icu-removed-from-the-core-build).
 
 ## See Also
 
