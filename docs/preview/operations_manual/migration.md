@@ -138,7 +138,7 @@ The [What's New in the Docs for 2.0 page]({% link docs/preview/whats_new_in_the_
 * DuckDB as a server with the [`quack` extension]({% link docs/preview/core_extensions/quack.md %}) and the `CONNECT` statement
 * The [`VARIANT` type]({% link docs/preview/sql/data_types/variant.md %}) for semi-structured data
 * Triggers that run actions automatically in response to table changes
-* SQL dialect additions, including the [`MERGE` statement]({% link docs/preview/sql/statements/merge_into.md %}), [recursive CTEs with `USING KEY`]({% link docs/preview/sql/query_syntax/with.md %}#recursive-ctes-with-using-key), data-modifying CTEs and nested schemas
+* SQL dialect additions, including data-modifying CTEs and nested schemas
 * [Asynchronous I/O]({% link docs/preview/data/io.md %}) for faster reads from object storage
 * Optimizer and engine improvements that speed up existing queries, including on Windows
 * Self-hostable [extension repositories]({% link docs/preview/extensions/extension_distribution.md %}) for signing and distributing your own extensions
