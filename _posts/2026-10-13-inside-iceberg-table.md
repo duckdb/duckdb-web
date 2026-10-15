@@ -116,7 +116,7 @@ Before going through the layers one by one, here is the whole structure. Each la
 ```text
 metadata.json                    one per table version
 └── manifest list (Avro)         one per snapshot
-    └── manifests (Avro)         one per write, in our case
+    └── manifests (Avro)         one per write (for simplicity)
         ├── data files (Parquet)
         └── delete files (Parquet)
 ```
@@ -231,9 +231,9 @@ FROM read_avro(getvariable('manifest_list'));
 └──────────────────────────────────────────────┴─────────┴─────────────────┴───────────────────┴──────────────────┘
 ```
 
-There is one manifest per write. `content` is 0 for manifests that track data files and 1 for manifests that track delete files. The manifest list also stores the range of partition values in each manifest (not shown here), so a reader can skip entire manifests when a query filters on the partition column.
+We created one manifest with every write. `content` is 0 for manifests that track data files and 1 for manifests that track delete files. The manifest list also stores the range of partition values in each manifest (not shown here), so a reader can skip entire manifests when a query filters on the partition column.
 
-The latest snapshot still includes the manifests written by the two earlier snapshots. A new snapshot reuses whatever did not change. This is what makes commits cheap, and also why a table with many small commits ends up with many small manifests.
+The latest snapshot still includes the manifests written by the two earlier snapshots. To make a commit cheap to write, an engine can add a new manifest for every write, as happened here. This comes at the cost of read performance, because of the rapidly accumulating small manifests. An alternative method merges new additions into an existing manifest, which is more expensive for the writer but more optimized for the reader.
 
 ## Layer 3: The Manifests
 
