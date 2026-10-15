@@ -78,7 +78,7 @@ DuckDB 2.0 ships a revamped, stable C API with a versioned ABI, so an extension 
 
 * [C API]({% link docs/preview/clients/c/overview.md %})
 * [Extension repositories]({% link docs/preview/extensions/extension_repositories.md %})
-* Statically linking extensions: see [Statically Linking Extensions](/docs/preview/dev/building/linking_extensions)
+* Statically linking extensions: see [Statically Linking Extensions]({% link docs/preview/extensions/advanced_installation_methods.md %}#statically-linking-extensions)
 
 ## Other Documentation Updates
 
