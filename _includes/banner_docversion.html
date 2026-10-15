@@ -16,7 +16,7 @@
 	{% elsif version_viewed == "preview" %}
 		{% assign banner_class = "preview" %}
 		{% assign banner_icon = "beaker-02" %}
-		{% capture banner_text %}This page is for DuckDB {{ site.preview_short_duckdb_version }} (preview).{% endcapture %}
+		{% capture banner_text %}This page is for DuckDB {{ site.next_major_short_duckdb_version }} (preview).{% endcapture %}
 	{% else %}
 		{% assign banner_class = "outdated" %}
 		{% assign banner_icon = "alert-octagon" %}
