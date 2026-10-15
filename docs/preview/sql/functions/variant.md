@@ -20,6 +20,7 @@ This section describes functions that operate on the [`VARIANT` type]({% link do
 | [`variant_exists(v, key)`](#variant_existsv-key) | Return whether the given key exists in a `VARIANT` object. |
 | [`variant_contains(haystack, needle)`](#variant_containshaystack-needle) | Return whether the `needle` `VARIANT` is contained in the `haystack` `VARIANT`. |
 | [`variant_comparator(v)`](#variant_comparatorv) | Return a binary sort key that orders a `VARIANT` value by the logical ordering of `VARIANT` values. |
+| [`variant_normalize(v)`](#variant_normalizev) | Return a canonical representation of a `VARIANT` value, so that values representing the same data share the same form. |
 | [`variant_group_object(key, value)`](#variant_group_objectkey-value) | Aggregate. Return a `VARIANT` object built from all `key`, `value` pairs in the group. |
 | [`variant_group_array(x)`](#variant_group_arrayx) | Aggregate. Collect all values of `x` into a `VARIANT` array. |
 
@@ -109,6 +110,16 @@ ORDER BY i::VARIANT;
 | -1 |
 | 0 |
 | 1 |
+
+#### `variant_normalize(v)`
+
+<div class="nostroke_table"></div>
+
+| **Description** | Return a canonical representation of a `VARIANT` value. Two `VARIANT` values that represent the same data normalize to the same result, regardless of how they were constructed or physically stored. This is useful when comparing or storing `VARIANT` values. |
+| **Example** | `variant_normalize({'b': [1, 2, 3], 'a': 42}::VARIANT)` |
+| **Result** | A normalized `VARIANT` |
+
+> New The `variant_normalize` function was added in DuckDB 2.0.
 
 #### `variant_group_object(key, value)`
 
