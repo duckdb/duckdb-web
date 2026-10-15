@@ -134,8 +134,8 @@ docs:
 
 extension_star_count: 0
 extension_star_count_pretty: 0
-extension_download_count: 655
-extension_download_count_pretty: 655
+extension_download_count: 684
+extension_download_count_pretty: 684
 image: '/images/community_extensions/social_preview/preview_community_extension_lance_conversion.png'
 layout: community_extension_doc
 ---
@@ -161,10 +161,11 @@ LOAD {{ page.extension.name }};
 
 <div class="extension_functions_table"></div>
 
-|  function_name   | function_type |                  description                  | comment |                      examples                      |
-|------------------|---------------|-----------------------------------------------|---------|----------------------------------------------------|
-| read_huggingface | table         | Reads a Hugging Face dataset's Parquet files. | NULL    | [SELECT * FROM read_huggingface('lhoestq/demo1');] |
-| read_warc        | table         | Reads records from a local or S3 WARC file.   | NULL    | [SELECT * FROM read_warc('archive.warc.gz');]      |
+|  function_name   | function_type |                             description                              | comment |                      examples                      |
+|------------------|---------------|----------------------------------------------------------------------|---------|----------------------------------------------------|
+| read_atif        | table         | Reads ATIF agent trajectories from a local or S3 JSON or JSONL file. | NULL    | [SELECT * FROM read_atif('trajectories.jsonl');]   |
+| read_huggingface | table         | Reads a Hugging Face dataset's Parquet files.                        | NULL    | [SELECT * FROM read_huggingface('lhoestq/demo1');] |
+| read_warc        | table         | Reads records from a local or S3 WARC file.                          | NULL    | [SELECT * FROM read_warc('archive.warc.gz');]      |
 
 ### Overloaded Functions
 
