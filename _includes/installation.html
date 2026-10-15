@@ -49,9 +49,9 @@
             <h2>Installation</h2>
             <div class="version-switch">
                 <span class="version-switch-toggle" role="radiogroup" aria-label="Version selection">
-                    <button class="version-switch-option active" data-version="current" role="radio" aria-checked="true" type="button">{{ site.current_duckdb_version }} (current)</button>
+                    <button class="version-switch-option active" data-version="preview" role="radio" aria-checked="true" type="button">{{ site.preview_duckdb_version }} (LTS)</button>
+                    <button class="version-switch-option" data-version="current" role="radio" aria-checked="false" type="button">{{ site.current_duckdb_version }}</button>
                     <button class="version-switch-option" data-version="lts" role="radio" aria-checked="false" type="button">{{ site.lts_duckdb_version }} (LTS)</button>
-                    <button class="version-switch-option" data-version="preview" role="radio" aria-checked="false" type="button">{{ site.preview_duckdb_version }} (preview)</button>
                     <span class="version-switch-slider"></span>
                 </span>
             </div>
@@ -92,9 +92,9 @@
     data-environment="cli"
     data-docs="{% link docs/current/clients/cli/overview.md %}">
 
-    <figure class="highlight">
-        <pre><code class="language-bash" data-lang="bash"><span class="nb">curl </span><a href="https://install.duckdb.org">https://install.duckdb.org</a> | <span class="nb">bash</span></code></pre>
-    </figure>
+{%- highlight bash -%}
+curl https://install.duckdb.org | DUCKDB_VERSION={{ site.current_duckdb_version }} bash
+{%- endhighlight -%}
 
 <div class="alternative">
 
@@ -143,7 +143,7 @@ curl https://install.duckdb.org | DUCKDB_VERSION={{ site.lts_duckdb_version }} b
     data-docs="{% link docs/preview/clients/cli/overview.md %}">
 
 {%- highlight bash -%}
-curl https://install.duckdb.org | DUCKDB_VERSION=alpha bash
+curl https://install.duckdb.org | bash
 {%- endhighlight -%}
 
 <div class="alternative">
@@ -159,9 +159,9 @@ curl https://install.duckdb.org | DUCKDB_VERSION=alpha bash
     data-environment="cli"
     data-docs="{% link docs/current/clients/cli/overview.md %}">
 
-<figure class="highlight">
-    <pre><code class="language-bash" data-lang="bash"><span class="nb">curl </span><a href="https://install.duckdb.org">https://install.duckdb.org</a> | <span class="nb">bash</span></code></pre>
-</figure>
+{%- highlight bash -%}
+curl https://install.duckdb.org | DUCKDB_VERSION={{ site.current_duckdb_version }} bash
+{%- endhighlight -%}
 
 <div class="alternative">
 
@@ -224,7 +224,7 @@ curl https://install.duckdb.org | DUCKDB_VERSION={{ site.lts_duckdb_version }} b
     data-docs="{% link docs/preview/clients/cli/overview.md %}">
 
 {%- highlight bash -%}
-curl https://install.duckdb.org | DUCKDB_VERSION=alpha bash
+curl https://install.duckdb.org | bash
 {%- endhighlight -%}
 
 <div class="alternative">
