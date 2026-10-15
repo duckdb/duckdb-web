@@ -2047,6 +2047,10 @@
                   "url": "building_extensions"
                 },
                 {
+                  "page": "Statically Linking Extensions",
+                  "url": "linking_extensions"
+                },
+                {
                   "page": "Android",
                   "url": "android"
                 },
