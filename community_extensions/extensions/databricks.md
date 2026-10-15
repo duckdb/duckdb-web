@@ -8,7 +8,7 @@ excerpt: |
 extension:
   name: databricks
   description: Read and write Databricks tables directly from DuckDB.
-  version: 0.1.0
+  version: 0.2.0
   language: C++
   build: cmake
   license: MIT
@@ -20,7 +20,7 @@ extension:
 
 repo:
   github: altertable-ai/duckdb-databricks
-  ref: 1f64b810cde2010fd9c35cb6f7b5f1067e1d99af
+  ref: 272162459a35364c0cb5639b2bc035bb8591d826
 
 docs:
   hello_world: |
@@ -52,10 +52,10 @@ docs:
     - writes with `INSERT`, `COPY`, `CREATE TABLE AS`, `UPDATE`, `DELETE`, and `TRUNCATE`
     - `databricks_query` and `databricks_execute` for Databricks SQL that DuckDB cannot express
 
-extension_star_count: 1
-extension_star_count_pretty: 1
-extension_download_count: 320
-extension_download_count_pretty: 320
+extension_star_count: 2
+extension_star_count_pretty: 2
+extension_download_count: 706
+extension_download_count_pretty: 706
 image: '/images/community_extensions/social_preview/preview_community_extension_databricks.png'
 layout: community_extension_doc
 ---

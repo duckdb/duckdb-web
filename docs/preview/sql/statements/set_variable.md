@@ -28,6 +28,17 @@ SELECT 20 + getvariable('my_var') AS total;
 |------:|
 | 50    |
 
+> New The `$⟨variable⟩` shorthand is introduced in DuckDB 2.0.
+
+As a shorthand for `getvariable`, a variable can be referenced directly with the `$⟨variable⟩` syntax anywhere an expression is allowed:
+
+```sql
+SET VARIABLE my_var = 30;
+SELECT 20 + $my_var AS total;
+```
+
+Variable names that are not valid identifiers can be quoted, for example `$"my var"`.
+
 If `SET VARIABLE` is invoked on an existing variable, it will overwrite its value:
 
 ```sql
@@ -92,6 +103,44 @@ SELECT COLUMNS(c -> c != getvariable('column_to_exclude')) FROM tbl;
 | col0 | col2 |
 |-----:|-----:|
 | 12   | 56   |
+
+### The `$name` Shorthand
+
+> New Referencing a variable with the `$name` shorthand is introduced in DuckDB 2.0.
+
+As a shorthand for `getvariable`, you can reference a session variable directly with `$name`:
+
+```sql
+SET VARIABLE my_var = 30;
+SELECT 20 + $my_var AS total;
+```
+
+| total |
+|------:|
+| 50    |
+
+For a variable that is set, `$name` and `getvariable('name')` return the same value:
+
+```sql
+SELECT $my_var = getvariable('my_var') AS same;
+```
+
+| same |
+|------|
+| true |
+
+The two forms differ when the variable is not set: `getvariable` returns `NULL`, while a `$name` reference raises an error.
+
+```sql
+SELECT $undefined_var;
+```
+
+```console
+Invalid Input Error:
+Values were not provided for the following parameters: undefined_var
+```
+
+This is because `$name` is a [prepared statement parameter]({% link docs/preview/sql/query_syntax/prepared_statements.md %}) that is filled from the session variable of the same name. This also lets variables act as [default values for prepared statements]({% link docs/preview/sql/query_syntax/prepared_statements.md %}#session-variables-as-default-values).
 
 ### Syntax
 

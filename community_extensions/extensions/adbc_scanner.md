@@ -6,7 +6,7 @@ excerpt: |
   An ADBC client extension for DuckDB that can access ADBC provided data sources.
 
 docs:
-  extended_description: For more information regarding usage, see the [documentation](https://query.farm/duckdb_extension_adbc_scanner.html).
+  extended_description: For more information regarding usage, see the [documentation](https://query.farm/products/extensions/adbc_scanner/).
 extension:
   build: cmake
   description: An ADBC client extension for DuckDB that can access ADBC provided data
@@ -21,12 +21,12 @@ extension:
 repo:
   andium: 84794a00a6837c31f0779c56f2ce0e83df1bb7b6
   github: query-farm/adbc_scanner
-  ref: 03b5b7fd29200029d25e63d181d0995dbafc6b07
+  ref: 9723c3cb908270099d82d879a7ad4caeac1879ee
 
 extension_star_count: 25
 extension_star_count_pretty: 25
-extension_download_count: 1893
-extension_download_count_pretty: 1.9k
+extension_download_count: 2206
+extension_download_count_pretty: 2.2k
 image: '/images/community_extensions/social_preview/preview_community_extension_adbc_scanner.png'
 layout: community_extension_doc
 ---

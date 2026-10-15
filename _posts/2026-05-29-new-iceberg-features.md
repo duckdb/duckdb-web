@@ -5,7 +5,7 @@ authors:
   - Tom Ebergen
   - Thijs Bruineman
 thumb: "/images/blog/thumbs/iceberg-in-v153.svg"
-image: "/images/blog/thumbs/iceberg-in-v153.jpg"
+image: "/images/blog/thumbs/iceberg-in-v153.png"
 excerpt: "DuckDB-Iceberg now has a number of new features supporting Iceberg Tables and Iceberg REST Catalogs: `MERGE INTO`, `ALTER TABLE`, partition transforms, V3 support, and others!"
 tag: extensions
 ---

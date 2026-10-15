@@ -8,7 +8,7 @@ excerpt: |
 extension:
   name: func_apply
   description: Dynamic function invocation - call any scalar function or macro by name at runtime
-  version: 0.3.3
+  version: 0.4.0
   language: C++
   build: cmake
   license: MIT
@@ -16,13 +16,19 @@ extension:
     - teaguesterling
 repo:
   github: teaguesterling/duckdb_func_apply
-  ref: 3ba0d303de29032a83290c3961838a1ae883642b
+  ref: 9f119877ef5c10ef84c8cc593ee98ee199be5302
   # ref_next == ref (deliberate): validate the shipped release on DuckDB
-  # v2.0-cyanoptera (carries the v2.0 compat fixes) instead of skipping it.
-  # v0.3.3 (tag v0.3.3) completes the family-C named_parameter -> FunctionSignature
-  # typed-kwargs port; verified by a real cyanoptera CI leg (build AND test on
-  # v2.0) on this exact commit, plus a version-drift guard.
-  ref_next: 3ba0d303de29032a83290c3961838a1ae883642b
+  # v2.0-cyanoptera instead of skipping it. A STALE ref_next is worse than none --
+  # it validates the PREVIOUS release and still reports green.
+  # v0.4.0 (tag v0.4.0) adds func_dispatch() and fixes a return-type bug in
+  # apply(). Verified on this exact commit by a real cyanoptera leg -- build AND
+  # test on v2.0, linux_amd64 and osx_arm64 -- plus all nine stable arches, the
+  # format/tidy checks and the DuckDB version-drift guard.
+  # The v2.0 leg earned this: an earlier commit of the same work compiled on both
+  # lines but DIVERGED at run time (a typed-NULL probe bound on v1.5.6 and raised
+  # a binder error on cyanoptera). Caught by that leg, fixed by removing the
+  # version-dependent path, and re-verified here.
+  ref_next: 9f119877ef5c10ef84c8cc593ee98ee199be5302
   # andium (DuckDB v1.4.5 track) intentionally left at the pre-v0.2.0 commit:
   # v0.3.0, like v0.2.0 before it, is a DuckDB v1.5.4 tree and is not
   # build-verified against v1.4.5. The v0.2.0 security fix
@@ -65,6 +71,7 @@ docs:
     | `apply_with(func_name, args, kwargs)` | Call a function with arguments as a list |
     | `apply_table(func_name, ...args)` | Call a table function by name with arguments |
     | `apply_table_with(func_name, args, kwargs)` | Call a table function with arguments as a list |
+    | `func_dispatch(routes, key, ...args)` | Dispatch to the function named by `routes[key]`, with real return types |
     | `function_exists(name)` | Check if a function exists |
 
     ## Use Cases
@@ -80,6 +87,34 @@ docs:
     SELECT apply(t.func_name, d.value) as result
     FROM data d JOIN transforms t ON d.column = t.column_name;
     ```
+
+    ### Routing With func_dispatch
+
+    ```sql
+    CREATE MACRO clean_git(p)   AS regexp_replace(p, '^git://', '');
+    CREATE MACRO clean_http(p)  AS regexp_replace(p, '^https?://', '');
+    CREATE MACRO clean_other(p) AS p;
+
+    SELECT func_dispatch(MAP{'git':   'clean_git',
+                             'https': 'clean_http',
+                             '*':     'clean_other'},
+                         split_part(url, ':', 1),
+                         url) AS cleaned
+    FROM urls;
+    ```
+
+    The `'*'` entry catches any key the map does not name. Unlike `apply()` with a
+    function name that is not a constant, `func_dispatch` binds every candidate in a
+    constant routing map at plan time, so the result keeps its real type instead of
+    collapsing to `VARCHAR`:
+
+    ```sql
+    CREATE MACRO pair(x) AS [x, x];
+    SELECT typeof(func_dispatch(MAP{'a': 'pair'}, 'a', 7));  -- INTEGER[]
+    ```
+
+    All routes in a constant map must accept the forwarded arguments, and the
+    session security policy applies to every route including `'*'`.
 
     ### Dynamic Function Selection
 
@@ -125,8 +160,8 @@ docs:
 
 extension_star_count: 5
 extension_star_count_pretty: 5
-extension_download_count: 970
-extension_download_count_pretty: 970
+extension_download_count: 1035
+extension_download_count_pretty: 1.0k
 image: '/images/community_extensions/social_preview/preview_community_extension_func_apply.png'
 layout: community_extension_doc
 ---
@@ -152,21 +187,22 @@ LOAD {{ page.extension.name }};
 
 <div class="extension_functions_table"></div>
 
-|         function_name          | function_type |                                            description                                            | comment |                        examples                        |
-|--------------------------------|---------------|---------------------------------------------------------------------------------------------------|---------|--------------------------------------------------------|
-| apply                          | scalar        | NULL                                                                                              | NULL    |                                                        |
-| apply_table                    | table         | Dynamically invoke a table function by name with variable arguments.                              | NULL    | [SELECT * FROM apply_table('range', 5)]                |
-| apply_table_with               | table         | Dynamically invoke a table function with structured args and kwargs.                              | NULL    | [SELECT * FROM apply_table_with('range', args := [5])] |
-| apply_with                     | scalar        | Dynamically invoke a scalar function with a list of positional args and struct of kwargs.         | NULL    | [apply_with('upper', args := ['hello'])]               |
-| func_apply_get_security_config | scalar        | Get the current security configuration as a JSON string.                                          | NULL    | [func_apply_get_security_config()]                     |
-| func_apply_lock_security       | scalar        | Lock the current security configuration to prevent further modifications.                         | NULL    | [func_apply_lock_security()]                           |
-| func_apply_set_blacklist       | scalar        | Set the list of disallowed functions in blacklist security mode.                                  | NULL    | [func_apply_set_blacklist(['system', 'read_csv'])]     |
-| func_apply_set_block_default   | scalar        | Set the default return value when a blocked function is encountered.                              | NULL    | [func_apply_set_block_default('BLOCKED')]              |
-| func_apply_set_on_block        | scalar        | Set behavior when a blocked function is called ('error', 'null', or 'default').                   | NULL    | [func_apply_set_on_block('error')]                     |
-| func_apply_set_security_mode   | scalar        | Set the security mode for dynamic function execution ('permissive', 'whitelist', or 'blacklist'). | NULL    | [func_apply_set_security_mode('permissive')]           |
-| func_apply_set_validator       | scalar        | Set a custom SQL validator function to check candidate function invocations.                      | NULL    | [func_apply_set_validator('my_validator')]             |
-| func_apply_set_whitelist       | scalar        | Set the list of allowed functions in whitelist security mode.                                     | NULL    | [func_apply_set_whitelist(['upper', 'lower', 'abs'])]  |
-| function_exists                | scalar        | Check if a function exists in the catalog.                                                        | NULL    | [function_exists('upper')]                             |
+|         function_name          | function_type |                                            description                                            | comment |                            examples                             |
+|--------------------------------|---------------|---------------------------------------------------------------------------------------------------|---------|-----------------------------------------------------------------|
+| apply                          | scalar        | NULL                                                                                              | NULL    |                                                                 |
+| apply_table                    | table         | Dynamically invoke a table function by name with variable arguments.                              | NULL    | [SELECT * FROM apply_table('range', 5)]                         |
+| apply_table_with               | table         | Dynamically invoke a table function with structured args and kwargs.                              | NULL    | [SELECT * FROM apply_table_with('range', args := [5])]          |
+| apply_with                     | scalar        | Dynamically invoke a scalar function with a list of positional args and struct of kwargs.         | NULL    | [apply_with('upper', args := ['hello'])]                        |
+| func_apply_get_security_config | scalar        | Get the current security configuration as a JSON string.                                          | NULL    | [func_apply_get_security_config()]                              |
+| func_apply_lock_security       | scalar        | Lock the current security configuration to prevent further modifications.                         | NULL    | [func_apply_lock_security()]                                    |
+| func_apply_set_blacklist       | scalar        | Set the list of disallowed functions in blacklist security mode.                                  | NULL    | [func_apply_set_blacklist(['system', 'read_csv'])]              |
+| func_apply_set_block_default   | scalar        | Set the default return value when a blocked function is encountered.                              | NULL    | [func_apply_set_block_default('BLOCKED')]                       |
+| func_apply_set_on_block        | scalar        | Set behavior when a blocked function is called ('error', 'null', or 'default').                   | NULL    | [func_apply_set_on_block('error')]                              |
+| func_apply_set_security_mode   | scalar        | Set the security mode for dynamic function execution ('permissive', 'whitelist', or 'blacklist'). | NULL    | [func_apply_set_security_mode('permissive')]                    |
+| func_apply_set_validator       | scalar        | Set a custom SQL validator function to check candidate function invocations.                      | NULL    | [func_apply_set_validator('my_validator')]                      |
+| func_apply_set_whitelist       | scalar        | Set the list of allowed functions in whitelist security mode.                                     | NULL    | [func_apply_set_whitelist(['upper', 'lower', 'abs'])]           |
+| func_dispatch                  | scalar        | Dispatch to the function named by routes[key], forwarding the remaining arguments.                | NULL    | [func_dispatch(MAP {'a': 'upper', '*': 'lower'}, 'a', 'hello')] |
+| function_exists                | scalar        | Check if a function exists in the catalog.                                                        | NULL    | [function_exists('upper')]                                      |
 
 ### Overloaded Functions
 

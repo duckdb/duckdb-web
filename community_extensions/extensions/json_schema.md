@@ -6,7 +6,7 @@ excerpt: |
   Adds support for validating JSON data with JSON schemas.
 
 docs:
-  extended_description: For more information regarding usage, see the [documentation](https://query.farm/duckdb_extension_json_schema.html).
+  extended_description: For more information regarding usage, see the [documentation](https://query.farm/products/extensions/json_schema/).
 extension:
   build: cmake
   description: Adds support for validating JSON data with JSON schemas.
@@ -23,8 +23,8 @@ repo:
 
 extension_star_count: 6
 extension_star_count_pretty: 6
-extension_download_count: 1350
-extension_download_count_pretty: 1.4k
+extension_download_count: 1161
+extension_download_count_pretty: 1.2k
 image: '/images/community_extensions/social_preview/preview_community_extension_json_schema.png'
 layout: community_extension_doc
 ---

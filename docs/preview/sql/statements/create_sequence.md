@@ -147,7 +147,7 @@ SELECT currval('serial') AS currval;
 
 ### Setting the Sequence Value
 
-> New This feature will be introduced in DuckDB 2.0.
+> New This feature is introduced in DuckDB 2.0.
 
 Use `setval` to set a sequence to a given value (PostgreSQL-style). The optional third argument `is_called` defaults to `true`: the next `nextval` returns `value + increment`. If `is_called` is `false`, the next `nextval` returns `value`.
 

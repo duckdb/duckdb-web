@@ -6,7 +6,7 @@ excerpt: |
   Compact geometry encoding using delta-encoded coordinates. Achieves 3-4x smaller geometry storage and wire transfer compared to WKB.
 
 docs:
-  extended_description: For more information regarding usage, see the [documentation](https://github.com/Query-farm/geosilo/blob/main/docs/README.md).
+  extended_description: For more information regarding usage, see the [documentation](https://query.farm/products/extensions/geosilo/).
 extension:
   build: cmake
   description: Compact geometry encoding using delta-encoded coordinates. Achieves
@@ -22,8 +22,8 @@ repo:
 
 extension_star_count: 25
 extension_star_count_pretty: 25
-extension_download_count: 1049
-extension_download_count_pretty: 1.0k
+extension_download_count: 869
+extension_download_count_pretty: 869
 image: '/images/community_extensions/social_preview/preview_community_extension_geosilo.png'
 layout: community_extension_doc
 ---

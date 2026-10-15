@@ -6,7 +6,7 @@ excerpt: |
   Enables text-based data visualization directly in SQL queries, including ASCII/Unicode bar charts, density plots, and sparklines for lightweight analytics and dashboards.
 
 docs:
-  extended_description: For more information regarding usage, see the [documentation](https://query.farm/duckdb_extension_textplot.html).
+  extended_description: For more information regarding usage, see the [documentation](https://query.farm/products/extensions/textplot/).
 extension:
   build: cmake
   description: Enables text-based data visualization directly in SQL queries, including
@@ -25,7 +25,7 @@ repo:
 
 extension_star_count: 29
 extension_star_count_pretty: 29
-extension_download_count: 1368
+extension_download_count: 1441
 extension_download_count_pretty: 1.4k
 image: '/images/community_extensions/social_preview/preview_community_extension_textplot.png'
 layout: community_extension_doc

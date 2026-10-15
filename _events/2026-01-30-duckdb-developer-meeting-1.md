@@ -11,11 +11,6 @@ category: core
 location: "Pakhuis de Zwijger, Amsterdam"
 ---
 
-<img src="{% link images/events/duckdb-developer-meeting-1-splashscreen.svg %}"
-     alt="DuckDB Developer Meeting #1 splashscreen"
-     width="680"
-     />
-
 We are excited to announce the first DuckDB Developer Meeting, organized by [DuckLabs](https://ducklabs.com/).
 The event will feature talks from DuckDB developers, and is aimed at developers who build DuckDB extensions or complex applications on top of DuckDB.
 

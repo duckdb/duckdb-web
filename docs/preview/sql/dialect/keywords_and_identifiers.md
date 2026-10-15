@@ -14,6 +14,8 @@ Similarly to other SQL dialects and programming languages, identifiers in DuckDB
 * Identifiers can be quoted using double-quote characters (`"`). Quoted identifiers can use any keyword, whitespace or special character, e.g., `"SELECT"` and `" § 🦆 ¶ "` are valid identifiers.
 * Double quotes can be escaped by repeating the quote character, e.g., to create an identifier named `IDENTIFIER "X"`, use `"IDENTIFIER ""X"""`.
 
+> New As of DuckDB 2.0, identifiers can also be quoted using backtick characters (`` ` ``), following exactly the same rules as double-quoted identifiers. A backtick is escaped by doubling it, e.g., `` `a``b` `` denotes the identifier `` a`b ``. Backtick-quoted identifiers are never case-folded and work everywhere double-quoted identifiers do. Note that stored and round-tripped DDL (for example in [`duckdb_views()`]({% link docs/preview/sql/meta/duckdb_table_functions.md %}#duckdb_views)) still uses double quotes.
+
 ### Deduplicating Identifiers
 
 In some cases, duplicate identifiers can occur, e.g., column names may conflict when unnesting a nested data structure.

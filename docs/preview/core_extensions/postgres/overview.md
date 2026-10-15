@@ -38,6 +38,8 @@ By default, all schemas are attached. When working with large instances, it can 
 ATTACH 'dbname=postgres user=postgres host=127.0.0.1' AS db (TYPE postgres, SCHEMA 'public');
 ```
 
+> Warning Avoid including credentials, such as a password, directly in the connection string. If a connection error occurs, the full connection string, including your credentials, may appear in the resulting error message. For better security, store credentials using [secrets]({% link docs/preview/configuration/secrets_manager.md %}) instead, as described in [Configuring via Secrets](#configuring-via-secrets).
+
 > Deprecated The old `postgres_attach` function is deprecated. It is recommended to switch over to the new `ATTACH` syntax.
 
 ### Configuration
@@ -322,6 +324,10 @@ The `postgres_execute` function allows running arbitrary queries within PostgreS
 ATTACH 'dbname=postgresscanner' AS postgres_db (TYPE postgres);
 CALL postgres_execute('postgres_db', 'CREATE TABLE my_table (i INTEGER)');
 ```
+
+### Routing a Session to PostgreSQL
+
+> New As of DuckDB 2.0, you can route an entire session to an attached PostgreSQL database with the [`CONNECT` statement]({% link docs/preview/sql/statements/connect.md %}). While connected, the remote pushdown optimizer ships queries directly to the PostgreSQL server instead of pulling tables over the wire, and `DISCONNECT` returns the session to the local database.
 
 ## Settings
 

@@ -53,7 +53,7 @@ The secret can then be explicitly referenced using the `SECRET` parameter in the
 ATTACH '' AS postgres_db_one (TYPE postgres, SECRET postgres_secret_one);
 ```
 
-> Warning Avoid including credentials directly in the connection string. If a connection error occurs, the full connection string (including your credentials) may be printed to the terminal output. For better security, store credentials using DuckDB-managed secrets.
+> Warning Avoid including credentials, such as a password, directly in the connection string. If a connection error occurs, the full connection string, including your credentials, may appear in the resulting error message. For better security, store credentials using DuckDB-managed secrets.
 
 ## Secret Configuration Options
 

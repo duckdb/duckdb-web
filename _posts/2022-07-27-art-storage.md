@@ -24,7 +24,7 @@ Adaptive Radix Trees are, in essence, [tries](https://en.wikipedia.org/wiki/trie
 
 ### Trie
 
-Tries are tree data structures, where each tree level holds information on part of the dataset. They are commonly exemplified with strings. In the figure below, you can see a trie representation of a table containing the strings "pedro", "paulo" and "peri". The root node represents the first character "p" with children "a" (from paulo) and "e" (from pedro and peri), and so on.
+Tries are tree data structures, where each tree level holds information on part of the dataset. They are commonly exemplified with strings. In the figure below, you can see a trie representation of a table containing the strings “pedro”, “paulo” and “peri”. The root node represents the first character “p” with children “a” (from paulo) and “e” (from pedro and peri), and so on.
 
 <img src="{% link images/blog/ART/string-trie.png %}"
      alt="String trie"

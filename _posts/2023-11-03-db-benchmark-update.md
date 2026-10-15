@@ -49,7 +49,7 @@ Many solutions do not spill to disk, so they did not require any modification to
 
 ### Results
 
-The first results you see are the 50 GB group by results. The benchmark runs every query twice per solution, and both runtimes are reported. The "first time" can be considered a cold run, and the "second time" can be considered a hot run. DuckDB and DuckDB-latest perform very well among all dataset sizes and variations.
+The first results you see are the 50 GB group by results. The benchmark runs every query twice per solution, and both runtimes are reported. The “first time” can be considered a cold run, and the “second time” can be considered a hot run. DuckDB and DuckDB-latest perform very well among all dataset sizes and variations.
 
 The team at DuckLabs has been hard at work improving the performance of the out-of-core hash aggregates and joins. The most notable improvement is the performance of query 5 in the advanced group by queries. The cold run is almost an order of magnitude better than every other solution! DuckDB is also one of only two solutions to finish the 50 GB join query. Some solutions are experiencing timeouts on the 50 GB datasets. Solutions running the 50 GB group by queries are killed after running for 180 minutes, meaning all 10 group by queries need to finish within the 180 minutes. Solutions running the 50 GB join queries are killed after running for 360 minutes.
 

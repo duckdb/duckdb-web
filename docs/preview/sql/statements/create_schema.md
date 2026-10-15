@@ -42,6 +42,18 @@ FROM s1.t s1t, s2.t s2t
 WHERE s1t.other_id = s2t.id;
 ```
 
+## Nested Schemas
+
+> New Support for nested schemas is introduced in DuckDB 2.0.
+
+Schemas can be nested within other schemas. Objects in a nested schema are referenced using their fully qualified, dot-separated path:
+
+```sql
+CREATE SCHEMA finance;
+CREATE SCHEMA finance.reports;
+CREATE TABLE finance.reports.q3 (revenue DECIMAL);
+```
+
 ## Syntax
 
 <div id="rrdiagram"></div>

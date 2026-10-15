@@ -40,6 +40,8 @@ The view that describes the catalog information for columns is `information_sche
 | `numeric_precision` | If `data_type` identifies a numeric type, this column contains the (declared or implicit) precision of the type for this column. The precision indicates the number of significant digits. For all other data types, this column is `NULL`. |`INTEGER`| `18` |
 | `numeric_scale` | If `data_type` identifies a numeric type, this column contains the (declared or implicit) scale of the type for this column. The scale indicates the number of digits after the decimal point. For all other data types, this column is `NULL`. |`INTEGER`| `2` |
 | `datetime_precision` | If `data_type` identifies a date, time, timestamp, or interval type, this column contains the (declared or implicit) fractional seconds precision of the type for this column, that is, the number of decimal digits maintained following the decimal point in the seconds value. No fractional seconds are currently supported in DuckDB. For all other data types, this column is `NULL`. |`INTEGER`| `0` |
+| `is_generated` | `ALWAYS` if the column is a [generated column]({% link docs/preview/sql/statements/create_table.md %}#generated-columns), `NEVER` otherwise. Available as of DuckDB 2.0. |`VARCHAR`| `'NEVER'` |
+| `generation_expression` | If the column is a generated column, the expression used to compute it; `NULL` otherwise. Available as of DuckDB 2.0. |`VARCHAR`| `NULL` |
 
 ### `constraint_column_usage`: Constraint Column Usage
 

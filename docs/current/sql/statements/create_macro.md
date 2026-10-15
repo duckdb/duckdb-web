@@ -198,6 +198,25 @@ CREATE TABLE tbl AS SELECT unnest([42, 43]) AS x, 100 AS y;
 SELECT * FROM checksum('tbl');
 ```
 
+A table macro's expression is bound when the macro is created, so file names written directly into the expression are resolved at creation time. For example, the following fails at creation time when the file is not present:
+
+```sql
+CREATE MACRO read_pipe() AS TABLE FROM read_csv('/dev/stdin');
+```
+
+```console
+IO Error:
+No files found that match the pattern "/dev/stdin"
+```
+
+To resolve the file name at call time instead, pass it as a parameter. Supplying a default value keeps the macro callable without arguments:
+
+```sql
+CREATE OR REPLACE TEMPORARY MACRO read_pipe(pipe := '/dev/stdin') AS TABLE
+    FROM read_csv(pipe);
+FROM read_pipe();
+```
+
 ## Overloading
 
 It is possible to overload a macro based on the types or the number of its parameters; this works for both scalar and table macros.

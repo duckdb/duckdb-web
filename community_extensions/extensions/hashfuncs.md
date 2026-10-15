@@ -6,7 +6,7 @@ excerpt: |
   Non-cryptographic hash functions, xxHash, rapidhash and Murmurhash3
 
 docs:
-  extended_description: For more information regarding usage, see the [documentation](https://query.farm/duckdb_extension_hashfuncs.html).
+  extended_description: For more information regarding usage, see the [documentation](https://query.farm/products/extensions/hashfuncs/).
 extension:
   build: cmake
   description: Non-cryptographic hash functions, xxHash, rapidhash and Murmurhash3
@@ -23,8 +23,8 @@ repo:
 
 extension_star_count: 15
 extension_star_count_pretty: 15
-extension_download_count: 55259
-extension_download_count_pretty: 55.3k
+extension_download_count: 58606
+extension_download_count_pretty: 58.6k
 image: '/images/community_extensions/social_preview/preview_community_extension_hashfuncs.png'
 layout: community_extension_doc
 ---

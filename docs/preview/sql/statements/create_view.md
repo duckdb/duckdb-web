@@ -26,7 +26,7 @@ Create a view and replace the column names:
 CREATE VIEW view1 (a) AS SELECT 42;
 ```
 
-> New The `SECURE VIEW` feature will be introduced in DuckDB 2.0.
+> New The `SECURE VIEW` feature is introduced in DuckDB 2.0.
 
 Create a secure view (hides internals from functions such as `stats()` and `EXPLAIN ANALYZE`):
 

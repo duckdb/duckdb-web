@@ -197,28 +197,24 @@ body.installation{
 	.instruction-collection{
 		margin-top: 50px;
 
-		h2{
+		.installation-heading{
 			display: flex;
 			align-items: center;
 			flex-wrap: wrap;
-			gap: 24px;
+			gap: 16px 24px;
+			margin-bottom: 30px;
 
+			h2{
+				margin: 0;
+			}
 		}
 
 		.version-switch{
-			display: inline-flex;
-			align-items: center;
-			gap: 12px;
+			display: flex;
 
 			&[hidden]{
 				display: none;
 			}
-		}
-
-		.version-switch-label{
-			@include label-1;
-			color: var(--main-text-secondary-color, #666);
-			font-weight: 400;
 		}
 
 		.version-switch-toggle{
@@ -231,7 +227,8 @@ body.installation{
 			z-index: 1;
 			background: none;
 			border: none;
-			padding: 12px 14px;
+			padding: 12px 16px;
+			margin-right: -4px;
 			border-radius: var(--page-radius-pill);
 			cursor: pointer;
 			@include label-1;
@@ -242,6 +239,10 @@ body.installation{
 			&:hover:not(:disabled),
 			&.active{
 				color: var(--interactive-filter-selected-text-color, #1A1A1A);
+			}
+
+			&:last-of-type{
+				margin-right: 0;
 			}
 
 			&:disabled{
@@ -257,9 +258,9 @@ body.installation{
 
 		.version-switch-slider{
 			position: absolute;
-			top: calc(50% - 18px);
+			top: 0;
 			left: 0;
-			height: 36px;
+			height: 100%;
 			border-radius: var(--page-radius-pill);
 			background: var(--interactive-filter-selected-background-color, #E6E6E6);
 			transition: transform 0.3s ease, width 0.3s ease;
