@@ -275,7 +275,7 @@ DuckBB v1.4.0 fixes some [scaling issues](https://github.com/duckdb/duckdb/pull/
 
 ### macOS Notarization
 
-macOS has a fairly advanced model to ensure system integrity built around cryptographic signatures along with so-called “[notarization](https://developer.apple.com/documentation/Security/notarizing-macos-software-before-distribution)” by Apple. We had been signing our binaries [for about two years already](https://github.com/duckdb/duckdb/pull/7484).
+macOS has a fairly advanced model to ensure system integrity built around cryptographic signatures along with so-called [“notarization”](https://developer.apple.com/documentation/Security/notarizing-macos-software-before-distribution) by Apple. We had been signing our binaries [for about two years already](https://github.com/duckdb/duckdb/pull/7484).
 Starting from this release, the DuckDB command line utility (`duckdb`) and the dynamic library `libduckdb...sdylib` are _released with this notarization_. This will reduce the amount of complaints when using web browsers to download our binaries. Unfortunately, macOS does not yet fully support notarization of command line utility, so the “open with double click” use case will still have to wait. The recommended path to install the CLI on macOS is still our install script:
 
 ```batch

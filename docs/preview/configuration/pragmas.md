@@ -148,6 +148,8 @@ The memory limit can also be specified as a percentage of the total system memor
 SET memory_limit = '60%';
 ```
 
+> New As of DuckDB 2.0, `max_memory` (and its alias `memory_limit`) accepts a percentage of the total system memory. The percentage must be between 0 and 100 and is computed relative to the total system memory. Values that cannot be parsed as a valid percentage raise an error.
+
 > Warning The specified memory limit is only applied to the buffer manager.
 > For most queries, the buffer manager handles the majority of the data processed.
 > However, certain in-memory data structures such as [vectors]({% link docs/preview/internals/vector.md %}) and query results are allocated outside of the buffer manager.
@@ -161,6 +163,16 @@ Set the amount of threads for parallel query execution:
 ```sql
 SET threads = 4;
 ```
+
+#### Maximum Execution Time
+
+> New As of DuckDB 2.0, the `max_execution_time` setting bounds the wall-clock time of a query in milliseconds. When the limit is exceeded, the query is aborted with the error `Query exceeded maximum execution time`. The default is `0`, meaning no limit.
+
+```sql
+SET max_execution_time = 5000;
+```
+
+This is a per-connection setting with a global fallback: a local value overrides a value set with `SET GLOBAL`, and `RESET max_execution_time` restores the global value.
 
 ## Collations
 
@@ -417,20 +429,24 @@ SET profiling_mode = 'all';
 
 ### Custom Metrics
 
-By default, profiling enables all metrics except those activated by detailed profiling.
+> New The `tracked_metrics` setting is introduced in DuckDB 2.0, replacing the `custom_profiling_settings` `PRAGMA` used in earlier versions.
 
-Using the `custom_profiling_settings` `PRAGMA`, each metric, including those from detailed profiling, can be individually enabled or disabled.
-This `PRAGMA` accepts a JSON object with metric names as keys and Boolean values to toggle them on or off.
-Settings specified by this `PRAGMA` override the default behavior.
+By default, profiling collects all metrics. To collect only a subset, use the `tracked_metrics` setting, which accepts a list of metric glob patterns. A metric is collected if its name matches any of the patterns. The default value, `['*']`, matches all metrics.
 
-> Note This only affects the metrics when the `enable_profiling` is set to `json` or `no_output`.
+> Note This only affects the metrics when `enable_profiling` is set to `json` or `no_output`.
 > The `query_tree` and `query_tree_optimizer` always use a default set of metrics.
 
-In the following example, the `CPU_TIME` metric is disabled.
-The `EXTRA_INFO`, `OPERATOR_CARDINALITY`, and `OPERATOR_TIMING` metrics are enabled.
+Metric names are grouped by stage and written in `group.metric` form, for example `query.cpu_time` or `operator.timing`. The following example collects only the query-level metrics and every operator metric:
 
 ```sql
-SET custom_profiling_settings = '{"CPU_TIME": "false", "EXTRA_INFO": "true", "OPERATOR_CARDINALITY": "true", "OPERATOR_TIMING": "true"}';
+SET tracked_metrics = ['query.*', 'operator.*'];
+```
+
+To list all available metric names, their types, and units, query the `duckdb_available_metrics()` table function:
+
+```sql
+SELECT metric_name, metric_type, unit
+FROM duckdb_available_metrics();
 ```
 
 The profiling documentation contains an overview of the available [metrics]({% link docs/preview/dev/profiling.md %}#metrics).
@@ -585,6 +601,16 @@ Don't run a `CHECKPOINT` on shutdown:
 ```sql
 PRAGMA disable_checkpoint_on_shutdown;
 ```
+
+#### Checkpoint on Detach
+
+> New As of DuckDB 2.0, the `checkpoint_on_detach` setting controls whether a `CHECKPOINT` runs when a database is detached:
+
+```sql
+SET checkpoint_on_detach = 'ENABLED';
+```
+
+The accepted values are `ENABLED` (request a checkpoint on detach), `DISABLED` (never checkpoint on detach), and `DEFAULT` (defer to the global `checkpoint_on_shutdown` behavior). A requested checkpoint still does not occur while another connection references the database. This is a per-session setting.
 
 ## Temp Directory for Spilling Data to Disk
 

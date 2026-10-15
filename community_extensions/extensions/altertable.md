@@ -8,7 +8,7 @@ excerpt: |
 extension:
   name: altertable
   description: Query Altertable's lakehouse directly from your local DuckDB.
-  version: 0.5.1
+  version: 0.6.0
   language: C++
   build: cmake
   excluded_platforms: wasm_mvp;wasm_eh;wasm_threads
@@ -19,7 +19,7 @@ extension:
   requires_toolchains: "vcpkg;parser_tools"
 repo:
   github: altertable-ai/duckdb-altertable
-  ref: 0def150caa4c82b4e6886be99117584d529bd4ce
+  ref: bcf258328c68bef3236bd196096cec0f9e576220
 docs:
   hello_world: |
     INSTALL altertable FROM community;
@@ -55,8 +55,8 @@ docs:
 
 extension_star_count: 1
 extension_star_count_pretty: 1
-extension_download_count: 1037
-extension_download_count_pretty: 1.0k
+extension_download_count: 827
+extension_download_count_pretty: 827
 image: '/images/community_extensions/social_preview/preview_community_extension_altertable.png'
 layout: community_extension_doc
 ---

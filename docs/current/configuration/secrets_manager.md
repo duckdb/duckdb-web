@@ -8,7 +8,7 @@ title: Secrets Manager
 
 The **Secrets manager** provides a unified user interface for secrets across all backends that use them. Secrets can be scoped, so different storage prefixes can have different secrets, allowing for example to join data across organizations in a single query. Secrets can also be persisted, so that they do not need to be specified every time DuckDB is launched.
 
-> Warning Persistent secrets are stored in unencrypted binary format on the disk.
+> Persistent secrets are stored in unencrypted binary format in the `~/.duckdb/stored_secrets` directory. They are protected by file system permissions (mode `600`), similar to how SSH private keys are stored: only the user running the DuckDB process can read and write them.
 
 ## Types of Secrets
 

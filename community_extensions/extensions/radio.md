@@ -6,7 +6,7 @@ excerpt: |
   Allow interaction with event buses like Websocket and Redis publish/subscribe servers.
 
 docs:
-  extended_description: For more information regarding usage, see the [documentation](https://query.farm/duckdb_extension_radio.html).
+  extended_description: For more information regarding usage, see the [documentation](https://query.farm/products/extensions/radio/).
 extension:
   build: cmake
   description: Allow interaction with event buses like Websocket and Redis publish/subscribe
@@ -25,8 +25,8 @@ repo:
 
 extension_star_count: 43
 extension_star_count_pretty: 43
-extension_download_count: 965
-extension_download_count_pretty: 965
+extension_download_count: 792
+extension_download_count_pretty: 792
 image: '/images/community_extensions/social_preview/preview_community_extension_radio.png'
 layout: community_extension_doc
 ---

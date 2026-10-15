@@ -22,6 +22,25 @@ Normally, the `GROUP BY` clause groups along a single dimension.
 Using the [`GROUPING SETS`, `CUBE` or `ROLLUP` clauses]({% link docs/preview/sql/query_syntax/grouping_sets.md %}) it is possible to group along multiple dimensions.
 See the [`GROUPING SETS`]({% link docs/preview/sql/query_syntax/grouping_sets.md %}) page for more information.
 
+## Grouping by `UNNEST`
+
+> New Grouping by `UNNEST` is introduced in DuckDB 2.0.
+
+[`UNNEST`]({% link docs/preview/sql/query_syntax/unnest.md %}) can be used directly in the `GROUP BY` clause to group by the elements of a list. This is useful for aggregating over the individual values of a list column:
+
+```sql
+SELECT unnest(tags) AS tag, count(*) AS n
+FROM (VALUES (['a', 'b']), (['b', 'c']), (['b'])) t(tags)
+GROUP BY unnest(tags)
+ORDER BY tag;
+```
+
+| tag |   n |
+|-----|----:|
+| a   |   1 |
+| b   |   3 |
+| c   |   1 |
+
 ## Examples
 
 Count the number of entries in the `addresses` table that belong to each different city:

@@ -6,7 +6,7 @@ excerpt: |
   Provides adds high-performance fuzzy string matching functions, powered by the RapidFuzz C++ library.
 
 docs:
-  extended_description: For more information regarding usage, see the [documentation](https://query.farm/duckdb_extension_rapidfuzz.html).
+  extended_description: For more information regarding usage, see the [documentation](https://query.farm/products/extensions/rapidfuzz/).
 extension:
   build: cmake
   description: Provides adds high-performance fuzzy string matching functions, powered
@@ -24,8 +24,8 @@ repo:
 
 extension_star_count: 19
 extension_star_count_pretty: 19
-extension_download_count: 13826
-extension_download_count_pretty: 13.8k
+extension_download_count: 11789
+extension_download_count_pretty: 11.8k
 image: '/images/community_extensions/social_preview/preview_community_extension_rapidfuzz.png'
 layout: community_extension_doc
 ---

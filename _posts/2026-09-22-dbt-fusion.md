@@ -19,9 +19,9 @@ When dbt Labs [announced the new Rust-based Fusion engine](https://www.getdbt.co
 
 dbt Labs announced the new Rust-based Fusion engine on [May 28, 2025](https://www.getdbt.com/licenses-faq#may-28-2025). Two days later, a user, [ran-codes](https://github.com/ran-codes), opened a [GitHub issue](https://github.com/dbt-labs/dbt/issues/13193) asking for a DuckDB adapter:
 
-> Quote “There is a huge community utilizing the DuckDB adaptor to run DBT. For me personally, I was able to learn and start using DBT just because of the light-weight setup for the dbt-duckdb workflow and it has allowed me to get over the learning curve to start using DBT.”
+> Quote There is a huge community utilizing the DuckDB adaptor to run DBT. For me personally, I was able to learn and start using DBT just because of the light-weight setup for the dbt-duckdb workflow and it has allowed me to get over the learning curve to start using DBT.
 >
-> -- <a href="https://github.com/dbt-labs/dbt/issues/13193">ran-codes, on GitHub
+> -- ran-codes, [on GitHub](https://github.com/dbt-labs/dbt/issues/13193)
 
 At the time of this writing, the issue resulted in 146 ❤️ and 21 👍 reactions. The adapter is now built into dbt v2.
 
@@ -48,7 +48,7 @@ my_project:
 
 ## DuckLake and Iceberg Catalogs
 
-v2 adds [catalog support](https://docs.getdbt.com/docs/build/iceberg/adapters/duckdb-iceberg-support) that the Python adapter doesn't have. dbt's DuckDB docs flag it as "dbt v2 only"; the legacy Python adapter instead attached DuckLake through the profile's [`attach` block](https://docs.getdbt.com/reference/resource-configs/duckdb-configs). 
+v2 adds [catalog support](https://docs.getdbt.com/docs/build/iceberg/adapters/duckdb-iceberg-support) that the Python adapter doesn't have. dbt's DuckDB docs flag it as “dbt v2 only”; the legacy Python adapter instead attached DuckLake through the profile's [`attach` block](https://docs.getdbt.com/reference/resource-configs/duckdb-configs). 
 
 With `catalogs.yml` you can configure [DuckLake](https://ducklake.select/) and Iceberg REST catalogs, with [catalog-aware materializations](https://github.com/dbt-labs/dbt/releases/tag/v2.0.0-alpha.4). This requires the v2 engine with the `use_catalogs_v2` flag enabled and isn't available in the Python adapter. dbt [generates and runs the `ATTACH` statements](https://docs.getdbt.com/docs/build/iceberg/adapters/duckdb-iceberg-support) for you.
 

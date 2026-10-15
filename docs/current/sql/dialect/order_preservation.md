@@ -78,6 +78,14 @@ By default, the following components preserve insertion order:
 * [JSON reader]({% link docs/current/data/json/overview.md %}#order-preservation) (`read_json` function)
 * [Parquet reader]({% link docs/current/data/parquet/overview.md %}#order-preservation) (`read_parquet` function)
 
+The `preserve_insertion_order` setting governs whether this order is maintained as rows flow into a _sink_. A sink is any operation that consumes a result, namely:
+
+* Writing to a file, for example with [`COPY ... TO`]({% link docs/current/sql/statements/copy.md %})
+* Writing to a table, for example with [`INSERT`]({% link docs/current/sql/statements/insert.md %}) or [`CREATE TABLE ... AS SELECT`]({% link docs/current/sql/statements/create_table.md %}#create-table--as-select-ctas)
+* Returning a query result to the client
+
+When the setting is disabled, DuckDB may reorder the rows produced by a query that has no `ORDER BY` clause before they reach the sink.
+
 Preservation of insertion order is controlled by the `preserve_insertion_order` [configuration option]({% link docs/current/configuration/overview.md %}).
 This setting is `true` by default, indicating that the order should be preserved.
 To change this setting, use:

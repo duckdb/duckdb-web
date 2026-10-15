@@ -167,7 +167,7 @@ There are a number of options exposed that can be passed to the `read_parquet` f
 
 The `schema` parameter allows you to read the Parquet file using a specific schema. This is useful for renaming, adding, deleting, reordering, or casting columns when reading Parquet files.
 
-> New The following feature will be introduced in DuckDB 2.0.
+> New The following feature is introduced in DuckDB 2.0.
 
 The `MAP` can be keyed by field-id or by column name.
 
@@ -196,7 +196,7 @@ FROM read_parquet('integers.parquet', schema = MAP {
 └───────────┴────────────┘
 ```
 
-> New The following feature will be introduced in DuckDB 2.0.
+> New The following feature is introduced in DuckDB 2.0.
 
 You can also key the `MAP` by column name. Field IDs are not required:
 
@@ -220,6 +220,21 @@ FROM read_parquet('integers.parquet', schema = MAP {
 ```
 
 > The `schema` parameter cannot be combined with `union_by_name = true`.
+
+## The `file_row_group_number` Virtual Column
+
+> New As of DuckDB 2.0, the `file_row_group_number` virtual column exposes the Parquet row group that each row belongs to.
+
+The `file_row_group_number` column returns the file-relative index of the row group that each row was read from, starting at `0` and restarting for every file. It enables row-group-level pruning and inspection:
+
+```sql
+SELECT file_row_group_number, count(*)
+FROM read_parquet('test.parquet')
+GROUP BY file_row_group_number
+ORDER BY file_row_group_number;
+```
+
+This complements the `file_row_number` column, which returns the file-relative row index.
 
 ## Partial Reading
 
@@ -369,7 +384,7 @@ COPY
     (FORMAT parquet, STRING_DICTIONARY_PAGE_SIZE_LIMIT 100_000);
 ```
 
-> New The following feature will be introduced in DuckDB 2.0.
+> New The following feature is introduced in DuckDB 2.0.
 
 To split data pages below the default 100 MiB cap, use `DATA_PAGE_SIZE_LIMIT` (bytes). The limit is best-effort at vector granularity. E.g., to set the limit to 1 MiB, use:
 

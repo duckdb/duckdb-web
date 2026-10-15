@@ -6,7 +6,7 @@ excerpt: |
   Fuzzy matching based autocompletion
 
 docs:
-  extended_description: For more information regarding usage, see the [documentation](https://query.farm/duckdb_extension_fuzzycomplete.html).
+  extended_description: For more information regarding usage, see the [documentation](https://query.farm/products/extensions/fuzzycomplete/).
 extension:
   build: cmake
   description: Fuzzy matching based autocompletion
@@ -25,8 +25,8 @@ repo:
 
 extension_star_count: 31
 extension_star_count_pretty: 31
-extension_download_count: 2601
-extension_download_count_pretty: 2.6k
+extension_download_count: 1927
+extension_download_count_pretty: 1.9k
 image: '/images/community_extensions/social_preview/preview_community_extension_fuzzycomplete.png'
 layout: community_extension_doc
 ---

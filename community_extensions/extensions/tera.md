@@ -6,7 +6,7 @@ excerpt: |
   Adds templating to DuckDB, enabling dynamic generation of text, HTML, and reports directly within SQL queries using the Tera engine.
 
 docs:
-  extended_description: For more information regarding usage, see the [documentation](https://query.farm/duckdb_extension_tera.html).
+  extended_description: For more information regarding usage, see the [documentation](https://query.farm/products/extensions/tera/).
 extension:
   build: cmake
   description: Adds templating to DuckDB, enabling dynamic generation of text, HTML,
@@ -25,8 +25,8 @@ repo:
 
 extension_star_count: 10
 extension_star_count_pretty: 10
-extension_download_count: 1276
-extension_download_count_pretty: 1.3k
+extension_download_count: 1182
+extension_download_count_pretty: 1.2k
 image: '/images/community_extensions/social_preview/preview_community_extension_tera.png'
 layout: community_extension_doc
 ---

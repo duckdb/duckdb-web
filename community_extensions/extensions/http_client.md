@@ -6,8 +6,7 @@ excerpt: |
   DuckDB HTTP Client Extension
 
 docs:
-  extended_description: The HTTP Client Extension is experimental, use at your own
-    risk!
+  extended_description: For more information regarding usage, see the [documentation](https://query.farm/products/extensions/http_client/).
   hello_world: "-- GET Request Example w/ JSON Parsing\nWITH __input AS (\n  SELECT\n\
     \    http_get(\n        'https://httpbin.org/delay/0',\n        headers => MAP\
     \ {\n          'accept': 'application/json',\n        },\n        params => MAP\
@@ -61,10 +60,10 @@ repo:
   github: query-farm/httpclient
   ref: 9e5713359dfefd6efff40a7f44c6e88b75bb9df4
 
-extension_star_count: 81
-extension_star_count_pretty: 81
-extension_download_count: 4159
-extension_download_count_pretty: 4.2k
+extension_star_count: 80
+extension_star_count_pretty: 80
+extension_download_count: 2215
+extension_download_count_pretty: 2.2k
 image: '/images/community_extensions/social_preview/preview_community_extension_http_client.png'
 layout: community_extension_doc
 ---

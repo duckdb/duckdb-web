@@ -8,7 +8,7 @@ excerpt: DuckDB, a free and open source analytical data management system, can r
 tag: using-duckdb
 ---
 
-Apache Parquet is the most common "Big Data" storage format for analytics. In Parquet files, data is stored in a columnar-compressed binary format. Each Parquet file stores a single table. The table is partitioned into row groups, which each contain a subset of the rows of the table. Within a row group, the table data is stored in a columnar fashion.
+Apache Parquet is the most common “Big Data” storage format for analytics. In Parquet files, data is stored in a columnar-compressed binary format. Each Parquet file stores a single table. The table is partitioned into row groups, which each contain a subset of the rows of the table. Within a row group, the table data is stored in a columnar fashion.
 
 <img src="{% link images/blog/parquet.svg %}" alt="Example Parquet file shown visually. The Parquet file (taxi.parquet) is divided into row groups that each have two columns (pickup_at and dropoff_at)" title="Taxi Parquet File" style="max-width:30%"/>
 
@@ -289,7 +289,7 @@ The query completes in `220ms` and yields the following result:
 |               8 |       72 |
 |               9 |       64 |
 
-For the SQL-averse and as a teaser for a future blog post, DuckDB also has a "Relational API" that allows for a more Python-esque declaration of queries. Here's the equivalent to the above SQL query, that provides the exact same result and performance:
+For the SQL-averse and as a teaser for a future blog post, DuckDB also has a “Relational API” that allows for a more Python-esque declaration of queries. Here's the equivalent to the above SQL query, that provides the exact same result and performance:
 
 ```python
 con.from_parquet('alltaxi.parquet')

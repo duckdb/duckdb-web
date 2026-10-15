@@ -65,6 +65,7 @@ The table below shows the available mathematical functions.
 | [`ceiling(x)`](#ceilingx) | Rounds the number up. Alias of `ceil`. |
 | [`cos(x)`](#cosx) | Computes the cosine of `x`. |
 | [`cot(x)`](#cotx) | Computes the cotangent of `x`. |
+| [`decimal_division(x, y)`](#decimal_divisionx-y) | Divides `x` by `y` using exact decimal arithmetic, returning a `DECIMAL`. |
 | [`degrees(x)`](#degreesx) | Converts radians to degrees. |
 | [`divide(x, y)`](#dividex-y) | Alias for `x // y`. |
 | [`even(x)`](#evenx) | Round to next even number by rounding away from zero. |
@@ -238,6 +239,16 @@ The table below shows the available mathematical functions.
 | **Example** | `cot(0.5)` |
 | **Result** | `1.830487721712452` |
 
+#### `decimal_division(x, y)`
+
+<div class="nostroke_table"></div>
+
+| **Description** | Divides the `DECIMAL` value `x` by `y` using exact decimal arithmetic with round-half-to-even, returning a `DECIMAL` rather than a `DOUBLE`. An optional third argument sets the scale of the result. |
+| **Example** | `decimal_division(10.00, 4.00)` |
+| **Result** | `2.500000` |
+
+> New The `decimal_division` function was added in DuckDB 2.0.
+
 #### `degrees(x)`
 
 <div class="nostroke_table"></div>
@@ -277,6 +288,8 @@ The table below shows the available mathematical functions.
 | **Description** | See the `!` operator. Computes the product of the current integer and all integers below it. |
 | **Example** | `factorial(4)` |
 | **Result** | `24` |
+
+> Note In DuckDB v2.0, the `!` operator binds more tightly than in earlier versions. For example, `SELECT 2 * 3!;` now returns `12` (`2 * (3!)`), while in v1.5 it returned `720` (`(2 * 3)!`). Use parentheses to get the old behavior, e.g., `SELECT (2 * 3)!;`.
 
 #### `fdiv(x, y)`
 

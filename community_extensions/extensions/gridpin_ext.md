@@ -8,23 +8,23 @@ excerpt: |
 extension:
   name: gridpin_ext
   description: Offline geocoding from a single country file — forward and reverse, no server, no network
-  version: 0.1.0
+  version: 0.4.0
   language: Rust
   build: cargo
   license: Apache-2.0
-  excluded_platforms: "wasm_mvp;wasm_eh;wasm_threads;windows_amd64_rtools;linux_amd64_musl"
+  excluded_platforms: "wasm_mvp;wasm_eh;wasm_threads;windows_amd64_rtools;windows_amd64_mingw;linux_amd64_musl"
   requires_toolchains: "rust;python3"
   maintainers:
     - gridpin-reserve
 
 repo:
   github: gridpin/duckdb-gridpin
-  ref: cf94e5d3994e48fbf12b67a2b808cdde9bda428d
+  ref: 0f4e7e09393858c196bb7fb5cbcf8a6bbd97e391
 
 docs:
   hello_world: |
     -- Country data files are free downloads: https://gridpin.dev
-    -- (France, Italy, the Netherlands and Serbia today; one file per country.)
+    -- (France, Italy, the Netherlands, Serbia, Germany, Spain and Brazil today; one file per country.)
     LOAD gridpin_ext;
 
     -- Point the extension at a downloaded sheet. One sheet is loaded at a time.
@@ -57,6 +57,9 @@ docs:
     | `gridpin_load_poi(path)` | optional points-of-interest layer, consulted after addresses |
     | `gridpin_reset()` | drop the loaded sheet so another country can be loaded |
 
+    Every function carries a description and parameter names, so SQL assistants and
+    AI agents can discover them through `duckdb_functions()`.
+
     A query issued before `gridpin_load` is a clear error rather than a crash, and an
     address with no match returns `{}` — an empty result is a documented contract, not a
     guess.
@@ -67,14 +70,16 @@ docs:
     [gridpin.dev](https://gridpin.dev) and in the [releases of the main
     repository](https://github.com/gridpin/gridpin/releases). Each sheet carries its own
     source licence (France comes from the national BAN registry under Licence Ouverte;
-    Italy, the Netherlands and Serbia are built from Overture). The engine itself is
+    Italy, the Netherlands, Serbia, Germany, Spain and Brazil are built from Overture,
+    with OpenAddresses, CartoCiudad and IBGE CNEFE sources where the country publishes
+    them). Germany covers 15 of 16 Länder (Bavaria is not covered). The engine itself is
     Apache-2.0 and lives at [gridpin/gridpin](https://github.com/gridpin/gridpin); this
     repository holds the extension crate only.
 
 extension_star_count: 1
 extension_star_count_pretty: 1
-extension_download_count: 658
-extension_download_count_pretty: 658
+extension_download_count: 689
+extension_download_count_pretty: 689
 image: '/images/community_extensions/social_preview/preview_community_extension_gridpin_ext.png'
 layout: community_extension_doc
 ---
@@ -100,13 +105,13 @@ LOAD {{ page.extension.name }};
 
 <div class="extension_functions_table"></div>
 
-|  function_name   | function_type | description | comment | examples |
-|------------------|---------------|-------------|---------|----------|
-| gridpin_geocode  | scalar        | NULL        | NULL    |          |
-| gridpin_load     | scalar        | NULL        | NULL    |          |
-| gridpin_load_poi | scalar        | NULL        | NULL    |          |
-| gridpin_reset    | scalar        | NULL        | NULL    |          |
-| gridpin_reverse  | scalar        | NULL        | NULL    |          |
+|  function_name   | function_type |                                                  description                                                  | comment |                          examples                           |
+|------------------|---------------|---------------------------------------------------------------------------------------------------------------|---------|-------------------------------------------------------------|
+| gridpin_geocode  | scalar        | Return the best address or POI match as JSON, or an empty JSON object when nothing matches.                   | NULL    | [SELECT gridpin_geocode('boulevard des moulins 27 monaco')] |
+| gridpin_load     | scalar        | Load an address index for this database, requiring an explicit reset before changing its path.                | NULL    | [SELECT gridpin_load('mc.bin')]                             |
+| gridpin_load_poi | scalar        | Load an optional POI index that must match the address index country.                                         | NULL    | [SELECT gridpin_load_poi('mc_poi.bin')]                     |
+| gridpin_reset    | scalar        | Unload the address and POI indexes in a standalone statement before switching sheets.                         | NULL    | [SELECT gridpin_reset()]                                    |
+| gridpin_reverse  | scalar        | Return the nearest indexed house as JSON for finite coordinates, or an empty JSON object when none is nearby. | NULL    | [SELECT gridpin_reverse(43.7391, 7.4266)]                   |
 
 ### Overloaded Functions
 

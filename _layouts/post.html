@@ -88,6 +88,23 @@
 					<div class="singleentry{% if page.collection %} singleentry-{{ page.collection }}{% endif %}{% if page.toc != false %} contains_toc{% endif %}">
 						<div class="content">
 							<div class="contentwidth">
+								{% if page.collection == "posts" %}
+									{% assign crumb_label = "Blog" %}{% assign crumb_url = "/news/" %}{% assign crumb_types = "blog" %}
+								{% elsif page.collection == "events" %}
+									{% assign crumb_label = "Events" %}{% assign crumb_url = "/events/" %}{% assign crumb_types = "events" %}
+								{% else %}
+									{% assign crumb_label = "Library" %}{% assign crumb_url = "/library/" %}{% assign crumb_types = "library" %}
+								{% endif %}
+								{% if page.collection == "everywhere" %}{% assign crumb_tag = "everywhere" %}{% else %}{% assign crumb_tag = page.tag %}{% endif %}
+								{% assign crumb_filter = site.data.post_types[crumb_types].filters | where: "value", crumb_tag | first %}
+								<nav class="post-breadcrumb" aria-label="Breadcrumb">
+									<a href="{{ crumb_url }}">{{ crumb_label }}</a>
+									{% if crumb_tag %}
+										<span class="separator" aria-hidden="true">/</span>
+										{% assign crumb_tag_label = site.data.post_types.tag_labels[crumb_tag] | default: crumb_tag %}
+										{% if crumb_filter %}<a href="{{ crumb_url }}?type={{ crumb_tag }}">{{ crumb_tag_label }}</a>{% else %}<span>{{ crumb_tag_label }}</span>{% endif %}
+									{% endif %}
+								</nav>
 								<h1>{{ page.title }}</h1>
 								{% if page.subtitle %}
 								<h2>{{ page.subtitle }}</h2>

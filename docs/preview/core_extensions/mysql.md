@@ -29,6 +29,8 @@ ATTACH 'host=localhost user=root port=0 database=mysql' AS mysqldb (TYPE mysql);
 USE mysqldb;
 ```
 
+> Warning Avoid including credentials, such as a password, directly in the connection string. If a connection error occurs, the full connection string, including your credentials, may appear in the resulting error message. For better security, store credentials using [secrets]({% link docs/preview/configuration/secrets_manager.md %}) instead, as described in [Configuring via Secrets](#configuring-via-secrets).
+
 ### Configuration
 
 The connection string determines the parameters for how to connect to MySQL as a set of `key=value` pairs. Any options not provided are replaced by their default values, as per the table below. Connection information can also be specified with [environment variables](https://dev.mysql.com/doc/refman/8.3/en/environment-variables.html). If no option is provided explicitly, the MySQL extension tries to read it from an environment variable.
@@ -311,6 +313,10 @@ The `mysql_execute` function allows running arbitrary queries within MySQL, incl
 ATTACH 'host=localhost database=mysql' AS mysqldb (TYPE mysql);
 CALL mysql_execute('mysqldb', 'CREATE TABLE my_table (i INTEGER)');
 ```
+
+### Routing a Session to MySQL
+
+> New As of DuckDB 2.0, you can route an entire session to an attached MySQL database with the [`CONNECT` statement]({% link docs/preview/sql/statements/connect.md %}). While connected, the remote pushdown optimizer ships queries directly to the MySQL server instead of pulling tables over the wire, and `DISCONNECT` returns the session to the local database.
 
 ## Settings
 

@@ -6,7 +6,7 @@ excerpt: |
   Cryptographic hash functions and HMAC
 
 docs:
-  extended_description: For more information regarding usage, see the [documentation](https://query.farm/duckdb_extension_crypto.html).
+  extended_description: For more information regarding usage, see the [documentation](https://query.farm/products/extensions/crypto/).
 extension:
   build: cmake
   description: Cryptographic hash functions and HMAC
@@ -25,7 +25,7 @@ repo:
 
 extension_star_count: 31
 extension_star_count_pretty: 31
-extension_download_count: 19852
+extension_download_count: 19930
 extension_download_count_pretty: 19.9k
 image: '/images/community_extensions/social_preview/preview_community_extension_crypto.png'
 layout: community_extension_doc
