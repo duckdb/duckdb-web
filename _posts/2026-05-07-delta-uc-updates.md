@@ -6,7 +6,7 @@ authors:
 excerpt: "DuckDB's Delta and Unity Catalog extensions shed their experimental tags — now with writes, Unity Catalog and time travel support."
 tag: extensions
 thumb: "/images/blog/thumbs/delta-uc-updates.svg"
-image: "/images/blog/thumbs/delta-uc-updates.jpg"
+image: "/images/blog/thumbs/delta-uc-updates.png"
 ---
 
 Welcome back! While we here at DuckLabs are typically of the quacking

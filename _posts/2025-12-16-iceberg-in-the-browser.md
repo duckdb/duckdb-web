@@ -53,7 +53,7 @@ CREATE SECRET test_secret (
 );
 
 ATTACH '⟨warehouse⟩' AS db (
-    TYPE ICEBERG,
+    TYPE iceberg,
     ENDPOINT_URL '⟨https://your-iceberg-endpoint⟩',
 );
 

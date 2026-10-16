@@ -46,10 +46,10 @@ docs:
     available as an embedded Rust library and CLI (on SQLite) and a PostgreSQL
     extension (`pg_mentat`). Source: https://codeberg.org/gregburd/mentat
 
-extension_star_count: 0
-extension_star_count_pretty: 0
-extension_download_count: 198
-extension_download_count_pretty: 198
+extension_star_count: 1
+extension_star_count_pretty: 1
+extension_download_count: 349
+extension_download_count_pretty: 349
 image: '/images/community_extensions/social_preview/preview_community_extension_mentat.png'
 layout: community_extension_doc
 ---

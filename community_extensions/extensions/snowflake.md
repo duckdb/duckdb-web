@@ -8,16 +8,17 @@ excerpt: |
 extension:
   name: snowflake
   description: Snowflake data source extension - query Snowflake databases directly from DuckDB
-  version: 0.5.2
+  version: 0.6.0
   language: C++
   build: cmake
   license: MIT
   maintainers:
+    - venkata-chikkam
     - iqea-ai
 
 repo:
   github: iqea-ai/duckdb-snowflake
-  ref: b61f5ad827373db9a5614e5183c1477f601cc82c
+  ref: f172cc80d53f4b1a866858a90f60beab62de78c1
 
 install_notes: |
   **Important:** This extension requires the ADBC Snowflake driver (a separate shared library) to function.
@@ -80,8 +81,8 @@ docs:
 
 extension_star_count: 63
 extension_star_count_pretty: 63
-extension_download_count: 8847
-extension_download_count_pretty: 8.8k
+extension_download_count: 9100
+extension_download_count_pretty: 9.1k
 image: '/images/community_extensions/social_preview/preview_community_extension_snowflake.png'
 layout: community_extension_doc
 ---
@@ -129,6 +130,9 @@ This extension does not add any types.
 
 <div class="extension_settings_table"></div>
 
-This extension does not add any settings.
+|              name              |                                                                                                                                                     description                                                                                                                                                      | input_type | scope  | aliases |
+|--------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|------------|--------|---------|
+| snowflake_prefetch_concurrency | How many Snowflake result chunks the ADBC driver downloads in parallel. 0 (the default) leaves the driver's own default in place; max 10000. Lowering this reduces read-ahead further, but costs download throughput.                                                                                                | BIGINT     | GLOBAL | []      |
+| snowflake_result_queue_size    | Maximum Arrow batches the ADBC driver buffers per Snowflake result stream. 0 (the default) leaves the driver's own default in place; max 10000. Set to 1 to throttle the driver's read-ahead when the consumer is slow (CREATE TABLE AS, COPY TO, inserts), which otherwise buffers the result outside memory_limit. | BIGINT     | GLOBAL | []      |
 
 

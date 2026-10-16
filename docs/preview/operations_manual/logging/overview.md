@@ -81,6 +81,8 @@ CALL enable_logging('HTTP');
 The above function will automatically set the correct log level and will add the `HTTP` type to the `enabled_log_types` settings. This ensures
 only log messages of the 'HTTP' type will be written to the log.
 
+> New As of DuckDB 2.0, the dedicated `enable_http_logging` and `http_logging_output` settings have been removed. Use the unified logging framework shown here (`CALL enable_logging('HTTP')` together with `duckdb_logs_parsed('HTTP')`) instead. The `redact_http_logs` setting (default `true`) controls whether HTTP header values are redacted in the logs.
+
 To enable multiple log types, simply pass:
 
 ```sql

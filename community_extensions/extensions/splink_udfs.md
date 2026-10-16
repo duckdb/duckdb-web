@@ -18,7 +18,7 @@ extension:
 repo:
   github: moj-analytical-services/splink_udfs
   ref: cf00056f887486d0aee0a853a764f9775aa40438
-  ref_next: 2ead762c7c554e377a72ef6a425f2da5cedace35
+  ref_next: c5b384ba3a62ea016e23c4fd408e012921595ea0
 
 docs:
   hello_world: |
@@ -33,8 +33,8 @@ docs:
 
 extension_star_count: 6
 extension_star_count_pretty: 6
-extension_download_count: 10292
-extension_download_count_pretty: 10.3k
+extension_download_count: 1946
+extension_download_count_pretty: 1.9k
 image: '/images/community_extensions/social_preview/preview_community_extension_splink_udfs.png'
 layout: community_extension_doc
 ---

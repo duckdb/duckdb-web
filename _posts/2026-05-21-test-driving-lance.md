@@ -5,7 +5,7 @@ authors:
   - LanceDB team
   - Guillermo Sanchez
 thumb: "/images/blog/thumbs/testing-lance.svg"
-image: "/images/blog/thumbs/testing-lance.jpg"
+image: "/images/blog/thumbs/testing-lance.png"
 excerpt: "Lance is an open lakehouse format with a design geared toward AI workloads. LanceDB and DuckLabs have partnered to bring you fast vector and hybrid search directly from DuckDB SQL, without leaving your analytical workflow. In this post, we explain what Lance is, how to use it in DuckDB, and, of course, show some benchmark results."
 tag: extensions
 redirect_from:

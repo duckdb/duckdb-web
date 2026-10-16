@@ -6,6 +6,11 @@
       "url": "/install/"
     },
     {
+      "page": "What's New in the Docs for 2.0",
+      "slug": "",
+      "url": "/docs/preview/whats_new_in_the_docs"
+    },
+    {
       "page": "Documentation",
       "slug": "",
       "mainfolderitems": [
@@ -268,6 +273,10 @@
                 {
                   "page": "Output Formats",
                   "url": "output_formats"
+                },
+                {
+                  "page": "Agent Mode",
+                  "url": "agent_mode"
                 },
                 {
                   "page": "Editing",
@@ -614,6 +623,10 @@
                   "url": "comment_on"
                 },
                 {
+                  "page": "CONNECT and DISCONNECT",
+                  "url": "connect"
+                },
+                {
                   "page": "COPY",
                   "url": "copy"
                 },
@@ -644,6 +657,10 @@
                 {
                   "page": "CREATE VIEW",
                   "url": "create_view"
+                },
+                {
+                  "page": "CREATE TRIGGER",
+                  "url": "create_trigger"
                 },
                 {
                   "page": "CREATE TYPE",
@@ -1050,6 +1067,10 @@
                   "url": "utility"
                 },
                 {
+                  "page": "Variant Functions",
+                  "url": "variant"
+                },
+                {
                   "page": "Window Functions",
                   "url": "window_functions"
                 }
@@ -1158,6 +1179,10 @@
             {
               "page": "Distributing Extensions",
               "url": "extension_distribution"
+            },
+            {
+              "page": "Extension Repositories",
+              "url": "extension_repositories"
             },
             {
               "page": "Versioning of Extensions",
@@ -1288,6 +1313,10 @@
             {
               "page": "Lance",
               "url": "lance"
+            },
+            {
+              "page": "Legacy Parser",
+              "url": "legacy_parser"
             },
             {
               "page": "MotherDuck",
@@ -1788,6 +1817,10 @@
                 {
                   "page": "LibreDB Studio SQL Editor",
                   "url": "libredb_studio"
+                },
+                {
+                  "page": "VisuaLeaf SQL Editor",
+                  "url": "visualeaf"
                 }
               ]
             },
@@ -1892,6 +1925,10 @@
               "url": "overview"
             },
             {
+              "page": "Migrating to DuckDB v2.0",
+              "url": "migration"
+            },
+            {
               "page": "Backup Extension Repositories",
               "url": "backup_extension_repositories"
             },
@@ -1974,6 +2011,10 @@
           "slug": "dev",
           "subfolderitems": [
             {
+              "page": "Overview",
+              "url": "overview"
+            },
+            {
               "page": "DuckDB Repositories",
               "url": "repositories"
             },
@@ -2004,6 +2045,10 @@
                 {
                   "page": "Building Extensions",
                   "url": "building_extensions"
+                },
+                {
+                  "page": "Statically Linking Extensions",
+                  "url": "linking_extensions"
                 },
                 {
                   "page": "Android",

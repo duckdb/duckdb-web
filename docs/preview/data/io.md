@@ -65,6 +65,12 @@ SET http_retry_backoff = 2;
 
 As the row group is the unit of parallelism for Parquet scans, asynchronous I/O works best if Parquet files have at least as many row groups as the number of threads. Files with only a few very large row groups cannot keep enough requests in flight to saturate the network.
 
+> New As of DuckDB 2.0, the size of the HTTP client pool can be tuned with the `http_client_pool_capacity` setting. By default the capacity is derived automatically from the number of CPU threads and asynchronous threads, bounded by the operating system file-descriptor limit, and capped at 256. Resizing `async_threads` also resizes the automatic pool so that it tracks the asynchronous pool. To pin the pool to a fixed size, set a positive integer; use `RESET http_client_pool_capacity` to return to the automatic value.
+
+```sql
+SET http_client_pool_capacity = 8;
+```
+
 ## Synchronizing Writes to Disk
 
 When DuckDB persists changes to a database on the local file system, it asks the operating system to flush the written data to stable storage. The `fsync_mode` configuration option controls how this is done. It can have three values:

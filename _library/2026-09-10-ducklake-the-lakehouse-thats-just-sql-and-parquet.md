@@ -21,6 +21,7 @@ venue: "Talk Python to Me"
 | **Guests** | Pedro Holanda and Guillermo Sanchez Dionis (DuckLabs) |
 | **Episode site** | [DuckLake: The Lakehouse That's Just SQL and Parquet](https://talkpython.fm/episodes/show/562/ducklake-the-lakehouse-thats-just-sql-and-parquet) |
 | **YouTube** | [Watch](https://www.youtube.com/watch?v=wEKbbY5tPtI) |
+| **Spotify** | [Listen](https://open.spotify.com/episode/7l8OCAjs5PTPhIeGSCiRHE) |
 
 ## Description
 

@@ -8,7 +8,7 @@ excerpt: |
 extension:
   name: mmcif
   description: Read and write protein structure mmcif files using SQL
-  version: 0.1.0
+  version: 0.2.0
   language: C++
   build: cmake
   license: Apache-2.0
@@ -17,8 +17,8 @@ extension:
 
 repo:
   github: i-VRESSE/duckdb-mmcif
-  ref: ac26e1fca1dbaff42cf25de829fc736e393347b7
-  ref_next: ac5b197b4ce3aa49ffdcb99a6e987555a1081c16
+  ref: 199a8dee2ab13919d0cb8e7f46a49fbc192200cd
+  ref_next: 4bdc8d545e1ea49ad838f812f281c78530ca6140
 
 docs:
   hello_world: |
@@ -55,8 +55,8 @@ extended_description: |
 
 extension_star_count: 1
 extension_star_count_pretty: 1
-extension_download_count: 891
-extension_download_count_pretty: 891
+extension_download_count: 645
+extension_download_count_pretty: 645
 image: '/images/community_extensions/social_preview/preview_community_extension_mmcif.png'
 layout: community_extension_doc
 ---
@@ -82,12 +82,13 @@ LOAD {{ page.extension.name }};
 
 <div class="extension_functions_table"></div>
 
-|    function_name    | function_type |                                                      description                                                      | comment |                                              examples                                               |
-|---------------------|---------------|-----------------------------------------------------------------------------------------------------------------------|---------|-----------------------------------------------------------------------------------------------------|
-| mmcif_columns       | table         | List the categories and columns in an mmCIF file, with their dictionary documentation links and inferred types.       | NULL    | [SELECT * FROM mmcif_columns('https://files.rcsb.org/download/1AMB.cif.gz'); -- 342 rows]           |
-| mmcif_relationships | table         | List the parent/child key relationships between the categories in an mmCIF file, each side as a (table, column) pair. | NULL    | [SELECT * FROM mmcif_relationships('https://files.rcsb.org/download/1AMB.cif.gz'); -- 86 rows]      |
-| mmcif_scan          | table         | Scan one mmCIF category as a table, reading its rows directly from a .cif or .cif.gz file.                            | NULL    | [SELECT * FROM mmcif_scan('https://files.rcsb.org/download/1AMB.cif.gz', 'atom_site'); -- 438 rows] |
-| mmcif_tables        | table         | List the categories in an mmCIF file with their dictionary documentation links and column counts.                     | NULL    | [SELECT * FROM mmcif_tables('https://files.rcsb.org/download/1AMB.cif.gz');]                        |
+|    function_name    | function_type |                                                                                                                                                                                                                                                                                                                  description                                                                                                                                                                                                                                                                                                                   | comment |                                                                             examples                                                                             |
+|---------------------|---------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|---------|------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| mmcif_blocks        | table         | List data block names in file order, without the data_ prefix.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 | NULL    | [SELECT * FROM mmcif_blocks('structures.cif');]                                                                                                                  |
+| mmcif_columns       | table         | List the categories and columns in an mmCIF file, with their dictionary documentation links and inferred types. Select a block with data_block := 'name'; defaults to the first block.                                                                                                                                                                                                                                                                                                                                                                                                                                                         | NULL    | [SELECT * FROM mmcif_columns('https://files.rcsb.org/download/1AMB.cif.gz');]                                                                                    |
+| mmcif_relationships | table         | List the parent/child key relationships between the categories in an mmCIF file, each side as a (table, column) pair. Select a block with data_block := 'name'; defaults to the first block.                                                                                                                                                                                                                                                                                                                                                                                                                                                   | NULL    | [SELECT * FROM mmcif_relationships('https://files.rcsb.org/download/1AMB.cif.gz');]                                                                              |
+| mmcif_scan          | table         | Scan one mmCIF category from a file path, glob, or list of paths/globs. Plain CIF and gzip inputs are supported. Multiple matched files add a filename column containing the concrete source path. Select a block with data_block := 'name'; defaults to the first block. Use column_source := 'dictionary' (default) for all bundled category columns and lazy parallel readers capped by threads. Missing items are typed NULLs and absent known categories yield no rows. Unknown categories or items in the requested category error; use column_source := 'files' to discover the column union from input files and include custom items. | NULL    | [SELECT * FROM mmcif_scan('https://files.rcsb.org/download/1AMB.cif.gz', 'atom_site');, SELECT count(*) FROM mmcif_scan('structures/**/*.cif.gz', 'atom_site');] |
+| mmcif_tables        | table         | List the categories in an mmCIF file with their dictionary documentation links and column counts, single-row constraints, descriptions, category groups and mandatory flags. Dictionary metadata is independent of observed rows; unavailable metadata is NULL. Select a block with data_block := 'name'; defaults to the first block.                                                                                                                                                                                                                                                                                                         | NULL    | [SELECT * FROM mmcif_tables('https://files.rcsb.org/download/1AMB.cif.gz');]                                                                                     |
 
 ### Overloaded Functions
 

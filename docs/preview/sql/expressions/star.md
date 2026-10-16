@@ -57,6 +57,13 @@ SELECT * EXCLUDE (col)
 FROM tbl;
 ```
 
+> New As of DuckDB 2.0, `EXCEPT` is accepted as a synonym for `EXCLUDE`, matching the SQL-standard and BigQuery spelling. The two keywords are interchangeable and may be mixed in the same query.
+>
+> ```sql
+> SELECT * EXCEPT (col)
+> FROM tbl;
+> ```
+
 ### `REPLACE` Clause
 
 `REPLACE` allows you to replace specific columns by alternative expressions.

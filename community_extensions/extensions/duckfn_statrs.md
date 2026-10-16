@@ -19,6 +19,7 @@ extension:
 repo:
   github: shijianjs/duckfn-statrs
   ref: 19cc9b83328d373d894ebb15bb043e8f4b1bf76c
+  ref_next: e485353d030e7de3dd62eae9b7cd791a2b4d9411
 
 docs:
   hello_world: |
@@ -64,8 +65,8 @@ docs:
 
 extension_star_count: 0
 extension_star_count_pretty: 0
-extension_download_count: 111
-extension_download_count_pretty: 111
+extension_download_count: 382
+extension_download_count_pretty: 382
 image: '/images/community_extensions/social_preview/preview_community_extension_duckfn_statrs.png'
 layout: community_extension_doc
 ---

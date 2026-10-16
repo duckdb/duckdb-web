@@ -4,7 +4,7 @@ title: "DuckDB on LoongArch"
 authors:
   - Hannes Mühleisen
 thumb: "/images/blog/thumbs/morefine-m700s.svg"
-image: "/images/blog/thumbs/morefine-m700s.jpg"
+image: "/images/blog/thumbs/morefine-m700s.png"
 excerpt: "In today's “What's on your desk?” episode, we test a Loongson CPU with the LoongArch architecture."
 tag: benchmark
 ---

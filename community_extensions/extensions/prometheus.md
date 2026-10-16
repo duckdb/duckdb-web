@@ -19,7 +19,7 @@ extension:
 
 repo:
   github: botan/duckdb-prometheus
-  ref: 9d8c511355b21444e5051c1e6d35f90e260ef8ac
+  ref: 698928aad1e0bafeb451f4cea32de7aea979c28a
 
 docs:
   hello_world: |
@@ -46,8 +46,8 @@ docs:
 
 extension_star_count: 6
 extension_star_count_pretty: 6
-extension_download_count: 762
-extension_download_count_pretty: 762
+extension_download_count: 380
+extension_download_count_pretty: 380
 image: '/images/community_extensions/social_preview/preview_community_extension_prometheus.png'
 layout: community_extension_doc
 ---

@@ -19,6 +19,7 @@ extension:
 repo:
   github: shijianjs/duckfn-quantstats
   ref: d6af371de1204cf2b25d298be494e9b59143a511
+  ref_next: b432271e1a10155756015a5e77d0181437b0b8bd
 
 docs:
   hello_world: |
@@ -107,8 +108,8 @@ docs:
 
 extension_star_count: 0
 extension_star_count_pretty: 0
-extension_download_count: 770
-extension_download_count_pretty: 770
+extension_download_count: 678
+extension_download_count_pretty: 678
 image: '/images/community_extensions/social_preview/preview_community_extension_duckfn_quantstats.png'
 layout: community_extension_doc
 ---

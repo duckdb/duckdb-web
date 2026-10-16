@@ -503,6 +503,53 @@ SELECT json_strip_nulls('{"a": [{"x": 1, "y": null}, {"z": null}], "b": null}');
 {"a":[{"x":1},{}]}
 ```
 
+## JSON Mutation Functions
+
+> New Support for the JSON mutation functions is introduced in DuckDB 2.0.
+
+The following scalar functions modify a JSON document at a given path and return the updated document. The `value` argument is a `JSON` value, so string values are provided in quotes (for example, `'2'`).
+
+| Function                            | Description                                                                                                           |
+| :---------------------------------- | :------------------------------------------------------------------------------------------------------------------ |
+| `json_set(json, path, value)`       | Set the `value` at `path`, inserting it if the path does not exist and overwriting it if it does.                   |
+| `json_insert(json, path, value)`    | Insert the `value` at `path` only if the path does not already exist. Existing values are left unchanged.           |
+| `json_replace(json, path, value)`   | Replace the `value` at `path` only if the path already exists. Missing paths are left unchanged.                    |
+| `json_remove(json, path)`           | Remove the element at `path`.                                                                                        |
+
+Set a key, inserting it because it does not exist yet:
+
+```sql
+SELECT json_set('{"a": 1}', '$.b', '2');
+```
+
+```text
+{"a":1,"b":2}
+```
+
+`json_insert` only adds new keys, while `json_replace` only updates existing keys:
+
+```sql
+SELECT
+    json_insert('{"a": 1}', '$.a', '9') AS insert,
+    json_replace('{"a": 1}', '$.b', '2') AS replace;
+```
+
+<div class="monospace_table"></div>
+
+| insert  | replace |
+| ------- | ------- |
+| {"a":1} | {"a":1} |
+
+Remove a key:
+
+```sql
+SELECT json_remove('{"a": 1, "b": 2}', '$.b');
+```
+
+```text
+{"a":1}
+```
+
 ## JSON Aggregate Functions
 
 There are three JSON aggregate functions.

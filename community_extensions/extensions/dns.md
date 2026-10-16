@@ -302,8 +302,8 @@ docs:
 
 extension_star_count: 18
 extension_star_count_pretty: 18
-extension_download_count: 907
-extension_download_count_pretty: 907
+extension_download_count: 758
+extension_download_count_pretty: 758
 image: '/images/community_extensions/social_preview/preview_community_extension_dns.png'
 layout: community_extension_doc
 ---
