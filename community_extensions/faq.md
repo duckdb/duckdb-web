@@ -99,7 +99,9 @@ We are working on adding Go support for extensions.
 
 DuckDB's [Extension Template](https://github.com/duckdb/extension-template) is based on the DuckDB C++ API and uses DuckDB's CMake-based build system. The DuckDB team will currently only provide support for extensions written using this framework. However, note that CMake is pretty flexible: for example, several [Rust-based](#can-i-write-extensions-in-rust) examples already exist.
 
-Additionally, a new [C Extension API](https://github.com/duckdb/duckdb/pull/12682) is available since DuckDB v1.1.
+The old [C Extension API](https://github.com/duckdb/duckdb/pull/12682) was available in DuckDB v1.1 to v1.5.
+
+DuckDB v2.0 ships a new C Extension API.
 
 </div>
 

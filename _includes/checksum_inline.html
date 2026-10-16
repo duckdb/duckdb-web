@@ -19,8 +19,10 @@ Notes:
   {%- assign checksums_data = site.data.checksums_lts -%}
 {%- elsif include.version == "current" -%}
   {%- assign checksums_data = site.data.checksums_current -%}
+{%- elsif include.version == "next_major" -%}
+  {%- assign checksums_data = site.data.checksums_next_major -%}
 {%- else -%}
-  Error: Release type (current / LTS) not available
+  Error: Release type (current / LTS / next major) not available
 {%- endif -%}
 {%- assign root = checksums_data.artifacts -%}
 

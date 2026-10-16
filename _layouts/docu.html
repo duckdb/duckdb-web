@@ -98,7 +98,7 @@ Page URL: <https://duckdb.org{{ page.url }}>
 								{% assign version_viewed_label = site.lts_short_duckdb_version %}
 								{% assign version_viewed_suffix = "LTS" %}
 							{% elsif version_viewed == "preview" %}
-								{% assign version_viewed_label = site.preview_short_duckdb_version %}
+								{% assign version_viewed_label = site.next_major_short_duckdb_version %}
 								{% assign version_viewed_suffix = "preview" %}
 							{% else %}
 								{% assign version_viewed_label = version_viewed %}
@@ -124,7 +124,7 @@ Page URL: <https://duckdb.org{{ page.url }}>
 												{% assign item_text = site.lts_short_duckdb_version %}
 												{% assign item_suffix = "LTS" %}
 											{% elsif item.version == "preview" %}
-												{% assign item_text = site.preview_short_duckdb_version %}
+												{% assign item_text = site.next_major_short_duckdb_version %}
 												{% assign item_suffix = "preview" %}
 											{% else %}
 												{% assign item_text = item.version %}
