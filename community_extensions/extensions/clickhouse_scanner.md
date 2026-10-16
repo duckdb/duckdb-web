@@ -59,8 +59,8 @@ docs:
 
 extension_star_count: 1
 extension_star_count_pretty: 1
-extension_download_count: 387
-extension_download_count_pretty: 387
+extension_download_count: 371
+extension_download_count_pretty: 371
 image: '/images/community_extensions/social_preview/preview_community_extension_clickhouse_scanner.png'
 layout: community_extension_doc
 ---
