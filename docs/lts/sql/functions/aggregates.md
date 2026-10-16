@@ -101,7 +101,7 @@ FROM tbl;
 ### Handling `NULL` Values
 
 All general aggregate functions ignore `NULL`s, except for [`list`](#listarg) ([`array_agg`](#listarg)), [`first`](#firstarg) ([`arbitrary`](#firstarg)) and [`last`](#lastarg).
-To exclude `NULL`s from `list`, you can use a [`FILTER` clause]({% link docs/lts/sql/query_syntax/filter.md %}).
+To exclude `NULL`s from `list`, use a [`FILTER` clause]({% link docs/lts/sql/query_syntax/filter.md %}) that excludes rows with null input, such as `list(x) FILTER (WHERE x IS NOT NULL)`. A filter on another column may still leave `NULL` values in the list.
 To ignore `NULL`s from `first`, you can use the [`any_value` aggregate](#any_valuearg).
 
 All general aggregate functions except [`count`](#countarg) return `NULL` on empty groups.
