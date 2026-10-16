@@ -24,15 +24,21 @@ repo:
 docs:
   hello_world: |
     -- Read a Hudi COW table
+    INSTALL hudi FROM community;
     LOAD hudi;
-    SELECT * FROM hudi_scan('/path/to/hudi_table')
+    SELECT * FROM read_hudi('/path/to/hudi_table')
     WHERE dt = '2026-01-01';
 
-    -- Time-travel to a specific instant
-    SELECT * FROM hudi_scan('/path/to/hudi_table', as_of = '20260101000000000');
+    -- Time-travel to the latest commit <= an instant
+    SELECT * FROM read_hudi('/path/to/hudi_table', as_of => '20260101000000000');
 
-    -- Incremental read of new records since the last checkpoint
-    SELECT * FROM hudi_scan('/path/to/hudi_table', incremental = true);
+    -- Incremental read of changes in (start, "end"]
+    -- ("end" is a reserved word, so quote it as a named parameter)
+    SELECT * FROM read_hudi('/path/to/hudi_table',
+        start => '20260101000000000', "end" => '20260102000000000');
+
+    -- Table metadata: type, latest commit, file counts
+    SELECT hudi_info('/path/to/hudi_table');
 
   extended_description: |
     ## duckdb-hudi
@@ -62,8 +68,8 @@ docs:
     toolchain not yet in the default community build environment — see the PR
     description for the resolution).
 
-extension_star_count: 1
-extension_star_count_pretty: 1
+extension_star_count: 2
+extension_star_count_pretty: 2
 extension_download_count: 66
 extension_download_count_pretty: 66
 image: '/images/community_extensions/social_preview/preview_community_extension_hudi.png'
