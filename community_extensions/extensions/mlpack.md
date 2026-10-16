@@ -70,7 +70,7 @@ docs:
 
 extension_star_count: 21
 extension_star_count_pretty: 21
-extension_download_count: 1164
+extension_download_count: 1167
 extension_download_count_pretty: 1.2k
 image: '/images/community_extensions/social_preview/preview_community_extension_mlpack.png'
 layout: community_extension_doc
@@ -97,19 +97,31 @@ LOAD {{ page.extension.name }};
 
 <div class="extension_functions_table"></div>
 
-|          function_name          | function_type |                          description                          |                               comment                               | examples |
-|---------------------------------|---------------|---------------------------------------------------------------|---------------------------------------------------------------------|----------|
-| mlpack_adaboost_train           | table         | use adaboost to train and store a model                       | parameters 'iterations', 'tolerance', 'perceptronIter' and 'silent' | NULL     |
-| mlpack_adaboost_pred            | table         | predict classification using stored adaboost model            | NULL                                                                | NULL     |
-| mlpack_linear_regression_fit    | table         | fit and store linear regression model                         | parameters 'lambda', 'intercept' and 'silent'                       | NULL     |
-| mlpack_linear_regression_pred   | table         | predict using stored linear regression model                  | NULL                                                                | NULL     |
-| mlpack_logistic_regression_fit  | table         | fit and store logistic regression model                       | parameters 'lambda', 'intercept' and 'silent'                       | NULL     |
-| mlpack_logistic_regression_pred | table         | predict classification using stored logistic regression model | NULL                                                                | NULL     |
-| mlpack_random_forest_train      | table         | use random forest to train and store a model                  | parameters 'nclasses', 'ntrees', 'seed', 'threads' and 'silent'     | NULL     |
-| mlpack_random_forest_pred       | table         | predict classification using stored random forest model       | NULL                                                                | NULL     |
-| mlpack_kmeans                   | table         | use kmeans unsupervised clustering                            | parameters 'clusters', and 'iterations'                             | NULL     |
-| mlpack_mlpack_version           | scalar        | returns the version string for the mlpack version used        | NULL                                                                | NULL     |
-| mlpack_armadillo_version        | scalar        | returns the version string for the armadillo version used     | NULL                                                                | NULL     |
+|             function_name              | function_type |                          description                          |                                                        comment                                                        | examples |
+|----------------------------------------|---------------|---------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------|----------|
+| mlpack_adaboost_train                  | table         | use adaboost to train and store a model                       | parameters 'iterations', 'tolerance', 'perceptronIter' and 'silent'                                                   | NULL     |
+| mlpack_adaboost_pred                   | table         | predict classification using stored adaboost model            | NULL                                                                                                                  | NULL     |
+| mlpack_bayesian_linear_regression_fit  | table         | fit and store Bayesian linear regression model                | parameters 'center', 'scale' and 'silent'                                                                             | NULL     |
+| mlpack_bayesian_linear_regression_pred | table         | predict using stored Bayesian linear regression model         | NULL                                                                                                                  | NULL     |
+| mlpack_decision_tree_train             | table         | fit and store decision tree classification                    | parameters 'numClasses', 'minimumLeafSize', 'minimumGainSplit', 'maximumDepth', and 'silent'                          | NULL     |
+| mlpack_decision_tree_pred              | table         | predict classification using stored decision tree model       | NULL                                                                                                                  | NULL     |
+| mlpack_lars_fit                        | table         | fit and store LARS regression model                           | parameters 'lambda1', 'lambda2', 'use_cholesky', 'no_intercept', 'no_normalize' and 'silent'                          | NULL     |
+| mlpack_lars_pred                       | table         | predict using stored LARS regression model                    | NULL                                                                                                                  | NULL     |
+| mlpack_linear_regression_fit           | table         | fit and store linear regression model                         | parameters 'lambda', 'intercept' and 'silent'                                                                         | NULL     |
+| mlpack_linear_regression_pred          | table         | predict using stored linear regression model                  | NULL                                                                                                                  | NULL     |
+| mlpack_linear_svm_train                | table         | fit and store linear SVM classification                       | parameters 'numClasses', 'lambda', 'delta', 'fitIntercept', 'standardize', 'maxIterations', 'tolerance', and 'silent' | NULL     |
+| mlpack_linear_svm_pred                 | table         | predict classification using stored linear SVM model          | NULL                                                                                                                  | NULL     |
+| mlpack_logistic_regression_fit         | table         | fit and store logistic regression model                       | parameters 'lambda', 'intercept' and 'silent'                                                                         | NULL     |
+| mlpack_logistic_regression_pred        | table         | predict classification using stored logistic regression model | NULL                                                                                                                  | NULL     |
+| mlpack_naive_bayes_train               | table         | fit and store naive Bayes classification                      | parameters 'numClasses', 'incremental_variance', and 'silent'                                                         | NULL     |
+| mlpack_naive_bayes_pred                | table         | predict classification using stored naive Bayes model         | NULL                                                                                                                  | NULL     |
+| mlpack_random_forest_train             | table         | use random forest to train and store a model                  | parameters 'nclasses', 'ntrees', 'seed', 'threads' and 'silent'                                                       | NULL     |
+| mlpack_random_forest_pred              | table         | predict classification using stored random forest model       | NULL                                                                                                                  | NULL     |
+| mlpack_softmax_regression_pred         | table         | predict classification using softmax regression model         | NULL                                                                                                                  | NULL     |
+| mlpack_kmeans                          | table         | use kmeans unsupervised clustering                            | parameters 'clusters', and 'iterations'                                                                               | NULL     |
+| mlpack_mlpack_version                  | scalar        | returns the version string for the mlpack version used        | NULL                                                                                                                  | NULL     |
+| mlpack_armadillo_version               | scalar        | returns the version string for the armadillo version used     | NULL                                                                                                                  | NULL     |
+| mlpack_softmax_regression_fit          | table         | NULL                                                          | NULL                                                                                                                  | NULL     |
 
 ### Overloaded Functions
 
