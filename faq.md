@@ -24,7 +24,9 @@ toc: false
 
 <div class="answer" markdown="1">
 
-DuckDB was created by [Dr. Mark Raasveldt](https://mytherin.github.io) & [Dr. Hannes Mühleisen](https://hannes.muehleisen.org) at the [Centrum Wiskunde & Informatica (CWI)](https://www.cwi.nl) in Amsterdam, the Netherlands. Mark and Hannes have set up the [DuckDB Foundation](https://duckdb.org/foundation/) that collects donations and funds development and maintenance of DuckDB. Mark and Hannes are also co-founders of [DuckLabs](https://www.ducklabs.com), which provides commercial services around DuckDB, and employs several core contributors of DuckDB.
+DuckDB was created by [Dr. Mark Raasveldt](https://mytherin.github.io) & [Dr. Hannes Mühleisen](https://hannes.muehleisen.org) at the [Centrum Wiskunde & Informatica (CWI)](https://www.cwi.nl) in Amsterdam, the Netherlands. Mark and Hannes have set up the [DuckDB Foundation](https://duckdb.org/foundation/) that collects donations and funds development and maintenance of DuckDB. Mark and Hannes are also co-founders of [DuckLabs](https://www.ducklabs.com).
+
+In 2026, [DuckLabs joined Amazon Web Services]({% post_url 2026-08-26-ducklabs-to-join-aws %}). The DuckDB project's intellectual property remained in the DuckDB Foundation and the project continues as open source.
 
 </div>
 
