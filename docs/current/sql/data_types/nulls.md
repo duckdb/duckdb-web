@@ -117,7 +117,7 @@ For details, see the [`IN` documentation]({% link docs/current/sql/expressions/i
 
 `NULL` values are ignored in most aggregate functions.
 
-Aggregate functions that do not ignore `NULL` values include: `first`, `last`, `list` and `array_agg`. To exclude `NULL` values from those aggregate functions, the [`FILTER` clause]({% link docs/current/sql/query_syntax/filter.md %}) can be used.
+Aggregate functions that do not ignore `NULL` values include: `first`, `last`, `list` and `array_agg`. To exclude `NULL` values from these results, use a [`FILTER` clause]({% link docs/current/sql/query_syntax/filter.md %}) with a predicate that excludes the relevant null rows, such as `list(x) FILTER (WHERE x IS NOT NULL)`. A different filter predicate does not remove `NULL` values from rows that pass it.
 
 <!-- test:setup DROP TABLE IF EXISTS integers; -->
 
