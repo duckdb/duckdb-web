@@ -73,14 +73,22 @@ LOAD {{ page.extension.name }};
 
 <div class="extension_functions_table"></div>
 
-|    function_name     | function_type | description | comment | examples |
-|----------------------|---------------|-------------|---------|----------|
-| pintail              | scalar        | NULL        | NULL    |          |
-| st_geohash           | scalar        | NULL        | NULL    |          |
-| st_geohash_bbox      | scalar        | NULL        | NULL    |          |
-| st_geohash_neighbors | scalar        | NULL        | NULL    |          |
-| st_geomfromgeohash   | scalar        | NULL        | NULL    |          |
-| st_pointfromgeohash  | scalar        | NULL        | NULL    |          |
+|    function_name     | function_type |                                   description                                   | comment |                          examples                          |
+|----------------------|---------------|---------------------------------------------------------------------------------|---------|------------------------------------------------------------|
+| pintail              | scalar        | Internal load-path smoke function; returns a Pintail diagnostic string.         | NULL    | [pintail('load-smoke')]                                    |
+| st_box2dfromgeohash  | scalar        | Decode a Geohash prefix to a BOX2D-compatible latitude/longitude bounding box.  | NULL    | [st_box2dfromgeohash('ezs42-extra', 5)]                    |
+| st_box2dfromgeohash  | scalar        | Decode a Geohash to a BOX2D-compatible latitude/longitude bounding box.         | NULL    | [st_box2dfromgeohash('ezs42')]                             |
+| st_geohash           | scalar        | Encode a geometry extent as a Geohash with an optional maximum character count. | NULL    | [st_geohash('POINT(121.4737 31.2304)'::GEOMETRY, 6)]       |
+| st_geohash           | scalar        | Encode latitude and longitude as a standard Geohash Base32 string.              | NULL    | [st_geohash(31.2304, 121.4737, 6)]                         |
+| st_geohash           | scalar        | Encode latitude and longitude using the default Geohash precision.              | NULL    | [st_geohash(31.2304, 121.4737)]                            |
+| st_geohash           | scalar        | Encode the smallest Geohash cell containing a geometry's complete XY extent.    | NULL    | [st_geohash('LINESTRING(-126 48, -126.1 48.1)'::GEOMETRY)] |
+| st_geohash_bbox      | scalar        | Decode a Geohash prefix to its latitude/longitude bounding box.                 | NULL    | [st_geohash_bbox('ezs42-extra', 5)]                        |
+| st_geohash_bbox      | scalar        | Decode a Geohash to its latitude/longitude bounding box.                        | NULL    | [st_geohash_bbox('ezs42')]                                 |
+| st_geohash_neighbors | scalar        | Return the eight adjacent Geohash cells in [N, NE, E, SE, S, SW, W, NW] order.  | NULL    | [st_geohash_neighbors('ezs42')]                            |
+| st_geomfromgeohash   | scalar        | Decode a Geohash prefix to the polygon boundary of its cell.                    | NULL    | [st_geomfromgeohash('c0w3h-extra', 5)]                     |
+| st_geomfromgeohash   | scalar        | Decode a Geohash to the polygon boundary of its cell.                           | NULL    | [st_geomfromgeohash('c0w3h')]                              |
+| st_pointfromgeohash  | scalar        | Decode a Geohash prefix to the center point of the selected cell.               | NULL    | [st_pointfromgeohash('wtw3sj-extra', 6)]                   |
+| st_pointfromgeohash  | scalar        | Decode a Geohash to the center point of its cell.                               | NULL    | [st_pointfromgeohash('wtw3sj')]                            |
 
 ### Overloaded Functions
 

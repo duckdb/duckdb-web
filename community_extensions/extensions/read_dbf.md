@@ -33,8 +33,8 @@ docs:
     **Output Schema:**
     The output schema will depend on the structure of the DBF file being read. Each column in the DBF file will be represented as a column in the output, with appropriate data types based on the field types defined in the DBF file.
 
-extension_star_count: 4
-extension_star_count_pretty: 4
+extension_star_count: 5
+extension_star_count_pretty: 5
 extension_download_count: 952
 extension_download_count_pretty: 952
 image: '/images/community_extensions/social_preview/preview_community_extension_read_dbf.png'
