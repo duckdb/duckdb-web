@@ -84,7 +84,7 @@ FROM range(0, 100) t(x);
 
 <div id="rrdiagram"></div>
 
-Aggregates are functions that *combine* multiple rows into a single value. Aggregates are different from scalar functions and window functions because they change the cardinality of the result. As such, aggregates can only be used in the `SELECT` and `HAVING` clauses of a SQL query.
+Aggregates are functions that *combine* multiple rows into a single value. Aggregates are different from scalar functions and window functions because they change the cardinality of the result. Aggregate functions can be used in the `SELECT`, `HAVING`, and `ORDER BY` clauses of a SQL query.
 
 ### `DISTINCT` Clause in Aggregate Functions
 
