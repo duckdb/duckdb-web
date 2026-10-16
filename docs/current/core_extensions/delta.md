@@ -111,18 +111,20 @@ INSERT INTO my_table SELECT * FROM other_table;
 
 ### Time Travel
 
-To read a specific version of a Delta table, attach it and use the `AT (VERSION => n)` clause:
+To read a table as it was at an earlier version, use the `AT` clause, an `ATTACH` option or a `delta_scan` parameter:
 
 ```sql
-ATTACH 's3://my-bucket/my-delta-table' AS my_table (TYPE delta);
+-- Query an attached table
 SELECT * FROM my_table AT (VERSION => 5);
+
+-- Attach the table at a version
+ATTACH 's3://my-bucket/my-delta-table' AS my_table_v5 (TYPE delta, VERSION 5);
+
+-- Scan without attaching
+SELECT * FROM delta_scan('s3://my-bucket/my-delta-table', version => 5);
 ```
 
-Alternatively, pin a version at attach time:
-
-```sql
-ATTACH 's3://my-bucket/my-delta-table' AS my_table (TYPE delta, VERSION 5);
-```
+A table attached at a version is read-only.
 
 ### Checkpointing
 
@@ -184,6 +186,21 @@ SELECT * FROM delta_list_files('file:///some/path/on/local/machine');
 | `partitions` | `MAP(VARCHAR, VARCHAR)` | Partition column values for the file. |
 | `have_deletes` | `BOOLEAN` | Whether the file has an associated deletion vector. |
 
+### Column Mapping
+
+Delta tables with [column mapping](https://github.com/delta-io/delta/blob/master/PROTOCOL.md#column-mapping) enabled are read as the Delta protocol specifies for each mode: in `id` mode, columns are matched by Parquet field ID; in `name` mode, by physical column name.
+
+The protocol requires every data file of an `id`-mode table to carry Parquet field IDs, but some writers omit them, including DuckDB v1.5.5 and earlier. The `delta_column_mapping_policy` setting decides how such files are read:
+
+* `strict`: fail with an error that names the file.
+* `lenient`: match the file's columns by physical name, or failing that by logical name, and log a warning under the `delta.ColumnMapping` log type. The names must cover every column in the file, otherwise the read fails.
+
+> Note The default is `lenient` in DuckDB v1.5 and changes to `strict` in v2.0. To keep reading such files after upgrading, set:
+
+```sql
+SET delta_column_mapping_policy = 'lenient';
+```
+
 ### Credential Chains in Delta
 
 DuckDB Delta uses `delta-kernel-rs` and `object_store` for some network operations.
@@ -201,6 +218,7 @@ The `delta` extension adds the following settings:
 
 | Setting | Type | Default | Description |
 | --- | --- | --- | --- |
+| `delta_column_mapping_policy` | `VARCHAR` | `lenient` | How to read an `id`-mode data file without Parquet field IDs: `strict` raises an error, `lenient` matches its columns by name. See [Column Mapping](#column-mapping). |
 | `delta_kernel_logging` | `BOOLEAN` | `false` | Forward the internal logging of the [Delta Kernel](https://github.com/delta-incubator/delta-kernel-rs) to the DuckDB logger. May impact performance even when DuckDB logging is disabled. |
 | `delta_scan_explain_files_filtered` | `BOOLEAN` | `true` | Add the filtered files to the `EXPLAIN` output. May impact the performance of `delta_scan` during `EXPLAIN ANALYZE` queries. |
 
@@ -208,25 +226,25 @@ The `delta` extension adds the following settings:
 
 The `delta` extension supports:
 
-- multithreaded scans and Parquet metadata reading
-- data skipping/filter pushdown
-  - skipping row groups in file (based on Parquet metadata)
-  - skipping complete files (based on Delta partition information)
-- projection pushdown
-- scanning tables with deletion vectors
-- all primitive types
-- structs
-- VARIANT type
-- blind appends (`INSERT INTO`)
-- cloud storage (AWS S3, Azure, GCS) with secrets
+* multithreaded scans and Parquet metadata reading
+* data skipping/filter pushdown
+    * skipping row groups in file (based on Parquet metadata)
+    * skipping complete files (based on Delta partition information)
+* projection pushdown
+* scanning tables with deletion vectors
+* all primitive types
+* structs
+* VARIANT type
+* blind appends (`INSERT INTO`)
+* cloud storage (AWS S3, Azure, GCS) with secrets
 
 ## Supported Platforms
 
 The `delta` extension currently only supports the following platforms:
 
-- Linux AMD64 (x86_64 and ARM64): `linux_amd64` and `linux_arm64`
-- macOS Intel and Apple Silicon: `osx_amd64` and `osx_arm64`
-- Windows AMD64: `windows_amd64`
+* Linux AMD64 (x86_64 and ARM64): `linux_amd64` and `linux_arm64`
+* macOS Intel and Apple Silicon: `osx_amd64` and `osx_arm64`
+* Windows AMD64: `windows_amd64`
 
 Support for the [other DuckDB platforms]({% link docs/current/extensions/extension_distribution.md %}#platforms) is work-in-progress.
 
