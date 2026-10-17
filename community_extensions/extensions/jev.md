@@ -81,8 +81,8 @@ docs:
 
 extension_star_count: 10
 extension_star_count_pretty: 10
-extension_download_count: 876
-extension_download_count_pretty: 876
+extension_download_count: 913
+extension_download_count_pretty: 913
 image: '/images/community_extensions/social_preview/preview_community_extension_jev.png'
 layout: community_extension_doc
 ---

@@ -56,8 +56,8 @@ docs:
 
 extension_star_count: {"message":"Not Found","documentation_url":"https://docs.github.com/rest","status":"404"}
 extension_star_count_pretty: n/a
-extension_download_count: 643
-extension_download_count_pretty: 643
+extension_download_count: 665
+extension_download_count_pretty: 665
 image: '/images/community_extensions/social_preview/preview_community_extension_livetennis.png'
 layout: community_extension_doc
 ---
