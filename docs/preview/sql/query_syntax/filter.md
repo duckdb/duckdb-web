@@ -13,7 +13,7 @@ Some aggregate functions also do not filter out `NULL` values, so using a `FILTE
 
 ## Examples
 
-### Filtering `NULL` values from lists
+### Filtering `NULL` Values from Lists
 
 A `FILTER` condition acts on rows, not on the values stored in the resulting list. Here the first expression keeps the `NULL` value because `y` is `true` for that row, while the second explicitly excludes null values from `x`:
 
