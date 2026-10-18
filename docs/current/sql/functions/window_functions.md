@@ -233,7 +233,7 @@ Note that there is no comma separating the arguments from the `ORDER BY` clause.
 
 All [general-purpose window functions](#general-purpose-window-functions) that accept `IGNORE NULLS` respect nulls by default. This default behavior can optionally be made explicit via `RESPECT NULLS`.
 
-In contrast, all [aggregate window functions](#aggregate-window-functions) (except for `list` and its aliases, which can be made to ignore nulls via a `FILTER`) ignore nulls and do not accept `RESPECT NULLS`. For example, `sum(column) OVER (ORDER BY time) AS cumulativeColumn` computes a cumulative sum where rows with a `NULL` value of `column` have the same value of `cumulativeColumn` as the row that precedes them.
+In contrast, all [aggregate window functions](#aggregate-window-functions) (except for `list` and its aliases, which retain `NULL` values unless a `FILTER` condition excludes those rows, e.g., `list(x) FILTER (WHERE x IS NOT NULL)`) ignore nulls and do not accept `RESPECT NULLS`. For example, `sum(column) OVER (ORDER BY time) AS cumulativeColumn` computes a cumulative sum where rows with a `NULL` value of `column` have the same value of `cumulativeColumn` as the row that precedes them.
 
 ## Evaluation
 
