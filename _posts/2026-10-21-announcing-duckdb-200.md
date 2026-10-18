@@ -154,6 +154,14 @@ Extensions built against the old unstable C++ API must be rebuilt against v2.0.0
 
 The ICU library dependency has been removed from the core build; timezones, calendars and collations are now handled natively by the `icu` extension, with no change in behavior. No query changes are needed, but custom builds no longer bundle ICU.
 
+### Amalgamation Build Deprecated
+
+The amalgamation build, which bundles DuckDB's entire source code into a single header and a single source file, is now deprecated. The amalgamation has grown too large to be realistically useful in most cases.
+
+## Extended Support for v1.5
+
+To ensure a smooth transition and allow sufficient time for testing, we extended the support period of DuckDB v1.5 until March 2027. For details, see the [release calendar]({% link release_calendar.md %}).
+
 ## Summary
 
 These were a few highlights, but there are many more features and improvements in this release. There have been more than 10,000 commits by many contributors since v1.5. The full [release notes can be found on GitHub](https://github.com/duckdb/duckdb/releases/tag/v2.0.0). 
