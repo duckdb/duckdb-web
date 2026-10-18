@@ -101,10 +101,10 @@ docs:
       https://leonardovida.github.io/duckdb-ai/docs/cookbooks
     - For agents, the full docs as one text file: https://leonardovida.github.io/duckdb-ai/llms-full.txt
 
-extension_star_count: 16
-extension_star_count_pretty: 16
-extension_download_count: 720
-extension_download_count_pretty: 720
+extension_star_count: 17
+extension_star_count_pretty: 17
+extension_download_count: 810
+extension_download_count_pretty: 810
 image: '/images/community_extensions/social_preview/preview_community_extension_ai.png'
 layout: community_extension_doc
 ---
