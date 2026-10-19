@@ -219,6 +219,17 @@ SELECT data_file, cardinality, delete_count
 FROM delta_list_files('file:///some/path/on/local/machine', version => 3, delete_count => true);
 ```
 
+### Reading Domain Metadata
+
+`delta_domain_metadata` returns the [domain metadata](https://github.com/delta-io/delta/blob/master/PROTOCOL.md#domain-metadata) of a table, one row per domain, with the columns `domain` and `configuration`, both `VARCHAR`. It also takes a `version` parameter:
+
+```sql
+SELECT domain, configuration
+FROM delta_domain_metadata('file:///some/path/on/local/machine');
+```
+
+For an attached table, the same pairs are the `tags` of the table in `duckdb_tables()`.
+
 ### Column Mapping
 
 Delta tables with [column mapping](https://github.com/delta-io/delta/blob/master/PROTOCOL.md#column-mapping) enabled are read as the Delta protocol specifies for each mode: in `id` mode, columns are matched by Parquet field ID; in `name` mode, by physical column name.
