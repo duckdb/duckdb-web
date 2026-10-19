@@ -248,6 +248,8 @@ For the time being, DuckDB and [core extensions]({% link docs/preview/core_exten
 
 DuckDB version 2.1 will stop supporting `osx_amd64`.
 
+TODO: [DuckLake v1.1](https://ducklake.select/2026/10/21/ducklake-11/), incl. spec and reference implementation
+
 ## Summary
 
 These were a few highlights, but there are many more features and improvements in this release. There have been almost 20,000 commits by many contributors since v1.5, many shipping smaller features as well as performance and usability improvements. The full [release notes can be found on GitHub](https://github.com/duckdb/duckdb/releases/tag/v2.0.0).

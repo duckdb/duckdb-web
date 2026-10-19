@@ -145,6 +145,12 @@ The [What's New in the Docs for 2.0 page]({% link docs/preview/whats_new_in_the_
 
 Several of the headline v2.0.0 changes are covered in [Breaking Changes](#breaking-changes) above: the new default [storage format](#storage-format), the [PEG-based SQL parser](#sql-parser), the reworked [C and C++ extension API](#c-and-c-extension-api), and the native timezone, calendar and collation support left after [ICU was removed from the core build](#icu-removed-from-the-core-build).
 
+## Performane Issues
+
+(This is a major TODO that needs to be resolved before the release.)
+
+-> py vs cli perf differences
+
 ## See Also
 
 * [Storage Versions and Format]({% link docs/preview/internals/storage.md %})
