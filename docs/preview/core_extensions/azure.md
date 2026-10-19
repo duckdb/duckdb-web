@@ -368,16 +368,19 @@ SET azure_http_logging_redact_headers = 'Authorization;x-ms-date';
 The Azure extension relies on the Azure SDK to connect to Azure Blob storage and supports printing the SDK logs to the console.
 To control the log level, set the [`AZURE_LOG_LEVEL`](https://github.com/Azure/azure-sdk-for-cpp/blob/main/sdk/core/azure-core/README.md#sdk-log-messages) environment variable.
 
-For instance, verbose logs can be enabled in Python as follows:
+For instance, to start the DuckDB CLI with verbose logs:
 
-```python
-import os
-import duckdb
+```batch
+AZURE_LOG_LEVEL=verbose duckdb
+```
 
-os.environ["AZURE_LOG_LEVEL"] = "verbose"
-
-duckdb.sql("CREATE SECRET myaccount (TYPE azure, PROVIDER credential_chain, SCOPE 'az://myaccount.blob.core.windows.net/')")
-duckdb.sql("SELECT count(*) FROM 'az://myaccount.blob.core.windows.net/path/to/blob.parquet'")
+```sql
+CREATE SECRET myaccount (
+    TYPE azure,
+    PROVIDER credential_chain,
+    SCOPE 'az://myaccount.blob.core.windows.net/'
+);
+SELECT count(*) FROM 'az://myaccount.blob.core.windows.net/path/to/blob.parquet';
 ```
 
 ### Difference between ADLS and Blob Storage
