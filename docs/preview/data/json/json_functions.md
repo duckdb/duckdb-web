@@ -419,7 +419,7 @@ true
 
 ## JSON Patching and Normalization Functions
 
-The following scalar functions compute, apply and clean up JSON patches. They complement the [`json_merge_patch` function]({% link docs/preview/data/json/creating_json.md %}), which applies a [RFC 7396](https://datatracker.ietf.org/doc/html/rfc7396) merge patch to a JSON document.
+The following scalar functions compute, apply and clean up JSON patches. They complement the [`json_merge_patch` function]({% link docs/preview/data/json/creating_json.md %}), which applies a [RFC 7396](https://datatracker.ietf.org/doc/html/rfc7396) merge patch to a JSON document. For an end-to-end example of using these functions in a data reconciliation pipeline, see the [“Reconciling JSON in DuckDB, One Patch at a Time” blog post]({% post_url 2026-08-18-reconciling-json %}).
 
 | Function                                          | Description                                                                                                                                                                                                                                                                                  |
 | :------------------------------------------------ | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
