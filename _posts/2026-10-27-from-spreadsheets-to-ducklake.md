@@ -9,7 +9,7 @@ excerpt: "Matt Martin, a data engineer who is writing a book on DuckLake, has sp
 tag: using-duckdb
 ---
 
-[Matt Martin](https://www.linkedin.com/in/mattmartin14/) is a data engineer at State Farm who is writing a book on DuckLake. He also writes about DuckDB on [his Substack](https://performancede.substack.com/). We talked to him in his personal capacity about how he got to DuckDB, why DuckLake caught his attention and what he expects from DuckDB v2.0.
+TL;DR: After nearly two decades working with increasingly sophisticated data infrastructure, data engineer [Matt Martin](https://www.linkedin.com/in/mattmartin14/) discovered DuckDB could handle many of the analytical tasks he cared about without the operational complexity he had come to associate with big data. The same preference for familiar SQL and simpler infrastructure drew him to DuckLake, and he has since become an active tester and advocate of DuckDB's evolving capabilities.
 
 ## From Copy-Paste to Code
 
@@ -140,6 +140,6 @@ He has built a [DuckDB-Wasm dashboard that talks via Quack to a DuckLake hosted 
 
 ## Conclusion
 
-Matt's path, from spreadsheets and macros, through MPP warehouses and Spark, to DuckDB and DuckLake, reflects a theme we hear often: most data work does not need a cluster, and removing friction is worth more than raw scale. 
+Matt's journey does not suggest that distributed systems are unnecessary. It illustrates a different engineering principle: start with the requirements of the workload, and introduce additional infrastructure only when those requirements justify it. For Matt, DuckDB and DuckLake demonstrate how much analytical capability can be delivered without making the underlying system unnecessarily complicated.
 
-We would like to thank Matt for the conversation and, if you are reading this, are using DuckDB, and would like to share your story, drop us a line at [quack@duckdb.org](mailto:quack@duckdb.org).
+We would like to thank Matt for the conversation. You can follow his writing on DuckDB and DuckLake on [his Substack](https://performancede.substack.com/). And if you are reading this, are using DuckDB, and would like to share your story, drop us a line at [quack@duckdb.org](mailto:quack@duckdb.org).
