@@ -110,11 +110,13 @@ FROM delta_scan('gs://my-bucket/my-delta-table');
 To create a Delta table, attach the location for it and create a table named after the attached database:
 
 ```sql
-ATTACH 's3://my-bucket/my-new-table' AS my_new_table (TYPE delta);
-CREATE TABLE my_new_table.my_new_table (id BIGINT, region VARCHAR)
+ATTACH 's3://my-bucket/events' AS events (TYPE delta);
+CREATE TABLE events.events (id BIGINT, region VARCHAR)
 PARTITIONED BY (region);
-INSERT INTO my_new_table.my_new_table VALUES (1, 'eu');
+INSERT INTO events VALUES (1, 'eu');
 ```
+
+Only `CREATE TABLE` needs the full `events.events` name: without the database name, it creates the table in the default database.
 
 The table can be read and written without attaching it again. `ATTACH` does not check that the path holds a Delta table: a path without one attaches as an empty database, so a mistyped path only shows when the table is first read.
 
@@ -123,7 +125,7 @@ The table can be read and written without attaching it again. `ATTACH` does not 
 Options in a `WITH` clause are stored as Delta table properties, except `location`, which must match the attached path:
 
 ```sql
-CREATE TABLE my_new_table.my_new_table (id BIGINT, name VARCHAR)
+CREATE TABLE events.events (id BIGINT, name VARCHAR)
 WITH ('delta.enableDeletionVectors' = 'true', 'delta.appendOnly' = 'true');
 ```
 
