@@ -154,25 +154,25 @@ A managed table that DuckDB [creates](#creating-tables) uses catalog-managed com
 
 This extension supports:
 
-- Listing available tables: `SHOW ALL TABLES;`{:.language-sql .highlight}
-- Interacting with tables using standard SQL: `SELECT * FROM ⟨catalog⟩.⟨schema⟩.⟨table⟩;`{:.language-sql .highlight}
-- [Time travel](#time-travel): `SELECT * FROM ... AT (VERSION => ...);`{:.language-sql .highlight} and `SELECT * FROM ... AT (TIMESTAMP => ...);`{:.language-sql .highlight}
-- Inserts: `INSERT INTO ... VALUES (...);`{:.language-sql .highlight}
-- Creating managed and external tables: `CREATE TABLE ... (...);`{:.language-sql .highlight}
-- Checkpointing individual tables: `CALL unity_catalog_checkpoint_table('my_catalog.my_schema.my_table');`{:.language-sql .highlight}
+* Listing available tables: `SHOW ALL TABLES;`{:.language-sql .highlight}
+* Interacting with tables using standard SQL: `SELECT * FROM ⟨catalog⟩.⟨schema⟩.⟨table⟩;`{:.language-sql .highlight}
+* [Time travel](#time-travel): `SELECT * FROM ... AT (VERSION => ...);`{:.language-sql .highlight} and `SELECT * FROM ... AT (TIMESTAMP => ...);`{:.language-sql .highlight}
+* Inserts: `INSERT INTO ... VALUES (...);`{:.language-sql .highlight}
+* Creating managed and external tables: `CREATE TABLE ... (...);`{:.language-sql .highlight}
+* Checkpointing individual tables: `CALL unity_catalog_checkpoint_table('my_catalog.my_schema.my_table');`{:.language-sql .highlight}
 
 It does not currently support:
 
-- `DELETE`{:.language-sql .highlight} or `UPDATE`{:.language-sql .highlight}
-- `DROP TABLE`{:.language-sql .highlight} or `ALTER TABLE`{:.language-sql .highlight}
-- Creation or manipulation of views or schemas
+* `DELETE`{:.language-sql .highlight} or `UPDATE`{:.language-sql .highlight}
+* `DROP TABLE`{:.language-sql .highlight} or `ALTER TABLE`{:.language-sql .highlight}
+* Creation or manipulation of views or schemas
 
 ## Supported DuckDB Versions and Platforms
 
 The `unity_catalog` (and `delta`) extension currently supports the following platforms:
 
-- Linux AMD64 (x86_64 and ARM64): `linux_amd64` and `linux_arm64`
-- macOS Intel and Apple Silicon: `osx_amd64` and `osx_arm64`
-- Windows AMD64: `windows_amd64`
+* Linux AMD64 (x86_64 and ARM64): `linux_amd64` and `linux_arm64`
+* macOS Intel and Apple Silicon: `osx_amd64` and `osx_arm64`
+* Windows AMD64: `windows_amd64`
 
 Support for the [other DuckDB platforms]({% link docs/preview/extensions/extension_distribution.md %}#platforms) is work-in-progress.
