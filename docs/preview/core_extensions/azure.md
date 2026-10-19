@@ -120,6 +120,8 @@ Since v1.5.4, the extension buffers written data locally and uploads it in block
 By default, the uploaded blocks are committed when the file is closed, so other readers see the new content only after the write completes.
 To commit earlier, set `azure_write_staged_blocks_per_commit` to the number of blocks after which an intermediate commit happens.
 
+> Warning An intermediate commit makes an incomplete file visible to readers. A Parquet file cannot be read until its footer is written at the end, so keep the default `0` for Parquet files and lakehouse tables.
+
 ### Writing Large Files
 
 Azure limits a blob to 50,000 blocks.
