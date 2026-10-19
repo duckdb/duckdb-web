@@ -1,15 +1,15 @@
 ---
 layout: post
-title: "Announcing DuckDB 2.0.0"
+title: "Announcing DuckDB 2.0.0 LTS “Cinnamon Teal”"
 authors:
   - The DuckDB team
 thumb: "/images/blog/thumbs/duckdb-release-2-0-0.svg"
 image: "/images/blog/thumbs/duckdb-release-2-0-0.png"
-excerpt: "The DuckDB team is happy to announce that today we're releasing DuckDB version 2.0.0, codenamed “Cyanoptera”. This is our biggest feature release so far, shipping asynchronous I/O, triggers, and an extensible SQL parser, along with a first-class `VARIANT` type, a more efficient storage format and much more, built from close to 20,000 commits since v1.5."
+excerpt: "The DuckDB team is happy to announce that today we're releasing DuckDB version 2.0.0 LTS, codenamed “Cinnamon Teal” (Cyanoptera). This is our biggest feature release so far, shipping asynchronous I/O, triggers, and an extensible SQL parser, along with a first-class `VARIANT` type, a more efficient storage format and much more, built from close to 20,000 commits since v1.5."
 tag: release
 ---
 
-We are proud to release DuckDB v2.0.0, codenamed “Cyanoptera” after the [cinnamon teal](https://en.wikipedia.org/wiki/Cinnamon_teal) _(Spatula cyanoptera),_ a strikingly reddish-brown duck found in the western Americas.
+We are proud to release DuckDB v2.0.0, codenamed “Cinnamon Teal” after the [cinnamon teal](https://en.wikipedia.org/wiki/Cinnamon_teal) _(Spatula cyanoptera),_ a strikingly reddish-brown duck found in the western Americas.
 
 While [DuckDB v1.0]({% post_url 2024-06-03-announcing-duckdb-100 %}) was all about stability and backwards compatibility, DuckDB v2.0 is above all a feature release.
 In this blog post, we summarize the highlights and then walk through the breaking changes and how to migrate.
@@ -76,6 +76,60 @@ DISCONNECT;
 
 The `CONNECT` statement is not limited to Quack: it points your session at any remote database that supports it, and the new remote pushdown optimizer ships SQL directly to PostgreSQL and MySQL instead of pulling tables over the wire.
 
+TODO: integrate this to the text
+
+
+<!-- markdownlint-disable MD001 -->
+
+<div class="duck-diagram" markdown="1">
+
+<div class="duck-diagram-box" markdown="1">
+
+#### <svg class="icon"><use href="#database-01"></use></svg> DuckDB server
+
+```sql
+CALL quack_serve(
+    token = 'my_token'
+);
+```
+
+</div>
+
+<div class="duck-diagram-arrow">quack:</div>
+
+<div class="duck-diagram-box" markdown="1">
+
+#### <svg class="icon"><use href="#database-01"></use></svg> DuckDB client
+
+```sql
+ATTACH 'quack:server.example.com'
+    AS qk (TOKEN 'my_token');
+
+CONNECT qk;
+SELECT count(*) FROM events;
+-- executes on the server,
+-- results stream back
+DISCONNECT;
+```
+
+</div>
+
+</div>
+
+<!-- markdownlint-enable MD001 -->
+
+`CONNECT` is the successor to the `remote.query($$...$$)` workaround we showed when Quack was first revealed – we looked at that syntax and said: no, this cannot be it. And `CONNECT` is not limited to Quack: it points your session at any remote database that supports it, and the new remote pushdown optimizer ([#22914](https://github.com/duckdb/duckdb/pull/22914)) ships SQL directly to PostgreSQL and MySQL instead of pulling tables over the wire:
+
+```sql
+CONNECT 'postgres://localhost/mydb';
+SELECT count(*) FROM orders; -- runs on the PostgreSQL server
+DISCONNECT;
+```
+
+If you have worked with analytical systems in the past, you may assume that DuckDB cannot handle transactional workloads. But DuckDB has been built as a transactional, multi-connection database with full MVCC and transaction isolation since day one. Most users just never needed that in a single-user scenario. It turns out DuckDB handles transactions well: it's fast enough to compete with general-purpose databases like PostgreSQL on quite a few workloads, and the client/server pattern finally lets that machinery shine in multi-tenant, long-running deployments.
+
+Running DuckDB long-term also comes with new challenges, which is why v2.0 pushes on better metrics, logs, and observability (see, e.g., the metrics layer rework in [#22799](https://github.com/duckdb/duckdb/pull/22799)) that let you look at a DuckDB instance and see what it is actually doing. People even built standalone clients for the Quack protocol within weeks of the preview. We thought we were extending DuckDB to talk to other DuckDBs; the world said no, no, no, and built their own clients. Who would have thought.
+
 ### Agent Mode in the CLI
 
 Coding agents such as Claude Code, Codex and Cursor increasingly drive the DuckDB CLI on their users' behalf. The v2.0 CLI detects when it is being run by an agent and switches to [agent mode]({% post_url 2026-10-09-agent-mode %}): it prints compact Markdown tables instead of padded boxes, says clearly when a result was truncated, stops runaway queries early and reports errors as JSON.
@@ -115,19 +169,41 @@ DuckDB v2.0 ships a revamped, stable C API with a versioned [ABI](https://en.wik
 
 You can also register and host your own trusted [extension repositories](https://github.com/duckdb/duckdb/pull/24777), so an organization can host and sign its own extensions and have them install and load just like the built-in ones.
 
-TODO: this needs more text
+TODO: integrate this to the text
+
+an organization can host and sign its own extensions and have them install and load just like the built-in ones:
+
+```sql
+SET allow_extension_repositories = 'allowed';
+
+CREATE EXTENSION REPOSITORY my_repo
+    WITH PREFIX 'https://extensions.example.org';
+
+INSTALL my_ext FROM my_repo;
+LOAD my_repo/my_ext;
+```
+
+A repository is a name, a URL prefix, and one or more RSA public keys that are trusted to sign the extensions served from it. The prefix can point at anything DuckDB can read: a local path, `https`, `s3`, you name it. At `CREATE` time, DuckDB fetches the repository's public keys and pins them into the repository definition, printing each key's SHA-256 fingerprint so you can compare it against one published out of band. If you would rather not trust the network at all, you can pass the key directly:
+
+```sql
+CREATE EXTENSION REPOSITORY my_repo
+    WITH PREFIX 'https://extensions.example.org';
+    USING PUBLIC KEY '-----BEGIN PUBLIC KEY----- ...';
+```
+
+Pinned repositories survive restarts, support key rotation by trusting multiple keys, and can be audited at any time through the `duckdb_extension_repositories()` table function, or removed again with `DROP EXTENSION REPOSITORY`. Together with the stable C API, the extension story rounds out nicely: write your extension once, sign it, host it wherever you like, and `INSTALL` it anywhere.
 
 ### SQL Dialect Additions
 
 As always, DuckDB's SQL dialect keeps growing. A few favorites from this release cycle:
 
-* `NEAREST` joins turn top-k similarity search into a join clause, handy for vector and embedding workloads.
-* Data-modifying CTEs let you use `INSERT`, `UPDATE`, `DELETE` and `COPY` as pipeline steps.
-* Nested schemas allow schemas within schemas, e.g., `CREATE SCHEMA finance.reports`.
-* The `$⟨variable⟩`{:.language-sql .highlight} shorthand lets you write `$x` anywhere an expression is allowed, instead of `getvariable('⟨variable⟩')`{:.language-sql .highlight}.
-* JSON mutation functions `json_set`, `json_insert`, `json_replace` and `json_remove` modify JSON documents in place.
+* [`NEAREST` joins]({% link docs/preview/sql/query_syntax/from.md %}#nearest-joins) turn top-k similarity search into a join clause, handy for vector and embedding workloads.
+* [Data-modifying CTEs]({% link docs/preview/sql/query_syntax/with.md %}#data-modifying-ctes) let you use `INSERT`, `UPDATE`, `DELETE` and `COPY` as pipeline steps.
+* [Nested schemas]({% link docs/preview/sql/statements/create_schema.md %}#nested-schemas) allow schemas within schemas, e.g., `CREATE SCHEMA finance.reports`.
+* The [`$⟨variable⟩`{:.language-sql .highlight} shorthand]({% link docs/preview/sql/statements/set_variable.md %}#the-name-shorthand) lets you write `$x` anywhere an expression is allowed, instead of `getvariable('⟨variable⟩')`{:.language-sql .highlight}.
+* [JSON mutation functions]({% link docs/preview/data/json/json_functions.md %}#json-mutation-functions) `json_set`, `json_insert`, `json_replace` and `json_remove` modify JSON documents in place.
 
-There is more: SQL-standard `FETCH FIRST`, `UNNEST` in `GROUP BY` and well-defined `MERGE` / `UPDATE ... FROM` semantics for multi-matched rows.
+There is more: SQL-standard [`FETCH FIRST`]({% link docs/preview/sql/query_syntax/limit.md %}#fetch-first), [`UNNEST` in `GROUP BY`]({% link docs/preview/sql/query_syntax/groupby.md %}#grouping-by-unnest) and well-defined [`MERGE`]({% link docs/preview/sql/statements/merge_into.md %}) / [`UPDATE ... FROM`]({% link docs/preview/sql/statements/update.md %}) semantics for multi-matched rows.
 
 ## Migrating to v2.0
 
