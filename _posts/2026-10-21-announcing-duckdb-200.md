@@ -5,7 +5,7 @@ authors:
   - The DuckDB team
 thumb: "/images/blog/thumbs/duckdb-release-2-0-0.svg"
 image: "/images/blog/thumbs/duckdb-release-2-0-0.png"
-excerpt: "The DuckDB team is happy to announce that today we're releasing DuckDB version 2.0.0, codenamed “Cyanoptera”. This release ships DuckDB as a server, triggers, a first-class `VARIANT` type, asynchronous I/O, a brand new SQL parser, a new default storage format and much more, built from over 10,000 commits since v1.5."
+excerpt: "The DuckDB team is happy to announce that today we're releasing DuckDB version 2.0.0, codenamed “Cyanoptera”. This release ships DuckDB as a server, triggers, a first-class `VARIANT` type, asynchronous I/O, a brand new SQL parser, a new default storage format and much more, built from close to 20,000 commits since v1.5."
 tag: release
 ---
 
@@ -17,7 +17,7 @@ In this blog post, we summarize the highlights and then walk through the breakin
 
 > To install the new version, please visit the [installation page]({% link install/index.html %}). Note that it can take a few days to release some extensions and client libraries (e.g., Go, R, Java) due to the extra changes and review rounds required.
 
-With this release, we have two DuckDB lines available: v1.5, which continues to receive updates into early 2027, and v2.0, the new current release.
+With this release, we have two DuckDB lines available. To ensure a smooth transition and allow sufficient time for testing, we extended the support period of DuckDB v1.5 until March 2027. For details, see the [release calendar]({% link release_calendar.md %}).
 
 To find your way around the documentation for all of the new features, we also published a [“What's New in the Docs for 2.0”](/docs/preview/whats_new_in_the_docs) page that links each feature below to its documentation.
 
@@ -96,11 +96,6 @@ Because the new format is not backward compatible, see the [migration section](#
 
 DuckDB has always used a parser derived from PostgreSQL's. In v2.0 we ship our own modern, extensible [PEG-based parser]({% post_url 2026-08-20-duckdb-20-peg-parser %}). Extensions can now hook into the grammar itself, so expect extensions that expose entirely new SQL syntax, and error messages now come with precise source locations. The new parser is designed to be compatible with the old one, so you should not notice the swap. If you do, please file an issue.
 
-### Timezones, Calendars, and Collations Without ICU
-
-Timezone-aware timestamps, calendars and collations have always been powered by the ICU library. In v2.0, the ICU library is gone entirely: the `icu` extension now implements timezones, calendars and collations itself, with the timezone data built directly from the IANA database and compressed down to around 45 kB. 
-
-Everything keeps working exactly as before, and the native implementation is also faster.
 
 ### Write Extensions Once, Host Them Yourself
 
@@ -108,17 +103,30 @@ DuckDB v2.0 ships a revamped, stable C API with a versioned ABI, so an extension
 
 You can also register and host your own trusted [extension repositories](https://github.com/duckdb/duckdb/pull/24777), so an organization can host and sign its own extensions and have them install and load just like the built-in ones.
 
-## Windows Performance
+## Other Changes
 
-DuckDB v2.0 brings large performance improvements on Windows thanks to several optimizations, including a [switch to the `clang-cl` compiler](https://github.com/duckdb/duckdb/pull/24391) and a [new allocator](https://github.com/duckdb/duckdb/pull/24036). When we benchmarked a [preview build]({% post_url 2026-09-28-announcing-duckdb-156 %}#looking-ahead-duckdb-v20-on-windows) on the [TPC-H]({% link docs/current/core_extensions/tpch.md %}) SF300 dataset, the total hot runtime dropped from 822 seconds on v1.5.6 to 129 seconds, more than 6× faster. 
 
-The speedup will not generalize to all workloads, but you should see significant improvements for most workloads on Windows once you upgrade.
+### Timezones, Calendars, and Collations Without ICU
+
+Timezone-aware timestamps, calendars and collations have always been powered by the ICU library. In v2.0, the ICU library is gone entirely: the `icu` extension now implements timezones, calendars and collations itself, with the timezone data built directly from the IANA database and compressed down to around 45 kB. 
+
+Everything keeps working exactly as before, and the native implementation is also faster.
+
+TODO: let us know if you find anything
+
+### C and C++ Extension API
+
+Extensions built against the old unstable C++ API must be rebuilt against v2.0.0. Before upgrading, confirm that v2.0.0-compatible builds exist for any third-party extensions you depend on.
 
 ## Migrating to v2.0
 
 DuckDB v2.0 comes with a small set of breaking changes. For most users, upgrading is straightforward, but complex deployments running many DuckDB processes need more care. The storage format is the most likely source of problems. We recommend testing v2.0.0 on a shadow system before switching production over, and if your workload is mission-critical, you may want to wait for the first patch releases. 
 
-For the full details, see the [migration guide](/docs/preview/operations_manual/migration).
+For the full details, see the [migration guide]({% linkn docs/preview/operations_manual/migration.md %}).
+
+### ICU Removed from the Core Build
+
+The ICU library dependency has been removed from the core build; timezones, calendars and collations are now handled natively by the `icu` extension, with no change in behavior. No query changes are needed, but custom builds no longer bundle ICU.
 
 ### Storage Format
 
@@ -136,7 +144,7 @@ SELECT list_transform([1, 2, 3], lambda x: x + 1);
 
 You can temporarily re-enable the old syntax with `SET lambda_syntax = 'ENABLE_SINGLE_ARROW';`. Both the flag and the single-arrow syntax will be removed entirely in v2.1.
 
-### SQL Parser
+### SQL Parser Fallback Option
 
 The new PEG-based parser is intended to be compatible with the old PostgreSQL-derived one. If a query that parsed previously now fails, please file an issue. In the meantime, you can revert to the old parser via the `legacy_parser` extension:
 
@@ -146,24 +154,12 @@ LOAD legacy_parser;
 SET enable_legacy_parser = true;
 ```
 
-### C and C++ Extension API
-
-Extensions built against the old unstable C++ API must be rebuilt against v2.0.0. Before upgrading, confirm that v2.0.0-compatible builds exist for any third-party extensions you depend on.
-
-### ICU Removed from the Core Build
-
-The ICU library dependency has been removed from the core build; timezones, calendars and collations are now handled natively by the `icu` extension, with no change in behavior. No query changes are needed, but custom builds no longer bundle ICU.
-
 ### Amalgamation Build Deprecated
 
 The amalgamation build, which bundles DuckDB's entire source code into a single header and a single source file, is now deprecated. The amalgamation has grown too large to be realistically useful in most cases.
 
-## Extended Support for v1.5
-
-To ensure a smooth transition and allow sufficient time for testing, we extended the support period of DuckDB v1.5 until March 2027. For details, see the [release calendar]({% link release_calendar.md %}).
-
 ## Summary
 
-These were a few highlights, but there are many more features and improvements in this release. There have been more than 10,000 commits by many contributors since v1.5. The full [release notes can be found on GitHub](https://github.com/duckdb/duckdb/releases/tag/v2.0.0). 
+These were a few highlights, but there are many more features and improvements in this release. There have almost 20,000 commits by many contributors since v1.5. The full [release notes can be found on GitHub](https://github.com/duckdb/duckdb/releases/tag/v2.0.0). 
 
 We would like to thank our community for the detailed issue reports and feedback that have driven this release, and our special thanks go to our contributors!
