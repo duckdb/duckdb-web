@@ -4,7 +4,7 @@ layout: docu
 title: Delta Extension
 ---
 
-The `delta` extension adds support for the [Delta Lake open-source storage format](https://delta.io/). It is built using the [Delta Kernel](https://github.com/delta-incubator/delta-kernel-rs). The extension offers **read and write support** for Delta tables, both local and remote.
+The `delta` extension adds support for the [Delta Lake open-source storage format](https://delta.io/). It is built using the [Delta Kernel](https://github.com/delta-io/delta-kernel-rs). The extension offers **read and write support** for Delta tables, both local and remote.
 
 For implementation details, see the [announcement blog post]({% post_url 2024-06-10-delta %}).
 
@@ -284,7 +284,7 @@ The `delta` extension adds the following settings:
 | Setting | Type | Default | Description |
 | --- | --- | --- | --- |
 | `delta_column_mapping_policy` | `VARCHAR` | `strict` | How to read an `id`-mode data file without Parquet field IDs: `strict` raises an error, `lenient` matches its columns by name. See [Column Mapping](#column-mapping). |
-| `delta_kernel_logging` | `BOOLEAN` | `false` | Forward the internal logging of the [Delta Kernel](https://github.com/delta-incubator/delta-kernel-rs) to the DuckDB logger. May impact performance even when DuckDB logging is disabled. |
+| `delta_kernel_logging` | `BOOLEAN` | `false` | Forward the internal logging of the [Delta Kernel](https://github.com/delta-io/delta-kernel-rs) to the DuckDB logger. May impact performance even when DuckDB logging is disabled. |
 | `delta_scan_explain_files_filtered` | `BOOLEAN` | `true` | Add the filtered files to the `EXPLAIN` output. May impact the performance of `delta_scan` during `EXPLAIN ANALYZE` queries. |
 
 ## Features
