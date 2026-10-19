@@ -1,15 +1,19 @@
 ---
 layout: docu
 title: I/O
+redirect_from:
+- /async
 ---
 
 > Warning DuckDB ships with safe defaults. The configuration options described on this page are advanced options, so proceed with caution when changing them.
+
+## Asynchronous I/O
 
 Starting with v2.0, DuckDB supports asynchronous I/O. Instead of blocking a worker thread until requested data arrives, DuckDB issues reads in the background and keeps multiple requests in flight while worker threads process data that has already arrived. This can significantly speed up queries when synchronous I/O does not saturate the available bandwidth, e.g., when reading data from object storage such as S3.
 
 For a detailed explanation of the design and benchmark results, see the [“Asynchronous I/O in DuckDB” blog post]({% post_url 2026-07-31-asynchronous-io %}).
 
-## Supported Formats
+### Supported Formats
 
 Asynchronous I/O is currently supported for the following formats:
 
@@ -18,7 +22,7 @@ Asynchronous I/O is currently supported for the following formats:
 
 Other formats, such as JSON files and DuckDB's native database format, use synchronous I/O. Asynchronous I/O is used automatically for the supported formats, including when they are read through data lake formats such as [DuckLake](https://ducklake.select/).
 
-## Thread Pools
+### Thread Pools
 
 DuckDB uses two thread pools:
 
@@ -33,7 +37,7 @@ SET async_threads = 48;
 
 > Warning The asynchronous pool increases the total number of threads per DuckDB instance. If you run many DuckDB instances in a single process, consider setting `threads` and `async_threads` explicitly.
 
-## Read-Ahead
+### Read-Ahead
 
 To keep the asynchronous threads busy, DuckDB reads ahead: it schedules the reads for upcoming scan jobs (e.g., row groups in Parquet files or byte ranges in CSV files) before the worker threads need them. While a worker thread processes the current job, the asynchronous threads fetch the data for the next jobs. If the data for a job has not arrived yet, the worker thread is free to run other tasks in the meantime.
 
@@ -51,7 +55,7 @@ SET read_ahead_depth = 5;
 
 In the default mode, the read-ahead budget is negotiated with the same memory manager that distributes memory between operators such as joins, sorts and window functions. Under high memory pressure, the read-ahead queue shrinks to a single job and the scan behaves similarly to a synchronous scan. Once memory frees up, the queue fills up again. To limit the total memory used by DuckDB, use the [`memory_limit` setting]({% link docs/preview/configuration/overview.md %}).
 
-## Tuning
+### Tuning
 
 The default settings work well in most cases. On machines with high network bandwidth, you can further increase throughput by fixing the read-ahead depth and adjusting the number of asynchronous threads and the HTTP retry settings. For example, the following configuration saturated a 25 Gbit/s network on a 64-core EC2 instance reading Parquet files from S3:
 

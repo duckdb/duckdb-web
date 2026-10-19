@@ -52,14 +52,14 @@ ccache -M 50G
 
 DuckDB fully supports Linux, macOS and Windows. Both x86_64 (amd64) and AArch64 (ARM64) builds are available for these platforms, and almost all extensions are distributed for these platforms.
 
-| Platform name      | Description                                                            |
-|--------------------|------------------------------------------------------------------------|
-| `linux_amd64`      | Linux x86_64 (AMD64) with [glibc](https://www.gnu.org/software/libc/)  |
-| `linux_arm64`      | Linux AArch64 (ARM64) with [glibc](https://www.gnu.org/software/libc/) |
-| `osx_amd64`        | macOS 12+ AMD64 (Intel CPUs)                                           |
-| `osx_arm64`        | macOS 12+ ARM64 (Apple Silicon CPUs)                                   |
-| `windows_amd64`    | Windows 10+ x86_64 (AMD64)                                             |
-| `windows_arm64`    | Windows 10+ AArch64 (ARM64)                                            |
+| Platform name      | Description                                                            | Comment |
+|--------------------|------------------------------------------------------------------------|---------|
+| `linux_amd64`      | Linux x86_64 (AMD64) with [glibc](https://www.gnu.org/software/libc/)  | |
+| `linux_arm64`      | Linux AArch64 (ARM64) with [glibc](https://www.gnu.org/software/libc/) | |
+| `osx_amd64`        | macOS 12+ AMD64 (Intel CPUs)                                           | Only [core extensions]({% link docs/preview/core_extensions/overview.md %}) are supported, [community extensions]({% link docs/preview/extensions/community_extensions.md %}) are no longer built for `osx_amd64`. |
+| `osx_arm64`        | macOS 12+ ARM64 (Apple Silicon CPUs)                                   | |
+| `windows_amd64`    | Windows 10+ x86_64 (AMD64)                                             | |
+| `windows_arm64`    | Windows 10+ AArch64 (ARM64)                                            | |
 
 For these platforms, builds are available for both the latest stable version and the preview version (nightly build).
 In some circumstances, you may still want to build DuckDB from source, e.g., to test an unmerged [pull request](https://github.com/duckdb/duckdb/pulls).
