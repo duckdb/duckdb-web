@@ -33,7 +33,7 @@ To find your way around the documentation for all of the new features, we also p
 
 DuckDB has always used a parser derived from PostgreSQL's. In v2.0 we ship our own modern, extensible [PEG-based parser]({% post_url 2026-08-20-duckdb-20-peg-parser %}). Extensions can now hook into the grammar itself, so expect extensions that expose entirely new SQL syntax, and error messages now come with precise source locations. The new parser is designed to be compatible with the old one, so you should not notice the swap. If you do, please file an issue.
 
-**TODO: this needs more text, potentially an image**
+*TODO: this needs more text, potentially an image*
 
 ### Triggers
 
@@ -48,7 +48,7 @@ FOR EACH STATEMENT
     FROM o JOIN n ON o.id = n.id;
 ```
 
-**TODO: this needs potentially an image**
+*TODO: this needs potentially an image*
 
 ### Asynchronous I/O
 
@@ -113,7 +113,7 @@ DuckDB v2.0 ships a revamped, stable C API with a versioned [ABI](https://en.wik
 
 You can also register and host your own trusted [extension repositories](https://github.com/duckdb/duckdb/pull/24777), so an organization can host and sign its own extensions and have them install and load just like the built-in ones.
 
-**TODO: this needs more text**
+*TODO: this needs more text*
 
 ### SQL Dialect Additions
 
@@ -127,7 +127,7 @@ As always, DuckDB's SQL dialect keeps growing. A few favorites from this release
 
 There is more: SQL-standard `FETCH FIRST`, `UNNEST` in `GROUP BY` and well-defined `MERGE` / `UPDATE ... FROM` semantics for multi-matched rows.
 
-**TODO: we could drop this section?**
+*TODO: we could drop this section?*
 
 ## Migrating to v2.0
 
@@ -164,7 +164,7 @@ If you're a [community extension]({% link community_extensions/index.md %}) deve
 
 Following DuckDB's long stint on C++11, DuckDB v2.0 now [requires a C++17 compiler]({% link docs/preview/dev/building/overview.md %}#prerequisites).
 
-**TODO: explain what the default compiler is**
+*TODO: explain what the default compiler is*
 
 ### Timezones, Calendars and Collations Without ICU
 
