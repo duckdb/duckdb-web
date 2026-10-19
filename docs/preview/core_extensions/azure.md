@@ -55,7 +55,7 @@ FROM 'az://⟨my_storage_account⟩.blob.core.windows.net/⟨my_container⟩/⟨
 
 ### Azure Data Lake Storage (ADLS)
 
-Allowed URI schemes: `abfss`
+Allowed URI schemes: `abfss` or `abfs` (both connect over HTTPS)
 
 ```sql
 SELECT count(*)
@@ -84,6 +84,13 @@ FROM 'abfss://⟨my_storage_account⟩.dfs.core.windows.net/⟨my_filesystem⟩/
 ```sql
 SELECT *
 FROM 'abfss://⟨my_storage_account⟩.dfs.core.windows.net/⟨my_filesystem⟩/⟨path⟩/*.csv';
+```
+
+The fully qualified path can also use the `⟨my_filesystem⟩@⟨my_storage_account⟩` form:
+
+```sql
+SELECT count(*)
+FROM 'abfss://⟨my_filesystem⟩@⟨my_storage_account⟩.dfs.core.windows.net/⟨path⟩/⟨my_file⟩.⟨parquet_or_csv⟩';
 ```
 
 ## Writing to Azure Blob Storage
