@@ -168,7 +168,7 @@ Because the new format is not backward compatible, see the [migration section](#
 
 DuckDB v2.0 ships a revamped, stable C API with a versioned [ABI](https://en.wikipedia.org/wiki/Application_binary_interface), so an extension built once keeps working across releases, along with a thin C++ API on top of it. 
 
-You can also register and host your own trusted [extension repositories](https://github.com/duckdb/duckdb/pull/24777), so an organization can host and sign its own extensions and have them install and load just like the built-in ones.
+You can also register and host your own trusted [extension repositories]({% link docs/preview/extensions/extension_repositories.md %}), so an organization can host and sign its own extensions and have them install and load just like the built-in ones.
 
 TODO: integrate this to the text
 
