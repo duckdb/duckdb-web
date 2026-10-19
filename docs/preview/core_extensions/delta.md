@@ -8,8 +8,6 @@ The `delta` extension adds support for the [Delta Lake open-source storage forma
 
 For implementation details, see the [announcement blog post]({% post_url 2024-06-10-delta %}).
 
-> Warning We are aware of a regression in Azure Onelake which appears to be a consequence of a change in `delta-kernel-rs`. You can track the issue [on GitHub](https://github.com/duckdb/duckdb-delta/issues/307).
-
 > To connect to Unity Catalog, DuckDB has the [`unity_catalog` extension]({% link docs/preview/core_extensions/unity_catalog.md %}).
 
 ## Installing and Loading
