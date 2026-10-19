@@ -116,7 +116,7 @@ COPY my_table
 TO 'az://⟨my_storage_account⟩.blob.core.windows.net/⟨my_container⟩/⟨path⟩/output.parquet';
 ```
 
-The extension buffers written data locally and uploads it in blocks of `azure_write_block_size` bytes (default: 8 MiB).
+Since v1.5.4, the extension buffers written data locally and uploads it in blocks of `azure_write_block_size` bytes (default: 8 MiB).
 By default, the uploaded blocks are committed when the file is closed, so other readers see the new content only after the write completes.
 To commit earlier, set `azure_write_staged_blocks_per_commit` to the number of blocks after which an intermediate commit happens.
 
@@ -147,6 +147,8 @@ Use the following [configuration options]({% link docs/preview/configuration/ove
 | `azure_write_staged_blocks_per_commit` | Number of uploaded blocks after which an intermediate commit happens. With `0`, all blocks are committed when the file is closed. Non-zero values make partial writes visible sooner, at the cost of extra requests. This option does not change the 50,000-block limit. | `UBIGINT` | `0` |
 | `azure_transport_option_type` | Underlying [adapter](https://github.com/Azure/azure-sdk-for-cpp/blob/main/doc/HttpTransportAdapter.md) to use in the Azure SDK. Valid values are: `default` or `curl`. | `VARCHAR` | `default` |
 | `azure_context_caching` | Enable/disable the caching of the underlying Azure SDK HTTP connection in the DuckDB connection context when performing queries. If you suspect that this is causing some side effect, you can try to disable it by setting it to false (not recommended). | `BOOLEAN` | `true` |
+
+Since v1.5.4, `azure_read_transfer_chunk_size` and `azure_read_buffer_size` default to 8 MiB (previously 1 MiB).
 
 > Setting `azure_transport_option_type` explicitly to `curl` will have the following effect:
 > * On Linux, this may solve certificate issue (`Error: Invalid Error: Fail to get a new connection for: https://storage_account_name.blob.core.windows.net/. Problem with the SSL CA cert (path? access rights?)`) because when specifying the extension will try to find the bundle certificate in various paths (that is not done by *curl* by default and might be wrong due to static linking).
@@ -342,7 +344,7 @@ Where `variable_name` can be one of the following:
 
 ### Logging
 
-The Azure extension writes its HTTP requests to the DuckDB [`HTTP` log]({% link docs/preview/operations_manual/logging/overview.md %}). To inspect them:
+Since v1.5.2, the Azure extension writes its HTTP requests to the DuckDB [`HTTP` log]({% link docs/preview/operations_manual/logging/overview.md %}). To inspect them:
 
 ```sql
 CALL enable_logging('HTTP');
