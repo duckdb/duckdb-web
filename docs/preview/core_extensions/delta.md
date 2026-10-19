@@ -185,7 +185,7 @@ When attaching a Delta table you can pass the following options to `ATTACH`:
 | --- | --- | --- | --- |
 | `VERSION` | `UBIGINT` | latest | Attach the table at a specific [table version](#time-travel). |
 | `TIMESTAMP` | `TIMESTAMP WITH TIME ZONE` | latest | Attach the table at the version current at a [point in time](#time-travel). |
-| `PIN_SNAPSHOT` | `BOOLEAN` | `false` | Resolve the table snapshot once at attach time and reuse it, rather than re-resolving the latest version per query. |
+| `PIN_SNAPSHOT` | `BOOLEAN` | `false` | Resolve the latest table snapshot once, on first use, and reuse it for every later query. Without it, each transaction reads the latest version, and loads only the log entries committed since the previous read. |
 | `PUSHDOWN_PARTITION_INFO` | `BOOLEAN` | `true` | Push down partition information so that whole files can be skipped based on partition values. |
 | `PUSHDOWN_FILTERS` | `VARCHAR` | `all` | Filter pushdown mode for file skipping. One of `none`, `all`, `constant_only`, `dynamic_only`. |
 
