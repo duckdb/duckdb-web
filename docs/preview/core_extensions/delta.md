@@ -133,7 +133,7 @@ WITH ('delta.enableDeletionVectors' = 'true', 'delta.appendOnly' = 'true');
 
 Properties that enable a Delta feature, such as deletion vectors, also upgrade the table's protocol as needed. Values can be any constant expression except `NULL`.
 
-To create a table with [column mapping](#column-mapping), set `'delta.columnMapping.mode'` to `'name'` or `'id'`. A column-mapped table cannot have nested or partition columns, because DuckDB cannot write to such tables yet.
+To create a table with [column mapping](#column-mapping), set `'delta.columnMapping.mode'` to `'name'` or `'id'`.
 
 ### Appending Data
 
@@ -144,7 +144,7 @@ ATTACH 's3://my-bucket/my-delta-table' AS my_table (TYPE delta);
 INSERT INTO my_table SELECT * FROM other_table;
 ```
 
-Spark stores the width of a `CHAR(n)` or `VARCHAR(n)` column in the table schema. Since v1.5.6, DuckDB checks it on write: a value longer than `n` characters fails the whole statement. A write to a table that declares such a width on a nested field, such as `ARRAY<VARCHAR(5)>`, is refused.
+Spark stores the width of a `CHAR(n)` or `VARCHAR(n)` column in the table schema. Since v1.5.6, DuckDB checks it on write: a value longer than `n` characters fails the whole statement.
 
 ### Time Travel
 
@@ -334,8 +334,10 @@ The `delta` extension supports:
 * `CREATE OR REPLACE TABLE` and `CREATE TABLE ... AS SELECT` are not supported. Create the table, then `INSERT` into it.
 * `UPDATE`, `DELETE`, `MERGE INTO`, `ALTER TABLE` and `DROP TABLE` are not supported, nor are `RETURNING` and `ON CONFLICT` clauses on `INSERT`.
 * `CREATE TABLE` does not support constraints (including `NOT NULL`), `DEFAULT` values, generated columns, `SORTED BY`, column types without a Delta equivalent such as unsigned integers or a table whose columns are all partition columns.
+* A table created with [column mapping](#column-mapping) cannot have nested or partition columns, because DuckDB cannot write to such tables yet.
 * Tables with an interval (`interval year to month` or `interval day to second`), `geometry` or `geography` column cannot be read.
 * Writing to a table with the `allowColumnDefaults` writer feature is not supported, even when the table declares no default yet. DuckDB does not apply Delta column defaults, so it refuses the write rather than storing `NULL` in their place. Reading such a table works.
+* Writing to a table that declares a `CHAR(n)` or `VARCHAR(n)` width on a nested field, such as `ARRAY<VARCHAR(5)>`, is not supported.
 
 ## Supported Platforms
 
