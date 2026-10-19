@@ -248,6 +248,17 @@ may be inconsistent.
 To avoid ambiguities, we recommend that you configure exactly one available
 credential type in your production chain secrets.
 
+To use [Azure workload identity](https://learn.microsoft.com/en-us/entra/workload-id/workload-identities-overview), for example on AKS, name `workload_identity` in the secret's `CHAIN` and set the `AZURE_FEDERATED_TOKEN_FILE`, `AZURE_CLIENT_ID` and `AZURE_TENANT_ID` environment variables.
+
+```sql
+CREATE SECRET (
+    TYPE azure,
+    PROVIDER credential_chain,
+    CHAIN 'workload_identity',
+    ACCOUNT_NAME '⟨storage_account_name⟩'
+);
+```
+
 ## Settings
 
 The `delta` extension adds the following settings:
