@@ -33,8 +33,8 @@ docs:
 
 extension_star_count: 34
 extension_star_count_pretty: 34
-extension_download_count: 838
-extension_download_count_pretty: 838
+extension_download_count: 1062
+extension_download_count_pretty: 1.1k
 image: '/images/community_extensions/social_preview/preview_community_extension_ggsql.png'
 layout: community_extension_doc
 ---

@@ -178,8 +178,8 @@ docs:
 
 extension_star_count: 4
 extension_star_count_pretty: 4
-extension_download_count: 703
-extension_download_count_pretty: 703
+extension_download_count: 747
+extension_download_count_pretty: 747
 image: '/images/community_extensions/social_preview/preview_community_extension_panduck.png'
 layout: community_extension_doc
 ---

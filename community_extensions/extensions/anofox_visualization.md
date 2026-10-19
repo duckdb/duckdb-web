@@ -48,8 +48,8 @@ docs:
 
 extension_star_count: 8
 extension_star_count_pretty: 8
-extension_download_count: 847
-extension_download_count_pretty: 847
+extension_download_count: 861
+extension_download_count_pretty: 861
 image: '/images/community_extensions/social_preview/preview_community_extension_anofox_visualization.png'
 layout: community_extension_doc
 ---

@@ -186,6 +186,10 @@
 			</div>
 		</div>
 	</main>
+
+	{% if page.collection == "posts" or page.collection == "library" %}
+		{% include community_cta.html %}
+	{% endif %}
 	
 	{% include footer.html %}
 	

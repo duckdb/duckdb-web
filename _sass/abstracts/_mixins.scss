@@ -252,6 +252,13 @@
 			color: var(--interactive-button-black-text-color, #E6E6E6);
 		}
 	}
+	&.ghost{
+		border: 1px solid transparent;
+		color: var(--interactive-button-black-border-color, #1A1A1A);
+		&:hover{
+			border: 1px solid var(--interactive-button-black-border-color, #1A1A1A);
+		}
+	}
 	&.white{
 		background: white;
 		color: black;

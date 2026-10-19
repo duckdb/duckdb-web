@@ -93,8 +93,8 @@ docs:
 
 extension_star_count: 4
 extension_star_count_pretty: 4
-extension_download_count: 335
-extension_download_count_pretty: 335
+extension_download_count: 421
+extension_download_count_pretty: 421
 image: '/images/community_extensions/social_preview/preview_community_extension_pgvfs.png'
 layout: community_extension_doc
 ---
@@ -149,8 +149,9 @@ This extension does not add any types.
 
 <div class="extension_settings_table"></div>
 
-|     name     |                                                                                                  description                                                                                                  | input_type | scope  | aliases |
-|--------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|------------|--------|---------|
-| pgvfs_secret | Name of the postgres secret pgvfs:// connects with, unless a secret named pgvfs_<volume> exists for the volume. Unset: $PGVFS_URL, else the unnamed default postgres secret (the one DuckLake's catalog uses) | VARCHAR    | GLOBAL | []      |
+|         name          |                                                                                                     description                                                                                                     | input_type | scope  | aliases |
+|-----------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|------------|--------|---------|
+| pgdb_refresh_interval | Seconds between checks for a newer published version of each pgdb:// database attached READ_ONLY by its plain path; a newer one is attached in its place (running transactions keep theirs). 0 turns refreshing off | DOUBLE     | GLOBAL | []      |
+| pgvfs_secret          | Name of the postgres secret pgvfs:// connects with, unless a secret named pgvfs_<volume> exists for the volume. Unset: $PGVFS_URL, else the unnamed default postgres secret (the one DuckLake's catalog uses)       | VARCHAR    | GLOBAL | []      |
 
 

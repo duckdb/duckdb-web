@@ -57,10 +57,10 @@ docs:
     Requires the core ducklake extension in the same session and an attached DuckLake catalog.
     Compatible with DuckDB 1.5.* and DuckDB 2.x.
 
-extension_star_count: 0
-extension_star_count_pretty: 0
-extension_download_count: null
-extension_download_count_pretty: n/a
+extension_star_count: 1
+extension_star_count_pretty: 1
+extension_download_count: 164
+extension_download_count_pretty: 164
 image: '/images/community_extensions/social_preview/preview_community_extension_lakemon.png'
 layout: community_extension_doc
 ---

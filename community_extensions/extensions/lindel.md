@@ -22,9 +22,9 @@ repo:
   github: query-farm/lindel
   ref: 6f8501a9213852286053946981f23b467a45bcd6
 
-extension_star_count: 68
-extension_star_count_pretty: 68
-extension_download_count: 3493
+extension_star_count: 67
+extension_star_count_pretty: 67
+extension_download_count: 3528
 extension_download_count_pretty: 3.5k
 image: '/images/community_extensions/social_preview/preview_community_extension_lindel.png'
 layout: community_extension_doc
