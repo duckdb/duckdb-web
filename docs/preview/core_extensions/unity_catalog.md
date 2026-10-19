@@ -78,6 +78,16 @@ INSERT INTO my_catalog.my_schema.my_table VALUES (1, 'hello');
 INSERT INTO my_catalog.my_schema.my_table SELECT * FROM other_table;
 ```
 
+Inserts into a table with column `DEFAULT` values or generated columns fail with an error, as DuckDB cannot compute these columns yet.
+
+### Data Types
+
+DuckDB reads a table's schema from its Delta log. Unity Catalog's `timestamp` maps to `TIMESTAMP WITH TIME ZONE`, `timestamp_ntz` to `TIMESTAMP` and `variant` to `VARIANT`.
+
+* `VARIANT` columns can be read, shredded or not. Inserts write shredded variants if the table sets `delta.enableVariantShredding`. Inserts into a table with a `VARIANT` nested in a `STRUCT` or a list fail with an error.
+* Reading a table with an `INTERVAL` column fails with an error, as Delta intervals and DuckDB's `INTERVAL` differ in meaning.
+* A column of a type that DuckDB cannot read is listed with the type `UNKNOWN`, e.g., in `DESCRIBE`. Reading the table fails with an error that names the column.
+
 ### Creating Tables
 
 `CREATE TABLE` in a Unity Catalog schema writes the first version of a new Delta table and registers the table with Unity Catalog.
