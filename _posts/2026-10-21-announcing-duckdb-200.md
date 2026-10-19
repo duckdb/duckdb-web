@@ -122,7 +122,7 @@ Extensions built against the old unstable C++ API must be rebuilt against v2.0.0
 
 DuckDB v2.0 comes with a small set of breaking changes. For most users, upgrading is straightforward, but complex deployments running many DuckDB processes need more care. The storage format is the most likely source of problems. We recommend testing v2.0.0 on a shadow system before switching production over, and if your workload is mission-critical, you may want to wait for the first patch releases. 
 
-For the full details, see the [migration guide]({% linkn docs/preview/operations_manual/migration.md %}).
+For the full details, see the [migration guide]({% link docs/preview/operations_manual/migration.md %}).
 
 ### ICU Removed from the Core Build
 
