@@ -164,7 +164,7 @@ If you're a [community extension]({% link community_extensions/index.md %}) deve
 
 Following DuckDB's long stint on C++11, DuckDB v2.0 now [requires a C++17 compiler]({% link docs/preview/dev/building/overview.md %}#prerequisites).
 
-*TODO: explain what the default compiler is*
+We also switched to Clang as the default compiler for our release builds. On Linux and macOS, both DuckDB and its core extensions are built with Clang. On Windows, the CLI is built with Clang, while most core extensions are still built with MSVC. We may move more Windows builds to Clang in the future, but this requires further changes.
 
 ### Timezones, Calendars and Collations Without ICU
 
