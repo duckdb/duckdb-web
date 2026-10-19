@@ -33,20 +33,7 @@ To find your way around the documentation for all of the new features, we also p
 
 DuckDB has always used a parser derived from PostgreSQL's. In v2.0 we ship our own modern, extensible [PEG-based parser]({% post_url 2026-08-20-duckdb-20-peg-parser %}). Extensions can now hook into the grammar itself, so expect extensions that expose entirely new SQL syntax, and error messages now come with precise source locations. The new parser is designed to be compatible with the old one, so you should not notice the swap. If you do, please file an issue.
 
-*TODO: this needs more text, potentially an image*
-
-### Triggers
-
-DuckDB v2.0 delivers triggers in full: `BEFORE` and `AFTER` triggers, `FOR EACH ROW` and `FOR EACH STATEMENT`, transition tables via `REFERENCING OLD/NEW TABLE`, multiple triggers per event, `RETURNING` on triggered tables and `DROP TRIGGER`. The classic use case is audit tables, where a trigger records what changed in response to a table modification.
-
-```sql
-CREATE TRIGGER trg_audit AFTER UPDATE ON target
-REFERENCING OLD TABLE AS o NEW TABLE AS n
-FOR EACH STATEMENT
-    INSERT INTO audit
-    SELECT n.id, o.val, n.val
-    FROM o JOIN n ON o.id = n.id;
-```
+The old parser had served DuckDB since its first commit in 2018. Its grammar was generated with YACC/Bison, which produces an LALR(1) parser, so as DuckSQL grew even small additions could collide with existing rules and raise `shift/reduce` or `reduce/reduce` conflicts. A PEG grammar avoids this by trying alternatives in the order they are written, so adding syntax no longer risks breaking unrelated rules. Similarly, Python itself has recently also moved to a PEG-based parser in [version 3.9](https://peps.python.org/pep-0617/), for the same flexibility.
 
 *TODO: this needs potentially an image*
 
@@ -60,6 +47,19 @@ In this blog post, we showed the network throughput over the course of a query w
 ![Network throughput]({% link images/blog/async/q6_network_throughput_3way-light.svg %}){: .lightmode-img }
 ![Network throughput]({% link images/blog/async/q6_network_throughput_3way-dark.svg %}){: .darkmode-img }
 *Network throughput. Higher utilization and shorter runtime are better.*{: .caption }
+
+### Triggers
+
+DuckDB v2.0 delivers triggers in full: `BEFORE` and `AFTER` triggers, `FOR EACH ROW` and `FOR EACH STATEMENT`, transition tables via `REFERENCING OLD/NEW TABLE`, multiple triggers per event, `RETURNING` on triggered tables and `DROP TRIGGER`. The classic use case is audit tables, where a trigger records what changed in response to a table modification.
+
+```sql
+CREATE TRIGGER trg_audit AFTER UPDATE ON target
+REFERENCING OLD TABLE AS o NEW TABLE AS n
+FOR EACH STATEMENT
+    INSERT INTO audit
+    SELECT n.id, o.val, n.val
+    FROM o JOIN n ON o.id = n.id;
+```
 
 ## Ergonomics and Further Performance Improvements
 
@@ -89,7 +89,9 @@ The [`VARIANT` type]({% link docs/preview/sql/data_types/variant.md %}) stores s
 ```sql
 CREATE TABLE events (payload VARIANT);
 INSERT INTO events
-VALUES ('{"user": {"id": 42, "tags": ["a", "b"]}}'::JSON::VARIANT);
+VALUES
+    ('{"user": {"id": 42, "tags": ["a", "b"]}}'::JSON::VARIANT),
+    ('{"event": "click", "x": 10, "y": 20}'::JSON::VARIANT);
 
 SELECT variant_type(payload), variant_keys(payload)
 FROM events;
@@ -122,7 +124,7 @@ As always, DuckDB's SQL dialect keeps growing. A few favorites from this release
 * `NEAREST` joins turn top-k similarity search into a join clause, handy for vector and embedding workloads.
 * Data-modifying CTEs let you use `INSERT`, `UPDATE`, `DELETE` and `COPY` as pipeline steps.
 * Nested schemas allow schemas within schemas, e.g., `CREATE SCHEMA finance.reports`.
-* The `$⟨variable⟩` shorthand lets you write `$x` anywhere an expression is allowed, instead of `getvariable(...)`.
+* The `$⟨variable⟩` shorthand lets you write `$x` anywhere an expression is allowed, instead of `getvariable('⟨variable⟩')`.
 * JSON mutation functions `json_set`, `json_insert`, `json_replace` and `json_remove` modify JSON documents in place.
 
 There is more: SQL-standard `FETCH FIRST`, `UNNEST` in `GROUP BY` and well-defined `MERGE` / `UPDATE ... FROM` semantics for multi-matched rows.
@@ -134,29 +136,6 @@ There is more: SQL-standard `FETCH FIRST`, `UNNEST` in `GROUP BY` and well-defin
 DuckDB v2.0 comes with a small set of breaking changes. For most users, upgrading is straightforward, but complex deployments running many DuckDB processes need more care. The storage format is the most likely source of problems. We recommend testing v2.0.0 on a shadow system before switching production over, and if your workload is mission-critical, you may want to wait for the first patch releases. 
 
 For the full details, see the [migration guide]({% link docs/preview/operations_manual/migration.md %}).
-
-### Storage Format
-
-The new storage format is not backward compatible with earlier versions. A file written by v2.0.0 cannot be read by older DuckDB versions, which will report an IO error. In multi-process deployments, a single v2.0.0 write can make a shared file unreadable to older processes, so roll out carefully and ensure version compatibility.
-
-If you still need to write files that older versions can read, use the `-storage-version` CLI argument, the `storage_compatibility_version` configuration option or the `STORAGE_VERSION` option on `ATTACH`. To convert an existing database, open it with the older version and `EXPORT DATABASE`, then `IMPORT DATABASE` with v2.0.0. `COPY FROM DATABASE` is also supported.
-
-### SQL Parser Fallback Option
-
-The new PEG-based parser is intended to be compatible with the old PostgreSQL-derived one. If a query that parsed previously now fails, please file an issue. In the meantime, you can revert to the old parser via the `legacy_parser` extension:
-
-```sql
-INSTALL legacy_parser;
-LOAD legacy_parser;
-SET enable_legacy_parser = true;
-```
-
-### C and C++ Extension API
-
-Extensions built against the old unstable C++ API must be rebuilt against v2.0.0. Before upgrading, confirm that v2.0.0-compatible builds exist for any third-party extensions you depend on.
-
-If you're a [community extension]({% link community_extensions/index.md %}) developer, please check that your extension builds against v2.0.0. All new PRs in the community extensions repository are now built against v2.0.0 using the `ref` field in `description.yml`, and v1.5 binaries are no longer built automatically. For details, including how to submit last-minute fixes for v1.5.6 via the new `variegata` field, see the [announcement issue](https://github.com/duckdb/community-extensions/issues/3081).
-
 
 ## Internals and Deprecations
 
