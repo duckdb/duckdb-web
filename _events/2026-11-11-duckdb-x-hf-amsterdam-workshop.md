@@ -14,7 +14,7 @@ location: "Mr. Treublaan 7, Amsterdam"
 
 ## AI-Powered Review Analysis with DuckDB and Hugging Face: Build an Automated Customer Feedback Pipeline
 
-> **HANDS-ON WORKSHOP — BRING YOUR LAPTOP!**
+> Warning Hands-on workshop — Bring your laptop!
 
 Ratings are slipping, thousands of reviews are piling up, and nobody knows why. In this hands-on workshop, you'll build a pipeline that finds out automatically.
 
