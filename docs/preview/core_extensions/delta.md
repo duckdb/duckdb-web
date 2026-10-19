@@ -294,14 +294,18 @@ The `delta` extension supports:
 * multithreaded scans and Parquet metadata reading
 * data skipping/filter pushdown
     * skipping row groups in file (based on Parquet metadata)
-    * skipping complete files (based on Delta partition information)
-* projection pushdown
+    * skipping complete files (based on Delta partition information and file statistics)
+* projection pushdown, down to single fields of struct and [`VARIANT`](#variant-columns) columns
 * scanning tables with deletion vectors
+* [column mapping](#column-mapping) in `name` and `id` mode
+* [time travel](#time-travel) by version or timestamp
 * all primitive types
-* structs
+* nested types (structs, lists and maps)
 * VARIANT type
 * creating tables (`CREATE TABLE`)
-* blind appends (`INSERT INTO`)
+* blind appends (`INSERT INTO`), with file statistics for data skipping
+* [idempotent appends](#idempotent-appends)
+* [checkpoints](#checkpointing) (`CHECKPOINT`)
 * cloud storage (AWS S3, Azure, GCS) with secrets
 
 ## Limitations
