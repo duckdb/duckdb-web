@@ -351,8 +351,7 @@ Since v1.5.2, the Azure extension writes its HTTP requests to the DuckDB [`HTTP`
 ```sql
 CALL enable_logging('HTTP');
 SELECT * FROM 'az://⟨my_container⟩/⟨path⟩/⟨my_file⟩.parquet';
-SELECT request.type, request.url, response.status
-FROM duckdb_logs_parsed('HTTP');
+SELECT request.type, request.url, response.status FROM duckdb_logs_parsed('HTTP');
 ```
 
 Requests carry the DuckDB `User-Agent` header.
