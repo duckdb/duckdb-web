@@ -38,6 +38,19 @@ ATTACH 'my_catalog' AS my_catalog (TYPE unity_catalog, DEFAULT_SCHEMA 'main');
 
 Where `ENDPOINT` is your Unity Catalog REST API endpoint and `TOKEN` is a suitable credential. For Databricks, `ENDPOINT` is your [Workspace URL](https://docs.databricks.com/aws/en/workspace/workspace-details#workspace-instance-names-urls-and-ids) (typically `https://⟨instance⟩.cloud.databricks.com/`) and `TOKEN` can be e.g., a [personal access token](https://docs.databricks.com/aws/en/dev-tools/auth/pat) with `unity-catalog` scope — see [Access Control in Unity Catalog](https://docs.databricks.com/aws/en/data-governance/unity-catalog/access-control/) for the full range of options. For OSS Unity Catalog, see the [OSS Unity Catalog documentation](https://docs.unitycatalog.io/).
 
+### Attach Options
+
+When attaching a Unity Catalog catalog, you can pass the following options to `ATTACH`:
+
+| Option | Type | Default | Description |
+| --- | --- | --- | --- |
+| `SECRET` | `VARCHAR` | unnamed secret | Name of the `unity_catalog` secret to use. Without it, the unnamed `unity_catalog` secret is used. |
+| `DEFAULT_SCHEMA` | `VARCHAR` | detected | Schema that unqualified table names resolve to. Without it, DuckDB asks the server for the workspace's default namespace. |
+| `READ_ONLY` | `BOOLEAN` | `false` | Attach the catalog in read-only mode. |
+| `USE_IRC_SCAN_PLAN` | `BOOLEAN` | `false` | Plan scans on the server; see [Server-Side Scan Planning](#server-side-scan-planning). |
+
+> Note Only Databricks reports a default namespace. When you attach a Unity Catalog OSS catalog, always set `DEFAULT_SCHEMA`: without it, queries against the catalog fail, even with fully qualified table names.
+
 ### Reading
 
 ```sql
@@ -53,6 +66,22 @@ Standard inserts are supported:
 INSERT INTO my_catalog.my_schema.my_table VALUES (1, 'hello');
 INSERT INTO my_catalog.my_schema.my_table SELECT * FROM other_table;
 ```
+
+### Server-Side Scan Planning
+
+With `USE_IRC_SCAN_PLAN true`, DuckDB asks Unity Catalog to plan each scan through its Iceberg REST Catalog API. DuckDB sends the query's filters, the server prunes the list of files to read and returns it with the table's delete files, and DuckDB reads these files and applies the filters again itself:
+
+```sql
+ATTACH 'my_catalog' AS my_catalog (
+    TYPE unity_catalog,
+    DEFAULT_SCHEMA 'main',
+    USE_IRC_SCAN_PLAN true
+);
+```
+
+* If the server cannot plan a scan, e.g., because it does not offer the API or refuses the table, DuckDB reads the table through its Delta log instead, and does not try scan planning again on this attached catalog for 15 minutes.
+* Time travel queries (`AT (...)`) always read through the Delta log.
+* Positional delete files and deletion vectors are applied. A table with equality delete files cannot be read with scan planning.
 
 ### Catalog-Managed Commits
 
