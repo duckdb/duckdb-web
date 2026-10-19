@@ -212,6 +212,13 @@ SELECT * FROM delta_list_files('file:///some/path/on/local/machine');
 | `partitions` | `MAP(VARCHAR, VARCHAR)` | Partition column values for the file. |
 | `have_deletes` | `BOOLEAN` | Whether the file has an associated deletion vector. |
 
+To list the files of an earlier table version, pass `version => ⟨version⟩`. To add a `delete_count` column with the number of rows each file's deletion vector removes, pass `delete_count => true`:
+
+```sql
+SELECT data_file, cardinality, delete_count
+FROM delta_list_files('file:///some/path/on/local/machine', version => 3, delete_count => true);
+```
+
 ### Column Mapping
 
 Delta tables with [column mapping](https://github.com/delta-io/delta/blob/master/PROTOCOL.md#column-mapping) enabled are read as the Delta protocol specifies for each mode: in `id` mode, columns are matched by Parquet field ID; in `name` mode, by physical column name.
