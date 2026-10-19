@@ -29,6 +29,15 @@ SELECT *
 FROM delta_scan('file:///some/path/on/local/machine');
 ```
 
+### Attaching Tables
+
+A Delta table can also be attached as a database. The database holds exactly one table, with the same name as the database, so `my_table` and `my_table.my_table` refer to the same table:
+
+```sql
+ATTACH 's3://my-bucket/my-delta-table' AS my_table (TYPE delta);
+SELECT * FROM my_table;
+```
+
 ### Reading from an S3 Bucket
 
 To scan a Delta table in an [S3 bucket]({% link docs/preview/core_extensions/httpfs/s3api.md %}), run:
