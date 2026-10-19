@@ -233,6 +233,10 @@ Delta `variant` columns are read as DuckDB `VARIANT`, whether their files are sh
 
 `CREATE TABLE` accepts `VARIANT` columns. When writing, DuckDB shreds `VARIANT` values only if the table sets `'delta.enableVariantShredding'` to `'true'`, as the Delta protocol requires; otherwise it writes them unshredded. `CREATE TABLE` cannot set this property, so a table created by DuckDB holds unshredded files. Only top-level `VARIANT` columns can be written: an `INSERT` into a table with a `VARIANT` inside a struct, list or map fails.
 
+### Catalog-Managed Tables
+
+A Delta table with the `catalogManaged` feature, such as a Unity Catalog managed table, has commits that only its catalog tracks. Reading or writing such a table straight from storage, with `delta_scan` or `ATTACH ... (TYPE delta)`, fails with an error. Attach its catalog instead, for example with the [`unity_catalog` extension]({% link docs/preview/core_extensions/unity_catalog.md %}), and query the table through it.
+
 ### Credential Chains in Delta
 
 DuckDB Delta uses `delta-kernel-rs` and `object_store` for some network operations.
