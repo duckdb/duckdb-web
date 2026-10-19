@@ -225,6 +225,12 @@ The protocol requires every data file of an `id`-mode table to carry Parquet fie
 SET delta_column_mapping_policy = 'lenient';
 ```
 
+### VARIANT Columns
+
+Delta `variant` columns are read as DuckDB `VARIANT`, whether their files are shredded or not. A query that reads one field of a `VARIANT` or `STRUCT` column, such as `SELECT v.a`, reads only that field from the Parquet files, so on a shredded table it skips the columns of the other fields. A column that contains a `TIMESTAMP WITH TIME ZONE` anywhere is still read whole.
+
+`CREATE TABLE` accepts `VARIANT` columns. When writing, DuckDB shreds `VARIANT` values only if the table sets `'delta.enableVariantShredding'` to `'true'`, as the Delta protocol requires; otherwise it writes them unshredded. `CREATE TABLE` cannot set this property, so a table created by DuckDB holds unshredded files. Only top-level `VARIANT` columns can be written: an `INSERT` into a table with a `VARIANT` inside a struct, list or map fails.
+
 ### Credential Chains in Delta
 
 DuckDB Delta uses `delta-kernel-rs` and `object_store` for some network operations.
