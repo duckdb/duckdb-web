@@ -67,6 +67,42 @@ INSERT INTO my_catalog.my_schema.my_table VALUES (1, 'hello');
 INSERT INTO my_catalog.my_schema.my_table SELECT * FROM other_table;
 ```
 
+### Creating Tables
+
+`CREATE TABLE` in a Unity Catalog schema writes the first version of a new Delta table and registers the table with Unity Catalog.
+
+Without a location, the table is a managed table: Unity Catalog chooses where it is stored, and the table uses [catalog-managed commits](#catalog-managed-commits):
+
+```sql
+CREATE TABLE my_catalog.my_schema.my_table (id INTEGER, name VARCHAR);
+```
+
+With the `location` option, the table is an external table at that location. The location can be any expression that evaluates to an absolute path or a URI:
+
+```sql
+CREATE TABLE my_catalog.my_schema.my_external_table (id INTEGER, name VARCHAR)
+WITH (location = 's3://my-bucket/my_external_table');
+```
+
+Both managed and external tables can be partitioned:
+
+```sql
+CREATE TABLE my_catalog.my_schema.my_partitioned_table (id INTEGER, part VARCHAR)
+PARTITIONED BY (part);
+```
+
+`CREATE TABLE IF NOT EXISTS` does nothing if Unity Catalog already has a table with this name.
+
+The following are not supported and fail with an error:
+
+* `CREATE OR REPLACE TABLE` and `CREATE TABLE ... AS SELECT`
+* constraints, including `NOT NULL` and `PRIMARY KEY`
+* column `DEFAULT` values and generated columns
+* columns of a type that Delta cannot store, e.g., `TIME`
+* `SORTED BY`, and `WITH` options other than `location`, including Delta table properties
+
+> Warning Unity Catalog registers the table while `CREATE TABLE` runs, so a `ROLLBACK` of the surrounding transaction does not remove the table.
+
 ### Server-Side Scan Planning
 
 With `USE_IRC_SCAN_PLAN true`, DuckDB asks Unity Catalog to plan each scan through its Iceberg REST Catalog API. DuckDB sends the query's filters, the server prunes the list of files to read and returns it with the table's delete files, and DuckDB reads these files and applies the filters again itself:
@@ -85,13 +121,13 @@ ATTACH 'my_catalog' AS my_catalog (
 
 ### Catalog-Managed Commits
 
-Databricks Unity Catalog tables may use catalog-managed commits (Catalog-Coordinated Commits / CCv2), where commit coordination is handled by Databricks rather than written directly to the Delta log. DuckDB transparently uses this protocol when the attached table requires it — the insert syntax is identical:
+Managed tables in Databricks and in Unity Catalog OSS may use catalog-managed commits (Catalog-Coordinated Commits / CCv2), where Unity Catalog coordinates commits rather than writers committing directly to the Delta log. DuckDB transparently uses this protocol when the attached table requires it — the insert syntax is identical:
 
 ```sql
 INSERT INTO my_catalog.my_schema.my_catalog_managed_table VALUES (1, 'hello');
 ```
 
-> Note DuckDB does not yet support `CREATE TABLE` DDL, so CMC-enabled tables must be created via Spark or the UC CLI (setting the `delta.feature.catalogManaged` table property). Once a table is CMC-enabled, DuckDB reads and writes it transparently.
+A managed table that DuckDB [creates](#creating-tables) uses catalog-managed commits. Tables created by other clients, e.g., Spark or the Unity Catalog CLI, are read and written the same way.
 
 ## Features
 
@@ -101,12 +137,14 @@ This extension supports:
 - Interacting with tables using standard SQL: `SELECT * FROM ⟨catalog⟩.⟨schema⟩.⟨table⟩;`{:.language-sql .highlight}
 - Time travel: `SELECT * FROM ... AT (VERSION => ...);`{:.language-sql .highlight}
 - Inserts: `INSERT INTO ... VALUES (...);`{:.language-sql .highlight}
+- Creating managed and external tables: `CREATE TABLE ... (...);`{:.language-sql .highlight}
 - Checkpointing individual tables: `CALL unity_catalog_checkpoint_table('my_catalog.my_schema.my_table');`{:.language-sql .highlight}
 
 It does not currently support:
 
 - `DELETE`{:.language-sql .highlight} or `UPDATE`{:.language-sql .highlight}
-- Creation or manipulation of tables, views or schemas
+- `DROP TABLE`{:.language-sql .highlight} or `ALTER TABLE`{:.language-sql .highlight}
+- Creation or manipulation of views or schemas
 
 ## Supported DuckDB Versions and Platforms
 
