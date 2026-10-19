@@ -58,6 +58,17 @@ SHOW ALL TABLES;
 SELECT * FROM my_catalog.my_schema.my_table LIMIT 10;
 ```
 
+### Time Travel
+
+To read a table as of a version or a point in time, use the `AT` clause:
+
+```sql
+SELECT * FROM my_catalog.my_schema.my_table AT (VERSION => 5);
+SELECT * FROM my_catalog.my_schema.my_table AT (TIMESTAMP => TIMESTAMPTZ '2026-10-01 12:00:00+00');
+```
+
+A timestamp reads the latest version committed at or before that time. A timestamp before the table's first commit or later than the current time fails with an error.
+
 ### Writing
 
 Standard inserts are supported:
@@ -135,7 +146,7 @@ This extension supports:
 
 - Listing available tables: `SHOW ALL TABLES;`{:.language-sql .highlight}
 - Interacting with tables using standard SQL: `SELECT * FROM ⟨catalog⟩.⟨schema⟩.⟨table⟩;`{:.language-sql .highlight}
-- Time travel: `SELECT * FROM ... AT (VERSION => ...);`{:.language-sql .highlight}
+- [Time travel](#time-travel): `SELECT * FROM ... AT (VERSION => ...);`{:.language-sql .highlight} and `SELECT * FROM ... AT (TIMESTAMP => ...);`{:.language-sql .highlight}
 - Inserts: `INSERT INTO ... VALUES (...);`{:.language-sql .highlight}
 - Creating managed and external tables: `CREATE TABLE ... (...);`{:.language-sql .highlight}
 - Checkpointing individual tables: `CALL unity_catalog_checkpoint_table('my_catalog.my_schema.my_table');`{:.language-sql .highlight}
