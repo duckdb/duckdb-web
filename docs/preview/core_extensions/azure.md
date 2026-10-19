@@ -130,6 +130,9 @@ Use the following [configuration options]({% link docs/preview/configuration/ove
 | Name | Description | Type | Default |
 |:---|:---|:---|:---|
 | `azure_http_stats` | Include HTTP info from Azure Storage in the [`EXPLAIN ANALYZE` statement]({% link docs/preview/dev/profiling.md %}). | `BOOLEAN` | `false` |
+| `azure_http_logging` | Write Azure HTTP requests to the DuckDB `HTTP` log when it is enabled. See [Logging](#logging). | `BOOLEAN` | `true` |
+| `azure_http_logging_redact_query_params` | Semicolon-separated list of URL query parameter names whose values are redacted in the HTTP log. | `VARCHAR` | `sig` |
+| `azure_http_logging_redact_headers` | Semicolon-separated list of header names (case-insensitive) whose values are redacted in the HTTP log, for both requests and responses. | `VARCHAR` | `Authorization` |
 | `azure_read_transfer_concurrency` | Maximum number of threads the Azure client can use for a single parallel read. If `azure_read_transfer_chunk_size` is less than `azure_read_buffer_size` then setting this > 1 will allow the Azure client to do concurrent requests to fill the buffer. | `INTEGER` | `5` |
 | `azure_read_transfer_chunk_size` | Maximum size in bytes that the Azure client will read in a single request. It is recommended that this is a factor of `azure_read_buffer_size`. | `BIGINT` | `8*1024*1024` |
 | `azure_read_buffer_size` | Size of the read buffer. It is recommended that this is evenly divisible by `azure_read_transfer_chunk_size`. | `UBIGINT` | `8*1024*1024` |
@@ -315,6 +318,27 @@ Where `variable_name` can be one of the following:
 ## Additional Information
 
 ### Logging
+
+The Azure extension writes its HTTP requests to the DuckDB [`HTTP` log]({% link docs/preview/operations_manual/logging/overview.md %}). To inspect them:
+
+```sql
+CALL enable_logging('HTTP');
+SELECT * FROM 'az://⟨my_container⟩/⟨path⟩/⟨my_file⟩.parquet';
+SELECT request.type, request.url, response.status
+FROM duckdb_logs_parsed('HTTP');
+```
+
+Requests carry the DuckDB `User-Agent` header.
+The values of the `sig` query parameter and the `Authorization` header are replaced by `REDACTED`.
+To change what is redacted, set `azure_http_logging_redact_query_params` and `azure_http_logging_redact_headers`.
+A new value replaces the default list, so include `sig` or `Authorization` if you still want them redacted:
+
+```sql
+SET azure_http_logging_redact_headers = 'Authorization;x-ms-date';
+```
+
+The Azure extension applies only these settings, not DuckDB's `redact_http_logs` setting.
+To keep Azure requests out of the `HTTP` log, run `SET azure_http_logging = false;`.
 
 The Azure extension relies on the Azure SDK to connect to Azure Blob storage and supports printing the SDK logs to the console.
 To control the log level, set the [`AZURE_LOG_LEVEL`](https://github.com/Azure/azure-sdk-for-cpp/blob/main/sdk/core/azure-core/README.md#sdk-log-messages) environment variable.
