@@ -44,8 +44,8 @@ DuckDB v2.0 introduces [asynchronous I/O]({% link docs/preview/data/io.md %}) th
 We described the design in detail in a [dedicated blog post]({% post_url 2026-07-31-asynchronous-io %}).
 In this blog post, we showed the network throughput over the course of a query with and without asynchronous I/O:
 
-![Network throughput]({% link images/blog/async/q6_network_throughput_3way-light.svg %}){: .lightmode-img }
-![Network throughput]({% link images/blog/async/q6_network_throughput_3way-dark.svg %}){: .darkmode-img }
+![Network throughput]({% link images/blog/v20-release/sync-vs-async-network-throughput-light.svg %}){: .lightmode-img }
+![Network throughput]({% link images/blog/v20-release/sync-vs-async-network-throughput-dark.svg %}){: .darkmode-img }
 *Network throughput. Higher utilization and shorter runtime are better.*{: .caption }
 
 ### Triggers
