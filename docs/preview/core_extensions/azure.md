@@ -362,8 +362,7 @@ A new value replaces the default list, so include `sig` or `Authorization` if yo
 SET azure_http_logging_redact_headers = 'Authorization;x-ms-date';
 ```
 
-The Azure extension applies only these settings, not DuckDB's `redact_http_logs` setting.
-To keep Azure requests out of the `HTTP` log, run `SET azure_http_logging = false;`.
+> Warning The Azure extension applies only these settings, not DuckDB's `redact_http_logs` setting. To keep Azure requests out of the `HTTP` log, run `SET azure_http_logging = false;`.
 
 The Azure extension relies on the Azure SDK to connect to Azure Blob storage and supports printing the SDK logs to the console.
 To control the log level, set the [`AZURE_LOG_LEVEL`](https://github.com/Azure/azure-sdk-for-cpp/blob/main/sdk/core/azure-core/README.md#sdk-log-messages) environment variable.
