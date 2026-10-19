@@ -11,7 +11,7 @@ tag: release
 
 We are proud to release DuckDB v2.0.0, codenamed “Cyanoptera” after the [cinnamon teal](https://en.wikipedia.org/wiki/Cinnamon_teal) _(Anas cyanoptera),_ a strikingly reddish-brown duck found in the western Americas.
 
-DuckDB v2.0 is above all a feature release, built from over 10,000 commits since we released [v1.5]({% post_url 2026-03-09-announcing-duckdb-150 %}) in March. Where last year was the year of the lakehouse, this release kicks off the year of DuckDB as a server. It also ships a new SQL parser, a new default storage format, a reworked C API, and a small number of breaking changes.
+DuckDB v2.0 is above all a feature release, built from close to 20,000 commits since we released [v1.5]({% post_url 2026-03-09-announcing-duckdb-150 %}) in March. Where last year was the year of the lakehouse, this release kicks off the year of DuckDB as a server. It also ships a new SQL parser, a new default storage format, a reworked C API, and a small number of breaking changes.
 
 In this blog post, we summarize the highlights and then walk through the breaking changes and how to migrate. We previewed many of these features in [“A Preview of DuckDB v2.0”]({% post_url 2026-08-17-duckdb-20-highlights %}), which covers each one in more depth. For the complete release notes, see the [release page on GitHub](https://github.com/duckdb/duckdb/releases/tag/v2.0.0).
 
