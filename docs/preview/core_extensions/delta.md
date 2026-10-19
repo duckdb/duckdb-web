@@ -131,7 +131,7 @@ ATTACH 's3://my-bucket/my-delta-table' AS my_table (TYPE delta);
 INSERT INTO my_table SELECT * FROM other_table;
 ```
 
-Spark stores the width of a `CHAR(n)` or `VARCHAR(n)` column in the table schema. DuckDB checks it on write: a value longer than `n` characters fails the whole statement. A write to a table that declares such a width on a nested field, such as `ARRAY<VARCHAR(5)>`, is refused.
+Spark stores the width of a `CHAR(n)` or `VARCHAR(n)` column in the table schema. Since v1.5.6, DuckDB checks it on write: a value longer than `n` characters fails the whole statement. A write to a table that declares such a width on a nested field, such as `ARRAY<VARCHAR(5)>`, is refused.
 
 ### Time Travel
 
@@ -149,7 +149,7 @@ ATTACH 's3://my-bucket/my-delta-table' AS my_table_v5 (TYPE delta, VERSION 5);
 ATTACH 's3://my-bucket/my-delta-table' AS my_table_then (TYPE delta, TIMESTAMP TIMESTAMPTZ '2026-09-01 12:00:00+00');
 
 -- Scan without attaching
-SELECT * FROM delta_scan('s3://my-bucket/my-delta-table', version => 5);
+SELECT * FROM delta_scan('s3://my-bucket/my-delta-table', version => 5); -- since v1.5.4
 SELECT * FROM delta_scan('s3://my-bucket/my-delta-table', timestamp => TIMESTAMPTZ '2026-09-01 12:00:00+00');
 ```
 
@@ -157,7 +157,7 @@ A timestamp reads the latest version committed at or before it. A timestamp with
 
 ### Checkpointing
 
-To compact the Delta log of an attached table into a checkpoint file:
+Since v1.5.1, `CHECKPOINT` compacts the Delta log of an attached table into a checkpoint file:
 
 ```sql
 ATTACH 'path/to/my-delta-table' AS my_table (TYPE delta);
@@ -189,7 +189,7 @@ When attaching a Delta table you can pass the following options to `ATTACH`:
 | --- | --- | --- | --- |
 | `VERSION` | `UBIGINT` | latest | Attach the table at a specific [table version](#time-travel). |
 | `TIMESTAMP` | `TIMESTAMP WITH TIME ZONE` | latest | Attach the table at the version current at a [point in time](#time-travel). |
-| `PIN_SNAPSHOT` | `BOOLEAN` | `false` | Resolve the latest table snapshot once, on first use, and reuse it for every later query. Without it, each transaction reads the latest version, and loads only the log entries committed since the previous read. |
+| `PIN_SNAPSHOT` | `BOOLEAN` | `false` | Resolve the latest table snapshot once, on first use, and reuse it for every later query. Without it, each transaction reads the latest version; since v1.5.3, it loads only the log entries committed since the previous read. |
 | `PUSHDOWN_PARTITION_INFO` | `BOOLEAN` | `true` | Push down partition information so that whole files can be skipped based on partition values. |
 | `PUSHDOWN_FILTERS` | `VARCHAR` | `all` | Filter pushdown mode for file skipping. One of `none`, `all`, `constant_only`, `dynamic_only`. |
 
@@ -225,7 +225,7 @@ FROM delta_list_files('file:///some/path/on/local/machine', version => 3, delete
 
 ### Reading Domain Metadata
 
-`delta_domain_metadata` returns the [domain metadata](https://github.com/delta-io/delta/blob/master/PROTOCOL.md#domain-metadata) of a table, one row per domain, with the columns `domain` and `configuration`, both `VARCHAR`. It also takes a `version` parameter:
+Since v1.5.1, `delta_domain_metadata` returns the [domain metadata](https://github.com/delta-io/delta/blob/master/PROTOCOL.md#domain-metadata) of a table, one row per domain, with the columns `domain` and `configuration`, both `VARCHAR`. It also takes a `version` parameter:
 
 ```sql
 SELECT domain, configuration
@@ -238,7 +238,7 @@ For an attached table, the same pairs are the `tags` of the table in `duckdb_tab
 
 Delta tables with [column mapping](https://github.com/delta-io/delta/blob/master/PROTOCOL.md#column-mapping) enabled are read as the Delta protocol specifies for each mode: in `id` mode, columns are matched by Parquet field ID; in `name` mode, by physical column name.
 
-The protocol requires every data file of an `id`-mode table to carry Parquet field IDs, but some writers omit them, including DuckDB v1.5.5 and earlier. The `delta_column_mapping_policy` setting decides how such files are read:
+The protocol requires every data file of an `id`-mode table to carry Parquet field IDs, but some writers omit them, including DuckDB v1.5.5 and earlier. Since v1.5.6, the `delta_column_mapping_policy` setting decides how such files are read:
 
 * `strict`: fail with an error that names the file.
 * `lenient`: match the file's columns by physical name, or failing that by logical name, and log a warning under the `delta.ColumnMapping` log type. The names must cover every column in the file, otherwise the read fails.
@@ -274,7 +274,7 @@ may be inconsistent.
 To avoid ambiguities, we recommend that you configure exactly one available
 credential type in your production chain secrets.
 
-To use [Azure workload identity](https://learn.microsoft.com/en-us/entra/workload-id/workload-identities-overview), for example on AKS, name `workload_identity` in the secret's `CHAIN` and set the `AZURE_FEDERATED_TOKEN_FILE`, `AZURE_CLIENT_ID` and `AZURE_TENANT_ID` environment variables.
+Since v1.5.6, the `delta` extension supports [Azure workload identity](https://learn.microsoft.com/en-us/entra/workload-id/workload-identities-overview) (for example on AKS). To use it, name `workload_identity` in the secret's `CHAIN` and set the `AZURE_FEDERATED_TOKEN_FILE`, `AZURE_CLIENT_ID` and `AZURE_TENANT_ID` environment variables.
 
 ```sql
 CREATE SECRET (
