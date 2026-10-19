@@ -12,8 +12,7 @@ The `sqlite` extension will be transparently [autoloaded]({% link docs/preview/e
 If you would like to install and load it manually, run:
 
 ```sql
-INSTALL sqlite;
-LOAD sqlite;
+INSTALL AND LOAD sqlite;
 ```
 
 ## Usage

@@ -34,4 +34,4 @@ DuckDB supports Iceberg, Delta, Lance and DuckLake as first-class citizens. The 
 
 DuckDB aims to build native extensions with minimal dependencies. The `iceberg` extension for example, has no dependencies on third-party Iceberg libraries, which means all data and metadata operations are implemented natively in the DuckDB extension. For the `delta` extension, we use the [`delta-kernel-rs` project](https://github.com/delta-io/delta-kernel-rs), which is meant to be a lightweight platform for engines to build delta integrations that are as close to native as possible.
 
-> **Why do native implementations matter?** Native implementations allow DuckDB to do more performance optimizations such as complex filter pushdowns (with file-level and row-group level pruning) and improve memory management.
+> Tip **Why do native implementations matter?** Native implementations allow DuckDB to do more performance optimizations such as complex filter pushdowns (with file-level and row-group level pruning) and improve memory management.

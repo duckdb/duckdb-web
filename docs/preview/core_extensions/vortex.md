@@ -11,8 +11,7 @@ The `vortex` extension allows you to read and write files using the [Vortex file
 To install and load the extension, run:
 
 ```sql
-INSTALL vortex;
-LOAD vortex;
+INSTALL AND LOAD vortex;
 ```
 
 ## Reading Vortex Files

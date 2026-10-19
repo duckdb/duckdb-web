@@ -11,8 +11,7 @@ For a complete list of supported `encodings`, see [All Supported Encodings](#all
 ## Installing and Loading
 
 ```sql
-INSTALL encodings;
-LOAD encodings;
+INSTALL AND LOAD encodings;
 ```
 
 ## Usage

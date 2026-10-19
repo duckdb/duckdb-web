@@ -12,8 +12,7 @@ The `aws` extension will be transparently [autoloaded]({% link docs/preview/exte
 If you would like to install and load it manually, run:
 
 ```sql
-INSTALL aws;
-LOAD aws;
+INSTALL AND LOAD aws;
 ```
 
 > In most cases, the `aws` extension works in conjunction with the [`httpfs` extension]({% link docs/preview/core_extensions/httpfs/overview.md %}).

@@ -12,8 +12,7 @@ The `postgres` extension will be transparently [autoloaded]({% link docs/preview
 If you would like to install and load it manually, run:
 
 ```sql
-INSTALL postgres;
-LOAD postgres;
+INSTALL AND LOAD postgres;
 ```
 
 ## Connecting

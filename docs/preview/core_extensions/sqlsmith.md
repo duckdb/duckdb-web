@@ -9,8 +9,7 @@ The `sqlsmith` extension is used for testing.
 ## Installing and Loading
 
 ```sql
-INSTALL sqlsmith;
-LOAD sqlsmith;
+INSTALL AND LOAD sqlsmith;
 ```
 
 ## Functions

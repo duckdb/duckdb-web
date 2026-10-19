@@ -11,8 +11,7 @@ The `lance` extension adds support for reading and writing Lance tables. [Lance]
 You can install the `lance` extension from DuckDB's core extensions repository and load it using the following commands:
 
 ```sql
-INSTALL lance;
-LOAD lance;
+INSTALL AND LOAD lance;
 ```
 
 ## Usage

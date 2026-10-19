@@ -12,8 +12,7 @@ The `excel` extension will be transparently [autoloaded]({% link docs/preview/ex
 If you would like to install and load it manually, run:
 
 ```sql
-INSTALL excel;
-LOAD excel;
+INSTALL AND LOAD excel;
 ```
 
 ## Excel Scalar Functions

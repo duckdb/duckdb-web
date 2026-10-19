@@ -12,8 +12,7 @@ The `azure` extension will be transparently [autoloaded]({% link docs/preview/ex
 If you would like to install and load it manually, run:
 
 ```sql
-INSTALL azure;
-LOAD azure;
+INSTALL AND LOAD azure;
 ```
 
 ## Usage

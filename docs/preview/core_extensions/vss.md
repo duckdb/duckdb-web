@@ -13,8 +13,7 @@ See the [announcement blog post]({% post_url 2024-05-03-vector-similarity-search
 To create a new HNSW (Hierarchical Navigable Small Worlds) index on a table with an `ARRAY` column, use the `CREATE INDEX` statement with the `USING HNSW` clause. For example:
 
 ```sql
-INSTALL vss;
-LOAD vss;
+INSTALL AND LOAD vss;
 
 CREATE TABLE my_vector_table (vec FLOAT[3]);
 INSERT INTO my_vector_table

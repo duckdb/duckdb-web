@@ -12,8 +12,7 @@ The `tpch` extension is shipped by default in some DuckDB builds, otherwise it w
 If you would like to install and load it manually, run:
 
 ```sql
-INSTALL tpch;
-LOAD tpch;
+INSTALL AND LOAD tpch;
 ```
 
 ## Benchmarking with the TPC-H Workload

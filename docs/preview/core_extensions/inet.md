@@ -13,8 +13,7 @@ The `inet` extension will be transparently [autoloaded]({% link docs/preview/ext
 If you would like to install and load it manually, run:
 
 ```sql
-INSTALL inet;
-LOAD inet;
+INSTALL AND LOAD inet;
 ```
 
 ## Examples

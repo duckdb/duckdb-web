@@ -18,8 +18,7 @@ For implementation details, see the [announcement blog post]({% post_url 2024-06
 To install and load, run:
 
 ```sql
-INSTALL unity_catalog;
-LOAD unity_catalog;
+INSTALL AND LOAD unity_catalog;
 ```
 
 ## Usage

@@ -12,8 +12,7 @@ The `fts` extension will be transparently [autoloaded]({% link docs/preview/exte
 If you would like to install and load it manually, run:
 
 ```sql
-INSTALL fts;
-LOAD fts;
+INSTALL AND LOAD fts;
 ```
 
 ## Usage

@@ -15,8 +15,7 @@ The `legacy_parser` extension allows reverting to the old parser.
 To install and load the `legacy_parser` extension, run:
 
 ```sql
-INSTALL legacy_parser;
-LOAD legacy_parser;
+INSTALL AND LOAD legacy_parser;
 ```
 
 ## Usage

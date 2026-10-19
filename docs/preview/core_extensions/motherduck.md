@@ -11,8 +11,7 @@ The `motherduck` extension will be transparently [autoinstalled and autoloaded](
 If you would like to install and load it manually, you can use the `motherduck` extension name or the `md` shorthand:
 
 ```sql
-INSTALL md;
-LOAD md;
+INSTALL AND LOAD md;
 ```
 
 ## Usage
