@@ -126,7 +126,7 @@ To commit earlier, set `azure_write_staged_blocks_per_commit` to the number of b
 
 Azure limits a blob to 50,000 blocks.
 With the default block size of 8 MiB, the largest file you can write is about 390 GiB.
-To write larger files, increase `azure_write_block_size` (maximum: 4000 MiB). For example, to write files up to about 3 TiB:
+To write larger files, increase `azure_write_block_size` (maximum: 4000 MiB, about 3.9 GiB). For example, to write files up to about 3 TiB:
 
 ```sql
 SET azure_write_block_size = 64 * 1024 * 1024;
@@ -145,7 +145,7 @@ Use the following [configuration options]({% link docs/preview/configuration/ove
 | `azure_read_transfer_concurrency` | Maximum number of threads the Azure client can use for a single parallel read. If `azure_read_transfer_chunk_size` is less than `azure_read_buffer_size` then setting this > 1 will allow the Azure client to do concurrent requests to fill the buffer. | `INTEGER` | `5` |
 | `azure_read_transfer_chunk_size` | Maximum size in bytes that the Azure client will read in a single request. It is recommended that this is a factor of `azure_read_buffer_size`. | `BIGINT` | `8*1024*1024` |
 | `azure_read_buffer_size` | Size of the read buffer. It is recommended that this is evenly divisible by `azure_read_transfer_chunk_size`. | `UBIGINT` | `8*1024*1024` |
-| `azure_write_block_size` | Size in bytes of each block for Blob and ADLS writes. Setting it to `0` restores the default. The maximum is 4000 MiB. See [Writing Large Files](#writing-large-files). | `UBIGINT` | `8*1024*1024` |
+| `azure_write_block_size` | Size in bytes of each block for Blob and ADLS writes. Setting it to `0` restores the default. The maximum is 4000 MiB (about 3.9 GiB). See [Writing Large Files](#writing-large-files). | `UBIGINT` | `8*1024*1024` |
 | `azure_write_staged_blocks_per_commit` | Number of uploaded blocks after which an intermediate commit happens. With `0`, all blocks are committed when the file is closed. Non-zero values make partial writes visible sooner, at the cost of extra requests. This option does not change the 50,000-block limit. | `UBIGINT` | `0` |
 | `azure_transport_option_type` | Underlying [adapter](https://github.com/Azure/azure-sdk-for-cpp/blob/main/doc/HttpTransportAdapter.md) to use in the Azure SDK. Valid values are: `default` or `curl`. | `VARCHAR` | `default` |
 | `azure_context_caching` | Enable/disable the caching of the underlying Azure SDK HTTP connection in the DuckDB connection context when performing queries. If you suspect that this is causing some side effect, you can try to disable it by setting it to false (not recommended). | `BOOLEAN` | `true` |
