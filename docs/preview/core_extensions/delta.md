@@ -118,7 +118,9 @@ INSERT INTO events VALUES (1, 'eu');
 
 Only `CREATE TABLE` needs the full `events.events` name: without the database name, it creates the table in the default database.
 
-The table can be read and written without attaching it again. `ATTACH` does not check that the path holds a Delta table: a path without one attaches as an empty database, so a mistyped path only shows when the table is first read.
+The table can be read and written without attaching it again.
+
+> Warning `ATTACH` does not check that the path holds a Delta table: a path without one attaches as an empty database, so a mistyped path only shows when the table is first read.
 
 #### Table Properties
 
