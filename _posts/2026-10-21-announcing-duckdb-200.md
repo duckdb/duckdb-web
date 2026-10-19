@@ -124,12 +124,10 @@ As always, DuckDB's SQL dialect keeps growing. A few favorites from this release
 * `NEAREST` joins turn top-k similarity search into a join clause, handy for vector and embedding workloads.
 * Data-modifying CTEs let you use `INSERT`, `UPDATE`, `DELETE` and `COPY` as pipeline steps.
 * Nested schemas allow schemas within schemas, e.g., `CREATE SCHEMA finance.reports`.
-* The `$⟨variable⟩` shorthand lets you write `$x` anywhere an expression is allowed, instead of `getvariable('⟨variable⟩')`.
+* The `$⟨variable⟩`{:.language-sql .highlight} shorthand lets you write `$x` anywhere an expression is allowed, instead of `getvariable('⟨variable⟩')`{:.language-sql .highlight}.
 * JSON mutation functions `json_set`, `json_insert`, `json_replace` and `json_remove` modify JSON documents in place.
 
 There is more: SQL-standard `FETCH FIRST`, `UNNEST` in `GROUP BY` and well-defined `MERGE` / `UPDATE ... FROM` semantics for multi-matched rows.
-
-TODO: we could drop this section?
 
 ## Migrating to v2.0
 
