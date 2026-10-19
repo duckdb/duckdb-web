@@ -67,6 +67,8 @@ SELECT * FROM my_catalog.my_schema.my_table AT (VERSION => 5);
 SELECT * FROM my_catalog.my_schema.my_table AT (TIMESTAMP => TIMESTAMPTZ '2026-10-01 12:00:00+00');
 ```
 
+> New Time travel by timestamp is introduced in DuckDB 2.0.
+
 A timestamp reads the latest version committed at or before that time. A timestamp before the table's first commit or later than the current time fails with an error.
 
 ### Writing
@@ -82,13 +84,21 @@ Inserts into a table with column `DEFAULT` values or generated columns fail with
 
 ### Data Types
 
-DuckDB reads a table's schema from its Delta log. Unity Catalog's `timestamp` maps to `TIMESTAMP WITH TIME ZONE`, `timestamp_ntz` to `TIMESTAMP` and `variant` to `VARIANT`.
+Since v1.5.6, DuckDB reads a table's schema from its Delta log and handles Unity Catalog's column types as follows:
 
-* `VARIANT` columns can be read, shredded or not. Inserts write shredded variants if the table sets `delta.enableVariantShredding`. Inserts into a table with a `VARIANT` nested in a `STRUCT` or a list fail with an error.
+* `timestamp` maps to `TIMESTAMP WITH TIME ZONE` and `timestamp_ntz` to `TIMESTAMP`.
 * Reading a table with an `INTERVAL` column fails with an error, as Delta intervals and DuckDB's `INTERVAL` differ in meaning.
 * A column of a type that DuckDB cannot read is listed with the type `UNKNOWN`, e.g., in `DESCRIBE`. Reading the table fails with an error that names the column.
 
+#### Variant Columns
+
+> New Support for `VARIANT` columns is introduced in DuckDB 2.0.
+
+Unity Catalog's `variant` maps to `VARIANT`. `VARIANT` columns can be read, shredded or not. Inserts write shredded variants if the table sets `delta.enableVariantShredding`. Inserts into a table with a `VARIANT` nested in a `STRUCT` or a list fail with an error.
+
 ### Creating Tables
+
+> New This feature is introduced in DuckDB 2.0.
 
 `CREATE TABLE` in a Unity Catalog schema writes the first version of a new Delta table and registers the table with Unity Catalog.
 
@@ -126,6 +136,8 @@ The following are not supported and fail with an error:
 
 ### Server-Side Scan Planning
 
+> New This feature is introduced in DuckDB 2.0.
+
 With `USE_IRC_SCAN_PLAN true`, DuckDB asks Unity Catalog to plan each scan through its Iceberg REST Catalog API. DuckDB sends the query's filters, the server prunes the list of files to read and returns it with the table's delete files, and DuckDB reads these files and applies the filters again itself:
 
 ```sql
@@ -142,7 +154,7 @@ ATTACH 'my_catalog' AS my_catalog (
 
 ### Catalog-Managed Commits
 
-Managed tables in Databricks and in Unity Catalog OSS may use catalog-managed commits (Catalog-Coordinated Commits / CCv2), where Unity Catalog coordinates commits rather than writers committing directly to the Delta log. DuckDB transparently uses this protocol when the attached table requires it — the insert syntax is identical:
+Managed tables in Databricks and in Unity Catalog OSS may use catalog-managed commits (Catalog-Coordinated Commits / CCv2), where Unity Catalog coordinates commits rather than writers committing directly to the Delta log. Since v1.5.2 (v1.5.5 for Unity Catalog OSS), DuckDB transparently uses this protocol when the attached table requires it — the insert syntax is identical:
 
 ```sql
 INSERT INTO my_catalog.my_schema.my_catalog_managed_table VALUES (1, 'hello');
@@ -159,7 +171,7 @@ This extension supports:
 * [Time travel](#time-travel): `SELECT * FROM ... AT (VERSION => ...);`{:.language-sql .highlight} and `SELECT * FROM ... AT (TIMESTAMP => ...);`{:.language-sql .highlight}
 * Inserts: `INSERT INTO ... VALUES (...);`{:.language-sql .highlight}
 * Creating managed and external tables: `CREATE TABLE ... (...);`{:.language-sql .highlight}
-* Checkpointing individual tables: `CALL unity_catalog_checkpoint_table('my_catalog.my_schema.my_table');`{:.language-sql .highlight}
+* Checkpointing individual tables (since v1.5.1): `CALL unity_catalog_checkpoint_table('my_catalog.my_schema.my_table');`{:.language-sql .highlight}
 
 It does not currently support:
 
