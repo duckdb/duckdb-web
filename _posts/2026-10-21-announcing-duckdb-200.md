@@ -76,6 +76,12 @@ DISCONNECT;
 
 The `CONNECT` statement is not limited to Quack: it points your session at any remote database that supports it, and the new remote pushdown optimizer ships SQL directly to PostgreSQL and MySQL instead of pulling tables over the wire.
 
+### Agent Mode in the CLI
+
+Coding agents such as Claude Code, Codex and Cursor increasingly drive the DuckDB CLI on their users' behalf. The v2.0 CLI detects when it is being run by an agent and switches to [agent mode]({% post_url 2026-10-09-agent-mode %}): it prints compact Markdown tables instead of padded boxes, says clearly when a result was truncated, stops runaway queries early and reports errors as JSON.
+
+Long-running SQL queries report their expected cost prior to running, so the agent can decide whether to wait. In our experiments on TPC-H, agent mode cut the number of output tokens the model had to read by 59%. You can turn it _on_ for manual testing using the `-agent` flag or instruct your agent to turn it _off_ using the `-no-agent` flag.
+
 ### `VARIANT` Becomes a First-Class Citizen
 
 The [`VARIANT` type]({% link docs/preview/sql/data_types/variant.md %}) stores semi-structured, schema-less data such as JSON while keeping the performance of columnar execution. Think of it as JSON on steroids: a `VARIANT` column can store differently-shaped data in every row, but unlike JSON it is not a text format. DuckDB detects the common structure in your data and “shreds” it, so it compresses well and executes fast. In v2.0 the pipeline works end to end, from shredded execution straight out of storage to shredded `VARIANT` reading and writing for Parquet, backed by a family of `variant_*` functions.
@@ -149,7 +155,8 @@ SET enable_legacy_parser = true;
 
 Extensions built against the old unstable C++ API must be rebuilt against v2.0.0. Before upgrading, confirm that v2.0.0-compatible builds exist for any third-party extensions you depend on.
 
-*TODO: add text on community extensions*
+If you're a [community extension]({% link community_extensions/index.md %}) developer, please check that your extension builds against v2.0.0. All new PRs in the community extensions repository are now built against v2.0.0 using the `ref` field in `description.yml`, and v1.5 binaries are no longer built automatically. For details, including how to submit last-minute fixes for v1.5.6 via the new `variegata` field, see the [announcement issue](https://github.com/duckdb/community-extensions/issues/3081).
+
 
 ## Internals and Deprecations
 
