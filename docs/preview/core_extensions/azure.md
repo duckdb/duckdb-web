@@ -279,6 +279,21 @@ CREATE SECRET azure_spn_cert (
 );
 ```
 
+#### `ACCESS_TOKEN` Provider
+
+The `ACCESS_TOKEN` provider allows connecting with an OAuth access token (bearer token) that you obtained outside of DuckDB:
+
+```sql
+CREATE SECRET azure_token (
+    TYPE azure,
+    PROVIDER access_token,
+    ACCESS_TOKEN '⟨access_token⟩',
+    ACCOUNT_NAME '⟨storage_account_name⟩'
+);
+```
+
+The extension does not refresh the token. When it expires, replace the secret with one that holds a new token.
+
 #### Configuring a Proxy
 
 To configure proxy information when using secrets, you can add `HTTP_PROXY`, `PROXY_USER_NAME` and `PROXY_PASSWORD` in the secret definition. For example:
