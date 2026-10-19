@@ -32,7 +32,7 @@ To find your way around the documentation for all of the new features, we also p
 
 ### A Brand New SQL Parser
 
-DuckDB has always used a parser derived from PostgreSQL's. In v2.0 we ship our own modern, extensible [PEG-based parser]({% post_url 2026-08-20-duckdb-20-peg-parser %}). Extensions can now hook into the grammar itself, so expect extensions that expose entirely new SQL syntax, and error messages now come with precise source locations. The new parser is designed to be compatible with the old one, so you should not notice the swap. If you do, please file an issue.
+DuckDB has always used a parser derived from PostgreSQL's. In v2.0 we ship our own modern, extensible [PEG-based parser]({% post_url 2026-08-20-duckdb-20-peg-parser %}). Extensions can now hook into the grammar itself (an idea we first explored in our [research on runtime-extensible parsers]({% post_url 2024-11-22-runtime-extensible-parsers %})), so expect extensions that expose entirely new SQL syntax, and error messages now come with precise source locations. The new parser is designed to be compatible with the old one, so you should not notice the swap. If you do, please file an issue.
 
 The old parser had served DuckDB since its first commit in 2018. Its grammar was generated with YACC/Bison, which produces an LALR(1) parser, so as DuckSQL grew even small additions could collide with existing rules and raise `shift/reduce` or `reduce/reduce` conflicts. A PEG grammar avoids this by trying alternatives in the order they are written, so adding syntax no longer risks breaking unrelated rules. Similarly, Python itself has recently also moved to a PEG-based parser in [version 3.9](https://peps.python.org/pep-0617/), for the same flexibility.
 
@@ -119,7 +119,7 @@ DISCONNECT;
 
 <!-- markdownlint-enable MD001 -->
 
-`CONNECT` is the successor to the `remote.query($$...$$)` workaround we showed when Quack was first revealed – we looked at that syntax and said: no, this cannot be it. And `CONNECT` is not limited to Quack: it points your session at any remote database that supports it, and the new remote pushdown optimizer ([#22914](https://github.com/duckdb/duckdb/pull/22914)) ships SQL directly to PostgreSQL and MySQL instead of pulling tables over the wire:
+`CONNECT` is the successor to the `remote.query($$...$$)` workaround we showed when [Quack was first revealed]({% post_url 2026-05-12-quack-remote-protocol %}) – we looked at that syntax and said: no, this cannot be it. And `CONNECT` is not limited to Quack: it points your session at any remote database that supports it, and the new remote pushdown optimizer ([#22914](https://github.com/duckdb/duckdb/pull/22914)) ships SQL directly to PostgreSQL and MySQL instead of pulling tables over the wire:
 
 ```sql
 CONNECT 'postgres://localhost/mydb';
@@ -127,7 +127,7 @@ SELECT count(*) FROM orders; -- runs on the PostgreSQL server
 DISCONNECT;
 ```
 
-If you have worked with analytical systems in the past, you may assume that DuckDB cannot handle transactional workloads. But DuckDB has been built as a transactional, multi-connection database with full MVCC and transaction isolation since day one. Most users just never needed that in a single-user scenario. It turns out DuckDB handles transactions well: it's fast enough to compete with general-purpose databases like PostgreSQL on quite a few workloads, and the client/server pattern finally lets that machinery shine in multi-tenant, long-running deployments.
+If you have worked with analytical systems in the past, you may assume that DuckDB cannot handle transactional workloads. But DuckDB has been built as a transactional, multi-connection database with full [MVCC and transaction isolation]({% post_url 2024-10-30-analytics-optimized-concurrent-transactions %}) since day one. Most users just never needed that in a single-user scenario. It turns out DuckDB handles transactions well: it's fast enough to compete with general-purpose databases like PostgreSQL on quite a few workloads, and the client/server pattern finally lets that machinery shine in multi-tenant, long-running deployments.
 
 Running DuckDB long-term also comes with new challenges, which is why v2.0 pushes on better metrics, logs, and observability (see, e.g., the metrics layer rework in [#22799](https://github.com/duckdb/duckdb/pull/22799)) that let you look at a DuckDB instance and see what it is actually doing. People even built standalone clients for the Quack protocol within weeks of the preview. We thought we were extending DuckDB to talk to other DuckDBs; the world said no, no, no, and built their own clients. Who would have thought.
 
@@ -139,7 +139,7 @@ Long-running SQL queries report their expected cost prior to running, so the age
 
 ### `VARIANT` Becomes a First-Class Citizen
 
-The [`VARIANT` type]({% link docs/preview/sql/data_types/variant.md %}) stores semi-structured, schema-less data such as JSON while keeping the performance of columnar execution. Think of it as JSON on steroids: a `VARIANT` column can store differently-shaped data in every row, but unlike JSON it is not a text format. DuckDB detects the common structure in your data and “shreds” it, so it compresses well and executes fast. In v2.0 the pipeline works end to end, from shredded execution straight out of storage to shredded `VARIANT` reading and writing for Parquet, backed by a family of `variant_*` functions.
+The [`VARIANT` type]({% link docs/preview/sql/data_types/variant.md %}) stores semi-structured, schema-less data such as JSON while keeping the performance of columnar execution. First introduced [in v1.5]({% post_url 2026-03-09-announcing-duckdb-150 %}#variant-type), it is now fully integrated. Think of it as JSON on steroids: a `VARIANT` column can store differently-shaped data in every row, but unlike JSON it is not a text format. DuckDB detects the common structure in your data and “shreds” it, so it compresses well and executes fast. In v2.0 the pipeline works end to end, from shredded execution straight out of storage to shredded `VARIANT` reading and writing for Parquet, backed by a family of `variant_*` functions.
 
 ```sql
 CREATE TABLE events (payload VARIANT);
@@ -202,7 +202,7 @@ As always, DuckDB's SQL dialect keeps growing. A few favorites from this release
 * [Data-modifying CTEs]({% link docs/preview/sql/query_syntax/with.md %}#data-modifying-ctes) let you use `INSERT`, `UPDATE`, `DELETE` and `COPY` as pipeline steps.
 * [Nested schemas]({% link docs/preview/sql/statements/create_schema.md %}#nested-schemas) allow schemas within schemas, e.g., `CREATE SCHEMA finance.reports`.
 * The [`$⟨variable⟩`{:.language-sql .highlight} shorthand]({% link docs/preview/sql/statements/set_variable.md %}#the-name-shorthand) lets you write `$x` anywhere an expression is allowed, instead of `getvariable('⟨variable⟩')`{:.language-sql .highlight}.
-* [JSON mutation functions]({% link docs/preview/data/json/json_functions.md %}#json-mutation-functions) `json_set`, `json_insert`, `json_replace` and `json_remove` modify JSON documents in place.
+* [JSON mutation functions]({% link docs/preview/data/json/json_functions.md %}#json-mutation-functions) `json_set`, `json_insert`, `json_replace` and `json_remove` modify JSON documents in place (see also our [blog post on JSON patches]({% post_url 2026-08-18-reconciling-json %})).
 
 There is more: SQL-standard [`FETCH FIRST`]({% link docs/preview/sql/query_syntax/limit.md %}#fetch-first), [`UNNEST` in `GROUP BY`]({% link docs/preview/sql/query_syntax/groupby.md %}#grouping-by-unnest) and well-defined [`MERGE`]({% link docs/preview/sql/statements/merge_into.md %}) / [`UPDATE ... FROM`]({% link docs/preview/sql/statements/update.md %}) semantics for multi-matched rows.
 
