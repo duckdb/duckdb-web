@@ -302,7 +302,7 @@ CREATE SECRET azure_token (
 );
 ```
 
-The extension does not refresh the token. When it expires, replace the secret with one that holds a new token.
+> Warning The extension does not refresh the token. When it expires, replace the secret with one that holds a new token.
 
 #### Configuring a Proxy
 
