@@ -129,6 +129,8 @@ ATTACH 's3://my-bucket/my-delta-table' AS my_table (TYPE delta);
 INSERT INTO my_table SELECT * FROM other_table;
 ```
 
+Spark stores the width of a `CHAR(n)` or `VARCHAR(n)` column in the table schema. DuckDB checks it on write: a value longer than `n` characters fails the whole statement. A write to a table that declares such a width on a nested field, such as `ARRAY<VARCHAR(5)>`, is refused.
+
 ### Time Travel
 
 To read a table as it was at an earlier version or point in time, use the `AT` clause, an `ATTACH` option or a `delta_scan` parameter:
