@@ -80,14 +80,11 @@ INSERT INTO my_catalog.my_schema.my_table VALUES (1, 'hello');
 INSERT INTO my_catalog.my_schema.my_table SELECT * FROM other_table;
 ```
 
-Inserts into a table with column `DEFAULT` values or generated columns fail with an error, as DuckDB cannot compute these columns yet.
-
 ### Data Types
 
 Since v1.5.6, DuckDB reads a table's schema from its Delta log and handles Unity Catalog's column types as follows:
 
 * `timestamp` maps to `TIMESTAMP WITH TIME ZONE` and `timestamp_ntz` to `TIMESTAMP`.
-* Reading a table with an `INTERVAL` column fails with an error, as Delta intervals and DuckDB's `INTERVAL` differ in meaning.
 * A column of a type that DuckDB cannot read is listed with the type `UNKNOWN`, e.g., in `DESCRIBE`. Reading the table fails with an error that names the column.
 
 #### Variant Columns
@@ -124,13 +121,7 @@ PARTITIONED BY (part);
 
 `CREATE TABLE IF NOT EXISTS` does nothing if Unity Catalog already has a table with this name.
 
-The following are not supported and fail with an error:
-
-* `CREATE OR REPLACE TABLE` and `CREATE TABLE ... AS SELECT`
-* constraints, including `NOT NULL` and `PRIMARY KEY`
-* column `DEFAULT` values and generated columns
-* columns of a type that Delta cannot store, e.g., `TIME`
-* `SORTED BY`, and `WITH` options other than `location`, including Delta table properties
+For the forms and options that `CREATE TABLE` does not support, see [Limitations](#limitations).
 
 > Warning Unity Catalog registers the table while `CREATE TABLE` runs, so a `ROLLBACK` of the surrounding transaction does not remove the table.
 
@@ -173,11 +164,18 @@ This extension supports:
 * Creating managed and external tables: `CREATE TABLE ... (...);`{:.language-sql .highlight}
 * Checkpointing individual tables (since v1.5.1): `CALL unity_catalog_checkpoint_table('my_catalog.my_schema.my_table');`{:.language-sql .highlight}
 
-It does not currently support:
+## Limitations
 
-* `DELETE`{:.language-sql .highlight} or `UPDATE`{:.language-sql .highlight}
-* `DROP TABLE`{:.language-sql .highlight} or `ALTER TABLE`{:.language-sql .highlight}
-* Creation or manipulation of views or schemas
+* `DELETE` and `UPDATE` are not supported.
+* `DROP TABLE` and `ALTER TABLE` are not supported, nor is creating or changing views or schemas.
+* Inserts into a table with column `DEFAULT` values or generated columns fail with an error, as DuckDB cannot compute these columns yet.
+* Reading a table with an `INTERVAL` column fails with an error, as Delta intervals and DuckDB's `INTERVAL` differ in meaning.
+* The following `CREATE TABLE` forms and options are not supported and fail with an error:
+    * `CREATE OR REPLACE TABLE` and `CREATE TABLE ... AS SELECT`
+    * constraints, including `NOT NULL` and `PRIMARY KEY`
+    * column `DEFAULT` values and generated columns
+    * columns of a type that Delta cannot store, e.g., `TIME`
+    * `SORTED BY`, and `WITH` options other than `location`, including Delta table properties
 
 ## Supported DuckDB Versions and Platforms
 
