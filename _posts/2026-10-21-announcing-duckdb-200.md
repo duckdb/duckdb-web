@@ -35,7 +35,7 @@ DuckDB has always used a parser derived from PostgreSQL's. In v2.0 we ship our o
 
 The old parser had served DuckDB since its first commit in 2018. Its grammar was generated with YACC/Bison, which produces an LALR(1) parser, so as DuckSQL grew even small additions could collide with existing rules and raise `shift/reduce` or `reduce/reduce` conflicts. A PEG grammar avoids this by trying alternatives in the order they are written, so adding syntax no longer risks breaking unrelated rules. Similarly, Python itself has recently also moved to a PEG-based parser in [version 3.9](https://peps.python.org/pep-0617/), for the same flexibility.
 
-*TODO: this needs potentially an image*
+TODO: this needs potentially an image
 
 ### Asynchronous I/O
 
@@ -115,7 +115,7 @@ DuckDB v2.0 ships a revamped, stable C API with a versioned [ABI](https://en.wik
 
 You can also register and host your own trusted [extension repositories](https://github.com/duckdb/duckdb/pull/24777), so an organization can host and sign its own extensions and have them install and load just like the built-in ones.
 
-*TODO: this needs more text*
+TODO: this needs more text
 
 ### SQL Dialect Additions
 
@@ -129,7 +129,7 @@ As always, DuckDB's SQL dialect keeps growing. A few favorites from this release
 
 There is more: SQL-standard `FETCH FIRST`, `UNNEST` in `GROUP BY` and well-defined `MERGE` / `UPDATE ... FROM` semantics for multi-matched rows.
 
-*TODO: we could drop this section?*
+TODO: we could drop this section?
 
 ## Migrating to v2.0
 
