@@ -96,6 +96,8 @@ FROM delta_scan('gs://my-bucket/my-delta-table');
 
 ### Creating Tables
 
+> New This feature is introduced in DuckDB 2.0.
+
 To create a Delta table, attach the location for it and create a table named after the attached database:
 
 ```sql
@@ -132,6 +134,8 @@ INSERT INTO my_table SELECT * FROM other_table;
 Spark stores the width of a `CHAR(n)` or `VARCHAR(n)` column in the table schema. DuckDB checks it on write: a value longer than `n` characters fails the whole statement. A write to a table that declares such a width on a nested field, such as `ARRAY<VARCHAR(5)>`, is refused.
 
 ### Time Travel
+
+> New Time travel by timestamp is introduced in DuckDB 2.0.
 
 To read a table as it was at an earlier version or point in time, use the `AT` clause, an `ATTACH` option or a `delta_scan` parameter:
 
@@ -247,7 +251,11 @@ SET delta_column_mapping_policy = 'lenient';
 
 ### VARIANT Columns
 
-Delta `variant` columns are read as DuckDB `VARIANT`, whether their files are shredded or not. A query that reads one field of a `VARIANT` or `STRUCT` column, such as `SELECT v.a`, reads only that field from the Parquet files, so on a shredded table it skips the columns of the other fields. A column that contains a `TIMESTAMP WITH TIME ZONE` anywhere is still read whole.
+Delta `variant` columns are read as DuckDB `VARIANT`, whether their files are shredded or not.
+
+> New The following features are introduced in DuckDB 2.0.
+
+A query that reads one field of a `VARIANT` or `STRUCT` column, such as `SELECT v.a`, reads only that field from the Parquet files, so on a shredded table it skips the columns of the other fields. A column that contains a `TIMESTAMP WITH TIME ZONE` anywhere is still read whole.
 
 `CREATE TABLE` accepts `VARIANT` columns. When writing, DuckDB shreds `VARIANT` values only if the table sets `'delta.enableVariantShredding'` to `'true'`, as the Delta protocol requires; otherwise it writes them unshredded. `CREATE TABLE` cannot set this property, so a table created by DuckDB holds unshredded files. Only top-level `VARIANT` columns can be written: an `INSERT` into a table with a `VARIANT` inside a struct, list or map fails.
 
