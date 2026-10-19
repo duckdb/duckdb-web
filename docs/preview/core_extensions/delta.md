@@ -266,6 +266,7 @@ The `delta` extension supports:
 ## Limitations
 
 * `CREATE OR REPLACE TABLE` and `CREATE TABLE ... AS SELECT` are not supported. Create the table, then `INSERT` into it.
+* `UPDATE`, `DELETE`, `MERGE INTO`, `ALTER TABLE` and `DROP TABLE` are not supported, nor are `RETURNING` and `ON CONFLICT` clauses on `INSERT`.
 * `CREATE TABLE` does not support constraints (including `NOT NULL`), `DEFAULT` values, generated columns, `SORTED BY`, column types without a Delta equivalent such as unsigned integers or a table whose columns are all partition columns.
 * Tables with an interval (`interval year to month` or `interval day to second`), `geometry` or `geography` column cannot be read.
 * Writing to a table with the `allowColumnDefaults` writer feature is not supported, even when the table declares no default yet. DuckDB does not apply Delta column defaults, so it refuses the write rather than storing `NULL` in their place. Reading such a table works.
