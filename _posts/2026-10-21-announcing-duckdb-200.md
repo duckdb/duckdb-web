@@ -20,9 +20,10 @@ For the complete release notes, see the [release page on GitHub](https://github.
 > Note that it can take a few days to release some extensions and client libraries (e.g., Go, R, Java) due to the extra changes and review rounds required.
 
 With this release, there are currently three DuckDB lines available.
-The long-term support (LTS) version 1.4 is still supported until late November 2026.
-To ensure a smooth transition and allow sufficient time for testing, we extended the support period of DuckDB v1.5 until March 2027.
-Finally, DuckDB v2.0 is an LTS release itself with support until at least October 2027.
+DuckDB v2.0 is a long-term support (LTS) release with support until at least October 2027.
+The previous LTS release, version 1.4, is still supported until late November 2026.
+To ensure a smooth transition and allow sufficient time for testing,
+we extended the support period of DuckDB v1.5 until March 2027, effectively also turning it into an LTS release.
 For details, see the [release calendar]({% link release_calendar.md %}).
 
 To find your way around the documentation for all of the new features, we also published a [“What's New in the Docs for 2.0”]({% link docs/preview/whats_new_in_the_docs.md %}) page that links each feature below to its documentation.
