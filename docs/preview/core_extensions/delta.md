@@ -18,8 +18,7 @@ The `delta` extension will be transparently [autoloaded]({% link docs/preview/ex
 If you would like to install and load it manually, run:
 
 ```sql
-INSTALL delta;
-LOAD delta;
+INSTALL AND LOAD delta;
 ```
 
 ## Usage

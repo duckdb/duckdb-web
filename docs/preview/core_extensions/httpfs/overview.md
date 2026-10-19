@@ -14,8 +14,7 @@ The `httpfs` extension will be, by default, autoloaded on first use of any funct
 To manually install and load the `httpfs` extension, run:
 
 ```sql
-INSTALL httpfs;
-LOAD httpfs;
+INSTALL AND LOAD httpfs;
 ```
 
 ## HTTP(S)

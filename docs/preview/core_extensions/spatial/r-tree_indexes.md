@@ -52,8 +52,7 @@ The impact tweaking these options will have on performance is highly dependent o
 Here is an example that shows how to create an R-tree index on a geometry column and where we can see that the `RTREE_INDEX_SCAN` operator is used when the table is filtered with a spatial predicate:
 
 ```sql
-INSTALL spatial;
-LOAD spatial;
+INSTALL AND LOAD spatial;
 
 -- Create a table with 10_000 random points
 CREATE TABLE t1 AS SELECT point::GEOMETRY AS geom

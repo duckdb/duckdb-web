@@ -107,8 +107,7 @@ First we install a [**stable DuckDB build**]({% link install/index.html %}).
 Then we can install and load a **nightly** extension like this:
 
 ```sql
-INSTALL aws FROM core_nightly;
-LOAD aws;
+INSTALL AND LOAD aws FROM core_nightly;
 ```
 
 In this example we are using the latest **nightly** build of the aws extension with the latest **stable** version of DuckDB.
@@ -120,8 +119,7 @@ When DuckDB CI produces a nightly binary of DuckDB itself, the binaries are dist
 First, we install a [**nightly DuckDB build**]({% link install/index.html %}). Then, we can install and load the `aws` extension as expected:
 
 ```sql
-INSTALL aws;
-LOAD aws;
+INSTALL AND LOAD aws;
 ```
 
 ## Updating Extensions

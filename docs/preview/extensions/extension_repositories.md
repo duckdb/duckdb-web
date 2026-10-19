@@ -49,8 +49,7 @@ Extensions are signed using 2048-bit RSA keys. The key can be provided either in
 Once a repository is registered, install and load its extensions by referring to the repository by name:
 
 ```sql
-INSTALL my_ext FROM my_repo;
-LOAD my_ext;
+INSTALL AND LOAD my_ext FROM my_repo;
 ```
 
 ## Inspecting Repositories

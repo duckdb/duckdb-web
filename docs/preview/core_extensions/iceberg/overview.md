@@ -23,8 +23,7 @@ The `iceberg` extension is installed and loaded automatically on first use.
 If you would like to install and load it manually, run:
 
 ```sql
-INSTALL iceberg;
-LOAD iceberg;
+INSTALL AND LOAD iceberg;
 ```
 
 ## Updating the Extension
