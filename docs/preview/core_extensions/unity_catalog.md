@@ -12,7 +12,8 @@ For implementation details, see the [“Delta Grows Up: Writes, Unity Catalog an
 
 ## Installing and Loading
 
-To install and load, run:
+The `unity_catalog` extension will be transparently [autoloaded]({% link docs/preview/extensions/overview.md %}#autoloading-extensions) on first use from the official extension repository. It loads the `delta` extension itself.
+If you would like to install and load it manually, run:
 
 ```sql
 INSTALL unity_catalog;
@@ -35,6 +36,9 @@ ATTACH '⟨catalog_name⟩' AS my_catalog (TYPE unity_catalog, DEFAULT_SCHEMA 'm
 
 * `ENDPOINT` is the Unity Catalog REST API endpoint. For Databricks, it is your [Workspace URL](https://docs.databricks.com/aws/en/workspace/workspace-details#workspace-instance-names-urls-and-ids), typically `https://⟨instance⟩.cloud.databricks.com/`{:.language-sql .highlight}.
 * `TOKEN` is a credential. For Databricks, it can be a [personal access token](https://docs.databricks.com/aws/en/dev-tools/auth/pat) with `unity-catalog` scope; see [Access Control in Unity Catalog](https://docs.databricks.com/aws/en/data-governance/unity-catalog/access-control/) for the other options. For Unity Catalog OSS, see the [OSS Unity Catalog documentation](https://docs.unitycatalog.io/).
+* `AWS_REGION` is the region of the storage that holds the tables. It is required.
+
+To read and write the table files, DuckDB also needs a [secret]({% link docs/preview/configuration/secrets_manager.md %}) for that storage, e.g., an [S3 secret]({% link docs/preview/core_extensions/httpfs/s3api.md %}) or an [Azure secret]({% link docs/preview/core_extensions/azure.md %}#authentication-with-secret).
 
 > Note Only Databricks reports a default namespace. When you attach a Unity Catalog OSS catalog, always set `DEFAULT_SCHEMA`: without it, queries against the catalog fail, even with fully qualified table names.
 
@@ -125,6 +129,16 @@ For the forms and options that `CREATE TABLE` does not support, see [Limitations
 
 > Warning Unity Catalog registers the table while `CREATE TABLE` runs, so a `ROLLBACK` of the surrounding transaction does not remove the table.
 
+### Checkpointing
+
+Since v1.5.1, `unity_catalog_checkpoint_table` compacts the Delta log of a table into a checkpoint file, which speeds up reads of tables with long logs. Pass the table name as a string, either fully qualified or relative to the catalog and schema set with `USE`:
+
+```sql
+CALL unity_catalog_checkpoint_table('my_catalog.my_schema.my_table');
+```
+
+The `CHECKPOINT` statement does not apply to Unity Catalog tables and fails with an error.
+
 ### Server-Side Scan Planning
 
 > New This feature is introduced in DuckDB 2.0.
@@ -160,7 +174,7 @@ This extension supports:
 * [Time travel](#time-travel): `SELECT * FROM ... AT (VERSION => ...);`{:.language-sql .highlight} and `SELECT * FROM ... AT (TIMESTAMP => ...);`{:.language-sql .highlight}
 * Inserts: `INSERT INTO ... VALUES (...);`{:.language-sql .highlight}
 * Creating managed and external tables: `CREATE TABLE ... (...);`{:.language-sql .highlight}
-* Checkpointing individual tables (since v1.5.1): `CALL unity_catalog_checkpoint_table('my_catalog.my_schema.my_table');`{:.language-sql .highlight}
+* [Checkpointing](#checkpointing) individual tables (since v1.5.1): `CALL unity_catalog_checkpoint_table('my_catalog.my_schema.my_table');`{:.language-sql .highlight}
 
 ## Limitations
 
