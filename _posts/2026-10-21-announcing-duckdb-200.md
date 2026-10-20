@@ -28,9 +28,14 @@ For details, see the [release calendar]({% link release_calendar.md %}).
 
 To find your way around the documentation for all of the new features, we also published a [“What's New in the Docs for 2.0”]({% link docs/preview/whats_new_in_the_docs.md %}) page that links each feature below to its documentation.
 
-## DuckDB as a Server: Quack and `CONNECT`
+## DuckDB as a Server
 
-DuckDB has been an in-process database since day one, but v2.0 lets it run as a server too. The [`quack` extension]({% link docs/preview/core_extensions/quack.md %}) implements DuckDB's native protocol, so any DuckDB process can [serve its databases]({% link docs/preview/quack/overview.md %}#server-side-usage) over the network and any other DuckDB can attach to it and route queries there using the new [`CONNECT` statement]({% link docs/preview/sql/statements/connect.md %}):
+DuckDB has been an in-process database since day one.
+In [DuckDB 1.5.3]({% post_url 2026-05-20-announcing-duckdb-153 %}), released in May, we introduced the Quack protocol that lets you run DuckDB in a traditional client-server setup, along with the [`quack` extension]({% link docs/preview/core_extensions/quack.md %}), which implements DuckDB's native protocol, so any DuckDB process can [serve its databases]({% link docs/preview/quack/overview.md %}#server-side-usage).
+
+### Quack and `CONNECT`
+
+DuckDB 2.0.0 ships a polished version of the Quack protocol with substantial performance and stability improvements. It also introduces the new [`CONNECT` statement]({% link docs/preview/sql/statements/connect.md %}) that allows attaching and switching to a remote database in a single command for better ergonomics:
 
 <!-- markdownlint-disable MD001 -->
 
@@ -84,7 +89,9 @@ SELECT * FROM events;
 
 The `CONNECT` statement is not limited to Quack: it points your session at any remote database that supports it, and the new remote pushdown optimizer ships SQL directly to PostgreSQL and MySQL instead of pulling tables over the wire.
 
-The CLI also has shortcuts for this: the new [`-serve` and `-connect` arguments]({% link docs/preview/clients/cli/arguments.md %}#serving-and-connecting-to-remote-databases) start a Quack server or connect to one directly from the command line:
+### Quack in the CLI
+
+The CLI also has shortcuts for setting up a Quack client-server pair: the new [`-serve` and `-connect` arguments]({% link docs/preview/clients/cli/arguments.md %}#serving-and-connecting-to-remote-databases) start a Quack server or connect to one directly from the command line:
 
 <!-- markdownlint-disable MD001 -->
 
@@ -297,7 +304,6 @@ In a [microbenchmark]({% post_url 2026-08-17-duckdb-20-highlights %}#6-faster-qu
 
 ### Storage Format v2.0
 
-DuckDB v2.0 bumps the default [storage format version]({% link docs/preview/internals/storage.md %}) to v2.0.0. Column metadata is now loaded lazily, so wide tables open faster; the `DICT_FSST` string compression method is enabled by default; deletes are stored compactly; and the storage layer performs much stronger corruption validation on read. Databases with big indexes and wide tables open faster and use far less memory.
+DuckDB v2.0 bumps the default [storage format version]({% link docs/preview/internals/storage.md %}) to v2.0.0. Column metadata is now loaded lazily, so databases with big indexes and wide tables open faster and use far less memory.; the `DICT_FSST` string compression method is enabled by default; deletes are stored compactly; and the storage layer performs much stronger corruption validation on read.
 
 Because the new format is not backward compatible, see the [migration section](#migrating-to-v20).
-
