@@ -256,6 +256,8 @@ This is done by passing a CRS "identifier" as a parameter of the `GEOMETRY` type
 
 CRS identifiers in DuckDB are always strings. `OGC:CRS84` is the identifier for a common geographic coordinate system spanning the whole globe where the `X` coordinate represents longitude and the `Y` coordinate represents latitude. DuckDB only knows this because the identifier 'OGC:CRS84' is registered as a _known_ CRS in the system catalog.
 
+> Warning Storing `GEOMETRY` columns that carry a CRS identifier requires [storage version v1.5.0]({% link docs/2.0/sql/statements/attach.md %}#explicit-storage-versions) or newer. Writing such a column into a database created with an older storage version fails with an error such as `Invalid Input Error: GEOMETRY columns with coordinate reference system identifiers are not supported in storage versions prior v1.5.0`. Create or attach the database with `ATTACH 'file.db' (STORAGE_VERSION 'v1.5.0');`.
+
 By default, only a handful of common CRSs are registered as known, but extensions can also register additional known CRSs. In particular, the `spatial` extension registers over 7000 CRSs from the [EPSG Geodetic Parameter Dataset](https://epsg.org/home.html), which is arguably the most widely used database of coordinate reference systems. 
 
 You can list all available CRSs known to DuckDB using the [`duckdb_coordinate_systems()`]({% link docs/2.0/sql/meta/duckdb_table_functions.md %}#duckdb_coordinate_systems) function:
