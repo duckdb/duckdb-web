@@ -49,7 +49,7 @@ You will see DuckDB's version number, the information on the connection and a pr
 duckdb
 ```
 
-```sql
+```text
 DuckDB v{{ site.next_major_duckdb_version }} ({{ site.current_duckdb_codename }})
 Enter ".help" for usage hints.
 «memory» D
