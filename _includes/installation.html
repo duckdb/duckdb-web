@@ -180,8 +180,8 @@ docker run --rm -it -v "$(pwd):/workspace" -w /workspace duckdb/duckdb
 <p>musl libc builds (for Alpine Linux):</p>
 
 {%- assign f_x86_musl = site.data.checksums_current.artifacts.cli.linux.x86_64_musl.filename -%}
-<a href="https://install.duckdb.org/v{{ site.current_duckdb_version }}/{{ f_x86_musl }}" class="download-btn" download="{{ f_x86 }}" rel="noopener noreferrer">{{ f_x86_musl }}</a>
-{%- include checksum_inline.html environment="cli" platform="linux" architecture="f_x86_musl" version="current" -%}
+<a href="https://install.duckdb.org/v{{ site.current_duckdb_version }}/{{ f_x86_musl }}" class="download-btn" download="{{ f_x86_musl }}" rel="noopener noreferrer">{{ f_x86_musl }}</a>
+{%- include checksum_inline.html environment="cli" platform="linux" architecture="x86_64_musl" version="current" -%}
 
 {%- assign f_arm_musl = site.data.checksums_current.artifacts.cli.linux.arm64_musl.filename -%}
 <a href="https://install.duckdb.org/v{{ site.current_duckdb_version }}/{{ f_arm_musl }}" class="download-btn" download="{{ f_arm_musl }}" rel="noopener noreferrer">{{ f_arm_musl }}</a>
