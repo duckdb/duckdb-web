@@ -1961,6 +1961,10 @@
                 {
                   "page": "Install Script",
                   "url": "install_script"
+                },
+                {
+                  "page": "Requirements",
+                  "url": "requirements"
                 }
               ]
             },

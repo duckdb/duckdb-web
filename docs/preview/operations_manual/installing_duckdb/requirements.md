@@ -5,6 +5,23 @@ title: Requirements
 
 DuckDB is designed to be [portable]({% link why_duckdb.md %}#portable) and has very few runtime dependencies. Still, there are a few requirements to be aware of before installing or running DuckDB.
 
+## Supported Platforms
+
+DuckDB officially supports Linux, macOS and Windows on both x86_64 (AMD64) and AArch64 (ARM64) CPU architectures. Official binaries are distributed for these platforms for both the latest stable version and the preview version (nightly build).
+
+| Platform name   | Operating system | Architecture    | CPU types                      | Support level |
+| --------------- | ---------------- | --------------- | ------------------------------ | ------------- |
+| `linux_amd64`   | Linux            | x86_64 (AMD64)  | Intel, AMD, etc.               | Full          |
+| `linux_arm64`   | Linux            | AArch64 (ARM64) | AWS Graviton, Snapdragon, etc. | Full          |
+| `osx_amd64`     | macOS 12+        | x86_64 (AMD64)  | Intel                          | Partial       |
+| `osx_arm64`     | macOS 12+        | AArch64 (ARM64) | Apple Silicon M1, M2, etc.     | Full          |
+| `windows_amd64` | Windows 10+      | x86_64 (AMD64)  | Intel, AMD, etc.               | Full          |
+| `windows_arm64` | Windows 10+      | AArch64 (ARM64) | Copilot+ PC with Qualcomm CPU  | Full          |
+
+> Warning macOS on Intel CPUs (`osx_amd64`) is only partially supported. DuckDB binaries and [core extensions]({% link docs/preview/core_extensions/overview.md %}) are still distributed for this platform but, starting with DuckDB 2.0.0, [community extensions]({% link docs/preview/extensions/community_extensions.md %}) are no longer built for it.
+
+DuckDB can also run on other platforms, such as Linux distributions using musl libc (e.g., Alpine Linux), Android and WebAssembly, with varying levels of support. For details, see the [list of platforms on the “Building DuckDB” page]({% link docs/preview/dev/building/overview.md %}#platforms). For the platforms extensions are distributed for, see the [“Extension Distribution” page]({% link docs/preview/extensions/extension_distribution.md %}#platforms).
+
 ## Linux
 
 DuckDB's official Linux binaries require [glibc](https://www.gnu.org/software/libc/) 2.28 or newer. Since DuckDB 1.3.0, the official Linux binaries are [built using the `manylinux_2_28` image](https://github.com/duckdb/duckdb/pull/16956), which combines an older glibc with a newer compiler. As a result, extensions are no longer distributed for the `linux_amd64_gcc4` platform.
