@@ -8,7 +8,7 @@ The `quack` extension adds support for the [Quack remote protocol]({% link docs/
 
 ## Usage
 
-> New The `quack` extension graduates to stable status in DuckDB 2.0. It was previously released as a preview.
+> New The `quack` extension graduates to stable status in DuckDB 2.0. It was previously released as a preview in DuckDB v1.5.3.
 
 Quack is transparently autoinstalled and [autoloaded]({% link docs/preview/extensions/overview.md %}#autoloading-extensions) on first use.
 
