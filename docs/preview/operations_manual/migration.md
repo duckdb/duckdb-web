@@ -108,7 +108,7 @@ LOAD legacy_parser;
 SET enable_legacy_parser = true;
 ```
 
-> This section is tracking the following pull request: [duckdb#22194](https://github.com/duckdb/duckdb/pull/22194), reported in isue [duckdb#7675](https://github.com/duckdb/duckdb/issues/7675).
+> This section is tracking the following pull request: [duckdb#22194](https://github.com/duckdb/duckdb/pull/22194), reported in issue [duckdb#7675](https://github.com/duckdb/duckdb/issues/7675).
 
 ### C and C++ Extension API
 
