@@ -151,9 +151,9 @@ By default, DuckDB renders query results in `duckbox` mode, which is a feature-r
 
 The duckbox mode supports the `large_number_rendering` option, which allows human-readable rendering of large numbers. It has three levels:
 
-- `off` – All numbers are printed using regular formatting.
-- `footer` (default) – Large numbers are augmented with the human-readable format. Only applies to single-row results.
-- `all` - All large numbers are replaced with the human-readable format.
+* `off` – All numbers are printed using regular formatting.
+* `footer` (default) – Large numbers are augmented with the human-readable format. Only applies to single-row results.
+* `all` - All large numbers are replaced with the human-readable format.
 
 See the following examples:
 

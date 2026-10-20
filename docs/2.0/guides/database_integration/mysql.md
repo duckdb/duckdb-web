@@ -31,7 +31,7 @@ LOAD mysql;
 After the `mysql` extension is installed, you can attach to a MySQL database using the following command:
 
 ```sql
-ATTACH 'host=localhost user=root port=0 database=mysqlscanner' AS mysql_db (TYPE mysql, READ_ONLY);
+ATTACH 'host=localhost user=root port=0 database=mysqlscanner' AS mysql_db (TYPE mysql);
 USE mysql_db;
 ```
 
@@ -54,3 +54,5 @@ INSERT INTO tbl VALUES (42, 'DuckDB');
 ```
 
 For a list of supported operations, see the [MySQL extension documentation]({% link docs/2.0/core_extensions/mysql.md %}#supported-operations).
+
+To run entire queries on the MySQL server instead of scanning its tables from DuckDB, see the [`CONNECT` statement]({% link docs/2.0/sql/statements/connect.md %}).

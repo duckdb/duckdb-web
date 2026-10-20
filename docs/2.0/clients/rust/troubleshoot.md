@@ -22,7 +22,7 @@ The [`bundled` feature]({% link docs/2.0/clients/rust/overview.md %}#feature-fla
 Set `DUCKDB_LIB_DIR` to the directory containing the library, and `DUCKDB_INCLUDE_DIR` to the directory containing `duckdb.h` if it is elsewhere. For example, using a prebuilt library from a [DuckDB release](https://github.com/duckdb/duckdb/releases):
 
 ```bash
-wget https://github.com/duckdb/duckdb/releases/download/v1.5.5/libduckdb-osx-universal.zip
+wget https://github.com/duckdb/duckdb/releases/download/v{{ site.current_duckdb_rust_version }}/libduckdb-osx-universal.zip
 unzip libduckdb-osx-universal.zip -d libduckdb
 
 export DUCKDB_LIB_DIR=$PWD/libduckdb
@@ -45,15 +45,15 @@ DUCKDB_DOWNLOAD_LIB=1 cargo build
 
 If DuckDB is installed through `pkg-config` or Vcpkg, the build finds it automatically. `vcpkg` uses static libraries by default; set `VCPKGRS_DYNAMIC=1` to link dynamically instead.
 
-## ICU Extension Is Excluded from the Bundled Build
+## ICU Extension Missing from the Bundled Build
 
-Because crates.io imposes a 10 MB package-size limit, the `bundled` source excludes the [ICU extension]({% link docs/2.0/core_extensions/icu.md %}). As a result, some collation and time-zone-aware date/time operations fail out of the box. Install and load ICU at runtime to restore them:
+Because crates.io imposes a 10 MB package-size limit, the `bundled` source of earlier crate versions excluded the [`icu` extension]({% link docs/2.0/core_extensions/icu.md %}). In DuckDB 2.0, the `icu` extension no longer depends on the ICU library and implements time zones, calendars and collations natively. If some collation or time-zone-aware date/time operations still fail out of the box with your crate version, install and load the extension at runtime:
 
 ```rust
 conn.execute_batch("INSTALL icu; LOAD icu;")?;
 ```
 
-Alternatively, statically link ICU by enabling the crate's `icu` feature, which pulls it into the build.
+Alternatively, statically link the extension by enabling the crate's `icu` feature, which pulls it into the build.
 
 ## `open_in_memory` Panics in an Extension Build
 

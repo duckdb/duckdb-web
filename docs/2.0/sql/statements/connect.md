@@ -25,10 +25,10 @@ SELECT count(*) FROM events; -- executes on the server, results stream back
 DISCONNECT;
 ```
 
-Connect directly to a remote database using a connection string:
+Connect directly to a remote database using a connection string. For databases other than DuckDB, the connection string must start with the type of the database, e.g., `postgres:`, followed by a connection string for that database (here, a [libpq connection string]({% link docs/2.0/core_extensions/postgres/overview.md %}#configuration)):
 
 ```sql
-CONNECT 'postgres://localhost/mydb';
+CONNECT 'postgres:dbname=mydb host=localhost';
 SELECT count(*) FROM orders; -- runs on the PostgreSQL server
 DISCONNECT;
 ```

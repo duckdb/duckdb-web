@@ -31,13 +31,14 @@ This will iterate over the extensions and return their repositories and the upda
 │    varchar     │   varchar    │       varchar       │     varchar      │     varchar     │
 ├────────────────┼──────────────┼─────────────────────┼──────────────────┼─────────────────┤
 │ iceberg        │ core_nightly │ UPDATED             │ 6386ab5          │ b3ec51a         │
-│ icu            │ core         │ NO_UPDATE_AVAILABLE │ v1.2.1           │ v1.2.1          │
-│ autocomplete   │ core         │ NO_UPDATE_AVAILABLE │ v1.2.1           │ v1.2.1          │
-│ httpfs         │ core_nightly │ NO_UPDATE_AVAILABLE │ cf3584b          │ cf3584b         │
-│ json           │ core         │ NO_UPDATE_AVAILABLE │ v1.2.1           │ v1.2.1          │
+│ tpch           │ core         │ NO_UPDATE_AVAILABLE │ v2.0.0           │ v2.0.0          │
+│ httpfs         │ core         │ NO_UPDATE_AVAILABLE │ 77392a7          │ 77392a7         │
+│ spatial        │ core         │ NO_UPDATE_AVAILABLE │ 4e066c1          │ 4e066c1         │
 │ aws            │ core_nightly │ NO_UPDATE_AVAILABLE │ d3c5013          │ d3c5013         │
 └────────────────┴──────────────┴─────────────────────┴──────────────────┴─────────────────┘
 ```
+
+Extensions that are statically linked into the DuckDB binary, such as `json`, `parquet` and `icu` in the official DuckDB builds, are not updated by this statement.
 
 ## Updating Selected Extensions
 

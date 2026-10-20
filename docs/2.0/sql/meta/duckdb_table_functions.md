@@ -45,6 +45,19 @@ The `duckdb_views` _view_ returns views that are not marked as internal:
 SELECT * FROM duckdb_views;
 ```
 
+## `duckdb_available_metrics`
+
+> New The `duckdb_available_metrics()` function was introduced in DuckDB 2.0.
+
+The `duckdb_available_metrics()` function lists the metrics that can be collected by the [profiler]({% link docs/2.0/dev/profiling.md %}), e.g., using the `tracked_metrics` setting.
+
+| Column | Description | Type |
+|:-|:---|:-|
+| `metric_name` | The name of the metric, e.g., `query.cpu_time`. | `VARCHAR` |
+| `metric_type` | The type of the metric's value, e.g., `double`, `uint64`, `string` or `map`. | `VARCHAR` |
+| `description` | Human readable text that describes the metric. | `VARCHAR` |
+| `unit` | The unit of the metric, e.g., `seconds` or `rows`. Empty for unitless metrics. | `VARCHAR` |
+
 ## `duckdb_columns`
 
 The `duckdb_columns()` function provides metadata about the columns available in the DuckDB instance.
@@ -73,6 +86,14 @@ The `duckdb_columns()` function provides metadata about the columns available in
 | `numeric_scale` | Applicable to `decimal` type. Indicates the maximum number of fractional digits (i.e., the number of digits that may appear after the decimal separator). | `INTEGER` |
 
 The [`information_schema.columns`]({% link docs/2.0/sql/meta/information_schema.md %}#columns-columns) system view provides a more standardized way to obtain metadata about database columns, but the `duckdb_columns` function also returns metadata about DuckDB internal objects. (In fact, `information_schema.columns` is implemented as a query on top of `duckdb_columns()`)
+
+## `duckdb_connection_count`
+
+The `duckdb_connection_count()` function returns the number of open connections to the DuckDB instance.
+
+| Column | Description | Type |
+|:-|:---|:-|
+| `count` | The number of open connections. | `UBIGINT` |
 
 ## `duckdb_constraints`
 
@@ -148,6 +169,20 @@ The `duckdb_dependencies()` function provides metadata about the dependencies av
 | `refobjsubid` | Always 0| `INTEGER` |
 | `deptype` | The type of dependency. Either regular (n) or automatic (a). | `VARCHAR` |
 
+## `duckdb_extension_repositories`
+
+> New The `duckdb_extension_repositories()` function was introduced in DuckDB 2.0.
+
+The `duckdb_extension_repositories()` function provides metadata about the [extension repositories]({% link docs/2.0/extensions/extension_repositories.md %}) known to the DuckDB instance, including the built-in ones (e.g., `core`, `core_nightly` and `community`) and those created with `CREATE EXTENSION REPOSITORY`.
+
+| Column | Description | Type |
+|:-|:---|:-|
+| `repository_name` | The name of the repository. | `VARCHAR` |
+| `prefix` | The URL prefix (or path) from which extensions are installed. | `VARCHAR` |
+| `type` | The type of the repository, e.g., `CORE` or `COMMUNITY`. | `VARCHAR` |
+| `key_fingerprints` | The SHA-256 fingerprints of the public keys pinned for the repository. `NULL` for built-in repositories. | `VARCHAR[]` |
+| `public_keys` | The public keys pinned for the repository. `NULL` for built-in repositories. | `VARCHAR[]` |
+
 ## `duckdb_extensions`
 
 The `duckdb_extensions()` function provides metadata about the extensions available in the DuckDB instance.
@@ -193,6 +228,17 @@ The `duckdb_functions()` function provides metadata about the functions (includi
 | `categories` | Categories of the function. Used to generate the documentation. | `VARCHAR[]` |
 
 > New The `extension_name` and `categories` columns were introduced in DuckDB 2.0.
+
+## `duckdb_grammar_extensions`
+
+> New The `duckdb_grammar_extensions()` function was introduced in DuckDB 2.0.
+
+The `duckdb_grammar_extensions()` function lists the extensions to the SQL grammar of the [PEG parser]({% link docs/2.0/sql/peg_parser.md %}) that are currently registered, e.g., by extensions.
+
+| Column | Description | Type |
+|:-|:---|:-|
+| `name` | The name of the grammar extension. | `VARCHAR` |
+| `description` | Human readable text that describes the grammar extension. | `VARCHAR` |
 
 ## `duckdb_indexes`
 
@@ -420,6 +466,30 @@ The `duckdb_temporary_files()` function provides metadata about the temporary fi
 |:-|:---|:-|
 | `path` | The name of the temporary file. | `VARCHAR` |
 | `size` | The size in bytes of the temporary file. | `BIGINT` |
+
+## `duckdb_triggers`
+
+> New The `duckdb_triggers()` function was introduced in DuckDB 2.0.
+
+The `duckdb_triggers()` function provides metadata about the [triggers]({% link docs/2.0/sql/statements/create_trigger.md %}) available in the DuckDB instance.
+
+| Column | Description | Type |
+|:-|:---|:-|
+| `database_name` | The name of the database that contains the trigger. | `VARCHAR` |
+| `database_oid` | Internal identifier of the database that contains the trigger. | `BIGINT` |
+| `schema_name` | The SQL name of the schema that contains the trigger. | `VARCHAR` |
+| `schema_oid` | Internal identifier of the schema that contains the trigger. | `BIGINT` |
+| `trigger_name` | The SQL name of the trigger. | `VARCHAR` |
+| `trigger_oid` | The object identifier of the trigger. | `BIGINT` |
+| `table_name` | The name of the table the trigger is attached to. | `VARCHAR` |
+| `action_timing` | When the trigger fires relative to the triggering statement, e.g., `AFTER`. | `VARCHAR` |
+| `event_manipulation` | The event that fires the trigger: `INSERT`, `UPDATE` or `DELETE`. | `VARCHAR` |
+| `columns` | For `UPDATE OF ⟨column⟩, ...` triggers, the list of columns. Empty otherwise. | `VARCHAR[]` |
+| `for_each` | The granularity of the trigger: `ROW` or `STATEMENT`. | `VARCHAR` |
+| `comment` | A comment created by the [`COMMENT ON` statement]({% link docs/2.0/sql/statements/comment_on.md %}). | `VARCHAR` |
+| `tags` | A map of string key–value pairs. | `MAP(VARCHAR, VARCHAR)` |
+| `temporary` | `true` if this is a temporary trigger, `false` otherwise. | `BOOLEAN` |
+| `sql` | The definition of the trigger expressed as SQL, i.e., a `CREATE TRIGGER` statement. | `VARCHAR` |
 
 ## `duckdb_types`
 

@@ -30,10 +30,10 @@ CREATE TABLE s1.tbl (v VARCHAR);
 SHOW ALL TABLES;
 ```
 
-| database | schema | table_name | column_names | column_types | temporary |
-|----------|--------|------------|--------------|--------------|-----------|
-| memory   | main   | tbl        | [i]          | [INTEGER]    | false     |
-| memory   | s1     | tbl        | [v]          | [VARCHAR]    | false     |
+| database | schema | name | column_names | column_types | temporary |
+|----------|--------|------|--------------|--------------|-----------|
+| memory   | main   | tbl  | [i]          | [INTEGER]    | false     |
+| memory   | s1     | tbl  | [v]          | [VARCHAR]    | false     |
 
 `SHOW TABLES FROM db` can be used to list all tables in a given database or schema.
 

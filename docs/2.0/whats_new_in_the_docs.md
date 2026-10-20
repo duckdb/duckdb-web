@@ -34,7 +34,7 @@ DuckDB 2.0 added trigger support, so you can run actions automatically in respon
 
 DuckDB 2.0 extended the SQL dialect in several directions, from new join types to data-modifying CTEs and a friendlier variable syntax.
 
-* [Explicit join type syntax, including nearest (`NEAREST`) joins]({% link docs/2.0/sql/query_syntax/from.md %}#specifying-the-join-type-explicitly)
+* [Explicit join type syntax, including nearest (`NEAREST`) joins]({% link docs/2.0/sql/query_syntax/from.md %}#nearest-joins)
 * [Data-modifying CTEs]({% link docs/2.0/sql/query_syntax/with.md %}#data-modifying-ctes), including [`COPY ...` blocks in CTEs]({% link docs/2.0/sql/statements/copy.md %}#copy--to)
 * [Nested schemas]({% link docs/2.0/sql/statements/create_schema.md %})
 * [The `$⟨variable⟩` variable shorthand]({% link docs/2.0/sql/statements/set_variable.md %}#the-name-shorthand), including [session variables as default parameter values]({% link docs/2.0/sql/query_syntax/prepared_statements.md %}#session-variables-as-default-values)
@@ -60,7 +60,7 @@ DuckDB 2.0 included optimizer and engine improvements, including faster recursiv
 
 ## Storage Format v2.0
 
-New database files use the v2.0.0 storage format by default. The format adds lazy metadata loading, better compression, and corruption validation. Because the format is not backward compatible, a migration guide covers upgrading existing deployments.
+New database files use the v2.0.0 storage format by default. The format adds lazy metadata loading, better compression, and corruption validation. Because the format is not forward compatible (older DuckDB versions cannot read files written by v2.0), a migration guide covers upgrading existing deployments.
 
 * [Default storage version]({% link docs/2.0/internals/storage.md %}#default-storage-version)
 * [Storage version table]({% link docs/2.0/internals/storage.md %}#storage-version-table)
@@ -74,15 +74,15 @@ DuckDB 2.0 introduced a PEG-based SQL parser that replaces the PostgreSQL-derive
 
 ## Timezones, Calendars, and Collations Without ICU
 
-DuckDB 2.0 provides a smaller, faster native implementation of timezone, calendar, and collation support, reducing reliance on the ICU extension.
+DuckDB 2.0 provides a smaller, faster native implementation of timezone, calendar, and collation support, replacing the ICU library with a native implementation in the `icu` extension.
 
 ## Write Extensions Once, Host Them Yourself
 
-DuckDB 2.0 shipped a revamped, stable C API with a versioned ABI, so an extension built once keeps working across releases. You can also register and host your own extension repositories, including static linking into custom builds.
+DuckDB 2.0 shipped a revamped C API (C API v2), which is not yet stable. You can also register and host your own extension repositories, including static linking into custom builds.
 
 * [C API]({% link docs/2.0/clients/c/overview.md %})
 * [Extension repositories]({% link docs/2.0/extensions/extension_repositories.md %})
-* Statically linking extensions: see [Statically Linking Extensions](/docs/preview/dev/building/linking_extensions)
+* Statically linking extensions: see [Statically Linking Extensions]({% link docs/2.0/dev/building/linking_extensions.md %})
 
 ## Other Documentation Updates
 
@@ -103,7 +103,6 @@ Additional 2.0 features documented across the site, grouped by area.
 * [`EXCEPT` as a synonym for `EXCLUDE`]({% link docs/2.0/sql/expressions/star.md %}#exclude-clause) in star expressions
 * [No-argument `GROUPING_ID()` and `GROUPING()`]({% link docs/2.0/sql/query_syntax/grouping_sets.md %}#identifying-grouping-sets-with-grouping_id) defaulting to all `GROUP BY` columns
 * [Backtick-quoted identifiers]({% link docs/2.0/sql/dialect/keywords_and_identifiers.md %}#identifiers) as an alternative to double quotes
-* [`DEFERRED` primary key and unique constraints]({% link docs/2.0/sql/constraints.md %}#deferred-constraints) checked at commit time
 * [`EXPLAIN (SQL)`]({% link docs/2.0/sql/statements/profiling.md %}#explain-sql) rendering the optimized plan as executable SQL
 * [Empty `STRUCT` types]({% link docs/2.0/sql/data_types/struct.md %}#creating-structs)
 
@@ -119,7 +118,7 @@ Additional 2.0 features documented across the site, grouped by area.
 
 ### Clients
 
-* [CLI agent mode]({% link docs/2.0/clients/cli/agent_mode.md %}), an interactive assistant in the command line client
+* [CLI agent mode]({% link docs/2.0/clients/cli/agent_mode.md %}), which produces compact, machine-readable output when the CLI is driven by an AI coding agent
 * [CLI command history]({% link docs/2.0/clients/cli/dot_commands.md %}#command-history): the `.history` command and the `shell_history()` table function
 * [Pretty-printed, highlighted `.schema` output]({% link docs/2.0/clients/cli/dot_commands.md %}#querying-the-database-schema) with `--no-indent` to restore the single-line form
 
@@ -132,7 +131,7 @@ Additional 2.0 features documented across the site, grouped by area.
 * [Removal of the `enable_http_logging` and `http_logging_output` settings]({% link docs/2.0/operations_manual/logging/overview.md %}#logging-specific-types) in favor of the unified logging framework
 * [The `http_client_pool_capacity` setting]({% link docs/2.0/data/io.md %}#tuning) for sizing the asynchronous HTTP client pool
 * [The metrics layer]({% link docs/2.0/dev/profiling.md %}#metrics) and the [`tracked_metrics` setting]({% link docs/2.0/configuration/pragmas.md %}#custom-metrics)
-* [IEEE floating-point operation semantics]({% link docs/2.0/configuration/pragmas.md %}#ieee-floating-point-operation-semantics) for integer division by zero
+* [Integer division by zero]({% link docs/2.0/configuration/pragmas.md %}#ieee-floating-point-operation-semantics) now raises an error
 * [The `web` profiling format]({% link docs/2.0/dev/profiling.md %}#the-format-option) and the CLI [`.web`]({% link docs/2.0/clients/cli/dot_commands.md %}) command for opening query graphs in a browser
 
 ### Building

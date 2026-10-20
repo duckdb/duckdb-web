@@ -62,6 +62,8 @@ The [`aws` extension]({% link docs/2.0/core_extensions/aws.md %}) allows for loa
 
 ## Per-Request Configuration
 
+> Deprecated Per-request configuration through S3 URL query parameters is deprecated and disabled by default in DuckDB 2.0: the `?` and the text following it are treated as part of the object key. To restore the legacy behavior, run `SET s3_enable_deprecated_url_parameters = true;` (URL compatibility mode must also be disabled). Once this setting has been explicitly set to `false`, it cannot be re-enabled in the same database instance. Instead of URL parameters, use [scoped secrets]({% link docs/2.0/configuration/secrets_manager.md %}) to use different credentials for different paths.
+
 Aside from the global S3 configuration described above, specific configuration values can be used on a per-request basis. This allows for use of multiple sets of credentials, regions, etc. These are used by including them on the S3 URI as query parameters. All the individual configuration values listed above can be set as query parameters. For instance:
 
 ```sql

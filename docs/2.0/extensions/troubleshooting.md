@@ -49,7 +49,7 @@ The default extension repository is distributed through a content delivery netwo
 
 ## Manual Process to Download Extensions via the Browser
 
-To check if an extension is available, consider trying to download the relevant extension resource, for example via your browser visiting <https://extensions.duckdb.org/v1.4.4/osx_arm64/spatial.duckdb_extension.gz> or any other link that has been provided. Note that `http://` has been deprecated in favor of `https://`.
+To check if an extension is available, consider trying to download the relevant extension resource, for example via your browser visiting <https://extensions.duckdb.org/v1.4.4/osx_arm64/spatial.duckdb_extension.gz> or any other link that has been provided. The extension server can be reached over both `http://` and `https://`. Note that DuckDB's built-in `core` and `community` repositories use `http://` by default: extension binaries are signed, so their integrity is verified on load regardless of the transport protocol.
 
 If successful, this will download and unpack the extension to the default `Downloads` folder, so that from SQL you can run:
 

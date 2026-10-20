@@ -58,7 +58,7 @@ SELECT *
 FROM iceberg_scan('s3://⟨bucket⟩/⟨iceberg_table_folder⟩/metadata/⟨id⟩.metadata.json');
 ```
 
-Note that you need to link directly to the manifest file. Otherwise, you'll get an error like this:
+Note that you need to link directly to the metadata file. Otherwise, you'll get an error like this:
 
 ```console
 IO Error:

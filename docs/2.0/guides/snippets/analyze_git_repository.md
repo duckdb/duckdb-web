@@ -56,16 +56,16 @@ LIMIT 5;
 ```
 
 ```text
-┌─────────────────────┬────────────┬──────────────────┬───────────────────────────────────────────────────────────────────────────────┐
-│      timestamp      │    hash    │      author      │                                    message                                    │
-│      timestamp      │  varchar   │     varchar      │                                    varchar                                    │
-├─────────────────────┼────────────┼──────────────────┼───────────────────────────────────────────────────────────────────────────────┤
-│ 2025-02-25 17:12:54 │ d608a31e13 │ Mark             │ MAIN_BRANCH_VERSIONING: Adopt also for Python build and amalgamation (#16400) │
-│ 2025-02-25 14:05:56 │ 920b39ad96 │ Mark             │ Read support for Parquet Float16 (#16395)                                     │
-│ 2025-02-25 12:43:52 │ 61f55734b9 │ Carlo Piovesan   │ MAIN_BRANCH_VERSIONING: Adopt also for Python build and amalgamation          │
-│ 2025-02-25 11:35:28 │ 87eff7ebd3 │ Mark             │ Fix issue #16377 (#16391)                                                     │
-│ 2025-02-25 09:33:49 │ 35af26476e │ Hannes Mühleisen │ Read support for Parquet Float16                                              │
-└─────────────────────┴────────────┴──────────────────┴───────────────────────────────────────────────────────────────────────────────┘
+┌──────────────────────────┬────────────┬──────────────────┬───────────────────────────────────────────────────────────────────────────────┐
+│        timestamp         │    hash    │      author      │                                    message                                    │
+│ timestamp with time zone │  varchar   │     varchar      │                                    varchar                                    │
+├──────────────────────────┼────────────┼──────────────────┼───────────────────────────────────────────────────────────────────────────────┤
+│ 2025-02-25 18:12:54+01   │ d608a31e13 │ Mark             │ MAIN_BRANCH_VERSIONING: Adopt also for Python build and amalgamation (#16400) │
+│ 2025-02-25 15:05:56+01   │ 920b39ad96 │ Mark             │ Read support for Parquet Float16 (#16395)                                     │
+│ 2025-02-25 13:43:52+01   │ 61f55734b9 │ Carlo Piovesan   │ MAIN_BRANCH_VERSIONING: Adopt also for Python build and amalgamation          │
+│ 2025-02-25 12:35:28+01   │ 87eff7ebd3 │ Mark             │ Fix issue #16377 (#16391)                                                     │
+│ 2025-02-25 10:33:49+01   │ 35af26476e │ Hannes Mühleisen │ Read support for Parquet Float16                                              │
+└──────────────────────────┴────────────┴──────────────────┴───────────────────────────────────────────────────────────────────────────────┘
 ```
 
 ## Analyzing the Log
@@ -139,7 +139,7 @@ LIMIT 20;
 
 ```text
 ┌──────────┬───────┐
-│    w     │ count │
+│   word   │ count │
 │ varchar  │ int64 │
 ├──────────┼───────┤
 │ merge    │ 12550 │

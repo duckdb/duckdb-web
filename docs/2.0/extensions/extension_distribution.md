@@ -24,6 +24,8 @@ All official extensions are distributed for the following platforms.
 | `windows_amd64` | Windows          | x86_64  (AMD64) | Intel, AMD, etc.               |
 | `windows_arm64` | Windows          | AArch64 (ARM64) | Copilot+ PC with Qualcomm CPU  |
 
+> Deprecated The `osx_amd64` platform (macOS on Intel) is being phased out. In DuckDB 2.0, DuckDB and its core extensions are still built for `osx_amd64`, but [community extensions]({% link docs/2.0/extensions/community_extensions.md %}) are no longer built for this platform. DuckDB 2.1 will stop supporting `osx_amd64`.
+
 Some extensions are distributed for the following platforms:
 
 * `windows_amd64_mingw`
@@ -38,6 +40,7 @@ For platforms outside the ones listed above, we do not officially distribute ext
 Extensions can be signed with a cryptographic key.
 By default, DuckDB uses its built-in public keys to verify the integrity of extensions before loading them.
 All core and community extensions are signed by the DuckDB team.
+In addition, [custom extension repositories]({% link docs/2.0/extensions/extension_repositories.md %}) can serve extensions signed with their own keys: DuckDB pins the repository's public keys when the repository is created and verifies the extensions installed from it against these keys.
 
 Signing the extension simplifies their distribution, this is why they can be distributed over HTTP without the need for HTTPS,
 which itself is supported through an extension ([`httpfs`]({% link docs/2.0/core_extensions/httpfs/overview.md %})).
@@ -77,6 +80,7 @@ DuckDB stores this compatibility information in a metadata footer appended to th
 ## Creating a Custom Repository
 
 You can create a custom DuckDB extension repository.
+To have DuckDB trust signed extensions from such a repository without enabling `allow_unsigned_extensions`, register it with its public keys using [`CREATE EXTENSION REPOSITORY`]({% link docs/2.0/extensions/extension_repositories.md %}).
 A DuckDB repository is an HTTP, HTTPS, S3, or local file based directory that serves the extensions files in a specific structure.
 This structure is described in the [“Downloading Extensions Directly from S3” section]({% link docs/2.0/extensions/advanced_installation_methods.md %}#downloading-extensions-directly-from-s3), and is the same
 for local paths and remote servers, for example:
@@ -91,7 +95,6 @@ base_repository_path_or_url
         ├── inet.duckdb_extension
         ├── json.duckdb_extension
         ├── parquet.duckdb_extension
-        ├── tpcds.duckdb_extension
         ├── tpcds.duckdb_extension
         └── tpch.duckdb_extension
 ```

@@ -18,7 +18,7 @@ Using this function is equivalent to performing the following steps:
 
 * Attaching to the database using a read-only connection.
 * Querying the table specified through the `table_name` argument.
-* Closing the connection to the database database.
+* Closing the connection to the database.
 
 ## Examples
 
@@ -47,7 +47,7 @@ FROM read_duckdb('https://blobs.duckdb.org/data/tpch-sf10.db', table_name = 'reg
 ### Reading from Multiple Databases
 
 You can use [globbing]({% link docs/2.0/sql/functions/pattern_matching.md %}#globbing) to read from multiple databases.
-Two illustrate this, let's create two tables:
+To illustrate this, let's create two databases:
 
 ```bash
 duckdb my-1.duckdb \
@@ -87,7 +87,7 @@ FROM read_duckdb('my-2.duckdb');
 │   x   │
 │ int32 │
 ├───────┤
-│     3 │
+│    43 │
 └───────┘
 ```
 

@@ -11,8 +11,8 @@ redirect_from:
 title: DuckLake
 ---
 
-> DuckLake 1.0 was released in April 2026.
-> Read the [announcement blog post](https://ducklake.select/2026/04/13/ducklake-10/).
+> DuckLake 1.1 was released together with DuckDB 2.0.
+> Read the [announcement blog post](https://ducklake.select/2026/10/21/ducklake-11/).
 
 The `ducklake` extension adds support for attaching to databases stored in the [DuckLake format](http://ducklake.select/). 
 The complete documentation of this extension is available at the [DuckLake website](https://ducklake.select/docs/stable/duckdb/introduction).
@@ -55,12 +55,12 @@ FROM ducklake_snapshots('my_ducklake');
 ```
 
 ```text
-┌─────────────┬────────────────────────────┬────────────────┬──────────────────────────┐
-│ snapshot_id │       snapshot_time        │ schema_version │         changes          │
-│    int64    │  timestamp with time zone  │     int64      │ map(varchar, varchar[])  │
-├─────────────┼────────────────────────────┼────────────────┼──────────────────────────┤
-│      0      │ 2025-05-26 11:41:10.838+02 │       0        │ {schemas_created=[main]} │
-└─────────────┴────────────────────────────┴────────────────┴──────────────────────────┘
+┌─────────────┬────────────────────────────┬────────────────┬──────────────────────────┬─────────┬────────────────┬───────────────────┐
+│ snapshot_id │       snapshot_time        │ schema_version │         changes          │ author  │ commit_message │ commit_extra_info │
+│    int64    │  timestamp with time zone  │     int64      │ map(varchar, varchar[])  │ varchar │    varchar     │      varchar      │
+├─────────────┼────────────────────────────┼────────────────┼──────────────────────────┼─────────┼────────────────┼───────────────────┤
+│           0 │ 2026-10-20 23:56:36.256+02 │              0 │ {schemas_created=[main]} │ NULL    │ NULL           │ NULL              │
+└─────────────┴────────────────────────────┴────────────────┴──────────────────────────┴─────────┴────────────────┴───────────────────┘
 ```
 
 ### `ducklake_snapshots`
@@ -73,12 +73,15 @@ Returns the snapshots stored in the DuckLake catalog name `catalog`.
 
 The information is encoded into a table with the following schema:
 
-| Column name      | Column type                |
-| ---------------- | -------------------------- |
-| `snapshot_id`    | `BIGINT`                   |
-| `snapshot_time`  | `TIMESTAMP WITH TIME ZONE` |
-| `schema_version` | `BIGINT`                   |
-| `changes`        | `MAP(VARCHAR, VARCHAR[])`  |
+| Column name         | Column type                |
+| ------------------- | -------------------------- |
+| `snapshot_id`       | `BIGINT`                   |
+| `snapshot_time`     | `TIMESTAMP WITH TIME ZONE` |
+| `schema_version`    | `BIGINT`                   |
+| `changes`           | `MAP(VARCHAR, VARCHAR[])`  |
+| `author`            | `VARCHAR`                  |
+| `commit_message`    | `VARCHAR`                  |
+| `commit_extra_info` | `VARCHAR`                  |
 
 ### `ducklake_table_info`
 

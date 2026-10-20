@@ -125,7 +125,7 @@ CREATE SECRET iceberg_secret (
 ATTACH '⟨warehouse⟩' AS my_catalog (
     TYPE iceberg,
     SECRET iceberg_secret,
-    ENDPOINT '⟨https://catalog.example.com⟩'
+    URI '⟨https://catalog.example.com⟩'
 );
 ```
 

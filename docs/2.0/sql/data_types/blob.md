@@ -36,6 +36,14 @@ Create a `BLOB` value with two bytes (65, 66):
 SELECT 'AB'::BLOB;
 ```
 
+A `BLOB` value can also be created using a hex string literal, which is a string of hexadecimal digits prefixed with `X`. The number of hex digits must be even. For example, create a `BLOB` value with two bytes (202, 254):
+
+```sql
+SELECT X'CAFE';
+```
+
+> New Starting with DuckDB 2.0, `X'…'` literals are `BLOB` values. In earlier versions, `X'CAFE'` was parsed as the `VARCHAR` string `'xCAFE'`.
+
 Blobs are typically used to store non-textual objects that the database does not provide explicit support for, such as images. While blobs can hold objects up to 4 GB in size, typically it is not recommended to store very large objects within the database system. In many situations it is better to store the large file on the file system, and store the path to the file in the database system in a `VARCHAR` field.
 
 ## Functions

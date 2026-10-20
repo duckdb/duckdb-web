@@ -219,3 +219,24 @@ and $$dollar quotes$$ $tag$ AS msg;
 ```
 
 [Implicit concatenation](#implicit-string-literal-concatenation) only works for single-quoted string literals, not with dollar-quoted ones.
+
+## Bit String and Hex String Literals
+
+> New Starting with DuckDB 2.0, bit string and hex string literals are supported. In earlier versions, `B'0101'` and `X'CAFE'` were parsed as the `VARCHAR` strings `'b0101'` and `'xCAFE'`, respectively.
+
+A string literal prefixed with `B` is a bit string literal, which produces a [`BITSTRING`]({% link docs/2.0/sql/data_types/bitstring.md %}) value. It may only contain the characters `0` and `1`.
+
+A string literal prefixed with `X` is a hex string literal, which produces a [`BLOB`]({% link docs/2.0/sql/data_types/blob.md %}) value. It must contain an even number of hexadecimal digits.
+
+```sql
+SELECT B'0101' AS b, X'CAFE' AS x;
+```
+
+```text
+┌──────┬──────────┐
+│  b   │    x     │
+│ bit  │   blob   │
+├──────┼──────────┤
+│ 0101 │ \xCA\xFE │
+└──────┴──────────┘
+```

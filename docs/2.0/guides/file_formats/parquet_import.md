@@ -56,13 +56,13 @@ TO 'f.parquet';
 To add another column `c3` that is not present in the file, run:
 
 ```sql
-FROM (VALUES (NULL::VARCHAR, NULL, NULL)) t(c1, c2, c3)
+FROM (VALUES (NULL::VARCHAR, NULL, NULL::INTEGER)) t(c1, c2, c3)
 WHERE false
 UNION ALL BY NAME
 FROM 'f.parquet';
 ```
 
-The first `FROM` clause generates an empty table with *three* columns where `c1` is a `VARCHAR`.
+The first `FROM` clause generates an empty table with *three* columns where `c1` is a `VARCHAR` and `c3` is an `INTEGER`.
 Then, use `UNION ALL BY NAME` to union the Parquet file. The result is:
 
 ```text
@@ -70,7 +70,7 @@ Then, use `UNION ALL BY NAME` to union the Parquet file. The result is:
 │   c1    │  c2   │  c3   │
 │ varchar │ int32 │ int32 │
 ├─────────┼───────┼───────┤
-│ 42      │  43   │ NULL  │
+│ 42      │    43 │  NULL │
 └─────────┴───────┴───────┘
 ```
 

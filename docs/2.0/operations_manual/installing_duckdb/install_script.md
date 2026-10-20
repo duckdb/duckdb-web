@@ -27,10 +27,9 @@ Click to see the output of the install script.
 ```text
   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
                                  Dload  Upload   Total   Spent    Left  Speed
-100  3507  100  3507    0     0  34367      0 --:--:-- --:--:-- --:--:-- 34382
-https://install.duckdb.org/v1.4.1/duckdb_cli-osx-universal.gz
+100 13209  100 13209    0     0   126k      0 --:--:-- --:--:-- --:--:--  127k
 
-*** DuckDB Linux/MacOS installation script, version 1.4.1 ***
+*** DuckDB Linux/MacOS installation script, version 2.0.0 ***
 
 
          .;odxdl,
@@ -44,14 +43,14 @@ https://install.duckdb.org/v1.4.1/duckdb_cli-osx-universal.gz
 
 ######################################################################## 100.0%
 
-Successfully installed DuckDB binary to /Users/your_user/.duckdb/cli/1.4.1/duckdb
-  with a link from                      /Users/your_user/.duckdb/cli/latest/duckdb
+Successfully installed DuckDB 2.0.0 to /Users/your_user/.duckdb/cli/2.0.0/duckdb
+Updated symlink from /Users/your_user/.duckdb/cli/latest/duckdb to
+                     /Users/your_user/.duckdb/cli/2.0.0/duckdb
 
 Hint: Append the following line to your shell profile:
-export PATH='/Users/your_user/.duckdb/cli/latest':$PATH
+export PATH="/Users/your_user/.duckdb/cli/latest":$PATH
 
-
-To launch DuckDB now, type
+To launch DuckDB 2.0.0 now, type
 /Users/your_user/.duckdb/cli/latest/duckdb
 ```
 </details>
@@ -70,6 +69,16 @@ You can install [past DuckDB releases]({% link release_calendar.md %}#past-relea
 ```bash
 curl https://install.duckdb.org | DUCKDB_VERSION=1.2.2 bash
 ```
+
+### Installing the C/C++ Libraries
+
+Starting with DuckDB 2.0, the install script can also install the DuckDB C/C++ headers and libraries using the `DUCKDB_INSTALL` variable. It takes a comma-separated list of components: `cli` (default), `static` and `shared`. For example, to install the static library and the CLI, run:
+
+```bash
+curl https://install.duckdb.org | DUCKDB_INSTALL=static,cli bash
+```
+
+The libraries and headers are installed to `~/.duckdb/lib/⟨version⟩/release_⟨platform⟩`, e.g., `~/.duckdb/lib/2.0.0/release_osx_arm64`. For more details, see [Linking Extensions]({% link docs/2.0/dev/building/linking_extensions.md %}).
 
 ## Windows
 

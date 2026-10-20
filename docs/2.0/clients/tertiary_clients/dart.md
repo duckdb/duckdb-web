@@ -31,7 +31,7 @@ This will add a line like this to your package's `pubspec.yaml` (and run an impl
 
 ```yaml
 dependencies:
-  dart_duckdb: ^{{ site.current_duckdb_dart_version }}
+  dart_duckdb: ^{% if site.current_duckdb_dart_version != "" %}{{ site.current_duckdb_dart_version }}{% else %}{{ site.lts_duckdb_dart_version }}{% endif %}
 ```
 
 Alternatively, your editor might support `flutter pub get`. Check the docs for your editor to learn more.

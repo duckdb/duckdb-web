@@ -119,7 +119,7 @@ SELECT today() AS date, get_current_time() AS time, current_localtimestamp() AS 
 
 ### Hashing
 
-Hash functions such as [`hash`]({% link docs/2.0/sql/functions/utility.md %}#hashvalue), [`md5`]({% link docs/2.0/sql/functions/utility.md %}#md5string), and [`sha256`]({% link docs/2.0/sql/functions/utility.md %}#sha256value) turn a row number into a deterministic pseudo-random value, which is useful when you want reproducible identifiers:
+Hash functions such as [`hash`]({% link docs/2.0/sql/functions/utility.md %}#hashvalue), [`md5`]({% link docs/2.0/sql/functions/utility.md %}#md5string), and [`sha256`]({% link docs/2.0/sql/functions/utility.md %}#sha256string) turn a row number into a deterministic pseudo-random value, which is useful when you want reproducible identifiers:
 
 ```sql
 SELECT hash(i) AS id, md5(i::VARCHAR) AS token FROM range(3) t(i);
@@ -184,23 +184,22 @@ res.show()
 This generates the following:
 
 ```text
-┌──────────────────────┬──────────────┬─────────┐
-│          id          │ creationDate │  flag   │
-│        uint64        │     date     │ boolean │
-├──────────────────────┼──────────────┼─────────┤
-│  6770051751173734325 │ 2019-11-05   │ true    │
-│ 16510940941872865459 │ 2002-08-03   │ true    │
-│ 13285076694688170502 │ 1998-11-27   │ true    │
-│ 11757770452869451863 │ 1998-07-03   │ true    │
-│  2064835973596856015 │ 2010-09-06   │ true    │
-│ 17776805813723356275 │ 2020-12-26   │ false   │
-│ 13540103502347468651 │ 1998-03-21   │ false   │
-│  4800297459639118879 │ 2015-06-12   │ false   │
-│  7199933130570745587 │ 2005-04-13   │ false   │
-│ 18103378254596719331 │ 2014-09-15   │ false   │
-├──────────────────────┴──────────────┴─────────┤
-│ 10 rows                             3 columns │
-└───────────────────────────────────────────────┘
+┌──────────────────────┬──────────────┬──────────────────────┬───────────────────────────────────────────────┬─────────┐
+│          id          │ creationDate │        short         │                     long                      │  bool   │
+│        uint64        │     date     │       varchar        │                    varchar                    │ boolean │
+├──────────────────────┼──────────────┼──────────────────────┼───────────────────────────────────────────────┼─────────┤
+│  6770051751173734325 │ 2013-03-01   │ Parent capital.      │ Pm general bit style drug want dog. Often fu… │ true    │
+│ 16510940941872865459 │ 1999-11-04   │ Low knowledge.       │ Cup these herself very debate. Mind former s… │ true    │
+│ 13285076694688170502 │ 1997-07-06   │ Note everyone head.  │ Stop into hour century head outside. At arti… │ true    │
+│ 11757770452869451863 │ 2001-08-10   │ Region recent along. │ Marriage tax federal yard short. Bank speech… │ true    │
+│  2064835973596856015 │ 2015-11-24   │ Matter to time.      │ Fly test thank fine loss. Across official in… │ true    │
+│ 17776805813723356275 │ 2022-03-24   │ Worry enter process. │ And score institution sea fish movie film di… │ false   │
+│ 13540103502347468651 │ 2020-03-26   │ Age stay create way. │ Check bit ground subject become role. Gun ra… │ false   │
+│  4800297459639118879 │ 2022-06-08   │ Politics bag tell.   │ Operation heart home article decide economy … │ false   │
+│  7199933130570745587 │ 2003-04-23   │ No language popular. │ Cup type woman network address ago. Continue… │ false   │
+│ 18103378254596719331 │ 1999-03-08   │ Customer capital.    │ Anything national their bank investment.\nSa… │ false   │
+└──────────────────────┴──────────────┴──────────────────────┴───────────────────────────────────────────────┴─────────┘
+  10 rows                                                                                                    5 columns
 ```
 
 ## Generating Benchmark Datasets with Extensions

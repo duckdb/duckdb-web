@@ -10,7 +10,7 @@ title: 'EXPLAIN ANALYZE: Profile Queries'
 ---
 
 Prepending a query with `EXPLAIN ANALYZE` both pretty-prints the query plan,
-and executes it, providing run-time performance numbers for every operator, as well as the estimated cardinality (`EC`) and the actual cardinality.
+and executes it, providing run-time performance numbers and the actual cardinality (number of rows produced) for every operator.
 
 ```sql
 EXPLAIN ANALYZE SELECT * FROM tbl;
@@ -36,65 +36,31 @@ EXPLAIN ANALYZE
 ```
 
 ```text
-┌─────────────────────────────────────┐
-│┌───────────────────────────────────┐│
-││        Total Time: 0.0008s        ││
-│└───────────────────────────────────┘│
-└─────────────────────────────────────┘
-┌───────────────────────────┐
-│      EXPLAIN_ANALYZE      │
-│   ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─   │
-│             0             │
-│          (0.00s)          │
-└─────────────┬─────────────┘
-┌─────────────┴─────────────┐
-│         PROJECTION        │
-│   ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─   │
-│            name           │
-│   ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─   │
-│             2             │
-│          (0.00s)          │
-└─────────────┬─────────────┘
-┌─────────────┴─────────────┐
-│         HASH_JOIN         │
-│   ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─   │
-│           INNER           │
-│         sid = sid         │
-│   ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─   ├──────────────┐
-│           EC: 1           │              │
-│   ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─   │              │
-│             2             │              │
-│          (0.00s)          │              │
-└─────────────┬─────────────┘              │
-┌─────────────┴─────────────┐┌─────────────┴─────────────┐
-│         SEQ_SCAN          ││           FILTER          │
-│   ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─   ││   ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─   │
-│           exams           ││     prefix(name, 'Ma')    │
-│   ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─   ││   ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─   │
-│            sid            ││           EC: 1           │
-│   ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─   ││   ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─   │
-│           EC: 3           ││             2             │
-│   ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─   ││          (0.00s)          │
-│             3             ││                           │
-│          (0.00s)          ││                           │
-└───────────────────────────┘└─────────────┬─────────────┘
-┌─────────────┴─────────────┐
-│         SEQ_SCAN          │
-│   ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─   │
-│          students         │
-│   ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─   │
-│            sid            │
-│            name           │
-│   ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─   │
-│ Filters: name>=Ma AND name│
-│  <Mb AND name IS NOT NULL │
-│   ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─   │
-│           EC: 1           │
-│   ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─   │
-│             2             │
-│          (0.00s)          │
-└───────────────────────────┘
+╭─ Summary ───────────╮
+│ Total Time: 0.0015s │
+╰─────────────────────╯
+╭─ Projection ────────────────────────────────────────────╮
+│ Projections: name                                       │
+│ 2 rows                                              0µs │
+╰────────────────────────────┒┎───────────────────────────╯
+╭─ Hash Join ────────────────┚┖───────────────────────────╮
+│ Join Type: INNER                                        │
+│ Conditions: sid = sid                                   │
+│ 2 rows                                              0µs │
+╰────────────────────────────┰┰───────────────────────────╯
+                             ┃┠─────────────────────────────────────────────┰┒
+╭─ Table Scan ───────────────┚┖───────────────────────────╮  ╭─ Table Scan ─┚┖─────────────╮
+│ Table: memory.main.exams                                │  │ Table: memory.main.students │
+│ Type: Sequential Scan                                   │  │ Type: Sequential Scan       │
+│ Projections: sid                                        │  │ Projections: sid, name      │
+│ Dynamic Filters:                                        │  │ Filters: name >= 'Ma'       │
+│ optional: (sid IN (1, 3)) AND optional: sid IN PRF(sid) │  │ Row Groups Scanned: 1 / 1   │
+│ Row Groups Scanned: 1 / 1                               │  │ 2 rows                  0µs │
+│ 2 rows                                              0µs │  ╰─────────────────────────────╯
+╰─────────────────────────────────────────────────────────╯
 ```
+
+Each operator shows the number of rows it produced and the time spent in it. Scan operators also show the number of row groups scanned and any _dynamic filters_ that were pushed into them at runtime, e.g., by the hash join.
 
 ## See Also
 

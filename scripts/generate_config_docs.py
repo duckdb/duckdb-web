@@ -64,7 +64,8 @@ CREATE TABLE configurations AS SELECT
     {description_replacement} AS Description,
     surround_with_backticks(input_type) AS "Type",
     default_value AS "Default value",
-    scope AS "Scope"
+    scope AS "Scope",
+    is_deprecated
 FROM (
     SELECT array_agg(surround_with_backticks(name))::VARCHAR AS name, description, input_type,
         first(CASE
@@ -87,25 +88,36 @@ FROM (
         WHEN name='temp_directory'
         THEN '`⟨database_name⟩.tmp` or `.tmp` (in in-memory mode)'
         ELSE surround_with_backticks(value) END) AS default_value,
-        scope
-    FROM duckdb_settings()
+        scope,
+        is_deprecated
+    FROM (
+        SELECT *, false AS is_deprecated FROM duckdb_settings()
+        UNION ALL
+        SELECT *, true AS is_deprecated FROM duckdb_settings(deprecated = true)
+    )
     WHERE name NOT LIKE '%debug%' AND description NOT ILIKE '%debug%'
-    GROUP BY description, input_type, scope
+    GROUP BY description, input_type, scope, is_deprecated
 ) tbl
 ORDER BY 1
 ;
 '''
 
 get_global_flags = '''
-SELECT * EXCLUDE Scope
+SELECT * EXCLUDE (Scope, is_deprecated)
 FROM configurations
-WHERE Scope = 'GLOBAL';
+WHERE Scope = 'GLOBAL' AND NOT is_deprecated;
 '''
 
 get_local_flags = '''
-SELECT * EXCLUDE Scope
+SELECT * EXCLUDE (Scope, is_deprecated)
 FROM configurations
-WHERE Scope = 'LOCAL';
+WHERE Scope = 'LOCAL' AND NOT is_deprecated;
+'''
+
+get_deprecated_flags = '''
+SELECT * EXCLUDE is_deprecated
+FROM configurations
+WHERE is_deprecated;
 '''
 
 global_configuration_flags = run_duckdb_script(script + get_global_flags)
@@ -113,6 +125,22 @@ global_configuration_flags = run_duckdb_script(script + get_global_flags)
 local_config_script = script + get_local_flags
 
 local_configuration_flags = run_duckdb_script(local_config_script)
+
+deprecated_configuration_flags = run_duckdb_script(script + get_deprecated_flags)
+
+
+def strip_cell_padding(table):
+    # newer CLI versions pad Markdown table cells to equal width
+    lines = []
+    for line in table.split('\n'):
+        cells = re.split(r'(?<!\\)\|', line)[1:-1]
+        lines.append('| ' + ' | '.join(cell.strip() for cell in cells) + ' |')
+    return '\n'.join(lines).replace('| --', '|--').replace('- |', '-|')
+
+
+global_configuration_flags = strip_cell_padding(global_configuration_flags)
+local_configuration_flags = strip_cell_padding(local_configuration_flags)
+deprecated_configuration_flags = strip_cell_padding(deprecated_configuration_flags)
 
 option_split = '## Configuration Reference'
 doc_file = 'docs/2.0/configuration/overview.md'
@@ -135,6 +163,12 @@ text += (
 
 text += '\n### Global Configuration Options\n\n' + global_configuration_flags + '\n'
 text += '\n### Local Configuration Options\n\n' + local_configuration_flags + '\n'
+text += (
+    '\n### Deprecated Configuration Options\n\n'
+    + 'The following configuration options are deprecated and will be removed in a future release.\n\n'
+    + deprecated_configuration_flags
+    + '\n'
+)
 text = re.sub(
     r'^\|---*\|---*\|---*\|---*\|$', '|----|--------|--|---|', text, flags=re.MULTILINE
 )

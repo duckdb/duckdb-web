@@ -14,11 +14,12 @@ DuckDB extensions to better understand the underlying processes.
 ## Overview
 
 - DuckDB follows [Semantic Versioning](https://semver.org/) (`v<MAJOR>.<MINOR>.<PATCH>`)
-- Minor versions are released approximately every 4 months
-- Patch releases are issued as needed for:
+- Feature releases (new minor or major versions) are released approximately every 6 months, e.g., v1.4.0 in September 2025, v1.5.0 in March 2026 and v2.0.0 in October 2026
+- Patch releases are issued as needed for all supported versions:
     - The latest stable version
-    - The current Long Term Support (LTS) version
-- All releases are listed in the [Release Calendar]({% link release_calendar.md %})
+    - Long Term Support (LTS) versions within their support period
+    - Versions with extended support (e.g., v1.5, which is supported until March 2027)
+- All releases and their end-of-life dates are listed in the [Release Calendar]({% link release_calendar.md %})
 
 ### Terminology
 
@@ -97,7 +98,7 @@ branch from which all subsequent `vx.<y+1>.<n>` patch releases are released.
 
 - Bug-fixes for `vx.y.<z+1>` patch releases are merged into `vx.y-codename`
 - Features and bug-fixes for `vx.<y+1>.0` are merged into `vx.<y+1>-codename`
-- Features for `vx.<y+2>.0` are merged into `vx.<y+2>-codename`
+- Features for `vx.<y+2>.0` are merged into `main`
 
 ### Phase 3: Feature Freeze
 
@@ -119,7 +120,7 @@ last-minute bugs by disallowing feature merges.
 - Bug-fixes for `vx.y.<z+1>` are no longer allowed, should target `vx.<y+1>.0` instead
 - Bug-fixes for `vx.<y+1>.0` are merged into `vx.<y+1>-codename`
 - Features for `vx.<y+1>.0` are no longer allowed, should target `vx.<y+2>.0` instead
-- Features for `vx.<y+2>.0` are merged into `vx.<y+2>-codename`
+- Features for `vx.<y+2>.0` are merged into `main`
 
 ## Main Extension Release Cycle
 

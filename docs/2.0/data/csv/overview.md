@@ -82,6 +82,7 @@ Below are parameters that can be passed to the [`read_csv` function](#csv-functi
 | Name | Description | Type | Default |
 |:--|:-----|:-|:-|
 | `all_varchar` | Skip type detection and assume all columns are of type `VARCHAR`. This option is only supported by the `read_csv` function. | `BOOL` | `false` |
+| `allow_empty` | If the file pattern or file list matches no files, return an empty result (with a single `empty` column of type `BOOL`) instead of throwing an error. Not available in the `COPY` statement. Added in DuckDB 2.0. | `BOOL` | `false` |
 | `allow_quoted_nulls` | Allow the conversion of quoted values to `NULL` values | `BOOL` | `true` |
 | `auto_detect` | [Auto detect CSV parameters]({% link docs/2.0/data/csv/auto_detection.md %}). | `BOOL` | `true` |
 | `auto_type_candidates` | Types that the sniffer uses when detecting column types. The `VARCHAR` type is always included as a fallback option. See [example](#auto_type_candidates-details). | `TYPE[]` | [default types](#auto_type_candidates-details) |

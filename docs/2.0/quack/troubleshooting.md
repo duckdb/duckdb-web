@@ -7,8 +7,7 @@ redirect_from:
 title: Troubleshooting Quack
 ---
 
-Quack was released as a stable extension in [DuckDB 2.0]({% link release_calendar.md %}), having previously been available as a preview since DuckDB 1.5.3.
-The protocol continues to be refined as the team works toward full production readiness.
+[DuckDB 2.0 ships a polished version of Quack]({% post_url 2026-10-21-announcing-duckdb-200 %}#duckdb-as-a-server) (first released in DuckDB 1.5.3) with substantial performance and stability improvements.
 If you experience any issues with Quack, try upgrading all your DuckDB clients to the latest version of the `quack` extension:
 
 ```sql

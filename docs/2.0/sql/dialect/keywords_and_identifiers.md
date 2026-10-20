@@ -111,7 +111,7 @@ SELECT cosineofpi FROM tbl;
 |-----------:|
 | -1.0       |
 
-To change this behavior, set the `preserve_identifier_case` [configuration option]({% link docs/2.0/configuration/overview.md %}#configuration-reference) to `false`.
+To change this behavior, use the `preserve_identifier_case` [configuration option]({% link docs/2.0/configuration/overview.md %}#configuration-reference), see [below](#disabling-preserving-cases).
 
 ### Case-Sensitivity of Keys in Nested Data Structures
 
@@ -161,10 +161,20 @@ SELECT * FROM t1 NATURAL JOIN t2;
 
 #### Disabling Preserving Cases
 
-With the `preserve_identifier_case` [configuration option]({% link docs/2.0/configuration/overview.md %}#configuration-reference) set to `false`, all identifiers are turned into lowercase:
+> New In DuckDB 2.0, `preserve_identifier_case` is a `VARCHAR` option. Previously, it was a `BOOLEAN` option.
+
+The `preserve_identifier_case` [configuration option]({% link docs/2.0/configuration/overview.md %}#configuration-reference) controls how non-quoted identifiers are folded. It accepts the following values:
+
+* `'preserve_case'` (default): keep the case as written.
+* `'lowercase'`: turn non-quoted identifiers into lowercase.
+* `'uppercase'`: turn non-quoted identifiers into uppercase.
+
+For backward compatibility, the Boolean values `true` and `false` are also accepted and map to `'preserve_case'` and `'lowercase'`, respectively.
+
+For example, with `preserve_identifier_case` set to `'lowercase'`, all non-quoted identifiers are turned into lowercase:
 
 ```sql
-SET preserve_identifier_case = false;
+SET preserve_identifier_case = 'lowercase';
 CREATE TABLE tbl AS SELECT cos(pi()) AS CosineOfPi;
 SELECT CosineOfPi FROM tbl;
 ```
@@ -172,3 +182,7 @@ SELECT CosineOfPi FROM tbl;
 | cosineofpi |
 |-----------:|
 | -1.0       |
+
+With `preserve_identifier_case` set to `'uppercase'`, they are turned into uppercase, so the table above would be named `TBL` and its column `COSINEOFPI`.
+
+> The setting is applied when a statement is parsed. Therefore, it only takes effect for statements parsed after the `SET` statement has been executed, e.g., in a subsequent query string.

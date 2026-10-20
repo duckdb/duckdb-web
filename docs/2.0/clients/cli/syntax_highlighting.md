@@ -10,7 +10,7 @@ redirect_from:
 title: Syntax Highlighting
 ---
 
-> Syntax highlighting in the CLI is currently only available for macOS and Linux.
+> Syntax highlighting in the CLI is available for macOS, Linux and Windows.
 
 SQL queries that are written in the shell are automatically highlighted using syntax highlighting.
 
@@ -20,6 +20,7 @@ There are several components of a query that are highlighted in different colors
 Syntax highlighting can also be disabled entirely using the `.highlight off` command.
 
 Below is a list of query components that can be configured.
+
 |          Type           |       Component         | Default color |
 |-------------------------|-------------------------|---------------|
 | Keywords                | `keyword`               | `green`       |

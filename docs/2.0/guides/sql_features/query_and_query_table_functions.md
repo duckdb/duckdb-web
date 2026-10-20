@@ -29,7 +29,7 @@ EXECUTE select_from_table('my_table');
 |---:|
 | 42 |
 
-When combined with the [`COLUMNS` expression]({% link docs/2.0/sql/expressions/star.md %}#columns), we can write very generic SQL-only macros. For example, below is a custom version of `SUMMARIZE` that computes the `min` and `max` of every column in a table:
+When combined with the [`COLUMNS` expression]({% link docs/2.0/sql/expressions/star.md %}#columns-expression), we can write very generic SQL-only macros. For example, below is a custom version of `SUMMARIZE` that computes the `min` and `max` of every column in a table:
 
 ```sql
 CREATE OR REPLACE MACRO my_summarize(table_name) AS TABLE

@@ -21,7 +21,7 @@ Rather than copying a fixed value, identify which of the concerns below match yo
 | Processing data larger than memory | Configuring the spill-to-disk directory | [Larger-than-memory workloads](#larger-than-memory-workloads-out-of-core-processing) |
 | Diagnosing a slow query | Inspecting the query plan | [Profiling](#profiling) |
 | Running the same query many times with different parameters | Prepared statements | [Prepared statements](#prepared-statements) |
-| Reading files over a slow or unreliable network | Raising `threads` and minimizing IO | [Querying remote files](#querying-remote-files) |
+| Reading files over a slow or unreliable network | Tuning asynchronous I/O and minimizing IO | [Querying remote files](#querying-remote-files) |
 | Running many small queries | Reusing a single connection | [Best practices for using connections](#best-practices-for-using-connections) |
 
 The rest of this page covers each of these areas in detail. See the [configuration reference]({% link docs/2.0/configuration/overview.md %}) for the full list of available settings.
@@ -98,9 +98,8 @@ DuckDB strives to always complete workloads even if they are larger-than-memory.
 That said, there are some limitations at the moment:
 
 - If multiple blocking operators appear in the same query, DuckDB may still throw an out-of-memory exception due to the complex interplay of these operators.
-- Some [aggregate functions]({% link docs/2.0/sql/functions/aggregates.md %}), such as `list()` and `string_agg()`, do not support offloading to disk.
+- Some [aggregate functions]({% link docs/2.0/sql/functions/aggregates.md %}), such as `string_agg()`, do not support offloading to disk.
 - [Aggregate functions that use sorting]({% link docs/2.0/sql/functions/aggregates.md %}#order-by-clause-in-aggregate-functions) are holistic, i.e., they need all inputs before the aggregation can start. As DuckDB cannot yet offload some complex intermediate aggregate states to disk, these functions can cause an out-of-memory exception when run on large datasets.
-- The `PIVOT` operation [internally uses the `list()` function]({% link docs/2.0/sql/statements/pivot.md %}#internals), therefore it is subject to the same limitation.
 
 ## Profiling
 
@@ -123,7 +122,9 @@ Note that it is not a primary design goal for DuckDB to quickly execute many sma
 
 ## Querying Remote Files
 
-DuckDB uses synchronous IO when reading remote files. This means that each DuckDB thread can make at most one HTTP request at a time. If a query must make many small requests over the network, increasing DuckDB's [`threads` setting]({% link docs/2.0/configuration/pragmas.md %}#threads) to larger than the total number of CPU cores (approx. 2-5 times CPU cores) can improve parallelism and performance.
+Starting with version 2.0, DuckDB uses [asynchronous I/O]({% link docs/2.0/data/io.md %}#asynchronous-io) when reading Parquet files and uncompressed, seekable UTF-8 CSV files, including when they are read through data lake formats such as DuckLake. For these formats, DuckDB keeps multiple requests in flight automatically, so there is no need to raise the number of threads. If the defaults do not saturate your network bandwidth, tune the [`async_threads` and `read_ahead_depth` settings]({% link docs/2.0/data/io.md %}#tuning) instead.
+
+Other formats, such as JSON files, compressed CSV files and DuckDB database files attached over HTTP, still use synchronous I/O: each DuckDB thread can make at most one HTTP request at a time. If a query on such files must make many small requests over the network, increasing DuckDB's [`threads` setting]({% link docs/2.0/configuration/pragmas.md %}#threads) to larger than the total number of CPU cores (approx. 2-5 times CPU cores) can improve parallelism and performance.
 
 ### Avoid Reading Unnecessary Data
 

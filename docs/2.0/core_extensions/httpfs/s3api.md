@@ -266,7 +266,6 @@ Some additional configuration options exist for the S3 upload, though the defaul
 | Name | Description | Default |
 |:---|:---|:---|
 | `s3_uploader_max_parts_per_file` | Used for part size calculation, see [AWS docs](https://docs.aws.amazon.com/AmazonS3/latest/userguide/qfacts.html) | `10000` |
-| `s3_uploader_max_filesize` | Used for part size calculation, see [AWS docs](https://docs.aws.amazon.com/AmazonS3/latest/userguide/qfacts.html) | `800GB` |
-| `s3_uploader_thread_limit` | Maximum number of uploader threads | `50` |
+| `s3_uploader_max_filesize` | Used for part size calculation, see [AWS docs](https://docs.aws.amazon.com/AmazonS3/latest/userguide/qfacts.html) | `80GB` |
 
 Further S3-related settings are available and documented in the [configuration reference]({% link docs/2.0/configuration/overview.md %}), including `enable_global_s3_configuration`, `merge_http_secret_into_s3_request`, `s3_allow_recursive_globbing`, `httpfs_enable_credential_refresh`, `s3_version_id_pinning`, and `unsafe_disable_etag_checks`.

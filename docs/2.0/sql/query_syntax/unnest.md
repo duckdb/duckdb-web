@@ -15,7 +15,7 @@ Values of the [`LIST`]({% link docs/2.0/sql/data_types/list.md %}) and [`STRUCT`
 
 * Unnesting turns a `LIST`-typed value into a table column: each list-element creates a row, and each element become a column value.
 * Unnesting a `STRUCT`-typed value creates a column for each member. The member key becomes the column name, and the member value becomes a column value. Values of a `STRUCT`-type may also be unnested using [dot-star (`⟨struct⟩.*`{:.language-sql .highlight}) shorthand syntax]({% link docs/2.0/sql/data_types/struct.md %}#unnest--struct), but the `unnest()` function offers some additional functionality.
-* For an [unnamed struct]({ % link /docs/current/sql/data_types/struct %}#creating-structs-with-the-row-function), the unnesting operation is the same as for a named `STRUCT`, but in this case the column name is generated based on the (1-based) ordinal position of the member, prefixed by `element`. The dot-star (`⟨struct⟩.*`{:.language-sql .highlight}) shorthand syntax is not available for unnamed structs: unnamed structs can only be unnested using the `unnest()` function.
+* For a [`TUPLE`]({% link docs/2.0/sql/data_types/struct.md %}#tuples) (unnamed struct), the unnesting operation is the same as for a named `STRUCT`, but in this case the column name is generated based on the (1-based) ordinal position of the member, prefixed by `element`. The dot-star (`⟨struct⟩.*`{:.language-sql .highlight}) shorthand syntax is not available for tuples: tuples can only be unnested using the `unnest()` function.
 
 # Calling `unnest()`
 

@@ -24,7 +24,7 @@ title: Union Functions
 
 | **Description** | Dot notation serves as an alias for `union_extract`. |
 | **Example** | `(union_value(k := 'hello')).k` |
-| **Result** | `string` |
+| **Result** | `hello` |
 
 #### `union_extract(union, 'tag')`
 
@@ -40,7 +40,7 @@ title: Union Functions
 
 | **Description** | Create a single member `UNION` containing the argument value. The tag of the value will be the bound variable name. |
 | **Example** | `union_value(k := 'hello')` |
-| **Result** | `'hello'::UNION(k VARCHAR)` |
+| **Result** | `hello` (of type `UNION(k VARCHAR)`) |
 
 #### `union_tag(union)`
 

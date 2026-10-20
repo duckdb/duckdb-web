@@ -163,6 +163,7 @@ Commonly used fields of the configuration object:
 * `allowUnsignedExtensions`: allow loading extensions that are not signed (see [Load Extensions]({% link docs/2.0/clients/wasm/extensions.md %})).
 * `maximumThreads`: the number of threads to use. This takes effect only with the threaded `coi` bundle on a cross-origin-isolated page (see [Threading](#threading)).
 * `query`: controls how query results are converted from Arrow into JavaScript values.
+* `opfs`: controls how `opfs://` files other than the database file are registered. Set `fileHandling` to `'auto'` to register files referenced in SQL automatically; the default is manual registration (see [Persistence with OPFS](#persistence-with-opfs)).
 
 The `query` object tunes the Arrow-to-JavaScript type mapping:
 
@@ -195,9 +196,14 @@ const bundles: duckdb.DuckDBBundles = {
 // supports Wasm exceptions, SIMD, and threads; otherwise it falls back to eh or mvp
 const bundle = await duckdb.selectBundle(bundles);
 
-const worker = new Worker(bundle.mainWorker!);
+// Worker scripts must be same-origin, so wrap the CDN worker in a Blob URL
+const worker_url = URL.createObjectURL(
+    new Blob([`importScripts("${bundle.mainWorker}");`], { type: 'text/javascript' })
+);
+const worker = new Worker(worker_url);
 const db = new duckdb.AsyncDuckDB(new duckdb.ConsoleLogger(), worker);
 await db.instantiate(bundle.mainModule, bundle.pthreadWorker);
+URL.revokeObjectURL(worker_url);
 
 // Configure the thread count (only effective on the coi bundle)
 await db.open({ maximumThreads: 4 });
@@ -229,7 +235,23 @@ await conn.query(`CREATE TABLE t AS SELECT * FROM range(10) AS r(i)`);
 await conn.query(`CHECKPOINT`);
 ```
 
-Reopening the same `opfs://` path in a later session restores the tables. You can also read and write `opfs://` files directly from SQL. Set `opfs.fileHandling` to `'auto'` so that DuckDB-Wasm registers the `opfs://` paths referenced in a statement automatically:
+Reopening the same `opfs://` path in a later session restores the tables.
+
+You can also read and write other `opfs://` files directly from SQL. By default, DuckDB-Wasm uses manual registration: every OPFS file other than the database file has to be registered with `db.registerOPFSFileName()` before a statement uses it, and dropped with `db.dropFile()` afterwards:
+
+```ts
+await db.open({
+    path: 'opfs://duckdb.db',
+    accessMode: duckdb.DuckDBAccessMode.READ_WRITE,
+});
+
+// Register the file, use it from SQL, then release its handle
+await db.registerOPFSFileName('opfs://export.parquet');
+await conn.query(`COPY (SELECT * FROM t) TO 'opfs://export.parquet'`);
+await db.dropFile('opfs://export.parquet');
+```
+
+Alternatively, set `opfs.fileHandling` to `'auto'`. DuckDB-Wasm then scans each statement for single-quoted `'opfs://...'` literals, registers those files before execution (creating them and any missing directories if needed) and drops their handles afterwards. This option only takes effect when the database itself was opened from an `opfs://` path:
 
 ```ts
 await db.open({
@@ -243,7 +265,13 @@ await conn.query(`CREATE TABLE t AS SELECT * FROM 'opfs://data.parquet'`);
 await conn.query(`COPY (SELECT * FROM t) TO 'opfs://export.csv'`);
 ```
 
-> Note OPFS access relies on synchronous file access handles, which browsers expose only inside a Web Worker; DuckDB-Wasm's asynchronous API already runs in one. Keep these points in mind: call `CHECKPOINT` to flush writes to disk, drop registered files with `db.dropFile()` (or `db.dropFiles()`) before another connection or database instance opens them, because a file can be held by only one handle at a time, and note that moving files into or out of OPFS is not yet supported.
+Automatic registration is convenient for one-off reads. Manual registration requires more code but avoids re-acquiring an OPFS access handle on every statement, which adds up for applications that run many small queries.
+
+> Note OPFS access relies on synchronous file access handles, which browsers expose only inside a Web Worker; DuckDB-Wasm's asynchronous API already runs in one. Keep these limitations in mind:
+>
+> * Call `CHECKPOINT` to flush writes to disk.
+> * A file can be held by only one handle at a time. Drop registered files with `db.dropFile()` (or `db.dropFiles()`) before another connection or database instance opens them.
+> * Moving files into or out of OPFS is not yet supported. Renaming files from SQL only works between two OPFS files that are both already registered.
 
 ## Further Reading
 

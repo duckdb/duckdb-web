@@ -44,7 +44,7 @@ The table below lists the operators that can be used with `GEOMETRY` values.
 <div class="nostroke_table"></div>
 
 | **Description** | Returns the Well-Known Binary (WKB) representation of the geometry |
-| **Example** | `ST_AsWKB('POINT(1 2)::GEOMETRY')` |
+| **Example** | `ST_AsWKB('POINT(1 2)'::GEOMETRY)` |
 | **Result** | `\x01\x01\x00\x00\x00\x00\x00\x00\x00\x00\x00\xF0?\x00\x00\x00\x00\x00\x00\x00@` |
 | **Alias** | `ST_AsBinary` |
 

@@ -34,51 +34,28 @@ EXPLAIN
 ```
 
 ```text
-┌─────────────────────────────┐
-│┌───────────────────────────┐│
-││       Physical Plan       ││
-│└───────────────────────────┘│
-└─────────────────────────────┘
-┌───────────────────────────┐
-│         PROJECTION        │
-│   ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─   │
-│            name           │
-└─────────────┬─────────────┘
-┌─────────────┴─────────────┐
-│         HASH_JOIN         │
-│   ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─   │
-│           INNER           │
-│         sid = sid         ├──────────────┐
-│   ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─   │              │
-│           EC: 1           │              │
-└─────────────┬─────────────┘              │
-┌─────────────┴─────────────┐┌─────────────┴─────────────┐
-│         SEQ_SCAN          ││           FILTER          │
-│   ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─   ││   ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─   │
-│           exams           ││     prefix(name, 'Ma')    │
-│   ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─   ││   ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─   │
-│            sid            ││           EC: 1           │
-│   ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─   ││                           │
-│           EC: 3           ││                           │
-└───────────────────────────┘└─────────────┬─────────────┘
-                             ┌─────────────┴─────────────┐
-                             │         SEQ_SCAN          │
-                             │   ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─   │
-                             │          students         │
-                             │   ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─   │
-                             │            sid            │
-                             │            name           │
-                             │   ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─   │
-                             │ Filters: name>=Ma AND name│
-                             │  <Mb AND name IS NOT NULL │
-                             │   ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─   │
-                             │           EC: 1           │
-                             └───────────────────────────┘
+╭─ Projection ─────────────╮
+│ Projections: name        │
+│ ~1 row                   │
+╰─────────────┬────────────╯
+╭─ Hash Join ─┴────────────╮
+│ Join Type: INNER         │
+│ Conditions: sid = sid    │
+│ ~1 row                   │
+╰─────────────┬────────────╯
+              ├──────────────────────────────╮
+╭─ Seq Scan ──┴────────────╮  ╭─ Seq Scan ───┴──────────────╮
+│ Table: memory.main.exams │  │ Table: memory.main.students │
+│ Type: Sequential Scan    │  │ Type: Sequential Scan       │
+│ Projections: sid         │  │ Projections: sid, name      │
+│ ~3 rows                  │  │ Filters: name >= 'Ma'       │
+╰──────────────────────────╯  │ ~1 row                      │
+                              ╰─────────────────────────────╯
 ```
 
-Note that the query is not actually executed – therefore, we can only see the estimated cardinality (`EC`) for each operator, which is calculated by using the statistics of the base tables and applying heuristics for each operator.
+Note that the query is not actually executed – therefore, we can only see the estimated cardinality for each operator (shown with a `~` prefix, e.g., `~3 rows`), which is calculated by using the statistics of the base tables and applying heuristics for each operator.
 
-Table scan operators display the fully qualified table name including catalog and schema (e.g., `memory.myschema.mytable`).
+Table scan operators display the fully qualified table name including catalog and schema (e.g., `memory.main.exams`).
 
 ## Additional Explain Settings
 
@@ -87,19 +64,19 @@ The `EXPLAIN` statement supports additional settings that can be used to control
 The default setting. Only shows the physical plan.
 
 ```sql
-PRAGMA explain_output = 'physical_only';
+SET explain_output = 'physical_only';
 ```
 
 Shows only the optimized plan.
 
 ```sql
-PRAGMA explain_output = 'optimized_only';
+SET explain_output = 'optimized_only';
 ```
 
 Shows both the physical and optimized plans.
 
 ```sql
-PRAGMA explain_output = 'all';
+SET explain_output = 'all';
 ```
 
 ## See Also

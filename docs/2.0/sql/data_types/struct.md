@@ -14,13 +14,13 @@ Conceptually, a `STRUCT` column contains an ordered list of columns called “en
 
 `STRUCT`s are typically used to nest multiple columns into a single column, and the nested column can be of any type, including other `STRUCT`s and `LIST`s.
 
-`STRUCT`s are similar to PostgreSQL's `ROW` type. The key difference is that DuckDB `STRUCT`s require the same keys in each row of a `STRUCT` column. This allows DuckDB to provide significantly improved performance by fully utilizing its vectorized execution engine, and also enforces type consistency for improved correctness. DuckDB includes a `row` function as a special way to produce a `STRUCT`, but does not have a `ROW` data type. See an example below and the [`STRUCT` functions documentation]({% link docs/2.0/sql/functions/struct.md %}) for details.
+`STRUCT`s are similar to PostgreSQL's `ROW` type. The key difference is that DuckDB `STRUCT`s require the same keys in each row of a `STRUCT` column. This allows DuckDB to provide significantly improved performance by fully utilizing its vectorized execution engine, and also enforces type consistency for improved correctness. Structs with unnamed entries are represented by the [`TUPLE` type](#tuples), which can be created using the `row` function or the `(expr, ...)` notation. See an example below and the [`STRUCT` functions documentation]({% link docs/2.0/sql/functions/struct.md %}) for details.
 
 See the [data types overview]({% link docs/2.0/sql/data_types/overview.md %}) for a comparison between nested data types.
 
 ## Creating Structs
 
-Structs can be created using the [`struct_pack(name := expr, ...)`]({% link docs/2.0/sql/functions/struct.md %}) function, the equivalent array notation `{'name': expr, ...}`, using a row variable, or using the `row` function.
+Structs can be created using the [`struct_pack(name := expr, ...)`]({% link docs/2.0/sql/functions/struct.md %}) function, the equivalent array notation `{'name': expr, ...}`, or using a row variable. To create a struct with unnamed entries, use a [tuple](#tuples).
 
 Create a struct using the `struct_pack` function. Note the lack of single quotes around the keys and the use of the `:=` operator:
 
@@ -180,12 +180,101 @@ FROM tbl;
 
 Any extra parts (e.g., `.part4.part5`, etc.) are always treated as properties
 
-## Creating Structs with the `row` Function
+## Tuples
 
-The `row` function can be used to automatically convert multiple columns to a single struct column.
-When using `row` the keys will be empty strings allowing for easy insertion into a table with a struct column.
-Columns, however, cannot be initialized with the `row` function, and must be explicitly named.
-For example, inserting values into a struct column using the `row` function:
+> New The `TUPLE` type was introduced in DuckDB 2.0. In earlier versions, unnamed structs were `STRUCT` values with empty keys.
+
+A `TUPLE` is a struct whose entries have no names. Its entries are referenced by their (1-based) position. Tuples are created using the `row` function or, if there are at least two expressions, using parentheses:
+
+```sql
+SELECT row(x, x + 1, y) AS t FROM (SELECT 1 AS x, 'a' AS y) AS s;
+```
+
+```text
+┌──────────────────────────────────┐
+│                t                 │
+│ tuple(integer, integer, varchar) │
+├──────────────────────────────────┤
+│ (1, 2, a)                        │
+└──────────────────────────────────┘
+```
+
+If using multiple expressions, the `row` function is optional. The following query returns the same result as the previous one:
+
+```sql
+SELECT (x, x + 1, y) AS t FROM (SELECT 1 AS x, 'a' AS y);
+```
+
+A single-element tuple can be created with `row(x)` or with a trailing comma, `(x,)`.
+
+The type of a tuple is written as `TUPLE(⟨type_1⟩, ..., ⟨type_n⟩)`:
+
+```sql
+SELECT typeof((1, 'a')) AS type;
+```
+
+```text
+TUPLE(INTEGER, VARCHAR)
+```
+
+### Accessing Tuple Entries
+
+Tuple entries are accessed by position using the bracket notation or the `struct_extract` and `struct_extract_at` functions. Dot notation is not supported, as the entries have no names:
+
+```sql
+SELECT t[1] AS first, struct_extract_at(t, 2) AS second
+FROM (SELECT (42, 'duck') AS t);
+```
+
+```text
+┌───────┬─────────┐
+│ first │ second  │
+│ int32 │ varchar │
+├───────┼─────────┤
+│    42 │ duck    │
+└───────┴─────────┘
+```
+
+### Tuples in Tables
+
+Tuples can be stored in tables, either by declaring a `TUPLE` column or by using `CREATE TABLE ... AS`:
+
+```sql
+CREATE TABLE t2 AS SELECT row('a') AS t;
+SELECT column_name, column_type FROM (DESCRIBE t2);
+```
+
+```text
+┌─────────────┬────────────────┐
+│ column_name │  column_type   │
+│   varchar   │    varchar     │
+├─────────────┼────────────────┤
+│ t           │ TUPLE(VARCHAR) │
+└─────────────┴────────────────┘
+```
+
+When written to file formats without a tuple type, such as Parquet, tuples are stored as structs with the generated keys `element1`, `element2`, etc.
+
+### Casting between Tuples and Structs
+
+Tuples can be cast to structs with the same number of entries, and vice versa. The entries are matched by position:
+
+```sql
+SELECT
+    (1, 'a')::STRUCT(id INTEGER, name VARCHAR) AS s,
+    {'id': 1, 'name': 'a'}::TUPLE(INTEGER, VARCHAR) AS t;
+```
+
+```text
+┌────────────────────────────────────┬─────────────────────────┐
+│                 s                  │            t            │
+│ struct(id integer, "name" varchar) │ tuple(integer, varchar) │
+├────────────────────────────────────┼─────────────────────────┤
+│ {'id': 1, 'name': a}               │ (1, a)                  │
+└────────────────────────────────────┴─────────────────────────┘
+```
+
+This allows inserting tuples into `STRUCT` columns:
 
 ```sql
 CREATE TABLE t1 (s STRUCT(v VARCHAR, i INTEGER));
@@ -207,20 +296,13 @@ The following produces the same result as above:
 
 ```sql
 CREATE TABLE t1 AS (
-    SELECT row('a', 42)::STRUCT(v VARCHAR, i INTEGER)
+    SELECT row('a', 42)::STRUCT(v VARCHAR, i INTEGER) AS s
 );
 ```
 
-Initializing a struct column with the `row` function will fail:
+Casting between a tuple and a struct with a different number of entries fails.
 
-```sql
-CREATE TABLE t2 AS SELECT row('a');
-```
-
-```console
-Invalid Input Error:
-A table cannot be created from an unnamed struct
-```
+## Casting between Structs
 
 When casting between structs, the names of at least one field have to match. Therefore, the following query will fail:
 
@@ -241,20 +323,6 @@ A workaround for this is to use [`struct_pack`](#creating-structs) instead:
 SELECT struct_pack(y := a.x) AS b
 FROM
     (SELECT {'x': 42} AS a);
-```
-
-The `row` function can be used to return unnamed structs. For example:
-
-```sql
-SELECT row(x, x + 1, y) FROM (SELECT 1 AS x, 'a' AS y) AS s;
-```
-
-This produces `(1, 2, a)`.
-
-If using multiple expressions when creating a struct, the `row` function is optional. The following query returns the same result as the previous one:
-
-```sql
-SELECT (x, x + 1, y) AS s FROM (SELECT 1 AS x, 'a' AS y);
 ```
 
 ## Comparison and Ordering

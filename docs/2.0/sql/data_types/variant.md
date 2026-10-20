@@ -36,9 +36,11 @@ SELECT * FROM events;
 │     1 │ 42                         │
 │     2 │ hello world                │
 │     3 │ [1, 2, 3]                  │
-│     4 │ {'name': Alice, 'age': 30} │
+│     4 │ {'age': 30, 'name': Alice} │
 └───────┴────────────────────────────┘
 ```
+
+Note that the keys of `VARIANT` objects are sorted: `{'name': 'Alice', 'age': 30}::VARIANT` is returned as `{'age': 30, 'name': Alice}`.
 
 ### Checking the Type of a Value
 
@@ -57,7 +59,7 @@ FROM events;
 │     1 │ 42                         │ INT32             │
 │     2 │ hello world                │ VARCHAR           │
 │     3 │ [1, 2, 3]                  │ ARRAY(3)          │
-│     4 │ {'name': Alice, 'age': 30} │ OBJECT(name, age) │
+│     4 │ {'age': 30, 'name': Alice} │ OBJECT(age, name) │
 └───────┴────────────────────────────┴───────────────────┘
 ```
 
@@ -80,6 +82,18 @@ SELECT variant_extract(data, 'name') AS name FROM events WHERE id = 4;
 ├─────────┤
 │ Alice   │
 └─────────┘
+```
+
+## Storage
+
+> New Shredding `VARIANT` columns in DuckDB's storage was introduced in DuckDB 2.0.
+
+When storing `VARIANT` columns in a DuckDB database file, DuckDB 2.0 automatically detects the common structure of the values and *shreds* them, i.e., stores the fields that share a type as separate, typed columns. Shredded data compresses well and can be scanned efficiently.
+
+Shredding is only applied to row groups with at least `variant_minimum_shredding_size` rows (by default, 30,000 rows, one fourth of the row group size). Setting it to `-1` disables shredding:
+
+```sql
+SET variant_minimum_shredding_size = -1;
 ```
 
 ## Parquet Support

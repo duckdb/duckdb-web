@@ -10,7 +10,7 @@ excerpt: "DuckDB v2.0 is coming this fall. In this post, we preview its headline
 tag: release
 ---
 
-DuckDB v2.0 will be named “Cyanoptera” after the [cinnamon teal](https://en.wikipedia.org/wiki/Cinnamon_teal) *(Anas cyanoptera),* a strikingly reddish-brown duck found in the western Americas.
+DuckDB v2.0 will be named “Cinnamon Teal” after the [cinnamon teal](https://en.wikipedia.org/wiki/Cinnamon_teal) *(Spatula cyanoptera),* a strikingly reddish-brown duck found in the western Americas.
 
 A major version bump is not something we do lightly, and it is not just ceremony: v2.0 ships a new SQL parser, a new default storage format, a reworked C API, and a small number of carefully chosen breaking changes. But above all, it is a feature release, built from over 10,000 commits since we released v1.5 in March. Where last year was the year of the lakehouse, this release kicks off the year of DuckDB as a server. We previewed many of these features in the [“State of the Duck” talk at DuckCon #7](https://www.youtube.com/watch?v=iFPKNQu0FtE), if you prefer to watch instead of read.
 
@@ -327,7 +327,7 @@ CREATE EXTENSION REPOSITORY my_repo
     WITH PREFIX 'https://extensions.example.org';
 
 INSTALL my_ext FROM my_repo;
-LOAD my_repo/my_ext;
+LOAD my_ext FROM my_repo;
 ```
 
 A repository is a name, a URL prefix, and one or more RSA public keys that are trusted to sign the extensions served from it. The prefix can point at anything DuckDB can read: a local path, `https`, `s3`, you name it. At `CREATE` time, DuckDB fetches the repository's public keys and pins them into the repository definition, printing each key's SHA-256 fingerprint so you can compare it against one published out of band. If you would rather not trust the network at all, you can pass the key directly:
@@ -342,9 +342,9 @@ Pinned repositories survive restarts, support key rotation by trusting multiple 
 
 > Update This feature is now available in the [preview build]({% link install/preview.md %}).
 
-## Bonus: DuckDB Foundation – Advisory Board
+## Bonus: DuckDB Foundation – Technical Advisory Board
 
-Starting this fall, we will add a stakeholder advisory board to the [DuckDB Foundation](https://duckdb.foundation/). The advisory board will provide input on the development roadmap of DuckDB, DuckLake, and Quack. This allows key stakeholders to have a say in the projects' direction.
+Starting this fall, we will add a Technical Advisory Board to the [DuckDB Foundation](https://duckdb.foundation/). The board will provide input on the development roadmap of DuckDB, DuckLake, and Quack. This allows key stakeholders to have a say in the projects' direction.
 
 ## Final Thoughts
 

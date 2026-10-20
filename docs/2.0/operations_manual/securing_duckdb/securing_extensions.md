@@ -30,7 +30,7 @@ DuckDB offers the following security levels for extensions.
 |-----|---|---|
 | `core` | Extensions can only be loaded if signed from a `core` key. | `SET allow_community_extensions = false`{:.language-sql .highlight} |
 | `core` and `community` | Extensions can only be loaded if signed from a `core` or `community` key. | This is the default security level. |
-| Any extension including unsigned | Any extensions can be loaded. | `SET allow_unsigned_extensions = true`{:.language-sql .highlight} |
+| Any extension including unsigned | Any extensions can be loaded. | Set `allow_unsigned_extensions = true` at startup (e.g., `duckdb -unsigned` in the CLI). It cannot be changed while the database is running. |
 
 Security-related configuration settings [lock themselves]({% link docs/2.0/operations_manual/securing_duckdb/overview.md %}#locking-configurations), i.e., it is only possible to restrict capabilities in the current process.
 
@@ -43,7 +43,20 @@ SET allow_community_extensions = true;
 
 ```console
 Invalid Input Error:
-Cannot upgrade allow_community_extensions setting while database is running
+Cannot change allow_community_extensions setting while database is running
+```
+
+## Custom Extension Repositories
+
+DuckDB 2.0 introduced trusted [custom extension repositories]({% link docs/2.0/extensions/extension_repositories.md %}), which can serve extensions signed with user-provided keys. Two settings control them:
+
+* `allow_extension_repositories`: whether custom trusted extension repositories are `'allowed'`, `'forbidden'` (which also distrusts existing repositories) or `'undecided'` (the default: blocks adding new repositories, but keeps trusting existing ones). While the database is running, the setting can only move from `'undecided'` to `'allowed'` or `'forbidden'`, or from `'allowed'` to `'forbidden'`.
+* `extension_repository_directory`: the directory in which trusted extension repositories are stored. This is the trust anchor for user-provided repositories, so while signature checking is enabled (`allow_unsigned_extensions = false`), it can only be set at startup, not while the database is running.
+
+If you run DuckDB in an environment where only extensions signed by the DuckDB team should be loaded, disable custom repositories:
+
+```sql
+SET allow_extension_repositories = 'forbidden';
 ```
 
 ## Community Extensions
@@ -83,5 +96,5 @@ SET lock_configuration = true;
 ## Always Require Signed Extensions
 
 By default, DuckDB requires extensions to be either signed as core extensions (created by the DuckDB developers) or community extensions (created by third-party developers but distributed by the DuckDB developers).
-The [`allow_unsigned_extensions` setting]({% link docs/2.0/extensions/overview.md %}#unsigned-extensions) can be enabled on start-up to allow loading unsigned extensions.
+The [`allow_unsigned_extensions` setting]({% link docs/2.0/extensions/extension_distribution.md %}#unsigned-extensions) can be enabled on start-up to allow loading unsigned extensions.
 While this setting is useful for extension development, enabling it will allow DuckDB to load _any extensions,_ which means more care must be taken to ensure malicious extensions are not loaded.

@@ -107,11 +107,13 @@ See [Build Configuration]({% link docs/2.0/dev/building/build_configuration.md %
 ## Obtaining Prebuilt Archives
 
 Rather than building `libduckdb` yourself, you can download the static and shared archives for DuckDB 2.0 and later using the [`duckdb-install-scripts`](https://github.com/duckdb/duckdb-install-scripts) tooling ([`duckdb-install-scripts#5`](https://github.com/duckdb/duckdb-install-scripts/pull/5)).
-Setting `DUCKDB_INSTALL=static` installs the archives and headers under `~/.duckdb/lib/⟨version⟩/⟨build_type⟩_⟨platform⟩`:
+Setting `DUCKDB_INSTALL=static` installs the archives and headers under `~/.duckdb/lib/⟨version⟩/⟨build_type⟩_⟨platform⟩` (e.g., `~/.duckdb/lib/2.0.0/release_osx_arm64`):
 
 ```bash
-DUCKDB_INSTALL=static DUCKDB_VERSION=alpha
+curl https://install.duckdb.org | DUCKDB_INSTALL=static bash
 ```
+
+Use `DUCKDB_INSTALL=shared` for the shared library, or combine components, e.g., `DUCKDB_INSTALL=static,shared,cli`. See the [install script page]({% link docs/2.0/operations_manual/installing_duckdb/install_script.md %}) for details.
 
 This installs, for example:
 
@@ -125,7 +127,7 @@ libicu_extension.a            libautocomplete_extension.a
 libtpch_extension.a           libtpcds_extension.a
 ```
 
-A pinned build can be installed with `DUCKDB_STAGED`, for example `DUCKDB_STAGED=31adc8b766/v2.0.0-alpha42839` or simply `DUCKDB_STAGED=31adc8b766`.
+A specific release can be installed by setting `DUCKDB_VERSION` (e.g., `DUCKDB_VERSION=2.0.0`). Static and shared libraries are only available for DuckDB 2.0 and later.
 
 > For DuckDB 2.0 and later, most artifacts are distributed as `.tar.gz` files instead of `.zip` files ([`duckdb#24773`](https://github.com/duckdb/duckdb/pull/24773)).
 
@@ -140,9 +142,9 @@ They provide a path forward for anyone maintaining a binding or an application t
 |---|---|---|
 | Python | Migrated | [`duckdb-python#634`](https://github.com/duckdb/duckdb-python/pull/634) |
 | Rust | Migrated | [`duckdb-rs#834`](https://github.com/duckdb/duckdb-rs/pull/834), [`duckdb-rs#839`](https://github.com/duckdb/duckdb-rs/pull/839), [`duckdb-rs#883`](https://github.com/duckdb/duckdb-rs/pull/883), [`duckdb-rs#835`](https://github.com/duckdb/duckdb-rs/pull/835) |
-| Node.js | Survey in progress | [`duckdb-node-neo#476`](https://github.com/duckdb/duckdb-node-neo/pull/476), [`duckdb-node-neo#508`](https://github.com/duckdb/duckdb-node-neo/pull/508) |
-| Go | Planned, not yet started | [`duckdb-go-bindings#112`](https://github.com/duckdb/duckdb-go-bindings/issues/112) |
-| Wasm | Not yet migrated | pending (pinned to the DuckDB 1.5 `v1.5-variegata` line at the time of writing) |
+| Node.js | In progress | [`duckdb-node-neo#476`](https://github.com/duckdb/duckdb-node-neo/pull/476), [`duckdb-node-neo#508`](https://github.com/duckdb/duckdb-node-neo/pull/508), [`duckdb-node-neo#512`](https://github.com/duckdb/duckdb-node-neo/pull/512) |
+| Go | In progress | [`duckdb-go-bindings#112`](https://github.com/duckdb/duckdb-go-bindings/issues/112), [`duckdb-go-bindings#116`](https://github.com/duckdb/duckdb-go-bindings/pull/116) |
+| Wasm | In progress | [`duckdb-wasm#2281`](https://github.com/duckdb/duckdb-wasm/pull/2281) |
 
 > The Python pull request is the clearest end-to-end example: it restores static linking of the default `BUILD_EXTENSIONS` set by calling `duckdb_register_static_extensions()` and shows how to override the linked set.
 

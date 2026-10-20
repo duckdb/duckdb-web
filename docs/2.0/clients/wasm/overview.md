@@ -60,9 +60,15 @@ import * as duckdb from '@duckdb/duckdb-wasm';
 
 // Instantiate DuckDB-Wasm from a jsDelivr bundle
 const bundle = await duckdb.selectBundle(duckdb.getJsDelivrBundles());
-const worker = new Worker(bundle.mainWorker!);
+
+// Worker scripts must be same-origin, so wrap the CDN worker in a Blob URL
+const worker_url = URL.createObjectURL(
+    new Blob([`importScripts("${bundle.mainWorker}");`], { type: 'text/javascript' })
+);
+const worker = new Worker(worker_url);
 const db = new duckdb.AsyncDuckDB(new duckdb.ConsoleLogger(), worker);
 await db.instantiate(bundle.mainModule, bundle.pthreadWorker);
+URL.revokeObjectURL(worker_url);
 
 // Open a connection and run a query
 const conn = await db.connect();

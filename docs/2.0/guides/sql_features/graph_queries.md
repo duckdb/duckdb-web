@@ -10,8 +10,7 @@ title: Graph Queries
 
 DuckDB supports graph queries via the [DuckPGQ community extension](https://duckpgq.org), which implements the SQL/PGQ syntax from the SQL:2023 standard.
 
-> Warning DuckPGQ is a community extension and is still under active development. It is not available in the latest DuckDB release (1.5.x). If you want to work with DuckPGQ, make sure to use DuckDB 1.4.4.
-> Moreover, some features may be incomplete. See the [DuckPGQ website](https://duckpgq.org) for the latest status.
+> Warning DuckPGQ is a community extension and is still under active development. It may not be available for every DuckDB version: check the [DuckPGQ community extension page]({% link community_extensions/extensions/duckpgq.md %}) for the supported versions. Moreover, some features may be incomplete. See the [DuckPGQ website](https://duckpgq.org) for the latest status.
 
 Graph queries allow you to find patterns and paths in connected data, such as social networks, financial transactions, or knowledge graphs, using a visual, intuitive syntax.
 

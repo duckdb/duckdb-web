@@ -110,16 +110,16 @@ A table can have multiple triggers for the same event. They fire in the order in
 
 ### Returning Rows
 
-A data modification statement on a table with triggers can still include a [`RETURNING` clause]({% link docs/2.0/sql/statements/insert.md %}#returning-clause). The trigger fires as part of the statement, and the `RETURNING` clause reports the rows affected by the statement itself:
+A data modification statement on a table with `FOR EACH STATEMENT` triggers can still include a [`RETURNING` clause]({% link docs/2.0/sql/statements/insert.md %}#returning-clause). The trigger fires as part of the statement, and the `RETURNING` clause reports the rows affected by the statement itself:
 
 ```sql
 CREATE TABLE t (id INTEGER);
-CREATE TABLE log (id INTEGER);
+CREATE TABLE log (row_count BIGINT);
 
 CREATE TRIGGER trg_log
     AFTER INSERT ON t
-    FOR EACH ROW
-        INSERT INTO log VALUES (NEW.id);
+    FOR EACH STATEMENT
+        INSERT INTO log SELECT count(*) FROM t;
 
 INSERT INTO t VALUES (1), (2) RETURNING id;
 ```
@@ -157,9 +157,10 @@ Dropping a table also drops all triggers defined on it.
 
 ## Limitations
 
-The current preview build has the following limitations, which may be lifted before the v2.0 release:
+DuckDB 2.0 has the following limitations:
 
 * `BEFORE ... FOR EACH ROW` triggers are not yet supported.
 * `UPDATE ... FOR EACH ROW` triggers are not yet supported.
+* `RETURNING` is not yet supported on tables with `FOR EACH ROW` triggers.
 * `INSTEAD OF` triggers and triggers on views are not supported; a trigger requires a base table.
 * Temporary triggers are not supported.

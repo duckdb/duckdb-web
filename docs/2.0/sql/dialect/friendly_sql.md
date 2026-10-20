@@ -37,13 +37,20 @@ DuckDB offers several advanced SQL features and syntactic sugar to make SQL quer
     * [`UNION BY NAME`]({% link docs/2.0/sql/query_syntax/setops.md %}#union-all-by-name): perform the `UNION` operation along the names of columns (instead of relying on positions).
     * [Prefix aliases in the `SELECT` and `FROM` clauses]({% link docs/2.0/sql/query_syntax/select.md %}): write `x: 42` instead of `42 AS x` for improved readability.
     * [Specifying a percentage of the table size for the `LIMIT` clause]({% link docs/2.0/sql/query_syntax/limit.md %}): write `LIMIT 10%` to return 10% of the query results.
+    * [`FETCH FIRST`]({% link docs/2.0/sql/query_syntax/limit.md %}#fetch-first): the SQL-standard alternative to `LIMIT`, e.g., `FETCH FIRST 5 ROWS ONLY`.
+    * [Grouping by `UNNEST`]({% link docs/2.0/sql/query_syntax/groupby.md %}#grouping-by-unnest): use `unnest()` directly in the `GROUP BY` clause to group by the elements of a list.
 * Transforming tables:
     * [`PIVOT`]({% link docs/2.0/sql/statements/pivot.md %}) to turn long tables to wide tables.
     * [`UNPIVOT`]({% link docs/2.0/sql/statements/unpivot.md %}) to turn wide tables to long tables.
 * Defining SQL-level variables:
     * [`SET VARIABLE`]({% link docs/2.0/sql/statements/set_variable.md %}#set-variable)
     * [`RESET VARIABLE`]({% link docs/2.0/sql/statements/set_variable.md %}#reset-variable)
-    * [The `$name` shorthand for reading variables]({% link docs/2.0/sql/statements/set_variable.md %}#the-name-shorthand)
+    * [The `$name` shorthand for reading variables]({% link docs/2.0/sql/statements/set_variable.md %}#the-name-shorthand): write `$x` instead of `getvariable('x')`.
+* Organizing the catalog:
+    * [Nested schemas]({% link docs/2.0/sql/statements/create_schema.md %}#nested-schemas): create schemas within schemas, e.g., `CREATE SCHEMA finance.reports`.
+* Managing extensions and settings:
+    * [`INSTALL AND LOAD`]({% link docs/2.0/sql/statements/load_and_install.md %}#install-and-load): install and load an extension in a single statement.
+    * [`SHOW ⟨setting⟩`]({% link docs/2.0/sql/statements/show.md %}#show-statement): print the value of a configuration setting, e.g., `SHOW threads`.
 
 ## Query Features
 
@@ -59,6 +66,7 @@ DuckDB offers several advanced SQL features and syntactic sugar to make SQL quer
 * [`count()` shorthand]({% link docs/2.0/sql/functions/aggregates.md %}) for `count(*)`
 * [`IN` operator for lists and maps]({% link docs/2.0/sql/expressions/in.md %})
 * [Specifying column names for common table expressions (`WITH`)]({% link docs/2.0/sql/query_syntax/with.md %}#basic-cte-examples)
+* [Data-modifying CTEs]({% link docs/2.0/sql/query_syntax/with.md %}#data-modifying-ctes): use `INSERT`, `UPDATE`, `DELETE` and `COPY` statements in common table expressions
 * [Specifying column names in the `JOIN` clause]({% link docs/2.0/sql/query_syntax/from.md %}#shorthands-in-the-join-clause)
 * [Using `VALUES` in the `JOIN` clause]({% link docs/2.0/sql/query_syntax/from.md %}#shorthands-in-the-join-clause)
 * [Using `VALUES` in the anchor part of common table expressions]({% link docs/2.0/sql/query_syntax/with.md %}#using-values)
@@ -103,6 +111,7 @@ DuckDB offers several advanced SQL features and syntactic sugar to make SQL quer
 * [`ASOF` joins]({% link docs/2.0/sql/query_syntax/from.md %}#as-of-joins)
 * [`LATERAL` joins]({% link docs/2.0/sql/query_syntax/from.md %}#lateral-joins)
 * [`POSITIONAL` joins]({% link docs/2.0/sql/query_syntax/from.md %}#positional-joins)
+* [`NEAREST` joins]({% link docs/2.0/sql/query_syntax/from.md %}#nearest-joins) for top-k similarity search, e.g., over embeddings
 
 ## Trailing Commas
 

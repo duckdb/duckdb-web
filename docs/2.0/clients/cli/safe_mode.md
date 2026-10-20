@@ -10,6 +10,14 @@ title: Safe Mode
 ---
 
 The DuckDB CLI client supports “safe mode”.
+Safe mode can be enabled from the command line using the `-safe` [argument]({% link docs/2.0/clients/cli/arguments.md %}):
+
+```batch
+duckdb -safe
+```
+
+Alternatively, it can be activated during a session using the `.safe_mode` [dot command]({% link docs/2.0/clients/cli/dot_commands.md %}).
+
 In safe mode, the CLI is prevented from accessing external files other than the database file that it was initially connected to and prevented from interacting with the host file system.
 
 This has the following effects:

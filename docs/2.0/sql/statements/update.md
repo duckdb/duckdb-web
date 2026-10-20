@@ -110,6 +110,24 @@ FROM original;
 | 1   | new value   |
 | 2   | new value 2 |
 
+### Multiple Matching Source Rows
+
+If a target row matches multiple rows in the `FROM` clause, the target row is updated only once, using the values of one of the matching source rows. Which source row is used is not specified. For example, the following query sets `v` to either `10` or `20`:
+
+```sql
+CREATE TABLE target (id INTEGER, v INTEGER);
+INSERT INTO target VALUES (1, 0);
+CREATE TABLE source (id INTEGER, v INTEGER);
+INSERT INTO source VALUES (1, 10), (1, 20);
+
+UPDATE target
+    SET v = source.v
+    FROM source
+    WHERE target.id = source.id;
+```
+
+To get deterministic results, ensure that each target row matches at most one source row, e.g., by deduplicating the source. In contrast, the sub-select form throws an error if the subquery returns more than one row (unless the [`scalar_subquery_error_on_multiple_rows` setting]({% link docs/2.0/configuration/overview.md %}#configuration-reference) is set to `false`), and [`MERGE INTO`]({% link docs/2.0/sql/statements/merge_into.md %}) throws an error if a target row matches more than one source row.
+
 ## Update from Same Table
 
 The only difference between this case and the above is that a different table alias must be specified on both the target table and the source table.

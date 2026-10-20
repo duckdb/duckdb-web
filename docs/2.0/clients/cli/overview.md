@@ -99,9 +99,9 @@ In addition to SQL syntax, special [dot commands]({% link docs/2.0/clients/cli/d
 
 Frequently-used configurations can be stored in the file `~/.duckdbrc`, which will be loaded when starting the CLI client. See the [Configuring the CLI](#configuring-the-cli) section below for further information on these options.
 
-> Tip To prevent the DuckDB CLI client from reading the `~/.duckdbrc` file, start it as follows:
+> Tip To prevent the DuckDB CLI client from reading the `~/.duckdbrc` file, start it with the `-no-init` argument:
 > ```batch
-> duckdb -init /dev/null
+> duckdb -no-init
 > ```
 
 Below, we summarize a few important dot commands. To see all available commands, see the [dot commands page]({% link docs/2.0/clients/cli/dot_commands.md %}) or use the `.help` command.
@@ -137,7 +137,7 @@ The `--sql` option allows setting the database path using a SQL expression:
 
 #### Output Formats
 
-The `.mode` [dot command]({% link docs/2.0/clients/cli/dot_commands.md %}#mode) may be used to change the appearance of the tables returned in the terminal output.
+The `.mode` [dot command]({% link docs/2.0/clients/cli/output_formats.md %}#changing-the-output-format) may be used to change the appearance of the tables returned in the terminal output.
 These include the default `duckbox` mode, `csv` and `json` mode for ingestion by other tools, `markdown` and `latex` for documents and `insert` mode for generating SQL statements.
 
 #### Writing Results to a File

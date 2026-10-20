@@ -14,7 +14,7 @@ DuckDB has a flexible extension mechanism that allows for dynamically loading ex
 Extensions can enhance DuckDB's functionality by providing support for additional file formats, introducing new types, and domain-specific functionality.
 
 > Extensions are loadable on all clients (e.g., Python and R).
-> Extensions distributed via the Core and Community repositories are built and tested on macOS, Windows and Linux. All operating systems are supported for both the AMD64 and the ARM64 architectures.
+> Extensions distributed via the Core and Community repositories are built and tested on macOS, Windows and Linux. All operating systems are supported for both the AMD64 and the ARM64 architectures, with the exception of macOS on Intel (`osx_amd64`), which is being phased out: in DuckDB 2.0, core extensions are still built for `osx_amd64` but community extensions are no longer built for it, and DuckDB 2.1 will drop support for the platform.
 
 ## Listing Extensions
 
@@ -25,11 +25,13 @@ SELECT extension_name, installed, description
 FROM duckdb_extensions();
 ```
 
-| extension_name    | installed | description                                                  |
-|-------------------|-----------|--------------------------------------------------------------|
-| arrow             | false     | A zero-copy data integration between Apache Arrow and DuckDB |
-| autocomplete      | false     | Adds support for autocomplete in the shell                   |
-| ...               | ...       | ...                                                          |
+| extension_name | installed | description                                                    |
+|----------------|-----------|----------------------------------------------------------------|
+| autocomplete   | true      | Adds support for autocomplete in the shell                     |
+| avro           | false     | Adds support for reading Avro files                            |
+| aws            | false     | Provides features that depend on the AWS SDK                   |
+| azure          | false     | Adds a filesystem abstraction for Azure blob storage to DuckDB |
+| ...            | ...       | ...                                                            |
 
 This list will show which extensions are available, which extensions are installed, at which version, where it is installed, and more.
 The list includes most, but not all, available core extensions. For the full list, we maintain a [list of core extensions]({% link docs/2.0/core_extensions/overview.md %}).
@@ -46,7 +48,13 @@ SELECT *
 FROM 'test.json';
 ```
 
-To make the DuckDB distribution lightweight, only a few essential extensions are built-in, varying slightly per distribution. Which extension is built-in on which platform is documented in the [list of core extensions]({% link docs/2.0/core_extensions/overview.md %}#default-extensions).
+To make the DuckDB distribution lightweight, only a few essential extensions are built-in, varying slightly per distribution. To check which extensions are built into your DuckDB distribution, query the `install_mode` column of the [`duckdb_extensions` function](#listing-extensions):
+
+```sql
+SELECT extension_name
+FROM duckdb_extensions()
+WHERE install_mode = 'STATICALLY_LINKED';
+```
 
 > Most of DuckDB's scalar and aggregate functions are provided by the `core_functions` extension, which is built in and loaded by default in the standard distributions (such as the CLI). Minimal embeddings that do not load any extensions by default may need to run `LOAD core_functions;` explicitly. Some extensions depend on it as well, for example [DuckLake]({% link docs/2.0/core_extensions/ducklake.md %}), which otherwise fails with an error such as `Binder Error: Failed to load DuckLake table data. Referenced table "system" not found!`.
 
@@ -80,7 +88,8 @@ to load the spatial extension (again skipping this step if it is already loaded)
 #### Extension Repository
 
 Optionally a repository can be provided where the extension should be installed from, by appending `FROM ⟨repository⟩`{:.language-sql .highlight} to the `INSTALL` / `FORCE INSTALL` command.
-This repository can either be an alias, such as [`community`]({% link community_extensions/index.md %}), or it can be a direct URL, provided as a single-quoted string.
+This repository can either be an alias, such as [`community`]({% link community_extensions/index.md %}), the name of a [custom extension repository]({% link docs/2.0/extensions/extension_repositories.md %}), or a direct URL, provided as a single-quoted string.
+Custom extension repositories, introduced in DuckDB 2.0, allow organizations to host extensions signed with their own keys, which DuckDB pins when the repository is created.
 
 After installing/loading an extension, the [`duckdb_extensions` function](#listing-extensions) can be used to get more information.
 
@@ -98,7 +107,7 @@ DuckDB will automatically install and load the [`httpfs`]({% link docs/2.0/core_
 
 Not all extensions can be autoloaded. This can have various reasons: some extensions make several changes to the running DuckDB instance, making autoloading technically not (yet) possible. For others, it is preferred to have users opt-in to the extension explicitly before use due to the way they modify behavior in DuckDB.
 
-To see which extensions can be autoloaded, check the [core extensions list]({% link docs/2.0/core_extensions/overview.md %}).
+Autoloading only applies to core extensions. If a query requires an extension that cannot be autoloaded, DuckDB typically raises an error that names the extension, which you can then install and load [explicitly](#explicit-install-and-load).
 
 ### Community Extensions
 

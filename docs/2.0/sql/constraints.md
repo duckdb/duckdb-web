@@ -118,34 +118,6 @@ Constraint Error:
 Duplicate key "i: 1, j: 2" violates unique constraint.
 ```
 
-### Deferred Constraints
-
-> New As of DuckDB 2.0, primary key and unique constraints can be declared `DEFERRED` so that they are checked at `COMMIT` time instead of during each statement. This allows a transaction to transiently violate uniqueness as long as the violation is resolved before the transaction commits. The default (or an explicit `IMMEDIATE`) checks the constraint during statement execution.
-
-Append `DEFERRED` (or `IMMEDIATE`) to the constraint, either on a column or at the table level:
-
-```sql
-CREATE TABLE t1 (i INTEGER PRIMARY KEY DEFERRED);
-CREATE TABLE t2 (i INTEGER UNIQUE DEFERRED);
-CREATE TABLE t3 (i INTEGER, j INTEGER, PRIMARY KEY (i) DEFERRED);
-CREATE TABLE t4 (i INTEGER, UNIQUE (i) DEFERRED);
-```
-
-The timing can also be set when adding a constraint with [`ALTER TABLE`]({% link docs/2.0/sql/statements/alter_table.md %}):
-
-```sql
-ALTER TABLE t5 ADD UNIQUE (i) DEFERRED;
-```
-
-If a deferred constraint is still violated at `COMMIT`, the commit fails. The following restrictions apply:
-
-* DuckDB uses the bare `DEFERRED` and `IMMEDIATE` keywords; the PostgreSQL `INITIALLY DEFERRED` and `DEFERRABLE` spellings are not supported, and there is no `SET CONSTRAINTS` statement.
-* A `NOT NULL` constraint on a deferred primary key is still checked eagerly.
-* A foreign key cannot reference a deferred key.
-* A deferred constraint cannot be used as an [`ON CONFLICT`]({% link docs/2.0/sql/statements/insert.md %}#on-conflict-clause) target.
-
-The [`duckdb_constraints()`]({% link docs/2.0/sql/meta/duckdb_table_functions.md %}#duckdb_constraints) function reports the timing in its `constraint_text` column (for example `UNIQUE(i) DEFERRED`) and exposes an `is_deferred` column.
-
 ## Foreign Keys
 
 Foreign keys define a column, or set of columns, that refer to a primary key or unique constraint from *another* table. The constraint enforces that the key exists in the other table.

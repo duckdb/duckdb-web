@@ -87,6 +87,7 @@ These functions have the following parameters:
 
 | Name | Description | Type | Default |
 |:--|:-----|:-|:-|
+| `allow_empty` | If the file pattern or file list matches no files, return an empty result (with a single `empty` column of type `BOOL`) instead of throwing an error. Added in DuckDB 2.0. | `BOOL` | `false` |
 | `compression` | The compression type for the file. By default this will be detected automatically from the file extension (e.g., `t.json.gz` will use gzip, `t.json` will use none). Options are `none`, `gzip`, `zstd` and `auto_detect`. | `VARCHAR` | `auto_detect` |
 | `filename` | Whether or not an extra `filename` column should be included in the result. Since DuckDB 1.3.0, the `filename` column is added automatically as a virtual column and this option is only kept for compatibility reasons. | `BOOL` | `false` |
 | `format` | Can be one of `auto`, `unstructured`, `newline_delimited` and `array`. | `VARCHAR` | `array` |
@@ -192,6 +193,7 @@ Besides the `maximum_object_size`, `format`, `ignore_errors` and `compression`, 
 
 | Name | Description | Type | Default |
 |:--|:------|:-|:-|
+| `array` | Shorthand for the `format` parameter: `true` is equivalent to `format = 'array'` and `false` is equivalent to `format = 'newline_delimited'`. As `array` is a keyword, the parameter name must be quoted, e.g., `read_json('my_file.json', "array" = true)`. Added in DuckDB 2.0. | `BOOL` | - |
 | `auto_detect` | Whether to auto-detect the names of the keys and data types of the values automatically | `BOOL` | `true` |
 | `columns` | A struct that specifies the key names and value types contained within the JSON file (e.g., `{key1: 'INTEGER', key2: 'VARCHAR'}`). If `auto_detect` is enabled these will be inferred | `STRUCT` | `(empty)` |
 | `dateformat` | Specifies the date format to use when parsing dates. See [Date Format]({% link docs/2.0/sql/functions/dateformat.md %}) | `VARCHAR` | `iso` |
@@ -260,7 +262,7 @@ Can be queried exactly the same as a JSON file that contains `unstructured` JSON
 Both can be read as the table:
 
 ```sql
-SELECT
+SELECT *
 FROM read_json('birds.json');
 ```
 

@@ -34,6 +34,20 @@ SELECT '101010'::BITSTRING AS b;
 |--------|
 | 101010 |
 
+A bitstring can also be created using a bit string literal, which is a string of 1s and 0s prefixed with `B`:
+
+```sql
+SELECT B'101010' AS b;
+```
+
+<div class="monospace_table"></div>
+
+|   b    |
+|--------|
+| 101010 |
+
+> New Starting with DuckDB 2.0, `B'…'` literals are `BITSTRING` values. In earlier versions, `B'0101'` was parsed as the `VARCHAR` string `'b0101'`.
+
 Creating a `BITSTRING` with a predefined length is possible with the `bitstring` function. The resulting bitstring will be left-padded with zeroes.
 
 ```sql

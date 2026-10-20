@@ -11,28 +11,28 @@ title: Windows
 
 On Windows, DuckDB requires the [Microsoft Visual C++ Redistributable package](https://learn.microsoft.com/en-US/cpp/windows/latest-supported-vc-redist) both as a build-time and runtime dependency. Note that unlike the build process on UNIX-like systems, the Windows builds directly call CMake.
 
-## Visual Studio
+## Clang-cl
 
-To build DuckDB on Windows, we recommend using the Visual Studio compiler.
-To use it, follow the instructions in the [CI workflow](https://github.com/duckdb/duckdb/blob/52b43b166091c82b3f04bf8af15f0ace18207a64/.github/workflows/Windows.yml#L73):
+To build DuckDB on Windows, we recommend using the [`clang-cl` compiler](https://clang.llvm.org/docs/MSVCCompatibility.html) with the Visual Studio build tools (MSVC toolchain, Windows SDK and linker). This is the setup used by DuckDB's [CI workflow](https://github.com/duckdb/duckdb/blob/d54cbbe3df17e8e5ce68312f483b4155836112aa/.github/workflows/Windows.yml#L30).
 
-```bash
-python scripts/windows_ci.py
-cmake \
-    -DCMAKE_BUILD_TYPE=Release \
-    -DCMAKE_GENERATOR_PLATFORM=x64 \
-    -DENABLE_EXTENSION_AUTOLOADING=1 \
-    -DENABLE_EXTENSION_AUTOINSTALL=1 \
-    -DDUCKDB_EXTENSION_CONFIGS="${GITHUB_WORKSPACE}/.github/config/bundled_extensions.cmake" \
-    -DDISABLE_UNITY=1 \
-    -DOVERRIDE_GIT_DESCRIBE="$OVERRIDE_GIT_DESCRIBE"
-cmake --build . --config Release --parallel
-```
+1. Install [Visual Studio](https://visualstudio.microsoft.com/downloads/) (or the Build Tools for Visual Studio) with the “Desktop development with C++” workload and the “C++ Clang Compiler for Windows” component. You also need Python, CMake, Ninja and a Bash shell with GNU Make (e.g., Git Bash with `make` installed).
+2. Open a shell where the Visual Studio environment variables are set (e.g., the “x64 Native Tools Command Prompt” or a shell started from it).
+3. Run the following commands in a Bash shell from the root of the DuckDB repository:
+
+   ```bash
+   export GEN=ninja
+   export CC=clang-cl
+   export CXX=clang-cl
+   python scripts/windows_ci.py
+   make windows_release
+   ```
+
+The `make windows_release` target invokes CMake with the bundled extensions configuration (`.github/config/bundled_extensions.cmake`) and builds DuckDB in `Release` mode.
 
 ## MSYS2 and MinGW64
 
 DuckDB on Windows can also be built with [MSYS2](https://www.msys2.org/) and [MinGW64](https://www.mingw-w64.org/).
-Note that this build is only supported for compatibility reasons and should only be used if the Visual Studio build is not feasible on a given platform.
+Note that this build is only supported for compatibility reasons and should only be used if the `clang-cl` build is not feasible on a given platform.
 To build DuckDB with MinGW64, install the required dependencies using Pacman.
 When prompted with `Enter a selection (default=all)`, select the default option by pressing `Enter`.
 

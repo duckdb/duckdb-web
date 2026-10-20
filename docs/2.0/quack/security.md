@@ -15,7 +15,7 @@ A Quack server exposes the full SQL surface of the underlying DuckDB instance, i
 
 * The server generates a **random authentication token** at startup, which the client has to supply on every connection.
 * The server binds to `localhost` only, non-local hostnames require an explicit `allow_other_hostname => true`.
-* The server does **not** use TLS itself. Involving the TLS for localhost communication only adds dependencies for no real benefit.
+* The server does **not** use TLS for local URIs, as TLS for localhost communication only adds dependencies for no real benefit. Non-local URIs default to HTTPS with a self-signed certificate (see [`quack_serve` parameters]({% link docs/2.0/quack/reference.md %}#quack_serve-parameters)).
 
 > Bestpractice For any deployment beyond local-only, do not expose Quack directly to the internet. We recommend you to put a proven HTTP reverse proxy in front of it and let the proxy terminate TLS.
 
@@ -29,7 +29,7 @@ For every database call, there are two distinct decisions to be made:
 * **Authentication**: *who* is the caller? Establishes identity, usually by having the caller supply a credential (e.g., a token, a password, a client certificate).
 * **Authorization**: *may they do this?* Establishes whether an already authenticated caller is allowed to run a particular query, against a particular set of objects.
 
-Quack runs these as two separate hooks: the authenticatiopn when a client first connects and the authorization before each query the client wants to issue.
+Quack runs these as two separate hooks: the authentication when a client first connects and the authorization before each query the client wants to issue.
 
 ### Default Configuration
 
@@ -105,7 +105,7 @@ SET GLOBAL quack_authentication_function = 'developer_mode_auth';
 
 ### Authorization Hook
 
-The server invokes the authorization function by issuing the following SQL statement on every `PREPARE_RESPONSE` call:
+The server invokes the authorization function by issuing the following SQL statement on every `PREPARE_REQUEST` call:
 
 ```sql
 SELECT ⟨quack_authorization_function⟩(⟨connection_id⟩, ⟨query⟩);
@@ -162,7 +162,7 @@ SET GLOBAL quack_authentication_function = 'check_token';
 SET GLOBAL quack_authorization_function  = 'read_only';
 ```
 
-A client with the right token now connects and can run `SELECT`s, but `INSERT INTO quack.t ...` issued through the standard SQL path will fail at authorization time.
+A client with the right token now connects (e.g., with `ATTACH 'quack:localhost' AS remote_db (TOKEN 'analytics-team-token')`{:.language-sql .highlight}) and can run `SELECT`s, but `INSERT INTO remote_db.t ...` issued through the standard SQL path will fail at authorization time.
 
 > Warning The prefix regex above is illustrative, not a robust read-only filter: a query like `WITH x AS (SELECT 1) INSERT INTO t SELECT * FROM x` starts with `WITH` yet still mutates data. For production read-only enforcement, attach the database in [read-only mode]({% link docs/2.0/sql/statements/attach.md %}#options) or use an authorization function that inspects the *parsed statement type* rather than the raw query text.
 

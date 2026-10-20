@@ -58,13 +58,12 @@ ccache -M 50G
 
 ### Platforms with Full Support
 
-DuckDB fully supports Linux, macOS and Windows. Both x86_64 (amd64) and AArch64 (ARM64) builds are available for these platforms, and almost all extensions are distributed for these platforms.
+DuckDB fully supports Linux, macOS and Windows. Both x86_64 (amd64) and AArch64 (ARM64) builds are available for these platforms (except for macOS on x86_64, which only has partial support, see below), and almost all extensions are distributed for these platforms.
 
 | Platform name      | Description                                                            | Comment |
 |--------------------|------------------------------------------------------------------------|---------|
 | `linux_amd64`      | Linux x86_64 (AMD64) with [glibc](https://www.gnu.org/software/libc/)  | |
 | `linux_arm64`      | Linux AArch64 (ARM64) with [glibc](https://www.gnu.org/software/libc/) | |
-| `osx_amd64`        | macOS 12+ AMD64 (Intel CPUs)                                           | Only [core extensions]({% link docs/2.0/core_extensions/overview.md %}) are supported, [community extensions]({% link docs/2.0/extensions/community_extensions.md %}) are no longer built for `osx_amd64`. |
 | `osx_arm64`        | macOS 12+ ARM64 (Apple Silicon CPUs)                                   | |
 | `windows_amd64`    | Windows 10+ x86_64 (AMD64)                                             | |
 | `windows_arm64`    | Windows 10+ AArch64 (ARM64)                                            | |
@@ -85,6 +84,7 @@ For others, building from source is possible.
 
 | Platform name          | Description                                                                                          |
 |------------------------|------------------------------------------------------------------------------------------------------|
+| `osx_amd64`            | macOS 12+ x86_64 (AMD64) (Intel CPUs). DuckDB binaries and [core extensions]({% link docs/2.0/core_extensions/overview.md %}) are distributed, but [community extensions]({% link docs/2.0/extensions/community_extensions.md %}) are no longer built for this platform. DuckDB 2.1 will stop supporting `osx_amd64`. |
 | `linux_amd64_musl`     | Linux x86_64 (AMD64) with [musl libc](https://musl.libc.org/), e.g., Alpine Linux                    |
 | `linux_arm64_musl`     | Linux AArch64 (ARM64) with [musl libc](https://musl.libc.org/), e.g., Alpine Linux                   |
 | `linux_arm64_android`  | Android AArch64 (ARM64)                                                                              |

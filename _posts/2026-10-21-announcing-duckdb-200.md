@@ -67,7 +67,7 @@ INSERT INTO events VALUES
 #### <svg class="icon"><use href="#database-01"></use></svg> DuckDB client
 
 ```sql
-ATTACH 'quack:myserver.com'
+ATTACH 'quack:localhost'
     AS qk (TOKEN 'my_token');
 
 CONNECT qk;
@@ -86,6 +86,8 @@ SELECT * FROM events;
 </div>
 
 <!-- markdownlint-enable MD001 -->
+
+For simplicity, this example runs the server and the client on the same machine. By default, the server only listens on `localhost`; to accept connections from other machines, [start the server with `allow_other_hostname`]({% link docs/2.0/quack/overview.md %}#starting-a-server) and put it behind a [TLS-terminating reverse proxy]({% link docs/2.0/quack/setup/reverse_proxy.md %}).
 
 The `CONNECT` statement is not limited to Quack: it points your session at any remote database that supports it, and the new remote pushdown optimizer ships SQL directly to PostgreSQL and MySQL instead of pulling tables over the wire.
 
@@ -145,7 +147,7 @@ FROM t;
 
 ### Asynchronous I/O
 
-DuckDB v2.0 introduces [asynchronous I/O]({% link docs/2.0/data/io.md %}) throughout the engine. The I/O layer now scales independently from the query processing layer, issuing reads in the background and keeping multiple requests in flight. This means far more parallelism for remote reads and dramatically faster queries on object storage such as [`s3://`]({% link docs/2.0/core_extensions/httpfs/s3api.md %}).
+DuckDB v2.0 introduces [asynchronous I/O]({% link docs/2.0/data/io.md %}) for reading Parquet and CSV files. The I/O layer now scales independently from the query processing layer, issuing reads in the background and keeping multiple requests in flight. This means far more parallelism for remote reads and dramatically faster queries on object storage such as [`s3://`]({% link docs/2.0/core_extensions/httpfs/s3api.md %}).
 
 We described the design in detail in a [dedicated blog post]({% post_url 2026-07-31-asynchronous-io %}).
 In that post, we showed the network throughput over the course of a query with and without asynchronous I/O:
@@ -159,7 +161,7 @@ In that post, we showed the network throughput over the course of a query with a
 The [`VARIANT` type]({% link docs/2.0/sql/data_types/variant.md %}) stores semi-structured, schema-less data such as JSON while keeping the performance of columnar execution.
 So you can think of it as JSON on steroids: a `VARIANT` column can store differently shaped data in every row, but unlike JSON it is not a text format.
 
-[DuckDB 1.5 already introduced `VARIANT`]({% post_url 2026-03-09-announcing-duckdb-150 %}#variant-type), but DuckDB fully integrates it. DuckDB 2.0 detects the common structure in your data and “shreds” it, so it compresses well and executes fast. The pipeline works end to end, from shredded execution straight out of storage to shredded `VARIANT` reading and writing for Parquet, backed by a family of [`variant_*` functions]({% link docs/2.0/sql/functions/variant.md %}). For example:
+[DuckDB 1.5 already introduced `VARIANT`]({% post_url 2026-03-09-announcing-duckdb-150 %}#variant-type), but DuckDB 2.0 fully integrates it. DuckDB 2.0 detects the common structure in your data and “shreds” it, so it compresses well and executes fast. The pipeline works end to end, from shredded execution straight out of storage to shredded `VARIANT` reading and writing for Parquet, backed by a family of [`variant_*` functions]({% link docs/2.0/sql/functions/variant.md %}). For example:
 
 ```sql
 CREATE TABLE events (payload VARIANT);
@@ -209,12 +211,12 @@ CREATE EXTENSION REPOSITORY my_repo
     WITH PREFIX 'https://extensions.example.org';
 
 INSTALL my_ext FROM my_repo;
-LOAD my_repo/my_ext;
+LOAD my_ext FROM my_repo;
 ```
 
 A repository is a name, a URL prefix and one or more RSA public keys that are trusted to sign the extensions served from it. The prefix can point at anything DuckDB can read: a local path, `https`, `s3`, you name it. At `CREATE` time, DuckDB fetches the repository's public keys and pins them into the repository definition, printing each key's SHA-256 fingerprint so you can compare it against one published out of band.
 
-For more details, see the [Extension Repositories page]({% link docs/2.0/extensions/extension_repositories.md %}).
+This feature is still work-in-progress and its syntax may change in future releases. For more details, see the [Extension Repositories page]({% link docs/2.0/extensions/extension_repositories.md %}).
 
 ### Core Extension Updates
 
@@ -230,7 +232,7 @@ In the coming weeks, we'll release more blog posts about these features.
 
 ### Triggers
 
-DuckDB v2.0 delivers triggers in full: [`CREATE TRIGGER` statement]({% link docs/2.0/sql/statements/create_trigger.md %}) with `BEFORE` and `AFTER` triggers, `FOR EACH ROW` and `FOR EACH STATEMENT`, transition tables via `REFERENCING OLD/NEW TABLE`, multiple triggers per event, `RETURNING` on triggered tables and `DROP TRIGGER`. The classic use case is audit tables, where a trigger records what changed in response to a table modification.
+DuckDB v2.0 delivers triggers: the [`CREATE TRIGGER` statement]({% link docs/2.0/sql/statements/create_trigger.md %}) with `BEFORE` and `AFTER` triggers, `FOR EACH ROW` and `FOR EACH STATEMENT`, transition tables via `REFERENCING OLD/NEW TABLE`, multiple triggers per event, `RETURNING` on triggered tables and `DROP TRIGGER`. The classic use case is audit tables, where a trigger records what changed in response to a table modification. Some combinations, such as `BEFORE ... FOR EACH ROW` and `UPDATE ... FOR EACH ROW` triggers, are not yet supported; see the [limitations]({% link docs/2.0/sql/statements/create_trigger.md %}#limitations).
 
 ```sql
 CREATE TRIGGER trg_audit
@@ -347,11 +349,11 @@ Triggers bring us one step closer to materialized views, a long-standing item in
 
 As always, DuckDB's [friendly SQL dialect]({% link docs/2.0/sql/dialect/friendly_sql.md %}) keeps growing. A few favorites from this release cycle:
 
-* The [`$⟨variable⟩`{:.language-sql .highlight} shorthand]({% link docs/2.0/sql/statements/set_variable.md %}#the-name-shorthand) lets you write `$x` anywhere an expression is allowed, instead of `getvariable('⟨variable⟩')`{:.language-sql .highlight}.
+* The [`$⟨variable⟩`{:.language-sql .highlight} shorthand]({% link docs/2.0/sql/statements/set_variable.md %}#the-name-shorthand) lets you write `$x` in most places where an expression is allowed, instead of `getvariable('⟨variable⟩')`{:.language-sql .highlight}.
 * [DML in CTEs (data manipulation language in common table expression)]({% link docs/2.0/sql/query_syntax/with.md %}#data-modifying-ctes) let you use `INSERT`, `UPDATE`, `DELETE` and `COPY` as pipeline steps.
 * [`NEAREST` joins]({% link docs/2.0/sql/query_syntax/from.md %}#nearest-joins) turn top-k similarity search into a join clause, handy for vector and embedding workloads.
 * [Nested schemas]({% link docs/2.0/sql/statements/create_schema.md %}#nested-schemas) allow schemas within schemas, e.g., `CREATE SCHEMA finance.reports`.
-* [JSON mutation functions]({% link docs/2.0/data/json/json_functions.md %}#json-mutation-functions) `json_set`, `json_insert`, `json_replace` and `json_remove` modify JSON documents in place (see also our [blog post on JSON patches]({% post_url 2026-08-18-reconciling-json %})).
+* [JSON mutation functions]({% link docs/2.0/data/json/json_functions.md %}#json-mutation-functions) `json_set`, `json_insert`, `json_replace` and `json_remove` return modified copies of JSON documents (see also our [blog post on JSON patches]({% post_url 2026-08-18-reconciling-json %})).
 
 There is more: DuckDB 2.0.0 supports the SQL-standard [`FETCH FIRST`]({% link docs/2.0/sql/query_syntax/limit.md %}#fetch-first), allows [`UNNEST` in the `GROUP BY` clause]({% link docs/2.0/sql/query_syntax/groupby.md %}#grouping-by-unnest), and ensures well-defined [`MERGE`]({% link docs/2.0/sql/statements/merge_into.md %}) and [`UPDATE ... FROM`]({% link docs/2.0/sql/statements/update.md %}) semantics for cases when multiple rows are matched.
 

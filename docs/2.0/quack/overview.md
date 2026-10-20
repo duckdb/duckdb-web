@@ -39,7 +39,7 @@ CALL quack_serve('quack:localhost');
 
 The URI argument is optional: calling `quack_serve()` without it also listens on `quack:localhost`.
 
-`quack_serve` returns the listen URI, the HTTP URL, and, when the default authentication function is in use, and the `auth_token` that clients need to connect.
+`quack_serve` returns the listen URI, the HTTP URL, and, when the default authentication function is in use, the `auth_token` that clients need to connect.
 This token can also be set explicitly before starting (see [Security]({% link docs/2.0/quack/security.md %})).
 
 > Tip The DuckDB CLI can start a server directly with the `-serve` argument and connect to one with `-connect`. See [Command Line Arguments]({% link docs/2.0/clients/cli/arguments.md %}#serving-and-connecting-to-remote-databases).
@@ -51,7 +51,7 @@ By default the server refuses to bind anything other than a local hostname. To l
 CALL quack_serve('quack:0.0.0.0:9494', allow_other_hostname => true);
 ```
 
-When you do this you should front the server with a TLS-terminating reverse proxy. See [Securing Quack with a Reverse Proxy]({% link docs/2.0/quack/setup/reverse_proxy.md %}).
+Non-local servers serve HTTPS by default, using a self-signed certificate unless you pass `ssl_cert_file` and `ssl_key_file` (see the [Reference]({% link docs/2.0/quack/reference.md %}#quack_serve-parameters)). For production deployments, we recommend binding the server to localhost and fronting it with a TLS-terminating reverse proxy. See [Securing Quack with a Reverse Proxy]({% link docs/2.0/quack/setup/reverse_proxy.md %}).
 
 ### URI Format
 
@@ -114,7 +114,7 @@ FROM quack_query(
 );
 ```
 
-The query executes remotely and the server stream the result back.
+The query executes remotely and the server streams the result back.
 Errors occurring on the server (parse errors, missing tables, etc.) are shown locally in the DuckDB client.
 
 ### Attaching a Remote Database
@@ -153,7 +153,7 @@ You can run queries against the remote database:
 FROM remote_db.t;              -- scan remote table
 FROM remote_db.t WHERE i = 42; -- run filter remotely
 BEGIN; ...; COMMIT;            -- transactions are forwarded
-DETACH quack;                  -- detach from the remote database
+DETACH remote_db;              -- detach from the remote database
 ```
 
 The attached catalog also exposes a `query` table macro for ad-hoc SQL scoped to that attachment:

@@ -103,7 +103,7 @@ The `getvariable` function can also be used in a [`COLUMNS` expression]({% link 
 ```sql
 SET VARIABLE column_to_exclude = 'col1';
 CREATE TABLE tbl AS SELECT 12 AS col0, 34 AS col1, 56 AS col2;
-SELECT COLUMNS(c -> c != getvariable('column_to_exclude')) FROM tbl;
+SELECT COLUMNS(lambda c: c != getvariable('column_to_exclude')) FROM tbl;
 ```
 
 | col0 | col2 |

@@ -147,8 +147,9 @@ The primary benefit of shredding is significantly improved compression, but in t
 The following example illustrates the effects of shredding on the storage footprint of a `GEOMETRY` column.
 
 ```sql
--- Attach a persistent database with storage version v1.5
-ATTACH 'geometry_db.db' as geometry_db (STORAGE_VERSION 'v1.5.0');
+-- Attach a persistent database
+-- (geometry shredding requires storage version v1.5.0 or later, which is the default in DuckDB 2.0)
+ATTACH 'geometry_db.db' AS geometry_db;
 
 USE geometry_db;
 
@@ -162,7 +163,7 @@ FROM range(0, 1000) AS rx(x), range(0, 1000) AS ry(y);
 CHECKPOINT;
 
 -- Attach a second database
-ATTACH 'shredded_db.db' as shredded_db (STORAGE_VERSION 'v1.5.0');
+ATTACH 'shredded_db.db' AS shredded_db;
 
 USE shredded_db;
 
@@ -222,17 +223,15 @@ SELECT DISTINCT(segment_type) FROM pragma_storage_info('shredded_db.points');
 You can inspect the statistics of a column using the `stats()` function:
 
 ```sql
-CREATE TABLE geometries as select 'POINT Z (30 10 5)'::GEOMETRY as geom;
+CREATE TABLE geometries AS SELECT 'POINT Z (30 10 5)'::GEOMETRY AS geom;
 
 SELECT stats(geom) AS geom_stats FROM geometries;
-----
-┌─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┐
-│                                                                                             geom_stats                                                                                              │
-│                                                                                               varchar                                                                                               │
-├─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┤
-│ [Extent: [X: [30.000000, 30.000000], Y: [10.000000, 10.000000], Z: [5.000000, 5.000000], M: [inf, -inf]], Types: [point_z], Flags: [Has Empty Geom: false, Has No Empty Geom: true, Has Empty Part: │
-│  false, Has No Empty Part: true]][Has Null: false, Has No Null: true][Approx Unique: 1]                                                                                                             │
-└─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┘
+```
+
+The result is a `VARIANT` value:
+
+```text
+{'approx_unique': 1, 'extent': {'x_max': 30.0, 'x_min': 30.0, 'y_max': 10.0, 'y_min': 10.0, 'z_max': 5.0, 'z_min': 5.0}, 'has_empty_geom': false, 'has_empty_part': false, 'has_no_null': true, 'has_non_empty_geom': true, 'has_non_empty_part': true, 'has_null': false}
 ```
 
 These statistics can be used by the query optimizer to skip row groups that don't match the geometry type or vertex dimensions required by a query, or to speed up spatial predicates by first checking if the bounding box of the geometries in the row group overlaps with the bounding box of the query geometry.

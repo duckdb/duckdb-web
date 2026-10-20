@@ -8,7 +8,7 @@
     {
       "page": "What's New in the Docs for 2.0",
       "slug": "",
-      "url": "/docs/preview/whats_new_in_the_docs"
+      "url": "/docs/2.0/whats_new_in_the_docs"
     },
     {
       "page": "Documentation",
@@ -1317,10 +1317,6 @@
             {
               "page": "inet",
               "url": "inet"
-            },
-            {
-              "page": "jemalloc",
-              "url": "jemalloc"
             },
             {
               "page": "Lance",

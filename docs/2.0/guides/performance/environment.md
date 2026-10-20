@@ -66,12 +66,12 @@ On Windows, we recommend using NTFS and avoiding FAT32.
 
 Special care needs to be taken when using network-attached disks:
 
-* If you are writing to disk, it is important that the disks is reliable. As a general rule of thumb, this is true for locally attached disks, and block storage in the cloud.
-* If your workload is larger than memory and/or fast data loading is important, you need fast disks, preferrably SSD or NVMe with a fast connection.
+* If you are writing to disk, it is important that the disks are reliable. As a general rule of thumb, this is true for locally attached disks, and block storage in the cloud.
+* If your workload is larger than memory and/or fast data loading is important, you need fast disks, preferably SSD or NVMe with a fast connection.
 
 With these in mind, here are two common architectures and the related considerations when you are using DuckDB's [native database format]({% link docs/2.0/internals/storage.md %}):
 
-**Clock storage in the colud.** DuckDB runs well on network-backed cloud disks such as [AWS EBS](https://aws.amazon.com/ebs/) for both read-only and read-write workloads.
+**Block storage in the cloud.** DuckDB runs well on network-backed cloud disks such as [AWS EBS](https://aws.amazon.com/ebs/) for both read-only and read-write workloads.
 
 **Network-attached storage.**
 Network-attached storage can serve DuckDB for read-only workloads.

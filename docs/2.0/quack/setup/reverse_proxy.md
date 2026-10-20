@@ -7,7 +7,7 @@ redirect_from:
 title: Securing Quack with a Reverse Proxy
 ---
 
-The Quack server speaks plain HTTP only and binds to localhost by default. See [Security]({% link docs/2.0/quack/security.md %}) for the rationale behind these configurations.
+By default, the Quack server binds to localhost and speaks plain HTTP. See [Security]({% link docs/2.0/quack/security.md %}) for the rationale behind these configurations.
 For any deployment beyond local-only, the recommended pattern is the same as for any other HTTP-based database / application server: put a proven HTTP reverse proxy in front of it, and let the proxy terminate TLS.
 
 The Quack client cooperates with this: for non-local URIs it assumes HTTPS by default, so a properly fronted server “just works” from the client side too.
@@ -60,7 +60,7 @@ CALL quack_serve('quack:localhost');
 
 In the client session, connect through Caddy on `:8443`. Local URIs default to plain HTTP, so you have to **force SSL on** explicitly:
 
-{:.codebox-server}
+{:.codebox-client}
 ```sql
 ATTACH 'quack:localhost:8443' AS quack (
     TOKEN '⟨authentication_token-from-quack_serve⟩',
@@ -71,7 +71,6 @@ FROM quack.query('SELECT 42');
 ```
 
 If the round-trip succeeds, your traffic just went out as TLS to Caddy, got terminated, and was forwarded as plain HTTP to Quack on `:9494`.
-
 
 ## Nginx + Let's Encrypt
 
@@ -118,11 +117,13 @@ CALL quack_serve('quack:localhost');
 ```
 
 Issue the certificate with `certbot --nginx -d quack.example.com`.
-Clients connect over HTTPS automatically:
+Clients connect over HTTPS automatically. As the default Quack port remains `9494` even with HTTPS, specify the proxy's port `443` explicitly:
 
 {:.codebox-client}
 ```sql
-ATTACH 'quack:quack.example.com' AS quack;   -- HTTPS auto-selected
+ATTACH 'quack:quack.example.com:443' AS quack (
+    TOKEN '⟨authentication_token-from-quack_serve⟩'
+);
 ```
 
 ## Caddy + Let's Encrypt
@@ -156,9 +157,11 @@ On the Quack side, start the server bound to localhost (the default):
 CALL quack_serve('quack:localhost');
 ```
 
-Clients connect over HTTPS automatically:
+Clients connect over HTTPS automatically. As the default Quack port remains `9494` even with HTTPS, specify the proxy's port `443` explicitly:
 
 {:.codebox-client}
 ```sql
-ATTACH 'quack:quack.example.com' AS quack;   -- HTTPS auto-selected
+ATTACH 'quack:quack.example.com:443' AS quack (
+    TOKEN '⟨authentication_token-from-quack_serve⟩'
+);
 ```

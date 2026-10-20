@@ -26,7 +26,17 @@ SHOW threads;
 |---------|
 | 42      |
 
-If both a table and a setting share the name, `SHOW` describes the table (deprecated; use [`DESCRIBE`]({% link docs/2.0/guides/meta/describe.md %}) for tables). `DESCRIBE` never resolves a setting.
+If both a table and a setting share the name, `SHOW` describes the table and prints a deprecation warning (use [`DESCRIBE`]({% link docs/2.0/guides/meta/describe.md %}) for tables). `DESCRIBE` never resolves a setting.
+
+The `show_behavior` setting configures how `SHOW` resolves a bare identifier:
+
+* `'auto'` (default): describe a table if one exists, otherwise show the setting.
+* `'table'`: always describe a table.
+* `'setting'`: always show a setting.
+
+```sql
+SET show_behavior = 'setting';
+```
 
 ## `SHOW DATABASES` Statement
 
@@ -61,10 +71,8 @@ The `SHOW SCHEMAS` statement shows a list of all schemas across non-internal dat
 SHOW SCHEMAS;
 ```
 
-| database_name | schema_name        | current |
-|---------------|--------------------|---------|
-| memory        | main               | true    |
-| memory        | pg_catalog         | false   |
-| memory        | information_schema | false   |
+| database_name | schema_name | current |
+|---------------|-------------|---------|
+| memory        | main        | true    |
 
 The `current` column indicates which schema is the default schema (set via the [`USE` statement]({% link docs/2.0/sql/statements/use.md %})).

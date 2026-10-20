@@ -222,28 +222,31 @@ DuckDB runs queries on its own pool of native threads. This pool is independent 
 
 The pool belongs to the **database instance**, not to the `Connection`. Every connection to the same instance, whether created through `DriverManager` or `duplicate()`, submits work to the same pool. Two connections that resolve to different instances, as described in [Database Instances and Instance Caching](#database-instances-and-instance-caching), each get a pool of their own.
 
-The size of the pool is set by DuckDB's `threads` option, which defaults to the number of CPU cores. DuckDB reserves `external_threads` of that budget, one by default, for the thread that calls into the library, and starts `threads - external_threads` background threads. On a 16-core machine, that is 15 native threads per database instance.
+The size of the pool is set by DuckDB's `threads` option, which defaults to the number of CPU cores. DuckDB reserves `external_threads` of that budget, one by default, for the thread that calls into the library, and starts `threads - external_threads` background threads.
 
-To bound the thread count, set `threads` when the instance is created:
+In addition, DuckDB 2.0 runs a second pool of asynchronous threads dedicated to blocking I/O, such as HTTP requests to object storage (see [Asynchronous I/O]({% link docs/2.0/data/io.md %}#thread-pools)). Its size is set by the `async_threads` option, which defaults to four times the number of CPU threads, capped at 256. On a 16-core machine, that is 15 worker threads plus 64 asynchronous threads, roughly 80 native threads per database instance.
+
+To bound the thread count, set both `threads` and `async_threads` when the instance is created:
 
 ```text
-jdbc:duckdb:/tmp/my_database;threads=4
+jdbc:duckdb:/tmp/my_database;threads=4;async_threads=4
 ```
 
-An already-running instance can be resized with a `SET` statement, which affects every connection to that instance:
+An already-running instance can be resized with `SET` statements, which affect every connection to that instance. Note that changing `threads` does not resize the asynchronous pool, so set `async_threads` explicitly as well:
 
 ```sql
 SET threads = 4;
+SET async_threads = 4;
 ```
 
 Two consequences are worth calling out for Java applications:
 
-* **Attached databases do not add threads.** [`ATTACH`]({% link docs/2.0/sql/statements/attach.md %}) adds a catalog to the database instance the connection already belongs to. All attached databases share that instance's thread pool, memory limit, and temporary directory. Only opening a *new* JDBC connection to a different database name creates a second instance, and with it a second pool.
-* **Multiple instances multiply the thread count.** An application that opens a dozen private in-memory databases with `jdbc:duckdb:` on a 16-core machine starts about 180 native threads, each with its own stack and its own share of the memory limit.
+* **Attached databases do not add threads.** [`ATTACH`]({% link docs/2.0/sql/statements/attach.md %}) adds a catalog to the database instance the connection already belongs to. All attached databases share that instance's thread pools, memory limit and temporary directory. Only opening a *new* JDBC connection to a different database name creates a second instance, and with it a second set of pools.
+* **Multiple instances multiply the thread count.** An application that opens a dozen private in-memory databases with `jdbc:duckdb:` on a 16-core machine starts more than 900 native threads, each with its own stack, and each instance has its own share of the memory limit.
 
-> Warning Each private (uncached) in-memory database creates its own instance with an independent thread pool. An application that opens many connections with the default `jdbc:duckdb:` URL can therefore create a large number of operating system threads. Use a named in-memory database, share one instance through the [instance cache](#database-instances-and-instance-caching), or set the `threads` option to bound the thread count.
+> Warning Each private (uncached) in-memory database creates its own instance with independent thread pools. An application that opens many connections with the default `jdbc:duckdb:` URL can therefore create a large number of operating system threads. Use a named in-memory database, share one instance through the [instance cache](#database-instances-and-instance-caching), or set both the `threads` and `async_threads` options to bound the thread count, e.g., `jdbc:duckdb:;threads=4;async_threads=4`.
 
-> Note DuckDB 2.0 added a second pool of `ASYNC` threads dedicated to blocking I/O, sized at four times the number of system threads and capped at 256. On a 16-core machine, this raises the default per-instance thread count from roughly 15 to roughly 80, which makes bounding the number of instances and setting `threads` explicitly more important. See the [asynchronous I/O blog post]({% post_url 2026-07-31-asynchronous-io %}) for details.
+> Note The asynchronous I/O pool is new in DuckDB 2.0. Compared to earlier versions, it raises the default per-instance thread count on a 16-core machine from roughly 15 to roughly 80, which makes bounding the number of instances and setting `threads` and `async_threads` explicitly more important. See the [asynchronous I/O blog post]({% post_url 2026-07-31-asynchronous-io %}) for details.
 
 Separately from DuckDB's pools, the driver starts a single daemon thread named `duckdb-query-cancel-scheduler-thread` in the JVM the first time it is loaded. It is shared by the whole process and is used to fire `Statement.setQueryTimeout()` cancellations. Applications that unload the driver, for example in an application server, can stop it with `DuckDBDriver.shutdownQueryCancelScheduler()`.
 
@@ -299,8 +302,8 @@ The part after `ducklake:` selects the catalog database:
 
 For `ducklake:` URLs the driver changes two defaults, so that BI tools such as Metabase, which open and close connections frequently, do not restart the database instance on every request or accidentally materialize a large table:
 
-- `jdbc_pin_db` is enabled, keeping the instance alive after the last connection closes. Release it with `DuckDBDriver.releaseDB(url)` when the application shuts down.
-- `jdbc_stream_results` is enabled. See [Streaming Results]({% link docs/2.0/clients/java/result_handling.md %}#streaming-results) for the consequences.
+* `jdbc_pin_db` is enabled, keeping the instance alive after the last connection closes. Release it with `DuckDBDriver.releaseDB(url)` when the application shuts down.
+* `jdbc_stream_results` is enabled. See [Streaming Results]({% link docs/2.0/clients/java/result_handling.md %}#streaming-results) for the consequences.
 
 Either default can be overridden by setting the option explicitly, for example `jdbc:duckdb:ducklake:metadata.ducklake;jdbc_pin_db=false`.
 

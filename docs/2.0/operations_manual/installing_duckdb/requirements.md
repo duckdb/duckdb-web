@@ -22,7 +22,7 @@ DuckDB officially supports Linux, macOS and Windows on both x86_64 (AMD64) and A
 | `windows_amd64` | Windows 10+      | x86_64 (AMD64)  | Intel, AMD, etc.               | Full          |
 | `windows_arm64` | Windows 10+      | AArch64 (ARM64) | Copilot+ PC with Qualcomm CPU  | Full          |
 
-> Warning macOS on Intel CPUs (`osx_amd64`) is only partially supported. DuckDB binaries and [core extensions]({% link docs/2.0/core_extensions/overview.md %}) are still distributed for this platform but, starting with DuckDB 2.0.0, [community extensions]({% link docs/2.0/extensions/community_extensions.md %}) are no longer built for it.
+> Warning macOS on Intel CPUs (`osx_amd64`) is only partially supported. DuckDB binaries and [core extensions]({% link docs/2.0/core_extensions/overview.md %}) are still distributed for this platform but, starting with DuckDB 2.0.0, [community extensions]({% link docs/2.0/extensions/community_extensions.md %}) are no longer built for it. DuckDB 2.1 will stop supporting `osx_amd64`.
 
 DuckDB can also run on other platforms, such as Linux distributions using musl libc (e.g., Alpine Linux), Android and WebAssembly, with varying levels of support. For details, see the [list of platforms on the “Building DuckDB” page]({% link docs/2.0/dev/building/overview.md %}#platforms). For the platforms extensions are distributed for, see the [“Extension Distribution” page]({% link docs/2.0/extensions/extension_distribution.md %}#platforms).
 

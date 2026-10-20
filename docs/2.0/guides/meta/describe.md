@@ -11,18 +11,19 @@ title: Describe
 
 ## Describing a Table
 
-To view the schema of a table, use the `DESCRIBE` statement (or its aliases `DESC` and `SHOW`) followed by the table name.
+To view the schema of a table, use the `DESCRIBE` statement (or its alias `DESC`) followed by the table name.
 
 ```sql
 CREATE TABLE tbl (i INTEGER PRIMARY KEY, j VARCHAR);
 DESCRIBE tbl;
-SHOW tbl; -- equivalent to DESCRIBE tbl;
 ```
 
 | column_name | column_type | null | key  | default | extra |
 |-------------|-------------|------|------|---------|-------|
 | i           | INTEGER     | NO   | PRI  | NULL    | NULL  |
 | j           | VARCHAR     | YES  | NULL | NULL    | NULL  |
+
+> Deprecated Describing a table with `SHOW tbl` is deprecated and emits a warning. Use `DESCRIBE tbl` instead. The [`show_behavior` setting]({% link docs/2.0/configuration/overview.md %}) controls whether `SHOW` resolves a bare identifier to a table or a setting.
 
 ## Describing a Query
 
@@ -34,10 +35,8 @@ DESCRIBE SELECT * FROM tbl;
 
 | column_name | column_type | null | key  | default | extra |
 |-------------|-------------|------|------|---------|-------|
-| i           | INTEGER     | YES  | NULL | NULL    | NULL  |
+| i           | INTEGER     | NO   | PRI  | NULL    | NULL  |
 | j           | VARCHAR     | YES  | NULL | NULL    | NULL  |
-
-Note that there are subtle differences: compared to the result when [describing a table](#describing-a-table), nullability (`null`) and key information (`key`) are lost.
 
 ## Using `DESCRIBE` in a Subquery
 

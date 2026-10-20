@@ -20,19 +20,26 @@ Dot commands are available in the DuckDB CLI client. To use one of these command
 | Command                                                               | Description                                                                                                                                                                      |
 | --------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `.about`{:.language-sql .highlight}                                   | Prints version, description and license information about DuckDB.                                                                                                                |
+| `.auto_format ⟨on/off⟩`{:.language-sql .highlight}                    | Automatically format SQL before execution. Default: `off`                                                                                                                        |
 | `.bail ⟨on/off⟩`{:.language-sql .highlight}                           | Stop after hitting an error. Default: `off`                                                                                                                                      |
 | `.binary ⟨on/off⟩`{:.language-sql .highlight}                         | Turn binary output `on` or `off`. Default: `off`                                                                                                                                 |
 | `.cd ⟨DIRECTORY⟩`{:.language-sql .highlight}                          | Change the working directory to `DIRECTORY`                                                                                                                                      |
 | `.changes ⟨on/off⟩`{:.language-sql .highlight}                        | Show number of rows changed by SQL                                                                                                                                               |
 | `.columns`{:.language-sql .highlight}                                 | Column-wise rendering of query results                                                                                                                                           |
+| `.connect_command ⟨COMMAND⟩`{:.language-sql .highlight}               | Set the command executed by the `-connect` [argument]({% link docs/2.0/clients/cli/arguments.md %}#serving-and-connecting-to-remote-databases)                                   |
 | `.databases`{:.language-sql .highlight}                               | List names and files of attached databases                                                                                                                                       |
+| `.decimal_sep ⟨SEP⟩`{:.language-sql .highlight}                       | Set the decimal separator used when rendering numbers. Only for duckbox mode                                                                                                     |
 | `.dump ⟨TABLE⟩`{:.language-sql .highlight}                            | Render database content as SQL. `TABLE` is a [`LIKE` pattern]({% link docs/2.0/sql/functions/pattern_matching.md %}) for the tables to dump                                  |
+| `.display_colors ⟨bold/underline⟩`{:.language-sql .highlight}         | Display all terminal colors and their names. See the [8-bit colors section]({% link docs/2.0/clients/cli/friendly_cli.md %}#8-bit-colors)                                        |
 | `.echo ⟨on/off⟩`{:.language-sql .highlight}                           | Turn command echo `on` or `off`                                                                                                                                                  |
+| `.edit`{:.language-sql .highlight}                                    | Open an external text editor to edit a query. `\e` can be used as an alias. See the [external editor mode section]({% link docs/2.0/clients/cli/editing.md %}#external-editor-mode) |
+| `.excel`{:.language-sql .highlight}                                   | Display the output of the next command in a spreadsheet. Equivalent to `.once -x`                                                                                                |
 | `.exit ⟨CODE⟩`{:.language-sql .highlight}                             | Exit this program with return-code `CODE`                                                                                                                                        |
 | `.headers ⟨on/off⟩`{:.language-sql .highlight}                        | Turn display of headers `on` or `off`. Does not apply to duckbox mode                                                                                                            |
 | `.help ⟨-all⟩ ⟨PATTERN⟩`{:.language-sql .highlight}                   | Show help text for `PATTERN`. Use `.help shortcuts` to display keyboard shortcuts                                                                                                |
 | `.highlight ⟨on/off⟩`{:.language-sql .highlight}                      | Toggle syntax highlighting in the shell `on` / `off`. See the [query syntax highlighting section](#configuring-the-query-syntax-highlighter) for more details                    |
 | `.highlight_colors ⟨COMPONENT⟩ ⟨COLOR⟩`{:.language-sql .highlight}    | Configure the color of each query and result component. See the [Syntax Highlighting page]({% link docs/2.0/clients/cli/syntax_highlighting.md %}) for details               |
+| `.highlight_errors ⟨on/off⟩`{:.language-sql .highlight}               | Turn highlighting of error messages `on` or `off`                                                                                                                                |
 | `.highlight_mode ⟨mixed/dark/light⟩`{:.language-sql .highlight}       | Toggle the highlight mode. See the [dark/light mode section]({% link docs/2.0/clients/cli/friendly_cli.md %}#darklight-mode) for details                                     |
 | `.highlight_results ⟨on/off⟩`{:.language-sql .highlight}              | Toggle highlighting in result tables `on` / `off` (duckbox only). See the [result syntax highlighting section](#configuring-the-query-syntax-highlighter) for more details       |
 | `.history ⟨N⟩`{:.language-sql .highlight}                             | Show the command history with syntax highlighting. If `N` is given, only the last `N` entries are shown. See the [command history section](#command-history)                     |
@@ -58,17 +65,24 @@ Dot commands are available in the DuckDB CLI client. To use one of these command
 | `.prompt ⟨OPTIONS⟩ ⟨CONTINUE⟩`{:.language-sql .highlight}             | Replace the standard prompts                                                                                                                                                     |
 | `.quit`{:.language-sql .highlight}                                    | Exit this program                                                                                                                                                                |
 | `.read ⟨FILE⟩`{:.language-sql .highlight}                             | Read input from `FILE`                                                                                                                                                           |
+| `.read_line_version ⟨linenoise/fallback⟩`{:.language-sql .highlight}  | Set the library used for processing interactive input                                                                                                                            |
+| `.render_completion ⟨on/off⟩`{:.language-sql .highlight}              | Toggle displaying of completion prompts in the shell `on` / `off`                                                                                                                |
+| `.render_errors ⟨on/off⟩`{:.language-sql .highlight}                  | Toggle rendering of errors (such as mismatched brackets and unclosed quotes) in the shell `on` / `off`. See the [Syntax Highlighting page]({% link docs/2.0/clients/cli/syntax_highlighting.md %}) |
 | `.rows`{:.language-sql .highlight}                                    | Row-wise rendering of query results (default)                                                                                                                                    |
 | `.safe_mode`{:.language-sql .highlight}                               | Activates [safe mode]({% link docs/2.0/clients/cli/safe_mode.md %})                                                                                                          |
 | `.schema ⟨OPTIONS⟩ ⟨PATTERN⟩`{:.language-sql .highlight}              | Show the `CREATE` statements matching `PATTERN`. Pretty-prints and highlights by default; use `--no-indent` (alias `--no-format`) for the stored single-line form                |
 | `.separator ⟨COL⟩ ⟨ROW⟩`{:.language-sql .highlight}                   | Change the column and row separators                                                                                                                                             |
+| `.serve_command ⟨COMMAND⟩`{:.language-sql .highlight}                 | Set the command executed by the `-serve` [argument]({% link docs/2.0/clients/cli/arguments.md %}#serving-and-connecting-to-remote-databases)                                     |
 | `.shell ⟨CMD⟩ ⟨ARGS...⟩`{:.language-sql .highlight}                   | Run `CMD` with `ARGS...` in a system shell                                                                                                                                       |
 | `.show`{:.language-sql .highlight}                                    | Show the current values for various settings                                                                                                                                     |
 | `.singleline`{:.language-sql .highlight}                              | Set single-line mode                                                                                                                                                             |
 | `.startup_text ⟨none/version/all⟩`{:.language-sql .highlight}         | Controls the start-up text displayed when launching the CLI. Set this as the first line in `~/.duckdbrc`                                                                         |
 | `.system ⟨CMD⟩ ⟨ARGS...⟩`{:.language-sql .highlight}                  | Run `CMD` with `ARGS...` in a system shell                                                                                                                                       |
 | `.tables ⟨TABLE⟩`{:.language-sql .highlight}                          | List tables [matching `LIKE` pattern]({% link docs/2.0/sql/functions/pattern_matching.md %}) `TABLE` with column names, types and row counts, grouped by database and schema |
-| `.timer ⟨on/off⟩`{:.language-sql .highlight}                          | Turn SQL timer `on` or `off`. SQL statements separated by `;` but _not_ separated via newline are measured together                                                              |
+| `.thousand_sep ⟨SEP⟩`{:.language-sql .highlight}                      | Set the thousand separator used when rendering numbers. Only for duckbox mode                                                                                                    |
+| `.timer ⟨on/off⟩ ⟨DIGITS⟩`{:.language-sql .highlight}                 | Turn SQL timer `on` or `off`, with `DIGITS` decimals for the real time (default: 3). SQL statements separated by `;` but _not_ separated via newline are measured together                                |
+| `.ui_command ⟨COMMAND⟩`{:.language-sql .highlight}                    | Set the command executed by the `-ui` [argument]({% link docs/2.0/clients/cli/arguments.md %}). `CALL` is prepended to `COMMAND`. Default: `CALL start_ui()`                     |
+| `.version`{:.language-sql .highlight}                                 | Show the DuckDB version                                                                                                                                                          |
 | `.web`{:.language-sql .highlight}                                     | Render the query graph of the previous query and open it in a web browser. Equivalent to `EXPLAIN ANALYZE (FORMAT WEB)`. Disabled in [safe mode]({% link docs/2.0/clients/cli/safe_mode.md %})               |
 | `.width ⟨NUM1⟩ ⟨NUM2⟩ ...`{:.language-sql .highlight}                 | Set minimum column widths for columnar output                                                                                                                                    |
 
@@ -80,10 +94,35 @@ The `.help` text may be filtered by passing in a text string as the first argume
 .help m
 ```
 
-```sql
-.maxrows COUNT           Sets the maximum number of rows for display (default: 40). Only for duckbox mode.
-.maxwidth COUNT          Sets the maximum width in characters. 0 defaults to terminal width. Only for duckbox mode.
-.mode MODE ?TABLE?       Set output mode
+```text
+.manual FUNCTION       Show the manual page for a SQL function
+  Displays the signatures, descriptions and examples of all overloads of FUNCTION.
+  FUNCTION may be qualified: [database.][schema.]function.
+.maxbytes COUNT        Sets the maximum number of bytes of rows for display (0 = all). Only for markdown mode in -agent mode.
+.maxcellwidth COUNT    Sets the maximum number of characters per cell (0 = all). Only for markdown mode in -agent mode.
+.maxrows COUNT         Sets the maximum number of rows for display (default: 40, -1 = all). Only for duckbox mode and for markdown mode in -agent mode.
+.maxwidth COUNT        Sets the maximum width in characters. 0 defaults to terminal width. Only for duckbox mode.
+.mode MODE ?TABLE?     Set output mode
+  MODE is one of:
+    ascii              Columns/rows delimited by 0x1F and 0x1E
+    box                Tables using unicode box-drawing characters
+    csv                Comma-separated values
+    column             Output in columns. (See .width)
+    duckbox            Tables with extensive features
+    html               HTML <table> code
+    insert             SQL insert statements for TABLE
+    json               Results in a JSON array
+    jsonlines          Results in a NDJSON
+    latex              LaTeX tabular environment code
+    line               One value per line
+    list               Values delimited by "|"
+    markdown           Markdown table format
+    quote              Escape answers as for SQL
+    table              ASCII-art table
+    tabs               Tab-separated values
+    tcl                TCL list elements
+    trash              No output
+.multiline             Sets the render mode to multi-line
 ```
 
 ## `.output`: Writing Results to a File
@@ -161,8 +200,16 @@ CREATE TABLE walkers AS SELECT 'duck' AS animal;
 .tables
 ```
 
-```sql
-fliers    swimmers  walkers
+```text
+ ────────────────────── memory ──────────────────────
+ ─────────────────────── main ───────────────────────
+┌────────────────┐┌────────────────┐┌────────────────┐
+│    swimmers    ││    walkers     ││     fliers     │
+│                ││                ││                │
+│ animal varchar ││ animal varchar ││ animal varchar │
+│                ││                ││                │
+│     1 rows     ││     1 rows     ││     1 rows     │
+└────────────────┘└────────────────┘└────────────────┘
 ```
 
 For example, to filter to only tables that contain an `l`, use the `LIKE` pattern `%l%`.
@@ -171,8 +218,16 @@ For example, to filter to only tables that contain an `l`, use the `LIKE` patter
 .tables %l%
 ```
 
-```sql
-fliers   walkers
+```text
+ ───────────── memory ─────────────
+ ────────────── main ──────────────
+┌────────────────┐┌────────────────┐
+│    walkers     ││     fliers     │
+│                ││                │
+│ animal varchar ││ animal varchar │
+│                ││                │
+│     1 rows     ││     1 rows     │
+└────────────────┘└────────────────┘
 ```
 
 The `.schema` command will show all of the SQL statements used to define the schema of the database.
@@ -347,7 +402,7 @@ To set that progress bar component to a red text that displays the current time 
 To set that progress bar component to a blue text that displays the file cache RAM usage on the progress bar:
 
 ```sql
-.progress_bar --add "{align:right}{min_size:20}{color:blue}External Cache Usage: {sql:select format_bytes(memory_usage_bytes) from duckdb_memory() where tag='EXTERNAL_FILE_CACHE'}{color:reset};
+.progress_bar --add "{align:right}{min_size:20}{color:blue}External Cache Usage: {sql:select format_bytes(memory_usage_bytes) from duckdb_memory() where tag='EXTERNAL_FILE_CACHE'}{color:reset}"
 ```
 
 <img src="{% link images/progress_bar/duckdb_progressbar_cache_usage.gif %}"
@@ -444,7 +499,7 @@ The file format can be specified explicitly using `--csv`, `--json`, or `--parqu
 .import data.csv my_table
 ```
 
-Additional parameters can be passed to the underlying reader function using `--⟨parameter⟩ ⟨value⟩{:.language-sql .highlight} syntax:
+Additional parameters can be passed to the underlying reader function using `--⟨parameter⟩ ⟨value⟩`{:.language-sql .highlight} syntax:
 
 ```sql
 .import data.csv my_table --delimiter "|" --header false

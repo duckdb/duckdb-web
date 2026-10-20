@@ -60,7 +60,7 @@ For more information, see the [“Profiling”]({% link docs/2.0/configuration/p
 | [`enable_profiling`]({% link docs/2.0/configuration/pragmas.md %}#enable-profiling), [`enable_profile`]({% link docs/2.0/configuration/pragmas.md %}#enable-profiling)     | Turn on profiling                               | `query_tree`                                             | `query_tree`, `json`, `query_tree_optimizer`, `no_output`                                                                                                          |
 | [`profiling_coverage`]({% link docs/2.0/configuration/pragmas.md %}#profiling-coverage)                                                                                        | Set the operators to profile                    | `SELECT`                                                 | `SELECT`, `ALL`                                                                                                                                                    |
 | [`profiling_output`]({% link docs/2.0/configuration/pragmas.md %}#profiling-output)                                                                                            | Set a profiling output file                     | Console                                                  | A filepath                                                                                                                                                         |
-| [`profiling_mode`]({% link docs/2.0/configuration/pragmas.md %}#profiling-mode)                                                                                                | Toggle additional optimizer and planner metrics | `standard`                                               | `standard`, `detailed`, `all`                                                                                                                                       |
+| [`profiling_mode`]({% link docs/2.0/configuration/pragmas.md %}#profiling-mode)                                                                                                | Deprecated, has no effect                       | `standard`                                               | `standard`, `detailed`, `all`                                                                                                                                       |
 | [`tracked_metrics`]({% link docs/2.0/configuration/pragmas.md %}#custom-metrics)                                                                                               | Select which metrics to collect                 | `['*']` (all metrics)                                    | A list of metric glob patterns, e.g. `['query.*', 'optimizer.*']`. ([List of all available metrics]({% link docs/2.0/dev/metrics.md %}#all-metrics)) |
 | [`disable_profiling`]({% link docs/2.0/configuration/pragmas.md %}#disable-profiling), [`disable_profile`]({% link docs/2.0/configuration/pragmas.md %}#disable-profiling) | Turn off profiling                              |                                                          |                                                                                                                                                                    |
 
@@ -119,9 +119,8 @@ DuckDB supports a wide range of metrics that can be enabled or disabled independ
 
 ## Detailed Profiling
 
-When the `profiling_mode` is set to `detailed`, an extra set of metrics are enabled, which are only available in the `QUERY_ROOT` node.
-These include all the metrics in the [Phase timing]({% link docs/2.0/dev/metrics.md %}#phase_timing-metrics) metric group.
-It is possible to toggle each of these additional metrics individually.
+> Deprecated In DuckDB 2.0, the `profiling_mode` setting is deprecated and has no effect: detailed profiling information, such as the [`planner`]({% link docs/2.0/dev/metrics.md %}#planner-metrics) and [`optimizer`]({% link docs/2.0/dev/metrics.md %}#optimizer-metrics) metrics, is always collected.
+> To restrict the collected metrics, use the `tracked_metrics` setting.
 
 ## Query Graphs
 

@@ -8,48 +8,24 @@ redirect_from:
 title: Command Line
 ---
 
-## Attaching to HTTPS Databases in v1.5.2
+## Unexpected Markdown Output When Piping
 
-DuckDB 1.5.2 has a known issue where opening an HTTPS database directly from the command line fails with an error during httpfs extension autoloading:
-
-```bash
-duckdb https://blobs.duckdb.org/data/tpch-sf1.db
-```
-
-```console
-Extension Autoloading Error:
-An error occurred while trying to automatically install the required extension 'httpfs':
-Initialization function "httpfs_duckdb_cpp_init" from file ".../.duckdb/extensions/v1.5.2/osx_arm64/httpfs.duckdb_extension" threw an exception:
-"Schema with name main does not exist!"
-```
-
-To work around this, prefix the URL with `duckdb:`:
+If the output of the [command line client]({% link docs/2.0/clients/cli/overview.md %}) is piped to another process and an AI agent environment variable (such as `AI_AGENT`) is set, the CLI switches to [agent mode]({% link docs/2.0/clients/cli/agent_mode.md %}) and prints compact Markdown tables instead of the usual duckbox tables:
 
 ```bash
-duckdb duckdb:https://blobs.duckdb.org/data/tpch-sf1.db
+echo "SELECT 42 AS x;" | duckdb | cat
 ```
 
-## Piped Scripts Not Running in v1.5.0
-
-On Linux and macOS, DuckDB 1.5.0 has a known issue that the [command line client]({% link docs/2.0/clients/cli/overview.md %}) does not interpret piped scripts ([#21243](https://github.com/duckdb/duckdb/issues/21243)).
-
-To demonstrate the problem, create a `test.sql` file:
-
-```bash
-echo "SELECT 42 AS x;" > test.sql
+```text
+| x:INTEGER |
+|---|
+| 42 |
 ```
 
-Piping the file to the DuckDB 1.5.0 CLI client does not run the script:
+To turn off agent mode, use the `-no-agent` [command line argument]({% link docs/2.0/clients/cli/arguments.md %}) or set the `DUCKDB_AGENT_MODE` environment variable to `0`:
 
 ```bash
-duckdb < test.sql
-# does not run the script
-```
-
-To work around this, add `| cat` to the end of the call:
-
-```bash
-duckdb < test.sql | cat
+echo "SELECT 42 AS x;" | duckdb -no-agent | cat
 ```
 
 ```text
@@ -61,17 +37,4 @@ duckdb < test.sql | cat
 └───────┘
 ```
 
-If you are piping from a file, you can also use the [`-f` argument]({% link docs/2.0/clients/cli/arguments.md %}):
-
-```bash
-duckdb -f test.sql
-```
-
-```text
-┌───────┐
-│   x   │
-│ int32 │
-├───────┤
-│    42 │
-└───────┘
-```
+Passing an explicit [output mode]({% link docs/2.0/clients/cli/output_formats.md %}) flag, such as `-csv` or `-json`, also disables agent mode.

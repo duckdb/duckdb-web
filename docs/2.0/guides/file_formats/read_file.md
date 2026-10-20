@@ -66,12 +66,12 @@ DESCRIBE FROM read_text('README.md');
 
 <div class="monospace_table"></div>
 
-|  column_name  | column_type | null | key  | default | extra |
-|---------------|-------------|------|------|---------|-------|
-| filename      | VARCHAR     | YES  | NULL | NULL    | NULL  |
-| content       | VARCHAR     | YES  | NULL | NULL    | NULL  |
-| size          | BIGINT      | YES  | NULL | NULL    | NULL  |
-| last_modified | TIMESTAMP   | YES  | NULL | NULL    | NULL  |
+|  column_name  |       column_type        | null | key  | default | extra |
+|---------------|--------------------------|------|------|---------|-------|
+| filename      | VARCHAR                  | YES  | NULL | NULL    | NULL  |
+| content       | VARCHAR                  | YES  | NULL | NULL    | NULL  |
+| size          | BIGINT                   | YES  | NULL | NULL    | NULL  |
+| last_modified | TIMESTAMP WITH TIME ZONE | YES  | NULL | NULL    | NULL  |
 
 ## Hive Partitioning
 

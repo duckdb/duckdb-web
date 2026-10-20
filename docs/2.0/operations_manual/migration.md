@@ -27,8 +27,9 @@ We expect the most common source of issues to be the storage format, which is de
 
 ### Storage Format
 
-The DuckDB 2.0.0 storage format is _not backward compatible_ with earlier versions.
-A database file created or modified by v2.0.0 uses [storage version 69]({% link docs/2.0/internals/storage.md %}#storage-version-table), which older DuckDB versions cannot read.
+The DuckDB 2.0.0 storage format is _not forward compatible_: earlier DuckDB versions cannot read it.
+A database file created by v2.0.0 uses [storage version 69]({% link docs/2.0/internals/storage.md %}#storage-version-table), which older DuckDB versions cannot read.
+Existing database files created by an older version keep their storage version when v2.0.0 writes to them, so they remain readable by the older version.
 
 For example, creating a database with v2.0.0 and then opening it with v1.5.6 results in an error:
 
@@ -38,15 +39,14 @@ For example, creating a database with v2.0.0 and then opening it with v1.5.6 res
 ```
 
 ```console
-IO Error:
-Trying to read a database file with version number 69, but we can only read versions between 64 and 68.
+IO Error: Trying to read a database file with version number 69, but we can only read versions between 64 and 68.
 The database file was created with a newer version of DuckDB.
 
 Newer DuckDB version might introduce backward incompatible changes (possibly guarded by compatibility settings).
-See the storage page for migration strategy and more information: https://duckdb.org/docs/preview/internals/storage
+See the storage page for migration strategy and more information: https://duckdb.org/internals/storage
 ```
 
-> Warning In a deployment with many DuckDB processes running different versions, a single write by a v2.0.0 process can make a database file unreadable by the remaining older processes. Roll out the upgrade carefully and verify that every process that touches a shared database file is on a compatible version.
+> Warning In a deployment with many DuckDB processes running different versions, a database file created by a v2.0.0 process is unreadable by the remaining older processes. Roll out the upgrade carefully and verify that every process that touches a shared database file is on a compatible version.
 
 #### Writing Files for Older Versions
 
@@ -71,8 +71,6 @@ To move an existing database file to the v2.0.0 storage format, open it with the
 
 For details on this and other conversion methods, including `COPY FROM DATABASE`, see [How to Move between Storage Formats]({% link docs/2.0/internals/storage.md %}#how-to-move-between-storage-formats).
 
-> This section is tracking the following pull request: [duckdb#22875](https://github.com/duckdb/duckdb/pull/22875).
-
 ### Lambda Syntax
 
 DuckDB 2.0.0 completed the lambda syntax transition that began in [v1.3]({% post_url 2025-05-21-announcing-duckdb-130 %}).
@@ -94,8 +92,6 @@ SET lambda_syntax = 'enable_single_arrow';
 This flag is a temporary bridge: DuckDB 2.1 will remove it and the single arrow syntax entirely.
 For details, see [Deprecated Syntax]({% link docs/2.0/sql/functions/lambda.md %}#deprecated-syntax).
 
-> This section is tracking the following pull requests: [duckdb#22682](https://github.com/duckdb/duckdb/pull/22682), [duckdb#13389](https://github.com/duckdb/duckdb/pull/13389).
-
 ### SQL Parser
 
 DuckDB 2.0.0 replaced the PostgreSQL-derived parser with a new [PEG-based parser]({% link docs/2.0/sql/peg_parser.md %}).
@@ -112,15 +108,11 @@ LOAD legacy_parser;
 SET enable_legacy_parser = true;
 ```
 
-> This section is tracking the following pull request: [duckdb#22194](https://github.com/duckdb/duckdb/pull/22194), reported in issue [duckdb#7675](https://github.com/duckdb/duckdb/issues/7675).
-
 ### C API v2
 
 DuckDB 2.0.0 ships a revamped [C API]({% link docs/2.0/clients/c/overview.md %}#c-api-v2), which is considerably more powerful than its predecessor and exposes components such as file systems and table functions to extensions.
 The C API v2 is not yet stable: its interface may change in upcoming releases.
 For background on extension stability levels, see [Versioning of Extensions]({% link docs/2.0/extensions/versioning_of_extensions.md %}); for the C API reference, see the [C API page]({% link docs/2.0/clients/c/api.md %}).
-
-> This section is tracking the following pull requests: [duckdb#24702](https://github.com/duckdb/duckdb/pull/24702), [duckdb#24135](https://github.com/duckdb/duckdb/pull/24135), [duckdb#24435](https://github.com/duckdb/duckdb/pull/24435).
 
 ### ICU Removed from the Core Build
 
@@ -129,13 +121,43 @@ Time zones, calendars, and collations are now implemented natively by the [`icu`
 No query changes are required, but if you ship a custom build, note that ICU is no longer bundled.
 If you find that ICU's behavior changed, please [file an issue](https://github.com/duckdb/duckdb/issues).
 
-> This section is tracking the following pull requests: [duckdb#24463](https://github.com/duckdb/duckdb/pull/24463), [duckdb#24403](https://github.com/duckdb/duckdb/pull/24403).
+### Division by Zero
+
+Integer division (`//`) and modulo (`%`) by zero, e.g., `1 // 0` and `1 % 0`, now throw an error instead of returning `NULL`:
+
+```console
+Invalid Input Error: Division by zero in expression (1 // 0). Use TRY(...) to return NULL for this expression, or SET error_on_division_by_zero=false to return NULL for all divisions by zero.
+```
+
+To get `NULL` for a single expression, wrap it in `TRY`, e.g., `TRY(1 // 0)`.
+Regular division (`1 / 0`) still returns `inf`.
+
+### Identifier Case Setting
+
+The [`preserve_identifier_case` setting]({% link docs/2.0/configuration/overview.md %}) changed from a `BOOLEAN` to a `VARCHAR` with the values `'preserve_case'` (default), `'lowercase'` and `'uppercase'`.
+The old values `true` and `false` are still accepted and map to `'preserve_case'` and `'lowercase'`, respectively.
+
+### S3 URL Parameters
+
+Passing S3 settings as URL parameters (e.g., `s3://bucket/file.csv?s3_access_key_id=...`) is disabled by default: the `?` and the following text are now treated as part of the object key.
+Use [secrets]({% link docs/2.0/configuration/secrets_manager.md %}) instead or, if you need the legacy behavior, opt in with `SET s3_enable_deprecated_url_parameters = true` (available after loading the `httpfs` extension).
+
+### Removed and Deprecated Settings
+
+* The `custom_profiling_settings` setting was removed. Use `tracked_metrics` instead, see [Profiling]({% link docs/2.0/dev/profiling.md %}).
+* The `enable_http_logging` and `http_logging_output` settings were removed. Use `CALL enable_logging('HTTP')` instead, see [Logging]({% link docs/2.0/operations_manual/logging/overview.md %}).
+* The `profiling_mode` setting is deprecated and its value has no effect: detailed profiling information is always collected. Use `PRAGMA enable_profiling` to enable profiling.
+
+### Log Storage in the CLI
+
+Since v1.5.0, the CLI uses the `shell_log_storage` log storage by default, which prints warnings to the console but cannot be queried.
+To query logs via `duckdb_logs` in the CLI, enable logging with `CALL enable_logging(storage = 'memory')`. Clients other than the CLI still default to the `memory` log storage.
 
 ## What's New in v2.0
 
 Beyond the breaking changes above, DuckDB 2.0.0 added a large set of new features.
 Rather than repeat the feature documentation here, this section points to where each new feature is covered in full.
-For the complete tour, see the [preview announcement]({% post_url 2026-08-17-duckdb-20-highlights %}) and the detailed release announcement.
+For the complete tour, see the [preview announcement]({% post_url 2026-08-17-duckdb-20-highlights %}) and the [detailed release announcement]({% post_url 2026-10-21-announcing-duckdb-200 %}).
 The [What's New in the Docs for 2.0 page]({% link docs/2.0/whats_new_in_the_docs.md %}) links every high-level new feature to its documentation, organized by theme:
 
 * DuckDB as a server with the [`quack` extension]({% link docs/2.0/core_extensions/quack.md %}) and the [`CONNECT` statement]({% link docs/2.0/sql/statements/connect.md %})
@@ -144,7 +166,7 @@ The [What's New in the Docs for 2.0 page]({% link docs/2.0/whats_new_in_the_docs
 * SQL dialect additions, including [data-modifying CTEs]({% link docs/2.0/sql/query_syntax/with.md %}#data-modifying-ctes) and [nested schemas]({% link docs/2.0/sql/statements/create_schema.md %}#nested-schemas)
 * [Asynchronous I/O]({% link docs/2.0/data/io.md %}) for faster reads from object storage
 * Optimizer and engine improvements that speed up existing queries, including on Windows
-* Self-hostable [extension repositories]({% link docs/2.0/extensions/extension_distribution.md %}) for signing and distributing your own extensions
+* Self-hostable [extension repositories]({% link docs/2.0/extensions/extension_repositories.md %}) for signing and distributing your own extensions
 
 Several of the headline v2.0.0 changes are covered in [Breaking Changes](#breaking-changes) above: the new default [storage format](#storage-format), the [PEG-based SQL parser](#sql-parser), the revamped [C API v2](#c-api-v2), and the native timezone, calendar and collation support left after [ICU was removed from the core build](#icu-removed-from-the-core-build).
 

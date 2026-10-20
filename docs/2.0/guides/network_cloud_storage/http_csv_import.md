@@ -19,7 +19,7 @@ To load the `httpfs` extension for usage, use the `LOAD` SQL command:
 LOAD httpfs;
 ```
 
-After the `httpfs` extension is set up, CSV files can be read over `http(s)` the same way as a local file, using [`read_csv`]({% link docs/2.0/guides/file_formats/csv_import.md %}) (or `read_csv_auto` for older DuckDB versions):
+After the `httpfs` extension is set up, CSV files can be read over `http(s)` the same way as a local file, using [`read_csv`]({% link docs/2.0/guides/file_formats/csv_import.md %}):
 
 ```sql
 SELECT * FROM read_csv('https://⟨domain⟩/path/to/file.csv');
@@ -33,14 +33,14 @@ SELECT * FROM 'https://⟨domain⟩/path/to/file.csv';
 
 ## Example
 
-The following query reads an openly licensed (CC BY 4.0) real-world CSV directly from GitHub's raw file host and aggregates it, with no local download step:
+The following query reads an openly licensed (CC BY 4.0) real-world CSV directly over HTTP and aggregates it, with no local download step:
 
 ```sql
 SELECT
     area,
     round(avg(sunbed_price), 0) AS avg_sunbed_price_eur,
     count(*) AS clubs
-    FROM 'http://blobs.duckdb.org/data/beach-clubs.csv'
+FROM 'http://blobs.duckdb.org/data/beach-clubs.csv'
 WHERE sunbed_price IS NOT NULL
 GROUP BY area
 ORDER BY avg_sunbed_price_eur DESC;

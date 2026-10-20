@@ -2,7 +2,7 @@
 layout: docu
 redirect_from:
 - /docs/lakehouse_formats
-- /docs/stable/./lakehouse_formats
+- /docs/stable/lakehouse_formats
 - /docs/current/lakehouse_formats
 - /docs/lts/lakehouse_formats
 - /docs/preview/lakehouse_formats
@@ -23,8 +23,8 @@ DuckDB supports Iceberg, Delta, Lance and DuckLake as first-class citizens. The 
 | Deletes                      | ✅                                                                    | ✅                                                                      | ❌                                                         | ✅                                                         |
 | Updates                      | ✅                                                                    | ✅                                                                      | ❌                                                         | ✅                                                         |
 | Upserting                    | ✅                                                                    | ✅                                                                      | ❌                                                         | ✅                                                         |
-| Create table                 | ✅                                                                    | ✅                                                                      | ❌                                                         | ✅                                                         |
-| Create table with partitions | ✅                                                                    | ✅                                                                      | ❌                                                         | ❌                                                         |
+| Create table                 | ✅                                                                    | ✅                                                                      | ✅                                                        | ✅                                                         |
+| Create table with partitions | ✅                                                                    | ✅                                                                      | ✅                                                        | ❌                                                         |
 | Attaching to a catalog       | ✅                                                                    | ✅                                                                      | ✅ \*                                                      | ✅                                                         |
 | Rename table                 | ✅                                                                    | ✅                                                                      | ❌                                                         | ❌                                                         |
 | Rename columns               | ✅                                                                    | ✅                                                                      | ❌                                                         | ✅                                                         |
@@ -32,11 +32,13 @@ DuckDB supports Iceberg, Delta, Lance and DuckLake as first-class citizens. The 
 | Alter column type            | ✅                                                                    | ✅                                                                      | ❌                                                         | ✅                                                         |
 | Compaction and maintenance   | ✅                                                                    | ❌                                                                      | ❌                                                         | ✅                                                         |
 | Encryption                   | ✅                                                                    | ❌                                                                      | ❌                                                         | ❌                                                         |
-| Manage table properties      | ✅                                                                    | ✅                                                                      | ❌                                                         | ❌                                                         |
+| Manage table properties      | ✅                                                                    | ✅                                                                      | ✅ \*\*                                                   | ❌                                                         |
 | Time travel                  | ✅                                                                    | ✅                                                                      | ✅                                                         | ❌                                                         |
 | Query table changes          | ✅                                                                    | ❌                                                                      | ❌                                                         | ❌                                                         |
 
 \* Through the [`unity_catalog`](https://github.com/duckdb/unity_catalog) extension.
+
+\*\* Table properties can be set when creating the table but cannot be altered afterwards.
 
 DuckDB aims to build native extensions with minimal dependencies. The `iceberg` extension for example, has no dependencies on third-party Iceberg libraries, which means all data and metadata operations are implemented natively in the DuckDB extension. For the `delta` extension, we use the [`delta-kernel-rs` project](https://github.com/delta-io/delta-kernel-rs), which is meant to be a lightweight platform for engines to build delta integrations that are as close to native as possible.
 

@@ -33,9 +33,9 @@ PRAGMA version;
 
 <div class="monospace_table"></div>
 
-| library_version | source_id  |
-|-----------------|------------|
-| v{{ site.current_duckdb_version }} | {{ site.current_duckdb_hash }} |
+| library_version | source_id  | codename |
+|-----------------|------------|----------|
+| v{{ site.current_duckdb_version }} | {{ site.current_duckdb_hash }} | {{ site.current_duckdb_codename }} |
 
 ## Platform
 

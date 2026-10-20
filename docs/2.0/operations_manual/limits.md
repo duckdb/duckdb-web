@@ -22,7 +22,7 @@ To check the value of a setting on your system, use the `current_setting` functi
 | Memory allocation for a vector | 128 GB | - | |
 | Memory use | 80% of RAM | [`memory_limit`]({% link docs/2.0/configuration/pragmas.md %}#memory-limit) | Note: This limit only applies to the buffer manager. |
 | String size | 4 GB | - | |
-| Temporary directory size | unlimited | [`max_temp_directory_size`]({% link docs/2.0/configuration/overview.md %}) | |
+| Temporary directory size | 90% of available disk space | [`max_temp_directory_size`]({% link docs/2.0/configuration/overview.md %}) | |
 
 ## Size of Database Files
 

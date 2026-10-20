@@ -51,7 +51,7 @@ LOAD httpfs;
 ATTACH '⟨warehouse⟩' AS iceberg_catalog (
    TYPE iceberg,
    SECRET iceberg_secret, -- pass a specific secret name to prevent ambiguity
-   ENDPOINT '⟨https://rest_endpoint.com⟩'
+    URI '⟨https://rest_endpoint.com⟩'
 );
 ```
 
@@ -97,7 +97,7 @@ ATTACH '⟨s3_tables_arn⟩' AS my_s3_tables_catalog (
 );
 ```
 
-> Warning `ENDPOINT_TYPE s3_tables` always builds an endpoint of the form `s3tables.⟨region⟩.amazonaws.com/iceberg`. This is incorrect for any region whose endpoint does not use the plain `amazonaws.com` suffix — most notably the AWS China regions (`cn-north-1`, `cn-northwest-1`), which use `amazonaws.com.cn`. For such regions, attach the catalog by passing an explicit `ENDPOINT` (with the correct host for your region) together with `AUTHORIZATION_TYPE 'sigv4'`, instead of using `ENDPOINT_TYPE`.
+> Warning `ENDPOINT_TYPE s3_tables` always builds an endpoint of the form `s3tables.⟨region⟩.amazonaws.com/iceberg`. This is incorrect for any region whose endpoint does not use the plain `amazonaws.com` suffix — most notably the AWS China regions (`cn-north-1`, `cn-northwest-1`), which use `amazonaws.com.cn`. For such regions, attach the catalog by passing an explicit `URI` (with the correct host for your region) together with `AUTHORIZATION_TYPE 'sigv4'`, instead of using `ENDPOINT_TYPE`.
 
 To check whether the attachment worked, list all tables:
 
@@ -135,7 +135,7 @@ Then, connect to the catalog:
 ```sql
 ATTACH '⟨account_id⟩' AS glue_catalog (
     TYPE iceberg,
-    ENDPOINT 'glue.⟨REGION⟩.amazonaws.com/iceberg',
+    URI 'glue.⟨region⟩.amazonaws.com/iceberg',
     AUTHORIZATION_TYPE 'sigv4'
 );
 ```
@@ -149,7 +149,7 @@ ATTACH '⟨account_id⟩' AS glue_catalog (
 );
 ```
 
-> Warning As with [Amazon S3 Tables](#amazon-s3-tables), `ENDPOINT_TYPE glue` always builds an endpoint of the form `glue.⟨region⟩.amazonaws.com/iceberg`, which is incorrect for regions that do not use the plain `amazonaws.com` suffix (most notably the AWS China regions `cn-north-1` and `cn-northwest-1`, which use `amazonaws.com.cn`). For such regions, attach with an explicit `ENDPOINT` (with the correct host) together with `AUTHORIZATION_TYPE 'sigv4'` instead of using `ENDPOINT_TYPE`.
+> Warning As with [Amazon S3 Tables](#amazon-s3-tables), `ENDPOINT_TYPE glue` always builds an endpoint of the form `glue.⟨region⟩.amazonaws.com/iceberg`, which is incorrect for regions that do not use the plain `amazonaws.com` suffix (most notably the AWS China regions `cn-north-1` and `cn-northwest-1`, which use `amazonaws.com.cn`). For such regions, attach with an explicit `URI` (with the correct host) together with `AUTHORIZATION_TYPE 'sigv4'` instead of using `ENDPOINT_TYPE`.
 
 The warehouse identifier (the first argument to `ATTACH`) accepts the following forms:
 
@@ -208,7 +208,7 @@ You can create a token by following the [create an API token](https://developers
 ```sql
 ATTACH '⟨warehouse⟩' AS my_r2_catalog (
     TYPE iceberg,
-    ENDPOINT '⟨catalog-uri⟩'
+    URI '⟨catalog-uri⟩'
 );
 ```
 
@@ -236,7 +236,7 @@ CREATE SECRET polaris_secret (
 ```sql
 ATTACH 'quickstart_catalog' AS polaris_catalog (
     TYPE iceberg,
-    ENDPOINT '⟨polaris_rest_catalog_endpoint⟩',
+    URI '⟨polaris_rest_catalog_endpoint⟩',
     ACCESS_DELEGATION_MODE 'vended_credentials'
 );
 ```
@@ -258,7 +258,7 @@ CREATE SECRET lakekeeper_secret (
 ```sql
 ATTACH '⟨warehouse⟩' AS lakekeeper_catalog (
     TYPE iceberg,
-    ENDPOINT '⟨lakekeeper_irc_url⟩',
+    URI '⟨lakekeeper_irc_url⟩',
     SECRET '⟨lakekeeper_secret⟩'
 );
 ```
@@ -290,7 +290,7 @@ CREATE SECRET seaweedfs_storage (
 ```sql
 ATTACH '⟨table_bucket_name⟩' AS seaweedfs_catalog (
     TYPE iceberg,
-    ENDPOINT 'http://⟨seaweedfs_host⟩:8181',
+    URI 'http://⟨seaweedfs_host⟩:8181',
     SECRET seaweedfs_secret
 );
 ```
@@ -337,7 +337,7 @@ Attach to the BigLake catalog:
 ```sql
 ATTACH '⟨gs://your-biglake-bucket⟩' AS biglake_catalog (
     TYPE iceberg,
-    ENDPOINT 'https://biglake.googleapis.com/iceberg/v1/restcatalog',
+    URI 'https://biglake.googleapis.com/iceberg/v1/restcatalog',
     SECRET biglake_secret
 );
 ```
@@ -355,7 +355,7 @@ CREATE SECRET biglake_public_secret (
 
 ATTACH 'gs://biglake-public-nyc-taxi-iceberg' AS biglake_public (
     TYPE iceberg,
-    ENDPOINT 'https://biglake.googleapis.com/iceberg/v1/restcatalog',
+    URI 'https://biglake.googleapis.com/iceberg/v1/restcatalog',
     SECRET biglake_public_secret
 );
 
@@ -381,7 +381,7 @@ For example, to attach a [Unity Catalog Horizon](https://docs.unitycatalog.io) e
 ```sql
 ATTACH '⟨warehouse⟩' AS horizon_catalog (
     TYPE iceberg,
-    ENDPOINT '⟨catalog_endpoint⟩',
+    URI '⟨catalog_endpoint⟩',
     STAGE_CREATE_TABLES false,
     DISABLE_MULTI_TABLE_COMMIT true,
     SKIP_CREATE_TABLE_METADATA_UPDATES true,

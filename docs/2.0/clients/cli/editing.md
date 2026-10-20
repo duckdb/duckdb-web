@@ -26,25 +26,25 @@ DuckDB's CLI uses a line-editing library based on [linenoise](https://github.com
 | `End`          | Move to end of buffer                                                  |
 | `Ctrl`+`Left`  | Move back a word                                                       |
 | `Ctrl`+`Right` | Move forward a word                                                    |
-| `Ctrl`+`A`     | Move to beginning of buffer                                            |
+| `Ctrl`+`A`     | Move to beginning of line                                              |
 | `Ctrl`+`B`     | Move back a character                                                  |
-| `Ctrl`+`E`     | Move to end of buffer                                                  |
+| `Ctrl`+`E`     | Move to end of line                                                    |
 | `Ctrl`+`F`     | Move forward a character                                               |
 | `Alt`+`Left`   | Move back a word                                                       |
 | `Alt`+`Right`  | Move forward a word                                                    |
 
 ## History
 
-| Key        | Action                         |
-| ---------- | ------------------------------ |
-| `Ctrl`+`P` | Move to previous history entry |
-| `Ctrl`+`N` | Move to next history entry     |
-| `Ctrl`+`R` | Search the history             |
-| `Ctrl`+`S` | Search the history             |
-| `Alt`+`<`  | Move to first history entry    |
-| `Alt`+`>`  | Move to last history entry     |
-| `Alt`+`N`  | Search the history             |
-| `Alt`+`P`  | Search the history             |
+| Key           | Action                         |
+| ------------- | ------------------------------ |
+| `Ctrl`+`P`    | Move to previous history entry |
+| `Ctrl`+`N`    | Move to next history entry     |
+| `Ctrl`+`R`    | Reverse search the history     |
+| `Ctrl`+`S`    | Forward search the history     |
+| `Ctrl`+`Up`   | Move to first history entry    |
+| `Ctrl`+`Down` | Move to last history entry     |
+| `Alt`+`N`     | Search the history             |
+| `Alt`+`P`     | Search the history             |
 
 ## Changing Text
 
@@ -55,14 +55,14 @@ DuckDB's CLI uses a line-editing library based on [linenoise](https://github.com
 | `Ctrl`+`D`        | Delete next character. When buffer is empty, end editing |
 | `Ctrl`+`H`        | Delete previous character                                |
 | `Ctrl`+`K`        | Delete everything after the cursor                       |
-| `Ctrl`+`T`        | Swap current and next character                          |
+| `Ctrl`+`T`        | Swap character under cursor with previous character      |
 | `Ctrl`+`U`        | Delete all text                                          |
 | `Ctrl`+`W`        | Delete previous word                                     |
 | `Alt`+`C`         | Convert next word to titlecase                           |
 | `Alt`+`D`         | Delete next word                                         |
 | `Alt`+`L`         | Convert next word to lowercase                           |
 | `Alt`+`R`         | Delete all text                                          |
-| `Alt`+`T`         | Swap current and next word                               |
+| `Alt`+`T`         | Swap current word with previous word                     |
 | `Alt`+`U`         | Convert next word to uppercase                           |
 | `Alt`+`Backspace` | Delete previous word                                     |
 | `Alt`+`\`         | Delete spaces around cursor                              |
@@ -81,8 +81,8 @@ DuckDB's CLI uses a line-editing library based on [linenoise](https://github.com
 | ---------------------- | ---------------------------------------------------------------------------------- |
 | `Enter`                | Execute query. If query is not complete, insert a newline at the end of the buffer |
 | `Ctrl`+`J`             | Execute query. If query is not complete, insert a newline at the end of the buffer |
-| `Ctrl`+`C`             | Cancel editing of current query                                                    |
-| `Ctrl`+`G`             | Cancel editing of current query                                                    |
+| `Ctrl`+`C`             | Cancel editing of current query or interrupt the currently running query           |
+| `Ctrl`+`G`             | Execute query. If query is not complete, terminate it with `;` and execute it      |
 | `Ctrl`+`L`             | Clear screen                                                                       |
 | `Ctrl`+`O`             | Cancel editing of current query                                                    |
 | `Ctrl`+`X`             | Insert a newline after the cursor                                                  |

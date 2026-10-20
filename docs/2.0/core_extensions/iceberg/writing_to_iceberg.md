@@ -167,7 +167,7 @@ ALTER TABLE iceberg_catalog.default.events
 
 The `bucket` and `truncate` transforms are also available as the [`iceberg_bucket` and `iceberg_truncate` functions]({% link docs/2.0/core_extensions/iceberg/iceberg_functions.md %}#partition-transform-functions).
 
-> The `write.target-file-size-bytes` and `write.parquet.row-group-size-bytes` table properties are not supported for partitioned tables and raise an error. To ignore them instead, set the [`ignore_target_file_size_for_partitioned_tables` and `ignore_row_group_size_for_partitioned_tables` settings]({% link docs/2.0/core_extensions/iceberg/iceberg_options.md %}#settings) to `true`.
+> The `write.target-file-size-bytes` and `write.parquet.row-group-size-bytes` table properties are honored for both partitioned and unpartitioned tables. Files are rotated at row-group boundaries, so if the row-group size exceeds the target file size, DuckDB caps the row-group size to the target file size.
 
 ## Iceberg V3 Support
 

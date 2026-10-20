@@ -158,6 +158,29 @@ MERGE INTO target
 
 There is also the possibility of specifying `WHEN NOT MATCHED BY TARGET`. However, the behavior is, as you may expect, the same as `WHEN NOT MATCHED` since by default when specifying conditions, we look at the target.
 
+### Multiple Matching Source Rows
+
+A `MERGE INTO` statement may not affect the same target row more than once. If a target row matches multiple source rows and a `WHEN MATCHED` clause applies (e.g., `UPDATE` or `DELETE`), the statement throws an error:
+
+```sql
+CREATE TABLE target (id INTEGER, v INTEGER);
+INSERT INTO target VALUES (1, 0);
+CREATE TABLE source (id INTEGER, v INTEGER);
+INSERT INTO source VALUES (1, 10), (1, 20);
+
+MERGE INTO target
+    USING source
+    ON target.id = source.id
+    WHEN MATCHED THEN UPDATE SET v = source.v;
+```
+
+```console
+Invalid Input Error:
+MERGE INTO command cannot affect the same target row more than once. A target row matched more than one source row; ensure the source rows are deduplicated or the ON condition is unique.
+```
+
+To avoid this, deduplicate the source rows or make the `ON` condition unique. Note that this differs from [`UPDATE ... FROM`]({% link docs/2.0/sql/statements/update.md %}#multiple-matching-source-rows), which uses an arbitrary matching source row.
+
 ## Syntax
 
 <div id="rrdiagram"></div>

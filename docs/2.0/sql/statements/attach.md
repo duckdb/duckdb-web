@@ -127,21 +127,22 @@ ATTACH 's3://⟨blobs-duckdb⟩/databases/stations.duckdb' AS stations_db (READ_
 ### Explicit Storage Versions
 
 [DuckDB 1.2.0 introduced the `STORAGE_VERSION` option]({% post_url 2025-02-05-announcing-duckdb-120 %}#explicit-storage-versions), which allows explicitly specifying the storage version.
-Using this, you can opt-in to newer forwards-incompatible features:
-
-```sql
-ATTACH 'file.db' (STORAGE_VERSION 'v1.2.0');
-```
-
 This setting specifies the minimum DuckDB version that should be able to read the database file. When database files are written with this option, the resulting files cannot be opened by older DuckDB versions than the specified version. They can be read by the specified version and all newer versions of DuckDB.
 
-To initialize a database with the latest storage version, use:
+Since DuckDB 2.0.0, new database files use the latest storage version by default (equivalent to `STORAGE_VERSION 'latest'`), so they cannot be read by older DuckDB versions. Therefore, the main use of this option is to create database files that remain readable by older DuckDB versions:
 
 ```sql
-ATTACH 'file.db' (STORAGE_VERSION 'latest');
+ATTACH 'file.db' (STORAGE_VERSION 'v1.5.0');
 ```
 
-For more details, see the [“Storage” page]({% link docs/2.0/internals/storage.md %}#explicit-storage-versions).
+You can check the storage version of attached databases using the `tags` column of the `duckdb_databases()` function:
+
+```sql
+SELECT database_name, tags
+FROM duckdb_databases();
+```
+
+For more information on upgrading to DuckDB 2.0.0, see the [migration guide]({% link docs/2.0/operations_manual/migration.md %}#storage-format). For more details on storage versions, see the [“Storage” page]({% link docs/2.0/internals/storage.md %}#explicit-storage-versions).
 
 ### Database Encryption
 
@@ -207,7 +208,7 @@ Zero or more copy options may be provided within parentheses following the `ATTA
 | `DEFAULT_TABLE`     | The table that is queried when the attached database is referenced directly by its catalog name (e.g., `FROM ⟨db⟩`).        | `VARCHAR` | -             |
 | `BLOCK_SIZE`        | The block size of a new database file. Must be a power of two and within [16384, 262144]. Cannot be set for existing files. | `UBIGINT` | `262144`      |
 | `ROW_GROUP_SIZE`    | The row group size of a new database file.                                                                                  | `UBIGINT` | `122880`      |
-| `STORAGE_VERSION`   | The version of the storage used.                                                                                            | `VARCHAR` | `v1.0.0`      |
+| `STORAGE_VERSION`   | The version of the storage used.                                                                                            | `VARCHAR` | `latest`      |
 | `ENCRYPTION_KEY`    | The encryption key used for encrypting the database.                                                                        | `VARCHAR` | -             |
 | `ENCRYPTION_CIPHER` | The encryption cipher used for encrypting the database (`CBC`, `CTR` or `GCM`).                                             | `VARCHAR` | -             |
 | `RECOVERY_MODE`     | Recovery mode for the database. `no_wal_writes` disables WAL writes, improving performance at the cost of crash recovery.   | `VARCHAR` | -             |

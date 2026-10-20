@@ -54,7 +54,7 @@ The parameters set by using the `S3_TABLES` `ENDPOINT_TYPE` are:
 | ------------------------ | -------------------------------------------------------------------------------------------------------------------------------------- |
 | `AUTHORIZATION_TYPE`     | `SIGV4`                                                                                                                                |
 | `SIGV4_REGION`           | The `REGION` section of the [ARN](https://docs.aws.amazon.com/IAM/latest/UserGuide/reference-arns.html) provided as the `ATTACH` path. |
-| `ENDPOINT`               | `⟨REGION⟩.s3tables.amazonaws.com/iceberg`{:.language-sql .highlight}                                                                   |
+| `URI`                    | `s3tables.⟨region⟩.amazonaws.com/iceberg`{:.language-sql .highlight}                                                                   |
 | `REMOVE_FILES_ON_DELETE` | `false` (unless explicitly set)                                                                                                        |
 | `STAGE_CREATE_TABLES`    | `false` (unless explicitly set)                                                                                                        |
 | `PURGE_REQUESTED`        | `true` (unless explicitly set)                                                                                                         |
@@ -67,7 +67,7 @@ The parameters set by using the `GLUE` `ENDPOINT_TYPE` are:
 | Parameter                | Value                                                                                                     |
 | ------------------------ | --------------------------------------------------------------------------------------------------------- |
 | `AUTHORIZATION_TYPE`     | `SIGV4`                                                                                                   |
-| `ENDPOINT`               | `⟨REGION⟩.glue.amazonaws.com/iceberg`{:.language-sql .highlight} using the region from the found `SECRET` |
+| `URI`                    | `glue.⟨region⟩.amazonaws.com/iceberg`{:.language-sql .highlight} using the region from the found `SECRET` |
 | `REMOVE_FILES_ON_DELETE` | `false` (unless explicitly set)                                                                           |
 | `STAGE_CREATE_TABLES`    | `false` (unless explicitly set)                                                                           |
 | `PURGE_REQUESTED`        | `true` (unless explicitly set)                                                                            |
@@ -102,8 +102,8 @@ The additional parameters that can be provided when the `AUTHORIZATION_TYPE` is 
 | Parameter            | Type                    | Default | Description                                                                                    |
 | -------------------- | ----------------------- | ------- | ---------------------------------------------------------------------------------------------- |
 | `SECRET`             | `VARCHAR`               | `NULL`  | The `S3` or `AWS` `SECRET` to use for signing.                                                 |
-| `SIGV4_SERVICE`      | `VARCHAR`               | `NULL`  | Override the `SERVICE` for signing requests, otherwise inferred from the `ENDPOINT` parameter. |
-| `SIGV4_REGION`       | `VARCHAR`               | `NULL`  | Override the `REGION` for signing requests, otherwise inferred from the `ENDPOINT` parameter.  |
+| `SIGV4_SERVICE`      | `VARCHAR`               | `NULL`  | Override the `SERVICE` for signing requests, otherwise inferred from the `URI` parameter. |
+| `SIGV4_REGION`       | `VARCHAR`               | `NULL`  | Override the `REGION` for signing requests, otherwise inferred from the `URI` parameter.  |
 
 #### `ICEBERG` `SECRET` Options
 
@@ -115,12 +115,13 @@ When such an `ICEBERG` SECRET exists it can be inferred by subsequent ATTACH sta
 | Setting                          | Type      | Default | Description                                                                                      |
 | -------------------------------- | --------- | ------- | ------------------------------------------------------------------------------------------------ |
 | `unsafe_enable_version_guessing` | `BOOLEAN` | `false` | Allows the extension to guess the latest metadata version when no version or hint file is given. |
-| `iceberg_default_format_version` | `INTEGER` | `2` | Sets the default format_version to use when creating a new table. |
+| `iceberg_default_format_version` | `UBIGINT` | `2` | The Iceberg format version used when creating a new table without an explicit `format-version` property. Valid values are `2` and `3`. |
 | `iceberg_unsafe_skip_puffin_verification` | `BOOLEAN` | `false` | When reading V3 Deletion Vectors, skip the Puffin file verification (for compatibility with files written by older versions). |
 | `iceberg_use_metadata_log` | `BOOLEAN` | `true` | Use a table's optional `metadata-log` to preserve atomicity guarantees, at the cost of an additional metadata `GET` request in rare cases. |
-| `ignore_target_file_size_for_partitioned_tables` | `BOOLEAN` | `false` | Ignore the unsupported `write.target-file-size-bytes` table property on partitioned tables instead of raising an error. |
-| `ignore_row_group_size_for_partitioned_tables` | `BOOLEAN` | `false` | Ignore the unsupported `write.parquet.row-group-size-bytes` table property on partitioned tables instead of raising an error. |
-| `iceberg_via_aws_sdk_for_catalog_interactions` | `BOOLEAN` | `false` | Use the legacy AWS SDK code path to interact with AWS-based catalogs instead of DuckDB's HTTP client. |
+| `iceberg_equality_delete_fast_filter` | `BOOLEAN` | `true` | Apply equality deletes on byte-comparable types through a shared columnar hash filter instead of a bound expression per delete row. Unsupported types fall back to the expression-based path. |
+| `iceberg_metadata_log_clock_skew_ms` | `BIGINT` | `0` | Clock-skew allowance in milliseconds when `iceberg_use_metadata_log` is enabled. Table metadata written up to this long after the transaction start is considered visible. Set to `0` for strict timestamp comparisons. |
+| `iceberg_use_server_side_scan_planning` | `BOOLEAN` | `false` | Use the REST Catalog's server-side scan planning endpoint (if the catalog provides it) instead of planning the scan in DuckDB. |
+| `iceberg_logging_post_body_truncate_limit` | `UBIGINT` | `10000` | Maximum number of characters of a REST Catalog `POST` request body to include in Iceberg log messages. Longer bodies are truncated with a trailing `... (truncated)` marker. Set to `0` to omit the body. |
 
 
 ## Scan Options
@@ -130,10 +131,10 @@ The following parameters can be passed to `iceberg_scan`, `iceberg_column_stats`
 | Parameter                    | Type        | Default                                    | Description                                                |
 | ---------------------------- | ----------- | ------------------------------------------ | ---------------------------------------------------------- |
 | `allow_moved_paths`          | `BOOLEAN`   | `false`                                    | Allows scanning Iceberg tables that are moved              |
-| `metadata_compression_codec` | `VARCHAR`   | `''`                                       | Treats metadata files as when set to `'gzip'`              |
+| `metadata_compression_codec` | `VARCHAR`   | `''`                                       | Treats metadata files as gzip-compressed when set to `'gzip'` |
 | `snapshot_from_id`           | `UBIGINT`   | `NULL`                                     | Access snapshot with a specific `id`                       |
 | `snapshot_from_timestamp`    | `TIMESTAMP` | `NULL`                                     | Access snapshot with a specific `timestamp`                |
-| `version`                    | `VARCHAR`   | `'?'`                                      | Provides an explicit version string, hint file or guessing |
+| `version`                    | `VARCHAR`   | `NULL` (use `version-hint.text`)           | Provides an explicit version string, a version hint file, or `'?'` to guess the latest version (see [Selecting Metadata Versions](#selecting-metadata-versions)) |
 | `version_name_format`        | `VARCHAR`   | `'v%s%s.metadata.json,%s%s.metadata.json'` | Controls how versions are converted to metadata file names |
 
 > `iceberg_snapshots` does not take `allow_moved_paths`, `snapshot_from_id` or `snapshot_from_timestamp` as parameters.
@@ -169,7 +170,7 @@ Note that the entire content of the `version-hint.txt` file will be treated as a
 
 ## Working with Alternative Metadata Naming Conventions
 
-The `iceberg` extension can handle different metadata naming conventions by specifying them as a comma-delimited list of format strings via the `version_name_format` parameter. Each format string must contain two `%s` parameters. The first is the location of the version number in the metadata filename and the second is the location of the filename extension specified by the `metadata_compression_codec`. The behavior described above is provided by the default value of `"v%s%s.metadata.gz,%s%smetadata.gz`.
+The `iceberg` extension can handle different metadata naming conventions by specifying them as a comma-delimited list of format strings via the `version_name_format` parameter. Each format string must contain two `%s` parameters. The first is the location of the version number in the metadata filename and the second is the location of the filename extension specified by the `metadata_compression_codec`. The behavior described above is provided by the default value `v%s%s.metadata.json,%s%s.metadata.json`.
 If you had an alternatively named metadata file, e.g., `rev-2.metadata.json.gz`, the table can be read via the follow statement:
 
 ```sql

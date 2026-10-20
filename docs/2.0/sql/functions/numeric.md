@@ -66,11 +66,13 @@ The table below shows the available mathematical functions.
 | [`atan(x)`](#atanx) | Computes the inverse tangent of `x`. |
 | [`atanh(x)`](#atanhx) | Computes the inverse hyperbolic tangent of `x`. |
 | [`atan2(y, x)`](#atan2y-x) | Computes the inverse tangent of `(y, x)`. |
+| [`binom(n, k)`](#binomn-k) | Computes the binomial coefficient of `n` and `k`, i.e., the number of ways to choose `k` elements from a set of `n` elements. Returns a `HUGEINT`. |
 | [`bit_count(x)`](#bit_countx) | Returns the number of bits that are set. |
 | [`cbrt(x)`](#cbrtx) | Returns the cube root of the number. |
 | [`ceil(x)`](#ceilx) | Rounds the number up. |
 | [`ceiling(x)`](#ceilingx) | Rounds the number up. Alias of `ceil`. |
 | [`cos(x)`](#cosx) | Computes the cosine of `x`. |
+| [`cosh(x)`](#coshx) | Computes the hyperbolic cosine of `x`. |
 | [`cot(x)`](#cotx) | Computes the cotangent of `x`. |
 | [`decimal_division(x, y)`](#decimal_divisionx-y) | Divides `x` by `y` using exact decimal arithmetic, returning a `DECIMAL`. |
 | [`degrees(x)`](#degreesx) | Converts radians to degrees. |
@@ -110,9 +112,11 @@ The table below shows the available mathematical functions.
 | [`sign(x)`](#signx) | Returns the sign of `x` as -1, 0 or 1. |
 | [`signbit(x)`](#signbitx) | Returns whether the signbit is set or not. |
 | [`sin(x)`](#sinx) | Computes the sin of `x`. |
+| [`sinh(x)`](#sinhx) | Computes the hyperbolic sine of `x`. |
 | [`sqrt(x)`](#sqrtx) | Returns the square root of the number. |
 | [`subtract(x, y)`](#subtractx-y) | Alias for `x - y`. |
 | [`tan(x)`](#tanx) | Computes the tangent of `x`. |
+| [`tanh(x)`](#tanhx) | Computes the hyperbolic tangent of `x`. |
 | [`trunc(x)`](#truncx) | Truncates the number. |
 | [`xor(x, y)`](#xorx-y) | Bitwise XOR. |
 
@@ -198,6 +202,14 @@ The table below shows the available mathematical functions.
 | **Example** | `atan2(0.5, 0.5)` |
 | **Result** | `0.7853981633974483` |
 
+#### `binom(n, k)`
+
+<div class="nostroke_table"></div>
+
+| **Description** | Computes the binomial coefficient of `n` and `k`, i.e., the number of ways to choose `k` elements from a set of `n` elements. Returns a `HUGEINT`. |
+| **Example** | `binom(5, 2)` |
+| **Result** | `10` |
+
 #### `bit_count(x)`
 
 <div class="nostroke_table"></div>
@@ -237,6 +249,14 @@ The table below shows the available mathematical functions.
 | **Description** | Computes the cosine of `x`. |
 | **Example** | `cos(pi() / 3)` |
 | **Result** | `0.5000000000000001 ` |
+
+#### `cosh(x)`
+
+<div class="nostroke_table"></div>
+
+| **Description** | Computes the hyperbolic cosine of `x`. |
+| **Example** | `cosh(1)` |
+| **Result** | `1.5430806348152437` |
 
 #### `cot(x)`
 
@@ -553,6 +573,14 @@ The table below shows the available mathematical functions.
 | **Example** | `sin(pi() / 6)` |
 | **Result** | `0.49999999999999994` |
 
+#### `sinh(x)`
+
+<div class="nostroke_table"></div>
+
+| **Description** | Computes the hyperbolic sine of `x`. |
+| **Example** | `sinh(1)` |
+| **Result** | `1.1752011936438014` |
+
 #### `sqrt(x)`
 
 <div class="nostroke_table"></div>
@@ -576,6 +604,14 @@ The table below shows the available mathematical functions.
 | **Description** | Computes the tangent of `x`. |
 | **Example** | `tan(pi() / 4)` |
 | **Result** | `0.9999999999999999` |
+
+#### `tanh(x)`
+
+<div class="nostroke_table"></div>
+
+| **Description** | Computes the hyperbolic tangent of `x`. |
+| **Example** | `tanh(1)` |
+| **Result** | `0.7615941559557649` |
 
 #### `trunc(x)`
 

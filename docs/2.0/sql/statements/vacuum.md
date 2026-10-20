@@ -50,13 +50,11 @@ FULL is not yet implemented
 
 ## Vacuum with Indexes
 
-> Warning This feature is experimental.
+> New Starting with DuckDB 2.0, checkpoint vacuuming also compacts tables with ART indexes.
 
-By default, `VACUUM` skips tables that have ART indexes. The `vacuum_rebuild_indexes` setting enables vacuum to compact row groups on tables with indexes by rebuilding the indexes afterward. The setting specifies a row count threshold: tables exceeding the threshold are skipped. Set to `0` to disable (the default).
+When a checkpoint vacuums (compacts) row groups, the row IDs of the moved rows change. On databases using [storage version]({% link docs/2.0/internals/storage.md %}) 2.0.0 or later, DuckDB incrementally remaps the affected ART index entries to the new row IDs, so tables with ART indexes (including those created by `PRIMARY KEY` and `UNIQUE` constraints) are vacuumed by default and no full index rebuild is required.
 
-```sql
-SET vacuum_rebuild_indexes = 1000000;
-```
+On databases using an older storage version, the row IDs cannot be remapped, so tables with indexes are skipped by checkpoint vacuuming. For such databases, the deprecated `vacuum_rebuild_indexes` setting provides a fallback: it specifies a maximum table row count up to which the indexes are rebuilt after vacuuming (the default, `0`, disables the fallback). It can only be set before the database is started or per database as an `ATTACH` option.
 
 ## Reclaiming Space
 

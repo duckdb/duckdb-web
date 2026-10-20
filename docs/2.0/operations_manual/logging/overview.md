@@ -21,10 +21,12 @@ named `duckdb_logs`, which can be queried like any standard table.
 Example:
 
 ```sql
-CALL enable_logging();
+CALL enable_logging(storage = 'memory');
 -- Run some queries...
 SELECT * FROM duckdb_logs;
 ```
+
+> In the [CLI client]({% link docs/2.0/clients/cli/overview.md %}), the default log storage is `shell_log_storage`, which prints log messages to the console but does not support querying. Therefore, the example above passes `storage = 'memory'`. In other clients, the default log storage is `memory`, so `CALL enable_logging();` suffices. See [Log Storages](#log-storages) for details.
 
 To disable logging, run
 
@@ -42,8 +44,9 @@ CALL truncate_duckdb_logs();
 
 DuckDB supports different logging levels that control the verbosity of the logs:
 
-* `ERROR`: Only logs error messages
-* `WARN`: Logs warnings and errors
+* `FATAL`: Only logs fatal errors
+* `ERROR`: Logs error messages
+* `WARNING`: Logs warnings and errors
 * `INFO`: Logs general information, warnings and errors (default)
 * `DEBUG`: Logs detailed debugging information
 * `TRACE`: Logs very detailed tracing information
@@ -56,17 +59,19 @@ CALL enable_logging(level = 'debug');
 
 ## Warnings
 
-DuckDB emits warnings, for example when you use deprecated syntax or a deprecated setting, through the logging system at the `WARN` level. In the CLI, warnings are printed by default. To capture them from any client, or to inspect them after the fact, enable logging and query the `duckdb_logs` view, filtering on the log level:
+DuckDB emits warnings, for example when you use deprecated syntax or a deprecated setting, through the logging system at the `WARNING` level. In the CLI, warnings are printed by default. To capture them from any client, or to inspect them after the fact, enable logging and query the `duckdb_logs` view, filtering on the log level:
 
 ```sql
-CALL enable_logging(level = 'warn');
+CALL enable_logging(level = 'warning', storage = 'memory');
 -- Run some queries that may emit warnings...
 SELECT timestamp, message
 FROM duckdb_logs
-WHERE level = 'WARN';
+WHERE log_level = 'WARNING';
 ```
 
-The default log level is `INFO`, which already includes warnings, so calling `enable_logging()` without a `level` also captures warnings. Setting `level = 'warn'` excludes lower-severity `INFO` messages.
+The default log level is `INFO`, which already includes warnings, so calling `enable_logging()` without a `level` also captures warnings. Setting `level = 'warning'` excludes lower-severity `INFO` messages.
+
+> Note Switching the CLI to a log storage other than `shell_log_storage` means that warnings are no longer printed to the console. To restore the default behavior, run `CALL enable_logging(storage = 'shell_log_storage')`.
 
 ## Log Types
 
@@ -134,14 +139,21 @@ The structured log types expose the following schemas, which you can inspect at 
 
 ## Log Storages
 
-By default, DuckDB logs to an in-memory log storage (`memory`). DuckDB supports different types of log storage. Currently,
+By default, DuckDB logs to an in-memory log storage (`memory`), except in the CLI client, which uses `shell_log_storage`. DuckDB supports different types of log storage. Currently,
 the following log storage types are implemented in core DuckDB.
 
-| Log storage | Description                                               |
-|-------------|-----------------------------------------------------------|
-| `memory`    | (default) Log to an in-memory buffer                      |
-| `stdout`    | Log to the stdout of the current process (in CSV format)  |
-| `file`      | Log to (a) csv file(s)                                    |
+| Log storage         | Description                                                               |
+|---------------------|---------------------------------------------------------------------------|
+| `memory`            | Log to an in-memory buffer (default in clients other than the CLI)        |
+| `stdout`            | Log to the stdout of the current process (in CSV format)                  |
+| `file`              | Log to (a) csv file(s)                                                    |
+| `shell_log_storage` | Print log messages to the console (default in the CLI)                    |
+
+The `shell_log_storage` cannot be queried: `duckdb_logs`, `duckdb_logs_parsed()` and `truncate_duckdb_logs()` all return an error. It also does not accept configuration options such as `storage_config` or `storage_buffer_size`. To query logs in the CLI, switch to a queryable storage such as `memory` or `file`:
+
+```sql
+CALL enable_logging(storage = 'memory');
+```
 
 
 Note that the `duckdb_logs` view is automatically updated to target the currently active log storage. This means that switching
@@ -180,8 +192,8 @@ the log entries are stored separately with context_ids referencing the context i
 | `file`      | configurable |
 | `stdout`    | no           |
 
-For file storage, you can switch between normalized and denormalized by providing a path ending in `.csv` (for normalized)
-or without `.csv `(for denormalized). For file logging, denormalized is generally recommended since this increases performance 
+For file storage, you can switch between normalized and denormalized by providing a path to a directory (for normalized)
+or a path ending in `.csv` (for denormalized). For file logging, denormalized is generally recommended since this increases performance 
 and reduces the total size of the logs. To configure normalization of `file` log storage:
 
 ```sql
@@ -203,13 +215,13 @@ which is particularly problematic when debugging crashes, as messages generated 
 written. To address this, the buffer size can be configured as follows:
 
 ```sql
-CALL enable_logging(storage_config = {'buffer_size': 0});
+CALL enable_logging(storage = 'memory', storage_config = {'buffer_size': 0});
 ```
 
 or using the equivalent shorthand:
 
 ```sql
-CALL enable_logging(storage_buffer_size = 0);
+CALL enable_logging(storage = 'memory', storage_buffer_size = 0);
 ```
 
 Note that the default buffer size is different for different log storages:

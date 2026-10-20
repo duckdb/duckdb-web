@@ -61,3 +61,5 @@ SHOW TABLES;
 ```
 
 For more information see the [PostgreSQL extension documentation]({% link docs/2.0/core_extensions/postgres/overview.md %}).
+
+To run entire queries on the PostgreSQL server instead of scanning its tables from DuckDB, see the [`CONNECT` statement]({% link docs/2.0/sql/statements/connect.md %}).

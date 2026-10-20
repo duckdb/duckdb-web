@@ -14,10 +14,10 @@ This is a practical, step-by-step guide to using DuckDB’s `MERGE` statement (i
 
 ## Why Use MERGE in DuckDB?
 
-- Single SQL statement for `INSERT`, `UPDATE`, and soft `DELETE` (upsert and expire).
-- Much cleaner and faster than equivalent Python/Pandas logic.
-- Full history tracking without hard deletes.
-- Works directly on Parquet, CSV, databases, thanks to DuckDB's connectivity!
+* Single SQL statement for `INSERT`, `UPDATE`, and soft `DELETE` (upsert and expire).
+* Much cleaner and faster than equivalent Python/Pandas logic.
+* Full history tracking without hard deletes.
+* Works directly on Parquet, CSV, databases, thanks to DuckDB's connectivity!
 
 ## Prerequisites
 
@@ -96,7 +96,7 @@ INSERT INTO master_ducks VALUES
 
 This statement will perform the merge, it will check for differences between the data of target and source and follow the `WHEN MATCHED` or `WHEN NOT MATCHED` logic specified.
 
-<!-- test:run-only rows carry CURRENT_DATE, which moves; see test/docs/FINDINGS.md for the assertion failure this triggers on 2.0 -->
+<!-- test:run-only rows carry CURRENT_DATE, which moves -->
 
 ```sql
 MERGE INTO master_ducks AS target
@@ -175,7 +175,7 @@ If we select from the master table after running the merge statement and the pos
 To view the original row of data that is historical: 
 
 ```sql
-SELECT * FROM master_ducks where duck_name = 'Quackers' and is_current = false;
+SELECT * FROM master_ducks WHERE duck_name = 'Quackers' AND is_current = false;
 ```
 
 Returns:
@@ -186,16 +186,16 @@ Returns:
 
 **Note**: 
 
-- The `end date` is NOT NULL, it has the date when this duck's data was updated.
-- The `is_current` is `false` indicating this is a historical record.
-- The field that will change is `location`, it is currently `Pond A` and will be updated to `Pond B`.
+* The `end date` is NOT NULL, it has the date when this duck's data was updated.
+* The `is_current` is `false` indicating this is a historical record.
+* The field that will change is `location`, it is currently `Pond A` and will be updated to `Pond B`.
 
 To view the current row of data:
 
 <!-- test:run-only the dates in the result move with CURRENT_DATE -->
 
 ```sql
-SELECT * FROM master_ducks where duck_name = 'Quackers' and is_current = true;
+SELECT * FROM master_ducks WHERE duck_name = 'Quackers' AND is_current = true;
 ```
 
 | record_id | duck_id | duck_name | breed   | location | begin_date   | end_date | is_current |
@@ -204,19 +204,20 @@ SELECT * FROM master_ducks where duck_name = 'Quackers' and is_current = true;
 
 **Note**: 
 
-- The `end date` is NULL, the NULL in this context indicates this is the latest record for this `duck_id`.
-- The `is_current` is `true` also indicating this is a current record.
-- The `location` is now `Pond B`.
+* The `end date` is NULL, the NULL in this context indicates this is the latest record for this `duck_id`.
+* The `is_current` is `true` also indicating this is a current record.
+* The `location` is now `Pond B`.
 
 To view all of `Quackers` data, which will contain both current and non-current rows:
 
 ```sql
-SELECT * FROM master_ducks where duck_name = 'Quackers';
+SELECT * FROM master_ducks WHERE duck_name = 'Quackers';
 ```
 
-| record_id | duck_id | duck_name | breed   | location | begin_date   | end_date | is_current |
-| 1         | 101     | Quackers  | Mallard | Pond A   | 2025-11-24  | 2025-11-25   | false      |
-| 10        | 101     | Quackers  | Mallard | Pond B   | 2025-11-26  | NULL     | true       |
+| record_id | duck_id | duck_name | breed   | location | begin_date  | end_date   | is_current |
+|----------:|--------:|-----------|---------|----------|-------------|------------|------------|
+| 1         | 101     | Quackers  | Mallard | Pond A   | 2025-11-24  | 2025-11-25 | false      |
+| 10        | 101     | Quackers  | Mallard | Pond B   | 2025-11-26  | NULL       | true       |
 
 ## Common Patterns and Variations
 
@@ -229,8 +230,8 @@ SELECT * FROM master_ducks where duck_name = 'Quackers';
 
 ## Best Practices
 
-- Remember that `TARGET` is the master table and `SOURCE` is the incoming table or query.
-- Keep end_date NULL for current rows (makes queries faster).
-- Wrap `MERGE` and `INSERT` statements in a transaction when needed.
-- Use a primary key or a surrogate key for uniqueness.
-- Test with RETURNING first.
+* Remember that `TARGET` is the master table and `SOURCE` is the incoming table or query.
+* Keep end_date NULL for current rows (makes queries faster).
+* Wrap `MERGE` and `INSERT` statements in a transaction when needed.
+* Use a primary key or a surrogate key for uniqueness.
+* Test with RETURNING first.

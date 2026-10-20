@@ -102,6 +102,13 @@ ALTER TABLE integers
 ADD PRIMARY KEY (i);
 ```
 
+Add a unique constraint to a column of a table:
+
+```sql
+ALTER TABLE integers
+ADD UNIQUE (j);
+```
+
 ## Syntax
 
 <div id="rrdiagram"></div>
@@ -255,7 +262,9 @@ The `SET/DROP DEFAULT` clause modifies the `DEFAULT` value of an existing column
 
 > Warning At the moment DuckDB will not allow you to alter a table if there are any dependencies. That means that if you have an index on a column you will first need to drop the index, alter the table, and then recreate the index. Otherwise, you will get a `Dependency Error`.
 
-## `ADD PRIMARY KEY`
+## `ADD PRIMARY KEY` / `ADD UNIQUE`
+
+The `ADD [CONSTRAINT ⟨name⟩] PRIMARY KEY` and `ADD [CONSTRAINT ⟨name⟩] UNIQUE` clauses add a [primary key or unique constraint]({% link docs/2.0/sql/constraints.md %}#primary-key-and-unique-constraint) to an existing table.
 
 Add a primary key to a column of a table:
 
@@ -269,6 +278,32 @@ Add a primary key to multiple columns of a table:
 ```sql
 ALTER TABLE integers
 ADD PRIMARY KEY (i, j);
+```
+
+Add a unique constraint to a column of a table:
+
+```sql
+ALTER TABLE integers
+ADD UNIQUE (j);
+```
+
+The constraint can also be introduced with the `CONSTRAINT ⟨name⟩` keyword:
+
+```sql
+ALTER TABLE integers
+ADD CONSTRAINT j_unique UNIQUE (j);
+```
+
+```sql
+ALTER TABLE integers
+ADD CONSTRAINT i_pk PRIMARY KEY (i);
+```
+
+If the existing data violates the constraint, the statement fails:
+
+```console
+Constraint Error:
+Data contains duplicates on indexed column(s)
 ```
 
 ## `SET` / `RESET` (Table Options)
@@ -305,7 +340,9 @@ RESET ('option1', 'option2');
 
 ## `ADD` / `DROP CONSTRAINT`
 
-> `ADD CONSTRAINT` and `DROP CONSTRAINT` clauses are not yet supported in DuckDB.
+`ADD [CONSTRAINT ⟨name⟩]` is supported for `PRIMARY KEY` and `UNIQUE` constraints, see [above](#add-primary-key--add-unique).
+
+> Adding `CHECK` and `FOREIGN KEY` constraints with `ALTER TABLE` and the `DROP CONSTRAINT` clause are not yet supported in DuckDB.
 
 ## Limitations
 

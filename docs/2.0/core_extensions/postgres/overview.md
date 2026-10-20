@@ -341,17 +341,27 @@ CALL postgres_execute('postgres_db', 'CREATE TABLE my_table (i INTEGER)');
 
 The extension exposes the following configuration parameters.
 
-| Name                              | Description                                                                  | Default |
-| --------------------------------- | ---------------------------------------------------------------------------- | ------- |
-| `pg_array_as_varchar`             | Read PostgreSQL arrays as varchar - enables reading mixed dimensional arrays | `false` |
-| `pg_connection_cache`             | Whether or not to use the connection cache                                   | `true`  |
-| `pg_connection_limit`             | The maximum amount of concurrent PostgreSQL connections                      | `64`    |
-| `pg_debug_show_queries`           | DEBUG SETTING: print all queries sent to PostgreSQL to stdout                | `false` |
-| `pg_experimental_filter_pushdown` | Whether or not to use filter pushdown (currently experimental)               | `true`  |
-| `pg_pages_per_task`               | The amount of pages per task                                                 | `1000`  |
-| `pg_use_binary_copy`              | Whether or not to use BINARY copy to read data                               | `true`  |
-| `pg_null_byte_replacement`        | When writing NULL bytes to Postgres, replace them with the given character   | `NULL`  |
-| `pg_use_ctid_scan`                | Whether or not to parallelize scanning using table ctids                     | `true`  |
+| Name | Description | Default |
+| --- | --- | --- |
+| `pg_array_as_varchar` | Read PostgreSQL arrays as varchar - enables reading mixed dimensional arrays | `false` |
+| `pg_connection_cache` | Deprecated: whether or not to use connection pooling. To disable pooling, use `SET pg_pool_max_connections = 0` instead (see [Connection Pool]({% link docs/2.0/core_extensions/postgres/connection_pool.md %})) | `true` |
+| `pg_connection_limit` | Deprecated: the maximum amount of concurrent PostgreSQL connections. Use `pg_pool_max_connections` instead (see [Connection Pool]({% link docs/2.0/core_extensions/postgres/connection_pool.md %})) | depends on the number of CPU cores |
+| `pg_debug_show_queries` | DEBUG SETTING: print all queries sent to PostgreSQL to stdout | `false` |
+| `pg_enable_filter_pushdown` | Whether or not to use filter pushdown | `true` |
+| `pg_idle_in_transaction_timeout_millis` | PostgreSQL `idle_in_transaction_session_timeout` in milliseconds to set on scan connections | `NULL` |
+| `pg_null_byte_replacement` | When writing NULL bytes to PostgreSQL, replace them with the given character | `NULL` |
+| `pg_numeric_as_varchar` | Read PostgreSQL `NUMERIC` values without precision and scale or with precision greater than 38 as `VARCHAR` instead of `DOUBLE` | `false` |
+| `pg_numeric_nan_as_null` | Read PostgreSQL `NUMERIC` `NaN` values as `NULL` instead of throwing an error | `true` |
+| `pg_oauth_token` | OAuth bearer token for PostgreSQL `OAUTHBEARER` authentication. Takes priority over the `PGOAUTHTOKEN` environment variable | `NULL` |
+| `pg_pages_per_task` | The amount of pages per task | `1000` |
+| `pg_query_mode` | Query mode used to read data, one of `'AUTO'`, `'COPY_BINARY'`, `'PLAIN_QUERY_BINARY'`, `'PLAIN_QUERY_TEXT'` | `AUTO` |
+| `pg_statement_timeout_millis` | PostgreSQL statement timeout in milliseconds to set on scan connections | `NULL` |
+| `pg_use_binary_copy` | Whether or not to use BINARY copy to read data | `true` |
+| `pg_use_ctid_scan` | Whether or not to parallelize scanning using table ctids | `true` |
+| `pg_use_information_schema_introspection` | Use the SQL-standard `information_schema` views instead of `pg_catalog` for schema discovery at `ATTACH` time. Useful for PostgreSQL-wire-compatible databases (e.g., Spanner, CockroachDB, Redshift) | `false` |
+| `pg_use_text_protocol` | Whether or not to use the text protocol to read data. This is slower, but provides better compatibility with non-PostgreSQL systems | `false` |
+
+The connection pool settings (`pg_pool_*`) are documented on the [Connection Pool page]({% link docs/2.0/core_extensions/postgres/connection_pool.md %}) and the schema cache settings (`pg_staleness_query`, `pg_staleness_query_enabled`) in the [Schema Cache](#schema-cache) section.
 
 ## Schema Cache
 

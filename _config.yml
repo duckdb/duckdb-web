@@ -146,3 +146,4 @@ exclude: ['Gemfile', 'Gemfile.lock', 'node_modules', 'vendor/bundle', 'vendor/ca
 include:
   - docs/1.4/clients/python/reference/objects.inv
   - docs/1.5/clients/python/reference/objects.inv
+  - docs/2.0/clients/python/reference/objects.inv

@@ -7,35 +7,53 @@ redirect_from:
 title: Reference
 ---
 
-This page lists every function, setting, and log type exposed by the [quack extension]({% link docs/2.0/core_extensions/quack.md %}).
+This page lists the functions, settings, and log types exposed by the [quack extension]({% link docs/2.0/core_extensions/quack.md %}).
 For a tour of the protocol, start with the [Overview]({% link docs/2.0/quack/overview.md %}).
 
 ## Function Reference
 
 ### Server Management
 
-| Function                                                                                        | Description                                                                                                                                                                                                           |
-| ----------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `quack_serve(uri := 'quack:localhost', token := 'token_value', allow_other_hostname := false, disable_ssl := false)` | Start a server on `uri`, which defaults to `quack:localhost` when omitted. Localhost-only by default. Pass `token` to set the server's authentication token explicitly (minimum 4 characters), otherwise one is generated. Returns listen URI, URL, and the auth token. |
-| `quack_stop(uri)`                                                                               | Stop the server listening on `uri`.                                                                                                                                                                                   |
-| `quack_identify(name, provider, hostname, region, meta)`                                        | Set this node's `whoami` identity fields. Any subset can be supplied.                                                                                                                                                 |
-| `whoami()`                                                                                      | Table macro returning identity + runtime info for the current node.                                                                                                                                                   |
+| Function | Description |
+| -------- | ----------- |
+| `quack_serve(⟨listen_uri⟩, ...)` | Start a server on `listen_uri`, which defaults to `quack:localhost` when omitted. Localhost-only by default. Returns the listen URI, the listen URL, and the authentication token. See the [`quack_serve` parameters](#quack_serve-parameters) below. |
+| `quack_stop(listen_uri)` | Stop the server listening on `listen_uri`. |
+| `quack_server_list()` | List the servers running in this instance: listen URI and URL, host, port, number of active connections, and additional info (IPv6, SSL). |
+| `quack_active_connections()` | List the client connections of the servers running in this instance: server, `quack_connection_id`, last query, state, hashed client id, cached rows, and query start time. |
+| `quack_generate_keys(directory := ⟨path⟩)` | Generate a self-signed certificate (`server.pem`) and private key (`private_key.pem`) for serving over SSL. Defaults to `~/.duckdb/extension_data/quack`; existing key files are not overwritten. Returns the file paths and the certificate fingerprint. |
+| `quack_identify(name, provider, hostname, region, meta)` | Set this node's `whoami` identity fields. Any subset can be supplied. |
+| `whoami()` | Table macro returning identity + runtime info for the current node. |
+
+#### `quack_serve` Parameters
+
+| Parameter | Type | Default | Description |
+| --------- | ---- | ------- | ----------- |
+| `listen_uri` | `VARCHAR` | `quack:localhost` | Positional. The Quack URI to listen on. |
+| `allow_other_hostname` | `BOOLEAN` | `false` | Allow binding to a non-local hostname, e.g., `0.0.0.0`. |
+| `token` | `VARCHAR` | (generated) | Authentication token clients have to present (minimum 4 characters). If omitted, the token of the default `quack` secret is used if one exists, otherwise a random token is generated. |
+| `secret` | `VARCHAR` | (unset) | Name of an existing `quack` secret whose token the server uses. |
+| `create_secret_if_not_exists` | `BOOLEAN` | `false` | If no token is given and no default `quack` secret exists, store the generated token in a persistent default `quack` secret, so that subsequent servers reuse it. |
+| `disable_ssl` | `BOOLEAN` | `true` for local, else `false` | Serve plain HTTP. Local URIs default to plain HTTP, other URIs to HTTPS. |
+| `ssl_cert_file` | `VARCHAR` | (generated) | Certificate file used when serving over SSL. If omitted, a self-signed certificate is generated (see `quack_generate_keys`). |
+| `ssl_key_file` | `VARCHAR` | (generated) | Private key file used when serving over SSL. |
 
 ### Client Queries
 
-| Function                                                                | Description                                                                                                             |
-| ----------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------- |
-| `quack_query(uri, query, token := 'token_value', disable_ssl := false)` | Run `query` on remote `uri`, stream result back. Pass `token` to override any matching quack secret on the client side. |
-| `quack_query_by_name(catalog, query)`                                   | Run `query` against an already-attached Quack catalog (used by `⟨catalog⟩.query()`{:.language-sql .highlight}).         |
+| Function | Description |
+| -------- | ----------- |
+| `quack_query(uri, query, ...)` | Run `query` on remote `uri`, stream result back. Accepts the named parameters `token`, `disable_ssl`, `ssl_fingerprint`, `client_id` and `heartbeat_timeout`, which behave like the [`ATTACH` options](#attach-options) of the same name. Pass `token` to override any matching quack secret on the client side. |
+| `quack_query_by_name(catalog, query)` | Run `query` against an already-attached Quack catalog (used by `⟨catalog⟩.query()`{:.language-sql .highlight}). Also accepts the named parameters `use_transaction` and `refresh_catalog` (both `BOOLEAN`). |
+| `quack_connection_id(catalog)` | Return the server-issued `quack_connection_id` of an attached Quack catalog. |
+| `quack_cancel(catalog, connection_id)` | Cancel the running query of the connection `connection_id` on the server of the attached Quack catalog `catalog`. Returns the connection id and whether the cancellation succeeded. |
 
 ### Utility
 
-| Function                                             | Description                                                                                            |
-| ---------------------------------------------------- | ------------------------------------------------------------------------------------------------------ |
-| `quack_uri_parser(uri, ssl)`                         | Parse a Quack URI into a `STRUCT(host, port, ipv6, ssl, url)` entry                                    |
+| Function | Description |
+| -------- | ----------- |
+| `quack_uri_parser(uri, ssl)` | Parse a Quack URI into a `STRUCT(host, port, ipv6, ssl, url)` entry. |
 | `quack_check_token(sid, client_token, server_token)` | Default authentication callback, compares the client-supplied token against the server's stored token. |
-| `quack_nop_authorization(sid, query)`                | Default authorization callback, always allows.                                                         |
-| `quack_clear_cache()`                                | Clear the cache. This also forces the DuckDB client to refresh its catalog.                            |
+| `quack_nop_authorization(sid, query)` | Default authorization callback, always allows. |
+| `quack_clear_cache()` | Clear the cache. This also forces the DuckDB client to refresh its catalog. |
 
 ### `ATTACH` Options
 
@@ -44,6 +62,9 @@ For a tour of the protocol, start with the [Overview]({% link docs/2.0/quack/ove
 | `TOKEN`       | `VARCHAR` | (unset)                        | Authentication token. Overrides any matching quack secret on the client side. |
 | `DISABLE_SSL` | `BOOLEAN` | `true` for local, else `false` | Force the client transport. Local URIs default to plain HTTP.                 |
 | `TYPE`        | `VARCHAR` | inferred                       | Pin the secret type used for token resolution (e.g., `quack`).                |
+| `SSL_FINGERPRINT` | `VARCHAR` | (unset)                    | Expected fingerprint of the server's certificate, e.g., the `fingerprint` returned by `quack_generate_keys`. Use this to connect to a server with a self-signed certificate. |
+| `CLIENT_ID`   | `VARCHAR` | `quack_default_client_id`      | Client identifier sent to the server (minimum 4 characters).                  |
+| `HEARTBEAT_TIMEOUT` | `UBIGINT` | `quack_default_heartbeat_timeout` | Heartbeat lease timeout in seconds requested from the server.    |
 
 ## Settings
 
@@ -60,13 +81,36 @@ The auth callbacks are evaluated on a fresh server-side connection every time, s
 
 You can plug in your own auth by creating any scalar function with the expected signature and pointing the setting at it. See [Security]({% link docs/2.0/quack/security.md %}) for examples.
 
-### `FETCH` Batching (Server-Side)
+### Data Transfer
 
-The server batches multiple `DataChunk`s into each `FETCH` response to reduce per-chunk overhead.
+These settings control how results and inserted data are batched and buffered.
 
-| Setting                    | Type      | Default | Description                                                  |
-| -------------------------- | --------- | ------- | ------------------------------------------------------------ |
-| `quack_fetch_batch_chunks` | `UBIGINT` | `12`    | Maximum number of `DataChunk`s shipped per `FETCH` response. |
+| Setting | Type | Default | Description |
+| ------- | ---- | ------- | ----------- |
+| `quack_target_batch_bytes` | `UBIGINT` | `33554432` (32 MiB) | Target in-memory size of one batch (one wire message payload). Batches are cut when they reach this size. |
+| `quack_prepare_inline_rows` | `UBIGINT` | `24576` | Rows returned inline in the `PREPARE` response before the remainder is left to `FETCH`. Drains whole batches, so it may overshoot to a batch boundary. |
+| `quack_fetch_read_ahead` | `UBIGINT` | `0` | Number of `FETCH` requests the client keeps in flight ahead of the scan. `0` uses the number of async threads. |
+| `quack_rebalance_buffer_bytes` | `UBIGINT` | `0` | Pending bytes the batch rebalancer buffers before gating non-minimum producers. `0` means automatic, governed by the memory manager. |
+| `quack_server_stream_buffer_bytes` | `UBIGINT` | `268435456` (256 MiB) | Server-side per-stream byte budget, at most a quarter of `memory_limit`. `FETCH` counts serialized payload bytes, `INSERT` counts decoded chunk allocations. `0` disables the limit. |
+
+### Server Connections
+
+| Setting | Type | Default | Description |
+| ------- | ---- | ------- | ----------- |
+| `quack_server_max_connections` | `UBIGINT` | `1024` | Maximum number of concurrent connections the server accepts. Beyond this, new connections are refused. |
+| `quack_server_keep_alive_timeout` | `UBIGINT` | `300` | Seconds an idle keep-alive connection is kept open by the server. |
+
+### Client Identity and Reconnects
+
+| Setting | Type | Default | Description |
+| ------- | ---- | ------- | ----------- |
+| `quack_default_client_id` | `VARCHAR` | (random per instance) | Client id used when `ATTACH` / `quack_query` omit one. Computed at load time from the `QUACK_CLIENT_ID` environment variable, or a random per-instance id if the variable is not set. Set to `''` to opt out. |
+| `quack_default_heartbeat_timeout` | `UBIGINT` | `60` | Heartbeat lease timeout in seconds requested by clients when `ATTACH` / `quack_query` omit `heartbeat_timeout`. |
+| `quack_enable_reconnects` | `BOOLEAN` | `false` | Enable reconnect support: clients acknowledge results and the server caches the last result until it is acknowledged. |
+| `quack_result_ttl` | `UBIGINT` | `3600` | Seconds an idle cached result is kept before it is dropped (`0` = never). |
+| `quack_cache_max_rows` | `UBIGINT` | `100000` | Maximum number of rows the server retains in the result cache (`0` = unlimited). |
+
+The extension also registers several `quack_debug_*` settings, which are intended for testing the protocol and should not be used in production.
 
 ### Node Identity
 
@@ -119,7 +163,7 @@ Fields on each entry:
 | `query`               | SQL payload for `PREPARE_REQUEST`s.                                   |
 | `server`              | HTTP URL on client-side logs, `NULL` on server-side logs.             |
 | `duration_ms`         | Round-trip time (client) or handling time (server).                   |
-| `response_type`       | Response type  or `ERROR`.                                            |
+| `response_type`       | Response type or `ERROR`.                                             |
 | `error`               | Error message if the request failed.                                  |
 
 To correlate a client request with its server-side handling, join on `(quack_connection_id, client_query_id)`.

@@ -166,7 +166,7 @@ Security-related configuration settings generally lock themselves for safety rea
 
 ```console
 Invalid Input Error:
-Cannot upgrade allow_community_extensions setting while database is running
+Cannot change allow_community_extensions setting while database is running
 ```
 
 This prevents re-enabling settings that were explicitly disabled.

@@ -63,7 +63,7 @@ The core extensions commonly used with DuckDB-Wasm include:
 | [autocomplete]({% link docs/2.0/core_extensions/autocomplete.md %}) | Adds support for autocomplete in the shell                       |                 |
 | [excel]({% link docs/2.0/core_extensions/excel.md %})               | Adds support for Excel-like format strings                       |                 |
 | [fts]({% link docs/2.0/core_extensions/full_text_search.md %})      | Adds support for Full-Text Search indexes                        |                 |
-| [icu]({% link docs/2.0/core_extensions/icu.md %})                   | Adds support for time zones and collations using the ICU library |                 |
+| [icu]({% link docs/2.0/core_extensions/icu.md %})                   | Adds support for time zones, calendars and collations             |                 |
 | [inet]({% link docs/2.0/core_extensions/inet.md %})                 | Adds support for IP-related data types and functions             |                 |
 | [json]({% link docs/2.0/data/json/overview.md %})                   | Adds support for JSON operations                                 |                 |
 | [parquet]({% link docs/2.0/data/parquet/overview.md %})             | Adds support for reading and writing Parquet files               |                 |

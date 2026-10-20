@@ -76,13 +76,12 @@ This will avoid confusing issues such as this, and the arithmetic operations are
 
 ## Time Zone Performance
 
-DuckDB uses the _International Components for Unicode_ time library for 
-[time zone support]({% post_url 2022-01-06-time-zones %}).
-This library has a number of advantages, including support for daylight savings time past 2037.
-(Note: Pandas gives incorrect results past that year).
+DuckDB's [time zone support]({% post_url 2022-01-06-time-zones %}) is provided by the [`icu` extension]({% link docs/2.0/core_extensions/icu.md %}).
+Starting with DuckDB 2.0, the extension no longer depends on the _International Components for Unicode_ (ICU) library: it implements time zones and calendars natively, using time zone data built from the [IANA time zone database](https://www.iana.org/time-zones).
+This implementation supports daylight savings time past 2037 (Note: Pandas gives incorrect results past that year) and is faster than the previous ICU-based one.
 
-The downside of using ICU is that it is not highly performant.
-One workaround for this is to create a calendar table for the timestamps being modeled.
+Even so, time zone-aware binning is more expensive than arithmetic on plain `TIMESTAMP`s.
+If the same temporal bins are computed repeatedly, one workaround is to precompute them in a calendar table for the timestamps being modeled.
 For example, if the application is modeling electrical supply and demand out to 2100 at hourly resolution,
 one can create the calendar table like so:
 
@@ -113,7 +112,7 @@ because `date_part` returns 64 bit integers for all parts.
 Notice that we can extract _all_ of the parts with a single call to `date_part`.
 This part list version of the function is faster than extracting the parts one by one
 because the underlying binning computation computes all parts,
-so picking out the ones in the list avoids duplicate calls to the slow ICU function.
+so picking out the ones in the list avoids duplicate time zone conversions.
 
 Also notice that we are leveraging the `DATE` cast rules from the previous section 
 to bound the calendar to the model domain.

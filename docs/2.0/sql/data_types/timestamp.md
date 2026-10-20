@@ -199,10 +199,11 @@ To distinguish the two hours, another range of bins containing the offset from U
 ### Time Zone Support
 
 The `TIMESTAMPTZ` type can be binned into calendar and clock bins using a suitable extension.
-The built-in [ICU extension]({% link docs/2.0/core_extensions/icu.md %}) implements all the binning and arithmetic functions using the
-[International Components for Unicode](https://icu.unicode.org) time zone and calendar functions.
+The built-in [`icu` extension]({% link docs/2.0/core_extensions/icu.md %}) implements all the binning and arithmetic functions using time zone data built from the [IANA Time Zone Database](https://www.iana.org/time-zones) and its own calendar implementation.
 
-To set the time zone to use, first load the ICU extension. The ICU extension comes pre-bundled with several DuckDB clients (including Python, R, JDBC and ODBC), so this step can be skipped in those cases. In other cases you might first need to install and load the ICU extension.
+> Despite its name, the `icu` extension no longer depends on the [International Components for Unicode (ICU)](https://icu.unicode.org) library: starting with DuckDB 2.0, it implements time zones, calendars and collations natively.
+
+To set the time zone to use, first load the `icu` extension. The `icu` extension comes pre-bundled with several DuckDB clients (including the CLI, Python, R, JDBC and ODBC) and is autoloaded on first use, so this step can be skipped in those cases. In other cases you might first need to install and load the `icu` extension.
 
 ```sql
 INSTALL icu;
@@ -255,7 +256,7 @@ ORDER BY 1;
 
 ## Settings
 
-The current value of the `TimeZone` and `Calendar` settings are determined by ICU when it starts up.
+The current values of the `TimeZone` and `Calendar` settings are determined by the `icu` extension when it starts up.
 They can be queried from in the [`duckdb_settings()` table function]({% link docs/2.0/sql/meta/duckdb_table_functions.md %}#duckdb_settings):
 
 ```sql

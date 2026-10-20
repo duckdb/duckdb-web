@@ -21,6 +21,7 @@ DuckDB creates the following global files and directories in the user's home dir
 | `~/.duckdb_history` | History file, similar to `~/.bash_history` and `~/.zsh_history`. Used by the [DuckDB CLI client]({% link docs/2.0/clients/cli/overview.md %}). | Yes | Only used by CLI |
 | `~/.duckdb/extensions` | Binaries of installed [extensions]({% link docs/2.0/extensions/overview.md %}). | No | Yes |
 | `~/.duckdb/stored_secrets` | [Persistent secrets]({% link docs/2.0/configuration/secrets_manager.md %}#persistent-secrets) created by the [Secrets manager]({% link docs/2.0/configuration/secrets_manager.md %}). | Yes | Yes |
+| `~/.duckdb/extension_repositories` | Definitions of custom [extension repositories]({% link docs/2.0/extensions/extension_repositories.md %}), including their pinned public keys, stored as one JSON file per repository. Created by `CREATE EXTENSION REPOSITORY`. | Yes (v2.0 and later) | Yes |
 
 ## Local Files and Directories
 
@@ -30,8 +31,8 @@ DuckDB creates the following files and directories in the working directory (for
 |-------|-------------------|---|
 | `⟨database_filename⟩`{:.language-sql .highlight} | Database file. Only created in on-disk mode. The file can have any extension with typical extensions being `.duckdb`, `.db` and `.ddb`. | `weather.duckdb` |
 | `.tmp/` | Temporary directory. Only created in in-memory mode. | `.tmp/` |
-| `⟨database_filename⟩.tmp/`{:.language-sql .highlight} | Temporary directory. Only created in on-disk mode. | `weather.tmp/` |
-| `⟨database_filename⟩.wal`{:.language-sql .highlight} | [Write-ahead log](https://en.wikipedia.org/wiki/Write-ahead_logging) file. If DuckDB exits normally, the WAL file is deleted upon exit. If DuckDB crashes, the WAL file is required to recover data. | `weather.wal` |
+| `⟨database_filename⟩.tmp/`{:.language-sql .highlight} | Temporary directory. Only created in on-disk mode. | `weather.duckdb.tmp/` |
+| `⟨database_filename⟩.wal`{:.language-sql .highlight} | [Write-ahead log](https://en.wikipedia.org/wiki/Write-ahead_logging) file. If DuckDB exits normally, the WAL file is deleted upon exit. If DuckDB crashes, the WAL file is required to recover data. | `weather.duckdb.wal` |
 
 If you are working in a Git repository and would like to disable tracking these files by Git,
 see the instructions on using [`.gitignore` for DuckDB]({% link docs/2.0/operations_manual/footprint_of_duckdb/gitignore_for_duckdb.md %}).

@@ -28,15 +28,18 @@ The functions below are difficult to categorize into specific function types and
 | [`current_catalog()`](#current_catalog) | Return the name of the currently active catalog. Default is memory. |
 | [`current_database()`](#current_database) | Return the name of the currently active database. |
 | [`current_query()`](#current_query) | Return the current query as a string. |
+| [`current_query_id()`](#current_query_id) | Returns the identifier of the current query as a `UBIGINT`. |
 | [`current_schema()`](#current_schema) | Return the name of the currently active schema. Default is main. |
 | [`current_schemas(boolean)`](#current_schemasboolean) | Return list of schemas. Pass a parameter of `true` to include implicit schemas. |
 | [`current_setting('setting_name')`](#current_settingsetting_name) | Return the current value of the configuration setting. |
 | [`currval('sequence_name')`](#currvalsequence_name) | Return the current value of the sequence. Note that `nextval` must be called at least once prior to calling `currval`. |
+| [`duckdb_format_sql(sql[, config])`](#duckdb_format_sqlsql-config) | Formats the `sql` string, e.g., by placing each clause on a separate line and normalizing the case of keywords. The optional `config` is a `MAP(VARCHAR, VARCHAR)` with the keys `'indent_size'`, `'inline_threshold'` and `'keyword_case'` (`'upper'`, `'lower'` or `'preserve'`). Provided by the `autocomplete` extension. |
 | [`error(message)`](#errormessage) | Throws the given error `message`. |
 | [`equi_width_bins(min, max, bincount, nice := false)`](#equi_width_binsmin-max-bincount-nice--false) | Returns the upper boundaries of a partition of the interval `[min, max]` into `bin_count` equal-sized subintervals (for use with, e.g., [`histogram`]({% link docs/2.0/sql/functions/aggregates.md %}#histogramargboundaries)). If `nice = true`, then `min`, `max` and `bincount` may be adjusted to produce more aesthetically pleasing results. |
 | [`force_checkpoint(database)`](#force_checkpointdatabase) | Synchronize WAL with file for (optional) database interrupting transactions. |
 | [`gen_random_uuid()`](#gen_random_uuid) | Return a random UUID similar to this: `eeccb8c5-9943-b2bb-bb5e-222f4e14b687`. |
 | [`get_block_size(database)`](#get_block_sizedatabase) | Returns the block size of the attached database with the given name. |
+| [`get_type(expression)`](#get_typeexpression) | Returns the data type of the result of the `expression` as a value of type `TYPE`. |
 | [`getenv(var)`](#getenvvar) | Returns the value of the environment variable `var`. Only available in the [command line client]({% link docs/2.0/clients/cli/overview.md %}). |
 | [`getvariable('variable_name')`](#getvariablevariable_name) | Returns the value of the SQL variable named `variable_name`, or `NULL` if it is not set. |
 | [`hash(value)`](#hashvalue) | Returns a `UBIGINT` with a hash of `value`. The used hash function may change across DuckDB versions.|
@@ -45,6 +48,7 @@ The functions below are difficult to categorize into specific function types and
 | [`ifnull(expr, other)`](#ifnullexpr-other) | A two-argument version of coalesce. |
 | [`in_search_path(database_name, schema_name)`](#in_search_pathdatabase_name-schema_name) | Returns whether or not the given database and schema are in the search path. |
 | [`is_histogram_other_bin(arg)`](#is_histogram_other_binarg) | Returns `true` when `arg` is the "catch-all element" of its datatype for the purpose of the [`histogram_exact`]({% link docs/2.0/sql/functions/aggregates.md %}#histogram_exactargelements) function, which is equal to the "right-most boundary" of its datatype for the purpose of the [`histogram`]({% link docs/2.0/sql/functions/aggregates.md %}#histogramargboundaries) function. |
+| [`make_type(name, ...)`](#make_typename-) | Constructs a value of type `TYPE` from a type name and optional type parameters. |
 | [`md5(string)`](#md5string) | Returns the MD5 hash of the `string` as a `VARCHAR`. |
 | [`md5_number(string)`](#md5_numberstring) | Returns the MD5 hash of the `string` as a `UHUGEINT`. |
 | [`md5_number_lower(string)`](#md5_number_lowerstring) | Returns the lower 64-bit segment of the MD5 hash of the `string` as a `UBIGINT`. |
@@ -62,7 +66,7 @@ The functions below are difficult to categorize into specific function types and
 | [`sha1(string)`](#sha1string) | Returns a `VARCHAR` with the SHA-1 hash of the `string`. |
 | [`sha256(string)`](#sha256string) | Returns a `VARCHAR` with the SHA-256 hash of the `string`. |
 | [`sleep_ms(milliseconds)`](#sleep_msmilliseconds) | Pause execution for the specified number of milliseconds. Returns `NULL`. |
-| [`stats(expression)`](#statsexpression) | Returns a string with statistics about the expression. Expression can be a column, constant, or SQL expression. |
+| [`stats(expression)`](#statsexpression) | Returns a `VARIANT` with statistics about the expression. Expression can be a column, constant, or SQL expression. |
 | [`txid_current()`](#txid_current) | Returns the current transaction's identifier, a `BIGINT` value. It will assign a new one if the current transaction does not have one already. |
 | [`typeof(expression)`](#typeofexpression) | Returns the name of the data type of the result of the expression. |
 | [`uuid()`](#uuid) | Return a random UUID (UUIDv4) similar to this: `eeccb8c5-9943-b2bb-bb5e-222f4e14b687`. |
@@ -152,6 +156,14 @@ The functions below are difficult to categorize into specific function types and
 | **Example** | `current_query()` |
 | **Result** | `SELECT current_query();` |
 
+#### `current_query_id()`
+
+<div class="nostroke_table"></div>
+
+| **Description** | Returns the identifier of the current query as a `UBIGINT`. |
+| **Example** | `current_query_id()` |
+| **Result** | various |
+
 #### `current_schema()`
 
 <div class="nostroke_table"></div>
@@ -183,6 +195,14 @@ The functions below are difficult to categorize into specific function types and
 | **Description** | Return the current value of the sequence. Note that `nextval` must be called at least once prior to calling `currval`. |
 | **Example** | `currval('my_sequence_name')` |
 | **Result** | `1` |
+
+#### `duckdb_format_sql(sql[, config])`
+
+<div class="nostroke_table"></div>
+
+| **Description** | Formats the `sql` string, e.g., by placing each clause on a separate line and normalizing the case of keywords. The optional `config` is a `MAP(VARCHAR, VARCHAR)` with the keys `'indent_size'`, `'inline_threshold'` and `'keyword_case'` (`'upper'`, `'lower'` or `'preserve'`). Provided by the `autocomplete` extension. |
+| **Example** | `duckdb_format_sql('select a,b from tbl where x=1')` |
+| **Result** | `SELECT a, b\nFROM tbl\nWHERE x = 1` (where `\n` denotes a newline) |
 
 #### `error(message)`
 
@@ -223,6 +243,14 @@ The functions below are difficult to categorize into specific function types and
 | **Example** | `get_block_size('file_db')` |
 | **Result** | `262144` |
 
+#### `get_type(expression)`
+
+<div class="nostroke_table"></div>
+
+| **Description** | Returns the data type of the result of the `expression` as a value of type `TYPE`. |
+| **Example** | `get_type([1, 2])` |
+| **Result** | `INTEGER[]` |
+
 #### `getenv(var)`
 
 | **Description** | Returns the value of the environment variable `var`. Only available in the [command line client]({% link docs/2.0/clients/cli/overview.md %}). |
@@ -241,7 +269,7 @@ The functions below are difficult to categorize into specific function types and
 
 | **Description** | Returns a `UBIGINT` with the hash of the `value`. The used hash function may change across DuckDB versions. |
 | **Example** | `hash('🦆')` |
-| **Result** | `2595805878642663834` |
+| **Result** | `4164431626903154684` |
 
 #### `icu_sort_key(string, collator)`
 
@@ -249,7 +277,7 @@ The functions below are difficult to categorize into specific function types and
 
 | **Description** | Surrogate [sort key](https://unicode-org.github.io/icu/userguide/collation/architecture.html#sort-keys) used to sort special characters according to the specific locale. Collator parameter is optional. Only available when the ICU extension is installed. |
 | **Example** | `icu_sort_key('ö', 'DE')` |
-| **Result** | `460145960106` |
+| **Result** | `470145960106` |
 
 #### `if(a, b, c)`
 
@@ -282,6 +310,14 @@ The functions below are difficult to categorize into specific function types and
 | **Description** | Returns `true` when `arg` is the "catch-all element" of its datatype for the purpose of the [`histogram_exact`]({% link docs/2.0/sql/functions/aggregates.md %}#histogram_exactargelements) function, which is equal to the "right-most boundary" of its datatype for the purpose of the [`histogram`]({% link docs/2.0/sql/functions/aggregates.md %}#histogramargboundaries) function. |
 | **Example** | `is_histogram_other_bin('')` |
 | **Result** | `true` |
+
+#### `make_type(name, ...)`
+
+<div class="nostroke_table"></div>
+
+| **Description** | Constructs a value of type `TYPE` from a type name and optional type parameters. |
+| **Example** | `make_type('DECIMAL', 10, 2)` |
+| **Result** | `DECIMAL(10,2)` |
 
 #### `md5(string)`
 
@@ -423,9 +459,9 @@ The functions below are difficult to categorize into specific function types and
 
 <div class="nostroke_table"></div>
 
-| **Description** | Returns a string with statistics about the expression. Expression can be a column, constant, or SQL expression. |
+| **Description** | Returns a `VARIANT` with statistics about the expression. Expression can be a column, constant, or SQL expression. |
 | **Example** | `stats(5)` |
-| **Result** | `'[Min: 5, Max: 5][Has Null: false]'` |
+| **Result** | `{'approx_unique': 1, 'has_no_null': true, 'has_null': false, 'max': 5, 'min': 5}` |
 
 #### `txid_current()`
 
@@ -494,6 +530,7 @@ A [table function]({% link docs/2.0/sql/query_syntax/from.md %}#table-functions)
 | [`range(start, stop, step)`](#rangestart-stop-step) | Returns a table of values between `start` and `stop` (exclusive), incrementing by `step`. |
 | [`repeat(value, count)`](#repeatvalue-count) | Returns a table with `count` rows, each containing `value`. |
 | [`repeat_row(varargs, num_rows)`](#repeat_rowvarargs-num_rows) | Returns a table with `num_rows` rows, each containing the fields defined in `varargs`. |
+| [`sql_tokenize(sql)`](#sql_tokenizesql) | Splits the `sql` string into tokens. Returns a table with the columns `start` (the byte offset of the token), `token_type` (e.g., `KEYWORD`, `IDENTIFIER`, `NUMBER_LITERAL`) and `word`. Provided by the `autocomplete` extension. |
 | [`unnest(list)`](#unnestlist) | Returns a table with one row per element of `list`. |
 
 #### `generate_series(start, stop, step)`
@@ -535,6 +572,14 @@ A [table function]({% link docs/2.0/sql/query_syntax/from.md %}#table-functions)
 | **Description** | Returns a table with `num_rows` rows, each containing the fields defined in `varargs`. |
 | **Example** | `repeat_row(1, 2, 'foo', num_rows = 3)` |
 | **Result** | 3 rows of `1, 2, 'foo'` |
+
+#### `sql_tokenize(sql)`
+
+<div class="nostroke_table"></div>
+
+| **Description** | Splits the `sql` string into tokens. Returns a table with the columns `start` (the byte offset of the token), `token_type` (e.g., `KEYWORD`, `IDENTIFIER`, `NUMBER_LITERAL`) and `word`. Provided by the `autocomplete` extension. |
+| **Example** | `sql_tokenize('SELECT 42 AS x')` |
+| **Result** | 4 rows: `(0, KEYWORD, SELECT), (7, NUMBER_LITERAL, 42), (10, KEYWORD, AS), (13, IDENTIFIER, x)` |
 
 #### `unnest(list)`
 

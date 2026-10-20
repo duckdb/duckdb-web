@@ -94,10 +94,11 @@ orders
 
 ### Auto-detection
 
-By default the system tries to infer if the provided files are in a hive partitioned hierarchy. And if so, the `hive_partitioning` flag is enabled automatically. The auto-detection will look at the names of the folders and search for a `'key' = 'value'` pattern. This behavior can be overridden by using the `hive_partitioning` configuration option:
+By default the system tries to infer if the provided files are in a hive partitioned hierarchy. And if so, the `hive_partitioning` flag is enabled automatically. The auto-detection will look at the names of the folders and search for a `'key' = 'value'` pattern. This behavior can be overridden by using the `hive_partitioning` option of the reader function:
 
 ```sql
-SET hive_partitioning = false;
+SELECT *
+FROM read_parquet('orders/*/*/*.parquet', hive_partitioning = false);
 ```
 
 ### Hive Types

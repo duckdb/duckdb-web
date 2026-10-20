@@ -30,7 +30,7 @@ Let's go over each of the 3 levels and describe their format:
 Unstable extensions are extensions that can't (or don't want to) give any guarantees regarding their current stability,
 or their goals of becoming stable. Unstable extensions are tagged with the **short git hash** of the extension.
 
-For example, at the time of writing this, the version of the `vss` extension is an unstable extension of version `690bfc5`.
+For example, an unstable extension may have a version such as `690bfc5`.
 
 What to expect from an extension that has a version number in the **unstable** format?
 
@@ -45,7 +45,7 @@ Pre-release extensions are the next step up from Unstable extensions. They are t
 In semantic versioning, versions starting with `v0` have a special meaning: they indicate that the more strict semantics of regular (`>v1.0.0`) versions do not yet apply. It basically means that an extension is working
 towards becoming a stable extension, but is not quite there yet.
 
-For example, at the time of writing this, the version of the `delta` extension is a pre-release extension of version `v0.1.0`.
+For example, a pre-release extension may have a version such as `v0.1.0`.
 
 What to expect from an extension that has a version number in the **pre-release** format?
 
@@ -58,7 +58,14 @@ What to expect from an extension that has a version number in the **pre-release*
 
 Stable extensions are the final step of extension stability. This is denoted by using a **stable SemVer** of format `vx.y.z` where `x>0`.
 
-For example, at the time of writing this, the version of the `parquet` extension is a stable extension of version `v1.0.0`.
+For example, a stable extension may have a version such as `v1.0.0`.
+
+To check the versions of the extensions in your DuckDB installation, run:
+
+```sql
+SELECT extension_name, extension_version
+FROM duckdb_extensions();
+```
 
 What to expect from an extension that has a version number in the **stable** format? Essentially the same as pre-release extensions, but now the more
 strict SemVer semantics apply: the API of the extension should now be stable and will only change in backwards incompatible ways when the major version is bumped.

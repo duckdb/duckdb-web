@@ -24,13 +24,6 @@ PREPARE query_person AS
       AND age >= $minimum_age;
 ```
 
-Parameter types can be declared after the statement name:
-
-```sql
-PREPARE add_values(INTEGER, INTEGER) AS
-    SELECT $1 + $2;
-```
-
 ### Syntax
 
 <div id="rrdiagram1"></div>

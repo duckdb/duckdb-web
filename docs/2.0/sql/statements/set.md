@@ -55,7 +55,7 @@ SET SESSION default_collation = 'nocase';
 Set the default sort order globally:
 
 ```sql
-SET GLOBAL sort_order = 'desc';
+SET GLOBAL default_order = 'DESC';
 ```
 
 Set the default threads globally: 

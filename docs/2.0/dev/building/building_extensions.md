@@ -31,7 +31,7 @@ In most cases, extensions will be directly linked in the resulting DuckDB execut
 
 ### `BUILD_JEMALLOC`
 
-When this flag is set, the [`jemalloc`]({% link docs/2.0/internals/jemalloc.md %}) is built.
+This flag controls whether the [`jemalloc`]({% link docs/2.0/internals/jemalloc.md %}) memory allocator is linked into DuckDB. Unlike TPC-H and TPC-DS, `jemalloc` is not an extension. It is only supported on 64-bit Linux, where it is enabled by default. To disable it, set `BUILD_JEMALLOC=0`.
 
 ### `BUILD_TPCE`
 

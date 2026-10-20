@@ -2,7 +2,7 @@
 github_repository: https://github.com/duckdb/duckdb-quack
 layout: docu
 redirect_from:
-- community_extensions/extensions/quack
+- /community_extensions/extensions/quack
 - /docs/current/core_extensions/quack
 - /docs/lts/core_extensions/quack
 - /docs/preview/core_extensions/quack

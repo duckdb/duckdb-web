@@ -64,33 +64,23 @@ More on this topic at [building DuckDB extensions]({% link docs/2.0/dev/building
 
 ## Package Flags
 
-For every package that is maintained by core DuckDB, there exists a flag in the Makefile to enable building the package.
+The Makefile has flags to control which components are built.
 These can be enabled by either setting them in the current `env`, through set up files like `bashrc` or `zshrc`, or by setting them before the call to `make`, for example:
 
 ```batch
-BUILD_PYTHON=1 make debug
+BUILD_BENCHMARK=1 make debug
 ```
 
-### `BUILD_PYTHON`
-
-When this flag is set, the [Python]({% link docs/2.0/clients/python/overview.md %}) package is built.
-
-### `BUILD_SHELL`
-
-When this flag is set, the [CLI]({% link docs/2.0/clients/cli/overview.md %}) is built, this is usually enabled by default.
+> The Python, Java (JDBC) and ODBC clients are maintained in separate repositories and are no longer built from the main DuckDB repository. See the [Python](https://github.com/duckdb/duckdb-python), [Java](https://github.com/duckdb/duckdb-java) and [ODBC](https://github.com/duckdb/duckdb-odbc) repositories for their build instructions.
 
 ### `BUILD_BENCHMARK`
 
 When this flag is set, DuckDB's in-house benchmark suite is built.
 More information about this can be found [in the README](https://github.com/duckdb/duckdb/blob/main/benchmark/README.md).
 
-### `BUILD_JDBC`
+### `DISABLE_SHELL`
 
-When this flag is set, the [Java]({% link docs/2.0/clients/java/overview.md %}) package is built.
-
-### `BUILD_ODBC`
-
-When this flag is set, the [ODBC]({% link docs/2.0/clients/odbc/overview.md %}) package is built.
+The [CLI]({% link docs/2.0/clients/cli/overview.md %}) is built by default. When this flag is set, the CLI is not built.
 
 ## Miscellaneous Flags
 

@@ -233,7 +233,7 @@ SET order_by_non_integer_literal = true;
 
 ## Implicit Casting to `VARCHAR`
 
-Prior to version 0.10.0, DuckDB would automatically allow any type to be implicitly cast to `VARCHAR` during function binding. As a result it was possible to e.g., compute the substring of an integer without using an explicit cast. For version v0.10.0 and later an explicit cast is needed instead. To revert to the old behavior that performs implicit casting, set the `old_implicit_casting` variable to `true`:
+Prior to version 0.10.0, DuckDB would automatically allow any type to be implicitly cast to `VARCHAR` during function binding. As a result it was possible to e.g., compute the substring of an integer without using an explicit cast. For version v0.10.0 and later an explicit cast is needed instead. To revert to the old behavior that performs implicit casting, set the `old_implicit_casting` variable to `true`. Note that this setting is deprecated and will be removed in a future release:
 
 ```sql
 SET old_implicit_casting = true;
@@ -405,36 +405,22 @@ SET enable_profiling = 'no_output';
 ### Profiling Output
 
 By default, DuckDB prints profiling information to the standard output.
-However, if you prefer to write the profiling information to a file, you can use `PRAGMA` `profiling_output` to specify a filepath.
+However, if you prefer to write the profiling information to a file, you can use the `profiling_output` setting to specify a filepath.
 
 > Warning The file contents will be overwritten for every newly issued query.
 > Hence, the file will only contain the profiling information of the last run query:
 
 ```sql
+SET enable_profiling = 'json';
 SET profiling_output = '/path/to/file.json';
 SET profile_output = '/path/to/file.json';
 ```
 
+The file extension must match the profiling output format set in `enable_profiling` (e.g., `.json` for `json`), or be `.txt`.
+
 ### Profiling Mode
 
-By default, a limited amount of profiling information is provided (`standard`).
-
-```sql
-SET profiling_mode = 'standard';
-```
-
-For more details, use the detailed profiling mode by setting `profiling_mode` to `detailed`.
-The output of this mode includes profiling of the planner and optimizer stages.
-
-```sql
-SET profiling_mode = 'detailed';
-```
-
-To access all available metrics, set the `profiling_mode` to `all`. 
-
-```sql
-SET profiling_mode = 'all';
-```
+> Deprecated The `profiling_mode` setting is deprecated in DuckDB 2.0 and its value has no effect: detailed profiling information is always collected. To enable profiling, use `PRAGMA enable_profiling`. To select which metrics are collected, use the [`tracked_metrics` setting](#custom-metrics).
 
 ### Custom Metrics
 
@@ -522,37 +508,9 @@ SET log_query_path = '';
 
 The `create_fts_index` and `drop_fts_index` options are only available when the [`fts` extension]({% link docs/2.0/core_extensions/full_text_search.md %}) is loaded. Their usage is documented on the [Full-Text Search extension page]({% link docs/2.0/core_extensions/full_text_search.md %}).
 
-## Verification
-
-#### Verification of External Operators
-
-Enable verification of external operators:
-
-```sql
-PRAGMA verify_external;
-```
-
-Disable verification of external operators:
-
-```sql
-PRAGMA disable_verify_external;
-```
-
-#### Verification of Round-Trip Capabilities
-
-Enable verification of round-trip capabilities for supported logical plans:
-
-```sql
-PRAGMA verify_serializer;
-```
-
-Disable verification of round-trip capabilities:
-
-```sql
-PRAGMA disable_verify_serializer;
-```
-
 ## Object Cache
+
+> Deprecated The `enable_object_cache` and `disable_object_cache` pragmas are deprecated in DuckDB 2.0 and no longer have any effect.
 
 Enable caching of objects for e.g., Parquet metadata:
 
@@ -571,14 +529,14 @@ PRAGMA disable_object_cache;
 #### Compression
 
 During checkpointing, the existing column data + any new changes get compressed.
-There exist a couple of pragmas to influence which compression functions are considered.
+There exist a couple of settings to influence which compression functions are considered.
 
 ##### Force Compression
 
 Prefer using this compression method over any other method if possible:
 
 ```sql
-PRAGMA force_compression = 'bitpacking';
+SET force_compression = 'bitpacking';
 ```
 
 ##### Disabled Compression Methods
@@ -586,7 +544,7 @@ PRAGMA force_compression = 'bitpacking';
 Avoid using any of the listed compression methods from the comma separated list:
 
 ```sql
-PRAGMA disabled_compression_methods = 'fsst,rle';
+SET disabled_compression_methods = 'fsst,rle';
 ```
 
 #### Force Checkpoint
@@ -663,7 +621,8 @@ DuckDB follows IEEE floating-point operation semantics. If you would like to tur
 SET ieee_floating_point_ops = false;
 ```
 
-In this case, floating point division by zero (e.g., `1.0 / 0.0`, `0.0 / 0.0` and `-1.0 / 0.0`) will all return `NULL`.
+In this case, floating point division by zero (e.g., `1.0 / 0.0`, `0.0 / 0.0` and `-1.0 / 0.0`) throws an error.
+To return `NULL` instead, also set `error_on_division_by_zero = false` (see below).
 
 > New The semantics of integer division by zero changed in DuckDB 2.0.
 
@@ -674,9 +633,13 @@ To return `NULL`, similarly to DuckDB 1.x, use:
 SET error_on_division_by_zero = false;
 ```
 
+> Deprecated The `error_on_division_by_zero` setting is deprecated and will be removed in a future release. Setting it prints a deprecation warning in the CLI. To return `NULL` for a specific expression, wrap it in [`TRY`]({% link docs/2.0/sql/expressions/try.md %}) instead, e.g., `TRY(1 // 0)`.
+
 ## Query Verification (for Development)
 
 The following `PRAGMA`s are mostly used for development and internal testing.
+
+> Deprecated The `enable_verification` and `disable_verification` pragmas are deprecated in DuckDB 2.0 and no longer have any effect.
 
 Enable query verification:
 

@@ -144,9 +144,11 @@ The table below shows the available general aggregate functions.
 | [`arg_max(arg, val)`](#arg_maxarg-val) | Finds the row with the maximum `val` and calculates the `arg` expression at that row. Rows where the value of the `arg` or `val` expression is `NULL` are ignored. This function is [affected by ordering](#order-by-clause-in-aggregate-functions). |
 | [`arg_max(arg, val, n)`](#arg_maxarg-val-n) | The generalized case of [`arg_max`](#arg_maxarg-val) for `n` values: returns a `LIST` containing the `arg` expressions for the top `n` rows ordered by `val` descending. This function is [affected by ordering](#order-by-clause-in-aggregate-functions). |
 | [`arg_max_null(arg, val)`](#arg_max_nullarg-val) | Finds the row with the maximum `val` and calculates the `arg` expression at that row. Rows where the `val` expression evaluates to `NULL` are ignored. This function is [affected by ordering](#order-by-clause-in-aggregate-functions). |
+| [`arg_max_nulls_last(arg, val[, n])`](#arg_max_nulls_lastarg-val-n) | Finds the row with the maximum `val` and calculates the `arg` expression at that row. Unlike [`arg_max`](#arg_maxarg-val), `NULL` values of `arg` are not ignored and rows where `val` is `NULL` are sorted last, i.e., they are only selected if there are no other rows. If `n` is specified, returns a `LIST` containing the `arg` expressions for the top `n` rows ordered by `val` descending, with `NULL` values of `val` last. This function is [affected by ordering](#order-by-clause-in-aggregate-functions). |
 | [`arg_min(arg, val)`](#arg_minarg-val) | Finds the row with the minimum `val` and calculates the `arg` expression at that row. Rows where the value of the `arg` or `val` expression is `NULL` are ignored. This function is [affected by ordering](#order-by-clause-in-aggregate-functions). |
 | [`arg_min(arg, val, n)`](#arg_minarg-val-n) | Returns a `LIST` containing the `arg` expressions for the "bottom" `n` rows ordered by `val` ascending. This function is [affected by ordering](#order-by-clause-in-aggregate-functions). |
 | [`arg_min_null(arg, val)`](#arg_min_nullarg-val) | Finds the row with the minimum `val` and calculates the `arg` expression at that row. Rows where the `val` expression evaluates to `NULL` are ignored. This function is [affected by ordering](#order-by-clause-in-aggregate-functions). |
+| [`arg_min_nulls_last(arg, val[, n])`](#arg_min_nulls_lastarg-val-n) | Finds the row with the minimum `val` and calculates the `arg` expression at that row. Unlike [`arg_min`](#arg_minarg-val), `NULL` values of `arg` are not ignored and rows where `val` is `NULL` are sorted last, i.e., they are only selected if there are no other rows. If `n` is specified, returns a `LIST` containing the `arg` expressions for the top `n` rows ordered by `val` ascending, with `NULL` values of `val` last. This function is [affected by ordering](#order-by-clause-in-aggregate-functions). |
 | [`avg(arg)`](#avgarg) | Calculates the average of all non-null values in `arg`. This function is [affected by ordering](#order-by-clause-in-aggregate-functions). |
 | [`bit_and(arg)`](#bit_andarg) | Returns the bitwise AND of all bits in a given expression. |
 | [`bit_or(arg)`](#bit_orarg) | Returns the bitwise OR of all bits in a given expression. |
@@ -209,6 +211,13 @@ The table below shows the available general aggregate functions.
 | **Description** | Finds the row with the maximum `val` and calculates the `arg` expression at that row. Rows where the `val` expression evaluates to `NULL` are ignored. This function is [affected by ordering](#order-by-clause-in-aggregate-functions). |
 | **Example** | `arg_max_null(A, B)` |
 
+#### `arg_max_nulls_last(arg, val[, n])`
+
+<div class="nostroke_table"></div>
+
+| **Description** | Finds the row with the maximum `val` and calculates the `arg` expression at that row. Unlike [`arg_max`](#arg_maxarg-val), `NULL` values of `arg` are not ignored and rows where `val` is `NULL` are sorted last, i.e., they are only selected if there are no other rows. If `n` is specified, returns a `LIST` containing the `arg` expressions for the top `n` rows ordered by `val` descending, with `NULL` values of `val` last. This function is [affected by ordering](#order-by-clause-in-aggregate-functions). |
+| **Example** | `arg_max_nulls_last(A, B)` |
+
 #### `arg_min(arg, val)`
 
 <div class="nostroke_table"></div>
@@ -231,6 +240,13 @@ The table below shows the available general aggregate functions.
 
 | **Description** | Finds the row with the minimum `val` and calculates the `arg` expression at that row. Rows where the `val` expression evaluates to `NULL` are ignored. This function is [affected by ordering](#order-by-clause-in-aggregate-functions). |
 | **Example** | `arg_min_null(A, B)` |
+
+#### `arg_min_nulls_last(arg, val[, n])`
+
+<div class="nostroke_table"></div>
+
+| **Description** | Finds the row with the minimum `val` and calculates the `arg` expression at that row. Unlike [`arg_min`](#arg_minarg-val), `NULL` values of `arg` are not ignored and rows where `val` is `NULL` are sorted last, i.e., they are only selected if there are no other rows. If `n` is specified, returns a `LIST` containing the `arg` expressions for the top `n` rows ordered by `val` ascending, with `NULL` values of `val` last. This function is [affected by ordering](#order-by-clause-in-aggregate-functions). |
+| **Example** | `arg_min_nulls_last(A, B)` |
 
 #### `avg(arg)`
 
