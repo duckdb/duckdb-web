@@ -58,7 +58,7 @@ lts_short_duckdb_version: "1.4"
 # preview version information
 preview_duckdb_version: "2.0.0-dev"
 preview_short_duckdb_version: "2.0-dev"
-preview_duckdb_java_version: "2.0.0-alpha44738-892"
+preview_duckdb_java_version: "2.0.0-alpha49003-937"
 preview_duckdb_odbc_version: "8f79c4f6"
 # more Jekyll config
 livereload: true
