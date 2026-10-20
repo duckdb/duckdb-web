@@ -129,7 +129,7 @@ For the forms and options that `CREATE TABLE` does not support, see [Limitations
 
 > New This feature is introduced in DuckDB 2.0.
 
-Databricks can plan scans on the server, through the Iceberg REST Catalog API of Unity Catalog. The server prunes the files to read with its own metadata, which filters more effectively than DuckDB's file skipping on the Delta log, so a selective query reads fewer files. Unity Catalog OSS does not offer this API.
+Databricks can plan scans on the server, through the Iceberg REST Catalog API of Unity Catalog. The API uses catalog-wide statistics, which can improve filtering and reduce the number of files that a query scans. Unity Catalog OSS does not offer this API.
 
 With `USE_IRC_SCAN_PLAN true`, DuckDB sends each scan's filters to the server, reads the files and delete files that it returns, and applies the filters again itself:
 
