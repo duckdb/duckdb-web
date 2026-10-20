@@ -216,17 +216,17 @@ static void udf_vectorized(DataChunk &args, ExpressionState &state, Vector &resu
 
     // get the solely input vector
     auto &input = args.data[0];
-    // now get an orrified vector
-    VectorData vdata;
-    input.Orrify(args.size(), vdata);
+    // now get a unified vector format
+    UnifiedVectorFormat vdata;
+    input.ToUnifiedFormat(args.size(), vdata);
 
-    // get a raw array from the orrified input
+    // get a raw array from the unified format input
     auto input_data = (TYPE *)vdata.data;
 
     // handling the data
     for (idx_t i = 0; i < args.size(); i++) {
         auto idx = vdata.sel->get_index(i);
-        if ((*vdata.nullmask)[idx]) {
+        if (!vdata.validity.RowIsValid(idx)) {
             continue;
         }
         result_data[i] = input_data[idx];
