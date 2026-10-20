@@ -12,7 +12,7 @@ title: I/O
 
 ## Asynchronous I/O
 
-> New Asynchronous I/O is introduced in DuckDB 2.0.
+> New Asynchronous I/O was introduced in DuckDB 2.0.
 
 Starting with v2.0, DuckDB supports asynchronous I/O. Instead of blocking a worker thread until requested data arrives, DuckDB issues reads in the background and keeps multiple requests in flight while worker threads process data that has already arrived. This can significantly speed up queries when synchronous I/O does not saturate the available bandwidth, e.g., when reading data from object storage such as S3.
 

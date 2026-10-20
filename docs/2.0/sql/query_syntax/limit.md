@@ -53,7 +53,7 @@ LIMIT 10%;
 
 ## FETCH FIRST
 
-> New The SQL-standard `FETCH FIRST` syntax is introduced in DuckDB 2.0.
+> New The SQL-standard `FETCH FIRST` syntax was introduced in DuckDB 2.0.
 
 As an alternative to `LIMIT`, DuckDB supports the SQL-standard `FETCH FIRST ... ROWS ONLY` syntax. It can be combined with `OFFSET`, in which case `FETCH NEXT` reads better:
 

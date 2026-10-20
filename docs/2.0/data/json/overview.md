@@ -78,7 +78,7 @@ CREATE TABLE todos AS
     SELECT * FROM 'todos.json';
 ```
 
-Since DuckDB v1.3.0, the JSON reader returns the `filename` virtual column:
+Since DuckDB 1.3.0, the JSON reader returns the `filename` virtual column:
 
 ```sql
 SELECT filename, *

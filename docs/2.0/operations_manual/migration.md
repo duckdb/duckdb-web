@@ -4,20 +4,20 @@ redirect_from:
 - /docs/current/operations_manual/migration
 - /docs/lts/operations_manual/migration
 - /docs/preview/operations_manual/migration
-title: Migrating to DuckDB v2.0
+title: Migrating to DuckDB 2.0
 ---
 
-DuckDB v2.0.0 is packed with new features and performance improvements, including query optimization and asynchronous I/O.
+DuckDB 2.0.0 is packed with new features and performance improvements, including query optimization and asynchronous I/O.
 It also ships a small set of breaking changes, most notably a new default storage format and the completed lambda syntax transition.
-This page provides guidance on migrating existing deployments to DuckDB v2.0.0.
+This page provides guidance on migrating existing deployments to DuckDB 2.0.0.
 
 ## Before You Migrate
 
-Before migrating to DuckDB v2.0.0, assess whether your workload is mission-critical.
+Before migrating to DuckDB 2.0.0, assess whether your workload is mission-critical.
 For such workloads, consider waiting for upcoming patch releases, which address issues that surface shortly after a major release.
-To help facilitate this, the DuckDB development team extended [support for DuckDB v1.5 into early 2027]({% link release_calendar.md %}).
+To help facilitate this, the DuckDB development team extended [support for DuckDB 1.5 into early 2027]({% link release_calendar.md %}).
 
-> Bestpractice In all cases, we recommend setting up a shadow system that tracks your existing workload. This lets you test DuckDB v2.0.0 in an environment outside of your production system before switching over.
+> Bestpractice In all cases, we recommend setting up a shadow system that tracks your existing workload. This lets you test DuckDB 2.0.0 in an environment outside of your production system before switching over.
 
 For simple deployments, migrating is straightforward.
 Complex deployments, especially those that run many DuckDB processes, require more care.
@@ -27,7 +27,7 @@ We expect the most common source of issues to be the storage format, which is de
 
 ### Storage Format
 
-The DuckDB v2.0.0 storage format is _not backward compatible_ with earlier versions.
+The DuckDB 2.0.0 storage format is _not backward compatible_ with earlier versions.
 A database file created or modified by v2.0.0 uses [storage version 69]({% link docs/2.0/internals/storage.md %}#storage-version-table), which older DuckDB versions cannot read.
 
 For example, creating a database with v2.0.0 and then opening it with v1.5.6 results in an error:
@@ -75,7 +75,7 @@ For details on this and other conversion methods, including `COPY FROM DATABASE`
 
 ### Lambda Syntax
 
-DuckDB v2.0.0 completes the lambda syntax transition that began in [v1.3]({% post_url 2025-05-21-announcing-duckdb-130 %}).
+DuckDB 2.0.0 completed the lambda syntax transition that began in [v1.3]({% post_url 2025-05-21-announcing-duckdb-130 %}).
 The old single arrow syntax (`x -> x + 1`) is now disabled by default in favor of the Python-style syntax (`lambda x : x + 1`).
 
 ```sql
@@ -91,14 +91,14 @@ If you cannot update your queries yet, you can re-enable the old syntax for the 
 SET lambda_syntax = 'enable_single_arrow';
 ```
 
-This flag is a temporary bridge: DuckDB v2.1 will remove it and the single arrow syntax entirely.
+This flag is a temporary bridge: DuckDB 2.1 will remove it and the single arrow syntax entirely.
 For details, see [Deprecated Syntax]({% link docs/2.0/sql/functions/lambda.md %}#deprecated-syntax).
 
 > This section is tracking the following pull requests: [duckdb#22682](https://github.com/duckdb/duckdb/pull/22682), [duckdb#13389](https://github.com/duckdb/duckdb/pull/13389).
 
 ### SQL Parser
 
-DuckDB v2.0.0 replaces the PostgreSQL-derived parser with a new [PEG-based parser]({% link docs/2.0/sql/peg_parser.md %}).
+DuckDB 2.0.0 replaced the PostgreSQL-derived parser with a new [PEG-based parser]({% link docs/2.0/sql/peg_parser.md %}).
 It is designed to be compatible with the previous parser, so queries that parsed before should continue to parse, and error messages now include more precise source locations.
 If a query that parsed on an earlier version fails on v2.0.0, please [file an issue](https://github.com/duckdb/duckdb/issues).
 For details, see the [PEG parser page]({% link docs/2.0/sql/peg_parser.md %}).
@@ -116,7 +116,7 @@ SET enable_legacy_parser = true;
 
 ### C and C++ Extension API
 
-DuckDB v2.0.0 ships a reworked, versioned C API with a stable ABI, along with a C++ API layered on top of it.
+DuckDB 2.0.0 shipped a reworked, versioned C API with a stable ABI, along with a C++ API layered on top of it.
 Extensions built against the previous unstable C++ API must be rebuilt for v2.0.0.
 If you depend on third-party extensions, confirm that a v2.0.0-compatible build is available before upgrading.
 For background on extension stability levels, see [Versioning of Extensions]({% link docs/2.0/extensions/versioning_of_extensions.md %}); for the C API reference, see the [C API page]({% link docs/2.0/clients/c/api.md %}).
@@ -125,7 +125,7 @@ For background on extension stability levels, see [Versioning of Extensions]({% 
 
 ### ICU Removed from the Core Build
 
-DuckDB v2.0.0 removes the dependency on the [ICU library](https://github.com/unicode-org/icu).
+DuckDB 2.0.0 removed the dependency on the [ICU library](https://github.com/unicode-org/icu).
 Time zones, calendars, and collations are now implemented natively by the [`icu` extension]({% link docs/2.0/core_extensions/icu.md %}), and will continue to behave as before.
 No query changes are required, but if you ship a custom build, note that ICU is no longer bundled.
 If you find that ICU's behavior changed, please [file an issue](https://github.com/duckdb/duckdb/issues).
@@ -134,7 +134,7 @@ If you find that ICU's behavior changed, please [file an issue](https://github.c
 
 ## What's New in v2.0
 
-Beyond the breaking changes above, DuckDB v2.0.0 adds a large set of new features.
+Beyond the breaking changes above, DuckDB 2.0.0 added a large set of new features.
 Rather than repeat the feature documentation here, this section points to where each new feature is covered in full.
 For the complete tour, see the [preview announcement]({% post_url 2026-08-17-duckdb-20-highlights %}) and the detailed release announcement.
 The [What's New in the Docs for 2.0 page]({% link docs/2.0/whats_new_in_the_docs.md %}) links every high-level new feature to its documentation, organized by theme:

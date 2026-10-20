@@ -257,7 +257,7 @@ The history reflects the interactive shell session, so it is only populated in i
 
 ## Displaying Function Documentation
 
-> New The `.manual` dot command (and the `-manual` command line argument) is introduced in DuckDB 2.0.
+> New The `.manual` dot command (and the `-manual` command line argument) was introduced in DuckDB 2.0.
 
 The `.manual` command displays a manual page for a SQL function, including its signatures (overloads), description and examples. This information is retrieved from the [`duckdb_functions()` table function]({% link docs/2.0/sql/meta/duckdb_table_functions.md %}#duckdb_functions).
 

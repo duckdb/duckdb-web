@@ -61,7 +61,7 @@ This function returns a table with columns `query_nr` and `query`.
 
 ### Scale Factor-Dependent Query Parameters
 
-> New This feature is introduced in DuckDB 2.0.
+> New This feature was introduced in DuckDB 2.0.
 
 The `tpcds_queries` function and the `tpcds` pragma take an optional scale factor, either as a positional argument or as the `sf` named parameter:
 

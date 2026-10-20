@@ -21,7 +21,7 @@ We also provide a SQLite API wrapper which means that if your application is pro
 
 ## Stable C API and C++ API
 
-> New DuckDB 2.0 introduces a reworked C API with a stable, versioned ABI, together with a C++ API layered on top of it.
+> New DuckDB 2.0 introduced a reworked C API with a stable, versioned ABI, together with a C++ API layered on top of it.
 
 The C API now has a stable, versioned ABI: an extension built against a given DuckDB version keeps working with later releases without recompilation. DuckDB 2.0 also adds a C++ API layered on top of the C API for extension development.
 

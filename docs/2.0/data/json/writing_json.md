@@ -29,7 +29,7 @@ See the [`COPY` statement]({% link docs/2.0/sql/statements/copy.md %}#copy--to) 
 
 ## GeoJSON
 
-> New This feature is introduced in DuckDB 2.0.
+> New This feature was introduced in DuckDB 2.0.
 
 `COPY ... (FORMAT GEOJSON)` writes a GeoJSON `FeatureCollection`. `FORMAT GEOJSONL` (or `ARRAY true` with `FORMAT GEOJSON`) writes newline-delimited `Feature` objects. You do not need `json_geometry_format` for these copy formats.
 

@@ -13,7 +13,7 @@ The `quack` extension adds support for the Quack remote protocol.
 
 ## Usage
 
-> New DuckDB v2.0.0 ships a polished version of the Quack protocol that is faster and more stable.
+> New DuckDB 2.0.0 shipped a polished version of the Quack protocol that is faster and more stable.
 > Expect further improvements in upcoming patch releases.
 
 Quack is transparently autoinstalled and [autoloaded]({% link docs/2.0/extensions/overview.md %}#autoloading-extensions) on first use.

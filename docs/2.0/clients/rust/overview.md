@@ -28,7 +28,7 @@ The DuckDB Rust client is published on [crates.io](https://crates.io/crates/duck
 cargo add duckdb --features bundled
 ```
 
-The equivalent `Cargo.toml` entry pins the version. Starting with DuckDB v1.5.0 the crate version has the form `1.⟨major_minor_patch⟩.x`. A tilde requirement receives patch releases without changing the bundled DuckDB version:
+The equivalent `Cargo.toml` entry pins the version. Starting with DuckDB 1.5.0 the crate version has the form `1.⟨major_minor_patch⟩.x`. A tilde requirement receives patch releases without changing the bundled DuckDB version:
 
 ```toml
 [dependencies]

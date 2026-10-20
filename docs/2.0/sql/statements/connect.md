@@ -7,7 +7,7 @@ redirect_from:
 title: CONNECT and DISCONNECT Statements
 ---
 
-> New Support for the `CONNECT` and `DISCONNECT` statements is introduced in DuckDB 2.0.
+> New Support for the `CONNECT` and `DISCONNECT` statements was introduced in DuckDB 2.0.
 
 The `CONNECT` statement routes the current session to a remote database, so that subsequent queries execute on that remote and their results stream back. `DISCONNECT` returns the session to the local database.
 

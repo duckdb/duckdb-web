@@ -8,7 +8,7 @@ redirect_from:
 title: CREATE TRIGGER Statement
 ---
 
-> New The `CREATE TRIGGER` feature is introduced in DuckDB 2.0.
+> New The `CREATE TRIGGER` feature was introduced in DuckDB 2.0.
 
 The `CREATE TRIGGER` statement registers a trigger: a set of SQL statements that run automatically in response to `INSERT`, `UPDATE`, or `DELETE` events on a table.
 

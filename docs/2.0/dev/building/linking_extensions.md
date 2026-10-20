@@ -8,18 +8,18 @@ title: Statically Linking Extensions
 ---
 
 This page is for client and binding authors, and for anyone who embeds `libduckdb` in their own application.
-It describes how statically linking extensions changed in DuckDB v2.0 and what builders on top of DuckDB need to do.
+It describes how statically linking extensions changed in DuckDB 2.0 and what builders on top of DuckDB need to do.
 
 > This change is independent of the new C API. It applies even if you continue to build against the existing (v1) C API: the difference is in how extension archives are linked and registered, not in which API your bindings call.
 
-## What Changed in DuckDB v2.0
+## What Changed in DuckDB 2.0
 
-> New Link-time static linking of extensions is introduced in DuckDB 2.0.
+> New Link-time static linking of extensions was introduced in DuckDB 2.0.
 
 Before v2.0, the set of statically linked extensions was a _compile-time_ decision.
 The sources were compiled with knowledge of which extensions were included, so a build with `CORE_EXTENSIONS='json;parquet;icu'` could not reuse the object files of a build with `CORE_EXTENSIONS='json;parquet;icu;tpch'`, even though one is a subset of the other.
 
-DuckDB v2.0 modularizes this into a _link-time_ decision ([`duckdb#25814`](https://github.com/duckdb/duckdb/pull/25814)).
+DuckDB 2.0 modularized this into a _link-time_ decision ([`duckdb#25814`](https://github.com/duckdb/duckdb/pull/25814)).
 Each extension is compiled once into its own static archive, for example:
 
 ```text
@@ -106,7 +106,7 @@ See [Build Configuration]({% link docs/2.0/dev/building/build_configuration.md %
 
 ## Obtaining Prebuilt Archives
 
-Rather than building `libduckdb` yourself, you can download the static and shared archives for DuckDB v2.0 and later using the [`duckdb-install-scripts`](https://github.com/duckdb/duckdb-install-scripts) tooling ([`duckdb-install-scripts#5`](https://github.com/duckdb/duckdb-install-scripts/pull/5)).
+Rather than building `libduckdb` yourself, you can download the static and shared archives for DuckDB 2.0 and later using the [`duckdb-install-scripts`](https://github.com/duckdb/duckdb-install-scripts) tooling ([`duckdb-install-scripts#5`](https://github.com/duckdb/duckdb-install-scripts/pull/5)).
 Setting `DUCKDB_INSTALL=static` installs the archives and headers under `~/.duckdb/lib/⟨version⟩/⟨build_type⟩_⟨platform⟩`:
 
 ```bash
@@ -127,7 +127,7 @@ libtpch_extension.a           libtpcds_extension.a
 
 A pinned build can be installed with `DUCKDB_STAGED`, for example `DUCKDB_STAGED=31adc8b766/v2.0.0-alpha42839` or simply `DUCKDB_STAGED=31adc8b766`.
 
-> For DuckDB v2.0 and later, most artifacts are distributed as `.tar.gz` files instead of `.zip` files ([`duckdb#24773`](https://github.com/duckdb/duckdb/pull/24773)).
+> For DuckDB 2.0 and later, most artifacts are distributed as `.tar.gz` files instead of `.zip` files ([`duckdb#24773`](https://github.com/duckdb/duckdb/pull/24773)).
 
 ## Reference Implementations for Clients
 
@@ -142,7 +142,7 @@ They provide a path forward for anyone maintaining a binding or an application t
 | Rust | Migrated | [`duckdb-rs#834`](https://github.com/duckdb/duckdb-rs/pull/834), [`duckdb-rs#839`](https://github.com/duckdb/duckdb-rs/pull/839), [`duckdb-rs#883`](https://github.com/duckdb/duckdb-rs/pull/883), [`duckdb-rs#835`](https://github.com/duckdb/duckdb-rs/pull/835) |
 | Node.js | Survey in progress | [`duckdb-node-neo#476`](https://github.com/duckdb/duckdb-node-neo/pull/476), [`duckdb-node-neo#508`](https://github.com/duckdb/duckdb-node-neo/pull/508) |
 | Go | Planned, not yet started | [`duckdb-go-bindings#112`](https://github.com/duckdb/duckdb-go-bindings/issues/112) |
-| Wasm | Not yet migrated | pending (pinned to the DuckDB v1.5 `v1.5-variegata` line at the time of writing) |
+| Wasm | Not yet migrated | pending (pinned to the DuckDB 1.5 `v1.5-variegata` line at the time of writing) |
 
 > The Python pull request is the clearest end-to-end example: it restores static linking of the default `BUILD_EXTENSIONS` set by calling `duckdb_register_static_extensions()` and shows how to override the linked set.
 

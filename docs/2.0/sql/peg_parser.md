@@ -13,9 +13,9 @@ DuckDB uses a parser based on PEG ([parsing expression grammars](https://en.wiki
 It replaces the parser front end derived from PostgreSQL that earlier versions used.
 The PEG parser enables better suggestions, improved error messages with precise source locations, and allows extensions to extend the grammar.
 
-The PEG grammar was first introduced in DuckDB v1.2 to power autocomplete in the command line client. DuckDB v1.5 shipped a complete but experimental version, and DuckDB 2.0 makes it the default.
+The PEG grammar was first introduced in DuckDB 1.2 to power autocomplete in the command line client. DuckDB 1.5 shipped a complete but experimental version, and DuckDB 2.0 made it the default.
 
-Switching parsers does not change the SQL dialect. DuckDB 2.0 replaces the parser implementation and rewrites its grammar, but the dialect itself and the rest of the query pipeline, including the binder, continue to operate on the same internal syntax tree.
+Switching parsers does not change the SQL dialect. DuckDB 2.0 replaced the parser implementation and rewrote its grammar, but the dialect itself and the rest of the query pipeline, including the binder, continue to operate on the same internal syntax tree.
 
 ## Suggestions
 
@@ -44,7 +44,7 @@ FROM check_peg_parser('SELECT 42');
 
 ## Legacy Parser
 
-> New The `legacy_parser` extension is introduced in DuckDB 2.0.
+> New The `legacy_parser` extension was introduced in DuckDB 2.0.
 
 For exceptional cases, DuckDB 2.0 can fall back to the legacy PostgreSQL-style parser through the [`legacy_parser` extension]({% link docs/2.0/core_extensions/legacy_parser.md %}). Setting the following option autoloads the extension and switches from the default PEG parser to the legacy parser:
 
@@ -52,7 +52,7 @@ For exceptional cases, DuckDB 2.0 can fall back to the legacy PostgreSQL-style p
 SET enable_legacy_parser = true;
 ```
 
-The legacy parser is intended as a bridge solution, for example to check a query on both parsers and determine whether a given behavior is tied to the parser or transformer rather than to downstream code. It provides a best-effort legacy experience and preserves several DuckDB v1.5 quirks:
+The legacy parser is intended as a bridge solution, for example to check a query on both parsers and determine whether a given behavior is tied to the parser or transformer rather than to downstream code. It provides a best-effort legacy experience and preserves several DuckDB 1.5 quirks:
 
 * `~` and `!~` perform full regular expression matches, whereas DuckDB 2.0 defaults to partial matches.
 * `B'0101'` is the `VARCHAR` value `'b0101'`, whereas DuckDB 2.0 interprets it as a bit-string literal.

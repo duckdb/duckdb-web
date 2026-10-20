@@ -8,9 +8,9 @@ redirect_from:
 title: Legacy Parser Extension
 ---
 
-> New The `legacy_parser` extension is introduced in DuckDB 2.0.
+> New The `legacy_parser` extension was introduced in DuckDB 2.0.
 
-DuckDB v2.0.0 replaced the PostgreSQL-derived parser with a new [PEG-based parser]({% link docs/2.0/sql/peg_parser.md %}).
+DuckDB 2.0.0 replaced the PostgreSQL-derived parser with a new [PEG-based parser]({% link docs/2.0/sql/peg_parser.md %}).
 The `legacy_parser` extension allows reverting to the old parser.
 
 > The PEG parser is designed to be compatible with the previous parser, so queries that parsed before should continue to parse.

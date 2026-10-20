@@ -94,7 +94,7 @@ EXECUTE query_person(name_start_letter := 'B', minimum_age := 40);
 
 ## Session Variables as Default Values
 
-> New Using [session variables]({% link docs/2.0/sql/statements/set_variable.md %}) as default values for named parameters is introduced in DuckDB 2.0.
+> New Using [session variables]({% link docs/2.0/sql/statements/set_variable.md %}) as default values for named parameters was introduced in DuckDB 2.0.
 
 When a named parameter is not supplied at execution time, DuckDB fills it from the [session variable]({% link docs/2.0/sql/statements/set_variable.md %}) of the same name, if one is set. An explicit argument always takes precedence over the variable.
 

@@ -69,7 +69,7 @@ For a list of dot commands available in the CLI shell, see the [Dot Commands pag
 
 ## Serving and Connecting to Remote Databases
 
-> New The `-serve` and `-connect` arguments are introduced in DuckDB 2.0.
+> New The `-serve` and `-connect` arguments were introduced in DuckDB 2.0.
 
 The `-serve` argument starts a [Quack]({% link docs/2.0/quack/overview.md %}) server for the database opened by the CLI. Without a database path or additional configuration, it serves an in-memory database on `localhost:9494`:
 

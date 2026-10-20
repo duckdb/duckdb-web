@@ -438,7 +438,7 @@ SET profiling_mode = 'all';
 
 ### Custom Metrics
 
-> New The `tracked_metrics` setting is introduced in DuckDB 2.0, replacing the `custom_profiling_settings` `PRAGMA` used in earlier versions.
+> New The `tracked_metrics` setting was introduced in DuckDB 2.0, replacing the `custom_profiling_settings` `PRAGMA` used in earlier versions.
 
 By default, profiling collects all metrics. To collect only a subset, use the `tracked_metrics` setting, which accepts a list of metric glob patterns. A metric is collected if its name matches any of the patterns. The default value, `['*']`, matches all metrics.
 
@@ -665,7 +665,7 @@ SET ieee_floating_point_ops = false;
 
 In this case, floating point division by zero (e.g., `1.0 / 0.0`, `0.0 / 0.0` and `-1.0 / 0.0`) will all return `NULL`.
 
-> New The semantics of integer division by zero will change in DuckDB 2.0.
+> New The semantics of integer division by zero changed in DuckDB 2.0.
 
 Integer division by zero (`1 // 0`, `1 % 0`, `INTERVAL '1' DAY / 0`) errors by default.
 To return `NULL`, similarly to DuckDB 1.x, use:

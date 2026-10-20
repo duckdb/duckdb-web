@@ -109,7 +109,7 @@ Generally, it is not recommended to use explicit materialization hints, as DuckD
 
 ## Data-Modifying CTEs
 
-> New Support for data-modifying statements in CTEs is introduced in DuckDB 2.0.
+> New Support for data-modifying statements in CTEs was introduced in DuckDB 2.0.
 
 A CTE body can be a data-modifying statement: [`INSERT`]({% link docs/2.0/sql/statements/insert.md %}), [`UPDATE`]({% link docs/2.0/sql/statements/update.md %}), [`DELETE`]({% link docs/2.0/sql/statements/delete.md %}), or [`COPY`]({% link docs/2.0/sql/statements/copy.md %}#copy--to). This lets you chain modifications into a single pipeline. A data-modifying CTE that is followed by other statements should use a [`RETURNING` clause]({% link docs/2.0/sql/statements/insert.md %}#returning-clause) so that its result can be referenced.
 

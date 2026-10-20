@@ -58,7 +58,7 @@ LOAD spatial;
 
 ## `INSTALL AND LOAD`
 
-> New The `INSTALL AND LOAD` statement is available starting with DuckDB 2.0.
+> New The `INSTALL AND LOAD` statement was introduced in DuckDB 2.0.
 
 The `INSTALL AND LOAD` statement installs an extension and loads it into the current session in a single step. It is equivalent to running `INSTALL` followed by `LOAD`. If the extension is already installed, the installation step is skipped; if it is already loaded, the loading step is skipped.
 

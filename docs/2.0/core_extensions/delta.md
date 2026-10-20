@@ -112,7 +112,7 @@ FROM delta_scan('gs://⟨my_bucket⟩/⟨path⟩');
 
 ### Creating Tables
 
-> New This feature is introduced in DuckDB 2.0.
+> New This feature was introduced in DuckDB 2.0.
 
 To create a Delta table, attach the location for it and create a table named after the attached database:
 
@@ -156,7 +156,7 @@ Since v1.5.6, if the table schema declares `CHAR(n)` or `VARCHAR(n)` (Spark writ
 
 ### Time Travel
 
-> New Time travel by timestamp is introduced in DuckDB 2.0.
+> New Time travel by timestamp was introduced in DuckDB 2.0.
 
 To read a table as it was at an earlier version or point in time, use the `AT` clause, an `ATTACH` option or a `delta_scan` parameter:
 
@@ -264,18 +264,18 @@ For an attached table, `duckdb_tables()` shows the same pairs in its `tags` colu
 
 Delta tables with [column mapping](https://github.com/delta-io/delta/blob/master/PROTOCOL.md#column-mapping) enabled are read as the Delta protocol specifies for each mode: in `id` mode, columns are matched by Parquet field ID; in `name` mode, by physical column name.
 
-The protocol requires every data file of an `id`-mode table to carry Parquet field IDs, but some writers omit them, including DuckDB v1.5.5 and earlier. Since v1.5.6, the `delta_column_mapping_policy` setting decides how such files are read:
+The protocol requires every data file of an `id`-mode table to carry Parquet field IDs, but some writers omit them, including DuckDB 1.5.5 and earlier. Since v1.5.6, the `delta_column_mapping_policy` setting decides how such files are read:
 
 * `strict`: fail with an error that names the file.
 * `lenient`: match the file's columns by physical name, or failing that by logical name, and log a warning under the `delta.ColumnMapping` log type. The names must cover every column in the file, otherwise the read fails.
 
-> Warning The default changed from `lenient` in DuckDB v1.5 to `strict` in v2.0. To read such files as v1.5 did, run `SET delta_column_mapping_policy = 'lenient';`{:.language-sql .highlight}.
+> Warning The default changed from `lenient` in DuckDB 1.5 to `strict` in v2.0. To read such files as v1.5 did, run `SET delta_column_mapping_policy = 'lenient';`{:.language-sql .highlight}.
 
 ### VARIANT Columns
 
 Delta `variant` columns are read as DuckDB [`VARIANT`]({% link docs/2.0/sql/data_types/variant.md %}), whether their files are shredded or not, and top-level `VARIANT` columns can be appended to.
 
-> New The following are introduced in DuckDB 2.0.
+> New The following were introduced in DuckDB 2.0.
 
 * A query that reads one field of a `VARIANT` or `STRUCT` column, such as `SELECT v.a`, reads only that field from the Parquet files, so on a shredded table it skips the columns of the other fields. This does not apply to a column with a `TIMESTAMP WITH TIME ZONE` field at any depth: DuckDB reads all of it.
 * `CREATE TABLE` accepts `VARIANT` columns.

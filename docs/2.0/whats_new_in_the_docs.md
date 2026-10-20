@@ -7,7 +7,7 @@ redirect_from:
 title: What's New in the Docs for 2.0
 ---
 
-This page tracks the documentation for the features introduced in DuckDB 2.0, organized around the themes of the [DuckDB v2.0 highlights blog post]({% post_url 2026-08-17-duckdb-20-highlights %}). Each section links to the relevant documentation.
+This page tracks the documentation for the features introduced in DuckDB 2.0, organized around the themes of the [DuckDB 2.0 highlights blog post]({% post_url 2026-08-17-duckdb-20-highlights %}). Each section links to the relevant documentation.
 
 ## DuckDB as a Server: Quack and `CONNECT`
 
@@ -26,13 +26,13 @@ The `VARIANT` type stores semi-structured, schema-less data such as JSON while k
 
 ## Triggers
 
-DuckDB 2.0 adds trigger support, so you can run actions automatically in response to table changes. This is useful for building audit tables and enforcing invariants.
+DuckDB 2.0 added trigger support, so you can run actions automatically in response to table changes. This is useful for building audit tables and enforcing invariants.
 
 * [`CREATE TRIGGER` statement]({% link docs/2.0/sql/statements/create_trigger.md %})
 
 ## SQL Dialect Additions
 
-DuckDB 2.0 extends the SQL dialect in several directions, from new join types to data-modifying CTEs and a friendlier variable syntax.
+DuckDB 2.0 extended the SQL dialect in several directions, from new join types to data-modifying CTEs and a friendlier variable syntax.
 
 * [Explicit join type syntax, including nearest (`NEAREST`) joins]({% link docs/2.0/sql/query_syntax/from.md %}#specifying-the-join-type-explicitly)
 * [Data-modifying CTEs]({% link docs/2.0/sql/query_syntax/with.md %}#data-modifying-ctes), including [`COPY ...` blocks in CTEs]({% link docs/2.0/sql/statements/copy.md %}#copy--to)
@@ -56,7 +56,7 @@ DuckDB 2.0 issues reads in the background and keeps multiple requests in flight,
 
 ## Faster Queries Across the Board
 
-DuckDB 2.0 includes optimizer and engine improvements, including faster recursive CTEs and better row-group pruning.
+DuckDB 2.0 included optimizer and engine improvements, including faster recursive CTEs and better row-group pruning.
 
 ## Storage Format v2.0
 
@@ -64,11 +64,11 @@ New database files use the v2.0.0 storage format by default. The format adds laz
 
 * [Default storage version]({% link docs/2.0/internals/storage.md %}#default-storage-version)
 * [Storage version table]({% link docs/2.0/internals/storage.md %}#storage-version-table)
-* Migrating existing deployments: see the [DuckDB v2.0 migration guide](/docs/preview/operations_manual/migration)
+* Migrating existing deployments: see the [DuckDB 2.0 migration guide]({% link docs/2.0/operations_manual/migration.md %})
 
 ## A Brand New SQL Parser
 
-DuckDB 2.0 introduces a PEG-based SQL parser that replaces the PostgreSQL-derived one and allows extensions to contribute grammar.
+DuckDB 2.0 introduced a PEG-based SQL parser that replaces the PostgreSQL-derived one and allows extensions to contribute grammar.
 
 * [PEG parser]({% link docs/2.0/sql/peg_parser.md %})
 
@@ -78,7 +78,7 @@ DuckDB 2.0 provides a smaller, faster native implementation of timezone, calenda
 
 ## Write Extensions Once, Host Them Yourself
 
-DuckDB 2.0 ships a revamped, stable C API with a versioned ABI, so an extension built once keeps working across releases. You can also register and host your own extension repositories, including static linking into custom builds.
+DuckDB 2.0 shipped a revamped, stable C API with a versioned ABI, so an extension built once keeps working across releases. You can also register and host your own extension repositories, including static linking into custom builds.
 
 * [C API]({% link docs/2.0/clients/c/overview.md %})
 * [Extension repositories]({% link docs/2.0/extensions/extension_repositories.md %})

@@ -50,7 +50,7 @@ WHERE s1t.other_id = s2t.id;
 
 ## Nested Schemas
 
-> New Support for nested schemas is introduced in DuckDB 2.0.
+> New Support for nested schemas was introduced in DuckDB 2.0.
 
 Schemas can be nested within other schemas. Objects in a nested schema are referenced using their fully qualified, dot-separated path:
 

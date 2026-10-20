@@ -11,7 +11,7 @@ title: Variant Functions
 
 This section describes functions that operate on the [`VARIANT` type]({% link docs/2.0/sql/data_types/variant.md %}).
 
-> New Support for the `variant_*` functions is introduced in DuckDB 2.0.
+> New Support for the `variant_*` functions was introduced in DuckDB 2.0.
 
 | Name | Description |
 |:--|:-------|

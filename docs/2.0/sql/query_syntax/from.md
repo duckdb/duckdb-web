@@ -528,7 +528,7 @@ ASOF LEFT JOIN prices p USING (symbol, "when");
 
 ### Nearest Joins
 
-> New Support for nearest joins is introduced in DuckDB 2.0.
+> New Support for nearest joins was introduced in DuckDB 2.0.
 
 A nearest join matches each left side row with the top-k right side rows according to a similarity or distance measure. This turns top-k similarity search into a join clause, which is handy for vector and embedding workloads.
 
@@ -600,7 +600,7 @@ SELECT * FROM t1 NATURAL JOIN (VALUES (2), (4)) _(x);
 
 ### Specifying the Join Type Explicitly
 
-> New This feature is introduced in DuckDB 2.0.
+> New This feature was introduced in DuckDB 2.0.
 
 The `JOIN BY (TYPE ⟨join_type⟩)`{:.language-sql .highlight} syntax allows you to explicitly select the join type, including DuckDB's internal join types that have no syntax in standard SQL:
 

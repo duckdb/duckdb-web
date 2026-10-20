@@ -126,7 +126,7 @@ ATTACH 's3://⟨blobs-duckdb⟩/databases/stations.duckdb' AS stations_db (READ_
 
 ### Explicit Storage Versions
 
-[DuckDB v1.2.0 introduced the `STORAGE_VERSION` option]({% post_url 2025-02-05-announcing-duckdb-120 %}#explicit-storage-versions), which allows explicitly specifying the storage version.
+[DuckDB 1.2.0 introduced the `STORAGE_VERSION` option]({% post_url 2025-02-05-announcing-duckdb-120 %}#explicit-storage-versions), which allows explicitly specifying the storage version.
 Using this, you can opt-in to newer forwards-incompatible features:
 
 ```sql
@@ -169,7 +169,7 @@ Database encryption implies using [storage version](#explicit-storage-versions) 
 
 ### Expressions in Paths and Options
 
-> New Using expressions for the database path is introduced in DuckDB 2.0. In earlier versions, the path had to be a string literal.
+> New Using expressions for the database path was introduced in DuckDB 2.0. In earlier versions, the path had to be a string literal.
 
 The database path and the [option values](#options) can be arbitrary scalar expressions rather than string literals. DuckDB evaluates these expressions while binding the `ATTACH` statement, so you can build them from [variables]({% link docs/2.0/sql/statements/set_variable.md %}), [environment variables]({% link docs/2.0/sql/functions/utility.md %}#getenvvar) or string concatenation. This keeps credentials and environment-specific identifiers, such as account numbers, out of your SQL scripts.
 

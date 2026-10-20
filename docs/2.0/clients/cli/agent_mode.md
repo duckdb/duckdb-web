@@ -7,7 +7,7 @@ redirect_from:
 title: Agent Mode
 ---
 
-> New Agent mode is introduced in DuckDB 2.0.
+> New Agent mode was introduced in DuckDB 2.0.
 
 Agent mode renders the CLI's output for consumption by an AI coding agent rather than a human at a terminal. It produces compact [Markdown]({% link docs/2.0/clients/cli/output_formats.md %}) tables with explicit result limits, machine-readable errors, and progress information on `stderr`, so that an agent can run queries and reliably parse the results.
 

@@ -24,7 +24,7 @@ They can be created using the type name followed by a string formatted according
 | `TIMESTAMPTZ`  | `TIMESTAMP WITH TIME ZONE`                | Time zone aware timestamp with microsecond precision   |
 | `TIMESTAMPTZ_NS` |                                         | Time zone aware timestamp with nanosecond precision    |
 
-> New The `TIMESTAMPTZ_NS` type is introduced in DuckDB 2.0. It provides time zone aware timestamps with nanosecond precision. External columns with nanosecond precision and `WITH TIME ZONE` semantics, e.g., [Parquet timestamp columns with `isAdjustedToUTC=true`](https://github.com/apache/parquet-format/blob/master/LogicalTypes.md#instant-semantics-timestamps-normalized-to-utc), are now read as `TIMESTAMPTZ_NS` and retain their full precision. In earlier versions these columns were converted to `TIMESTAMP WITH TIME ZONE` and lost precision.
+> New The `TIMESTAMPTZ_NS` type was introduced in DuckDB 2.0. It provides time zone aware timestamps with nanosecond precision. External columns with nanosecond precision and `WITH TIME ZONE` semantics, e.g., [Parquet timestamp columns with `isAdjustedToUTC=true`](https://github.com/apache/parquet-format/blob/master/LogicalTypes.md#instant-semantics-timestamps-normalized-to-utc), are now read as `TIMESTAMPTZ_NS` and retain their full precision. In earlier versions these columns were converted to `TIMESTAMP WITH TIME ZONE` and lost precision.
 
 ```sql
 SELECT TIMESTAMP_NS '1992-09-20 11:30:00.123456789';

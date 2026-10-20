@@ -30,7 +30,7 @@ See the [`GROUPING SETS`]({% link docs/2.0/sql/query_syntax/grouping_sets.md %})
 
 ## Grouping by `UNNEST`
 
-> New Grouping by `UNNEST` is introduced in DuckDB 2.0.
+> New Grouping by `UNNEST` was introduced in DuckDB 2.0.
 
 [`UNNEST`]({% link docs/2.0/sql/query_syntax/unnest.md %}) can be used directly in the `GROUP BY` clause to group by the elements of a list. This is useful for aggregating over the individual values of a list column:
 

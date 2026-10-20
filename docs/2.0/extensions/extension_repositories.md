@@ -7,7 +7,7 @@ redirect_from:
 title: Extension Repositories
 ---
 
-> New Support for custom extension repositories is introduced in DuckDB 2.0. This feature is currently work-in-progress and the syntax may still change.
+> New Support for custom extension repositories was introduced in DuckDB 2.0. This feature is currently work-in-progress and the syntax may still change.
 
 By default, DuckDB installs extensions from its built-in repositories (`core`, `core_nightly`, `community`, …). In addition, you can register your own trusted repositories, so that an organization can host and sign its own extensions and have them install and load just like the built-in ones.
 

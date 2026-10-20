@@ -231,7 +231,7 @@ ALTER col TYPE USING struct_insert(col, a := 42, b := NULL::VARCHAR);
 
 #### `ALTER TABLE` with `ADD COLUMN` / `DROP COLUMN` / `RENAME COLUMN`
 
-Starting with DuckDB v1.3.0, `ALTER TABLE` supports the
+Starting with DuckDB 1.3.0, `ALTER TABLE` supports the
 [`ADD COLUMN`, `DROP COLUMN` and `RENAME COLUMN` clauses]({% link docs/2.0/sql/data_types/struct.md %}#updating-the-schema)
 to update the sub-schema of a `STRUCT`.
 
@@ -273,7 +273,7 @@ ADD PRIMARY KEY (i, j);
 
 ## `SET` / `RESET` (Table Options)
 
-> This feature was introduced in DuckDB v1.5.
+> This feature was introduced in DuckDB 1.5.
 
 Modify table options after table creation.
 

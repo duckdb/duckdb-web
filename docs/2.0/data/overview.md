@@ -111,7 +111,7 @@ For more details, see the [page on JSON loading]({% link docs/2.0/data/json/over
 
 ### Returning the Filename
 
-Since DuckDB v1.3.0, the CSV, JSON and Parquet readers support the `filename` virtual column:
+Since DuckDB 1.3.0, the CSV, JSON and Parquet readers support the `filename` virtual column:
 
 ```sql
 COPY (FROM (VALUES (42), (43)) t(x)) TO 'test.parquet';

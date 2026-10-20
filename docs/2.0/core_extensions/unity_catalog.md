@@ -70,7 +70,7 @@ SELECT * FROM my_catalog.my_schema.my_table LIMIT 10;
 
 ### Time Travel
 
-> New Time travel by timestamp is introduced in DuckDB 2.0.
+> New Time travel by timestamp was introduced in DuckDB 2.0.
 
 To read a table as of a version or a point in time, use the `AT` clause:
 
@@ -99,13 +99,13 @@ Unity Catalog column types map to DuckDB types as follows. Since v1.5.6, DuckDB 
 
 #### VARIANT Columns
 
-> New Support for `VARIANT` columns is introduced in DuckDB 2.0.
+> New Support for `VARIANT` columns was introduced in DuckDB 2.0.
 
 Unity Catalog's `variant` maps to `VARIANT`. `VARIANT` columns can be read whether their files are shredded or not. Inserts write shredded variants if the table sets `delta.enableVariantShredding`. An `INSERT` into a table with a `VARIANT` inside a struct, list or map fails with an error.
 
 ### Creating Tables
 
-> New This feature is introduced in DuckDB 2.0.
+> New This feature was introduced in DuckDB 2.0.
 
 `CREATE TABLE` in a Unity Catalog schema writes the first version of a new Delta table and registers the table with Unity Catalog.
 
@@ -147,7 +147,7 @@ The `CHECKPOINT` statement does not apply to Unity Catalog tables and fails with
 
 ### Server-Side Scan Planning
 
-> New This feature is introduced in DuckDB 2.0.
+> New This feature was introduced in DuckDB 2.0.
 
 Databricks can plan scans on the server, through the Iceberg REST Catalog (IRC) API of Unity Catalog. The API uses catalog-wide statistics, which can improve filtering and reduce the number of files that a query scans. Unity Catalog OSS does not offer this API.
 

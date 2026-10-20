@@ -192,7 +192,7 @@ The `duckdb_functions()` function provides metadata about the functions (includi
 | `stability` | The stability of the function (`CONSISTENT`, `VOLATILE`, `CONSISTENT_WITHIN_QUERY` or `NULL`) | `VARCHAR` |
 | `categories` | Categories of the function. Used to generate the documentation. | `VARCHAR[]` |
 
-> New The `extension_name` and `categories` columns are introduced in DuckDB 2.0.
+> New The `extension_name` and `categories` columns were introduced in DuckDB 2.0.
 
 ## `duckdb_indexes`
 
@@ -320,7 +320,7 @@ The `duckdb_secret_types()` lists secret types that are supported in the current
 
 ## `duckdb_secret_type_parameters`
 
-> New The `duckdb_secret_type_parameters()` function is available as of DuckDB 2.0. It lists the parameters that each secret type and provider accepts.
+> New The `duckdb_secret_type_parameters()` function was introduced in DuckDB 2.0. It lists the parameters that each secret type and provider accepts.
 
 | Column | Description | Type |
 |:-|:---|:-|

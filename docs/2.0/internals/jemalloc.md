@@ -11,7 +11,7 @@ title: jemalloc
 The `jemalloc` extension replaces the system's memory allocator with [jemalloc](https://jemalloc.net/).
 `jemalloc` extension is statically linked and cannot be installed or loaded during runtime.
 
-> For thechnical reasons, we used to distribute `jemalloc` as an extension. Since DuckDB v1.5.3, it is distributred as a third-party library.
+> For thechnical reasons, we used to distribute `jemalloc` as an extension. Since DuckDB 1.5.3, it is distributred as a third-party library.
 
 ## Operating System Support
 

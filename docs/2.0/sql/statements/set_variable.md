@@ -34,7 +34,7 @@ SELECT 20 + getvariable('my_var') AS total;
 |------:|
 | 50    |
 
-> New The `$⟨variable⟩` shorthand is introduced in DuckDB 2.0.
+> New The `$⟨variable⟩` shorthand was introduced in DuckDB 2.0.
 
 As a shorthand for `getvariable`, a variable can be referenced directly with the `$⟨variable⟩` syntax anywhere an expression is allowed:
 
@@ -112,7 +112,7 @@ SELECT COLUMNS(c -> c != getvariable('column_to_exclude')) FROM tbl;
 
 ### The `$name` Shorthand
 
-> New Referencing a variable with the `$name` shorthand is introduced in DuckDB 2.0.
+> New Referencing a variable with the `$name` shorthand was introduced in DuckDB 2.0.
 
 As a shorthand for `getvariable`, you can reference a session variable directly with `$name`:
 
