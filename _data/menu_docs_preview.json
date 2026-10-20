@@ -739,6 +739,10 @@
                   "url": "update"
                 },
                 {
+                  "page": "UPDATE EXTENSIONS",
+                  "url": "update_extensions"
+                },
+                {
                   "page": "USE",
                   "url": "use"
                 },
@@ -1185,6 +1189,10 @@
               "url": "extension_repositories"
             },
             {
+              "page": "Community Extensions",
+              "url": "community_extensions"
+            },
+            {
               "page": "Versioning of Extensions",
               "url": "versioning_of_extensions"
             },
@@ -1395,6 +1403,10 @@
             {
               "page": "SQLite",
               "url": "sqlite"
+            },
+            {
+              "page": "SQLSmith",
+              "url": "sqlsmith"
             },
             {
               "page": "TPC-DS",
@@ -2145,6 +2157,10 @@
                   "url": "catch"
                 }
               ]
+            },
+            {
+              "page": "Internal Errors",
+              "url": "internal_errors"
             }
           ]
         },

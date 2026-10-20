@@ -283,7 +283,7 @@ The [amalgamation build]({% link docs/lts/dev/building/overview.md %}), which bu
 
 #### Gradual Phase-Out of macOS x86_64
 
-We are gradually phasing out `osx_amd64` from the list of fully supported [platforms]({% link docs/preview/dev/building/overview.md %}#platforms).
+We are gradually phasing out `osx_amd64` from the list of fully supported [platforms]({% link docs/preview/operations_manual/installing_duckdb/requirements.md %}#supported-platforms).
 For the time being, DuckDB and [core extensions]({% link docs/preview/core_extensions/overview.md %}) are still built and supported, but [community extensions]({% link docs/preview/extensions/community_extensions.md %}) are no longer built for this platform.
 
 DuckDB version 2.1 will stop supporting `osx_amd64`.
