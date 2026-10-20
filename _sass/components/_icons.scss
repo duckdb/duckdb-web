@@ -22,6 +22,10 @@ td svg.icon{
 	&.minus{
 		color: var(--main-text-tertiary-color, #B2B2B2);
 	}
+
+	&.x{
+		color: var(--cli-error, #d70000);
+	}
 	
 	@media only screen and (max-width: 650px) {
 		width: 1rem;
