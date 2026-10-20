@@ -201,7 +201,7 @@ CREATE OR REPLACE SECRET s3_secret1 IN postgres_p1 (
 );
 ```
 
-When `IN postgres_⟨attached_database⟩`{:.language-sql .highlight} clause of `CREATE SECRET` is specified, the secret is persisted to the `duckdb_secrets` table in the specified attached database.
+When `IN postgres_⟨attached_database⟩`{:.language-sql .highlight} clause of [`CREATE SECRET`]({% link docs/preview/sql/statements/create_secret.md %}) is specified, the secret is persisted to the `duckdb_secrets` table in the specified attached database.
 
 > Warning 
 > Secrets are written to the database table in unencrypted binary format. It is advised to use this provider for secrets that do not include confidential credentials (like the `s3` example above). For multi-tenant scenarios it is expected that [Postgres Row-Level Security policies](https://www.postgresql.org/docs/18/ddl-rowsecurity.html) can be used to prevent users to see secrets of other users.

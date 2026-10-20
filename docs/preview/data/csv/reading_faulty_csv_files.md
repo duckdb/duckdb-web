@@ -180,7 +180,7 @@ The CSV Reject Errors Table returns the following information:
 
 ## Parameters
 
-The parameters listed below are used in the `read_csv` function to configure the CSV Rejects Table.
+The parameters listed below are used in the [`read_csv` function]({% link docs/preview/data/csv/overview.md %}#parameters) to configure the CSV Rejects Table.
 
 | Name | Description | Type | Default |
 |:--|:-----|:-|:-|

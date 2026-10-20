@@ -28,7 +28,7 @@ After the SQLite extension is installed, tables can be queried from SQLite using
 SELECT * FROM sqlite_scan('test.db', 'tbl_name');
 ```
 
-Alternatively, the entire file can be attached using the `ATTACH` command. This allows you to query all tables stored within a SQLite database file as if they were a regular database.
+Alternatively, the entire file can be attached using the [`ATTACH` command]({% link docs/preview/sql/statements/attach.md %}). This allows you to query all tables stored within a SQLite database file as if they were a regular database.
 
 ```sql
 -- Attach the SQLite file "test.db"

@@ -3,7 +3,7 @@ layout: docu
 title: Parquet Export
 ---
 
-To export the data from a table to a Parquet file, use the `COPY` statement:
+To export the data from a table to a Parquet file, use the [`COPY` statement]({% link docs/preview/sql/statements/copy.md %}):
 
 ```sql
 COPY tbl TO 'output.parquet' (FORMAT parquet);

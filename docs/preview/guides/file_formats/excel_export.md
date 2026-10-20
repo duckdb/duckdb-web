@@ -14,7 +14,7 @@ LOAD excel;
 
 ## Exporting Excel Sheets
 
-To export a table to an Excel file, use the `COPY` statement with the `FORMAT xlsx` option:
+To export a table to an Excel file, use the [`COPY` statement]({% link docs/preview/sql/statements/copy.md %}) with the `FORMAT xlsx` option:
 
 ```sql
 COPY tbl TO 'output.xlsx' WITH (FORMAT xlsx);

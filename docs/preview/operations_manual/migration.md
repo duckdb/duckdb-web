@@ -94,7 +94,7 @@ For details, see [Deprecated Syntax]({% link docs/preview/sql/functions/lambda.m
 
 ### SQL Parser
 
-DuckDB v2.0.0 replaces the PostgreSQL-derived parser with a new PEG-based parser.
+DuckDB v2.0.0 replaces the PostgreSQL-derived parser with a new [PEG-based parser]({% link docs/preview/sql/peg_parser.md %}).
 It is designed to be compatible with the previous parser, so queries that parsed before should continue to parse, and error messages now include more precise source locations.
 If a query that parsed on an earlier version fails on v2.0.0, please [file an issue](https://github.com/duckdb/duckdb/issues).
 For details, see the [PEG parser page]({% link docs/preview/sql/peg_parser.md %}).
@@ -135,10 +135,10 @@ Rather than repeat the feature documentation here, this section points to where 
 For the complete tour, see the [preview announcement]({% post_url 2026-08-17-duckdb-20-highlights %}) and the detailed release announcement.
 The [What's New in the Docs for 2.0 page]({% link docs/preview/whats_new_in_the_docs.md %}) links every high-level new feature to its documentation, organized by theme:
 
-* DuckDB as a server with the [`quack` extension]({% link docs/preview/core_extensions/quack.md %}) and the `CONNECT` statement
+* DuckDB as a server with the [`quack` extension]({% link docs/preview/core_extensions/quack.md %}) and the [`CONNECT` statement]({% link docs/preview/sql/statements/connect.md %})
 * The [`VARIANT` type]({% link docs/preview/sql/data_types/variant.md %}) for semi-structured data
-* Triggers that run actions automatically in response to table changes
-* SQL dialect additions, including data-modifying CTEs and nested schemas
+* [Triggers]({% link docs/preview/sql/statements/create_trigger.md %}) that run actions automatically in response to table changes
+* SQL dialect additions, including [data-modifying CTEs]({% link docs/preview/sql/query_syntax/with.md %}#data-modifying-ctes) and [nested schemas]({% link docs/preview/sql/statements/create_schema.md %}#nested-schemas)
 * [Asynchronous I/O]({% link docs/preview/data/io.md %}) for faster reads from object storage
 * Optimizer and engine improvements that speed up existing queries, including on Windows
 * Self-hostable [extension repositories]({% link docs/preview/extensions/extension_distribution.md %}) for signing and distributing your own extensions

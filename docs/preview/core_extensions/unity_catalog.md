@@ -43,7 +43,7 @@ To read and write the table files, DuckDB also needs a [secret]({% link docs/pre
 
 ### Attach Options
 
-When attaching a Unity Catalog catalog, you can pass the following options to `ATTACH`:
+When attaching a Unity Catalog catalog, you can pass the following options to [`ATTACH`]({% link docs/preview/sql/statements/attach.md %}):
 
 | Option | Type | Default | Description |
 | --- | --- | --- | --- |

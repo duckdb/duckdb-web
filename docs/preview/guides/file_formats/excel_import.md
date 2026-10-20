@@ -79,7 +79,7 @@ INSERT INTO tbl
     SELECT * FROM read_xlsx('test_excel.xlsx', sheet = 'Sheet1');
 ```
 
-Alternatively, you can use the `COPY` statement with the `XLSX` format option to import an Excel file into an existing table:
+Alternatively, you can use the [`COPY` statement]({% link docs/preview/sql/statements/copy.md %}) with the `XLSX` format option to import an Excel file into an existing table:
 
 ```sql
 COPY tbl FROM 'test_excel.xlsx' (FORMAT xlsx, SHEET 'Sheet1');

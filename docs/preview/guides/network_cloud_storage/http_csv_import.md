@@ -21,7 +21,7 @@ After the `httpfs` extension is set up, CSV files can be read over `http(s)` the
 SELECT * FROM read_csv('https://⟨domain⟩/path/to/file.csv');
 ```
 
-Moreover, the `read_csv` function itself can also be omitted thanks to DuckDB's [replacement scan mechanism]({% link docs/preview/clients/c/replacement_scans.md %}):
+Moreover, the [`read_csv` function]({% link docs/preview/data/csv/overview.md %}) itself can also be omitted thanks to DuckDB's [replacement scan mechanism]({% link docs/preview/clients/c/replacement_scans.md %}):
 
 ```sql
 SELECT * FROM 'https://⟨domain⟩/path/to/file.csv';

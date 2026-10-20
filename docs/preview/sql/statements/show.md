@@ -21,7 +21,7 @@ SHOW threads;
 |---------|
 | 42      |
 
-If both a table and a setting share the name, `SHOW` describes the table (deprecated; use `DESCRIBE` for tables). `DESCRIBE` never resolves a setting.
+If both a table and a setting share the name, `SHOW` describes the table (deprecated; use [`DESCRIBE`]({% link docs/preview/guides/meta/describe.md %}) for tables). `DESCRIBE` never resolves a setting.
 
 ## `SHOW DATABASES` Statement
 

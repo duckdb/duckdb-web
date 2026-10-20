@@ -129,7 +129,7 @@ Second, set it in your DuckDB session using DuckDB’s [Secrets Manager]({% link
 
 ### `CONFIG`
 
-The user must pass all configuration information into the `CREATE SECRET` statement. To create a secret using the `CONFIG` provider, use the following command:
+The user must pass all configuration information into the [`CREATE SECRET` statement]({% link docs/preview/sql/statements/create_secret.md %}). To create a secret using the `CONFIG` provider, use the following command:
 
 ```sql
 CREATE SECRET hf_token (

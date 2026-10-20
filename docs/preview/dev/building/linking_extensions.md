@@ -10,6 +10,8 @@ It describes how statically linking extensions changed in DuckDB v2.0 and what b
 
 ## What Changed in DuckDB v2.0
 
+> New Link-time static linking of extensions is introduced in DuckDB 2.0.
+
 Before v2.0, the set of statically linked extensions was a _compile-time_ decision.
 The sources were compiled with knowledge of which extensions were included, so a build with `CORE_EXTENSIONS='json;parquet;icu'` could not reuse the object files of a build with `CORE_EXTENSIONS='json;parquet;icu;tpch'`, even though one is a subset of the other.
 

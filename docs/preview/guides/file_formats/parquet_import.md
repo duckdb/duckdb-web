@@ -29,7 +29,7 @@ INSERT INTO tbl
     SELECT * FROM read_parquet('input.parquet');
 ```
 
-Alternatively, use the `COPY` statement to load data from a Parquet file into an existing table:
+Alternatively, use the [`COPY` statement]({% link docs/preview/sql/statements/copy.md %}) to load data from a Parquet file into an existing table:
 
 ```sql
 COPY tbl FROM 'input.parquet' (FORMAT parquet);

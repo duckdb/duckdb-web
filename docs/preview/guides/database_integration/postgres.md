@@ -40,7 +40,7 @@ The first parameter to the `postgres_scan` function is the [PostgreSQL connectio
 | `dbname`   | Database name                        | [user]         |
 | `passfile` | Name of file passwords are stored in | `~/.pgpass`    |
 
-Alternatively, the entire database can be attached using the `ATTACH` command. This allows you to query all tables stored within the PostgreSQL database as if it was a regular database.
+Alternatively, the entire database can be attached using the [`ATTACH` command]({% link docs/preview/sql/statements/attach.md %}). This allows you to query all tables stored within the PostgreSQL database as if it was a regular database.
 
 ```sql
 -- Attach the PostgreSQL database using the given connection string

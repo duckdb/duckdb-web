@@ -79,7 +79,7 @@ DuckDB can also read a series of Parquet files and treat them as if they were a 
 
 ### Directory Paths
 
-The `read_parquet` function accepts a local directory path and recursively reads files with the `.parquet` extension, including files in subdirectories:
+The [`read_parquet` function]({% link docs/preview/data/parquet/overview.md %}) accepts a local directory path and recursively reads files with the `.parquet` extension, including files in subdirectories:
 
 ```sql
 SELECT *

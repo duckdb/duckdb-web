@@ -3,7 +3,7 @@ layout: docu
 title: Profiling Queries
 ---
 
-DuckDB supports profiling queries via the `EXPLAIN` and `EXPLAIN ANALYZE` statements.
+DuckDB supports profiling queries via the [`EXPLAIN`]({% link docs/preview/guides/meta/explain.md %}) and [`EXPLAIN ANALYZE`]({% link docs/preview/guides/meta/explain_analyze.md %}) statements.
 
 ## `EXPLAIN`
 

@@ -72,7 +72,7 @@ The `PhysicalPivot` operator converts those lists into column names and values t
 ### Internals
 
 Unpivoting is implemented entirely as rewrites into SQL queries.
-Each `UNPIVOT` is implemented as set of `unnest` functions, operating on a list of the column names and a list of the column values.
+Each [`UNPIVOT`]({% link docs/preview/sql/statements/unpivot.md %}) is implemented as set of `unnest` functions, operating on a list of the column names and a list of the column values.
 If dynamically unpivoting, the `COLUMNS` expression is evaluated first to calculate the column list.
 
 For example:

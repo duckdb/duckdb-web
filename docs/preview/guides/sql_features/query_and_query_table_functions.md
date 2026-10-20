@@ -50,7 +50,7 @@ LIMIT 3;
 | quarter     | 1         | 3         |
 | month       | 1         | 9         |
 
-The `query` function allows for even more flexibility. For example, users who prefer pandas' `stack` syntax over SQL's `UNPIVOT` syntax, may use:
+The `query` function allows for even more flexibility. For example, users who prefer pandas' `stack` syntax over SQL's [`UNPIVOT` syntax]({% link docs/preview/sql/statements/unpivot.md %}), may use:
 
 ```sql
 CREATE OR REPLACE MACRO stack(table_name, index, name, values) AS TABLE 

@@ -176,7 +176,7 @@ SELECT * FROM delta_scan('s3://⟨my_bucket⟩/⟨path⟩', timestamp => TIMESTA
 
 ### Checkpointing
 
-Since v1.5.1, `CHECKPOINT` compacts the Delta log of an attached table into a checkpoint file, which speeds up reads of tables with long logs:
+Since v1.5.1, [`CHECKPOINT`]({% link docs/preview/sql/statements/checkpoint.md %}) compacts the Delta log of an attached table into a checkpoint file, which speeds up reads of tables with long logs:
 
 ```sql
 ATTACH '⟨path⟩' AS my_table (TYPE delta);
@@ -266,7 +266,7 @@ The protocol requires every data file of an `id`-mode table to carry Parquet fie
 
 ### VARIANT Columns
 
-Delta `variant` columns are read as DuckDB `VARIANT`, whether their files are shredded or not, and top-level `VARIANT` columns can be appended to.
+Delta `variant` columns are read as DuckDB [`VARIANT`]({% link docs/preview/sql/data_types/variant.md %}), whether their files are shredded or not, and top-level `VARIANT` columns can be appended to.
 
 > New The following are introduced in DuckDB 2.0.
 
@@ -317,7 +317,7 @@ The `delta` extension supports:
 ## Limitations
 
 * `CREATE OR REPLACE TABLE` and `CREATE TABLE ... AS SELECT` are not supported. Create the table, then `INSERT` into it.
-* `UPDATE`, `DELETE`, `MERGE INTO`, `ALTER TABLE` and `DROP TABLE` are not supported, nor are `RETURNING` and `ON CONFLICT` clauses on `INSERT`.
+* `UPDATE`, `DELETE`, [`MERGE INTO`]({% link docs/preview/sql/statements/merge_into.md %}), `ALTER TABLE` and `DROP TABLE` are not supported, nor are `RETURNING` and `ON CONFLICT` clauses on `INSERT`.
 * `CREATE TABLE` does not support:
     * constraints, including `NOT NULL`
     * `DEFAULT` values and generated columns

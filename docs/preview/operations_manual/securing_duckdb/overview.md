@@ -131,8 +131,8 @@ SET enable_external_access = false;
 
 This setting implies that:
 
-* `ATTACH` cannot attach to a database in a file.
-* `COPY` cannot read from or write to files.
+* [`ATTACH`]({% link docs/preview/sql/statements/attach.md %}) cannot attach to a database in a file.
+* [`COPY`]({% link docs/preview/sql/statements/copy.md %}) cannot read from or write to files.
 * Functions such as `read_csv`, `read_parquet`, `read_json`, etc. cannot read from an external source.
 
 #### The `allowed_directories` and `allowed_paths` Options

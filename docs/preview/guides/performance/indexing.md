@@ -84,7 +84,7 @@ DuckDB registers index memory through its buffer manager.
 However, these index buffers are not yet buffer-managed.
 That means DuckDB does not yet destroy any index buffers if it has to evict memory.
 Thus, indexes can take up a significant portion of DuckDB's available memory, potentially affecting the performance of memory-intensive queries.
-Re-attaching (`DETACH` + `ATTACH`) the database containing indexes can mitigate this effect, as we deserialize index memory lazily.
+Re-attaching ([`DETACH`]({% link docs/preview/sql/statements/attach.md %}#detach) + [`ATTACH`]({% link docs/preview/sql/statements/attach.md %})) the database containing indexes can mitigate this effect, as we deserialize index memory lazily.
 Disabling index scans and re-attaching after changes can further decrease the impact of indexes on DuckDB's available memory.
 
 ### Indexes and Opening Databases

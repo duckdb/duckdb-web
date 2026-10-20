@@ -3,7 +3,7 @@ layout: docu
 title: JSON Import
 ---
 
-To read data from a JSON file, use the `read_json` function in the `FROM` clause of a query:
+To read data from a JSON file, use the [`read_json` function]({% link docs/preview/data/json/loading_json.md %}) in the `FROM` clause of a query:
 
 ```sql
 SELECT *

@@ -40,7 +40,7 @@ FROM quack_query('⟨uri⟩', 'SELECT 1 + 1');
 
 #### Sticky Session via `ATTACH`
 
-`ATTACH` keeps server-side state (temp tables, `SET` variables) across calls, which `quack_query` alone does not.
+[`ATTACH`]({% link docs/preview/sql/statements/attach.md %}) keeps server-side state (temp tables, `SET` variables) across calls, which `quack_query` alone does not.
 
 ```sql
 ATTACH '⟨uri⟩' AS remote (TYPE quack);

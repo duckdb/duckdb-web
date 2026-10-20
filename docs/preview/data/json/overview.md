@@ -38,7 +38,7 @@ Read a JSON file from disk, auto-infer options:
 SELECT * FROM 'todos.json';
 ```
 
-Use the `read_json` function with custom options:
+Use the [`read_json` function]({% link docs/preview/data/json/loading_json.md %}) with custom options:
 
 ```sql
 SELECT *

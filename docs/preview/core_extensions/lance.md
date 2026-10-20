@@ -104,7 +104,7 @@ TO 's3://⟨bucket/path/to/out.lance⟩'
 
 ### Create a Lance Dataset via `CREATE TABLE` (Directory Namespace)
 
-When you `ATTACH` a directory as a Lance namespace, you can create new datasets using `CREATE TABLE` (schema-only)
+When you [`ATTACH`]({% link docs/preview/sql/statements/attach.md %}) a directory as a Lance namespace, you can create new datasets using `CREATE TABLE` (schema-only)
 or `CREATE TABLE AS SELECT` (CTAS). The dataset is written to `⟨namespace_root⟩/⟨table_name.lance⟩`{:.language-sql .highlight}.
 
 ```sql

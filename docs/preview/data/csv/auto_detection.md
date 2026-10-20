@@ -106,7 +106,7 @@ In this example – the system selects the `|` as the delimiter. All rows are sp
 
 ### Type Detection
 
-After detecting the dialect, the system will attempt to figure out the types of each of the columns. Note that this step is only performed if we are calling `read_csv`. In case of the `COPY` statement the types of the table that we are copying into will be used instead.
+After detecting the dialect, the system will attempt to figure out the types of each of the columns. Note that this step is only performed if we are calling `read_csv`. In case of the [`COPY` statement]({% link docs/preview/sql/statements/copy.md %}) the types of the table that we are copying into will be used instead.
 
 The type detection works by attempting to convert the values in each column to the candidate types. If the conversion is unsuccessful, the candidate type is removed from the set of candidate types for that column. After all samples have been handled – the remaining candidate type with the highest priority is chosen. The default set of candidate types is given below, in order of priority:
 

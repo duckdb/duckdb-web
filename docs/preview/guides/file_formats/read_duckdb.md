@@ -86,7 +86,7 @@ FROM read_duckdb('my-2.duckdb');
 └───────┘
 ```
 
-If the extension is `.db` or `.duckdb`, you can also omit the `read_duckdb` call (similarly to how you can omit `read_csv` and `read_parquet`):
+If the extension is `.db` or `.duckdb`, you can also omit the `read_duckdb` call (similarly to how you can omit [`read_csv`]({% link docs/preview/data/csv/overview.md %}) and [`read_parquet`]({% link docs/preview/data/parquet/overview.md %})):
 
 ```sql
 FROM 'my-2.duckdb';

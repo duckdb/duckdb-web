@@ -57,7 +57,7 @@ The legacy parser is intended as a bridge solution, for example to check a query
 * Column constraints on `ALTER TABLE ... ADD COLUMN`, such as `UNIQUE`, are rejected by the transformer.
 * The `identifier_case_mode = 'uppercase'` option is a DuckDB 2.0 feature; the legacy grammar treats it as `preserve`.
 
-> Warning Newer and more powerful syntax, such as `INSTALL AND LOAD`, is rejected by the legacy parser.
+> Warning Newer and more powerful syntax, such as [`INSTALL AND LOAD`]({% link docs/preview/sql/statements/load_and_install.md %}), is rejected by the legacy parser.
 
 ## Further Reading
 

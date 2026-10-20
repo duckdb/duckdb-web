@@ -27,7 +27,7 @@ For example:
 SELECT * FROM read_parquet('https://duckdb.org/data/prices.parquet');
 ```
 
-Moreover, the `read_parquet` function itself can also be omitted thanks to DuckDB's [replacement scan mechanism]({% link docs/preview/clients/c/replacement_scans.md %}):
+Moreover, the [`read_parquet` function]({% link docs/preview/data/parquet/overview.md %}) itself can also be omitted thanks to DuckDB's [replacement scan mechanism]({% link docs/preview/clients/c/replacement_scans.md %}):
 
 ```sql
 SELECT * FROM 'https://duckdb.org/data/holdings.parquet';

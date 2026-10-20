@@ -43,6 +43,8 @@ The view that describes the catalog information for columns is `information_sche
 | `is_generated` | `ALWAYS` if the column is a [generated column]({% link docs/preview/sql/statements/create_table.md %}#generated-columns), `NEVER` otherwise. Available as of DuckDB 2.0. |`VARCHAR`| `'NEVER'` |
 | `generation_expression` | If the column is a generated column, the expression used to compute it; `NULL` otherwise. Available as of DuckDB 2.0. |`VARCHAR`| `NULL` |
 
+> New The `is_generated` and `generation_expression` columns are introduced in DuckDB 2.0.
+
 ### `constraint_column_usage`: Constraint Column Usage
 
 This view describes all columns in the current database that are used by some constraint. For a check constraint, this view identifies the columns that are used in the check expression. For a not-null constraint, this view identifies the column that the constraint is defined on. For a foreign key constraint, this view identifies the columns that the foreign key references. For a unique or primary key constraint, this view identifies the constrained columns.

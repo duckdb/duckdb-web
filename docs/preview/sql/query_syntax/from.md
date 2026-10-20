@@ -477,7 +477,7 @@ ASOF JOIN prices p
        ON t.symbol = p.symbol AND t.when >= p.when;
 ```
 
-The `ASOF` join requires at least one inequality condition on the ordering field.
+The [`ASOF` join]({% link docs/preview/guides/sql_features/asof_join.md %}) requires at least one inequality condition on the ordering field.
 The inequality can be any inequality condition (`>=`, `>`, `<=`, `<`)
 on any data type, but the most common form is `>=` on a temporal type.
 Any other conditions must be equalities (or `NOT DISTINCT`).

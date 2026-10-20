@@ -22,7 +22,7 @@ LOAD mysql;
 
 ## Reading Data from MySQL
 
-To make a MySQL database accessible to DuckDB use the `ATTACH` command with the `mysql` or the `mysql_scanner` type:
+To make a MySQL database accessible to DuckDB use the [`ATTACH` command]({% link docs/preview/sql/statements/attach.md %}) with the `mysql` or the `mysql_scanner` type:
 
 ```sql
 ATTACH 'host=localhost user=root port=0 database=mysql' AS mysqldb (TYPE mysql);

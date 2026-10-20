@@ -208,6 +208,8 @@ DuckDB supports some PostgreSQL-style operators for regular expression matching:
 | `~*`             | [`regexp_matches`]({% link docs/preview/sql/functions/text.md %}#regexp_matchesstring-regex-options) with case-insensitive matching       |
 | `!~*`            | `NOT` [`regexp_matches`]({% link docs/preview/sql/functions/text.md %}#regexp_matchesstring-regex-options) with case-insensitive matching |
 
+> New As of DuckDB 2.0, the `~` and `!~` operators perform partial matching by default, and the `~*` and `!~*` operators are supported. In earlier versions, `~` and `!~` performed full matching.
+
 By default, these operators perform partial matching, following PostgreSQL's semantics.
 This is controlled by the deprecated `regex_match_operator_semantics` setting.
 Setting it to `full` restores the legacy behavior in which `~` and `!~` map to [`regexp_full_match`]({% link docs/preview/sql/functions/text.md %}#regexp_full_matchstring-regex-col2), but this setting is deprecated and will be removed in a future release.

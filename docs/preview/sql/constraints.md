@@ -136,7 +136,7 @@ If a deferred constraint is still violated at `COMMIT`, the commit fails. The fo
 * DuckDB uses the bare `DEFERRED` and `IMMEDIATE` keywords; the PostgreSQL `INITIALLY DEFERRED` and `DEFERRABLE` spellings are not supported, and there is no `SET CONSTRAINTS` statement.
 * A `NOT NULL` constraint on a deferred primary key is still checked eagerly.
 * A foreign key cannot reference a deferred key.
-* A deferred constraint cannot be used as an `ON CONFLICT` target.
+* A deferred constraint cannot be used as an [`ON CONFLICT`]({% link docs/preview/sql/statements/insert.md %}#on-conflict-clause) target.
 
 The [`duckdb_constraints()`]({% link docs/preview/sql/meta/duckdb_table_functions.md %}#duckdb_constraints) function reports the timing in its `constraint_text` column (for example `UNIQUE(i) DEFERRED`) and exposes an `is_deferred` column.
 
