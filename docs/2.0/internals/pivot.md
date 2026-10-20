@@ -73,6 +73,8 @@ The `PhysicalPivot` operator converts those lists into column names and values t
 | US      | Seattle       | 564  | 608  | 738  |
 | US      | New York City | 8015 | 8175 | 8772 |
 
+> The rewrite into list-based aggregations shown above is used only when the number of distinct pivot values exceeds the [`pivot_filter_threshold` configuration option]({% link docs/2.0/configuration/overview.md %}#global-configuration-options) (default `20`). Below that threshold, DuckDB instead uses filtered aggregates. The list-based approach materializes all values in memory, so you can lower or raise `pivot_filter_threshold` to trade off time against memory usage.
+
 ## `UNPIVOT`
 
 ### Internals
