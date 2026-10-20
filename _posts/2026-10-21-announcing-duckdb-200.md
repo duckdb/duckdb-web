@@ -5,11 +5,11 @@ authors:
   - The DuckDB team
 thumb: "/images/blog/thumbs/duckdb-release-2-0-0.svg"
 image: "/images/blog/thumbs/duckdb-release-2-0-0.png"
-excerpt: "The DuckDB team is happy to announce that today we're releasing DuckDB version 2.0.0 LTS, codenamed “Cinnamon Teal” (Cyanoptera). This is our biggest feature release so far, shipping asynchronous I/O, triggers, and an extensible SQL parser, along with a first-class `VARIANT` type, a more efficient storage format and much more, built from close to 20,000 commits since v1.5."
+excerpt: "The DuckDB team is happy to announce that today we're releasing DuckDB version 2.0.0 LTS, codenamed “Cinnamon Teal” (Spatula cyanoptera). This is our biggest feature release so far, shipping asynchronous I/O, triggers, and an extensible SQL parser, along with a first-class `VARIANT` type, a more efficient storage format and much more, built from close to 20,000 commits since v1.5."
 tag: release
 ---
 
-We are proud to release DuckDB v2.0.0, codenamed “Cinnamon Teal” after the [spatula cyanoptera](https://en.wikipedia.org/wiki/Cinnamon_teal), a strikingly reddish-brown duck found in the western Americas.
+We are proud to release DuckDB v2.0.0, codenamed “Cinnamon Teal” after the [_Spatula cyanoptera_](https://en.wikipedia.org/wiki/Cinnamon_teal), a strikingly reddish-brown duck found in the western Americas.
 
 While [DuckDB v1.0]({% post_url 2024-06-03-announcing-duckdb-100 %}) was all about stability and backwards compatibility, DuckDB v2.0 is above all a feature release.
 In this blog post, we summarize the highlights and then walk through the breaking changes and how to migrate.
@@ -141,7 +141,7 @@ FROM t;
 DuckDB v2.0 introduces [asynchronous I/O]({% link docs/preview/data/io.md %}) throughout the engine. The I/O layer now scales independently from the query processing layer, issuing reads in the background and keeping multiple requests in flight. This means far more parallelism for remote reads and dramatically faster queries on object storage such as [`s3://`]({% link docs/preview/core_extensions/httpfs/s3api.md %}).
 
 We described the design in detail in a [dedicated blog post]({% post_url 2026-07-31-asynchronous-io %}).
-In this blog post, we showed the network throughput over the course of a query with and without asynchronous I/O:
+In that post, we showed the network throughput over the course of a query with and without asynchronous I/O:
 
 ![Network throughput]({% link images/blog/v20-release/sync-vs-async-network-throughput-light.svg %}){: .lightmode-img }
 ![Network throughput]({% link images/blog/v20-release/sync-vs-async-network-throughput-dark.svg %}){: .darkmode-img }
@@ -174,7 +174,7 @@ Long-running SQL queries report their expected cost prior to running, so the age
 
 DuckDB has always used a parser derived from PostgreSQL's. In v2.0 we ship our own modern, extensible [PEG-based parser]({% post_url 2026-08-20-duckdb-20-peg-parser %}). Extensions can now hook into the grammar itself (an idea we first explored in our [research on runtime-extensible parsers]({% post_url 2024-11-22-runtime-extensible-parsers %})), so expect extensions that expose entirely new SQL syntax, and error messages now come with precise source locations. For details, see the [PEG parser documentation]({% link docs/preview/sql/peg_parser.md %}). The new parser is designed to be compatible with the old one, so you should not notice the swap. If you do, please file an issue. In the meantime, you can switch back to the old parser using the [`legacy_parser` extension]({% link docs/preview/core_extensions/legacy_parser.md %}) by running `SET enable_legacy_parser = true;`{:.language-sql .highlight}.
 
-The old parser had served DuckDB since its first commit in 2018. Its grammar was generated with YACC/Bison, which produces an LALR(1) parser, so as DuckSQL grew even small additions could collide with existing rules and raise `shift/reduce` or `reduce/reduce` conflicts. A PEG grammar avoids this by trying alternatives in the order they are written, so adding syntax no longer risks breaking unrelated rules. Similarly, Python itself has recently also moved to a PEG-based parser in [version 3.9](https://peps.python.org/pep-0617/), for the same flexibility.
+The old parser had served DuckDB since its first commit in 2018. Its grammar was generated with YACC/Bison, which produces an LALR(1) parser, so as DuckSQL grew even small additions could collide with existing rules and raise `shift/reduce` or `reduce/reduce` conflicts. A PEG grammar avoids this by trying alternatives in the order they are written, so adding syntax no longer risks breaking unrelated rules. Python itself moved to a PEG-based parser in [version 3.9](https://peps.python.org/pep-0617/) for the same flexibility.
 
 ### Write Extensions Once and Host Them Yourself
 
@@ -194,7 +194,7 @@ LOAD my_repo/my_ext;
 
 A repository is a name, a URL prefix, and one or more RSA public keys that are trusted to sign the extensions served from it. The prefix can point at anything DuckDB can read: a local path, `https`, `s3`, you name it. At `CREATE` time, DuckDB fetches the repository's public keys and pins them into the repository definition, printing each key's SHA-256 fingerprint so you can compare it against one published out of band.
 
-For more details, see the [Extension Repositories page]({% link docs/preview/extensions/extension_repositories.md %})
+For more details, see the [Extension Repositories page]({% link docs/preview/extensions/extension_repositories.md %}).
 
 ### Core Extension Updates
 
@@ -299,5 +299,5 @@ In a [microbenchmark]({% post_url 2026-08-17-duckdb-20-highlights %}#6-faster-qu
 
 DuckDB v2.0 bumps the default [storage format version]({% link docs/preview/internals/storage.md %}) to v2.0.0. Column metadata is now loaded lazily, so wide tables open faster; the `DICT_FSST` string compression method is enabled by default; deletes are stored compactly; and the storage layer performs much stronger corruption validation on read. Databases with big indexes and wide tables open faster and use far less memory.
 
-Because the new format is not backward compatible, see the [migration section](#migrating-to-v20) below.
+Because the new format is not backward compatible, see the [migration section](#migrating-to-v20).
 
