@@ -85,4 +85,12 @@ permalink: /history/
     </div>
   </div>
 
+  <div class="timeline-entry">
+    <div class="timeline-marker"><span class="timeline-year">2026, Q4</span></div>
+    <div class="timeline-body">
+      <h2 id="duckdb-reaches-20">DuckDB Reaches v2.0</h2>
+      <p>On October 21, 2026, the team <a href="{% post_url 2026-10-21-announcing-duckdb-200 %}">released DuckDB v2.0.0 LTS</a>, the project's biggest feature release so far. It ships a polished version of the Quack protocol, asynchronous I/O, a first-class <code>VARIANT</code> type, triggers and an extensible SQL parser.</p>
+    </div>
+  </div>
+
 </div>
