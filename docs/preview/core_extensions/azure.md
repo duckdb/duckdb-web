@@ -4,7 +4,7 @@ layout: docu
 title: Azure Extension
 ---
 
-The `azure` extension is a loadable extension that adds a filesystem abstraction for [Azure Blob Storage](https://azure.microsoft.com/en-us/products/storage/blobs) to DuckDB, enabling both reading and writing data.
+The `azure` extension lets DuckDB read and write files in [Azure Blob Storage](https://azure.microsoft.com/en-us/products/storage/blobs) and Azure Data Lake Storage (ADLS) Gen2.
 
 ## Installing and Loading
 
@@ -17,7 +17,7 @@ INSTALL AND LOAD azure;
 
 ## Usage
 
-Once the [authentication](#authentication) is set up, you can query Azure storage as follows:
+Queries need a [secret](#authentication-with-secret); for a public container, a secret with the storage account name is enough (see the [`CONFIG` provider](#config-provider)). Then you can query Azure storage as follows:
 
 ### Azure Blob Storage
 
@@ -54,7 +54,7 @@ FROM 'az://⟨my_storage_account⟩.blob.core.windows.net/⟨my_container⟩/⟨
 
 ### Azure Data Lake Storage (ADLS)
 
-Allowed URI schemes: `abfss`
+Allowed URI schemes: `abfss` or `abfs` (both connect over HTTPS)
 
 ```sql
 SELECT count(*)
@@ -85,6 +85,13 @@ SELECT *
 FROM 'abfss://⟨my_storage_account⟩.dfs.core.windows.net/⟨my_filesystem⟩/⟨path⟩/*.csv';
 ```
 
+The fully qualified path can also use the `⟨my_filesystem⟩@⟨my_storage_account⟩`{:.language-sql .highlight} form:
+
+```sql
+SELECT count(*)
+FROM 'abfss://⟨my_filesystem⟩@⟨my_storage_account⟩.dfs.core.windows.net/⟨path⟩/⟨my_file⟩.⟨parquet_or_csv⟩';
+```
+
 ## Writing to Azure Blob Storage
 
 You can write data directly to Azure Blob or ADLSv2 Storage using the [`COPY` statement]({% link docs/preview/sql/statements/copy.md %}).
@@ -98,7 +105,7 @@ TO 'az://⟨my_container⟩/⟨path⟩/output.parquet';
 ```sql
 -- Write a table to a CSV file on ADLSv2 Storage
 COPY my_table
-TO 'abfss://⟨my_container⟩/⟨path⟩/output.csv';
+TO 'abfss://⟨my_filesystem⟩/⟨path⟩/output.csv';
 ```
 
 You can also use fully qualified paths:
@@ -108,45 +115,70 @@ COPY my_table
 TO 'az://⟨my_storage_account⟩.blob.core.windows.net/⟨my_container⟩/⟨path⟩/output.parquet';
 ```
 
+Since v1.5.4, the extension buffers written data locally and uploads it in blocks of `azure_write_block_size` bytes (default: 8 MiB).
+By default, the uploaded blocks are committed when the file is closed, so other readers see the new content only after the write completes.
+To commit earlier, set `azure_write_staged_blocks_per_commit` to the number of blocks after which an intermediate commit happens.
+
+> Warning An intermediate commit makes an incomplete file visible to readers. A Parquet file cannot be read until its footer is written at the end, so keep the default `0` for Parquet files and for Delta, Iceberg or DuckLake tables.
+
+### Writing Large Files
+
+Azure limits a blob to 50,000 blocks.
+With the default block size of 8 MiB, the largest file you can write is about 390 GiB.
+To write larger files, increase `azure_write_block_size` (maximum: 4000 MiB, about 3.9 GiB). For example, to write files up to about 3 TiB:
+
+```sql
+SET azure_write_block_size = 64 * 1024 * 1024;
+```
+
 ## Configuration
 
-Use the following [configuration options]({% link docs/preview/configuration/overview.md %}) to control how the extension reads remote files:
+Use the following [configuration options]({% link docs/preview/configuration/overview.md %}) to control how the extension reads and writes remote files:
 
 | Name | Description | Type | Default |
 |:---|:---|:---|:---|
 | `azure_http_stats` | Include HTTP info from Azure Storage in the [`EXPLAIN ANALYZE` statement]({% link docs/preview/dev/profiling.md %}). | `BOOLEAN` | `false` |
-| `azure_read_transfer_concurrency` | Maximum number of threads the Azure client can use for a single parallel read. If `azure_read_transfer_chunk_size` is less than `azure_read_buffer_size` then setting this > 1 will allow the Azure client to do concurrent requests to fill the buffer. | `BIGINT` | `5` |
-| `azure_read_transfer_chunk_size` | Maximum size in bytes that the Azure client will read in a single request. It is recommended that this is a factor of `azure_read_buffer_size`. | `BIGINT` | `1024*1024` |
-| `azure_read_buffer_size` | Size of the read buffer. It is recommended that this is evenly divisible by `azure_read_transfer_chunk_size`. | `UBIGINT` | `1024*1024` |
+| `azure_http_logging` | Write Azure HTTP requests to the DuckDB `HTTP` log when it is enabled. See [Logging](#logging). | `BOOLEAN` | `true` |
+| `azure_http_logging_redact_query_params` | Semicolon-separated list of URL query parameter names (case-sensitive) whose values are redacted in the HTTP log. | `VARCHAR` | `sig` |
+| `azure_http_logging_redact_headers` | Semicolon-separated list of header names (case-insensitive) whose values are redacted in the HTTP log, for both requests and responses. | `VARCHAR` | `Authorization` |
+| `azure_read_transfer_concurrency` | Maximum number of threads the Azure client can use for a single parallel read. Values above 1 let the client fill one buffer with parallel requests, when the chunk size is smaller than the buffer. | `INTEGER` | `5` |
+| `azure_read_transfer_chunk_size` | Maximum size in bytes that the Azure client will read in a single request. Should be a divisor of `azure_read_buffer_size`. | `BIGINT` | `8*1024*1024` |
+| `azure_read_buffer_size` | Size of the read buffer. Should be a multiple of `azure_read_transfer_chunk_size`. | `UBIGINT` | `8*1024*1024` |
+| `azure_write_block_size` | Size in bytes of each block for Blob and ADLS writes. Setting it to `0` restores the default. The maximum is 4000 MiB (about 3.9 GiB). See [Writing Large Files](#writing-large-files). | `UBIGINT` | `8*1024*1024` |
+| `azure_write_staged_blocks_per_commit` | Number of uploaded blocks after which an intermediate commit happens. With `0`, all blocks are committed when the file is closed. Non-zero values make partial writes visible sooner, at the cost of extra requests. This option does not change the 50,000-block limit. | `UBIGINT` | `0` |
 | `azure_transport_option_type` | Underlying [adapter](https://github.com/Azure/azure-sdk-for-cpp/blob/main/doc/HttpTransportAdapter.md) to use in the Azure SDK. Valid values are: `default` or `curl`. | `VARCHAR` | `default` |
 | `azure_context_caching` | Enable/disable the caching of the underlying Azure SDK HTTP connection in the DuckDB connection context when performing queries. If you suspect that this is causing some side effect, you can try to disable it by setting it to false (not recommended). | `BOOLEAN` | `true` |
 
-> Setting `azure_transport_option_type` explicitly to `curl` will have the following effect:
-> * On Linux, this may solve certificate issue (`Error: Invalid Error: Fail to get a new connection for: https://storage_account_name.blob.core.windows.net/. Problem with the SSL CA cert (path? access rights?)`) because when specifying the extension will try to find the bundle certificate in various paths (that is not done by *curl* by default and might be wrong due to static linking).
-> * On Windows, this replaces the default adapter (*WinHTTP*) allowing you to use all *curl* capabilities (for example using a socks proxies).
-> * On all operating systems, it will honor the following environment variables:
->   * `CURL_CA_INFO`: Path to a PEM encoded file containing the certificate authorities sent to libcurl. Note that this option is known to only work on Linux and might throw if set on other platforms.
->   * `CURL_CA_PATH`: Path to a directory which holds PEM encoded files, containing the certificate authorities sent to libcurl.
+Since v1.5.4, `azure_read_transfer_chunk_size` and `azure_read_buffer_size` default to 8 MiB (previously 1 MiB).
+
+> Tip Setting `azure_transport_option_type` to `curl` has the following effects:
+>
+> * On Linux, it may fix certificate errors such as `Problem with the SSL CA cert (path? access rights?)`: the extension then looks for the CA bundle in the usual paths, which *curl* does not do by default and which static linking may get wrong.
+> * On Windows, it replaces the default adapter (*WinHTTP*), so you can use all *curl* features, e.g., SOCKS proxies.
+> * On all operating systems, it honors these environment variables:
+>     * `CURL_CA_INFO`: path to a PEM encoded file with the certificate authorities for libcurl. It is known to work only on Linux and may fail on other platforms.
+>     * `CURL_CA_PATH`: path to a directory of PEM encoded files with the certificate authorities for libcurl.
 
 Example:
 
 ```sql
 SET azure_http_stats = false;
 SET azure_read_transfer_concurrency = 5;
-SET azure_read_transfer_chunk_size = 1_048_576;
-SET azure_read_buffer_size = 1_048_576;
+SET azure_read_transfer_chunk_size = 8_388_608;
+SET azure_read_buffer_size = 8_388_608;
 ```
 
 ## Authentication
 
-The Azure extension has two ways to configure the authentication. The preferred way is to use Secrets.
+Authenticate with a [secret](#authentication-with-secret). The `SET` variables in [Authentication with Variables](#authentication-with-variables) still work but are deprecated.
 
 ### Authentication with Secret
 
-Multiple [Secret Providers]({% link docs/preview/configuration/secrets_manager.md %}#secret-providers) are available for the Azure extension:
+Several [Secret Providers]({% link docs/preview/configuration/secrets_manager.md %}#secret-providers) are available, described below. These rules apply to every provider:
 
-* If you need to define different secrets for different storage accounts, use the [`SCOPE` configuration]({% link docs/preview/configuration/secrets_manager.md %}#creating-multiple-secrets-for-the-same-service-type). Note that the `SCOPE` requires a trailing slash (`SCOPE 'azure://some_container/'`).
-* If you use fully qualified path then the `ACCOUNT_NAME` attribute is optional.
+* If you need to define different secrets for different storage accounts, use the [`SCOPE` configuration]({% link docs/preview/configuration/secrets_manager.md %}#creating-multiple-secrets-for-the-same-service-type). Note that the `SCOPE` requires a trailing slash (`SCOPE 'az://⟨my_storage_account⟩.blob.core.windows.net/'`{:.language-sql .highlight}).
+* With fully qualified paths, `ACCOUNT_NAME` is optional.
+* For paths that are not fully qualified, the `ENDPOINT` attribute overrides the default endpoint (`blob.core.windows.net` for `az://` and `azure://`, `dfs.core.windows.net` for `abfss://` and `abfs://`).
 
 #### `CONFIG` Provider
 
@@ -155,11 +187,11 @@ The default provider, `CONFIG` (i.e., user-configured), allows access to the sto
 ```sql
 CREATE SECRET secret1 (
     TYPE azure,
-    CONNECTION_STRING '⟨value⟩'
+    CONNECTION_STRING '⟨connection_string⟩'
 );
 ```
 
-If you do not use authentication, you still need to specify the storage account name. For example:
+For anonymous access, give the storage account name:
 
 ```sql
 CREATE SECRET secret2 (
@@ -169,13 +201,10 @@ CREATE SECRET secret2 (
 );
 ```
 
-The default `PROVIDER` is `CONFIG`.
-
 #### `credential_chain` Provider
 
 The `credential_chain` provider allows connecting using credentials automatically fetched by the Azure SDK via the Azure credential chain.
-By default, the `DefaultAzureCredential` chain used, which tries credentials according to the order specified by the [Azure documentation](https://learn.microsoft.com/en-us/javascript/api/@azure/identity/defaultazurecredential?view=azure-node-latest#@azure-identity-defaultazurecredential-constructor).
-For example:
+By default, the provider uses the Azure SDK's [`DefaultAzureCredential`](https://github.com/Azure/azure-sdk-for-cpp/blob/azure-identity_1.6.0/sdk/identity/azure-identity/README.md#defaultazurecredential) chain. The token is fetched at query time, not when the secret is created. For example:
 
 ```sql
 CREATE SECRET secret3 (
@@ -196,44 +225,34 @@ CREATE SECRET secret4 (
 );
 ```
 
-The possible values are the following:
-[`cli`](https://learn.microsoft.com/en-us/cli/azure/authenticate-azure-cli);
-[`managed_identity`](https://learn.microsoft.com/en-us/entra/identity/managed-identities-azure-resources/overview);
-[`workload_identity`](https://learn.microsoft.com/en-us/entra/workload-id/workload-identities-overview);
-[`env`](https://github.com/Azure/azure-sdk-for-cpp/blob/azure-identity_1.6.0/sdk/identity/azure-identity/README.md#environment-variables);
-[`default`](https://github.com/Azure/azure-sdk-for-cpp/blob/azure-identity_1.6.0/sdk/identity/azure-identity/README.md#defaultazurecredential);
+The possible values are:
 
-If no explicit `CHAIN` is provided, the default one will be [`default`](https://github.com/Azure/azure-sdk-for-cpp/blob/azure-identity_1.6.0/sdk/identity/azure-identity/README.md#defaultazurecredential)
+* [`cli`](https://learn.microsoft.com/en-us/cli/azure/authenticate-azure-cli): the Azure CLI login
+* [`managed_identity`](https://learn.microsoft.com/en-us/entra/identity/managed-identities-azure-resources/overview)
+* [`workload_identity`](https://learn.microsoft.com/en-us/entra/workload-id/workload-identities-overview), e.g., on AKS
+* [`env`](https://github.com/Azure/azure-sdk-for-cpp/blob/azure-identity_1.6.0/sdk/identity/azure-identity/README.md#environment-variables): environment variables
+* [`default`](https://github.com/Azure/azure-sdk-for-cpp/blob/azure-identity_1.6.0/sdk/identity/azure-identity/README.md#defaultazurecredential): the full default chain, used when no `CHAIN` is given
 
-#### Managed Identity
+#### `MANAGED_IDENTITY` Provider
 
-Managed Identity (MI) can be used gracefully and automatically via the `credential_chain`. In typical 
-cases where the executor has a single MI available, no configuration is needed. 
-
-If your execution environment has multiple Identities, use the `MANAGED_IDENTITY` provider and specify
-which identity to use. This provider allows identity specification via one of 
-`CLIENT_ID`, `OBJECT_ID` or `RESOURCE_ID`, e.g.:
+If the machine has one managed identity, the `credential_chain` provider uses it with no extra options. If it has several, use the `MANAGED_IDENTITY` provider and pick one with `CLIENT_ID`, `OBJECT_ID` or `RESOURCE_ID`:
 
 ```sql
-CREATE SECRET secret1 (
-    TYPE AZURE,
-    PROVIDER MANAGED_IDENTITY,
-    ACCOUNT_NAME '⟨storage account name⟩',
-    CLIENT_ID '⟨used-assigned managed identity client id⟩'
+CREATE SECRET azure_mi (
+    TYPE azure,
+    PROVIDER managed_identity,
+    ACCOUNT_NAME '⟨storage_account_name⟩',
+    CLIENT_ID '⟨client_id⟩'
 );
 ```
 
-The provider may be used without specifying an ID; if only a single ID is available this provider 
-will function identically to the `credential_chain` provider, and use the single available ID. If 
-multiple IDs are available, behavior is undefined (or more specifically, defined by the Azure SDK)
-– therefore we recommend explicit Identity setting in this situation.
-
+Without an ID, the provider works like `credential_chain`. With several identities and no ID, the Azure SDK decides which one is used, so set an ID.
 
 #### `SERVICE_PRINCIPAL` Provider
 
-The `SERVICE_PRINCIPAL` provider allows connecting using a [Azure Service Principal (SPN)](https://learn.microsoft.com/en-us/entra/architecture/service-accounts-principal).
+The `SERVICE_PRINCIPAL` provider allows connecting using an [Azure Service Principal (SPN)](https://learn.microsoft.com/en-us/entra/architecture/service-accounts-principal).
 
-Either with a secret:
+With a client secret:
 
 ```sql
 CREATE SECRET azure_spn (
@@ -259,6 +278,21 @@ CREATE SECRET azure_spn_cert (
 );
 ```
 
+#### `ACCESS_TOKEN` Provider
+
+The `ACCESS_TOKEN` provider allows connecting with an OAuth access token (bearer token) that you obtained outside of DuckDB:
+
+```sql
+CREATE SECRET azure_token (
+    TYPE azure,
+    PROVIDER access_token,
+    ACCESS_TOKEN '⟨access_token⟩',
+    ACCOUNT_NAME '⟨storage_account_name⟩'
+);
+```
+
+> Warning The extension does not refresh the token. When it expires, run `CREATE OR REPLACE SECRET` with a new token; it takes effect on the next query.
+
 #### Configuring a Proxy
 
 To configure proxy information when using secrets, you can add `HTTP_PROXY`, `PROXY_USER_NAME` and `PROXY_PASSWORD` in the secret definition. For example:
@@ -266,79 +300,102 @@ To configure proxy information when using secrets, you can add `HTTP_PROXY`, `PR
 ```sql
 CREATE SECRET secret5 (
     TYPE azure,
-    CONNECTION_STRING '⟨value⟩',
+    CONNECTION_STRING '⟨connection_string⟩',
     HTTP_PROXY 'http://localhost:3128',
-    PROXY_USER_NAME 'john',
-    PROXY_PASSWORD 'doe'
+    PROXY_USER_NAME '⟨proxy_user_name⟩',
+    PROXY_PASSWORD '⟨proxy_password⟩'
 );
 ```
 
-> * When using secrets, the `HTTP_PROXY` environment variable will still be honored except if you provide an explicit value for it.
-> * When using secrets, the `SET` variable of the *Authentication with variables* session will be ignored.
-> * For the Azure `credential_chain` provider, the actual token is fetched at query time, not when the secret is created.
+> Note When you use secrets:
+>
+> * The `HTTP_PROXY` environment variable is still honored, unless the secret sets `HTTP_PROXY`.
+> * The `SET` variables of [Authentication with Variables](#authentication-with-variables) are ignored.
 
-### Authentication with Variables (Deprecated)
+### Authentication with Variables
+
+> Deprecated Use [secrets](#authentication-with-secret) instead.
 
 ```sql
-SET variable_name = variable_value;
+SET ⟨variable_name⟩ = ⟨value⟩;
 ```
 
 Where `variable_name` can be one of the following:
 
 | Name | Description | Type | Default |
 |:---|:---|:---|:---|
-| `azure_storage_connection_string` | Azure connection string, used for authenticating and configuring Azure requests. | `STRING` | - |
-| `azure_account_name` | Azure account name, when set, the extension will attempt to automatically detect credentials (not used if you pass the connection string). | `STRING` | - |
-| `azure_endpoint` | Override the Azure endpoint for when the Azure credential providers are used. | `STRING` | `blob.core.windows.net` |
-| `azure_credential_chain`| Ordered list of Azure credential providers, in string format separated by `;`. For example: `'cli;managed_identity;env'`. See the list of possible values in the [`credential_chain` provider section](#credential_chain-provider). Not used if you pass the connection string. | `STRING` | - |
-| `azure_http_proxy` | Proxy to use when login & performing request to Azure. | `STRING` | `HTTP_PROXY` environment variable (if set). |
-| `azure_proxy_user_name` | HTTP proxy username if needed. | `STRING` | - |
-| `azure_proxy_password` | HTTP proxy password if needed. | `STRING` | - |
+| `azure_storage_connection_string` | Azure connection string, used for authenticating and configuring Azure requests. | `VARCHAR` | - |
+| `azure_account_name` | Azure account name, when set, the extension will attempt to automatically detect credentials (not used if you pass the connection string). | `VARCHAR` | - |
+| `azure_endpoint` | Override the Azure endpoint for when the Azure credential providers are used. | `VARCHAR` | `blob.core.windows.net` |
+| `azure_credential_chain`| Ordered list of Azure credential providers, in string format separated by `;`. For example: `'cli;managed_identity;env'`. See the list of possible values in the [`credential_chain` provider section](#credential_chain-provider). Not used if you pass the connection string. | `VARCHAR` | - |
+| `azure_http_proxy` | Proxy for login and for requests to Azure. | `VARCHAR` | `HTTP_PROXY` environment variable (if set). |
+| `azure_proxy_user_name` | HTTP proxy username if needed. | `VARCHAR` | - |
+| `azure_proxy_password` | HTTP proxy password if needed. | `VARCHAR` | - |
 
 ## Additional Information
 
 ### Logging
 
+Since v1.5.2, the Azure extension writes its HTTP requests to the DuckDB [`HTTP` log]({% link docs/preview/operations_manual/logging/overview.md %}). To inspect them:
+
+```sql
+CALL enable_logging('HTTP');
+SELECT * FROM 'az://⟨my_container⟩/⟨path⟩/⟨my_file⟩.parquet';
+SELECT request.type, request.url, response.status FROM duckdb_logs_parsed('HTTP');
+```
+
+Logged requests show the DuckDB `User-Agent` header.
+The values of the `sig` query parameter and the `Authorization` header are replaced by `REDACTED`.
+To change what is redacted, set `azure_http_logging_redact_query_params` and `azure_http_logging_redact_headers`.
+A new value replaces the default list, so include `sig` or `Authorization` if you still want them redacted:
+
+```sql
+SET azure_http_logging_redact_headers = 'Authorization;x-ms-date';
+```
+
+> Warning The Azure extension applies only these settings, not DuckDB's `redact_http_logs` setting. To keep Azure requests out of the `HTTP` log, run `SET azure_http_logging = false;`.
+
 The Azure extension relies on the Azure SDK to connect to Azure Blob storage and supports printing the SDK logs to the console.
 To control the log level, set the [`AZURE_LOG_LEVEL`](https://github.com/Azure/azure-sdk-for-cpp/blob/main/sdk/core/azure-core/README.md#sdk-log-messages) environment variable.
 
-For instance, verbose logs can be enabled in Python as follows:
+For instance, to start the DuckDB CLI with verbose logs:
 
-```python
-import os
-import duckdb
+```batch
+AZURE_LOG_LEVEL=verbose duckdb
+```
 
-os.environ["AZURE_LOG_LEVEL"] = "verbose"
-
-duckdb.sql("CREATE SECRET myaccount (TYPE azure, PROVIDER credential_chain, SCOPE 'az://myaccount.blob.core.windows.net/')")
-duckdb.sql("SELECT count(*) FROM 'az://myaccount.blob.core.windows.net/path/to/blob.parquet'")
+```sql
+CREATE SECRET myaccount (
+    TYPE azure,
+    PROVIDER credential_chain,
+    SCOPE 'az://⟨my_storage_account⟩.blob.core.windows.net/'
+);
+SELECT count(*) FROM 'az://⟨my_storage_account⟩.blob.core.windows.net/⟨my_container⟩/⟨path⟩/⟨my_file⟩.parquet';
 ```
 
 ### Difference between ADLS and Blob Storage
 
-Even though ADLS implements similar functionality as the Blob storage, there are some important performance benefits to using the ADLS endpoints for globbing, especially when using (complex) glob patterns.
-
-To demonstrate, let's look at an example of how a glob is performed internally using the Blob and ADLS endpoints, respectively.
+For glob patterns over many directories, prefer `abfss://`: the ADLS endpoint lists only the directories that match, while the Blob endpoint lists every file under the prefix and filters afterwards. The following example shows how a glob is performed through each endpoint.
 
 Using the following filesystem:
 
 ```text
 root
-├── l_receipmonth=1997-10
+├── l_receiptmonth=1997-10
 │   ├── l_shipmode=AIR
 │   │   └── data_0.csv
 │   ├── l_shipmode=SHIP
 │   │   └── data_0.csv
 │   └── l_shipmode=TRUCK
 │       └── data_0.csv
-├── l_receipmonth=1997-11
+├── l_receiptmonth=1997-11
 │   ├── l_shipmode=AIR
 │   │   └── data_0.csv
 │   ├── l_shipmode=SHIP
 │   │   └── data_0.csv
 │   └── l_shipmode=TRUCK
 │       └── data_0.csv
-└── l_receipmonth=1997-12
+└── l_receiptmonth=1997-12
     ├── l_shipmode=AIR
     │   └── data_0.csv
     ├── l_shipmode=SHIP
@@ -351,52 +408,52 @@ The following query is performed through the Blob endpoint:
 
 ```sql
 SELECT count(*)
-FROM 'az://root/l_receipmonth=1997-*/l_shipmode=SHIP/*.csv';
+FROM 'az://root/l_receiptmonth=1997-*/l_shipmode=SHIP/*.csv';
 ```
 
 It will perform the following steps:
 
-* List all the files with the prefix `root/l_receipmonth=1997-`
-    * `root/l_receipmonth=1997-10/l_shipmode=SHIP/data_0.csv`
-    * `root/l_receipmonth=1997-10/l_shipmode=AIR/data_0.csv`
-    * `root/l_receipmonth=1997-10/l_shipmode=TRUCK/data_0.csv`
-    * `root/l_receipmonth=1997-11/l_shipmode=SHIP/data_0.csv`
-    * `root/l_receipmonth=1997-11/l_shipmode=AIR/data_0.csv`
-    * `root/l_receipmonth=1997-11/l_shipmode=TRUCK/data_0.csv`
-    * `root/l_receipmonth=1997-12/l_shipmode=SHIP/data_0.csv`
-    * `root/l_receipmonth=1997-12/l_shipmode=AIR/data_0.csv`
-    * `root/l_receipmonth=1997-12/l_shipmode=TRUCK/data_0.csv`
-* Filter the result with the requested pattern `root/l_receipmonth=1997-*/l_shipmode=SHIP/*.csv`
-    * `root/l_receipmonth=1997-10/l_shipmode=SHIP/data_0.csv`
-    * `root/l_receipmonth=1997-11/l_shipmode=SHIP/data_0.csv`
-    * `root/l_receipmonth=1997-12/l_shipmode=SHIP/data_0.csv`
+* List all the files with the prefix `root/l_receiptmonth=1997-`
+    * `root/l_receiptmonth=1997-10/l_shipmode=SHIP/data_0.csv`
+    * `root/l_receiptmonth=1997-10/l_shipmode=AIR/data_0.csv`
+    * `root/l_receiptmonth=1997-10/l_shipmode=TRUCK/data_0.csv`
+    * `root/l_receiptmonth=1997-11/l_shipmode=SHIP/data_0.csv`
+    * `root/l_receiptmonth=1997-11/l_shipmode=AIR/data_0.csv`
+    * `root/l_receiptmonth=1997-11/l_shipmode=TRUCK/data_0.csv`
+    * `root/l_receiptmonth=1997-12/l_shipmode=SHIP/data_0.csv`
+    * `root/l_receiptmonth=1997-12/l_shipmode=AIR/data_0.csv`
+    * `root/l_receiptmonth=1997-12/l_shipmode=TRUCK/data_0.csv`
+* Filter the result with the requested pattern `root/l_receiptmonth=1997-*/l_shipmode=SHIP/*.csv`
+    * `root/l_receiptmonth=1997-10/l_shipmode=SHIP/data_0.csv`
+    * `root/l_receiptmonth=1997-11/l_shipmode=SHIP/data_0.csv`
+    * `root/l_receiptmonth=1997-12/l_shipmode=SHIP/data_0.csv`
 
 Meanwhile, the same query can be performed through the datalake endpoint as follows:
 
 ```sql
 SELECT count(*)
-FROM 'abfss://root/l_receipmonth=1997-*/l_shipmode=SHIP/*.csv';
+FROM 'abfss://root/l_receiptmonth=1997-*/l_shipmode=SHIP/*.csv';
 ```
 
 This will perform the following steps:
 
 * List all directories in `root/`
-    * `root/l_receipmonth=1997-10`
-    * `root/l_receipmonth=1997-11`
-    * `root/l_receipmonth=1997-12`
-* Filter and list subdirectories: `root/l_receipmonth=1997-10`, `root/l_receipmonth=1997-11`, `root/l_receipmonth=1997-12`
-    * `root/l_receipmonth=1997-10/l_shipmode=SHIP`
-    * `root/l_receipmonth=1997-10/l_shipmode=AIR`
-    * `root/l_receipmonth=1997-10/l_shipmode=TRUCK`
-    * `root/l_receipmonth=1997-11/l_shipmode=SHIP`
-    * `root/l_receipmonth=1997-11/l_shipmode=AIR`
-    * `root/l_receipmonth=1997-11/l_shipmode=TRUCK`
-    * `root/l_receipmonth=1997-12/l_shipmode=SHIP`
-    * `root/l_receipmonth=1997-12/l_shipmode=AIR`
-    * `root/l_receipmonth=1997-12/l_shipmode=TRUCK`
-* Filter and list subdirectories: `root/l_receipmonth=1997-10/l_shipmode=SHIP`, `root/l_receipmonth=1997-11/l_shipmode=SHIP`, `root/l_receipmonth=1997-12/l_shipmode=SHIP`
-    * `root/l_receipmonth=1997-10/l_shipmode=SHIP/data_0.csv`
-    * `root/l_receipmonth=1997-11/l_shipmode=SHIP/data_0.csv`
-    * `root/l_receipmonth=1997-12/l_shipmode=SHIP/data_0.csv`
+    * `root/l_receiptmonth=1997-10`
+    * `root/l_receiptmonth=1997-11`
+    * `root/l_receiptmonth=1997-12`
+* Filter and list subdirectories: `root/l_receiptmonth=1997-10`, `root/l_receiptmonth=1997-11`, `root/l_receiptmonth=1997-12`
+    * `root/l_receiptmonth=1997-10/l_shipmode=SHIP`
+    * `root/l_receiptmonth=1997-10/l_shipmode=AIR`
+    * `root/l_receiptmonth=1997-10/l_shipmode=TRUCK`
+    * `root/l_receiptmonth=1997-11/l_shipmode=SHIP`
+    * `root/l_receiptmonth=1997-11/l_shipmode=AIR`
+    * `root/l_receiptmonth=1997-11/l_shipmode=TRUCK`
+    * `root/l_receiptmonth=1997-12/l_shipmode=SHIP`
+    * `root/l_receiptmonth=1997-12/l_shipmode=AIR`
+    * `root/l_receiptmonth=1997-12/l_shipmode=TRUCK`
+* Filter and list subdirectories: `root/l_receiptmonth=1997-10/l_shipmode=SHIP`, `root/l_receiptmonth=1997-11/l_shipmode=SHIP`, `root/l_receiptmonth=1997-12/l_shipmode=SHIP`
+    * `root/l_receiptmonth=1997-10/l_shipmode=SHIP/data_0.csv`
+    * `root/l_receiptmonth=1997-11/l_shipmode=SHIP/data_0.csv`
+    * `root/l_receiptmonth=1997-12/l_shipmode=SHIP/data_0.csv`
 
-As you can see because the Blob endpoint does not support the notion of directories, the filter can only be performed after the listing, whereas the ADLS endpoint will list files recursively. Especially with higher partition/directory counts, the performance difference can be very significant.
+Because the Blob endpoint does not support the notion of directories, the filter can only be performed after the listing, whereas the ADLS endpoint will list files recursively. Especially with higher partition/directory counts, the performance difference can be very significant.
