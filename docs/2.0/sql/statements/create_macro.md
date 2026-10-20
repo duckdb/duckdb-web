@@ -67,6 +67,7 @@ Macros support overloading:
 * When overloading table functions that are defined using a `SELECT` statement as expression, you will probably need to wrap the `SELECT` statement in parentheses.
 
 ## Calling Macros
+
 Macros are called by mentioning their name, followed by parentheses. A comma-separated list of value-expressions may appear between the parentheses - these are the actual parameters. 
 The DuckDB binder examines the data types of the actual parameters and tries to find an implementation of the macro that has a matching signature.
 If an implementation is found, the parameter values are passed and the implementation's expression is evaluated; finally, its resulting value is returned and used in place where the macro was called.

@@ -167,7 +167,7 @@ Driver={Oracle in instantclient_23_0};DBQ=//127.0.0.1:1521/XE;UID=scott;PWD=tige
 
 SQL Server: 
  
-```
+```text
 Driver={ODBC Driver 18 for SQL Server};Server=tcp:127.0.0.1,1433;UID=sa;PWD=pwd;TrustServerCertificate=Yes;Database=test_db;
 ```
 

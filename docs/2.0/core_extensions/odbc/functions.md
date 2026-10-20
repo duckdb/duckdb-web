@@ -20,7 +20,7 @@ title: ODBC Extension Functions
 - [`odbc_query`](#odbc_query)
 - [`odbc_rollback`](#odbc_rollback)
 
-### odbc_begin_transaction
+## odbc_begin_transaction
 
 ```sql
 odbc_begin_transaction(conn_handle BIGINT) -> VARCHAR
@@ -28,21 +28,21 @@ odbc_begin_transaction(conn_handle BIGINT) -> VARCHAR
 
 Sets the `SQL_ATTR_AUTOCOMMIT` attribute to `SQL_AUTOCOMMIT_OFF` on the specified connection thus effectively starting an implicit transaction. [`odbc_commit`](#odbc_commit) or [`odbc_rollback`](#odbc_rollback) must be called on such connection to complete the transaction. The completion starts another implicit transaction on this connection. See [Transaction management](overview#transaction-management) for details.
 
-#### Parameters:
+### Parameters:
 
  - `conn_handle` (`BIGINT`): ODBC connection handle created with [`odbc_connect`](#odbc_connect)
 
-#### Returns:
+### Returns:
 
 Always returns `NULL` (`VARCHAR`).
 
-#### Example:
+### Example:
 
 ```sql
 SELECT odbc_begin_transaction(getvariable('conn'))
 ```
 
-### odbc_bind_params
+## odbc_bind_params
 
 ```sql
 odbc_bind_params(conn_handle BIGINT, params_handle BIGINT, params STRUCT) -> BIGINT
@@ -50,23 +50,23 @@ odbc_bind_params(conn_handle BIGINT, params_handle BIGINT, params STRUCT) -> BIG
 
 Binds specified parameter values to the specified parameters handle. Only necessary with 2-step parameters binding, see [Query parameters](overview#query-parameters) for details.
 
-#### Parameters:
+### Parameters:
 
  - `conn_handle` (`BIGINT`): ODBC connection handle created with [`odbc_connect`](#odbc_connect)
  - `params_handle` (`BIGINT`): parameters handle created with [`odbc_create_params`](#odbc_create_params)
  - `params` (`STRUCT`): parameters values
 
-#### Returns:
+### Returns:
 
 Parameters handle (`BIGINT`), the same one that was passed as a second argument.
 
-#### Example:
+### Example:
 
 ```sql
 SELECT odbc_bind_params(getvariable('conn'), getvariable('params1'), row(42, 'foo'))
 ```
 
-### odbc_close
+## odbc_close
 
 ```sql
 odbc_close(conn_handle BIGINT) -> VARCHAR
@@ -74,21 +74,21 @@ odbc_close(conn_handle BIGINT) -> VARCHAR
 
 Closes specified ODBC connection to a remote DB. Does not throw errors if the connection is already closed.
 
-#### Parameters:
+### Parameters:
 
  - `conn_handle` (`BIGINT`): ODBC connection handle created with [`odbc_connect`](#odbc_connect)
 
-#### Returns:
+### Returns:
 
 Always returns `NULL` (`VARCHAR`).
 
-#### Example:
+### Example:
 
 ```sql
 SELECT odbc_close(getvariable('conn'))
 ```
 
-### odbc_commit
+## odbc_commit
 
 ```sql
 odbc_commit(conn_handle BIGINT) -> VARCHAR
@@ -96,21 +96,21 @@ odbc_commit(conn_handle BIGINT) -> VARCHAR
 
 Calls `SQLEndTran` with `SQL_COMMIT` argument on the specified connection, completing the current transaction. [`odbc_begin_transaction`](#odbc_begin_transaction) must be called on this connection before this call for the completion to be effective. See [Transaction management](overview#transaction-management) for details.
 
-#### Parameters:
+### Parameters:
 
  - `conn_handle` (`BIGINT`): ODBC connection handle created with [`odbc_connect`](#odbc_connect)
 
-#### Returns:
+### Returns:
 
 Always returns `NULL` (`VARCHAR`).
 
-#### Example:
+### Example:
 
 ```sql
 SELECT odbc_commit(getvariable('conn'))
 ```
 
-### odbc_connect
+## odbc_connect
 
 ```sql
 odbc_connect(conn_string VARCHAR) -> BIGINT
@@ -123,15 +123,15 @@ Opens an ODBC connection to a remote DB.
 
 If `username` and `password` (positional) parameters are specified, they are appended to the connection string as `UID` and `PWD`.
 
-#### Parameters:
+### Parameters:
 
  - `conn_string` (`VARCHAR`): ODBC connection string, passed to the Driver Manager.
 
-#### Returns:
+### Returns:
 
 Connection handle that can be placed into a `VARIABLE`. Connection is not closed automatically, must be closed with [`odbc_close`](#odbc_close).
 
-#### Example:
+### Example:
 
 ```sql
 SET VARIABLE conn = odbc_connect('Driver={Oracle Driver};DBQ=//127.0.0.1:1521/XE;UID=scott;PWD=tiger')
@@ -140,7 +140,7 @@ SET VARIABLE conn = odbc_connect('Driver={Oracle Driver};DBQ=//127.0.0.1:1521/XE
 SET VARIABLE conn = odbc_connect('Driver={Oracle Driver};DBQ=//127.0.0.1:1521/XE', 'scott', 'tiger')
 ```
 
-### odbc_copy
+## odbc_copy
 
 ```sql
 odbc_copy(conn_handle BIGINT, [, <optional named parameters>]) -> TABLE
@@ -158,7 +158,7 @@ Copies rows from a DuckDB accessible file or table into the remote DB.
 > is taking place. Thus no rows will be copied until [a method that triggers execution]({% link docs/2.0/clients/python/relational_api.md %}#output)
 > is called on the resulting relation and all result rows are consumed.
 
-#### Parameters:
+### Parameters:
 
  - `conn_handle_or_string` (`BIGINT` or `VARCHAR`), one of:
    - ODBC connection handle created with [`odbc_connect`](#odbc_connect)
@@ -221,7 +221,7 @@ Optional named parameters (other):
  - `max_records_in_transaction` (`UBIGINT`, default: `0`): when specified causes the remote transaction to be committed every time after the specified number of rows is processed
  - `close_connection` (`BOOLEAN`, default: `false`): closes the passed connection after the function call is completed, intended to be used with one-shot invocations of the `odbc_copy`
 
-#### Returns:
+### Returns:
 
 A table with the following columns:
 
@@ -233,7 +233,7 @@ A table with the following columns:
 
  One resulting row is emitted for every `2048` rows read from source. Only the last row has the `completed=TRUE` and non null `table_ddl` (only when `create_table=TRUE` is specified) values.
 
-#### Examples:
+### Examples:
 
 ```sql
 FROM odbc_copy(getvariable('conn'),
@@ -253,7 +253,8 @@ FROM odbc_copy(getvariable('conn'),
   batch_size=32,
   max_records_in_transaction=42);
 ```
-### odbc_create_params
+
+## odbc_create_params
 
 ```sql
 odbc_create_params() -> BIGINT
@@ -261,21 +262,21 @@ odbc_create_params() -> BIGINT
 
 Creates a parameters handle. Only necessary with 2-step parameters binding, see [Query parameters](overview#query-parameters) for details.
 
-#### Parameters:
+### Parameters:
 
 None.
 
-#### Returns:
+### Returns:
 
 Parameters handle (`BIGINT`). When the handle is passed to [`odbc_query`](#odbc_query) it gets tied to the underlying prepared statement and is closed automatically when the statement is closed.
 
-#### Example:
+### Example:
 
 ```sql
 SET VARIABLE params1 = odbc_create_params()
 ```
 
-### odbc_list_data_sources
+## odbc_list_data_sources
 
 ```sql
 odbc_list_data_sources() -> TABLE(name VARCHAR, description VARCHAR, type VARCHAR)
@@ -283,11 +284,11 @@ odbc_list_data_sources() -> TABLE(name VARCHAR, description VARCHAR, type VARCHA
 
 Returns the list of ODBC data sources registered in the OS. Uses driver manager call `SQLDataSources`.
 
-#### Parameters:
+### Parameters:
 
 None.
 
-#### Returns:
+### Returns:
 
 A table with the following columns:
 
@@ -295,13 +296,13 @@ A table with the following columns:
  - `description` (`VARCHAR`): data source description
  - `type` (`VARCHAR`): data source type, `USER` or `SYSTEM`
 
-#### Example:
+### Example:
 
 ```sql
 FROM odbc_list_data_sources()
 ```
 
-### odbc_list_drivers
+## odbc_list_drivers
 
 ```sql
 odbc_list_drivers() -> TABLE(description VARCHAR, attributes MAP(VARCHAR, VARCHAR))
@@ -309,24 +310,24 @@ odbc_list_drivers() -> TABLE(description VARCHAR, attributes MAP(VARCHAR, VARCHA
 
 Returns the list of ODBC drivers registered in the OS. Uses driver manager call `SQLDrivers`.
 
-#### Parameters:
+### Parameters:
 
 None.
 
-#### Returns:
+### Returns:
 
 A table with the following columns:
 
  - `description` (`VARCHAR`): driver description
  - `attributes` (`MAP(VARCHAR, VARCHAR)`): driver attributes as a `name->value` map
 
-#### Example:
+### Example:
 
 ```sql
 FROM odbc_list_drivers()
 ```
 
-### odbc_query
+## odbc_query
 
 ```sql
 odbc_query(conn_handle BIGINT, query VARCHAR[, <optional named parameters>]) -> TABLE
@@ -337,7 +338,7 @@ odbc_query(conn_string VARCHAR, query VARCHAR[, <optional named parameters>]) ->
 
 Runs specified query in a remote DB and returns the query results table.
 
-#### Parameters:
+### Parameters:
 
  - `conn_handle_or_string` (`BIGINT` or `VARCHAR`), one of:
    - ODBC connection handle created with [`odbc_connect`](#odbc_connect)
@@ -381,11 +382,11 @@ Other optional named parameters:
     close_connection=TRUE);
  ```
 
-#### Returns:
+### Returns:
 
 A table with the query result.
 
-#### Example:
+### Example:
 
 ```sql
 FROM odbc_query(getvariable('conn'), 
@@ -394,7 +395,7 @@ FROM odbc_query(getvariable('conn'),
 )
 ```
 
-### odbc_rollback
+## odbc_rollback
 
 ```sql
 odbc_rollback(conn_handle BIGINT) -> VARCHAR
@@ -402,15 +403,15 @@ odbc_rollback(conn_handle BIGINT) -> VARCHAR
 
 Calls `SQLEndTran` with `SQL_ROLLBACK` argument on the specified connection, completing the current transaction. [`odbc_begin_transaction`](#odbc_begin_transaction) must be called on this connection before this call for the completion to be effective. See [Transaction management](overview#transaction-management) for details.
 
-#### Parameters:
+### Parameters:
 
  - `conn_handle` (`BIGINT`): ODBC connection handle created with [`odbc_connect`](#odbc_connect)
 
-#### Returns:
+### Returns:
 
 Always returns `NULL` (`VARCHAR`).
 
-#### Example:
+### Example:
 
 ```sql
 SELECT odbc_rollback(getvariable('conn'))

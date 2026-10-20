@@ -19,7 +19,7 @@ title: PostgreSQL Extension Functions
 * [postgres\_scan\_pushdown](#postgres_scan_pushdown)
 * [read\_postgres\_binary](#read_postgres_binary)
 
-### pg_clear_cache
+## pg_clear_cache
 
 ```sql
 pg_clear_cache() -> TABLE
@@ -27,11 +27,11 @@ pg_clear_cache() -> TABLE
 
 Clears cached schema entries (like table names with column lists) for all attached PostgreSQL catalogs. Attached schema is going to be re-read on the next access.
 
-#### Parameters
+### Parameters
 
 None.
 
-#### Returns
+### Returns
 
 A table with the following columns:
 
@@ -39,13 +39,13 @@ A table with the following columns:
 
 > Currently the table result is always returned with zero rows, so the flag value is not available.
 
-#### Example
+### Example
 
 ```sql
 CALL pg_clear_cache()
 ```
 
-### postgres_attach
+## postgres_attach
 
 > Warning 
 > This function is deprecated and is planned to be removed in future versions.
@@ -55,7 +55,7 @@ CALL pg_clear_cache()
 postgres_attach(connection_string VARCHAR [, ⟨optional named parameters⟩]) -> TABLE
 ```
 
-### postgres_configure_pool
+## postgres_configure_pool
 
 ```sql
 FROM postgres_configure_pool([⟨optional named parameters⟩]) -> TABLE
@@ -63,7 +63,7 @@ FROM postgres_configure_pool([⟨optional named parameters⟩]) -> TABLE
 
 When a PostgreSQL database is attached, a connection pool is created for this database. This function allows to change the configuration options of a connection pool for the specified attached database. It also allows to list the current effective configuration options and the collected runtime statistics of a connection pool.
 
-#### Parameters
+### Parameters
 
 * `catalog_name` (`VARCHAR`): the name (alias) of the attached Postgres database to which pool the configuration change is applied and details are returned. When `NULL` (default) returns the current state of pools for all attached catalogs without changing their configuration. Must be specified and non-NULL when any other option is specified.
 * `acquire_mode` (`VARCHAR`, default: `'force'`): how to acquire connections from the pool: `'force'` (always connect, ignore pool limit), `'wait'` (block until available), `'try'` (fail immediately if unavailable)
@@ -75,7 +75,7 @@ When a PostgreSQL database is attached, a connection pool is created for this da
 * `enable_reaper_thread` (`BOOLEAN`): whether to enable the connection pool reaper thread, that periodically scans the pool to check the `'max_lifetime_millis'` and `'idle_timeout_millis'` and closes the connection which exceed the specified values. Either `'max_lifetime_millis'` or `'idle_timeout_millis'` must be set to a non-zero value for this option to be effective.
 * `health_check_query` (`VARCHAR`): the query that is used to check that the connection is healthy. Setting this option to an empty string disables the health check.
 
-#### Returns
+### Returns
 
 A table with the following columns:
 
@@ -96,7 +96,7 @@ A table with the following columns:
 * `reaper_thread_period_millis` (`UBIGINT`): the period of time when a reaper thread performs the checks
 * `health_check_query` (`VARCHAR`): the query that is used to check that the connection is healthy
 
-#### Examples
+### Examples
 
 List the current effective configuration options and the collected runtime statistics of all connections pools (for all attached databases):
 
@@ -110,7 +110,7 @@ Change one or more configuration option for the connection pool of the specified
 FROM postgres_configure_pool(catalog_name = 'db1', acquire_mode = 'wait', max_connections = 42)
 ```
 
-### postgres_execute
+## postgres_execute
 
 ```sql
 postgres_execute(attached_db_name VARCHAR, sql_query VARCHAR[, ⟨optional named parameters⟩]) -> TABLE
@@ -119,7 +119,7 @@ postgres_execute(attached_db_name VARCHAR, sql_query VARCHAR[, ⟨optional named
 Executes the `⟨sql_query⟩`{:.language-sql .highlight} in the specified remote Postgres instance previously attached with `ATTACH ... AS ⟨attached_db_name⟩`{:.language-sql .highlight}.
 This function returns an empty result.
 
-#### Parameters
+### Parameters
 
 * `attached_db_name` (`VARCHAR`):  the name of the attached PostgreSQL database
 * `sql_query` (`VARCHAR`): query that is passed to PostgreSQL for execution; no transformation or analysis of this query is performed by DuckDB
@@ -128,7 +128,7 @@ Optional named parameters:
 
 * `use_transaction` (`BOOLEAN`, default: `TRUE`): whether to start a PostgreSQL transaction if it was not started before.
 
-#### Returns
+### Returns
 
 A table with the following columns:
 
@@ -136,13 +136,13 @@ A table with the following columns:
 
 > Currently the table result is always returned with zero rows, so the flag value is not available.
 
-#### Example
+### Example
 
 ```sql
 CALL postgres_execute('db1', 'VACUUM ANALYZE', use_transaction = false)
 ```
 
-### postgres_hstore_get
+## postgres_hstore_get
 
 ```sql
 postgres_hstore_get(hstore_string VARCHAR, hstore_key VARCHAR) -> VARCHAR
@@ -150,22 +150,22 @@ postgres_hstore_get(hstore_string VARCHAR, hstore_key VARCHAR) -> VARCHAR
 
 Parses the external representation of and [PostgreSQL hstore column](https://www.postgresql.org/docs/18/hstore.html) and returns the value of the specified hstore key.
 
-#### Parameters
+### Parameters
 
 * `hstore_string` (`VARCHAR`): PostgreSQL `hstore` value in `key => value` form.
 * `hstore_kay` (`VARCHAR`): Key name to return the value for.
 
-#### Returns
+### Returns
 
 The value for the specified key. `NULL` if the key not found.
 
-#### Example
+### Example
 
 ```sql
 SELECT postgres_hstore_get('a=>b, c=>d', 'a')
 ```
 
-### postgres_hstore_to_json
+## postgres_hstore_to_json
 
 ```sql
 postgres_hstore_to_json(hstore_string VARCHAR) -> JSON
@@ -173,21 +173,21 @@ postgres_hstore_to_json(hstore_string VARCHAR) -> JSON
 
 Converts the external representation of and [PostgreSQL hstore column](https://www.postgresql.org/docs/18/hstore.html) into `JSON`.
 
-#### Parameters
+### Parameters
 
 * `hstore_string` (`VARCHAR`): PostgreSQL `hstore` value in `key => value` form.
 
-#### Returns
+### Returns
 
 JSON dictionary with the same key/value pairs as the input `hstore` string. All values are returned as strings.
 
-#### Example
+### Example
 
 ```sql
 SELECT postgres_hstore_to_json('z=>1, a=>2, m=>3')
 ```
 
-### postgres_query
+## postgres_query
 
 ```sql
 postgres_query(attached_db_name VARCHAR, sql_query VARCHAR[, ⟨optional named parameters⟩]) -> TABLE
@@ -195,7 +195,7 @@ postgres_query(attached_db_name VARCHAR, sql_query VARCHAR[, ⟨optional named p
 
 Executes the query in the specified remote DB that was previously attached with `ATTACH .. AS ⟨attached_db_name⟩`{:.language-sql .highlight} and returns the query result as a table.
 
-#### Parameters
+### Parameters
 
 * `attached_db_name` (`VARCHAR`):  the name of the attached PostgreSQL database
 * `sql_query` (`VARCHAR`): query that is passed to PostgreSQL for execution; no transformation or analysis of this query is performed by DuckDB
@@ -205,17 +205,17 @@ Optional named parameters:
 * `use_transaction` (`BOOLEAN`, default: `TRUE`): whether to start a PostgreSQL transaction if it was not started before.
 * `params` (`STRUCT`): query parameters that are passed to the PostgreSQL server; only supported when the text protocol is used
 
-#### Returns
+### Returns
 
 A table with the query result.
 
-#### Example
+### Example
 
 ```sql
 FROM postgres_query('db11', 'SELECT $1::INTEGER, $2::TEXT', params=row(42::INTEGER, 'foo'::VARCHAR))
 ```
 
-### postgres_scan
+## postgres_scan
 
 > Warning 
 > This function is deprecated and is planned to be removed in future versions.
@@ -225,7 +225,7 @@ FROM postgres_query('db11', 'SELECT $1::INTEGER, $2::TEXT', params=row(42::INTEG
 postgres_scan(connection_string VARCHAR, schema_name VARCHAR, table_name VARCHAR) -> TABLE
 ```
 
-### postgres_scan_pushdown
+## postgres_scan_pushdown
 
 > Warning 
 > This function is deprecated and is planned to be removed in future versions.
@@ -235,7 +235,7 @@ postgres_scan(connection_string VARCHAR, schema_name VARCHAR, table_name VARCHAR
 postgres_scan_pushdown(connection_string VARCHAR, schema_name VARCHAR, table_name VARCHAR) -> TABLE
 ```
 
-### read_postgres_binary
+## read_postgres_binary
 
 ```sql
 FROM read_postgres_binary(file_path VARCHAR[, ⟨optional named parameters⟩]) -> TABLE
@@ -243,7 +243,7 @@ FROM read_postgres_binary(file_path VARCHAR[, ⟨optional named parameters⟩]) 
 
 Reads PostgreSQL binary dump files from file system.
 
-#### Parameters
+### Parameters
 
 * `file_path` (`VARCHAR`): FS path to the binary dump file in a PostgreSQL format.
 
@@ -252,11 +252,11 @@ Optional named parameters:
 * `columns` (`STRUCT`): type mapping in form of the `column_name -> column_type` structure.
 * `buffer_size` (`UBIGINT`, default: 32KB): size of the read buffer in bytes.
 
-#### Returns
+### Returns
 
 Contents of the binary dump file as a table.
 
-#### Example
+### Example
 
 ```sql
 COPY (SELECT 42::INTEGER AS a, 'foo'::VARCHAR AS b) TO 'path/to/test.bin' (FORMAT postgres_binary);

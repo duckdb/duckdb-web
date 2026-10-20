@@ -8,7 +8,7 @@ redirect_from:
 title: Out-of-Memory Issues
 ---
 
-### Configuration Options
+## Configuration Options
 
 If you are experiencing out-of-memory issues with DuckDB, try tweaking the following configuration options:
 
@@ -24,7 +24,7 @@ SET memory_limit = ⟨lower_than_80%_of_system_memory⟩;
 SET preserve_insertion_order = false;
 ```
 
-### Schema and Indexes
+## Schema and Indexes
 
 If you run in a memory-constrained environment, using smaller data types (e.g., `TINYINT`) can reduce the amount of memory and disk space required to complete a query. DuckDB’s [bitpacking compression]({% post_url 2022-10-28-lightweight-compression %}#bit-packing) means small values stored in larger data types will not take up larger sizes on disk, but they will take up more memory during processing – hence, using the most restrictive types possible when creating columns is necessary to reduce memory consumption.
 

@@ -3102,11 +3102,11 @@ The function has the following signature:
 
 `ST_AsMVT(row STRUCT, layer_name VARCHAR DEFAULT 'layer', extent INTEGER DEFAULT 4096, geom_column_name VARCHAR DEFAULT NULL, feature_id_column_name VARCHAR DEFAULT NULL) -> BLOB`
 
-- The first argument is a struct containing the geometry and properties.
-- The second argument is the name of the layer in the vector tile. This argument is optional and defaults to 'layer'.
-- The third argument is the extent of the tile. This argument is optional and defaults to 4096.
-- The fourth argument is the name of the geometry column in the input row. This argument is optional. If not provided, the first geometry column in the input row will be used. If multiple geometry columns are present, an error will be raised.
-- The fifth argument is the name of the feature id column in the input row. This argument is optional. If provided, the values in this column will be used as feature ids in the vector tile. The column must be of type INTEGER or BIGINT. If set to negative or NULL, a feature id will not be assigned to the corresponding feature.
+* The first argument is a struct containing the geometry and properties.
+* The second argument is the name of the layer in the vector tile. This argument is optional and defaults to 'layer'.
+* The third argument is the extent of the tile. This argument is optional and defaults to 4096.
+* The fourth argument is the name of the geometry column in the input row. This argument is optional. If not provided, the first geometry column in the input row will be used. If multiple geometry columns are present, an error will be raised.
+* The fifth argument is the name of the feature id column in the input row. This argument is optional. If provided, the values in this column will be used as feature ids in the vector tile. The column must be of type INTEGER or BIGINT. If set to negative or NULL, a feature id will not be assigned to the corresponding feature.
 
 The input struct must contain exactly one geometry column of type GEOMETRY. It can contain any number of property columns of types VARCHAR, FLOAT, DOUBLE, INTEGER, BIGINT, or BOOLEAN.
 

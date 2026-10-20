@@ -6680,7 +6680,7 @@ Execute and return an Arrow Record Batch Reader that yields all rows
 
 > Deprecated `fetch_record_batch()` is deprecated. Use [`to_arrow_reader()`](#to_arrow_reader) instead.
 
-**Aliases**: [`record_batch`](#record_batch)
+**Aliases**: `record_batch`
 
 ##### Parameters
 
