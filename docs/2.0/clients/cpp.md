@@ -236,7 +236,7 @@ static void udf_vectorized(DataChunk &args, ExpressionState &state, Vector &resu
 con.Query("CREATE TABLE integers (i INTEGER)");
 con.Query("INSERT INTO integers VALUES (1), (2), (3), (999)");
 
-con.CreateVectorizedFunction<int, int>("udf_vectorized_int", &&udf_vectorized<int>);
+con.CreateVectorizedFunction<int, int>("udf_vectorized_int", &udf_vectorized<int>);
 
 con.Query("SELECT udf_vectorized_int(i) FROM integers")->Print();
 ```
