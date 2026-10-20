@@ -145,11 +145,9 @@ The [What's New in the Docs for 2.0 page]({% link docs/preview/whats_new_in_the_
 
 Several of the headline v2.0.0 changes are covered in [Breaking Changes](#breaking-changes) above: the new default [storage format](#storage-format), the [PEG-based SQL parser](#sql-parser), the reworked [C and C++ extension API](#c-and-c-extension-api), and the native timezone, calendar and collation support left after [ICU was removed from the core build](#icu-removed-from-the-core-build).
 
-## Performane Issues
+## Linux: Performance Differences between CLI and Python Clients
 
-(This is a major TODO that needs to be resolved before the release.)
-
--> py vs cli perf differences
+On Linux, you may experience a slight performance difference between the CLI and the Python clients, with the CLI client outperforming the Python client. The reason for this is that the CLI's build uses Link Time Optimization (LTO), while the Python client is currently built without this option. This is subject to change in [upcoming versions]({% link release_calendar.md %}).
 
 ## See Also
 

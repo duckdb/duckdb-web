@@ -205,7 +205,7 @@ For more details, see the [Extension Repositories page]({% link docs/preview/ext
 
 ### Core Extension Updates
 
-(TODO: turn this into text)
+DuckDB's [core extensions]({% link docs/preview/core_extensions/overview.md %}) are also shipping several new features, fixes and performance optimizations. These are too numerous to all list here, so we'll dedicate blog posts for them and only highlight a few of them here:
 
 * We released [DuckLake 1.1](https://ducklake.select/2026/10/21/ducklake-11/), incl. spec and reference implementation
 * The Iceberg extension ...
@@ -293,19 +293,3 @@ DuckDB version 2.1 will stop supporting `osx_amd64`.
 These were a few highlights, but there are many more features and improvements in this release. There have been almost 20,000 commits by many contributors since v1.5, shipping smaller features as well as performance and usability improvements. The full [release notes can be found on GitHub](https://github.com/duckdb/duckdb/releases/tag/v2.0.0).
 
 We would like to thank our community for the detailed issue reports and feedback that have driven this release, and our special thanks go to our contributors!
-
-<!-- TODO: maybe drop these? -->
-
-## Tmp
-
-### Faster Queries Across the Board
-
-As with every release, a lot of work went into making your existing queries faster without you doing anything. Partial aggregates are now pushed below joins, redundant aggregations are reused, the recursive CTE engine has been rewritten, aggregations spill to disk when they outgrow memory, and row-group pruning has been massively expanded across structs, lists, decimals, UUIDs, `IN` filters and even function predicates.
-
-In a [microbenchmark]({% post_url 2026-08-17-duckdb-20-highlights %}#6-faster-queries-across-the-board) of single-source reachability over a graph with one million edges, DuckDB v2.0 runs a plain recursive CTE about 40× faster than v1.5. We explain how in a [dedicated blog post]({% post_url 2026-08-25-how-duckdb-runs-recursive-ctes-faster %}).
-
-### Storage Format v2.0
-
-DuckDB v2.0 bumps the default [storage format version]({% link docs/preview/internals/storage.md %}) to v2.0.0. Column metadata is now loaded lazily, so databases with big indexes and wide tables open faster and use far less memory; the `DICT_FSST` string compression method is enabled by default; deletes are stored compactly; and the storage layer performs much stronger corruption validation on read.
-
-Because the new format is not backward compatible, see the [migration section](#migrating-to-v20).
