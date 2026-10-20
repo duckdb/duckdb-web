@@ -20,9 +20,10 @@ The preview (nightly) builds provide development versions of DuckDB. As such, th
 
 There are currently the following DuckDB versions under development:
 
-* v1.4: the LTS release.
-* v1.5: the current stable DuckDB release.
-* v2.0: the next DuckDB version, in an early stage of the development.
+* v1.4: an LTS release.
+* v1.5: a regular release with extended support to allow users sufficient time to transition to v2.0.
+* v2.0: an LTS release.
+* v2.1: the upcoming DuckDB version, in an early stage of the development.
 
 Note that for most users, we recommend the [stable DuckDB releases]({% link install/index.html %}).
 
@@ -44,7 +45,7 @@ pip install "duckdb<1.6.0" --pre --upgrade
 
 ### Python v2.0-dev
 
-See the [installation page]({% link install/index.html %}?environment=python&version=preview).
+See the [installation page]({% link install/index.html %}?environment=python).
 
 ## Command Line Interface (CLI) Client
 
@@ -61,15 +62,15 @@ To download the v1.5-dev command line client, use the following links:
 
 ### v2.0-dev CLI
 
-See the [installation page]({% link install/index.html %}?environment=cli&version=preview).
+See the [installation page]({% link install/index.html %}?environment=cli).
 
 ## Java
 
-See the [installation page]({% link install/index.html %}?environment=java&version=preview).
+See the [installation page]({% link install/index.html %}?environment=java).
 
 ## ODBC
 
-See the [installation page]({% link install/index.html %}?environment=odbc&version=preview).
+See the [installation page]({% link install/index.html %}?environment=odbc).
 
 ## C/C++ Libraries
 
@@ -87,7 +88,7 @@ To download the C/C++ libraries, use the following links:
 
 ### v2.0-dev C/C++ Libraries
 
-See the [installation page]({% link install/index.html %}?environment=c&version=preview).
+See the [installation page]({% link install/index.html %}?environment=c).
 
 ## Node.js (Neo)
 
