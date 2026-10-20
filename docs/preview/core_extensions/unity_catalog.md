@@ -147,11 +147,7 @@ ATTACH 'my_catalog' AS my_catalog (
 
 ### Catalog-Managed Commits
 
-Managed tables in Databricks and in Unity Catalog OSS may use catalog-managed commits (Catalog-Coordinated Commits / CCv2), where Unity Catalog coordinates commits rather than writers committing directly to the Delta log. Since v1.5.2 (v1.5.5 for Unity Catalog OSS), DuckDB transparently uses this protocol when the attached table requires it — the insert syntax is identical:
-
-```sql
-INSERT INTO my_catalog.my_schema.my_catalog_managed_table VALUES (1, 'hello');
-```
+Managed tables in Databricks and in Unity Catalog OSS may use catalog-managed commits (Catalog-Coordinated Commits / CCv2), where Unity Catalog coordinates commits rather than writers committing directly to the Delta log. Since v1.5.2 (v1.5.5 for Unity Catalog OSS), DuckDB uses this protocol when the attached table requires it. `INSERT` statements are identical in syntax, but they commit through the catalog-managed write protocol, so Unity Catalog coordinates concurrent writers. For details, see the [blog post]({% post_url 2026-05-07-delta-uc-updates %}#catalog-managed-tables).
 
 A managed table that DuckDB [creates](#creating-tables) uses catalog-managed commits. Tables created by other clients, e.g., Spark or the Unity Catalog CLI, are read and written the same way.
 
