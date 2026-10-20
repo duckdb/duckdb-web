@@ -5,7 +5,7 @@ authors:
   - The DuckDB team
 thumb: "/images/blog/thumbs/duckdb-release-2-0-0.svg"
 image: "/images/blog/thumbs/duckdb-release-2-0-0.png"
-excerpt: "The DuckDB team is happy to announce that today we're releasing DuckDB version 2.0.0 LTS, codenamed “Cinnamon Teal” (Spatula cyanoptera). This is our biggest feature release so far, shipping asynchronous I/O, triggers and an extensible SQL parser, along with a first-class `VARIANT` type, a more efficient storage format and much more, built from close to 20,000 commits since v1.5."
+excerpt: "The DuckDB team is happy to announce that today we're releasing DuckDB version 2.0.0 LTS, codenamed “Cinnamon Teal” (Spatula cyanoptera). This is our biggest feature release so far, and it's shipping a polished version of the Quack protocol, asynchronous I/O, along with a first-class `VARIANT` type, agent mode, triggers, an extensible SQL parser, and much more, built from close to 20,000 commits since v1.5."
 tag: release
 ---
 
@@ -159,7 +159,7 @@ In that post, we showed the network throughput over the course of a query with a
 The [`VARIANT` type]({% link docs/preview/sql/data_types/variant.md %}) stores semi-structured, schema-less data such as JSON while keeping the performance of columnar execution.
 So you can think of it as JSON on steroids: a `VARIANT` column can store differently shaped data in every row, but unlike JSON it is not a text format.
 
-[DuckDB 1.5 already introduced `VARIANT`]({% post_url 2026-03-09-announcing-duckdb-150 %}#variant-type), but DuckDB fully integrates it. DuckDB 2.0 detects the common structure in your data and “shreds” it, so it compresses well and executes fast. The pipeline works end to end, from shredded execution straight out of storage to shredded `VARIANT` reading and writing for Parquet, backed by a family of [`variant_*` functions]({% link docs/preview/sql/functions/variant.md %}). For example:
+[DuckDB 1.5 already introduced `VARIANT`]({% post_url 2026-03-09-announcing-duckdb-150 %}#variant-type), but DuckDB 2.0 fully integrates it. DuckDB 2.0 detects the common structure in your data and “shreds” it, so it compresses well and executes fast. The pipeline works end to end, from shredded execution straight out of storage to shredded `VARIANT` reading and writing for Parquet, backed by a family of [`variant_*` functions]({% link docs/preview/sql/functions/variant.md %}). For example:
 
 ```sql
 CREATE TABLE events (payload VARIANT);
@@ -221,8 +221,8 @@ For more details, see the [Extension Repositories page]({% link docs/preview/ext
 DuckDB's [core extensions]({% link docs/preview/core_extensions/overview.md %}) are also shipping several new features, fixes and performance optimizations. These are too numerous to all list here, so we'll dedicate blog posts for them and only highlight a few of them here:
 
 * We released [DuckLake 1.1](https://ducklake.select/2026/10/21/ducklake-11/), including a new specification and [reference implementation]({% link docs/preview/core_extensions/ducklake.md %}).
-* The [Iceberg extension]({% link docs/preview/core_extensions/iceberg/overview.md %}) strives to become a feature-complete implementation. To this end, is add REST catalog `ATTACH` options to derive a table's location from its namespace, control the URL prefix and namespace separator, and load metadata from the catalog's metadata-location.
-* The [Delta extension]({% link docs/preview/core_extensions/delta.md %}) can create Delta tables with `CREATE TABLE`, including partitioning and Delta table properties, supports time trave, and improves `VARIANT` support.
+* The [Iceberg extension]({% link docs/preview/core_extensions/iceberg/overview.md %}) strives to become a feature-complete implementation. To this end, it adds REST catalog `ATTACH` options to derive a table's location from its namespace, control the URL prefix and namespace separator, and load metadata from the catalog's metadata-location.
+* The [Delta extension]({% link docs/preview/core_extensions/delta.md %}) can create Delta tables with `CREATE TABLE`, including partitioning and Delta table properties, supports time travel, and improves `VARIANT` support.
 
 In the coming weeks, we'll release more blog posts about these features.
 
@@ -348,7 +348,7 @@ Triggers bring us one step closer to materialized views, a long-standing item in
 As always, DuckDB's [friendly SQL dialect]({% link docs/preview/sql/dialect/friendly_sql.md %}) keeps growing. A few favorites from this release cycle:
 
 * The [`$⟨variable⟩`{:.language-sql .highlight} shorthand]({% link docs/preview/sql/statements/set_variable.md %}#the-name-shorthand) lets you write `$x` anywhere an expression is allowed, instead of `getvariable('⟨variable⟩')`{:.language-sql .highlight}.
-* [DML in CTEs (data manipulation language in common table expresssion)]({% link docs/preview/sql/query_syntax/with.md %}#data-modifying-ctes) let you use `INSERT`, `UPDATE`, `DELETE` and `COPY` as pipeline steps.
+* [DML in CTEs (data manipulation language in common table expression)]({% link docs/preview/sql/query_syntax/with.md %}#data-modifying-ctes) let you use `INSERT`, `UPDATE`, `DELETE` and `COPY` as pipeline steps.
 * [`NEAREST` joins]({% link docs/preview/sql/query_syntax/from.md %}#nearest-joins) turn top-k similarity search into a join clause, handy for vector and embedding workloads.
 * [Nested schemas]({% link docs/preview/sql/statements/create_schema.md %}#nested-schemas) allow schemas within schemas, e.g., `CREATE SCHEMA finance.reports`.
 * [JSON mutation functions]({% link docs/preview/data/json/json_functions.md %}#json-mutation-functions) `json_set`, `json_insert`, `json_replace` and `json_remove` modify JSON documents in place (see also our [blog post on JSON patches]({% post_url 2026-08-18-reconciling-json %})).
