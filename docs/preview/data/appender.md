@@ -3,13 +3,15 @@ layout: docu
 title: Appender
 ---
 
-The Appender can be used to load bulk data into a DuckDB database. It is available in the C, C++, Go, Java, Julia, Node.js, and Rust clients. This page describes how the Appender behaves across clients and shows a minimal example in each of them. For the full API of a given client, follow the links under [Client APIs](#client-apis).
+The Appender can be used to load bulk data into a DuckDB database. It is available in the C, C++, Go, Java, Julia, Node.js, Python, and Rust clients. This page describes how the Appender behaves across clients and shows a minimal example in each of them. For the full API of a given client, follow the links under [Client APIs](#client-apis).
 
 ## How It Works
 
 An Appender is tied to a single connection and always appends to a single table in the database file, using that connection's transaction context.
 
 Values added to the Appender are cached before being inserted into the database, for performance reasons. That means that, while appending, the rows might not be immediately visible in the system. The cache is flushed automatically when the Appender is closed or goes out of scope, and it can also be flushed manually. Once the Appender has been flushed or closed, all of its data has been written to the database.
+
+> Note In Python, call `flush()` or use a `with` block, which flushes on successful exit. Garbage collection discards any remaining buffered rows. See the [Python Appender]({% link docs/preview/clients/python/appender.md %}).
 
 Constraints such as `NOT NULL`, `PRIMARY KEY`, and `UNIQUE` are checked when the cache is flushed rather than as each row is added, so a row can be accepted but later fail at flush time. See [Handling Constraint Violations](#handling-constraint-violations).
 
@@ -83,6 +85,19 @@ app.flush()?;
 
 For more information, see the [Rust Appender API]({% link docs/preview/clients/rust/data_import.md %}#appender).
 
+### Python
+
+Create an appender from a connection with `appender()`, then add rows with `append_row()`. A `with` block flushes on successful exit; if an exception leaves the block, the buffered rows are discarded:
+
+```python
+con = duckdb.connect()
+con.execute("CREATE TABLE people (id INTEGER, name VARCHAR)")
+with con.appender("people") as appender:
+    appender.append_row(1, "Mark")
+```
+
+For more information, see the [Python Appender]({% link docs/preview/clients/python/appender.md %}).
+
 ### C
 
 For more information, see the [C Appender API]({% link docs/preview/clients/c/appender.md %}).
@@ -114,7 +129,7 @@ appender.AppendRow(
 
 ## Commit Frequency
 
-By default, the appender performs commits every 204,800 rows.
+For clients other than Python, the appender performs commits every 204,800 rows by default.
 You can change this by explicitly using [transactions]({% link docs/preview/sql/statements/transactions.md %}) and surrounding your batches of appended rows by `BEGIN TRANSACTION` and `COMMIT` statements.
 
 ## Handling Constraint Violations
@@ -136,5 +151,6 @@ Each client's documentation covers its full Appender API, including constructors
 * [Go]({% link docs/preview/clients/go/data_import.md %}#appender)
 * [Java (JDBC)]({% link docs/preview/clients/java/data_import.md %}#appender)
 * [Julia]({% link docs/preview/clients/tertiary_clients/julia.md %}#appender-api)
+* [Python]({% link docs/preview/clients/python/appender.md %})
 * [Rust]({% link docs/preview/clients/rust/data_import.md %}#appender)
 * [Node.js]({% link docs/preview/clients/node_neo/overview.md %}#append-to-table)
