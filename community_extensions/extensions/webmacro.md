@@ -90,8 +90,8 @@ repo:
 
 extension_star_count: 16
 extension_star_count_pretty: 16
-extension_download_count: 879
-extension_download_count_pretty: 879
+extension_download_count: 952
+extension_download_count_pretty: 952
 image: '/images/community_extensions/social_preview/preview_community_extension_webmacro.png'
 layout: community_extension_doc
 ---

@@ -50,10 +50,10 @@ docs:
       - `vector[T]`/`set[T]` to `LIST[T]`
     - optional `filename` column for tracking source files across globs
 
-extension_star_count: 5
-extension_star_count_pretty: 5
-extension_download_count: 900
-extension_download_count_pretty: 900
+extension_star_count: 6
+extension_star_count_pretty: 6
+extension_download_count: 962
+extension_download_count_pretty: 962
 image: '/images/community_extensions/social_preview/preview_community_extension_zeek.png'
 layout: community_extension_doc
 ---
