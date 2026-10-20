@@ -158,6 +158,7 @@ To find a list of these tools, check out the [Awesome DuckDB repository](https:/
 
 * [How to set up the Beekeeper Studio SQL editor]({% link docs/2.0/guides/sql_editors/beekeeper_studio.md %})
 * [How to set up the DBeaver SQL IDE]({% link docs/2.0/guides/sql_editors/dbeaver.md %})
+* [How to set up the DBine SQL editor]({% link docs/2.0/guides/sql_editors/dbine.md %})
 * [How to set up the LibreDB Studio SQL editor]({% link docs/2.0/guides/sql_editors/libredb_studio.md %})
 * [How to set up the VisuaLeaf SQL editor]({% link docs/2.0/guides/sql_editors/visualeaf.md %})
 
