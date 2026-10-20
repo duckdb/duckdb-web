@@ -21,6 +21,8 @@ Values added to the Appender are cached before being inserted into the database,
 
 Constraints such as `NOT NULL`, `PRIMARY KEY`, and `UNIQUE` are checked when the cache is flushed rather than as each row is added, so a row can be accepted but later fail at flush time. See [Handling Constraint Violations](#handling-constraint-violations).
 
+Within a row, a value must be appended for every column of the table, in column order, before the row is ended. Ending a row before all columns have been appended, or appending more values than the table has columns, results in an error.
+
 ## Creating an Appender
 
 Each client creates an Appender from a connection and a target table, adds rows, and then flushes. The examples below insert into a table with an integer and a string column.
