@@ -218,3 +218,13 @@ The sample size can be changed by setting the `pandas_analyze_sample` config opt
 # example setting the sample size to 100k
 duckdb.execute("SET GLOBAL pandas_analyze_sample = 100_000")
 ```
+
+## Appending Rows
+
+Use the [appender]({% link docs/preview/clients/python/appender.md %}) to insert rows produced by Python. The `with` block writes the rows to the table when it finishes without an exception:
+
+```python
+duckdb.execute("CREATE TABLE people (id INTEGER, name VARCHAR)")
+with duckdb.appender("people") as appender:
+    appender.append_row(1, "Mark")
+```

@@ -433,6 +433,10 @@
                   "url": "data_ingestion"
                 },
                 {
+                  "page": "Appender",
+                  "url": "appender"
+                },
+                {
                   "page": "Conversion between DuckDB and Python",
                   "url": "conversion"
                 },
