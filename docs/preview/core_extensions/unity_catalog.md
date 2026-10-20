@@ -4,13 +4,11 @@ layout: docu
 title: Unity Catalog Extension
 ---
 
-The `unity_catalog` extension adds support for the [`Unity Catalog`](https://www.unitycatalog.io/) atop the [`Delta Lake`](https://delta.io/) format and [DuckDB Delta extension]({% link docs/preview/core_extensions/delta.md %}).
+The `unity_catalog` extension attaches a [Unity Catalog](https://www.unitycatalog.io/) catalog, on Databricks or Unity Catalog OSS, as a DuckDB database. You can list, read, insert into and create its [Delta Lake](https://delta.io/) tables. It uses the [`delta` extension]({% link docs/preview/core_extensions/delta.md %}) to access the tables.
 
-The [`delta` extension]({% link docs/preview/core_extensions/delta.md %}) adds support for the [Delta Lake open-source storage format](https://delta.io/). It is built using the [Delta Kernel](https://github.com/delta-io/delta-kernel-rs). The extension reads and writes Delta tables, both local and remote.
+For implementation details, see the [“Delta Grows Up: Writes, Unity Catalog and Time Travel” blog post]({% post_url 2026-05-07-delta-uc-updates %}).
 
-For implementation details, see the [“Native Delta Lake Support in DuckDB” blog post]({% post_url 2024-06-10-delta %}).
-
-> Note Both extensions are [only supported on given platforms](#supported-duckdb-versions-and-platforms).
+> Note Both extensions are available on [a subset of platforms](#supported-platforms).
 
 ## Installing and Loading
 
@@ -23,7 +21,7 @@ LOAD unity_catalog;
 
 ## Usage
 
-Given that you already have a Unity Catalog setup with either Databricks or Unity Catalog OSS, configure a secret with your token, endpoint, and region, then attach to your catalog:
+To connect to Unity Catalog on Databricks or Unity Catalog OSS, create a secret with your token, endpoint and region, then attach a catalog:
 
 ```sql
 CREATE SECRET (
@@ -35,7 +33,10 @@ CREATE SECRET (
 ATTACH '⟨catalog_name⟩' AS my_catalog (TYPE unity_catalog, DEFAULT_SCHEMA 'main');
 ```
 
-Where `ENDPOINT` is your Unity Catalog REST API endpoint and `TOKEN` is a suitable credential. For Databricks, `ENDPOINT` is your [Workspace URL](https://docs.databricks.com/aws/en/workspace/workspace-details#workspace-instance-names-urls-and-ids) (typically `https://⟨instance⟩.cloud.databricks.com/`{:.language-sql .highlight}) and `TOKEN` can be e.g., a [personal access token](https://docs.databricks.com/aws/en/dev-tools/auth/pat) with `unity-catalog` scope — see [Access Control in Unity Catalog](https://docs.databricks.com/aws/en/data-governance/unity-catalog/access-control/) for the full range of options. For OSS Unity Catalog, see the [OSS Unity Catalog documentation](https://docs.unitycatalog.io/).
+* `ENDPOINT` is the Unity Catalog REST API endpoint. For Databricks, it is your [Workspace URL](https://docs.databricks.com/aws/en/workspace/workspace-details#workspace-instance-names-urls-and-ids), typically `https://⟨instance⟩.cloud.databricks.com/`{:.language-sql .highlight}.
+* `TOKEN` is a credential. For Databricks, it can be a [personal access token](https://docs.databricks.com/aws/en/dev-tools/auth/pat) with `unity-catalog` scope; see [Access Control in Unity Catalog](https://docs.databricks.com/aws/en/data-governance/unity-catalog/access-control/) for the other options. For Unity Catalog OSS, see the [OSS Unity Catalog documentation](https://docs.unitycatalog.io/).
+
+> Note Only Databricks reports a default namespace. When you attach a Unity Catalog OSS catalog, always set `DEFAULT_SCHEMA`: without it, queries against the catalog fail, even with fully qualified table names.
 
 ### Attach Options
 
@@ -48,9 +49,9 @@ When attaching a Unity Catalog catalog, you can pass the following options to `A
 | `READ_ONLY` | `BOOLEAN` | `false` | Attach the catalog in read-only mode. |
 | `USE_IRC_SCAN_PLAN` | `BOOLEAN` | `false` | Plan scans on the server (Databricks only); see [Server-Side Scan Planning](#server-side-scan-planning). |
 
-> Note Only Databricks reports a default namespace. When you attach a Unity Catalog OSS catalog, always set `DEFAULT_SCHEMA`: without it, queries against the catalog fail, even with fully qualified table names.
-
 ### Reading
+
+Tables are named `⟨catalog⟩.⟨schema⟩.⟨table⟩`{:.language-sql .highlight}; names without a schema resolve to `DEFAULT_SCHEMA`:
 
 ```sql
 SHOW ALL TABLES;
@@ -59,6 +60,8 @@ SELECT * FROM my_catalog.my_schema.my_table LIMIT 10;
 
 ### Time Travel
 
+> New Time travel by timestamp is introduced in DuckDB 2.0.
+
 To read a table as of a version or a point in time, use the `AT` clause:
 
 ```sql
@@ -66,13 +69,11 @@ SELECT * FROM my_catalog.my_schema.my_table AT (VERSION => 5);
 SELECT * FROM my_catalog.my_schema.my_table AT (TIMESTAMP => TIMESTAMPTZ '2026-10-01 12:00:00+00');
 ```
 
-> New Time travel by timestamp is introduced in DuckDB 2.0.
-
 A timestamp reads the latest version committed at or before that time. A timestamp before the table's first commit or later than the current time fails with an error.
 
 ### Writing
 
-Standard inserts are supported:
+To append rows, use `INSERT INTO`:
 
 ```sql
 INSERT INTO my_catalog.my_schema.my_table VALUES (1, 'hello');
@@ -81,16 +82,16 @@ INSERT INTO my_catalog.my_schema.my_table SELECT * FROM other_table;
 
 ### Data Types
 
-Since v1.5.6, DuckDB reads a table's schema from its Delta log and handles Unity Catalog's column types as follows:
+Unity Catalog column types map to DuckDB types as follows. Since v1.5.6, DuckDB reads them from the table's Delta log.
 
-* `timestamp` maps to `TIMESTAMP WITH TIME ZONE` and `timestamp_ntz` to `TIMESTAMP`.
-* A column of a type that DuckDB cannot read is listed with the type `UNKNOWN`, e.g., in `DESCRIBE`. Reading the table fails with an error that names the column.
+* `timestamp` maps to `TIMESTAMP WITH TIME ZONE` and, since v1.5.6, `timestamp_ntz` to `TIMESTAMP`.
+* Since v1.5.6, a column of a type that DuckDB cannot read is listed with the type `UNKNOWN`, e.g., in `DESCRIBE`. Reading the table fails with an error that names the column.
 
-#### Variant Columns
+#### VARIANT Columns
 
 > New Support for `VARIANT` columns is introduced in DuckDB 2.0.
 
-Unity Catalog's `variant` maps to `VARIANT`. `VARIANT` columns can be read, shredded or not. Inserts write shredded variants if the table sets `delta.enableVariantShredding`. Inserts into a table with a `VARIANT` nested in a `STRUCT` or a list fail with an error.
+Unity Catalog's `variant` maps to `VARIANT`. `VARIANT` columns can be read whether their files are shredded or not. Inserts write shredded variants if the table sets `delta.enableVariantShredding`. An `INSERT` into a table with a `VARIANT` inside a struct, list or map fails with an error.
 
 ### Creating Tables
 
@@ -128,9 +129,9 @@ For the forms and options that `CREATE TABLE` does not support, see [Limitations
 
 > New This feature is introduced in DuckDB 2.0.
 
-Databricks can plan scans on the server, through the Iceberg REST Catalog API of Unity Catalog. The API uses catalog-wide statistics, which can improve filtering and reduce the number of files that a query scans. Unity Catalog OSS does not offer this API.
+Databricks can plan scans on the server, through the Iceberg REST Catalog (IRC) API of Unity Catalog. The API uses catalog-wide statistics, which can improve filtering and reduce the number of files that a query scans. Unity Catalog OSS does not offer this API.
 
-With `USE_IRC_SCAN_PLAN true`, DuckDB sends each scan's filters to the server, reads the files and delete files that it returns, and applies the filters again itself:
+With `USE_IRC_SCAN_PLAN true`, DuckDB sends each scan's filters to the server and reads only the files that it returns, with their delete files. DuckDB still applies the filters itself:
 
 ```sql
 ATTACH '⟨catalog_name⟩' AS my_catalog (
@@ -142,7 +143,7 @@ ATTACH '⟨catalog_name⟩' AS my_catalog (
 
 * If the server cannot plan a scan, e.g., because it does not offer the API or refuses the table, DuckDB reads the table through its Delta log instead, and does not try scan planning again on this attached catalog for 15 minutes.
 * Time travel queries (`AT (...)`) always read through the Delta log.
-* Positional delete files and deletion vectors are applied. A table with equality delete files cannot be read with scan planning.
+* Positional delete files and deletion vectors are applied. A table with equality delete files fails with an error; to read it, attach the catalog without `USE_IRC_SCAN_PLAN`.
 
 ### Catalog-Managed Commits
 
@@ -172,13 +173,14 @@ This extension supports:
     * constraints, including `NOT NULL` and `PRIMARY KEY`
     * column `DEFAULT` values and generated columns
     * columns of a type that Delta cannot store, e.g., `TIME`
-    * `SORTED BY`, and `WITH` options other than `location`, including Delta table properties
+    * `SORTED BY`
+    * `WITH` options other than `location`: unlike with the [`delta` extension]({% link docs/preview/core_extensions/delta.md %}#table-properties), Delta table properties cannot be set
 
-## Supported DuckDB Versions and Platforms
+## Supported Platforms
 
-The `unity_catalog` (and `delta`) extension currently supports the following platforms:
+The `unity_catalog` and `delta` extensions support the following platforms:
 
-* Linux AMD64 (x86_64 and ARM64): `linux_amd64` and `linux_arm64`
+* Linux (x86_64 and ARM64): `linux_amd64` and `linux_arm64`
 * macOS Intel and Apple Silicon: `osx_amd64` and `osx_arm64`
 * Windows AMD64: `windows_amd64`
 
