@@ -82,10 +82,55 @@ DISCONNECT;
 
 The CLI also has shortcuts for this: the new [`-serve` and `-connect` arguments]({% link docs/preview/clients/cli/arguments.md %}#serving-and-connecting-to-remote-databases) start a Quack server or connect to one directly from the command line:
 
+<!-- markdownlint-disable MD001 -->
+
+<div class="duck-diagram" markdown="1">
+
+<div class="duck-diagram-box" markdown="1">
+
+#### <svg class="icon"><use href="#database-01"></use></svg> DuckDB server
+
 ```batch
-duckdb -serve    # server
-duckdb -connect  # client
+duckdb -serve
 ```
+
+<!-- «memory» D -->
+```plsql
+CREATE TABLE t AS
+    SELECT 42 AS x;
+```
+
+</div>
+
+<div class="duck-diagram-arrow">quack:</div>
+
+<div class="duck-diagram-box" markdown="1">
+
+#### <svg class="icon"><use href="#database-01"></use></svg> DuckDB client
+
+```batch
+duckdb -connect
+```
+
+<!-- «quack:localhost memory» -->
+```plsql
+FROM t;
+```
+
+```text
+┌───────┐
+│   x   │
+│ int32 │
+├───────┤
+│    42 │
+└───────┘
+```
+
+</div>
+
+</div>
+
+<!-- markdownlint-enable MD001 -->
 
 The `CONNECT` statement is not limited to Quack: it points your session at any remote database that supports it, and the new remote pushdown optimizer ships SQL directly to PostgreSQL and MySQL instead of pulling tables over the wire.
 
