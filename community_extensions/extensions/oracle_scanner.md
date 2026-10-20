@@ -24,9 +24,9 @@ repo:
   # The DuckDB 2.0 port of v0.4.0 (branch duckdb-2.0-v0.4), built against v2.0-cyanoptera.
   ref_next: 5ffbef1e789012650aea6d85026b7c6fca8cae1e
 
-extension_star_count: 3
-extension_star_count_pretty: 3
-extension_download_count: 1055
+extension_star_count: 4
+extension_star_count_pretty: 4
+extension_download_count: 1061
 extension_download_count_pretty: 1.1k
 image: '/images/community_extensions/social_preview/preview_community_extension_oracle_scanner.png'
 layout: community_extension_doc

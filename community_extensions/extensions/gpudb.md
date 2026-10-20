@@ -225,10 +225,10 @@ docs:
     * Whole-column min / max on a stored table stays a native win —
       DuckDB answers it from zonemap statistics without scanning.
 
-extension_star_count: 28
-extension_star_count_pretty: 28
-extension_download_count: 707
-extension_download_count_pretty: 707
+extension_star_count: 29
+extension_star_count_pretty: 29
+extension_download_count: 739
+extension_download_count_pretty: 739
 image: '/images/community_extensions/social_preview/preview_community_extension_gpudb.png'
 layout: community_extension_doc
 ---
