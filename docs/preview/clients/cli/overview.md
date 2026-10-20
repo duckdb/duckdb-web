@@ -49,12 +49,10 @@ You will see DuckDB's version number, the information on the connection and a pr
 duckdb
 ```
 
-```text
-DuckDB v{{ site.current_duckdb_version }} ({{ site.current_duckdb_codename }}) {{ site.current_duckdb_hash }}
+```sql
+DuckDB v{{ site.next_major_duckdb_version }} ({{ site.current_duckdb_codename }})
 Enter ".help" for usage hints.
-Connected to a transient in-memory database.
-Use ".open FILENAME" to reopen on a persistent database.
-D
+«memory» D
 ```
 
 To open or create a [persistent database]({% link docs/preview/connect/overview.md %}#persistent-database), simply include a path as a command line argument:
