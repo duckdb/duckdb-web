@@ -86,7 +86,7 @@ DuckDB supports three different types of sampling methods: `reservoir`, `bernoul
 
 Samples require a *sample size*, which is an indication of how many elements will be sampled from the total population. Samples can either be given as a percentage (`10%` or `10 PERCENT`) or as a fixed number of rows (`10` or `10 ROWS`). All three sampling methods support sampling over a percentage, but **only** reservoir sampling supports sampling a fixed number of rows.
 
-Samples are probabilistic, that is to say, samples can be different between runs *unless* the seed is specifically specified. Specifying the seed *only* guarantees that the sample is the same if multi-threading is not enabled (i.e., `SET threads = 1`). In the case of multiple threads running over a sample, samples are not necessarily consistent even with a fixed seed.
+Samples are probabilistic, that is to say, samples can be different between runs *unless* the seed is specifically specified. Specifying the seed *only* guarantees that the sample is the same if multi-threading is not enabled (i.e., `SET threads = 1`{:.language-sql .highlight}). In the case of multiple threads running over a sample, samples are not necessarily consistent even with a fixed seed.
 
 ## Reproducible Samples
 
@@ -95,7 +95,7 @@ Sampling is probabilistic, so a query returns a different sample on each run unl
 * With the `REPEATABLE` keyword after the method form, e.g., `USING SAMPLE reservoir(50 ROWS) REPEATABLE (100)`.
 * As the second value in the parenthesized method form, e.g., `USING SAMPLE 20% (system, 377)`.
 
-As noted above, fixing the seed only guarantees a reproducible sample when DuckDB runs single-threaded (`SET threads = 1`). With multiple threads, samples are not necessarily consistent even with a fixed seed.
+As noted above, fixing the seed only guarantees a reproducible sample when DuckDB runs single-threaded (`SET threads = 1`{:.language-sql .highlight}). With multiple threads, samples are not necessarily consistent even with a fixed seed.
 
 ## Sampling Methods
 

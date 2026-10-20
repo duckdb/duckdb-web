@@ -60,7 +60,7 @@ These limits can be adjusted with [dot commands]({% link docs/preview/clients/cl
 
 The `.help agent` command prints a summary of agent mode. A few things that help when driving DuckDB programmatically:
 
-* `SET max_execution_time = ⟨milliseconds⟩` bounds how long a query may run.
+* `SET max_execution_time = ⟨milliseconds⟩`{:.language-sql .highlight} bounds how long a query may run.
 * `DESCRIBE ⟨query⟩` returns the result columns without running the query.
 * [`SUMMARIZE ⟨table⟩`]({% link docs/preview/sql/statements/summarize.md %}) returns summary statistics for a table.
 * `.tables` lists the available tables.

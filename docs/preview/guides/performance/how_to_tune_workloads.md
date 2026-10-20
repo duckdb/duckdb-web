@@ -54,7 +54,7 @@ The [performance considerations when choosing `ROW_GROUP_SIZE` for Parquet files
 
 ### Too Many Threads
 
-Note that in certain cases DuckDB may launch _too many threads_ (e.g., due to HyperThreading), which can lead to slowdowns. In these cases, it’s worth manually limiting the number of threads using [`SET threads = X`]({% link docs/preview/configuration/pragmas.md %}#threads).
+Note that in certain cases DuckDB may launch _too many threads_ (e.g., due to HyperThreading), which can lead to slowdowns. In these cases, it’s worth manually limiting the number of threads using [`SET threads = X`{:.language-sql .highlight}]({% link docs/preview/configuration/pragmas.md %}#threads).
 
 ## Larger-than-Memory Workloads (Out-of-Core Processing)
 

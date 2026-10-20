@@ -9,7 +9,7 @@ The `PRAGMA` statement is a SQL extension adopted by DuckDB from SQLite. `PRAGMA
 
 Configure DuckDB settings using the [`SET` statement]({% link docs/preview/sql/statements/set.md %}). You can retrieve a setting's value using `SELECT current_setting('option_name')`.
 
-> Deprecated Assigning configuration settings with `PRAGMA name = value` is deprecated and emits a warning. Use `SET name = value` instead. The warning becomes an error when `warnings_as_errors` is enabled. Function-style `PRAGMA` calls (for example, `PRAGMA table_info('table_name')`) and the SQLite-compatible `PRAGMA table_info = 'table_name'` form are unaffected.
+> Deprecated Assigning configuration settings with `PRAGMA name = value` is deprecated and emits a warning. Use `SET name = value`{:.language-sql .highlight} instead. The warning becomes an error when `warnings_as_errors` is enabled. Function-style `PRAGMA` calls (for example, `PRAGMA table_info('table_name')`) and the SQLite-compatible `PRAGMA table_info = 'table_name'` form are unaffected.
 
 For DuckDB's built in configuration options, see the [Configuration Reference]({% link docs/preview/configuration/overview.md %}#configuration-reference).
 DuckDB [extensions]({% link docs/preview/extensions/overview.md %}) may register additional configuration options.

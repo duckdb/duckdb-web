@@ -367,7 +367,7 @@ SELECT * FROM tbl2;
 
 ## Transactional Semantics
 
-When running queries on multiple databases, the system opens separate transactions per database. The transactions are started _lazily_ by default – when a given database is referenced for the first time in a query, a transaction for that database will be started. `SET immediate_transaction_mode = true` can be toggled to change this behavior to eagerly start transactions in all attached databases instead.
+When running queries on multiple databases, the system opens separate transactions per database. The transactions are started _lazily_ by default – when a given database is referenced for the first time in a query, a transaction for that database will be started. `SET immediate_transaction_mode = true`{:.language-sql .highlight} can be toggled to change this behavior to eagerly start transactions in all attached databases instead.
 
 While multiple transactions can be active at a time – the system only supports _writing_ to a single attached database in a single transaction. If you try to write to multiple attached databases in a single transaction the following error will be thrown:
 

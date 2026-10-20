@@ -321,7 +321,7 @@ INITIAL - 1 - a - 2 - b - 3 - c - 4 - d
 >
 > DuckDB v1.5 is the last release supporting the single arrow syntax without explicitly enabling it.
 >
-> DuckDB v2.0 disables the single arrow syntax by default. Under `DEFAULT`, only the Python-style syntax is enabled; use `SET lambda_syntax = 'ENABLE_SINGLE_ARROW'` to revert to the deprecated behavior.
+> DuckDB v2.0 disables the single arrow syntax by default. Under `DEFAULT`, only the Python-style syntax is enabled; use `SET lambda_syntax = 'ENABLE_SINGLE_ARROW'`{:.language-sql .highlight} to revert to the deprecated behavior.
 >
 > DuckDB v2.1 will remove the `lambda_syntax` flag and fully deprecates the single arrow syntax,
 > so the old behavior will no longer be possible.

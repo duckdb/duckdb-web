@@ -163,7 +163,7 @@ CREATE OR REPLACE SECRET secret (
 If no region is provided explicitly, DuckDB resolves it from the following sources, in order:
 
 1. The `REGION` secret parameter.
-2. The `s3_region` [setting]({% link docs/preview/configuration/overview.md %}) (`SET s3_region = '⟨region⟩'`).
+2. The `s3_region` [setting]({% link docs/preview/configuration/overview.md %}) (`SET s3_region = '⟨region⟩'`{:.language-sql .highlight}).
 3. The `AWS_REGION` environment variable.
 4. The `AWS_DEFAULT_REGION` environment variable.
 5. The `region` of the profile in `~/.aws/config`.

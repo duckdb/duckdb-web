@@ -248,7 +248,7 @@ The old single-arrow lambda syntax (`x -> x + 1`) is now disabled by default. Us
 SELECT list_transform([1, 2, 3], lambda x: x + 1);
 ```
 
-You can temporarily re-enable the old syntax with `SET lambda_syntax = 'ENABLE_SINGLE_ARROW';`. Both the flag and the single-arrow syntax will be removed entirely in v2.1.
+You can temporarily re-enable the old syntax with `SET lambda_syntax = 'ENABLE_SINGLE_ARROW';`{:.language-sql .highlight}. Both the flag and the single-arrow syntax will be removed entirely in v2.1.
 
 #### Amalgamation Builds
 

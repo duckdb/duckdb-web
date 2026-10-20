@@ -7426,7 +7426,7 @@ Write the relation object to a Parquet file in 'file_name'
     The field_id for each column. Pass auto to attempt to infer automatically.
 - **row_group_size_bytes** : int, default: row_group_size * 1024
                             
-    The target size of each row group. You can pass either a human-readable string, e.g., 2MB, or an integer, i.e., the number of bytes. This option is only used when you have issued `SET preserve_insertion_order = false;`, otherwise, it is ignored.
+    The target size of each row group. You can pass either a human-readable string, e.g., 2MB, or an integer, i.e., the number of bytes. This option is only used when you have issued `SET preserve_insertion_order = false;`{:.language-sql .highlight}, otherwise, it is ignored.
 - **row_group_size** : int, default: 122880
                             
     The target size, i.e., number of rows, of each row group.
@@ -7741,7 +7741,7 @@ Write the relation object to a Parquet file in 'file_name'
     The field_id for each column. Pass auto to attempt to infer automatically.
 - **row_group_size_bytes** : int, default: row_group_size * 1024
                             
-    The target size of each row group. You can pass either a human-readable string, e.g., 2MB, or an integer, i.e., the number of bytes. This option is only used when you have issued `SET preserve_insertion_order = false;`, otherwise, it is ignored.
+    The target size of each row group. You can pass either a human-readable string, e.g., 2MB, or an integer, i.e., the number of bytes. This option is only used when you have issued `SET preserve_insertion_order = false;`{:.language-sql .highlight}, otherwise, it is ignored.
 - **row_group_size** : int, default: 122880
                             
     The target size, i.e., number of rows, of each row group.

@@ -43,7 +43,7 @@ Using the sample dataset, this query took 55 seconds.
 
 I was quickly able to get it up and running and import the data into DuckDB. I ran many of our analytical queries and it was very fast, under 100ms for `GROUP BY` and `COUNT` queries and I was able to export 50,000 records in less than 5 seconds. The only exception was when projecting large text columns, which caused a performance degradation; I have raised an [issue](https://github.com/duckdb/duckdb/issues/24935) about that.
 
-Sorting the data provided further query performance improvements, and using `SET storage_compatibility_version = 'latest'` resulted in a significant reduction in the database file size.
+Sorting the data provided further query performance improvements, and using `SET storage_compatibility_version = 'latest'`{:.language-sql .highlight} resulted in a significant reduction in the database file size.
 
 Ultimately, the `mongo` community extension appears to be the easiest, most painless, and most performant way to set up a MongoDB-to-DuckDB pipeline.
 
@@ -234,7 +234,7 @@ In this implementation, we use our table function as the data source for the `CR
 To make the query over this function to run in parallel we need two bits:
 
  - `info.setMaxThreads(8)` in `globalInit`: tells DuckDB that function supports multiple concurrent `apply` calls
- - `SET preserve_insertion_order = FALSE`: tells DuckDB that it is not necessary to maintain the original order of records as they are read from the table function during insertion. If this flag is not set to FALSE, DuckDB will restrict apply calls to a single thread to preserve order. Since we perform sorting as a post-processing step after the import, preserving the insertion order is unnecessary.
+ - `SET preserve_insertion_order = FALSE`{:.language-sql .highlight}: tells DuckDB that it is not necessary to maintain the original order of records as they are read from the table function during insertion. If this flag is not set to FALSE, DuckDB will restrict apply calls to a single thread to preserve order. Since we perform sorting as a post-processing step after the import, preserving the insertion order is unnecessary.
 
 With this approach, the total execution time on the sample data was 1 minute and 27 seconds. While it does not achieve the `mongo` extension time (it is not an apples-to-apples comparison due to day-sized queries and post-processing sorting) - it incurs the least overhead among all Java approaches I tried.
 

@@ -72,7 +72,7 @@ check(err)
 db := sql.OpenDB(connector)
 _, err = db.Exec(`CALL enable_logging(level = 'info')`)
 check(err)
-_, err = db.Exec(`SET logging_storage = 'my_log_storage'`)
+_, err = db.Exec(`SET logging_storage = 'my_log_storage'`{:.language-sql .highlight})
 check(err)
 ```
 

@@ -216,8 +216,8 @@ The first version printed three lines of explanation (634 bytes) on every run. T
 
 The longer text is available via `.help agent`. It describes the output rules and settings, and it points to a few features an agent might not find by itself:
 
-* `SET max_execution_time = <ms>` to put an upper bound on a query’s runtime
-* `DESCRIBE <query>` to get the result columns without running the query
+* `SET max_execution_time = ⟨ms⟩`{:.language-sql .highlight} to put an upper bound on a query’s runtime
+* `DESCRIBE ⟨query⟩`{:.language-sql .highlight} to get the result columns without running the query
 * `SUMMARIZE` for a quick profile of a table or query
 * `.tables` for the schema
 * `duckdb_functions()` for function documentation

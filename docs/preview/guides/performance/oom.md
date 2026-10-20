@@ -7,9 +7,9 @@ title: Out-of-Memory Issues
 
 If you are experiencing out-of-memory issues with DuckDB, try tweaking the following configuration options:
 
-* Reduce the number of threads using the `SET threads = ...` command.
-* Setting the memory limit lower than the [default 80%]({% link docs/preview/operations_manual/limits.md %}) can help prevent out of memory errors. While this configuration sounds counter-intuitive, it helps because some of DuckDB's operations circumvent the database's buffer manager and thus they can reserve more memory than allowed by the memory limit. If this happens (e.g., DuckDB is killed by the operating system or an OOM reaper process), set the memory limit to just 50-60% of the total system memory by using the `SET memory_limit = '...'` statement.
-* If your query reads a large amount of data from a file or writes a large amount of data, try setting the `preserve_insertion_order` option to `false`: `SET preserve_insertion_order = false`.
+* Reduce the number of threads using the `SET threads = ...`{:.language-sql .highlight} command.
+* Setting the memory limit lower than the [default 80%]({% link docs/preview/operations_manual/limits.md %}) can help prevent out of memory errors. While this configuration sounds counter-intuitive, it helps because some of DuckDB's operations circumvent the database's buffer manager and thus they can reserve more memory than allowed by the memory limit. If this happens (e.g., DuckDB is killed by the operating system or an OOM reaper process), set the memory limit to just 50-60% of the total system memory by using the `SET memory_limit = '...'`{:.language-sql .highlight} statement.
+* If your query reads a large amount of data from a file or writes a large amount of data, try setting the `preserve_insertion_order` option to `false`: `SET preserve_insertion_order = false`{:.language-sql .highlight}.
 
 In short, try the settings:
 
