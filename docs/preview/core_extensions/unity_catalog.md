@@ -6,7 +6,7 @@ title: Unity Catalog Extension
 
 The `unity_catalog` extension adds support for the [`Unity Catalog`](https://www.unitycatalog.io/) atop the [`Delta Lake`](https://delta.io/) format and [DuckDB Delta extension]({% link docs/preview/core_extensions/delta.md %}).
 
-The [`delta` extension]({% link docs/preview/core_extensions/delta.md %}) adds support for the [Delta Lake open-source storage format](https://delta.io/). It is built using the [Delta Kernel](https://github.com/delta-incubator/delta-kernel-rs). The extension reads and writes Delta tables, both local and remote.
+The [`delta` extension]({% link docs/preview/core_extensions/delta.md %}) adds support for the [Delta Lake open-source storage format](https://delta.io/). It is built using the [Delta Kernel](https://github.com/delta-io/delta-kernel-rs). The extension reads and writes Delta tables, both local and remote.
 
 For implementation details, see the [“Native Delta Lake Support in DuckDB” blog post]({% post_url 2024-06-10-delta %}).
 
