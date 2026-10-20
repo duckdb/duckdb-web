@@ -86,7 +86,7 @@ SELECT *
 FROM 'abfss://⟨my_storage_account⟩.dfs.core.windows.net/⟨my_filesystem⟩/⟨path⟩/*.csv';
 ```
 
-The fully qualified path can also use the `⟨my_filesystem⟩@⟨my_storage_account⟩` form:
+The fully qualified path can also use the `⟨my_filesystem⟩@⟨my_storage_account⟩`{:.language-sql .highlight} form:
 
 ```sql
 SELECT count(*)
@@ -187,7 +187,7 @@ The default provider, `CONFIG` (i.e., user-configured), allows access to the sto
 ```sql
 CREATE SECRET secret1 (
     TYPE azure,
-    CONNECTION_STRING '⟨value⟩'
+    CONNECTION_STRING '⟨connection_string⟩'
 );
 ```
 
@@ -206,7 +206,7 @@ The default `PROVIDER` is `CONFIG`.
 #### `credential_chain` Provider
 
 The `credential_chain` provider allows connecting using credentials automatically fetched by the Azure SDK via the Azure credential chain.
-By default, the `DefaultAzureCredential` chain used, which tries credentials according to the order specified by the [Azure documentation](https://learn.microsoft.com/en-us/javascript/api/@azure/identity/defaultazurecredential?view=azure-node-latest#@azure-identity-defaultazurecredential-constructor).
+By default, the `DefaultAzureCredential` chain is used, which tries credentials according to the order specified by the [Azure documentation](https://learn.microsoft.com/en-us/javascript/api/@azure/identity/defaultazurecredential?view=azure-node-latest#@azure-identity-defaultazurecredential-constructor).
 For example:
 
 ```sql
@@ -235,30 +235,24 @@ The possible values are the following:
 [`env`](https://github.com/Azure/azure-sdk-for-cpp/blob/azure-identity_1.6.0/sdk/identity/azure-identity/README.md#environment-variables);
 [`default`](https://github.com/Azure/azure-sdk-for-cpp/blob/azure-identity_1.6.0/sdk/identity/azure-identity/README.md#defaultazurecredential);
 
-If no explicit `CHAIN` is provided, the default one will be [`default`](https://github.com/Azure/azure-sdk-for-cpp/blob/azure-identity_1.6.0/sdk/identity/azure-identity/README.md#defaultazurecredential)
+If no explicit `CHAIN` is provided, the default one will be [`default`](https://github.com/Azure/azure-sdk-for-cpp/blob/azure-identity_1.6.0/sdk/identity/azure-identity/README.md#defaultazurecredential).
 
 #### Managed Identity
 
-Managed Identity (MI) can be used gracefully and automatically via the `credential_chain`. In typical 
-cases where the executor has a single MI available, no configuration is needed. 
+Managed Identity (MI) can be used gracefully and automatically via the `credential_chain`. In typical cases where the executor has a single MI available, no configuration is needed.
 
-If your execution environment has multiple Identities, use the `MANAGED_IDENTITY` provider and specify
-which identity to use. This provider allows identity specification via one of 
-`CLIENT_ID`, `OBJECT_ID` or `RESOURCE_ID`, e.g.:
+If your execution environment has multiple Identities, use the `MANAGED_IDENTITY` provider and specify which identity to use. This provider allows identity specification via one of `CLIENT_ID`, `OBJECT_ID` or `RESOURCE_ID`, e.g.:
 
 ```sql
 CREATE SECRET secret1 (
-    TYPE AZURE,
-    PROVIDER MANAGED_IDENTITY,
-    ACCOUNT_NAME '⟨storage account name⟩',
-    CLIENT_ID '⟨used-assigned managed identity client id⟩'
+    TYPE azure,
+    PROVIDER managed_identity,
+    ACCOUNT_NAME '⟨storage_account_name⟩',
+    CLIENT_ID '⟨client_id⟩'
 );
 ```
 
-The provider may be used without specifying an ID; if only a single ID is available this provider 
-will function identically to the `credential_chain` provider, and use the single available ID. If 
-multiple IDs are available, behavior is undefined (or more specifically, defined by the Azure SDK)
-– therefore we recommend explicit Identity setting in this situation.
+The provider may be used without specifying an ID; if only a single ID is available this provider will function identically to the `credential_chain` provider, and use the single available ID. If multiple IDs are available, behavior is undefined (or more specifically, defined by the Azure SDK) – therefore we recommend explicit Identity setting in this situation.
 
 
 #### `SERVICE_PRINCIPAL` Provider
@@ -313,10 +307,10 @@ To configure proxy information when using secrets, you can add `HTTP_PROXY`, `PR
 ```sql
 CREATE SECRET secret5 (
     TYPE azure,
-    CONNECTION_STRING '⟨value⟩',
+    CONNECTION_STRING '⟨connection_string⟩',
     HTTP_PROXY 'http://localhost:3128',
-    PROXY_USER_NAME 'john',
-    PROXY_PASSWORD 'doe'
+    PROXY_USER_NAME '⟨proxy_user_name⟩',
+    PROXY_PASSWORD '⟨proxy_password⟩'
 );
 ```
 
@@ -327,7 +321,7 @@ CREATE SECRET secret5 (
 ### Authentication with Variables (Deprecated)
 
 ```sql
-SET variable_name = variable_value;
+SET ⟨variable_name⟩ = ⟨value⟩;
 ```
 
 Where `variable_name` can be one of the following:
@@ -378,9 +372,9 @@ AZURE_LOG_LEVEL=verbose duckdb
 CREATE SECRET myaccount (
     TYPE azure,
     PROVIDER credential_chain,
-    SCOPE 'az://myaccount.blob.core.windows.net/'
+    SCOPE 'az://⟨my_storage_account⟩.blob.core.windows.net/'
 );
-SELECT count(*) FROM 'az://myaccount.blob.core.windows.net/path/to/blob.parquet';
+SELECT count(*) FROM 'az://⟨my_storage_account⟩.blob.core.windows.net/⟨my_container⟩/⟨path⟩/⟨my_file⟩.parquet';
 ```
 
 ### Difference between ADLS and Blob Storage
