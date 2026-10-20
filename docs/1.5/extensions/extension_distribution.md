@@ -1,7 +1,5 @@
 ---
 layout: docu
-redirect_from:
-- /docs/stable/extensions/extension_distribution
 title: Extension Distribution
 ---
 

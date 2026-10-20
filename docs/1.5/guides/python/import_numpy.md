@@ -1,8 +1,5 @@
 ---
 layout: docu
-redirect_from:
-- /docs/guides/python/import_numpy
-- /docs/stable/guides/python/import_numpy
 title: Import from Numpy
 ---
 

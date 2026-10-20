@@ -22,17 +22,21 @@ from generate_python_relational_docs_methods import (
     OUTPUT_MEMBER_LIST,
 )
 
-DUCKDB_DOC_VERSION = os.getenv("DUCKDB_DOC_VERSION", "lts")
+DUCKDB_DOC_VERSION = os.getenv("DUCKDB_DOC_VERSION", "2.0")
 
 redirect_from_text = """\
 redirect_from:
 - /docs/api/python/relational_api
 - /docs/clients/python/relational_api
+- /docs/stable/clients/python/relational_api
+- /docs/current/clients/python/relational_api
+- /docs/lts/clients/python/relational_api
+- /docs/preview/clients/python/relational_api
 """
 
 FORMATTER_TEXT = f"""---
 layout: docu
-{redirect_from_text if DUCKDB_DOC_VERSION == 'lts' else ''}
+{redirect_from_text if DUCKDB_DOC_VERSION == '2.0' else ''}
 title: Relational API
 ---
 

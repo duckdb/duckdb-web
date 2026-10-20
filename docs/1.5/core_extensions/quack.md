@@ -2,8 +2,6 @@
 github_repository: https://github.com/duckdb/duckdb-quack
 layout: docu
 title: Quack Extension
-redirect_from:
-- community_extensions/extensions/quack
 ---
 
 The `quack` extension adds support for the [Quack remote protocol]({% link docs/1.5/quack/overview.md %}).

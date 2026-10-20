@@ -1,9 +1,5 @@
 ---
 layout: docu
-redirect_from:
-- /docs/guides/database_integration/sqlite
-- /docs/guides/import/query_sqlite
-- /docs/stable/guides/database_integration/sqlite
 title: SQLite Import
 ---
 

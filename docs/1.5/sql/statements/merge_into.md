@@ -1,8 +1,6 @@
 ---
 layout: docu
 railroad: statements/merge_into.js
-redirect_from:
-- /docs/stable/sql/statements/merge_into
 title: MERGE INTO Statement
 tested: true
 ---

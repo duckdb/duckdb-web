@@ -1,8 +1,5 @@
 ---
 layout: docu
-redirect_from:
-- /docs/data/json/sql_to_and_from_json
-- /docs/stable/data/json/sql_to_and_from_json
 title: SQL to/from JSON
 tested: true
 ---

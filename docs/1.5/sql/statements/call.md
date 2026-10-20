@@ -1,9 +1,6 @@
 ---
 layout: docu
 railroad: statements/call.js
-redirect_from:
-- /docs/sql/statements/call
-- /docs/stable/sql/statements/call
 title: CALL Statement
 tested: true
 ---

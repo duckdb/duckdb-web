@@ -1,8 +1,5 @@
 ---
 layout: docu
-redirect_from:
-- /docs/clients/rust/profiling
-- /docs/stable/clients/rust/profiling
 title: Profile and Monitor
 ---
 

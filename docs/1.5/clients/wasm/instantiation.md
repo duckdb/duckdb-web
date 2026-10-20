@@ -1,9 +1,5 @@
 ---
 layout: docu
-redirect_from:
-- /docs/api/wasm/instantiation
-- /docs/clients/wasm/instantiation
-- /docs/stable/clients/wasm/instantiation
 title: Instantiate
 ---
 

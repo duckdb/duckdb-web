@@ -1,9 +1,5 @@
 ---
 layout: docu
-redirect_from:
-- /docs/sql/functions/nested
-- /docs/stable/sql/functions/nested
-- /docs/test/functions/nested
 title: Nested Functions
 ---
 

@@ -1,9 +1,5 @@
 ---
 layout: docu
-redirect_from:
-- /docs/guides/file_formats/excel_export
-- /docs/guides/import/excel_export
-- /docs/stable/guides/file_formats/excel_export
 title: Excel Export
 ---
 

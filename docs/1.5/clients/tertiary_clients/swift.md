@@ -1,8 +1,6 @@
 ---
 github_repository: https://github.com/duckdb/duckdb-swift
 layout: docu
-redirect_from:
-- /docs/stable/clients/tertiary_clients/swift
 title: Swift Client
 ---
 

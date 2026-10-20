@@ -1,9 +1,5 @@
 ---
 layout: docu
-redirect_from:
-- /dev/sqllogictest/test_configuration
-- /docs/dev/sqllogictest/test_configuration
-- /docs/stable/dev/sqllogictest/test_configuration
 title: Unit Tester Configuration
 ---
 

@@ -1,7 +1,5 @@
 ---
 layout: docu
-redirect_from:
-- /docs/stable/guides/troubleshooting/command_line
 title: Command Line
 ---
 

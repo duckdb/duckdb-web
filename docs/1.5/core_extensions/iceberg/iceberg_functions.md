@@ -1,7 +1,5 @@
 ---
 layout: docu
-redirect_from:
-- /docs/current/core_extensions/iceberg/reference
 title: Iceberg Functions
 ---
 

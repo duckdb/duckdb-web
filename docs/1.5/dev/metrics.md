@@ -1,9 +1,5 @@
 ---
 layout: docu
-redirect_from:
-- /dev/metrics
-- /docs/dev/metrics
-- /docs/stable/dev/metrics
 title: Metrics
 ---
 

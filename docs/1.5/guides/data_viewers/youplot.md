@@ -1,8 +1,5 @@
 ---
 layout: docu
-redirect_from:
-- /docs/guides/data_viewers/youplot
-- /docs/stable/guides/data_viewers/youplot
 title: CLI Charting with YouPlot
 ---
 

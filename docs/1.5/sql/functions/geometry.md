@@ -1,7 +1,5 @@
 ---
 layout: docu
-redirect_from:
-- /docs/stable/sql/functions/geometry
 title: Geometry Functions
 ---
 

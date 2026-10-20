@@ -1,10 +1,5 @@
 ---
 layout: docu
-redirect_from:
-- /docs/stable/dev/building/overview
-- /docs/dev/building/build_instructions
-- /build
-- /building
 title: Building DuckDB from Source
 ---
 

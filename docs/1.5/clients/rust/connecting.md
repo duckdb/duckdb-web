@@ -1,8 +1,5 @@
 ---
 layout: docu
-redirect_from:
-- /docs/clients/rust/connecting
-- /docs/stable/clients/rust/connecting
 title: Connect
 ---
 

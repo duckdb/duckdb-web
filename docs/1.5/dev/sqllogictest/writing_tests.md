@@ -1,9 +1,5 @@
 ---
 layout: docu
-redirect_from:
-- /dev/writing_tests
-- /docs/dev/sqllogictest/writing_tests
-- /docs/stable/dev/sqllogictest/writing_tests
 title: Writing Tests
 ---
 

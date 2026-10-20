@@ -1,8 +1,5 @@
 ---
 layout: docu
-redirect_from:
-- /docs/clients/go/functions
-- /docs/stable/clients/go/functions
 title: Write User Defined Functions
 ---
 

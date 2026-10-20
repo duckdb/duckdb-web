@@ -1,8 +1,5 @@
 ---
 layout: docu
-redirect_from:
-- /docs/sql/functions/dateformat
-- /docs/stable/sql/functions/dateformat
 title: Date Format Functions
 ---
 

@@ -1,8 +1,5 @@
 ---
 layout: docu
-redirect_from:
-- /docs/sql/functions/datepart
-- /docs/stable/sql/functions/datepart
 title: Date Part Functions
 ---
 

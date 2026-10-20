@@ -1,8 +1,5 @@
 ---
 layout: docu
-redirect_from:
-- /docs/sql/expressions/overview
-- /docs/stable/sql/expressions/overview
 title: Expressions
 ---
 

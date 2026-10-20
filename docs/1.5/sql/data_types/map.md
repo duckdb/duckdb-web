@@ -1,8 +1,5 @@
 ---
 layout: docu
-redirect_from:
-- /docs/sql/data_types/map
-- /docs/stable/sql/data_types/map
 title: Map Type
 tested: true
 ---

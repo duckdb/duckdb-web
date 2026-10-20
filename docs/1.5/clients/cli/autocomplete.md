@@ -1,9 +1,5 @@
 ---
 layout: docu
-redirect_from:
-- /docs/api/cli/autocomplete
-- /docs/clients/cli/autocomplete
-- /docs/stable/clients/cli/autocomplete
 title: Autocomplete
 ---
 

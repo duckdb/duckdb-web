@@ -1,8 +1,5 @@
 ---
 layout: docu
-redirect_from:
-- /docs/internals/pivot
-- /docs/stable/internals/pivot
 title: Pivot Internals
 ---
 

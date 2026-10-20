@@ -1,7 +1,5 @@
 ---
 layout: docu
-redirect_from:
-- /docs/stable/core_extensions/postgres/functions
 title: PostgreSQL Extension Functions
 ---
 

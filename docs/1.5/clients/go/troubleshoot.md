@@ -1,8 +1,5 @@
 ---
 layout: docu
-redirect_from:
-- /docs/clients/go/known_issues
-- /docs/stable/clients/go/known_issues
 title: Troubleshoot
 ---
 

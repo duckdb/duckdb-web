@@ -1,10 +1,6 @@
 ---
 github_repository: https://github.com/duckdb/duckdb-inet
 layout: docu
-redirect_from:
-- /docs/extensions/inet
-- /docs/stable/extensions/inet
-- /docs/stable/core_extensions/inet
 title: inet Extension
 tested: true
 ---

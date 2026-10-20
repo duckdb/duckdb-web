@@ -1,8 +1,5 @@
 ---
 layout: docu
-redirect_from:
-- /docs/guides/python/install
-- /docs/stable/guides/python/install
 title: Installing the Python Client
 ---
 

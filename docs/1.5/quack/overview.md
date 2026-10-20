@@ -1,8 +1,6 @@
 ---
 github_repository: https://github.com/duckdb/duckdb-quack
 layout: docu
-redirect_from:
-- /docs/quack
 title: Quack Remote Protocol
 ---
 

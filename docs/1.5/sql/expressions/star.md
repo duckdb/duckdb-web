@@ -2,9 +2,6 @@
 layout: docu
 railroad: expressions/star.js
 tested: true
-redirect_from:
-- /docs/sql/expressions/star
-- /docs/stable/sql/expressions/star
 title: Star Expression
 ---
 

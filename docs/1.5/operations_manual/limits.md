@@ -1,8 +1,5 @@
 ---
 layout: docu
-redirect_from:
-- /docs/operations_manual/limits
-- /docs/stable/operations_manual/limits
 title: Limits
 ---
 

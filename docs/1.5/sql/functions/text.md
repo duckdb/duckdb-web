@@ -1,11 +1,5 @@
 ---
 layout: docu
-redirect_from:
-- /docs/stable/sql/functions/text
-- /docs/stable/sql/functions/char
-- /docs/stable/sql/functions/char/
-- /docs/sql/functions/char
-- /docs/sql/functions/char/
 title: Text Functions
 tested: true
 ---

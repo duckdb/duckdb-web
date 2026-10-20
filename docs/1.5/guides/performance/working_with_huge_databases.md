@@ -1,7 +1,5 @@
 ---
 layout: docu
-redirect_from:
-- /docs/stable/guides/performance/working_with_huge_databases
 title: Working with Huge Databases
 ---
 

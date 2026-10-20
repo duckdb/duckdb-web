@@ -1,9 +1,6 @@
 ---
 layout: docu
 railroad: statements/insert.js
-redirect_from:
-- /docs/sql/statements/insert
-- /docs/stable/sql/statements/insert
 title: INSERT Statement
 tested: true
 ---

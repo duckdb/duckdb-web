@@ -1,8 +1,5 @@
 ---
 layout: docu
-redirect_from:
-- /docs/dev/building/r
-- /docs/stable/dev/building/r
 title: R
 ---
 

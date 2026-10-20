@@ -1,8 +1,5 @@
 ---
 layout: docu
-redirect_from:
-- /docs/sql/data_types/union
-- /docs/stable/sql/data_types/union
 title: Union Type
 tested: true
 ---

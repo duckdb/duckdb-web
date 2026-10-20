@@ -1,12 +1,5 @@
 ---
 layout: docu
-redirect_from:
-- /cli
-- /docs/api/cli
-- /docs/api/cli/overview
-- /docs/clients/cli
-- /docs/clients/cli/overview
-- /docs/stable/clients/cli/overview
 title: Command Line Client
 ---
 

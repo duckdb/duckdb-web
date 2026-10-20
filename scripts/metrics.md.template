@@ -8,8 +8,10 @@ layout: docu
 redirect_from:
 - /dev/metrics
 - /docs/dev/metrics
-- /docs/preview/dev/metrics
 - /docs/stable/dev/metrics
+- /docs/current/dev/metrics
+- /docs/lts/dev/metrics
+- /docs/preview/dev/metrics
 title: Metrics
 ---
 
@@ -42,9 +44,9 @@ The following is a list of the available metric groups:
 
 ### Optimizer Metrics
 
-Optimizer metrics sit at the `QUERY_ROOT` level, and measure the time taken by each [optimizer]({% link docs/current/internals/overview.md %}#optimizer).
+Optimizer metrics sit at the `QUERY_ROOT` level, and measure the time taken by each [optimizer]({% link docs/2.0/internals/overview.md %}#optimizer).
 These metrics are only available when the specific optimizer is enabled.
-The available optimizations can be queried using the [`duckdb_optimizers()`{:.language-sql .highlight} table function]({% link docs/current/sql/meta/duckdb_table_functions.md %}#duckdb_optimizers).
+The available optimizations can be queried using the [`duckdb_optimizers()`{:.language-sql .highlight} table function]({% link docs/2.0/sql/meta/duckdb_table_functions.md %}#duckdb_optimizers).
 
 Each optimizer has a corresponding metric that follows the template: `OPTIMIZER_⟨OPTIMIZER_NAME⟩`{:.language-sql .highlight}.
 For example, the `OPTIMIZER_JOIN_ORDER` metric corresponds to the `JOIN_ORDER` optimizer.

@@ -1,8 +1,5 @@
 ---
 layout: docu
-redirect_from:
-- /docs/guides/meta/summarize
-- /docs/stable/guides/meta/summarize
 title: Summarize
 ---
 

@@ -1,7 +1,5 @@
 ---
 layout: docu
-redirect_from:
-- /docs/stable/sql/data_types/geometry
 title: Geometry Data Type
 ---
 

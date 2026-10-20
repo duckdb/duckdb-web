@@ -1,9 +1,6 @@
 ---
 layout: docu
 railroad: expressions/in.js
-redirect_from:
-- /docs/sql/expressions/in
-- /docs/stable/sql/expressions/in
 title: IN Operator
 tested: true
 ---

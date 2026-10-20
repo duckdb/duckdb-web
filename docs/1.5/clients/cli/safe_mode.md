@@ -1,8 +1,5 @@
 ---
 layout: docu
-redirect_from:
-- /docs/clients/cli/safe_mode
-- /docs/stable/clients/cli/safe_mode
 title: Safe Mode
 ---
 

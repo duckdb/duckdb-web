@@ -45,7 +45,7 @@ Please note that there are **no guarantees** that a particular feature will be r
 
 We are [gradually phasing out]({% link docs/1.5/sql/functions/lambda.md %}) the lambda syntax (`x -> x + 1`) in favor of the Pythonic `lambda x : x + 1`. [DuckDB v1.5]({% post_url 2026-03-09-announcing-duckdb-150 %}) throws a warning when using the deprecated syntax and [DuckDB v2.0]({% post_url 2026-10-21-announcing-duckdb-200 %}#lambda-syntax) throws an error (unless configured explicitly to allow the old syntax). DuckDB v2.1 will remove the old syntax completely.
 
-We are gradually phasing out macOS x86_64 (`osx_amd64`) from the list of [supported platforms]({% link docs/preview/operations_manual/installing_duckdb/requirements.md %}#supported-platforms). In DuckDB v2.0, DuckDB and core extensions are still built and supported for this platform, but community extensions are no longer built for it. DuckDB v2.1 will stop supporting `osx_amd64`.
+We are gradually phasing out macOS x86_64 (`osx_amd64`) from the list of [supported platforms]({% link docs/2.0/operations_manual/installing_duckdb/requirements.md %}#supported-platforms). In DuckDB v2.0, DuckDB and core extensions are still built and supported for this platform, but community extensions are no longer built for it. DuckDB v2.1 will stop supporting `osx_amd64`.
 
 ## Future Work
 

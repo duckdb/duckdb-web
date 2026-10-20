@@ -1,8 +1,5 @@
 ---
 layout: docu
-redirect_from:
-- /docs/sql/statements/analyze
-- /docs/stable/sql/statements/analyze
 title: ANALYZE Statement
 ---
 

@@ -1,8 +1,5 @@
 ---
 layout: docu
-redirect_from:
-- /docs/guides/meta/describe
-- /docs/stable/guides/meta/describe
 title: Describe
 ---
 

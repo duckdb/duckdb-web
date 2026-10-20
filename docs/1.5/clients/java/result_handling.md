@@ -1,8 +1,5 @@
 ---
 layout: docu
-redirect_from:
-- /docs/clients/java/result_handling
-- /docs/stable/clients/java/result_handling
 title: Handle Results
 ---
 

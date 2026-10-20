@@ -26,16 +26,16 @@ To ensure a smooth transition and allow sufficient time for testing,
 we extended the support period of DuckDB v1.5 until March 2027, effectively also turning it into an LTS release.
 For details, see the [release calendar]({% link release_calendar.md %}#lts-releases).
 
-To find your way around the documentation for all of the new features, we also published a [“What's New in the Docs for 2.0”]({% link docs/preview/whats_new_in_the_docs.md %}) page that links each feature below to its documentation.
+To find your way around the documentation for all of the new features, we also published a [“What's New in the Docs for 2.0”]({% link docs/2.0/whats_new_in_the_docs.md %}) page that links each feature below to its documentation.
 
 ## DuckDB as a Server
 
 DuckDB has been an in-process database since day one.
-In [DuckDB 1.5.3]({% post_url 2026-05-20-announcing-duckdb-153 %}), released in May, we introduced the Quack protocol that lets you run DuckDB in a traditional client-server setup, along with the [`quack` extension]({% link docs/preview/core_extensions/quack.md %}), which implements DuckDB's native protocol, so any DuckDB process can [serve its databases]({% link docs/preview/quack/overview.md %}#server-side-usage).
+In [DuckDB 1.5.3]({% post_url 2026-05-20-announcing-duckdb-153 %}), released in May, we introduced the Quack protocol that lets you run DuckDB in a traditional client-server setup, along with the [`quack` extension]({% link docs/2.0/core_extensions/quack.md %}), which implements DuckDB's native protocol, so any DuckDB process can [serve its databases]({% link docs/2.0/quack/overview.md %}#server-side-usage).
 
 ### Quack and `CONNECT`
 
-DuckDB 2.0.0 ships a polished version of the Quack protocol with substantial performance and stability improvements. It also introduces the new [`CONNECT` statement]({% link docs/preview/sql/statements/connect.md %}) that allows attaching and switching to a remote database in a single command for better ergonomics:
+DuckDB 2.0.0 ships a polished version of the Quack protocol with substantial performance and stability improvements. It also introduces the new [`CONNECT` statement]({% link docs/2.0/sql/statements/connect.md %}) that allows attaching and switching to a remote database in a single command for better ergonomics:
 
 <!-- markdownlint-disable MD001 -->
 
@@ -91,7 +91,7 @@ The `CONNECT` statement is not limited to Quack: it points your session at any r
 
 ### Quack in the CLI
 
-The CLI also has shortcuts for setting up a Quack client-server pair: the new [`-serve` and `-connect` arguments]({% link docs/preview/clients/cli/arguments.md %}#serving-and-connecting-to-remote-databases) start a Quack server or connect to one directly from the command line:
+The CLI also has shortcuts for setting up a Quack client-server pair: the new [`-serve` and `-connect` arguments]({% link docs/2.0/clients/cli/arguments.md %}#serving-and-connecting-to-remote-databases) start a Quack server or connect to one directly from the command line:
 
 <!-- markdownlint-disable MD001 -->
 
@@ -145,7 +145,7 @@ FROM t;
 
 ### Asynchronous I/O
 
-DuckDB v2.0 introduces [asynchronous I/O]({% link docs/preview/data/io.md %}) throughout the engine. The I/O layer now scales independently from the query processing layer, issuing reads in the background and keeping multiple requests in flight. This means far more parallelism for remote reads and dramatically faster queries on object storage such as [`s3://`]({% link docs/preview/core_extensions/httpfs/s3api.md %}).
+DuckDB v2.0 introduces [asynchronous I/O]({% link docs/2.0/data/io.md %}) throughout the engine. The I/O layer now scales independently from the query processing layer, issuing reads in the background and keeping multiple requests in flight. This means far more parallelism for remote reads and dramatically faster queries on object storage such as [`s3://`]({% link docs/2.0/core_extensions/httpfs/s3api.md %}).
 
 We described the design in detail in a [dedicated blog post]({% post_url 2026-07-31-asynchronous-io %}).
 In that post, we showed the network throughput over the course of a query with and without asynchronous I/O:
@@ -156,10 +156,10 @@ In that post, we showed the network throughput over the course of a query with a
 
 ### The `VARIANT` Type Becomes a First-Class Citizen
 
-The [`VARIANT` type]({% link docs/preview/sql/data_types/variant.md %}) stores semi-structured, schema-less data such as JSON while keeping the performance of columnar execution.
+The [`VARIANT` type]({% link docs/2.0/sql/data_types/variant.md %}) stores semi-structured, schema-less data such as JSON while keeping the performance of columnar execution.
 So you can think of it as JSON on steroids: a `VARIANT` column can store differently shaped data in every row, but unlike JSON it is not a text format.
 
-[DuckDB 1.5 already introduced `VARIANT`]({% post_url 2026-03-09-announcing-duckdb-150 %}#variant-type), but DuckDB fully integrates it. DuckDB 2.0 detects the common structure in your data and “shreds” it, so it compresses well and executes fast. The pipeline works end to end, from shredded execution straight out of storage to shredded `VARIANT` reading and writing for Parquet, backed by a family of [`variant_*` functions]({% link docs/preview/sql/functions/variant.md %}). For example:
+[DuckDB 1.5 already introduced `VARIANT`]({% post_url 2026-03-09-announcing-duckdb-150 %}#variant-type), but DuckDB fully integrates it. DuckDB 2.0 detects the common structure in your data and “shreds” it, so it compresses well and executes fast. The pipeline works end to end, from shredded execution straight out of storage to shredded `VARIANT` reading and writing for Parquet, backed by a family of [`variant_*` functions]({% link docs/2.0/sql/functions/variant.md %}). For example:
 
 ```sql
 CREATE TABLE events (payload VARIANT);
@@ -186,19 +186,19 @@ FROM events;
 
 Coding agents such as Claude Code, Codex and Cursor increasingly drive the DuckDB CLI on their users' behalf. The v2.0 CLI detects when it is being run by an agent and switches to [agent mode]({% post_url 2026-10-09-agent-mode %}): it prints compact Markdown tables instead of padded boxes, says clearly when a result was truncated, stops runaway queries early and reports errors as JSON.
 
-Long-running SQL queries report their expected cost prior to running, so the agent can decide whether to wait. In our experiments on TPC-H, agent mode cut the number of output tokens the model had to read by 59%. You can turn it _on_ for manual testing using the [`-agent` flag]({% link docs/preview/clients/cli/agent_mode.md %}#activating-agent-mode) or instruct your agent to turn it _off_ using the `-no-agent` flag.
+Long-running SQL queries report their expected cost prior to running, so the agent can decide whether to wait. In our experiments on TPC-H, agent mode cut the number of output tokens the model had to read by 59%. You can turn it _on_ for manual testing using the [`-agent` flag]({% link docs/2.0/clients/cli/agent_mode.md %}#activating-agent-mode) or instruct your agent to turn it _off_ using the `-no-agent` flag.
 
 ## Extensibility
 
 ### A Brand New SQL Parser
 
-DuckDB has always used a parser derived from PostgreSQL's. In v2.0 we ship our own modern, extensible [PEG-based parser]({% post_url 2026-08-20-duckdb-20-peg-parser %}). Extensions can now hook into the grammar itself (an idea we first explored in our [research on runtime-extensible parsers]({% post_url 2024-11-22-runtime-extensible-parsers %})), so expect extensions that expose entirely new SQL syntax. Error messages now come with precise source locations. For details, see the [PEG parser documentation]({% link docs/preview/sql/peg_parser.md %}). The new parser is designed to be compatible with the old one, so you should not notice the swap. If you do, please file an issue. In the meantime, you can switch back to the old parser using the [`legacy_parser` extension]({% link docs/preview/core_extensions/legacy_parser.md %}) by running `SET enable_legacy_parser = true;`{:.language-sql .highlight}.
+DuckDB has always used a parser derived from PostgreSQL's. In v2.0 we ship our own modern, extensible [PEG-based parser]({% post_url 2026-08-20-duckdb-20-peg-parser %}). Extensions can now hook into the grammar itself (an idea we first explored in our [research on runtime-extensible parsers]({% post_url 2024-11-22-runtime-extensible-parsers %})), so expect extensions that expose entirely new SQL syntax. Error messages now come with precise source locations. For details, see the [PEG parser documentation]({% link docs/2.0/sql/peg_parser.md %}). The new parser is designed to be compatible with the old one, so you should not notice the swap. If you do, please file an issue. In the meantime, you can switch back to the old parser using the [`legacy_parser` extension]({% link docs/2.0/core_extensions/legacy_parser.md %}) by running `SET enable_legacy_parser = true;`{:.language-sql .highlight}.
 
 The old parser had served DuckDB since its first commit in 2018. Its grammar was generated with YACC/Bison, which produces an LALR(1) parser, so as DuckSQL grew, even small additions could collide with existing rules and raise `shift/reduce` or `reduce/reduce` conflicts. A PEG grammar avoids this by trying alternatives in the order they are written, so adding syntax no longer risks breaking unrelated rules. Python itself moved to a PEG-based parser in [version 3.9](https://peps.python.org/pep-0617/) for the same flexibility.
 
 ### Write Extensions Once and Host Them Yourself
 
-DuckDB v2.0 ships a revamped [C API v2]({% link docs/preview/clients/c/overview.md %}#stable-c-api-and-c-api), which is considerably more powerful than its predecessor and exposes components such as file systems and table functions to extensions. Before marking it as stable, we would like to test it in the field, so please give it a try and [send us your feedback](https://github.com/duckdb/duckdb/discussions/27525)!
+DuckDB v2.0 ships a revamped [C API v2]({% link docs/2.0/clients/c/overview.md %}#stable-c-api-and-c-api), which is considerably more powerful than its predecessor and exposes components such as file systems and table functions to extensions. Before marking it as stable, we would like to test it in the field, so please give it a try and [send us your feedback](https://github.com/duckdb/duckdb/discussions/27525)!
 
 You can also register and host your own trusted extension repositories, so an organization can host and sign its own extensions and have them install and load just like the built-in ones:
 
@@ -214,15 +214,15 @@ LOAD my_repo/my_ext;
 
 A repository is a name, a URL prefix and one or more RSA public keys that are trusted to sign the extensions served from it. The prefix can point at anything DuckDB can read: a local path, `https`, `s3`, you name it. At `CREATE` time, DuckDB fetches the repository's public keys and pins them into the repository definition, printing each key's SHA-256 fingerprint so you can compare it against one published out of band.
 
-For more details, see the [Extension Repositories page]({% link docs/preview/extensions/extension_repositories.md %}).
+For more details, see the [Extension Repositories page]({% link docs/2.0/extensions/extension_repositories.md %}).
 
 ### Core Extension Updates
 
-DuckDB's [core extensions]({% link docs/preview/core_extensions/overview.md %}) are also shipping several new features, fixes and performance optimizations. These are too numerous to all list here, so we'll dedicate blog posts for them and only highlight a few of them here:
+DuckDB's [core extensions]({% link docs/2.0/core_extensions/overview.md %}) are also shipping several new features, fixes and performance optimizations. These are too numerous to all list here, so we'll dedicate blog posts for them and only highlight a few of them here:
 
-* We released [DuckLake 1.1](https://ducklake.select/2026/10/21/ducklake-11/), including a new specification and [reference implementation]({% link docs/preview/core_extensions/ducklake.md %}).
-* The [Iceberg extension]({% link docs/preview/core_extensions/iceberg/overview.md %}) strives to become a feature-complete implementation. To this end, it adds REST catalog `ATTACH` options to derive a table's location from its namespace, control the URL prefix and namespace separator, and load metadata from the catalog's metadata-location.
-* The [Delta extension]({% link docs/preview/core_extensions/delta.md %}) can create Delta tables with `CREATE TABLE`, including partitioning and Delta table properties, supports time travel, and improves `VARIANT` support.
+* We released [DuckLake 1.1](https://ducklake.select/2026/10/21/ducklake-11/), including a new specification and [reference implementation]({% link docs/2.0/core_extensions/ducklake.md %}).
+* The [Iceberg extension]({% link docs/2.0/core_extensions/iceberg/overview.md %}) strives to become a feature-complete implementation. To this end, it adds REST catalog `ATTACH` options to derive a table's location from its namespace, control the URL prefix and namespace separator, and load metadata from the catalog's metadata-location.
+* The [Delta extension]({% link docs/2.0/core_extensions/delta.md %}) can create Delta tables with `CREATE TABLE`, including partitioning and Delta table properties, supports time travel, and improves `VARIANT` support.
 
 In the coming weeks, we'll release more blog posts about these features.
 
@@ -230,7 +230,7 @@ In the coming weeks, we'll release more blog posts about these features.
 
 ### Triggers
 
-DuckDB v2.0 delivers triggers in full: [`CREATE TRIGGER` statement]({% link docs/preview/sql/statements/create_trigger.md %}) with `BEFORE` and `AFTER` triggers, `FOR EACH ROW` and `FOR EACH STATEMENT`, transition tables via `REFERENCING OLD/NEW TABLE`, multiple triggers per event, `RETURNING` on triggered tables and `DROP TRIGGER`. The classic use case is audit tables, where a trigger records what changed in response to a table modification.
+DuckDB v2.0 delivers triggers in full: [`CREATE TRIGGER` statement]({% link docs/2.0/sql/statements/create_trigger.md %}) with `BEFORE` and `AFTER` triggers, `FOR EACH ROW` and `FOR EACH STATEMENT`, transition tables via `REFERENCING OLD/NEW TABLE`, multiple triggers per event, `RETURNING` on triggered tables and `DROP TRIGGER`. The classic use case is audit tables, where a trigger records what changed in response to a table modification.
 
 ```sql
 CREATE TRIGGER trg_audit
@@ -345,33 +345,33 @@ Triggers bring us one step closer to materialized views, a long-standing item in
 
 ### SQL Dialect Additions
 
-As always, DuckDB's [friendly SQL dialect]({% link docs/preview/sql/dialect/friendly_sql.md %}) keeps growing. A few favorites from this release cycle:
+As always, DuckDB's [friendly SQL dialect]({% link docs/2.0/sql/dialect/friendly_sql.md %}) keeps growing. A few favorites from this release cycle:
 
-* The [`$⟨variable⟩`{:.language-sql .highlight} shorthand]({% link docs/preview/sql/statements/set_variable.md %}#the-name-shorthand) lets you write `$x` anywhere an expression is allowed, instead of `getvariable('⟨variable⟩')`{:.language-sql .highlight}.
-* [DML in CTEs (data manipulation language in common table expression)]({% link docs/preview/sql/query_syntax/with.md %}#data-modifying-ctes) let you use `INSERT`, `UPDATE`, `DELETE` and `COPY` as pipeline steps.
-* [`NEAREST` joins]({% link docs/preview/sql/query_syntax/from.md %}#nearest-joins) turn top-k similarity search into a join clause, handy for vector and embedding workloads.
-* [Nested schemas]({% link docs/preview/sql/statements/create_schema.md %}#nested-schemas) allow schemas within schemas, e.g., `CREATE SCHEMA finance.reports`.
-* [JSON mutation functions]({% link docs/preview/data/json/json_functions.md %}#json-mutation-functions) `json_set`, `json_insert`, `json_replace` and `json_remove` modify JSON documents in place (see also our [blog post on JSON patches]({% post_url 2026-08-18-reconciling-json %})).
+* The [`$⟨variable⟩`{:.language-sql .highlight} shorthand]({% link docs/2.0/sql/statements/set_variable.md %}#the-name-shorthand) lets you write `$x` anywhere an expression is allowed, instead of `getvariable('⟨variable⟩')`{:.language-sql .highlight}.
+* [DML in CTEs (data manipulation language in common table expression)]({% link docs/2.0/sql/query_syntax/with.md %}#data-modifying-ctes) let you use `INSERT`, `UPDATE`, `DELETE` and `COPY` as pipeline steps.
+* [`NEAREST` joins]({% link docs/2.0/sql/query_syntax/from.md %}#nearest-joins) turn top-k similarity search into a join clause, handy for vector and embedding workloads.
+* [Nested schemas]({% link docs/2.0/sql/statements/create_schema.md %}#nested-schemas) allow schemas within schemas, e.g., `CREATE SCHEMA finance.reports`.
+* [JSON mutation functions]({% link docs/2.0/data/json/json_functions.md %}#json-mutation-functions) `json_set`, `json_insert`, `json_replace` and `json_remove` modify JSON documents in place (see also our [blog post on JSON patches]({% post_url 2026-08-18-reconciling-json %})).
 
-There is more: DuckDB 2.0.0 supports the SQL-standard [`FETCH FIRST`]({% link docs/preview/sql/query_syntax/limit.md %}#fetch-first), allows [`UNNEST` in the `GROUP BY` clause]({% link docs/preview/sql/query_syntax/groupby.md %}#grouping-by-unnest), and ensures well-defined [`MERGE`]({% link docs/preview/sql/statements/merge_into.md %}) and [`UPDATE ... FROM`]({% link docs/preview/sql/statements/update.md %}) semantics for cases when multiple rows are matched.
+There is more: DuckDB 2.0.0 supports the SQL-standard [`FETCH FIRST`]({% link docs/2.0/sql/query_syntax/limit.md %}#fetch-first), allows [`UNNEST` in the `GROUP BY` clause]({% link docs/2.0/sql/query_syntax/groupby.md %}#grouping-by-unnest), and ensures well-defined [`MERGE`]({% link docs/2.0/sql/statements/merge_into.md %}) and [`UPDATE ... FROM`]({% link docs/2.0/sql/statements/update.md %}) semantics for cases when multiple rows are matched.
 
 ## Migrating to v2.0
 
 DuckDB v2.0 comes with a small set of breaking changes. For most users, upgrading is straightforward, but complex deployments running many DuckDB processes need more care. The storage format is the most likely source of problems. We recommend testing v2.0.0 on a shadow system before switching production over. And, if your workload is mission-critical, you may want to wait for the first patch releases, [coming in November]({% link release_calendar.md %}#upcoming-releases).
 
-For the full details, see the [migration guide]({% link docs/preview/operations_manual/migration.md %}).
+For the full details, see the [migration guide]({% link docs/2.0/operations_manual/migration.md %}).
 
 ## Internals and Deprecations
 
 ### Compiler Requirements
 
-Following DuckDB's long stint on C++11, DuckDB v2.0 now [requires a C++17 compiler]({% link docs/preview/dev/building/overview.md %}#prerequisites).
+Following DuckDB's long stint on C++11, DuckDB v2.0 now [requires a C++17 compiler]({% link docs/2.0/dev/building/overview.md %}#prerequisites).
 
 We also switched to Clang as the default compiler for our release builds. On Linux and macOS, both DuckDB and its core extensions are built with Clang. On Windows, the CLI is built with Clang, while most core extensions are still built with MSVC. We may move more Windows builds to Clang in the future, but this requires further changes.
 
 ### Timezones, Calendars and Collations Without ICU
 
-Timezone-aware timestamps, calendars and collations have always been powered by the ICU library. In v2.0, the ICU library is gone entirely: the [`icu` extension]({% link docs/preview/core_extensions/icu.md %}) now implements timezones, calendars and collations itself, with the timezone data built directly from the IANA database and compressed down to around 45 kB.
+Timezone-aware timestamps, calendars and collations have always been powered by the ICU library. In v2.0, the ICU library is gone entirely: the [`icu` extension]({% link docs/2.0/core_extensions/icu.md %}) now implements timezones, calendars and collations itself, with the timezone data built directly from the IANA database and compressed down to around 45 kB.
 
 Everything keeps working exactly as before, and the native implementation is also faster. If you find any issues, please [let us know](https://github.com/duckdb/duckdb/issues)!
 
@@ -393,8 +393,8 @@ The [amalgamation build](/docs/1.4/dev/building/overview), which bundles DuckDB'
 
 #### Gradual Phase-Out of macOS x86_64
 
-We are gradually phasing out `osx_amd64` from the list of fully supported [platforms]({% link docs/preview/operations_manual/installing_duckdb/requirements.md %}#supported-platforms).
-For the time being, DuckDB and [core extensions]({% link docs/preview/core_extensions/overview.md %}) are still built and supported, but [community extensions]({% link docs/preview/extensions/community_extensions.md %}) are no longer built for this platform.
+We are gradually phasing out `osx_amd64` from the list of fully supported [platforms]({% link docs/2.0/operations_manual/installing_duckdb/requirements.md %}#supported-platforms).
+For the time being, DuckDB and [core extensions]({% link docs/2.0/core_extensions/overview.md %}) are still built and supported, but [community extensions]({% link docs/2.0/extensions/community_extensions.md %}) are no longer built for this platform.
 
 DuckDB version 2.1 will stop supporting `osx_amd64`.
 

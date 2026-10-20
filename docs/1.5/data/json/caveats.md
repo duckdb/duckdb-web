@@ -1,8 +1,5 @@
 ---
 layout: docu
-redirect_from:
-- /docs/data/json/caveats
-- /docs/stable/data/json/caveats
 title: Caveats
 ---
 

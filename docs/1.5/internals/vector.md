@@ -1,9 +1,5 @@
 ---
 layout: docu
-redirect_from:
-- /docs/internals/vector
-- /docs/stable/internals/vector
-- /internals/vector
 title: Execution Format
 ---
 

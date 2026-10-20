@@ -1,9 +1,6 @@
 ---
 github_directory: https://github.com/vortex-data/duckdb-vortex
 layout: docu
-redirect_from:
-- /community_extensions/extensions/vortex
-- /docs/stable/core_extensions/vortex
 title: Vortex Extension
 ---
 

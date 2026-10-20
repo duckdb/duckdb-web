@@ -1,9 +1,6 @@
 ---
 layout: docu
 railroad: expressions/case.js
-redirect_from:
-- /docs/sql/expressions/case
-- /docs/stable/sql/expressions/case
 title: CASE Expression
 tested: true
 ---

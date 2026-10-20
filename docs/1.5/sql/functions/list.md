@@ -1,8 +1,5 @@
 ---
 layout: docu
-redirect_from:
-- /docs/sql/functions/list
-- /docs/stable/sql/functions/list
 title: List Functions
 tested: true
 ---

@@ -1,8 +1,5 @@
 ---
 layout: docu
-redirect_from:
-- /docs/guides/python/export_pandas
-- /docs/stable/guides/python/export_pandas
 title: Export to Pandas
 ---
 

@@ -1,7 +1,5 @@
 ---
 layout: docu
-redirect_from:
-- /oom
 title: Out-of-Memory Issues
 ---
 

@@ -1,19 +1,20 @@
-{% if version_viewed != "current" %}
+{% if version_viewed_status != "current" %}
 	{% assign basename = page.path | regex_replace: "docs/(lts|current|preview|\d*.\d*)/", "" %}
-	{% assign current_filename = "docs/current/" | append: basename %}
+	{% assign latest_docs_dir = "docs/" | append: latest_version.version | append: "/" %}
+	{% assign current_filename = latest_docs_dir | append: basename %}
 	{% capture current_exists %}{% file_exists {{ current_filename }} %}{% endcapture %}
 	{% if current_exists == "true" %}
 		{% assign current_url = current_filename | replace: ".md", "" %}
-		{% assign current_link_text = "Switch to the current version" %}
+		{% assign current_link_text = "Switch to the latest version" %}
 	{% else %}
-		{% assign current_url = "docs/current/index" %}
-		{% assign current_link_text = "Switch to the current documentation" %}
+		{% assign current_url = latest_docs_dir | append: "index" %}
+		{% assign current_link_text = "Switch to the latest documentation" %}
 	{% endif %}
-	{% if version_viewed == "lts" %}
+	{% if version_viewed_status == "lts" %}
 		{% assign banner_class = "lts" %}
 		{% assign banner_icon = "clock" %}
-		{% capture banner_text %}This page is for DuckDB {{ site.lts_short_duckdb_version }} (LTS).{% endcapture %}
-	{% elsif version_viewed == "preview" %}
+		{% capture banner_text %}This page is for DuckDB {{ version_viewed }} (LTS).{% endcapture %}
+	{% elsif version_viewed_status == "preview" %}
 		{% assign banner_class = "preview" %}
 		{% assign banner_icon = "beaker-02" %}
 		{% capture banner_text %}This page is for DuckDB {{ site.next_major_short_duckdb_version }} (preview).{% endcapture %}

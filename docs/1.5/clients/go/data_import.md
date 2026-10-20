@@ -1,8 +1,5 @@
 ---
 layout: docu
-redirect_from:
-- /docs/clients/go/data_import
-- /docs/stable/clients/go/data_import
 title: Import Data
 ---
 

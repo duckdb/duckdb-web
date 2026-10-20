@@ -1,8 +1,5 @@
 ---
 layout: docu
-redirect_from:
-- /docs/lakehouse_formats
-- /docs/stable/./lakehouse_formats
 title: Lakehouse Formats
 ---
 

@@ -1,8 +1,5 @@
 ---
 layout: docu
-redirect_from:
-- /docs/data/json/creating_json
-- /docs/stable/data/json/creating_json
 title: Creating JSON
 tested: true
 ---

@@ -1,7 +1,5 @@
 ---
 layout: docu
-redirect_from:
-- /docs/stable/guides/troubleshooting/oom_errors
 title: Out of Memory Errors
 ---
 

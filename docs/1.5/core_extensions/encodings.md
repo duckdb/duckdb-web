@@ -1,10 +1,6 @@
 ---
 github_directory: https://github.com/duckdb/duckdb-encodings
 layout: docu
-redirect_from:
-- /docs/extensions/encodings
-- /docs/stable/extensions/encodings
-- /docs/stable/core_extensions/encodings
 title: Encodings Extension
 ---
 

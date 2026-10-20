@@ -1,8 +1,5 @@
 ---
 layout: docu
-redirect_from:
-- /docs/dev/building/windows
-- /docs/stable/dev/building/windows
 title: Windows
 ---
 

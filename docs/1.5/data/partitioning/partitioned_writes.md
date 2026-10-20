@@ -1,8 +1,5 @@
 ---
 layout: docu
-redirect_from:
-- /docs/data/partitioning/partitioned_writes
-- /docs/stable/data/partitioning/partitioned_writes
 title: Partitioned Writes
 ---
 

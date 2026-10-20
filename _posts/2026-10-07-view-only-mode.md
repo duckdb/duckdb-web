@@ -9,7 +9,7 @@ excerpt: "A DuckDB database file does not have to hold any data. It can store no
 tag: using-duckdb
 ---
 
-A DuckDB database file does not have to contain any data. It can store nothing but [view]({% link docs/preview/sql/statements/create_view.md %}) definitions that point at files stored somewhere else, such as Parquet on object storage. The file stays a few hundred kilobytes no matter how large the data it describes, and anyone who attaches it sees a set of named relations that are ready to query.
+A DuckDB database file does not have to contain any data. It can store nothing but [view]({% link docs/2.0/sql/statements/create_view.md %}) definitions that point at files stored somewhere else, such as Parquet on object storage. The file stays a few hundred kilobytes no matter how large the data it describes, and anyone who attaches it sees a set of named relations that are ready to query.
 
 Nikolas Goebel described this idea in [DuckDB doesn't need data](https://www.nikolasgoebel.com/2024/05/28/duckdb-doesnt-need-data), which argues that modern databases have separated where data is stored from how it is read, to the point that most databases no longer need to hold any data of their own. From that perspective, DuckDB becomes a browser for the data cloud, where you access a dataset through a URL rather than a copy on your own disk.
 
@@ -25,7 +25,7 @@ A database file made entirely of such views contains no rows of its own. It is a
 
 The examples use DuckDB's public train services dataset, which records one row for every stop a Dutch railway train makes. The data comes from the open datasets published by the [Rijden de Treinen *(Are the trains running?)* application](https://www.rijdendetreinen.nl/en/open-data/), and you can read it straight from its URL.
 
-First, install the [`httpfs` extension]({% link docs/preview/core_extensions/httpfs/overview.md %}) so that DuckDB can read over the network. This only needs to be run once.
+First, install the [`httpfs` extension]({% link docs/2.0/core_extensions/httpfs/overview.md %}) so that DuckDB can read over the network. This only needs to be run once.
 
 ```sql
 INSTALL httpfs;
@@ -60,13 +60,13 @@ Because the file stores only the view definition, it stays small no matter how l
 
 ## Hosting the Catalog
 
-Upload `rail_catalog.duckdb` to any location that DuckDB can read over the network, for example an [`s3://`]({% link docs/preview/guides/network_cloud_storage/s3_import.md %}) bucket or an [`https://`]({% link docs/preview/guides/network_cloud_storage/http_import.md %}) endpoint. The same bucket that already holds the Parquet files is a convenient place to put it.
+Upload `rail_catalog.duckdb` to any location that DuckDB can read over the network, for example an [`s3://`]({% link docs/2.0/guides/network_cloud_storage/s3_import.md %}) bucket or an [`https://`]({% link docs/2.0/guides/network_cloud_storage/http_import.md %}) endpoint. The same bucket that already holds the Parquet files is a convenient place to put it.
 
 Sharing the catalog then means sharing one URL instead of a list of individual file paths. The recipient does not need to know how many files back each view or where they are stored, only the address of the catalog.
 
 ## Attaching the Catalog Read-Only
 
-Consumers attach the catalog [read-only]({% link docs/preview/guides/network_cloud_storage/duckdb_over_https_or_s3.md %}) and query the views as if they were local tables. Each query reads the current data from the referenced files, so the result reflects whatever is in object storage at that moment.
+Consumers attach the catalog [read-only]({% link docs/2.0/guides/network_cloud_storage/duckdb_over_https_or_s3.md %}) and query the views as if they were local tables. Each query reads the current data from the referenced files, so the result reflects whatever is in object storage at that moment.
 
 ```sql
 ATTACH 'https://example.com/rail_catalog.duckdb' AS rail (READ_ONLY);
@@ -84,7 +84,7 @@ LIMIT 3;
 | Amsterdam Centraal | 7591 |
 | Zwolle | 5013 |
 
-Consumers need the `httpfs` extension and, for `s3://` sources, [credentials]({% link docs/preview/guides/network_cloud_storage/s3_import.md %}#credentials-and-configuration) that grant access to the underlying data. DuckDB reads only the columns and row groups a query needs, so a filtered or aggregated query over a large remote dataset does not download the whole thing.
+Consumers need the `httpfs` extension and, for `s3://` sources, [credentials]({% link docs/2.0/guides/network_cloud_storage/s3_import.md %}#credentials-and-configuration) that grant access to the underlying data. DuckDB reads only the columns and row groups a query needs, so a filtered or aggregated query over a large remote dataset does not download the whole thing.
 
 ## Surviving Changes to the Data Layout
 
@@ -112,16 +112,16 @@ If you repartition the files or move them to a new bucket, you only have to upda
 
 ## When to Use It
 
-Use this pattern when you want to share a dataset without sending the recipient a long list of individual file paths, and when the data is already in a format DuckDB reads well, such as [Parquet]({% link docs/preview/data/parquet/overview.md %}). Readers get a set of named relations to query, and the publisher can change the file layout without breaking those queries.
+Use this pattern when you want to share a dataset without sending the recipient a long list of individual file paths, and when the data is already in a format DuckDB reads well, such as [Parquet]({% link docs/2.0/data/parquet/overview.md %}). Readers get a set of named relations to query, and the publisher can change the file layout without breaking those queries.
 
 Note the following limitations:
 
 * Consumers must be able to access both the catalog file and every data source that its views reference.
-* Connections over HTTPS and the S3 API are [read-only]({% link docs/preview/guides/network_cloud_storage/duckdb_over_https_or_s3.md %}#limitations), so the catalog cannot be modified in place. To change a view, edit a local copy and upload it again.
-* Query performance depends on the [network and the layout of the referenced files]({% link docs/preview/guides/performance/file_formats.md %}). The tips for [querying remote files]({% link docs/preview/guides/performance/how_to_tune_workloads.md %}#querying-remote-files) apply.
+* Connections over HTTPS and the S3 API are [read-only]({% link docs/2.0/guides/network_cloud_storage/duckdb_over_https_or_s3.md %}#limitations), so the catalog cannot be modified in place. To change a view, edit a local copy and upload it again.
+* Query performance depends on the [network and the layout of the referenced files]({% link docs/2.0/guides/performance/file_formats.md %}). The tips for [querying remote files]({% link docs/2.0/guides/performance/how_to_tune_workloads.md %}#querying-remote-files) apply.
 
 ## Conclusion
 
 A DuckDB file that holds only views is a small catalog you can share as a single URL. The data stays in its original location, the publisher can change how it is stored, and the reader gets a stable set of relations to query.
 
-For the full reference, see the [Share a DuckDB Database That Only Stores Views]({% link docs/preview/guides/network_cloud_storage/duckdb_views_only.md %}) guide.
+For the full reference, see the [Share a DuckDB Database That Only Stores Views]({% link docs/2.0/guides/network_cloud_storage/duckdb_views_only.md %}) guide.

@@ -1,7 +1,5 @@
 ---
 layout: docu
-redirect_from:
-- /docs/stable/sql/expressions/try
 title: TRY Expression
 tested: true
 ---

@@ -1,9 +1,5 @@
 ---
 layout: docu
-redirect_from:
-- /docs/guides/file_formats/json_export
-- /docs/guides/import/json_export
-- /docs/stable/guides/file_formats/json_export
 title: JSON Export
 ---
 

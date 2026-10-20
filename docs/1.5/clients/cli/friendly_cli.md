@@ -1,7 +1,5 @@
 ---
 layout: docu
-redirect_from:
-- /docs/stable/clients/cli/friendly_cli
 title: Friendly CLI
 ---
 

@@ -1,11 +1,5 @@
 ---
 layout: docu
-redirect_from:
-- /docs/extensions/jemalloc
-- /docs/extensions/current/jemalloc 
-- /docs/stable/extensions/jemalloc
-- /docs/stable/core_extensions/jemalloc
-- /docs/current/core_extensions/jemalloc
 title: jemalloc
 ---
 

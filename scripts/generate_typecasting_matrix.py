@@ -165,7 +165,7 @@ def main():
     doc_file = (
         sys.argv[2]
         if len(sys.argv) > 2
-        else "docs/preview/sql/data_types/typecasting.md"
+        else "docs/2.0/sql/data_types/typecasting.md"
     )
 
     rows = build_matrix(db_path)

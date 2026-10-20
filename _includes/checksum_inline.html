@@ -20,7 +20,7 @@ Notes:
 {%- elsif include.version == "1.5" -%}
   {%- assign checksums_data = site.data.checksums_15 -%}
 {%- elsif include.version == "next_major" -%}
-  {%- assign checksums_data = site.data.checksums_next_major -%}
+  {%- assign checksums_data = site.data.checksums_20 -%}
 {%- else -%}
   Error: Release type (current / LTS / next major) not available
 {%- endif -%}

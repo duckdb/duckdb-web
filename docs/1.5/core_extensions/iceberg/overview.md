@@ -1,11 +1,6 @@
 ---
 github_repository: https://github.com/duckdb/duckdb-iceberg
 layout: docu
-redirect_from:
-- /docs/extensions/iceberg
-- /docs/stable/extensions/iceberg
-- /docs/stable/extensions/iceberg/overview
-- /docs/stable/core_extensions/iceberg/overview
 title: Iceberg Extension
 ---
 

@@ -1,7 +1,5 @@
 ---
 layout: docu
-redirect_from:
-- /docs/stable/clients/tertiary_clients/overview
 title: Tertiary Clients
 ---
 

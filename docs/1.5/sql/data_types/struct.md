@@ -1,8 +1,5 @@
 ---
 layout: docu
-redirect_from:
-- /docs/sql/data_types/struct
-- /docs/stable/sql/data_types/struct
 title: Struct Data Type
 tested: true
 ---

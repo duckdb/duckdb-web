@@ -1,7 +1,5 @@
 ---
 layout: docu
-redirect_from:
-- /docs/stable/guides/sql_features/timestamps
 title: Timestamp Issues
 ---
 

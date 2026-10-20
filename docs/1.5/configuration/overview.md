@@ -1,10 +1,5 @@
 ---
 layout: docu
-redirect_from:
-- /docs/configuration
-- /docs/configuration/overview
-- /docs/sql/configuration
-- /docs/stable/configuration/overview
 title: Configuration
 ---
 

@@ -1,9 +1,5 @@
 ---
 layout: docu
-redirect_from:
-- /dev/testing
-- /docs/dev/sqllogictest/overview
-- /docs/stable/dev/sqllogictest/overview
 title: Overview
 ---
 

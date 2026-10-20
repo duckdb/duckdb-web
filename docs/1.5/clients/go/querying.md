@@ -1,8 +1,5 @@
 ---
 layout: docu
-redirect_from:
-- /docs/clients/go/querying
-- /docs/stable/clients/go/querying
 title: Run Queries
 ---
 

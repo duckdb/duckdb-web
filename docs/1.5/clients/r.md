@@ -1,10 +1,6 @@
 ---
 github_repository: https://github.com/duckdb/duckdb-r
 layout: docu
-redirect_from:
-- /docs/api/r
-- /docs/clients/r
-- /docs/stable/clients/r
 title: R Client
 ---
 

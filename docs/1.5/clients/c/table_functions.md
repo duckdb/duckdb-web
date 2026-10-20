@@ -1,9 +1,5 @@
 ---
 layout: docu
-redirect_from:
-- /docs/api/c/table_functions
-- /docs/clients/c/table_functions
-- /docs/stable/clients/c/table_functions
 title: Table Functions
 ---
 

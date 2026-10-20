@@ -1,8 +1,5 @@
 ---
 layout: docu
-redirect_from:
-- /docs/configuration/secrets_manager
-- /docs/stable/configuration/secrets_manager
 title: Secrets Manager
 ---
 

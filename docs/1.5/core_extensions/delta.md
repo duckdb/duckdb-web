@@ -1,10 +1,6 @@
 ---
 github_repository: https://github.com/duckdb/duckdb-delta
 layout: docu
-redirect_from:
-  - /docs/extensions/delta
-  - /docs/stable/extensions/delta
-  - /docs/stable/core_extensions/delta
 title: Delta Extension
 ---
 

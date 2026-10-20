@@ -1,9 +1,6 @@
 ---
 layout: docu
 railroad: expressions/like.js
-redirect_from:
-- /docs/sql/functions/regular_expressions
-- /docs/stable/sql/functions/regular_expressions
 title: Regular Expressions
 tested: true
 ---

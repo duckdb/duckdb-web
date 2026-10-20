@@ -1,8 +1,5 @@
 ---
 layout: docu
-redirect_from:
-- /docs/sql/functions/map
-- /docs/stable/sql/functions/map
 title: Map Functions
 ---
 

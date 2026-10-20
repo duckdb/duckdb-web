@@ -6,7 +6,7 @@ from tabulate import tabulate
 
 REPO_ROOT = Path(__file__).resolve().parents[1]
 METRIC_TOOLS_PATH = Path("scripts") / "metrics"
-METRICS_DOC_PATH = REPO_ROOT / "docs" / "current" / "dev" / "metrics.md"
+METRICS_DOC_PATH = REPO_ROOT / "docs" / "2.0" / "dev" / "metrics.md"
 METRICS_DOC_TEMPLATE = REPO_ROOT / "scripts" / "metrics.md.template"
 
 METRICS_MARKER = "<!-- METRICS_TABLE -->"

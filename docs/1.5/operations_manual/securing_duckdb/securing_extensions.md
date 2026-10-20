@@ -1,8 +1,5 @@
 ---
 layout: docu
-redirect_from:
-- /docs/operations_manual/securing_duckdb/securing_extensions
-- /docs/stable/operations_manual/securing_duckdb/securing_extensions
 title: Securing Extensions
 tested: true
 ---

@@ -1,8 +1,5 @@
 ---
 layout: docu
-redirect_from:
-- /docs/clients/rust/result_handling
-- /docs/stable/clients/rust/result_handling
 title: Handle Results
 ---
 
