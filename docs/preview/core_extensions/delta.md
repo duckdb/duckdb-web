@@ -6,7 +6,7 @@ title: Delta Extension
 
 The `delta` extension adds support for the [Delta Lake open-source storage format](https://delta.io/). It is built using the [Delta Kernel](https://github.com/delta-io/delta-kernel-rs). The extension offers **read and write support** for Delta tables, both local and remote.
 
-For implementation details, see the [announcement blog post]({% post_url 2024-06-10-delta %}).
+For implementation details, see the [“Native Delta Lake Support in DuckDB” blog post]({% post_url 2024-06-10-delta %}).
 
 > To connect to Unity Catalog, DuckDB has the [`unity_catalog` extension]({% link docs/preview/core_extensions/unity_catalog.md %}).
 
@@ -26,7 +26,7 @@ To scan a local Delta table, run:
 
 ```sql
 SELECT *
-FROM delta_scan('file:///some/path/on/local/machine');
+FROM delta_scan('file:///⟨path⟩');
 ```
 
 ### Attaching Tables
@@ -34,7 +34,7 @@ FROM delta_scan('file:///some/path/on/local/machine');
 A Delta table can also be attached as a database. The database holds exactly one table, with the same name as the database, so `my_table` and `my_table.my_table` refer to the same table:
 
 ```sql
-ATTACH 's3://my-bucket/my-delta-table' AS my_table (TYPE delta);
+ATTACH 's3://⟨my_bucket⟩/⟨path⟩' AS my_table (TYPE delta);
 SELECT * FROM my_table;
 ```
 
@@ -44,7 +44,7 @@ To scan a Delta table in an [S3 bucket]({% link docs/preview/core_extensions/htt
 
 ```sql
 SELECT *
-FROM delta_scan('s3://some/delta/table');
+FROM delta_scan('s3://⟨my_bucket⟩/⟨path⟩');
 ```
 
 For authenticating to S3 buckets, DuckDB [Secrets]({% link docs/preview/configuration/secrets_manager.md %}) are supported:
@@ -55,7 +55,7 @@ CREATE SECRET (
     PROVIDER credential_chain
 );
 SELECT *
-FROM delta_scan('s3://some/delta/table/with/auth');
+FROM delta_scan('s3://⟨my_bucket⟩/⟨path⟩');
 ```
 
 To scan public buckets on S3, you may need to pass the correct region by creating a secret containing the region of your public S3 bucket:
@@ -63,10 +63,10 @@ To scan public buckets on S3, you may need to pass the correct region by creatin
 ```sql
 CREATE SECRET (
     TYPE s3,
-    REGION 'my-region'
+    REGION '⟨my_region⟩'
 );
 SELECT *
-FROM delta_scan('s3://some/public/table/in/my-region');
+FROM delta_scan('s3://⟨my_bucket⟩/⟨path⟩');
 ```
 
 ### Reading from Azure Blob Storage
@@ -75,7 +75,7 @@ To scan a Delta table in an [Azure Blob Storage bucket]({% link docs/preview/cor
 
 ```sql
 SELECT *
-FROM delta_scan('az://my-container/my-table');
+FROM delta_scan('az://⟨my_container⟩/⟨path⟩');
 ```
 
 For authenticating to Azure Blob Storage, DuckDB [Secrets]({% link docs/preview/configuration/secrets_manager.md %}) are supported:
@@ -86,7 +86,7 @@ CREATE SECRET (
     PROVIDER credential_chain
 );
 SELECT *
-FROM delta_scan('az://my-container/my-table-with-auth');
+FROM delta_scan('az://⟨my_container⟩/⟨path⟩');
 ```
 
 ### Reading from Google Cloud Storage
@@ -96,11 +96,11 @@ To scan a Delta table in a [GCS bucket]({% link docs/preview/core_extensions/htt
 ```sql
 CREATE SECRET (
     TYPE gcs,
-    KEY_ID '⟨hmac-key-id⟩',
-    SECRET '⟨hmac-secret⟩'
+    KEY_ID '⟨hmac_key_id⟩',
+    SECRET '⟨hmac_secret⟩'
 );
 SELECT *
-FROM delta_scan('gs://my-bucket/my-delta-table');
+FROM delta_scan('gs://⟨my_bucket⟩/⟨path⟩');
 ```
 
 ### Creating Tables
@@ -110,7 +110,7 @@ FROM delta_scan('gs://my-bucket/my-delta-table');
 To create a Delta table, attach the location for it and create a table named after the attached database:
 
 ```sql
-ATTACH 's3://my-bucket/events' AS events (TYPE delta);
+ATTACH 's3://⟨my_bucket⟩/⟨path⟩' AS events (TYPE delta);
 CREATE TABLE events.events (id BIGINT, region VARCHAR)
 PARTITIONED BY (region);
 INSERT INTO events VALUES (1, 'eu');
@@ -140,7 +140,7 @@ To create a table with [column mapping](#column-mapping), set `'delta.columnMapp
 To append rows to a Delta table, attach it and use `INSERT INTO`:
 
 ```sql
-ATTACH 's3://my-bucket/my-delta-table' AS my_table (TYPE delta);
+ATTACH 's3://⟨my_bucket⟩/⟨path⟩' AS my_table (TYPE delta);
 INSERT INTO my_table SELECT * FROM other_table;
 ```
 
@@ -158,12 +158,12 @@ SELECT * FROM my_table AT (VERSION => 5);
 SELECT * FROM my_table AT (TIMESTAMP => TIMESTAMPTZ '2026-09-01 12:00:00+00');
 
 -- Attach the table at a version or point in time
-ATTACH 's3://my-bucket/my-delta-table' AS my_table_v5 (TYPE delta, VERSION 5);
-ATTACH 's3://my-bucket/my-delta-table' AS my_table_then (TYPE delta, TIMESTAMP TIMESTAMPTZ '2026-09-01 12:00:00+00');
+ATTACH 's3://⟨my_bucket⟩/⟨path⟩' AS my_table_v5 (TYPE delta, VERSION 5);
+ATTACH 's3://⟨my_bucket⟩/⟨path⟩' AS my_table_then (TYPE delta, TIMESTAMP TIMESTAMPTZ '2026-09-01 12:00:00+00');
 
 -- Scan without attaching
-SELECT * FROM delta_scan('s3://my-bucket/my-delta-table', version => 5); -- since v1.5.4
-SELECT * FROM delta_scan('s3://my-bucket/my-delta-table', timestamp => TIMESTAMPTZ '2026-09-01 12:00:00+00');
+SELECT * FROM delta_scan('s3://⟨my_bucket⟩/⟨path⟩', version => 5); -- since v1.5.4
+SELECT * FROM delta_scan('s3://⟨my_bucket⟩/⟨path⟩', timestamp => TIMESTAMPTZ '2026-09-01 12:00:00+00');
 ```
 
 A timestamp reads the latest version committed at or before it. A timestamp without a time zone uses the session's `TimeZone`, and one later than `now()` fails. Within a transaction, a timestamp always reads the same version. A version or timestamp given to `ATTACH` is the default for queries on that table, and an `AT` clause overrides it. A table attached at a version or timestamp is read-only.
@@ -173,7 +173,7 @@ A timestamp reads the latest version committed at or before it. A timestamp with
 Since v1.5.1, `CHECKPOINT` compacts the Delta log of an attached table into a checkpoint file:
 
 ```sql
-ATTACH 'path/to/my-delta-table' AS my_table (TYPE delta);
+ATTACH '⟨path⟩' AS my_table (TYPE delta);
 CHECKPOINT my_table;
 ```
 
@@ -181,10 +181,10 @@ CHECKPOINT my_table;
 
 The `delta` extension exposes an idempotent-append API that uses Delta's per-application transaction versions to give exactly-once semantics: an append tagged with an `app_id` and a version is only committed if the table's currently recorded version for that `app_id` matches the expected previous version. This lets a producer safely retry a batch without duplicating it.
 
-Within a transaction, tag the append with `delta_set_transaction_version(⟨table⟩, ⟨app_id⟩, ⟨new_version⟩, ⟨expected_previous_version⟩)`:
+Within a transaction, tag the append with `delta_set_transaction_version(⟨table⟩, ⟨app_id⟩, ⟨new_version⟩, ⟨expected_previous_version⟩)`{:.language-sql .highlight}:
 
 ```sql
-ATTACH 'path/to/my-delta-table' AS my_table (TYPE delta);
+ATTACH '⟨path⟩' AS my_table (TYPE delta);
 
 BEGIN TRANSACTION;
 CALL delta_set_transaction_version('my_table', 'my_app_id', 1::UBIGINT, NULL::UBIGINT);
@@ -192,7 +192,7 @@ INSERT INTO my_table VALUES (1);
 COMMIT;
 ```
 
-On `COMMIT`, the version is compared-and-swapped: if another process advanced the version for `my_app_id` in the meantime, the commit fails. Aborting the transaction leaves the version unchanged. Read the current version with `delta_get_transaction_version(⟨table⟩, ⟨app_id⟩)`, which returns `NULL` if no version has been recorded yet.
+On `COMMIT`, the version is compared-and-swapped: if another process advanced the version for `my_app_id` in the meantime, the commit fails. Aborting the transaction leaves the version unchanged. Read the current version with `delta_get_transaction_version(⟨table⟩, ⟨app_id⟩)`{:.language-sql .highlight}, which returns `NULL` if no version has been recorded yet.
 
 ### Attach Options
 
@@ -207,7 +207,7 @@ When attaching a Delta table you can pass the following options to `ATTACH`:
 | `PUSHDOWN_FILTERS` | `VARCHAR` | `all` | Filter pushdown mode for file skipping. One of `none`, `all`, `constant_only`, `dynamic_only`. |
 
 ```sql
-ATTACH 's3://my-bucket/my-delta-table' AS my_table (
+ATTACH 's3://⟨my_bucket⟩/⟨path⟩' AS my_table (
     TYPE delta,
     PIN_SNAPSHOT true,
     PUSHDOWN_FILTERS 'constant_only'
@@ -219,7 +219,7 @@ ATTACH 's3://my-bucket/my-delta-table' AS my_table (
 `delta_list_files` returns the data files a scan would read for a table, together with their cardinality, partition values, and whether they carry deletion vectors. This is useful for understanding the effect of [data skipping](#features):
 
 ```sql
-SELECT * FROM delta_list_files('file:///some/path/on/local/machine');
+SELECT * FROM delta_list_files('file:///⟨path⟩');
 ```
 
 | Column | Type | Description |
@@ -229,11 +229,11 @@ SELECT * FROM delta_list_files('file:///some/path/on/local/machine');
 | `partitions` | `MAP(VARCHAR, VARCHAR)` | Partition column values for the file. |
 | `have_deletes` | `BOOLEAN` | Whether the file has an associated deletion vector. |
 
-To list the files of an earlier table version, pass `version => ⟨version⟩`. To add a `delete_count` column with the number of rows each file's deletion vector removes, pass `delete_count => true`:
+To list the files of an earlier table version, pass `version => ⟨version⟩`{:.language-sql .highlight}. To add a `delete_count` column with the number of rows each file's deletion vector removes, pass `delete_count => true`:
 
 ```sql
 SELECT data_file, cardinality, delete_count
-FROM delta_list_files('file:///some/path/on/local/machine', version => 3, delete_count => true);
+FROM delta_list_files('file:///⟨path⟩', version => 3, delete_count => true);
 ```
 
 ### Reading Domain Metadata
@@ -242,7 +242,7 @@ Since v1.5.1, `delta_domain_metadata` returns the [domain metadata](https://gith
 
 ```sql
 SELECT domain, configuration
-FROM delta_domain_metadata('file:///some/path/on/local/machine');
+FROM delta_domain_metadata('file:///⟨path⟩');
 ```
 
 For an attached table, the same pairs are the `tags` of the table in `duckdb_tables()`.
@@ -278,14 +278,9 @@ A Delta table with the `catalogManaged` feature, such as a Unity Catalog managed
 
 ### Credential Chains in Delta
 
-DuckDB Delta uses `delta-kernel-rs` and `object_store` for some network operations.
-These systems have a different ordering (and inclusion defaults) for credential
-chains. If your system has multiple credential sources available, e.g., both
-Service Principal via the environment and a CLI-based option, credential loading behavior
-may be inconsistent.
+DuckDB Delta uses `delta-kernel-rs` and `object_store` for some network operations. These systems have a different ordering (and inclusion defaults) for credential chains. If your system has multiple credential sources available, e.g., both Service Principal via the environment and a CLI-based option, credential loading behavior may be inconsistent.
 
-To avoid ambiguities, we recommend that you configure exactly one available
-credential type in your production chain secrets.
+To avoid ambiguities, we recommend that you configure exactly one available credential type in your production chain secrets.
 
 Since v1.5.6, the `delta` extension supports [Azure workload identity](https://learn.microsoft.com/en-us/entra/workload-id/workload-identities-overview) (for example on AKS): name `workload_identity` in the `CHAIN` of an [Azure `credential_chain` secret]({% link docs/preview/core_extensions/azure.md %}#credential_chain-provider).
 
