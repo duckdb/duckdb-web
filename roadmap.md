@@ -26,8 +26,8 @@ This section lists the features that the DuckDB team plans to work on **in the c
 * Shipping the stable version of the [Quack protocol]({% link quack/index.html %}) (released in [DuckDB v2.0.0]({% post_url 2026-10-21-announcing-duckdb-200 %}))
 * [Support for async I/O]({% post_url 2026-07-31-asynchronous-io %}) (released in [DuckDB v2.0.0]({% post_url 2026-10-21-announcing-duckdb-200 %}))
 * Migration and documentation to [C client API]({% link docs/current/clients/c/overview.md %}) and [C extension API](https://github.com/duckdb/extension-template-c)
-* Rust support for extensions
 * C++17 support (released in [DuckDB v2.0.0]({% post_url 2026-10-21-announcing-duckdb-200 %}))
+* Rust support for extensions
 * Continuous improvements to [lakehouse formats]({% link docs/current/lakehouse_formats.md %}):
   [Iceberg]({% link docs/current/core_extensions/iceberg/overview.md %}),
   [Delta]({% link docs/current/core_extensions/delta.md %}),
@@ -47,10 +47,9 @@ We are [gradually phasing out]({% link docs/current/sql/functions/lambda.md %}) 
 
 We are gradually phasing out macOS x86_64 (`osx_amd64`) from the list of [supported platforms]({% link docs/preview/operations_manual/installing_duckdb/requirements.md %}#supported-platforms). In DuckDB v2.0, DuckDB and core extensions are still built and supported for this platform, but community extensions are no longer built for it. DuckDB v2.1 will stop supporting `osx_amd64`.
 
-## Future Work / Looking for Funding
+## Future Work
 
 There are several features and optimizations that we plan to implement at some point in the future.
-If you would like to expedite the development of these items, please [get in touch with DuckLabs](https://ducklabs.com/contact/).
 
 * Go support for extensions
 * Time series optimizations

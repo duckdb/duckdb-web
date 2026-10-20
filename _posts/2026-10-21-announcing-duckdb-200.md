@@ -24,7 +24,7 @@ DuckDB v2.0 is a long-term support (LTS) release with support until at least Oct
 The previous LTS release, version 1.4, is still supported until late November 2026.
 To ensure a smooth transition and allow sufficient time for testing,
 we extended the support period of DuckDB v1.5 until March 2027, effectively also turning it into an LTS release.
-For details, see the [release calendar]({% link release_calendar.md %}).
+For details, see the [release calendar]({% link release_calendar.md %}#lts-releases).
 
 To find your way around the documentation for all of the new features, we also published a [“What's New in the Docs for 2.0”]({% link docs/preview/whats_new_in_the_docs.md %}) page that links each feature below to its documentation.
 
@@ -156,7 +156,10 @@ In that post, we showed the network throughput over the course of a query with a
 
 ### The `VARIANT` Type Becomes a First-Class Citizen
 
-The [`VARIANT` type]({% link docs/preview/sql/data_types/variant.md %}) stores semi-structured, schema-less data such as JSON while keeping the performance of columnar execution. First introduced [in v1.5]({% post_url 2026-03-09-announcing-duckdb-150 %}#variant-type), it is now fully integrated. Think of it as JSON on steroids: a `VARIANT` column can store differently shaped data in every row, but unlike JSON it is not a text format. DuckDB detects the common structure in your data and “shreds” it, so it compresses well and executes fast. In v2.0 the pipeline works end to end, from shredded execution straight out of storage to shredded `VARIANT` reading and writing for Parquet, backed by a family of [`variant_*` functions]({% link docs/preview/sql/functions/variant.md %}).
+The [`VARIANT` type]({% link docs/preview/sql/data_types/variant.md %}) stores semi-structured, schema-less data such as JSON while keeping the performance of columnar execution.
+So you can think of it as JSON on steroids: a `VARIANT` column can store differently shaped data in every row, but unlike JSON it is not a text format.
+
+[DuckDB 1.5 already introduced `VARIANT`]({% post_url 2026-03-09-announcing-duckdb-150 %}#variant-type), but DuckDB fully integrates it. DuckDB 2.0 detects the common structure in your data and “shreds” it, so it compresses well and executes fast. The pipeline works end to end, from shredded execution straight out of storage to shredded `VARIANT` reading and writing for Parquet, backed by a family of [`variant_*` functions]({% link docs/preview/sql/functions/variant.md %}). For example:
 
 ```sql
 CREATE TABLE events (payload VARIANT);
@@ -167,6 +170,16 @@ VALUES
 
 SELECT variant_type(payload), variant_keys(payload)
 FROM events;
+```
+
+```text
+┌───────────────────────┬───────────────────────┐
+│ variant_type(payload) │ variant_keys(payload) │
+│        varchar        │       varchar[]       │
+├───────────────────────┼───────────────────────┤
+│ OBJECT                │ [user]                │
+│ OBJECT                │ [event, x, y]         │
+└───────────────────────┴───────────────────────┘
 ```
 
 ### Agent Mode in the CLI
@@ -207,9 +220,9 @@ For more details, see the [Extension Repositories page]({% link docs/preview/ext
 
 DuckDB's [core extensions]({% link docs/preview/core_extensions/overview.md %}) are also shipping several new features, fixes and performance optimizations. These are too numerous to all list here, so we'll dedicate blog posts for them and only highlight a few of them here:
 
-* We released [DuckLake 1.1](https://ducklake.select/2026/10/21/ducklake-11/), incl. spec and reference implementation
-* The Iceberg extension ...
-* The Delta extension ...
+* We released [DuckLake 1.1](https://ducklake.select/2026/10/21/ducklake-11/), including a new specification and [reference implementation]({% link docs/preview/core_extensions/ducklake.md %}).
+* The [Iceberg extension]({% link docs/preview/core_extensions/iceberg/overview.md %}) strives to become a feature-complete implementation. To this end, is add REST catalog `ATTACH` options to derive a table's location from its namespace, control the URL prefix and namespace separator, and load metadata from the catalog's metadata-location.
+* The [Delta extension]({% link docs/preview/core_extensions/delta.md %}) can create Delta tables with `CREATE TABLE`, including partitioning and Delta table properties, supports time trave, and improves `VARIANT` support.
 
 In the coming weeks, we'll release more blog posts about these features.
 
@@ -217,7 +230,7 @@ In the coming weeks, we'll release more blog posts about these features.
 
 ### Triggers
 
-DuckDB v2.0 delivers triggers in full: `BEFORE` and `AFTER` triggers, `FOR EACH ROW` and `FOR EACH STATEMENT`, transition tables via `REFERENCING OLD/NEW TABLE`, multiple triggers per event, `RETURNING` on triggered tables and `DROP TRIGGER`. The classic use case is audit tables, where a trigger records what changed in response to a table modification.
+DuckDB v2.0 delivers triggers in full: [`CREATE TRIGGER` statement]({% link docs/preview/sql/statements/create_trigger.md %}) with `BEFORE` and `AFTER` triggers, `FOR EACH ROW` and `FOR EACH STATEMENT`, transition tables via `REFERENCING OLD/NEW TABLE`, multiple triggers per event, `RETURNING` on triggered tables and `DROP TRIGGER`. The classic use case is audit tables, where a trigger records what changed in response to a table modification.
 
 ```sql
 CREATE TRIGGER trg_audit
@@ -231,23 +244,120 @@ CREATE TRIGGER trg_audit
         FROM o JOIN n ON o.id = n.id;
 ```
 
-For more details, see the [`CREATE TRIGGER` statement page]({% link docs/preview/sql/statements/create_trigger.md %}).
+Triggers can also maintain materialized views incrementally! For example, to keep track of the average age of people per nationality in a table `age_statistics`, you can use two triggers – one for insert and another for delete operations – and store the sum and the count alongside the average.
+
+<details markdown='1'>
+<summary markdown='span'>
+To see more details, click here.
+</summary>
+
+```sql
+CREATE TABLE people (name VARCHAR, nationality VARCHAR, age INTEGER);
+CREATE TABLE age_statistics (
+    nationality VARCHAR PRIMARY KEY,
+    sum_age INTEGER,
+    num_people INTEGER,
+    average_age DOUBLE
+);
+```
+
+On insertion, we aggregate the new rows per nationality and merge them into `age_statistics`, adding a row for each new nationality:
+
+```sql
+CREATE TRIGGER people_insert
+    AFTER INSERT ON people
+    REFERENCING NEW TABLE AS n
+    FOR EACH STATEMENT
+        MERGE INTO age_statistics s
+        USING (
+            SELECT nationality, sum(age) AS sum_age, count(*) AS num_people
+            FROM n
+            GROUP BY nationality
+        ) d
+        ON s.nationality = d.nationality
+        WHEN MATCHED THEN UPDATE SET
+            sum_age = s.sum_age + d.sum_age,
+            num_people = s.num_people + d.num_people,
+            average_age = (s.sum_age + d.sum_age) / (s.num_people + d.num_people)
+        WHEN NOT MATCHED THEN INSERT
+            VALUES (d.nationality, d.sum_age, d.num_people, d.sum_age / d.num_people);
+```
+
+On deletion, we subtract the deleted rows and drop a nationality once its last person has left:
+
+```sql
+CREATE TRIGGER people_delete
+    AFTER DELETE ON people
+    REFERENCING OLD TABLE AS o
+    FOR EACH STATEMENT
+        MERGE INTO age_statistics s
+        USING (
+            SELECT nationality, sum(age) AS sum_age, count(*) AS num_people
+            FROM o
+            GROUP BY nationality
+        ) d
+        ON s.nationality = d.nationality
+        WHEN MATCHED AND s.num_people = d.num_people THEN DELETE
+        WHEN MATCHED THEN UPDATE SET
+            sum_age = s.sum_age - d.sum_age,
+            num_people = s.num_people - d.num_people,
+            average_age = (s.sum_age - d.sum_age) / (s.num_people - d.num_people);
+```
+
+Let's see people come and go:
+
+```sql
+INSERT INTO people VALUES
+    ('Alice', 'US', 34), ('Bram', 'NL', 27), ('Csilla', 'HU', 45),
+    ('Dave', 'US', 58), ('Eva', 'NL', 19), ('Femke', 'NL', 41);
+FROM age_statistics ORDER BY nationality;
+```
+
+```text
+┌─────────────┬─────────┬────────────┬─────────────┐
+│ nationality │ sum_age │ num_people │ average_age │
+│   varchar   │  int32  │   int32    │   double    │
+├─────────────┼─────────┼────────────┼─────────────┤
+│ HU          │      45 │          1 │        45.0 │
+│ NL          │      87 │          3 │        29.0 │
+│ US          │      92 │          2 │        46.0 │
+└─────────────┴─────────┴────────────┴─────────────┘
+```
+
+```sql
+DELETE FROM people WHERE name = 'Alice';
+DELETE FROM people WHERE nationality = 'HU';
+FROM age_statistics ORDER BY nationality;
+```
+
+```text
+┌─────────────┬─────────┬────────────┬─────────────┐
+│ nationality │ sum_age │ num_people │ average_age │
+│   varchar   │  int32  │   int32    │   double    │
+├─────────────┼─────────┼────────────┼─────────────┤
+│ NL          │      87 │          3 │        29.0 │
+│ US          │      58 │          1 │        58.0 │
+└─────────────┴─────────┴────────────┴─────────────┘
+```
+</details>
+
+Triggers bring us one step closer to materialized views, a long-standing item in the [“future work” section of our roadmap]({% link roadmap.md %}#future-work).
 
 ### SQL Dialect Additions
 
-As always, DuckDB's SQL dialect keeps growing. A few favorites from this release cycle:
+As always, DuckDB's [friendly SQL dialect]({% link docs/preview/sql/dialect/friendly_sql.md %}) keeps growing. A few favorites from this release cycle:
 
-* [`NEAREST` joins]({% link docs/preview/sql/query_syntax/from.md %}#nearest-joins) turn top-k similarity search into a join clause, handy for vector and embedding workloads.
-* [Data-modifying CTEs]({% link docs/preview/sql/query_syntax/with.md %}#data-modifying-ctes) let you use `INSERT`, `UPDATE`, `DELETE` and `COPY` as pipeline steps.
-* [Nested schemas]({% link docs/preview/sql/statements/create_schema.md %}#nested-schemas) allow schemas within schemas, e.g., `CREATE SCHEMA finance.reports`.
 * The [`$⟨variable⟩`{:.language-sql .highlight} shorthand]({% link docs/preview/sql/statements/set_variable.md %}#the-name-shorthand) lets you write `$x` anywhere an expression is allowed, instead of `getvariable('⟨variable⟩')`{:.language-sql .highlight}.
+* [DML in CTEs (data manipulation language in common table expresssion)]({% link docs/preview/sql/query_syntax/with.md %}#data-modifying-ctes) let you use `INSERT`, `UPDATE`, `DELETE` and `COPY` as pipeline steps.
+* [`NEAREST` joins]({% link docs/preview/sql/query_syntax/from.md %}#nearest-joins) turn top-k similarity search into a join clause, handy for vector and embedding workloads.
+* [Nested schemas]({% link docs/preview/sql/statements/create_schema.md %}#nested-schemas) allow schemas within schemas, e.g., `CREATE SCHEMA finance.reports`.
 * [JSON mutation functions]({% link docs/preview/data/json/json_functions.md %}#json-mutation-functions) `json_set`, `json_insert`, `json_replace` and `json_remove` modify JSON documents in place (see also our [blog post on JSON patches]({% post_url 2026-08-18-reconciling-json %})).
 
-There is more: SQL-standard [`FETCH FIRST`]({% link docs/preview/sql/query_syntax/limit.md %}#fetch-first), [`UNNEST` in `GROUP BY`]({% link docs/preview/sql/query_syntax/groupby.md %}#grouping-by-unnest) and well-defined [`MERGE`]({% link docs/preview/sql/statements/merge_into.md %}) / [`UPDATE ... FROM`]({% link docs/preview/sql/statements/update.md %}) semantics for multi-matched rows.
+There is more: DuckDB 2.0.0 supports the SQL-standard [`FETCH FIRST`]({% link docs/preview/sql/query_syntax/limit.md %}#fetch-first), allows [`UNNEST` in the `GROUP BY` clause]({% link docs/preview/sql/query_syntax/groupby.md %}#grouping-by-unnest), and ensures well-defined [`MERGE`]({% link docs/preview/sql/statements/merge_into.md %}) and [`UPDATE ... FROM`]({% link docs/preview/sql/statements/update.md %}) semantics for cases when multiple rows are matched.
 
 ## Migrating to v2.0
 
-DuckDB v2.0 comes with a small set of breaking changes. For most users, upgrading is straightforward, but complex deployments running many DuckDB processes need more care. The storage format is the most likely source of problems. We recommend testing v2.0.0 on a shadow system before switching production over, and if your workload is mission-critical, you may want to wait for the first patch releases.
+DuckDB v2.0 comes with a small set of breaking changes. For most users, upgrading is straightforward, but complex deployments running many DuckDB processes need more care. The storage format is the most likely source of problems. We recommend testing v2.0.0 on a shadow system before switching production over. And, if your workload is mission-critical, you may want to wait for the first patch releases, [coming in November]({% link release_calendar.md %}#upcoming-releases).
 
 For the full details, see the [migration guide]({% link docs/preview/operations_manual/migration.md %}).
 
