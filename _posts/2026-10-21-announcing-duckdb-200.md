@@ -211,6 +211,8 @@ For more details, see the [Extension Repositories page]({% link docs/preview/ext
 * The Iceberg extension ...
 * The Delta extension ...
 
+In the coming weeks, we'll release more blog posts about these features.
+
 ## SQL Features
 
 ### Triggers
