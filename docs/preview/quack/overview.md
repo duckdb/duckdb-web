@@ -32,8 +32,12 @@ To start listening on localhost, run:
 CALL quack_serve('quack:localhost');
 ```
 
+The URI argument is optional: calling `quack_serve()` without it also listens on `quack:localhost`.
+
 `quack_serve` returns the listen URI, the HTTP URL, and, when the default authentication function is in use, and the `auth_token` that clients need to connect.
 This token can also be set explicitly before starting (see [Security]({% link docs/preview/quack/security.md %})).
+
+> Tip The DuckDB CLI can start a server directly with the `-serve` argument and connect to one with `-connect`. See [Command Line Arguments]({% link docs/preview/clients/cli/arguments.md %}#serving-and-connecting-to-remote-databases).
 
 By default the server refuses to bind anything other than a local hostname. To listen on an externally-reachable address, pass `allow_other_hostname => true`:
 
@@ -69,12 +73,13 @@ CALL quack_stop('quack:localhost');
 
 ## Client-Side Usage
 
-There are two ways to talk to a Quack server:
+There are three ways to talk to a Quack server:
 
-1. `quack_query(uri, query)`: [stateless querying](#stateless-queries-with-quack_query).
-2. `ATTACH 'quack:host' AS name`: [attach the remote as a full catalog](#attaching-a-remote-database).
+1. `ATTACH 'quack:host' AS name` followed by `CONNECT name`: [route the whole session to the remote](#routing-a-session-with-connect). This is the recommended approach.
+2. `ATTACH 'quack:host' AS name`: [attach the remote as a full catalog](#attaching-a-remote-database) and query it by qualifying table names.
+3. `quack_query(uri, query)`: [stateless querying](#stateless-queries-with-quack_query).
 
-In both cases, you need to [authenticate](#authentication).
+In all cases, you need to [authenticate](#authentication).
 
 The client picks plain HTTP automatically for local URIs (`localhost`, `127.0.0.1`, `::1`) and HTTPS otherwise.
 Either default can be overridden with the `DISABLE_SSL` configuration option.
@@ -153,6 +158,23 @@ The attached catalog also exposes a `query` table macro for ad-hoc SQL scoped to
 FROM remote_db.query('SELECT 42');
 ```
 
+> `ATTACH` binds the remote's table definitions on the client, so a single table definition that cannot be bound fails the whole attachment. If this happens (for example, with an Iceberg catalog using lazy table resolution), see [`ATTACH` Fails to Bind a Remote Table Definition]({% link docs/preview/quack/troubleshooting.md %}#attach-fails-to-bind-a-remote-table-definition).
+
+### Routing a Session with `CONNECT`
+
+Once a remote is attached, the [`CONNECT` statement]({% link docs/preview/sql/statements/connect.md %}) routes the whole session to it, so that subsequent queries execute on the server and their results stream back. This is the recommended way to work with a remote Quack database: you write plain SQL without qualifying every table name with the attached catalog. `DISCONNECT` returns the session to the local database.
+
+{:.codebox-client}
+```sql
+ATTACH 'quack:server.example.com' AS qk (TOKEN '⟨MY_QUACK_TOKEN_01234567890ABCDEF⟩');
+
+CONNECT qk;
+SELECT count(*) FROM events; -- executes on the server, results stream back
+DISCONNECT;
+```
+
+`CONNECT` is not specific to Quack: it points the session at any remote database that supports remote execution. See the [`CONNECT` and `DISCONNECT` statements]({% link docs/preview/sql/statements/connect.md %}) page for details.
+
 ### Authentication
 
 Clients pass the authentication token to the server in one of two ways: a `quack` secret scoped to the server URI or an explicit `TOKEN` option on `ATTACH` / `quack_query`.
@@ -203,7 +225,7 @@ FROM remote_db.query('FROM whoami()');
 │  name   │ provider │ hostname │ region  │     uptime      │            ts_now             │                        meta                        │
 │ varchar │ varchar  │ varchar  │ varchar │    interval     │   timestamp with time zone    │                        json                        │
 ├─────────┼──────────┼──────────┼─────────┼─────────────────┼───────────────────────────────┼────────────────────────────────────────────────────┤
-│ NULL    │ NULL     │ NULL     │ NULL    │ 00:04:56.832456 │ 2026-05-22 15:59:38.631715+02 │ {"duckdb_version":"v1.5.3","platform":"osx_arm64"} │
+│ NULL    │ NULL     │ NULL     │ NULL    │ 00:04:56.832456 │ 2026-05-22 15:59:38.631715+02 │ {"duckdb_version":"v2.0.0","platform":"osx_arm64"} │
 └─────────┴──────────┴──────────┴─────────┴─────────────────┴───────────────────────────────┴────────────────────────────────────────────────────┘
 ```
 
