@@ -1,5 +1,6 @@
 ---
 layout: docu
+railroad: statements/createtrigger.js
 title: CREATE TRIGGER Statement
 ---
 
@@ -66,15 +67,15 @@ Drop a trigger:
 DROP TRIGGER trg_audit ON target;
 ```
 
-## Syntax
+Drop a trigger if it exists:
 
 ```sql
-CREATE [OR REPLACE] TRIGGER ⟨name⟩
-    { BEFORE | AFTER } { INSERT | UPDATE [OF ⟨column⟩, ...] | DELETE } ON ⟨table⟩
-    [REFERENCING { OLD | NEW } TABLE AS ⟨alias⟩ [{ OLD | NEW } TABLE AS ⟨alias⟩]]
-    FOR EACH { ROW | STATEMENT }
-    ⟨triggered_statement⟩;
+DROP TRIGGER IF EXISTS trg_audit ON target;
 ```
+
+## Syntax
+
+<div id="rrdiagram1"></div>
 
 The triggered statement is a single SQL statement, typically a data modification statement such as `INSERT`, `UPDATE`, or `DELETE`.
 
@@ -94,6 +95,10 @@ Statement-level triggers can expose the rows involved in the change as transitio
 
 * `NEW TABLE` contains the inserted or post-update rows and is available for `INSERT` and `UPDATE`.
 * `OLD TABLE` contains the deleted or pre-update rows and is available for `UPDATE` and `DELETE`.
+
+### `OR REPLACE` and `IF NOT EXISTS`
+
+`CREATE OR REPLACE TRIGGER` replaces an existing trigger with the same name. `CREATE TRIGGER IF NOT EXISTS` does nothing if a trigger with the same name already exists on the table. Without either clause, creating a trigger with a name that already exists results in an error. The two clauses cannot be combined.
 
 ### Multiple Triggers
 
@@ -128,9 +133,23 @@ FROM duckdb_triggers();
 
 A trigger is dropped with `DROP TRIGGER`. The table the trigger is attached to must be specified:
 
+<div id="rrdiagram2"></div>
+
+For example:
+
 ```sql
-DROP TRIGGER ⟨name⟩ ON ⟨table⟩;
+DROP TRIGGER trg_audit ON target;
 ```
+
+Dropping a trigger that does not exist results in an error. Use `IF EXISTS` to skip the statement if the trigger does not exist:
+
+```sql
+DROP TRIGGER IF EXISTS trg_audit ON target;
+```
+
+The table must exist even when `IF EXISTS` is specified. The table name can be qualified with a schema name, e.g., `ON my_schema.target`.
+
+Dropping a table also drops all triggers defined on it.
 
 ## Limitations
 
