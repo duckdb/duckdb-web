@@ -4,12 +4,11 @@ layout: docu
 title: Unity Catalog Extension
 ---
 
-The `unity_catalog` extension adds support for the [`Unity Catalog`](https://www.unitycatalog.io/) atop the
-[`Delta Lake`](https://delta.io/) format and [DuckDB Delta extension]({% link docs/preview/core_extensions/delta.md %}).
+The `unity_catalog` extension adds support for the [`Unity Catalog`](https://www.unitycatalog.io/) atop the [`Delta Lake`](https://delta.io/) format and [DuckDB Delta extension]({% link docs/preview/core_extensions/delta.md %}).
 
 The [`delta` extension]({% link docs/preview/core_extensions/delta.md %}) adds support for the [Delta Lake open-source storage format](https://delta.io/). It is built using the [Delta Kernel](https://github.com/delta-incubator/delta-kernel-rs). The extension reads and writes Delta tables, both local and remote.
 
-For implementation details, see the [announcement blog post]({% post_url 2024-06-10-delta %}).
+For implementation details, see the [“Native Delta Lake Support in DuckDB” blog post]({% post_url 2024-06-10-delta %}).
 
 > Note Both extensions are [only supported on given platforms](#supported-duckdb-versions-and-platforms).
 
@@ -33,10 +32,10 @@ CREATE SECRET (
     ENDPOINT '⟨endpoint⟩',
     AWS_REGION '⟨region⟩'
 );
-ATTACH 'my_catalog' AS my_catalog (TYPE unity_catalog, DEFAULT_SCHEMA 'main');
+ATTACH '⟨catalog_name⟩' AS my_catalog (TYPE unity_catalog, DEFAULT_SCHEMA 'main');
 ```
 
-Where `ENDPOINT` is your Unity Catalog REST API endpoint and `TOKEN` is a suitable credential. For Databricks, `ENDPOINT` is your [Workspace URL](https://docs.databricks.com/aws/en/workspace/workspace-details#workspace-instance-names-urls-and-ids) (typically `https://⟨instance⟩.cloud.databricks.com/`) and `TOKEN` can be e.g., a [personal access token](https://docs.databricks.com/aws/en/dev-tools/auth/pat) with `unity-catalog` scope — see [Access Control in Unity Catalog](https://docs.databricks.com/aws/en/data-governance/unity-catalog/access-control/) for the full range of options. For OSS Unity Catalog, see the [OSS Unity Catalog documentation](https://docs.unitycatalog.io/).
+Where `ENDPOINT` is your Unity Catalog REST API endpoint and `TOKEN` is a suitable credential. For Databricks, `ENDPOINT` is your [Workspace URL](https://docs.databricks.com/aws/en/workspace/workspace-details#workspace-instance-names-urls-and-ids) (typically `https://⟨instance⟩.cloud.databricks.com/`{:.language-sql .highlight}) and `TOKEN` can be e.g., a [personal access token](https://docs.databricks.com/aws/en/dev-tools/auth/pat) with `unity-catalog` scope — see [Access Control in Unity Catalog](https://docs.databricks.com/aws/en/data-governance/unity-catalog/access-control/) for the full range of options. For OSS Unity Catalog, see the [OSS Unity Catalog documentation](https://docs.unitycatalog.io/).
 
 ### Attach Options
 
@@ -109,7 +108,7 @@ With the `location` option, the table is an external table at that location. The
 
 ```sql
 CREATE TABLE my_catalog.my_schema.my_external_table (id INTEGER, name VARCHAR)
-WITH (location = 's3://my-bucket/my_external_table');
+WITH (location = 's3://⟨my_bucket⟩/⟨path⟩');
 ```
 
 Both managed and external tables can be partitioned:
@@ -134,7 +133,7 @@ Databricks can plan scans on the server, through the Iceberg REST Catalog API of
 With `USE_IRC_SCAN_PLAN true`, DuckDB sends each scan's filters to the server, reads the files and delete files that it returns, and applies the filters again itself:
 
 ```sql
-ATTACH 'my_catalog' AS my_catalog (
+ATTACH '⟨catalog_name⟩' AS my_catalog (
     TYPE unity_catalog,
     DEFAULT_SCHEMA 'main',
     USE_IRC_SCAN_PLAN true
@@ -147,7 +146,7 @@ ATTACH 'my_catalog' AS my_catalog (
 
 ### Catalog-Managed Commits
 
-Managed tables in Databricks and in Unity Catalog OSS may use catalog-managed commits (Catalog-Coordinated Commits / CCv2), where Unity Catalog coordinates commits rather than writers committing directly to the Delta log. Since v1.5.2 (v1.5.5 for Unity Catalog OSS), DuckDB uses this protocol when the attached table requires it. `INSERT` statements are identical in syntax, but they commit through the catalog-managed write protocol, so Unity Catalog coordinates concurrent writers. For details, see the [blog post]({% post_url 2026-05-07-delta-uc-updates %}#catalog-managed-tables).
+Managed tables in Databricks and in Unity Catalog OSS may use catalog-managed commits (Catalog-Coordinated Commits / CCv2), where Unity Catalog coordinates commits rather than writers committing directly to the Delta log. Since v1.5.2 (v1.5.5 for Unity Catalog OSS), DuckDB uses this protocol when the attached table requires it. `INSERT` statements are identical in syntax, but they commit through the catalog-managed write protocol, so Unity Catalog coordinates concurrent writers. For details, see the [“Delta Grows Up: Writes, Unity Catalog and Time Travel” blog post]({% post_url 2026-05-07-delta-uc-updates %}#catalog-managed-tables).
 
 A managed table that DuckDB [creates](#creating-tables) uses catalog-managed commits. Tables created by other clients, e.g., Spark or the Unity Catalog CLI, are read and written the same way.
 
