@@ -9,9 +9,9 @@ title: Lambda Functions
 > DuckDB 1.3.0 introduced a new setting to configure the lambda syntax.
 >
 > ```sql
-> SET lambda_syntax = 'DEFAULT';
-> SET lambda_syntax = 'ENABLE_SINGLE_ARROW';
-> SET lambda_syntax = 'DISABLE_SINGLE_ARROW';
+> SET lambda_syntax = 'default';
+> SET lambda_syntax = 'enable_single_arrow';
+> SET lambda_syntax = 'disable_single_arrow';
 > ```
 >
 > DuckDB 1.4.0 enables both the old single arrow syntax and the Python-style syntax.

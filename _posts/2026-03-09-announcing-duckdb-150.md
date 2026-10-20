@@ -366,9 +366,9 @@ You can use the `lambda_syntax` configuration option to change this behavior to 
 
 ```sql
 -- Suppress the warning
-SET lambda_syntax = 'ENABLE_SINGLE_ARROW';
+SET lambda_syntax = 'enable_single_arrow';
 -- Turn the deprecation warning into an error
-SET lambda_syntax = 'DISABLE_SINGLE_ARROW';
+SET lambda_syntax = 'disable_single_arrow';
 ```
 
 DuckDB 2.0 will disable the single arrow syntax by default and it will only be available if you opt-in explicitly.

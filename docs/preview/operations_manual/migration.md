@@ -84,7 +84,7 @@ SELECT list_transform([1, 2, 3], lambda x : x + 1);
 If you cannot update your queries yet, you can re-enable the old syntax for the session:
 
 ```sql
-SET lambda_syntax = 'ENABLE_SINGLE_ARROW';
+SET lambda_syntax = 'enable_single_arrow';
 ```
 
 This flag is a temporary bridge: DuckDB v2.1 will remove it and the single arrow syntax entirely.

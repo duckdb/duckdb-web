@@ -313,12 +313,12 @@ INITIAL - 1 - a - 2 - b - 3 - c - 4 - d
 > DuckDB v1.3 also introduces a new setting to configure the lambda syntax.
 >
 > ```sql
-> SET lambda_syntax = 'DEFAULT';
-> SET lambda_syntax = 'ENABLE_SINGLE_ARROW';
-> SET lambda_syntax = 'DISABLE_SINGLE_ARROW';
+> SET lambda_syntax = 'default';
+> SET lambda_syntax = 'enable_single_arrow';
+> SET lambda_syntax = 'disable_single_arrow';
 > ```
 >
-> Currently, `DEFAULT` enables both syntax styles, i.e.,
+> Currently, `default` enables both syntax styles, i.e.,
 > the old single arrow syntax and the Python-style syntax.
 >
 > DuckDB v1.5 is the last release supporting the single arrow syntax without explicitly enabling it.

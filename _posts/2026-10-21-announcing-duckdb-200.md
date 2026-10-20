@@ -159,7 +159,7 @@ In that post, we showed the network throughput over the course of a query with a
 The [`VARIANT` type]({% link docs/preview/sql/data_types/variant.md %}) stores semi-structured, schema-less data such as JSON while keeping the performance of columnar execution.
 So you can think of it as JSON on steroids: a `VARIANT` column can store differently shaped data in every row, but unlike JSON it is not a text format.
 
-[DuckDB 1.5 already introduced `VARIANT`]({% post_url 2026-03-09-announcing-duckdb-150 %}#variant-type), but DuckDB 2.0 fully integrates it. DuckDB 2.0 detects the common structure in your data and “shreds” it, so it compresses well and executes fast. The pipeline works end to end, from shredded execution straight out of storage to shredded `VARIANT` reading and writing for Parquet, backed by a family of [`variant_*` functions]({% link docs/preview/sql/functions/variant.md %}). For example:
+[DuckDB 1.5 already introduced `VARIANT`]({% post_url 2026-03-09-announcing-duckdb-150 %}#variant-type), but DuckDB fully integrates it. DuckDB 2.0 detects the common structure in your data and “shreds” it, so it compresses well and executes fast. The pipeline works end to end, from shredded execution straight out of storage to shredded `VARIANT` reading and writing for Parquet, backed by a family of [`variant_*` functions]({% link docs/preview/sql/functions/variant.md %}). For example:
 
 ```sql
 CREATE TABLE events (payload VARIANT);
@@ -385,7 +385,7 @@ The old single-arrow lambda syntax (`x -> x + 1`) is now disabled by default. Us
 SELECT list_transform([1, 2, 3], lambda x: x + 1);
 ```
 
-You can temporarily re-enable the old syntax with `SET lambda_syntax = 'ENABLE_SINGLE_ARROW';`{:.language-sql .highlight}. Both the flag and the single-arrow syntax will be removed entirely in v2.1.
+You can temporarily re-enable the old syntax with `SET lambda_syntax = 'enable_single_arrow';`{:.language-sql .highlight}. Both the flag and the single-arrow syntax will be removed entirely in v2.1.
 
 #### Amalgamation Builds
 
