@@ -14,6 +14,8 @@ title: ODBC API Overview
 >
 > The latest stable version of the DuckDB ODBC client is {% if site.current_duckdb_odbc_short_version != "" %}{{ site.current_duckdb_odbc_short_version }}{% else %}{{ site.lts_duckdb_odbc_short_version }}{% endif %}.
 
+> This page describes the DuckDB ODBC driver, which lets other applications connect _to DuckDB_. To connect _from DuckDB to other databases_ over ODBC, use the [`odbc` extension]({% link docs/2.0/core_extensions/odbc/overview.md %}).
+
 The ODBC (Open Database Connectivity) is a C-style API that provides access to different flavors of Database Management Systems (DBMSs).
 The ODBC API consists of the Driver Manager (DM) and the ODBC drivers.
 
