@@ -15,13 +15,16 @@ Record every statement that modifies a table in an audit table using a statement
 CREATE TABLE target (id INTEGER, val INTEGER);
 CREATE TABLE audit (id INTEGER, old_val INTEGER, new_val INTEGER);
 
-CREATE TRIGGER trg_audit AFTER UPDATE ON target
-REFERENCING OLD TABLE AS o NEW TABLE AS n
-FOR EACH STATEMENT
-    INSERT INTO audit
-    SELECT n.id, o.val, n.val
-    FROM o
-    JOIN n ON o.id = n.id;
+CREATE TRIGGER trg_audit
+    AFTER UPDATE ON target
+    REFERENCING
+        OLD TABLE AS o
+        NEW TABLE AS n
+    FOR EACH STATEMENT
+        INSERT INTO audit
+        SELECT n.id, o.val, n.val
+        FROM o
+        JOIN n ON o.id = n.id;
 
 INSERT INTO target VALUES (1, 10), (2, 20);
 UPDATE target SET val = val * 10 WHERE id <= 2;
@@ -39,9 +42,10 @@ Fire a trigger once per affected row with a row-level `AFTER` trigger. Row-level
 CREATE TABLE t (id INTEGER);
 CREATE TABLE log (id INTEGER);
 
-CREATE TRIGGER trg_log AFTER INSERT ON t
-FOR EACH ROW
-    INSERT INTO log VALUES (NEW.id);
+CREATE TRIGGER trg_log
+    AFTER INSERT ON t
+    FOR EACH ROW
+        INSERT INTO log VALUES (NEW.id);
 
 INSERT INTO t VALUES (1), (2);
 SELECT * FROM log;
@@ -50,9 +54,10 @@ SELECT * FROM log;
 Restrict a trigger to changes of specific columns with `UPDATE OF`:
 
 ```sql
-CREATE TRIGGER trg_price AFTER UPDATE OF price ON products
-FOR EACH STATEMENT
-    INSERT INTO price_changes DEFAULT VALUES;
+CREATE TRIGGER trg_price
+    AFTER UPDATE OF price ON products
+    FOR EACH STATEMENT
+        INSERT INTO price_changes DEFAULT VALUES;
 ```
 
 Drop a trigger:
@@ -102,9 +107,10 @@ A data modification statement on a table with triggers can still include a [`RET
 CREATE TABLE t (id INTEGER);
 CREATE TABLE log (id INTEGER);
 
-CREATE TRIGGER trg_log AFTER INSERT ON t
-FOR EACH ROW
-    INSERT INTO log VALUES (NEW.id);
+CREATE TRIGGER trg_log
+    AFTER INSERT ON t
+    FOR EACH ROW
+        INSERT INTO log VALUES (NEW.id);
 
 INSERT INTO t VALUES (1), (2) RETURNING id;
 ```

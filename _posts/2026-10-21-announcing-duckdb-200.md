@@ -54,13 +54,18 @@ In this blog post, we showed the network throughput over the course of a query w
 DuckDB v2.0 delivers triggers in full: `BEFORE` and `AFTER` triggers, `FOR EACH ROW` and `FOR EACH STATEMENT`, transition tables via `REFERENCING OLD/NEW TABLE`, multiple triggers per event, `RETURNING` on triggered tables and `DROP TRIGGER`. The classic use case is audit tables, where a trigger records what changed in response to a table modification.
 
 ```sql
-CREATE TRIGGER trg_audit AFTER UPDATE ON target
-REFERENCING OLD TABLE AS o NEW TABLE AS n
-FOR EACH STATEMENT
-    INSERT INTO audit
-    SELECT n.id, o.val, n.val
-    FROM o JOIN n ON o.id = n.id;
+CREATE TRIGGER trg_audit
+    AFTER UPDATE ON target
+    REFERENCING
+        OLD TABLE AS o
+        NEW TABLE AS n
+    FOR EACH STATEMENT
+        INSERT INTO audit
+        SELECT n.id, o.val, n.val
+        FROM o JOIN n ON o.id = n.id;
 ```
+
+For more details, see the [`CREATE TRIGGER` statement page]({% link docs/preview/sql/statements/create_trigger.md %}).
 
 ## Ergonomics and Further Performance Improvements
 
