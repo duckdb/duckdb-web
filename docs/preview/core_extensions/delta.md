@@ -34,7 +34,7 @@ FROM delta_scan('file:///⟨path⟩');
 A Delta table can also be attached as a database. The database holds exactly one table, with the same name as the database, so `my_table` and `my_table.my_table` refer to the same table:
 
 ```sql
-ATTACH 's3://⟨my_bucket⟩/⟨path⟩' AS my_table (TYPE delta);
+ATTACH 'file:///⟨path⟩' AS my_table (TYPE delta);
 SELECT * FROM my_table;
 ```
 
@@ -47,7 +47,7 @@ SELECT *
 FROM delta_scan('s3://⟨my_bucket⟩/⟨path⟩');
 ```
 
-For authenticating to S3 buckets, DuckDB [Secrets]({% link docs/preview/configuration/secrets_manager.md %}) are supported:
+To authenticate, create a [secret]({% link docs/preview/configuration/secrets_manager.md %}):
 
 ```sql
 CREATE SECRET (
@@ -58,7 +58,7 @@ SELECT *
 FROM delta_scan('s3://⟨my_bucket⟩/⟨path⟩');
 ```
 
-To scan public buckets on S3, you may need to pass the correct region by creating a secret containing the region of your public S3 bucket:
+For a public bucket, you may need to set its region in a secret:
 
 ```sql
 CREATE SECRET (
@@ -71,19 +71,20 @@ FROM delta_scan('s3://⟨my_bucket⟩/⟨path⟩');
 
 ### Reading from Azure Blob Storage
 
-To scan a Delta table in an [Azure Blob Storage bucket]({% link docs/preview/core_extensions/azure.md %}#azure-blob-storage), run:
+To scan a Delta table in an [Azure Blob Storage container]({% link docs/preview/core_extensions/azure.md %}#azure-blob-storage), run:
 
 ```sql
 SELECT *
 FROM delta_scan('az://⟨my_container⟩/⟨path⟩');
 ```
 
-For authenticating to Azure Blob Storage, DuckDB [Secrets]({% link docs/preview/configuration/secrets_manager.md %}) are supported:
+To authenticate, create a [secret]({% link docs/preview/configuration/secrets_manager.md %}):
 
 ```sql
 CREATE SECRET (
     TYPE azure,
-    PROVIDER credential_chain
+    PROVIDER credential_chain,
+    ACCOUNT_NAME '⟨storage_account_name⟩'
 );
 SELECT *
 FROM delta_scan('az://⟨my_container⟩/⟨path⟩');
@@ -91,7 +92,7 @@ FROM delta_scan('az://⟨my_container⟩/⟨path⟩');
 
 ### Reading from Google Cloud Storage
 
-To scan a Delta table in a [GCS bucket]({% link docs/preview/core_extensions/httpfs/s3api.md %}), use [HMAC keys](https://console.cloud.google.com/storage/settings;tab=interoperability) and create a secret:
+To scan a Delta table in a GCS bucket through its [S3 API compatibility]({% link docs/preview/core_extensions/httpfs/s3api.md %}), use [HMAC keys](https://console.cloud.google.com/storage/settings;tab=interoperability) and create a secret:
 
 ```sql
 CREATE SECRET (
@@ -120,18 +121,19 @@ Only `CREATE TABLE` needs the full `events.events` name: without the database na
 
 The table can be read and written without attaching it again.
 
-> Warning `ATTACH` does not check that the path holds a Delta table: a path without one attaches as an empty database, so a mistyped path only shows when the table is first read.
+> Warning `ATTACH` does not check that the path holds a Delta table. A mistyped path attaches as an empty database and only fails on the first read.
 
 #### Table Properties
 
 Options in a `WITH` clause are stored as Delta table properties, except `location`, which must match the attached path:
 
 ```sql
-CREATE TABLE events.events (id BIGINT, name VARCHAR)
+ATTACH 's3://⟨my_bucket⟩/⟨other_path⟩' AS audit (TYPE delta);
+CREATE TABLE audit.audit (id BIGINT, name VARCHAR)
 WITH ('delta.enableDeletionVectors' = 'true', 'delta.appendOnly' = 'true');
 ```
 
-Properties that enable a Delta feature, such as deletion vectors, also upgrade the table's protocol as needed. Values can be any constant expression except `NULL`.
+Properties that enable a Delta feature, such as deletion vectors, also upgrade the table's protocol as needed. Values can be any constant expression except `NULL`. Some properties cannot be set at creation, such as `'delta.enableVariantShredding'`.
 
 To create a table with [column mapping](#column-mapping), set `'delta.columnMapping.mode'` to `'name'` or `'id'`.
 
@@ -144,7 +146,7 @@ ATTACH 's3://⟨my_bucket⟩/⟨path⟩' AS my_table (TYPE delta);
 INSERT INTO my_table SELECT * FROM other_table;
 ```
 
-Spark stores the width of a `CHAR(n)` or `VARCHAR(n)` column in the table schema. Since v1.5.6, DuckDB checks it on write: a value longer than `n` characters fails the whole statement.
+Since v1.5.6, if the table schema declares `CHAR(n)` or `VARCHAR(n)` (Spark writes these), a write with a value longer than `n` characters fails as a whole.
 
 ### Time Travel
 
@@ -166,11 +168,16 @@ SELECT * FROM delta_scan('s3://⟨my_bucket⟩/⟨path⟩', version => 5); -- si
 SELECT * FROM delta_scan('s3://⟨my_bucket⟩/⟨path⟩', timestamp => TIMESTAMPTZ '2026-09-01 12:00:00+00');
 ```
 
-A timestamp reads the latest version committed at or before it. A timestamp without a time zone uses the session's `TimeZone`, and one later than `now()` fails. Within a transaction, a timestamp always reads the same version. A version or timestamp given to `ATTACH` is the default for queries on that table, and an `AT` clause overrides it. A table attached at a version or timestamp is read-only.
+* A table attached at a version or timestamp is read-only.
+* A version or timestamp given to `ATTACH` is the default for queries on that table; an `AT` clause overrides it.
+* A version and a timestamp cannot be given together.
+* A timestamp reads the latest version committed at or before it. One later than `now()` or earlier than the table's first commit fails.
+* A timestamp without a time zone uses the session's `TimeZone`.
+* Within a transaction, a timestamp always reads the same version.
 
 ### Checkpointing
 
-Since v1.5.1, `CHECKPOINT` compacts the Delta log of an attached table into a checkpoint file:
+Since v1.5.1, `CHECKPOINT` compacts the Delta log of an attached table into a checkpoint file, which speeds up reads of tables with long logs:
 
 ```sql
 ATTACH '⟨path⟩' AS my_table (TYPE delta);
@@ -179,7 +186,7 @@ CHECKPOINT my_table;
 
 ### Idempotent Appends
 
-The `delta` extension exposes an idempotent-append API that uses Delta's per-application transaction versions to give exactly-once semantics: an append tagged with an `app_id` and a version is only committed if the table's currently recorded version for that `app_id` matches the expected previous version. This lets a producer safely retry a batch without duplicating it.
+To retry a batch without writing it twice, tag the append with an application ID and a version. DuckDB commits the append only if the table's last recorded version for that ID is the one you expect. This uses Delta's per-application transaction versions.
 
 Within a transaction, tag the append with `delta_set_transaction_version(⟨table⟩, ⟨app_id⟩, ⟨new_version⟩, ⟨expected_previous_version⟩)`{:.language-sql .highlight}:
 
@@ -192,7 +199,7 @@ INSERT INTO my_table VALUES (1);
 COMMIT;
 ```
 
-On `COMMIT`, the version is compared-and-swapped: if another process advanced the version for `my_app_id` in the meantime, the commit fails. Aborting the transaction leaves the version unchanged. Read the current version with `delta_get_transaction_version(⟨table⟩, ⟨app_id⟩)`{:.language-sql .highlight}, which returns `NULL` if no version has been recorded yet.
+If another process committed a different version for `my_app_id` first, `COMMIT` fails. A rolled-back transaction leaves the version unchanged. Read the current version with `delta_get_transaction_version(⟨table⟩, ⟨app_id⟩)`{:.language-sql .highlight}, which returns `NULL` if no version has been recorded yet.
 
 ### Attach Options
 
@@ -238,14 +245,14 @@ FROM delta_list_files('file:///⟨path⟩', version => 3, delete_count => true);
 
 ### Reading Domain Metadata
 
-Since v1.5.1, `delta_domain_metadata` returns the [domain metadata](https://github.com/delta-io/delta/blob/master/PROTOCOL.md#domain-metadata) of a table, one row per domain, with the columns `domain` and `configuration`, both `VARCHAR`. It also takes a `version` parameter:
+Since v1.5.1, `delta_domain_metadata` returns one row per [domain](https://github.com/delta-io/delta/blob/master/PROTOCOL.md#domain-metadata) of a table, with the `VARCHAR` columns `domain` and `configuration`. Pass `version => ⟨version⟩`{:.language-sql .highlight} for an earlier version:
 
 ```sql
 SELECT domain, configuration
 FROM delta_domain_metadata('file:///⟨path⟩');
 ```
 
-For an attached table, the same pairs are the `tags` of the table in `duckdb_tables()`.
+For an attached table, `duckdb_tables()` shows the same pairs in its `tags` column.
 
 ### Column Mapping
 
@@ -256,21 +263,17 @@ The protocol requires every data file of an `id`-mode table to carry Parquet fie
 * `strict`: fail with an error that names the file.
 * `lenient`: match the file's columns by physical name, or failing that by logical name, and log a warning under the `delta.ColumnMapping` log type. The names must cover every column in the file, otherwise the read fails.
 
-> Warning The default changed from `lenient` in DuckDB v1.5 to `strict` in v2.0. To read such files as v1.5 did, set:
-
-```sql
-SET delta_column_mapping_policy = 'lenient';
-```
+> Warning The default changed from `lenient` in DuckDB v1.5 to `strict` in v2.0. To read such files as v1.5 did, run `SET delta_column_mapping_policy = 'lenient';`{:.language-sql .highlight}.
 
 ### VARIANT Columns
 
-Delta `variant` columns are read as DuckDB `VARIANT`, whether their files are shredded or not.
+Delta `variant` columns are read as DuckDB `VARIANT`, whether their files are shredded or not, and top-level `VARIANT` columns can be appended to.
 
-> New The following features are introduced in DuckDB 2.0.
+> New The following are introduced in DuckDB 2.0.
 
-A query that reads one field of a `VARIANT` or `STRUCT` column, such as `SELECT v.a`, reads only that field from the Parquet files, so on a shredded table it skips the columns of the other fields. A column that contains a `TIMESTAMP WITH TIME ZONE` anywhere is still read whole.
-
-`CREATE TABLE` accepts `VARIANT` columns. When writing, DuckDB shreds `VARIANT` values only if the table sets `'delta.enableVariantShredding'` to `'true'`, as the Delta protocol requires; otherwise it writes them unshredded. `CREATE TABLE` cannot set this property, so a table created by DuckDB holds unshredded files. Only top-level `VARIANT` columns can be written: an `INSERT` into a table with a `VARIANT` inside a struct, list or map fails.
+* A query that reads one field of a `VARIANT` or `STRUCT` column, such as `SELECT v.a`, reads only that field from the Parquet files, so on a shredded table it skips the columns of the other fields. This does not apply to a column with a `TIMESTAMP WITH TIME ZONE` field at any depth: DuckDB reads all of it.
+* `CREATE TABLE` accepts `VARIANT` columns.
+* When writing, DuckDB shreds `VARIANT` values only if the table sets `'delta.enableVariantShredding'` to `'true'`, as the Delta protocol requires; otherwise it writes them unshredded. Because `CREATE TABLE` cannot set this property, a table created by DuckDB holds unshredded files.
 
 ### Catalog-Managed Tables
 
@@ -278,9 +281,7 @@ A Delta table with the `catalogManaged` feature, such as a Unity Catalog managed
 
 ### Credential Chains in Delta
 
-DuckDB Delta uses `delta-kernel-rs` and `object_store` for some network operations. These systems have a different ordering (and inclusion defaults) for credential chains. If your system has multiple credential sources available, e.g., both Service Principal via the environment and a CLI-based option, credential loading behavior may be inconsistent.
-
-To avoid ambiguities, we recommend that you configure exactly one available credential type in your production chain secrets.
+For some network operations, the `delta` extension uses `delta-kernel-rs` and `object_store`, which try credential sources in a different order than DuckDB and include different ones by default. If more than one source is available, e.g., a service principal in the environment and the Azure CLI, credential loading may be inconsistent. Configure exactly one credential type in the chain of your secret.
 
 Since v1.5.6, the `delta` extension supports [Azure workload identity](https://learn.microsoft.com/en-us/entra/workload-id/workload-identities-overview) (for example on AKS): name `workload_identity` in the `CHAIN` of an [Azure `credential_chain` secret]({% link docs/preview/core_extensions/azure.md %}#credential_chain-provider).
 
@@ -306,9 +307,8 @@ The `delta` extension supports:
 * scanning tables with deletion vectors
 * [column mapping](#column-mapping) in `name` and `id` mode
 * [time travel](#time-travel) by version or timestamp
-* all primitive types
+* all primitive types except intervals
 * nested types (structs, lists and maps)
-* VARIANT type
 * creating tables (`CREATE TABLE`)
 * blind appends (`INSERT INTO`), with file statistics for data skipping
 * [idempotent appends](#idempotent-appends)
@@ -319,17 +319,23 @@ The `delta` extension supports:
 
 * `CREATE OR REPLACE TABLE` and `CREATE TABLE ... AS SELECT` are not supported. Create the table, then `INSERT` into it.
 * `UPDATE`, `DELETE`, `MERGE INTO`, `ALTER TABLE` and `DROP TABLE` are not supported, nor are `RETURNING` and `ON CONFLICT` clauses on `INSERT`.
-* `CREATE TABLE` does not support constraints (including `NOT NULL`), `DEFAULT` values, generated columns, `SORTED BY`, column types without a Delta equivalent such as unsigned integers or a table whose columns are all partition columns.
+* `CREATE TABLE` does not support:
+    * constraints, including `NOT NULL`
+    * `DEFAULT` values and generated columns
+    * `SORTED BY`
+    * column types without a Delta equivalent, such as `TIME` or unsigned integers
+    * a table whose columns are all partition columns
 * A table created with [column mapping](#column-mapping) cannot have nested or partition columns, because DuckDB cannot write to such tables yet.
 * Tables with an interval (`interval year to month` or `interval day to second`), `geometry` or `geography` column cannot be read.
-* Writing to a table with the `allowColumnDefaults` writer feature is not supported, even when the table declares no default yet. DuckDB does not apply Delta column defaults, so it refuses the write rather than storing `NULL` in their place. Reading such a table works.
+* Writing to a table with the `allowColumnDefaults` writer feature fails, even if no column has a default yet: DuckDB cannot fill in Delta defaults and does not write `NULL` instead. Reading works.
 * Writing to a table that declares a `CHAR(n)` or `VARCHAR(n)` width on a nested field, such as `ARRAY<VARCHAR(5)>`, is not supported.
+* Writing to a table with a `VARIANT` inside a struct, list or map is not supported.
 
 ## Supported Platforms
 
 The `delta` extension currently only supports the following platforms:
 
-* Linux AMD64 (x86_64 and ARM64): `linux_amd64` and `linux_arm64`
+* Linux (x86_64 and ARM64): `linux_amd64` and `linux_arm64`
 * macOS Intel and Apple Silicon: `osx_amd64` and `osx_arm64`
 * Windows AMD64: `windows_amd64`
 
@@ -337,17 +343,18 @@ Support for the [other DuckDB platforms]({% link docs/preview/extensions/extensi
 
 ## Using delta-rs with DuckDB
 
-In this example, we create a Delta table with the `delta-rs` Python binding, then we use the `delta` extension of DuckDB to read it. We also showcase how to do other read operations with DuckDB, like reading the change data feed using the Arrow zero-copy integration. This operation can also be lazy if reading bigger data by using [Arrow Datasets](https://delta-io.github.io/delta-rs/integrations/delta-lake-arrow/).
+This example writes a Delta table with the `delta-rs` Python package and reads it with DuckDB. It then reads the table's change data feed through the Arrow zero-copy integration. For larger data, use [Arrow Datasets](https://delta-io.github.io/delta-rs/integrations/delta-lake-arrow/) to read it lazily.
 
 <!-- markdownlint-disable MD040 MD046 -->
 
 <details markdown='1'>
 <summary markdown='span'>
-Click here to see the full example.
+Full example
 </summary>
 
 ```python
 import deltalake as dl
+import duckdb
 import pyarrow as pa
 
 # Create a delta table and read it with DuckDB Delta extension
@@ -359,15 +366,11 @@ dl.write_deltalake(
     })
 )
 with duckdb.connect() as conn:
-    conn.execute("""
-        INSTALL delta;
-        LOAD delta;
-    """)
     conn.sql("""
         SELECT * FROM delta_scan('tmp/some_table')
     """).show()
 
-# Append some data and read the data change feed using the PyArrow integration
+# Append some data and read the change data feed using the PyArrow integration
 dl.write_deltalake(
     "tmp/some_table",
     pa.table({
