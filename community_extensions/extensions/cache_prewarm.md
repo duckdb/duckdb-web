@@ -55,8 +55,8 @@ docs:
 
 extension_star_count: 11
 extension_star_count_pretty: 11
-extension_download_count: 793
-extension_download_count_pretty: 793
+extension_download_count: 852
+extension_download_count_pretty: 852
 image: '/images/community_extensions/social_preview/preview_community_extension_cache_prewarm.png'
 layout: community_extension_doc
 ---

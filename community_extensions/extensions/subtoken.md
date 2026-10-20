@@ -403,8 +403,8 @@ docs:
 
 extension_star_count: 0
 extension_star_count_pretty: 0
-extension_download_count: 733
-extension_download_count_pretty: 733
+extension_download_count: 737
+extension_download_count_pretty: 737
 image: '/images/community_extensions/social_preview/preview_community_extension_subtoken.png'
 layout: community_extension_doc
 ---
