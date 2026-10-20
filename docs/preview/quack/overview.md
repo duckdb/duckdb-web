@@ -153,6 +153,8 @@ The attached catalog also exposes a `query` table macro for ad-hoc SQL scoped to
 FROM remote_db.query('SELECT 42');
 ```
 
+> Note `ATTACH` binds the remote's table definitions on the client, so a single table definition that cannot be bound fails the whole attachment. If this happens (for example, with an Iceberg catalog using lazy table resolution), see [`ATTACH` Fails to Bind a Remote Table Definition]({% link docs/preview/quack/troubleshooting.md %}#attach-fails-to-bind-a-remote-table-definition).
+
 ### Authentication
 
 Clients pass the authentication token to the server in one of two ways: a `quack` secret scoped to the server URI or an explicit `TOKEN` option on `ATTACH` / `quack_query`.
