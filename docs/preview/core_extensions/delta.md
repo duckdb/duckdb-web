@@ -4,7 +4,7 @@ layout: docu
 title: Delta Extension
 ---
 
-The `delta` extension adds support for the [Delta Lake open-source storage format](https://delta.io/). It is built using the [Delta Kernel](https://github.com/delta-io/delta-kernel-rs). The extension offers **read and write support** for Delta tables, both local and remote.
+The `delta` extension adds support for the [Delta Lake open-source storage format](https://delta.io/). It is built using the [Delta Kernel](https://github.com/delta-io/delta-kernel-rs). The extension reads Delta tables, local and remote, and writes them: it can create tables and append to them.
 
 For implementation details, see the [“Native Delta Lake Support in DuckDB” blog post]({% post_url 2024-06-10-delta %}).
 
@@ -283,7 +283,7 @@ A Delta table with the `catalogManaged` feature, such as a Unity Catalog managed
 
 For some network operations, the `delta` extension uses `delta-kernel-rs` and `object_store`, which try credential sources in a different order than DuckDB and include different ones by default. If more than one source is available, e.g., a service principal in the environment and the Azure CLI, credential loading may be inconsistent. Configure exactly one credential type in the chain of your secret.
 
-Since v1.5.6, the `delta` extension supports [Azure workload identity](https://learn.microsoft.com/en-us/entra/workload-id/workload-identities-overview) (for example on AKS): name `workload_identity` in the `CHAIN` of an [Azure `credential_chain` secret]({% link docs/preview/core_extensions/azure.md %}#credential_chain-provider).
+Since v1.5.6, the `delta` extension supports [Azure workload identity](https://learn.microsoft.com/en-us/entra/workload-id/workload-identities-overview) (for example on AKS): name `workload_identity` in the `CHAIN` of an [Azure `credential_chain` secret]({% link docs/preview/core_extensions/azure.md %}#credential_chain-provider), and set the `AZURE_FEDERATED_TOKEN_FILE`, `AZURE_CLIENT_ID` and `AZURE_TENANT_ID` environment variables.
 
 ## Settings
 
