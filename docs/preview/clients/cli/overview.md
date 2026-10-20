@@ -224,10 +224,10 @@ Note that the duck head is built with Unicode characters and does not work in al
 ```
 
 Or a simpler version without colours:
+
 ```sql
 .prompt "{sql:select current_database()} ⚫◗ "
 ```
-
 
 To invoke that file on initialization, use this command:
 
@@ -239,10 +239,9 @@ This outputs:
 
 ```text
 -- Loading resources from prompt.sql
-v⟨version⟩ ⟨git_hash⟩
+DuckDB v{{ site.next_major_duckdb_version }} ({{ site.current_duckdb_codename }})
 Enter ".help" for usage hints.
-Connected to a transient in-memory database.
-Use ".open FILENAME" to reopen on a persistent database.
+«memory» D
 ⚫◗
 ```
 
