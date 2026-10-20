@@ -19,13 +19,13 @@ DuckDB implements a custom C API modeled somewhat following the SQLite C API. Th
 
 We also provide a SQLite API wrapper which means that if your application is programmed against the SQLite C API, you can re-link to DuckDB and it should continue working. See the [`shell_helpers.cpp`](https://github.com/duckdb/duckdb/tree/main/tools/shell/shell_helpers.cpp) file in our source repository for more information.
 
-## Stable C API and C++ API
+## C API v2
 
-> New DuckDB 2.0 introduced a reworked C API with a stable, versioned ABI, together with a C++ API layered on top of it.
+> Warning The C API v2 is not yet stable. Its interface may change in upcoming releases.
 
-The C API now has a stable, versioned ABI: an extension built against a given DuckDB version keeps working with later releases without recompilation. DuckDB 2.0 also adds a C++ API layered on top of the C API for extension development.
+DuckDB 2.0 ships a revamped C API, which is considerably more powerful than its predecessor. Among others, it exposes components such as file systems and table functions to extensions.
 
-If you maintain an extension built against the previous, unstable C++ API, you must rebuild it for DuckDB 2.0. For details, see the [migration guide]({% link docs/2.0/operations_manual/migration.md %}#c-and-c-extension-api) and [Versioning of Extensions]({% link docs/2.0/extensions/versioning_of_extensions.md %}).
+Before marking the C API v2 as stable, we would like to test it in the field. Please give it a try and [send us your feedback](https://github.com/duckdb/duckdb/discussions/27525)!
 
 ## Installation
 

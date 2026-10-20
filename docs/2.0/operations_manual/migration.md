@@ -114,11 +114,10 @@ SET enable_legacy_parser = true;
 
 > This section is tracking the following pull request: [duckdb#22194](https://github.com/duckdb/duckdb/pull/22194), reported in issue [duckdb#7675](https://github.com/duckdb/duckdb/issues/7675).
 
-### C and C++ Extension API
+### C API v2
 
-DuckDB 2.0.0 shipped a reworked, versioned C API with a stable ABI, along with a C++ API layered on top of it.
-Extensions built against the previous unstable C++ API must be rebuilt for v2.0.0.
-If you depend on third-party extensions, confirm that a v2.0.0-compatible build is available before upgrading.
+DuckDB 2.0.0 ships a revamped [C API]({% link docs/2.0/clients/c/overview.md %}#c-api-v2), which is considerably more powerful than its predecessor and exposes components such as file systems and table functions to extensions.
+The C API v2 is not yet stable: its interface may change in upcoming releases.
 For background on extension stability levels, see [Versioning of Extensions]({% link docs/2.0/extensions/versioning_of_extensions.md %}); for the C API reference, see the [C API page]({% link docs/2.0/clients/c/api.md %}).
 
 > This section is tracking the following pull requests: [duckdb#24702](https://github.com/duckdb/duckdb/pull/24702), [duckdb#24135](https://github.com/duckdb/duckdb/pull/24135), [duckdb#24435](https://github.com/duckdb/duckdb/pull/24435).
@@ -147,7 +146,7 @@ The [What's New in the Docs for 2.0 page]({% link docs/2.0/whats_new_in_the_docs
 * Optimizer and engine improvements that speed up existing queries, including on Windows
 * Self-hostable [extension repositories]({% link docs/2.0/extensions/extension_distribution.md %}) for signing and distributing your own extensions
 
-Several of the headline v2.0.0 changes are covered in [Breaking Changes](#breaking-changes) above: the new default [storage format](#storage-format), the [PEG-based SQL parser](#sql-parser), the reworked [C and C++ extension API](#c-and-c-extension-api), and the native timezone, calendar and collation support left after [ICU was removed from the core build](#icu-removed-from-the-core-build).
+Several of the headline v2.0.0 changes are covered in [Breaking Changes](#breaking-changes) above: the new default [storage format](#storage-format), the [PEG-based SQL parser](#sql-parser), the revamped [C API v2](#c-api-v2), and the native timezone, calendar and collation support left after [ICU was removed from the core build](#icu-removed-from-the-core-build).
 
 ## See Also
 
