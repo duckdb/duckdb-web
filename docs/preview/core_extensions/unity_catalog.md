@@ -47,7 +47,7 @@ When attaching a Unity Catalog catalog, you can pass the following options to `A
 | `SECRET` | `VARCHAR` | unnamed secret | Name of the `unity_catalog` secret to use. Without it, the unnamed `unity_catalog` secret is used. |
 | `DEFAULT_SCHEMA` | `VARCHAR` | detected | Schema that unqualified table names resolve to. Without it, DuckDB asks the server for the workspace's default namespace. |
 | `READ_ONLY` | `BOOLEAN` | `false` | Attach the catalog in read-only mode. |
-| `USE_IRC_SCAN_PLAN` | `BOOLEAN` | `false` | Plan scans on the server; see [Server-Side Scan Planning](#server-side-scan-planning). |
+| `USE_IRC_SCAN_PLAN` | `BOOLEAN` | `false` | Plan scans on the server (Databricks only); see [Server-Side Scan Planning](#server-side-scan-planning). |
 
 > Note Only Databricks reports a default namespace. When you attach a Unity Catalog OSS catalog, always set `DEFAULT_SCHEMA`: without it, queries against the catalog fail, even with fully qualified table names.
 
@@ -129,7 +129,9 @@ For the forms and options that `CREATE TABLE` does not support, see [Limitations
 
 > New This feature is introduced in DuckDB 2.0.
 
-With `USE_IRC_SCAN_PLAN true`, DuckDB asks Unity Catalog to plan each scan through its Iceberg REST Catalog API. DuckDB sends the query's filters, the server prunes the list of files to read and returns it with the table's delete files, and DuckDB reads these files and applies the filters again itself:
+Databricks can plan scans on the server, through the Iceberg REST Catalog API of Unity Catalog. The server prunes the files to read with its own metadata, which filters more effectively than DuckDB's file skipping on the Delta log, so a selective query reads fewer files. Unity Catalog OSS does not offer this API.
+
+With `USE_IRC_SCAN_PLAN true`, DuckDB sends each scan's filters to the server, reads the files and delete files that it returns, and applies the filters again itself:
 
 ```sql
 ATTACH 'my_catalog' AS my_catalog (
