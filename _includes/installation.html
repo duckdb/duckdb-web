@@ -518,6 +518,7 @@ dependencies {
 </div>
 </div>
 
+{%- if site.next_major_duckdb_java_version != "" -%}
 <div class="preview"
     data-environment="java"
     data-docs="{% link docs/preview/clients/java/overview.md %}">
@@ -583,6 +584,7 @@ dependencies {
 
 </div>
 </div>
+{%- endif -%}
 
 
 {%- if site.current_duckdb_node_neo_version != "" -%}
@@ -607,6 +609,18 @@ npm install @duckdb/node-api@{{ site.lts_duckdb_node_neo_version }}
 
 </div>
 
+{%- if site.next_major_duckdb_node_neo_version != "" -%}
+<div class="preview"
+    data-environment="nodejs"
+    data-docs="{% link docs/preview/clients/node_neo/overview.md %}">
+
+{%- highlight bash -%}
+npm install @duckdb/node-api@{{ site.next_major_duckdb_node_neo_version }}
+{%- endhighlight -%}
+
+</div>
+{%- endif -%}
+
 {%- if site.current_duckdb_wasm_version != "" -%}
 <div class="current"
     data-environment="wasm"
@@ -628,6 +642,18 @@ npm install @duckdb/duckdb-wasm@{{ site.lts_duckdb_wasm_version }}
 {%- endhighlight -%}
 
 </div>
+
+{%- if site.next_major_duckdb_wasm_version != "" -%}
+<div class="preview"
+    data-environment="wasm"
+    data-docs="{% link docs/preview/clients/wasm/overview.md %}">
+
+{%- highlight bash -%}
+npm install @duckdb/duckdb-wasm@{{ site.next_major_duckdb_wasm_version }}
+{%- endhighlight -%}
+
+</div>
+{%- endif -%}
 
 {%- if site.current_duckdb_rust_version != "" -%}
 <div class="current"
@@ -651,6 +677,18 @@ cargo add duckdb@{{ site.lts_duckdb_rust_version }} --features bundled
 
 </div>
 
+{%- if site.next_major_duckdb_rust_version != "" -%}
+<div class="preview"
+    data-environment="rust"
+    data-docs="{% link docs/preview/clients/rust/overview.md %}">
+
+{%- highlight bash -%}
+cargo add duckdb@{{ site.next_major_duckdb_rust_version }} --features bundled
+{%- endhighlight -%}
+
+</div>
+{%- endif -%}
+
 {%- if site.current_duckdb_go_version != "" -%}
 <div class="current"
     data-environment="go"
@@ -672,6 +710,18 @@ go get github.com/duckdb/duckdb-go/v2@{{ site.lts_duckdb_go_tag }}
 {%- endhighlight -%}
 
 </div>
+
+{%- if site.next_major_duckdb_go_version != "" -%}
+<div class="preview"
+    data-environment="go"
+    data-docs="{% link docs/preview/clients/go/overview.md %}">
+
+{%- highlight bash -%}
+go get github.com/duckdb/duckdb-go/v2@{{ site.next_major_duckdb_go_version }}
+{%- endhighlight -%}
+
+</div>
+{%- endif -%}
 
 
 
@@ -881,6 +931,7 @@ go get github.com/duckdb/duckdb-go/v2@{{ site.lts_duckdb_go_tag }}
 
 </div>
 
+{%- if site.next_major_duckdb_odbc_version != "" -%}
 <div class="preview"
     data-platform="linux"
     data-environment="odbc"
@@ -921,5 +972,6 @@ go get github.com/duckdb/duckdb-go/v2@{{ site.lts_duckdb_go_tag }}
 {%- include checksum_inline.html environment="odbc" platform="windows" architecture="arm64" version="next_major" -%}
 
 </div>
+{%- endif -%}
 
 </div>
