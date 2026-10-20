@@ -19,7 +19,7 @@ You need DuckDB with the [`iceberg` extension]({% link docs/current/core_extensi
 
 A catalog is needed because the files on their own cannot tell you which version of the table is current. An Iceberg table writes a new `metadata.json` on every change and never overwrites the old one. The catalog holds the one piece of mutable state: a pointer to the current metadata file. When you query the table, DuckDB asks the catalog for that pointer first, then follows the tree of files down from there.
 
-For this post, we run a catalog locally with the [Iceberg REST catalog fixture](https://iceberg.apache.org/), a small reference catalog that the Iceberg project publishes as a Docker image. It is the quickest catalog to set up: it runs from a single image, needs no Cloud account and no authentication, and keeps everything on local disk where you can open the files yourself. 
+For this post, we run a catalog locally with the [Iceberg REST catalog fixture](https://iceberg.apache.org/), a small reference catalog that the Iceberg project publishes as a Docker image. It is the quickest catalog to set up: it runs from a single image, needs no Cloud account and no authentication, and keeps everything on local disk where you can open the files yourself.
 
 We start it like this:
 
@@ -141,7 +141,7 @@ FROM iceberg_load_table_response(lake.demo.services);
 └────────────────────────────────────────────────────────────────────────────────────────────┘
 ```
 
-The file name starts with `00003` because this is the fourth version of the metadata, counting from `00000` when the table was created. 
+The file name starts with `00003` because this is the fourth version of the metadata, counting from `00000` when the table was created.
 
 It is a JSON document, so [`read_json`]({% link docs/current/data/json/loading_json.md %}) can read it. We store the location in a [variable]({% link docs/current/sql/statements/set_variable.md %}) to keep the queries short:
 
@@ -319,7 +319,7 @@ ORDER BY file;
 └─────────────┴──────────────────────────────────────────────────────────────────────────────┴─────────────┴─────────────┘
 ```
 
-These bounds are what DuckDB uses to skip files when you filter on a column that is not the partition column. A query with `WHERE service_id > 10000` only has to open the file for October 4, because the bounds of the other three files rule them out. 
+These bounds are what DuckDB uses to skip files when you filter on a column that is not the partition column. A query with `WHERE service_id > 10000` only has to open the file for October 4, because the bounds of the other three files rule them out.
 
 The ranges for the first three days overlap almost completely, because the rows were spread over the days round-robin. Data that is written in the order of a commonly filtered column gets narrower bounds and more skipping.
 
@@ -377,7 +377,7 @@ LIMIT 5;
 └──────────────────────────────────────────────────────────────────────┴───────┘
 ```
 
-This is how the extension implements `DELETE` and `UPDATE`: it leaves the data file alone and records the positions of the deleted rows, a strategy called [merge-on-read]({% link docs/current/core_extensions/iceberg/writing_to_iceberg.md %}#limitations-for-update-and-delete). 
+This is how the extension implements `DELETE` and `UPDATE`: it leaves the data file alone and records the positions of the deleted rows, a strategy called [merge-on-read]({% link docs/current/core_extensions/iceberg/writing_to_iceberg.md %}#limitations-for-update-and-delete).
 
 Every reader then has to combine the two files to get the correct rows. Writes are cheap, and reads pay a small cost, which grows with the number of delete files. We set `hive_partitioning = false` because the `service_date=...` directory would otherwise be added as an extra column.
 

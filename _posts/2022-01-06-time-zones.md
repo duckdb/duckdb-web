@@ -8,10 +8,10 @@ excerpt: The DuckDB ICU extension now provides time zone support.
 tag: extensions
 ---
 
-Time zone support is a common request for temporal analytics, but the rules are complex and somewhat arbitrary. 
+Time zone support is a common request for temporal analytics, but the rules are complex and somewhat arbitrary.
 The most well supported library for locale-specific operations is the [International Components for Unicode (ICU)](https://icu.unicode.org).
 DuckDB already provided collated string comparisons using ICU via an extension (to avoid dependencies),
-and we have now connected the existing ICU calendar and time zone functions to the main code 
+and we have now connected the existing ICU calendar and time zone functions to the main code
 via the new `TIMESTAMP WITH TIME ZONE` (or `TIMESTAMPTZ` for short) data type. The ICU extension is pre-bundled in DuckDB's Python client and can be optionally installed in the remaining clients.
 
 In this post, we will describe how time works in DuckDB and what time zone functionality has been added.
@@ -83,7 +83,7 @@ The most confusing thing about temporal binning is that there is more than one w
 and it is not always obvious what binning should be used.
 For example, what I mean by “today” is a bin of instants often determined by where I live.
 Every instant that is part of my “today” goes in that bin.
-But notice that I qualified “today” with “where I live”, 
+But notice that I qualified “today” with “where I live”,
 and that qualification determines what binning system is being used.
 But “today” could also be determined by “where the events happened”,
 which would require a different binning to be applied.
@@ -104,7 +104,7 @@ To distinguish the two hours, we needed to include another bin containing the of
      />
 
 As this example shows, in order to bin the instants correctly, we need to know the binning rules that apply.
-It also shows that we can't just use the built in binning operations, 
+It also shows that we can't just use the built in binning operations,
 because they don't understand daylight savings time.
 
 ### Naïve Timestamps
@@ -127,7 +127,7 @@ The DuckDB `VARCHAR` cast operation parses these offsets correctly and will gene
 The SQL standard defines temporal data types qualified by `WITH TIME ZONE`.
 This terminology is confusing because it seems to imply that the time zone will be stored with the value,
 but what it really means is “bin this value using the session's `TimeZone` setting”.
-Thus a `TIMESTAMPTZ` column also stores instants, 
+Thus a `TIMESTAMPTZ` column also stores instants,
 but expresses a “hint” that it should use a specific binning system.
 
 There are a number of operations that can be performed on instants without a binning system:
@@ -175,9 +175,9 @@ TimeZone    Europe/Amsterdam    The current time zone   VARCHAR
 SET TimeZone = 'America/Los_Angeles';
 
 -- Emulate Postgres' time zone table
-SELECT name, abbrev, utc_offset 
-FROM pg_timezone_names() 
-ORDER BY 1 
+SELECT name, abbrev, utc_offset
+FROM pg_timezone_names()
+ORDER BY 1
 LIMIT 5;
 ```
 
@@ -206,17 +206,17 @@ the ICU extension can define additional functions with bindings to `TIMESTAMPTZ`
 * `DATE_SUB` – Count the number of complete parts between two timestamp
 * `DATE_TRUNC` – Truncate a timestamp to the given precision
 * `LAST_DAY` – Returns the last day of the month
-* `MAKE_TIMESTAMPTZ` – Constructs a `TIMESTAMPTZ` from parts, including an optional final time zone specifier. 
+* `MAKE_TIMESTAMPTZ` – Constructs a `TIMESTAMPTZ` from parts, including an optional final time zone specifier.
 
-We have not implemented these functions for `TIMETZ` because this type has limited utility, 
+We have not implemented these functions for `TIMETZ` because this type has limited utility,
 but it would not be difficult to add in the future.
-We have also not implemented string formatting/casting to `VARCHAR` 
-because the type casting system is not yet extensible, 
+We have also not implemented string formatting/casting to `VARCHAR`
+because the type casting system is not yet extensible,
 and the current [ICU build](https://github.com/Mytherin/minimal-icu-collation) we are using does not embed this data.
 
 ### ICU Calendar Support
 
-ICU can also perform binning operations for some non-Gregorian calendars. 
+ICU can also perform binning operations for some non-Gregorian calendars.
 We have added support for these calendars via a `Calendar` setting and the `icu_calendar_names` table function:
 
 ```sql

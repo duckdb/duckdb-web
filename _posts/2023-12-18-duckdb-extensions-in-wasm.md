@@ -114,7 +114,7 @@ Both components in the figure run within the web browser.
      />
 
 When you load DuckDB-Wasm in your browser, there are two components that will be set up:
-(1) A main-thread wrapper library that acts as a bridge between users or code using DuckDB-Wasm and drives the background component. 
+(1) A main-thread wrapper library that acts as a bridge between users or code using DuckDB-Wasm and drives the background component.
 (2) A DuckDB engine used to execute queries.
 This component lives in a Web Worker and communicates with the main thread component via messages. This component has a JavaScript layer that handles messages and the original DuckDB C++ logic compiled down to a single WebAssembly file.
 

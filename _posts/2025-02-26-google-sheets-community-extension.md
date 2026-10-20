@@ -20,7 +20,7 @@ Is anything more polarizing for data folks than spreadsheets?
 Wait, don't answer that, we don't have time to talk about leading and trailing commas again...
 
 The fact is that spreadsheets are everywhere.
-It is estimated that there are over [750 million spreadsheet users](https://thenewstack.io/microsoft-excel-becomes-a-programming-language/), compared to just [20](https://www.jetbrains.com/lp/devecosystem-data-playground/#global_population) to [30 million programmers](https://www.statista.com/statistics/627312/worldwide-developer-population/). 
+It is estimated that there are over [750 million spreadsheet users](https://thenewstack.io/microsoft-excel-becomes-a-programming-language/), compared to just [20](https://www.jetbrains.com/lp/devecosystem-data-playground/#global_population) to [30 million programmers](https://www.statista.com/statistics/627312/worldwide-developer-population/).
 That includes all languages put together!
 
 There are a number of ways that using a spreadsheet can improve a data workflow.
@@ -156,7 +156,7 @@ TO 'https://docs.google.com/spreadsheets/d/...?gid=123#gid=123&range=A2:Z10000' 
 );
 ```
 
-The `header` boolean parameter can also be used to determine whether the column names should be written out or not. 
+The `header` boolean parameter can also be used to determine whether the column names should be written out or not.
 
 ### Overwriting or Appending
 

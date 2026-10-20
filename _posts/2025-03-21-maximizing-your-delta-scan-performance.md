@@ -333,7 +333,7 @@ Now, as a baseline, we will rerun the same query, but now with partition informa
 ATTACH './⟨path_to_partitioned_directory⟩/lineitem_sf10' AS lineitem (
     TYPE delta,
     PUSHDOWN_PARTITION_INFO 0
-); 
+);
 PRAGMA tpch(1);
 ```
 
@@ -377,9 +377,9 @@ While features such as filter pushdown and partition information pushdown will i
 
 ```sql
 ATTACH './⟨your_delta_table_directory⟩' AS dt (
-    TYPE delta, 
-    PIN_SNAPSHOT, 
-    PUSHDOWN_PARTITION_INFO 0, 
+    TYPE delta,
+    PIN_SNAPSHOT,
+    PUSHDOWN_PARTITION_INFO 0,
     PUSHDOWN_FILTERS 'none'
 );
 ```

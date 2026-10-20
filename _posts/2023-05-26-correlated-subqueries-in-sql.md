@@ -244,9 +244,9 @@ WHERE distance = (
 
 ```text
 ┌───────────────────────────┐
-│         HASH_JOIN         │ 
-│   ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─   │ 
-│      uniquecarrier =      │ 
+│         HASH_JOIN         │
+│   ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─   │
+│      uniquecarrier =      │
 │       uniquecarrier       ├──────────────┐
 └─────────────┬─────────────┘              │
 ┌─────────────┴─────────────┐┌─────────────┴─────────────┐
@@ -279,7 +279,7 @@ JOIN (
      SELECT uniquecarrier, min(distance) AS min_distance
      FROM ontime
      GROUP BY uniquecarrier
-  ) AS subquery 
+  ) AS subquery
   ON ontime.uniquecarrier = subquery.uniquecarrier
  AND distance = min_distance;
 ```

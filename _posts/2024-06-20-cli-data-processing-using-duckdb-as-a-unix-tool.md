@@ -262,7 +262,7 @@ We again rely on `head` and `tail` to treat the headers and the rest of the file
 head -n 1 pop.csv | cut -d , -f 1; \
     comm -12 \
         <(tail -n +2 pop.csv | cut -d , -f 1 | sort) \
-        <(tail -n +2 cities-airports.csv | cut -d , -f 1 | sort) 
+        <(tail -n +2 cities-airports.csv | cut -d , -f 1 | sort)
 ```
 
 The script produces the following output:

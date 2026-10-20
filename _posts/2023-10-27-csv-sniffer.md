@@ -174,7 +174,7 @@ In this phase, we transition to a more efficient vectorized casting algorithm. T
 
 To analyze the impact of running DuckDB's automatic detection, we execute the sniffer on the [NYC taxi dataset](https://www.kaggle.com/datasets/elemento/nyc-yellow-taxi-trip-data/). The file consists of 19 columns, 10,906,858 tuples and is 1.72 GB in size.
 
-The cost of sniffing the dialect column names and types is approximately 4% of the total cost of loading the data. 
+The cost of sniffing the dialect column names and types is approximately 4% of the total cost of loading the data.
 
 
 | Name     | Time (s) |

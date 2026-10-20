@@ -18,7 +18,7 @@ These [days](https://en.wikipedia.org/wiki/Crypto_Wars), strong encryption softw
 
 Databases store arbitrary information, it is clear that many if not most datasets of any value should perhaps not be plainly available to everyone. Even if stored on tightly controlled hardware like a cloud virtual machine, there have been [many cases](https://haveibeenpwned.com/) of files being lost through various privilege escalations. Unsurprisingly, compliance frameworks like the common [SOC 2](https://secureframe.com/hub/soc-2/what-is-soc-2) “highly recommend” encrypting data when stored on storage mediums like hard drives.
 
-However, database systems and encryption have a somewhat problematic track record. Even PostgreSQL, the self-proclaimed “The World's Most Advanced Open Source Relational Database” has very [limited options](https://www.postgresql.org/docs/current/encryption-options.html) for data encryption. SQLite, the world’s [“Most Widely Deployed and Used Database Engine”](https://www.sqlite.org/mostdeployed.html) does not support data encryption out-of-the-box, its encryption extension is [a $2000 add-on](https://sqlite.org/com/see.html). 
+However, database systems and encryption have a somewhat problematic track record. Even PostgreSQL, the self-proclaimed “The World's Most Advanced Open Source Relational Database” has very [limited options](https://www.postgresql.org/docs/current/encryption-options.html) for data encryption. SQLite, the world’s [“Most Widely Deployed and Used Database Engine”](https://www.sqlite.org/mostdeployed.html) does not support data encryption out-of-the-box, its encryption extension is [a $2000 add-on](https://sqlite.org/com/see.html).
 
 DuckDB has supported [Parquet Modular Encryption](https://parquet.apache.org/docs/file-format/data-pages/encryption/) [for a while]({% link docs/current/data/parquet/encryption.md %}). This feature allows reading and writing Parquet files with encrypted columns. However, while Parquet files are great and [reports of their impending death](https://materializedview.io/p/nimble-and-lance-parquet-killers) are greatly exaggerated, they cannot – for example – be updated in place, a pretty basic feature of a database management system.
 
@@ -41,7 +41,7 @@ GCM and CTR both require as input a (1) plaintext, (2) an initialization vector 
 
 Before diving deeper into how we actually implemented encryption in DuckDB, we’ll explain some things about the DuckDB file format.
 
-DuckDB has one **main database header** which stores data that enables it to correctly load and verify a DuckDB database. At the start of each DuckDB main database header, the magic bytes (“DUCKDB”) are stored and read upon initialization to verify whether the file is a valid DuckDB database file. The magic bytes are followed by four 8-byte of flags that can be set for different purposes. 
+DuckDB has one **main database header** which stores data that enables it to correctly load and verify a DuckDB database. At the start of each DuckDB main database header, the magic bytes (“DUCKDB”) are stored and read upon initialization to verify whether the file is a valid DuckDB database file. The magic bytes are followed by four 8-byte of flags that can be set for different purposes.
 
 When a database is encrypted in DuckDB, the main database header remains plaintext at all times, since the main header contains *no sensitive data* about the contents of the database file.
 Upon initializing an encrypted database, DuckDB sets the first bit in the first flag to indicate that the database is encrypted. After setting this bit, additional metadata is stored that is necessary for encryption. This metadata entails the (1) *database identifier*, (2) 8 bytes of additional metadata for e.g. the encryption cipher used, and (3) the encrypted canary.
@@ -56,7 +56,7 @@ To encrypt data in DuckDB, you can use practically *any* plaintext or base64 enc
 
 After the main database header, DuckDB stores two 4KB database headers that contain more information about e.g. the block (header) size and the storage version used. After keeping the main database header plaintext, *all* remaining headers and blocks are encrypted when encryption is used.
 
-Blocks in DuckDB are by default 256KB, but their size is configurable. At the start of each *plaintext* block there is an 8-byte block header, which stores an 8-byte checksum. The checksum is a simple calculation that is often used in database systems to check for any corrupted data. 
+Blocks in DuckDB are by default 256KB, but their size is configurable. At the start of each *plaintext* block there is an 8-byte block header, which stores an 8-byte checksum. The checksum is a simple calculation that is often used in database systems to check for any corrupted data.
 
 <div>
     <img src="{% link images/blog/encryption/plaintext-block-light.svg %}"
@@ -140,7 +140,7 @@ Temporary files are used to store intermediate data that is often necessary for 
 
 #### The Structure of Temporary Files
 
-There are three different types of temporary files in DuckDB: (1) temporary files that have the same layout as a regular 256KB block, (2) compressed temporary files and (3) temporary files that exceed the standard 256KB block size. The former two are suffixed with .tmp, while the latter is distinguished by a suffix with .block. To keep track of the size of .block temporary files, they are always prefixed with its length. As opposed to regular database blocks, temporary files do not contain a checksum to check for data corruption, since the calculation of a checksum is somewhat expensive. 
+There are three different types of temporary files in DuckDB: (1) temporary files that have the same layout as a regular 256KB block, (2) compressed temporary files and (3) temporary files that exceed the standard 256KB block size. The former two are suffixed with .tmp, while the latter is distinguished by a suffix with .block. To keep track of the size of .block temporary files, they are always prefixed with its length. As opposed to regular database blocks, temporary files do not contain a checksum to check for data corruption, since the calculation of a checksum is somewhat expensive.
 
 #### Encrypting Temporary Files
 
@@ -258,15 +258,15 @@ _5 rows —  10 columns (5 shown)_
 
 ## Implementation and Performance
 
-Here at DuckDB, we strive to achieve a good out-of-the-box experience with zero external dependencies and a small footprint. Encryption and decryption, however, are usually performed by pretty heavy external libraries such as OpenSSL. We would much prefer not to rely on external libraries or statically linking huge codebases just so that people can use encryption in DuckDB without additional steps. This is why we actually implemented encryption *twice* in DuckDB, once with the (excellent) [Mbed TLS](https://github.com/Mbed-TLS/mbedtls) library and once with the ubiquitous OpenSSL library. 
+Here at DuckDB, we strive to achieve a good out-of-the-box experience with zero external dependencies and a small footprint. Encryption and decryption, however, are usually performed by pretty heavy external libraries such as OpenSSL. We would much prefer not to rely on external libraries or statically linking huge codebases just so that people can use encryption in DuckDB without additional steps. This is why we actually implemented encryption *twice* in DuckDB, once with the (excellent) [Mbed TLS](https://github.com/Mbed-TLS/mbedtls) library and once with the ubiquitous OpenSSL library.
 
-DuckDB already shipped parts of Mbed TLS because we use it to verify RSA extension signatures. However, for maximum compatibility we actually disabled the hardware acceleration of MbedTLS, which has a performance impact. Furthermore, Mbed TLS is not particularly hardened against things like nasty timing attacks. OpenSSL on the other hand contains heavily vetted and hardware-accelerated code to perform AES operations, which is why we can also use it for encryption. 
+DuckDB already shipped parts of Mbed TLS because we use it to verify RSA extension signatures. However, for maximum compatibility we actually disabled the hardware acceleration of MbedTLS, which has a performance impact. Furthermore, Mbed TLS is not particularly hardened against things like nasty timing attacks. OpenSSL on the other hand contains heavily vetted and hardware-accelerated code to perform AES operations, which is why we can also use it for encryption.
 
 In DuckDB Land, OpenSSL is part of the `httpfs` extension. Once you load that extension, encryption will *automatically* switch to using OpenSSL. After we shipped encryption in DuckDB 1.4.0, security experts actually found [issues with the random number generator](https://github.com/duckdb/duckdb/security/advisories/GHSA-vmp8-hg63-v2hp) we used in Mbed TLS mode. Even though it would be difficult to actually exploit this, we *disabled writing* to databases in MbedTLS mode from DuckDB 1.4.1. Instead, DuckDB now (version 1.4.2+) tries to auto-install and auto-load the `httpfs` extension whenever a write is attempted. We might be able to revisit this in the future, but for now this seems the safest path forward that still allows high compatibility for reading. In OpenSSL mode, we always used a cryptographically-safe random number generation so that mode is unaffected.
 
-Encrypting and decrypting database files is an additional step in writing tables to disk, so we would naturally assume that there is some performance impact. Let’s investigate the performance impact of DuckDB’s new encryption feature with a very basic experiment. 
+Encrypting and decrypting database files is an additional step in writing tables to disk, so we would naturally assume that there is some performance impact. Let’s investigate the performance impact of DuckDB’s new encryption feature with a very basic experiment.
 
-We first create two DuckDB database files, one encrypted and one unencrypted. We use the TPC-H benchmark generator again to create the table data, particularly the (somewhat tired) `lineitem` table. 
+We first create two DuckDB database files, one encrypted and one unencrypted. We use the TPC-H benchmark generator again to create the table data, particularly the (somewhat tired) `lineitem` table.
 
 ```sql
 INSTALL httpfs;
@@ -297,7 +297,7 @@ Here are the results on a fairly recent MacBook: `SUMMARIZE` on the unencrypted 
 
 But just running summarization is overly simplistic. Real™ database workloads include modifications to data, insertion of new rows, updates of rows, deletion of rows etc. Also, multiple clients will be updating and querying at the same time. So we re-surrected the full TPC-H “Power” test from our previous blog post [“Changing Data with Confidence and ACID”]({% post_url 2024-09-25-changing-data-with-confidence-and-acid %}). We slightly tweaked the [benchmark script](https://github.com/duckdb/duckdb-tpch/blob/main/benchmark.py) to enable the new database encryption. For this experiment, we used the OpenSSL encryption implementation due to the issues outlined above. We observe “Power@Size” and “Throughput@Size”. The former is raw sequential query performance, while the latter measures multiple parallel query streams in the presence of updates.
 
-When running on the same MacBook with DuckDB 1.4.1 and a “scale factor” of 100, we get a Power@Size metric of 624,296 and a Throughput@Size metric of 450,409 *without* encryption. 
+When running on the same MacBook with DuckDB 1.4.1 and a “scale factor” of 100, we get a Power@Size metric of 624,296 and a Throughput@Size metric of 450,409 *without* encryption.
 
 When we enable encryption, the results are almost unchanged, confirming the observation of the small microbenchmark above. However, the relationship between available memory and the benchmark size means that we’re not stressing temporary file encryption. So we re-ran everything with an 8GB memory limit. We confirmed constant reading and writing to and from disk in this configuration by observing operating system statistics. For the unencrypted case, the Power@Size metric predictably went down to 591,841 and Throughput@Size went down to 153,690. And finally, we could observe a slight performance decrease with Power@Size of 571,985 and Throughput@Size of 145,353. However, that difference is not very great either and likely not relevant in real operational scenarios.
 
@@ -305,4 +305,4 @@ When we enable encryption, the results are almost unchanged, confirming the obse
 
 With the new encrypted database feature, we can now safely pass around DuckDB database files with all information inside them completely opaque to prying eyes. This allows for some interesting new deployment models for DuckDB, for example, we could now put an encrypted DuckDB database file on a Content Delivery Network (CDN). A fleet of DuckDB instances could attach to this file read-only using the decryption key. This elegantly allows efficient distribution of private background data in a similar way like encrypted Parquet files, but of course with many more features like multi-table storage. When using DuckDB with encrypted storage, we can also simplify threat modeling when – for example – using DuckDB on cloud providers. While in the past access to DuckDB storage would have been enough to leak data, we can now relax paranoia regarding storage a little,  especially since temporary files and WAL are also encrypted. And the best part of all of this, there is almost no performance overhead to using encryption in DuckDB, especially with the OpenSSL implementation.
 
-We are very much looking forward to what you are going to do with this feature, and please [let us know](https://github.com/duckdb/duckdb/issues/new) if you run into any issues. 
+We are very much looking forward to what you are going to do with this feature, and please [let us know](https://github.com/duckdb/duckdb/issues/new) if you run into any issues.

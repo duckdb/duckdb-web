@@ -21,7 +21,7 @@ The puzzle in the first week of September was `Clumsy Rental Red`. Let's try to 
 First, let's create a [macro]({% link docs/current/sql/statements/create_macro.md %}) that turns a string into an ordered list of unique characters:
 
 ```sql
-CREATE MACRO order_letters(s) AS 
+CREATE MACRO order_letters(s) AS
     lower(s)                  -- convert all characters to lowercase
     .regexp_replace(          -- remove all non-Unicode letters
         '[^\p{L}]', '', 'g'

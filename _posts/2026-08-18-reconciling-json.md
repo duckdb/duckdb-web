@@ -78,7 +78,7 @@ This function is particularly useful for CDC pipelines, where most events on a m
 ## `json_deep_merge`: Recursive Merge where `null` Means “Skip”
 
 The patches from the previous section are applied with `json_merge_patch`, which strictly follows RFC 7396: `null` in the patch deletes the key. That is the right rule for the round trip with `json_merge_patch_diff`, but it is the wrong rule when you are reconciling fragments from multiple upstreams that emit `null` to mean “I do not have a value for this field on this message.”
-`json_deep_merge` covers that case. 
+`json_deep_merge` covers that case.
 
 `json_deep_merge` follows the same recursive merge structure as `json_merge_patch`, with one difference: a `null` value in the patch means “keep the original value” instead of “delete the key”. Everything else, including handling of non-null values, nested objects, and the variadic argument shape, matches `json_merge_patch`. In the following example, we apply a patch with the key `b` set to `null` with `json_merge_patch` and `json_deep_merge`, respectively, resulting in two different results:
 
@@ -324,7 +324,7 @@ The speedup comes from two sources: DuckDB operates on `yyjson` trees in place, 
 
 There are a few characteristics worth pointing out:
 
-* All four functions operate on `yyjson` mutable values directly. 
+* All four functions operate on `yyjson` mutable values directly.
 * `json_merge_patch_diff` uses `yyjson_equals` for deep equality, and subtrees that compare equal stop the recursion.
 * `json_normalize`'s sort is per-object, not global. The cost scales with the size of each object, not the document.
 * All four are plain scalar functions that process one vector of rows at a time, so they fit DuckDB's vectorized execution model.

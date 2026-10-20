@@ -174,10 +174,10 @@ Possible fixes:
 ```
 
 > It is important to note two things for the `strict_mode = false` option:
-> 
+>
 > * When using this option, there is no guarantee that the result is correct.
 >   This is because it's impossible to define what constitutes a “correct result” when parsing a non-standard CSV file.
-> 
+>
 > * DuckDB runs a best-effort parser, as it will try only fail if it encounters an error to which it can't find any reasonable guess of what the correct data should look like (e.g., imagine a column of integers, where some integers are represented as a spelled-out string, this will cause a casting error).
 >   While it is possible that, with a given combination of errors, our parser may still fail, we are striving to make it even more robust as we face the abyss.
 

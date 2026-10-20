@@ -114,7 +114,7 @@ The improvements for streaming `LEAD` were quite dramatic:
 ```sql
 SELECT setseed(0.8675309);
 CREATE OR REPLACE TABLE df AS
-    SELECT 
+    SELECT
         random() AS a,
         random() AS b,
         random() AS c,

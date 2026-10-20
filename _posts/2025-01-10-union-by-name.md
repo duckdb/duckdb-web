@@ -148,13 +148,13 @@ For example:
 ```sql
 CREATE TABLE year_info (year INTEGER, status VARCHAR);
 
-INSERT INTO year_info BY NAME 
-    SELECT 
+INSERT INTO year_info BY NAME
+    SELECT
         'The planet made it through' AS status,
         2024 AS year;
 
-INSERT INTO year_info BY NAME 
-    SELECT 
+INSERT INTO year_info BY NAME
+    SELECT
         2025 AS year;
 
 FROM year_info;
@@ -216,8 +216,8 @@ I modified the query [from here](https://dataengineeringcentral.substack.com/i/1
 The benchmark continued to use Python, but I'm just showing the SQL here for better syntax highlighting:
 
 ```sql
-CREATE OR REPLACE VIEW metrics AS 
-    SELECT 
+CREATE OR REPLACE VIEW metrics AS
+    SELECT
         date,
         sum(failure) AS failures
     FROM read_csv_auto('⟨s3_path⟩/*.csv', union_by_name = true)
@@ -240,8 +240,8 @@ The simplified query runs in only 4 minutes, but it fails to exercise the capabi
 To exercise the `BY NAME` capability, we add a column to the SQL query that is present only in some of the files.
 
 ```sql
-CREATE OR REPLACE VIEW metrics AS 
-    SELECT 
+CREATE OR REPLACE VIEW metrics AS
+    SELECT
         date,
         count(DISTINCT datacenter) AS datacenters,
         sum(failure) AS failures
@@ -262,8 +262,8 @@ The updated SQL statement looks like this:
 
 ```sql
 COPY (
-    SELECT 
-        date, 
+    SELECT
+        date,
         count(DISTINCT datacenter) AS datacenters,
         sum(failure) AS failures
     FROM read_csv_auto('⟨s3_path⟩/*.csv', union_by_name = true)
@@ -277,8 +277,8 @@ We can quantify the overhead of the flexibility that `UNION ALL BY NAME` provide
 
 ```sql
 COPY (
-    SELECT 
-        date, 
+    SELECT
+        date,
         sum(failure) AS failures
     FROM read_csv_auto('⟨s3_path⟩/*.csv')
     GROUP BY date

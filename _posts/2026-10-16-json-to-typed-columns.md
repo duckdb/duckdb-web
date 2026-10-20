@@ -79,7 +79,7 @@ For a large table, you do not have to scan every row for this. Running it over a
 
 ## Adjusting the Types
 
-The inferred structure needs a few fixes. `ts` came out as `VARCHAR` because JSON has no timestamp type, and the integers came out as `UBIGINT`, which is wider than needed. 
+The inferred structure needs a few fixes. `ts` came out as `VARCHAR` because JSON has no timestamp type, and the integers came out as `UBIGINT`, which is wider than needed.
 
 Since the structure is itself a JSON document, you can override parts of it with [`json_merge_patch`]({% link docs/current/data/json/json_functions.md %}). Store the result in a [variable]({% link docs/current/sql/statements/set_variable.md %}) so you can use it in the next query:
 

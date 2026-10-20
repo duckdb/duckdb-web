@@ -70,7 +70,7 @@ FROM iceberg_catalog.default.simple_table;
 ```
 
 > The Iceberg write support current has two limitations:
-> 
+>
 > The update support is limited to _tables that are not partitioned and not sorted._ Attempting to perform update, insert or delete operations on partitioned or sorted tables using DuckDB-Iceberg will result in an error.
 >
 > DuckDB-Iceberg only writes positional deletes for `DELETE` and `UPDATE` statements. Copy-on-write functionality is not yet supported.

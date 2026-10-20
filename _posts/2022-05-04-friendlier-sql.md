@@ -58,7 +58,7 @@ Now we can save time repeatedly typing all columns, improve code readability, an
 DuckDB's implementation of this concept can even handle exclusions from multiple tables within a single statement:
 
 ```sql
-SELECT 
+SELECT
     sw.* EXCLUDE (jar_jar_binks, midichlorians),
     ff.* EXCLUDE cancellation
 FROM star_wars sw, firefly ff;
@@ -69,7 +69,7 @@ FROM star_wars sw, firefly ff;
 Similarly, we often wish to use all of the columns in a table, aside from a few small adjustments. This would also prevent the use of `*` and require a list of all columns, including those that remain unedited. In DuckDB, easily apply changes to a small number of columns with `REPLACE`:
 
 ```sql
-SELECT 
+SELECT
     * REPLACE (movie_count+3 AS movie_count, show_count*1000 AS show_count)
 FROM star_wars_owned_by_disney;
 ```
@@ -187,7 +187,7 @@ LINE 1: SELECT long_ago FROM star_wars;
 
 ## String Slicing
 
-Even as SQL fans, we know that SQL can learn a thing or two from newer languages. Instead of using bulky `SUBSTRING` functions, you can slice strings in DuckDB using bracket syntax. As a note, SQL is required to be 1-indexed, so that is a slight difference from other languages (although it keeps DuckDB internally consistent and similar to other DBs). 
+Even as SQL fans, we know that SQL can learn a thing or two from newer languages. Instead of using bulky `SUBSTRING` functions, you can slice strings in DuckDB using bracket syntax. As a note, SQL is required to be 1-indexed, so that is a slight difference from other languages (although it keeps DuckDB internally consistent and similar to other DBs).
 
 ```sql
 SELECT 'I love you! I know'[:-3] AS nearly_soloed;
@@ -213,8 +213,8 @@ SELECT
 Bracket syntax may also be used to slice a `LIST`. Again, note that this is 1-indexed for SQL compatibility.
 
 ```sql
-SELECT 
-    starfighter_list[2:2] AS dont_forget_the_b_wing 
+SELECT
+    starfighter_list[2:2] AS dont_forget_the_b_wing
 FROM (SELECT ['A-Wing', 'B-Wing', 'X-Wing', 'Y-Wing'] AS starfighter_list);
 ```  
 
@@ -228,15 +228,15 @@ FROM (SELECT ['A-Wing', 'B-Wing', 'X-Wing', 'Y-Wing'] AS starfighter_list);
 Use convenient dot notation to access the value of a specific key in a DuckDB `STRUCT` column. If keys contain spaces, double quotes can be used.
 
 ```sql
-SELECT 
+SELECT
     planet.name,
-    planet."Amount of sand" 
+    planet."Amount of sand"
 FROM (SELECT {name: 'Tatooine', 'Amount of sand': 'High'} AS planet);
 ```
 
 ## Trailing Commas
 
-Have you ever removed your final column from a SQL `SELECT` and been met with an error, only to find you needed to remove the trailing comma as well!? Never? Ok, Jedi... On a more serious note, this feature is an example of DuckDB's responsiveness to the community. In under 2 days from seeing this issue in a tweet (not even about DuckDB!), this feature was already built, tested, and merged into the primary branch. You can include trailing commas in many places in your query, and we hope this saves you from the most boring but frustrating of errors! 
+Have you ever removed your final column from a SQL `SELECT` and been met with an error, only to find you needed to remove the trailing comma as well!? Never? Ok, Jedi... On a more serious note, this feature is an example of DuckDB's responsiveness to the community. In under 2 days from seeing this issue in a tweet (not even about DuckDB!), this feature was already built, tested, and merged into the primary branch. You can include trailing commas in many places in your query, and we hope this saves you from the most boring but frustrating of errors!
 
 ```sql
 SELECT
@@ -290,9 +290,9 @@ CREATE TABLE sith_count_int AS SELECT 2::INTEGER AS sith_count;
 CREATE TABLE sith_count_varchar AS SELECT 2::VARCHAR AS sith_count;
 
 SELECT
-    * 
-FROM sith_count_int s_int 
-JOIN sith_count_varchar s_char 
+    *
+FROM sith_count_int s_int
+JOIN sith_count_varchar s_char
   ON s_int.sith_count = s_char.sith_count;
 ```
 
@@ -312,11 +312,11 @@ The [`DISTINCT ON` clause]({% link docs/current/sql/query_syntax/select.md %}#di
 
 ## Ideas for the Future
 
-In addition to what has already been implemented, several other improvements have been suggested. Let us know if one would be particularly useful – we are flexible with our roadmap! If you would like to contribute, we are very open to PRs and you are welcome to reach out on [GitHub](https://github.com/duckdb/duckdb) or [Discord](https://discord.gg/vukK4xp7Rd) ahead of time to talk through a new feature's design. 
+In addition to what has already been implemented, several other improvements have been suggested. Let us know if one would be particularly useful – we are flexible with our roadmap! If you would like to contribute, we are very open to PRs and you are welcome to reach out on [GitHub](https://github.com/duckdb/duckdb) or [Discord](https://discord.gg/vukK4xp7Rd) ahead of time to talk through a new feature's design.
 
 * Choose columns via regex
   * Decide which columns to select with a pattern rather than specifying columns explicitly
-  * ClickHouse supports this with the [`COLUMNS` expression](https://clickhouse.com/docs/en/sql-reference/statements/select/#columns-expression) 
+  * ClickHouse supports this with the [`COLUMNS` expression](https://clickhouse.com/docs/en/sql-reference/statements/select/#columns-expression)
 * Incremental column aliases
   * Refer to previously defined aliases in subsequent calculated columns rather than re-specifying the calculations
 * Dot operators for JSON types

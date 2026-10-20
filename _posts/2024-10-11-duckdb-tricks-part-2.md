@@ -98,7 +98,7 @@ To achieve this, we first create a table `timeslot_location_combinations` contai
 > The `CROSS JOIN` clause is equivalent to simply listing the tables in the `FROM` clause without specifying join conditions. By explicitly spelling out `CROSS JOIN`, we communicate that we intend to compute a Cartesian product – which is an expensive operation on large tables and should be avoided in most use cases.
 
 ```sql
-CREATE TABLE timeslot_location_combinations AS 
+CREATE TABLE timeslot_location_combinations AS
     SELECT timeslot, location
     FROM (SELECT DISTINCT timeslot FROM schedule_cleaned)
     CROSS JOIN (SELECT DISTINCT location FROM schedule_cleaned);

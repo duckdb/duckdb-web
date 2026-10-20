@@ -42,10 +42,10 @@ These new overloads take an optional third `n` argument that specifies the numbe
 
 ```sql
 -- Create a table with some example data
-CREATE OR REPLACE TABLE vecs AS 
+CREATE OR REPLACE TABLE vecs AS
     SELECT
-        row_number() OVER () AS id, 
-        [a, b, c]::FLOAT[3] AS vec 
+        row_number() OVER () AS id,
+        [a, b, c]::FLOAT[3] AS vec
     FROM
         range(1,4) AS x(a), range(1,4) AS y(b), range(1,4) AS z(c);
 
@@ -89,7 +89,7 @@ SELECT setseed(0.42);
 CREATE TABLE queries AS
     SELECT
         i AS id,
-        [random(), random(), random()]::FLOAT[3] AS embedding 
+        [random(), random(), random()]::FLOAT[3] AS embedding
     FROM generate_series(1, 10_000) r(i);
 
 CREATE TABLE items AS
@@ -99,13 +99,13 @@ CREATE TABLE items AS
 FROM generate_series(1, 10_000) r(i);
 
 -- Collect the 5 closest items to each query embedding
-SELECT queries.id AS id, list(inner_id) AS matches 
+SELECT queries.id AS id, list(inner_id) AS matches
     FROM queries, LATERAL (
         SELECT
             items.id AS inner_id,
             array_distance(queries.embedding, items.embedding) AS dist
-        FROM items 
-        ORDER BY dist 
+        FROM items
+        ORDER BY dist
         LIMIT 5
     )
 GROUP BY queries.id;

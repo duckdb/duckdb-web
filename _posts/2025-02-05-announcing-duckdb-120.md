@@ -201,9 +201,9 @@ SELECT 100_000_000 AS x, pi() * 1e9 AS y;
 SQL Expression and table aliases can now be specified before the thing they are referring to (instead of using the well-known syntax of using `AS`s). This can improve readability in some cases, for example:
 
 ```sql
-SELECT 
+SELECT
     e1: some_long_and_winding_expression,
-    e2: t2.a_column_name 
+    e2: t2.a_column_name
 FROM
     t1: long_schema.some_long_table_name,
     t2: short_s.tbl;

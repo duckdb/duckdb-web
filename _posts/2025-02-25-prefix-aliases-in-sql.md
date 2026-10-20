@@ -82,9 +82,9 @@ SELECT "forty two": 42;
 Prefix aliases can be used to name just about everything, for example expressions, function calls and subqueries in the `SELECT` clause:
 
 ```sql
-SELECT 
-    e: 1 + 2, 
-    f: len('asdf'), 
+SELECT
+    e: 1 + 2,
+    f: len('asdf'),
     s: (SELECT 42);
 ```
 
@@ -111,7 +111,7 @@ SELECT
     avg_qty:        avg(l_quantity),
     avg_price:      avg(l_extendedprice),
     avg_disc:       avg(l_discount),
-    count_order:    count(*) 
+    count_order:    count(*)
     ...
 ```
 

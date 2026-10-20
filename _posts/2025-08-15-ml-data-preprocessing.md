@@ -319,7 +319,7 @@ SELECT
         spending_deviation_score,
         avg_spending_deviation_score,
         std_spending_deviation_score
-    ) 
+    )
 FROM financial_trx_testing,
     scaling_params(
         'financial_trx_training',
@@ -501,7 +501,7 @@ def scikit_feature_scaling_training_data(x_train):
                 impute_missing_data,
                 ["time_since_last_transaction"],
             ),
-            ( 
+            (
                 "minmax",
                 MinMaxScaler(copy=False),
                 ["spending_deviation_score"]

@@ -62,7 +62,7 @@ If we want to remove a few of them the result, we can use the [`EXCLUDE` modifie
 For example, to exclude `min`, `max` and the quantiles `q25`, `q50`, `q75`, we can use issue the following command:
 
 ```sql
-SELECT * EXCLUDE(min, max, q25, q50, q75) 
+SELECT * EXCLUDE(min, max, q25, q50, q75)
 FROM (SUMMARIZE FROM 'services-2024-08.csv');
 ```
 
@@ -70,7 +70,7 @@ Alternatively, we can use the [`COLUMNS`]({% link docs/current/sql/expressions/s
 This works with a regular expression:
 
 ```sql
-SELECT COLUMNS(lambda c: c NOT SIMILAR TO 'min|max|q.*') 
+SELECT COLUMNS(lambda c: c NOT SIMILAR TO 'min|max|q.*')
 FROM (SUMMARIZE FROM 'services-2024-08.csv');
 ```
 
@@ -128,7 +128,7 @@ SELECT COLUMNS('(\w*)\W*(\w*)\W*(\w*)') AS "\1_\2_\3"
 Here, we use regular expression with `(\w*)` groups that capture 0...n word characters (`[0-9A-Za-z_]`).
 Meanwhile, the expression `\W*` captures 0...n non-word characters (`[^0-9A-Za-z_]`).
 In the alias part we refer to the capture group `i` with `\i` so `"\1_\2_\3"` means that we only keep the word characters and separate their groups with underscores (`_`).
-However, because some column names contain words separated by a space, while others don't, after this `SELECT` statement we get column names with a trailing underscore (`_`), 
+However, because some column names contain words separated by a space, while others don't, after this `SELECT` statement we get column names with a trailing underscore (`_`),
 e.g., `Service_Date_`.
 Thus, we need an additional processing step:
 
@@ -169,9 +169,9 @@ Now that we can simplify the column names, let's ingest all 3 months of data to 
 
 ```sql
 CREATE OR REPLACE TABLE services AS
-    SELECT COLUMNS('(.*?)_*$') AS "\1" 
+    SELECT COLUMNS('(.*?)_*$') AS "\1"
     FROM (
-        SELECT COLUMNS('(\w*)\W*(\w*)\W*(\w*)') AS "\1_\2_\3" 
+        SELECT COLUMNS('(\w*)\W*(\w*)\W*(\w*)') AS "\1_\2_\3"
         FROM 'services-2024-*.csv'
     );
 ```

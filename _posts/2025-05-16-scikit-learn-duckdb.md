@@ -128,7 +128,7 @@ def train_split_data(selection_query):
         species_id
     """).order("observation_id").df()
     y_df = [
-        x[0] 
+        x[0]
         for x in selection_query.order("observation_id").select("species_id").fetchall()
     ]
 
@@ -282,10 +282,10 @@ selection_query.select("""
     observation_id,
     species_id,
     predict_species_per_row(
-        bill_length_mm, 
-        bill_depth_mm, 
-        flipper_length_mm, 
-        body_mass_g, 
+        bill_length_mm,
+        bill_depth_mm,
+        flipper_length_mm,
+        body_mass_g,
         island_id
     ) as predicted_species_id
 """).filter("species_id != predicted_species_id")

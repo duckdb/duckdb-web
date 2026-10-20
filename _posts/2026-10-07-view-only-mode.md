@@ -11,7 +11,7 @@ tag: using-duckdb
 
 A DuckDB database file does not have to contain any data. It can store nothing but [view]({% link docs/preview/sql/statements/create_view.md %}) definitions that point at files stored somewhere else, such as Parquet on object storage. The file stays a few hundred kilobytes no matter how large the data it describes, and anyone who attaches it sees a set of named relations that are ready to query.
 
-Nikolas Goebel described this idea in [DuckDB doesn't need data](https://www.nikolasgoebel.com/2024/05/28/duckdb-doesnt-need-data), which argues that modern databases have separated where data is stored from how it is read, to the point that most databases no longer need to hold any data of their own. From that perspective, DuckDB becomes a browser for the data cloud, where you access a dataset through a URL rather than a copy on your own disk. 
+Nikolas Goebel described this idea in [DuckDB doesn't need data](https://www.nikolasgoebel.com/2024/05/28/duckdb-doesnt-need-data), which argues that modern databases have separated where data is stored from how it is read, to the point that most databases no longer need to hold any data of their own. From that perspective, DuckDB becomes a browser for the data cloud, where you access a dataset through a URL rather than a copy on your own disk.
 
 In this blog post, we turn that idea into a small, shareable catalog.
 

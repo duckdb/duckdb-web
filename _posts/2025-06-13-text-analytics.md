@@ -82,7 +82,7 @@ text_emotions_rel.filter("text ilike '%excited to learn%'").select("""
         text,
         position('excited to learn' in text),
         len('excited to learn')
-    ) as substring_text 
+    ) as substring_text
 """)
 ```
 
@@ -204,14 +204,14 @@ While the `stem` function can be used standalone, the `match_bm25` one requires 
 ```python
 conn.sql("""
     PRAGMA create_fts_index(
-        "text_emotions", 
-        text_id, 
-        "text", 
+        "text_emotions",
+        text_id,
+        "text",
         stemmer = 'english',
         stopwords = 'english_stopwords',
         ignore = '(\\.|[^a-z])+',
-        strip_accents = 1, 
-        lower = 1, 
+        strip_accents = 1,
+        lower = 1,
         overwrite = 1
     )
 """)
@@ -326,7 +326,7 @@ text_emotions_rel
 .join(conn.table("text_emotion_embeddings"), condition="text_id")
 .join(input_text_emb_rel, condition="1=1")
 .select("""
-        text, 
+        text,
         emotion,
         emotion_color,
         array_cosine_distance(
@@ -354,7 +354,7 @@ Interesting to observe that the phrase `i am excited to learn and feel privilege
 
 Vector embeddings are most known for their usability in search engines, but they can be used in a variety of text analytics use cases, such as topic grouping, classification or semantic matching between documents. The VSS extension provides [vector similarity joins]({% link docs/current/core_extensions/vss.md %}#bonus-vector-similarity-search-joins), which can be used to conduct these types of analytics.
 
-For example, we show in the below [heatmap chart](https://plotly.com/python/heatmaps/) the number of texts for each combination of emotion labels, where the x-axis corresponds to the semantic matching between the text and the emotion, the y-axis to the classified emotion, and the color indicates the count of texts assigned to each pair: 
+For example, we show in the below [heatmap chart](https://plotly.com/python/heatmaps/) the number of texts for each combination of emotion labels, where the x-axis corresponds to the semantic matching between the text and the emotion, the y-axis to the classified emotion, and the color indicates the count of texts assigned to each pair:
 
 <div align="center" style="margin:10px">
     <a href="/images/blog/text-analytics/best_matched_emotion.png">

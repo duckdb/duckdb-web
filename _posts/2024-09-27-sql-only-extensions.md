@@ -53,7 +53,7 @@ DuckDB extensions can be used across all languages with a DuckDB client, includi
 
 If you are a DuckDB fan and a SQL user, you can share your expertise back to the community with an extension.
 This post will show you how!
-No C++ knowledge is needed – just a little bit of copy/paste and GitHub Actions handles all the compilation. 
+No C++ knowledge is needed – just a little bit of copy/paste and GitHub Actions handles all the compilation.
 If I can do it, you can do it!
 
 ### Powerful SQL
@@ -133,7 +133,7 @@ git push
 
 #### Write Your SQL Macros
 
-It is likely a bit faster to iterate if you test your macros directly in DuckDB. 
+It is likely a bit faster to iterate if you test your macros directly in DuckDB.
 After you have written your SQL, we will move it into the extension.
 The example we will use demonstrates how to pull a dynamic set of columns from a dynamic table name (or a view name!).
 
@@ -351,7 +351,7 @@ INSTALL pivot_table FROM community;
 LOAD pivot_table;
 ```
 
-Now we can build pivot tables like the one below. 
+Now we can build pivot tables like the one below.
 There is a little bit of boilerplate required, and the details of how this works will be explained shortly.
 
 ```sql
@@ -493,7 +493,7 @@ FROM pivot_table(['business_metrics'],
 
 #### Pivot Horizontally, One Column per Metric in `values`
 
-Build up a `PIVOT` statement that will pivot out all valid combinations of raw data values within the `columns` parameter. 
+Build up a `PIVOT` statement that will pivot out all valid combinations of raw data values within the `columns` parameter.
 If `subtotals` or `grand_totals` are in use, make multiple copies of the input data, but replace appropriate column names in the `rows` parameter with a string constant.
 Pass all expressions in `values` to the `PIVOT` statement's `USING` clause so they each receive their own column.
 
@@ -530,7 +530,7 @@ FROM pivot_table(['business_metrics'],
 
 #### Pivot Horizontally, One Row per Metric in `values`
 
-Build up a separate `PIVOT` statement for each metric in `values` and combine them with `UNION ALL BY NAME`. 
+Build up a separate `PIVOT` statement for each metric in `values` and combine them with `UNION ALL BY NAME`.
 If `subtotals` or `grand_totals` are in use, make multiple copies of the input data, but replace appropriate column names in the `rows` parameter with a string constant.
 
 To simplify the appearance slightly, we adjust one parameter in our previous query and set `values_axis := 'rows'`:

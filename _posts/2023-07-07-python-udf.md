@@ -207,7 +207,7 @@ In this section, we will perform simple benchmark comparisons to demonstrate the
 
 ### Built-In Python vs. PyArrow
 
-To benchmark these UDF types, we create UDFs that take an integral column as input, add one to each value, and return the result. The code used for this benchmark section can be found in a [GitHub Gist](https://gist.github.com/pdet/ebd201475581756c29e4533a8fa4106e). 
+To benchmark these UDF types, we create UDFs that take an integral column as input, add one to each value, and return the result. The code used for this benchmark section can be found in a [GitHub Gist](https://gist.github.com/pdet/ebd201475581756c29e4533a8fa4106e).
 
 ```python
 import pyarrow.compute as pc

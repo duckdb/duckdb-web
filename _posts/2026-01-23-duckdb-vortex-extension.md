@@ -35,7 +35,7 @@ DuckDB is a database as the name says, yes, but it is also widely used as an eng
 
 - Databases like Snowflake, BigQuery or PostgreSQL.  
 - Lakehouse formats like Delta, Iceberg or DuckLake.  
-- File formats, most notably JSON, CSV, Parquet and most recently Vortex. 
+- File formats, most notably JSON, CSV, Parquet and most recently Vortex.
 
 > The community has gotten very creative, though, so these days you can even read YAML and Markdown with DuckDB using [community extensions]({% link community_extensions/index.md %}).
 
@@ -101,7 +101,7 @@ Another interesting result is the standard deviation across runs. There was a co
 <details markdown='1'>
 <summary markdown='span'>
 Click here to see a more detailed breakdown of the benchmark results.
-</summary> 
+</summary>
 
 This figure shows the results per query, including the standard deviation error bar.  
 ![mean_per_query](/images/blog/duckdb-vortex/tpch_rowgram.png)  

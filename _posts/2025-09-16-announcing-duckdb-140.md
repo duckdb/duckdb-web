@@ -77,7 +77,7 @@ Click to see the end-of-life (EOL) dates for DuckDB releases.
 
 ### Database Encryption
 
-Being able to encrypt DuckDB database files has been a [long-standing feature request](https://github.com/duckdb/duckdb/discussions/4512). Starting with this release, DuckDB supports encryption of its files. Encryption keys are given using the `ENCRYPTION_KEY` parameter 
+Being able to encrypt DuckDB database files has been a [long-standing feature request](https://github.com/duckdb/duckdb/discussions/4512). Starting with this release, DuckDB supports encryption of its files. Encryption keys are given using the `ENCRYPTION_KEY` parameter
 to [`ATTACH`]({% link docs/current/sql/statements/attach.md %}), like so:
 
 ```sql
@@ -270,7 +270,7 @@ This feature was [implemented](https://github.com/duckdb/duckdb/pull/17459) by [
 
 DuckBB v1.4.0 fixes some [scaling issues](https://github.com/duckdb/duckdb/pull/17985), supports [caching for hashes of string dictionaries](https://github.com/duckdb/duckdb/pull/18580) and has several [aggregation optimizations](https://github.com/duckdb/duckdb/pull/17718).
 
-## Distribution 
+## Distribution
 
 ### macOS Notarization
 

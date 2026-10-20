@@ -453,8 +453,8 @@ This focuses the benchmark on the speed of scanning the data rather than DuckDB'
 The query used follows the format:
 
 ```sql
-SELECT 
-    sum(v3) AS v3 
+SELECT
+    sum(v3) AS v3
 FROM ⟨dataframe_or_Parquet_file⟩;
 ```
 
@@ -514,7 +514,7 @@ The table in use is the largest table from the H2O.ai join benchmark, and in thi
 DROP TABLE IF EXISTS windowing_results;
 
 CREATE TABLE windowing_results AS
-    SELECT 
+    SELECT
         id1,
         id2,
         id3,
@@ -529,7 +529,7 @@ The DuckDB documentation contains a [full railroad diagram of the available synt
 If there are common use cases for window functions that are not well-covered in this benchmark, please let us know!
 
 ```sql
-/* 302 Basic Window */ 
+/* 302 Basic Window */
 sum(v2) OVER () AS window_basic
 
 /* 303 Sorted Window */

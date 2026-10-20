@@ -47,7 +47,7 @@ For example:
 
 ```sql
 CREATE SECRET test_secret (
-    TYPE S3, 
+    TYPE S3,
     KEY_ID '⟨AKIAIOSFODNN7EXAMPLE⟩',
     SECRET '⟨wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY⟩'
 );

@@ -44,7 +44,7 @@ In reality, tries can also be used for numeric data types. However, storing them
 
 To have more realistic examples, from this point onwards, all depictions in this post will be with bit representations. In DuckDB, the fan-out is always 8 bits. However, for simplicity, the following examples in this blog post will have a fan-out of 2 bits.
 
-In the example below, we have a trie that indexes the values 7, 10, and 12. You can also see the binary representation of each value on the table next to them. Each node consists of the bits 0 and 1, with a pointer next to them. This pointer can either be set (represented by `*`) or null (represented by `Ø`). Similar to the string trie we had before, each level of the trie will represent two bits, with the pointer next to these bits pointing to their children. Finally, the leaves point to the actual data. 
+In the example below, we have a trie that indexes the values 7, 10, and 12. You can also see the binary representation of each value on the table next to them. Each node consists of the bits 0 and 1, with a pointer next to them. This pointer can either be set (represented by `*`) or null (represented by `Ø`). Similar to the string trie we had before, each level of the trie will represent two bits, with the pointer next to these bits pointing to their children. Finally, the leaves point to the actual data.
 
 <img src="{% link images/blog/ART/2-bit-trie.png %}"
      alt="2-bit trie"
@@ -55,7 +55,7 @@ One can quickly notice that this trie representation is wasteful on two differen
 
 ### Vertical Compression (i.e., Radix Trees)
 
-The basic idea of vertical compression is that we collapse paths with nodes that only have one child. To support this, nodes store a prefix variable containing the collapsed path to that node. You can see a representation of this in the figure below. For example, one can see that the first four nodes have only one child. These nodes can be collapsed to the third node (i.e., the first one that bifurcates) as a prefix path. When performing lookups, the key must match all values included in the prefix path. 
+The basic idea of vertical compression is that we collapse paths with nodes that only have one child. To support this, nodes store a prefix variable containing the collapsed path to that node. You can see a representation of this in the figure below. For example, one can see that the first four nodes have only one child. These nodes can be collapsed to the third node (i.e., the first one that bifurcates) as a prefix path. When performing lookups, the key must match all values included in the prefix path.
 
 <img src="{% link images/blog/ART/2-bit-collapse-trie.png %}"
      alt="2-bit Radix Tree (Collapsing)"
@@ -189,7 +189,7 @@ As said previously, ART indexes are mainly used in DuckDB on three fronts.
 
 ## ART Storage
 
-There are two main constraints when storing ART indexes: 
+There are two main constraints when storing ART indexes:
 
 1. The index must be stored in an order that allows for lazy-loading. Otherwise, we would have to fully load the index, including nodes that might be unnecessary to queries that would be executed in that session.
 2. It must not increase the node size. Otherwise, we diminish the cache-conscious effectiveness of the ART index.
@@ -220,10 +220,10 @@ One major problem with implementing this (de)serialization process is that now w
 
 If we stored the Block Id and Offset in new variables, it would dramatically increase the ART node sizes, diminishing its effectiveness as a cache-conscious data structure.
 
-Take Node 256 as an example. The cost of holding 256 pointers is 2048 bytes (256 pointers * 8 bytes). Let's say we decide to store the Block Information on a new array like the following: 
+Take Node 256 as an example. The cost of holding 256 pointers is 2048 bytes (256 pointers * 8 bytes). Let's say we decide to store the Block Information on a new array like the following:
 
 ```cpp
-struct BlockPointer { 
+struct BlockPointer {
     uint32_t block_id;
     uint32_t offset;
 }
@@ -241,7 +241,7 @@ Node 256 would increase 2048 bytes (256 * (4+4)), causing it to double its curre
 
 To avoid the increase in sizes of ART nodes, we decided to implement [Swizzlable Pointers](https://en.wikipedia.org/wiki/Pointer_swizzling) and use them instead of regular pointers.
 
-The idea is that we don't need all 64 bits (i.e., 48 bits give you an address space of 256 terabytes, supporting any of the current architectures, see the [related discussion on Stack Overflow](https://stackoverflow.com/questions/6716946/why-do-x86-64-systems-have-only-a-48-bit-virtual-address-space) and the [“64-bit computing” Wikipedia page](https://en.wikipedia.org/wiki/64-bit_computing)) in a pointer to point to a memory address. Hence we can use the most significant bit as a flag (i.e., the Swizzle Flag). 
+The idea is that we don't need all 64 bits (i.e., 48 bits give you an address space of 256 terabytes, supporting any of the current architectures, see the [related discussion on Stack Overflow](https://stackoverflow.com/questions/6716946/why-do-x86-64-systems-have-only-a-48-bit-virtual-address-space) and the [“64-bit computing” Wikipedia page](https://en.wikipedia.org/wiki/64-bit_computing)) in a pointer to point to a memory address. Hence we can use the most significant bit as a flag (i.e., the Swizzle Flag).
 If the swizzle flag is set, the value in our Swizzlable Pointer is a memory address for the Node. Otherwise, the variable stores the Block Information of where the Node is stored. In the latter case, we use the following 31 bits to store the Block ID and the remaining 32 bits to store the offset.
 
 In the following figure, you can see a visual representation of DuckDB's Swizzlable Pointer.
@@ -253,10 +253,10 @@ In the following figure, you can see a visual representation of DuckDB's Swizzla
 
 ## Benchmarks
 
-To evaluate the benefits and disadvantages of our current storage implementation, we run a benchmark (Available at this [Colab Link](https://colab.research.google.com/drive/1lidiFNswQfxdmYlsufXUT80IFpyluEF3?usp=sharing)), where we create a table containing 50,000,000 integral elements with a primary key constraint on top of them. 
+To evaluate the benefits and disadvantages of our current storage implementation, we run a benchmark (Available at this [Colab Link](https://colab.research.google.com/drive/1lidiFNswQfxdmYlsufXUT80IFpyluEF3?usp=sharing)), where we create a table containing 50,000,000 integral elements with a primary key constraint on top of them.
 
 ```python
-con = duckdb.connect("vault.db") 
+con = duckdb.connect("vault.db")
 con.execute("CREATE TABLE integers (x INTEGER PRIMARY KEY)")
 con.execute("INSERT INTO integers SELECT * FROM range(50000000)")
 ```
@@ -288,7 +288,7 @@ We now measure the loading time of restarting our database.
 
 ```python
 cur_time = time.time()
-con = duckdb.connect("vault.db") 
+con = duckdb.connect("vault.db")
 print("Load time: " + str(time.time() - cur_time))
 ```
 
@@ -325,7 +325,7 @@ for i in range (0, 50000000, 10000):
 
 In general, each query is 3x more expensive in the persisted storage format. This is due to two main reasons:
 
-* Creating the nodes. In the storage version, we do create the nodes lazily, which means that, for each node, all parameters must be allocated, and values like keys and prefixes are loaded. 
+* Creating the nodes. In the storage version, we do create the nodes lazily, which means that, for each node, all parameters must be allocated, and values like keys and prefixes are loaded.
 * Block pinning. At every node, we must pin and unpin the blocks where they are stored.
 
 ### Query Time (Hot)

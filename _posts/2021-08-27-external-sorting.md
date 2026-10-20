@@ -108,7 +108,7 @@ The trick is to convert these to a binary string that encodes the sorting order:
 10000000 00000000 00000111 10000100
 ```
 
-The binary string is fixed-size because this makes it much easier to move it around during sorting. 
+The binary string is fixed-size because this makes it much easier to move it around during sorting.
 
 The string “GERMANY” is shorter than “NETHERLANDS”, therefore it is padded with `00000000`'s.
 All bits in column `c_birth_country` are subsequently inverted because this column is sorted descendingly.
@@ -118,7 +118,7 @@ The bytes in `c_birth_year` are swapped because we need the big-endian represent
 The first bit is also flipped, to preserve order between positive and negative integers for [signed integers](https://en.wikipedia.org/wiki/Signed_number_representations).
 If there are `NULL` values, these must be encoded using an additional byte (not shown in the example).
 
-With this binary string, we can now compare both columns at the same time by comparing only the binary string representation. 
+With this binary string, we can now compare both columns at the same time by comparing only the binary string representation.
 This can be done with a single `memcmp` in __C++__! The compiler will emit efficient assembly for single function call, even auto-generating [SIMD instructions](https://en.wikipedia.org/wiki/SIMD).
 
 This technique solves one of the problems mentioned above, namely the function call overhead when using complex comparators.
@@ -231,7 +231,7 @@ Using relative offsets within rows rather than absolute offsets is very useful d
 When the blocks need to be scanned to read the sorted result, we “unswizzle” the pointers, making them point to the string again.
 
 With this dual-purpose row-wise representation, we can easily copy around both the fixed-size rows and the variable-sized rows in the heap.
-Besides having the buffer manager load/unload blocks, the only difference between in-memory and external sorting is that we swizzle/unswizzle pointers to the heap blocks, and copy data from the heap blocks during merge sort. 
+Besides having the buffer manager load/unload blocks, the only difference between in-memory and external sorting is that we swizzle/unswizzle pointers to the heap blocks, and copy data from the heap blocks during merge sort.
 
 All this reduces overhead when blocks need to be moved in and out of memory, which will lead to graceful performance degradation as we approach the limit of available memory.
 

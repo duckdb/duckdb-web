@@ -162,7 +162,7 @@ CALL enable_peg_parser();
 The PEG parser is already used for generating suggestions. You can cycle through the options using `TAB`.
 
 ```sql
-«animals_db» D FROM ducks WHERE habitat IS 
+«animals_db» D FROM ducks WHERE habitat IS
 IS           ISNULL       ILIKE        ⌊IN⌋           INTERSECT    LIKE
 ```
 
@@ -218,7 +218,7 @@ You can extract fields from nested variants using the dot notation or the `varia
 
 ```sql
 SELECT data.name FROM events WHERE id = 4;
--- or 
+-- or
 SELECT variant_extract(data, 'name') AS name FROM events WHERE id = 4;
 ```
 ```text
@@ -403,13 +403,13 @@ So to summarize, nothing is changing by default in this release, but to avoid be
 
 #### `GEOMETRY` Becomes a Built-In Type
 
-The `GEOMETRY` type has been moved from the `spatial` extension into core DuckDB\! 
+The `GEOMETRY` type has been moved from the `spatial` extension into core DuckDB\!
 
 Geospatial data is no longer niche. The Parquet standard now treats `GEOMETRY` as a first-class column type, and open table formats like Apache Iceberg and DuckLake are moving in the same direction. Many widely used data formats and systems also have geospatial counterparts—GeoJSON, PostGIS, GeoPandas, GeoPackage/Spatialite, and more.
 
 DuckDB already offers extensions that integrate with many of these formats and systems. But there’s a structural problem: as long as `GEOMETRY` lives inside the `spatial` extension, other extensions that want to read or write geospatial data must either depend on `spatial`, implement their own incompatible geometry representation, or force users to handle the conversions themselves.
 
-By moving `GEOMETRY` into DuckDB’s core, extensions can now produce and consume geometry values natively, without depending on `spatial`. While the `spatial` extension still provides most of the functions for working with geometries, the type itself becomes a shared foundation that the entire ecosystem can build on. We’ve already added `GEOMETRY` support to the Postgres scanner and GeoArrow conversion for Arrow import and export. Geometry support in additional extensions is coming soon. 
+By moving `GEOMETRY` into DuckDB’s core, extensions can now produce and consume geometry values natively, without depending on `spatial`. While the `spatial` extension still provides most of the functions for working with geometries, the type itself becomes a shared foundation that the entire ecosystem can build on. We’ve already added `GEOMETRY` support to the Postgres scanner and GeoArrow conversion for Arrow import and export. Geometry support in additional extensions is coming soon.
 
 This change also enables deeper integration with DuckDB’s storage engine and query optimizer, unlocking new compression techniques, query optimizations, and CRS awareness capabilities that were not possible when `GEOMETRY` only existed as an extension type. This is all documented in the new [geometry page]({% link docs/current/sql/data_types/geometry.md %}) in the documentation, but we will highlight some below.
 

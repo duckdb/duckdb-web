@@ -9,13 +9,13 @@ excerpt: "Hugging Face hosts hundreds of thousands of datasets, and DuckDB can r
 tag: extensions
 ---
 
-[Hugging Face](https://huggingface.co/) is where much of the machine learning community publishes and finds its datasets, while DuckDB is the in-process analytical database that queries files like CSV and Parquet directly, with no server or warehouse to install or run. 
+[Hugging Face](https://huggingface.co/) is where much of the machine learning community publishes and finds its datasets, while DuckDB is the in-process analytical database that queries files like CSV and Parquet directly, with no server or warehouse to install or run.
 
 Did you know that, since DuckDB [v0.10.3](https://github.com/duckdb/duckdb/releases/tag/v0.10.3) (released on May 22, 2024), you can point a `SELECT` at a dataset on the [Hugging Face Hub](https://huggingface.co/docs/hub), using the DuckDB `hf://` protocol, and query it, without downloading it first? This post covers how that integration works and the use cases it fits.
 
 ## Background
 
-On the [Hugging Face Hub](https://huggingface.co/docs/hub), each dataset is a git repository holding its data as plain files, usually CSV, JSONL, or Parquet. The [`cais/mmlu`](https://huggingface.co/datasets/cais/mmlu) benchmark and the [`datasets-examples/doc-formats-csv-1`](https://huggingface.co/datasets/datasets-examples/doc-formats-csv-1) repository used later in this post are two such examples: you can browse their files and commit history in the browser, the same way you would any git repository. 
+On the [Hugging Face Hub](https://huggingface.co/docs/hub), each dataset is a git repository holding its data as plain files, usually CSV, JSONL, or Parquet. The [`cais/mmlu`](https://huggingface.co/datasets/cais/mmlu) benchmark and the [`datasets-examples/doc-formats-csv-1`](https://huggingface.co/datasets/datasets-examples/doc-formats-csv-1) repository used later in this post are two such examples: you can browse their files and commit history in the browser, the same way you would any git repository.
 
 Before the Hugging Face integration, getting at that data from DuckDB meant downloading the files first, or loading them with the Hugging Face [`datasets`](https://huggingface.co/docs/datasets) library, before they could be read and analyzed. Either way, the data had to be copied out of the [Hugging Face Hub](https://huggingface.co/docs/hub) before you could query it.
 

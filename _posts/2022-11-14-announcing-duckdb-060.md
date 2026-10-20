@@ -79,7 +79,7 @@ The parallel CSV reader can be enabled by setting the `experimental_parallel_csv
 SET experimental_parallel_csv = true;
 ```
 
-Below is the load time of a 720 MB CSV file containing the `lineitem` table from the `TPC-H` benchmark, 
+Below is the load time of a 720 MB CSV file containing the `lineitem` table from the `TPC-H` benchmark,
 
 | Variant         | Load time |
 | --------------- | --------: |
@@ -278,7 +278,7 @@ COPY lineitem TO 'lineitem-big.parquet';
 ```
 
 ```text
-   32% ▕███████████████████▏                                        ▏ 
+   32% ▕███████████████████▏                                        ▏
 ```
 
 In the future we aim to enable the progress bar by default in other clients. For now, this can be done manually by running the following SQL queries:

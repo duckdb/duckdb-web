@@ -40,7 +40,7 @@ TODO: this needs potentially an image
 
 ### Asynchronous I/O
 
-DuckDB v2.0 introduces [asynchronous I/O]({% link docs/preview/data/io.md %}) throughout the engine. The I/O layer now scales independently from the query processing layer, issuing reads in the background and keeping multiple requests in flight. This means far more parallelism for remote reads and dramatically faster queries on object storage such as [`s3://`]({% link docs/preview/core_extensions/httpfs/s3api.md %}). 
+DuckDB v2.0 introduces [asynchronous I/O]({% link docs/preview/data/io.md %}) throughout the engine. The I/O layer now scales independently from the query processing layer, issuing reads in the background and keeping multiple requests in flight. This means far more parallelism for remote reads and dramatically faster queries on object storage such as [`s3://`]({% link docs/preview/core_extensions/httpfs/s3api.md %}).
 
 We described the design in detail in a [dedicated blog post]({% post_url 2026-07-31-asynchronous-io %}).
 In this blog post, we showed the network throughput over the course of a query with and without asynchronous I/O:
@@ -166,19 +166,19 @@ FROM events;
 
 ### Faster Queries Across the Board
 
-As with every release, a lot of work went into making your existing queries faster without you doing anything. Partial aggregates are now pushed below joins, redundant aggregations are reused, the recursive CTE engine has been rewritten, aggregations spill to disk when they outgrow memory, and row-group pruning has been massively expanded across structs, lists, decimals, UUIDs, `IN` filters and even function predicates. 
+As with every release, a lot of work went into making your existing queries faster without you doing anything. Partial aggregates are now pushed below joins, redundant aggregations are reused, the recursive CTE engine has been rewritten, aggregations spill to disk when they outgrow memory, and row-group pruning has been massively expanded across structs, lists, decimals, UUIDs, `IN` filters and even function predicates.
 
 In a [microbenchmark]({% post_url 2026-08-17-duckdb-20-highlights %}#6-faster-queries-across-the-board) of single-source reachability over a graph with one million edges, DuckDB v2.0 runs a plain recursive CTE about 40× faster than v1.5. We explain how in a [dedicated blog post]({% post_url 2026-08-25-how-duckdb-runs-recursive-ctes-faster %}).
 
 ### Storage Format v2.0
 
-DuckDB v2.0 bumps the default [storage format version]({% link docs/preview/internals/storage.md %}) to v2.0.0. Column metadata is now loaded lazily, so wide tables open faster; the `DICT_FSST` string compression method is enabled by default; deletes are stored compactly; and the storage layer performs much stronger corruption validation on read. Databases with big indexes and wide tables open faster and use far less memory. 
+DuckDB v2.0 bumps the default [storage format version]({% link docs/preview/internals/storage.md %}) to v2.0.0. Column metadata is now loaded lazily, so wide tables open faster; the `DICT_FSST` string compression method is enabled by default; deletes are stored compactly; and the storage layer performs much stronger corruption validation on read. Databases with big indexes and wide tables open faster and use far less memory.
 
 Because the new format is not backward compatible, see the [migration section](#migrating-to-v20) below.
 
 ### Write Extensions Once and Host Them Yourself
 
-DuckDB v2.0 ships a revamped, [stable C API]({% link docs/preview/clients/c/overview.md %}#stable-c-api-and-c-api) with a versioned [ABI](https://en.wikipedia.org/wiki/Application_binary_interface), so an extension built once keeps working across releases, along with a thin C++ API on top of it. 
+DuckDB v2.0 ships a revamped, [stable C API]({% link docs/preview/clients/c/overview.md %}#stable-c-api-and-c-api) with a versioned [ABI](https://en.wikipedia.org/wiki/Application_binary_interface), so an extension built once keeps working across releases, along with a thin C++ API on top of it.
 
 You can also register and host your own trusted [extension repositories]({% link docs/preview/extensions/extension_repositories.md %}), so an organization can host and sign its own extensions and have them install and load just like the built-in ones.
 
@@ -220,7 +220,7 @@ There is more: SQL-standard [`FETCH FIRST`]({% link docs/preview/sql/query_synta
 
 ## Migrating to v2.0
 
-DuckDB v2.0 comes with a small set of breaking changes. For most users, upgrading is straightforward, but complex deployments running many DuckDB processes need more care. The storage format is the most likely source of problems. We recommend testing v2.0.0 on a shadow system before switching production over, and if your workload is mission-critical, you may want to wait for the first patch releases. 
+DuckDB v2.0 comes with a small set of breaking changes. For most users, upgrading is straightforward, but complex deployments running many DuckDB processes need more care. The storage format is the most likely source of problems. We recommend testing v2.0.0 on a shadow system before switching production over, and if your workload is mission-critical, you may want to wait for the first patch releases.
 
 For the full details, see the [migration guide]({% link docs/preview/operations_manual/migration.md %}).
 

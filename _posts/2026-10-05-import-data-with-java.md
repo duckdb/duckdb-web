@@ -77,12 +77,12 @@ public class InsertWorker implements Runnable {
                 break;
             }
             insertDayRecords(day, collection, ps);
-        } 
+        }
         // error handling omitted
     }
 
     static void insertDayRecords(LocalDate day, MongoCollection<Document> collection, PreparedStatement ps) {
-        MongoCursor<Document> docs = collection.find(Filters.and( // other filters omittted 
+        MongoCursor<Document> docs = collection.find(Filters.and( // other filters omittted
                 Filters.gte("updated_date", day.atStartOfDay().toInstant(ZoneOffset.UTC)),
                 Filters.lt("updated_date", day.plusDays(1).atStartOfDay().toInstant(ZoneOffset.UTC))
         )).iterator();

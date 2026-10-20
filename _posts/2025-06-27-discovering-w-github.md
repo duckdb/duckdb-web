@@ -185,7 +185,7 @@ selection_query = (
 The above returns:
 
 ```text
-repo_details = [duckdb-web](https://github.com/duckdb/duckdb-web)<br>DuckDB website and documentation<br>**License** MIT License<br>**Owner** duckdb 
+repo_details = [duckdb-web](https://github.com/duckdb/duckdb-web)<br>DuckDB website and documentation<br>**License** MIT License<br>**Owner** duckdb
 repo_details = [duckdb](https://github.com/duckdb/duckdb)<br>DuckDB is an analytical in-process SQL database management system<br>**License** MIT License<br>**Owner** duckdb
 ...
 ```
@@ -208,7 +208,7 @@ In order to export the data as a Markdown file we are applying a few tricks. The
 
 ```python
 duckdb_conn.sql("""
-    select 
+    select
         NULL,
         'Name',
         'Topics',
@@ -226,7 +226,7 @@ We then union the above header with the delimiter row:
 ```python
 .union(
     duckdb_conn.sql("""
-    select 
+    select
         NULL as '',
         '--' as "Name",
         '--' as "Topics",
