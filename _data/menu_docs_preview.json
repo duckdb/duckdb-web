@@ -1819,6 +1819,10 @@
                   "url": "dbeaver"
                 },
                 {
+                  "page": "DBine SQL Editor",
+                  "url": "dbine"
+                },
+                {
                   "page": "LibreDB Studio SQL Editor",
                   "url": "libredb_studio"
                 },
