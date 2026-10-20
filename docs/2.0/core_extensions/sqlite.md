@@ -183,6 +183,20 @@ DuckDB can read or modify a SQLite database while DuckDB or SQLite reads or modi
 
 > Warning Linking multiple copies of the SQLite library into the same application can lead to application errors. See [sqlite_scanner Issue #82](https://github.com/duckdb/sqlite_scanner/issues/82) for more information.
 
+## Attach Options
+
+The following options can be passed to `ATTACH` when attaching a SQLite database:
+
+| Option | Description | Default |
+|--------|-------------|---------|
+| `BUSY_TIMEOUT` | Time in milliseconds to wait when the SQLite file is locked by another process before returning a `database is locked` error. Set to `0` to fail immediately. | `5000` |
+| `JOURNAL_MODE` | SQLite [journaling mode](https://www.sqlite.org/pragma.html#pragma_journal_mode), e.g., `'WAL'`. | (SQLite default) |
+
+```sql
+ATTACH 'file.db' AS f (TYPE sqlite, BUSY_TIMEOUT 0);
+ATTACH 'file.db' AS f (TYPE sqlite, JOURNAL_MODE 'WAL');
+```
+
 ## Settings
 
 The extension exposes the following configuration parameters.
