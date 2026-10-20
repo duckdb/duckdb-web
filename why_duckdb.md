@@ -23,13 +23,13 @@ For DuckDB, there is no DBMS server software to install, update and maintain. Du
 
 ### Portable
 
-Thanks to having no dependencies, DuckDB is extremely portable. It can be compiled for all major operating systems (Linux, macOS, Windows) and CPU architectures (x86, ARM). It can be deployed from small, resource-constrained edge devices to large multi-terabyte memory servers with 100+ CPU cores. Using [DuckDB-Wasm]({% link docs/current/clients/wasm/overview.md %}), DuckDB can also run in web browsers and even on mobile phones.
+Thanks to having no dependencies, DuckDB is extremely portable. It can be compiled for all major operating systems (Linux, macOS, Windows) and CPU architectures (x86, ARM). It can be deployed from small, resource-constrained edge devices to large multi-terabyte memory servers with 100+ CPU cores. Using [DuckDB-Wasm]({% link docs/1.5/clients/wasm/overview.md %}), DuckDB can also run in web browsers and even on mobile phones.
 
-DuckDB provides [APIs for C, C++, Go, Python, R, Rust, Java, Node.js and other languages]({% link docs/current/clients/overview.md %}).
+DuckDB provides [APIs for C, C++, Go, Python, R, Rust, Java, Node.js and other languages]({% link docs/1.5/clients/overview.md %}).
 
 ### Feature-Rich
 
-DuckDB provides serious data management features. There is extensive support for **complex queries** in SQL with a large function library, window functions, etc. DuckDB provides **transactional guarantees** (ACID properties) through our custom, bulk-optimized [Multi-Version Concurrency Control (MVCC)](https://en.wikipedia.org/wiki/Multiversion_concurrency_control). Data can be stored in DuckDB's native format, a **single-file database** or in one of the supported [lakehouse formats]({% link docs/current/lakehouse_formats.md %}). DuckDB's native format supports secondary indexes to speed up queries trying to find a single table entry, while lakehouse formats, including the [DuckLake format](https://ducklake.select/) can scale up to petabytes of data.
+DuckDB provides serious data management features. There is extensive support for **complex queries** in SQL with a large function library, window functions, etc. DuckDB provides **transactional guarantees** (ACID properties) through our custom, bulk-optimized [Multi-Version Concurrency Control (MVCC)](https://en.wikipedia.org/wiki/Multiversion_concurrency_control). Data can be stored in DuckDB's native format, a **single-file database** or in one of the supported [lakehouse formats]({% link docs/1.5/lakehouse_formats.md %}). DuckDB's native format supports secondary indexes to speed up queries trying to find a single table entry, while lakehouse formats, including the [DuckLake format](https://ducklake.select/) can scale up to petabytes of data.
 
 DuckDB is deeply integrated into Python and R for efficient interactive data analysis.
 
@@ -41,7 +41,7 @@ To efficiently support this workload, it is critical to reduce the amount of CPU
 
 ### Extensible
 
-DuckDB offers a [flexible extension mechanism]({% link docs/current/core_extensions/overview.md %}) that allows defining new data types, functions, file formats and new SQL syntax. In fact, many of DuckDB's key features, such as support for the [Parquet file format]({% link docs/current/data/parquet/overview.md %}), [JSON]({% link docs/current/data/json/overview.md %}), [time zones]({% link docs/current/core_extensions/icu.md %}), and support for the [HTTP(S) and S3 protocols]({% link docs/current/core_extensions/httpfs/overview.md %}) are implemented as extensions. Extensions also [work in DuckDB Wasm]({% post_url 2023-12-18-duckdb-extensions-in-wasm %}).
+DuckDB offers a [flexible extension mechanism]({% link docs/1.5/core_extensions/overview.md %}) that allows defining new data types, functions, file formats and new SQL syntax. In fact, many of DuckDB's key features, such as support for the [Parquet file format]({% link docs/1.5/data/parquet/overview.md %}), [JSON]({% link docs/1.5/data/json/overview.md %}), [time zones]({% link docs/1.5/core_extensions/icu.md %}), and support for the [HTTP(S) and S3 protocols]({% link docs/1.5/core_extensions/httpfs/overview.md %}) are implemented as extensions. Extensions also [work in DuckDB Wasm]({% post_url 2023-12-18-duckdb-extensions-in-wasm %}).
 User contributions are available as [community extensions]({% link community_extensions/index.md %}).
 
 ### Free
@@ -52,7 +52,7 @@ DuckDB's development started while the main developers were public servants in t
 
 While DuckDB was originally created by a research group, it was never intended to be a research prototype. Instead, it was intended to become a stable and mature database system. To facilitate this stability, DuckDB is intensively tested using [Continuous Integration](https://github.com/duckdb/duckdb/actions). DuckDB's test suite currently contains millions of queries, and includes queries adapted from the test suites of SQLite, PostgreSQL, and MonetDB. Tests are repeated on a wide variety of platforms and compilers. Every pull request is checked against the full test setup and only merged if it passes.
 
-In addition to this test suite, we run various tests that stress DuckDB under heavy loads. We run the [TPC-H]({% link docs/current/core_extensions/tpch.md %}) and [TPC-DS]({% link docs/current/core_extensions/tpcds.md %}) benchmarks, and run various tests where DuckDB is used by many clients in parallel.
+In addition to this test suite, we run various tests that stress DuckDB under heavy loads. We run the [TPC-H]({% link docs/1.5/core_extensions/tpch.md %}) and [TPC-DS]({% link docs/1.5/core_extensions/tpcds.md %}) benchmarks, and run various tests where DuckDB is used by many clients in parallel.
 
 ## Peer-Reviewed Papers and Thesis Works
 
@@ -92,6 +92,6 @@ DuckDB uses some components from various open-source projects and draws inspirat
 * **Test framework:** DuckDB uses the [Catch2](https://github.com/catchorg/Catch2) unit test framework.
 * **Test cases:** We use the [SQL Logic Tests from SQLite](https://www.sqlite.org/sqllogictest/doc/trunk/about.wiki) to test DuckDB.
 * **Result validation:** [Manuel Rigger](https://www.manuelrigger.at) used his excellent [SQLancer](https://github.com/sqlancer/sqlancer) tool to verify DuckDB result correctness.
-* **Query fuzzing:** We use [SQLsmith](https://github.com/anse1/sqlsmith) via the [`sqlsmith` extension]({% link docs/current/core_extensions/sqlsmith.md %}) to generate random queries for additional testing.
-* **JSON parser:** We use [yyjson](https://github.com/ibireme/yyjson), a high performance JSON library written in ANSI C, to parse JSON in DuckDB's [JSON Extension]({% link docs/current/data/json/overview.md %}).
+* **Query fuzzing:** We use [SQLsmith](https://github.com/anse1/sqlsmith) via the [`sqlsmith` extension]({% link docs/1.5/core_extensions/sqlsmith.md %}) to generate random queries for additional testing.
+* **JSON parser:** We use [yyjson](https://github.com/ibireme/yyjson), a high performance JSON library written in ANSI C, to parse JSON in DuckDB's [JSON Extension]({% link docs/1.5/data/json/overview.md %}).
 * **`USING KEY` in recursive CTEs:** An innovative idea from the University of Tübingen, which allows treating intermediate results in recursive common table expressions as keyed dictionaries, leading to significant improvements in performance and memory usage. See the paper [“How DuckDB is `USING KEY` to Unlock Recursive Query Performance”]({% link _library/2025-06-22-bamberg-using-key-sigmod.md %}).

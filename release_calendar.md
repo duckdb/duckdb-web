@@ -73,8 +73,8 @@ Since version 0.4.0, only major and minor versions get a codename.
 
 ## Release Calendar as a CSV File
 
-You can get a [CSV file containing past DuckDB releases](/data/duckdb-releases.csv) and analyze it using DuckDB's [docs/currenter]({% link docs/current/data/csv/overview.md %}).
-For example, you can compute the average number of days between releases using the [`lag` window function]({% link docs/current/sql/functions/window_functions.md %}#lagexpr-offset-default-order-by-ordering-ignore-nulls):
+You can get a [CSV file containing past DuckDB releases](/data/duckdb-releases.csv) and analyze it using DuckDB's [docs/currenter]({% link docs/1.5/data/csv/overview.md %}).
+For example, you can compute the average number of days between releases using the [`lag` window function]({% link docs/1.5/sql/functions/window_functions.md %}#lagexpr-offset-default-order-by-ordering-ignore-nulls):
 
 ```sql
 SELECT avg(diff)::DECIMAL(8, 2) AS average_days_between_releases
