@@ -389,7 +389,7 @@ You can temporarily re-enable the old syntax with `SET lambda_syntax = 'enable_s
 
 #### Amalgamation Builds
 
-The [amalgamation build]({% link docs/lts/dev/building/overview.md %}), which bundles DuckDB's entire source code into a single header and a single source file, is now deprecated. The amalgamation has grown too large to be realistically useful in most cases.
+The [amalgamation build](/docs/1.4/dev/building/overview), which bundles DuckDB's entire source code into a single header and a single source file, is now deprecated. The amalgamation has grown too large to be realistically useful in most cases.
 
 #### Gradual Phase-Out of macOS x86_64
 

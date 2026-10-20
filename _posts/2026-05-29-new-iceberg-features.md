@@ -89,7 +89,7 @@ You can also combine matched and unmatched branches with `WHEN MATCHED THEN DELE
 
 ## `ALTER TABLE` Support
 
-In DuckDB v1.4's Iceberg extension, the lack of schema evolution of Iceberg tables was a [documented limitation]({% link docs/lts/core_extensions/iceberg/iceberg_rest_catalogs.md %}#unsupported-operations).
+In DuckDB v1.4's Iceberg extension, the lack of schema evolution of Iceberg tables was a [documented limitation](/docs/1.4/core_extensions/iceberg/iceberg_rest_catalogs#unsupported-operations).
 In v1.5.3, the `ALTER TABLE` statement is now supported against Iceberg tables, covering the most common schema-evolution operations.
 
 ```sql
