@@ -224,6 +224,8 @@ On startup, the CLI reads and executes all commands in the file `~/.duckdbrc`, i
 This allows you to store the configuration state of the CLI.
 You may also point to a different initialization file using the `-init` flag.
 
+> Warning The CLI reads and writes several files in the user's home directory, including `~/.duckdbrc`, `~/.duckdb_history`, and the extension directory `~/.duckdb/extensions`. If the home directory is missing or not writable, startup can fail with an error such as `IO Error: Failed to create directory`. In sandboxed or restricted environments, set the `HOME` environment variable to a writable location to control where these files are created. See [Files Created by DuckDB]({% link docs/2.0/operations_manual/footprint_of_duckdb/files_created_by_duckdb.md %}) for the full list.
+
 ### Setting a Custom Prompt
 
 As an example, a file in the same directory as the DuckDB CLI named `prompt.sql` will change the DuckDB prompt to be a duck head and run a SQL statement.
