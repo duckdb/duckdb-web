@@ -158,6 +158,8 @@ The attached catalog also exposes a `query` table macro for ad-hoc SQL scoped to
 FROM remote_db.query('SELECT 42');
 ```
 
+> `ATTACH` binds the remote's table definitions on the client, so a single table definition that cannot be bound fails the whole attachment. If this happens (for example, with an Iceberg catalog using lazy table resolution), see [`ATTACH` Fails to Bind a Remote Table Definition]({% link docs/preview/quack/troubleshooting.md %}#attach-fails-to-bind-a-remote-table-definition).
+
 ### Routing a Session with `CONNECT`
 
 Once a remote is attached, the [`CONNECT` statement]({% link docs/preview/sql/statements/connect.md %}) routes the whole session to it, so that subsequent queries execute on the server and their results stream back. This is the recommended way to work with a remote Quack database: you write plain SQL without qualifying every table name with the attached catalog. `DISCONNECT` returns the session to the local database.
