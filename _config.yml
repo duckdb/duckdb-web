@@ -59,8 +59,8 @@ lts_short_duckdb_version: "1.4"
 next_major_duckdb_codename: "Cyanoptera"
 next_major_duckdb_version: "2.0.0"
 next_major_short_duckdb_version: "2.0"
-next_major_duckdb_java_version: "2.0.0-alpha44738-892"
-next_major_duckdb_odbc_version: "d54cbbe3"
+next_major_duckdb_java_version: "2.0.0-alpha49003-937"
+next_major_duckdb_odbc_version: "8f79c4f6"
 # more Jekyll config
 livereload: true
 highlighter: rouge
