@@ -88,7 +88,7 @@ The CLI also has shortcuts for this: the new [`-serve` and `-connect` arguments]
 
 <div class="duck-diagram-box" markdown="1">
 
-#### <svg class="icon"><use href="#database-01"></use></svg> DuckDB server
+#### <svg class="icon"><use href="#database-01"></use></svg> CLI server
 
 ```batch
 duckdb -serve
@@ -97,7 +97,7 @@ duckdb -serve
 <!-- «memory» D -->
 ```plsql
 CREATE TABLE t AS
-    SELECT 42 AS x;
+      SELECT 42 AS x;
 ```
 
 </div>
@@ -106,7 +106,7 @@ CREATE TABLE t AS
 
 <div class="duck-diagram-box" markdown="1">
 
-#### <svg class="icon"><use href="#database-01"></use></svg> DuckDB client
+#### <svg class="icon"><use href="#database-01"></use></svg> CLI client
 
 ```batch
 duckdb -connect
@@ -115,9 +115,7 @@ duckdb -connect
 <!-- «quack:localhost memory» -->
 ```plsql
 FROM t;
-```
 
-```text
 ┌───────┐
 │   x   │
 │ int32 │
