@@ -32,7 +32,7 @@ To find your way around the documentation for all of the new features, we also p
 
 ### A Brand New SQL Parser
 
-DuckDB has always used a parser derived from PostgreSQL's. In v2.0 we ship our own modern, extensible [PEG-based parser]({% post_url 2026-08-20-duckdb-20-peg-parser %}). Extensions can now hook into the grammar itself (an idea we first explored in our [research on runtime-extensible parsers]({% post_url 2024-11-22-runtime-extensible-parsers %})), so expect extensions that expose entirely new SQL syntax, and error messages now come with precise source locations. The new parser is designed to be compatible with the old one, so you should not notice the swap. If you do, please file an issue.
+DuckDB has always used a parser derived from PostgreSQL's. In v2.0 we ship our own modern, extensible [PEG-based parser]({% post_url 2026-08-20-duckdb-20-peg-parser %}). Extensions can now hook into the grammar itself (an idea we first explored in our [research on runtime-extensible parsers]({% post_url 2024-11-22-runtime-extensible-parsers %})), so expect extensions that expose entirely new SQL syntax, and error messages now come with precise source locations. For details, see the [PEG parser documentation]({% link docs/preview/sql/peg_parser.md %}). The new parser is designed to be compatible with the old one, so you should not notice the swap. If you do, please file an issue. In the meantime, you can switch back to the old parser using the [`legacy_parser` extension]({% link docs/preview/core_extensions/legacy_parser.md %}) by running `SET enable_legacy_parser = true;`{:.language-sql .highlight}.
 
 The old parser had served DuckDB since its first commit in 2018. Its grammar was generated with YACC/Bison, which produces an LALR(1) parser, so as DuckSQL grew even small additions could collide with existing rules and raise `shift/reduce` or `reduce/reduce` conflicts. A PEG grammar avoids this by trying alternatives in the order they are written, so adding syntax no longer risks breaking unrelated rules. Similarly, Python itself has recently also moved to a PEG-based parser in [version 3.9](https://peps.python.org/pep-0617/), for the same flexibility.
 
@@ -71,13 +71,20 @@ For more details, see the [`CREATE TRIGGER` statement page]({% link docs/preview
 
 ### DuckDB as a Server: Quack and `CONNECT`
 
-DuckDB has been an in-process database since day one, but v2.0 lets it run as a server too. The [`quack` extension]({% link docs/preview/core_extensions/quack.md %}) implements DuckDB's native protocol, so any DuckDB process can serve its databases over the network and any other DuckDB can attach to it and route queries there using the new [`CONNECT` statement]({% link docs/preview/sql/statements/connect.md %}):
+DuckDB has been an in-process database since day one, but v2.0 lets it run as a server too. The [`quack` extension]({% link docs/preview/core_extensions/quack.md %}) implements DuckDB's native protocol, so any DuckDB process can [serve its databases]({% link docs/preview/quack/overview.md %}#server-side-usage) over the network and any other DuckDB can attach to it and route queries there using the new [`CONNECT` statement]({% link docs/preview/sql/statements/connect.md %}):
 
 ```sql
 ATTACH 'quack:server.example.com' AS qk (TOKEN 'my_token');
 CONNECT qk;
 SELECT count(*) FROM events; -- executes on the server
 DISCONNECT;
+```
+
+The CLI also has shortcuts for this: the new [`-serve` and `-connect` arguments]({% link docs/preview/clients/cli/arguments.md %}#serving-and-connecting-to-remote-databases) start a Quack server or connect to one directly from the command line:
+
+```batch
+duckdb -serve    # server
+duckdb -connect  # client
 ```
 
 The `CONNECT` statement is not limited to Quack: it points your session at any remote database that supports it, and the new remote pushdown optimizer ships SQL directly to PostgreSQL and MySQL instead of pulling tables over the wire.
@@ -134,17 +141,17 @@ DISCONNECT;
 
 If you have worked with analytical systems in the past, you may assume that DuckDB cannot handle transactional workloads. But DuckDB has been built as a transactional, multi-connection database with full [MVCC and transaction isolation]({% post_url 2024-10-30-analytics-optimized-concurrent-transactions %}) since day one. Most users just never needed that in a single-user scenario. It turns out DuckDB handles transactions well: it's fast enough to compete with general-purpose databases like PostgreSQL on quite a few workloads, and the client/server pattern finally lets that machinery shine in multi-tenant, long-running deployments.
 
-Running DuckDB long-term also comes with new challenges, which is why v2.0 pushes on better metrics, logs, and observability (see, e.g., the metrics layer rework in [#22799](https://github.com/duckdb/duckdb/pull/22799)) that let you look at a DuckDB instance and see what it is actually doing. People even built standalone clients for the Quack protocol within weeks of the preview. We thought we were extending DuckDB to talk to other DuckDBs; the world said no, no, no, and built their own clients. Who would have thought.
+Running DuckDB long-term also comes with new challenges, which is why v2.0 pushes on better [metrics]({% link docs/preview/dev/metrics.md %}), [logs]({% link docs/preview/operations_manual/logging/overview.md %}), and observability (see, e.g., the metrics layer rework in [#22799](https://github.com/duckdb/duckdb/pull/22799)) that let you look at a DuckDB instance and see what it is actually doing. People even built standalone clients for the Quack protocol within weeks of the preview. We thought we were extending DuckDB to talk to other DuckDBs; the world said no, no, no, and built their own clients. Who would have thought.
 
 ### Agent Mode in the CLI
 
 Coding agents such as Claude Code, Codex and Cursor increasingly drive the DuckDB CLI on their users' behalf. The v2.0 CLI detects when it is being run by an agent and switches to [agent mode]({% post_url 2026-10-09-agent-mode %}): it prints compact Markdown tables instead of padded boxes, says clearly when a result was truncated, stops runaway queries early and reports errors as JSON.
 
-Long-running SQL queries report their expected cost prior to running, so the agent can decide whether to wait. In our experiments on TPC-H, agent mode cut the number of output tokens the model had to read by 59%. You can turn it _on_ for manual testing using the `-agent` flag or instruct your agent to turn it _off_ using the `-no-agent` flag.
+Long-running SQL queries report their expected cost prior to running, so the agent can decide whether to wait. In our experiments on TPC-H, agent mode cut the number of output tokens the model had to read by 59%. You can turn it _on_ for manual testing using the [`-agent` flag]({% link docs/preview/clients/cli/agent_mode.md %}#activating-agent-mode) or instruct your agent to turn it _off_ using the `-no-agent` flag.
 
 ### `VARIANT` Becomes a First-Class Citizen
 
-The [`VARIANT` type]({% link docs/preview/sql/data_types/variant.md %}) stores semi-structured, schema-less data such as JSON while keeping the performance of columnar execution. First introduced [in v1.5]({% post_url 2026-03-09-announcing-duckdb-150 %}#variant-type), it is now fully integrated. Think of it as JSON on steroids: a `VARIANT` column can store differently-shaped data in every row, but unlike JSON it is not a text format. DuckDB detects the common structure in your data and “shreds” it, so it compresses well and executes fast. In v2.0 the pipeline works end to end, from shredded execution straight out of storage to shredded `VARIANT` reading and writing for Parquet, backed by a family of `variant_*` functions.
+The [`VARIANT` type]({% link docs/preview/sql/data_types/variant.md %}) stores semi-structured, schema-less data such as JSON while keeping the performance of columnar execution. First introduced [in v1.5]({% post_url 2026-03-09-announcing-duckdb-150 %}#variant-type), it is now fully integrated. Think of it as JSON on steroids: a `VARIANT` column can store differently-shaped data in every row, but unlike JSON it is not a text format. DuckDB detects the common structure in your data and “shreds” it, so it compresses well and executes fast. In v2.0 the pipeline works end to end, from shredded execution straight out of storage to shredded `VARIANT` reading and writing for Parquet, backed by a family of [`variant_*` functions]({% link docs/preview/sql/functions/variant.md %}).
 
 ```sql
 CREATE TABLE events (payload VARIANT);
@@ -171,7 +178,7 @@ Because the new format is not backward compatible, see the [migration section](#
 
 ### Write Extensions Once and Host Them Yourself
 
-DuckDB v2.0 ships a revamped, stable C API with a versioned [ABI](https://en.wikipedia.org/wiki/Application_binary_interface), so an extension built once keeps working across releases, along with a thin C++ API on top of it. 
+DuckDB v2.0 ships a revamped, [stable C API]({% link docs/preview/clients/c/overview.md %}#stable-c-api-and-c-api) with a versioned [ABI](https://en.wikipedia.org/wiki/Application_binary_interface), so an extension built once keeps working across releases, along with a thin C++ API on top of it. 
 
 You can also register and host your own trusted [extension repositories]({% link docs/preview/extensions/extension_repositories.md %}), so an organization can host and sign its own extensions and have them install and load just like the built-in ones.
 
@@ -227,7 +234,7 @@ We also switched to Clang as the default compiler for our release builds. On Lin
 
 ### Timezones, Calendars and Collations Without ICU
 
-Timezone-aware timestamps, calendars and collations have always been powered by the ICU library. In v2.0, the ICU library is gone entirely: the `icu` extension now implements timezones, calendars and collations itself, with the timezone data built directly from the IANA database and compressed down to around 45 kB.
+Timezone-aware timestamps, calendars and collations have always been powered by the ICU library. In v2.0, the ICU library is gone entirely: the [`icu` extension]({% link docs/preview/core_extensions/icu.md %}) now implements timezones, calendars and collations itself, with the timezone data built directly from the IANA database and compressed down to around 45 kB.
 
 Everything keeps working exactly as before, and the native implementation is also faster. If you find any issues, please [let us know](https://github.com/duckdb/duckdb/issues)!
 
