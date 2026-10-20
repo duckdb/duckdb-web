@@ -185,7 +185,7 @@ The old parser had served DuckDB since its first commit in 2018. Its grammar was
 
 ### Write Extensions Once and Host Them Yourself
 
-DuckDB v2.0 ships a revamped [C API v2]({% link docs/preview/clients/c/overview.md %}#stable-c-api-and-c-api), which is considerably more powerful than its predecessor and exposes components such as file systems and table functions to extensions. Before marking it as stable, we would like to test it in the field, so please give it a try and send us your feedback!
+DuckDB v2.0 ships a revamped [C API v2]({% link docs/preview/clients/c/overview.md %}#stable-c-api-and-c-api), which is considerably more powerful than its predecessor and exposes components such as file systems and table functions to extensions. Before marking it as stable, we would like to test it in the field, so please give it a try and [send us your feedback](https://github.com/duckdb/duckdb/discussions/27525)!
 
 You can also register and host your own trusted extension repositories, so an organization can host and sign its own extensions and have them install and load just like the built-in ones:
 
