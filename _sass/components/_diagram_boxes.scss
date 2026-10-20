@@ -106,6 +106,14 @@ body.documentation main .wrap .duck-diagram-box .highlighter-rouge > div.highlig
 	border-radius: var(--page-radius-box-inner);
 }
 
+/* The boxes are narrow, so drop the trailing padding that would otherwise
+   push long lines into a horizontal scroll bar. */
+.duck-diagram-box pre.highlight > code,
+.newswrap .postwrap .postcontent .duck-diagram-box pre.highlight > code,
+body.documentation main .wrap .duck-diagram-box pre.highlight > code {
+	padding-right: 0;
+}
+
 .duck-diagram-box pre,
 .duck-diagram-box pre.highlight,
 .duck-diagram-box code,

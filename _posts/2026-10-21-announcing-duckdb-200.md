@@ -28,9 +28,7 @@ For details, see the [release calendar]({% link release_calendar.md %}).
 
 To find your way around the documentation for all of the new features, we also published a [“What's New in the Docs for 2.0”]({% link docs/preview/whats_new_in_the_docs.md %}) page that links each feature below to its documentation.
 
-## Highlights
-
-### DuckDB as a Server: Quack and `CONNECT`
+## DuckDB as a Server: Quack and `CONNECT`
 
 DuckDB has been an in-process database since day one, but v2.0 lets it run as a server too. The [`quack` extension]({% link docs/preview/core_extensions/quack.md %}) implements DuckDB's native protocol, so any DuckDB process can [serve its databases]({% link docs/preview/quack/overview.md %}#server-side-usage) over the network and any other DuckDB can attach to it and route queries there using the new [`CONNECT` statement]({% link docs/preview/sql/statements/connect.md %}):
 
@@ -136,7 +134,7 @@ FROM t;
 
 <!-- markdownlint-enable MD001 -->
 
-## Performance Improvements
+## Performance
 
 ### Asynchronous I/O
 
@@ -178,18 +176,11 @@ DuckDB has always used a parser derived from PostgreSQL's. In v2.0 we ship our o
 
 The old parser had served DuckDB since its first commit in 2018. Its grammar was generated with YACC/Bison, which produces an LALR(1) parser, so as DuckSQL grew even small additions could collide with existing rules and raise `shift/reduce` or `reduce/reduce` conflicts. A PEG grammar avoids this by trying alternatives in the order they are written, so adding syntax no longer risks breaking unrelated rules. Similarly, Python itself has recently also moved to a PEG-based parser in [version 3.9](https://peps.python.org/pep-0617/), for the same flexibility.
 
-TODO: this needs potentially an image
-
-
 ### Write Extensions Once and Host Them Yourself
 
 DuckDB v2.0 ships a revamped, [stable C API]({% link docs/preview/clients/c/overview.md %}#stable-c-api-and-c-api) with a versioned [ABI](https://en.wikipedia.org/wiki/Application_binary_interface), so an extension built once keeps working across releases, along with a thin C++ API on top of it.
 
-You can also register and host your own trusted [extension repositories]({% link docs/preview/extensions/extension_repositories.md %}), so an organization can host and sign its own extensions and have them install and load just like the built-in ones.
-
-TODO: integrate this to the text
-
-an organization can host and sign its own extensions and have them install and load just like the built-in ones:
+You can also register and host your own trusted extension repositories, so an organization can host and sign its own extensions and have them install and load just like the built-in ones:
 
 ```sql
 SET allow_extension_repositories = 'allowed';
@@ -201,19 +192,17 @@ INSTALL my_ext FROM my_repo;
 LOAD my_repo/my_ext;
 ```
 
-A repository is a name, a URL prefix, and one or more RSA public keys that are trusted to sign the extensions served from it. The prefix can point at anything DuckDB can read: a local path, `https`, `s3`, you name it. At `CREATE` time, DuckDB fetches the repository's public keys and pins them into the repository definition, printing each key's SHA-256 fingerprint so you can compare it against one published out of band. If you would rather not trust the network at all, you can pass the key directly:
+A repository is a name, a URL prefix, and one or more RSA public keys that are trusted to sign the extensions served from it. The prefix can point at anything DuckDB can read: a local path, `https`, `s3`, you name it. At `CREATE` time, DuckDB fetches the repository's public keys and pins them into the repository definition, printing each key's SHA-256 fingerprint so you can compare it against one published out of band.
 
-```sql
-CREATE EXTENSION REPOSITORY my_repo
-    WITH PREFIX 'https://extensions.example.org';
-    USING PUBLIC KEY '-----BEGIN PUBLIC KEY----- ...';
-```
-
-Pinned repositories survive restarts, support key rotation by trusting multiple keys, and can be audited at any time through the `duckdb_extension_repositories()` table function, or removed again with `DROP EXTENSION REPOSITORY`. Together with the stable C API, the extension story rounds out nicely: write your extension once, sign it, host it wherever you like, and `INSTALL` it anywhere.
+For more details, see the [Extension Repositories page]({% link docs/preview/extensions/extension_repositories.md %})
 
 ### Core Extension Updates
 
-TODO: We released [DuckLake 1.1](https://ducklake.select/2026/10/21/ducklake-11/), incl. spec and reference implementation
+(TODO: turn this into text)
+
+* We released [DuckLake 1.1](https://ducklake.select/2026/10/21/ducklake-11/), incl. spec and reference implementation
+* The Iceberg extension ...
+* The Delta extension ...
 
 ## SQL Features
 
@@ -297,6 +286,8 @@ These were a few highlights, but there are many more features and improvements i
 We would like to thank our community for the detailed issue reports and feedback that have driven this release, and our special thanks go to our contributors!
 
 <!-- TODO: maybe drop these? -->
+
+## Tmp
 
 ### Faster Queries Across the Board
 
