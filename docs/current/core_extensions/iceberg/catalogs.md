@@ -143,7 +143,7 @@ ATTACH '⟨account_id⟩' AS glue_catalog (
 );
 ```
 
-> Warning As with [Amazon S3 Tables]({% link docs/current/core_extensions/iceberg/amazon_s3_tables.md %}), `ENDPOINT_TYPE glue` always builds an endpoint of the form `glue.⟨region⟩.amazonaws.com/iceberg`, which is incorrect for regions that do not use the plain `amazonaws.com` suffix (most notably the AWS China regions `cn-north-1` and `cn-northwest-1`, which use `amazonaws.com.cn`). For such regions, attach with an explicit `ENDPOINT` (with the correct host) together with `AUTHORIZATION_TYPE 'sigv4'` instead of using `ENDPOINT_TYPE`.
+> Warning As with [Amazon S3 Tables](#amazon-s3-tables), `ENDPOINT_TYPE glue` always builds an endpoint of the form `glue.⟨region⟩.amazonaws.com/iceberg`, which is incorrect for regions that do not use the plain `amazonaws.com` suffix (most notably the AWS China regions `cn-north-1` and `cn-northwest-1`, which use `amazonaws.com.cn`). For such regions, attach with an explicit `ENDPOINT` (with the correct host) together with `AUTHORIZATION_TYPE 'sigv4'` instead of using `ENDPOINT_TYPE`.
 
 The warehouse identifier (the first argument to `ATTACH`) accepts the following forms:
 
@@ -184,7 +184,7 @@ WITH (
 );
 ```
 
-You can learn more about the `WITH` clause at [Creating Tables]({% link docs/current/core_extensions/iceberg/writing_to_iceberg.md %}#creating-tables).
+You can learn more about the `WITH` clause at [Creating Schemas and Tables]({% link docs/current/core_extensions/iceberg/writing_to_iceberg.md %}#creating-schemas-and-tables).
 
 ## Cloudflare R2 Data Catalog
 
@@ -223,7 +223,7 @@ To attach to a [Polaris](https://polaris.apache.org) catalog, use the following 
 CREATE SECRET polaris_secret (
     TYPE ICEBERG,
     CLIENT_ID '⟨admin⟩',
-    CLIENT_SECRET '⟨password⟩',
+    CLIENT_SECRET '⟨password⟩'
 );
 ```
 
@@ -357,7 +357,7 @@ ATTACH 'gs://biglake-public-nyc-taxi-iceberg' AS biglake_public (
 SELECT count(*) FROM biglake_public.public_data.nyc_taxicab;
 ```
 
-> Note: Google Cloud access tokens expire after 1 hour. For long-running sessions, you'll need to refresh the token periodically.
+> Google Cloud access tokens expire after 1 hour. For long-running sessions, you'll need to refresh the token periodically.
 
 ### Catalogs with Limited REST Spec Support
 

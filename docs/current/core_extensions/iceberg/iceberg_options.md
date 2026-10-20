@@ -24,13 +24,14 @@ The options provided to the `ATTACH` are divided into categories:
 | `PURGE_REQUESTED`                    | `BOOLEAN`  | `false`              | Sends the [PurgeRequested](https://github.com/apache/iceberg/blob/4b4eb38cf6dda7b43faeb40eb00aa5db424d2ecb/open-api/rest-catalog-open-api.yaml#L1144) parameter when dropping a table. |
 | `ENCODE_ENTIRE_PREFIX`               | `BOOLEAN`  | `false`              | URL-encode the entire path prefix when communicating with the catalog.                                                                                                                 |
 | `MAX_TABLE_STALENESS`                | `INTERVAL` | `NULL`               | Prevents unnecessary requests to the Iceberg REST Catalog. Accepts human-readable interval strings such as `10 minutes`, `30 seconds`, or `1 year`.                                    |
+| `EXTRA_HTTP_HEADERS`                 | `MAP(VARCHAR, VARCHAR)` | `NULL`  | Extra headers (key-value) sent along with the requests to the REST Catalog.                                                                                                            |
 
 Some parameters enable others, see the list of associated additional parameters below this table.
 
 | Parameter            | Type      | Default  | Accepted options    | Description                                                                      |
 | -------------------- | --------- | -------- | ------------------- | -------------------------------------------------------------------------------- |
-| `ENDPOINT_TYPE`      | `VARCHAR` | `NULL`   | `S3_TABLES`, `GLUE` | A common identifier of an Iceberg Catalog type, sets certain default parameters. |
-| `AUTHORIZATION_TYPE` | `VARCHAR` | `OAUTH2` | `OAUTH2`, `SIGV4`   | The Authorization layer of the Iceberg Catalog to attach to.                     |
+| `ENDPOINT_TYPE`      | `VARCHAR` | `NULL`   | `S3_TABLES`, `GLUE` | A common identifier of an Iceberg Catalog type, sets certain default parameters. Cannot be combined with `ENDPOINT` or `AUTHORIZATION_TYPE`. |
+| `AUTHORIZATION_TYPE` | `VARCHAR` | `OAUTH2` | `OAUTH2`, `SIGV4`, `NONE` | The Authorization layer of the Iceberg Catalog to attach to. Use `NONE` for catalogs that need no authentication. |
 
 ### `Endpoint Type`
 
@@ -91,25 +92,11 @@ The additional parameters that can be provided when the `AUTHORIZATION_TYPE` is 
 | `SECRET`             | `VARCHAR`               | `NULL`  | The `S3` or `AWS` `SECRET` to use for signing.                                                 |
 | `SIGV4_SERVICE`      | `VARCHAR`               | `NULL`  | Override the `SERVICE` for signing requests, otherwise inferred from the `ENDPOINT` parameter. |
 | `SIGV4_REGION`       | `VARCHAR`               | `NULL`  | Override the `REGION` for signing requests, otherwise inferred from the `ENDPOINT` parameter.  |
-| `EXTRA_HTTP_HEADERS` | `MAP(VARCHAR, VARCHAR)` | `NULL`  | Extra headers (key-value) sent along with the signing request.                                 |
 
 #### `ICEBERG` `SECRET` Options
 
 Every option mentioned in the `ATTACH Options` section and its sub-sections can be used in the creation of an `ICEBERG` SECRET.
 When such an `ICEBERG` SECRET exists it can be inferred by subsequent ATTACH statements, or provided explicitly through the `SECRET` ATTACH option.
-
-## Working with an Attached Catalog
-
-Once a catalog is attached, you can run the full set of read and write operations against its tables:
-
-* **Reading and metadata**: `SELECT`, time travel with the `AT` clause, and the `iceberg_metadata`, `iceberg_snapshots`, and statistics functions. See the [Functions and Settings Reference]({% link docs/current/core_extensions/iceberg/reference.md %}).
-* **Writing**: `CREATE`/`DROP SCHEMA` and `TABLE`, partitioning, `INSERT`, `UPDATE`, `DELETE`, `MERGE INTO`, `ALTER TABLE`, table properties, and `COPY FROM DATABASE`. See [Writing to Iceberg]({% link docs/current/core_extensions/iceberg/writing.md %}).
-
-Metadata functions accept a fully qualified table name, e.g.:
-
-```sql
-SELECT * FROM iceberg_snapshots(my_catalog.default.t);
-```
 
 ## Settings
 
@@ -118,6 +105,10 @@ SELECT * FROM iceberg_snapshots(my_catalog.default.t);
 | `unsafe_enable_version_guessing` | `BOOLEAN` | `false` | Allows the extension to guess the latest metadata version when no version or hint file is given. |
 | `iceberg_default_format_version` | `INTEGER` | `2` | Sets the default format_version to use when creating a new table. |
 | `iceberg_unsafe_skip_puffin_verification` | `BOOLEAN` | `false` | When reading V3 Deletion Vectors, skip the Puffin file verification (for compatibility with files written by older versions). |
+| `iceberg_use_metadata_log` | `BOOLEAN` | `true` | Use a table's optional `metadata-log` to preserve atomicity guarantees, at the cost of an additional metadata `GET` request in rare cases. |
+| `ignore_target_file_size_for_partitioned_tables` | `BOOLEAN` | `false` | Ignore the unsupported `write.target-file-size-bytes` table property on partitioned tables instead of raising an error. |
+| `ignore_row_group_size_for_partitioned_tables` | `BOOLEAN` | `false` | Ignore the unsupported `write.parquet.row-group-size-bytes` table property on partitioned tables instead of raising an error. |
+| `iceberg_via_aws_sdk_for_catalog_interactions` | `BOOLEAN` | `false` | Use the legacy AWS SDK code path to interact with AWS-based catalogs instead of DuckDB's HTTP client. |
 
 
 ## Scan Options

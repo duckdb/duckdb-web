@@ -1,5 +1,7 @@
 ---
 layout: docu
+redirect_from:
+- /docs/current/core_extensions/iceberg/reference
 title: Iceberg Functions
 ---
 
@@ -10,11 +12,16 @@ The `iceberg` extension provides the following functions:
 | `iceberg_scan(source)`                                    | Reads an Iceberg table from a path.                                  |
 | `iceberg_metadata(source)`                                | Returns the manifest entries of an Iceberg table.                    |
 | `iceberg_snapshots(source)`                               | Returns the snapshots of an Iceberg table.                           |
+| `iceberg_column_stats(source)`                            | Returns per-data-file, per-column statistics of an Iceberg table.    |
+| `iceberg_partition_stats(source)`                         | Returns per-partition-field statistics of an Iceberg table.          |
+| `iceberg_load_table_response(table)`                      | Returns the raw `LoadTable` response of the REST Catalog.            |
 | `iceberg_table_properties(table)`                         | Returns all properties of the specified table.                       |
 | `iceberg_schema_properties(schema)`                       | Returns all properties of the specified schema.                      |
 | `set_iceberg_schema_properties(schema, properties)`       | Sets properties on the specified schema.                             |
 | `remove_iceberg_schema_properties(schema, property_list)` | Removes properties from the specified schema.                        |
 | `iceberg_to_ducklake(iceberg_catalog, ducklake_catalog)`  | Copies the Iceberg metadata of a catalog to a DuckLake catalog.      |
+| `iceberg_bucket(num_buckets, value)`                      | Computes the Iceberg `bucket` partition transform of a value.        |
+| `iceberg_truncate(width, value)`                          | Computes the Iceberg `truncate` partition transform of a value.      |
 
 The examples on this page use the [`iceberg_data.zip`]({% link data/iceberg_data.zip %}) file; download and unzip it to run them.
 
@@ -66,6 +73,36 @@ FROM iceberg_snapshots('data/iceberg/lineitem_iceberg');
 | 2               | 7635660646343998149 | 2023-02-15 15:08:14.73  | lineitem_iceberg/metadata/snap-7635660646343998149-1-10eaca8a-1e1c-421e-ad6d-b232e5ee23d3.avro |
 
 > `iceberg_snapshots` does not take `allow_moved_paths`, `snapshot_from_id` or `snapshot_from_timestamp` as parameters.
+
+## `iceberg_column_stats`
+
+The `iceberg_column_stats` function returns the statistics stored in the manifests for every data file and column.
+Its columns include `file_path`, `column_name`, `column_type`, `lower_bound`, `upper_bound`, `value_count`, `null_value_count` and `nan_value_count`.
+
+```sql
+SELECT *
+FROM iceberg_column_stats('data/iceberg/lineitem_iceberg', allow_moved_paths = true);
+```
+
+## `iceberg_partition_stats`
+
+The `iceberg_partition_stats` function returns statistics per partition field.
+Its columns include `partition_field_name`, `partition_source_columns`, `partition_field_transform`, `lower_bound` and `upper_bound`.
+
+```sql
+SELECT *
+FROM iceberg_partition_stats(my_datalake.default.t);
+```
+
+## `iceberg_load_table_response`
+
+The `iceberg_load_table_response` function is an advanced function that only works with an [attached Iceberg REST Catalog]({% link docs/current/core_extensions/iceberg/catalogs.md %}).
+It returns the raw `LoadTable` response of the catalog with the columns `metadata_location`, `metadata` (`VARIANT`), `config` (`MAP`), `storage_credentials` and `request_url`.
+
+```sql
+SELECT *
+FROM iceberg_load_table_response(my_datalake.default.t);
+```
 
 ## Metadata Operations on Attached Catalogs
 
@@ -160,4 +197,19 @@ It is also possible to skip a set of tables provided the `skip_tables` parameter
 
 ```sql
 CALL iceberg_to_ducklake('iceberg_datalake', 'my_ducklake', skip_tables := ['table_to_skip']);
+```
+
+## Partition Transform Functions
+
+The `iceberg_bucket` and `iceberg_truncate` scalar functions implement the [Iceberg partition transforms](https://iceberg.apache.org/spec/#partition-transforms) of the same name.
+They are most often used implicitly through the `PARTITIONED BY` clause (see [Partitioning]({% link docs/current/core_extensions/iceberg/writing_to_iceberg.md %}#partitioning)), but they can also be called directly:
+
+| Function | Description |
+| --- | --- |
+| `iceberg_bucket(num_buckets, value)` | Returns the Iceberg bucket partition value (an `INTEGER`) for `value`. Supported `value` types: `INTEGER`, `BIGINT`, `DECIMAL`, `DATE`, `TIME`, `TIMESTAMP`, `TIMESTAMP WITH TIME ZONE`, `TIMESTAMP_NS`, `VARCHAR`, `BLOB`, `UUID`. |
+| `iceberg_truncate(width, value)` | Returns the Iceberg truncate partition value for `value`, with the same type as `value`. Supported `value` types: `INTEGER`, `BIGINT`, `DECIMAL`, `VARCHAR`, `BLOB`. |
+
+```sql
+SELECT iceberg_bucket(16, 'duckdb');
+SELECT iceberg_truncate(10, 1234);
 ```

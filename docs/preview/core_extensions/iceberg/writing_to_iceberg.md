@@ -1,5 +1,7 @@
 ---
 layout: docu
+redirect_from:
+- /docs/preview/core_extensions/iceberg/writing
 title: Writing to Iceberg
 ---
 
@@ -29,7 +31,14 @@ COPY FROM DATABASE iceberg_datalake TO duckdb_db;
 
 This functionality enables deep copies between Iceberg and DuckDB storage.
 
-## Creating Tables
+## Creating Schemas and Tables
+
+Iceberg namespaces are exposed as schemas, which can be created and dropped with [`CREATE SCHEMA`]({% link docs/preview/sql/statements/create_schema.md %}) and [`DROP SCHEMA`]({% link docs/preview/sql/statements/drop.md %}):
+
+```sql
+CREATE SCHEMA iceberg_catalog.sales;
+USE iceberg_catalog.sales;
+```
 
 Tables are created with the standard [`CREATE TABLE`]({% link docs/preview/sql/statements/create_table.md %}) syntax. [Iceberg table properties](https://iceberg.apache.org/spec/#table-metadata-fields) can be supplied with the `WITH` clause:
 
@@ -43,7 +52,29 @@ WITH (
 );
 ```
 
+Tables can also be created from the result of a query:
+
+```sql
+CREATE TABLE iceberg_catalog.sales.events_copy AS
+    FROM iceberg_catalog.sales.events;
+```
+
 Table properties can also be inspected and modified after creation, see [Table Properties Functions]({% link docs/preview/core_extensions/iceberg/iceberg_functions.md %}#table-properties-functions).
+
+## `UPDATE` and `DELETE`
+
+The [`UPDATE`]({% link docs/preview/sql/statements/update.md %}) and [`DELETE`]({% link docs/preview/sql/statements/delete.md %}) statements are supported on both partitioned and unpartitioned tables:
+
+```sql
+UPDATE iceberg_catalog.sales.events
+SET event_name = 'view'
+WHERE id = 1;
+
+DELETE FROM iceberg_catalog.sales.events
+WHERE event_time < TIMESTAMP '2026-01-01';
+```
+
+They use merge-on-read semantics and write positional deletes, see [Limitations for `UPDATE` and `DELETE`](#limitations-for-update-and-delete).
 
 ## `MERGE INTO`
 
@@ -85,6 +116,16 @@ ALTER TABLE iceberg_catalog.default.renamed_table
 ALTER TABLE iceberg_catalog.default.renamed_table
     DROP COLUMN col3;
 
+-- Change the type of a column
+ALTER TABLE iceberg_catalog.default.renamed_table
+    ALTER COLUMN col1 TYPE BIGINT;
+
+-- Set and drop the default value of a column
+ALTER TABLE iceberg_catalog.default.renamed_table
+    ALTER COLUMN col1 SET DEFAULT 0;
+ALTER TABLE iceberg_catalog.default.renamed_table
+    ALTER COLUMN col1 DROP DEFAULT;
+
 -- Set the format-version
 ALTER TABLE iceberg_catalog.default.renamed_table
     SET ('format-version' = 3);
@@ -92,23 +133,37 @@ ALTER TABLE iceberg_catalog.default.renamed_table
 
 Each `ALTER TABLE` statement updates the `current-schema-id` of the Iceberg table, and the changes become visible to other Iceberg-aware engines the next time they query the `LoadTableInformation` endpoint. Iceberg schema evolution is metadata-only, so no data files are rewritten.
 
-## Partition Transforms
+## Partitioning
 
-In addition to identity partitioning, DuckDB-Iceberg supports creating, inserting into, and updating tables that use the `bucket` and `truncate` [partition transforms](https://iceberg.apache.org/spec/#partition-transforms).
+Tables can be partitioned with the `PARTITIONED BY` clause using the [Iceberg partition transforms](https://iceberg.apache.org/spec/#partition-transforms):
 
-The `bucket(N, col)` transform hashes the column's value into `N` buckets, which is useful for stable partitioning on a high-cardinality column. `truncate(W, col)` groups rows by the first `W` characters (or by the column's value rounded down to a multiple of `W` for numeric columns), which is useful for prefix-based partitioning.
+| Transform | Description |
+| --- | --- |
+| `⟨column⟩`{:.language-sql .highlight} | Identity: partition by the column value directly. |
+| `year(⟨column⟩)`{:.language-sql .highlight}, `month(⟨column⟩)`{:.language-sql .highlight}, `day(⟨column⟩)`{:.language-sql .highlight}, `hour(⟨column⟩)`{:.language-sql .highlight} | Partition by a date or timestamp component. |
+| `bucket(⟨n⟩, ⟨column⟩)`{:.language-sql .highlight} | Hash the column's value into `n` buckets. This is useful for stable partitioning on a high-cardinality column. |
+| `truncate(⟨w⟩, ⟨column⟩)`{:.language-sql .highlight} | Group rows by the first `w` characters (or by the column's value rounded down to a multiple of `w` for numeric columns). This is useful for prefix-based partitioning. |
 
 ```sql
 CREATE TABLE iceberg_catalog.default.events (
     event_id BIGINT,
     user_id BIGINT,
     country VARCHAR,
-    payload VARCHAR
+    event_time TIMESTAMP
 )
-PARTITIONED BY (bucket(16, user_id), truncate(2, country));
+PARTITIONED BY (day(event_time), bucket(16, user_id), truncate(2, country));
 ```
 
-Updates and deletes against `bucket`- and `truncate`-partitioned tables are also supported, using positional deletes under merge-on-read semantics.
+The partition spec of an existing table can be changed with `ALTER TABLE ... SET PARTITIONED BY`:
+
+```sql
+ALTER TABLE iceberg_catalog.default.events
+    SET PARTITIONED BY (month(event_time));
+```
+
+The `bucket` and `truncate` transforms are also available as the [`iceberg_bucket` and `iceberg_truncate` functions]({% link docs/preview/core_extensions/iceberg/iceberg_functions.md %}#partition-transform-functions).
+
+> The `write.target-file-size-bytes` and `write.parquet.row-group-size-bytes` table properties are not supported for partitioned tables and raise an error. To ignore them instead, set the [`ignore_target_file_size_for_partitioned_tables` and `ignore_row_group_size_for_partitioned_tables` settings]({% link docs/preview/core_extensions/iceberg/iceberg_options.md %}#settings) to `true`.
 
 ## Iceberg V3 Support
 
@@ -136,7 +191,7 @@ WITH ('format-version' = 3) AS
 
 The `UPDATE` and `DELETE` operations have the following limitations:
 
-* They only work on tables that are **not sorted**. Attempting these operations on sorted tables.
+* They only work on tables that are **not sorted**. Attempting these operations on sorted tables results in an error.
 * DuckDB-Iceberg only writes **positional deletes** (encoded as binary deletion vectors for v3 tables). Copy-on-write functionality is not yet supported.
 * DuckDB-Iceberg only supports **merge-on-read semantics**. If a table has `write.update.mode` or `write.delete.mode` properties set to something other than `merge-on-read`, the operation fails.
 

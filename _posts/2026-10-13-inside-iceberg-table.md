@@ -293,7 +293,7 @@ Reading the Avro files directly is useful when you want to see fields that the f
 
 ## Column Statistics
 
-The manifests also store, for every data file, the lower and upper bound of each column. [`iceberg_column_stats`]({% link docs/current/core_extensions/iceberg/reference.md %}) returns them in a readable form:
+The manifests also store, for every data file, the lower and upper bound of each column. [`iceberg_column_stats`]({% link docs/current/core_extensions/iceberg/iceberg_functions.md %}#iceberg_column_stats) returns them in a readable form:
 
 ```sql
 SELECT
@@ -325,7 +325,7 @@ The ranges for the first three days overlap almost completely, because the rows 
 
 ## Partition Statistics
 
-The bounds above are per column, per data file. For the partition column there is a coarser view, one row per manifest, that the manifest list keeps so a reader can skip an entire manifest before opening any of its files. [`iceberg_partition_stats`]({% link docs/current/core_extensions/iceberg/reference.md %}) returns it:
+The bounds above are per column, per data file. For the partition column there is a coarser view, one row per manifest, that the manifest list keeps so a reader can skip an entire manifest before opening any of its files. [`iceberg_partition_stats`]({% link docs/current/core_extensions/iceberg/iceberg_functions.md %}#iceberg_partition_stats) returns it:
 
 ```sql
 SELECT
