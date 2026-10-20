@@ -189,7 +189,7 @@ WITH ('format-version' = 3) AS
     ) t(id, payload, event_time);
 ```
 
-> Warning The `GEOGRAPHY` and `UNKNOWN` types are not yet supported in DuckDB-Iceberg; they are planned for DuckDB 2.0.0.
+> Warning The `GEOGRAPHY` type is not yet supported in DuckDB-Iceberg.
 
 ## Limitations for `UPDATE` and `DELETE`
 
@@ -203,5 +203,5 @@ The `UPDATE` and `DELETE` operations have the following limitations:
 
 The following are not yet supported by the DuckDB `iceberg` extension:
 
-* The `GEOGRAPHY` and `UNKNOWN` data types (planned for DuckDB 2.0.0)
+* The `GEOGRAPHY` data type
 * Copy-on-write semantics for `UPDATE`, `DELETE`, and `MERGE INTO`
