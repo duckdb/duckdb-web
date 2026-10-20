@@ -50,7 +50,7 @@ duckdb
 ```
 
 ```text
-DuckDB v{{ site.next_major_duckdb_version }} ({{ site.current_duckdb_codename }})
+DuckDB v{{ site.next_major_duckdb_version }} ({{ site.next_major_duckdb_codename }})
 Enter ".help" for usage hints.
 «memory» D
 ```
@@ -239,7 +239,7 @@ This outputs:
 
 ```text
 -- Loading resources from prompt.sql
-DuckDB v{{ site.next_major_duckdb_version }} ({{ site.current_duckdb_codename }})
+DuckDB v{{ site.next_major_duckdb_version }} ({{ site.next_major_duckdb_codename }})
 Enter ".help" for usage hints.
 «memory» D
 ⚫◗
