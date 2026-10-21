@@ -13,7 +13,7 @@ toc: false
   <h1>Development Roadmap</h1>
 </div>
 
-_(Last updated: Aug 2026)_
+_(Last updated: Oct 2026)_
 
 This list was compiled by the DuckDB maintainers and is based on the long-term strategic vision for the DuckDB project and general interactions with users in the open-source community (GitHub Issues and Discussions, social media, etc.).
 For details on how to request features in DuckDB, please refer to the FAQ item [“I would like feature X to be implemented in DuckDB”]({% link faq.md %}#i-would-like-feature-x-to-be-implemented-in-duckdb-how-do-i-proceed).
@@ -22,16 +22,12 @@ For details on how to request features in DuckDB, please refer to the FAQ item [
 
 This section lists the features that the DuckDB team plans to work on **in the coming year**.
 
-* Using the new [PEG parser]({% post_url 2024-11-22-runtime-extensible-parsers %}) by default
-* Shipping the stable version of the [Quack protocol]({% link quack/index.html %})
-* [Support for async I/O]({% post_url 2026-07-31-asynchronous-io %})
-* Migration and documentation to [C client API]({% link docs/current/clients/c/overview.md %}) and [C extension API](https://github.com/duckdb/extension-template-c)
+* Stabilizing the [C API v2]({% link docs/2.0/clients/c/overview.md %}) and the [C extension API](https://github.com/duckdb/extension-template-c)
 * Rust support for extensions
-* C++17 support
-* Continuous improvements to [lakehouse formats]({% link docs/current/lakehouse_formats.md %}):
-  [Iceberg]({% link docs/current/core_extensions/iceberg/overview.md %}),
-  [Delta]({% link docs/current/core_extensions/delta.md %}),
-  [Lance]({% link docs/current/core_extensions/lance.md %})
+* Continuous improvements to [lakehouse formats]({% link docs/2.0/lakehouse_formats.md %}):
+  [Iceberg]({% link docs/2.0/core_extensions/iceberg/overview.md %}),
+  [Delta]({% link docs/2.0/core_extensions/delta.md %}),
+  [Lance]({% link docs/2.0/core_extensions/lance.md %})
   and
   [DuckLake](https://ducklake.select/)
 * [`MATCH_RECOGNIZE`](https://github.com/duckdb/duckdb/discussions/3994) for pattern matching
@@ -41,14 +37,24 @@ This section lists the features that the DuckDB team plans to work on **in the c
 
 Please note that there are **no guarantees** that a particular feature will be released within the next year. Everything on this page is subject to change without notice.
 
+## Delivered in DuckDB v2.0
+
+The following features from the previous version of the roadmap were released in [DuckDB v2.0.0]({% post_url 2026-10-21-announcing-duckdb-200 %}):
+
+* Using the new [PEG parser]({% post_url 2026-08-20-duckdb-20-peg-parser %}) by default
+* Shipping the polished version of the [Quack protocol]({% link quack/index.html %})
+* [Support for async I/O]({% post_url 2026-07-31-asynchronous-io %})
+* C++17 support
+
 ## Planned Deprecations
 
-We are [gradually phasing out]({% link docs/current/sql/functions/lambda.md %}) the lambda syntax (`x -> x + 1`) in favor of the Pythonic `lambda x : x + 1`. [DuckDB v1.5]({% post_url 2026-03-09-announcing-duckdb-150 %}) throws a warning when using the deprecated syntax and DuckDB v2.0 will throw an error (unless configured explicitly to allow the old syntax).
+We are [gradually phasing out]({% link docs/2.0/sql/functions/lambda.md %}) the lambda syntax (`x -> x + 1`) in favor of the Pythonic `lambda x : x + 1`. [DuckDB v1.5]({% post_url 2026-03-09-announcing-duckdb-150 %}) throws a warning when using the deprecated syntax and [DuckDB v2.0]({% post_url 2026-10-21-announcing-duckdb-200 %}#lambda-syntax) throws an error (unless configured explicitly to allow the old syntax). DuckDB v2.1 will remove the old syntax completely.
 
-## Future Work / Looking for Funding
+We are gradually phasing out macOS x86_64 (`osx_amd64`) from the list of [supported platforms]({% link docs/2.0/operations_manual/installing_duckdb/requirements.md %}#supported-platforms). In DuckDB v2.0, DuckDB and core extensions are still built and supported for this platform, but community extensions are no longer built for it. DuckDB v2.1 will stop supporting `osx_amd64`.
+
+## Future Work
 
 There are several features and optimizations that we plan to implement at some point in the future.
-If you would like to expedite the development of these items, please [get in touch with DuckLabs](https://ducklabs.com/contact/).
 
 * Go support for extensions
 * Time series optimizations
@@ -60,5 +66,5 @@ If you would like to expedite the development of these items, please [get in tou
 * [Materialized views](https://github.com/duckdb/duckdb/discussions/3638)
 * [Support for PL/SQL stored procedures](https://github.com/duckdb/duckdb/discussions/8104) (see Denis Hirn's [DuckPL talk]({% link _library/2026-01-30-duckpl-a-procedural-language-in-duckdb.md %}))
 * [XML read support](https://github.com/duckdb/duckdb/discussions/9547)
-* Guaranteeing [FIPS](https://en.wikipedia.org/wiki/FIPS_140-2)-compliance for the [database encryption]({% link docs/current/sql/statements/attach.md %}#database-encryption)
+* Guaranteeing [FIPS](https://en.wikipedia.org/wiki/FIPS_140-2)-compliance for the [database encryption]({% link docs/2.0/sql/statements/attach.md %}#database-encryption)
 * Performance and out-of-core optimization on Windows

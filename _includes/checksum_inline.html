@@ -15,12 +15,14 @@ Notes:
 {%- assign env = include.environment -%}
 {%- assign plat = include.platform -%}
 {%- assign arch = include.architecture -%}
-{%- if include.version == "lts" -%}
-  {%- assign checksums_data = site.data.checksums_lts -%}
-{%- elsif include.version == "current" -%}
-  {%- assign checksums_data = site.data.checksums_current -%}
+{%- if include.version == "1.4" -%}
+  {%- assign checksums_data = site.data.checksums_14 -%}
+{%- elsif include.version == "1.5" -%}
+  {%- assign checksums_data = site.data.checksums_15 -%}
+{%- elsif include.version == "next_major" -%}
+  {%- assign checksums_data = site.data.checksums_20 -%}
 {%- else -%}
-  Error: Release type (current / LTS) not available
+  Error: Release type (current / LTS / next major) not available
 {%- endif -%}
 {%- assign root = checksums_data.artifacts -%}
 

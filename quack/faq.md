@@ -101,7 +101,7 @@ Yes, DuckDB as an in-process database will continue working just as it did befor
 
 <div class="answer" markdown="1">
 
-Please follow the [installation instructions]({% link quack/index.html %}#install) and the [documentation]({% link docs/current/quack/overview.md %}).
+Please follow the [installation instructions]({% link quack/index.html %}#install) and the [documentation]({% link docs/1.5/quack/overview.md %}).
 
 </div>
 
@@ -115,7 +115,7 @@ Please follow the [installation instructions]({% link quack/index.html %}#instal
 
 <div class="answer" markdown="1">
 
-Quack uses HTTP v2.0 for communication. This allows Quack to work in environments with firewalls, load balancers, etc. You can provide your own encryption – see the [“Reserve Proxy” guide]({% link docs/current/quack/setup/reverse_proxy.md %}).
+Quack uses HTTP v2.0 for communication. This allows Quack to work in environments with firewalls, load balancers, etc. You can provide your own encryption – see the [“Reserve Proxy” guide]({% link docs/1.5/quack/setup/reverse_proxy.md %}).
 
 </div>
 
@@ -135,7 +135,7 @@ Yes, Quack is available in DuckDB v1.5.3 as a beta release. To install it, run:
 INSTALL quack;
 ```
 
-Or, simply start using it as described in the [documentation]({% link docs/current/quack/overview.md %}).
+Or, simply start using it as described in the [documentation]({% link docs/1.5/quack/overview.md %}).
 
 </div>
 
@@ -165,7 +165,7 @@ Yes, we designed Quack to be a high-performance protocol for both bulk operation
 
 <div class="answer" markdown="1">
 
-Please consult the Quack documentation's [Security]({% link docs/current/quack/security.md %}) page and the [Securing Quack with a Reverse Proxy]({% link docs/current/quack/setup/reverse_proxy.md %}) page.
+Please consult the Quack documentation's [Security]({% link docs/1.5/quack/security.md %}) page and the [Securing Quack with a Reverse Proxy]({% link docs/1.5/quack/setup/reverse_proxy.md %}) page.
 
 </div>
 

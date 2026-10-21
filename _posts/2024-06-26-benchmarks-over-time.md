@@ -52,7 +52,7 @@ There are some limitations when looking at the performance of a system over time
 If a feature is brand new, there is no prior performance to compare to!
 As a result, this post focuses on fundamental workloads rather than DuckDB's ever-increasing set of integrations with different lakehouse data formats, cloud services, and more.
 
-The code used to run the benchmark also avoids many of DuckDB's [Friendlier SQL]({% link docs/current/sql/dialect/friendly_sql.md %}) additions, as those have also been added more recently.
+The code used to run the benchmark also avoids many of DuckDB's [Friendlier SQL]({% link docs/1.5/sql/dialect/friendly_sql.md %}) additions, as those have also been added more recently.
 (When writing these queries, it felt like going back in time!)
 
 ## Benchmark Design Summary
@@ -453,8 +453,8 @@ This focuses the benchmark on the speed of scanning the data rather than DuckDB'
 The query used follows the format:
 
 ```sql
-SELECT 
-    sum(v3) AS v3 
+SELECT
+    sum(v3) AS v3
 FROM ⟨dataframe_or_Parquet_file⟩;
 ```
 
@@ -514,7 +514,7 @@ The table in use is the largest table from the H2O.ai join benchmark, and in thi
 DROP TABLE IF EXISTS windowing_results;
 
 CREATE TABLE windowing_results AS
-    SELECT 
+    SELECT
         id1,
         id2,
         id3,
@@ -525,11 +525,11 @@ CREATE TABLE windowing_results AS
 
 The various window functions that replace the placeholder are below and are labelled to match the result graphs.
 These were selected to showcase the variety of use cases for window functions, as well as the variety of algorithms required to support the full range of the syntax.
-The DuckDB documentation contains a [full railroad diagram of the available syntax]({% link docs/current/sql/functions/window_functions.md %}#syntax).
+The DuckDB documentation contains a [full railroad diagram of the available syntax]({% link docs/1.5/sql/functions/window_functions.md %}#syntax).
 If there are common use cases for window functions that are not well-covered in this benchmark, please let us know!
 
 ```sql
-/* 302 Basic Window */ 
+/* 302 Basic Window */
 sum(v2) OVER () AS window_basic
 
 /* 303 Sorted Window */

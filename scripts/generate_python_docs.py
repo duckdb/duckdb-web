@@ -12,19 +12,23 @@ from sphinx.locale import __
 
 from generate_python_relational_docs import generate_python_relational_api_md
 
-DUCKDB_DOC_VERSION = os.getenv("DUCKDB_DOC_VERSION", "lts")
+DUCKDB_DOC_VERSION = os.getenv("DUCKDB_DOC_VERSION", "2.0")
 
 redirect_from_text = """\
 redirect_from:
 - /docs/api/python/reference/index
 - /docs/clients/python/reference/index
+- /docs/stable/clients/python/reference/index
+- /docs/current/clients/python/reference/index
+- /docs/lts/clients/python/reference/index
+- /docs/preview/clients/python/reference/index
 """
 
 FRONTMATTER = f"""\
 ---
 # this file is GENERATED, regenerate it with scripts/generate_python_docs.py
 layout: docu
-{redirect_from_text if DUCKDB_DOC_VERSION == 'lts' else ''}
+{redirect_from_text if DUCKDB_DOC_VERSION == '2.0' else ''}
 title: Python Client API
 ---
 """
@@ -186,7 +190,7 @@ def main():
         filename.unlink()
 
     # test objects.inv
-    # python -m sphinx.ext.intersphinx http://localhost:4000/docs/lts/clients/python/reference/objects.inv
+    # python -m sphinx.ext.intersphinx http://localhost:4000/docs/2.0/clients/python/reference/objects.inv
 
 
 if __name__ == "__main__":

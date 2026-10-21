@@ -9,9 +9,9 @@ excerpt: "dbt v2, which runs on the new Rust-based Fusion engine, is the first d
 tag: using-duckdb
 ---
 
-[dbt](https://www.getdbt.com/) is the tool many data teams use to manage their SQL transformations: you write each model as a `SELECT` statement, and dbt works out the order to run them in from the references between models, builds the resulting tables and views in your database, and can test them along the way. 
+[dbt](https://www.getdbt.com/) is the tool many data teams use to manage their SQL transformations: you write each model as a `SELECT` statement, and dbt works out the order to run them in from the references between models, builds the resulting tables and views in your database, and can test them along the way.
 
-[dbt-duckdb](https://github.com/duckdb/dbt-duckdb/blob/master/README.md), the dbt adapter for DuckDB, received its [first pull request](https://github.com/duckdb/dbt-duckdb/pull/3) on August 27, 2021, and in the meantime [has 1.4k stars on GitHub](https://github.com/duckdb/dbt-duckdb). Since then, dbt users have been able to install one Python package (dbt-duckdb, via `pip`), point it at a file (a local DuckDB database), and have a working project (models building into tables and views), without having to sign up to (and pay for) servers or warehouses. 
+[dbt-duckdb](https://github.com/duckdb/dbt-duckdb/blob/master/README.md), the dbt adapter for DuckDB, received its [first pull request](https://github.com/duckdb/dbt-duckdb/pull/3) on August 27, 2021, and in the meantime [has 1.4k stars on GitHub](https://github.com/duckdb/dbt-duckdb). Since then, dbt users have been able to install one Python package (dbt-duckdb, via `pip`), point it at a file (a local DuckDB database), and have a working project (models building into tables and views), without having to sign up to (and pay for) servers or warehouses.
 
 When dbt Labs [announced the new Rust-based Fusion engine](https://www.getdbt.com/blog/dbt-launch-showcase-2025-recap) in May 2025, DuckDB initially wasn't supported out of the box. That has changed with dbt v2, which ships with a DuckDB adapter built in. Here is how to set it up and what else is new.
 
@@ -31,9 +31,9 @@ On June 1, 2026, dbt Labs released the [first alpha of dbt Core 2.0](https://doc
 
 ## Setup
 
-In dbt v1, an adapter was a standalone Python package. In v2, adapters live inside a Rust monorepo and connect through [ADBC drivers](https://docs.getdbt.com/docs/contribute-dbt-adapters-v2). 
+In dbt v1, an adapter was a standalone Python package. In v2, adapters live inside a Rust monorepo and connect through [ADBC drivers](https://docs.getdbt.com/docs/contribute-dbt-adapters-v2).
 
-With v2, dbt automatically downloads and caches the DuckDB driver the first time you run it, so after you [install dbt](https://docs.getdbt.com/docs/local/install-dbt?version=2.0) there is nothing else to add. dbt also publishes a [DuckDB quickstart guide](https://docs.getdbt.com/guides/duckdb) for getting a project running locally. 
+With v2, dbt automatically downloads and caches the DuckDB driver the first time you run it, so after you [install dbt](https://docs.getdbt.com/docs/local/install-dbt?version=2.0) there is nothing else to add. dbt also publishes a [DuckDB quickstart guide](https://docs.getdbt.com/guides/duckdb) for getting a project running locally.
 
 A basic profile looks the same as before:
 
@@ -48,7 +48,7 @@ my_project:
 
 ## DuckLake and Iceberg Catalogs
 
-v2 adds [catalog support](https://docs.getdbt.com/docs/build/iceberg/adapters/duckdb-iceberg-support) that the Python adapter doesn't have. dbt's DuckDB docs flag it as “dbt v2 only”; the legacy Python adapter instead attached DuckLake through the profile's [`attach` block](https://docs.getdbt.com/reference/resource-configs/duckdb-configs). 
+v2 adds [catalog support](https://docs.getdbt.com/docs/build/iceberg/adapters/duckdb-iceberg-support) that the Python adapter doesn't have. dbt's DuckDB docs flag it as “dbt v2 only”; the legacy Python adapter instead attached DuckLake through the profile's [`attach` block](https://docs.getdbt.com/reference/resource-configs/duckdb-configs).
 
 With `catalogs.yml` you can configure [DuckLake](https://ducklake.select/) and Iceberg REST catalogs, with [catalog-aware materializations](https://github.com/dbt-labs/dbt/releases/tag/v2.0.0-alpha.4). This requires the v2 engine with the `use_catalogs_v2` flag enabled and isn't available in the Python adapter. dbt [generates and runs the `ATTACH` statements](https://docs.getdbt.com/docs/build/iceberg/adapters/duckdb-iceberg-support) for you.
 
@@ -81,9 +81,9 @@ The example above follows the DuckDB [catalog support documentation](https://doc
 
 ## dbt Metadata as Parquet
 
-v2 also [writes its metadata as Parquet](https://docs.getdbt.com/docs/build/dbt-information-schema?version=2.0) as an alternative to the large JSON files, and these (as well as the large JSON files) can be queried directly with DuckDB. 
+v2 also [writes its metadata as Parquet](https://docs.getdbt.com/docs/build/dbt-information-schema?version=2.0) as an alternative to the large JSON files, and these (as well as the large JSON files) can be queried directly with DuckDB.
 
-dbt calls this the Information Schema, a v2 feature that stores the manifest as Parquet instead of JSON. Running `dbt parse --generate-info-schema` writes a set of Parquet files to `target/info_schema/v1/`, so you can list your models without parsing `manifest.json`. 
+dbt calls this the Information Schema, a v2 feature that stores the manifest as Parquet instead of JSON. Running `dbt parse --generate-info-schema` writes a set of Parquet files to `target/info_schema/v1/`, so you can list your models without parsing `manifest.json`.
 
 These are the same artifacts dbt ships as test fixtures, so you can query one straight from the dbt repository using DuckDB without running dbt first:
 

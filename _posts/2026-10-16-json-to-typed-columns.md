@@ -9,9 +9,9 @@ excerpt: "JSON often arrives as a text column inside a table, not as a file. In 
 tag: using-duckdb
 ---
 
-DuckDB's [`read_json`]({% link docs/current/data/json/loading_json.md %}) turns JSON files into tables. It reads through part of the data to work out a schema, then gives you typed columns. However, a lot of JSON does not come as files. It comes as a text column: event payloads in a Postgres table, API responses stored by an ingestion job, a `metadata` column in a CSV export.
+DuckDB's [`read_json`]({% link docs/1.5/data/json/loading_json.md %}) turns JSON files into tables. It reads through part of the data to work out a schema, then gives you typed columns. However, a lot of JSON does not come as files. It comes as a text column: event payloads in a Postgres table, API responses stored by an ingestion job, a `metadata` column in a CSV export.
 
-People regularly [ask](https://github.com/duckdb/duckdb/discussions/9558) how to get the `read_json` treatment for such a column, and one workaround that comes up is to [`COPY`]({% link docs/current/sql/statements/copy.md %}) the column to a file and read the file back.
+People regularly [ask](https://github.com/duckdb/duckdb/discussions/9558) how to get the `read_json` treatment for such a column, and one workaround that comes up is to [`COPY`]({% link docs/1.5/sql/statements/copy.md %}) the column to a file and read the file back.
 
 You do not need the round trip. In this post, we get the same result directly in SQL.
 
@@ -31,7 +31,7 @@ Like most real payloads, the objects do not all have the same keys. Only the sec
 
 ## Picking out a Few Fields
 
-If you only need a handful of fields, the [JSON extraction operators]({% link docs/current/data/json/json_functions.md %}) are enough. `->` returns `JSON` and `->>` returns `VARCHAR`. Both accept a key name or a JSON path:
+If you only need a handful of fields, the [JSON extraction operators]({% link docs/1.5/data/json/json_functions.md %}) are enough. `->` returns `JSON` and `->>` returns `VARCHAR`. Both accept a key name or a JSON path:
 
 ```sql
 SELECT
@@ -57,7 +57,7 @@ Missing keys come back as `NULL`, which is what you want for optional fields. Ho
 
 ## Inferring a Structure from the Column
 
-[`json_structure`]({% link docs/current/data/json/json_functions.md %}) returns the structure of a single JSON value. Its aggregate variation, [`json_group_structure`]({% link docs/current/data/json/json_functions.md %}), merges the structures of all values in a column into one. It needs `JSON` input, so cast the `VARCHAR` column first:
+[`json_structure`]({% link docs/1.5/data/json/json_functions.md %}) returns the structure of a single JSON value. Its aggregate variation, [`json_group_structure`]({% link docs/1.5/data/json/json_functions.md %}), merges the structures of all values in a column into one. It needs `JSON` input, so cast the `VARCHAR` column first:
 
 ```sql
 SELECT json_group_structure(payload::JSON) AS structure
@@ -75,13 +75,13 @@ FROM events;
 
 Every key that appears in any row is in there, including `duration_ms` and the array of `items`.
 
-For a large table, you do not have to scan every row for this. Running it over a [sample]({% link docs/current/sql/query_syntax/sample.md %}), for example `FROM events USING SAMPLE 10_000 ROWS`, is much cheaper, at the risk of missing keys that are very rare.
+For a large table, you do not have to scan every row for this. Running it over a [sample]({% link docs/1.5/sql/query_syntax/sample.md %}), for example `FROM events USING SAMPLE 10_000 ROWS`, is much cheaper, at the risk of missing keys that are very rare.
 
 ## Adjusting the Types
 
-The inferred structure needs a few fixes. `ts` came out as `VARCHAR` because JSON has no timestamp type, and the integers came out as `UBIGINT`, which is wider than needed. 
+The inferred structure needs a few fixes. `ts` came out as `VARCHAR` because JSON has no timestamp type, and the integers came out as `UBIGINT`, which is wider than needed.
 
-Since the structure is itself a JSON document, you can override parts of it with [`json_merge_patch`]({% link docs/current/data/json/json_functions.md %}). Store the result in a [variable]({% link docs/current/sql/statements/set_variable.md %}) so you can use it in the next query:
+Since the structure is itself a JSON document, you can override parts of it with [`json_merge_patch`]({% link docs/1.5/data/json/json_functions.md %}). Store the result in a [variable]({% link docs/1.5/sql/statements/set_variable.md %}) so you can use it in the next query:
 
 ```sql
 SET VARIABLE payload_structure = (
@@ -102,7 +102,7 @@ The patch only lists what you want to change. Keys you leave out, such as `user.
 
 ## Building the Table
 
-[`json_transform`]({% link docs/current/data/json/json_functions.md %}) (also available as [`from_json`]({% link docs/current/data/json/json_functions.md %})) converts a JSON value into a DuckDB [`STRUCT`]({% link docs/current/sql/data_types/struct.md %}) following the structure you give it. [`unnest`]({% link docs/current/sql/query_syntax/unnest.md %}) then expands the top-level fields of that struct into columns:
+[`json_transform`]({% link docs/1.5/data/json/json_functions.md %}) (also available as [`from_json`]({% link docs/1.5/data/json/json_functions.md %})) converts a JSON value into a DuckDB [`STRUCT`]({% link docs/1.5/sql/data_types/struct.md %}) following the structure you give it. [`unnest`]({% link docs/1.5/sql/query_syntax/unnest.md %}) then expands the top-level fields of that struct into columns:
 
 ```sql
 CREATE TABLE events_typed AS
@@ -146,7 +146,7 @@ FROM events_typed;
 
 ## Nested Structs and Name Collisions
 
-Recursive unnesting with [`unnest(..., recursive := true)`]({% link docs/current/sql/query_syntax/unnest.md %}) flattens nested structs in a single pass. By default it names each column after its innermost key, so the `id` inside `user` ends up as a column called `id`, right next to the event's own `id`:
+Recursive unnesting with [`unnest(..., recursive := true)`]({% link docs/1.5/sql/query_syntax/unnest.md %}) flattens nested structs in a single pass. By default it names each column after its innermost key, so the `id` inside `user` ends up as a column called `id`, right next to the event's own `id`:
 
 ```sql
 SELECT id, unnest("user", recursive := true)
@@ -163,7 +163,7 @@ LIMIT 1;
 └───────┴─────────┴───────┘
 ```
 
-With two columns both named `id`, a later query cannot tell which one you mean. Pass [`keep_parent_names := true`]({% link docs/current/sql/query_syntax/unnest.md %}) to prefix each column with the keys it came from, so names from different levels stay distinct. On the full payload, `user.id` and `user.country` no longer clash with the top-level columns, and you can select them by their prefixed names:
+With two columns both named `id`, a later query cannot tell which one you mean. Pass [`keep_parent_names := true`]({% link docs/1.5/sql/query_syntax/unnest.md %}) to prefix each column with the keys it came from, so names from different levels stay distinct. On the full payload, `user.id` and `user.country` no longer clash with the top-level columns, and you can select them by their prefixed names:
 
 ```sql
 SELECT id, "user.id", "user.country"
@@ -185,7 +185,7 @@ FROM (
 
 ## Arrays of Objects
 
-In `events_typed`, the `items` array is stored as a `STRUCT(sku VARCHAR, qty INTEGER)[]`, a list of structs, as the `DESCRIBE` output above shows. To get one row per item, [`unnest`]({% link docs/current/sql/query_syntax/unnest.md %}) the list in the `FROM` clause:
+In `events_typed`, the `items` array is stored as a `STRUCT(sku VARCHAR, qty INTEGER)[]`, a list of structs, as the `DESCRIBE` output above shows. To get one row per item, [`unnest`]({% link docs/1.5/sql/query_syntax/unnest.md %}) the list in the `FROM` clause:
 
 ```sql
 SELECT id, u.item.sku, u.item.qty
@@ -202,11 +202,11 @@ FROM events_typed, unnest(items) AS u(item);
 └───────┴─────────┴───────┘
 ```
 
-Events without items do not appear here. If you need to keep them, write the [`unnest`]({% link docs/current/sql/query_syntax/unnest.md %}) as a lateral join: `FROM events_typed LEFT JOIN unnest(items) AS u(item) ON true`.
+Events without items do not appear here. If you need to keep them, write the [`unnest`]({% link docs/1.5/sql/query_syntax/unnest.md %}) as a lateral join: `FROM events_typed LEFT JOIN unnest(items) AS u(item) ON true`.
 
 ## Values That Do Not Fit
 
-By default, [`json_transform`]({% link docs/current/data/json/json_functions.md %}) does not raise an error on a value it cannot convert. The value becomes `NULL` instead:
+By default, [`json_transform`]({% link docs/1.5/data/json/json_functions.md %}) does not raise an error on a value it cannot convert. The value becomes `NULL` instead:
 
 ```sql
 SELECT json_transform('{"qty": "two"}', '{"qty": "INTEGER"}') AS result;
@@ -221,7 +221,7 @@ SELECT json_transform('{"qty": "two"}', '{"qty": "INTEGER"}') AS result;
 └─────────────────────┘
 ```
 
-That is convenient for messy data, but it can hide problems. [`json_transform_strict`]({% link docs/current/data/json/json_functions.md %}) raises an error instead:
+That is convenient for messy data, but it can hide problems. [`json_transform_strict`]({% link docs/1.5/data/json/json_functions.md %}) raises an error instead:
 
 ```sql
 SELECT json_transform_strict('{"qty": "two"}', '{"qty": "INTEGER"}') AS result;
@@ -235,7 +235,7 @@ Use the strict version while you are working out the structure, and switch to th
 
 ## Should the Column Be `VARCHAR` or `JSON`?
 
-This question comes up regularly in the DuckDB discussions. The [`JSON` type]({% link docs/current/data/json/json_type.md %}) is stored exactly like a `VARCHAR`, so there is no difference in size or scan speed. What it adds is validation on the way in, since an invalid document fails the insert, and the guarantee that the extraction functions do not have to deal with malformed input.
+This question comes up regularly in the DuckDB discussions. The [`JSON` type]({% link docs/1.5/data/json/json_type.md %}) is stored exactly like a `VARCHAR`, so there is no difference in size or scan speed. What it adds is validation on the way in, since an invalid document fails the insert, and the guarantee that the extraction functions do not have to deal with malformed input.
 
 If you will query fields from the column many times, the type of the raw column matters much less than whether you extract the fields at all. Parsing JSON at query time is work that has to be repeated for every query. Turning it into typed columns once, as shown above, does that work a single time.
 
@@ -245,6 +245,6 @@ For more on working with JSON in DuckDB, see the following blog posts and docume
 
 * [Shredding Deeply Nested JSON, One Vector at a Time]({% post_url 2023-03-03-json %}), on how DuckDB reads JSON files
 * [Reconciling JSON in DuckDB, One Patch at a Time]({% post_url 2026-08-18-reconciling-json %}), on combining JSON documents with `json_merge_patch`
-* [JSON Overview]({% link docs/current/data/json/overview.md %}) and [JSON Functions]({% link docs/current/data/json/json_functions.md %})
-* [The `JSON` Type]({% link docs/current/data/json/json_type.md %})
-* [`unnest`]({% link docs/current/sql/query_syntax/unnest.md %}) and the [`STRUCT` data type]({% link docs/current/sql/data_types/struct.md %})
+* [JSON Overview]({% link docs/1.5/data/json/overview.md %}) and [JSON Functions]({% link docs/1.5/data/json/json_functions.md %})
+* [The `JSON` Type]({% link docs/1.5/data/json/json_type.md %})
+* [`unnest`]({% link docs/1.5/sql/query_syntax/unnest.md %}) and the [`STRUCT` data type]({% link docs/1.5/sql/data_types/struct.md %})

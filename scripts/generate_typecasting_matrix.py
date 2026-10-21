@@ -163,9 +163,7 @@ def legend():
 def main():
     db_path = sys.argv[1] if len(sys.argv) > 1 else "duckdb"
     doc_file = (
-        sys.argv[2]
-        if len(sys.argv) > 2
-        else "docs/preview/sql/data_types/typecasting.md"
+        sys.argv[2] if len(sys.argv) > 2 else "docs/2.0/sql/data_types/typecasting.md"
     )
 
     rows = build_matrix(db_path)

@@ -228,7 +228,7 @@ FROM vectors;
 └───────────────────┘
 ```
 
-See the [Array Type page]({% link docs/current/sql/data_types/array.md %}) in the documentation for more information.
+See the [Array Type page]({% link docs/1.5/sql/data_types/array.md %}) in the documentation for more information.
 
 ## Multi-Database Support
 
@@ -242,7 +242,7 @@ ATTACH 'mysql:user=root database=mysqlscanner' AS mysql;
 
 ## Secret Manager
 
-DuckDB integrates with several cloud storage systems such as S3 that require access credentials to access data. In the current version of DuckDB, authentication information is configured through DuckDB settings, e.g., `SET s3_access_key_id = '...';`. While this worked, it had several shortcomings. For example, it was not possible to set different credentials for different S3 buckets without modifying the settings between queries. Because settings are not considered secret, it was also possible to query them using `duckdb_settings()`.
+DuckDB integrates with several cloud storage systems such as S3 that require access credentials to access data. In the current version of DuckDB, authentication information is configured through DuckDB settings, e.g., `SET s3_access_key_id = '...';`{:.language-sql .highlight}. While this worked, it had several shortcomings. For example, it was not possible to set different credentials for different S3 buckets without modifying the settings between queries. Because settings are not considered secret, it was also possible to query them using `duckdb_settings()`.
 
 With this release, DuckDB adds a new [“Secrets Manager”](https://github.com/duckdb/duckdb/pull/10042) to manage secrets in a better way. We now have a unified user interface for secrets across all backends that use them. Secrets can be scoped, so different storage prefixes can have different secrets, allowing, for example, joining across organizations in a single query. Secrets can also be persisted, so that they do not need to be specified every time DuckDB is launched.
 
@@ -295,7 +295,7 @@ CREATE PERSISTENT SECRET my_persistent_secret (
 
 As mentioned, this will write the secret (unencrypted, so beware) to the `~/.duckdb/stored_secrets` directory.
 
-See the [Create Secret page]({% link docs/current/sql/statements/create_secret.md %}) in the documentation for more information.
+See the [Create Secret page]({% link docs/1.5/sql/statements/create_secret.md %}) in the documentation for more information.
 
 ## Temporary Memory Manager
 
@@ -346,14 +346,14 @@ As a user, you don't have to do anything to make use of the new ALP compression 
 
 ## CLI Improvements
 
-The command line client has seen a lot of work this release. In particular, multi-line editing has been made the default mode, and has seen many improvements. The query history is now also multi-line. [Syntax highlighting has improved]({% link docs/current/clients/cli/syntax_highlighting.md %}) – missing brackets and unclosed quotes are highlighted as errors, and matching brackets are highlighted when the cursor moves over them. Compatibility with read-line has also been [greatly extended]({% link docs/current/clients/cli/editing.md %}).
+The command line client has seen a lot of work this release. In particular, multi-line editing has been made the default mode, and has seen many improvements. The query history is now also multi-line. [Syntax highlighting has improved]({% link docs/1.5/clients/cli/syntax_highlighting.md %}) – missing brackets and unclosed quotes are highlighted as errors, and matching brackets are highlighted when the cursor moves over them. Compatibility with read-line has also been [greatly extended]({% link docs/1.5/clients/cli/editing.md %}).
 
 <img src="{% link images/syntax_highlighting_screenshot.png %}"
      alt="Image showing syntax highlighting in the shell"
      width="700"
      />
 
-See the [extended CLI docs for more information]({% link docs/current/clients/cli/overview.md %}).
+See the [extended CLI docs for more information]({% link docs/1.5/clients/cli/overview.md %}).
 
 ## Final Thoughts
 

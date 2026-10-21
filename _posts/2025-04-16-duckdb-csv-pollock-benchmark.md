@@ -100,7 +100,7 @@ We can see that the sniffer decided that quotes and escape characters are not pr
 Consequently, it decided to skip the first 4 rows (including the header) in order to read the file according to the dialect.
 
 > Tip DuckDB allows users to retrieve all errors that occur when reading a CSV file using the `reject_errors` table.
-> This is beyond the scope of this blog post, but you can find more details in the [“Reading Faulty CSV Files” documentation page]({% link docs/current/data/csv/reading_faulty_csv_files.md %}).
+> This is beyond the scope of this blog post, but you can find more details in the [“Reading Faulty CSV Files” documentation page]({% link docs/1.5/data/csv/reading_faulty_csv_files.md %}).
 
 ### Loading the Example with a User-Defined CSV Dialect
 
@@ -174,10 +174,10 @@ Possible fixes:
 ```
 
 > It is important to note two things for the `strict_mode = false` option:
-> 
+>
 > * When using this option, there is no guarantee that the result is correct.
 >   This is because it's impossible to define what constitutes a “correct result” when parsing a non-standard CSV file.
-> 
+>
 > * DuckDB runs a best-effort parser, as it will try only fail if it encounters an error to which it can't find any reasonable guess of what the correct data should look like (e.g., imagine a column of integers, where some integers are represented as a spelled-out string, this will cause a casting error).
 >   While it is possible that, with a given combination of errors, our parser may still fail, we are striving to make it even more robust as we face the abyss.
 

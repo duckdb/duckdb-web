@@ -12,8 +12,8 @@ image: "/images/blog/thumbs/delta-uc-updates.png"
 Welcome back! While we here at DuckLabs are typically of the quacking
 persuasion, we’ve been busy as beavers, shoring up our Delta to prepare for
 what’s next… Unity Catalog! Let’s look at how DuckDB’s
-[Delta]({% link docs/current/core_extensions/delta.md %}) and
-[Unity Catalog]({% link docs/current/core_extensions/unity_catalog.md %})
+[Delta]({% link docs/1.5/core_extensions/delta.md %}) and
+[Unity Catalog]({% link docs/1.5/core_extensions/unity_catalog.md %})
 extensions have grown up enough to shed the experimental tag, and see what
 has changed since our [last
 update]({% post_url 2025-03-21-maximizing-your-delta-scan-performance %}).
@@ -24,7 +24,7 @@ Before we jump in, let's review briefly. Delta is a foundational [open
 table format and toolset](https://docs.delta.io/) for building and managing
 data lakes, related to Iceberg and other lakehouse formats. DuckDB supports
 Delta tables via its [Delta
-Extension]({% link docs/current/core_extensions/delta.md %}).
+Extension]({% link docs/1.5/core_extensions/delta.md %}).
 
 In that last update we highlighted performance wins, particularly file skipping
 via filter pushdowns, and metadata caching with snapshot pinning. Now we build

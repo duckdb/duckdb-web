@@ -55,7 +55,7 @@ For a large result, it shows the first and last 20 rows with a row of dots in th
 
 A person sees the dots and the `(40 shown)` footer and knows that rows are missing.
 
-Today, many CLI invocations do not come from a person at all. Coding agents such as Claude Code, Codex, Cursor, Gemini CLI and GitHub Copilot run `duckdb -c "..."` once per shell call, capture stdout through a pipe and pass the text to a language model. This has quickly become a common way to use DuckDB. 
+Today, many CLI invocations do not come from a person at all. Coding agents such as Claude Code, Codex, Cursor, Gemini CLI and GitHub Copilot run `duckdb -c "..."` once per shell call, capture stdout through a pipe and pass the text to a language model. This has quickly become a common way to use DuckDB.
 
 This reader differs from a person in a few ways:
 
@@ -148,7 +148,7 @@ This returns in 30 milliseconds with the footer `first 20 of at least 102400 row
 
 ### A Hash of the Result
 
-The footer includes a hash of the entire result, covering the rows past the cap. The hash does not depend on row order and distinguishes `NULL` from the string `'NULL'`. An agent that wants to know whether a result changed after an edit can compare two footers instead of printing two results. 
+The footer includes a hash of the entire result, covering the rows past the cap. The hash does not depend on row order and distinguishes `NULL` from the string `'NULL'`. An agent that wants to know whether a result changed after an edit can compare two footers instead of printing two results.
 
 The footer is printed for empty results, for results of 10 rows or more, and whenever the output was capped. It is left out when the query was stopped early, because the hash would not cover the whole result.
 
@@ -210,14 +210,14 @@ When agent mode turns on by detection, the shell prints one line on `stderr` bef
 duckdb agent mode on: CLAUDECODE is set and stdout is not a terminal; -no-agent turns it off, .help agent explains the output
 ```
 
-The line states why the mode is on and how to turn it off. 
+The line states why the mode is on and how to turn it off.
 
-The first version printed three lines of explanation (634 bytes) on every run. That was larger than most query results, and a model keeps its context between runs anyway, so it only needs the explanation once. 
+The first version printed three lines of explanation (634 bytes) on every run. That was larger than most query results, and a model keeps its context between runs anyway, so it only needs the explanation once.
 
 The longer text is available via `.help agent`. It describes the output rules and settings, and it points to a few features an agent might not find by itself:
 
-* `SET max_execution_time = <ms>` to put an upper bound on a query’s runtime
-* `DESCRIBE <query>` to get the result columns without running the query
+* `SET max_execution_time = ⟨ms⟩`{:.language-sql .highlight} to put an upper bound on a query’s runtime
+* `DESCRIBE ⟨query⟩`{:.language-sql .highlight} to get the result columns without running the query
 * `SUMMARIZE` for a quick profile of a table or query
 * `.tables` for the schema
 * `duckdb_functions()` for function documentation
@@ -226,7 +226,7 @@ If you do not want the startup line, add `.startup_text none` to your `~/.duckdb
 
 ## Trying It Out
 
-If you use a coding agent, there is nothing to configure. Agents such as Claude Code, Codex, Cursor, Gemini CLI and GitHub Copilot already set one of the environment variables from the table above, and they capture a command's output through a pipe rather than a terminal. Those are two of the three conditions for agent mode. 
+If you use a coding agent, there is nothing to configure. Agents such as Claude Code, Codex, Cursor, Gemini CLI and GitHub Copilot already set one of the environment variables from the table above, and they capture a command's output through a pipe rather than a terminal. Those are two of the three conditions for agent mode.
 
 So as long as the `duckdb` binary on the agent’s path is v2.0 or newer and the agent does not request a specific output format with a flag such as `-csv`, `-json` or `-markdown`, the mode turns on by itself. A format flag is treated as a deliberate choice, so it switches agent mode off: the CLI assumes you want exactly that format and does not override it.
 

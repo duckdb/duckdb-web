@@ -53,7 +53,7 @@ DuckDB extensions can be used across all languages with a DuckDB client, includi
 
 If you are a DuckDB fan and a SQL user, you can share your expertise back to the community with an extension.
 This post will show you how!
-No C++ knowledge is needed – just a little bit of copy/paste and GitHub Actions handles all the compilation. 
+No C++ knowledge is needed – just a little bit of copy/paste and GitHub Actions handles all the compilation.
 If I can do it, you can do it!
 
 ### Powerful SQL
@@ -69,21 +69,21 @@ To achieve this level of flexibility, the `pivot_table` extension uses many frie
 
 * The [`query` function]({% post_url 2024-09-09-announcing-duckdb-110 %}#query-and-query_table-functions) to execute a SQL string
 * The [`query_table` function]({% post_url 2024-09-09-announcing-duckdb-110 %}#query-and-query_table-functions) to query a list of tables
-* The [`COLUMNS` expression]({% link docs/current/sql/expressions/star.md %}#columns-expression) to select a dynamic list of columns
-* [List lambda functions]({% link docs/current/sql/functions/lambda.md %}) to build up the SQL statement passed into `query`
-    * [`list_transform`]({% link docs/current/sql/functions/lambda.md %}#list_transformlist-lambda) for string manipulation like quoting
-    * [`list_reduce`]({% link docs/current/sql/functions/lambda.md %}#list_reducelist-lambda) to concatenate strings together
-    * [`list_aggregate`]({% link docs/current/sql/functions/list.md %}#list_aggregatelist-name) to sum multiple columns and identify subtotal and grand total rows
-* [Bracket notation for string slicing]({% link docs/current/sql/functions/text.md %}#stringbeginend)
-* [`UNION ALL BY NAME`]({% link docs/current/sql/query_syntax/setops.md %}#union-all-by-name) to stack data by column name for subtotals and grand totals
-* [`SELECT * REPLACE`]({% link docs/current/sql/expressions/star.md %}#replace-clause) to dynamically clean up subtotal columns
-* [`SELECT * EXCLUDE`]({% link docs/current/sql/expressions/star.md %}#exclude-clause) to remove internally generated columns from the final result
-* [`GROUPING SETS` and `ROLLUP`]({% link docs/current/sql/query_syntax/grouping_sets.md %}) to generate subtotals and grand totals
-* [`UNNEST`]({% link docs/current/sql/query_syntax/unnest.md %}) to convert lists into separate rows for `values_axis := 'rows'`
-* [`MACRO`s]({% link docs/current/sql/statements/create_macro.md %}) to modularize the code
-* [`ORDER BY ALL`]({% link docs/current/sql/query_syntax/orderby.md %}#order-by-all) to order the result dynamically
-* [`ENUM`s]({% link docs/current/sql/statements/create_type.md %}) to determine what columns to pivot horizontally
-* And of course the [`PIVOT` function]({% link docs/current/sql/statements/pivot.md %}) for horizontal pivoting!
+* The [`COLUMNS` expression]({% link docs/1.5/sql/expressions/star.md %}#columns-expression) to select a dynamic list of columns
+* [List lambda functions]({% link docs/1.5/sql/functions/lambda.md %}) to build up the SQL statement passed into `query`
+    * [`list_transform`]({% link docs/1.5/sql/functions/lambda.md %}#list_transformlist-lambda) for string manipulation like quoting
+    * [`list_reduce`]({% link docs/1.5/sql/functions/lambda.md %}#list_reducelist-lambda) to concatenate strings together
+    * [`list_aggregate`]({% link docs/1.5/sql/functions/list.md %}#list_aggregatelist-name) to sum multiple columns and identify subtotal and grand total rows
+* [Bracket notation for string slicing]({% link docs/1.5/sql/functions/text.md %}#stringbeginend)
+* [`UNION ALL BY NAME`]({% link docs/1.5/sql/query_syntax/setops.md %}#union-all-by-name) to stack data by column name for subtotals and grand totals
+* [`SELECT * REPLACE`]({% link docs/1.5/sql/expressions/star.md %}#replace-clause) to dynamically clean up subtotal columns
+* [`SELECT * EXCLUDE`]({% link docs/1.5/sql/expressions/star.md %}#exclude-clause) to remove internally generated columns from the final result
+* [`GROUPING SETS` and `ROLLUP`]({% link docs/1.5/sql/query_syntax/grouping_sets.md %}) to generate subtotals and grand totals
+* [`UNNEST`]({% link docs/1.5/sql/query_syntax/unnest.md %}) to convert lists into separate rows for `values_axis := 'rows'`
+* [`MACRO`s]({% link docs/1.5/sql/statements/create_macro.md %}) to modularize the code
+* [`ORDER BY ALL`]({% link docs/1.5/sql/query_syntax/orderby.md %}#order-by-all) to order the result dynamically
+* [`ENUM`s]({% link docs/1.5/sql/statements/create_type.md %}) to determine what columns to pivot horizontally
+* And of course the [`PIVOT` function]({% link docs/1.5/sql/statements/pivot.md %}) for horizontal pivoting!
 
 DuckDB's innovative syntax makes this extension possible!
 
@@ -133,7 +133,7 @@ git push
 
 #### Write Your SQL Macros
 
-It is likely a bit faster to iterate if you test your macros directly in DuckDB. 
+It is likely a bit faster to iterate if you test your macros directly in DuckDB.
 After you have written your SQL, we will move it into the extension.
 The example we will use demonstrates how to pull a dynamic set of columns from a dynamic table name (or a view name!).
 
@@ -194,7 +194,7 @@ All we had to provide were the name of the function, the names of the parameters
 ### Testing the Extension
 
 We also recommend adding some tests for your extension to the `⟨your_extension_name⟩.test` file.
-This uses [sqllogictest]({% link docs/current/dev/sqllogictest/intro.md %}) to test with just SQL!
+This uses [sqllogictest]({% link docs/1.5/dev/sqllogictest/intro.md %}) to test with just SQL!
 Let's add the example from above.
 
 > Note In sqllogictest, `query I` indicates that there will be 1 column in the result.
@@ -214,7 +214,7 @@ NULL
 
 Now, just add, commit, and push your changes to GitHub like before, and GitHub Actions will compile your extension and test it!
 
-If you would like to do further ad-hoc testing of your extension, you can download the extension from your GitHub Actions run's artifacts and then [install it locally using these steps]({% link docs/current/core_extensions/overview.md %}#unsigned-extensions).
+If you would like to do further ad-hoc testing of your extension, you can download the extension from your GitHub Actions run's artifacts and then [install it locally using these steps]({% link docs/1.5/core_extensions/overview.md %}#unsigned-extensions).
 
 ### Uploading to the Community Extensions Repository
 
@@ -351,7 +351,7 @@ INSTALL pivot_table FROM community;
 LOAD pivot_table;
 ```
 
-Now we can build pivot tables like the one below. 
+Now we can build pivot tables like the one below.
 There is a little bit of boilerplate required, and the details of how this works will be explained shortly.
 
 ```sql
@@ -493,7 +493,7 @@ FROM pivot_table(['business_metrics'],
 
 #### Pivot Horizontally, One Column per Metric in `values`
 
-Build up a `PIVOT` statement that will pivot out all valid combinations of raw data values within the `columns` parameter. 
+Build up a `PIVOT` statement that will pivot out all valid combinations of raw data values within the `columns` parameter.
 If `subtotals` or `grand_totals` are in use, make multiple copies of the input data, but replace appropriate column names in the `rows` parameter with a string constant.
 Pass all expressions in `values` to the `PIVOT` statement's `USING` clause so they each receive their own column.
 
@@ -530,7 +530,7 @@ FROM pivot_table(['business_metrics'],
 
 #### Pivot Horizontally, One Row per Metric in `values`
 
-Build up a separate `PIVOT` statement for each metric in `values` and combine them with `UNION ALL BY NAME`. 
+Build up a separate `PIVOT` statement for each metric in `values` and combine them with `UNION ALL BY NAME`.
 If `subtotals` or `grand_totals` are in use, make multiple copies of the input data, but replace appropriate column names in the `rows` parameter with a string constant.
 
 To simplify the appearance slightly, we adjust one parameter in our previous query and set `values_axis := 'rows'`:
