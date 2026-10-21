@@ -17,18 +17,24 @@ title: ODBC API on macOS
    brew install unixodbc
    ```
 
-2. <!-- markdownlint-disable MD034 --> DuckDB releases a universal [ODBC driver for macOS](https://github.com/duckdb/duckdb-odbc/releases/download/v{% if site.next_major_duckdb_odbc_version != "" %}{{ site.next_major_duckdb_odbc_version }}{% else %}{{ site.current_duckdb_odbc_version }}{% endif %}/duckdb_odbc-osx-universal.zip) (supporting both Intel and Apple Silicon CPUs). To download it, run:
+2. <!-- markdownlint-disable MD034 --> DuckDB releases ODBC drivers for macOS on [Apple Silicon (`arm64`)](https://github.com/duckdb/duckdb-odbc/releases/download/v{% if site.next_major_duckdb_odbc_version != "" %}{{ site.next_major_duckdb_odbc_version }}{% else %}{{ site.current_duckdb_odbc_version }}{% endif %}/duckdb_odbc-macos-arm64.zip) and [Intel (`x86_64`)](https://github.com/duckdb/duckdb-odbc/releases/download/v{% if site.next_major_duckdb_odbc_version != "" %}{{ site.next_major_duckdb_odbc_version }}{% else %}{{ site.current_duckdb_odbc_version }}{% endif %}/duckdb_odbc-macos-amd64.zip) CPUs. To download the driver for Apple Silicon, run:
 
    ```batch
-   wget https://github.com/duckdb/duckdb-odbc/releases/download/v{% if site.next_major_duckdb_odbc_version != "" %}{{ site.next_major_duckdb_odbc_version }}{% else %}{{ site.current_duckdb_odbc_version }}{% endif %}/duckdb_odbc-osx-universal.zip
+   wget https://github.com/duckdb/duckdb-odbc/releases/download/v{% if site.next_major_duckdb_odbc_version != "" %}{{ site.next_major_duckdb_odbc_version }}{% else %}{{ site.current_duckdb_odbc_version }}{% endif %}/duckdb_odbc-macos-arm64.zip
+   ```
+
+   To download the driver for Intel, run:
+
+   ```batch
+   wget https://github.com/duckdb/duckdb-odbc/releases/download/v{% if site.next_major_duckdb_odbc_version != "" %}{{ site.next_major_duckdb_odbc_version }}{% else %}{{ site.current_duckdb_odbc_version }}{% endif %}/duckdb_odbc-macos-amd64.zip
    ```
 
    <!-- markdownlint-enable MD034 -->
 
-3. The archive contains the `libduckdb_odbc.dylib` artifact. To extract it to a directory, run:
+3. The archive contains the `libduckdb_odbc.dylib` artifact. To extract it to a directory, run (on Intel, replace `arm64` with `amd64`):
 
    ```batch
-   mkdir duckdb_odbc && unzip duckdb_odbc-osx-universal.zip -d duckdb_odbc
+   mkdir duckdb_odbc && unzip duckdb_odbc-macos-arm64.zip -d duckdb_odbc
    ```
 
 4. There are two ways to configure the ODBC driver, either by initializing via the configuration files, or by connecting with [`SQLDriverConnect`](https://learn.microsoft.com/en-us/sql/odbc/reference/syntax/sqldriverconnect-function?view=sql-server-ver16).

@@ -157,7 +157,8 @@ For ODBC, the preview builds are based on the `main` branch of the [`duckdb/duck
 | -------- | ------------------ | --------------------------------------------------------------------------- |
 | Linux    | `arm64`            | [zip](https://artifacts.duckdb.org/duckdb-odbc/main/odbc-linux-arm64.zip)   |
 | Linux    | `x86_64`           | [zip](https://artifacts.duckdb.org/duckdb-odbc/main/odbc-linux-amd64.zip)   |
-| macOS    | `arm64` / `x86_64` | [zip](https://artifacts.duckdb.org/duckdb-odbc/main/odbc-osx-universal.zip) |
+| macOS    | `arm64`            | [zip](https://artifacts.duckdb.org/duckdb-odbc/main/odbc-macos-arm64.zip)   |
+| macOS    | `x86_64`           | [zip](https://artifacts.duckdb.org/duckdb-odbc/main/odbc-macos-amd64.zip)   |
 | Windows  | `arm64`            | [zip](https://artifacts.duckdb.org/duckdb-odbc/main/odbc-windows-arm64.zip) |
 | Windows  | `x86_64`           | [zip](https://artifacts.duckdb.org/duckdb-odbc/main/odbc-windows-amd64.zip) |
 
