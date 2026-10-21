@@ -9,7 +9,7 @@ excerpt: "DuckDB's development team in Amsterdam has started getting DuckDB v2.0
 tag: release
 ---
 
-> Update You can now select the [2.0.0-dev version on the installation page]({% link install/index.html %}?version=preview).
+> Update DuckDB v2.0.0 is out now! For details, see the [announcement blog post]({% post_url 2026-10-21-announcing-duckdb-200 %}).
 
 ## The State of DuckDB v2.0
 
