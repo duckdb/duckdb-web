@@ -146,7 +146,7 @@ FROM t;
 
 ### Asynchronous I/O
 
-DuckDB 2.0 introduces [asynchronous I/O]({% link docs/2.0/data/io.md %}) for reading Parquet and CSV files. The I/O layer now scales independently from the query processing layer, issuing reads in the background and keeping multiple requests in flight. This means far more parallelism for remote reads and dramatically faster queries on object storage such as [`s3://`]({% link docs/2.0/core_extensions/httpfs/s3api.md %}).
+DuckDB 2.0 introduces [asynchronous I/O]({% link docs/2.0/data/io.md %}) for reading Parquet and CSV files, as well as [DuckDB's native storage format]({% link docs/2.0/internals/storage.md %}). The I/O layer now scales independently from the query processing layer, issuing reads in the background and keeping multiple requests in flight. This means far more parallelism for remote reads and dramatically faster queries on object storage such as [`s3://`]({% link docs/2.0/core_extensions/httpfs/s3api.md %}).
 
 We described the design in detail in a [dedicated blog post]({% post_url 2026-07-31-asynchronous-io %}).
 In that post, we showed the network throughput over the course of a query with and without asynchronous I/O:

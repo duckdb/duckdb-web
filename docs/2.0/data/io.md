@@ -24,8 +24,9 @@ Asynchronous I/O is currently supported for the following formats:
 
 * [Parquet files]({% link docs/2.0/data/parquet/overview.md %})
 * uncompressed, seekable [CSV files]({% link docs/2.0/data/csv/overview.md %}) encoded in UTF-8
+* DuckDB's [native storage format]({% link docs/2.0/internals/storage.md %})
 
-Other formats, such as JSON files and DuckDB's native database format, use synchronous I/O. Asynchronous I/O is used automatically for the supported formats, including when they are read through data lake formats such as [DuckLake](https://ducklake.select/).
+Other formats, such as JSON files, use synchronous I/O. Asynchronous I/O is used automatically for the supported formats, including when they are read through data lake formats such as [DuckLake](https://ducklake.select/).
 
 ### Thread Pools
 
