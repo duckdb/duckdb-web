@@ -5,7 +5,7 @@ authors:
   - Ilya Boyandin in conversation with Geertjan Wielenga & Tim Cox
 thumb: "/images/blog/thumbs/spatial-joins.svg"
 image: "/images/blog/thumbs/spatial-joins.png"
-excerpt: "Ilya Boyandin first used DuckDB in a geospatial side project that analyzed data in the browser with no database backend. He later turned that setup into SQLRooms, an open-source framework for local-first analytical applications, and Foursquare's Spatial Desktop is the largest application built on it so far."
+excerpt: "TL;DR: Ilya Boyandin first used DuckDB in a geospatial side project that analyzed data in the browser with no database backend. He later turned that setup into SQLRooms, an open-source framework for local-first analytical applications, and Foursquare's Spatial Desktop is the largest application built on it so far."
 tag: using-duckdb
 ---
 
