@@ -89,7 +89,7 @@ SELECT * FROM events;
 
 For simplicity, this example runs the server and the client on the same machine. By default, the server only listens on `localhost`; to accept connections from other machines, [start the server with `allow_other_hostname`]({% link docs/2.0/quack/overview.md %}#starting-a-server) and put it behind a [TLS-terminating reverse proxy]({% link docs/2.0/quack/setup/reverse_proxy.md %}).
 
-The `CONNECT` statement is not limited to Quack: it points your session at any remote database that supports it, and the new remote pushdown optimizer ships SQL directly to PostgreSQL and MySQL instead of pulling tables over the wire.
+The `CONNECT` statement is not limited to Quack: it points your session at any remote database that supports it. The new remote pushdown optimizer goes further, rewriting queries to run on the remote side even without an explicit `CONNECT`, so a query like `FROM postgres.lineitem JOIN postgres.orders` is executed by PostgreSQL instead of pulling both tables over the wire.
 
 ### Quack in the CLI
 
