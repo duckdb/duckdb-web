@@ -28,7 +28,7 @@ We expect the most common source of issues to be the storage format, which is de
 
 ### Storage Format
 
-The DuckDB 2.0.0 storage format is _not forward compatible_: earlier DuckDB versions cannot read it.
+The DuckDB 2.0.0 storage format is _not backward compatible_: earlier DuckDB versions cannot read it.
 A database file created by v2.0.0 uses [storage version 69]({% link docs/2.0/internals/storage.md %}#storage-version-table), which older DuckDB versions cannot read.
 Existing database files created by an older version keep their storage version when v2.0.0 writes to them, so they remain readable by the older version.
 
