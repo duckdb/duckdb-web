@@ -5,11 +5,9 @@ authors:
   - Matt Martin in conversation with Geertjan Wielenga & Tim Cox
 thumb: "/images/blog/thumbs/ducklake.svg"
 image: "/images/blog/thumbs/ducklake.png"
-excerpt: "Matt Martin, a data engineer who is writing a book on DuckLake, has spent almost two decades moving from Excel macros to Teradata, BigQuery and Spark. We talked to him about why DuckDB stuck, why DuckLake caught his attention and which DuckDB v2.0 features he is most excited about."
+excerpt: "TL;DR: After nearly two decades working with increasingly sophisticated data infrastructure, data engineer [Matt Martin](https://www.linkedin.com/in/mattmartin14/) discovered DuckDB could handle many of the analytical tasks he cared about without the operational complexity he had come to associate with big data. The same preference for familiar SQL and simpler infrastructure drew him to DuckLake, and he has since become an active tester and advocate of DuckDB's evolving capabilities."
 tag: using-duckdb
 ---
-
-TL;DR: After nearly two decades working with increasingly sophisticated data infrastructure, data engineer [Matt Martin](https://www.linkedin.com/in/mattmartin14/) discovered DuckDB could handle many of the analytical tasks he cared about without the operational complexity he had come to associate with big data. The same preference for familiar SQL and simpler infrastructure drew him to DuckLake, and he has since become an active tester and advocate of DuckDB's evolving capabilities.
 
 ## From Copy-Paste to Code
 
@@ -136,7 +134,7 @@ For workloads such as log analytics over large numbers of raw files in S3, Googl
 
 **Quack.** The [Quack remote protocol]({% link docs/current/quack/overview.md %}) turns a DuckDB instance into a server that other DuckDB instances can connect to over HTTP. Matt likes the cleaner connect and disconnect syntax in v2.0 and the official DuckLake support. 
 
-He has built a [DuckDB-Wasm dashboard that talks via Quack to a DuckLake hosted on an Amazon EC2 instance](https://performancede.substack.com/p/serving-a-ducklake-on-ec2-via-quack). End users only need the Quack address and a token, with no AWS credentials and no knowledge of the DuckLake behind it. The Wasm build is still on v1.5 and will be updated for the v2.0 release.
+He has written about [serving a DuckLake on an Amazon EC2 instance via Quack](https://performancede.substack.com/p/serving-a-ducklake-on-ec2-via-quack). End users only need the Quack address and a token, with no AWS credentials and no knowledge of the DuckLake behind it. He has also built a DuckDB-Wasm dashboard on top of this setup, which he covers in the DuckLake book he is writing. The Wasm build is still on v1.5 and will be updated for the v2.0 release.
 
 ## Conclusion
 
