@@ -23,13 +23,13 @@
     var $versionBtns = $versionSwitch.find('.version-switch-option');
     var $versionSlider = $versionSwitch.find('.version-switch-slider');
 
-    var VERSIONS = ['current', 'lts', 'preview'];
-    var VERSION_LABELS = { current: 'current', lts: 'LTS', preview: 'preview' };
+    var VERSIONS = ['preview', 'current', 'lts'];
+    var VERSION_LABELS = { current: '', lts: 'LTS', preview: 'LTS' };
 
     var state = {
       platform: null,
       environment: null,
-      version: 'current'
+      version: 'preview'
     };
 
     function detectPlatform() {
@@ -67,7 +67,7 @@
         var params = new URLSearchParams(window.location.search);
         setOrDelete(params, 'platform', state.platform);
         setOrDelete(params, 'environment', state.environment);
-        setOrDelete(params, 'version', state.version !== 'current' ? state.version : null);
+        setOrDelete(params, 'version', state.version !== 'preview' ? state.version : null);
         var newQuery = params.toString();
         var newUrl = window.location.pathname + (newQuery ? '?' + newQuery : '') + window.location.hash;
         var prevQuery = window.location.search.replace(/^\?/, '');
@@ -207,7 +207,7 @@
       $versionBtns.each(function () {
         var v = $(this).data('version');
         var ver = getVersionForEnv(versionAttrPrefix(v));
-        if (ver) $(this).text(ver + ' (' + VERSION_LABELS[v] + ')');
+        if (ver) $(this).text(VERSION_LABELS[v] ? ver + ' (' + VERSION_LABELS[v] + ')' : ver);
       });
       positionSlider();
     }
@@ -300,7 +300,7 @@
     function bestTemplate() {
       var p = state.platform;
       var e = state.environment;
-      var v = state.version || 'current';
+      var v = state.version || 'preview';
 
       if (!e) return $();
 

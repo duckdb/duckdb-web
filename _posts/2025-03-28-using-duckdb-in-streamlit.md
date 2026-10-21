@@ -77,7 +77,7 @@ A DuckDB connection can be established against a persisted database file on the 
 
 ```python
 duckdb_conn = duckdb.connect(
-    "train_stations_and_services.duckdb", 
+    "train_stations_and_services.duckdb",
     read_only=True
 )
 ```
@@ -93,7 +93,7 @@ duckdb_conn.execute(f"attach '{DUCKDB_EXTERNAL_LOCATION}' as ext_db")
 duckdb_conn.execute("use ext_db")
 ```
 
-More details about attaching an external database can be found in the [DuckDB documentation]({% link docs/current/guides/network_cloud_storage/duckdb_over_https_or_s3.md %}).
+More details about attaching an external database can be found in the [DuckDB documentation]({% link docs/1.5/guides/network_cloud_storage/duckdb_over_https_or_s3.md %}).
 
 ### Considerations
 
@@ -106,11 +106,11 @@ Starting from this point, we will work with the external database.
 
 ## Analyzing Dutch Railway Data
 
-To analyze the data within Streamlit, we will make use of the Python [relational API]({% link docs/current/clients/python/relational_api.md %}), by chaining queries. We start by defining a relation, which will select the needed data from `stations`:
+To analyze the data within Streamlit, we will make use of the Python [relational API]({% link docs/1.5/clients/python/relational_api.md %}), by chaining queries. We start by defining a relation, which will select the needed data from `stations`:
 
 ```python
 stations_selection = duckdb_conn.sql("""
-    select name_long as station_name, geo_lat, geo_lng, code 
+    select name_long as station_name, geo_lat, geo_lng, code
     from stations
 """).set_alias("stations_selection")
 ```
@@ -146,7 +146,7 @@ def get_stations_services_query(duckdb_conn):
     return (
         stations_selection
         .join(
-            services_selection, 
+            services_selection,
             "services.station_code = stations_selection.code"
         )
         .select("""
@@ -167,7 +167,7 @@ The query will be executed when one of the following methods is encountered:
 - `stations_query.df()` to extract to a Pandas dataframe;  
 - `stations_query.fetchall()` to extract in a list;  
 - `stations_query.write_to()` to export the data in a file;  
-- any other calculation method, such as `.sum`, `.row_number` etc. The relational methods can be found in the [DuckDB documentation]({% link docs/current/clients/python/reference/index.md %}).
+- any other calculation method, such as `.sum`, `.row_number` etc. The relational methods can be found in the [DuckDB documentation]({% link docs/1.5/clients/python/reference/index.md %}).
 
 <div align="center" style="margin:10px">
     <a href="/images/blog/duckdb-streamlit/top_5_busiest_stations.png">
@@ -188,19 +188,19 @@ stations_query, _ = get_stations_services_query(get_duckdb_conn())
 
 top_5_query = (
     stations_query.aggregate("""
-            station_name, 
-            service_month: monthname(service_date), 
-            service_month_id: month(service_date), 
+            station_name,
+            service_month: monthname(service_date),
+            service_month_id: month(service_date),
             num_services: sum(num_services)
         """)
     .select("""
-            station_name, 
-            service_month, 
-            service_month_id, 
-            num_services, 
-            rn: row_number() 
+            station_name,
+            service_month,
+            service_month_id,
+            num_services,
+            rn: row_number()
                 over (
-                    partition by service_month 
+                    partition by service_month
                     order by num_services desc
                 )
         """)
@@ -227,7 +227,7 @@ The data about the train rides through the train stations of The Netherlands, at
     </a>
 </div>
 
-To analyze the network utilization across the country, we use `density_map` chart from Plotly, which will generate a heat map on a map chart. Because heat maps work best with pre-aggregated data, we first aggregate the number of train services and the geolocation of the station: 
+To analyze the network utilization across the country, we use `density_map` chart from Plotly, which will generate a heat map on a map chart. Because heat maps work best with pre-aggregated data, we first aggregate the number of train services and the geolocation of the station:
 
 ```python
 stations_df = stations_query.aggregate(
@@ -331,12 +331,12 @@ We then define a function to retrieve the query, which returns the closest five 
 def get_closest_stations_query(duckdb_conn, lat, lng):
 
     stations_selection = duckdb_conn.sql("""
-        select name_long as station_name, geo_lat, geo_lng, code 
-        from stations st 
+        select name_long as station_name, geo_lat, geo_lng, code
+        from stations st
         where exists (
-                select count(*) 
-                from services sv 
-                where st.code = sv."Stop:Station code" 
+                select count(*)
+                from services sv
+                where st.code = sv."Stop:Station code"
                 having count(*) > 100
             )
     """)
@@ -345,12 +345,12 @@ def get_closest_stations_query(duckdb_conn, lat, lng):
         stations_selection.project(f"""
             code as station_code,
             station_name,
-            geo_lat, 
-            geo_lng, 
+            geo_lat,
+            geo_lng,
             station_geo_point: st_point(geo_lng, geo_lat),
             clicked_geo_point: st_point({lng}, {lat}),
             distance_in_m: st_distance_sphere(
-                            st_point(geo_lng, geo_lat), 
+                            st_point(geo_lng, geo_lat),
                             clicked_geo_point
                         ),
             distance_in_km: round(distance_in_m/1000,2)

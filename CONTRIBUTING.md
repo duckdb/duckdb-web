@@ -154,6 +154,7 @@ Some of this style guide is automated with GitHub Actions, but feel free to run 
      * These characters are known in LaTeX code as `\langle` and `\rangle`.
      * Inline code snippets containing placeholders should be highlighted as SQL code. This can be achieved by appending `{:.language-sql .highlight}` after the code snippet (no space is required before the curly brace).
      * *Avoid* using arithmetic comparison characters, `<` and `>`, brackets, `[` and `]`, braces, `{` and `}`, for this purpose.
+* To show the DuckDB CLI prompt with the current database (e.g., to illustrate `ATTACH` or `USE`), put the database name in guillemets (`«»`) followed by `D`, e.g., `«memory» D ATTACH 'my_database.duckdb';`. Use the `sql` language tag for these code blocks, as `plsql` would add a second `D` prompt.
 
 ### Python Style
 

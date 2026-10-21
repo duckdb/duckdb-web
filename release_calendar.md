@@ -47,6 +47,7 @@ For planned new features, see the [DuckDB Development Roadmap]({% link roadmap.m
 
 Starting with v1.4.0, every _other_ DuckDB version is going to be a Long-Term Support (LTS) edition.
 For LTS DuckDB versions, the support period for [community support](https://ducklabs.com/community_support_policy/) is currently a year after the release.
+As exceptions, the support for DuckDB v1.4 was extended until November 17, 2026 and the support for DuckDB v1.5 (a non-LTS version) was extended until March 2027.
 
 <img src="{% link images/blog/lts-support-light.svg %}" alt="DuckDB LTS support" width="900" class="lightmode-img">
 <img src="{% link images/blog/lts-support-dark.svg %}" alt="DuckDB LTS support" width="900" class="darkmode-img">
@@ -73,8 +74,8 @@ Since version 0.4.0, only major and minor versions get a codename.
 
 ## Release Calendar as a CSV File
 
-You can get a [CSV file containing past DuckDB releases](/data/duckdb-releases.csv) and analyze it using DuckDB's [docs/currenter]({% link docs/current/data/csv/overview.md %}).
-For example, you can compute the average number of days between releases using the [`lag` window function]({% link docs/current/sql/functions/window_functions.md %}#lagexpr-offset-default-order-by-ordering-ignore-nulls):
+You can get a [CSV file containing past DuckDB releases](/data/duckdb-releases.csv) and analyze it using DuckDB's [CSV reader]({% link docs/2.0/data/csv/overview.md %}).
+For example, you can compute the average number of days between releases using the [`lag` window function]({% link docs/2.0/sql/functions/window_functions.md %}#lagexpr-offset-default-order-by-ordering-ignore-nulls):
 
 ```sql
 SELECT avg(diff)::DECIMAL(8, 2) AS average_days_between_releases

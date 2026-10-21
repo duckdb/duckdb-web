@@ -20,34 +20,35 @@ We continue to be amazed by the growth of the DuckDB community. DuckDB now sees 
 
 Until now, the size of our team has limited the level of support we could provide as the community grew. We have had to make difficult choices about where to focus our time, balancing the development and maintenance of DuckDB with the needs of an increasingly large and diverse user base.
 
-By [joining AWS](https://ducklabs.com/ducklabs-to-join-aws), DuckLabs now has access to additional resources that will allow us to expand our support for the DuckDB community. We are pleased to be able to invest more deeply in documentation, education, community programs, contributor support, and the channels through which users can ask questions and share feedback. We will provide further details about these initiatives as they become available.
+By [joining AWS](https://ducklabs.com/news/2026/08/26/ducklabs-to-join-aws), DuckLabs now has access to additional resources that will allow us to expand our support for the DuckDB community. We are pleased to be able to invest more deeply in documentation, education, community programs, contributor support, and the channels through which users can ask questions and share feedback. We will provide further details about these initiatives as they become available.
 
 Starting this fall, the [DuckDB Foundation](https://duckdb.foundation/) will also establish a Technical Advisory Board. The board will bring together members of the wider DuckDB community to provide input on the project’s technical direction and help ensure that its development continues to reflect the needs of its users and contributors.
 
 ## Support Model
 
-- **Where to file tickets:** Users can file bug reports as issues on GitHub ([DuckDB](https://github.com/duckdb/duckdb/issues), [DuckLake](https://github.com/duckdb/ducklake/issues), [Quack](https://github.com/duckdb/duckdb-quack/issues), and [other repositories]({% link docs/current/dev/repositories.md %})). Users can also suggest features on GitHub Discussions of the respective repositories.
+- **Where to file tickets:** Users can file bug reports as issues on GitHub ([DuckDB](https://github.com/duckdb/duckdb/issues), [DuckLake](https://github.com/duckdb/ducklake/issues), [Quack](https://github.com/duckdb/duckdb-quack/issues), and [other repositories]({% link docs/2.0/dev/repositories.md %})). Users can also suggest features on GitHub Discussions of the respective repositories.
 - **Response time:** We attempt to reproduce incoming issues within a few business days. Internally, we assign issues in weekly batches. However, we are unable to guarantee that issues will be resolved (e.g., fixed) within any time frame.
 
 ## Scope
 
 - **Client APIs:**
   - We provide first-tier support for the command line shell as well as the C, Go, Java (JDBC), ODBC, Node.js, Python, R, Rust and WebAssembly client APIs.
-  - The C++ API is intended for internal use and is not designed as a stable user-facing API. See the [Client overview page]({% link docs/current/clients/overview.md %}) for more details. (Note that starting from version v2.0, we will ship a stable C++ API.)
-- **Extensions:** The community support policy only covers the primary extensions from the [core extensions]({% link docs/current/core_extensions/overview.md %}).
-- **Crashes and internal errors:** Issues that cause crashes (segfault, bus error, abort) and issues that result in [internal errors]({% link docs/current/dev/internal_errors.md %}) get higher priority.
+  - The C++ API is intended for internal use and is not designed as a stable user-facing API. See the [Client overview page]({% link docs/2.0/clients/overview.md %}) for more details.
+- **Extensions:** The community support policy only covers the primary extensions from the [core extensions]({% link docs/2.0/core_extensions/overview.md %}).
+- **Crashes and internal errors:** Issues that cause crashes (segfault, bus error, abort) and issues that result in [internal errors]({% link docs/2.0/dev/internal_errors.md %}) get higher priority.
 - **Platforms:** We only support the following platforms:
   - Linux x86_64 & aarch64 (mainstream distributions under support by distributor running with glibc). The last three Ubuntu LTS releases are safe bets (currently: Ubuntu 22.04, 24.04 and 26.04)
   - macOS latest
   - Windows 11+ on x86_64
 - **Versions:** We support the following versions:
-  - The latest stable version (currently v{{ site.current_duckdb_version }})
-  - The latest LTS version (currently v{{ site.lts_duckdb_version }})
+  - DuckDB v2.0 (LTS, supported until October 2027)
+  - DuckDB v1.5 (extended support until March 2027)
+  - DuckDB v1.4 (LTS, supported until November 2026)
   - The bleeding edge version ([`main` branch](https://github.com/duckdb/duckdb/tree/main)) of DuckDB
 
 Out of scope:
 
-- **Architectures:** We [do not support]({% link docs/current/dev/building/unofficial_and_unsupported_platforms.md %}) 32-bit and big-endian architectures.
+- **Architectures:** We [do not support]({% link docs/2.0/dev/building/unofficial_and_unsupported_platforms.md %}) 32-bit and big-endian architectures.
 - **Debug builds:** Debug builds of DuckDB's clients and tooling are out of scope.
 - **Internals:** We are unable to answer questions about DuckDB internals, e.g., physical operators or storage internals. In general, if an issue cannot be triggered from SQL or one of the [supported client APIs](#scope), it's probably out of scope.
 

@@ -1,5 +1,6 @@
 import json
 import os
+import posixpath
 import re
 import yaml
 import textwrap
@@ -39,11 +40,42 @@ def reduce_clutter_in_doc(doc_body):
 
 
 def replace_jekyll_tags_for_variables(doc_body, config):
-    doc_body = doc_body.replace("{{ site.current_duckdb_hash }}",          config["current_duckdb_hash"])
-    doc_body = doc_body.replace("{{ site.current_duckdb_odbc_version }}",  config["current_duckdb_odbc_version"])
-    doc_body = doc_body.replace("{{ site.current_duckdb_version }}",       config["current_duckdb_version"])
-    doc_body = doc_body.replace("{{ site.current_duckdb_java_version }}",  config["current_duckdb_java_version"])
-    doc_body = doc_body.replace("{{ site.current_short_duckdb_version }}", config["current_short_duckdb_version"])
+    # stash the content of {% raw %} blocks so that it is not processed
+    raw_blocks = []
+    def stash_raw_block(match):
+        raw_blocks.append(match.group(1))
+        return f"@@RAW_BLOCK_{len(raw_blocks) - 1}@@"
+    doc_body = re.sub(r"{% raw %}(.*?){% endraw %}", stash_raw_block, doc_body, flags=re.DOTALL)
+
+    # evaluate conditionals of the form {% if site.x != "" %}...{% else %}...{% endif %}
+    doc_body = re.sub(
+        r'{% if site\.(\w+) != "" %}(.*?)(?:{% else %}(.*?))?{% endif %}',
+        lambda m: m.group(2) if config.get(m.group(1), "") != "" else (m.group(3) or ""),
+        doc_body,
+        flags=re.DOTALL
+    )
+
+    # evaluate version numbers split into components, e.g., for the Rust crate version:
+    # {% assign rust_v = site.current_duckdb_rust_version | split: "." %}...{{ rust_v[1] | prepend: "0" | slice: -2, 2 }}
+    for variable, config_key in re.findall(r'{% assign (\w+) = site\.(\w+) \| split: "\." %}', doc_body):
+        parts = str(config[config_key]).split(".")
+        doc_body = re.sub(
+            rf'{{{{ {variable}\[(\d)\] }}}}',
+            lambda m: parts[int(m.group(1))],
+            doc_body
+        )
+        doc_body = re.sub(
+            rf'{{{{ {variable}\[(\d)\] \| prepend: "0" \| slice: -2, 2 }}}}',
+            lambda m: ("0" + parts[int(m.group(1))])[-2:],
+            doc_body
+        )
+    doc_body = re.sub(r'{% assign .*? %}', "", doc_body)
+
+    # replace variables, e.g., {{ site.current_duckdb_version }}, undefined variables are rendered as empty strings (as in Jekyll)
+    doc_body = re.sub(r"{{ site\.(\w+) }}", lambda m: str(config.get(m.group(1), "")), doc_body)
+
+    # restore the content of {% raw %} blocks
+    doc_body = re.sub(r"@@RAW_BLOCK_(\d+)@@", lambda m: raw_blocks[int(m.group(1))], doc_body)
     return doc_body
 
 
@@ -90,10 +122,30 @@ def replace_html_code_blocks(doc_body):
 
 def doc_path_to_page_header_header_label(doc_file_full_path):
     return doc_file_full_path \
-        .replace("../docs/current/", "docs/current/") \
         .replace(".md", "") \
         .replace("../", "") \
         .replace("/", ":")
+
+
+def blog_post_file_to_label(blog_post_file):
+    # e.g., ../_posts/2024-10-02-pyodide.md -> blog:2024-10-02-pyodide
+    return "blog:" + os.path.basename(blog_post_file).replace(".md", "")
+
+
+# convert the path of a Jekyll source file to its URL on the website
+def jekyll_path_to_url(path):
+    # collections, e.g., _events/2024-08-15-duckcon5.md -> events/2024/08/15/duckcon5/
+    match = re.match(r"_events/([0-9]{4})-([0-9]{2})-([0-9]{2})-(.*)\.(md|html)$", path)
+    if match:
+        return f"https://duckdb.org/events/{match.group(1)}/{match.group(2)}/{match.group(3)}/{match.group(4)}/"
+    match = re.match(r"_(library|everywhere)/(?:[0-9]{4}-[0-9]{2}-[0-9]{2}-)?(.*)\.(md|html)$", path)
+    if match:
+        return f"https://duckdb.org/{match.group(1)}/{match.group(2)}/"
+
+    # index pages, e.g., install/index.html -> install/
+    path = re.sub(r"(^|/)index\.(md|html)$", r"\1", path)
+    path = re.sub(r"\.md$", "", path)
+    return f"https://duckdb.org/{path}"
 
 
 def adjust_links_in_doc_body(doc_body):
@@ -110,13 +162,6 @@ def adjust_links_in_doc_body(doc_body):
             r"[installation page](https://duckdb.org/install)",
             doc_body
         )
-
-    # replace link to the Python guides index page
-    # with a link to the Python guides section
-    doc_body = doc_body.replace(
-        "]({% link docs/current/guides/overview.md %}#python-client)",
-        "]({% link docs/current/python/overview.md %})"
-    )
 
     # replace "`, `" (with the surrounding characters used for emphasis) with "`,` " to allow line breaking
     # see https://stackoverflow.com/questions/76951040/pandoc-preserve-whitespace-in-inline-code
@@ -184,70 +229,78 @@ def adjust_links_in_doc_body(doc_body):
 
 
 # change links to filenames to links to headers
-def change_links(doc_body):
-    # match links but do not match image definitions (which start with a '!' character) within the link
-    matches = re.findall(r"([^!]\[[^]!]*\])\(([^)]*)\)", doc_body)
-    for match in matches:
-        original_link = match[1]
-
-        if original_link.startswith("http://") or original_link.startswith("https://"):
+# links to pages included in the document (internal_labels) become cross-references,
+# links to other pages (e.g., other versions of the documentation) become links to the website
+def change_links(doc_body, page_label, internal_labels):
+    # match links (allowing brackets in the link text, e.g., [`UNION [ALL]`](#union))
+    # but do not match image definitions (which start with '![') within the link
+    matches = re.findall(r"(?<!!)(\[(?:[^]\[!]|!(?!\[)|\[[^]\[]*\])*\])\(([^)]*)\)", doc_body)
+    for link_text, original_link in matches:
+        if original_link.startswith(("http://", "https://", "mailto:", "<")):
             continue
         if original_link.startswith("/"):
             full_url_link = f"https://duckdb.org{original_link}"
             doc_body = doc_body.replace(f"]({original_link})", f"]({full_url_link})")
             continue
 
-        # default: the link is unchanged
-        new_link = original_link
+        # links pointing within the same page, e.g., [example](#section-header)
+        if original_link.startswith("#"):
+            target_label = page_label
+            link_suffix = original_link
+            external_url = None
 
         # {% link ... %} tags
-        if original_link.startswith("{% link"):
-            new_link = original_link
-
-            # links to other pages (drop the .md extension)
-            new_link = re.sub(
-                r"{% link (.*?)\.md %}(#.*?)?",
-                r"\1\2",
-                new_link
-            )
-
-            # other links, e.g., PDFs
-            new_link = re.sub(
-                r"{% link (.*?) %}",
-                r"https://duckdb.org/\1",
-                new_link
-            )
+        elif original_link.startswith("{% link "):
+            link_target, link_suffix = re.match(r"{% link (.*?) %}(.*)", original_link).groups()
+            target_label = linked_path_to_label(link_target.replace(".md", ""))
+            external_url = jekyll_path_to_url(link_target)
 
         # {% post_url ... %} tags
-        if original_link.startswith("{% post_url "):
-            new_link = re.sub(
-                r"{% post_url (20[0-9][0-9])-([0-9][0-9])-([0-9][0-9])-(.*?) %}",
+        elif original_link.startswith("{% post_url "):
+            post_name, link_suffix = re.match(r"{% post_url (.*?) %}(.*)", original_link).groups()
+            target_label = f"blog:{post_name}"
+            external_url = re.sub(
+                r"(20[0-9][0-9])-([0-9][0-9])-([0-9][0-9])-(.*)",
                 r"https://duckdb.org/\1/\2/\3/\4",
-                original_link
+                post_name
             )
 
-        if new_link.startswith("https://"):
-           new_link_replacement = new_link
+        # relative links in the documentation, e.g., [types](types) on the docs/2.0/clients/c/query.md page
+        elif not page_label.startswith("blog:"):
+            link_target, _, anchor = original_link.partition("#")
+            page_directory = posixpath.dirname(page_label.replace(":", "/"))
+            link_target = posixpath.normpath(posixpath.join(page_directory, link_target))
+            link_suffix = f"#{anchor}" if anchor else ""
+            target_label = linked_path_to_label(link_target)
+            external_url = f"https://duckdb.org/{link_target}"
+
         else:
-            # we split links of the form a#b to along the #, leave links without # as they are
-            link_parts = new_link.split("#")
-            link_path = link_parts[0]
-            new_link_replacement = f"#{linked_path_to_label(link_path)}"
+            continue
+
+        if target_label in internal_labels:
+            new_link = f"#{target_label}"
             # if there was an anchor target in the link (#some-item),
             # we append it using double colons as separator (::some-item)
-            if len(link_parts) > 1:
-                new_link_replacement = new_link_replacement + "::" + link_parts[1]
+            if link_suffix.startswith("#") and len(link_suffix) > 1:
+                new_link += "::" + link_suffix[1:]
+        elif external_url:
+            new_link = f"{external_url}{link_suffix}"
+        else:
+            continue
 
-        old_link = f"{match[0]}({original_link})"
-        new_link_anchor = f"{match[0]}({new_link_replacement})"
-
-        doc_body = doc_body.replace(old_link, new_link_anchor)
+        doc_body = re.sub(
+            "(?<!!)" + re.escape(f"{link_text}({original_link})"),
+            lambda _: f"{link_text}({new_link})",
+            doc_body
+        )
     return doc_body
 
 
 def cleanup_doc(doc_body):
     doc_body = re.sub(r"<iframe.*</iframe>", "", doc_body)
-    doc_body = re.sub(r"{% include .*}", "", doc_body)
+    # replace tooltips with their labels
+    doc_body = re.sub(r'{% include tooltip\.html label="(.*?)".*? %}', r"\1", doc_body)
+    doc_body = re.sub(r"{% include .*? %}", "", doc_body)
     doc_body = doc_body.replace("{::nomarkdown}", "")
     doc_body = doc_body.replace("{::/nomarkdown}", "")
     return doc_body
@@ -286,19 +339,22 @@ def change_function_table_headers(doc_body):
     return doc_body
 
 
-def concatenate_page_to_output(config, of, header_level, docs_root, doc_file_path):
+def resolve_doc_file_path(docs_root, doc_file_path):
     # skip index files
     if doc_file_path.endswith("index"):
-        return
+        return None
 
     if doc_file_path.endswith("release_calendar"):
-        return
+        return None
 
     # determine the full path
     doc_file_full_path = f"{docs_root}/{doc_file_path}.md"
     if not os.path.exists(doc_file_full_path):
         doc_file_full_path = f"{docs_root}/{doc_file_path}/index.md"
+    return doc_file_full_path
 
+
+def concatenate_page_to_output(config, internal_labels, of, header_level, doc_file_full_path):
     with open(doc_file_full_path) as doc_file:
         # parse YAML header and add header to the beginning of the content based on the "title" attribute
         # with a corresponding label to allow cross-references to target this header
@@ -320,7 +376,7 @@ def concatenate_page_to_output(config, of, header_level, docs_root, doc_file_pat
         doc_body = adjust_links_in_doc_body(doc_body)
         doc_body = adjust_headers(doc_body, doc_header_label)
         doc_body = change_function_table_headers(doc_body)
-        doc_body = change_links(doc_body)
+        doc_body = change_links(doc_body, doc_header_label, internal_labels)
         doc_body = cleanup_doc(doc_body)
 
         # write to output
@@ -328,53 +384,80 @@ def concatenate_page_to_output(config, of, header_level, docs_root, doc_file_pat
         of.write("\n")
 
 
-def add_main_documentation(docs_root, menu, config, of):
-    chapter_json = [x for x in menu["docsmenu"] if x["page"] == "Documentation"][0]
-    chapter_slug = chapter_json["slug"]
-    main_level_pages = chapter_json["mainfolderitems"]
+# collect the sections and pages of the documentation in the order of the menu
+# sections are represented as ("section", header_level, title, label), pages as ("page", header_level, doc_file_full_path)
+def collect_main_documentation(docs_root, docs_url_prefix, menu):
+    items = []
 
-    for main_level_page in main_level_pages:
-        main_title = main_level_page["page"]
-        main_url = main_level_page.get("url")
-        main_slug = main_level_page.get("slug")
+    def add_page(header_level, doc_file_path):
+        doc_file_full_path = resolve_doc_file_path(docs_root, doc_file_path)
+        if doc_file_full_path:
+            items.append(("page", header_level, doc_file_full_path))
 
-        if main_url:
-            logging.info(f"- {main_url}")
-            concatenate_page_to_output(config, of, 1, docs_root, f"{chapter_slug}{main_url}")
+    for chapter_json in menu["docsmenu"]:
+        # standalone pages in the documentation, e.g., "What's New in the Docs for 2.0"
+        chapter_url = chapter_json.get("url")
+        if chapter_url and chapter_url.startswith(docs_url_prefix):
+            logging.info(f"- {chapter_url}")
+            add_page(1, chapter_url[len(docs_url_prefix):])
 
-        if main_slug:
-            # e.g., "# SQL Features {#guides:sql_features}"
-            of.write(f"# {main_title} {{#{ linked_path_to_label(f'{chapter_slug}/{main_slug}') }}}\n\n")
-        else:
+        if chapter_json["page"] != "Documentation":
             continue
 
-        logging.info(f"- {main_slug}")
-        for subfolder_page in main_level_page["subfolderitems"]:
-            subfolder_page_title = subfolder_page["page"]
-            subfolder_url = subfolder_page.get("url")
-            subfolder_slug = subfolder_page.get("slug")
+        chapter_slug = chapter_json["slug"]
+        for main_level_page in chapter_json["mainfolderitems"]:
+            main_title = main_level_page["page"]
+            main_url = main_level_page.get("url")
+            main_slug = main_level_page.get("slug")
 
-            if subfolder_url:
-                logging.info(f"  - {main_slug}/{subfolder_url}")
-                concatenate_page_to_output(config, of, 2, docs_root, f"{chapter_slug}{main_slug}/{subfolder_url}")
+            if main_url:
+                logging.info(f"- {main_url}")
+                add_page(1, f"{chapter_slug}{main_url}")
 
-            if subfolder_slug:
-                of.write(f"## {subfolder_page_title} {{#{ linked_path_to_label(f'{chapter_slug}/{main_slug}/{subfolder_slug}') }}}\n\n")
+            if main_slug:
+                # e.g., "# SQL Features {#guides:sql_features}"
+                items.append(("section", 1, main_title, linked_path_to_label(f"{chapter_slug}/{main_slug}")))
             else:
                 continue
 
-            logging.info(f"  - {main_slug}/{subfolder_slug}")
-            for subsubfolder_page in subfolder_page["subsubfolderitems"]:
-                subsubfolder_url = subsubfolder_page.get("url")
+            logging.info(f"- {main_slug}")
+            for subfolder_page in main_level_page["subfolderitems"]:
+                subfolder_page_title = subfolder_page["page"]
+                subfolder_url = subfolder_page.get("url")
+                subfolder_slug = subfolder_page.get("slug")
 
-                logging.info(f"    - {main_slug}/{subfolder_slug}/{subsubfolder_url}")
-                concatenate_page_to_output(config, of, 3, docs_root, f"{chapter_slug}{main_slug}/{subfolder_slug}/{subsubfolder_url}")
+                if subfolder_url:
+                    logging.info(f"  - {main_slug}/{subfolder_url}")
+                    add_page(2, f"{chapter_slug}{main_slug}/{subfolder_url}")
+
+                if subfolder_slug:
+                    items.append(("section", 2, subfolder_page_title, linked_path_to_label(f"{chapter_slug}/{main_slug}/{subfolder_slug}")))
+                else:
+                    continue
+
+                logging.info(f"  - {main_slug}/{subfolder_slug}")
+                for subsubfolder_page in subfolder_page["subsubfolderitems"]:
+                    subsubfolder_url = subsubfolder_page.get("url")
+
+                    logging.info(f"    - {main_slug}/{subfolder_slug}/{subsubfolder_url}")
+                    add_page(3, f"{chapter_slug}{main_slug}/{subfolder_slug}/{subsubfolder_url}")
+
+    return items
 
 
-def add_blog_posts(blog_root, of):
-    of.write("# DuckDB Blog\n\n")
+def add_main_documentation(items, config, internal_labels, of):
+    for item in items:
+        if item[0] == "section":
+            _, header_level, title, label = item
+            of.write(f"{'#' * header_level} {title} {{#{label}}}\n\n")
+        else:
+            _, header_level, doc_file_full_path = item
+            concatenate_page_to_output(config, internal_labels, of, header_level, doc_file_full_path)
 
-    blog_post_files = sorted(glob.glob(f"{blog_root}/*.md"))
+
+def add_blog_posts(blog_post_files, config, internal_labels, of):
+    of.write("# DuckDB Blog {#blog}\n\n")
+
     for blog_post_file in blog_post_files:
         print(blog_post_file)
         doc = frontmatter.load(blog_post_file)
@@ -385,13 +468,16 @@ def add_blog_posts(blog_root, of):
         doc_author = ", ".join(doc_authors)
         doc_date = blog_post_file.split("/")[-1][0:10]
         doc_body = doc.content
+        doc_header_label = blog_post_file_to_label(blog_post_file)
 
         doc_body = reduce_clutter_in_doc(doc_body)
+        doc_body = replace_jekyll_tags_for_variables(doc_body, config)
         doc_body = fix_language_tags_for_syntax_highlighting(doc_body)
         doc_body = replace_box_names(doc_body)
         doc_body = move_headers_down(doc_body)
         doc_body = adjust_links_in_doc_body(doc_body)
-        doc_body = change_links(doc_body)
+        doc_body = adjust_headers(doc_body, doc_header_label)
+        doc_body = change_links(doc_body, doc_header_label, internal_labels)
         doc_body = cleanup_doc(doc_body)
 
         if len(doc_authors) > 1:
@@ -399,7 +485,7 @@ def add_blog_posts(blog_root, of):
         else:
             author_field = "Author"
 
-        of.write(f"""## {doc_title}\n\n""")
+        of.write(f"""## {doc_title} {{#{doc_header_label}}}\n\n""")
         of.write(f"""**Publication date:** {doc_date}\n\n""")
         of.write(f"""**{author_field}:** {doc_author}\n\n""")
         if doc_excerpt is not None and doc_excerpt != "":
@@ -407,10 +493,20 @@ def add_blog_posts(blog_root, of):
         of.write(f"""{doc_body}\n\n""")
 
 
+# get the full DuckDB version number for the documentation version, e.g., 2.0 -> 2.0.0
+def get_duckdb_version(config, docs_version):
+    for prefix in ["current", "next_major", "lts"]:
+        if config.get(f"{prefix}_short_duckdb_version") == docs_version:
+            return config[f"{prefix}_duckdb_version"]
+    return docs_version
+
+
 parser = argparse.ArgumentParser()
 parser.add_argument("--verbose", action="store_true")
+parser.add_argument("--docs-version", default="2.0", help="version of the documentation, i.e., a directory in docs/")
 args = parser.parse_args()
 verbose = args.verbose
+docs_version = args.docs_version
 
 if verbose:
     logging.getLogger().setLevel(logging.INFO)
@@ -423,21 +519,29 @@ with open("../_config.yml") as config_file, open("metadata/metadata.yaml", "w") 
           ---
           title: DuckDB Documentation
           subtitle: >-
-            DuckDB version {config["current_duckdb_version"]}\\newline
+            DuckDB version {get_duckdb_version(config, docs_version)}\\newline
             Generated on {datetime.now(timezone.utc).strftime("%Y-%m-%d at %H:%M UTC")}
           ---
         """))
+
+with open(f"../_data/menu_docs_{docs_version.replace('.', '')}.json") as menu_docs_file:
+    menu = json.load(menu_docs_file)
+doc_items = collect_main_documentation(f"../docs/{docs_version}", f"/docs/{docs_version}/", menu)
+blog_post_files = sorted(glob.glob("../_posts/*.md"))
+
+# labels of the pages included in the document, links to other pages point to the website
+internal_labels = set(
+    [doc_path_to_page_header_header_label(item[2]) for item in doc_items if item[0] == "page"] +
+    [blog_post_file_to_label(blog_post_file) for blog_post_file in blog_post_files]
+)
 
 # compile concatenated document
 with open(f"duckdb-docs.md", "w") as of:
     with open("cover-page.md") as cover_page_file:
         of.write(cover_page_file.read())
 
-    with open("../_data/menu_docs_current.json") as menu_docs_file:
-        menu = json.load(menu_docs_file)
-        add_main_documentation("../docs/current", menu, config, of)
-
-    add_blog_posts("../_posts", of)
+    add_main_documentation(doc_items, config, internal_labels, of)
+    add_blog_posts(blog_post_files, config, internal_labels, of)
 
     with open("acknowledgments.md") as acknowledgments_file:
         of.write(acknowledgments_file.read())

@@ -56,10 +56,19 @@ lts_duckdb_version: "1.4.5"
 lts_duckdb_wasm_version: "1.4.4"
 lts_short_duckdb_version: "1.4"
 # preview version information
-preview_duckdb_version: "2.0.0-dev"
-preview_short_duckdb_version: "2.0-dev"
-preview_duckdb_java_version: "2.0.0-alpha49003-937"
-preview_duckdb_odbc_version: "8f79c4f6"
+next_major_duckdb_codename: "Cyanoptera"
+next_major_duckdb_version: "2.0.0"
+next_major_short_duckdb_version: "2.0"
+next_major_duckdb_java_version: ""
+next_major_duckdb_odbc_version: ""
+next_major_duckdb_go_version: ""
+next_major_duckdb_node_neo_version: ""
+next_major_duckdb_rust_version: ""
+next_major_duckdb_wasm_version: ""
+next_major_duckdb_csharp_version: ""
+next_major_duckdb_dart_version: ""
+next_major_duckdb_hash: "d54cbbe3df"
+next_major_duckdb_r_version: ""
 # more Jekyll config
 livereload: true
 highlighter: rouge
@@ -139,5 +148,6 @@ toc:
 exclude: ['Gemfile', 'Gemfile.lock', 'node_modules', 'vendor/bundle', 'vendor/cache', 'vendor/gems', 'vendor/ruby', 'bundle']
 
 include:
-  - docs/lts/clients/python/reference/objects.inv
-  - docs/current/clients/python/reference/objects.inv
+  - docs/1.4/clients/python/reference/objects.inv
+  - docs/1.5/clients/python/reference/objects.inv
+  - docs/2.0/clients/python/reference/objects.inv

@@ -20,7 +20,7 @@ Is anything more polarizing for data folks than spreadsheets?
 Wait, don't answer that, we don't have time to talk about leading and trailing commas again...
 
 The fact is that spreadsheets are everywhere.
-It is estimated that there are over [750 million spreadsheet users](https://thenewstack.io/microsoft-excel-becomes-a-programming-language/), compared to just [20](https://www.jetbrains.com/lp/devecosystem-data-playground/#global_population) to [30 million programmers](https://www.statista.com/statistics/627312/worldwide-developer-population/). 
+It is estimated that there are over [750 million spreadsheet users](https://thenewstack.io/microsoft-excel-becomes-a-programming-language/), compared to just [20](https://www.jetbrains.com/lp/devecosystem-data-playground/#global_population) to [30 million programmers](https://www.statista.com/statistics/627312/worldwide-developer-population/).
 That includes all languages put together!
 
 There are a number of ways that using a spreadsheet can improve a data workflow.
@@ -156,7 +156,7 @@ TO 'https://docs.google.com/spreadsheets/d/...?gid=123#gid=123&range=A2:Z10000' 
 );
 ```
 
-The `header` boolean parameter can also be used to determine whether the column names should be written out or not. 
+The `header` boolean parameter can also be used to determine whether the column names should be written out or not.
 
 ### Overwriting or Appending
 
@@ -211,7 +211,7 @@ The GSheets extension will use it to generate an access token periodically.
 
 After acquiring this key file, the persistent private key must be converted to a temporary token once every 30 minutes.
 That process is now automated with the `key_file` secret provider.
-Create the [secret]({% link docs/current/configuration/secrets_manager.md %}) with a command like below, pointing to the JSON file exported from Google.
+Create the [secret]({% link docs/1.5/configuration/secrets_manager.md %}) with a command like below, pointing to the JSON file exported from Google.
 
 ```sql
 CREATE OR REPLACE PERSISTENT SECRET my_secret (
@@ -222,7 +222,7 @@ CREATE OR REPLACE PERSISTENT SECRET my_secret (
 ```
 
 As the secret is created, the private key is stored in DuckDB and a temporary token is created.
-The secret can be stored in memory or optionally persisted to disk (unencrypted) using the [`PERSISTENT` keyword]({% link docs/current/configuration/secrets_manager.md %}#persistent-secrets).
+The secret can be stored in memory or optionally persisted to disk (unencrypted) using the [`PERSISTENT` keyword]({% link docs/1.5/configuration/secrets_manager.md %}#persistent-secrets).
 The temporary token is cached within the `SECRET` as well and is recreated if it is over 30 minutes old.
 
 This unlocks the use of the GSheets extension within pipelines, like GitHub Actions (GHA) or other orchestrators like dbt.
@@ -243,7 +243,7 @@ There are a few more fun features we are thinking about for the extension – we
 We would like to use a better heuristic for detecting data types when reading from a Sheet.
 The DuckDB type system is more advanced than Sheets, so it would be beneficial to be more precise.
 
-Enabling the GSheets extension to work in [DuckDB-Wasm]({% link docs/current/clients/wasm/overview.md %}) would allow in-browser applications to query Sheets directly – no server needed!
+Enabling the GSheets extension to work in [DuckDB-Wasm]({% link docs/1.5/clients/wasm/overview.md %}) would allow in-browser applications to query Sheets directly – no server needed!
 Several `http` functions need some modification to work in a browser environment.
 
 The OAuth flow that powers the browser-based login may be useful for authenticating to other APIs.

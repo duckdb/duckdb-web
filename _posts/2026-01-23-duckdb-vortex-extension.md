@@ -35,13 +35,13 @@ DuckDB is a database as the name says, yes, but it is also widely used as an eng
 
 - Databases like Snowflake, BigQuery or PostgreSQL.  
 - Lakehouse formats like Delta, Iceberg or DuckLake.  
-- File formats, most notably JSON, CSV, Parquet and most recently Vortex. 
+- File formats, most notably JSON, CSV, Parquet and most recently Vortex.
 
 > The community has gotten very creative, though, so these days you can even read YAML and Markdown with DuckDB using [community extensions]({% link community_extensions/index.md %}).
 
-All this is possible due to the DuckDB [extension system]({% link docs/current/extensions/overview.md %}), which makes it relatively easy to implement logic to interact with different file formats or external systems.
+All this is possible due to the DuckDB [extension system]({% link docs/1.5/extensions/overview.md %}), which makes it relatively easy to implement logic to interact with different file formats or external systems.
 
-The SpiralDB team built a [DuckDB extension](https://github.com/vortex-data/duckdb-vortex). Together with the [DuckLabs](https://ducklabs.com/) team, we have made the extension available as a [core DuckDB extension]({% link docs/current/core_extensions/overview.md %}), so that the community can enjoy Vortex as a first-class citizen in DuckDB.
+The SpiralDB team built a [DuckDB extension](https://github.com/vortex-data/duckdb-vortex). Together with the [DuckLabs](https://ducklabs.com/) team, we have made the extension available as a [core DuckDB extension]({% link docs/1.5/core_extensions/overview.md %}), so that the community can enjoy Vortex as a first-class citizen in DuckDB.
 
 ### Example Usage
 
@@ -101,7 +101,7 @@ Another interesting result is the standard deviation across runs. There was a co
 <details markdown='1'>
 <summary markdown='span'>
 Click here to see a more detailed breakdown of the benchmark results.
-</summary> 
+</summary>
 
 This figure shows the results per query, including the standard deviation error bar.  
 ![mean_per_query](/images/blog/duckdb-vortex/tpch_rowgram.png)  

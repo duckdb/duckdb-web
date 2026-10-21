@@ -46,11 +46,39 @@ function GenerateMerge(options = {}) {
                     ]),
                     Sequence([
                         Keyword("WHEN NOT MATCHED"),
+                        Optional(Keyword("BY TARGET"), "skip"),
                         Optional(Sequence([Keyword("AND"), Expression("condition")]), "skip"),
                         Keyword("THEN"),
                         Keyword("INSERT"),
-                        Keyword("VALUES"),
-                        GenerateOptionalColumnList()
+                        Choice(0, [
+                            new Skip(),
+                            Keyword("BY NAME"),
+                            Sequence([
+                                Keyword("VALUES"),
+                                GenerateOptionalColumnList()
+                            ])
+                        ])
+                    ]),
+                    Sequence([
+                        Keyword("WHEN NOT MATCHED BY SOURCE"),
+                        Optional(Sequence([Keyword("AND"), Expression("condition")]), "skip"),
+                        Keyword("THEN"),
+                        Choice(0, [
+                            Sequence([
+                                Keyword("UPDATE"),
+                                Optional(OneOrMore(
+                                    Sequence([
+                                        Keyword("SET"),
+                                        Expression("column-name"),
+                                        Keyword("="),
+                                        Expression("value-expr")
+                                    ]), Keyword(",")
+                                ), "skip")
+                            ]),
+                            Sequence([
+                                Keyword("DELETE")
+                            ])
+                        ])
                     ])
                 ])
             ),

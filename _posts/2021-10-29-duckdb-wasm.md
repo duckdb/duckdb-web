@@ -33,7 +33,7 @@ The processing capabilities of browsers were boosted tremendously 4 years ago wi
 > WebAssembly (abbreviated Wasm) is a binary instruction format for a stack-based virtual machine. Wasm is designed as a portable compilation target for programming languages, enabling deployment on the web for client and server applications.
 >
 > The Wasm stack machine is designed to be encoded in a size- and load-time efficient binary format. WebAssembly aims to execute at native speed by taking advantage of common hardware capabilities available on a wide range of platforms.
-> 
+>
 > (ref: [https://webassembly.org/](https://webassembly.org/))
 
 Four years later, the WebAssembly revolution is in full progress with first implementations being shipped in four major browsers. It has already brought us game engines, [entire IDEs](https://blog.stackblitz.com/posts/introducing-webcontainers/) and even a browser version of [Photoshop](https://web.dev/ps-on-the-web/). Today, we join the ranks with a first release of the npm library [@duckdb/duckdb-wasm](https://www.npmjs.com/package/@duckdb/duckdb-wasm).
@@ -131,7 +131,7 @@ for await (const batch of await conn.send<{ v: arrow.Int32 }>(`
     SELECT * FROM generate_series(1, 100) t(v)
 `)) {
     // ...
-} 
+}
 ```
 
 Alternatively, you can prepare statements for parameterized queries using:

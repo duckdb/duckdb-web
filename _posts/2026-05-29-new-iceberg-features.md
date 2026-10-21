@@ -10,12 +10,12 @@ excerpt: "DuckDB-Iceberg now has a number of new features supporting Iceberg Tab
 tag: extensions
 ---
 
-Despite the work required to develop the features needed for DuckLake v1.0 and Quack, the DuckLabs team is still hard at work on the [DuckDB-Iceberg extension]({% link docs/current/core_extensions/iceberg/overview.md %}).
+Despite the work required to develop the features needed for DuckLake v1.0 and Quack, the DuckLabs team is still hard at work on the [DuckDB-Iceberg extension]({% link docs/1.5/core_extensions/iceberg/overview.md %}).
 In this blog post, we will demonstrate some of the features that are available in [DuckDB v1.5.3]({% post_url 2026-05-20-announcing-duckdb-153 %}). Many of these features were earmarked for a future release in our last Iceberg-themed blog post [“Writes in DuckDB-Iceberg”]({% post_url 2025-11-28-iceberg-writes-in-duckdb %}) – you can think of this post as “Part 2” to that blog post.
 
 ## Getting Started
 
-To experiment with the new DuckDB-Iceberg features, you will need to connect to your favorite Iceberg REST Catalog. There are many ways to do so: please have a look at the [Connecting to REST Catalogs page]({% link docs/current/core_extensions/iceberg/catalogs.md %}), which has instructions for catalogs such as [Apache Polaris](https://polaris.apache.org/) and [Lakekeeper](https://lakekeeper.io/). If you would like to connect to [Amazon S3 Tables](https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-tables.html), please consult the [Connecting to S3 Tables page]({% link docs/current/core_extensions/iceberg/catalogs.md %}#amazon-s3-tables). In any case, your `ATTACH` command will look something like this:
+To experiment with the new DuckDB-Iceberg features, you will need to connect to your favorite Iceberg REST Catalog. There are many ways to do so: please have a look at the [Connecting to REST Catalogs page]({% link docs/1.5/core_extensions/iceberg/catalogs.md %}), which has instructions for catalogs such as [Apache Polaris](https://polaris.apache.org/) and [Lakekeeper](https://lakekeeper.io/). If you would like to connect to [Amazon S3 Tables](https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-tables.html), please consult the [Connecting to S3 Tables page]({% link docs/1.5/core_extensions/iceberg/catalogs.md %}#amazon-s3-tables). In any case, your `ATTACH` command will look something like this:
 
 ```sql
 ATTACH '⟨warehouse_name⟩' AS my_datalake (
@@ -26,7 +26,7 @@ ATTACH '⟨warehouse_name⟩' AS my_datalake (
 
 ## `MERGE INTO` Support
 
-DuckDB's [`MERGE INTO`]({% link docs/current/sql/statements/merge_into.md %}) statement is the recommended way to express upserts when the target table does not have a primary key – which is the case for all [lakehouse formats]({% link docs/current/lakehouse_formats.md %}).
+DuckDB's [`MERGE INTO`]({% link docs/1.5/sql/statements/merge_into.md %}) statement is the recommended way to express upserts when the target table does not have a primary key – which is the case for all [lakehouse formats]({% link docs/1.5/lakehouse_formats.md %}).
 With v1.5.3, `MERGE INTO` is now fully supported against Iceberg tables. You can apply a change set to an Iceberg table in a single statement, deciding per row whether to insert, update or delete.
 
 Let's take this table for example:
@@ -89,7 +89,7 @@ You can also combine matched and unmatched branches with `WHEN MATCHED THEN DELE
 
 ## `ALTER TABLE` Support
 
-In DuckDB v1.4's Iceberg extension, the lack of schema evolution of Iceberg tables was a [documented limitation]({% link docs/lts/core_extensions/iceberg/iceberg_rest_catalogs.md %}#unsupported-operations).
+In DuckDB v1.4's Iceberg extension, the lack of schema evolution of Iceberg tables was a [documented limitation](/docs/1.4/core_extensions/iceberg/iceberg_rest_catalogs#unsupported-operations).
 In v1.5.3, the `ALTER TABLE` statement is now supported against Iceberg tables, covering the most common schema-evolution operations.
 
 ```sql

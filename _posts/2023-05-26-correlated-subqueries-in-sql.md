@@ -105,7 +105,7 @@ WHERE distance = (
 
 Notice how the column from the *outer* relation (`ontime_outer`) is used *inside* the query. This is what turns the subquery into a *correlated subquery*. The column from the outer relation (`ontime_outer.uniquecarrier`) is a *parameter* for the subquery. Logically the subquery is executed once for every row that is present in `ontime`, where the value for the column at that row is substituted as a parameter.
 
-In order to make it more clear that the correlated subquery is in essence a *parameterized query*, we can create a scalar macro that contains the query using DuckDB's [macros]({% link docs/current/sql/statements/create_macro.md %}).
+In order to make it more clear that the correlated subquery is in essence a *parameterized query*, we can create a scalar macro that contains the query using DuckDB's [macros]({% link docs/1.5/sql/statements/create_macro.md %}).
 
 ```sql
 CREATE MACRO min_distance_per_carrier(param) AS (
@@ -244,9 +244,9 @@ WHERE distance = (
 
 ```text
 ┌───────────────────────────┐
-│         HASH_JOIN         │ 
-│   ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─   │ 
-│      uniquecarrier =      │ 
+│         HASH_JOIN         │
+│   ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─   │
+│      uniquecarrier =      │
 │       uniquecarrier       ├──────────────┐
 └─────────────┬─────────────┘              │
 ┌─────────────┴─────────────┐┌─────────────┴─────────────┐
@@ -279,7 +279,7 @@ JOIN (
      SELECT uniquecarrier, min(distance) AS min_distance
      FROM ontime
      GROUP BY uniquecarrier
-  ) AS subquery 
+  ) AS subquery
   ON ontime.uniquecarrier = subquery.uniquecarrier
  AND distance = min_distance;
 ```

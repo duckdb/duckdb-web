@@ -41,7 +41,7 @@ Below is a benchmark comparing loading time of 150 million rows of the Taxi data
 
 DuckDB supports two modes – the [`order-preserving`](https://github.com/duckdb/duckdb/pull/5082) and the [`non-order-preserving`](https://github.com/duckdb/duckdb/pull/5033) parallel data load.
 
-The order-preserving load preserves the insertion order so that e.g., the first line in your CSV file is the first line in the DuckDB table. The non-order-preserving load does not offer such guarantees – and instead might re-order the data on load. By default the order-preserving load is used, which involves some extra book-keeping. The preservation of insertion order can be disabled using the `SET preserve_insertion_order = false` statement.
+The order-preserving load preserves the insertion order so that e.g., the first line in your CSV file is the first line in the DuckDB table. The non-order-preserving load does not offer such guarantees – and instead might re-order the data on load. By default the order-preserving load is used, which involves some extra book-keeping. The preservation of insertion order can be disabled using the `SET preserve_insertion_order = false`{:.language-sql .highlight} statement.
 
 ## Compression Improvements
 
@@ -79,7 +79,7 @@ The parallel CSV reader can be enabled by setting the `experimental_parallel_csv
 SET experimental_parallel_csv = true;
 ```
 
-Below is the load time of a 720 MB CSV file containing the `lineitem` table from the `TPC-H` benchmark, 
+Below is the load time of a 720 MB CSV file containing the `lineitem` table from the `TPC-H` benchmark,
 
 | Variant         | Load time |
 | --------------- | --------: |
@@ -119,7 +119,7 @@ SELECT * FROM messages;
 └─────────────┘
 ```
 
-Sum types are strongly typed – but they allow a single value in a table to be represented as one of various types. The [union page]({% link docs/current/sql/data_types/union.md %}) in the documentation contains more information on how to use this new composite type.
+Sum types are strongly typed – but they allow a single value in a table to be represented as one of various types. The [union page]({% link docs/1.5/sql/data_types/union.md %}) in the documentation contains more information on how to use this new composite type.
 
 **FROM-first**. Starting with this release, DuckDB supports starting queries with the [`FROM` clause](https://github.com/duckdb/duckdb/pull/5076) instead of the `SELECT` clause. In fact, the `SELECT` clause is fully optional now, and defaults to `SELECT *`. That means the following queries are now valid in DuckDB:
 
@@ -153,7 +153,7 @@ SELECT min(COLUMNS(*)), count(*) FROM obs;
 └─────────────┴───────────────┴───────────────┴──────────────┘
 ```
 
-The `COLUMNS` expression supports all star expressions, including [the `EXCLUDE` and `REPLACE` syntax]({% link docs/current/sql/query_syntax/select.md %}). In addition, the `COLUMNS` expression can take a regular expression as parameter:
+The `COLUMNS` expression supports all star expressions, including [the `EXCLUDE` and `REPLACE` syntax]({% link docs/1.5/sql/query_syntax/select.md %}). In addition, the `COLUMNS` expression can take a regular expression as parameter:
 
 ```sql
 SELECT COLUMNS('val[0-9]+') FROM obs;
@@ -278,7 +278,7 @@ COPY lineitem TO 'lineitem-big.parquet';
 ```
 
 ```text
-   32% ▕███████████████████▏                                        ▏ 
+   32% ▕███████████████████▏                                        ▏
 ```
 
 In the future we aim to enable the progress bar by default in other clients. For now, this can be done manually by running the following SQL queries:

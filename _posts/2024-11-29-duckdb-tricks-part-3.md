@@ -13,7 +13,7 @@ tag: using-duckdb
 ## Overview
 
 We continue our DuckDB [Tricks]({% post_url 2024-08-19-duckdb-tricks-part-1 %}) [series]({% post_url 2024-10-11-duckdb-tricks-part-2 %}) with a third part,
-where we showcase [friendly SQL features]({% link docs/current/sql/dialect/friendly_sql.md %}) and performance optimizations.
+where we showcase [friendly SQL features]({% link docs/1.5/sql/dialect/friendly_sql.md %}) and performance optimizations.
 
 | Operation                                                                         | SQL instructions                                                                                                            |
 | --------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------- |
@@ -32,7 +32,7 @@ If you would like to follow the examples, download and decompress the data set b
 ## Excluding Columns from a Table
 
 First, let's look at the data in the CSV files.
-We pick the CSV file for August and inspect it with the [`DESCRIBE` statement]({% link docs/current/guides/meta/describe.md %}).
+We pick the CSV file for August and inspect it with the [`DESCRIBE` statement]({% link docs/1.5/guides/meta/describe.md %}).
 
 ```sql
 DESCRIBE FROM 'services-2024-08.csv';
@@ -51,26 +51,26 @@ The result is a table with the column names and the column types.
 | Service:Train number | BIGINT      | YES  | NULL | NULL    | NULL  |
 | ...                  | ...         | ...  | ...  | ...     | ...   |
 
-Now, let's use [`SUMMARIZE`]({% link docs/current/guides/meta/summarize.md %}) to inspect some statistics about the columns.
+Now, let's use [`SUMMARIZE`]({% link docs/1.5/guides/meta/summarize.md %}) to inspect some statistics about the columns.
 
 ```sql
 SUMMARIZE FROM 'services-2024-08.csv';
 ```
 
 With `SUMMARIZE`, we get 10 statistics about our data (`min`, `max`, `approx_unique`, etc.).
-If we want to remove a few of them the result, we can use the [`EXCLUDE` modifier]({% link docs/current/sql/expressions/star.md %}#exclude-modifier).
+If we want to remove a few of them the result, we can use the [`EXCLUDE` modifier]({% link docs/1.5/sql/expressions/star.md %}#exclude-modifier).
 For example, to exclude `min`, `max` and the quantiles `q25`, `q50`, `q75`, we can use issue the following command:
 
 ```sql
-SELECT * EXCLUDE(min, max, q25, q50, q75) 
+SELECT * EXCLUDE(min, max, q25, q50, q75)
 FROM (SUMMARIZE FROM 'services-2024-08.csv');
 ```
 
-Alternatively, we can use the [`COLUMNS`]({% link docs/current/sql/expressions/star.md %}#columns) expression with the [`NOT SIMILAR TO` operator]({% link docs/current/sql/functions/pattern_matching.md %}#similar-to).
+Alternatively, we can use the [`COLUMNS`]({% link docs/1.5/sql/expressions/star.md %}#columns) expression with the [`NOT SIMILAR TO` operator]({% link docs/1.5/sql/functions/pattern_matching.md %}#similar-to).
 This works with a regular expression:
 
 ```sql
-SELECT COLUMNS(lambda c: c NOT SIMILAR TO 'min|max|q.*') 
+SELECT COLUMNS(lambda c: c NOT SIMILAR TO 'min|max|q.*')
 FROM (SUMMARIZE FROM 'services-2024-08.csv');
 ```
 
@@ -128,7 +128,7 @@ SELECT COLUMNS('(\w*)\W*(\w*)\W*(\w*)') AS "\1_\2_\3"
 Here, we use regular expression with `(\w*)` groups that capture 0...n word characters (`[0-9A-Za-z_]`).
 Meanwhile, the expression `\W*` captures 0...n non-word characters (`[^0-9A-Za-z_]`).
 In the alias part we refer to the capture group `i` with `\i` so `"\1_\2_\3"` means that we only keep the word characters and separate their groups with underscores (`_`).
-However, because some column names contain words separated by a space, while others don't, after this `SELECT` statement we get column names with a trailing underscore (`_`), 
+However, because some column names contain words separated by a space, while others don't, after this `SELECT` statement we get column names with a trailing underscore (`_`),
 e.g., `Service_Date_`.
 Thus, we need an additional processing step:
 
@@ -138,7 +138,7 @@ SELECT COLUMNS('(.*?)_*$') AS "\1"
 
 Here, we capture the group of characters without the trailing underscore(s) and rename the columns to `\1`, which removes the trailing underscores.
 
-To make writing queries even more convenient, we can rely on the [case-insensitivity of identifiers]({% link docs/current/sql/dialect/keywords_and_identifiers.md %}#case-sensitivity-of-identifiers) to query the column names in lowercase:
+To make writing queries even more convenient, we can rely on the [case-insensitivity of identifiers]({% link docs/1.5/sql/dialect/keywords_and_identifiers.md %}#case-sensitivity-of-identifiers) to query the column names in lowercase:
 
 ```sql
 SELECT DISTINCT service_company
@@ -169,14 +169,14 @@ Now that we can simplify the column names, let's ingest all 3 months of data to 
 
 ```sql
 CREATE OR REPLACE TABLE services AS
-    SELECT COLUMNS('(.*?)_*$') AS "\1" 
+    SELECT COLUMNS('(.*?)_*$') AS "\1"
     FROM (
-        SELECT COLUMNS('(\w*)\W*(\w*)\W*(\w*)') AS "\1_\2_\3" 
+        SELECT COLUMNS('(\w*)\W*(\w*)\W*(\w*)') AS "\1_\2_\3"
         FROM 'services-2024-*.csv'
     );
 ```
 
-In the inner `FROM` clause, we use the [`*` glob syntax]({% link docs/current/sql/functions/pattern_matching.md %}#globbing) to match all files.
+In the inner `FROM` clause, we use the [`*` glob syntax]({% link docs/1.5/sql/functions/pattern_matching.md %}#globbing) to match all files.
 DuckDB automatically detects that all files have the same schema and unions them together.
 We have now a table with all the data from January to October, amounting to almost 20 million rows.
 
@@ -184,7 +184,7 @@ We have now a table with all the data from January to October, amounting to almo
 
 Suppose we want to analyze the average delay of the [Intercity Direct trains](https://en.wikipedia.org/wiki/Intercity_Direct) operated by the [Nederlandse Spoorwegen (NS)](https://en.wikipedia.org/wiki/Nederlandse_Spoorwegen), measured at the final destination of the train service.
 While we can run this analysis directly on the `.csv` files, the lack of metadata (such as schema and min-max indexes) will limit the performance.
-Let's measure this in the CLI client by turning on the [timer]({% link docs/current/clients/cli/dot_commands.md %}):
+Let's measure this in the CLI client by turning on the [timer]({% link docs/1.5/clients/cli/dot_commands.md %}):
 
 ```plsql
 .timer on
@@ -237,12 +237,12 @@ TO 'railway/services.parquet';
 ```
 
 If we run the query again, it's noticeably faster, taking only 35 milliseconds.
-This is thanks to [partial reading]({% link docs/current/data/parquet/overview.md %}#partial-reading), which uses the zonemaps (min-max indexes) to limit the amount of data that has to be scanned.
+This is thanks to [partial reading]({% link docs/1.5/data/parquet/overview.md %}#partial-reading), which uses the zonemaps (min-max indexes) to limit the amount of data that has to be scanned.
 Reordering the file allows DuckDB to skip more data, leading to faster query times.
 
 ## Hive Partitioning
 
-To speed up queries even further, we can use [Hive partitioning]({% link docs/current/data/partitioning/hive_partitioning.md %}) to create a directory layout on disk that matches the filtering used in the queries.
+To speed up queries even further, we can use [Hive partitioning]({% link docs/1.5/data/partitioning/hive_partitioning.md %}) to create a directory layout on disk that matches the filtering used in the queries.
 
 ```sql
 COPY services
@@ -250,7 +250,7 @@ TO 'services-parquet-hive'
 (FORMAT parquet, PARTITION_BY (Service_Company, Service_Type));
 ```
 
-Let's peek into the directory from DuckDB's CLI using the [`.sh` dot command]({% link docs/current/clients/cli/dot_commands.md %}):
+Let's peek into the directory from DuckDB's CLI using the [`.sh` dot command]({% link docs/1.5/clients/cli/dot_commands.md %}):
 
 ```plsql
 .sh tree services-parquet-hive

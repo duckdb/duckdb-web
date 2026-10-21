@@ -79,10 +79,24 @@ body.documentation main .wrap .duck-diagram-box h4 {
 .duck-diagram-box .highlighter-rouge,
 .newswrap .postwrap .postcontent .duck-diagram-box .highlighter-rouge,
 body.documentation main .wrap .duck-diagram-box .highlighter-rouge {
-	flex: 1;
+	flex: 0 0 auto;
 	margin: 0;
 	display: flex;
 	flex-direction: column;
+}
+
+/* A single code block stretches to match the height of the other box;
+   multiple stacked code blocks keep their natural height. */
+.duck-diagram-box .highlighter-rouge:only-of-type,
+.newswrap .postwrap .postcontent .duck-diagram-box .highlighter-rouge:only-of-type,
+body.documentation main .wrap .duck-diagram-box .highlighter-rouge:only-of-type {
+	flex: 1;
+}
+
+.duck-diagram-box .highlighter-rouge + .highlighter-rouge,
+.newswrap .postwrap .postcontent .duck-diagram-box .highlighter-rouge + .highlighter-rouge,
+body.documentation main .wrap .duck-diagram-box .highlighter-rouge + .highlighter-rouge {
+	margin-top: 12px;
 }
 
 .duck-diagram-box .highlighter-rouge > div.highlight,
@@ -90,6 +104,14 @@ body.documentation main .wrap .duck-diagram-box .highlighter-rouge {
 body.documentation main .wrap .duck-diagram-box .highlighter-rouge > div.highlight {
 	flex: 1;
 	border-radius: var(--page-radius-box-inner);
+}
+
+/* The boxes are narrow, so drop the trailing padding that would otherwise
+   push long lines into a horizontal scroll bar. */
+.duck-diagram-box pre.highlight > code,
+.newswrap .postwrap .postcontent .duck-diagram-box pre.highlight > code,
+body.documentation main .wrap .duck-diagram-box pre.highlight > code {
+	padding-right: 0;
 }
 
 .duck-diagram-box pre,
@@ -126,6 +148,11 @@ body.documentation main .wrap .duck-diagram-box code,
 		background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='58' height='22' fill='none' viewBox='0 0 58 22'%3E%3Cpath fill='%231a1a1a' d='M58 2.887 53 0v5.774zm-58 0v.5h53.5v-1H0z'/%3E%3Cpath fill='%23b2b2b2' d='M58 2.887 53 0v5.774zm-58 0v.5h53.5v-1H0z'/%3E%3Cpath fill='%231a1a1a' d='m0 18.887 5 2.886V16zm58 0v-.5H4.5v1H58z'/%3E%3Cpath fill='%23b2b2b2' d='m0 18.887 5 2.886V16zm58 0v-.5H4.5v1H58z'/%3E%3C/svg%3E");
 		background-repeat: no-repeat;
 		background-position: center;
+	}
+
+	// Top arrow points left, bottom arrow points right
+	&.reversed::after {
+		background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='58' height='22' fill='none' viewBox='0 0 58 22'%3E%3Cpath fill='%23b2b2b2' d='m0 2.887 5 2.886V0zm58 0v-.5H4.5v1H58z'/%3E%3Cpath fill='%23b2b2b2' d='M58 18.887 53 16v5.774zm-58 0v.5h53.5v-1H0z'/%3E%3C/svg%3E");
 	}
 }
 
