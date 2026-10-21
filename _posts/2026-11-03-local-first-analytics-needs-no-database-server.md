@@ -9,9 +9,7 @@ excerpt: "Ilya Boyandin first used DuckDB in a geospatial side project that anal
 tag: using-duckdb
 ---
 
-TL;DR: Ilya Boyandin first used DuckDB in a geospatial side project that analyzed data in the browser with no database backend. He later turned that setup into [SQLRooms](https://sqlrooms.org), an open-source framework for local-first analytical applications. Foursquare's Spatial Desktop is the largest application built on it so far.
-
-[Ilya Boyandin](https://www.linkedin.com/in/ilyabo/) is a software engineer and the creator of SQLRooms. He has a PhD in geospatial data visualization. He worked on urban mobility analytics at Teralytics before joining Unfolded, the company behind the open-source projects [deck.gl](https://deck.gl) and [kepler.gl](https://kepler.gl). Foursquare later acquired Unfolded, and he has worked there since.
+[Ilya Boyandin](https://www.linkedin.com/in/ilyabo/) is a software engineer and the creator of [SQLRooms](https://sqlrooms.org). He has a PhD in geospatial data visualization. He worked on urban mobility analytics at Teralytics before joining Unfolded, the company behind the open-source projects [deck.gl](https://deck.gl) and [kepler.gl](https://kepler.gl). Foursquare later acquired Unfolded, and he has worked there since.
 
 ## How DuckDB Entered the Picture
 
