@@ -11,6 +11,8 @@ title: Installing the Python Client
 
 ## Installing via Pip
 
+The Python client requires Python 3.11 or later. On Python 3.10, `pip` does not report an error: it installs a 1.x release instead, and with `--pre` a 1.x development build.
+
 The latest release of the Python client can be installed using `pip`.
 
 ```batch

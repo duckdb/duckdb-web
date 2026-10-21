@@ -19,7 +19,7 @@ pip install -U duckdb 'polars[pyarrow]'
 
 ## Polars to DuckDB
 
-DuckDB can natively query Polars DataFrames by referring to the name of Polars DataFrames as they exist in the current scope.
+DuckDB can natively query Polars DataFrames and LazyFrames by referring to their names as they exist in the current scope. DuckDB pushes the column selections of a query, and the filters it can translate, into a LazyFrame, so Polars collects only the rows and columns the query needs. A DataFrame is converted in full and filtered afterwards.
 
 ```python
 import duckdb
@@ -38,7 +38,7 @@ duckdb.sql("SELECT * FROM df").show()
 
 ## DuckDB to Polars
 
-DuckDB can output results as Polars DataFrames using the `.pl()` result-conversion method.
+DuckDB can output results as Polars DataFrames using the `.pl()` method of a relation, the object that `duckdb.sql` and `con.sql` return. Results of `con.execute()` have no `.pl()` method.
 
 ```python
 df = duckdb.sql("""
@@ -84,4 +84,6 @@ PYTHON SCAN []
 PROJECT */2 COLUMNS
 ```
 
-To learn more about Polars, feel free to explore their [Python API Reference](https://pola-rs.github.io/polars/py-polars/html/reference/index.html).
+A relation also implements the [Arrow PyCapsule interface]({% link docs/2.0/guides/python/export_arrow.md %}#export-through-the-arrow-pycapsule-interface), so `pl.DataFrame(rel)` reads it too, without `pyarrow` installed. `pl.from_arrow(rel)` returns a Series with one struct per row instead of a DataFrame.
+
+To learn more about Polars, feel free to explore their [Python API Reference](https://docs.pola.rs/api/python/stable/reference/index.html).

@@ -349,7 +349,13 @@ Support for the [other DuckDB platforms]({% link docs/2.0/extensions/extension_d
 
 ## Using delta-rs with DuckDB
 
-This example writes a Delta table with the `delta-rs` Python package and reads it with DuckDB. It then reads the table's change data feed through the Arrow zero-copy integration. For larger data, use [Arrow Datasets](https://delta-io.github.io/delta-rs/integrations/delta-lake-arrow/) to read it lazily.
+This example writes a Delta table with the `delta-rs` Python package and reads it with DuckDB. It then reads the table's change data feed through the Arrow zero-copy integration. For larger data, use [Arrow Datasets](https://delta-io.github.io/delta-rs/latest/integrations/delta-lake-arrow/) to read it lazily.
+
+The example needs `deltalake`, the Python package of `delta-rs`, with its `pyarrow` extra:
+
+```batch
+pip install duckdb "deltalake[pyarrow]"
+```
 
 <!-- markdownlint-disable MD040 MD046 -->
 
@@ -376,7 +382,7 @@ with duckdb.connect() as conn:
         SELECT * FROM delta_scan('tmp/some_table')
     """).show()
 
-# Append some data and read the change data feed using the PyArrow integration
+# Append some data and read the change data feed, an Arrow record batch reader
 dl.write_deltalake(
     "tmp/some_table",
     pa.table({

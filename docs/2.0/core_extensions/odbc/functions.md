@@ -154,9 +154,11 @@ Copies rows from a DuckDB accessible file or table into the remote DB.
 > Warning Using `odbc_copy` from [Python Relational API]({% link docs/2.0/clients/python/relational_api.md %}).
 >
 > `odbc_copy` is a table function that [returns](#returns-5) one row for each 2048 copied rows.
-> When it is used from Python with `duckdb.sql()` the [Lazy Evaluation]({% link docs/2.0/clients/python/relational_api.md %}#lazy-evaluation)
-> is taking place. Thus no rows will be copied until [a method that triggers execution]({% link docs/2.0/clients/python/relational_api.md %}#output)
-> is called on the resulting relation and all result rows are consumed.
+> Called from Python as `duckdb.sql("SELECT * FROM odbc_copy(...)")`, it is subject to [lazy evaluation]({% link docs/2.0/clients/python/relational_api.md %}#lazy-evaluation):
+> no rows are copied until [a method that reads the relation]({% link docs/2.0/clients/python/relational_api.md %}#output) is called
+> and all result rows are consumed, and every such read copies the rows again.
+> To copy once, use `duckdb.sql("CALL odbc_copy(...)")`, which runs at the call and consumes all rows,
+> or `duckdb.execute("SELECT * FROM odbc_copy(...)")` followed by `fetchall()` or `complete()`.
 
 ### Parameters:
 

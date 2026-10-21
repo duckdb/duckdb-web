@@ -9,13 +9,13 @@ redirect_from:
 title: Python
 ---
 
-The DuckDB Python package has its own repository at [`duckdb/duckdb-python`](https://github.com/duckdb/duckdb-python) and uses [pybind11](https://pybind11.readthedocs.io/en/stable/) to create Python bindings with DuckDB.
+The DuckDB Python package has its own repository at [`duckdb/duckdb-python`](https://github.com/duckdb/duckdb-python) and uses [nanobind](https://nanobind.readthedocs.io/) 3 to create Python bindings with DuckDB.
 
 ## Prerequisites
 
 This guide assumes:
 
-1. You have a working copy of the DuckDB Python package source (including git submodules and tags)
+1. You have a full clone of the DuckDB Python package source, including its git submodule
 2. You have [Astral UV](https://docs.astral.sh/uv/) version >= 0.8.0 installed
 3. You run commands from the root of the `duckdb-python` source
 
@@ -43,13 +43,8 @@ git fetch --all
 ```
 
 **Important notes:**
-* DuckDB is vendored as a git submodule and must be initialized
-* DuckDB version determination depends on local availability of git tags
-* If switching between branches with different submodule refs, add the git hooks:
-
-```bash
-git config --local core.hooksPath .githooks/
-```
+* DuckDB is vendored as a git submodule and must be initialized, otherwise the build fails with `RuntimeError: Duckdb submodule not initialized`
+* The package version is the `release_version` in `pyproject.toml` followed by `.dev` and the time of the latest commit across the repository and the submodule, as `yymmddhhmm` in UTC, for example `2.0.0.dev2610201323`. No git tags are read. The DuckDB version is computed from the number of commits in the submodule, so do not make a shallow clone
 
 ### 2. Install Astral uv
 
@@ -61,9 +56,9 @@ git config --local core.hooksPath .githooks/
 
 #### All Platforms
 
-* Python 3.9+ supported
+* Python 3.11 or later; free-threaded builds of CPython are not supported
 * uv >= 0.8.0 required
-* CMake and Ninja (installed via UV)
+* CMake, Ninja, nanobind and the NumPy headers (installed via UV)
 * C++ compiler toolchain
 
 #### Linux
@@ -108,12 +103,14 @@ Ensure you have the following installed:
 Set up the development environment in two steps:
 
 ```bash
-# Install all development dependencies without building the project
-uv sync --no-install-project
+# Install the build dependencies without building the project
+uv sync --only-group build --no-install-project -p 3.13
 
 # Build and install the project without build isolation
-uv sync --no-build-isolation
+uv sync --no-build-isolation -v --reinstall -p 3.13
 ```
+
+The result is an editable Debug build in `build/debug/`. Editable builds use the full CPython API; only wheels use the stable ABI.
 
 **Why two steps?**
 * `uv sync` performs editable installs by default with scikit-build-core using a persistent build-dir
@@ -122,18 +119,19 @@ uv sync --no-build-isolation
 
 ### 3. Enable Pre-Commit Hooks
 
-We run a number of linting, formatting and type-checking in CI. You can run all of these manually, but to make your life easier you can install the exact same checks we run in CI as git hooks with pre-commit, which is already installed as part of the dev dependencies:
+We run a number of linting, formatting and type-checking in CI. You can run all of these manually, but to make your life easier you can install the exact same checks we run in CI as git hooks with [pre-commit](https://pre-commit.com). Install it pinned to Python 3.12, so the hooks do not depend on your build interpreter:
 
 ```bash
-uvx pre-commit install
+uv tool install --python 3.12 pre-commit
+pre-commit install
 ```
 
-This will run all required checks before letting your commit pass.
+This will run all required checks before letting your commit pass. To run them across the tree, use `pre-commit run --all-files`.
 
 You can also install a post-checkout hook that always runs `git submodule update --init --recursive`. When you change branches between main and a bugfix branch, this makes sure the `duckdb` submodule is always correctly initialized:
 
 ```bash
-uvx pre-commit install --hook-type post-checkout
+pre-commit install --hook-type post-checkout
 ```
 
 ### 4. Verify Installation
@@ -160,9 +158,10 @@ uv run --no-build-isolation pytest ./tests --verbose --ignore=./tests/slow
 
 ### Test Coverage
 
-Run with coverage (compiles extension with `--coverage` for C++ coverage):
+Build with coverage (compiles the extension with `--coverage` into `build/coverage/` for C++ coverage), then run the tests under coverage:
 
 ```bash
+COVERAGE=1 uv sync --no-build-isolation -v --reinstall -p 3.13
 COVERAGE=1 uv run --no-build-isolation coverage run -m pytest ./tests --verbose
 ```
 
@@ -178,8 +177,9 @@ Check C++ coverage:
 ```bash
 uv run gcovr \
   --gcov-ignore-errors all \
+  --gcov-ignore-parse-errors=negative_hits.warn_once_per_file \
   --root "$PWD" \
-  --filter "${PWD}/src/duckdb_py" \
+  --filter "${PWD}/src" \
   --exclude '.*/\.cache/.*' \
   --gcov-exclude '.*/\.cache/.*' \
   --gcov-exclude '.*/external/.*' \
@@ -187,22 +187,22 @@ uv run gcovr \
   --exclude-unreachable-branches \
   --exclude-throw-branches \
   --html --html-details -o coverage-cpp.html \
-  build/coverage/src/duckdb_py \
+  build/coverage/src \
   --print-summary
 ```
 
 ### Building Wheels
 
-Build wheel for your system:
+Build an sdist and a wheel for your system:
 
 ```bash
 uv build
 ```
 
-Build for specific Python version:
+On CPython 3.12 and later, the wheel is tagged `cp312-abi3`: it uses the stable ABI and serves 3.12 and every later version. On CPython 3.11, the wheel is specific to that version. Build for a specific Python version:
 
 ```bash
-uv build -p 3.9
+uv build -p 3.11
 ```
 
 To install the wheel, run:
@@ -255,7 +255,7 @@ Set breakpoints and debug with lldb:
 ```bash
 # Example Python script (test.py)
 # import duckdb
-# print(duckdb.sql("select * from range(1000)").df())
+# print(duckdb.sql("SELECT * FROM range(1000)").df())
 
 lldb -- .venv/bin/python3 test.py
 ```
@@ -264,22 +264,20 @@ In lldb:
 
 ```bash
 # Set breakpoint (library loads when imported)
-(lldb) br s -n duckdb::DuckDBPyRelation::FetchDF
+(lldb) br s -n duckdb::DuckDBPyResult::FetchDF
 (lldb) r
 ```
 
 ## Cross-Platform Testing
 
-You can run the packaging workflow manually on your fork for any branch, choosing platforms and test suites via the GitHub Actions web interface.
+You can run the Packaging workflow manually on your fork for any branch via the GitHub Actions web interface. Its inputs choose a minimal set of wheels or all of them, the test suite to run (none, fast or all), the commits of the package and of the DuckDB submodule to build and a forced package or DuckDB version.
 
 ## Troubleshooting
 
 ### Build Issues
 
-**Missing git tags:** If you forked DuckDB Python, ensure you have the upstream tags:
+**Missing submodule:** If the build fails with `RuntimeError: Duckdb submodule not initialized`, initialize the submodule:
 
 ```bash
-git remote add upstream https://github.com/duckdb/duckdb-python.git
-git fetch --tags upstream
-git push --tags
+git submodule update --init --recursive
 ```

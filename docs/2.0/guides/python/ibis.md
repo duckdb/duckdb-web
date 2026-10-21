@@ -11,25 +11,17 @@ title: Integration with Ibis
 
 [Ibis](https://ibis-project.org) is a Python dataframe library that supports 20+ backends, with DuckDB as the default. Ibis with DuckDB provides a Pythonic interface for SQL with great performance.
 
+> Warning Ibis 12.0.0 and earlier do not support DuckDB 2.0. The examples below use DuckDB 1.5. Follow the Installation section to keep DuckDB below 2.0.
+
 ## Installation
 
-You can pip install Ibis with the DuckDB backend:
+Install Ibis with the DuckDB backend, keeping DuckDB below 2.0:
 
 ```batch
-pip install 'ibis-framework[duckdb,examples]' # examples is only required to access the sample data Ibis provides
+pip install 'ibis-framework[duckdb,examples]' 'duckdb<2'
 ```
 
-or use conda:
-
-```batch
-conda install ibis-framework
-```
-
-or use mamba:
-
-```batch
-mamba install ibis-framework
-```
+The `examples` extra provides the sample data used below.
 
 ## Create a Database File
 
@@ -39,22 +31,10 @@ Ibis can work with several file types, but at its core, it connects to existing 
 import ibis
 
 con = ibis.connect("duckdb://penguins.ddb")
-con.create_table(
-    "penguins", ibis.examples.penguins.fetch().to_pyarrow(), overwrite = True
-)
-```
-
-```python
-# Output:
-DatabaseTable: penguins
-  species           string
-  island            string
-  bill_length_mm    float64
-  bill_depth_mm     float64
-  flipper_length_mm int64
-  body_mass_g       int64
-  sex               string
-  year              int64
+if "penguins" not in con.list_tables():
+    con.create_table(
+        "penguins", ibis.memtable(ibis.examples.penguins.fetch().to_pyarrow())
+    )
 ```
 
 You can now see the example dataset copied over to the database:
@@ -65,8 +45,7 @@ con = ibis.connect("duckdb://penguins.ddb")
 con.list_tables()
 ```
 
-```python
-# Output:
+```text
 ['penguins']
 ```
 
@@ -78,7 +57,6 @@ penguins
 ```
 
 ```text
-# Output:
 DatabaseTable: penguins
   species           string
   island            string
@@ -101,7 +79,7 @@ penguins.head().to_pandas()
 0  Adelie  Torgersen            39.1           18.7              181.0       3750.0    male  2007
 1  Adelie  Torgersen            39.5           17.4              186.0       3800.0  female  2007
 2  Adelie  Torgersen            40.3           18.0              195.0       3250.0  female  2007
-3  Adelie  Torgersen             NaN            NaN                NaN          NaN    None  2007
+3  Adelie  Torgersen             NaN            NaN                NaN          NaN     NaN  2007
 4  Adelie  Torgersen            36.7           19.3              193.0       3450.0  female  2007
 ```
 
@@ -111,8 +89,7 @@ penguins.head().to_pandas()
 penguins.head()
 ```
 
-```python
-# Output:
+```text
 r0 := DatabaseTable: penguins
   species           string
   island            string
@@ -146,7 +123,7 @@ penguins.head()
 │ Adelie  │ Torgersen │           39.1 │          18.7 │               181 │        3750 │ male   │  2007 │
 │ Adelie  │ Torgersen │           39.5 │          17.4 │               186 │        3800 │ female │  2007 │
 │ Adelie  │ Torgersen │           40.3 │          18.0 │               195 │        3250 │ female │  2007 │
-│ Adelie  │ Torgersen │            nan │           nan │              NULL │        NULL │ NULL   │  2007 │
+│ Adelie  │ Torgersen │           NULL │          NULL │              NULL │        NULL │ NULL   │  2007 │
 │ Adelie  │ Torgersen │           36.7 │          19.3 │               193 │        3450 │ female │  2007 │
 └─────────┴───────────┴────────────────┴───────────────┴───────────────────┴─────────────┴────────┴───────┘
 ```
@@ -202,7 +179,7 @@ penguins.filter((penguins.species == "Gentoo") & (penguins.body_mass_g > 6000))
 └─────────┴────────┴────────────────┴───────────────┴───────────────────┴─────────────┴────────┴───────┘
 ```
 
-You can use any Boolean comparison in a filter (although if you try to do something like use `<` on a string, Ibis will yell at you).
+You can use any Boolean comparison in a filter.
 
 ### select
 
@@ -223,7 +200,6 @@ penguins.select("species", "island", "year").limit(3)
 │ Adelie  │ Torgersen │  2007 │
 │ Adelie  │ Torgersen │  2007 │
 │ Adelie  │ Torgersen │  2007 │
-│ …       │ …         │     … │
 └─────────┴───────────┴───────┘
 ```
 
@@ -242,7 +218,6 @@ penguins.select(penguins.species, penguins.island, penguins.year).limit(3)
 │ Adelie  │ Torgersen │  2007 │
 │ Adelie  │ Torgersen │  2007 │
 │ Adelie  │ Torgersen │  2007 │
-│ …       │ …         │     … │
 └─────────┴───────────┴───────┘
 ```
 
@@ -261,7 +236,6 @@ penguins.select("species", "island", penguins.year).limit(3)
 │ Adelie  │ Torgersen │  2007 │
 │ Adelie  │ Torgersen │  2007 │
 │ Adelie  │ Torgersen │  2007 │
-│ …       │ …         │     … │
 └─────────┴───────────┴───────┘
 ```
 
@@ -282,7 +256,7 @@ penguins.mutate(bill_length_cm=penguins.bill_length_mm / 10)
 │ Adelie  │ Torgersen │           39.1 │          18.7 │               181 │        3750 │ male   │  2007 │           3.91 │
 │ Adelie  │ Torgersen │           39.5 │          17.4 │               186 │        3800 │ female │  2007 │           3.95 │
 │ Adelie  │ Torgersen │           40.3 │          18.0 │               195 │        3250 │ female │  2007 │           4.03 │
-│ Adelie  │ Torgersen │            nan │           nan │              NULL │        NULL │ NULL   │  2007 │            nan │
+│ Adelie  │ Torgersen │           NULL │          NULL │              NULL │        NULL │ NULL   │  2007 │           NULL │
 │ Adelie  │ Torgersen │           36.7 │          19.3 │               193 │        3450 │ female │  2007 │           3.67 │
 │ Adelie  │ Torgersen │           39.3 │          20.6 │               190 │        3650 │ male   │  2007 │           3.93 │
 │ Adelie  │ Torgersen │           38.9 │          17.8 │               181 │        3625 │ female │  2007 │           3.89 │
@@ -317,7 +291,7 @@ penguins.mutate(bill_length_cm=penguins.bill_length_mm / 10).select(
 │ Adelie  │ Torgersen │          18.7 │               181 │        3750 │ male   │  2007 │           3.91 │
 │ Adelie  │ Torgersen │          17.4 │               186 │        3800 │ female │  2007 │           3.95 │
 │ Adelie  │ Torgersen │          18.0 │               195 │        3250 │ female │  2007 │           4.03 │
-│ Adelie  │ Torgersen │           nan │              NULL │        NULL │ NULL   │  2007 │            nan │
+│ Adelie  │ Torgersen │          NULL │              NULL │        NULL │ NULL   │  2007 │           NULL │
 │ Adelie  │ Torgersen │          19.3 │               193 │        3450 │ female │  2007 │           3.67 │
 │ Adelie  │ Torgersen │          20.6 │               190 │        3650 │ male   │  2007 │           3.93 │
 │ Adelie  │ Torgersen │          17.8 │               181 │        3625 │ female │  2007 │           3.89 │
@@ -350,7 +324,7 @@ penguins.mutate(bill_length_cm=penguins.bill_length_mm / 10).select(
 │ Adelie  │ Torgersen │          18.7 │               181 │        3750 │ male   │  2007 │           3.91 │
 │ Adelie  │ Torgersen │          17.4 │               186 │        3800 │ female │  2007 │           3.95 │
 │ Adelie  │ Torgersen │          18.0 │               195 │        3250 │ female │  2007 │           4.03 │
-│ Adelie  │ Torgersen │           nan │              NULL │        NULL │ NULL   │  2007 │            nan │
+│ Adelie  │ Torgersen │          NULL │              NULL │        NULL │ NULL   │  2007 │           NULL │
 │ Adelie  │ Torgersen │          19.3 │               193 │        3450 │ female │  2007 │           3.67 │
 │ Adelie  │ Torgersen │          20.6 │               190 │        3650 │ male   │  2007 │           3.93 │
 │ Adelie  │ Torgersen │          17.8 │               181 │        3625 │ female │  2007 │           3.89 │
@@ -376,7 +350,7 @@ penguins.select("island", s.numeric())
 │ Torgersen │           39.1 │          18.7 │               181 │        3750 │  2007 │
 │ Torgersen │           39.5 │          17.4 │               186 │        3800 │  2007 │
 │ Torgersen │           40.3 │          18.0 │               195 │        3250 │  2007 │
-│ Torgersen │            nan │           nan │              NULL │        NULL │  2007 │
+│ Torgersen │           NULL │          NULL │              NULL │        NULL │  2007 │
 │ Torgersen │           36.7 │          19.3 │               193 │        3450 │  2007 │
 │ Torgersen │           39.3 │          20.6 │               190 │        3650 │  2007 │
 │ Torgersen │           38.9 │          17.8 │               181 │        3625 │  2007 │
@@ -489,9 +463,10 @@ To aggregate an entire column, call the corresponding method on that column.
 penguins.flipper_length_mm.mean()
 ```
 
-```python
-# Output:
-200.91520467836258
+```text
+┌────────────┐
+│ 200.915205 │
+└────────────┘
 ```
 
 You can compute multiple aggregates at once using the `aggregate` method:
@@ -516,10 +491,10 @@ But `aggregate` _really_ shines when it's paired with `group_by`.
 
 `group_by` creates groupings of rows that have the same value for one or more columns.
 
-But it doesn't do much on its own -- you can pair it with `aggregate` to get a result.
+But it doesn't do much on its own: you can pair it with `aggregate` to get a result.
 
 ```python
-penguins.group_by("species").aggregate()
+penguins.group_by("species").aggregate().order_by("species")
 ```
 
 ```text
@@ -529,8 +504,8 @@ penguins.group_by("species").aggregate()
 │ string    │
 ├───────────┤
 │ Adelie    │
-│ Gentoo    │
 │ Chinstrap │
+│ Gentoo    │
 └───────────┘
 ```
 
@@ -539,7 +514,7 @@ We grouped by the `species` column and handed it an “empty” aggregate comman
 If we add a second column to the `group_by`, we'll get each unique pairing of the values in those columns.
 
 ```python
-penguins.group_by(["species", "island"]).aggregate()
+penguins.group_by(["species", "island"]).aggregate().order_by(["species", "island"])
 ```
 
 ```text
@@ -548,18 +523,20 @@ penguins.group_by(["species", "island"]).aggregate()
 ┡━━━━━━━━━━━╇━━━━━━━━━━━┩
 │ string    │ string    │
 ├───────────┼───────────┤
-│ Adelie    │ Torgersen │
 │ Adelie    │ Biscoe    │
 │ Adelie    │ Dream     │
-│ Gentoo    │ Biscoe    │
+│ Adelie    │ Torgersen │
 │ Chinstrap │ Dream     │
+│ Gentoo    │ Biscoe    │
 └───────────┴───────────┘
 ```
 
 Now, if we add an aggregation function to that, we start to really open things up.
 
 ```python
-penguins.group_by(["species", "island"]).aggregate(penguins.bill_length_mm.mean())
+penguins.group_by(["species", "island"]).aggregate(penguins.bill_length_mm.mean()).order_by(
+    ["species", "island"]
+)
 ```
 
 ```text
@@ -568,11 +545,11 @@ penguins.group_by(["species", "island"]).aggregate(penguins.bill_length_mm.mean(
 ┡━━━━━━━━━━━╇━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━━┩
 │ string    │ string    │ float64              │
 ├───────────┼───────────┼──────────────────────┤
-│ Adelie    │ Torgersen │            38.950980 │
 │ Adelie    │ Biscoe    │            38.975000 │
 │ Adelie    │ Dream     │            38.501786 │
-│ Gentoo    │ Biscoe    │            47.504878 │
+│ Adelie    │ Torgersen │            38.950980 │
 │ Chinstrap │ Dream     │            48.833824 │
+│ Gentoo    │ Biscoe    │            47.504878 │
 └───────────┴───────────┴──────────────────────┘
 ```
 
@@ -581,7 +558,7 @@ By adding that `mean` to the `aggregate`, we now have a concise way to calculate
 ```python
 penguins.group_by(["species", "island"]).aggregate(
     [penguins.bill_length_mm.mean(), penguins.flipper_length_mm.max()]
-)
+).order_by(["species", "island"])
 ```
 
 ```text
@@ -590,11 +567,11 @@ penguins.group_by(["species", "island"]).aggregate(
 ┡━━━━━━━━━━━╇━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━━━━┩
 │ string    │ string    │ float64              │ int64                  │
 ├───────────┼───────────┼──────────────────────┼────────────────────────┤
-│ Adelie    │ Torgersen │            38.950980 │                    210 │
 │ Adelie    │ Biscoe    │            38.975000 │                    203 │
 │ Adelie    │ Dream     │            38.501786 │                    208 │
-│ Gentoo    │ Biscoe    │            47.504878 │                    231 │
+│ Adelie    │ Torgersen │            38.950980 │                    210 │
 │ Chinstrap │ Dream     │            48.833824 │                    212 │
+│ Gentoo    │ Biscoe    │            47.504878 │                    231 │
 └───────────┴───────────┴──────────────────────┴────────────────────────┘
 ```
 
@@ -603,27 +580,27 @@ If we need more specific groups, we can add to the `group_by`.
 ```python
 penguins.group_by(["species", "island", "sex"]).aggregate(
     [penguins.bill_length_mm.mean(), penguins.flipper_length_mm.max()]
-)
+).order_by(["species", "island", "sex"])
 ```
 
 ```text
-┏━━━━━━━━━┳━━━━━━━━━━━┳━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━┓
-┃ species ┃ island    ┃ sex    ┃ Mean(bill_length_mm) ┃ Max(flipper_length_mm) ┃
-┡━━━━━━━━━╇━━━━━━━━━━━╇━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━━━━┩
-│ string  │ string    │ string │ float64              │ int64                  │
-├─────────┼───────────┼────────┼──────────────────────┼────────────────────────┤
-│ Adelie  │ Torgersen │ male   │            40.586957 │                    210 │
-│ Adelie  │ Torgersen │ female │            37.554167 │                    196 │
-│ Adelie  │ Torgersen │ NULL   │            37.925000 │                    193 │
-│ Adelie  │ Biscoe    │ female │            37.359091 │                    199 │
-│ Adelie  │ Biscoe    │ male   │            40.590909 │                    203 │
-│ Adelie  │ Dream     │ female │            36.911111 │                    202 │
-│ Adelie  │ Dream     │ male   │            40.071429 │                    208 │
-│ Adelie  │ Dream     │ NULL   │            37.500000 │                    179 │
-│ Gentoo  │ Biscoe    │ female │            45.563793 │                    222 │
-│ Gentoo  │ Biscoe    │ male   │            49.473770 │                    231 │
-│ …       │ …         │ …      │                    … │                      … │
-└─────────┴───────────┴────────┴──────────────────────┴────────────────────────┘
+┏━━━━━━━━━━━┳━━━━━━━━━━━┳━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━┓
+┃ species   ┃ island    ┃ sex    ┃ Mean(bill_length_mm) ┃ Max(flipper_length_mm) ┃
+┡━━━━━━━━━━━╇━━━━━━━━━━━╇━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━━━━┩
+│ string    │ string    │ string │ float64              │ int64                  │
+├───────────┼───────────┼────────┼──────────────────────┼────────────────────────┤
+│ Adelie    │ Biscoe    │ female │            37.359091 │                    199 │
+│ Adelie    │ Biscoe    │ male   │            40.590909 │                    203 │
+│ Adelie    │ Dream     │ female │            36.911111 │                    202 │
+│ Adelie    │ Dream     │ male   │            40.071429 │                    208 │
+│ Adelie    │ Dream     │ NULL   │            37.500000 │                    179 │
+│ Adelie    │ Torgersen │ female │            37.554167 │                    196 │
+│ Adelie    │ Torgersen │ male   │            40.586957 │                    210 │
+│ Adelie    │ Torgersen │ NULL   │            37.925000 │                    193 │
+│ Chinstrap │ Dream     │ female │            46.573529 │                    202 │
+│ Chinstrap │ Dream     │ male   │            51.094118 │                    212 │
+│ …         │ …         │ …      │                    … │                      … │
+└───────────┴───────────┴────────┴──────────────────────┴────────────────────────┘
 ```
 
 ## Chaining It All Together
@@ -639,7 +616,7 @@ How about:
 ```python
 penguins.filter((penguins.sex == "female") & (penguins.year == 2008)).group_by(
     ["island"]
-).aggregate(penguins.body_mass_g.max())
+).aggregate(penguins.body_mass_g.max()).order_by("island")
 ```
 
 ```text
@@ -649,8 +626,8 @@ penguins.filter((penguins.sex == "female") & (penguins.year == 2008)).group_by(
 │ string    │ int64            │
 ├───────────┼──────────────────┤
 │ Biscoe    │             5200 │
-│ Torgersen │             3800 │
 │ Dream     │             3900 │
+│ Torgersen │             3800 │
 └───────────┴──────────────────┘
 ```
 

@@ -119,7 +119,7 @@ SELECT today() AS date, get_current_time() AS time, current_localtimestamp() AS 
 
 ### Hashing
 
-Hash functions such as [`hash`]({% link docs/2.0/sql/functions/utility.md %}#hashvalue), [`md5`]({% link docs/2.0/sql/functions/utility.md %}#md5string), and [`sha256`]({% link docs/2.0/sql/functions/utility.md %}#sha256string) turn a row number into a deterministic pseudo-random value, which is useful when you want reproducible identifiers:
+Hash functions such as [`hash`]({% link docs/2.0/sql/functions/utility.md %}#hashvalue), [`md5`]({% link docs/2.0/sql/functions/utility.md %}#md5string) and [`sha256`]({% link docs/2.0/sql/functions/utility.md %}#sha256string) turn a row number into a deterministic pseudo-random value, which is useful when you want reproducible identifiers:
 
 ```sql
 SELECT hash(i) AS id, md5(i::VARCHAR) AS token FROM range(3) t(i);
@@ -144,7 +144,7 @@ SELECT nextval('id_seq') AS id FROM range(3);
 
 ## Generating Text with Faker
 
-For realistic-looking names, addresses, and other text, you can call the [Faker Python package](https://faker.readthedocs.io/) through the [Python function API]({% link docs/2.0/clients/python/function.md %}):
+For realistic-looking names, addresses and other text, you can call the [Faker Python package](https://faker.readthedocs.io/) through the [Python function API]({% link docs/2.0/clients/python/function.md %}):
 
 ```python
 import duckdb
@@ -171,10 +171,10 @@ con.create_function("random_long_text",  random_long_text,  [], VARCHAR, type="n
 res = con.sql("""
                  SELECT
                     hash(i * 10 + j) AS id,
-                    random_date() AS creationDate,
+                    random_date() AS creation_date,
                     random_short_text() AS short,
                     random_long_text() AS long,
-                    IF (j % 2, true, false) AS bool
+                    IF (j % 2, TRUE, FALSE) AS bool
                  FROM generate_series(1, 5) s(i)
                  CROSS JOIN generate_series(1, 2) t(j)
                  """)
@@ -184,21 +184,21 @@ res.show()
 This generates the following:
 
 ```text
-┌──────────────────────┬──────────────┬──────────────────────┬───────────────────────────────────────────────┬─────────┐
-│          id          │ creationDate │        short         │                     long                      │  bool   │
-│        uint64        │     date     │       varchar        │                    varchar                    │ boolean │
-├──────────────────────┼──────────────┼──────────────────────┼───────────────────────────────────────────────┼─────────┤
-│  6770051751173734325 │ 2013-03-01   │ Parent capital.      │ Pm general bit style drug want dog. Often fu… │ true    │
-│ 16510940941872865459 │ 1999-11-04   │ Low knowledge.       │ Cup these herself very debate. Mind former s… │ true    │
-│ 13285076694688170502 │ 1997-07-06   │ Note everyone head.  │ Stop into hour century head outside. At arti… │ true    │
-│ 11757770452869451863 │ 2001-08-10   │ Region recent along. │ Marriage tax federal yard short. Bank speech… │ true    │
-│  2064835973596856015 │ 2015-11-24   │ Matter to time.      │ Fly test thank fine loss. Across official in… │ true    │
-│ 17776805813723356275 │ 2022-03-24   │ Worry enter process. │ And score institution sea fish movie film di… │ false   │
-│ 13540103502347468651 │ 2020-03-26   │ Age stay create way. │ Check bit ground subject become role. Gun ra… │ false   │
-│  4800297459639118879 │ 2022-06-08   │ Politics bag tell.   │ Operation heart home article decide economy … │ false   │
-│  7199933130570745587 │ 2003-04-23   │ No language popular. │ Cup type woman network address ago. Continue… │ false   │
-│ 18103378254596719331 │ 1999-03-08   │ Customer capital.    │ Anything national their bank investment.\nSa… │ false   │
-└──────────────────────┴──────────────┴──────────────────────┴───────────────────────────────────────────────┴─────────┘
+┌──────────────────────┬───────────────┬─────────────────────┬───────────────────────────────────────────────┬─────────┐
+│          id          │ creation_date │        short        │                     long                      │  bool   │
+│        uint64        │     date      │       varchar       │                    varchar                    │ boolean │
+├──────────────────────┼───────────────┼─────────────────────┼───────────────────────────────────────────────┼─────────┤
+│  6770051751173734325 │ 1998-01-04    │ Head keep face age. │ Stay different gun according make large read… │ true    │
+│ 16510940941872865459 │ 2006-07-30    │ Ten quickly expect. │ Early race claim. Middle economy box nor. An… │ true    │
+│ 13285076694688170502 │ 2018-02-19    │ Spring writer onto. │ Lose painting time dog sure marriage month. … │ true    │
+│ 11757770452869451863 │ 2011-09-01    │ Recently single.    │ Power class party information this. Appear e… │ true    │
+│  2064835973596856015 │ 2014-03-09    │ Write nor national. │ Total need tend Democrat. Group under boy no… │ true    │
+│ 17776805813723356275 │ 2000-10-21    │ Commercial occur.   │ Professor big but executive plan fast body b… │ false   │
+│ 13540103502347468651 │ 2023-08-23    │ Specific author.    │ Across cut market eight. Thing pull open spa… │ false   │
+│  4800297459639118879 │ 2004-02-18    │ Beautiful learn.    │ Upon common box beautiful. War check investm… │ false   │
+│  7199933130570745587 │ 2024-11-30    │ Fact nation cup.    │ Trouble that sing former sing sure range ser… │ false   │
+│ 18103378254596719331 │ 2000-07-27    │ Late ago serious.   │ Million operation six school station give us… │ false   │
+└──────────────────────┴───────────────┴─────────────────────┴───────────────────────────────────────────────┴─────────┘
   10 rows                                                                                                    5 columns
 ```
 

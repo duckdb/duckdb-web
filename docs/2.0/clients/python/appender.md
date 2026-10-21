@@ -34,7 +34,7 @@ Both functions are also available on the `duckdb` module. They use the default c
 
 ## Appending to a Table
 
-`con.appender(table)` resolves the table once, when the appender is created, the way SQL resolves a table name. It appends to the table's columns in declared order and skips generated columns. `append_row` takes one value per column, and `append_rows` takes any iterable of rows. Values are converted exactly as [`executemany` parameters]({% link docs/2.0/clients/python/dbapi.md %}#prepared-statements) are.
+`con.appender(table)` resolves the table once, when the appender is created, the way SQL resolves a table name. It appends to the table's columns in declared order and skips generated columns. `append_row` takes one value per column, and `append_rows` takes any iterable of rows. Values are converted exactly as [`executemany` parameters]({% link docs/2.0/clients/python/dbapi.md %}#query-parameters) are.
 
 To append to some of the columns, list them in `columns`. The other columns take their default value, per row:
 

@@ -14,12 +14,12 @@ title: Integration with PyTorch
 ## Installation
 
 ```batch
-pip install -U duckdb pyarrow torch
+pip install -U duckdb numpy pyarrow torch
 ```
 
 ## DuckDB to PyTorch
 
-This example queries a Parquet-backed Arrow dataset, streams the result as `RecordBatch` objects, and converts each batch into feature and label tensors.
+This example queries a Parquet-backed Arrow dataset, streams the result as `RecordBatch` objects and converts each batch into feature and label tensors.
 
 ```python
 import pathlib
@@ -47,7 +47,7 @@ pq.write_to_dataset(table, str(parquet_dir))
 con = duckdb.connect()
 train_dataset = ds.dataset(str(parquet_dir))
 
-reader = con.execute("""
+reader = con.sql("""
     SELECT feature_0, feature_1, label
     FROM train_dataset
     WHERE label = 1
@@ -72,6 +72,8 @@ for batch in reader:
 torch.Size([2, 2]) tensor([1, 1])
 ```
 
-DuckDB pushes the `WHERE label = 1` filter and the selected columns into the dataset scan, so only the requested rows and columns are converted to tensors. The `to_arrow_reader` method streams the result in batches instead of materializing the full result in memory at once.
+DuckDB pushes the `WHERE label = 1` filter and the selected columns into the dataset scan, so only the requested rows and columns are converted to tensors. The `to_arrow_reader` method of a relation streams the result in batches instead of materializing the full result in memory at once. While the loop holds the reader, other queries on `con` raise a `ResourceInUseException`; a loop that runs a query per batch needs a cursor from `con.cursor()`.
+
+To get the whole result at once, the `torch()` method of a relation returns a dictionary with one tensor per column.
 
 To learn more about querying Arrow objects directly, see the [“SQL on Apache Arrow” guide]({% link docs/2.0/guides/python/sql_on_arrow.md %}) and the [“Export to Apache Arrow” guide]({% link docs/2.0/guides/python/export_arrow.md %}).

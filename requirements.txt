@@ -3,6 +3,8 @@ duckdb --pre
 sphinx
 pandas
 pandas-stubs
+pyarrow
+polars
 lxml
 ripgrepy
 

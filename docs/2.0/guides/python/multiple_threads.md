@@ -42,6 +42,7 @@ duckdb_con.execute("""
 Next, define functions to be executed by the writer and reader threads.
 Each thread must use the `.cursor()` method to create a thread-local connection to the same DuckDB file based on the original connection.
 This approach also works with in-memory DuckDB databases.
+A connection serves one call at a time: a call from a second thread while another call is running raises a `ResourceInUseException` instead of waiting.
 
 ```python
 def write_from_thread(duckdb_con):
@@ -63,7 +64,7 @@ def read_from_thread(duckdb_con):
         SELECT
             ? AS thread_name,
             count(*) AS row_counter,
-            current_timestamp
+            current_localtimestamp() AS read_time
         FROM my_inserts
     """, (thread_name,)).fetchall()
     print(results)
