@@ -8,6 +8,7 @@ redirect_from:
 - /docs/current/clients/node_neo/overview
 - /docs/lts/clients/node_neo/overview
 - /docs/preview/clients/node_neo/overview
+- /docs/lts/clients/nodejs/overview
 title: Node.js Client (Neo)
 ---
 
