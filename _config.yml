@@ -59,7 +59,9 @@ lts_short_duckdb_version: "1.4"
 next_major_duckdb_codename: "Cyanoptera"
 next_major_duckdb_version: "2.0.0"
 next_major_short_duckdb_version: "2.0"
+next_major_duckdb_java_short_version: ""
 next_major_duckdb_java_version: ""
+next_major_duckdb_odbc_short_version: ""
 next_major_duckdb_odbc_version: ""
 next_major_duckdb_go_version: ""
 next_major_duckdb_node_neo_version: ""
@@ -68,7 +70,7 @@ next_major_duckdb_wasm_version: ""
 next_major_duckdb_csharp_version: ""
 next_major_duckdb_dart_version: ""
 next_major_duckdb_hash: "d54cbbe3df"
-next_major_duckdb_r_version: ""
+next_major_duckdb_r_version: "1.5.6"
 # more Jekyll config
 livereload: true
 highlighter: rouge
