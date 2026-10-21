@@ -5,11 +5,9 @@ authors:
   - Ryan Hamilton in conversation with Geertjan Wielenga and Tim Cox
 thumb: "/images/blog/thumbs/java.svg"
 image: "/images/blog/thumbs/java.png"
-excerpt: "After years building kdb+-based data platforms for banks and hedge funds, Ryan Hamilton wanted an analytical engine he could recommend to smaller teams without specialized infrastructure or expensive licensing. DuckDB gave him a small, embedded way to bring fast local analytics into QStudio and Pulse, and it is now shaping his next open-source project, PeachQ."
+excerpt: "TL;DR: After years building kdb+-based data platforms for banks and hedge funds, Ryan Hamilton wanted an analytical engine he could recommend to smaller teams without specialized infrastructure or expensive licensing. DuckDB gave him a small, embedded way to bring fast local analytics into QStudio and Pulse, and it is now shaping his next open-source project, PeachQ."
 tag: using-duckdb
 ---
-
-TL;DR: After years building kdb+-based data platforms for banks and hedge funds, [Ryan Hamilton](https://www.linkedin.com/in/ryananthonyhamilton/) wanted an analytical engine he could recommend to smaller teams without requiring specialized infrastructure or expensive licensing. DuckDB gave him a small, embedded way to bring fast local analytics into [QStudio](https://www.timestored.com/qstudio/) and [Pulse](https://www.timestored.com/pulse/), and it is now shaping his next open-source project, [PeachQ](https://peachq.org/).
 
 > Quote I like the simplicity of just a small thing running and working. And then you can get more complex.
 >
@@ -17,7 +15,7 @@ TL;DR: After years building kdb+-based data platforms for banks and hedge funds,
 
 ## Fifteen Years of Heavyweight Infrastructure
 
-For about fifteen years, Ryan Hamilton has built large market-data platforms for banks and hedge funds. Most of that work was in [kdb+](https://kx.com/), integrated with real-time messaging systems such as [Solace](https://solace.com/). He built much of the platform at UBS and almost all of it at Citi, contributed to Morgan Stanley's, and most recently worked at a hedge fund.
+For about fifteen years, [Ryan Hamilton](https://www.linkedin.com/in/ryananthonyhamilton/) has built large market-data platforms for banks and hedge funds. Most of that work was in [kdb+](https://kx.com/), integrated with real-time messaging systems such as [Solace](https://solace.com/). He built much of the platform at UBS and almost all of it at Citi, contributed to Morgan Stanley's, and most recently worked at a hedge fund.
 
 His users are typically teams of 10 to 15 quants. They are deep specialists in finance who spend anywhere from a tenth to more than half their time on technology. Ryan's job has been to store their data efficiently so they can get on with their work. Sometimes he leads a team to do that. Sometimes he builds it himself. Sometimes he talks quants out of building infrastructure on their own.
 
@@ -37,7 +35,7 @@ That let him give smaller firms a straight recommendation. DuckDB might not scal
 
 ## QStudio: a Local Analytical Sandbox
 
-The clearest illustration is QStudio, the analytics IDE Ryan released about 13 years ago. It was originally built for kdb+ and now connects to around 15 databases. He leaves database administration to tools like [DBeaver](https://dbeaver.io/) and focuses QStudio on analytics and charting.
+The clearest illustration is [QStudio](https://www.timestored.com/qstudio/), the analytics IDE Ryan released about 13 years ago. It was originally built for kdb+ and now connects to around 15 databases. He leaves database administration to tools like [DBeaver](https://dbeaver.io/) and focuses QStudio on analytics and charting.
 
 DuckDB was the first deep integration, and it changed how quants work with expensive queries. The workflow runs like this. An analyst runs a heavy query against a remote database. Some of these take up to 20 minutes. QStudio captures the result locally to Parquet through DuckDB:
 
@@ -80,13 +78,13 @@ That experience became the basis of his DuckCon talk. His argument was that an o
 
 ## Pulse: DuckDB by Default
 
-QStudio never made much money directly, but it got a very small company onto the approved-vendor lists of some very large firms, which is hard for small vendors to do. When TimeStored launched Pulse, a real-time HTML visualization tool that is now Ryan's main product, that path into large firms already existed.
+QStudio never made much money directly, but it got a very small company onto the approved-vendor lists of some very large firms, which is hard for small vendors to do. When TimeStored launched [Pulse](https://www.timestored.com/pulse/), a real-time HTML visualization tool that is now Ryan's main product, that path into large firms already existed.
 
 Ryan reached for DuckDB again. Pulse uses it to snapshot and cache data. What began as an integration experiment had become a repeated TimeStored architecture pattern. DuckDB sits in the embedded storage and query layer, and increasingly supports AI-assisted data exploration. Excel exports and similar user-facing features stay in the application's UI. That is partly to keep styling intact, and partly because bank users often can't install extensions at all.
 
 ## PeachQ: Back to q
 
-Ryan's newest project is PeachQ, an open-source implementation of the q language. Ryan loves q as a language but thinks DuckDB is ahead as a database, so PeachQ separates the two.
+Ryan's newest project is [PeachQ](https://peachq.org/), an open-source implementation of the q language. Ryan loves q as a language but thinks DuckDB is ahead as a database, so PeachQ separates the two.
 
 The first release focuses on q compatibility and runs on the RayForce in-memory engine. DuckDB-backed storage is aimed at version two, which is still taking shape. That is where Ryan's recent work on C extensions is heading, along with experiments with newer formats such as [Vortex]({% link docs/current/core_extensions/vortex.md %}) and custom table formats. He credits DuckDB's [extension API]({% link docs/current/extensions/overview.md %}) with letting people add features cleanly, unlike the fragile workarounds he and others once built into closed systems. Often, he notes, DuckDB later builds those features itself.
 
@@ -98,6 +96,6 @@ Ryan's DuckCon talk gives a short tour of this work.
 <iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/viMXP_TG6tU" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 </div>
 
-You can explore [QStudio](https://www.timestored.com/qstudio/), now open source, and try PeachQ at [peachq.org](https://peachq.org/).
+You can explore QStudio, now open source, and try PeachQ at peachq.org.
 
 We would like to thank Ryan for the conversation. You can follow his work on DuckDB, q and TimeStored at [timestored.com](https://www.timestored.com/). And if you are reading this, are using DuckDB, and would like to share your story, drop us a line at [quack@duckdb.org](mailto:quack@duckdb.org).
