@@ -60,7 +60,7 @@ INSERT INTO events VALUES
 
 </div>
 
-<div class="duck-diagram-arrow">quack:</div>
+<div class="duck-diagram-arrow reversed">quack:</div>
 
 <div class="duck-diagram-box" markdown="1">
 
@@ -115,7 +115,7 @@ CREATE TABLE t AS
 
 </div>
 
-<div class="duck-diagram-arrow">quack:</div>
+<div class="duck-diagram-arrow reversed">quack:</div>
 
 <div class="duck-diagram-box" markdown="1">
 

@@ -149,6 +149,11 @@ body.documentation main .wrap .duck-diagram-box code,
 		background-repeat: no-repeat;
 		background-position: center;
 	}
+
+	// Top arrow points left, bottom arrow points right
+	&.reversed::after {
+		background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='58' height='22' fill='none' viewBox='0 0 58 22'%3E%3Cpath fill='%23b2b2b2' d='m0 2.887 5 2.886V0zm58 0v-.5H4.5v1H58z'/%3E%3Cpath fill='%23b2b2b2' d='M58 18.887 53 16v5.774zm-58 0v.5h53.5v-1H0z'/%3E%3C/svg%3E");
+	}
 }
 
 @media (max-width: 700px) {
