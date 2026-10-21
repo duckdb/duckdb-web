@@ -8,7 +8,7 @@ title: Migrating to DuckDB 2.0
 ---
 
 DuckDB 2.0.0 is packed with new features and performance improvements, including query optimization and asynchronous I/O.
-It also ships a small set of breaking changes, most notably a new default storage format and the next step of the lambda syntax transition.
+It also ships a small set of breaking changes, most notably a new default storage format, which DuckDB versions before 2.0.0 cannot read, and the next step of the lambda syntax transition.
 This page provides guidance on migrating existing deployments to DuckDB 2.0.0.
 
 ## Before You Migrate
@@ -28,9 +28,11 @@ We expect the most common source of issues to be the storage format, which is de
 
 ### Storage Format
 
-The DuckDB 2.0.0 storage format is _not backward compatible_: earlier DuckDB versions cannot read it.
-A database file created by v2.0.0 uses [storage version 69]({% link docs/2.0/internals/storage.md %}#storage-version-table), which older DuckDB versions cannot read.
-Existing database files created by an older version keep their storage version when v2.0.0 writes to them, so they remain readable by the older version.
+DuckDB versions before 2.0.0 _cannot read_ database files that use the DuckDB 2.0.0 storage format.
+By default, every new database file created by v2.0.0 uses this format ([storage version 69]({% link docs/2.0/internals/storage.md %}#storage-version-table)).
+
+The other direction keeps working: DuckDB 2.0.0 can read and write existing database files created by earlier versions.
+These files keep their storage version when v2.0.0 writes to them, so they remain readable by the earlier version.
 
 For example, creating a database with v2.0.0 and then opening it with v1.5.6 results in an error:
 

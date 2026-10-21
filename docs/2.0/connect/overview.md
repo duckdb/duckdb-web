@@ -30,6 +30,7 @@ The file may have an arbitrary extension, but `.db` or `.duckdb` are two common 
 
 Starting with v0.10, DuckDB's storage format is [backwards-compatible]({% link docs/2.0/internals/storage.md %}#backward-compatibility), i.e., DuckDB is able to read database files produced by an older version of DuckDB.
 For example, DuckDB 0.10 can read and operate on files created by the previous DuckDB version, v0.9.
+Note that DuckDB versions before 2.0 cannot read database files created by DuckDB 2.0. For details, see the [migration guide]({% link docs/2.0/operations_manual/migration.md %}#storage-format).
 For more details on DuckDB's storage format, see the [storage page]({% link docs/2.0/internals/storage.md %}).
 
 ### In-Memory Database

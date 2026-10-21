@@ -355,7 +355,7 @@ There is more: DuckDB 2.0.0 supports the SQL-standard [`FETCH FIRST`]({% link do
 
 ## Migrating to 2.0
 
-DuckDB 2.0 comes with a small set of breaking changes. For most users, upgrading is straightforward, but complex deployments running many DuckDB processes need more care. The storage format is the most likely source of problems. We recommend testing 2.0.0 on a shadow system before switching production over. And, if your workload is mission-critical, you may want to wait for the first patch release, [coming in November]({% link release_calendar.md %}#upcoming-releases).
+DuckDB 2.0 comes with a small set of breaking changes. For most users, upgrading is straightforward, but complex deployments running many DuckDB processes need more care. The storage format is the most likely source of problems: DuckDB versions before 2.0 cannot read database files created by DuckDB 2.0. DuckDB 2.0 can still read and write your existing database files, and these remain readable by older versions. We recommend testing 2.0.0 on a shadow system before switching production over. And, if your workload is mission-critical, you may want to wait for the first patch release, [coming in November]({% link release_calendar.md %}#upcoming-releases).
 
 For the full details, see the [migration guide]({% link docs/2.0/operations_manual/migration.md %}).
 

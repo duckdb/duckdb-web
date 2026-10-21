@@ -66,7 +66,7 @@ DuckDB 2.0 included optimizer and engine improvements, including faster recursiv
 
 ## Storage Format v2.0
 
-New database files use the v2.0.0 storage format by default. The format adds lazy metadata loading, better compression and corruption validation. Because the format is not forward compatible (older DuckDB versions cannot read files created by v2.0), a migration guide covers upgrading existing deployments.
+New database files use the v2.0.0 storage format by default. The format adds lazy metadata loading, better compression and corruption validation. DuckDB versions before 2.0 cannot read files in the new format, so a migration guide covers upgrading existing deployments.
 
 * [Default storage version]({% link docs/2.0/internals/storage.md %}#default-storage-version)
 * [Storage version table]({% link docs/2.0/internals/storage.md %}#storage-version-table)

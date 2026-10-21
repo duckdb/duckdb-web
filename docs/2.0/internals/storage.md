@@ -25,6 +25,8 @@ _Forward compatibility_ refers to the ability of an older DuckDB version to read
 
 Forward compatibility is provided on a **best effort** basis. While stability of the storage format is important – there are still many improvements and innovations that we want to make to the storage format in the future. As such, forward compatibility may be (partially) broken on occasion.
 
+> Warning DuckDB versions before 2.0 cannot read database files that use the v2.0.0 storage format, which DuckDB 2.0 uses by default for new database files. See [Default Storage Version](#default-storage-version) and the [migration guide]({% link docs/2.0/operations_manual/migration.md %}#storage-format).
+
 ## How to Move between Storage Formats
 
 When you update DuckDB and open an old database file, you might encounter an error message about incompatible storage formats, pointing to this page.
@@ -66,7 +68,7 @@ Compared to earlier storage versions, the v2.0.0 format:
 ### Explicit Storage Versions
 
 [DuckDB 1.2.0 introduced the `STORAGE_VERSION` option]({% post_url 2025-02-05-announcing-duckdb-120 %}#explicit-storage-versions), which allows explicitly specifying the storage version.
-Using this, you can opt-in to newer forwards-incompatible features:
+Since DuckDB 2.0, new database files use the latest storage version by default, so the main use of this option is to create database files that older DuckDB versions can still read:
 
 ```sql
 ATTACH 'file.db' (STORAGE_VERSION 'v1.2.0');
@@ -251,6 +253,19 @@ ATTACH '/tmp/somefile.db' AS db (ROW_GROUP_SIZE 16384);
 
 ## Troubleshooting
 
+### Error Message When Opening a DuckDB 2.0 Database File with an Older Version
+
+DuckDB versions before 2.0 cannot read database files in the v2.0.0 storage format. Opening such a file with DuckDB 1.5.6 results in the following error:
+
+```console
+IO Error: Trying to read a database file with version number 69, but we can only read versions between 64 and 68.
+The database file was created with a newer version of DuckDB.
+```
+
+DuckDB 1.5.5 and earlier versions report version number 999 instead of 69.
+
+To read the data with an older DuckDB version, either upgrade that process to DuckDB 2.0, or use DuckDB 2.0 to [copy the database into a file with an older storage version](#converting-between-storage-versions), e.g., `v1.5.0`.
+
 ### Error Message When Opening an Incompatible Database File
 
 When opening a database file that has been written by a different DuckDB version from the one you are using, the following error message may occur:
@@ -259,7 +274,7 @@ When opening a database file that has been written by a different DuckDB version
 Error: unable to open database "...": Serialization Error: Failed to deserialize: ...
 ```
 
-The message implies that the database file was created with a newer DuckDB version and uses features that are backward incompatible with the DuckDB version used to read the file.
+The message implies that the database file was created with a newer DuckDB version and uses features that the DuckDB version used to read the file does not support.
 
 There are two potential workarounds:
 
