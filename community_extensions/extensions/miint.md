@@ -15,14 +15,13 @@ extension:
   excluded_platforms: "windows_amd64;windows_amd64_mingw;windows_amd64_rtools;osx_amd64"
   maintainers:
     - wasade
-  requires:
-    duckdb: "1.5.5"
   requires_toolchains: "rust;omp"
   test_config: '{"test_env_variables": {"MIINT_SIMD": "baseline"}}'
 
 repo:
   github: the-miint/duckdb-miint
-  ref: 10f0fde06d091bc78939223dea928f4374d4fdea
+  ref: 5fbea2ab2bcd6888741d3752293293cc4202121e
+  variegata: 10f0fde06d091bc78939223dea928f4374d4fdea
 
 docs:
   hello_world: |
@@ -116,15 +115,15 @@ This table covers all DuckDB releases that have not reached [end-of-life](https:
 
 <div class="extension_compatibility_table"></div>
 
-| Platform | 1.4.4 | 1.4.5 | 1.5.5 | 1.5.6 |
-| :--- | :---: | :---: | :---: | :---: |
-| Linux AMD64 | ✅ | ❌ | ✅ | ✅ |
-| Linux ARM64 | ✅ | ❌ | ✅ | ✅ |
-| macOS AMD64 | ✅ | ❌ | ❌ | ❌ |
-| macOS ARM64 | ✅ | ❌ | ✅ | ✅ |
-| Windows AMD64 | ❌ | ❌ | ❌ | ❌ |
-| Windows ARM64 | ❌ | ❌ | ❌ | ❌ |
-| WebAssembly | ❌ | ❌ | ✅ | ✅ |
+| Platform | 1.4.4 | 1.4.5 | 1.5.5 | 1.5.6 | 2.0.0 |
+| :--- | :---: | :---: | :---: | :---: | :---: |
+| Linux AMD64 | ✅ | ❌ | ✅ | ✅ | ✅ |
+| Linux ARM64 | ✅ | ❌ | ✅ | ✅ | ✅ |
+| macOS AMD64 | ✅ | ❌ | ❌ | ❌ | ❌ |
+| macOS ARM64 | ✅ | ❌ | ✅ | ✅ | ✅ |
+| Windows AMD64 | ❌ | ❌ | ❌ | ❌ | ❌ |
+| Windows ARM64 | ❌ | ❌ | ❌ | ❌ | ❌ |
+| WebAssembly | ❌ | ❌ | ✅ | ✅ | ✅ |
 
 ### Installing and Loading
 ```sql

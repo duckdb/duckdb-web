@@ -16,7 +16,7 @@ extension:
   requires_toolchains: rust
 repo:
   github: DataZooDE/anofox-statistics
-  ref: 8b1a138797f00ea8a479eb17328b0bb2607861c2
+  ref: d6b46815dac4cdfff00c4b86cc9ccdf92d0f3bac
 extension_star_count: 17
 extension_star_count_pretty: 17
 extension_download_count: 5364
@@ -30,15 +30,15 @@ This table covers all DuckDB releases that have not reached [end-of-life](https:
 
 <div class="extension_compatibility_table"></div>
 
-| Platform | 1.4.4 | 1.4.5 | 1.5.5 | 1.5.6 |
-| :--- | :---: | :---: | :---: | :---: |
-| Linux AMD64 | ✅ | ❌ | ✅ | ✅ |
-| Linux ARM64 | ✅ | ❌ | ✅ | ✅ |
-| macOS AMD64 | ✅ | ❌ | ✅ | ✅ |
-| macOS ARM64 | ✅ | ❌ | ✅ | ✅ |
-| Windows AMD64 | ✅ | ❌ | ✅ | ✅ |
-| Windows ARM64 | ❌ | ❌ | ❌ | ❌ |
-| WebAssembly | ✅ | ❌ | ✅ | ✅ |
+| Platform | 1.4.4 | 1.4.5 | 1.5.5 | 1.5.6 | 2.0.0 |
+| :--- | :---: | :---: | :---: | :---: | :---: |
+| Linux AMD64 | ✅ | ❌ | ✅ | ✅ | ❌ |
+| Linux ARM64 | ✅ | ❌ | ✅ | ✅ | ❌ |
+| macOS AMD64 | ✅ | ❌ | ✅ | ✅ | ❌ |
+| macOS ARM64 | ✅ | ❌ | ✅ | ✅ | ❌ |
+| Windows AMD64 | ✅ | ❌ | ✅ | ✅ | ❌ |
+| Windows ARM64 | ❌ | ❌ | ❌ | ❌ | ❌ |
+| WebAssembly | ✅ | ❌ | ✅ | ✅ | ❌ |
 
 ### Installing and Loading
 ```sql

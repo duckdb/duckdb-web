@@ -15,7 +15,7 @@ excerpt: |
 extension:
   name: dplyr
   description: R dplyr pipeline syntax support for DuckDB - transpiles dplyr verbs to SQL
-  version: 0.6.0
+  version: 0.7.0
   language: Rust & C++
   build: cmake
   license: MIT
@@ -26,7 +26,8 @@ extension:
 
 repo:
   github: mrchypark/libdplyr
-  ref: 5285d3f51803d6a1a4bf7b62f40cfaf9b9215733
+  ref: 53e70ca0e75d13f6684261c12b4ddd36a0608dd8
+  variegata: 836fc09dbecfac027ee35cb6d63024a4dfe10f0e
 
 docs:
   hello_world: |
@@ -134,15 +135,15 @@ This table covers all DuckDB releases that have not reached [end-of-life](https:
 
 <div class="extension_compatibility_table"></div>
 
-| Platform | 1.4.4 | 1.4.5 | 1.5.5 | 1.5.6 |
-| :--- | :---: | :---: | :---: | :---: |
-| Linux AMD64 | ❌ | ❌ | ✅ | ✅ |
-| Linux ARM64 | ❌ | ❌ | ✅ | ✅ |
-| macOS AMD64 | ❌ | ❌ | ✅ | ✅ |
-| macOS ARM64 | ❌ | ❌ | ✅ | ✅ |
-| Windows AMD64 | ❌ | ❌ | ✅ | ✅ |
-| Windows ARM64 | ❌ | ❌ | ❌ | ❌ |
-| WebAssembly | ❌ | ❌ | ✅ | ✅ |
+| Platform | 1.4.4 | 1.4.5 | 1.5.5 | 1.5.6 | 2.0.0 |
+| :--- | :---: | :---: | :---: | :---: | :---: |
+| Linux AMD64 | ❌ | ❌ | ✅ | ✅ | ❌ |
+| Linux ARM64 | ❌ | ❌ | ✅ | ✅ | ❌ |
+| macOS AMD64 | ❌ | ❌ | ✅ | ✅ | ❌ |
+| macOS ARM64 | ❌ | ❌ | ✅ | ✅ | ❌ |
+| Windows AMD64 | ❌ | ❌ | ✅ | ✅ | ❌ |
+| Windows ARM64 | ❌ | ❌ | ❌ | ❌ | ❌ |
+| WebAssembly | ❌ | ❌ | ✅ | ✅ | ❌ |
 
 ### Installing and Loading
 ```sql
@@ -168,6 +169,7 @@ LOAD {{ page.extension.name }};
 |-------------------|---------------|-------------|---------|----------|
 | dplyr             | table         | NULL        | NULL    |          |
 | dplyr_pipe_syntax | scalar        | NULL        | NULL    |          |
+| dplyr_with_schema | table         | NULL        | NULL    |          |
 
 ### Overloaded Functions
 
