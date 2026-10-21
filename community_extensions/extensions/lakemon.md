@@ -15,7 +15,7 @@ excerpt: |
 extension:
   name: lakemon
   description: Smart DuckLake table maintain (adaptive rewrite + merge) and catalog-global expire/cleanup
-  version: 0.1.0
+  version: 0.1.1
   language: C++
   build: cmake
   license: MIT
@@ -25,7 +25,7 @@ extension:
 repo:
   github: paulosuzart/lakemon-duckdb-ext
   # Replace with the commit SHA you want the community builder to compile.
-  ref: dfb61b7d6413fb613ee14aa79714f5237cc3e9c6
+  ref: 6a1b8bf88a3e3893d9bbbcb27baa3e98db5a6215
   # Optional: SHA compatible with DuckDB 2.x / upcoming stable.
   # ref_next: REPLACE_WITH_2X_COMMIT_SHA
 
@@ -47,23 +47,40 @@ docs:
   extended_description: |
     lakemon orchestrates native DuckLake maintenance CALLs with a policy layer:
 
-    * Catalog SELECT inventory of data files and delete files
+    * Catalog SELECT inventory of data files, delete files, and inlined-delete backlog
+    * Flush guard (lakemon_flush_inlined_max_delete_files) so a large ended-file delete backlog cannot block rewrite/merge
     * Byte-weighted adaptive rewrite ladder (delete fraction DESC; one ducklake_rewrite_data_files CALL per byte-cut rung)
     * Merge size bands (micro / small / medium) with per-tier target_file_size
     * Table maintain (lakemon_maintain) vs catalog-global expire/cleanup (lakemon_maintain_global)
-    * Execute-by-default; pass dry_run => true to plan only
+    * CALL / SELECT plan and execute by default (dry_run for plan only)
     * One result row per step (ok / skip / error / planned)
+    * Optional stderr step logs with duration and byte-weighted progress
 
     Requires the core ducklake extension in the same session and an attached DuckLake catalog.
     Compatible with DuckDB 1.5.* and DuckDB 2.x.
 
 extension_star_count: 1
 extension_star_count_pretty: 1
-extension_download_count: 317
-extension_download_count_pretty: 317
+extension_download_count: 690
+extension_download_count_pretty: 690
 image: '/images/community_extensions/social_preview/preview_community_extension_lakemon.png'
 layout: community_extension_doc
 ---
+### Compatibility Matrix
+
+This table covers all DuckDB releases that have not reached [end-of-life](https://duckdb.org/release_calendar), including LTS releases, and shows the 2 most recent patch releases of each. Older patch releases are not listed, but the extension may be available for them as well.
+
+<div class="extension_compatibility_table"></div>
+
+| Platform | 1.4.4 | 1.4.5 | 1.5.5 | 1.5.6 |
+| :--- | :---: | :---: | :---: | :---: |
+| Linux AMD64 | ❌ | ❌ | ❌ | ✅ |
+| Linux ARM64 | ❌ | ❌ | ❌ | ✅ |
+| macOS AMD64 | ❌ | ❌ | ❌ | ✅ |
+| macOS ARM64 | ❌ | ❌ | ❌ | ✅ |
+| Windows AMD64 | ❌ | ❌ | ❌ | ✅ |
+| Windows ARM64 | ❌ | ❌ | ❌ | ❌ |
+| WebAssembly | ❌ | ❌ | ❌ | ✅ |
 
 ### Installing and Loading
 ```sql
@@ -81,7 +98,6 @@ LOAD {{ page.extension.name }};
 ### About {{ page.extension.name }}
 {{ page.docs.extended_description }}
 {% endif %}
-
 ### Added Functions
 
 <div class="extension_functions_table"></div>

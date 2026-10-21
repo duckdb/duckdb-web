@@ -18,8 +18,8 @@ extension:
 repo:
   github: cwida/duckpgq-extension
   andium: 42eea114b22fad93f04cb7edf50d2b0077e464fa
-  ref: 61f5d08270bef2c81fc4e5d9af32739e67adc2be
-  ref_next: 91433a8397642684fcfed0be52aca9c8b5078faa
+  variegata: 61f5d08270bef2c81fc4e5d9af32739e67adc2be
+  ref: 91433a8397642684fcfed0be52aca9c8b5078faa
 
 docs:
   hello_world: |
@@ -64,11 +64,26 @@ docs:
 
 extension_star_count: 504
 extension_star_count_pretty: 504
-extension_download_count: 17022
-extension_download_count_pretty: 17.0k
+extension_download_count: 18223
+extension_download_count_pretty: 18.2k
 image: '/images/community_extensions/social_preview/preview_community_extension_duckpgq.png'
 layout: community_extension_doc
 ---
+### Compatibility Matrix
+
+This table covers all DuckDB releases that have not reached [end-of-life](https://duckdb.org/release_calendar), including LTS releases, and shows the 2 most recent patch releases of each. Older patch releases are not listed, but the extension may be available for them as well.
+
+<div class="extension_compatibility_table"></div>
+
+| Platform | 1.4.4 | 1.4.5 | 1.5.5 | 1.5.6 |
+| :--- | :---: | :---: | :---: | :---: |
+| Linux AMD64 | ✅ | ❌ | ❌ | ✅ |
+| Linux ARM64 | ✅ | ❌ | ❌ | ✅ |
+| macOS AMD64 | ✅ | ❌ | ❌ | ✅ |
+| macOS ARM64 | ✅ | ❌ | ❌ | ✅ |
+| Windows AMD64 | ✅ | ❌ | ❌ | ✅ |
+| Windows ARM64 | ❌ | ❌ | ❌ | ❌ |
+| WebAssembly | ✅ | ❌ | ❌ | ✅ |
 
 ### Installing and Loading
 ```sql
@@ -86,7 +101,6 @@ LOAD {{ page.extension.name }};
 ### About {{ page.extension.name }}
 {{ page.docs.extended_description }}
 {% endif %}
-
 ### Added Functions
 
 <div class="extension_functions_table"></div>

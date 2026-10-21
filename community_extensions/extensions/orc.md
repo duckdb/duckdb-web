@@ -20,6 +20,7 @@ extension:
 repo:
   github: alitrack/duckdb_orc
   ref: e2bb83eb1f50531dddf3074b14eb56d85401b8f3
+  ref_next: e2bb83eb1f50531dddf3074b14eb56d85401b8f3
 
 docs:
   hello_world: |
@@ -65,11 +66,26 @@ docs:
     - **No union type**: not supported by `orc-rust` upstream
 extension_star_count: 4
 extension_star_count_pretty: 4
-extension_download_count: 640
-extension_download_count_pretty: 640
+extension_download_count: 385
+extension_download_count_pretty: 385
 image: '/images/community_extensions/social_preview/preview_community_extension_orc.png'
 layout: community_extension_doc
 ---
+### Compatibility Matrix
+
+This table covers all DuckDB releases that have not reached [end-of-life](https://duckdb.org/release_calendar), including LTS releases, and shows the 2 most recent patch releases of each. Older patch releases are not listed, but the extension may be available for them as well.
+
+<div class="extension_compatibility_table"></div>
+
+| Platform | 1.4.4 | 1.4.5 | 1.5.5 | 1.5.6 |
+| :--- | :---: | :---: | :---: | :---: |
+| Linux AMD64 | ❌ | ❌ | ✅ | ❌ |
+| Linux ARM64 | ❌ | ❌ | ✅ | ❌ |
+| macOS AMD64 | ❌ | ❌ | ✅ | ❌ |
+| macOS ARM64 | ❌ | ❌ | ✅ | ❌ |
+| Windows AMD64 | ❌ | ❌ | ✅ | ❌ |
+| Windows ARM64 | ❌ | ❌ | ❌ | ❌ |
+| WebAssembly | ❌ | ❌ | ❌ | ❌ |
 
 ### Installing and Loading
 ```sql
@@ -87,7 +103,6 @@ LOAD {{ page.extension.name }};
 ### About {{ page.extension.name }}
 {{ page.docs.extended_description }}
 {% endif %}
-
 ### Added Functions
 
 <div class="extension_functions_table"></div>

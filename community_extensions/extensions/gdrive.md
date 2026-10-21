@@ -7,7 +7,7 @@ excerpt: |
 
 extension:
   name: gdrive
-  version: 2026.09.26
+  version: 2026.10.18
   description: Query files in Google Drive directly with a gdrive:// filesystem
   language: C++
   build: cmake
@@ -24,7 +24,10 @@ extension:
 
 repo:
   github: DataZooDE/duckdb-gdrive
-  ref: 3755d9ea6f03387d8546e3eb1500ea58758a3528
+  ref: ac9b9da229cbc2ca8a787aac6ddd0390c7c5e81f
+  # ref builds against DuckDB 2.0, variegata against v1.5.6; one commit
+  # serves both (and v1.4.5 via the ref fallback).
+  variegata: ac9b9da229cbc2ca8a787aac6ddd0390c7c5e81f
 
 docs:
   hello_world: |
@@ -111,11 +114,26 @@ docs:
 
 extension_star_count: 7
 extension_star_count_pretty: 7
-extension_download_count: 719
-extension_download_count_pretty: 719
+extension_download_count: 1230
+extension_download_count_pretty: 1.2k
 image: '/images/community_extensions/social_preview/preview_community_extension_gdrive.png'
 layout: community_extension_doc
 ---
+### Compatibility Matrix
+
+This table covers all DuckDB releases that have not reached [end-of-life](https://duckdb.org/release_calendar), including LTS releases, and shows the 2 most recent patch releases of each. Older patch releases are not listed, but the extension may be available for them as well.
+
+<div class="extension_compatibility_table"></div>
+
+| Platform | 1.4.4 | 1.4.5 | 1.5.5 | 1.5.6 |
+| :--- | :---: | :---: | :---: | :---: |
+| Linux AMD64 | ❌ | ❌ | ✅ | ✅ |
+| Linux ARM64 | ❌ | ❌ | ✅ | ✅ |
+| macOS AMD64 | ❌ | ❌ | ✅ | ✅ |
+| macOS ARM64 | ❌ | ❌ | ✅ | ✅ |
+| Windows AMD64 | ❌ | ❌ | ✅ | ✅ |
+| Windows ARM64 | ❌ | ❌ | ❌ | ❌ |
+| WebAssembly | ❌ | ❌ | ❌ | ❌ |
 
 ### Installing and Loading
 ```sql
@@ -133,7 +151,6 @@ LOAD {{ page.extension.name }};
 ### About {{ page.extension.name }}
 {{ page.docs.extended_description }}
 {% endif %}
-
 ### Added Functions
 
 <div class="extension_functions_table"></div>

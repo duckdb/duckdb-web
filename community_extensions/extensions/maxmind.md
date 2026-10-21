@@ -8,7 +8,7 @@ excerpt: |
 extension:
   name: maxmind
   description: Read MaxMind databases (GeoLite, GeoIP, and more)
-  version: 0.11.0
+  version: 0.12.0
   language: Zig
   build: cmake
   license: ISC
@@ -18,7 +18,7 @@ extension:
 
 repo:
   github: marselester/duckdb-maxmind
-  ref: 6d0327c9b8bd90f19c4287dcf634301e79f8557e
+  ref: 08a80d772143c083c160ebd846642ecac1ef035c
 
 docs:
   hello_world: |
@@ -26,7 +26,7 @@ docs:
   extended_description: |
     Read any MaxMind database using table and scalar functions.
     GeoLite and GeoIP databases get typed columns;
-    other MMDB files return JSON in a `record` VARCHAR column.
+    other MMDB files return a `record` JSON column.
 
     Scan all IP network blocks with `read_mmdb()`.
     Use the optional `network` parameter to limit the scan to a subnet,
@@ -60,7 +60,7 @@ docs:
     Use `mmdb_record()` to look up a record from any MMDB file as JSON:
 
     ```sql
-    SELECT mmdb_record('./GeoLite2-City.mmdb', '1.0.64.0', 'city')::json -> 'city' -> 'names' ->> 'en' AS en;
+    SELECT mmdb_record('./GeoLite2-City.mmdb', '1.0.64.0', 'city') -> 'city' -> 'names' ->> 'en' AS en;
     ┌───────────┐
     │    en     │
     ├───────────┤
@@ -70,11 +70,26 @@ docs:
 
 extension_star_count: 9
 extension_star_count_pretty: 9
-extension_download_count: 960
-extension_download_count_pretty: 960
+extension_download_count: 1908
+extension_download_count_pretty: 1.9k
 image: '/images/community_extensions/social_preview/preview_community_extension_maxmind.png'
 layout: community_extension_doc
 ---
+### Compatibility Matrix
+
+This table covers all DuckDB releases that have not reached [end-of-life](https://duckdb.org/release_calendar), including LTS releases, and shows the 2 most recent patch releases of each. Older patch releases are not listed, but the extension may be available for them as well.
+
+<div class="extension_compatibility_table"></div>
+
+| Platform | 1.4.4 | 1.4.5 | 1.5.5 | 1.5.6 |
+| :--- | :---: | :---: | :---: | :---: |
+| Linux AMD64 | ✅ | ❌ | ✅ | ✅ |
+| Linux ARM64 | ✅ | ❌ | ✅ | ✅ |
+| macOS AMD64 | ✅ | ❌ | ✅ | ✅ |
+| macOS ARM64 | ✅ | ❌ | ✅ | ✅ |
+| Windows AMD64 | ❌ | ❌ | ✅ | ✅ |
+| Windows ARM64 | ❌ | ❌ | ❌ | ❌ |
+| WebAssembly | ❌ | ❌ | ❌ | ❌ |
 
 ### Installing and Loading
 ```sql
@@ -92,7 +107,6 @@ LOAD {{ page.extension.name }};
 ### About {{ page.extension.name }}
 {{ page.docs.extended_description }}
 {% endif %}
-
 ### Added Functions
 
 <div class="extension_functions_table"></div>
