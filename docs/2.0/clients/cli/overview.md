@@ -15,7 +15,7 @@ title: Command Line Client
 
 > Installation To use the DuckDB CLI client, visit the [CLI installation page]({% link install/index.html %}?environment=cli).
 >
-> The latest stable version of the DuckDB command line client is {{ site.current_duckdb_version }}.
+> The latest stable version of the DuckDB command line client is {{ site.next_major_duckdb_version }}.
 
 ## Installation
 
@@ -28,7 +28,7 @@ The DuckDB CLI is based on the SQLite command line shell, so CLI-client-specific
 
 ## Getting Started
 
-Once the CLI executable has been downloaded, unzip it and save it to any directory.
+Once the CLI executable has been downloaded, decompress it and save it to any directory.
 Navigate to that directory in a terminal and enter the command `duckdb` to run the executable.
 If in a PowerShell or POSIX shell environment, use the command `./duckdb` instead.
 

@@ -52,7 +52,7 @@ def update_file(path, digests):
     for i, line in enumerate(lines):
         if m := re.match(r'\s*filename:\s*"?([^"\s]+)"?', line):
             filename = m.group(1)
-        elif filename and (m := re.match(r'(\s*sha256:\s*)"?[0-9a-fA-F]*"?\s*$', line)):
+        elif filename and (m := re.match(r'(\s*sha256:\s*)"?[^"\s]*"?\s*$', line)):
             if filename in digests:
                 lines[i] = f'{m.group(1)}"{digests[filename]}"\n'
                 updated.append(filename)

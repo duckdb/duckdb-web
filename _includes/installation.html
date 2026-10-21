@@ -1,3 +1,7 @@
+{%- assign checksums_current_file = site.current_short_duckdb_version | remove: "." | prepend: "checksums_" -%}
+{%- assign checksums_current = site.data[checksums_current_file] -%}
+{%- assign checksums_lts_file = site.lts_short_duckdb_version | remove: "." | prepend: "checksums_" -%}
+{%- assign checksums_lts = site.data[checksums_lts_file] -%}
 <div class="wrap pagetitle pagetitle--small mb-5">
     <h1>DuckDB Installation</h1>
 </div>
@@ -104,7 +108,7 @@ docker run --rm -it -v "$(pwd):/workspace" -w /workspace duckdb/duckdb
 {%- endhighlight -%}
 
 <h4>Direct Download</h4>
-{%- assign f = site.data.checksums_current.artifacts.cli.macos.x86_64.filename -%}
+{%- assign f = checksums_current.artifacts.cli.macos.x86_64.filename -%}
 <a href="https://install.duckdb.org/v{{ site.current_duckdb_version }}/{{ f }}" class="download-btn" download="{{ f }}" rel="noopener noreferrer">{{ f }}</a>
 {%- include checksum_inline.html environment="cli" platform="macos" version="current" -%}
 
@@ -123,7 +127,7 @@ curl https://install.duckdb.org | DUCKDB_VERSION={{ site.lts_duckdb_version }} b
 <div class="alternative">
 
 <h4>Direct Download</h4>
-{%- assign f = site.data.checksums_lts.artifacts.cli.macos.x86_64.filename -%}
+{%- assign f = checksums_lts.artifacts.cli.macos.x86_64.filename -%}
 <a href="https://install.duckdb.org/v{{ site.lts_duckdb_version }}/{{ f }}" class="download-btn" download="{{ f }}" rel="noopener noreferrer">{{ f }}</a>
 {%- include checksum_inline.html environment="cli" platform="macos" version="lts" -%}
 
@@ -169,21 +173,21 @@ docker run --rm -it -v "$(pwd):/workspace" -w /workspace duckdb/duckdb
 
 <p>glibc builds (recommended):</p>
 
-{%- assign f_x86 = site.data.checksums_current.artifacts.cli.linux.x86_64.filename -%}
+{%- assign f_x86 = checksums_current.artifacts.cli.linux.x86_64.filename -%}
 <a href="https://install.duckdb.org/v{{ site.current_duckdb_version }}/{{ f_x86 }}" class="download-btn" download="{{ f_x86 }}" rel="noopener noreferrer">{{ f_x86 }}</a>
 {%- include checksum_inline.html environment="cli" platform="linux" architecture="x86_64" version="current" -%}
 
-{%- assign f_arm = site.data.checksums_current.artifacts.cli.linux.arm64.filename -%}
+{%- assign f_arm = checksums_current.artifacts.cli.linux.arm64.filename -%}
 <a href="https://install.duckdb.org/v{{ site.current_duckdb_version }}/{{ f_arm }}" class="download-btn" download="{{ f_arm }}" rel="noopener noreferrer">{{ f_arm }}</a>
 {%- include checksum_inline.html environment="cli" platform="linux" architecture="arm64" version="current" -%}
 
 <p>musl libc builds (for Alpine Linux):</p>
 
-{%- assign f_x86_musl = site.data.checksums_current.artifacts.cli.linux.x86_64_musl.filename -%}
+{%- assign f_x86_musl = checksums_current.artifacts.cli.linux.x86_64_musl.filename -%}
 <a href="https://install.duckdb.org/v{{ site.current_duckdb_version }}/{{ f_x86_musl }}" class="download-btn" download="{{ f_x86_musl }}" rel="noopener noreferrer">{{ f_x86_musl }}</a>
 {%- include checksum_inline.html environment="cli" platform="linux" architecture="x86_64_musl" version="current" -%}
 
-{%- assign f_arm_musl = site.data.checksums_current.artifacts.cli.linux.arm64_musl.filename -%}
+{%- assign f_arm_musl = checksums_current.artifacts.cli.linux.arm64_musl.filename -%}
 <a href="https://install.duckdb.org/v{{ site.current_duckdb_version }}/{{ f_arm_musl }}" class="download-btn" download="{{ f_arm_musl }}" rel="noopener noreferrer">{{ f_arm_musl }}</a>
 {%- include checksum_inline.html environment="cli" platform="linux" architecture="arm64_musl" version="current" -%}
 
@@ -202,11 +206,11 @@ curl https://install.duckdb.org | DUCKDB_VERSION={{ site.lts_duckdb_version }} b
 <div class="alternative">
 
 <h4>Direct Downloads</h4>
-{%- assign f_x86 = site.data.checksums_lts.artifacts.cli.linux.x86_64.filename -%}
+{%- assign f_x86 = checksums_lts.artifacts.cli.linux.x86_64.filename -%}
 <a href="https://install.duckdb.org/v{{ site.lts_duckdb_version }}/{{ f_x86 }}" class="download-btn" download="{{ f_x86 }}" rel="noopener noreferrer">{{ f_x86 }}</a>
 {%- include checksum_inline.html environment="cli" platform="linux" architecture="x86_64" version="lts" -%}
 
-{%- assign f_arm = site.data.checksums_lts.artifacts.cli.linux.arm64.filename -%}
+{%- assign f_arm = checksums_lts.artifacts.cli.linux.arm64.filename -%}
 <a href="https://install.duckdb.org/v{{ site.lts_duckdb_version }}/{{ f_arm }}" class="download-btn" download="{{ f_arm }}" rel="noopener noreferrer">{{ f_arm }}</a>
 {%- include checksum_inline.html environment="cli" platform="linux" architecture="arm64" version="lts" -%}
 
@@ -242,11 +246,11 @@ curl https://install.duckdb.org | bash
     data-docs="{% link docs/1.5/clients/cli/overview.md %}">
 
 <h4>Direct Downloads</h4>
-{%- assign f_x86 = site.data.checksums_current.artifacts.cli.windows.x86_64.filename -%}
+{%- assign f_x86 = checksums_current.artifacts.cli.windows.x86_64.filename -%}
 <a href="https://install.duckdb.org/v{{ site.current_duckdb_version }}/{{ f_x86 }}" class="download-btn" download="{{ f_x86 }}" rel="noopener noreferrer">{{ f_x86 }}</a>
 {%- include checksum_inline.html environment="cli" platform="windows" architecture="x86_64" version="current" -%}
 
-{%- assign f_arm = site.data.checksums_current.artifacts.cli.windows.arm64.filename -%}
+{%- assign f_arm = checksums_current.artifacts.cli.windows.arm64.filename -%}
 <a href="https://install.duckdb.org/v{{ site.current_duckdb_version }}/{{ f_arm }}" class="download-btn" download="{{ f_arm }}" rel="noopener noreferrer">{{ f_arm }}</a>
 {%- include checksum_inline.html environment="cli" platform="windows" architecture="arm64" version="current" -%}
 
@@ -281,11 +285,11 @@ docker run --rm -it -v "$(pwd):/workspace" -w /workspace duckdb/duckdb
     data-docs="/docs/1.4/clients/cli/overview">
 
 <h4>Direct Downloads</h4>
-{%- assign f_x86 = site.data.checksums_lts.artifacts.cli.windows.x86_64.filename -%}
+{%- assign f_x86 = checksums_lts.artifacts.cli.windows.x86_64.filename -%}
 <a href="https://install.duckdb.org/v{{ site.lts_duckdb_version }}/{{ f_x86 }}" class="download-btn" download="{{ f_x86 }}" rel="noopener noreferrer">{{ f_x86 }}</a>
 {%- include checksum_inline.html environment="cli" platform="windows" architecture="x86_64" version="lts" -%}
 
-{%- assign f_arm = site.data.checksums_lts.artifacts.cli.windows.arm64.filename -%}
+{%- assign f_arm = checksums_lts.artifacts.cli.windows.arm64.filename -%}
 <a href="https://install.duckdb.org/v{{ site.lts_duckdb_version }}/{{ f_arm }}" class="download-btn" download="{{ f_arm }}" rel="noopener noreferrer">{{ f_arm }}</a>
 {%- include checksum_inline.html environment="cli" platform="windows" architecture="arm64" version="lts" -%}
 
@@ -627,7 +631,7 @@ npm install @duckdb/node-api@{{ site.next_major_duckdb_node_neo_version }}
     data-docs="{% link docs/1.5/clients/wasm/overview.md %}">
 
 {%- highlight bash -%}
-npm install @duckdb/duckdb-wasm
+npm install @duckdb/duckdb-wasm@{{ site.current_duckdb_wasm_version }}
 {%- endhighlight -%}
 
 </div>
@@ -661,7 +665,7 @@ npm install @duckdb/duckdb-wasm@{{ site.next_major_duckdb_wasm_version }}
     data-docs="{% link docs/1.5/clients/rust/overview.md %}">
 
 {%- highlight bash -%}
-cargo add duckdb --features bundled
+cargo add duckdb@{{ site.current_duckdb_version }} --features bundled
 {%- endhighlight -%}
     
 </div>
@@ -730,11 +734,11 @@ go get github.com/duckdb/duckdb-go/v2@{{ site.next_major_duckdb_go_version }}
     data-environment="c"
     data-docs="{% link docs/1.5/clients/c/overview.md %}">
 
-{%- assign f_x86 = site.data.checksums_current.artifacts.c.linux.x86_64.filename -%}
+{%- assign f_x86 = checksums_current.artifacts.c.linux.x86_64.filename -%}
 <a href="https://install.duckdb.org/v{{ site.current_duckdb_version }}/{{ f_x86 }}" class="download-btn" download="{{ f_x86 }}" rel="noopener noreferrer">{{ f_x86 }}</a>
 {%- include checksum_inline.html environment="c" platform="linux" architecture="x86_64" version="current" -%}
 
-{%- assign f_arm = site.data.checksums_current.artifacts.c.linux.arm64.filename -%}
+{%- assign f_arm = checksums_current.artifacts.c.linux.arm64.filename -%}
 <a href="https://install.duckdb.org/v{{ site.current_duckdb_version }}/{{ f_arm }}" class="download-btn" download="{{ f_arm }}" rel="noopener noreferrer">{{ f_arm }}</a>
 {%- include checksum_inline.html environment="c" platform="linux" architecture="arm64" version="current" -%}
 
@@ -746,7 +750,7 @@ go get github.com/duckdb/duckdb-go/v2@{{ site.next_major_duckdb_go_version }}
     data-environment="c"
     data-docs="{% link docs/1.5/clients/c/overview.md %}">
 
-{%- assign f = site.data.checksums_current.artifacts.c.macos.x86_64.filename -%}
+{%- assign f = checksums_current.artifacts.c.macos.x86_64.filename -%}
 <a href="https://install.duckdb.org/v{{ site.current_duckdb_version }}/{{ f }}" class="download-btn" download="{{ f }}" rel="noopener noreferrer">{{ f }}</a>
 {%- include checksum_inline.html environment="c" platform="macos" version="current" -%}
 
@@ -758,11 +762,11 @@ go get github.com/duckdb/duckdb-go/v2@{{ site.next_major_duckdb_go_version }}
     data-environment="c"
     data-docs="{% link docs/1.5/clients/c/overview.md %}">
 
-{%- assign f_x86 = site.data.checksums_current.artifacts.c.windows.x86_64.filename -%}
+{%- assign f_x86 = checksums_current.artifacts.c.windows.x86_64.filename -%}
 <a href="https://install.duckdb.org/v{{ site.current_duckdb_version }}/{{ f_x86 }}" class="download-btn" download="{{ f_x86 }}" rel="noopener noreferrer">{{ f_x86 }}</a>
 {%- include checksum_inline.html environment="c" platform="windows" architecture="x86_64" version="current" -%}
 
-{%- assign f_arm = site.data.checksums_current.artifacts.c.windows.arm64.filename -%}
+{%- assign f_arm = checksums_current.artifacts.c.windows.arm64.filename -%}
 <a href="https://install.duckdb.org/v{{ site.current_duckdb_version }}/{{ f_arm }}" class="download-btn" download="{{ f_arm }}" rel="noopener noreferrer">{{ f_arm }}</a>
 {%- include checksum_inline.html environment="c" platform="windows" architecture="arm64" version="current" -%}
 
@@ -774,11 +778,11 @@ go get github.com/duckdb/duckdb-go/v2@{{ site.next_major_duckdb_go_version }}
     data-environment="c"
     data-docs="/docs/1.4/clients/c/overview">
 
-{%- assign f_x86 = site.data.checksums_lts.artifacts.c.linux.x86_64.filename -%}
+{%- assign f_x86 = checksums_lts.artifacts.c.linux.x86_64.filename -%}
 <a href="https://install.duckdb.org/v{{ site.lts_duckdb_version }}/{{ f_x86 }}" class="download-btn" download="{{ f_x86 }}" rel="noopener noreferrer">{{ f_x86 }}</a>
 {%- include checksum_inline.html environment="c" platform="linux" architecture="x86_64" version="lts" -%}
 
-{%- assign f_arm = site.data.checksums_lts.artifacts.c.linux.arm64.filename -%}
+{%- assign f_arm = checksums_lts.artifacts.c.linux.arm64.filename -%}
 <a href="https://install.duckdb.org/v{{ site.lts_duckdb_version }}/{{ f_arm }}" class="download-btn" download="{{ f_arm }}" rel="noopener noreferrer">{{ f_arm }}</a>
 {%- include checksum_inline.html environment="c" platform="linux" architecture="arm64" version="lts" -%}
 
@@ -790,7 +794,7 @@ go get github.com/duckdb/duckdb-go/v2@{{ site.next_major_duckdb_go_version }}
     data-environment="c"
     data-docs="/docs/1.4/clients/c/overview">
 
-{%- assign f = site.data.checksums_lts.artifacts.c.macos.x86_64.filename -%}
+{%- assign f = checksums_lts.artifacts.c.macos.x86_64.filename -%}
 <a href="https://install.duckdb.org/v{{ site.lts_duckdb_version }}/{{ f }}" class="download-btn" download="{{ f }}" rel="noopener noreferrer">{{ f }}</a>
 {%- include checksum_inline.html environment="c" platform="macos" version="lts" -%}
 
@@ -802,11 +806,11 @@ go get github.com/duckdb/duckdb-go/v2@{{ site.next_major_duckdb_go_version }}
     data-environment="c"
     data-docs="/docs/1.4/clients/c/overview">
 
-{%- assign f_x86 = site.data.checksums_lts.artifacts.c.windows.x86_64.filename -%}
+{%- assign f_x86 = checksums_lts.artifacts.c.windows.x86_64.filename -%}
 <a href="https://install.duckdb.org/v{{ site.lts_duckdb_version }}/{{ f_x86 }}" class="download-btn" download="{{ f_x86 }}" rel="noopener noreferrer">{{ f_x86 }}</a>
 {%- include checksum_inline.html environment="c" platform="windows" architecture="x86_64" version="lts" -%}
 
-{%- assign f_arm = site.data.checksums_lts.artifacts.c.windows.arm64.filename -%}
+{%- assign f_arm = checksums_lts.artifacts.c.windows.arm64.filename -%}
 <a href="https://install.duckdb.org/v{{ site.lts_duckdb_version }}/{{ f_arm }}" class="download-btn" download="{{ f_arm }}" rel="noopener noreferrer">{{ f_arm }}</a>
 {%- include checksum_inline.html environment="c" platform="windows" architecture="arm64" version="lts" -%}
 

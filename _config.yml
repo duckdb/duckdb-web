@@ -65,6 +65,10 @@ next_major_duckdb_go_version: ""
 next_major_duckdb_node_neo_version: ""
 next_major_duckdb_rust_version: ""
 next_major_duckdb_wasm_version: "2.0.0"
+next_major_duckdb_csharp_version: ""
+next_major_duckdb_dart_version: ""
+next_major_duckdb_hash: "d54cbbe3df"
+next_major_duckdb_r_version: ""
 # more Jekyll config
 livereload: true
 highlighter: rouge

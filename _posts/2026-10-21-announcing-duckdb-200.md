@@ -9,7 +9,7 @@ excerpt: "The DuckDB team is happy to announce that today we're releasing DuckDB
 tag: release
 ---
 
-We are proud to release DuckDB 2.0.0, codenamed [“Cinnamon Teal”](https://shell.duckdb.org/#queries=v0,ATTACH-'https%3A%2F%2Fblobs.duckdb.org%2Fduck.db'-AS-duckdb~,CALL-duckdb.cinnamon_teal()~) after the [_Spatula cyanoptera_](https://en.wikipedia.org/wiki/Cinnamon_teal), a strikingly reddish-brown duck found in the western Americas.
+We are proud to release DuckDB 2.0.0, codenamed “Cinnamon Teal” after the [_Spatula cyanoptera_](https://en.wikipedia.org/wiki/Cinnamon_teal), a strikingly reddish-brown duck found in the western Americas.
 
 While [DuckDB 1.0]({% post_url 2024-06-03-announcing-duckdb-100 %}) was all about stability and backward compatibility, DuckDB 2.0 is above all a feature release.
 In this blog post, we summarize the highlights and then walk through the breaking changes and how to migrate.

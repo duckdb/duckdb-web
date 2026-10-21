@@ -23,7 +23,7 @@ SELECT version() AS version;
 
 | version |
 |-----------|
-| v{{ site.current_duckdb_version }} |
+| v{{ site.next_major_duckdb_version }} |
 
 Using a `PRAGMA`:
 
@@ -35,7 +35,7 @@ PRAGMA version;
 
 | library_version | source_id  | codename |
 |-----------------|------------|----------|
-| v{{ site.current_duckdb_version }} | {{ site.current_duckdb_hash }} | {{ site.current_duckdb_codename }} |
+| v{{ site.next_major_duckdb_version }} | {{ site.next_major_duckdb_hash }} | {{ site.next_major_duckdb_codename }} |
 
 ## Platform
 
