@@ -18,7 +18,7 @@ extension:
 
 repo:
   github: nkwork9999/duckSMILES
-  ref: ff7c681ca14698d7ed6ec4a5d7a15fc40cefe834
+  ref: 2c76e900f75fe6cc8196aa7d44f2f9c36d848d2c
 
 docs:
   hello_world: |
@@ -72,9 +72,13 @@ docs:
     - PDB/CIF/XYZ: protein structure analysis (atom, chain, residue, model counts)
     - SELFIES: bidirectional SMILES-SELFIES conversion for ML pipelines
 
-    **130+ scalar SQL functions** for molecular property extraction, format conversion,
+    **149 scalar SQL functions (151 overloads)** for molecular property extraction, format conversion,
     structural comparison, fingerprinting, similarity search, drug-likeness /
     toxicophore filtering, and structure-based virtual screening.
+
+    Function descriptions, meaningful argument names, runnable examples and
+    categories are discoverable through `duckdb_functions()` for every overload.
+    Filter with `list_contains(categories, 'ducksmiles')` after loading the extension.
 
     **Descriptors (RDKit-faithful ports):**
     - 21 structural-profile functions: fragments, formal charge, hydrogen and
@@ -87,6 +91,15 @@ docs:
     - `qed()` - QED drug-likeness (Bickerton 2012), a port of RDKit `Chem.QED`.
     - Lipinski set: `num_h_donors()`, `num_h_acceptors()`, `num_rotatable_bonds()`,
       `fraction_csp3()`, `num_heteroatoms()`, and the full ring-count descriptor family.
+
+    **Mass context and native graphs:**
+    - `formula_exact_mass()` parses supported flat formulas strictly.
+    - `adduct_neutral_mass()` and `adduct_precursor_mz()` perform versioned
+      arithmetic for 29 explicit adduct labels, including signed electron corrections.
+    - `mol_graph_json()` exports a versioned native atom/bond graph in input
+      order with explicit hydrogen vertices, isotope, charge and raw stereo tokens.
+      This sidecar is not pretrained-model tensors or full RDKit sanitization.
+    - Unsupported or malformed inputs return NULL.
 
     **Fingerprints & similarity:**
     - `morgan_fp_bits()` (Morgan/ECFP-style, radius 2 / 2048-bit default) and
@@ -124,11 +137,26 @@ docs:
 
 extension_star_count: 4
 extension_star_count_pretty: 4
-extension_download_count: 1015
-extension_download_count_pretty: 1.0k
+extension_download_count: 1856
+extension_download_count_pretty: 1.9k
 image: '/images/community_extensions/social_preview/preview_community_extension_ducksmiles.png'
 layout: community_extension_doc
 ---
+### Compatibility Matrix
+
+This table covers all DuckDB releases that have not reached [end-of-life](https://duckdb.org/release_calendar), including LTS releases, and shows the 2 most recent patch releases of each. Older patch releases are not listed, but the extension may be available for them as well.
+
+<div class="extension_compatibility_table"></div>
+
+| Platform | 1.4.4 | 1.4.5 | 1.5.5 | 1.5.6 |
+| :--- | :---: | :---: | :---: | :---: |
+| Linux AMD64 | ❌ | ❌ | ✅ | ✅ |
+| Linux ARM64 | ❌ | ❌ | ✅ | ✅ |
+| macOS AMD64 | ❌ | ❌ | ✅ | ✅ |
+| macOS ARM64 | ❌ | ❌ | ✅ | ✅ |
+| Windows AMD64 | ❌ | ❌ | ✅ | ✅ |
+| Windows ARM64 | ❌ | ❌ | ❌ | ❌ |
+| WebAssembly | ❌ | ❌ | ✅ | ✅ |
 
 ### Installing and Loading
 ```sql
@@ -146,7 +174,6 @@ LOAD {{ page.extension.name }};
 ### About {{ page.extension.name }}
 {{ page.docs.extended_description }}
 {% endif %}
-
 ### Added Functions
 
 <div class="extension_functions_table"></div>

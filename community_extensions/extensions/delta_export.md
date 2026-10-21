@@ -8,7 +8,7 @@ excerpt: |
 extension:
   name: delta_export
   description: Export DuckLake catalog tables to Delta Lake format
-  version: 0.1.0
+  version: 0.2.0
   language: C++
   build: cmake
   license: MIT
@@ -17,7 +17,7 @@ extension:
 
 repo:
   github: djouallah/delta_export
-  ref: cb5e3659c43216ed7789efb1a5eaaca8816710d0
+  ref: d3875f616befdbf2d9a35940daa80115c13fa733
 
 docs:
   hello_world: |
@@ -44,16 +44,36 @@ docs:
     system that reads Delta Lake format, such as Apache Spark, Databricks,
     Microsoft Fabric, and other Delta-compatible engines.
 
+    Deletes, updates and MERGE are exported as Delta deletion vectors, so
+    no file rewrite is needed. Each export commits the next Delta version,
+    widened columns use the Delta typeWidening feature, and the Delta log
+    of a dropped table is removed.
+
     Works with both DuckDB and SQLite-backed DuckLake catalogs, and
     supports all storage backends including local filesystem and ABFSS.
 
-extension_star_count: 11
-extension_star_count_pretty: 11
-extension_download_count: 896
-extension_download_count_pretty: 896
+extension_star_count: 12
+extension_star_count_pretty: 12
+extension_download_count: 2419
+extension_download_count_pretty: 2.4k
 image: '/images/community_extensions/social_preview/preview_community_extension_delta_export.png'
 layout: community_extension_doc
 ---
+### Compatibility Matrix
+
+This table covers all DuckDB releases that have not reached [end-of-life](https://duckdb.org/release_calendar), including LTS releases, and shows the 2 most recent patch releases of each. Older patch releases are not listed, but the extension may be available for them as well.
+
+<div class="extension_compatibility_table"></div>
+
+| Platform | 1.4.4 | 1.4.5 | 1.5.5 | 1.5.6 |
+| :--- | :---: | :---: | :---: | :---: |
+| Linux AMD64 | ✅ | ✅ | ✅ | ✅ |
+| Linux ARM64 | ✅ | ✅ | ✅ | ✅ |
+| macOS AMD64 | ✅ | ✅ | ✅ | ✅ |
+| macOS ARM64 | ✅ | ✅ | ✅ | ✅ |
+| Windows AMD64 | ✅ | ✅ | ✅ | ✅ |
+| Windows ARM64 | ❌ | ❌ | ❌ | ❌ |
+| WebAssembly | ✅ | ✅ | ✅ | ✅ |
 
 ### Installing and Loading
 ```sql
@@ -71,7 +91,6 @@ LOAD {{ page.extension.name }};
 ### About {{ page.extension.name }}
 {{ page.docs.extended_description }}
 {% endif %}
-
 ### Added Functions
 
 <div class="extension_functions_table"></div>
