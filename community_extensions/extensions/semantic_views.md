@@ -8,7 +8,7 @@ excerpt: |
 extension:
   name: semantic_views
   description: "Semantic views -- a declarative layer for dimensions, metrics, and relationships"
-  version: 0.13.0
+  version: 0.14.1
   language: Rust
   build: cargo
   license: MIT
@@ -18,8 +18,9 @@ extension:
     - anentropic
 
 repo:
-  github: anentropic/duckdb-semantic-views
+  github: s-layer/duckdb-semantic-views
   ref: 27e6271218f3ee9687e9f15cae6e85171eded45c
+  variegata: 8d02550da117b1b1e92ad08a819e4c99dd4f4653
 
 docs:
   hello_world: |
@@ -41,7 +42,7 @@ docs:
     composition automatically. Supports multi-table joins with PK/FK relationships,
     fan trap detection, role-playing dimensions, derived metrics, and FACTS.
 
-    Documentation: https://anentropic.github.io/duckdb-semantic-views/
+    Documentation: https://s-layer.github.io/duckdb-semantic-views/
 
 extension_star_count: 19
 extension_star_count_pretty: 19
@@ -56,15 +57,15 @@ This table covers all DuckDB releases that have not reached [end-of-life](https:
 
 <div class="extension_compatibility_table"></div>
 
-| Platform | 1.4.4 | 1.4.5 | 1.5.5 | 1.5.6 |
-| :--- | :---: | :---: | :---: | :---: |
-| Linux AMD64 | ❌ | ❌ | ✅ | ✅ |
-| Linux ARM64 | ❌ | ❌ | ✅ | ✅ |
-| macOS AMD64 | ❌ | ❌ | ✅ | ✅ |
-| macOS ARM64 | ❌ | ❌ | ✅ | ✅ |
-| Windows AMD64 | ❌ | ❌ | ✅ | ✅ |
-| Windows ARM64 | ❌ | ❌ | ❌ | ❌ |
-| WebAssembly | ❌ | ❌ | ❌ | ❌ |
+| Platform | 1.4.4 | 1.4.5 | 1.5.5 | 1.5.6 | 2.0.0 |
+| :--- | :---: | :---: | :---: | :---: | :---: |
+| Linux AMD64 | ❌ | ❌ | ✅ | ✅ | ❌ |
+| Linux ARM64 | ❌ | ❌ | ✅ | ✅ | ❌ |
+| macOS AMD64 | ❌ | ❌ | ✅ | ✅ | ❌ |
+| macOS ARM64 | ❌ | ❌ | ✅ | ✅ | ❌ |
+| Windows AMD64 | ❌ | ❌ | ✅ | ✅ | ❌ |
+| Windows ARM64 | ❌ | ❌ | ❌ | ❌ | ❌ |
+| WebAssembly | ❌ | ❌ | ❌ | ❌ | ❌ |
 
 ### Installing and Loading
 ```sql

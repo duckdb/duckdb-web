@@ -76,8 +76,8 @@ docs:
     caches, cache statistics, OpenDAL I/O statistics, read-only attachments,
     and multiple read-only processes alongside a single writer.
 
-extension_star_count: 83
-extension_star_count_pretty: 83
+extension_star_count: 84
+extension_star_count_pretty: 84
 extension_download_count: 793
 extension_download_count_pretty: 793
 image: '/images/community_extensions/social_preview/preview_community_extension_duckdb_object_storage.png'
@@ -89,15 +89,15 @@ This table covers all DuckDB releases that have not reached [end-of-life](https:
 
 <div class="extension_compatibility_table"></div>
 
-| Platform | 1.4.4 | 1.4.5 | 1.5.5 | 1.5.6 |
-| :--- | :---: | :---: | :---: | :---: |
-| Linux AMD64 | ❌ | ❌ | ❌ | ✅ |
-| Linux ARM64 | ❌ | ❌ | ❌ | ✅ |
-| macOS AMD64 | ❌ | ❌ | ❌ | ✅ |
-| macOS ARM64 | ❌ | ❌ | ❌ | ✅ |
-| Windows AMD64 | ❌ | ❌ | ❌ | ❌ |
-| Windows ARM64 | ❌ | ❌ | ❌ | ❌ |
-| WebAssembly | ❌ | ❌ | ❌ | ❌ |
+| Platform | 1.4.4 | 1.4.5 | 1.5.5 | 1.5.6 | 2.0.0 |
+| :--- | :---: | :---: | :---: | :---: | :---: |
+| Linux AMD64 | ❌ | ❌ | ❌ | ✅ | ❌ |
+| Linux ARM64 | ❌ | ❌ | ❌ | ✅ | ❌ |
+| macOS AMD64 | ❌ | ❌ | ❌ | ✅ | ❌ |
+| macOS ARM64 | ❌ | ❌ | ❌ | ✅ | ❌ |
+| Windows AMD64 | ❌ | ❌ | ❌ | ❌ | ❌ |
+| Windows ARM64 | ❌ | ❌ | ❌ | ❌ | ❌ |
+| WebAssembly | ❌ | ❌ | ❌ | ❌ | ❌ |
 
 ### Installing and Loading
 ```sql

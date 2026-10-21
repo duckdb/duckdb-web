@@ -5,10 +5,18 @@ excerpt: |
   DuckDB Community Extensions
   High-performance lossless log parsing, analytical database compaction, and information-theoretic semantic accounting.
 
+# =============================================================================
+# DuckDB community extension metadata specification for razobill
+#
+# defines extension identity, build system, excluded platforms, and repository
+# coordinates for the DuckDB community extension distribution repository
+# ~ DuckDB community extension metadata specification and usage documentation
+# =============================================================================
+
 extension:
   name: razobill
   description: High-performance lossless log parsing, analytical database compaction, and information-theoretic semantic accounting.
-  version: 1.1.1
+  version: 1.1.3
   language: C++
   build: cmake
   license: Apache-2.0
@@ -16,11 +24,13 @@ extension:
     - 4t1a
   excluded_platforms: "wasm_mvp;wasm_eh;wasm_threads;windows_amd64_mingw;windows_amd64_rtools"
 
+# upstream git repository coordinates and tagged release reference
 repo:
   github: razobill/razobill
-  ref: 258b2da2481c4a79c01b2f1d89f282810d8b85cc
-  ref_next: 258b2da2481c4a79c01b2f1d89f282810d8b85cc
+  ref: 66bd1831e00123ebd6c8b07dca294b413ce4254a
+  variegata: 66bd1831e00123ebd6c8b07dca294b413ce4254a
 
+# documentation and sql usage examples published on DuckDB community portal
 docs:
   hello_world: |
     -- Install and load the Razobill extension
@@ -30,10 +40,9 @@ docs:
     -- Vectorized single-pass composite struct decomposition: STRUCT(template VARCHAR, ints BIGINT[], strs VARCHAR[])
     SELECT RzSplit('2026-10-10 12:00:00 [INFO] Worker 42 finished job in 150ms') AS parsed;
 
-    -- Extract structural template and typed variable columns
+    -- Extract structural template and 64-bit partition hash
     SELECT RzTemplate('User 1042 authenticated') AS template,
-           RzInts('User 1042 authenticated') AS ints,
-           RzStrs('User 1042 authenticated') AS strs;
+           RzHash('User 1042 authenticated') AS template_hash;
 
     -- Exact bit-for-bit lossless log reconstruction
     SELECT RzJoin(d.template, d.ints, d.strs) AS reconstructed
@@ -56,15 +65,15 @@ This table covers all DuckDB releases that have not reached [end-of-life](https:
 
 <div class="extension_compatibility_table"></div>
 
-| Platform | 1.4.4 | 1.4.5 | 1.5.5 | 1.5.6 |
-| :--- | :---: | :---: | :---: | :---: |
-| Linux AMD64 | ❌ | ❌ | ❌ | ✅ |
-| Linux ARM64 | ❌ | ❌ | ❌ | ✅ |
-| macOS AMD64 | ❌ | ❌ | ❌ | ✅ |
-| macOS ARM64 | ❌ | ❌ | ❌ | ✅ |
-| Windows AMD64 | ❌ | ❌ | ❌ | ✅ |
-| Windows ARM64 | ❌ | ❌ | ❌ | ❌ |
-| WebAssembly | ❌ | ❌ | ❌ | ❌ |
+| Platform | 1.4.4 | 1.4.5 | 1.5.5 | 1.5.6 | 2.0.0 |
+| :--- | :---: | :---: | :---: | :---: | :---: |
+| Linux AMD64 | ❌ | ❌ | ❌ | ✅ | ✅ |
+| Linux ARM64 | ❌ | ❌ | ❌ | ✅ | ✅ |
+| macOS AMD64 | ❌ | ❌ | ❌ | ✅ | ❌ |
+| macOS ARM64 | ❌ | ❌ | ❌ | ✅ | ✅ |
+| Windows AMD64 | ❌ | ❌ | ❌ | ✅ | ✅ |
+| Windows ARM64 | ❌ | ❌ | ❌ | ❌ | ❌ |
+| WebAssembly | ❌ | ❌ | ❌ | ❌ | ❌ |
 
 ### Installing and Loading
 ```sql
@@ -86,12 +95,7 @@ LOAD {{ page.extension.name }};
 
 <div class="extension_functions_table"></div>
 
-| function_name | function_type | description | comment | examples |
-|---------------|---------------|-------------|---------|----------|
-| RzHash        | scalar        | NULL        | NULL    |          |
-| RzJoin        | scalar        | NULL        | NULL    |          |
-| RzSplit       | scalar        | NULL        | NULL    |          |
-| RzTemplate    | scalar        | NULL        | NULL    |          |
+This extension does not add any functions.
 
 ### Overloaded Functions
 

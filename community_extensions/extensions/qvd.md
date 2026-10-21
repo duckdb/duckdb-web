@@ -8,7 +8,7 @@ excerpt: |
 extension:
   name: qvd
   description: Read (streaming) and write Qlik QVD files
-  version: 1.0.3
+  version: 1.0.4
   language: Rust
   build: cmake          # community label; the actual build goes through the Rust C-API Makefile
   license: Apache-2.0
@@ -20,7 +20,7 @@ extension:
 
 repo:
   github: snouhaud/DuckDB-QVD-Extension
-  ref: f9870d64292f5a065e67b636ff714e966ea46536
+  ref: 2d608d838e2826bf026a8433ef57b987505eb61a
 
 docs:
   hello_world: |
@@ -59,15 +59,15 @@ This table covers all DuckDB releases that have not reached [end-of-life](https:
 
 <div class="extension_compatibility_table"></div>
 
-| Platform | 1.4.4 | 1.4.5 | 1.5.5 | 1.5.6 |
-| :--- | :---: | :---: | :---: | :---: |
-| Linux AMD64 | ❌ | ❌ | ✅ | ❌ |
-| Linux ARM64 | ❌ | ❌ | ✅ | ❌ |
-| macOS AMD64 | ❌ | ❌ | ✅ | ❌ |
-| macOS ARM64 | ❌ | ❌ | ✅ | ❌ |
-| Windows AMD64 | ❌ | ❌ | ✅ | ❌ |
-| Windows ARM64 | ❌ | ❌ | ❌ | ❌ |
-| WebAssembly | ❌ | ❌ | ❌ | ❌ |
+| Platform | 1.4.4 | 1.4.5 | 1.5.5 | 1.5.6 | 2.0.0 |
+| :--- | :---: | :---: | :---: | :---: | :---: |
+| Linux AMD64 | ❌ | ❌ | ✅ | ❌ | ❌ |
+| Linux ARM64 | ❌ | ❌ | ✅ | ❌ | ❌ |
+| macOS AMD64 | ❌ | ❌ | ✅ | ❌ | ❌ |
+| macOS ARM64 | ❌ | ❌ | ✅ | ❌ | ❌ |
+| Windows AMD64 | ❌ | ❌ | ✅ | ❌ | ❌ |
+| Windows ARM64 | ❌ | ❌ | ❌ | ❌ | ❌ |
+| WebAssembly | ❌ | ❌ | ❌ | ❌ | ❌ |
 
 ### Installing and Loading
 ```sql

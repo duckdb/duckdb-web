@@ -19,7 +19,7 @@ repo:
   github: cwida/duckpgq-extension
   andium: 42eea114b22fad93f04cb7edf50d2b0077e464fa
   variegata: 61f5d08270bef2c81fc4e5d9af32739e67adc2be
-  ref: 91433a8397642684fcfed0be52aca9c8b5078faa
+  ref: 29ca668a2218810862bed794cc501add03a4149a
 
 docs:
   hello_world: |
@@ -75,15 +75,15 @@ This table covers all DuckDB releases that have not reached [end-of-life](https:
 
 <div class="extension_compatibility_table"></div>
 
-| Platform | 1.4.4 | 1.4.5 | 1.5.5 | 1.5.6 |
-| :--- | :---: | :---: | :---: | :---: |
-| Linux AMD64 | ✅ | ❌ | ❌ | ✅ |
-| Linux ARM64 | ✅ | ❌ | ❌ | ✅ |
-| macOS AMD64 | ✅ | ❌ | ❌ | ✅ |
-| macOS ARM64 | ✅ | ❌ | ❌ | ✅ |
-| Windows AMD64 | ✅ | ❌ | ❌ | ✅ |
-| Windows ARM64 | ❌ | ❌ | ❌ | ❌ |
-| WebAssembly | ✅ | ❌ | ❌ | ✅ |
+| Platform | 1.4.4 | 1.4.5 | 1.5.5 | 1.5.6 | 2.0.0 |
+| :--- | :---: | :---: | :---: | :---: | :---: |
+| Linux AMD64 | ✅ | ❌ | ❌ | ✅ | ✅ |
+| Linux ARM64 | ✅ | ❌ | ❌ | ✅ | ✅ |
+| macOS AMD64 | ✅ | ❌ | ❌ | ✅ | ❌ |
+| macOS ARM64 | ✅ | ❌ | ❌ | ✅ | ✅ |
+| Windows AMD64 | ✅ | ❌ | ❌ | ✅ | ✅ |
+| Windows ARM64 | ❌ | ❌ | ❌ | ❌ | ❌ |
+| WebAssembly | ✅ | ❌ | ❌ | ✅ | ✅ |
 
 ### Installing and Loading
 ```sql
