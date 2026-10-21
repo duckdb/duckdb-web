@@ -3,7 +3,7 @@ layout: docu
 title: ADBC Client
 ---
 
-> Installation To use the DuckDB ADBC client, download the [`libduckdb` archive]({% link install/index.html %}?environment=c) for your platform and follow the [instructions below](#installing-the-library).
+> Installation To use the DuckDB ADBC client, download the [`libduckdb` archive]({% link install/index.html %}?environment=c) for your platform and follow the [instructions below](#installing-the-library). For Python, install the `duckdb` package instead, as described in the [Python section](#python).
 >
 > The latest stable version of the DuckDB ADBC client is {{ site.current_duckdb_version }}.
 
@@ -257,15 +257,17 @@ StatementExecuteQuery(&adbc_statement, nullptr, nullptr, &adbc_error);
 
 ### Python
 
-The first thing to do is to use `pip` and install the ADBC Driver manager. You will also need to install the `pyarrow` to directly access Apache Arrow formatted result sets (such as using `fetch_arrow_table`).
+The `duckdb` package contains the DuckDB ADBC driver as its `adbc_driver_duckdb` module, so Python needs no `libduckdb` archive. Install it together with the ADBC driver manager and `pyarrow`:
 
 ```bash
-pip install adbc_driver_manager pyarrow
+pip install duckdb adbc_driver_manager pyarrow
 ```
+
+`pyarrow` to fetch rows (`fetchone` and `fetchall`). It is not needed for `fetch_arrow()`, which returns an object of the Arrow PyCapsule interface.
 
 > For details on the `adbc_driver_manager` package, see the [`adbc_driver_manager` package documentation](https://arrow.apache.org/adbc/current/python/api/adbc_driver_manager.html).
 
-As with C++, we need to provide initialization options consisting of the location of the libduckdb shared object and entrypoint function. Notice that the `path` argument for DuckDB is passed in through the `db_kwargs` dictionary.
+`adbc_driver_duckdb.dbapi.connect` sets the `driver` and `entrypoint` options itself, using the driver in the installed `duckdb` package. It takes the path of the database file as its first argument, and opens an in-memory database without one. There is no need to import `duckdb` first.
 
 ```python
 import adbc_driver_duckdb.dbapi
@@ -277,7 +279,7 @@ with adbc_driver_duckdb.dbapi.connect("test.db") as conn, conn.cursor() as cur:
     print(tbl)
 ```
 
-Alongside `fetch_arrow_table`, other methods from DBApi are also implemented on the cursor, such as `fetchone` and `fetchall`. Data can also be ingested via `arrow_streams`. We just need to set options on the statement to bind the stream of data and execute the query.
+Alongside `fetch_arrow_table`, the cursor implements the standard DB-API methods, such as `fetchone` and `fetchall`. To load Arrow data into a table, pass the table name and the data, such as a `pyarrow` record batch or table, to `cur.adbc_ingest`. By default it creates the table and fails if the table exists; its `mode` argument also takes `"append"`, `"create_append"` and `"replace"`, as in the [ingestion modes](#ingestion-modes) above.
 
 ```python
 import adbc_driver_duckdb.dbapi
@@ -290,7 +292,10 @@ data = pyarrow.record_batch(
 
 with adbc_driver_duckdb.dbapi.connect("test.db") as conn, conn.cursor() as cur:
     cur.adbc_ingest("AnswerToEverything", data)
+    conn.commit()
 ```
+
+The connection does not commit automatically, so without `conn.commit()` the ingested data is lost when the connection closes.
 
 ### Go
 

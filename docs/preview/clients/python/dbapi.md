@@ -3,14 +3,14 @@ layout: docu
 title: Python DB API
 ---
 
-The standard DuckDB Python API provides a SQL interface compliant with the [DB-API 2.0 specification described by PEP 249](https://www.python.org/dev/peps/pep-0249/) similar to the [SQLite Python API](https://docs.python.org/3.7/library/sqlite3.html).
+The standard DuckDB Python API provides a SQL interface compliant with the [DB-API 2.0 specification described by PEP 249](https://www.python.org/dev/peps/pep-0249/) similar to the [SQLite Python API](https://docs.python.org/3/library/sqlite3.html).
 
 ## Connection
 
 To use the module, you must first create a `DuckDBPyConnection` object that represents a connection to a database.
-This is done through the [`duckdb.connect`]({% link docs/preview/clients/python/reference/index.md %}#duckdb.connect) method.
+This is done through the [`duckdb.connect`]({% link docs/preview/clients/python/reference/index.md %}#duckdb.connect) method, which takes three arguments: `database`, `read_only` and `config`.
 
-The 'config' keyword argument can be used to provide a `dict` that contains key->value pairs referencing [settings]({% link docs/preview/configuration/overview.md %}#configuration-reference) understood by DuckDB.
+The `config` keyword argument can be used to provide a `dict` that contains key-value pairs referencing [settings]({% link docs/preview/configuration/overview.md %}#configuration-reference) understood by DuckDB.
 
 ### In-Memory Connection
 
@@ -25,25 +25,15 @@ Using `:memory:` without a name will always create a new and separate database i
 
 ### Default Connection
 
-By default we create an (unnamed) **in-memory-database** that lives inside the `duckdb` module.
-Every method of `DuckDBPyConnection` is also available on the `duckdb` module, this connection is what's used by these methods.
+The `duckdb` module has a default connection to an unnamed **in-memory database**.
+Functions such as `duckdb.sql()` and `duckdb.execute()` use the default connection; the first function that needs it creates it. Some module functions differ from connection methods; see [Connection Object and Module]({% link docs/preview/clients/python/overview.md %}#connection-object-and-module).
 
-The special value `:default:` can be used to get this default connection.
-
-### File-Based Connection
-
-If the `database` is a file path, a connection to a persistent database is established.
-If the file does not exist the file will be created (the extension of the file is irrelevant and can be `.db`, `.duckdb` or anything else).
-
-#### `read_only` Connections
-
-If you would like to connect in read-only mode, you can set the `read_only` flag to `True`. If the file does not exist, it is **not** created when connecting in read-only mode.
-Read-only mode is required if multiple Python processes want to access the same database file at the same time.
+The special value `:default:` and the `duckdb.default_connection()` function return the default connection:
 
 ```python
 import duckdb
 
-duckdb.execute("CREATE TABLE tbl AS SELECT 42 a")
+duckdb.execute("CREATE TABLE tbl AS SELECT 42 AS a")
 con = duckdb.connect(":default:")
 con.sql("SELECT * FROM tbl")
 # or
@@ -59,67 +49,111 @@ duckdb.default_connection().sql("SELECT * FROM tbl")
 └───────┘
 ```
 
+To make another connection the default connection, pass it to `duckdb.set_default_connection()`:
+
+```python
+import duckdb
+
+con = duckdb.connect()
+con.execute("CREATE TABLE answer AS SELECT 42 AS a")
+duckdb.set_default_connection(con)
+duckdb.sql("SELECT * FROM answer").fetchall()
+```
+
+```text
+[(42,)]
+```
+
+### File-Based Connection
+
+If the `database` is a file path, a connection to a persistent database is established.
+If the file does not exist the file will be created (the extension of the file is irrelevant and can be `.db`, `.duckdb` or anything else).
+
+#### `read_only` Connections
+
+If you would like to connect in read-only mode, you can set the `read_only` flag to `True`. If the file does not exist, it is **not** created when connecting in read-only mode.
+Read-only mode is required if multiple Python processes want to access the same database file at the same time.
+
+Within one Python process, all connections to a database file must use the same configuration, `read_only` included.
+
 ```python
 import duckdb
 
 # to start an in-memory database
-con = duckdb.connect(database = ":memory:")
+con = duckdb.connect(database=":memory:")
 # to use a database file (not shared between processes)
-con = duckdb.connect(database = "my-db.duckdb", read_only = False)
+con = duckdb.connect(database="my-db.duckdb", read_only=False)
+con.close()
 # to use a database file (shared between processes)
-con = duckdb.connect(database = "my-db.duckdb", read_only = True)
+con = duckdb.connect(database="my-db.duckdb", read_only=True)
+con.close()
 # to explicitly get the default connection
-con = duckdb.connect(database = ":default:")
+con = duckdb.connect(database=":default:")
 ```
 
-You can obtain another handle on an existing connection with the `cursor()` method. Note that this creates another handle on the _same_ connection rather than opening a new connection, so cursors created from one connection cannot run queries at the same time. A single connection is thread-safe but is locked for the duration of each query, effectively serializing database access. See [About `cursor()`]({% link docs/preview/clients/python/overview.md %}#about-cursor) for details.
+You can open another connection to the same database with the `cursor()` method. A cursor has its own transaction and its own session settings, and cursors can run queries at the same time. A single connection runs one call at a time: a call from another thread while it is busy raises a `ResourceInUseException` instead of waiting, so give each thread its own cursor. Closing a connection closes its cursors. See [About `cursor()`]({% link docs/preview/clients/python/overview.md %}#about-cursor) for details.
 
 Connections are closed implicitly when they go out of scope or if they are explicitly closed using `close()`. Once the last connection to a database instance is closed, the database instance is closed as well.
 
 ## Querying
 
-SQL queries can be sent to DuckDB using the `execute()` method of connections. Once a query has been executed, results can be retrieved using the `fetchone` and `fetchall` methods on the connection. `fetchall` will retrieve all results and complete the transaction. `fetchone` will retrieve a single row of results each time that it is invoked until no more results are available. The transaction will only close once `fetchone` is called and there are no more results remaining (the return value will be `None`). As an example, in the case of a query only returning a single row, `fetchone` should be called once to retrieve the results and a second time to close the transaction. Below are some short examples:
+SQL queries can be sent to DuckDB using the `execute()` method of connections. Once a query has been executed, results can be retrieved using the `fetchone`, `fetchmany` and `fetchall` methods on the connection. `fetchone()` returns the next row, or `None` when no rows are left. `fetchmany(size)` returns a list of at most `size` rows, one by default. `fetchall()` returns all remaining rows. `df()` and `fetchnumpy()` return the remaining rows as a pandas DataFrame or as NumPy arrays. Below are some short examples:
 
 ```python
+import duckdb
+
+con = duckdb.connect()
 # create a table
 con.execute("CREATE TABLE items (item VARCHAR, value DECIMAL(10, 2), count INTEGER)")
 # insert two items into the table
 con.execute("INSERT INTO items VALUES ('jeans', 20.0, 1), ('hammer', 42.2, 2)")
+print(con.rowcount)
 
 # retrieve the items again
 con.execute("SELECT * FROM items")
 print(con.fetchall())
-# [('jeans', Decimal('20.00'), 1), ('hammer', Decimal('42.20'), 2)]
 
 # retrieve the items one at a time
 con.execute("SELECT * FROM items")
 print(con.fetchone())
-# ('jeans', Decimal('20.00'), 1)
+print(con.fetchmany(5))
 print(con.fetchone())
-# ('hammer', Decimal('42.20'), 2)
-print(con.fetchone()) # This closes the transaction. Any subsequent calls to .fetchone will return None
-# None
 ```
 
-The `description` property of the connection object contains the column names as per the standard.
+```text
+2
+[('jeans', Decimal('20.00'), 1), ('hammer', Decimal('42.20'), 2)]
+('jeans', Decimal('20.00'), 1)
+[('hammer', Decimal('42.20'), 2)]
+None
+```
 
-### Prepared Statements
+The `description` property of the connection object contains the column names as per the standard. The `rowcount` property holds the number of rows that the last `INSERT`, `UPDATE` or `DELETE` changed, counted over all parameter sets of an `executemany()` call. It is `-1` after a query and after a statement with a `RETURNING` clause.
 
-DuckDB also supports [prepared statements]({% link docs/preview/sql/query_syntax/prepared_statements.md %}) in the API with the `execute` and `executemany` methods. The values may be passed as an additional parameter after a query that contains `?` or `$1` (dollar symbol and a number) placeholders. Using the `?` notation adds the values in the same sequence as passed within the Python parameter. Using the `$` notation allows for values to be reused within the SQL statement based on the number and index of the value found within the Python parameter. Values are converted according to the [conversion rules]({% link docs/preview/clients/python/conversion.md %}#object-conversion-python-object-to-duckdb).
+### Query Parameters
 
-Here are some examples. First, insert a row using a [prepared statement]({% link docs/preview/sql/query_syntax/prepared_statements.md %}):
+Pass parameter values as the second argument to `execute()`. Use `?` with a list in placeholder order, `$1` to reuse a list value or `$name` with a dictionary. Pass values separately from the SQL text. The query then runs as a [prepared statement]({% link docs/preview/sql/query_syntax/prepared_statements.md %}), and the values are converted according to the [conversion rules]({% link docs/preview/clients/python/conversion.md %}#object-conversion-python-object-to-duckdb).
+
+```python
+rows = con.execute(
+    "SELECT item FROM items WHERE value > $minimum",
+    {"minimum": 40},
+).fetchall()
+print(rows)
+```
+
+```text
+[('hammer',)]
+```
+
+Parameter names are not case sensitive: the key `"ABC"` binds `$abc`, so do not pass two keys that differ only in case.
+
+Insert a row with `?` placeholders, and several rows with `executemany()`, which runs the statement once for each list of values:
 
 ```python
 con.execute("INSERT INTO items VALUES (?, ?, ?)", ["laptop", 2000, 1])
+con.executemany("INSERT INTO items VALUES (?, ?, ?)", [["chainsaw", 500, 10], ["iphone", 300, 2]])
 ```
-
-Second, insert several rows using a [prepared statement]({% link docs/preview/sql/query_syntax/prepared_statements.md %}):
-
-```python
-con.executemany("INSERT INTO items VALUES (?, ?, ?)", [["chainsaw", 500, 10], ["iphone", 300, 2]] )
-```
-
-Query the database using a [prepared statement]({% link docs/preview/sql/query_syntax/prepared_statements.md %}):
 
 ```python
 con.execute("SELECT item FROM items WHERE value > ?", [400])
@@ -130,7 +164,7 @@ print(con.fetchall())
 [('laptop',), ('chainsaw',)]
 ```
 
-Query using the `$` notation for a [prepared statement]({% link docs/preview/sql/query_syntax/prepared_statements.md %}) and reused values:
+`$1` stands for the first value of the list, so a value can appear more than once:
 
 ```python
 con.execute("SELECT $1, $1, $2", ["duck", "goose"])
@@ -141,32 +175,61 @@ print(con.fetchall())
 [('duck', 'duck', 'goose')]
 ```
 
-> Warning Do *not* use `executemany` to insert large amounts of data into DuckDB. See the [data ingestion page]({% link docs/preview/clients/python/data_ingestion.md %}) for better options.
+> Warning Do *not* use `executemany` to insert large amounts of data into DuckDB. For rows that Python code produces, use the [appender]({% link docs/preview/clients/python/appender.md %}); see the [data ingestion page]({% link docs/preview/clients/python/data_ingestion.md %}) for other options.
 
-## Named Parameters
+### Open Results
 
-Besides the standard unnamed parameters, like `$1`, `$2` etc., it's also possible to supply named parameters, like `$my_parameter`.
-When using named parameters, you have to provide a dictionary mapping of `str` to value in the `parameters` argument.
-An example use is the following:
+`execute()` starts the statement and returns the connection. A query runs until its first rows are ready, so an error up to that point raises from `execute()`, and an error further into the query raises from the fetch that reaches it. Any other statement, `INSERT ... RETURNING` included, runs to its end inside `execute()`.
+
+The result of a query stays open until a fetch returns no rows, or until `fetchall()`, `df()` or `fetchnumpy()` reads the rest of it. After a partial read with `fetchone()` or `fetchmany()`, these methods return the rows not fetched yet. `con.complete()` runs an open result to its end without reading its rows, and `con.abort()` cancels it, which fails an open transaction when the statement may write. Both are also functions of the `duckdb` module. The next `execute()` replaces an open result. If the replaced result may have side effects then it runs to its end first.
+
+While a result is open, everything that runs a query on the connection raises an error, including reading a relation, `register()` and `create_function()`. Building a relation, the `description` property and `cursor()` still work, so a cursor can run other queries in the meantime.
 
 ```python
-import duckdb
+con.execute("SELECT * FROM items")
+con.sql("SELECT 42").fetchall()
+```
 
-res = duckdb.execute("""
-    SELECT
-        $my_param,
-        $other_param,
-        $also_param
-    """,
-    {
-        "my_param": 5,
-        "other_param": "DuckDB",
-        "also_param": [42]
-    }
-).fetchall()
-print(res)
+```console
+_duckdb.ResourceInUseException: Resource In Use Error: connection has an unfinished result from execute(); call complete() or abort(), or fetch until a fetch returns no rows, before other work on this connection, or use a separate connection from cursor()
+```
+
+```python
+con.complete()
+con.sql("SELECT 42").fetchall()
 ```
 
 ```text
-[(5, 'DuckDB', [42])]
+[(42,)]
+```
+
+### Arrow and Polars Output
+
+A result of `execute()` has no `fetch_arrow_table()`, `fetch_record_batch()`, `arrow()` or `pl()` method. Its `to_arrow_table()` and `to_arrow_reader()` methods copy the rows and emit a `UserWarning`, and that reader does not stream: its first batch arrives after the whole query ran. For Arrow and Polars output, use a [relation]({% link docs/preview/clients/python/relational_api.md %}) instead: `con.sql(query).to_arrow_table()`, `con.sql(query).pl()` or `con.sql(query).to_arrow_reader()`, which streams.
+
+### Transactions
+
+`con.begin()`, `con.commit()` and `con.rollback()` start, commit and roll back a transaction, as the [`BEGIN`, `COMMIT` and `ROLLBACK` statements]({% link docs/preview/sql/statements/transactions.md %}) do. Inside a transaction, any statement run with `execute()` that fails aborts the transaction, including one with a syntax error or one that names a missing table. After that, `commit()` rolls the transaction back without raising an error, and any other statement raises a `TransactionException` until you roll back:
+
+```python
+con.begin()
+con.execute("INSERT INTO items VALUES ('drill', 80, 1)")
+try:
+    con.execute("SELECT * FROM missing_table")
+except duckdb.CatalogException:
+    pass
+con.execute("SELECT count(*) FROM items")
+```
+
+```console
+_duckdb.TransactionException: TransactionContext Error: Current transaction is aborted (please ROLLBACK)
+```
+
+```python
+con.rollback()
+con.execute("SELECT count(*) FROM items").fetchall()
+```
+
+```text
+[(5,)]
 ```

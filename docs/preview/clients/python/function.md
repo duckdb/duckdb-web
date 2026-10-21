@@ -6,37 +6,28 @@ title: Python Function API
 You can create a DuckDB user-defined function (UDF) from a Python function so it can be used in SQL queries.
 Similarly to regular [functions]({% link docs/preview/sql/functions/overview.md %}), they need to have a name, a return type and parameter types.
 
-Here is an example using a Python function that calls a third-party library.
+## Creating Functions
+
+To register a Python UDF, use the `create_function` method from a DuckDB connection:
 
 ```python
 import duckdb
-from duckdb.sqltypes import VARCHAR
-from faker import Faker
 
-def generate_random_name():
-    fake = Faker()
-    return fake.name()
+def add_one(x: int) -> int:
+    return x + 1
 
-duckdb.create_function("random_name", generate_random_name, [], VARCHAR)
-res = duckdb.sql("SELECT random_name()").fetchall()
-print(res)
+con = duckdb.connect()
+con.create_function("add_one", add_one)
+print(con.sql("SELECT add_one(41)").fetchall())
 ```
 
 ```text
-[('Gerald Ashley',)]
+[(42,)]
 ```
 
-## Creating Functions
+UDFs need NumPy. Without the `numpy` package, `create_function` raises `InvalidInputException: 'numpy' is required for this operation, but it wasn't installed`.
 
-To register a Python UDF, use the `create_function` method from a DuckDB connection. Here is the syntax:
-
-```python
-import duckdb
-con = duckdb.connect()
-con.create_function(name, function, parameters, return_type)
-```
-
-The `create_function` method takes the following parameters:
+The signature is `create_function(name, function, parameters=None, return_type=None, *, type=..., null_handling=..., exception_handling=..., side_effects=False)`. The last four parameters are keyword only, and a value they do not accept raises a `TypeError`:
 
 1. `name` A string representing the unique name of the UDF within the connection catalog.
 2. `function` The Python function you wish to register as a UDF.
@@ -44,90 +35,55 @@ The `create_function` method takes the following parameters:
 4. `return_type` Scalar functions return one element per row. This parameter specifies the return type of the function.
 5. `type` (optional): DuckDB supports both native Python types and PyArrow Arrays. By default, `type = 'native'` is assumed, but you can specify `type = 'arrow'` to use PyArrow Arrays. In general, using an Arrow UDF will be much more efficient than native because it will be able to operate in batches.
 6. `null_handling` (optional): By default, `NULL` values are automatically handled as `NULL`-in `NULL`-out. Users can specify a desired behavior for `NULL` values by setting `null_handling = 'special'`.
-7. `exception_handling` (optional): By default, when an exception is thrown from the Python function, it will be re-thrown in Python. Users can disable this behavior, and instead return `NULL`, by setting this parameter to `'return_null'`
+7. `exception_handling` (optional): By default, when an exception is thrown from the Python function, the query fails with an error that names it. Users can disable this behavior, and instead return `NULL`, by setting this parameter to `'return_null'`.
 8. `side_effects` (optional): By default, functions are expected to produce the same result for the same input. If the result of a function is impacted by any type of randomness, `side_effects` must be set to `True`.
+
+A type given as a string, such as `"INTEGER"` or the name of a type created with `CREATE TYPE`, is looked up on the connection that registers the function. While an `execute()` result of the connection is still open, `create_function` raises a `ResourceInUseException`.
 
 To unregister a UDF, you can call the `remove_function` method with the UDF name:
 
 ```python
-con.remove_function(name)
+con.remove_function("add_one")
+```
+
+### Using the Connection from a Function
+
+A UDF cannot use the connection that runs its query: such a call raises a `ResourceInUseException`, and the query fails with `InvalidInputException: Python exception occurred while executing the UDF: ResourceInUseException: Resource In Use Error: code running inside a query cannot use that query's connection; use a separate connection from cursor()`. A cursor of that connection works:
+
+```python
+def lookup(x: int) -> int:
+    cur = con.cursor()
+    try:
+        return cur.execute("SELECT 41 + ?", [x]).fetchone()[0]
+    finally:
+        cur.close()
+
+con.create_function("lookup", lookup)
+print(con.sql("SELECT lookup(1)").fetchall())
+```
+
+```text
+[(42,)]
 ```
 
 ### Using Partial Functions
 
-DuckDB UDFs can also be created with [Python partial functions](https://docs.python.org/3/library/functools.html#functools.partial).
-
-In the below example, we show how a custom logger will return the concatenation of the execution datetime in ISO format, always followed by 
-argument passed at UDF creation and the input parameter provided to the function call:
+DuckDB UDFs can also be created with [Python partial functions](https://docs.python.org/3/library/functools.html#functools.partial). The arguments the partial function fixes are not parameters of the UDF:
 
 ```python
-from datetime import datetime
+from functools import partial
 import duckdb
-import functools
 
+def add(x: int, y: int) -> int:
+    return x + y
 
-def get_datetime_iso_format() -> str:
-    return datetime.now().isoformat()
-
-
-def logger_udf(func, arg1: str, arg2: int) -> str:
-    return ' '.join([func(), arg1, str(arg2)])
-    
-    
 with duckdb.connect() as con:
-    con.sql("select * from range(10) tbl(id)").to_table("example_table")
-    
-    con.create_function(
-        'custom_logger',
-        functools.partial(logger_udf, get_datetime_iso_format, 'logging data')
-    )
-    rel = con.sql("SELECT custom_logger(id) from example_table;")
-    rel.show()
-
-    con.create_function(
-        'another_custom_logger',
-        functools.partial(logger_udf, get_datetime_iso_format, ':')
-    )
-    rel = con.sql("SELECT another_custom_logger(id) from example_table;")
-    rel.show()
+    con.create_function("add_ten", partial(add, 10))
+    print(con.sql("SELECT add_ten(5)").fetchall())
 ```
 
 ```text
-┌───────────────────────────────────────────┐
-│             custom_logger(id)             │
-│                  varchar                  │
-├───────────────────────────────────────────┤
-│ 2025-03-27T12:07:56.811251 logging data 0 │
-│ 2025-03-27T12:07:56.811264 logging data 1 │
-│ 2025-03-27T12:07:56.811266 logging data 2 │
-│ 2025-03-27T12:07:56.811268 logging data 3 │
-│ 2025-03-27T12:07:56.811269 logging data 4 │
-│ 2025-03-27T12:07:56.811270 logging data 5 │
-│ 2025-03-27T12:07:56.811271 logging data 6 │
-│ 2025-03-27T12:07:56.811272 logging data 7 │
-│ 2025-03-27T12:07:56.811274 logging data 8 │
-│ 2025-03-27T12:07:56.811275 logging data 9 │
-├───────────────────────────────────────────┤
-│                  10 rows                  │
-└───────────────────────────────────────────┘
-
-┌────────────────────────────────┐
-│   another_custom_logger(id)    │
-│            varchar             │
-├────────────────────────────────┤
-│ 2025-03-27T12:07:56.812106 : 0 │
-│ 2025-03-27T12:07:56.812116 : 1 │
-│ 2025-03-27T12:07:56.812118 : 2 │
-│ 2025-03-27T12:07:56.812119 : 3 │
-│ 2025-03-27T12:07:56.812121 : 4 │
-│ 2025-03-27T12:07:56.812122 : 5 │
-│ 2025-03-27T12:07:56.812123 : 6 │
-│ 2025-03-27T12:07:56.812124 : 7 │
-│ 2025-03-27T12:07:56.812126 : 8 │
-│ 2025-03-27T12:07:56.812127 : 9 │
-├────────────────────────────────┤
-│            10 rows             │
-└────────────────────────────────┘
+[(15,)]
 ```
 
 ## Type Annotation
@@ -155,7 +111,7 @@ print(duckdb.sql("SELECT my_func(42)"))
 └─────────────┘
 ```
 
-If only the parameter list types can be inferred, you'll need to pass in `None` as `parameters`.
+When `parameters` is left out, the parameter types come from the annotations, and a parameter without an annotation accepts any type. The return type must be annotated or given as `return_type`; otherwise `create_function` raises `InvalidInputException: Could not infer the return type, please set it explicitly`.
 
 ## `NULL` Handling
 
@@ -187,8 +143,8 @@ from duckdb.sqltypes import BIGINT
 def dont_intercept_null(x):
     return 5
 
-duckdb.create_function("dont_intercept", dont_intercept_null, [BIGINT], BIGINT, null_handling="special")
-res = duckdb.sql("SELECT dont_intercept(NULL)").fetchall()
+duckdb.create_function("dont_intercept_special", dont_intercept_null, [BIGINT], BIGINT, null_handling="special")
+res = duckdb.sql("SELECT dont_intercept_special(NULL)").fetchall()
 print(res)
 ```
 
@@ -198,7 +154,6 @@ print(res)
 
 > Always use `null_handling="special"` when the function can return NULL.
 
-
 ```python
 import duckdb
 from duckdb.sqltypes import VARCHAR
@@ -207,7 +162,7 @@ from duckdb.sqltypes import VARCHAR
 def return_str_or_none(x: str) -> str | None:
     if not x:
         return None
-    
+
     return x
 
 duckdb.create_function(
@@ -227,7 +182,7 @@ print(res)
 
 ## Exception Handling
 
-By default, when an exception is thrown from the Python function, we'll forward (re-throw) the exception.
+By default, when an exception is thrown from the Python function, the query fails with a `duckdb.InvalidInputException` that names the Python exception.
 If you want to disable this behavior, and instead return `NULL`, you'll need to set this parameter to `"return_null"`.
 
 ```python
@@ -248,18 +203,12 @@ res = duckdb.sql("SELECT doesnt_throw()").fetchall()
 print(res)
 ```
 
-```console
-Invalid Input Error:
-Python exception occurred while executing the UDF: ValueError: ERROR
-
-At:
-  ...(5): will_throw
-  ...(9): <module>
-```
-
 ```text
+Invalid Input Error: Python exception occurred while executing the UDF: ValueError: ERROR
 [(None,)]
 ```
+
+`"return_null"` turns an `Exception` other than `MemoryError` into `NULL`. A `MemoryError` still fails the query, and so does an exception that does not derive from `Exception`, such as `KeyboardInterrupt`.
 
 ## Side Effects
 
@@ -312,7 +261,7 @@ Currently, two function types are supported, `native` (default) and `arrow`.
 
 If the function is expected to receive arrow arrays, set the `type` parameter to `'arrow'`.
 
-This will let the system know to provide arrow arrays of up to `STANDARD_VECTOR_SIZE` tuples to the function, and also expect an array of the same amount of tuples to be returned from the function.
+This will let the system know to provide each argument as a `pyarrow.ChunkedArray` of at most 2048 rows to the function, and also expect an array of the same amount of rows to be returned from the function.
 
 In general, using an Arrow UDF will be much more efficient than native because it will be able to operate in batches.
 
@@ -368,6 +317,7 @@ duckdb.create_function(
     parameters=[],
     return_type=DATE,
     type="native",
+    side_effects=True,
 )
 res = duckdb.sql("SELECT random_date()").fetchall()
 print(res)
