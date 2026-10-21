@@ -22,8 +22,8 @@ The [`bundled` feature]({% link docs/2.0/clients/rust/overview.md %}#feature-fla
 Set `DUCKDB_LIB_DIR` to the directory containing the library, and `DUCKDB_INCLUDE_DIR` to the directory containing `duckdb.h` if it is elsewhere. For example, using a prebuilt library from a [DuckDB release](https://github.com/duckdb/duckdb/releases):
 
 ```bash
-wget https://github.com/duckdb/duckdb/releases/download/v{{ site.current_duckdb_rust_version }}/libduckdb-osx-universal.zip
-unzip libduckdb-osx-universal.zip -d libduckdb
+wget https://github.com/duckdb/duckdb/releases/download/v{{ site.next_major_duckdb_version }}/duckdb-shared-libs-osx-universal.tar.gz
+mkdir libduckdb && tar -xzf duckdb-shared-libs-osx-universal.tar.gz -C libduckdb
 
 export DUCKDB_LIB_DIR=$PWD/libduckdb
 export DUCKDB_INCLUDE_DIR=$DUCKDB_LIB_DIR
@@ -31,7 +31,7 @@ export DYLD_FALLBACK_LIBRARY_PATH=$DUCKDB_LIB_DIR   # LD_LIBRARY_PATH on Linux
 cargo build
 ```
 
-On Linux, use the matching `libduckdb-linux-amd64.zip` or `libduckdb-linux-arm64.zip` archive and set `LD_LIBRARY_PATH` instead.
+On Linux, use the matching `duckdb-shared-libs-linux-amd64.tar.gz` or `duckdb-shared-libs-linux-arm64.tar.gz` archive and set `LD_LIBRARY_PATH` instead.
 
 ### Let the Build Download a Library
 
