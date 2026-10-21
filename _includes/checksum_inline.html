@@ -1,27 +1,33 @@
 {%- comment -%}
-Renders a checksum block (div.shainfo) for a given artifact if available in site.data.checksums_[release_type]
+Renders a checksum block (div.shainfo) for a given artifact if available in site.data.checksums_[short_version] (e.g., checksums_15)
 Usage examples:
   - Env + Platform + Arch:
-    {% include checksum_inline.html environment="cli" platform="windows" architecture="x86_64" %}
+    {% include checksum_inline.html environment="cli" platform="windows" architecture="x86_64" version="current" %}
   - Env + Platform (arch optional, falls back x86_64 → arm64 → first available):
-    {% include checksum_inline.html environment="odbc" platform="macos" %}
+    {% include checksum_inline.html environment="odbc" platform="macos" version="lts" %}
   - Env-only (for artifacts that are not platform-specific, e.g. java):
-    {% include checksum_inline.html environment="java" %}
+    {% include checksum_inline.html environment="java" version="next_major" %}
 Notes:
-- Algorithm selection follows site.data.checksums_[release_type].preferred_algorithms (e.g., ["sha512","sha256"]); falls back to any available if none match.
+- version is "current", "lts" or "next_major" (resolved via the site's *_short_duckdb_version settings), or an explicit short version such as "1.5".
+- Algorithm selection follows site.data.checksums_[short_version].preferred_algorithms (e.g., ["sha512","sha256"]); falls back to any available if none match.
 - Renders nothing if no checksum is found.
 {%- endcomment -%}
 
 {%- assign env = include.environment -%}
 {%- assign plat = include.platform -%}
 {%- assign arch = include.architecture -%}
-{%- if include.version == "1.4" -%}
-  {%- assign checksums_data = site.data.checksums_14 -%}
-{%- elsif include.version == "1.5" -%}
-  {%- assign checksums_data = site.data.checksums_15 -%}
+{%- if include.version == "current" -%}
+  {%- assign short_version = site.current_short_duckdb_version -%}
+{%- elsif include.version == "lts" -%}
+  {%- assign short_version = site.lts_short_duckdb_version -%}
 {%- elsif include.version == "next_major" -%}
-  {%- assign checksums_data = site.data.checksums_20 -%}
+  {%- assign short_version = site.next_major_short_duckdb_version -%}
 {%- else -%}
+  {%- assign short_version = include.version -%}
+{%- endif -%}
+{%- assign checksums_file = short_version | remove: "." | prepend: "checksums_" -%}
+{%- assign checksums_data = site.data[checksums_file] -%}
+{%- if checksums_data == nil -%}
   Error: Release type (current / LTS / next major) not available
 {%- endif -%}
 {%- assign root = checksums_data.artifacts -%}
