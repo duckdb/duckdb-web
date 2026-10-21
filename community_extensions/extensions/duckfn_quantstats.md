@@ -18,8 +18,8 @@ extension:
 
 repo:
   github: shijianjs/duckfn-quantstats
-  ref: d6af371de1204cf2b25d298be494e9b59143a511
-  ref_next: b432271e1a10155756015a5e77d0181437b0b8bd
+  variegata: d6af371de1204cf2b25d298be494e9b59143a511
+  ref: b432271e1a10155756015a5e77d0181437b0b8bd
 
 docs:
   hello_world: |
@@ -108,11 +108,26 @@ docs:
 
 extension_star_count: 0
 extension_star_count_pretty: 0
-extension_download_count: 745
-extension_download_count_pretty: 745
+extension_download_count: 1440
+extension_download_count_pretty: 1.4k
 image: '/images/community_extensions/social_preview/preview_community_extension_duckfn_quantstats.png'
 layout: community_extension_doc
 ---
+### Compatibility Matrix
+
+This table covers all DuckDB releases that have not reached [end-of-life](https://duckdb.org/release_calendar), including LTS releases, and shows the 2 most recent patch releases of each. Older patch releases are not listed, but the extension may be available for them as well.
+
+<div class="extension_compatibility_table"></div>
+
+| Platform | 1.4.4 | 1.4.5 | 1.5.5 | 1.5.6 |
+| :--- | :---: | :---: | :---: | :---: |
+| Linux AMD64 | ❌ | ❌ | ✅ | ✅ |
+| Linux ARM64 | ❌ | ❌ | ✅ | ✅ |
+| macOS AMD64 | ❌ | ❌ | ✅ | ✅ |
+| macOS ARM64 | ❌ | ❌ | ✅ | ✅ |
+| Windows AMD64 | ❌ | ❌ | ✅ | ✅ |
+| Windows ARM64 | ❌ | ❌ | ❌ | ❌ |
+| WebAssembly | ❌ | ❌ | ✅ | ✅ |
 
 ### Installing and Loading
 ```sql
@@ -130,7 +145,6 @@ LOAD {{ page.extension.name }};
 ### About {{ page.extension.name }}
 {{ page.docs.extended_description }}
 {% endif %}
-
 ### Added Functions
 
 <div class="extension_functions_table"></div>

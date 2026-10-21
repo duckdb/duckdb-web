@@ -14,6 +14,8 @@ docs:
 
     The easiest way to get started is Azure CLI auth (`az login`) with `SET pbi_scanner_auth_mode = 'azure_cli'`, but Azure CLI is not required.
 
+    `connection_string` and `dax_text` are positional. Named options use `:=`: `auth_mode`, `access_token`, `secret_name`, `tenant_id`, `client_id`, `client_secret`, `effective_user_name`, `timeout_ms`, `schema_probe_rows`, `normalize_dax_column_names`.
+
     You may also use the DuckDB `azure` extension to create an Azure secret. More details and examples are in the [pbi_scanner repository](https://github.com/crazy-treyn/pbi_scanner).
 
   hello_world: |
@@ -24,30 +26,46 @@ docs:
     SELECT *
     FROM dax_query(
         'Data Source=powerbi://api.powerbi.com/v1.0/myorg/Example%20Workspace;Initial Catalog=example_semantic_model;',
-        'EVALUATE TOPN(500, FactSales)'
+        'EVALUATE ROW("probe_ok", 1)'
     );
 
 extension:
   name: pbi_scanner
   description: DuckDB extension for querying Power BI Semantic Models with DAX.
-  version: '0.0.5'
+  version: '0.0.6'
   language: C++
   build: cmake
   license: MIT
   excluded_platforms: "wasm_threads;windows_amd64_mingw;osx_amd64"
   maintainers:
     - crazy-treyn
+
 repo:
   github: crazy-treyn/pbi_scanner
-  ref: f9889e854a0f0770dc8a06f30db655f961ece6e5
+  ref: 2c6ad65522d7e0cde19b701ef7895a4c210a5910
 
 extension_star_count: 16
 extension_star_count_pretty: 16
-extension_download_count: 885
-extension_download_count_pretty: 885
+extension_download_count: 1597
+extension_download_count_pretty: 1.6k
 image: '/images/community_extensions/social_preview/preview_community_extension_pbi_scanner.png'
 layout: community_extension_doc
 ---
+### Compatibility Matrix
+
+This table covers all DuckDB releases that have not reached [end-of-life](https://duckdb.org/release_calendar), including LTS releases, and shows the 2 most recent patch releases of each. Older patch releases are not listed, but the extension may be available for them as well.
+
+<div class="extension_compatibility_table"></div>
+
+| Platform | 1.4.4 | 1.4.5 | 1.5.5 | 1.5.6 |
+| :--- | :---: | :---: | :---: | :---: |
+| Linux AMD64 | ❌ | ❌ | ✅ | ✅ |
+| Linux ARM64 | ❌ | ❌ | ✅ | ✅ |
+| macOS AMD64 | ❌ | ❌ | ❌ | ❌ |
+| macOS ARM64 | ❌ | ❌ | ✅ | ✅ |
+| Windows AMD64 | ❌ | ❌ | ✅ | ✅ |
+| Windows ARM64 | ❌ | ❌ | ❌ | ❌ |
+| WebAssembly | ❌ | ❌ | ✅ | ✅ |
 
 ### Installing and Loading
 ```sql
@@ -65,7 +83,6 @@ LOAD {{ page.extension.name }};
 ### About {{ page.extension.name }}
 {{ page.docs.extended_description }}
 {% endif %}
-
 ### Added Functions
 
 <div class="extension_functions_table"></div>

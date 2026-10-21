@@ -8,7 +8,7 @@ excerpt: |
 extension:
   name: mssql_ducklake
   description: "DuckLake with its catalog in Microsoft SQL Server or Azure SQL - embedded DuckLake, native TDS through the mssql extension."
-  version: "0.1.2"
+  version: "0.2.0"
   language: "C++"
   build: "cmake"
   licence: "MIT"
@@ -26,33 +26,52 @@ extension:
 
 repo:
   github: "hugr-lab/mssql-ducklake"
-  ref: "93a676d05098a6fc1289070adfbfcd96ee8c6dfc"
+  # DuckDB 2.0: main of hugr-lab/mssql-ducklake on the v2.0-cyanoptera line, to be replaced by the
+  # v0.2.0 release commit once DuckDB v2.0.0 is out. A SHA rather than a tag name.
+  ref: "04b9dd65e5b587f128db0a214527d5adadb07a15"
+  # DuckDB 1.5.6: v0.1.2, the commit ref used to point at.
+  variegata: "93a676d05098a6fc1289070adfbfcd96ee8c6dfc"
 
 docs:
   hello_world: |
     INSTALL mssql FROM community;
     INSTALL mssql_ducklake FROM community;
     LOAD mssql_ducklake;
-    ATTACH 'ducklake:mssql:Server=localhost,1433;Database=lake_meta;User Id=sa;Password=...' AS lake (DATA_PATH 's3://bucket/lake/');
+    ATTACH 'ducklake:mssql:Server=localhost,1433;Database=lake_meta;User Id=sa;Password=...;TrustServerCertificate=yes' AS lake (DATA_PATH 's3://bucket/lake/');
     CREATE TABLE lake.t AS SELECT range AS i FROM range(100);
     SELECT count(*) FROM lake.t;
 
   extended_description: |
-    Runs [DuckLake](https://ducklake.select) with its **catalog in Microsoft SQL Server or Azure SQL**. The extension embeds the complete, unmodified DuckLake source at a pinned release and adds a SQL Server metadata manager beside DuckLake's built-in PostgreSQL and SQLite ones; it talks to the server through the mssql extension (native TDS, no ODBC), which must be installed too. Everything DuckLake does - snapshots, time travel, schema evolution, data inlining, partitioning, the maintenance functions, `ducklake:postgres:` catalogs as well - works as in the stock extension; the data files live wherever DuckLake puts them.
+    Runs [DuckLake](https://ducklake.select) with its **catalog in Microsoft SQL Server or Azure SQL**. The extension embeds the complete, unmodified DuckLake source at a pinned commit (catalog format 1.1 on DuckDB 2.0) and adds a SQL Server metadata manager beside DuckLake's built-in PostgreSQL and SQLite ones; it talks to the server through the mssql extension (native TDS, no ODBC), which must be installed too. Everything DuckLake does - snapshots, time travel, schema evolution, data inlining, partitioning, the maintenance functions, `ducklake:postgres:` catalogs as well - works as in the stock extension; the data files live wherever DuckLake puts them.
 
-    Documentation: https://hugr-lab.github.io/mssql-ducklake/
+    Documentation: https://hugr-lab.com/docs/mssql-ducklake/
 
-    **Mutually exclusive with the stock `ducklake` extension**: both provide the same functions and the same `ducklake:` attach prefix - load one or the other, and load `mssql_ducklake` before the first `ATTACH 'ducklake:...'`. Needs the mssql extension v0.2.5 or newer, and a SQL Server 2019+ or Azure SQL database (a UTF-8 collation).
+    **Mutually exclusive with the stock `ducklake` extension**: both provide the same functions and the same `ducklake:` attach prefix - load one or the other, and load `mssql_ducklake` before the first `ATTACH 'ducklake:...'`. Needs the mssql extension (v0.3.0 or newer on DuckDB 2.0, v0.2.5 or newer on 1.5.6), and a SQL Server 2019+ or Azure SQL database (a UTF-8 collation).
 
-    Experimental. The catalog is shaped for SQL Server on creation (primary keys, UTF-8 binary collation, indexes, forced parameterization), commits go to the server as T-SQL, and the 1000-table benchmark runs at 1.5x of the PostgreSQL backend's time with commits at parity; what is not there yet is on the limitations page.
+    Experimental. The catalog is shaped for SQL Server on creation (primary keys, UTF-8 binary collation, indexes, forced parameterization), a commit goes to the server as one T-SQL batch, and the catalog loads in one statement and is kept per ATTACH. On equal Azure VMs the 500-table benchmark takes 0.63x of the PostgreSQL backend's time; what is not there yet is on the limitations page.
 
 extension_star_count: 12
 extension_star_count_pretty: 12
-extension_download_count: 748
-extension_download_count_pretty: 748
+extension_download_count: 1487
+extension_download_count_pretty: 1.5k
 image: '/images/community_extensions/social_preview/preview_community_extension_mssql_ducklake.png'
 layout: community_extension_doc
 ---
+### Compatibility Matrix
+
+This table covers all DuckDB releases that have not reached [end-of-life](https://duckdb.org/release_calendar), including LTS releases, and shows the 2 most recent patch releases of each. Older patch releases are not listed, but the extension may be available for them as well.
+
+<div class="extension_compatibility_table"></div>
+
+| Platform | 1.4.4 | 1.4.5 | 1.5.5 | 1.5.6 |
+| :--- | :---: | :---: | :---: | :---: |
+| Linux AMD64 | ❌ | ❌ | ✅ | ✅ |
+| Linux ARM64 | ❌ | ❌ | ✅ | ✅ |
+| macOS AMD64 | ❌ | ❌ | ✅ | ✅ |
+| macOS ARM64 | ❌ | ❌ | ✅ | ✅ |
+| Windows AMD64 | ❌ | ❌ | ✅ | ✅ |
+| Windows ARM64 | ❌ | ❌ | ❌ | ❌ |
+| WebAssembly | ❌ | ❌ | ✅ | ✅ |
 
 ### Installing and Loading
 ```sql
@@ -70,7 +89,6 @@ LOAD {{ page.extension.name }};
 ### About {{ page.extension.name }}
 {{ page.docs.extended_description }}
 {% endif %}
-
 ### Added Functions
 
 <div class="extension_functions_table"></div>

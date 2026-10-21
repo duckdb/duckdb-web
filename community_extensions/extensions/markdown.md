@@ -22,6 +22,11 @@ repo:
   # v1.9.7 (was v1.5.4 when this note was written, then v1.5.5).
   andium: c9e1a4d3b98a814c86295ecb2ed760be286242ba
   ref: 6fc7013de640191ea5248897df3b60a7bc07db67
+  # variegata pins the v1.5.6 track. scripts/build.py sends a v1.5.6 build here when
+  # present and to `ref` otherwise, and unlike ref_next it has no skip branch -- so
+  # once `ref` is 2.0-only a v1.5.6 build would fail rather than be skipped. Equal to
+  # `ref` while both lines build; advance only to a commit v1.5.6 can still build.
+  variegata: 6fc7013de640191ea5248897df3b60a7bc07db67
   # ref_next is what makes the PRERELEASE leg actually build against DuckDB
   # v2.0. Without it build_next.yml prints "Skipping prerelease validation" and
   # the PR passes green having verified nothing on that line. A STALE ref_next is
@@ -126,11 +131,26 @@ docs:
 
 extension_star_count: 32
 extension_star_count_pretty: 32
-extension_download_count: 2091
-extension_download_count_pretty: 2.1k
+extension_download_count: 3222
+extension_download_count_pretty: 3.2k
 image: '/images/community_extensions/social_preview/preview_community_extension_markdown.png'
 layout: community_extension_doc
 ---
+### Compatibility Matrix
+
+This table covers all DuckDB releases that have not reached [end-of-life](https://duckdb.org/release_calendar), including LTS releases, and shows the 2 most recent patch releases of each. Older patch releases are not listed, but the extension may be available for them as well.
+
+<div class="extension_compatibility_table"></div>
+
+| Platform | 1.4.4 | 1.4.5 | 1.5.5 | 1.5.6 |
+| :--- | :---: | :---: | :---: | :---: |
+| Linux AMD64 | ✅ | ❌ | ✅ | ✅ |
+| Linux ARM64 | ✅ | ❌ | ✅ | ✅ |
+| macOS AMD64 | ✅ | ❌ | ✅ | ✅ |
+| macOS ARM64 | ✅ | ❌ | ✅ | ✅ |
+| Windows AMD64 | ✅ | ❌ | ✅ | ✅ |
+| Windows ARM64 | ❌ | ❌ | ❌ | ❌ |
+| WebAssembly | ✅ | ❌ | ✅ | ✅ |
 
 ### Installing and Loading
 ```sql
@@ -148,7 +168,6 @@ LOAD {{ page.extension.name }};
 ### About {{ page.extension.name }}
 {{ page.docs.extended_description }}
 {% endif %}
-
 ### Added Functions
 
 <div class="extension_functions_table"></div>

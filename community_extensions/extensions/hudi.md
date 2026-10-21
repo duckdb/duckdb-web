@@ -8,7 +8,7 @@ excerpt: |
 extension:
   name: hudi
   description: Query Apache Hudi COW and MOR tables directly in DuckDB — full scans, time-travel (as_of), incremental windows, and table metadata — powered by the Rust hudi-rs kernel.
-  version: 0.2.1
+  version: 0.2.2
   language: Rust
   build: cmake
   license: MIT
@@ -20,6 +20,7 @@ extension:
 repo:
   github: alitrack/duckdb-hudi
   ref: ea166bd3b7fc07bcaf3356880da73e864c5f05e9
+  ref_next: ae57dbf54dad2a3faadcfe74e489cb7498aec18e
 
 docs:
   hello_world: |
@@ -70,11 +71,26 @@ docs:
 
 extension_star_count: 3
 extension_star_count_pretty: 3
-extension_download_count: 452
-extension_download_count_pretty: 452
+extension_download_count: 783
+extension_download_count_pretty: 783
 image: '/images/community_extensions/social_preview/preview_community_extension_hudi.png'
 layout: community_extension_doc
 ---
+### Compatibility Matrix
+
+This table covers all DuckDB releases that have not reached [end-of-life](https://duckdb.org/release_calendar), including LTS releases, and shows the 2 most recent patch releases of each. Older patch releases are not listed, but the extension may be available for them as well.
+
+<div class="extension_compatibility_table"></div>
+
+| Platform | 1.4.4 | 1.4.5 | 1.5.5 | 1.5.6 |
+| :--- | :---: | :---: | :---: | :---: |
+| Linux AMD64 | ❌ | ❌ | ❌ | ✅ |
+| Linux ARM64 | ❌ | ❌ | ❌ | ✅ |
+| macOS AMD64 | ❌ | ❌ | ❌ | ✅ |
+| macOS ARM64 | ❌ | ❌ | ❌ | ✅ |
+| Windows AMD64 | ❌ | ❌ | ❌ | ✅ |
+| Windows ARM64 | ❌ | ❌ | ❌ | ❌ |
+| WebAssembly | ❌ | ❌ | ❌ | ❌ |
 
 ### Installing and Loading
 ```sql
@@ -92,7 +108,6 @@ LOAD {{ page.extension.name }};
 ### About {{ page.extension.name }}
 {{ page.docs.extended_description }}
 {% endif %}
-
 ### Added Functions
 
 <div class="extension_functions_table"></div>

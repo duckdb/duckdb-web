@@ -8,7 +8,7 @@ excerpt: |
 extension:
   name: scalarfs
   description: A collection of virtual filesystems for working with scalars
-  version: 1.6.2
+  version: 1.6.3
   language: C++
   build: cmake
   license: MIT
@@ -17,14 +17,26 @@ extension:
 repo:
   github: teaguesterling/duckdb_scalarfs
   andium: 68faa6c72054123a6c6521dd41c12f929431da50
-  ref: 6fc4d68397c521e1fda56bd164ce4f2f3aabda5c
-  # ref_next omitted (skips the v2.0-cyanoptera prerelease leg). scalarfs is clean
-  # of family C (0 named_parameters) and builds against duckdb main, but v2.0-
-  # cyanoptera removed QueryResult::GetValue, which pathmacro_filesystem.cpp uses
-  # (cyanoptera build error at pathmacro_filesystem.cpp:147). That is a separate
-  # v2.0 fix, out of scope for the v1.5.6 restoration; the prerelease leg is
-  # deploy:false and never publishes. Restore ref_next once the v2.0 GetValue
-  # change is handled (after v2.0.0 tags).
+  ref: c5f66ec884e6070d7a9abd560ae24369b2e96d5e
+  # variegata pins the v1.5.6 track. scripts/build.py sends a v1.5.6 build here when
+  # present and to `ref` otherwise, and unlike ref_next it has no skip branch -- so
+  # once `ref` is 2.0-only a v1.5.6 build would fail rather than be skipped. Equal to
+  # `ref` while both lines build; advance only to a commit v1.5.6 can still build.
+  variegata: c5f66ec884e6070d7a9abd560ae24369b2e96d5e
+  # ref_next RESTORED, on the condition the 1.6.2 comment set for it. It was omitted
+  # there deliberately: v2.0 removed QueryResult::GetValue and pathmacro_filesystem.cpp
+  # :147 used it, so the prerelease leg could only have gone red. v1.6.3 fixes exactly
+  # that -- the row is read through Fetch() + DataChunk::GetValue, which exist on BOTH
+  # lines, so it needs no version probe -- and the condition is now met.
+  #
+  # Verified at this commit on the 2.0 line with tests EXECUTED, not merely compiled:
+  #   ran tests: 27 passed, 0 skipped
+  # on linux_amd64, windows_amd64, windows_amd64_mingw and osx_arm64, taken from the
+  # full-matrix push run on main rather than a reduced PR leg (a PR builds three arches).
+  #
+  # A STALE ref_next is worse than an absent one: it validates the PREVIOUS release
+  # while reporting green, so it must never lag ref.
+  ref_next: c5f66ec884e6070d7a9abd560ae24369b2e96d5e
 docs:
   hello_world: |
     LOAD scalarfs;
@@ -93,11 +105,26 @@ docs:
 
 extension_star_count: 10
 extension_star_count_pretty: 10
-extension_download_count: 971
-extension_download_count_pretty: 971
+extension_download_count: 2137
+extension_download_count_pretty: 2.1k
 image: '/images/community_extensions/social_preview/preview_community_extension_scalarfs.png'
 layout: community_extension_doc
 ---
+### Compatibility Matrix
+
+This table covers all DuckDB releases that have not reached [end-of-life](https://duckdb.org/release_calendar), including LTS releases, and shows the 2 most recent patch releases of each. Older patch releases are not listed, but the extension may be available for them as well.
+
+<div class="extension_compatibility_table"></div>
+
+| Platform | 1.4.4 | 1.4.5 | 1.5.5 | 1.5.6 |
+| :--- | :---: | :---: | :---: | :---: |
+| Linux AMD64 | ✅ | ❌ | ✅ | ✅ |
+| Linux ARM64 | ✅ | ❌ | ✅ | ✅ |
+| macOS AMD64 | ✅ | ❌ | ✅ | ✅ |
+| macOS ARM64 | ✅ | ❌ | ✅ | ✅ |
+| Windows AMD64 | ✅ | ❌ | ✅ | ✅ |
+| Windows ARM64 | ❌ | ❌ | ❌ | ❌ |
+| WebAssembly | ✅ | ❌ | ✅ | ✅ |
 
 ### Installing and Loading
 ```sql
@@ -115,7 +142,6 @@ LOAD {{ page.extension.name }};
 ### About {{ page.extension.name }}
 {{ page.docs.extended_description }}
 {% endif %}
-
 ### Added Functions
 
 <div class="extension_functions_table"></div>
