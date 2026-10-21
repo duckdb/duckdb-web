@@ -12,7 +12,7 @@ title: ODBC API Overview
 
 > Installation To use the DuckDB ODBC client, visit the [ODBC installation page]({% link install/index.html %}?environment=odbc).
 >
-> The latest stable version of the DuckDB ODBC client is {% if site.current_duckdb_odbc_short_version != "" %}{{ site.current_duckdb_odbc_short_version }}{% else %}{{ site.lts_duckdb_odbc_short_version }}{% endif %}.
+> The latest stable version of the DuckDB ODBC client is {% if site.next_major_duckdb_odbc_short_version != "" %}{{ site.next_major_duckdb_odbc_short_version }}{% else %}{{ site.current_duckdb_odbc_short_version }}{% endif %}.
 
 > This page describes the DuckDB ODBC driver, which lets other applications connect _to DuckDB_. To connect _from DuckDB to other databases_ over ODBC, use the [`odbc` extension]({% link docs/2.0/core_extensions/odbc/overview.md %}).
 
