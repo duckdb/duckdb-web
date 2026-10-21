@@ -154,7 +154,7 @@ Each entry in the search path is a schema. An entry may be qualified with a cata
 
 > New Asynchronous I/O, along with the settings that tune it, was introduced in DuckDB 2.0.
 
-A few settings that tune asynchronous I/O do not appear in the reference list below. The `async_threads` and `read_ahead_depth` settings control the size of the asynchronous thread pool and the read-ahead budget used when reading from object storage and HTTP servers. They are documented on the [I/O page]({% link docs/2.0/data/io.md %}), together with the related `http_client_pool_capacity` setting.
+The `async_threads` and `read_ahead_depth` settings control the size of the asynchronous thread pool and the read-ahead budget used when reading from object storage and HTTP servers. They are listed in the [reference below](#configuration-reference) and documented in more detail on the [I/O page]({% link docs/2.0/data/io.md %}), together with the related `http_client_pool_capacity` setting.
 
 ## Configuration Reference
 
@@ -189,7 +189,7 @@ Configuration options come with different default [scopes]({% link docs/2.0/sql/
 | `arrow_output_list_view` | Whether the export to the Arrow format should use ListView as the physical layout for LIST columns. | `BOOLEAN` | `false` |
 | `arrow_output_version` | Whether strings should be produced by DuckDB in Utf8View format instead of Utf8. | `VARCHAR` | `1.0` |
 | `asof_loop_join_threshold` | The maximum number of rows we need on the left side of an ASOF join to use a nested loop join. | `UBIGINT` | `64` |
-| `async_threads` | The number of total async threads used by the system for tasks like I/O. | `BIGINT` | `72` |
+| `async_threads` | The number of total async threads used by the system for tasks like I/O. | `BIGINT` | 4 × # CPU cores (max. 256) |
 | `auto_checkpoint_skip_wal_threshold` | The estimated WAL write size at which point we will skip writing to the WAL and only checkpoint. Skipping writing to the WAL means concurrent commits are blocked while the checkpoint is happening. | `UBIGINT` | `100000` |
 | `auto_fallback_to_full_download` | Allows automatically falling back to full file downloads when possible. | `BOOLEAN` | `true` |
 | `autoinstall_extension_repository` | Overrides the custom endpoint for extension installation on autoloading. Falls back to custom_extension_repository, if not specified. | `VARCHAR` |  |
@@ -256,7 +256,7 @@ Configuration options come with different default [scopes]({% link docs/2.0/sql/
 | `fsync_mode` | How to synchronize database file changes to stable storage (`STANDARD`, NONE or FULL). NONE may cause database corruption after an operating system or hardware crash. FULL uses fullfsync on macOS. | `VARCHAR` | `STANDARD` |
 | `geometry_minimum_shredding_size` | Minimum size of a row group to enable GEOMETRY shredding. Set to -1 to disable shredding entirely. Defaults to 1/4th of a row group. | `BIGINT` | `30000` |
 | `home_directory` | Sets the home directory of the database instance. | `VARCHAR` |  |
-| `http_client_pool_capacity` | HTTP client pool capacity derived from CPU and async thread counts unless explicitly set | `BIGINT` | `72` |
+| `http_client_pool_capacity` | HTTP client pool capacity derived from CPU and async thread counts unless explicitly set | `BIGINT` | Derived automatically (max. 256) |
 | `http_keep_alive` | Keep alive connections. Setting this to false can help when running into connection failures | `BOOLEAN` | `true` |
 | `http_proxy_password` | The password for the HTTP proxy. | `VARCHAR` |  |
 | `http_proxy_username` | The username for the HTTP proxy. | `VARCHAR` |  |

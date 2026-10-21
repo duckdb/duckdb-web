@@ -10,6 +10,8 @@ excerpt: "DuckDB v2.0 is coming this fall. In this post, we preview its headline
 tag: release
 ---
 
+> Update DuckDB v2.0.0 was released on October 21, 2026. Some details changed since this preview; see the [release announcement]({% post_url 2026-10-21-announcing-duckdb-200 %}) and the [migration guide]({% link docs/2.0/operations_manual/migration.md %}).
+
 DuckDB v2.0 will be named “Cinnamon Teal” after the [cinnamon teal](https://en.wikipedia.org/wiki/Cinnamon_teal) *(Spatula cyanoptera),* a strikingly reddish-brown duck found in the western Americas.
 
 A major version bump is not something we do lightly, and it is not just ceremony: v2.0 ships a new SQL parser, a new default storage format, a reworked C API, and a small number of carefully chosen breaking changes. But above all, it is a feature release, built from over 10,000 commits since we released v1.5 in March. Where last year was the year of the lakehouse, this release kicks off the year of DuckDB as a server. We previewed many of these features in the [“State of the Duck” talk at DuckCon #7](https://www.youtube.com/watch?v=iFPKNQu0FtE), if you prefer to watch instead of read.
@@ -18,7 +20,7 @@ DuckDB is moving rather quickly, and we can only cover a small fraction of the c
 
 ## 1. DuckDB as a Server: Quack and `CONNECT`
 
-DuckDB has been an in-process database since day one. But people have asked us – very persistently – for a client/server mode, and we have finally caved. The [`quack` extension](https://github.com/duckdb/duckdb-quack) implements DuckDB's native protocol for talking to other DuckDBs. It was [released as a preview]({% post_url 2026-05-12-quack-remote-protocol %}) shortly before DuckCon #7, graduates to stable in v2.0, and it is a big part of where DuckDB is headed: any DuckDB process can serve its databases over the network, and any other DuckDB can attach to it and route queries there using the new `CONNECT` statement. For example:
+DuckDB has been an in-process database since day one. But people have asked us – very persistently – for a client/server mode, and we have finally caved. The [`quack` extension](https://github.com/duckdb/duckdb-quack) implements DuckDB's native protocol for talking to other DuckDBs. It was [released as a preview]({% post_url 2026-05-12-quack-remote-protocol %}) shortly before DuckCon #7, and it is a big part of where DuckDB is headed: any DuckDB process can serve its databases over the network, and any other DuckDB can attach to it and route queries there using the new `CONNECT` statement. For example:
 
 <!-- markdownlint-disable MD001 -->
 
@@ -221,7 +223,7 @@ As you can see, DuckDB v2.0 is about 40× faster (!) for the same recursive quer
 
 > Update We published a blog post on [how we are speeding up recursive CTEs in DuckDB v2.0]({% post_url 2026-08-25-how-duckdb-runs-recursive-ctes-faster %}).
 
-Row-group pruning has been massively expanded: [min-max indexes (zone maps)]({% link docs/1.5/sql/indexes.md %}#min-max-index-zonemap %}) and [Parquet Bloom filters]({% post_url 2025-03-07-parquet-bloom-filters-in-duckdb %}) now skip data for structs, lists, decimals, UUIDs, `IN` filters, and even function predicates:
+Row-group pruning has been massively expanded: [min-max indexes (zone maps)]({% link docs/1.5/sql/indexes.md %}#min-max-index-zonemap) and [Parquet Bloom filters]({% post_url 2025-03-07-parquet-bloom-filters-in-duckdb %}) now skip data for structs, lists, decimals, UUIDs, `IN` filters, and even function predicates:
 
 ```sql
 -- these now prune row groups instead of scanning them:
@@ -314,7 +316,7 @@ SELECT add_numbers(b := 2, a := 40); -- 42: named arguments work too
 SELECT add_numbers(40, NULL);        -- NULL, without the function doing anything
 ```
 
-You do not need re-target or rebuild it every time a new DuckDB version comes out. And nowadays, with all the AI tooling around, building an extension has never been easier.
+You do not need to re-target or rebuild it every time a new DuckDB version comes out. And nowadays, with all the AI tooling around, building an extension has never been easier.
 
 ### Distributing Extensions
 
@@ -334,13 +336,13 @@ A repository is a name, a URL prefix, and one or more RSA public keys that are t
 
 ```sql
 CREATE EXTENSION REPOSITORY my_repo
-    WITH PREFIX 'https://extensions.example.org';
+    WITH PREFIX 'https://extensions.example.org'
     USING PUBLIC KEY '-----BEGIN PUBLIC KEY----- ...';
 ```
 
 Pinned repositories survive restarts, support key rotation by trusting multiple keys, and can be audited at any time through the `duckdb_extension_repositories()` table function, or removed again with `DROP EXTENSION REPOSITORY`. Together with the stable C API, the extension story rounds out nicely: write your extension once, sign it, host it wherever you like, and `INSTALL` it anywhere.
 
-> Update This feature is now available in the [preview build]({% link install/preview.md %}).
+> Update This feature is available in DuckDB v2.0.0. For details, see the [Extension Repositories page]({% link docs/2.0/extensions/extension_repositories.md %}).
 
 ## Bonus: DuckDB Foundation – Technical Advisory Board
 
@@ -350,4 +352,4 @@ Starting this fall, we will add a Technical Advisory Board to the [DuckDB Founda
 
 These are only a few highlights, and this post is only a preview. Some details may still shift before the release this fall, and there are many more features and improvements that we could not cover here. DuckDB v2.0 will also come with a small set of breaking changes, including the new default storage format and the completed lambda syntax transition, which we will cover in detail in the release announcement.
 
-There have been more than 10,000 commits by many contributors since we released v1.5. We would like to thank our community for the detailed issue reports, feedback, and contributions that shaped this release. If you want a taste before the fall, the [preview builds]({% link install/preview.md %}) have most of these features today, and if something breaks, you know where [the issue tracker](https://github.com/duckdb/duckdb/issues) is.
+There have been more than 10,000 commits by many contributors since we released v1.5. We would like to thank our community for the detailed issue reports, feedback, and contributions that shaped this release. DuckDB v2.0.0 is now available on the [installation page]({% link install/index.html %}), and if something breaks, you know where [the issue tracker](https://github.com/duckdb/duckdb/issues) is.

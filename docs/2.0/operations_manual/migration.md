@@ -8,14 +8,15 @@ title: Migrating to DuckDB 2.0
 ---
 
 DuckDB 2.0.0 is packed with new features and performance improvements, including query optimization and asynchronous I/O.
-It also ships a small set of breaking changes, most notably a new default storage format and the completed lambda syntax transition.
+It also ships a small set of breaking changes, most notably a new default storage format and the next step of the lambda syntax transition.
 This page provides guidance on migrating existing deployments to DuckDB 2.0.0.
 
 ## Before You Migrate
 
 Before migrating to DuckDB 2.0.0, assess whether your workload is mission-critical.
 For such workloads, consider waiting for upcoming patch releases, which address issues that surface shortly after a major release.
-To help facilitate this, the DuckDB development team extended [support for DuckDB 1.5 into early 2027]({% link release_calendar.md %}).
+To help facilitate this, the DuckDB development team extended [support for DuckDB 1.5 until March 2027]({% link release_calendar.md %}#lts-releases).
+Note that DuckDB 1.4 LTS reaches its end of life on November 17, 2026.
 
 > Bestpractice In all cases, we recommend setting up a shadow system that tracks your existing workload. This lets you test DuckDB 2.0.0 in an environment outside of your production system before switching over.
 
@@ -54,7 +55,7 @@ If you need database files that remain readable by an older DuckDB version, writ
 
 ```bash
 ~/.duckdb/cli/latest/duckdb my.db -storage-version v1.5.6 -c "CREATE TABLE t (x INT);"
-~/.duckdb/cli/1.5.5/duckdb my.db
+~/.duckdb/cli/1.5.6/duckdb my.db
 ```
 
 The storage version can also be set with the `storage_compatibility_version` configuration option or the `STORAGE_VERSION` option of the [`ATTACH` statement]({% link docs/2.0/sql/statements/attach.md %}).
@@ -73,7 +74,7 @@ For details on this and other conversion methods, including `COPY FROM DATABASE`
 
 ### Lambda Syntax
 
-DuckDB 2.0.0 completed the lambda syntax transition that began in [v1.3]({% post_url 2025-05-21-announcing-duckdb-130 %}).
+DuckDB 2.0.0 takes the next step in the lambda syntax transition that began in [v1.3]({% post_url 2025-05-21-announcing-duckdb-130 %}).
 The old single arrow syntax (`x -> x + 1`) is now disabled by default in favor of the Python-style syntax (`lambda x : x + 1`).
 
 ```sql
@@ -103,8 +104,7 @@ If you would like to revert to the old parser, use the [`legacy_parser` extensio
 To install and activate it, run the following commands:
 
 ```sql
-INSTALL legacy_parser;
-LOAD legacy_parser;
+INSTALL AND LOAD legacy_parser;
 SET enable_legacy_parser = true;
 ```
 
@@ -117,7 +117,7 @@ For background on extension stability levels, see [Versioning of Extensions]({% 
 ### ICU Removed from the Core Build
 
 DuckDB 2.0.0 removed the dependency on the [ICU library](https://github.com/unicode-org/icu).
-Time zones, calendars, and collations are now implemented natively by the [`icu` extension]({% link docs/2.0/core_extensions/icu.md %}), and will continue to behave as before.
+Time zones, calendars and collations are now implemented natively by the [`icu` extension]({% link docs/2.0/core_extensions/icu.md %}), and will continue to behave as before.
 No query changes are required, but if you ship a custom build, note that ICU is no longer bundled.
 If you find that ICU's behavior changed, please [file an issue](https://github.com/duckdb/duckdb/issues).
 
@@ -168,7 +168,7 @@ The [What's New in the Docs for 2.0 page]({% link docs/2.0/whats_new_in_the_docs
 * Optimizer and engine improvements that speed up existing queries, including on Windows
 * Self-hostable [extension repositories]({% link docs/2.0/extensions/extension_repositories.md %}) for signing and distributing your own extensions
 
-Several of the headline v2.0.0 changes are covered in [Breaking Changes](#breaking-changes) above: the new default [storage format](#storage-format), the [PEG-based SQL parser](#sql-parser), the revamped [C API v2](#c-api-v2), and the native timezone, calendar and collation support left after [ICU was removed from the core build](#icu-removed-from-the-core-build).
+Several of the headline v2.0.0 changes are covered in [Breaking Changes](#breaking-changes) above: the new default [storage format](#storage-format), the [PEG-based SQL parser](#sql-parser), the revamped [C API v2](#c-api-v2) and the native timezone, calendar and collation support left after [ICU was removed from the core build](#icu-removed-from-the-core-build).
 
 ## See Also
 

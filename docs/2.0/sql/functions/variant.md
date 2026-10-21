@@ -123,8 +123,6 @@ ORDER BY i::VARIANT;
 | **Example** | `variant_normalize({'b': [1, 2, 3], 'a': 42}::VARIANT)` |
 | **Result** | A normalized `VARIANT` |
 
-> New The `variant_normalize` function was added in DuckDB 2.0.
-
 #### `variant_group_object(key, value)`
 
 <div class="nostroke_table"></div>

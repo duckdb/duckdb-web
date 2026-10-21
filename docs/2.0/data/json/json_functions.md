@@ -513,7 +513,7 @@ SELECT json_strip_nulls('{"a": [{"x": 1, "y": null}, {"z": null}], "b": null}');
 
 > New Support for the JSON mutation functions was introduced in DuckDB 2.0.
 
-The following scalar functions modify a JSON document at a given path and return the updated document. The `value` argument is a `JSON` value, so string values are provided in quotes (for example, `'2'`).
+The following scalar functions modify a JSON document at a given path and return the updated document. The `value` argument is a `JSON` value given as JSON text, e.g., `'2'` for the number 2 or `'"duck"'` for the string `duck`.
 
 | Function                            | Description                                                                                                           |
 | :---------------------------------- | :------------------------------------------------------------------------------------------------------------------ |

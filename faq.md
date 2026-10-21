@@ -82,7 +82,7 @@ For the organizations around DuckDB, see the next question–answer pair.
 The [**DuckDB Foundation**](https://duckdb.foundation/) is a non-profit organization that holds the intellectual property of the DuckDB project.
 The DuckDB Foundation's [statutes]({% link pdf/deed-of-incorporation-stichting-duckdb-foundation.pdf %}) ensure DuckDB remains open-source under the MIT license in perpetuity.
 
-[**DuckLabs**](https://ducklabs.com/) is based in Amsterdam that provides commercial support services for DuckDB.
+[**DuckLabs**](https://ducklabs.com/) is a company based in Amsterdam that provides commercial support services for DuckDB.
 DuckLabs employs the core contributors of the DuckDB project. DuckLabs [joined AWS in September 2026]({% post_url 2026-08-26-ducklabs-to-join-aws %}).
 
 [**MotherDuck**](https://motherduck.com/) is a venture-backed company creating a hybrid cloud/local platform using DuckDB.
@@ -163,7 +163,7 @@ Other projects and events are likely _not affiliated_ with DuckDB. Please check 
 
 It is a common misconception that DuckDB is an in-memory database.
 While DuckDB _can_ work in-memory, it is **not an in-memory database**.
-DuckDB can make use of available memory for caching, it also fully supports disk-based persistence and [offloading larger-than-memory operations]({% link docs/2.0/guides/performance/how_to_tune_workloads.md %}#larger-than-memory-workloads-out-of-core-processing) to disk.
+DuckDB can make use of available memory for caching, but it also fully supports disk-based persistence and [offloading larger-than-memory operations]({% link docs/2.0/guides/performance/how_to_tune_workloads.md %}#larger-than-memory-workloads-out-of-core-processing) to disk.
 
 </div>
 
@@ -387,7 +387,7 @@ Therefore, you can use DuckDB's SQL syntax to be highly flexible, or very precis
 
 For data science users, who often run queries in an interactive fashion, DuckDB offers several mechanisms for quickly exploring data sets.
 For example, CSV files can be loaded by [auto-inferring their schema]({% link docs/2.0/data/csv/auto_detection.md %}) using `CREATE TABLE tbl AS FROM 'input.csv'`.
-Moreover, there numerous SQL shorthands known as [“friendly SQL”]({% link docs/2.0/sql/dialect/friendly_sql.md %}) for more concise expressions, e.g., the [`GROUP BY ALL` clause]({% link docs/2.0/sql/query_syntax/groupby.md %}#group-by-all).
+Moreover, there are numerous SQL shorthands known as [“friendly SQL”]({% link docs/2.0/sql/dialect/friendly_sql.md %}) for more concise expressions, e.g., the [`GROUP BY ALL` clause]({% link docs/2.0/sql/query_syntax/groupby.md %}#group-by-all).
 
 For data engineering use cases, DuckDB allows full control over the loading process, so it is possible to define the precise schema using a `CREATE TABLE tbl ⟨schema⟩`{:.language-sql .highlight} statement and populate it using a [`COPY` statement]({% link docs/2.0/sql/statements/copy.md %}) that specifies the CSV's dialect (delimiter, quotes, etc.).
 Most friendly SQL extensions are simple to rewrite to SQL queries that are fully compatible with PostgreSQL.

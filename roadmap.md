@@ -58,7 +58,7 @@ There are several features and optimizations that we plan to implement at some p
 
 * Go support for extensions
 * Time series optimizations
-* Partition-aware optimizations
+* Further partition-aware optimizations
 * Sorting-aware optimizations
 * Better filter cardinality estimation using automatically maintained table samples
 * [`ALTER TABLE` support for adding foreign keys](https://github.com/duckdb/duckdb/issues/57)

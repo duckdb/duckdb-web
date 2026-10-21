@@ -90,7 +90,7 @@ The triggered statement is a single SQL statement, typically a data modification
 
 ### Granularity
 
-* `FOR EACH ROW` fires the trigger once for every row affected by the statement. The triggered statement can refer to the affected row through `NEW` (for `INSERT` and `UPDATE`) and `OLD` (for `UPDATE` and `DELETE`).
+* `FOR EACH ROW` fires the trigger once for every row affected by the statement. The triggered statement can refer to the affected row through `NEW` (for `INSERT`) and `OLD` (for `DELETE`). Row-level `UPDATE` triggers are not yet supported; see the [limitations](#limitations).
 * `FOR EACH STATEMENT` fires the trigger once per statement, regardless of how many rows are affected. Use `REFERENCING OLD TABLE` and `NEW TABLE` to access the affected rows as transition tables.
 
 ### Transition Tables

@@ -223,7 +223,7 @@ Please consult the DuckDB FAQ's [“I would like feature X to be implemented in 
 
 <div class="answer" markdown="1">
 
-Not yet. Quack is currently in a beta state. You can use Quack for prototyping but it is still in development, and breaking changes are expected to happen. These may include the protocol, function names and default settings. We expect Quack to mature over the next few months and plan to release it as a stable protocol as part of [DuckDB v2.0]({% link release_calendar.md %}) in September 2026.
+Not yet. Quack is currently in a beta state. You can use Quack for prototyping but it is still in development, and breaking changes are expected to happen. These may include the protocol, function names and default settings. [DuckDB v2.0]({% post_url 2026-10-21-announcing-duckdb-200 %}) ships a polished version of Quack with substantial performance and stability improvements, but the protocol is not yet stable.
 
 </div>
 

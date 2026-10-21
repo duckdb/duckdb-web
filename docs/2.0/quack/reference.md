@@ -20,7 +20,7 @@ For a tour of the protocol, start with the [Overview]({% link docs/2.0/quack/ove
 | `quack_stop(listen_uri)` | Stop the server listening on `listen_uri`. |
 | `quack_server_list()` | List the servers running in this instance: listen URI and URL, host, port, number of active connections, and additional info (IPv6, SSL). |
 | `quack_active_connections()` | List the client connections of the servers running in this instance: server, `quack_connection_id`, last query, state, hashed client id, cached rows, and query start time. |
-| `quack_generate_keys(directory := ⟨path⟩)` | Generate a self-signed certificate (`server.pem`) and private key (`private_key.pem`) for serving over SSL. Defaults to `~/.duckdb/extension_data/quack`; existing key files are not overwritten. Returns the file paths and the certificate fingerprint. |
+| `quack_generate_keys(directory = ⟨path⟩)` | Generate a self-signed certificate (`server.pem`) and private key (`private_key.pem`) for serving over SSL. Defaults to `~/.duckdb/extension_data/quack`; existing key files are not overwritten. Returns the file paths and the certificate fingerprint. |
 | `quack_identify(name, provider, hostname, region, meta)` | Set this node's `whoami` identity fields. Any subset can be supplied. |
 | `whoami()` | Table macro returning identity + runtime info for the current node. |
 
@@ -199,8 +199,8 @@ Requests are `POST`s to a `/quack` endpoint.
 ```sql
 CALL enable_logging(
     'Quack',
-    storage => 'file',
-    storage_config => {'path': '/tmp/duckdb-rpc-logs'}
+    storage = 'file',
+    storage_config = {'path': '/tmp/duckdb-rpc-logs'}
 );
 ```
 

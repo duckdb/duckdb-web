@@ -40,15 +40,20 @@ CALL quack_serve('quack:localhost');
 The URI argument is optional: calling `quack_serve()` without it also listens on `quack:localhost`.
 
 `quack_serve` returns the listen URI, the HTTP URL, and, when the default authentication function is in use, the `auth_token` that clients need to connect.
-This token can also be set explicitly before starting (see [Security]({% link docs/2.0/quack/security.md %})).
-
-> Tip The DuckDB CLI can start a server directly with the `-serve` argument and connect to one with `-connect`. See [Command Line Arguments]({% link docs/2.0/clients/cli/arguments.md %}#serving-and-connecting-to-remote-databases).
-
-By default the server refuses to bind anything other than a local hostname. To listen on an externally-reachable address, pass `allow_other_hostname => true`:
+To choose the token yourself, pass the `token` parameter (see [Security]({% link docs/2.0/quack/security.md %})):
 
 {:.codebox-server}
 ```sql
-CALL quack_serve('quack:0.0.0.0:9494', allow_other_hostname => true);
+CALL quack_serve('quack:localhost', token = '⟨my_token⟩');
+```
+
+> Tip The DuckDB CLI can start a server directly with the `-serve` argument and connect to one with `-connect`. See [Command Line Arguments]({% link docs/2.0/clients/cli/arguments.md %}#serving-and-connecting-to-remote-databases).
+
+By default the server refuses to bind anything other than a local hostname. To listen on an externally-reachable address, pass `allow_other_hostname = true`:
+
+{:.codebox-server}
+```sql
+CALL quack_serve('quack:0.0.0.0:9494', allow_other_hostname = true);
 ```
 
 Non-local servers serve HTTPS by default, using a self-signed certificate unless you pass `ssl_cert_file` and `ssl_key_file` (see the [Reference]({% link docs/2.0/quack/reference.md %}#quack_serve-parameters)). For production deployments, we recommend binding the server to localhost and fronting it with a TLS-terminating reverse proxy. See [Securing Quack with a Reverse Proxy]({% link docs/2.0/quack/setup/reverse_proxy.md %}).
@@ -110,7 +115,7 @@ FROM quack_query(
     'quack:remote.com',
     'SELECT 42',
     token = '⟨MY_QUACK_TOKEN_01234567890ABCDEF⟩',
-    disable_ssl => true
+    disable_ssl = true
 );
 ```
 
@@ -230,7 +235,7 @@ FROM remote_db.query('FROM whoami()');
 │  name   │ provider │ hostname │ region  │     uptime      │            ts_now             │                        meta                        │
 │ varchar │ varchar  │ varchar  │ varchar │    interval     │   timestamp with time zone    │                        json                        │
 ├─────────┼──────────┼──────────┼─────────┼─────────────────┼───────────────────────────────┼────────────────────────────────────────────────────┤
-│ NULL    │ NULL     │ NULL     │ NULL    │ 00:04:56.832456 │ 2026-05-22 15:59:38.631715+02 │ {"duckdb_version":"v2.0.0","platform":"osx_arm64"} │
+│ NULL    │ NULL     │ NULL     │ NULL    │ 00:04:56.832456 │ 2026-10-21 15:59:38.631715+02 │ {"duckdb_version":"v2.0.0","platform":"osx_arm64"} │
 └─────────┴──────────┴──────────┴─────────┴─────────────────┴───────────────────────────────┴────────────────────────────────────────────────────┘
 ```
 
@@ -239,10 +244,10 @@ Identity fields are populated either by setting `whoami_*` options directly or b
 {:.codebox-client}
 ```sql
 CALL quack_identify(
-    name => 'analytics-1',
-    provider => 'ec2',
-    region => 'eu-west-1',
-    meta => '{"role": "worker"}'
+    name = 'analytics-1',
+    provider = 'ec2',
+    region = 'eu-west-1',
+    meta = '{"role": "worker"}'
 );
 ```
 

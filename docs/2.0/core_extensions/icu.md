@@ -2,7 +2,7 @@
 github_directory: https://github.com/duckdb/duckdb/tree/main/extension/icu
 layout: docu
 redirect_from:
-- /docs/extensions/ice
+- /docs/extensions/icu
 - /docs/stable/extensions/icu
 - /docs/stable/core_extensions/icu
 - /docs/current/core_extensions/icu

@@ -51,7 +51,7 @@ FROM addresses
 LIMIT 10%;
 ```
 
-## FETCH FIRST
+## `FETCH FIRST`
 
 > New The SQL-standard `FETCH FIRST` syntax was introduced in DuckDB 2.0.
 

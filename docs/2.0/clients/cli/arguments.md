@@ -88,7 +88,7 @@ To serve a persistent database, provide its path before `-serve`:
 duckdb analytics.duckdb -serve
 ```
 
-The `-connect` argument connects the CLI to a remote database. It defaults to Quack's unnamed secret:
+The `-connect` argument connects the CLI to a remote database. Without arguments, it connects to the Quack server on `localhost:9494` using the default `quack` secret. If this secret does not exist yet, `-serve` creates it as a persistent secret, so running `duckdb -serve` and `duckdb -connect` on the same machine works without further setup:
 
 ```batch
 duckdb -connect

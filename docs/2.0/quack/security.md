@@ -14,7 +14,7 @@ This page covers Quack's security posture end to end: what the server exposes, w
 A Quack server exposes the full SQL surface of the underlying DuckDB instance, including read and write access to every table the server's session can see. Because of this, the extension ships with conservative defaults that prevent accidental exposure:
 
 * The server generates a **random authentication token** at startup, which the client has to supply on every connection.
-* The server binds to `localhost` only, non-local hostnames require an explicit `allow_other_hostname => true`.
+* The server binds to `localhost` only, non-local hostnames require an explicit `allow_other_hostname = true`.
 * The server does **not** use TLS for local URIs, as TLS for localhost communication only adds dependencies for no real benefit. Non-local URIs default to HTTPS with a self-signed certificate (see [`quack_serve` parameters]({% link docs/2.0/quack/reference.md %}#quack_serve-parameters)).
 
 > Bestpractice For any deployment beyond local-only, do not expose Quack directly to the internet. We recommend you to put a proven HTTP reverse proxy in front of it and let the proxy terminate TLS.
@@ -37,7 +37,7 @@ Both hooks ship with built-in defaults that are suitable for local development a
 
 Out of the box, they come with the following configuration:
 
-* **Authentication is token-based.** When you call `quack_serve`, the server generates a random token and returns it in the `auth_token` column (or you can supply one explicitly via `quack_serve(uri, token := '...')`). Clients have to present this token on every connection, either through a `quack` secret scoped to the server URI or via the explicit `TOKEN` option in the `ATTACH` statement / `quack_query` function call. The default authentication callback compares the client-supplied token against the server's stored token.
+* **Authentication is token-based.** When you call `quack_serve`, the server generates a random token and returns it in the `auth_token` column (or you can supply one explicitly via `quack_serve(uri, token = '...')`). Clients have to present this token on every connection, either through a `quack` secret scoped to the server URI or via the explicit `TOKEN` option in the `ATTACH` statement / `quack_query` function call. The default authentication callback compares the client-supplied token against the server's stored token.
 * **Authorization is permissive.** The default authorization callback returns `true` for every query. No further filtering happens.
 
 Both callbacks can be replaced with user-supplied code, including plain SQL macros. See the examples below.
@@ -69,7 +69,7 @@ The arguments are defined as follows:
 
 * `session_id`: Server-generated session id (random 32-char string). Becomes the `quack_connection_id` for that client.
 * `client_token`: The token the client sent.
-* `server_token`: The token configured on the server (via `quack_serve(token := ...)` or auto-generated).
+* `server_token`: The token configured on the server (via `quack_serve(token = ...)` or auto-generated).
 
 #### Overriding Authentication
 
@@ -156,7 +156,7 @@ CREATE MACRO read_only(sid, query) AS (
     regexp_matches(upper(trim(query)), '^(SELECT|FROM|WITH|EXPLAIN)\b')
 );
 
-CALL quack_serve('quack:localhost', token => 'analytics-team-token');
+CALL quack_serve('quack:localhost', token = 'analytics-team-token');
 
 SET GLOBAL quack_authentication_function = 'check_token';
 SET GLOBAL quack_authorization_function  = 'read_only';

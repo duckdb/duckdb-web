@@ -19,7 +19,7 @@ SQLite is the [world's most widely deployed DBMS](https://www.sqlite.org/mostdep
 
 DuckDB has **no external dependencies**, neither for compilation nor during run-time. This greatly simplifies deployment and integration in other build processes. To build DuckDB, all that is required is a working C++17 compiler.
 
-For DuckDB, there is no DBMS server software to install, update and maintain. DuckDB does not run as a separate process, but completely **embedded within a host process**. For the analytical use cases that DuckDB targets, this has the additional advantage of **high-speed data transfer** to and from the database. In some cases, DuckDB can process foreign data without copying. For example, the DuckDB Python package can run queries directly on Pandas data without ever importing or copying any data.
+For DuckDB, there is no DBMS server software to install, update and maintain. By default, DuckDB does not run as a separate process but is completely **embedded within a host process**. For the analytical use cases that DuckDB targets, this has the additional advantage of **high-speed data transfer** to and from the database. In some cases, DuckDB can process foreign data without copying. For example, the DuckDB Python package can run queries directly on Pandas data without ever importing or copying any data.
 
 ### Portable
 

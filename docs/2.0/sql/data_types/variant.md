@@ -90,7 +90,7 @@ SELECT variant_extract(data, 'name') AS name FROM events WHERE id = 4;
 
 When storing `VARIANT` columns in a DuckDB database file, DuckDB 2.0 automatically detects the common structure of the values and *shreds* them, i.e., stores the fields that share a type as separate, typed columns. Shredded data compresses well and can be scanned efficiently.
 
-Shredding is only applied to row groups with at least `variant_minimum_shredding_size` rows (by default, 30,000 rows, one fourth of the row group size). Setting it to `-1` disables shredding:
+Shredding is only applied to row groups with at least `variant_minimum_shredding_size` rows (by default, 30,000 rows, roughly one fourth of the default row group size). Setting it to `-1` disables shredding:
 
 ```sql
 SET variant_minimum_shredding_size = -1;
