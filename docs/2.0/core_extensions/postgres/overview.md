@@ -46,6 +46,12 @@ By default, all schemas are attached. When working with large instances, it can 
 ATTACH 'dbname=postgres user=postgres host=127.0.0.1' AS db (TYPE postgres, SCHEMA 'public');
 ```
 
+The transaction isolation level can be set with the `ISOLATION_LEVEL` option. Supported values are `READ COMMITTED`, `REPEATABLE READ`, and `SERIALIZABLE`; the default is `REPEATABLE READ`.
+
+```sql
+ATTACH 'dbname=postgres user=postgres host=127.0.0.1' AS db (TYPE postgres, ISOLATION_LEVEL 'READ COMMITTED');
+```
+
 > Warning Avoid including credentials, such as a password, directly in the connection string. If a connection error occurs, the full connection string, including your credentials, may appear in the resulting error message. For better security, store credentials using [secrets]({% link docs/2.0/configuration/secrets_manager.md %}) instead, as described in [Configuring via Secrets](#configuring-via-secrets).
 
 > Deprecated The old `postgres_attach` function is deprecated. It is recommended to switch over to the new `ATTACH` syntax.
