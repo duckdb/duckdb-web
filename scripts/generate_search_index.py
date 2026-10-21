@@ -1,7 +1,7 @@
 """
 Generate a DuckDB search index for the documentation.
 
-Parses all markdown files under docs/1.4/, docs/1.5/ and docs/2.0/,
+Parses all markdown files under docs/2.0/ and _posts/,
 chunks them (per-function for function reference pages, per-H2 section
 for conceptual pages), and builds a DuckDB file with a pre-built FTS index.
 
@@ -519,8 +519,6 @@ def main():
     args = parser.parse_args()
 
     versions = [
-        ("docs/1.4", "1.4"),
-        ("docs/1.5", "1.5"),
         ("docs/2.0", "2.0"),
     ]
 
