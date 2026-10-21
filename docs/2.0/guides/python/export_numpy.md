@@ -9,7 +9,7 @@ redirect_from:
 title: Export to Numpy
 ---
 
-The result of a query can be converted to a Numpy array using the `fetchnumpy()` function. For example:
+The result of a query can be converted to Numpy arrays using the `fetchnumpy()` function, which returns a dictionary that maps each column name to a Numpy array. For example:
 
 ```python
 import duckdb
@@ -20,9 +20,7 @@ my_arr
 ```
 
 ```text
-{'x': array([1, 2, 3], dtype=int32), 'y': masked_array(data=[5.0, 5.0, 5.0],
-             mask=[False, False, False],
-       fill_value=1e+20)}
+{'x': array([1, 2, 3], dtype=int32), 'y': array([5., 5., 5.])}
 ```
 
 Then, the array can be processed using Numpy functions, e.g.:
@@ -32,7 +30,7 @@ np.sum(my_arr['x'])
 ```
 
 ```text
-6
+np.int64(6)
 ```
 
 ## See Also

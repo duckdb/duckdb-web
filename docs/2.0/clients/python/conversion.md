@@ -24,8 +24,8 @@ A result is read from a [relation]({% link docs/2.0/clients/python/relational_ap
 | Python tuples        | `fetchall()`, `iter_rows(batch_size=1024)`           | `fetchone()`, `fetchmany(size=1)`, `fetchall()`               |
 | Python dicts         | `to_dicts()`                                         |                                                               |
 | NumPy                | `fetchnumpy()`                                       | `fetchnumpy()`                                                |
-| Pandas               | `df()`, `fetchdf()`                                  | `df()`, `fetchdf()`, `fetch_df()`, `fetch_df_chunk()`         |
-| Apache Arrow         | `to_arrow_table()`, `to_arrow_reader()`, `arrow()`   | `to_arrow_table()`, `to_arrow_reader()`, both make a copy     |
+| Pandas               | `df()`                                               | `df()`, `fetch_df_chunk()`                                    |
+| Apache Arrow         | `to_arrow_table()`, `to_arrow_reader()`              | `to_arrow_table()`, `to_arrow_reader()`, both make a copy     |
 | Polars               | `pl()`                                               |                                                               |
 | PyTorch              | `torch()`                                            | `torch()`                                                     |
 | TensorFlow           | `tf()`                                               | `tf()`                                                        |
@@ -54,7 +54,7 @@ con.execute("""
 Fetch as Pandas DataFrame:
 
 ```python
-df = con.execute("SELECT * FROM items").fetchdf()
+df = con.execute("SELECT * FROM items").df()
 print(df)
 ```
 
@@ -101,15 +101,14 @@ print(tbl.to_pandas())
 ### Pandas
 
 * `df()` fetches the data as a Pandas DataFrame
-* `fetchdf()` is an alias of `df()`
-* `fetch_df()` is an alias of `df()`, on the connection only
+* `fetchdf()` and, on the connection, `fetch_df()` are older names of `df()`
 * `fetch_df_chunk(vectors_per_chunk)` fetches the next portion of the results of `con.execute()` into a DataFrame. Each chunk has at most the vector size (2048 by default) times `vectors_per_chunk` (1 by default) rows.
 
 ### Apache Arrow
 
 * `to_arrow_table()` fetches the data as an [Arrow table](https://arrow.apache.org/docs/python/generated/pyarrow.Table.html)
 * `to_arrow_reader(batch_size)` returns an [Arrow record batch reader](https://arrow.apache.org/docs/python/generated/pyarrow.RecordBatchReader.html) with _at most_ `batch_size` rows per batch (the default is 131072)
-* `arrow()` is an alias of `to_arrow_reader()`, on relations only
+* `arrow()` is an older name of `to_arrow_reader()`, on relations only
 * A relation is also an Arrow stream through the [Arrow PyCapsule Interface](https://arrow.apache.org/docs/format/CDataInterface/PyCapsuleInterface.html). `pyarrow.table(rel)` returns an Arrow table and `polars.DataFrame(rel)` a Polars DataFrame, which unlike `pl()` needs no pyarrow
 
 After `con.execute()`, `to_arrow_table()` and `to_arrow_reader()` first fetch the rows and then convert them, so they make an extra copy of the result, and the reader returns its first batch only after the whole query ran. They warn: `UserWarning: Arrow output on a DB-API result makes an extra copy of the rows, use con.sql(query).to_arrow_table() instead.` The module functions `duckdb.to_arrow_table()` and `duckdb.to_arrow_reader()` read the result of `duckdb.execute()` and warn the same way. For Arrow output, run the query with `con.sql(query)`.

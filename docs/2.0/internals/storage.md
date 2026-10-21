@@ -121,6 +121,8 @@ The `storage_compatibility_version` [configuration option]({% link docs/2.0/conf
 In the Python client, you have to specify it when connecting to a new database:
 
 ```python
+import duckdb
+
 duckdb.connect("file.db", config={'storage_compatibility_version': 'latest'})
 # or
 duckdb.connect("file.db", config={'storage_compatibility_version': 'v1.4.0'})
@@ -148,7 +150,7 @@ COPY FROM DATABASE file1 TO converted_file;
 
 ## Storage Header
 
-DuckDB files start with a `uint64_t` which contains a checksum for the main header, followed by four magic bytes (`DUCK`), followed by the storage version number in a `uint64_t`.
+DuckDB files start with a `uint64_t` which contains a checksum for the main header, followed by four magic bytes (`DUCK`), followed by a version number in a `uint64_t`. Files created in the v2.0.0 format hold 999 there. In other files it is a storage version, but it can be older than the format the file was upgraded to, which only the database headers record.
 
 ```batch
 hexdump -n 20 -C mydata.db
@@ -160,15 +162,20 @@ hexdump -n 20 -C mydata.db
 00000014
 ```
 
-A simple example of reading the storage version using Python is below.
+Because the number after the magic bytes does not always name the storage version, let DuckDB read the headers: attach the file read-only and query `duckdb_databases()`, as in the following Python example.
 
 ```python
-import struct
+import duckdb
 
-pattern = struct.Struct('<8x4sQ')
+con = duckdb.connect()
+con.execute("ATTACH 'file.db' AS file_db (READ_ONLY)")
+print(con.execute(
+    "SELECT tags['storage_version'] FROM duckdb_databases() WHERE database_name = 'file_db'"
+).fetchone()[0])
+```
 
-with open('test/sql/storage_version/storage_version.db', 'rb') as fh:
-    print(pattern.unpack(fh.read(pattern.size)))
+```text
+v2.0.0+
 ```
 
 ## Storage Version Table

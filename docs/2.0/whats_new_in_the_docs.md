@@ -121,6 +121,11 @@ Additional 2.0 features documented across the site, grouped by area.
 * [CLI agent mode]({% link docs/2.0/clients/cli/agent_mode.md %}), which produces compact, machine-readable output when the CLI is driven by an AI coding agent
 * [CLI command history]({% link docs/2.0/clients/cli/dot_commands.md %}#command-history): the `.history` command and the `shell_history()` table function
 * [Pretty-printed, highlighted `.schema` output]({% link docs/2.0/clients/cli/dot_commands.md %}#querying-the-database-schema) with `--no-indent` to restore the single-line form
+* [Migrating Python code to DuckDB 2.0]({% link docs/2.0/clients/python/migration.md %}): the changes that code written for DuckDB 1.x needs
+* [Python relations]({% link docs/2.0/clients/python/overview.md %}#basic-api-usage) that run their query on every read, and [parallel Python queries]({% link docs/2.0/clients/python/overview.md %}#using-connections-in-parallel-python-programs) with one cursor per thread
+* [Open results of the Python DB API]({% link docs/2.0/clients/python/dbapi.md %}#open-results) with `complete()` and `abort()`, and [Python transactions]({% link docs/2.0/clients/python/dbapi.md %}#transactions) that a failed `execute()` aborts
+* [The Python appender]({% link docs/2.0/clients/python/appender.md %}) for inserting rows that Python code produces
+* [Python expression helpers]({% link docs/2.0/clients/python/expression.md %}) such as `col()`, `lit()` and `fn()`, [aggregates and window functions]({% link docs/2.0/clients/python/expression.md %}#aggregates-and-window-functions) on expressions and new relation methods such as `with_columns()`, `group_by()` and `pivot()` in the [Relational API]({% link docs/2.0/clients/python/relational_api.md %})
 
 ### Configuration and Profiling
 

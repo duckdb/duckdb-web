@@ -19,20 +19,12 @@ it simple to run notebooks as scripts.
 
 ## Installation
 
-To get started, install marimo and DuckDB from your terminal:
+To get started, install marimo from your terminal. Its `sql` extra also installs DuckDB, Polars and PyArrow:
 
 ```bash
 pip install "marimo[sql]"
 # or
 uv add "marimo[sql]"
-```
-
-Install supporting libraries:
-
-```bash
-pip install "polars[pyarrow]"
-# or
-uv add "polars[pyarrow]"
 ```
 
 Run a tutorial:
@@ -86,9 +78,9 @@ marimo automatically discovers the connection and lets you select it in the SQL 
 </div>
 
 
-## Database, Schema, and Table Auto-Discovery
+## Database, Schema and Table Auto-Discovery
 
-marimo introspects connections and displays the database, schemas, tables, and columns in the Data Sources panel. This panel lets you quickly navigate your schemas to pull tables and columns into your SQL queries.
+marimo introspects connections and displays the database, schemas, tables and columns in the Data Sources panel. This panel lets you quickly navigate your schemas to pull tables and columns into your SQL queries.
 
 <div align="center">
   <figure>
@@ -106,11 +98,11 @@ with a table of the same name, the database table will be used instead.
 
 ```python
 import polars as pl
-df = pl.DataFrame({"column": [1, 2, 3]})
+df = pl.DataFrame({"value": [1, 2, 3]})
 ```
 
 ```sql
-SELECT * FROM df WHERE column > 2
+SELECT * FROM df WHERE value > 2
 ```
 
 ## Reference the Output of a SQL Cell

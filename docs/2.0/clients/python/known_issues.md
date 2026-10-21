@@ -23,12 +23,13 @@ In [1]: import duckdb
 
 ```text
 Out[1]:
-┌───────────────┬───────────────────────────────────────────────────────────────────────────────────────────────────────────────────┐
-│  explain_key  │                                                   explain_value                                                   │
-│    varchar    │                                                      varchar                                                      │
-├───────────────┼───────────────────────────────────────────────────────────────────────────────────────────────────────────────────┤
-│ physical_plan │ ┌───────────────────────────┐\n│         PROJECTION        │\n│   ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─   │\n│             x   …  │
-└───────────────┴───────────────────────────────────────────────────────────────────────────────────────────────────────────────────┘
+┌───────────────┬──────────────────────────────────────────────────────────────────────────────────────────────────────┐
+│  explain_key  │                                            explain_value                                             │
+│    varchar    │                                               varchar                                                │
+├───────────────┼──────────────────────────────────────────────────────────────────────────────────────────────────────┤
+│ physical_plan │ ╭─ Projection ───╮\n│ Projections: x │\n│ ~1 row         │\n╰────────┬───────╯\n╭─ Dummy Scan ───╮\n │
+│               │ ╰────────────────╯\n                                                                                 │
+└───────────────┴──────────────────────────────────────────────────────────────────────────────────────────────────────┘
 ```
 
 To work around this, `print` the output of the `explain()` function:
@@ -39,15 +40,15 @@ In [2]: print(duckdb.sql("SELECT 42 AS x").explain())
 
 ```text
 Out[2]:
-┌───────────────────────────┐
-│         PROJECTION        │
-│   ─ ─ ─ ─ ─ ─ ─ ─ ─ ─ ─   │
-│             x             │
-└─────────────┬─────────────┘
-┌─────────────┴─────────────┐
-│         DUMMY_SCAN        │
-└───────────────────────────┘
+╭─ Projection ───╮
+│ Projections: x │
+│ ~1 row         │
+╰────────┬───────╯
+╭─ Dummy Scan ───╮
+╰────────────────╯
 ```
+
+In a Jupyter notebook, `explain()` displays the plan as HTML itself and returns an empty string, so printing it prints nothing.
 
 Please also check out the [Jupyter guide]({% link docs/2.0/guides/python/jupyter.md %}) for tips on using Jupyter with JupySQL.
 
@@ -84,25 +85,6 @@ Alternatively, you can instruct `pip` to compile the package from source as foll
 python3 -m pip install duckdb --no-binary duckdb
 ```
 
-### Parameterized Queries in Relational API
-
-Passing query parameters to the [`sql()`]({% link docs/2.0/clients/python/relational_api.md %}#sql), [`query()`]({% link docs/2.0/clients/python/relational_api.md %}#query), or [`from_query()`]({% link docs/2.0/clients/python/relational_api.md %}#from_query) methods has significant performance overhead.
-There is currently no relation type in core that supports prepared statements, so parameterized queries are immediately materialized into an intermediate representation. This causes at least 5x processing overhead and nearly 2x memory usage compared to the non-parameterized path.
-
-Instead, use [`execute()`]({% link docs/2.0/clients/python/dbapi.md %}#prepared-statements) for the parameterized query, then feed the result into the relational API via a [replacement scan]({% link docs/2.0/clients/python/relational_api.md %}#sql):
-
-```python
-import duckdb
-
-conn = duckdb.connect()
-
-# Use execute() for the parameterized query
-df = conn.execute("SELECT * FROM my_table WHERE x = ?", [42]).df()
-
-# Use a replacement scan to continue with the relational API
-conn.sql("SELECT * FROM df WHERE y > 0").order("y").show()
-```
-
 ## Known Issues
 
 Unfortunately there are some issues that are either beyond our control or are very elusive / hard to track down.
@@ -115,20 +97,57 @@ If this module has not been imported from the main thread, and a different threa
 
 To avoid this, it's recommended to `import numpy.core.multiarray` before starting up threads.
 
-## `DESCRIBE` and `SUMMARIZE` Return Empty Tables in Jupyter
+### Many Threads per Database
 
-The `DESCRIBE` and `SUMMARIZE` statements return an empty table:
+Besides its worker threads, each database starts a pool of [asynchronous I/O threads]({% link docs/2.0/data/io.md %}#thread-pools): by default four times the number of CPU cores, at most 256. Every `duckdb.connect()` to an unnamed in-memory database starts a new database, so a process that opens many of them runs many threads. To start fewer, set `async_threads` when connecting:
 
 ```python
-%sql
+import duckdb
+
+con = duckdb.connect(config={"async_threads": 4})
+```
+
+### Fetching Time Zone Aware Values Needs `pytz`
+
+Converting a `TIMESTAMP WITH TIME ZONE` value to a Python object, as `fetchone()` and `fetchall()` do, needs the [`pytz` package](https://pypi.org/project/pytz/), which is not installed with DuckDB. Without it, the fetch raises an `InvalidInputException` saying `Required module 'pytz' failed to import`. Install `pytz` with `pip install pytz`.
+
+### `max_temp_directory_size` Is Ignored in `connect()`
+
+The `max_temp_directory_size` setting has no effect when it is passed in the `config` dictionary of `duckdb.connect()`: `current_setting()` reports the value, but queries write temporary files beyond it. Set it with a `SET` statement after connecting instead:
+
+```python
+import duckdb
+
+con = duckdb.connect()
+con.execute("SET max_temp_directory_size = '10GB'")
+```
+
+### Arrow Readers Hang on Windows after a Subinterpreter Was Created
+
+On Windows, once the process has created a subinterpreter, a query that scans a `pyarrow.RecordBatchReader` whose batches come from a Python generator can hang.
+
+### DataFrame Queries or Boxplots Fail in JupySQL
+
+With JupySQL 0.11.1, run `%sql SET python_scan_all_frames = true` to query notebook DataFrames. This is needed with both native and SQLAlchemy connections. For `%sqlplot boxplot`, use SQLAlchemy. See the [Jupyter guide]({% link docs/2.0/guides/python/jupyter.md %}) for the complete setup.
+
+### Ibis Fails with DuckDB 2.0
+
+Ibis 12.0.0 fails on several operations with DuckDB 2.0, such as `list_tables()`. See the [Ibis guide]({% link docs/2.0/guides/python/ibis.md %}).
+
+### `DESCRIBE` Returns an Empty Table in JupySQL
+
+In JupySQL, the `DESCRIBE` statement returns an empty table:
+
+```python
+%%sql
 CREATE OR REPLACE TABLE tbl AS (SELECT 42 AS x);
 DESCRIBE tbl;
 ```
 
-To work around this, wrap them into a subquery:
+To work around this, wrap it into a subquery:
 
 ```python
-%sql
+%%sql
 CREATE OR REPLACE TABLE tbl AS (SELECT 42 AS x);
 FROM (DESCRIBE tbl);
 ```

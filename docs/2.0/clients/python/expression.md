@@ -41,6 +41,20 @@ print((col("a") > 1) & col("b"))
 (("a" > 1) AND "b")
 ```
 
+The `duckdb` module has a short helper for each kind of expression, and this page uses them throughout. The constructors of the earlier expression API still work and build the same expressions, but new code should use the helpers:
+
+| Helper | Older constructor |
+|:--|:--|
+| `col(name)` | `ColumnExpression(name)` |
+| `lit(value)` | `ConstantExpression(value)` |
+| `when(condition).then(value)` | `CaseExpression(condition, value)` |
+| `fn(name, *args)` | `FunctionExpression(name, *args)` |
+| `star(exclude=...)` | `StarExpression(exclude=...)` |
+| `sql_expr(text)` | `SQLExpression(text)` |
+| `coalesce(*values)` | `CoalesceOperator(*values)` |
+| a Python function, such as `lambda x: x * 2` | `LambdaExpression(lhs, rhs)` |
+| `.is_null()`, `.is_not_null()` | `.isnull()`, `.isnotnull()` |
+
 ## Values and Operators
 
 Python operators combine expressions with each other and with Python values. The arithmetic operators are `+`, `-`, `*`, `/`, `//`, `%` and `**`; the comparisons are `==`, `!=`, `<`, `<=`, `>` and `>=`; `&`, `|` and `~` are `AND`, `OR` and `NOT`. A Python value in an operation is a constant. This holds for a string too: `col("s") == "x"` compares the column `s` with the text `x`. Use `col("x")` to compare with the column `x`, and `lit("x")` to make a constant explicit:
@@ -64,7 +78,7 @@ Below is a list of currently supported expressions that can be created through t
 
 ## Column Expression
 
-This expression references a column by name, with `col(name)` or `ColumnExpression(name)`.
+This expression references a column by name, with `col(name)`.
 
 ```python
 import duckdb
@@ -81,7 +95,7 @@ Selecting a single column:
 
 ```python
 a_column = duckdb.col('a')
-duckdb.df(df).select(a_column).show()
+duckdb.from_df(df).select(a_column).show()
 ```
 
 ```text
@@ -101,10 +115,10 @@ Selecting multiple columns:
 ```python
 col_list = [
         duckdb.col('a') * 10,
-        duckdb.col('b').isnull(),
+        duckdb.col('b').is_null(),
         duckdb.col('c') + 5
     ]
-duckdb.df(df).select(*col_list).show()
+duckdb.from_df(df).select(*col_list).show()
 ```
 
 ```text
@@ -135,7 +149,7 @@ print(rel.select(duckdb.col("st.a"), duckdb.col("st", "a"), col("st")["a"]).fetc
 This expression selects all columns of the input source.
 
 Optionally it's possible to provide an `exclude` list to filter out columns of the table.
-This `exclude` list can contain strings and `ColumnExpression`s, which name a column of a table by its parts, as in `col("t", "b")`; other expressions raise a `ValueError`.
+This `exclude` list holds column names. To leave out a column of one side of a join, such as `b` of `t`, give it by its parts with the older constructor, as in `StarExpression(exclude=[col("t", "b")])`; `star()` takes plain names only.
 
 ```python
 import duckdb
@@ -148,7 +162,7 @@ df = pd.DataFrame({
 })
 
 all_but_b = duckdb.star(exclude = ['b'])
-duckdb.df(df).select(all_but_b).show()
+duckdb.from_df(df).select(all_but_b).show()
 ```
 
 ```text
@@ -167,7 +181,7 @@ duckdb.df(df).select(all_but_b).show()
 
 ## Constant Expression
 
-This expression contains a single value, with `lit(value)` or `ConstantExpression(value)`. Values convert as described in [Conversion between DuckDB and Python]({% link docs/2.0/clients/python/conversion.md %}); a `dict` with string keys is a `STRUCT`, and a `dict` with other keys is a `MAP`.
+This expression contains a single value, with `lit(value)`. Operators, `fn()` and the case builder take Python values directly, so `lit()` is needed only where a value must be an expression of its own, as in a select list. Values convert as described in [Conversion between DuckDB and Python]({% link docs/2.0/clients/python/conversion.md %}); a `dict` with string keys is a `STRUCT`, and a `dict` with other keys is a `MAP`.
 
 ```python
 import duckdb
@@ -180,7 +194,7 @@ df = pd.DataFrame({
 })
 
 const = duckdb.lit('hello')
-duckdb.df(df).select(const).show()
+duckdb.from_df(df).select(const).show()
 ```
 
 ```text
@@ -197,18 +211,12 @@ duckdb.df(df).select(const).show()
 
 ## Case Expression
 
-This expression contains a `CASE WHEN (...) THEN (...) ELSE (...) END` expression.
-By default `ELSE` is `NULL` and it can be set using `.otherwise(value)`.
-Additional `WHEN (...) THEN (...)` blocks can be added with `.when(condition, value)`.
+This expression is a [`CASE` expression]({% link docs/2.0/sql/expressions/case.md %}). `when(condition).then(value)` starts it, each further `.when(condition).then(value)` adds a branch, tried in order, and `.otherwise(value)` gives the value where no branch matches. `.end()` closes it without an `otherwise`, which leaves `NULL` there.
 
 ```python
 import duckdb
 import pandas as pd
-from duckdb import (
-    lit,
-    col,
-    when
-)
+from duckdb import col, when
 
 df = pd.DataFrame({
     'a': [1, 2, 3, 4],
@@ -216,34 +224,13 @@ df = pd.DataFrame({
     'c': [42, 21, 13, 14]
 })
 
-hello = lit('hello')
-world = lit('world')
-
-case = \
-    when(condition = col('b') == False, value = world) \
-    .otherwise(hello)
-duckdb.df(df).select(case).show()
-```
-
-```text
-┌──────────────────────────────────────────────────────────┐
-│ CASE  WHEN ((b = false)) THEN ('world') ELSE 'hello' END │
-│                         varchar                          │
-├──────────────────────────────────────────────────────────┤
-│ hello                                                    │
-│ hello                                                    │
-│ world                                                    │
-│ hello                                                    │
-└──────────────────────────────────────────────────────────┘
-```
-
-`when(condition).then(value)` starts the expression, continued with `.when(condition).then(value)` and completed with `.otherwise(value)`, or with `.end()` to leave `ELSE` as `NULL`:
-
-```python
-from duckdb import when
-
-size = when(col("c") > 20).then("large").otherwise("small").alias("size")
-duckdb.df(df).select(col("c"), size).show()
+size = (
+    when(col("c") > 40).then("large")
+    .when(col("c") > 20).then("medium")
+    .otherwise("small")
+    .alias("size")
+)
+duckdb.from_df(df).select(col("c"), size).show()
 ```
 
 ```text
@@ -252,26 +239,35 @@ duckdb.df(df).select(col("c"), size).show()
 │ int64 │ varchar │
 ├───────┼─────────┤
 │    42 │ large   │
-│    21 │ large   │
+│    21 │ medium  │
 │    13 │ small   │
 │    14 │ small   │
 └───────┴─────────┘
 ```
 
+The older constructor builds the same expression: `CaseExpression(condition, value)` takes the first branch, `.when(condition, value)` adds one and `.otherwise(value)` closes it:
+
+```python
+from duckdb import CaseExpression
+
+older = CaseExpression(col("c") > 40, "large").when(col("c") > 20, "medium").otherwise("small")
+print(older)
+```
+
+```text
+(CASE WHEN ("c" > 40) THEN 'large' WHEN ("c" > 20) THEN 'medium' ELSE 'small' END)
+```
+
 ## Function Expression
 
 This expression contains a function call.
-It can be constructed by providing the function name and an arbitrary amount of arguments, with `fn(name, *args)` or `FunctionExpression(name, *args)`.
+It is built from the function name and any number of arguments, with `fn(name, *args)`.
 An argument that is a plain string is a value, so `fn('upper', 's')` passes the text `s`; use `col('s')` for the column.
 
 ```python
 import duckdb
 import pandas as pd
-from duckdb import (
-    lit,
-    col,
-    fn
-)
+from duckdb import col, fn
 
 df = pd.DataFrame({
     'a': [1, 2, 3, 4],
@@ -279,8 +275,8 @@ df = pd.DataFrame({
     'c': [42, 21, 13, 14]
 })
 
-multiply_by_2 = fn('multiply', col('a'), lit(2))
-duckdb.df(df).select(multiply_by_2).show()
+multiply_by_2 = fn('multiply', col('a'), 2)
+duckdb.from_df(df).select(multiply_by_2).show()
 ```
 
 ```text
@@ -295,7 +291,7 @@ duckdb.df(df).select(multiply_by_2).show()
 └────────────────┘
 ```
 
-`fn` also passes keyword arguments by name: `fn("round", col("x"), precision=1)` is `round("x", "precision" := 1)`. `coalesce(*values)`, or `CoalesceOperator(*values)`, gives the first of its arguments that is not `NULL`. A Python function given as an argument becomes a SQL [lambda]({% link docs/2.0/sql/functions/lambda.md %}); it is called once, with expressions, to build the lambda's body:
+`fn` also passes keyword arguments by name: `fn("round", col("x"), precision=1)` is `round("x", "precision" := 1)`. `coalesce(*values)` gives the first of its arguments that is not `NULL`. A Python function given as an argument becomes a SQL [lambda]({% link docs/2.0/sql/functions/lambda.md %}); it is called once, with expressions, to build the lambda's body:
 
 ```python
 from duckdb import fn
@@ -310,13 +306,13 @@ print(rel.select(fn("list_transform", col("l"), lambda v: v * 10)).fetchall())
 
 ## SQL Expression
 
-This expression contains any valid SQL expression. `SQLExpression(text)` checks that the text is one expression; `sql_expr(text)` splices the text in without a check. Never build either from untrusted input. With the `sales` DataFrame from the top of the page:
+This expression contains any valid SQL expression, written as text with `sql_expr(text)`, which splices the text in as it is. The older `SQLExpression(text)` also checks that the text is one expression. Never build either from untrusted input. With the `sales` DataFrame from the top of the page:
 
 ```python
-from duckdb import SQLExpression
+from duckdb import sql_expr
 
 rel = duckdb.from_df(sales)
-print(rel.select(SQLExpression("price * 2").alias("double_price")).fetchall())
+print(rel.select(sql_expr("price * 2").alias("double_price")).fetchall())
 ```
 
 ```text
@@ -387,8 +383,8 @@ The Expression class also contains many operations that can be applied to any Ex
 | `.isnotin(*values)`                          | Creates a [`NOT IN` expression]({% link docs/2.0/sql/expressions/in.md %}#not-in) against the provided values                |
 | `.between(low, high)`                        | Checks whether the expression is between `low` and `high`, both included                                                         |
 | `.like(pattern)`, `.ilike(pattern)`          | Matches the text against a [`LIKE` pattern]({% link docs/2.0/sql/functions/pattern_matching.md %}), `ilike` ignoring case    |
-| `.is_null()`, `.isnull()`                    | Checks whether the expression is `NULL`                                                                                          |
-| `.is_not_null()`, `.isnotnull()`             | Checks whether the expression is not `NULL`                                                                                      |
+| `.is_null()`                                 | Checks whether the expression is `NULL`                                                                                          |
+| `.is_not_null()`                             | Checks whether the expression is not `NULL`                                                                                      |
 | `.collate(collation: str)`                   | Compares and sorts by a [collation]({% link docs/2.0/sql/expressions/collations.md %}), such as `nocase`                     |
 | `.concat(*values)`                           | Concatenates text values                                                                                                         |
 | `[key]`                                      | Takes a field of a `STRUCT` by name, an element of a list by position, counting from 1, or an entry of a map by key              |

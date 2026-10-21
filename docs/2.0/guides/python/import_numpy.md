@@ -18,19 +18,36 @@ For example:
 import duckdb
 import numpy as np
 
-my_arr = np.array([(1, 9.0), (2, 8.0), (3, 7.0)])
-
-duckdb.sql("SELECT * FROM my_arr")
+columns = {
+    "id": np.array([1, 2, 3]),
+    "value": np.array([9.0, 8.0, 7.0]),
+}
+print(duckdb.sql("SELECT * FROM columns").fetchall())
 ```
 
 ```text
-┌─────────┬─────────┬─────────┐
-│ column0 │ column1 │ column2 │
-│ double  │ double  │ double  │
-├─────────┼─────────┼─────────┤
-│     1.0 │     2.0 │     3.0 │
-│     9.0 │     8.0 │     7.0 │
-└─────────┴─────────┴─────────┘
+[(1, 9.0), (2, 8.0), (3, 7.0)]
+```
+
+Each array supplies one column. DuckDB also accepts a two-dimensional array, treating each outer array as a column. Transpose an array whose outer dimension represents rows before querying it.
+
+A [masked array](https://numpy.org/doc/stable/reference/maskedarray.html) is read with its mask: masked elements become `NULL`.
+
+```python
+my_masked_arr = np.ma.masked_array([1.0, 2.0, 3.0], mask=[False, True, False])
+
+duckdb.sql("SELECT * FROM my_masked_arr")
+```
+
+```text
+┌─────────┐
+│ column0 │
+│ double  │
+├─────────┤
+│     1.0 │
+│    NULL │
+│     3.0 │
+└─────────┘
 ```
 
 ## See Also
