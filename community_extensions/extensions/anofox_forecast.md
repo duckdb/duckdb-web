@@ -20,13 +20,28 @@ repo:
   github: DataZooDE/anofox-forecast
   ref: e7f3138603037dc1e99e74a726c0a7220acc3b8f
 
-extension_star_count: 41
-extension_star_count_pretty: 41
-extension_download_count: 48408
-extension_download_count_pretty: 48.4k
+extension_star_count: 42
+extension_star_count_pretty: 42
+extension_download_count: 64082
+extension_download_count_pretty: 64.1k
 image: '/images/community_extensions/social_preview/preview_community_extension_anofox_forecast.png'
 layout: community_extension_doc
 ---
+### Compatibility Matrix
+
+This table covers all DuckDB releases that have not reached [end-of-life](https://duckdb.org/release_calendar), including LTS releases, and shows the 2 most recent patch releases of each. Older patch releases are not listed, but the extension may be available for them as well.
+
+<div class="extension_compatibility_table"></div>
+
+| Platform | 1.4.4 | 1.4.5 | 1.5.5 | 1.5.6 |
+| :--- | :---: | :---: | :---: | :---: |
+| Linux AMD64 | ✅ | ❌ | ✅ | ✅ |
+| Linux ARM64 | ✅ | ❌ | ✅ | ✅ |
+| macOS AMD64 | ✅ | ❌ | ✅ | ✅ |
+| macOS ARM64 | ✅ | ❌ | ✅ | ✅ |
+| Windows AMD64 | ✅ | ❌ | ✅ | ❌ |
+| Windows ARM64 | ❌ | ❌ | ❌ | ❌ |
+| WebAssembly | ✅ | ❌ | ✅ | ✅ |
 
 ### Installing and Loading
 ```sql
@@ -44,7 +59,6 @@ LOAD {{ page.extension.name }};
 ### About {{ page.extension.name }}
 {{ page.docs.extended_description }}
 {% endif %}
-
 ### Added Functions
 
 <div class="extension_functions_table"></div>

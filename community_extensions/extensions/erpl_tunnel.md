@@ -8,7 +8,7 @@ excerpt: |
 extension:
   name: erpl_tunnel
   description: Reach any TCP service from DuckDB through an SSH bastion, Tailscale or NetBird — and publish local ports back onto those networks.
-  version: 2026.10.03
+  version: 2026.10.20
   language: C++
   build: cmake
   license: BSL 1.1
@@ -24,15 +24,33 @@ extension:
 
 repo:
   github: DataZooDE/erpl-tunnel
-  ref: 6732b0e9df99f52264bac39204e0e3b32a8fe9e2
+  ref: 470fa6499b689c50fc323f589fcf73c6a86518ef
+  # ref builds against DuckDB 2.0, variegata against v1.5.6; one commit
+  # serves both (and v1.4.5 via the ref fallback).
+  variegata: 470fa6499b689c50fc323f589fcf73c6a86518ef
 
 extension_star_count: 4
 extension_star_count_pretty: 4
-extension_download_count: 729
-extension_download_count_pretty: 729
+extension_download_count: 1281
+extension_download_count_pretty: 1.3k
 image: '/images/community_extensions/social_preview/preview_community_extension_erpl_tunnel.png'
 layout: community_extension_doc
 ---
+### Compatibility Matrix
+
+This table covers all DuckDB releases that have not reached [end-of-life](https://duckdb.org/release_calendar), including LTS releases, and shows the 2 most recent patch releases of each. Older patch releases are not listed, but the extension may be available for them as well.
+
+<div class="extension_compatibility_table"></div>
+
+| Platform | 1.4.4 | 1.4.5 | 1.5.5 | 1.5.6 |
+| :--- | :---: | :---: | :---: | :---: |
+| Linux AMD64 | ❌ | ❌ | ✅ | ✅ |
+| Linux ARM64 | ❌ | ❌ | ✅ | ✅ |
+| macOS AMD64 | ❌ | ❌ | ✅ | ✅ |
+| macOS ARM64 | ❌ | ❌ | ✅ | ✅ |
+| Windows AMD64 | ❌ | ❌ | ✅ | ✅ |
+| Windows ARM64 | ❌ | ❌ | ❌ | ❌ |
+| WebAssembly | ❌ | ❌ | ❌ | ❌ |
 
 ### Installing and Loading
 ```sql
@@ -50,7 +68,6 @@ LOAD {{ page.extension.name }};
 ### About {{ page.extension.name }}
 {{ page.docs.extended_description }}
 {% endif %}
-
 ### Added Functions
 
 <div class="extension_functions_table"></div>

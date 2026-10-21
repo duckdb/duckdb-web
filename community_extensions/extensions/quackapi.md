@@ -22,7 +22,7 @@ extension:
     FastAPI-class HTTP framework inside DuckDB — CREATE ROUTE turns SQL into
     typed, validated endpoints; one process is DB + HTTP (+ PDF/renderer via
     companion extensions).
-  version: 0.1.3
+  version: 0.1.4
   language: C++
   build: cmake
   license: MIT
@@ -36,7 +36,9 @@ extension:
 repo:
   github: asubbarao/quackapi
   # Pin to the packaging commit SHA (set by release engineer; never a branch).
-  ref: 269c7b22e6d379be4ab18e26182c8b15ec8be463
+  ref: afc31ea4e245b7306e1554da086015196e943e18
+  # DuckDB v1.5.6 builds read repo.variegata (scripts/build.py): exec routes + outbound timeouts, pre-2.0 API.
+  variegata: 9da900bcaa1da48b64dbcab5cc3470c849b851a0
 
 docs:
   hello_world: |
@@ -135,7 +137,7 @@ docs:
 
     ## Platforms & build
 
-    Targets **DuckDB v1.5.6** only. C++17; depends only on DuckDB-bundled **httplib**
+    Targets **DuckDB v2.0** (`repo.ref`) and **v1.5.6** (`repo.variegata`). C++17; depends only on DuckDB-bundled **httplib**
     and **mbedtls** (no vcpkg, no libcurl). CI builds linux/macOS/windows_amd64;
     excludes wasm and Windows MinGW/rtools/arm64.
 
@@ -155,11 +157,26 @@ docs:
 
 extension_star_count: 7
 extension_star_count_pretty: 7
-extension_download_count: 902
-extension_download_count_pretty: 902
+extension_download_count: 1505
+extension_download_count_pretty: 1.5k
 image: '/images/community_extensions/social_preview/preview_community_extension_quackapi.png'
 layout: community_extension_doc
 ---
+### Compatibility Matrix
+
+This table covers all DuckDB releases that have not reached [end-of-life](https://duckdb.org/release_calendar), including LTS releases, and shows the 2 most recent patch releases of each. Older patch releases are not listed, but the extension may be available for them as well.
+
+<div class="extension_compatibility_table"></div>
+
+| Platform | 1.4.4 | 1.4.5 | 1.5.5 | 1.5.6 |
+| :--- | :---: | :---: | :---: | :---: |
+| Linux AMD64 | ❌ | ❌ | ✅ | ✅ |
+| Linux ARM64 | ❌ | ❌ | ✅ | ✅ |
+| macOS AMD64 | ❌ | ❌ | ✅ | ✅ |
+| macOS ARM64 | ❌ | ❌ | ✅ | ✅ |
+| Windows AMD64 | ❌ | ❌ | ✅ | ✅ |
+| Windows ARM64 | ❌ | ❌ | ❌ | ❌ |
+| WebAssembly | ❌ | ❌ | ❌ | ❌ |
 
 ### Installing and Loading
 ```sql
@@ -177,7 +194,6 @@ LOAD {{ page.extension.name }};
 ### About {{ page.extension.name }}
 {{ page.docs.extended_description }}
 {% endif %}
-
 ### Added Functions
 
 <div class="extension_functions_table"></div>

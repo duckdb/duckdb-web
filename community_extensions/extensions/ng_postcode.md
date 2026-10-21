@@ -49,11 +49,26 @@ docs:
 
 extension_star_count: 0
 extension_star_count_pretty: 0
-extension_download_count: 470
-extension_download_count_pretty: 470
+extension_download_count: 743
+extension_download_count_pretty: 743
 image: '/images/community_extensions/social_preview/preview_community_extension_ng_postcode.png'
 layout: community_extension_doc
 ---
+### Compatibility Matrix
+
+This table covers all DuckDB releases that have not reached [end-of-life](https://duckdb.org/release_calendar), including LTS releases, and shows the 2 most recent patch releases of each. Older patch releases are not listed, but the extension may be available for them as well.
+
+<div class="extension_compatibility_table"></div>
+
+| Platform | 1.4.4 | 1.4.5 | 1.5.5 | 1.5.6 |
+| :--- | :---: | :---: | :---: | :---: |
+| Linux AMD64 | ❌ | ❌ | ❌ | ✅ |
+| Linux ARM64 | ❌ | ❌ | ❌ | ✅ |
+| macOS AMD64 | ❌ | ❌ | ❌ | ✅ |
+| macOS ARM64 | ❌ | ❌ | ❌ | ✅ |
+| Windows AMD64 | ❌ | ❌ | ❌ | ✅ |
+| Windows ARM64 | ❌ | ❌ | ❌ | ❌ |
+| WebAssembly | ❌ | ❌ | ❌ | ❌ |
 
 ### Installing and Loading
 ```sql
@@ -71,21 +86,20 @@ LOAD {{ page.extension.name }};
 ### About {{ page.extension.name }}
 {{ page.docs.extended_description }}
 {% endif %}
-
 ### Added Functions
 
 <div class="extension_functions_table"></div>
 
-|      function_name       | function_type | description | comment | examples |
-|--------------------------|---------------|-------------|---------|----------|
-| ng_postcode_compact      | scalar        | NULL        | NULL    |          |
-| ng_postcode_format       | scalar        | NULL        | NULL    |          |
-| ng_postcode_parent       | scalar        | NULL        | NULL    |          |
-| ng_postcode_parse        | scalar        | NULL        | NULL    |          |
-| ng_postcode_prefix_parse | scalar        | NULL        | NULL    |          |
-| ng_postcode_truncate     | scalar        | NULL        | NULL    |          |
-| ng_postcode_version      | scalar        | NULL        | NULL    |          |
-| ng_postcode_within       | scalar        | NULL        | NULL    |          |
+|      function_name       | function_type |                                                   description                                                    |                     comment                      |                                 examples                                 |
+|--------------------------|---------------|------------------------------------------------------------------------------------------------------------------|--------------------------------------------------|--------------------------------------------------------------------------|
+| ng_postcode_parse        | scalar        | Parse a Nigerian NIPOST postcode in any case or spacing into its 11-character compact form, or NULL if malformed | Returns VARCHAR. Rejects the old six-digit code. | [SELECT ng_postcode_parse('ek 01 a03 fk 01'); -- EK01A03FK01]            |
+| ng_postcode_prefix_parse | scalar        | Parse a postcode cut off after any segment into its compact prefix, or NULL                                      | Returns VARCHAR.                                 | [SELECT ng_postcode_prefix_parse('ek-01-a03'); -- EK01A03]               |
+| ng_postcode_format       | scalar        | Format a code or prefix in the hyphenated style, or NULL if malformed                                            | Returns VARCHAR.                                 | [SELECT ng_postcode_format('EK01A03FK01'); -- EK-01-A03-FK-01]           |
+| ng_postcode_truncate     | scalar        | Cut a code after a segment: state, lga, district, area or unit                                                   | Returns VARCHAR. NULL for an unknown segment.    | [SELECT ng_postcode_truncate('EK-01-A03-FK-01', 'district'); -- EK01A03] |
+| ng_postcode_parent       | scalar        | Return the next coarser prefix of a code or prefix                                                               | Returns VARCHAR.                                 | [SELECT ng_postcode_parent('EK01A03FK01'); -- EK01A03FK]                 |
+| ng_postcode_within       | scalar        | Whether a code lies inside a prefix                                                                              | Returns BOOLEAN.                                 | [SELECT ng_postcode_within('EK-01-A03-FK-01', 'EK-01'); -- true]         |
+| ng_postcode_compact      | scalar        | Strip spaces and hyphens and uppercase, without validating                                                       | Returns VARCHAR.                                 | [SELECT ng_postcode_compact(' ek-01 a03 fk 01 '); -- EK01A03FK01]        |
+| ng_postcode_version      | scalar        | The extension version                                                                                            | Returns VARCHAR.                                 | [SELECT ng_postcode_version();]                                          |
 
 ### Overloaded Functions
 

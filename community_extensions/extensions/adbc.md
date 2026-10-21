@@ -17,7 +17,8 @@ extension:
 repo:
   github: columnar-tech/duckdb-adbc-client
   andium: c30888194e57d78017cbde379abb117e82538fe6
-  ref: d4b19a7b3d291464eb54b2d50e185466234225d9
+  variegata: d4b19a7b3d291464eb54b2d50e185466234225d9
+  ref: b1b13c05d7354ce83342c9bae242d25152144ec6
 docs:
   hello_world: |
     -- Install and load the ADBC extension
@@ -125,11 +126,26 @@ docs:
 
 extension_star_count: 48
 extension_star_count_pretty: 48
-extension_download_count: 1252
-extension_download_count_pretty: 1.3k
+extension_download_count: 2304
+extension_download_count_pretty: 2.3k
 image: '/images/community_extensions/social_preview/preview_community_extension_adbc.png'
 layout: community_extension_doc
 ---
+### Compatibility Matrix
+
+This table covers all DuckDB releases that have not reached [end-of-life](https://duckdb.org/release_calendar), including LTS releases, and shows the 2 most recent patch releases of each. Older patch releases are not listed, but the extension may be available for them as well.
+
+<div class="extension_compatibility_table"></div>
+
+| Platform | 1.4.4 | 1.4.5 | 1.5.5 | 1.5.6 |
+| :--- | :---: | :---: | :---: | :---: |
+| Linux AMD64 | ❌ | ✅ | ✅ | ✅ |
+| Linux ARM64 | ❌ | ✅ | ✅ | ✅ |
+| macOS AMD64 | ❌ | ✅ | ✅ | ✅ |
+| macOS ARM64 | ❌ | ✅ | ✅ | ✅ |
+| Windows AMD64 | ❌ | ✅ | ✅ | ✅ |
+| Windows ARM64 | ❌ | ❌ | ❌ | ❌ |
+| WebAssembly | ❌ | ✅ | ✅ | ✅ |
 
 ### Installing and Loading
 ```sql
@@ -147,7 +163,6 @@ LOAD {{ page.extension.name }};
 ### About {{ page.extension.name }}
 {{ page.docs.extended_description }}
 {% endif %}
-
 ### Added Functions
 
 <div class="extension_functions_table"></div>

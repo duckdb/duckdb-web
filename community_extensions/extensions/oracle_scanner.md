@@ -8,7 +8,7 @@ excerpt: |
 extension:
   name: oracle_scanner
   description: Read and write Oracle Database with no Oracle client
-  version: '0.4.0'
+  version: '0.5.0'
   language: C++
   build: cmake
   license: Apache-2.0
@@ -19,18 +19,34 @@ extension:
 
 repo:
   github: krokozyab/quack-oracle
-  # The commit tagged v0.4.0, pinned by SHA so what is built cannot move.
-  ref: d4aa50f9bf23ca44b44f0df48fb0065ba751f5be
-  # The DuckDB 2.0 port of v0.4.0 (branch duckdb-2.0-v0.4), built against v2.0-cyanoptera.
-  ref_next: 5ffbef1e789012650aea6d85026b7c6fca8cae1e
+  # The commit tagged v0.5.0, built for DuckDB 2.0, pinned by SHA so what is
+  # built cannot move.
+  ref: a7d3aa4343a87169bc1e4a966387e4c0d3f53d0b
+  # DuckDB 1.5.6 stays on v0.4.0, the last release built for that line.
+  variegata: d4aa50f9bf23ca44b44f0df48fb0065ba751f5be
 
 extension_star_count: 4
 extension_star_count_pretty: 4
-extension_download_count: 1061
-extension_download_count_pretty: 1.1k
+extension_download_count: 1581
+extension_download_count_pretty: 1.6k
 image: '/images/community_extensions/social_preview/preview_community_extension_oracle_scanner.png'
 layout: community_extension_doc
 ---
+### Compatibility Matrix
+
+This table covers all DuckDB releases that have not reached [end-of-life](https://duckdb.org/release_calendar), including LTS releases, and shows the 2 most recent patch releases of each. Older patch releases are not listed, but the extension may be available for them as well.
+
+<div class="extension_compatibility_table"></div>
+
+| Platform | 1.4.4 | 1.4.5 | 1.5.5 | 1.5.6 |
+| :--- | :---: | :---: | :---: | :---: |
+| Linux AMD64 | ❌ | ❌ | ✅ | ✅ |
+| Linux ARM64 | ❌ | ❌ | ✅ | ✅ |
+| macOS AMD64 | ❌ | ❌ | ✅ | ✅ |
+| macOS ARM64 | ❌ | ❌ | ✅ | ✅ |
+| Windows AMD64 | ❌ | ❌ | ✅ | ✅ |
+| Windows ARM64 | ❌ | ❌ | ❌ | ❌ |
+| WebAssembly | ❌ | ❌ | ❌ | ❌ |
 
 ### Installing and Loading
 ```sql
@@ -48,7 +64,6 @@ LOAD {{ page.extension.name }};
 ### About {{ page.extension.name }}
 {{ page.docs.extended_description }}
 {% endif %}
-
 ### Added Functions
 
 <div class="extension_functions_table"></div>
