@@ -676,7 +676,7 @@ cargo add duckdb@{{ site.next_major_duckdb_rust_version }} --features bundled
     data-docs="{% link docs/1.5/clients/go/overview.md %}">
 
 {%- highlight bash -%}
-go get github.com/duckdb/duckdb-go/v2
+go get github.com/duckdb/duckdb-go/v2@{{ site.current_duckdb_go_tag }}
 {%- endhighlight -%}
 
 </div>
@@ -698,7 +698,7 @@ go get github.com/duckdb/duckdb-go/v2@{{ site.lts_duckdb_go_tag }}
     data-docs="{% link docs/2.0/clients/go/overview.md %}">
 
 {%- highlight bash -%}
-go get github.com/duckdb/duckdb-go/v2@{{ site.next_major_duckdb_go_version }}
+go get github.com/duckdb/duckdb-go/v2
 {%- endhighlight -%}
 
 </div>
