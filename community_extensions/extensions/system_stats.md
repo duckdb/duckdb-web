@@ -8,7 +8,7 @@ excerpt: |
 extension:
   name: system_stats
   description: Provides table functions to access system-level statistics for monitoring purpose
-  version: 1.0.0
+  version: 1.1.0
   language: Rust & C++
   build: cmake
   license: MIT
@@ -20,7 +20,7 @@ extension:
 repo:
   github: dentiny/system_stats
   andium: d1933b1a67b89a48317102bc9cb008e152526afb
-  ref: 5d8b119d78f904b1cffa2f3b3adcbc443b5b58fe
+  ref: e7dea146ce16cb4c734d5b4f16aa1e006f72f370
 
 docs:
   hello_world: |
@@ -56,11 +56,11 @@ This table covers all DuckDB releases that have not reached [end-of-life](https:
 
 | Platform | 1.4.4 | 1.4.5 | 1.5.5 | 1.5.6 | 2.0.0 |
 | :--- | :---: | :---: | :---: | :---: | :---: |
-| Linux AMD64 | ✅ | ❌ | ✅ | ✅ | ❌ |
-| Linux ARM64 | ✅ | ❌ | ✅ | ✅ | ❌ |
+| Linux AMD64 | ✅ | ❌ | ✅ | ✅ | ✅ |
+| Linux ARM64 | ✅ | ❌ | ✅ | ✅ | ✅ |
 | macOS AMD64 | ✅ | ❌ | ✅ | ✅ | ❌ |
-| macOS ARM64 | ✅ | ❌ | ✅ | ✅ | ❌ |
-| Windows AMD64 | ❌ | ❌ | ✅ | ✅ | ❌ |
+| macOS ARM64 | ✅ | ❌ | ✅ | ✅ | ✅ |
+| Windows AMD64 | ❌ | ❌ | ✅ | ✅ | ✅ |
 | Windows ARM64 | ❌ | ❌ | ❌ | ❌ | ❌ |
 | WebAssembly | ❌ | ❌ | ❌ | ❌ | ❌ |
 

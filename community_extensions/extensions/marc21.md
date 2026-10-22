@@ -8,7 +8,7 @@ excerpt: |
 extension:
   name: marc21
   description: Read, write, validate and edit MARC 21 bibliographic data (ISO 2709, MARCXML, MARC-in-JSON, breaker, Aleph; UTF-8 and MARC-8)
-  version: 1.5.6
+  version: 2.0.0
   language: C++
   build: cmake
   license: MIT
@@ -17,7 +17,8 @@ extension:
 
 repo:
   github: mgbilby/duckdb-marc21
-  ref: 9fcea0628f6c8853a5f8e96d4e789f08ba801f7f
+  ref: d4a821d289fb0ee33c2bcf2fdbed8874a64169fa
+  variegata: 9fcea0628f6c8853a5f8e96d4e789f08ba801f7f
 
 docs:
   hello_world: |
@@ -64,8 +65,10 @@ docs:
     and DuckDB FileSystem protocols (httpfs URLs — including SRU and OAI-PMH
     responses, whose envelopes are handled).  `read_z3950` retrieves records
     live from Z39.50 servers (Library of Congress, OCLC, most ILSes) with a
-    built-in dependency-free client.  Scans parallelise across and within
-    files.
+    built-in dependency-free client.  On DuckDB v2.0 the readers are
+    multi-file readers (lists of paths, `filename` and `file_index` columns,
+    `union_by_name`, `hive_partitioning`, parallel across files).  Scans
+    parallelise across and within files.
 
     ### Write
     `COPY ... TO (FORMAT marc | marcxml | mrk | marcjson)`.  ISO 2709 output
@@ -97,13 +100,13 @@ This table covers all DuckDB releases that have not reached [end-of-life](https:
 
 | Platform | 1.4.4 | 1.4.5 | 1.5.5 | 1.5.6 | 2.0.0 |
 | :--- | :---: | :---: | :---: | :---: | :---: |
-| Linux AMD64 | ❌ | ❌ | ✅ | ✅ | ❌ |
-| Linux ARM64 | ❌ | ❌ | ✅ | ✅ | ❌ |
+| Linux AMD64 | ❌ | ❌ | ✅ | ✅ | ✅ |
+| Linux ARM64 | ❌ | ❌ | ✅ | ✅ | ✅ |
 | macOS AMD64 | ❌ | ❌ | ✅ | ✅ | ❌ |
-| macOS ARM64 | ❌ | ❌ | ✅ | ✅ | ❌ |
-| Windows AMD64 | ❌ | ❌ | ✅ | ✅ | ❌ |
+| macOS ARM64 | ❌ | ❌ | ✅ | ✅ | ✅ |
+| Windows AMD64 | ❌ | ❌ | ✅ | ✅ | ✅ |
 | Windows ARM64 | ❌ | ❌ | ❌ | ❌ | ❌ |
-| WebAssembly | ❌ | ❌ | ✅ | ✅ | ❌ |
+| WebAssembly | ❌ | ❌ | ✅ | ✅ | ✅ |
 
 ### Installing and Loading
 ```sql
