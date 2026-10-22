@@ -4,7 +4,7 @@ layout: docu
 title: DuckDB Wasm
 ---
 
-> The latest stable version of the DuckDB WebAssembly client is {% if site.current_duckdb_wasm_version != "" %}{{ site.current_duckdb_wasm_version }}{% else %}{{ site.lts_duckdb_wasm_version }}{% endif %}
+> The latest stable version of the DuckDB WebAssembly client is {% if site.maintained_duckdb_wasm_version != "" %}{{ site.maintained_duckdb_wasm_version }}{% else %}{{ site.old_lts_duckdb_wasm_version }}{% endif %}
 
 DuckDB has been compiled to WebAssembly, so it can run inside any browser on any device.
 

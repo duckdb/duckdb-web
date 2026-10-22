@@ -56,7 +56,7 @@ def replace_jekyll_tags_for_variables(doc_body, config):
     )
 
     # evaluate version numbers split into components, e.g., for the Rust crate version:
-    # {% assign rust_v = site.current_duckdb_rust_version | split: "." %}...{{ rust_v[1] | prepend: "0" | slice: -2, 2 }}
+    # {% assign rust_v = site.maintained_duckdb_rust_version | split: "." %}...{{ rust_v[1] | prepend: "0" | slice: -2, 2 }}
     for variable, config_key in re.findall(r'{% assign (\w+) = site\.(\w+) \| split: "\." %}', doc_body):
         parts = str(config[config_key]).split(".")
         doc_body = re.sub(
@@ -71,7 +71,7 @@ def replace_jekyll_tags_for_variables(doc_body, config):
         )
     doc_body = re.sub(r'{% assign .*? %}', "", doc_body)
 
-    # replace variables, e.g., {{ site.current_duckdb_version }}, undefined variables are rendered as empty strings (as in Jekyll)
+    # replace variables, e.g., {{ site.maintained_duckdb_version }}, undefined variables are rendered as empty strings (as in Jekyll)
     doc_body = re.sub(r"{{ site\.(\w+) }}", lambda m: str(config.get(m.group(1), "")), doc_body)
 
     # restore the content of {% raw %} blocks
@@ -495,7 +495,7 @@ def add_blog_posts(blog_post_files, config, internal_labels, of):
 
 # get the full DuckDB version number for the documentation version, e.g., 2.0 -> 2.0.0
 def get_duckdb_version(config, docs_version):
-    for prefix in ["current", "next_major", "lts"]:
+    for prefix in ["maintained", "latest", "old_lts"]:
         if config.get(f"{prefix}_short_duckdb_version") == docs_version:
             return config[f"{prefix}_duckdb_version"]
     return docs_version

@@ -4,7 +4,7 @@ layout: docu
 title: Python API
 ---
 
-> The latest stable version of the DuckDB Python client is {{ site.current_duckdb_version }}.
+> The latest stable version of the DuckDB Python client is {{ site.maintained_duckdb_version }}.
 
 ## Installation
 

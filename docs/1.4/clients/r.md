@@ -4,7 +4,7 @@ layout: docu
 title: R Client
 ---
 
-> The latest stable version of the DuckDB R client is {% if site.current_duckdb_r_version != "" %}{{ site.current_duckdb_r_version }}{% else %}{{ site.lts_duckdb_r_version }}{% endif %}.
+> The latest stable version of the DuckDB R client is {% if site.maintained_duckdb_r_version != "" %}{{ site.maintained_duckdb_r_version }}{% else %}{{ site.old_lts_duckdb_r_version }}{% endif %}.
 
 ## Installation
 

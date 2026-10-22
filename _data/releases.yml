@@ -1,21 +1,21 @@
 # Releases offered on the installation page (newest first). The first one is selected by default.
 #
 # version:       short version, matching _data/versions.csv, docs/⟨version⟩/ and _data/checksums_⟨XY⟩.yml
-# config_prefix: prefix of the version numbers in _config.yml, e.g., `next_major` → site.next_major_duckdb_java_version
+# config_prefix: prefix of the version numbers in _config.yml, e.g., `latest` → site.latest_duckdb_java_version
 #                A client is offered for a release if its version number is non-empty.
 #                The newest release that offers a client gets install commands without a version pin.
 # aliases:       legacy values of the installation page's `?version=` URL parameter
 # winget:        the CLI is published on winget
 
 - version: "2.0"
-  config_prefix: next_major
+  config_prefix: latest
   aliases: [preview]
 
 - version: "1.5"
-  config_prefix: current
+  config_prefix: maintained
   aliases: [current]
   winget: true
 
 - version: "1.4"
-  config_prefix: lts
+  config_prefix: old_lts
   aliases: [lts]

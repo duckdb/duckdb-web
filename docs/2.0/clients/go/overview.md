@@ -147,7 +147,7 @@ The project moved from `github.com/marcboeker/go-duckdb` to `github.com/duckdb/d
 
 ```bash
 # Update the dependency.
-go get github.com/duckdb/duckdb-go/v2@{{ site.next_major_duckdb_go_tag }}
+go get github.com/duckdb/duckdb-go/v2@{{ site.latest_duckdb_go_tag }}
 
 # Rewrite the import paths.
 gofmt -w -r '"github.com/marcboeker/go-duckdb/v2" -> "github.com/duckdb/duckdb-go/v2"' .

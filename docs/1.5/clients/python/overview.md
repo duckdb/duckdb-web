@@ -6,7 +6,7 @@ title: Python API
 
 > Installation To use the DuckDB Python client, visit the [Python installation page]({% link install/index.html %}?environment=python).
 >
-> The latest stable version of the DuckDB Python client is {{ site.current_duckdb_version }}.
+> The latest stable version of the DuckDB Python client is {{ site.maintained_duckdb_version }}.
 
 ## Installation
 

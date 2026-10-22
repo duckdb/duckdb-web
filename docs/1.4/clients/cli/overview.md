@@ -3,7 +3,7 @@ layout: docu
 title: Command Line Client
 ---
 
-> The latest stable version of the DuckDB command line client is {{ site.current_duckdb_version }}.
+> The latest stable version of the DuckDB command line client is {{ site.maintained_duckdb_version }}.
 
 ## Installation
 
@@ -48,7 +48,7 @@ duckdb
 ```
 
 ```text
-DuckDB v{{ site.current_duckdb_version }} ({{ site.current_duckdb_codename }}) {{ site.current_duckdb_hash }}
+DuckDB v{{ site.maintained_duckdb_version }} ({{ site.maintained_duckdb_codename }}) {{ site.maintained_duckdb_hash }}
 Enter ".help" for usage hints.
 Connected to a transient in-memory database.
 Use ".open FILENAME" to reopen on a persistent database.

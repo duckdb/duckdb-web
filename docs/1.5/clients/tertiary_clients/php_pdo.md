@@ -9,7 +9,7 @@ title: PHP Client (PDO)
 >
 > To use `pdo_duckdb`, follow the [instructions below](#installation-and-setup).
 >
-> The latest version of `pdo_duckdb` supports DuckDB {{ site.current_duckdb_php_version }}.
+> The latest version of `pdo_duckdb` supports DuckDB {{ site.maintained_duckdb_php_version }}.
 
 [pdo_duckdb](https://github.com/thomas-0816/pdo-duckdb-php) is a native DuckDB database driver for the [PHP Data Objects (PDO)](https://www.php.net/manual/en/book.pdo.php) interface.
 

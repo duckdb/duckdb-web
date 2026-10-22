@@ -12,7 +12,7 @@ title: C++ API
 
 > Installation To use the DuckDB C++ API, download the [`libduckdb` archive]({% link install/index.html %}?environment=c) for your platform.
 >
-> The latest stable version of the DuckDB C++ API is {{ site.next_major_duckdb_version }}.
+> The latest stable version of the DuckDB C++ API is {{ site.latest_duckdb_version }}.
 
 > Warning DuckDB's C++ API is internal.
 > It is not guaranteed to be stable and can change without notice.

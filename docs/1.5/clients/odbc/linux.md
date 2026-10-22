@@ -28,8 +28,8 @@ sudo yum install unixODBC
 
    <!-- markdownlint-disable MD034 -->
 
-   * [x86_64 (AMD64)](https://github.com/duckdb/duckdb-odbc/releases/download/v{% if site.current_duckdb_odbc_version != "" %}{{ site.current_duckdb_odbc_version }}{% else %}{{ site.lts_duckdb_odbc_version }}{% endif %}/duckdb_odbc-linux-amd64.zip)
-   * [arm64 (AArch64)](https://github.com/duckdb/duckdb-odbc/releases/download/v{% if site.current_duckdb_odbc_version != "" %}{{ site.current_duckdb_odbc_version }}{% else %}{{ site.lts_duckdb_odbc_version }}{% endif %}/duckdb_odbc-linux-aarch64.zip)
+   * [x86_64 (AMD64)](https://github.com/duckdb/duckdb-odbc/releases/download/v{% if site.maintained_duckdb_odbc_version != "" %}{{ site.maintained_duckdb_odbc_version }}{% else %}{{ site.old_lts_duckdb_odbc_version }}{% endif %}/duckdb_odbc-linux-amd64.zip)
+   * [arm64 (AArch64)](https://github.com/duckdb/duckdb-odbc/releases/download/v{% if site.maintained_duckdb_odbc_version != "" %}{{ site.maintained_duckdb_odbc_version }}{% else %}{{ site.old_lts_duckdb_odbc_version }}{% endif %}/duckdb_odbc-linux-aarch64.zip)
 
    <!-- markdownlint-enable MD034 -->
 

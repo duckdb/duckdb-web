@@ -13,7 +13,7 @@ title: Overview
 
 > Installation To use the DuckDB C API, download the [`libduckdb` archive]({% link install/index.html %}?environment=c) for your platform.
 >
-> The latest stable version of the DuckDB C API is {{ site.next_major_duckdb_version }}.
+> The latest stable version of the DuckDB C API is {{ site.latest_duckdb_version }}.
 
 DuckDB implements a custom C API modeled somewhat following the SQLite C API. The API is contained in the `duckdb.h` header. Continue to [Startup & Shutdown]({% link docs/2.0/clients/c/connect.md %}) to get started, or check out the [Full API overview]({% link docs/2.0/clients/c/api.md %}).
 

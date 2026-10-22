@@ -4,7 +4,7 @@ layout: docu
 title: Go Client
 ---
 
-> The latest stable release of the DuckDB Go client bundles DuckDB {% if site.current_duckdb_go_version != "" %}{{ site.current_duckdb_go_version }}{% else %}{{ site.lts_duckdb_go_version }}{% endif %}. Its own version tag encodes that DuckDB version; see [Versioning](#versioning) below.
+> The latest stable release of the DuckDB Go client bundles DuckDB {% if site.maintained_duckdb_go_version != "" %}{{ site.maintained_duckdb_go_version }}{% else %}{{ site.old_lts_duckdb_go_version }}{% endif %}. Its own version tag encodes that DuckDB version; see [Versioning](#versioning) below.
 
 The DuckDB Go client, [`duckdb-go`](https://github.com/duckdb/duckdb-go), is a SQL driver that conforms to Go's built-in [`database/sql`](https://pkg.go.dev/database/sql) interface, so DuckDB is used through the same API as any other Go SQL database. On top of `database/sql`, the client adds DuckDB-specific interfaces for the [Appender]({% link docs/1.5/clients/go/data_import.md %}#appender), [Apache Arrow]({% link docs/1.5/clients/go/result_handling.md %}), [user-defined functions]({% link docs/1.5/clients/go/functions.md %}), and [profiling]({% link docs/1.5/clients/go/profiling.md %}). This page focuses on installation. The other pages in this section cover connecting and each feature in detail.
 
@@ -42,7 +42,7 @@ import "github.com/duckdb/duckdb-go/v2"
 
 ## Versioning
 
-Starting with DuckDB v1.5.0, the `duckdb-go` version encodes the DuckDB version it bundles in its second semantic-versioning component. That component is the DuckDB `major`, `minor`, and `patch` numbers concatenated, with `minor` and `patch` each zero-padded to two digits: DuckDB v1.5.0 maps to `duckdb-go` v2.10500.x, and DuckDB {{ site.current_duckdb_go_version }} maps to v2.10505.0. The [README](https://github.com/duckdb/duckdb-go#readme) has the full mapping table for earlier releases.
+Starting with DuckDB v1.5.0, the `duckdb-go` version encodes the DuckDB version it bundles in its second semantic-versioning component. That component is the DuckDB `major`, `minor`, and `patch` numbers concatenated, with `minor` and `patch` each zero-padded to two digits: DuckDB v1.5.0 maps to `duckdb-go` v2.10500.x, and DuckDB {{ site.maintained_duckdb_go_version }} maps to v2.10505.0. The [README](https://github.com/duckdb/duckdb-go#readme) has the full mapping table for earlier releases.
 
 The LTS release line that stays on DuckDB 1.4 Andium is published as its own tags, which still follow the client's older versioning scheme. Select one in `go.mod` the same way as any other version; see the [releases page](https://github.com/duckdb/duckdb-go/releases) for the available tags.
 

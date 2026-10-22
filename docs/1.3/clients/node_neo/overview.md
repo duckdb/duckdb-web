@@ -3,7 +3,7 @@ layout: docu
 title: Node.js Client (Neo)
 ---
 
-> The latest version of the DuckDB Node.js (Neo) client is {{ site.current_duckdb_node_neo_version }}.
+> The latest version of the DuckDB Node.js (Neo) client is {{ site.maintained_duckdb_node_neo_version }}.
 
 An API for using [DuckDB]({% link index.html %}) in [Node.js](https://nodejs.org/).
 

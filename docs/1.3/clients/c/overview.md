@@ -3,7 +3,7 @@ layout: docu
 title: Overview
 ---
 
-> The latest version of the DuckDB C API is {{ site.current_duckdb_version }}.
+> The latest version of the DuckDB C API is {{ site.maintained_duckdb_version }}.
 
 DuckDB implements a custom C API modeled somewhat following the SQLite C API. The API is contained in the `duckdb.h` header. Continue to [Startup & Shutdown]({% link docs/1.3/clients/c/connect.md %}) to get started, or check out the [Full API overview]({% link docs/1.3/clients/c/api.md %}).
 

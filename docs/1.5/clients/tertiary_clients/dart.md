@@ -4,7 +4,7 @@ layout: docu
 title: Dart Client
 ---
 
-> The latest stable version of the DuckDB Dart client is {% if site.current_duckdb_dart_version != "" %}{{ site.current_duckdb_dart_version }}{% else %}{{ site.lts_duckdb_dart_version }}{% endif %}.
+> The latest stable version of the DuckDB Dart client is {% if site.maintained_duckdb_dart_version != "" %}{{ site.maintained_duckdb_dart_version }}{% else %}{{ site.old_lts_duckdb_dart_version }}{% endif %}.
 
 DuckDB.Dart is the native Dart API for DuckDB.
 
@@ -26,7 +26,7 @@ This will add a line like this to your package's `pubspec.yaml` (and run an impl
 
 ```yaml
 dependencies:
-  dart_duckdb: ^{{ site.current_duckdb_dart_version }}
+  dart_duckdb: ^{{ site.maintained_duckdb_dart_version }}
 ```
 
 Alternatively, your editor might support `flutter pub get`. Check the docs for your editor to learn more.

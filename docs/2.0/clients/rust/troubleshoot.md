@@ -22,7 +22,7 @@ The [`bundled` feature]({% link docs/2.0/clients/rust/overview.md %}#feature-fla
 Set `DUCKDB_LIB_DIR` to the directory containing the library, and `DUCKDB_INCLUDE_DIR` to the directory containing `duckdb.h` if it is elsewhere. For example, using a prebuilt library from a [DuckDB release](https://github.com/duckdb/duckdb/releases):
 
 ```bash
-wget https://github.com/duckdb/duckdb/releases/download/v{{ site.next_major_duckdb_version }}/duckdb-shared-libs-osx-universal.tar.gz
+wget https://github.com/duckdb/duckdb/releases/download/v{{ site.latest_duckdb_version }}/duckdb-shared-libs-osx-universal.tar.gz
 mkdir libduckdb && tar -xzf duckdb-shared-libs-osx-universal.tar.gz -C libduckdb
 
 export DUCKDB_LIB_DIR=$PWD/libduckdb

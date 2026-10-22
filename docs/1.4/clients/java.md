@@ -4,7 +4,7 @@ layout: docu
 title: Java JDBC Client
 ---
 
-> The latest stable version of the DuckDB Java (JDBC) client is {% if site.current_duckdb_java_short_version != "" %}{{ site.current_duckdb_java_short_version }}{% else %}{{ site.lts_duckdb_java_short_version }}{% endif %}.
+> The latest stable version of the DuckDB Java (JDBC) client is {% if site.maintained_duckdb_java_short_version != "" %}{{ site.maintained_duckdb_java_short_version }}{% else %}{{ site.old_lts_duckdb_java_short_version }}{% endif %}.
 
 ## Installation
 

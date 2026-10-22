@@ -3,7 +3,7 @@ layout: docu
 title: Node.js API
 ---
 
-> The latest stable version of the DuckDB Node.js (deprecated) client is {{ site.lts_duckdb_nodejs_version }}.
+> The latest stable version of the DuckDB Node.js (deprecated) client is {{ site.old_lts_duckdb_nodejs_version }}.
 > The Node.js client will not be released for DuckDB v1.5.
 
 > Deprecated The old DuckDB Node.js package is deprecated.

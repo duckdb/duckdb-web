@@ -15,7 +15,7 @@ title: Command Line Client
 
 > Installation To use the DuckDB CLI client, visit the [CLI installation page]({% link install/index.html %}?environment=cli).
 >
-> The latest stable version of the DuckDB command line client is {{ site.next_major_duckdb_version }}.
+> The latest stable version of the DuckDB command line client is {{ site.latest_duckdb_version }}.
 
 ## Installation
 
@@ -60,7 +60,7 @@ duckdb
 ```
 
 ```text
-DuckDB v{{ site.next_major_duckdb_version }} ({{ site.next_major_duckdb_codename }})
+DuckDB v{{ site.latest_duckdb_version }} ({{ site.latest_duckdb_codename }})
 Enter ".help" for usage hints.
 «memory» D
 ```
@@ -251,7 +251,7 @@ This outputs:
 
 ```text
 -- Loading resources from prompt.sql
-DuckDB v{{ site.next_major_duckdb_version }} ({{ site.next_major_duckdb_codename }})
+DuckDB v{{ site.latest_duckdb_version }} ({{ site.latest_duckdb_codename }})
 Enter ".help" for usage hints.
 «memory» D
 ⚫◗

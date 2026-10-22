@@ -4,7 +4,7 @@ layout: docu
 title: ODBC API Overview
 ---
 
-> The latest stable version of the DuckDB ODBC client is {% if site.current_duckdb_odbc_short_version != "" %}{{ site.current_duckdb_odbc_short_version }}{% else %}{{ site.lts_duckdb_odbc_short_version }}{% endif %}.
+> The latest stable version of the DuckDB ODBC client is {% if site.maintained_duckdb_odbc_short_version != "" %}{{ site.maintained_duckdb_odbc_short_version }}{% else %}{{ site.old_lts_duckdb_odbc_short_version }}{% endif %}.
 
 The ODBC (Open Database Connectivity) is a C-style API that provides access to different flavors of Database Management Systems (DBMSs).
 The ODBC API consists of the Driver Manager (DM) and the ODBC drivers.

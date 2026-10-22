@@ -46,7 +46,7 @@ duckdb
 ```
 
 ```text
-v{{ site.current_duckdb_version }} {{ site.current_duckdb_hash }}
+v{{ site.maintained_duckdb_version }} {{ site.maintained_duckdb_hash }}
 Enter ".help" for usage hints.
 Connected to a transient in-memory database.
 Use ".open FILENAME" to reopen on a persistent database.
