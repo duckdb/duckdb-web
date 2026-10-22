@@ -48,10 +48,10 @@ docs:
     For setup, IAM requirements, and the complete SQL reference, visit the
     [extension repository](https://github.com/smithclay/duckdb-gcloud-observability).
 
-extension_star_count: 1
-extension_star_count_pretty: 1
-extension_download_count: 378
-extension_download_count_pretty: 378
+extension_star_count: 2
+extension_star_count_pretty: 2
+extension_download_count: 765
+extension_download_count_pretty: 765
 image: '/images/community_extensions/social_preview/preview_community_extension_gcloud_observability.png'
 layout: community_extension_doc
 ---

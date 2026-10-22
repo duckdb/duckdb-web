@@ -56,8 +56,8 @@ docs:
 
 extension_star_count: 5
 extension_star_count_pretty: 5
-extension_download_count: 676
-extension_download_count_pretty: 676
+extension_download_count: 710
+extension_download_count_pretty: 710
 image: '/images/community_extensions/social_preview/preview_community_extension_duckdbi.png'
 layout: community_extension_doc
 ---

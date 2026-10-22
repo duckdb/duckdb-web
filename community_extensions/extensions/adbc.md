@@ -124,10 +124,10 @@ docs:
     For more information see the [documentation](https://github.com/columnar-tech/duckdb-adbc-client).
 
 
-extension_star_count: 48
-extension_star_count_pretty: 48
-extension_download_count: 2304
-extension_download_count_pretty: 2.3k
+extension_star_count: 50
+extension_star_count_pretty: 50
+extension_download_count: 5004
+extension_download_count_pretty: 5.0k
 image: '/images/community_extensions/social_preview/preview_community_extension_adbc.png'
 layout: community_extension_doc
 ---

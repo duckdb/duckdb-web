@@ -103,8 +103,8 @@ docs:
 
 extension_star_count: 12
 extension_star_count_pretty: 12
-extension_download_count: 1674
-extension_download_count_pretty: 1.7k
+extension_download_count: 3587
+extension_download_count_pretty: 3.6k
 image: '/images/community_extensions/social_preview/preview_community_extension_pst.png'
 layout: community_extension_doc
 ---

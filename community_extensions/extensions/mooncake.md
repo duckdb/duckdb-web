@@ -30,8 +30,8 @@ docs:
 
 extension_star_count: 10
 extension_star_count_pretty: 10
-extension_download_count: 96
-extension_download_count_pretty: 96
+extension_download_count: 204
+extension_download_count_pretty: 204
 image: '/images/community_extensions/social_preview/preview_community_extension_mooncake.png'
 layout: community_extension_doc
 ---
