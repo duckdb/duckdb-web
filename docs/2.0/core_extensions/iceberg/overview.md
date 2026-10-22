@@ -98,11 +98,11 @@ To read a historical snapshot of a table, pass either `snapshot_from_id` or `sna
 ```sql
 -- Read a specific snapshot by id
 SELECT count(*)
-FROM iceberg_scan('data/iceberg/lineitem_iceberg', snapshot_from_id = 7635660646343998149);
+FROM iceberg_scan('data/iceberg/lineitem_iceberg', allow_moved_paths = true, snapshot_from_id = 7635660646343998149);
 
 -- Read the snapshot that was current at a given time
 SELECT count(*)
-FROM iceberg_scan('data/iceberg/lineitem_iceberg', snapshot_from_timestamp = TIMESTAMP '2023-02-15 15:08:00');
+FROM iceberg_scan('data/iceberg/lineitem_iceberg', allow_moved_paths = true, snapshot_from_timestamp = TIMESTAMP '2023-02-15 15:08:00');
 ```
 
 ### Limitations of Direct Reads

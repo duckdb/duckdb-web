@@ -71,7 +71,7 @@ permalink: /history/
     <div class="timeline-body">
       <h2 id="the-broader-direction-becomes-explicit">Broader Horizons</h2>
       <p>DuckLake reached <a href="https://ducklake.select/2026/04/13/ducklake-10/">version 1.0 on April 13, 2026</a>, establishing a production-ready specification and reference implementation.</p>
-      <p>The Quack technical preview followed in May. Quack is the DuckDB client-server protocol, designed for workloads that need remote connections or multiple clients. It was available as a beta release until <a href="{% post_url 2026-10-21-announcing-duckdb-200 %}">DuckDB v2.0</a> shipped a polished version.</p>
+      <p>The Quack technical preview followed in May. Quack is the DuckDB client-server protocol, designed for workloads that need remote connections or multiple clients. It was introduced as a beta release, and <a href="{% post_url 2026-10-21-announcing-duckdb-200 %}">DuckDB v2.0</a> shipped a polished version, although the protocol is not yet stable.</p>
       <p>The change from <a href="https://ducklabs.com/news/2026/05/27/duckdb-labs-becomes-ducklabs">DuckDB Labs to DuckLabs</a> came later that month. By then, the company employed more than 30 people working across DuckDB, DuckLake, Quack, extensions, language bindings, and related systems engineering.</p>
     </div>
   </div>

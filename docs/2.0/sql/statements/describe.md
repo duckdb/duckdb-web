@@ -25,7 +25,7 @@ DESCRIBE SELECT * FROM tbl;
 
 ## Alias
 
-The `SHOW` statement is an alias for `DESCRIBE`.
+The `SHOW` statement can also describe tables and queries, but this usage is deprecated as of DuckDB 2.0 and prints a warning.
 
 ## See Also
 

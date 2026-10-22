@@ -4,7 +4,7 @@ railroad: statements/alter_database.js
 title: ALTER DATABASE Statement
 ---
 
-The `ALTER DATABASE` command modifies a DuckDB database. This command can be used to change a database's name without needing to detach and reattach it.
+> Warning The `ALTER DATABASE` statement is not supported in DuckDB 2.0.0: `ALTER DATABASE ⟨old_name⟩ RENAME TO ⟨new_name⟩` fails with `Parser Error: syntax error at or near "RENAME"`. To rename an attached database, `DETACH` it and `ATTACH` it again with a different alias.
 
 ## Syntax
 

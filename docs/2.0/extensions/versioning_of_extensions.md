@@ -79,7 +79,7 @@ extensions follow their own release cycle. These may or may not coincide with Du
 extension, refer to the documentation or GitHub page of the respective extension. Generally, **pre-release** and **stable** extensions will document
 their releases as GitHub releases, an example of which you can see in the [`delta` extension](https://github.com/duckdb/duckdb-delta/releases).
 
-Finally, there is a small exception: All [in-tree]({% link docs/2.0/extensions/advanced_installation_methods.md %}#in-tree-vs-out-of-tree) extensions simply
+Finally, there is a small exception: All [in-tree](#in-tree-vs-out-of-tree) extensions simply
 follow DuckDB's release cycle.
 
 ## Installing a Specific Extension Version
@@ -87,13 +87,13 @@ follow DuckDB's release cycle.
 To install a specific version of an extension, add a `VERSION` clause to the `INSTALL` statement:
 
 ```sql
-INSTALL spatial VERSION 'v1.1.8';
+INSTALL ⟨extension_name⟩ VERSION '⟨version⟩';
 ```
 
 The `VERSION` clause can be combined with a `FROM` clause that selects a [repository]({% link docs/2.0/extensions/installing_extensions.md %}#extension-repositories), and with `FORCE INSTALL` to replace an already installed version:
 
 ```sql
-FORCE INSTALL spatial FROM core VERSION 'v1.1.8';
+FORCE INSTALL ⟨extension_name⟩ FROM core VERSION '⟨version⟩';
 ```
 
 Pinning a version is mainly useful for extensions that publish their own versioned releases, i.e., pre-release and stable extensions. The requested version must be available for your DuckDB build and platform, otherwise the download fails with an HTTP error.

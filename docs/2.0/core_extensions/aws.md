@@ -226,6 +226,7 @@ The `aws` extension can generate short-lived [IAM authentication tokens](https:/
 CREATE SECRET aws_rds_secret (
     TYPE rds,
     PROVIDER credential_chain,
+    CHAIN 'env;sso',
     REGION '⟨eu-west-1⟩',
     RDS_USER '⟨db_user⟩',
     RDS_HOST '⟨instance⟩.⟨identifier⟩.⟨region⟩.rds.amazonaws.com',

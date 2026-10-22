@@ -1075,7 +1075,7 @@ SELECT format('{:tX}', 123_456_789); -- 123X456X789
 Float, double and decimal:
 
 ```sql
-SELECT format('{:,f}',    123456.789); -- 123,456.78900
+SELECT format('{:,f}',    123456.789); -- 123,456.789000
 SELECT format('{:,.2f}',  123456.789); -- 123,456.79
 SELECT format('{:t..2f}', 123456.789); -- 123.456,79
 ```

@@ -77,19 +77,6 @@ FROM tpch_queries();
 
 This function returns a table with columns `query_nr` and `query`.
 
-### Scale Factor-Dependent Query Parameters
-
-> New This feature was introduced in DuckDB 2.0.
-
-The `tpch_queries` function and the `tpch` pragma take an optional scale factor, either as a positional argument or as the `sf` named parameter:
-
-```sql
-FROM tpch_queries(sf = 100);
-PRAGMA tpch(11, sf = 100);
-```
-
-The returned queries use the substitution parameters that the official TPC-H query generator produces for the given scale factor. Only query 11 has a substitution parameter that depends on the scale factor: without it, query 11 returns no rows at scale factor 10 and above. Without a scale factor, the queries use the parameters for scale factor 1. The scale factor must be greater than 0 and at most 100000.
-
 ### Listing Expected Answers
 
 To produce the expected results for all queries on scale factors 0.01, 0.1 and 1, run:
@@ -139,4 +126,4 @@ Pre-generated DuckDB databases for TPC-H are available for download:
 
 ## Limitation
 
-The `tpch(⟨query_id⟩)`{:.language-sql .highlight} function runs a fixed TPC-H query with pre-defined bind parameters (a.k.a. substitution parameters). Apart from adjusting them to the [scale factor](#scale-factor-dependent-query-parameters), it is not possible to change the query parameters using the `tpch` extension. To run the queries with the parameters prescribed by the TPC-H benchmark, use a TPC-H framework implementation.
+The `tpch(⟨query_id⟩)`{:.language-sql .highlight} function runs a fixed TPC-H query with pre-defined bind parameters (a.k.a. substitution parameters). It is not possible to change the query parameters using the `tpch` extension. To run the queries with the parameters prescribed by the TPC-H benchmark, use a TPC-H framework implementation.

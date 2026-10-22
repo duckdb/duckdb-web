@@ -39,7 +39,7 @@ Connection con(db);
 
 ### Querying
 
-Connections expose the `Query()` method to send a SQL query string to DuckDB from C++. `Query()` fully materializes the query result as a `MaterializedQueryResult` in memory before returning at which point the query result can be consumed. There is also a streaming API for queries, see further below.
+Connections expose the `Query()` method to send a SQL query string to DuckDB from C++. `Query()` runs the query to completion and returns a `QueryResult` that retains the result in memory, so it can be read repeatedly. To submit a query without blocking, use `Submit()`.
 
 ```cpp
 // create a table
@@ -56,7 +56,7 @@ if (result->HasError()) {
 }
 ```
 
-The `MaterializedQueryResult` instance contains firstly two fields that indicate whether the query was successful. `Query` will not throw exceptions under normal circumstances. Instead, invalid queries or other issues will lead to the `success` Boolean field in the query result instance to be set to `false`. In this case an error message may be available in `error` as a string. The methods `GetErrorType()` and `GetErrorObject()` are also available for any `QueryResult` instance which may aid in more explicit error handling. 
+The `QueryResult` instance contains firstly two fields that indicate whether the query was successful. `Query` will not throw exceptions under normal circumstances. Instead, invalid queries or other issues will lead to the `success` Boolean field in the query result instance to be set to `false`. In this case an error message may be available in `error` as a string. The methods `GetErrorType()` and `GetErrorObject()` are also available for any `QueryResult` instance which may aid in more explicit error handling. 
 
 ```cpp
 auto result = con.Query("INSERT INTO integers VALUES (1, 2)");
@@ -79,7 +79,7 @@ if (result->HasError()) {
 
 If successful, other fields are set: the type of statement that was just executed (e.g., `StatementType::INSERT_STATEMENT`) is returned by `GetStatementType()`. The high-level (“Logical type”/“SQL type”) types of the result set columns are returned by `GetTypes()`. The names of the result columns are returned by `GetNames()` as a vector of strings. In case multiple result sets are returned, for example because the result set contained multiple statements, the result set can be chained using the `next` field.
 
-Because `Query()` returns a `MaterializedQueryResult`, the result set can be traversed directly by index. Use `ColumnCount()` and `RowCount()` for the dimensions, and `GetValue(column, row)` to retrieve an individual value as a `duckdb::Value`:
+Because `Query()` retains the full result, the result set can be traversed directly by index. Use `ColumnCount()` and `RowCount()` for the dimensions, and `Collection().GetValue(column, row)` to retrieve an individual value as a `duckdb::Value`:
 
 ```cpp
 auto result = con.Query("SELECT * FROM integers");
@@ -95,7 +95,7 @@ if (result->HasError()) {
     for (idx_t row_idx = 0; row_idx < result->RowCount(); row_idx++) {
         for (idx_t col_idx = 0; col_idx < result->ColumnCount(); col_idx++) {
             // GetValue returns a duckdb::Value; ToString renders it (NULL values become "NULL")
-            cout << result->GetValue(col_idx, row_idx).ToString();
+            cout << result->Collection().GetValue(col_idx, row_idx).ToString();
             cout << (col_idx + 1 < result->ColumnCount() ? "\t" : "\n");
         }
     }
@@ -113,184 +113,4 @@ std::unique_ptr<QueryResult> result = prepare->Execute(12);
 
 ### UDF API
 
-The UDF API allows the definition of user-defined functions. It is exposed in `duckdb:Connection` through the methods: `CreateScalarFunction()`, `CreateVectorizedFunction()`, and variants.
-These methods create UDFs in the temporary schema (`TEMP_SCHEMA`) of the owner connection that is the only one allowed to use and change them.
-
-#### CreateScalarFunction
-
-The user can code an ordinary scalar function and invoke the `CreateScalarFunction()` to register and afterward use the UDF in a `SELECT` statement, for instance:
-
-```cpp
-bool bigger_than_four(int value) {
-    return value > 4;
-}
-
-connection.CreateScalarFunction<bool, int>("bigger_than_four", &bigger_than_four);
-
-connection.Query("SELECT bigger_than_four(i) FROM (VALUES (3), (5)) tbl(i)")->Print();
-```
-
-The `CreateScalarFunction()` methods automatically create vectorized scalar UDFs so they are as efficient as built-in functions, we have two variants of this method interface as follows:
-
-**1.**
-
-```cpp
-template<typename TR, typename... Args>
-void CreateScalarFunction(string name, TR (*udf_func)(Args…))
-```
-
-* template parameters:
-    * **TR** is the return type of the UDF function.
-    * **Args** are the arguments up to 3 for the UDF function (this method only supports until ternary functions).
-* **name** is the name to register the UDF function.
-* **udf_func** is a pointer to the UDF function.
-
-This method automatically discovers from the template typenames the corresponding LogicalTypes:
-
-* `bool` → `LogicalType::BOOLEAN`
-* `int8_t` → `LogicalType::TINYINT`
-* `int16_t` → `LogicalType::SMALLINT`
-* `int32_t` → `LogicalType::INTEGER`
-* `int64_t` → `LogicalType::BIGINT`
-* `float` → `LogicalType::FLOAT`
-* `double` → `LogicalType::DOUBLE`
-* `string_t` → `LogicalType::VARCHAR`
-
-In DuckDB some primitive types, e.g., `int32_t`, are mapped to the same `LogicalType`: `INTEGER`, `TIME` and `DATE`, then for disambiguation the users can use the following overloaded method.
-
-**2.**
-
-```cpp
-template<typename TR, typename... Args>
-void CreateScalarFunction(string name, vector<LogicalType> args, LogicalType ret_type, TR (*udf_func)(Args…))
-```
-
-An example of use would be:
-
-```cpp
-int32_t udf_date(int32_t a) {
-    return a;
-}
-
-con.Query("CREATE TABLE dates (d DATE)");
-con.Query("INSERT INTO dates VALUES ('1992-01-01')");
-
-con.CreateScalarFunction<int32_t, int32_t>("udf_date", {LogicalType::DATE}, LogicalType::DATE, &udf_date);
-
-con.Query("SELECT udf_date(d) FROM dates")->Print();
-```
-
-* template parameters:
-    * **TR** is the return type of the UDF function.
-    * **Args** are the arguments up to 3 for the UDF function (this method only supports until ternary functions).
-* **name** is the name to register the UDF function.
-* **args** are the LogicalType arguments that the function uses, which should match with the template Args types.
-* **ret_type** is the LogicalType of return of the function, which should match with the template TR type.
-* **udf_func** is a pointer to the UDF function.
-
-This function checks the template types against the LogicalTypes passed as arguments and they must match as follows:
-
-* LogicalTypeId::BOOLEAN → bool
-* LogicalTypeId::TINYINT → int8_t
-* LogicalTypeId::SMALLINT → int16_t
-* LogicalTypeId::DATE, LogicalTypeId::TIME, LogicalTypeId::INTEGER → int32_t
-* LogicalTypeId::BIGINT, LogicalTypeId::TIMESTAMP → int64_t
-* LogicalTypeId::FLOAT, LogicalTypeId::DOUBLE, LogicalTypeId::DECIMAL → double
-* LogicalTypeId::VARCHAR, LogicalTypeId::CHAR, LogicalTypeId::BLOB → string_t
-* LogicalTypeId::VARBINARY → blob_t
-
-#### CreateVectorizedFunction
-
-The `CreateVectorizedFunction()` methods register a vectorized UDF such as:
-
-```cpp
-/*
-* This vectorized function copies the input values to the result vector
-*/
-template<typename TYPE>
-static void udf_vectorized(DataChunk &args, ExpressionState &state, Vector &result) {
-    // set the result vector type
-    result.vector_type = VectorType::FLAT_VECTOR;
-    // get a raw array from the result
-    auto result_data = FlatVector::GetData<TYPE>(result);
-
-    // get the solely input vector
-    auto &input = args.data[0];
-    // now get a unified vector format
-    UnifiedVectorFormat vdata;
-    input.ToUnifiedFormat(args.size(), vdata);
-
-    // get a raw array from the unified format input
-    auto input_data = (TYPE *)vdata.data;
-
-    // handling the data
-    for (idx_t i = 0; i < args.size(); i++) {
-        auto idx = vdata.sel->get_index(i);
-        if (!vdata.validity.RowIsValid(idx)) {
-            continue;
-        }
-        result_data[i] = input_data[idx];
-    }
-}
-
-con.Query("CREATE TABLE integers (i INTEGER)");
-con.Query("INSERT INTO integers VALUES (1), (2), (3), (999)");
-
-con.CreateVectorizedFunction<int, int>("udf_vectorized_int", &udf_vectorized<int>);
-
-con.Query("SELECT udf_vectorized_int(i) FROM integers")->Print();
-```
-
-The Vectorized UDF is a pointer of the type _scalar_function_t_:
-
-```cpp
-typedef std::function<void(DataChunk &args, ExpressionState &expr, Vector &result)> scalar_function_t;
-```
-
-* **args** is a [DataChunk](https://github.com/duckdb/duckdb/blob/main/src/include/duckdb/common/types/data_chunk.hpp) that holds a set of input vectors for the UDF that all have the same length.
-* **expr** is an [ExpressionState](https://github.com/duckdb/duckdb/blob/main/src/include/duckdb/execution/expression_executor_state.hpp) that provides information to the query's expression state.
-* **result** is a [Vector](https://github.com/duckdb/duckdb/blob/main/src/include/duckdb/common/types/vector.hpp) to store the result values.
-
-There are different vector types to handle in a Vectorized UDF:
-
-* ConstantVector
-* DictionaryVector
-* FlatVector
-* ListVector
-* StringVector
-* StructVector
-* SequenceVector
-
-The general API of the `CreateVectorizedFunction()` method is as follows:
-
-**1.**
-
-```cpp
-template<typename TR, typename... Args>
-void CreateVectorizedFunction(string name, scalar_function_t udf_func, LogicalType varargs = LogicalType::INVALID)
-```
-
-* template parameters:
-    * **TR** is the return type of the UDF function.
-    * **Args** are the arguments up to 3 for the UDF function.
-* **name** is the name to register the UDF function.
-* **udf_func** is a _vectorized_ UDF function.
-* **varargs** The type of varargs to support, or LogicalTypeId::INVALID (default value) if the function does not accept variable length arguments.
-
-This method automatically discovers from the template typenames the corresponding LogicalTypes:
-
-* `bool` → `LogicalType::BOOLEAN`
-* `int8_t` → `LogicalType::TINYINT`
-* `int16_t` → `LogicalType::SMALLINT`
-* `int32_t` → `LogicalType::INTEGER`
-* `int64_t` → `LogicalType::BIGINT`
-* `float` → `LogicalType::FLOAT`
-* `double` → `LogicalType::DOUBLE`
-* `string_t` → `LogicalType::VARCHAR`
-
-**2.**
-
-```cpp
-template<typename TR, typename... Args>
-void CreateVectorizedFunction(string name, vector<LogicalType> args, LogicalType ret_type, scalar_function_t udf_func, LogicalType varargs = LogicalType::INVALID)
-```
+> Deprecated The `Connection` methods `CreateScalarFunction()`, `CreateVectorizedFunction()` and `CreateAggregateFunction()` were removed in DuckDB 2.0. To define user-defined functions, use the [scalar function interface of the C API]({% link docs/2.0/clients/c/api.md %}#scalar-functions) or write an [extension]({% link docs/2.0/extensions/overview.md %}).

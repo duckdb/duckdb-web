@@ -160,7 +160,7 @@ The schema of the table returned by the function contains the following three co
 ### `ducklake_cleanup_old_files`
 
 The `ducklake_cleanup_old_files` function cleans up old files in the DuckLake denoted by `catalog`.
-Upon success, it returns a table with a single column (`Success`) and 0 rows.
+It returns a table with a single column (`path`) listing the files that were deleted (or, with `dry_run`, would be deleted).
 
 | Parameter name | Parameter type             | Named parameter | Description |
 | -------------- | -------------------------- | --------------- | ----------- |
@@ -172,7 +172,7 @@ Upon success, it returns a table with a single column (`Success`) and 0 rows.
 ### `ducklake_expire_snapshots`
 
 The `ducklake_expire_snapshots` function expires snapshots with the versions specified by the `versions` parameter or the ones older than the `older_than` parameter.
-Upon success, it returns a table with a single column (`Success`) and 0 rows.
+It returns the expired snapshots, using the same columns as [`ducklake_snapshots`](#ducklake_snapshots).
 
 | Parameter name | Parameter type             | Named parameter | Description |
 | -------------- | -------------------------- | --------------- | ----------- |
@@ -183,7 +183,7 @@ Upon success, it returns a table with a single column (`Success`) and 0 rows.
 ### `ducklake_merge_adjacent_files`
 
 The `ducklake_merge_adjacent_files` function merges adjacent files in the storage.
-Upon success, it returns a table with a single column (`Success`) and 0 rows.
+It returns one row per table with the columns `schema_name`, `table_name`, `files_processed` and `files_created`.
 
 | Parameter name | Parameter type | Named parameter | Description |
 | -------------- | -------------- | --------------- | ----------- |

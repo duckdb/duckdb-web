@@ -70,6 +70,8 @@ target_directory/t_n.csv
 
 The `schema.sql` file contains the schema statements that are found in the database. It contains any `CREATE SCHEMA`, `CREATE TABLE`, `CREATE VIEW` and `CREATE SEQUENCE` commands that are necessary to re-construct the database.
 
+> Warning In DuckDB 2.0.0, [triggers]({% link docs/2.0/sql/statements/create_trigger.md %}) are not included in the export, and `COPY FROM DATABASE` does not copy them either. Recreate triggers manually after importing or copying a database.
+
 The `load.sql` file contains a set of `COPY` statements that can be used to read the data from the CSV files again. The file contains a single `COPY` statement for every table found in the schema.
 
 ### Syntax

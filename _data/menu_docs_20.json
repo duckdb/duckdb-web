@@ -563,10 +563,6 @@
                   "url": "overview"
                 },
                 {
-                  "page": "Dart",
-                  "url": "dart"
-                },
-                {
                   "page": "Julia",
                   "url": "julia"
                 },

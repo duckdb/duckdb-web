@@ -77,7 +77,7 @@ The auth callbacks are evaluated on a fresh server-side connection every time, s
 | Setting                         | Type      | Default                   | Description                                                                                                                |
 | ------------------------------- | --------- | ------------------------- | -------------------------------------------------------------------------------------------------------------------------- |
 | `quack_authentication_function` | `VARCHAR` | `quack_check_token`       | Name of a 3-arg scalar function `(sid, client_token, server_token) -> BOOLEAN` used by the server to authenticate clients. |
-| `quack_authorization_function`  | `VARCHAR` | `quack_nop_authorization` | Name of a 2-arg scalar function `(sid, query) -> BOOLEAN` used by the server to authorize each query.                      |
+| `quack_authorization_function`  | `VARCHAR` | `quack_nop_authorization` | Name of a 2-arg scalar function `(sid, query) -> BOOLEAN` (or `-> VARCHAR`, returning the SQL to execute) used by the server to authorize each query.                      |
 
 You can plug in your own auth by creating any scalar function with the expected signature and pointing the setting at it. See [Security]({% link docs/2.0/quack/security.md %}) for examples.
 

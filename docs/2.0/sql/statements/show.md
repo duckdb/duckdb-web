@@ -10,8 +10,7 @@ title: SHOW, SHOW DATABASES, and SHOW SCHEMAS Statements
 
 ## `SHOW` Statement
 
-The `SHOW` statement is an alias for [`DESCRIBE`]({% link docs/2.0/sql/statements/describe.md %}).
-It shows the schema of a table, view or query.
+The `SHOW` statement can also show the schema of a table, view or query, like [`DESCRIBE`]({% link docs/2.0/sql/statements/describe.md %}). As of DuckDB 2.0, this usage is deprecated and prints a warning; use `DESCRIBE` instead.
 
 > New The following feature was introduced in DuckDB 2.0.
 

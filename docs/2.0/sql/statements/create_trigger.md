@@ -106,7 +106,7 @@ Statement-level triggers can expose the rows involved in the change as transitio
 
 ### Multiple Triggers
 
-A table can have multiple triggers for the same event. They fire in the order in which they were created.
+A table can have multiple triggers for the same event, as long as they have the same granularity (see [Limitations](#limitations)). They fire in the order in which they were created.
 
 ### Returning Rows
 
@@ -164,3 +164,6 @@ DuckDB 2.0 has the following limitations:
 * `RETURNING` is not yet supported on tables with `FOR EACH ROW` triggers.
 * `INSTEAD OF` triggers and triggers on views are not supported; a trigger requires a base table.
 * Temporary triggers are not supported.
+* `MERGE INTO` is not supported on tables with triggers. `INSERT ... ON CONFLICT`, `INSERT OR REPLACE` and `INSERT OR IGNORE` are executed as a merge and therefore fail on tables with `UPDATE` or `DELETE` triggers.
+* `ON CONFLICT` is not yet supported on tables with `FOR EACH ROW` triggers.
+* `FOR EACH ROW` and `FOR EACH STATEMENT` triggers cannot be mixed for the same event on the same table.

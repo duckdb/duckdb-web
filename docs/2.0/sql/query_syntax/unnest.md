@@ -23,7 +23,7 @@ The `LIST` or `STRUCT` value that is to be unnested is always passed as the firs
 The `unnest()` function has a number of optional additional arguments to control the behavior for [recursive unnesting](#recursive-unnesting).
 
 The `unnest` function can be called in the [`SELECT`-clause]({% link docs/2.0/sql/query_syntax/select.md %}) as if it is a scalar function.
-The `unnest` function may not be called in other contexts where one would normally be able to invoke scalar functions, like the `WHERE`, `GROUP BY`, or `ORDER BY` clauses.
+The `unnest` function may not be called in other contexts where one would normally be able to invoke scalar functions, like the `WHERE` or `ORDER BY` clauses. Since DuckDB 2.0, `unnest` can be used in the [`GROUP BY` clause]({% link docs/2.0/sql/query_syntax/groupby.md %}#grouping-by-unnest).
 When applied to values of the `LIST`-type, `unnest()` may also appear in clauses where one could normally use a [table function](#unnest-as-table-function).
 
 ### Unnesting `LIST`-Typed Values

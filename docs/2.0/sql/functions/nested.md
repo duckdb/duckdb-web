@@ -10,7 +10,7 @@ redirect_from:
 title: Nested Functions
 ---
 
-There are five [nested data types]({% link docs/2.0/sql/data_types/overview.md %}#nested--composite-types):
+The following [nested data types]({% link docs/2.0/sql/data_types/overview.md %}#nested--composite-types) have dedicated function pages (`TUPLE` values are handled by the `STRUCT` functions):
 
 | Name | Type page | Functions page |
 |--|---|---|
@@ -19,3 +19,4 @@ There are five [nested data types]({% link docs/2.0/sql/data_types/overview.md %
 | `MAP`    | [`MAP` type]({% link docs/2.0/sql/data_types/map.md %})       | [`MAP` functions]({% link docs/2.0/sql/functions/map.md %})       |
 | `STRUCT` | [`STRUCT` type]({% link docs/2.0/sql/data_types/struct.md %}) | [`STRUCT` functions]({% link docs/2.0/sql/functions/struct.md %}) |
 | `UNION`  | [`UNION` type]({% link docs/2.0/sql/data_types/union.md %})   | [`UNION` functions]({% link docs/2.0/sql/functions/union.md %})   |
+| `VARIANT` | [`VARIANT` type]({% link docs/2.0/sql/data_types/variant.md %}) | [`VARIANT` functions]({% link docs/2.0/sql/functions/variant.md %}) |

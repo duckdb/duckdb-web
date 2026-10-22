@@ -67,6 +67,10 @@ Error: Month out of range, expected a value between 1 and 12
 
 To return `NULL` on failure, use the [`try_strptime` function]({% link docs/2.0/sql/functions/timestamp.md %}#try_strptimetext-format):
 
+```sql
+SELECT try_strptime('02/50/1992', '%d/%m/%Y') AS x;
+```
+
 ```text
 NULL
 ```

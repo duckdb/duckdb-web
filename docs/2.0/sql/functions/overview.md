@@ -33,22 +33,24 @@ FROM unnest(['African goose', 'Faroese goose', 'Hungarian goose', 'Pomeranian go
 
 ### Using with Literals and Arrays
 
-To apply function chaining to literals and following array access operations, you must surround the argument with parentheses, e.g.:
+String literals and array access operations can be used with function chaining directly:
 
 ```sql
-SELECT ('hello world').replace(' ', '_');
+SELECT 'hello world'.replace(' ', '_');
 ```
+
+```sql
+SELECT m[1].map_entries()
+FROM (VALUES ([MAP {'hello': 42}, MAP {'world': 42}])) t(m);
+```
+
+To apply function chaining to numeric literals, you must surround the literal with parentheses, e.g.:
 
 ```sql
 SELECT (2).sqrt();
 ```
 
-```sql
-SELECT (m[1]).map_entries()
-FROM (VALUES ([MAP {'hello': 42}, MAP {'world': 42}])) t(m);
-```
-
-In the absence of these parentheses, DuckDB will return a `Parser Error` for the function call:
+In the absence of these parentheses (e.g., `SELECT 2.sqrt();`), DuckDB returns a `Parser Error` for the function call:
 
 ```console
 Parser Error:

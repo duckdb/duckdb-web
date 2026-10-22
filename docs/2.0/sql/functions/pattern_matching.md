@@ -173,35 +173,19 @@ SELECT * FROM glob('*');
 
 ### Globbing Semantics
 
-DuckDB's globbing implementation follows the semantics of [Python's `glob`](https://docs.python.org/3/library/glob.html) and not the `glob` used in the shell.
-A notable difference is the behavior of the `**/` construct: `**/⟨filename⟩`{:.language-sql .highlight} will not return a file with `⟨filename⟩`{:.language-sql .highlight} in top-level directory.
-For example, with a `README.md` file present in the directory, the following query finds it:
-
-```sql
-SELECT * FROM glob('README.md');
-```
-
-<div class="monospace_table"></div>
-
-| file      |
-| --------- |
-| README.md |
-
-However, the following query returns an empty result:
+The `**` wildcard matches any number of subdirectories, including none, so `**/⟨filename⟩`{:.language-sql .highlight} also returns a file named `⟨filename⟩`{:.language-sql .highlight} in the top-level directory.
+For example, with a `README.md` file present both in the current directory and in its `sub` subdirectory, the following query returns both files:
 
 ```sql
 SELECT * FROM glob('**/README.md');
 ```
 
-Meanwhile, the globbing of Bash, Zsh, etc. finds the file using the same syntax:
+<div class="monospace_table"></div>
 
-```batch
-ls **/README.md
-```
-
-```text
-README.md
-```
+| file          |
+| ------------- |
+| README.md     |
+| sub/README.md |
 
 ## Regular Expressions
 

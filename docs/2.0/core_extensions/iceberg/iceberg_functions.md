@@ -59,6 +59,8 @@ The path can also point directly to a metadata file, or to an object store such 
 
 To access Iceberg metadata, you can use the `iceberg_metadata` function:
 
+> Warning In DuckDB 2.0.0, `iceberg_metadata` and `iceberg_column_stats` fail on the sample `lineitem_iceberg` table with an `Invalid Configuration Error` about `manifest_entry.sequence_number`.
+
 ```sql
 SELECT *
 FROM iceberg_metadata('data/iceberg/lineitem_iceberg', allow_moved_paths = true);

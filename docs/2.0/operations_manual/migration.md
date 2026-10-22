@@ -102,6 +102,12 @@ It is designed to be compatible with the previous parser, so queries that parsed
 If a query that parsed on an earlier version fails on v2.0.0, please [file an issue](https://github.com/duckdb/duckdb/issues).
 For details, see the [PEG parser page]({% link docs/2.0/sql/peg_parser.md %}).
 
+A few expressions deliberately behave differently in v2.0.0, which can silently change query results:
+
+* The `~` and `!~` operators now perform [partial regular expression matching]({% link docs/2.0/sql/functions/pattern_matching.md %}#regular-expressions), following PostgreSQL: `'abc' ~ 'b'` now returns `true` (previously `false`). The deprecated `regex_match_operator_semantics` setting restores full matching: `SET regex_match_operator_semantics = 'full';`{:.language-sql .highlight}
+* The [factorial operator `!`]({% link docs/2.0/sql/functions/numeric.md %}#factorialx) binds more tightly: `2 * 3!` now returns `12` (previously `720`). Use parentheses to get the old behavior, e.g., `(2 * 3)!`.
+* `X'…'` and `B'…'` literals now produce [`BLOB`]({% link docs/2.0/sql/data_types/blob.md %}) and [`BITSTRING`]({% link docs/2.0/sql/data_types/bitstring.md %}) values instead of the `VARCHAR` strings `'x…'` and `'b…'`.
+
 If you would like to revert to the old parser, use the [`legacy_parser` extension]({% link docs/2.0/core_extensions/legacy_parser.md %}).
 To install and activate it, run the following commands:
 
@@ -134,6 +140,17 @@ Invalid Input Error: Division by zero in expression (1 // 0). Use TRY(...) to re
 To get `NULL` for a single expression, wrap it in `TRY`, e.g., `TRY(1 // 0)`.
 Regular division (`1 / 0`) still returns `inf`.
 
+### `MERGE INTO` with Multiple Matching Source Rows
+
+A [`MERGE INTO` statement]({% link docs/2.0/sql/statements/merge_into.md %}#multiple-matching-source-rows) that would update or delete the same target row more than once, because the row matches multiple source rows, now throws an error instead of silently using one of the source rows.
+Deduplicate the source rows or make the `ON` condition unique.
+
+### Untyped `NULL` Columns
+
+An untyped `NULL` now keeps the `NULL` type instead of defaulting to `INTEGER`.
+For example, `CREATE TABLE t AS SELECT NULL AS x` creates a column of type `"NULL"`, which rejects subsequent inserts of non-`NULL` values.
+Cast the `NULL` to the intended type, e.g., `NULL::VARCHAR AS x`, or restore the previous behavior with `SET legacy_disable_null_type = true;`{:.language-sql .highlight}.
+
 ### Identifier Case Setting
 
 The [`preserve_identifier_case` setting]({% link docs/2.0/configuration/overview.md %}) changed from a `BOOLEAN` to a `VARCHAR` with the values `'preserve_case'` (default), `'lowercase'` and `'uppercase'`.
@@ -154,6 +171,11 @@ Use [secrets]({% link docs/2.0/configuration/secrets_manager.md %}) instead or, 
 
 Since v1.5.0, the CLI uses the `shell_log_storage` log storage by default, which prints warnings to the console but cannot be queried.
 To query logs via `duckdb_logs` in the CLI, enable logging with `CALL enable_logging(storage = 'memory')`. Clients other than the CLI still default to the `memory` log storage.
+
+### Client APIs
+
+Some client APIs ship their own breaking changes with DuckDB 2.0.
+In particular, the Python client requires Python 3.11 or newer and changes several APIs, see [Migrating Python Code to DuckDB 2.0]({% link docs/2.0/clients/python/migration.md %}).
 
 ## What's New in v2.0
 

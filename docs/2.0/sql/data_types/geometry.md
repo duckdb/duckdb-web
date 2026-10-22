@@ -319,6 +319,8 @@ To convert a geometry from one CRS to another, you can use the `ST_Transform(geo
 ```sql
 
 LOAD spatial;
+-- required in DuckDB 2.0: assume [longitude, latitude] axis order
+SET geometry_always_xy = true;
 
 SELECT ST_Transform('POINT(4.897070 52.377956)'::GEOMETRY('OGC:CRS84'), 'EPSG:3857') AS transformed;
 ----

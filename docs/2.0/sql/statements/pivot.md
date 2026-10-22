@@ -353,10 +353,9 @@ Below is the full syntax diagram of the SQL Standard version of the `PIVOT` stat
 
 <div id="rrdiagram2"></div>
 
-## Limitations
+## Expressions in the `USING` Clause
 
-`PIVOT` currently only accepts an aggregate function, expressions are not allowed.
-For example, the following query attempts to get the population as the number of people instead of thousands of people (i.e., instead of 564, get 564000):
+The `USING` clause also accepts expressions over aggregate functions. For example, the following query gets the population as the number of people instead of thousands of people (i.e., instead of 564, get 564000):
 
 ```sql
 PIVOT cities
@@ -364,14 +363,7 @@ ON year
 USING sum(population) * 1000;
 ```
 
-However, it fails with the following error:
-
-```console
-Catalog Error:
-* is not an aggregate function
-```
-
-To work around this limitation, perform the `PIVOT` with the aggregation only, then use the [`COLUMNS` expression]({% link docs/2.0/sql/expressions/star.md %}#columns-expression):
+Alternatively, perform the `PIVOT` with the aggregation only, then use the [`COLUMNS` expression]({% link docs/2.0/sql/expressions/star.md %}#columns-expression):
 
 ```sql
 SELECT country, name, 1000 * COLUMNS(* EXCLUDE (country, name))

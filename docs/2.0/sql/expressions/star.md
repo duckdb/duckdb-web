@@ -231,11 +231,11 @@ For example, to select the first three letters of column names, run:
 SELECT COLUMNS('(\w{3}).*') AS '\1' FROM numbers;
 ```
 
-| id | num  |
-|---:|-----:|
-| 1  | 10   |
-| 2  | 20   |
-| 3  | NULL |
+| num  |
+|-----:|
+| 10   |
+| 20   |
+| NULL |
 
 To remove a colon (`:`) character in the middle of a column name, run:
 
@@ -282,11 +282,11 @@ SELECT COLUMNS(lambda c: c LIKE '%num%') FROM numbers;
 `COLUMNS` also supports passing in a list of column names.
 
 ```sql
-SELECT COLUMNS(['id', 'num']) FROM numbers;
+SELECT COLUMNS(['id', 'number']) FROM numbers;
 ```
 
-| id | num  |
-|---:|-----:|
+| id | number |
+|---:|-------:|
 | 1  | 10   |
 | 2  | 20   |
 | 3  | NULL |

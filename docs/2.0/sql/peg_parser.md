@@ -78,7 +78,7 @@ SET enable_legacy_parser = true;
 The legacy parser is intended as a bridge solution, for example to check a query on both parsers and determine whether a given behavior is tied to the parser or transformer rather than to downstream code. It provides a best-effort legacy experience and preserves several DuckDB 1.5 quirks:
 
 * `~` and `!~` perform full regular expression matches, whereas DuckDB 2.0 defaults to partial matches.
-* `B'0101'` is the `VARCHAR` value `'b0101'`, whereas DuckDB 2.0 interprets it as a bit-string literal.
+* The `!` operator binds less tightly: `2 * 3!` returns `720` (`(2 * 3)!`), whereas DuckDB 2.0 returns `12`.
 * Rendered SQL qualifies built-in functions, for example `main.struct_pack(x := 1)` in view definitions.
 * `ORDER BY true` is accepted, whereas DuckDB 2.0 rejects a non-integer literal.
 * Column constraints on `ALTER TABLE ... ADD COLUMN`, such as `UNIQUE`, are rejected by the transformer.

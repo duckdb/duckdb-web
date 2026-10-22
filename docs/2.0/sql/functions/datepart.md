@@ -42,7 +42,7 @@ Only the entries of the first table can be extracted from `INTERVAL`s or used to
 |:--|:--|:---|--:|
 | `dayofweek` | Day of the week (Sunday = 0, Saturday = 6) | `weekday`, `dow` | `2` |
 | `dayofyear` | Day of the year (1-365/366) | `doy` | `215` |
-| `epoch` | Seconds since 1970-01-01 | | `1760465850.6698709` |
+| `epoch` | Seconds since 1970-01-01 | | `1627991984.123456` |
 | `era` | Gregorian era (CE/AD, BCE/BC) | | `1` |
 | `isodow` | ISO day of the week (Monday = 1, Sunday = 7) | | `2` |
 | `isoyear` | ISO Year number (Starts on Monday of week containing Jan 4th) | | `2021` |

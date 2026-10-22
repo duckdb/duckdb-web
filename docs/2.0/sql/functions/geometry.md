@@ -18,7 +18,7 @@ The table below lists the operators that can be used with `GEOMETRY` values.
 
 | Operator | Description | Example | Result |
 |:-|:--|:---|:--|
-| `&&` | Returns true if the geometries bounding boxes intersect. Equivalent to `ST_IntersectsExtent`. | `'POINT(5 5)'::GEOMETRY && 'LINESTRING(0 0, 10 20)'::GEOMETRY` | `true` |
+| `&&` | Returns true if the geometries bounding boxes intersect. Equivalent to `ST_Intersects_Extent`. | `'POINT(5 5)'::GEOMETRY && 'LINESTRING(0 0, 10 20)'::GEOMETRY` | `true` |
 
 ## Built-in Geometry Functions
 

@@ -38,7 +38,7 @@ SET VARIABLE conn = odbc_connect('Driver={Oracle driver};DBQ=//127.0.0.1:1521/XE
 FROM odbc_query(getvariable('conn'), 'SELECT SYSTIMESTAMP FROM DUAL');
 
 -- query with parameters
-FROM odbc_query(getvariable('conn') 
+FROM odbc_query(getvariable('conn'),
     'SELECT CAST(? AS NVARCHAR2(2)) || CAST(? AS VARCHAR2(5)) FROM DUAL',
     params = row('🦆', 'quack'));
 

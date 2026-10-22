@@ -64,7 +64,7 @@ collect2.exe: error: ld returned 5 exit status
 
 GitHub user [vdmitriyev](https://github.com/vdmitriyev) shared instructions for [building the DuckDB Go client on Windows](https://github.com/marcboeker/go-duckdb/issues/4#issuecomment-2176409066):
 
-1. Get four files (`.dll, .lib, .hpp, .h`) from the `libduckdb-windows-amd64.zip` archive.
+1. Get four files (`.dll, .lib, .hpp, .h`) from the `duckdb-shared-libs-windows-amd64.tar.gz` archive (called `libduckdb-windows-amd64.zip` before DuckDB 2.0).
 
 2. Place them to, e.g.,: `C:\duckdb-go\libs\`.
 

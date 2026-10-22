@@ -28,14 +28,9 @@ LOAD postgres;
 
 ## Usage
 
-After the `postgres` extension is installed, tables can be queried from PostgreSQL using the `postgres_scan` function:
+After the `postgres` extension is installed, you can attach a PostgreSQL database using the [`ATTACH` command]({% link docs/2.0/sql/statements/attach.md %}). This allows you to query all tables stored within the PostgreSQL database as if it was a regular database.
 
-```sql
--- Scan the table "mytable" from the schema "public" in the database "mydb"
-SELECT * FROM postgres_scan('host=localhost port=5432 dbname=mydb', 'public', 'mytable');
-```
-
-The first parameter to the `postgres_scan` function is the [PostgreSQL connection string](https://www.postgresql.org/docs/current/libpq-connect.html#LIBPQ-CONNSTRING), a list of connection arguments provided in `{key}={value}` format. Below is a list of valid arguments.
+The first parameter of `ATTACH` is the [PostgreSQL connection string](https://www.postgresql.org/docs/current/libpq-connect.html#LIBPQ-CONNSTRING), a list of connection arguments provided in `{key}={value}` format. Below is a list of valid arguments.
 
 | Name       | Description                          | Default        |
 | ---------- | ------------------------------------ | -------------- |
@@ -46,8 +41,6 @@ The first parameter to the `postgres_scan` function is the [PostgreSQL connectio
 | `password` | PostgreSQL password                  |                |
 | `dbname`   | Database name                        | [user]         |
 | `passfile` | Name of file passwords are stored in | `~/.pgpass`    |
-
-Alternatively, the entire database can be attached using the [`ATTACH` command]({% link docs/2.0/sql/statements/attach.md %}). This allows you to query all tables stored within the PostgreSQL database as if it was a regular database.
 
 ```sql
 -- Attach the PostgreSQL database using the given connection string

@@ -54,7 +54,7 @@ ATTACH 'dbname=postgres user=postgres host=127.0.0.1' AS db (TYPE postgres, ISOL
 
 > Warning Avoid including credentials, such as a password, directly in the connection string. If a connection error occurs, the full connection string, including your credentials, may appear in the resulting error message. For better security, store credentials using [secrets]({% link docs/2.0/configuration/secrets_manager.md %}) instead, as described in [Configuring via Secrets](#configuring-via-secrets).
 
-> Deprecated The old `postgres_attach` function is deprecated. It is recommended to switch over to the new `ATTACH` syntax.
+> Deprecated The old `postgres_attach` function was removed in DuckDB 2.0. Use the `ATTACH` statement instead.
 
 ### Configuration
 
@@ -371,10 +371,10 @@ The connection pool settings (`pg_pool_*`) are documented on the [Connection Poo
 
 ## Schema Cache
 
-To avoid having to continuously fetch schema data from PostgreSQL, DuckDB keeps schema information – such as the names of tables, their columns, etc. – cached. If changes are made to the schema through a different connection to the PostgreSQL instance, such as new columns being added to a table, the cached schema information might be outdated. In this case, the function `pg_clear_cache` can be executed to clear the internal caches.
+To avoid having to continuously fetch schema data from PostgreSQL, DuckDB keeps schema information – such as the names of tables, their columns, etc. – cached. If changes are made to the schema through a different connection to the PostgreSQL instance, such as new columns being added to a table, the cached schema information might be outdated. In this case, the function `postgres_clear_cache` can be executed to clear the internal caches.
 
 ```sql
-CALL pg_clear_cache();
+CALL postgres_clear_cache();
 ```
 
 In version 1.5.5 a support for automatic detection of schema changes was added using a "staleness query"

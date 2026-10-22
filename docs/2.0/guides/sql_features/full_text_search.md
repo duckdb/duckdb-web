@@ -50,10 +50,13 @@ The table is now ready to query using the [Okapi BM25](https://en.wikipedia.org/
 What does Shakespeare say about butter?
 
 ```sql
-SELECT
-    fts_main_corpus.match_bm25(line_id, 'butter') AS score,
-    line_id, play_name, speaker, text_entry
-FROM corpus
+SELECT *
+FROM (
+    SELECT
+        fts_main_corpus.match_bm25(line_id, 'butter') AS score,
+        line_id, play_name, speaker, text_entry
+    FROM corpus
+) sq
 WHERE score IS NOT NULL
 ORDER BY score DESC;
 ```

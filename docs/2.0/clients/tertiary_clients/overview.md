@@ -5,6 +5,10 @@ redirect_from:
 - /docs/current/clients/tertiary_clients/overview
 - /docs/lts/clients/tertiary_clients/overview
 - /docs/preview/clients/tertiary_clients/overview
+- /docs/stable/clients/tertiary_clients/dart
+- /docs/current/clients/tertiary_clients/dart
+- /docs/lts/clients/tertiary_clients/dart
+- /docs/preview/clients/tertiary_clients/dart
 title: Tertiary Clients
 ---
 
@@ -16,7 +20,6 @@ Tertiary clients come without any support guarantees.
 | ------------------------------------------------------------------ | ----------------------------------------------------- |
 | [Common Lisp](https://github.com/ak-coram/cl-duckdb)               | [ak-coram](https://github.com/ak-coram)               |
 | [Crystal](https://github.com/amauryt/crystal-duckdb)               | [amauryt](https://github.com/amauryt)                 |
-| [Dart]({% link docs/2.0/clients/tertiary_clients/dart.md %})   | [TigerEye](https://www.tigereye.com/)                 |
 | [Elixir (Duckdbex)](https://github.com/AlexR2D2/duckdbex)          | [AlexR2D2](https://github.com/AlexR2D2/duckdbex)      |
 | [Elixir (QuackDB)](https://github.com/elixir-vibe/quackdb)         | [Danila Poyarkov](https://github.com/dannote)         |
 | [Erlang](https://github.com/mmzeeman/educkdb)                      | [MM Zeeman](https://github.com/mmzeeman)              |

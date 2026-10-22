@@ -21,6 +21,12 @@ INSTALL duckpgq FROM community;
 LOAD duckpgq;
 ```
 
+Starting with DuckDB 2.0, extensions that add new syntax hook into the grammar of the [PEG parser]({% link docs/2.0/sql/peg_parser.md %}), and you have to opt in to an extension's grammar explicitly. To enable the SQL/PGQ syntax of DuckPGQ (e.g., `CREATE PROPERTY GRAPH` and `GRAPH_TABLE`), run:
+
+```sql
+SET active_grammar_extensions = ['duckpgq'];
+```
+
 ## Creating a Property Graph
 
 A property graph consists of vertices (nodes) and edges (relationships). You create one as a layer on top of existing tables:
@@ -90,7 +96,7 @@ DuckPGQ includes built-in graph algorithms:
 Example:
 
 ```sql
-FROM pagerank(social_network, Person, Knows);
+FROM pagerank('social_network', 'Person', 'Knows');
 ```
 
 ## Use Case: Financial Fraud Detection

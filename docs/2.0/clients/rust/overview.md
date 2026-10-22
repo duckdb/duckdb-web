@@ -16,7 +16,9 @@ title: Rust Client
 
 > Installation To use the DuckDB Rust client, visit the [Rust installation page]({% link install/index.html %}?environment=rust).
 >
-> The latest stable version of the DuckDB Rust client is {% if site.next_major_duckdb_rust_version != "" %}{{ site.next_major_duckdb_rust_version }}{% else %}{{ site.current_duckdb_rust_version }}{% endif %}.
+> The latest stable version of the DuckDB Rust client is {% if site.next_major_duckdb_rust_version != "" %}{{ site.next_major_duckdb_rust_version }}{% else %}{{ site.current_duckdb_rust_version }}{% endif %}.{% if site.next_major_duckdb_rust_version == "" %}
+>
+> A release of the Rust client based on DuckDB 2.0 is not yet available. Releases based on DuckDB 1.5 cannot open database files created by DuckDB 2.0, see the [migration guide]({% link docs/2.0/operations_manual/migration.md %}#storage-format).{% endif %}
 
 The DuckDB Rust client, [`duckdb-rs`](https://github.com/duckdb/duckdb-rs), is an ergonomic wrapper over the [DuckDB C API](https://github.com/duckdb/duckdb/blob/main/src/include/duckdb.h) that exposes an interface modeled on [rusqlite](https://github.com/rusqlite/rusqlite). It supports type-safe queries, bulk loading with the Appender, [Apache Arrow](https://arrow.apache.org/) interchange, user-defined functions, and building DuckDB extensions in Rust. This page focuses on installation. The other pages in this section cover connecting and each feature in detail.
 
@@ -32,7 +34,7 @@ The equivalent `Cargo.toml` entry pins the version. Starting with DuckDB 1.5.0 t
 
 ```toml
 [dependencies]
-{% assign rust_v = site.current_duckdb_rust_version | split: "." %}duckdb = { version = "~1.{{ rust_v[0] }}{{ rust_v[1] | prepend: "0" | slice: -2, 2 }}{{ rust_v[2] | prepend: "0" | slice: -2, 2 }}.0", features = ["bundled"] }
+{% if site.next_major_duckdb_rust_version != "" %}{% assign rust_v = site.next_major_duckdb_rust_version | split: "." %}{% else %}{% assign rust_v = site.current_duckdb_rust_version | split: "." %}{% endif %}duckdb = { version = "~1.{{ rust_v[0] }}{{ rust_v[1] | prepend: "0" | slice: -2, 2 }}{{ rust_v[2] | prepend: "0" | slice: -2, 2 }}.0", features = ["bundled"] }
 ```
 
 The `bundled` feature is the simplest way to get started. Without it, the [`libduckdb-sys`](https://crates.io/crates/libduckdb-sys) crate links against a system DuckDB library instead of compiling one, which is covered in [Troubleshoot]({% link docs/2.0/clients/rust/troubleshoot.md %}#linking-against-a-system-library).

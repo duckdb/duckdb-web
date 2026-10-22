@@ -32,7 +32,7 @@ Currently, the following secret types are available:
 | `quack`       | Quack                | [`quack`]({% link docs/2.0/core_extensions/quack.md %})                       |
 | `r2`          | Cloudflare R2        | [`httpfs`]({% link docs/2.0/core_extensions/httpfs/s3api.md %})               |
 | `s3`          | AWS S3               | [`httpfs`]({% link docs/2.0/core_extensions/httpfs/s3api.md %})               |
-| `aws`         | AWS                  | [`aws`](% link docs/current/core_extensions/aws.md %})                  |
+| `aws`         | AWS                  | [`aws`]({% link docs/2.0/core_extensions/aws.md %})                  |
 
 For each type, there are one or more “secret providers” that specify how the secret is created. Secrets can also have an optional scope, which is a file path prefix that the secret applies to. When fetching a secret for a path, the secret scopes are compared to the path, returning the matching secret for the path. In the case of multiple matching secrets, the longest prefix is chosen.
 

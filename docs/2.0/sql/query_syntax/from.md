@@ -562,7 +562,7 @@ SELECT * FROM t JOIN t USING(x);
 
 ```console
 Binder Error:
-Duplicate alias "t" in query!
+Ambiguous reference to table "memory.main.t" (duplicate alias "memory.main.t", explicitly alias one of the tables using "AS my_alias")
 ```
 
 Adding the aliases allows the query to parse successfully:

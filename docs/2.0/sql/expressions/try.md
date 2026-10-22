@@ -41,23 +41,23 @@ SELECT TRY('abc'::INTEGER);
 NULL
 ```
 
-### Logarithm on Zero
+### Integer Division by Zero
 
 #### Without `TRY`
 
 ```sql
-SELECT ln(0);
+SELECT 1 // 0;
 ```
 
 ```console
-Out of Range Error:
-cannot take logarithm of zero
+Invalid Input Error:
+Division by zero in expression (1 // 0). Use TRY(...) to return NULL for this expression, or SET error_on_division_by_zero=false to return NULL for all divisions by zero.
 ```
 
 #### With `TRY`
 
 ```sql
-SELECT TRY(ln(0));
+SELECT TRY(1 // 0);
 ```
 
 ```text

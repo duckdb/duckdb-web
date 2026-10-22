@@ -157,7 +157,7 @@ provided by the ICU extension.
 
 Adding to or subtracting from [infinite values]({% link docs/2.0/sql/data_types/timestamp.md %}#special-values) produces the same infinite value.
 
-Addition and subtraction of intervals uses the [ICU Calendar add function](https://unicode-org.github.io/icu-docs/apidoc/released/icu4c/classicu_1_1Calendar.html#aa6e19a88ca2225eddcbbe82313c9c095).
+Addition and subtraction of intervals follows the semantics of the [ICU Calendar add function](https://unicode-org.github.io/icu-docs/apidoc/released/icu4c/classicu_1_1Calendar.html#aa6e19a88ca2225eddcbbe82313c9c095), which the `icu` extension implements natively since DuckDB 2.0.
 For positive intervals (forwards in time) the fields are incremented from least to most significant.
 For negative intervals (backwards in time) the fields are decremented from most to least significant.
 This produces the same results as Postgres, but does not match some [more recent calendar RFCs](https://www.rfc-editor.org/rfc/rfc5545).
@@ -300,7 +300,7 @@ The table below shows the ICU provided scalar functions for `TIMESTAMP WITH TIME
 
 | **Description** | The `TIMESTAMP WITH TIME ZONE` for the given µs since the epoch. |
 | **Example** | `make_timestamptz(1667810584123456)` |
-| **Result** | `2022-11-07 16:43:04.123456-08` |
+| **Result** | `2022-11-07 00:43:04.123456-08` |
 
 #### `strftime(timestamptz, format)`
 

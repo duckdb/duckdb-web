@@ -140,9 +140,9 @@ Before using DuckDB as an ADBC driver, you must install the `libduckdb` shared l
 
 Download the appropriate `libduckdb` library for your platform from the [DuckDB releases page](https://github.com/duckdb/duckdb/releases):
 
-- **Linux**: `libduckdb-linux-amd64.zip` (contains `libduckdb.so`)
-- **macOS**: `libduckdb-osx-universal.zip` (contains `libduckdb.dylib`)
-- **Windows**: `libduckdb-windows-amd64.zip` (contains `duckdb.dll`)
+- **Linux**: `duckdb-shared-libs-linux-amd64.tar.gz` or `duckdb-shared-libs-linux-arm64.tar.gz` (contains `libduckdb.so`)
+- **macOS**: `duckdb-shared-libs-osx-universal.tar.gz` (contains `libduckdb.dylib`)
+- **Windows**: `duckdb-shared-libs-windows-amd64.tar.gz` or `duckdb-shared-libs-windows-arm64.tar.gz` (contains `duckdb.dll`)
 
 Extract the archive to obtain the shared library file.
 

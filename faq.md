@@ -234,7 +234,7 @@ It can also run SQL queries directly on Arrow using [`pyarrow`]({% link docs/2.0
 <div class="answer" markdown="1">
 
 Since version 0.10.0 (released in February 2024), DuckDB is backwards-compatible when reading database files, i.e., newer versions of DuckDB are always able to read database files created with an older version of DuckDB.
-DuckDB also provides partial forwards-compatibility on a best-effort basis. See the [storage page]({% link docs/2.0/internals/storage.md %}) for more details.
+DuckDB also provides partial forwards-compatibility on a best-effort basis. Note that DuckDB versions before 2.0 cannot read database files created by DuckDB 2.0 unless they were written with an [explicit storage version]({% link docs/2.0/operations_manual/migration.md %}#writing-files-for-older-versions). See the [storage page]({% link docs/2.0/internals/storage.md %}) for more details.
 Compatibility is also guaranteed between different DuckDB clients (e.g., Python and R): a database file created with one client can be read with other clients.
 
 </div>

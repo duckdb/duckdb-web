@@ -8,21 +8,18 @@ redirect_from:
 title: PostgreSQL Extension Functions
 ---
 
-* [`pg_clear_cache`](#pg_clear_cache)
-* [`postgres_attach`](#postgres_attach)
+* [`postgres_clear_cache`](#postgres_clear_cache)
 * [`postgres_configure_pool`](#postgres_configure_pool)
 * [`postgres_execute`](#postgres_execute)
 * [`postgres_hstore_get`](#postgres_hstore_get)
 * [`postgres_hstore_to_json`](#postgres_hstore_to_json)
 * [`postgres_query`](#postgres_query)
-* [`postgres_scan`](#postgres_scan)
-* [`postgres_scan_pushdown`](#postgres_scan_pushdown)
 * [`read_postgres_binary`](#read_postgres_binary)
 
-## pg_clear_cache
+## postgres_clear_cache
 
 ```sql
-pg_clear_cache() -> TABLE
+postgres_clear_cache() -> TABLE
 ```
 
 Clears cached schema entries (like table names with column lists) for all attached PostgreSQL catalogs. Attached schema is going to be re-read on the next access.
@@ -42,17 +39,7 @@ A table with the following columns:
 ### Example
 
 ```sql
-CALL pg_clear_cache()
-```
-
-## postgres_attach
-
-> Warning 
-> This function is deprecated and is planned to be removed in future versions.
-> The `ATTACH` statement is intended to be used instead.
-
-```sql
-postgres_attach(connection_string VARCHAR [, ⟨optional named parameters⟩]) -> TABLE
+CALL postgres_clear_cache()
 ```
 
 ## postgres_configure_pool
@@ -213,26 +200,6 @@ A table with the query result.
 
 ```sql
 FROM postgres_query('db11', 'SELECT $1::INTEGER, $2::TEXT', params=row(42::INTEGER, 'foo'::VARCHAR))
-```
-
-## postgres_scan
-
-> Warning 
-> This function is deprecated and is planned to be removed in future versions.
-> Direct SQL queries over the attached PostgreSQL database are intended to be used instead.
-
-```sql
-postgres_scan(connection_string VARCHAR, schema_name VARCHAR, table_name VARCHAR) -> TABLE
-```
-
-## postgres_scan_pushdown
-
-> Warning 
-> This function is deprecated and is planned to be removed in future versions.
-> Direct SQL queries over the attached PostgreSQL database are intended to be used instead.
-
-```sql
-postgres_scan_pushdown(connection_string VARCHAR, schema_name VARCHAR, table_name VARCHAR) -> TABLE
 ```
 
 ## read_postgres_binary

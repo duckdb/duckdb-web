@@ -15,7 +15,7 @@ The Go client can observe query execution: it can retrieve per-operator [profili
 
 ## Profiling
 
-Profiling information is connection-local, so it is read from a `*sql.Conn` checked out with `db.Conn()`. Enable profiling on that connection with the [`enable_profiling` and `profiling_mode` PRAGMAs]({% link docs/2.0/dev/profiling.md %}), run the query to profile, then read the result with `duckdb.GetProfilingInfo()`:
+Profiling information is connection-local, so it is read from a `*sql.Conn` checked out with `db.Conn()`. Enable profiling on that connection with the [`enable_profiling` PRAGMA]({% link docs/2.0/dev/profiling.md %}), run the query to profile, then read the result with `duckdb.GetProfilingInfo()`:
 
 ```go
 db, err := sql.Open("duckdb", "")
@@ -28,9 +28,6 @@ defer conn.Close()
 
 // Do not print profiling output to stdout after each query.
 _, err = conn.ExecContext(context.Background(), `PRAGMA enable_profiling = 'no_output'`)
-check(err)
-// Collect a comprehensive set of metrics per operator.
-_, err = conn.ExecContext(context.Background(), `PRAGMA profiling_mode = 'detailed'`)
 check(err)
 
 // Run the query to profile.
@@ -56,7 +53,7 @@ for _, child := range info.Children {
 }
 ```
 
-Which metrics are collected depends on the `profiling_mode` set on the connection; see the [Profiling page]({% link docs/2.0/dev/profiling.md %}) for the available modes and metric names.
+All metrics are collected by default; to restrict them, set the `tracked_metrics` option. See the [Profiling page]({% link docs/2.0/dev/profiling.md %}) and the [metrics list]({% link docs/2.0/dev/metrics.md %}) for the available metric names.
 
 ## Log Storage
 
@@ -78,7 +75,7 @@ check(err)
 db := sql.OpenDB(connector)
 _, err = db.Exec(`CALL enable_logging(level = 'info')`)
 check(err)
-_, err = db.Exec(`SET logging_storage = 'my_log_storage'`{:.language-sql .highlight})
+_, err = db.Exec(`SET logging_storage = 'my_log_storage'`)
 check(err)
 ```
 
@@ -86,7 +83,7 @@ Logging is off by default, so enable it with `CALL enable_logging()` in addition
 
 ## Further Reading
 
-* [Profiling]({% link docs/2.0/dev/profiling.md %}) — DuckDB's query profiling output and the `enable_profiling` and `profiling_mode` PRAGMAs.
+* [Profiling]({% link docs/2.0/dev/profiling.md %}) — DuckDB's query profiling output and the `enable_profiling` PRAGMA and the `tracked_metrics` setting.
 * [Logging]({% link docs/2.0/operations_manual/logging/overview.md %}) — enabling logging with `enable_logging` and querying log entries through `duckdb_logs`.
 * [Run Queries]({% link docs/2.0/clients/go/querying.md %}) — running the queries whose metrics this page reads.
 * [Connect]({% link docs/2.0/clients/go/connecting.md %}) — checking out the connection that profiling operates on, and the connector that log storage is registered on.
