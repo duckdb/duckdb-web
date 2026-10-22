@@ -132,6 +132,13 @@ This call returns the following information for the given table:
 | `block_offset` | `BIGINT`  | Empty unless persistent                                                                                                                            |
 | `additional_block_ids` | `BIGINT[]` | Empty unless persistent |
 
+> New As of DuckDB 2.0, when `pragma_storage_info` is called as a table function, it accepts an `include_segment_info` boolean parameter. When set to `true`, the result contains an additional `segment_info` `VARCHAR` column with per-segment detail for some compression methods, such as the `DICT_FSST` mode applied (for example, `DICTIONARY`):
+
+```sql
+SELECT compression, segment_info
+FROM pragma_storage_info('table_name', include_segment_info := true);
+```
+
 See [Storage]({% link docs/2.0/internals/storage.md %}) for more information.
 
 #### Show Databases
