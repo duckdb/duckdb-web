@@ -155,8 +155,8 @@ docs:
     Full reference: https://github.com/asubbarao/quackapi  
     Community page draft: https://github.com/asubbarao/quackapi/blob/main/docs/community-page.md
 
-extension_star_count: 7
-extension_star_count_pretty: 7
+extension_star_count: 8
+extension_star_count_pretty: 8
 extension_download_count: 3147
 extension_download_count_pretty: 3.1k
 image: '/images/community_extensions/social_preview/preview_community_extension_quackapi.png'

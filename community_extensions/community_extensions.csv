@@ -58,7 +58,7 @@ decimal_arithmetic,duckdb/duckdb-decimal-arithmetic,66d59be49f75bcb164fd4f26b899
 delta_classic,djouallah/delta_classic,ff9914ee3d752b2c1c3e1ea021c7af5b922da63a,"Attach a directory of Delta tables as a single DuckDB database with automatic schema discovery"
 delta_export,djouallah/delta_export,d3875f616befdbf2d9a35940daa80115c13fa733,"Export DuckLake catalog tables to Delta Lake format"
 dicom,nmontesg/duck-dicom,73df5583e9661a2c13663aa4b233c2e436e28dca,"DuckDB integration with medical imaging data (DICOM - Digital Imaging and Communication in Medicine)."
-differential,tobilg/duckdb-differential,1b38539572e995d267d255574bd150adb70356cb,"Versioned DuckDB databases - snapshots, time travel, branches, clones and S3 export over native storage"
+differential,tobilg/duckdb-differential,844ae5fcb686b26ca401f27d03ccf4e77636fe58,"Versioned DuckDB databases - snapshots, time travel, branches, clones and S3 export over native storage"
 dns,tobilg/duckdb-dns,e8b36f403df2399b27b8d9c3a9e0126b6c038c36,"The DNS Extension enables DNS lookups and reverse DNS lookups from within DuckDB"
 documentdb,documentdb/duckdb-documentdb,42543feb3f63847563623ee7ba8c6d6983ed5424,"DuckDB extension for DocumentDB metadata and SQL integration, with schema inference scaffolding and collection access helpers."
 dplyr,mrchypark/libdplyr,53e70ca0e75d13f6684261c12b4ddd36a0608dd8,"R dplyr pipeline syntax support for DuckDB - transpiles dplyr verbs to SQL"
