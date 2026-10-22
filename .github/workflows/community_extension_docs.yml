@@ -3,7 +3,7 @@ on:
   workflow_dispatch:
   workflow_call:
   schedule:
-    - cron: "0 */2 * * *"
+    - cron: "0 */6 * * *"
 
 jobs:
   generate_docs:
