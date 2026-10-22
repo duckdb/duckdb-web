@@ -14,7 +14,7 @@ title: DuckDB Wasm Client
 
 > Installation To use the DuckDB Wasm client, visit the [`duckdb-wasm` GitHub repository](https://github.com/duckdb/duckdb-wasm#readme).
 >
-> The latest stable version of the DuckDB WebAssembly client is {% if site.next_major_duckdb_wasm_version != "" %}{{ site.next_major_duckdb_wasm_version }}{% else %}{{ site.current_duckdb_wasm_version }}{% endif %}.
+> The latest stable version of the DuckDB WebAssembly client is {% include install/latest_client.html client="wasm" %}{{ latest_version }}.
 
 DuckDB-Wasm is a version of DuckDB that has been compiled to [WebAssembly](https://webassembly.org/), the portable binary format that browsers can run at near-native speed. This lets a full DuckDB engine run entirely inside any browser on any device, with no server to send queries to and no data leaving the user's machine.
 

@@ -50,7 +50,7 @@ you will need to make sure the file was created with a file-compatible version o
 Also, check that there is only one version of the driver installed as there are multiple filenames in use.
 
 <!-- markdownlint-disable MD034 -->
-{% if site.next_major_duckdb_java_version != "" %}{% assign jdbc_version = site.next_major_duckdb_java_version %}{% else %}{% assign jdbc_version = site.current_duckdb_java_version %}{% endif %}Download the [JAR file](https://repo1.maven.org/maven2/org/duckdb/duckdb_jdbc/{{ jdbc_version }}/duckdb_jdbc-{{ jdbc_version }}.jar).
+{% include install/latest_client.html client="java" %}{% assign jdbc_version = latest_package %}Download the [JAR file](https://repo1.maven.org/maven2/org/duckdb/duckdb_jdbc/{{ jdbc_version }}/duckdb_jdbc-{{ jdbc_version }}.jar).
 <!-- markdownlint-enable MD034 -->
 
 * macOS: Copy it to `~/Library/Tableau/Drivers/`.

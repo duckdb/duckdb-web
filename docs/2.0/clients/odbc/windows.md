@@ -19,7 +19,7 @@ Using the DuckDB ODBC API on Windows requires the following steps:
    The Driver Manager on Windows is provided in a DLL file `odbccp32.dll`, and other files and tools.
    For detailed information check out the [Common ODBC Component Files](https://docs.microsoft.com/en-us/previous-versions/windows/desktop/odbc/dn170563(v=vs.85)).
 
-2. <!-- markdownlint-disable MD034 --> DuckDB releases the ODBC driver as an asset. For Windows, download it from the [Windows ODBC asset (x86_64/AMD64)](https://github.com/duckdb/duckdb-odbc/releases/download/v{% if site.next_major_duckdb_odbc_version != "" %}{{ site.next_major_duckdb_odbc_version }}{% else %}{{ site.current_duckdb_odbc_version }}{% endif %}/duckdb_odbc-windows-amd64.zip). <!-- markdownlint-enable MD034 -->
+2. <!-- markdownlint-disable MD034 --> DuckDB releases the ODBC driver as an asset. For Windows, download it from the [Windows ODBC asset (x86_64/AMD64)](https://github.com/duckdb/duckdb-odbc/releases/download/v{% include install/latest_client.html client="odbc" %}{{ latest_package }}/duckdb_odbc-windows-amd64.zip). <!-- markdownlint-enable MD034 -->
 
 3. The archive contains the following artifacts:
 

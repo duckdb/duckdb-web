@@ -17,7 +17,7 @@ title: Java (JDBC) Client
 
 > Installation To use the DuckDB Java (JDBC) client, visit the [Java installation page]({% link install/index.html %}?environment=java).
 >
-> The latest stable version of the DuckDB Java (JDBC) client is {% if site.next_major_duckdb_java_short_version != "" %}{{ site.next_major_duckdb_java_short_version }}{% else %}{{ site.current_duckdb_java_short_version }}{% endif %}.
+> The latest stable version of the DuckDB Java (JDBC) client is {% include install/latest_client.html client="java" %}{{ latest_version }}.
 
 The DuckDB Java (JDBC) client lets Java applications query DuckDB through the standard JDBC API, extended with DuckDB-specific features for bulk loading, [Apache Arrow](https://arrow.apache.org/) interchange, user-defined functions, and profiling, and can open a [DuckLake]({% link docs/2.0/core_extensions/ducklake.md %}) catalog directly from the JDBC URL. The driver also supports ahead-of-time compilation with [GraalVM Native Image]({% link docs/2.0/clients/java/deploy_native_image.md %}). 
 

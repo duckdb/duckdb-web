@@ -1,16 +1,9 @@
-# Checksums for the current install version
-preferred_algorithms:
-  - sha512
-  - sha256
+# SHA-256 checksums of the DuckDB 1.4 downloads shown on the installation page, see scripts/update_checksums.py
 
 artifacts:
   cli:
     macos:
-      x86_64:
-        filename: "duckdb_cli-osx-universal.zip"
-        hashes:
-          sha256: "8ef6d776ee60dd97a98edd46255c27d64cf3b3c8d4cd442e43b3ab5c765c8fd8"
-      arm64:
+      universal:
         filename: "duckdb_cli-osx-universal.zip"
         hashes:
           sha256: "8ef6d776ee60dd97a98edd46255c27d64cf3b3c8d4cd442e43b3ab5c765c8fd8"
@@ -44,11 +37,7 @@ artifacts:
         hashes:
           sha256: "ead09563da5a3eba69c345363f04f27a1fb3b105d8b59206c8765cd098123c44"
     macos:
-      x86_64:
-        filename: "libduckdb-osx-universal.zip"
-        hashes:
-          sha256: "33f840404e3b420600936d5b59d342680aa4af41cc06d9a5589711e43cd75766"
-      arm64:
+      universal:
         filename: "libduckdb-osx-universal.zip"
         hashes:
           sha256: "33f840404e3b420600936d5b59d342680aa4af41cc06d9a5589711e43cd75766"
@@ -63,9 +52,10 @@ artifacts:
           sha256: "e4959f966e8f11cd21c7cf8751b5187439e272641411eca78737974cc1ae0176"
 
   java:
-    filename: "duckdb_jdbc-1.4.5.0.jar"
-    hashes:
-      sha256: "5f11500c4fe8af47cfb15b36bb92e22597ad2109556c1564823e2db1a210072e"
+    jar:
+      filename: "duckdb_jdbc-1.4.5.0.jar"
+      hashes:
+        sha256: "5f11500c4fe8af47cfb15b36bb92e22597ad2109556c1564823e2db1a210072e"
 
   odbc:
     linux:

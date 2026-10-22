@@ -1,0 +1,19 @@
+{%- comment -%}
+Looks up the version numbers of a release (an entry of _data/releases.yml) in _config.yml
+and assigns them to v_* variables, which are available in the caller after the include.
+Usage: {% include install/versions.html release=r %}
+{%- endcomment -%}
+{%- assign vp = include.release.config_prefix | append: "_duckdb_" -%}
+{%- assign vk = vp | append: "version" -%}{%- assign v_core = site[vk] -%}
+{%- assign vk = vp | append: "java_short_version" -%}{%- assign v_java = site[vk] -%}
+{%- assign vk = vp | append: "java_version" -%}{%- assign v_java_pkg = site[vk] -%}
+{%- assign vk = vp | append: "odbc_short_version" -%}{%- assign v_odbc = site[vk] -%}
+{%- assign vk = vp | append: "odbc_version" -%}{%- assign v_odbc_pkg = site[vk] -%}
+{%- assign vk = vp | append: "node_neo_version" -%}{%- assign v_nodejs = site[vk] -%}
+{%- assign vk = vp | append: "go_version" -%}{%- assign v_go = site[vk] -%}
+{%- assign vk = vp | append: "go_tag" -%}{%- assign v_go_tag = site[vk] -%}
+{%- assign vk = vp | append: "r_version" -%}{%- assign v_r = site[vk] -%}
+{%- assign vk = vp | append: "rust_version" -%}{%- assign v_rust = site[vk] -%}
+{%- assign vk = vp | append: "wasm_version" -%}{%- assign v_wasm = site[vk] -%}
+{%- assign vk = vp | append: "wasm_tag" -%}{%- assign v_wasm_tag = site[vk] -%}
+{%- assign vk = vp | append: "csharp_version" -%}{%- assign v_csharp = site[vk] -%}

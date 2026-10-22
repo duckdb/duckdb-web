@@ -1,0 +1,11 @@
+{%- comment -%}
+Download buttons with checksums.
+Parameters: base (URL prefix), artifacts (entries of _data/checksums_⟨XY⟩.yml keyed by architecture).
+{%- endcomment -%}
+{%- for pair in include.artifacts -%}
+{%- assign a = pair[1] %}
+<a href="{{ include.base }}/{{ a.filename }}" class="download-btn" download="{{ a.filename }}" rel="noopener noreferrer">{{ a.filename }}</a>
+{%- if a.hashes.sha256 and a.hashes.sha256 != "" -%}
+<div class="shainfo"><span>SHA256:</span><span class="hash">{{ a.hashes.sha256 }}</span></div>
+{%- endif -%}
+{%- endfor -%}

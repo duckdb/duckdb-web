@@ -41,62 +41,91 @@ curl https://install.duckdb.org | bash
 
 <div id="quick-installation">
 
-<div data-install="python" data-version="{{ site.next_major_duckdb_version }}">
+{%- comment -%}
+For each client, the newest release in _data/releases.yml that offers it (see the installation page)
+{%- endcomment -%}
+{%- for r in site.data.releases -%}
+{%- include install/versions.html release=r -%}
+{%- assign checksums_file = r.version | remove: "." | prepend: "checksums_" -%}
+{%- assign artifacts = site.data[checksums_file].artifacts -%}
+
+{%- if forloop.first %}
+
+<div data-install="python" data-version="{{ v_core }}">
 {% highlight bash %}
 pip install duckdb
 {% endhighlight %}
 </div>
 
-<div data-install="java" data-version="{% if site.next_major_duckdb_java_short_version != "" %}{{ site.next_major_duckdb_java_short_version }}{% else %}{{ site.lts_duckdb_java_short_version }}{% endif %}">
-<a href="https://repo1.maven.org/maven2/org/duckdb/duckdb_jdbc/{% if site.next_major_duckdb_java_version != "" %}{{ site.next_major_duckdb_java_version }}{% else %}{{ site.lts_duckdb_java_version }}{% endif %}/duckdb_jdbc-{% if site.next_major_duckdb_java_version != "" %}{{ site.next_major_duckdb_java_version }}{% else %}{{ site.lts_duckdb_java_version }}{% endif %}.jar" class="download-btn" target="_blank">duckdb_jdbc-{% if site.next_major_duckdb_java_version != "" %}{{ site.next_major_duckdb_java_version }}{% else %}{{ site.lts_duckdb_java_version }}{% endif %}.jar</a>
+<div data-install="cli macos" data-version="{{ v_core }}">
+{% highlight bash %}
+curl https://install.duckdb.org | bash
+{% endhighlight %}
 </div>
 
-<div data-install="nodejs" data-version="{% if site.next_major_duckdb_node_neo_version != "" %}{{ site.next_major_duckdb_node_neo_version }}{% else %}{{ site.lts_duckdb_node_neo_version }}{% endif %}">
+<div data-install="cli linux" data-version="{{ v_core }}">
+{% highlight bash %}
+curl https://install.duckdb.org | bash
+{% endhighlight %}
+</div>
+
+<div data-install="cli windows" data-version="{{ v_core }}">
+<a href="https://install.duckdb.org/v{{ v_core }}/{{ artifacts.cli.windows.x86_64.filename }}" class="download-btn" target="_blank">{{ artifacts.cli.windows.x86_64.filename }}</a>
+</div>
+{%- endif -%}
+
+{%- if v_java_pkg != "" and done_java == nil -%}{%- assign done_java = true %}
+
+<div data-install="java" data-version="{{ v_java }}">
+<a href="https://repo1.maven.org/maven2/org/duckdb/duckdb_jdbc/{{ v_java_pkg }}/{{ artifacts.java.jar.filename }}" class="download-btn" target="_blank">{{ artifacts.java.jar.filename }}</a>
+</div>
+{%- endif -%}
+
+{%- if v_nodejs != "" and done_nodejs == nil -%}{%- assign done_nodejs = true %}
+
+<div data-install="nodejs" data-version="{{ v_nodejs }}">
 {% highlight bash %}
 npm install @duckdb/node-api
 {% endhighlight %}
 </div>
+{%- endif -%}
 
-<div data-install="cli macos" data-version="{{ site.next_major_duckdb_version }}">
-{% highlight bash %}
-curl https://install.duckdb.org | bash
-{% endhighlight %}
+{%- if v_odbc_pkg != "" and done_odbc == nil -%}{%- assign done_odbc = true -%}
+{%- assign odbc_macos = artifacts.odbc.macos.universal | default: artifacts.odbc.macos.arm64 -%}
+{%- capture odbc_url -%}https://github.com/duckdb/duckdb-odbc/releases/download/v{{ v_odbc_pkg }}{%- endcapture %}
+
+<div data-install="odbc macos" data-version="{{ v_odbc }}">
+<a href="{{ odbc_url }}/{{ odbc_macos.filename }}" class="download-btn" target="_blank">{{ odbc_macos.filename }}</a>
 </div>
 
-<div data-install="cli linux" data-version="{{ site.next_major_duckdb_version }}">
-{% highlight bash %}
-curl https://install.duckdb.org | bash
-{% endhighlight %}
+<div data-install="odbc linux" data-version="{{ v_odbc }}">
+<a href="{{ odbc_url }}/{{ artifacts.odbc.linux.x86_64.filename }}" class="download-btn" target="_blank">{{ artifacts.odbc.linux.x86_64.filename }}</a>
 </div>
 
-<div data-install="cli windows" data-version="{{ site.next_major_duckdb_version }}">
-<a href="https://install.duckdb.org/v{{ site.next_major_duckdb_version }}/{{ site.data.checksums_20.artifacts.cli.windows.x86_64.filename }}" class="download-btn" target="_blank">{{ site.data.checksums_20.artifacts.cli.windows.x86_64.filename }}</a>
+<div data-install="odbc windows" data-version="{{ v_odbc }}">
+<a href="{{ odbc_url }}/{{ artifacts.odbc.windows.x86_64.filename }}" class="download-btn" target="_blank">{{ artifacts.odbc.windows.x86_64.filename }}</a>
 </div>
+{%- endif -%}
 
-{%- assign odbc_20 = site.data.checksums_20.artifacts.odbc -%}
-<div data-install="odbc macos" data-version="{{ site.next_major_duckdb_odbc_short_version }}">
-<a href="https://github.com/duckdb/duckdb-odbc/releases/download/v{{ site.next_major_duckdb_odbc_version }}/{{ odbc_20.macos.arm64.filename }}" class="download-btn" target="_blank">{{ odbc_20.macos.arm64.filename }}</a>
-</div>
+{%- if v_rust != "" and done_rust == nil -%}{%- assign done_rust = true %}
 
-<div data-install="odbc linux" data-version="{{ site.next_major_duckdb_odbc_short_version }}">
-<a href="https://github.com/duckdb/duckdb-odbc/releases/download/v{{ site.next_major_duckdb_odbc_version }}/{{ odbc_20.linux.x86_64.filename }}" class="download-btn" target="_blank">{{ odbc_20.linux.x86_64.filename }}</a>
-</div>
-
-<div data-install="odbc windows" data-version="{{ site.next_major_duckdb_odbc_short_version }}">
-<a href="https://github.com/duckdb/duckdb-odbc/releases/download/v{{ site.next_major_duckdb_odbc_version }}/{{ odbc_20.windows.x86_64.filename }}" class="download-btn" target="_blank">{{ odbc_20.windows.x86_64.filename }}</a>
-</div>
-
-<div data-install="rust" data-version="{% if site.current_duckdb_rust_version != "" %}{{ site.current_duckdb_rust_version }}{% else %}{{ site.lts_duckdb_rust_version }}{% endif %}">
+<div data-install="rust" data-version="{{ v_rust }}">
 {% highlight bash %}
 cargo add duckdb --features bundled
 {% endhighlight %}
 </div>
+{%- endif -%}
 
-<div data-install="go" data-version="{% if site.next_major_duckdb_go_version != "" %}{{ site.next_major_duckdb_go_version }}{% else %}{{ site.lts_duckdb_go_version }}{% endif %}">
+{%- if v_go != "" and done_go == nil -%}{%- assign done_go = true %}
+
+<div data-install="go" data-version="{{ v_go }}">
 {% highlight bash %}
 go get github.com/duckdb/duckdb-go/v2
 {% endhighlight %}
 </div>
+{%- endif -%}
+
+{%- endfor %}
 
 </div>
 

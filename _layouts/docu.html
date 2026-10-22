@@ -45,7 +45,7 @@ Page URL: <https://duckdb.org{{ page.url }}>
 {% endcapture %}
 
 {% comment %}
-	The status of each version (current / lts / preview / outdated) is set in _data/versions.csv.
+	The status of each version (current / maintained / lts / outdated) is set in _data/versions.csv.
 	By default, we assume that the users is interested in the current version.
 {% endcomment %}
 {% assign latest_version = site.data.versions | where: "status", "current" | first %}
@@ -60,10 +60,13 @@ Page URL: <https://duckdb.org{{ page.url }}>
 	{% assign version_info = latest_version %}
 {% endif %}
 {% assign version_viewed_status = version_info.status %}
+{% comment %} Path of the page relative to its version's directory, used to link to other versions of the page {% endcomment %}
+{% assign version_prefix = "docs/" | append: version_viewed | append: "/" %}
+{% assign basename = page.path | remove_first: version_prefix %}
 
 <body class="documentation layout_docu{% if page.body_class %} {{ page.body_class }}{% endif %} {{ version_viewed_status }}">
 
-	{% if page.url contains '/docs/' %}{% unless page.url contains '/docs/installation/' %}{% include banner_docversion.html %}{% endunless %}{% endif %}
+	{% if page.url contains '/docs/' %}{% include banner_docversion.html %}{% endif %}
 
 	<header>
 		<div class="headerline">
@@ -89,21 +92,15 @@ Page URL: <https://duckdb.org{{ page.url }}>
 					</div>
 					
 					{% if page.url contains '/docs/' %}
-					{% unless page.url contains '/docs/installation/' %}
 
 					<div class="versionselect">
 						<div class="version">
-							{% assign version_viewed_label = version_viewed %}
 							{% assign version_viewed_suffix = version_info.suffix | default: "" %}
 
-							<button type="button" class="versiontrigger" aria-haspopup="listbox" aria-expanded="false"><span class="selectedversion">{{ version_viewed_label }}{% if version_viewed_suffix != "" %} <span class="version-suffix">{{ version_viewed_suffix }}</span>{% endif %}</span><svg class="arrow"><use href="#chevron-down"></use></svg></button>
+							<button type="button" class="versiontrigger" aria-haspopup="listbox" aria-expanded="false"><span class="selectedversion">{{ version_viewed }}{% if version_viewed_suffix != "" %} <span class="version-suffix">{{ version_viewed_suffix }}</span>{% endif %}</span><svg class="arrow"><use href="#chevron-down"></use></svg></button>
 							<div class="versionsidebar">
 								<ul>
-									{% comment %} Remove the leading part, e.g., "docs/lts" or "docs/preview" or "docs/1.0" (version number) {% endcomment %}
-
 									{% comment %} Try the basename with different versions and see whether it exists {% endcomment %}
-									{% assign basename = page.path | regex_replace: "docs/(lts|current|preview|\d*.\d*)/", "" %}
-
 									{% for item in site.data.versions %}
 										{% assign filename = "docs/" | append: item.version | append: "/" | append: basename %}
 										{% capture other_version_of_page_exists %}{% file_exists {{ filename }} %}{% endcapture %}
@@ -119,7 +116,6 @@ Page URL: <https://duckdb.org{{ page.url }}>
 						</div>
 					</div>
 
-					{% endunless %}
 					{% endif %}
 					<button class="mode" data-mode="dark" aria-label="Toggle dark mode">
 						<svg class="icon icon-sun"><use href="#sun"></use></svg>
@@ -217,10 +213,6 @@ Page URL: <https://duckdb.org{{ page.url }}>
 	<script src="/js/script.js?{{ site.time | date: '%s' }}" defer></script>
 	<script src="/js/copy_button.js" defer></script>
 
-	{% if page.body_class == "installation" %}
-		<script src="/js/js-yaml.min.js" defer></script>
-		<script src="/js/installation.js" defer></script>
-	{% endif %}
 	{% if page.railroad and page.railroad != "" and page.railroad != nil %}
 		<script src="/js/{{ version_viewed }}/railroad.js" defer></script>
 		<script src="/js/{{ version_viewed }}/{{ page.railroad }}" defer></script>

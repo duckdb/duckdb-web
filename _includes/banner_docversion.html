@@ -1,5 +1,4 @@
 {% if version_viewed_status != "current" %}
-	{% assign basename = page.path | regex_replace: "docs/(lts|current|preview|\d*.\d*)/", "" %}
 	{% assign latest_docs_dir = "docs/" | append: latest_version.version | append: "/" %}
 	{% assign current_filename = latest_docs_dir | append: basename %}
 	{% capture current_exists %}{% file_exists {{ current_filename }} %}{% endcapture %}

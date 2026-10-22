@@ -13,7 +13,7 @@ title: R Client
 
 > Installation To use the DuckDB R client, visit the [R installation page]({% link install/index.html %}?environment=r).
 >
-> {% if site.next_major_duckdb_r_version != "" %}{% assign r_version = site.next_major_duckdb_r_version %}{% else %}{% assign r_version = site.current_duckdb_r_version %}{% endif %}The latest stable version of the DuckDB R client is {{ r_version }}.{% assign r_major = r_version | slice: 0, 2 %}{% if r_major != "2." %}
+> {% include install/latest_client.html client="r" %}The latest stable version of the DuckDB R client is {{ latest_version }}.{% if latest_release != "2.0" %}
 >
 > A release of the R client based on DuckDB 2.0 is not yet available. Releases based on DuckDB 1.5 cannot open database files created by DuckDB 2.0, see the [migration guide]({% link docs/2.0/operations_manual/migration.md %}#storage-format).{% endif %}
 

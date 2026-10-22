@@ -3,6 +3,27 @@ function docBannerHeight() {
 	return banner ? banner.offsetHeight : 0;
 }
 
+// Detect OS (using UAParser), also used by install.js
+function detectPlatform() {
+	if (window.UAParser) {
+		try {
+			var result = new UAParser().getResult();
+			var osName = (result && result.os && result.os.name) ? String(result.os.name).toLowerCase() : '';
+			if (osName) {
+				if (/mac\s?os|macos|os\s?x/.test(osName)) return 'macos';
+				if (/windows/.test(osName)) return 'windows';
+				if (/linux|ubuntu|debian|fedora|arch|gentoo|suse|centos/.test(osName)) return 'linux';
+			}
+		} catch (e) {}
+	}
+
+	var fallback = (navigator.platform || '') + ' ' + (navigator.userAgent || '');
+	if (/Mac/i.test(fallback)) return 'macos';
+	if (/Win/i.test(fallback)) return 'windows';
+	if (/Linux|X11/i.test(fallback)) return 'linux';
+	return 'macos';
+}
+
 $(document).ready(function(){
 	if (window.location.hash) {
 		var hash = window.location.hash;
@@ -53,26 +74,6 @@ $(document).ready(function(){
 	});
 
 	
-	// Detect OS (using UAParser)
-	function detectPlatform() {
-		if (window.UAParser) {
-			try {
-				var result = new UAParser().getResult();
-				var osName = (result && result.os && result.os.name) ? String(result.os.name).toLowerCase() : '';
-				if (osName) {
-					if (/mac\s?os|macos|os\s?x/.test(osName)) return 'macos';
-					if (/windows/.test(osName)) return 'windows';
-					if (/linux|ubuntu|debian|fedora|arch|gentoo|suse|centos/.test(osName)) return 'linux';
-				}
-			} catch (e) {}
-		}
-
-		var fallback = (navigator.platform || '') + ' ' + (navigator.userAgent || '');
-		if (/Mac/i.test(fallback)) return 'macos';
-		if (/Win/i.test(fallback)) return 'windows';
-		if (/Linux|X11/i.test(fallback)) return 'linux';
-		return 'macos';
-	}
 
 	var OSdatid = detectPlatform();
 	var OSName = OSdatid === 'macos' ? 'macOS' : OSdatid === 'windows' ? 'Windows' : OSdatid === 'linux' ? 'Linux' : 'Unknown OS';

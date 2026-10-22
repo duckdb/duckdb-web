@@ -1,19 +1,15 @@
-{%- assign checksums_current_file = site.current_short_duckdb_version | remove: "." | prepend: "checksums_" -%}
-{%- assign checksums_current = site.data[checksums_current_file] -%}
-{%- assign checksums_lts_file = site.lts_short_duckdb_version | remove: "." | prepend: "checksums_" -%}
-{%- assign checksums_lts = site.data[checksums_lts_file] -%}
 <div class="wrap pagetitle pagetitle--small mb-5">
     <h1>DuckDB Installation</h1>
 </div>
 
 <div class="installationselection">
 
-    
+
     <div class="selection-foldout open" data-foldout="environment">
         <div class="selection-head">
             <h3>Client<span class="selected"></span></h3>
         </div>
-        
+
         <div class="selection-content">
             <div class="selection-options" data-role="environment">
                 <div class="option" aria-checked="false" tabindex="0" data-value="cli" data-display-label="Command Line Interface (CLI)"><span class="symbol"><img src="/images/icons/cli.svg" aria-hidden="true"></span><span class="label">Command line</span></div>
@@ -29,14 +25,14 @@
                 <a class="option" href="{% link docs/2.0/clients/overview.md %}" tabindex="-1"><span class="label">More</span><svg class="icon arrow-right" aria-hidden="true"><use href="#arrow-right"></use></svg></a>
             </div>
         </div>
-        
+
     </div>
-    
+
     <div class="selection-foldout" data-foldout="platform">
         <div class="selection-head">
             <h3>Platform<span class="selected"></span></h3>
         </div>
-    
+
         <div class="selection-content">
             <div class="selection-options" data-role="platform">
                 <div class="option" aria-checked="false" tabindex="-1" data-value="linux"><span class="symbol"><img src="/images/icons/linux.svg" aria-hidden="true"></span><span class="label">Linux</span></div>
@@ -45,22 +41,24 @@
             </div>
         </div>
     </div>
-    
-    
-    <div class="installation-instructions" data-core-version="{{ site.current_duckdb_version }}" data-java-version="{{ site.current_duckdb_java_short_version }}" data-odbc-version="{{ site.current_duckdb_odbc_short_version }}" data-nodejs-version="{{ site.current_duckdb_node_neo_version }}" data-go-version="{{ site.current_duckdb_go_version }}" data-r-version="{{ site.current_duckdb_r_version }}" data-rust-version="{{ site.current_duckdb_rust_version }}" data-wasm-version="{{ site.current_duckdb_wasm_version }}" data-lts-core-version="{{ site.lts_duckdb_version }}" data-lts-java-version="{{ site.lts_duckdb_java_short_version }}" data-lts-odbc-version="{{ site.lts_duckdb_odbc_short_version }}" data-lts-nodejs-version="{{ site.lts_duckdb_node_neo_version }}" data-lts-go-version="{{ site.lts_duckdb_go_version }}" data-lts-r-version="{{ site.lts_duckdb_r_version }}" data-lts-rust-version="{{ site.lts_duckdb_rust_version }}" data-lts-wasm-version="{{ site.lts_duckdb_wasm_version }}" data-preview-core-version="{{ site.next_major_duckdb_version }}">
-        
+
+
+    <div class="installation-instructions">
+
         <div class="installation-heading">
             <h2>Installation</h2>
             <div class="version-switch">
                 <span class="version-switch-toggle" role="radiogroup" aria-label="Version selection">
-                    <button class="version-switch-option active" data-version="preview" role="radio" aria-checked="true" type="button">{{ site.next_major_duckdb_version }} (LTS)</button>
-                    <button class="version-switch-option" data-version="current" role="radio" aria-checked="false" type="button">{{ site.current_duckdb_version }}</button>
-                    <button class="version-switch-option" data-version="lts" role="radio" aria-checked="false" type="button">{{ site.lts_duckdb_version }} (LTS)</button>
+                    {%- for r in site.data.releases %}
+                    {%- include install/versions.html release=r -%}
+                    {%- assign docs_version = site.data.versions | where: "version", r.version | first %}
+                    <button class="version-switch-option{% if forloop.first %} active{% endif %}" data-version="{{ r.version }}" data-aliases="{{ r.aliases | join: ' ' }}" data-suffix="{{ docs_version.suffix }}" role="radio" aria-checked="{{ forloop.first }}" type="button">{{ v_core }}{% if docs_version.suffix and docs_version.suffix != "" %} ({{ docs_version.suffix }}){% endif %}</button>
+                    {%- endfor %}
                     <span class="version-switch-slider"></span>
                 </span>
             </div>
         </div>
-        
+
 <div id="result">
 
 <div class="instruction-wrap"></div>
@@ -72,882 +70,270 @@
 </div><!-- result -->
 
     </div><!-- installation-instructions -->
-    
+
 </div>
 
-<!--<div class="aboutthispage">
-    <p>This page contains installation options for DuckDB. Binaries are available for major programming languages and <a href="{% link docs/1.5/dev/building/overview.md %}#supported-platforms">platforms</a>. If there are no pre-packaged binaries available, consider <a href="{% link docs/1.5/dev/building/overview.md %}">building DuckDB from source</a>.</p>
-</div>-->
-
+{%- comment -%}
+Instruction templates, one per release, client and (for downloads) platform. js/install.js shows the selected one.
+Releases are configured in _data/releases.yml, download filenames and checksums are in _data/checksums_⟨XY⟩.yml.
+The newest release offering a client gets unversioned install commands, older ones get pinned versions.
+{%- endcomment %}
 
 <div class="hidden instruction-collection" hidden aria-hidden="true">
 
+{%- assign platforms = "linux,macos,windows" | split: "," -%}
+{%- assign newest_r = true -%}{%- assign newest_rust = true -%}{%- assign newest_go = true -%}{%- assign newest_nodejs = true -%}{%- assign newest_wasm = true -%}
+{%- for r in site.data.releases -%}
+{%- include install/versions.html release=r -%}
+{%- assign release_version = r.version -%}
+{%- assign newest_release = forloop.first -%}
+{%- assign checksums_file = release_version | remove: "." | prepend: "checksums_" -%}
+{%- assign artifacts = site.data[checksums_file].artifacts -%}
+{%- capture downloads_url -%}https://install.duckdb.org/v{{ v_core }}{%- endcapture -%}
+{%- capture docker_cmd -%}docker run --rm -it -v "$(pwd):/workspace" -w /workspace duckdb/duckdb:{{ v_core }}{%- endcapture -%}
 
+{%- comment -%} Command line {%- endcomment -%}
+{%- capture docs -%}{% include install/docs_url.html release=release_version client="cli" %}{%- endcapture -%}
+{%- capture curl_cmd -%}curl https://install.duckdb.org | {% unless newest_release %}DUCKDB_VERSION={{ v_core }} {% endunless %}bash{%- endcapture -%}
+{%- capture powershell_cmd -%}powershell -NoExit -ExecutionPolicy Bypass -Command "{% unless newest_release %}$env:DUCKDB_VERSION = '{{ v_core }}'; {% endunless %}irm https://install.duckdb.org/install.ps1 | iex"{%- endcapture %}
 
-<div class="current"
-    data-platform="macos"
-    data-environment="cli"
-    data-docs="{% link docs/1.5/clients/cli/overview.md %}">
+<div data-release="{{ release_version }}" data-platform="macos" data-environment="cli" data-label="{{ v_core }}" data-docs="{{ docs }}">
 
-{%- highlight bash -%}
-curl https://install.duckdb.org | DUCKDB_VERSION={{ site.current_duckdb_version }} bash
-{%- endhighlight -%}
+{% highlight bash %}{{ curl_cmd }}{% endhighlight %}
 
 <div class="alternative">
+
+<h4>Direct Download</h4>
+{% include install/downloads.html base=downloads_url artifacts=artifacts.cli.macos %}
 
 <h4>Docker Image</h4>
-
-{%- highlight bash -%}
-docker run --rm -it -v "$(pwd):/workspace" -w /workspace duckdb/duckdb:{{ site.current_duckdb_version }}
-{%- endhighlight -%}
-
-<h4>Direct Download</h4>
-{%- assign f = checksums_current.artifacts.cli.macos.x86_64.filename -%}
-<a href="https://install.duckdb.org/v{{ site.current_duckdb_version }}/{{ f }}" class="download-btn" download="{{ f }}" rel="noopener noreferrer">{{ f }}</a>
-{%- include checksum_inline.html environment="cli" platform="macos" version="current" -%}
+{% highlight bash %}{{ docker_cmd }}{% endhighlight %}
 
 </div>
 </div>
 
-<div class="lts"
-    data-platform="macos"
-    data-environment="cli"
-    data-docs="/docs/1.4/clients/cli/overview">
+<div data-release="{{ release_version }}" data-platform="linux" data-environment="cli" data-label="{{ v_core }}" data-docs="{{ docs }}">
 
-{%- highlight bash -%}
-curl https://install.duckdb.org | DUCKDB_VERSION={{ site.lts_duckdb_version }} bash
-{%- endhighlight -%}
+{% highlight bash %}{{ curl_cmd }}{% endhighlight %}
 
 <div class="alternative">
-
-<h4>Direct Download</h4>
-{%- assign f = checksums_lts.artifacts.cli.macos.x86_64.filename -%}
-<a href="https://install.duckdb.org/v{{ site.lts_duckdb_version }}/{{ f }}" class="download-btn" download="{{ f }}" rel="noopener noreferrer">{{ f }}</a>
-{%- include checksum_inline.html environment="cli" platform="macos" version="lts" -%}
-
-</div>
-</div>
-
-<div class="preview"
-    data-platform="macos"
-    data-environment="cli"
-    data-docs="{% link docs/2.0/clients/cli/overview.md %}">
-
-{%- highlight bash -%}
-curl https://install.duckdb.org | bash
-{%- endhighlight -%}
-
-<div class="alternative">
-
-<h4>Direct Download</h4>
-{%- assign f = site.data.checksums_20.artifacts.cli.macos.x86_64.filename -%}
-<a href="https://install.duckdb.org/v{{ site.next_major_duckdb_version }}/{{ f }}" class="download-btn" download="{{ f }}" rel="noopener noreferrer">{{ f }}</a>
-{%- include checksum_inline.html environment="cli" platform="macos" version="next_major" -%}
-
-</div>
-</div>
-
-<div class="current"
-    data-platform="linux"
-    data-environment="cli"
-    data-docs="{% link docs/1.5/clients/cli/overview.md %}">
-
-{%- highlight bash -%}
-curl https://install.duckdb.org | DUCKDB_VERSION={{ site.current_duckdb_version }} bash
-{%- endhighlight -%}
-
-<div class="alternative">
-
-<h4>Docker Image</h4>
-{%- highlight bash -%}
-docker run --rm -it -v "$(pwd):/workspace" -w /workspace duckdb/duckdb:{{ site.current_duckdb_version }}
-{%- endhighlight -%}
 
 <h4>Direct Downloads</h4>
-
+{%- if artifacts.cli.linux_musl %}
 <p>glibc builds (recommended):</p>
-
-{%- assign f_x86 = checksums_current.artifacts.cli.linux.x86_64.filename -%}
-<a href="https://install.duckdb.org/v{{ site.current_duckdb_version }}/{{ f_x86 }}" class="download-btn" download="{{ f_x86 }}" rel="noopener noreferrer">{{ f_x86 }}</a>
-{%- include checksum_inline.html environment="cli" platform="linux" architecture="x86_64" version="current" -%}
-
-{%- assign f_arm = checksums_current.artifacts.cli.linux.arm64.filename -%}
-<a href="https://install.duckdb.org/v{{ site.current_duckdb_version }}/{{ f_arm }}" class="download-btn" download="{{ f_arm }}" rel="noopener noreferrer">{{ f_arm }}</a>
-{%- include checksum_inline.html environment="cli" platform="linux" architecture="arm64" version="current" -%}
-
+{%- endif %}
+{% include install/downloads.html base=downloads_url artifacts=artifacts.cli.linux %}
+{%- if artifacts.cli.linux_musl %}
 <p>musl libc builds (for Alpine Linux):</p>
+{% include install/downloads.html base=downloads_url artifacts=artifacts.cli.linux_musl %}
+{%- endif %}
 
-{%- assign f_x86_musl = checksums_current.artifacts.cli.linux.x86_64_musl.filename -%}
-<a href="https://install.duckdb.org/v{{ site.current_duckdb_version }}/{{ f_x86_musl }}" class="download-btn" download="{{ f_x86_musl }}" rel="noopener noreferrer">{{ f_x86_musl }}</a>
-{%- include checksum_inline.html environment="cli" platform="linux" architecture="x86_64_musl" version="current" -%}
-
-{%- assign f_arm_musl = checksums_current.artifacts.cli.linux.arm64_musl.filename -%}
-<a href="https://install.duckdb.org/v{{ site.current_duckdb_version }}/{{ f_arm_musl }}" class="download-btn" download="{{ f_arm_musl }}" rel="noopener noreferrer">{{ f_arm_musl }}</a>
-{%- include checksum_inline.html environment="cli" platform="linux" architecture="arm64_musl" version="current" -%}
+<h4>Docker Image</h4>
+{% highlight bash %}{{ docker_cmd }}{% endhighlight %}
 
 </div>
 </div>
 
-<div class="lts"
-    data-platform="linux"
-    data-environment="cli"
-    data-docs="/docs/1.4/clients/cli/overview">
+<div data-release="{{ release_version }}" data-platform="windows" data-environment="cli" data-label="{{ v_core }}" data-docs="{{ docs }}">
 
-{%- highlight bash -%}
-curl https://install.duckdb.org | DUCKDB_VERSION={{ site.lts_duckdb_version }} bash
-{%- endhighlight -%}
+<h4>Installation Script</h4>
 
-<div class="alternative">
+<p>Run the following command from the Run menu (Win+R) or the Command Prompt:</p>
+
+{% highlight bash %}{{ powershell_cmd }}{% endhighlight %}
 
 <h4>Direct Downloads</h4>
-{%- assign f_x86 = checksums_lts.artifacts.cli.linux.x86_64.filename -%}
-<a href="https://install.duckdb.org/v{{ site.lts_duckdb_version }}/{{ f_x86 }}" class="download-btn" download="{{ f_x86 }}" rel="noopener noreferrer">{{ f_x86 }}</a>
-{%- include checksum_inline.html environment="cli" platform="linux" architecture="x86_64" version="lts" -%}
+{% include install/downloads.html base=downloads_url artifacts=artifacts.cli.windows %}
 
-{%- assign f_arm = checksums_lts.artifacts.cli.linux.arm64.filename -%}
-<a href="https://install.duckdb.org/v{{ site.lts_duckdb_version }}/{{ f_arm }}" class="download-btn" download="{{ f_arm }}" rel="noopener noreferrer">{{ f_arm }}</a>
-{%- include checksum_inline.html environment="cli" platform="linux" architecture="arm64" version="lts" -%}
-
-</div>
-</div>
-
-<div class="preview"
-    data-platform="linux"
-    data-environment="cli"
-    data-docs="{% link docs/2.0/clients/cli/overview.md %}">
-
-{%- highlight bash -%}
-curl https://install.duckdb.org | bash
-{%- endhighlight -%}
+{% include install/vcredist.html %}
 
 <div class="alternative">
-
-<h4>Direct Downloads</h4>
-{%- assign f_x86 = site.data.checksums_20.artifacts.cli.linux.x86_64.filename -%}
-<a href="https://install.duckdb.org/v{{ site.next_major_duckdb_version }}/{{ f_x86 }}" class="download-btn" download="{{ f_x86 }}" rel="noopener noreferrer">{{ f_x86 }}</a>
-{%- include checksum_inline.html environment="cli" platform="linux" architecture="x86_64" version="next_major" -%}
-{%- assign f_arm = site.data.checksums_20.artifacts.cli.linux.arm64.filename -%}
-<a href="https://install.duckdb.org/v{{ site.next_major_duckdb_version }}/{{ f_arm }}" class="download-btn" download="{{ f_arm }}" rel="noopener noreferrer">{{ f_arm }}</a>
-{%- include checksum_inline.html environment="cli" platform="linux" architecture="arm64" version="next_major" -%}
-
-</div>
-</div>
-
-
-<div class="current"
-    data-platform="windows"
-    data-environment="cli"
-    data-docs="{% link docs/1.5/clients/cli/overview.md %}">
-
-<h4>Direct Downloads</h4>
-{%- assign f_x86 = checksums_current.artifacts.cli.windows.x86_64.filename -%}
-<a href="https://install.duckdb.org/v{{ site.current_duckdb_version }}/{{ f_x86 }}" class="download-btn" download="{{ f_x86 }}" rel="noopener noreferrer">{{ f_x86 }}</a>
-{%- include checksum_inline.html environment="cli" platform="windows" architecture="x86_64" version="current" -%}
-
-{%- assign f_arm = checksums_current.artifacts.cli.windows.arm64.filename -%}
-<a href="https://install.duckdb.org/v{{ site.current_duckdb_version }}/{{ f_arm }}" class="download-btn" download="{{ f_arm }}" rel="noopener noreferrer">{{ f_arm }}</a>
-{%- include checksum_inline.html environment="cli" platform="windows" architecture="arm64" version="current" -%}
-
-<div class="alternative">
+{%- if r.winget %}
 
 <h4>Package Manager</h4>
-
-{%- highlight bash -%}
-winget install DuckDB.cli --version {{ site.current_duckdb_version }}
-{%- endhighlight -%}
-
-<h4>Installation Script (Beta)</h4>
-
-You can install the DuckDB CLI client with a script the Run menu or the Command Prompt. Please note that this script is in beta – exercise caution when using it.
-
-{%- highlight bash -%}
-powershell -NoExit -Command "$env:DUCKDB_VERSION = '{{ site.current_duckdb_version }}'; iex (iwr 'https://install.duckdb.org/install.ps1').Content"
-{%- endhighlight -%}
+{% highlight bash %}winget install DuckDB.cli --version {{ v_core }}{% endhighlight %}
+{%- endif %}
 
 <h4>Docker Image (for WSL2)</h4>
-
-{%- highlight bash -%}
-docker run --rm -it -v "$(pwd):/workspace" -w /workspace duckdb/duckdb:{{ site.current_duckdb_version }}
-{%- endhighlight -%}
+{% highlight bash %}{{ docker_cmd }}{% endhighlight %}
 
 </div>
 </div>
 
-<div class="lts"
-    data-platform="windows"
-    data-environment="cli"
-    data-docs="/docs/1.4/clients/cli/overview">
+{%- comment -%} Python {%- endcomment -%}
+{%- capture docs -%}{% include install/docs_url.html release=release_version client="python" %}{%- endcapture %}
 
-<h4>Direct Downloads</h4>
-{%- assign f_x86 = checksums_lts.artifacts.cli.windows.x86_64.filename -%}
-<a href="https://install.duckdb.org/v{{ site.lts_duckdb_version }}/{{ f_x86 }}" class="download-btn" download="{{ f_x86 }}" rel="noopener noreferrer">{{ f_x86 }}</a>
-{%- include checksum_inline.html environment="cli" platform="windows" architecture="x86_64" version="lts" -%}
+<div data-release="{{ release_version }}" data-environment="python" data-label="{{ v_core }}" data-docs="{{ docs }}">
 
-{%- assign f_arm = checksums_lts.artifacts.cli.windows.arm64.filename -%}
-<a href="https://install.duckdb.org/v{{ site.lts_duckdb_version }}/{{ f_arm }}" class="download-btn" download="{{ f_arm }}" rel="noopener noreferrer">{{ f_arm }}</a>
-{%- include checksum_inline.html environment="cli" platform="windows" architecture="arm64" version="lts" -%}
+{% if newest_release -%}
+{% highlight bash %}pip install --upgrade duckdb{% endhighlight %}
+{%- else -%}
+{% highlight bash %}pip install duckdb=={{ v_core }}{% endhighlight %}
+{%- endif %}
 
-<div class="note">
-    DuckDB on Windows requires the <a href="https://learn.microsoft.com/en-us/cpp/windows/latest-supported-vc-redist?view=msvc-170">Microsoft Visual C++ Redistributable</a>.
-</div>
-
-<div class="alternative">
-
-<h4>Package Manager</h4>
-
-{%- highlight bash -%}
-winget install DuckDB.cli --version {{ site.lts_duckdb_version }}
-{%- endhighlight -%}
-
-<h4>Docker Image (for WSL2)</h4>
-
-{%- highlight bash -%}
-docker run --rm -it -v "$(pwd):/workspace" -w /workspace duckdb/duckdb:{{ site.lts_duckdb_version }}
-{%- endhighlight -%}
+{% include install/vcredist.html %}
 
 </div>
 
-</div>
+{%- comment -%} R {%- endcomment -%}
+{%- if v_r != "" -%}
+{%- capture docs -%}{% include install/docs_url.html release=release_version client="r" %}{%- endcapture %}
 
-<div class="preview"
-    data-platform="windows"
-    data-environment="cli"
-    data-docs="{% link docs/2.0/clients/cli/overview.md %}">
-
-<h4>Powershell Script</h4>
-{%- highlight powershell -%}
-irm https://install.duckdb.org/install.ps1 | iex
-{%- endhighlight -%}
-
-<h4>Direct Downloads</h4>
-{%- assign f_x86 = site.data.checksums_20.artifacts.cli.windows.x86_64.filename -%}
-<a href="https://install.duckdb.org/v{{ site.next_major_duckdb_version }}/{{ f_x86 }}" class="download-btn" download="{{ f_x86 }}" rel="noopener noreferrer">{{ f_x86 }}</a>
-{%- include checksum_inline.html environment="cli" platform="windows" architecture="x86_64" version="next_major" -%}
-{%- assign f_arm = site.data.checksums_20.artifacts.cli.windows.arm64.filename -%}
-<a href="https://install.duckdb.org/v{{ site.next_major_duckdb_version }}/{{ f_arm }}" class="download-btn" download="{{ f_arm }}" rel="noopener noreferrer">{{ f_arm }}</a>
-{%- include checksum_inline.html environment="cli" platform="windows" architecture="arm64" version="next_major" -%}
-
-<div class="note">
-    DuckDB on Windows requires the <a href="https://learn.microsoft.com/en-us/cpp/windows/latest-supported-vc-redist?view=msvc-170">Microsoft Visual C++ Redistributable</a>.
-</div>
-
-</div>
-
-
-<div class="current"
-    data-environment="python"
-    data-docs="{% link docs/1.5/clients/python/overview.md %}">
-
-{%- highlight bash -%}
-pip install duckdb=={{ site.current_duckdb_version }}
-{%- endhighlight -%}
-
-<div class="note">
-    DuckDB on Windows requires the <a href="https://learn.microsoft.com/en-us/cpp/windows/latest-supported-vc-redist?view=msvc-170">Microsoft Visual C++ Redistributable</a>.
-</div>
-
-</div>
-
-<div class="lts"
-    data-environment="python"
-    data-docs="/docs/1.4/clients/python/overview">
-
-{%- highlight bash -%}
-pip install duckdb=={{ site.lts_duckdb_version }}
-{%- endhighlight -%}
-
-<div class="note">
-    DuckDB on Windows requires the <a href="https://learn.microsoft.com/en-us/cpp/windows/latest-supported-vc-redist?view=msvc-170">Microsoft Visual C++ Redistributable</a>.
-</div>
-
-</div>
-
-<div class="preview"
-    data-environment="python"
-    data-docs="{% link docs/2.0/clients/python/overview.md %}">
-
-{%- highlight bash -%}
-pip install --upgrade duckdb
-{%- endhighlight -%}
-
-<div class="note">
-    DuckDB on Windows requires the <a href="https://learn.microsoft.com/en-us/cpp/windows/latest-supported-vc-redist?view=msvc-170">Microsoft Visual C++ Redistributable</a>.
-</div>
-
-</div>
-
-{%- if site.current_duckdb_r_version != "" -%}
-<div class="current"
-    data-environment="r"
-    data-docs="{% link docs/1.5/clients/r.md %}">
-
-{%- highlight r -%}
-install.packages("duckdb")
-{%- endhighlight -%}
+<div data-release="{{ release_version }}" data-environment="r" data-label="{{ v_r }}" data-docs="{{ docs }}">
+{% if newest_r %}
+{% highlight r %}install.packages("duckdb"){% endhighlight %}
 
 <div class="alternative">
 
 <h4>Installing from the Posit Public Package Manager (Linux)</h4>
 
-{%- highlight r -%}
+{% highlight r %}
 options(HTTPUserAgent = sprintf("R/%s R (%s)",
     getRversion(),
     paste(getRversion(), R.version["platform"], R.version["arch"], R.version["os"])
 ))
 install.packages("duckdb", repos="https://p3m.dev/cran/__linux__/manylinux_2_28/latest/")
-{%- endhighlight -%}
+{% endhighlight %}
 </div>
-</div>
-{%- endif -%}
-
-<div class="lts"
-    data-environment="r"
-    data-docs="/docs/1.4/clients/r">
-
-{%- highlight r -%}
+{%- else %}
+{% highlight r %}
 install.packages("DBI")
-install.packages("duckdb.{{ site.lts_short_duckdb_version }}", repos = "https://duckdb.r-universe.dev")
-{%- endhighlight -%}
+install.packages("duckdb.{{ release_version }}", repos = "https://duckdb.r-universe.dev")
+{% endhighlight %}
 
 <div class="alternative">
 
 <h4>Downloading package file</h4>
 
-Navigate to <a href="https://duckdb.r-universe.dev/duckdb.{{ site.lts_short_duckdb_version }}" target="_blank" rel="noopener noreferrer">https://duckdb.r-universe.dev/duckdb.{{ site.lts_short_duckdb_version }}</a> and download the package file for your platform. Then install it using:
+Navigate to <a href="https://duckdb.r-universe.dev/duckdb.{{ release_version }}" target="_blank" rel="noopener noreferrer">https://duckdb.r-universe.dev/duckdb.{{ release_version }}</a> and download the package file for your platform. Then install it using:
 
-{%- highlight r -%}
-install.packages("path/to/downloaded/package.ext", repos = NULL)
-{%- endhighlight -%}
+{% highlight r %}install.packages("path/to/downloaded/package.ext", repos = NULL){% endhighlight %}
 </div>
+{%- endif %}
 </div>
+{%- assign newest_r = false -%}
+{%- endif -%}
 
+{%- comment -%} Java {%- endcomment -%}
+{%- if v_java_pkg != "" -%}
+{%- capture docs -%}{% include install/docs_url.html release=release_version client="java" %}{%- endcapture -%}
+{%- capture maven_url -%}https://repo1.maven.org/maven2/org/duckdb/duckdb_jdbc/{{ v_java_pkg }}{%- endcapture %}
 
-
-{%- if site.current_duckdb_java_version != "" -%}
-<div class="current"
-    data-environment="java"
-    data-docs="{% link docs/1.5/clients/java/overview.md %}">
+<div data-release="{{ release_version }}" data-environment="java" data-label="{{ v_java }}" data-docs="{{ docs }}">
 
 <h4>Direct Download (JAR)</h4>
-<a href="https://repo1.maven.org/maven2/org/duckdb/duckdb_jdbc/{{ site.current_duckdb_java_version }}/duckdb_jdbc-{{ site.current_duckdb_java_version }}.jar" class="download-btn" download="duckdb_jdbc-{{ site.current_duckdb_java_version }}.jar" download rel="noopener noreferrer">duckdb_jdbc-{{ site.current_duckdb_java_version }}.jar</a>
-{%- include checksum_inline.html environment="java" version="current" -%}
+{% include install/downloads.html base=maven_url artifacts=artifacts.java %}
 
 <h4>Maven</h4>
 
-{%- highlight xml -%}
+{% highlight xml %}
 <dependency>
     <groupId>org.duckdb</groupId>
     <artifactId>duckdb_jdbc</artifactId>
-    <version>{{ site.current_duckdb_java_version }}</version>
+    <version>{{ v_java_pkg }}</version>
 </dependency>
-{%- endhighlight -%}
+{% endhighlight %}
 
-<p>See the <a href="https://central.sonatype.com/artifact/org.duckdb/duckdb_jdbc">Maven Central entry</a>.</p>
+<p>See the <a href="https://central.sonatype.com/artifact/org.duckdb/duckdb_jdbc/{{ v_java_pkg }}/overview">Maven Central entry</a>.</p>
 
-<div class="note">
-    DuckDB on Windows requires the <a href="https://learn.microsoft.com/en-us/cpp/windows/latest-supported-vc-redist?view=msvc-170">Microsoft Visual C++ Redistributable</a>.
-</div>
+{% include install/vcredist.html %}
 
 <div class="alternative">
 
 <h4>Gradle (Groovy)</h4>
 
-{%- highlight groovy -%}
+{% highlight groovy %}
 dependencies {
-    implementation 'org.duckdb:duckdb_jdbc:{{ site.current_duckdb_java_version }}'
+    implementation 'org.duckdb:duckdb_jdbc:{{ v_java_pkg }}'
 }
-{%- endhighlight -%}
+{% endhighlight %}
 
 <h4>Gradle (Kotlin)</h4>
 
-{%- highlight kotlin -%}
+{% highlight kotlin %}
 dependencies {
-    implementation("org.duckdb:duckdb_jdbc:{{ site.current_duckdb_java_version }}")
+    implementation("org.duckdb:duckdb_jdbc:{{ v_java_pkg }}")
 }
-{%- endhighlight -%}
+{% endhighlight %}
 
 </div>
 </div>
 {%- endif -%}
 
+{%- comment -%} Node.js {%- endcomment -%}
+{%- if v_nodejs != "" -%}
+{%- capture docs -%}{% include install/docs_url.html release=release_version client="node_neo" %}{%- endcapture %}
 
-<div class="lts"
-    data-environment="java"
-    data-docs="/docs/1.4/clients/java">
+<div data-release="{{ release_version }}" data-environment="nodejs" data-label="{{ v_nodejs }}" data-docs="{{ docs }}">
 
-<h4>Direct Download (JAR)</h4>
-<a href="https://repo1.maven.org/maven2/org/duckdb/duckdb_jdbc/{{ site.lts_duckdb_java_version }}/duckdb_jdbc-{{ site.lts_duckdb_java_version }}.jar" class="download-btn" download="duckdb_jdbc-{{ site.lts_duckdb_java_version }}.jar" download rel="noopener noreferrer">duckdb_jdbc-{{ site.lts_duckdb_java_version }}.jar</a>
-{%- include checksum_inline.html environment="java" version="lts" -%}
-
-<h4>Maven</h4>
-
-{%- highlight xml -%}
-<dependency>
-    <groupId>org.duckdb</groupId>
-    <artifactId>duckdb_jdbc</artifactId>
-    <version>{{ site.lts_duckdb_java_version }}</version>
-</dependency>
-{%- endhighlight -%}
-
-<p>See the <a href="https://central.sonatype.com/artifact/org.duckdb/duckdb_jdbc/{{ site.lts_duckdb_java_version }}/overview">Maven Central entry</a>.</p>
-
-<div class="note">
-    DuckDB on Windows requires the <a href="https://learn.microsoft.com/en-us/cpp/windows/latest-supported-vc-redist?view=msvc-170">Microsoft Visual C++ Redistributable</a>.
-</div>
-
-<div class="alternative">
-
-<h4>Gradle (Groovy)</h4>
-
-{%- highlight groovy -%}
-dependencies {
-    implementation 'org.duckdb:duckdb_jdbc:{{ site.lts_duckdb_java_version }}'
-}
-{%- endhighlight -%}
-
-<h4>Gradle (Kotlin)</h4>
-
-{%- highlight kotlin -%}
-dependencies {
-    implementation("org.duckdb:duckdb_jdbc:{{ site.lts_duckdb_java_version }}")
-}
-{%- endhighlight -%}
+{% highlight bash %}npm install @duckdb/node-api{% unless newest_nodejs %}@{{ v_nodejs }}{% endunless %}{% endhighlight %}
 
 </div>
-</div>
-
-{%- if site.next_major_duckdb_java_version != "" -%}
-<div class="preview"
-    data-environment="java"
-    data-docs="{% link docs/2.0/clients/java/overview.md %}">
-
-<h4>Direct Download (JAR)</h4>
-<a href="https://repo1.maven.org/maven2/org/duckdb/duckdb_jdbc/{{ site.next_major_duckdb_java_version }}/duckdb_jdbc-{{ site.next_major_duckdb_java_version }}.jar" class="download-btn" download="duckdb_jdbc-{{ site.next_major_duckdb_java_version }}.jar" rel="noopener noreferrer">duckdb_jdbc-{{ site.next_major_duckdb_java_version }}.jar</a>
-{%- include checksum_inline.html environment="java" version="next_major" -%}
-
-<h4>Maven</h4>
-
-{%- highlight xml -%}
-<dependency>
-    <groupId>org.duckdb</groupId>
-    <artifactId>duckdb_jdbc</artifactId>
-    <version>{{ site.next_major_duckdb_java_version }}</version>
-</dependency>
-{%- endhighlight -%}
-
-<div class="note">
-    DuckDB on Windows requires the <a href="https://learn.microsoft.com/en-us/cpp/windows/latest-supported-vc-redist?view=msvc-170">Microsoft Visual C++ Redistributable</a>.
-</div>
-
-<div class="alternative">
-
-<h4>Gradle (Groovy)</h4>
-
-{%- highlight groovy -%}
-dependencies {
-    implementation 'org.duckdb:duckdb_jdbc:{{ site.next_major_duckdb_java_version }}'
-}
-{%- endhighlight -%}
-
-<h4>Gradle (Kotlin)</h4>
-
-{%- highlight kotlin -%}
-dependencies {
-    implementation("org.duckdb:duckdb_jdbc:{{ site.next_major_duckdb_java_version }}")
-}
-{%- endhighlight -%}
-
-</div>
-</div>
+{%- assign newest_nodejs = false -%}
 {%- endif -%}
 
+{%- comment -%} Wasm: npm package if a tag is set in _config.yml, otherwise a link to the repository {%- endcomment -%}
+{%- if v_wasm != "" -%}
+{%- capture docs -%}{% include install/docs_url.html release=release_version client="wasm" %}{%- endcapture %}
 
-{%- if site.current_duckdb_node_neo_version != "" -%}
-<div class="current"
-    data-environment="nodejs"
-    data-docs="{% link docs/1.5/clients/node_neo/overview.md %}">
-{%- highlight bash -%}
-npm install @duckdb/node-api@{{ site.current_duckdb_node_neo_version }}
-{%- endhighlight -%}
-    
-</div>
-{%- endif -%}
+<div data-release="{{ release_version }}" data-environment="wasm" data-label="{{ v_wasm }}" data-docs="{{ docs }}">
 
-
-<div class="lts"
-    data-environment="nodejs"
-    data-docs="/docs/1.4/clients/node_neo/overview">
-
-{%- highlight bash -%}
-npm install @duckdb/node-api@{{ site.lts_duckdb_node_neo_version }}
-{%- endhighlight -%}
-
-</div>
-
-{%- if site.next_major_duckdb_node_neo_version != "" -%}
-<div class="preview"
-    data-environment="nodejs"
-    data-docs="{% link docs/2.0/clients/node_neo/overview.md %}">
-
-{%- highlight bash -%}
-npm install @duckdb/node-api
-{%- endhighlight -%}
-
-</div>
-{%- endif -%}
-
-{%- if site.current_duckdb_wasm_version != "" -%}
-<div class="current"
-    data-environment="wasm"
-    data-docs="{% link docs/1.5/clients/wasm/overview.md %}">
-
-{%- highlight bash -%}
-npm install @duckdb/duckdb-wasm@{{ site.current_duckdb_wasm_tag }}
-{%- endhighlight -%}
-
-</div>
-{%- endif -%}
-
-<div class="lts"
-    data-environment="wasm"
-    data-docs="/docs/1.4/clients/wasm/overview">
-
-{%- highlight bash -%}
-npm install @duckdb/duckdb-wasm@{{ site.lts_duckdb_wasm_tag }}
-{%- endhighlight -%}
-
-</div>
-
-{%- if site.next_major_duckdb_wasm_version != "" -%}
-<div class="preview"
-    data-environment="wasm"
-    data-docs="{% link docs/2.0/clients/wasm/overview.md %}">
-
+{% if v_wasm_tag and v_wasm_tag != "" -%}
+{% highlight bash %}npm install @duckdb/duckdb-wasm{% unless newest_wasm %}@{{ v_wasm_tag }}{% endunless %}{% endhighlight %}
+{%- else -%}
 <p>See the <a href="https://github.com/duckdb/duckdb-wasm">GitHub repository</a>.</p>
+{%- endif %}
 
 </div>
+{%- assign newest_wasm = false -%}
 {%- endif -%}
 
-{%- if site.current_duckdb_rust_version != "" -%}
-<div class="current"
-    data-environment="rust"
-    data-docs="{% link docs/1.5/clients/rust/overview.md %}">
+{%- comment -%} Rust {%- endcomment -%}
+{%- if v_rust != "" -%}
+{%- capture docs -%}{% include install/docs_url.html release=release_version client="rust" %}{%- endcapture %}
 
-{%- highlight bash -%}
-cargo add duckdb@{{ site.current_duckdb_version }} --features bundled
-{%- endhighlight -%}
-    
+<div data-release="{{ release_version }}" data-environment="rust" data-label="{{ v_rust }}" data-docs="{{ docs }}">
+
+{% highlight bash %}cargo add duckdb{% unless newest_rust %}@{{ v_rust }}{% endunless %} --features bundled{% endhighlight %}
+
 </div>
+{%- assign newest_rust = false -%}
 {%- endif -%}
 
-<div class="lts"
-    data-environment="rust"
-    data-docs="/docs/1.4/clients/rust">
+{%- comment -%} Go {%- endcomment -%}
+{%- if v_go != "" -%}
+{%- capture docs -%}{% include install/docs_url.html release=release_version client="go" %}{%- endcapture %}
 
-{%- highlight bash -%}
-cargo add duckdb@{{ site.lts_duckdb_rust_version }} --features bundled
-{%- endhighlight -%}
+<div data-release="{{ release_version }}" data-environment="go" data-label="{{ v_go }}" data-docs="{{ docs }}">
 
-</div>
-
-{%- if site.next_major_duckdb_rust_version != "" -%}
-<div class="preview"
-    data-environment="rust"
-    data-docs="{% link docs/2.0/clients/rust/overview.md %}">
-
-{%- highlight bash -%}
-cargo add duckdb@{{ site.next_major_duckdb_rust_version }} --features bundled
-{%- endhighlight -%}
+{% highlight bash %}go get github.com/duckdb/duckdb-go/v2{% unless newest_go %}@{{ v_go_tag }}{% endunless %}{% endhighlight %}
 
 </div>
+{%- assign newest_go = false -%}
 {%- endif -%}
 
-{%- if site.current_duckdb_go_version != "" -%}
-<div class="current"
-    data-environment="go"
-    data-docs="{% link docs/1.5/clients/go/overview.md %}">
+{%- comment -%} C/C++ and ODBC: downloads per platform {%- endcomment -%}
+{%- capture docs -%}{% include install/docs_url.html release=release_version client="c" %}{%- endcapture -%}
+{%- for p in platforms %}
 
-{%- highlight bash -%}
-go get github.com/duckdb/duckdb-go/v2@{{ site.current_duckdb_go_tag }}
-{%- endhighlight -%}
-
+<div data-release="{{ release_version }}" data-platform="{{ p }}" data-environment="c" data-label="{{ v_core }}" data-docs="{{ docs }}">
+{%- assign platform_artifacts = artifacts.c[p] %}
+{% include install/downloads.html base=downloads_url artifacts=platform_artifacts %}
 </div>
+{%- endfor -%}
+
+{%- if v_odbc_pkg != "" -%}
+{%- capture docs -%}{% include install/docs_url.html release=release_version client="odbc" %}{%- endcapture -%}
+{%- capture odbc_url -%}https://github.com/duckdb/duckdb-odbc/releases/download/v{{ v_odbc_pkg }}{%- endcapture -%}
+{%- for p in platforms %}
+
+<div data-release="{{ release_version }}" data-platform="{{ p }}" data-environment="odbc" data-label="{{ v_odbc }}" data-docs="{{ docs }}">
+{%- assign platform_artifacts = artifacts.odbc[p] %}
+{% include install/downloads.html base=odbc_url artifacts=platform_artifacts %}
+</div>
+{%- endfor -%}
 {%- endif -%}
 
-<div class="lts"
-    data-environment="go"
-    data-docs="/docs/1.4/clients/go">
-
-{%- highlight bash -%}
-go get github.com/duckdb/duckdb-go/v2@{{ site.lts_duckdb_go_tag }}
-{%- endhighlight -%}
-
-</div>
-
-{%- if site.next_major_duckdb_go_version != "" -%}
-<div class="preview"
-    data-environment="go"
-    data-docs="{% link docs/2.0/clients/go/overview.md %}">
-
-{%- highlight bash -%}
-go get github.com/duckdb/duckdb-go/v2
-{%- endhighlight -%}
-
-</div>
-{%- endif -%}
-
-
-
-<div class="current"
-    data-platform="linux"
-    data-environment="c"
-    data-docs="{% link docs/1.5/clients/c/overview.md %}">
-
-{%- assign f_x86 = checksums_current.artifacts.c.linux.x86_64.filename -%}
-<a href="https://install.duckdb.org/v{{ site.current_duckdb_version }}/{{ f_x86 }}" class="download-btn" download="{{ f_x86 }}" rel="noopener noreferrer">{{ f_x86 }}</a>
-{%- include checksum_inline.html environment="c" platform="linux" architecture="x86_64" version="current" -%}
-
-{%- assign f_arm = checksums_current.artifacts.c.linux.arm64.filename -%}
-<a href="https://install.duckdb.org/v{{ site.current_duckdb_version }}/{{ f_arm }}" class="download-btn" download="{{ f_arm }}" rel="noopener noreferrer">{{ f_arm }}</a>
-{%- include checksum_inline.html environment="c" platform="linux" architecture="arm64" version="current" -%}
-
-</div>
-
-
-<div class="current"
-    data-platform="macos"
-    data-environment="c"
-    data-docs="{% link docs/1.5/clients/c/overview.md %}">
-
-{%- assign f = checksums_current.artifacts.c.macos.x86_64.filename -%}
-<a href="https://install.duckdb.org/v{{ site.current_duckdb_version }}/{{ f }}" class="download-btn" download="{{ f }}" rel="noopener noreferrer">{{ f }}</a>
-{%- include checksum_inline.html environment="c" platform="macos" version="current" -%}
-
-</div>
-
-
-<div class="current"
-    data-platform="windows"
-    data-environment="c"
-    data-docs="{% link docs/1.5/clients/c/overview.md %}">
-
-{%- assign f_x86 = checksums_current.artifacts.c.windows.x86_64.filename -%}
-<a href="https://install.duckdb.org/v{{ site.current_duckdb_version }}/{{ f_x86 }}" class="download-btn" download="{{ f_x86 }}" rel="noopener noreferrer">{{ f_x86 }}</a>
-{%- include checksum_inline.html environment="c" platform="windows" architecture="x86_64" version="current" -%}
-
-{%- assign f_arm = checksums_current.artifacts.c.windows.arm64.filename -%}
-<a href="https://install.duckdb.org/v{{ site.current_duckdb_version }}/{{ f_arm }}" class="download-btn" download="{{ f_arm }}" rel="noopener noreferrer">{{ f_arm }}</a>
-{%- include checksum_inline.html environment="c" platform="windows" architecture="arm64" version="current" -%}
-
-</div>
-
-
-<div class="lts"
-    data-platform="linux"
-    data-environment="c"
-    data-docs="/docs/1.4/clients/c/overview">
-
-{%- assign f_x86 = checksums_lts.artifacts.c.linux.x86_64.filename -%}
-<a href="https://install.duckdb.org/v{{ site.lts_duckdb_version }}/{{ f_x86 }}" class="download-btn" download="{{ f_x86 }}" rel="noopener noreferrer">{{ f_x86 }}</a>
-{%- include checksum_inline.html environment="c" platform="linux" architecture="x86_64" version="lts" -%}
-
-{%- assign f_arm = checksums_lts.artifacts.c.linux.arm64.filename -%}
-<a href="https://install.duckdb.org/v{{ site.lts_duckdb_version }}/{{ f_arm }}" class="download-btn" download="{{ f_arm }}" rel="noopener noreferrer">{{ f_arm }}</a>
-{%- include checksum_inline.html environment="c" platform="linux" architecture="arm64" version="lts" -%}
-
-</div>
-
-
-<div class="lts"
-    data-platform="macos"
-    data-environment="c"
-    data-docs="/docs/1.4/clients/c/overview">
-
-{%- assign f = checksums_lts.artifacts.c.macos.x86_64.filename -%}
-<a href="https://install.duckdb.org/v{{ site.lts_duckdb_version }}/{{ f }}" class="download-btn" download="{{ f }}" rel="noopener noreferrer">{{ f }}</a>
-{%- include checksum_inline.html environment="c" platform="macos" version="lts" -%}
-
-</div>
-
-
-<div class="lts"
-    data-platform="windows"
-    data-environment="c"
-    data-docs="/docs/1.4/clients/c/overview">
-
-{%- assign f_x86 = checksums_lts.artifacts.c.windows.x86_64.filename -%}
-<a href="https://install.duckdb.org/v{{ site.lts_duckdb_version }}/{{ f_x86 }}" class="download-btn" download="{{ f_x86 }}" rel="noopener noreferrer">{{ f_x86 }}</a>
-{%- include checksum_inline.html environment="c" platform="windows" architecture="x86_64" version="lts" -%}
-
-{%- assign f_arm = checksums_lts.artifacts.c.windows.arm64.filename -%}
-<a href="https://install.duckdb.org/v{{ site.lts_duckdb_version }}/{{ f_arm }}" class="download-btn" download="{{ f_arm }}" rel="noopener noreferrer">{{ f_arm }}</a>
-{%- include checksum_inline.html environment="c" platform="windows" architecture="arm64" version="lts" -%}
-
-</div>
-
-<div class="preview"
-    data-platform="linux"
-    data-environment="c"
-    data-docs="{% link docs/2.0/clients/c/overview.md %}">
-
-{%- assign f_x86 = site.data.checksums_20.artifacts.c.linux.x86_64.filename -%}
-<a href="https://install.duckdb.org/v{{ site.next_major_duckdb_version }}/{{ f_x86 }}" class="download-btn" download="{{ f_x86 }}" rel="noopener noreferrer">{{ f_x86 }}</a>
-{%- include checksum_inline.html environment="c" platform="linux" architecture="x86_64" version="next_major" -%}
-{%- assign f_arm = site.data.checksums_20.artifacts.c.linux.arm64.filename -%}
-<a href="https://install.duckdb.org/v{{ site.next_major_duckdb_version }}/{{ f_arm }}" class="download-btn" download="{{ f_arm }}" rel="noopener noreferrer">{{ f_arm }}</a>
-{%- include checksum_inline.html environment="c" platform="linux" architecture="arm64" version="next_major" -%}
-
-</div>
-
-
-<div class="preview"
-    data-platform="macos"
-    data-environment="c"
-    data-docs="{% link docs/2.0/clients/c/overview.md %}">
-
-{%- assign f = site.data.checksums_20.artifacts.c.macos.x86_64.filename -%}
-<a href="https://install.duckdb.org/v{{ site.next_major_duckdb_version }}/{{ f }}" class="download-btn" download="{{ f }}" rel="noopener noreferrer">{{ f }}</a>
-{%- include checksum_inline.html environment="c" platform="macos" version="next_major" -%}
-
-</div>
-
-
-<div class="preview"
-    data-platform="windows"
-    data-environment="c"
-    data-docs="{% link docs/2.0/clients/c/overview.md %}">
-
-{%- assign f_x86 = site.data.checksums_20.artifacts.c.windows.x86_64.filename -%}
-<a href="https://install.duckdb.org/v{{ site.next_major_duckdb_version }}/{{ f_x86 }}" class="download-btn" download="{{ f_x86 }}" rel="noopener noreferrer">{{ f_x86 }}</a>
-{%- include checksum_inline.html environment="c" platform="windows" architecture="x86_64" version="next_major" -%}
-{%- assign f_arm = site.data.checksums_20.artifacts.c.windows.arm64.filename -%}
-<a href="https://install.duckdb.org/v{{ site.next_major_duckdb_version }}/{{ f_arm }}" class="download-btn" download="{{ f_arm }}" rel="noopener noreferrer">{{ f_arm }}</a>
-{%- include checksum_inline.html environment="c" platform="windows" architecture="arm64" version="next_major" -%}
-
-</div>
-
-{%- if site.current_duckdb_odbc_version != "" -%}
-<div class="current"
-    data-platform="linux"
-    data-environment="odbc"
-    data-docs="{% link docs/1.5/clients/odbc/overview.md %}">
-    
-<a href="https://github.com/duckdb/duckdb-odbc/releases/download/v{{ site.current_duckdb_odbc_version }}/duckdb_odbc-linux-amd64.zip" class="download-btn" download="duckdb_odbc-linux-amd64.zip" rel="noopener noreferrer">duckdb_odbc-linux-amd64.zip</a>
-{%- include checksum_inline.html environment="odbc" platform="linux" architecture="x86_64" version="current" -%}
-
-<a href="https://github.com/duckdb/duckdb-odbc/releases/download/v{{ site.current_duckdb_odbc_version }}/duckdb_odbc-linux-arm64.zip" class="download-btn" download="duckdb_odbc-linux-arm64.zip" rel="noopener noreferrer">duckdb_odbc-linux-arm64.zip</a>
-{%- include checksum_inline.html environment="odbc" platform="linux" architecture="arm64" version="current" -%}
-
-</div>
-
-
-<div class="current"
-    data-platform="macos"
-    data-environment="odbc"
-    data-docs="{% link docs/1.5/clients/odbc/overview.md %}">
-    
-<a href="https://github.com/duckdb/duckdb-odbc/releases/download/v{{ site.current_duckdb_odbc_version }}/duckdb_odbc-osx-universal.zip" class="download-btn" download="duckdb_odbc-osx-universal.zip" rel="noopener noreferrer">duckdb_odbc-osx-universal.zip</a>
-{%- include checksum_inline.html environment="odbc" platform="macos" version="current" -%}
-
-</div>
-
-
-<div class="current"
-    data-platform="windows"
-    data-environment="odbc"
-    data-docs="{% link docs/1.5/clients/odbc/overview.md %}">
-
-<a href="https://github.com/duckdb/duckdb-odbc/releases/download/v{{ site.current_duckdb_odbc_version }}/duckdb_odbc-windows-amd64.zip" class="download-btn" download="duckdb_odbc-windows-amd64.zip" rel="noopener noreferrer">duckdb_odbc-windows-amd64.zip</a>
-{%- include checksum_inline.html environment="odbc" platform="windows" architecture="x86_64" version="current" -%}
-
-<a href="https://github.com/duckdb/duckdb-odbc/releases/download/v{{ site.current_duckdb_odbc_version }}/duckdb_odbc-windows-arm64.zip" class="download-btn" download="duckdb_odbc-windows-arm64.zip" rel="noopener noreferrer">duckdb_odbc-windows-arm64.zip</a>
-{%- include checksum_inline.html environment="odbc" platform="windows" architecture="arm64" version="current" -%}
-
-</div>
-{%- endif -%}
-
-<div class="lts"
-    data-platform="linux"
-    data-environment="odbc"
-    data-docs="/docs/1.4/clients/odbc/overview">
-    
-<a href="https://github.com/duckdb/duckdb-odbc/releases/download/v{{ site.lts_duckdb_odbc_version }}/duckdb_odbc-linux-amd64.zip" class="download-btn" download="duckdb_odbc-linux-amd64.zip" rel="noopener noreferrer">duckdb_odbc-linux-amd64.zip</a>
-{%- include checksum_inline.html environment="odbc" platform="linux" architecture="x86_64" version="lts" -%}
-
-<a href="https://github.com/duckdb/duckdb-odbc/releases/download/v{{ site.lts_duckdb_odbc_version }}/duckdb_odbc-linux-arm64.zip" class="download-btn" download="duckdb_odbc-linux-arm64.zip" rel="noopener noreferrer">duckdb_odbc-linux-arm64.zip</a>
-{%- include checksum_inline.html environment="odbc" platform="linux" architecture="arm64" version="lts" -%}
-
-</div>
-
-
-<div class="lts"
-    data-platform="macos"
-    data-environment="odbc"
-    data-docs="/docs/1.4/clients/odbc/overview">
-    
-<a href="https://github.com/duckdb/duckdb-odbc/releases/download/v{{ site.lts_duckdb_odbc_version }}/duckdb_odbc-osx-universal.zip" class="download-btn" download="duckdb_odbc-osx-universal.zip" rel="noopener noreferrer">duckdb_odbc-osx-universal.zip</a>
-{%- include checksum_inline.html environment="odbc" platform="macos" version="lts" -%}
-
-</div>
-
-
-<div class="lts"
-    data-platform="windows"
-    data-environment="odbc"
-    data-docs="/docs/1.4/clients/odbc/overview">
-
-<a href="https://github.com/duckdb/duckdb-odbc/releases/download/v{{ site.lts_duckdb_odbc_version }}/duckdb_odbc-windows-amd64.zip" class="download-btn" download="duckdb_odbc-windows-amd64.zip" rel="noopener noreferrer">duckdb_odbc-windows-amd64.zip</a>
-{%- include checksum_inline.html environment="odbc" platform="windows" architecture="x86_64" version="lts" -%}
-
-<a href="https://github.com/duckdb/duckdb-odbc/releases/download/v{{ site.lts_duckdb_odbc_version }}/duckdb_odbc-windows-arm64.zip" class="download-btn" download="duckdb_odbc-windows-arm64.zip" rel="noopener noreferrer">duckdb_odbc-windows-arm64.zip</a>
-{%- include checksum_inline.html environment="odbc" platform="windows" architecture="arm64" version="lts" -%}
-
-</div>
-
-{%- if site.next_major_duckdb_odbc_version != "" -%}
-<div class="preview"
-    data-platform="linux"
-    data-environment="odbc"
-    data-docs="{% link docs/2.0/clients/odbc/overview.md %}">
-
-{%- assign f_x86 = site.data.checksums_20.artifacts.odbc.linux.x86_64.filename -%}
-<a href="https://github.com/duckdb/duckdb-odbc/releases/download/v{{ site.next_major_duckdb_odbc_version }}/{{ f_x86 }}" class="download-btn" download="{{ f_x86 }}" rel="noopener noreferrer">{{ f_x86 }}</a>
-{%- include checksum_inline.html environment="odbc" platform="linux" architecture="x86_64" version="next_major" -%}
-{%- assign f_arm = site.data.checksums_20.artifacts.odbc.linux.arm64.filename -%}
-<a href="https://github.com/duckdb/duckdb-odbc/releases/download/v{{ site.next_major_duckdb_odbc_version }}/{{ f_arm }}" class="download-btn" download="{{ f_arm }}" rel="noopener noreferrer">{{ f_arm }}</a>
-{%- include checksum_inline.html environment="odbc" platform="linux" architecture="arm64" version="next_major" -%}
-
-</div>
-
-
-<div class="preview"
-    data-platform="macos"
-    data-environment="odbc"
-    data-docs="{% link docs/2.0/clients/odbc/overview.md %}">
-
-{%- assign f_x86 = site.data.checksums_20.artifacts.odbc.macos.x86_64.filename -%}
-<a href="https://github.com/duckdb/duckdb-odbc/releases/download/v{{ site.next_major_duckdb_odbc_version }}/{{ f_x86 }}" class="download-btn" download="{{ f_x86 }}" rel="noopener noreferrer">{{ f_x86 }}</a>
-{%- include checksum_inline.html environment="odbc" platform="macos" architecture="x86_64" version="next_major" -%}
-{%- assign f_arm = site.data.checksums_20.artifacts.odbc.macos.arm64.filename -%}
-<a href="https://github.com/duckdb/duckdb-odbc/releases/download/v{{ site.next_major_duckdb_odbc_version }}/{{ f_arm }}" class="download-btn" download="{{ f_arm }}" rel="noopener noreferrer">{{ f_arm }}</a>
-{%- include checksum_inline.html environment="odbc" platform="macos" architecture="arm64" version="next_major" -%}
-
-</div>
-
-
-<div class="preview"
-    data-platform="windows"
-    data-environment="odbc"
-    data-docs="{% link docs/2.0/clients/odbc/overview.md %}">
-
-{%- assign f_x86 = site.data.checksums_20.artifacts.odbc.windows.x86_64.filename -%}
-<a href="https://github.com/duckdb/duckdb-odbc/releases/download/v{{ site.next_major_duckdb_odbc_version }}/{{ f_x86 }}" class="download-btn" download="{{ f_x86 }}" rel="noopener noreferrer">{{ f_x86 }}</a>
-{%- include checksum_inline.html environment="odbc" platform="windows" architecture="x86_64" version="next_major" -%}
-{%- assign f_arm = site.data.checksums_20.artifacts.odbc.windows.arm64.filename -%}
-<a href="https://github.com/duckdb/duckdb-odbc/releases/download/v{{ site.next_major_duckdb_odbc_version }}/{{ f_arm }}" class="download-btn" download="{{ f_arm }}" rel="noopener noreferrer">{{ f_arm }}</a>
-{%- include checksum_inline.html environment="odbc" platform="windows" architecture="arm64" version="next_major" -%}
-
-</div>
-{%- endif -%}
+{%- endfor %}
 
 </div>

@@ -17,16 +17,16 @@ title: ODBC API on macOS
    brew install unixodbc
    ```
 
-2. <!-- markdownlint-disable MD034 --> DuckDB releases ODBC drivers for macOS on [Apple Silicon (`arm64`)](https://github.com/duckdb/duckdb-odbc/releases/download/v{% if site.next_major_duckdb_odbc_version != "" %}{{ site.next_major_duckdb_odbc_version }}{% else %}{{ site.current_duckdb_odbc_version }}{% endif %}/duckdb_odbc-macos-arm64.zip) and [Intel (`x86_64`)](https://github.com/duckdb/duckdb-odbc/releases/download/v{% if site.next_major_duckdb_odbc_version != "" %}{{ site.next_major_duckdb_odbc_version }}{% else %}{{ site.current_duckdb_odbc_version }}{% endif %}/duckdb_odbc-macos-amd64.zip) CPUs. To download the driver for Apple Silicon, run:
+2. <!-- markdownlint-disable MD034 --> DuckDB releases ODBC drivers for macOS on [Apple Silicon (`arm64`)](https://github.com/duckdb/duckdb-odbc/releases/download/v{% include install/latest_client.html client="odbc" %}{{ latest_package }}/duckdb_odbc-macos-arm64.zip) and [Intel (`x86_64`)](https://github.com/duckdb/duckdb-odbc/releases/download/v{{ latest_package }}/duckdb_odbc-macos-amd64.zip) CPUs. To download the driver for Apple Silicon, run:
 
    ```batch
-   wget https://github.com/duckdb/duckdb-odbc/releases/download/v{% if site.next_major_duckdb_odbc_version != "" %}{{ site.next_major_duckdb_odbc_version }}{% else %}{{ site.current_duckdb_odbc_version }}{% endif %}/duckdb_odbc-macos-arm64.zip
+   wget https://github.com/duckdb/duckdb-odbc/releases/download/v{% include install/latest_client.html client="odbc" %}{{ latest_package }}/duckdb_odbc-macos-arm64.zip
    ```
 
    To download the driver for Intel, run:
 
    ```batch
-   wget https://github.com/duckdb/duckdb-odbc/releases/download/v{% if site.next_major_duckdb_odbc_version != "" %}{{ site.next_major_duckdb_odbc_version }}{% else %}{{ site.current_duckdb_odbc_version }}{% endif %}/duckdb_odbc-macos-amd64.zip
+   wget https://github.com/duckdb/duckdb-odbc/releases/download/v{% include install/latest_client.html client="odbc" %}{{ latest_package }}/duckdb_odbc-macos-amd64.zip
    ```
 
    <!-- markdownlint-enable MD034 -->

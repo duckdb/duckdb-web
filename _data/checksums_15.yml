@@ -1,16 +1,9 @@
-# Checksums for the LTS install version
-preferred_algorithms:
-  - sha512
-  - sha256
+# SHA-256 checksums of the DuckDB 1.5 downloads shown on the installation page, see scripts/update_checksums.py
 
 artifacts:
   cli:
     macos:
-      x86_64:
-        filename: "duckdb_cli-osx-universal.zip"
-        hashes:
-          sha256: "80a80c68736bd7dea53e8b02447e9759db0c8596ea156476ba396c44f54c5810"
-      arm64:
+      universal:
         filename: "duckdb_cli-osx-universal.zip"
         hashes:
           sha256: "80a80c68736bd7dea53e8b02447e9759db0c8596ea156476ba396c44f54c5810"
@@ -23,11 +16,12 @@ artifacts:
         filename: "duckdb_cli-linux-arm64.zip"
         hashes:
           sha256: "c544e92c9b7c31fc53c2139802cabd8e2d1b2b3e3f933117f31611239c1402db"
-      x86_64_musl:
+    linux_musl:
+      x86_64:
         filename: "duckdb_cli-linux-amd64-musl.zip"
         hashes:
           sha256: "c8f8080a292a80f8f2066a3d27123d8d448ace1ab0bcb0819a104fb44f1f12de"
-      arm64_musl:
+      arm64:
         filename: "duckdb_cli-linux-arm64-musl.zip"
         hashes:
           sha256: "70f55385c1d42bc34c8865f4d5c606215545cb38c03a4c86a87f17d17773a3a3"
@@ -52,11 +46,7 @@ artifacts:
         hashes:
           sha256: "b72ed9f05003f5e9d2015f7ceada6416b377d9dd33169cdde3c9e33897856eee"
     macos:
-      x86_64:
-        filename: "libduckdb-osx-universal.zip"
-        hashes:
-          sha256: "e0bc007d9b0094c0970ac1847a8601d10aad07cbd2910ce586ec810f77b638d6"
-      arm64:
+      universal:
         filename: "libduckdb-osx-universal.zip"
         hashes:
           sha256: "e0bc007d9b0094c0970ac1847a8601d10aad07cbd2910ce586ec810f77b638d6"
@@ -71,9 +61,10 @@ artifacts:
           sha256: "c63285647e94c46d309b60d5dd1ff3cb2cdf9ca03e415a818ff7d8dbf838e0e8"
 
   java:
-    filename: "duckdb_jdbc-1.5.6.0.jar"
-    hashes:
-      sha256: "04ae3375d7c40dc88dc9bf0014b82ba5e66715564584af4e3abea39c7ba144d3"
+    jar:
+      filename: "duckdb_jdbc-1.5.6.0.jar"
+      hashes:
+        sha256: "04ae3375d7c40dc88dc9bf0014b82ba5e66715564584af4e3abea39c7ba144d3"
 
   odbc:
     linux:

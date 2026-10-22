@@ -82,8 +82,8 @@ The libraries and headers are installed to `~/.duckdb/lib/⟨version⟩/release_
 
 ## Windows
 
-On Windows, we provide a beta install script. To use it, run the following command:
+On Windows, we provide a beta install script. To use it, run the following command from the Run menu (Win+R) or the Command Prompt:
 
 ```bash
-powershell -NoExit iex (iwr "https://install.duckdb.org/install.ps1").Content
+powershell -NoExit -ExecutionPolicy Bypass -Command "irm https://install.duckdb.org/install.ps1 | iex"
 ```
