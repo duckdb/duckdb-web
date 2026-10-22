@@ -139,12 +139,6 @@ curl https://install.duckdb.org | bash
 
 <div class="alternative">
 
-<h4>Package Manager (Homebrew)</h4>
-
-{%- highlight bash -%}
-brew install duckdb
-{%- endhighlight -%}
-
 <h4>Direct Download</h4>
 {%- assign f = site.data.checksums_20.artifacts.cli.macos.x86_64.filename -%}
 <a href="https://install.duckdb.org/v{{ site.next_major_duckdb_version }}/{{ f }}" class="download-btn" download="{{ f }}" rel="noopener noreferrer">{{ f }}</a>
