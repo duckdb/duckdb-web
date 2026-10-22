@@ -433,6 +433,14 @@ The `duckdb_settings()` function provides metadata about the settings available 
 | `input_type` | The logical data type of the setting's value. | `VARCHAR` |
 | `scope` | The scope of the setting (`LOCAL` or `GLOBAL`). | `VARCHAR` |
 
+> New As of DuckDB 2.0, `duckdb_settings()` accepts the `debug`, `deprecated`, and `include_all` named parameters.
+
+By default, `duckdb_settings()` returns only regular settings and omits debug-only and deprecated ones. The `debug` and `deprecated` parameters select which category to return instead: for example, `duckdb_settings(deprecated := true)` returns the deprecated settings and `duckdb_settings(debug := true)` returns the debug settings. To return every setting, pass `include_all := true`, which cannot be combined with the other two parameters:
+
+```sql
+SELECT * FROM duckdb_settings(include_all := true);
+```
+
 The various settings are described in the [configuration page]({% link docs/2.0/configuration/overview.md %}).
 
 ## `duckdb_tables`
