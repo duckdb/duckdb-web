@@ -62,10 +62,10 @@ docs:
     DuckDB 1.5.6 does not expose function-description setters through the table-function C API,
     so the five native server functions are documented above.
 
-extension_star_count: 17
-extension_star_count_pretty: 17
-extension_download_count: 1155
-extension_download_count_pretty: 1.2k
+extension_star_count: 25
+extension_star_count_pretty: 25
+extension_download_count: 2136
+extension_download_count_pretty: 2.1k
 image: '/images/community_extensions/social_preview/preview_community_extension_duckflight.png'
 layout: community_extension_doc
 ---

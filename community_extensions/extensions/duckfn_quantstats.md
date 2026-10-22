@@ -106,10 +106,10 @@ docs:
     The full option table, the error paths and the development notes:
     <https://shijianjs.github.io/duckfn-quantstats/docs/intro>.
 
-extension_star_count: 0
-extension_star_count_pretty: 0
-extension_download_count: 1440
-extension_download_count_pretty: 1.4k
+extension_star_count: 1
+extension_star_count_pretty: 1
+extension_download_count: 3386
+extension_download_count_pretty: 3.4k
 image: '/images/community_extensions/social_preview/preview_community_extension_duckfn_quantstats.png'
 layout: community_extension_doc
 ---

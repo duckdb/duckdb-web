@@ -54,8 +54,8 @@ docs:
 
 extension_star_count: 0
 extension_star_count_pretty: 0
-extension_download_count: 650
-extension_download_count_pretty: 650
+extension_download_count: 1422
+extension_download_count_pretty: 1.4k
 image: '/images/community_extensions/social_preview/preview_community_extension_razobill.png'
 layout: community_extension_doc
 ---
