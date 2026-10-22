@@ -31,7 +31,7 @@ The extension adds two `PRAGMA` statements to DuckDB: one to create, and one to 
 ```python
 create_fts_index(input_table, input_id, *input_values, stemmer = 'porter',
                  stopwords = 'english', ignore = '(\\.|[^a-z])+',
-                 strip_accents = 1, lower = 1, overwrite = 0)
+                 strip_accents = 1, lower = 1, overwrite = 0, incremental = 0)
 ```
 
 `PRAGMA` that creates a FTS index for the specified table.
@@ -49,6 +49,7 @@ create_fts_index(input_table, input_id, *input_values, stemmer = 'porter',
 | `strip_accents` | `BOOLEAN` | Whether to remove accents (e.g., convert `á` to `a`). Defaults to `1` |
 | `lower` | `BOOLEAN` | Whether to convert all text to lowercase. Defaults to `1` |
 | `overwrite` | `BOOLEAN` | Whether to overwrite an existing index on a table. Defaults to `0` |
+| `incremental` | `BOOLEAN` | Whether to maintain the FTS index with triggers after inserts and deletes on the input table. Requires the document identifier column to be declared `NOT NULL` or `PRIMARY KEY`. Defaults to `0` |
 
 <!-- markdownlint-enable MD056 -->
 
