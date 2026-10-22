@@ -70,7 +70,7 @@ title: Spatial Functions
 | [`ST_GeomFromHEXWKB`](#st_geomfromhexwkb) | Deserialize a GEOMETRY from a HEX(E)WKB encoded string |
 | [`ST_GeomFromText`](#st_geomfromtext) | Deserialize a GEOMETRY from a WKT encoded string |
 | [`ST_GeomFromWKB`](#st_geomfromwkb) | Deserializes a GEOMETRY from a WKB encoded blob |
-| [`ST_GeometryType`](#st_geometrytype) | Returns a 'GEOMETRY_TYPE' enum identifying the input geometry type. Possible enum return types are: `POINT`, `LINESTRING`, `POLYGON`, `MULTIPOINT`, `MULTILINESTRING`, `MULTIPOLYGON` and `GEOMETRYCOLLECTION`. |
+| [`ST_GeometryType`](#st_geometrytype) | Returns a `GEOMETRY_TYPE` enum identifying the input geometry type. Possible enum return types are: `POINT`, `LINESTRING`, `POLYGON`, `MULTIPOINT`, `MULTILINESTRING`, `MULTIPOLYGON` and `GEOMETRYCOLLECTION`. |
 | [`ST_HasM`](#st_hasm) | Check if the input geometry has M values. |
 | [`ST_HasZ`](#st_hasz) | Check if the input geometry has Z values. |
 | [`ST_Hilbert`](#st_hilbert) | Encodes the X and Y values as the hilbert curve index for a curve covering the given bounding box. |
@@ -433,7 +433,7 @@ GEOMETRY ST_AsMVTGeom (geom GEOMETRY, bounds BOX_2D)
 
 Transform and clip geometry to a tile boundary
 
-See "ST_AsMVT" for more details
+See `ST_AsMVT` for more details
 
 ----
 
@@ -576,11 +576,11 @@ Returns a buffer around the input geometry at the target distance
 
 `num_triangles` represents how many triangles that will be produced to approximate a quarter circle. The larger the number, the smoother the resulting geometry. The default value is 8.
 
-`cap_style` must be one of "CAP_ROUND", "CAP_FLAT", "CAP_SQUARE". This parameter is case-insensitive.
+`cap_style` must be one of `'CAP_ROUND'`, `'CAP_FLAT'`, `'CAP_SQUARE'`. This parameter is case-insensitive.
 
-`join_style` must be one of "JOIN_ROUND", "JOIN_MITRE", "JOIN_BEVEL". This parameter is case-insensitive.
+`join_style` must be one of `'JOIN_ROUND'`, `'JOIN_MITRE'`, `'JOIN_BEVEL'`. This parameter is case-insensitive.
 
-`mitre_limit` only applies when `join_style` is "JOIN_MITRE". It is the ratio of the distance from the corner to the mitre point to the corner radius. The default value is 1.0.
+`mitre_limit` only applies when `join_style` is `'JOIN_MITRE'`. It is the ratio of the distance from the corner to the mitre point to the corner radius. The default value is 1.0.
 
 This is a planar operation and will not take into account the curvature of the earth.
 
@@ -815,7 +815,7 @@ GEOMETRY ST_CoverageSimplify (geoms GEOMETRY[], tolerance DOUBLE)
 
 Simplify the edges in a polygonal coverage, preserving the coverage by ensuring that there are no seams between the resulting simplified polygons.
 
-By default, the boundary of the coverage is also simplified, but this can be controlled with the optional third 'simplify_boundary' parameter.
+By default, the boundary of the coverage is also simplified, but this can be controlled with the optional third `simplify_boundary` parameter.
 
 ----
 
@@ -1416,7 +1416,7 @@ ANY ST_GeometryType (wkb WKB_BLOB)
 
 #### Description
 
-Returns a 'GEOMETRY_TYPE' enum identifying the input geometry type. Possible enum return types are: `POINT`, `LINESTRING`, `POLYGON`, `MULTIPOINT`, `MULTILINESTRING`, `MULTIPOLYGON` and `GEOMETRYCOLLECTION`.
+Returns a `GEOMETRY_TYPE` enum identifying the input geometry type. Possible enum return types are: `POINT`, `LINESTRING`, `POLYGON`, `MULTIPOINT`, `MULTILINESTRING`, `MULTIPOLYGON` and `GEOMETRYCOLLECTION`.
 
 #### Example
 
@@ -1837,7 +1837,7 @@ GEOMETRY ST_LocateBetween (line GEOMETRY, start_measure DOUBLE, end_measure DOUB
 
 Returns a geometry or geometry collection created by filtering and interpolating vertices within a range of "M" values
 
-Creates a geometry or geometry collection, containing the parts formed by vertices that have an "M" value within the "start_measure" and "end_measure" range
+Creates a geometry or geometry collection, containing the parts formed by vertices that have an "M" value within the `start_measure` and `end_measure` range
 
 For LINESTRING or MULTILINESTRING, if a line segment would cross either the upper or lower bound, a vertex is added by interpolating the coordinates at the "intersection"
 For a POINT and MULTIPOINT, the point is added to the collection if its vertex has an "M" value within the range, otherwise it is skipped
@@ -3103,7 +3103,7 @@ The function has the following signature:
 `ST_AsMVT(row STRUCT, layer_name VARCHAR DEFAULT 'layer', extent INTEGER DEFAULT 4096, geom_column_name VARCHAR DEFAULT NULL, feature_id_column_name VARCHAR DEFAULT NULL) -> BLOB`
 
 * The first argument is a struct containing the geometry and properties.
-* The second argument is the name of the layer in the vector tile. This argument is optional and defaults to 'layer'.
+* The second argument is the name of the layer in the vector tile. This argument is optional and defaults to `'layer'`.
 * The third argument is the extent of the tile. This argument is optional and defaults to 4096.
 * The fourth argument is the name of the geometry column in the input row. This argument is optional. If not provided, the first geometry column in the input row will be used. If multiple geometry columns are present, an error will be raised.
 * The fifth argument is the name of the feature id column in the input row. This argument is optional. If provided, the values in this column will be used as feature ids in the vector tile. The column must be of type INTEGER or BIGINT. If set to negative or NULL, a feature id will not be assigned to the corresponding feature.
@@ -3116,9 +3116,9 @@ SELECT ST_AsMVT({'geom': geom, 'id': id, 'name': name}, 'cities', 4096, 'geom', 
 FROM cities;
  ```
 
-This example creates a vector tile named 'cities' with an extent of 4096 from the 'cities' table, using 'geom' as the geometry column and 'id' as the feature id column.
+This example creates a vector tile named `cities` with an extent of 4096 from the `cities` table, using `geom` as the geometry column and `id` as the feature id column.
 
-However, you probably want to use the ST_AsMVTGeom function to first transform and clip your geometries to the tile extent.
+However, you probably want to use the `ST_AsMVTGeom` function to first transform and clip your geometries to the tile extent.
 The following example assumes the geometry is in WebMercator ("EPSG:3857") coordinates.
 Replace `⟨z⟩`{:.language-sql .highlight}, `⟨x⟩`{:.language-sql .highlight}, and `⟨y⟩`{:.language-sql .highlight} with the appropriate tile coordinates, `⟨your_table⟩`{:.language-sql .highlight} with your table name, and `⟨tile_path⟩` with the path to write the tile to.
 
@@ -3454,7 +3454,7 @@ ST_GeneratePoints (col0 BOX_2D, col1 BIGINT, col2 BIGINT)
 
 Generates a set of random points within the specified bounding box.
 
-Takes a bounding box (min_x, min_y, max_x, max_y), a count of points to generate and optionally a seed for the random number generator.
+Takes a bounding box (`min_x`, `min_y`, `max_x`, `max_y`), a count of points to generate and optionally a seed for the random number generator.
 
 #### Example
 

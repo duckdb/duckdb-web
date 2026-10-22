@@ -57,7 +57,7 @@ FROM addresses
 GROUP BY city;
 ```
 
-Compute the average income per city per street_name:
+Compute the average income per `city` per `street_name`:
 
 ```sql
 SELECT city, street_name, avg(income)
@@ -67,7 +67,7 @@ GROUP BY city, street_name;
 
 ### `GROUP BY ALL` Examples
 
-Group by city and street_name to remove any duplicate values:
+Group by `city` and `street_name` to remove any duplicate values:
 
 ```sql
 SELECT city, street_name

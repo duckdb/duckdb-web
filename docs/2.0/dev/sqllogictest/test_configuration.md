@@ -53,7 +53,7 @@ The following additional options can also be used in the configuration file:
 | Option | Description |
 |----------------------------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | `extends` | List of config files to extend from |
-| `inherit_skip_tests` | Path of config to inherit 'skip_tests' from |
+| `inherit_skip_tests` | Path of config to inherit `skip_tests` from |
 | `skip_tests` | Tests to be skipped |
 
 Example:

@@ -68,7 +68,7 @@ COPY sales_data FROM 'sales_data.csv';
 
 ## Using Enums
 
-Enum values are case-sensitive, so 'maltese' and 'Maltese' are considered different values:
+Enum values are case-sensitive, so `'maltese'` and `'Maltese'` are considered different values:
 
 <!-- test:error the last statement in this block is shown failing on purpose -->
 

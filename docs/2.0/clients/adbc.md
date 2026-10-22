@@ -254,7 +254,7 @@ AdbcStatementExecuteQuery(&adbc_statement, &arrow_stream, &rows_affected, &adbc_
 arrow_stream.release(arrow_stream)
 ```
 
-Besides running queries, we can also ingest data via `arrow_streams`. For this we need to set an option with the table name we want to insert to, bind the stream and then execute the query.
+Besides running queries, we can also ingest data via `arrow_stream`s. For this we need to set an option with the table name we want to insert to, bind the stream and then execute the query.
 
 ```cpp
 StatementSetOption(&adbc_statement, ADBC_INGEST_OPTION_TARGET_TABLE, "AnswerToEverything", &adbc_error);

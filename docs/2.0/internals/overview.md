@@ -83,5 +83,5 @@ The physical plan generator converts the resulting logical operator tree into a 
 ## Execution
 
 In the execution phase, the physical operators are executed to produce the query result.
-DuckDB uses a push-based vectorized model, where [`DataChunks`](https://github.com/duckdb/duckdb/blob/main/src/include/duckdb/common/types/data_chunk.hpp) are pushed through the operator tree.
+DuckDB uses a push-based vectorized model, where [`DataChunk`s](https://github.com/duckdb/duckdb/blob/main/src/include/duckdb/common/types/data_chunk.hpp) are pushed through the operator tree.
 For more information, see the talk [Push-Based Execution in DuckDB](https://www.youtube.com/watch?v=1kDrPgRUuEI).

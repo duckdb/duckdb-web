@@ -205,7 +205,7 @@ Use tab separators to create a TSV file without a header:
 COPY lineitem TO 'lineitem.tsv' (DELIMITER '\t', HEADER false);
 ```
 
-Copy the l_orderkey column of the `lineitem` table to the file `orderkey.tbl`:
+Copy the `l_orderkey` column of the `lineitem` table to the file `orderkey.tbl`:
 
 ```sql
 COPY lineitem(l_orderkey) TO 'orderkey.tbl' (DELIMITER '|');

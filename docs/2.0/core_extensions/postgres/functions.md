@@ -8,16 +8,16 @@ redirect_from:
 title: PostgreSQL Extension Functions
 ---
 
-* [pg\_clear\_cache](#pg_clear_cache)
-* [postgres\_attach](#postgres_attach)
-* [postgres\_configure\_pool](#postgres_configure_pool)
-* [postgres\_execute](#postgres_execute)
-* [postgres\_hstore\_get](#postgres_hstore_get)
-* [postgres\_hstore\_to\_json](#postgres_hstore_to_json)
-* [postgres\_query](#postgres_query)
-* [postgres\_scan](#postgres_scan)
-* [postgres\_scan\_pushdown](#postgres_scan_pushdown)
-* [read\_postgres\_binary](#read_postgres_binary)
+* [`pg_clear_cache`](#pg_clear_cache)
+* [`postgres_attach`](#postgres_attach)
+* [`postgres_configure_pool`](#postgres_configure_pool)
+* [`postgres_execute`](#postgres_execute)
+* [`postgres_hstore_get`](#postgres_hstore_get)
+* [`postgres_hstore_to_json`](#postgres_hstore_to_json)
+* [`postgres_query`](#postgres_query)
+* [`postgres_scan`](#postgres_scan)
+* [`postgres_scan_pushdown`](#postgres_scan_pushdown)
+* [`read_postgres_binary`](#read_postgres_binary)
 
 ## pg_clear_cache
 
@@ -70,9 +70,9 @@ When a PostgreSQL database is attached, a connection pool is created for this da
 * `max_connections` (`UBIGINT`): maximum number of connections that are allowed to be cached in a connection pool for each attached Postgres database. This number can be temporary exceeded when parallel scans are used.
 * `wait_timeout_millis` (`UBIGINT`): maximum number of milliseconds to wait when acquiring a connection from a pool where all available connections are already taken.
 * `enable_thread_local_cache` (`BOOLEAN`): whether to enable the connection caching in thread-local cache. Such connections are getting pinned to the threads and are not made available to other threads, while still taking the place in the pool.
-* `max_lifetime_millis` (`UBIGINT`): maximum number of milliseconds the connection can be kept open. This number is checked when the connection is taken from the pool and returned to the pool. When the connection pool reaper thread is enabled ('enable_reaper_thread' argument), then this number is checked in background periodically.
-* `idle_timeout_millis` (`UBIGINT`): maximum number of milliseconds the connection can be kept idle in the pool. This number is checked when the connection is taken from the pool. When the connection pool reaper thread is enabled ('enable_reaper_thread' option), then this number is checked in background periodically.
-* `enable_reaper_thread` (`BOOLEAN`): whether to enable the connection pool reaper thread, that periodically scans the pool to check the `'max_lifetime_millis'` and `'idle_timeout_millis'` and closes the connection which exceed the specified values. Either `'max_lifetime_millis'` or `'idle_timeout_millis'` must be set to a non-zero value for this option to be effective.
+* `max_lifetime_millis` (`UBIGINT`): maximum number of milliseconds the connection can be kept open. This number is checked when the connection is taken from the pool and returned to the pool. When the connection pool reaper thread is enabled (`enable_reaper_thread` argument), then this number is checked in background periodically.
+* `idle_timeout_millis` (`UBIGINT`): maximum number of milliseconds the connection can be kept idle in the pool. This number is checked when the connection is taken from the pool. When the connection pool reaper thread is enabled (`enable_reaper_thread` option), then this number is checked in background periodically.
+* `enable_reaper_thread` (`BOOLEAN`): whether to enable the connection pool reaper thread, that periodically scans the pool to check the `max_lifetime_millis` and `idle_timeout_millis` and closes the connection which exceed the specified values. Either `max_lifetime_millis` or `idle_timeout_millis` must be set to a non-zero value for this option to be effective.
 * `health_check_query` (`VARCHAR`): the query that is used to check that the connection is healthy. Setting this option to an empty string disables the health check.
 
 ### Returns
@@ -92,7 +92,7 @@ A table with the following columns:
 * `thread_local_cache_misses` (`UBIGINT`): the number of times connections were not available in a thread-local cache and were taken from the main pool instead
 * `max_lifetime_millis` (`UBIGINT`): maximum number of milliseconds a connection can be kept open
 * `idle_timeout_millis` (`UBIGINT`): maximum number of milliseconds a connection can be kept idle in the pool
-* `reaper_thread_running` (`BOOLEAN`): whether the pool reaper thread is running; this thread periodically scans the pool to check the `'max_lifetime_millis'` and `'idle_timeout_millis'` and closes connections which exceed the specified values
+* `reaper_thread_running` (`BOOLEAN`): whether the pool reaper thread is running; this thread periodically scans the pool to check the `max_lifetime_millis` and `idle_timeout_millis` and closes connections which exceed the specified values
 * `reaper_thread_period_millis` (`UBIGINT`): the period of time when a reaper thread performs the checks
 * `health_check_query` (`VARCHAR`): the query that is used to check that the connection is healthy
 

@@ -40,7 +40,7 @@ List of lists with `NULL` values:
 SELECT [['duck', 'goose', 'heron'], NULL, ['frog', 'toad'], []];
 ```
 
-Create a list with the list_value function:
+Create a list with the `list_value` function:
 
 ```sql
 SELECT list_value(1, 2, 3);

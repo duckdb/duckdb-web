@@ -28,10 +28,10 @@ When applied to values of the `LIST`-type, `unnest()` may also appear in clauses
 
 ### Unnesting `LIST`-Typed Values
 
-To fully understand unnesting `LIST`-typed values, it is useful to distinguish between the 'input' row that provided the `LIST`-typed value that is to be unnested, and the 'ouput' row(s) created by the unnesting operation.
+To fully understand unnesting `LIST`-typed values, it is useful to distinguish between the 'input' row that provided the `LIST`-typed value that is to be unnested, and the 'output' row(s) created by the unnesting operation.
 An individual invocation to `unnest()` on the `LIST`-typed value has the effect of duplicating the 'input' row while populating the field corresponding to the `unnest()` call with the element value.
 In other words, the original row becomes a repeating group for element unnnested from the `LIST`-typed value.
-Consequently, if `unnest()` gets called on an empty list (or a `NULL` value), no elements are unnested, and no 'ouput' rows are generated.
+Consequently, if `unnest()` gets called on an empty list (or a `NULL` value), no elements are unnested, and no 'output' rows are generated.
 
 #### Unnesting Multiple Lists
 

@@ -13,7 +13,7 @@ title: Encodings Extension
 
 The `encodings` extension adds support for reading CSVs using more than 1,000 character encodings.
 
-For a complete list of supported `encodings`, see [All Supported Encodings](#all-supported-encodings). For detailed information on character encoding, see the [ICU data repository](https://github.com/unicode-org/icu-data/tree/main/charset/data/ucm).
+For a complete list of supported encodings, see [All Supported Encodings](#all-supported-encodings). For detailed information on character encoding, see the [ICU data repository](https://github.com/unicode-org/icu-data/tree/main/charset/data/ucm).
 
 ## Installing and Loading
 

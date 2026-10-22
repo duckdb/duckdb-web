@@ -254,7 +254,7 @@ To avoid these kinds of mistakes, DuckDB makes it possible to explicitly associa
 
 This is done by passing a CRS "identifier" as a parameter of the `GEOMETRY` type. For example, a column of type `GEOMETRY('OGC:CRS84')` stores geometries that are associated with the "OGC CRS84" coordinate reference system. 
 
-CRS identifiers in DuckDB are always strings. `OGC:CRS84` is the identifier for a common geographic coordinate system spanning the whole globe where the `X` coordinate represents longitude and the `Y` coordinate represents latitude. DuckDB only knows this because the identifier 'OGC:CRS84' is registered as a _known_ CRS in the system catalog.
+CRS identifiers in DuckDB are always strings. `OGC:CRS84` is the identifier for a common geographic coordinate system spanning the whole globe where the `X` coordinate represents longitude and the `Y` coordinate represents latitude. DuckDB only knows this because the identifier `OGC:CRS84` is registered as a _known_ CRS in the system catalog.
 
 > Warning Storing `GEOMETRY` columns that carry a CRS identifier requires [storage version v1.5.0]({% link docs/2.0/sql/statements/attach.md %}#explicit-storage-versions) or newer. Writing such a column into a database created with an older storage version fails with an error such as `Invalid Input Error: GEOMETRY columns with coordinate reference system identifiers are not supported in storage versions prior v1.5.0`. Create or attach the database with `ATTACH 'file.db' (STORAGE_VERSION 'v1.5.0');`.
 

@@ -89,7 +89,7 @@ CALL enable_logging('HTTP');
 ```
 
 The above function will automatically set the correct log level and will add the `HTTP` type to the `enabled_log_types` settings. This ensures
-only log messages of the 'HTTP' type will be written to the log.
+only log messages of the `HTTP` type will be written to the log.
 
 > New As of DuckDB 2.0, the dedicated `enable_http_logging` and `http_logging_output` settings have been removed. Use the unified logging framework shown here (`CALL enable_logging('HTTP')` together with `duckdb_logs_parsed('HTTP')`) instead. The `redact_http_logs` setting (default `true`) controls whether HTTP header values are redacted in the logs.
 
@@ -184,7 +184,7 @@ CALL enable_logging(storage_path = 'path/to/store/logs');
 DuckDB's log storages can log in two ways: normalized vs. denormalized.
 
 In denormalized logging, the log context information is appended directly to each log entry, while in normalized logging
-the log entries are stored separately with context_ids referencing the context information.
+the log entries are stored separately with `context_id`s referencing the context information.
 
 | Log storage | Normalized   |
 |-------------|--------------|
@@ -203,7 +203,7 @@ CALL enable_logging(storage_path = '/tmp');
 CALL enable_logging(storage_path = '/tmp/logs.csv');
 ```
 
-Note that the difference between normalized and denormalized is typically hidden from users through the 'duckdb_logs' function,
+Note that the difference between normalized and denormalized is typically hidden from users through the `duckdb_logs` function,
 which automatically joins normalized tables into a single unified result. To illustrate, both configurations above will be
 queryable using `FROM duckdb_logs;` and will produce identical results.
 

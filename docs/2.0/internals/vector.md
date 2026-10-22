@@ -45,7 +45,7 @@ SELECT lst || 'duckdb'
 FROM range(1000) tbl(lst);
 ```
 
-Since `duckdb` is a string literal, the value of the literal is the same for every row. In a flat vector, we would have to duplicate the literal 'duckdb' once for every row. The constant vector allows us to only store the literal once.
+Since `duckdb` is a string literal, the value of the literal is the same for every row. In a flat vector, we would have to duplicate the literal `duckdb` once for every row. The constant vector allows us to only store the literal once.
 
 Constant vectors are also emitted by the storage when decompressing from constant compression.
 

@@ -231,7 +231,7 @@ SELECT * FROM master_ducks WHERE duck_name = 'Quackers';
 ## Best Practices
 
 * Remember that `TARGET` is the master table and `SOURCE` is the incoming table or query.
-* Keep end_date NULL for current rows (makes queries faster).
+* Keep `end_date` `NULL` for current rows (makes queries faster).
 * Wrap `MERGE` and `INSERT` statements in a transaction when needed.
 * Use a primary key or a surrogate key for uniqueness.
 * Test with RETURNING first.

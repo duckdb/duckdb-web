@@ -17,13 +17,13 @@ The `CALL` statement invokes the given [table function]({% link docs/2.0/sql/que
 
 ## Examples
 
-Invoke the 'duckdb_functions' table function:
+Invoke the `duckdb_functions` table function:
 
 ```sql
 CALL duckdb_functions();
 ```
 
-Invoke the 'pragma_table_info' table function:
+Invoke the `pragma_table_info` table function:
 
 ```sql
 CALL pragma_table_info('pg_am');
