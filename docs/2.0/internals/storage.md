@@ -104,14 +104,14 @@ FROM duckdb_databases();
 This shows the storage versions:
 
 ```text
-┌───────────────┬───────────────────────────────────┐
-│ database_name │               tags                │
-│    varchar    │       map(varchar, varchar)       │
-├───────────────┼───────────────────────────────────┤
-│ file1         │ {storage_version=v1.2.0}          │
-│ file2         │ {storage_version=v1.0.0 - v1.1.3} │
-│ ...           │ ...                               │
-└───────────────┴───────────────────────────────────┘
+┌───────────────┬───────────────────────────┐
+│ database_name │           tags            │
+│    varchar    │   map(varchar, varchar)   │
+├───────────────┼───────────────────────────┤
+│ file1         │ {storage_version=v1.2.0+} │
+│ file2         │ {storage_version=v1.0.0+} │
+│ ...           │ ...                       │
+└───────────────┴───────────────────────────┘
 ```
 
 This means that `file2` can be opened by past DuckDB versions while `file1` is compatible only with `v1.2.0` (or future versions).
@@ -159,7 +159,7 @@ hexdump -n 20 -C mydata.db
 ```
 
 ```text
-00000000  01 d0 e2 63 9c 13 39 3e  44 55 43 4b 2b 00 00 00  |...c..9>DUCK+...|
+00000000  ac a3 60 b1 80 cb c3 8e  44 55 43 4b e7 03 00 00  |..`.....DUCK....|
 00000010  00 00 00 00                                       |....|
 00000014
 ```

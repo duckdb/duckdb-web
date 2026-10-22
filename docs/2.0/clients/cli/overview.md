@@ -91,7 +91,7 @@ The CLI supports [autocompletion]({% link docs/2.0/clients/cli/autocomplete.md %
 
 ### Exiting the CLI
 
-To exit the CLI, press `Ctrl`+`D` if your platform supports it. Otherwise, press `Ctrl`+`C` or use the `.exit` command. If you used a persistent database, DuckDB will automatically checkpoint (save the latest edits to disk) and close. This will remove the `.wal` file (the [write-ahead log](https://en.wikipedia.org/wiki/Write-ahead_logging)) and consolidate all of your data into the single-file database.
+To exit the CLI, press `Ctrl`+`D` if your platform supports it. Otherwise, press `Ctrl`+`C` or use the `.exit` command. If the session is connected to a remote database via the [`CONNECT` statement]({% link docs/2.0/sql/statements/connect.md %}), the first `Ctrl`+`D` disconnects and returns to the local database; press it again to exit. A CLI started with `-connect` exits on the first `Ctrl`+`D`. If you used a persistent database, DuckDB will automatically checkpoint (save the latest edits to disk) and close. This will remove the `.wal` file (the [write-ahead log](https://en.wikipedia.org/wiki/Write-ahead_logging)) and consolidate all of your data into the single-file database.
 
 ### Dot Commands
 

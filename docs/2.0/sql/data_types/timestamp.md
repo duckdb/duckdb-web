@@ -98,7 +98,7 @@ The conversion between strings *with* UTC offsets or time zone names and `WITH T
 
 When strings *without* UTC offsets or time zone names are converted to a `WITH TIME ZONE` type, the string is interpreted in the configured time zone. 
 When strings with UTC offsets are passed to a `WITHOUT TIME ZONE` type, the offsets or time zone specifications are ignored.
-When strings with time zone names other than `UTC` are passed to a `WITHOUT TIME ZONE` type, an error is thrown. 
+Starting with DuckDB 2.0, time zone names in strings passed to a `WITHOUT TIME ZONE` type are also ignored (in earlier versions, names other than `UTC` raised an error).
 
 Finally, when `WITH TIME ZONE` and `WITHOUT TIME ZONE` types are converted to each other via explicit or implicit casts, the translation uses the configured time zone. To use an alternative time zone, the `timezone` function provided by the `ICU` extension may be used:
 

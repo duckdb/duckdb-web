@@ -228,7 +228,7 @@ Configuration options come with different default [scopes]({% link docs/2.0/sql/
 | `enable_geoparquet_conversion` | Attempt to decode/encode geometry data in/as GeoParquet files if the spatial extension is present. | `BOOLEAN` | `true` |
 | `enable_global_s3_configuration` | Automatically fetch AWS credentials from environment variables. | `BOOLEAN` | `true` |
 | `enable_http_metadata_cache` | Whether or not the global http metadata is used to cache HTTP metadata. | `BOOLEAN` | `false` |
-| `enable_logging` | Enables the logger. | `BOOLEAN` | `1` |
+| `enable_logging` | Enables the logger. | `BOOLEAN` | `false` (`true` in the CLI) |
 | `enable_macro_dependencies` | Enables created MACROs to create dependencies on the referenced objects, such as tables. | `BOOLEAN` | `false` |
 | `enable_optimistic_write` | Whether or not to optimistically write large appends to disk before committing. Disable this to keep bulk appends in memory, e.g., for in-memory benchmarks. | `BOOLEAN` | `true` |
 | `enable_optimizer` | Whether the query optimizer is enabled. | `BOOLEAN` | `true` |
@@ -280,9 +280,9 @@ Configuration options come with different default [scopes]({% link docs/2.0/sql/
 | `legacy_disable_null_type` | When enabled, prevent the NULL type from leaving the binder. This was the default behavior prior to DuckDB v2.0. | `BOOLEAN` | `false` |
 | `lock_configuration` | Whether configurations can be altered. | `BOOLEAN` | `false` |
 | `log_query_path` | Specifies the path to which queries should be logged. The default is NULL, meaning queries are not logged. | `VARCHAR` |  |
-| `logging_level` | Determines which 'severity' of log messages will be logged. | `VARCHAR` | `WARNING` |
+| `logging_level` | Determines which 'severity' of log messages will be logged. | `VARCHAR` | `INFO` (`WARNING` in the CLI) |
 | `logging_mode` | Determines which types of log messages are logged. | `VARCHAR` | `LEVEL_ONLY` |
-| `logging_storage` | Set the logging storage, options are 'memory', 'stdout', 'file', '<custom>'. | `VARCHAR` | `shell_log_storage` |
+| `logging_storage` | Set the logging storage, options are 'memory', 'stdout', 'file', '<custom>'. | `VARCHAR` | `memory` (`shell_log_storage` in the CLI) |
 | `max_execution_time` | The maximum execution time per query in milliseconds (0 = no limit). | `BIGINT` | `0` |
 | `max_expression_depth` | The maximum expression depth limit in the parser. WARNING: increasing this setting and using very deep expressions might lead to stack overflow errors. | `UBIGINT` | `1000` |
 | `max_memory`, `memory_limit` | The maximum memory of the system (e.g., 1GB). | `VARCHAR` | 80% of RAM |

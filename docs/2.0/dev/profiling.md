@@ -79,7 +79,6 @@ CALL enable_profiling(
     format := 'json',
     save_location := '/path/to/output.json',
     coverage := 'select',
-    mode := 'standard',
     metrics := ['query.sql', 'query.total_time', 'operator.timing']
 );
 ```
@@ -87,7 +86,7 @@ CALL enable_profiling(
 | Parameter | Type | Description |
 |-----------|------|-------------|
 | `metrics` | `LIST`, `STRUCT`, or JSON | Specifies which metrics to enable |
-| `mode` | `VARCHAR` | Profiling level: `'standard'` or `'detailed'` |
+| `mode` | `VARCHAR` | Deprecated, has no effect (detailed profiling information is always collected) |
 | `save_location` | `VARCHAR` | File path for profiling output |
 | `coverage` | `VARCHAR` | Query coverage: `'select'` or `'all'` |
 | `format` | `VARCHAR` | Output format: `'query_tree'`, `'json'`, `'query_tree_optimizer'`, `'no_output'` |

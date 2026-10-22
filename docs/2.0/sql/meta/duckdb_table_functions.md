@@ -227,7 +227,7 @@ The `duckdb_functions()` function provides metadata about the functions (includi
 | `stability` | The stability of the function (`CONSISTENT`, `VOLATILE`, `CONSISTENT_WITHIN_QUERY` or `NULL`) | `VARCHAR` |
 | `categories` | Categories of the function. Used to generate the documentation. | `VARCHAR[]` |
 
-> New The `extension_name` and `categories` columns were introduced in DuckDB 2.0.
+> New The `extension_name` column was introduced in DuckDB 2.0.
 
 ## `duckdb_grammar_extensions`
 
@@ -351,6 +351,8 @@ The `duckdb_schemas()` function provides metadata about the schemas available in
 | `tags` | A map of string key–value pairs. | `MAP(VARCHAR, VARCHAR)` |
 | `internal` | `true` if this is an internal (built-in) schema, `false` if this is a user-defined schema. | `BOOLEAN` |
 | `sql` | Always `NULL`| `VARCHAR` |
+| `parent_schema` | The name of the parent schema for a [nested schema]({% link docs/2.0/sql/statements/create_schema.md %}#nested-schemas), or `NULL`. | `VARCHAR` |
+| `parent_schema_oid` | Internal identifier of the parent schema, or `NULL`. | `BIGINT` |
 
 The [`information_schema.schemata`]({% link docs/2.0/sql/meta/information_schema.md %}#schemata-database-catalog-and-schema) system view provides a more standardized way to obtain metadata about database schemas.
 

@@ -26,6 +26,7 @@ The table below shows all the built-in general-purpose data types. The alternati
 | `DECIMAL(prec, scale)`     | `NUMERIC(prec, scale)`             | Fixed-precision number with the given width (precision) and scale, defaults to `prec = 18` and `scale = 3` |
 | `DOUBLE`                   | `FLOAT8`                           | Double precision floating-point number (8 bytes)                                                           |
 | `FLOAT`                    | `FLOAT4`, `REAL`                   | Single precision floating-point number (4 bytes)                                                           |
+| `GEOMETRY`                 |                                    | Geospatial entity, see the [`GEOMETRY` data type]({% link docs/2.0/sql/data_types/geometry.md %})              |
 | `HUGEINT`                  |                                    | Signed sixteen-byte integer                                                                                |
 | `INTEGER`                  | `INT4`, `INT`, `SIGNED`            | Signed four-byte integer                                                                                   |
 | `INTERVAL`                 |                                    | Date / time delta                                                                                          |

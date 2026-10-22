@@ -62,7 +62,7 @@ To find a list of these tools, check out the [Awesome DuckDB repository](https:/
 * [How to load a JSON file into a table]({% link docs/2.0/guides/file_formats/json_import.md %})
 * [How to export a table to a JSON file]({% link docs/2.0/guides/file_formats/json_export.md %})
 
-### Excel Files with the Spatial Extension
+### Excel Files
 
 * [How to load an Excel file into a table]({% link docs/2.0/guides/file_formats/excel_import.md %})
 * [How to export a table to an Excel file]({% link docs/2.0/guides/file_formats/excel_export.md %})

@@ -135,5 +135,5 @@ SELECT x, file_index FROM read_parquet(['a.parquet', 'b.parquet']);
 
 ## Appender
 
-In several APIs (C, C++, Go, Java and Rust), the [Appender]({% link docs/2.0/data/appender.md %}) can be used as an alternative for bulk data loading.
+In several APIs (C, C++, Go, Java, Julia, Node.js, Python and Rust), the [Appender]({% link docs/2.0/data/appender.md %}) can be used as an alternative for bulk data loading.
 This class can be used to efficiently add rows to the database system without using SQL statements.

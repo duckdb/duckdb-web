@@ -87,6 +87,12 @@ FROM (
         THEN 'System (locale) timezone'
         WHEN name='Calendar'
         THEN 'System (locale) calendar'
+        WHEN name='enable_logging'
+        THEN '`false` (`true` in the CLI)'
+        WHEN name='logging_level'
+        THEN '`INFO` (`WARNING` in the CLI)'
+        WHEN name='logging_storage'
+        THEN '`memory` (`shell_log_storage` in the CLI)'
         WHEN lower(value) IN ('null', 'nulls_last', 'asc', 'desc')
         THEN surround_with_backticks(upper(value))
         WHEN name='temp_directory'

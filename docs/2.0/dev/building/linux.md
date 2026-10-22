@@ -96,8 +96,8 @@ Therefore, it's recommended to use glibc for performance-oriented workloads.
 
 #### Distribution for the `linux_*_musl` Platforms
 
-Starting with DuckDB 1.2.0, [_DuckDB extensions_ are distributed for the `linux_amd64_musl` platform]({% post_url 2025-02-05-announcing-duckdb-120 %}#musl-extensions) (but not yet for the `linux_arm64_musl` platform).
-However, there are no official _DuckDB binaries_ distributed for musl libc but it can be built with it manually following the instructions on this page.
+Starting with DuckDB 1.2.0, [_DuckDB extensions_ are distributed for the `linux_amd64_musl` platform]({% post_url 2025-02-05-announcing-duckdb-120 %}#musl-extensions), and starting with DuckDB 1.5.0 also for the `linux_arm64_musl` platform.
+Since DuckDB 1.5.0, official CLI binaries and libraries are also distributed for both musl platforms (e.g., `duckdb-cli-linux-amd64-musl.tar.gz` on the [GitHub release page](https://github.com/duckdb/duckdb/releases)). You can also build DuckDB with musl libc manually following the instructions on this page.
 
 #### Python Client on Alpine Linux
 

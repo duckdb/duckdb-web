@@ -44,7 +44,7 @@ Unlike variable-length integer implementations in other systems, there are limit
 
 ## Fixed-Point Decimals
 
-The data type `DECIMAL(WIDTH, SCALE)` (also available under the alias `NUMERIC(WIDTH, SCALE)`) represents an exact fixed-point decimal value. When creating a value of type `DECIMAL`, the `WIDTH` and `SCALE` can be specified to define which size of decimal values can be held in the field. The `WIDTH` field determines how many digits can be held, and the `scale` determines the number of digits after the decimal point. For example, the type `DECIMAL(3, 2)` can fit the value `1.23`, but cannot fit the value `12.3` or the value `1.234`. The default `WIDTH` and `SCALE` is `DECIMAL(18, 3)`, if none are specified. If only the `WIDTH` is specified, the `SCALE` defaults to `0` – for example, `DECIMAL(18)` is equivalent to `DECIMAL(18, 0)` and truncates fractional digits.
+The data type `DECIMAL(WIDTH, SCALE)` (also available under the alias `NUMERIC(WIDTH, SCALE)`) represents an exact fixed-point decimal value. When creating a value of type `DECIMAL`, the `WIDTH` and `SCALE` can be specified to define which size of decimal values can be held in the field. The `WIDTH` field determines how many digits can be held, and the `scale` determines the number of digits after the decimal point. For example, the type `DECIMAL(3, 2)` can fit the value `1.23`, but cannot fit the value `12.3` or the value `1.234`. The default `WIDTH` and `SCALE` is `DECIMAL(18, 3)`, if none are specified. If only the `WIDTH` is specified, the `SCALE` defaults to `0` – for example, `DECIMAL(18)` is equivalent to `DECIMAL(18, 0)` and rounds to whole numbers (e.g., `1.5::DECIMAL(18)` is `2`).
 
 ### Specifying the `WIDTH` and the `SCALE`
 

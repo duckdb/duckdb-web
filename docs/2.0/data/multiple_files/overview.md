@@ -147,7 +147,14 @@ IO Error:
 No files found that match the pattern "test/*.parquet"
 ```
 
-To handle this case gracefully, use the [`glob` function](#glob-function-to-find-filenames) to check whether any files match before reading. Unlike the read functions, `glob` returns an empty result instead of raising an error when nothing matches:
+Starting with DuckDB 2.0, the CSV, JSON and Parquet readers accept the `allow_empty` option, which returns an empty result (with a single `empty` column of type `BOOLEAN`) instead of raising an error:
+
+```sql
+SELECT *
+FROM read_parquet('test/*.parquet', allow_empty = true);
+```
+
+Alternatively, use the [`glob` function](#glob-function-to-find-filenames) to check whether any files match before reading. Unlike the read functions, `glob` returns an empty result instead of raising an error when nothing matches:
 
 ```sql
 SELECT count(*) AS matches

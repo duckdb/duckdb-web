@@ -96,10 +96,10 @@ WHERE
 
 | schema_name |  function_name  | function_rank |
 |:---|:---|:---|
-| main        | !__postfix      | 1             |
-| main        | !~~             | 2             |
-| pg_catalog  | col_description | 1             |
-| pg_catalog  | format_pg_type  | 2             |
+| main        | !=               | 1             |
+| main        | !__postfix       | 2             |
+| pg_catalog  | col_description  | 1             |
+| pg_catalog  | current_database | 2             |
 
 ## Syntax
 

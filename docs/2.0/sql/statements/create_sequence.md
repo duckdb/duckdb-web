@@ -203,7 +203,7 @@ After a sequence is created, you use the function `nextval` to operate on the se
 
 ## Limitations
 
-Due to limitations in DuckDB's dependency manager, `DROP SEQUENCE` will fail in some corner cases.
+A sequence cannot be dropped while a column `DEFAULT` still references it:
 
 ```sql
 CREATE SEQUENCE id_sequence START 1;
@@ -213,24 +213,9 @@ CREATE TABLE tbl (
     s VARCHAR
 );
 INSERT INTO tbl(s) VALUES ('default is the next value from id_sequence');
-
-ALTER TABLE tbl ALTER COLUMN id SET DEFAULT NULL;
-INSERT INTO tbl(s) VALUES ('default is NULL');
-
-SELECT * FROM tbl;
 ```
 
-```text
-┌───────┬────────────────────────────────────────────┐
-│  id   │                     s                      │
-│ int32 │                  varchar                   │
-├───────┼────────────────────────────────────────────┤
-│     1 │ default is the next value from id_sequence │
-│  NULL │ default is NULL                            │
-└───────┴────────────────────────────────────────────┘
-```
-
-Even though the sequence is no longer used, attempting to drop it results in an error:
+Attempting to drop the sequence results in an error:
 
 <!-- test:skip the generator's section resets clear the dependency this example needs -->
 
@@ -241,7 +226,7 @@ DROP SEQUENCE id_sequence;
 ```console
 Dependency Error:
 Cannot drop entry "id_sequence" because there are entries that depend on it.
-table "tbl" depends on index "id_sequence".
+table "tbl" depends on sequence "id_sequence".
 Use DROP...CASCADE to drop all dependents.
 ```
 
@@ -270,7 +255,7 @@ CREATE OR REPLACE SEQUENCE id_sequence;
 ```console
 Dependency Error:
 Cannot drop entry "id_sequence" because there are entries that depend on it.
-table "tbl" depends on index "id_sequence".
+table "tbl" depends on sequence "id_sequence".
 Use DROP...CASCADE to drop all dependents.
 ```
 

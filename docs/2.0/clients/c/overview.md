@@ -23,6 +23,8 @@ DuckDB implements a custom C API modeled somewhat following the SQLite C API. Th
 
 DuckDB 2.0 ships a revamped C API, which is considerably more powerful than its predecessor. Among others, it exposes components such as file systems and table functions to extensions.
 
+The C API v2 is declared in the `duckdb_v2.h` header. Extensions that target it include `duckdb_extension_v2.h` instead of `duckdb_extension.h`; an extension targets either the v1 or the v2 C API, never both.
+
 Before marking the C API v2 as stable, we would like to test it in the field. Please give it a try and [send us your feedback](https://github.com/duckdb/duckdb/discussions/27525)!
 
 ## Installation

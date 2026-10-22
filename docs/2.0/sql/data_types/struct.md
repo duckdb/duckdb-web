@@ -68,10 +68,10 @@ SELECT {
     } AS s;
 ```
 
-> New As of DuckDB 2.0, `STRUCT` types may be empty. The bare type name `STRUCT` denotes an empty struct, so both `NULL::STRUCT` and `CREATE TABLE t (s STRUCT)` are valid, and `struct_pack()` or `row()` with no arguments returns `{}`. Note that `STRUCT()` with empty parentheses remains a syntax error, and `unnest` and `struct_extract` raise an error on an empty struct. Persisting an empty struct into a pre-2.0 database format is not supported.
+> New As of DuckDB 2.0, `STRUCT` types may be empty. The bare type name `STRUCT` denotes an empty struct, so both `NULL::STRUCT` and `CREATE TABLE t (s STRUCT)` are valid, and `struct_pack()` with no arguments returns `{}` (whereas `row()` with no arguments returns the empty tuple `()`). Note that `STRUCT()` with empty parentheses remains a syntax error, and `unnest` and `struct_extract` raise an error on an empty struct. Persisting an empty struct into a pre-2.0 database format is not supported.
 
 ```sql
-SELECT row() AS s;
+SELECT struct_pack() AS s;
 ```
 
 ## Adding or Updating Fields of Structs

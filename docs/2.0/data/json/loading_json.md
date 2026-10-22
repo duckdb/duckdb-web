@@ -90,7 +90,7 @@ These functions have the following parameters:
 | `allow_empty` | If the file pattern or file list matches no files, return an empty result (with a single `empty` column of type `BOOL`) instead of throwing an error. Added in DuckDB 2.0. | `BOOL` | `false` |
 | `compression` | The compression type for the file. By default this will be detected automatically from the file extension (e.g., `t.json.gz` will use gzip, `t.json` will use none). Options are `none`, `gzip`, `zstd` and `auto_detect`. | `VARCHAR` | `auto_detect` |
 | `filename` | Whether or not an extra `filename` column should be included in the result. Since DuckDB 1.3.0, the `filename` column is added automatically as a virtual column and this option is only kept for compatibility reasons. | `BOOL` | `false` |
-| `format` | Can be one of `auto`, `unstructured`, `newline_delimited` and `array`. | `VARCHAR` | `array` |
+| `format` | Can be one of `auto`, `unstructured`, `newline_delimited` and `array`. | `VARCHAR` | `auto` |
 | `hive_partitioning` | Whether or not to interpret the path as a [Hive partitioned path]({% link docs/2.0/data/partitioning/hive_partitioning.md %}). | `BOOL` | (auto-detected) |
 | `ignore_errors` | Whether to ignore parse errors (only possible when `format` is `newline_delimited`). | `BOOL` | `false` |
 | `maximum_sample_files` | The maximum number of JSON files sampled for auto-detection. | `BIGINT` | `32` |
@@ -366,24 +366,3 @@ FROM read_json('features.geojson', geojson := true);
 
 `.geojson` / `.geojsonl` files are also recognized as JSON replacements. Convert with `st_geomfromgeojson` / `st_asgeojson`. Writing FeatureCollections is documented on the [Writing JSON]({% link docs/2.0/data/json/writing_json.md %}) page.
 
-### Parameters
-
-| Name | Description | Type | Default |
-|:--|:-----|:-|:-|
-| `auto_detect` | Whether to auto-detect the names of the keys and data types of the values automatically | `BOOL` | `false` |
-| `columns` | A struct that specifies the key names and value types contained within the JSON file (e.g., `{key1: 'INTEGER', key2: 'VARCHAR'}`). If `auto_detect` is enabled these will be inferred | `STRUCT` | `(empty)` |
-| `compression` | The compression type for the file. By default this will be detected automatically from the file extension (e.g., `t.json.gz` will use gzip, `t.json` will use none). Options are `uncompressed`, `gzip`, `zstd` and `auto_detect`. | `VARCHAR` | `auto_detect` |
-| `convert_strings_to_integers` | Whether strings representing integer values should be converted to a numerical type. | `BOOL` | `false` |
-| `dateformat` | Specifies the date format to use when parsing dates. See [Date Format]({% link docs/2.0/sql/functions/dateformat.md %}) | `VARCHAR` | `iso` |
-| `filename` | Whether or not an extra `filename` column should be included in the result. | `BOOL` | `false` |
-| `format` | Can be one of `auto, unstructured, newline_delimited, array` | `VARCHAR` | `array` |
-| `hive_partitioning` | Whether or not to interpret the path as a [Hive partitioned path]({% link docs/2.0/data/partitioning/hive_partitioning.md %}). | `BOOL` | `false` |
-| `hive_types` | If Hive partitioning is enabled, `hive_types` can be used to specify the logical types of the Hive partitioning columns as a struct (e.g., `{'year': 'INTEGER'}`). | `STRUCT` | (auto-detected) |
-| `ignore_errors` | Whether to ignore parse errors (only possible when `format` is `newline_delimited`) | `BOOL` | `false` |
-| `maximum_depth` | Maximum nesting depth to which the automatic schema detection detects types. Set to -1 to fully detect nested JSON types | `BIGINT` | `-1` |
-| `maximum_object_size` | The maximum size of a JSON object (in bytes) | `UINTEGER` | `16777216` |
-| `maximum_sample_files` | The maximum number of JSON files sampled for auto-detection. | `BIGINT` | `32` |
-| `records` | Can be one of `auto`, `true`, `false` | `VARCHAR` | `records` |
-| `sample_size` | Option to define number of sample objects for automatic JSON type detection. Set to -1 to scan the entire input file | `UBIGINT` | `20480` |
-| `timestampformat` | Specifies the date format to use when parsing timestamps. See [Date Format]({% link docs/2.0/sql/functions/dateformat.md %}) | `VARCHAR` | `iso`|
-| `union_by_name` | Whether the schemas of multiple JSON files should be [unified]({% link docs/2.0/data/multiple_files/combining_schemas.md %}). | `BOOL` | `false` |

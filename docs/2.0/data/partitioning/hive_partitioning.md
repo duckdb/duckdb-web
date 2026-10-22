@@ -110,7 +110,7 @@ SELECT *
 FROM read_parquet(
     'dir/**/*.parquet',
     hive_partitioning = true,
-    hive_types = {'release': DATE, 'orders': BIGINT}
+    hive_types = {'release': 'DATE', 'orders': 'BIGINT'}
 );
 ```
 

@@ -25,7 +25,7 @@ This option also accepts out-of-tree extensions such as [`delta`]({% link docs/2
 BUILD_EXTENSIONS='autocomplete;httpfs;icu;json;tpch;delta' GEN=ninja make
 ```
 
-In most cases, extensions will be directly linked in the resulting DuckDB executable.
+Since DuckDB 2.0, extensions listed in `BUILD_EXTENSIONS` are built but not statically linked into the DuckDB executable by default: they are installed from the build's own extension repository and loaded on first use. To link them into the executable, set `LINK_CORE_EXTENSIONS=1` or list them in `STATICALLY_LINK_EXTENSIONS` (see [Linking Extensions]({% link docs/2.0/dev/building/linking_extensions.md %})).
 
 ## Special Extension Flags
 
@@ -73,8 +73,8 @@ To build using a CMake configuration file, create an extension configuration fil
 
 ```cmake
 duckdb_extension_load(autocomplete)
-duckdb_extension_load(fts)
-duckdb_extension_load(inet)
+duckdb_extension_load(tpch)
+duckdb_extension_load(tpcds)
 duckdb_extension_load(icu)
 duckdb_extension_load(json)
 duckdb_extension_load(parquet)

@@ -53,14 +53,13 @@ darkred1 red darkred2 red3 red4 red1 brightred indianred1 ...
 
 ## Dynamic Prompt
 
-The default prompts are the following:
+The default prompt is the following:
 
 ```text
--- macOS / Linux
-{max_length:40}{color:38,5,208}{color:bold}{setting:current_database_and_schema}{color:reset} D 
--- Windows
-{max_length:40}{color:green}{color:bold}{setting:current_database_and_schema}{color:reset} D 
+{max_length:50}{highlight_element:prompt_connect}{setting:connect_name_prefix}{highlight_element:prompt}{setting:current_database_and_schema}{color:reset} D 
 ```
+
+While the session is connected to a remote database with [`CONNECT`]({% link docs/2.0/sql/statements/connect.md %}), `{setting:connect_name_prefix}` shows the remote database's name (or its URI, e.g., `quack:localhost`, for `CONNECT '⟨uri⟩'` and `-connect`); otherwise it is empty.
 
 ## Return the Result of the Last Query Using `_`
 

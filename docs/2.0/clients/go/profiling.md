@@ -15,7 +15,7 @@ The Go client can observe query execution: it can retrieve per-operator [profili
 
 ## Profiling
 
-Profiling information is connection-local, so it is read from a `*sql.Conn` checked out with `db.Conn()`. Enable profiling on that connection with the [`enable_profiling` PRAGMA]({% link docs/2.0/dev/profiling.md %}), run the query to profile, then read the result with `duckdb.GetProfilingInfo()`:
+Profiling information is connection-local, so it is read from a `*sql.Conn` checked out with `db.Conn()`. Enable profiling on that connection with the [`enable_profiling` setting]({% link docs/2.0/dev/profiling.md %}), run the query to profile, then read the result with `duckdb.GetProfilingInfo()`:
 
 ```go
 db, err := sql.Open("duckdb", "")
@@ -27,7 +27,7 @@ check(err)
 defer conn.Close()
 
 // Do not print profiling output to stdout after each query.
-_, err = conn.ExecContext(context.Background(), `PRAGMA enable_profiling = 'no_output'`)
+_, err = conn.ExecContext(context.Background(), `SET enable_profiling = 'no_output'`)
 check(err)
 
 // Run the query to profile.
@@ -83,7 +83,7 @@ Logging is off by default, so enable it with `CALL enable_logging()` in addition
 
 ## Further Reading
 
-* [Profiling]({% link docs/2.0/dev/profiling.md %}) — DuckDB's query profiling output and the `enable_profiling` PRAGMA and the `tracked_metrics` setting.
+* [Profiling]({% link docs/2.0/dev/profiling.md %}) — DuckDB's query profiling output and the `enable_profiling` and `tracked_metrics` settings.
 * [Logging]({% link docs/2.0/operations_manual/logging/overview.md %}) — enabling logging with `enable_logging` and querying log entries through `duckdb_logs`.
 * [Run Queries]({% link docs/2.0/clients/go/querying.md %}) — running the queries whose metrics this page reads.
 * [Connect]({% link docs/2.0/clients/go/connecting.md %}) — checking out the connection that profiling operates on, and the connector that log storage is registered on.

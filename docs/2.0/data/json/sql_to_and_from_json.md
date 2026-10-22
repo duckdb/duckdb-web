@@ -35,7 +35,7 @@ SELECT json_serialize_sql('SELECT 2');
 ```
 
 ```text
-{"error":false,"statements":[{"node":{"type":"SELECT_NODE","modifiers":[],"cte_map":{"map":[]},"select_list":[{"class":"CONSTANT","type":"VALUE_CONSTANT","alias":"","query_location":7,"value":{"type":{"id":"INTEGER","type_info":null},"is_null":false,"value":2}}],"from_table":{"type":"EMPTY","alias":"","sample":null,"query_location":18446744073709551615},"where_clause":null,"group_expressions":[],"group_sets":[],"aggregate_handling":"STANDARD_HANDLING","having":null,"sample":null,"qualify":null},"named_param_map":[]}]}
+{"error":false,"statements":[{"node":{"type":"SELECT_NODE","modifiers":[],"cte_map":{"map":[]},"select_list":[{"class":"CONSTANT","type":"VALUE_CONSTANT","alias":"","query_location":7,"query_location_length":1,"literal":{"kind":"INTEGER","text":"2"}}],"from_table":{"type":"EMPTY","alias":"","sample":null,"query_location":18446744073709551615,"query_location_length":0},"where_clause":null,"group_expressions":[],"group_sets":[],"aggregate_handling":"STANDARD_HANDLING","having":null,"sample":null,"qualify":null},"named_param_map":[]}]}
 ```
 
 Example with multiple statements and skip options:
@@ -45,7 +45,7 @@ SELECT json_serialize_sql('SELECT 1 + 2; SELECT a + b FROM tbl1', skip_empty := 
 ```
 
 ```text
-{"error":false,"statements":[{"node":{"type":"SELECT_NODE","select_list":[{"class":"FUNCTION","type":"FUNCTION","query_location":9,"function_name":"+","children":[{"class":"CONSTANT","type":"VALUE_CONSTANT","query_location":7,"value":{"type":{"id":"INTEGER"},"is_null":false,"value":1}},{"class":"CONSTANT","type":"VALUE_CONSTANT","query_location":11,"value":{"type":{"id":"INTEGER"},"is_null":false,"value":2}}],"order_bys":{"type":"ORDER_MODIFIER"},"distinct":false,"is_operator":true,"export_state":false}],"from_table":{"type":"EMPTY","query_location":18446744073709551615},"aggregate_handling":"STANDARD_HANDLING"}},{"node":{"type":"SELECT_NODE","select_list":[{"class":"FUNCTION","type":"FUNCTION","query_location":23,"function_name":"+","children":[{"class":"COLUMN_REF","type":"COLUMN_REF","query_location":21,"column_names":["a"]},{"class":"COLUMN_REF","type":"COLUMN_REF","query_location":25,"column_names":["b"]}],"order_bys":{"type":"ORDER_MODIFIER"},"distinct":false,"is_operator":true,"export_state":false}],"from_table":{"type":"BASE_TABLE","query_location":32,"table_name":"tbl1"},"aggregate_handling":"STANDARD_HANDLING"}}]}
+{"error":false,"statements":[{"node":{"type":"SELECT_NODE","cte_map":{},"select_list":[{"class":"FUNCTION","type":"FUNCTION","query_location":9,"query_location_length":0,"function_name":"+","order_bys":{"type":"ORDER_MODIFIER"},"distinct":false,"is_operator":true,"export_state":false,"arguments":[{"expression":{"class":"CONSTANT","type":"VALUE_CONSTANT","query_location":7,"query_location_length":1,"literal":{"kind":"INTEGER","text":"1"}}},{"expression":{"class":"CONSTANT","type":"VALUE_CONSTANT","query_location":11,"query_location_length":1,"literal":{"kind":"INTEGER","text":"2"}}}],"qualified_name":{"path":["+"]}}],"from_table":{"type":"EMPTY","query_location":18446744073709551615,"query_location_length":0},"aggregate_handling":"STANDARD_HANDLING"}},{"node":{"type":"SELECT_NODE","cte_map":{},"select_list":[{"class":"FUNCTION","type":"FUNCTION","query_location":23,"query_location_length":0,"function_name":"+","order_bys":{"type":"ORDER_MODIFIER"},"distinct":false,"is_operator":true,"export_state":false,"arguments":[{"expression":{"class":"COLUMN_REF","type":"COLUMN_REF","query_location":21,"query_location_length":1,"column_names":["a"]}},{"expression":{"class":"COLUMN_REF","type":"COLUMN_REF","query_location":25,"query_location_length":1,"column_names":["b"]}}],"qualified_name":{"path":["+"]}}],"from_table":{"type":"BASE_TABLE","query_location":32,"query_location_length":4,"table_name":"tbl1","qualified_name":{"path":["tbl1"]}},"aggregate_handling":"STANDARD_HANDLING"}}]}
 ```
 
 Skip the default values in the AST (e.g., `"distinct":false`):
@@ -55,7 +55,7 @@ SELECT json_serialize_sql('SELECT 1 + 2; SELECT a + b FROM tbl1', skip_default :
 ```
 
 ```text
-{"error":false,"statements":[{"node":{"type":"SELECT_NODE","select_list":[{"class":"FUNCTION","type":"FUNCTION","query_location":9,"function_name":"+","children":[{"class":"CONSTANT","type":"VALUE_CONSTANT","query_location":7,"value":{"type":{"id":"INTEGER"},"is_null":false,"value":1}},{"class":"CONSTANT","type":"VALUE_CONSTANT","query_location":11,"value":{"type":{"id":"INTEGER"},"is_null":false,"value":2}}],"order_bys":{"type":"ORDER_MODIFIER"},"is_operator":true}],"from_table":{"type":"EMPTY"},"aggregate_handling":"STANDARD_HANDLING"}},{"node":{"type":"SELECT_NODE","select_list":[{"class":"FUNCTION","type":"FUNCTION","query_location":23,"function_name":"+","children":[{"class":"COLUMN_REF","type":"COLUMN_REF","query_location":21,"column_names":["a"]},{"class":"COLUMN_REF","type":"COLUMN_REF","query_location":25,"column_names":["b"]}],"order_bys":{"type":"ORDER_MODIFIER"},"is_operator":true}],"from_table":{"type":"BASE_TABLE","query_location":32,"table_name":"tbl1"},"aggregate_handling":"STANDARD_HANDLING"}}]}
+{"error":false,"statements":[{"node":{"type":"SELECT_NODE","cte_map":{},"select_list":[{"class":"FUNCTION","type":"FUNCTION","query_location":9,"function_name":"+","order_bys":{"type":"ORDER_MODIFIER"},"is_operator":true,"arguments":[{"expression":{"class":"CONSTANT","type":"VALUE_CONSTANT","query_location":7,"query_location_length":1,"literal":{"kind":"INTEGER","text":"1"}}},{"expression":{"class":"CONSTANT","type":"VALUE_CONSTANT","query_location":11,"query_location_length":1,"literal":{"kind":"INTEGER","text":"2"}}}],"qualified_name":{"path":["+"]}}],"from_table":{"type":"EMPTY"},"aggregate_handling":"STANDARD_HANDLING"}},{"node":{"type":"SELECT_NODE","cte_map":{},"select_list":[{"class":"FUNCTION","type":"FUNCTION","query_location":23,"function_name":"+","order_bys":{"type":"ORDER_MODIFIER"},"is_operator":true,"arguments":[{"expression":{"class":"COLUMN_REF","type":"COLUMN_REF","query_location":21,"query_location_length":1,"column_names":["a"]}},{"expression":{"class":"COLUMN_REF","type":"COLUMN_REF","query_location":25,"query_location_length":1,"column_names":["b"]}}],"qualified_name":{"path":["+"]}}],"from_table":{"type":"BASE_TABLE","query_location":32,"query_location_length":4,"table_name":"tbl1","qualified_name":{"path":["tbl1"]}},"aggregate_handling":"STANDARD_HANDLING"}}]}
 ```
 Example with a syntax error:
 
@@ -64,7 +64,7 @@ SELECT json_serialize_sql('TOTALLY NOT VALID SQL');
 ```
 
 ```text
-{"error":true,"error_type":"parser","error_message":"syntax error at or near \"TOTALLY\"","error_subtype":"SYNTAX_ERROR","position":"0"}
+{"error":true,"error_type":"parser","error_message":"syntax error at or near \"VALID\"","location":"[12,5]","position":"12","error_subtype":"SYNTAX_ERROR"}
 ```
 
 Example with deserialize:
@@ -105,7 +105,7 @@ SELECT * FROM json_execute_serialized_sql(json_serialize_sql('TOTALLY NOT VALID 
 
 ```console
 Parser Error:
-Error parsing json: parser: syntax error at or near "TOTALLY"
+Error parsing json: parser: syntax error at or near "VALID"
 ```
 
 Serializing the bound logical plan of a statement with `json_serialize_plan`:

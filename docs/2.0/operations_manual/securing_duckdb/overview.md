@@ -84,6 +84,10 @@ To disable community extensions entirely:
 SET allow_community_extensions = false;
 ```
 
+## Serving DuckDB over the Network
+
+With the [`quack` extension]({% link docs/2.0/quack/overview.md %}), a DuckDB process can act as a server (`CALL quack_serve(...)` or `duckdb -serve`). A Quack server exposes the full SQL surface of the instance, including read and write access to every table its session can see, to any client holding the token. The server binds to `localhost` by default; for remote access, put it behind a TLS-terminating reverse proxy instead of using `allow_other_hostname`. Note that `duckdb -serve` stores its token in a persistent (unencrypted) `quack` secret. For authentication and authorization hooks, see the [Quack security page]({% link docs/2.0/quack/security.md %}).
+
 ## Reporting Vulnerabilities
 
 If you discover a potential vulnerability, please [report it confidentially via GitHub](https://github.com/duckdb/duckdb/security/advisories/new).
