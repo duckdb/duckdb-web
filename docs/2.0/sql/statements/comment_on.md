@@ -126,7 +126,6 @@ SELECT comment FROM duckdb_functions();
 The `COMMENT ON` statement currently has the following limitations:
 
 * It is not possible to comment on schemas or databases.
-* It is not possible to comment on things that have a dependency (e.g., a table with an index).
 
 ## Syntax
 

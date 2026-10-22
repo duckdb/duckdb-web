@@ -125,11 +125,12 @@ This call returns the following information for the given table:
 | `start`        | `BIGINT`  | The start row id of this chunk                                                                                                                     |
 | `count`        | `BIGINT`  | The amount of entries in this storage chunk                                                                                                        |
 | `compression`  | `VARCHAR` | Compression type used for this column – see the [“Lightweight Compression in DuckDB” blog post]({% post_url 2022-10-28-lightweight-compression %}) |
-| `stats`        | `VARCHAR` |                                                                                                                                                    |
+| `stats`        | `VARIANT` |                                                                                                                                                    |
 | `has_updates`  | `BOOLEAN` |                                                                                                                                                    |
 | `persistent`   | `BOOLEAN` | `false` if temporary table                                                                                                                         |
 | `block_id`     | `BIGINT`  | Empty unless persistent                                                                                                                            |
 | `block_offset` | `BIGINT`  | Empty unless persistent                                                                                                                            |
+| `additional_block_ids` | `BIGINT[]` | Empty unless persistent |
 
 See [Storage]({% link docs/2.0/internals/storage.md %}) for more information.
 

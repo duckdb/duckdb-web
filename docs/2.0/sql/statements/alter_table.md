@@ -194,8 +194,8 @@ The `DROP [COLUMN]` clause can be used to remove a column from a table. Note tha
 If you attempt to drop a column with an index on it, DuckDB will return the following error message:
 
 ```console
-Dependency Error:
-Cannot alter entry "..." because there are entries that depend on it.
+Catalog Error:
+Cannot drop this column: an index depends on it!
 ```
 
 ## `[SET [DATA]] TYPE`
@@ -260,7 +260,7 @@ ALTER COLUMN i DROP DEFAULT;
 
 The `SET/DROP DEFAULT` clause modifies the `DEFAULT` value of an existing column. Note that this does not modify any existing data in the column. Dropping the default is equivalent to setting the default value to NULL.
 
-> Warning At the moment DuckDB will not allow you to alter a table if there are any dependencies. That means that if you have an index on a column you will first need to drop the index, alter the table, and then recreate the index. Otherwise, you will get a `Dependency Error`.
+> Warning At the moment, DuckDB does not allow most `ALTER TABLE` operations (e.g., renaming the table, renaming, dropping or changing the type of columns, or setting or dropping `NOT NULL`) on a table that has an index. Adding columns and setting or dropping column defaults are allowed. For other changes, drop the index, alter the table, and then recreate the index. Otherwise, you will get a `Dependency Error`.
 
 ## `ADD PRIMARY KEY` / `ADD UNIQUE`
 

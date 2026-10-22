@@ -195,7 +195,6 @@ WITH ('format-version' = 3) AS
 
 The `UPDATE` and `DELETE` operations have the following limitations:
 
-* They only work on tables that are **not sorted**. Attempting these operations on sorted tables results in an error.
 * DuckDB-Iceberg only writes **positional deletes** (encoded as binary deletion vectors for v3 tables). Copy-on-write functionality is not yet supported.
 * DuckDB-Iceberg only supports **merge-on-read semantics**. If a table has `write.update.mode` or `write.delete.mode` properties set to something other than `merge-on-read`, the operation fails.
 

@@ -108,7 +108,7 @@ they are always available.
 
 | **Description** | Converts seconds since the epoch to a timestamp with time zone. |
 | **Example** | `to_timestamp(1284352323.5)` |
-| **Result** | `2010-09-13 04:32:03.5+00` |
+| **Result** | `2010-09-12 21:32:03.5-07` |
 
 #### `transaction_timestamp()`
 
@@ -158,8 +158,8 @@ provided by the ICU extension.
 Adding to or subtracting from [infinite values]({% link docs/2.0/sql/data_types/timestamp.md %}#special-values) produces the same infinite value.
 
 Addition and subtraction of intervals follows the semantics of the [ICU Calendar add function](https://unicode-org.github.io/icu-docs/apidoc/released/icu4c/classicu_1_1Calendar.html#aa6e19a88ca2225eddcbbe82313c9c095), which the `icu` extension implements natively since DuckDB 2.0.
-For positive intervals (forwards in time) the fields are incremented from least to most significant.
-For negative intervals (backwards in time) the fields are decremented from most to least significant.
+For positive intervals (forwards in time) the fields are incremented from most to least significant.
+For negative intervals (backwards in time) the fields are decremented from least to most significant.
 This produces the same results as Postgres, but does not match some [more recent calendar RFCs](https://www.rfc-editor.org/rfc/rfc5545).
 
 ## ICU Timestamp with Time Zone Functions

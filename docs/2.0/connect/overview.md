@@ -14,7 +14,7 @@ title: Connect
 
 To use DuckDB, you must first create a connection to a database. The exact syntax varies between the [client APIs]({% link docs/2.0/clients/overview.md %}) but it typically involves passing an argument to configure persistence.
 
-Starting from DuckDB 2.0, you can use the [Quack protocol]({% link docs/2.0/quack/overview.md %}) to run DuckDB as a server and set up a client-server connection, directing queries to a remote instance with the [`CONNECT` statement]({% link docs/2.0/sql/statements/connect.md %}).
+Since DuckDB 1.5.3, you can use the [Quack protocol]({% link docs/2.0/quack/overview.md %}) to run DuckDB as a server and set up a client-server connection. DuckDB 2.0 adds the [`CONNECT` statement]({% link docs/2.0/sql/statements/connect.md %}), which directs queries to a remote instance.
 
 ## Persistence
 

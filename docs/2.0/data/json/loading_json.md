@@ -43,8 +43,8 @@ DESCRIBE todos;
 
 | column_name | column_type | null | key  | default | extra |
 |-------------|-------------|------|------|---------|-------|
-| userId      | UBIGINT     | YES  | NULL | NULL    | NULL  |
-| id          | UBIGINT     | YES  | NULL | NULL    | NULL  |
+| userId      | BIGINT      | YES  | NULL | NULL    | NULL  |
+| id          | BIGINT      | YES  | NULL | NULL    | NULL  |
 | title       | VARCHAR     | YES  | NULL | NULL    | NULL  |
 | completed   | BOOLEAN     | YES  | NULL | NULL    | NULL  |
 

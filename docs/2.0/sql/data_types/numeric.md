@@ -96,7 +96,7 @@ SELECT 1::DECIMAL(18, -1);
 
 ```console
 Binder Error:
-DECIMAL type scale must be between 0 and 38
+Type "DECIMAL" does not accept type parameters (INTEGER, INTEGER)
 ```
 
 ### Arithmetic and Internal Representation
@@ -144,10 +144,9 @@ In addition to ordinary numeric values, the floating-point types have several sp
 * `-Infinity`: negative infinity
 * `NaN`: not a number
 
-On machines with the required CPU/FPU support, DuckDB follows the IEEE 754 specification regarding these special values, with two exceptions:
+On machines with the required CPU/FPU support, DuckDB follows the IEEE 754 specification regarding these special values, with one exception:
 
 * `NaN` compares equal to `NaN` and greater than any other floating point number.
-* Some floating point functions, like `sqrt` / `sin` / `asin` throw errors rather than return `NaN` for values outside their ranges of definition.
 
 To insert these values as literals in a SQL command, you must put quotes around them, you may abbreviate `Infinity` as `Inf`, and you may use any capitalization. For example:
 

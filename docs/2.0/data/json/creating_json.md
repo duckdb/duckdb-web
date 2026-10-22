@@ -79,5 +79,5 @@ SELECT json_merge_patch('{"duck": 42}', '{"goose": 123}');
 ```
 
 ```text
-{"goose":123,"duck":42}
+{"duck":42,"goose":123}
 ```

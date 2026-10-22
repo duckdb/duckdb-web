@@ -176,7 +176,7 @@ If you want to enforce type-safety, cast to the enum explicitly:
 ```sql
 SELECT * FROM person
 WHERE current_mood = 'bogus'::mood;
--- Conversion Error: Could not convert string 'bogus' to UINT8
+-- Conversion Error: Could not convert string 'bogus' to ENUM('sad', 'ok', 'happy')
 ```
 
 ## Ordering of Enums

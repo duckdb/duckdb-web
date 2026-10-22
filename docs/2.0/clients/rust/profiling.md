@@ -15,7 +15,7 @@ The Rust client can observe a running or completed query: it can retrieve per-op
 
 ## Profiling
 
-Profiling must be enabled on a connection before metrics are collected. Enable it with the [`enable_profiling` and `profiling_mode` PRAGMAs]({% link docs/2.0/dev/profiling.md %}), run a query, then read the result with `get_profiling_info()`:
+Profiling must be enabled on a connection before metrics are collected. Enable it with the [`enable_profiling` PRAGMA]({% link docs/2.0/dev/profiling.md %}), run a query, then read the result with `get_profiling_info()`:
 
 ```rust
 use duckdb::Connection;
@@ -24,16 +24,14 @@ let conn = Connection::open_in_memory()?;
 
 // Do not print profiling output to stdout after each query (the default when profiling is enabled).
 conn.execute("PRAGMA enable_profiling = 'no_output'", [])?;
-// Collect a comprehensive set of metrics for each operator; 'detailed' is also available.
-conn.execute("PRAGMA profiling_mode = 'standard'", [])?;
 
 conn.execute("SELECT 42", [])?;
 
 let info = conn.get_profiling_info().expect("profiling should be enabled");
-println!("rows returned: {}", info.metrics["ROWS_RETURNED"]);
+println!("profiled children: {}", info.children.len());
 ```
 
-`get_profiling_info()` returns an `Option<ProfilingInfo>`, which is `None` when profiling is not enabled. `ProfilingInfo` is a tree that mirrors DuckDB's query plan: the root (`QUERY_ROOT`) holds metrics for the whole query, such as total `LATENCY` and `ROWS_RETURNED`, and each child node represents a plan operator with its own metrics such as `OPERATOR_NAME` and `OPERATOR_CARDINALITY`. Read a node's metrics through its `metrics` map and its children through `children`.
+`get_profiling_info()` returns an `Option<ProfilingInfo>`, which is `None` when profiling is not enabled. `ProfilingInfo` is a tree whose metrics are grouped and named in lowercase (see the [metrics list]({% link docs/2.0/dev/metrics.md %})): the root's children are the root plan operator, with metrics such as `type`, `timing` and `intermediate_rows`, followed by one node per metric group, such as `query` with `total_time`. Read a node's metrics through its `metrics` map and its children through `children`.
 
 ## Interrupting Queries
 
@@ -62,6 +60,6 @@ fn run_query(conn: Connection) -> Result<()> {
 
 ## Further Reading
 
-* [Profiling]({% link docs/2.0/dev/profiling.md %}) — DuckDB's query profiling output and the `enable_profiling` and `profiling_mode` PRAGMAs.
+* [Profiling]({% link docs/2.0/dev/profiling.md %}) — DuckDB's query profiling output and the `enable_profiling` PRAGMA and the `tracked_metrics` setting.
 * [Run Queries]({% link docs/2.0/clients/rust/querying.md %}) — running the queries whose metrics this page reads and whose execution it interrupts.
 * [Connect]({% link docs/2.0/clients/rust/connecting.md %}) — the `Connection` that profiling and the interrupt handle operate on.

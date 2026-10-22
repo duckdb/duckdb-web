@@ -17,7 +17,7 @@ title: Keywords and Identifiers
 Similarly to other SQL dialects and programming languages, identifiers in DuckDB's SQL are subject to several rules.
 
 * Unquoted identifiers need to conform to a number of rules:
-    * They must not be a reserved keyword (see [`duckdb_keywords()`]({% link docs/2.0/sql/meta/duckdb_table_functions.md %}#duckdb_keywords)), e.g., `SELECT 123 AS SELECT` will fail.
+    * They must not be a reserved keyword (see [`duckdb_keywords()`]({% link docs/2.0/sql/meta/duckdb_table_functions.md %}#duckdb_keywords)), e.g., `CREATE TABLE select (i INTEGER)` will fail.
     * They must not start with a number or special character, e.g., `SELECT 123 AS 1col` is invalid.
     * They cannot contain whitespaces (including tabs and newline characters).
 * Identifiers can be quoted using double-quote characters (`"`). Quoted identifiers can use any keyword, whitespace or special character, e.g., `"SELECT"` and `" § 🦆 ¶ "` are valid identifiers.

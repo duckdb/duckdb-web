@@ -101,10 +101,10 @@ SELECT * FROM points;
 
 -- But we cannot mix different vertex dimensions within the same geometry!
 INSERT INTO points VALUES
-  (5, 'MULTIPOINT (POINT (30 10), POINT Z (30 10 5))');
+  (5, 'GEOMETRYCOLLECTION (POINT (30 10), POINT Z (30 10 5))');
 ----
 Invalid Input Error:
-Geometry has inconsistent Z/M dimension
+Failed to parse geometry: Geometry has inconsistent Z/M dimensions at offset 43
 ```
 
 ## Empty Geometries

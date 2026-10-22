@@ -127,6 +127,8 @@ The type detection works by attempting to convert the values in each column to t
 | TIMESTAMP   |
 | TIMESTAMPTZ |
 | BIGINT      |
+| HUGEINT     |
+| BIGNUM      |
 | DOUBLE      |
 | VARCHAR     |
 

@@ -33,7 +33,7 @@ The output of `EXPLAIN` contains the estimated cardinalities for each operator.
 > |-------------|------------------------------------|
 > | sql         | SELECT CAST(3 AS INTEGER) AS answer |
 
-Because the output is the *optimized* plan, it can differ substantially from the input query (for example through join reordering, constant folding, or subquery introduction). The generated query preserves the result column names, column order, and logical types, but the exact formatting and any generated aliases are not a stable interface. `EXPLAIN (SQL)` does not execute the query, supports only `SELECT`, `VALUES`, and `WITH` queries, and cannot be combined with `ANALYZE` or `FORMAT`.
+Because the output is the *optimized* plan, it can differ substantially from the input query (for example through join reordering, constant folding, or subquery introduction). The generated query preserves the result column names, column order, and logical types, but the exact formatting and any generated aliases are not a stable interface. `EXPLAIN (SQL)` does not execute the query, supports only `SELECT`, `VALUES`, `WITH`, `INSERT`, `UPDATE`, `DELETE` and `MERGE INTO` statements, and cannot be combined with `ANALYZE` or `FORMAT`.
 
 ## `EXPLAIN ANALYZE`
 

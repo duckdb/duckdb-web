@@ -23,7 +23,7 @@ An example of `odbc.ini` with DuckDB:
 ```ini
 [DuckDB]
 Driver = DuckDB Driver
-Database = :memory:
+Database = /path/to/database.duckdb
 access_mode = read_only
 ```
 

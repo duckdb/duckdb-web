@@ -1194,7 +1194,7 @@ Therefore, (nested) values compare the same in `list_sort` as in `ORDER BY`.
 
 By default, if no modifiers are provided, DuckDB sorts `ASC NULLS LAST`.
 I.e., the values are sorted in ascending order and `NULL` values are placed last.
-This is identical to the default sort order of SQLite.
+For ascending order, this matches PostgreSQL's default.
 The default sort order can be changed using [`PRAGMA` statements.](../query_syntax/orderby).
 
 `list_sort` leaves it open to the user whether they want to use the default sort order or a custom order.

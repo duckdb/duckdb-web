@@ -1024,9 +1024,9 @@ const reader = await connection.runAndReadAll(sql, values, types);
 // the target may be read.)
 const reader = await connection.runAndReadUntil(sql, targetRowCount);
 const reader =
-  await connection.runAndReadAll(sql, targetRowCount, values);
+  await connection.runAndReadUntil(sql, targetRowCount, values);
 const reader =
-  await connection.runAndReadAll(sql, targetRowCount, values, types);
+  await connection.runAndReadUntil(sql, targetRowCount, values, types);
 
 // Create a streaming result and don't yet retrieve any rows.
 const result = await connection.stream(sql);

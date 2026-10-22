@@ -391,4 +391,4 @@ ATTACH '⟨warehouse⟩' AS horizon_catalog (
 
 ## Limitations
 
-DuckDB supports Iceberg REST Catalogs backed by S3, S3 Tables, and Google Cloud Storage (GCS). Support for other storage backends is not yet available.
+DuckDB supports Iceberg REST Catalogs backed by S3, S3 Tables, Google Cloud Storage (GCS) and Azure Data Lake Storage (ADLS).

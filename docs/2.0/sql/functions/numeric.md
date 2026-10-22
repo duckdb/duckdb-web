@@ -47,7 +47,7 @@ Integer division (`//`), modulo (`%`), and `INTERVAL / 0` throw an `Invalid Inpu
 
 ### Supported Types
 
-The modulo, bitwise, negation, and factorial operators work only on integral data types,
+The bitwise, bitwise negation, and factorial operators work only on integral data types,
 whereas the others are available for all numeric data types.
 
 ## Numeric Functions

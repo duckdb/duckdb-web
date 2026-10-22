@@ -78,7 +78,7 @@ ORDER BY score DESC;
 | 3.0278411214953107 | MWW/3.5.102 | Merry Wives of Windsor   | FALSTAFF     | to heat as butter; a man of continual dissolution  |
 | 2.739219044070792  | H4/2.4.115  | Henry IV                 | PRINCE HENRY | Didst thou never see Titan kiss a dish of butter?  |
 
-Unlike standard indexes, full-text indexes don't auto-update as the underlying data is changed, so you need to `PRAGMA drop_fts_index(my_fts_index)` and recreate it when appropriate.
+Unlike standard indexes, full-text indexes don't auto-update as the underlying data is changed, so you need to `PRAGMA drop_fts_index('corpus')` and recreate it when appropriate.
 
 ## Note on Generating the Corpus Table
 

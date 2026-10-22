@@ -13,7 +13,7 @@ title: Extension Distribution
 Extension binaries are distributed for several platforms (see below).
 For platforms where packages for certain extensions are not available, users can build them from source and [install the resulting binaries manually]({% link docs/2.0/extensions/advanced_installation_methods.md %}#installing-an-extension-from-an-explicit-path).
 
-All official extensions are distributed for the following platforms.
+Most official extensions are distributed for the following platforms. Some extensions are only available on a subset of these platforms; see the individual extension pages for details.
 
 | Platform name   | Operating system | Architecture    | CPU types                      |
 | --------------- | ---------------- | --------------- | ------------------------------ |
@@ -28,6 +28,7 @@ All official extensions are distributed for the following platforms.
 
 Some extensions are distributed for the following platforms:
 
+* `linux_amd64_musl` and `linux_arm64_musl`
 * `windows_amd64_mingw`
 * `wasm_eh` and `wasm_mvp` (see [DuckDB-Wasm's extensions]({% link docs/2.0/clients/wasm/extensions.md %}))
 

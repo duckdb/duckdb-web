@@ -76,7 +76,7 @@ print(results)
 
 ## Appender API
 
-The DuckDB Julia package also supports the [Appender API]({% link docs/2.0/data/appender.md %}), which is much faster than using prepared statements or individual `INSERT INTO` statements. Appends are made in row-wise format. For every column, an `append()` call should be made, after which the row should be finished by calling `flush()`. After all rows have been appended, `close()` should be used to finalize the Appender and clean up the resulting memory.
+The DuckDB Julia package also supports the [Appender API]({% link docs/2.0/data/appender.md %}), which is much faster than using prepared statements or individual `INSERT INTO` statements. Appends are made in row-wise format. For every column, an `append()` call should be made, after which the row should be finished by calling `end_row()`. After all rows have been appended, `close()` should be used to finalize the Appender and clean up the resulting memory.
 
 ```julia
 using DuckDB, DataFrames, Dates

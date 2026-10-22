@@ -85,7 +85,7 @@ SELECT * FROM read_csv(getvariable('list_of_files'), filename := True);
 
 | a    | filename    |
 |-----:|------------:|
-| 42   | test.csv    |
+| 42   | test1.csv   |
 | 84   | test2.csv   |
 
 If a variable is not set, the `getvariable` function returns `NULL`:

@@ -177,7 +177,7 @@ It returns the expired snapshots, using the same columns as [`ducklake_snapshots
 | Parameter name | Parameter type             | Named parameter | Description |
 | -------------- | -------------------------- | --------------- | ----------- |
 | `catalog`      | `VARCHAR`                  | no              |             |
-| `versions`     | `UBIGINT[]`                | yes             |             |
+| `versions`     | `BIGINT[]`                 | yes             |             |
 | `older_than`   | `TIMESTAMP WITH TIME ZONE` | yes             |             |
 
 ### `ducklake_merge_adjacent_files`

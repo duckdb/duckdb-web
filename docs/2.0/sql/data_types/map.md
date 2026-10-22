@@ -89,7 +89,7 @@ SELECT map_extract(MAP {'key1': 5, 'key2': 43}, 'key1');
 ```
 
 ```sql
-SELECT MAP {'key1': 5, 'key2': 43}['key3'];
+SELECT map_extract(MAP {'key1': 5, 'key2': 43}, 'key3');
 ```
 
 ```text

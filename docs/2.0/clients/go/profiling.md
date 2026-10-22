@@ -44,12 +44,13 @@ _, err = conn.ExecContext(context.Background(), `PRAGMA disable_profiling`)
 check(err)
 ```
 
-`GetProfilingInfo()` returns a `duckdb.ProfilingInfo`, a tree that mirrors DuckDB's query plan. Each node has a `Metrics` map of metric name to value and a `Children` slice of child nodes. The root node (`QUERY_ROOT`) holds metrics measured over the whole query, and each descendant is a plan operator with its own metrics. Walk the tree to read them:
+`GetProfilingInfo()` returns a `duckdb.ProfilingInfo`, a tree that mirrors DuckDB's query plan. Each node has a `Metrics` map of metric name to value and a `Children` slice of child nodes. Metrics are grouped and named in lowercase: the root's children are the root plan operator, whose metrics include `type` and `timing`, followed by one node per metric group, e.g., the `query` group with `total_time`. Walk the tree to read them:
 
 ```go
-log.Printf("query latency: %s", info.Metrics["LATENCY"])
 for _, child := range info.Children {
-    log.Printf("operator: %s", child.Metrics["OPERATOR_NAME"])
+    if opType, ok := child.Metrics["type"]; ok {
+        log.Printf("operator: %s, timing: %s", opType, child.Metrics["timing"])
+    }
 }
 ```
 

@@ -72,21 +72,9 @@ By default the client statically links a pre-built DuckDB library into the binar
 
 ### Linking a Custom Static Library
 
-Build a DuckDB static library from source with DuckDB's `bundle-library` Makefile target, which produces `build/release/libduckdb_bundle.a`:
+Build DuckDB from source. Starting with DuckDB 2.0, the `bundle-library` Makefile target and the merged `libduckdb_bundle.a` archive no longer exist: the build produces `libduckdb_static.a` plus one static archive per extension (e.g., `libparquet_extension.a`), and statically linked extensions have to be registered at startup. See [Statically Linking Extensions]({% link docs/2.0/dev/building/linking_extensions.md %}) for the archives, the required link order and the extension registration.
 
-```bash
-cd /path/to/duckdb
-make bundle-library DUCKDB_PLATFORM=any BUILD_EXTENSIONS="icu;json;parquet;autocomplete"
-```
-
-Then build the Go module against that archive with the `duckdb_use_static_lib` [build tag]({% link docs/2.0/clients/go/overview.md %}#build-tags), passing the linker flags for the archive. For example, on macOS ARM64:
-
-```bash
-CGO_ENABLED=1 \
-CPPFLAGS="-DDUCKDB_STATIC_BUILD" \
-CGO_LDFLAGS="-lduckdb_bundle -lc++ -L/path/to/libs" \
-go build -tags=duckdb_use_static_lib
-```
+Then build the Go module against these archives with the `duckdb_use_static_lib` [build tag]({% link docs/2.0/clients/go/overview.md %}#build-tags), passing the archives in `CGO_LDFLAGS`, with the extension archives listed before `libduckdb_static.a`.
 
 This is also how a local DuckDB checkout is validated from the Go client, and how the client's own `Makefile` and CI build. It is required to target platforms without a pre-built library, including FreeBSD, for which DuckDB publishes no bundled library.
 

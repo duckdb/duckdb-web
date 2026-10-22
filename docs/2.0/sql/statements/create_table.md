@@ -283,7 +283,7 @@ Foreign keys have the following limitations.
 
 Foreign keys with cascading deletes (`FOREIGN KEY ... REFERENCES ... ON DELETE CASCADE`) are not supported.
 
-Inserting into tables with self-referencing foreign keys is currently not supported and will result in the following error:
+Inserting a row that references another row inserted in the same statement (or itself) into a table with a self-referencing foreign key is currently not supported and will result in the following error:
 
 ```console
 Constraint Error:

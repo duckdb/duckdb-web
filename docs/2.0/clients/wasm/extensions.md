@@ -93,7 +93,7 @@ Signing is a property of the binary itself, so copying a DuckDB extension (say t
 
 ## Fetching DuckDB-Wasm Extensions
 
-Official DuckDB extensions are served at `extensions.duckdb.org`, and this is also the default value for the `default_extension_repository` option.
+Official DuckDB extensions are served at `extensions.duckdb.org`, which is used as the extension repository unless `custom_extension_repository` is set.
 When installing extensions, a relevant URL will be built that will look like `extensions.duckdb.org/$duckdb_version_hash/$duckdb_platform/$name.duckdb_extension.gz`.
 
 DuckDB-Wasm extension are fetched only on load, and the URL will look like: `extensions.duckdb.org/duckdb-wasm/$duckdb_version_hash/$duckdb_platform/$name.duckdb_extension.wasm`.

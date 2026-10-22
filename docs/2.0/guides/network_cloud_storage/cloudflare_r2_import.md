@@ -25,7 +25,7 @@ CREATE SECRET (
     TYPE r2,
     KEY_ID '⟨AKIAIOSFODNN7EXAMPLE⟩',
     SECRET '⟨wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY⟩',
-    ACCOUNT_ID '⟨your-33-character-hexadecimal-account-ID⟩'
+    ACCOUNT_ID '⟨your-32-character-hexadecimal-account-ID⟩'
 );
 ```
 

@@ -136,7 +136,7 @@ SELECT
 FROM numbers;
 ```
 
-| id | min(number := (number + id)) | id |
+| id | min((number + id)) | id |
 |---:|-----------------------------:|---:|
 | 1  | 11                           | 3  |
 

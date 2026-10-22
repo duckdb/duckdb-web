@@ -83,7 +83,7 @@ An alternate remote URL can be configured with a SQL command like:
 SET ui_remote_url = 'https://ui.duckdb.org';
 ```
 
-The environment variable `ui_remote_port` can also be used.
+The environment variable `ui_remote_url` can also be used.
 
 This setting is available mainly for testing purposes.
 
@@ -161,4 +161,4 @@ in the [MotherDuck documentation](https://motherduck.com/docs/getting-started/mo
 
 ## Limitations
 
-* The UI currently does not support `windows_arm64`.
+* The UI currently does not support `osx_amd64` and `windows_arm64`.

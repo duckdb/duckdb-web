@@ -172,7 +172,7 @@ There are a number of options exposed that can be passed to the `read_parquet` f
 | `hive_partitioning` | Whether or not to interpret the path as a [Hive partitioned path]({% link docs/2.0/data/partitioning/hive_partitioning.md %}). | `BOOL` | (auto-detected) |
 | `int96_as` | How to read `INT96` columns (a deprecated timestamp encoding used by legacy writers such as Impala and older Spark versions). Options are `timestamp` (microsecond precision), `timestamp_ns` (preserves nanoseconds; out-of-range values saturate) and `struct` (a `STRUCT(date DATE, time TIME_NS)` that preserves the full range and precision). Added in DuckDB 2.0. | `VARCHAR` | `timestamp` |
 | `prefetch_strategy` | Strategy for prefetching column data of row groups (applies unless prefetching is disabled with the `disable_parquet_prefetching` setting). With `auto`, DuckDB picks a strategy at runtime based on the projections and filters of the query. With `whole_group`, the entire row group is always prefetched. Added in DuckDB 2.0. | `VARCHAR` | `auto` |
-| `union_by_name` | Whether the columns of multiple schemas should be [unified by name]({% link docs/2.0/data/multiple_files/combining_schemas.md %}), rather than by position. | `BOOL` | `false` |
+| `union_by_name` | Whether the columns of multiple schemas should be [unified by name]({% link docs/2.0/data/multiple_files/combining_schemas.md %}), rather than using the schema of the first file. | `BOOL` | `false` |
 | `schema` | Allows you to read a Parquet file as if it has the supplied schema. The `MAP` can be keyed by field-id (`INTEGER`) or by column name (`VARCHAR`). | `MAP` | `NULL` |
 | `utf8_validation` | How to handle invalid UTF-8 in string columns. With `strict`, an error is thrown. With `replace`, invalid bytes are replaced by `?`. With `ignore`, invalid bytes are removed. Added in DuckDB 2.0. | `VARCHAR` | `strict` |
 
@@ -384,7 +384,7 @@ COPY
     (FORMAT parquet, COMPRESSION brotli);
 ```
 
-To configure the page size of Parquet file's dictionary pages, use the `STRING_DICTIONARY_PAGE_SIZE_LIMIT` option (default: 1 MB):
+To configure the page size of Parquet file's dictionary pages, use the `STRING_DICTIONARY_PAGE_SIZE_LIMIT` option (default: 1 GiB):
 
 ```sql
 COPY

@@ -28,7 +28,7 @@ Only the entries of the first table can be extracted from `INTERVAL`s or used to
 | `decade` | Gregorian decade | `dec`, `decades`, `decs` | `202` |
 | `hour` | Hours | `hr`, `hours`, `hrs`, `h` | `11` |
 | `microseconds` | Sub-minute microseconds | `microsecond`, `us`, `usec`, `usecs`, `usecond`, `useconds` | `44123456` |
-| `millennium` | Gregorian millennium | `mil`, `millenniums`, `millenia`, `mils`, `millenium` | `3` |
+| `millennium` | Gregorian millennium | `mil`, `millenniums`, `millennia`, `mils`, `millenium` | `3` |
 | `milliseconds` | Sub-minute milliseconds | `millisecond`, `ms`, `msec`, `msecs`, `msecond`, `mseconds` | `44123` |
 | `minute` | Minutes | `min`, `minutes`, `mins`, `m` | `59` |
 | `month` | Gregorian month | `mon`, `months`, `mons` | `8` |

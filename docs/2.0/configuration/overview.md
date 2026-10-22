@@ -344,7 +344,7 @@ Configuration options come with different default [scopes]({% link docs/2.0/sql/
 | `current_dialect` | The SQL dialect used by the parser. | `VARCHAR` | NULL |
 | `enable_profiling` | Enables profiling and sets the output format, which can be `JSON`, `QUERY_TREE`, or `QUERY_TREE_OPTIMIZER`. | `VARCHAR` | NULL |
 | `enable_progress_bar_print` | Controls the printing of the progress bar and requires 'enable_progress_bar' to be true. | `BOOLEAN` | `true` |
-| `enable_progress_bar` | Enables the progress bar, which prints progress to the terminal during long queries. | `BOOLEAN` | `true` |
+| `enable_progress_bar` | Enables the progress bar, which prints progress to the terminal during long queries. | `BOOLEAN` | `false` (`true` in the CLI) |
 | `max_streaming_buffer_size`, `streaming_buffer_size` | The maximum number of bytes a streaming query result buffers (e.g., 1GB). Queued output stays under this cap, and each engine thread may hold, beyond the queue, the units it is still building or handing over from its current chunk. | `VARCHAR` | `10.0 MiB` |
 | `operator_memory_limit` | The maximum memory available for query intermediates (sorts, hash tables) per connection (e.g., 256MB). | `VARCHAR` | NULL |
 | `profile_output`, `profiling_output` | The file to which profiler output is written. When empty, the output is printed to the terminal. | `VARCHAR` |  |
@@ -373,7 +373,7 @@ The following configuration options are deprecated and will be removed in a futu
 | `s3_access_key_id` | S3 Access Key ID | `VARCHAR` | NULL | GLOBAL |
 | `s3_endpoint` | S3 Endpoint | `VARCHAR` | NULL | GLOBAL |
 | `s3_kms_key_id` | S3 KMS Key ID | `VARCHAR` | NULL | GLOBAL |
-| `s3_region` | S3 Region | `VARCHAR` | `us-west-2` | GLOBAL |
+| `s3_region` | S3 Region | `VARCHAR` | NULL | GLOBAL |
 | `s3_requester_pays` | S3 use requester pays mode | `BOOLEAN` | `false` | GLOBAL |
 | `s3_secret_access_key` | S3 Access Key | `VARCHAR` | NULL | GLOBAL |
 | `s3_session_token` | S3 Session Token | `VARCHAR` | NULL | GLOBAL |

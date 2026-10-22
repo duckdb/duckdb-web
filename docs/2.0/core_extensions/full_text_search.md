@@ -167,5 +167,5 @@ ORDER BY score DESC;
 |---------------------|------------------------------------------------------------|------:|
 | doc2                | The cat is a domestic species of small carnivorous mammal. | 0.0   |
 
-> Warning The FTS index will not update automatically when the input table changes.
-> A workaround of this limitation can be recreating the index to refresh.
+> Warning By default, the FTS index will not update automatically when the input table changes.
+> To keep it up to date, create the index with `incremental = 1` (this requires the document identifier column to be `NOT NULL`), or recreate the index to refresh it.

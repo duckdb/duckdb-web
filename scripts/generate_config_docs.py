@@ -72,7 +72,7 @@ FROM (
         WHEN value = ''
         THEN ''
         WHEN name = 'enable_progress_bar'
-        THEN surround_with_backticks('true')
+        THEN '`false` (`true` in the CLI)'
         WHEN name='memory_limit' OR name='max_memory'
         THEN '80% of RAM'
         WHEN name='secret_directory'

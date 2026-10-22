@@ -74,7 +74,7 @@ The first step is to connect to the data source so that the application can perf
 
 #### Connection String
 
-A [connection string](https://learn.microsoft.com/en-us/sql/odbc/reference/develop-app/connection-strings?view=sql-server-ver16) is a string which contains the information needed to connect to a data source. It is formatted as a semicolon separated list of key-value pairs, however DuckDB currently only utilizes the DSN and ignores the rest of the parameters.
+A [connection string](https://learn.microsoft.com/en-us/sql/odbc/reference/develop-app/connection-strings?view=sql-server-ver16) is a string which contains the information needed to connect to a data source. It is formatted as a semicolon separated list of key-value pairs, e.g., `DSN=DuckDB;access_mode=READ_ONLY`, where the keys can be the DSN, `Database` or any of the [DuckDB configuration options]({% link docs/2.0/configuration/overview.md %}).
 
 #### DSN
 
@@ -203,8 +203,8 @@ SQLAllocHandle(SQL_HANDLE_DBC, env, &dbc);
 
 SQLCHAR str[1024];
 SQLSMALLINT strl;
-std::string dsn = "DSN=DuckDB;access_mode=READ_ONLY"
-SQLDriverConnect(dbc, nullptr, (SQLCHAR*)dsn.c_str(), SQL_NTS, str, sizeof(str), &strl, SQL_DRIVER_COMPLETE)
+std::string dsn = "DSN=DuckDB;access_mode=READ_ONLY";
+SQLDriverConnect(dbc, nullptr, (SQLCHAR*)dsn.c_str(), SQL_NTS, str, sizeof(str), &strl, SQL_DRIVER_COMPLETE);
 
 std::cout << "Connected!" << std::endl;
 ```

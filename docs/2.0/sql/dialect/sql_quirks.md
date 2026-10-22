@@ -72,7 +72,7 @@ For signed values, `INT8` corresponds to `BIGINT` (8 bytes).
 
 ### Extract Functions
 
-`list_extract` / `map_extract` return `NULL` on non-existing keys. `struct_extract` throws an error because keys of structs are like columns.
+`list_extract` / `map_extract_value` return `NULL` on non-existing keys (`map_extract` returns an empty list). `struct_extract` throws an error because keys of structs are like columns.
 
 ## Clauses
 
