@@ -82,6 +82,20 @@ The `secret_directory` setting applies to the current DuckDB instance and is not
 
 Note that setting the value of the `home_directory` configuration option has no effect on the location of the secrets.
 
+### Connection-Scoped Secrets
+
+> New As of DuckDB 2.0, a secret can be stored in connection-scoped storage so that it is only visible to queries running on the same connection. Use the `IN connection` clause:
+
+```sql
+CREATE SECRET my_secret IN connection (
+    TYPE s3,
+    KEY_ID 'my_secret_key',
+    SECRET 'my_secret_value'
+);
+```
+
+Connection-scoped secrets are always temporary. This lets different connections hold secrets of the same type and scope without clashing.
+
 ## Deleting Secrets
 
 Secrets can be deleted using the [`DROP SECRET` statement]({% link docs/2.0/sql/statements/create_secret.md %}#syntax-for-drop-secret), e.g.:
