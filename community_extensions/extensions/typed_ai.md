@@ -145,8 +145,8 @@ docs:
     -- 1 none   2 contact details   3 health   4 money   5 none
     ```
 
-extension_star_count: 1
-extension_star_count_pretty: 1
+extension_star_count: 2
+extension_star_count_pretty: 2
 extension_download_count: 1599
 extension_download_count_pretty: 1.6k
 image: '/images/community_extensions/social_preview/preview_community_extension_typed_ai.png'

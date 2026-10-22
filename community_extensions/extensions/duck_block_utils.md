@@ -212,8 +212,8 @@ docs:
     ) TO 'output.md' (FORMAT markdown, MARKDOWN_MODE duck_block);
     ```
 
-extension_star_count: 4
-extension_star_count_pretty: 4
+extension_star_count: 5
+extension_star_count_pretty: 5
 extension_download_count: 6540
 extension_download_count_pretty: 6.5k
 image: '/images/community_extensions/social_preview/preview_community_extension_duck_block_utils.png'
