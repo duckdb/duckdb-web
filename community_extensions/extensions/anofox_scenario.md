@@ -7,7 +7,7 @@ excerpt: |
 
 extension:
   name: anofox_scenario
-  version: 2026.10.18
+  version: 2026.10.21
   description: Git-like branching for analytical databases. Attach isolated what-if scenarios as catalogs, edit them with ordinary SQL on copy-on-write delta storage, branch, diff, and merge them back.
   language: C++
   build: cmake
@@ -19,8 +19,8 @@ extension:
 
 repo:
   github: DataZooDE/anofox-scenario
-  ref: 6440b89b780950d69379e20f0d7abc9329669cf6
-  variegata: 6440b89b780950d69379e20f0d7abc9329669cf6
+  ref: 1813667992e470e4f775e2a5714ed6a23e213821
+  variegata: 1813667992e470e4f775e2a5714ed6a23e213821
 
 docs:
   hello_world: |
@@ -89,13 +89,13 @@ This table covers all DuckDB releases that have not reached [end-of-life](https:
 
 | Platform | 1.4.4 | 1.4.5 | 1.5.5 | 1.5.6 | 2.0.0 |
 | :--- | :---: | :---: | :---: | :---: | :---: |
-| Linux AMD64 | ❌ | ❌ | ✅ | ✅ | ❌ |
-| Linux ARM64 | ❌ | ❌ | ✅ | ✅ | ❌ |
+| Linux AMD64 | ❌ | ❌ | ✅ | ✅ | ✅ |
+| Linux ARM64 | ❌ | ❌ | ✅ | ✅ | ✅ |
 | macOS AMD64 | ❌ | ❌ | ✅ | ✅ | ❌ |
-| macOS ARM64 | ❌ | ❌ | ✅ | ✅ | ❌ |
-| Windows AMD64 | ❌ | ❌ | ✅ | ✅ | ❌ |
+| macOS ARM64 | ❌ | ❌ | ✅ | ✅ | ✅ |
+| Windows AMD64 | ❌ | ❌ | ✅ | ✅ | ✅ |
 | Windows ARM64 | ❌ | ❌ | ❌ | ❌ | ❌ |
-| WebAssembly | ❌ | ❌ | ✅ | ✅ | ❌ |
+| WebAssembly | ❌ | ❌ | ✅ | ✅ | ✅ |
 
 ### Installing and Loading
 ```sql
