@@ -58,9 +58,10 @@ SELECT *
 FROM iceberg_scan('s3://⟨bucket⟩/⟨iceberg_table_folder⟩/metadata/⟨id⟩.metadata.json');
 ```
 
-Note that you need to link directly to the metadata file. Otherwise, you'll get an error like this:
+If you pass the table folder instead of the metadata file, DuckDB looks for a `version-hint.text` file in the table's `metadata` directory. If there is no such file, you'll get an error like this:
 
 ```console
-IO Error:
-Cannot open file "s3://bucket/iceberg_table_folder/metadata/version-hint.text": No such file or directory
+Invalid Configuration Error: Failed to read iceberg table. No version was provided and no version-hint could be found, globbing the filesystem to locate the latest version is disabled by default as this is considered unsafe and could result in reading uncommitted data. To enable this use 'SET unsafe_enable_version_guessing = true;'
 ```
+
+In this case, link directly to the metadata file or see [Selecting Metadata Versions]({% link docs/2.0/core_extensions/iceberg/iceberg_options.md %}#selecting-metadata-versions).

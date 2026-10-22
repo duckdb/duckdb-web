@@ -73,16 +73,17 @@ curl https://install.duckdb.org | bash
 <a href="https://install.duckdb.org/v{{ site.next_major_duckdb_version }}/{{ site.data.checksums_20.artifacts.cli.windows.x86_64.filename }}" class="download-btn" target="_blank">{{ site.data.checksums_20.artifacts.cli.windows.x86_64.filename }}</a>
 </div>
 
-<div data-install="odbc macos" data-version="{% if site.current_duckdb_odbc_short_version != "" %}{{ site.current_duckdb_odbc_short_version }}{% else %}{{ site.lts_duckdb_odbc_short_version }}{% endif %}">
-<a href="https://github.com/duckdb/duckdb-odbc/releases/download/v{% if site.current_duckdb_odbc_version != "" %}{{ site.current_duckdb_odbc_version }}{% else %}{{ site.lts_duckdb_odbc_version }}{% endif %}/duckdb_odbc-osx-universal.zip" class="download-btn" target="_blank">duckdb_odbc-osx-universal.zip</a>
+{%- assign odbc_20 = site.data.checksums_20.artifacts.odbc -%}
+<div data-install="odbc macos" data-version="{{ site.next_major_duckdb_odbc_short_version }}">
+<a href="https://github.com/duckdb/duckdb-odbc/releases/download/v{{ site.next_major_duckdb_odbc_version }}/{{ odbc_20.macos.arm64.filename }}" class="download-btn" target="_blank">{{ odbc_20.macos.arm64.filename }}</a>
 </div>
 
-<div data-install="odbc linux" data-version="{% if site.current_duckdb_odbc_short_version != "" %}{{ site.current_duckdb_odbc_short_version }}{% else %}{{ site.lts_duckdb_odbc_short_version }}{% endif %}">
-<a href="https://github.com/duckdb/duckdb-odbc/releases/download/v{% if site.current_duckdb_odbc_version != "" %}{{ site.current_duckdb_odbc_version }}{% else %}{{ site.lts_duckdb_odbc_version }}{% endif %}/duckdb_odbc-linux-amd64.zip" class="download-btn" target="_blank">duckdb_odbc-linux-amd64.zip</a>
+<div data-install="odbc linux" data-version="{{ site.next_major_duckdb_odbc_short_version }}">
+<a href="https://github.com/duckdb/duckdb-odbc/releases/download/v{{ site.next_major_duckdb_odbc_version }}/{{ odbc_20.linux.x86_64.filename }}" class="download-btn" target="_blank">{{ odbc_20.linux.x86_64.filename }}</a>
 </div>
 
-<div data-install="odbc windows" data-version="{% if site.current_duckdb_odbc_short_version != "" %}{{ site.current_duckdb_odbc_short_version }}{% else %}{{ site.lts_duckdb_odbc_short_version }}{% endif %}">
-<a href="https://github.com/duckdb/duckdb-odbc/releases/download/v{% if site.current_duckdb_odbc_version != "" %}{{ site.current_duckdb_odbc_version }}{% else %}{{ site.lts_duckdb_odbc_version }}{% endif %}/duckdb_odbc-windows-amd64.zip" class="download-btn" target="_blank">duckdb_odbc-windows-amd64.zip</a>
+<div data-install="odbc windows" data-version="{{ site.next_major_duckdb_odbc_short_version }}">
+<a href="https://github.com/duckdb/duckdb-odbc/releases/download/v{{ site.next_major_duckdb_odbc_version }}/{{ odbc_20.windows.x86_64.filename }}" class="download-btn" target="_blank">{{ odbc_20.windows.x86_64.filename }}</a>
 </div>
 
 <div data-install="rust" data-version="{% if site.current_duckdb_rust_version != "" %}{{ site.current_duckdb_rust_version }}{% else %}{{ site.lts_duckdb_rust_version }}{% endif %}">

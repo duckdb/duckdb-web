@@ -406,7 +406,7 @@ install.packages("duckdb", repos="https://p3m.dev/cran/__linux__/manylinux_2_28/
 
 {%- highlight r -%}
 install.packages("DBI")
-install.packages("duckdb.{{ site.lts_short_duckdb_version }}", repos = "https://duckdb.r-universe.dev"))
+install.packages("duckdb.{{ site.lts_short_duckdb_version }}", repos = "https://duckdb.r-universe.dev")
 {%- endhighlight -%}
 
 <div class="alternative">
@@ -622,10 +622,6 @@ npm install @duckdb/duckdb-wasm@{{ site.lts_duckdb_wasm_tag }}
 <div class="preview"
     data-environment="wasm"
     data-docs="{% link docs/2.0/clients/wasm/overview.md %}">
-
-{%- highlight bash -%}
-npm install @duckdb/duckdb-wasm@{{ site.next_major_duckdb_wasm_version }}
-{%- endhighlight -%}
 
 <p>See the <a href="https://github.com/duckdb/duckdb-wasm">GitHub repository</a>.</p>
 
@@ -864,7 +860,7 @@ go get github.com/duckdb/duckdb-go/v2
 <a href="https://github.com/duckdb/duckdb-odbc/releases/download/v{{ site.current_duckdb_odbc_version }}/duckdb_odbc-windows-amd64.zip" class="download-btn" download="duckdb_odbc-windows-amd64.zip" rel="noopener noreferrer">duckdb_odbc-windows-amd64.zip</a>
 {%- include checksum_inline.html environment="odbc" platform="windows" architecture="x86_64" version="current" -%}
 
-<a href="https://github.com/duckdb/duckdb-odbc/releases/download/v{{ site.current_duckdb_odbc_version }}/duckdb_odbc-windows-arm64.zip" class="download-btn" download="duckdb_odbc-windows-amd64.zip" rel="noopener noreferrer">duckdb_odbc-windows-arm64.zip</a>
+<a href="https://github.com/duckdb/duckdb-odbc/releases/download/v{{ site.current_duckdb_odbc_version }}/duckdb_odbc-windows-arm64.zip" class="download-btn" download="duckdb_odbc-windows-arm64.zip" rel="noopener noreferrer">duckdb_odbc-windows-arm64.zip</a>
 {%- include checksum_inline.html environment="odbc" platform="windows" architecture="arm64" version="current" -%}
 
 </div>
@@ -903,7 +899,7 @@ go get github.com/duckdb/duckdb-go/v2
 <a href="https://github.com/duckdb/duckdb-odbc/releases/download/v{{ site.lts_duckdb_odbc_version }}/duckdb_odbc-windows-amd64.zip" class="download-btn" download="duckdb_odbc-windows-amd64.zip" rel="noopener noreferrer">duckdb_odbc-windows-amd64.zip</a>
 {%- include checksum_inline.html environment="odbc" platform="windows" architecture="x86_64" version="lts" -%}
 
-<a href="https://github.com/duckdb/duckdb-odbc/releases/download/v{{ site.lts_duckdb_odbc_version }}/duckdb_odbc-windows-arm64.zip" class="download-btn" download="duckdb_odbc-windows-amd64.zip" rel="noopener noreferrer">duckdb_odbc-windows-arm64.zip</a>
+<a href="https://github.com/duckdb/duckdb-odbc/releases/download/v{{ site.lts_duckdb_odbc_version }}/duckdb_odbc-windows-arm64.zip" class="download-btn" download="duckdb_odbc-windows-arm64.zip" rel="noopener noreferrer">duckdb_odbc-windows-arm64.zip</a>
 {%- include checksum_inline.html environment="odbc" platform="windows" architecture="arm64" version="lts" -%}
 
 </div>

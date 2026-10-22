@@ -20,7 +20,7 @@ Please refer to the [ADBC documentation page](https://arrow.apache.org/adbc/curr
 
 ## Implemented Functionality
 
-The DuckDB-ADBC driver implements the full ADBC specification, with the exception of the `ConnectionReadPartition` and `StatementExecutePartitions` functions. Both of these functions exist to support systems that internally partition the query results, which does not apply to DuckDB.
+The DuckDB-ADBC driver implements the full ADBC specification, with the exception of the `ConnectionReadPartition`, `StatementExecutePartitions` and `StatementSetSubstraitPlan` functions. The first two exist to support systems that internally partition the query results, which does not apply to DuckDB. Substrait plans are not supported.
 In this section, we will describe the main functions that exist in ADBC, along with the arguments they take and provide examples for each function.
 
 ### Database
@@ -59,9 +59,9 @@ A set of functions that retrieve metadata about the database. In general, these 
 | Function name | Description | Arguments | Example |
 |:---|:-|:---|:----|
 | `ConnectionGetInfo` | Get metadata about the driver and database. | `(AdbcConnection*, const uint32_t*, size_t, ArrowArrayStream*, AdbcError*)` | `AdbcConnectionGetInfo(&adbc_connection, NULL, 0, &arrow_stream, &adbc_error)` |
-| `ConnectionGetObjects` | Get a hierarchical view of all catalogs, database schemas, tables and columns. | `(AdbcConnection*, int, const char*, const char*, const char*, const char**, const char*, ArrowArrayStream*, AdbcError*)` | `AdbcDatabaseInit(&adbc_database, &adbc_error)` |
-| `ConnectionGetTableSchema` | Get the Arrow schema of a table. | `(AdbcConnection*, const char*, const char*, const char*, ArrowSchema*, AdbcError*)` | `AdbcDatabaseRelease(&adbc_database, &adbc_error)` |
-| `ConnectionGetTableTypes` | Get a list of table types in the database. | `(AdbcConnection*, ArrowArrayStream*, AdbcError*)` | `AdbcDatabaseNew(&adbc_database, &adbc_error)` |
+| `ConnectionGetObjects` | Get a hierarchical view of all catalogs, database schemas, tables and columns. | `(AdbcConnection*, int, const char*, const char*, const char*, const char**, const char*, ArrowArrayStream*, AdbcError*)` | `AdbcConnectionGetObjects(&adbc_connection, ADBC_OBJECT_DEPTH_ALL, NULL, NULL, NULL, NULL, NULL, &arrow_stream, &adbc_error)` |
+| `ConnectionGetTableSchema` | Get the Arrow schema of a table. | `(AdbcConnection*, const char*, const char*, const char*, ArrowSchema*, AdbcError*)` | `AdbcConnectionGetTableSchema(&adbc_connection, NULL, NULL, "my_table", &arrow_schema, &adbc_error)` |
+| `ConnectionGetTableTypes` | Get a list of table types in the database. | `(AdbcConnection*, ArrowArrayStream*, AdbcError*)` | `AdbcConnectionGetTableTypes(&adbc_connection, &arrow_stream, &adbc_error)` |
 
 The `ConnectionGetInfo` function supports the following info codes:
 
@@ -100,7 +100,6 @@ Functions related to query execution:
 | Function name | Description | Arguments | Example |
 |:---|:-|:---|:----|
 | `StatementSetSqlQuery` | Set the SQL query to execute. The query can then be executed with StatementExecuteQuery. | `(AdbcStatement*, const char*, AdbcError*)` | `AdbcStatementSetSqlQuery(&adbc_statement, "SELECT * FROM TABLE", &adbc_error)` |
-| `StatementSetSubstraitPlan` | Set a substrait plan to execute. The query can then be executed with StatementExecuteQuery. | `(AdbcStatement*, const uint8_t*, size_t, AdbcError*)` | `AdbcStatementSetSubstraitPlan(&adbc_statement, substrait_plan, length, &adbc_error)` |
 | `StatementExecuteQuery` | Execute a statement and get the results. | `(AdbcStatement*, ArrowArrayStream*, int64_t*, AdbcError*)` | `AdbcStatementExecuteQuery(&adbc_statement, &arrow_stream, &rows_affected, &adbc_error)` |
 | `StatementPrepare` | Turn this statement into a prepared statement to be  executed multiple times. | `(AdbcStatement*, AdbcError*)` | `AdbcStatementPrepare(&adbc_statement, &adbc_error)` |
 

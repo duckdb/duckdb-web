@@ -50,7 +50,7 @@ duckdb = { git = "https://github.com/duckdb/duckdb-rs", branch = "main", feature
 duckdb = { git = "https://github.com/duckdb/duckdb-rs", rev = "abc123def", features = ["bundled"] }
 ```
 
-For the LTS release line that stays on DuckDB 1.4 Andium, use the `v1.4-andium` branch.
+For the DuckDB 1.4 Andium LTS release line, use the `v1.4-andium` branch.
 
 > Tip The Rust client offers a large set of Cargo [feature flags](#feature-flags) that turn on file-format readers, the Arrow and Polars integrations, connection pooling, and the function and extension interfaces. Enable only the features a project uses to keep build times and binary size down.
 

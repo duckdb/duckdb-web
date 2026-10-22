@@ -54,7 +54,7 @@ import "github.com/duckdb/duckdb-go/v2"
 
 Starting with DuckDB 1.5.0, the `duckdb-go` version encodes the DuckDB version it bundles in its second semantic-versioning component. That component is the DuckDB `major`, `minor`, and `patch` numbers concatenated, with `minor` and `patch` each zero-padded to two digits: DuckDB 1.5.0 maps to `duckdb-go` v2.10500.x, and DuckDB {% if site.next_major_duckdb_go_version != "" %}{{ site.next_major_duckdb_go_version }} maps to {{ site.next_major_duckdb_go_tag }}{% else %}{{ site.current_duckdb_go_version }} maps to {{ site.current_duckdb_go_tag }}{% endif %}. The [README](https://github.com/duckdb/duckdb-go#readme) has the full mapping table for earlier releases.
 
-The LTS release line that stays on DuckDB 1.4 Andium is published as its own tags, which still follow the client's older versioning scheme. Select one in `go.mod` the same way as any other version; see the [releases page](https://github.com/duckdb/duckdb-go/releases) for the available tags.
+The DuckDB 1.4 Andium LTS release line is published as its own tags, which still follow the client's older versioning scheme. Select one in `go.mod` the same way as any other version; see the [releases page](https://github.com/duckdb/duckdb-go/releases) for the available tags.
 
 > This project moved from `github.com/marcboeker/go-duckdb` to `github.com/duckdb/duckdb-go` starting with v2.5.0. All versions prior to v2.5.0 use the old import paths. See [Migrating from `marcboeker/go-duckdb`](#migrating-from-marcboekergo-duckdb) below.
 

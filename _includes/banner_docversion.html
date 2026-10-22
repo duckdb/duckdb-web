@@ -14,10 +14,10 @@
 		{% assign banner_class = "lts" %}
 		{% assign banner_icon = "clock" %}
 		{% capture banner_text %}This page is for DuckDB {{ version_viewed }} (LTS).{% endcapture %}
-	{% elsif version_viewed_status == "preview" %}
-		{% assign banner_class = "preview" %}
-		{% assign banner_icon = "beaker-02" %}
-		{% capture banner_text %}This page is for DuckDB {{ site.next_major_short_duckdb_version }} (preview).{% endcapture %}
+	{% elsif version_viewed_status == "maintained" %}
+		{% assign banner_class = "lts" %}
+		{% assign banner_icon = "clock" %}
+		{% capture banner_text %}This page is for DuckDB {{ version_viewed }}.{% endcapture %}
 	{% else %}
 		{% assign banner_class = "outdated" %}
 		{% assign banner_icon = "alert-octagon" %}
