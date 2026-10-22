@@ -146,6 +146,18 @@ Starting with version 1.3.0, DuckDB supports caching remote data. To inspect the
 FROM duckdb_external_file_cache();
 ```
 
+The external file cache follows the `Cache-Control` headers of HTTP responses: data from a response marked `no-store`, `no-cache` or `private`, or from a response that is already stale (e.g., `max-age=0`), is not reused. Object stores often send such headers on authenticated reads. For example, Google Cloud Storage returns `Cache-Control: private, max-age=0` for every read of a non-public object, so by default, these files are read from the object store again on every query.
+
+To reuse cached data regardless of these headers, set `enable_external_file_cache` explicitly, even though it is enabled by default:
+
+```sql
+SET enable_external_file_cache = true;
+```
+
+Cached data is still validated against the remote file as configured by the `validate_external_file_cache` setting.
+
+> Warning The external file cache is shared by all connections of a database instance. Only set this option if every connection may read the cached files, e.g., because all connections use the same credentials.
+
 ## Best Practices for Using Connections
 
 DuckDB will perform best when reusing the same database connection many times. Disconnecting and reconnecting on every query will incur some overhead, which can reduce performance when running many small queries. DuckDB also caches some data and metadata in memory, and that cache is lost when the last open connection is closed. Frequently, a single connection will work best, but a connection pool may also be used.
