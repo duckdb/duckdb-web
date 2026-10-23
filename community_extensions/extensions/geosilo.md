@@ -64,26 +64,7 @@ LOAD {{ page.extension.name }};
 
 <div class="extension_functions_table"></div>
 
-|  function_name   | function_type | description | comment | examples |
-|------------------|---------------|-------------|---------|----------|
-| ST_Area          | scalar        | NULL        | NULL    | NULL     |
-| ST_GeometryType  | scalar        | NULL        | NULL    | NULL     |
-| ST_IsEmpty       | scalar        | NULL        | NULL    | NULL     |
-| ST_Length        | scalar        | NULL        | NULL    | NULL     |
-| ST_NPoints       | scalar        | NULL        | NULL    | NULL     |
-| ST_Perimeter     | scalar        | NULL        | NULL    | NULL     |
-| ST_X             | scalar        | NULL        | NULL    | NULL     |
-| ST_XMax          | scalar        | NULL        | NULL    | NULL     |
-| ST_XMin          | scalar        | NULL        | NULL    | NULL     |
-| ST_Y             | scalar        | NULL        | NULL    | NULL     |
-| ST_YMax          | scalar        | NULL        | NULL    | NULL     |
-| ST_YMin          | scalar        | NULL        | NULL    | NULL     |
-| geosilo_decode   | scalar        | NULL        | NULL    | NULL     |
-| geosilo_decode   | scalar        | NULL        | NULL    | NULL     |
-| geosilo_encode   | scalar        | NULL        | NULL    | NULL     |
-| geosilo_encode   | scalar        | NULL        | NULL    | NULL     |
-| geosilo_metadata | scalar        | NULL        | NULL    | NULL     |
-| geosilo_metadata | scalar        | NULL        | NULL    | NULL     |
+This extension does not add any functions.
 
 ### Overloaded Functions
 
@@ -95,9 +76,7 @@ This extension does not add any function overloads.
 
 <div class="extension_types_table"></div>
 
-| type_name | type_size | logical_type | type_category | internal |
-|-----------|----------:|--------------|---------------|----------|
-| GEOSILO   | 16        | BLOB         | NULL          | true     |
+This extension does not add any types.
 
 ### Added Settings
 

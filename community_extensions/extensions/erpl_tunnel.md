@@ -100,10 +100,11 @@ This extension does not add any types.
 
 <div class="extension_settings_table"></div>
 
-|          name          |                                                         description                                                         | input_type | scope  | aliases |
-|------------------------|-----------------------------------------------------------------------------------------------------------------------------|------------|--------|---------|
-| datazoo_banner         | Show the DataZoo feedback banner when an extension is loaded in an interactive terminal (at most once a day per extension). | BOOLEAN    | GLOBAL | []      |
-| erpl_telemetry_enabled | Enable ERPL telemetry, see https://erpl.io/telemetry for details.                                                           | BOOLEAN    | GLOBAL | []      |
-| erpl_telemetry_key     | Telemetry key, see https://erpl.io/telemetry for details.                                                                   | VARCHAR    | GLOBAL | []      |
+|          name          |                                                         description                                                         | input_type | scope  | aliases |                   typed_value                   |
+|------------------------|-----------------------------------------------------------------------------------------------------------------------------|------------|--------|---------|-------------------------------------------------|
+| datazoo_banner         | Show the DataZoo feedback banner when an extension is loaded in an interactive terminal (at most once a day per extension). | BOOLEAN    | GLOBAL | []      | true                                            |
+| erpl_telemetry_enabled | Enable ERPL telemetry, see https://erpl.io/telemetry for details.                                                           | BOOLEAN    | GLOBAL | []      | true                                            |
+| erpl_telemetry_key     | Telemetry key, see https://erpl.io/telemetry for details.                                                                   | VARCHAR    | GLOBAL | []      | phc_t3wwRLtpyEmLHYaZCSszG0MqVr74J6wnCrj9D41zk2t |
+| temp_directory         | Set the directory to which temporary files are written.                                                                     | VARCHAR    | GLOBAL | []      | post.db.tmp                                     |
 
 

@@ -76,8 +76,8 @@ docs:
     caches, cache statistics, OpenDAL I/O statistics, read-only attachments,
     and multiple read-only processes alongside a single writer.
 
-extension_star_count: 86
-extension_star_count_pretty: 86
+extension_star_count: 87
+extension_star_count_pretty: 87
 extension_download_count: 1648
 extension_download_count_pretty: 1.6k
 image: '/images/community_extensions/social_preview/preview_community_extension_duckdb_object_storage.png'
@@ -141,18 +141,19 @@ This extension does not add any types.
 
 <div class="extension_settings_table"></div>
 
-|                    name                     |                        description                         | input_type | scope  | aliases |
-|---------------------------------------------|------------------------------------------------------------|------------|--------|---------|
-| duckdb_objfs_backend                        | Storage backend: s3, local, or memory                      | VARCHAR    | GLOBAL | []      |
-| duckdb_objfs_bucket                         | S3 bucket used by the DuckDB object filesystem             | VARCHAR    | GLOBAL | []      |
-| duckdb_objfs_cache_shards                   | In-memory cache shard count; zero selects the CPU count    | UBIGINT    | GLOBAL | []      |
-| duckdb_objfs_memory_cache_size              | Foyer data-block cache capacity in bytes                   | UBIGINT    | GLOBAL | []      |
-| duckdb_objfs_metadata_cache_size            | Foyer SST metadata cache capacity in bytes                 | UBIGINT    | GLOBAL | []      |
-| duckdb_objfs_persistent_cache_on_compaction | Populate the persistent cache from compaction output       | BOOLEAN    | GLOBAL | []      |
-| duckdb_objfs_persistent_cache_on_flush      | Populate the persistent cache from memtable flush output   | BOOLEAN    | GLOBAL | []      |
-| duckdb_objfs_persistent_cache_part_size     | Persistent SST cache part size in bytes                    | UBIGINT    | GLOBAL | []      |
-| duckdb_objfs_persistent_cache_path          | Local path for the persistent SST cache; empty disables it | VARCHAR    | GLOBAL | []      |
-| duckdb_objfs_persistent_cache_size          | Persistent SST cache capacity in bytes                     | UBIGINT    | GLOBAL | []      |
-| duckdb_objfs_root                           | Local directory or S3 object prefix used by the filesystem | VARCHAR    | GLOBAL | []      |
+|                    name                     |                        description                         | input_type | scope  | aliases | typed_value |
+|---------------------------------------------|------------------------------------------------------------|------------|--------|---------|-------------|
+| duckdb_objfs_backend                        | Storage backend: s3, local, or memory                      | VARCHAR    | GLOBAL | []      | local       |
+| duckdb_objfs_bucket                         | S3 bucket used by the DuckDB object filesystem             | VARCHAR    | GLOBAL | []      | NULL        |
+| duckdb_objfs_cache_shards                   | In-memory cache shard count; zero selects the CPU count    | UBIGINT    | GLOBAL | []      | 0           |
+| duckdb_objfs_memory_cache_size              | Foyer data-block cache capacity in bytes                   | UBIGINT    | GLOBAL | []      | 536870912   |
+| duckdb_objfs_metadata_cache_size            | Foyer SST metadata cache capacity in bytes                 | UBIGINT    | GLOBAL | []      | 134217728   |
+| duckdb_objfs_persistent_cache_on_compaction | Populate the persistent cache from compaction output       | BOOLEAN    | GLOBAL | []      | false       |
+| duckdb_objfs_persistent_cache_on_flush      | Populate the persistent cache from memtable flush output   | BOOLEAN    | GLOBAL | []      | false       |
+| duckdb_objfs_persistent_cache_part_size     | Persistent SST cache part size in bytes                    | UBIGINT    | GLOBAL | []      | 4194304     |
+| duckdb_objfs_persistent_cache_path          | Local path for the persistent SST cache; empty disables it | VARCHAR    | GLOBAL | []      |             |
+| duckdb_objfs_persistent_cache_size          | Persistent SST cache capacity in bytes                     | UBIGINT    | GLOBAL | []      | 17179869184 |
+| duckdb_objfs_root                           | Local directory or S3 object prefix used by the filesystem | VARCHAR    | GLOBAL | []      | NULL        |
+| temp_directory                              | Set the directory to which temporary files are written.    | VARCHAR    | GLOBAL | []      | post.db.tmp |
 
 

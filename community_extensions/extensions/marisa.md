@@ -68,12 +68,7 @@ LOAD {{ page.extension.name }};
 
 <div class="extension_functions_table"></div>
 
-|    function_name     | function_type |                    description                     | comment |                examples                 |
-|----------------------|---------------|----------------------------------------------------|---------|-----------------------------------------|
-| marisa_common_prefix | scalar        | NULL                                               | NULL    |                                         |
-| marisa_lookup        | scalar        | NULL                                               | NULL    |                                         |
-| marisa_predictive    | scalar        | NULL                                               | NULL    |                                         |
-| marisa_trie          | aggregate     | Creates a new Marisa Trie from the value supplied. | NULL    | [SELECT marisa_trie(column) FROM table] |
+This extension does not add any functions.
 
 ### Overloaded Functions
 

@@ -145,18 +145,19 @@ LOAD {{ page.extension.name }};
 <div class="extension_types_table"></div>
 
 |  type_name   | type_size | logical_type | type_category | internal |
-|--------------|----------:|--------------|---------------|---------:|
+|--------------|----------:|--------------|---------------|----------|
 | HTTP_HEADERS | 16        | MAP          | COMPOSITE     | true     |
 
 ### Added Settings
 
 <div class="extension_settings_table"></div>
 
-|         name          |                                    description                                    | input_type | scope  | aliases |
-|-----------------------|-----------------------------------------------------------------------------------|------------|--------|---------|
-| http_follow_redirects | Automatically follow HTTP redirects (default: true)                               | BOOLEAN    | GLOBAL | []      |
-| http_max_concurrency  | Maximum number of concurrent HTTP requests per scalar function call (default: 32) | UBIGINT    | GLOBAL | []      |
-| http_request_cache    | Cache HTTP responses within query to prevent duplicate requests (default: true)   | BOOLEAN    | GLOBAL | []      |
-| http_user_agent       | Custom User-Agent header for all HTTP requests (default: DuckDB)                  | VARCHAR    | GLOBAL | []      |
+|         name          |                                    description                                    | input_type | scope  | aliases | typed_value |
+|-----------------------|-----------------------------------------------------------------------------------|------------|--------|---------|-------------|
+| http_follow_redirects | Automatically follow HTTP redirects (default: true)                               | BOOLEAN    | GLOBAL | []      | true        |
+| http_max_concurrency  | Maximum number of concurrent HTTP requests per scalar function call (default: 32) | UBIGINT    | GLOBAL | []      | 32          |
+| http_request_cache    | Cache HTTP responses within query to prevent duplicate requests (default: true)   | BOOLEAN    | GLOBAL | []      | true        |
+| http_user_agent       | Custom User-Agent header for all HTTP requests (default: DuckDB)                  | VARCHAR    | GLOBAL | []      |             |
+| temp_directory        | Set the directory to which temporary files are written.                           | VARCHAR    | GLOBAL | []      | post.db.tmp |
 
 

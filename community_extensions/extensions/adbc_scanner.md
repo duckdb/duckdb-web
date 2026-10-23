@@ -67,19 +67,7 @@ LOAD {{ page.extension.name }};
 
 <div class="extension_functions_table"></div>
 
-|  function_name   | function_type | description | comment | examples |
-|------------------|---------------|-------------|---------|----------|
-| adbc_clear_cache | table         | NULL        | NULL    | NULL     |
-| adbc_columns     | table         | NULL        | NULL    | NULL     |
-| adbc_execute     | table         | NULL        | NULL    | NULL     |
-| adbc_info        | table         | NULL        | NULL    | NULL     |
-| adbc_insert      | table         | NULL        | NULL    | NULL     |
-| adbc_profiles    | table         | NULL        | NULL    | NULL     |
-| adbc_scan        | table         | NULL        | NULL    | NULL     |
-| adbc_scan_table  | table         | NULL        | NULL    | NULL     |
-| adbc_schema      | table         | NULL        | NULL    | NULL     |
-| adbc_table_types | table         | NULL        | NULL    | NULL     |
-| adbc_tables      | table         | NULL        | NULL    | NULL     |
+This extension does not add any functions.
 
 ### Overloaded Functions
 

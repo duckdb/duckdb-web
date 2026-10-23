@@ -101,16 +101,17 @@ This extension does not add any types.
 
 <div class="extension_settings_table"></div>
 
-|             name              |                    description                    | input_type | scope  | aliases |
-|-------------------------------|---------------------------------------------------|------------|--------|---------|
-| opendal_io_timeout_ms         | OpenDAL I/O-operation timeout in milliseconds     | UBIGINT    | GLOBAL | []      |
-| opendal_retry_factor          | OpenDAL exponential retry factor                  | DOUBLE     | GLOBAL | []      |
-| opendal_retry_jitter          | Add jitter to OpenDAL retry delays                | BOOLEAN    | GLOBAL | []      |
-| opendal_retry_layer_enabled   | Enable the OpenDAL retry layer                    | BOOLEAN    | GLOBAL | []      |
-| opendal_retry_max_delay_ms    | Maximum OpenDAL retry delay in milliseconds       | UBIGINT    | GLOBAL | []      |
-| opendal_retry_max_times       | Maximum number of OpenDAL retry backoff delays    | UBIGINT    | GLOBAL | []      |
-| opendal_retry_min_delay_ms    | Minimum OpenDAL retry delay in milliseconds       | UBIGINT    | GLOBAL | []      |
-| opendal_timeout_layer_enabled | Enable the OpenDAL timeout layer                  | BOOLEAN    | GLOBAL | []      |
-| opendal_timeout_ms            | OpenDAL control-operation timeout in milliseconds | UBIGINT    | GLOBAL | []      |
+|             name              |                       description                       | input_type | scope  | aliases | typed_value |
+|-------------------------------|---------------------------------------------------------|------------|--------|---------|-------------|
+| opendal_io_timeout_ms         | OpenDAL I/O-operation timeout in milliseconds           | UBIGINT    | GLOBAL | []      | 10000       |
+| opendal_retry_factor          | OpenDAL exponential retry factor                        | DOUBLE     | GLOBAL | []      | 2.0         |
+| opendal_retry_jitter          | Add jitter to OpenDAL retry delays                      | BOOLEAN    | GLOBAL | []      | false       |
+| opendal_retry_layer_enabled   | Enable the OpenDAL retry layer                          | BOOLEAN    | GLOBAL | []      | true        |
+| opendal_retry_max_delay_ms    | Maximum OpenDAL retry delay in milliseconds             | UBIGINT    | GLOBAL | []      | 60000       |
+| opendal_retry_max_times       | Maximum number of OpenDAL retry backoff delays          | UBIGINT    | GLOBAL | []      | 3           |
+| opendal_retry_min_delay_ms    | Minimum OpenDAL retry delay in milliseconds             | UBIGINT    | GLOBAL | []      | 1000        |
+| opendal_timeout_layer_enabled | Enable the OpenDAL timeout layer                        | BOOLEAN    | GLOBAL | []      | true        |
+| opendal_timeout_ms            | OpenDAL control-operation timeout in milliseconds       | UBIGINT    | GLOBAL | []      | 60000       |
+| temp_directory                | Set the directory to which temporary files are written. | VARCHAR    | GLOBAL | []      | post.db.tmp |
 
 

@@ -65,12 +65,7 @@ LOAD {{ page.extension.name }};
 
 <div class="extension_functions_table"></div>
 
-|        function_name        | function_type | description | comment | examples |
-|-----------------------------|---------------|-------------|---------|----------|
-| json_schema_patch           | scalar        | NULL        | NULL    |          |
-| json_schema_update          | scalar        | NULL        | NULL    |          |
-| json_schema_validate        | scalar        | NULL        | NULL    |          |
-| json_schema_validate_schema | scalar        | NULL        | NULL    |          |
+This extension does not add any functions.
 
 ### Overloaded Functions
 

@@ -104,12 +104,7 @@ LOAD {{ page.extension.name }};
 
 <div class="extension_functions_table"></div>
 
-| function_name  | function_type | description | comment | examples |
-|----------------|---------------|-------------|---------|----------|
-| http_get       | scalar        | NULL        | NULL    |          |
-| http_head      | scalar        | NULL        | NULL    |          |
-| http_post      | scalar        | NULL        | NULL    |          |
-| http_post_form | scalar        | NULL        | NULL    |          |
+This extension does not add any functions.
 
 ### Overloaded Functions
 

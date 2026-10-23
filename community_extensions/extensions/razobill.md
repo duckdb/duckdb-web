@@ -95,7 +95,12 @@ LOAD {{ page.extension.name }};
 
 <div class="extension_functions_table"></div>
 
-This extension does not add any functions.
+| function_name | function_type | description | comment | examples |
+|---------------|---------------|-------------|---------|----------|
+| RzHash        | scalar        | NULL        | NULL    |          |
+| RzJoin        | scalar        | NULL        | NULL    |          |
+| RzSplit       | scalar        | NULL        | NULL    |          |
+| RzTemplate    | scalar        | NULL        | NULL    |          |
 
 ### Overloaded Functions
 
@@ -113,6 +118,8 @@ This extension does not add any types.
 
 <div class="extension_settings_table"></div>
 
-This extension does not add any settings.
+|      name      |                       description                       | input_type | scope  | aliases | typed_value |
+|----------------|---------------------------------------------------------|------------|--------|---------|-------------|
+| temp_directory | Set the directory to which temporary files are written. | VARCHAR    | GLOBAL | []      | post.db.tmp |
 
 

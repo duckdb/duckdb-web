@@ -104,7 +104,9 @@ LOAD {{ page.extension.name }};
 
 |      function_name      | function_type | description | comment | examples |
 |-------------------------|---------------|-------------|---------|----------|
+| lakemon_maintain        | pragma        | NULL        | NULL    |          |
 | lakemon_maintain        | table         | NULL        | NULL    |          |
+| lakemon_maintain_global | pragma        | NULL        | NULL    |          |
 | lakemon_maintain_global | table         | NULL        | NULL    |          |
 | lakemon_policy          | table         | NULL        | NULL    |          |
 | lakemon_set_policy      | table         | NULL        | NULL    |          |
@@ -127,6 +129,10 @@ This extension does not add any types.
 
 <div class="extension_settings_table"></div>
 
-This extension does not add any settings.
+|                  name                  |                                                       description                                                        | input_type | scope  | aliases | typed_value |
+|----------------------------------------|--------------------------------------------------------------------------------------------------------------------------|------------|--------|---------|-------------|
+| lakemon_flush_inlined_max_delete_files | Skip ducklake_flush_inlined_data when the planned delete-file count exceeds this (0 = no limit). Negatives are rejected. | BIGINT     | GLOBAL | []      | 500         |
+| lakemon_log_stderr                     | Write lakemon maintain step start/end lines to stderr                                                                    | BOOLEAN    | GLOBAL | []      | false       |
+| temp_directory                         | Set the directory to which temporary files are written.                                                                  | VARCHAR    | GLOBAL | []      | post.db.tmp |
 
 

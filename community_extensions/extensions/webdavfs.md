@@ -77,10 +77,10 @@ This table covers all DuckDB releases that have not reached [end-of-life](https:
 
 | Platform | 1.4.4 | 1.4.5 | 1.5.5 | 1.5.6 | 2.0.0 |
 | :--- | :---: | :---: | :---: | :---: | :---: |
-| Linux AMD64 | ✅ | ❌ | ✅ | ❌ | ❌ |
-| Linux ARM64 | ✅ | ❌ | ✅ | ❌ | ❌ |
+| Linux AMD64 | ✅ | ❌ | ✅ | ❌ | ✅ |
+| Linux ARM64 | ✅ | ❌ | ✅ | ❌ | ✅ |
 | macOS AMD64 | ✅ | ❌ | ✅ | ❌ | ❌ |
-| macOS ARM64 | ✅ | ❌ | ✅ | ❌ | ❌ |
+| macOS ARM64 | ✅ | ❌ | ✅ | ❌ | ✅ |
 | Windows AMD64 | ❌ | ❌ | ❌ | ❌ | ❌ |
 | Windows ARM64 | ❌ | ❌ | ❌ | ❌ | ❌ |
 | WebAssembly | ❌ | ❌ | ❌ | ❌ | ❌ |
@@ -123,10 +123,11 @@ This extension does not add any types.
 
 <div class="extension_settings_table"></div>
 
-|             name              |                                           description                                           | input_type | scope  | aliases |
-|-------------------------------|-------------------------------------------------------------------------------------------------|------------|--------|---------|
-| webdav_debug_logging          | Enable debug logging for WebDAV operations                                                      | BOOLEAN    | GLOBAL | []      |
-| webdav_max_retries            | Maximum number of retries for failed WebDAV operations                                          | BIGINT     | GLOBAL | []      |
-| webdav_streaming_threshold_mb | File size threshold in MB for streaming uploads (files larger than this are streamed from disk) | BIGINT     | GLOBAL | []      |
+|             name              |                                           description                                           | input_type | scope  | aliases | typed_value |
+|-------------------------------|-------------------------------------------------------------------------------------------------|------------|--------|---------|-------------|
+| temp_directory                | Set the directory to which temporary files are written.                                         | VARCHAR    | GLOBAL | []      | post.db.tmp |
+| webdav_debug_logging          | Enable debug logging for WebDAV operations                                                      | BOOLEAN    | GLOBAL | []      | false       |
+| webdav_max_retries            | Maximum number of retries for failed WebDAV operations                                          | BIGINT     | GLOBAL | []      | 3           |
+| webdav_streaming_threshold_mb | File size threshold in MB for streaming uploads (files larger than this are streamed from disk) | BIGINT     | GLOBAL | []      | 50          |
 
 

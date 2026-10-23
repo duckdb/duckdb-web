@@ -74,15 +74,15 @@ LOAD {{ page.extension.name }};
 
 <div class="extension_functions_table"></div>
 
-|   function_name   | function_type | description | comment | examples |
-|-------------------|---------------|-------------|---------|----------|
-| build_suffix_trie | aggregate     | NULL        | NULL    |          |
-| double_metaphone  | scalar        | NULL        | NULL    |          |
-| find_address      | scalar        | NULL        | NULL    |          |
-| ngrams            | scalar        | NULL        | NULL    |          |
-| soundex           | scalar        | NULL        | NULL    |          |
-| strip_diacritics  | scalar        | NULL        | NULL    |          |
-| unaccent          | scalar        | NULL        | NULL    |          |
+|      function_name       | function_type | description | comment | examples |
+|--------------------------|---------------|-------------|---------|----------|
+| _get_nicknames           | scalar        | NULL        | NULL    |          |
+| double_metaphone         | scalar        | NULL        | NULL    |          |
+| ngrams                   | scalar        | NULL        | NULL    |          |
+| nickname_lookup_versions | table         | NULL        | NULL    |          |
+| soundex                  | scalar        | NULL        | NULL    |          |
+| strip_diacritics         | scalar        | NULL        | NULL    |          |
+| unaccent                 | scalar        | NULL        | NULL    |          |
 
 ### Overloaded Functions
 
@@ -103,6 +103,8 @@ This extension does not add any types.
 
 <div class="extension_settings_table"></div>
 
-This extension does not add any settings.
+|      name      |                       description                       | input_type | scope  | aliases | typed_value |
+|----------------|---------------------------------------------------------|------------|--------|---------|-------------|
+| temp_directory | Set the directory to which temporary files are written. | VARCHAR    | GLOBAL | []      | post.db.tmp |
 
 

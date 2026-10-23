@@ -67,22 +67,7 @@ LOAD {{ page.extension.name }};
 
 <div class="extension_functions_table"></div>
 
-|                    function_name                     | function_type | description | comment | examples |
-|------------------------------------------------------|---------------|-------------|---------|----------|
-| radio_flush                                          | table         | NULL        | NULL    |          |
-| radio_listen                                         | table         | NULL        | NULL    |          |
-| radio_received_messages                              | table         | NULL        | NULL    |          |
-| radio_sleep                                          | table         | NULL        | NULL    |          |
-| radio_subscribe                                      | table         | NULL        | NULL    |          |
-| radio_subscription_received_message_add              | table         | NULL        | NULL    |          |
-| radio_subscription_received_messages                 | table         | NULL        | NULL    |          |
-| radio_subscription_transmit_message_delete           | table         | NULL        | NULL    |          |
-| radio_subscription_transmit_messages                 | table         | NULL        | NULL    |          |
-| radio_subscription_transmit_messages_delete_finished | table         | NULL        | NULL    |          |
-| radio_subscriptions                                  | table         | NULL        | NULL    |          |
-| radio_transmit_message                               | table         | NULL        | NULL    |          |
-| radio_unsubscribe                                    | table         | NULL        | NULL    |          |
-| radio_version                                        | scalar        | NULL        | NULL    |          |
+This extension does not add any functions.
 
 ### Overloaded Functions
 

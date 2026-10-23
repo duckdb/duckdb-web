@@ -71,9 +71,10 @@ LOAD {{ page.extension.name }};
 
 <div class="extension_functions_table"></div>
 
-| function_name | function_type | description | comment | examples |
-|---------------|---------------|-------------|---------|----------|
-| read_px       | table         | NULL        | NULL    |          |
+|  function_name   | function_type |                                                                                                                  description                                                                                                                   | comment |                                                                                   examples                                                                                    |
+|------------------|---------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|---------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| read_px          | table         | Reads a PX (PC-Axis) file and returns its contents as a table with STUB/HEADING variables as VARCHAR columns and a 'value' column (INTEGER if DECIMALS=0, otherwise FLOAT).                                                                    | NULL    | [SELECT * FROM read_px('test/data/statfin_vaerak_pxt_11rc.px');]                                                                                                              |
+| read_px_metadata | table         | Reads metadata from a PX (PC-Axis) file and returns the available CODE-VALUE pairs per variable without scanning the DATA section. Returns columns: 'variable' (VARCHAR), 'code' (VARCHAR), 'value' (VARCHAR, NULL if no VALUES entry exists). | NULL    | [SELECT * FROM read_px_metadata('test/data/statfin_vaerak_pxt_11rc.px');, SELECT * FROM read_px_metadata('test/data/statfin_vaerak_pxt_11rc.px') WHERE variable='Sukupuoli';] |
 
 ### Overloaded Functions
 
@@ -91,6 +92,8 @@ This extension does not add any types.
 
 <div class="extension_settings_table"></div>
 
-This extension does not add any settings.
+|      name      |                       description                       | input_type | scope  | aliases | typed_value |
+|----------------|---------------------------------------------------------|------------|--------|---------|-------------|
+| temp_directory | Set the directory to which temporary files are written. | VARCHAR    | GLOBAL | []      | post.db.tmp |
 
 

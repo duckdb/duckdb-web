@@ -66,10 +66,7 @@ LOAD {{ page.extension.name }};
 
 <div class="extension_functions_table"></div>
 
-| function_name | function_type | description | comment | examples |
-|---------------|---------------|-------------|---------|----------|
-| jsonata       | scalar        | NULL        | NULL    | NULL     |
-| jsonata       | scalar        | NULL        | NULL    | NULL     |
+This extension does not add any functions.
 
 ### Overloaded Functions
 

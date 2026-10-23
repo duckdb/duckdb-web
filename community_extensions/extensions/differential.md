@@ -204,8 +204,8 @@ docs:
     [repository](https://github.com/tobilg/duckdb-differential) for the SQL reference, the
     lifecycle guide and the storage format.
 
-extension_star_count: 18
-extension_star_count_pretty: 18
+extension_star_count: 22
+extension_star_count_pretty: 22
 extension_download_count: 1689
 extension_download_count_pretty: 1.7k
 image: '/images/community_extensions/social_preview/preview_community_extension_differential.png'
@@ -275,6 +275,10 @@ LOAD {{ page.extension.name }};
 | differential_status                | table         | Reports the extension's capabilities, durability profiles, limits and last background publication error as capability/status rows.                                                     | NULL    | [SELECT capability, status FROM differential_status();]                                                               |
 | differential_storage_stats         | table         | Returns storage, S3, cache and timing counters of the repository and process as metric/value rows.                                                                                     | NULL    | [SELECT metric, value FROM differential_storage_stats() WHERE metric = 'local_payload_bytes';]                        |
 | differential_writers               | table         | Lists the advisory 'being written' markers of a shared database in S3: which hosts are writing which branches.                                                                         | NULL    | [SELECT branch_name, host, live FROM differential_writers('team');]                                                   |
+| differential_cleanup_metadata      | table         | NULL                                                                                                                                                                                   | NULL    | NULL                                                                                                                  |
+| differential_recover_branch        | table         | NULL                                                                                                                                                                                   | NULL    | NULL                                                                                                                  |
+| differential_cleanup_remote_files  | table         | NULL                                                                                                                                                                                   | NULL    | NULL                                                                                                                  |
+| differential_followers             | table         | NULL                                                                                                                                                                                   | NULL    | NULL                                                                                                                  |
 
 ### Overloaded Functions
 
@@ -292,13 +296,17 @@ This extension does not add any types.
 
 <div class="extension_settings_table"></div>
 
-|                name                 |                                                    description                                                     | input_type | scope  | aliases |
-|-------------------------------------|--------------------------------------------------------------------------------------------------------------------|------------|--------|---------|
-| differential_auto_gc                | Run bounded differential garbage collection after native checkpoints                                               | BOOLEAN    | GLOBAL | []      |
-| differential_remote_cache_size      | Size of the repository's disk cache for data read from S3 (e.g. '4GB'); 0 = off. Read when a remote file is opened | VARCHAR    | GLOBAL | []      |
-| differential_repository             | Differential repository root (relative paths resolve against the working directory); set before first use          | VARCHAR    | GLOBAL | []      |
-| differential_repository_shared      | Create the repository for several local users (group-writable); set before first use                               | BOOLEAN    | GLOBAL | []      |
-| differential_s3_max_requests        | Parallel S3 requests per process (1-64), shared by all S3 locations and DuckDB instances in the process            | BIGINT     | GLOBAL | []      |
-| differential_snapshot_on_checkpoint | Publish every completed native checkpoint of a writable branch as a public snapshot                                | BOOLEAN    | GLOBAL | []      |
+|                name                 |                                                                   description                                                                    | input_type | scope  | aliases |            typed_value            |
+|-------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------|------------|--------|---------|-----------------------------------|
+| differential_auto_gc                | Run bounded differential garbage collection after native checkpoints                                                                             | BOOLEAN    | GLOBAL | []      | true                              |
+| differential_export_staging         | Where exports stage objects before uploading them: 'disk' (the repository's staging directory) or 'memory'. Process-wide                         | VARCHAR    | GLOBAL | []      | disk                              |
+| differential_export_verification    | How exports verify each uploaded object: 'checksum' (the S3 service checks its SHA-256) or 'read_back' (also download and hash it). Process-wide | VARCHAR    | GLOBAL | []      | checksum                          |
+| differential_group_commit           | Commit concurrent native syncs of different databases in one durable transaction (one device flush). Process-wide                                | BOOLEAN    | GLOBAL | []      | true                              |
+| differential_remote_cache_size      | Size of the repository's disk cache for data read from S3 (e.g. '4GB'); 0 = off. Read when a remote file is opened                               | VARCHAR    | GLOBAL | []      | 0                                 |
+| differential_repository             | Differential repository root (relative paths resolve against the working directory); set before first use                                        | VARCHAR    | GLOBAL | []      | /home/runner/.duckdb/differential |
+| differential_repository_shared      | Create the repository for several local users (group-writable); set before first use                                                             | BOOLEAN    | GLOBAL | []      | false                             |
+| differential_s3_max_requests        | Parallel S3 requests per process (1-64), shared by all S3 locations and DuckDB instances in the process                                          | BIGINT     | GLOBAL | []      | 16                                |
+| differential_snapshot_on_checkpoint | Publish every completed native checkpoint of a writable branch as a public snapshot                                                              | BOOLEAN    | GLOBAL | []      | false                             |
+| temp_directory                      | Set the directory to which temporary files are written.                                                                                          | VARCHAR    | GLOBAL | []      | post.db.tmp                       |
 
 

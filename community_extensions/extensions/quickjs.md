@@ -92,11 +92,7 @@ LOAD {{ page.extension.name }};
 
 <div class="extension_functions_table"></div>
 
-| function_name | function_type |                                       description                                       | comment |                                 examples                                  |
-|---------------|---------------|-----------------------------------------------------------------------------------------|---------|---------------------------------------------------------------------------|
-| quickjs       | scalar        | Execute JavaScript code and return the result as a string                               | NULL    | [quickjs('1 + 2'), quickjs('"hello".toUpperCase()')]                      |
-| quickjs       | table         | Execute JavaScript code that returns an array, with each element becoming a row         | NULL    | [SELECT * FROM quickjs('[1, 2, 3].map(x => x * 2)')]                      |
-| quickjs_eval  | scalar        | Execute a JavaScript function with the provided arguments and return the result as JSON | NULL    | [quickjs_eval('(a, b) => a + b', 1, 2), quickjs_eval('(x) => x * 2', 21)] |
+This extension does not add any functions.
 
 ### Overloaded Functions
 

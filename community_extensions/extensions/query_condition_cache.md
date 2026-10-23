@@ -95,8 +95,9 @@ This extension does not add any types.
 
 <div class="extension_settings_table"></div>
 
-|           name            |                      description                       | input_type | scope  | aliases |
-|---------------------------|--------------------------------------------------------|------------|--------|---------|
-| use_query_condition_cache | Enable automatic query condition cache build and apply | BOOLEAN    | GLOBAL | []      |
+|           name            |                       description                       | input_type | scope  | aliases | typed_value |
+|---------------------------|---------------------------------------------------------|------------|--------|---------|-------------|
+| temp_directory            | Set the directory to which temporary files are written. | VARCHAR    | GLOBAL | []      | post.db.tmp |
+| use_query_condition_cache | Enable automatic query condition cache build and apply  | BOOLEAN    | GLOBAL | []      | true        |
 
 

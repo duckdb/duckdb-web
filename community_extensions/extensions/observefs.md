@@ -102,8 +102,9 @@ This extension does not add any types.
 
 <div class="extension_settings_table"></div>
 
-|                    name                    |                       description                       | input_type | scope  | aliases |
-|--------------------------------------------|---------------------------------------------------------|------------|--------|---------|
-| observefs_enable_external_file_cache_stats | Whether to enable stats record for external file cache. | BOOLEAN    | GLOBAL | []      |
+|                    name                    |                       description                       | input_type | scope  | aliases | typed_value |
+|--------------------------------------------|---------------------------------------------------------|------------|--------|---------|-------------|
+| observefs_enable_external_file_cache_stats | Whether to enable stats record for external file cache. | BOOLEAN    | GLOBAL | []      | 1           |
+| temp_directory                             | Set the directory to which temporary files are written. | VARCHAR    | GLOBAL | []      | post.db.tmp |
 
 

@@ -89,6 +89,7 @@ LOAD {{ page.extension.name }};
 
 |   function_name   | function_type | description | comment | examples |
 |-------------------|---------------|-------------|---------|----------|
+| arrow_kv_metadata | table         | NULL        | NULL    |          |
 | nanoarrow_version | scalar        | NULL        | NULL    |          |
 | read_arrow        | table         | NULL        | NULL    |          |
 | scan_arrow_ipc    | table         | NULL        | NULL    |          |
@@ -110,6 +111,8 @@ This extension does not add any types.
 
 <div class="extension_settings_table"></div>
 
-This extension does not add any settings.
+|      name      |                       description                       | input_type | scope  | aliases | typed_value |
+|----------------|---------------------------------------------------------|------------|--------|---------|-------------|
+| temp_directory | Set the directory to which temporary files are written. | VARCHAR    | GLOBAL | []      | post.db.tmp |
 
 

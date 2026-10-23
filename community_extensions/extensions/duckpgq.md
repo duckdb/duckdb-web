@@ -158,6 +158,12 @@ This extension does not add any types.
 
 <div class="extension_settings_table"></div>
 
-This extension does not add any settings.
+|               name                |                                                                      description                                                                      | input_type | scope  | aliases | typed_value |
+|-----------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------|------------|--------|---------|-------------|
+| duckpgq_factorized_join_directory | Let FACTORIZED_GROUP_JOIN count into a dense array indexed by the key when the key bounds are known, instead of a hash table                          | BOOLEAN    | GLOBAL | []      | true        |
+| duckpgq_factorized_join_operator  | Use the FACTORIZED_GROUP_JOIN operator when both sides of a join are only counted or summed, instead of separate GROUP BY aggregates and a hash join  | BOOLEAN    | GLOBAL | []      | true        |
+| duckpgq_factorized_joins          | Pre-aggregate join sides that are only counted or summed above the join, so that path counts become degree products instead of enumerating every path | BOOLEAN    | GLOBAL | []      | true        |
+| duckpgq_vertex_join_elimination   | Leave vertex tables out of the MATCH translation when the query only uses their key, joining the incident edge tables to each other instead           | BOOLEAN    | GLOBAL | []      | true        |
+| temp_directory                    | Set the directory to which temporary files are written.                                                                                               | VARCHAR    | GLOBAL | []      | post.db.tmp |
 
 

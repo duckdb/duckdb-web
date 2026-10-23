@@ -102,27 +102,27 @@ LOAD {{ page.extension.name }};
 
 <div class="extension_functions_table"></div>
 
-|       function_name        | function_type | description | comment | examples |
-|----------------------------|---------------|-------------|---------|----------|
-| read_aim                   | table         | NULL        | NULL    |          |
-| read_aimd                  | table         | NULL        | NULL    |          |
-| read_cosworth              | table         | NULL        | NULL    |          |
-| read_motec                 | table         | NULL        | NULL    |          |
-| read_telemetry             | table         | NULL        | NULL    |          |
-| read_telemetry_normalized  | table         | NULL        | NULL    |          |
-| read_telemetry_session     | table         | NULL        | NULL    |          |
-| read_vbo                   | table         | NULL        | NULL    |          |
-| telemetry_can_convert      | scalar        | NULL        | NULL    |          |
-| telemetry_column_comments  | table         | NULL        | NULL    |          |
-| telemetry_convert          | scalar        | NULL        | NULL    |          |
-| telemetry_convert_column   | scalar        | NULL        | NULL    |          |
-| telemetry_file_metadata    | table         | NULL        | NULL    |          |
-| telemetry_laps             | table         | NULL        | NULL    |          |
-| telemetry_metadata         | table         | NULL        | NULL    |          |
-| telemetry_samples          | table         | NULL        | NULL    |          |
-| telemetry_session_metadata | table         | NULL        | NULL    |          |
-| telemetry_units            | table         | NULL        | NULL    |          |
-| write_telemetry            | table         | NULL        | NULL    |          |
+|       function_name        | function_type |                                  description                                   | comment |                           examples                           |
+|----------------------------|---------------|--------------------------------------------------------------------------------|---------|--------------------------------------------------------------|
+| read_aim                   | table         | Projected wide telemetry with type-aware interpolation and optional unit tags. | NULL    | [SELECT * FROM read_aim('run.mp4');]                         |
+| read_aimd                  | table         | Projected wide telemetry with type-aware interpolation and optional unit tags. | NULL    | [SELECT * FROM read_aimd('run.mp4');]                        |
+| read_cosworth              | table         | Projected wide telemetry with type-aware interpolation and optional unit tags. | NULL    | [SELECT * FROM read_cosworth('run.pds');]                    |
+| read_motec                 | table         | Projected wide telemetry with type-aware interpolation and optional unit tags. | NULL    | [SELECT * FROM read_motec('run.ld');]                        |
+| read_telemetry             | table         | Projected wide telemetry with type-aware interpolation and optional unit tags. | NULL    | [SELECT * FROM read_telemetry('run.pds');]                   |
+| read_telemetry_normalized  | table         | Normalized telemetry channels at each native instant.                          | NULL    | [SELECT * FROM read_telemetry_normalized('run.pds');]        |
+| read_telemetry_session     | table         | Synchronized wide telemetry across related files in a session.                 | NULL    | [SELECT * FROM read_telemetry_session('run.pds');]           |
+| read_vbo                   | table         | Projected wide telemetry with type-aware interpolation and optional unit tags. | NULL    | [SELECT * FROM read_vbo('run.vbo');]                         |
+| telemetry_can_convert      | scalar        | Whether two telemetry units have compatible dimensions.                        | NULL    | [telemetry_can_convert('m/s', 'km/h')]                       |
+| telemetry_column_comments  | table         | SQL column comments preserving telemetry units and provenance.                 | NULL    | [SELECT * FROM telemetry_column_comments('run.pds', 'run');] |
+| telemetry_convert          | scalar        | Convert compatible telemetry units; incompatible dimensions raise an error.    | NULL    | [telemetry_convert(10.0, 'm/s', 'km/h')]                     |
+| telemetry_convert_column   | scalar        | Convert a numeric column carrying a telemetry unit alias.                      | NULL    | [telemetry_convert_column(speed, 'km/h')]                    |
+| telemetry_file_metadata    | table         | File identity, track, session and lap summaries.                               | NULL    | [SELECT * FROM telemetry_file_metadata('run.pds');]          |
+| telemetry_laps             | table         | Session-monotonic laps, stints and lap kinds from telemetry files.             | NULL    | [SELECT * FROM telemetry_laps('run.pds');]                   |
+| telemetry_metadata         | table         | Channel metadata, units and native sample rates from telemetry files.          | NULL    | [SELECT * FROM telemetry_metadata('run.pds');]               |
+| telemetry_samples          | table         | Exact native-rate telemetry samples, with channel and time pruning.            | NULL    | [SELECT * FROM telemetry_samples('run.pds');]                |
+| telemetry_session_metadata | table         | Groups related telemetry files into sessions.                                  | NULL    | [SELECT * FROM telemetry_session_metadata('run.pds');]       |
+| telemetry_units            | table         | Discover canonical telemetry units, aliases and compatible dimensions.         | NULL    | [SELECT * FROM telemetry_units();]                           |
+| write_telemetry            | table         | Exports telemetry to MoTeC LD with optional channel and unit mappings.         | NULL    | [SELECT * FROM write_telemetry('run.pds', 'run.ld');]        |
 
 ### Overloaded Functions
 
@@ -134,12 +134,16 @@ This extension does not add any function overloads.
 
 <div class="extension_types_table"></div>
 
-This extension does not add any types.
+| type_name | type_size | logical_type | type_category | internal |
+|-----------|----------:|--------------|---------------|----------|
+| LIST      | 16        | LIST         | COMPOSITE     | true     |
 
 ### Added Settings
 
 <div class="extension_settings_table"></div>
 
-This extension does not add any settings.
+|      name      |                       description                       | input_type | scope  | aliases | typed_value |
+|----------------|---------------------------------------------------------|------------|--------|---------|-------------|
+| temp_directory | Set the directory to which temporary files are written. | VARCHAR    | GLOBAL | []      | post.db.tmp |
 
 

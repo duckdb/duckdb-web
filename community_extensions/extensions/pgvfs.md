@@ -163,9 +163,12 @@ This extension does not add any types.
 
 <div class="extension_settings_table"></div>
 
-|         name          |                                                                                                     description                                                                                                     | input_type | scope  | aliases |
-|-----------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|------------|--------|---------|
-| pgdb_refresh_interval | Seconds between checks for a newer published version of each pgdb:// database attached READ_ONLY by its plain path; a newer one is attached in its place (running transactions keep theirs). 0 turns refreshing off | DOUBLE     | GLOBAL | []      |
-| pgvfs_secret          | Name of the postgres secret pgvfs:// connects with, unless a secret named pgvfs_<volume> exists for the volume. Unset: $PGVFS_URL, else the unnamed default postgres secret (the one DuckLake's catalog uses)       | VARCHAR    | GLOBAL | []      |
+|          name          |                                                                                                     description                                                                                                     | input_type | scope  | aliases | typed_value |
+|------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|------------|--------|---------|-------------|
+| cache_local_files      | Whether the external file cache also caches local files. Remote files are always cached.                                                                                                                            | BOOLEAN    | GLOBAL | []      | true        |
+| parquet_metadata_cache | Cache Parquet metadata - useful when reading the same files multiple times                                                                                                                                          | BOOLEAN    | GLOBAL | []      | true        |
+| pgdb_refresh_interval  | Seconds between checks for a newer published version of each pgdb:// database attached READ_ONLY by its plain path; a newer one is attached in its place (running transactions keep theirs). 0 turns refreshing off | DOUBLE     | GLOBAL | []      | 10.0        |
+| pgvfs_secret           | Name of the postgres secret pgvfs:// connects with, unless a secret named pgvfs_<volume> exists for the volume. Unset: $PGVFS_URL, else the unnamed default postgres secret (the one DuckLake's catalog uses)       | VARCHAR    | GLOBAL | []      | NULL        |
+| temp_directory         | Set the directory to which temporary files are written.                                                                                                                                                             | VARCHAR    | GLOBAL | []      | post.db.tmp |
 
 

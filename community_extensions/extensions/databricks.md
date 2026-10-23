@@ -119,15 +119,16 @@ This extension does not add any types.
 
 <div class="extension_settings_table"></div>
 
-|              name              |                              description                               | input_type | scope  | aliases |
-|--------------------------------|------------------------------------------------------------------------|------------|--------|---------|
-| dbx_ca_cert                    | PEM bundle to trust, or 'system'                                       | VARCHAR    | GLOBAL | []      |
-| dbx_debug_show_queries         | Print each statement text and id                                       | BOOLEAN    | GLOBAL | []      |
-| dbx_filter_pushdown            | Push filters into Databricks SQL                                       | BOOLEAN    | GLOBAL | []      |
-| dbx_http_retries               | Retries for HTTP 429, 503, and connection errors                       | UBIGINT    | GLOBAL | []      |
-| dbx_http_timeout_ms            | Per-request HTTP timeout in milliseconds                               | UBIGINT    | GLOBAL | []      |
-| dbx_insert_max_statement_bytes | Maximum SQL text of one INSERT statement, at most 16 MiB               | UBIGINT    | GLOBAL | []      |
-| dbx_order_pushdown             | Push ORDER BY ... LIMIT into Databricks SQL                            | BOOLEAN    | GLOBAL | []      |
-| dbx_statement_timeout_ms       | Cancel a statement still running after this many milliseconds. 0 waits | UBIGINT    | GLOBAL | []      |
+|              name              |                              description                               | input_type | scope  | aliases | typed_value |
+|--------------------------------|------------------------------------------------------------------------|------------|--------|---------|-------------|
+| dbx_ca_cert                    | PEM bundle to trust, or 'system'                                       | VARCHAR    | GLOBAL | []      | system      |
+| dbx_debug_show_queries         | Print each statement text and id                                       | BOOLEAN    | GLOBAL | []      | false       |
+| dbx_filter_pushdown            | Push filters into Databricks SQL                                       | BOOLEAN    | GLOBAL | []      | true        |
+| dbx_http_retries               | Retries for HTTP 429, 503, and connection errors                       | UBIGINT    | GLOBAL | []      | 5           |
+| dbx_http_timeout_ms            | Per-request HTTP timeout in milliseconds                               | UBIGINT    | GLOBAL | []      | 60000       |
+| dbx_insert_max_statement_bytes | Maximum SQL text of one INSERT statement, at most 16 MiB               | UBIGINT    | GLOBAL | []      | 12582912    |
+| dbx_order_pushdown             | Push ORDER BY ... LIMIT into Databricks SQL                            | BOOLEAN    | GLOBAL | []      | true        |
+| dbx_statement_timeout_ms       | Cancel a statement still running after this many milliseconds. 0 waits | UBIGINT    | GLOBAL | []      | 0           |
+| temp_directory                 | Set the directory to which temporary files are written.                | VARCHAR    | GLOBAL | []      | post.db.tmp |
 
 

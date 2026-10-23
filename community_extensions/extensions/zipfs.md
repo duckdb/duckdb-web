@@ -89,9 +89,10 @@ This extension does not add any types.
 
 <div class="extension_settings_table"></div>
 
-|      name       |                                                                             description                                                                             | input_type | scope  | aliases |
-|-----------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------|------------|--------|---------|
-| zipfs_extension | Extension to look for splitting the zip path and the file path within the zip. To specify an artificial seperator, instead set: `set zipfs_split = '!!';`           | VARCHAR    | GLOBAL | []      |
-| zipfs_split     | Extension to look for splitting the zip path and the file path within the zip. Will be removed from the zip file name. Overrides zipfs_extension. Defaults to NULL. | VARCHAR    | GLOBAL | []      |
+|      name       |                                                                             description                                                                             | input_type | scope  | aliases | typed_value |
+|-----------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------|------------|--------|---------|-------------|
+| temp_directory  | Set the directory to which temporary files are written.                                                                                                             | VARCHAR    | GLOBAL | []      | post.db.tmp |
+| zipfs_extension | Extension to look for splitting the zip path and the file path within the zip. To specify an artificial seperator, instead set: `set zipfs_split = '!!';`           | VARCHAR    | GLOBAL | []      | .zip        |
+| zipfs_split     | Extension to look for splitting the zip path and the file path within the zip. Will be removed from the zip file name. Overrides zipfs_extension. Defaults to NULL. | VARCHAR    | GLOBAL | []      | NULL        |
 
 

@@ -106,17 +106,18 @@ This extension does not add any types.
 
 <div class="extension_settings_table"></div>
 
-|               name               |                           description                           | input_type | scope  | aliases |
-|----------------------------------|-----------------------------------------------------------------|------------|--------|---------|
-| httpfs_retries_create_dir        | Maximum number of retries for creating directories              | UBIGINT    | GLOBAL | []      |
-| httpfs_retries_delete            | Maximum number of retries for deleting files                    | UBIGINT    | GLOBAL | []      |
-| httpfs_retries_file_operation    | Maximum number of retries for file operations (open/read/write) | UBIGINT    | GLOBAL | []      |
-| httpfs_retries_list              | Maximum number of retries for listing directories               | UBIGINT    | GLOBAL | []      |
-| httpfs_retries_stat              | Maximum number of retries for stat/metadata operations          | UBIGINT    | GLOBAL | []      |
-| httpfs_timeout_create_dir_ms     | Timeout for creating directories (in milliseconds)              | UBIGINT    | GLOBAL | []      |
-| httpfs_timeout_delete_ms         | Timeout for deleting files (in milliseconds)                    | UBIGINT    | GLOBAL | []      |
-| httpfs_timeout_file_operation_ms | Timeout for file operations (open/read/write) (in milliseconds) | UBIGINT    | GLOBAL | []      |
-| httpfs_timeout_list_ms           | Timeout for listing directories (in milliseconds)               | UBIGINT    | GLOBAL | []      |
-| httpfs_timeout_stat_ms           | Timeout for stat/metadata operations (in milliseconds)          | UBIGINT    | GLOBAL | []      |
+|               name               |                           description                           | input_type | scope  | aliases | typed_value |
+|----------------------------------|-----------------------------------------------------------------|------------|--------|---------|-------------|
+| httpfs_retries_create_dir        | Maximum number of retries for creating directories              | UBIGINT    | GLOBAL | []      | NULL        |
+| httpfs_retries_delete            | Maximum number of retries for deleting files                    | UBIGINT    | GLOBAL | []      | NULL        |
+| httpfs_retries_file_operation    | Maximum number of retries for file operations (open/read/write) | UBIGINT    | GLOBAL | []      | NULL        |
+| httpfs_retries_list              | Maximum number of retries for listing directories               | UBIGINT    | GLOBAL | []      | NULL        |
+| httpfs_retries_stat              | Maximum number of retries for stat/metadata operations          | UBIGINT    | GLOBAL | []      | NULL        |
+| httpfs_timeout_create_dir_ms     | Timeout for creating directories (in milliseconds)              | UBIGINT    | GLOBAL | []      | NULL        |
+| httpfs_timeout_delete_ms         | Timeout for deleting files (in milliseconds)                    | UBIGINT    | GLOBAL | []      | NULL        |
+| httpfs_timeout_file_operation_ms | Timeout for file operations (open/read/write) (in milliseconds) | UBIGINT    | GLOBAL | []      | NULL        |
+| httpfs_timeout_list_ms           | Timeout for listing directories (in milliseconds)               | UBIGINT    | GLOBAL | []      | NULL        |
+| httpfs_timeout_stat_ms           | Timeout for stat/metadata operations (in milliseconds)          | UBIGINT    | GLOBAL | []      | NULL        |
+| temp_directory                   | Set the directory to which temporary files are written.         | VARCHAR    | GLOBAL | []      | post.db.tmp |
 
 
