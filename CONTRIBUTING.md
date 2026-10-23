@@ -80,11 +80,15 @@ venue: "CIDR 2023"
     * Everywhere: `servers`, `pcs`, `phones`, `other`
 * `category` is `core` or `community` for library entries, events and Everywhere entries. Official DuckDB events are `core`. Blog posts do not use `category`.
 * `thumb` is the card image in a 1.91:1 format, `image` is the social media preview (PNG or JPG). Without `thumb`, the card shows a placeholder in the color of its source (DuckDB, DuckLake or community), e.g. for papers that have no thumbnail yet.
-* `venue` is the conference, series or publication (e.g., `VLDB 2025`, `Data Engineering Podcast`). Events additionally use `location` for the physical place, `sponsored: true` for sponsored events and optionally `end_date`.
+* `venue` is the conference, series or publication (e.g., `VLDB 2025`, `Data Engineering Podcast`). Events additionally use `location` for the physical place, `sponsored: true` for sponsored events and optionally `end_date` and `library`.
 * Library entries may add `episode` and `length`. Blog posts may add `external_post_url`.
 * Labels and headings for the filters are defined in [`_data/post_types.yml`](_data/post_types.yml).
 
-When a talk event has taken place, it can be moved to `_library` with its front matter unchanged; `location` and `sponsored` are ignored there.
+Once an event has taken place, the nightly [`scripts/archive_past_events.py`](scripts/archive_past_events.py) job handles it based on its `library` flag:
+
+* `library: true` moves it to `_library` with its front matter unchanged except for a redirect from the old event URL; `location`, `sponsored` and `library` are ignored there.
+* `library: false` deletes it, unless other files still link to it.
+* Without the flag, talks (`tag: talk`) are deleted the same way and other events are kept.
 
 ## Style Guide
 

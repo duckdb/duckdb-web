@@ -1,0 +1,82 @@
+name: Nightly site maintenance
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "0 4 * * *"
+
+defaults:
+  run:
+    shell: bash
+
+jobs:
+  nightly_site_maintenance:
+    if: ${{ github.ref == 'refs/heads/main' && github.repository == 'duckdb/duckdb-web' }}
+    runs-on: ubuntu-26.04
+    env:
+      GH_TOKEN: ${{ secrets.GH_UPDATE_DOCS_TOKEN }}
+    steps:
+    - uses: actions/checkout@v7
+      with:
+        path: '.'
+        token: ${{ secrets.GH_UPDATE_DOCS_TOKEN }}
+
+    - name: Update star count
+      run: scripts/update-star-count.sh
+
+    - name: Update R version
+      run: python3 scripts/update_r_version.py
+
+    - name: Copy releases CSV
+      # make sure the duckdb-releases.csv file gets deployed
+      run: cp _data/past_releases.csv data/duckdb-releases.csv
+
+    - name: Update release calendar
+      run: |
+        python3 -m pip install --break-system-packages duckdb icalendar requests
+        python3 scripts/get_calendar.py
+
+    - name: Thin SVG strokes
+      run: python3 scripts/thin_svg_strokes.py
+
+    - name: Move or delete past events
+      run: python3 scripts/archive_past_events.py | tee "$RUNNER_TEMP/past_events.txt"
+
+    - name: Send PR
+      run: |
+        git add --all
+        if git diff --cached --quiet; then
+          echo "No changes, skipping PR"
+          exit 0
+        fi
+        {
+          echo "Automated nightly site maintenance:"
+          echo
+          echo "* Update the star count (\`scripts/update-star-count.sh\`)"
+          echo "* Update \`latest_duckdb_r_version\` if CRAN has a newer R package (\`scripts/update_r_version.py\`)"
+          echo "* Copy \`_data/past_releases.csv\` to \`data/duckdb-releases.csv\`"
+          echo "* Update the release calendar (\`scripts/get_calendar.py\`)"
+          echo "* Thin SVG thumbnail strokes (\`scripts/thin_svg_strokes.py\`)"
+          echo "* Move past events with \`library: true\` to \`_library\` and delete past events with \`library: false\` and past talks without the flag (\`scripts/archive_past_events.py\`)"
+          if [[ -s "$RUNNER_TEMP/past_events.txt" ]]; then
+            echo
+            echo "Past events (please review the wording of moved entries and add \`length\` and a recording where available):"
+            echo
+            echo '```text'
+            cat "$RUNNER_TEMP/past_events.txt"
+            echo '```'
+          fi
+        } > "$RUNNER_TEMP/pr_body.md"
+        git checkout -B auto_nightly_site_maintenance
+        git config user.email "quack.docs@somedomain.org"
+        git config user.name "Quack Mc Docs"
+        git commit -m "chore: nightly site maintenance"
+        git push -f origin auto_nightly_site_maintenance
+        gh pr create \
+          --body-file "$RUNNER_TEMP/pr_body.md" \
+          --title "chore: nightly site maintenance" \
+          --head "auto_nightly_site_maintenance" \
+          --base "main" \
+        || gh pr edit \
+          "auto_nightly_site_maintenance" \
+          --body-file "$RUNNER_TEMP/pr_body.md" \
+          --title "chore: nightly site maintenance"
