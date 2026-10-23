@@ -44,7 +44,8 @@ Beyond CORS, reading remote files has several other known limitations:
 * Because every request is upgraded to HTTPS, an `http://` URL can be rewritten incorrectly (for example to `https://http//…`), which breaks reads against local or non-TLS endpoints (see [duckdb-wasm issue #2118](https://github.com/duckdb/duckdb-wasm/issues/2118)).
 * DuckDB relies on HTTP range requests to read only part of a file. Range requests can fail on Firefox (see [issue #1932](https://github.com/duckdb/duckdb-wasm/issues/1932)) and are not detected correctly for some S3 pre-signed URLs (see [issue #2228](https://github.com/duckdb/duckdb-wasm/issues/2228)), which forces the whole file to be downloaded or makes the read fail.
 * Cached reads of files in DuckDB's native format over HTTP can be corrupted (see [issue #1957](https://github.com/duckdb/duckdb-wasm/issues/1957)).
-* HTTP authentication headers are not supported, so endpoints that require them cannot be read directly (see [issue #1967](https://github.com/duckdb/duckdb-wasm/issues/1967)).
+
+The Wasm HTTP client now forwards the request headers that DuckDB's httpfs sets, including the `Authorization` header configured through an [httpfs secret]({% link docs/2.0/core_extensions/httpfs/overview.md %}), so endpoints that require authentication can be read directly. It also surfaces the real HTTP status code and response body on a failed request, rather than a generic network error, which makes authenticated APIs such as the Iceberg REST catalog easier to debug.
 
 ## Extension Fails to Load from a Custom Repository
 
@@ -54,7 +55,9 @@ Extensions remain signed regardless of where they are served, so copying an exte
 
 ## Out of Memory
 
-The WebAssembly client has a limited amount of memory available: [WebAssembly limits the available memory to 4 GB](https://v8.dev/blog/4gb-wasm-memory) and browsers may impose even stricter limits. Queries over large datasets can therefore run out of memory where native DuckDB would not. To stay within the limit:
+The WebAssembly client has a limited amount of memory available: [WebAssembly limits the available memory to 4 GB](https://v8.dev/blog/4gb-wasm-memory) and browsers may impose even stricter limits. Queries over large datasets can therefore run out of memory where native DuckDB would not.
+
+DuckDB-Wasm spills intermediate data that does not fit in memory to a temporary directory, so many larger-than-memory queries succeed out of the box. Spilling is controlled by the `spill` and `temporaryDirectory` [configuration fields]({% link docs/2.0/clients/wasm/instantiation.md %}#configuration): it is enabled by default and writes to `js_buffer://tmp` (buffers held outside the Wasm heap). Point `temporaryDirectory` at an `opfs://` path to spill into the Origin Private File System instead. To stay within the limit:
 
 * Stream large results with [`send()`]({% link docs/2.0/clients/wasm/query.md %}#query-execution) instead of materializing them all at once with `query()`.
 * Read only the columns and rows you need. Because DuckDB reads Parquet files lazily, projections, filters, and `LIMIT` clauses let entire row groups be skipped rather than loaded into memory.
@@ -63,11 +66,11 @@ See [Limitations]({% link docs/2.0/clients/wasm/overview.md %}#limitations) for 
 
 ## Threading Is Not Available
 
-By default, the WebAssembly client uses a single thread; multithreading is available through the `coi` bundle but is still experimental.
+By default, the WebAssembly client uses a single thread; multithreading is available through the `threads` bundle but is still experimental.
 
-The threaded bundle relies on `SharedArrayBuffer`, which browsers only expose to pages that are [cross-origin isolated]({% link docs/2.0/clients/wasm/deploying_duckdb_wasm.md %}#cross-origin-isolation). If the top-level document is not served with the `Cross-Origin-Embedder-Policy` and `Cross-Origin-Opener-Policy` headers, DuckDB-Wasm falls back to the single-threaded `mvp` or `eh` bundle.
+The threaded bundle relies on `SharedArrayBuffer`, which browsers only expose to pages that are [cross-origin isolated]({% link docs/2.0/clients/wasm/deploying_duckdb_wasm.md %}#cross-origin-isolation). If the top-level document is not served with the `Cross-Origin-Embedder-Policy` and `Cross-Origin-Opener-Policy` headers, DuckDB-Wasm falls back to the single-threaded `base` bundle.
 
-See [Cross-Origin Isolation]({% link docs/2.0/clients/wasm/deploying_duckdb_wasm.md %}#cross-origin-isolation) for the required headers, and [Threading]({% link docs/2.0/clients/wasm/instantiation.md %}#threading) for how to select and configure the `coi` bundle.
+See [Cross-Origin Isolation]({% link docs/2.0/clients/wasm/deploying_duckdb_wasm.md %}#cross-origin-isolation) for the required headers, and [Threading]({% link docs/2.0/clients/wasm/instantiation.md %}#threading) for how to select and configure the `threads` bundle.
 
 ## Further Reading
 
