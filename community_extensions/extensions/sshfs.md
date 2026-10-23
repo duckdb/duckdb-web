@@ -8,7 +8,7 @@ excerpt: |
 extension:
   name: sshfs
   description: Allows reading and writing files over SSH
-  version: '2026091401'
+  version: '2026102301'
   language: C++
   build: cmake
   license: MIT
@@ -20,7 +20,8 @@ extension:
 repo:
   github: midwork-finds-jobs/duckdb-sshfs
   andium: 5f2e422f964010d11a0bea040ab421c4d7f7fa41
-  ref: 34d3dddd08f29e7c40bda9a05d56a1b053f9ec7d
+  variegata: 34d3dddd08f29e7c40bda9a05d56a1b053f9ec7d
+  ref: b7ca495c21ea7cec2c59c1e890129a95fdd4a7c3
 
 docs:
   hello_world: |
@@ -72,10 +73,10 @@ This table covers all DuckDB releases that have not reached [end-of-life](https:
 
 | Platform | 1.4.4 | 1.4.5 | 1.5.5 | 1.5.6 | 2.0.0 |
 | :--- | :---: | :---: | :---: | :---: | :---: |
-| Linux AMD64 | ✅ | ❌ | ✅ | ✅ | ❌ |
-| Linux ARM64 | ✅ | ❌ | ✅ | ✅ | ❌ |
+| Linux AMD64 | ✅ | ❌ | ✅ | ✅ | ✅ |
+| Linux ARM64 | ✅ | ❌ | ✅ | ✅ | ✅ |
 | macOS AMD64 | ✅ | ❌ | ✅ | ✅ | ❌ |
-| macOS ARM64 | ✅ | ❌ | ✅ | ✅ | ❌ |
+| macOS ARM64 | ✅ | ❌ | ✅ | ✅ | ✅ |
 | Windows AMD64 | ❌ | ❌ | ❌ | ❌ | ❌ |
 | Windows ARM64 | ❌ | ❌ | ❌ | ❌ | ❌ |
 | WebAssembly | ❌ | ❌ | ❌ | ❌ | ❌ |
