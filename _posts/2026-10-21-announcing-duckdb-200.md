@@ -17,7 +17,6 @@ We showcased many of the new features in [“A Preview of DuckDB v2.0”]({% pos
 For the complete release notes, see the [release page on GitHub](https://github.com/duckdb/duckdb/releases/tag/v2.0.0).
 
 > Tip To install the new version, please visit the [installation page]({% link install/index.html %}).
-> Some clients, such as the CLI and Python, are already available. Other client libraries (e.g., R and Rust) and some extensions can take a few days to release due to the extra changes and review rounds required.
 
 With this release, there are currently three DuckDB lines available.
 DuckDB 2.0 is a long-term support (LTS) release with support until at least October 2027.
