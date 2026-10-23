@@ -63,5 +63,6 @@ if response.status_code == 200:
     upcoming_events = sorted(upcoming_events, key=lambda x: x["start_date"])
     with open(data_file_path, "w") as data_file:
         json.dump(upcoming_events, data_file, indent=4)
+        data_file.write("\n")
 else:
     print("Error downloading .ics file:", response.status_code)
