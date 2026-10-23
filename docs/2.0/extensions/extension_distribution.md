@@ -78,6 +78,20 @@ DuckDB stores this compatibility information in a metadata footer appended to th
 
 > Warning Do not run [`strip`](https://sourceware.org/binutils/docs/binutils/strip.html) on an extension binary. Stripping removes or corrupts the appended metadata footer, after which DuckDB reports the metadata as invalid and refuses to load the extension. On some platforms, `strip` fails outright because the footer extends beyond the binary's segments.
 
+### Skipping the Compatibility Check
+
+For debugging purposes, extension developers can skip this check using the `allow_extensions_metadata_mismatch` setting.
+This lets `INSTALL` and `UPDATE EXTENSIONS` accept extensions with mismatching or invalid metadata.
+For `LOAD`, the setting only takes effect if `allow_unsigned_extensions` is also enabled:
+
+```sql
+SET allow_unsigned_extensions = true;
+SET allow_extensions_metadata_mismatch = true;
+LOAD './some/local/ext.duckdb_extension';
+```
+
+> Warning Loading an extension built for a different DuckDB version or platform may crash DuckDB or cause undefined behavior.
+
 ## Creating a Custom Repository
 
 You can create a custom DuckDB extension repository.
