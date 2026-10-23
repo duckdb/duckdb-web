@@ -59,8 +59,8 @@ docs:
 
 extension_star_count: 10
 extension_star_count_pretty: 10
-extension_download_count: 3775
-extension_download_count_pretty: 3.8k
+extension_download_count: 5877
+extension_download_count_pretty: 5.9k
 image: '/images/community_extensions/social_preview/preview_community_extension_duckdb_geoip_rs.png'
 layout: community_extension_doc
 ---
