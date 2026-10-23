@@ -7,7 +7,7 @@ name: Update docs
 jobs:
   update_docs:
     name: Update docs
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-26.04
     if: ${{ github.ref == 'refs/heads/main' && github.repository == 'duckdb/duckdb-web' }}
 
     steps:
@@ -16,7 +16,7 @@ jobs:
           token: ${{ secrets.GH_UPDATE_DOCS_TOKEN }}
       - uses: actions/setup-python@v7
         with:
-          python-version: '3.12'
+          python-version: '3.14'
           cache: 'pip'
       - run: npm install jsdoc-to-markdown
       - run: pip install wheel pip -U --break-system-packages
