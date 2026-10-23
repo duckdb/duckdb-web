@@ -13,13 +13,15 @@ extension:
   build: cargo
   license: MIT
   excluded_platforms: "wasm_mvp;wasm_eh;wasm_threads;windows_amd64;windows_amd64_rtools;windows_amd64_mingw;linux_amd64_musl"
+  opt_in_platforms: "osx_amd64"
   requires_toolchains: "rust;python3"
   maintainers:
     - nicosuave
 
 repo:
   github: sidequery/duckflight-extension
-  ref: d6646edb7877ab65f39ffa1cfe53b5d090f3694b
+  ref: 81a2a0c8cbaac13bf9a4729860f24085074d9378
+  variegata: d6646edb7877ab65f39ffa1cfe53b5d090f3694b
 
 docs:
   hello_world: |
@@ -59,11 +61,11 @@ docs:
     and internal session/catalog helpers installed by the runtime. These support PostgreSQL
     queries and client metadata discovery; they are not additional server controls or a complete
     implementation of PostgreSQL functions. Their catalog comments describe each helper.
-    DuckDB 1.5.6 does not expose function-description setters through the table-function C API,
+    The v1 table-function C API does not expose function-description setters,
     so the five native server functions are documented above.
 
-extension_star_count: 27
-extension_star_count_pretty: 27
+extension_star_count: 29
+extension_star_count_pretty: 29
 extension_download_count: 2136
 extension_download_count_pretty: 2.1k
 image: '/images/community_extensions/social_preview/preview_community_extension_duckflight.png'

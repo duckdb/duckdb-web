@@ -16,7 +16,7 @@ excerpt: |
 extension:
   name: razobill
   description: High-performance lossless log parsing, analytical database compaction, and information-theoretic semantic accounting.
-  version: 1.1.3
+  version: 1.1.4
   language: C++
   build: cmake
   license: Apache-2.0
@@ -27,8 +27,8 @@ extension:
 # upstream git repository coordinates and tagged release reference
 repo:
   github: razobill/razobill
-  ref: 66bd1831e00123ebd6c8b07dca294b413ce4254a
-  variegata: 66bd1831e00123ebd6c8b07dca294b413ce4254a
+  ref: 55e2bd1d8aab484c6b997102c00d337dbc4d8807
+  variegata: 55e2bd1d8aab484c6b997102c00d337dbc4d8807
 
 # documentation and sql usage examples published on DuckDB community portal
 docs:

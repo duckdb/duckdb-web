@@ -8,7 +8,7 @@ excerpt: |
 extension:
   name: delta_export
   description: Export DuckLake catalog tables to Delta Lake format
-  version: 0.2.0
+  version: 0.2.1
   language: C++
   build: cmake
   license: MIT
@@ -17,7 +17,7 @@ extension:
 
 repo:
   github: djouallah/delta_export
-  ref: d3875f616befdbf2d9a35940daa80115c13fa733
+  ref: 8defbf4174d4fb95f87f2ab5b14234e923ec9ebd
 
 docs:
   hello_world: |
@@ -35,6 +35,9 @@ docs:
 
     -- Export all DuckLake tables to Delta Lake format
     CALL delta_export();
+
+    -- Or export only some tables or schemas
+    CALL delta_export(tables := ['main.orders']);  -- or schemas := ['sales']
   extended_description: |
     Delta Export reads DuckLake internal metadata and writes Delta Lake
     checkpoint files (Parquet, JSON transaction log, and _last_checkpoint)

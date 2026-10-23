@@ -8,6 +8,7 @@ excerpt: |
 extension:
   name: quack_oauth
   description: Extensions providing OAuth and OpenID primitives for authentication and authorization for the DuckDB quack server.
+  version: 2026.10.21
   language: C++
   build: cmake
   excluded_platforms: "windows_amd64_rtools;windows_amd64_mingw;wasm_mvp;wasm_eh;wasm_threads;"
@@ -17,7 +18,10 @@ extension:
     - jrosskopf
 repo:
   github: DataZooDE/quack-oauth
-  ref: 59edd7d553e3b750cddf651267ea1144bc51cba4
+  ref: 0714cb05413ac40161d1b9ec641b4fb6b974a4ea
+  # ref builds against DuckDB 2.0, variegata against v1.5.6; one commit
+  # serves both (and v1.4.5 via the ref fallback).
+  variegata: 0714cb05413ac40161d1b9ec641b4fb6b974a4ea
 
 extension_star_count: 30
 extension_star_count_pretty: 30
@@ -34,11 +38,11 @@ This table covers all DuckDB releases that have not reached [end-of-life](https:
 
 | Platform | 1.4.4 | 1.4.5 | 1.5.5 | 1.5.6 | 2.0.0 |
 | :--- | :---: | :---: | :---: | :---: | :---: |
-| Linux AMD64 | ❌ | ❌ | ✅ | ✅ | ❌ |
-| Linux ARM64 | ❌ | ❌ | ✅ | ✅ | ❌ |
+| Linux AMD64 | ❌ | ❌ | ✅ | ✅ | ✅ |
+| Linux ARM64 | ❌ | ❌ | ✅ | ✅ | ✅ |
 | macOS AMD64 | ❌ | ❌ | ✅ | ✅ | ❌ |
-| macOS ARM64 | ❌ | ❌ | ✅ | ✅ | ❌ |
-| Windows AMD64 | ❌ | ❌ | ✅ | ✅ | ❌ |
+| macOS ARM64 | ❌ | ❌ | ✅ | ✅ | ✅ |
+| Windows AMD64 | ❌ | ❌ | ✅ | ✅ | ✅ |
 | Windows ARM64 | ❌ | ❌ | ❌ | ❌ | ❌ |
 | WebAssembly | ❌ | ❌ | ✅ | ❌ | ❌ |
 

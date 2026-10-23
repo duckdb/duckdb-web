@@ -8,7 +8,7 @@ excerpt: |
 extension:
   name: px
   description: Extension for querying Px-files with DuckDB.
-  version: 0.0.2
+  version: 0.0.4
   language: C++
   build: cmake
   license: MIT
@@ -17,7 +17,9 @@ extension:
 
 repo:
   github: toppyy/duckdb-px
-  ref: 5be93d58f438c48c492f9a9ce729eb61b9bbc025
+  ref: 8656c63225234d78e854a3ec8d66f9defe4ed120
+  ref_next: 8656c63225234d78e854a3ec8d66f9defe4ed120
+  variegata: bc40da8093fc530768255dbc3ee49b6922172dd3
 
 docs:
   hello_world: |
@@ -41,13 +43,13 @@ This table covers all DuckDB releases that have not reached [end-of-life](https:
 
 | Platform | 1.4.4 | 1.4.5 | 1.5.5 | 1.5.6 | 2.0.0 |
 | :--- | :---: | :---: | :---: | :---: | :---: |
-| Linux AMD64 | ❌ | ❌ | ✅ | ❌ | ❌ |
-| Linux ARM64 | ❌ | ❌ | ✅ | ❌ | ❌ |
+| Linux AMD64 | ❌ | ❌ | ✅ | ❌ | ✅ |
+| Linux ARM64 | ❌ | ❌ | ✅ | ❌ | ✅ |
 | macOS AMD64 | ❌ | ❌ | ✅ | ❌ | ❌ |
-| macOS ARM64 | ❌ | ❌ | ✅ | ❌ | ❌ |
-| Windows AMD64 | ❌ | ❌ | ✅ | ❌ | ❌ |
+| macOS ARM64 | ❌ | ❌ | ✅ | ❌ | ✅ |
+| Windows AMD64 | ❌ | ❌ | ✅ | ❌ | ✅ |
 | Windows ARM64 | ❌ | ❌ | ❌ | ❌ | ❌ |
-| WebAssembly | ❌ | ❌ | ✅ | ❌ | ❌ |
+| WebAssembly | ❌ | ❌ | ✅ | ❌ | ✅ |
 
 ### Installing and Loading
 ```sql
