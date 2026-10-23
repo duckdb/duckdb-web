@@ -6,16 +6,16 @@ jobs:
   UpdateStarCountAndCopyStableToArchive:
     if: github.repository == 'duckdb/duckdb-web'
     name: Copy stable to preview
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-26.04
     steps:
       - uses: actions/checkout@v7
         with:
           fetch-depth: 0
 
-      - name: Set up Python 3.12
+      - name: Set up Python 3.14
         uses: actions/setup-python@v7
         with:
-          python-version: '3.12'
+          python-version: '3.14'
 
       - name: Update star count
         env:
