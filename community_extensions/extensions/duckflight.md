@@ -20,7 +20,7 @@ extension:
 
 repo:
   github: sidequery/duckflight-extension
-  ref: 81a2a0c8cbaac13bf9a4729860f24085074d9378
+  ref: a36f686e136f2a4ee22253f25ebdff6e28f36343
   variegata: d6646edb7877ab65f39ffa1cfe53b5d090f3694b
 
 docs:
@@ -66,8 +66,8 @@ docs:
 
 extension_star_count: 29
 extension_star_count_pretty: 29
-extension_download_count: 2136
-extension_download_count_pretty: 2.1k
+extension_download_count: 3144
+extension_download_count_pretty: 3.1k
 image: '/images/community_extensions/social_preview/preview_community_extension_duckflight.png'
 layout: community_extension_doc
 ---

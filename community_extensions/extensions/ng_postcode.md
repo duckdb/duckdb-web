@@ -8,7 +8,7 @@ excerpt: |
 extension:
   name: ng_postcode
   description: Parse, validate, format, and group Nigeria's NIPOST digital postcode (NDAPS)
-  version: 0.1.0
+  version: 0.2.0
   language: Rust
   build: cargo
   license: MIT
@@ -19,7 +19,7 @@ extension:
 
 repo:
   github: Adeniyikayodee/ng-postcode-duckdb
-  ref: c19a29e68a6a535e8d88800aa6d72195acc52642
+  ref: a584158edc26f40554ee5fb8a3290ff3eca1c90a
 
 docs:
   hello_world: |
@@ -49,8 +49,8 @@ docs:
 
 extension_star_count: 0
 extension_star_count_pretty: 0
-extension_download_count: 1211
-extension_download_count_pretty: 1.2k
+extension_download_count: 1705
+extension_download_count_pretty: 1.7k
 image: '/images/community_extensions/social_preview/preview_community_extension_ng_postcode.png'
 layout: community_extension_doc
 ---
@@ -62,11 +62,11 @@ This table covers all DuckDB releases that have not reached [end-of-life](https:
 
 | Platform | 1.4.4 | 1.4.5 | 1.5.5 | 1.5.6 | 2.0.0 |
 | :--- | :---: | :---: | :---: | :---: | :---: |
-| Linux AMD64 | ❌ | ❌ | ❌ | ✅ | ❌ |
-| Linux ARM64 | ❌ | ❌ | ❌ | ✅ | ❌ |
+| Linux AMD64 | ❌ | ❌ | ❌ | ✅ | ✅ |
+| Linux ARM64 | ❌ | ❌ | ❌ | ✅ | ✅ |
 | macOS AMD64 | ❌ | ❌ | ❌ | ✅ | ❌ |
-| macOS ARM64 | ❌ | ❌ | ❌ | ✅ | ❌ |
-| Windows AMD64 | ❌ | ❌ | ❌ | ✅ | ❌ |
+| macOS ARM64 | ❌ | ❌ | ❌ | ✅ | ✅ |
+| Windows AMD64 | ❌ | ❌ | ❌ | ✅ | ✅ |
 | Windows ARM64 | ❌ | ❌ | ❌ | ❌ | ❌ |
 | WebAssembly | ❌ | ❌ | ❌ | ❌ | ❌ |
 

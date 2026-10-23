@@ -76,8 +76,8 @@ docs:
 
 extension_star_count: 60
 extension_star_count_pretty: 60
-extension_download_count: 3197
-extension_download_count_pretty: 3.2k
+extension_download_count: 4745
+extension_download_count_pretty: 4.7k
 image: '/images/community_extensions/social_preview/preview_community_extension_stats_duck.png'
 layout: community_extension_doc
 ---

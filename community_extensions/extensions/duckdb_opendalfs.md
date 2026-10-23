@@ -19,7 +19,7 @@ extension:
 
 repo:
   github: dentiny/duckdb-opendal-filesystem
-  ref: c6f14ce63802a8e134977117659df39a9b54f08f
+  ref: 84b00dc969aacf2f87d3a73f4532b6aa507e54b4
 
 docs:
   hello_world: |
@@ -42,8 +42,8 @@ docs:
 
 extension_star_count: 8
 extension_star_count_pretty: 8
-extension_download_count: 2251
-extension_download_count_pretty: 2.3k
+extension_download_count: 3235
+extension_download_count_pretty: 3.2k
 image: '/images/community_extensions/social_preview/preview_community_extension_duckdb_opendalfs.png'
 layout: community_extension_doc
 ---

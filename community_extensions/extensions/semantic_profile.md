@@ -121,8 +121,8 @@ docs:
 
 extension_star_count: 0
 extension_star_count_pretty: 0
-extension_download_count: 2519
-extension_download_count_pretty: 2.5k
+extension_download_count: 3819
+extension_download_count_pretty: 3.8k
 image: '/images/community_extensions/social_preview/preview_community_extension_semantic_profile.png'
 layout: community_extension_doc
 ---

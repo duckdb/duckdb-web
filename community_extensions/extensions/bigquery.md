@@ -75,8 +75,8 @@ docs:
 
 extension_star_count: 172
 extension_star_count_pretty: 172
-extension_download_count: 48646
-extension_download_count_pretty: 48.6k
+extension_download_count: 46633
+extension_download_count_pretty: 46.6k
 image: '/images/community_extensions/social_preview/preview_community_extension_bigquery.png'
 layout: community_extension_doc
 ---
@@ -88,11 +88,11 @@ This table covers all DuckDB releases that have not reached [end-of-life](https:
 
 | Platform | 1.4.4 | 1.4.5 | 1.5.5 | 1.5.6 | 2.0.0 |
 | :--- | :---: | :---: | :---: | :---: | :---: |
-| Linux AMD64 | ✅ | ❌ | ✅ | ✅ | ❌ |
-| Linux ARM64 | ✅ | ❌ | ✅ | ✅ | ❌ |
+| Linux AMD64 | ✅ | ❌ | ✅ | ✅ | ✅ |
+| Linux ARM64 | ✅ | ❌ | ✅ | ✅ | ✅ |
 | macOS AMD64 | ✅ | ❌ | ✅ | ✅ | ❌ |
-| macOS ARM64 | ✅ | ❌ | ✅ | ✅ | ❌ |
-| Windows AMD64 | ✅ | ❌ | ✅ | ✅ | ❌ |
+| macOS ARM64 | ✅ | ❌ | ✅ | ✅ | ✅ |
+| Windows AMD64 | ✅ | ❌ | ✅ | ✅ | ✅ |
 | Windows ARM64 | ❌ | ❌ | ❌ | ❌ | ❌ |
 | WebAssembly | ❌ | ❌ | ❌ | ❌ | ❌ |
 
