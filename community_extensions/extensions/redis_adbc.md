@@ -51,8 +51,8 @@ docs:
     See the [extension guide](https://github.com/alberttwong/redis-adbc-driver/blob/8f4c5f5763dbef7fa4f096b6da2d19218e6fb9d3/duckdb-extension/README.md)
     for build instructions, prerequisites, limitations and verification.
 
-extension_star_count: 1
-extension_star_count_pretty: 1
+extension_star_count: {"message":"Not Found","documentation_url":"https://docs.github.com/rest/repos/repos#get-a-repository","status":"404"}
+extension_star_count_pretty: n/a
 extension_download_count: null
 extension_download_count_pretty: n/a
 image: '/images/community_extensions/social_preview/preview_community_extension_redis_adbc.png'

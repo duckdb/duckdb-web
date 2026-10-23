@@ -59,8 +59,8 @@ docs:
     monthly revenue exceeds $20 million**. Read the licence before using the models, and contact Mistral AI for a
     commercial licence if it applies to you.
 
-extension_star_count: 2
-extension_star_count_pretty: 2
+extension_star_count: 3
+extension_star_count_pretty: 3
 extension_download_count: null
 extension_download_count_pretty: n/a
 image: '/images/community_extensions/social_preview/preview_community_extension_timestral.png'
