@@ -87,13 +87,13 @@ LOAD {{ page.extension.name }};
 
 <div class="extension_functions_table"></div>
 
-|   function_name   | function_type | description | comment | examples |
-|-------------------|---------------|-------------|---------|----------|
-| dax_query         | table         | NULL        | NULL    |          |
-| pbi_columns       | table         | NULL        | NULL    |          |
-| pbi_measures      | table         | NULL        | NULL    |          |
-| pbi_relationships | table         | NULL        | NULL    |          |
-| pbi_tables        | table         | NULL        | NULL    |          |
+|   function_name   | function_type |                                                                                          description                                                                                          | comment |                                                                                 examples                                                                                  |
+|-------------------|---------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|---------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| dax_query         | table         | Runs a DAX statement against a Power BI semantic model or a direct XMLA endpoint and returns the result rows as a table. connection_string and dax_text are positional; named options use :=. | NULL    | [SELECT * FROM dax_query('Data Source=powerbi://api.powerbi.com/v1.0/myorg/Example%20Workspace;Initial Catalog=example_semantic_model;', 'EVALUATE ROW("probe_ok", 1)');] |
+| pbi_columns       | table         | Returns the columns in a Power BI semantic model by running EVALUATE INFO.VIEW.COLUMNS(). connection_string is positional; named options use :=.                                              | NULL    | [SELECT * FROM pbi_columns('Data Source=powerbi://api.powerbi.com/v1.0/myorg/Example%20Workspace;Initial Catalog=example_semantic_model;');]                              |
+| pbi_measures      | table         | Returns the measures in a Power BI semantic model by running EVALUATE INFO.VIEW.MEASURES(). connection_string is positional; named options use :=.                                            | NULL    | [SELECT * FROM pbi_measures('Data Source=powerbi://api.powerbi.com/v1.0/myorg/Example%20Workspace;Initial Catalog=example_semantic_model;');]                             |
+| pbi_relationships | table         | Returns the relationships in a Power BI semantic model by running EVALUATE INFO.VIEW.RELATIONSHIPS(). connection_string is positional; named options use :=.                                  | NULL    | [SELECT * FROM pbi_relationships('Data Source=powerbi://api.powerbi.com/v1.0/myorg/Example%20Workspace;Initial Catalog=example_semantic_model;');]                        |
+| pbi_tables        | table         | Returns the tables in a Power BI semantic model by running EVALUATE INFO.VIEW.TABLES(). connection_string is positional; named options use :=.                                                | NULL    | [SELECT * FROM pbi_tables('Data Source=powerbi://api.powerbi.com/v1.0/myorg/Example%20Workspace;Initial Catalog=example_semantic_model;');]                               |
 
 ### Overloaded Functions
 
@@ -111,9 +111,10 @@ This extension does not add any types.
 
 <div class="extension_settings_table"></div>
 
-|            name            |                                                                                     description                                                                                     | input_type | scope  | aliases |
-|----------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|------------|--------|---------|
-| normalize_dax_column_names | When true, strip DAX square brackets and table qualifiers from dax_query and pbi_* metadata table function column names (default off; opt in via SET or normalize_dax_column_names) | BOOLEAN    | GLOBAL | []      |
-| pbi_scanner_auth_mode      | Default auth mode for pbi_scanner table functions (access_token, azure_cli, service_principal)                                                                                      | VARCHAR    | GLOBAL | []      |
+|            name            |                                                                                     description                                                                                     | input_type | scope  | aliases | typed_value |
+|----------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|------------|--------|---------|-------------|
+| normalize_dax_column_names | When true, strip DAX square brackets and table qualifiers from dax_query and pbi_* metadata table function column names (default off; opt in via SET or normalize_dax_column_names) | BOOLEAN    | GLOBAL | []      | false       |
+| pbi_scanner_auth_mode      | Default auth mode for pbi_scanner table functions (access_token, azure_cli, service_principal)                                                                                      | VARCHAR    | GLOBAL | []      |             |
+| temp_directory             | Set the directory to which temporary files are written.                                                                                                                             | VARCHAR    | GLOBAL | []      | post.db.tmp |
 
 

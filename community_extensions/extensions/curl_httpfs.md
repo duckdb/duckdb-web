@@ -95,9 +95,10 @@ This extension does not add any types.
 
 <div class="extension_settings_table"></div>
 
-|                name                |                                                     description                                                      | input_type | scope  | aliases |
-|------------------------------------|----------------------------------------------------------------------------------------------------------------------|------------|--------|---------|
-| curl_httpfs_client_implementation  | Select the HTTPUtil implementation to be used. Supports `multi_curl`, `curl`, `httplib`, and `default` (multi_curl). | VARCHAR    | GLOBAL | []      |
-| curl_httpfs_enable_verbose_logging | Turn on and off curl-based http util verbose logging.                                                                | BOOLEAN    | GLOBAL | []      |
+|                name                |                                                     description                                                      | input_type | scope  | aliases | typed_value |
+|------------------------------------|----------------------------------------------------------------------------------------------------------------------|------------|--------|---------|-------------|
+| curl_httpfs_client_implementation  | Select the HTTPUtil implementation to be used. Supports `multi_curl`, `curl`, `httplib`, and `default` (multi_curl). | VARCHAR    | GLOBAL | []      | default     |
+| curl_httpfs_enable_verbose_logging | Turn on and off curl-based http util verbose logging.                                                                | BOOLEAN    | GLOBAL | []      | 0           |
+| temp_directory                     | Set the directory to which temporary files are written.                                                              | VARCHAR    | GLOBAL | []      | post.db.tmp |
 
 

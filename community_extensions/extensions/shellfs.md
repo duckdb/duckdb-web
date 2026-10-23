@@ -85,8 +85,6 @@ This extension does not add any types.
 
 <div class="extension_settings_table"></div>
 
-|      name      |  description   | input_type | scope  | aliases |
-|----------------|----------------|------------|--------|---------|
-| ignore_sigpipe | Ignore SIGPIPE | BOOLEAN    | GLOBAL | []      |
+This extension does not add any settings.
 
 

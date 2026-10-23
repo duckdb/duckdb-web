@@ -67,10 +67,7 @@ LOAD {{ page.extension.name }};
 
 <div class="extension_functions_table"></div>
 
-| function_name | function_type |                        description                         | comment |                                                                                                examples                                                                                                |
-|---------------|---------------|------------------------------------------------------------|---------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| tera_render   | scalar        | Renders a Tera template string with JSON context variables | NULL    | [tera_render('Hello {% raw %}{{{% endraw %} name {% raw %}}}{% endraw %}!', '{"name": "World"}'), tera_render('{% raw %}{{{% endraw %} value \| upper {% raw %}}}{% endraw %}', '{"value": "hello"}')] |
-| tera_render   | scalar        | Renders a Tera template string without context variables   | NULL    | [tera_render('Hello World!')]                                                                                                                                                                          |
+This extension does not add any functions.
 
 ### Overloaded Functions
 

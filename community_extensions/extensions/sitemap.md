@@ -167,7 +167,10 @@ LOAD {{ page.extension.name }};
 
 <div class="extension_functions_table"></div>
 
-This extension does not add any functions.
+|      function_name      | function_type | description | comment | examples |
+|-------------------------|---------------|-------------|---------|----------|
+| bruteforce_find_sitemap | scalar        | NULL        | NULL    |          |
+| sitemap_urls            | table         | NULL        | NULL    |          |
 
 ### Overloaded Functions
 
@@ -185,6 +188,10 @@ This extension does not add any types.
 
 <div class="extension_settings_table"></div>
 
-This extension does not add any settings.
+|        name        |                       description                       | input_type | scope  | aliases |    typed_value     |
+|--------------------|---------------------------------------------------------|------------|--------|---------|--------------------|
+| sitemap_max_size   | Maximum (decompressed) sitemap size in bytes            | UBIGINT    | GLOBAL | []      | 67108864           |
+| sitemap_user_agent | User agent string for sitemap HTTP requests             | VARCHAR    | GLOBAL | []      | DuckDB-Sitemap/1.0 |
+| temp_directory     | Set the directory to which temporary files are written. | VARCHAR    | GLOBAL | []      | post.db.tmp        |
 
 

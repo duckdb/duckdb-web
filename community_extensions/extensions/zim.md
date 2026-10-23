@@ -252,9 +252,10 @@ This extension does not add any types.
 
 <div class="extension_settings_table"></div>
 
-|               name                |                                                                                                          description                                                                                                          | input_type | scope  | aliases |
-|-----------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|------------|--------|---------|
-| zim_max_content_size              | Maximum decompressed size (bytes) of a single ZIM entry to materialize; reads of a larger entry fail cleanly instead of allocating (decompression-bomb guard). 0 disables the cap. Lower it when reading untrusted archives.  | UBIGINT    | GLOBAL | []      |
-| zim_remote_search_max_local_index | Maximum size (bytes) of a remote ZIM's full-text index to copy locally so search works; 0 disables remote search. Larger values cover bigger archives but lengthen the first remote search (the whole index is fetched once). | UBIGINT    | GLOBAL | []      |
+|               name                |                                                                                                          description                                                                                                          | input_type | scope  | aliases | typed_value |
+|-----------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|------------|--------|---------|-------------|
+| temp_directory                    | Set the directory to which temporary files are written.                                                                                                                                                                       | VARCHAR    | GLOBAL | []      | post.db.tmp |
+| zim_max_content_size              | Maximum decompressed size (bytes) of a single ZIM entry to materialize; reads of a larger entry fail cleanly instead of allocating (decompression-bomb guard). 0 disables the cap. Lower it when reading untrusted archives.  | UBIGINT    | GLOBAL | []      | 2147483648  |
+| zim_remote_search_max_local_index | Maximum size (bytes) of a remote ZIM's full-text index to copy locally so search works; 0 disables remote search. Larger values cover bigger archives but lengthen the first remote search (the whole index is fetched once). | UBIGINT    | GLOBAL | []      | 8388608     |
 
 

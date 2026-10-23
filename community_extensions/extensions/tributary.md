@@ -66,23 +66,7 @@ LOAD {{ page.extension.name }};
 
 <div class="extension_functions_table"></div>
 
-|                       function_name                        | function_type | description | comment | examples |
-|------------------------------------------------------------|---------------|-------------|---------|----------|
-| tributary                                                  | scalar        | NULL        | NULL    |          |
-| tributary_metadata                                         | table         | NULL        | NULL    |          |
-| tributary_scan_topic                                       | table         | NULL        | NULL    |          |
-| tributary_schema_registry_delete_subject                   | table         | NULL        | NULL    |          |
-| tributary_schema_registry_delete_subject_version           | table         | NULL        | NULL    |          |
-| tributary_schema_registry_get_schema_by_guid               | table         | NULL        | NULL    |          |
-| tributary_schema_registry_get_schema_by_subject_and_id     | table         | NULL        | NULL    |          |
-| tributary_schema_registry_get_schema_by_version            | table         | NULL        | NULL    |          |
-| tributary_schema_registry_get_schema_latest                | table         | NULL        | NULL    |          |
-| tributary_schema_registry_get_schema_latest_json_structure | scalar        | NULL        | NULL    |          |
-| tributary_schema_registry_register_schema                  | table         | NULL        | NULL    |          |
-| tributary_schema_registry_serialize_json                   | scalar        | NULL        | NULL    |          |
-| tributary_schema_registry_subjects                         | table         | NULL        | NULL    |          |
-| tributary_schema_registry_versions                         | table         | NULL        | NULL    |          |
-| tributary_version                                          | scalar        | NULL        | NULL    |          |
+This extension does not add any functions.
 
 ### Overloaded Functions
 

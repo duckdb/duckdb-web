@@ -114,9 +114,14 @@ LOAD {{ page.extension.name }};
 
 <div class="extension_functions_table"></div>
 
-| function_name | function_type | description | comment | examples |
-|---------------|---------------|-------------|---------|----------|
-| yardstick     | table         | NULL        | NULL    |          |
+|   function_name    | function_type | description | comment | examples |
+|--------------------|---------------|-------------|---------|----------|
+| yardstick          | table         | NULL        | NULL    |          |
+| yardstick_combine  | scalar        | NULL        | NULL    |          |
+| yardstick_finalize | scalar        | NULL        | NULL    |          |
+| yardstick_scoped   | table         | NULL        | NULL    |          |
+| yardstick_state    | scalar        | NULL        | NULL    |          |
+| yardstick_warning  | scalar        | NULL        | NULL    |          |
 
 ### Overloaded Functions
 
@@ -134,6 +139,9 @@ This extension does not add any types.
 
 <div class="extension_settings_table"></div>
 
-This extension does not add any settings.
+|              name               |                       description                       | input_type | scope  | aliases | typed_value |
+|---------------------------------|---------------------------------------------------------|------------|--------|---------|-------------|
+| allow_parser_override_extension | Allow extensions to override the current parser.        | VARCHAR    | GLOBAL | []      | fallback    |
+| temp_directory                  | Set the directory to which temporary files are written. | VARCHAR    | GLOBAL | []      | post.db.tmp |
 
 

@@ -315,10 +315,11 @@ This extension does not add any types.
 
 <div class="extension_settings_table"></div>
 
-|            name            |                                                                               description                                                                                | input_type | scope  | aliases |
-|----------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------|------------|--------|---------|
-| panduck_allow_registration | Allow panduck_register_doc_reader/panduck_register_table_reader to add readers at runtime                                                                                | BOOLEAN    | GLOBAL | []      |
-| panduck_disabled_readers   | Comma-separated denylist of reader FORMATS, applied after panduck_enabled_readers. 'code' turns off the fallback that returns a parse tree for sources no reader claimed | VARCHAR    | GLOBAL | []      |
-| panduck_enabled_readers    | Comma-separated allowlist of reader FORMATS ('*' for all). Applied before panduck_disabled_readers                                                                       | VARCHAR    | GLOBAL | []      |
+|            name            |                                                                               description                                                                                | input_type | scope  | aliases | typed_value |
+|----------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------|------------|--------|---------|-------------|
+| panduck_allow_registration | Allow panduck_register_doc_reader/panduck_register_table_reader to add readers at runtime                                                                                | BOOLEAN    | GLOBAL | []      | true        |
+| panduck_disabled_readers   | Comma-separated denylist of reader FORMATS, applied after panduck_enabled_readers. 'code' turns off the fallback that returns a parse tree for sources no reader claimed | VARCHAR    | GLOBAL | []      |             |
+| panduck_enabled_readers    | Comma-separated allowlist of reader FORMATS ('*' for all). Applied before panduck_disabled_readers                                                                       | VARCHAR    | GLOBAL | []      | *           |
+| temp_directory             | Set the directory to which temporary files are written.                                                                                                                  | VARCHAR    | GLOBAL | []      | post.db.tmp |
 
 

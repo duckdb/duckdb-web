@@ -176,9 +176,10 @@ This extension does not add any types.
 
 <div class="extension_settings_table"></div>
 
-|              name               |                                                    description                                                     | input_type | scope  | aliases |
-|---------------------------------|--------------------------------------------------------------------------------------------------------------------|------------|--------|---------|
-| allowed_pathmacros              | Comma-separated list of scalar macros invokable via the pathmacro: filesystem                                      | VARCHAR    | GLOBAL | []      |
-| scalarfs_max_decompressed_bytes | Maximum number of bytes a scalarfs decompress+ read may materialize (decompression-bomb guard; 0 disables the cap) | UBIGINT    | GLOBAL | []      |
+|              name               |                                                    description                                                     | input_type | scope  | aliases | typed_value |
+|---------------------------------|--------------------------------------------------------------------------------------------------------------------|------------|--------|---------|-------------|
+| allowed_pathmacros              | Comma-separated list of scalar macros invokable via the pathmacro: filesystem                                      | VARCHAR    | GLOBAL | []      |             |
+| scalarfs_max_decompressed_bytes | Maximum number of bytes a scalarfs decompress+ read may materialize (decompression-bomb guard; 0 disables the cap) | UBIGINT    | GLOBAL | []      | 268435456   |
+| temp_directory                  | Set the directory to which temporary files are written.                                                            | VARCHAR    | GLOBAL | []      | post.db.tmp |
 
 

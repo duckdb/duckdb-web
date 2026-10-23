@@ -269,7 +269,7 @@ LOAD {{ page.extension.name }};
 |  function_name   | function_type | description | comment | examples |
 |------------------|---------------|-------------|---------|----------|
 | ft_cast          | scalar        | NULL        | NULL    |          |
-| ft_detail        | scalar        | NULL        | NULL    |          |
+| ft_detail        | aggregate     | NULL        | NULL    |          |
 | ft_infer         | scalar        | NULL        | NULL    |          |
 | ft_profile       | aggregate     | NULL        | NULL    |          |
 | ft_profile       | table_macro   | NULL        | NULL    |          |
@@ -294,6 +294,8 @@ This extension does not add any types.
 
 <div class="extension_settings_table"></div>
 
-This extension does not add any settings.
+|      name      |                       description                       | input_type | scope  | aliases | typed_value |
+|----------------|---------------------------------------------------------|------------|--------|---------|-------------|
+| temp_directory | Set the directory to which temporary files are written. | VARCHAR    | GLOBAL | []      | post.db.tmp |
 
 

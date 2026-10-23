@@ -92,9 +92,10 @@ This extension does not add any types.
 
 <div class="extension_settings_table"></div>
 
-|           name           |                                                      description                                                       | input_type | scope  | aliases |
-|--------------------------|------------------------------------------------------------------------------------------------------------------------|------------|--------|---------|
-| max_rows_to_scan         | Reject queries before execution when estimated table-scan rows exceed this value. Defaults to the maximum idx_t value. | UBIGINT    | GLOBAL | []      |
-| max_rows_to_scan_unknown | Policy for scans without row estimates when max_rows_to_scan is enabled: allow or reject.                              | VARCHAR    | GLOBAL | []      |
+|           name           |                                                      description                                                       | input_type | scope  | aliases |     typed_value      |
+|--------------------------|------------------------------------------------------------------------------------------------------------------------|------------|--------|---------|----------------------|
+| max_rows_to_scan         | Reject queries before execution when estimated table-scan rows exceed this value. Defaults to the maximum idx_t value. | UBIGINT    | GLOBAL | []      | 18446744073709551615 |
+| max_rows_to_scan_unknown | Policy for scans without row estimates when max_rows_to_scan is enabled: allow or reject.                              | VARCHAR    | GLOBAL | []      | allow                |
+| temp_directory           | Set the directory to which temporary files are written.                                                                | VARCHAR    | GLOBAL | []      | post.db.tmp          |
 
 

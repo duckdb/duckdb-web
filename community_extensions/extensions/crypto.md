@@ -67,12 +67,7 @@ LOAD {{ page.extension.name }};
 
 <div class="extension_functions_table"></div>
 
-|    function_name    | function_type |                                                                                                                               description                                                                                                                                | comment |                                                  examples                                                  |
-|---------------------|---------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|---------|------------------------------------------------------------------------------------------------------------|
-| crypto_hash         | scalar        | Computes a cryptographic hash of the input value using the specified algorithm. Supported algorithms: blake3, sha2-256, sha2-512, sha3-256, sha3-512, md5, sha1, and more. Accepts strings, integers, floats, dates, timestamps, UUIDs, and lists of fixed-length types. | NULL    | [crypto_hash('sha2-256', 'hello world'), crypto_hash('blake3', 42), crypto_hash('sha2-256', [1, 2, 3])]    |
-| crypto_hash_agg     | aggregate     | Computes a cryptographic hash over multiple rows using the specified algorithm. ORDER BY is required to ensure deterministic results. Returns the same hash as crypto_hash() would for an equivalent ordered list. Returns NULL for empty result sets.                   | NULL    | [crypto_hash_agg('sha2-256', column_name ORDER BY id), crypto_hash_agg('blake3', data ORDER BY timestamp)] |
-| crypto_hmac         | scalar        | Computes an HMAC (Hash-based Message Authentication Code) of the message using the specified algorithm and key. Supports all hash algorithms except blake3, which requires exactly 32 bytes for the key.                                                                 | NULL    | [crypto_hmac('sha2-256', 'secret_key', 'message to authenticate')]                                         |
-| crypto_random_bytes | scalar        | Generates cryptographically secure random bytes using OpenSSL's RAND_bytes(). Length must be between 1 and 4,294,967,295 bytes. Each call produces different random bytes.                                                                                               | NULL    | [crypto_random_bytes(16), crypto_random_bytes(32)]                                                         |
+This extension does not add any functions.
 
 ### Overloaded Functions
 

@@ -70,17 +70,7 @@ LOAD {{ page.extension.name }};
 
 <div class="extension_functions_table"></div>
 
-|    function_name    | function_type |                                       description                                        | comment |                                    examples                                    |
-|---------------------|---------------|------------------------------------------------------------------------------------------|---------|--------------------------------------------------------------------------------|
-| airport_action      | table         | Execute an Arrow Flight action on a server with a parameter.                             | NULL    | [SELECT * FROM airport_action('grpc://localhost:8815', 'my_action', 'param');] |
-| airport_action      | table         | Execute an Arrow Flight action on a server.                                              | NULL    | [SELECT * FROM airport_action('grpc://localhost:8815', 'my_action');]          |
-| airport_databases   | table_macro   | NULL                                                                                     | NULL    |                                                                                |
-| airport_flights     | table         | List the flights available on an Arrow Flight server, filtered by criteria.              | NULL    | [SELECT * FROM airport_flights('grpc://localhost:8815', '');]                  |
-| airport_flights     | table         | List the flights available on an Arrow Flight server.                                    | NULL    | [SELECT * FROM airport_flights('grpc://localhost:8815');]                      |
-| airport_take_flight | table         | Read an Arrow Flight stream from a server using a flight descriptor (path or command).   | NULL    | [SELECT * FROM airport_take_flight('grpc://localhost:8815', ['my_table']);]    |
-| airport_take_flight | table         | Read an Arrow Flight stream from a server using internal pointers (used by the catalog). | NULL    |                                                                                |
-| airport_user_agent  | scalar        | NULL                                                                                     | NULL    |                                                                                |
-| airport_version     | scalar        | NULL                                                                                     | NULL    |                                                                                |
+This extension does not add any functions.
 
 ### Overloaded Functions
 

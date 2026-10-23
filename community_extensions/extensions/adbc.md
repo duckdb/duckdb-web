@@ -189,11 +189,12 @@ This extension does not add any types.
 
 <div class="extension_settings_table"></div>
 
-|             name             |                                                        description                                                         | input_type | scope  | aliases |
-|------------------------------|----------------------------------------------------------------------------------------------------------------------------|------------|--------|---------|
-| adbc_connection_pool_size    | The number of connections (default 50) to pool (cache) before the catalog creates ephemeral connections to serve requests. | BIGINT     | GLOBAL | []      |
-| adbc_insert_buffer_size      | The number of chunks (default 1000) to buffer in memory before inserting via ADBC.                                         | BIGINT     | GLOBAL | []      |
-| adbc_materialize_insert_rows | Whether input rows for INSERTs are materialized before inserting via ADBC.                                                 | BOOLEAN    | GLOBAL | []      |
-| adbc_mix_reads_writes        | Whether ADBC reads and writes can be mixed within the same SQL statement (default false).                                  | BOOLEAN    | GLOBAL | []      |
+|             name             |                                                        description                                                         | input_type | scope  | aliases | typed_value |
+|------------------------------|----------------------------------------------------------------------------------------------------------------------------|------------|--------|---------|-------------|
+| adbc_connection_pool_size    | The number of connections (default 50) to pool (cache) before the catalog creates ephemeral connections to serve requests. | BIGINT     | GLOBAL | []      | 50          |
+| adbc_insert_buffer_size      | The number of chunks (default 1000) to buffer in memory before inserting via ADBC.                                         | BIGINT     | GLOBAL | []      | 1000        |
+| adbc_materialize_insert_rows | Whether input rows for INSERTs are materialized before inserting via ADBC.                                                 | BOOLEAN    | GLOBAL | []      | false       |
+| adbc_mix_reads_writes        | Whether ADBC reads and writes can be mixed within the same SQL statement (default false).                                  | BOOLEAN    | GLOBAL | []      | false       |
+| temp_directory               | Set the directory to which temporary files are written.                                                                    | VARCHAR    | GLOBAL | []      | post.db.tmp |
 
 

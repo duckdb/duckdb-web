@@ -119,15 +119,16 @@ This extension does not add any types.
 
 <div class="extension_settings_table"></div>
 
-|             name             |                                                                           description                                                                            | input_type | scope  | aliases |
-|------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------|------------|--------|---------|
-| ssh_keepalive                | SSH keepalive interval in seconds (default: 60, set to 0 to disable). Prevents idle connection timeouts and improves performance.                                | BIGINT     | GLOBAL | []      |
-| sshfs_chunk_size_mb          | Chunk size in MB for uploads (default: 50MB, larger chunks may improve throughput but use more memory)                                                           | BIGINT     | GLOBAL | []      |
-| sshfs_debug_logging          | Enable debug logging for SSHFS operations                                                                                                                        | BOOLEAN    | GLOBAL | []      |
-| sshfs_initial_retry_delay_ms | Initial delay in milliseconds between retries, with exponential backoff (default: 1000)                                                                          | BIGINT     | GLOBAL | []      |
-| sshfs_max_concurrent_uploads | Maximum number of concurrent chunk uploads (default: 2, higher values may improve speed but use more connections)                                                | BIGINT     | GLOBAL | []      |
-| sshfs_max_retries            | Maximum number of connection retry attempts (default: 3)                                                                                                         | BIGINT     | GLOBAL | []      |
-| sshfs_strict_crypto          | Restrict SSH to non-NIST algorithms only (curve25519, ed25519, DH group14+). Removes ecdh-sha2-nistp*, ecdsa-sha2-nistp*, and legacy algorithms (default: false) | BOOLEAN    | GLOBAL | []      |
-| sshfs_timeout_seconds        | Timeout in seconds for SSH operations (default: 300 = 5 minutes)                                                                                                 | BIGINT     | GLOBAL | []      |
+|             name             |                                                                           description                                                                            | input_type | scope  | aliases | typed_value |
+|------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------|------------|--------|---------|-------------|
+| ssh_keepalive                | SSH keepalive interval in seconds (default: 60, set to 0 to disable). Prevents idle connection timeouts and improves performance.                                | BIGINT     | GLOBAL | []      | 60          |
+| sshfs_chunk_size_mb          | Chunk size in MB for uploads (default: 50MB, larger chunks may improve throughput but use more memory)                                                           | BIGINT     | GLOBAL | []      | 50          |
+| sshfs_debug_logging          | Enable debug logging for SSHFS operations                                                                                                                        | BOOLEAN    | GLOBAL | []      | false       |
+| sshfs_initial_retry_delay_ms | Initial delay in milliseconds between retries, with exponential backoff (default: 1000)                                                                          | BIGINT     | GLOBAL | []      | 1000        |
+| sshfs_max_concurrent_uploads | Maximum number of concurrent chunk uploads (default: 2, higher values may improve speed but use more connections)                                                | BIGINT     | GLOBAL | []      | 2           |
+| sshfs_max_retries            | Maximum number of connection retry attempts (default: 3)                                                                                                         | BIGINT     | GLOBAL | []      | 3           |
+| sshfs_strict_crypto          | Restrict SSH to non-NIST algorithms only (curve25519, ed25519, DH group14+). Removes ecdh-sha2-nistp*, ecdsa-sha2-nistp*, and legacy algorithms (default: false) | BOOLEAN    | GLOBAL | []      | false       |
+| sshfs_timeout_seconds        | Timeout in seconds for SSH operations (default: 300 = 5 minutes)                                                                                                 | BIGINT     | GLOBAL | []      | 300         |
+| temp_directory               | Set the directory to which temporary files are written.                                                                                                          | VARCHAR    | GLOBAL | []      | post.db.tmp |
 
 

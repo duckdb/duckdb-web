@@ -463,15 +463,15 @@ LOAD {{ page.extension.name }};
 
 <div class="extension_functions_table"></div>
 
-|     function_name     | function_type | description | comment | examples |
-|-----------------------|---------------|-------------|---------|----------|
-| subtoken_cache_clear  | scalar        | NULL        | NULL    |          |
-| subtoken_cache_stats  | scalar        | NULL        | NULL    |          |
-| subtoken_embed        | scalar        | NULL        | NULL    |          |
-| subtoken_is_truncated | scalar        | NULL        | NULL    |          |
-| subtoken_model_id     | scalar        | NULL        | NULL    |          |
-| subtoken_models       | scalar        | NULL        | NULL    |          |
-| subtoken_version      | scalar        | NULL        | NULL    |          |
+|     function_name     | function_type |                                                                                                  description                                                                                                  | comment |                     examples                      |
+|-----------------------|---------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|---------|---------------------------------------------------|
+| subtoken_cache_clear  | scalar        | Drops every cached vector, resets the cache counters and returns how many vectors were dropped.                                                                                                               | NULL    | [subtoken_cache_clear()]                          |
+| subtoken_cache_stats  | scalar        | Returns the embedding cache's counters since the last subtoken_cache_clear(): hits, misses, encoder runs, lookups too full to store, entries and capacity.                                                    | NULL    | [subtoken_cache_stats()]                          |
+| subtoken_embed        | scalar        | Returns a unit-length FLOAT[] vector for text from the model bundled in the extension, with no network call; text with no in-vocabulary tokens (including '') gives the all-zero vector, and NULL gives NULL. | NULL    | [subtoken_embed('a quiet street near the river')] |
+| subtoken_is_truncated | scalar        | Returns true when subtoken_embed(text) had to drop part of text to fit the model's input limits, so its vector does not reflect all of it.                                                                    | NULL    | [subtoken_is_truncated(repeat('word ', 2000))]    |
+| subtoken_model_id     | scalar        | Returns the bundled model's full key; store it beside a vector column so a later session can refuse to compare vectors from a different model.                                                                | NULL    | [subtoken_model_id()]                             |
+| subtoken_models       | scalar        | Returns the catalogue row for the bundled model: name, backend, revision, width, input limit, licence, support tier and key.                                                                                  | NULL    | [subtoken_models().width]                         |
+| subtoken_version      | scalar        | Returns one line naming this build, the bundled model, its revision and the vector width.                                                                                                                     | NULL    | [subtoken_version()]                              |
 
 ### Overloaded Functions
 
@@ -483,12 +483,20 @@ This extension does not add any function overloads.
 
 <div class="extension_types_table"></div>
 
-This extension does not add any types.
+| type_name | type_size | logical_type | type_category | internal |
+|-----------|----------:|--------------|---------------|----------|
+| BIGINT    | 8         | BIGINT       | NUMERIC       | true     |
+| BOOLEAN   | 1         | BOOLEAN      | BOOLEAN       | true     |
+| FLOAT     | 4         | FLOAT        | NUMERIC       | true     |
+| STRUCT    | 0         | STRUCT       | COMPOSITE     | true     |
+| VARCHAR   | 16        | VARCHAR      | STRING        | true     |
 
 ### Added Settings
 
 <div class="extension_settings_table"></div>
 
-This extension does not add any settings.
+|      name      |                       description                       | input_type | scope  | aliases | typed_value |
+|----------------|---------------------------------------------------------|------------|--------|---------|-------------|
+| temp_directory | Set the directory to which temporary files are written. | VARCHAR    | GLOBAL | []      | post.db.tmp |
 
 

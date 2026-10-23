@@ -98,9 +98,9 @@ LOAD {{ page.extension.name }};
 
 <div class="extension_functions_table"></div>
 
-| function_name | function_type | description | comment | examples |
-|---------------|---------------|-------------|---------|----------|
-| delta_export  | table         | NULL        | NULL    |          |
+| function_name | function_type |                                                                                                                                                                                                                                    description                                                                                                                                                                                                                                    | comment |                                                                                                 examples                                                                                                  |
+|---------------|---------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|---------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| delta_export  | table         | Exports every table of the DuckLake catalog in use (or the first attached lake) to Delta Lake by writing _delta_log metadata over the existing parquet files, with deletes as deletion vectors; also removes the Delta logs of dropped tables. With tables := ['name', 'schema.name'] and/or schemas := ['schema'] only those tables, and every table of those schemas, are exported, and dropped-table logs are removed only in those schemas. Returns one status row per table. | NULL    | [CALL delta_export();, CALL delta_export(tables := ['main.orders']);, CALL delta_export(schemas := ['sales'], tables := ['main.orders']);, SELECT table_name, status, data_snapshot FROM delta_export();] |
 
 ### Overloaded Functions
 
@@ -118,6 +118,8 @@ This extension does not add any types.
 
 <div class="extension_settings_table"></div>
 
-This extension does not add any settings.
+|      name      |                       description                       | input_type | scope  | aliases | typed_value |
+|----------------|---------------------------------------------------------|------------|--------|---------|-------------|
+| temp_directory | Set the directory to which temporary files are written. | VARCHAR    | GLOBAL | []      | post.db.tmp |
 
 

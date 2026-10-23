@@ -112,11 +112,7 @@ LOAD {{ page.extension.name }};
 
 <div class="extension_functions_table"></div>
 
-| function_name | function_type | description | comment | examples |
-|---------------|---------------|-------------|---------|----------|
-| hudi_files    | scalar        | NULL        | NULL    |          |
-| hudi_info     | scalar        | NULL        | NULL    |          |
-| read_hudi     | table         | NULL        | NULL    |          |
+This extension does not add any functions.
 
 ### Overloaded Functions
 

@@ -97,20 +97,21 @@ This extension does not add any types.
 
 <div class="extension_settings_table"></div>
 
-|              name              |                                                         description                                                         | input_type | scope  | aliases |
-|--------------------------------|-----------------------------------------------------------------------------------------------------------------------------|------------|--------|---------|
-| datazoo_banner                 | Show the DataZoo feedback banner when an extension is loaded in an interactive terminal (at most once a day per extension). | BOOLEAN    | GLOBAL | []      |
-| quack_oauth_clock_skew_s       | Allowable clock skew (seconds) when verifying JWT exp/nbf/iat (R-S-3).                                                      | INTEGER    | GLOBAL | []      |
-| quack_oauth_enabled            | Swap quack's auth callbacks for the OAuth implementation (R-S-1).                                                           | BOOLEAN    | GLOBAL | []      |
-| quack_oauth_introspect_cache_s | Cache lifetime (seconds) for introspect-mode decisions, capped at token exp (R-S-5).                                        | INTEGER    | GLOBAL | []      |
-| quack_oauth_jwks_min_refresh_s | Minimum seconds between JWKS refreshes per kid (R-S-4). Must be between the startup floor and 3600.                         | INTEGER    | GLOBAL | []      |
-| quack_oauth_policy_default     | Default decision when no policy_table rule matches: 'allow' or 'deny' (R-S-7).                                              | VARCHAR    | GLOBAL | []      |
-| quack_oauth_provider           | First-class IdP preset: entra\|google\|keycloak\|okta\|github\|generic (R-S-12).                                            | VARCHAR    | GLOBAL | []      |
-| quack_oauth_renew_skew_s       | Client refreshes the access token this many seconds before expires_at (R-C-2).                                              | INTEGER    | GLOBAL | []      |
-| quack_oauth_server_secret_name | Name of the quack_oauth_server SECRET that check_token reads.                                                               | VARCHAR    | GLOBAL | []      |
-| quack_oauth_telemetry_enabled  | Enable anonymous usage telemetry, see https://erpl.io/telemetry for details.                                                | BOOLEAN    | GLOBAL | []      |
-| quack_oauth_telemetry_key      | PostHog API key for telemetry, see https://erpl.io/telemetry for details.                                                   | VARCHAR    | GLOBAL | []      |
-| quack_oauth_trust_plaintext    | Allow LOAD with enabled=true even when no TLS terminator is detected (R-N-4).                                               | BOOLEAN    | GLOBAL | []      |
-| quack_oauth_validation_mode    | Token validation strategy: 'jwks', 'introspect', 'tokeninfo', or 'github_check' (R-S-2).                                    | VARCHAR    | GLOBAL | []      |
+|              name              |                                                         description                                                         | input_type | scope  | aliases |                   typed_value                   |
+|--------------------------------|-----------------------------------------------------------------------------------------------------------------------------|------------|--------|---------|-------------------------------------------------|
+| datazoo_banner                 | Show the DataZoo feedback banner when an extension is loaded in an interactive terminal (at most once a day per extension). | BOOLEAN    | GLOBAL | []      | true                                            |
+| quack_oauth_clock_skew_s       | Allowable clock skew (seconds) when verifying JWT exp/nbf/iat (R-S-3).                                                      | INTEGER    | GLOBAL | []      | 60                                              |
+| quack_oauth_enabled            | Swap quack's auth callbacks for the OAuth implementation (R-S-1).                                                           | BOOLEAN    | GLOBAL | []      | false                                           |
+| quack_oauth_introspect_cache_s | Cache lifetime (seconds) for introspect-mode decisions, capped at token exp (R-S-5).                                        | INTEGER    | GLOBAL | []      | 30                                              |
+| quack_oauth_jwks_min_refresh_s | Minimum seconds between JWKS refreshes per kid (R-S-4). Must be between the startup floor and 3600.                         | INTEGER    | GLOBAL | []      | 30                                              |
+| quack_oauth_policy_default     | Default decision when no policy_table rule matches: 'allow' or 'deny' (R-S-7).                                              | VARCHAR    | GLOBAL | []      | deny                                            |
+| quack_oauth_provider           | First-class IdP preset: entra\|google\|keycloak\|okta\|github\|generic (R-S-12).                                            | VARCHAR    | GLOBAL | []      | generic                                         |
+| quack_oauth_renew_skew_s       | Client refreshes the access token this many seconds before expires_at (R-C-2).                                              | INTEGER    | GLOBAL | []      | 60                                              |
+| quack_oauth_server_secret_name | Name of the quack_oauth_server SECRET that check_token reads.                                                               | VARCHAR    | GLOBAL | []      |                                                 |
+| quack_oauth_telemetry_enabled  | Enable anonymous usage telemetry, see https://erpl.io/telemetry for details.                                                | BOOLEAN    | GLOBAL | []      | true                                            |
+| quack_oauth_telemetry_key      | PostHog API key for telemetry, see https://erpl.io/telemetry for details.                                                   | VARCHAR    | GLOBAL | []      | phc_t3wwRLtpyEmLHYaZCSszG0MqVr74J6wnCrj9D41zk2t |
+| quack_oauth_trust_plaintext    | Allow LOAD with enabled=true even when no TLS terminator is detected (R-N-4).                                               | BOOLEAN    | GLOBAL | []      | false                                           |
+| quack_oauth_validation_mode    | Token validation strategy: 'jwks', 'introspect', 'tokeninfo', or 'github_check' (R-S-2).                                    | VARCHAR    | GLOBAL | []      | jwks                                            |
+| temp_directory                 | Set the directory to which temporary files are written.                                                                     | VARCHAR    | GLOBAL | []      | post.db.tmp                                     |
 
 
