@@ -12,6 +12,8 @@ sponsored: true
 venue: "Alice & Eve 2026"
 location: "Neude11 Utrecht Public Library"
 library: true
+redirect_from:
+- /events/2026/10/20/alice-and-eve/
 ---
 
 > DuckLabs is a gold sponsor of this event.
