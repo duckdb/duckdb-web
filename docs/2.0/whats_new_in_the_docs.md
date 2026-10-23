@@ -62,7 +62,6 @@ DuckDB 2.0 issues reads in the background and keeps multiple requests in flight,
 DuckDB 2.0 included optimizer and engine improvements, including faster recursive CTEs and better row-group pruning.
 
 * [Recursive CTEs]({% link docs/2.0/sql/query_syntax/with.md %}#recursive-ctes) and the [blog post on how DuckDB runs them faster]({% post_url 2026-08-25-how-duckdb-runs-recursive-ctes-faster %})
-* [Min-max indexes (zonemaps)]({% link docs/2.0/sql/indexes.md %}#min-max-index-zonemap) used for row-group pruning
 
 ## Storage Format v2.0
 
