@@ -87,11 +87,12 @@ extension:
   name: llm
   requires_extensions:
     - http_request
-  version: '2026020501'
+  version: '2026102301'
 repo:
   github: midwork-finds-jobs/duckdb-llm
   andium: 2de6c4d2a7d1bc6cefe8adfac8ecb16c1e7b2f3e
-  ref: 18c5a54197440fcf43643c22f5de9ea9cbfe31e5
+  variegata: 18c5a54197440fcf43643c22f5de9ea9cbfe31e5
+  ref: 38f0c14d28f3db675293433361f90b637bb8a3d5
 
 extension_star_count: 4
 extension_star_count_pretty: 4
@@ -108,11 +109,11 @@ This table covers all DuckDB releases that have not reached [end-of-life](https:
 
 | Platform | 1.4.4 | 1.4.5 | 1.5.5 | 1.5.6 | 2.0.0 |
 | :--- | :---: | :---: | :---: | :---: | :---: |
-| Linux AMD64 | ✅ | ✅ | ✅ | ✅ | ❌ |
-| Linux ARM64 | ✅ | ✅ | ✅ | ✅ | ❌ |
+| Linux AMD64 | ✅ | ✅ | ✅ | ✅ | ✅ |
+| Linux ARM64 | ✅ | ✅ | ✅ | ✅ | ✅ |
 | macOS AMD64 | ✅ | ✅ | ✅ | ✅ | ❌ |
-| macOS ARM64 | ✅ | ✅ | ✅ | ✅ | ❌ |
-| Windows AMD64 | ✅ | ✅ | ✅ | ✅ | ❌ |
+| macOS ARM64 | ✅ | ✅ | ✅ | ✅ | ✅ |
+| Windows AMD64 | ✅ | ✅ | ✅ | ✅ | ✅ |
 | Windows ARM64 | ❌ | ❌ | ❌ | ❌ | ❌ |
 | WebAssembly | ❌ | ❌ | ❌ | ❌ | ❌ |
 

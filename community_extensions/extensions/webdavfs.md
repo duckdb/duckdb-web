@@ -8,7 +8,7 @@ excerpt: |
 extension:
   name: webdavfs
   description: Allows reading and writing files over WebDAV protocol
-  version: '2026091401'
+  version: '2026102301'
   language: C++
   build: cmake
   license: MIT
@@ -20,7 +20,8 @@ extension:
 repo:
   github: midwork-finds-jobs/duckdb-webdavfs
   andium: 359f4c05601798855c07954cf560a6e3beb6fc10
-  ref: 0259545780249ba6c9656b1cfca9a57168cfb63d
+  variegata: 0259545780249ba6c9656b1cfca9a57168cfb63d
+  ref: a32c98ef9dd21b00b24990d71c4493273f60ae14
 
 docs:
   hello_world: |

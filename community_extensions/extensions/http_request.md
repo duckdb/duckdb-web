@@ -8,7 +8,7 @@ excerpt: |
 extension:
   name: http_request
   description: HTTP client extension for DuckDB with GET/POST/PUT/PATCH/DELETE and byte-range requests
-  version: '2026020501'
+  version: '2026102301'
   language: C++
   build: cmake
   license: MIT
@@ -19,7 +19,8 @@ extension:
 repo:
   github: midwork-finds-jobs/duckdb_http_request
   andium: d4ad6fb9728b637996de4e23e0afcaf89b5140b4
-  ref: 1c0324d3749d7b2d82fbf35b289cd2ca4da62934
+  variegata: 1c0324d3749d7b2d82fbf35b289cd2ca4da62934
+  ref: 319d8af27df8868593068f8698e168f8ac9ac44b
 
 docs:
   hello_world: |
@@ -82,13 +83,13 @@ This table covers all DuckDB releases that have not reached [end-of-life](https:
 
 | Platform | 1.4.4 | 1.4.5 | 1.5.5 | 1.5.6 | 2.0.0 |
 | :--- | :---: | :---: | :---: | :---: | :---: |
-| Linux AMD64 | ✅ | ❌ | ❌ | ❌ | ❌ |
-| Linux ARM64 | ✅ | ❌ | ❌ | ❌ | ❌ |
+| Linux AMD64 | ✅ | ❌ | ❌ | ❌ | ✅ |
+| Linux ARM64 | ✅ | ❌ | ❌ | ❌ | ✅ |
 | macOS AMD64 | ✅ | ❌ | ❌ | ❌ | ❌ |
-| macOS ARM64 | ✅ | ❌ | ❌ | ❌ | ❌ |
-| Windows AMD64 | ✅ | ❌ | ❌ | ❌ | ❌ |
+| macOS ARM64 | ✅ | ❌ | ❌ | ❌ | ✅ |
+| Windows AMD64 | ✅ | ❌ | ❌ | ❌ | ✅ |
 | Windows ARM64 | ❌ | ❌ | ❌ | ❌ | ❌ |
-| WebAssembly | ✅ | ❌ | ❌ | ❌ | ❌ |
+| WebAssembly | ✅ | ❌ | ❌ | ❌ | ✅ |
 
 ### Installing and Loading
 ```sql
