@@ -116,7 +116,9 @@ LOAD {{ page.extension.name }};
 
 <div class="extension_functions_table"></div>
 
-This extension does not add any functions.
+| function_name | function_type | description | comment | examples |
+|---------------|---------------|-------------|---------|----------|
+| psql_enable   | table         | NULL        | NULL    |          |
 
 ### Overloaded Functions
 
@@ -134,6 +136,9 @@ This extension does not add any types.
 
 <div class="extension_settings_table"></div>
 
-This extension does not add any settings.
+|           name            |                       description                       | input_type | scope  | aliases |  typed_value  |
+|---------------------------|---------------------------------------------------------|------------|--------|---------|---------------|
+| active_grammar_extensions | The grammar extensions used by the parser.              | VARCHAR[]  | LOCAL  | []      | [shell, psql] |
+| temp_directory            | Set the directory to which temporary files are written. | VARCHAR    | GLOBAL | []      | post.db.tmp   |
 
 
