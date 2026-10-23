@@ -14,6 +14,7 @@ Usage: {% include install/versions.html release=r %}
 {%- assign vk = vp | append: "go_tag" -%}{%- assign v_go_tag = site[vk] -%}
 {%- assign vk = vp | append: "r_version" -%}{%- assign v_r = site[vk] -%}
 {%- assign vk = vp | append: "rust_version" -%}{%- assign v_rust = site[vk] -%}
+{%- assign vk = vp | append: "rust_crate_version" -%}{%- assign v_rust_crate = site[vk] -%}
 {%- assign vk = vp | append: "wasm_version" -%}{%- assign v_wasm = site[vk] -%}
 {%- assign vk = vp | append: "wasm_tag" -%}{%- assign v_wasm_tag = site[vk] -%}
 {%- assign vk = vp | append: "csharp_version" -%}{%- assign v_csharp = site[vk] -%}

@@ -291,10 +291,12 @@ dependencies {
 {%- comment -%} Rust {%- endcomment -%}
 {%- if v_rust != "" -%}
 {%- capture docs -%}{% include install/docs_url.html release=release_version client="rust" %}{%- endcapture %}
+{%- comment -%} A tilde requirement is needed because Cargo treats a bare version as a caret requirement,
+which would resolve to the newest 1.x crate, i.e., the newest DuckDB release. {%- endcomment %}
 
 <div data-release="{{ release_version }}" data-environment="rust" data-label="{{ v_rust }}" data-docs="{{ docs }}">
 
-{% highlight bash %}cargo add duckdb{% unless newest_rust %}@{{ v_rust }}{% endunless %} --features bundled{% endhighlight %}
+{% highlight bash %}cargo add {% if newest_rust %}duckdb{% else %}'duckdb@~{{ v_rust_crate }}'{% endif %} --features bundled{% endhighlight %}
 
 </div>
 {%- assign newest_rust = false -%}

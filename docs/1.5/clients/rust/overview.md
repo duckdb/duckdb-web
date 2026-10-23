@@ -15,14 +15,14 @@ The DuckDB Rust client, [`duckdb-rs`](https://github.com/duckdb/duckdb-rs), is a
 The DuckDB Rust client is published on [crates.io](https://crates.io/crates/duckdb). The full API is documented on [docs.rs](https://docs.rs/duckdb). Add it to a project with `cargo`, enabling the `bundled` feature so that DuckDB is compiled from source and no system library is required:
 
 ```bash
-cargo add duckdb --features bundled
+cargo add 'duckdb@~{{ site.maintained_duckdb_rust_crate_version }}' --features bundled
 ```
 
 The equivalent `Cargo.toml` entry pins the version. Starting with DuckDB v1.5.0 the crate version has the form `1.⟨major_minor_patch⟩.x`. A tilde requirement receives patch releases without changing the bundled DuckDB version:
 
 ```toml
 [dependencies]
-duckdb = { version = "~1.10505.0", features = ["bundled"] }
+duckdb = { version = "~{{ site.maintained_duckdb_rust_crate_version }}", features = ["bundled"] }
 ```
 
 The `bundled` feature is the simplest way to get started. Without it, the [`libduckdb-sys`](https://crates.io/crates/libduckdb-sys) crate links against a system DuckDB library instead of compiling one, which is covered in [Troubleshoot]({% link docs/1.5/clients/rust/troubleshoot.md %}#linking-against-a-system-library).

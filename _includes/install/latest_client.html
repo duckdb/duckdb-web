@@ -1,6 +1,6 @@
 {%- comment -%}
 Finds the newest release in _data/releases.yml that offers a client, e.g., to point to the 1.5 Rust client from the 2.0 docs
-until a Rust client based on DuckDB 2.0 is released. Assigns latest_version, latest_package (e.g., JDBC version or Go tag)
+until a Rust client based on DuckDB 2.0 is released. Assigns latest_version, latest_package (e.g., JDBC version, Go tag or Rust crate version)
 and latest_release (short version) in the caller.
 Usage: {% include install/latest_client.html client="rust" %}{{ latest_version }}
 Clients: core (CLI, Python, C), java, odbc, nodejs, go, r, rust, wasm, csharp
@@ -14,7 +14,7 @@ Clients: core (CLI, Python, C), java, odbc, nodejs, go, r, rust, wasm, csharp
     {%- when "nodejs" -%}{%- assign latest_version = v_nodejs -%}{%- assign latest_package = v_nodejs -%}
     {%- when "go" -%}{%- assign latest_version = v_go -%}{%- assign latest_package = v_go_tag -%}
     {%- when "r" -%}{%- assign latest_version = v_r -%}{%- assign latest_package = v_r -%}
-    {%- when "rust" -%}{%- assign latest_version = v_rust -%}{%- assign latest_package = v_rust -%}
+    {%- when "rust" -%}{%- assign latest_version = v_rust -%}{%- assign latest_package = v_rust_crate -%}
     {%- when "wasm" -%}{%- assign latest_version = v_wasm -%}{%- assign latest_package = v_wasm_tag -%}
     {%- when "csharp" -%}{%- assign latest_version = v_csharp -%}{%- assign latest_package = v_csharp -%}
     {%- else -%}{%- assign latest_version = v_core -%}{%- assign latest_package = v_core -%}

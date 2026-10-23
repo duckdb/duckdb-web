@@ -34,7 +34,7 @@ The equivalent `Cargo.toml` entry pins the version. Starting with DuckDB 1.5.0 t
 
 ```toml
 [dependencies]
-{% include install/latest_client.html client="rust" %}{% assign rust_v = latest_version | split: "." %}duckdb = { version = "~1.{{ rust_v[0] }}{{ rust_v[1] | prepend: "0" | slice: -2, 2 }}{{ rust_v[2] | prepend: "0" | slice: -2, 2 }}.0", features = ["bundled"] }
+{% include install/latest_client.html client="rust" %}duckdb = { version = "~{{ latest_package }}", features = ["bundled"] }
 ```
 
 The `bundled` feature is the simplest way to get started. Without it, the [`libduckdb-sys`](https://crates.io/crates/libduckdb-sys) crate links against a system DuckDB library instead of compiling one, which is covered in [Troubleshoot]({% link docs/2.0/clients/rust/troubleshoot.md %}#linking-against-a-system-library).
