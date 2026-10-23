@@ -18,11 +18,12 @@ This page shows the patterns for a jsDelivr CDN, webpack, Vite and statically se
 
 ## Bundle Selection
 
-DuckDB-Wasm ships several WebAssembly modules compiled for different browser feature sets, because post-MVP WebAssembly features reach browsers at different speeds and each one can bring a flat performance improvement. The `selectBundle` function runs dynamic browser checks and picks the fastest bundle the current browser supports:
+DuckDB-Wasm ships two WebAssembly modules compiled for different browser feature sets. The `selectBundle` function runs dynamic browser checks and picks the fastest bundle the current browser supports:
 
-* `mvp` — the WebAssembly 1.0 (MVP) baseline, supported everywhere
-* `eh` — adds Wasm-level exception handling, which improves performance; DuckDB and DuckDB-Wasm are written in C++ and use exceptions to propagate errors, so native exception handling avoids emulating them through JavaScript
-* `coi` — adds threading for parallel query execution; it requires the page to be [cross-origin isolated]({% link docs/2.0/clients/wasm/deploying_duckdb_wasm.md %}#cross-origin-isolation) and must be opted into explicitly (see [Threading](#threading))
+* `base` — single-threaded, and the baseline that runs everywhere. It requires Wasm-level exception handling; DuckDB and DuckDB-Wasm are written in C++ and use exceptions to propagate errors, so native exception handling avoids emulating them through JavaScript. Every modern browser supports it, and `selectBundle` throws if a browser does not.
+* `threads` — adds threading for parallel query execution. It additionally requires Wasm SIMD and threads, and the page must be [cross-origin isolated]({% link docs/2.0/clients/wasm/deploying_duckdb_wasm.md %}#cross-origin-isolation). It must be opted into explicitly (see [Threading](#threading)).
+
+Earlier releases shipped three bundles: `mvp` (the WebAssembly 1.0 baseline with no exception handling), `eh` (adding exception handling), and `coi` (adding threading). DuckDB-Wasm now requires exception handling, so the `mvp` bundle has been removed. The `base` bundle replaces `eh` and is the new baseline, and the `threads` bundle replaces `coi`.
 
 The examples below all call `selectBundle` so the browser receives the fastest bundle it can run. You can also inspect the selected bundle and feature set from the [web shell](https://shell.duckdb.org) with the `.features` command.
 
@@ -52,20 +53,15 @@ URL.revokeObjectURL(worker_url);
 
 ## `webpack`
 
-When your application is built with [webpack](https://webpack.js.org/), let the bundler resolve and emit DuckDB-Wasm's assets instead of fetching them from a CDN. Import each `.wasm` module directly, and reference the worker scripts with `new URL(..., import.meta.url)` so that webpack fingerprints them and rewrites the paths to the emitted files. The bundles are declared manually because their final locations are known only after the build, and `selectBundle` then chooses between the `mvp` and `eh` variants at runtime.
+When your application is built with [webpack](https://webpack.js.org/), let the bundler resolve and emit DuckDB-Wasm's assets instead of fetching them from a CDN. Import the `.wasm` module directly, and reference the worker script with `new URL(..., import.meta.url)` so that webpack fingerprints it and rewrites the path to the emitted file. The bundle is declared manually because its final location is known only after the build. This declares the single-threaded `base` bundle; to add the threaded bundle, see [Threading](#threading).
 
 ```ts
 import * as duckdb from '@duckdb/duckdb-wasm';
-import duckdb_wasm from '@duckdb/duckdb-wasm/dist/duckdb-mvp.wasm';
-import duckdb_wasm_next from '@duckdb/duckdb-wasm/dist/duckdb-eh.wasm';
+import duckdb_wasm from '@duckdb/duckdb-wasm/dist/duckdb-base.wasm';
 const MANUAL_BUNDLES: duckdb.DuckDBBundles = {
-    mvp: {
+    base: {
         mainModule: duckdb_wasm,
-        mainWorker: new URL('@duckdb/duckdb-wasm/dist/duckdb-browser-mvp.worker.js', import.meta.url).toString(),
-    },
-    eh: {
-        mainModule: duckdb_wasm_next,
-        mainWorker: new URL('@duckdb/duckdb-wasm/dist/duckdb-browser-eh.worker.js', import.meta.url).toString(),
+        mainWorker: new URL('@duckdb/duckdb-wasm/dist/duckdb-browser-base.worker.js', import.meta.url).toString(),
     },
 };
 // Select a bundle based on browser checks
@@ -79,23 +75,17 @@ await db.instantiate(bundle.mainModule, bundle.pthreadWorker);
 
 ## `vite`
 
-[Vite](https://vitejs.dev/) resolves assets a little differently: appending the `?url` suffix to an import tells Vite to return the asset's final URL rather than its contents. Import both the `.wasm` modules and the worker scripts this way, assemble them into the manual bundle definition, and let `selectBundle` select the appropriate variant for the browser at runtime.
+[Vite](https://vitejs.dev/) resolves assets a little differently: appending the `?url` suffix to an import tells Vite to return the asset's final URL rather than its contents. Import the `.wasm` module and the worker script this way, assemble them into the manual bundle definition, and let `selectBundle` resolve the bundle for the browser at runtime. This declares the single-threaded `base` bundle; to add the threaded bundle, see [Threading](#threading).
 
 ```ts
 import * as duckdb from '@duckdb/duckdb-wasm';
-import duckdb_wasm from '@duckdb/duckdb-wasm/dist/duckdb-mvp.wasm?url';
-import mvp_worker from '@duckdb/duckdb-wasm/dist/duckdb-browser-mvp.worker.js?url';
-import duckdb_wasm_eh from '@duckdb/duckdb-wasm/dist/duckdb-eh.wasm?url';
-import eh_worker from '@duckdb/duckdb-wasm/dist/duckdb-browser-eh.worker.js?url';
+import duckdb_wasm from '@duckdb/duckdb-wasm/dist/duckdb-base.wasm?url';
+import base_worker from '@duckdb/duckdb-wasm/dist/duckdb-browser-base.worker.js?url';
 
 const MANUAL_BUNDLES: duckdb.DuckDBBundles = {
-    mvp: {
+    base: {
         mainModule: duckdb_wasm,
-        mainWorker: mvp_worker,
-    },
-    eh: {
-        mainModule: duckdb_wasm_eh,
-        mainWorker: eh_worker,
+        mainWorker: base_worker,
     },
 };
 // Select a bundle based on browser checks
@@ -115,13 +105,9 @@ If you would rather not depend on a CDN or a bundler, you can host the DuckDB-Wa
 import * as duckdb from '@duckdb/duckdb-wasm';
 
 const MANUAL_BUNDLES: duckdb.DuckDBBundles = {
-    mvp: {
-        mainModule: 'change/me/../duckdb-mvp.wasm',
-        mainWorker: 'change/me/../duckdb-browser-mvp.worker.js',
-    },
-    eh: {
-        mainModule: 'change/me/../duckdb-eh.wasm',
-        mainWorker: 'change/me/../duckdb-browser-eh.worker.js',
+    base: {
+        mainModule: 'change/me/../duckdb-base.wasm',
+        mainWorker: 'change/me/../duckdb-browser-base.worker.js',
     },
 };
 // Select a bundle based on browser checks
@@ -161,9 +147,19 @@ Commonly used fields of the configuration object:
 * `path`: the database file to open. Defaults to an in-memory database (`:memory:`). Use an `opfs://` path to persist data to the browser's Origin Private File System (see [Persistence with OPFS](#persistence-with-opfs)).
 * `accessMode`: `duckdb.DuckDBAccessMode.READ_ONLY` or `duckdb.DuckDBAccessMode.READ_WRITE`.
 * `allowUnsignedExtensions`: allow loading extensions that are not signed (see [Load Extensions]({% link docs/2.0/clients/wasm/extensions.md %})).
-* `maximumThreads`: the number of threads to use. This takes effect only with the threaded `coi` bundle on a cross-origin-isolated page (see [Threading](#threading)).
+* `maximumThreads`: the number of threads to use. This takes effect only with the threaded bundle on a cross-origin-isolated page (see [Threading](#threading)).
 * `query`: controls how query results are converted from Arrow into JavaScript values.
 * `opfs`: controls how `opfs://` files other than the database file are registered. Set `fileHandling` to `'auto'` to register files referenced in SQL automatically; the default is manual registration (see [Persistence with OPFS](#persistence-with-opfs)).
+
+DuckDB-Wasm also accepts fields that control spilling, storage locations, the extension repository, and data conversion:
+
+* `spill`: spill data that does not fit in memory to the temporary directory, rather than failing with an out-of-memory error. This is enabled by default and can be turned off by setting it to `false`. See [Out of Memory]({% link docs/2.0/clients/wasm/troubleshoot.md %}#out-of-memory).
+* `temporaryDirectory`: where spilled data is written. Defaults to `js_buffer://tmp`, which uses buffers held by the runtime outside the Wasm heap. Point it at an `opfs://` path to spill into the Origin Private File System instead.
+* `homeDirectory`: DuckDB's home directory, where it stores data next to the user such as persistent secrets. Set it to `opfs://home` so that this data survives across sessions.
+* `extensionRepository`: the repository extensions are loaded from, equivalent to `custom_extension_repository`. Defaults to `extensions.duckdb.org` (see [Load Extensions]({% link docs/2.0/clients/wasm/extensions.md %}#serving-extensions-from-a-third-party-repository)).
+* `filesystem`: tunes HTTP reads. `reliableHeadRequests`, `allowFullHTTPReads`, and `forceFullHTTPReads` control whether range requests are used and whether a full download is allowed as a fallback (see [Troubleshoot]({% link docs/2.0/clients/wasm/troubleshoot.md %}#network-error-when-querying-remote-files)).
+* `arrowLosslessConversion`: use an alternate Arrow conversion that preserves the full range and precision of DuckDB values.
+* `customUserAgent`: append a custom string to the user agent that DuckDB-Wasm reports on outgoing requests.
 
 The `query` object tunes the Arrow-to-JavaScript type mapping:
 
@@ -175,25 +171,25 @@ The `query` object tunes the Arrow-to-JavaScript type mapping:
 
 ## Threading
 
-By default DuckDB-Wasm runs on a single thread. The threaded `coi` bundle runs queries across multiple threads, but it has two requirements: the page must be [cross-origin isolated]({% link docs/2.0/clients/wasm/deploying_duckdb_wasm.md %}#cross-origin-isolation), and you must add the `coi` bundle to the set you pass to `selectBundle`, because `getJsDelivrBundles()` returns only the `mvp` and `eh` bundles. The `coi` bundle also needs a third artifact, the pthread worker, alongside the usual module and worker:
+By default DuckDB-Wasm runs on a single thread. The threaded bundle runs queries across multiple threads, but it has two requirements: the page must be [cross-origin isolated]({% link docs/2.0/clients/wasm/deploying_duckdb_wasm.md %}#cross-origin-isolation), and you must add the `threads` bundle to the set you pass to `selectBundle`, because `getJsDelivrBundles()` returns only the `base` bundle. The `threads` bundle also needs a third artifact, the pthread worker, alongside the usual module and worker:
 
 ```ts
 import * as duckdb from '@duckdb/duckdb-wasm';
 
 const DIST = 'https://cdn.jsdelivr.net/npm/@duckdb/duckdb-wasm/dist/';
 
-// getJsDelivrBundles() returns only mvp and eh, so add coi explicitly
+// getJsDelivrBundles() returns only base, so add threads explicitly
 const bundles: duckdb.DuckDBBundles = {
     ...duckdb.getJsDelivrBundles(),
-    coi: {
-        mainModule: `${DIST}duckdb-coi.wasm`,
-        mainWorker: `${DIST}duckdb-browser-coi.worker.js`,
-        pthreadWorker: `${DIST}duckdb-browser-coi.pthread.worker.js`,
+    threads: {
+        mainModule: `${DIST}duckdb-threads.wasm`,
+        mainWorker: `${DIST}duckdb-browser-threads.worker.js`,
+        pthreadWorker: `${DIST}duckdb-browser-threads.pthread.worker.js`,
     },
 };
 
-// selectBundle picks coi only on a cross-origin-isolated page whose browser
-// supports Wasm exceptions, SIMD, and threads; otherwise it falls back to eh or mvp
+// selectBundle picks threads only on a cross-origin-isolated page whose browser
+// supports Wasm exceptions, SIMD, and threads; otherwise it falls back to base
 const bundle = await duckdb.selectBundle(bundles);
 
 // Worker scripts must be same-origin, so wrap the CDN worker in a Blob URL
@@ -205,15 +201,15 @@ const db = new duckdb.AsyncDuckDB(new duckdb.ConsoleLogger(), worker);
 await db.instantiate(bundle.mainModule, bundle.pthreadWorker);
 URL.revokeObjectURL(worker_url);
 
-// Configure the thread count (only effective on the coi bundle)
+// Configure the thread count (only effective on the threaded bundle)
 await db.open({ maximumThreads: 4 });
 const conn = await db.connect();
 ```
 
-Because `selectBundle` falls back to the `eh` or `mvp` bundle when the `coi` requirements are not met, the same code runs everywhere: on a page that is not cross-origin isolated it simply runs single-threaded, and `bundle.pthreadWorker` is `null`. Two things to keep in mind when deploying the threaded bundle:
+Because `selectBundle` falls back to the `base` bundle when the `threads` requirements are not met, the same code runs everywhere: on a page that is not cross-origin isolated it simply runs single-threaded, and `bundle.pthreadWorker` is `null`. Two things to keep in mind when deploying the threaded bundle:
 
 * The page must be served with the `Cross-Origin-Opener-Policy: same-origin` and `Cross-Origin-Embedder-Policy: require-corp` headers, which is what makes the browser expose `SharedArrayBuffer` and report the page as cross-origin isolated. See [Cross-Origin Isolation]({% link docs/2.0/clients/wasm/deploying_duckdb_wasm.md %}#cross-origin-isolation).
-* Extensions must be built for the threaded platform. The `coi` bundle uses the `wasm_threads` extension platform, so extensions published only for `wasm_mvp` or `wasm_eh` will not load into it.
+* Extensions must be built for the threaded platform. The `threads` bundle uses the `wasm_threads` extension platform, while the `base` bundle uses `wasm_base`, so an extension has to be published for the platform of the bundle that loads it.
 
 ## Persistence with OPFS
 
