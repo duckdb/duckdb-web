@@ -8,7 +8,7 @@ excerpt: |
 extension:
   name: duckdb_object_storage
   description: Store writable DuckDB databases in local or S3-compatible object storage through SlateDB
-  version: 0.1.0
+  version: 0.2.0
   language: Rust & C++
   build: cmake
   license: MIT
@@ -19,7 +19,7 @@ extension:
 
 repo:
   github: dentiny/duckdb-object-storage
-  ref: 57845cd6c768d3227ea37822d2a043cc250d519b
+  ref: 56d9c7b928836cfaffa6790c77b7640d50102fe3
 
 docs:
   hello_world: |
@@ -91,10 +91,10 @@ This table covers all DuckDB releases that have not reached [end-of-life](https:
 
 | Platform | 1.4.4 | 1.4.5 | 1.5.5 | 1.5.6 | 2.0.0 |
 | :--- | :---: | :---: | :---: | :---: | :---: |
-| Linux AMD64 | ❌ | ❌ | ❌ | ✅ | ❌ |
-| Linux ARM64 | ❌ | ❌ | ❌ | ✅ | ❌ |
+| Linux AMD64 | ❌ | ❌ | ❌ | ✅ | ✅ |
+| Linux ARM64 | ❌ | ❌ | ❌ | ✅ | ✅ |
 | macOS AMD64 | ❌ | ❌ | ❌ | ✅ | ❌ |
-| macOS ARM64 | ❌ | ❌ | ❌ | ✅ | ❌ |
+| macOS ARM64 | ❌ | ❌ | ❌ | ✅ | ✅ |
 | Windows AMD64 | ❌ | ❌ | ❌ | ❌ | ❌ |
 | Windows ARM64 | ❌ | ❌ | ❌ | ❌ | ❌ |
 | WebAssembly | ❌ | ❌ | ❌ | ❌ | ❌ |

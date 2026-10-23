@@ -19,7 +19,8 @@ extension:
 repo:
   andium: 69664ce2fb234a071c4e01690584d2c402e96705
   github: query-farm/json_schema
-  ref: a745dbf089a53da68f60c1084ba4c1fba3623f3b
+  ref: c0b5fc48d1d2654e804a7b0ea6aad877044dc4ba
+  variegata: 5a07ae7c3bddddb05dcae8a00b15a836ccfcdb1a
 
 extension_star_count: 8
 extension_star_count_pretty: 8

@@ -21,7 +21,8 @@ extension:
 repo:
   andium: 0ace6af84ec2289c23944857fd9aded06e65ec9c
   github: query-farm/radio
-  ref: b5e292ab8bff74ad8a1934a120f53cd62d0ec0ba
+  ref: 9dda8c730b6f32f781e17f7b3cf527da115382a3
+  variegata: f8d93c04377284389e38937d9309c05ac71a123c
 
 extension_star_count: 43
 extension_star_count_pretty: 43
@@ -38,10 +39,10 @@ This table covers all DuckDB releases that have not reached [end-of-life](https:
 
 | Platform | 1.4.4 | 1.4.5 | 1.5.5 | 1.5.6 | 2.0.0 |
 | :--- | :---: | :---: | :---: | :---: | :---: |
-| Linux AMD64 | ✅ | ❌ | ✅ | ✅ | ❌ |
-| Linux ARM64 | ✅ | ❌ | ✅ | ✅ | ❌ |
+| Linux AMD64 | ✅ | ❌ | ✅ | ✅ | ✅ |
+| Linux ARM64 | ✅ | ❌ | ✅ | ✅ | ✅ |
 | macOS AMD64 | ✅ | ❌ | ✅ | ✅ | ❌ |
-| macOS ARM64 | ✅ | ❌ | ✅ | ✅ | ❌ |
+| macOS ARM64 | ✅ | ❌ | ✅ | ✅ | ✅ |
 | Windows AMD64 | ❌ | ❌ | ❌ | ❌ | ❌ |
 | Windows ARM64 | ❌ | ❌ | ❌ | ❌ | ❌ |
 | WebAssembly | ❌ | ❌ | ❌ | ❌ | ❌ |

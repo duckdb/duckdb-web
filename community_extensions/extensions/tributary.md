@@ -20,7 +20,8 @@ extension:
 repo:
   andium: 3b2a5c1e23bb2cf608874f64dbf9469f5f945892
   github: query-farm/tributary
-  ref: cb1fb527ea29628b976a0b2b819bc0692d9d226b
+  ref: 820ca74ba108b8e0d7c8d7a1caf74f6340a49837
+  variegata: d7d89361c2802c032ba5af73aa65718f5a26804b
 
 extension_star_count: 61
 extension_star_count_pretty: 61
@@ -37,11 +38,11 @@ This table covers all DuckDB releases that have not reached [end-of-life](https:
 
 | Platform | 1.4.4 | 1.4.5 | 1.5.5 | 1.5.6 | 2.0.0 |
 | :--- | :---: | :---: | :---: | :---: | :---: |
-| Linux AMD64 | ✅ | ✅ | ❌ | ✅ | ❌ |
-| Linux ARM64 | ✅ | ✅ | ❌ | ✅ | ❌ |
+| Linux AMD64 | ✅ | ✅ | ❌ | ✅ | ✅ |
+| Linux ARM64 | ✅ | ✅ | ❌ | ✅ | ✅ |
 | macOS AMD64 | ✅ | ✅ | ❌ | ✅ | ❌ |
-| macOS ARM64 | ✅ | ✅ | ❌ | ✅ | ❌ |
-| Windows AMD64 | ✅ | ✅ | ❌ | ✅ | ❌ |
+| macOS ARM64 | ✅ | ✅ | ❌ | ✅ | ✅ |
+| Windows AMD64 | ✅ | ✅ | ❌ | ✅ | ✅ |
 | Windows ARM64 | ❌ | ❌ | ❌ | ❌ | ❌ |
 | WebAssembly | ❌ | ❌ | ❌ | ❌ | ❌ |
 

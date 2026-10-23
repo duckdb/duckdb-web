@@ -14,12 +14,15 @@ extension:
   license: MIT
   requires_toolchains: "rust"
   excluded_platforms: "wasm_mvp;wasm_eh;wasm_threads;linux_amd64_gcc4;windows_amd64_rtools;windows_amd64_mingw"
+  opt_in_platforms: "osx_amd64"
+  test_config: '{"test_env_variables":{"YARDSTICK_NATIVE_PEG":"1"}}'
   maintainers:
     - sidequery
 
 repo:
   github: sidequery/yardstick
-  ref: f19d73fa93f2601cfa81ca3ebad841dffcc5f609
+  ref: 6b5e9ead9dd69ee1f79323407c2469d5f1619481
+  variegata: f19d73fa93f2601cfa81ca3ebad841dffcc5f609
 
 docs:
   hello_world: |
@@ -83,11 +86,11 @@ This table covers all DuckDB releases that have not reached [end-of-life](https:
 
 | Platform | 1.4.4 | 1.4.5 | 1.5.5 | 1.5.6 | 2.0.0 |
 | :--- | :---: | :---: | :---: | :---: | :---: |
-| Linux AMD64 | ❌ | ❌ | ✅ | ✅ | ❌ |
-| Linux ARM64 | ❌ | ❌ | ✅ | ✅ | ❌ |
-| macOS AMD64 | ❌ | ❌ | ✅ | ✅ | ❌ |
-| macOS ARM64 | ❌ | ❌ | ✅ | ✅ | ❌ |
-| Windows AMD64 | ❌ | ❌ | ✅ | ✅ | ❌ |
+| Linux AMD64 | ❌ | ❌ | ✅ | ✅ | ✅ |
+| Linux ARM64 | ❌ | ❌ | ✅ | ✅ | ✅ |
+| macOS AMD64 | ❌ | ❌ | ✅ | ✅ | ✅ |
+| macOS ARM64 | ❌ | ❌ | ✅ | ✅ | ✅ |
+| Windows AMD64 | ❌ | ❌ | ✅ | ✅ | ✅ |
 | Windows ARM64 | ❌ | ❌ | ❌ | ❌ | ❌ |
 | WebAssembly | ❌ | ❌ | ❌ | ❌ | ❌ |
 
