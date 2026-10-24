@@ -1035,7 +1035,7 @@ The arguments are as follows:
     * **Bracket Notation:** When `end` is omitted, it defaults to the end of the list. When `end` is omitted and a `step` is provided, `end` must be replaced with a `-`
 * `step` *(optional)*
     * Is the step size between elements in the slice
-    * When `step < 0` the slice is reversed, and `begin` and `end` are swapped
+    * When `step < 0` the slice is reversed, and `begin` and `end` are swapped before the index normalization and clamping rules above are applied
     * Must be non-zero
 
 Examples:
