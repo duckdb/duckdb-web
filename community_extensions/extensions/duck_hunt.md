@@ -204,8 +204,8 @@ docs:
 
 extension_star_count: 8
 extension_star_count_pretty: 8
-extension_download_count: 7581
-extension_download_count_pretty: 7.6k
+extension_download_count: 10238
+extension_download_count_pretty: 10.2k
 image: '/images/community_extensions/social_preview/preview_community_extension_duck_hunt.png'
 layout: community_extension_doc
 ---

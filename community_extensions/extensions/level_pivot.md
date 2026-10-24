@@ -61,8 +61,8 @@ docs:
 
 extension_star_count: 0
 extension_star_count_pretty: 0
-extension_download_count: 5966
-extension_download_count_pretty: 6.0k
+extension_download_count: 7953
+extension_download_count_pretty: 8.0k
 image: '/images/community_extensions/social_preview/preview_community_extension_level_pivot.png'
 layout: community_extension_doc
 ---

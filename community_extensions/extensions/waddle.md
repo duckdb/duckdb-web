@@ -34,10 +34,10 @@ docs:
   extended_description: |
     The waddle extension is based on DuckDB's [Extension Template](https://github.com/duckdb/extension-template/), and it's a great starting point to get started building more advanced extensions.
 
-extension_star_count: 293
-extension_star_count_pretty: 293
-extension_download_count: 5655
-extension_download_count_pretty: 5.7k
+extension_star_count: 294
+extension_star_count_pretty: 294
+extension_download_count: 7489
+extension_download_count_pretty: 7.5k
 image: '/images/community_extensions/social_preview/preview_community_extension_waddle.png'
 layout: community_extension_doc
 ---

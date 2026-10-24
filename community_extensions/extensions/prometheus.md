@@ -8,7 +8,7 @@ excerpt: |
 extension:
   name: prometheus
   description: Query Prometheus-compatible HTTP APIs directly from DuckDB
-  version: 0.1.0
+  version: 0.3.0
   language: Rust
   build: cargo
   license: Apache-2.0
@@ -19,7 +19,8 @@ extension:
 
 repo:
   github: botan/duckdb-prometheus
-  ref: 698928aad1e0bafeb451f4cea32de7aea979c28a
+  ref: 7dff993bacd1fca00a4bc7e5ff4018757eaee1b4
+  variegata: b20a37bb2423e41cc2e67aa3db91bd49318cead9
 
 docs:
   hello_world: |
@@ -46,8 +47,8 @@ docs:
 
 extension_star_count: 6
 extension_star_count_pretty: 6
-extension_download_count: 3842
-extension_download_count_pretty: 3.8k
+extension_download_count: 5128
+extension_download_count_pretty: 5.1k
 image: '/images/community_extensions/social_preview/preview_community_extension_prometheus.png'
 layout: community_extension_doc
 ---
@@ -59,11 +60,11 @@ This table covers all DuckDB releases that have not reached [end-of-life](https:
 
 | Platform | 1.4.4 | 1.4.5 | 1.5.5 | 1.5.6 | 2.0.0 |
 | :--- | :---: | :---: | :---: | :---: | :---: |
-| Linux AMD64 | ❌ | ❌ | ✅ | ✅ | ❌ |
-| Linux ARM64 | ❌ | ❌ | ✅ | ✅ | ❌ |
+| Linux AMD64 | ❌ | ❌ | ✅ | ✅ | ✅ |
+| Linux ARM64 | ❌ | ❌ | ✅ | ✅ | ✅ |
 | macOS AMD64 | ❌ | ❌ | ✅ | ✅ | ❌ |
-| macOS ARM64 | ❌ | ❌ | ✅ | ✅ | ❌ |
-| Windows AMD64 | ❌ | ❌ | ✅ | ✅ | ❌ |
+| macOS ARM64 | ❌ | ❌ | ✅ | ✅ | ✅ |
+| Windows AMD64 | ❌ | ❌ | ✅ | ✅ | ✅ |
 | Windows ARM64 | ❌ | ❌ | ❌ | ❌ | ❌ |
 | WebAssembly | ❌ | ❌ | ❌ | ❌ | ❌ |
 
@@ -114,6 +115,8 @@ This extension does not add any types.
 
 <div class="extension_settings_table"></div>
 
-This extension does not add any settings.
+|      name      |                       description                       | input_type | scope  | aliases | typed_value |
+|----------------|---------------------------------------------------------|------------|--------|---------|-------------|
+| temp_directory | Set the directory to which temporary files are written. | VARCHAR    | GLOBAL | []      | post.db.tmp |
 
 

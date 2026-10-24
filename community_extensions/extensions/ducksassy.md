@@ -76,8 +76,8 @@ docs:
 
 extension_star_count: 0
 extension_star_count_pretty: 0
-extension_download_count: 2444
-extension_download_count_pretty: 2.4k
+extension_download_count: 3377
+extension_download_count_pretty: 3.4k
 image: '/images/community_extensions/social_preview/preview_community_extension_ducksassy.png'
 layout: community_extension_doc
 ---

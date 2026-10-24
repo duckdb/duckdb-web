@@ -126,8 +126,8 @@ docs:
 
 extension_star_count: 2
 extension_star_count_pretty: 2
-extension_download_count: 6966
-extension_download_count_pretty: 7.0k
+extension_download_count: 9890
+extension_download_count_pretty: 9.9k
 image: '/images/community_extensions/social_preview/preview_community_extension_sitemap.png'
 layout: community_extension_doc
 ---
