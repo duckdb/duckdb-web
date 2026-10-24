@@ -55,8 +55,8 @@ extended_description: |
 
 extension_star_count: 1
 extension_star_count_pretty: 1
-extension_download_count: 5500
-extension_download_count_pretty: 5.5k
+extension_download_count: 7577
+extension_download_count_pretty: 7.6k
 image: '/images/community_extensions/social_preview/preview_community_extension_mmcif.png'
 layout: community_extension_doc
 ---

@@ -76,10 +76,10 @@ docs:
     Optional in-process XGBoost / LightGBM training requires rebuilding with
     `DUCKBOOST_WITH_XGBOOST` / `DUCKBOOST_WITH_LIGHTGBM`. CatBoost is import-only.
 
-extension_star_count: 1
-extension_star_count_pretty: 1
-extension_download_count: null
-extension_download_count_pretty: n/a
+extension_star_count: 2
+extension_star_count_pretty: 2
+extension_download_count: 119
+extension_download_count_pretty: 119
 image: '/images/community_extensions/social_preview/preview_community_extension_duckboost.png'
 layout: community_extension_doc
 ---

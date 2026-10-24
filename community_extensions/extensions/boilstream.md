@@ -121,8 +121,8 @@ docs:
 
 extension_star_count: 12
 extension_star_count_pretty: 12
-extension_download_count: 7206
-extension_download_count_pretty: 7.2k
+extension_download_count: 9559
+extension_download_count_pretty: 9.6k
 image: '/images/community_extensions/social_preview/preview_community_extension_boilstream.png'
 layout: community_extension_doc
 ---

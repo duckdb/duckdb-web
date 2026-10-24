@@ -8,7 +8,7 @@ excerpt: |
 extension:
   name: duckbridge
   description: Bridge between SQL Server and DuckDB - import a SQL Server database, run T-SQL on DuckDB through a built-in translator, export back as a live load, a restorable .bak, PostgreSQL or Parquet
-  version: 0.1.1
+  version: 0.1.2
   language: Rust
   build: cargo
   license: MIT
@@ -19,7 +19,7 @@ extension:
 
 repo:
   github: singhpratech/duckbridge-extension
-  ref: bf26395445923c4d6ce26e969018ef066db98045
+  ref: 5333079b7525f0d488ebcc36c16c27030df88950
 
 docs:
   hello_world: |
@@ -60,8 +60,8 @@ docs:
 
 extension_star_count: 0
 extension_star_count_pretty: 0
-extension_download_count: 116
-extension_download_count_pretty: 116
+extension_download_count: 206
+extension_download_count_pretty: 206
 image: '/images/community_extensions/social_preview/preview_community_extension_duckbridge.png'
 layout: community_extension_doc
 ---
