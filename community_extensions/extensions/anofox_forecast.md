@@ -20,8 +20,8 @@ repo:
   github: DataZooDE/anofox-forecast
   ref: b2fbfbe2b7c1f55b9081d77029d484012ff5fd11
 
-extension_star_count: 42
-extension_star_count_pretty: 42
+extension_star_count: 43
+extension_star_count_pretty: 43
 extension_download_count: 210739
 extension_download_count_pretty: 210.7k
 image: '/images/community_extensions/social_preview/preview_community_extension_anofox_forecast.png'
@@ -37,7 +37,7 @@ This table covers all DuckDB releases that have not reached [end-of-life](https:
 | :--- | :---: | :---: | :---: | :---: | :---: |
 | Linux AMD64 | ✅ | ❌ | ✅ | ✅ | ✅ |
 | Linux ARM64 | ✅ | ❌ | ✅ | ✅ | ✅ |
-| macOS AMD64 | ✅ | ❌ | ✅ | ✅ | ❌ |
+| macOS AMD64 | ✅ | ❌ | ✅ | ✅ | ✅ |
 | macOS ARM64 | ✅ | ❌ | ✅ | ✅ | ✅ |
 | Windows AMD64 | ✅ | ❌ | ✅ | ❌ | ❌ |
 | Windows ARM64 | ❌ | ❌ | ❌ | ❌ | ❌ |

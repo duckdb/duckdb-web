@@ -74,8 +74,8 @@ docs:
     `SET anofox_scenario_telemetry_enabled = false` or
     `DATAZOO_DISABLE_TELEMETRY=1`; see TELEMETRY.md in the repository.
 
-extension_star_count: 7
-extension_star_count_pretty: 7
+extension_star_count: 8
+extension_star_count_pretty: 8
 extension_download_count: 7129
 extension_download_count_pretty: 7.1k
 image: '/images/community_extensions/social_preview/preview_community_extension_anofox_scenario.png'
@@ -91,7 +91,7 @@ This table covers all DuckDB releases that have not reached [end-of-life](https:
 | :--- | :---: | :---: | :---: | :---: | :---: |
 | Linux AMD64 | ❌ | ❌ | ✅ | ✅ | ✅ |
 | Linux ARM64 | ❌ | ❌ | ✅ | ✅ | ✅ |
-| macOS AMD64 | ❌ | ❌ | ✅ | ✅ | ❌ |
+| macOS AMD64 | ❌ | ❌ | ✅ | ✅ | ✅ |
 | macOS ARM64 | ❌ | ❌ | ✅ | ✅ | ✅ |
 | Windows AMD64 | ❌ | ❌ | ✅ | ✅ | ✅ |
 | Windows ARM64 | ❌ | ❌ | ❌ | ❌ | ❌ |

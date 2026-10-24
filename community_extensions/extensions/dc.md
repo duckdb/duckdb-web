@@ -8,20 +8,22 @@ excerpt: |
 extension:
   name: dc
   description: Compose fast bounded judgments, semantic resolution, and selective LLM reasoning with provenance
-  version: 0.2.1
+  version: 0.2.2
   language: C++
   build: cmake
   license: Apache-2.0
   maintainers:
     - prasanthj
-  excluded_platforms: "wasm_mvp;wasm_eh;wasm_threads;windows_amd64;windows_amd64_mingw;windows_amd64_rtools"
+  excluded_platforms: "wasm_mvp;wasm_eh;wasm_threads;windows_amd64;windows_arm64;windows_amd64_mingw;windows_amd64_rtools"
+  opt_in_platforms: "linux_arm64;osx_amd64;osx_arm64"
   requires_toolchains: vcpkg
   vcpkg_commit: 84bab45d415d22042bd0b9081aea57f362da3f35
 
 repo:
   github: prasanthj/duckdb-dual-cognition
-  ref: 158494419be2003894f8907dd32e1d1e7b753274
-  andium: 158494419be2003894f8907dd32e1d1e7b753274
+  ref: 8a4c282095efbf0e7ff5dd744940b917ab678104
+  variegata: 8a4c282095efbf0e7ff5dd744940b917ab678104
+  andium: 8a4c282095efbf0e7ff5dd744940b917ab678104
 
 docs:
   hello_world: |
@@ -98,10 +100,10 @@ This table covers all DuckDB releases that have not reached [end-of-life](https:
 
 | Platform | 1.4.4 | 1.4.5 | 1.5.5 | 1.5.6 | 2.0.0 |
 | :--- | :---: | :---: | :---: | :---: | :---: |
-| Linux AMD64 | ❌ | ❌ | ❌ | ✅ | ❌ |
-| Linux ARM64 | ❌ | ❌ | ❌ | ✅ | ❌ |
-| macOS AMD64 | ❌ | ❌ | ❌ | ✅ | ❌ |
-| macOS ARM64 | ❌ | ❌ | ❌ | ✅ | ❌ |
+| Linux AMD64 | ❌ | ❌ | ❌ | ✅ | ✅ |
+| Linux ARM64 | ❌ | ❌ | ❌ | ✅ | ✅ |
+| macOS AMD64 | ❌ | ❌ | ❌ | ✅ | ✅ |
+| macOS ARM64 | ❌ | ❌ | ❌ | ✅ | ✅ |
 | Windows AMD64 | ❌ | ❌ | ❌ | ❌ | ❌ |
 | Windows ARM64 | ❌ | ❌ | ❌ | ❌ | ❌ |
 | WebAssembly | ❌ | ❌ | ❌ | ❌ | ❌ |
@@ -156,34 +158,35 @@ This extension does not add any types.
 
 <div class="extension_settings_table"></div>
 
-|                 name                  |                      description                      | input_type | scope  | aliases |
-|---------------------------------------|-------------------------------------------------------|------------|--------|---------|
-| dc_system_one_batch_size              | Maximum questions per HTTP request                    | BIGINT     | GLOBAL | []      |
-| dc_system_one_cache_bytes             | Query cache serialized byte budget (0 disables)       | BIGINT     | GLOBAL | []      |
-| dc_system_one_concurrency             | Concurrent requests (global ceiling 10)               | BIGINT     | GLOBAL | []      |
-| dc_system_one_endpoint                | Trusted TypeSafe endpoint                             | VARCHAR    | GLOBAL | []      |
-| dc_system_one_max_questions_per_query | Maximum billable questions dispatched by one query    | BIGINT     | GLOBAL | []      |
-| dc_system_one_max_request_bytes       | Serialized request byte cap                           | BIGINT     | GLOBAL | []      |
-| dc_system_one_max_requests_per_query  | Maximum logical HTTP requests dispatched by one query | BIGINT     | GLOBAL | []      |
-| dc_system_one_max_retries             | Retries for transient transport, 429 and 5xx errors   | BIGINT     | GLOBAL | []      |
-| dc_system_one_model                   | TypeSafe model                                        | VARCHAR    | GLOBAL | []      |
-| dc_system_one_retry_base_ms           | Initial exponential retry delay                       | BIGINT     | GLOBAL | []      |
-| dc_system_one_retry_max_delay_ms      | Maximum retry delay including Retry-After             | BIGINT     | GLOBAL | []      |
-| dc_system_one_session_cache_bytes     | Opt-in connection LRU serialized byte budget          | BIGINT     | GLOBAL | []      |
-| dc_system_one_session_cache_ttl_ms    | Connection cache non-sliding TTL                      | BIGINT     | GLOBAL | []      |
-| dc_system_one_timeout_ms              | HTTP timeout per attempt                              | BIGINT     | GLOBAL | []      |
-| dc_system_two_batch_size              | Maximum rows per Responses request                    | BIGINT     | GLOBAL | []      |
-| dc_system_two_cache_bytes             | System Two query-cache serialized byte budget         | BIGINT     | GLOBAL | []      |
-| dc_system_two_concurrency             | Concurrent Responses requests                         | BIGINT     | GLOBAL | []      |
-| dc_system_two_endpoint                | OpenAI Responses endpoint                             | VARCHAR    | GLOBAL | []      |
-| dc_system_two_max_items_per_query     | Maximum uncached System Two rows per query            | BIGINT     | GLOBAL | []      |
-| dc_system_two_max_request_bytes       | Serialized Responses request byte cap                 | BIGINT     | GLOBAL | []      |
-| dc_system_two_max_requests_per_query  | Maximum System Two HTTP requests per query            | BIGINT     | GLOBAL | []      |
-| dc_system_two_max_retries             | Retries for transient transport, 429 and 5xx errors   | BIGINT     | GLOBAL | []      |
-| dc_system_two_retry_base_ms           | Initial exponential retry delay                       | BIGINT     | GLOBAL | []      |
-| dc_system_two_retry_max_delay_ms      | Maximum retry delay including Retry-After             | BIGINT     | GLOBAL | []      |
-| dc_system_two_session_cache_bytes     | System Two connection-cache serialized byte budget    | BIGINT     | GLOBAL | []      |
-| dc_system_two_session_cache_ttl_ms    | System Two connection-cache TTL                       | BIGINT     | GLOBAL | []      |
-| dc_system_two_timeout_ms              | HTTP timeout per attempt                              | BIGINT     | GLOBAL | []      |
+|                 name                  |                       description                       | input_type | scope  | aliases |             typed_value              |
+|---------------------------------------|---------------------------------------------------------|------------|--------|---------|--------------------------------------|
+| dc_system_one_batch_size              | Maximum questions per HTTP request                      | BIGINT     | GLOBAL | []      | 25                                   |
+| dc_system_one_cache_bytes             | Query cache serialized byte budget (0 disables)         | BIGINT     | GLOBAL | []      | 8388608                              |
+| dc_system_one_concurrency             | Concurrent requests (global ceiling 10)                 | BIGINT     | GLOBAL | []      | 10                                   |
+| dc_system_one_endpoint                | Trusted TypeSafe endpoint                               | VARCHAR    | GLOBAL | []      | https://api.typesafe.ai/v1/systemone |
+| dc_system_one_max_questions_per_query | Maximum billable questions dispatched by one query      | BIGINT     | GLOBAL | []      | 100000                               |
+| dc_system_one_max_request_bytes       | Serialized request byte cap                             | BIGINT     | GLOBAL | []      | 65536                                |
+| dc_system_one_max_requests_per_query  | Maximum logical HTTP requests dispatched by one query   | BIGINT     | GLOBAL | []      | 2000                                 |
+| dc_system_one_max_retries             | Retries for transient transport, 429 and 5xx errors     | BIGINT     | GLOBAL | []      | 2                                    |
+| dc_system_one_model                   | TypeSafe model                                          | VARCHAR    | GLOBAL | []      | jev-latest                           |
+| dc_system_one_retry_base_ms           | Initial exponential retry delay                         | BIGINT     | GLOBAL | []      | 100                                  |
+| dc_system_one_retry_max_delay_ms      | Maximum retry delay including Retry-After               | BIGINT     | GLOBAL | []      | 5000                                 |
+| dc_system_one_session_cache_bytes     | Opt-in connection LRU serialized byte budget            | BIGINT     | GLOBAL | []      | 0                                    |
+| dc_system_one_session_cache_ttl_ms    | Connection cache non-sliding TTL                        | BIGINT     | GLOBAL | []      | 60000                                |
+| dc_system_one_timeout_ms              | HTTP timeout per attempt                                | BIGINT     | GLOBAL | []      | 30000                                |
+| dc_system_two_batch_size              | Maximum rows per Responses request                      | BIGINT     | GLOBAL | []      | 25                                   |
+| dc_system_two_cache_bytes             | System Two query-cache serialized byte budget           | BIGINT     | GLOBAL | []      | 8388608                              |
+| dc_system_two_concurrency             | Concurrent Responses requests                           | BIGINT     | GLOBAL | []      | 5                                    |
+| dc_system_two_endpoint                | OpenAI Responses endpoint                               | VARCHAR    | GLOBAL | []      | https://api.openai.com/v1/responses  |
+| dc_system_two_max_items_per_query     | Maximum uncached System Two rows per query              | BIGINT     | GLOBAL | []      | 100000                               |
+| dc_system_two_max_request_bytes       | Serialized Responses request byte cap                   | BIGINT     | GLOBAL | []      | 1048576                              |
+| dc_system_two_max_requests_per_query  | Maximum System Two HTTP requests per query              | BIGINT     | GLOBAL | []      | 2000                                 |
+| dc_system_two_max_retries             | Retries for transient transport, 429 and 5xx errors     | BIGINT     | GLOBAL | []      | 2                                    |
+| dc_system_two_retry_base_ms           | Initial exponential retry delay                         | BIGINT     | GLOBAL | []      | 250                                  |
+| dc_system_two_retry_max_delay_ms      | Maximum retry delay including Retry-After               | BIGINT     | GLOBAL | []      | 10000                                |
+| dc_system_two_session_cache_bytes     | System Two connection-cache serialized byte budget      | BIGINT     | GLOBAL | []      | 0                                    |
+| dc_system_two_session_cache_ttl_ms    | System Two connection-cache TTL                         | BIGINT     | GLOBAL | []      | 60000                                |
+| dc_system_two_timeout_ms              | HTTP timeout per attempt                                | BIGINT     | GLOBAL | []      | 90000                                |
+| temp_directory                        | Set the directory to which temporary files are written. | VARCHAR    | GLOBAL | []      | post.db.tmp                          |
 
 

@@ -17,7 +17,8 @@ extension:
     - jrosskopf
 repo:
   github: DataZooDE/erpl-odata
-  ref: 98972212ae3770928f55c0de787b4dcb80904077
+  ref: e7cc326bd2e126189561c9469fa9aabbc33134bd
+  variegata: e7cc326bd2e126189561c9469fa9aabbc33134bd
 
 extension_star_count: 31
 extension_star_count_pretty: 31

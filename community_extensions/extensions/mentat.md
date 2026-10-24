@@ -8,7 +8,7 @@ excerpt: |
 extension:
   name: mentat
   description: Datomic-compatible Datalog query engine as a DuckDB extension
-  version: 1.17.1
+  version: 1.18.0
   language: Rust
   build: cargo
   license: Apache-2.0
@@ -18,8 +18,8 @@ extension:
   excluded_platforms: "wasm_mvp;wasm_eh;wasm_threads;windows_amd64_mingw;linux_amd64_musl"
 repo:
   github: gburd/mentat
-  ref: b67bb3941ba58eb17e5dfce913399d9c1df7e023
-  variegata: b67bb3941ba58eb17e5dfce913399d9c1df7e023
+  ref: edd11b46c648141ba4e997a0497e434e6a87408c
+  variegata: edd11b46c648141ba4e997a0497e434e6a87408c
 docs:
   hello_world: |
     LOAD mentat;
@@ -64,7 +64,7 @@ This table covers all DuckDB releases that have not reached [end-of-life](https:
 | :--- | :---: | :---: | :---: | :---: | :---: |
 | Linux AMD64 | ❌ | ❌ | ❌ | ✅ | ✅ |
 | Linux ARM64 | ❌ | ❌ | ❌ | ✅ | ✅ |
-| macOS AMD64 | ❌ | ❌ | ❌ | ✅ | ❌ |
+| macOS AMD64 | ❌ | ❌ | ❌ | ✅ | ✅ |
 | macOS ARM64 | ❌ | ❌ | ❌ | ✅ | ✅ |
 | Windows AMD64 | ❌ | ❌ | ❌ | ✅ | ✅ |
 | Windows ARM64 | ❌ | ❌ | ❌ | ❌ | ❌ |
@@ -96,6 +96,7 @@ LOAD {{ page.extension.name }};
 | edn_pull      | scalar        | NULL        | NULL    |          |
 | edn_q         | table         | NULL        | NULL    |          |
 | edn_t         | scalar        | NULL        | NULL    |          |
+| mentat_import | scalar        | NULL        | NULL    |          |
 
 ### Overloaded Functions
 
