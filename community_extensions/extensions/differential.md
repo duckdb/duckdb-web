@@ -204,8 +204,8 @@ docs:
     [repository](https://github.com/tobilg/duckdb-differential) for the SQL reference, the
     lifecycle guide and the storage format.
 
-extension_star_count: 26
-extension_star_count_pretty: 26
+extension_star_count: 29
+extension_star_count_pretty: 29
 extension_download_count: 2406
 extension_download_count_pretty: 2.4k
 image: '/images/community_extensions/social_preview/preview_community_extension_differential.png'
@@ -221,7 +221,7 @@ This table covers all DuckDB releases that have not reached [end-of-life](https:
 | :--- | :---: | :---: | :---: | :---: | :---: |
 | Linux AMD64 | ❌ | ❌ | ❌ | ✅ | ✅ |
 | Linux ARM64 | ❌ | ❌ | ❌ | ✅ | ✅ |
-| macOS AMD64 | ❌ | ❌ | ❌ | ✅ | ❌ |
+| macOS AMD64 | ❌ | ❌ | ❌ | ✅ | ✅ |
 | macOS ARM64 | ❌ | ❌ | ❌ | ✅ | ✅ |
 | Windows AMD64 | ❌ | ❌ | ❌ | ❌ | ❌ |
 | Windows ARM64 | ❌ | ❌ | ❌ | ❌ | ❌ |

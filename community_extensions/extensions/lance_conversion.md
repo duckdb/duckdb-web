@@ -8,7 +8,7 @@ excerpt: |
 extension:
   name: lance_conversion
   description: Stream any DuckDB query into Lance datasets with Blob v2 storage and scalar, vector, text, and Bloom filter indexes
-  version: 0.1.5
+  version: 0.2.0
   language: C++ & Rust
   build: cmake
   license: MIT
@@ -19,7 +19,7 @@ extension:
 
 repo:
   github: dentiny/duckdb_lance_conversion
-  ref: 282997bb96f4c9ac03bd3064a5d5c6d7c1fdc327
+  ref: eaa66ae5906d6747f489aa7e4b69299ad3d5e0da
 
 docs:
   hello_world: |
@@ -147,10 +147,10 @@ This table covers all DuckDB releases that have not reached [end-of-life](https:
 
 | Platform | 1.4.4 | 1.4.5 | 1.5.5 | 1.5.6 | 2.0.0 |
 | :--- | :---: | :---: | :---: | :---: | :---: |
-| Linux AMD64 | ❌ | ❌ | ✅ | ✅ | ❌ |
-| Linux ARM64 | ❌ | ❌ | ✅ | ✅ | ❌ |
+| Linux AMD64 | ❌ | ❌ | ✅ | ✅ | ✅ |
+| Linux ARM64 | ❌ | ❌ | ✅ | ✅ | ✅ |
 | macOS AMD64 | ❌ | ❌ | ❌ | ❌ | ❌ |
-| macOS ARM64 | ❌ | ❌ | ✅ | ✅ | ❌ |
+| macOS ARM64 | ❌ | ❌ | ✅ | ✅ | ✅ |
 | Windows AMD64 | ❌ | ❌ | ❌ | ❌ | ❌ |
 | Windows ARM64 | ❌ | ❌ | ❌ | ❌ | ❌ |
 | WebAssembly | ❌ | ❌ | ❌ | ❌ | ❌ |
@@ -175,11 +175,11 @@ LOAD {{ page.extension.name }};
 
 <div class="extension_functions_table"></div>
 
-|  function_name   | function_type |                             description                              | comment |                      examples                      |
-|------------------|---------------|----------------------------------------------------------------------|---------|----------------------------------------------------|
-| read_atif        | table         | Reads ATIF agent trajectories from a local or S3 JSON or JSONL file. | NULL    | [SELECT * FROM read_atif('trajectories.jsonl');]   |
-| read_huggingface | table         | Reads a Hugging Face dataset's Parquet files.                        | NULL    | [SELECT * FROM read_huggingface('lhoestq/demo1');] |
-| read_warc        | table         | Reads records from a local or S3 WARC file.                          | NULL    | [SELECT * FROM read_warc('archive.warc.gz');]      |
+|  function_name   | function_type |                                                          description                                                           | comment |                      examples                      |
+|------------------|---------------|--------------------------------------------------------------------------------------------------------------------------------|---------|----------------------------------------------------|
+| read_atif        | table         | Reads ATIF agent trajectories from a local, S3, or HTTP(S) JSON or JSONL file, optionally gzipped, embedding referenced media. | NULL    | [SELECT * FROM read_atif('trajectories.jsonl');]   |
+| read_huggingface | table         | Reads a Hugging Face dataset's Parquet files.                                                                                  | NULL    | [SELECT * FROM read_huggingface('lhoestq/demo1');] |
+| read_warc        | table         | Reads records from a local, S3, or HTTP(S) WARC file or Common Crawl crawl or segment.                                         | NULL    | [SELECT * FROM read_warc('archive.warc.gz');]      |
 
 ### Overloaded Functions
 
@@ -197,13 +197,14 @@ This extension does not add any types.
 
 <div class="extension_settings_table"></div>
 
-|                    name                     |                            description                            | input_type | scope  | aliases |
-|---------------------------------------------|-------------------------------------------------------------------|------------|--------|---------|
-| lance_conversion_storage_io_timeout_ms      | IO operation and body method timeout per attempt (ms)             | BIGINT     | GLOBAL | []      |
-| lance_conversion_storage_retry_factor       | Storage exponential retry backoff multiplier for reads and writes | DOUBLE     | GLOBAL | []      |
-| lance_conversion_storage_retry_max_delay_ms | Maximum exponential retry backoff (ms)                            | BIGINT     | GLOBAL | []      |
-| lance_conversion_storage_retry_max_times    | Maximum retries after the initial attempt (0 disables retries)    | BIGINT     | GLOBAL | []      |
-| lance_conversion_storage_retry_min_delay_ms | Initial exponential retry backoff (ms)                            | BIGINT     | GLOBAL | []      |
-| lance_conversion_storage_timeout_ms         | Control operation timeout per attempt (ms)                        | BIGINT     | GLOBAL | []      |
+|                    name                     |                            description                            | input_type | scope  | aliases | typed_value |
+|---------------------------------------------|-------------------------------------------------------------------|------------|--------|---------|-------------|
+| lance_conversion_storage_io_timeout_ms      | IO operation and body method timeout per attempt (ms)             | BIGINT     | GLOBAL | []      | 10000       |
+| lance_conversion_storage_retry_factor       | Storage exponential retry backoff multiplier for reads and writes | DOUBLE     | GLOBAL | []      | 2.0         |
+| lance_conversion_storage_retry_max_delay_ms | Maximum exponential retry backoff (ms)                            | BIGINT     | GLOBAL | []      | 60000       |
+| lance_conversion_storage_retry_max_times    | Maximum retries after the initial attempt (0 disables retries)    | BIGINT     | GLOBAL | []      | 3           |
+| lance_conversion_storage_retry_min_delay_ms | Initial exponential retry backoff (ms)                            | BIGINT     | GLOBAL | []      | 1000        |
+| lance_conversion_storage_timeout_ms         | Control operation timeout per attempt (ms)                        | BIGINT     | GLOBAL | []      | 60000       |
+| temp_directory                              | Set the directory to which temporary files are written.           | VARCHAR    | GLOBAL | []      | post.db.tmp |
 
 
