@@ -93,8 +93,8 @@ docs:
 
 extension_star_count: 26
 extension_star_count_pretty: 26
-extension_download_count: 9348
-extension_download_count_pretty: 9.3k
+extension_download_count: 10756
+extension_download_count_pretty: 10.8k
 image: '/images/community_extensions/social_preview/preview_community_extension_miniplot.png'
 layout: community_extension_doc
 ---

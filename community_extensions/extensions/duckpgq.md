@@ -65,10 +65,10 @@ docs:
 
     *Disclaimer:* As this extension is part of an ongoing research project by the Database Architectures group at CWI, some features may still be under development. We appreciate your understanding and patience as we continue to improve it.
 
-extension_star_count: 505
-extension_star_count_pretty: 505
-extension_download_count: 20833
-extension_download_count_pretty: 20.8k
+extension_star_count: 506
+extension_star_count_pretty: 506
+extension_download_count: 21708
+extension_download_count_pretty: 21.7k
 image: '/images/community_extensions/social_preview/preview_community_extension_duckpgq.png'
 layout: community_extension_doc
 ---
@@ -82,7 +82,7 @@ This table covers all DuckDB releases that have not reached [end-of-life](https:
 | :--- | :---: | :---: | :---: | :---: | :---: |
 | Linux AMD64 | ✅ | ❌ | ❌ | ✅ | ✅ |
 | Linux ARM64 | ✅ | ❌ | ❌ | ✅ | ✅ |
-| macOS AMD64 | ✅ | ❌ | ❌ | ✅ | ❌ |
+| macOS AMD64 | ✅ | ❌ | ❌ | ✅ | ✅ |
 | macOS ARM64 | ✅ | ❌ | ❌ | ✅ | ✅ |
 | Windows AMD64 | ✅ | ❌ | ❌ | ✅ | ✅ |
 | Windows ARM64 | ❌ | ❌ | ❌ | ❌ | ❌ |

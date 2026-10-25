@@ -112,8 +112,8 @@ docs:
 
 extension_star_count: 5
 extension_star_count_pretty: 5
-extension_download_count: 1825
-extension_download_count_pretty: 1.8k
+extension_download_count: 2847
+extension_download_count_pretty: 2.8k
 image: '/images/community_extensions/social_preview/preview_community_extension_anofox_optimize.png'
 layout: community_extension_doc
 ---
@@ -127,7 +127,7 @@ This table covers all DuckDB releases that have not reached [end-of-life](https:
 | :--- | :---: | :---: | :---: | :---: | :---: |
 | Linux AMD64 | ❌ | ❌ | ✅ | ❌ | ✅ |
 | Linux ARM64 | ❌ | ❌ | ✅ | ❌ | ✅ |
-| macOS AMD64 | ❌ | ❌ | ✅ | ❌ | ❌ |
+| macOS AMD64 | ❌ | ❌ | ✅ | ❌ | ✅ |
 | macOS ARM64 | ❌ | ❌ | ✅ | ❌ | ✅ |
 | Windows AMD64 | ❌ | ❌ | ✅ | ❌ | ✅ |
 | Windows ARM64 | ❌ | ❌ | ❌ | ❌ | ❌ |

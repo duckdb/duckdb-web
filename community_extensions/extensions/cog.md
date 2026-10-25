@@ -64,8 +64,8 @@ docs:
 
 extension_star_count: 5
 extension_star_count_pretty: 5
-extension_download_count: 1809
-extension_download_count_pretty: 1.8k
+extension_download_count: 2507
+extension_download_count_pretty: 2.5k
 image: '/images/community_extensions/social_preview/preview_community_extension_cog.png'
 layout: community_extension_doc
 ---

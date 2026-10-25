@@ -8,7 +8,7 @@ excerpt: |
 extension:
   name: duck_diff
   description: Diff two relations (tables, queries) off a primary key, reporting per-key status (identical/different/left_only/right_only), a JSON summary of changed columns, and per-column left/right values.
-  version: 0.3.1
+  version: 0.4.0
   language: C++
   build: cmake
   license: MIT
@@ -18,7 +18,7 @@ extension:
 
 repo:
   github: avaitla/duck_diff
-  ref: 68ace706fe6196ae7fdb30ef0b30581c0434bd7d
+  ref: 00f636e5a62ee9ba508148d2493006e2ae1734e9
 
 docs:
   hello_world: |
@@ -84,8 +84,8 @@ docs:
 
 extension_star_count: 8
 extension_star_count_pretty: 8
-extension_download_count: 6213
-extension_download_count_pretty: 6.2k
+extension_download_count: 7721
+extension_download_count_pretty: 7.7k
 image: '/images/community_extensions/social_preview/preview_community_extension_duck_diff.png'
 layout: community_extension_doc
 ---
@@ -97,13 +97,13 @@ This table covers all DuckDB releases that have not reached [end-of-life](https:
 
 | Platform | 1.4.4 | 1.4.5 | 1.5.5 | 1.5.6 | 2.0.0 |
 | :--- | :---: | :---: | :---: | :---: | :---: |
-| Linux AMD64 | ❌ | ❌ | ✅ | ✅ | ❌ |
-| Linux ARM64 | ❌ | ❌ | ✅ | ✅ | ❌ |
-| macOS AMD64 | ❌ | ❌ | ✅ | ✅ | ❌ |
-| macOS ARM64 | ❌ | ❌ | ✅ | ✅ | ❌ |
-| Windows AMD64 | ❌ | ❌ | ✅ | ✅ | ❌ |
+| Linux AMD64 | ❌ | ❌ | ✅ | ✅ | ✅ |
+| Linux ARM64 | ❌ | ❌ | ✅ | ✅ | ✅ |
+| macOS AMD64 | ❌ | ❌ | ✅ | ✅ | ✅ |
+| macOS ARM64 | ❌ | ❌ | ✅ | ✅ | ✅ |
+| Windows AMD64 | ❌ | ❌ | ✅ | ✅ | ✅ |
 | Windows ARM64 | ❌ | ❌ | ❌ | ❌ | ❌ |
-| WebAssembly | ❌ | ❌ | ✅ | ✅ | ❌ |
+| WebAssembly | ❌ | ❌ | ✅ | ✅ | ✅ |
 
 ### Installing and Loading
 ```sql
@@ -125,11 +125,19 @@ LOAD {{ page.extension.name }};
 
 <div class="extension_functions_table"></div>
 
-|   function_name    | function_type | description | comment | examples |
-|--------------------|---------------|-------------|---------|----------|
-| schema_diff        | table         | NULL        | NULL    |          |
-| table_diff         | table         | NULL        | NULL    |          |
-| table_diff_summary | table         | NULL        | NULL    |          |
+|   function_name    | function_type |                                                                                                                    description                                                                                                                    | comment |                      examples                      |
+|--------------------|---------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|---------|----------------------------------------------------|
+| schema_diff        | table         | Compares the column names and types of two relations (query strings) without reading any rows: one row per column with left_type, right_type and status (identical/type_differs/left_only/right_only).                                            | NULL    | [SELECT * FROM schema_diff('SELECT 1::INTEGER AS id, ''a'' AS name', 'SELECT 1::BIGINT AS id, 2.5 AS score');
+-- id    \| INTEGER \| BIGINT       \| type_differs
+-- name  \| VARCHAR \| NULL         \| left_only
+-- score \| NULL    \| DECIMAL(2,1) \| right_only] |
+| table_diff         | table         | Diffs two relations (query strings, e.g. 'FROM t') on a primary key: one row per key with diff_status (identical/different/left_only/right_only), a JSON diff_data of the changed columns, and per-column <c>_left / <c>_right / <c>_diff_status. | NULL    | [SELECT id, diff_status, diff_data FROM table_diff('FROM (VALUES (1, 10), (2, 20), (3, 30)) t(id, v)', 'FROM (VALUES (1, 10), (2, 25), (4, 40)) t(id, v)', pk := 'id') ORDER BY id;
+-- 1 \| identical  \| NULL
+-- 2 \| different  \| {"v":{"left":20,"right":25{% raw %}}}{% endraw %}
+-- 3 \| left_only  \| NULL
+-- 4 \| right_only \| NULL]                        |
+| table_diff_summary | table         | Summarizes a table_diff of two relations in one row: per-status counts (n_identical, n_different, n_left_only, n_right_only, n_total) and their percentages. Takes the same parameters as table_diff.                                             | NULL    | [SELECT n_identical, n_different, n_left_only, n_right_only FROM table_diff_summary('FROM (VALUES (1, 10), (2, 20), (3, 30)) t(id, v)', 'FROM (VALUES (1, 10), (2, 25), (4, 40)) t(id, v)', pk := 'id');
+-- 1 \| 1 \| 1 \| 1]                               |
 
 ### Overloaded Functions
 
@@ -147,6 +155,8 @@ This extension does not add any types.
 
 <div class="extension_settings_table"></div>
 
-This extension does not add any settings.
+|      name      |                       description                       | input_type | scope  | aliases | typed_value |
+|----------------|---------------------------------------------------------|------------|--------|---------|-------------|
+| temp_directory | Set the directory to which temporary files are written. | VARCHAR    | GLOBAL | []      | post.db.tmp |
 
 

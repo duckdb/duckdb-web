@@ -48,8 +48,8 @@ docs:
 
 extension_star_count: 1
 extension_star_count_pretty: 1
-extension_download_count: 6840
-extension_download_count_pretty: 6.8k
+extension_download_count: 8486
+extension_download_count_pretty: 8.5k
 image: '/images/community_extensions/social_preview/preview_community_extension_nsv.png'
 layout: community_extension_doc
 ---

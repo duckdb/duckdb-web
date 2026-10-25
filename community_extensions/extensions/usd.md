@@ -61,8 +61,8 @@ docs:
 
 extension_star_count: 0
 extension_star_count_pretty: 0
-extension_download_count: 94
-extension_download_count_pretty: 94
+extension_download_count: 185
+extension_download_count_pretty: 185
 image: '/images/community_extensions/social_preview/preview_community_extension_usd.png'
 layout: community_extension_doc
 ---
@@ -76,7 +76,7 @@ This table covers all DuckDB releases that have not reached [end-of-life](https:
 | :--- | :---: | :---: | :---: | :---: | :---: |
 | Linux AMD64 | ❌ | ❌ | ❌ | ❌ | ✅ |
 | Linux ARM64 | ❌ | ❌ | ❌ | ❌ | ✅ |
-| macOS AMD64 | ❌ | ❌ | ❌ | ❌ | ❌ |
+| macOS AMD64 | ❌ | ❌ | ❌ | ❌ | ✅ |
 | macOS ARM64 | ❌ | ❌ | ❌ | ❌ | ✅ |
 | Windows AMD64 | ❌ | ❌ | ❌ | ❌ | ❌ |
 | Windows ARM64 | ❌ | ❌ | ❌ | ❌ | ❌ |

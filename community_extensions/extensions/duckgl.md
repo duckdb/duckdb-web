@@ -17,7 +17,7 @@ extension:
 
 repo:
   github: nkwork9999/duckgl # あなたのリポジトリ名に合わせて
-  ref: e8bbc917f3676ff738eb41c4617201bcfd7624c9
+  ref: 2cfa0a924beaa0985af6729c4986c129e8c52ce5
 
 docs:
   hello_world: |
@@ -37,10 +37,15 @@ docs:
     - GeoJSON layer rendering from spatial tables
     - SQL query execution from browser UI
 
-extension_star_count: 9
-extension_star_count_pretty: 9
-extension_download_count: 6753
-extension_download_count_pretty: 6.8k
+    **HTML and PDF reports**:
+    Export HTML downloads an offline snapshot containing the last successful SQL query, all returned rows,
+    and a north-up SVG geometry overview without base-map tiles. Export PDF opens that report in the
+    browser print dialog; choose Save as PDF. Saved HTML contains no scripts and does not execute SQL.
+
+extension_star_count: 10
+extension_star_count_pretty: 10
+extension_download_count: 8383
+extension_download_count_pretty: 8.4k
 image: '/images/community_extensions/social_preview/preview_community_extension_duckgl.png'
 layout: community_extension_doc
 ---
@@ -52,13 +57,13 @@ This table covers all DuckDB releases that have not reached [end-of-life](https:
 
 | Platform | 1.4.4 | 1.4.5 | 1.5.5 | 1.5.6 | 2.0.0 |
 | :--- | :---: | :---: | :---: | :---: | :---: |
-| Linux AMD64 | ❌ | ❌ | ✅ | ✅ | ❌ |
-| Linux ARM64 | ❌ | ❌ | ✅ | ✅ | ❌ |
-| macOS AMD64 | ❌ | ❌ | ✅ | ✅ | ❌ |
-| macOS ARM64 | ❌ | ❌ | ✅ | ✅ | ❌ |
-| Windows AMD64 | ❌ | ❌ | ✅ | ✅ | ❌ |
+| Linux AMD64 | ❌ | ❌ | ✅ | ✅ | ✅ |
+| Linux ARM64 | ❌ | ❌ | ✅ | ✅ | ✅ |
+| macOS AMD64 | ❌ | ❌ | ✅ | ✅ | ✅ |
+| macOS ARM64 | ❌ | ❌ | ✅ | ✅ | ✅ |
+| Windows AMD64 | ❌ | ❌ | ✅ | ✅ | ✅ |
 | Windows ARM64 | ❌ | ❌ | ❌ | ❌ | ❌ |
-| WebAssembly | ❌ | ❌ | ✅ | ✅ | ❌ |
+| WebAssembly | ❌ | ❌ | ✅ | ✅ | ✅ |
 
 ### Installing and Loading
 ```sql
@@ -101,6 +106,8 @@ This extension does not add any types.
 
 <div class="extension_settings_table"></div>
 
-This extension does not add any settings.
+|      name      |                       description                       | input_type | scope  | aliases | typed_value |
+|----------------|---------------------------------------------------------|------------|--------|---------|-------------|
+| temp_directory | Set the directory to which temporary files are written. | VARCHAR    | GLOBAL | []      | post.db.tmp |
 
 

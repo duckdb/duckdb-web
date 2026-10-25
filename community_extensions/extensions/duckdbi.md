@@ -18,7 +18,7 @@ extension:
 
 repo:
   github: nkwork9999/DuckDBI
-  ref: 59af05d91677f6a0404720b11cb31e7550f287f7
+  ref: 87e34e337b32352f7b83a47345afde8a2f0d0682
 
 docs:
   hello_world: |
@@ -36,14 +36,16 @@ docs:
 
   extended_description: |
     DuckDBI turns DuckDB into a local BI server. The extension embeds a full single-page application
-    that serves an interactive dashboard builder directly from the DuckDB process.
+    with a simple SQL query and results screen. Advanced dashboards and reports are available at `/advanced`.
 
     **Core Features**:
     - SQL query editor with JSON result rendering
     - Interactive charts powered by Plotly.js (Bar, Line, Scatter, Area, 3D Scatter)
     - Drag-and-drop dashboard layout via Gridstack.js
     - PDF export with jsPDF and html2canvas
-    - Markdown text panels via Marked.js
+    - Markdown query-column previews on both routes, with HTML/link sanitization
+    - English, Simplified Chinese, and Japanese interface controls
+    - Markdown reports via Marked.js
 
     **Functions**:
     - `duckdbi_start(host, port)` - Start the HTTP server and open the dashboard UI
@@ -56,8 +58,8 @@ docs:
 
 extension_star_count: 5
 extension_star_count_pretty: 5
-extension_download_count: 1506
-extension_download_count_pretty: 1.5k
+extension_download_count: 2394
+extension_download_count_pretty: 2.4k
 image: '/images/community_extensions/social_preview/preview_community_extension_duckdbi.png'
 layout: community_extension_doc
 ---
@@ -69,13 +71,13 @@ This table covers all DuckDB releases that have not reached [end-of-life](https:
 
 | Platform | 1.4.4 | 1.4.5 | 1.5.5 | 1.5.6 | 2.0.0 |
 | :--- | :---: | :---: | :---: | :---: | :---: |
-| Linux AMD64 | ❌ | ✅ | ❌ | ❌ | ❌ |
-| Linux ARM64 | ❌ | ✅ | ❌ | ❌ | ❌ |
-| macOS AMD64 | ❌ | ✅ | ❌ | ❌ | ❌ |
-| macOS ARM64 | ❌ | ✅ | ❌ | ❌ | ❌ |
-| Windows AMD64 | ❌ | ✅ | ❌ | ❌ | ❌ |
+| Linux AMD64 | ❌ | ✅ | ❌ | ❌ | ✅ |
+| Linux ARM64 | ❌ | ✅ | ❌ | ❌ | ✅ |
+| macOS AMD64 | ❌ | ✅ | ❌ | ❌ | ✅ |
+| macOS ARM64 | ❌ | ✅ | ❌ | ❌ | ✅ |
+| Windows AMD64 | ❌ | ✅ | ❌ | ❌ | ✅ |
 | Windows ARM64 | ❌ | ❌ | ❌ | ❌ | ❌ |
-| WebAssembly | ❌ | ✅ | ❌ | ❌ | ❌ |
+| WebAssembly | ❌ | ✅ | ❌ | ❌ | ✅ |
 
 ### Installing and Loading
 ```sql
@@ -118,6 +120,8 @@ This extension does not add any types.
 
 <div class="extension_settings_table"></div>
 
-This extension does not add any settings.
+|      name      |                       description                       | input_type | scope  | aliases | typed_value |
+|----------------|---------------------------------------------------------|------------|--------|---------|-------------|
+| temp_directory | Set the directory to which temporary files are written. | VARCHAR    | GLOBAL | []      | post.db.tmp |
 
 
