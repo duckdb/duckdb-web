@@ -17,12 +17,13 @@ extension:
     - jrosskopf
 repo:
   github: DataZooDE/erpl-odata
-  ref: 98972212ae3770928f55c0de787b4dcb80904077
+  ref: e7cc326bd2e126189561c9469fa9aabbc33134bd
+  variegata: e7cc326bd2e126189561c9469fa9aabbc33134bd
 
 extension_star_count: 31
 extension_star_count_pretty: 31
-extension_download_count: 2231
-extension_download_count_pretty: 2.2k
+extension_download_count: 3055
+extension_download_count_pretty: 3.1k
 image: '/images/community_extensions/social_preview/preview_community_extension_erpl_odata.png'
 layout: community_extension_doc
 ---

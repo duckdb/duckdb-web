@@ -8,7 +8,7 @@ excerpt: |
 extension:
   name: gridpin_ext
   description: Offline geocoding from a single country file — forward and reverse, no server, no network
-  version: 0.4.0
+  version: 0.5.0
   language: Rust
   build: cargo
   license: Apache-2.0
@@ -20,8 +20,8 @@ extension:
 
 repo:
   github: gridpin/duckdb-gridpin
-  variegata: 0f4e7e09393858c196bb7fb5cbcf8a6bbd97e391
-  ref: 225c3307cdc79177ba8ad71e9dd8cdb19b11c057
+  variegata: 3f6b8e36c83066265340009babf356f40964aed3
+  ref: 3f6b8e36c83066265340009babf356f40964aed3
 
 docs:
   hello_world: |
@@ -86,8 +86,8 @@ docs:
 
 extension_star_count: 1
 extension_star_count_pretty: 1
-extension_download_count: 6740
-extension_download_count_pretty: 6.7k
+extension_download_count: 8225
+extension_download_count_pretty: 8.2k
 image: '/images/community_extensions/social_preview/preview_community_extension_gridpin_ext.png'
 layout: community_extension_doc
 ---

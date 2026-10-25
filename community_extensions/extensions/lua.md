@@ -29,8 +29,8 @@ docs:
 
 extension_star_count: 14
 extension_star_count_pretty: 14
-extension_download_count: 14245
-extension_download_count_pretty: 14.2k
+extension_download_count: 17127
+extension_download_count_pretty: 17.1k
 image: '/images/community_extensions/social_preview/preview_community_extension_lua.png'
 layout: community_extension_doc
 ---

@@ -342,10 +342,10 @@ docs:
     Full documentation, including a Python integration example, is in the
     [README](https://github.com/nozzle/duckdb-gatekeeper/blob/v0.4.3/README.md).
 
-extension_star_count: 4
-extension_star_count_pretty: 4
-extension_download_count: 6971
-extension_download_count_pretty: 7.0k
+extension_star_count: 5
+extension_star_count_pretty: 5
+extension_download_count: 8382
+extension_download_count_pretty: 8.4k
 image: '/images/community_extensions/social_preview/preview_community_extension_gatekeeper.png'
 layout: community_extension_doc
 ---

@@ -8,7 +8,7 @@ excerpt: |
 extension:
   name: netquack
   description: DuckDB extension for parsing, extracting, and analyzing domains, URIs, and paths with ease.
-  version: 1.15.1
+  version: 1.16.0
   language: C++
   build: cmake
   license: MIT
@@ -17,8 +17,8 @@ extension:
 
 repo:
   github: hatamiarash7/duckdb-netquack
-  andium: 1864ff04183fcaeba566cd3740b68a80282519d9
-  ref: 1864ff04183fcaeba566cd3740b68a80282519d9
+  andium: 7347c1217e1b0fa3575a6f6fa9a80562bf412a0d
+  ref: 7347c1217e1b0fa3575a6f6fa9a80562bf412a0d
 
 docs:
   extended_description: |
@@ -30,8 +30,8 @@ docs:
 
 extension_star_count: 42
 extension_star_count_pretty: 42
-extension_download_count: 15256
-extension_download_count_pretty: 15.3k
+extension_download_count: 19023
+extension_download_count_pretty: 19.0k
 image: '/images/community_extensions/social_preview/preview_community_extension_netquack.png'
 layout: community_extension_doc
 ---
@@ -43,13 +43,13 @@ This table covers all DuckDB releases that have not reached [end-of-life](https:
 
 | Platform | 1.4.4 | 1.4.5 | 1.5.5 | 1.5.6 | 2.0.0 |
 | :--- | :---: | :---: | :---: | :---: | :---: |
-| Linux AMD64 | ✅ | ✅ | ✅ | ✅ | ❌ |
-| Linux ARM64 | ✅ | ✅ | ✅ | ✅ | ❌ |
-| macOS AMD64 | ✅ | ✅ | ✅ | ✅ | ❌ |
-| macOS ARM64 | ✅ | ✅ | ✅ | ✅ | ❌ |
-| Windows AMD64 | ✅ | ✅ | ✅ | ✅ | ❌ |
+| Linux AMD64 | ✅ | ✅ | ✅ | ✅ | ✅ |
+| Linux ARM64 | ✅ | ✅ | ✅ | ✅ | ✅ |
+| macOS AMD64 | ✅ | ✅ | ✅ | ✅ | ✅ |
+| macOS ARM64 | ✅ | ✅ | ✅ | ✅ | ✅ |
+| Windows AMD64 | ✅ | ✅ | ✅ | ✅ | ✅ |
 | Windows ARM64 | ❌ | ❌ | ❌ | ❌ | ❌ |
-| WebAssembly | ✅ | ✅ | ✅ | ✅ | ❌ |
+| WebAssembly | ✅ | ✅ | ✅ | ✅ | ✅ |
 
 ### Installing and Loading
 ```sql
@@ -141,6 +141,8 @@ This extension does not add any types.
 
 <div class="extension_settings_table"></div>
 
-This extension does not add any settings.
+|      name      |                       description                       | input_type | scope  | aliases | typed_value |
+|----------------|---------------------------------------------------------|------------|--------|---------|-------------|
+| temp_directory | Set the directory to which temporary files are written. | VARCHAR    | GLOBAL | []      | post.db.tmp |
 
 

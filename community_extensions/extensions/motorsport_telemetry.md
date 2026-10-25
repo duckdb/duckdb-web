@@ -59,10 +59,10 @@ docs:
     parsers memory-map native files and table functions produce vectorized
     DuckDB output.
 
-extension_star_count: 9
-extension_star_count_pretty: 9
-extension_download_count: 6487
-extension_download_count_pretty: 6.5k
+extension_star_count: 10
+extension_star_count_pretty: 10
+extension_download_count: 7950
+extension_download_count_pretty: 8.0k
 image: '/images/community_extensions/social_preview/preview_community_extension_motorsport_telemetry.png'
 layout: community_extension_doc
 ---
@@ -76,7 +76,7 @@ This table covers all DuckDB releases that have not reached [end-of-life](https:
 | :--- | :---: | :---: | :---: | :---: | :---: |
 | Linux AMD64 | ❌ | ❌ | ✅ | ✅ | ✅ |
 | Linux ARM64 | ❌ | ❌ | ✅ | ✅ | ✅ |
-| macOS AMD64 | ❌ | ❌ | ✅ | ✅ | ❌ |
+| macOS AMD64 | ❌ | ❌ | ✅ | ✅ | ✅ |
 | macOS ARM64 | ❌ | ❌ | ✅ | ✅ | ✅ |
 | Windows AMD64 | ❌ | ❌ | ✅ | ✅ | ✅ |
 | Windows ARM64 | ❌ | ❌ | ❌ | ❌ | ❌ |
