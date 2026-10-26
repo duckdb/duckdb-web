@@ -92,6 +92,7 @@ DuckDB 2.0 shipped a revamped C API (C API v2), which is not yet stable. You can
 * [C API v2]({% link docs/2.0/clients/c/overview.md %}#c-api-v2)
 * [Extension repositories]({% link docs/2.0/extensions/extension_repositories.md %})
 * Statically linking extensions: see [Statically Linking Extensions]({% link docs/2.0/dev/building/linking_extensions.md %})
+* [Window function extensions]({% link docs/2.0/extensions/window_function_extensions.md %})
 
 ## Core Extension Updates
 

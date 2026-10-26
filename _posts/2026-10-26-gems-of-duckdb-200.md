@@ -2,14 +2,15 @@
 layout: post
 title: "Gems of DuckDB 2.0.0"
 authors:
-  - The DuckDB team
+  - Gábor Szárnyas
+  - Geertjan Wielenga
 thumb: "/images/blog/thumbs/gems-of-duckdb-2-0-0.svg"
 image: "/images/blog/thumbs/gems-of-duckdb-2-0-0.png"
 excerpt: "We released DuckDB 2.0.0 last week with an improved Quack protocol and `VARIANT` support, asynchronous I/O and many other features. In this blog post, we highlight a few smaller features and improvements that did not make it into the release announcement."
 tag: release
 ---
 
-Last week we released [DuckDB 2.0.0 LTS “Cinnamon Teal”]({% post_url 2026-10-21-announcing-duckdb-200 %}), our biggest feature release so far.
+Last week we released [DuckDB 2.0.0 LTS]({% post_url 2026-10-21-announcing-duckdb-200 %}), our biggest feature release so far.
 The announcement covered the headline items: the Quack protocol, asynchronous I/O, the first-class `VARIANT` type, agent mode, the PEG parser and triggers.
 DuckDB 2.0.0 is now available in [all primary clients]({% link docs/2.0/clients/overview.md %}) – check the [installation page]({% link install/index.html %}) for instructions on installing or upgrading.
 
@@ -31,13 +32,13 @@ con.execute("CREATE TABLE duckdb_releases (version VARCHAR, codename VARCHAR);")
 
 with con.appender("duckdb_releases") as appender:
     appender.append_row("1.4", "Andium")
-    appender.append_rows([("1.5", "Variegata"), ("2.0", "Cinnamon Teal")])
+    appender.append_rows([("1.5", "Variegata"), ("2.0", "Cyanoptera")])
 
 print(con.execute("FROM duckdb_releases").fetchall())
 ```
 
 ```text
-[('1.4', 'Andium'), ('1.5', 'Variegata'), ('2.0', 'Cinnamon Teal')]
+[('1.4', 'Andium'), ('1.5', 'Variegata'), ('2.0', 'Cyanoptera')]
 ```
 
 The `with` block flushes the buffered rows when it exits.
@@ -51,6 +52,55 @@ As of DuckDB 2.0, the [`.schema` dot command]({% link docs/2.0/clients/cli/dot_c
 
 ```batch
 duckdb mydata.duckdb ".schema --no-indent"
+```
+
+### `.manual` Dot Command
+
+DuckDB 2.0 introduces the [`.manual` dot command]({% link docs/2.0/clients/cli/dot_commands.md %}#displaying-function-documentation), which shows the signatures, description and examples of a SQL function.
+For example, to get the details of the `bar` function, run:
+
+```sql
+.manual bar
+```
+
+```text
+  ────────────────────────────────────────────────────────────────────────────────────────────────
+  system.main                                   bar                                scalar function
+
+  SIGNATURE
+
+        bar(x DOUBLE, min DOUBLE, max DOUBLE) -> VARCHAR
+
+        bar(x DOUBLE, min DOUBLE, max DOUBLE, width DOUBLE) -> VARCHAR
+
+  DESCRIPTION
+
+        Draws a band whose width is proportional to (`x - min`) and equal to `width` characters
+        when `x` = `max`. `width` defaults to 80.
+
+  EXAMPLES
+
+        bar(5, 0, 20, 10)
+```
+
+The same page is available from the command line via `duckdb -manual bar`, and the name may contain `LIKE` wildcards, e.g., `.manual list_%`.
+In the coming releases, we will extend the manuals to cover more features such as SQL statements and clauses.
+
+### Calculator
+
+You can use the CLI as a calculator. Simply type the expression ended with a semicolon – no more typing into your browser's address bar!
+
+```sql
+6*7;
+```
+
+```text
+┌─────────┐
+│ (6 * 7) │
+│  int32  │
+├─────────┤
+│      42 │
+└─────────┘
 ```
 
 ### Command History
@@ -114,9 +164,9 @@ CREATE SECURE VIEW users AS
 
 A secure view returns `NULL` for those internals and shows a `Secure View` node in `EXPLAIN ANALYZE`, so query plans cannot be used to reconstruct the rows that the view filters out.
 
-### Regex Options in `regexp_extract`
+### Options in `regexp_extract`
 
-The [`regexp_extract` function]({% link docs/2.0/sql/functions/regular_expressions.md %}#using-regexp_extract) gained an overload that takes regex options as the third argument, with no capture group required. For example, you can now match case-insensitively in a single call:
+The [`regexp_extract` function]({% link docs/2.0/sql/functions/regular_expressions.md %}#using-regexp_extract) gained an overload that takes regular expression options as the third argument, with no capture group required. For example, you can now match case-insensitively in a single call:
 
 ```sql
 SELECT regexp_extract('ABC', 'abc', 'i'); -- ABC
@@ -180,7 +230,7 @@ COPY orders TO 'orders'
 
 ### Writing GeoJSON
 
-The [`spatial` extension]({% link docs/2.0/core_extensions/spatial/overview.md %}) can now write [GeoJSON]({% link docs/2.0/data/json/writing_json.md %}#geojson) directly with `COPY ... (FORMAT GEOJSON)`, which produces a `FeatureCollection`, or `FORMAT GEOJSONL` for newline-delimited features:
+DuckDB can now write [GeoJSON]({% link docs/2.0/data/json/writing_json.md %}#geojson) directly with `COPY ... (FORMAT GEOJSON)`, which produces a `FeatureCollection`, or `FORMAT GEOJSONL` for newline-delimited features:
 
 ```sql
 COPY (SELECT 'POINT(0 1)'::GEOMETRY AS geom, 10 AS my_field)
@@ -189,7 +239,9 @@ COPY (SELECT 'POINT(0 1)'::GEOMETRY AS geom, 10 AS my_field)
 
 The optional `ID_COLUMN` and `GEOMETRY_COLUMN` options pick which columns become the feature `id` and geometry. Reading GeoJSON is covered on the [Loading JSON]({% link docs/2.0/data/json/loading_json.md %}#geojson) page.
 
-## Compatibility Matrix for Community Extensions
+## Extensions
+
+### Compatibility Matrix for Community Extensions
 
 In the days following the release, once our CI pipelines got some breathing room, we built and deployed the [community extensions]({% link community_extensions/index.md %}) for DuckDB 2.0.0.
 
@@ -206,6 +258,10 @@ Not every extension is available for every DuckDB version and platform, so each 
 | Windows AMD64 | ✅ | ❌ | ❌ | ✅ | ✅ |
 | Windows ARM64 | ❌ | ❌ | ❌ | ❌ | ❌ |
 | WebAssembly | ✅ | ❌ | ❌ | ✅ | ✅ |
+
+### Window Function Extensions
+
+Every aggregate function can be used as a window function, but not every windowed operation is an aggregate. In DuckDB 2.0, window functions became catalog entries, so [extensions can now define their own window functions]({% link docs/2.0/extensions/window_function_extensions.md %}) using the same C++ API as the built-in ones. An extension derives from the `WindowFunction` class, registers it with the `ExtensionLoader` and implements a blocking interface, which builds its data structures and evaluates the function in parallel. Optionally, it can also implement a streaming interface for windows without `PARTITION BY` and `ORDER BY` clauses. As a side effect, window functions are now listed in `duckdb_functions()` and can be looked up with the `.manual` dot command. For the details, see [Richard Wesley's slides on window extensions](https://blobs.duckdb.org/events/duckdb-boston/meetup/richard-wesley-windowing.pdf).
 
 ## Summary
 
