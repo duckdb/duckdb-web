@@ -40,7 +40,7 @@ They are different from the [Core Extensions]({% link docs/1.5/core_extensions/o
 
 Community Extensions are distributed via the Community Extension endpoint at `http(s)://community-extensions.duckdb.org`, and on `INSTALL` or `UPDATE EXTENSIONS` are retrieved from there.
 
-Community Extension submissions and build process happen via the [Community Extension repo](https://github.com/duckdb/community-extensions).
+Community Extension submissions and build process happen via the [Community Extension repository](https://github.com/duckdb/community-extensions).
 
 Check the [Development page]({% link community_extensions/development.md %}) on how to contribute an extension.
 
