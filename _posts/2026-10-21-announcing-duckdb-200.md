@@ -9,6 +9,8 @@ excerpt: "The DuckDB team is happy to announce that today we're releasing DuckDB
 tag: release
 ---
 
+> Update 2.0.0 packed so many features that we published a followup blog post titled [“Gems of DuckDB 2.0.0”]({% post_url 2026-10-26-gems-of-duckdb-200 %}).
+
 We are proud to release DuckDB 2.0.0, codenamed [“Cinnamon Teal”](https://shell.duckdb.org/#queries=v0,ATTACH-'https%3A%2F%2Fblobs.duckdb.org%2Fduck.db'-AS-duckdb~,CALL-duckdb.cinnamon_teal()~) after the [_Spatula cyanoptera_](https://en.wikipedia.org/wiki/Cinnamon_teal), a strikingly reddish-brown duck found in the western Americas.
 
 While [DuckDB 1.0]({% post_url 2024-06-03-announcing-duckdb-100 %}) was all about stability and backward compatibility, DuckDB 2.0 is above all a feature release.
@@ -391,7 +393,7 @@ The [amalgamation build](/docs/1.4/dev/building/overview), which bundles DuckDB'
 #### Gradual Phase-Out of macOS x86_64
 
 We are gradually phasing out `osx_amd64` from the list of fully supported [platforms]({% link docs/2.0/operations_manual/installing_duckdb/requirements.md %}#supported-platforms).
-For the time being, DuckDB and [core extensions]({% link docs/2.0/core_extensions/overview.md %}) are still built and supported, but [community extensions]({% link docs/2.0/extensions/community_extensions.md %}) are no longer built for this platform. DuckDB 2.1 will stop supporting `osx_amd64`.
+For the time being, DuckDB and [core extensions]({% link docs/2.0/core_extensions/overview.md %}) are still built and supported, but [community extensions]({% link docs/2.0/extensions/community_extensions.md %}) are only built for this platform on a best-effort basis. DuckDB 2.1 will stop supporting `osx_amd64`.
 
 ## Summary
 

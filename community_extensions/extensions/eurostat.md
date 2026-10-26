@@ -8,7 +8,7 @@ excerpt: |
 extension:
   name: eurostat
   description: Extension that adds support for reading data from EUROSTAT database using SQL.
-  version: 0.5.0
+  version: 0.6.0
   language: C++
   build: cmake
   excluded_platforms: "windows_amd64_mingw"
@@ -18,7 +18,8 @@ extension:
 
 repo:
   github: ahuarte47/duckdb-eurostat
-  ref: b1658b1cdc389871512b1c9fb1f29f596c38391a
+  ref: 34da5469c503c2b7e476cc38b19022ed37eab419
+  variegata: 0a011cd804680f01864ed8c2a987973974081f52
 
 docs:
   hello_world: |
@@ -162,13 +163,13 @@ This table covers all DuckDB releases that have not reached [end-of-life](https:
 
 | Platform | 1.4.4 | 1.4.5 | 1.5.5 | 1.5.6 | 2.0.0 |
 | :--- | :---: | :---: | :---: | :---: | :---: |
-| Linux AMD64 | ✅ | ❌ | ✅ | ✅ | ❌ |
-| Linux ARM64 | ✅ | ❌ | ✅ | ✅ | ❌ |
+| Linux AMD64 | ✅ | ❌ | ✅ | ✅ | ✅ |
+| Linux ARM64 | ✅ | ❌ | ✅ | ✅ | ✅ |
 | macOS AMD64 | ✅ | ❌ | ✅ | ✅ | ❌ |
-| macOS ARM64 | ✅ | ❌ | ✅ | ✅ | ❌ |
-| Windows AMD64 | ✅ | ❌ | ✅ | ✅ | ❌ |
+| macOS ARM64 | ✅ | ❌ | ✅ | ✅ | ✅ |
+| Windows AMD64 | ✅ | ❌ | ✅ | ✅ | ✅ |
 | Windows ARM64 | ❌ | ❌ | ❌ | ❌ | ❌ |
-| WebAssembly | ✅ | ❌ | ✅ | ✅ | ❌ |
+| WebAssembly | ✅ | ❌ | ✅ | ✅ | ✅ |
 
 ### Installing and Loading
 ```sql
@@ -215,6 +216,8 @@ This extension does not add any types.
 
 <div class="extension_settings_table"></div>
 
-This extension does not add any settings.
+|      name      |                       description                       | input_type | scope  | aliases | typed_value |
+|----------------|---------------------------------------------------------|------------|--------|---------|-------------|
+| temp_directory | Set the directory to which temporary files are written. | VARCHAR    | GLOBAL | []      | post.db.tmp |
 
 

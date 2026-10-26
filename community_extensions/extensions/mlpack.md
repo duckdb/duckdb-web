@@ -8,7 +8,7 @@ excerpt: |
 extension:
   name: mlpack
   description: Connecting duckdb to the mlpack C++ machine learning library 
-  version: 0.0.6
+  version: 0.0.7
   language: C++
   build: cmake
   license: MIT
@@ -20,8 +20,8 @@ extension:
 repo:
   github: eddelbuettel/duckdb-mlpack
   andium: 8437d78423e3cfc65f9226606908b301c2314710
-  ref: 312d1098fb51b40ed9a3c39dbdce1a7bdcf58c37
-  
+  ref: ed1891ddf415491a2c0c24009d7a7b9aed32bead
+
 docs:
   hello_world: |
     -- Perform adaBoost (using weak learner 'Perceptron' by default)
@@ -83,10 +83,10 @@ This table covers all DuckDB releases that have not reached [end-of-life](https:
 
 | Platform | 1.4.4 | 1.4.5 | 1.5.5 | 1.5.6 | 2.0.0 |
 | :--- | :---: | :---: | :---: | :---: | :---: |
-| Linux AMD64 | ✅ | ❌ | ✅ | ✅ | ❌ |
-| Linux ARM64 | ✅ | ❌ | ✅ | ✅ | ❌ |
+| Linux AMD64 | ✅ | ❌ | ✅ | ✅ | ✅ |
+| Linux ARM64 | ✅ | ❌ | ✅ | ✅ | ✅ |
 | macOS AMD64 | ✅ | ❌ | ✅ | ✅ | ❌ |
-| macOS ARM64 | ✅ | ❌ | ✅ | ✅ | ❌ |
+| macOS ARM64 | ✅ | ❌ | ✅ | ✅ | ✅ |
 | Windows AMD64 | ❌ | ❌ | ❌ | ❌ | ❌ |
 | Windows ARM64 | ❌ | ❌ | ❌ | ❌ | ❌ |
 | WebAssembly | ❌ | ❌ | ❌ | ❌ | ❌ |
@@ -153,9 +153,10 @@ This extension does not add any types.
 
 <div class="extension_settings_table"></div>
 
-|      name      |                         description                         | input_type | scope  | aliases |
-|----------------|-------------------------------------------------------------|------------|--------|---------|
-| mlpack_silent  | Toggle whether to operate in silent mode, default is false  | BOOLEAN    | GLOBAL | []      |
-| mlpack_verbose | Toggle whether to operate in verbose mode, default is false | BOOLEAN    | GLOBAL | []      |
+|      name      |                         description                         | input_type | scope  | aliases | typed_value |
+|----------------|-------------------------------------------------------------|------------|--------|---------|-------------|
+| mlpack_silent  | Toggle whether to operate in silent mode, default is false  | BOOLEAN    | GLOBAL | []      | false       |
+| mlpack_verbose | Toggle whether to operate in verbose mode, default is false | BOOLEAN    | GLOBAL | []      | false       |
+| temp_directory | Set the directory to which temporary files are written.     | VARCHAR    | GLOBAL | []      | post.db.tmp |
 
 

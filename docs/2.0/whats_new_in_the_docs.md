@@ -92,6 +92,7 @@ DuckDB 2.0 shipped a revamped C API (C API v2), which is not yet stable. You can
 * [C API v2]({% link docs/2.0/clients/c/overview.md %}#c-api-v2)
 * [Extension repositories]({% link docs/2.0/extensions/extension_repositories.md %})
 * Statically linking extensions: see [Statically Linking Extensions]({% link docs/2.0/dev/building/linking_extensions.md %})
+* [Window function extensions]({% link docs/2.0/extensions/window_function_extensions.md %})
 
 ## Core Extension Updates
 
@@ -106,7 +107,7 @@ Several core extensions shipped new features alongside DuckDB 2.0.
 DuckDB 2.0 disables or phases out a few features, which will be removed in future releases.
 
 * [The single-arrow lambda syntax]({% link docs/2.0/sql/functions/lambda.md %}#deprecated-syntax), now disabled by default
-* [macOS x86_64 (`osx_amd64`)]({% link docs/2.0/operations_manual/installing_duckdb/requirements.md %}#supported-platforms), for which community extensions are no longer built
+* [macOS x86_64 (`osx_amd64`)]({% link docs/2.0/operations_manual/installing_duckdb/requirements.md %}#supported-platforms), for which community extensions are only built on a best-effort basis
 
 ## Other Documentation Updates
 

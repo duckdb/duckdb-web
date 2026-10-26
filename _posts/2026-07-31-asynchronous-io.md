@@ -182,7 +182,7 @@ With the default memory configuration, DuckDB v1.5.5 keeps an average of only ab
 
 The memory results are also interesting. As we lower the limit, the memory governor reduces the read-ahead backlog, while memory-heavy operators such as those in Q18 can spill to disk. This lowers the peak physical memory used by the DuckDB process (i.e., RSS) of DuckDB v2.0.0-dev from 20.1 GB with the default configuration to 15.7 GB with a 16 GB limit and 11.5 GB with an 8 GB limit. The additional spilling and reduced read-ahead also lower average CPU utilization and increase the runtime, but v2.0.0-dev continues to saturate the network and remains substantially faster than v1.5.5 in both cases.
 
-> One might notice that the 8 GB result still peaks at 11.5 GB of RSS. This is because [jemalloc]({% link docs/1.5/internals/jemalloc.md %}) keeps recently freed pages resident for about one second so they can be reused. This memory is no longer counted by DuckDB's memory manager, and v1.5.5 shows the same allocator behavior.
+> One might notice that the 8 GB result still peaks at 11.5 GB of RSS. This is because [jemalloc]({% link docs/2.0/internals/jemalloc.md %}) keeps recently freed pages resident for about one second so they can be reused. This memory is no longer counted by DuckDB's memory manager, and v1.5.5 shows the same allocator behavior.
 
 ### CSV
 

@@ -11,7 +11,7 @@ tag: pcs
 category: community
 ---
 
-DuckDB can complete all [TPC-H]({% link docs/1.5/core_extensions/tpch.md %}) SF100 queries on the [Asus Chromebook CM30 Detachable (CM3001)](https://www.asus.com/laptops/for-home/chromebook/asus-chromebook-cm30-detachable-cm3001/techspec/), running via Crostini, ChromeOS's built-in Linux container environment.
+DuckDB can complete all [TPC-H]({% link docs/2.0/core_extensions/tpch.md %}) SF100 queries on the [Asus Chromebook CM30 Detachable (CM3001)](https://www.asus.com/laptops/for-home/chromebook/asus-chromebook-cm30-detachable-cm3001/techspec/), running via Crostini, ChromeOS's built-in Linux container environment.
 
 The laptop is powered by the MediaTek Kompanio 520 (MT8186), which features 2 Arm Cortex-A76 performance cores (up to 2.2 GHz) and 6 Arm Cortex-A55 efficiency cores (up to 2.0 GHz), with a 256 KB L2 cache per CPU package. The machine ships with 8 GB of LPDDR4X RAM soldered to the board and 128 GB of eMMC storage.
 

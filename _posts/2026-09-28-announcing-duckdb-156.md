@@ -62,7 +62,7 @@ First, extensions are now available for [these clients]({% link install/preview.
 Second, we recently ran a benchmark to measure the performance improvement that the new clients bring, and the results blew our minds!
 
 We used Windows 11 25H2 on a [laptop]({% post_url 2025-09-08-duckdb-on-the-framework-laptop-13 %}) with 128 GB RAM and 12 AMD Ryzen AI 300 CPU cores with simultaneous multithreading (yielding 24 threads).
-We used the [TPC-H]({% link docs/1.5/core_extensions/tpch.md %}) SF300 dataset and ran each query twice on both DuckDB v1.5.6 and v2.0.0-dev (alpha43586).
+We used the [TPC-H]({% link docs/2.0/core_extensions/tpch.md %}) SF300 dataset and ran each query twice on both DuckDB v1.5.6 and v2.0.0-dev (alpha43586).
 For each query, we took the runtime of the second (hot) run.
 The total runtime for DuckDB v1.5.6 was 822 seconds, while for v2.0.0-dev it was 129 seconds.
 That's more than 6× faster!

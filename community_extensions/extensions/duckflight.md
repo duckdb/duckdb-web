@@ -20,7 +20,7 @@ extension:
 
 repo:
   github: sidequery/duckflight-extension
-  ref: a36f686e136f2a4ee22253f25ebdff6e28f36343
+  ref: 94b984d096d90094d6902bfa8c0eca3aa5067df2
   variegata: d6646edb7877ab65f39ffa1cfe53b5d090f3694b
 
 docs:

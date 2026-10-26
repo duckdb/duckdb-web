@@ -27,7 +27,7 @@ DuckDB has had support for window functions since the early days,
 but if they are new to you, you might want to start with my earlier blog posts
 on [Windowing in DuckDB]({% post_url 2021-10-13-windowing %})
 and [Fast Moving Holistic Aggregates]({% post_url 2021-11-12-moving-holistic %}),
-or just the [window function documentation]({% link docs/1.5/sql/functions/window_functions.md %}).
+or just the [window function documentation]({% link docs/2.0/sql/functions/window_functions.md %}).
 In this post, I will start by introducing the more recent functionality additions.
 In a follow-up post, I will spelunk into the internals to talk about some performance and scaling improvements.
 
@@ -236,7 +236,7 @@ but it is at odds with traditional unordered query processing.
 Nevertheless, since 2003 the SQL language has provided syntax for expressing a wide range of such queries.
 In recent years, the community has also considered further extensions to the language
 (such as `QUALIFY` and argument modifiers like `DISTINCT` and `ORDER BY`) to improve expressivity.
-Here at DuckDB we love providing this kind of expressiveness as part of our [“friendly SQL”]({% link docs/1.5/sql/dialect/friendly_sql.md %}) work.
+Here at DuckDB we love providing this kind of expressiveness as part of our [“friendly SQL”]({% link docs/2.0/sql/dialect/friendly_sql.md %}) work.
 What may  be less obvious is that when we enable users to express their problem more naturally,
 it helps us provide more performant solutions!
 In my next post, I will go deeper into recent improvements in windowing's performance and resource utilization.

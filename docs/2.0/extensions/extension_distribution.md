@@ -24,7 +24,7 @@ Most official extensions are distributed for the following platforms. Some exten
 | `windows_amd64` | Windows          | x86_64  (AMD64) | Intel, AMD, etc.               |
 | `windows_arm64` | Windows          | AArch64 (ARM64) | Copilot+ PC with Qualcomm CPU  |
 
-> Deprecated The `osx_amd64` platform (macOS on Intel) is being phased out. In DuckDB 2.0, DuckDB and its core extensions are still built for `osx_amd64`, but [community extensions]({% link docs/2.0/extensions/community_extensions.md %}) are no longer built for this platform. DuckDB 2.1 will stop supporting `osx_amd64`.
+> Deprecated The `osx_amd64` platform (macOS on Intel) is being phased out. In DuckDB 2.0, DuckDB and its core extensions are still built for `osx_amd64`, but [community extensions]({% link docs/2.0/extensions/community_extensions.md %}) are only built for this platform on a best-effort basis. DuckDB 2.1 will stop supporting `osx_amd64`.
 
 Some extensions are distributed for the following platforms:
 

@@ -571,6 +571,18 @@ h5 a {
 			details summary{
 				font-size: var(--type-body-normal, 16px);
 			}
+			// Match the compatibility matrix on community extension pages
+			.extension_compatibility_table + table{
+				thead th{
+					font-size: var(--type-body-small, 14px);
+					font-weight: 700;
+				}
+				tbody td{
+					font-size: var(--type-body-small, 14px);
+					font-weight: var(--type-weight-standard, 450);
+					line-height: 1.55;
+				}
+			}
 			.video-container{
 				margin: 30px 0;
 				position: relative;

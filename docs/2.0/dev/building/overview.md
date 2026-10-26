@@ -84,7 +84,7 @@ For others, building from source is possible.
 
 | Platform name          | Description                                                                                          |
 |------------------------|------------------------------------------------------------------------------------------------------|
-| `osx_amd64`            | macOS 12+ x86_64 (AMD64) (Intel CPUs). DuckDB binaries and [core extensions]({% link docs/2.0/core_extensions/overview.md %}) are distributed, but [community extensions]({% link docs/2.0/extensions/community_extensions.md %}) are no longer built for this platform. DuckDB 2.1 will stop supporting `osx_amd64`. |
+| `osx_amd64`            | macOS 12+ x86_64 (AMD64) (Intel CPUs). DuckDB binaries and [core extensions]({% link docs/2.0/core_extensions/overview.md %}) are distributed, but [community extensions]({% link docs/2.0/extensions/community_extensions.md %}) are only built for this platform on a best-effort basis. DuckDB 2.1 will stop supporting `osx_amd64`. |
 | `linux_amd64_musl`     | Linux x86_64 (AMD64) with [musl libc](https://musl.libc.org/), e.g., Alpine Linux                    |
 | `linux_arm64_musl`     | Linux AArch64 (ARM64) with [musl libc](https://musl.libc.org/), e.g., Alpine Linux                   |
 | `linux_arm64_android`  | Android AArch64 (ARM64)                                                                              |

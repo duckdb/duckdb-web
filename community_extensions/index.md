@@ -11,11 +11,11 @@ Welcome to the documentation for the DuckDB Community Extensions.
 
 This website contains all documentation specific to community-contributed extensions for DuckDB.
 
-DuckDB is an analytical in-process SQL database management system, documented at the [DuckDB documentation website]({% link docs/1.5/index.md %}).
+DuckDB is an analytical in-process SQL database management system, documented at the [DuckDB documentation website]({% link docs/2.0/index.md %}).
 
 Community means that the extensions are created by external contributors and not maintained by [DuckLabs](https://ducklabs.com/).
 
-Extensions for DuckDB are the preferred way to package additional functionality for DuckDB. Generic extensions are documented in the [core DuckDB documentation]({% link docs/1.5/core_extensions/overview.md %}).
+Extensions for DuckDB are the preferred way to package additional functionality for DuckDB. Generic extensions are documented in the [core DuckDB documentation]({% link docs/2.0/core_extensions/overview.md %}).
 
 ## How to Use a Community Extension
 
@@ -34,9 +34,9 @@ SELECT waddle('world');
 
 ## What Are Community Extensions?
 
-Community Extensions are [DuckDB extensions]({% link docs/1.5/core_extensions/overview.md %}) that are not maintained by the DuckDB team.
+Community Extensions are [DuckDB extensions]({% link docs/2.0/core_extensions/overview.md %}) that are not maintained by the DuckDB team.
 
-They are different from the [Core Extensions]({% link docs/1.5/core_extensions/overview.md %}), which *are* maintained by the DuckDB team, or from unsigned extensions, that are extensions that have an empty or invalid key.
+They are different from the [Core Extensions]({% link docs/2.0/core_extensions/overview.md %}), which *are* maintained by the DuckDB team, or from unsigned extensions, that are extensions that have an empty or invalid key.
 
 Community Extensions are distributed via the Community Extension endpoint at `http(s)://community-extensions.duckdb.org`, and on `INSTALL` or `UPDATE EXTENSIONS` are retrieved from there.
 
@@ -55,7 +55,7 @@ DuckDB Community extensions are conceptually similar to a package manager such a
 
 DuckDB Community Extensions are signed, so that on `LOAD` a check is performed to prove a given extension has been built by the Community Extension CI.
 
-For more information on extensions and how to use them, check the [“Securing Extensions”]({% link docs/1.5/operations_manual/securing_duckdb/securing_extensions.md %}) and [“Installing Extensions”]({% link docs/1.5/extensions/installing_extensions.md %}) pages.
+For more information on extensions and how to use them, check the [“Securing Extensions”]({% link docs/2.0/operations_manual/securing_duckdb/securing_extensions.md %}) and [“Installing Extensions”]({% link docs/2.0/extensions/installing_extensions.md %}) pages.
 
 In particular, if you want to forbid `LOAD` of Community Extensions, run:
 

@@ -8,18 +8,20 @@ excerpt: |
 extension:
   name: h5db
   description: Read HDF5 datasets and attributes
-  version: 1.3.2
+  version: 1.4.0
   language: C++
   build: cmake
   license: MIT
   excluded_platforms: "windows_amd64_mingw;wasm_mvp;wasm_eh;wasm_threads"
+  opt_in_platforms: "osx_amd64"
   requires_toolchains: "vcpkg;python3"
   maintainers:
     - jokasimr
 repo:
   github: jokasimr/h5db
-  ref: 7de598959594ef86ccc838e64bf0e45fef315857
-  andium: v0.3.0
+  ref: 265ab57c5787f1477ae9ed818d42a82383e40dfa
+  variegata: 7de598959594ef86ccc838e64bf0e45fef315857
+  andium: e185e91cca551ef31d2c19b84866cc0f462d2363
 
 docs:
   hello_world: |
@@ -58,11 +60,11 @@ This table covers all DuckDB releases that have not reached [end-of-life](https:
 
 | Platform | 1.4.4 | 1.4.5 | 1.5.5 | 1.5.6 | 2.0.0 |
 | :--- | :---: | :---: | :---: | :---: | :---: |
-| Linux AMD64 | ✅ | ❌ | ✅ | ✅ | ❌ |
-| Linux ARM64 | ✅ | ❌ | ✅ | ✅ | ❌ |
-| macOS AMD64 | ✅ | ❌ | ✅ | ✅ | ❌ |
-| macOS ARM64 | ✅ | ❌ | ✅ | ✅ | ❌ |
-| Windows AMD64 | ✅ | ❌ | ✅ | ✅ | ❌ |
+| Linux AMD64 | ✅ | ❌ | ✅ | ✅ | ✅ |
+| Linux ARM64 | ✅ | ❌ | ✅ | ✅ | ✅ |
+| macOS AMD64 | ✅ | ❌ | ✅ | ✅ | ✅ |
+| macOS ARM64 | ✅ | ❌ | ✅ | ✅ | ✅ |
+| Windows AMD64 | ✅ | ❌ | ✅ | ✅ | ✅ |
 | Windows ARM64 | ❌ | ❌ | ❌ | ❌ | ❌ |
 | WebAssembly | ❌ | ❌ | ❌ | ❌ | ❌ |
 
@@ -120,10 +122,12 @@ This extension does not add any types.
 
 <div class="extension_settings_table"></div>
 
-|             name              |                                   description                                    | input_type | scope  | aliases |
-|-------------------------------|----------------------------------------------------------------------------------|------------|--------|---------|
-| h5db_batch_size               | Target batch size for h5_read read-ahead caching (e.g. 1MB, 8MB)                 | VARCHAR    | GLOBAL | []      |
-| h5db_scalar_read_memory_limit | Estimated peak memory limit for scalar h5_read materialization (e.g. 64MB, none) | VARCHAR    | GLOBAL | []      |
-| h5db_swmr_default             | Default to SWMR read mode for h5db table functions                               | BOOLEAN    | GLOBAL | []      |
+|             name              |                                   description                                    | input_type | scope  | aliases | typed_value |
+|-------------------------------|----------------------------------------------------------------------------------|------------|--------|---------|-------------|
+| h5db_batch_size               | Target batch size for h5_read read-ahead caching (e.g. 1MB, 8MB)                 | VARCHAR    | GLOBAL | []      | 1MB         |
+| h5db_cache_limit_per_column   | Per-column h5_read cache limit, raised to at least four times h5db_batch_size    | VARCHAR    | GLOBAL | []      | 128MiB      |
+| h5db_scalar_read_memory_limit | Estimated peak memory limit for scalar h5_read materialization (e.g. 64MB, none) | VARCHAR    | GLOBAL | []      | 64MB        |
+| h5db_swmr_default             | Default to SWMR read mode for h5db table functions                               | BOOLEAN    | GLOBAL | []      | false       |
+| temp_directory                | Set the directory to which temporary files are written.                          | VARCHAR    | GLOBAL | []      | post.db.tmp |
 
 

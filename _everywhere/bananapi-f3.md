@@ -30,4 +30,4 @@ FROM (SELECT range * 3.14 AS value FROM range(1000));
 ```
 
 The DuckDB Python package also builds from source on riscv64.
-See the [build instructions]({% link docs/1.5/dev/building/unofficial_and_unsupported_platforms.md %}#native-build-recommended) for details.
+See the [build instructions]({% link docs/2.0/dev/building/unofficial_and_unsupported_platforms.md %}#native-build-recommended) for details.

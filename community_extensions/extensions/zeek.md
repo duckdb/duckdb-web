@@ -8,7 +8,7 @@ excerpt: |
 extension:
   name: zeek
   description: Read Zeek network security monitor log files with automatic schema detection and type-aware parsing
-  version: 0.4.1
+  version: 0.5.0
   language: C++
   build: cmake
   license: MIT
@@ -17,7 +17,11 @@ extension:
 
 repo:
   github: ynadji/zeek-duckdb
-  ref: ad3580e3ba6130d0da395ad283cfca4e9cbb2024
+  # ref builds against DuckDB v2.0.0 (latest stable) from main. andium (v1.4.x) and variegata (v1.5.x)
+  # keep the last commit that builds against those versions.
+  ref: f79f5e27809095018e9a8fba071564d7fb71c459
+  andium: ad3580e3ba6130d0da395ad283cfca4e9cbb2024
+  variegata: ad3580e3ba6130d0da395ad283cfca4e9cbb2024
 
 docs:
   hello_world: |
@@ -65,13 +69,13 @@ This table covers all DuckDB releases that have not reached [end-of-life](https:
 
 | Platform | 1.4.4 | 1.4.5 | 1.5.5 | 1.5.6 | 2.0.0 |
 | :--- | :---: | :---: | :---: | :---: | :---: |
-| Linux AMD64 | ❌ | ❌ | ✅ | ✅ | ❌ |
-| Linux ARM64 | ❌ | ❌ | ✅ | ✅ | ❌ |
+| Linux AMD64 | ❌ | ❌ | ✅ | ✅ | ✅ |
+| Linux ARM64 | ❌ | ❌ | ✅ | ✅ | ✅ |
 | macOS AMD64 | ❌ | ❌ | ✅ | ✅ | ❌ |
-| macOS ARM64 | ❌ | ❌ | ✅ | ✅ | ❌ |
-| Windows AMD64 | ❌ | ❌ | ✅ | ✅ | ❌ |
+| macOS ARM64 | ❌ | ❌ | ✅ | ✅ | ✅ |
+| Windows AMD64 | ❌ | ❌ | ✅ | ✅ | ✅ |
 | Windows ARM64 | ❌ | ❌ | ❌ | ❌ | ❌ |
-| WebAssembly | ❌ | ❌ | ✅ | ✅ | ❌ |
+| WebAssembly | ❌ | ❌ | ✅ | ✅ | ✅ |
 
 ### Installing and Loading
 ```sql

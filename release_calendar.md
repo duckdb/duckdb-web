@@ -41,6 +41,8 @@ _There are no upcoming releases announced at the moment. Please check back later
 
 <!-- markdownlint-enable MD055 MD056 MD058 -->
 
+DuckDB v2.1 will be released sometime in 2027 H1 with the codename “Islandica”.
+
 For planned new features, see the [DuckDB Development Roadmap]({% link roadmap.md %}).
 
 ### LTS Releases
