@@ -17,6 +17,69 @@ A release of this size ships many smaller improvements that never make it into t
 In this post, we highlight a few of these gems.
 To find the documentation for everything that is new in 2.0, see the [“What's New in the Docs for 2.0”]({% link docs/2.0/whats_new_in_the_docs.md %}) page.
 
+## The Python Appender
+
+Inserting rows one at a time is inefficient and building up a giant `INSERT` statement is awkward.
+The [Python appender]({% link docs/2.0/clients/python/appender.md %}) collects rows and writes them together in a single operation:
+
+```python
+import duckdb
+
+con = duckdb.connect()
+con.execute("CREATE TABLE duckdb_releases (version VARCHAR, codename VARCHAR);")
+
+with con.appender("duckdb_releases") as appender:
+    appender.append_row("1.4", "Andium")
+    appender.append_rows([("1.5", "Variegata"), ("2.0", "Cinnamon Teal")])
+
+con.execute("FROM duckdb_releases").fetchall()
+```
+```text
+# [('1.4', 'Andium'), ('1.5', 'Variegata'), ('2.0', 'Cinnamon Teal')]
+```
+
+The `with` block flushes the buffered rows when it exits.
+For data that already lives in a DataFrame or Arrow table, `INSERT INTO ... SELECT` is still faster, but the appender is ideal for rows that your Python code produces on the fly.
+
+## Usability Improvements in the CLI
+
+### Pretty-Printed `.schema`
+
+As of DuckDB 2.0, the [`.schema` dot command]({% link docs/2.0/clients/cli/dot_commands.md %}#querying-the-database-schema) pretty-prints and highlights its output by default, which makes reading the schema of a database much easier. If you prefer the earlier single-line form, for example to copy a statement verbatim, use `--no-indent` (or its alias `--no-format`):
+
+```batch
+duckdb mydata.duckdb ".schema --no-indent"
+```
+
+### Command History
+
+The CLI now exposes its command history in two ways. The [`.history` dot command]({% link docs/2.0/clients/cli/dot_commands.md %}#command-history) shows previously executed statements with syntax highlighting, optionally limited to the last `N` entries:
+
+```sql
+.history 10
+```
+
+The same information is available as a table through the `shell_history()` table function, so you can query your own history with SQL:
+
+```sql
+SELECT sql
+FROM shell_history()
+WHERE sql ILIKE '%copy%';
+```
+
+## Offline Documentation
+
+As a reminder, both the DuckDB documentation and the DuckDB blog are available [for offline browsing]({% link docs/2.0/guides/offline-copy.md %}):
+
+* [Documentation as a Markdown file](https://blobs.duckdb.org/docs/duckdb-docs.md) (approx. 5 MB)
+* [Documentation as a PDF file](https://blobs.duckdb.org/docs/duckdb-docs.pdf) (approx. 10 MB)
+* [Blog as a Markdown file](https://blobs.duckdb.org/docs/duckdb-blog.md) (approx. 3 MB)
+* [Blog as a PDF file](https://blobs.duckdb.org/docs/duckdb-blog.pdf) (approx. 35 MB)
+
+You can download them to your e-reader (we are not affiliated with any particular brand!) or read them on your laptop on the go.
+You can also use them to supply context to LLMs and coding agents.
+Note that the documentation is approximately 5 MB, so it is larger than the context window of contemporary LLMs, therefore fully ingesting it is not practical – point them towards specific segments or let them figure out which part they need.
+
 ## Unsung DuckDB 2.0 Features
 
 ### `SHOW` for Configuration Settings
@@ -33,7 +96,7 @@ SHOW threads;
 | 42      |
 
 
-This much more succint than the previous formulation that used the [`current_setting` function]({% link docs/2.0/configuration/overview.md %}) (e.g., `SELECT current_setting('threads') AS threads;`).
+This is much more succinct than the previous formulation that used the [`current_setting` function]({% link docs/2.0/configuration/overview.md %}) (e.g., `SELECT current_setting('threads') AS threads;`).
 
 When a table and a setting share a name, DuckDB prioritizes the table by default. You can control this with the `show_behavior` setting, which takes `'auto'` (the default), `'table'` or `'setting'`.
 
@@ -125,56 +188,6 @@ COPY (SELECT 'POINT(0 1)'::GEOMETRY AS geom, 10 AS my_field)
 
 The optional `ID_COLUMN` and `GEOMETRY_COLUMN` options pick which columns become the feature `id` and geometry. Reading GeoJSON is covered on the [Loading JSON]({% link docs/2.0/data/json/loading_json.md %}#geojson) page.
 
-## Quality-of-Life Improvements in the CLI
-
-### Pretty-Printed `.schema`
-
-As of DuckDB 2.0, the [`.schema` dot command]({% link docs/2.0/clients/cli/dot_commands.md %}#querying-the-database-schema) pretty-prints and highlights its output by default, which makes reading the schema of a database much easier. If you prefer the earlier single-line form, for example to copy a statement verbatim, use `--no-indent` (or its alias `--no-format`):
-
-```batch
-duckdb mydata.duckdb ".schema --no-indent"
-```
-
-### Command History
-
-The CLI now exposes its command history in two ways. The [`.history` dot command]({% link docs/2.0/clients/cli/dot_commands.md %}#command-history) shows previously executed statements with syntax highlighting, optionally limited to the last `N` entries:
-
-```sql
-.history 10
-```
-
-The same information is available as a table through the `shell_history()` table function, so you can query your own history with SQL:
-
-```sql
-SELECT sql
-FROM shell_history()
-WHERE sql ILIKE '%copy%';
-```
-
-## The Python Appender
-
-Inserting rows one at a time is inefficient and building up a giant `INSERT` statement is awkward.
-The [Python appender]({% link docs/2.0/clients/python/appender.md %}) collects rows and writes them together in a single operation:
-
-```python
-import duckdb
-
-con = duckdb.connect()
-con.execute("CREATE TABLE duckdb_releases (version VARCHAR, codename VARCHAR);")
-
-with con.appender("duckdb_releases") as appender:
-    appender.append_row("1.4", "Andium")
-    appender.append_rows([("1.5", "Variegata"), ("2.0", "Cinnamon Teal")])
-
-con.execute("FROM duckdb_releases").fetchall();
-```
-```text
-# [('1.4', 'Andium'), ('1.5', 'Variegata'), ('2.0', 'Cinnamon Teal')]
-```
-
-The `with` block flushes the buffered rows when it exits.
-For data that already lives in a DataFrame or Arrow table, `INSERT INTO ... SELECT` is still faster, but the appender is ideal for rows that your Python code produces on the fly.
-
 ## On the Interweb
 
 The ecosystem around DuckDB keeps growing: many projects are built both with DuckDB and within DuckDB. The community-driven [`awesome-duckdb` repository](https://github.com/davidgasquez/awesome-duckdb), maintained by [David Gasquez](https://github.com/davidgasquez), collects these extensions, integrations and articles in one place and is a great starting point for exploring what people are building.
@@ -183,6 +196,6 @@ The ecosystem around DuckDB keeps growing: many projects are built both with Duc
 
 These were just a few of the smaller features in DuckDB 2.0. For everything else, see the [announcement blog post]({% post_url 2026-10-21-announcing-duckdb-200 %}), the [release notes](https://github.com/duckdb/duckdb/releases/tag/v2.0.0) and the [core extensions overview]({% link docs/2.0/core_extensions/overview.md %}).
 
-We are also in the process upgrading our [roadmap]({% link roadmap.md %}) for upcoming features. Stay tuned.
+We are also in the process of upgrading our [roadmap]({% link roadmap.md %}) for upcoming features. Stay tuned.
 
 As always, our thanks go to the contributors who made this release possible!

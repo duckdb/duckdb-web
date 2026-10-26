@@ -2,6 +2,7 @@
 layout: docu
 redirect_from:
 - /pdf
+- /offline
 - /docs/guides/offline-copy
 - /docs/stable/guides/offline-copy
 - /docs/current/guides/offline-copy
@@ -10,7 +11,14 @@ redirect_from:
 title: Browsing Offline
 ---
 
-You can browse the DuckDB documentation offline in the following formats:
+You can browse the DuckDB documentation and blog offline:
 
-* [Single Markdown file](https://blobs.duckdb.org/docs/duckdb-docs.md) (approx. 6 MB)
-* [PDF file](https://blobs.duckdb.org/docs/duckdb-docs.pdf) (approx. 40 MB)
+### Documentation
+
+* [DuckDB documentation as a Markdown file](https://blobs.duckdb.org/docs/duckdb-docs.md) (approx. 5 MB)
+* [DuckDB documentation as a PDF file](https://blobs.duckdb.org/docs/duckdb-docs.pdf) (approx. 10 MB)
+
+### Blog
+
+* [DuckDB blog as a Markdown file](https://blobs.duckdb.org/docs/duckdb-blog.md) (approx. 3 MB)
+* [DuckDB blog as a PDF file](https://blobs.duckdb.org/docs/duckdb-blog.pdf) (approx. 35 MB)
