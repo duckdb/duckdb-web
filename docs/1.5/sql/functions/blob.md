@@ -21,7 +21,7 @@ This section describes functions and operators for examining and manipulating [`
 | [`from_hex(value)`](#unhexvalue) | Alias for `unhex`. |
 | [`hex(blob)`](#hexblob) | Converts `blob` to `VARCHAR` using hexadecimal encoding. |
 | [`md5(blob)`](#md5blob) | Returns the MD5 hash of the `blob` as a `VARCHAR`. |
-| [`md5_number(blob)`](#md5_numberblob) | Returns the MD5 hash of the `blob` as a `HUGEINT`. |
+| [`md5_number(blob)`](#md5_numberblob) | Returns the MD5 hash of the `blob` as a `UHUGEINT`. |
 | [`octet_length(blob)`](#octet_lengthblob) | Number of bytes in `blob`. |
 | [`read_blob(source)`](#read_blobsource) | Returns the content from `source` (a filename, a list of filenames, or a glob pattern) as a `BLOB`. See the [`read_blob` guide]({% link docs/1.5/guides/file_formats/read_file.md %}#read_blob) for more details. |
 | [`repeat(blob, count)`](#repeatblob-count) | Repeats the `blob` `count` number of times. |
@@ -93,7 +93,7 @@ This section describes functions and operators for examining and manipulating [`
 
 <div class="nostroke_table"></div>
 
-| **Description** | Returns the MD5 hash of the `blob` as a `HUGEINT`. |
+| **Description** | Returns the MD5 hash of the `blob` as a `UHUGEINT`. |
 | **Example** | `md5_number('\xAA\xBB'::BLOB)` |
 | **Result** | `94525045605907259200829535064523132504` |
 
