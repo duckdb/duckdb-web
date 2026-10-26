@@ -400,7 +400,7 @@ The functions below are difficult to categorize into specific function types and
 
 | **Description** | Returns a string with statistics about the expression. Expression can be a column, constant, or SQL expression. |
 | **Example** | `stats(5)` |
-| **Result** | `'[Min: 5, Max: 5][Has Null: false]'` |
+| **Result** | `'[Min: 5, Max: 5][Has Null: false, Has No Null: true][Approx Unique: 1]'` |
 
 #### `txid_current()`
 
