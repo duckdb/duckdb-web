@@ -76,8 +76,8 @@ docs:
     caches, cache statistics, OpenDAL I/O statistics, read-only attachments,
     and multiple read-only processes alongside a single writer.
 
-extension_star_count: 87
-extension_star_count_pretty: 87
+extension_star_count: 88
+extension_star_count_pretty: 88
 extension_download_count: 4141
 extension_download_count_pretty: 4.1k
 image: '/images/community_extensions/social_preview/preview_community_extension_duckdb_object_storage.png'
