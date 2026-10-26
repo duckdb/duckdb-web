@@ -267,15 +267,18 @@ An extension derives from the `WindowFunction` class, registers it with the `Ext
 
 For more details, see [Richard Wesley's slides on window extensions](https://blobs.duckdb.org/events/duckdb-boston/meetup/richard-wesley-windowing.pdf) (presented in September at our [Boston meetup]({% link _events/2026-09-03-duckdb-boston-meetup.md %})).
 
-## Summary
+## Summary and Looking Ahead
 
-These were just a few of the smaller features in DuckDB 2.0. For everything else, see the [announcement blog post]({% post_url 2026-10-21-announcing-duckdb-200 %}), the [release notes](https://github.com/duckdb/duckdb/releases/tag/v2.0.0) and the [core extensions overview]({% link docs/2.0/core_extensions/overview.md %}). To explore what the community builds with and within DuckDB, browse the [`awesome-duckdb` repository](https://github.com/davidgasquez/awesome-duckdb), maintained by [David Gasquez](https://github.com/davidgasquez).
+In this blog post, we listed a few of the smaller features in DuckDB 2.0.0. For everything else, see the [announcement blog post]({% post_url 2026-10-21-announcing-duckdb-200 %}) and the [release notes](https://github.com/duckdb/duckdb/releases/tag/v2.0.0). There are even more things in the release as part our [core extensions]({% link docs/2.0/core_extensions/overview.md %}) – we'll release more posts on these in the coming weeks.
 
-We are also in the process of updating our [roadmap]({% link roadmap.md %}) with upcoming features. We already picked the codename for DuckDB 2.1, coming in 2027: we will name it after [Barrow's goldeneye](https://en.wikipedia.org/wiki/Barrow%27s_goldeneye) _(Bucephala islandica)_, so:
+The ecosystem around DuckDB keeps growing: many projects are built both with DuckDB and within it. The community-driven [`awesome-duckdb` repository](https://github.com/davidgasquez/awesome-duckdb), maintained by [David Gasquez](https://github.com/davidgasquez), collects extensions, integrations and articles in one place and is a great starting point for exploring what people are building.
+
+We are also in the process of updating our [roadmap]({% link roadmap.md %}) with upcoming features. We already picked the codename for DuckDB 2.1, coming in 2027: we will name it after [Barrow's goldeneye](https://en.wikipedia.org/wiki/Barrow%27s_goldeneye) _(Bucephala islandica),_ so:
 
 ```python
 with con.appender("duckdb_releases") as appender:
     appender.append_row("2.1", "Islandica")
 ```
 
-Stay tuned for more, and, as always, our thanks go to the contributors who made this release possible!
+As always, we are grateful to the contributors who made this release possible.
+Thank you all!
