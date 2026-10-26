@@ -25,8 +25,8 @@ repo:
 
 extension_star_count: 61
 extension_star_count_pretty: 61
-extension_download_count: 7581
-extension_download_count_pretty: 7.6k
+extension_download_count: 10098
+extension_download_count_pretty: 10.1k
 image: '/images/community_extensions/social_preview/preview_community_extension_tributary.png'
 layout: community_extension_doc
 ---

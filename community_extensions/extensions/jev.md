@@ -79,10 +79,10 @@ docs:
 
     Row contents are sent to a third-party API, so do not point it at data you may not share.
 
-extension_star_count: 11
-extension_star_count_pretty: 11
-extension_download_count: 6649
-extension_download_count_pretty: 6.6k
+extension_star_count: 13
+extension_star_count_pretty: 13
+extension_download_count: 7929
+extension_download_count_pretty: 7.9k
 image: '/images/community_extensions/social_preview/preview_community_extension_jev.png'
 layout: community_extension_doc
 ---

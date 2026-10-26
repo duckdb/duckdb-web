@@ -110,10 +110,10 @@ docs:
     guides, the theory notes, and an API reference generated from
     `duckdb_functions()` of the built extension.
 
-extension_star_count: 5
-extension_star_count_pretty: 5
-extension_download_count: 2847
-extension_download_count_pretty: 2.8k
+extension_star_count: 6
+extension_star_count_pretty: 6
+extension_download_count: 3861
+extension_download_count_pretty: 3.9k
 image: '/images/community_extensions/social_preview/preview_community_extension_anofox_optimize.png'
 layout: community_extension_doc
 ---

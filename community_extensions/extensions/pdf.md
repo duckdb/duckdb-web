@@ -83,8 +83,8 @@ docs:
 
 extension_star_count: 12
 extension_star_count_pretty: 12
-extension_download_count: 5457
-extension_download_count_pretty: 5.5k
+extension_download_count: 7970
+extension_download_count_pretty: 8.0k
 image: '/images/community_extensions/social_preview/preview_community_extension_pdf.png'
 layout: community_extension_doc
 ---
