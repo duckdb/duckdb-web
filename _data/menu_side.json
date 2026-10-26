@@ -1,6 +1,10 @@
 {
   "sidemenu": [
     {
+      "page": "Blog",
+      "url": "/news/"
+    },
+    {
       "page": "Live Demo",
       "url": "https://shell.duckdb.org"
     }
