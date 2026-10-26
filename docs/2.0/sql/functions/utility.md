@@ -525,21 +525,21 @@ A [table function]({% link docs/2.0/sql/query_syntax/from.md %}#table-functions)
 
 | Name | Description |
 |:--|:-------|
-| [`generate_series(start, stop, step)`](#generate_seriesstart-stop-step) | Returns a table of values between `start` and `stop` (inclusive), incrementing by `step`. |
+| [`generate_series([start,] stop[, step])`](#generate_seriesstart-stop-step) | Returns a table of values between `start` and `stop` (inclusive), incrementing by `step`. |
 | [`glob(search_path)`](#globsearch_path) | Return filenames found at the location indicated by the *search_path* in a single column named `file`. The *search_path* may contain [glob pattern matching syntax]({% link docs/2.0/sql/functions/pattern_matching.md %}). |
-| [`range(start, stop, step)`](#rangestart-stop-step) | Returns a table of values between `start` and `stop` (exclusive), incrementing by `step`. |
+| [`range([start,] stop[, step])`](#rangestart-stop-step) | Returns a table of values between `start` and `stop` (exclusive), incrementing by `step`. |
 | [`repeat(value, count)`](#repeatvalue-count) | Returns a table with `count` rows, each containing `value`. |
 | [`repeat_row(varargs, num_rows)`](#repeat_rowvarargs-num_rows) | Returns a table with `num_rows` rows, each containing the fields defined in `varargs`. |
 | [`sql_tokenize(sql)`](#sql_tokenizesql) | Splits the `sql` string into tokens. Returns a table with the columns `start` (the byte offset of the token), `token_type` (e.g., `KEYWORD`, `IDENTIFIER`, `NUMBER_LITERAL`) and `word`. Provided by the `autocomplete` extension. |
 | [`unnest(list)`](#unnestlist) | Returns a table with one row per element of `list`. |
 
-#### `generate_series(start, stop, step)`
+#### `generate_series([start,] stop[, step])`
 
 <div class="nostroke_table"></div>
 
-| **Description** | Returns a table of values between `start` and `stop`, incrementing by `step`. The `stop` parameter is inclusive, and the `stop` and `step` arguments are optional. See the [list variant]({% link docs/2.0/sql/functions/list.md %}#generate_series) for the available argument combinations. |
-| **Example** | `generate_series(2, 5)` |
-| **Result** | 4 rows: `2, 3, 4, 5` |
+| **Description** | Returns a table of values between `start` and `stop`, incrementing by `step`. The `stop` parameter is inclusive, and the `start` and `step` arguments are optional. See the [list variant]({% link docs/2.0/sql/functions/list.md %}#generate_series) for the available argument combinations. |
+| **Example** | `generate_series(5)` |
+| **Result** | 6 rows: `0, 1, 2, 3, 4, 5` |
 
 #### `glob(search_path)`
 
@@ -549,7 +549,7 @@ A [table function]({% link docs/2.0/sql/query_syntax/from.md %}#table-functions)
 | **Example** | `glob('*')` |
 | **Result** | (table of filenames) |
 
-#### `range(start, stop, step)`
+#### `range([start,] stop[, step])`
 
 <div class="nostroke_table"></div>
 
