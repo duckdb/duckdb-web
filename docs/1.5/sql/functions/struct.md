@@ -92,7 +92,7 @@ title: Struct Functions
 <div class="nostroke_table"></div>
 
 | **Description** | Extract the entry from a `STRUCT` (tuple) using an index (1-based). |
-| **Example** | `struct_extract_at({'v1': 10, 'v2': 20, 'v3': 3}, 20)` |
+| **Example** | `struct_extract_at({'v1': 10, 'v2': 20, 'v3': 3}, 2)` |
 | **Result** | `20` |
 
 #### `struct_insert(struct, name := any, ...)`
