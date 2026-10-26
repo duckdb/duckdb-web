@@ -2083,6 +2083,10 @@
                   "url": "android"
                 },
                 {
+                  "page": "OpenHarmony",
+                  "url": "openharmony"
+                },
+                {
                   "page": "Linux",
                   "url": "linux"
                 },
