@@ -7,6 +7,7 @@ redirect_from:
 - /docs/lts/guides/odbc/general
 - /docs/preview/guides/odbc/general
 title: 'ODBC 101: A Duck Themed Guide to ODBC'
+how_to_topic: tools-meta
 ---
 
 ## What is ODBC?

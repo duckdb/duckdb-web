@@ -8,6 +8,7 @@ redirect_from:
 - /docs/lts/guides/network_cloud_storage/s3_export
 - /docs/preview/guides/network_cloud_storage/s3_export
 title: S3 Parquet Export
+how_to_topic: network-cloud-storage
 ---
 
 To write a Parquet file to S3, the [`httpfs` extension]({% link docs/2.0/core_extensions/httpfs/overview.md %}) is required. This can be installed using the `INSTALL` SQL command. This only needs to be run once.

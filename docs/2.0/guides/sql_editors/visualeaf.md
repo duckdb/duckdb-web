@@ -5,6 +5,7 @@ redirect_from:
 - /docs/lts/guides/sql_editors/visualeaf
 - /docs/preview/guides/sql_editors/visualeaf
 title: VisuaLeaf SQL Editor
+how_to_topic: tools-meta
 ---
 
 [VisuaLeaf](https://visualeaf.com/database/duckdb/) is a cross-platform desktop database client for Windows, macOS, and Linux. Besides a SQL editor, it includes a visual query builder, entity-relationship diagrams, and charts built from query results. VisuaLeaf ships with the DuckDB JDBC driver, so no separate driver installation is required. It offers a free Community Edition as well as paid editions with additional features.

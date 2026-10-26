@@ -8,6 +8,7 @@ redirect_from:
 - /docs/lts/guides/database_integration/sqlite
 - /docs/preview/guides/database_integration/sqlite
 title: SQLite Import
+how_to_topic: database-integration
 ---
 
 To run a query directly on a SQLite file, the `sqlite` extension is required.

@@ -7,6 +7,7 @@ redirect_from:
 - /docs/lts/guides/python/sql_on_arrow
 - /docs/preview/guides/python/sql_on_arrow
 title: SQL on Apache Arrow
+how_to_topic: python
 ---
 
 DuckDB can query multiple different types of Apache Arrow objects.

@@ -7,6 +7,7 @@ redirect_from:
 - /docs/lts/guides/python/execute_sql
 - /docs/preview/guides/python/execute_sql
 title: Executing SQL in Python
+how_to_topic: python
 ---
 
 SQL queries can be executed using the `duckdb.sql` function.

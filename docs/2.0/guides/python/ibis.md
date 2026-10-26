@@ -7,6 +7,7 @@ redirect_from:
 - /docs/lts/guides/python/ibis
 - /docs/preview/guides/python/ibis
 title: Integration with Ibis
+how_to_topic: python
 ---
 
 [Ibis](https://ibis-project.org) is a Python dataframe library that supports 20+ backends, with DuckDB as the default. Ibis with DuckDB provides a Pythonic interface for SQL with great performance.

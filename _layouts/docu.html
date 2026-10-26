@@ -210,6 +210,7 @@ Page URL: <https://duckdb.org{{ page.url }}>
 	<script src="/js/search.js" defer></script>
 
 	<script src="/js/noteboxes.js" defer></script>
+	{% if page.isotope %}<script src="/js/isotope.pkgd.min.js" defer></script>{% endif %}
 	<script src="/js/script.js?{{ site.time | date: '%s' }}" defer></script>
 	<script src="/js/copy_button.js" defer></script>
 

@@ -8,6 +8,7 @@ redirect_from:
 - /docs/lts/guides/network_cloud_storage/cloudflare_r2_import
 - /docs/preview/guides/network_cloud_storage/cloudflare_r2_import
 title: Cloudflare R2 Import
+how_to_topic: network-cloud-storage
 ---
 
 ## Prerequisites

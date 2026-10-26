@@ -1,10 +1,6 @@
 {
   "sidemenu": [
     {
-      "page": "Sitemap",
-      "url": "/sitemap.html"
-    },
-    {
       "page": "Live Demo",
       "url": "https://shell.duckdb.org"
     }

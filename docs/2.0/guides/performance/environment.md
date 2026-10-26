@@ -7,6 +7,7 @@ redirect_from:
 - /docs/lts/guides/performance/environment
 - /docs/preview/guides/performance/environment
 title: Environment
+how_to_topic: performance
 ---
 
 The environment where DuckDB is run has an obvious impact on performance. This page focuses on the effects of the hardware configuration and the operating system used.

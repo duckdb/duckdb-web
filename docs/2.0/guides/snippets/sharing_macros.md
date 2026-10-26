@@ -7,6 +7,7 @@ redirect_from:
 - /docs/lts/guides/snippets/sharing_macros
 - /docs/preview/guides/snippets/sharing_macros
 title: Sharing Macros
+how_to_topic: tools-meta
 ---
 
 DuckDB has a powerful [macro mechanism]({% link docs/2.0/sql/statements/create_macro.md %}) that allows creating shorthands for common tasks.

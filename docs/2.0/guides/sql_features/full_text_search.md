@@ -7,6 +7,7 @@ redirect_from:
 - /docs/lts/guides/sql_features/full_text_search
 - /docs/preview/guides/sql_features/full_text_search
 title: Full-Text Search
+how_to_topic: sql-features
 ---
 
 DuckDB supports full-text search via the [`fts` extension]({% link docs/2.0/core_extensions/full_text_search.md %}).

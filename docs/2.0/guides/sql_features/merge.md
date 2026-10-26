@@ -8,6 +8,7 @@ redirect_from:
 - /docs/preview/guides/sql_features/merge
 tested: true
 title: Merge Statement for SCD Type 2
+how_to_topic: sql-features
 ---
 
 This is a practical, step-by-step guide to using DuckDB’s `MERGE` statement (introduced in v1.4.0) to perform upserts and build [Slowly Changing Dimension Type 2 (SCD Type 2) tables](https://en.wikipedia.org/wiki/Slowly_changing_dimension). Type 2 SCDs let you keep full historical versions of records while clearly identifying the current version, perfect for audit trails, data warehousing, and analytical workloads. Type 2 SCDs are practical when you want to know previous values of your primary key data, when it changed and for how long it was in a particular state.

@@ -1,11 +1,14 @@
 <div class="sidenavigation" data-selected="{{page.selected}}" data-expanded="{{page.expanded}}">
-		
+
 	{% assign starting_url = "docs/" | append: version_viewed | append: "/" %}
 	{% assign url_parts = page.url | replace: ".html", "" | split: "/" %}
 	{% assign current_main = url_parts[3] %}
 	{% if url_parts[1] == "docs" %}
 		{% assign current_main = url_parts[3] | default: "index" %}
 	{% endif %}
+
+	{%- comment -%} pageUrlClean lets menu nodes with an explicit `path` field (pages grouped under a section that does not match their on-disk directory) resolve active/expanded state. {%- endcomment -%}
+	{% assign pageUrlClean = page.url | replace: ".html", "" %}
 
 	{%- assign menudocfile = "menu_docs_" | append: version_viewed | replace: ".", "" -%}
 
@@ -28,8 +31,22 @@
 				{% if item.slug != nil and item.url != nil %}
 					{% assign base_slash = '/' %}
 				{% endif %}
+
+				{%- comment -%} A top-level section (promoted from the former Documentation wrapper) opens when the active page sits anywhere inside it, including pages grouped via an explicit `path`. No-op for menus whose nodes carry no `path`. {%- endcomment -%}
+				{% assign item_open = url_contains %}
+				{% if item.mainfolderitems[0] %}
+					{% for scan_main in item.mainfolderitems %}
+						{% if scan_main.path and scan_main.path == pageUrlClean %}{% assign item_open = true %}{% endif %}
+						{% for scan_sub in scan_main.subfolderitems %}
+							{% if scan_sub.path and scan_sub.path == pageUrlClean %}{% assign item_open = true %}{% endif %}
+							{% for scan_subsub in scan_sub.subsubfolderitems %}
+								{% if scan_subsub.path and scan_subsub.path == pageUrlClean %}{% assign item_open = true %}{% endif %}
+							{% endfor %}
+						{% endfor %}
+					{% endfor %}
+				{% endif %}
 				<li class="item-menu
-					{%- if url_contains %} active opened{% endif -%}
+					{%- if item_open %} active opened{% endif -%}
 					{%- if item.mainfolderitems[0] %} hasSub{% endif -%}
 				">
 				{% if item.url %}
@@ -42,40 +59,63 @@
 					<a href="{{ target_url }}">{{ item.page }}</a> {% if item.mainfolderitems[0] %} <svg class="show"><use href="#chevron-right"></use></svg> {% endif %} {% else %} {% if item.mainfolderitems[0] %} <svg class="show"><use href="#chevron-right"></use></svg> {% endif %} {{ item.page }}
 				{% endif %}
 				</li>
-			
+
 				{% if item.mainfolderitems[0] %}
-					<ul style="display: {% if url_contains %}block;{% else %}none{% endif %}">
+					<ul style="display: {% if item_open %}block;{% else %}none{% endif %}">
 						{% for mainentry in item.mainfolderitems %}
+
+						{%- comment -%} Compute whether this section should be expanded: either the current URL sits under its slug (native pages) or one of its descendants carries an explicit `path` equal to the current page. {%- endcomment -%}
+						{% assign section_open = false %}
+						{% if mainentry.open or url_parts contains mainentry.url or url_parts contains mainentry.slug %}{% assign section_open = true %}{% endif %}
+						{% if mainentry.path and mainentry.path == pageUrlClean %}{% assign section_open = true %}{% endif %}
+						{% for scan_entry in mainentry.subfolderitems %}
+							{% if scan_entry.path and scan_entry.path == pageUrlClean %}{% assign section_open = true %}{% endif %}
+							{% for scan_sub in scan_entry.subsubfolderitems %}
+								{% if scan_sub.path and scan_sub.path == pageUrlClean %}{% assign section_open = true %}{% endif %}
+							{% endfor %}
+						{% endfor %}
 
 						<li class="mainentry-menu
 								{%- if mainentry.url and current_main == mainentry.url %} active{% endif -%}
+								{%- if mainentry.path and mainentry.path == pageUrlClean %} active{% endif -%}
 								{%- if mainentry.url %} {{ mainentry.url }}{% endif -%}
 								{%- if url_parts[3] %} {{ url_parts[3]}}{% endif -%}
 								{%- if mainentry.subfolderitems[0] %} hasSub{% endif -%}
-								{%- if mainentry.open or url_parts contains mainentry.url or url_parts contains mainentry.slug %} opened{% endif -%}
+								{%- if section_open %} opened{% endif -%}
 							">
-							{% if mainentry.url %} <a href="/{{starting_url}}{{item.slug}}{{ mainentry.url }}">{{ mainentry.page }}</a> {% if mainentry.subfolderitems[0] %} <svg class="show"><use href="#chevron-right"></use></svg> {% endif %} {% else %} {{ mainentry.page }} {% if mainentry.subfolderitems[0] %} <svg class="show"><use href="#chevron-right"></use></svg> {% endif %} {% endif %} </li>
+							{% if mainentry.url or mainentry.path %} <a href="{% if mainentry.path %}{{ mainentry.path }}{% else %}/{{starting_url}}{{item.slug}}{{ mainentry.url }}{% endif %}">{{ mainentry.page }}</a> {% if mainentry.subfolderitems[0] %} <svg class="show"><use href="#chevron-right"></use></svg> {% endif %} {% else %} {{ mainentry.page }} {% if mainentry.subfolderitems[0] %} <svg class="show"><use href="#chevron-right"></use></svg> {% endif %} {% endif %} </li>
 						{% if mainentry.subfolderitems[0] %}
-						<ul style="display:{% if mainentry.open or url_parts contains mainentry.url or url_parts contains mainentry.slug %}block{% else %}none{% endif %};">
+						<ul style="display:{% if section_open %}block{% else %}none{% endif %};">
 							{% for entry in mainentry.subfolderitems %}
+
+							{%- comment -%} Expand this entry if a native URL match or an explicit-path descendant matches the current page. {%- endcomment -%}
+							{% assign entry_open = false %}
+							{% if entry.open or url_parts contains entry.url or url_parts contains entry.slug %}{% assign entry_open = true %}{% endif %}
+							{% if entry.path and entry.path == pageUrlClean %}{% assign entry_open = true %}{% endif %}
+							{% for scan_sub in entry.subsubfolderitems %}
+								{% if scan_sub.path and scan_sub.path == pageUrlClean %}{% assign entry_open = true %}{% endif %}
+							{% endfor %}
+
 							{% if mainentry.subfolderitems %}
 							<li class="entry-menu
 									{%- if url_parts[3] == mainentry.slug and url_parts[4] == entry.url %} active{% endif -%}
+									{%- if entry.path and entry.path == pageUrlClean %} active{% endif -%}
 									{%- if entry.subsubfolderitems[0] %} hasSub{% endif -%}
-									{%- if entry.open or url_parts contains entry.url or url_parts contains entry.slug %} opened{% endif -%}
+									{%- if entry_open %} opened{% endif -%}
 								">
-								{% if entry.url %} <a href="/{{starting_url}}{{item.slug}}{{mainentry.slug}}/{{ entry.url }}">{{ entry.page }}</a> {% if entry.subsubfolderitems[0] %} <svg class="show"><use href="#chevron-right"></use></svg> {% endif %} {% else %} {{ entry.page }} {% if entry.subsubfolderitems[0] %} <svg class="show"><use href="#chevron-right"></use></svg> {% endif %} {% endif %}
+								{% if entry.url or entry.path %} <a href="{% if entry.path %}{{ entry.path }}{% else %}/{{starting_url}}{{item.slug}}{{mainentry.slug}}/{{ entry.url }}{% endif %}">{{ entry.page }}</a> {% if entry.subsubfolderitems[0] %} <svg class="show"><use href="#chevron-right"></use></svg> {% endif %} {% else %} {{ entry.page }} {% if entry.subsubfolderitems[0] %} <svg class="show"><use href="#chevron-right"></use></svg> {% endif %} {% endif %}
 							</li>
 							{% endif %}
 							{% if entry.subsubfolderitems[0] %}
-							<ul style="display:{% if entry.open or url_parts contains entry.url or url_parts contains entry.slug %}block{% else %}none{% endif %};">
+							<ul style="display:{% if entry_open %}block{% else %}none{% endif %};">
 								{% for subentry in entry.subsubfolderitems %}
 								{% if entry.subsubfolderitems %}
 								<li class="subentry-menu
 									{%- if url_parts[4] == entry.slug and url_parts[5] == subentry.url %} active{% endif -%}
+									{%- if subentry.path and subentry.path == pageUrlClean %} active{% endif -%}
 									{%- if subentry.open or url_parts contains subentry.url or url_parts contains subentry.slug %} opened{% endif -%}
 								">
-									{% if subentry.url %} <a href="/{{starting_url}}{{item.slug}}{{mainentry.slug}}/{{ entry.slug }}/{{ subentry.url }}"> {{ subentry.page }} </a> {% else %} {{ subentry.page }} {% endif %}
+									{% if subentry.url or subentry.path %} <a href="{% if subentry.path %}{{ subentry.path }}{% else %}/{{starting_url}}{{item.slug}}{{mainentry.slug}}/{{ entry.slug }}/{{ subentry.url }}{% endif %}"> {{ subentry.page }} </a> {% else %} {{ subentry.page }} {% endif %}
 								</li>
 								{% endif %}
 								{% endfor %}
@@ -104,6 +144,6 @@
 				{% if item.url %} <a href="{{ item.url }}">{{ item.page }}</a> {% if item.mainfolderitems[0] %} <svg class="show"><use href="#chevron-right"></use></svg> {% endif %} {% else %} {{ item.page }} {% if item.mainfolderitems[0] %} <svg class="show"><use href="#chevron-right"></use></svg> {% endif %} {% endif %} </li>
 			{% endfor %}
 		{% endif %}
-	
+
 	</ul>
 </div>

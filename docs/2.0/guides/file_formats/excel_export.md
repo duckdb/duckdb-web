@@ -8,6 +8,7 @@ redirect_from:
 - /docs/lts/guides/file_formats/excel_export
 - /docs/preview/guides/file_formats/excel_export
 title: Excel Export
+how_to_topic: file-formats
 ---
 
 DuckDB supports exporting data to Excel `.xlsx` files via the `excel` extension. Please note that `.xls` files are not supported.

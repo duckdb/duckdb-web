@@ -7,6 +7,7 @@ redirect_from:
 - /docs/lts/guides/snippets/create_synthetic_data
 - /docs/preview/guides/snippets/create_synthetic_data
 title: Create Synthetic Data
+how_to_topic: tools-meta
 ---
 
 DuckDB lets you quickly generate synthetic datasets by combining a few building blocks: functions and clauses that generate *rows*, functions that generate *values* to fill those rows, and extensions that generate whole benchmark datasets. This page shows each building block with a runnable example.

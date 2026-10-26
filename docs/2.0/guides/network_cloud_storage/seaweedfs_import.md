@@ -5,6 +5,7 @@ redirect_from:
 - /docs/lts/guides/network_cloud_storage/seaweedfs_import
 - /docs/preview/guides/network_cloud_storage/seaweedfs_import
 title: SeaweedFS Import
+how_to_topic: network-cloud-storage
 ---
 
 ## Prerequisites

@@ -7,6 +7,7 @@ redirect_from:
 - /docs/lts/guides/python/export_arrow
 - /docs/preview/guides/python/export_arrow
 title: Export to Apache Arrow
+how_to_topic: python
 ---
 
 All results of a query can be exported to an [Apache Arrow Table](https://arrow.apache.org/docs/python/generated/pyarrow.Table.html) using the `to_arrow_table` function. Alternatively, results can be returned as a [RecordBatchReader](https://arrow.apache.org/docs/python/generated/pyarrow.RecordBatchReader.html) using the `to_arrow_reader` function and results can be read one batch at a time.

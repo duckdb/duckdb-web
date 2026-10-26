@@ -6,13 +6,39 @@
   {% assign crumbs = page.url | remove: '/index.html' | split: '/' %}
   {% assign offset = 3 %}
   {% assign version_base = "docs/" | append: version_viewed %}
+  {% assign pageClean = page.url | replace: '.html', '' %}
+  {% assign bc_done = false %}
 
   <span><a href="/{{ version_base }}/index">Documentation</a></span>
 
   {% for doc_entry in menudocfile %}
-    {% assign crumb = crumbs[offset] %}
-    {% if doc_entry.mainfolderitems %}
+    {% if doc_entry.mainfolderitems and doc_entry.slug and doc_entry.slug != "" %}
+      {%- comment -%}
+        New structure: each section is a top-level docsmenu item and its leaves
+        carry explicit `path` values. Match the active page by path and emit the
+        Section / [Group] / Leaf trail.
+      {%- endcomment -%}
+      {% assign sec_path = version_base | append: "/" | append: doc_entry.slug %}
+      {% capture sec_overview %}{% file_exists {{ sec_path }}/overview.md %}{% endcapture %}
+      {% capture section_crumb %}<span class="slash">/</span> <span>{% if sec_overview == "true" %}<a href="/{{ sec_path }}/overview">{{ doc_entry.page }}</a>{% else %}{{ doc_entry.page }}{% endif %}</span>{% endcapture %}
       {% for main_entry in doc_entry.mainfolderitems %}
+        {% if main_entry.path == pageClean and bc_done == false %}
+          {{ section_crumb }}
+          <span class="slash">/</span> <span>{{ main_entry.page }}</span>
+          {% assign bc_done = true %}
+        {% endif %}
+        {% for sub_entry in main_entry.subfolderitems %}
+          {% if sub_entry.path == pageClean and bc_done == false %}
+            {{ section_crumb }}
+            <span class="slash">/</span> <span>{{ main_entry.page }}</span>
+            <span class="slash">/</span> <span>{{ sub_entry.page }}</span>
+            {% assign bc_done = true %}
+          {% endif %}
+        {% endfor %}
+      {% endfor %}
+    {% elsif doc_entry.mainfolderitems %}
+      {% for main_entry in doc_entry.mainfolderitems %}
+        {% assign crumb = crumbs[offset] %}
         {% assign main_entry_slug_trimmed = main_entry.slug | replace: '/', '' %}
         {% if main_entry_slug_trimmed == crumb %}
           {% assign main_path = version_base | append: "/" | append: main_entry_slug_trimmed %}

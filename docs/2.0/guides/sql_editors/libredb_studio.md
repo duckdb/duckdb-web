@@ -5,6 +5,7 @@ redirect_from:
 - /docs/lts/guides/sql_editors/libredb_studio
 - /docs/preview/guides/sql_editors/libredb_studio
 title: LibreDB Studio SQL Editor
+how_to_topic: tools-meta
 ---
 
 [LibreDB Studio](https://github.com/libredb/libredb-studio) is an open-source, self-hosted, browser-based SQL editor. It runs as a single server, either via `npx`, Docker, or a native package, and is reached through the browser rather than installed as a desktop application. LibreDB Studio connects to DuckDB directly through its native Node.js binding, so it queries a DuckDB database file (or an in-memory database) without going through a JDBC or ODBC driver.

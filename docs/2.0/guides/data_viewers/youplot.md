@@ -7,6 +7,7 @@ redirect_from:
 - /docs/lts/guides/data_viewers/youplot
 - /docs/preview/guides/data_viewers/youplot
 title: CLI Charting with YouPlot
+how_to_topic: tools-meta
 ---
 
 DuckDB can be used with CLI graphing tools to quickly pipe input to stdout to graph your data in one line.

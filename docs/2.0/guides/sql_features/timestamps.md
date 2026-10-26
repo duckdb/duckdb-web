@@ -6,6 +6,7 @@ redirect_from:
 - /docs/lts/guides/sql_features/timestamps
 - /docs/preview/guides/sql_features/timestamps
 title: Timestamp Issues
+how_to_topic: sql-features
 ---
 
 ## Timestamp with Time Zone Promotion Casts

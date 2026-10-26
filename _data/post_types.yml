@@ -56,7 +56,42 @@ events:
       label: Sponsored
       heading: Sponsored Events
 
+how_to:
+  filters:
+    - value: file-formats
+      label: Data Import & Export
+      heading: How-to Guides – Data Import & Export
+    - value: database-integration
+      label: Databases
+      heading: How-to Guides – Databases
+    - value: network-cloud-storage
+      label: Cloud & Network
+      heading: How-to Guides – Cloud & Network
+    - value: performance
+      label: Performance
+      heading: How-to Guides – Performance
+    - value: python
+      label: Python
+      heading: How-to Guides – Python
+    - value: sql-features
+      label: SQL Features
+      heading: How-to Guides – SQL Features
+    - value: tools-meta
+      label: Tools & Meta
+      heading: How-to Guides – Tools & Meta Queries
+    - value: troubleshooting
+      label: Troubleshooting
+      heading: How-to Guides – Troubleshooting
+
 tag_labels:
+  file-formats: Data Import & Export
+  database-integration: Databases
+  network-cloud-storage: Cloud & Network
+  performance: Performance
+  python: Python
+  sql-features: SQL Features
+  tools-meta: Tools & Meta
+  troubleshooting: Troubleshooting
   using-duckdb: Using DuckDB
   benchmark: Benchmark
   deep-dive: Deep Dive
