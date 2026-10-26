@@ -10,7 +10,7 @@ GIT
 
 GIT
   remote: https://github.com/duckdb/rouge.git
-  revision: 752846d96aad76b4b709800e53703fbe08d8c401
+  revision: 641eceecd3388aa42cf268e595aa794ec9fbef0b
   branch: duckdb
   specs:
     rouge (3.3823.1)
@@ -42,7 +42,7 @@ GEM
     eventmachine (1.2.7)
     execjs (2.10.2)
       json (>= 2)
-    faraday (2.15.0)
+    faraday (2.15.1)
       faraday-net_http (>= 2.0, < 3.6)
       json
       logger
