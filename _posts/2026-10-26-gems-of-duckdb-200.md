@@ -17,32 +17,6 @@ A release of this size ships many smaller improvements that never make it into t
 In this post, we highlight a few of these gems.
 To find the documentation for everything that is new in 2.0, see the [“What's New in the Docs for 2.0”]({% link docs/2.0/whats_new_in_the_docs.md %}) page.
 
-## Usability Improvements in the CLI
-
-### Pretty-Printed `.schema`
-
-As of DuckDB 2.0, the [`.schema` dot command]({% link docs/2.0/clients/cli/dot_commands.md %}#querying-the-database-schema) pretty-prints and highlights its output by default, which makes reading the schema of a database much easier. If you prefer the earlier single-line form, for example, to copy a statement verbatim, use `--no-indent` (or its alias `--no-format`):
-
-```batch
-duckdb mydata.duckdb ".schema --no-indent"
-```
-
-### Command History
-
-The CLI now exposes its command history in two ways. The [`.history` dot command]({% link docs/2.0/clients/cli/dot_commands.md %}#command-history) shows previously executed statements with syntax highlighting, optionally limited to the last `N` entries:
-
-```sql
-.history 10
-```
-
-The same information is available as a table through the `shell_history()` table function, so you can query your own history with SQL:
-
-```sql
-SELECT sql
-FROM shell_history()
-WHERE sql ILIKE '%copy%';
-```
-
 ## Python Appender
 
 Inserting rows one at a time is inefficient, and building up a giant `INSERT` statement is awkward.
@@ -68,6 +42,32 @@ print(con.execute("FROM duckdb_releases").fetchall())
 
 The `with` block flushes the buffered rows when it exits.
 For data that already lives in a DataFrame or Arrow table, `INSERT INTO ... SELECT` is still faster, but the appender is ideal for rows that your Python code produces on the fly.
+
+## Usability Improvements in the CLI
+
+### Pretty-Printed `.schema`
+
+As of DuckDB 2.0, the [`.schema` dot command]({% link docs/2.0/clients/cli/dot_commands.md %}#querying-the-database-schema) pretty-prints and highlights its output by default, which makes reading the schema of a database much easier. If you prefer the earlier single-line form, for example, to copy a statement verbatim, use `--no-indent` (or its alias `--no-format`):
+
+```batch
+duckdb mydata.duckdb ".schema --no-indent"
+```
+
+### Command History
+
+The CLI now exposes its command history in two ways. The [`.history` dot command]({% link docs/2.0/clients/cli/dot_commands.md %}#command-history) shows previously executed statements with syntax highlighting, optionally limited to the last `N` entries:
+
+```sql
+.history 10
+```
+
+The same information is available as a table through the `shell_history()` table function, so you can query your own history with SQL:
+
+```sql
+SELECT sql
+FROM shell_history()
+WHERE sql ILIKE '%copy%';
+```
 
 ## Offline Documentation
 
