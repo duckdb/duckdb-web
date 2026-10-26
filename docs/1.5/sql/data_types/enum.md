@@ -18,7 +18,7 @@ You can create an enum using hardcoded values:
 
 ```sql
 CREATE TYPE mood AS ENUM ('sad', 'ok', 'happy');
--- This statement will fail since enums cannot hold NULL values:
+-- This statement will fail since enum dictionary values cannot be NULL:
 -- CREATE TYPE mood AS ENUM ('sad', NULL);
 -- This statement will fail since enum values must be unique:
 -- CREATE TYPE mood AS ENUM ('sad', 'sad');
@@ -88,6 +88,9 @@ INSERT INTO person VALUES
     ('Pagliacci', 'sad'),
     ('Mr. Mackey', 'ok');
 ```
+
+Enum-typed columns can still contain SQL `NULL`, which is distinct from the
+values in the enum dictionary.
 
 The following query will fail since the mood type does not have a `quackity-quack` value.
 
