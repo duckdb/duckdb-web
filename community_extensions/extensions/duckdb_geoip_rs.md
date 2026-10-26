@@ -72,11 +72,11 @@ This table covers all DuckDB releases that have not reached [end-of-life](https:
 
 | Platform | 1.4.4 | 1.4.5 | 1.5.5 | 1.5.6 | 2.0.0 |
 | :--- | :---: | :---: | :---: | :---: | :---: |
-| Linux AMD64 | ✅ | ❌ | ✅ | ✅ | ❌ |
-| Linux ARM64 | ✅ | ❌ | ✅ | ✅ | ❌ |
+| Linux AMD64 | ✅ | ❌ | ✅ | ✅ | ✅ |
+| Linux ARM64 | ✅ | ❌ | ✅ | ✅ | ✅ |
 | macOS AMD64 | ✅ | ❌ | ✅ | ✅ | ❌ |
-| macOS ARM64 | ✅ | ❌ | ✅ | ✅ | ❌ |
-| Windows AMD64 | ✅ | ❌ | ✅ | ✅ | ❌ |
+| macOS ARM64 | ✅ | ❌ | ✅ | ✅ | ✅ |
+| Windows AMD64 | ✅ | ❌ | ✅ | ✅ | ✅ |
 | Windows ARM64 | ❌ | ❌ | ❌ | ❌ | ❌ |
 | WebAssembly | ❌ | ❌ | ❌ | ❌ | ❌ |
 
@@ -100,12 +100,12 @@ LOAD {{ page.extension.name }};
 
 <div class="extension_functions_table"></div>
 
-|   function_name   | function_type | description | comment | examples |
-|-------------------|---------------|-------------|---------|----------|
-| geoip_asn_num     | scalar        | NULL        | NULL    |          |
-| geoip_asn_org     | scalar        | NULL        | NULL    |          |
-| geoip_city        | scalar        | NULL        | NULL    |          |
-| geoip_country_iso | scalar        | NULL        | NULL    |          |
+|   function_name   | function_type |                                description                                 | comment |             examples              |
+|-------------------|---------------|----------------------------------------------------------------------------|---------|-----------------------------------|
+| geoip_asn_num     | scalar        | IP ASN lookup using `$MAXMIND_MMDB_DIR`/GeoLite2-ASN.mmdb database         | NULL    | [geoip_asn_num('90.9.250.1')]     |
+| geoip_asn_org     | scalar        | IP ASN org lookup using `$MAXMIND_MMDB_DIR`/GeoLite2-ASN.mmdb database     | NULL    | [geoip_asn_org('90.9.250.1')]     |
+| geoip_city        | scalar        | Geoip city lookup using `$MAXMIND_MMDB_DIR`/GeoLite2-City.mmdb database    | NULL    | [geoip_city('90.9.250.1')]        |
+| geoip_country_iso | scalar        | Geoip country lookup using `$MAXMIND_MMDB_DIR`/GeoLite2-City.mmdb database | NULL    | [geoip_country_iso('90.9.250.1')] |
 
 ### Overloaded Functions
 
@@ -123,6 +123,8 @@ This extension does not add any types.
 
 <div class="extension_settings_table"></div>
 
-This extension does not add any settings.
+|      name      |                       description                       | input_type | scope  | aliases | typed_value |
+|----------------|---------------------------------------------------------|------------|--------|---------|-------------|
+| temp_directory | Set the directory to which temporary files are written. | VARCHAR    | GLOBAL | []      | post.db.tmp |
 
 
