@@ -8,6 +8,9 @@ cd "$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
 ./generate_latex.sh
 
 export max_print_line=1000
-latexmk -xelatex duckdb-docs.tex
+for document in duckdb-docs duckdb-blog; do
+    latexmk -xelatex ${document}.tex
 
-grep '^LaTeX Warning: Hyper reference' duckdb-docs.log | tee duckdb-docs-missing-references.log
+    # grep returns a non-zero exit code if there are no missing references
+    grep '^LaTeX Warning: Hyper reference' ${document}.log | tee ${document}-missing-references.log || true
+done

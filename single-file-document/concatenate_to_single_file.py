@@ -501,6 +501,18 @@ def get_duckdb_version(config, docs_version):
     return docs_version
 
 
+# compile a document from its cover page, its content and the acknowledgments
+def write_document(output_file_path, cover_page_file_path, add_content):
+    with open(output_file_path, "w") as of:
+        with open(cover_page_file_path) as cover_page_file:
+            of.write(cover_page_file.read())
+
+        add_content(of)
+
+        with open("acknowledgments.md") as acknowledgments_file:
+            of.write(acknowledgments_file.read())
+
+
 parser = argparse.ArgumentParser()
 parser.add_argument("--verbose", action="store_true")
 parser.add_argument("--docs-version", default="2.0", help="version of the documentation, i.e., a directory in docs/")
@@ -511,16 +523,28 @@ docs_version = args.docs_version
 if verbose:
     logging.getLogger().setLevel(logging.INFO)
 
-# get version number
-with open("../_config.yml") as config_file, open("metadata/metadata.yaml", "w") as metadata_file:
+with open("../_config.yml") as config_file:
     config = yaml.safe_load(config_file.read())
+
+# write the metadata (title page) of the documents
+generated_on = f"Generated on {datetime.now(timezone.utc).strftime('%Y-%m-%d at %H:%M UTC')}"
+with open("metadata/duckdb-docs.yaml", "w") as metadata_file:
     metadata_file.write(textwrap.dedent(
         f"""
           ---
           title: DuckDB Documentation
           subtitle: >-
             DuckDB version {get_duckdb_version(config, docs_version)}\\newline
-            Generated on {datetime.now(timezone.utc).strftime("%Y-%m-%d at %H:%M UTC")}
+            {generated_on}
+          ---
+        """))
+with open("metadata/duckdb-blog.yaml", "w") as metadata_file:
+    metadata_file.write(textwrap.dedent(
+        f"""
+          ---
+          title: DuckDB Blog
+          subtitle: >-
+            {generated_on}
           ---
         """))
 
@@ -529,19 +553,18 @@ with open(f"../_data/menu_docs_{docs_version.replace('.', '')}.json") as menu_do
 doc_items = collect_main_documentation(f"../docs/{docs_version}", f"/docs/{docs_version}/", menu)
 blog_post_files = sorted(glob.glob("../_posts/*.md"))
 
-# labels of the pages included in the document, links to other pages point to the website
-internal_labels = set(
-    [doc_path_to_page_header_header_label(item[2]) for item in doc_items if item[0] == "page"] +
-    [blog_post_file_to_label(blog_post_file) for blog_post_file in blog_post_files]
+# labels of the pages included in each document, links to other pages (including pages in the other document) point to the website
+docs_internal_labels = set(doc_path_to_page_header_header_label(item[2]) for item in doc_items if item[0] == "page")
+blog_internal_labels = set(blog_post_file_to_label(blog_post_file) for blog_post_file in blog_post_files)
+
+# compile concatenated documents
+write_document(
+    "duckdb-docs.md",
+    "cover-page-docs.md",
+    lambda of: add_main_documentation(doc_items, config, docs_internal_labels, of)
 )
-
-# compile concatenated document
-with open(f"duckdb-docs.md", "w") as of:
-    with open("cover-page.md") as cover_page_file:
-        of.write(cover_page_file.read())
-
-    add_main_documentation(doc_items, config, internal_labels, of)
-    add_blog_posts(blog_post_files, config, internal_labels, of)
-
-    with open("acknowledgments.md") as acknowledgments_file:
-        of.write(acknowledgments_file.read())
+write_document(
+    "duckdb-blog.md",
+    "cover-page-blog.md",
+    lambda of: add_blog_posts(blog_post_files, config, blog_internal_labels, of)
+)
