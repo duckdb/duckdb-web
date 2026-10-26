@@ -55,7 +55,7 @@ All functions accept an optional set of [options](#options-for-regular-expressio
 
 | **Description** | Finds non-overlapping occurrences of `regex` in `string` and returns the corresponding values of `group`. A set of optional [`options`](#options-for-regular-expression-functions) can be set. |
 | **Example** | `regexp_extract_all('Peter: 33, Paul:14', '(\w+):\s*(\d+)', 2)` |
-| **Result** | `[33, 14]` |
+| **Result** | `['33', '14']` |
 
 #### `regexp_extract_all(string, regex, name_list[, options])`
 

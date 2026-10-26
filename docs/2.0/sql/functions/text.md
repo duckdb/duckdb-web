@@ -574,7 +574,7 @@ This section describes functions and operators for examining and manipulating [`
 
 | **Description** | Finds non-overlapping occurrences of the `regex` in the `string` and returns the corresponding values of the capturing `group`. A set of optional [regex `options`]({% link docs/2.0/sql/functions/regular_expressions.md %}#options-for-regular-expression-functions) can be set. |
 | **Example** | `regexp_extract_all('Peter: 33, Paul:14', '(\w+):\s*(\d+)', 2)` |
-| **Result** | `[33, 14]` |
+| **Result** | `['33', '14']` |
 
 #### `regexp_extract_all(string, regex, name_list[, options])`
 
