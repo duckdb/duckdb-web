@@ -261,7 +261,11 @@ Not every extension is available for every DuckDB version and platform, so each 
 
 ### Window Function Extensions
 
-Every aggregate function can be used as a window function, but not every windowed operation is an aggregate. In DuckDB 2.0, window functions became catalog entries, so [extensions can now define their own window functions]({% link docs/2.0/extensions/window_function_extensions.md %}) using the same C++ API as the built-in ones. An extension derives from the `WindowFunction` class, registers it with the `ExtensionLoader` and implements a blocking interface, which builds its data structures and evaluates the function in parallel. Optionally, it can also implement a streaming interface for windows without `PARTITION BY` and `ORDER BY` clauses. As a side effect, window functions are now listed in `duckdb_functions()` and can be looked up with the `.manual` dot command. For the details, see [Richard Wesley's slides on window extensions](https://blobs.duckdb.org/events/duckdb-boston/meetup/richard-wesley-windowing.pdf).
+Every aggregate function can be used as a window function, but not every windowed operation is an aggregate. In DuckDB 2.0, window functions became catalog entries, so [extensions can now define their own window functions]({% link docs/2.0/extensions/window_function_extensions.md %}) using the same C++ API as the built-in ones.
+
+An extension derives from the `WindowFunction` class, registers it with the `ExtensionLoader` and implements a blocking interface, which builds its data structures and evaluates the function in parallel. Optionally, it can also implement a streaming interface for windows without `PARTITION BY` and `ORDER BY` clauses. As a side effect, window functions are now listed in `duckdb_functions()` and can be looked up with the `.manual` dot command.
+
+For more details, see [Richard Wesley's slides on window extensions](https://blobs.duckdb.org/events/duckdb-boston/meetup/richard-wesley-windowing.pdf) (presented in September at our [Boston meetup]({% link _events/2026-09-03-duckdb-boston-meetup.md %})).
 
 ## Summary
 
