@@ -224,7 +224,7 @@ The functions below are difficult to categorize into specific function types and
 
 | **Description** | Returns a `UBIGINT` with the hash of the `value`. The used hash function may change across DuckDB versions. |
 | **Example** | `hash('🦆')` |
-| **Result** | `2595805878642663834` |
+| **Result** | `4164431626903154684` |
 
 #### `icu_sort_key(string, collator)`
 
