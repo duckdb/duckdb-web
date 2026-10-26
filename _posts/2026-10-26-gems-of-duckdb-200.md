@@ -41,6 +41,24 @@ con.execute("FROM duckdb_releases").fetchall()
 The `with` block flushes the buffered rows when it exits.
 For data that already lives in a DataFrame or Arrow table, `INSERT INTO ... SELECT` is still faster, but the appender is ideal for rows that your Python code produces on the fly.
 
+## Community Extensions
+
+In the days following the release, once our CI pipelines go some breathing room, we built and deployed the [community extensions]({% link community_extensions/index.md %}) for DuckDB 2.0.0.
+
+Not every extension is available for every DuckDB version and platform, so each extension's page now includes a compatibility matrix that shows which DuckDB version and platform combinations the extension was deployed for, covering all DuckDB releases that have not reached end-of-life. For example, see the [compatibility matrix of the DuckPGQ extension]({% link community_extensions/extensions/duckpgq.md %}#compatibility-matrix):
+
+<div class="extension_compatibility_table"></div>
+
+| Platform | 1.4.4 | 1.4.5 | 1.5.5 | 1.5.6 | 2.0.0 |
+| :--- | :---: | :---: | :---: | :---: | :---: |
+| Linux AMD64 | ✅ | ❌ | ❌ | ✅ | ✅ |
+| Linux ARM64 | ✅ | ❌ | ❌ | ✅ | ✅ |
+| macOS AMD64 | ✅ | ❌ | ❌ | ✅ | ✅ |
+| macOS ARM64 | ✅ | ❌ | ❌ | ✅ | ✅ |
+| Windows AMD64 | ✅ | ❌ | ❌ | ✅ | ✅ |
+| Windows ARM64 | ❌ | ❌ | ❌ | ❌ | ❌ |
+| WebAssembly | ✅ | ❌ | ❌ | ✅ | ✅ |
+
 ## Usability Improvements in the CLI
 
 ### Pretty-Printed `.schema`
