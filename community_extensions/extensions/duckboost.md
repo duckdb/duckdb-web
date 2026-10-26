@@ -5,8 +5,11 @@ excerpt: |
   DuckDB Community Extensions
   SQL-native histogram GBDT in DuckDB with vendor dump import and plain-SQL export
 
-# Submit this file to https://github.com/duckdb/community-extensions as:
+# Source of truth for https://github.com/duckdb/community-extensions
 #   extensions/duckboost/description.yml
+# Also ship docs/community_extensions_function_descriptions.csv as
+#   extensions/duckboost/docs/function_descriptions.csv
+# so the community “Added Functions” table is populated.
 #
 # DuckDB community CI builds `repo.ref` against DuckDB 2.0.0 LTS
 # (duckdb_version=v2.0.0, duckdb_commit=d54cbbe…). duckboost is 2.0-only:
@@ -15,7 +18,7 @@ excerpt: |
 extension:
   name: duckboost
   description: SQL-native histogram GBDT in DuckDB with vendor dump import and plain-SQL export
-  version: 0.0.4
+  version: 0.0.5
   language: C++
   build: cmake
   license: MIT
@@ -26,8 +29,8 @@ extension:
 
 repo:
   github: JavOrraca/duckboost
-  # v0.0.4 release commit (tag v0.0.4). Raw SHA only — not a movable tag.
-  ref: b775ef43e175ba9d38e97da33ff164b70c573d3c
+  # v0.0.5 release commit (tag v0.0.5). Raw SHA only — not a movable tag.
+  ref: 0c9dc402641c7c6a25faee93e8aeb5bb70123a27
 
 docs:
   # Mirrors the Getting Started penguins first-model loop. Uses a public raw URL so the
@@ -119,28 +122,28 @@ LOAD {{ page.extension.name }};
 
 <div class="extension_functions_table"></div>
 
-|           function_name            | function_type |                                   description                                    | comment |                                             examples                                              |
-|------------------------------------|---------------|----------------------------------------------------------------------------------|---------|---------------------------------------------------------------------------------------------------|
-| duckboost_backends                 | table         | List available GBDT backends and whether this binary can train them in-process   | NULL    | [SELECT * FROM duckboost_backends();]                                                             |
-| duckboost_build_info               | table         | Report compile-time duckboost build flags and linked trainers                    | NULL    | [SELECT * FROM duckboost_build_info();]                                                           |
-| duckboost_dummy                    | macro         | One-hot or reference-level dummy encode a categorical value against known levels | NULL    | [duckboost_dummy(sex, ['female','male'])]                                                         |
-| duckboost_dummy_names              | macro         | Column names matching duckboost_dummy output for the given levels                | NULL    | [duckboost_dummy_names('sex', ['female','male'])]                                                 |
-| duckboost_evaluate                 | scalar        | Per-row evaluation score for a model prediction vs label                         | NULL    | [duckboost_evaluate(model, y, features)]                                                          |
-| duckboost_evaluate_agg             | aggregate     | Aggregate evaluation metric (rmse, auc, brier_score, ...) over labeled rows      | NULL    | [duckboost_evaluate_agg(model, y, features, MAP {'metric': 'rmse'})]                              |
-| duckboost_fit                      | table_macro   | Train a model from a table name (table macro wrapper around duckboost_train)     | NULL    | [FROM duckboost_fit('penguins', 'body_mass_g', 'features', options := MAP {'backend': 'native'})] |
-| duckboost_import                   | scalar        | Import an XGBoost, LightGBM, or CatBoost model dump into duckboost JSON          | NULL    | [duckboost_import('xgboost', dump_json)]                                                          |
-| duckboost_importance               | table         | Feature importance table (gain, cover, frequency) for a trained model            | NULL    | [SELECT * FROM duckboost_importance(model);]                                                      |
-| duckboost_initial_split            | table_macro   | Add a train/test split column by content-hash (optional strata)                  | NULL    | [FROM duckboost_initial_split('penguins', prop := 0.75)]                                          |
-| duckboost_initial_validation_split | table_macro   | Add train/validation/test split columns by content-hash (optional strata)        | NULL    | [FROM duckboost_initial_validation_split('penguins', prop := [0.6, 0.2])]                         |
-| duckboost_integer                  | macro         | Map a categorical value to its 1-based position in levels (0 if absent)          | NULL    | [duckboost_integer(species, ['Adelie','Chinstrap','Gentoo'])]                                     |
-| duckboost_levels                   | macro         | Collect distinct categorical levels that appear at least min_count times         | NULL    | [duckboost_levels(sex, min_count := 1)]                                                           |
-| duckboost_other                    | macro         | Collapse categorical values outside levels into a single other label             | NULL    | [duckboost_other(island, ['Biscoe','Dream'], other := 'other')]                                   |
-| duckboost_predict                  | scalar        | Score one feature vector with a duckboost model                                  | NULL    | [duckboost_predict(model, features)]                                                              |
-| duckboost_predict_proba            | scalar        | Class probabilities (or single-element list for regression)                      | NULL    | [duckboost_predict_proba(model, features)]                                                        |
-| duckboost_score                    | table_macro   | Score every row of a table and append a prediction column                        | NULL    | [FROM duckboost_score(model, 'penguins', 'features')]                                             |
-| duckboost_to_sql                   | scalar        | Export a model as plain DuckDB SQL for inference without the extension           | NULL    | [duckboost_to_sql(model, 'penguins', ['bill_length_mm','bill_depth_mm'])]                         |
-| duckboost_train                    | aggregate     | Train a histogram GBDT (native) or linked vendor trainer; returns model JSON     | NULL    | [duckboost_train(y, features, MAP {'backend': 'native', 'n_estimators': '40'})]                   |
-| duckboost_vfold                    | table_macro   | Assign cross-validation fold ids by content-hash (optional strata)               | NULL    | [FROM duckboost_vfold('penguins', v := 5)]                                                        |
+|           function_name            | function_type |                                       description                                        | comment |                                             examples                                              |
+|------------------------------------|---------------|------------------------------------------------------------------------------------------|---------|---------------------------------------------------------------------------------------------------|
+| duckboost_backends                 | table         | List available GBDT backends and whether this binary can train them in-process           | NULL    | [SELECT * FROM duckboost_backends();]                                                             |
+| duckboost_build_info               | table         | Report compile-time duckboost build flags and linked trainers                            | NULL    | [SELECT * FROM duckboost_build_info();]                                                           |
+| duckboost_dummy                    | macro         | One-hot or reference-level dummy encode a categorical value against known levels         | NULL    | [duckboost_dummy(sex, ['female','male'])]                                                         |
+| duckboost_dummy_names              | macro         | Column names matching duckboost_dummy output for the given levels                        | NULL    | [duckboost_dummy_names('sex', ['female','male'])]                                                 |
+| duckboost_evaluate                 | scalar        | Per-row evaluation score for a model prediction vs label                                 | NULL    | [duckboost_evaluate(model, y, features)]                                                          |
+| duckboost_evaluate_agg             | aggregate     | Aggregate evaluation metric (rmse, auc, brier_score, ...) over labeled rows              | NULL    | [duckboost_evaluate_agg(model, y, features, MAP {'metric': 'rmse'})]                              |
+| duckboost_fit                      | table_macro   | Train a model from a table name (table macro wrapper around duckboost_train)             | NULL    | [FROM duckboost_fit('penguins', 'body_mass_g', 'features', options := MAP {'backend': 'native'})] |
+| duckboost_import                   | scalar        | Import an XGBoost, LightGBM, or CatBoost model dump into duckboost JSON                  | NULL    | [duckboost_import('xgboost', dump_json)]                                                          |
+| duckboost_importance               | table         | Feature importance table (gain, cover, frequency) for a trained model                    | NULL    | [SELECT * FROM duckboost_importance(model);]                                                      |
+| duckboost_initial_split            | table_macro   | Add a train/test split column by content-hash (optional strata)                          | NULL    | [FROM duckboost_initial_split('penguins', prop := 0.75)]                                          |
+| duckboost_initial_validation_split | table_macro   | Add train/validation/test split columns by content-hash (optional strata)                | NULL    | [FROM duckboost_initial_validation_split('penguins', prop := [0.6, 0.2])]                         |
+| duckboost_integer                  | macro         | Map a categorical value to its 1-based position in levels (0 if absent)                  | NULL    | [duckboost_integer(species, ['Adelie','Chinstrap','Gentoo'])]                                     |
+| duckboost_levels                   | macro         | Collect distinct categorical levels that appear at least min_count times                 | NULL    | [duckboost_levels(sex, min_count := 1)]                                                           |
+| duckboost_other                    | macro         | Collapse categorical values outside levels into a single other label                     | NULL    | [duckboost_other(island, ['Biscoe','Dream'], other := 'other')]                                   |
+| duckboost_predict                  | scalar        | Score one feature vector with a duckboost model                                          | NULL    | [duckboost_predict(model, features)]                                                              |
+| duckboost_predict_proba            | scalar        | Class probabilities (or single-element list for regression)                              | NULL    | [duckboost_predict_proba(model, features)]                                                        |
+| duckboost_score                    | table_macro   | Score every row of a table and append a prediction column                                | NULL    | [FROM duckboost_score(model, 'penguins', 'features')]                                             |
+| duckboost_to_sql                   | scalar        | Export a model as plain DuckDB SQL (DOUBLE literals) for inference without the extension | NULL    | [duckboost_to_sql(model, 'penguins', ['bill_length_mm','bill_depth_mm'])]                         |
+| duckboost_train                    | aggregate     | Train a histogram GBDT (native) or linked vendor trainer; returns model JSON             | NULL    | [duckboost_train(y, features, MAP {'backend': 'native', 'n_estimators': '40'})]                   |
+| duckboost_vfold                    | table_macro   | Assign cross-validation fold ids by content-hash (optional strata)                       | NULL    | [FROM duckboost_vfold('penguins', v := 5)]                                                        |
 
 ### Overloaded Functions
 

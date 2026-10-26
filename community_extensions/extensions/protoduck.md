@@ -8,7 +8,7 @@ excerpt: |
 extension:
   name: protoduck
   description: Deserialize Protocol Buffer messages stored in DuckDB columns
-  version: 0.1.2
+  version: 0.1.3
   language: Rust
   build: cmake
   license: MIT
@@ -19,7 +19,7 @@ extension:
 
 repo:
   github: fcsnk/protoduck
-  ref: 73803c0e12569a66cc6ad44e5d8079067462bb6f
+  ref: 5473d9573eb34e91a7c97d3d3d0ecb2ce311c715
 
 docs:
   hello_world: |
@@ -71,11 +71,11 @@ This table covers all DuckDB releases that have not reached [end-of-life](https:
 
 | Platform | 1.4.4 | 1.4.5 | 1.5.5 | 1.5.6 | 2.0.0 |
 | :--- | :---: | :---: | :---: | :---: | :---: |
-| Linux AMD64 | ❌ | ❌ | ✅ | ❌ | ❌ |
-| Linux ARM64 | ❌ | ❌ | ✅ | ❌ | ❌ |
+| Linux AMD64 | ❌ | ❌ | ✅ | ❌ | ✅ |
+| Linux ARM64 | ❌ | ❌ | ✅ | ❌ | ✅ |
 | macOS AMD64 | ❌ | ❌ | ✅ | ❌ | ❌ |
-| macOS ARM64 | ❌ | ❌ | ✅ | ❌ | ❌ |
-| Windows AMD64 | ❌ | ❌ | ✅ | ❌ | ❌ |
+| macOS ARM64 | ❌ | ❌ | ✅ | ❌ | ✅ |
+| Windows AMD64 | ❌ | ❌ | ✅ | ❌ | ✅ |
 | Windows ARM64 | ❌ | ❌ | ❌ | ❌ | ❌ |
 | WebAssembly | ❌ | ❌ | ❌ | ❌ | ❌ |
 
@@ -124,6 +124,8 @@ This extension does not add any types.
 
 <div class="extension_settings_table"></div>
 
-This extension does not add any settings.
+|      name      |                       description                       | input_type | scope  | aliases | typed_value |
+|----------------|---------------------------------------------------------|------------|--------|---------|-------------|
+| temp_directory | Set the directory to which temporary files are written. | VARCHAR    | GLOBAL | []      | post.db.tmp |
 
 
