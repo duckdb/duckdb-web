@@ -7,7 +7,7 @@ redirect_from:
 title: What's New in the Docs for 2.0
 ---
 
-This page tracks the documentation for the features introduced in DuckDB 2.0, organized around the themes of the [DuckDB 2.0.0 release announcement]({% post_url 2026-10-21-announcing-duckdb-200 %}). Each section links to the relevant documentation.
+This page tracks the documentation for the features introduced in DuckDB 2.0, organized around the themes of the [DuckDB 2.0.0 release announcement]({% post_url 2026-10-21-announcing-duckdb-200 %}). Each section links to the relevant documentation. For smaller features, see the [“Gems of DuckDB 2.0.0” blog post]({% post_url 2026-10-26-gems-of-duckdb-200 %}), which covers the Python appender, CLI usability improvements, secure views and custom partition paths.
 
 ## DuckDB as a Server: Quack and `CONNECT`
 
@@ -92,7 +92,6 @@ DuckDB 2.0 shipped a revamped C API (C API v2), which is not yet stable. You can
 * [C API v2]({% link docs/2.0/clients/c/overview.md %}#c-api-v2)
 * [Extension repositories]({% link docs/2.0/extensions/extension_repositories.md %})
 * Statically linking extensions: see [Statically Linking Extensions]({% link docs/2.0/dev/building/linking_extensions.md %})
-* [Window function extensions]({% link docs/2.0/extensions/window_function_extensions.md %})
 
 ## Core Extension Updates
 
@@ -124,6 +123,7 @@ Additional 2.0 features documented across the site, grouped by area.
 
 * [CLI agent mode]({% link docs/2.0/clients/cli/agent_mode.md %}), which produces compact, machine-readable output when the CLI is driven by an AI coding agent
 * [CLI command history]({% link docs/2.0/clients/cli/dot_commands.md %}#command-history): the `.history` command and the `shell_history()` table function
+* [The `.manual` dot command]({% link docs/2.0/clients/cli/dot_commands.md %}#displaying-function-documentation), which shows the signatures, description and examples of a SQL function
 * [Pretty-printed, highlighted `.schema` output]({% link docs/2.0/clients/cli/dot_commands.md %}#querying-the-database-schema) with `--no-indent` to restore the single-line form
 * [The Python appender]({% link docs/2.0/clients/python/appender.md %}) for inserting rows that Python code produces
 
