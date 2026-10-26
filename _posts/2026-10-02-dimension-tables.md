@@ -25,14 +25,14 @@ LIMIT 5;
 | 2023-05-15 00:45:00 | Leiden Centraal | Intercity |
 | 2023-05-15 01:03:00 | Schiphol Airport | Intercity |
 
-The table has 380,959 rows but only 537 distinct station names, so each name is stored again in thousands of rows: `Amsterdam Centraal` (18 bytes) alone appears in 7,591 of them. Load it into a table to follow along, in the [web shell](https://shell.duckdb.org/) or the [DuckDB CLI]({% link docs/1.5/clients/cli/overview.md %}):
+The table has 380,959 rows but only 537 distinct station names, so each name is stored again in thousands of rows: `Amsterdam Centraal` (18 bytes) alone appears in 7,591 of them. Load it into a table to follow along, in the [web shell](https://shell.duckdb.org/) or the [DuckDB CLI]({% link docs/2.0/clients/cli/overview.md %}):
 
 ```sql
 CREATE TABLE train_services AS
     FROM 'https://blobs.duckdb.org/train_services.parquet';
 ```
 
-When you [`GROUP BY`]({% link docs/1.5/sql/query_syntax/groupby.md %}) the station name, DuckDB has to process the full string for every row. For example, this query counts how many trains call at each station:
+When you [`GROUP BY`]({% link docs/2.0/sql/query_syntax/groupby.md %}) the station name, DuckDB has to process the full string for every row. For example, this query counts how many trains call at each station:
 
 ```sql
 SELECT station_name, count(*) AS calls
@@ -60,19 +60,19 @@ The approach is the [star schema](https://en.wikipedia.org/wiki/Star_schema) fro
 
 That report turned out not to involve strings, but Richard Wesley pointed out that in his own work, building dimension tables and joining the strings back at the end made a large difference to string-heavy aggregations.
 
-We have since added the pattern to the [schema section of the Performance Guide]({% link docs/1.5/guides/performance/schema.md %}).
+We have since added the pattern to the [schema section of the Performance Guide]({% link docs/2.0/guides/performance/schema.md %}).
 
 ## Why Strings Are Expensive to Group On
 
 DuckDB computes a `GROUP BY` with a hash aggregation, keeping one hash table entry per group, as described in the [Parallel Grouped Aggregation in DuckDB]({% post_url 2022-03-07-aggregate-hashtable %}) blog post (2022). The aggregation uses the hash of each group key to find the key's slot in a hash table, then compares the key with the one stored in that slot. For integers, this takes a few CPU instructions. For strings, the cost grows with the length of the string.
 
-In DuckDB, a string value is a [16-byte structure]({% link docs/1.5/clients/c/vector.md %}#strings). Strings of up to 12 bytes are stored inline. Longer strings store a 4-byte prefix plus a pointer to the actual characters. That design keeps short strings cheap, but many real-world labels are longer than 12 bytes.
+In DuckDB, a string value is a [16-byte structure]({% link docs/2.0/clients/c/vector.md %}#strings). Strings of up to 12 bytes are stored inline. Longer strings store a 4-byte prefix plus a pointer to the actual characters. That design keeps short strings cheap, but many real-world labels are longer than 12 bytes.
 
 For these longer strings, hashing reads every byte of every string in every row. A match can't be confirmed from the prefix alone, so DuckDB follows the pointer and compares the full string. When a new group appears, its string is copied into the hash table's own memory, which makes the table larger than it would be with fixed-width keys.
 
 Copying strings also affects memory use. A wider hash table fits less well into CPU caches, and in larger-than-memory aggregations it reaches the memory limit sooner and has to spill more data to disk. DuckDB does apply dictionary encoding to string columns on disk, as described in the [Lightweight Compression in DuckDB]({% post_url 2022-10-28-lightweight-compression %}) blog post (2022), but that is a storage optimization: once a column is read into an aggregation, each group key is a full string again.
 
-Integer keys avoid these costs, as their fixed width makes hashing and comparing them cheap. When the key range is small, DuckDB can avoid hashing altogether: if the statistics show that the keys fit in a small enough domain, the optimizer picks a [perfect hash aggregate]({% link docs/1.5/configuration/overview.md %}#global-configuration-options), controlled by the `perfect_ht_threshold` setting, which uses the key value directly as an index into an array.
+Integer keys avoid these costs, as their fixed width makes hashing and comparing them cheap. When the key range is small, DuckDB can avoid hashing altogether: if the statistics show that the keys fit in a small enough domain, the optimizer picks a [perfect hash aggregate]({% link docs/2.0/configuration/overview.md %}#global-configuration-options), controlled by the `perfect_ht_threshold` setting, which uses the key value directly as an index into an array.
 
 ## Building a Dimension Table with Sorted, Narrow Keys
 
@@ -89,13 +89,13 @@ FROM train_services;
 
 This returns 537, and that count decides how wide the key needs to be. You want the narrowest integer type whose range still covers every distinct value, because a narrower key means fewer bytes per row in the fact table and a smaller entry in the hash table you group on.
 
-The keys come from [`row_number()`]({% link docs/1.5/sql/functions/window_functions.md %}#row_numberorder-by-ordering), which starts at 1 and only counts upward, so an unsigned type is the right fit, spending none of its range on negative values. [`UTINYINT`]({% link docs/1.5/sql/data_types/numeric.md %}#fixed-width-integer-types) (1 byte) holds up to 255 distinct values, [`USMALLINT`]({% link docs/1.5/sql/data_types/numeric.md %}#fixed-width-integer-types) (2 bytes) up to 65,535, and [`UINTEGER`]({% link docs/1.5/sql/data_types/numeric.md %}#fixed-width-integer-types) (4 bytes) up to about 4.3 billion.
+The keys come from [`row_number()`]({% link docs/2.0/sql/functions/window_functions.md %}#row_numberorder-by-ordering), which starts at 1 and only counts upward, so an unsigned type is the right fit, spending none of its range on negative values. [`UTINYINT`]({% link docs/2.0/sql/data_types/numeric.md %}#fixed-width-integer-types) (1 byte) holds up to 255 distinct values, [`USMALLINT`]({% link docs/2.0/sql/data_types/numeric.md %}#fixed-width-integer-types) (2 bytes) up to 65,535, and [`UINTEGER`]({% link docs/2.0/sql/data_types/numeric.md %}#fixed-width-integer-types) (4 bytes) up to about 4.3 billion.
 
 The 537 station names do not fit in a `UTINYINT`, so `USMALLINT` is the narrowest that works, and that is the type the next step casts to. If the number of distinct values will grow, choose a larger type so you don't run out of keys.
 
 ### Step 2: Build the Dimension Table
 
-Next, assign each distinct string an integer key. The important detail is the [`ORDER BY`]({% link docs/1.5/sql/query_syntax/orderby.md %}) `station_name` inside the window: the keys are assigned in string order.
+Next, assign each distinct string an integer key. The important detail is the [`ORDER BY`]({% link docs/2.0/sql/query_syntax/orderby.md %}) `station_name` inside the window: the keys are assigned in string order.
 
 ```sql
 CREATE OR REPLACE TABLE stations AS
@@ -109,7 +109,7 @@ Sorted keys have two advantages. First, `ORDER BY station_id` produces the same 
 
 ### Step 3: Store the Key in the Fact Table
 
-Finally, replace the string column in the fact table with its key, a rewrite of the table that you pay for once. The dimension table leaves out [`NULL`]({% link docs/1.5/sql/data_types/nulls.md %}), so the [`LEFT JOIN`]({% link docs/1.5/sql/query_syntax/from.md %}#joins) keeps the rows without a station and gives them a `NULL` key.
+Finally, replace the string column in the fact table with its key, a rewrite of the table that you pay for once. The dimension table leaves out [`NULL`]({% link docs/2.0/sql/data_types/nulls.md %}), so the [`LEFT JOIN`]({% link docs/2.0/sql/query_syntax/from.md %}#joins) keeps the rows without a station and gives them a `NULL` key.
 
 ```sql
 CREATE OR REPLACE TABLE train_services_encoded AS
@@ -143,7 +143,7 @@ You can also leave out this step and join the dimension table on the fly inside 
 
 ## Querying the Encoded Table
 
-With the key in place, the query aggregates on integers and only looks up the strings once the result is small. The [`LEFT JOIN`]({% link docs/1.5/sql/query_syntax/from.md %}#joins) keeps the group of rows without a station.
+With the key in place, the query aggregates on integers and only looks up the strings once the result is small. The [`LEFT JOIN`]({% link docs/2.0/sql/query_syntax/from.md %}#joins) keeps the group of rows without a station.
 
 ```sql
 WITH rollup AS (
@@ -160,9 +160,9 @@ LEFT JOIN stations s USING (station_id)
 ORDER BY station_id, date;
 ```
 
-[`GROUP BY ALL`]({% link docs/1.5/sql/query_syntax/groupby.md %}#group-by-all) groups by every selected column that is not aggregated, here `station_id` and `date`, so you don't repeat the list. The final join runs against the aggregated result, which has one row per group rather than one row per event. If the aggregation reduces a billion rows to a few hundred thousand, the join only looks up a few hundred thousand strings. Because the keys are sorted, `ORDER BY station_id` also sorts alphabetically by station name.
+[`GROUP BY ALL`]({% link docs/2.0/sql/query_syntax/groupby.md %}#group-by-all) groups by every selected column that is not aggregated, here `station_id` and `date`, so you don't repeat the list. The final join runs against the aggregated result, which has one row per group rather than one row per event. If the aggregation reduces a billion rows to a few hundred thousand, the join only looks up a few hundred thousand strings. Because the keys are sorted, `ORDER BY station_id` also sorts alphabetically by station name.
 
-For top-N queries, apply the [`LIMIT`]({% link docs/1.5/sql/query_syntax/limit.md %}) before the join, so that only ten strings are looked up:
+For top-N queries, apply the [`LIMIT`]({% link docs/2.0/sql/query_syntax/limit.md %}) before the join, so that only ten strings are looked up:
 
 ```sql
 WITH top_stations AS (
@@ -218,7 +218,7 @@ FROM rollup
 LEFT JOIN stations s USING (station_id);
 ```
 
-To see where the time goes, prefix each query with [`EXPLAIN ANALYZE`]({% link docs/1.5/sql/statements/profiling.md %}#explain-analyze) and compare the timings of the aggregation operators. To compare memory use, set a lower [`memory_limit`]({% link docs/1.5/configuration/overview.md %}#global-configuration-options) with [`SET`]({% link docs/1.5/sql/statements/set.md %}) and check which query starts spilling to disk first.
+To see where the time goes, prefix each query with [`EXPLAIN ANALYZE`]({% link docs/2.0/sql/statements/profiling.md %}#explain-analyze) and compare the timings of the aggregation operators. To compare memory use, set a lower [`memory_limit`]({% link docs/2.0/configuration/overview.md %}#global-configuration-options) with [`SET`]({% link docs/2.0/sql/statements/set.md %}) and check which query starts spilling to disk first.
 
 ## Variations
 
@@ -226,7 +226,7 @@ So far the examples use a single string column with a fixed set of values. The v
 
 ### Comparison with ENUM
 
-DuckDB's [`ENUM` type]({% link docs/1.5/sql/data_types/enum.md %}) is dictionary encoding built into the type system: values are stored as small integers, and DuckDB picks the integer width for you. The [Lord of the Enums]({% post_url 2021-11-26-duck-enum %}) blog post (2021) benchmarks this, with a `GROUP BY` on an `ENUM` column running faster than the same grouping on the raw strings. You can create one from a query:
+DuckDB's [`ENUM` type]({% link docs/2.0/sql/data_types/enum.md %}) is dictionary encoding built into the type system: values are stored as small integers, and DuckDB picks the integer width for you. The [Lord of the Enums]({% post_url 2021-11-26-duck-enum %}) blog post (2021) benchmarks this, with a `GROUP BY` on an `ENUM` column running faster than the same grouping on the raw strings. You can create one from a query:
 
 ```sql
 CREATE TYPE station_enum AS ENUM (
@@ -238,7 +238,7 @@ If the set of values is known up front and rarely changes, an `ENUM` gives you m
 
 - **New values keep arriving.** An `ENUM`'s values are fixed when the type is created, so inserting an unknown value fails. A dimension table can grow.
 - **You need attributes.** A dimension table can carry extra columns, such as the station's city or the line it sits on, that you can group or filter on without parsing strings.
-- **The data leaves DuckDB.** Integer keys and a lookup table can be exported to [Parquet]({% link docs/1.5/data/parquet/overview.md %}) or [CSV]({% link docs/1.5/data/csv/overview.md %}) and used in other tools.
+- **The data leaves DuckDB.** Integer keys and a lookup table can be exported to [Parquet]({% link docs/2.0/data/parquet/overview.md %}) or [CSV]({% link docs/2.0/data/csv/overview.md %}) and used in other tools.
 
 ### Several String Columns
 
@@ -276,7 +276,7 @@ INSERT INTO stations
     ANTI JOIN stations USING (station_name);
 ```
 
-The [`ANTI JOIN`]({% link docs/1.5/sql/query_syntax/from.md %}#semi-and-anti-joins) keeps only the names that are not already in `stations`, so the existing keys stay untouched and each genuinely new name gets a key that continues past the current maximum.
+The [`ANTI JOIN`]({% link docs/2.0/sql/query_syntax/from.md %}#semi-and-anti-joins) keeps only the names that are not already in `stations`, so the existing keys stay untouched and each genuinely new name gets a key that continues past the current maximum.
 
 Then encode the new rows the same way as in Step 3 and append them:
 
@@ -293,13 +293,13 @@ Appended keys no longer follow alphabetical order. If your queries rely on `ORDE
 
 Dictionary encoding makes each group smaller. It does not reduce how many groups there are, and that matters for very high-cardinality aggregations.
 
-The report that prompted this post, [duckdb/duckdb#14584](https://github.com/duckdb/duckdb/issues/14584), shows this. It grouped 9.2 billion rows into 320 million distinct groups and used far more memory than expected. The group key was already a [`UBIGINT`]({% link docs/1.5/sql/data_types/numeric.md %}#fixed-width-integer-types), so there were no strings to encode.
+The report that prompted this post, [duckdb/duckdb#14584](https://github.com/duckdb/duckdb/issues/14584), shows this. It grouped 9.2 billion rows into 320 million distinct groups and used far more memory than expected. The group key was already a [`UBIGINT`]({% link docs/2.0/sql/data_types/numeric.md %}#fixed-width-integer-types), so there were no strings to encode.
 
 The cause is how DuckDB parallelizes aggregation. Each thread first aggregates its share of the rows in its own thread-local hash table, and the partial results are combined at the end. This works well when each thread sees many repeats of the same groups, which is typical for real-world data.
 
 In the report, with 8 threads, each thread saw about 1.1 billion rows: only about 3 times the number of distinct values, spread without any useful pattern. Nearly every group ended up in nearly every thread's table, so memory use approached the number of threads times the number of groups.
 
-Narrow keys make each of those entries smaller, but they cannot prevent the duplication. When the number of groups is close to the number of rows each thread processes, reducing the number of [`threads`]({% link docs/1.5/configuration/overview.md %}#global-configuration-options) helps more, because each thread holds its own copy of each group.
+Narrow keys make each of those entries smaller, but they cannot prevent the duplication. When the number of groups is close to the number of rows each thread processes, reducing the number of [`threads`]({% link docs/2.0/configuration/overview.md %}#global-configuration-options) helps more, because each thread holds its own copy of each group.
 
 ```sql
 SET threads = 1;
@@ -324,4 +324,4 @@ In these cases, keep the string column as it is. If you are unsure, compare both
 
 Grouping on repeated strings is expensive. By moving them into a small dimension table with sorted, narrow integer keys, DuckDB can aggregate on fixed-width integers and keep its hash tables compact. The strings come back in a final join against a result that is already small.
 
-This approach helps most when you repeatedly aggregate on long strings that have few distinct values. You can find a condensed version of this tip in the [Performance Guide]({% link docs/1.5/guides/performance/schema.md %}).
+This approach helps most when you repeatedly aggregate on long strings that have few distinct values. You can find a condensed version of this tip in the [Performance Guide]({% link docs/2.0/guides/performance/schema.md %}).

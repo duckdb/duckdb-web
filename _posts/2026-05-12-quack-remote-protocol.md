@@ -143,13 +143,13 @@ FROM remote.query(
 
 <!-- markdownlint-enable MD001 -->
 
-Of course there is much more to see here. Please [consult our documentation]({% link docs/1.5/quack/overview.md %}) for more details.
+Of course there is much more to see here. Please [consult our documentation]({% link docs/2.0/quack/overview.md %}) for more details.
 
 ## Protocol Design
 
 ### HTTP-Based
 
-Quack is built straight on the venerable HTTP, the Hypertext Transfer Protocol. From its humble beginnings at CERN, HTTP has become a de-facto protocol layer on top of TCP and all the stuff below. The entire stack is optimized to transmit HTTP message streams efficiently. The protocol has surprisingly low overhead if implemented properly. Everyone and their little brother knows how to deal with HTTP in load balancing, authentication, firewalls, intrusion detection etc. It would be rather misguided not to build a database protocol on top of HTTP in 2026. HTTP also allows the [DuckDB-Wasm distribution to speak Quack natively]({% link docs/1.5/quack/setup/quack_wasm.md %})! So DuckDB running in a browser can e.g., directly connect to a DuckDB instance running in an EC2 server using Quack.
+Quack is built straight on the venerable HTTP, the Hypertext Transfer Protocol. From its humble beginnings at CERN, HTTP has become a de-facto protocol layer on top of TCP and all the stuff below. The entire stack is optimized to transmit HTTP message streams efficiently. The protocol has surprisingly low overhead if implemented properly. Everyone and their little brother knows how to deal with HTTP in load balancing, authentication, firewalls, intrusion detection etc. It would be rather misguided not to build a database protocol on top of HTTP in 2026. HTTP also allows the [DuckDB-Wasm distribution to speak Quack natively]({% link docs/2.0/quack/setup/quack_wasm.md %})! So DuckDB running in a browser can e.g., directly connect to a DuckDB instance running in an EC2 server using Quack.
 
 ### Request-Response Pattern
 
@@ -161,7 +161,7 @@ Requests and responses are encoded using the new MIME type application/duckdb. T
 
 ### Encryption
 
-While we want Quack to “just work” we also are wary of the security nightmares of attaching a database directly to the evil internet, as has happened before. This is why Quack will by default generate a random authentication token at server start-up, which then has to be given to the client. In addition, the Quack server will by default only bind to localhost (which can of course be overridden). Quack does not use SSL by default, because it is a bit silly to bring all that infrastructure and add dependencies just for localhost communication. We do not recommend opening up a DuckDB Quack endpoint directly to the Internet. Instead we strongly recommend that you use a common HTTP endpoint like [nginx](https://nginx.org/) if you should choose to expose Quack to the World Wide Web and have that proxy terminate SSL (e.g., with Let's Encrypt). The Quack client will assume SSL is enabled for non-local connections, this can be overridden. We provide a [guide for this in our documentation]({% link docs/1.5/quack/setup/reverse_proxy.md %}).
+While we want Quack to “just work” we also are wary of the security nightmares of attaching a database directly to the evil internet, as has happened before. This is why Quack will by default generate a random authentication token at server start-up, which then has to be given to the client. In addition, the Quack server will by default only bind to localhost (which can of course be overridden). Quack does not use SSL by default, because it is a bit silly to bring all that infrastructure and add dependencies just for localhost communication. We do not recommend opening up a DuckDB Quack endpoint directly to the Internet. Instead we strongly recommend that you use a common HTTP endpoint like [nginx](https://nginx.org/) if you should choose to expose Quack to the World Wide Web and have that proxy terminate SSL (e.g., with Let's Encrypt). The Quack client will assume SSL is enabled for non-local connections, this can be overridden. We provide a [guide for this in our documentation]({% link docs/2.0/quack/setup/reverse_proxy.md %}).
 
 ### Round-Trips
 
@@ -233,7 +233,7 @@ Would you like to see the results as a table? Click here.
 
 We can see how Quack is doing great for bulk result set transfer, transferring the 60 million rows in under 5 seconds! Even the purpose-built Arrow Flight SQL protocol can’t compete here, and Postgres’ row-based protocol is rather hopeless in general.
 
-In fairness we have to mention that the standard PostgreSQL clients do not parallelize reads over multiple threads, but Quack and Arrow can. Shameless plug: DuckDB’s [PostgreSQL client]({% link docs/1.5/core_extensions/postgres/overview.md %}) can also do that in some cases!
+In fairness we have to mention that the standard PostgreSQL clients do not parallelize reads over multiple threads, but Quack and Arrow can. Shameless plug: DuckDB’s [PostgreSQL client]({% link docs/2.0/core_extensions/postgres/overview.md %}) can also do that in some cases!
 
 ### Small Writes
 
@@ -305,7 +305,7 @@ Overall, DuckDB is moving further out of its initial niche of an in-process data
 
 ### Next Steps
 
-There are of course a lot of things still to do. First off, we are going to integrate Quack into DuckLake, so that it becomes possible to use a remote DuckDB server as a DuckLake catalog! We expect this to greatly improve performance, especially with inlining. Next, we are going to polish Quack over the coming months and release a first production release together with [DuckDB v2.0]({% link release_calendar.md %}) when it's coming in fall this year. We plan for example to enable auto-installation and auto-loading of the Quack extension whenever it is needed. Using our [new parser]({% link docs/1.5/sql/peg_parser.md %}), we are also planning to improve on the syntax for talking to remote SQL databases from DuckDB. On the core DuckDB side, we plan to work on greatly increasing the transactions per second achievable, so we can scale transactions far beyond eight parallel threads.
+There are of course a lot of things still to do. First off, we are going to integrate Quack into DuckLake, so that it becomes possible to use a remote DuckDB server as a DuckLake catalog! We expect this to greatly improve performance, especially with inlining. Next, we are going to polish Quack over the coming months and release a first production release together with [DuckDB v2.0]({% link release_calendar.md %}) when it's coming in fall this year. We plan for example to enable auto-installation and auto-loading of the Quack extension whenever it is needed. Using our [new parser]({% link docs/2.0/sql/peg_parser.md %}), we are also planning to improve on the syntax for talking to remote SQL databases from DuckDB. On the core DuckDB side, we plan to work on greatly increasing the transactions per second achievable, so we can scale transactions far beyond eight parallel threads.
 
 Further on, we are thinking about allowing extensions to the Quack protocol beyond authentication and authorization, for example, by allowing DuckDB extensions to add new protocol messages and the code to handle them. And we are also thinking about adding a replication protocol on top of Quack so that changes to a DuckDB instance can be replicated to other servers, for example to set up a cluster of read replicas.
 

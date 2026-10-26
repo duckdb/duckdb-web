@@ -16,7 +16,7 @@ To install the new version, please visit the [installation page]({% link install
 
 ## Iceberg Improvements
 
-The DuckDB [`iceberg` extension]({% link docs/1.5/core_extensions/iceberg/overview.md %}) received a number of patches:
+The DuckDB [`iceberg` extension]({% link docs/2.0/core_extensions/iceberg/overview.md %}) received a number of patches:
 
 * You can now attach to an Iceberg REST Catalog and specify an access delegation mode. This fixes a bug when using catalogs that did not vend credentials. The `ATTACH` statement will now look like this:
 
@@ -38,7 +38,7 @@ The DuckDB [`iceberg` extension]({% link docs/1.5/core_extensions/iceberg/overvi
 ## AWS Improvements
 
 The `aws` extension received a number of changes, which makes it easier to configure and troubleshoot.
-See the [`aws` documentation page]({% link docs/1.5/core_extensions/aws.md %}) for more details.
+See the [`aws` documentation page]({% link docs/2.0/core_extensions/aws.md %}) for more details.
 
 ### Secret Validation
 
@@ -68,13 +68,13 @@ DuckDB v1.4.1 [removes `us-east-1` as the default S3 region](https://github.com/
 Users reported two cases where DuckDB omitted some data:
 
 * The Parquet reader had a [regression which caused it to omit some rows](https://github.com/duckdb/duckdb/issues/19131) when using predicate pushdown on certain string columns.
-* In certain edge cases, DuckDB’s ART index could [omit rows](https://github.com/duckdb/duckdb/issues/19190) rows non-deterministically when running on multiple threads. Note that this index is only used when you manually specify an index with [`CREATE INDEX`]({% link docs/1.5/sql/indexes.md %}).
+* In certain edge cases, DuckDB’s ART index could [omit rows](https://github.com/duckdb/duckdb/issues/19190) rows non-deterministically when running on multiple threads. Note that this index is only used when you manually specify an index with [`CREATE INDEX`]({% link docs/2.0/sql/indexes.md %}).
 
 DuckDB v1.4.1 fixes both of these issues.
 
 ## Autoloading
 
-In DuckDB v1.4.0, the [`httpfs` extension]({% link docs/1.5/core_extensions/httpfs/overview.md %}) was not always autoloaded. For example, running:
+In DuckDB v1.4.0, the [`httpfs` extension]({% link docs/2.0/core_extensions/httpfs/overview.md %}) was not always autoloaded. For example, running:
 
 ```sql
 COPY (SELECT 42 AS answer) TO 's3://my_bucket/my_file.parquet';
@@ -104,4 +104,4 @@ Use ".open FILENAME" to reopen on a persistent database.
 D
 ```
 
-For more details including operational considerations and using the UI, read the [Docker image page]({% link docs/1.5/operations_manual/duckdb_docker.md %}).
+For more details including operational considerations and using the UI, read the [Docker image page]({% link docs/2.0/operations_manual/duckdb_docker.md %}).

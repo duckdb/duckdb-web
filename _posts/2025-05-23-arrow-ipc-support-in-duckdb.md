@@ -18,7 +18,7 @@ In recent years, the [Apache Arrow project](https://arrow.apache.org/docs/) has 
 Apache Arrow powers, among others, the integration between DuckDB and Polars.
 In practice, when DuckDB produces or consumes a Polars DataFrame, it is actually using the [Arrow columnar format](https://arrow.apache.org/docs/format/Columnar.html) underneath.
 
-The importance of having such a format is also one of the main reasons DuckDB was among the pioneers in [integrating with Arrow]({% post_url 2021-12-03-duck-arrow %}) and implementing an [Arrow Database Connectivity (ADBC)](https://arrow.apache.org/adbc/) [interface]({% link docs/1.5/clients/adbc.md %}) – particularly because Arrow makes this possible with no additional dependencies, thanks to its [C data interface](https://arrow.apache.org/docs/format/CDataInterface.html).
+The importance of having such a format is also one of the main reasons DuckDB was among the pioneers in [integrating with Arrow]({% post_url 2021-12-03-duck-arrow %}) and implementing an [Arrow Database Connectivity (ADBC)](https://arrow.apache.org/adbc/) [interface]({% link docs/2.0/clients/adbc.md %}) – particularly because Arrow makes this possible with no additional dependencies, thanks to its [C data interface](https://arrow.apache.org/docs/format/CDataInterface.html).
 
 But one limitation of Arrow's C data interface is that it exchanges data using pointers (memory addresses). This limits the possibilities if you want to exchange Arrow data between different processes or systems. To overcome this limitation, the Arrow project also specifies the [Arrow IPC format](https://arrow.apache.org/docs/format/Columnar.html#format-ipc), which allows users to efficiently serialize Arrow columnar data and pass it between processes or over a network. This data can be consumed as a stream, either directly from a memory buffer or from a file.
 
@@ -101,7 +101,7 @@ which prints:
 └─────────────────┘
 ```
 
-Thanks to [replacement scans]({% link docs/1.5/sql/dialect/friendly_sql.md %}#data-import), you can omit the function `read_arrow` if the filename ends with `.arrow` or `.arrows`. For example:
+Thanks to [replacement scans]({% link docs/2.0/sql/dialect/friendly_sql.md %}#data-import), you can omit the function `read_arrow` if the filename ends with `.arrow` or `.arrows`. For example:
 
 ```sql
 SELECT count(*) FROM 'lineitem.arrows';
@@ -127,7 +127,7 @@ What if you want to fetch an Arrow IPC stream directly from a server into DuckDB
 npx serve -l 8008
 ```
 
-Then you can use [DuckDB's `httpfs` extension]({% link docs/1.5/core_extensions/httpfs/https.md %}) to query the Arrow data over the HTTP(S) protocol:
+Then you can use [DuckDB's `httpfs` extension]({% link docs/2.0/core_extensions/httpfs/https.md %}) to query the Arrow data over the HTTP(S) protocol:
 
 ```sql
 INSTALL httpfs;

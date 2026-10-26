@@ -49,10 +49,10 @@ docs:
     `anofox_tab_email_is_valid`). Documentation:
     https://github.com/DataZooDE/anofox-tabular/blob/main/docs/API_REFERENCE.md
 
-extension_star_count: 20
-extension_star_count_pretty: 20
-extension_download_count: 10065
-extension_download_count_pretty: 10.1k
+extension_star_count: 22
+extension_star_count_pretty: 22
+extension_download_count: 12390
+extension_download_count_pretty: 12.4k
 image: '/images/community_extensions/social_preview/preview_community_extension_anofox_tabular.png'
 layout: community_extension_doc
 ---

@@ -32,7 +32,7 @@ Some extensions are distributed for the following platforms:
 * `windows_amd64_mingw`
 * `wasm_eh` and `wasm_mvp` (see [DuckDB-Wasm's extensions]({% link docs/2.0/clients/wasm/extensions.md %}))
 
-For platforms outside the ones listed above, we do not officially distribute extensions (e.g., `linux_arm64_android`).
+For platforms outside the ones listed above, we do not officially distribute extensions (e.g., `linux_arm64_android`, `openharmony_arm64`).
 
 ## Extensions Signing
 

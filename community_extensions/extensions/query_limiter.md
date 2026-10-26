@@ -31,8 +31,8 @@ docs:
 
 extension_star_count: 1
 extension_star_count_pretty: 1
-extension_download_count: 7013
-extension_download_count_pretty: 7.0k
+extension_download_count: 9402
+extension_download_count_pretty: 9.4k
 image: '/images/community_extensions/social_preview/preview_community_extension_query_limiter.png'
 layout: community_extension_doc
 ---

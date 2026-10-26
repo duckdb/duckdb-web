@@ -13,7 +13,7 @@ We are proud to release DuckDB v1.5.0, codenamed “Variegata” after the _Para
 
 In this blog post, we cover the most important updates for this release around support, features and extensions. As always, there is more: for the complete release notes, see the [release page on GitHub](https://github.com/duckdb/duckdb/releases/tag/v1.5.0).
 
-> To install the new version, please visit the [installation page]({% link install/index.html %}). Note that it can take a few days to release some extensions (e.g., the [UI]({% link docs/1.5/core_extensions/ui.md %})) client libraries (e.g., Go, R, Java) due to the extra changes and review rounds required.
+> To install the new version, please visit the [installation page]({% link install/index.html %}). Note that it can take a few days to release some extensions (e.g., the [UI]({% link docs/2.0/core_extensions/ui.md %})) client libraries (e.g., Go, R, Java) due to the extra changes and review rounds required.
 
 With this release, we will have two DuckDB releases available: v1.4 (LTS) and v1.5 (current).
 The next release – planned for September – will ship a major version, DuckDB v2.0.
@@ -26,7 +26,7 @@ For users who use DuckDB through the terminal, the highlight of the new release 
 
 #### Color Scheme
 
-We shipped a [new color palette]({% link docs/1.5/clients/cli/friendly_cli.md %}) and harmonized it with the documentation. The color palette is available in both dark mode and light mode. Both use two shades of gray, and five colors for keywords, strings, errors, functions and numbers. You can find the color palette in the [Design Manual]({% link design/manual/index.html %}#color-palette).
+We shipped a [new color palette]({% link docs/2.0/clients/cli/friendly_cli.md %}) and harmonized it with the documentation. The color palette is available in both dark mode and light mode. Both use two shades of gray, and five colors for keywords, strings, errors, functions and numbers. You can find the color palette in the [Design Manual]({% link design/manual/index.html %}#color-palette).
 
 You can customize the color scheme using the `.highlight_colors` dot command:
 
@@ -60,7 +60,7 @@ These prompts can be configured using bracket codes to have a maximum length, ru
 
 #### `.tables` and `DESCRIBE`
 
-To show the columns of an individual table, use the [`DESCRIBE` statement]({% link docs/1.5/sql/statements/describe.md %}):
+To show the columns of an individual table, use the [`DESCRIBE` statement]({% link docs/2.0/sql/statements/describe.md %}):
 
 ```sql
 «memory» D ATTACH 'https://blobs.duckdb.org/data/animals.db' AS animals_db;
@@ -78,7 +78,7 @@ To show the columns of an individual table, use the [`DESCRIBE` statement]({% li
 └──────────────────────┘
 ```
 
-The [`.tables` dot command]({% link docs/1.5/clients/cli/dot_commands.md %}) lists the attached catalogs, the schemas and tables in them, and the columns in each table.
+The [`.tables` dot command]({% link docs/2.0/clients/cli/dot_commands.md %}) lists the attached catalogs, the schemas and tables in them, and the columns in each table.
 
 ```sql
 «memory» D ATTACH 'https://blobs.duckdb.org/data/animals.db' AS animals_db;
@@ -172,7 +172,7 @@ We are planning to make the switch to the new parser in the upcoming DuckDB rele
 
 ### `VARIANT` Type
 
-DuckDB now natively supports the [`VARIANT` type](https://github.com/duckdb/duckdb/pull/18609), inspired by [Snowflake's semi-structured `VARIANT` data type](https://docs.snowflake.com/en/sql-reference/data-types-semistructured) and available [in Parquet since 2025](https://github.com/apache/parquet-format/blob/master/VariantEncoding.md). Unlike the [JSON type]({% link docs/1.5/data/json/json_type.md %}), which is physically stored as text, VARIANT stores typed, binary data. Each row in a VARIANT column is self-contained with its own type information. This leads to better compression and query performance. Here are a few examples of using `VARIANT`.
+DuckDB now natively supports the [`VARIANT` type](https://github.com/duckdb/duckdb/pull/18609), inspired by [Snowflake's semi-structured `VARIANT` data type](https://docs.snowflake.com/en/sql-reference/data-types-semistructured) and available [in Parquet since 2025](https://github.com/apache/parquet-format/blob/master/VariantEncoding.md). Unlike the [JSON type]({% link docs/2.0/data/json/json_type.md %}), which is physically stored as text, VARIANT stores typed, binary data. Each row in a VARIANT column is self-contained with its own type information. This leads to better compression and query performance. Here are a few examples of using `VARIANT`.
 
 Store different types in the same column:
 
@@ -252,7 +252,7 @@ FROM read_duckdb('numbers*.db');
 
 ### Azure Writes
 
-You can now [write to the Azure Blob or ADLSv2 storage]({% link docs/1.5/core_extensions/azure.md %}#writing-to-azure-blob-storage) using the `COPY` statement:
+You can now [write to the Azure Blob or ADLSv2 storage]({% link docs/2.0/core_extensions/azure.md %}#writing-to-azure-blob-storage) using the `COPY` statement:
 
 ```sql
 -- Write query results to a Parquet file on Blob Storage
@@ -281,7 +281,7 @@ In the meantime, please refer to the [project's README](https://github.com/duckd
 
 ### Breaking Change for Datetime Function
 
-The [`date_trunc`]({% link docs/1.5/sql/functions/timestamptz.md %}#date_truncpart-timestamptz) function, when applied to a `DATE`, now returns a `TIMESTAMP` instead of a date.
+The [`date_trunc`]({% link docs/2.0/sql/functions/timestamptz.md %}#date_truncpart-timestamptz) function, when applied to a `DATE`, now returns a `TIMESTAMP` instead of a date.
 
 ```sql
 -- v1.4.4:
@@ -312,11 +312,11 @@ We'll announce more details about these features in the blog post for DuckLake v
 
 #### Delta Lake
 
-For the [Delta Lake extension]({% link docs/1.5/core_extensions/delta.md %}), the team has focused on improving support for writes via [Unity Catalog]({% link docs/1.5/core_extensions/unity_catalog.md %}), Delta idempotent writes and table `CHECKPOINT`s.
+For the [Delta Lake extension]({% link docs/2.0/core_extensions/delta.md %}), the team has focused on improving support for writes via [Unity Catalog]({% link docs/2.0/core_extensions/unity_catalog.md %}), Delta idempotent writes and table `CHECKPOINT`s.
 
 #### Iceberg
 
-For the [Iceberg extension]({% link docs/1.5/core_extensions/iceberg/overview.md %}), the team is working on a larger release for v1.5.1. For v1.5.0, the main feature is the addition of table properties in the `CREATE TABLE` statement:
+For the [Iceberg extension]({% link docs/2.0/core_extensions/iceberg/overview.md %}), the team is working on a larger release for v1.5.1. For v1.5.0, the main feature is the addition of table properties in the `CREATE TABLE` statement:
 
 ```sql
 CREATE TABLE test_create_table (a INTEGER)
@@ -334,7 +334,7 @@ Other minor additions have been made to enable passing `EXTRA_HTTP_HEADERS` when
 
 ### Network Stack
 
-The default backend for the [httpfs extension]({% link docs/1.5/core_extensions/httpfs/overview.md %}) has changed from [`httplib`](https://github.com/yhirose/cpp-httplib) to [`curl`](https://curl.se/). As one of the most popular and well-tested open-source projects, we expect `curl` to provide long-standing stability and security for DuckDB. Regardless of the `http` library used, `openssl` is still the backing SSL library and options such as `http_timeout`, `http_retries`, etc. are still the same.
+The default backend for the [httpfs extension]({% link docs/2.0/core_extensions/httpfs/overview.md %}) has changed from [`httplib`](https://github.com/yhirose/cpp-httplib) to [`curl`](https://curl.se/). As one of the most popular and well-tested open-source projects, we expect `curl` to provide long-standing stability and security for DuckDB. Regardless of the `http` library used, `openssl` is still the backing SSL library and options such as `http_timeout`, `http_retries`, etc. are still the same.
 
 Our community has been [testing the new network stack](https://github.com/duckdb/duckdb/issues/20977) for the last few weeks. Still, if you encounter any issues, please submit them to the [`duckdb-httpfs` repository](https://github.com/duckdb/duckdb-httpfs).
 
@@ -375,7 +375,7 @@ DuckDB 2.0 will disable the single arrow syntax by default and it will only be a
 
 ### Spatial Extension
 
-The [spatial extension]({% link docs/1.5/core_extensions/spatial/overview.md %}) ships several important changes.
+The [spatial extension]({% link docs/2.0/core_extensions/spatial/overview.md %}) ships several important changes.
 
 #### Breaking Change: Flipping of Axis Order
 
@@ -411,7 +411,7 @@ DuckDB already offers extensions that integrate with many of these formats and s
 
 By moving `GEOMETRY` into DuckDB’s core, extensions can now produce and consume geometry values natively, without depending on `spatial`. While the `spatial` extension still provides most of the functions for working with geometries, the type itself becomes a shared foundation that the entire ecosystem can build on. We’ve already added `GEOMETRY` support to the Postgres scanner and GeoArrow conversion for Arrow import and export. Geometry support in additional extensions is coming soon.
 
-This change also enables deeper integration with DuckDB’s storage engine and query optimizer, unlocking new compression techniques, query optimizations, and CRS awareness capabilities that were not possible when `GEOMETRY` only existed as an extension type. This is all documented in the new [geometry page]({% link docs/1.5/sql/data_types/geometry.md %}) in the documentation, but we will highlight some below.
+This change also enables deeper integration with DuckDB’s storage engine and query optimizer, unlocking new compression techniques, query optimizations, and CRS awareness capabilities that were not possible when `GEOMETRY` only existed as an extension type. This is all documented in the new [geometry page]({% link docs/2.0/sql/data_types/geometry.md %}) in the documentation, but we will highlight some below.
 
 #### Improved Storage: WKB and Shredding
 
@@ -469,7 +469,7 @@ Please note that this is currently in the beta stage. If you have any feedback, 
 
 #### CLI for Linux with musl libc
 
-We are distributing CLI clients that work with [musl libc]({% link docs/1.5/dev/building/linux.md %}) (e.g., for Alpine Linux, commonly used in Docker images). The archives are available [on GitHub](https://github.com/duckdb/duckdb/releases/tag/v1.5.0).
+We are distributing CLI clients that work with [musl libc]({% link docs/2.0/dev/building/linux.md %}) (e.g., for Alpine Linux, commonly used in Docker images). The archives are available [on GitHub](https://github.com/duckdb/duckdb/releases/tag/v1.5.0).
 
 Note that the musl libc CLI client requires the `libstdc++`. To install this package, run:
 

@@ -62,8 +62,8 @@ docs:
 
 extension_star_count: 0
 extension_star_count_pretty: 0
-extension_download_count: 2928
-extension_download_count_pretty: 2.9k
+extension_download_count: 3456
+extension_download_count_pretty: 3.5k
 image: '/images/community_extensions/social_preview/preview_community_extension_fxmacrodata.png'
 layout: community_extension_doc
 ---

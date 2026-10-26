@@ -242,8 +242,8 @@ docs:
 
 extension_star_count: 27
 extension_star_count_pretty: 27
-extension_download_count: 10304
-extension_download_count_pretty: 10.3k
+extension_download_count: 11691
+extension_download_count_pretty: 11.7k
 image: '/images/community_extensions/social_preview/preview_community_extension_polyglot.png'
 layout: community_extension_doc
 ---

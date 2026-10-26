@@ -164,8 +164,8 @@ docs:
 
 extension_star_count: 2
 extension_star_count_pretty: 2
-extension_download_count: 11231
-extension_download_count_pretty: 11.2k
+extension_download_count: 13790
+extension_download_count_pretty: 13.8k
 image: '/images/community_extensions/social_preview/preview_community_extension_duck_dggs.png'
 layout: community_extension_doc
 ---

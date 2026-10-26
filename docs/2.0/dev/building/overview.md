@@ -101,11 +101,14 @@ Below, we provide detailed build instructions for some platforms:
 |------------------------|------------------------------------------------------------------------------------------------------|
 | `freebsd_amd64`        | FreeBSD x86_64 (AMD64)                                                                               |
 | `freebsd_arm64`        | FreeBSD AArch64 (ARM64)                                                                              |
+| `openharmony_arm64`    | OpenHarmony AArch64 (ARM64)                                                                          |
 | `wasm_mvp`             | WebAssembly Minimum Viable Product                                                                   |
 | `windows_amd64_mingw`  | Windows 10+ x86_64 (AMD64) with MinGW                                                                |
 | `windows_arm64_mingw`  | Windows 10+ AArch64 (ARM64) with MinGW                                                               |
 
 > These platforms are not covered by DuckDB's community support. For details on commercial support, see the [support policy page](https://ducklabs.com/community_support_policy#platforms).
+
+See the [OpenHarmony page]({% link docs/2.0/dev/building/openharmony.md %}) for build instructions.
 
 See also the [“Unofficial and Unsupported Platforms” page]({% link docs/2.0/dev/building/unofficial_and_unsupported_platforms.md %}) for details.
 
