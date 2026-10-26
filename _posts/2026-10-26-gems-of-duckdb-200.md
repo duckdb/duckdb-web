@@ -211,7 +211,7 @@ Not every extension is available for every DuckDB version and platform, so each 
 
 These were just a few of the smaller features in DuckDB 2.0. For everything else, see the [announcement blog post]({% post_url 2026-10-21-announcing-duckdb-200 %}), the [release notes](https://github.com/duckdb/duckdb/releases/tag/v2.0.0) and the [core extensions overview]({% link docs/2.0/core_extensions/overview.md %}). To explore what the community builds with and within DuckDB, browse the [`awesome-duckdb` repository](https://github.com/davidgasquez/awesome-duckdb), maintained by [David Gasquez](https://github.com/davidgasquez).
 
-We are also in the process of updating our [roadmap]({% link roadmap.md %}) with upcoming features. We already picked the codename for DuckDB 2.1, coming in 2027: we will name it after [Barrow's goldeneye](https://en.wikipedia.org/wiki/Barrow%27s_goldeneye) (_Bucephala islandica_), so:
+We are also in the process of updating our [roadmap]({% link roadmap.md %}) with upcoming features. We already picked the codename for DuckDB 2.1, coming in 2027: we will name it after [Barrow's goldeneye](https://en.wikipedia.org/wiki/Barrow%27s_goldeneye) _(Bucephala islandica)_, so:
 
 ```python
 with con.appender("duckdb_releases") as appender:
