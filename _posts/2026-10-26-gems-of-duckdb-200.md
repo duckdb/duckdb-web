@@ -5,66 +5,23 @@ authors:
   - The DuckDB team
 thumb: "/images/blog/thumbs/gems-of-duckdb-2-0-0.svg"
 image: "/images/blog/thumbs/gems-of-duckdb-2-0-0.png"
-excerpt: "We released DuckDB 2.0.0 last week with an improved Quack protocol and `VARIANT` support, asynchronous I/O, and many other features. In this blog post, we highlight a few smaller features that shipped in DuckDB 2.0.0 but did not make it into the release announcement."
+excerpt: "We released DuckDB 2.0.0 last week with an improved Quack protocol and `VARIANT` support, asynchronous I/O and many other features. In this blog post, we highlight a few smaller features and improvements that did not make it into the release announcement."
 tag: release
 ---
 
 Last week we released [DuckDB 2.0.0 LTS “Cinnamon Teal”]({% post_url 2026-10-21-announcing-duckdb-200 %}), our biggest feature release so far.
 The announcement covered the headline items: the Quack protocol, asynchronous I/O, the first-class `VARIANT` type, agent mode, the PEG parser and triggers.
-DuckDB 2.0.0 is now available in [all primary clients]({% link docs/2.0/clients/overview.md %}) - check the [installation page]({% link install/index.html %}) for instructions on installing or upgrading.
+DuckDB 2.0.0 is now available in [all primary clients]({% link docs/2.0/clients/overview.md %}) – check the [installation page]({% link install/index.html %}) for instructions on installing or upgrading.
 
 A release of this size ships many smaller improvements that never make it into the original announcement.
 In this post, we highlight a few of these gems.
 To find the documentation for everything that is new in 2.0, see the [“What's New in the Docs for 2.0”]({% link docs/2.0/whats_new_in_the_docs.md %}) page.
 
-## Community Extensions
-
-In the days following the release, once our CI pipelines got some breathing room, we built and deployed the [community extensions]({% link community_extensions/index.md %}) for DuckDB 2.0.0.
-
-Not every extension is available for every DuckDB version and platform, so each extension's page now includes a compatibility matrix that shows which DuckDB version and platform combinations the extension was deployed for, covering all DuckDB releases that have not reached end-of-life. For example, see the [compatibility matrix of the DuckPGQ extension]({% link community_extensions/extensions/duckpgq.md %}#compatibility-matrix):
-
-<div class="extension_compatibility_table"></div>
-
-| Platform | 1.4.4 | 1.4.5 | 1.5.5 | 1.5.6 | 2.0.0 |
-| :--- | :---: | :---: | :---: | :---: | :---: |
-| Linux AMD64 | ✅ | ❌ | ❌ | ✅ | ✅ |
-| Linux ARM64 | ✅ | ❌ | ❌ | ✅ | ✅ |
-| macOS AMD64 | ✅ | ❌ | ❌ | ✅ | ✅ |
-| macOS ARM64 | ✅ | ❌ | ❌ | ✅ | ✅ |
-| Windows AMD64 | ✅ | ❌ | ❌ | ✅ | ✅ |
-| Windows ARM64 | ❌ | ❌ | ❌ | ❌ | ❌ |
-| WebAssembly | ✅ | ❌ | ❌ | ✅ | ✅ |
-
-## Python Appender
-
-Inserting rows one at a time is inefficient and building up a giant `INSERT` statement is awkward.
-Therefore, the preferred solution for inserting large amounts of data is the [appender]({% link docs/2.0/data/appender.md %}). However, it was only available in some clients (C/C++, Go, Java, etc.) and notably absent from the Python client.
-DuckDB 2.0.0's Python client ships an [appender]({% link docs/2.0/clients/python/appender.md %}) that collects rows and writes them together in a single operation:
-
-```python
-import duckdb
-
-con = duckdb.connect()
-con.execute("CREATE TABLE duckdb_releases (version VARCHAR, codename VARCHAR);")
-
-with con.appender("duckdb_releases") as appender:
-    appender.append_row("1.4", "Andium")
-    appender.append_rows([("1.5", "Variegata"), ("2.0", "Cinnamon Teal")])
-
-con.execute("FROM duckdb_releases").fetchall()
-```
-```text
-# [('1.4', 'Andium'), ('1.5', 'Variegata'), ('2.0', 'Cinnamon Teal')]
-```
-
-The `with` block flushes the buffered rows when it exits.
-For data that already lives in a DataFrame or Arrow table, `INSERT INTO ... SELECT` is still faster, but the appender is ideal for rows that your Python code produces on the fly.
-
 ## Usability Improvements in the CLI
 
 ### Pretty-Printed `.schema`
 
-As of DuckDB 2.0, the [`.schema` dot command]({% link docs/2.0/clients/cli/dot_commands.md %}#querying-the-database-schema) pretty-prints and highlights its output by default, which makes reading the schema of a database much easier. If you prefer the earlier single-line form, for example to copy a statement verbatim, use `--no-indent` (or its alias `--no-format`):
+As of DuckDB 2.0, the [`.schema` dot command]({% link docs/2.0/clients/cli/dot_commands.md %}#querying-the-database-schema) pretty-prints and highlights its output by default, which makes reading the schema of a database much easier. If you prefer the earlier single-line form, for example, to copy a statement verbatim, use `--no-indent` (or its alias `--no-format`):
 
 ```batch
 duckdb mydata.duckdb ".schema --no-indent"
@@ -86,6 +43,32 @@ FROM shell_history()
 WHERE sql ILIKE '%copy%';
 ```
 
+## Python Appender
+
+Inserting rows one at a time is inefficient, and building up a giant `INSERT` statement is awkward.
+Therefore, the preferred solution for inserting large amounts of data has been the [appender]({% link docs/2.0/data/appender.md %}). However, it was only available in some clients (C/C++, Go, Java, etc.) and notably absent from the Python client.
+DuckDB 2.0.0's Python client ships an [appender]({% link docs/2.0/clients/python/appender.md %}) that collects rows and writes them together in a single operation:
+
+```python
+import duckdb
+
+con = duckdb.connect()
+con.execute("CREATE TABLE duckdb_releases (version VARCHAR, codename VARCHAR);")
+
+with con.appender("duckdb_releases") as appender:
+    appender.append_row("1.4", "Andium")
+    appender.append_rows([("1.5", "Variegata"), ("2.0", "Cinnamon Teal")])
+
+print(con.execute("FROM duckdb_releases").fetchall())
+```
+
+```text
+[('1.4', 'Andium'), ('1.5', 'Variegata'), ('2.0', 'Cinnamon Teal')]
+```
+
+The `with` block flushes the buffered rows when it exits.
+For data that already lives in a DataFrame or Arrow table, `INSERT INTO ... SELECT` is still faster, but the appender is ideal for rows that your Python code produces on the fly.
+
 ## Offline Documentation
 
 As a reminder, both the DuckDB documentation and the DuckDB blog are available [for offline browsing]({% link docs/2.0/guides/offline-copy.md %}):
@@ -97,9 +80,9 @@ As a reminder, both the DuckDB documentation and the DuckDB blog are available [
 
 You can download them to your e-reader (we are not affiliated with any particular brand!) or read them on your laptop on the go.
 You can also use them to supply context to LLMs and coding agents.
-Note that the documentation is approximately 5 MB, so it is larger than the context window of contemporary LLMs, therefore fully ingesting it is not practical – point them towards specific segments or let them figure out which part they need.
+At approximately 5 MB, the documentation exceeds the context window of most LLMs, so instead of ingesting it in full, point them to specific sections or let them find the parts they need.
 
-## Unsung DuckDB 2.0 Features
+## Unsung SQL Features
 
 ### `SHOW` for Configuration Settings
 
@@ -114,8 +97,7 @@ SHOW threads;
 |---------|
 | 42      |
 
-
-This is much more succinct than the previous formulation that used the [`current_setting` function]({% link docs/2.0/configuration/overview.md %}) (e.g., `SELECT current_setting('threads') AS threads;`).
+This is much more succinct than the previous formulation that used the [`current_setting` function]({% link docs/2.0/sql/functions/utility.md %}#current_settingsetting_name) (e.g., `SELECT current_setting('threads') AS threads;`).
 
 When a table and a setting share a name, DuckDB prioritizes the table by default. You can control this with the `show_behavior` setting, which takes `'auto'` (the default), `'table'` or `'setting'`.
 
@@ -171,7 +153,7 @@ EXECUTE compute;
 |-------:|
 | 420    |
 
-An explicit argument always takes precedence over the variable, and because the fallback is resolved at execution time, changing a variable and re-executing picks up the new value.
+An explicit argument always takes precedence over the variable, and because the fallback is resolved at execution time, changing a variable and re-executing the statement picks up the new value.
 
 ### Custom Partition Paths
 
@@ -207,14 +189,33 @@ COPY (SELECT 'POINT(0 1)'::GEOMETRY AS geom, 10 AS my_field)
 
 The optional `ID_COLUMN` and `GEOMETRY_COLUMN` options pick which columns become the feature `id` and geometry. Reading GeoJSON is covered on the [Loading JSON]({% link docs/2.0/data/json/loading_json.md %}#geojson) page.
 
-## On the Interweb
+## Compatibility Matrix for Community Extensions
 
-The ecosystem around DuckDB keeps growing: many projects are built both with DuckDB and within DuckDB. The community-driven [`awesome-duckdb` repository](https://github.com/davidgasquez/awesome-duckdb), maintained by [David Gasquez](https://github.com/davidgasquez), collects these extensions, integrations and articles in one place and is a great starting point for exploring what people are building.
+In the days following the release, once our CI pipelines got some breathing room, we built and deployed the [community extensions]({% link community_extensions/index.md %}) for DuckDB 2.0.0.
+
+Not every extension is available for every DuckDB version and platform, so each extension's page now includes a compatibility matrix that shows which DuckDB version and platform combinations the extension was deployed for, covering recent DuckDB releases. For example, see the [compatibility matrix of the DuckPGQ extension]({% link community_extensions/extensions/duckpgq.md %}#compatibility-matrix):
+
+<div class="extension_compatibility_table"></div>
+
+| Platform | 1.4.4 | 1.4.5 | 1.5.5 | 1.5.6 | 2.0.0 |
+| :--- | :---: | :---: | :---: | :---: | :---: |
+| Linux AMD64 | ✅ | ❌ | ❌ | ✅ | ✅ |
+| Linux ARM64 | ✅ | ❌ | ❌ | ✅ | ✅ |
+| macOS AMD64 | ✅ | ❌ | ❌ | ✅ | ✅ |
+| macOS ARM64 | ✅ | ❌ | ❌ | ✅ | ✅ |
+| Windows AMD64 | ✅ | ❌ | ❌ | ✅ | ✅ |
+| Windows ARM64 | ❌ | ❌ | ❌ | ❌ | ❌ |
+| WebAssembly | ✅ | ❌ | ❌ | ✅ | ✅ |
 
 ## Summary
 
-These were just a few of the smaller features in DuckDB 2.0. For everything else, see the [announcement blog post]({% post_url 2026-10-21-announcing-duckdb-200 %}), the [release notes](https://github.com/duckdb/duckdb/releases/tag/v2.0.0) and the [core extensions overview]({% link docs/2.0/core_extensions/overview.md %}).
+These were just a few of the smaller features in DuckDB 2.0. For everything else, see the [announcement blog post]({% post_url 2026-10-21-announcing-duckdb-200 %}), the [release notes](https://github.com/duckdb/duckdb/releases/tag/v2.0.0) and the [core extensions overview]({% link docs/2.0/core_extensions/overview.md %}). To explore what the community builds with and within DuckDB, browse the [`awesome-duckdb` repository](https://github.com/davidgasquez/awesome-duckdb), maintained by [David Gasquez](https://github.com/davidgasquez).
 
-We are also in the process of upgrading our [roadmap]({% link roadmap.md %}) for upcoming features. Stay tuned.
+We are also in the process of updating our [roadmap]({% link roadmap.md %}) with upcoming features. We already picked the codename for DuckDB 2.1, coming in 2027: we will name it after [Barrow's goldeneye](https://en.wikipedia.org/wiki/Barrow%27s_goldeneye) (_Bucephala islandica_), so:
 
-As always, our thanks go to the contributors who made this release possible!
+```python
+with con.appender("duckdb_releases") as appender:
+    appender.append_row("2.1", "Islandica")
+```
+
+Stay tuned for more, and, as always, our thanks go to the contributors who made this release possible!
