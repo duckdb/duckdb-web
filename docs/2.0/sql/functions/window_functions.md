@@ -159,9 +159,18 @@ The table below shows the available general window functions.
 
 <div class="nostroke_table"></div>
 
-| **Description** | The relative rank of the current row: `(rank() - 1) / (total partition rows - 1)`. If an `ORDER BY` clause is specified, the relative rank is computed within the frame using the provided ordering instead of the frame ordering. |
+| **Description** | The relative rank of the current row: `(rank() - 1) / (total partition rows - 1)`. If an `ORDER BY` clause is specified, the relative rank is computed within the frame using the provided ordering instead of the frame ordering. For a partition with a single row, `percent_rank` returns `0`. |
 | **Return type** | `DOUBLE` |
 | **Example** | `percent_rank()` |
+
+```sql
+SELECT percent_rank() OVER (ORDER BY x) AS percent_rank
+FROM (VALUES (42)) AS t(x);
+```
+
+```text
+0.0
+```
 
 #### `rank([ORDER BY ordering])`
 
