@@ -25,19 +25,15 @@ This section lists the features that the DuckDB team plans to work on **in the c
 ### Coming Soon
 
 * Stabilizing the [C API v2]({% link docs/2.0/clients/c/overview.md %}) and the [C extension API](https://github.com/duckdb/extension-template-c)
-* [`MATCH_RECOGNIZE`](https://github.com/duckdb/duckdb/discussions/3994) for pattern matching – planned for DuckDB 2.1
-* [Support for PL/SQL stored procedures](https://github.com/duckdb/duckdb/discussions/8104) (see Denis Hirn's [DuckPL talk]({% link _library/2026-01-30-duckpl-a-procedural-language-in-duckdb.md %})) – planned for DuckDB 2.1
+* [`MATCH_RECOGNIZE`](https://github.com/duckdb/duckdb/discussions/3994) for pattern matching – in flight for DuckDB 2.1
+* [Support for PL/SQL stored procedures](https://github.com/duckdb/duckdb/discussions/8104) (see Denis Hirn's [DuckPL talk]({% link _library/2026-01-30-duckpl-a-procedural-language-in-duckdb.md %})) – in flight for DuckDB 2.1
 
 ### Major Features
 
 * Rust support for extensions
 * Go support for extensions
-* Continuous improvements to [lakehouse formats]({% link docs/2.0/lakehouse_formats.md %}):
-  [Iceberg]({% link docs/2.0/core_extensions/iceberg/overview.md %}),
-  [Delta]({% link docs/2.0/core_extensions/delta.md %}),
-  [Lance]({% link docs/2.0/core_extensions/lance.md %})
-  and
-  [DuckLake](https://ducklake.select/)
+* Continuous improvements to [support for lakehouse formats]({% link docs/2.0/lakehouse_formats.md %})
+* [Materialized views](https://github.com/duckdb/duckdb/discussions/3638)
 * [Parallel Python UDFs](https://github.com/duckdb/duckdb-python/issues/718)
 * macOS installer
 * Windows installer
@@ -49,7 +45,6 @@ This section lists the features that the DuckDB team plans to work on **in the c
 * Sorting-aware optimizations
 * Better filter cardinality estimation using automatically maintained table samples
 * [`ALTER TABLE` support for adding foreign keys](https://github.com/duckdb/duckdb/issues/57)
-* [Materialized views](https://github.com/duckdb/duckdb/discussions/3638)
 * [XML read support](https://github.com/duckdb/duckdb/discussions/9547)
 * Guaranteeing [FIPS](https://en.wikipedia.org/wiki/FIPS_140-2)-compliance for the [database encryption]({% link docs/2.0/sql/statements/attach.md %}#database-encryption)
 * Improvements of query profiling (especially for concurrently running queries)
