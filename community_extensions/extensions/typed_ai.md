@@ -147,8 +147,8 @@ docs:
 
 extension_star_count: 2
 extension_star_count_pretty: 2
-extension_download_count: 4592
-extension_download_count_pretty: 4.6k
+extension_download_count: 5703
+extension_download_count_pretty: 5.7k
 image: '/images/community_extensions/social_preview/preview_community_extension_typed_ai.png'
 layout: community_extension_doc
 ---

@@ -73,8 +73,8 @@ docs:
 
 extension_star_count: 1
 extension_star_count_pretty: 1
-extension_download_count: 6598
-extension_download_count_pretty: 6.6k
+extension_download_count: 9365
+extension_download_count_pretty: 9.4k
 image: '/images/community_extensions/social_preview/preview_community_extension_gorz.png'
 layout: community_extension_doc
 ---
