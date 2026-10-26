@@ -154,7 +154,7 @@ CREATE SCHEMA finance.reports;
 CREATE TABLE finance.reports.q3 (revenue DECIMAL);
 ```
 
-The new **variable syntax** ([#21194](https://github.com/duckdb/duckdb/pull/21194)) lets you write `$x` anywhere an expression is allowed, no more [`getvariable(...)` verbiage]({% link docs/1.5/sql/functions/utility.md %}#getvariablevariable_name):
+The new **variable syntax** ([#21194](https://github.com/duckdb/duckdb/pull/21194)) lets you write `$x` anywhere an expression is allowed, no more [`getvariable(...)` verbiage]({% link docs/2.0/sql/functions/utility.md %}#getvariablevariable_name):
 
 ```sql
 SET VARIABLE threshold = 100;
@@ -198,7 +198,7 @@ Thanks to asynchronous access, the I/O layer now scales independently from the q
 
 As with every release, a lot of work went into making your existing queries faster without you doing anything. To pick some highlights: partial aggregates are now pushed below joins ([#22572](https://github.com/duckdb/duckdb/pull/22572)) and redundant aggregations are reused ([#24543](https://github.com/duckdb/duckdb/pull/24543)), the recursive CTE engine has been rewritten ([#22211](https://github.com/duckdb/duckdb/pull/22211)), aggregations now spill to disk when they outgrow memory ([#24499](https://github.com/duckdb/duckdb/pull/24499)), and the Windows CLI got approximately 2.2× faster at multi-threaded result materialization ([#24036](https://github.com/duckdb/duckdb/pull/24036)).
 
-How much faster can this get? Here is a microbenchmark you can run on a laptop: single-source reachability over a graph with one million edges, written as a plain [recursive CTE]({% link docs/1.5/sql/query_syntax/with.md %}).
+How much faster can this get? Here is a microbenchmark you can run on a laptop: single-source reachability over a graph with one million edges, written as a plain [recursive CTE]({% link docs/2.0/sql/query_syntax/with.md %}).
 
 ```sql
 CREATE TABLE edges AS
@@ -223,7 +223,7 @@ As you can see, DuckDB v2.0 is about 40× faster (!) for the same recursive quer
 
 > Update We published a blog post on [how we are speeding up recursive CTEs in DuckDB v2.0]({% post_url 2026-08-25-how-duckdb-runs-recursive-ctes-faster %}).
 
-Row-group pruning has been massively expanded: [min-max indexes (zone maps)]({% link docs/1.5/sql/indexes.md %}#min-max-index-zonemap) and [Parquet Bloom filters]({% post_url 2025-03-07-parquet-bloom-filters-in-duckdb %}) now skip data for structs, lists, decimals, UUIDs, `IN` filters, and even function predicates:
+Row-group pruning has been massively expanded: [min-max indexes (zone maps)]({% link docs/2.0/sql/indexes.md %}#min-max-index-zonemap) and [Parquet Bloom filters]({% post_url 2025-03-07-parquet-bloom-filters-in-duckdb %}) now skip data for structs, lists, decimals, UUIDs, `IN` filters, and even function predicates:
 
 ```sql
 -- these now prune row groups instead of scanning them:
@@ -232,11 +232,11 @@ SELECT * FROM t WHERE substr(code, 1, 3) = 'NL-';
 SELECT * FROM 'data/*.parquet' WHERE id IN (1, 5, 9);
 ```
 
-Query planning also becomes **partition-aware** ([#22336](https://github.com/duckdb/duckdb/pull/22336)). [Lakehouse formats]({% link docs/1.5/lakehouse_formats.md %}) (DuckLake, Iceberg and plain Hive-partitioned Parquet on S3) are all partitioned, and exploiting that partitioning is often the difference between scanning a dataset and skipping most of it. In v2.0, the planner and optimizer take full advantage of existing partitioning, and partitioned writes have been reworked as well ([#22225](https://github.com/duckdb/duckdb/pull/22225), [#22620](https://github.com/duckdb/duckdb/pull/22620)).
+Query planning also becomes **partition-aware** ([#22336](https://github.com/duckdb/duckdb/pull/22336)). [Lakehouse formats]({% link docs/2.0/lakehouse_formats.md %}) (DuckLake, Iceberg and plain Hive-partitioned Parquet on S3) are all partitioned, and exploiting that partitioning is often the difference between scanning a dataset and skipping most of it. In v2.0, the planner and optimizer take full advantage of existing partitioning, and partitioned writes have been reworked as well ([#22225](https://github.com/duckdb/duckdb/pull/22225), [#22620](https://github.com/duckdb/duckdb/pull/22620)).
 
 ## 7. Storage Format v2.0
 
-DuckDB v2.0 bumps the default [storage format version]({% link docs/1.5/internals/storage.md %}) to v2.0.0 ([#22875](https://github.com/duckdb/duckdb/pull/22875)).
+DuckDB v2.0 bumps the default [storage format version]({% link docs/2.0/internals/storage.md %}) to v2.0.0 ([#22875](https://github.com/duckdb/duckdb/pull/22875)).
 
 Column metadata is now loaded lazily ([#22333](https://github.com/duckdb/duckdb/pull/22333)), so wide tables open faster too. The `DICT_FSST` string compression method is enabled by default ([#23733](https://github.com/duckdb/duckdb/pull/23733)), deletes are stored compactly ([#24336](https://github.com/duckdb/duckdb/pull/24336)), and the storage layer performs much stronger corruption validation on read. In short: databases with big indexes and wide tables open faster and use far less memory. The new storage format also allows checkpoint vacuuming to compact tables with ART indexes by incrementally remapping entries whose row IDs change, avoiding a full index rebuild ([#23653](https://github.com/duckdb/duckdb/pull/23653)).
 
@@ -268,7 +268,7 @@ Besides being much smaller and easier to keep up to date, the new implementation
 
 ## 10. Write Extensions Once, Host Them Yourself
 
-Extensions are one of the best things about DuckDB, but today, most of them, including our own, build against the [unstable C++ API]({% link docs/1.5/clients/cpp.md %}). Extension authors are required to rebuild and publish their extensions for every DuckDB release, even if the extension itself does not change. This is often a non-trivial operation for the extension author and a non-trivial coordination effort for the DuckDB team. Not rebuilding an extension means it can't be installed on the latest version of DuckDB.
+Extensions are one of the best things about DuckDB, but today, most of them, including our own, build against the [unstable C++ API]({% link docs/2.0/clients/cpp.md %}). Extension authors are required to rebuild and publish their extensions for every DuckDB release, even if the extension itself does not change. This is often a non-trivial operation for the extension author and a non-trivial coordination effort for the DuckDB team. Not rebuilding an extension means it can't be installed on the latest version of DuckDB.
 
 ### Developing Extensions
 

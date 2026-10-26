@@ -15,7 +15,7 @@ DuckDB can read all three formats, so you can inspect every layer with plain SQL
 
 ## Getting Started
 
-You need DuckDB with the [`iceberg` extension]({% link docs/1.5/core_extensions/iceberg/overview.md %}) and an [Iceberg REST catalog](https://iceberg.apache.org/) to attach to. The [catalogs page]({% link docs/1.5/core_extensions/iceberg/catalogs.md %}) has instructions for catalogs such as [Apache Polaris](https://polaris.apache.org/), [Lakekeeper](https://lakekeeper.io/) and Amazon S3 Tables.
+You need DuckDB with the [`iceberg` extension]({% link docs/2.0/core_extensions/iceberg/overview.md %}) and an [Iceberg REST catalog](https://iceberg.apache.org/) to attach to. The [catalogs page]({% link docs/2.0/core_extensions/iceberg/catalogs.md %}) has instructions for catalogs such as [Apache Polaris](https://polaris.apache.org/), [Lakekeeper](https://lakekeeper.io/) and Amazon S3 Tables.
 
 A catalog is needed because the files on their own cannot tell you which version of the table is current. An Iceberg table writes a new `metadata.json` on every change and never overwrites the old one. The catalog holds the one piece of mutable state: a pointer to the current metadata file. When you query the table, DuckDB asks the catalog for that pointer first, then follows the tree of files down from there.
 
@@ -36,7 +36,7 @@ Each part of that command maps to something DuckDB relies on later:
 * `-v /data/lake:/data/lake` mounts a host directory into the container, so the metadata, manifest and Parquet files survive after the container stops and you can read them directly.
 * `-e CATALOG_WAREHOUSE=/data/lake` tells the catalog where to write those files, which is why every path in the output below begins with `/data/lake`.
 
-> Note Run the examples below in the local DuckDB [CLI]({% link docs/1.5/clients/cli/overview.md %}), not in the browser-based [DuckDB Shell](https://shell.duckdb.org/), because a page served from the web cannot reach a catalog on your own `localhost`.
+> Note Run the examples below in the local DuckDB [CLI]({% link docs/2.0/clients/cli/overview.md %}), not in the browser-based [DuckDB Shell](https://shell.duckdb.org/), because a page served from the web cannot reach a catalog on your own `localhost`.
 
 With the fixture running, attach it like this:
 
@@ -54,7 +54,7 @@ This opens a catalog connection named `lake` that you query like any attached da
 * `ENDPOINT` is the address published by the `-p` flag above.
 * `AUTHORIZATION_TYPE 'none'` matches the fixture, which expects no credentials.
 * The first argument is the warehouse name. The fixture serves a single warehouse, so any name works.
-* With object storage, the paths in the output below start with [`s3://`]({% link docs/1.5/core_extensions/httpfs/s3api.md %}) instead of `/data/lake`, but everything else is the same.
+* With object storage, the paths in the output below start with [`s3://`]({% link docs/2.0/core_extensions/httpfs/s3api.md %}) instead of `/data/lake`, but everything else is the same.
 
 ## A Table with History
 
@@ -90,7 +90,7 @@ Each of the two inserts and the delete commits on its own. A write does not chan
 
 The commit names the snapshot it expects to replace, so two writers that start from the same snapshot cannot both succeed. The first commit moves the pointer, and the second is rejected, because the snapshot it meant to replace is no longer current. The rejected write then retries on top of the new snapshot. When run in sequence from a single session, the three statements here never conflict, because each one starts from the snapshot the previous one committed.
 
-The table now has 11,000 rows: the first insert added 9,000, the second added 3,000, and the delete removed the 1,000 rows of October 2 that had a delay of 4 minutes. Each of the three statements created a new [snapshot](https://iceberg.apache.org/spec/#snapshots), which [`iceberg_snapshots`]({% link docs/1.5/core_extensions/iceberg/iceberg_functions.md %}#iceberg_snapshots) lists as follows:
+The table now has 11,000 rows: the first insert added 9,000, the second added 3,000, and the delete removed the 1,000 rows of October 2 that had a delay of 4 minutes. Each of the three statements created a new [snapshot](https://iceberg.apache.org/spec/#snapshots), which [`iceberg_snapshots`]({% link docs/2.0/core_extensions/iceberg/iceberg_functions.md %}#iceberg_snapshots) lists as follows:
 
 ```sql
 SELECT sequence_number, snapshot_id, operation
@@ -143,7 +143,7 @@ FROM iceberg_load_table_response(lake.demo.services);
 
 The file name starts with `00003` because this is the fourth version of the metadata, counting from `00000` when the table was created.
 
-It is a JSON document, so [`read_json`]({% link docs/1.5/data/json/loading_json.md %}) can read it. We store the location in a [variable]({% link docs/1.5/sql/statements/set_variable.md %}) to keep the queries short:
+It is a JSON document, so [`read_json`]({% link docs/2.0/data/json/loading_json.md %}) can read it. We store the location in a [variable]({% link docs/2.0/sql/statements/set_variable.md %}) to keep the queries short:
 
 ```sql
 SET VARIABLE metadata_file = (
@@ -201,7 +201,7 @@ In the last row, after the delete, `total-records` is still 12,000 and there are
 
 ## Layer 2: The Manifest List
 
-Each snapshot points to a *manifest list*, an Avro file that lists the manifests making up that snapshot. The [`avro` extension]({% link docs/1.5/core_extensions/avro.md %}) reads it with `read_avro`. We take the manifest list of the latest snapshot:
+Each snapshot points to a *manifest list*, an Avro file that lists the manifests making up that snapshot. The [`avro` extension]({% link docs/2.0/core_extensions/avro.md %}) reads it with `read_avro`. We take the manifest list of the latest snapshot:
 
 ```sql
 SET VARIABLE manifest_list = (
@@ -265,7 +265,7 @@ ORDER BY file;
 
 `status = 1` means the file was added in the snapshot that wrote the manifest. `content` is 0 for a data file and 1 for a position delete file. The partition value is stored per file, which is what lets a reader skip files without opening them.
 
-The extension has a function that does this for you. [`iceberg_metadata`]({% link docs/1.5/core_extensions/iceberg/iceberg_functions.md %}#iceberg_metadata) follows the current snapshot through the manifest list and the manifests and returns one row per file:
+The extension has a function that does this for you. [`iceberg_metadata`]({% link docs/2.0/core_extensions/iceberg/iceberg_functions.md %}#iceberg_metadata) follows the current snapshot through the manifest list and the manifests and returns one row per file:
 
 ```sql
 SELECT
@@ -293,7 +293,7 @@ Reading the Avro files directly is useful when you want to see fields that the f
 
 ## Column Statistics
 
-The manifests also store, for every data file, the lower and upper bound of each column. [`iceberg_column_stats`]({% link docs/1.5/core_extensions/iceberg/iceberg_functions.md %}#iceberg_column_stats) returns them in a readable form:
+The manifests also store, for every data file, the lower and upper bound of each column. [`iceberg_column_stats`]({% link docs/2.0/core_extensions/iceberg/iceberg_functions.md %}#iceberg_column_stats) returns them in a readable form:
 
 ```sql
 SELECT
@@ -325,7 +325,7 @@ The ranges for the first three days overlap almost completely, because the rows 
 
 ## Partition Statistics
 
-The bounds above are per column, per data file. For the partition column there is a coarser view, one row per manifest, that the manifest list keeps so a reader can skip an entire manifest before opening any of its files. [`iceberg_partition_stats`]({% link docs/1.5/core_extensions/iceberg/iceberg_functions.md %}#iceberg_partition_stats) returns it:
+The bounds above are per column, per data file. For the partition column there is a coarser view, one row per manifest, that the manifest list keeps so a reader can skip an entire manifest before opening any of its files. [`iceberg_partition_stats`]({% link docs/2.0/core_extensions/iceberg/iceberg_functions.md %}#iceberg_partition_stats) returns it:
 
 ```sql
 SELECT
@@ -377,7 +377,7 @@ LIMIT 5;
 └──────────────────────────────────────────────────────────────────────┴───────┘
 ```
 
-This is how the extension implements `DELETE` and `UPDATE`: it leaves the data file alone and records the positions of the deleted rows, a strategy called [merge-on-read]({% link docs/1.5/core_extensions/iceberg/writing_to_iceberg.md %}#limitations-for-update-and-delete).
+This is how the extension implements `DELETE` and `UPDATE`: it leaves the data file alone and records the positions of the deleted rows, a strategy called [merge-on-read]({% link docs/2.0/core_extensions/iceberg/writing_to_iceberg.md %}#limitations-for-update-and-delete).
 
 Every reader then has to combine the two files to get the correct rows. Writes are cheap, and reads pay a small cost, which grows with the number of delete files. We set `hive_partitioning = false` because the `service_date=...` directory would otherwise be added as an extra column.
 

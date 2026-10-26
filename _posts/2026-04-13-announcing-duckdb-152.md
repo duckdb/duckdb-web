@@ -24,7 +24,7 @@ We published a [detailed blog post on the DuckLake site](https://ducklake.select
 
 ### Iceberg
 
-The [Iceberg extension]({% link docs/1.5/core_extensions/iceberg/overview.md %}) ships a number of new features. It now supports the following:
+The [Iceberg extension]({% link docs/2.0/core_extensions/iceberg/overview.md %}) ships a number of new features. It now supports the following:
 
 * `GEOMETRY` type
 * `ALTER TABLE` statement
@@ -41,10 +41,10 @@ The test suite has uncovered a bug that was triggered by `INSERT INTO` statement
 
 ## New Online Shell
 
-The online [WebAssembly]({% link docs/1.5/clients/wasm/overview.md %}) shell at [`shell.duckdb.org`](https://shell.duckdb.org/) received a complete overhaul.
+The online [WebAssembly]({% link docs/2.0/clients/wasm/overview.md %}) shell at [`shell.duckdb.org`](https://shell.duckdb.org/) received a complete overhaul.
 A highlight of the new shell is the ability to store and list files using the `.files` dot command and its variants.
 
-Using the file storage feature, you can turn your browser session into workbench: you can drag-and-drop files from your local file system to upload them, create new ones using DuckDB's [`COPY ... TO` statement]({% link docs/1.5/sql/statements/copy.md %}#copy--to) and download the results. For more information on this feature, use the `.help` command.
+Using the file storage feature, you can turn your browser session into workbench: you can drag-and-drop files from your local file system to upload them, create new ones using DuckDB's [`COPY ... TO` statement]({% link docs/2.0/sql/statements/copy.md %}#copy--to) and download the results. For more information on this feature, use the `.help` command.
 
 <!--
 <img src="{% link images/blog/online-shell-example.png %}" alt="Example use of the new online shell at shell.duckdb.org" width="800" />
