@@ -17,10 +17,29 @@ A release of this size ships many smaller improvements that never make it into t
 In this post, we highlight a few of these gems.
 To find the documentation for everything that is new in 2.0, see the [“What's New in the Docs for 2.0”]({% link docs/2.0/whats_new_in_the_docs.md %}) page.
 
-## The Python Appender
+## Community Extensions
+
+In the days following the release, once our CI pipelines got some breathing room, we built and deployed the [community extensions]({% link community_extensions/index.md %}) for DuckDB 2.0.0.
+
+Not every extension is available for every DuckDB version and platform, so each extension's page now includes a compatibility matrix that shows which DuckDB version and platform combinations the extension was deployed for, covering all DuckDB releases that have not reached end-of-life. For example, see the [compatibility matrix of the DuckPGQ extension]({% link community_extensions/extensions/duckpgq.md %}#compatibility-matrix):
+
+<div class="extension_compatibility_table"></div>
+
+| Platform | 1.4.4 | 1.4.5 | 1.5.5 | 1.5.6 | 2.0.0 |
+| :--- | :---: | :---: | :---: | :---: | :---: |
+| Linux AMD64 | ✅ | ❌ | ❌ | ✅ | ✅ |
+| Linux ARM64 | ✅ | ❌ | ❌ | ✅ | ✅ |
+| macOS AMD64 | ✅ | ❌ | ❌ | ✅ | ✅ |
+| macOS ARM64 | ✅ | ❌ | ❌ | ✅ | ✅ |
+| Windows AMD64 | ✅ | ❌ | ❌ | ✅ | ✅ |
+| Windows ARM64 | ❌ | ❌ | ❌ | ❌ | ❌ |
+| WebAssembly | ✅ | ❌ | ❌ | ✅ | ✅ |
+
+## Python Appender
 
 Inserting rows one at a time is inefficient and building up a giant `INSERT` statement is awkward.
-The [Python appender]({% link docs/2.0/clients/python/appender.md %}) collects rows and writes them together in a single operation:
+Therefore, the preferred solution for inserting large amounts of data is the [appender]({% link docs/2.0/data/appender.md %}). However, it was only available in some clients (C/C++, Go, Java, etc.) and notably absent from the Python client.
+DuckDB 2.0.0's Python client ships an [appender]({% link docs/2.0/clients/python/appender.md %}) that collects rows and writes them together in a single operation:
 
 ```python
 import duckdb
@@ -40,24 +59,6 @@ con.execute("FROM duckdb_releases").fetchall()
 
 The `with` block flushes the buffered rows when it exits.
 For data that already lives in a DataFrame or Arrow table, `INSERT INTO ... SELECT` is still faster, but the appender is ideal for rows that your Python code produces on the fly.
-
-## Community Extensions
-
-In the days following the release, once our CI pipelines go some breathing room, we built and deployed the [community extensions]({% link community_extensions/index.md %}) for DuckDB 2.0.0.
-
-Not every extension is available for every DuckDB version and platform, so each extension's page now includes a compatibility matrix that shows which DuckDB version and platform combinations the extension was deployed for, covering all DuckDB releases that have not reached end-of-life. For example, see the [compatibility matrix of the DuckPGQ extension]({% link community_extensions/extensions/duckpgq.md %}#compatibility-matrix):
-
-<div class="extension_compatibility_table"></div>
-
-| Platform | 1.4.4 | 1.4.5 | 1.5.5 | 1.5.6 | 2.0.0 |
-| :--- | :---: | :---: | :---: | :---: | :---: |
-| Linux AMD64 | ✅ | ❌ | ❌ | ✅ | ✅ |
-| Linux ARM64 | ✅ | ❌ | ❌ | ✅ | ✅ |
-| macOS AMD64 | ✅ | ❌ | ❌ | ✅ | ✅ |
-| macOS ARM64 | ✅ | ❌ | ❌ | ✅ | ✅ |
-| Windows AMD64 | ✅ | ❌ | ❌ | ✅ | ✅ |
-| Windows ARM64 | ❌ | ❌ | ❌ | ❌ | ❌ |
-| WebAssembly | ✅ | ❌ | ❌ | ✅ | ✅ |
 
 ## Usability Improvements in the CLI
 
