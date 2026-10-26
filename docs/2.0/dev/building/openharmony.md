@@ -64,5 +64,7 @@ cmake --build build/openharmony --parallel
 - No prebuilt extensions are distributed for `openharmony_arm64`; build the extensions you
   need from source. `INSTALL <extension>` reports that no extension is available for this
   platform.
+- Loadable extensions built with the CMake build are re-signed after DuckDB appends
+  its metadata footer, so they can be `dlopen`ed on OpenHarmony.
 - The unittest binary is linked against the static DuckDB library on OpenHarmony because
   the shared library does not export the internal symbols used by the test helpers.
