@@ -88,7 +88,7 @@ In the coming releases, we will extend the manuals to cover more features such a
 
 ### Calculator
 
-You can use the CLI as a calculator. Simply type the expression ended with a semicolon – no more typing into your browser's address bar!
+You can use the CLI as a calculator. Simply type the expression followed by a semicolon – no more typing into your browser's address bar!
 
 ```sql
 6*7;
@@ -151,6 +151,8 @@ This is much more succinct than the previous formulation that used the [`current
 
 When a table and a setting share a name, DuckDB prioritizes the table by default. You can control this with the `show_behavior` setting, which takes `'auto'` (the default), `'table'` or `'setting'`.
 
+> Deprecated Using `SHOW` to describe a table, view or query (e.g., `SHOW my_table`) is deprecated as of DuckDB 2.0 and prints a warning. Use [`DESCRIBE`]({% link docs/2.0/sql/statements/describe.md %}) instead.
+
 ### `CREATE SECURE VIEW` Statement
 
 Regular views can leak information about their underlying tables through statistics and query plans, for example via the `stats()` function. The new [`SECURE VIEW`]({% link docs/2.0/sql/statements/create_view.md %}#examples) does not:
@@ -162,7 +164,7 @@ CREATE SECURE VIEW users AS
     WHERE access_level = 'standard';
 ```
 
-A secure view returns `NULL` for those internals and shows a `Secure View` node in `EXPLAIN ANALYZE`, so query plans cannot be used to reconstruct the rows that the view filters out.
+On a secure view, `stats()` returns only uninformative statistics and `EXPLAIN ANALYZE` shows a single `Secure View` node instead of the view's query plan, so neither can be used to reconstruct the rows that the view filters out.
 
 ### Options in `regexp_extract`
 
@@ -207,22 +209,65 @@ An explicit argument always takes precedence over the variable, and because the 
 
 ### Custom Partition Paths
 
-When writing [partitioned data]({% link docs/2.0/data/partitioning/partitioned_writes.md %}), the `PARTITION_BY` clause writes each partition to a `col=value` subdirectory following the Hive convention. The new [`PARTITION_PATH` option]({% link docs/2.0/data/partitioning/partitioned_writes.md %}#custom-partition-paths) gives you full control over the subdirectory that each partition is written to, using an expression over the partitioning columns:
+When writing [partitioned data]({% link docs/2.0/data/partitioning/partitioned_writes.md %}), the `PARTITION_BY` clause writes each partition to a `col=value` subdirectory following the Hive convention. The new [`PARTITION_PATH` option]({% link docs/2.0/data/partitioning/partitioned_writes.md %}#custom-partition-paths) gives you full control over the subdirectory that each partition is written to, using an expression over the partitioning columns.
+Let's suppose you have a table named `orders` that stores customer orders.
+
+<details markdown='1'>
+<summary markdown='span'>
+Click here to see the code to create the `orders` table.
+</summary>
+```sql
+CREATE TABLE orders AS
+FROM (VALUES
+    (1, 2018, 3, 120.00),
+    (2, 2018, 11, 75.50),
+    (3, 2019, 6, NULL),
+    (4, 2019, 6, 310.25),
+    (5, 2020, 9, 18.75),
+    (6, 2021, 2, 42.00),
+    (7, 2021, 2, 99.90),
+    (8, 2023, 12, 260.00)
+) t(order_id, year, month, amount);
+```
+</details>
+
+Let's partition this table based on year:
 
 ```sql
 COPY orders TO 'orders'
     (FORMAT parquet,
      PARTITION_BY (year),
      PARTITION_PATH CASE
-         WHEN year < 2020 THEN 'archive'
+         WHEN year < 2020 THEN 'archive/' || year
          ELSE 'recent/' || year
      END);
 ```
 
-The expression is evaluated once per partition, and its result must be a relative path that does not contain `..` segments. A companion [`ORDER_BY` copy option]({% link docs/2.0/data/partitioning/partitioned_writes.md %}#sorting-rows-within-partitions) sorts the rows before they are written, within each partition when combined with `PARTITION_BY`:
+This will result in the following directory structure:
+
+```batch
+tree orders
+```
+```text
+orders
+├── archive
+│   ├── 2018
+│   │   └── data_0.parquet
+│   └── 2019
+│       └── data_0.parquet
+└── recent
+    ├── 2020
+    │   └── data_0.parquet
+    ├── 2021
+    │   └── data_0.parquet
+    └── 2023
+        └── data_0.parquet
+```
+
+The expression is evaluated once per partition, and its result must be a relative path that does not contain `..` segments. Each partition must map to a distinct path. A companion [`ORDER_BY` copy option]({% link docs/2.0/data/partitioning/partitioned_writes.md %}#sorting-rows-within-partitions) sorts the rows before they are written. When combined with `PARTITION_BY`, the rows are sorted within each partition:
 
 ```sql
-COPY orders TO 'orders'
+COPY orders TO 'orders_sorted'
     (FORMAT parquet,
      PARTITION_BY (year, month),
      ORDER_BY (amount DESC NULLS LAST));
@@ -281,4 +326,4 @@ with con.appender("duckdb_releases") as appender:
 ```
 
 As always, we are grateful to the contributors who made this release possible.
-Thank you all!
+Thank you!
