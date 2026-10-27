@@ -126,8 +126,8 @@ docs:
 
 extension_star_count: 50
 extension_star_count_pretty: 50
-extension_download_count: 16757
-extension_download_count_pretty: 16.8k
+extension_download_count: 19507
+extension_download_count_pretty: 19.5k
 image: '/images/community_extensions/social_preview/preview_community_extension_adbc.png'
 layout: community_extension_doc
 ---

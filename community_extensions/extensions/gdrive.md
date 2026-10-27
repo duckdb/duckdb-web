@@ -112,10 +112,10 @@ docs:
     object storage under a hot workload. On a workstation, Google Drive for
     desktop plus ordinary local paths is simpler and faster.
 
-extension_star_count: 9
-extension_star_count_pretty: 9
-extension_download_count: 10292
-extension_download_count_pretty: 10.3k
+extension_star_count: 10
+extension_star_count_pretty: 10
+extension_download_count: 11287
+extension_download_count_pretty: 11.3k
 image: '/images/community_extensions/social_preview/preview_community_extension_gdrive.png'
 layout: community_extension_doc
 ---

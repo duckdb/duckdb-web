@@ -154,8 +154,8 @@ docs:
 
 extension_star_count: 0
 extension_star_count_pretty: 0
-extension_download_count: 603
-extension_download_count_pretty: 603
+extension_download_count: 940
+extension_download_count_pretty: 940
 image: '/images/community_extensions/social_preview/preview_community_extension_factorize.png'
 layout: community_extension_doc
 ---
