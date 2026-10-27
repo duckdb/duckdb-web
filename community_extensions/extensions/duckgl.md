@@ -42,8 +42,8 @@ docs:
     and a north-up SVG geometry overview without base-map tiles. Export PDF opens that report in the
     browser print dialog; choose Save as PDF. Saved HTML contains no scripts and does not execute SQL.
 
-extension_star_count: 10
-extension_star_count_pretty: 10
+extension_star_count: 12
+extension_star_count_pretty: 12
 extension_download_count: 12850
 extension_download_count_pretty: 12.8k
 image: '/images/community_extensions/social_preview/preview_community_extension_duckgl.png'
