@@ -244,7 +244,7 @@ There are dedicated extraction functions to get certain subfields:
 | **Example** | `second(timestamp '2021-08-03 11:59:44.123456')` |
 | **Result** | `44` |
 
-#### `timezone_hour(date)`
+#### `timezone_hour(timestamptz)`
 
 <div class="nostroke_table"></div>
 
@@ -252,7 +252,7 @@ There are dedicated extraction functions to get certain subfields:
 | **Example** | `timezone_hour(TIMESTAMPTZ '1992-02-15 01:00:00+00')` |
 | **Result** | `-5` (with `TimeZone` set to `America/New_York`) |
 
-#### `timezone_minute(date)`
+#### `timezone_minute(timestamptz)`
 
 <div class="nostroke_table"></div>
 
@@ -260,7 +260,7 @@ There are dedicated extraction functions to get certain subfields:
 | **Example** | `timezone_minute(TIMESTAMPTZ '1992-02-15 01:00:00+00')` |
 | **Result** | `30` (with `TimeZone` set to `Asia/Kolkata`) |
 
-#### `timezone(date)`
+#### `timezone(timestamptz)`
 
 <div class="nostroke_table"></div>
 
