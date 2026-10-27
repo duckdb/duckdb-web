@@ -33,8 +33,7 @@ my_arrow_table = pa.Table.from_pydict({'i': [1, 2, 3, 4],
 chunk_size = 1_000_000
 result = duckdb.sql("SELECT * FROM my_arrow_table").to_arrow_reader(chunk_size)
 
-# Loop through the results. A StopIteration exception is thrown when the RecordBatchReader is empty
-while (batch := result.read_next_batch()):
+for batch in result:
     # Process a single chunk here
     print(batch.to_pandas())
 ```
@@ -62,7 +61,7 @@ arrow_table = res.to_arrow_table()
 
 # You can also create an Arrow record batch reader from a relation
 arrow_batch_reader = res.to_arrow_reader()
-while (batch := arrow_batch_reader.read_next_batch()):
+for batch in arrow_batch_reader:
     # Process a single chunk here
     print(batch.to_pandas())
 ```
