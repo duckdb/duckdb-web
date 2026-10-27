@@ -255,7 +255,7 @@ body.documentation {
         
         hr {
             margin: 20px 0 10px 0;
-            border: 0.5px solid rgb(229, 229, 229);
+            border: 0.5px solid var(--border-color);
         }
         
         ul {
@@ -331,7 +331,7 @@ body.layout_default.blog_typography {
         }
 
         tr {
-            border-bottom: 1px solid var(--doc-codebox-border-color, #E6E6E6);
+            border-bottom: 1px solid var(--border-color);
         }
 
         tbody tr:last-child {
@@ -339,7 +339,7 @@ body.layout_default.blog_typography {
         }
 
         >tbody>tr:hover {
-            background: var(--interactive-table-row-hover, #F2F2F2);
+            background: var(--element-background-color);
         }
 
         a {
@@ -366,7 +366,7 @@ body.layout_default.blog_typography {
 
         td {
             padding: 10px;
-            border-bottom: 1px solid var(--doc-codebox-border-color, #E6E6E6);
+            border-bottom: 1px solid var(--border-color);
             font-size: var(--type-body-small, 14px);
             line-height: 1.55;
             vertical-align: top;
@@ -482,7 +482,7 @@ body.layout_default.blog_typography {
                 top: calc(69px + var(--docbanner-height, 0px));
                 z-index: 10;
                 background: var(--main-body-background-color, #FAFAFA);
-                box-shadow: inset 0 -1px 0 var(--doc-codebox-border-color, #E6E6E6);           }
+                box-shadow: inset 0 -1px 0 var(--border-color);           }
         }
     }
 
@@ -528,7 +528,7 @@ body.layout_default.blog_typography {
         overflow: hidden;
         transition: border-color .3s;
         background: var(--doc-codebox-background-color, #F2F2F2);
-        border: 1px solid var(--doc-codebox-border-color, #D9D9D9);
+        border: 1px solid var(--border-color);
     }
 
     /* example:
@@ -541,7 +541,7 @@ body.layout_default.blog_typography {
     main .wrap .codebox-catalog {
         position: relative;
         overflow: hidden;
-        border: 1px solid var(--doc-codebox-border-color, #D9D9D9);
+        border: 1px solid var(--border-color);
         border-radius: var(--page-radius-m);
         background: var(--doc-codebox-background-color, #F2F2F2);
 
@@ -552,7 +552,7 @@ body.layout_default.blog_typography {
             text-transform: uppercase;
             color: var(--main-text-secondary-color, #666);
             background: var(--doc-codebox-background-color-secondary, #EDEDED);
-            border-bottom: 1px solid var(--doc-codebox-border-color, #D9D9D9);
+            border-bottom: 1px solid var(--border-color);
         }
 
         > div.highlight {
@@ -587,7 +587,7 @@ body.layout_default.blog_typography {
 
     code.highlighter-rouge,
     code.language-plaintext {
-        border: 1px solid var(--doc-codebox-border-color, #E6E6E6);
+        border: 1px solid var(--border-color);
         background: var(--doc-codebox-background-color, #F2F2F2);
         font-family: $fontMonoMedium;
         border-radius: var(--page-radius-xs);

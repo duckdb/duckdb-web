@@ -12,7 +12,7 @@
 
 	.maincolumn{
 		border-radius: var(--page-radius-box);
-		border: 1px solid var(--doc-codebox-border-color, #E6E6E6);
+		border: 1px solid var(--border-color);
 		background: var(--doc-codebox-background-color, #F2F2F2);
 		padding: 32px;
 		>h1{
@@ -91,7 +91,7 @@
 			.button{
 				@include button();
 				margin-top: 16px;
-				background: var(--interactive-filter-selected-background-color, #E6E6E6);
+				background: var(--element-background-color);
 				color: var(--main-text-primary-color, #0D0D0D);
 			}
 		}
@@ -132,7 +132,7 @@
 	input[type="password"],
 	textarea {
 		border-radius: var(--page-radius-box);
-		border: 1px solid var(--doc-codebox-border-color, #E6E6E6);
+		border: 1px solid var(--border-color);
 		background: linear-gradient(0deg, var(--main-section-background-gradient-start-color, #FAFAFA) 0%, var(--main-section-background-gradient-start-color, #FAFAFA) 100%);
 		color: var(--main-text-primary-color, #0D0D0D);
 		font-size: 18px;
@@ -156,7 +156,7 @@
 	.file-input {
 	  display: inline-block;
 	  text-align: left;
-	  border: 1px solid var(--doc-codebox-border-color, #E6E6E6);
+	  border: 1px solid var(--border-color);
 	  background: linear-gradient(0deg, var(--main-section-background-gradient-start-color, #FAFAFA) 0%, var(--main-section-background-gradient-start-color, #FAFAFA) 100%);
 	  padding: 30px 10px 10px 10px;
 	  position: relative;
@@ -273,7 +273,7 @@
 
 	/** BUBBLE SELECT **/
 	.bubble-select {
-		border: 1px solid var(--doc-codebox-border-color, #E6E6E6);
+		border: 1px solid var(--border-color);
 		background: linear-gradient(0deg, var(--main-section-background-gradient-start-color, #FAFAFA) 0%, var(--main-section-background-gradient-start-color, #FAFAFA) 100%);
 		padding: 16px;
 		border-radius: var(--page-radius-box);
@@ -301,7 +301,7 @@
 				display: inline-block;
 				padding: 12px 16px;
 				border-radius: var(--page-radius-pill);
-				border: 1px solid var(--doc-codebox-border-color, #E6E6E6);
+				border: 1px solid var(--border-color);
 				background: transparent;
 				cursor: pointer;
 				pointer-events: auto;
@@ -316,7 +316,7 @@
 
 			input[type="radio"]:checked + label,
 			input[type="checkbox"]:checked + label {
-				background: var(--interactive-filter-selected-background-color, #E6E6E6);
+				background: var(--element-background-color);
 			}
 		}
 	}
@@ -336,7 +336,7 @@
 			margin: 1px 0 0 0;
 			cursor: pointer;
 			position: relative;
-			border: 1px solid var(--doc-codebox-border-color, #E6E6E6);
+			border: 1px solid var(--border-color);
 			border-radius: var(--page-radius-s);
 			background: linear-gradient(0deg, var(--main-section-background-gradient-start-color, #FAFAFA) 0%, var(--main-section-background-gradient-start-color, #FAFAFA) 100%);
 			transition: all 0.2s ease;
@@ -377,7 +377,7 @@
 
 	/** CUSTOM SELECT **/
 	.custom-select {
-		border: 1px solid var(--doc-codebox-border-color, #E6E6E6);
+		border: 1px solid var(--border-color);
 		background: linear-gradient(0deg, var(--main-section-background-gradient-start-color, #FAFAFA) 0%, var(--main-section-background-gradient-start-color, #FAFAFA) 100%);
 		padding: 16px;
 		padding-bottom: 0;
@@ -427,7 +427,7 @@
 				}
 
 				option:hover {
-					background-color: var(--interactive-filter-selected-background-color, #E6E6E6);
+					background-color: var(--element-background-color);
 				}
 			}
 

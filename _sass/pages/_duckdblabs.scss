@@ -136,7 +136,7 @@ body.landing section.about-cards{
 /** CARD GRID (duckdblabs override) **/
 .card-grid .card{
 	background: var(--main-infobox-labs-background-color, rgba(26, 26, 26, 0.60));
-	border: 1px solid var(--main-infobox-labs-border-color, rgba(51, 51, 51, 0.60));
+	border: 1px solid var(--border-color);
 }
 
 /** LOGO GRID **/
@@ -155,7 +155,7 @@ body.landing section.about-cards{
 	.logo-grid{
 		display: grid;
 		grid-template-columns: repeat(4, 1fr);
-		border: 1px solid var(--main-infobox-labs-border-color, rgba(51, 51, 51, 0.60));
+		border: 1px solid var(--border-color);
 		border-radius: var(--page-radius-box);
 		overflow: hidden;
 
@@ -164,8 +164,8 @@ body.landing section.about-cards{
 			align-items: center;
 			justify-content: center;
 			padding: 20px 24px;
-			border-right: 1px solid var(--main-infobox-labs-border-color, rgba(51, 51, 51, 0.60));
-			border-bottom: 1px solid var(--main-infobox-labs-border-color, rgba(51, 51, 51, 0.60));
+			border-right: 1px solid var(--border-color);
+			border-bottom: 1px solid var(--border-color);
 			&:nth-child(4n){
 				border-right: none;
 			}
@@ -225,7 +225,7 @@ section#jobs{
 		margin: 0 auto;
 		margin-top: 50px;
 		border-radius: var(--page-radius-box);
-		border: 1px solid var(--doc-codebox-border-color, #E6E6E6);
+		border: 1px solid var(--border-color);
 		background: var(--main-codebox-main-background-color, rgba(250, 250, 250, 0.60));
 		box-shadow: 0px 0px 21px 0px rgba(255, 105, 0, 0.12);
 		backdrop-filter: blur(13px);
@@ -233,7 +233,7 @@ section#jobs{
 			margin: 0;
 			font-size: var(--type-headline-3, 24px);
 			padding: 20px;
-			border-bottom: 1px solid var(--doc-codebox-border-color, #E6E6E6);
+			border-bottom: 1px solid var(--border-color);
 			span.count{
 				font-size: var(--type-body-small, 14px);
 				font-weight: 450;
@@ -252,7 +252,7 @@ section#jobs{
 			align-items: flex-start;
 			justify-content: space-between;
 			padding: 20px;
-			border-bottom: 1px solid var(--doc-codebox-border-color, #E6E6E6);
+			border-bottom: 1px solid var(--border-color);
 			&:last-child{
 				border: none;
 			}
@@ -377,7 +377,7 @@ main.job_template{
 	.applyform{
 		width: calc(50% - 24px);
 		border-radius: var(--page-radius-box);
-		border: 1px solid var(--doc-codebox-border-color, #333);
+		border: 1px solid var(--border-color);
 		background: var(--doc-codebox-background-color, #1A1A1A);
 		backdrop-filter: blur(7px);
 		
@@ -441,7 +441,7 @@ body.contact{
 }
 
 .postpreview .postimg{
-	border: 1px solid var(--doc-codebox-border-color, #E6E6E6);
+	border: 1px solid var(--border-color);
 }
 
 .postpreview .meta .source{
@@ -530,7 +530,7 @@ footer .sitefooter .footercontent .footerlogo{
 	body.landing .logo-grid-section .logo-grid{
 		grid-template-columns: repeat(2, 1fr);
 		.logo-cell:nth-child(4n){
-			border-right: 1px solid var(--doc-codebox-border-color, #333);
+			border-right: 1px solid var(--border-color);
 		}
 		.logo-cell:nth-child(2n){
 			border-right: none;
@@ -543,7 +543,7 @@ footer .sitefooter .footercontent .footerlogo{
 		// Expanded: restore borders and remove from actual last row
 		&.expanded .logo-cell:nth-child(7),
 		&.expanded .logo-cell:nth-child(8){
-			border-bottom: 1px solid var(--doc-codebox-border-color, #333);
+			border-bottom: 1px solid var(--border-color);
 		}
 		&.expanded .logo-cell:last-child,
 		&.expanded .logo-cell:nth-last-child(2):nth-child(odd){
@@ -566,7 +566,7 @@ footer .sitefooter .footercontent .footerlogo{
 	.logo-grid-section .logo-grid{
 		grid-template-columns: repeat(2, 1fr);
 		.logo-cell:nth-child(4n){
-			border-right: 1px solid var(--main-infobox-labs-border-color, rgba(51, 51, 51, 0.60));
+			border-right: 1px solid var(--border-color);
 		}
 		.logo-cell:nth-child(2n){
 			border-right: none;
@@ -710,7 +710,7 @@ body.press-release{
 		height: 44px;
 		width: 100%;
 		padding: 0 15px 0 38px;
-		border: 1px solid var(--main-infobox-labs-border-color, rgba(51, 51, 51, 0.60));
+		border: 1px solid var(--border-color);
 		border-radius: var(--page-radius-pill);
 		background: transparent;
 		color: inherit;
@@ -905,7 +905,7 @@ body.press-release{
 .resource-box{
 	padding: 24px;
 	border-radius: var(--page-radius-box);
-	border: 1px solid var(--main-infobox-labs-border-color, rgba(51, 51, 51, 0.60));
+	border: 1px solid var(--border-color);
 	background: var(--main-infobox-labs-background-color, rgba(26, 26, 26, 0.60));
 	display: flex;
 	flex-direction: column;

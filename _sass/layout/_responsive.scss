@@ -163,7 +163,7 @@
 		height: auto;
 		backdrop-filter: blur(5px);
 		background: var(--menu-dropdown-background-color, #F2F2F2);
-		border: 1px solid var(--menu-dropdown-border-color, #E6E6E6);
+		border: 1px solid var(--border-color);
 		backdrop-filter: blur(5px);
 		border-radius: var(--page-radius-m);
 		pointer-events: none;
@@ -258,7 +258,7 @@
 		transition: all .3s;
 		padding-top: 14px;
 		background: var(--menu-dropdown-background-color, #F2F2F2);
-		border: 1px solid var(--menu-dropdown-border-color, #E6E6E6);
+		border: 1px solid var(--border-color);
 		border-radius: var(--page-radius-m);
 		opacity: 0;
 		pointer-events: none;
@@ -372,7 +372,7 @@
 		margin-left: 0;
 		margin-top: 50px;
 		width: 90%;
-		border-top: 1px solid #ebebeb;
+		border-top: 1px solid var(--border-color);
 
 		div.sup {
 			position: relative;
@@ -851,11 +851,11 @@
 /** TOUCH DEVICES **/
 @media (hover: none) {
 	header .headerline .headercontent .options button.mode:hover{
-		border-color: var(--menu-topmenu-searchbar-border-color) !important;
+		border-color: var(--border-color) !important;
 		color: var(--duckdb-nav-icon, #CCBD00) !important;
 	}
 	.hamburger:hover{
-		border-color: var(--menu-topmenu-searchbar-border-color) !important;
+		border-color: var(--border-color) !important;
 	}
 	.hamburger:hover .hamburger-inner,
 	.hamburger:hover .hamburger-inner:after,
@@ -864,7 +864,7 @@
 	}
 	.opensearch:hover,
 	body.documentation div.version .versiontrigger:hover{
-		border-color: var(--menu-dropdown-border-color, #333) !important;
+		border-color: var(--border-color) !important;
 		color: var(--main-text-secondary-color, #666) !important;
 	}
 	svg.anchor-icon{
