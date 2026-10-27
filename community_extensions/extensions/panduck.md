@@ -8,7 +8,7 @@ excerpt: |
 extension:
   name: panduck
   description: Read documents natively into the duck_block vocabulary -- DOCX, ODT, EPUB, RTF, LaTeX, Org, RST, ipynb, MediaWiki and Textile -- and write them back as Pandoc JSON, without linking Pandoc
-  version: 0.6.0
+  version: 0.6.2
   language: C++
   build: cmake
   license: MIT
@@ -20,20 +20,30 @@ extension:
   vcpkg_commit: 84bab45d415d22042bd0b9081aea57f362da3f35
 repo:
   github: teaguesterling/duckdb_panduck
-  ref: a144d41b61bc853a2a5616f99aebe8f0b2bba377
+  ref: fbc56ed5c5d550a9dd601c617649a56625c89d19
+  # variegata pins the v1.5.6 track. scripts/build.py sends a v1.5.6 build here when
+  # present and to `ref` otherwise, and unlike ref_next it has no skip branch -- so
+  # once `ref` is 2.0-only a v1.5.6 build would fail rather than be skipped. Equal to
+  # `ref` while both lines build; advance only to a commit v1.5.6 can still build.
+  variegata: fbc56ed5c5d550a9dd601c617649a56625c89d19
   # THE SAME COMMIT AS `ref`, measured rather than defaulted: panduck's own pipeline on this
-  # commit built v2.0-cyanoptera green on all nine platform targets, and DuckDB `main` as an
+  # commit built v2.0-cyanoptera green on every platform target, and DuckDB `main` as an
   # advisory canary. 0.5.0 needed a separate ref_next for a missing catalog.hpp include; that
-  # fix has been in every tag since. RE-MEASURED for 0.6.0 on this exact commit: the
-  # v2.0 line is green on all nine targets (linux amd64/arm64, osx amd64/arm64, windows
-  # amd64 + mingw, wasm mvp/eh/threads), and the `main` canary green on the same nine.
+  # fix has been in every tag since. RE-MEASURED for 0.6.2 on this exact commit (run
+  # 38436336002): 45 jobs green, 1 skipped, with all THREE lines at 10/10 -- the default
+  # stable line, the v2.0 "next" line, and the `main` canary -- across the nine platform
+  # targets, which are linux amd64/arm64, osx amd64/arm64, windows amd64 + mingw and wasm
+  # mvp/eh/threads. The single skip is `Code Quality Check / Tidy Check`, which skipped for
+  # 0.6.0 and 0.6.1 too. Note that the v2.0 and canary jobs do NOT run on pull requests --
+  # they skip there and only fire on main -- so this measurement is from the post-merge run,
+  # not the PR's, and it was re-run for THIS commit rather than carried over from 0.6.1.
   #
   # ref_next STAYS SET even when it equals ref: without it scripts/build.py prints "Skipping
   # prerelease validation" and test_against_latest never runs -- a green that means "did not
   # look". panduck v0.2.0 merged that way, and the job has since caught two real defects.
   # A STALE ref_next is worse than an absent one: it validates the PREVIOUS release
   # against the next line while reporting green, so it moves with ref every release.
-  ref_next: a144d41b61bc853a2a5616f99aebe8f0b2bba377
+  ref_next: fbc56ed5c5d550a9dd601c617649a56625c89d19
 docs:
   hello_world: |
     LOAD panduck;
@@ -173,11 +183,26 @@ docs:
 
 extension_star_count: 4
 extension_star_count_pretty: 4
-extension_download_count: 713
-extension_download_count_pretty: 713
+extension_download_count: 13827
+extension_download_count_pretty: 13.8k
 image: '/images/community_extensions/social_preview/preview_community_extension_panduck.png'
 layout: community_extension_doc
 ---
+### Compatibility Matrix
+
+This table covers all DuckDB releases that have not reached [end-of-life](https://duckdb.org/release_calendar), including LTS releases, and shows the 2 most recent patch releases of each. Older patch releases are not listed, but the extension may be available for them as well.
+
+<div class="extension_compatibility_table"></div>
+
+| Platform | 1.4.4 | 1.4.5 | 1.5.5 | 1.5.6 | 2.0.0 |
+| :--- | :---: | :---: | :---: | :---: | :---: |
+| Linux AMD64 | ❌ | ❌ | ✅ | ✅ | ✅ |
+| Linux ARM64 | ❌ | ❌ | ✅ | ✅ | ✅ |
+| macOS AMD64 | ❌ | ❌ | ✅ | ✅ | ✅ |
+| macOS ARM64 | ❌ | ❌ | ✅ | ✅ | ✅ |
+| Windows AMD64 | ❌ | ❌ | ✅ | ✅ | ✅ |
+| Windows ARM64 | ❌ | ❌ | ❌ | ❌ | ❌ |
+| WebAssembly | ❌ | ❌ | ✅ | ✅ | ✅ |
 
 ### Installing and Loading
 ```sql
@@ -195,7 +220,6 @@ LOAD {{ page.extension.name }};
 ### About {{ page.extension.name }}
 {{ page.docs.extended_description }}
 {% endif %}
-
 ### Added Functions
 
 <div class="extension_functions_table"></div>
@@ -291,10 +315,11 @@ This extension does not add any types.
 
 <div class="extension_settings_table"></div>
 
-|            name            |                                                                               description                                                                                | input_type | scope  | aliases |
-|----------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------|------------|--------|---------|
-| panduck_allow_registration | Allow panduck_register_doc_reader/panduck_register_table_reader to add readers at runtime                                                                                | BOOLEAN    | GLOBAL | []      |
-| panduck_disabled_readers   | Comma-separated denylist of reader FORMATS, applied after panduck_enabled_readers. 'code' turns off the fallback that returns a parse tree for sources no reader claimed | VARCHAR    | GLOBAL | []      |
-| panduck_enabled_readers    | Comma-separated allowlist of reader FORMATS ('*' for all). Applied before panduck_disabled_readers                                                                       | VARCHAR    | GLOBAL | []      |
+|            name            |                                                                               description                                                                                | input_type | scope  | aliases | typed_value |
+|----------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------|------------|--------|---------|-------------|
+| panduck_allow_registration | Allow panduck_register_doc_reader/panduck_register_table_reader to add readers at runtime                                                                                | BOOLEAN    | GLOBAL | []      | true        |
+| panduck_disabled_readers   | Comma-separated denylist of reader FORMATS, applied after panduck_enabled_readers. 'code' turns off the fallback that returns a parse tree for sources no reader claimed | VARCHAR    | GLOBAL | []      |             |
+| panduck_enabled_readers    | Comma-separated allowlist of reader FORMATS ('*' for all). Applied before panduck_disabled_readers                                                                       | VARCHAR    | GLOBAL | []      | *           |
+| temp_directory             | Set the directory to which temporary files are written.                                                                                                                  | VARCHAR    | GLOBAL | []      | post.db.tmp |
 
 

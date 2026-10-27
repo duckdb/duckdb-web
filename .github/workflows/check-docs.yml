@@ -10,19 +10,19 @@ name: Check docs
 jobs:
   update_docs:
     name: Check docs
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-26.04
 
     steps:
       - uses: actions/checkout@v7
       - uses: actions/setup-python@v7
         with:
-          python-version: '3.10'
+          python-version: '3.14'
           cache: 'pip'
       - run: pip install wheel pip -U --break-system-packages
       - run: pip install -r requirements.txt -U --break-system-packages
       - run: pip install duckdb --pre -U --break-system-packages
       # - run: gh repo clone duckdb/duckdb
-      - uses: taiki-e/install-action@v2.87.23
+      - uses: taiki-e/install-action@v2.87.31
         with:
           tool: ripgrep
       - run: python3 scripts/check_for_missing_docs.py >> $GITHUB_STEP_SUMMARY

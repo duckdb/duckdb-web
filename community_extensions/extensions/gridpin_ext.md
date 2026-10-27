@@ -8,18 +8,20 @@ excerpt: |
 extension:
   name: gridpin_ext
   description: Offline geocoding from a single country file — forward and reverse, no server, no network
-  version: 0.4.0
+  version: 0.5.0
   language: Rust
   build: cargo
   license: Apache-2.0
   excluded_platforms: "wasm_mvp;wasm_eh;wasm_threads;windows_amd64_rtools;windows_amd64_mingw;linux_amd64_musl"
+  opt_in_platforms: "osx_amd64"
   requires_toolchains: "rust;python3"
   maintainers:
     - gridpin-reserve
 
 repo:
   github: gridpin/duckdb-gridpin
-  ref: 0f4e7e09393858c196bb7fb5cbcf8a6bbd97e391
+  variegata: 3f6b8e36c83066265340009babf356f40964aed3
+  ref: 3f6b8e36c83066265340009babf356f40964aed3
 
 docs:
   hello_world: |
@@ -76,13 +78,34 @@ docs:
     Apache-2.0 and lives at [gridpin/gridpin](https://github.com/gridpin/gridpin); this
     repository holds the extension crate only.
 
+    ### Licences
+
+    The extension statically links the Rust libraries listed in
+    [THIRDPARTY.yml](https://github.com/gridpin/duckdb-gridpin/blob/main/THIRDPARTY.yml),
+    which carries their licence texts.
+
 extension_star_count: 1
 extension_star_count_pretty: 1
-extension_download_count: 581
-extension_download_count_pretty: 581
+extension_download_count: 11535
+extension_download_count_pretty: 11.5k
 image: '/images/community_extensions/social_preview/preview_community_extension_gridpin_ext.png'
 layout: community_extension_doc
 ---
+### Compatibility Matrix
+
+This table covers all DuckDB releases that have not reached [end-of-life](https://duckdb.org/release_calendar), including LTS releases, and shows the 2 most recent patch releases of each. Older patch releases are not listed, but the extension may be available for them as well.
+
+<div class="extension_compatibility_table"></div>
+
+| Platform | 1.4.4 | 1.4.5 | 1.5.5 | 1.5.6 | 2.0.0 |
+| :--- | :---: | :---: | :---: | :---: | :---: |
+| Linux AMD64 | ❌ | ❌ | ✅ | ✅ | ✅ |
+| Linux ARM64 | ❌ | ❌ | ✅ | ✅ | ✅ |
+| macOS AMD64 | ❌ | ❌ | ✅ | ✅ | ✅ |
+| macOS ARM64 | ❌ | ❌ | ✅ | ✅ | ✅ |
+| Windows AMD64 | ❌ | ❌ | ✅ | ✅ | ✅ |
+| Windows ARM64 | ❌ | ❌ | ❌ | ❌ | ❌ |
+| WebAssembly | ❌ | ❌ | ❌ | ❌ | ❌ |
 
 ### Installing and Loading
 ```sql
@@ -100,7 +123,6 @@ LOAD {{ page.extension.name }};
 ### About {{ page.extension.name }}
 {{ page.docs.extended_description }}
 {% endif %}
-
 ### Added Functions
 
 <div class="extension_functions_table"></div>
@@ -129,6 +151,8 @@ This extension does not add any types.
 
 <div class="extension_settings_table"></div>
 
-This extension does not add any settings.
+|      name      |                       description                       | input_type | scope  | aliases | typed_value |
+|----------------|---------------------------------------------------------|------------|--------|---------|-------------|
+| temp_directory | Set the directory to which temporary files are written. | VARCHAR    | GLOBAL | []      | post.db.tmp |
 
 

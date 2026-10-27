@@ -351,6 +351,6 @@ With DuckDB v2.0, we are replacing the PostgreSQL-derived parser with a new PEG 
 
 The runtime grammar extension API shown in this post is still a preview and may change before v2.0 is released. However, the underlying idea is already working. Extensions can add their own syntax directly to DuckDB's grammar while reusing its existing rules and transformations. This means they no longer need to parse the rest of SQL themselves.
 
-We are excited to see what new syntax the community will create. In the meantime, we will continue evolving DuckSQL and improving the parser. 
+We are excited to see what new syntax the community will create. In the meantime, we will continue evolving DuckSQL and improving the parser.
 
 If you do find an existing query that behaves differently with the PEG parser, please let us know by [filing an issue](https://github.com/duckdb/duckdb/issues).

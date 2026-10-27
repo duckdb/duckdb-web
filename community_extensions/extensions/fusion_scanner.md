@@ -8,7 +8,7 @@ excerpt: |
 extension:
   name: fusion_scanner
   description: Query Oracle Fusion from DuckDB through BI Publisher, with SSO, an ATTACH-able catalog and cached metadata
-  version: 0.3.1
+  version: 0.4.1
   language: C++
   build: cmake
   license: MIT
@@ -19,7 +19,8 @@ extension:
 
 repo:
   github: krokozyab/ofquack
-  ref: 6850e13b516756a3872714a0118dd380788ff7b9
+  ref: 8a84de39955ed45a9600b6cb1387f574a6cbdf33
+  variegata: 6850e13b516756a3872714a0118dd380788ff7b9
 
 docs:
   hello_world: |
@@ -72,11 +73,26 @@ docs:
 
 extension_star_count: 7
 extension_star_count_pretty: 7
-extension_download_count: 691
-extension_download_count_pretty: 691
+extension_download_count: 11373
+extension_download_count_pretty: 11.4k
 image: '/images/community_extensions/social_preview/preview_community_extension_fusion_scanner.png'
 layout: community_extension_doc
 ---
+### Compatibility Matrix
+
+This table covers all DuckDB releases that have not reached [end-of-life](https://duckdb.org/release_calendar), including LTS releases, and shows the 2 most recent patch releases of each. Older patch releases are not listed, but the extension may be available for them as well.
+
+<div class="extension_compatibility_table"></div>
+
+| Platform | 1.4.4 | 1.4.5 | 1.5.5 | 1.5.6 | 2.0.0 |
+| :--- | :---: | :---: | :---: | :---: | :---: |
+| Linux AMD64 | ❌ | ❌ | ✅ | ✅ | ✅ |
+| Linux ARM64 | ❌ | ❌ | ✅ | ✅ | ✅ |
+| macOS AMD64 | ❌ | ❌ | ✅ | ✅ | ✅ |
+| macOS ARM64 | ❌ | ❌ | ✅ | ✅ | ✅ |
+| Windows AMD64 | ❌ | ❌ | ✅ | ✅ | ✅ |
+| Windows ARM64 | ❌ | ❌ | ❌ | ❌ | ❌ |
+| WebAssembly | ❌ | ❌ | ❌ | ❌ | ❌ |
 
 ### Installing and Loading
 ```sql
@@ -94,7 +110,6 @@ LOAD {{ page.extension.name }};
 ### About {{ page.extension.name }}
 {{ page.docs.extended_description }}
 {% endif %}
-
 ### Added Functions
 
 <div class="extension_functions_table"></div>
@@ -128,10 +143,11 @@ This extension does not add any types.
 
 <div class="extension_settings_table"></div>
 
-|               name                |                                                                                                                                                description                                                                                                                                                 | input_type | scope  | aliases |
-|-----------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|------------|--------|---------|
-| fusion_scanner_filter_pushdown    | Send WHERE predicates on an attached Oracle Fusion table to Fusion. Off by default: DuckDB removes a pushed filter from the plan, so a predicate that cannot be translated exactly must fail the query rather than be approximated.                                                                        | BOOLEAN    | GLOBAL | []      |
-| fusion_scanner_metadata_page_size | Rows per page when listing Oracle Fusion's dictionary. Lower it if a listing keeps stopping short of the instance's own table count.                                                                                                                                                                       | UBIGINT    | GLOBAL | []      |
-| fusion_scanner_stable_paging      | Give a paged statement an order, so that its pages partition the result instead of sampling it: an attached table by its primary key (or ROWID), a query by every column it returns. On by default; turn it off only if Oracle refuses the ordering, and expect pages to repeat and skip rows when you do. | BOOLEAN    | GLOBAL | []      |
+|               name                |                                                                                                                                                description                                                                                                                                                 | input_type | scope  | aliases | typed_value |
+|-----------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|------------|--------|---------|-------------|
+| fusion_scanner_filter_pushdown    | Send WHERE predicates on an attached Oracle Fusion table to Fusion. Off by default: DuckDB removes a pushed filter from the plan, so a predicate that cannot be translated exactly must fail the query rather than be approximated.                                                                        | BOOLEAN    | GLOBAL | []      | false       |
+| fusion_scanner_metadata_page_size | Rows per page when listing Oracle Fusion's dictionary. Lower it if a listing keeps stopping short of the instance's own table count.                                                                                                                                                                       | UBIGINT    | GLOBAL | []      | 2000        |
+| fusion_scanner_stable_paging      | Give a paged statement an order, so that its pages partition the result instead of sampling it: an attached table by its primary key (or ROWID), a query by every column it returns. On by default; turn it off only if Oracle refuses the ordering, and expect pages to repeat and skip rows when you do. | BOOLEAN    | GLOBAL | []      | true        |
+| temp_directory                    | Set the directory to which temporary files are written.                                                                                                                                                                                                                                                    | VARCHAR    | GLOBAL | []      | post.db.tmp |
 
 

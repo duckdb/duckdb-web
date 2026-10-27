@@ -8,7 +8,7 @@ excerpt: |
 extension:
   name: paimon
   description: Query Apache Paimon tables directly from DuckDB
-  version: 0.1.2
+  version: 0.1.3
   language: C++
   build: cmake
   license: Apache-2.0
@@ -18,8 +18,9 @@ extension:
 
 repo:
   github: polardb/duckdb-paimon
-  andium: a3ede9fc9b1a51f8de125e9ceff106533a71b236
-  ref: e49d491a103e30399d2d0cdc9c2f7efaf138d200
+  andium: 37f984782c17df9e7a1abbd04548eaf97866156b
+  variegata: dbaf0f1b39b78a8f2043a70450d2441c7c69aa5e
+  ref: 6762e34b3f805f00511e5a21c6a04c9c9a904f35
 
 docs:
   hello_world: |
@@ -72,13 +73,28 @@ docs:
 
     For more information, visit the [extension repository](https://github.com/polardb/duckdb-paimon).
 
-extension_star_count: 48
-extension_star_count_pretty: 48
-extension_download_count: 5199
-extension_download_count_pretty: 5.2k
+extension_star_count: 49
+extension_star_count_pretty: 49
+extension_download_count: 13197
+extension_download_count_pretty: 13.2k
 image: '/images/community_extensions/social_preview/preview_community_extension_paimon.png'
 layout: community_extension_doc
 ---
+### Compatibility Matrix
+
+This table covers all DuckDB releases that have not reached [end-of-life](https://duckdb.org/release_calendar), including LTS releases, and shows the 2 most recent patch releases of each. Older patch releases are not listed, but the extension may be available for them as well.
+
+<div class="extension_compatibility_table"></div>
+
+| Platform | 1.4.4 | 1.4.5 | 1.5.5 | 1.5.6 | 2.0.0 |
+| :--- | :---: | :---: | :---: | :---: | :---: |
+| Linux AMD64 | ❌ | ✅ | ✅ | ✅ | ✅ |
+| Linux ARM64 | ❌ | ✅ | ✅ | ✅ | ✅ |
+| macOS AMD64 | ❌ | ❌ | ❌ | ❌ | ❌ |
+| macOS ARM64 | ❌ | ✅ | ✅ | ✅ | ✅ |
+| Windows AMD64 | ❌ | ❌ | ❌ | ❌ | ❌ |
+| Windows ARM64 | ❌ | ❌ | ❌ | ❌ | ❌ |
+| WebAssembly | ❌ | ❌ | ❌ | ❌ | ❌ |
 
 ### Installing and Loading
 ```sql
@@ -96,7 +112,6 @@ LOAD {{ page.extension.name }};
 ### About {{ page.extension.name }}
 {{ page.docs.extended_description }}
 {% endif %}
-
 ### Added Functions
 
 <div class="extension_functions_table"></div>
@@ -124,6 +139,8 @@ This extension does not add any types.
 
 <div class="extension_settings_table"></div>
 
-This extension does not add any settings.
+|      name      |                       description                       | input_type | scope  | aliases | typed_value |
+|----------------|---------------------------------------------------------|------------|--------|---------|-------------|
+| temp_directory | Set the directory to which temporary files are written. | VARCHAR    | GLOBAL | []      | post.db.tmp |
 
 

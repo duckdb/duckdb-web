@@ -8,7 +8,7 @@ excerpt: |
 extension:
   name: duck_geoarrow
   description: DuckDB extension for converting GEOMETRY/WKB to and from GeoArrow native encodings, powered by geoarrow-c.
-  version: 0.1.5 # x-release-please-version
+  version: 0.2.0 # x-release-please-version
   language: C++
   build: cmake
   license: MIT
@@ -17,13 +17,11 @@ extension:
 
 repo:
   github: am2222/duck_geoarrow
-  ref: 6e539f3ff8327913b3fbef99335d9109a4790124
-  # ref_next is what makes the PRERELEASE leg (build_next.yml, DuckDB
-  # v2.0-cyanoptera) actually build. It runs with require_ref_next: true, so
-  # without this key the job resolves an empty ref, skips, and the PR goes green
-  # having verified nothing against v2. Same commit as ref: the compat header
-  # keeps one tree building on both v1.5.5 and v2.0.
-  ref_next: 6e539f3ff8327913b3fbef99335d9109a4790124
+  ref: c8e341d20ea636d02e789268195b35ddc58f28ef
+  # ref_next is what makes the PRERELEASE leg (build_next.yml, DuckDB's next
+  # dev line) actually build. It runs with require_ref_next: true, so without
+  # this key the job resolves an empty ref and skips, verifying nothing.
+  ref_next: c8e341d20ea636d02e789268195b35ddc58f28ef
 
 docs:
   hello_world: |
@@ -134,11 +132,26 @@ docs:
 
 extension_star_count: 9
 extension_star_count_pretty: 9
-extension_download_count: 921
-extension_download_count_pretty: 921
+extension_download_count: 15684
+extension_download_count_pretty: 15.7k
 image: '/images/community_extensions/social_preview/preview_community_extension_duck_geoarrow.png'
 layout: community_extension_doc
 ---
+### Compatibility Matrix
+
+This table covers all DuckDB releases that have not reached [end-of-life](https://duckdb.org/release_calendar), including LTS releases, and shows the 2 most recent patch releases of each. Older patch releases are not listed, but the extension may be available for them as well.
+
+<div class="extension_compatibility_table"></div>
+
+| Platform | 1.4.4 | 1.4.5 | 1.5.5 | 1.5.6 | 2.0.0 |
+| :--- | :---: | :---: | :---: | :---: | :---: |
+| Linux AMD64 | ❌ | ❌ | ✅ | ✅ | ✅ |
+| Linux ARM64 | ❌ | ❌ | ✅ | ✅ | ✅ |
+| macOS AMD64 | ❌ | ❌ | ✅ | ✅ | ✅ |
+| macOS ARM64 | ❌ | ❌ | ✅ | ✅ | ✅ |
+| Windows AMD64 | ❌ | ❌ | ✅ | ✅ | ✅ |
+| Windows ARM64 | ❌ | ❌ | ❌ | ❌ | ❌ |
+| WebAssembly | ❌ | ❌ | ✅ | ✅ | ✅ |
 
 ### Installing and Loading
 ```sql
@@ -156,7 +169,6 @@ LOAD {{ page.extension.name }};
 ### About {{ page.extension.name }}
 {{ page.docs.extended_description }}
 {% endif %}
-
 ### Added Functions
 
 <div class="extension_functions_table"></div>
@@ -203,6 +215,8 @@ This extension does not add any types.
 
 <div class="extension_settings_table"></div>
 
-This extension does not add any settings.
+|      name      |                       description                       | input_type | scope  | aliases | typed_value |
+|----------------|---------------------------------------------------------|------------|--------|---------|-------------|
+| temp_directory | Set the directory to which temporary files are written. | VARCHAR    | GLOBAL | []      | post.db.tmp |
 
 

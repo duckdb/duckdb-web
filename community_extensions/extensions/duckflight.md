@@ -13,13 +13,15 @@ extension:
   build: cargo
   license: MIT
   excluded_platforms: "wasm_mvp;wasm_eh;wasm_threads;windows_amd64;windows_amd64_rtools;windows_amd64_mingw;linux_amd64_musl"
+  opt_in_platforms: "osx_amd64"
   requires_toolchains: "rust;python3"
   maintainers:
     - nicosuave
 
 repo:
   github: sidequery/duckflight-extension
-  ref: d6646edb7877ab65f39ffa1cfe53b5d090f3694b
+  ref: 94b984d096d90094d6902bfa8c0eca3aa5067df2
+  variegata: d6646edb7877ab65f39ffa1cfe53b5d090f3694b
 
 docs:
   hello_world: |
@@ -59,16 +61,31 @@ docs:
     and internal session/catalog helpers installed by the runtime. These support PostgreSQL
     queries and client metadata discovery; they are not additional server controls or a complete
     implementation of PostgreSQL functions. Their catalog comments describe each helper.
-    DuckDB 1.5.6 does not expose function-description setters through the table-function C API,
+    The v1 table-function C API does not expose function-description setters,
     so the five native server functions are documented above.
 
-extension_star_count: 12
-extension_star_count_pretty: 12
-extension_download_count: 722
-extension_download_count_pretty: 722
+extension_star_count: 30
+extension_star_count_pretty: 30
+extension_download_count: 8708
+extension_download_count_pretty: 8.7k
 image: '/images/community_extensions/social_preview/preview_community_extension_duckflight.png'
 layout: community_extension_doc
 ---
+### Compatibility Matrix
+
+This table covers all DuckDB releases that have not reached [end-of-life](https://duckdb.org/release_calendar), including LTS releases, and shows the 2 most recent patch releases of each. Older patch releases are not listed, but the extension may be available for them as well.
+
+<div class="extension_compatibility_table"></div>
+
+| Platform | 1.4.4 | 1.4.5 | 1.5.5 | 1.5.6 | 2.0.0 |
+| :--- | :---: | :---: | :---: | :---: | :---: |
+| Linux AMD64 | ❌ | ❌ | ✅ | ✅ | ✅ |
+| Linux ARM64 | ❌ | ❌ | ✅ | ✅ | ✅ |
+| macOS AMD64 | ❌ | ❌ | ✅ | ✅ | ✅ |
+| macOS ARM64 | ❌ | ❌ | ✅ | ✅ | ✅ |
+| Windows AMD64 | ❌ | ❌ | ❌ | ❌ | ❌ |
+| Windows ARM64 | ❌ | ❌ | ❌ | ❌ | ❌ |
+| WebAssembly | ❌ | ❌ | ❌ | ❌ | ❌ |
 
 ### Installing and Loading
 ```sql
@@ -86,7 +103,6 @@ LOAD {{ page.extension.name }};
 ### About {{ page.extension.name }}
 {{ page.docs.extended_description }}
 {% endif %}
-
 ### Added Functions
 
 <div class="extension_functions_table"></div>
@@ -154,6 +170,8 @@ This extension does not add any types.
 
 <div class="extension_settings_table"></div>
 
-This extension does not add any settings.
+|      name      |                       description                       | input_type | scope  | aliases | typed_value |
+|----------------|---------------------------------------------------------|------------|--------|---------|-------------|
+| temp_directory | Set the directory to which temporary files are written. | VARCHAR    | GLOBAL | []      | post.db.tmp |
 
 

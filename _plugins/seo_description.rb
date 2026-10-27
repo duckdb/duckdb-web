@@ -1,5 +1,17 @@
 require 'jekyll-seo-tag'
 
+# for pages (unlike documents), the seo drop only sees the raw source in page["content"] with unrendered Liquid,
+# so keep the converted content, keyed by URL
+SEO_RENDERED_PAGE_CONTENT = {}
+
+Jekyll::Hooks.register :site, :after_reset do
+  SEO_RENDERED_PAGE_CONTENT.clear
+end
+
+Jekyll::Hooks.register :pages, :post_convert do |page|
+  SEO_RENDERED_PAGE_CONTENT[page.url] = page.content
+end
+
 # most of this code is copied from jekyll-seo-tag
 Jekyll::SeoTag::Drop.class_eval do
   def description
@@ -7,7 +19,7 @@ Jekyll::SeoTag::Drop.class_eval do
       description_max_words = 100
       # skip empty values, e.g., library entries set 'excerpt: ""'
       value = [page["description"], page["excerpt"]].map { |s| format_string(s.to_s) }.compact.first ||
-        format_string(strip_tables_and_headers(page["content"].to_s)) ||
+        format_string(strip_tables_and_headers((SEO_RENDERED_PAGE_CONTENT[page["url"]] || page["content"]).to_s)) ||
         site_description
       snippet(value, description_max_words)
     end

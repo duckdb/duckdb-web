@@ -8,7 +8,7 @@ excerpt: |
 extension:
   name: delta_export
   description: Export DuckLake catalog tables to Delta Lake format
-  version: 0.1.0
+  version: 0.2.1
   language: C++
   build: cmake
   license: MIT
@@ -17,7 +17,7 @@ extension:
 
 repo:
   github: djouallah/delta_export
-  ref: cb5e3659c43216ed7789efb1a5eaaca8816710d0
+  ref: 8defbf4174d4fb95f87f2ab5b14234e923ec9ebd
 
 docs:
   hello_world: |
@@ -35,6 +35,9 @@ docs:
 
     -- Export all DuckLake tables to Delta Lake format
     CALL delta_export();
+
+    -- Or export only some tables or schemas
+    CALL delta_export(tables := ['main.orders']);  -- or schemas := ['sales']
   extended_description: |
     Delta Export reads DuckLake internal metadata and writes Delta Lake
     checkpoint files (Parquet, JSON transaction log, and _last_checkpoint)
@@ -44,16 +47,36 @@ docs:
     system that reads Delta Lake format, such as Apache Spark, Databricks,
     Microsoft Fabric, and other Delta-compatible engines.
 
+    Deletes, updates and MERGE are exported as Delta deletion vectors, so
+    no file rewrite is needed. Each export commits the next Delta version,
+    widened columns use the Delta typeWidening feature, and the Delta log
+    of a dropped table is removed.
+
     Works with both DuckDB and SQLite-backed DuckLake catalogs, and
     supports all storage backends including local filesystem and ABFSS.
 
-extension_star_count: 11
-extension_star_count_pretty: 11
-extension_download_count: 803
-extension_download_count_pretty: 803
+extension_star_count: 12
+extension_star_count_pretty: 12
+extension_download_count: 26462
+extension_download_count_pretty: 26.5k
 image: '/images/community_extensions/social_preview/preview_community_extension_delta_export.png'
 layout: community_extension_doc
 ---
+### Compatibility Matrix
+
+This table covers all DuckDB releases that have not reached [end-of-life](https://duckdb.org/release_calendar), including LTS releases, and shows the 2 most recent patch releases of each. Older patch releases are not listed, but the extension may be available for them as well.
+
+<div class="extension_compatibility_table"></div>
+
+| Platform | 1.4.4 | 1.4.5 | 1.5.5 | 1.5.6 | 2.0.0 |
+| :--- | :---: | :---: | :---: | :---: | :---: |
+| Linux AMD64 | ✅ | ✅ | ✅ | ✅ | ✅ |
+| Linux ARM64 | ✅ | ✅ | ✅ | ✅ | ✅ |
+| macOS AMD64 | ✅ | ✅ | ✅ | ✅ | ✅ |
+| macOS ARM64 | ✅ | ✅ | ✅ | ✅ | ✅ |
+| Windows AMD64 | ✅ | ✅ | ✅ | ✅ | ✅ |
+| Windows ARM64 | ❌ | ❌ | ❌ | ❌ | ❌ |
+| WebAssembly | ✅ | ✅ | ✅ | ✅ | ✅ |
 
 ### Installing and Loading
 ```sql
@@ -71,14 +94,13 @@ LOAD {{ page.extension.name }};
 ### About {{ page.extension.name }}
 {{ page.docs.extended_description }}
 {% endif %}
-
 ### Added Functions
 
 <div class="extension_functions_table"></div>
 
-| function_name | function_type | description | comment | examples |
-|---------------|---------------|-------------|---------|----------|
-| delta_export  | table         | NULL        | NULL    |          |
+| function_name | function_type |                                                                                                                                                                                                                                    description                                                                                                                                                                                                                                    | comment |                                                                                                 examples                                                                                                  |
+|---------------|---------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|---------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| delta_export  | table         | Exports every table of the DuckLake catalog in use (or the first attached lake) to Delta Lake by writing _delta_log metadata over the existing parquet files, with deletes as deletion vectors; also removes the Delta logs of dropped tables. With tables := ['name', 'schema.name'] and/or schemas := ['schema'] only those tables, and every table of those schemas, are exported, and dropped-table logs are removed only in those schemas. Returns one status row per table. | NULL    | [CALL delta_export();, CALL delta_export(tables := ['main.orders']);, CALL delta_export(schemas := ['sales'], tables := ['main.orders']);, SELECT table_name, status, data_snapshot FROM delta_export();] |
 
 ### Overloaded Functions
 
@@ -96,6 +118,8 @@ This extension does not add any types.
 
 <div class="extension_settings_table"></div>
 
-This extension does not add any settings.
+|      name      |                       description                       | input_type | scope  | aliases | typed_value |
+|----------------|---------------------------------------------------------|------------|--------|---------|-------------|
+| temp_directory | Set the directory to which temporary files are written. | VARCHAR    | GLOBAL | []      | post.db.tmp |
 
 

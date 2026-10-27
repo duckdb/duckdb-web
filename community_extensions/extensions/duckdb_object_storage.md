@@ -8,7 +8,7 @@ excerpt: |
 extension:
   name: duckdb_object_storage
   description: Store writable DuckDB databases in local or S3-compatible object storage through SlateDB
-  version: 0.1.0
+  version: 0.2.0
   language: Rust & C++
   build: cmake
   license: MIT
@@ -19,7 +19,7 @@ extension:
 
 repo:
   github: dentiny/duckdb-object-storage
-  ref: 57845cd6c768d3227ea37822d2a043cc250d519b
+  ref: 56d9c7b928836cfaffa6790c77b7640d50102fe3
 
 docs:
   hello_world: |
@@ -76,13 +76,28 @@ docs:
     caches, cache statistics, OpenDAL I/O statistics, read-only attachments,
     and multiple read-only processes alongside a single writer.
 
-extension_star_count: 25
-extension_star_count_pretty: 25
-extension_download_count: 308
-extension_download_count_pretty: 308
+extension_star_count: 89
+extension_star_count_pretty: 89
+extension_download_count: 4945
+extension_download_count_pretty: 4.9k
 image: '/images/community_extensions/social_preview/preview_community_extension_duckdb_object_storage.png'
 layout: community_extension_doc
 ---
+### Compatibility Matrix
+
+This table covers all DuckDB releases that have not reached [end-of-life](https://duckdb.org/release_calendar), including LTS releases, and shows the 2 most recent patch releases of each. Older patch releases are not listed, but the extension may be available for them as well.
+
+<div class="extension_compatibility_table"></div>
+
+| Platform | 1.4.4 | 1.4.5 | 1.5.5 | 1.5.6 | 2.0.0 |
+| :--- | :---: | :---: | :---: | :---: | :---: |
+| Linux AMD64 | ❌ | ❌ | ❌ | ✅ | ✅ |
+| Linux ARM64 | ❌ | ❌ | ❌ | ✅ | ✅ |
+| macOS AMD64 | ❌ | ❌ | ❌ | ✅ | ✅ |
+| macOS ARM64 | ❌ | ❌ | ❌ | ✅ | ✅ |
+| Windows AMD64 | ❌ | ❌ | ❌ | ❌ | ❌ |
+| Windows ARM64 | ❌ | ❌ | ❌ | ❌ | ❌ |
+| WebAssembly | ❌ | ❌ | ❌ | ❌ | ❌ |
 
 ### Installing and Loading
 ```sql
@@ -100,7 +115,6 @@ LOAD {{ page.extension.name }};
 ### About {{ page.extension.name }}
 {{ page.docs.extended_description }}
 {% endif %}
-
 ### Added Functions
 
 <div class="extension_functions_table"></div>
@@ -127,18 +141,19 @@ This extension does not add any types.
 
 <div class="extension_settings_table"></div>
 
-|                    name                     |                        description                         | input_type | scope  | aliases |
-|---------------------------------------------|------------------------------------------------------------|------------|--------|---------|
-| duckdb_objfs_backend                        | Storage backend: s3, local, or memory                      | VARCHAR    | GLOBAL | []      |
-| duckdb_objfs_bucket                         | S3 bucket used by the DuckDB object filesystem             | VARCHAR    | GLOBAL | []      |
-| duckdb_objfs_cache_shards                   | In-memory cache shard count; zero selects the CPU count    | UBIGINT    | GLOBAL | []      |
-| duckdb_objfs_memory_cache_size              | Foyer data-block cache capacity in bytes                   | UBIGINT    | GLOBAL | []      |
-| duckdb_objfs_metadata_cache_size            | Foyer SST metadata cache capacity in bytes                 | UBIGINT    | GLOBAL | []      |
-| duckdb_objfs_persistent_cache_on_compaction | Populate the persistent cache from compaction output       | BOOLEAN    | GLOBAL | []      |
-| duckdb_objfs_persistent_cache_on_flush      | Populate the persistent cache from memtable flush output   | BOOLEAN    | GLOBAL | []      |
-| duckdb_objfs_persistent_cache_part_size     | Persistent SST cache part size in bytes                    | UBIGINT    | GLOBAL | []      |
-| duckdb_objfs_persistent_cache_path          | Local path for the persistent SST cache; empty disables it | VARCHAR    | GLOBAL | []      |
-| duckdb_objfs_persistent_cache_size          | Persistent SST cache capacity in bytes                     | UBIGINT    | GLOBAL | []      |
-| duckdb_objfs_root                           | Local directory or S3 object prefix used by the filesystem | VARCHAR    | GLOBAL | []      |
+|                    name                     |                        description                         | input_type | scope  | aliases | typed_value |
+|---------------------------------------------|------------------------------------------------------------|------------|--------|---------|-------------|
+| duckdb_objfs_backend                        | Storage backend: s3, local, or memory                      | VARCHAR    | GLOBAL | []      | local       |
+| duckdb_objfs_bucket                         | S3 bucket used by the DuckDB object filesystem             | VARCHAR    | GLOBAL | []      | NULL        |
+| duckdb_objfs_cache_shards                   | In-memory cache shard count; zero selects the CPU count    | UBIGINT    | GLOBAL | []      | 0           |
+| duckdb_objfs_memory_cache_size              | Foyer data-block cache capacity in bytes                   | UBIGINT    | GLOBAL | []      | 536870912   |
+| duckdb_objfs_metadata_cache_size            | Foyer SST metadata cache capacity in bytes                 | UBIGINT    | GLOBAL | []      | 134217728   |
+| duckdb_objfs_persistent_cache_on_compaction | Populate the persistent cache from compaction output       | BOOLEAN    | GLOBAL | []      | false       |
+| duckdb_objfs_persistent_cache_on_flush      | Populate the persistent cache from memtable flush output   | BOOLEAN    | GLOBAL | []      | false       |
+| duckdb_objfs_persistent_cache_part_size     | Persistent SST cache part size in bytes                    | UBIGINT    | GLOBAL | []      | 4194304     |
+| duckdb_objfs_persistent_cache_path          | Local path for the persistent SST cache; empty disables it | VARCHAR    | GLOBAL | []      |             |
+| duckdb_objfs_persistent_cache_size          | Persistent SST cache capacity in bytes                     | UBIGINT    | GLOBAL | []      | 17179869184 |
+| duckdb_objfs_root                           | Local directory or S3 object prefix used by the filesystem | VARCHAR    | GLOBAL | []      | NULL        |
+| temp_directory                              | Set the directory to which temporary files are written.    | VARCHAR    | GLOBAL | []      | post.db.tmp |
 
 

@@ -8,7 +8,7 @@ excerpt: |
 extension:
   name: curl_httpfs
   description: httpfs with connection pool, HTTP/2 and async IO. 
-  version: 0.4.5
+  version: 0.5.0
   language: C++
   build: cmake
   license: MIT
@@ -19,7 +19,7 @@ extension:
 repo:
   github: dentiny/duckdb-curl-filesystem
   andium: e5c4921e6e908d07abab3f89c0d036a22db0cd4b
-  ref: f2539567158a273f6e4609af9790ef531a664979
+  ref: e87b297515c4ae002b7574fee431ad6cf205ee63
 
 docs:
   hello_world: |
@@ -31,13 +31,28 @@ docs:
     - Implements TCP connection pool.
     - All network IO operations are performed in asynchronously.
 
-extension_star_count: 14
-extension_star_count_pretty: 14
-extension_download_count: 3584
-extension_download_count_pretty: 3.6k
+extension_star_count: 15
+extension_star_count_pretty: 15
+extension_download_count: 19581
+extension_download_count_pretty: 19.6k
 image: '/images/community_extensions/social_preview/preview_community_extension_curl_httpfs.png'
 layout: community_extension_doc
 ---
+### Compatibility Matrix
+
+This table covers all DuckDB releases that have not reached [end-of-life](https://duckdb.org/release_calendar), including LTS releases, and shows the 2 most recent patch releases of each. Older patch releases are not listed, but the extension may be available for them as well.
+
+<div class="extension_compatibility_table"></div>
+
+| Platform | 1.4.4 | 1.4.5 | 1.5.5 | 1.5.6 | 2.0.0 |
+| :--- | :---: | :---: | :---: | :---: | :---: |
+| Linux AMD64 | ✅ | ❌ | ✅ | ✅ | ✅ |
+| Linux ARM64 | ✅ | ❌ | ✅ | ✅ | ✅ |
+| macOS AMD64 | ✅ | ❌ | ✅ | ✅ | ✅ |
+| macOS ARM64 | ✅ | ❌ | ✅ | ✅ | ✅ |
+| Windows AMD64 | ❌ | ❌ | ❌ | ❌ | ❌ |
+| Windows ARM64 | ❌ | ❌ | ❌ | ❌ | ❌ |
+| WebAssembly | ❌ | ❌ | ❌ | ❌ | ❌ |
 
 ### Installing and Loading
 ```sql
@@ -55,7 +70,6 @@ LOAD {{ page.extension.name }};
 ### About {{ page.extension.name }}
 {{ page.docs.extended_description }}
 {% endif %}
-
 ### Added Functions
 
 <div class="extension_functions_table"></div>
@@ -81,9 +95,10 @@ This extension does not add any types.
 
 <div class="extension_settings_table"></div>
 
-|                name                |                                                     description                                                      | input_type | scope  | aliases |
-|------------------------------------|----------------------------------------------------------------------------------------------------------------------|------------|--------|---------|
-| curl_httpfs_client_implementation  | Select the HTTPUtil implementation to be used. Supports `multi_curl`, `curl`, `httplib`, and `default` (multi_curl). | VARCHAR    | GLOBAL | []      |
-| curl_httpfs_enable_verbose_logging | Turn on and off curl-based http util verbose logging.                                                                | BOOLEAN    | GLOBAL | []      |
+|                name                |                                                     description                                                      | input_type | scope  | aliases | typed_value |
+|------------------------------------|----------------------------------------------------------------------------------------------------------------------|------------|--------|---------|-------------|
+| curl_httpfs_client_implementation  | Select the HTTPUtil implementation to be used. Supports `multi_curl`, `curl`, `httplib`, and `default` (multi_curl). | VARCHAR    | GLOBAL | []      | default     |
+| curl_httpfs_enable_verbose_logging | Turn on and off curl-based http util verbose logging.                                                                | BOOLEAN    | GLOBAL | []      | 0           |
+| temp_directory                     | Set the directory to which temporary files are written.                                                              | VARCHAR    | GLOBAL | []      | post.db.tmp |
 
 

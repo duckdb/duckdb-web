@@ -160,7 +160,7 @@ Here is what the `state` CTE looks like for our example:
 
 In the case where there is no equality condition, the planner would have to use an inequality join,
 which can be very expensive.
-And even in the equality condition case, 
+And even in the equality condition case,
 the resulting hash join may end up with long chains of identical `ticker` keys that will all match and need pruning.
 
 ## Why AsOf?
@@ -172,12 +172,12 @@ so making it easier to say what you are doing helps others (or even you!) unders
 
 The syntax also makes it easier for DuckDB to understand what you want and produce your results faster.
 The window and inequality join version loses the valuable information that the intervals do not overlap.
-It also prevents the query optimizer from moving the join 
+It also prevents the query optimizer from moving the join
 because SQL insists that windowing happens *after* joins.
 By treating the operation *as a join* with *known data constraints*,
 DuckDB can move the join for performance and use a tailored join algorithm.
 The algorithm we use is to sort the right side table and then do a kind of merge join with the left side values.
-But unlike a standard merge join, 
+But unlike a standard merge join,
 AsOf can stop searching when it finds the first match because there is at most one match.
 
 ### State Tables
@@ -197,26 +197,26 @@ and the windowing CTE above shows how to do it in general using SQL.
 
 ### Sentinel Values
 
-One limitation of the windowing approach is that 
+One limitation of the windowing approach is that
 the ordering type needs to have sentinel value that can be used if it does not support `infinity`,
 either an unused value or `NULL`.
 
 Both of these choices are potentially problematic.
-In the first case, it may not be easy to determine an upper sentinel value 
+In the first case, it may not be easy to determine an upper sentinel value
 (suppose the ordering was a string column?)
-In the second case, you would need to write the condition as 
+In the second case, you would need to write the condition as
 `h.when < s.end OR s.end IS NULL`
 and using an `OR` like this in a join condition makes comparisons slow and hard to optimize.
 Moreover, if the ordering column is already using `NULL` to indicate missing values,
 this option is not available.
 
-For most state tables, there are suitable choices (e.g., large dates) 
-but one of the advantages of AsOf is that it can avoid having to design a state table 
+For most state tables, there are suitable choices (e.g., large dates)
+but one of the advantages of AsOf is that it can avoid having to design a state table
 if it is not needed for the analytic task.
 
 ### Event Table Variants
 
-So far we have been using a standard type of event table 
+So far we have been using a standard type of event table
 where the timestamps are assumed to be the start of the state transitions.
 But AsOf can now use any inequality, which allows it to handle other types of event tables.
 
@@ -325,7 +325,7 @@ To sum up, here is the full list:
 We now have two natural interpretations of what the inequalities mean:
 
 * The greater (resp. less) than inequalities mean the time is the beginning (resp. end) of the interval.
-* The strict (resp. non-strict) inequalities mean the time is excluded from (resp. included in) the interval. 
+* The strict (resp. non-strict) inequalities mean the time is excluded from (resp. included in) the interval.
 
 So if we know whether the time marks the start or the end of the event,
 and whether the time is include or excluded, we can choose the appropriate AsOf inequality.
@@ -401,7 +401,7 @@ and then merge joins the sorted values within each hash partition.
 Because AsOf joins can be implemented in various ways using standard SQL queries,
 benchmarking is really about comparing the various alternatives.
 
-One alternative is a debugging `PRAGMA` for AsOf called `debug_asof_iejoin`, 
+One alternative is a debugging `PRAGMA` for AsOf called `debug_asof_iejoin`,
 which implements the join using Window and IEJoin.
 This allows us to easily toggle between the implementations and compare runtimes.
 
@@ -468,15 +468,15 @@ but we can create the state table in a CTE again and use an inner join:
 ```sql
 -- Hash Join implementation
 WITH state AS (
-    SELECT k, 
-      t AS begin, 
-      v, 
+    SELECT k,
+      t AS begin,
+      v,
       lead(t, 1, 'infinity'::TIMESTAMP) OVER (PARTITION BY k ORDER BY t) AS end
     FROM build
 )
 SELECT sum(v)
 FROM probe p
-INNER JOIN state s 
+INNER JOIN state s
         ON p.t >= s.begin
        AND p.t < s.end
        AND p.k = s.k;
@@ -501,13 +501,13 @@ The second benchmark tests the case where the probe side is about 10× smaller t
 
 ```sql
 CREATE OR REPLACE TABLE probe AS
-    SELECT k, 
+    SELECT k,
       '2021-01-01T00:00:00'::TIMESTAMP +
           INTERVAL (random() * 60 * 60 * 24 * 365) SECOND AS t,
     FROM range(0, 100_000) tbl(k);
 
 CREATE OR REPLACE TABLE build AS
-    SELECT r % 100_000 AS k, 
+    SELECT r % 100_000 AS k,
       '2021-01-01T00:00:00'::TIMESTAMP +
           INTERVAL (random() * 60 * 60 * 24 * 365) SECOND AS t,
       (random() * 100_000)::INTEGER AS v
@@ -521,9 +521,9 @@ ASOF JOIN build b
 
 -- Hash Join Version
 WITH state AS (
-  SELECT k, 
-    t AS begin, 
-    v, 
+  SELECT k,
+    t AS begin,
+    v,
     lead(t, 1, 'infinity'::TIMESTAMP)
         OVER (PARTITION BY k ORDER BY t) AS end
   FROM build
@@ -546,7 +546,7 @@ INNER JOIN state s
 Now the runtime improvement of AsOf over IEJoin is huge (~500×)
 because it can leverage the partitioning to eliminate almost all of the equality mismatches.
 
-The Hash Join implementation does much better here because 
+The Hash Join implementation does much better here because
 the optimizer notices that the probe side is smaller and builds the hash table on the “probe” table.
 Also, the probe values here are unique, so the hash table chains are minimal.
 
@@ -570,14 +570,14 @@ WITH win AS (
       ON p.k = b.k
     AND p.t >= b.t
     QUALIFY r = 1
-) 
+)
 SELECT k, t, v
 FROM win;
 ```
 
 The advantage of this windowing query is that it does not require sentinel values,
 so it can work with any data type.
-The disadvantage is that it creates many more partitions 
+The disadvantage is that it creates many more partitions
 because it includes both timestamps, which requires more complex sorting.
 Moreover, because it applies the window _after_ the join,
 it can produce huge intermediates that can result in external sorting
@@ -590,7 +590,7 @@ The probe tables have either 1 or 15 timestamps per key:
 ```sql
 CREATE OR REPLACE TABLE probe15 AS
     SELECT k, t
-    FROM range(10_000) cs(k), 
+    FROM range(10_000) cs(k),
          range('2022-01-01'::TIMESTAMP, '2023-01-01'::TIMESTAMP, INTERVAL 26 DAY) ts(t);
 
 CREATE OR REPLACE TABLE probe1 AS
@@ -605,19 +605,19 @@ The build tables are much larger and have approximately
 -- 10:1
 CREATE OR REPLACE TABLE build10 AS
     SELECT k, t, (random() * 1000)::DECIMAL(7, 2) AS v
-    FROM range(10_000) ks(k), 
+    FROM range(10_000) ks(k),
          range('2022-01-01'::TIMESTAMP, '2023-01-01'::TIMESTAMP, INTERVAL 59 HOUR) ts(t);
 
 -- 100:1
 CREATE OR REPLACE TABLE build100 AS
     SELECT k, t, (random() * 1000)::DECIMAL(7, 2) AS v
-    FROM range(10_000) ks(k), 
+    FROM range(10_000) ks(k),
          range('2022-01-01'::TIMESTAMP, '2023-01-01'::TIMESTAMP, INTERVAL 350 MINUTE) ts(t);
 
 -- 1000:1
 CREATE OR REPLACE TABLE build1000 AS
     SELECT k, t, (random() * 1000)::DECIMAL(7, 2) AS v
-    FROM range(10_000) ks(k), 
+    FROM range(10_000) ks(k),
          range('2022-01-01'::TIMESTAMP, '2023-01-01'::TIMESTAMP, INTERVAL 35 MINUTE) ts(t);
 ```
 

@@ -9,23 +9,23 @@ excerpt: "Hugging Face hosts hundreds of thousands of datasets, and DuckDB can r
 tag: extensions
 ---
 
-[Hugging Face](https://huggingface.co/) is where much of the machine learning community publishes and finds its datasets, while DuckDB is the in-process analytical database that queries files like CSV and Parquet directly, with no server or warehouse to install or run. 
+[Hugging Face](https://huggingface.co/) is where much of the machine learning community publishes and finds its datasets, while DuckDB is the in-process analytical database that queries files like CSV and Parquet directly, with no server or warehouse to install or run.
 
 Did you know that, since DuckDB [v0.10.3](https://github.com/duckdb/duckdb/releases/tag/v0.10.3) (released on May 22, 2024), you can point a `SELECT` at a dataset on the [Hugging Face Hub](https://huggingface.co/docs/hub), using the DuckDB `hf://` protocol, and query it, without downloading it first? This post covers how that integration works and the use cases it fits.
 
 ## Background
 
-On the [Hugging Face Hub](https://huggingface.co/docs/hub), each dataset is a git repository holding its data as plain files, usually CSV, JSONL, or Parquet. The [`cais/mmlu`](https://huggingface.co/datasets/cais/mmlu) benchmark and the [`datasets-examples/doc-formats-csv-1`](https://huggingface.co/datasets/datasets-examples/doc-formats-csv-1) repository used later in this post are two such examples: you can browse their files and commit history in the browser, the same way you would any git repository. 
+On the [Hugging Face Hub](https://huggingface.co/docs/hub), each dataset is a git repository holding its data as plain files, usually CSV, JSONL, or Parquet. The [`cais/mmlu`](https://huggingface.co/datasets/cais/mmlu) benchmark and the [`datasets-examples/doc-formats-csv-1`](https://huggingface.co/datasets/datasets-examples/doc-formats-csv-1) repository used later in this post are two such examples: you can browse their files and commit history in the browser, the same way you would any git repository.
 
 Before the Hugging Face integration, getting at that data from DuckDB meant downloading the files first, or loading them with the Hugging Face [`datasets`](https://huggingface.co/docs/datasets) library, before they could be read and analyzed. Either way, the data had to be copied out of the [Hugging Face Hub](https://huggingface.co/docs/hub) before you could query it.
 
-DuckDB was already able to read remote files over HTTP through its [`httpfs` extension]({% link docs/current/core_extensions/httpfs/overview.md %}), so reading a URL directly was not new. Hugging Face datasets are also increasingly published as Parquet, the columnar format DuckDB reads natively and can scan without materializing everything in memory.
+DuckDB was already able to read remote files over HTTP through its [`httpfs` extension](/docs/current/core_extensions/httpfs/overview.md %}), so reading a URL directly was not new. Hugging Face datasets are also increasingly published as Parquet, the columnar format DuckDB reads natively and can scan without materializing everything in memory.
 
-DuckDB and Hugging Face [worked together]({% post_url 2024-05-29-access-150k-plus-datasets-from-hugging-face-with-duckdb %}) to add the [`hf://` path scheme]({% link docs/lts/core_extensions/httpfs/hugging_face.md %}) on top of `httpfs`, [announced in May 2024]({% post_url 2024-05-29-access-150k-plus-datasets-from-hugging-face-with-duckdb %}) with DuckDB [v0.10.3](https://github.com/duckdb/duckdb/releases/tag/v0.10.3). As a result, DuckDB can resolve a dataset repository to the files inside it, so that a query can read and analyze them exactly where they are located, instead of via a downloaded copy.
+DuckDB and Hugging Face [worked together]({% post_url 2024-05-29-access-150k-plus-datasets-from-hugging-face-with-duckdb %}) to add the [`hf://` path scheme](/docs/1.4/core_extensions/httpfs/hugging_face) on top of `httpfs`, [announced in May 2024]({% post_url 2024-05-29-access-150k-plus-datasets-from-hugging-face-with-duckdb %}) with DuckDB [v0.10.3](https://github.com/duckdb/duckdb/releases/tag/v0.10.3). As a result, DuckDB can resolve a dataset repository to the files inside it, so that a query can read and analyze them exactly where they are located, instead of via a downloaded copy.
 
 ## Reading Hugging Face Datasets Directly
 
-The examples below cover the common cases. [DuckDB's Hugging Face docs]({% link docs/lts/core_extensions/httpfs/hugging_face.md %}) are the full reference. The scheme maps a Hugging Face dataset repository onto a path DuckDB can read:
+The examples below cover the common cases. [DuckDB's Hugging Face docs](/docs/1.4/core_extensions/httpfs/hugging_face) are the full reference. The scheme maps a Hugging Face dataset repository onto a path DuckDB can read:
 
 ```sql
 hf://datasets/⟨my_username⟩/⟨my_dataset⟩/⟨path_to_file⟩
@@ -61,7 +61,7 @@ DuckDB infers the format from the file and reads only the columns that the query
 
 ### Querying Many Files at Once
 
-Datasets are often split across many files. A [glob pattern]({% link docs/current/data/multiple_files/overview.md %}#multi-file-reads-and-globs) lets you treat a whole directory as one table. The [`cais/mmlu`](https://huggingface.co/datasets/cais/mmlu) benchmark stores its `astronomy` task across three Parquet files (`dev`, `test`, and `validation`), and this counts the rows across all of them:
+Datasets are often split across many files. A [glob pattern](/docs/current/data/multiple_files/overview.md %}#multi-file-reads-and-globs) lets you treat a whole directory as one table. The [`cais/mmlu`](https://huggingface.co/datasets/cais/mmlu) benchmark stores its `astronomy` task across three Parquet files (`dev`, `test`, and `validation`), and this counts the rows across all of them:
 
 ```sql
 SELECT count(*) AS count
@@ -128,7 +128,7 @@ FROM data;
 
 ### Private and Gated Datasets
 
-Public datasets need no setup. For private or gated ones, store a Hugging Face token in DuckDB's [Secrets Manager]({% link docs/current/configuration/secrets_manager.md %}). You can pass the token directly:
+Public datasets need no setup. For private or gated ones, store a Hugging Face token in DuckDB's [Secrets Manager](/docs/current/configuration/secrets_manager.md %}). You can pass the token directly:
 
 ```sql
 CREATE SECRET hf_token (
@@ -224,8 +224,8 @@ The integration is a good fit whenever you want to look at data on the [Hugging 
 
 ## Conclusion
 
-The [`hf://` protocol]({% link docs/lts/core_extensions/httpfs/hugging_face.md %}) lets you query a dataset on the [Hugging Face Hub](https://huggingface.co/docs/hub) by putting its path in a `SELECT`, with no download step and no server to run.
+The [`hf://` protocol](/docs/1.4/core_extensions/httpfs/hugging_face) lets you query a dataset on the [Hugging Face Hub](https://huggingface.co/docs/hub) by putting its path in a `SELECT`, with no download step and no server to run.
 
 If you work with datasets on the [Hugging Face Hub](https://huggingface.co/docs/hub), that covers a lot of day-to-day tasks, from inspecting a new dataset to creating a training subset out of a larger one.
 
-For further reading, see the original [announcement post]({% post_url 2024-05-29-access-150k-plus-datasets-from-hugging-face-with-duckdb %}), [DuckDB's Hugging Face docs]({% link docs/lts/core_extensions/httpfs/hugging_face.md %}), and Hugging Face's own [DuckDB guide](https://huggingface.co/docs/hub/datasets-duckdb).
+For further reading, see the original [announcement post]({% post_url 2024-05-29-access-150k-plus-datasets-from-hugging-face-with-duckdb %}), [DuckDB's Hugging Face docs](/docs/1.4/core_extensions/httpfs/hugging_face), and Hugging Face's own [DuckDB guide](https://huggingface.co/docs/hub/datasets-duckdb).

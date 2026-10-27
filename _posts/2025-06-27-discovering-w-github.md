@@ -39,7 +39,7 @@ def get_duckdb_conn():
     return conn
 ```
 
-With the DuckDB Python client's [`read_json`]({% link docs/current/clients/python/relational_api.md %}#read_json) function we are able to query the API response with SQL. The above secret is passed automatically by DuckDB to the API call:
+With the DuckDB Python client's [`read_json`]({% link docs/2.0/clients/python/relational_api.md %}#read_json) function we are able to query the API response with SQL. The above secret is passed automatically by DuckDB to the API call:
 
 ```python
 duckdb_conn = get_duckdb_conn()
@@ -118,7 +118,7 @@ api_url = f"{api_url}+pushed:>={last_pushed_date}"
 duckdb_conn.read_json(f"{api_url}&per_page=100&page=1").to_table("github_raw_data")
 ```
 
-We store the first page in a table called `github_raw_data` and calculate how many pages we need to retrieve based on the total count returned by the first call. Then, with the [`insert_into`]({% link docs/current/clients/python/relational_api.md %}#insert_into) method, we append the data from each page into `github_raw_data`:
+We store the first page in a table called `github_raw_data` and calculate how many pages we need to retrieve based on the total count returned by the first call. Then, with the [`insert_into`]({% link docs/2.0/clients/python/relational_api.md %}#insert_into) method, we append the data from each page into `github_raw_data`:
 
 ```python
 for page in range(2, number_pages + 1):
@@ -132,7 +132,7 @@ for page in range(2, number_pages + 1):
 
 ## Saving Data to a Markdown File
 
-With the data available in a table, we can continue our data processing, by using the [`unnest` function]({% link docs/current/sql/query_syntax/unnest.md %}), which will flatten the `items` returned by the API:
+With the data available in a table, we can continue our data processing, by using the [`unnest` function]({% link docs/2.0/sql/query_syntax/unnest.md %}), which will flatten the `items` returned by the API:
 
 ```python
 (
@@ -141,7 +141,7 @@ With the data available in a table, we can continue our data processing, by usin
 )
 ```
 
-By using [`recursive` unnesting]({% link docs/current/sql/query_syntax/unnest.md %}#recursive-unnest), the `STRUCT` objects within `items` will be flattened too; below is a sample of the columns derived from `items` after unnesting:
+By using [`recursive` unnesting]({% link docs/2.0/sql/query_syntax/unnest.md %}#recursive-unnest), the `STRUCT` objects within `items` will be flattened too; below is a sample of the columns derived from `items` after unnesting:
 
 ```text
 ['id',
@@ -165,7 +165,7 @@ Our scope is to create a Markdown file containing a table, with the following fo
 - **created at**, when the repository was created;
 - **updated at**, when the repository was last updated.
 
-To retrieve the `name` field we use [`concat_ws`]({% link docs/current/sql/functions/text.md %}#concat_wsseparator-string-) and [`concat`]({% link docs/current/sql/functions/text.md %}#concatvalue-) functions, in order to generate the hyperlink and text with the Markdown newline character(`<br>`):
+To retrieve the `name` field we use [`concat_ws`]({% link docs/2.0/sql/functions/text.md %}#concat_wsseparator-string-) and [`concat`]({% link docs/2.0/sql/functions/text.md %}#concatvalue-) functions, in order to generate the hyperlink and text with the Markdown newline character(`<br>`):
 
 ```python
 selection_query = (
@@ -185,7 +185,7 @@ selection_query = (
 The above returns:
 
 ```text
-repo_details = [duckdb-web](https://github.com/duckdb/duckdb-web)<br>DuckDB website and documentation<br>**License** MIT License<br>**Owner** duckdb 
+repo_details = [duckdb-web](https://github.com/duckdb/duckdb-web)<br>DuckDB website and documentation<br>**License** MIT License<br>**Owner** duckdb
 repo_details = [duckdb](https://github.com/duckdb/duckdb)<br>DuckDB is an analytical in-process SQL database management system<br>**License** MIT License<br>**Owner** duckdb
 ...
 ```
@@ -208,7 +208,7 @@ In order to export the data as a Markdown file we are applying a few tricks. The
 
 ```python
 duckdb_conn.sql("""
-    select 
+    select
         NULL,
         'Name',
         'Topics',
@@ -226,7 +226,7 @@ We then union the above header with the delimiter row:
 ```python
 .union(
     duckdb_conn.sql("""
-    select 
+    select
         NULL as '',
         '--' as "Name",
         '--' as "Topics",
@@ -273,7 +273,7 @@ echo '# Repositories using `duckdb`' > README.md
 cat exported_records.md >> README.md
 ```
 
-Another way to create the README file is by using the [`string_agg` function]({% link docs/current/clients/python/relational_api.md %}#string_agg):
+Another way to create the README file is by using the [`string_agg` function]({% link docs/2.0/clients/python/relational_api.md %}#string_agg):
 
 ```python
 selected_data = (
@@ -305,7 +305,7 @@ with open('README.md', 'w') as readme_file:
     readme_file.write(f"{selected_data}|")
 ```
 
-In the above code snippet we concatenate the columns with the pipe character and then we aggregate the records into a string, separated by `|\n` in order to add a pipe and newline at the end of each line. We then use Python to write to README the title of the page, the Markdown table header, the delimiter row (by using the [`repeat` function]({% link docs/current/sql/functions/text.md %}#repeatstring-count)) and the data itself.
+In the above code snippet we concatenate the columns with the pipe character and then we aggregate the records into a string, separated by `|\n` in order to add a pipe and newline at the end of each line. We then use Python to write to README the title of the page, the Markdown table header, the delimiter row (by using the [`repeat` function]({% link docs/2.0/sql/functions/text.md %}#repeatstring-count)) and the data itself.
 
 > The data size is very small, each commit having a README of approx. 35 KB.
 

@@ -21,15 +21,31 @@ extension:
 repo:
   andium: 0840a76e0a50c4c6e27f5432221166c829c00413
   github: query-farm/crypto
-  ref: 7d71c89b04d5e4b1c74d69621c1b607f69436cbe
+  ref: cbcc152b6cbe53ae7876af24060c26df0488a2a6
+  variegata: 2f9163474e3d0c22e2a69573fbb456d7e106dcf6
 
 extension_star_count: 31
 extension_star_count_pretty: 31
-extension_download_count: 20234
-extension_download_count_pretty: 20.2k
+extension_download_count: 33263
+extension_download_count_pretty: 33.3k
 image: '/images/community_extensions/social_preview/preview_community_extension_crypto.png'
 layout: community_extension_doc
 ---
+### Compatibility Matrix
+
+This table covers all DuckDB releases that have not reached [end-of-life](https://duckdb.org/release_calendar), including LTS releases, and shows the 2 most recent patch releases of each. Older patch releases are not listed, but the extension may be available for them as well.
+
+<div class="extension_compatibility_table"></div>
+
+| Platform | 1.4.4 | 1.4.5 | 1.5.5 | 1.5.6 | 2.0.0 |
+| :--- | :---: | :---: | :---: | :---: | :---: |
+| Linux AMD64 | ✅ | ❌ | ✅ | ✅ | ✅ |
+| Linux ARM64 | ✅ | ❌ | ✅ | ✅ | ✅ |
+| macOS AMD64 | ✅ | ❌ | ✅ | ✅ | ✅ |
+| macOS ARM64 | ✅ | ❌ | ✅ | ✅ | ✅ |
+| Windows AMD64 | ✅ | ❌ | ✅ | ✅ | ✅ |
+| Windows ARM64 | ❌ | ❌ | ❌ | ❌ | ❌ |
+| WebAssembly | ❌ | ❌ | ❌ | ❌ | ❌ |
 
 ### Installing and Loading
 ```sql
@@ -47,17 +63,11 @@ LOAD {{ page.extension.name }};
 ### About {{ page.extension.name }}
 {{ page.docs.extended_description }}
 {% endif %}
-
 ### Added Functions
 
 <div class="extension_functions_table"></div>
 
-|    function_name    | function_type |                                                                                                                               description                                                                                                                                | comment |                                                  examples                                                  |
-|---------------------|---------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|---------|------------------------------------------------------------------------------------------------------------|
-| crypto_hash         | scalar        | Computes a cryptographic hash of the input value using the specified algorithm. Supported algorithms: blake3, sha2-256, sha2-512, sha3-256, sha3-512, md5, sha1, and more. Accepts strings, integers, floats, dates, timestamps, UUIDs, and lists of fixed-length types. | NULL    | [crypto_hash('sha2-256', 'hello world'), crypto_hash('blake3', 42), crypto_hash('sha2-256', [1, 2, 3])]    |
-| crypto_hash_agg     | aggregate     | Computes a cryptographic hash over multiple rows using the specified algorithm. ORDER BY is required to ensure deterministic results. Returns the same hash as crypto_hash() would for an equivalent ordered list. Returns NULL for empty result sets.                   | NULL    | [crypto_hash_agg('sha2-256', column_name ORDER BY id), crypto_hash_agg('blake3', data ORDER BY timestamp)] |
-| crypto_hmac         | scalar        | Computes an HMAC (Hash-based Message Authentication Code) of the message using the specified algorithm and key. Supports all hash algorithms except blake3, which requires exactly 32 bytes for the key.                                                                 | NULL    | [crypto_hmac('sha2-256', 'secret_key', 'message to authenticate')]                                         |
-| crypto_random_bytes | scalar        | Generates cryptographically secure random bytes using OpenSSL's RAND_bytes(). Length must be between 1 and 4,294,967,295 bytes. Each call produces different random bytes.                                                                                               | NULL    | [crypto_random_bytes(16), crypto_random_bytes(32)]                                                         |
+This extension does not add any functions.
 
 ### Overloaded Functions
 

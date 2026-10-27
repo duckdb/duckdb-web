@@ -8,7 +8,7 @@ excerpt: |
 extension:
   name: motorsport_telemetry
   description: Query AiM MP4, Cosworth PDS, MoTeC LD, Racelogic VBOX and .telemetry recordings directly in DuckDB, with stint-aware laps
-  version: 1.3.4
+  version: 2.0.0
   language: Rust
   build: cargo
   license: MIT
@@ -19,7 +19,7 @@ extension:
 
 repo:
   github: tobi/duckdb_motorsport_telemetry
-  ref: e9d941d7f3a88a7bb279ceada8555c3c90e611d1
+  ref: 11895b4c1ffd9d217b57c45c02720010908cf693
 
 docs:
   hello_world: |
@@ -43,8 +43,7 @@ docs:
   extended_description: |
     `motorsport_telemetry` reads AiM `aimd` telemetry embedded in MP4, Pi
     Research/Cosworth PDS, MoTeC i2 LD, Racelogic VBOX VBO, and
-    motorsport-telemetry-rs `.telemetry` recordings (zstd MTJ JSONL or the
-    legacy zip, detected by content) without an export step.
+    motorsport-telemetry-rs `.telemetry` recordings (zstd-compressed MTJ JSONL) without an export step.
     `telemetry_laps` returns each lap with a session-monotonic virtual lap
     number, stint index, the dash's own stint lap counter, and a normalized
     kind (flying, out, in, out-in, pit); `telemetry_file_metadata` reports
@@ -60,13 +59,28 @@ docs:
     parsers memory-map native files and table functions produce vectorized
     DuckDB output.
 
-extension_star_count: 9
-extension_star_count_pretty: 9
-extension_download_count: 689
-extension_download_count_pretty: 689
+extension_star_count: 10
+extension_star_count_pretty: 10
+extension_download_count: 11382
+extension_download_count_pretty: 11.4k
 image: '/images/community_extensions/social_preview/preview_community_extension_motorsport_telemetry.png'
 layout: community_extension_doc
 ---
+### Compatibility Matrix
+
+This table covers all DuckDB releases that have not reached [end-of-life](https://duckdb.org/release_calendar), including LTS releases, and shows the 2 most recent patch releases of each. Older patch releases are not listed, but the extension may be available for them as well.
+
+<div class="extension_compatibility_table"></div>
+
+| Platform | 1.4.4 | 1.4.5 | 1.5.5 | 1.5.6 | 2.0.0 |
+| :--- | :---: | :---: | :---: | :---: | :---: |
+| Linux AMD64 | ❌ | ❌ | ✅ | ✅ | ✅ |
+| Linux ARM64 | ❌ | ❌ | ✅ | ✅ | ✅ |
+| macOS AMD64 | ❌ | ❌ | ✅ | ✅ | ✅ |
+| macOS ARM64 | ❌ | ❌ | ✅ | ✅ | ✅ |
+| Windows AMD64 | ❌ | ❌ | ✅ | ✅ | ✅ |
+| Windows ARM64 | ❌ | ❌ | ❌ | ❌ | ❌ |
+| WebAssembly | ❌ | ❌ | ❌ | ❌ | ❌ |
 
 ### Installing and Loading
 ```sql
@@ -84,32 +98,31 @@ LOAD {{ page.extension.name }};
 ### About {{ page.extension.name }}
 {{ page.docs.extended_description }}
 {% endif %}
-
 ### Added Functions
 
 <div class="extension_functions_table"></div>
 
-|       function_name        | function_type | description | comment | examples |
-|----------------------------|---------------|-------------|---------|----------|
-| read_aim                   | table         | NULL        | NULL    |          |
-| read_aimd                  | table         | NULL        | NULL    |          |
-| read_cosworth              | table         | NULL        | NULL    |          |
-| read_motec                 | table         | NULL        | NULL    |          |
-| read_telemetry             | table         | NULL        | NULL    |          |
-| read_telemetry_normalized  | table         | NULL        | NULL    |          |
-| read_telemetry_session     | table         | NULL        | NULL    |          |
-| read_vbo                   | table         | NULL        | NULL    |          |
-| telemetry_can_convert      | scalar        | NULL        | NULL    |          |
-| telemetry_column_comments  | table         | NULL        | NULL    |          |
-| telemetry_convert          | scalar        | NULL        | NULL    |          |
-| telemetry_convert_column   | scalar        | NULL        | NULL    |          |
-| telemetry_file_metadata    | table         | NULL        | NULL    |          |
-| telemetry_laps             | table         | NULL        | NULL    |          |
-| telemetry_metadata         | table         | NULL        | NULL    |          |
-| telemetry_samples          | table         | NULL        | NULL    |          |
-| telemetry_session_metadata | table         | NULL        | NULL    |          |
-| telemetry_units            | table         | NULL        | NULL    |          |
-| write_telemetry            | table         | NULL        | NULL    |          |
+|       function_name        | function_type |                                  description                                   | comment |                           examples                           |
+|----------------------------|---------------|--------------------------------------------------------------------------------|---------|--------------------------------------------------------------|
+| read_aim                   | table         | Projected wide telemetry with type-aware interpolation and optional unit tags. | NULL    | [SELECT * FROM read_aim('run.mp4');]                         |
+| read_aimd                  | table         | Projected wide telemetry with type-aware interpolation and optional unit tags. | NULL    | [SELECT * FROM read_aimd('run.mp4');]                        |
+| read_cosworth              | table         | Projected wide telemetry with type-aware interpolation and optional unit tags. | NULL    | [SELECT * FROM read_cosworth('run.pds');]                    |
+| read_motec                 | table         | Projected wide telemetry with type-aware interpolation and optional unit tags. | NULL    | [SELECT * FROM read_motec('run.ld');]                        |
+| read_telemetry             | table         | Projected wide telemetry with type-aware interpolation and optional unit tags. | NULL    | [SELECT * FROM read_telemetry('run.pds');]                   |
+| read_telemetry_normalized  | table         | Normalized telemetry channels at each native instant.                          | NULL    | [SELECT * FROM read_telemetry_normalized('run.pds');]        |
+| read_telemetry_session     | table         | Synchronized wide telemetry across related files in a session.                 | NULL    | [SELECT * FROM read_telemetry_session('run.pds');]           |
+| read_vbo                   | table         | Projected wide telemetry with type-aware interpolation and optional unit tags. | NULL    | [SELECT * FROM read_vbo('run.vbo');]                         |
+| telemetry_can_convert      | scalar        | Whether two telemetry units have compatible dimensions.                        | NULL    | [telemetry_can_convert('m/s', 'km/h')]                       |
+| telemetry_column_comments  | table         | SQL column comments preserving telemetry units and provenance.                 | NULL    | [SELECT * FROM telemetry_column_comments('run.pds', 'run');] |
+| telemetry_convert          | scalar        | Convert compatible telemetry units; incompatible dimensions raise an error.    | NULL    | [telemetry_convert(10.0, 'm/s', 'km/h')]                     |
+| telemetry_convert_column   | scalar        | Convert a numeric column carrying a telemetry unit alias.                      | NULL    | [telemetry_convert_column(speed, 'km/h')]                    |
+| telemetry_file_metadata    | table         | File identity, track, session and lap summaries.                               | NULL    | [SELECT * FROM telemetry_file_metadata('run.pds');]          |
+| telemetry_laps             | table         | Session-monotonic laps, stints and lap kinds from telemetry files.             | NULL    | [SELECT * FROM telemetry_laps('run.pds');]                   |
+| telemetry_metadata         | table         | Channel metadata, units and native sample rates from telemetry files.          | NULL    | [SELECT * FROM telemetry_metadata('run.pds');]               |
+| telemetry_samples          | table         | Exact native-rate telemetry samples, with channel and time pruning.            | NULL    | [SELECT * FROM telemetry_samples('run.pds');]                |
+| telemetry_session_metadata | table         | Groups related telemetry files into sessions.                                  | NULL    | [SELECT * FROM telemetry_session_metadata('run.pds');]       |
+| telemetry_units            | table         | Discover canonical telemetry units, aliases and compatible dimensions.         | NULL    | [SELECT * FROM telemetry_units();]                           |
+| write_telemetry            | table         | Exports telemetry to MoTeC LD with optional channel and unit mappings.         | NULL    | [SELECT * FROM write_telemetry('run.pds', 'run.ld');]        |
 
 ### Overloaded Functions
 
@@ -121,12 +134,16 @@ This extension does not add any function overloads.
 
 <div class="extension_types_table"></div>
 
-This extension does not add any types.
+| type_name | type_size | logical_type | type_category | internal |
+|-----------|----------:|--------------|---------------|----------|
+| LIST      | 16        | LIST         | COMPOSITE     | true     |
 
 ### Added Settings
 
 <div class="extension_settings_table"></div>
 
-This extension does not add any settings.
+|      name      |                       description                       | input_type | scope  | aliases | typed_value |
+|----------------|---------------------------------------------------------|------------|--------|---------|-------------|
+| temp_directory | Set the directory to which temporary files are written. | VARCHAR    | GLOBAL | []      | post.db.tmp |
 
 

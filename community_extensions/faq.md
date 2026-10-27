@@ -16,7 +16,7 @@ Similarly to other package management systems, DuckDB's Community Extensions rep
 therefore, there are no guarantees regarding the content of extensions.
 The DuckDB Foundation and DuckLabs do not vet the code within community extensions and, therefore, cannot guarantee that DuckDB community extensions are safe to use.
 
-For details on securing your DuckDB setup, please refer to the [Securing Extensions page]({% link docs/current/operations_manual/securing_duckdb/securing_extensions.md %}).
+For details on securing your DuckDB setup, please refer to the [Securing Extensions page]({% link docs/2.0/operations_manual/securing_duckdb/securing_extensions.md %}).
 </div>
 
 </div>
@@ -35,7 +35,7 @@ The loading of community extensions can be explicitly disabled with the followin
 SET allow_community_extensions = false;
 ```
 
-For details on securing your DuckDB setup, please refer to the [Securing Extensions page]({% link docs/current/operations_manual/securing_duckdb/securing_extensions.md %}).
+For details on securing your DuckDB setup, please refer to the [Securing Extensions page]({% link docs/2.0/operations_manual/securing_duckdb/securing_extensions.md %}).
 </div>
 
 </div>
@@ -99,7 +99,9 @@ We are working on adding Go support for extensions.
 
 DuckDB's [Extension Template](https://github.com/duckdb/extension-template) is based on the DuckDB C++ API and uses DuckDB's CMake-based build system. The DuckDB team will currently only provide support for extensions written using this framework. However, note that CMake is pretty flexible: for example, several [Rust-based](#can-i-write-extensions-in-rust) examples already exist.
 
-Additionally, a new [C Extension API](https://github.com/duckdb/duckdb/pull/12682) is available since DuckDB v1.1.
+The old [C Extension API](https://github.com/duckdb/duckdb/pull/12682) was available in DuckDB v1.1 to v1.5.
+
+DuckDB v2.0 ships a new C Extension API.
 
 </div>
 

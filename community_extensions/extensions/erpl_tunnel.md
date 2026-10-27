@@ -8,7 +8,7 @@ excerpt: |
 extension:
   name: erpl_tunnel
   description: Reach any TCP service from DuckDB through an SSH bastion, Tailscale or NetBird — and publish local ports back onto those networks.
-  version: 2026.10.03
+  version: 2026.10.20
   language: C++
   build: cmake
   license: BSL 1.1
@@ -24,15 +24,33 @@ extension:
 
 repo:
   github: DataZooDE/erpl-tunnel
-  ref: 6732b0e9df99f52264bac39204e0e3b32a8fe9e2
+  ref: 470fa6499b689c50fc323f589fcf73c6a86518ef
+  # ref builds against DuckDB 2.0, variegata against v1.5.6; one commit
+  # serves both (and v1.4.5 via the ref fallback).
+  variegata: 470fa6499b689c50fc323f589fcf73c6a86518ef
 
-extension_star_count: 4
-extension_star_count_pretty: 4
-extension_download_count: 896
-extension_download_count_pretty: 896
+extension_star_count: 5
+extension_star_count_pretty: 5
+extension_download_count: 12083
+extension_download_count_pretty: 12.1k
 image: '/images/community_extensions/social_preview/preview_community_extension_erpl_tunnel.png'
 layout: community_extension_doc
 ---
+### Compatibility Matrix
+
+This table covers all DuckDB releases that have not reached [end-of-life](https://duckdb.org/release_calendar), including LTS releases, and shows the 2 most recent patch releases of each. Older patch releases are not listed, but the extension may be available for them as well.
+
+<div class="extension_compatibility_table"></div>
+
+| Platform | 1.4.4 | 1.4.5 | 1.5.5 | 1.5.6 | 2.0.0 |
+| :--- | :---: | :---: | :---: | :---: | :---: |
+| Linux AMD64 | ❌ | ❌ | ✅ | ✅ | ✅ |
+| Linux ARM64 | ❌ | ❌ | ✅ | ✅ | ✅ |
+| macOS AMD64 | ❌ | ❌ | ✅ | ✅ | ✅ |
+| macOS ARM64 | ❌ | ❌ | ✅ | ✅ | ✅ |
+| Windows AMD64 | ❌ | ❌ | ✅ | ✅ | ✅ |
+| Windows ARM64 | ❌ | ❌ | ❌ | ❌ | ❌ |
+| WebAssembly | ❌ | ❌ | ❌ | ❌ | ❌ |
 
 ### Installing and Loading
 ```sql
@@ -50,7 +68,6 @@ LOAD {{ page.extension.name }};
 ### About {{ page.extension.name }}
 {{ page.docs.extended_description }}
 {% endif %}
-
 ### Added Functions
 
 <div class="extension_functions_table"></div>
@@ -83,10 +100,11 @@ This extension does not add any types.
 
 <div class="extension_settings_table"></div>
 
-|          name          |                                                         description                                                         | input_type | scope  | aliases |
-|------------------------|-----------------------------------------------------------------------------------------------------------------------------|------------|--------|---------|
-| datazoo_banner         | Show the DataZoo feedback banner when an extension is loaded in an interactive terminal (at most once a day per extension). | BOOLEAN    | GLOBAL | []      |
-| erpl_telemetry_enabled | Enable ERPL telemetry, see https://erpl.io/telemetry for details.                                                           | BOOLEAN    | GLOBAL | []      |
-| erpl_telemetry_key     | Telemetry key, see https://erpl.io/telemetry for details.                                                                   | VARCHAR    | GLOBAL | []      |
+|          name          |                                                         description                                                         | input_type | scope  | aliases |                   typed_value                   |
+|------------------------|-----------------------------------------------------------------------------------------------------------------------------|------------|--------|---------|-------------------------------------------------|
+| datazoo_banner         | Show the DataZoo feedback banner when an extension is loaded in an interactive terminal (at most once a day per extension). | BOOLEAN    | GLOBAL | []      | true                                            |
+| erpl_telemetry_enabled | Enable ERPL telemetry, see https://erpl.io/telemetry for details.                                                           | BOOLEAN    | GLOBAL | []      | true                                            |
+| erpl_telemetry_key     | Telemetry key, see https://erpl.io/telemetry for details.                                                                   | VARCHAR    | GLOBAL | []      | phc_t3wwRLtpyEmLHYaZCSszG0MqVr74J6wnCrj9D41zk2t |
+| temp_directory         | Set the directory to which temporary files are written.                                                                     | VARCHAR    | GLOBAL | []      | post.db.tmp                                     |
 
 

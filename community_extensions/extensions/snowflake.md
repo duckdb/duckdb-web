@@ -8,16 +8,18 @@ excerpt: |
 extension:
   name: snowflake
   description: Snowflake data source extension - query Snowflake databases directly from DuckDB
-  version: 0.5.2
+  version: 0.7.0
   language: C++
   build: cmake
   license: MIT
   maintainers:
+    - venkata-chikkam
     - iqea-ai
 
 repo:
   github: iqea-ai/duckdb-snowflake
-  ref: b61f5ad827373db9a5614e5183c1477f601cc82c
+  variegata: f172cc80d53f4b1a866858a90f60beab62de78c1
+  ref: 2f9048cc2aa1e264cb18c7b4a773a6df2dc10d7a
 
 install_notes: |
   **Important:** This extension requires the ADBC Snowflake driver (a separate shared library) to function.
@@ -78,13 +80,28 @@ docs:
     for complete setup instructions.** For comprehensive usage examples, authentication methods, and 
     advanced features, visit the [extension repository](https://github.com/iqea-ai/duckdb-snowflake).
 
-extension_star_count: 63
-extension_star_count_pretty: 63
-extension_download_count: 9584
-extension_download_count_pretty: 9.6k
+extension_star_count: 66
+extension_star_count_pretty: 66
+extension_download_count: 24278
+extension_download_count_pretty: 24.3k
 image: '/images/community_extensions/social_preview/preview_community_extension_snowflake.png'
 layout: community_extension_doc
 ---
+### Compatibility Matrix
+
+This table covers all DuckDB releases that have not reached [end-of-life](https://duckdb.org/release_calendar), including LTS releases, and shows the 2 most recent patch releases of each. Older patch releases are not listed, but the extension may be available for them as well.
+
+<div class="extension_compatibility_table"></div>
+
+| Platform | 1.4.4 | 1.4.5 | 1.5.5 | 1.5.6 | 2.0.0 |
+| :--- | :---: | :---: | :---: | :---: | :---: |
+| Linux AMD64 | ✅ | ❌ | ✅ | ✅ | ✅ |
+| Linux ARM64 | ✅ | ❌ | ✅ | ✅ | ✅ |
+| macOS AMD64 | ✅ | ❌ | ✅ | ✅ | ✅ |
+| macOS ARM64 | ✅ | ❌ | ✅ | ✅ | ✅ |
+| Windows AMD64 | ✅ | ❌ | ✅ | ✅ | ✅ |
+| Windows ARM64 | ❌ | ❌ | ❌ | ❌ | ❌ |
+| WebAssembly | ✅ | ❌ | ✅ | ✅ | ✅ |
 
 ### Installing and Loading
 ```sql
@@ -102,7 +119,6 @@ LOAD {{ page.extension.name }};
 ### About {{ page.extension.name }}
 {{ page.docs.extended_description }}
 {% endif %}
-
 ### Added Functions
 
 <div class="extension_functions_table"></div>
@@ -129,6 +145,10 @@ This extension does not add any types.
 
 <div class="extension_settings_table"></div>
 
-This extension does not add any settings.
+|              name              |                                                                                                                                                     description                                                                                                                                                      | input_type | scope  | aliases | typed_value |
+|--------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|------------|--------|---------|-------------|
+| snowflake_prefetch_concurrency | How many Snowflake result chunks the ADBC driver downloads in parallel. 0 (the default) leaves the driver's own default in place; max 10000. Lowering this reduces read-ahead further, but costs download throughput.                                                                                                | BIGINT     | GLOBAL | []      | 0           |
+| snowflake_result_queue_size    | Maximum Arrow batches the ADBC driver buffers per Snowflake result stream. 0 (the default) leaves the driver's own default in place; max 10000. Set to 1 to throttle the driver's read-ahead when the consumer is slow (CREATE TABLE AS, COPY TO, inserts), which otherwise buffers the result outside memory_limit. | BIGINT     | GLOBAL | []      | 0           |
+| temp_directory                 | Set the directory to which temporary files are written.                                                                                                                                                                                                                                                              | VARCHAR    | GLOBAL | []      | post.db.tmp |
 
 

@@ -21,15 +21,31 @@ extension:
 repo:
   andium: f4493ade6aa592402b1b80a3eec002d94254b5e9
   github: query-farm/evalexpr_rhai
-  ref: 4b797040d58931f9c016154ec7665fbb138be861
+  ref: 7a64f153e282820c09a9a0b0a871428b65945b2d
+  variegata: 9ce44d91e57cecb79d3126d5bb5a9e6a920c1fcc
 
 extension_star_count: 27
 extension_star_count_pretty: 27
-extension_download_count: 1188
-extension_download_count_pretty: 1.2k
+extension_download_count: 24588
+extension_download_count_pretty: 24.6k
 image: '/images/community_extensions/social_preview/preview_community_extension_evalexpr_rhai.png'
 layout: community_extension_doc
 ---
+### Compatibility Matrix
+
+This table covers all DuckDB releases that have not reached [end-of-life](https://duckdb.org/release_calendar), including LTS releases, and shows the 2 most recent patch releases of each. Older patch releases are not listed, but the extension may be available for them as well.
+
+<div class="extension_compatibility_table"></div>
+
+| Platform | 1.4.4 | 1.4.5 | 1.5.5 | 1.5.6 | 2.0.0 |
+| :--- | :---: | :---: | :---: | :---: | :---: |
+| Linux AMD64 | ✅ | ✅ | ✅ | ✅ | ✅ |
+| Linux ARM64 | ✅ | ✅ | ✅ | ✅ | ✅ |
+| macOS AMD64 | ✅ | ✅ | ✅ | ✅ | ✅ |
+| macOS ARM64 | ✅ | ✅ | ✅ | ✅ | ✅ |
+| Windows AMD64 | ✅ | ✅ | ✅ | ✅ | ✅ |
+| Windows ARM64 | ❌ | ❌ | ❌ | ❌ | ❌ |
+| WebAssembly | ✅ | ✅ | ✅ | ✅ | ✅ |
 
 ### Installing and Loading
 ```sql
@@ -47,15 +63,11 @@ LOAD {{ page.extension.name }};
 ### About {{ page.extension.name }}
 {{ page.docs.extended_description }}
 {% endif %}
-
 ### Added Functions
 
 <div class="extension_functions_table"></div>
 
-| function_name | function_type |                                           description                                            | comment |                                                           examples                                                           |
-|---------------|---------------|--------------------------------------------------------------------------------------------------|---------|------------------------------------------------------------------------------------------------------------------------------|
-| evalexpr_rhai | scalar        | Evaluate a Rhai scripting language expression and return the result as JSON                      | NULL    | [evalexpr_rhai('40 + 2'), evalexpr_rhai('[1, 2, 3].map(\|x\| x * 2)')]                                                       |
-| evalexpr_rhai | scalar        | Evaluate a Rhai scripting language expression with a JSON context object accessible as 'context' | NULL    | [evalexpr_rhai('context.x + context.y', '{"x": 10, "y": 20}'), evalexpr_rhai('context.items.len()', '{"items": [1, 2, 3]}')] |
+This extension does not add any functions.
 
 ### Overloaded Functions
 

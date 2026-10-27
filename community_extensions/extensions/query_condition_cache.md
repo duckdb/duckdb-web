@@ -8,7 +8,7 @@ excerpt: |
 extension:
   name: query_condition_cache
   description: This extension provides a cache for query conditions, which is useful for repeated-query workloads like metrics monitoring dashboards, log investigations, etc.
-  version: 0.1.3
+  version: 0.2.0
   language: C++
   build: cmake
   license: MIT
@@ -20,7 +20,7 @@ extension:
 
 repo:
   github: dentiny/duckdb-query-condition-cache
-  ref: 8d934bc5796bea4fd6eb059143d4e71b4feaa4b9
+  ref: e6af277259ecd0a28db21675deaa47792900d7dc
 
 docs:
   hello_world: |
@@ -30,11 +30,26 @@ docs:
 
 extension_star_count: 19
 extension_star_count_pretty: 19
-extension_download_count: 733
-extension_download_count_pretty: 733
+extension_download_count: 9734
+extension_download_count_pretty: 9.7k
 image: '/images/community_extensions/social_preview/preview_community_extension_query_condition_cache.png'
 layout: community_extension_doc
 ---
+### Compatibility Matrix
+
+This table covers all DuckDB releases that have not reached [end-of-life](https://duckdb.org/release_calendar), including LTS releases, and shows the 2 most recent patch releases of each. Older patch releases are not listed, but the extension may be available for them as well.
+
+<div class="extension_compatibility_table"></div>
+
+| Platform | 1.4.4 | 1.4.5 | 1.5.5 | 1.5.6 | 2.0.0 |
+| :--- | :---: | :---: | :---: | :---: | :---: |
+| Linux AMD64 | ❌ | ❌ | ✅ | ✅ | ✅ |
+| Linux ARM64 | ❌ | ❌ | ✅ | ✅ | ✅ |
+| macOS AMD64 | ❌ | ❌ | ✅ | ✅ | ✅ |
+| macOS ARM64 | ❌ | ❌ | ✅ | ✅ | ✅ |
+| Windows AMD64 | ❌ | ❌ | ❌ | ❌ | ❌ |
+| Windows ARM64 | ❌ | ❌ | ❌ | ❌ | ❌ |
+| WebAssembly | ❌ | ❌ | ❌ | ❌ | ❌ |
 
 ### Installing and Loading
 ```sql
@@ -52,7 +67,6 @@ LOAD {{ page.extension.name }};
 ### About {{ page.extension.name }}
 {{ page.docs.extended_description }}
 {% endif %}
-
 ### Added Functions
 
 <div class="extension_functions_table"></div>
@@ -81,8 +95,9 @@ This extension does not add any types.
 
 <div class="extension_settings_table"></div>
 
-|           name            |                      description                       | input_type | scope  | aliases |
-|---------------------------|--------------------------------------------------------|------------|--------|---------|
-| use_query_condition_cache | Enable automatic query condition cache build and apply | BOOLEAN    | GLOBAL | []      |
+|           name            |                       description                       | input_type | scope  | aliases | typed_value |
+|---------------------------|---------------------------------------------------------|------------|--------|---------|-------------|
+| temp_directory            | Set the directory to which temporary files are written. | VARCHAR    | GLOBAL | []      | post.db.tmp |
+| use_query_condition_cache | Enable automatic query condition cache build and apply  | BOOLEAN    | GLOBAL | []      | true        |
 
 

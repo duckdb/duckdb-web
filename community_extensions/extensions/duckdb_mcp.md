@@ -8,7 +8,7 @@ excerpt: |
 extension:
   name: duckdb_mcp
   description: Model Context Protocol (MCP) extension for DuckDB that enables seamless integration between SQL databases and MCP servers. Provides both client capabilities for accessing remote MCP resources via SQL and server capabilities for exposing database content as MCP resources.
-  version: 2.3.2
+  version: 2.4.0
   language: C++
   build: cmake
   license: Apache-2.0
@@ -17,12 +17,12 @@ extension:
     - teaguesterling
 repo:
   github: teaguesterling/duckdb_mcp
-  ref: 6f9c4ba1d2f1040c2a4638dabcd66da630a763ad
-  # ref_next == ref (deliberate): v2.3.2 carries the DuckDB v2.0 fix (#91: reach the
-  # result collection through a compat shim; v2.0 changed MaterializedQueryResult access).
-  # Setting ref_next == ref makes test_against_latest build+test the SHIPPED release on
-  # v2.0-cyanoptera, rather than skipping it (v2.3.1 shipped unvalidated on v2.0).
-  ref_next: 6f9c4ba1d2f1040c2a4638dabcd66da630a763ad
+  ref: 6b2b1dc899e1b5834ed6ee2f574e309f445e23b1
+  variegata: 6b2b1dc899e1b5834ed6ee2f574e309f445e23b1
+  # ref == ref_next == variegata (deliberate): v2.4.0 builds against DuckDB v2.0.0 and
+  # v1.5.6 from one tree. ref_next == ref makes test_against_latest build+test the
+  # shipped release on v2.0-cyanoptera, rather than skipping it.
+  ref_next: 6b2b1dc899e1b5834ed6ee2f574e309f445e23b1
 
 docs:
   hello_world: |
@@ -98,13 +98,28 @@ docs:
     
     The extension implements the complete JSON-RPC 2.0 MCP protocol with support for multiple transport mechanisms. It enables powerful use cases including database federation, remote data access, tool orchestration, and exposing database insights to external MCP-compatible systems. Perfect for integration with AI agents, data pipelines, and distributed analytical workflows.
 
-extension_star_count: 65
-extension_star_count_pretty: 65
-extension_download_count: 2678
-extension_download_count_pretty: 2.7k
+extension_star_count: 67
+extension_star_count_pretty: 67
+extension_download_count: 25203
+extension_download_count_pretty: 25.2k
 image: '/images/community_extensions/social_preview/preview_community_extension_duckdb_mcp.png'
 layout: community_extension_doc
 ---
+### Compatibility Matrix
+
+This table covers all DuckDB releases that have not reached [end-of-life](https://duckdb.org/release_calendar), including LTS releases, and shows the 2 most recent patch releases of each. Older patch releases are not listed, but the extension may be available for them as well.
+
+<div class="extension_compatibility_table"></div>
+
+| Platform | 1.4.4 | 1.4.5 | 1.5.5 | 1.5.6 | 2.0.0 |
+| :--- | :---: | :---: | :---: | :---: | :---: |
+| Linux AMD64 | ✅ | ✅ | ✅ | ✅ | ✅ |
+| Linux ARM64 | ✅ | ✅ | ✅ | ✅ | ✅ |
+| macOS AMD64 | ✅ | ✅ | ✅ | ✅ | ❌ |
+| macOS ARM64 | ✅ | ✅ | ✅ | ✅ | ✅ |
+| Windows AMD64 | ✅ | ✅ | ✅ | ✅ | ✅ |
+| Windows ARM64 | ❌ | ❌ | ❌ | ❌ | ❌ |
+| WebAssembly | ✅ | ✅ | ✅ | ✅ | ✅ |
 
 ### Installing and Loading
 ```sql
@@ -122,7 +137,6 @@ LOAD {{ page.extension.name }};
 ### About {{ page.extension.name }}
 {{ page.docs.extended_description }}
 {% endif %}
-
 ### Added Functions
 
 <div class="extension_functions_table"></div>
@@ -182,16 +196,17 @@ This extension does not add any types.
 
 <div class="extension_settings_table"></div>
 
-|          name          |                                                                                       description                                                                                        | input_type | scope  | aliases |
-|------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|------------|--------|---------|
-| allowed_mcp_commands   | Colon-delimited list of executable paths allowed for MCP servers (security: executable paths only, no arguments)                                                                         | VARCHAR    | GLOBAL | []      |
-| allowed_mcp_urls       | Space-delimited list of URL prefixes allowed for MCP servers                                                                                                                             | VARCHAR    | GLOBAL | []      |
-| mcp_allow_all_commands | INSECURE opt-in: when true, allow spawning ANY command if no allowed_mcp_commands allowlist is set. Default false = deny-all (fail-closed). Prefer setting allowed_mcp_commands instead. | BOOLEAN    | GLOBAL | []      |
-| mcp_console_logging    | Enable MCP logging to console/stderr                                                                                                                                                     | BOOLEAN    | GLOBAL | []      |
-| mcp_disable_serving    | Disable MCP server functionality entirely (client-only mode)                                                                                                                             | BOOLEAN    | GLOBAL | []      |
-| mcp_lock_servers       | Lock MCP server configuration to prevent runtime changes (security feature)                                                                                                              | BOOLEAN    | GLOBAL | []      |
-| mcp_log_file           | Path to MCP log file (empty for no file logging)                                                                                                                                         | VARCHAR    | GLOBAL | []      |
-| mcp_log_level          | MCP logging level (trace, debug, info, warn, error, off)                                                                                                                                 | VARCHAR    | GLOBAL | []      |
-| mcp_server_file        | Path to MCP server configuration file                                                                                                                                                    | VARCHAR    | GLOBAL | []      |
+|          name          |                                                                                       description                                                                                        | input_type | scope  | aliases | typed_value |
+|------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|------------|--------|---------|-------------|
+| allowed_mcp_commands   | Colon-delimited list of executable paths allowed for MCP servers (security: executable paths only, no arguments)                                                                         | VARCHAR    | GLOBAL | []      |             |
+| allowed_mcp_urls       | Space-delimited list of URL prefixes allowed for MCP servers                                                                                                                             | VARCHAR    | GLOBAL | []      |             |
+| mcp_allow_all_commands | INSECURE opt-in: when true, allow spawning ANY command if no allowed_mcp_commands allowlist is set. Default false = deny-all (fail-closed). Prefer setting allowed_mcp_commands instead. | BOOLEAN    | GLOBAL | []      | false       |
+| mcp_console_logging    | Enable MCP logging to console/stderr                                                                                                                                                     | BOOLEAN    | GLOBAL | []      | false       |
+| mcp_disable_serving    | Disable MCP server functionality entirely (client-only mode)                                                                                                                             | BOOLEAN    | GLOBAL | []      | false       |
+| mcp_lock_servers       | Lock MCP server configuration to prevent runtime changes (security feature)                                                                                                              | BOOLEAN    | GLOBAL | []      | false       |
+| mcp_log_file           | Path to MCP log file (empty for no file logging)                                                                                                                                         | VARCHAR    | GLOBAL | []      |             |
+| mcp_log_level          | MCP logging level (trace, debug, info, warn, error, off)                                                                                                                                 | VARCHAR    | GLOBAL | []      | warn        |
+| mcp_server_file        | Path to MCP server configuration file                                                                                                                                                    | VARCHAR    | GLOBAL | []      | ./.mcp.json |
+| temp_directory         | Set the directory to which temporary files are written.                                                                                                                                  | VARCHAR    | GLOBAL | []      | post.db.tmp |
 
 

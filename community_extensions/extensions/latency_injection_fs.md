@@ -8,7 +8,7 @@ excerpt: |
 extension:
   name: latency_injection_fs
   description: Used to inject simulated latency to filesystem operations
-  version: 0.1.4
+  version: 0.2.0
   language: C++
   build: cmake
   license: MIT
@@ -19,7 +19,8 @@ extension:
 repo:
   github: dentiny/duckdb-filesystem-latency-injection
   andium: a0dc5543de71f77e981f2be946ca5399db670f45
-  ref: 5f45999f1b9e62dafd48ee5f2623fec04f326dec
+  variegata: 5f45999f1b9e62dafd48ee5f2623fec04f326dec
+  ref: a062a4dd176a065671806f84e40f0280f08492c3
 
 docs:
   hello_world: |
@@ -33,11 +34,26 @@ docs:
 
 extension_star_count: 1
 extension_star_count_pretty: 1
-extension_download_count: 737
-extension_download_count_pretty: 737
+extension_download_count: 13560
+extension_download_count_pretty: 13.6k
 image: '/images/community_extensions/social_preview/preview_community_extension_latency_injection_fs.png'
 layout: community_extension_doc
 ---
+### Compatibility Matrix
+
+This table covers all DuckDB releases that have not reached [end-of-life](https://duckdb.org/release_calendar), including LTS releases, and shows the 2 most recent patch releases of each. Older patch releases are not listed, but the extension may be available for them as well.
+
+<div class="extension_compatibility_table"></div>
+
+| Platform | 1.4.4 | 1.4.5 | 1.5.5 | 1.5.6 | 2.0.0 |
+| :--- | :---: | :---: | :---: | :---: | :---: |
+| Linux AMD64 | ✅ | ❌ | ✅ | ✅ | ✅ |
+| Linux ARM64 | ✅ | ❌ | ✅ | ✅ | ✅ |
+| macOS AMD64 | ✅ | ❌ | ✅ | ✅ | ✅ |
+| macOS ARM64 | ✅ | ❌ | ✅ | ✅ | ✅ |
+| Windows AMD64 | ❌ | ❌ | ❌ | ❌ | ❌ |
+| Windows ARM64 | ❌ | ❌ | ❌ | ❌ | ❌ |
+| WebAssembly | ❌ | ❌ | ❌ | ❌ | ❌ |
 
 ### Installing and Loading
 ```sql
@@ -55,7 +71,6 @@ LOAD {{ page.extension.name }};
 ### About {{ page.extension.name }}
 {{ page.docs.extended_description }}
 {% endif %}
-
 ### Added Functions
 
 <div class="extension_functions_table"></div>
@@ -81,20 +96,21 @@ This extension does not add any types.
 
 <div class="extension_settings_table"></div>
 
-|                   name                   |                                     description                                      | input_type | scope  | aliases |
-|------------------------------------------|--------------------------------------------------------------------------------------|------------|--------|---------|
-| latency_inject_fs_enabled                | Enable or disable latency injection                                                  | BOOLEAN    | GLOBAL | []      |
-| latency_inject_fs_list_mean_ms           | Mean latency in milliseconds for LIST operations (log-normal distribution)           | DOUBLE     | GLOBAL | []      |
-| latency_inject_fs_list_stddev            | Standard deviation for LIST operations latency (log-normal distribution)             | DOUBLE     | GLOBAL | []      |
-| latency_inject_fs_metadata_write_mean_ms | Mean latency in milliseconds for METADATA_WRITE operations (log-normal distribution) | DOUBLE     | GLOBAL | []      |
-| latency_inject_fs_metadata_write_stddev  | Standard deviation for METADATA_WRITE operations latency (log-normal distribution)   | DOUBLE     | GLOBAL | []      |
-| latency_inject_fs_read_base_mean_ms      | Base mean latency in milliseconds for READ operations (log-normal distribution)      | DOUBLE     | GLOBAL | []      |
-| latency_inject_fs_read_base_stddev       | Base standard deviation for READ operations latency (log-normal distribution)        | DOUBLE     | GLOBAL | []      |
-| latency_inject_fs_read_bytes_per_ms      | Read throughput in bytes per millisecond (size-dependent latency)                    | DOUBLE     | GLOBAL | []      |
-| latency_inject_fs_stat_mean_ms           | Mean latency in milliseconds for STAT operations (log-normal distribution)           | DOUBLE     | GLOBAL | []      |
-| latency_inject_fs_stat_stddev            | Standard deviation for STAT operations latency (log-normal distribution)             | DOUBLE     | GLOBAL | []      |
-| latency_inject_fs_write_base_mean_ms     | Base mean latency in milliseconds for WRITE operations (log-normal distribution)     | DOUBLE     | GLOBAL | []      |
-| latency_inject_fs_write_base_stddev      | Base standard deviation for WRITE operations latency (log-normal distribution)       | DOUBLE     | GLOBAL | []      |
-| latency_inject_fs_write_bytes_per_ms     | Write throughput in bytes per millisecond (size-dependent latency)                   | DOUBLE     | GLOBAL | []      |
+|                   name                   |                                     description                                      | input_type | scope  | aliases | typed_value |
+|------------------------------------------|--------------------------------------------------------------------------------------|------------|--------|---------|-------------|
+| latency_inject_fs_enabled                | Enable or disable latency injection                                                  | BOOLEAN    | GLOBAL | []      | true        |
+| latency_inject_fs_list_mean_ms           | Mean latency in milliseconds for LIST operations (log-normal distribution)           | DOUBLE     | GLOBAL | []      | 2.0         |
+| latency_inject_fs_list_stddev            | Standard deviation for LIST operations latency (log-normal distribution)             | DOUBLE     | GLOBAL | []      | 0.5         |
+| latency_inject_fs_metadata_write_mean_ms | Mean latency in milliseconds for METADATA_WRITE operations (log-normal distribution) | DOUBLE     | GLOBAL | []      | 3.0         |
+| latency_inject_fs_metadata_write_stddev  | Standard deviation for METADATA_WRITE operations latency (log-normal distribution)   | DOUBLE     | GLOBAL | []      | 0.5         |
+| latency_inject_fs_read_base_mean_ms      | Base mean latency in milliseconds for READ operations (log-normal distribution)      | DOUBLE     | GLOBAL | []      | 5.0         |
+| latency_inject_fs_read_base_stddev       | Base standard deviation for READ operations latency (log-normal distribution)        | DOUBLE     | GLOBAL | []      | 1.0         |
+| latency_inject_fs_read_bytes_per_ms      | Read throughput in bytes per millisecond (size-dependent latency)                    | DOUBLE     | GLOBAL | []      | 1000000.0   |
+| latency_inject_fs_stat_mean_ms           | Mean latency in milliseconds for STAT operations (log-normal distribution)           | DOUBLE     | GLOBAL | []      | 1.0         |
+| latency_inject_fs_stat_stddev            | Standard deviation for STAT operations latency (log-normal distribution)             | DOUBLE     | GLOBAL | []      | 0.3         |
+| latency_inject_fs_write_base_mean_ms     | Base mean latency in milliseconds for WRITE operations (log-normal distribution)     | DOUBLE     | GLOBAL | []      | 10.0        |
+| latency_inject_fs_write_base_stddev      | Base standard deviation for WRITE operations latency (log-normal distribution)       | DOUBLE     | GLOBAL | []      | 2.0         |
+| latency_inject_fs_write_bytes_per_ms     | Write throughput in bytes per millisecond (size-dependent latency)                   | DOUBLE     | GLOBAL | []      | 500000.0    |
+| temp_directory                           | Set the directory to which temporary files are written.                              | VARCHAR    | GLOBAL | []      | post.db.tmp |
 
 

@@ -8,7 +8,7 @@ excerpt: |
 extension:
   name: trino_parity
   description: Native Trino-compatible scalar functions (trino_*) for the cases where DuckDB's built-ins diverge from Trino on Unicode and byte-level inputs — Trino's simple per-code-point case mapping, code-point reverse, Java-whitespace trim, NFC normalize, and raw-bytes xxhash64/sha512/hmac_sha256
-  version: 0.5.0
+  version: 0.5.2
   language: C++
   build: cmake
   license: MIT
@@ -17,7 +17,8 @@ extension:
 
 repo:
   github: brikk/duckdb-trino-parity-extension
-  ref: dbdb85c502f82ddecab0779df092a6d1817f0b5a
+  ref: 0d6f9a1b2ca5a93f4ff813c2fdab9ef0b5a9c4ed
+  variegata: dbdb85c502f82ddecab0779df092a6d1817f0b5a
 
 docs:
   hello_world: |
@@ -41,12 +42,25 @@ docs:
 
     -- The catalog of functions this extension provides:
     SELECT trino_name, arg_count, category FROM trino_meta();  -- 10 rows
+
+    -- Discover descriptions, argument names, runnable examples and categories:
+    SELECT function_name, parameters, description, examples, categories
+    FROM duckdb_functions()
+    WHERE starts_with(function_name, 'trino_');  -- 10 scalars + trino_meta
   extended_description: |
     `trino_parity` provides native `trino_<name>(...)` scalar functions for the
     specific cases where DuckDB's built-ins diverge from Trino's documented
     behaviour on Unicode and byte-level inputs.
 
-    Version 0.5.0 vendors ICU 76.1 / Unicode 16.0, fixing newer case mappings
+    Version 0.5.2 targets DuckDB 2.0.0 and adds SQL catalog documentation for
+    all ten scalars and the `trino_meta()` table macro in `duckdb_functions()`:
+    implementation-grounded descriptions, meaningful scalar argument names
+    (including HMAC's `data, key` order), runnable examples and short categories.
+    Function behavior, signatures and the ten-row, three-column `trino_meta()`
+    result are unchanged. The legacy v1.5.6 source remains preserved in the
+    descriptor's `variegata` pin; this update selects new source only for 2.0.
+
+    The extension vendors ICU 76.1 / Unicode 16.0, fixing newer case mappings
     and NFC normalization data missing from the previous Unicode 13 snapshot.
     The compatibility target is Trino 483 on JDK 25. Matching version labels
     alone does not guarantee parity with other Trino/JDK combinations.
@@ -92,7 +106,9 @@ docs:
     unchanged. Validation against pinned OpenJDK 25 covers all 1,112,064 valid
     Unicode scalar values and 99,825 NFC conformance column checks, with zero
     mismatches. See the [Unicode 16 validation report](https://github.com/brikk/duckdb-trino-parity-extension/blob/main/docs/REPORT-unicode16-validation.md)
-    for provenance, commands, and the limits of that validation.
+    for provenance, commands, and the limits of that validation. These checks
+    also pass on final DuckDB 2.0.0; see the
+    [2.0 readiness report](https://github.com/brikk/duckdb-trino-parity-extension/blob/main/docs/REPORT-duckdb-2-readiness.md).
 
     Aligned Trino functions (e.g. `length`, `abs`, `year`, `substring`,
     `regexp_extract`) are intentionally NOT shipped — a caller emits them as
@@ -104,11 +120,26 @@ docs:
 
 extension_star_count: 1
 extension_star_count_pretty: 1
-extension_download_count: 678
-extension_download_count_pretty: 678
+extension_download_count: 13786
+extension_download_count_pretty: 13.8k
 image: '/images/community_extensions/social_preview/preview_community_extension_trino_parity.png'
 layout: community_extension_doc
 ---
+### Compatibility Matrix
+
+This table covers all DuckDB releases that have not reached [end-of-life](https://duckdb.org/release_calendar), including LTS releases, and shows the 2 most recent patch releases of each. Older patch releases are not listed, but the extension may be available for them as well.
+
+<div class="extension_compatibility_table"></div>
+
+| Platform | 1.4.4 | 1.4.5 | 1.5.5 | 1.5.6 | 2.0.0 |
+| :--- | :---: | :---: | :---: | :---: | :---: |
+| Linux AMD64 | ❌ | ❌ | ✅ | ✅ | ✅ |
+| Linux ARM64 | ❌ | ❌ | ✅ | ✅ | ✅ |
+| macOS AMD64 | ❌ | ❌ | ✅ | ✅ | ✅ |
+| macOS ARM64 | ❌ | ❌ | ✅ | ✅ | ✅ |
+| Windows AMD64 | ❌ | ❌ | ✅ | ✅ | ✅ |
+| Windows ARM64 | ❌ | ❌ | ❌ | ❌ | ❌ |
+| WebAssembly | ❌ | ❌ | ✅ | ✅ | ✅ |
 
 ### Installing and Loading
 ```sql
@@ -126,24 +157,23 @@ LOAD {{ page.extension.name }};
 ### About {{ page.extension.name }}
 {{ page.docs.extended_description }}
 {% endif %}
-
 ### Added Functions
 
 <div class="extension_functions_table"></div>
 
-|   function_name   | function_type | description | comment | examples |
-|-------------------|---------------|-------------|---------|----------|
-| trino_hmac_sha256 | scalar        | NULL        | NULL    |          |
-| trino_lower       | scalar        | NULL        | NULL    |          |
-| trino_ltrim       | scalar        | NULL        | NULL    |          |
-| trino_meta        | table_macro   | NULL        | NULL    |          |
-| trino_normalize   | scalar        | NULL        | NULL    |          |
-| trino_reverse     | scalar        | NULL        | NULL    |          |
-| trino_rtrim       | scalar        | NULL        | NULL    |          |
-| trino_sha512      | scalar        | NULL        | NULL    |          |
-| trino_trim        | scalar        | NULL        | NULL    |          |
-| trino_upper       | scalar        | NULL        | NULL    |          |
-| trino_xxhash64    | scalar        | NULL        | NULL    |          |
+|   function_name   | function_type |                                                                                          description                                                                                           | comment |                    examples                    |
+|-------------------|---------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|---------|------------------------------------------------|
+| trino_hmac_sha256 | scalar        | Computes HMAC-SHA256 over raw data bytes with the supplied raw key bytes and returns a 32-byte BLOB, accepting empty data but rejecting an empty key with 'Empty key' as Trino does.           | NULL    | [trino_hmac_sha256('abc'::BLOB, 'key'::BLOB)]  |
+| trino_lower       | scalar        | Converts each Unicode code point to its simple lowercase mapping using ICU 76.1 (Unicode 16), matching Trino 483 on JDK 25 without contextual rules or multi-code-point expansion.             | NULL    | [trino_lower('İSTANBUL')]                      |
+| trino_ltrim       | scalar        | Removes leading Java Character.isWhitespace code points, leaving trailing whitespace and non-breaking spaces (U+00A0, U+2007, U+202F) intact as Trino does.                                    | NULL    | [trino_ltrim(chr(9) \|\| 'hello')]             |
+| trino_meta        | table_macro   | Lists the ten native Trino-parity scalar functions as trino_name, arg_count and category, excluding passthrough functions and this table macro.                                                | NULL    | [SELECT * FROM trino_meta()]                   |
+| trino_normalize   | scalar        | Normalizes a string to NFC using ICU 76.1 (Unicode 16), matching Trino's default normalization form with no form-selector overload.                                                            | NULL    | [trino_normalize('cafe' \|\| chr(769))]        |
+| trino_reverse     | scalar        | Reverses the Unicode code-point sequence, not grapheme clusters, preserving the UTF-8 bytes within each code point as Trino does.                                                              | NULL    | [trino_reverse('cafe' \|\| chr(769))]          |
+| trino_rtrim       | scalar        | Removes trailing Java Character.isWhitespace code points, leaving leading whitespace and non-breaking spaces (U+00A0, U+2007, U+202F) intact as Trino does.                                    | NULL    | [trino_rtrim('hello' \|\| chr(10))]            |
+| trino_sha512      | scalar        | Computes SHA-512 over raw bytes and returns the 64-byte digest as a BLOB, matching Trino's varbinary output.                                                                                   | NULL    | [trino_sha512('abc'::BLOB)]                    |
+| trino_trim        | scalar        | Removes leading and trailing Java Character.isWhitespace code points, leaving non-breaking spaces (U+00A0, U+2007, U+202F) intact as Trino does.                                               | NULL    | [trino_trim(chr(9) \|\| 'hello' \|\| chr(10))] |
+| trino_upper       | scalar        | Converts each Unicode code point to its simple uppercase mapping using ICU 76.1 (Unicode 16), matching Trino 483 on JDK 25 without contextual rules or multi-code-point expansion (ß stays ß). | NULL    | [trino_upper('straße')]                        |
+| trino_xxhash64    | scalar        | Computes xxHash64 over raw bytes with seed 0 and returns the hash as an eight-byte big-endian BLOB, matching Trino's varbinary output.                                                         | NULL    | [trino_xxhash64('abc'::BLOB)]                  |
 
 ### Overloaded Functions
 
@@ -161,6 +191,8 @@ This extension does not add any types.
 
 <div class="extension_settings_table"></div>
 
-This extension does not add any settings.
+|      name      |                       description                       | input_type | scope  | aliases | typed_value |
+|----------------|---------------------------------------------------------|------------|--------|---------|-------------|
+| temp_directory | Set the directory to which temporary files are written. | VARCHAR    | GLOBAL | []      | post.db.tmp |
 
 

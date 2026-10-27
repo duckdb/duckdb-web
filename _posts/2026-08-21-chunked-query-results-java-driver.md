@@ -10,7 +10,7 @@ thumb: "/images/blog/thumbs/java.svg"
 image: "/images/blog/thumbs/java.png"
 ---
 
-DuckDB is a columnar, vectorized database. Every operator inside the engine works on [*data chunks:*]({% link docs/current/clients/c/data_chunk.md %}) batches of column vectors, 2,048 rows at a time. That is a big part of why DuckDB is fast: the engine amortizes interpretation overhead over thousands of values instead of paying it once per value.
+DuckDB is a columnar, vectorized database. Every operator inside the engine works on [*data chunks:*]({% link docs/2.0/clients/c/data_chunk.md %}) batches of column vectors, 2,048 rows at a time. That is a big part of why DuckDB is fast: the engine amortizes interpretation overhead over thousands of values instead of paying it once per value.
 
 JDBC, on the other hand, was designed in 1997 around a very different idea. The `ResultSet` API hands you one row at a time (`next()`) and one value at a time (`getInt(1)`, `getString(2)` and so on). It is a solid, familiar API, supported across the Java ecosystem, but it forces the data into a form that DuckDB never used internally.
 
@@ -18,7 +18,7 @@ The DuckDB Java driver has to bridge the two. It embeds the native DuckDB librar
 
 Version 1.5.3.0 of the Java driver adds an alternative.
 
-> Tip We have thoroughly updated the [Java client documentation]({% link docs/current/clients/java/overview.md %}), which now covers the driver's full API surface across dedicated pages: [defining connections]({% link docs/current/clients/java/connecting.md %}), [running queries]({% link docs/current/clients/java/querying.md %}), [handling results]({% link docs/current/clients/java/result_handling.md %}) (including [Arrow methods]({% link docs/current/clients/java/result_handling.md %}#arrow-methods) and [streaming results]({% link docs/current/clients/java/result_handling.md %}#streaming-results)), [importing data]({% link docs/current/clients/java/data_import.md %}) with the [appender]({% link docs/current/clients/java/data_import.md %}#appender) and [batch writer]({% link docs/current/clients/java/data_import.md %}#batch-writer), and [defining functions]({% link docs/current/clients/java/functions.md %}). The chunked query results discussed in this post are documented under [Chunked Results]({% link docs/current/clients/java/result_handling.md %}#chunked-results).
+> Tip We have thoroughly updated the [Java client documentation]({% link docs/2.0/clients/java/overview.md %}), which now covers the driver's full API surface across dedicated pages: [defining connections]({% link docs/2.0/clients/java/connecting.md %}), [running queries]({% link docs/2.0/clients/java/querying.md %}), [handling results]({% link docs/2.0/clients/java/result_handling.md %}) (including [Arrow methods]({% link docs/2.0/clients/java/result_handling.md %}#arrow-methods) and [streaming results]({% link docs/2.0/clients/java/result_handling.md %}#streaming-results)), [importing data]({% link docs/2.0/clients/java/data_import.md %}) with the [appender]({% link docs/2.0/clients/java/data_import.md %}#appender) and [batch writer]({% link docs/2.0/clients/java/data_import.md %}#batch-writer), and [defining functions]({% link docs/2.0/clients/java/functions.md %}). The chunked query results discussed in this post are documented under [Chunked Results]({% link docs/2.0/clients/java/result_handling.md %}#chunked-results).
 
 ## Reading Results Row by Row
 
@@ -36,13 +36,13 @@ try (ResultSet rs = stmt.executeQuery("SELECT a, b FROM measurements")) {
 
 Calling `next()` advances the cursor, and a `get*` call then locates the value inside the current native chunk and converts it to a Java representation. For some non-primitive types that conversion has to cross the JNI boundary on every value, and a few conversions are more involved, such as fetching a timestamp against a caller-supplied `java.util.Calendar` (the pre-`java.time` class the JDBC specification still mandates here). None of these steps is expensive on its own, but multiplied by millions of rows times a handful of columns, they add up. This is exactly the per-value interpretation overhead that vectorized execution is designed to avoid.
 
-The loop also carries fixed overhead. So that a single connection can keep several result sets open at once, [result streaming]({% link docs/current/clients/java/result_handling.md %}#streaming-results) is off by default, which means a query's entire result is read into memory unless you set `jdbc_stream_results`, an option most users never set. The driver also assembles a full set of result metadata. That happens once per result rather than once per row, so it is cheap next to the row loop, but it is not free, and most queries never look at it.
+The loop also carries fixed overhead. So that a single connection can keep several result sets open at once, [result streaming]({% link docs/2.0/clients/java/result_handling.md %}#streaming-results) is off by default, which means a query's entire result is read into memory unless you set `jdbc_stream_results`, an option most users never set. The driver also assembles a full set of result metadata. That happens once per result rather than once per row, so it is cheap next to the row loop, but it is not free, and most queries never look at it.
 
 The `ResultSet` path is the standard your ORM and the rest of the ecosystem already use, and for the vast majority of queries, the ones returning hundreds or thousands of rows, it is the right choice. The chunked API is for the other case: a query returns *a lot* of data, you control both ends of the pipe, and reading it row by row provides no advantage.
 
 ## Reading Chunks with `DuckDBChunkedResult`
 
-The Java driver now exposes the engine's native chunk stream directly, via the same mechanism the [C API]({% link docs/current/clients/c/overview.md %}) offers as `duckdb_fetch_chunk`. A query result becomes a lazily fetched sequence of data chunks, and you read column vectors out of each chunk in batches, the way the engine produced them, avoiding the per-row overhead required by the JDBC specification.
+The Java driver now exposes the engine's native chunk stream directly, via the same mechanism the [C API]({% link docs/2.0/clients/c/overview.md %}) offers as `duckdb_fetch_chunk`. A query result becomes a lazily fetched sequence of data chunks, and you read column vectors out of each chunk in batches, the way the engine produced them, avoiding the per-row overhead required by the JDBC specification.
 
 Putting that together:
 
@@ -87,7 +87,7 @@ This approach has a few notable properties:
 
 * **Enough metadata to dispatch.** Each result still reports its column count and column types, so you can pick the right `get*` call per vector without carrying a separate schema description alongside the data.
 
-* **A familiar API if you have written a UDF.** Chunk contents are accessed through the same `DuckDBDataChunkReader` API that the driver's [user-defined functions]({% link docs/current/clients/java/functions.md %}) use to read their input vectors. So the same code that reads a function's arguments inside a UDF also reads query results outside one.
+* **A familiar API if you have written a UDF.** Chunk contents are accessed through the same `DuckDBDataChunkReader` API that the driver's [user-defined functions]({% link docs/2.0/clients/java/functions.md %}) use to read their input vectors. So the same code that reads a function's arguments inside a UDF also reads query results outside one.
 
 * **Zero-based indexing.** Chunk *columns and rows* are 0-based, matching the C API and the UDF interfaces.
 

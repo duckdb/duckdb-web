@@ -8,7 +8,7 @@ excerpt: |
 extension:
   name: duckherder
   description: Run duckdb query on remote server
-  version: 0.0.10
+  version: 0.1.0
   language: C++
   build: cmake
   license: MIT
@@ -19,7 +19,7 @@ extension:
 
 repo:
   github: dentiny/duckdb-distributed-execution
-  ref: c254790685d4f11a8b5bc2b543b9ddb1c4dcb95a
+  ref: 3598d5422575eb05e901b852c52d8be30d028622
 
 docs:
   hello_world: |
@@ -31,13 +31,28 @@ docs:
     Users are allowed to implement their own driver and worker(s), and register to the duckdb client-side, as long they speaks duckherder dialect (i.e., grpc stubs and arrow flight).
     From users' perspective, all DML and DDL SQL statements should be used exactly the same as local duckdb.
 
-extension_star_count: 150
-extension_star_count_pretty: 150
-extension_download_count: 680
-extension_download_count_pretty: 680
+extension_star_count: 165
+extension_star_count_pretty: 165
+extension_download_count: 11204
+extension_download_count_pretty: 11.2k
 image: '/images/community_extensions/social_preview/preview_community_extension_duckherder.png'
 layout: community_extension_doc
 ---
+### Compatibility Matrix
+
+This table covers all DuckDB releases that have not reached [end-of-life](https://duckdb.org/release_calendar), including LTS releases, and shows the 2 most recent patch releases of each. Older patch releases are not listed, but the extension may be available for them as well.
+
+<div class="extension_compatibility_table"></div>
+
+| Platform | 1.4.4 | 1.4.5 | 1.5.5 | 1.5.6 | 2.0.0 |
+| :--- | :---: | :---: | :---: | :---: | :---: |
+| Linux AMD64 | ✅ | ❌ | ✅ | ✅ | ✅ |
+| Linux ARM64 | ✅ | ❌ | ✅ | ✅ | ✅ |
+| macOS AMD64 | ✅ | ❌ | ✅ | ✅ | ❌ |
+| macOS ARM64 | ✅ | ❌ | ✅ | ✅ | ✅ |
+| Windows AMD64 | ❌ | ❌ | ❌ | ❌ | ❌ |
+| Windows ARM64 | ❌ | ❌ | ❌ | ❌ | ❌ |
+| WebAssembly | ❌ | ❌ | ❌ | ❌ | ❌ |
 
 ### Installing and Loading
 ```sql
@@ -55,24 +70,24 @@ LOAD {{ page.extension.name }};
 ### About {{ page.extension.name }}
 {{ page.docs.extended_description }}
 {% endif %}
-
 ### Added Functions
 
 <div class="extension_functions_table"></div>
 
-|             function_name             | function_type |                                                    description                                                     | comment |                                       examples                                       |
-|---------------------------------------|---------------|--------------------------------------------------------------------------------------------------------------------|---------|--------------------------------------------------------------------------------------|
-| duckherder_clear_query_recorder_stats | scalar        | Clears all query history records collected by the Duckherder query recorder.                                       | NULL    | [SELECT duckherder_clear_query_recorder_stats();]                                    |
-| duckherder_get_query_execution_stats  | table         | Returns execution mode, merge strategy, duration, worker, task, and start-time statistics for distributed queries. | NULL    | [SELECT * FROM duckherder_get_query_execution_stats();]                              |
-| duckherder_get_query_history          | table         | Returns recorded SQL queries and their observed execution latencies.                                               | NULL    | [SELECT * FROM duckherder_get_query_history();]                                      |
-| duckherder_get_worker_count           | scalar        | Returns the number of workers registered with the local Duckherder driver server.                                  | NULL    | [SELECT duckherder_get_worker_count();]                                              |
-| duckherder_load_extension             | scalar        | Loads an extension on the attached Duckherder server and attempts to load it on the client.                        | NULL    | [SELECT duckherder_load_extension('parquet');]                                       |
-| duckherder_register_or_replace_driver | scalar        | Registers a driver node, replacing the currently registered driver if one exists.                                  | NULL    | [SELECT duckherder_register_or_replace_driver('driver-1', 'grpc://localhost:8815');] |
-| duckherder_register_worker            | scalar        | Registers a worker node with the local Duckherder driver server.                                                   | NULL    | [SELECT duckherder_register_worker('worker-1', 'grpc://localhost:8816');]            |
-| duckherder_start_local_server         | scalar        | Starts a local Duckherder driver server on the given port, optionally with local workers.                          | NULL    | [SELECT duckherder_start_local_server(8815, 4);]                                     |
-| duckherder_start_standalone_worker    | scalar        | Starts a standalone Duckherder worker on the given port.                                                           | NULL    | [SELECT duckherder_start_standalone_worker(8816);]                                   |
-| duckherder_stop_local_server          | scalar        | Stops the local Duckherder driver server and its managed standalone workers.                                       | NULL    | [SELECT duckherder_stop_local_server();]                                             |
-| duckherder_unregister_remote_table    | pragma        | Removes a remote table mapping from the attached Duckherder catalog.                                               | NULL    | [PRAGMA duckherder_unregister_remote_table('orders');]                               |
+|             function_name             | function_type |                                                    description                                                     | comment |                                  examples                                   |
+|---------------------------------------|---------------|--------------------------------------------------------------------------------------------------------------------|---------|-----------------------------------------------------------------------------|
+| distributed_scan                      | table         | Scans a table stored on a Duckherder server.                                                                       | NULL    |                                                                             |
+| duckherder_clear_query_recorder_stats | scalar        | Clears all query history records collected by the Duckherder query recorder.                                       | NULL    | [SELECT duckherder_clear_query_recorder_stats();]                           |
+| duckherder_connected_query            | table         | Runs the SQL of a connection CONNECT-ed to a Duckherder database on its server as is.                              | NULL    | [CONNECT dh;]                                                               |
+| duckherder_get_query_execution_stats  | table         | Returns execution mode, merge strategy, duration, worker, task, and start-time statistics for distributed queries. | NULL    | [SELECT * FROM duckherder_get_query_execution_stats();]                     |
+| duckherder_get_query_history          | table         | Returns recorded SQL queries and their observed execution latencies.                                               | NULL    | [SELECT * FROM duckherder_get_query_history();]                             |
+| duckherder_get_worker_count           | scalar        | Returns the number of workers registered with the local Duckherder driver server.                                  | NULL    | [SELECT duckherder_get_worker_count();]                                     |
+| duckherder_load_extension             | scalar        | Loads an extension on the attached Duckherder server and attempts to load it on the client.                        | NULL    | [SELECT duckherder_load_extension('parquet');]                              |
+| duckherder_query                      | table         | Runs a query, a DML statement or a CREATE TABLE AS on the server of an attached Duckherder database.               | NULL    | [SELECT * FROM duckherder_query('dh', 'SELECT count(*) FROM main.orders');] |
+| duckherder_register_worker            | scalar        | Registers a worker node with the local Duckherder driver server.                                                   | NULL    | [SELECT duckherder_register_worker('worker-1', 'grpc://localhost:8816');]   |
+| duckherder_start_local_server         | scalar        | Starts a local Duckherder driver server on the given port, optionally with local workers.                          | NULL    | [SELECT duckherder_start_local_server(8815, 4);]                            |
+| duckherder_start_standalone_worker    | scalar        | Starts a standalone Duckherder worker on the given port.                                                           | NULL    | [SELECT duckherder_start_standalone_worker(8816);]                          |
+| duckherder_stop_local_server          | scalar        | Stops the local Duckherder driver server and its managed standalone workers.                                       | NULL    | [SELECT duckherder_stop_local_server();]                                    |
 
 ### Overloaded Functions
 
@@ -90,11 +105,14 @@ This extension does not add any types.
 
 <div class="extension_settings_table"></div>
 
-|                name                 |                       description                        | input_type | scope  | aliases |
-|-------------------------------------|----------------------------------------------------------|------------|--------|---------|
-| duckherder_retry_initial_backoff_ms | Initial Duckherder RPC retry backoff in milliseconds     | BIGINT     | GLOBAL | []      |
-| duckherder_retry_jitter_ratio       | Jitter ratio applied to Duckherder RPC retry backoff     | DOUBLE     | GLOBAL | []      |
-| duckherder_retry_max_attempts       | Maximum number of attempts for retryable Duckherder RPCs | UBIGINT    | GLOBAL | []      |
-| duckherder_retry_max_backoff_ms     | Maximum Duckherder RPC retry backoff in milliseconds     | BIGINT     | GLOBAL | []      |
+|                name                 |                                     description                                     | input_type | scope  | aliases | typed_value |
+|-------------------------------------|-------------------------------------------------------------------------------------|------------|--------|---------|-------------|
+| duckherder_async_threads            | Worker RPC thread limit (0: min(4 * DuckDB threads, 256)); applied on next dispatch | BIGINT     | GLOBAL | []      | 0           |
+| duckherder_query_pushdown           | Push whole queries reading only remote tables to the server                         | BOOLEAN    | GLOBAL | []      | true        |
+| duckherder_retry_initial_backoff_ms | Initial Duckherder RPC retry backoff in milliseconds                                | BIGINT     | GLOBAL | []      | 25          |
+| duckherder_retry_jitter_ratio       | Jitter ratio applied to Duckherder RPC retry backoff                                | DOUBLE     | GLOBAL | []      | 0.2         |
+| duckherder_retry_max_attempts       | Maximum number of attempts for retryable Duckherder RPCs                            | UBIGINT    | GLOBAL | []      | 3           |
+| duckherder_retry_max_backoff_ms     | Maximum Duckherder RPC retry backoff in milliseconds                                | BIGINT     | GLOBAL | []      | 250         |
+| temp_directory                      | Set the directory to which temporary files are written.                             | VARCHAR    | GLOBAL | []      | post.db.tmp |
 
 

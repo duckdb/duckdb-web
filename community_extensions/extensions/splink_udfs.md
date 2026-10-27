@@ -17,8 +17,8 @@ extension:
 
 repo:
   github: moj-analytical-services/splink_udfs
-  ref: cf00056f887486d0aee0a853a764f9775aa40438
-  ref_next: 2ead762c7c554e377a72ef6a425f2da5cedace35
+  variegata: cf00056f887486d0aee0a853a764f9775aa40438
+  ref: c5b384ba3a62ea016e23c4fd408e012921595ea0
 
 docs:
   hello_world: |
@@ -31,13 +31,28 @@ docs:
     `ngrams(list,n)`, `double_metaphone(str)`
     and faster versions of `levenshtein` and `damerau_levenshtein`.
 
-extension_star_count: 6
-extension_star_count_pretty: 6
-extension_download_count: 4929
-extension_download_count_pretty: 4.9k
+extension_star_count: 7
+extension_star_count_pretty: 7
+extension_download_count: 25464
+extension_download_count_pretty: 25.5k
 image: '/images/community_extensions/social_preview/preview_community_extension_splink_udfs.png'
 layout: community_extension_doc
 ---
+### Compatibility Matrix
+
+This table covers all DuckDB releases that have not reached [end-of-life](https://duckdb.org/release_calendar), including LTS releases, and shows the 2 most recent patch releases of each. Older patch releases are not listed, but the extension may be available for them as well.
+
+<div class="extension_compatibility_table"></div>
+
+| Platform | 1.4.4 | 1.4.5 | 1.5.5 | 1.5.6 | 2.0.0 |
+| :--- | :---: | :---: | :---: | :---: | :---: |
+| Linux AMD64 | ✅ | ✅ | ✅ | ✅ | ✅ |
+| Linux ARM64 | ✅ | ✅ | ✅ | ✅ | ✅ |
+| macOS AMD64 | ✅ | ✅ | ✅ | ✅ | ✅ |
+| macOS ARM64 | ✅ | ✅ | ✅ | ✅ | ✅ |
+| Windows AMD64 | ✅ | ✅ | ✅ | ✅ | ✅ |
+| Windows ARM64 | ❌ | ❌ | ❌ | ❌ | ❌ |
+| WebAssembly | ✅ | ✅ | ✅ | ✅ | ✅ |
 
 ### Installing and Loading
 ```sql
@@ -55,20 +70,19 @@ LOAD {{ page.extension.name }};
 ### About {{ page.extension.name }}
 {{ page.docs.extended_description }}
 {% endif %}
-
 ### Added Functions
 
 <div class="extension_functions_table"></div>
 
-|   function_name   | function_type | description | comment | examples |
-|-------------------|---------------|-------------|---------|----------|
-| build_suffix_trie | aggregate     | NULL        | NULL    |          |
-| double_metaphone  | scalar        | NULL        | NULL    |          |
-| find_address      | scalar        | NULL        | NULL    |          |
-| ngrams            | scalar        | NULL        | NULL    |          |
-| soundex           | scalar        | NULL        | NULL    |          |
-| strip_diacritics  | scalar        | NULL        | NULL    |          |
-| unaccent          | scalar        | NULL        | NULL    |          |
+|      function_name       | function_type | description | comment | examples |
+|--------------------------|---------------|-------------|---------|----------|
+| _get_nicknames           | scalar        | NULL        | NULL    |          |
+| double_metaphone         | scalar        | NULL        | NULL    |          |
+| ngrams                   | scalar        | NULL        | NULL    |          |
+| nickname_lookup_versions | table         | NULL        | NULL    |          |
+| soundex                  | scalar        | NULL        | NULL    |          |
+| strip_diacritics         | scalar        | NULL        | NULL    |          |
+| unaccent                 | scalar        | NULL        | NULL    |          |
 
 ### Overloaded Functions
 
@@ -89,6 +103,8 @@ This extension does not add any types.
 
 <div class="extension_settings_table"></div>
 
-This extension does not add any settings.
+|      name      |                       description                       | input_type | scope  | aliases | typed_value |
+|----------------|---------------------------------------------------------|------------|--------|---------|-------------|
+| temp_directory | Set the directory to which temporary files are written. | VARCHAR    | GLOBAL | []      | post.db.tmp |
 
 

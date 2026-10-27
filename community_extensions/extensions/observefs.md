@@ -8,7 +8,7 @@ excerpt: |
 extension:
   name: observefs
   description: Provides IO observability to filesystem
-  version: 0.5.4
+  version: 0.6.0
   language: C++
   build: cmake
   license: MIT
@@ -20,7 +20,7 @@ extension:
 repo:
   github: dentiny/duckdb-filesystem-observability
   andium: cb6a1a7d88eba7f02a9690e1df4c6bf4e166a9f3
-  ref: c8a307e4969797e9427af20f2d76fed8f7d93d19
+  ref: 7ce82e737b047cdb03e9ad8e854ea73d43896844
 
 docs:
   hello_world: |
@@ -36,11 +36,26 @@ docs:
 
 extension_star_count: 18
 extension_star_count_pretty: 18
-extension_download_count: 3106
-extension_download_count_pretty: 3.1k
+extension_download_count: 18620
+extension_download_count_pretty: 18.6k
 image: '/images/community_extensions/social_preview/preview_community_extension_observefs.png'
 layout: community_extension_doc
 ---
+### Compatibility Matrix
+
+This table covers all DuckDB releases that have not reached [end-of-life](https://duckdb.org/release_calendar), including LTS releases, and shows the 2 most recent patch releases of each. Older patch releases are not listed, but the extension may be available for them as well.
+
+<div class="extension_compatibility_table"></div>
+
+| Platform | 1.4.4 | 1.4.5 | 1.5.5 | 1.5.6 | 2.0.0 |
+| :--- | :---: | :---: | :---: | :---: | :---: |
+| Linux AMD64 | ✅ | ❌ | ✅ | ✅ | ✅ |
+| Linux ARM64 | ✅ | ❌ | ✅ | ✅ | ✅ |
+| macOS AMD64 | ✅ | ❌ | ✅ | ✅ | ✅ |
+| macOS ARM64 | ✅ | ❌ | ✅ | ✅ | ✅ |
+| Windows AMD64 | ✅ | ❌ | ✅ | ✅ | ✅ |
+| Windows ARM64 | ❌ | ❌ | ❌ | ❌ | ❌ |
+| WebAssembly | ❌ | ❌ | ❌ | ❌ | ❌ |
 
 ### Installing and Loading
 ```sql
@@ -58,7 +73,6 @@ LOAD {{ page.extension.name }};
 ### About {{ page.extension.name }}
 {{ page.docs.extended_description }}
 {% endif %}
-
 ### Added Functions
 
 <div class="extension_functions_table"></div>
@@ -88,8 +102,9 @@ This extension does not add any types.
 
 <div class="extension_settings_table"></div>
 
-|                    name                    |                       description                       | input_type | scope  | aliases |
-|--------------------------------------------|---------------------------------------------------------|------------|--------|---------|
-| observefs_enable_external_file_cache_stats | Whether to enable stats record for external file cache. | BOOLEAN    | GLOBAL | []      |
+|                    name                    |                       description                       | input_type | scope  | aliases | typed_value |
+|--------------------------------------------|---------------------------------------------------------|------------|--------|---------|-------------|
+| observefs_enable_external_file_cache_stats | Whether to enable stats record for external file cache. | BOOLEAN    | GLOBAL | []      | 1           |
+| temp_directory                             | Set the directory to which temporary files are written. | VARCHAR    | GLOBAL | []      | post.db.tmp |
 
 

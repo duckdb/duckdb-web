@@ -8,7 +8,7 @@ excerpt: |
 extension:
   name: webdavfs
   description: Allows reading and writing files over WebDAV protocol
-  version: '2026091401'
+  version: '2026102301'
   language: C++
   build: cmake
   license: MIT
@@ -20,7 +20,8 @@ extension:
 repo:
   github: midwork-finds-jobs/duckdb-webdavfs
   andium: 359f4c05601798855c07954cf560a6e3beb6fc10
-  ref: 0259545780249ba6c9656b1cfca9a57168cfb63d
+  variegata: 0259545780249ba6c9656b1cfca9a57168cfb63d
+  ref: a32c98ef9dd21b00b24990d71c4493273f60ae14
 
 docs:
   hello_world: |
@@ -63,11 +64,26 @@ docs:
 
 extension_star_count: 1
 extension_star_count_pretty: 1
-extension_download_count: 664
-extension_download_count_pretty: 664
+extension_download_count: 5795
+extension_download_count_pretty: 5.8k
 image: '/images/community_extensions/social_preview/preview_community_extension_webdavfs.png'
 layout: community_extension_doc
 ---
+### Compatibility Matrix
+
+This table covers all DuckDB releases that have not reached [end-of-life](https://duckdb.org/release_calendar), including LTS releases, and shows the 2 most recent patch releases of each. Older patch releases are not listed, but the extension may be available for them as well.
+
+<div class="extension_compatibility_table"></div>
+
+| Platform | 1.4.4 | 1.4.5 | 1.5.5 | 1.5.6 | 2.0.0 |
+| :--- | :---: | :---: | :---: | :---: | :---: |
+| Linux AMD64 | ✅ | ❌ | ✅ | ❌ | ✅ |
+| Linux ARM64 | ✅ | ❌ | ✅ | ❌ | ✅ |
+| macOS AMD64 | ✅ | ❌ | ✅ | ❌ | ✅ |
+| macOS ARM64 | ✅ | ❌ | ✅ | ❌ | ✅ |
+| Windows AMD64 | ❌ | ❌ | ❌ | ❌ | ❌ |
+| Windows ARM64 | ❌ | ❌ | ❌ | ❌ | ❌ |
+| WebAssembly | ❌ | ❌ | ❌ | ❌ | ❌ |
 
 ### Installing and Loading
 ```sql
@@ -85,7 +101,6 @@ LOAD {{ page.extension.name }};
 ### About {{ page.extension.name }}
 {{ page.docs.extended_description }}
 {% endif %}
-
 ### Added Functions
 
 <div class="extension_functions_table"></div>
@@ -108,10 +123,11 @@ This extension does not add any types.
 
 <div class="extension_settings_table"></div>
 
-|             name              |                                           description                                           | input_type | scope  | aliases |
-|-------------------------------|-------------------------------------------------------------------------------------------------|------------|--------|---------|
-| webdav_debug_logging          | Enable debug logging for WebDAV operations                                                      | BOOLEAN    | GLOBAL | []      |
-| webdav_max_retries            | Maximum number of retries for failed WebDAV operations                                          | BIGINT     | GLOBAL | []      |
-| webdav_streaming_threshold_mb | File size threshold in MB for streaming uploads (files larger than this are streamed from disk) | BIGINT     | GLOBAL | []      |
+|             name              |                                           description                                           | input_type | scope  | aliases | typed_value |
+|-------------------------------|-------------------------------------------------------------------------------------------------|------------|--------|---------|-------------|
+| temp_directory                | Set the directory to which temporary files are written.                                         | VARCHAR    | GLOBAL | []      | post.db.tmp |
+| webdav_debug_logging          | Enable debug logging for WebDAV operations                                                      | BOOLEAN    | GLOBAL | []      | false       |
+| webdav_max_retries            | Maximum number of retries for failed WebDAV operations                                          | BIGINT     | GLOBAL | []      | 3           |
+| webdav_streaming_threshold_mb | File size threshold in MB for streaming uploads (files larger than this are streamed from disk) | BIGINT     | GLOBAL | []      | 50          |
 
 

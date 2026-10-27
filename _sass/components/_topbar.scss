@@ -29,13 +29,13 @@
 		align-items: flex-start;
 		list-style: none;
 		margin: 0;
-		padding: 5px;
-		border: 1px solid var(--main-codebox-border-color, #E6E6E6);
+		padding: 0;
 		border-radius: var(--page-radius-pill);
 
 		li {
 			@include label-1;
-			padding: 12px 14px;
+			padding: 12px 16px;
+			margin-right: -4px;
 			border-radius: var(--page-radius-pill);
 			color: var(--interactive-filter-unselected-text-color, #666);
 			cursor: pointer;
@@ -46,15 +46,19 @@
 			&.active {
 				color: var(--interactive-filter-selected-text-color, #1A1A1A);
 			}
+
+			&:last-child {
+				margin-right: 0;
+			}
 		}
 	}
 
 	.select-highlight {
 		position: absolute;
-		top: 5px;
+		top: 0;
 		left: 0;
 		width: 0;
-		height: calc(100% - 10px);
+		height: 100%;
 		border-radius: var(--page-radius-pill);
 		background: var(--interactive-filter-selected-background-color, #E6E6E6);
 		transition: all 0.3s ease;

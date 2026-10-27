@@ -14,12 +14,15 @@ extension:
   license: MIT
   requires_toolchains: "rust"
   excluded_platforms: "wasm_mvp;wasm_eh;wasm_threads;linux_amd64_gcc4;windows_amd64_rtools;windows_amd64_mingw"
+  opt_in_platforms: "osx_amd64"
+  test_config: '{"test_env_variables":{"YARDSTICK_NATIVE_PEG":"1"}}'
   maintainers:
     - sidequery
 
 repo:
   github: sidequery/yardstick
-  ref: f19d73fa93f2601cfa81ca3ebad841dffcc5f609
+  ref: 6b5e9ead9dd69ee1f79323407c2469d5f1619481
+  variegata: f19d73fa93f2601cfa81ca3ebad841dffcc5f609
 
 docs:
   hello_world: |
@@ -68,13 +71,28 @@ docs:
 
     For more details, visit the [extension repository](https://github.com/sidequery/yardstick).
 
-extension_star_count: 58
-extension_star_count_pretty: 58
-extension_download_count: 775
-extension_download_count_pretty: 775
+extension_star_count: 59
+extension_star_count_pretty: 59
+extension_download_count: 12657
+extension_download_count_pretty: 12.7k
 image: '/images/community_extensions/social_preview/preview_community_extension_yardstick.png'
 layout: community_extension_doc
 ---
+### Compatibility Matrix
+
+This table covers all DuckDB releases that have not reached [end-of-life](https://duckdb.org/release_calendar), including LTS releases, and shows the 2 most recent patch releases of each. Older patch releases are not listed, but the extension may be available for them as well.
+
+<div class="extension_compatibility_table"></div>
+
+| Platform | 1.4.4 | 1.4.5 | 1.5.5 | 1.5.6 | 2.0.0 |
+| :--- | :---: | :---: | :---: | :---: | :---: |
+| Linux AMD64 | ❌ | ❌ | ✅ | ✅ | ✅ |
+| Linux ARM64 | ❌ | ❌ | ✅ | ✅ | ✅ |
+| macOS AMD64 | ❌ | ❌ | ✅ | ✅ | ✅ |
+| macOS ARM64 | ❌ | ❌ | ✅ | ✅ | ✅ |
+| Windows AMD64 | ❌ | ❌ | ✅ | ✅ | ✅ |
+| Windows ARM64 | ❌ | ❌ | ❌ | ❌ | ❌ |
+| WebAssembly | ❌ | ❌ | ❌ | ❌ | ❌ |
 
 ### Installing and Loading
 ```sql
@@ -92,14 +110,18 @@ LOAD {{ page.extension.name }};
 ### About {{ page.extension.name }}
 {{ page.docs.extended_description }}
 {% endif %}
-
 ### Added Functions
 
 <div class="extension_functions_table"></div>
 
-| function_name | function_type | description | comment | examples |
-|---------------|---------------|-------------|---------|----------|
-| yardstick     | table         | NULL        | NULL    |          |
+|   function_name    | function_type | description | comment | examples |
+|--------------------|---------------|-------------|---------|----------|
+| yardstick          | table         | NULL        | NULL    |          |
+| yardstick_combine  | scalar        | NULL        | NULL    |          |
+| yardstick_finalize | scalar        | NULL        | NULL    |          |
+| yardstick_scoped   | table         | NULL        | NULL    |          |
+| yardstick_state    | scalar        | NULL        | NULL    |          |
+| yardstick_warning  | scalar        | NULL        | NULL    |          |
 
 ### Overloaded Functions
 
@@ -117,6 +139,9 @@ This extension does not add any types.
 
 <div class="extension_settings_table"></div>
 
-This extension does not add any settings.
+|              name               |                       description                       | input_type | scope  | aliases | typed_value |
+|---------------------------------|---------------------------------------------------------|------------|--------|---------|-------------|
+| allow_parser_override_extension | Allow extensions to override the current parser.        | VARCHAR    | GLOBAL | []      | fallback    |
+| temp_directory                  | Set the directory to which temporary files are written. | VARCHAR    | GLOBAL | []      | post.db.tmp |
 
 

@@ -8,7 +8,7 @@ excerpt: |
 extension:
   name: duckrouting
   description: Graph routing for DuckDB - shortest paths, flow, spanning trees and more, following pgRouting's semantics and powered by the Boost Graph Library.
-  version: 0.1.5
+  version: 0.1.6
   language: C++
   build: cmake
   license: MIT
@@ -17,7 +17,7 @@ extension:
 
 repo:
   github: am2222/duckrouting
-  ref: 535dd2298eed5d95853059f675b394b4c3ff5611
+  ref: 0bd1bb7cece6623346641e33de65694117ff36c1
 
 docs:
   hello_world: |
@@ -92,13 +92,28 @@ docs:
     extension. Run `INSTALL spatial; LOAD spatial;` before calling one; spatial is
     not needed for anything else.
 
-extension_star_count: 4
-extension_star_count_pretty: 4
-extension_download_count: 674
-extension_download_count_pretty: 674
+extension_star_count: 5
+extension_star_count_pretty: 5
+extension_download_count: 13775
+extension_download_count_pretty: 13.8k
 image: '/images/community_extensions/social_preview/preview_community_extension_duckrouting.png'
 layout: community_extension_doc
 ---
+### Compatibility Matrix
+
+This table covers all DuckDB releases that have not reached [end-of-life](https://duckdb.org/release_calendar), including LTS releases, and shows the 2 most recent patch releases of each. Older patch releases are not listed, but the extension may be available for them as well.
+
+<div class="extension_compatibility_table"></div>
+
+| Platform | 1.4.4 | 1.4.5 | 1.5.5 | 1.5.6 | 2.0.0 |
+| :--- | :---: | :---: | :---: | :---: | :---: |
+| Linux AMD64 | ❌ | ❌ | ✅ | ✅ | ✅ |
+| Linux ARM64 | ❌ | ❌ | ✅ | ✅ | ✅ |
+| macOS AMD64 | ❌ | ❌ | ✅ | ✅ | ✅ |
+| macOS ARM64 | ❌ | ❌ | ✅ | ✅ | ✅ |
+| Windows AMD64 | ❌ | ❌ | ✅ | ✅ | ✅ |
+| Windows ARM64 | ❌ | ❌ | ❌ | ❌ | ❌ |
+| WebAssembly | ❌ | ❌ | ✅ | ✅ | ✅ |
 
 ### Installing and Loading
 ```sql
@@ -116,7 +131,6 @@ LOAD {{ page.extension.name }};
 ### About {{ page.extension.name }}
 {{ page.docs.extended_description }}
 {% endif %}
-
 ### Added Functions
 
 <div class="extension_functions_table"></div>
@@ -231,6 +245,8 @@ This extension does not add any types.
 
 <div class="extension_settings_table"></div>
 
-This extension does not add any settings.
+|      name      |                       description                       | input_type | scope  | aliases | typed_value |
+|----------------|---------------------------------------------------------|------------|--------|---------|-------------|
+| temp_directory | Set the directory to which temporary files are written. | VARCHAR    | GLOBAL | []      | post.db.tmp |
 
 

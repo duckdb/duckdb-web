@@ -1,0 +1,58 @@
+---
+layout: docu
+redirect_from:
+- /docs/guides/database_integration/postgres
+- /docs/guides/import/query_postgres
+- /docs/stable/guides/database_integration/postgres
+- /docs/current/guides/database_integration/postgres
+- /docs/lts/guides/database_integration/postgres
+- /docs/preview/guides/database_integration/postgres
+title: PostgreSQL Import
+---
+
+To run a query directly on a running PostgreSQL database, the [`postgres` extension]({% link docs/2.0/core_extensions/postgres/overview.md %}) is required.
+
+## Installation and Loading
+
+The extension can be installed using the `INSTALL` SQL command. This only needs to be run once.
+
+```sql
+INSTALL postgres;
+```
+
+To load the `postgres` extension for usage, use the `LOAD` SQL command:
+
+```sql
+LOAD postgres;
+```
+
+## Usage
+
+After the `postgres` extension is installed, you can attach a PostgreSQL database using the [`ATTACH` command]({% link docs/2.0/sql/statements/attach.md %}). This allows you to query all tables stored within the PostgreSQL database as if it was a regular database.
+
+The first parameter of `ATTACH` is the [PostgreSQL connection string](https://www.postgresql.org/docs/current/libpq-connect.html#LIBPQ-CONNSTRING), a list of connection arguments provided in `{key}={value}` format. Below is a list of valid arguments.
+
+| Name       | Description                          | Default        |
+| ---------- | ------------------------------------ | -------------- |
+| `host`     | Name of host to connect to           | `localhost`    |
+| `hostaddr` | Host IP address                      | `localhost`    |
+| `port`     | Port number                          | `5432`         |
+| `user`     | PostgreSQL user name                 | [OS user name] |
+| `password` | PostgreSQL password                  |                |
+| `dbname`   | Database name                        | [user]         |
+| `passfile` | Name of file passwords are stored in | `~/.pgpass`    |
+
+```sql
+-- Attach the PostgreSQL database using the given connection string
+ATTACH 'host=localhost port=5432 dbname=mydb' AS test (TYPE postgres);
+-- The table "tbl_name" can now be queried as if it is a regular table
+SELECT * FROM test.tbl_name;
+-- Switch the active database to "test"
+USE test;
+-- List all tables in the file
+SHOW TABLES;
+```
+
+For more information see the [PostgreSQL extension documentation]({% link docs/2.0/core_extensions/postgres/overview.md %}).
+
+To run entire queries on the PostgreSQL server instead of scanning its tables from DuckDB, see the [`CONNECT` statement]({% link docs/2.0/sql/statements/connect.md %}).

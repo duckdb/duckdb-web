@@ -8,13 +8,13 @@ excerpt: |
 ## The DuckDB community-extensions registry entry for subtoken.
 ##
 ## This file is the submission: it is copied to `extensions/subtoken/description.yml`
-## in duckdb/community-extensions. Merging it there makes DuckDB's CI build this
-## repository at `repo.ref` for every platform in the matrix and publish the
-## binaries, after which `INSTALL subtoken FROM community` works for anyone.
+## in duckdb/community-extensions. The extension is in that registry: DuckDB's CI
+## builds this repository at `repo.ref` for every platform in the matrix and
+## publishes the binaries, so `INSTALL subtoken FROM community` works for anyone.
 ##
-## The `repo.ref` below names a commit that carries the build contract in
+## The `repo.ref` and `repo.ref_next` below name a commit that carries the build contract in
 ## `Makefile` and the `extension-ci-tools` submodule. `scripts/check_description_examples.py`
-## asserts only that the ref is a full 40-character SHA, because a check that the commit
+## asserts only that each is a full 40-character SHA, because a check that the commit
 ## carries the contract would go quiet in any clone that no longer has the
 ## object, which is the shape of check this repository keeps deleting.
 ##
@@ -25,14 +25,17 @@ excerpt: |
 extension:
   name: subtoken
   description: Text becomes tokens, tokens become vectors. Inside DuckDB, with no network, no key and no bill
-  version: 0.1.0
+  version: 0.2.0
   language: Rust
   build: cargo
   license: MIT
   # wasm: the artifact is a native cdylib and the bundled weights alone are 30 MB.
   # musl and windows_arm64 are opt-in in the distribution matrix and are not
-  # opted into. windows_amd64_mingw is excluded; windows_amd64 (MSVC) is not.
+  # opted into. osx_amd64 became opt-in in the DuckDB 2.0 matrix, and is opted
+  # into so Intel Macs keep a build. windows_amd64_mingw is excluded;
+  # windows_amd64 (MSVC) is not.
   excluded_platforms: "wasm_mvp;wasm_eh;wasm_threads;linux_amd64_musl;linux_arm64_musl;windows_amd64_mingw"
+  opt_in_platforms: "osx_amd64"
   # python3 backs the metadata-stamp venv the C-API build contract uses.
   requires_toolchains: "rust;python3"
   maintainers:
@@ -40,7 +43,14 @@ extension:
 
 repo:
   github: meridian-online/subtoken
-  ref: c453860544b53803bb9b830c4818e4f1ad2d4057
+  ref: a0aa1d802ab3a6fdea67b4ec5453f6e916863bc0
+  # The registry builds `ref_next` against the next DuckDB release before it
+  # ships; without it that build skips and passes having built nothing.
+  ref_next: a0aa1d802ab3a6fdea67b4ec5453f6e916863bc0
+  # DuckDB 1.5.6 builds from `variegata`: the commit the v1 build was already
+  # published from, which targets the v1 C API. A build from `ref` would not
+  # load on 1.5.
+  variegata: 3bf95680e23ba6ad23951023bd65432f53877485
 
 docs:
   hello_world: |
@@ -87,6 +97,18 @@ docs:
     Being a scalar is the point. `subtoken_embed` composes with `WHERE` and `LIMIT`, so a
     filtered subset of a table can be embedded without materialising the rest,
     and it behaves the same over a local Parquet file as over a remote one.
+
+    ## Requirements
+
+    The extension needs DuckDB 2.0.0 exactly. DuckDB 2.0 ships its v2 C API as unstable, so a build loads only on the DuckDB release it was built for; each DuckDB release gets a rebuild. If you are on DuckDB 1.5, `INSTALL subtoken FROM community` fetches the earlier build, which stays pinned to the v1 commit it was published from.
+
+    `duckdb_functions()` describes each function, with real parameter names, a description, a runnable example and a category:
+
+    ```sql
+    SELECT function_name, parameters, description, examples, categories
+    FROM duckdb_functions()
+    WHERE function_name LIKE 'subtoken_%';
+    ```
 
     ## What it is good at, and what it is not
 
@@ -320,8 +342,9 @@ docs:
     ### What counts as the same string
 
     The bundled tokenizer lowercases, strips accents and ignores surrounding
-    whitespace, so you do not have to normalise a column before embedding it. Word
-    order still matters, and different words still give different vectors.
+    whitespace, so you do not have to normalise a column before embedding it. The
+    same words in another order give the same vector, and different words still
+    give different vectors.
 
     ```sql
     SELECT subtoken_embed('Steel') = subtoken_embed('  steel  ')          AS case_and_space_fold,
@@ -399,11 +422,26 @@ docs:
 
 extension_star_count: 0
 extension_star_count_pretty: 0
-extension_download_count: 711
-extension_download_count_pretty: 711
+extension_download_count: 12321
+extension_download_count_pretty: 12.3k
 image: '/images/community_extensions/social_preview/preview_community_extension_subtoken.png'
 layout: community_extension_doc
 ---
+### Compatibility Matrix
+
+This table covers all DuckDB releases that have not reached [end-of-life](https://duckdb.org/release_calendar), including LTS releases, and shows the 2 most recent patch releases of each. Older patch releases are not listed, but the extension may be available for them as well.
+
+<div class="extension_compatibility_table"></div>
+
+| Platform | 1.4.4 | 1.4.5 | 1.5.5 | 1.5.6 | 2.0.0 |
+| :--- | :---: | :---: | :---: | :---: | :---: |
+| Linux AMD64 | ❌ | ❌ | ✅ | ✅ | ✅ |
+| Linux ARM64 | ❌ | ❌ | ✅ | ✅ | ✅ |
+| macOS AMD64 | ❌ | ❌ | ✅ | ✅ | ✅ |
+| macOS ARM64 | ❌ | ❌ | ✅ | ✅ | ✅ |
+| Windows AMD64 | ❌ | ❌ | ✅ | ✅ | ✅ |
+| Windows ARM64 | ❌ | ❌ | ❌ | ❌ | ❌ |
+| WebAssembly | ❌ | ❌ | ❌ | ❌ | ❌ |
 
 ### Installing and Loading
 ```sql
@@ -421,20 +459,19 @@ LOAD {{ page.extension.name }};
 ### About {{ page.extension.name }}
 {{ page.docs.extended_description }}
 {% endif %}
-
 ### Added Functions
 
 <div class="extension_functions_table"></div>
 
-|     function_name     | function_type | description | comment | examples |
-|-----------------------|---------------|-------------|---------|----------|
-| subtoken_cache_clear  | scalar        | NULL        | NULL    |          |
-| subtoken_cache_stats  | scalar        | NULL        | NULL    |          |
-| subtoken_embed        | scalar        | NULL        | NULL    |          |
-| subtoken_is_truncated | scalar        | NULL        | NULL    |          |
-| subtoken_model_id     | scalar        | NULL        | NULL    |          |
-| subtoken_models       | scalar        | NULL        | NULL    |          |
-| subtoken_version      | scalar        | NULL        | NULL    |          |
+|     function_name     | function_type |                                                                                                  description                                                                                                  | comment |                     examples                      |
+|-----------------------|---------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|---------|---------------------------------------------------|
+| subtoken_cache_clear  | scalar        | Drops every cached vector, resets the cache counters and returns how many vectors were dropped.                                                                                                               | NULL    | [subtoken_cache_clear()]                          |
+| subtoken_cache_stats  | scalar        | Returns the embedding cache's counters since the last subtoken_cache_clear(): hits, misses, encoder runs, lookups too full to store, entries and capacity.                                                    | NULL    | [subtoken_cache_stats()]                          |
+| subtoken_embed        | scalar        | Returns a unit-length FLOAT[] vector for text from the model bundled in the extension, with no network call; text with no in-vocabulary tokens (including '') gives the all-zero vector, and NULL gives NULL. | NULL    | [subtoken_embed('a quiet street near the river')] |
+| subtoken_is_truncated | scalar        | Returns true when subtoken_embed(text) had to drop part of text to fit the model's input limits, so its vector does not reflect all of it.                                                                    | NULL    | [subtoken_is_truncated(repeat('word ', 2000))]    |
+| subtoken_model_id     | scalar        | Returns the bundled model's full key; store it beside a vector column so a later session can refuse to compare vectors from a different model.                                                                | NULL    | [subtoken_model_id()]                             |
+| subtoken_models       | scalar        | Returns the catalogue row for the bundled model: name, backend, revision, width, input limit, licence, support tier and key.                                                                                  | NULL    | [subtoken_models().width]                         |
+| subtoken_version      | scalar        | Returns one line naming this build, the bundled model, its revision and the vector width.                                                                                                                     | NULL    | [subtoken_version()]                              |
 
 ### Overloaded Functions
 
@@ -446,12 +483,20 @@ This extension does not add any function overloads.
 
 <div class="extension_types_table"></div>
 
-This extension does not add any types.
+| type_name | type_size | logical_type | type_category | internal |
+|-----------|----------:|--------------|---------------|----------|
+| BIGINT    | 8         | BIGINT       | NUMERIC       | true     |
+| BOOLEAN   | 1         | BOOLEAN      | BOOLEAN       | true     |
+| FLOAT     | 4         | FLOAT        | NUMERIC       | true     |
+| STRUCT    | 0         | STRUCT       | COMPOSITE     | true     |
+| VARCHAR   | 16        | VARCHAR      | STRING        | true     |
 
 ### Added Settings
 
 <div class="extension_settings_table"></div>
 
-This extension does not add any settings.
+|      name      |                       description                       | input_type | scope  | aliases | typed_value |
+|----------------|---------------------------------------------------------|------------|--------|---------|-------------|
+| temp_directory | Set the directory to which temporary files are written. | VARCHAR    | GLOBAL | []      | post.db.tmp |
 
 

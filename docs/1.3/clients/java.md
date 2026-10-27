@@ -4,7 +4,7 @@ layout: docu
 title: Java JDBC Client
 ---
 
-> The latest version of the DuckDB Java (JDBC) client is {{ site.current_duckdb_java_short_version }}.
+> The latest version of the DuckDB Java (JDBC) client is {{ site.maintained_duckdb_java_short_version }}.
 
 ## Installation
 

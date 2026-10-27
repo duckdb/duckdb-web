@@ -18,8 +18,8 @@ extension:
     - evertlammerts
 repo:
   github: paleolimbot/duckdb-nanoarrow
-  ref: 42e4199a67c4cd0789087562a025e87e7130fdc3
-  ref_next: 2507666f14fedfbad6783bc1d74cbdf177d69b8f
+  ref: e390b9b4f8a41e64e41488888defb27d8f1e1421
+  variegata: 42e4199a67c4cd0789087562a025e87e7130fdc3
 
 docs:
   hello_world: |
@@ -44,13 +44,28 @@ docs:
 
 
 
-extension_star_count: 82
-extension_star_count_pretty: 82
-extension_download_count: 26594
-extension_download_count_pretty: 26.6k
+extension_star_count: 92
+extension_star_count_pretty: 92
+extension_download_count: 72383
+extension_download_count_pretty: 72.4k
 image: '/images/community_extensions/social_preview/preview_community_extension_nanoarrow.png'
 layout: community_extension_doc
 ---
+### Compatibility Matrix
+
+This table covers all DuckDB releases that have not reached [end-of-life](https://duckdb.org/release_calendar), including LTS releases, and shows the 2 most recent patch releases of each. Older patch releases are not listed, but the extension may be available for them as well.
+
+<div class="extension_compatibility_table"></div>
+
+| Platform | 1.4.4 | 1.4.5 | 1.5.5 | 1.5.6 | 2.0.0 |
+| :--- | :---: | :---: | :---: | :---: | :---: |
+| Linux AMD64 | ✅ | ❌ | ✅ | ✅ | ✅ |
+| Linux ARM64 | ✅ | ❌ | ✅ | ✅ | ✅ |
+| macOS AMD64 | ✅ | ❌ | ✅ | ✅ | ✅ |
+| macOS ARM64 | ✅ | ❌ | ✅ | ✅ | ✅ |
+| Windows AMD64 | ✅ | ❌ | ✅ | ✅ | ✅ |
+| Windows ARM64 | ❌ | ❌ | ❌ | ❌ | ❌ |
+| WebAssembly | ✅ | ❌ | ✅ | ✅ | ✅ |
 
 ### Installing and Loading
 ```sql
@@ -68,13 +83,13 @@ LOAD {{ page.extension.name }};
 ### About {{ page.extension.name }}
 {{ page.docs.extended_description }}
 {% endif %}
-
 ### Added Functions
 
 <div class="extension_functions_table"></div>
 
 |   function_name   | function_type | description | comment | examples |
 |-------------------|---------------|-------------|---------|----------|
+| arrow_kv_metadata | table         | NULL        | NULL    |          |
 | nanoarrow_version | scalar        | NULL        | NULL    |          |
 | read_arrow        | table         | NULL        | NULL    |          |
 | scan_arrow_ipc    | table         | NULL        | NULL    |          |
@@ -96,6 +111,8 @@ This extension does not add any types.
 
 <div class="extension_settings_table"></div>
 
-This extension does not add any settings.
+|      name      |                       description                       | input_type | scope  | aliases | typed_value |
+|----------------|---------------------------------------------------------|------------|--------|---------|-------------|
+| temp_directory | Set the directory to which temporary files are written. | VARCHAR    | GLOBAL | []      | post.db.tmp |
 
 

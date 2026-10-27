@@ -12,7 +12,7 @@ body {
 body.documentation {
 
     &.lts,
-    &.preview,
+    &.maintained,
     &.outdated {
         --docbanner-height: 42px;
     }

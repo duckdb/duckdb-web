@@ -21,15 +21,31 @@ extension:
 repo:
   andium: db7e2017352a63d43da4c9391321fb66f4d1e18b
   github: query-farm/textplot
-  ref: ea239eeb23dbdb75c252af93fbecc358207a5218
+  ref: e3b8772c5c5a15077f86e200f90b4999504a46d6
+  variegata: 6d3bd91ea6fd9c1df2947adf0f19b8d7cbab2571
 
 extension_star_count: 29
 extension_star_count_pretty: 29
-extension_download_count: 1353
-extension_download_count_pretty: 1.4k
+extension_download_count: 25653
+extension_download_count_pretty: 25.7k
 image: '/images/community_extensions/social_preview/preview_community_extension_textplot.png'
 layout: community_extension_doc
 ---
+### Compatibility Matrix
+
+This table covers all DuckDB releases that have not reached [end-of-life](https://duckdb.org/release_calendar), including LTS releases, and shows the 2 most recent patch releases of each. Older patch releases are not listed, but the extension may be available for them as well.
+
+<div class="extension_compatibility_table"></div>
+
+| Platform | 1.4.4 | 1.4.5 | 1.5.5 | 1.5.6 | 2.0.0 |
+| :--- | :---: | :---: | :---: | :---: | :---: |
+| Linux AMD64 | ✅ | ✅ | ✅ | ✅ | ✅ |
+| Linux ARM64 | ✅ | ✅ | ✅ | ✅ | ✅ |
+| macOS AMD64 | ✅ | ✅ | ✅ | ✅ | ✅ |
+| macOS ARM64 | ✅ | ✅ | ✅ | ✅ | ✅ |
+| Windows AMD64 | ✅ | ✅ | ✅ | ✅ | ✅ |
+| Windows ARM64 | ❌ | ❌ | ❌ | ❌ | ❌ |
+| WebAssembly | ✅ | ✅ | ✅ | ✅ | ✅ |
 
 ### Installing and Loading
 ```sql
@@ -47,17 +63,11 @@ LOAD {{ page.extension.name }};
 ### About {{ page.extension.name }}
 {{ page.docs.extended_description }}
 {% endif %}
-
 ### Added Functions
 
 <div class="extension_functions_table"></div>
 
-| function_name | function_type |                                                                                                                                                               description                                                                                                                                                               | comment |                                                                                                                                                                                                    examples                                                                                                                                                                                                     |
-|---------------|---------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|---------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| tp_bar        | scalar        | Creates a horizontal bar chart visualization from a numeric value. Supports customizable width, colors, shapes (square/circle/heart), and color thresholds.                                                                                                                                                                             | NULL    | [tp_bar(0.75), tp_bar(75, min := 0, max := 100, width := 20), tp_bar(0.5, "on" := '#', off := '-', width := 10), tp_bar(0.8, shape := 'heart', on_color := 'red'), tp_bar(75, min := 0, max := 100, thresholds := [{'threshold': 80, 'color': 'red'}, {'threshold': 50, 'color': 'yellow'}])]                                                                                                                   |
-| tp_density    | scalar        | Creates a density plot (histogram) visualization from an array of numeric values. Supports multiple styles: shaded, dots, ascii, height, circles, safety, rainbow_circle, rainbow_square, moon, sparse, and white. Pass 'marker_value' to highlight the bin containing a particular value, optionally with a custom 'marker' character. | NULL    | [tp_density([1.0, 2.0, 2.0, 3.0, 3.0, 3.0, 4.0, 4.0, 5.0]), tp_density([1.0, 2.0, 3.0, 4.0, 5.0, 6.0, 7.0, 8.0], width := 40), tp_density([1.0, 2.0, 3.0, 4.0, 5.0], style := 'height'), tp_density([1.0, 2.0, 3.0, 4.0, 5.0], marker_value := 3.0), tp_density([1.0, 2.0, 3.0, 4.0, 5.0], marker := '\|', marker_value := 4.0), tp_density([1.0, 2.0, 3.0, 4.0, 5.0], style := 'rainbow_square', width := 30)] |
-| tp_qr         | scalar        | Generates a text-based QR code from a string or blob. Supports configurable error correction levels and custom on/off characters.                                                                                                                                                                                                       | NULL    | [tp_qr('https://duckdb.org'), tp_qr('https://example.com', ecc := 'high'), tp_qr('Hello, world!', "on" := '##', off := '  '), tp_qr('\xDE\xAD\xBE\xEF'::BLOB)]                                                                                                                                                                                                                                                  |
-| tp_sparkline  | scalar        | Creates a sparkline visualization from an array of numeric values. Supports three modes: 'absolute' (height-based), 'delta' (up/down/same direction), and 'trend' (direction with magnitude). Multiple themes available per mode.                                                                                                       | NULL    | [tp_sparkline([1.0, 2.0, 3.0, 4.0, 5.0]), tp_sparkline([1.0, 3.0, 2.0, 5.0, 4.0, 6.0], width := 20), tp_sparkline([1.0, 2.0, 1.0, 3.0, 2.0], mode := 'delta', theme := 'arrows'), tp_sparkline([1.0, 2.0, 3.0, 4.0, 5.0], mode := 'absolute', theme := 'utf8_blocks'), tp_sparkline([1.0, 5.0, 3.0, 8.0, 6.0], mode := 'trend', theme := 'faces')]                                                              |
+This extension does not add any functions.
 
 ### Overloaded Functions
 

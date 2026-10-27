@@ -8,7 +8,7 @@ excerpt: |
 extension:
   name: sshfs
   description: Allows reading and writing files over SSH
-  version: '2026091401'
+  version: '2026102301'
   language: C++
   build: cmake
   license: MIT
@@ -20,7 +20,8 @@ extension:
 repo:
   github: midwork-finds-jobs/duckdb-sshfs
   andium: 5f2e422f964010d11a0bea040ab421c4d7f7fa41
-  ref: 34d3dddd08f29e7c40bda9a05d56a1b053f9ec7d
+  variegata: 34d3dddd08f29e7c40bda9a05d56a1b053f9ec7d
+  ref: b7ca495c21ea7cec2c59c1e890129a95fdd4a7c3
 
 docs:
   hello_world: |
@@ -59,11 +60,26 @@ docs:
 
 extension_star_count: 14
 extension_star_count_pretty: 14
-extension_download_count: 741
-extension_download_count_pretty: 741
+extension_download_count: 12541
+extension_download_count_pretty: 12.5k
 image: '/images/community_extensions/social_preview/preview_community_extension_sshfs.png'
 layout: community_extension_doc
 ---
+### Compatibility Matrix
+
+This table covers all DuckDB releases that have not reached [end-of-life](https://duckdb.org/release_calendar), including LTS releases, and shows the 2 most recent patch releases of each. Older patch releases are not listed, but the extension may be available for them as well.
+
+<div class="extension_compatibility_table"></div>
+
+| Platform | 1.4.4 | 1.4.5 | 1.5.5 | 1.5.6 | 2.0.0 |
+| :--- | :---: | :---: | :---: | :---: | :---: |
+| Linux AMD64 | ✅ | ❌ | ✅ | ✅ | ✅ |
+| Linux ARM64 | ✅ | ❌ | ✅ | ✅ | ✅ |
+| macOS AMD64 | ✅ | ❌ | ✅ | ✅ | ✅ |
+| macOS ARM64 | ✅ | ❌ | ✅ | ✅ | ✅ |
+| Windows AMD64 | ❌ | ❌ | ❌ | ❌ | ❌ |
+| Windows ARM64 | ❌ | ❌ | ❌ | ❌ | ❌ |
+| WebAssembly | ❌ | ❌ | ❌ | ❌ | ❌ |
 
 ### Installing and Loading
 ```sql
@@ -81,7 +97,6 @@ LOAD {{ page.extension.name }};
 ### About {{ page.extension.name }}
 {{ page.docs.extended_description }}
 {% endif %}
-
 ### Added Functions
 
 <div class="extension_functions_table"></div>
@@ -104,15 +119,16 @@ This extension does not add any types.
 
 <div class="extension_settings_table"></div>
 
-|             name             |                                                                           description                                                                            | input_type | scope  | aliases |
-|------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------|------------|--------|---------|
-| ssh_keepalive                | SSH keepalive interval in seconds (default: 60, set to 0 to disable). Prevents idle connection timeouts and improves performance.                                | BIGINT     | GLOBAL | []      |
-| sshfs_chunk_size_mb          | Chunk size in MB for uploads (default: 50MB, larger chunks may improve throughput but use more memory)                                                           | BIGINT     | GLOBAL | []      |
-| sshfs_debug_logging          | Enable debug logging for SSHFS operations                                                                                                                        | BOOLEAN    | GLOBAL | []      |
-| sshfs_initial_retry_delay_ms | Initial delay in milliseconds between retries, with exponential backoff (default: 1000)                                                                          | BIGINT     | GLOBAL | []      |
-| sshfs_max_concurrent_uploads | Maximum number of concurrent chunk uploads (default: 2, higher values may improve speed but use more connections)                                                | BIGINT     | GLOBAL | []      |
-| sshfs_max_retries            | Maximum number of connection retry attempts (default: 3)                                                                                                         | BIGINT     | GLOBAL | []      |
-| sshfs_strict_crypto          | Restrict SSH to non-NIST algorithms only (curve25519, ed25519, DH group14+). Removes ecdh-sha2-nistp*, ecdsa-sha2-nistp*, and legacy algorithms (default: false) | BOOLEAN    | GLOBAL | []      |
-| sshfs_timeout_seconds        | Timeout in seconds for SSH operations (default: 300 = 5 minutes)                                                                                                 | BIGINT     | GLOBAL | []      |
+|             name             |                                                                           description                                                                            | input_type | scope  | aliases | typed_value |
+|------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------|------------|--------|---------|-------------|
+| ssh_keepalive                | SSH keepalive interval in seconds (default: 60, set to 0 to disable). Prevents idle connection timeouts and improves performance.                                | BIGINT     | GLOBAL | []      | 60          |
+| sshfs_chunk_size_mb          | Chunk size in MB for uploads (default: 50MB, larger chunks may improve throughput but use more memory)                                                           | BIGINT     | GLOBAL | []      | 50          |
+| sshfs_debug_logging          | Enable debug logging for SSHFS operations                                                                                                                        | BOOLEAN    | GLOBAL | []      | false       |
+| sshfs_initial_retry_delay_ms | Initial delay in milliseconds between retries, with exponential backoff (default: 1000)                                                                          | BIGINT     | GLOBAL | []      | 1000        |
+| sshfs_max_concurrent_uploads | Maximum number of concurrent chunk uploads (default: 2, higher values may improve speed but use more connections)                                                | BIGINT     | GLOBAL | []      | 2           |
+| sshfs_max_retries            | Maximum number of connection retry attempts (default: 3)                                                                                                         | BIGINT     | GLOBAL | []      | 3           |
+| sshfs_strict_crypto          | Restrict SSH to non-NIST algorithms only (curve25519, ed25519, DH group14+). Removes ecdh-sha2-nistp*, ecdsa-sha2-nistp*, and legacy algorithms (default: false) | BOOLEAN    | GLOBAL | []      | false       |
+| sshfs_timeout_seconds        | Timeout in seconds for SSH operations (default: 300 = 5 minutes)                                                                                                 | BIGINT     | GLOBAL | []      | 300         |
+| temp_directory               | Set the directory to which temporary files are written.                                                                                                          | VARCHAR    | GLOBAL | []      | post.db.tmp |
 
 

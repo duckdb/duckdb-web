@@ -8,7 +8,7 @@ excerpt: |
 extension:
   name: px
   description: Extension for querying Px-files with DuckDB.
-  version: 0.0.2
+  version: 0.0.4
   language: C++
   build: cmake
   license: MIT
@@ -17,7 +17,9 @@ extension:
 
 repo:
   github: toppyy/duckdb-px
-  ref: 5be93d58f438c48c492f9a9ce729eb61b9bbc025
+  ref: 8656c63225234d78e854a3ec8d66f9defe4ed120
+  ref_next: 8656c63225234d78e854a3ec8d66f9defe4ed120
+  variegata: bc40da8093fc530768255dbc3ee49b6922172dd3
 
 docs:
   hello_world: |
@@ -28,11 +30,26 @@ docs:
 
 extension_star_count: 0
 extension_star_count_pretty: 0
-extension_download_count: 763
-extension_download_count_pretty: 763
+extension_download_count: 5368
+extension_download_count_pretty: 5.4k
 image: '/images/community_extensions/social_preview/preview_community_extension_px.png'
 layout: community_extension_doc
 ---
+### Compatibility Matrix
+
+This table covers all DuckDB releases that have not reached [end-of-life](https://duckdb.org/release_calendar), including LTS releases, and shows the 2 most recent patch releases of each. Older patch releases are not listed, but the extension may be available for them as well.
+
+<div class="extension_compatibility_table"></div>
+
+| Platform | 1.4.4 | 1.4.5 | 1.5.5 | 1.5.6 | 2.0.0 |
+| :--- | :---: | :---: | :---: | :---: | :---: |
+| Linux AMD64 | ❌ | ❌ | ✅ | ❌ | ✅ |
+| Linux ARM64 | ❌ | ❌ | ✅ | ❌ | ✅ |
+| macOS AMD64 | ❌ | ❌ | ✅ | ❌ | ✅ |
+| macOS ARM64 | ❌ | ❌ | ✅ | ❌ | ✅ |
+| Windows AMD64 | ❌ | ❌ | ✅ | ❌ | ✅ |
+| Windows ARM64 | ❌ | ❌ | ❌ | ❌ | ❌ |
+| WebAssembly | ❌ | ❌ | ✅ | ❌ | ✅ |
 
 ### Installing and Loading
 ```sql
@@ -50,14 +67,14 @@ LOAD {{ page.extension.name }};
 ### About {{ page.extension.name }}
 {{ page.docs.extended_description }}
 {% endif %}
-
 ### Added Functions
 
 <div class="extension_functions_table"></div>
 
-| function_name | function_type | description | comment | examples |
-|---------------|---------------|-------------|---------|----------|
-| read_px       | table         | NULL        | NULL    |          |
+|  function_name   | function_type |                                                                                                                  description                                                                                                                   | comment |                                                                                   examples                                                                                    |
+|------------------|---------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|---------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| read_px          | table         | Reads a PX (PC-Axis) file and returns its contents as a table with STUB/HEADING variables as VARCHAR columns and a 'value' column (INTEGER if DECIMALS=0, otherwise FLOAT).                                                                    | NULL    | [SELECT * FROM read_px('test/data/statfin_vaerak_pxt_11rc.px');]                                                                                                              |
+| read_px_metadata | table         | Reads metadata from a PX (PC-Axis) file and returns the available CODE-VALUE pairs per variable without scanning the DATA section. Returns columns: 'variable' (VARCHAR), 'code' (VARCHAR), 'value' (VARCHAR, NULL if no VALUES entry exists). | NULL    | [SELECT * FROM read_px_metadata('test/data/statfin_vaerak_pxt_11rc.px');, SELECT * FROM read_px_metadata('test/data/statfin_vaerak_pxt_11rc.px') WHERE variable='Sukupuoli';] |
 
 ### Overloaded Functions
 
@@ -75,6 +92,8 @@ This extension does not add any types.
 
 <div class="extension_settings_table"></div>
 
-This extension does not add any settings.
+|      name      |                       description                       | input_type | scope  | aliases | typed_value |
+|----------------|---------------------------------------------------------|------------|--------|---------|-------------|
+| temp_directory | Set the directory to which temporary files are written. | VARCHAR    | GLOBAL | []      | post.db.tmp |
 
 

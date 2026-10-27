@@ -21,15 +21,31 @@ extension:
 repo:
   andium: 0ace6af84ec2289c23944857fd9aded06e65ec9c
   github: query-farm/radio
-  ref: b5e292ab8bff74ad8a1934a120f53cd62d0ec0ba
+  ref: 9dda8c730b6f32f781e17f7b3cf527da115382a3
+  variegata: f8d93c04377284389e38937d9309c05ac71a123c
 
 extension_star_count: 43
 extension_star_count_pretty: 43
-extension_download_count: 770
-extension_download_count_pretty: 770
+extension_download_count: 13564
+extension_download_count_pretty: 13.6k
 image: '/images/community_extensions/social_preview/preview_community_extension_radio.png'
 layout: community_extension_doc
 ---
+### Compatibility Matrix
+
+This table covers all DuckDB releases that have not reached [end-of-life](https://duckdb.org/release_calendar), including LTS releases, and shows the 2 most recent patch releases of each. Older patch releases are not listed, but the extension may be available for them as well.
+
+<div class="extension_compatibility_table"></div>
+
+| Platform | 1.4.4 | 1.4.5 | 1.5.5 | 1.5.6 | 2.0.0 |
+| :--- | :---: | :---: | :---: | :---: | :---: |
+| Linux AMD64 | ✅ | ❌ | ✅ | ✅ | ✅ |
+| Linux ARM64 | ✅ | ❌ | ✅ | ✅ | ✅ |
+| macOS AMD64 | ✅ | ❌ | ✅ | ✅ | ✅ |
+| macOS ARM64 | ✅ | ❌ | ✅ | ✅ | ✅ |
+| Windows AMD64 | ❌ | ❌ | ❌ | ❌ | ❌ |
+| Windows ARM64 | ❌ | ❌ | ❌ | ❌ | ❌ |
+| WebAssembly | ❌ | ❌ | ❌ | ❌ | ❌ |
 
 ### Installing and Loading
 ```sql
@@ -47,27 +63,11 @@ LOAD {{ page.extension.name }};
 ### About {{ page.extension.name }}
 {{ page.docs.extended_description }}
 {% endif %}
-
 ### Added Functions
 
 <div class="extension_functions_table"></div>
 
-|                    function_name                     | function_type | description | comment | examples |
-|------------------------------------------------------|---------------|-------------|---------|----------|
-| radio_flush                                          | table         | NULL        | NULL    |          |
-| radio_listen                                         | table         | NULL        | NULL    |          |
-| radio_received_messages                              | table         | NULL        | NULL    |          |
-| radio_sleep                                          | table         | NULL        | NULL    |          |
-| radio_subscribe                                      | table         | NULL        | NULL    |          |
-| radio_subscription_received_message_add              | table         | NULL        | NULL    |          |
-| radio_subscription_received_messages                 | table         | NULL        | NULL    |          |
-| radio_subscription_transmit_message_delete           | table         | NULL        | NULL    |          |
-| radio_subscription_transmit_messages                 | table         | NULL        | NULL    |          |
-| radio_subscription_transmit_messages_delete_finished | table         | NULL        | NULL    |          |
-| radio_subscriptions                                  | table         | NULL        | NULL    |          |
-| radio_transmit_message                               | table         | NULL        | NULL    |          |
-| radio_unsubscribe                                    | table         | NULL        | NULL    |          |
-| radio_version                                        | scalar        | NULL        | NULL    |          |
+This extension does not add any functions.
 
 ### Overloaded Functions
 

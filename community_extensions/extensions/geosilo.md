@@ -18,15 +18,31 @@ extension:
   name: geosilo
 repo:
   github: Query-farm/geosilo
-  ref: e6aaca0fc2784a35a967dd044761483a8b3bda86
+  ref: 41cb7be30f5568b3675ac4ec34abd57bfedbf53f
+  variegata: b08d5d26620a193785e40668c839a861db4be6ce
 
 extension_star_count: 25
 extension_star_count_pretty: 25
-extension_download_count: 863
-extension_download_count_pretty: 863
+extension_download_count: 15128
+extension_download_count_pretty: 15.1k
 image: '/images/community_extensions/social_preview/preview_community_extension_geosilo.png'
 layout: community_extension_doc
 ---
+### Compatibility Matrix
+
+This table covers all DuckDB releases that have not reached [end-of-life](https://duckdb.org/release_calendar), including LTS releases, and shows the 2 most recent patch releases of each. Older patch releases are not listed, but the extension may be available for them as well.
+
+<div class="extension_compatibility_table"></div>
+
+| Platform | 1.4.4 | 1.4.5 | 1.5.5 | 1.5.6 | 2.0.0 |
+| :--- | :---: | :---: | :---: | :---: | :---: |
+| Linux AMD64 | ❌ | ❌ | ✅ | ✅ | ✅ |
+| Linux ARM64 | ❌ | ❌ | ✅ | ✅ | ✅ |
+| macOS AMD64 | ❌ | ❌ | ✅ | ✅ | ✅ |
+| macOS ARM64 | ❌ | ❌ | ✅ | ✅ | ✅ |
+| Windows AMD64 | ❌ | ❌ | ✅ | ✅ | ✅ |
+| Windows ARM64 | ❌ | ❌ | ❌ | ❌ | ❌ |
+| WebAssembly | ❌ | ❌ | ✅ | ✅ | ✅ |
 
 ### Installing and Loading
 ```sql
@@ -44,31 +60,11 @@ LOAD {{ page.extension.name }};
 ### About {{ page.extension.name }}
 {{ page.docs.extended_description }}
 {% endif %}
-
 ### Added Functions
 
 <div class="extension_functions_table"></div>
 
-|  function_name   | function_type | description | comment | examples |
-|------------------|---------------|-------------|---------|----------|
-| ST_Area          | scalar        | NULL        | NULL    | NULL     |
-| ST_GeometryType  | scalar        | NULL        | NULL    | NULL     |
-| ST_IsEmpty       | scalar        | NULL        | NULL    | NULL     |
-| ST_Length        | scalar        | NULL        | NULL    | NULL     |
-| ST_NPoints       | scalar        | NULL        | NULL    | NULL     |
-| ST_Perimeter     | scalar        | NULL        | NULL    | NULL     |
-| ST_X             | scalar        | NULL        | NULL    | NULL     |
-| ST_XMax          | scalar        | NULL        | NULL    | NULL     |
-| ST_XMin          | scalar        | NULL        | NULL    | NULL     |
-| ST_Y             | scalar        | NULL        | NULL    | NULL     |
-| ST_YMax          | scalar        | NULL        | NULL    | NULL     |
-| ST_YMin          | scalar        | NULL        | NULL    | NULL     |
-| geosilo_decode   | scalar        | NULL        | NULL    | NULL     |
-| geosilo_decode   | scalar        | NULL        | NULL    | NULL     |
-| geosilo_encode   | scalar        | NULL        | NULL    | NULL     |
-| geosilo_encode   | scalar        | NULL        | NULL    | NULL     |
-| geosilo_metadata | scalar        | NULL        | NULL    | NULL     |
-| geosilo_metadata | scalar        | NULL        | NULL    | NULL     |
+This extension does not add any functions.
 
 ### Overloaded Functions
 
@@ -80,9 +76,7 @@ This extension does not add any function overloads.
 
 <div class="extension_types_table"></div>
 
-| type_name | type_size | logical_type | type_category | internal |
-|-----------|----------:|--------------|---------------|----------|
-| GEOSILO   | 16        | BLOB         | NULL          | true     |
+This extension does not add any types.
 
 ### Added Settings
 

@@ -8,7 +8,7 @@ excerpt: |
 extension:
   name: webbed
   description: Comprehensive processing extension for web markup languages (XML and HTML) with SAX streaming for large files, intelligent schema inference, XPath-based data extraction, and HTML table parsing.
-  version: 2.10.0
+  version: 2.12.0
   language: C++
   build: cmake
   license: MIT
@@ -21,25 +21,20 @@ extension:
   vcpkg_commit: 68a1c387f660632f2f65cdb7e8cd093a08840e5d
 repo:
   github: teaguesterling/duckdb_webbed
-  andium: ddda30f11352138b2451657419640370d1612137
-  # andium (DuckDB v1.4.5 track) left at its prior commit; v2.9.3 ships on the
-  # v1.5.x track via ref and is verified against DuckDB v2.0-cyanoptera as well.
-  ref: acc5a33329e9b289ba6a68cccc858b78fb0b4caf
-  # ref_next is what makes the PRERELEASE leg actually build against DuckDB
-  # v2.0. Without it build_next.yml prints "Skipping prerelease validation" and
-  # the PR passes green having verified nothing on that line. Same commit as
-  # ref: v2.10.0 (tag v2.10.0) adds xml_extract_text_each for positionally
-  # aligned extraction, documents record_element as the better answer for most of
-  # those cases, and documents a SAX limitation where the column set comes
-  # strictly from the first sample_size records. Builds green on both the v1.5.6
-  # and v2.0-cyanoptera lines -- nine next-line legs success on this exact commit,
-  # measured rather than assumed.
-  #
-  # A STALE ref_next is worse than an absent one: it validates the PREVIOUS
-  # release against the next line while reporting green, so it moves with ref on
-  # every release. v2.9.5 was tagged and built green but never registered, so it
-  # was never installable; v2.10.0 supersedes it.
-  ref_next: acc5a33329e9b289ba6a68cccc858b78fb0b4caf
+  ref: 7dad6101607529d74c9d831b75675f460f3a4d4a
+  # variegata: the v1.5.6 track. scripts/build.py:46-48 routes duckdb_version
+  # v1.5.6 here. Same commit as ref deliberately -- this release builds and
+  # passes on both lines, so v1.5.6 users get the correctness fixes rather than
+  # staying frozen at v2.10.0. The registry no longer builds v1.5 automatically;
+  # per the DuckDB team, a v1.5.6 build needs this field plus contacting them.
+  variegata: 7dad6101607529d74c9d831b75675f460f3a4d4a
+  # ref_next is now DORMANT: build_next.yml is `if: false`, and build.py's
+  # ref_next branch is unreachable while the registry's duckdb_version equals its
+  # DUCKDB_LATEST_STABLE. Kept and moved with ref anyway -- it costs nothing and
+  # restores prerelease validation if that job is re-enabled. A STALE ref_next is
+  # worse than an absent one: it validates the PREVIOUS release while reporting
+  # green, so it must never lag ref.
+  ref_next: 7dad6101607529d74c9d831b75675f460f3a4d4a
 docs:
   docs_url: https://duckdb-webbed.readthedocs.io
   hello_world: |
@@ -122,11 +117,26 @@ docs:
 
 extension_star_count: 77
 extension_star_count_pretty: 77
-extension_download_count: 21419
-extension_download_count_pretty: 21.4k
+extension_download_count: 46737
+extension_download_count_pretty: 46.7k
 image: '/images/community_extensions/social_preview/preview_community_extension_webbed.png'
 layout: community_extension_doc
 ---
+### Compatibility Matrix
+
+This table covers all DuckDB releases that have not reached [end-of-life](https://duckdb.org/release_calendar), including LTS releases, and shows the 2 most recent patch releases of each. Older patch releases are not listed, but the extension may be available for them as well.
+
+<div class="extension_compatibility_table"></div>
+
+| Platform | 1.4.4 | 1.4.5 | 1.5.5 | 1.5.6 | 2.0.0 |
+| :--- | :---: | :---: | :---: | :---: | :---: |
+| Linux AMD64 | ✅ | ✅ | ✅ | ✅ | ✅ |
+| Linux ARM64 | ✅ | ✅ | ✅ | ✅ | ✅ |
+| macOS AMD64 | ✅ | ✅ | ✅ | ✅ | ✅ |
+| macOS ARM64 | ✅ | ✅ | ✅ | ✅ | ✅ |
+| Windows AMD64 | ✅ | ❌ | ✅ | ✅ | ✅ |
+| Windows ARM64 | ❌ | ❌ | ❌ | ❌ | ❌ |
+| WebAssembly | ✅ | ✅ | ✅ | ✅ | ✅ |
 
 ### Installing and Loading
 ```sql
@@ -144,7 +154,6 @@ LOAD {{ page.extension.name }};
 ### About {{ page.extension.name }}
 {{ page.docs.extended_description }}
 {% endif %}
-
 ### Added Functions
 
 <div class="extension_functions_table"></div>
@@ -221,6 +230,8 @@ This extension does not add any function overloads.
 
 <div class="extension_settings_table"></div>
 
-This extension does not add any settings.
+|      name      |                       description                       | input_type | scope  | aliases | typed_value |
+|----------------|---------------------------------------------------------|------------|--------|---------|-------------|
+| temp_directory | Set the directory to which temporary files are written. | VARCHAR    | GLOBAL | []      | post.db.tmp |
 
 

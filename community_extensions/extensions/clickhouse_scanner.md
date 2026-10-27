@@ -8,7 +8,7 @@ excerpt: |
 extension:
   name: clickhouse_scanner
   description: Read and write ClickHouse tables directly from DuckDB.
-  version: 0.1.0
+  version: 0.2.0
   language: C++
   build: cmake
   license: MIT
@@ -20,7 +20,8 @@ extension:
 
 repo:
   github: altertable-ai/duckdb-clickhouse
-  ref: 36d412bff2394e2b41149b42298be06e627701d8
+  ref: ce337c48c12d24630caeed151b79dc177d48eb86
+  variegata: bb11b7ce640de14b9f7565f588bfd3cd08c99266
 
 docs:
   hello_world: |
@@ -59,11 +60,26 @@ docs:
 
 extension_star_count: 1
 extension_star_count_pretty: 1
-extension_download_count: 373
-extension_download_count_pretty: 373
+extension_download_count: 7266
+extension_download_count_pretty: 7.3k
 image: '/images/community_extensions/social_preview/preview_community_extension_clickhouse_scanner.png'
 layout: community_extension_doc
 ---
+### Compatibility Matrix
+
+This table covers all DuckDB releases that have not reached [end-of-life](https://duckdb.org/release_calendar), including LTS releases, and shows the 2 most recent patch releases of each. Older patch releases are not listed, but the extension may be available for them as well.
+
+<div class="extension_compatibility_table"></div>
+
+| Platform | 1.4.4 | 1.4.5 | 1.5.5 | 1.5.6 | 2.0.0 |
+| :--- | :---: | :---: | :---: | :---: | :---: |
+| Linux AMD64 | ❌ | ❌ | ❌ | ✅ | ✅ |
+| Linux ARM64 | ❌ | ❌ | ❌ | ✅ | ✅ |
+| macOS AMD64 | ❌ | ❌ | ❌ | ✅ | ✅ |
+| macOS ARM64 | ❌ | ❌ | ❌ | ✅ | ✅ |
+| Windows AMD64 | ❌ | ❌ | ❌ | ✅ | ✅ |
+| Windows ARM64 | ❌ | ❌ | ❌ | ❌ | ❌ |
+| WebAssembly | ❌ | ❌ | ❌ | ❌ | ❌ |
 
 ### Installing and Loading
 ```sql
@@ -81,7 +97,6 @@ LOAD {{ page.extension.name }};
 ### About {{ page.extension.name }}
 {{ page.docs.extended_description }}
 {% endif %}
-
 ### Added Functions
 
 <div class="extension_functions_table"></div>
@@ -111,19 +126,20 @@ This extension does not add any types.
 
 <div class="extension_settings_table"></div>
 
-|            name             |                                                                             description                                                                             | input_type | scope  | aliases |
-|-----------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------|------------|--------|---------|
-| ch_connect_timeout_ms       | Timeout in milliseconds for connecting to ClickHouse                                                                                                                | UBIGINT    | GLOBAL | []      |
-| ch_debug_show_queries       | DEBUG SETTING: print all queries sent to ClickHouse to stdout                                                                                                       | BOOLEAN    | GLOBAL | []      |
-| ch_default_table_engine     | Table engine for CREATE TABLE in attached ClickHouse databases, e.g. MergeTree or ReplicatedMergeTree('/clickhouse/tables/{shard}/{database}/{table}', '{replica}') | VARCHAR    | GLOBAL | []      |
-| ch_filter_pushdown          | Push filters down into the queries sent to ClickHouse                                                                                                               | BOOLEAN    | GLOBAL | []      |
-| ch_insert_block_size        | Minimum rows per block sent to ClickHouse during INSERT (rounded up to whole chunks)                                                                                | UBIGINT    | GLOBAL | []      |
-| ch_mutations_sync           | mutations_sync sent with UPDATE and ALTER COLUMN mutations: 0 = do not wait, 1 = wait on this replica, 2 = wait on all replicas                                     | UBIGINT    | GLOBAL | []      |
-| ch_order_pushdown           | Push LIMIT and ORDER BY ... LIMIT down into ClickHouse queries                                                                                                      | BOOLEAN    | GLOBAL | []      |
-| ch_pool_acquire_mode        | What to do when the pool is exhausted: force, wait or try (new ATTACHes)                                                                                            | VARCHAR    | GLOBAL | []      |
-| ch_pool_idle_timeout_millis | Idle pooled connections are closed after this many milliseconds (new ATTACHes)                                                                                      | UBIGINT    | GLOBAL | []      |
-| ch_pool_max_connections     | Maximum number of pooled connections per attached ClickHouse database (new ATTACHes)                                                                                | UBIGINT    | GLOBAL | []      |
-| ch_pool_wait_timeout_millis | How long 'wait' acquire mode waits for a free connection (new ATTACHes)                                                                                             | UBIGINT    | GLOBAL | []      |
-| ch_receive_timeout_ms       | Timeout in milliseconds for receiving data from ClickHouse                                                                                                          | UBIGINT    | GLOBAL | []      |
+|            name             |                                                                             description                                                                             | input_type | scope  | aliases | typed_value |
+|-----------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------|------------|--------|---------|-------------|
+| ch_connect_timeout_ms       | Timeout in milliseconds for connecting to ClickHouse                                                                                                                | UBIGINT    | GLOBAL | []      | 10000       |
+| ch_debug_show_queries       | DEBUG SETTING: print all queries sent to ClickHouse to stdout                                                                                                       | BOOLEAN    | GLOBAL | []      | false       |
+| ch_default_table_engine     | Table engine for CREATE TABLE in attached ClickHouse databases, e.g. MergeTree or ReplicatedMergeTree('/clickhouse/tables/{shard}/{database}/{table}', '{replica}') | VARCHAR    | GLOBAL | []      | MergeTree   |
+| ch_filter_pushdown          | Push filters down into the queries sent to ClickHouse                                                                                                               | BOOLEAN    | GLOBAL | []      | true        |
+| ch_insert_block_size        | Minimum rows per block sent to ClickHouse during INSERT (rounded up to whole chunks)                                                                                | UBIGINT    | GLOBAL | []      | 65536       |
+| ch_mutations_sync           | mutations_sync sent with UPDATE and ALTER COLUMN mutations: 0 = do not wait, 1 = wait on this replica, 2 = wait on all replicas                                     | UBIGINT    | GLOBAL | []      | 2           |
+| ch_order_pushdown           | Push LIMIT and ORDER BY ... LIMIT down into ClickHouse queries                                                                                                      | BOOLEAN    | GLOBAL | []      | true        |
+| ch_pool_acquire_mode        | What to do when the pool is exhausted: force, wait or try (new ATTACHes)                                                                                            | VARCHAR    | GLOBAL | []      | force       |
+| ch_pool_idle_timeout_millis | Idle pooled connections are closed after this many milliseconds (new ATTACHes)                                                                                      | UBIGINT    | GLOBAL | []      | 60000       |
+| ch_pool_max_connections     | Maximum number of pooled connections per attached ClickHouse database (new ATTACHes)                                                                                | UBIGINT    | GLOBAL | []      | 6           |
+| ch_pool_wait_timeout_millis | How long 'wait' acquire mode waits for a free connection (new ATTACHes)                                                                                             | UBIGINT    | GLOBAL | []      | 30000       |
+| ch_receive_timeout_ms       | Timeout in milliseconds for receiving data from ClickHouse                                                                                                          | UBIGINT    | GLOBAL | []      | 300000      |
+| temp_directory              | Set the directory to which temporary files are written.                                                                                                             | VARCHAR    | GLOBAL | []      | post.db.tmp |
 
 

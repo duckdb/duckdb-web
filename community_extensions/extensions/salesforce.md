@@ -7,13 +7,17 @@ excerpt: |
 
 # Submission file for https://github.com/duckdb/community-extensions
 #
-# Live in duckdb/community-extensions since #2037 (v0.9.2). This update bumps
-# from v0.18.0 straight to v0.19.1 — v0.19.0 was never submitted separately.
+# This update bumps salesforce from v0.19.1 to v0.19.2 (own-repo release
+# 2026-10-14: tag v0.19.2, commit 2c96c1916c6067d979f578c1b73d7872457425d3,
+# Release published with signed assets). Deltas: version + repo.ref bumped;
+# extended_description gains the v0.19.2 sentence (latest_date_covered
+# column, read_only ATTACH option, plan-time Id validation,
+# sf_timeout_read_s). Function count unchanged (28, all self-documented).
 
 extension:
   name: salesforce
   description: Read-only access to Salesforce orgs as DuckDB SQL tables over the official REST and Bulk APIs — OAuth refresh-token or JWT-bearer auth (credentials from inline options, environment variables, or an SFDX auth URL), native ATTACH, projection + predicate pushdown, COUNT pushdown, explicit server-side aggregates with GROUP BY, lazy/auto/Bulk transports with PK chunking (Bulk blob/base64 compatibility guard), a per-job API quota governor, parent + grandparent relationship STRUCT columns with diagnostics, queryAll (archived + deleted), Tooling-API fast schema, and metadata helpers (manual cache refresh, picklist values, record types). Requires DuckDB v1.5.4 or newer.
-  version: 0.19.1
+  version: 0.19.2
   language: C++
   build: cmake
   license: MIT
@@ -29,8 +33,8 @@ extension:
 repo:
   github: flozer/duckdb-salesforce
   # community-extensions CI checks out exactly this ref to build + sign.
-  # tag v0.19.0
-  ref: ef57aa928999240f310bd48ae1badf537a2a53df
+  # PLACEHOLDER - pin to the v0.19.2 tag commit before submitting.
+  ref: 2c96c1916c6067d979f578c1b73d7872457425d3
 
 docs:
   hello_world: |
@@ -70,7 +74,15 @@ docs:
     base object from the official reportTypeMetadata when the first category
     is unambiguous. Built and tested against DuckDB v1.5.4, v1.5.5 and
     v1.5.6 (v1.5.2/v1.5.3 support was dropped in v0.15.0 — see CHANGELOG.md).
-    Full change history in this repo's CHANGELOG.md. Since v0.19.1,
+    Full change history in this repo's CHANGELOG.md.
+    Since v0.19.2, salesforce_deleted_ids returns latest_date_covered (the
+    getDeleted coverage frontier, for wide-window sweep checkpoints), the
+    read_only ATTACH option is accepted as a documented no-op (the catalog is
+    read-only by design), Id literals in =/!=/IN filters are validated at
+    plan time (15/18 alphanumeric chars; clear error instead of Salesforce's
+    generic INVALID_QUERY_FILTER_OPERATOR), and the per-attempt HTTP read
+    timeout is tunable via sf_timeout_read_s (default 60s, cap 3600s).
+    Since v0.19.1,
     salesforce_deleted_ids paginates its queryAll sweep (v0.19.0 truncated at
     exactly 2,000 ids) and uses the Replication API getDeleted() as the
     default source for ANY window width (the 15-minute cap was an incorrect
@@ -88,11 +100,26 @@ docs:
 
 extension_star_count: 3
 extension_star_count_pretty: 3
-extension_download_count: 815
-extension_download_count_pretty: 815
+extension_download_count: 5912
+extension_download_count_pretty: 5.9k
 image: '/images/community_extensions/social_preview/preview_community_extension_salesforce.png'
 layout: community_extension_doc
 ---
+### Compatibility Matrix
+
+This table covers all DuckDB releases that have not reached [end-of-life](https://duckdb.org/release_calendar), including LTS releases, and shows the 2 most recent patch releases of each. Older patch releases are not listed, but the extension may be available for them as well.
+
+<div class="extension_compatibility_table"></div>
+
+| Platform | 1.4.4 | 1.4.5 | 1.5.5 | 1.5.6 | 2.0.0 |
+| :--- | :---: | :---: | :---: | :---: | :---: |
+| Linux AMD64 | ❌ | ❌ | ✅ | ✅ | ❌ |
+| Linux ARM64 | ❌ | ❌ | ❌ | ❌ | ❌ |
+| macOS AMD64 | ❌ | ❌ | ❌ | ❌ | ❌ |
+| macOS ARM64 | ❌ | ❌ | ✅ | ✅ | ❌ |
+| Windows AMD64 | ❌ | ❌ | ✅ | ✅ | ❌ |
+| Windows ARM64 | ❌ | ❌ | ❌ | ❌ | ❌ |
+| WebAssembly | ❌ | ❌ | ❌ | ❌ | ❌ |
 
 ### Installing and Loading
 ```sql
@@ -110,7 +137,6 @@ LOAD {{ page.extension.name }};
 ### About {{ page.extension.name }}
 {{ page.docs.extended_description }}
 {% endif %}
-
 ### Added Functions
 
 <div class="extension_functions_table"></div>
@@ -120,7 +146,7 @@ LOAD {{ page.extension.name }};
 | salesforce_aggregate             | table         | Runs an explicit server-side SOQL aggregate over an attached catalog - SELECT <aggregates> FROM <object> [WHERE <filter>] [GROUP BY <group_by>] - with optional positional filter and group_by arguments (3 to 5 total) and one VARCHAR column per aggregate term; opt-in, not transparent pushdown.                                                                                                                                 | NULL    | [SELECT * FROM salesforce_aggregate('sf', 'Account', 'COUNT(Id) n', 'IsDeleted = false', 'Industry');]                                                                         |
 | salesforce_bulk_resume           | table         | Re-streams the result rows of an existing Bulk API 2.0 query job by id, so a load that died mid-stream can resume without re-running the query. Columns come from the job's CSV header (VARCHAR); rows stream page-by-page following the Sforce-Locator. Read-only; invalid or expired job ids fail fast.                                                                                                                            | NULL    | [SELECT * FROM salesforce_bulk_resume('sf', '7504x00000ABCDef');]                                                                                                              |
 | salesforce_decode                | table         | Decodes a fields-describe JSON array plus a records JSON array into typed DuckDB rows; utility surface of the scan's JSON-to-vector conversion.                                                                                                                                                                                                                                                                                      | NULL    | [SELECT * FROM salesforce_decode('[{"name":"Name","type":"string"}]', '[{"Name":"Acme"}]');]                                                                                   |
-| salesforce_deleted_ids           | table         | Returns the ids deleted in the org for an sObject within a time window, so a watermark-based incremental load can sweep deletes (deletes do not update SystemModstamp). Windows up to 15 minutes use the Replication API getDeleted() with exact deleted_date; wider windows fall back to a queryAll IsDeleted scan (deleted_date NULL; the recycle bin holds rows ~15 days).                                                        | NULL    | [SELECT * FROM salesforce_deleted_ids('sf', 'Lead', since := '2026-09-30T00:00:00');]                                                                                          |
+| salesforce_deleted_ids           | table         | Returns the ids deleted in the org for an sObject within a time window, so a watermark-based incremental load can sweep deletes. Uses the Replication API getDeleted() for any window width (exact deleted_date, latestDateCovered resume with boundary dedup) and covers objects with no IsDeleted field (e.g. User); opt-in source := 'queryAll' is a paginated IsDeleted sweep (deleted_date NULL, ~15-day recycle bin).          | NULL    | [SELECT * FROM salesforce_deleted_ids('sf', 'Lead', since := '2026-09-30T00:00:00');]                                                                                          |
 | salesforce_describe              | table         | Fetches the REST describe metadata (fields, types, relationships) for a single Salesforce sObject without an ATTACH; credentials are passed as the named parameters client_id, client_secret, refresh_token, login_url and api_version.                                                                                                                                                                                              | NULL    | [SELECT * FROM salesforce_describe('Account', client_id := '<client_id>', client_secret := '<client_secret>', refresh_token := '<refresh_token>');]                            |
 | salesforce_describe_calls        | table         | TEST ONLY: returns the number of sObject describes issued since ATTACH, proving the metadata cache is reused.                                                                                                                                                                                                                                                                                                                        | NULL    | [SELECT * FROM salesforce_describe_calls();]                                                                                                                                   |
 | salesforce_global_describe_calls | table         | TEST ONLY: returns the number of global describe (GET /sobjects) calls issued since ATTACH, proving object-list discovery caching.                                                                                                                                                                                                                                                                                                   | NULL    | [SELECT * FROM salesforce_global_describe_calls();]                                                                                                                            |
@@ -212,5 +238,6 @@ This extension does not add any types.
 | sf_retry_backoff_ms            | Linear backoff base between transient HTTP retries: attempt N sleeps backoff_ms * N before retrying. Clamped to [0,60000]. Default 200.                                                                                                                                                                                                                   | BIGINT     | GLOBAL | []      |
 | sf_retry_max                   | Maximum attempts for transient HTTP failures (429, 5xx, connection errors) before failing a call. Clamped to [1,10]. Default 3. Raise for runs over flaky links; the 401 refresh path is separate and always applies.                                                                                                                                     | BIGINT     | GLOBAL | []      |
 | sf_schema_source               | Schema discovery: 'describe' (default, REST, authoritative) or 'tooling' (fast batched Tooling API FieldDefinition; falls back to REST describe per object on error/absent/ambiguous type; coarser types; fields default non-filterable unless Tooling marks them filterable).                                                                            | VARCHAR    | GLOBAL | []      |
+| sf_timeout_read_s              | HTTP read timeout in seconds per attempt (default 60). Raise it when a server-side COUNT() or scan on a very large object exceeds the default instead of failing; each transient retry waits up to this timeout, so budget attempts x timeout when tuning with sf_retry_max.                                                                              | BIGINT     | GLOBAL | []      |
 
 

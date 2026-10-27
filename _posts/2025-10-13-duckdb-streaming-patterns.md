@@ -13,7 +13,7 @@ The words “DuckDB” and “streaming” don't usually make it into the same s
 
 ## Streaming Analytics Patterns
 
-The simplest definition: streaming analytics is the _act of updating an analytical view of your data at near real-time speed as new data comes in._ For example, if three new sessions have just started in your website, the process of gathering those session events and updating the count (+3) is streaming analytics. Streaming analytics is not, in my modest opinion, just about inserting those 3 session events in a table – that would fit well within the realm of a transactional workload. Streaming analytics is also not pushing this events to a Kafka topic and sinking to another system. If you don't update the analytical view of your data, I wouldn't call it streaming analytics. 
+The simplest definition: streaming analytics is the _act of updating an analytical view of your data at near real-time speed as new data comes in._ For example, if three new sessions have just started in your website, the process of gathering those session events and updating the count (+3) is streaming analytics. Streaming analytics is not, in my modest opinion, just about inserting those 3 session events in a table – that would fit well within the realm of a transactional workload. Streaming analytics is also not pushing this events to a Kafka topic and sinking to another system. If you don't update the analytical view of your data, I wouldn't call it streaming analytics.
 
 Now that we have a definition, let's take a look at three common architectural patterns in streaming analytics. The names given to these patterns are of my own making, but I think they help differentiating them from one another.
 
@@ -47,7 +47,7 @@ The key component in this diagram is what I call “Delta Processor”. This com
 ```sql
 MERGE INTO user_clicks AS dest
 USING (
-    SELECT 
+    SELECT
         user_id,
         user_name,
         count(*) AS count_of_clicks,
@@ -59,8 +59,8 @@ USING (
     GROUP BY user_id, user_name
 ) AS src
 ON dest.user_id = src.user_id
-WHEN MATCHED THEN 
-    UPDATE SET 
+WHEN MATCHED THEN
+    UPDATE SET
         count_of_clicks = dest.count_of_clicks + src.count_of_clicks,
         updated_at = src.updated_at
 WHEN NOT MATCHED THEN
@@ -68,7 +68,7 @@ WHEN NOT MATCHED THEN
     VALUES (src.user_id, src.user_name, src.count_of_clicks, src.updated_at);
 ```
 
-You can check the full pipeline in [this repository](https://github.com/guillesd/duckdb-streaming-patterns/blob/main/pipelines/pattern_1_1.py). 
+You can check the full pipeline in [this repository](https://github.com/guillesd/duckdb-streaming-patterns/blob/main/pipelines/pattern_1_1.py).
 
 ### Using DuckLake's Change Data Feed
 
@@ -111,8 +111,8 @@ This setup is the most similar thing to the Streaming Databases Pattern that you
 ```sql
 CREATE VIEW IF NOT EXISTS raw_events_view AS
     SELECT
-        * EXCLUDE message, 
-        decode(message)::JSON AS message 
+        * EXCLUDE message,
+        decode(message)::JSON AS message
     FROM
         tributary_scan_topic(⟨TOPIC⟩, "bootstrap.servers":="localhost:9092");
 ```
@@ -125,7 +125,7 @@ You can check the full pipeline in [this repository](https://github.com/guillesd
 
 ## Some Thoughts
 
-Conclusions always feel very subjective, so I rather write about some of my thoughts regarding streaming patterns in general and particularly around DuckDB. 
+Conclusions always feel very subjective, so I rather write about some of my thoughts regarding streaming patterns in general and particularly around DuckDB.
 
 **The Materialized View Pattern is usually good enough.**
 My hot take is that most use cases for analytics are usually covered by the Materialized View Pattern without the need of complexity that comes with other patterns. I believe that DuckDB is very well suited for this pattern because for a small OLAP, it does incredibly well at handling large amounts of streaming inserts. In [this article](https://arrow.apache.org/blog/2025/03/10/fast-streaming-inserts-in-duckdb-with-adbc/) DuckDB was pushed to the limit and was able to handle more than one million rows inserted per second. Also note that **[materialized views are on the DuckDB's long-term roadmap]({% link roadmap.md %}#future-work)**, so this pattern will become even simpler in the near future.

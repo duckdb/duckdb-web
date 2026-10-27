@@ -8,18 +8,18 @@ excerpt: |
 extension:
   name: duckdb_geoip_rs
   description: Retrieve geo ip data from MMDB database
-  version: 0.2.5
+  version: 0.3.0
   language: Rust
   build: cmake
   license: MIT
-  excluded_platforms: "windows_amd64_rtools;windows_amd64_mingw;linux_amd64_musl;wasm_mvp;wasm_eh;wasm_threads"
+  excluded_platforms: "windows_amd64_rtools;wasm_mvp;wasm_eh;wasm_threads;linux_amd64_musl"
   requires_toolchains: "rust;python3"
   maintainers:
     - william-billaud
 
 repo:
   github: william-billaud/duckdb-geoip-rs
-  ref: 5c8632d581330038bb5a59490063ebc0dad34d21
+  ref: 27c9b1f86772a5e8927c5dd6cfc0e0bf1f194ba4
 
 docs:
   hello_world: |
@@ -59,11 +59,26 @@ docs:
 
 extension_star_count: 10
 extension_star_count_pretty: 10
-extension_download_count: 731
-extension_download_count_pretty: 731
+extension_download_count: 14283
+extension_download_count_pretty: 14.3k
 image: '/images/community_extensions/social_preview/preview_community_extension_duckdb_geoip_rs.png'
 layout: community_extension_doc
 ---
+### Compatibility Matrix
+
+This table covers all DuckDB releases that have not reached [end-of-life](https://duckdb.org/release_calendar), including LTS releases, and shows the 2 most recent patch releases of each. Older patch releases are not listed, but the extension may be available for them as well.
+
+<div class="extension_compatibility_table"></div>
+
+| Platform | 1.4.4 | 1.4.5 | 1.5.5 | 1.5.6 | 2.0.0 |
+| :--- | :---: | :---: | :---: | :---: | :---: |
+| Linux AMD64 | ✅ | ❌ | ✅ | ✅ | ✅ |
+| Linux ARM64 | ✅ | ❌ | ✅ | ✅ | ✅ |
+| macOS AMD64 | ✅ | ❌ | ✅ | ✅ | ❌ |
+| macOS ARM64 | ✅ | ❌ | ✅ | ✅ | ✅ |
+| Windows AMD64 | ✅ | ❌ | ✅ | ✅ | ✅ |
+| Windows ARM64 | ❌ | ❌ | ❌ | ❌ | ❌ |
+| WebAssembly | ❌ | ❌ | ❌ | ❌ | ❌ |
 
 ### Installing and Loading
 ```sql
@@ -81,17 +96,16 @@ LOAD {{ page.extension.name }};
 ### About {{ page.extension.name }}
 {{ page.docs.extended_description }}
 {% endif %}
-
 ### Added Functions
 
 <div class="extension_functions_table"></div>
 
-|   function_name   | function_type | description | comment | examples |
-|-------------------|---------------|-------------|---------|----------|
-| geoip_asn_num     | scalar        | NULL        | NULL    |          |
-| geoip_asn_org     | scalar        | NULL        | NULL    |          |
-| geoip_city        | scalar        | NULL        | NULL    |          |
-| geoip_country_iso | scalar        | NULL        | NULL    |          |
+|   function_name   | function_type |                                description                                 | comment |             examples              |
+|-------------------|---------------|----------------------------------------------------------------------------|---------|-----------------------------------|
+| geoip_asn_num     | scalar        | IP ASN lookup using `$MAXMIND_MMDB_DIR`/GeoLite2-ASN.mmdb database         | NULL    | [geoip_asn_num('90.9.250.1')]     |
+| geoip_asn_org     | scalar        | IP ASN org lookup using `$MAXMIND_MMDB_DIR`/GeoLite2-ASN.mmdb database     | NULL    | [geoip_asn_org('90.9.250.1')]     |
+| geoip_city        | scalar        | Geoip city lookup using `$MAXMIND_MMDB_DIR`/GeoLite2-City.mmdb database    | NULL    | [geoip_city('90.9.250.1')]        |
+| geoip_country_iso | scalar        | Geoip country lookup using `$MAXMIND_MMDB_DIR`/GeoLite2-City.mmdb database | NULL    | [geoip_country_iso('90.9.250.1')] |
 
 ### Overloaded Functions
 
@@ -109,6 +123,8 @@ This extension does not add any types.
 
 <div class="extension_settings_table"></div>
 
-This extension does not add any settings.
+|      name      |                       description                       | input_type | scope  | aliases | typed_value |
+|----------------|---------------------------------------------------------|------------|--------|---------|-------------|
+| temp_directory | Set the directory to which temporary files are written. | VARCHAR    | GLOBAL | []      | post.db.tmp |
 
 

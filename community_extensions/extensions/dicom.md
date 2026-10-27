@@ -10,7 +10,7 @@ extension:
   name: dicom
   description: |
     DuckDB integration with medical imaging data (DICOM - Digital Imaging and Communication in Medicine).
-  version: 0.7.2
+  version: 1.0.0
   language: C++
   build: cmake
   excluded_platforms: "wasm_mvp;wasm_eh;wasm_threads"
@@ -20,7 +20,7 @@ extension:
 
 repo:
   github: nmontesg/duck-dicom
-  ref: 73df5583e9661a2c13663aa4b233c2e436e28dca
+  ref: d9f418b11b412bcd3182a2e39982f86a9b56cbfd
 
 docs:
   hello_world: |
@@ -47,11 +47,26 @@ docs:
 
 extension_star_count: 2
 extension_star_count_pretty: 2
-extension_download_count: 813
-extension_download_count_pretty: 813
+extension_download_count: 11658
+extension_download_count_pretty: 11.7k
 image: '/images/community_extensions/social_preview/preview_community_extension_dicom.png'
 layout: community_extension_doc
 ---
+### Compatibility Matrix
+
+This table covers all DuckDB releases that have not reached [end-of-life](https://duckdb.org/release_calendar), including LTS releases, and shows the 2 most recent patch releases of each. Older patch releases are not listed, but the extension may be available for them as well.
+
+<div class="extension_compatibility_table"></div>
+
+| Platform | 1.4.4 | 1.4.5 | 1.5.5 | 1.5.6 | 2.0.0 |
+| :--- | :---: | :---: | :---: | :---: | :---: |
+| Linux AMD64 | ❌ | ❌ | ✅ | ✅ | ✅ |
+| Linux ARM64 | ❌ | ❌ | ✅ | ✅ | ✅ |
+| macOS AMD64 | ❌ | ❌ | ✅ | ✅ | ✅ |
+| macOS ARM64 | ❌ | ❌ | ✅ | ✅ | ✅ |
+| Windows AMD64 | ❌ | ❌ | ✅ | ✅ | ✅ |
+| Windows ARM64 | ❌ | ❌ | ❌ | ❌ | ❌ |
+| WebAssembly | ❌ | ❌ | ❌ | ❌ | ❌ |
 
 ### Installing and Loading
 ```sql
@@ -69,19 +84,18 @@ LOAD {{ page.extension.name }};
 ### About {{ page.extension.name }}
 {{ page.docs.extended_description }}
 {% endif %}
-
 ### Added Functions
 
 <div class="extension_functions_table"></div>
 
-| function_name  | function_type |                                               description                                               | comment |                                                                                                            examples                                                                                                             |
-|----------------|---------------|---------------------------------------------------------------------------------------------------------|---------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| query_dicom    | table         | Query remote DICOM nodes using C-FIND commands                                                          | NULL    | [FROM query_dicom(host='localhost', port=4242, match_keys={'Modality': 'MR'}, retrieve_keys=['StudyInstanceUID']);, FROM query_dicom(secret='my_dicom_conn_secret', qr_level='series', match_keys={'SeriesDate': '20070101'});] |
-| read_dicom     | table         | Load DICOM files into DuckDB. The contents of each file are loaded into a row in JSON format.           | NULL    | [SELECT * FROM read_dicom('/path/to/dicom_files/*');, SELECT * FROM read_dicom('/path/to/dicom_files/*', load_pixel_data = true);]                                                                                              |
-| retrieve_dicom | table         | Retrieve DICOM data from remote modalities using C-MOVE commands                                        | NULL    | [FROM retrieve_dicom('1.3.54.24.5...', host='localhost', port=4242, incoming_port=11112, qr_level='study');, FROM retrieve_dicom(['1.95.3...', '1.56.7...'], secret='my_dicom_conn_secret', qr_level='series');]                |
-| tag_element    | scalar        | Extracts the element of a DICOM tag, as a VARCHAR containing the element in hexadecimal representation. | NULL    | [SELECT tag_element('0008,01DA')]                                                                                                                                                                                               |
-| tag_group      | scalar        | Extracts the group of a DICOM tag, as a VARCHAR containing the group in hexadecimal representation.     | NULL    | [SELECT tag_group('0008,01DA')]                                                                                                                                                                                                 |
-| tag_name       | scalar        | Extracts the name of the DICOM tag. If it can't be found, a VARCHAR with format GGGG,EEEE is returned.  | NULL    | [SELECT tag_name('0008,0008')]                                                                                                                                                                                                  |
+| function_name  | function_type |                                               description                                               | comment |                                                                                                                examples                                                                                                                 |
+|----------------|---------------|---------------------------------------------------------------------------------------------------------|---------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| query_dicom    | table         | Query remote DICOM nodes using C-FIND commands                                                          | NULL    | [FROM query_dicom(host='localhost', port=4242, match_keys=MAP {'Modality': 'MR'}, retrieve_keys=['StudyInstanceUID']);, FROM query_dicom(secret='my_dicom_conn_secret', qr_level='series', match_keys=MAP {'SeriesDate': '20070101'});] |
+| read_dicom     | table         | Load DICOM files into DuckDB. The contents of each file are loaded into a row in JSON format.           | NULL    | [SELECT * FROM read_dicom('/path/to/dicom_files/*');, SELECT * FROM read_dicom('/path/to/dicom_files/*', load_pixel_data = true);]                                                                                                      |
+| retrieve_dicom | table         | Retrieve DICOM data from remote modalities using C-MOVE commands                                        | NULL    | [FROM retrieve_dicom('1.3.54.24.5...', host='localhost', port=4242, incoming_port=11112, qr_level='study');, FROM retrieve_dicom('1.95.3...', '1.56.7...', ..., secret='my_dicom_conn_secret', qr_level='series');]                     |
+| tag_element    | scalar        | Extracts the element of a DICOM tag, as a VARCHAR containing the element in hexadecimal representation. | NULL    | [SELECT tag_element('0008,01DA')]                                                                                                                                                                                                       |
+| tag_group      | scalar        | Extracts the group of a DICOM tag, as a VARCHAR containing the group in hexadecimal representation.     | NULL    | [SELECT tag_group('0008,01DA')]                                                                                                                                                                                                         |
+| tag_name       | scalar        | Extracts the name of the DICOM tag. If it can't be found, a VARCHAR with format GGGG,EEEE is returned.  | NULL    | [SELECT tag_name('0008,0008')]                                                                                                                                                                                                          |
 
 ### Overloaded Functions
 
@@ -101,6 +115,10 @@ This extension does not add any function overloads.
 
 <div class="extension_settings_table"></div>
 
-This extension does not add any settings.
+|              name               |                                                  description                                                   | input_type | scope  | aliases | typed_value |
+|---------------------------------|----------------------------------------------------------------------------------------------------------------|------------|--------|---------|-------------|
+| read_dicom_batch_size           | Number of files to read in each batch of read_dicom.                                                           | UINTEGER   | GLOBAL | []      | 64          |
+| read_dicom_internal_buffer_size | The size of the internal buffer (in kB) used to cache remote read when calling read_dicom over remote storage. | UINTEGER   | GLOBAL | []      | 128         |
+| temp_directory                  | Set the directory to which temporary files are written.                                                        | VARCHAR    | GLOBAL | []      | post.db.tmp |
 
 

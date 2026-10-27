@@ -3,13 +3,13 @@ layout: post
 title: "Try DuckDB v2.0-dev"
 authors:
   - The DuckDB team
-thumb: "/images/blog/thumbs/duckdb-preview-2-0.svg"
-image: "/images/blog/thumbs/duckdb-preview-2-0.png"
+thumb: "/images/blog/thumbs/alpha.svg"
+image: "/images/blog/thumbs/alpha.png"
 excerpt: "DuckDB's development team in Amsterdam has started getting DuckDB v2.0 ready for release in October. If you like shiny new things, try out the alpha releases now and report anything that might not be working as expected!"
 tag: release
 ---
 
-> Update You can now select the [2.0.0-dev version on the installation page]({% link install/index.html %}?version=preview).
+> Update DuckDB v2.0.0 is out now! For details, see the [announcement blog post]({% post_url 2026-10-21-announcing-duckdb-200 %}).
 
 ## The State of DuckDB v2.0
 

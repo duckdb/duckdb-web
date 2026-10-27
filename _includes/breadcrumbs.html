@@ -5,8 +5,7 @@
 <div id="breadcrumbs">
   {% assign crumbs = page.url | remove: '/index.html' | split: '/' %}
   {% assign offset = 3 %}
-  {% assign breadcrumb_version = version_viewed | default: "current" %}
-  {% assign version_base = "docs/" | append: breadcrumb_version %}
+  {% assign version_base = "docs/" | append: version_viewed %}
 
   <span><a href="/{{ version_base }}/index">Documentation</a></span>
 

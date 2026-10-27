@@ -20,15 +20,31 @@ extension:
 repo:
   andium: 3b2a5c1e23bb2cf608874f64dbf9469f5f945892
   github: query-farm/tributary
-  ref: cb1fb527ea29628b976a0b2b819bc0692d9d226b
+  ref: 820ca74ba108b8e0d7c8d7a1caf74f6340a49837
+  variegata: d7d89361c2802c032ba5af73aa65718f5a26804b
 
-extension_star_count: 60
-extension_star_count_pretty: 60
-extension_download_count: 382
-extension_download_count_pretty: 382
+extension_star_count: 61
+extension_star_count_pretty: 61
+extension_download_count: 11304
+extension_download_count_pretty: 11.3k
 image: '/images/community_extensions/social_preview/preview_community_extension_tributary.png'
 layout: community_extension_doc
 ---
+### Compatibility Matrix
+
+This table covers all DuckDB releases that have not reached [end-of-life](https://duckdb.org/release_calendar), including LTS releases, and shows the 2 most recent patch releases of each. Older patch releases are not listed, but the extension may be available for them as well.
+
+<div class="extension_compatibility_table"></div>
+
+| Platform | 1.4.4 | 1.4.5 | 1.5.5 | 1.5.6 | 2.0.0 |
+| :--- | :---: | :---: | :---: | :---: | :---: |
+| Linux AMD64 | ✅ | ✅ | ❌ | ✅ | ✅ |
+| Linux ARM64 | ✅ | ✅ | ❌ | ✅ | ✅ |
+| macOS AMD64 | ✅ | ✅ | ❌ | ✅ | ✅ |
+| macOS ARM64 | ✅ | ✅ | ❌ | ✅ | ✅ |
+| Windows AMD64 | ✅ | ✅ | ❌ | ✅ | ✅ |
+| Windows ARM64 | ❌ | ❌ | ❌ | ❌ | ❌ |
+| WebAssembly | ❌ | ❌ | ❌ | ❌ | ❌ |
 
 ### Installing and Loading
 ```sql
@@ -46,28 +62,11 @@ LOAD {{ page.extension.name }};
 ### About {{ page.extension.name }}
 {{ page.docs.extended_description }}
 {% endif %}
-
 ### Added Functions
 
 <div class="extension_functions_table"></div>
 
-|                       function_name                        | function_type | description | comment | examples |
-|------------------------------------------------------------|---------------|-------------|---------|----------|
-| tributary                                                  | scalar        | NULL        | NULL    |          |
-| tributary_metadata                                         | table         | NULL        | NULL    |          |
-| tributary_scan_topic                                       | table         | NULL        | NULL    |          |
-| tributary_schema_registry_delete_subject                   | table         | NULL        | NULL    |          |
-| tributary_schema_registry_delete_subject_version           | table         | NULL        | NULL    |          |
-| tributary_schema_registry_get_schema_by_guid               | table         | NULL        | NULL    |          |
-| tributary_schema_registry_get_schema_by_subject_and_id     | table         | NULL        | NULL    |          |
-| tributary_schema_registry_get_schema_by_version            | table         | NULL        | NULL    |          |
-| tributary_schema_registry_get_schema_latest                | table         | NULL        | NULL    |          |
-| tributary_schema_registry_get_schema_latest_json_structure | scalar        | NULL        | NULL    |          |
-| tributary_schema_registry_register_schema                  | table         | NULL        | NULL    |          |
-| tributary_schema_registry_serialize_json                   | scalar        | NULL        | NULL    |          |
-| tributary_schema_registry_subjects                         | table         | NULL        | NULL    |          |
-| tributary_schema_registry_versions                         | table         | NULL        | NULL    |          |
-| tributary_version                                          | scalar        | NULL        | NULL    |          |
+This extension does not add any functions.
 
 ### Overloaded Functions
 

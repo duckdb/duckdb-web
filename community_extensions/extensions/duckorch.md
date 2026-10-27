@@ -17,7 +17,7 @@ extension:
 
 repo:
   github: nkwork9999/duck-orch
-  ref: d9bc95f49410c86f3f07a2bf8d2982aecbbf3dd7
+  ref: ee9ccd7966f02f15497332d6cf5a01808ebdb256
 
 docs:
   hello_world: |
@@ -148,11 +148,26 @@ docs:
 
 extension_star_count: 5
 extension_star_count_pretty: 5
-extension_download_count: 857
-extension_download_count_pretty: 857
+extension_download_count: 15594
+extension_download_count_pretty: 15.6k
 image: '/images/community_extensions/social_preview/preview_community_extension_duckorch.png'
 layout: community_extension_doc
 ---
+### Compatibility Matrix
+
+This table covers all DuckDB releases that have not reached [end-of-life](https://duckdb.org/release_calendar), including LTS releases, and shows the 2 most recent patch releases of each. Older patch releases are not listed, but the extension may be available for them as well.
+
+<div class="extension_compatibility_table"></div>
+
+| Platform | 1.4.4 | 1.4.5 | 1.5.5 | 1.5.6 | 2.0.0 |
+| :--- | :---: | :---: | :---: | :---: | :---: |
+| Linux AMD64 | ❌ | ❌ | ✅ | ✅ | ✅ |
+| Linux ARM64 | ❌ | ❌ | ✅ | ✅ | ✅ |
+| macOS AMD64 | ❌ | ❌ | ✅ | ✅ | ✅ |
+| macOS ARM64 | ❌ | ❌ | ✅ | ✅ | ✅ |
+| Windows AMD64 | ❌ | ❌ | ✅ | ✅ | ✅ |
+| Windows ARM64 | ❌ | ❌ | ❌ | ❌ | ❌ |
+| WebAssembly | ❌ | ❌ | ✅ | ✅ | ✅ |
 
 ### Installing and Loading
 ```sql
@@ -170,53 +185,52 @@ LOAD {{ page.extension.name }};
 ### About {{ page.extension.name }}
 {{ page.docs.extended_description }}
 {% endif %}
-
 ### Added Functions
 
 <div class="extension_functions_table"></div>
 
-|         function_name          | function_type | description | comment | examples |
-|--------------------------------|---------------|-------------|---------|----------|
-| orch_asset_health              | pragma        | NULL        | NULL    |          |
-| orch_asset_lineage             | pragma        | NULL        | NULL    |          |
-| orch_asset_list                | pragma        | NULL        | NULL    |          |
-| orch_asset_list_group          | pragma        | NULL        | NULL    |          |
-| orch_asset_materializations    | pragma        | NULL        | NULL    |          |
-| orch_asset_partitions          | pragma        | NULL        | NULL    |          |
-| orch_asset_partitions_calendar | pragma        | NULL        | NULL    |          |
-| orch_asset_show                | pragma        | NULL        | NULL    |          |
-| orch_automation_simulate       | pragma        | NULL        | NULL    |          |
-| orch_automation_status         | pragma        | NULL        | NULL    |          |
-| orch_backfill                  | pragma        | NULL        | NULL    |          |
-| orch_backfill_missing          | pragma        | NULL        | NULL    |          |
-| orch_build_dag                 | scalar        | NULL        | NULL    |          |
-| orch_check_history             | pragma        | NULL        | NULL    |          |
-| orch_check_run                 | pragma        | NULL        | NULL    |          |
-| orch_create_dynamic_asset      | pragma        | NULL        | NULL    |          |
-| orch_downstream_of             | scalar        | NULL        | NULL    |          |
-| orch_dynamic_list              | pragma        | NULL        | NULL    |          |
-| orch_dynamic_refresh           | pragma        | NULL        | NULL    |          |
-| orch_extract_io                | scalar        | NULL        | NULL    |          |
-| orch_hello                     | scalar        | NULL        | NULL    |          |
-| orch_ingest_http               | pragma        | NULL        | NULL    |          |
-| orch_ingest_preview            | pragma        | NULL        | NULL    |          |
-| orch_ingest_reset              | pragma        | NULL        | NULL    |          |
-| orch_ingest_run                | pragma        | NULL        | NULL    |          |
-| orch_ingest_state              | pragma        | NULL        | NULL    |          |
-| orch_init                      | pragma        | NULL        | NULL    |          |
-| orch_load_directory_json       | scalar        | NULL        | NULL    |          |
-| orch_parse_task                | scalar        | NULL        | NULL    |          |
-| orch_register                  | pragma        | NULL        | NULL    |          |
-| orch_render_mermaid            | scalar        | NULL        | NULL    |          |
-| orch_restate                   | pragma        | NULL        | NULL    |          |
-| orch_run                       | pragma        | NULL        | NULL    |          |
-| orch_run_partition             | pragma        | NULL        | NULL    |          |
-| orch_sensor_set_interval       | pragma        | NULL        | NULL    |          |
-| orch_sensor_start              | pragma        | NULL        | NULL    |          |
-| orch_sensor_status             | pragma        | NULL        | NULL    |          |
-| orch_sensor_stop               | pragma        | NULL        | NULL    |          |
-| orch_test                      | pragma        | NULL        | NULL    |          |
-| orch_visualize                 | pragma        | NULL        | NULL    |          |
+|         function_name          | function_type |                                        description                                        | comment |                                     examples                                      |
+|--------------------------------|---------------|-------------------------------------------------------------------------------------------|---------|-----------------------------------------------------------------------------------|
+| orch_asset_health              | pragma        | NULL                                                                                      | NULL    |                                                                                   |
+| orch_asset_lineage             | pragma        | NULL                                                                                      | NULL    |                                                                                   |
+| orch_asset_list                | pragma        | NULL                                                                                      | NULL    |                                                                                   |
+| orch_asset_list_group          | pragma        | NULL                                                                                      | NULL    |                                                                                   |
+| orch_asset_materializations    | pragma        | NULL                                                                                      | NULL    |                                                                                   |
+| orch_asset_partitions          | pragma        | NULL                                                                                      | NULL    |                                                                                   |
+| orch_asset_partitions_calendar | pragma        | NULL                                                                                      | NULL    |                                                                                   |
+| orch_asset_show                | pragma        | NULL                                                                                      | NULL    |                                                                                   |
+| orch_automation_simulate       | pragma        | NULL                                                                                      | NULL    |                                                                                   |
+| orch_automation_status         | pragma        | NULL                                                                                      | NULL    |                                                                                   |
+| orch_backfill                  | pragma        | NULL                                                                                      | NULL    |                                                                                   |
+| orch_backfill_missing          | pragma        | NULL                                                                                      | NULL    |                                                                                   |
+| orch_build_dag                 | scalar        | Builds a dependency DAG from task definitions encoded as JSON.                            | NULL    | [orch_build_dag('[]')]                                                            |
+| orch_check_history             | pragma        | NULL                                                                                      | NULL    |                                                                                   |
+| orch_check_run                 | pragma        | NULL                                                                                      | NULL    |                                                                                   |
+| orch_create_dynamic_asset      | pragma        | NULL                                                                                      | NULL    |                                                                                   |
+| orch_downstream_of             | scalar        | Returns the task names downstream of a failed task from task definitions encoded as JSON. | NULL    | [orch_downstream_of('[]', 'failed_task')]                                         |
+| orch_dynamic_list              | pragma        | NULL                                                                                      | NULL    |                                                                                   |
+| orch_dynamic_refresh           | pragma        | NULL                                                                                      | NULL    |                                                                                   |
+| orch_extract_io                | scalar        | Extracts input and output datasets from a SQL statement as JSON.                          | NULL    | [orch_extract_io('INSERT INTO dst SELECT * FROM src')]                            |
+| orch_hello                     | scalar        | Returns a greeting from the duckorch core library for the supplied name.                  | NULL    | [orch_hello('world')]                                                             |
+| orch_ingest_http               | pragma        | NULL                                                                                      | NULL    |                                                                                   |
+| orch_ingest_preview            | pragma        | NULL                                                                                      | NULL    |                                                                                   |
+| orch_ingest_reset              | pragma        | NULL                                                                                      | NULL    |                                                                                   |
+| orch_ingest_run                | pragma        | NULL                                                                                      | NULL    |                                                                                   |
+| orch_ingest_state              | pragma        | NULL                                                                                      | NULL    |                                                                                   |
+| orch_init                      | pragma        | NULL                                                                                      | NULL    |                                                                                   |
+| orch_load_directory_json       | scalar        | Walks a directory's SQL files and returns parsed tasks and errors as JSON.                | NULL    | [orch_load_directory_json('.')]                                                   |
+| orch_parse_task                | scalar        | Parses a task SQL document and returns its task metadata as JSON.                         | NULL    | [orch_parse_task('-- @task name=demo' \|\| chr(10) \|\| 'SELECT 1', 'demo.sql')]  |
+| orch_register                  | pragma        | NULL                                                                                      | NULL    |                                                                                   |
+| orch_render_mermaid            | scalar        | Renders a task DAG and lineage as Mermaid text using execution statuses.                  | NULL    | [orch_render_mermaid('{"order":[],"task_edges":[],"lineage_edges":[]}', 0, '[]')] |
+| orch_restate                   | pragma        | NULL                                                                                      | NULL    |                                                                                   |
+| orch_run                       | pragma        | NULL                                                                                      | NULL    |                                                                                   |
+| orch_run_partition             | pragma        | NULL                                                                                      | NULL    |                                                                                   |
+| orch_sensor_set_interval       | pragma        | NULL                                                                                      | NULL    |                                                                                   |
+| orch_sensor_start              | pragma        | NULL                                                                                      | NULL    |                                                                                   |
+| orch_sensor_status             | pragma        | NULL                                                                                      | NULL    |                                                                                   |
+| orch_sensor_stop               | pragma        | NULL                                                                                      | NULL    |                                                                                   |
+| orch_test                      | pragma        | NULL                                                                                      | NULL    |                                                                                   |
+| orch_visualize                 | pragma        | NULL                                                                                      | NULL    |                                                                                   |
 
 ### Overloaded Functions
 
@@ -234,13 +248,14 @@ This extension does not add any types.
 
 <div class="extension_settings_table"></div>
 
-|           name           |                                description                                | input_type | scope  | aliases |
-|--------------------------|---------------------------------------------------------------------------|------------|--------|---------|
-| orch_capture_interactive | Capture column lineage for ad-hoc INSERT/CTAS queries via ParserExtension | BOOLEAN    | GLOBAL | []      |
-| orch_max_parallel        | Maximum parallel tasks per DAG layer                                      | BIGINT     | GLOBAL | []      |
-| orch_namespace           | Job namespace for OpenLineage events                                      | VARCHAR    | GLOBAL | []      |
-| orch_openlineage_api_key | OpenLineage API key                                                       | VARCHAR    | GLOBAL | []      |
-| orch_openlineage_debug   | Log OpenLineage events to stderr                                          | BOOLEAN    | GLOBAL | []      |
-| orch_openlineage_url     | OpenLineage backend URL (e.g. http://localhost:5000/api/v1/lineage)       | VARCHAR    | GLOBAL | []      |
+|           name           |                                description                                | input_type | scope  | aliases | typed_value |
+|--------------------------|---------------------------------------------------------------------------|------------|--------|---------|-------------|
+| orch_capture_interactive | Capture column lineage for ad-hoc INSERT/CTAS queries via ParserExtension | BOOLEAN    | GLOBAL | []      | false       |
+| orch_max_parallel        | Maximum parallel tasks per DAG layer                                      | BIGINT     | GLOBAL | []      | 1           |
+| orch_namespace           | Job namespace for OpenLineage events                                      | VARCHAR    | GLOBAL | []      | duckdb      |
+| orch_openlineage_api_key | OpenLineage API key                                                       | VARCHAR    | GLOBAL | []      |             |
+| orch_openlineage_debug   | Log OpenLineage events to stderr                                          | BOOLEAN    | GLOBAL | []      | false       |
+| orch_openlineage_url     | OpenLineage backend URL (e.g. http://localhost:5000/api/v1/lineage)       | VARCHAR    | GLOBAL | []      |             |
+| temp_directory           | Set the directory to which temporary files are written.                   | VARCHAR    | GLOBAL | []      | post.db.tmp |
 
 

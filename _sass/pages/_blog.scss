@@ -2,6 +2,9 @@
 @use '../abstracts/variables' as *;
 @use '../abstracts/mixins' as *;
 
+$filter-btn-height: 38px;
+$filter-modal-padding: 20px;
+
 /** BLOG STYLES **/
 
 section.blog .postpreview:nth-child(4){
@@ -400,7 +403,6 @@ section.speakers,
 		position: relative;
 		display: flex;
 		align-items: center;
-		height: 44px;
 		overflow-x: auto;
 		flex-wrap: nowrap;
 		width: fit-content;
@@ -408,9 +410,9 @@ section.speakers,
 
 		.filter-highlight {
 			position: absolute;
-			top: 4px;
+			top: 0;
 			left: 0;
-			height: calc(100% - 8px);
+			height: $filter-btn-height;
 			background: var(--interactive-filter-selected-background-color, #D9D9D9);
 			border-radius: var(--page-radius-pill);
 			transition: all 0.3s ease;
@@ -424,8 +426,9 @@ section.speakers,
 			z-index: 2;
 			background: none;
 			border: none;
-			height: 100%;
-			padding: 0 15px;
+			height: $filter-btn-height;
+			padding: 0 16px;
+			margin-right: -4px;
 			color: var(--interactive-filter-unselected-text-color, #666);
 			cursor: pointer;
 			border-radius: var(--page-radius-pill);
@@ -434,6 +437,10 @@ section.speakers,
 			&.active,
 			&:hover {
 				color: var(--interactive-filter-selected-text-color, #1A1A1A);
+			}
+
+			&:last-child {
+				margin-right: 0;
 			}
 		}
 	}
@@ -563,6 +570,18 @@ h5 a {
 			@include blog-typography;
 			details summary{
 				font-size: var(--type-body-normal, 16px);
+			}
+			// Match the compatibility matrix on community extension pages
+			.extension_compatibility_table + table{
+				thead th{
+					font-size: var(--type-body-small, 14px);
+					font-weight: 700;
+				}
+				tbody td{
+					font-size: var(--type-body-small, 14px);
+					font-weight: var(--type-weight-standard, 450);
+					line-height: 1.55;
+				}
 			}
 			.video-container{
 				margin: 30px 0;
@@ -846,6 +865,23 @@ h5 a {
 				padding: 10px 30px 10px 10px;
 			}
 		}
+		.post-breadcrumb{
+			@include tiny();
+			font-weight: 400;
+			letter-spacing: 0.02em;
+			display: flex;
+			flex-wrap: wrap;
+			gap: 4px;
+			margin: 0 0 16px;
+			color: var(--main-text-secondary-color, #666);
+			a{
+				color: inherit;
+				text-decoration: none;
+				&:hover{
+					color: var(--main-text-primary-color, #0D0D0D);
+				}
+			}
+		}
 		.contentwidth:has(> .postheader) > h1{
 			margin-bottom: 12px;
 		}
@@ -890,7 +926,7 @@ h5 a {
 				flex: none;
 				width: 32px;
 				height: 32px;
-				border: 1px solid var(--main-quaternary-color, #CCC);
+				border: 1px solid var(--main-body-background-color, #FAFAFA);
 				border-radius: 50%;
 				-o-object-fit: cover;
 				   object-fit: cover;
@@ -952,7 +988,7 @@ h5 a {
 		.singleentry{
 			max-width: 1180px;
 			margin: 0 auto;
-			padding: 75px 15px;
+			padding: 50px 15px 75px;
 
 			.content{
 				max-width: 650px;
@@ -1005,7 +1041,7 @@ h5 a {
 				flex: none;
 				box-sizing: border-box;
 				width: 220px;
-				padding-top: 3px;
+				padding-top: 0;
 				position: relative;
 				.toc_menu{
 					position: sticky;
@@ -1201,7 +1237,7 @@ footer{
 			background: var(--menu-dropdown-background-color, #F2F2F2);
 			border: 1px solid var(--menu-dropdown-border-color, #E6E6E6);
 			border-radius: var(--page-radius-box);
-			padding: 20px;
+			padding: $filter-modal-padding;
 			opacity: 0;
 			transform: translateY(10px);
 			pointer-events: none;
@@ -1228,9 +1264,9 @@ footer{
 		.filter-modal .filtertags {
 			width: auto;
 			max-width: none;
-			margin-left: -20px;
-			margin-right: -20px;
-			padding: 0 20px;
+			margin: 0 (-$filter-modal-padding);
+			padding: 0 $filter-modal-padding;
+			@include scroll-x-faded($filter-modal-padding);
 		}
 
 		.filter-overlay {

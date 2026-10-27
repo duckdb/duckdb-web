@@ -8,7 +8,7 @@ excerpt: |
 extension:
   name: duckdb_opendalfs
   description: Remote storage filesystem for DuckDB via Apache OpenDAL — S3, GCS, Azure, Hugging Face, WebDAV, SFTP, and more, with DuckDB secret-based auth.
-  version: 0.2.1
+  version: 0.3.0
   language: C++
   build: cmake
   license: MIT
@@ -19,7 +19,7 @@ extension:
 
 repo:
   github: dentiny/duckdb-opendal-filesystem
-  ref: 174049fc96d09f03c7c20a4912987f1c3f248f5d
+  ref: 84b00dc969aacf2f87d3a73f4532b6aa507e54b4
 
 docs:
   hello_world: |
@@ -40,13 +40,28 @@ docs:
     `duckdb_opendalfs` is an extension which supports many backends (S3, GCS, Azure Blob, Hugging Face, etc)
     and secret management via `opendal_<backend>` secret types.
 
-extension_star_count: 7
-extension_star_count_pretty: 7
-extension_download_count: 810
-extension_download_count_pretty: 810
+extension_star_count: 8
+extension_star_count_pretty: 8
+extension_download_count: 9061
+extension_download_count_pretty: 9.1k
 image: '/images/community_extensions/social_preview/preview_community_extension_duckdb_opendalfs.png'
 layout: community_extension_doc
 ---
+### Compatibility Matrix
+
+This table covers all DuckDB releases that have not reached [end-of-life](https://duckdb.org/release_calendar), including LTS releases, and shows the 2 most recent patch releases of each. Older patch releases are not listed, but the extension may be available for them as well.
+
+<div class="extension_compatibility_table"></div>
+
+| Platform | 1.4.4 | 1.4.5 | 1.5.5 | 1.5.6 | 2.0.0 |
+| :--- | :---: | :---: | :---: | :---: | :---: |
+| Linux AMD64 | ❌ | ❌ | ✅ | ✅ | ✅ |
+| Linux ARM64 | ❌ | ❌ | ✅ | ✅ | ✅ |
+| macOS AMD64 | ❌ | ❌ | ✅ | ✅ | ✅ |
+| macOS ARM64 | ❌ | ❌ | ✅ | ✅ | ✅ |
+| Windows AMD64 | ❌ | ❌ | ❌ | ❌ | ❌ |
+| Windows ARM64 | ❌ | ❌ | ❌ | ❌ | ❌ |
+| WebAssembly | ❌ | ❌ | ❌ | ❌ | ❌ |
 
 ### Installing and Loading
 ```sql
@@ -64,7 +79,6 @@ LOAD {{ page.extension.name }};
 ### About {{ page.extension.name }}
 {{ page.docs.extended_description }}
 {% endif %}
-
 ### Added Functions
 
 <div class="extension_functions_table"></div>
@@ -87,16 +101,17 @@ This extension does not add any types.
 
 <div class="extension_settings_table"></div>
 
-|             name              |                    description                    | input_type | scope  | aliases |
-|-------------------------------|---------------------------------------------------|------------|--------|---------|
-| opendal_io_timeout_ms         | OpenDAL I/O-operation timeout in milliseconds     | UBIGINT    | GLOBAL | []      |
-| opendal_retry_factor          | OpenDAL exponential retry factor                  | DOUBLE     | GLOBAL | []      |
-| opendal_retry_jitter          | Add jitter to OpenDAL retry delays                | BOOLEAN    | GLOBAL | []      |
-| opendal_retry_layer_enabled   | Enable the OpenDAL retry layer                    | BOOLEAN    | GLOBAL | []      |
-| opendal_retry_max_delay_ms    | Maximum OpenDAL retry delay in milliseconds       | UBIGINT    | GLOBAL | []      |
-| opendal_retry_max_times       | Maximum number of OpenDAL retry backoff delays    | UBIGINT    | GLOBAL | []      |
-| opendal_retry_min_delay_ms    | Minimum OpenDAL retry delay in milliseconds       | UBIGINT    | GLOBAL | []      |
-| opendal_timeout_layer_enabled | Enable the OpenDAL timeout layer                  | BOOLEAN    | GLOBAL | []      |
-| opendal_timeout_ms            | OpenDAL control-operation timeout in milliseconds | UBIGINT    | GLOBAL | []      |
+|             name              |                       description                       | input_type | scope  | aliases | typed_value |
+|-------------------------------|---------------------------------------------------------|------------|--------|---------|-------------|
+| opendal_io_timeout_ms         | OpenDAL I/O-operation timeout in milliseconds           | UBIGINT    | GLOBAL | []      | 10000       |
+| opendal_retry_factor          | OpenDAL exponential retry factor                        | DOUBLE     | GLOBAL | []      | 2.0         |
+| opendal_retry_jitter          | Add jitter to OpenDAL retry delays                      | BOOLEAN    | GLOBAL | []      | false       |
+| opendal_retry_layer_enabled   | Enable the OpenDAL retry layer                          | BOOLEAN    | GLOBAL | []      | true        |
+| opendal_retry_max_delay_ms    | Maximum OpenDAL retry delay in milliseconds             | UBIGINT    | GLOBAL | []      | 60000       |
+| opendal_retry_max_times       | Maximum number of OpenDAL retry backoff delays          | UBIGINT    | GLOBAL | []      | 3           |
+| opendal_retry_min_delay_ms    | Minimum OpenDAL retry delay in milliseconds             | UBIGINT    | GLOBAL | []      | 1000        |
+| opendal_timeout_layer_enabled | Enable the OpenDAL timeout layer                        | BOOLEAN    | GLOBAL | []      | true        |
+| opendal_timeout_ms            | OpenDAL control-operation timeout in milliseconds       | UBIGINT    | GLOBAL | []      | 60000       |
+| temp_directory                | Set the directory to which temporary files are written. | VARCHAR    | GLOBAL | []      | post.db.tmp |
 
 

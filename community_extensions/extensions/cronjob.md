@@ -72,15 +72,31 @@ extension:
 repo:
   andium: 040dbecd552e6b373fb1bb4582935d243693978e
   github: quackscience/duckdb-extension-cronjob
-  ref: a8982fb5d1520f307f92e197436abb84b41ac86d
+  ref: 1a8304ef9c98c73e8293525db67eb681b9ceee56
+  variegata: 40e96fd97cb8ce393578f4b64622c9cd5b8a3280
 
-extension_star_count: 56
-extension_star_count_pretty: 56
-extension_download_count: 984
-extension_download_count_pretty: 984
+extension_star_count: 57
+extension_star_count_pretty: 57
+extension_download_count: 20390
+extension_download_count_pretty: 20.4k
 image: '/images/community_extensions/social_preview/preview_community_extension_cronjob.png'
 layout: community_extension_doc
 ---
+### Compatibility Matrix
+
+This table covers all DuckDB releases that have not reached [end-of-life](https://duckdb.org/release_calendar), including LTS releases, and shows the 2 most recent patch releases of each. Older patch releases are not listed, but the extension may be available for them as well.
+
+<div class="extension_compatibility_table"></div>
+
+| Platform | 1.4.4 | 1.4.5 | 1.5.5 | 1.5.6 | 2.0.0 |
+| :--- | :---: | :---: | :---: | :---: | :---: |
+| Linux AMD64 | ✅ | ❌ | ✅ | ✅ | ✅ |
+| Linux ARM64 | ✅ | ❌ | ✅ | ✅ | ✅ |
+| macOS AMD64 | ✅ | ❌ | ✅ | ✅ | ✅ |
+| macOS ARM64 | ✅ | ❌ | ✅ | ✅ | ✅ |
+| Windows AMD64 | ✅ | ❌ | ✅ | ✅ | ✅ |
+| Windows ARM64 | ❌ | ❌ | ❌ | ❌ | ❌ |
+| WebAssembly | ✅ | ❌ | ✅ | ✅ | ✅ |
 
 ### Installing and Loading
 ```sql
@@ -98,16 +114,11 @@ LOAD {{ page.extension.name }};
 ### About {{ page.extension.name }}
 {{ page.docs.extended_description }}
 {% endif %}
-
 ### Added Functions
 
 <div class="extension_functions_table"></div>
 
-| function_name | function_type | description | comment | examples |
-|---------------|---------------|-------------|---------|----------|
-| cron          | scalar        | NULL        | NULL    |          |
-| cron_delete   | scalar        | NULL        | NULL    |          |
-| cron_jobs     | table         | NULL        | NULL    |          |
+This extension does not add any functions.
 
 ### Overloaded Functions
 

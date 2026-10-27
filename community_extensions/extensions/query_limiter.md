@@ -8,7 +8,7 @@ excerpt: |
 extension:
   name: query_limiter
   description: Reject queries before physical execution when estimated table scans exceed a configured row budget
-  version: 0.1.2
+  version: 0.2.0
   language: C++
   build: cmake
   license: MIT
@@ -18,7 +18,8 @@ extension:
 
 repo:
   github: dentiny/duckdb-query-limiter
-  ref: 8febc919c9240343112b6a54468074fe48628ea1
+  variegata: 8febc919c9240343112b6a54468074fe48628ea1
+  ref: 739c7964074f2adce00cdf9dc130a109d0b01e6f
 
 docs:
   hello_world: |
@@ -30,11 +31,26 @@ docs:
 
 extension_star_count: 1
 extension_star_count_pretty: 1
-extension_download_count: 716
-extension_download_count_pretty: 716
+extension_download_count: 10336
+extension_download_count_pretty: 10.3k
 image: '/images/community_extensions/social_preview/preview_community_extension_query_limiter.png'
 layout: community_extension_doc
 ---
+### Compatibility Matrix
+
+This table covers all DuckDB releases that have not reached [end-of-life](https://duckdb.org/release_calendar), including LTS releases, and shows the 2 most recent patch releases of each. Older patch releases are not listed, but the extension may be available for them as well.
+
+<div class="extension_compatibility_table"></div>
+
+| Platform | 1.4.4 | 1.4.5 | 1.5.5 | 1.5.6 | 2.0.0 |
+| :--- | :---: | :---: | :---: | :---: | :---: |
+| Linux AMD64 | ❌ | ❌ | ✅ | ✅ | ✅ |
+| Linux ARM64 | ❌ | ❌ | ✅ | ✅ | ✅ |
+| macOS AMD64 | ❌ | ❌ | ✅ | ✅ | ✅ |
+| macOS ARM64 | ❌ | ❌ | ✅ | ✅ | ✅ |
+| Windows AMD64 | ❌ | ❌ | ✅ | ✅ | ✅ |
+| Windows ARM64 | ❌ | ❌ | ❌ | ❌ | ❌ |
+| WebAssembly | ❌ | ❌ | ❌ | ❌ | ❌ |
 
 ### Installing and Loading
 ```sql
@@ -52,7 +68,6 @@ LOAD {{ page.extension.name }};
 ### About {{ page.extension.name }}
 {{ page.docs.extended_description }}
 {% endif %}
-
 ### Added Functions
 
 <div class="extension_functions_table"></div>
@@ -77,9 +92,10 @@ This extension does not add any types.
 
 <div class="extension_settings_table"></div>
 
-|           name           |                                                      description                                                       | input_type | scope  | aliases |
-|--------------------------|------------------------------------------------------------------------------------------------------------------------|------------|--------|---------|
-| max_rows_to_scan         | Reject queries before execution when estimated table-scan rows exceed this value. Defaults to the maximum idx_t value. | UBIGINT    | GLOBAL | []      |
-| max_rows_to_scan_unknown | Policy for scans without row estimates when max_rows_to_scan is enabled: allow or reject.                              | VARCHAR    | GLOBAL | []      |
+|           name           |                                                      description                                                       | input_type | scope  | aliases |     typed_value      |
+|--------------------------|------------------------------------------------------------------------------------------------------------------------|------------|--------|---------|----------------------|
+| max_rows_to_scan         | Reject queries before execution when estimated table-scan rows exceed this value. Defaults to the maximum idx_t value. | UBIGINT    | GLOBAL | []      | 18446744073709551615 |
+| max_rows_to_scan_unknown | Policy for scans without row estimates when max_rows_to_scan is enabled: allow or reject.                              | VARCHAR    | GLOBAL | []      | allow                |
+| temp_directory           | Set the directory to which temporary files are written.                                                                | VARCHAR    | GLOBAL | []      | post.db.tmp          |
 
 

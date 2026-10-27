@@ -19,15 +19,31 @@ extension:
 repo:
   andium: 7680a4be752c2f0c09046eabacc384e0df66134a
   github: query-farm/hashfuncs
-  ref: 741f1cfd28826aa63d1d28f1216a7d7cf39b2849
+  ref: b8986ca6a0f384293a43f1fd0768d0e3ec1da7be
+  variegata: 6c8bd7c1161657a901f1f7c1909a60f69867f6af
 
 extension_star_count: 15
 extension_star_count_pretty: 15
-extension_download_count: 59225
-extension_download_count_pretty: 59.2k
+extension_download_count: 54806
+extension_download_count_pretty: 54.8k
 image: '/images/community_extensions/social_preview/preview_community_extension_hashfuncs.png'
 layout: community_extension_doc
 ---
+### Compatibility Matrix
+
+This table covers all DuckDB releases that have not reached [end-of-life](https://duckdb.org/release_calendar), including LTS releases, and shows the 2 most recent patch releases of each. Older patch releases are not listed, but the extension may be available for them as well.
+
+<div class="extension_compatibility_table"></div>
+
+| Platform | 1.4.4 | 1.4.5 | 1.5.5 | 1.5.6 | 2.0.0 |
+| :--- | :---: | :---: | :---: | :---: | :---: |
+| Linux AMD64 | ✅ | ✅ | ✅ | ✅ | ✅ |
+| Linux ARM64 | ✅ | ✅ | ✅ | ✅ | ✅ |
+| macOS AMD64 | ✅ | ✅ | ✅ | ✅ | ✅ |
+| macOS ARM64 | ✅ | ✅ | ✅ | ✅ | ✅ |
+| Windows AMD64 | ✅ | ✅ | ✅ | ✅ | ✅ |
+| Windows ARM64 | ❌ | ❌ | ❌ | ❌ | ❌ |
+| WebAssembly | ✅ | ✅ | ✅ | ✅ | ✅ |
 
 ### Installing and Loading
 ```sql
@@ -45,32 +61,11 @@ LOAD {{ page.extension.name }};
 ### About {{ page.extension.name }}
 {{ page.docs.extended_description }}
 {% endif %}
-
 ### Added Functions
 
 <div class="extension_functions_table"></div>
 
-|    function_name    | function_type |                                                                                   description                                                                                    | comment |              examples              |
-|---------------------|---------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|---------|------------------------------------|
-| murmurhash3_128     | scalar        | Computes a 128-bit MurmurHash3 (x86 variant) non-cryptographic hash of the input                                                                                                 | NULL    | [murmurhash3_128('hello')]         |
-| murmurhash3_128     | scalar        | Computes a 128-bit MurmurHash3 (x86 variant) non-cryptographic hash of the input with a seed                                                                                     | NULL    | [murmurhash3_128('hello', 42)]     |
-| murmurhash3_32      | scalar        | Computes a 32-bit MurmurHash3 non-cryptographic hash of the input                                                                                                                | NULL    | [murmurhash3_32('hello')]          |
-| murmurhash3_32      | scalar        | Computes a 32-bit MurmurHash3 non-cryptographic hash of the input with a seed                                                                                                    | NULL    | [murmurhash3_32('hello', 42)]      |
-| murmurhash3_x64_128 | scalar        | Computes a 128-bit MurmurHash3 (x64 variant) non-cryptographic hash of the input with a seed                                                                                     | NULL    | [murmurhash3_x64_128('hello', 42)] |
-| murmurhash3_x64_128 | scalar        | Computes a 128-bit MurmurHash3 (x64 variant) non-cryptographic hash of the input. Optimized for 64-bit platforms                                                                 | NULL    | [murmurhash3_x64_128('hello')]     |
-| rapidhash           | scalar        | Computes a 64-bit RapidHash non-cryptographic hash of the input with a seed                                                                                                      | NULL    | [rapidhash('hello', 42)]           |
-| rapidhash           | scalar        | Computes a 64-bit RapidHash non-cryptographic hash of the input. Very fast for all input sizes                                                                                   | NULL    | [rapidhash('hello')]               |
-| xxh32               | scalar        | Computes a 32-bit xxHash (XXH32) non-cryptographic hash of the input                                                                                                             | NULL    | [xxh32('hello')]                   |
-| xxh32               | scalar        | Computes a 32-bit xxHash (XXH32) non-cryptographic hash of the input with a seed                                                                                                 | NULL    | [xxh32('hello', 42)]               |
-| xxh3_128            | scalar        | Computes a 128-bit xxHash3 (XXH3_128) non-cryptographic hash of the input                                                                                                        | NULL    | [xxh3_128('hello')]                |
-| xxh3_128            | scalar        | Computes a 128-bit xxHash3 (XXH3_128) non-cryptographic hash of the input with a seed                                                                                            | NULL    | [xxh3_128('hello', 42)]            |
-| xxh3_128_hex        | scalar        | Computes a 128-bit xxHash3 hash and returns it as a 32-character lowercase hex string in canonical byte order (high64 \|\| low64), matching Python xxhash.xxh3_128().hexdigest() | NULL    | [xxh3_128_hex('hello')]            |
-| xxh3_128_hex        | scalar        | Computes a 128-bit xxHash3 hash with a seed and returns it as a 32-character lowercase hex string in canonical byte order                                                        | NULL    | [xxh3_128_hex('hello', 42)]        |
-| xxh3_128_hex        | scalar        | NULL                                                                                                                                                                             | NULL    |                                    |
-| xxh3_64             | scalar        | Computes a 64-bit xxHash3 (XXH3_64) non-cryptographic hash of the input with a seed                                                                                              | NULL    | [xxh3_64('hello', 42)]             |
-| xxh3_64             | scalar        | Computes a 64-bit xxHash3 (XXH3_64) non-cryptographic hash of the input. Faster than XXH64 for short inputs                                                                      | NULL    | [xxh3_64('hello')]                 |
-| xxh64               | scalar        | Computes a 64-bit xxHash (XXH64) non-cryptographic hash of the input                                                                                                             | NULL    | [xxh64('hello')]                   |
-| xxh64               | scalar        | Computes a 64-bit xxHash (XXH64) non-cryptographic hash of the input with a seed                                                                                                 | NULL    | [xxh64('hello', 42)]               |
+This extension does not add any functions.
 
 ### Overloaded Functions
 

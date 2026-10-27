@@ -145,13 +145,28 @@ docs:
     -- 1 none   2 contact details   3 health   4 money   5 none
     ```
 
-extension_star_count: 1
-extension_star_count_pretty: 1
-extension_download_count: 358
-extension_download_count_pretty: 358
+extension_star_count: 2
+extension_star_count_pretty: 2
+extension_download_count: 6690
+extension_download_count_pretty: 6.7k
 image: '/images/community_extensions/social_preview/preview_community_extension_typed_ai.png'
 layout: community_extension_doc
 ---
+### Compatibility Matrix
+
+This table covers all DuckDB releases that have not reached [end-of-life](https://duckdb.org/release_calendar), including LTS releases, and shows the 2 most recent patch releases of each. Older patch releases are not listed, but the extension may be available for them as well.
+
+<div class="extension_compatibility_table"></div>
+
+| Platform | 1.4.4 | 1.4.5 | 1.5.5 | 1.5.6 | 2.0.0 |
+| :--- | :---: | :---: | :---: | :---: | :---: |
+| Linux AMD64 | ❌ | ❌ | ❌ | ✅ | ✅ |
+| Linux ARM64 | ❌ | ❌ | ❌ | ✅ | ✅ |
+| macOS AMD64 | ❌ | ❌ | ❌ | ✅ | ✅ |
+| macOS ARM64 | ❌ | ❌ | ❌ | ✅ | ✅ |
+| Windows AMD64 | ❌ | ❌ | ❌ | ✅ | ✅ |
+| Windows ARM64 | ❌ | ❌ | ❌ | ❌ | ❌ |
+| WebAssembly | ❌ | ❌ | ❌ | ❌ | ❌ |
 
 ### Installing and Loading
 ```sql
@@ -169,7 +184,6 @@ LOAD {{ page.extension.name }};
 ### About {{ page.extension.name }}
 {{ page.docs.extended_description }}
 {% endif %}
-
 ### Added Functions
 
 <div class="extension_functions_table"></div>
@@ -199,19 +213,20 @@ This extension does not add any types.
 
 <div class="extension_settings_table"></div>
 
-|         name          |                                        description                                         | input_type | scope  | aliases |
-|-----------------------|--------------------------------------------------------------------------------------------|------------|--------|---------|
-| typed_batch_size      | Rows per request, up to the provider's limit                                               | BIGINT     | GLOBAL | []      |
-| typed_budget_usd      | Most dollars this database may spend, counted since the extension loaded                   | DOUBLE     | GLOBAL | []      |
-| typed_cache_mb        | Memory for saved answers                                                                   | BIGINT     | GLOBAL | []      |
-| typed_concurrency     | Requests in flight across the whole process                                                | BIGINT     | GLOBAL | []      |
-| typed_dry_run         | Price queries and call nothing; results are NULL                                           | BOOLEAN    | GLOBAL | []      |
-| typed_fail_after      | Failed requests in a row that stop calls for the rest of the query; 0 is off               | BIGINT     | GLOBAL | []      |
-| typed_max_input_chars | Longest input value, in characters; longer values are refused, never cut                   | BIGINT     | GLOBAL | []      |
-| typed_max_retries     | Extra attempts after a 408, 429, 5xx or dropped connection                                 | BIGINT     | GLOBAL | []      |
-| typed_max_rows        | Most rows one query may send to the model; cached rows are free                            | BIGINT     | GLOBAL | []      |
-| typed_on_stop         | What a stopped job shows: 'error', 'null' or 'row' ({value, error} pairs)                  | VARCHAR    | GLOBAL | []      |
-| typed_profile         | Name of the typed_ai secret to use; empty picks the only one, or Jev from TYPESAFE_API_KEY | VARCHAR    | GLOBAL | []      |
-| typed_timeout_s       | Seconds per HTTP attempt                                                                   | BIGINT     | GLOBAL | []      |
+|         name          |                                        description                                         | input_type | scope  | aliases | typed_value |
+|-----------------------|--------------------------------------------------------------------------------------------|------------|--------|---------|-------------|
+| temp_directory        | Set the directory to which temporary files are written.                                    | VARCHAR    | GLOBAL | []      | post.db.tmp |
+| typed_batch_size      | Rows per request, up to the provider's limit                                               | BIGINT     | GLOBAL | []      | 10          |
+| typed_budget_usd      | Most dollars this database may spend, counted since the extension loaded                   | DOUBLE     | GLOBAL | []      | 1.0         |
+| typed_cache_mb        | Memory for saved answers                                                                   | BIGINT     | GLOBAL | []      | 256         |
+| typed_concurrency     | Requests in flight across the whole process                                                | BIGINT     | GLOBAL | []      | 4           |
+| typed_dry_run         | Price queries and call nothing; results are NULL                                           | BOOLEAN    | GLOBAL | []      | false       |
+| typed_fail_after      | Failed requests in a row that stop calls for the rest of the query; 0 is off               | BIGINT     | GLOBAL | []      | 3           |
+| typed_max_input_chars | Longest input value, in characters; longer values are refused, never cut                   | BIGINT     | GLOBAL | []      | 20000       |
+| typed_max_retries     | Extra attempts after a 408, 429, 5xx or dropped connection                                 | BIGINT     | GLOBAL | []      | 3           |
+| typed_max_rows        | Most rows one query may send to the model; cached rows are free                            | BIGINT     | GLOBAL | []      | 1000        |
+| typed_on_stop         | What a stopped job shows: 'error', 'null' or 'row' ({value, error} pairs)                  | VARCHAR    | GLOBAL | []      | error       |
+| typed_profile         | Name of the typed_ai secret to use; empty picks the only one, or Jev from TYPESAFE_API_KEY | VARCHAR    | GLOBAL | []      |             |
+| typed_timeout_s       | Seconds per HTTP attempt                                                                   | BIGINT     | GLOBAL | []      | 30          |
 
 

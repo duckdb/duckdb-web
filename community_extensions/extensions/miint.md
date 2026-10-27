@@ -15,14 +15,13 @@ extension:
   excluded_platforms: "windows_amd64;windows_amd64_mingw;windows_amd64_rtools;osx_amd64"
   maintainers:
     - wasade
-  requires:
-    duckdb: "1.5.5"
   requires_toolchains: "rust;omp"
   test_config: '{"test_env_variables": {"MIINT_SIMD": "baseline"}}'
 
 repo:
   github: the-miint/duckdb-miint
-  ref: 10f0fde06d091bc78939223dea928f4374d4fdea
+  ref: 5fbea2ab2bcd6888741d3752293293cc4202121e
+  variegata: 10f0fde06d091bc78939223dea928f4374d4fdea
 
 docs:
   hello_world: |
@@ -103,13 +102,28 @@ docs:
 
     See the [documentation](https://github.com/the-miint/duckdb-miint) for complete details.
 
-extension_star_count: 8
-extension_star_count_pretty: 8
-extension_download_count: 938
-extension_download_count_pretty: 938
+extension_star_count: 10
+extension_star_count_pretty: 10
+extension_download_count: 13892
+extension_download_count_pretty: 13.9k
 image: '/images/community_extensions/social_preview/preview_community_extension_miint.png'
 layout: community_extension_doc
 ---
+### Compatibility Matrix
+
+This table covers all DuckDB releases that have not reached [end-of-life](https://duckdb.org/release_calendar), including LTS releases, and shows the 2 most recent patch releases of each. Older patch releases are not listed, but the extension may be available for them as well.
+
+<div class="extension_compatibility_table"></div>
+
+| Platform | 1.4.4 | 1.4.5 | 1.5.5 | 1.5.6 | 2.0.0 |
+| :--- | :---: | :---: | :---: | :---: | :---: |
+| Linux AMD64 | ✅ | ❌ | ✅ | ✅ | ✅ |
+| Linux ARM64 | ✅ | ❌ | ✅ | ✅ | ✅ |
+| macOS AMD64 | ✅ | ❌ | ❌ | ❌ | ❌ |
+| macOS ARM64 | ✅ | ❌ | ✅ | ✅ | ✅ |
+| Windows AMD64 | ❌ | ❌ | ❌ | ❌ | ❌ |
+| Windows ARM64 | ❌ | ❌ | ❌ | ❌ | ❌ |
+| WebAssembly | ❌ | ❌ | ✅ | ✅ | ✅ |
 
 ### Installing and Loading
 ```sql
@@ -127,7 +141,6 @@ LOAD {{ page.extension.name }};
 ### About {{ page.extension.name }}
 {{ page.docs.extended_description }}
 {% endif %}
-
 ### Added Functions
 
 <div class="extension_functions_table"></div>
@@ -374,9 +387,10 @@ This extension does not add any types.
 
 <div class="extension_settings_table"></div>
 
-|             name             |                                                                                        description                                                                                         | input_type | scope  | aliases |
-|------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|------------|--------|---------|
-| miint_ena_validate_only      | When true, the next INSERT INTO ena.* is sent as a Webin V2 VALIDATE (server-side dry-run) instead of ADD. No accessions are returned. Default false.                                      | BOOLEAN    | GLOBAL | []      |
-| miint_rype_arrow_batch_bytes | Byte ceiling on one Arrow record batch's sequence payload in rype_classify / rype_log_ratio / rype_extract_*. 0 disables the ceiling, restoring a single unbounded batch. Default 256 MiB. | BIGINT     | GLOBAL | []      |
+|             name             |                                                                                        description                                                                                         | input_type | scope  | aliases | typed_value |
+|------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|------------|--------|---------|-------------|
+| miint_ena_validate_only      | When true, the next INSERT INTO ena.* is sent as a Webin V2 VALIDATE (server-side dry-run) instead of ADD. No accessions are returned. Default false.                                      | BOOLEAN    | GLOBAL | []      | false       |
+| miint_rype_arrow_batch_bytes | Byte ceiling on one Arrow record batch's sequence payload in rype_classify / rype_log_ratio / rype_extract_*. 0 disables the ceiling, restoring a single unbounded batch. Default 256 MiB. | BIGINT     | GLOBAL | []      | 268435456   |
+| temp_directory               | Set the directory to which temporary files are written.                                                                                                                                    | VARCHAR    | GLOBAL | []      | post.db.tmp |
 
 

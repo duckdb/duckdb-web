@@ -21,15 +21,31 @@ extension:
 repo:
   andium: 84794a00a6837c31f0779c56f2ce0e83df1bb7b6
   github: query-farm/adbc_scanner
-  ref: 9723c3cb908270099d82d879a7ad4caeac1879ee
+  ref: c0f05dc21f808a528e1797806759a9c7d3b80377
+  variegata: d76672f3a87b490467a01dbcc767610f9ecd849e
 
 extension_star_count: 25
 extension_star_count_pretty: 25
-extension_download_count: 1951
-extension_download_count_pretty: 2.0k
+extension_download_count: 23936
+extension_download_count_pretty: 23.9k
 image: '/images/community_extensions/social_preview/preview_community_extension_adbc_scanner.png'
 layout: community_extension_doc
 ---
+### Compatibility Matrix
+
+This table covers all DuckDB releases that have not reached [end-of-life](https://duckdb.org/release_calendar), including LTS releases, and shows the 2 most recent patch releases of each. Older patch releases are not listed, but the extension may be available for them as well.
+
+<div class="extension_compatibility_table"></div>
+
+| Platform | 1.4.4 | 1.4.5 | 1.5.5 | 1.5.6 | 2.0.0 |
+| :--- | :---: | :---: | :---: | :---: | :---: |
+| Linux AMD64 | ✅ | ❌ | ✅ | ✅ | ✅ |
+| Linux ARM64 | ✅ | ❌ | ✅ | ✅ | ✅ |
+| macOS AMD64 | ✅ | ❌ | ✅ | ✅ | ✅ |
+| macOS ARM64 | ✅ | ❌ | ✅ | ✅ | ✅ |
+| Windows AMD64 | ✅ | ❌ | ✅ | ✅ | ✅ |
+| Windows ARM64 | ❌ | ❌ | ❌ | ❌ | ❌ |
+| WebAssembly | ❌ | ❌ | ❌ | ❌ | ❌ |
 
 ### Installing and Loading
 ```sql
@@ -47,24 +63,11 @@ LOAD {{ page.extension.name }};
 ### About {{ page.extension.name }}
 {{ page.docs.extended_description }}
 {% endif %}
-
 ### Added Functions
 
 <div class="extension_functions_table"></div>
 
-|  function_name   | function_type | description | comment | examples |
-|------------------|---------------|-------------|---------|----------|
-| adbc_clear_cache | table         | NULL        | NULL    | NULL     |
-| adbc_columns     | table         | NULL        | NULL    | NULL     |
-| adbc_execute     | table         | NULL        | NULL    | NULL     |
-| adbc_info        | table         | NULL        | NULL    | NULL     |
-| adbc_insert      | table         | NULL        | NULL    | NULL     |
-| adbc_profiles    | table         | NULL        | NULL    | NULL     |
-| adbc_scan        | table         | NULL        | NULL    | NULL     |
-| adbc_scan_table  | table         | NULL        | NULL    | NULL     |
-| adbc_schema      | table         | NULL        | NULL    | NULL     |
-| adbc_table_types | table         | NULL        | NULL    | NULL     |
-| adbc_tables      | table         | NULL        | NULL    | NULL     |
+This extension does not add any functions.
 
 ### Overloaded Functions
 

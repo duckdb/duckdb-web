@@ -7,7 +7,7 @@ thumb: "/images/blog/thumbs/raspberry-pi.svg"
 image: "/images/blog/thumbs/raspberry-pi.png"
 excerpt: DuckDB can run all TPC-H queries on a Raspberry Pi 5 board up to the 1,000 GiB dataset.
 tag: benchmark
---- 
+---
 
 > Update The setup described here can run all TPC-H queries on the SF100, SF300 and SF1,000 datasets with DuckDB v1.2.2 and newer versions.
 > The timings given in this blog post were achieved in January 2025 using DuckDB v1.2-dev.
@@ -53,8 +53,8 @@ Here is a photo of our machine:
 So what is this little box capable of? We used the [TPC-H workload](https://www.tpc.org/tpch/) to find out.
 
 We first updated the Raspberry Pi OS (a fork of Debian Linux) to its latest version, 2024-11-19.
-We then compiled DuckDB [version `0024e5d4be`](https://github.com/duckdb/duckdb/commit/0024e5d4be) using the [Raspberry Pi build instructions]({% link docs/current/dev/building/raspberry_pi.md %}).
-To make the queries easy to run, we also included the [TPC-H extension]({% link docs/current/core_extensions/tpch.md %}) in the build:
+We then compiled DuckDB [version `0024e5d4be`](https://github.com/duckdb/duckdb/commit/0024e5d4be) using the [Raspberry Pi build instructions]({% link docs/2.0/dev/building/raspberry_pi.md %}).
+To make the queries easy to run, we also included the [TPC-H extension]({% link docs/2.0/core_extensions/tpch.md %}) in the build:
 
 ```bash
 GEN=ninja BUILD_EXTENSIONS="tpch" make

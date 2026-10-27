@@ -22,15 +22,31 @@ extension:
 repo:
   andium: 8feeb0b0157b7fad0694ee09c430bbabce54cbb7
   github: query-farm/marisa
-  ref: 58d4c7e72d97564bea25f8bb5d65ddea36262fbe
+  ref: 3235fe43770ee93df1ff8d7f39d075da91dc76cf
+  variegata: e51a6a0125424d5153063802505d6aaae85651d0
 
 extension_star_count: 17
 extension_star_count_pretty: 17
-extension_download_count: 859
-extension_download_count_pretty: 859
+extension_download_count: 25677
+extension_download_count_pretty: 25.7k
 image: '/images/community_extensions/social_preview/preview_community_extension_marisa.png'
 layout: community_extension_doc
 ---
+### Compatibility Matrix
+
+This table covers all DuckDB releases that have not reached [end-of-life](https://duckdb.org/release_calendar), including LTS releases, and shows the 2 most recent patch releases of each. Older patch releases are not listed, but the extension may be available for them as well.
+
+<div class="extension_compatibility_table"></div>
+
+| Platform | 1.4.4 | 1.4.5 | 1.5.5 | 1.5.6 | 2.0.0 |
+| :--- | :---: | :---: | :---: | :---: | :---: |
+| Linux AMD64 | ✅ | ✅ | ✅ | ✅ | ✅ |
+| Linux ARM64 | ✅ | ✅ | ✅ | ✅ | ✅ |
+| macOS AMD64 | ✅ | ✅ | ✅ | ✅ | ✅ |
+| macOS ARM64 | ✅ | ✅ | ✅ | ✅ | ✅ |
+| Windows AMD64 | ✅ | ✅ | ✅ | ✅ | ✅ |
+| Windows ARM64 | ❌ | ❌ | ❌ | ❌ | ❌ |
+| WebAssembly | ✅ | ✅ | ✅ | ✅ | ✅ |
 
 ### Installing and Loading
 ```sql
@@ -48,17 +64,11 @@ LOAD {{ page.extension.name }};
 ### About {{ page.extension.name }}
 {{ page.docs.extended_description }}
 {% endif %}
-
 ### Added Functions
 
 <div class="extension_functions_table"></div>
 
-|    function_name     | function_type |                    description                     | comment |                examples                 |
-|----------------------|---------------|----------------------------------------------------|---------|-----------------------------------------|
-| marisa_common_prefix | scalar        | NULL                                               | NULL    |                                         |
-| marisa_lookup        | scalar        | NULL                                               | NULL    |                                         |
-| marisa_predictive    | scalar        | NULL                                               | NULL    |                                         |
-| marisa_trie          | aggregate     | Creates a new Marisa Trie from the value supplied. | NULL    | [SELECT marisa_trie(column) FROM table] |
+This extension does not add any functions.
 
 ### Overloaded Functions
 

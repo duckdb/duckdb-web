@@ -21,15 +21,31 @@ extension:
 repo:
   andium: 4fef6d3d58068ce8ef6ed002441e0eca002cf372
   github: query-farm/shellfs
-  ref: fd80ab07ff1f2f2793218abb96f876d0875fb2c6
+  ref: aa33b9b8db9f838e535df467228593a2a95418da
+  variegata: d762423eea333f7ea044e4dbf4e86b8289d7e296
 
-extension_star_count: 97
-extension_star_count_pretty: 97
-extension_download_count: 3610
-extension_download_count_pretty: 3.6k
+extension_star_count: 96
+extension_star_count_pretty: 96
+extension_download_count: 17860
+extension_download_count_pretty: 17.9k
 image: '/images/community_extensions/social_preview/preview_community_extension_shellfs.png'
 layout: community_extension_doc
 ---
+### Compatibility Matrix
+
+This table covers all DuckDB releases that have not reached [end-of-life](https://duckdb.org/release_calendar), including LTS releases, and shows the 2 most recent patch releases of each. Older patch releases are not listed, but the extension may be available for them as well.
+
+<div class="extension_compatibility_table"></div>
+
+| Platform | 1.4.4 | 1.4.5 | 1.5.5 | 1.5.6 | 2.0.0 |
+| :--- | :---: | :---: | :---: | :---: | :---: |
+| Linux AMD64 | ✅ | ❌ | ✅ | ✅ | ✅ |
+| Linux ARM64 | ✅ | ❌ | ✅ | ✅ | ✅ |
+| macOS AMD64 | ✅ | ❌ | ✅ | ✅ | ✅ |
+| macOS ARM64 | ✅ | ❌ | ✅ | ✅ | ✅ |
+| Windows AMD64 | ✅ | ❌ | ✅ | ✅ | ✅ |
+| Windows ARM64 | ❌ | ❌ | ❌ | ❌ | ❌ |
+| WebAssembly | ❌ | ❌ | ❌ | ❌ | ❌ |
 
 ### Installing and Loading
 ```sql
@@ -47,7 +63,6 @@ LOAD {{ page.extension.name }};
 ### About {{ page.extension.name }}
 {{ page.docs.extended_description }}
 {% endif %}
-
 ### Added Functions
 
 <div class="extension_functions_table"></div>
@@ -70,8 +85,6 @@ This extension does not add any types.
 
 <div class="extension_settings_table"></div>
 
-|      name      |  description   | input_type | scope  | aliases |
-|----------------|----------------|------------|--------|---------|
-| ignore_sigpipe | Ignore SIGPIPE | BOOLEAN    | GLOBAL | []      |
+This extension does not add any settings.
 
 

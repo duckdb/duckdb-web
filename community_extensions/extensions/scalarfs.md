@@ -8,7 +8,7 @@ excerpt: |
 extension:
   name: scalarfs
   description: A collection of virtual filesystems for working with scalars
-  version: 1.6.2
+  version: 1.7.0
   language: C++
   build: cmake
   license: MIT
@@ -17,14 +17,26 @@ extension:
 repo:
   github: teaguesterling/duckdb_scalarfs
   andium: 68faa6c72054123a6c6521dd41c12f929431da50
-  ref: 6fc4d68397c521e1fda56bd164ce4f2f3aabda5c
-  # ref_next omitted (skips the v2.0-cyanoptera prerelease leg). scalarfs is clean
-  # of family C (0 named_parameters) and builds against duckdb main, but v2.0-
-  # cyanoptera removed QueryResult::GetValue, which pathmacro_filesystem.cpp uses
-  # (cyanoptera build error at pathmacro_filesystem.cpp:147). That is a separate
-  # v2.0 fix, out of scope for the v1.5.6 restoration; the prerelease leg is
-  # deploy:false and never publishes. Restore ref_next once the v2.0 GetValue
-  # change is handled (after v2.0.0 tags).
+  # ref, variegata and ref_next are the SAME commit: the v1.7.0 tag (16a2637).
+  # One source tree builds both DuckDB lines.
+  #
+  # variegata pins the v1.5.6 track. scripts/build.py sends a v1.5.6 build here when
+  # present and to `ref` otherwise, and unlike ref_next it has no skip branch. Advance
+  # it only to a commit that v1.5.6 can still build. This commit can (counts below).
+  #
+  # Evidence at this commit, with tests EXECUTED, not only compiled:
+  #   local, linux_amd64, DuckDB v2.0.0 (d54cbbe3) and v1.5.6:
+  #     All tests passed (1091 assertions in 29 test cases), on each line
+  #   upstream main run 40254809357, full matrix:
+  #     v1.5.6: All tests passed (1091 assertions in 29 test cases)
+  #     v2.0:   ran tests: 29 passed, 0 skipped
+  #   each on linux_amd64, osx_arm64, windows_amd64 and windows_amd64_mingw.
+  #
+  # A STALE ref_next is worse than an absent one: it validates the PREVIOUS release
+  # while reporting green, so it must never lag ref.
+  ref: 16a2637eaab656d3b94e7a25f612573f8e056769
+  variegata: 16a2637eaab656d3b94e7a25f612573f8e056769
+  ref_next: 16a2637eaab656d3b94e7a25f612573f8e056769
 docs:
   hello_world: |
     LOAD scalarfs;
@@ -93,11 +105,26 @@ docs:
 
 extension_star_count: 10
 extension_star_count_pretty: 10
-extension_download_count: 1042
-extension_download_count_pretty: 1.0k
+extension_download_count: 19518
+extension_download_count_pretty: 19.5k
 image: '/images/community_extensions/social_preview/preview_community_extension_scalarfs.png'
 layout: community_extension_doc
 ---
+### Compatibility Matrix
+
+This table covers all DuckDB releases that have not reached [end-of-life](https://duckdb.org/release_calendar), including LTS releases, and shows the 2 most recent patch releases of each. Older patch releases are not listed, but the extension may be available for them as well.
+
+<div class="extension_compatibility_table"></div>
+
+| Platform | 1.4.4 | 1.4.5 | 1.5.5 | 1.5.6 | 2.0.0 |
+| :--- | :---: | :---: | :---: | :---: | :---: |
+| Linux AMD64 | ✅ | ❌ | ✅ | ✅ | ✅ |
+| Linux ARM64 | ✅ | ❌ | ✅ | ✅ | ✅ |
+| macOS AMD64 | ✅ | ❌ | ✅ | ✅ | ✅ |
+| macOS ARM64 | ✅ | ❌ | ✅ | ✅ | ✅ |
+| Windows AMD64 | ✅ | ❌ | ✅ | ✅ | ✅ |
+| Windows ARM64 | ❌ | ❌ | ❌ | ❌ | ❌ |
+| WebAssembly | ✅ | ❌ | ✅ | ✅ | ✅ |
 
 ### Installing and Loading
 ```sql
@@ -115,24 +142,27 @@ LOAD {{ page.extension.name }};
 ### About {{ page.extension.name }}
 {{ page.docs.extended_description }}
 {% endif %}
-
 ### Added Functions
 
 <div class="extension_functions_table"></div>
 
-|   function_name    | function_type |                                  description                                   | comment |                      examples                      |
-|--------------------|---------------|--------------------------------------------------------------------------------|---------|----------------------------------------------------|
-| from_blob_uri      | scalar        | Decode a blob: URI to its string payload.                                      | NULL    | [from_blob_uri('blob:68656c6c6f')]                 |
-| from_data_uri      | scalar        | Decode an RFC 2397 data: URI to its payload string.                            | NULL    | [from_data_uri('data:text/plain;base64,aGVsbG8=')] |
-| from_pathmacro_url | scalar        | Parse a pathmacro: URL into a struct containing macro name and parameters map. | NULL    | [from_pathmacro_url('pathmacro:my_macro?key=val')] |
-| from_scalarfs_uri  | scalar        | Decode any scalarfs-compatible URI to its string payload.                      | NULL    | [from_scalarfs_uri('varchar:hello%20world')]       |
-| from_varchar_uri   | scalar        | Decode a varchar: URI to its string payload.                                   | NULL    | [from_varchar_uri('varchar:hello%20world')]        |
-| to_blob_uri        | scalar        | Encode a string as a hex-encoded blob: URI.                                    | NULL    | [to_blob_uri('hello world')]                       |
-| to_data_uri        | scalar        | Encode a string into an RFC 2397 data: URI.                                    | NULL    | [to_data_uri('hello world')]                       |
-| to_pathmacro_url   | scalar        | Construct a pathmacro: URL from a macro name and parameters struct/map.        | NULL    | [to_pathmacro_url('my_macro', {'key': 'val'})]     |
-| to_pathmacro_url   | scalar        | Construct a pathmacro: URL from a macro name.                                  | NULL    | [to_pathmacro_url('my_macro')]                     |
-| to_scalarfs_uri    | scalar        | NULL                                                                           | NULL    |                                                    |
-| to_varchar_uri     | scalar        | Encode a string as a percent-encoded varchar: URI.                             | NULL    | [to_varchar_uri('hello world')]                    |
+|       function_name        | function_type |                                                                                                  description                                                                                                   | comment |                      examples                      |
+|----------------------------|---------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|---------|----------------------------------------------------|
+| from_blob_uri              | scalar        | Decode a blob: URI to its string payload.                                                                                                                                                                      | NULL    | [from_blob_uri('blob:68656c6c6f')]                 |
+| from_data_uri              | scalar        | Decode an RFC 2397 data: URI to its payload string.                                                                                                                                                            | NULL    | [from_data_uri('data:text/plain;base64,aGVsbG8=')] |
+| from_pathmacro_url         | scalar        | Parse a pathmacro: URL into a struct containing macro name and parameters map.                                                                                                                                 | NULL    | [from_pathmacro_url('pathmacro:my_macro?key=val')] |
+| from_scalarfs_uri          | scalar        | Decode any scalarfs-compatible URI to its string payload.                                                                                                                                                      | NULL    | [from_scalarfs_uri('varchar:hello%20world')]       |
+| from_varchar_uri           | scalar        | Decode a varchar: URI to its string payload.                                                                                                                                                                   | NULL    | [from_varchar_uri('varchar:hello%20world')]        |
+| is_data_uri                | scalar        | True if the path carries its content inline: data:, data+varchar: or data+blob:.                                                                                                                               | NULL    | [is_data_uri('data+varchar:hello')]                |
+| is_scalarfs_uri            | scalar        | True if scalarfs opens the path: data:, data+varchar:, data+blob:, variable:, pathvariable:, pathmacro:, decompress+gz:, decompress+zstd: (and their tmp_ forms).                                              | NULL    | [is_scalarfs_uri('variable:my_var')]               |
+| scalarfs_canonicalize_path | scalar        | Canonicalize a path through the session filesystem. pathvariable: and pathmacro: paths that name exactly one file resolve to that file's path; any other path is canonicalized by the filesystem that owns it. | NULL    | [scalarfs_canonicalize_path('pathvariable:doc')]   |
+| scalarfs_protocol          | scalar        | The scalarfs protocol of a path, without the colon (e.g. 'data+varchar', 'tmp_variable'), or NULL if scalarfs does not open the path.                                                                          | NULL    | [scalarfs_protocol('data+varchar:hello')]          |
+| to_blob_uri                | scalar        | Encode a string as a hex-encoded blob: URI.                                                                                                                                                                    | NULL    | [to_blob_uri('hello world')]                       |
+| to_data_uri                | scalar        | Encode a string into an RFC 2397 data: URI.                                                                                                                                                                    | NULL    | [to_data_uri('hello world')]                       |
+| to_pathmacro_url           | scalar        | Construct a pathmacro: URL from a macro name and parameters struct/map.                                                                                                                                        | NULL    | [to_pathmacro_url('my_macro', {'key': 'val'})]     |
+| to_pathmacro_url           | scalar        | Construct a pathmacro: URL from a macro name.                                                                                                                                                                  | NULL    | [to_pathmacro_url('my_macro')]                     |
+| to_scalarfs_uri            | scalar        | NULL                                                                                                                                                                                                           | NULL    |                                                    |
+| to_varchar_uri             | scalar        | Encode a string as a percent-encoded varchar: URI.                                                                                                                                                             | NULL    | [to_varchar_uri('hello world')]                    |
 
 ### Overloaded Functions
 
@@ -150,9 +180,10 @@ This extension does not add any types.
 
 <div class="extension_settings_table"></div>
 
-|              name               |                                                    description                                                     | input_type | scope  | aliases |
-|---------------------------------|--------------------------------------------------------------------------------------------------------------------|------------|--------|---------|
-| allowed_pathmacros              | Comma-separated list of scalar macros invokable via the pathmacro: filesystem                                      | VARCHAR    | GLOBAL | []      |
-| scalarfs_max_decompressed_bytes | Maximum number of bytes a scalarfs decompress+ read may materialize (decompression-bomb guard; 0 disables the cap) | UBIGINT    | GLOBAL | []      |
+|              name               |                                                    description                                                     | input_type | scope  | aliases | typed_value |
+|---------------------------------|--------------------------------------------------------------------------------------------------------------------|------------|--------|---------|-------------|
+| allowed_pathmacros              | Comma-separated list of scalar macros invokable via the pathmacro: filesystem                                      | VARCHAR    | GLOBAL | []      |             |
+| scalarfs_max_decompressed_bytes | Maximum number of bytes a scalarfs decompress+ read may materialize (decompression-bomb guard; 0 disables the cap) | UBIGINT    | GLOBAL | []      | 268435456   |
+| temp_directory                  | Set the directory to which temporary files are written.                                                            | VARCHAR    | GLOBAL | []      | post.db.tmp |
 
 

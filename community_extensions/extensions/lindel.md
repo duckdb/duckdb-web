@@ -20,15 +20,31 @@ extension:
 repo:
   andium: 3fb0a957c3e497fb3513dcf4c0f70ec599bbc0d3
   github: query-farm/lindel
-  ref: 6f8501a9213852286053946981f23b467a45bcd6
+  ref: 6ad9ea3efcbec63ed313ab0f0d6273975b34fe68
+  variegata: 4982971cea696b5b53dd92df355513f352b64793
 
-extension_star_count: 68
-extension_star_count_pretty: 68
-extension_download_count: 3410
-extension_download_count_pretty: 3.4k
+extension_star_count: 67
+extension_star_count_pretty: 67
+extension_download_count: 26969
+extension_download_count_pretty: 27.0k
 image: '/images/community_extensions/social_preview/preview_community_extension_lindel.png'
 layout: community_extension_doc
 ---
+### Compatibility Matrix
+
+This table covers all DuckDB releases that have not reached [end-of-life](https://duckdb.org/release_calendar), including LTS releases, and shows the 2 most recent patch releases of each. Older patch releases are not listed, but the extension may be available for them as well.
+
+<div class="extension_compatibility_table"></div>
+
+| Platform | 1.4.4 | 1.4.5 | 1.5.5 | 1.5.6 | 2.0.0 |
+| :--- | :---: | :---: | :---: | :---: | :---: |
+| Linux AMD64 | ✅ | ✅ | ✅ | ✅ | ✅ |
+| Linux ARM64 | ✅ | ✅ | ✅ | ✅ | ✅ |
+| macOS AMD64 | ✅ | ✅ | ✅ | ✅ | ✅ |
+| macOS ARM64 | ✅ | ✅ | ✅ | ✅ | ✅ |
+| Windows AMD64 | ✅ | ✅ | ✅ | ✅ | ✅ |
+| Windows ARM64 | ❌ | ❌ | ❌ | ❌ | ❌ |
+| WebAssembly | ✅ | ✅ | ✅ | ✅ | ✅ |
 
 ### Installing and Loading
 ```sql
@@ -46,17 +62,11 @@ LOAD {{ page.extension.name }};
 ### About {{ page.extension.name }}
 {{ page.docs.extended_description }}
 {% endif %}
-
 ### Added Functions
 
 <div class="extension_functions_table"></div>
 
-| function_name  | function_type |                                                                                                                           description                                                                                                                           | comment |                                                     examples                                                      |
-|----------------|---------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|---------|-------------------------------------------------------------------------------------------------------------------|
-| hilbert_decode | scalar        | Decodes a Hilbert-encoded unsigned integer back into an array of values. The number of output elements and their type are determined by the parameters. Keep the encoded key unsigned; return_unsigned selects signed or unsigned integer coordinates.          | NULL    | [hilbert_decode(123::UBIGINT, 2, false, true), hilbert_decode(hilbert_encode([-1]::INTEGER[1]), 1, false, false)] |
-| hilbert_encode | scalar        | Encodes an array of integers or floats into a single unsigned integer using Hilbert curve mapping. Hilbert curves preserve locality better than Morton encoding, making them ideal for spatial indexing.                                                        | NULL    | [hilbert_encode([1, 2, 3]::INTEGER[3])]                                                                           |
-| morton_decode  | scalar        | Decodes a Morton (Z-order) encoded unsigned integer back into an array of values. The number of output elements and their type are determined by the parameters. Keep the encoded key unsigned; return_unsigned selects signed or unsigned integer coordinates. | NULL    | [morton_decode(123::UBIGINT, 2, false, true), morton_decode(morton_encode([-1]::INTEGER[1]), 1, false, false)]    |
-| morton_encode  | scalar        | Encodes an array of integers or floats into a single unsigned integer using Morton (Z-order) curve mapping. Morton encoding interleaves bits and is computationally simpler than Hilbert encoding.                                                              | NULL    | [morton_encode([1, 2, 3]::INTEGER[3])]                                                                            |
+This extension does not add any functions.
 
 ### Overloaded Functions
 

@@ -23,4 +23,4 @@ Despite their central role in processing queries, parsers have not received any 
 ## Implementation
 
 DuckDB's autocomplete is implemented using a PEG-based parser.
-DuckDB v1.5 [shipped an experimental parser]({% link docs/current/sql/peg_parser.md %}).
+DuckDB v1.5 [shipped an experimental parser]({% link docs/2.0/sql/peg_parser.md %}).

@@ -8,7 +8,7 @@ excerpt: |
 extension:
   name: fire_duck_ext
   description: Query Google Cloud Firestore directly from DuckDB using SQL
-  version: 0.3.2
+  version: 0.4.0
   language: C++
   build: cmake
   license: MIT
@@ -18,7 +18,7 @@ extension:
 
 repo:
   github: BorisBesky/fire_duck_ext
-  ref: 133172d96db2292e36297492e21fc69b9cd25358
+  ref: 89f1537c55ec894c7f2c79ca726d2f028f68fdca
 
 docs:
   hello_world: |
@@ -85,16 +85,33 @@ docs:
     The extension also builds and runs under DuckDB-WASM using API-key or
     Firebase-user auth (service-account auth needs OpenSSL and is native-only).
 
+    Builds for DuckDB 2.0 and DuckDB 1.5.
+
     See the project README for the parameter and settings reference, type
     mapping, pushdown semantics, and platform notes.
 
 extension_star_count: 4
 extension_star_count_pretty: 4
-extension_download_count: 732
-extension_download_count_pretty: 732
+extension_download_count: 19224
+extension_download_count_pretty: 19.2k
 image: '/images/community_extensions/social_preview/preview_community_extension_fire_duck_ext.png'
 layout: community_extension_doc
 ---
+### Compatibility Matrix
+
+This table covers all DuckDB releases that have not reached [end-of-life](https://duckdb.org/release_calendar), including LTS releases, and shows the 2 most recent patch releases of each. Older patch releases are not listed, but the extension may be available for them as well.
+
+<div class="extension_compatibility_table"></div>
+
+| Platform | 1.4.4 | 1.4.5 | 1.5.5 | 1.5.6 | 2.0.0 |
+| :--- | :---: | :---: | :---: | :---: | :---: |
+| Linux AMD64 | ✅ | ❌ | ✅ | ✅ | ✅ |
+| Linux ARM64 | ✅ | ❌ | ✅ | ✅ | ✅ |
+| macOS AMD64 | ✅ | ❌ | ✅ | ✅ | ✅ |
+| macOS ARM64 | ✅ | ❌ | ✅ | ✅ | ✅ |
+| Windows AMD64 | ✅ | ❌ | ✅ | ✅ | ✅ |
+| Windows ARM64 | ❌ | ❌ | ❌ | ❌ | ❌ |
+| WebAssembly | ✅ | ❌ | ✅ | ✅ | ✅ |
 
 ### Installing and Loading
 ```sql
@@ -112,7 +129,6 @@ LOAD {{ page.extension.name }};
 ### About {{ page.extension.name }}
 {{ page.docs.extended_description }}
 {% endif %}
-
 ### Added Functions
 
 <div class="extension_functions_table"></div>
@@ -149,13 +165,14 @@ This extension does not add any types.
 
 <div class="extension_settings_table"></div>
 
-|             name             |                                                                                                                                                                                      description                                                                                                                                                                                       | input_type | scope  | aliases |
-|------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|------------|--------|---------|
-| firestore_max_threads        | Maximum threads one scan may split across, reading separate document-key ranges. 1 (the default) disables parallel scanning; raise it for collections whose document ids spread over the key space, such as Firestore auto-ids                                                                                                                                                         | BIGINT     | GLOBAL | []      |
-| firestore_orderby_pushdown   | Whether a SQL ORDER BY ... LIMIT may be sent to Firestore. Each ordering field is first checked against the sampled documents, because Firestore omits documents that lack the ordering field, sorts nulls first, and orders across types by its own precedence; a field that would change which rows a query returns keeps its sort in DuckDB. The order_by:= parameter is unaffected | BOOLEAN    | GLOBAL | []      |
-| firestore_page_byte_budget   | Uncompressed bytes one page may weigh before the scan requests fewer documents per round trip (0 disables the guard)                                                                                                                                                                                                                                                                   | BIGINT     | GLOBAL | []      |
-| firestore_page_size          | Documents requested per Firestore round trip (1-1000; lower it for collections of large documents)                                                                                                                                                                                                                                                                                     | BIGINT     | GLOBAL | []      |
-| firestore_schema_cache_ttl   | Schema cache TTL in seconds (0 to disable caching)                                                                                                                                                                                                                                                                                                                                     | BIGINT     | GLOBAL | []      |
-| firestore_schema_sample_size | Documents sampled to infer a collection's schema (-1 samples every document)                                                                                                                                                                                                                                                                                                           | BIGINT     | GLOBAL | []      |
+|             name             |                                                                                                                                                                                      description                                                                                                                                                                                       | input_type | scope  | aliases | typed_value |
+|------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|------------|--------|---------|-------------|
+| firestore_max_threads        | Maximum threads one scan may split across, reading separate document-key ranges. 1 (the default) disables parallel scanning; raise it for collections whose document ids spread over the key space, such as Firestore auto-ids                                                                                                                                                         | BIGINT     | GLOBAL | []      | 1           |
+| firestore_orderby_pushdown   | Whether a SQL ORDER BY ... LIMIT may be sent to Firestore. Each ordering field is first checked against the sampled documents, because Firestore omits documents that lack the ordering field, sorts nulls first, and orders across types by its own precedence; a field that would change which rows a query returns keeps its sort in DuckDB. The order_by:= parameter is unaffected | BOOLEAN    | GLOBAL | []      | true        |
+| firestore_page_byte_budget   | Uncompressed bytes one page may weigh before the scan requests fewer documents per round trip (0 disables the guard)                                                                                                                                                                                                                                                                   | BIGINT     | GLOBAL | []      | 67108864    |
+| firestore_page_size          | Documents requested per Firestore round trip (1-1000; lower it for collections of large documents)                                                                                                                                                                                                                                                                                     | BIGINT     | GLOBAL | []      | 1000        |
+| firestore_schema_cache_ttl   | Schema cache TTL in seconds (0 to disable caching)                                                                                                                                                                                                                                                                                                                                     | BIGINT     | GLOBAL | []      | 3600        |
+| firestore_schema_sample_size | Documents sampled to infer a collection's schema (-1 samples every document)                                                                                                                                                                                                                                                                                                           | BIGINT     | GLOBAL | []      | 1000        |
+| temp_directory               | Set the directory to which temporary files are written.                                                                                                                                                                                                                                                                                                                                | VARCHAR    | GLOBAL | []      | post.db.tmp |
 
 

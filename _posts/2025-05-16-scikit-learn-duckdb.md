@@ -17,7 +17,7 @@ Machine learning prototyping often involves juggling datasets, preprocessing ste
 
 ## Data Preparation
 
-We start by loading the [Palmer Penguins dataset](https://github.com/allisonhorst/palmerpenguins/) and use DuckDB's [`COLUMNS(*)` expression]({% link docs/current/sql/expressions/star.md %}#columns) to filter out any record which contains `NA` or `NULL`:
+We start by loading the [Palmer Penguins dataset](https://github.com/allisonhorst/palmerpenguins/) and use DuckDB's [`COLUMNS(*)` expression]({% link docs/2.0/sql/expressions/star.md %}#columns) to filter out any record which contains `NA` or `NULL`:
 
 ```python
 duckdb_conn.read_csv(
@@ -33,7 +33,7 @@ duckdb_conn.read_csv(
 )
 ```
 
-Even if the `NA` values are removed from the dataset, DuckDB has inferred the column type as `VARCHAR` at the moment of `read_csv`. Therefore, we modify the column type to a numeric type, `DECIMAL(5, 2)`, using the [`ALTER TABLE`]({% link docs/current/sql/statements/alter_table.md %}#set-data-type) statement:
+Even if the `NA` values are removed from the dataset, DuckDB has inferred the column type as `VARCHAR` at the moment of `read_csv`. Therefore, we modify the column type to a numeric type, `DECIMAL(5, 2)`, using the [`ALTER TABLE`]({% link docs/2.0/sql/statements/alter_table.md %}#set-data-type) statement:
 
 ```python
 duckdb_conn.sql(
@@ -41,7 +41,7 @@ duckdb_conn.sql(
 )
 ```
 
-> Tip One can also [define the schema]({% link docs/current/data/csv/tips.md %}#override-the-types-of-specific-columns) at import time.
+> Tip One can also [define the schema]({% link docs/2.0/data/csv/tips.md %}#override-the-types-of-specific-columns) at import time.
 
 We can now plot the data and check for species specific clusters. For example, using a [scatter plot](https://plotly.com/python/line-and-scatter/) we identify clusters at the combination between bill depth and bill length:
 
@@ -55,7 +55,7 @@ We can now plot the data and check for species specific clusters. For example, u
     </a>
 </div>
 
-We also observe that there are a few descriptive columns in the dataset, such as `species` and `island`. In a machine learning workflow, one common preprocessing step is to transform such values into numerical values, assigning them a unique identifier; a process called _label encoding_. While scikit-learn offers a [LabelEncoder](https://scikit-learn.org/stable/modules/generated/sklearn.preprocessing.LabelEncoder.html) utility, this process is very similar to how we work with [reference tables](https://roelantvos.com/blog/designing-reference-tables-for-the-data-warehouse/) in a data warehouse. Therefore, we define a function which will create, for each column (feature), a reference table, leveraging the DuckDB Python [relational API]({% link docs/current/clients/python/relational_api.md %}):
+We also observe that there are a few descriptive columns in the dataset, such as `species` and `island`. In a machine learning workflow, one common preprocessing step is to transform such values into numerical values, assigning them a unique identifier; a process called _label encoding_. While scikit-learn offers a [LabelEncoder](https://scikit-learn.org/stable/modules/generated/sklearn.preprocessing.LabelEncoder.html) utility, this process is very similar to how we work with [reference tables](https://roelantvos.com/blog/designing-reference-tables-for-the-data-warehouse/) in a data warehouse. Therefore, we define a function which will create, for each column (feature), a reference table, leveraging the DuckDB Python [relational API]({% link docs/2.0/clients/python/relational_api.md %}):
 
 ```python
 def process_reference_data(duckdb_conn):
@@ -128,7 +128,7 @@ def train_split_data(selection_query):
         species_id
     """).order("observation_id").df()
     y_df = [
-        x[0] 
+        x[0]
         for x in selection_query.order("observation_id").select("species_id").fetchall()
     ]
 
@@ -200,7 +200,7 @@ predicted_df["predicted_species_id"] = model.predict(
 )
 ```
 
-With DuckDB, the dataframe can be [queried with SQL]({% link docs/current/guides/python/import_pandas.md %}):
+With DuckDB, the dataframe can be [queried with SQL]({% link docs/2.0/guides/python/import_pandas.md %}):
 
 ```python
 (
@@ -242,7 +242,7 @@ resulting in:
 
 ### DuckDB Python UDF, Row by Row
 
-DuckDB offers the possibility to register [User Defined Functions (UDFs)]({% link docs/current/clients/python/function.md %}) from Python functions. Because the UDF is executed row by row, our prediction function will return the predicted species id for each row:
+DuckDB offers the possibility to register [User Defined Functions (UDFs)]({% link docs/2.0/clients/python/function.md %}) from Python functions. Because the UDF is executed row by row, our prediction function will return the predicted species id for each row:
 ```python
 def get_prediction_per_row(
     bill_length_mm: Decimal,
@@ -282,10 +282,10 @@ selection_query.select("""
     observation_id,
     species_id,
     predict_species_per_row(
-        bill_length_mm, 
-        bill_depth_mm, 
-        flipper_length_mm, 
-        body_mass_g, 
+        bill_length_mm,
+        bill_depth_mm,
+        flipper_length_mm,
+        body_mass_g,
         island_id
     ) as predicted_species_id
 """).filter("species_id != predicted_species_id")
@@ -341,7 +341,7 @@ json_object(
 ) as input_data,
 ```
 
-We then pack in a [`STRUCT`]({% link docs/current/sql/data_types/struct.md %}), the predictions together with other columns we are interested in:
+We then pack in a [`STRUCT`]({% link docs/2.0/sql/data_types/struct.md %}), the predictions together with other columns we are interested in:
 
 ```python
 struct_pack(
@@ -351,7 +351,7 @@ struct_pack(
 ) as output_data
 ```
 
-Last, we [`unnest`]({% link docs/current/sql/query_syntax/unnest.md %}) the results, in order to flatten the lists into tables:
+Last, we [`unnest`]({% link docs/2.0/sql/query_syntax/unnest.md %}) the results, in order to flatten the lists into tables:
 
 ```python
 .select("""
@@ -367,7 +367,7 @@ The above query is wrapped into a Python function, named `get_selection_query_fo
 get_selection_query_for_batch(selection_query).filter("species_id != predicted_species_id")
 ```
 
-A batch approach can be implemented by using [`LIMIT` and `OFFSET`]({% link docs/current/sql/query_syntax/limit.md %}) to loop through the data:
+A batch approach can be implemented by using [`LIMIT` and `OFFSET`]({% link docs/2.0/sql/query_syntax/limit.md %}) to loop through the data:
 
 ```python
 for i in range(4):
@@ -387,7 +387,7 @@ for i in range(4):
 
 ### Performance Considerations
 
-To obtain performance data on a larger scale dataset, we have generated a dummy dataset with approximately 59 million records. On a [sample]({% link docs/current/sql/samples.md %}) of 10%, on a 16 GB MacBook Pro, the batch processing ranges between 3 and 4 seconds, while the Pandas implementation is executed under 1 second. This is because the Python UDF includes multiple conversion steps which affect performance:
+To obtain performance data on a larger scale dataset, we have generated a dummy dataset with approximately 59 million records. On a [sample]({% link docs/2.0/sql/query_syntax/samples.md %}) of 10%, on a 16 GB MacBook Pro, the batch processing ranges between 3 and 4 seconds, while the Pandas implementation is executed under 1 second. This is because the Python UDF includes multiple conversion steps which affect performance:
 
 - parsing the input data as JSON;
 - converting the JSON to numpy array;

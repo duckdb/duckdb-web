@@ -20,15 +20,31 @@ extension:
 repo:
   andium: eb2fe18d3f60205722521ff2ddd8eb3c932c7888
   github: query-farm/rapidfuzz
-  ref: 8dca273affb2c907b3830a2d30e65266f9f692ea
+  ref: f26a9693db5037ef1b012f901eeeb771551df664
+  variegata: 9331bf3003cd3c2bc7ad7659cb747705ccce1e3b
 
 extension_star_count: 19
 extension_star_count_pretty: 19
-extension_download_count: 13398
-extension_download_count_pretty: 13.4k
+extension_download_count: 35217
+extension_download_count_pretty: 35.2k
 image: '/images/community_extensions/social_preview/preview_community_extension_rapidfuzz.png'
 layout: community_extension_doc
 ---
+### Compatibility Matrix
+
+This table covers all DuckDB releases that have not reached [end-of-life](https://duckdb.org/release_calendar), including LTS releases, and shows the 2 most recent patch releases of each. Older patch releases are not listed, but the extension may be available for them as well.
+
+<div class="extension_compatibility_table"></div>
+
+| Platform | 1.4.4 | 1.4.5 | 1.5.5 | 1.5.6 | 2.0.0 |
+| :--- | :---: | :---: | :---: | :---: | :---: |
+| Linux AMD64 | ✅ | ✅ | ✅ | ✅ | ✅ |
+| Linux ARM64 | ✅ | ✅ | ✅ | ✅ | ✅ |
+| macOS AMD64 | ✅ | ✅ | ✅ | ✅ | ✅ |
+| macOS ARM64 | ✅ | ✅ | ✅ | ✅ | ✅ |
+| Windows AMD64 | ✅ | ✅ | ✅ | ✅ | ✅ |
+| Windows ARM64 | ❌ | ❌ | ❌ | ❌ | ❌ |
+| WebAssembly | ✅ | ✅ | ✅ | ✅ | ✅ |
 
 ### Installing and Loading
 ```sql
@@ -46,50 +62,11 @@ LOAD {{ page.extension.name }};
 ### About {{ page.extension.name }}
 {{ page.docs.extended_description }}
 {% endif %}
-
 ### Added Functions
 
 <div class="extension_functions_table"></div>
 
-|                function_name                 | function_type | description | comment | examples |
-|----------------------------------------------|---------------|-------------|---------|----------|
-| rapidfuzz_hamming_distance                   | scalar        | NULL        | NULL    |          |
-| rapidfuzz_hamming_normalized_distance        | scalar        | NULL        | NULL    |          |
-| rapidfuzz_hamming_normalized_similarity      | scalar        | NULL        | NULL    |          |
-| rapidfuzz_hamming_similarity                 | scalar        | NULL        | NULL    |          |
-| rapidfuzz_indel_distance                     | scalar        | NULL        | NULL    |          |
-| rapidfuzz_indel_normalized_distance          | scalar        | NULL        | NULL    |          |
-| rapidfuzz_indel_normalized_similarity        | scalar        | NULL        | NULL    |          |
-| rapidfuzz_indel_similarity                   | scalar        | NULL        | NULL    |          |
-| rapidfuzz_jaro_distance                      | scalar        | NULL        | NULL    |          |
-| rapidfuzz_jaro_normalized_distance           | scalar        | NULL        | NULL    |          |
-| rapidfuzz_jaro_normalized_similarity         | scalar        | NULL        | NULL    |          |
-| rapidfuzz_jaro_similarity                    | scalar        | NULL        | NULL    |          |
-| rapidfuzz_jaro_winkler_distance              | scalar        | NULL        | NULL    |          |
-| rapidfuzz_jaro_winkler_normalized_distance   | scalar        | NULL        | NULL    |          |
-| rapidfuzz_jaro_winkler_normalized_similarity | scalar        | NULL        | NULL    |          |
-| rapidfuzz_jaro_winkler_similarity            | scalar        | NULL        | NULL    |          |
-| rapidfuzz_lcs_seq_distance                   | scalar        | NULL        | NULL    |          |
-| rapidfuzz_lcs_seq_normalized_distance        | scalar        | NULL        | NULL    |          |
-| rapidfuzz_lcs_seq_normalized_similarity      | scalar        | NULL        | NULL    |          |
-| rapidfuzz_lcs_seq_similarity                 | scalar        | NULL        | NULL    |          |
-| rapidfuzz_osa_distance                       | scalar        | NULL        | NULL    |          |
-| rapidfuzz_osa_normalized_distance            | scalar        | NULL        | NULL    |          |
-| rapidfuzz_osa_normalized_similarity          | scalar        | NULL        | NULL    |          |
-| rapidfuzz_osa_similarity                     | scalar        | NULL        | NULL    |          |
-| rapidfuzz_partial_ratio                      | scalar        | NULL        | NULL    |          |
-| rapidfuzz_partial_token_set_ratio            | scalar        | NULL        | NULL    |          |
-| rapidfuzz_postfix_distance                   | scalar        | NULL        | NULL    |          |
-| rapidfuzz_postfix_normalized_distance        | scalar        | NULL        | NULL    |          |
-| rapidfuzz_postfix_normalized_similarity      | scalar        | NULL        | NULL    |          |
-| rapidfuzz_postfix_similarity                 | scalar        | NULL        | NULL    |          |
-| rapidfuzz_prefix_distance                    | scalar        | NULL        | NULL    |          |
-| rapidfuzz_prefix_normalized_distance         | scalar        | NULL        | NULL    |          |
-| rapidfuzz_prefix_normalized_similarity       | scalar        | NULL        | NULL    |          |
-| rapidfuzz_prefix_similarity                  | scalar        | NULL        | NULL    |          |
-| rapidfuzz_ratio                              | scalar        | NULL        | NULL    |          |
-| rapidfuzz_token_set_ratio                    | scalar        | NULL        | NULL    |          |
-| rapidfuzz_token_sort_ratio                   | scalar        | NULL        | NULL    |          |
+This extension does not add any functions.
 
 ### Overloaded Functions
 

@@ -3,15 +3,15 @@ layout: post
 title: "DuckDB.ExtensionKit: Building DuckDB Extensions in C#"
 authors:
   - Giorgi Dalakishvili
-thumb: "/images/blog/thumbs/duckdb-extensionkit-csharp.jpg"
-image: "/images/blog/thumbs/duckdb-extensionkit-csharp.jpg"
+thumb: "/images/blog/thumbs/duckdb-extensionkit-csharp.svg"
+image: "/images/blog/thumbs/duckdb-extensionkit-csharp.png"
 excerpt: "DuckDB.ExtensionKit brings DuckDB extension development to the .NET ecosystem. By building on DuckDB's stable C Extension API and leveraging .NET Native AOT compilation, it lets C# developers define scalar and table functions, which can be shipped as native DuckDB extensions."
 tag: extensions
 ---
 
 ## Introduction
 
-DuckDB has a flexible extension mechanism that allows extensions to be loaded dynamically at runtime. This makes it easy to extend DuckDB’s main feature set without adding everything to the main binary. Extensions can add support for new file formats, introduce custom types, or provide new scalar and table functions. A significant part of DuckDB’s functionality is actually implemented using this extension mechanism in the form of core extensions, which are developed alongside the engine itself by the DuckDB team. For example, DuckDB can read and write JSON files via the `json` extension and integrate with PostgreSQL using the `postgres` extension. 
+DuckDB has a flexible extension mechanism that allows extensions to be loaded dynamically at runtime. This makes it easy to extend DuckDB’s main feature set without adding everything to the main binary. Extensions can add support for new file formats, introduce custom types, or provide new scalar and table functions. A significant part of DuckDB’s functionality is actually implemented using this extension mechanism in the form of core extensions, which are developed alongside the engine itself by the DuckDB team. For example, DuckDB can read and write JSON files via the `json` extension and integrate with PostgreSQL using the `postgres` extension.
 
 DuckDB also has a thriving ecosystem of [community extensions]({% link community_extensions/index.md %}), i.e., third-party extensions, maintained by community members, covering a wide range of use cases and integrations. For example, you can expose additional cryptographic functionality through the `crypto` community extension.
 

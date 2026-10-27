@@ -14,6 +14,8 @@ docs:
 
     The easiest way to get started is Azure CLI auth (`az login`) with `SET pbi_scanner_auth_mode = 'azure_cli'`, but Azure CLI is not required.
 
+    `connection_string` and `dax_text` are positional. Named options use `:=`: `auth_mode`, `access_token`, `secret_name`, `tenant_id`, `client_id`, `client_secret`, `effective_user_name`, `timeout_ms`, `schema_probe_rows`, `normalize_dax_column_names`.
+
     You may also use the DuckDB `azure` extension to create an Azure secret. More details and examples are in the [pbi_scanner repository](https://github.com/crazy-treyn/pbi_scanner).
 
   hello_world: |
@@ -24,30 +26,46 @@ docs:
     SELECT *
     FROM dax_query(
         'Data Source=powerbi://api.powerbi.com/v1.0/myorg/Example%20Workspace;Initial Catalog=example_semantic_model;',
-        'EVALUATE TOPN(500, FactSales)'
+        'EVALUATE ROW("probe_ok", 1)'
     );
 
 extension:
   name: pbi_scanner
   description: DuckDB extension for querying Power BI Semantic Models with DAX.
-  version: '0.0.5'
+  version: '0.0.6'
   language: C++
   build: cmake
   license: MIT
   excluded_platforms: "wasm_threads;windows_amd64_mingw;osx_amd64"
   maintainers:
     - crazy-treyn
+
 repo:
   github: crazy-treyn/pbi_scanner
-  ref: f9889e854a0f0770dc8a06f30db655f961ece6e5
+  ref: 2c6ad65522d7e0cde19b701ef7895a4c210a5910
 
 extension_star_count: 16
 extension_star_count_pretty: 16
-extension_download_count: 738
-extension_download_count_pretty: 738
+extension_download_count: 13414
+extension_download_count_pretty: 13.4k
 image: '/images/community_extensions/social_preview/preview_community_extension_pbi_scanner.png'
 layout: community_extension_doc
 ---
+### Compatibility Matrix
+
+This table covers all DuckDB releases that have not reached [end-of-life](https://duckdb.org/release_calendar), including LTS releases, and shows the 2 most recent patch releases of each. Older patch releases are not listed, but the extension may be available for them as well.
+
+<div class="extension_compatibility_table"></div>
+
+| Platform | 1.4.4 | 1.4.5 | 1.5.5 | 1.5.6 | 2.0.0 |
+| :--- | :---: | :---: | :---: | :---: | :---: |
+| Linux AMD64 | ❌ | ❌ | ✅ | ✅ | ✅ |
+| Linux ARM64 | ❌ | ❌ | ✅ | ✅ | ✅ |
+| macOS AMD64 | ❌ | ❌ | ❌ | ❌ | ❌ |
+| macOS ARM64 | ❌ | ❌ | ✅ | ✅ | ✅ |
+| Windows AMD64 | ❌ | ❌ | ✅ | ✅ | ✅ |
+| Windows ARM64 | ❌ | ❌ | ❌ | ❌ | ❌ |
+| WebAssembly | ❌ | ❌ | ✅ | ✅ | ✅ |
 
 ### Installing and Loading
 ```sql
@@ -65,18 +83,17 @@ LOAD {{ page.extension.name }};
 ### About {{ page.extension.name }}
 {{ page.docs.extended_description }}
 {% endif %}
-
 ### Added Functions
 
 <div class="extension_functions_table"></div>
 
-|   function_name   | function_type | description | comment | examples |
-|-------------------|---------------|-------------|---------|----------|
-| dax_query         | table         | NULL        | NULL    |          |
-| pbi_columns       | table         | NULL        | NULL    |          |
-| pbi_measures      | table         | NULL        | NULL    |          |
-| pbi_relationships | table         | NULL        | NULL    |          |
-| pbi_tables        | table         | NULL        | NULL    |          |
+|   function_name   | function_type |                                                                                          description                                                                                          | comment |                                                                                 examples                                                                                  |
+|-------------------|---------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|---------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| dax_query         | table         | Runs a DAX statement against a Power BI semantic model or a direct XMLA endpoint and returns the result rows as a table. connection_string and dax_text are positional; named options use :=. | NULL    | [SELECT * FROM dax_query('Data Source=powerbi://api.powerbi.com/v1.0/myorg/Example%20Workspace;Initial Catalog=example_semantic_model;', 'EVALUATE ROW("probe_ok", 1)');] |
+| pbi_columns       | table         | Returns the columns in a Power BI semantic model by running EVALUATE INFO.VIEW.COLUMNS(). connection_string is positional; named options use :=.                                              | NULL    | [SELECT * FROM pbi_columns('Data Source=powerbi://api.powerbi.com/v1.0/myorg/Example%20Workspace;Initial Catalog=example_semantic_model;');]                              |
+| pbi_measures      | table         | Returns the measures in a Power BI semantic model by running EVALUATE INFO.VIEW.MEASURES(). connection_string is positional; named options use :=.                                            | NULL    | [SELECT * FROM pbi_measures('Data Source=powerbi://api.powerbi.com/v1.0/myorg/Example%20Workspace;Initial Catalog=example_semantic_model;');]                             |
+| pbi_relationships | table         | Returns the relationships in a Power BI semantic model by running EVALUATE INFO.VIEW.RELATIONSHIPS(). connection_string is positional; named options use :=.                                  | NULL    | [SELECT * FROM pbi_relationships('Data Source=powerbi://api.powerbi.com/v1.0/myorg/Example%20Workspace;Initial Catalog=example_semantic_model;');]                        |
+| pbi_tables        | table         | Returns the tables in a Power BI semantic model by running EVALUATE INFO.VIEW.TABLES(). connection_string is positional; named options use :=.                                                | NULL    | [SELECT * FROM pbi_tables('Data Source=powerbi://api.powerbi.com/v1.0/myorg/Example%20Workspace;Initial Catalog=example_semantic_model;');]                               |
 
 ### Overloaded Functions
 
@@ -94,9 +111,10 @@ This extension does not add any types.
 
 <div class="extension_settings_table"></div>
 
-|            name            |                                                                                     description                                                                                     | input_type | scope  | aliases |
-|----------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|------------|--------|---------|
-| normalize_dax_column_names | When true, strip DAX square brackets and table qualifiers from dax_query and pbi_* metadata table function column names (default off; opt in via SET or normalize_dax_column_names) | BOOLEAN    | GLOBAL | []      |
-| pbi_scanner_auth_mode      | Default auth mode for pbi_scanner table functions (access_token, azure_cli, service_principal)                                                                                      | VARCHAR    | GLOBAL | []      |
+|            name            |                                                                                     description                                                                                     | input_type | scope  | aliases | typed_value |
+|----------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|------------|--------|---------|-------------|
+| normalize_dax_column_names | When true, strip DAX square brackets and table qualifiers from dax_query and pbi_* metadata table function column names (default off; opt in via SET or normalize_dax_column_names) | BOOLEAN    | GLOBAL | []      | false       |
+| pbi_scanner_auth_mode      | Default auth mode for pbi_scanner table functions (access_token, azure_cli, service_principal)                                                                                      | VARCHAR    | GLOBAL | []      |             |
+| temp_directory             | Set the directory to which temporary files are written.                                                                                                                             | VARCHAR    | GLOBAL | []      | post.db.tmp |
 
 

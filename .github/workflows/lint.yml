@@ -8,22 +8,22 @@ concurrency:
 
 jobs:
   markdown:
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-26.04
     steps:
       - uses: actions/checkout@v7
       - uses: errata-ai/vale-action@reviewdog
         with:
-          files: '_posts/,docs/current/'
+          files: '_posts/,docs/2.0/'
           separator: ","
           filter_mode: added
           fail_on_error: false
       - uses: articulate/actions-markdownlint@main
         with:
           config: .markdownlint.jsonc
-          files: 'docs/current/**/*.md _posts/*.md'
+          files: 'docs/2.0/**/*.md _posts/*.md'
 
   version-file:
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-26.04
     steps:
       - uses: actions/checkout@v7
       - name: Check no trailing newline in latest_stable_version.txt
@@ -34,7 +34,7 @@ jobs:
           fi
 
   python:
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-26.04
     steps:
     - uses: actions/checkout@v7
     - uses: psf/black@stable

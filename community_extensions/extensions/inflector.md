@@ -21,15 +21,31 @@ extension:
 repo:
   andium: 888a4bc287db39ae1680269f963952696a28ccf1
   github: query-farm/inflector
-  ref: 8628623f7084daeb3ae5e3abbc4a40ba4850b2f3
+  ref: 69e604e8d73bb5b40b03d024d04572ba3a9fac49
+  variegata: c161cab900fe007f1a3ec049a5ba3faa6b68e196
 
 extension_star_count: 10
 extension_star_count_pretty: 10
-extension_download_count: 1538
-extension_download_count_pretty: 1.5k
+extension_download_count: 25779
+extension_download_count_pretty: 25.8k
 image: '/images/community_extensions/social_preview/preview_community_extension_inflector.png'
 layout: community_extension_doc
 ---
+### Compatibility Matrix
+
+This table covers all DuckDB releases that have not reached [end-of-life](https://duckdb.org/release_calendar), including LTS releases, and shows the 2 most recent patch releases of each. Older patch releases are not listed, but the extension may be available for them as well.
+
+<div class="extension_compatibility_table"></div>
+
+| Platform | 1.4.4 | 1.4.5 | 1.5.5 | 1.5.6 | 2.0.0 |
+| :--- | :---: | :---: | :---: | :---: | :---: |
+| Linux AMD64 | ✅ | ✅ | ✅ | ✅ | ✅ |
+| Linux ARM64 | ✅ | ✅ | ✅ | ✅ | ✅ |
+| macOS AMD64 | ✅ | ✅ | ✅ | ✅ | ✅ |
+| macOS ARM64 | ✅ | ✅ | ✅ | ✅ | ✅ |
+| Windows AMD64 | ✅ | ✅ | ✅ | ✅ | ✅ |
+| Windows ARM64 | ❌ | ❌ | ❌ | ❌ | ❌ |
+| WebAssembly | ✅ | ✅ | ✅ | ✅ | ✅ |
 
 ### Installing and Loading
 ```sql
@@ -47,45 +63,11 @@ LOAD {{ page.extension.name }};
 ### About {{ page.extension.name }}
 {{ page.docs.extended_description }}
 {% endif %}
-
 ### Added Functions
 
 <div class="extension_functions_table"></div>
 
-|          function_name           | function_type |                               description                                | comment |                            examples                            |
-|----------------------------------|---------------|--------------------------------------------------------------------------|---------|----------------------------------------------------------------|
-| inflect                          | scalar        | Transforms a string value using the specified case format                | NULL    | [inflect('snake', 'helloWorld')]                               |
-| inflect                          | scalar        | Transforms struct field names using the specified case format            | NULL    | [inflect('snake', {firstName: 'John', lastName: 'Doe'})]       |
-| inflect                          | scalar        | NULL                                                                     | NULL    |                                                                |
-| inflect                          | table         | Transforms column names in query results using the specified case format | NULL    | [FROM inflect('snake', SELECT firstName, lastName FROM users)] |
-| inflector_deconstantize          | scalar        | Removes the rightmost segment from a constant expression                 | NULL    | [inflector_deconstantize('Net::HTTP')]                         |
-| inflector_demodulize             | scalar        | Removes the module part from a fully qualified name                      | NULL    | [inflector_demodulize('ActiveRecord::CoreExtensions::String')] |
-| inflector_deordinalize           | scalar        | Removes the ordinal suffix from a string (1st -> 1)                      | NULL    | [inflector_deordinalize('1st')]                                |
-| inflector_is_camel_case          | scalar        | Returns true if the string is in camelCase format                        | NULL    | [inflector_is_camel_case('helloWorld')]                        |
-| inflector_is_class_case          | scalar        | Returns true if the string is in ClassCase (PascalCase) format           | NULL    | [inflector_is_class_case('HelloWorld')]                        |
-| inflector_is_foreign_key         | scalar        | Returns true if the string is in foreign key format (ends with _id)      | NULL    | [inflector_is_foreign_key('message_id')]                       |
-| inflector_is_kebab_case          | scalar        | Returns true if the string is in kebab-case format                       | NULL    | [inflector_is_kebab_case('hello-world')]                       |
-| inflector_is_pascal_case         | scalar        | Returns true if the string is in PascalCase format                       | NULL    | [inflector_is_pascal_case('HelloWorld')]                       |
-| inflector_is_screamingsnake_case | scalar        | Returns true if the string is in SCREAMING_SNAKE_CASE format             | NULL    | [inflector_is_screamingsnake_case('HELLO_WORLD')]              |
-| inflector_is_sentence_case       | scalar        | Returns true if the string is in Sentence case format                    | NULL    | [inflector_is_sentence_case('Hello world')]                    |
-| inflector_is_snake_case          | scalar        | Returns true if the string is in snake_case format                       | NULL    | [inflector_is_snake_case('hello_world')]                       |
-| inflector_is_table_case          | scalar        | Returns true if the string is in table_case format (snake_case plural)   | NULL    | [inflector_is_table_case('foo_bars')]                          |
-| inflector_is_title_case          | scalar        | Returns true if the string is in Title Case format                       | NULL    | [inflector_is_title_case('Hello World')]                       |
-| inflector_is_train_case          | scalar        | Returns true if the string is in Train-Case format                       | NULL    | [inflector_is_train_case('Hello-World')]                       |
-| inflector_ordinalize             | scalar        | Converts a number string to its ordinal form (1st, 2nd, 3rd, etc.)       | NULL    | [inflector_ordinalize('1')]                                    |
-| inflector_to_camel_case          | scalar        | Converts a string to camelCase format                                    | NULL    | [inflector_to_camel_case('hello_world')]                       |
-| inflector_to_class_case          | scalar        | Converts a string to ClassCase (PascalCase) format                       | NULL    | [inflector_to_class_case('hello_world')]                       |
-| inflector_to_foreign_key         | scalar        | Converts a class name to a foreign key column name                       | NULL    | [inflector_to_foreign_key('Message')]                          |
-| inflector_to_kebab_case          | scalar        | Converts a string to kebab-case format                                   | NULL    | [inflector_to_kebab_case('helloWorld')]                        |
-| inflector_to_pascal_case         | scalar        | Converts a string to PascalCase format                                   | NULL    | [inflector_to_pascal_case('hello_world')]                      |
-| inflector_to_plural              | scalar        | Returns the plural form of a word                                        | NULL    | [inflector_to_plural('person')]                                |
-| inflector_to_screamingsnake_case | scalar        | Converts a string to SCREAMING_SNAKE_CASE format                         | NULL    | [inflector_to_screamingsnake_case('helloWorld')]               |
-| inflector_to_sentence_case       | scalar        | Converts a string to Sentence case format                                | NULL    | [inflector_to_sentence_case('helloWorld')]                     |
-| inflector_to_singular            | scalar        | Returns the singular form of a word                                      | NULL    | [inflector_to_singular('people')]                              |
-| inflector_to_snake_case          | scalar        | Converts a string to snake_case format                                   | NULL    | [inflector_to_snake_case('helloWorld')]                        |
-| inflector_to_table_case          | scalar        | Converts a string to table_cases format (snake_case plural)              | NULL    | [inflector_to_table_case('FooBar')]                            |
-| inflector_to_title_case          | scalar        | Converts a string to Title Case format                                   | NULL    | [inflector_to_title_case('hello_world')]                       |
-| inflector_to_train_case          | scalar        | Converts a string to Train-Case format                                   | NULL    | [inflector_to_train_case('helloWorld')]                        |
+This extension does not add any functions.
 
 ### Overloaded Functions
 
@@ -103,8 +85,6 @@ This extension does not add any types.
 
 <div class="extension_settings_table"></div>
 
-|        name        |                                  description                                  | input_type | scope  | aliases |
-|--------------------|-------------------------------------------------------------------------------|------------|--------|---------|
-| inflector_acronyms | List of acronyms preserved as uppercase in case conversions (e.g., HTML, API) | VARCHAR[]  | GLOBAL | []      |
+This extension does not add any settings.
 
 

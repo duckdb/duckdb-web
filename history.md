@@ -71,7 +71,7 @@ permalink: /history/
     <div class="timeline-body">
       <h2 id="the-broader-direction-becomes-explicit">Broader Horizons</h2>
       <p>DuckLake reached <a href="https://ducklake.select/2026/04/13/ducklake-10/">version 1.0 on April 13, 2026</a>, establishing a production-ready specification and reference implementation.</p>
-      <p>The Quack technical preview followed in May. Quack is the DuckDB client-server protocol, designed for workloads that need remote connections or multiple clients. It is available as a beta release while the team develops it toward stable status as <a href="{% post_url 2026-08-17-duckdb-20-highlights %}">DuckDB v2.0</a>.</p>
+      <p>The Quack technical preview followed in May. Quack is the DuckDB client-server protocol, designed for workloads that need remote connections or multiple clients. It was introduced as a beta release, and <a href="{% post_url 2026-10-21-announcing-duckdb-200 %}">DuckDB v2.0</a> shipped a polished version, although the protocol is not yet stable.</p>
       <p>The change from <a href="https://ducklabs.com/news/2026/05/27/duckdb-labs-becomes-ducklabs">DuckDB Labs to DuckLabs</a> came later that month. By then, the company employed more than 30 people working across DuckDB, DuckLake, Quack, extensions, language bindings, and related systems engineering.</p>
     </div>
   </div>
@@ -80,8 +80,16 @@ permalink: /history/
     <div class="timeline-marker"><span class="timeline-year">2026, Q3</span></div>
     <div class="timeline-body">
       <h2 id="ducklabs-to-join-aws">DuckLabs Is Joining AWS</h2>
-      <p>On August 26, 2026, DuckLabs announced that <a href="https://ducklabs.com/news/2026/08/26/ducklabs-to-join-aws">it is joining Amazon Web Services</a>. The DuckLabs team stays in Amsterdam and remain focused on the development of the core projects – DuckDB, DuckLake and Quack.</p>
+      <p>On August 26, 2026, DuckLabs announced that <a href="https://ducklabs.com/news/2026/08/26/ducklabs-to-join-aws">it is joining Amazon Web Services</a>. The DuckLabs team stays in Amsterdam and remains focused on the development of the core projects – DuckDB, DuckLake and Quack.</p>
       <p>These projects will remain the intellectual property of the <a href="https://duckdb.foundation/">DuckDB Foundation</a> and open source under the MIT license. The scope of the <a href="{% link community_support.md %}">community support</a> is extended to accept larger volumes of issues and pull requests, and will cover more components.</p>
+    </div>
+  </div>
+
+  <div class="timeline-entry">
+    <div class="timeline-marker"><span class="timeline-year">2026, Q4</span></div>
+    <div class="timeline-body">
+      <h2 id="duckdb-reaches-20">DuckDB Reaches v2.0</h2>
+      <p>On October 21, 2026, the team <a href="{% post_url 2026-10-21-announcing-duckdb-200 %}">released DuckDB v2.0.0 LTS</a>, the project's biggest feature release so far. It ships a polished version of the Quack protocol, asynchronous I/O, a first-class <code>VARIANT</code> type, triggers and an extensible SQL parser.</p>
     </div>
   </div>
 

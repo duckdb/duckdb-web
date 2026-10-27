@@ -8,7 +8,7 @@ excerpt: |
 extension:
   name: duck_hunt
   description: Parse and analyze test results, build outputs, and CI/CD pipeline logs from 110+ formats with severity filtering, format auto-detection, and context extraction
-  version: 1.13.3
+  version: 1.14.0
   language: C++
   build: cmake
   license: Apache-2.0
@@ -23,15 +23,31 @@ extension:
 repo:
   github: teaguesterling/duck_hunt
   andium: 68ca1c4676f706980a6503c19b789f5224596b4d
-  ref: 60f840ae4d3420b41ad6a5013cf03f0f1d4072db
-  # ref_next == ref (deliberate): v1.13.3 (tag v1.13.3) completes the family-C
-  # migration (named_parameters -> FunctionSignature typed-kwargs shim) AND fixes
-  # missing-file tolerance on the v2.0/macOS build (a narrow catch(const
-  # IOException&) in the in-out read path that missed the open exception there,
-  # broadened to catch(const std::exception&)). The v2.0-cyanoptera prerelease leg
-  # now BUILDS AND TESTS on this exact commit instead of skipping vacuously; v1.13.2
-  # built but failed 3 missing-file tests on v2.0/macOS, which this ref fixes.
-  ref_next: 60f840ae4d3420b41ad6a5013cf03f0f1d4072db
+  ref: 72149b4fdabdfbf4bb231c81123832c428cc93a3
+  # variegata pins the v1.5.6 track. scripts/build.py sends a v1.5.6 build here when
+  # present and to `ref` otherwise, and unlike ref_next it has no skip branch -- so
+  # once `ref` is 2.0-only a v1.5.6 build would fail rather than be skipped. Equal to
+  # `ref` while both lines build; advance only to a commit v1.5.6 can still build.
+  variegata: 72149b4fdabdfbf4bb231c81123832c428cc93a3
+  # ref_next == ref (deliberate): validate the shipped release on v2.0-cyanoptera
+  # rather than skipping it.
+  #
+  # v1.14.0 (tag v1.14.0) RESTORES the v2.0 build. Cyanoptera made the
+  # ParserOptions default constructor private, which broke
+  # `Parser parser;` in duck_hunt_macros.cpp (it reaches ParserOptions() through a
+  # defaulted argument). The v2.0 line had not compiled since dd06255, and the leg
+  # was advisory, so main read green while that build was dead. v1.14.0 switches to
+  # cyanoptera's public context-free Parser::GetBuiltinParser(). Both v2.0 legs
+  # (linux_amd64, osx_arm64) are green on this exact commit, alongside 14 gating
+  # legs and 3794 assertions across 61 test files on the stable line.
+  #
+  # NOTE for whoever edits this next: the PREVIOUS ref_next comment claimed v2.0
+  # "BUILDS AND TESTS on this exact commit", and that was TRUE when written
+  # (2026-10-04, run 37180096622 green at 60f840ae). It became false on 2026-10-05
+  # when cyanoptera privatised ParserOptions. A ref_next claim has a shelf life:
+  # the next-line branch moves under a pinned ref, so "verified green" ages into
+  # "was green once". Re-check against a current cyanoptera leg before trusting it.
+  ref_next: 72149b4fdabdfbf4bb231c81123832c428cc93a3
 
 docs:
   readme: https://duck-hunt.readthedocs.io/
@@ -188,11 +204,26 @@ docs:
 
 extension_star_count: 8
 extension_star_count_pretty: 8
-extension_download_count: 999
-extension_download_count_pretty: 999
+extension_download_count: 18702
+extension_download_count_pretty: 18.7k
 image: '/images/community_extensions/social_preview/preview_community_extension_duck_hunt.png'
 layout: community_extension_doc
 ---
+### Compatibility Matrix
+
+This table covers all DuckDB releases that have not reached [end-of-life](https://duckdb.org/release_calendar), including LTS releases, and shows the 2 most recent patch releases of each. Older patch releases are not listed, but the extension may be available for them as well.
+
+<div class="extension_compatibility_table"></div>
+
+| Platform | 1.4.4 | 1.4.5 | 1.5.5 | 1.5.6 | 2.0.0 |
+| :--- | :---: | :---: | :---: | :---: | :---: |
+| Linux AMD64 | ✅ | ❌ | ✅ | ✅ | ✅ |
+| Linux ARM64 | ✅ | ❌ | ✅ | ✅ | ✅ |
+| macOS AMD64 | ✅ | ❌ | ✅ | ✅ | ✅ |
+| macOS ARM64 | ✅ | ❌ | ✅ | ✅ | ✅ |
+| Windows AMD64 | ✅ | ❌ | ❌ | ❌ | ❌ |
+| Windows ARM64 | ❌ | ❌ | ❌ | ❌ | ❌ |
+| WebAssembly | ✅ | ❌ | ✅ | ✅ | ✅ |
 
 ### Installing and Loading
 ```sql
@@ -210,7 +241,6 @@ LOAD {{ page.extension.name }};
 ### About {{ page.extension.name }}
 {{ page.docs.extended_description }}
 {% endif %}
-
 ### Added Functions
 
 <div class="extension_functions_table"></div>
@@ -247,6 +277,8 @@ This extension does not add any types.
 
 <div class="extension_settings_table"></div>
 
-This extension does not add any settings.
+|      name      |                       description                       | input_type | scope  | aliases | typed_value |
+|----------------|---------------------------------------------------------|------------|--------|---------|-------------|
+| temp_directory | Set the directory to which temporary files are written. | VARCHAR    | GLOBAL | []      | post.db.tmp |
 
 

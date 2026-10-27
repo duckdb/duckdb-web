@@ -21,7 +21,7 @@ pip install -r requirements.txt
 ## Development Commands
 
 ```bash
-# Serve locally (current/lts only, faster — recommended for most editing)
+# Serve locally (last two versions only, faster — recommended for most editing)
 scripts/serve-latest.sh
 
 # Serve full site including all archived versions
@@ -51,11 +51,9 @@ Visit `http://localhost:4000/docs/` (use HTTP, not HTTPS).
 Jekyll with Kramdown/GFM markdown. Navigation menus are driven by JSON data files, not auto-discovered from files.
 
 ### Documentation Versioning
-- `docs/current/` — current stable release (target for most PRs)
-- `docs/lts/` — LTS release
-- `docs/1.3/`, `docs/1.2/`, etc. — archived versions (rarely edited)
+- `docs/1.3/`, `docs/1.2/`, etc.
 
-The `_config_exclude_archive.yml` config is used by `serve-latest.sh` to skip archived versions for faster local builds.
+The `_config_exclude_archive.yml` config is used by `serve-latest.sh` to skip older versions for faster local builds.
 
 ### Adding a New Doc Page
 1. Create a Markdown file using `snake_case` naming in `docs/`

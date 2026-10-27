@@ -8,7 +8,7 @@ excerpt: |
 extension:
   name: zeek
   description: Read Zeek network security monitor log files with automatic schema detection and type-aware parsing
-  version: 0.4.1
+  version: 0.5.0
   language: C++
   build: cmake
   license: MIT
@@ -17,7 +17,11 @@ extension:
 
 repo:
   github: ynadji/zeek-duckdb
-  ref: ad3580e3ba6130d0da395ad283cfca4e9cbb2024
+  # ref builds against DuckDB v2.0.0 (latest stable) from main. andium (v1.4.x) and variegata (v1.5.x)
+  # keep the last commit that builds against those versions.
+  ref: f79f5e27809095018e9a8fba071564d7fb71c459
+  andium: ad3580e3ba6130d0da395ad283cfca4e9cbb2024
+  variegata: ad3580e3ba6130d0da395ad283cfca4e9cbb2024
 
 docs:
   hello_world: |
@@ -50,13 +54,28 @@ docs:
       - `vector[T]`/`set[T]` to `LIST[T]`
     - optional `filename` column for tracking source files across globs
 
-extension_star_count: 5
-extension_star_count_pretty: 5
-extension_download_count: 748
-extension_download_count_pretty: 748
+extension_star_count: 6
+extension_star_count_pretty: 6
+extension_download_count: 10276
+extension_download_count_pretty: 10.3k
 image: '/images/community_extensions/social_preview/preview_community_extension_zeek.png'
 layout: community_extension_doc
 ---
+### Compatibility Matrix
+
+This table covers all DuckDB releases that have not reached [end-of-life](https://duckdb.org/release_calendar), including LTS releases, and shows the 2 most recent patch releases of each. Older patch releases are not listed, but the extension may be available for them as well.
+
+<div class="extension_compatibility_table"></div>
+
+| Platform | 1.4.4 | 1.4.5 | 1.5.5 | 1.5.6 | 2.0.0 |
+| :--- | :---: | :---: | :---: | :---: | :---: |
+| Linux AMD64 | ❌ | ❌ | ✅ | ✅ | ✅ |
+| Linux ARM64 | ❌ | ❌ | ✅ | ✅ | ✅ |
+| macOS AMD64 | ❌ | ❌ | ✅ | ✅ | ❌ |
+| macOS ARM64 | ❌ | ❌ | ✅ | ✅ | ✅ |
+| Windows AMD64 | ❌ | ❌ | ✅ | ✅ | ✅ |
+| Windows ARM64 | ❌ | ❌ | ❌ | ❌ | ❌ |
+| WebAssembly | ❌ | ❌ | ✅ | ✅ | ✅ |
 
 ### Installing and Loading
 ```sql
@@ -74,7 +93,6 @@ LOAD {{ page.extension.name }};
 ### About {{ page.extension.name }}
 {{ page.docs.extended_description }}
 {% endif %}
-
 ### Added Functions
 
 <div class="extension_functions_table"></div>
@@ -99,6 +117,8 @@ This extension does not add any types.
 
 <div class="extension_settings_table"></div>
 
-This extension does not add any settings.
+|      name      |                       description                       | input_type | scope  | aliases | typed_value |
+|----------------|---------------------------------------------------------|------------|--------|---------|-------------|
+| temp_directory | Set the directory to which temporary files are written. | VARCHAR    | GLOBAL | []      | post.db.tmp |
 
 

@@ -17,13 +17,13 @@ extension:
   requires_toolchains: "python3"
   maintainers:
     - Mjboothaus
-  # macOS first; widen after CI is proven
-  excluded_platforms: "wasm_mvp;wasm_eh;wasm_threads"
+  # Wasm deferred (large exports + bind memory). osx_amd64 dropped for DuckDB 2.0 community.
+  excluded_platforms: "wasm_mvp;wasm_eh;wasm_threads;osx_amd64"
 
 repo:
   github: Mjboothaus/duckdb-healthkit-export
-  # v0.2.0 — healthkit_export (replaces short-lived apple_health listing)
-  ref: 08cf61c655a9efc277535a1ae6c1d89feebaf400
+  # main @ DuckDB 2.0.0 CI host (stable C_STRUCT); merge of feature/duckdb-2.0 (#42)
+  ref: 0063896b1b6ce515c9430c90d1624637139d9ba9
 
 docs:
   hello_world: |
@@ -60,8 +60,9 @@ docs:
     also appear top-level).
 
     ### Platform
-    Initial community builds target **macOS** (Apple Silicon / Intel). Other platforms may
-    follow once CI is green.
+    Community builds target **DuckDB 2.0.0** on **macOS arm64**, **Linux**, and **Windows**.
+    **Wasm** and **osx_amd64** are excluded. Prior CDN artifacts for DuckDB 1.5.x remain
+    available for older clients until EOL.
 
     ### Rename note
     This listing **replaces** the short-lived `apple_health` community id (unintended branding).
@@ -73,11 +74,26 @@ docs:
 
 extension_star_count: 1
 extension_star_count_pretty: 1
-extension_download_count: 660
-extension_download_count_pretty: 660
+extension_download_count: 4814
+extension_download_count_pretty: 4.8k
 image: '/images/community_extensions/social_preview/preview_community_extension_healthkit_export.png'
 layout: community_extension_doc
 ---
+### Compatibility Matrix
+
+This table covers all DuckDB releases that have not reached [end-of-life](https://duckdb.org/release_calendar), including LTS releases, and shows the 2 most recent patch releases of each. Older patch releases are not listed, but the extension may be available for them as well.
+
+<div class="extension_compatibility_table"></div>
+
+| Platform | 1.4.4 | 1.4.5 | 1.5.5 | 1.5.6 | 2.0.0 |
+| :--- | :---: | :---: | :---: | :---: | :---: |
+| Linux AMD64 | ❌ | ❌ | ✅ | ❌ | ✅ |
+| Linux ARM64 | ❌ | ❌ | ✅ | ❌ | ✅ |
+| macOS AMD64 | ❌ | ❌ | ✅ | ❌ | ❌ |
+| macOS ARM64 | ❌ | ❌ | ✅ | ❌ | ✅ |
+| Windows AMD64 | ❌ | ❌ | ✅ | ❌ | ✅ |
+| Windows ARM64 | ❌ | ❌ | ❌ | ❌ | ❌ |
+| WebAssembly | ❌ | ❌ | ❌ | ❌ | ❌ |
 
 ### Installing and Loading
 ```sql
@@ -95,7 +111,6 @@ LOAD {{ page.extension.name }};
 ### About {{ page.extension.name }}
 {{ page.docs.extended_description }}
 {% endif %}
-
 ### Added Functions
 
 <div class="extension_functions_table"></div>
@@ -124,6 +139,8 @@ This extension does not add any types.
 
 <div class="extension_settings_table"></div>
 
-This extension does not add any settings.
+|      name      |                       description                       | input_type | scope  | aliases | typed_value |
+|----------------|---------------------------------------------------------|------------|--------|---------|-------------|
+| temp_directory | Set the directory to which temporary files are written. | VARCHAR    | GLOBAL | []      | post.db.tmp |
 
 

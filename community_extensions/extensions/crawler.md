@@ -8,7 +8,7 @@ excerpt: |
 extension:
   name: crawler
   description: SQL-native web crawler with HTML extraction and MERGE support
-  version: '2026092202'
+  version: '2026102301'
   language: C++
   build: cmake
   license: MIT
@@ -21,7 +21,8 @@ extension:
 repo:
   github: midwork-finds-jobs/duckdb-crawler
   andium: f0aad857435a2ce138c567e8af11f9d4f8ae0c25
-  ref: ce2679bc70f65b0d3525262066ece014b8d8f1c9
+  variegata: ce2679bc70f65b0d3525262066ece014b8d8f1c9
+  ref: d846ba2074e029a1747853e6bf5baa75e3a5e05c
 
 docs:
   hello_world: |
@@ -68,11 +69,26 @@ docs:
 
 extension_star_count: 16
 extension_star_count_pretty: 16
-extension_download_count: 869
-extension_download_count_pretty: 869
+extension_download_count: 6578
+extension_download_count_pretty: 6.6k
 image: '/images/community_extensions/social_preview/preview_community_extension_crawler.png'
 layout: community_extension_doc
 ---
+### Compatibility Matrix
+
+This table covers all DuckDB releases that have not reached [end-of-life](https://duckdb.org/release_calendar), including LTS releases, and shows the 2 most recent patch releases of each. Older patch releases are not listed, but the extension may be available for them as well.
+
+<div class="extension_compatibility_table"></div>
+
+| Platform | 1.4.4 | 1.4.5 | 1.5.5 | 1.5.6 | 2.0.0 |
+| :--- | :---: | :---: | :---: | :---: | :---: |
+| Linux AMD64 | ✅ | ❌ | ✅ | ❌ | ❌ |
+| Linux ARM64 | ✅ | ❌ | ✅ | ❌ | ❌ |
+| macOS AMD64 | ✅ | ❌ | ✅ | ❌ | ❌ |
+| macOS ARM64 | ✅ | ❌ | ✅ | ❌ | ❌ |
+| Windows AMD64 | ✅ | ❌ | ✅ | ❌ | ❌ |
+| Windows ARM64 | ❌ | ❌ | ❌ | ❌ | ❌ |
+| WebAssembly | ❌ | ❌ | ❌ | ❌ | ❌ |
 
 ### Installing and Loading
 ```sql
@@ -90,7 +106,6 @@ LOAD {{ page.extension.name }};
 ### About {{ page.extension.name }}
 {{ page.docs.extended_description }}
 {% endif %}
-
 ### Added Functions
 
 <div class="extension_functions_table"></div>

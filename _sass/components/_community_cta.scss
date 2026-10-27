@@ -1,0 +1,52 @@
+@use '../abstracts/mixins' as *;
+
+.community-cta,
+body.landing section.community-cta{
+	padding: 140px 15px 80px;
+}
+
+.community-cta{
+	.wrap{
+		max-width: 1150px;
+		margin: 0 auto;
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		text-align: center;
+	}
+
+	h2{
+		@include display-3;
+		line-height: 1.15;
+		letter-spacing: -0.00125em;
+		margin: 0;
+	}
+
+	.buttons{
+		display: flex;
+		flex-wrap: wrap;
+		justify-content: center;
+		gap: var(--element-elementlight, 8px);
+		padding-top: var(--page-margin-m, 24px);
+
+		.button{
+			margin-right: 0;
+		}
+	}
+}
+
+body section.blog:has(+ .community-cta),
+body main:has(+ .community-cta) .newswrap .postwrap .recentposts{
+	padding-bottom: 0;
+
+	.newstileswrap{
+		margin-bottom: 0;
+	}
+}
+
+@media only screen and (max-width: 720px){
+	.community-cta,
+	body.landing section.community-cta{
+		padding: 80px 15px 60px;
+	}
+}

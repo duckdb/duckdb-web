@@ -27,7 +27,7 @@ With DuckDB's Community Extensions being a [relatively new]({% post_url 2024-07-
 * [extension template](https://github.com/duckdb/extension-template)
 * [Community Extensions Repository](https://github.com/duckdb/community-extensions)
 
-However, because of the batteries-included nature of the extension template and the [large]({% link community_extensions/index.md %}) [number]({% link docs/current/core_extensions/overview.md %}) of example extensions, extension development should be relatively straightforward.
+However, because of the batteries-included nature of the extension template and the [large]({% link community_extensions/index.md %}) [number]({% link docs/2.0/core_extensions/overview.md %}) of example extensions, extension development should be relatively straightforward.
 
 ## How to Maintain an Extension Through DuckDB Releases
 

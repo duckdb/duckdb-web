@@ -41,7 +41,7 @@ To see how this laptop performs, we ran a few benchmarks focusing on loading and
 
 ### CSV Loading
 
-To measure CSV loading performance, we used one of our favorite datasets: the [Dutch railway services]({% link docs/current/guides/snippets/dutch_railway_datasets.md %}). We picked the [full dataset spanning the last 80 months](https://blobs.duckdb.org/nl-railway/railway-services-80-months.zip) (between Jan 2019 and Aug 2025).
+To measure CSV loading performance, we used one of our favorite datasets: the [Dutch railway services]({% link docs/2.0/guides/snippets/dutch_railway_datasets.md %}). We picked the [full dataset spanning the last 80 months](https://blobs.duckdb.org/nl-railway/railway-services-80-months.zip) (between Jan 2019 and Aug 2025).
 We can fetch and decompress the file as follows:
 
 ```bash
@@ -76,8 +76,6 @@ and were curious: how far can DuckDB scale on this laptop?
 
 Of course, we first needed some big TPC-H datasets, and we needed to generate them locally – downloading them could take days.
 Luckily, we could use the [`tpchgen-cli`](https://github.com/clflushopt/tpchgen-rs/) tool, a pure Rust implementation of the TPC-H generator that can produce large-scale datasets on the laptop in just a few hours. We generated the data as Parquet files and loaded them into DuckDB.
-
-> Omarchy comes with the [btrfs](https://en.wikipedia.org/wiki/Btrfs) file system by default. We created a directory for the generated data and disabled copy-on-write (see the [configuration details](#file-system-configuration)).
 
 #### SF3,000
 
@@ -143,14 +141,3 @@ Here's the cost breakdown of the laptop using retail prices in euros (including 
 | **Total (euros, VAT included)**                                                             | **2,974.87** |
 
 Note that Framework currently only sells 96 GB memory kits but both the motherboard and the CPU can handle 128 GB (2 × 64 GB) kits.
-
-### File System Configuration
-
-In our initial experiments, we experienced intermittent checksum errors from the btrfs file system in [dmesg](https://man.archlinux.org/man/dmesg.1.en), manifesting as `BTRFS warning (device dm-0): csum failed ...` messages and crashes. We ran extensive disk and memory tests, which indicated no issues, and also attempted to reproduce the error on an AWS EC2 cloud instance with btrfs but we could not observe the issue there. If you have an insight into this error or have a reproducer, please [let us know by opening an issue](https://github.com/duckdb/duckdb/issues/new) and we'd be happy to send you some [DuckDB merch](https://shop.duckdb.org/)!
-
-Because DuckDB's storage already uses checksums, we can [disable copy-on-write along with checksums](https://wiki.archlinux.org/title/Btrfs#Disabling_CoW) for the experiments using the NOCOW (`+C`) attribute without risking data corruption:
-
-```bash
-sudo chattr +C duckdb-tpch-experiment
-lsattr -d duckdb-tpch-experiment
-```

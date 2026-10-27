@@ -1,2 +1,2 @@
 # bundle exec jekyll serve --incremental --config _config.yml,_config_exclude_archive.yml
-exclude: ['docs/0.*', 'docs/1.*', 'vendor']
+exclude: ['docs/0.*', 'docs/1.0', 'docs/1.1', 'docs/1.2', 'docs/1.3', 'docs/1.4', 'vendor']

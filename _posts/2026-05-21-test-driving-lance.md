@@ -5,14 +5,14 @@ authors:
   - LanceDB team
   - Guillermo Sanchez
 thumb: "/images/blog/thumbs/testing-lance.svg"
-image: "/images/blog/thumbs/testing-lance.jpg"
+image: "/images/blog/thumbs/testing-lance.png"
 excerpt: "Lance is an open lakehouse format with a design geared toward AI workloads. LanceDB and DuckLabs have partnered to bring you fast vector and hybrid search directly from DuckDB SQL, without leaving your analytical workflow. In this post, we explain what Lance is, how to use it in DuckDB, and, of course, show some benchmark results."
 tag: extensions
 redirect_from:
 - /2026/05/21/testing-lance
 ---
 
-With the [`lance` extension]({% link docs/current/core_extensions/lance.md %}), DuckDB users can query Lance datasets with the same familiar SQL interface (via the CLI or SDKs), while adding capabilities for AI and retrieval workloads. This blog post highlights how Lance is a good option for workloads that need to support storage and querying of vectors, rich table operations, and AI-oriented access patterns, while also supporting scan-friendly analytical workloads at scale. And with DuckDB, it becomes trivial to query those kinds of datasets in SQL.
+With the [`lance` extension]({% link docs/2.0/core_extensions/lance.md %}), DuckDB users can query Lance datasets with the same familiar SQL interface (via the CLI or SDKs), while adding capabilities for AI and retrieval workloads. This blog post highlights how Lance is a good option for workloads that need to support storage and querying of vectors, rich table operations, and AI-oriented access patterns, while also supporting scan-friendly analytical workloads at scale. And with DuckDB, it becomes trivial to query those kinds of datasets in SQL.
 
 > In this blog, there will be some mentions of “retrieval workloads” and “AI data patterns” or “AI datasets”. By “retrieval workloads,” we mean queries that find rows by similarity or keyword relevance, such as vector search and full-text search, rather than by exact filters or aggregations. By “AI data patterns,” we mean datasets that mix embeddings, images, or audio alongside scalar metadata.
 
@@ -28,7 +28,7 @@ On the data evolution side, adding columns or backfilling existing rows with new
 
 ## The Lance DuckDB Extension
 
-The [`lance` extension]({% link docs/current/core_extensions/lance.md %}) brings Lance into DuckDB as part of the SQL-based workflow. You can read Lance datasets directly, write to them via `COPY`, attach them as table namespaces, build indexes, and query them with regular DuckDB SQL. On top of that, the extension exposes Lance-native search functionality through SQL table functions.
+The [`lance` extension]({% link docs/2.0/core_extensions/lance.md %}) brings Lance into DuckDB as part of the SQL-based workflow. You can read Lance datasets directly, write to them via `COPY`, attach them as table namespaces, build indexes, and query them with regular DuckDB SQL. On top of that, the extension exposes Lance-native search functionality through SQL table functions.
 
 This fits naturally with how DuckDB is already used: as a single, embedded SQL query engine that operates on many different data sources and file formats. With the Lance extension, DuckDB remains the familiar query engine, while Lance provides the storage, indexing, and search capabilities underneath, which is especially beneficial when your data is multimodal and includes embeddings.
 
@@ -115,7 +115,7 @@ First, it gives users one SQL surface for analytics plus retrieval. The same Duc
 
 Second, Lance is a table format for more than traditional analytics. Many AI pipelines need versioned datasets, updates, deletes, `MERGE`-style changes, index management, and schema evolution. The DuckDB extension exposes these capabilities through SQL, which means users do not need to leave the DuckDB environment just because their dataset is doing more than serving analytical reads.
 
-Third, the workflow scales from local files to remote storage without changing the mental model. You can start with a local `lance` dataset, then [move to object storage]({% link docs/current/core_extensions/lance.md %}#query-a-lance-dataset).
+Third, the workflow scales from local files to remote storage without changing the mental model. You can start with a local `lance` dataset, then [move to object storage]({% link docs/2.0/core_extensions/lance.md %}#query-a-lance-dataset).
 
 The extension also supports REST namespaces, so DuckDB can connect to a remote Lance catalog (including [LanceDB Enterprise](https://docs.lancedb.com/enterprise/index)) and treat it like an attached database. That makes the local-to-remote storage progression feel incremental rather than disruptive.
 

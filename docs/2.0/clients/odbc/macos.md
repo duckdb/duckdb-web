@@ -1,0 +1,83 @@
+---
+github_repository: https://github.com/duckdb/duckdb-odbc
+layout: docu
+redirect_from:
+- /docs/api/odbc/macos
+- /docs/clients/odbc/macos
+- /docs/stable/clients/odbc/macos
+- /docs/current/clients/odbc/macos
+- /docs/lts/clients/odbc/macos
+- /docs/preview/clients/odbc/macos
+title: ODBC API on macOS
+---
+
+1. A driver manager is required to manage communication between applications and the ODBC driver. DuckDB supports `unixODBC`, which is a complete ODBC driver manager for macOS and Linux. Users can install it from the command line via [Homebrew](https://brew.sh/):
+
+   ```batch
+   brew install unixodbc
+   ```
+
+2. <!-- markdownlint-disable MD034 --> DuckDB releases ODBC drivers for macOS on [Apple Silicon (`arm64`)](https://github.com/duckdb/duckdb-odbc/releases/download/v{% include install/latest_client.html client="odbc" %}{{ latest_package }}/duckdb_odbc-macos-arm64.zip) and [Intel (`x86_64`)](https://github.com/duckdb/duckdb-odbc/releases/download/v{{ latest_package }}/duckdb_odbc-macos-amd64.zip) CPUs. To download the driver for Apple Silicon, run:
+
+   ```batch
+   wget https://github.com/duckdb/duckdb-odbc/releases/download/v{% include install/latest_client.html client="odbc" %}{{ latest_package }}/duckdb_odbc-macos-arm64.zip
+   ```
+
+   To download the driver for Intel, run:
+
+   ```batch
+   wget https://github.com/duckdb/duckdb-odbc/releases/download/v{% include install/latest_client.html client="odbc" %}{{ latest_package }}/duckdb_odbc-macos-amd64.zip
+   ```
+
+   <!-- markdownlint-enable MD034 -->
+
+3. The archive contains the `libduckdb_odbc.dylib` artifact. To extract it to a directory, run (on Intel, replace `arm64` with `amd64`):
+
+   ```batch
+   mkdir duckdb_odbc && unzip duckdb_odbc-macos-arm64.zip -d duckdb_odbc
+   ```
+
+4. There are two ways to configure the ODBC driver, either by initializing via the configuration files, or by connecting with [`SQLDriverConnect`](https://learn.microsoft.com/en-us/sql/odbc/reference/syntax/sqldriverconnect-function?view=sql-server-ver16).
+   A combination of the two is also possible.
+
+   Furthermore, the ODBC driver supports all the [configuration options]({% link docs/2.0/configuration/overview.md %}) included in DuckDB.
+
+   > If a configuration is set in both the connection string passed to `SQLDriverConnect` and in the `odbc.ini` file,
+   > the one passed to `SQLDriverConnect` will take precedence.
+
+   For the details of the configuration parameters, see the [ODBC configuration page]({% link docs/2.0/clients/odbc/configuration.md %}).
+
+5. After the configuration, to validate the installation, it is possible to use an ODBC client. unixODBC uses a command line tool called `isql`.
+
+   Use the DSN defined in `odbc.ini` as a parameter of `isql`.
+
+   ```batch
+   isql DuckDB
+   ```
+
+   ```text
+   +---------------------------------------+
+   | Connected!                            |
+   |                                       |
+   | sql-statement                         |
+   | help [tablename]                      |
+   | echo [string]                         |
+   | quit                                  |
+   |                                       |
+   +---------------------------------------+
+   ```
+
+   ```sql
+   SQL> SELECT 42;
+   ```
+
+   ```text
+   +------------+
+   | 42         |
+   +------------+
+   | 42         |
+   +------------+
+
+   SQLRowCount returns -1
+   1 rows fetched
+   ```

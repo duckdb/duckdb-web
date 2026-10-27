@@ -19,7 +19,7 @@ extension:
 
 repo:
   github: neuesql/atm_talib
-  ref: baebee616765169eab9efac31d469d64f8aecf79
+  ref: 5caac83a9a6f89c49985482cd634ed1f6f17cffe
 
 docs:
   hello_world: |
@@ -64,11 +64,26 @@ docs:
 
 extension_star_count: 8
 extension_star_count_pretty: 8
-extension_download_count: 738
-extension_download_count_pretty: 738
+extension_download_count: 13171
+extension_download_count_pretty: 13.2k
 image: '/images/community_extensions/social_preview/preview_community_extension_talib.png'
 layout: community_extension_doc
 ---
+### Compatibility Matrix
+
+This table covers all DuckDB releases that have not reached [end-of-life](https://duckdb.org/release_calendar), including LTS releases, and shows the 2 most recent patch releases of each. Older patch releases are not listed, but the extension may be available for them as well.
+
+<div class="extension_compatibility_table"></div>
+
+| Platform | 1.4.4 | 1.4.5 | 1.5.5 | 1.5.6 | 2.0.0 |
+| :--- | :---: | :---: | :---: | :---: | :---: |
+| Linux AMD64 | ❌ | ❌ | ✅ | ✅ | ✅ |
+| Linux ARM64 | ❌ | ❌ | ✅ | ✅ | ✅ |
+| macOS AMD64 | ❌ | ❌ | ✅ | ✅ | ✅ |
+| macOS ARM64 | ❌ | ❌ | ✅ | ✅ | ✅ |
+| Windows AMD64 | ❌ | ❌ | ✅ | ✅ | ✅ |
+| Windows ARM64 | ❌ | ❌ | ❌ | ❌ | ❌ |
+| WebAssembly | ❌ | ❌ | ❌ | ❌ | ❌ |
 
 ### Installing and Loading
 ```sql
@@ -86,265 +101,264 @@ LOAD {{ page.extension.name }};
 ### About {{ page.extension.name }}
 {{ page.docs.extended_description }}
 {% endif %}
-
 ### Added Functions
 
 <div class="extension_functions_table"></div>
 
-|     function_name      | function_type | description | comment | examples |
-|------------------------|---------------|-------------|---------|----------|
-| t_acos                 | scalar        | NULL        | NULL    |          |
-| t_ad                   | scalar        | NULL        | NULL    |          |
-| t_adx                  | scalar        | NULL        | NULL    |          |
-| t_adxr                 | scalar        | NULL        | NULL    |          |
-| t_aroon                | scalar        | NULL        | NULL    |          |
-| t_asin                 | scalar        | NULL        | NULL    |          |
-| t_atan                 | scalar        | NULL        | NULL    |          |
-| t_atr                  | scalar        | NULL        | NULL    |          |
-| t_avgprice             | scalar        | NULL        | NULL    |          |
-| t_bbands               | scalar        | NULL        | NULL    |          |
-| t_bop                  | scalar        | NULL        | NULL    |          |
-| t_cci                  | scalar        | NULL        | NULL    |          |
-| t_cdl2crows            | scalar        | NULL        | NULL    |          |
-| t_cdl3blackcrows       | scalar        | NULL        | NULL    |          |
-| t_cdl3inside           | scalar        | NULL        | NULL    |          |
-| t_cdl3linestrike       | scalar        | NULL        | NULL    |          |
-| t_cdl3outside          | scalar        | NULL        | NULL    |          |
-| t_cdl3starsinsouth     | scalar        | NULL        | NULL    |          |
-| t_cdl3whitesoldiers    | scalar        | NULL        | NULL    |          |
-| t_cdladvanceblock      | scalar        | NULL        | NULL    |          |
-| t_cdlbelthold          | scalar        | NULL        | NULL    |          |
-| t_cdlbreakaway         | scalar        | NULL        | NULL    |          |
-| t_cdlclosingmarubozu   | scalar        | NULL        | NULL    |          |
-| t_cdlconcealbabyswall  | scalar        | NULL        | NULL    |          |
-| t_cdlcounterattack     | scalar        | NULL        | NULL    |          |
-| t_cdldoji              | scalar        | NULL        | NULL    |          |
-| t_cdldojistar          | scalar        | NULL        | NULL    |          |
-| t_cdldragonflydoji     | scalar        | NULL        | NULL    |          |
-| t_cdlengulfing         | scalar        | NULL        | NULL    |          |
-| t_cdlgapsidesidewhite  | scalar        | NULL        | NULL    |          |
-| t_cdlgravestonedoji    | scalar        | NULL        | NULL    |          |
-| t_cdlhammer            | scalar        | NULL        | NULL    |          |
-| t_cdlhangingman        | scalar        | NULL        | NULL    |          |
-| t_cdlharami            | scalar        | NULL        | NULL    |          |
-| t_cdlharamicross       | scalar        | NULL        | NULL    |          |
-| t_cdlhighwave          | scalar        | NULL        | NULL    |          |
-| t_cdlhikkake           | scalar        | NULL        | NULL    |          |
-| t_cdlhikkakemod        | scalar        | NULL        | NULL    |          |
-| t_cdlhomingpigeon      | scalar        | NULL        | NULL    |          |
-| t_cdlidentical3crows   | scalar        | NULL        | NULL    |          |
-| t_cdlinneck            | scalar        | NULL        | NULL    |          |
-| t_cdlinvertedhammer    | scalar        | NULL        | NULL    |          |
-| t_cdlkicking           | scalar        | NULL        | NULL    |          |
-| t_cdlkickingbylength   | scalar        | NULL        | NULL    |          |
-| t_cdlladderbottom      | scalar        | NULL        | NULL    |          |
-| t_cdllongleggeddoji    | scalar        | NULL        | NULL    |          |
-| t_cdllongline          | scalar        | NULL        | NULL    |          |
-| t_cdlmarubozu          | scalar        | NULL        | NULL    |          |
-| t_cdlmatchinglow       | scalar        | NULL        | NULL    |          |
-| t_cdlonneck            | scalar        | NULL        | NULL    |          |
-| t_cdlpiercing          | scalar        | NULL        | NULL    |          |
-| t_cdlrickshawman       | scalar        | NULL        | NULL    |          |
-| t_cdlrisefall3methods  | scalar        | NULL        | NULL    |          |
-| t_cdlseparatinglines   | scalar        | NULL        | NULL    |          |
-| t_cdlshootingstar      | scalar        | NULL        | NULL    |          |
-| t_cdlshortline         | scalar        | NULL        | NULL    |          |
-| t_cdlspinningtop       | scalar        | NULL        | NULL    |          |
-| t_cdlstalledpattern    | scalar        | NULL        | NULL    |          |
-| t_cdlsticksandwich     | scalar        | NULL        | NULL    |          |
-| t_cdltakuri            | scalar        | NULL        | NULL    |          |
-| t_cdltasukigap         | scalar        | NULL        | NULL    |          |
-| t_cdlthrusting         | scalar        | NULL        | NULL    |          |
-| t_cdltristar           | scalar        | NULL        | NULL    |          |
-| t_cdlunique3river      | scalar        | NULL        | NULL    |          |
-| t_cdlupsidegap2crows   | scalar        | NULL        | NULL    |          |
-| t_cdlxsidegap3methods  | scalar        | NULL        | NULL    |          |
-| t_ceil                 | scalar        | NULL        | NULL    |          |
-| t_cmo                  | scalar        | NULL        | NULL    |          |
-| t_cos                  | scalar        | NULL        | NULL    |          |
-| t_cosh                 | scalar        | NULL        | NULL    |          |
-| t_dema                 | scalar        | NULL        | NULL    |          |
-| t_dx                   | scalar        | NULL        | NULL    |          |
-| t_ema                  | scalar        | NULL        | NULL    |          |
-| t_exp                  | scalar        | NULL        | NULL    |          |
-| t_floor                | scalar        | NULL        | NULL    |          |
-| t_ht_dcperiod          | scalar        | NULL        | NULL    |          |
-| t_ht_dcphase           | scalar        | NULL        | NULL    |          |
-| t_ht_phasor            | scalar        | NULL        | NULL    |          |
-| t_ht_sine              | scalar        | NULL        | NULL    |          |
-| t_ht_trendline         | scalar        | NULL        | NULL    |          |
-| t_ht_trendmode         | scalar        | NULL        | NULL    |          |
-| t_kama                 | scalar        | NULL        | NULL    |          |
-| t_linearreg            | scalar        | NULL        | NULL    |          |
-| t_linearreg_angle      | scalar        | NULL        | NULL    |          |
-| t_linearreg_intercept  | scalar        | NULL        | NULL    |          |
-| t_linearreg_slope      | scalar        | NULL        | NULL    |          |
-| t_ln                   | scalar        | NULL        | NULL    |          |
-| t_log10                | scalar        | NULL        | NULL    |          |
-| t_macd                 | scalar        | NULL        | NULL    |          |
-| t_mama                 | scalar        | NULL        | NULL    |          |
-| t_max                  | scalar        | NULL        | NULL    |          |
-| t_maxindex             | scalar        | NULL        | NULL    |          |
-| t_medprice             | scalar        | NULL        | NULL    |          |
-| t_midpoint             | scalar        | NULL        | NULL    |          |
-| t_midprice             | scalar        | NULL        | NULL    |          |
-| t_min                  | scalar        | NULL        | NULL    |          |
-| t_minindex             | scalar        | NULL        | NULL    |          |
-| t_minmax               | scalar        | NULL        | NULL    |          |
-| t_minus_di             | scalar        | NULL        | NULL    |          |
-| t_minus_dm             | scalar        | NULL        | NULL    |          |
-| t_mom                  | scalar        | NULL        | NULL    |          |
-| t_natr                 | scalar        | NULL        | NULL    |          |
-| t_plus_di              | scalar        | NULL        | NULL    |          |
-| t_plus_dm              | scalar        | NULL        | NULL    |          |
-| t_roc                  | scalar        | NULL        | NULL    |          |
-| t_rocp                 | scalar        | NULL        | NULL    |          |
-| t_rocr                 | scalar        | NULL        | NULL    |          |
-| t_rocr100              | scalar        | NULL        | NULL    |          |
-| t_rsi                  | scalar        | NULL        | NULL    |          |
-| t_sin                  | scalar        | NULL        | NULL    |          |
-| t_sinh                 | scalar        | NULL        | NULL    |          |
-| t_sma                  | scalar        | NULL        | NULL    |          |
-| t_sqrt                 | scalar        | NULL        | NULL    |          |
-| t_stoch                | scalar        | NULL        | NULL    |          |
-| t_sum                  | scalar        | NULL        | NULL    |          |
-| t_tan                  | scalar        | NULL        | NULL    |          |
-| t_tanh                 | scalar        | NULL        | NULL    |          |
-| t_tema                 | scalar        | NULL        | NULL    |          |
-| t_trange               | scalar        | NULL        | NULL    |          |
-| t_trima                | scalar        | NULL        | NULL    |          |
-| t_trix                 | scalar        | NULL        | NULL    |          |
-| t_tsf                  | scalar        | NULL        | NULL    |          |
-| t_typprice             | scalar        | NULL        | NULL    |          |
-| t_wclprice             | scalar        | NULL        | NULL    |          |
-| t_willr                | scalar        | NULL        | NULL    |          |
-| t_wma                  | scalar        | NULL        | NULL    |          |
-| ta_acos                | aggregate     | NULL        | NULL    |          |
-| ta_ad                  | aggregate     | NULL        | NULL    |          |
-| ta_adx                 | aggregate     | NULL        | NULL    |          |
-| ta_adxr                | aggregate     | NULL        | NULL    |          |
-| ta_aroon               | aggregate     | NULL        | NULL    |          |
-| ta_asin                | aggregate     | NULL        | NULL    |          |
-| ta_atan                | aggregate     | NULL        | NULL    |          |
-| ta_atr                 | aggregate     | NULL        | NULL    |          |
-| ta_avgprice            | aggregate     | NULL        | NULL    |          |
-| ta_bbands              | aggregate     | NULL        | NULL    |          |
-| ta_bop                 | aggregate     | NULL        | NULL    |          |
-| ta_cci                 | aggregate     | NULL        | NULL    |          |
-| ta_cdl2crows           | aggregate     | NULL        | NULL    |          |
-| ta_cdl3blackcrows      | aggregate     | NULL        | NULL    |          |
-| ta_cdl3inside          | aggregate     | NULL        | NULL    |          |
-| ta_cdl3linestrike      | aggregate     | NULL        | NULL    |          |
-| ta_cdl3outside         | aggregate     | NULL        | NULL    |          |
-| ta_cdl3starsinsouth    | aggregate     | NULL        | NULL    |          |
-| ta_cdl3whitesoldiers   | aggregate     | NULL        | NULL    |          |
-| ta_cdladvanceblock     | aggregate     | NULL        | NULL    |          |
-| ta_cdlbelthold         | aggregate     | NULL        | NULL    |          |
-| ta_cdlbreakaway        | aggregate     | NULL        | NULL    |          |
-| ta_cdlclosingmarubozu  | aggregate     | NULL        | NULL    |          |
-| ta_cdlconcealbabyswall | aggregate     | NULL        | NULL    |          |
-| ta_cdlcounterattack    | aggregate     | NULL        | NULL    |          |
-| ta_cdldoji             | aggregate     | NULL        | NULL    |          |
-| ta_cdldojistar         | aggregate     | NULL        | NULL    |          |
-| ta_cdldragonflydoji    | aggregate     | NULL        | NULL    |          |
-| ta_cdlengulfing        | aggregate     | NULL        | NULL    |          |
-| ta_cdlgapsidesidewhite | aggregate     | NULL        | NULL    |          |
-| ta_cdlgravestonedoji   | aggregate     | NULL        | NULL    |          |
-| ta_cdlhammer           | aggregate     | NULL        | NULL    |          |
-| ta_cdlhangingman       | aggregate     | NULL        | NULL    |          |
-| ta_cdlharami           | aggregate     | NULL        | NULL    |          |
-| ta_cdlharamicross      | aggregate     | NULL        | NULL    |          |
-| ta_cdlhighwave         | aggregate     | NULL        | NULL    |          |
-| ta_cdlhikkake          | aggregate     | NULL        | NULL    |          |
-| ta_cdlhikkakemod       | aggregate     | NULL        | NULL    |          |
-| ta_cdlhomingpigeon     | aggregate     | NULL        | NULL    |          |
-| ta_cdlidentical3crows  | aggregate     | NULL        | NULL    |          |
-| ta_cdlinneck           | aggregate     | NULL        | NULL    |          |
-| ta_cdlinvertedhammer   | aggregate     | NULL        | NULL    |          |
-| ta_cdlkicking          | aggregate     | NULL        | NULL    |          |
-| ta_cdlkickingbylength  | aggregate     | NULL        | NULL    |          |
-| ta_cdlladderbottom     | aggregate     | NULL        | NULL    |          |
-| ta_cdllongleggeddoji   | aggregate     | NULL        | NULL    |          |
-| ta_cdllongline         | aggregate     | NULL        | NULL    |          |
-| ta_cdlmarubozu         | aggregate     | NULL        | NULL    |          |
-| ta_cdlmatchinglow      | aggregate     | NULL        | NULL    |          |
-| ta_cdlonneck           | aggregate     | NULL        | NULL    |          |
-| ta_cdlpiercing         | aggregate     | NULL        | NULL    |          |
-| ta_cdlrickshawman      | aggregate     | NULL        | NULL    |          |
-| ta_cdlrisefall3methods | aggregate     | NULL        | NULL    |          |
-| ta_cdlseparatinglines  | aggregate     | NULL        | NULL    |          |
-| ta_cdlshootingstar     | aggregate     | NULL        | NULL    |          |
-| ta_cdlshortline        | aggregate     | NULL        | NULL    |          |
-| ta_cdlspinningtop      | aggregate     | NULL        | NULL    |          |
-| ta_cdlstalledpattern   | aggregate     | NULL        | NULL    |          |
-| ta_cdlsticksandwich    | aggregate     | NULL        | NULL    |          |
-| ta_cdltakuri           | aggregate     | NULL        | NULL    |          |
-| ta_cdltasukigap        | aggregate     | NULL        | NULL    |          |
-| ta_cdlthrusting        | aggregate     | NULL        | NULL    |          |
-| ta_cdltristar          | aggregate     | NULL        | NULL    |          |
-| ta_cdlunique3river     | aggregate     | NULL        | NULL    |          |
-| ta_cdlupsidegap2crows  | aggregate     | NULL        | NULL    |          |
-| ta_cdlxsidegap3methods | aggregate     | NULL        | NULL    |          |
-| ta_ceil                | aggregate     | NULL        | NULL    |          |
-| ta_cmo                 | aggregate     | NULL        | NULL    |          |
-| ta_cos                 | aggregate     | NULL        | NULL    |          |
-| ta_cosh                | aggregate     | NULL        | NULL    |          |
-| ta_dema                | aggregate     | NULL        | NULL    |          |
-| ta_dx                  | aggregate     | NULL        | NULL    |          |
-| ta_ema                 | aggregate     | NULL        | NULL    |          |
-| ta_exp                 | aggregate     | NULL        | NULL    |          |
-| ta_floor               | aggregate     | NULL        | NULL    |          |
-| ta_ht_dcperiod         | aggregate     | NULL        | NULL    |          |
-| ta_ht_dcphase          | aggregate     | NULL        | NULL    |          |
-| ta_ht_phasor           | aggregate     | NULL        | NULL    |          |
-| ta_ht_sine             | aggregate     | NULL        | NULL    |          |
-| ta_ht_trendline        | aggregate     | NULL        | NULL    |          |
-| ta_ht_trendmode        | aggregate     | NULL        | NULL    |          |
-| ta_kama                | aggregate     | NULL        | NULL    |          |
-| ta_linearreg           | aggregate     | NULL        | NULL    |          |
-| ta_linearreg_angle     | aggregate     | NULL        | NULL    |          |
-| ta_linearreg_intercept | aggregate     | NULL        | NULL    |          |
-| ta_linearreg_slope     | aggregate     | NULL        | NULL    |          |
-| ta_ln                  | aggregate     | NULL        | NULL    |          |
-| ta_log10               | aggregate     | NULL        | NULL    |          |
-| ta_macd                | aggregate     | NULL        | NULL    |          |
-| ta_mama                | aggregate     | NULL        | NULL    |          |
-| ta_max                 | aggregate     | NULL        | NULL    |          |
-| ta_maxindex            | aggregate     | NULL        | NULL    |          |
-| ta_medprice            | aggregate     | NULL        | NULL    |          |
-| ta_midpoint            | aggregate     | NULL        | NULL    |          |
-| ta_midprice            | aggregate     | NULL        | NULL    |          |
-| ta_min                 | aggregate     | NULL        | NULL    |          |
-| ta_minindex            | aggregate     | NULL        | NULL    |          |
-| ta_minmax              | aggregate     | NULL        | NULL    |          |
-| ta_minus_di            | aggregate     | NULL        | NULL    |          |
-| ta_minus_dm            | aggregate     | NULL        | NULL    |          |
-| ta_mom                 | aggregate     | NULL        | NULL    |          |
-| ta_natr                | aggregate     | NULL        | NULL    |          |
-| ta_plus_di             | aggregate     | NULL        | NULL    |          |
-| ta_plus_dm             | aggregate     | NULL        | NULL    |          |
-| ta_roc                 | aggregate     | NULL        | NULL    |          |
-| ta_rocp                | aggregate     | NULL        | NULL    |          |
-| ta_rocr                | aggregate     | NULL        | NULL    |          |
-| ta_rocr100             | aggregate     | NULL        | NULL    |          |
-| ta_rsi                 | aggregate     | NULL        | NULL    |          |
-| ta_sin                 | aggregate     | NULL        | NULL    |          |
-| ta_sinh                | aggregate     | NULL        | NULL    |          |
-| ta_sma                 | aggregate     | NULL        | NULL    |          |
-| ta_sqrt                | aggregate     | NULL        | NULL    |          |
-| ta_stoch               | aggregate     | NULL        | NULL    |          |
-| ta_sum                 | aggregate     | NULL        | NULL    |          |
-| ta_tan                 | aggregate     | NULL        | NULL    |          |
-| ta_tanh                | aggregate     | NULL        | NULL    |          |
-| ta_tema                | aggregate     | NULL        | NULL    |          |
-| ta_trange              | aggregate     | NULL        | NULL    |          |
-| ta_trima               | aggregate     | NULL        | NULL    |          |
-| ta_trix                | aggregate     | NULL        | NULL    |          |
-| ta_tsf                 | aggregate     | NULL        | NULL    |          |
-| ta_typprice            | aggregate     | NULL        | NULL    |          |
-| ta_wclprice            | aggregate     | NULL        | NULL    |          |
-| ta_willr               | aggregate     | NULL        | NULL    |          |
-| ta_wma                 | aggregate     | NULL        | NULL    |          |
+|     function_name      | function_type |                                                                                description                                                                                | comment |                                       examples                                       |
+|------------------------|---------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------|---------|--------------------------------------------------------------------------------------|
+| t_acos                 | scalar        | Arc Cosine: the inverse cosine of each input value, in radians.                                                                                                           | NULL    | [t_acos([1.0, 2.0, 3.0, 4.0, 5.0])]                                                  |
+| t_ad                   | scalar        | Chaikin Accumulation/Distribution Line: a volume-weighted running total of each period's position within its high-low range.                                              | NULL    | [t_ad([12.0, 13.0], [10.0, 11.0], [11.0, 12.0], [1000.0, 1200.0])]                   |
+| t_adx                  | scalar        | Average Directional Movement Index: measures trend strength (not direction) by smoothing the directional movement index.                                                  | NULL    | [t_adx([12.0, 13.0, 14.0], [10.0, 11.0, 12.0], [11.0, 12.0, 13.0], 3)]               |
+| t_adxr                 | scalar        | Average Directional Movement Rating: the average of the current and a prior ADX value, smoothing ADX further.                                                             | NULL    | [t_adxr([12.0, 13.0, 14.0], [10.0, 11.0, 12.0], [11.0, 12.0, 13.0], 3)]              |
+| t_aroon                | scalar        | Aroon Indicator: measures the time since the most recent highest high and lowest low within the period, as two 0-100 oscillators.                                         | NULL    | [t_aroon([12.0, 13.0, 14.0], [10.0, 11.0, 12.0], 14)]                                |
+| t_asin                 | scalar        | Arc Sine: the inverse sine of each input value, in radians.                                                                                                               | NULL    | [t_asin([1.0, 2.0, 3.0, 4.0, 5.0])]                                                  |
+| t_atan                 | scalar        | Arc Tangent: the inverse tangent of each input value, in radians.                                                                                                         | NULL    | [t_atan([1.0, 2.0, 3.0, 4.0, 5.0])]                                                  |
+| t_atr                  | scalar        | Average True Range: a Wilder-smoothed moving average of the true range, measuring volatility.                                                                             | NULL    | [t_atr([12.0, 13.0, 14.0], [10.0, 11.0, 12.0], [11.0, 12.0, 13.0], 3)]               |
+| t_avgprice             | scalar        | Average Price: the mean of the open, high, low, and close for the period.                                                                                                 | NULL    | [t_avgprice([10.0, 11.0], [12.0, 13.0], [9.0, 10.0], [11.0, 12.0])]                  |
+| t_bbands               | scalar        | Bollinger Bands: a moving-average midline with upper and lower bands offset by a multiple of the rolling standard deviation.                                              | NULL    | [t_bbands([1.0, 2.0, 3.0, 4.0, 5.0], 20, 2.0, 2.0, 0)]                               |
+| t_bop                  | scalar        | Balance of Power: measures buying versus selling pressure as the ratio of the close-open difference to the high-low range.                                                | NULL    | [t_bop([10.0, 11.0], [12.0, 13.0], [9.0, 10.0], [11.0, 12.0])]                       |
+| t_cci                  | scalar        | Commodity Channel Index: measures the deviation of the typical price from its moving average, relative to mean absolute deviation.                                        | NULL    | [t_cci([12.0, 13.0, 14.0], [10.0, 11.0, 12.0], [11.0, 12.0, 13.0], 3)]               |
+| t_cdl2crows            | scalar        | Two Crows candlestick pattern: a bearish reversal signal of two black candles gapping above an uptrend.                                                                   | NULL    | [t_cdl2crows([10.0, 11.0], [12.0, 13.0], [9.0, 10.0], [11.0, 12.0])]                 |
+| t_cdl3blackcrows       | scalar        | Three Black Crows candlestick pattern: three consecutive long bearish candles signaling a downtrend.                                                                      | NULL    | [t_cdl3blackcrows([10.0, 11.0], [12.0, 13.0], [9.0, 10.0], [11.0, 12.0])]            |
+| t_cdl3inside           | scalar        | Three Inside Up/Down candlestick pattern: a reversal pattern confirmed by a third candle.                                                                                 | NULL    | [t_cdl3inside([10.0, 11.0], [12.0, 13.0], [9.0, 10.0], [11.0, 12.0])]                |
+| t_cdl3linestrike       | scalar        | Three-Line Strike candlestick pattern: three same-direction candles followed by a reversing strike candle.                                                                | NULL    | [t_cdl3linestrike([10.0, 11.0], [12.0, 13.0], [9.0, 10.0], [11.0, 12.0])]            |
+| t_cdl3outside          | scalar        | Three Outside Up/Down candlestick pattern: an engulfing pattern confirmed by a third candle.                                                                              | NULL    | [t_cdl3outside([10.0, 11.0], [12.0, 13.0], [9.0, 10.0], [11.0, 12.0])]               |
+| t_cdl3starsinsouth     | scalar        | Three Stars In The South candlestick pattern: a bullish reversal of three declining bearish candles with shrinking bodies.                                                | NULL    | [t_cdl3starsinsouth([10.0, 11.0], [12.0, 13.0], [9.0, 10.0], [11.0, 12.0])]          |
+| t_cdl3whitesoldiers    | scalar        | Three Advancing White Soldiers candlestick pattern: three consecutive long bullish candles signaling an uptrend.                                                          | NULL    | [t_cdl3whitesoldiers([10.0, 11.0], [12.0, 13.0], [9.0, 10.0], [11.0, 12.0])]         |
+| t_cdladvanceblock      | scalar        | Advance Block candlestick pattern: three bullish candles with progressively shrinking bodies, signaling weakening momentum.                                               | NULL    | [t_cdladvanceblock([10.0, 11.0], [12.0, 13.0], [9.0, 10.0], [11.0, 12.0])]           |
+| t_cdlbelthold          | scalar        | Belt-hold candlestick pattern: a long candle that opens at its extreme for the session.                                                                                   | NULL    | [t_cdlbelthold([10.0, 11.0], [12.0, 13.0], [9.0, 10.0], [11.0, 12.0])]               |
+| t_cdlbreakaway         | scalar        | Breakaway candlestick pattern: a gap followed by a reversal that closes back into the gap.                                                                                | NULL    | [t_cdlbreakaway([10.0, 11.0], [12.0, 13.0], [9.0, 10.0], [11.0, 12.0])]              |
+| t_cdlclosingmarubozu   | scalar        | Closing Marubozu candlestick pattern: a candle with no shadow on its closing side.                                                                                        | NULL    | [t_cdlclosingmarubozu([10.0, 11.0], [12.0, 13.0], [9.0, 10.0], [11.0, 12.0])]        |
+| t_cdlconcealbabyswall  | scalar        | Concealing Baby Swallow candlestick pattern: a four-candle bearish continuation pattern.                                                                                  | NULL    | [t_cdlconcealbabyswall([10.0, 11.0], [12.0, 13.0], [9.0, 10.0], [11.0, 12.0])]       |
+| t_cdlcounterattack     | scalar        | Counterattack candlestick pattern: two opposite-colored candles that close at the same level.                                                                             | NULL    | [t_cdlcounterattack([10.0, 11.0], [12.0, 13.0], [9.0, 10.0], [11.0, 12.0])]          |
+| t_cdldoji              | scalar        | Doji candlestick pattern: a candle whose open and close are virtually equal, signaling indecision.                                                                        | NULL    | [t_cdldoji([10.0, 11.0], [12.0, 13.0], [9.0, 10.0], [11.0, 12.0])]                   |
+| t_cdldojistar          | scalar        | Doji Star candlestick pattern: a doji that gaps away from the previous candle.                                                                                            | NULL    | [t_cdldojistar([10.0, 11.0], [12.0, 13.0], [9.0, 10.0], [11.0, 12.0])]               |
+| t_cdldragonflydoji     | scalar        | Dragonfly Doji candlestick pattern: a doji with a long lower shadow and no upper shadow.                                                                                  | NULL    | [t_cdldragonflydoji([10.0, 11.0], [12.0, 13.0], [9.0, 10.0], [11.0, 12.0])]          |
+| t_cdlengulfing         | scalar        | Engulfing candlestick pattern: a candle whose body fully contains the prior candle's body.                                                                                | NULL    | [t_cdlengulfing([10.0, 11.0], [12.0, 13.0], [9.0, 10.0], [11.0, 12.0])]              |
+| t_cdlgapsidesidewhite  | scalar        | Gap Side-by-Side White Lines candlestick pattern: two similarly-sized candles following a gap.                                                                            | NULL    | [t_cdlgapsidesidewhite([10.0, 11.0], [12.0, 13.0], [9.0, 10.0], [11.0, 12.0])]       |
+| t_cdlgravestonedoji    | scalar        | Gravestone Doji candlestick pattern: a doji with a long upper shadow and no lower shadow.                                                                                 | NULL    | [t_cdlgravestonedoji([10.0, 11.0], [12.0, 13.0], [9.0, 10.0], [11.0, 12.0])]         |
+| t_cdlhammer            | scalar        | Hammer candlestick pattern: a small body with a lower shadow at least twice the body length, in a downtrend.                                                              | NULL    | [t_cdlhammer([10.0, 11.0], [12.0, 13.0], [9.0, 10.0], [11.0, 12.0])]                 |
+| t_cdlhangingman        | scalar        | Hanging Man candlestick pattern: a hammer-shaped candle occurring in an uptrend, signaling a bearish reversal.                                                            | NULL    | [t_cdlhangingman([10.0, 11.0], [12.0, 13.0], [9.0, 10.0], [11.0, 12.0])]             |
+| t_cdlharami            | scalar        | Harami candlestick pattern: a small candle whose body is contained within the prior candle's larger body.                                                                 | NULL    | [t_cdlharami([10.0, 11.0], [12.0, 13.0], [9.0, 10.0], [11.0, 12.0])]                 |
+| t_cdlharamicross       | scalar        | Harami Cross candlestick pattern: a Harami pattern where the second candle is a doji.                                                                                     | NULL    | [t_cdlharamicross([10.0, 11.0], [12.0, 13.0], [9.0, 10.0], [11.0, 12.0])]            |
+| t_cdlhighwave          | scalar        | High-Wave Candle pattern: a small body with very long upper and lower shadows.                                                                                            | NULL    | [t_cdlhighwave([10.0, 11.0], [12.0, 13.0], [9.0, 10.0], [11.0, 12.0])]               |
+| t_cdlhikkake           | scalar        | Hikkake candlestick pattern: an inside-bar setup followed by a failed breakout.                                                                                           | NULL    | [t_cdlhikkake([10.0, 11.0], [12.0, 13.0], [9.0, 10.0], [11.0, 12.0])]                |
+| t_cdlhikkakemod        | scalar        | Modified Hikkake candlestick pattern: a Hikkake pattern confirmed by subsequent price action.                                                                             | NULL    | [t_cdlhikkakemod([10.0, 11.0], [12.0, 13.0], [9.0, 10.0], [11.0, 12.0])]             |
+| t_cdlhomingpigeon      | scalar        | Homing Pigeon candlestick pattern: two bearish candles where the second body is contained within the first.                                                               | NULL    | [t_cdlhomingpigeon([10.0, 11.0], [12.0, 13.0], [9.0, 10.0], [11.0, 12.0])]           |
+| t_cdlidentical3crows   | scalar        | Identical Three Crows candlestick pattern: three bearish candles that each open at the prior candle's close.                                                              | NULL    | [t_cdlidentical3crows([10.0, 11.0], [12.0, 13.0], [9.0, 10.0], [11.0, 12.0])]        |
+| t_cdlinneck            | scalar        | In-Neck candlestick pattern: a small bullish candle closing near the prior candle's low, in a downtrend.                                                                  | NULL    | [t_cdlinneck([10.0, 11.0], [12.0, 13.0], [9.0, 10.0], [11.0, 12.0])]                 |
+| t_cdlinvertedhammer    | scalar        | Inverted Hammer candlestick pattern: a small body with a long upper shadow, in a downtrend.                                                                               | NULL    | [t_cdlinvertedhammer([10.0, 11.0], [12.0, 13.0], [9.0, 10.0], [11.0, 12.0])]         |
+| t_cdlkicking           | scalar        | Kicking candlestick pattern: two opposing marubozu candles separated by a gap.                                                                                            | NULL    | [t_cdlkicking([10.0, 11.0], [12.0, 13.0], [9.0, 10.0], [11.0, 12.0])]                |
+| t_cdlkickingbylength   | scalar        | Kicking by Length candlestick pattern: a Kicking pattern whose direction is determined by the longer marubozu.                                                            | NULL    | [t_cdlkickingbylength([10.0, 11.0], [12.0, 13.0], [9.0, 10.0], [11.0, 12.0])]        |
+| t_cdlladderbottom      | scalar        | Ladder Bottom candlestick pattern: a four-candle bearish-to-bullish reversal pattern.                                                                                     | NULL    | [t_cdlladderbottom([10.0, 11.0], [12.0, 13.0], [9.0, 10.0], [11.0, 12.0])]           |
+| t_cdllongleggeddoji    | scalar        | Long Legged Doji candlestick pattern: a doji with very long upper and lower shadows.                                                                                      | NULL    | [t_cdllongleggeddoji([10.0, 11.0], [12.0, 13.0], [9.0, 10.0], [11.0, 12.0])]         |
+| t_cdllongline          | scalar        | Long Line Candle pattern: a candle with an unusually long body.                                                                                                           | NULL    | [t_cdllongline([10.0, 11.0], [12.0, 13.0], [9.0, 10.0], [11.0, 12.0])]               |
+| t_cdlmarubozu          | scalar        | Marubozu candlestick pattern: a candle with no shadows, consisting purely of its body.                                                                                    | NULL    | [t_cdlmarubozu([10.0, 11.0], [12.0, 13.0], [9.0, 10.0], [11.0, 12.0])]               |
+| t_cdlmatchinglow       | scalar        | Matching Low candlestick pattern: two bearish candles that close at the same level.                                                                                       | NULL    | [t_cdlmatchinglow([10.0, 11.0], [12.0, 13.0], [9.0, 10.0], [11.0, 12.0])]            |
+| t_cdlonneck            | scalar        | On-Neck candlestick pattern: a bullish candle closing at the prior candle's low, in a downtrend.                                                                          | NULL    | [t_cdlonneck([10.0, 11.0], [12.0, 13.0], [9.0, 10.0], [11.0, 12.0])]                 |
+| t_cdlpiercing          | scalar        | Piercing candlestick pattern: a bullish candle closing above the midpoint of the prior bearish candle's body.                                                             | NULL    | [t_cdlpiercing([10.0, 11.0], [12.0, 13.0], [9.0, 10.0], [11.0, 12.0])]               |
+| t_cdlrickshawman       | scalar        | Rickshaw Man candlestick pattern: a long-legged doji whose body sits near the center of its range.                                                                        | NULL    | [t_cdlrickshawman([10.0, 11.0], [12.0, 13.0], [9.0, 10.0], [11.0, 12.0])]            |
+| t_cdlrisefall3methods  | scalar        | Rising/Falling Three Methods candlestick pattern: a continuation pattern of a strong candle, three small counter-trend candles, then a resuming strong candle.            | NULL    | [t_cdlrisefall3methods([10.0, 11.0], [12.0, 13.0], [9.0, 10.0], [11.0, 12.0])]       |
+| t_cdlseparatinglines   | scalar        | Separating Lines candlestick pattern: two opposite-colored candles that share the same opening price.                                                                     | NULL    | [t_cdlseparatinglines([10.0, 11.0], [12.0, 13.0], [9.0, 10.0], [11.0, 12.0])]        |
+| t_cdlshootingstar      | scalar        | Shooting Star candlestick pattern: an inverted-hammer-shaped candle occurring in an uptrend.                                                                              | NULL    | [t_cdlshootingstar([10.0, 11.0], [12.0, 13.0], [9.0, 10.0], [11.0, 12.0])]           |
+| t_cdlshortline         | scalar        | Short Line Candle pattern: a candle with an unusually short body.                                                                                                         | NULL    | [t_cdlshortline([10.0, 11.0], [12.0, 13.0], [9.0, 10.0], [11.0, 12.0])]              |
+| t_cdlspinningtop       | scalar        | Spinning Top candlestick pattern: a small body with upper and lower shadows of similar length.                                                                            | NULL    | [t_cdlspinningtop([10.0, 11.0], [12.0, 13.0], [9.0, 10.0], [11.0, 12.0])]            |
+| t_cdlstalledpattern    | scalar        | Stalled Pattern: three bullish candles where the third has a notably small body, signaling fading momentum.                                                               | NULL    | [t_cdlstalledpattern([10.0, 11.0], [12.0, 13.0], [9.0, 10.0], [11.0, 12.0])]         |
+| t_cdlsticksandwich     | scalar        | Stick Sandwich candlestick pattern: two same-close bearish candles sandwiching an opposite candle.                                                                        | NULL    | [t_cdlsticksandwich([10.0, 11.0], [12.0, 13.0], [9.0, 10.0], [11.0, 12.0])]          |
+| t_cdltakuri            | scalar        | Takuri candlestick pattern: a doji with an unusually long lower shadow.                                                                                                   | NULL    | [t_cdltakuri([10.0, 11.0], [12.0, 13.0], [9.0, 10.0], [11.0, 12.0])]                 |
+| t_cdltasukigap         | scalar        | Tasuki Gap candlestick pattern: a gap followed by a candle that partially fills it.                                                                                       | NULL    | [t_cdltasukigap([10.0, 11.0], [12.0, 13.0], [9.0, 10.0], [11.0, 12.0])]              |
+| t_cdlthrusting         | scalar        | Thrusting candlestick pattern: a bullish candle closing below the midpoint of the prior bearish candle's body.                                                            | NULL    | [t_cdlthrusting([10.0, 11.0], [12.0, 13.0], [9.0, 10.0], [11.0, 12.0])]              |
+| t_cdltristar           | scalar        | Tristar candlestick pattern: three consecutive dojis with the middle one gapping from the others.                                                                         | NULL    | [t_cdltristar([10.0, 11.0], [12.0, 13.0], [9.0, 10.0], [11.0, 12.0])]                |
+| t_cdlunique3river      | scalar        | Unique 3 River candlestick pattern: a three-candle bullish reversal pattern.                                                                                              | NULL    | [t_cdlunique3river([10.0, 11.0], [12.0, 13.0], [9.0, 10.0], [11.0, 12.0])]           |
+| t_cdlupsidegap2crows   | scalar        | Upside Gap Two Crows candlestick pattern: two bearish candles gapping above an uptrend.                                                                                   | NULL    | [t_cdlupsidegap2crows([10.0, 11.0], [12.0, 13.0], [9.0, 10.0], [11.0, 12.0])]        |
+| t_cdlxsidegap3methods  | scalar        | Upside/Downside Gap Three Methods candlestick pattern: a gap followed by three candles that close the gap.                                                                | NULL    | [t_cdlxsidegap3methods([10.0, 11.0], [12.0, 13.0], [9.0, 10.0], [11.0, 12.0])]       |
+| t_ceil                 | scalar        | Ceiling: the smallest integer greater than or equal to each input value.                                                                                                  | NULL    | [t_ceil([1.0, 2.0, 3.0, 4.0, 5.0])]                                                  |
+| t_cmo                  | scalar        | Chande Momentum Oscillator: a -100 to 100 momentum oscillator based on the difference between the sum of recent gains and losses.                                         | NULL    | [t_cmo([1.0, 2.0, 3.0, 4.0, 5.0], 3)]                                                |
+| t_cos                  | scalar        | Cosine of each input value, in radians.                                                                                                                                   | NULL    | [t_cos([1.0, 2.0, 3.0, 4.0, 5.0])]                                                   |
+| t_cosh                 | scalar        | Hyperbolic Cosine of each input value.                                                                                                                                    | NULL    | [t_cosh([1.0, 2.0, 3.0, 4.0, 5.0])]                                                  |
+| t_dema                 | scalar        | Double Exponential Moving Average: reduces the lag of a plain EMA by combining it with an EMA of itself.                                                                  | NULL    | [t_dema([1.0, 2.0, 3.0, 4.0, 5.0], 3)]                                               |
+| t_dx                   | scalar        | Directional Movement Index: measures the difference between the plus and minus directional indicators relative to their sum.                                              | NULL    | [t_dx([12.0, 13.0, 14.0], [10.0, 11.0, 12.0], [11.0, 12.0, 13.0], 3)]                |
+| t_ema                  | scalar        | Exponential Moving Average: a weighted average that discounts older values exponentially, giving more weight to recent prices.                                            | NULL    | [t_ema([1.0, 2.0, 3.0, 4.0, 5.0], 3)]                                                |
+| t_exp                  | scalar        | Exponential: e raised to the power of each input value.                                                                                                                   | NULL    | [t_exp([1.0, 2.0, 3.0, 4.0, 5.0])]                                                   |
+| t_floor                | scalar        | Floor: the largest integer less than or equal to each input value.                                                                                                        | NULL    | [t_floor([1.0, 2.0, 3.0, 4.0, 5.0])]                                                 |
+| t_ht_dcperiod          | scalar        | Hilbert Transform Dominant Cycle Period: the estimated length, in bars, of the dominant price cycle.                                                                      | NULL    | [t_ht_dcperiod([1.0, 2.0, 3.0, 4.0, 5.0])]                                           |
+| t_ht_dcphase           | scalar        | Hilbert Transform Dominant Cycle Phase: the phase angle, in degrees, of the dominant price cycle.                                                                         | NULL    | [t_ht_dcphase([1.0, 2.0, 3.0, 4.0, 5.0])]                                            |
+| t_ht_phasor            | scalar        | Hilbert Transform Phasor Components: the in-phase and quadrature components of the dominant price cycle.                                                                  | NULL    | [t_ht_phasor([1.0, 2.0, 3.0, 4.0, 5.0])]                                             |
+| t_ht_sine              | scalar        | Hilbert Transform SineWave: the sine and lead sine of the dominant cycle's phase angle.                                                                                   | NULL    | [t_ht_sine([1.0, 2.0, 3.0, 4.0, 5.0])]                                               |
+| t_ht_trendline         | scalar        | Hilbert Transform Instantaneous Trendline: a Hilbert-smoothed trend component of the price series.                                                                        | NULL    | [t_ht_trendline([1.0, 2.0, 3.0, 4.0, 5.0])]                                          |
+| t_ht_trendmode         | scalar        | Hilbert Transform Trend vs Cycle Mode: returns 1 when the market is trending and 0 when it is in a cycling mode.                                                          | NULL    | [t_ht_trendmode([1.0, 2.0, 3.0, 4.0, 5.0])]                                          |
+| t_kama                 | scalar        | Kaufman Adaptive Moving Average: a moving average whose smoothing adapts to market volatility and trend efficiency.                                                       | NULL    | [t_kama([1.0, 2.0, 3.0, 4.0, 5.0], 3)]                                               |
+| t_linearreg            | scalar        | Linear Regression: the value of the best-fit line through the last N points, evaluated at the current point.                                                              | NULL    | [t_linearreg([1.0, 2.0, 3.0, 4.0, 5.0], 3)]                                          |
+| t_linearreg_angle      | scalar        | Linear Regression Angle: the angle, in degrees, of the slope of the best-fit line through the last N points.                                                              | NULL    | [t_linearreg_angle([1.0, 2.0, 3.0, 4.0, 5.0], 3)]                                    |
+| t_linearreg_intercept  | scalar        | Linear Regression Intercept: the y-intercept of the best-fit line through the last N points.                                                                              | NULL    | [t_linearreg_intercept([1.0, 2.0, 3.0, 4.0, 5.0], 3)]                                |
+| t_linearreg_slope      | scalar        | Linear Regression Slope: the slope of the best-fit line through the last N points.                                                                                        | NULL    | [t_linearreg_slope([1.0, 2.0, 3.0, 4.0, 5.0], 3)]                                    |
+| t_ln                   | scalar        | Natural Logarithm of each input value.                                                                                                                                    | NULL    | [t_ln([1.0, 2.0, 3.0, 4.0, 5.0])]                                                    |
+| t_log10                | scalar        | Base-10 Logarithm of each input value.                                                                                                                                    | NULL    | [t_log10([1.0, 2.0, 3.0, 4.0, 5.0])]                                                 |
+| t_macd                 | scalar        | Moving Average Convergence/Divergence: the difference between a fast and slow EMA of the input, plus an EMA signal line and the histogram of their difference.            | NULL    | [t_macd([1.0, 2.0, 3.0, 4.0, 5.0], 12, 26, 9)]                                       |
+| t_mama                 | scalar        | MESA Adaptive Moving Average: an EMA whose smoothing factor adapts to the dominant market cycle via the Hilbert Transform, paired with a slower following average (FAMA). | NULL    | [t_mama([1.0, 2.0, 3.0, 4.0, 5.0], 0.5, 0.05)]                                       |
+| t_max                  | scalar        | Highest Value over period: the maximum of the last N values.                                                                                                              | NULL    | [t_max([1.0, 2.0, 3.0, 4.0, 5.0], 3)]                                                |
+| t_maxindex             | scalar        | Index of Highest Value: the position within the last N values where the maximum occurs.                                                                                   | NULL    | [t_maxindex([1.0, 2.0, 3.0, 4.0, 5.0], 3)]                                           |
+| t_medprice             | scalar        | Median Price: the midpoint between the high and low for the period.                                                                                                       | NULL    | [t_medprice([12.0, 13.0], [10.0, 11.0])]                                             |
+| t_midpoint             | scalar        | MidPoint over period: the average of the highest and lowest value of the input within the period.                                                                         | NULL    | [t_midpoint([1.0, 2.0, 3.0, 4.0, 5.0], 3)]                                           |
+| t_midprice             | scalar        | Midpoint Price over period: the average of the highest high and lowest low over the period.                                                                               | NULL    | [t_midprice([12.0, 13.0, 14.0], [10.0, 11.0, 12.0], 3)]                              |
+| t_min                  | scalar        | Lowest Value over period: the minimum of the last N values.                                                                                                               | NULL    | [t_min([1.0, 2.0, 3.0, 4.0, 5.0], 3)]                                                |
+| t_minindex             | scalar        | Index of Lowest Value: the position within the last N values where the minimum occurs.                                                                                    | NULL    | [t_minindex([1.0, 2.0, 3.0, 4.0, 5.0], 3)]                                           |
+| t_minmax               | scalar        | Computes the rolling minimum and maximum of the input over the given period in a single pass.                                                                             | NULL    | [t_minmax([1.0, 2.0, 3.0, 4.0, 5.0], 3)]                                             |
+| t_minus_di             | scalar        | Minus Directional Indicator: the smoothed ratio of downward directional movement to the average true range.                                                               | NULL    | [t_minus_di([12.0, 13.0, 14.0], [10.0, 11.0, 12.0], [11.0, 12.0, 13.0], 3)]          |
+| t_minus_dm             | scalar        | Minus Directional Movement: the raw downward price movement used to compute the minus directional indicator.                                                              | NULL    | [t_minus_dm([12.0, 13.0, 14.0], [10.0, 11.0, 12.0], 3)]                              |
+| t_mom                  | scalar        | Momentum: the difference between the current value and the value N periods ago.                                                                                           | NULL    | [t_mom([1.0, 2.0, 3.0, 4.0, 5.0], 3)]                                                |
+| t_natr                 | scalar        | Normalized Average True Range: the ATR expressed as a percentage of the closing price, for cross-instrument comparison.                                                   | NULL    | [t_natr([12.0, 13.0, 14.0], [10.0, 11.0, 12.0], [11.0, 12.0, 13.0], 3)]              |
+| t_plus_di              | scalar        | Plus Directional Indicator: the smoothed ratio of upward directional movement to the average true range.                                                                  | NULL    | [t_plus_di([12.0, 13.0, 14.0], [10.0, 11.0, 12.0], [11.0, 12.0, 13.0], 3)]           |
+| t_plus_dm              | scalar        | Plus Directional Movement: the raw upward price movement used to compute the plus directional indicator.                                                                  | NULL    | [t_plus_dm([12.0, 13.0, 14.0], [10.0, 11.0, 12.0], 3)]                               |
+| t_roc                  | scalar        | Rate of Change: the percentage change between the current value and the value N periods ago.                                                                              | NULL    | [t_roc([1.0, 2.0, 3.0, 4.0, 5.0], 3)]                                                |
+| t_rocp                 | scalar        | Rate of Change (Percentage): the fractional change between the current value and the value N periods ago.                                                                 | NULL    | [t_rocp([1.0, 2.0, 3.0, 4.0, 5.0], 3)]                                               |
+| t_rocr                 | scalar        | Rate of Change (Ratio): the ratio of the current value to the value N periods ago.                                                                                        | NULL    | [t_rocr([1.0, 2.0, 3.0, 4.0, 5.0], 3)]                                               |
+| t_rocr100              | scalar        | Rate of Change (Ratio x100): the ratio of the current value to the value N periods ago, scaled by 100.                                                                    | NULL    | [t_rocr100([1.0, 2.0, 3.0, 4.0, 5.0], 3)]                                            |
+| t_rsi                  | scalar        | Relative Strength Index: a 0-100 momentum oscillator derived from the ratio of average gains to average losses over the period.                                           | NULL    | [t_rsi([1.0, 2.0, 3.0, 4.0, 5.0], 3)]                                                |
+| t_sin                  | scalar        | Sine of each input value, in radians.                                                                                                                                     | NULL    | [t_sin([1.0, 2.0, 3.0, 4.0, 5.0])]                                                   |
+| t_sinh                 | scalar        | Hyperbolic Sine of each input value.                                                                                                                                      | NULL    | [t_sinh([1.0, 2.0, 3.0, 4.0, 5.0])]                                                  |
+| t_sma                  | scalar        | Simple Moving Average: the unweighted mean of the previous N values.                                                                                                      | NULL    | [t_sma([1.0, 2.0, 3.0, 4.0, 5.0], 3)]                                                |
+| t_sqrt                 | scalar        | Square Root of each input value.                                                                                                                                          | NULL    | [t_sqrt([1.0, 2.0, 3.0, 4.0, 5.0])]                                                  |
+| t_stoch                | scalar        | Stochastic Oscillator: compares the current close to its recent high-low range, smoothed into %K and %D lines.                                                            | NULL    | [t_stoch([12.0, 13.0, 14.0], [10.0, 11.0, 12.0], [11.0, 12.0, 13.0], 5, 3, 0, 3, 0)] |
+| t_sum                  | scalar        | Rolling Summation: the sum of the last N values.                                                                                                                          | NULL    | [t_sum([1.0, 2.0, 3.0, 4.0, 5.0], 3)]                                                |
+| t_tan                  | scalar        | Tangent of each input value, in radians.                                                                                                                                  | NULL    | [t_tan([1.0, 2.0, 3.0, 4.0, 5.0])]                                                   |
+| t_tanh                 | scalar        | Hyperbolic Tangent of each input value.                                                                                                                                   | NULL    | [t_tanh([1.0, 2.0, 3.0, 4.0, 5.0])]                                                  |
+| t_tema                 | scalar        | Triple Exponential Moving Average: further reduces lag versus DEMA by combining three nested EMAs.                                                                        | NULL    | [t_tema([1.0, 2.0, 3.0, 4.0, 5.0], 3)]                                               |
+| t_trange               | scalar        | True Range: the greatest of the current high-low range, the gap up from the prior close, and the gap down from the prior close.                                           | NULL    | [t_trange([12.0, 13.0], [10.0, 11.0], [11.0, 12.0])]                                 |
+| t_trima                | scalar        | Triangular Moving Average: a doubly-smoothed moving average (an SMA of an SMA) that weights the middle of the window most heavily.                                        | NULL    | [t_trima([1.0, 2.0, 3.0, 4.0, 5.0], 3)]                                              |
+| t_trix                 | scalar        | Triple Smooth EMA Rate of Change: the rate of change of a triple-smoothed exponential moving average, used to filter out short-term noise.                                | NULL    | [t_trix([1.0, 2.0, 3.0, 4.0, 5.0], 3)]                                               |
+| t_tsf                  | scalar        | Time Series Forecast: the best-fit line through the last N points, projected one period forward.                                                                          | NULL    | [t_tsf([1.0, 2.0, 3.0, 4.0, 5.0], 3)]                                                |
+| t_typprice             | scalar        | Typical Price: the average of the high, low, and close for the period.                                                                                                    | NULL    | [t_typprice([12.0, 13.0], [10.0, 11.0], [11.0, 12.0])]                               |
+| t_wclprice             | scalar        | Weighted Close Price: the close weighted twice as heavily as the high and low.                                                                                            | NULL    | [t_wclprice([12.0, 13.0], [10.0, 11.0], [11.0, 12.0])]                               |
+| t_willr                | scalar        | Williams %R: a momentum oscillator measuring the close relative to the high-low range over the period, scaled -100 to 0.                                                  | NULL    | [t_willr([12.0, 13.0, 14.0], [10.0, 11.0, 12.0], [11.0, 12.0, 13.0], 3)]             |
+| t_wma                  | scalar        | Weighted Moving Average: a moving average where each value is weighted linearly by its recency, with the most recent value weighted highest.                              | NULL    | [t_wma([1.0, 2.0, 3.0, 4.0, 5.0], 3)]                                                |
+| ta_acos                | aggregate     | Arc Cosine: the inverse cosine of each input value, in radians.                                                                                                           | NULL    | [ta_acos(close)]                                                                     |
+| ta_ad                  | aggregate     | Chaikin Accumulation/Distribution Line: a volume-weighted running total of each period's position within its high-low range.                                              | NULL    | [ta_ad(high, low, close, volume)]                                                    |
+| ta_adx                 | aggregate     | Average Directional Movement Index: measures trend strength (not direction) by smoothing the directional movement index.                                                  | NULL    | [ta_adx(high, low, close, 3)]                                                        |
+| ta_adxr                | aggregate     | Average Directional Movement Rating: the average of the current and a prior ADX value, smoothing ADX further.                                                             | NULL    | [ta_adxr(high, low, close, 3)]                                                       |
+| ta_aroon               | aggregate     | Aroon Indicator: measures the time since the most recent highest high and lowest low within the period, as two 0-100 oscillators.                                         | NULL    | [ta_aroon(high, low, 14)]                                                            |
+| ta_asin                | aggregate     | Arc Sine: the inverse sine of each input value, in radians.                                                                                                               | NULL    | [ta_asin(close)]                                                                     |
+| ta_atan                | aggregate     | Arc Tangent: the inverse tangent of each input value, in radians.                                                                                                         | NULL    | [ta_atan(close)]                                                                     |
+| ta_atr                 | aggregate     | Average True Range: a Wilder-smoothed moving average of the true range, measuring volatility.                                                                             | NULL    | [ta_atr(high, low, close, 3)]                                                        |
+| ta_avgprice            | aggregate     | Average Price: the mean of the open, high, low, and close for the period.                                                                                                 | NULL    | [ta_avgprice(open, high, low, close)]                                                |
+| ta_bbands              | aggregate     | Bollinger Bands: a moving-average midline with upper and lower bands offset by a multiple of the rolling standard deviation.                                              | NULL    | [ta_bbands(close, 20, 2.0, 2.0, 0)]                                                  |
+| ta_bop                 | aggregate     | Balance of Power: measures buying versus selling pressure as the ratio of the close-open difference to the high-low range.                                                | NULL    | [ta_bop(open, high, low, close)]                                                     |
+| ta_cci                 | aggregate     | Commodity Channel Index: measures the deviation of the typical price from its moving average, relative to mean absolute deviation.                                        | NULL    | [ta_cci(high, low, close, 3)]                                                        |
+| ta_cdl2crows           | aggregate     | Two Crows candlestick pattern: a bearish reversal signal of two black candles gapping above an uptrend.                                                                   | NULL    | [ta_cdl2crows(open, high, low, close)]                                               |
+| ta_cdl3blackcrows      | aggregate     | Three Black Crows candlestick pattern: three consecutive long bearish candles signaling a downtrend.                                                                      | NULL    | [ta_cdl3blackcrows(open, high, low, close)]                                          |
+| ta_cdl3inside          | aggregate     | Three Inside Up/Down candlestick pattern: a reversal pattern confirmed by a third candle.                                                                                 | NULL    | [ta_cdl3inside(open, high, low, close)]                                              |
+| ta_cdl3linestrike      | aggregate     | Three-Line Strike candlestick pattern: three same-direction candles followed by a reversing strike candle.                                                                | NULL    | [ta_cdl3linestrike(open, high, low, close)]                                          |
+| ta_cdl3outside         | aggregate     | Three Outside Up/Down candlestick pattern: an engulfing pattern confirmed by a third candle.                                                                              | NULL    | [ta_cdl3outside(open, high, low, close)]                                             |
+| ta_cdl3starsinsouth    | aggregate     | Three Stars In The South candlestick pattern: a bullish reversal of three declining bearish candles with shrinking bodies.                                                | NULL    | [ta_cdl3starsinsouth(open, high, low, close)]                                        |
+| ta_cdl3whitesoldiers   | aggregate     | Three Advancing White Soldiers candlestick pattern: three consecutive long bullish candles signaling an uptrend.                                                          | NULL    | [ta_cdl3whitesoldiers(open, high, low, close)]                                       |
+| ta_cdladvanceblock     | aggregate     | Advance Block candlestick pattern: three bullish candles with progressively shrinking bodies, signaling weakening momentum.                                               | NULL    | [ta_cdladvanceblock(open, high, low, close)]                                         |
+| ta_cdlbelthold         | aggregate     | Belt-hold candlestick pattern: a long candle that opens at its extreme for the session.                                                                                   | NULL    | [ta_cdlbelthold(open, high, low, close)]                                             |
+| ta_cdlbreakaway        | aggregate     | Breakaway candlestick pattern: a gap followed by a reversal that closes back into the gap.                                                                                | NULL    | [ta_cdlbreakaway(open, high, low, close)]                                            |
+| ta_cdlclosingmarubozu  | aggregate     | Closing Marubozu candlestick pattern: a candle with no shadow on its closing side.                                                                                        | NULL    | [ta_cdlclosingmarubozu(open, high, low, close)]                                      |
+| ta_cdlconcealbabyswall | aggregate     | Concealing Baby Swallow candlestick pattern: a four-candle bearish continuation pattern.                                                                                  | NULL    | [ta_cdlconcealbabyswall(open, high, low, close)]                                     |
+| ta_cdlcounterattack    | aggregate     | Counterattack candlestick pattern: two opposite-colored candles that close at the same level.                                                                             | NULL    | [ta_cdlcounterattack(open, high, low, close)]                                        |
+| ta_cdldoji             | aggregate     | Doji candlestick pattern: a candle whose open and close are virtually equal, signaling indecision.                                                                        | NULL    | [ta_cdldoji(open, high, low, close)]                                                 |
+| ta_cdldojistar         | aggregate     | Doji Star candlestick pattern: a doji that gaps away from the previous candle.                                                                                            | NULL    | [ta_cdldojistar(open, high, low, close)]                                             |
+| ta_cdldragonflydoji    | aggregate     | Dragonfly Doji candlestick pattern: a doji with a long lower shadow and no upper shadow.                                                                                  | NULL    | [ta_cdldragonflydoji(open, high, low, close)]                                        |
+| ta_cdlengulfing        | aggregate     | Engulfing candlestick pattern: a candle whose body fully contains the prior candle's body.                                                                                | NULL    | [ta_cdlengulfing(open, high, low, close)]                                            |
+| ta_cdlgapsidesidewhite | aggregate     | Gap Side-by-Side White Lines candlestick pattern: two similarly-sized candles following a gap.                                                                            | NULL    | [ta_cdlgapsidesidewhite(open, high, low, close)]                                     |
+| ta_cdlgravestonedoji   | aggregate     | Gravestone Doji candlestick pattern: a doji with a long upper shadow and no lower shadow.                                                                                 | NULL    | [ta_cdlgravestonedoji(open, high, low, close)]                                       |
+| ta_cdlhammer           | aggregate     | Hammer candlestick pattern: a small body with a lower shadow at least twice the body length, in a downtrend.                                                              | NULL    | [ta_cdlhammer(open, high, low, close)]                                               |
+| ta_cdlhangingman       | aggregate     | Hanging Man candlestick pattern: a hammer-shaped candle occurring in an uptrend, signaling a bearish reversal.                                                            | NULL    | [ta_cdlhangingman(open, high, low, close)]                                           |
+| ta_cdlharami           | aggregate     | Harami candlestick pattern: a small candle whose body is contained within the prior candle's larger body.                                                                 | NULL    | [ta_cdlharami(open, high, low, close)]                                               |
+| ta_cdlharamicross      | aggregate     | Harami Cross candlestick pattern: a Harami pattern where the second candle is a doji.                                                                                     | NULL    | [ta_cdlharamicross(open, high, low, close)]                                          |
+| ta_cdlhighwave         | aggregate     | High-Wave Candle pattern: a small body with very long upper and lower shadows.                                                                                            | NULL    | [ta_cdlhighwave(open, high, low, close)]                                             |
+| ta_cdlhikkake          | aggregate     | Hikkake candlestick pattern: an inside-bar setup followed by a failed breakout.                                                                                           | NULL    | [ta_cdlhikkake(open, high, low, close)]                                              |
+| ta_cdlhikkakemod       | aggregate     | Modified Hikkake candlestick pattern: a Hikkake pattern confirmed by subsequent price action.                                                                             | NULL    | [ta_cdlhikkakemod(open, high, low, close)]                                           |
+| ta_cdlhomingpigeon     | aggregate     | Homing Pigeon candlestick pattern: two bearish candles where the second body is contained within the first.                                                               | NULL    | [ta_cdlhomingpigeon(open, high, low, close)]                                         |
+| ta_cdlidentical3crows  | aggregate     | Identical Three Crows candlestick pattern: three bearish candles that each open at the prior candle's close.                                                              | NULL    | [ta_cdlidentical3crows(open, high, low, close)]                                      |
+| ta_cdlinneck           | aggregate     | In-Neck candlestick pattern: a small bullish candle closing near the prior candle's low, in a downtrend.                                                                  | NULL    | [ta_cdlinneck(open, high, low, close)]                                               |
+| ta_cdlinvertedhammer   | aggregate     | Inverted Hammer candlestick pattern: a small body with a long upper shadow, in a downtrend.                                                                               | NULL    | [ta_cdlinvertedhammer(open, high, low, close)]                                       |
+| ta_cdlkicking          | aggregate     | Kicking candlestick pattern: two opposing marubozu candles separated by a gap.                                                                                            | NULL    | [ta_cdlkicking(open, high, low, close)]                                              |
+| ta_cdlkickingbylength  | aggregate     | Kicking by Length candlestick pattern: a Kicking pattern whose direction is determined by the longer marubozu.                                                            | NULL    | [ta_cdlkickingbylength(open, high, low, close)]                                      |
+| ta_cdlladderbottom     | aggregate     | Ladder Bottom candlestick pattern: a four-candle bearish-to-bullish reversal pattern.                                                                                     | NULL    | [ta_cdlladderbottom(open, high, low, close)]                                         |
+| ta_cdllongleggeddoji   | aggregate     | Long Legged Doji candlestick pattern: a doji with very long upper and lower shadows.                                                                                      | NULL    | [ta_cdllongleggeddoji(open, high, low, close)]                                       |
+| ta_cdllongline         | aggregate     | Long Line Candle pattern: a candle with an unusually long body.                                                                                                           | NULL    | [ta_cdllongline(open, high, low, close)]                                             |
+| ta_cdlmarubozu         | aggregate     | Marubozu candlestick pattern: a candle with no shadows, consisting purely of its body.                                                                                    | NULL    | [ta_cdlmarubozu(open, high, low, close)]                                             |
+| ta_cdlmatchinglow      | aggregate     | Matching Low candlestick pattern: two bearish candles that close at the same level.                                                                                       | NULL    | [ta_cdlmatchinglow(open, high, low, close)]                                          |
+| ta_cdlonneck           | aggregate     | On-Neck candlestick pattern: a bullish candle closing at the prior candle's low, in a downtrend.                                                                          | NULL    | [ta_cdlonneck(open, high, low, close)]                                               |
+| ta_cdlpiercing         | aggregate     | Piercing candlestick pattern: a bullish candle closing above the midpoint of the prior bearish candle's body.                                                             | NULL    | [ta_cdlpiercing(open, high, low, close)]                                             |
+| ta_cdlrickshawman      | aggregate     | Rickshaw Man candlestick pattern: a long-legged doji whose body sits near the center of its range.                                                                        | NULL    | [ta_cdlrickshawman(open, high, low, close)]                                          |
+| ta_cdlrisefall3methods | aggregate     | Rising/Falling Three Methods candlestick pattern: a continuation pattern of a strong candle, three small counter-trend candles, then a resuming strong candle.            | NULL    | [ta_cdlrisefall3methods(open, high, low, close)]                                     |
+| ta_cdlseparatinglines  | aggregate     | Separating Lines candlestick pattern: two opposite-colored candles that share the same opening price.                                                                     | NULL    | [ta_cdlseparatinglines(open, high, low, close)]                                      |
+| ta_cdlshootingstar     | aggregate     | Shooting Star candlestick pattern: an inverted-hammer-shaped candle occurring in an uptrend.                                                                              | NULL    | [ta_cdlshootingstar(open, high, low, close)]                                         |
+| ta_cdlshortline        | aggregate     | Short Line Candle pattern: a candle with an unusually short body.                                                                                                         | NULL    | [ta_cdlshortline(open, high, low, close)]                                            |
+| ta_cdlspinningtop      | aggregate     | Spinning Top candlestick pattern: a small body with upper and lower shadows of similar length.                                                                            | NULL    | [ta_cdlspinningtop(open, high, low, close)]                                          |
+| ta_cdlstalledpattern   | aggregate     | Stalled Pattern: three bullish candles where the third has a notably small body, signaling fading momentum.                                                               | NULL    | [ta_cdlstalledpattern(open, high, low, close)]                                       |
+| ta_cdlsticksandwich    | aggregate     | Stick Sandwich candlestick pattern: two same-close bearish candles sandwiching an opposite candle.                                                                        | NULL    | [ta_cdlsticksandwich(open, high, low, close)]                                        |
+| ta_cdltakuri           | aggregate     | Takuri candlestick pattern: a doji with an unusually long lower shadow.                                                                                                   | NULL    | [ta_cdltakuri(open, high, low, close)]                                               |
+| ta_cdltasukigap        | aggregate     | Tasuki Gap candlestick pattern: a gap followed by a candle that partially fills it.                                                                                       | NULL    | [ta_cdltasukigap(open, high, low, close)]                                            |
+| ta_cdlthrusting        | aggregate     | Thrusting candlestick pattern: a bullish candle closing below the midpoint of the prior bearish candle's body.                                                            | NULL    | [ta_cdlthrusting(open, high, low, close)]                                            |
+| ta_cdltristar          | aggregate     | Tristar candlestick pattern: three consecutive dojis with the middle one gapping from the others.                                                                         | NULL    | [ta_cdltristar(open, high, low, close)]                                              |
+| ta_cdlunique3river     | aggregate     | Unique 3 River candlestick pattern: a three-candle bullish reversal pattern.                                                                                              | NULL    | [ta_cdlunique3river(open, high, low, close)]                                         |
+| ta_cdlupsidegap2crows  | aggregate     | Upside Gap Two Crows candlestick pattern: two bearish candles gapping above an uptrend.                                                                                   | NULL    | [ta_cdlupsidegap2crows(open, high, low, close)]                                      |
+| ta_cdlxsidegap3methods | aggregate     | Upside/Downside Gap Three Methods candlestick pattern: a gap followed by three candles that close the gap.                                                                | NULL    | [ta_cdlxsidegap3methods(open, high, low, close)]                                     |
+| ta_ceil                | aggregate     | Ceiling: the smallest integer greater than or equal to each input value.                                                                                                  | NULL    | [ta_ceil(close)]                                                                     |
+| ta_cmo                 | aggregate     | Chande Momentum Oscillator: a -100 to 100 momentum oscillator based on the difference between the sum of recent gains and losses.                                         | NULL    | [ta_cmo(close, 3)]                                                                   |
+| ta_cos                 | aggregate     | Cosine of each input value, in radians.                                                                                                                                   | NULL    | [ta_cos(close)]                                                                      |
+| ta_cosh                | aggregate     | Hyperbolic Cosine of each input value.                                                                                                                                    | NULL    | [ta_cosh(close)]                                                                     |
+| ta_dema                | aggregate     | Double Exponential Moving Average: reduces the lag of a plain EMA by combining it with an EMA of itself.                                                                  | NULL    | [ta_dema(close, 3)]                                                                  |
+| ta_dx                  | aggregate     | Directional Movement Index: measures the difference between the plus and minus directional indicators relative to their sum.                                              | NULL    | [ta_dx(high, low, close, 3)]                                                         |
+| ta_ema                 | aggregate     | Exponential Moving Average: a weighted average that discounts older values exponentially, giving more weight to recent prices.                                            | NULL    | [ta_ema(close, 3)]                                                                   |
+| ta_exp                 | aggregate     | Exponential: e raised to the power of each input value.                                                                                                                   | NULL    | [ta_exp(close)]                                                                      |
+| ta_floor               | aggregate     | Floor: the largest integer less than or equal to each input value.                                                                                                        | NULL    | [ta_floor(close)]                                                                    |
+| ta_ht_dcperiod         | aggregate     | Hilbert Transform Dominant Cycle Period: the estimated length, in bars, of the dominant price cycle.                                                                      | NULL    | [ta_ht_dcperiod(close)]                                                              |
+| ta_ht_dcphase          | aggregate     | Hilbert Transform Dominant Cycle Phase: the phase angle, in degrees, of the dominant price cycle.                                                                         | NULL    | [ta_ht_dcphase(close)]                                                               |
+| ta_ht_phasor           | aggregate     | Hilbert Transform Phasor Components: the in-phase and quadrature components of the dominant price cycle.                                                                  | NULL    | [ta_ht_phasor(close)]                                                                |
+| ta_ht_sine             | aggregate     | Hilbert Transform SineWave: the sine and lead sine of the dominant cycle's phase angle.                                                                                   | NULL    | [ta_ht_sine(close)]                                                                  |
+| ta_ht_trendline        | aggregate     | Hilbert Transform Instantaneous Trendline: a Hilbert-smoothed trend component of the price series.                                                                        | NULL    | [ta_ht_trendline(close)]                                                             |
+| ta_ht_trendmode        | aggregate     | Hilbert Transform Trend vs Cycle Mode: returns 1 when the market is trending and 0 when it is in a cycling mode.                                                          | NULL    | [ta_ht_trendmode(close)]                                                             |
+| ta_kama                | aggregate     | Kaufman Adaptive Moving Average: a moving average whose smoothing adapts to market volatility and trend efficiency.                                                       | NULL    | [ta_kama(close, 3)]                                                                  |
+| ta_linearreg           | aggregate     | Linear Regression: the value of the best-fit line through the last N points, evaluated at the current point.                                                              | NULL    | [ta_linearreg(close, 3)]                                                             |
+| ta_linearreg_angle     | aggregate     | Linear Regression Angle: the angle, in degrees, of the slope of the best-fit line through the last N points.                                                              | NULL    | [ta_linearreg_angle(close, 3)]                                                       |
+| ta_linearreg_intercept | aggregate     | Linear Regression Intercept: the y-intercept of the best-fit line through the last N points.                                                                              | NULL    | [ta_linearreg_intercept(close, 3)]                                                   |
+| ta_linearreg_slope     | aggregate     | Linear Regression Slope: the slope of the best-fit line through the last N points.                                                                                        | NULL    | [ta_linearreg_slope(close, 3)]                                                       |
+| ta_ln                  | aggregate     | Natural Logarithm of each input value.                                                                                                                                    | NULL    | [ta_ln(close)]                                                                       |
+| ta_log10               | aggregate     | Base-10 Logarithm of each input value.                                                                                                                                    | NULL    | [ta_log10(close)]                                                                    |
+| ta_macd                | aggregate     | Moving Average Convergence/Divergence: the difference between a fast and slow EMA of the input, plus an EMA signal line and the histogram of their difference.            | NULL    | [ta_macd(close, 12, 26, 9)]                                                          |
+| ta_mama                | aggregate     | MESA Adaptive Moving Average: an EMA whose smoothing factor adapts to the dominant market cycle via the Hilbert Transform, paired with a slower following average (FAMA). | NULL    | [ta_mama(close, 0.5, 0.05)]                                                          |
+| ta_max                 | aggregate     | Highest Value over period: the maximum of the last N values.                                                                                                              | NULL    | [ta_max(close, 3)]                                                                   |
+| ta_maxindex            | aggregate     | Index of Highest Value: the position within the last N values where the maximum occurs.                                                                                   | NULL    | [ta_maxindex(close, 3)]                                                              |
+| ta_medprice            | aggregate     | Median Price: the midpoint between the high and low for the period.                                                                                                       | NULL    | [ta_medprice(high, low)]                                                             |
+| ta_midpoint            | aggregate     | MidPoint over period: the average of the highest and lowest value of the input within the period.                                                                         | NULL    | [ta_midpoint(close, 3)]                                                              |
+| ta_midprice            | aggregate     | Midpoint Price over period: the average of the highest high and lowest low over the period.                                                                               | NULL    | [ta_midprice(high, low, 3)]                                                          |
+| ta_min                 | aggregate     | Lowest Value over period: the minimum of the last N values.                                                                                                               | NULL    | [ta_min(close, 3)]                                                                   |
+| ta_minindex            | aggregate     | Index of Lowest Value: the position within the last N values where the minimum occurs.                                                                                    | NULL    | [ta_minindex(close, 3)]                                                              |
+| ta_minmax              | aggregate     | Computes the rolling minimum and maximum of the input over the given period in a single pass.                                                                             | NULL    | [ta_minmax(close, 3)]                                                                |
+| ta_minus_di            | aggregate     | Minus Directional Indicator: the smoothed ratio of downward directional movement to the average true range.                                                               | NULL    | [ta_minus_di(high, low, close, 3)]                                                   |
+| ta_minus_dm            | aggregate     | Minus Directional Movement: the raw downward price movement used to compute the minus directional indicator.                                                              | NULL    | [ta_minus_dm(high, low, 3)]                                                          |
+| ta_mom                 | aggregate     | Momentum: the difference between the current value and the value N periods ago.                                                                                           | NULL    | [ta_mom(close, 3)]                                                                   |
+| ta_natr                | aggregate     | Normalized Average True Range: the ATR expressed as a percentage of the closing price, for cross-instrument comparison.                                                   | NULL    | [ta_natr(high, low, close, 3)]                                                       |
+| ta_plus_di             | aggregate     | Plus Directional Indicator: the smoothed ratio of upward directional movement to the average true range.                                                                  | NULL    | [ta_plus_di(high, low, close, 3)]                                                    |
+| ta_plus_dm             | aggregate     | Plus Directional Movement: the raw upward price movement used to compute the plus directional indicator.                                                                  | NULL    | [ta_plus_dm(high, low, 3)]                                                           |
+| ta_roc                 | aggregate     | Rate of Change: the percentage change between the current value and the value N periods ago.                                                                              | NULL    | [ta_roc(close, 3)]                                                                   |
+| ta_rocp                | aggregate     | Rate of Change (Percentage): the fractional change between the current value and the value N periods ago.                                                                 | NULL    | [ta_rocp(close, 3)]                                                                  |
+| ta_rocr                | aggregate     | Rate of Change (Ratio): the ratio of the current value to the value N periods ago.                                                                                        | NULL    | [ta_rocr(close, 3)]                                                                  |
+| ta_rocr100             | aggregate     | Rate of Change (Ratio x100): the ratio of the current value to the value N periods ago, scaled by 100.                                                                    | NULL    | [ta_rocr100(close, 3)]                                                               |
+| ta_rsi                 | aggregate     | Relative Strength Index: a 0-100 momentum oscillator derived from the ratio of average gains to average losses over the period.                                           | NULL    | [ta_rsi(close, 3)]                                                                   |
+| ta_sin                 | aggregate     | Sine of each input value, in radians.                                                                                                                                     | NULL    | [ta_sin(close)]                                                                      |
+| ta_sinh                | aggregate     | Hyperbolic Sine of each input value.                                                                                                                                      | NULL    | [ta_sinh(close)]                                                                     |
+| ta_sma                 | aggregate     | Simple Moving Average: the unweighted mean of the previous N values.                                                                                                      | NULL    | [ta_sma(close, 3)]                                                                   |
+| ta_sqrt                | aggregate     | Square Root of each input value.                                                                                                                                          | NULL    | [ta_sqrt(close)]                                                                     |
+| ta_stoch               | aggregate     | Stochastic Oscillator: compares the current close to its recent high-low range, smoothed into %K and %D lines.                                                            | NULL    | [ta_stoch(high, low, close, 5, 3, 0, 3, 0)]                                          |
+| ta_sum                 | aggregate     | Rolling Summation: the sum of the last N values.                                                                                                                          | NULL    | [ta_sum(close, 3)]                                                                   |
+| ta_tan                 | aggregate     | Tangent of each input value, in radians.                                                                                                                                  | NULL    | [ta_tan(close)]                                                                      |
+| ta_tanh                | aggregate     | Hyperbolic Tangent of each input value.                                                                                                                                   | NULL    | [ta_tanh(close)]                                                                     |
+| ta_tema                | aggregate     | Triple Exponential Moving Average: further reduces lag versus DEMA by combining three nested EMAs.                                                                        | NULL    | [ta_tema(close, 3)]                                                                  |
+| ta_trange              | aggregate     | True Range: the greatest of the current high-low range, the gap up from the prior close, and the gap down from the prior close.                                           | NULL    | [ta_trange(high, low, close)]                                                        |
+| ta_trima               | aggregate     | Triangular Moving Average: a doubly-smoothed moving average (an SMA of an SMA) that weights the middle of the window most heavily.                                        | NULL    | [ta_trima(close, 3)]                                                                 |
+| ta_trix                | aggregate     | Triple Smooth EMA Rate of Change: the rate of change of a triple-smoothed exponential moving average, used to filter out short-term noise.                                | NULL    | [ta_trix(close, 3)]                                                                  |
+| ta_tsf                 | aggregate     | Time Series Forecast: the best-fit line through the last N points, projected one period forward.                                                                          | NULL    | [ta_tsf(close, 3)]                                                                   |
+| ta_typprice            | aggregate     | Typical Price: the average of the high, low, and close for the period.                                                                                                    | NULL    | [ta_typprice(high, low, close)]                                                      |
+| ta_wclprice            | aggregate     | Weighted Close Price: the close weighted twice as heavily as the high and low.                                                                                            | NULL    | [ta_wclprice(high, low, close)]                                                      |
+| ta_willr               | aggregate     | Williams %R: a momentum oscillator measuring the close relative to the high-low range over the period, scaled -100 to 0.                                                  | NULL    | [ta_willr(high, low, close, 3)]                                                      |
+| ta_wma                 | aggregate     | Weighted Moving Average: a moving average where each value is weighted linearly by its recency, with the most recent value weighted highest.                              | NULL    | [ta_wma(close, 3)]                                                                   |
 
 ### Overloaded Functions
 
@@ -362,6 +376,8 @@ This extension does not add any types.
 
 <div class="extension_settings_table"></div>
 
-This extension does not add any settings.
+|      name      |                       description                       | input_type | scope  | aliases | typed_value |
+|----------------|---------------------------------------------------------|------------|--------|---------|-------------|
+| temp_directory | Set the directory to which temporary files are written. | VARCHAR    | GLOBAL | []      | post.db.tmp |
 
 

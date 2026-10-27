@@ -90,15 +90,31 @@ extension:
 repo:
   andium: e404bc8c0d0b204b2f58e0c954881bc0f7d4ec70
   github: quackscience/duckdb-extension-tsid
-  ref: 186b60f519f443362c940b8014c8b0f480421ed5
+  ref: cd697d31c4e2aca2aaf42fca81fcb3f37000fd09
+  variegata: bd6d432b71cf69017654d8ddd28dd57c8e25f4f5
 
 extension_star_count: 7
 extension_star_count_pretty: 7
-extension_download_count: 741
-extension_download_count_pretty: 741
+extension_download_count: 25522
+extension_download_count_pretty: 25.5k
 image: '/images/community_extensions/social_preview/preview_community_extension_tsid.png'
 layout: community_extension_doc
 ---
+### Compatibility Matrix
+
+This table covers all DuckDB releases that have not reached [end-of-life](https://duckdb.org/release_calendar), including LTS releases, and shows the 2 most recent patch releases of each. Older patch releases are not listed, but the extension may be available for them as well.
+
+<div class="extension_compatibility_table"></div>
+
+| Platform | 1.4.4 | 1.4.5 | 1.5.5 | 1.5.6 | 2.0.0 |
+| :--- | :---: | :---: | :---: | :---: | :---: |
+| Linux AMD64 | ✅ | ✅ | ✅ | ✅ | ✅ |
+| Linux ARM64 | ✅ | ✅ | ✅ | ✅ | ✅ |
+| macOS AMD64 | ✅ | ✅ | ✅ | ✅ | ✅ |
+| macOS ARM64 | ✅ | ✅ | ✅ | ✅ | ✅ |
+| Windows AMD64 | ✅ | ✅ | ✅ | ✅ | ✅ |
+| Windows ARM64 | ❌ | ❌ | ❌ | ❌ | ❌ |
+| WebAssembly | ✅ | ✅ | ✅ | ✅ | ✅ |
 
 ### Installing and Loading
 ```sql
@@ -116,15 +132,11 @@ LOAD {{ page.extension.name }};
 ### About {{ page.extension.name }}
 {{ page.docs.extended_description }}
 {% endif %}
-
 ### Added Functions
 
 <div class="extension_functions_table"></div>
 
-|   function_name   | function_type |                                                                                                 description                                                                                                 | comment |                        examples                         |
-|-------------------|---------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|---------|---------------------------------------------------------|
-| tsid              | scalar        | Generates a new Time-Sorted Unique Identifier (TSID). TSIDs are chronologically sortable 128-bit unique identifiers that embed a timestamp, making them ideal for distributed systems and time-series data. | NULL    | [tsid()]                                                |
-| tsid_to_timestamp | scalar        | Extracts the embedded timestamp from a TSID. Returns the timestamp that was recorded when the TSID was generated.                                                                                           | NULL    | [tsid_to_timestamp('0193b9c8d23d7192bc1cc82b43e6e8f3')] |
+This extension does not add any functions.
 
 ### Overloaded Functions
 

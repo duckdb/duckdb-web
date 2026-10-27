@@ -66,15 +66,30 @@ extension:
 repo:
   andium: 5328a2ff7100887263259ccc5ad8c03b8c6bc58a
   github: quackscience/duckdb-extension-openprompt
-  ref: a99c1f62d72eb46d3b632b76a6534540ff297254
+  ref: 725b1a99a20c1f627b81fa86c026f7d2b9146576
 
 extension_star_count: 62
 extension_star_count_pretty: 62
-extension_download_count: 755
-extension_download_count_pretty: 755
+extension_download_count: 25490
+extension_download_count_pretty: 25.5k
 image: '/images/community_extensions/social_preview/preview_community_extension_open_prompt.png'
 layout: community_extension_doc
 ---
+### Compatibility Matrix
+
+This table covers all DuckDB releases that have not reached [end-of-life](https://duckdb.org/release_calendar), including LTS releases, and shows the 2 most recent patch releases of each. Older patch releases are not listed, but the extension may be available for them as well.
+
+<div class="extension_compatibility_table"></div>
+
+| Platform | 1.4.4 | 1.4.5 | 1.5.5 | 1.5.6 | 2.0.0 |
+| :--- | :---: | :---: | :---: | :---: | :---: |
+| Linux AMD64 | ✅ | ✅ | ✅ | ✅ | ✅ |
+| Linux ARM64 | ✅ | ✅ | ✅ | ✅ | ✅ |
+| macOS AMD64 | ✅ | ✅ | ✅ | ✅ | ✅ |
+| macOS ARM64 | ✅ | ✅ | ✅ | ✅ | ✅ |
+| Windows AMD64 | ✅ | ✅ | ✅ | ✅ | ✅ |
+| Windows ARM64 | ❌ | ❌ | ❌ | ❌ | ❌ |
+| WebAssembly | ✅ | ✅ | ✅ | ✅ | ✅ |
 
 ### Installing and Loading
 ```sql
@@ -92,21 +107,11 @@ LOAD {{ page.extension.name }};
 ### About {{ page.extension.name }}
 {{ page.docs.extended_description }}
 {% endif %}
-
 ### Added Functions
 
 <div class="extension_functions_table"></div>
 
-|  function_name  | function_type |                              description                               | comment |                          examples                           |
-|-----------------|---------------|------------------------------------------------------------------------|---------|-------------------------------------------------------------|
-| open_prompt     | scalar        | Send a prompt to an LLM API using a specific model                     | NULL    | [open_prompt('Explain SQL', 'gpt-4')]                       |
-| open_prompt     | scalar        | Send a prompt to an LLM API with a system prompt and structured output | NULL    | [open_prompt('Hello', 'gpt-4', '{}', 'You are helpful')]    |
-| open_prompt     | scalar        | Send a prompt to an LLM API with structured JSON output                | NULL    | [open_prompt('Extract name', 'gpt-4', '{"type":"object"}')] |
-| open_prompt     | scalar        | Send a prompt to an OpenAI-compatible LLM API and return the response  | NULL    | [open_prompt('What is DuckDB?')]                            |
-| set_api_timeout | scalar        | Set the API timeout in seconds for LLM requests                        | NULL    | [set_api_timeout('30')]                                     |
-| set_api_token   | scalar        | Set the API token for LLM authentication                               | NULL    | [set_api_token('sk-...')]                                   |
-| set_api_url     | scalar        | Set the API URL for LLM endpoint                                       | NULL    | [set_api_url('https://api.openai.com/v1/chat/completions')] |
-| set_model_name  | scalar        | Set the default model name for LLM requests                            | NULL    | [set_model_name('gpt-4')]                                   |
+This extension does not add any functions.
 
 ### Overloaded Functions
 

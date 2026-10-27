@@ -8,7 +8,7 @@ excerpt: |
 extension:
   name: faiss
   description: Provides access to faiss indices from DuckDB.
-  version: 0.12.1
+  version: 0.12.2
   language: C++
   build: cmake
   license: MIT
@@ -17,12 +17,10 @@ extension:
     - arjenpdevries
   excluded_platforms: "wasm_mvp;wasm_eh;wasm_threads"
   requires_toolchains: "fortran;omp"
-  vcpkg_url: "https://github.com/microsoft/vcpkg.git"
-  vcpkg_commit: "26826180d398b4bb4f0453ae9d38a1c2c4d472dc"
 
 repo:
   github: "duckdb-faiss-ext/duckdb-faiss-ext"
-  ref: "e44df640b1def08315af80c01ce6207062cc7d64"
+  ref: "c8fb12d213fc232c98c61f8b230cfa13c52c6f26"
 
 docs:
   hello_world: |
@@ -46,13 +44,28 @@ docs:
 
     Some (most) indices are not supported for gpus, however this is very easily resolvable. Please open an issue over at our repository in order to get this resolved!
 
-extension_star_count: 32
-extension_star_count_pretty: 32
-extension_download_count: 830
-extension_download_count_pretty: 830
+extension_star_count: 33
+extension_star_count_pretty: 33
+extension_download_count: 15111
+extension_download_count_pretty: 15.1k
 image: '/images/community_extensions/social_preview/preview_community_extension_faiss.png'
 layout: community_extension_doc
 ---
+### Compatibility Matrix
+
+This table covers all DuckDB releases that have not reached [end-of-life](https://duckdb.org/release_calendar), including LTS releases, and shows the 2 most recent patch releases of each. Older patch releases are not listed, but the extension may be available for them as well.
+
+<div class="extension_compatibility_table"></div>
+
+| Platform | 1.4.4 | 1.4.5 | 1.5.5 | 1.5.6 | 2.0.0 |
+| :--- | :---: | :---: | :---: | :---: | :---: |
+| Linux AMD64 | ✅ | ❌ | ✅ | ✅ | ✅ |
+| Linux ARM64 | ✅ | ❌ | ✅ | ✅ | ✅ |
+| macOS AMD64 | ❌ | ❌ | ✅ | ✅ | ❌ |
+| macOS ARM64 | ✅ | ❌ | ✅ | ✅ | ✅ |
+| Windows AMD64 | ✅ | ❌ | ✅ | ✅ | ✅ |
+| Windows ARM64 | ❌ | ❌ | ❌ | ❌ | ❌ |
+| WebAssembly | ❌ | ❌ | ❌ | ❌ | ❌ |
 
 ### Installing and Loading
 ```sql
@@ -70,7 +83,6 @@ LOAD {{ page.extension.name }};
 ### About {{ page.extension.name }}
 {{ page.docs.extended_description }}
 {% endif %}
-
 ### Added Functions
 
 <div class="extension_functions_table"></div>

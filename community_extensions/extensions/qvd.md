@@ -8,7 +8,7 @@ excerpt: |
 extension:
   name: qvd
   description: Read (streaming) and write Qlik QVD files
-  version: 1.0.3
+  version: 1.0.7
   language: Rust
   build: cmake          # community label; the actual build goes through the Rust C-API Makefile
   license: Apache-2.0
@@ -20,7 +20,8 @@ extension:
 
 repo:
   github: snouhaud/DuckDB-QVD-Extension
-  ref: f9870d64292f5a065e67b636ff714e966ea46536
+  variegata: 568d26aba339becaaded1ee1ffed0b09a88c08bc
+  ref: 568d26aba339becaaded1ee1ffed0b09a88c08bc
 
 docs:
   hello_world: |
@@ -31,8 +32,8 @@ docs:
     SELECT * FROM read_qvd('sales.qvd');
     SELECT * FROM read_qvd('data/*.qvd');         -- glob
 
-    -- Write
-    COPY (SELECT * FROM sales) TO 'output.qvd' (FORMAT qvd, FIELD_NAMES (a, b));
+    -- Write (field names via FIELD_NAMES, one per column)
+    COPY (SELECT id, amount FROM sales) TO 'output.qvd' (FORMAT qvd, FIELD_NAMES (id, amount));
 
     -- Import
     COPY sales FROM 'output.qvd' (FORMAT qvd);
@@ -44,15 +45,34 @@ docs:
       queries over large files). Native typing `BIGINT`/`DOUBLE`/`VARCHAR`/`DATE`/
       `TIMESTAMP`/`TIME`/`INTERVAL`, projection pushdown and multi-file glob.
     - `COPY ... TO (FORMAT qvd)` write with `FIELD_NAMES` option, and
-      `COPY tbl FROM 'x.qvd' (FORMAT qvd)` import.
+      `COPY tbl FROM 'x.qvd' (FORMAT qvd)` import (fields by position; target
+      column types must match the inferred ones).
+    - QVD headers are treated as untrusted: sizes and offsets are validated
+      against the file before reading, so corrupt files fail cleanly.
+    - Stable C ABI: one binary for DuckDB 1.5.6 and 2.0.x.
 
 extension_star_count: 2
 extension_star_count_pretty: 2
-extension_download_count: 1060
-extension_download_count_pretty: 1.1k
+extension_download_count: 4881
+extension_download_count_pretty: 4.9k
 image: '/images/community_extensions/social_preview/preview_community_extension_qvd.png'
 layout: community_extension_doc
 ---
+### Compatibility Matrix
+
+This table covers all DuckDB releases that have not reached [end-of-life](https://duckdb.org/release_calendar), including LTS releases, and shows the 2 most recent patch releases of each. Older patch releases are not listed, but the extension may be available for them as well.
+
+<div class="extension_compatibility_table"></div>
+
+| Platform | 1.4.4 | 1.4.5 | 1.5.5 | 1.5.6 | 2.0.0 |
+| :--- | :---: | :---: | :---: | :---: | :---: |
+| Linux AMD64 | ❌ | ❌ | ✅ | ❌ | ✅ |
+| Linux ARM64 | ❌ | ❌ | ✅ | ❌ | ✅ |
+| macOS AMD64 | ❌ | ❌ | ✅ | ❌ | ✅ |
+| macOS ARM64 | ❌ | ❌ | ✅ | ❌ | ✅ |
+| Windows AMD64 | ❌ | ❌ | ✅ | ❌ | ✅ |
+| Windows ARM64 | ❌ | ❌ | ❌ | ❌ | ❌ |
+| WebAssembly | ❌ | ❌ | ❌ | ❌ | ❌ |
 
 ### Installing and Loading
 ```sql
@@ -70,7 +90,6 @@ LOAD {{ page.extension.name }};
 ### About {{ page.extension.name }}
 {{ page.docs.extended_description }}
 {% endif %}
-
 ### Added Functions
 
 <div class="extension_functions_table"></div>
@@ -95,6 +114,8 @@ This extension does not add any types.
 
 <div class="extension_settings_table"></div>
 
-This extension does not add any settings.
+|      name      |                       description                       | input_type | scope  | aliases | typed_value |
+|----------------|---------------------------------------------------------|------------|--------|---------|-------------|
+| temp_directory | Set the directory to which temporary files are written. | VARCHAR    | GLOBAL | []      | post.db.tmp |
 
 

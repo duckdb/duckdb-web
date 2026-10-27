@@ -8,7 +8,7 @@ excerpt: |
 extension:
   name: mongo
   description: Integrates DuckDB with MongoDB, enabling direct SQL queries and writes over MongoDB collections without ETL
-  version: 0.3.0
+  version: 0.4.0
   language: C++
   build: cmake
   license: MIT
@@ -19,7 +19,7 @@ extension:
 
 repo:
   github: stephaniewang526/duckdb-mongo
-  ref: cce7784951aa452b16aaab736c7b95e87c7add2b
+  ref: 50e20bdfb3649d6d4ff296a41557caddb69763cc
 
 docs:
   hello_world: |
@@ -39,10 +39,12 @@ docs:
     **Reading data:**
     - Automatic schema inference from sampled documents, with nested document flattening
     - User-provided schemas and Atlas SQL `__schema` document support
-    - Query pushdown to MongoDB for filters, projections, limits, TopN, and aggregations (COUNT, SUM, MIN, MAX, AVG)
+    - Query pushdown to MongoDB for filters (including struct field predicates), projections, limits, TopN, and aggregations (COUNT, SUM, MIN, MAX, AVG)
+    - `mongo_sample_size` setting to control schema inference sampling
+    - `MongoQuery` log type to inspect the exact commands sent to MongoDB
     - BSON type mapping including ObjectId, Decimal128, arrays, and nested documents
 
-    **Writing data (new in v0.3.0):**
+    **Writing data:**
     - `INSERT INTO` -- insert rows from any DuckDB source (CSV, Parquet, other databases, subqueries)
     - `CREATE TABLE AS SELECT` -- create new MongoDB collections from query results
     - `COPY TO (FORMAT mongo)` -- bulk-load data into MongoDB collections
@@ -55,13 +57,28 @@ docs:
 
     For detailed setup and usage instructions, visit the [extension repository](https://github.com/stephaniewang526/duckdb-mongo).
 
-extension_star_count: 59
-extension_star_count_pretty: 59
-extension_download_count: 4308
-extension_download_count_pretty: 4.3k
+extension_star_count: 60
+extension_star_count_pretty: 60
+extension_download_count: 23260
+extension_download_count_pretty: 23.3k
 image: '/images/community_extensions/social_preview/preview_community_extension_mongo.png'
 layout: community_extension_doc
 ---
+### Compatibility Matrix
+
+This table covers all DuckDB releases that have not reached [end-of-life](https://duckdb.org/release_calendar), including LTS releases, and shows the 2 most recent patch releases of each. Older patch releases are not listed, but the extension may be available for them as well.
+
+<div class="extension_compatibility_table"></div>
+
+| Platform | 1.4.4 | 1.4.5 | 1.5.5 | 1.5.6 | 2.0.0 |
+| :--- | :---: | :---: | :---: | :---: | :---: |
+| Linux AMD64 | ✅ | ✅ | ✅ | ✅ | ✅ |
+| Linux ARM64 | ✅ | ✅ | ✅ | ✅ | ✅ |
+| macOS AMD64 | ✅ | ✅ | ✅ | ✅ | ✅ |
+| macOS ARM64 | ✅ | ✅ | ✅ | ✅ | ✅ |
+| Windows AMD64 | ✅ | ✅ | ✅ | ✅ | ✅ |
+| Windows ARM64 | ❌ | ❌ | ❌ | ❌ | ❌ |
+| WebAssembly | ❌ | ❌ | ❌ | ❌ | ❌ |
 
 ### Installing and Loading
 ```sql
@@ -79,7 +96,6 @@ LOAD {{ page.extension.name }};
 ### About {{ page.extension.name }}
 {{ page.docs.extended_description }}
 {% endif %}
-
 ### Added Functions
 
 <div class="extension_functions_table"></div>
@@ -105,8 +121,10 @@ This extension does not add any types.
 
 <div class="extension_settings_table"></div>
 
-|           name           |                                                                                              description                                                                                              | input_type | scope  | aliases |
-|--------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|------------|--------|---------|
-| mongo_enable_direct_scan | Allow mongo_scan to use a connection string that is not from an attached MongoDB database. When false, mongo_scan is only allowed if the connection string exactly matches an attached Mongo catalog. | BOOLEAN    | GLOBAL | []      |
+|           name           |                                                                                                                                                             description                                                                                                                                                              | input_type | scope  | aliases | typed_value |
+|--------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|------------|--------|---------|-------------|
+| mongo_enable_direct_scan | Allow mongo_scan to use a connection string that is not from an attached MongoDB database. When false, mongo_scan is only allowed if the connection string exactly matches an attached Mongo catalog.                                                                                                                                | BOOLEAN    | GLOBAL | []      | true        |
+| mongo_sample_size        | Number of documents sampled for schema inference when mongo_scan is called without an explicit sample_size, including collections queried through an attached catalog. Inferred schemas are cached per attached collection; call mongo_clear_cache() or re-ATTACH after changing this to re-infer. Must be between 1 and 2147483647. | BIGINT     | GLOBAL | []      | 100         |
+| temp_directory           | Set the directory to which temporary files are written.                                                                                                                                                                                                                                                                              | VARCHAR    | GLOBAL | []      | post.db.tmp |
 
 

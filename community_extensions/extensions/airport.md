@@ -24,15 +24,31 @@ extension:
 repo:
   andium: 3c12d74372ff8e7f5b4577da7dce3c36aca0bb6f
   github: query-farm/airport
-  ref: 23f967d317f89a749c1e4ae68460f721141e0c0a
+  ref: d6aed16bf9a1787c26602f146dd92debd939f33e
+  variegata: dc4208dc3c544169def364f179771e8ef9e7d444
 
 extension_star_count: 350
 extension_star_count_pretty: 350
-extension_download_count: 1330
-extension_download_count_pretty: 1.3k
+extension_download_count: 16954
+extension_download_count_pretty: 17.0k
 image: '/images/community_extensions/social_preview/preview_community_extension_airport.png'
 layout: community_extension_doc
 ---
+### Compatibility Matrix
+
+This table covers all DuckDB releases that have not reached [end-of-life](https://duckdb.org/release_calendar), including LTS releases, and shows the 2 most recent patch releases of each. Older patch releases are not listed, but the extension may be available for them as well.
+
+<div class="extension_compatibility_table"></div>
+
+| Platform | 1.4.4 | 1.4.5 | 1.5.5 | 1.5.6 | 2.0.0 |
+| :--- | :---: | :---: | :---: | :---: | :---: |
+| Linux AMD64 | ✅ | ❌ | ✅ | ✅ | ✅ |
+| Linux ARM64 | ✅ | ❌ | ✅ | ✅ | ✅ |
+| macOS AMD64 | ✅ | ❌ | ✅ | ✅ | ✅ |
+| macOS ARM64 | ✅ | ❌ | ✅ | ✅ | ✅ |
+| Windows AMD64 | ✅ | ❌ | ✅ | ✅ | ✅ |
+| Windows ARM64 | ❌ | ❌ | ❌ | ❌ | ❌ |
+| WebAssembly | ❌ | ❌ | ❌ | ❌ | ❌ |
 
 ### Installing and Loading
 ```sql
@@ -50,22 +66,11 @@ LOAD {{ page.extension.name }};
 ### About {{ page.extension.name }}
 {{ page.docs.extended_description }}
 {% endif %}
-
 ### Added Functions
 
 <div class="extension_functions_table"></div>
 
-|    function_name    | function_type |                                       description                                        | comment |                                    examples                                    |
-|---------------------|---------------|------------------------------------------------------------------------------------------|---------|--------------------------------------------------------------------------------|
-| airport_action      | table         | Execute an Arrow Flight action on a server with a parameter.                             | NULL    | [SELECT * FROM airport_action('grpc://localhost:8815', 'my_action', 'param');] |
-| airport_action      | table         | Execute an Arrow Flight action on a server.                                              | NULL    | [SELECT * FROM airport_action('grpc://localhost:8815', 'my_action');]          |
-| airport_databases   | table_macro   | NULL                                                                                     | NULL    |                                                                                |
-| airport_flights     | table         | List the flights available on an Arrow Flight server, filtered by criteria.              | NULL    | [SELECT * FROM airport_flights('grpc://localhost:8815', '');]                  |
-| airport_flights     | table         | List the flights available on an Arrow Flight server.                                    | NULL    | [SELECT * FROM airport_flights('grpc://localhost:8815');]                      |
-| airport_take_flight | table         | Read an Arrow Flight stream from a server using a flight descriptor (path or command).   | NULL    | [SELECT * FROM airport_take_flight('grpc://localhost:8815', ['my_table']);]    |
-| airport_take_flight | table         | Read an Arrow Flight stream from a server using internal pointers (used by the catalog). | NULL    |                                                                                |
-| airport_user_agent  | scalar        | NULL                                                                                     | NULL    |                                                                                |
-| airport_version     | scalar        | NULL                                                                                     | NULL    |                                                                                |
+This extension does not add any functions.
 
 ### Overloaded Functions
 

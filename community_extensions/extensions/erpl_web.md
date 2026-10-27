@@ -17,15 +17,31 @@ extension:
     - jrosskopf
 repo:
   github: DataZooDE/erpl-odata
-  ref: 98972212ae3770928f55c0de787b4dcb80904077
+  ref: e7cc326bd2e126189561c9469fa9aabbc33134bd
+  variegata: e7cc326bd2e126189561c9469fa9aabbc33134bd
 
 extension_star_count: 31
 extension_star_count_pretty: 31
-extension_download_count: 300
-extension_download_count_pretty: 300
+extension_download_count: 5062
+extension_download_count_pretty: 5.1k
 image: '/images/community_extensions/social_preview/preview_community_extension_erpl_odata.png'
 layout: community_extension_doc
 ---
+### Compatibility Matrix
+
+This table covers all DuckDB releases that have not reached [end-of-life](https://duckdb.org/release_calendar), including LTS releases, and shows the 2 most recent patch releases of each. Older patch releases are not listed, but the extension may be available for them as well.
+
+<div class="extension_compatibility_table"></div>
+
+| Platform | 1.4.4 | 1.4.5 | 1.5.5 | 1.5.6 | 2.0.0 |
+| :--- | :---: | :---: | :---: | :---: | :---: |
+| Linux AMD64 | ✅ | ❌ | ✅ | ✅ | ❌ |
+| Linux ARM64 | ✅ | ❌ | ✅ | ✅ | ❌ |
+| macOS AMD64 | ✅ | ❌ | ✅ | ✅ | ❌ |
+| macOS ARM64 | ✅ | ❌ | ✅ | ✅ | ❌ |
+| Windows AMD64 | ✅ | ❌ | ✅ | ✅ | ❌ |
+| Windows ARM64 | ❌ | ❌ | ❌ | ❌ | ❌ |
+| WebAssembly | ❌ | ❌ | ❌ | ❌ | ❌ |
 
 ### Installing and Loading
 ```sql
@@ -43,5 +59,4 @@ LOAD {{ page.extension.name }};
 ### About {{ page.extension.name }}
 {{ page.docs.extended_description }}
 {% endif %}
-
 
