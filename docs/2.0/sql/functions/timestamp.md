@@ -109,7 +109,7 @@ In general, if the function needs to examine the parts of the infinite date, the
 
 <div class="nostroke_table"></div>
 
-| **Description** | Returns the current timestamp with time zone (at the start of the transaction). |
+| **Description** | Returns the current `TIMESTAMP` value (at the start of the transaction). |
 | **Example** | `current_localtimestamp()` |
 | **Result** | `2024-11-30 13:28:48.895` |
 
