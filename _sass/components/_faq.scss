@@ -64,7 +64,7 @@ body.documentation main .wrap.frequentlyaskedquestions{
 					transform: rotate(180deg);
 		}
 		&:hover{
-			border-color: var(--doc-codebox-border-color);
+			border-color: var(--border-color);
 		}
 	}
 	.answer{

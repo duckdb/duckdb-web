@@ -69,7 +69,7 @@ a.github:hover .starcount{
 }
 
 header .headerline .headercontent .options button.mode{
-	border-color: var(--menu-topmenu-searchbar-border-color);
+	border-color: var(--border-color);
 	color: var(--lake-nav-icon);
 	&:hover{
 		border-color: var(--lake-nav-icon-hover);
@@ -78,7 +78,7 @@ header .headerline .headercontent .options button.mode{
 }
 
 .hamburger{
-	border-color: var(--menu-topmenu-searchbar-border-color);
+	border-color: var(--border-color);
 	.icon{
 		color: var(--lake-nav-icon);
 	}
@@ -101,12 +101,12 @@ body.documentation div.version > div:first-child:hover{
 
 @media (hover: none) {
 	header .headerline .headercontent .options button.mode:hover{
-		border-color: var(--menu-topmenu-searchbar-border-color) !important;
+		border-color: var(--border-color) !important;
 		color: var(--lake-nav-icon) !important;
 	}
 	body.documentation .opensearch:hover,
 	body.documentation div.version > div:first-child:hover{
-		border-color: var(--menu-topmenu-searchbar-border-color) !important;
+		border-color: var(--border-color) !important;
 	}
 }
 
@@ -121,7 +121,7 @@ body.landing header .headerline{
 	}
 	.headercontent .landingmenu .hamburger{
 		background: transparent;
-		border-color: var(--main-no-nav-icon-border);
+		border-color: var(--border-color);
 		transition: background .3s, border-color .3s;
 		&:hover{
 			border-color: var(--lake-nav-icon-hover);
@@ -129,7 +129,7 @@ body.landing header .headerline{
 	}
 	.headercontent .options button.mode{
 		background: transparent;
-		border-color: var(--main-no-nav-icon-border);
+		border-color: var(--border-color);
 		&:hover{
 			border-color: var(--lake-nav-icon-hover);
 			color: var(--lake-nav-icon-hover);
@@ -138,7 +138,7 @@ body.landing header .headerline{
 
 	&.header-scrolled,
 	&:hover{
-		border-bottom-color: var(--main-codebox-border-color, #E6E6E6);
+		border-bottom-color: var(--border-color);
 
 		&::before {
 			background: var(--menu-topmenu-background-color, rgba(250, 250, 250, 0.60));
@@ -295,7 +295,7 @@ body.landing{
 			}
 			.highlight{
 				background: #8F8F8F0F;
-				border: 1px solid var(--main-codebox-border-color, #E6E6E6);
+				border: 1px solid var(--border-color);
 				margin: 0;
 			}
 		}
@@ -438,7 +438,7 @@ section.architecture {
 		gap: 30px;
 		padding: 24px;
 		border-radius: var(--page-radius-box);
-		border: 1px solid var(--main-codebox-border-color, rgba(13,13,13,0.08));
+		border: 1px solid var(--border-color);
 		background: var(--main-codebox-main-background-color, rgba(250,250,250,0.8));
 		backdrop-filter: blur(2px);
 		box-shadow: 2px 2px 24px 0px var(--main-codebox-dropshadow, rgba(0,0,0,0.03));
@@ -457,7 +457,7 @@ section.architecture {
 			position: relative;
 			.select-highlight{
 				position: absolute;
-				background: var(--doc-sidebar-selected-background-color, #f2f2f2);
+				background: var(--element-background-color);
 				border-radius: var(--page-radius-pill);
 				transition: all 0.3s ease;
 				z-index: 0;
@@ -493,7 +493,7 @@ section.architecture {
 		.database,
 		.storage {
 			border-radius: var(--page-radius-box);
-			border: 1px solid var(--doc-codebox-border-color, #E6E6E6);
+			border: 1px solid var(--border-color);
 			background: var(--doc-codebox-background-color, #F2F2F2);
 			padding: 20px;
 			position: relative;
@@ -1033,7 +1033,7 @@ body.manifesto{
 
 code.highlighter-rouge,
 code.language-plaintext {
-	border: 1px solid var(--doc-codebox-border-color, #E6E6E6);
+	border: 1px solid var(--border-color);
 	background: var(--doc-codebox-background-color, #F2F2F2);
 	font-family: $fontMonoMedium;
 	border-radius: var(--page-radius-xs);
@@ -1087,7 +1087,7 @@ div.highlight {
 	overflow: hidden;
 	border-radius: var(--page-radius-box);
 	background: var(--doc-codebox-background-color, #F2F2F2);
-	border: 1px solid var(--doc-codebox-border-color, #D9D9D9);
+	border: 1px solid var(--border-color);
 
 	transition: border-color 0.3s;
 	-webkit-transition: border-color 0.3s;
