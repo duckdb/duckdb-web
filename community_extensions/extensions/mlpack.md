@@ -131,11 +131,11 @@ LOAD {{ page.extension.name }};
 | mlpack_naive_bayes_pred                | table         | predict classification using stored naive Bayes model         | NULL                                                                                                                  | NULL     |
 | mlpack_random_forest_train             | table         | use random forest to train and store a model                  | parameters 'nclasses', 'ntrees', 'seed', 'threads' and 'silent'                                                       | NULL     |
 | mlpack_random_forest_pred              | table         | predict classification using stored random forest model       | NULL                                                                                                                  | NULL     |
+| mlpack_softmax_regression_fit          | table         | fit and store softmax regression classification               | parameters 'numClasses', 'lambda', 'fitIntercept', 'silent'                                                           | NULL     |
 | mlpack_softmax_regression_pred         | table         | predict classification using softmax regression model         | NULL                                                                                                                  | NULL     |
 | mlpack_kmeans                          | table         | use kmeans unsupervised clustering                            | parameters 'clusters', and 'iterations'                                                                               | NULL     |
 | mlpack_mlpack_version                  | scalar        | returns the version string for the mlpack version used        | NULL                                                                                                                  | NULL     |
 | mlpack_armadillo_version               | scalar        | returns the version string for the armadillo version used     | NULL                                                                                                                  | NULL     |
-| mlpack_softmax_regression_fit          | table         | NULL                                                          | NULL                                                                                                                  | NULL     |
 
 ### Overloaded Functions
 
