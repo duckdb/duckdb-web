@@ -58,7 +58,7 @@ This section describes functions and operators for examining and manipulating [`
 | [`lpad(string, count, character)`](#lpadstring-count-character) | Pads the `string` with the `character` on the left until it has `count` characters. Truncates the `string` on the right if it has more than `count` characters. |
 | [`ltrim(string[, characters])`](#ltrimstring-characters) | Removes any occurrences of any of the `characters` from the left side of the `string`. `characters` defaults to `space`. |
 | [`md5(string)`](#md5string) | Returns the MD5 hash of the `string` as a `VARCHAR`. |
-| [`md5_number(string)`](#md5_numberstring) | Returns the MD5 hash of the `string` as a `HUGEINT`. |
+| [`md5_number(string)`](#md5_numberstring) | Returns the MD5 hash of the `string` as a `UHUGEINT`. |
 | [`md5_number_lower(string)`](#md5_number_lowerstring) | Returns the lower 64-bit segment of the MD5 hash of the `string` as a `UBIGINT`. |
 | [`md5_number_upper(string)`](#md5_number_upperstring) | Returns the upper 64-bit segment of the MD5 hash of the `string` as a `UBIGINT`. |
 | [`nfc_normalize(string)`](#nfc_normalizestring) | Converts `string` to Unicode NFC normalized string. Useful for comparisons and ordering if text data is mixed between NFC normalized and not. |
@@ -426,7 +426,7 @@ This section describes functions and operators for examining and manipulating [`
 
 <div class="nostroke_table"></div>
 
-| **Description** | Returns the MD5 hash of the `string` as a `HUGEINT`. |
+| **Description** | Returns the MD5 hash of the `string` as a `UHUGEINT`. |
 | **Example** | `md5_number('abc')` |
 | **Result** | `152195979970564155685860391459828531600` |
 
