@@ -34,7 +34,7 @@ import duckdb
 duckdb.sql("FROM 'sales.csv'").show()
 ```
 
-**“There actually is something out there that's easy to use and doesn't require a bunch of infrastructure overhead,”** he says. No JVM, no knobs to turn. From local files, he moved on to files on Amazon S3, over the [`s3://`]({% link docs/current/core_extensions/httpfs/s3api.md %}) protocol:
+**“There actually is something out there that's easy to use and doesn't require a bunch of infrastructure overhead,”** he says. No JVM, no knobs to turn. From local files, he moved on to files on Amazon S3, over the [`s3://`]({% link docs/2.0/core_extensions/httpfs/s3api.md %}) protocol:
 
 ```sql
 CREATE SECRET (TYPE s3, PROVIDER credential_chain);
@@ -94,7 +94,7 @@ ATTACH 'ducklake:⟨metadata.ducklake⟩' AS my_lake (
 
 If the DuckLake does not exist yet, DuckDB creates it and you can start creating tables right away. Matt has also written about [streaming events straight into a DuckLake](https://performancede.substack.com/p/streaming-events-to-ducklake).
 
-The same simplicity applies to existing Iceberg catalogs. Matt has [written on his Substack](https://performancede.substack.com/) about the Spark configuration of 20-plus lines he once needed to query an Iceberg table in AWS Glue, just to get the right JARs and the right AWS settings. With DuckDB's [Iceberg extension]({% link docs/current/core_extensions/iceberg/overview.md %}), it takes three statements:
+The same simplicity applies to existing Iceberg catalogs. Matt has [written on his Substack](https://performancede.substack.com/) about the Spark configuration of 20-plus lines he once needed to query an Iceberg table in AWS Glue, just to get the right JARs and the right AWS settings. With DuckDB's [Iceberg extension]({% link docs/2.0/core_extensions/iceberg/overview.md %}), it takes three statements:
 
 ```sql
 INSTALL iceberg;
@@ -132,7 +132,7 @@ FROM read_json('s3://⟨bucket⟩/logs/*.json');
 
 For workloads such as log analytics over large numbers of raw files in S3, Google Cloud Storage or Azure, where teams would traditionally spin up a wide Spark cluster, a single DuckDB process can now keep up, with less overhead and lower cost.
 
-**Quack.** The [Quack remote protocol]({% link docs/current/quack/overview.md %}) turns a DuckDB instance into a server that other DuckDB instances can connect to over HTTP. Matt likes the cleaner connect and disconnect syntax in v2.0 and the official DuckLake support. 
+**Quack.** The [Quack remote protocol]({% link docs/2.0/quack/overview.md %}) turns a DuckDB instance into a server that other DuckDB instances can connect to over HTTP. Matt likes the cleaner connect and disconnect syntax in v2.0 and the official DuckLake support. 
 
 He has written about [serving a DuckLake on an Amazon EC2 instance via Quack](https://performancede.substack.com/p/serving-a-ducklake-on-ec2-via-quack). End users only need the Quack address and a token, with no AWS credentials and no knowledge of the DuckLake behind it. He has also built a DuckDB-Wasm dashboard on top of this setup, which he covers in the DuckLake book he is writing. The Wasm build is still on v1.5 and will be updated for the v2.0 release.
 
