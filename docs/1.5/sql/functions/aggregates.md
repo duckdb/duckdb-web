@@ -70,6 +70,7 @@ Aggregates are functions that *combine* multiple rows into a single value. Aggre
 
 When the `DISTINCT` clause is provided, only distinct values are considered in the computation of the aggregate. This is typically used in combination with the `count` aggregate to get the number of distinct elements; but it can be used together with any aggregate function in the system.
 There are some aggregates that are insensitive to duplicate values (e.g., `min` and `max`) and for them this clause is parsed and ignored.
+If the aggregate also has an `ORDER BY` clause, all ordering expressions must appear in the aggregate's argument list; see the [`ORDER BY` clause](#order-by-clause-in-aggregate-functions) section for details.
 
 ### `ORDER BY` Clause in Aggregate Functions
 
@@ -83,6 +84,16 @@ This clause ensures that the values being aggregated are sorted before applying 
 Most aggregate functions are order-insensitive, and for them this clause is parsed and discarded.
 However, there are some order-sensitive aggregates that can have non-deterministic results without ordering, e.g., `first`, `last`, `list` and `string_agg` / `group_concat` / `listagg`.
 These can be made deterministic by ordering the arguments.
+
+When `DISTINCT` is used, every expression in the aggregate-local `ORDER BY` clause must also appear in the aggregate's argument list. For example, the first query below is valid, while the second fails because `y` is not an aggregate argument.
+
+```sql
+SELECT list(DISTINCT x ORDER BY x DESC) FROM (VALUES (1), (2), (2), (3)) t(x);
+-- [3, 2, 1]
+
+SELECT list(DISTINCT x ORDER BY y DESC) FROM (VALUES (1, 10), (1, 20), (2, 5)) t(x, y);
+-- Binder Error: In a DISTINCT aggregate, ORDER BY expressions must appear in the argument list
+```
 
 For example:
 
