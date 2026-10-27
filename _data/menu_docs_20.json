@@ -801,6 +801,10 @@
                   "url": "sample"
                 },
                 {
+                  "page": "Samples",
+                  "url": "samples"
+                },
+                {
                   "page": "Unnesting",
                   "url": "unnest"
                 },
@@ -1147,10 +1151,6 @@
             {
               "page": "PEG Parser",
               "url": "peg_parser"
-            },
-            {
-              "page": "Samples",
-              "url": "samples"
             }
           ]
         },
