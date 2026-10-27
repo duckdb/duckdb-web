@@ -22,8 +22,8 @@ repo:
 
 extension_star_count: 3
 extension_star_count_pretty: 3
-extension_download_count: 5513
-extension_download_count_pretty: 5.5k
+extension_download_count: 6264
+extension_download_count_pretty: 6.3k
 image: '/images/community_extensions/social_preview/preview_community_extension_cwiqduck.png'
 layout: community_extension_doc
 ---

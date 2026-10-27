@@ -40,8 +40,8 @@ docs:
 
 extension_star_count: 1
 extension_star_count_pretty: 1
-extension_download_count: 13933
-extension_download_count_pretty: 13.9k
+extension_download_count: 16086
+extension_download_count_pretty: 16.1k
 image: '/images/community_extensions/social_preview/preview_community_extension_se3.png'
 layout: community_extension_doc
 ---

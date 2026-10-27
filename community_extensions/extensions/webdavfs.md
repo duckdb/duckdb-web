@@ -64,8 +64,8 @@ docs:
 
 extension_star_count: 1
 extension_star_count_pretty: 1
-extension_download_count: 4658
-extension_download_count_pretty: 4.7k
+extension_download_count: 5795
+extension_download_count_pretty: 5.8k
 image: '/images/community_extensions/social_preview/preview_community_extension_webdavfs.png'
 layout: community_extension_doc
 ---

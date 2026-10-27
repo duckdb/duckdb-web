@@ -124,8 +124,8 @@ docs:
 
 extension_star_count: 17
 extension_star_count_pretty: 17
-extension_download_count: 11123
-extension_download_count_pretty: 11.1k
+extension_download_count: 13239
+extension_download_count_pretty: 13.2k
 image: '/images/community_extensions/social_preview/preview_community_extension_dplyr.png'
 layout: community_extension_doc
 ---

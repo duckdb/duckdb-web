@@ -70,8 +70,8 @@ docs:
 
 extension_star_count: 2
 extension_star_count_pretty: 2
-extension_download_count: 21659
-extension_download_count_pretty: 21.7k
+extension_download_count: 25347
+extension_download_count_pretty: 25.3k
 image: '/images/community_extensions/social_preview/preview_community_extension_eeagrid.png'
 layout: community_extension_doc
 ---

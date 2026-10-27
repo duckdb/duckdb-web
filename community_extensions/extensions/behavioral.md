@@ -65,8 +65,8 @@ docs:
 
 extension_star_count: 16
 extension_star_count_pretty: 16
-extension_download_count: 24368
-extension_download_count_pretty: 24.4k
+extension_download_count: 28167
+extension_download_count_pretty: 28.2k
 image: '/images/community_extensions/social_preview/preview_community_extension_behavioral.png'
 layout: community_extension_doc
 ---

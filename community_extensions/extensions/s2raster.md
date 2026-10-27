@@ -50,8 +50,8 @@ docs:
 
 extension_star_count: 1
 extension_star_count_pretty: 1
-extension_download_count: 6856
-extension_download_count_pretty: 6.9k
+extension_download_count: 8058
+extension_download_count_pretty: 8.1k
 image: '/images/community_extensions/social_preview/preview_community_extension_s2raster.png'
 layout: community_extension_doc
 ---

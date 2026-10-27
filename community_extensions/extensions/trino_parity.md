@@ -120,8 +120,8 @@ docs:
 
 extension_star_count: 1
 extension_star_count_pretty: 1
-extension_download_count: 11722
-extension_download_count_pretty: 11.7k
+extension_download_count: 13786
+extension_download_count_pretty: 13.8k
 image: '/images/community_extensions/social_preview/preview_community_extension_trino_parity.png'
 layout: community_extension_doc
 ---
@@ -161,19 +161,19 @@ LOAD {{ page.extension.name }};
 
 <div class="extension_functions_table"></div>
 
-|   function_name   | function_type | description | comment | examples |
-|-------------------|---------------|-------------|---------|----------|
-| trino_hmac_sha256 | scalar        | NULL        | NULL    |          |
-| trino_lower       | scalar        | NULL        | NULL    |          |
-| trino_ltrim       | scalar        | NULL        | NULL    |          |
-| trino_meta        | table_macro   | NULL        | NULL    |          |
-| trino_normalize   | scalar        | NULL        | NULL    |          |
-| trino_reverse     | scalar        | NULL        | NULL    |          |
-| trino_rtrim       | scalar        | NULL        | NULL    |          |
-| trino_sha512      | scalar        | NULL        | NULL    |          |
-| trino_trim        | scalar        | NULL        | NULL    |          |
-| trino_upper       | scalar        | NULL        | NULL    |          |
-| trino_xxhash64    | scalar        | NULL        | NULL    |          |
+|   function_name   | function_type |                                                                                          description                                                                                           | comment |                    examples                    |
+|-------------------|---------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|---------|------------------------------------------------|
+| trino_hmac_sha256 | scalar        | Computes HMAC-SHA256 over raw data bytes with the supplied raw key bytes and returns a 32-byte BLOB, accepting empty data but rejecting an empty key with 'Empty key' as Trino does.           | NULL    | [trino_hmac_sha256('abc'::BLOB, 'key'::BLOB)]  |
+| trino_lower       | scalar        | Converts each Unicode code point to its simple lowercase mapping using ICU 76.1 (Unicode 16), matching Trino 483 on JDK 25 without contextual rules or multi-code-point expansion.             | NULL    | [trino_lower('İSTANBUL')]                      |
+| trino_ltrim       | scalar        | Removes leading Java Character.isWhitespace code points, leaving trailing whitespace and non-breaking spaces (U+00A0, U+2007, U+202F) intact as Trino does.                                    | NULL    | [trino_ltrim(chr(9) \|\| 'hello')]             |
+| trino_meta        | table_macro   | Lists the ten native Trino-parity scalar functions as trino_name, arg_count and category, excluding passthrough functions and this table macro.                                                | NULL    | [SELECT * FROM trino_meta()]                   |
+| trino_normalize   | scalar        | Normalizes a string to NFC using ICU 76.1 (Unicode 16), matching Trino's default normalization form with no form-selector overload.                                                            | NULL    | [trino_normalize('cafe' \|\| chr(769))]        |
+| trino_reverse     | scalar        | Reverses the Unicode code-point sequence, not grapheme clusters, preserving the UTF-8 bytes within each code point as Trino does.                                                              | NULL    | [trino_reverse('cafe' \|\| chr(769))]          |
+| trino_rtrim       | scalar        | Removes trailing Java Character.isWhitespace code points, leaving leading whitespace and non-breaking spaces (U+00A0, U+2007, U+202F) intact as Trino does.                                    | NULL    | [trino_rtrim('hello' \|\| chr(10))]            |
+| trino_sha512      | scalar        | Computes SHA-512 over raw bytes and returns the 64-byte digest as a BLOB, matching Trino's varbinary output.                                                                                   | NULL    | [trino_sha512('abc'::BLOB)]                    |
+| trino_trim        | scalar        | Removes leading and trailing Java Character.isWhitespace code points, leaving non-breaking spaces (U+00A0, U+2007, U+202F) intact as Trino does.                                               | NULL    | [trino_trim(chr(9) \|\| 'hello' \|\| chr(10))] |
+| trino_upper       | scalar        | Converts each Unicode code point to its simple uppercase mapping using ICU 76.1 (Unicode 16), matching Trino 483 on JDK 25 without contextual rules or multi-code-point expansion (ß stays ß). | NULL    | [trino_upper('straße')]                        |
+| trino_xxhash64    | scalar        | Computes xxHash64 over raw bytes with seed 0 and returns the hash as an eight-byte big-endian BLOB, matching Trino's varbinary output.                                                         | NULL    | [trino_xxhash64('abc'::BLOB)]                  |
 
 ### Overloaded Functions
 

@@ -92,10 +92,10 @@ docs:
     extension. Run `INSTALL spatial; LOAD spatial;` before calling one; spatial is
     not needed for anything else.
 
-extension_star_count: 4
-extension_star_count_pretty: 4
-extension_download_count: 11746
-extension_download_count_pretty: 11.7k
+extension_star_count: 5
+extension_star_count_pretty: 5
+extension_download_count: 13775
+extension_download_count_pretty: 13.8k
 image: '/images/community_extensions/social_preview/preview_community_extension_duckrouting.png'
 layout: community_extension_doc
 ---

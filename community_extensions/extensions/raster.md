@@ -383,8 +383,8 @@ docs:
 
 extension_star_count: 61
 extension_star_count_pretty: 61
-extension_download_count: 8644
-extension_download_count_pretty: 8.6k
+extension_download_count: 9892
+extension_download_count_pretty: 9.9k
 image: '/images/community_extensions/social_preview/preview_community_extension_raster.png'
 layout: community_extension_doc
 ---
