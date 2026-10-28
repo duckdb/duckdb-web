@@ -635,50 +635,8 @@ h5 a {
 						margin-left: 12px;
 						margin-top: 0;
 					}
-					ul li{
-						@include tiny();
-						font-weight: 400;
-					}
 					ul#toc{
-						list-style: none;
-						padding: 0;
-						margin: 0;
-						margin-top: 15px;
-						position: relative;
-						ul{
-							padding-left: 0px;
-							margin-left: 15px;
-							border-left: 1px solid var(--border-color);
-							margin-top: 2px;
-							margin-bottom: 2px;
-							li{
-								list-style: none;
-							}
-							ul{
-								display: none;
-							}
-						}
-						li{
-							line-height: 1;
-						&.current > a{
-								color: var(--main-text-primary-color, #0D0D0D);
-							}
-						}
-						a{
-							color: $black400;
-							text-decoration: none;
-							padding: 6px 0px 6px 12px;
-							border-radius: var(--page-radius-pill);
-							display: inline-block;
-							text-overflow: ellipsis; 
-							overflow: hidden; 
-							white-space: nowrap;
-							max-width: 100%;
-							line-height: 1;
-						&:hover{
-								color: var(--main-text-primary-color, #0D0D0D);
-							}
-						}
+						@include toc-nav(15px);
 					}
 				}
 				
