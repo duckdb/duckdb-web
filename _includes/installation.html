@@ -22,6 +22,7 @@
                 <div class="option" aria-checked="false" tabindex="-1" data-value="rust"><span class="symbol"><img src="/images/icons/rust.svg" aria-hidden="true"></span><span class="label">Rust</span></div>
                 <div class="option" aria-checked="false" tabindex="-1" data-value="odbc"><span class="symbol"><img src="/images/icons/odbc.svg" aria-hidden="true"></span><span class="label">ODBC</span></div>
                 <div class="option" aria-checked="false" tabindex="-1" data-value="wasm" data-display-label="WebAssembly (Wasm)"><span class="symbol"><img src="/images/icons/webassembly.svg" aria-hidden="true"></span><span class="label">Wasm</span></div>
+                <div class="option" aria-checked="false" tabindex="-1" data-value="claude"><span class="symbol"><img src="/images/icons/claude.svg" aria-hidden="true"></span><span class="label">Claude</span></div>
                 <a class="option" href="{% link docs/2.0/clients/overview.md %}" tabindex="-1"><span class="label">More</span><svg class="icon arrow-right" aria-hidden="true"><use href="#arrow-right"></use></svg></a>
             </div>
         </div>
@@ -312,6 +313,19 @@ which would resolve to the newest 1.x crate, i.e., the newest DuckDB release. {%
 
 </div>
 {%- assign newest_go = false -%}
+{%- endif -%}
+
+{%- comment -%} Claude: the plugin is not tied to a DuckDB release, so it is only offered for the newest one {%- endcomment -%}
+{%- if newest_release %}
+
+<div data-release="{{ release_version }}" data-environment="claude" data-docs="https://github.com/hannes/duckdb-claude-plugin">
+
+{% highlight text %}
+/plugin marketplace add duckdb/duckdb-claude-plugin
+/plugin install duckdb-dialect@duckdb-dialect
+{% endhighlight %}
+
+</div>
 {%- endif -%}
 
 {%- comment -%} C/C++ and ODBC: downloads per platform {%- endcomment -%}
