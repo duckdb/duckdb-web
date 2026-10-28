@@ -68,7 +68,7 @@ For this reader, the box renderer is a poor fit. The alignment padding costs tok
 
 Agent mode changes the CLI’s defaults for this reader. This post describes how the CLI detects an agent, what changes in the output and how to try it.
 
-> Agent mode ships with DuckDB v2.0.
+> New Agent mode shipped with DuckDB 2.0.
 
 ## Detecting an Agent
 
@@ -87,7 +87,7 @@ Agent mode turns on when three things are true: one of these variables is set, s
 
 Two flags override detection. `-agent` forces the mode on and `-no-agent` forces it off. The two combine with format flags, so `duckdb -agent -csv` keeps the agent behavior and only changes how the rows are printed. The `DUCKDB_AGENT_MODE` environment variable does the same from the environment, for when the command line cannot be changed, such as a script run from an agent’s shell. For example, to manually enable agent mode, run:
 
-```bash
+```batch
 DUCKDB_AGENT_MODE=1 duckdb
 ```
 
@@ -232,7 +232,7 @@ So as long as the `duckdb` binary on the agent’s path is v2.0 or newer and the
 
 To see what the agent sees, run a query through a pipe with the flag set:
 
-```bash
+```batch
 duckdb -agent -c "SUMMARIZE FROM 'my_data.parquet'" | cat
 ```
 
