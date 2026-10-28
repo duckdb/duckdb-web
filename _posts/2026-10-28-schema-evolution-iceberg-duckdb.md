@@ -11,6 +11,8 @@ When an operational database evolves — a column is added, a type is widened, a
 
 This post walks the complete path: a source database undergoes schema changes, [Olake Go](https://olake.io/olake-go/) replicates those changes into an Iceberg table on S3, and DuckDB queries the evolved table through an AWS Glue catalog.
 
+[Olake Go](https://olake.io/docs/) is an open-source EL platform that bridges operational databases and Apache Iceberg on S3, with support for CDC, incremental sync, and stateful resumable syncs.
+
 > This example uses PostgreSQL as the source database. Olake Go supports the same replication workflow for MySQL, MongoDB, Oracle, MSSQL, DB2, Kafka, and S3. Only the `source.json` changes; everything else in this post applies to any supported source.
 
 ## Pipeline Overview
