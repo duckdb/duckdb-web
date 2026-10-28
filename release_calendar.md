@@ -30,8 +30,8 @@ The planned dates of upcoming DuckDB releases are shown below.
 <!-- markdownlint-disable MD055 MD056 MD058 -->
 
 {% if site.data.upcoming_releases.size > 0 %}
-| Date | Version |
-|:-----|--------:|
+| Date | Event |
+|:-----|:------|
 {%- for release in site.data.upcoming_releases %}
 | {{ release.start_date }} | {{ release.title }} |
 {%- endfor %}
