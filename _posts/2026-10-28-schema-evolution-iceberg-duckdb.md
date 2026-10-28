@@ -223,12 +223,12 @@ FROM iceberg_snapshots(glue_catalog.public.orders)
 ORDER BY committed_at;
 ```
 
-Then query a historical snapshot directly with `AT (VERSION = ...)`:
+Then query a historical snapshot directly with `AT (VERSION => ...)`:
 
 ```sql
 SELECT order_id, amount
 FROM glue_catalog.public.orders
-AT (VERSION = ⟨snapshot_id_before_drop⟩)
+AT (VERSION => ⟨snapshot_id_before_drop⟩)
 LIMIT 5;
 ```
 
