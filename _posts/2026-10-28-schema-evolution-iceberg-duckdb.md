@@ -7,13 +7,11 @@ excerpt: "Schema changes in source databases — added columns, widened types, d
 tag: using-duckdb
 ---
 
-When an operational database evolves — a column is added, a type is widened, a field is removed — downstream analytics pipelines often need manual intervention: update the warehouse schema, backfill historical rows, fix queries. Apache Iceberg handles these changes through metadata-only schema evolution, which means no data files are rewritten. When a CDC replication tool propagates the schema change to Iceberg, DuckDB reads the new schema on the next query, with no session restart and no manual step.
+Schema changes in operational databases — added columns, widened types, dropped fields — typically force manual pipeline updates. Apache Iceberg's metadata-only schema evolution removes that burden: a CDC tool propagates the change, and DuckDB reads the new schema on the next query with no manual step.
 
-This post walks the complete path: a source database undergoes schema changes, [Olake Go](https://olake.io/olake-go/) replicates those changes into an Iceberg table on S3, and DuckDB queries the evolved table through an AWS Glue catalog.
+This post walks the complete path using [Olake Go](https://olake.io/olake-go/) — an [open-source EL platform](https://olake.io/docs/) for CDC and incremental replication to Apache Iceberg on S3 — with DuckDB querying the results through AWS Glue.
 
-[Olake Go](https://olake.io/docs/) is an open-source EL platform that bridges operational databases and Apache Iceberg on S3, with support for CDC, incremental sync, and stateful resumable syncs.
-
-> This example uses PostgreSQL as the source database. Olake Go supports the same replication workflow for MySQL, MongoDB, Oracle, MSSQL, DB2, Kafka, and S3. Only the `source.json` changes; everything else in this post applies to any supported source.
+> This example uses PostgreSQL. Olake Go supports the same workflow for MySQL, MongoDB, Oracle, MSSQL, DB2, Kafka, and S3 — only `source.json` changes.
 
 ## Pipeline Overview
 
@@ -45,7 +43,7 @@ When the source schema changes, Olake Go detects it on the next sync, commits th
 
 ## Configure Olake Go
 
-Clone the repository to get the latest source and reference configurations:
+Clone the Olake repository:
 
 ```bash
 git clone https://github.com/datazip-inc/olake
@@ -141,12 +139,12 @@ docker run --pull=always \
   olakego/source-postgres:latest \
   sync \
   --config /mnt/config/source.json \
-  --streams /mnt/config/selected_streams.json \
+  --selected-streams /mnt/config/selected_streams.json \
   --destination /mnt/config/destination.json \
   --state /mnt/config/state.json
 ```
 
-Olake Go writes `state.json` to the config directory after the first run. Pass `--state` on subsequent runs so the sync resumes from the saved WAL position instead of doing a full refresh.
+Olake Go creates `state.json` after the first run. On subsequent runs, it reads that file to resume from the saved WAL position instead of performing a full reload.
 
 ## Attach the Catalog in DuckDB
 
@@ -178,7 +176,7 @@ Add a `region` column to the source table:
 ALTER TABLE orders ADD COLUMN region VARCHAR(50);
 ```
 
-Rerun the sync command (with `--state`) and then query from DuckDB. Olake Go adds the new field to the Iceberg schema with a new field ID:
+Rerun the sync command and then query from DuckDB. Olake Go adds the new field to the Iceberg schema with a new field ID:
 
 ```sql
 SELECT order_id, region
@@ -199,7 +197,7 @@ Promote `customer_id` from `INTEGER` to `BIGINT`:
 ALTER TABLE orders ALTER COLUMN customer_id TYPE BIGINT;
 ```
 
-Iceberg v2 supports these type widening promotions natively: `INT → BIGINT`, `FLOAT → DOUBLE`, and `DECIMAL` precision increases. Olake Go propagates the type change to the Iceberg schema. Iceberg records the new type in a fresh `metadata.json` without rewriting existing data files. DuckDB reflects the new type on the next query:
+Iceberg v2 supports these type widening promotions natively: `INT → BIGINT`, `FLOAT → DOUBLE`, and `DECIMAL` precision increases. Olake Go propagates the type change to the Iceberg schema on the next sync. Iceberg records the new type in a fresh `metadata.json` without rewriting existing data files. DuckDB reflects the new type on the next query:
 
 ```sql
 DESCRIBE glue_catalog.public.orders;
@@ -215,7 +213,7 @@ Drop `amount` from the source table:
 ALTER TABLE orders DROP COLUMN amount;
 ```
 
-Olake Go updates the Iceberg schema so new rows arrive without the column. Iceberg does not remove the column from the existing data files — the physical files are immutable. The column disappears from the live schema but historical snapshots remain fully intact.
+Olake Go updates the Iceberg schema so incoming rows no longer include the column. Iceberg does not remove the column from the existing data files — the physical files are immutable. The column disappears from the live schema but historical snapshots remain fully intact.
 
 Use `iceberg_snapshots` to find the snapshot committed before the drop:
 
