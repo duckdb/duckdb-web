@@ -10,7 +10,7 @@ redirect_from:
 title: Hugging Face Support
 ---
 
-The `httpfs` extension introduces support for the `hf://` protocol to access datasets hosted in [Hugging Face](https://huggingface.co/) repositories.
+The `httpfs` extension introduces support for the `hf://` protocol to access datasets and Storage Buckets hosted on [Hugging Face](https://huggingface.co/).
 See the [announcement blog post]({% post_url 2024-05-29-access-150k-plus-datasets-from-hugging-face-with-duckdb %}) for details.
 
 ## Usage
@@ -127,6 +127,27 @@ FROM 'hf://datasets/datasets-examples/doc-formats-csv-1@~parquet/**/*.parquet';
 | human   | hello |
 
 The previous query will read all Parquet files under the `~parquet` revision. This is a special branch where Hugging Face automatically generates the Parquet files of every dataset to enable efficient scanning.
+
+## Storage Buckets
+
+[Storage Buckets](https://huggingface.co/docs/hub/storage-buckets) are mutable, non-versioned object storage on Hugging Face. They can be queried using the following URL pattern:
+
+```text
+hf://buckets/⟨my_username⟩/⟨my_bucket⟩/⟨path_to_file⟩
+```
+
+Glob patterns work the same way as for datasets. For example:
+
+```sql
+SELECT count(*) AS count
+FROM 'hf://buckets/cfahlgren1/duckdb-httpfs-fineweb-edu-5gb/data/**/*.parquet';
+```
+
+| count   |
+|--------:|
+| 1789696 |
+
+Buckets are not versioned, so the `@⟨revision⟩` syntax does not apply to bucket paths. To query a private bucket, configure a token as described in [Authentication](#authentication).
 
 ## Authentication
 
