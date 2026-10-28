@@ -36,7 +36,7 @@ When the source schema changes, Olake Go detects it on the next sync, commits th
 
 ## Prerequisites
 
-* [DuckDB]({% link docs/2.0/installation/index.html %}) with the [`iceberg`]({% link docs/2.0/core_extensions/iceberg/overview.md %}) and [`aws`]({% link docs/2.0/core_extensions/aws.md %}) extensions
+* DuckDB with the [`iceberg`]({% link docs/2.0/core_extensions/iceberg/overview.md %}) and [`aws`]({% link docs/2.0/core_extensions/aws.md %}) extensions
 * [Docker](https://docs.docker.com/get-docker/)
 * An AWS account with an S3 bucket and Glue Data Catalog access
 * PostgreSQL with logical replication enabled (`wal_level = logical`)
