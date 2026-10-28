@@ -1,6 +1,6 @@
 ---
 layout: community_extension_doc
-title: Community Extensions Download Metrics
+title: Download Metrics
 ---
 
 ## What Do We Measure?

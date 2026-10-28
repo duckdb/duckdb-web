@@ -1,6 +1,6 @@
 ---
 layout: community_extension_doc
-title: Community Extension Development
+title: Development
 ---
 
 ## Building
