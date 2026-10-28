@@ -83,7 +83,7 @@ INSERT INTO duck_species VALUES
     (0, 'Anas nivis', 'Snow duck');
 ```
 
-> Tip To continuously replicate data from a PostgreSQL, MySQL, or MongoDB database into S3 Tables via CDC, see [OLake](https://olake.io/docs) — an open-source tool that writes to S3 Tables using the Iceberg REST Catalog API.
+> Tip To continuously replicate data from a PostgreSQL, MySQL, or MongoDB database into S3 Tables via CDC, see [Olake Go](https://olake.io/docs) — an open-source tool that writes to S3 Tables using the Iceberg REST Catalog API.
 
 ### Reading Amazon S3 Tables with DuckDB
 
