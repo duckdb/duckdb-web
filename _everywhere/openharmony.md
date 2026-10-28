@@ -1,11 +1,11 @@
 ---
 layout: post
-title: "OpenHarmony (Arm64)"
+title: "Huawei MateBook (OpenHarmony, Arm64)"
 date: 2026-10-27
 authors:
   - springmin
-thumb: "/images/everywhere/thumbs/openharmony.png"
-image: "/images/everywhere/thumbs/openharmony.png"
+thumb: "/images/everywhere/thumbs/huawei-matebook.png"
+image: "/images/everywhere/thumbs/huawei-matebook.png"
 excerpt: "DuckDB builds and runs natively on OpenHarmony arm64 devices."
 tag: other
 category: community
