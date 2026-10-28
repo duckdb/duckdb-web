@@ -24,7 +24,7 @@ while patch versions mostly contain bugfixes.
 
 ## Upcoming Releases
 
-The planned dates of upcoming DuckDB releases are shown below.
+The planned dates of upcoming DuckDB releases and related logistics (e.g., feature freezes) are shown below.
 **Please note that these dates are tentative** and DuckDB maintainers may decide to push back release dates to ensure the stability and quality of releases.
 
 <!-- markdownlint-disable MD055 MD056 MD058 -->
