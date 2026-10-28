@@ -9,20 +9,41 @@ tag: using-duckdb
 
 When an operational database evolves — a column is added, a type is widened, a field is removed — downstream analytics pipelines often need manual intervention: update the warehouse schema, backfill historical rows, fix queries. Apache Iceberg handles these changes through metadata-only schema evolution, which means no data files are rewritten. When a CDC replication tool propagates the schema change to Iceberg, DuckDB reads the new schema on the next query, with no session restart and no manual step.
 
-This post walks the complete path: an operational database undergoes schema changes, [Olake Go](https://olake.io/olake-go/) replicates those changes into an Iceberg table on S3, and DuckDB queries the evolved table through an AWS Glue catalog.
+This post walks the complete path: a source database undergoes schema changes, [Olake Go](https://olake.io/olake-go/) replicates those changes into an Iceberg table on S3, and DuckDB queries the evolved table through an AWS Glue catalog.
 
 > This example uses PostgreSQL as the source database. Olake Go supports the same CDC workflow for MySQL, MongoDB, Oracle, MSSQL, DB2, Kafka, and S3. Only the `source.json` changes; everything else in this post applies to any supported source.
 
+## Pipeline Overview
+
+```text
+┌────────────────┐   WAL / binlog   ┌─────────────────┐   Parquet + metadata   ┌─────────────────┐
+│  Source DB     │ ───────────────> │   Olake Go      │ ─────────────────────> │  S3 (Iceberg)   │
+│  (PostgreSQL)  │                  │   CDC sync      │                         │  data files     │
+└────────────────┘                  └─────────────────┘                         └────────┬────────┘
+                                                                                          │ schema pointer
+                                                                                 ┌────────▼────────┐
+                                                                                 │  AWS Glue       │
+                                                                                 │  (catalog)      │
+                                                                                 └────────┬────────┘
+                                                                                          │ ATTACH
+                                                                                 ┌────────▼────────┐
+                                                                                 │  DuckDB         │
+                                                                                 │  SQL queries    │
+                                                                                 └─────────────────┘
+```
+
+When the source schema changes, Olake Go detects it on the next sync, commits a metadata-only update to Iceberg, and DuckDB reflects the new schema on the following query.
+
 ## Prerequisites
 
-* [DuckDB](https://duckdb.org/docs/installation/) with the [`iceberg`]({% link docs/2.0/core_extensions/iceberg/overview.md %}) and [`aws`]({% link docs/2.0/core_extensions/aws.md %}) extensions
+* [DuckDB]({% link docs/2.0/installation/index.html %}) with the [`iceberg`]({% link docs/2.0/core_extensions/iceberg/overview.md %}) and [`aws`]({% link docs/2.0/core_extensions/aws.md %}) extensions
 * [Docker](https://docs.docker.com/get-docker/)
 * An AWS account with an S3 bucket and Glue Data Catalog access
 * PostgreSQL with logical replication enabled (`wal_level = logical`)
 
 ## Configure Olake Go
 
-Olake Go reads from three config files: `source.json` (connection to the source database), `destination.json` (the Iceberg catalog and storage target), and `selected_streams.json` (which tables to replicate and how).
+Olake Go reads from three files: `source.json` (source connection), `destination.json` (the Iceberg catalog), and `streams.json` (which tables to replicate and how).
 
 Create a config directory:
 
@@ -40,6 +61,7 @@ mkdir -p ~/olake-config
   "username": "⟨db_user⟩",
   "password": "⟨db_password⟩",
   "update_method": {
+    "type": "CDC",
     "replication_slot": "olake_slot",
     "publication": "olake_pub",
     "initial_wait_time": 120
@@ -73,7 +95,7 @@ CREATE PUBLICATION olake_pub FOR ALL TABLES;
 
 ## Discover Streams
 
-Run `discover` to let Olake Go inspect the source and write `available_streams.json` and `selected_streams.json`:
+Run `discover` to inspect the source and write `streams.json` to the config directory:
 
 ```bash
 docker run --pull=always \
@@ -83,25 +105,24 @@ docker run --pull=always \
   --config /mnt/config/source.json
 ```
 
-The output files appear in `~/olake-config`. Edit `selected_streams.json` to configure each table. To automatically pick up new columns when the source schema changes, set `sync_new_columns` to `true`:
+Edit `streams.json` to configure the `orders` table. Set `sync_new_columns` to `true` so Olake Go automatically picks up columns added to the source after the initial sync:
 
 ```json
 {
-  "selected_streams": {
-    "public": [
-      {
-        "stream_name": "orders",
-        "sync_mode": "cdc",
-        "selected_columns": {
-          "sync_new_columns": true
-        }
+  "streams": [
+    {
+      "stream_name": "orders",
+      "namespace": "public",
+      "sync_mode": "cdc",
+      "selected_columns": {
+        "sync_new_columns": true
       }
-    ]
-  }
+    }
+  ]
 }
 ```
 
-## Start the Initial Sync
+## Start the Sync
 
 Run `sync` to perform the initial full load and then continue in CDC mode:
 
@@ -111,15 +132,14 @@ docker run --pull=always \
   olakego/source-postgres:latest \
   sync \
   --config /mnt/config/source.json \
-  --selected-streams /mnt/config/selected_streams.json \
-  --available-streams /mnt/config/available_streams.json \
+  --streams /mnt/config/streams.json \
   --destination /mnt/config/destination.json \
   --state /mnt/config/state.json
 ```
 
-Olake Go writes a `state.json` to the config directory. Pass `--state /mnt/config/state.json` on subsequent runs so the sync resumes from where it left off instead of doing a full refresh.
+Olake Go writes `state.json` to the config directory after the first run. Pass `--state` on subsequent runs so the sync resumes from the saved WAL position instead of doing a full refresh.
 
-After the initial sync, the `orders` table is in Glue and its data files are on S3. DuckDB can now query it.
+After the initial sync, the `orders` table exists in the Glue catalog and its Parquet files are on S3.
 
 ## Attach the Catalog in DuckDB
 
@@ -141,101 +161,56 @@ ATTACH '⟨account_id⟩' AS glue_catalog (
 );
 ```
 
-Query the table:
-
-```sql
-DESCRIBE glue_catalog.public.orders;
-```
-
-```text
-┌─────────────┬─────────────┬─────────┐
-│ column_name │ column_type │  null   │
-├─────────────┼─────────────┼─────────┤
-│ order_id    │   INTEGER   │   YES   │
-│ customer_id │   INTEGER   │   YES   │
-│ order_time  │  TIMESTAMP  │   YES   │
-│ amount      │   DOUBLE    │   YES   │
-└─────────────┴─────────────┴─────────┘
-```
+The `ATTACH` statement connects DuckDB to the Glue catalog. You can now query the table with the `glue_catalog.public.orders` three-part name.
 
 ## Schema Change 1: Adding a Column
 
-Add a `region` column in the source database:
+Add a `region` column to the source table:
 
 ```sql
 ALTER TABLE orders ADD COLUMN region VARCHAR(50);
 ```
 
-On the next sync run, Olake Go detects the new column and adds it to the Iceberg schema with a new field ID. Historical rows receive `NULL` for `region`; new rows carry the value. Rerun the sync command (with `--state`) and then query from DuckDB:
+Rerun the sync command (with `--state`) and then query from DuckDB. Olake Go adds the new field to the Iceberg schema with a new field ID. Historical rows return `NULL` for `region`; new rows carry the value:
 
 ```sql
-DESCRIBE glue_catalog.public.orders;
+SELECT order_id, region
+FROM glue_catalog.public.orders
+ORDER BY order_id
+LIMIT 5;
 ```
 
-```text
-┌─────────────┬─────────────┬─────────┐
-│ column_name │ column_type │  null   │
-├─────────────┼─────────────┼─────────┤
-│ order_id    │   INTEGER   │   YES   │
-│ customer_id │   INTEGER   │   YES   │
-│ order_time  │  TIMESTAMP  │   YES   │
-│ amount      │   DOUBLE    │   YES   │
-│ region      │   VARCHAR   │   YES   │
-└─────────────┴─────────────┴─────────┘
-```
+Rows inserted before the `ALTER TABLE` return `NULL` for `region`. New rows carry the actual value. The existing Parquet files are never rewritten — Iceberg stores the schema change in a new `metadata.json`, not in the data files.
 
-The column is there, and existing data files are untouched. Iceberg stores the schema as metadata; the Parquet files themselves do not change.
-
-> Note `sync_new_columns: true` in `selected_streams.json` is what causes the new column to be picked up automatically. Without it, you must add the column to `selected_columns.columns` manually and re-run with `--discover-schema`.
+> Note `sync_new_columns: true` in `streams.json` is required for Olake Go to pick up the new column automatically. Without it, add the column to the stream's column list manually and re-run `discover` first.
 
 ## Schema Change 2: Widening a Type
 
-Promote `customer_id` from `INTEGER` to `BIGINT` at the source:
+Promote `customer_id` from `INTEGER` to `BIGINT`:
 
 ```sql
 ALTER TABLE orders ALTER COLUMN customer_id TYPE BIGINT;
 ```
 
-Iceberg v2 supports type widening promotions natively: `INT → BIGINT`, `FLOAT → DOUBLE`, `DATE → TIMESTAMP`, and `DECIMAL` precision increases. Olake Go propagates the type change to the Iceberg schema. No data files are rewritten — the promotion is a metadata-only change. DuckDB reflects it on the next query:
+Iceberg v2 supports these type widening promotions natively: `INT → BIGINT`, `FLOAT → DOUBLE`, `DATE → TIMESTAMP`, and `DECIMAL` precision increases. Olake Go propagates the change to the Iceberg schema as a metadata-only update — no data files are rewritten. DuckDB reflects the new type on the next query:
 
 ```sql
 DESCRIBE glue_catalog.public.orders;
 ```
 
-```text
-┌─────────────┬─────────────┬─────────┐
-│ column_name │ column_type │  null   │
-├─────────────┼─────────────┼─────────┤
-│ order_id    │   INTEGER   │   YES   │
-│ customer_id │    BIGINT   │   YES   │  ← widened
-│ order_time  │  TIMESTAMP  │   YES   │
-│ amount      │   DOUBLE    │   YES   │
-│ region      │   VARCHAR   │   YES   │
-└─────────────┴─────────────┴─────────┘
-```
+The `customer_id` column now shows as `BIGINT`. Existing Parquet files that stored the column as 32-bit integers are still readable: DuckDB widens the values on read.
 
 ## Schema Change 3: Dropping a Column
 
-Drop `amount` at the source:
+Drop `amount` from the source table:
 
 ```sql
 ALTER TABLE orders DROP COLUMN amount;
 ```
 
-When Olake Go detects the drop, it updates the Iceberg schema so new rows arrive without the column. Crucially, Iceberg does not remove the column from the existing data files. The column stays in the schema for historical snapshots. DuckDB's `AT (VERSION = ...)` syntax makes historical data queryable alongside the current schema:
+Olake Go updates the Iceberg schema so new rows arrive without the column. Iceberg does not remove the column from the existing data files — the physical files are immutable. The column disappears from the live schema but historical snapshots remain fully intact.
 
-```sql
--- Current snapshot: no amount column
-DESCRIBE glue_catalog.public.orders;
-
--- Historical snapshot: amount column present
-SELECT order_id, amount
-FROM glue_catalog.public.orders
-AT (VERSION = ⟨snapshot_id⟩)
-LIMIT 5;
-```
-
-To find the snapshot ID before the drop:
+Use `iceberg_snapshots` to find the snapshot committed before the drop:
 
 ```sql
 SELECT snapshot_id, committed_at
@@ -243,14 +218,42 @@ FROM iceberg_snapshots(glue_catalog.public.orders)
 ORDER BY committed_at;
 ```
 
-## Why This Matters
+Then query a historical snapshot directly with `AT (VERSION = ...)`:
 
-DuckDB resolves the Iceberg table schema from the catalog's current metadata on every query. When Olake Go commits a schema change to the catalog, DuckDB picks it up immediately — no session restart, no manual `ALTER TABLE` in DuckDB, no pipeline pause. The Glue catalog is the single source of schema truth for both the replication tool and the query engine.
+```sql
+SELECT order_id, amount
+FROM glue_catalog.public.orders
+AT (VERSION = ⟨snapshot_id_before_drop⟩)
+LIMIT 5;
+```
+
+The historical snapshot returns `amount` even though the live table no longer has it.
+
+## Why This Works Without Manual Intervention
+
+```text
+Source DB                  Iceberg (Glue + S3)          DuckDB
+
+ALTER TABLE                metadata.json updated         next query reads
+ADD COLUMN region    →     (new field ID added)    →     new column as NULL
+                           no Parquet rewrite            for old rows
+
+ALTER COLUMN               metadata.json updated         DESCRIBE shows
+TYPE BIGINT          →     (type promotion)       →     BIGINT; values
+                           no Parquet rewrite            widened on read
+
+DROP COLUMN                metadata.json updated         live schema: no column
+amount               →     (field removed from    →     AT (VERSION=...): column
+                           live schema)                  still present in history
+```
+
+DuckDB resolves the Iceberg schema from the Glue catalog on every query. When Olake Go commits a schema change to Glue, DuckDB picks it up automatically. The catalog is the single source of schema truth for both tools.
 
 ## Further Reading
 
 * [Iceberg Catalogs supported by DuckDB]({% link docs/2.0/core_extensions/iceberg/catalogs.md %})
 * [Writing to Iceberg with DuckDB — schema evolution]({% link docs/2.0/core_extensions/iceberg/writing_to_iceberg.md %}#alter-table-and-schema-evolution)
-* [Olake Go CDC replication](https://olake.io/olake-go/)
-* [Olake Go schema evolution documentation](https://olake.io/docs/features/schema/)
+* [What Is Inside an Iceberg Table?]({% post_url 2026-10-13-inside-iceberg-table %})
+* [Olake Go documentation](https://olake.io/olake-go/)
+* [Olake Go schema evolution](https://olake.io/docs/features/schema/)
 * [Olake Go supported catalogs](https://olake.io/docs/understanding/compatibility-catalogs/)
