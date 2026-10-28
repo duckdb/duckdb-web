@@ -45,6 +45,12 @@ When the source schema changes, Olake Go detects it on the next sync, commits th
 
 ## Configure Olake Go
 
+Clone the repository to get the latest source and reference configurations:
+
+```bash
+git clone https://github.com/datazip-inc/olake
+```
+
 Olake Go reads from three files: `source.json` (source connection), `destination.json` (the Iceberg catalog), and `selected_streams.json` (which tables to replicate and how).
 
 Create a config directory:
