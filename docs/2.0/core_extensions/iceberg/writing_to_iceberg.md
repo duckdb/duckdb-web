@@ -207,4 +207,4 @@ The following are not yet supported by the DuckDB `iceberg` extension:
 
 ## See Also
 
-For continuously replicating data from PostgreSQL, MySQL, or MongoDB into Iceberg via change data capture (CDC), see [Olake Go](https://olake.io/docs) — an open-source tool that writes to Iceberg REST Catalogs, including the catalogs listed on the [Catalogs]({% link docs/2.0/core_extensions/iceberg/catalogs.md %}) page.
+For continuously replicating data from PostgreSQL, MySQL, or MongoDB into Iceberg via change data capture (CDC), see [Olake Go](https://olake.io/olake-go/) — an open-source tool that writes to Iceberg REST Catalogs, including the catalogs listed on the [Catalogs]({% link docs/2.0/core_extensions/iceberg/catalogs.md %}) page.

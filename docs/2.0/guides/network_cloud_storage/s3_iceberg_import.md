@@ -66,4 +66,4 @@ Invalid Configuration Error: Failed to read iceberg table. No version was provid
 
 In this case, link directly to the metadata file or see [Selecting Metadata Versions]({% link docs/2.0/core_extensions/iceberg/iceberg_options.md %}#selecting-metadata-versions).
 
-> Tip To populate Iceberg tables on S3 from a PostgreSQL, MySQL, or MongoDB database using CDC replication, see [Olake Go](https://olake.io/docs) — an open-source tool that writes Iceberg-format data to S3 with support for AWS Glue and S3 Tables catalogs.
+> Tip To populate Iceberg tables on S3 from a PostgreSQL, MySQL, or MongoDB database using CDC replication, see [Olake Go](https://olake.io/olake-go/) — an open-source tool that writes Iceberg-format data to S3 with support for [AWS Glue](https://olake.io/docs/writers/iceberg/catalog/glue/) and S3 Tables catalogs.

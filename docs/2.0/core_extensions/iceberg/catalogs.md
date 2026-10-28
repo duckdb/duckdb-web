@@ -22,7 +22,7 @@ The `iceberg` extension supports attaching Iceberg REST Catalogs. Attaching a ca
 
 The section below describes the generic way of attaching an Iceberg REST Catalog. For instructions specific to a catalog implementation, see [Amazon S3 Tables](#amazon-s3-tables), [AWS Glue](#aws-glue-amazon-sagemaker-lakehouse), [Cloudflare R2 Data Catalog](#cloudflare-r2-data-catalog), [Apache Polaris](#apache-polaris), [Lakekeeper](#lakekeeper), [SeaweedFS](#seaweedfs) and [Google Cloud BigLake](#google-cloud-biglake).
 
-> Tip To replicate data from PostgreSQL, MySQL, or MongoDB into Iceberg tables using change data capture (CDC), see [Olake Go](https://olake.io/docs) — an open-source tool that supports the catalogs documented on this page, including Lakekeeper, Apache Polaris, and AWS Glue.
+> Tip To replicate data from PostgreSQL, MySQL, or MongoDB into Iceberg tables using change data capture (CDC), see [Olake Go](https://olake.io/olake-go/) — an open-source tool that supports the catalogs documented on this page, including Lakekeeper, Apache Polaris, and AWS Glue.
 
 ## Attaching an Iceberg REST Catalog
 
