@@ -58,6 +58,7 @@ dazzleduck,dazzleduck-web/dazzleduck-sql-duckdb,v0.0.5,"Arrow IPC over HTTP clie
 dc,prasanthj/duckdb-dual-cognition,8a4c282095efbf0e7ff5dd744940b917ab678104,"Compose fast bounded judgments, semantic resolution, and selective LLM reasoning with provenance"
 decide,gzheng92/duckdb-decide,96a0e33fa9b52210af63c2f08bd21024bd2ae0ab,"Filter, classify, and score text with OpenAI Decisions or Cloudflare Clef"
 decimal_arithmetic,duckdb/duckdb-decimal-arithmetic,66d59be49f75bcb164fd4f26b899cf9f075c4c58,"Extension that adds support special decimal arithmetic functions"
+decision_tune,altertable-ai/duckdb-decision_tune,a473343b7170efb8edbab3866bd122a606112ae8,"Classify rows, route messages and answer yes/no questions in SQL with the DecisionTune 1.0 model, on CPU via ONNX Runtime"
 delta_classic,djouallah/delta_classic,3b930e3dd1aded4738c65410bf5026693e862e56,"Attach a directory of Delta tables as a single DuckDB database with automatic schema discovery"
 delta_export,djouallah/delta_export,8defbf4174d4fb95f87f2ab5b14234e923ec9ebd,"Export DuckLake catalog tables to Delta Lake format"
 dicom,nmontesg/duck-dicom,d9f418b11b412bcd3182a2e39982f86a9b56cbfd,"DuckDB integration with medical imaging data (DICOM - Digital Imaging and Communication in Medicine)."
