@@ -303,8 +303,8 @@ docs:
 
 extension_star_count: 18
 extension_star_count_pretty: 18
-extension_download_count: 16444
-extension_download_count_pretty: 16.4k
+extension_download_count: 18600
+extension_download_count_pretty: 18.6k
 image: '/images/community_extensions/social_preview/preview_community_extension_dns.png'
 layout: community_extension_doc
 ---
@@ -353,6 +353,8 @@ LOAD {{ page.extension.name }};
 | set_dns_concurrency_limit | scalar        | Updates the concurrency limit for DNS lookup operations to prevent TCP connection exhaustion.                                                             | NULL    | [SELECT set_dns_concurrency_limit(100);]    |
 | set_dns_cache_size        | scalar        | Updates the DNS cache size for the resolver.                                                                                                              | NULL    | [SELECT set_dns_cache_size(8192);]          |
 | corey                     | table         | Queries all TXT records for a hostname and returns them as a table with one row per TXT record.                                                           | NULL    | [SELECT * FROM corey('lastweekinaws.com');] |
+| dns_lookup                | scalar        | Performs a forward DNS lookup to resolve a hostname to its first IPv4 address, or to the first record of a specified DNS record type as second parameter. | NULL    | [SELECT dns_lookup('google.com');]          |
+| dns_lookup_all            | scalar        | Performs a forward DNS lookup to resolve a hostname to all its IPv4 addresses, or to all records of a specified DNS record type second parameter.         | NULL    | [SELECT dns_lookup_all('cloudflare.com');]  |
 
 ### Overloaded Functions
 
@@ -364,7 +366,9 @@ This extension does not add any function overloads.
 
 <div class="extension_types_table"></div>
 
-This extension does not add any types.
+| type_name | type_size | logical_type | type_category | internal |
+|-----------|----------:|--------------|---------------|----------|
+| LIST      | 16        | LIST         | COMPOSITE     | true     |
 
 ### Added Settings
 

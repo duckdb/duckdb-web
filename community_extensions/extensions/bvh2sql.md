@@ -60,8 +60,8 @@ docs:
 
 extension_star_count: 1
 extension_star_count_pretty: 1
-extension_download_count: 16954
-extension_download_count_pretty: 17.0k
+extension_download_count: 18427
+extension_download_count_pretty: 18.4k
 image: '/images/community_extensions/social_preview/preview_community_extension_bvh2sql.png'
 layout: community_extension_doc
 ---

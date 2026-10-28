@@ -47,8 +47,8 @@ docs:
 
 extension_star_count: 2
 extension_star_count_pretty: 2
-extension_download_count: 241
-extension_download_count_pretty: 241
+extension_download_count: 369
+extension_download_count_pretty: 369
 image: '/images/community_extensions/social_preview/preview_community_extension_geosupport.png'
 layout: community_extension_doc
 ---
