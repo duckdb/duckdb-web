@@ -204,3 +204,7 @@ The following are not yet supported by the DuckDB `iceberg` extension:
 
 * The `GEOGRAPHY` data type
 * Copy-on-write semantics for `UPDATE`, `DELETE`, and `MERGE INTO`
+
+## See Also
+
+For continuously replicating data from PostgreSQL, MySQL, or MongoDB into Iceberg via change data capture (CDC), see [OLake](https://olake.io/docs) — an open-source tool that writes to Iceberg REST Catalogs, including the catalogs listed on the [Catalogs]({% link docs/2.0/core_extensions/iceberg/catalogs.md %}) page.
