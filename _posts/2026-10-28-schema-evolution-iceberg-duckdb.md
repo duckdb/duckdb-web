@@ -140,8 +140,6 @@ docker run --pull=always \
 
 Olake Go writes `state.json` to the config directory after the first run. Pass `--state` on subsequent runs so the sync resumes from the saved WAL position instead of doing a full refresh.
 
-After the initial sync, the `orders` table exists in the Glue catalog and its Parquet files are on S3.
-
 ## Attach the Catalog in DuckDB
 
 ```sql
@@ -162,7 +160,7 @@ ATTACH '⟨account_id⟩' AS glue_catalog (
 );
 ```
 
-The `ATTACH` statement connects DuckDB to the Glue catalog. You can now query the table with the `glue_catalog.public.orders` three-part name.
+Tables are accessible with the three-part name `glue_catalog.public.orders`.
 
 ## Schema Change 1: Adding a Column
 
@@ -230,25 +228,7 @@ LIMIT 5;
 
 The historical snapshot returns `amount` even though the live table no longer has it.
 
-## Why This Works Without Manual Intervention
-
-```text
-Source DB                  Iceberg (Glue + S3)          DuckDB
-
-ALTER TABLE                metadata.json updated         next query reads
-ADD COLUMN region    →     (new field ID added)    →     new column as NULL
-                           no Parquet rewrite            for old rows
-
-ALTER COLUMN               metadata.json updated         DESCRIBE shows
-TYPE BIGINT          →     (type promotion)       →     BIGINT; values
-                           no Parquet rewrite            widened on read
-
-DROP COLUMN                metadata.json updated         live schema: no column
-amount               →     (field removed from    →     AT (VERSION=...): column
-                           live schema)                  still present in history
-```
-
-DuckDB resolves the Iceberg schema from the Glue catalog on every query. When Olake Go commits a schema change to Glue, DuckDB picks it up automatically. The catalog is the single source of schema truth for both tools.
+In each case, DuckDB resolves the schema from the Glue catalog on every query — when Olake Go commits a schema change, DuckDB picks it up automatically with no manual step.
 
 ## Further Reading
 
