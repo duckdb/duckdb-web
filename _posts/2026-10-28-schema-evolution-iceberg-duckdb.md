@@ -11,7 +11,7 @@ Schema changes in operational databases — added columns, widened types, droppe
 
 This post walks the complete path using [Olake Go](https://olake.io/olake-go/) — an [open-source EL platform](https://olake.io/docs/) for CDC and incremental replication to Apache Iceberg — with DuckDB querying the results through [Lakekeeper](https://lakekeeper.io), an open-source Iceberg REST Catalog.
 
-> This example uses PostgreSQL. Olake Go supports the same replication workflow for MySQL, MongoDB, Oracle, MSSQL, DB2, and S3 — only `source.json` changes.
+> This example uses PostgreSQL. Olake Go supports the same replication workflow for MySQL, MongoDB, Oracle, MSSQL, DB2, Kafka, and S3 — only `source.json` changes.
 
 ## Pipeline Overview
 
