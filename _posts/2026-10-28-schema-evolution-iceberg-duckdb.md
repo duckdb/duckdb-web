@@ -32,7 +32,7 @@ This post walks the complete path: a source database undergoes schema changes, [
                                                                                  └─────────────────┘
 ```
 
-When the source schema changes, Olake Go detects it on the next sync, commits a metadata-only update to Iceberg, and DuckDB reflects the new schema on the following query.
+When the source schema changes, Olake Go detects it on the next sync, commits the schema update to Iceberg, and DuckDB reflects the new schema on the following query.
 
 ## Prerequisites
 
@@ -43,7 +43,7 @@ When the source schema changes, Olake Go detects it on the next sync, commits a 
 
 ## Configure Olake Go
 
-Olake Go reads from three files: `source.json` (source connection), `destination.json` (the Iceberg catalog), and `streams.json` (which tables to replicate and how).
+Olake Go reads from three files: `source.json` (source connection), `destination.json` (the Iceberg catalog), and `selected_streams.json` (which tables to replicate and how).
 
 Create a config directory:
 
@@ -95,7 +95,7 @@ CREATE PUBLICATION olake_pub FOR ALL TABLES;
 
 ## Discover Streams
 
-Run `discover` to inspect the source and write `streams.json` to the config directory:
+Run `discover` to inspect the source and write `available_streams.json` to the config directory:
 
 ```bash
 docker run --pull=always \
@@ -105,20 +105,21 @@ docker run --pull=always \
   --config /mnt/config/source.json
 ```
 
-Edit `streams.json` to configure the `orders` table. Set `sync_new_columns` to `true` so Olake Go automatically picks up columns added to the source after the initial sync:
+Create `selected_streams.json` to configure the `orders` table. The top-level key is `selected_streams`; each namespace maps to an array of stream objects. Set `sync_new_columns` to `true` so Olake Go automatically picks up columns added to the source after the initial sync:
 
 ```json
 {
-  "streams": [
-    {
-      "stream_name": "orders",
-      "namespace": "public",
-      "sync_mode": "cdc",
-      "selected_columns": {
-        "sync_new_columns": true
+  "selected_streams": {
+    "public": [
+      {
+        "stream_name": "orders",
+        "sync_mode": "cdc",
+        "selected_columns": {
+          "sync_new_columns": true
+        }
       }
-    }
-  ]
+    ]
+  }
 }
 ```
 
@@ -132,7 +133,7 @@ docker run --pull=always \
   olakego/source-postgres:latest \
   sync \
   --config /mnt/config/source.json \
-  --streams /mnt/config/streams.json \
+  --streams /mnt/config/selected_streams.json \
   --destination /mnt/config/destination.json \
   --state /mnt/config/state.json
 ```
@@ -182,7 +183,7 @@ LIMIT 5;
 
 Rows inserted before the `ALTER TABLE` return `NULL` for `region`. New rows carry the actual value. The existing Parquet files are never rewritten — Iceberg stores the schema change in a new `metadata.json`, not in the data files.
 
-> Note `sync_new_columns: true` in `streams.json` is required for Olake Go to pick up the new column automatically. Without it, add the column to the stream's column list manually and re-run `discover` first.
+> Note `sync_new_columns: true` in `selected_streams.json` is required for Olake Go to pick up the new column automatically. Without it, add the column to the stream's `selected_columns.columns` list manually and re-run `discover` first.
 
 ## Schema Change 2: Widening a Type
 
@@ -192,7 +193,7 @@ Promote `customer_id` from `INTEGER` to `BIGINT`:
 ALTER TABLE orders ALTER COLUMN customer_id TYPE BIGINT;
 ```
 
-Iceberg v2 supports these type widening promotions natively: `INT → BIGINT`, `FLOAT → DOUBLE`, `DATE → TIMESTAMP`, and `DECIMAL` precision increases. Olake Go propagates the change to the Iceberg schema as a metadata-only update — no data files are rewritten. DuckDB reflects the new type on the next query:
+Iceberg v2 supports these type widening promotions natively: `INT → BIGINT`, `FLOAT → DOUBLE`, `DATE → TIMESTAMP`, and `DECIMAL` precision increases. Olake Go propagates the type change to the Iceberg schema. Iceberg records the new type in a fresh `metadata.json` without rewriting existing data files. DuckDB reflects the new type on the next query:
 
 ```sql
 DESCRIBE glue_catalog.public.orders;
