@@ -120,8 +120,8 @@ docs:
 
 extension_star_count: 13
 extension_star_count_pretty: 13
-extension_download_count: 7891
-extension_download_count_pretty: 7.9k
+extension_download_count: 9018
+extension_download_count_pretty: 9.0k
 image: '/images/community_extensions/social_preview/preview_community_extension_anndata.png'
 layout: community_extension_doc
 ---

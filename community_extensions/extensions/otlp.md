@@ -121,8 +121,8 @@ docs:
 
 extension_star_count: 97
 extension_star_count_pretty: 97
-extension_download_count: 19988
-extension_download_count_pretty: 20.0k
+extension_download_count: 22407
+extension_download_count_pretty: 22.4k
 image: '/images/community_extensions/social_preview/preview_community_extension_otlp.png'
 layout: community_extension_doc
 ---

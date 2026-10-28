@@ -25,8 +25,8 @@ repo:
 
 extension_star_count: 31
 extension_star_count_pretty: 31
-extension_download_count: 12976
-extension_download_count_pretty: 13.0k
+extension_download_count: 14581
+extension_download_count_pretty: 14.6k
 image: '/images/community_extensions/social_preview/preview_community_extension_quack_oauth.png'
 layout: community_extension_doc
 ---
