@@ -99,11 +99,11 @@ This table covers all DuckDB releases that have not reached [end-of-life](https:
 
 | Platform | 1.4.4 | 1.4.5 | 1.5.5 | 1.5.6 | 2.0.0 |
 | :--- | :---: | :---: | :---: | :---: | :---: |
-| Linux AMD64 | ❌ | ❌ | ✅ | ✅ | ❌ |
-| Linux ARM64 | ❌ | ❌ | ✅ | ✅ | ❌ |
+| Linux AMD64 | ❌ | ❌ | ✅ | ✅ | ✅ |
+| Linux ARM64 | ❌ | ❌ | ✅ | ✅ | ✅ |
 | macOS AMD64 | ❌ | ❌ | ✅ | ✅ | ❌ |
-| macOS ARM64 | ❌ | ❌ | ✅ | ✅ | ❌ |
-| Windows AMD64 | ❌ | ❌ | ✅ | ✅ | ❌ |
+| macOS ARM64 | ❌ | ❌ | ✅ | ✅ | ✅ |
+| Windows AMD64 | ❌ | ❌ | ✅ | ✅ | ✅ |
 | Windows ARM64 | ❌ | ❌ | ❌ | ❌ | ❌ |
 | WebAssembly | ❌ | ❌ | ❌ | ❌ | ❌ |
 
@@ -127,57 +127,30 @@ LOAD {{ page.extension.name }};
 
 <div class="extension_functions_table"></div>
 
-|     function_name     | function_type | description | comment | examples |
-|-----------------------|---------------|-------------|---------|----------|
-| pdf_annotations       | table         | NULL        | NULL    |          |
-| pdf_attachments       | table         | NULL        | NULL    |          |
-| pdf_bates             | scalar        | NULL        | NULL    |          |
-| pdf_chunks            | table         | NULL        | NULL    |          |
-| pdf_compress          | scalar        | NULL        | NULL    |          |
-| pdf_decrypt           | scalar        | NULL        | NULL    |          |
-| pdf_destinations      | table         | NULL        | NULL    |          |
-| pdf_encrypt           | scalar        | NULL        | NULL    |          |
-| pdf_fonts             | table         | NULL        | NULL    |          |
-| pdf_form_fields       | table         | NULL        | NULL    |          |
-| pdf_images            | table         | NULL        | NULL    |          |
-| pdf_info              | table         | NULL        | NULL    |          |
-| pdf_json              | scalar        | NULL        | NULL    |          |
-| pdf_merge             | scalar        | NULL        | NULL    |          |
-| pdf_outline           | table         | NULL        | NULL    |          |
-| pdf_page_images       | table         | NULL        | NULL    |          |
-| pdf_pages             | scalar        | NULL        | NULL    |          |
-| pdf_pages_info        | table         | NULL        | NULL    |          |
-| pdf_permissions       | table         | NULL        | NULL    |          |
-| pdf_qpdf_info         | table         | NULL        | NULL    |          |
-| pdf_redact            | table         | NULL        | NULL    |          |
-| pdf_redact_lateral    | table         | NULL        | NULL    |          |
-| pdf_repair            | scalar        | NULL        | NULL    |          |
-| pdf_revisions         | table         | NULL        | NULL    |          |
-| pdf_rotate            | scalar        | NULL        | NULL    |          |
-| pdf_sign              | table         | NULL        | NULL    |          |
-| pdf_signatures        | table         | NULL        | NULL    |          |
-| pdf_split             | table         | NULL        | NULL    |          |
-| pdf_split_blank       | table         | NULL        | NULL    |          |
-| pdf_to_html           | scalar        | NULL        | NULL    |          |
-| pdf_to_markdown       | scalar        | NULL        | NULL    |          |
-| pdf_to_png            | scalar        | NULL        | NULL    |          |
-| pdf_to_svg            | scalar        | NULL        | NULL    |          |
-| pdf_to_text           | scalar        | NULL        | NULL    |          |
-| pdf_to_xml            | scalar        | NULL        | NULL    |          |
-| pdf_watermark         | scalar        | NULL        | NULL    |          |
-| pdf_write_page_images | table         | NULL        | NULL    |          |
-| poppler_render_page   | scalar        | NULL        | NULL    |          |
-| poppler_version       | scalar        | NULL        | NULL    |          |
-| read_pdf              | table         | NULL        | NULL    |          |
-| read_pdf_elements     | table         | NULL        | NULL    |          |
-| read_pdf_layout       | table         | NULL        | NULL    |          |
-| read_pdf_lines        | table         | NULL        | NULL    |          |
-| read_pdf_meta         | table         | NULL        | NULL    |          |
-| read_pdf_tables       | table         | NULL        | NULL    |          |
-| read_pdf_words        | table         | NULL        | NULL    |          |
-| tesseract_ocr         | scalar        | NULL        | NULL    |          |
-| to_pdf                | scalar        | NULL        | NULL    |          |
-| write_pdf             | scalar        | NULL        | NULL    |          |
+|   function_name    | function_type |                                                                                                                                       description                                                                                                                                       | comment |                                                      examples                                                       |
+|--------------------|---------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|---------|---------------------------------------------------------------------------------------------------------------------|
+| ocr_image          | scalar        | Recognize an encoded image BLOB. Scalar returns text, HOCR or TSV and accepts an optional options STRUCT. Table returns text, confidence and format with named OCR settings.                                                                                                            | NULL    | [SELECT ocr_image(pdf_render('document.pdf', 1), {language: 'eng'});]                                               |
+| ocr_image          | table         | Recognize an encoded image BLOB. Scalar returns text, HOCR or TSV and accepts an optional options STRUCT. Table returns text, confidence and format with named OCR settings.                                                                                                            | NULL    | [SELECT text, confidence FROM ocr_image(pdf_render('document.pdf', 1));]                                            |
+| pdf_info           | table         | Inspect metadata, permissions and features (detail basic), or qpdf structural and encryption statistics (detail qpdf). Basic supports projection pushdown and ignore_errors.                                                                                                            | NULL    | [SELECT * FROM pdf_info('document.pdf', detail := 'basic');]                                                        |
+| pdf_merge          | scalar        | Merge local input PDFs in list order and atomically publish the output.                                                                                                                                                                                                                 | NULL    | [SELECT pdf_merge(['first.pdf', 'second.pdf'], 'merged.pdf');]                                                      |
+| pdf_objects        | table         | Inspect typed PDF objects; kind is required: outline, structure, destinations, fonts, form_fields, annotations, attachments, images, signatures, revisions or pages. Each kind has its own schema. Signature verification checks integrity, not certificate trust.                      | NULL    | [SELECT * FROM pdf_objects('document.pdf', kind := 'outline');]                                                     |
+| pdf_ocr            | table         | Add searchable Tesseract layers to selected pages and return one status row per document page. Existing text pages are skipped unless force is true. Force adds another layer and can duplicate extracted text.                                                                         | NULL    | [SELECT * FROM pdf_ocr('document.pdf', 'searchable.pdf', force := false);]                                          |
+| pdf_pages          | scalar        | Extract/reorder local PDF pages using qpdf ranges; optional STRUCT rotate (multiple of 90) and rotate_pages select rotation after extraction, in output page coordinates. Default rotates all selected pages.                                                                           | NULL    | [SELECT pdf_pages('document.pdf', 'selected.pdf', '1-3', {rotate: 90});]                                            |
+| pdf_pages          | scalar        | Rotate a complete local PDF without extracting pages, preserving its catalog, metadata and bookmarks. STRUCT rotate is a multiple of 90; optional rotate_pages defaults to all and uses original document page numbers.                                                                 | NULL    | [SELECT pdf_pages('document.pdf', 'rotated.pdf', {rotate: 90});]                                                    |
+| pdf_redact         | table         | Rasterize redacted pages and remove their underlying text. Boxes use original PDF user-space points with a bottom-left origin. Redaction removes forms, annotations, attachments and document metadata.                                                                                 | NULL    | [SELECT * FROM pdf_redact('document.pdf', 'redacted.pdf', [{page: 1, x: 0.0, y: 0.0, w: 100.0, h: 30.0}]);]         |
+| pdf_redact_lateral | table         | Column-input variant of pdf_redact. Uses dpi 200 and an empty password; no named options.                                                                                                                                                                                               | NULL    | [SELECT * FROM pdf_redact_lateral('document.pdf', 'redacted.pdf', [{page: 1, x: 0.0, y: 0.0, w: 100.0, h: 30.0}]);] |
+| pdf_render         | scalar        | Scalar: render one page to encoded PNG or SVG bytes (BLOB); optional STRUCT format defaults to png, dpi to 150. Use decode for SVG text. Table: stream pages, with format png (default) or svg; output_dir writes preview files. Page bounds, dpi and password are named table options. | NULL    | [SELECT pdf_render('document.pdf', 1, {format: 'png', dpi: 150});]                                                  |
+| pdf_render         | table         | Scalar: render one page to encoded PNG or SVG bytes (BLOB); optional STRUCT format defaults to png, dpi to 150. Use decode for SVG text. Table: stream pages, with format png (default) or svg; output_dir writes preview files. Page bounds, dpi and password are named table options. | NULL    | [SELECT page, png FROM pdf_render('document.pdf', dpi := 150);]                                                     |
+| pdf_rewrite        | scalar        | Rewrite a local PDF. STRUCT mode is compress, repair, encrypt or decrypt. Encrypt/decrypt require password; encrypt optionally accepts owner_password. Repair optionally accepts password. Output is atomically published.                                                              | NULL    | [SELECT pdf_rewrite('document.pdf', 'small.pdf', {mode: 'compress'});]                                              |
+| pdf_sign           | table         | Sign using a PEM certificate and key. Existing signatures are rejected: incremental signing is unsupported. Inspect with pdf_objects kind signatures.                                                                                                                                   | NULL    | [SELECT * FROM pdf_sign('document.pdf', 'signed.pdf', 'cert.pem', 'key.pem');]                                      |
+| pdf_split          | table         | Split a local PDF into files by page (default mode page), or near-white separators (mode blank, blank_threshold in (0,1]). Schemas differ by mode. The output directory must exist.                                                                                                     | NULL    | [SELECT * FROM pdf_split('document.pdf', 'parts', mode := 'blank');]                                                |
+| pdf_stamp          | scalar        | Stamp a local PDF. STRUCT mode watermark requires text, optional opacity defaults to 0.30; mode bates requires prefix and start. Output is atomically published.                                                                                                                        | NULL    | [SELECT pdf_stamp('document.pdf', 'marked.pdf', {mode: 'watermark', text: 'DRAFT'});]                               |
+| pdf_text           | scalar        | Convert a path or PDF BLOB to VARCHAR. Optional STRUCT: format text (default), markdown, html, xml or json; text layout defaults to reading. Password is supported except for Markdown. Markdown requires a path.                                                                       | NULL    | [SELECT pdf_text('document.pdf', {format: 'markdown'});]                                                            |
+| poppler_version    | scalar        | Return the linked runtime Poppler version.                                                                                                                                                                                                                                              | NULL    | [SELECT poppler_version();]                                                                                         |
+| read_pdf           | table         | Read PDF pages by default, or select grain page, line, element, table or chunk at bind time. Each grain retains its native typed columns and streams through DuckDB file readers. Unsupported options for the selected grain are rejected.                                              | NULL    | [SELECT page, text FROM read_pdf('document.pdf', grain := 'page');]                                                 |
+| read_pdf_words     | table         | Read positioned words with font, column/line grouping, label and OCR provenance. Coordinates use displayed page points with a top-left origin.                                                                                                                                          | NULL    | [SELECT * FROM read_pdf_words('document.pdf');]                                                                     |
+| to_pdf             | scalar        | Convert a local Office document with LibreOffice. Omit output_path to replace the input extension with pdf. Requires external process access.                                                                                                                                           | NULL    | [SELECT to_pdf('document.docx', 'converted.pdf');]                                                                  |
+| write_pdf          | scalar        | Write text to PDF using the in-process writer. Omit output_path to create a temporary PDF and return its path.                                                                                                                                                                          | NULL    | [SELECT write_pdf('Hello', 'hello.pdf');]                                                                           |
 
 ### Overloaded Functions
 
@@ -195,6 +168,8 @@ This extension does not add any types.
 
 <div class="extension_settings_table"></div>
 
-This extension does not add any settings.
+|      name      |                       description                       | input_type | scope  | aliases | typed_value |
+|----------------|---------------------------------------------------------|------------|--------|---------|-------------|
+| temp_directory | Set the directory to which temporary files are written. | VARCHAR    | GLOBAL | []      | post.db.tmp |
 
 
