@@ -41,8 +41,12 @@ html.darkmode body.documentation.communityextensions .box-link .symbol{
 	}
 }
 
-.breadcrumbs{
-	display: none;
+body.documentation.communityextensions #main_content_wrap .headlinebar .breadcrumbs{
+	display: block;
+}
+
+body.documentation.communityextensions #main_content_wrap .headlinebar h1.title{
+	margin: 0;
 }
 
 body.documentation.communityextensions header .headerline .headercontent .landingmenu nav .search_icon{
