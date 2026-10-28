@@ -11,7 +11,7 @@ When an operational database evolves — a column is added, a type is widened, a
 
 This post walks the complete path: a source database undergoes schema changes, [Olake Go](https://olake.io/olake-go/) replicates those changes into an Iceberg table on S3, and DuckDB queries the evolved table through an AWS Glue catalog.
 
-> This example uses PostgreSQL as the source database. Olake Go supports the same CDC workflow for MySQL, MongoDB, Oracle, MSSQL, DB2, Kafka, and S3. Only the `source.json` changes; everything else in this post applies to any supported source.
+> This example uses PostgreSQL as the source database. Olake Go supports the same replication workflow for MySQL, MongoDB, Oracle, MSSQL, DB2, Kafka, and S3. Only the `source.json` changes; everything else in this post applies to any supported source.
 
 ## Pipeline Overview
 
@@ -172,7 +172,7 @@ Add a `region` column to the source table:
 ALTER TABLE orders ADD COLUMN region VARCHAR(50);
 ```
 
-Rerun the sync command (with `--state`) and then query from DuckDB. Olake Go adds the new field to the Iceberg schema with a new field ID. Historical rows return `NULL` for `region`; new rows carry the value:
+Rerun the sync command (with `--state`) and then query from DuckDB. Olake Go adds the new field to the Iceberg schema with a new field ID:
 
 ```sql
 SELECT order_id, region
@@ -183,7 +183,7 @@ LIMIT 5;
 
 Rows inserted before the `ALTER TABLE` return `NULL` for `region`. New rows carry the actual value. The existing Parquet files are never rewritten — Iceberg stores the schema change in a new `metadata.json`, not in the data files.
 
-> Note `sync_new_columns: true` in `selected_streams.json` is required for Olake Go to pick up the new column automatically. Without it, add the column to the stream's `selected_columns.columns` list manually and re-run `discover` first.
+> Note `sync_new_columns: true` in `selected_streams.json` is required for Olake Go to pick up the new column automatically. Without it, add the column name to the stream's `selected_columns.columns` array in `selected_streams.json` manually before the next sync.
 
 ## Schema Change 2: Widening a Type
 
@@ -193,7 +193,7 @@ Promote `customer_id` from `INTEGER` to `BIGINT`:
 ALTER TABLE orders ALTER COLUMN customer_id TYPE BIGINT;
 ```
 
-Iceberg v2 supports these type widening promotions natively: `INT → BIGINT`, `FLOAT → DOUBLE`, `DATE → TIMESTAMP`, and `DECIMAL` precision increases. Olake Go propagates the type change to the Iceberg schema. Iceberg records the new type in a fresh `metadata.json` without rewriting existing data files. DuckDB reflects the new type on the next query:
+Iceberg v2 supports these type widening promotions natively: `INT → BIGINT`, `FLOAT → DOUBLE`, and `DECIMAL` precision increases. Olake Go propagates the type change to the Iceberg schema. Iceberg records the new type in a fresh `metadata.json` without rewriting existing data files. DuckDB reflects the new type on the next query:
 
 ```sql
 DESCRIBE glue_catalog.public.orders;
