@@ -2372,7 +2372,7 @@ sample(self, n: int | None = None, *, percent: float | None = None, seed: int | 
 
 A random subset: `n` rows, or `percent` of them, with `seed` repeating a draw.
 
-See [Samples]({% link docs/2.0/sql/samples.md %}) for the sampling methods. A fixed `seed` gives the same sample on every run only when DuckDB runs on one thread.
+See [Samples]({% link docs/2.0/sql/query_syntax/samples.md %}) for the sampling methods. A fixed `seed` gives the same sample on every run only when DuckDB runs on one thread.
 
 **Parameters**
 

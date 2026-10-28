@@ -34,6 +34,8 @@ The `WindowFunction` constructor takes the function's name, argument types, retu
 | `SetCanExclude` | `EXCLUDE` clause | `false` |
 | `SetCanIgnoreNulls` | `IGNORE NULLS` | `true` |
 
+> DuckDB 2.1 adds the `SetIsRanking` method (default: `false`), which marks the function as a ranking function such as `rank` or `row_number`. The planner uses it to exclude ranking functions from optimizations for degenerate frames, i.e., frames that only contain the current row. This property is currently only available on the `main` branch of the [`duckdb/duckdb` repository](https://github.com/duckdb/duckdb) and is not part of the DuckDB 2.0.0 release.
+
 ## Blocking Interface
 
 Window functions are typically evaluated in a blocking fashion: the window operator first partitions and sorts the input into hash groups, then evaluates the function on each hash group. A blocking window function implements the following callbacks:

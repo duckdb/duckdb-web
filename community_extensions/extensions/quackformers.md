@@ -30,8 +30,8 @@ docs:
 
 extension_star_count: 16
 extension_star_count_pretty: 16
-extension_download_count: 14251
-extension_download_count_pretty: 14.3k
+extension_download_count: 19046
+extension_download_count_pretty: 19.0k
 image: '/images/community_extensions/social_preview/preview_community_extension_quackformers.png'
 layout: community_extension_doc
 ---

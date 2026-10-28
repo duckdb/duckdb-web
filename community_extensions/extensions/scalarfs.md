@@ -105,8 +105,8 @@ docs:
 
 extension_star_count: 10
 extension_star_count_pretty: 10
-extension_download_count: 18276
-extension_download_count_pretty: 18.3k
+extension_download_count: 23649
+extension_download_count_pretty: 23.6k
 image: '/images/community_extensions/social_preview/preview_community_extension_scalarfs.png'
 layout: community_extension_doc
 ---
@@ -146,19 +146,23 @@ LOAD {{ page.extension.name }};
 
 <div class="extension_functions_table"></div>
 
-|   function_name    | function_type |                                  description                                   | comment |                      examples                      |
-|--------------------|---------------|--------------------------------------------------------------------------------|---------|----------------------------------------------------|
-| from_blob_uri      | scalar        | Decode a blob: URI to its string payload.                                      | NULL    | [from_blob_uri('blob:68656c6c6f')]                 |
-| from_data_uri      | scalar        | Decode an RFC 2397 data: URI to its payload string.                            | NULL    | [from_data_uri('data:text/plain;base64,aGVsbG8=')] |
-| from_pathmacro_url | scalar        | Parse a pathmacro: URL into a struct containing macro name and parameters map. | NULL    | [from_pathmacro_url('pathmacro:my_macro?key=val')] |
-| from_scalarfs_uri  | scalar        | Decode any scalarfs-compatible URI to its string payload.                      | NULL    | [from_scalarfs_uri('varchar:hello%20world')]       |
-| from_varchar_uri   | scalar        | Decode a varchar: URI to its string payload.                                   | NULL    | [from_varchar_uri('varchar:hello%20world')]        |
-| to_blob_uri        | scalar        | Encode a string as a hex-encoded blob: URI.                                    | NULL    | [to_blob_uri('hello world')]                       |
-| to_data_uri        | scalar        | Encode a string into an RFC 2397 data: URI.                                    | NULL    | [to_data_uri('hello world')]                       |
-| to_pathmacro_url   | scalar        | Construct a pathmacro: URL from a macro name and parameters struct/map.        | NULL    | [to_pathmacro_url('my_macro', {'key': 'val'})]     |
-| to_pathmacro_url   | scalar        | Construct a pathmacro: URL from a macro name.                                  | NULL    | [to_pathmacro_url('my_macro')]                     |
-| to_scalarfs_uri    | scalar        | NULL                                                                           | NULL    |                                                    |
-| to_varchar_uri     | scalar        | Encode a string as a percent-encoded varchar: URI.                             | NULL    | [to_varchar_uri('hello world')]                    |
+|       function_name        | function_type |                                                                                                  description                                                                                                   | comment |                      examples                      |
+|----------------------------|---------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|---------|----------------------------------------------------|
+| from_blob_uri              | scalar        | Decode a blob: URI to its string payload.                                                                                                                                                                      | NULL    | [from_blob_uri('blob:68656c6c6f')]                 |
+| from_data_uri              | scalar        | Decode an RFC 2397 data: URI to its payload string.                                                                                                                                                            | NULL    | [from_data_uri('data:text/plain;base64,aGVsbG8=')] |
+| from_pathmacro_url         | scalar        | Parse a pathmacro: URL into a struct containing macro name and parameters map.                                                                                                                                 | NULL    | [from_pathmacro_url('pathmacro:my_macro?key=val')] |
+| from_scalarfs_uri          | scalar        | Decode any scalarfs-compatible URI to its string payload.                                                                                                                                                      | NULL    | [from_scalarfs_uri('varchar:hello%20world')]       |
+| from_varchar_uri           | scalar        | Decode a varchar: URI to its string payload.                                                                                                                                                                   | NULL    | [from_varchar_uri('varchar:hello%20world')]        |
+| is_data_uri                | scalar        | True if the path carries its content inline: data:, data+varchar: or data+blob:.                                                                                                                               | NULL    | [is_data_uri('data+varchar:hello')]                |
+| is_scalarfs_uri            | scalar        | True if scalarfs opens the path: data:, data+varchar:, data+blob:, variable:, pathvariable:, pathmacro:, decompress+gz:, decompress+zstd: (and their tmp_ forms).                                              | NULL    | [is_scalarfs_uri('variable:my_var')]               |
+| scalarfs_canonicalize_path | scalar        | Canonicalize a path through the session filesystem. pathvariable: and pathmacro: paths that name exactly one file resolve to that file's path; any other path is canonicalized by the filesystem that owns it. | NULL    | [scalarfs_canonicalize_path('pathvariable:doc')]   |
+| scalarfs_protocol          | scalar        | The scalarfs protocol of a path, without the colon (e.g. 'data+varchar', 'tmp_variable'), or NULL if scalarfs does not open the path.                                                                          | NULL    | [scalarfs_protocol('data+varchar:hello')]          |
+| to_blob_uri                | scalar        | Encode a string as a hex-encoded blob: URI.                                                                                                                                                                    | NULL    | [to_blob_uri('hello world')]                       |
+| to_data_uri                | scalar        | Encode a string into an RFC 2397 data: URI.                                                                                                                                                                    | NULL    | [to_data_uri('hello world')]                       |
+| to_pathmacro_url           | scalar        | Construct a pathmacro: URL from a macro name and parameters struct/map.                                                                                                                                        | NULL    | [to_pathmacro_url('my_macro', {'key': 'val'})]     |
+| to_pathmacro_url           | scalar        | Construct a pathmacro: URL from a macro name.                                                                                                                                                                  | NULL    | [to_pathmacro_url('my_macro')]                     |
+| to_scalarfs_uri            | scalar        | NULL                                                                                                                                                                                                           | NULL    |                                                    |
+| to_varchar_uri             | scalar        | Encode a string as a percent-encoded varchar: URI.                                                                                                                                                             | NULL    | [to_varchar_uri('hello world')]                    |
 
 ### Overloaded Functions
 

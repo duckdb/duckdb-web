@@ -501,7 +501,7 @@ title: List Functions
 
 | **Description** | Returns a list of all the elements that exist in both `list1` and `list2`, without duplicates. |
 | **Example** | `list_intersect([1, 2, 3], [2, 3, 4])` |
-| **Result** | `[3, 2]` |
+| **Result** | `[2, 3]` |
 | **Alias** | `array_intersect` |
 
 #### `list_kurtosis(list)`

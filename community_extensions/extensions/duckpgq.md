@@ -12,6 +12,7 @@ extension:
   language: C++
   build: cmake
   license: MIT
+  opt_in_platforms: "windows_arm64"
   maintainers:
     - Dtenwolde
 
@@ -19,7 +20,7 @@ repo:
   github: cwida/duckpgq-extension
   andium: 42eea114b22fad93f04cb7edf50d2b0077e464fa
   variegata: 61f5d08270bef2c81fc4e5d9af32739e67adc2be
-  ref: 29ca668a2218810862bed794cc501add03a4149a
+  ref: 9c11bc192a071c9e44cef16cced90a22d7d7db2c
 
 docs:
   hello_world: |
@@ -67,8 +68,8 @@ docs:
 
 extension_star_count: 506
 extension_star_count_pretty: 506
-extension_download_count: 24137
-extension_download_count_pretty: 24.1k
+extension_download_count: 26919
+extension_download_count_pretty: 26.9k
 image: '/images/community_extensions/social_preview/preview_community_extension_duckpgq.png'
 layout: community_extension_doc
 ---
@@ -85,7 +86,7 @@ This table covers all DuckDB releases that have not reached [end-of-life](https:
 | macOS AMD64 | ✅ | ❌ | ❌ | ✅ | ✅ |
 | macOS ARM64 | ✅ | ❌ | ❌ | ✅ | ✅ |
 | Windows AMD64 | ✅ | ❌ | ❌ | ✅ | ✅ |
-| Windows ARM64 | ❌ | ❌ | ❌ | ❌ | ❌ |
+| Windows ARM64 | ❌ | ❌ | ❌ | ❌ | ✅ |
 | WebAssembly | ✅ | ❌ | ❌ | ✅ | ✅ |
 
 ### Installing and Loading

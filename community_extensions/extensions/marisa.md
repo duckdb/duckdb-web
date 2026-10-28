@@ -27,8 +27,8 @@ repo:
 
 extension_star_count: 17
 extension_star_count_pretty: 17
-extension_download_count: 21939
-extension_download_count_pretty: 21.9k
+extension_download_count: 28544
+extension_download_count_pretty: 28.5k
 image: '/images/community_extensions/social_preview/preview_community_extension_marisa.png'
 layout: community_extension_doc
 ---

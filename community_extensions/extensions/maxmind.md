@@ -70,8 +70,8 @@ docs:
 
 extension_star_count: 9
 extension_star_count_pretty: 9
-extension_download_count: 14208
-extension_download_count_pretty: 14.2k
+extension_download_count: 18647
+extension_download_count_pretty: 18.6k
 image: '/images/community_extensions/social_preview/preview_community_extension_maxmind.png'
 layout: community_extension_doc
 ---

@@ -142,7 +142,7 @@ body.about{
 			display: flex;
 			border-radius: var(--page-radius-box);
 			overflow: hidden;
-			border: 1px solid var(--main-infobox-labs-border-color, rgba(230, 230, 230, 0.6));
+			border: 1px solid var(--border-color);
 			background: var(--main-infobox-labs-background-color, rgba(242, 242, 242, 0.6));
 
 			.founder-photo{

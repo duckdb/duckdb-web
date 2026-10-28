@@ -44,10 +44,10 @@ docs:
 
 
 
-extension_star_count: 92
-extension_star_count_pretty: 92
-extension_download_count: 70302
-extension_download_count_pretty: 70.3k
+extension_star_count: 93
+extension_star_count_pretty: 93
+extension_download_count: 77274
+extension_download_count_pretty: 77.3k
 image: '/images/community_extensions/social_preview/preview_community_extension_nanoarrow.png'
 layout: community_extension_doc
 ---

@@ -133,8 +133,8 @@ docs:
 
 extension_star_count: 7
 extension_star_count_pretty: 7
-extension_download_count: 12805
-extension_download_count_pretty: 12.8k
+extension_download_count: 16612
+extension_download_count_pretty: 16.6k
 image: '/images/community_extensions/social_preview/preview_community_extension_ossie.png'
 layout: community_extension_doc
 ---

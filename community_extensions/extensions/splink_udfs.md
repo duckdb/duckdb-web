@@ -33,8 +33,8 @@ docs:
 
 extension_star_count: 7
 extension_star_count_pretty: 7
-extension_download_count: 21960
-extension_download_count_pretty: 22.0k
+extension_download_count: 29287
+extension_download_count_pretty: 29.3k
 image: '/images/community_extensions/social_preview/preview_community_extension_splink_udfs.png'
 layout: community_extension_doc
 ---

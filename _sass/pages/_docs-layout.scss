@@ -221,7 +221,7 @@ body.documentation {
             ul {
                 padding-left: 0px;
                 margin-left: 15px;
-                border-left: 1px solid var(--main-codebox-border-color, #E6E6E6);
+                border-left: 1px solid var(--border-color);
                 margin-top: 2px;
                 margin-bottom: 2px;
                 
@@ -266,7 +266,7 @@ body.documentation {
     .sidenavigation {
         position: fixed;
         top: calc(55px + var(--docbanner-height, 0px));
-        border-right: 1px solid var(--main-codebox-border-color, #E6E6E6);
+        border-right: 1px solid var(--border-color);
         width: 275px;
         height: calc(100vh - 55px - var(--docbanner-height, 0px));
         padding: 15px;
@@ -416,7 +416,7 @@ body.documentation {
         }
 
         li.hasSub.opened+ul {
-            border-left: 1px solid var(--main-codebox-border-color, #E6E6E6);
+            border-left: 1px solid var(--border-color);
         }
     }
 }
@@ -432,7 +432,7 @@ body.documentation {
     margin: 0;
     list-style: none;
     background-color: var(--menu-dropdown-background-color, #0D0D0D);
-    border: 1px solid var(--menu-dropdown-border-color);
+    border: 1px solid var(--border-color);
     border-radius: var(--page-radius-box);
     padding: 8px;
     right: 0;

@@ -483,6 +483,10 @@
               "path": "/docs/2.0/sql/query_syntax/sample"
             },
             {
+              "page": "Samples",
+              "path": "/docs/2.0/sql/query_syntax/samples"
+            },
+            {
               "page": "Unnesting",
               "path": "/docs/2.0/sql/query_syntax/unnest"
             },
@@ -824,10 +828,6 @@
         {
           "page": "PEG Parser",
           "path": "/docs/2.0/sql/peg_parser"
-        },
-        {
-          "page": "Samples",
-          "path": "/docs/2.0/sql/samples"
         }
       ]
     },

@@ -238,29 +238,29 @@ There are dedicated extraction functions to get certain subfields:
 | **Example** | `second(timestamp '2021-08-03 11:59:44.123456')` |
 | **Result** | `44` |
 
-#### `timezone_hour(date)`
+#### `timezone_hour(timestamptz)`
 
 <div class="nostroke_table"></div>
 
-| **Description** | Time zone offset hour portion. |
-| **Example** | `timezone_hour(DATE '1992-02-15')` |
-| **Result** | `0` |
+| **Description** | Time zone offset hour portion. Only meaningful for `TIMESTAMP WITH TIME ZONE` values, where the offset is computed for the current `TimeZone` setting. Not supported for `DATE` values. |
+| **Example** | `timezone_hour(TIMESTAMPTZ '1992-02-15 01:00:00+00')` |
+| **Result** | `-5` (with `TimeZone` set to `America/New_York`) |
 
-#### `timezone_minute(date)`
-
-<div class="nostroke_table"></div>
-
-| **Description** | Time zone offset minutes portion. |
-| **Example** | `timezone_minute(DATE '1992-02-15')` |
-| **Result** | `0` |
-
-#### `timezone(date)`
+#### `timezone_minute(timestamptz)`
 
 <div class="nostroke_table"></div>
 
-| **Description** | Time zone offset in minutes. |
-| **Example** | `timezone(DATE '1992-02-15')` |
-| **Result** | `0` |
+| **Description** | Time zone offset minutes portion. Only meaningful for `TIMESTAMP WITH TIME ZONE` values, where the offset is computed for the current `TimeZone` setting. Not supported for `DATE` values. |
+| **Example** | `timezone_minute(TIMESTAMPTZ '1992-02-15 01:00:00+00')` |
+| **Result** | `30` (with `TimeZone` set to `Asia/Kolkata`) |
+
+#### `timezone(timestamptz)`
+
+<div class="nostroke_table"></div>
+
+| **Description** | Time zone offset in seconds. Only meaningful for `TIMESTAMP WITH TIME ZONE` values, where the offset is computed for the current `TimeZone` setting. Not supported for `DATE` values. |
+| **Example** | `timezone(TIMESTAMPTZ '1992-02-15 01:00:00+00')` |
+| **Result** | `-18000` (with `TimeZone` set to `America/New_York`) |
 
 #### `week(date)`
 

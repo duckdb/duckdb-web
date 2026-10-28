@@ -120,7 +120,7 @@ The table below shows the available general window functions.
 
 <div class="nostroke_table"></div>
 
-| **Description** | Returns `expr` evaluated at the row that is the last row (among rows with a non-null value of `expr` if `IGNORE NULLS` is set) of the window frame. If omitted, `offset` defaults to `1` and default to `NULL`. If an `ORDER BY` clause is specified, the last row is determined within the frame using the provided ordering instead of the frame ordering. |
+| **Description** | Returns `expr` evaluated at the row that is the last row (among rows with a non-null value of `expr` if `IGNORE NULLS` is set) of the window frame. If an `ORDER BY` clause is specified, the last row is determined within the frame using the provided ordering instead of the frame ordering. |
 | **Return type** | Same type as `expr` |
 | **Example** | `last_value(column)` |
 
@@ -152,9 +152,18 @@ The table below shows the available general window functions.
 
 <div class="nostroke_table"></div>
 
-| **Description** | The relative rank of the current row: `(rank() - 1) / (total partition rows - 1)`. If an `ORDER BY` clause is specified, the relative rank is computed within the frame using the provided ordering instead of the frame ordering. |
+| **Description** | The relative rank of the current row: `(rank() - 1) / (total partition rows - 1)`. If an `ORDER BY` clause is specified, the relative rank is computed within the frame using the provided ordering instead of the frame ordering. For a partition with a single row, `percent_rank` returns `0`. |
 | **Return type** | `DOUBLE` |
 | **Example** | `percent_rank()` |
+
+```sql
+SELECT percent_rank() OVER (ORDER BY x) AS percent_rank
+FROM (VALUES (42)) AS t(x);
+```
+
+```text
+0.0
+```
 
 #### `rank([ORDER BY ordering])`
 

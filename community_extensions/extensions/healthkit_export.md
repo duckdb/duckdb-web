@@ -74,8 +74,8 @@ docs:
 
 extension_star_count: 1
 extension_star_count_pretty: 1
-extension_download_count: 3901
-extension_download_count_pretty: 3.9k
+extension_download_count: 5731
+extension_download_count_pretty: 5.7k
 image: '/images/community_extensions/social_preview/preview_community_extension_healthkit_export.png'
 layout: community_extension_doc
 ---

@@ -5,6 +5,11 @@ authors:
   - The DuckDB team
 thumb: "/images/blog/thumbs/duckdb-release-2-0-0.svg"
 image: "/images/blog/thumbs/duckdb-release-2-0-0.png"
+redirect_from:
+- /20
+- /200
+- /2.0
+- /2.0.0
 excerpt: "The DuckDB team is happy to announce that today we're releasing DuckDB version 2.0.0 LTS, codenamed “Cinnamon Teal” (Spatula cyanoptera). This is our biggest feature release so far, and it ships a polished version of the Quack protocol, asynchronous I/O, a first-class `VARIANT` type, agent mode, triggers, an extensible SQL parser and much more, built from close to 20,000 commits since DuckDB 1.5."
 tag: release
 ---

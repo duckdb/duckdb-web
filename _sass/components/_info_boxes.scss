@@ -12,7 +12,7 @@ div.singleentry {
 		margin: 20px 0;
 		padding: 14px 12px;
 		border-radius: var(--page-radius-s, 6px);
-		border: 1px solid var(--doc-box-note-border, #E6E6E6);
+		border: 1px solid var(--border-color);
 		background: var(--doc-box-note, #F2F2F2);
 		position: relative;
 		@include body-small;
@@ -110,7 +110,7 @@ div.singleentry {
 			}
 			border-radius: var(--page-radius-m, 10px);
 			background: var(--doc-codebox-background-color, #F2F2F2);
-			border-color: var(--doc-codebox-border-color, #E6E6E6);
+			border-color: var(--border-color);
 
 			p {
 				font-size: var(--type-body-normal, 16px);

@@ -70,6 +70,7 @@ Aggregates are functions that *combine* multiple rows into a single value. Aggre
 
 When the `DISTINCT` clause is provided, only distinct values are considered in the computation of the aggregate. This is typically used in combination with the `count` aggregate to get the number of distinct elements; but it can be used together with any aggregate function in the system.
 There are some aggregates that are insensitive to duplicate values (e.g., `min` and `max`) and for them this clause is parsed and ignored.
+If the aggregate also has an `ORDER BY` clause, all ordering expressions must appear in the aggregate's argument list; see the [`ORDER BY` clause](#order-by-clause-in-aggregate-functions) section for details.
 
 ### `ORDER BY` Clause in Aggregate Functions
 
@@ -83,6 +84,16 @@ This clause ensures that the values being aggregated are sorted before applying 
 Most aggregate functions are order-insensitive, and for them this clause is parsed and discarded.
 However, there are some order-sensitive aggregates that can have non-deterministic results without ordering, e.g., `first`, `last`, `list` and `string_agg` / `group_concat` / `listagg`.
 These can be made deterministic by ordering the arguments.
+
+When `DISTINCT` is used, every expression in the aggregate-local `ORDER BY` clause must also appear in the aggregate's argument list. For example, the first query below is valid, while the second fails because `y` is not an aggregate argument.
+
+```sql
+SELECT list(DISTINCT x ORDER BY x DESC) FROM (VALUES (1), (2), (2), (3)) t(x);
+-- [3, 2, 1]
+
+SELECT list(DISTINCT x ORDER BY y DESC) FROM (VALUES (1, 10), (1, 20), (2, 5)) t(x, y);
+-- Binder Error: In a DISTINCT aggregate, ORDER BY expressions must appear in the argument list
+```
 
 For example:
 
@@ -137,7 +148,7 @@ The table below shows the available general aggregate functions.
 | [`histogram(arg)`](#histogramarg) | Returns a `MAP` of key-value pairs representing buckets and counts. |
 | [`histogram(arg, boundaries)`](#histogramarg-boundaries) | Returns a `MAP` of key-value pairs representing the provided upper `boundaries` and counts of elements in the corresponding bins (left-open and right-closed partitions) of the datatype. A boundary at the largest value of the datatype is automatically added when elements larger than all provided `boundaries` appear, see [`is_histogram_other_bin`]({% link docs/1.5/sql/functions/utility.md %}#is_histogram_other_binarg). Boundaries may be provided, e.g., via [`equi_width_bins`]({% link docs/1.5/sql/functions/utility.md %}#equi_width_binsminmaxbincountnice). |
 | [`histogram_exact(arg, elements)`](#histogram_exactarg-elements) | Returns a `MAP` of key-value pairs representing the requested elements and their counts. A catch-all element specific to the data-type is automatically added to count other elements when they appear, see [`is_histogram_other_bin`]({% link docs/1.5/sql/functions/utility.md %}#is_histogram_other_binarg). |
-| [`histogram_values(source, col_name, technique, bin_count)`](#histogram_valuessource-col_name-technique-bin_count) | A table macro (not an aggregate function) returning the upper boundary of each bin and its count for a column; see the detailed entry for the available `technique` values. |
+| [`histogram_values(source, col_name[, bin_count[, technique]])`](#histogram_valuessource-col_name-bin_count-technique) | A table macro (not an aggregate function) returning the upper boundary of each bin and its count for a column; see the detailed entry for the available `technique` values. |
 | [`last(arg)`](#lastarg) | Returns the last value of a column. This function is [affected by ordering](#order-by-clause-in-aggregate-functions). |
 | [`list(arg)`](#listarg) | Returns a `LIST` containing all the values of a column. This function is [affected by ordering](#order-by-clause-in-aggregate-functions). |
 | [`max(arg)`](#maxarg) | Returns the maximum value present in `arg`. This function is [unaffected by distinctness](#distinct-clause-in-aggregate-functions). |
@@ -327,12 +338,12 @@ The table below shows the available general aggregate functions.
 | **Description** | Returns a `MAP` of key-value pairs representing the requested elements and their counts. A catch-all element specific to the data-type is automatically added to count other elements when they appear, see [`is_histogram_other_bin`]({% link docs/1.5/sql/functions/utility.md %}#is_histogram_other_binarg). |
 | **Example** | `histogram_exact(A, ['a', 'b', 'c'])` |
 
-#### `histogram_values(source, col_name, technique, bin_count)`
+#### `histogram_values(source, col_name[, bin_count[, technique]])`
 
 <div class="nostroke_table"></div>
 
-| **Description** | A table macro (not an aggregate function) that computes a histogram over column `col_name` of table `source`, returning the upper boundary of each bin and its count. The optional `technique` argument selects the binning method and is one of `auto`, `sample`, `equi-height`, `equi-width`, or `equi-width-nice`. The optional `bin_count` argument sets the number of bins. |
-| **Example** | `histogram_values(integers, i, bin_count := 2)` |
+| **Description** | A table macro (not an aggregate function) that computes a histogram over column `col_name` of table `source`, returning the upper boundary of each bin and its count. The optional third argument, `bin_count`, sets the number of bins. The optional fourth argument, `technique`, selects the binning method and is one of `auto`, `sample`, `equi-height`, `equi-width`, or `equi-width-nice`. |
+| **Example** | `histogram_values(integers, i, 2, 'equi-width')` |
 
 #### `last(arg)`
 
@@ -444,7 +455,7 @@ They all ignore `NULL` values (in the case of a single input column `x`), or pai
 | [`mode(x)`](#modex)| The most frequent value. This function is [affected by ordering](#order-by-clause-in-aggregate-functions). |
 | [`quantile_cont(x, pos)`](#quantile_contx-pos) | The interpolated `pos`-quantile of `x` for `-1 <= pos <= 1`. Returns the `pos * (n_nonnull_values - 1)`th (zero-indexed, in the specified order) value of `x` or an interpolation between the adjacent values if the index is not an integer. Values of `pos` between `-1` and `0` correspond to counting backwards from `1`. More precisely, `quantile_cont(x, -y) = quantile_cont(x, 1 - y)`. Intuitively, arranges the values of `x` as equispaced *points* on a line, starting at 0 and ending at 1, and returns the (interpolated) value at `pos`. This is Type 7 in Hyndman & Fan (1996). If `pos` is a `LIST` of `FLOAT`s, then the result is a `LIST` of the corresponding interpolated quantiles. |
 | [`quantile(x, pos)`](#quantilex-pos) | Alias for [`quantile_disc`](#quantile_discx-pos). |
-| [`quantile_disc(x, pos)`](#quantile_discx-pos) | The discrete `pos`-quantile of `x` for `0 <= pos <= 1`. Returns  the `greatest(ceil(pos * n_nonnull_values) - 1, 0)`th (zero-indexed, in the specified order) value of `x`. Intuitively, assigns to each value of `x` an equisized *sub-interval* (left-open and right-closed except for the initial interval) of the interval `[0, 1]`, and picks the value of the sub-interval that contains `pos`. This is Type 1 in Hyndman & Fan (1996). If `pos` is a `LIST` of `FLOAT`s, then the result is a `LIST` of the corresponding discrete quantiles. |
+| [`quantile_disc(x, pos)`](#quantile_discx-pos) | The discrete `pos`-quantile of `x` for `-1 <= pos <= 1`. Positive positions select in ascending order, while negative positions select in descending order. For `p = abs(pos)`, returns the `greatest(ceil(p * n_nonnull_values) - 1, 0)`th (zero-indexed, in the specified order) value of `x`. Intuitively, assigns to each value of `x` an equisized *sub-interval* (left-open and right-closed except for the initial interval) of the interval `[0, 1]`, and picks the value of the sub-interval that contains `p`. This is Type 1 in Hyndman & Fan (1996). If `pos` is a `LIST` of `FLOAT`s, then the result is a `LIST` of the corresponding discrete quantiles. The list cannot contain both positive and negative positions. |
 | [`regr_avgx(y, x)`](#regr_avgxy-x) | The average of the independent variable for non-`NULL` pairs, where x is the independent variable and y is the dependent variable. |
 | [`regr_avgy(y, x)`](#regr_avgyy-x) | The average of the dependent variable for non-`NULL` pairs, where x is the independent variable and y is the dependent variable. |
 | [`regr_count(y, x)`](#regr_county-x) | The number of non-`NULL` pairs. |
@@ -542,7 +553,7 @@ They all ignore `NULL` values (in the case of a single input column `x`), or pai
 
 <div class="nostroke_table"></div>
 
-| **Description** | The discrete `pos`-quantile of `x` for `0 <= pos <= 1`. Returns  the `greatest(ceil(pos * n_nonnull_values) - 1, 0)`th (zero-indexed, in the specified order) value of `x`. Intuitively, assigns to each value of `x` an equisized *sub-interval* (left-open and right-closed except for the initial interval) of the interval `[0, 1]`, and picks the value of the sub-interval that contains `pos`. This is Type 1 in Hyndman & Fan (1996). If `pos` is a `LIST` of `FLOAT`s, then the result is a `LIST` of the corresponding discrete quantiles.  |
+| **Description** | The discrete `pos`-quantile of `x` for `-1 <= pos <= 1`. Positive positions select in ascending order, while negative positions select in descending order. For `p = abs(pos)`, returns the `greatest(ceil(p * n_nonnull_values) - 1, 0)`th (zero-indexed, in the specified order) value of `x`. Intuitively, assigns to each value of `x` an equisized *sub-interval* (left-open and right-closed except for the initial interval) of the interval `[0, 1]`, and picks the value of the sub-interval that contains `p`. This is Type 1 in Hyndman & Fan (1996). If `pos` is a `LIST` of `FLOAT`s, then the result is a `LIST` of the corresponding discrete quantiles. The list cannot contain both positive and negative positions. |
 | **Formula** | - |
 | **Alias(es)** | `quantile` |
 

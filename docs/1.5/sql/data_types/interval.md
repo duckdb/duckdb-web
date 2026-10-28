@@ -84,7 +84,9 @@ Additionally, `datepart` may be used to extract centuries, decades, quarters, se
 | `second`             | `datepart('microsecond', interval) // 1_000_000` |
 | `millisecond`        | `datepart('microsecond', interval) // 1_000`     |
 
-> All units use 0-based indexing, except for quarters, which use 1-based indexing.
+> The `month` component uses zero-based indexing, while quarters use 1-based
+> indexing. The other interval parts return counts of complete units as described
+> in the formulas above.
 
 For example:
 

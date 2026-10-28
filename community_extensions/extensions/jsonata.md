@@ -25,8 +25,8 @@ repo:
 
 extension_star_count: 9
 extension_star_count_pretty: 9
-extension_download_count: 17685
-extension_download_count_pretty: 17.7k
+extension_download_count: 23202
+extension_download_count_pretty: 23.2k
 image: '/images/community_extensions/social_preview/preview_community_extension_jsonata.png'
 layout: community_extension_doc
 ---

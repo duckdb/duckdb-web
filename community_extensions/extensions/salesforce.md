@@ -100,8 +100,8 @@ docs:
 
 extension_star_count: 3
 extension_star_count_pretty: 3
-extension_download_count: 5178
-extension_download_count_pretty: 5.2k
+extension_download_count: 6446
+extension_download_count_pretty: 6.4k
 image: '/images/community_extensions/social_preview/preview_community_extension_salesforce.png'
 layout: community_extension_doc
 ---

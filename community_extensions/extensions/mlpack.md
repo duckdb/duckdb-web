@@ -70,8 +70,8 @@ docs:
 
 extension_star_count: 21
 extension_star_count_pretty: 21
-extension_download_count: 10121
-extension_download_count_pretty: 10.1k
+extension_download_count: 13298
+extension_download_count_pretty: 13.3k
 image: '/images/community_extensions/social_preview/preview_community_extension_mlpack.png'
 layout: community_extension_doc
 ---
@@ -131,11 +131,11 @@ LOAD {{ page.extension.name }};
 | mlpack_naive_bayes_pred                | table         | predict classification using stored naive Bayes model         | NULL                                                                                                                  | NULL     |
 | mlpack_random_forest_train             | table         | use random forest to train and store a model                  | parameters 'nclasses', 'ntrees', 'seed', 'threads' and 'silent'                                                       | NULL     |
 | mlpack_random_forest_pred              | table         | predict classification using stored random forest model       | NULL                                                                                                                  | NULL     |
+| mlpack_softmax_regression_fit          | table         | fit and store softmax regression classification               | parameters 'numClasses', 'lambda', 'fitIntercept', 'silent'                                                           | NULL     |
 | mlpack_softmax_regression_pred         | table         | predict classification using softmax regression model         | NULL                                                                                                                  | NULL     |
 | mlpack_kmeans                          | table         | use kmeans unsupervised clustering                            | parameters 'clusters', and 'iterations'                                                                               | NULL     |
 | mlpack_mlpack_version                  | scalar        | returns the version string for the mlpack version used        | NULL                                                                                                                  | NULL     |
 | mlpack_armadillo_version               | scalar        | returns the version string for the armadillo version used     | NULL                                                                                                                  | NULL     |
-| mlpack_softmax_regression_fit          | table         | NULL                                                          | NULL                                                                                                                  | NULL     |
 
 ### Overloaded Functions
 

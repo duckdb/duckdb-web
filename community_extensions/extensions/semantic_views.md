@@ -8,7 +8,7 @@ excerpt: |
 extension:
   name: semantic_views
   description: "Semantic views -- a declarative layer for dimensions, metrics, and relationships"
-  version: 0.16.0
+  version: 0.17.0
   language: Rust
   build: cargo
   license: MIT
@@ -19,7 +19,7 @@ extension:
 
 repo:
   github: s-layer/duckdb-semantic-views
-  ref: a4187aa5bb29074c31268f216b8fad74064b311d
+  ref: a3a5547e516984903508c6d027fbd374175ce723
   variegata: 71ea4f11e76c6ad2542bbc77c8669ac491ebc2a4
 
 docs:
@@ -46,8 +46,8 @@ docs:
 
 extension_star_count: 20
 extension_star_count_pretty: 20
-extension_download_count: 8751
-extension_download_count_pretty: 8.8k
+extension_download_count: 11958
+extension_download_count_pretty: 12.0k
 image: '/images/community_extensions/social_preview/preview_community_extension_semantic_views.png'
 layout: community_extension_doc
 ---
@@ -89,6 +89,7 @@ LOAD {{ page.extension.name }};
 
 |            function_name            | function_type |                                                                                                                                                                                                                                                                                                         description                                                                                                                                                                                                                                                                                                         | comment |                                                                                    examples                                                                                     |
 |-------------------------------------|---------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|---------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| __sv_check_create                   | table         | Internal helper behind CREATE SEMANTIC VIEW: checks that every member of the definition binds. Use that statement instead; this function is not for direct use. The search_path parameter is reserved (kept so views stored by earlier releases still bind); do not pass it.                                                                                                                                                                                                                                                                                                                                                | NULL    |                                                                                                                                                                                 |
 | __sv_compute_create_from_yaml       | table         | Internal helper behind CREATE SEMANTIC VIEW ... FROM YAML FILE. Use that statement instead; this function is not for direct use. The search_path parameter is reserved (kept so views stored by earlier releases still bind); do not pass it.                                                                                                                                                                                                                                                                                                                                                                               | NULL    |                                                                                                                                                                                 |
 | describe_semantic_view              | table         | Backs DESCRIBE SEMANTIC VIEW: returns a semantic view's definition as one row per property of each table, relationship, fact, dimension, metric and materialization. Use that statement rather than calling this directly. The search_path parameter is reserved (kept so views stored by earlier releases still bind); do not pass it.                                                                                                                                                                                                                                                                                     | NULL    | [DESCRIBE SEMANTIC VIEW sales;]                                                                                                                                                 |
 | explain_semantic_view               | table         | Shows how semantic_view() would answer the same arguments: the generated SQL, the materialization routing decision and the DuckDB query plan, as rows of text, without running the data query. The search_path parameter is reserved (kept so views stored by earlier releases still bind); do not pass it.                                                                                                                                                                                                                                                                                                                 | NULL    | [SELECT * FROM explain_semantic_view('sales', dimensions := ['region'], metrics := ['revenue']);]                                                                               |

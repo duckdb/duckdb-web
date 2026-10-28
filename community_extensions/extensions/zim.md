@@ -174,8 +174,8 @@ docs:
 
 extension_star_count: 7
 extension_star_count_pretty: 7
-extension_download_count: 10132
-extension_download_count_pretty: 10.1k
+extension_download_count: 14048
+extension_download_count_pretty: 14.0k
 image: '/images/community_extensions/social_preview/preview_community_extension_zim.png'
 layout: community_extension_doc
 ---
@@ -215,26 +215,27 @@ LOAD {{ page.extension.name }};
 
 <div class="extension_functions_table"></div>
 
-|    function_name    | function_type |                                       description                                       | comment |                       examples                        |
-|---------------------|---------------|-----------------------------------------------------------------------------------------|---------|-------------------------------------------------------|
-| read_zim            | table         | Read entries and content from ZIM archive files.                                        | NULL    | [SELECT * FROM read_zim('wikipedia.zim')]             |
-| read_zim_metadata   | table         | Read archive-level metadata from ZIM files.                                             | NULL    | [SELECT * FROM read_zim_metadata('wikipedia.zim')]    |
-| zim_check           | scalar        | Validate the integrity and checksum of a ZIM file.                                      | NULL    | [zim_check('wiki.zim')]                               |
-| zim_counter         | scalar        | Get entry type counters from a ZIM file.                                                | NULL    | [zim_counter('wikipedia.zim')]                        |
-| zim_get_content     | scalar        | Retrieve binary content of an entry from a ZIM file.                                    | NULL    | [zim_get_content('wiki.zim', 'A/Duck.html')]          |
-| zim_get_text        | scalar        | Retrieve text content of an entry from a ZIM file.                                      | NULL    | [zim_get_text('wiki.zim', 'A/Duck.html')]             |
-| zim_has_entry       | scalar        | Check if a path exists in a ZIM file.                                                   | NULL    | [zim_has_entry('wiki.zim', 'A/Duck.html')]            |
-| zim_illustration    | scalar        | Extract the illustration favicon or thumbnail image from a ZIM file.                    | NULL    | [zim_illustration('wiki.zim')]                        |
-| zim_illustration    | scalar        | Extract the illustration favicon or thumbnail image of a specific size from a ZIM file. | NULL    | [zim_illustration('wiki.zim', 64)]                    |
-| zim_info            | scalar        | Get structural and format information about a ZIM file.                                 | NULL    | [zim_info('wikipedia.zim')]                           |
-| zim_main_entry      | scalar        | Get the main entry path of a ZIM file.                                                  | NULL    | [zim_main_entry('wiki.zim')]                          |
-| zim_metadata        | scalar        | Get a specific metadata value from a ZIM file.                                          | NULL    | [zim_metadata('wikipedia.zim', 'Title')]              |
-| zim_metadata_keys   | scalar        | List all metadata keys present in a ZIM file.                                           | NULL    | [zim_metadata_keys('wikipedia.zim')]                  |
-| zim_mimetype        | scalar        | Get the MIME type of an entry in a ZIM file.                                            | NULL    | [zim_mimetype('wiki.zim', 'A/Duck.html')]             |
-| zim_random          | scalar        | Get a random entry path from a ZIM file.                                                | NULL    | [zim_random('wiki.zim')]                              |
-| zim_redirect_target | scalar        | Get the redirect target path for an entry in a ZIM file.                                | NULL    | [zim_redirect_target('wiki.zim', 'A/Duck.html')]      |
-| zim_search          | table         | Perform full-text search across entries in ZIM archives.                                | NULL    | [SELECT * FROM zim_search('wikipedia.zim', 'DuckDB')] |
-| zim_suggest         | table         | Get entry title suggestions matching a prefix in ZIM archives.                          | NULL    | [SELECT * FROM zim_suggest('wikipedia.zim', 'Duck')]  |
+|    function_name    | function_type |                                                                  description                                                                  | comment |                       examples                        |
+|---------------------|---------------|-----------------------------------------------------------------------------------------------------------------------------------------------|---------|-------------------------------------------------------|
+| read_zim            | table         | Read entries and content from ZIM archive files.                                                                                              | NULL    | [SELECT * FROM read_zim('wikipedia.zim')]             |
+| read_zim_metadata   | table         | Read archive-level metadata from ZIM files.                                                                                                   | NULL    | [SELECT * FROM read_zim_metadata('wikipedia.zim')]    |
+| zim_check           | scalar        | Validate the integrity and checksum of a ZIM file.                                                                                            | NULL    | [zim_check('wiki.zim')]                               |
+| zim_counter         | scalar        | Get entry type counters from a ZIM file.                                                                                                      | NULL    | [zim_counter('wikipedia.zim')]                        |
+| zim_get_content     | scalar        | Retrieve binary content of an entry from a ZIM file.                                                                                          | NULL    | [zim_get_content('wiki.zim', 'A/Duck.html')]          |
+| zim_get_text        | scalar        | Retrieve text content of an entry from a ZIM file.                                                                                            | NULL    | [zim_get_text('wiki.zim', 'A/Duck.html')]             |
+| zim_has_entry       | scalar        | Check if a path exists in a ZIM file.                                                                                                         | NULL    | [zim_has_entry('wiki.zim', 'A/Duck.html')]            |
+| zim_illustration    | scalar        | Extract the illustration favicon or thumbnail image from a ZIM file.                                                                          | NULL    | [zim_illustration('wiki.zim')]                        |
+| zim_illustration    | scalar        | Extract the illustration favicon or thumbnail image of a specific size from a ZIM file.                                                       | NULL    | [zim_illustration('wiki.zim', 64)]                    |
+| zim_info            | scalar        | Get structural and format information about a ZIM file.                                                                                       | NULL    | [zim_info('wikipedia.zim')]                           |
+| zim_main_entry      | scalar        | Get the main entry path of a ZIM file.                                                                                                        | NULL    | [zim_main_entry('wiki.zim')]                          |
+| zim_metadata        | scalar        | Get a specific metadata value from a ZIM file.                                                                                                | NULL    | [zim_metadata('wikipedia.zim', 'Title')]              |
+| zim_metadata_keys   | scalar        | List all metadata keys present in a ZIM file.                                                                                                 | NULL    | [zim_metadata_keys('wikipedia.zim')]                  |
+| zim_mimetype        | scalar        | Get the MIME type of an entry in a ZIM file, following redirects to the target.                                                               | NULL    | [zim_mimetype('wiki.zim', 'A/Duck.html')]             |
+| zim_mimetype        | scalar        | Get the MIME type of an entry in a ZIM file; resolve=false reports it as stored, so a redirect is NULL (matching read_zim's mimetype column). | NULL    | [zim_mimetype('wiki.zim', 'A/Duck.html', false)]      |
+| zim_random          | scalar        | Get a random entry path from a ZIM file.                                                                                                      | NULL    | [zim_random('wiki.zim')]                              |
+| zim_redirect_target | scalar        | Get the redirect target path for an entry in a ZIM file.                                                                                      | NULL    | [zim_redirect_target('wiki.zim', 'A/Duck.html')]      |
+| zim_search          | table         | Perform full-text search across entries in ZIM archives.                                                                                      | NULL    | [SELECT * FROM zim_search('wikipedia.zim', 'DuckDB')] |
+| zim_suggest         | table         | Get entry title suggestions matching a prefix in ZIM archives.                                                                                | NULL    | [SELECT * FROM zim_suggest('wikipedia.zim', 'Duck')]  |
 
 ### Overloaded Functions
 

@@ -16,7 +16,7 @@ The functions below are difficult to categorize into specific function types and
 | [`checkpoint(database)`](#checkpointdatabase) | Synchronize WAL with file for (optional) database without interrupting transactions. |
 | [`coalesce(expr, ...)`](#coalesceexpr-) | Return the first expression that evaluates to a non-`NULL` value. Accepts 1 or more parameters. Each expression can be a column, literal value, function result, or many others. |
 | [`constant_or_null(arg1, arg2)`](#constant_or_nullarg1-arg2) | If `arg2` is `NULL`, return `NULL`. Otherwise, return `arg1`. |
-| [`count_if(x)`](#count_ifx) | Aggregate function; rows contribute 1 if `x` is `true` or a non-zero number, else 0. |
+| [`count_if(x)`](#count_ifx) | Aggregate function; returns the number of rows where the `BOOLEAN` argument `x` is `true`. |
 | [`create_sort_key(parameters...)`](#create_sort_keyparameters) | Constructs a binary-comparable sort key based on a set of input parameters and sort qualifiers. |
 | [`current_catalog()`](#current_catalog) | Return the name of the currently active catalog. Default is memory. |
 | [`current_database()`](#current_database) | Return the name of the currently active database. |
@@ -54,7 +54,7 @@ The functions below are difficult to categorize into specific function types and
 | [`sha256(string)`](#sha256string) | Returns a `VARCHAR` with the SHA-256 hash of the `string`. |
 | [`sleep_ms(milliseconds)`](#sleep_msmilliseconds) | Pause execution for the specified number of milliseconds. Returns `NULL`. |
 | [`stats(expression)`](#statsexpression) | Returns a string with statistics about the expression. Expression can be a column, constant, or SQL expression. |
-| [`txid_current()`](#txid_current) | Returns the current transaction's identifier, a `BIGINT` value. It will assign a new one if the current transaction does not have one already. |
+| [`txid_current()`](#txid_current) | Returns the current transaction's identifier, a `UBIGINT` value. It will assign a new one if the current transaction does not have one already. |
 | [`typeof(expression)`](#typeofexpression) | Returns the name of the data type of the result of the expression. |
 | [`uuid()`](#uuid) | Return a random UUID (UUIDv4) similar to this: `eeccb8c5-9943-b2bb-bb5e-222f4e14b687`. |
 | [`uuidv4()`](#uuidv4) | Return a random UUID (UUIDv4) similar to this: `eeccb8c5-9943-b2bb-bb5e-222f4e14b687`. |
@@ -107,8 +107,8 @@ The functions below are difficult to categorize into specific function types and
 
 <div class="nostroke_table"></div>
 
-| **Description** | Aggregate function; rows contribute 1 if `x` is `true` or a non-zero number, else 0. |
-| **Example** | `count_if(42)` |
+| **Description** | Aggregate function; returns the number of rows where the `BOOLEAN` argument `x` is `true`. |
+| **Example** | `count_if(42 > 0)` |
 | **Result** | 1 |
 
 #### `create_sort_key(parameters...)`
@@ -224,7 +224,7 @@ The functions below are difficult to categorize into specific function types and
 
 | **Description** | Returns a `UBIGINT` with the hash of the `value`. The used hash function may change across DuckDB versions. |
 | **Example** | `hash('🦆')` |
-| **Result** | `2595805878642663834` |
+| **Result** | `4164431626903154684` |
 
 #### `icu_sort_key(string, collator)`
 
@@ -400,13 +400,13 @@ The functions below are difficult to categorize into specific function types and
 
 | **Description** | Returns a string with statistics about the expression. Expression can be a column, constant, or SQL expression. |
 | **Example** | `stats(5)` |
-| **Result** | `'[Min: 5, Max: 5][Has Null: false]'` |
+| **Result** | `'[Min: 5, Max: 5][Has Null: false, Has No Null: true][Approx Unique: 1]'` |
 
 #### `txid_current()`
 
 <div class="nostroke_table"></div>
 
-| **Description** | Returns the current transaction's identifier, a `BIGINT` value. It will assign a new one if the current transaction does not have one already. |
+| **Description** | Returns the current transaction's identifier, a `UBIGINT` value. It will assign a new one if the current transaction does not have one already. |
 | **Example** | `txid_current()` |
 | **Result** | various |
 
@@ -464,20 +464,20 @@ A [table function]({% link docs/1.5/sql/query_syntax/from.md %}#table-functions)
 
 | Name | Description |
 |:--|:-------|
-| [`generate_series(start, stop, step)`](#generate_seriesstart-stop-step) | Returns a table of values between `start` and `stop` (inclusive), incrementing by `step`. |
+| [`generate_series([start,] stop[, step])`](#generate_seriesstart-stop-step) | Returns a table of values between `start` and `stop` (inclusive), incrementing by `step`. |
 | [`glob(search_path)`](#globsearch_path) | Return filenames found at the location indicated by the *search_path* in a single column named `file`. The *search_path* may contain [glob pattern matching syntax]({% link docs/1.5/sql/functions/pattern_matching.md %}). |
-| [`range(start, stop, step)`](#rangestart-stop-step) | Returns a table of values between `start` and `stop` (exclusive), incrementing by `step`. |
+| [`range([start,] stop[, step])`](#rangestart-stop-step) | Returns a table of values between `start` and `stop` (exclusive), incrementing by `step`. |
 | [`repeat(value, count)`](#repeatvalue-count) | Returns a table with `count` rows, each containing `value`. |
 | [`repeat_row(varargs, num_rows)`](#repeat_rowvarargs-num_rows) | Returns a table with `num_rows` rows, each containing the fields defined in `varargs`. |
 | [`unnest(list)`](#unnestlist) | Returns a table with one row per element of `list`. |
 
-#### `generate_series(start, stop, step)`
+#### `generate_series([start,] stop[, step])`
 
 <div class="nostroke_table"></div>
 
-| **Description** | Returns a table of values between `start` and `stop`, incrementing by `step`. The `stop` parameter is inclusive, and the `stop` and `step` arguments are optional. See the [list variant]({% link docs/1.5/sql/functions/list.md %}#generate_series) for the available argument combinations. |
-| **Example** | `generate_series(2, 5)` |
-| **Result** | 4 rows: `2, 3, 4, 5` |
+| **Description** | Returns a table of values between `start` and `stop`, incrementing by `step`. The `stop` parameter is inclusive, and the `start` and `step` arguments are optional. See the [list variant]({% link docs/1.5/sql/functions/list.md %}#generate_series) for the available argument combinations. |
+| **Example** | `generate_series(5)` |
+| **Result** | 6 rows: `0, 1, 2, 3, 4, 5` |
 
 #### `glob(search_path)`
 
@@ -487,7 +487,7 @@ A [table function]({% link docs/1.5/sql/query_syntax/from.md %}#table-functions)
 | **Example** | `glob('*')` |
 | **Result** | (table of filenames) |
 
-#### `range(start, stop, step)`
+#### `range([start,] stop[, step])`
 
 <div class="nostroke_table"></div>
 
