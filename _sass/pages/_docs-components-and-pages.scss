@@ -335,6 +335,7 @@ body.documentation {
 
     // Page metadata
     .pagemeta {
+        container: page-actions / inline-size;
         display: flex;
         justify-content: space-between;
         margin-top: 8em;
@@ -350,6 +351,7 @@ body.documentation {
         >div:last-child {
             @include tiny();
             text-align: left;
+            width: 100%;
         }
 
         p {
@@ -368,6 +370,7 @@ body.documentation {
             display: inline-flex;
             align-items: center;
             gap: 6px;
+            white-space: nowrap;
             text-decoration: none;
             color: var(--main-text-secondary-color, #666);
 
@@ -390,13 +393,13 @@ body.documentation {
         padding-bottom: 0;
         padding-left: 0;
         list-style: none;
-        display: flex;
-        flex-wrap: wrap;
+        display: grid;
+        grid-template-columns: repeat(2, max-content);
         column-gap: 24px;
-        row-gap: 6px;
+        row-gap: 10px;
 
-        @media only screen and (max-width: 900px) {
-            flex-direction: column;
+        @container page-actions (min-width: 600px) {
+            grid-template-columns: repeat(4, max-content);
         }
     }
 

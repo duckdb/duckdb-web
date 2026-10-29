@@ -1,0 +1,11 @@
+<div class="pagemeta">
+	<div>
+		<ul>
+			<li><a href="https://raw.githubusercontent.com/duckdb/duckdb-web/refs/heads/main/{{ page.path }}" title="See Markdown"><svg class="icon" aria-hidden="true"><use href="#file-code-01"></use></svg>View Markdown</a></li>
+			<li><a href="https://github.com/duckdb/duckdb-web/edit/main/{{ page.path }}" title="Go to GitHub"><svg class="icon" aria-hidden="true"><use href="#edit-02"></use></svg>Edit on GitHub</a></li>
+			<li><a href="https://github.com/duckdb/duckdb-web/issues/new?title={{ issue_title | uri_escape }}&amp;labels=issue%20found%20on%20page&amp;body={{ issue_body | uri_escape }}" title="Create GitHub issue"><svg class="icon" aria-hidden="true"><use href="#flag-01"></use></svg>Report an issue</a></li>
+			{% if include.repository %}<li><a href="{{ include.repository }}"><svg class="icon" aria-hidden="true"><use href="#folder-code"></use></svg>View repository</a></li>{% endif %}
+			{% if include.source_directory %}<li><a href="{{ include.source_directory }}"><svg class="icon" aria-hidden="true"><use href="#code-snippet-02"></use></svg>View source code</a></li>{% endif %}
+		</ul>
+	</div>
+</div>

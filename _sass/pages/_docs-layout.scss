@@ -433,13 +433,25 @@ body.documentation {
             }
 
             .nav-item > .nav-list,
-            .nav-list.is-drilled > li:not(.is-open),
-            .nav-item.is-open > .nav-row {
+            .sidenav.is-drilled > li:not(.is-open),
+            .sidenav > .nav-item.is-open > .nav-row {
                 display: none;
             }
 
             .nav-item.is-open > .nav-list {
                 display: block;
+            }
+
+            .nav-expand + .nav-list {
+                --nav-text-indent: 24px;
+
+                .nav-expand + .nav-list {
+                    --nav-text-indent: 36px;
+                }
+            }
+
+            .nav-expand[aria-expanded="true"] > svg {
+                transform: rotate(90deg);
             }
 
             .nav-row {
@@ -450,6 +462,7 @@ body.documentation {
                 width: 100%;
                 box-sizing: border-box;
                 text-align: left;
+                padding-left: var(--nav-text-indent, 12px);
 
                 &[aria-current="page"] {
                     @include nav-element-selected;
@@ -509,8 +522,13 @@ body.documentation {
     @media (prefers-reduced-motion: reduce) {
         transition: none;
     }
+}
 
+// Keep article list formatting out of dropdowns without overriding their open state.
+.versionsidebar,
+body.documentation #main_content_wrap .versionsidebar {
     >ul {
+        @include menu-dropdown-list;
         color: var(--main-text-primary-color, #F2F2F2);
         padding: 0;
         margin: 0;
@@ -519,11 +537,7 @@ body.documentation {
 
         li {
             @include tiny;
-            margin-bottom: 2px;
-
-            &:last-child {
-                margin-bottom: 0;
-            }
+            margin: 0;
 
             a {
                 border-radius: var(--page-radius-pill);
@@ -538,12 +552,7 @@ body.documentation {
                 color: var(--main-text-primary-color, #F2F2F2) !important;
                 transition: background-color .3s;
                 white-space: nowrap;
-
-                &:hover {
-                    color: var(--main-text-primary-color, #F2F2F2) !important;
-                    background-color: var(--menu-dropdown-item-background-hover, #333);
-                    border-radius: var(--page-radius-box);
-                }
+                @include menu-dropdown-item-states;
             }
 
             &.current a {
