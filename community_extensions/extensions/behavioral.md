@@ -63,8 +63,8 @@ docs:
     by timestamp themselves, and OVER (PARTITION BY user_id) gives the
     whole-partition value.
 
-extension_star_count: 16
-extension_star_count_pretty: 16
+extension_star_count: 17
+extension_star_count_pretty: 17
 extension_download_count: 30168
 extension_download_count_pretty: 30.2k
 image: '/images/community_extensions/social_preview/preview_community_extension_behavioral.png'
