@@ -19,7 +19,7 @@ title: Command Line Client
 
 ## Installation
 
-The DuckDB CLI (Command Line Interface) is a single, dependency-free executable. It is precompiled for Windows, Mac and Linux for both the stable version and for nightly builds produced by GitHub Actions. Please see the [installation page]({% link install/index.html %}) under the CLI tab for download links.
+The DuckDB CLI (Command Line Interface) is a single, dependency-free executable. It is precompiled for Windows, Mac, and Linux for both the stable version and for nightly builds produced by GitHub Actions. Please see the [installation page]({% link install/index.html %}) under the CLI tab for download links.
 
 The DuckDB CLI is based on the SQLite command line shell, so CLI-client-specific functionality is similar to what is described in the [SQLite documentation](https://www.sqlite.org/cli.html) (although DuckDB's SQL syntax follows PostgreSQL conventions with a [few exceptions]({% link docs/2.0/sql/dialect/postgresql_compatibility.md %})).
 
@@ -53,7 +53,7 @@ For a full list of options, see the [command line arguments page]({% link docs/2
 ### In-Memory vs. Persistent Database
 
 When no `⟨FILENAME⟩`{:.language-sql .highlight} argument is provided, the DuckDB CLI will open a temporary [in-memory database]({% link docs/2.0/connect/overview.md %}#in-memory-database).
-You will see DuckDB's version number, the information on the connection and a prompt starting with a `D`.
+You will see DuckDB's version number, the information on the connection, and a prompt starting with a `D`.
 
 ```batch
 duckdb
@@ -83,11 +83,11 @@ SELECT 'quack' AS my_column;
 |-----------|
 | quack     |
 
-The CLI supports all of DuckDB's rich [SQL syntax]({% link docs/2.0/sql/introduction.md %}) including `SELECT`, `CREATE` and `ALTER` statements.
+The CLI supports all of DuckDB's rich [SQL syntax]({% link docs/2.0/sql/introduction.md %}) including `SELECT`, `CREATE`, and `ALTER` statements.
 
 ### Editor Features
 
-The CLI supports [autocompletion]({% link docs/2.0/clients/cli/autocomplete.md %}), and has sophisticated [editor features]({% link docs/2.0/clients/cli/editing.md %}) and [syntax highlighting]({% link docs/2.0/clients/cli/syntax_highlighting.md %}) on macOS, Linux and Windows.
+The CLI supports [autocompletion]({% link docs/2.0/clients/cli/autocomplete.md %}), and has sophisticated [editor features]({% link docs/2.0/clients/cli/editing.md %}) and [syntax highlighting]({% link docs/2.0/clients/cli/syntax_highlighting.md %}) on macOS, Linux, and Windows.
 
 ### Exiting the CLI
 
@@ -138,7 +138,7 @@ The `--sql` option allows setting the database path using a SQL expression:
 #### Output Formats
 
 The `.mode` [dot command]({% link docs/2.0/clients/cli/output_formats.md %}#changing-the-output-format) may be used to change the appearance of the tables returned in the terminal output.
-These include the default `duckbox` mode, `csv` and `json` mode for ingestion by other tools, `markdown` and `latex` for documents and `insert` mode for generating SQL statements.
+These include the default `duckbox` mode, `csv` and `json` mode for ingestion by other tools, `markdown` and `latex` for documents, and `insert` mode for generating SQL statements.
 
 #### Writing Results to a File
 
@@ -147,7 +147,7 @@ For details, see the documentation for the [output dot command]({% link docs/2.0
 
 #### Displaying Function Documentation
 
-The `.manual` command shows the signatures, description and examples of a SQL function:
+The `.manual` command shows the signatures, description, and examples of a SQL function:
 
 ```sql
 .manual regexp_extract

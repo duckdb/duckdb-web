@@ -80,7 +80,7 @@ COPY FROM DATABASE db1 TO db2 (SCHEMA);
 
 ## Overview
 
-`COPY` moves data between DuckDB and external files. `COPY ... FROM` imports data into DuckDB from an external file. `COPY ... TO` writes data from DuckDB to an external file. The `COPY` command can be used for `CSV`, `PARQUET` and `JSON` files.
+`COPY` moves data between DuckDB and external files. `COPY ... FROM` imports data into DuckDB from an external file. `COPY ... TO` writes data from DuckDB to an external file. The `COPY` command can be used for `CSV`, `PARQUET`, and `JSON` files.
 
 ## `COPY ... FROM`
 
@@ -164,7 +164,7 @@ EXECUTE v1('lineitem.json');
 
 ## `COPY ... TO`
 
-`COPY ... TO` exports data from DuckDB to an external CSV, Parquet, JSON or BLOB file. It has mostly the same set of options as `COPY ... FROM`, however, in the case of `COPY ... TO` the options specify how the file should be written to disk. Any file created by `COPY ... TO` can be copied back into the database by using `COPY ... FROM` with a similar set of options.
+`COPY ... TO` exports data from DuckDB to an external CSV, Parquet, JSON, or BLOB file. It has mostly the same set of options as `COPY ... FROM`, however, in the case of `COPY ... TO` the options specify how the file should be written to disk. Any file created by `COPY ... TO` can be copied back into the database by using `COPY ... FROM` with a similar set of options.
 
 The `COPY ... TO` function can be called specifying either a table name, or a query. When a table name is specified, the contents of the entire table will be written into the resulting file. When a query is specified, the query is executed and the result of the query is written to the resulting file.
 
@@ -263,12 +263,12 @@ With few exceptions, the below options are applicable to all formats written wit
 
 | Name | Description | Type | Default |
 |:--|:-----|:-|:-|
-| `FORMAT` | Specifies the copy function to use. The default is selected from the file extension (e.g., `.parquet` results in a Parquet file being written/read). If the file extension is unknown `CSV` is selected. Vanilla DuckDB provides `CSV`, `PARQUET` and `JSON` but additional copy functions can be added by [`extensions`]({% link docs/1.5/extensions/overview.md %}). | `VARCHAR` | `auto` |
+| `FORMAT` | Specifies the copy function to use. The default is selected from the file extension (e.g., `.parquet` results in a Parquet file being written/read). If the file extension is unknown `CSV` is selected. Vanilla DuckDB provides `CSV`, `PARQUET`, and `JSON` but additional copy functions can be added by [`extensions`]({% link docs/1.5/extensions/overview.md %}). | `VARCHAR` | `auto` |
 | `USE_TMP_FILE` | Whether or not to write to a temporary file first if the original file exists (`target.csv.tmp`). This prevents overwriting an existing file with a broken file in case the writing is cancelled. | `BOOL` | `auto` |
-| `OVERWRITE_OR_IGNORE` | Whether or not to allow overwriting files if they already exist. Only has an effect when used with options that write multiple files, such as `PARTITION_BY`, `PER_THREAD_OUTPUT` or `FILE_SIZE_BYTES`. | `BOOL` | `false` |
-| `OVERWRITE` | When `true`, all existing files inside targeted directories will be removed (not supported on remote filesystems). Only has an effect when used with options that write multiple files, such as `PARTITION_BY`, `PER_THREAD_OUTPUT` or `FILE_SIZE_BYTES`. | `BOOL` | `false` |
-| `APPEND` | When `true`, in the event a filename pattern is generated that already exists, the path will be regenerated to ensure no existing files are overwritten. Only has an effect when used with options that write multiple files, such as `PARTITION_BY`, `PER_THREAD_OUTPUT` or `FILE_SIZE_BYTES`. | `BOOL` | `false` |
-| `FILENAME_PATTERN` | Set a pattern to use for the filename, can optionally contain `{uuid}` / `{uuidv4}` or `{uuidv7}` to be filled in with a generated [UUID]({% link docs/1.5/sql/data_types/numeric.md %}#universally-unique-identifiers-uuids) (v4 or v7, respectively), and `{i}`, which is replaced by an incrementing index. Only has an effect when used with options that write multiple files, such as `PARTITION_BY`, `PER_THREAD_OUTPUT` or `FILE_SIZE_BYTES`. | `VARCHAR` | `auto` |
+| `OVERWRITE_OR_IGNORE` | Whether or not to allow overwriting files if they already exist. Only has an effect when used with options that write multiple files, such as `PARTITION_BY`, `PER_THREAD_OUTPUT`, or `FILE_SIZE_BYTES`. | `BOOL` | `false` |
+| `OVERWRITE` | When `true`, all existing files inside targeted directories will be removed (not supported on remote filesystems). Only has an effect when used with options that write multiple files, such as `PARTITION_BY`, `PER_THREAD_OUTPUT`, or `FILE_SIZE_BYTES`. | `BOOL` | `false` |
+| `APPEND` | When `true`, in the event a filename pattern is generated that already exists, the path will be regenerated to ensure no existing files are overwritten. Only has an effect when used with options that write multiple files, such as `PARTITION_BY`, `PER_THREAD_OUTPUT`, or `FILE_SIZE_BYTES`. | `BOOL` | `false` |
+| `FILENAME_PATTERN` | Set a pattern to use for the filename, can optionally contain `{uuid}` / `{uuidv4}` or `{uuidv7}` to be filled in with a generated [UUID]({% link docs/1.5/sql/data_types/numeric.md %}#universally-unique-identifiers-uuids) (v4 or v7, respectively), and `{i}`, which is replaced by an incrementing index. Only has an effect when used with options that write multiple files, such as `PARTITION_BY`, `PER_THREAD_OUTPUT`, or `FILE_SIZE_BYTES`. | `VARCHAR` | `auto` |
 | `FILE_EXTENSION` | Set the file extension that should be assigned to the generated file(s). | `VARCHAR` | `auto` |
 | `PER_THREAD_OUTPUT` | When `true`, the `COPY` command generates one file per thread, rather than one file in total. This allows for faster parallel writing. | `BOOL` | `false` |
 | `FILE_SIZE_BYTES` | If this parameter is set, the `COPY` process creates a directory which will contain the exported files. If a file exceeds the set limit (specified as bytes such as `1000` or in human-readable format such as `1k`), the process creates a new file in the directory. This parameter works in combination with `PER_THREAD_OUTPUT`. Note that the size is used as an approximation, and files can be occasionally slightly over the limit. | `VARCHAR` or `BIGINT` | (empty) |

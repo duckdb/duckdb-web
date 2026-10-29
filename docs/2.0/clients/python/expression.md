@@ -31,7 +31,7 @@ print(rel.filter(col(price_column) > 30).fetchall())
 [('hammer', 42)]
 ```
 
-An expression is passed to a method of a [relation]({% link docs/2.0/clients/python/relational_api.md %}), such as `select`, `filter`, `aggregate` or `sort`. `str()` of an expression returns its SQL text, with the identifiers quoted and every operation in parentheses:
+An expression is passed to a method of a [relation]({% link docs/2.0/clients/python/relational_api.md %}), such as `select`, `filter`, `aggregate`, or `sort`. `str()` of an expression returns its SQL text, with the identifiers quoted and every operation in parentheses:
 
 ```python
 print((col("a") > 1) & col("b"))
@@ -57,7 +57,7 @@ The `duckdb` module has a short helper for each kind of expression, and this pag
 
 ## Values and Operators
 
-Python operators combine expressions with each other and with Python values. The arithmetic operators are `+`, `-`, `*`, `/`, `//`, `%` and `**`; the comparisons are `==`, `!=`, `<`, `<=`, `>` and `>=`; `&`, `|` and `~` are `AND`, `OR` and `NOT`. A Python value in an operation is a constant. This holds for a string too: `col("s") == "x"` compares the column `s` with the text `x`. Use `col("x")` to compare with the column `x`, and `lit("x")` to make a constant explicit:
+Python operators combine expressions with each other and with Python values. The arithmetic operators are `+`, `-`, `*`, `/`, `//`, `%`, and `**`; the comparisons are `==`, `!=`, `<`, `<=`, `>`, and `>=`; `&`, `|`, and `~` are `AND`, `OR`, and `NOT`. A Python value in an operation is a constant. This holds for a string too: `col("s") == "x"` compares the column `s` with the text `x`. Use `col("x")` to compare with the column `x`, and `lit("x")` to make a constant explicit:
 
 ```python
 rel = duckdb.sql("SELECT * FROM (VALUES ('x', 'y'), ('y', 'x')) t(s, x)")
@@ -181,7 +181,7 @@ duckdb.from_df(df).select(all_but_b).show()
 
 ## Constant Expression
 
-This expression contains a single value, with `lit(value)`. Operators, `fn()` and the case builder take Python values directly, so `lit()` is needed only where a value must be an expression of its own, as in a select list. Values convert as described in [Conversion between DuckDB and Python]({% link docs/2.0/clients/python/conversion.md %}); a `dict` with string keys is a `STRUCT`, and a `dict` with other keys is a `MAP`.
+This expression contains a single value, with `lit(value)`. Operators, `fn()`, and the case builder take Python values directly, so `lit()` is needed only where a value must be an expression of its own, as in a select list. Values convert as described in [Conversion between DuckDB and Python]({% link docs/2.0/clients/python/conversion.md %}); a `dict` with string keys is a `STRUCT`, and a `dict` with other keys is a `MAP`.
 
 ```python
 import duckdb
@@ -245,7 +245,7 @@ duckdb.from_df(df).select(col("c"), size).show()
 └───────┴─────────┘
 ```
 
-The older constructor builds the same expression: `CaseExpression(condition, value)` takes the first branch, `.when(condition, value)` adds one and `.otherwise(value)` closes it:
+The older constructor builds the same expression: `CaseExpression(condition, value)` takes the first branch, `.when(condition, value)` adds one, and `.otherwise(value)` closes it:
 
 ```python
 from duckdb import CaseExpression
@@ -321,7 +321,7 @@ print(rel.select(sql_expr("price * 2").alias("double_price")).fetchall())
 
 ## Aggregates and Window Functions
 
-An expression has a method for each common aggregate function, such as `.sum()`, `.mean()`, `.min()`, `.max()`, `.count()`, `.median()`, `.string_agg()` and `.array_agg()`; `fn()` calls any other. `col("g").arg_max(col("x"))` is the value of `g` in the row where `x` is largest, and `.arg_min()` takes the row where it is smallest. `count_all()` is `count(*)`. `.where(condition)` makes an aggregate use only the rows where the condition holds. A projection may hold aggregates without a `GROUP BY`:
+An expression has a method for each common aggregate function, such as `.sum()`, `.mean()`, `.min()`, `.max()`, `.count()`, `.median()`, `.string_agg()`, and `.array_agg()`; `fn()` calls any other. `col("g").arg_max(col("x"))` is the value of `g` in the row where `x` is largest, and `.arg_min()` takes the row where it is smallest. `count_all()` is `count(*)`. `.where(condition)` makes an aggregate use only the rows where the condition holds. A projection may hold aggregates without a `GROUP BY`:
 
 ```python
 from duckdb import count_all
@@ -336,7 +336,7 @@ print(rel.aggregate([col("g"), col("x").max().alias("top")], "g").order("g").fet
 [('a', 2), ('b', 3)]
 ```
 
-`.over(partition_by=..., order_by=..., rows=..., range=...)` turns an aggregate into a window function. `rows` and `range` bound the window as a pair (start, end) relative to the current row, where `None` means unbounded; `rows` counts rows and `range` measures the distance in the `order_by` value: `rows=(-2, 0)` is the current row and the two before it. The window functions `row_number()`, `rank()`, `dense_rank()`, `ntile(n)`, `lag(expr)`, `lead(expr)`, `first_value(expr)` and `last_value(expr)` are in the `duckdb` module, and `.ignore_nulls()` makes the last four skip `NULL` values:
+`.over(partition_by=..., order_by=..., rows=..., range=...)` turns an aggregate into a window function. `rows` and `range` bound the window as a pair (start, end) relative to the current row, where `None` means unbounded; `rows` counts rows and `range` measures the distance in the `order_by` value: `rows=(-2, 0)` is the current row and the two before it. The window functions `row_number()`, `rank()`, `dense_rank()`, `ntile(n)`, `lag(expr)`, `lead(expr)`, `first_value(expr)`, and `last_value(expr)` are in the `duckdb` module, and `.ignore_nulls()` makes the last four skip `NULL` values:
 
 ```python
 from duckdb import lag, row_number
@@ -355,7 +355,7 @@ print(rel.select(
 
 ## Function Families
 
-`.str()`, `.dt()`, `.list()` and `.json()` give the string, date and time, list and JSON functions as methods that apply the function to the expression: `col("s").str().upper()` is `upper("s")`.
+`.str()`, `.dt()`, `.list()`, and `.json()` give the string, date and time, list, and JSON functions as methods that apply the function to the expression: `col("s").str().upper()` is `upper("s")`.
 
 ```python
 rel = duckdb.sql("SELECT 'duck' AS s, DATE '2024-05-01' AS d, [3, 1, 2] AS l")
@@ -377,7 +377,7 @@ The Expression class also contains many operations that can be applied to any Ex
 | Operation                                    | Description                                                                                                                      |
 |----------------------------------------------|----------------------------------------------------------------------------------------------------------------------------------|
 | `.alias(name: str)`                          | Applies an alias to the expression                                                                                               |
-| `.cast(type)`                                | Applies a cast to the provided type on the expression: a `DuckDBPyType`, a Python type or a SQL type name such as `"VARCHAR"`    |
+| `.cast(type)`                                | Applies a cast to the provided type on the expression: a `DuckDBPyType`, a Python type, or a SQL type name such as `"VARCHAR"`    |
 | `.try_cast(type)`                            | Like `.cast`, but gives `NULL` where the cast fails                                                                              |
 | `.isin(*values)`                             | Creates an [`IN` expression]({% link docs/2.0/sql/expressions/in.md %}) against the provided values                          |
 | `.isnotin(*values)`                          | Creates a [`NOT IN` expression]({% link docs/2.0/sql/expressions/in.md %}#not-in) against the provided values                |

@@ -23,4 +23,4 @@ venue: "Data Renegades by Heavybit"
 
 ## Description
 
-In this episode, CL Kao talks with Hannes Mühleisen about building databases that people want to use. Hannes explains how conversations with frustrated statisticians shaped the design of DuckDB and why building useful software sometimes means letting go of your own assumptions. They also discuss DuckLake, the Quack client-server protocol and how the focus on human usability pays off now that AI agents pick their own tools.
+In this episode, CL Kao talks with Hannes Mühleisen about building databases that people want to use. Hannes explains how conversations with frustrated statisticians shaped the design of DuckDB and why building useful software sometimes means letting go of your own assumptions. They also discuss DuckLake, the Quack client-server protocol, and how the focus on human usability pays off now that AI agents pick their own tools.

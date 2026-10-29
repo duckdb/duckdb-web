@@ -48,10 +48,10 @@ Of course, there will be issues found in today’s release. But rest assured, th
 
 First of all, we are very, very grateful to you all. Our massive and heartfelt thanks go to everyone who has contributed code, filed issues or engaged in discussions, promoted DuckDB in their environment, and, of course, all DuckDB users. We could not have done it without you!
 
-We would also like to thank the [CWI Database Architectures group](https://www.cwi.nl/en/groups/database-architectures/) for providing us with the environment and expertise to build DuckDB, the organizations that provided us with research grants early on, the excellent [customers of DuckLabs](https://ducklabs.com/#collaborators) that make it all work (especially the early ones), and the generous donors to the [DuckDB Foundation](https://duckdb.foundation/). We are particularly grateful to our long-standing Gold sponsors [MotherDuck](https://motherduck.com/), [Voltron Data](https://voltrondata.com/) and [Posit](https://posit.co/).
+We would also like to thank the [CWI Database Architectures group](https://www.cwi.nl/en/groups/database-architectures/) for providing us with the environment and expertise to build DuckDB, the organizations that provided us with research grants early on, the excellent [customers of DuckLabs](https://ducklabs.com/#collaborators) that make it all work (especially the early ones), and the generous donors to the [DuckDB Foundation](https://duckdb.foundation/). We are particularly grateful to our long-standing Gold sponsors [MotherDuck](https://motherduck.com/), [Voltron Data](https://voltrondata.com/), and [Posit](https://posit.co/).
 
 Finally, we would like to thank the [excellent and amazing team at DuckLabs](https://ducklabs.com/#about).
 
-So join us now in being nostalgic, teary-eyed and excited for what’s to come for DuckDB and celebrate the release of DuckDB 1.0.0 with us. We certainly will.
+So join us now in being nostalgic, teary-eyed, and excited for what’s to come for DuckDB and celebrate the release of DuckDB 1.0.0 with us. We certainly will.
 
 Mark and Hannes

@@ -175,7 +175,7 @@ Zero or more copy options may be provided within parentheses following the `ATTA
 | `ROW_GROUP_SIZE`    | The row group size of a new database file.                                                                                  | `UBIGINT` | `122880`      |
 | `STORAGE_VERSION`   | The version of the storage used.                                                                                            | `VARCHAR` | `v1.0.0`      |
 | `ENCRYPTION_KEY`    | The encryption key used for encrypting the database.                                                                        | `VARCHAR` | -             |
-| `ENCRYPTION_CIPHER` | The encryption cipher used for encrypting the database (`CBC`, `CTR` or `GCM`).                                             | `VARCHAR` | -             |
+| `ENCRYPTION_CIPHER` | The encryption cipher used for encrypting the database (`CBC`, `CTR`, or `GCM`).                                             | `VARCHAR` | -             |
 | `RECOVERY_MODE`     | Recovery mode for the database. `no_wal_writes` disables WAL writes, improving performance at the cost of crash recovery.   | `VARCHAR` | -             |
 
 ### Attaching Data Files Directly
@@ -210,7 +210,7 @@ USE memory_db;
 
 ## Name Qualification
 
-The fully qualified name of catalog objects contains the _catalog_, the _schema_ and the _name_ of the object. For example:
+The fully qualified name of catalog objects contains the _catalog_, the _schema_, and the _name_ of the object. For example:
 
 Attach the database `new_db`:
 
@@ -236,7 +236,7 @@ Refer to the column `col` inside the table `my_table`:
 SELECT new_db.my_schema.my_table.col FROM new_db.my_schema.my_table;
 ```
 
-Note that often the fully qualified name is not required. When a name is not fully qualified, the system looks for which entries to reference using the _catalog search path_. The default catalog search path includes the system catalog, the temporary catalog and the initially attached database together with the `main` schema.
+Note that often the fully qualified name is not required. When a name is not fully qualified, the system looks for which entries to reference using the _catalog search path_. The default catalog search path includes the system catalog, the temporary catalog, and the initially attached database together with the `main` schema.
 
 Also note the rules on [identifiers and database names in particular]({% link docs/1.5/sql/dialect/keywords_and_identifiers.md %}#database-names).
 

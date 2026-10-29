@@ -68,7 +68,7 @@ The vertex dimensions of a `GEOMETRY` value must be consistent across all vertic
 
 Functions that operate on `GEOMETRY` values typically ignore any additional dimensions beyond the `X` and `Y` unless explicitly specified, but they can still be stored and can be retrieved if needed.
 
-In the following example, we create a `GEOMETRY` table with 2D, 3D(Z), 3D(M) and 4D(ZM) points:
+In the following example, we create a `GEOMETRY` table with 2D, 3D(Z), 3D(M), and 4D(ZM) points:
 
 ```sql
 CREATE TABLE points (

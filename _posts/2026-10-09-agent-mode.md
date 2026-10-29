@@ -17,13 +17,13 @@ We asked Claude to measure the effect of agent mode. In the experiment, Claude C
 >
 > -- Claude Fable 5.1
 
-The savings did not show up in the total cost or runtime. Each turn re-reads the agent’s system prompt, which is much larger than the query output, so the saved tokens amount to about 0.5% of the total input. The agent mode runs also took slightly more turns (237 vs. 224). Claude wrote up the setup, the full results and a follow-up experiment in a [report](https://github.com/hannes/agent-mode-experiment/blob/main/REPORT.md).
+The savings did not show up in the total cost or runtime. Each turn re-reads the agent’s system prompt, which is much larger than the query output, so the saved tokens amount to about 0.5% of the total input. The agent mode runs also took slightly more turns (237 vs. 224). Claude wrote up the setup, the full results, and a follow-up experiment in a [report](https://github.com/hannes/agent-mode-experiment/blob/main/REPORT.md).
 
 
 ## Background
 
 
-The DuckDB CLI was built for a person sitting at a terminal. Its default renderer pads columns so they line up, draws borders around the result and prints the column types under the names:
+The DuckDB CLI was built for a person sitting at a terminal. Its default renderer pads columns so they line up, draws borders around the result, and prints the column types under the names:
 
 ```text
 ┌────────────┬───────┬────────┬───────────────┐
@@ -55,7 +55,7 @@ For a large result, it shows the first and last 20 rows with a row of dots in th
 
 A person sees the dots and the `(40 shown)` footer and knows that rows are missing.
 
-Today, many CLI invocations do not come from a person at all. Coding agents such as Claude Code, Codex, Cursor, Gemini CLI and GitHub Copilot run `duckdb -c "..."` once per shell call, capture stdout through a pipe and pass the text to a language model. This has quickly become a common way to use DuckDB.
+Today, many CLI invocations do not come from a person at all. Coding agents such as Claude Code, Codex, Cursor, Gemini CLI, and GitHub Copilot run `duckdb -c "..."` once per shell call, capture stdout through a pipe, and pass the text to a language model. This has quickly become a common way to use DuckDB.
 
 This reader differs from a person in a few ways:
 
@@ -66,7 +66,7 @@ This reader differs from a person in a few ways:
 
 For this reader, the box renderer is a poor fit. The alignment padding costs tokens and carries no information for a model. A truncated result also looks a lot like a complete one. The footer says `(40 shown)`, but a model can skim past that line and then draw conclusions from data it never saw.
 
-Agent mode changes the CLI’s defaults for this reader. This post describes how the CLI detects an agent, what changes in the output and how to try it.
+Agent mode changes the CLI’s defaults for this reader. This post describes how the CLI detects an agent, what changes in the output, and how to try it.
 
 > New Agent mode shipped with DuckDB 2.0.
 
@@ -83,7 +83,7 @@ Agents mark the commands they run with environment variables. There is no single
 | `GEMINI_CLI` | Gemini CLI |
 | `COPILOT_AGENT`, `COPILOT_CLI`, `COPILOT_AGENT_SESSION_ID` | GitHub Copilot |
 
-Agent mode turns on when three things are true: one of these variables is set, stdout is not a terminal, and no output format was given on the command line. If you pass `-csv`, `-json` or `-markdown`, you asked for a specific format, and agent mode stays out of the way.
+Agent mode turns on when three things are true: one of these variables is set, stdout is not a terminal, and no output format was given on the command line. If you pass `-csv`, `-json`, or `-markdown`, you asked for a specific format, and agent mode stays out of the way.
 
 Two flags override detection. `-agent` forces the mode on and `-no-agent` forces it off. The two combine with format flags, so `duckdb -agent -csv` keeps the agent behavior and only changes how the rows are printed. The `DUCKDB_AGENT_MODE` environment variable does the same from the environment, for when the command line cannot be changed, such as a script run from an agent’s shell. For example, to manually enable agent mode, run:
 
@@ -107,7 +107,7 @@ An agent that nobody told about the mode can find it this way the first time som
 
 ## What Changes in Agent Mode
 
-Everything below is a default. Explicit settings such as `.mode`, `.maxrows`, `EXPLAIN (FORMAT ...)` or anything in your `.duckdbrc` still take precedence.
+Everything below is a default. Explicit settings such as `.mode`, `.maxrows`, `EXPLAIN (FORMAT ...)`, or anything in your `.duckdbrc` still take precedence.
 
 ### Compact Tables
 
@@ -164,7 +164,7 @@ The shell drops the `candidates` field, because the message already lists the ca
 
 ### Compact Query Plans
 
-`EXPLAIN` defaults to a new `compact` format with one operator per line, indented by depth. Estimates, actual row counts and timings go in parentheses, followed by the operator’s properties:
+`EXPLAIN` defaults to a new `compact` format with one operator per line, indented by depth. Estimates, actual row counts, and timings go in parentheses, followed by the operator’s properties:
 
 ```text
 UNGROUPED_AGGREGATE (est=1) Aggregates: count_star()
@@ -226,9 +226,9 @@ If you do not want the startup line, add `.startup_text none` to your `~/.duckdb
 
 ## Trying It Out
 
-If you use a coding agent, there is nothing to configure. Agents such as Claude Code, Codex, Cursor, Gemini CLI and GitHub Copilot already set one of the environment variables from the table above, and they capture a command's output through a pipe rather than a terminal. Those are two of the three conditions for agent mode.
+If you use a coding agent, there is nothing to configure. Agents such as Claude Code, Codex, Cursor, Gemini CLI, and GitHub Copilot already set one of the environment variables from the table above, and they capture a command's output through a pipe rather than a terminal. Those are two of the three conditions for agent mode.
 
-So as long as the `duckdb` binary on the agent’s path is v2.0 or newer and the agent does not request a specific output format with a flag such as `-csv`, `-json` or `-markdown`, the mode turns on by itself. A format flag is treated as a deliberate choice, so it switches agent mode off: the CLI assumes you want exactly that format and does not override it.
+So as long as the `duckdb` binary on the agent’s path is v2.0 or newer and the agent does not request a specific output format with a flag such as `-csv`, `-json`, or `-markdown`, the mode turns on by itself. A format flag is treated as a deliberate choice, so it switches agent mode off: the CLI assumes you want exactly that format and does not override it.
 
 To see what the agent sees, run a query through a pipe with the flag set:
 

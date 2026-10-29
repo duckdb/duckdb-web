@@ -27,7 +27,7 @@ ATTACH '⟨warehouse_name⟩' AS my_datalake (
 ## `MERGE INTO` Support
 
 DuckDB's [`MERGE INTO`]({% link docs/2.0/sql/statements/merge_into.md %}) statement is the recommended way to express upserts when the target table does not have a primary key – which is the case for all [lakehouse formats]({% link docs/2.0/lakehouse_formats.md %}).
-With v1.5.3, `MERGE INTO` is now fully supported against Iceberg tables. You can apply a change set to an Iceberg table in a single statement, deciding per row whether to insert, update or delete.
+With v1.5.3, `MERGE INTO` is now fully supported against Iceberg tables. You can apply a change set to an Iceberg table in a single statement, deciding per row whether to insert, update, or delete.
 
 Let's take this table for example:
 

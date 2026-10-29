@@ -19,7 +19,7 @@ At the company where I work, we store vulnerability data for our clients as a co
 
 The plan was to import one year of records into an alternative database and run analytical queries on it. The requirements were to run all the queries in one second or less and export 50,000 records in Excel format under ten seconds. Anything more than that would be handled in background.
 
-Due to internal requirements, the analytical database had to run on the same server as MongoDB. It needed to be actively developed, free, open-source and capable of working well with limited resources - and DuckDB checked all the boxes.
+Due to internal requirements, the analytical database had to run on the same server as MongoDB. It needed to be actively developed, free, open-source, and capable of working well with limited resources - and DuckDB checked all the boxes.
 
 ## Sample Data Set and Code Snippets
 

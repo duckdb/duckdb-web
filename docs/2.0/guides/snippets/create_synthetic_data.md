@@ -120,7 +120,7 @@ SELECT today() AS date, get_current_time() AS time, current_localtimestamp() AS 
 
 ### Hashing
 
-Hash functions such as [`hash`]({% link docs/2.0/sql/functions/utility.md %}#hashvalue), [`md5`]({% link docs/2.0/sql/functions/utility.md %}#md5string) and [`sha256`]({% link docs/2.0/sql/functions/utility.md %}#sha256string) turn a row number into a deterministic pseudo-random value, which is useful when you want reproducible identifiers:
+Hash functions such as [`hash`]({% link docs/2.0/sql/functions/utility.md %}#hashvalue), [`md5`]({% link docs/2.0/sql/functions/utility.md %}#md5string), and [`sha256`]({% link docs/2.0/sql/functions/utility.md %}#sha256string) turn a row number into a deterministic pseudo-random value, which is useful when you want reproducible identifiers:
 
 ```sql
 SELECT hash(i) AS id, md5(i::VARCHAR) AS token FROM range(3) t(i);
@@ -145,7 +145,7 @@ SELECT nextval('id_seq') AS id FROM range(3);
 
 ## Generating Text with Faker
 
-For realistic-looking names, addresses and other text, you can call the [Faker Python package](https://faker.readthedocs.io/) through the [Python function API]({% link docs/2.0/clients/python/function.md %}):
+For realistic-looking names, addresses, and other text, you can call the [Faker Python package](https://faker.readthedocs.io/) through the [Python function API]({% link docs/2.0/clients/python/function.md %}):
 
 ```python
 import duckdb

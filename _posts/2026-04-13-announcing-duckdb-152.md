@@ -5,7 +5,7 @@ authors:
   - The DuckDB team
 thumb: "/images/blog/thumbs/duckdb-release-1-5-2.svg"
 image: "/images/blog/thumbs/duckdb-release-1-5-2.png"
-excerpt: "We are releasing DuckDB version v1.5.2, a patch release with bugfixes and performance improvements, and support for the DuckLake v1.0 lakehouse format."
+excerpt: "We are releasing DuckDB version v1.5.2, a patch release with bugfixes, performance improvements, and support for the DuckLake v1.0 lakehouse format."
 tag: release
 ---
 
@@ -44,7 +44,7 @@ The test suite has uncovered a bug that was triggered by `INSERT INTO` statement
 The online [WebAssembly]({% link docs/2.0/clients/wasm/overview.md %}) shell at [`shell.duckdb.org`](https://shell.duckdb.org/) received a complete overhaul.
 A highlight of the new shell is the ability to store and list files using the `.files` dot command and its variants.
 
-Using the file storage feature, you can turn your browser session into workbench: you can drag-and-drop files from your local file system to upload them, create new ones using DuckDB's [`COPY ... TO` statement]({% link docs/2.0/sql/statements/copy.md %}#copy--to) and download the results. For more information on this feature, use the `.help` command.
+Using the file storage feature, you can turn your browser session into workbench: you can drag-and-drop files from your local file system to upload them, create new ones using DuckDB's [`COPY ... TO` statement]({% link docs/2.0/sql/statements/copy.md %}#copy--to), and download the results. For more information on this feature, use the `.help` command.
 
 <!--
 <img src="{% link images/blog/online-shell-example.png %}" alt="Example use of the new online shell at shell.duckdb.org" width="800" />

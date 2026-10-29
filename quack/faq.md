@@ -223,7 +223,7 @@ Please consult the DuckDB FAQ's [“I would like feature X to be implemented in 
 
 <div class="answer" markdown="1">
 
-Not yet. Quack is currently in a beta state. You can use Quack for prototyping but it is still in development, and breaking changes are expected to happen. These may include the protocol, function names and default settings. [DuckDB v2.0]({% post_url 2026-10-21-announcing-duckdb-200 %}) ships a polished version of Quack with substantial performance and stability improvements, but the protocol is not yet stable.
+Not yet. Quack is currently in a beta state. You can use Quack for prototyping but it is still in development, and breaking changes are expected to happen. These may include the protocol, function names, and default settings. [DuckDB v2.0]({% post_url 2026-10-21-announcing-duckdb-200 %}) ships a polished version of Quack with substantial performance and stability improvements, but the protocol is not yet stable.
 
 </div>
 
@@ -281,7 +281,7 @@ There are several third-party solutions providing remote access to DuckDB (e.g.,
 
 <div class="answer" markdown="1">
 
-Quack is a remote protocol for DuckDB that enables client-server use of DuckDB. DuckLake is an open lakehouse format supported by different data management systems, including DuckDB itself but also Apache Spark, Apache DataFusion and Trino.
+Quack is a remote protocol for DuckDB that enables client-server use of DuckDB. DuckLake is an open lakehouse format supported by different data management systems, including DuckDB itself but also Apache Spark, Apache DataFusion, and Trino.
 
 Quack and DuckLake share a few similarities:
 
@@ -292,7 +292,7 @@ However, Quack and DuckLake are also fundamentally different.
 
 **Relation to DuckDB:**
   * Quack is exclusive to DuckDB as it allows DuckDB processes to communicate. 
-  * The DuckLake format is not exclusive to DuckDB: DuckLakes can be [created, read and updated via different clients](https://ducklake.select/docs/stable/#list-of-ducklake-clients).
+  * The DuckLake format is not exclusive to DuckDB: DuckLakes can be [created, read, and updated via different clients](https://ducklake.select/docs/stable/#list-of-ducklake-clients).
 * **Storage:**
   * Quack allows you to run a DuckDB server that uses DuckDB's native database format for storage. This allows you to scale up to a few terabytes.
   * DuckLake stores the data on object storage, which allows it to store huge, potentially petabyte-scale datasets.

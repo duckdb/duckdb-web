@@ -264,7 +264,7 @@ WHERE s1.time > s2.time
 
 Natural joins join two tables based on attributes that share the same name.
 
-For example, take the following example with cities, airport codes and airport names. Note that both tables are intentionally incomplete, i.e., they do not have a matching pair in the other table.
+For example, take the following example with cities, airport codes, and airport names. Note that both tables are intentionally incomplete, i.e., they do not have a matching pair in the other table.
 
 ```sql
 CREATE TABLE city_airport (city_name VARCHAR, iata VARCHAR);

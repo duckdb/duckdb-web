@@ -9,13 +9,13 @@ excerpt: DuckDB can run all TPC-H queries on a Raspberry Pi 5 board up to the 1,
 tag: benchmark
 ---
 
-> Update The setup described here can run all TPC-H queries on the SF100, SF300 and SF1,000 datasets with DuckDB v1.2.2 and newer versions.
+> Update The setup described here can run all TPC-H queries on the SF100, SF300, and SF1,000 datasets with DuckDB v1.2.2 and newer versions.
 > The timings given in this blog post were achieved in January 2025 using DuckDB v1.2-dev.
 
 ## Introduction
 
 The Raspberry Pi is an initiative to provide affordable and easy-to-program microcomputer boards.
-The initial model in 2012 had a single CPU core running at 0.7 GHz, 256 MB RAM and an SD card slot, making it a great educational platform.
+The initial model in 2012 had a single CPU core running at 0.7 GHz, 256 MB RAM, and an SD card slot, making it a great educational platform.
 Over time the Raspberry Pi Foundation introduced more and more powerful models.
 The latest model, the [Raspberry Pi 5](https://www.raspberrypi.com/products/raspberry-pi-5/), has a 2.4 GHz quad-core CPU and – with extra connectors – can even make use of NVMe SSDs for storage.
 
@@ -115,7 +115,7 @@ We ran the script as follows:
 duckdb tpch-sf${SF}.db -f tpch-queries.sql
 ```
 
-We did not encounter any crashes, errors or incorrect results.
+We did not encounter any crashes, errors, or incorrect results.
 The following table contains the aggregated runtimes:
 
 | Scale factor | Storage      | Geometric mean runtime | Total runtime |

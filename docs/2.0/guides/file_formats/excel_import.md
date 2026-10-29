@@ -109,7 +109,7 @@ By default, the first row is treated as a header if all the cells in the first r
 
 When not importing into an existing table, DuckDB will attempt to infer the types of the columns in the Excel sheet based on their contents and/or "number format".
 
-- `TIMESTAMP`, `TIME`, `DATE` and `BOOLEAN` types are inferred when possible based on the "number format" applied to the cell.
+- `TIMESTAMP`, `TIME`, `DATE`, and `BOOLEAN` types are inferred when possible based on the "number format" applied to the cell.
 - Text cells containing `TRUE` and `FALSE` are inferred as `BOOLEAN`.
 - Empty cells are considered to be of type `DOUBLE` by default.
 - Otherwise cells are inferred as `VARCHAR` or `DOUBLE` based on their contents.

@@ -20,7 +20,7 @@ it simple to run notebooks as scripts.
 
 ## Installation
 
-To get started, install marimo from your terminal. Its `sql` extra also installs DuckDB, Polars and PyArrow:
+To get started, install marimo from your terminal. Its `sql` extra also installs DuckDB, Polars, and PyArrow:
 
 ```bash
 pip install "marimo[sql]"
@@ -79,9 +79,9 @@ marimo automatically discovers the connection and lets you select it in the SQL 
 </div>
 
 
-## Database, Schema and Table Auto-Discovery
+## Database, Schema, and Table Auto-Discovery
 
-marimo introspects connections and displays the database, schemas, tables and columns in the Data Sources panel. This panel lets you quickly navigate your schemas to pull tables and columns into your SQL queries.
+marimo introspects connections and displays the database, schemas, tables, and columns in the Data Sources panel. This panel lets you quickly navigate your schemas to pull tables and columns into your SQL queries.
 
 <div align="center">
   <figure>

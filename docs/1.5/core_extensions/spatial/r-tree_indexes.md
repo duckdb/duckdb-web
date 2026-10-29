@@ -45,7 +45,7 @@ You can also pass in additional options when creating an R-tree index using the 
 CREATE INDEX my_idx ON my_table USING RTREE (geom) WITH (max_node_capacity = 16);
 ```
 
-The impact tweaking these options will have on performance is highly dependent on the system setup DuckDB is running on, the spatial distribution of the dataset and the query patterns of your specific workload. The defaults should be good enough, but you if you want to experiment with different parameters, see the [full list of options here](#options).
+The impact tweaking these options will have on performance is highly dependent on the system setup DuckDB is running on, the spatial distribution of the dataset, and the query patterns of your specific workload. The defaults should be good enough, but you if you want to experiment with different parameters, see the [full list of options here](#options).
 
 ## Example
 
@@ -132,7 +132,7 @@ The following options can be passed to the `WITH` clause when creating an R-tree
 
 ## R-Tree Table Functions
 
-The `rtree_index_dump(VARCHAR)` table function can be used to return all the nodes within an R-tree index which might come on handy when debugging, profiling or otherwise just inspecting the structure of the index. The function takes the name of the R-tree index as an argument and returns a table with the following columns:
+The `rtree_index_dump(VARCHAR)` table function can be used to return all the nodes within an R-tree index which might come on handy when debugging, profiling, or otherwise just inspecting the structure of the index. The function takes the name of the R-tree index as an argument and returns a table with the following columns:
 
 | Column name | Type       | Description                                                                   |
 |-------------|------------|-------------------------------------------------------------------------------|

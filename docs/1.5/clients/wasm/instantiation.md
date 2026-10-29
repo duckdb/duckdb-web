@@ -7,7 +7,7 @@ title: Instantiate
 
 DuckDB-Wasm can be instantiated in several ways, depending on how your application bundles and serves its assets. Each approach resolves the `mainModule` (the WebAssembly file) and the `mainWorker` (the worker script) for the browser's capabilities, then hands them to `AsyncDuckDB`.
 
-This page shows the patterns for a jsDelivr CDN, webpack, Vite and statically served files. Once instantiated, the `db` object is used to [import data]({% link docs/1.5/clients/wasm/data_ingestion.md %}) and [run queries]({% link docs/1.5/clients/wasm/query.md %}).
+This page shows the patterns for a jsDelivr CDN, webpack, Vite, and statically served files. Once instantiated, the `db` object is used to [import data]({% link docs/1.5/clients/wasm/data_ingestion.md %}) and [run queries]({% link docs/1.5/clients/wasm/query.md %}).
 
 ## Bundle Selection
 

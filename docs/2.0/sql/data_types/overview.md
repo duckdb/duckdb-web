@@ -48,7 +48,7 @@ Implicit and explicit typecasting is possible between numerous types, see the [T
 
 ## Nested / Composite Types
 
-DuckDB supports the following nested data types: `ARRAY`, `LIST`, `MAP`, `STRUCT`, `TUPLE`, `UNION` and `VARIANT`. Each supports different use cases and has a different structure.
+DuckDB supports the following nested data types: `ARRAY`, `LIST`, `MAP`, `STRUCT`, `TUPLE`, `UNION`, and `VARIANT`. Each supports different use cases and has a different structure.
 
 | Name                                                         | Description                                                                                                                                                                                     | Rules when used in a column                                                                                    | Build from values         | Define in DDL/CREATE               |
 | :----------------------------------------------------------- | :---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | :------------------------------------------------------------------------------------------------------------- | :------------------------ | :--------------------------------- |
@@ -72,7 +72,7 @@ When used in a table with ART indexes (either via explicit indexes or primary ke
 
 ## Nesting
 
-`ARRAY`, `LIST`, `MAP`, `STRUCT`, `TUPLE` and `UNION` types can be arbitrarily nested to any depth, so long as the type rules are observed.
+`ARRAY`, `LIST`, `MAP`, `STRUCT`, `TUPLE`, and `UNION` types can be arbitrarily nested to any depth, so long as the type rules are observed.
 
 Struct with `LIST`s:
 

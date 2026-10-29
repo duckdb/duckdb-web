@@ -9,9 +9,9 @@ excerpt: "How does the latest entry-level MacBook perform on database workloads?
 tag: benchmark
 ---
 
-Apple released the [MacBook Neo](https://en.wikipedia.org/wiki/MacBook_Neo) today and there is no shortage of tech reviews explaining whether it's the right device for you if you are a student, a photographer or a writer.
+Apple released the [MacBook Neo](https://en.wikipedia.org/wiki/MacBook_Neo) today and there is no shortage of tech reviews explaining whether it's the right device for you if you are a student, a photographer, or a writer.
 What they *don't* tell you is whether it fits into our [Big Data on Your Laptop](https://blobs.duckdb.org/merch/duckdb-2024-big-data-on-your-laptop-poster.pdf) ethos.
-We wanted to answer this _using a data-driven approach,_ so we went to the nearest Apple Store, picked one up and took it for a spin.
+We wanted to answer this _using a data-driven approach,_ so we went to the nearest Apple Store, picked one up, and took it for a spin.
 
 ## What's in the Box?
 
@@ -40,7 +40,7 @@ We only applied a small tweak: as suggested in [our performance guide]({% link d
 
 We also re-ran ClickBench with DuckDB v1.5.0 on two cloud instances, yielding the following lineup:
 
-* The star of our show, the MacBook Neo with 2 performance cores, 4 efficiency cores and 8 GB RAM
+* The star of our show, the MacBook Neo with 2 performance cores, 4 efficiency cores, and 8 GB RAM
 * [c6a.4xlarge](https://instances.vantage.sh/aws/ec2/c6a.4xlarge) with 16 AMD EPYC vCPU cores and 32 GB RAM. This instance is [popular in ClickBench](https://benchmark.clickhouse.com/#system=-&type=-&machine=+ca4e&cluster_size=-&opensource=-&hardware=+c&tuned=+n&metric=combined&queries=-) with about 80 individual results reported.
 * [c8g.metal-48xl](https://instances.vantage.sh/aws/ec2/c8g.metal-48xl) with a whopping 192 Graviton4 vCPU cores and 384 GB RAM. This instance is often at the top of the [overall ClickBench leaderboard](https://benchmark.clickhouse.com/).
 

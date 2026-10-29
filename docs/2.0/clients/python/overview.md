@@ -66,7 +66,7 @@ duckdb.sql("SELECT * FROM 'example.json'")    # directly query a JSON file
 
 ### DataFrames
 
-DuckDB can directly query Pandas DataFrames, Polars DataFrames and Arrow tables.
+DuckDB can directly query Pandas DataFrames, Polars DataFrames, and Arrow tables.
 Note that these are read-only, i.e., editing these tables via [`INSERT`]({% link docs/2.0/sql/statements/insert.md %}) or [`UPDATE` statements]({% link docs/2.0/sql/statements/update.md %}) is not possible.
 
 #### Pandas
@@ -208,7 +208,7 @@ with duckdb.connect("file.db") as con:
 
 ### Configuration
 
-The `duckdb.connect()` method takes three arguments: `database`, `read_only` and `config`. Settings go into the `config` dictionary, where [configuration options]({% link docs/2.0/configuration/overview.md %}#configuration-reference) can be specified. For example:
+The `duckdb.connect()` method takes three arguments: `database`, `read_only`, and `config`. Settings go into the `config` dictionary, where [configuration options]({% link docs/2.0/configuration/overview.md %}#configuration-reference) can be specified. For example:
 
 ```python
 import duckdb
@@ -238,7 +238,7 @@ Nearly every method of a connection object is also a function of the `duckdb` mo
 
 A connection runs one call at a time. A call from another thread while the connection is busy does not wait: it raises a `ResourceInUseException` saying `connection is busy with another call; it refuses instead of waiting, so use a separate connection from cursor()`.
 
-`duckdb.sql()`, the other functions of the `duckdb` module and `duckdb.connect(":default:")` all use one shared default connection, so the same holds for them. To run queries in parallel, give each thread its own cursor:
+`duckdb.sql()`, the other functions of the `duckdb` module, and `duckdb.connect(":default:")` all use one shared default connection, so the same holds for them. To run queries in parallel, give each thread its own cursor:
 
 ```python
 import threading

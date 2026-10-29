@@ -23,4 +23,4 @@ venue: "DuckDB Paris Meetup"
 
 ## Abstract
 
-Sylvain Utard, CEO and co-founder of Altertable, explores how DuckDB and dbt can simplify modern analytics workflows and reduce the need for complex data pipelines. The talk covers a more lightweight approach to transforming and analyzing data, what changes when compute moves closer to the data and why traditional pipeline-heavy architectures may be reaching their limits.
+Sylvain Utard, CEO and co-founder of Altertable, explores how DuckDB and dbt can simplify modern analytics workflows and reduce the need for complex data pipelines. The talk covers a more lightweight approach to transforming and analyzing data, what changes when compute moves closer to the data, and why traditional pipeline-heavy architectures may be reaching their limits.

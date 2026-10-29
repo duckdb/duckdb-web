@@ -8,7 +8,7 @@ redirect_from:
 title: What's New in the Docs for 2.0
 ---
 
-This page tracks the documentation for the features introduced in DuckDB 2.0, organized around the themes of the [DuckDB 2.0.0 release announcement]({% post_url 2026-10-21-announcing-duckdb-200 %}). Each section links to the relevant documentation. For smaller features, see the [“Gems of DuckDB 2.0.0” blog post]({% post_url 2026-10-26-gems-of-duckdb-200 %}), which covers the Python appender, CLI usability improvements, secure views and custom partition paths.
+This page tracks the documentation for the features introduced in DuckDB 2.0, organized around the themes of the [DuckDB 2.0.0 release announcement]({% post_url 2026-10-21-announcing-duckdb-200 %}). Each section links to the relevant documentation. For smaller features, see the [“Gems of DuckDB 2.0.0” blog post]({% post_url 2026-10-26-gems-of-duckdb-200 %}), which covers the Python appender, CLI usability improvements, secure views, and custom partition paths.
 
 ## DuckDB as a Server: Quack and `CONNECT`
 
@@ -67,7 +67,7 @@ DuckDB 2.0 included optimizer and engine improvements, including faster recursiv
 
 ## Storage Format v2.0
 
-New database files use the v2.0.0 storage format by default. The format adds lazy metadata loading, better compression and corruption validation. DuckDB versions before 2.0 cannot read files in the new format, so a migration guide covers upgrading existing deployments.
+New database files use the v2.0.0 storage format by default. The format adds lazy metadata loading, better compression, and corruption validation. DuckDB versions before 2.0 cannot read files in the new format, so a migration guide covers upgrading existing deployments.
 
 * [Default storage version]({% link docs/2.0/internals/storage.md %}#default-storage-version)
 * [Storage version table]({% link docs/2.0/internals/storage.md %}#storage-version-table)
@@ -80,9 +80,9 @@ DuckDB 2.0 introduced a PEG-based SQL parser that replaces the PostgreSQL-derive
 * [PEG parser]({% link docs/2.0/sql/peg_parser.md %})
 * [Legacy parser extension]({% link docs/2.0/core_extensions/legacy_parser.md %}) for switching back to the old parser
 
-## Timezones, Calendars and Collations without ICU
+## Timezones, Calendars, and Collations without ICU
 
-DuckDB 2.0 replaces the ICU library with a smaller, faster native implementation of timezone, calendar and collation support in the `icu` extension.
+DuckDB 2.0 replaces the ICU library with a smaller, faster native implementation of timezone, calendar, and collation support in the `icu` extension.
 
 * [ICU extension]({% link docs/2.0/core_extensions/icu.md %})
 
@@ -100,7 +100,7 @@ Several core extensions shipped new features alongside DuckDB 2.0.
 
 * [DuckLake extension]({% link docs/2.0/core_extensions/ducklake.md %}), the reference implementation of DuckLake 1.1
 * [Iceberg extension `ATTACH` options]({% link docs/2.0/core_extensions/iceberg/iceberg_options.md %}#attach-options) for REST catalogs
-* [Creating Delta tables]({% link docs/2.0/core_extensions/delta.md %}#creating-tables), [time travel]({% link docs/2.0/core_extensions/delta.md %}#time-travel) and [`VARIANT` columns]({% link docs/2.0/core_extensions/delta.md %}#variant-columns) in the Delta extension
+* [Creating Delta tables]({% link docs/2.0/core_extensions/delta.md %}#creating-tables), [time travel]({% link docs/2.0/core_extensions/delta.md %}#time-travel), and [`VARIANT` columns]({% link docs/2.0/core_extensions/delta.md %}#variant-columns) in the Delta extension
 
 ## Deprecations
 
@@ -124,7 +124,7 @@ Additional 2.0 features documented across the site, grouped by area.
 
 * [CLI agent mode]({% link docs/2.0/clients/cli/agent_mode.md %}), which produces compact, machine-readable output when the CLI is driven by an AI coding agent
 * [CLI command history]({% link docs/2.0/clients/cli/dot_commands.md %}#command-history): the `.history` command and the `shell_history()` table function
-* [The `.manual` dot command]({% link docs/2.0/clients/cli/dot_commands.md %}#displaying-function-documentation), which shows the signatures, description and examples of a SQL function
+* [The `.manual` dot command]({% link docs/2.0/clients/cli/dot_commands.md %}#displaying-function-documentation), which shows the signatures, description, and examples of a SQL function
 * [Pretty-printed, highlighted `.schema` output]({% link docs/2.0/clients/cli/dot_commands.md %}#querying-the-database-schema) with `--no-indent` to restore the single-line form
 * [The Python appender]({% link docs/2.0/clients/python/appender.md %}) for inserting rows that Python code produces
 

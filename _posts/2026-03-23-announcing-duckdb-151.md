@@ -5,7 +5,7 @@ authors:
   - The DuckDB team
 thumb: "/images/blog/thumbs/duckdb-release-1-5-1.svg"
 image: "/images/blog/thumbs/duckdb-release-1-5-1.png"
-excerpt: "We are releasing DuckDB version 1.5.1, a patch release with bugfixes, performance improvements and support for the Lance lakehouse format."
+excerpt: "We are releasing DuckDB version 1.5.1, a patch release with bugfixes, performance improvements, and support for the Lance lakehouse format."
 tag: release
 ---
 

@@ -33,9 +33,9 @@ The functions below are difficult to categorize into specific function types and
 | [`current_schemas(boolean)`](#current_schemasboolean) | Return list of schemas. Pass a parameter of `true` to include implicit schemas. |
 | [`current_setting('setting_name')`](#current_settingsetting_name) | Return the current value of the configuration setting. |
 | [`currval('sequence_name')`](#currvalsequence_name) | Return the current value of the sequence. Note that `nextval` must be called at least once prior to calling `currval`. |
-| [`duckdb_format_sql(sql[, config])`](#duckdb_format_sqlsql-config) | Formats the `sql` string, e.g., by placing each clause on a separate line and normalizing the case of keywords. The optional `config` is a `MAP(VARCHAR, VARCHAR)` with the keys `'indent_size'`, `'inline_threshold'` and `'keyword_case'` (`'upper'`, `'lower'` or `'preserve'`). Provided by the `autocomplete` extension. |
+| [`duckdb_format_sql(sql[, config])`](#duckdb_format_sqlsql-config) | Formats the `sql` string, e.g., by placing each clause on a separate line and normalizing the case of keywords. The optional `config` is a `MAP(VARCHAR, VARCHAR)` with the keys `'indent_size'`, `'inline_threshold'`, and `'keyword_case'` (`'upper'`, `'lower'`, or `'preserve'`). Provided by the `autocomplete` extension. |
 | [`error(message)`](#errormessage) | Throws the given error `message`. |
-| [`equi_width_bins(min, max, bincount, nice := false)`](#equi_width_binsmin-max-bincount-nice--false) | Returns the upper boundaries of a partition of the interval `[min, max]` into `bin_count` equal-sized subintervals (for use with, e.g., [`histogram`]({% link docs/2.0/sql/functions/aggregates.md %}#histogramargboundaries)). If `nice = true`, then `min`, `max` and `bincount` may be adjusted to produce more aesthetically pleasing results. |
+| [`equi_width_bins(min, max, bincount, nice := false)`](#equi_width_binsmin-max-bincount-nice--false) | Returns the upper boundaries of a partition of the interval `[min, max]` into `bin_count` equal-sized subintervals (for use with, e.g., [`histogram`]({% link docs/2.0/sql/functions/aggregates.md %}#histogramargboundaries)). If `nice = true`, then `min`, `max`, and `bincount` may be adjusted to produce more aesthetically pleasing results. |
 | [`force_checkpoint(database)`](#force_checkpointdatabase) | Synchronize WAL with file for (optional) database interrupting transactions. |
 | [`gen_random_uuid()`](#gen_random_uuid) | Return a random UUID similar to this: `eeccb8c5-9943-b2bb-bb5e-222f4e14b687`. |
 | [`get_block_size(database)`](#get_block_sizedatabase) | Returns the block size of the attached database with the given name. |
@@ -200,7 +200,7 @@ The functions below are difficult to categorize into specific function types and
 
 <div class="nostroke_table"></div>
 
-| **Description** | Formats the `sql` string, e.g., by placing each clause on a separate line and normalizing the case of keywords. The optional `config` is a `MAP(VARCHAR, VARCHAR)` with the keys `'indent_size'`, `'inline_threshold'` and `'keyword_case'` (`'upper'`, `'lower'` or `'preserve'`). Provided by the `autocomplete` extension. |
+| **Description** | Formats the `sql` string, e.g., by placing each clause on a separate line and normalizing the case of keywords. The optional `config` is a `MAP(VARCHAR, VARCHAR)` with the keys `'indent_size'`, `'inline_threshold'`, and `'keyword_case'` (`'upper'`, `'lower'`, or `'preserve'`). Provided by the `autocomplete` extension. |
 | **Example** | `duckdb_format_sql('select a,b from tbl where x=1')` |
 | **Result** | `SELECT a, b\nFROM tbl\nWHERE x = 1` (where `\n` denotes a newline) |
 
@@ -215,7 +215,7 @@ The functions below are difficult to categorize into specific function types and
 
 <div class="nostroke_table"></div>
 
-| **Description** | Returns the upper boundaries of a partition of the interval `[min, max]` into `bin_count` equal-sized subintervals (for use with, e.g., [`histogram`]({% link docs/2.0/sql/functions/aggregates.md %}#histogramargboundaries)). If `nice = true`, then `min`, `max` and `bincount` may be adjusted to produce more aesthetically pleasing results.  |
+| **Description** | Returns the upper boundaries of a partition of the interval `[min, max]` into `bin_count` equal-sized subintervals (for use with, e.g., [`histogram`]({% link docs/2.0/sql/functions/aggregates.md %}#histogramargboundaries)). If `nice = true`, then `min`, `max`, and `bincount` may be adjusted to produce more aesthetically pleasing results.  |
 | **Example** | `equi_width_bins(0.1, 2.7, 4, true)` |
 | **Result** | `[0.5, 1.0, 1.5, 2.0, 2.5, 3.0]` |
 
@@ -530,7 +530,7 @@ A [table function]({% link docs/2.0/sql/query_syntax/from.md %}#table-functions)
 | [`range([start,] stop[, step])`](#rangestart-stop-step) | Returns a table of values between `start` and `stop` (exclusive), incrementing by `step`. |
 | [`repeat(value, count)`](#repeatvalue-count) | Returns a table with `count` rows, each containing `value`. |
 | [`repeat_row(varargs, num_rows)`](#repeat_rowvarargs-num_rows) | Returns a table with `num_rows` rows, each containing the fields defined in `varargs`. |
-| [`sql_tokenize(sql)`](#sql_tokenizesql) | Splits the `sql` string into tokens. Returns a table with the columns `start` (the byte offset of the token), `token_type` (e.g., `KEYWORD`, `IDENTIFIER`, `NUMBER_LITERAL`) and `word`. Provided by the `autocomplete` extension. |
+| [`sql_tokenize(sql)`](#sql_tokenizesql) | Splits the `sql` string into tokens. Returns a table with the columns `start` (the byte offset of the token), `token_type` (e.g., `KEYWORD`, `IDENTIFIER`, `NUMBER_LITERAL`), and `word`. Provided by the `autocomplete` extension. |
 | [`unnest(list)`](#unnestlist) | Returns a table with one row per element of `list`. |
 
 #### `generate_series([start,] stop[, step])`
@@ -577,7 +577,7 @@ A [table function]({% link docs/2.0/sql/query_syntax/from.md %}#table-functions)
 
 <div class="nostroke_table"></div>
 
-| **Description** | Splits the `sql` string into tokens. Returns a table with the columns `start` (the byte offset of the token), `token_type` (e.g., `KEYWORD`, `IDENTIFIER`, `NUMBER_LITERAL`) and `word`. Provided by the `autocomplete` extension. |
+| **Description** | Splits the `sql` string into tokens. Returns a table with the columns `start` (the byte offset of the token), `token_type` (e.g., `KEYWORD`, `IDENTIFIER`, `NUMBER_LITERAL`), and `word`. Provided by the `autocomplete` extension. |
 | **Example** | `sql_tokenize('SELECT 42 AS x')` |
 | **Result** | 4 rows: `(0, KEYWORD, SELECT), (7, NUMBER_LITERAL, 42), (10, KEYWORD, AS), (13, IDENTIFIER, x)` |
 

@@ -17,7 +17,7 @@ The DuckDB C++ API can be installed as part of the `libduckdb` packages. Please 
 
 ## Basic API Usage
 
-DuckDB implements a custom C++ API. This is built around the abstractions of a database instance (`DuckDB` class), multiple `Connection`s to the database instance and `QueryResult` instances as the result of queries. The header file for the C++ API is `duckdb.hpp`.
+DuckDB implements a custom C++ API. This is built around the abstractions of a database instance (`DuckDB` class), multiple `Connection`s to the database instance, and `QueryResult` instances as the result of queries. The header file for the C++ API is `duckdb.hpp`.
 
 ### Startup & Shutdown
 
@@ -149,7 +149,7 @@ This method automatically discovers from the template typenames the correspondin
 * `double` → `LogicalType::DOUBLE`
 * `string_t` → `LogicalType::VARCHAR`
 
-In DuckDB some primitive types, e.g., `int32_t`, are mapped to the same `LogicalType`: `INTEGER`, `TIME` and `DATE`, then for disambiguation the users can use the following overloaded method.
+In DuckDB some primitive types, e.g., `int32_t`, are mapped to the same `LogicalType`: `INTEGER`, `TIME`, and `DATE`, then for disambiguation the users can use the following overloaded method.
 
 **2.**
 

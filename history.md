@@ -80,7 +80,7 @@ permalink: /history/
     <div class="timeline-marker"><span class="timeline-year">2026, Q3</span></div>
     <div class="timeline-body">
       <h2 id="ducklabs-to-join-aws">DuckLabs Is Joining AWS</h2>
-      <p>On August 26, 2026, DuckLabs announced that <a href="https://ducklabs.com/news/2026/08/26/ducklabs-to-join-aws">it is joining Amazon Web Services</a>. The DuckLabs team stays in Amsterdam and remains focused on the development of the core projects – DuckDB, DuckLake and Quack.</p>
+      <p>On August 26, 2026, DuckLabs announced that <a href="https://ducklabs.com/news/2026/08/26/ducklabs-to-join-aws">it is joining Amazon Web Services</a>. The DuckLabs team stays in Amsterdam and remains focused on the development of the core projects – DuckDB, DuckLake, and Quack.</p>
       <p>These projects will remain the intellectual property of the <a href="https://duckdb.foundation/">DuckDB Foundation</a> and open source under the MIT license. The scope of the <a href="{% link community_support.md %}">community support</a> is extended to accept larger volumes of issues and pull requests, and will cover more components.</p>
     </div>
   </div>
@@ -89,7 +89,7 @@ permalink: /history/
     <div class="timeline-marker"><span class="timeline-year">2026, Q4</span></div>
     <div class="timeline-body">
       <h2 id="duckdb-reaches-20">DuckDB Reaches v2.0</h2>
-      <p>On October 21, 2026, the team <a href="{% post_url 2026-10-21-announcing-duckdb-200 %}">released DuckDB v2.0.0 LTS</a>, the project's biggest feature release so far. It ships a polished version of the Quack protocol, asynchronous I/O, a first-class <code>VARIANT</code> type, triggers and an extensible SQL parser.</p>
+      <p>On October 21, 2026, the team <a href="{% post_url 2026-10-21-announcing-duckdb-200 %}">released DuckDB v2.0.0 LTS</a>, the project's biggest feature release so far. It ships a polished version of the Quack protocol, asynchronous I/O, a first-class <code>VARIANT</code> type, triggers, and an extensible SQL parser.</p>
     </div>
   </div>
 

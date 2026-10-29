@@ -109,7 +109,7 @@ SELECT ⟨aggregate_function⟩(⟨arg⟩, ⟨sep⟩ ORDER BY ⟨ordering_criter
 
 This clause ensures that the values being aggregated are sorted before applying the function.
 Most aggregate functions are order-insensitive, and for them this clause is parsed and discarded.
-However, there are some order-sensitive aggregates that can have non-deterministic results without ordering, e.g., `first`, `last`, `list` and `string_agg` / `group_concat` / `listagg`.
+However, there are some order-sensitive aggregates that can have non-deterministic results without ordering, e.g., `first`, `last`, `list`, and `string_agg` / `group_concat` / `listagg`.
 These can be made deterministic by ordering the arguments.
 
 When `DISTINCT` is used, every expression in the aggregate-local `ORDER BY` clause must also appear in the aggregate's argument list. For example, the first query below is valid, while the second fails because `y` is not an aggregate argument.
@@ -138,7 +138,7 @@ FROM tbl;
 
 ### Handling `NULL` Values
 
-All general aggregate functions ignore `NULL`s, except for [`list`](#listarg) ([`array_agg`](#listarg)), [`first`](#firstarg) ([`arbitrary`](#firstarg)) and [`last`](#lastarg).
+All general aggregate functions ignore `NULL`s, except for [`list`](#listarg) ([`array_agg`](#listarg)), [`first`](#firstarg) ([`arbitrary`](#firstarg)), and [`last`](#lastarg).
 To exclude `NULL`s from `list`, use a [`FILTER` clause]({% link docs/2.0/sql/query_syntax/filter.md %}) that excludes rows with null input, such as `list(x) FILTER (WHERE x IS NOT NULL)`. A filter on another column may still leave `NULL` values in the list.
 To ignore `NULL`s from `first`, you can use the [`any_value` aggregate](#any_valuearg).
 

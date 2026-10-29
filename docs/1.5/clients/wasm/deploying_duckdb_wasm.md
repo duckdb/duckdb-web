@@ -26,7 +26,7 @@ It cannot be served as-is: it requires transpilation, because it needs to know t
 
 ## JS Worker Component
 
-This is distributed as a JavaScript file in three different flavors, `mvp`, `eh` and `coi`, and needs to be served as-is. The main library component needs to be informed of the actual location.
+This is distributed as a JavaScript file in three different flavors, `mvp`, `eh`, and `coi`, and needs to be served as-is. The main library component needs to be informed of the actual location.
 
 The three variants target three different WebAssembly feature sets:
 

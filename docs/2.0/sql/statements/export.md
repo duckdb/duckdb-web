@@ -58,7 +58,7 @@ For details regarding the writing of Parquet files, see the [Parquet Files page 
 
 ## `EXPORT DATABASE`
 
-The `EXPORT DATABASE` command exports the full contents of the database – including schema information, tables, views and sequences – to a specific directory that can then be loaded again. The created directory will be structured as follows:
+The `EXPORT DATABASE` command exports the full contents of the database – including schema information, tables, views, and sequences – to a specific directory that can then be loaded again. The created directory will be structured as follows:
 
 ```text
 target_directory/schema.sql
@@ -68,7 +68,7 @@ target_directory/t_1.csv
 target_directory/t_n.csv
 ```
 
-The `schema.sql` file contains the schema statements that are found in the database. It contains any `CREATE SCHEMA`, `CREATE TABLE`, `CREATE VIEW` and `CREATE SEQUENCE` commands that are necessary to re-construct the database.
+The `schema.sql` file contains the schema statements that are found in the database. It contains any `CREATE SCHEMA`, `CREATE TABLE`, `CREATE VIEW`, and `CREATE SEQUENCE` commands that are necessary to re-construct the database.
 
 > Warning In DuckDB 2.0.0, [triggers]({% link docs/2.0/sql/statements/create_trigger.md %}) are not included in the export, and `COPY FROM DATABASE` does not copy them either. Recreate triggers manually after importing or copying a database.
 

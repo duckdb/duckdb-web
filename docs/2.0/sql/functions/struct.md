@@ -11,7 +11,7 @@ title: Struct Functions
 
 <!-- markdownlint-disable MD001 -->
 
-The functions on this page work on [`STRUCT` values]({% link docs/2.0/sql/data_types/struct.md %}). Functions that access entries by position, such as `struct[idx]`, `struct_extract_at`, `struct_contains`, `struct_position` and `struct_values`, also accept [`TUPLE` values]({% link docs/2.0/sql/data_types/struct.md %}#tuples), i.e., structs with unnamed entries. `struct_concat` accepts either only `STRUCT`s or only `TUPLE`s. Functions that work with entry names, i.e., `struct_insert`, `struct_keys`, `struct_update` and `remap_struct`, require a `STRUCT`.
+The functions on this page work on [`STRUCT` values]({% link docs/2.0/sql/data_types/struct.md %}). Functions that access entries by position, such as `struct[idx]`, `struct_extract_at`, `struct_contains`, `struct_position`, and `struct_values`, also accept [`TUPLE` values]({% link docs/2.0/sql/data_types/struct.md %}#tuples), i.e., structs with unnamed entries. `struct_concat` accepts either only `STRUCT`s or only `TUPLE`s. Functions that work with entry names, i.e., `struct_insert`, `struct_keys`, `struct_update`, and `remap_struct`, require a `STRUCT`.
 
 | Name | Description |
 |:--|:-------|

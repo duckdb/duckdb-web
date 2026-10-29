@@ -6,7 +6,7 @@ authors:
   - Gábor Szárnyas
 thumb: "/images/blog/thumbs/time-based-analysis-in-duckdb.svg"
 image: "/images/blog/thumbs/time-based-analysis-in-duckdb.png"
-excerpt: "DuckDB can perform time-based analytics using windows with different semantics (e.g., tumbling, hopping and sliding windows). In this post, we demonstrate these by detecting trends and anomalies in the railway service at Amsterdam Centraal Station."
+excerpt: "DuckDB can perform time-based analytics using windows with different semantics (e.g., tumbling, hopping, and sliding windows). In this post, we demonstrate these by detecting trends and anomalies in the railway service at Amsterdam Centraal Station."
 tag: using-duckdb
 ---
 
@@ -15,7 +15,7 @@ tag: using-duckdb
 In data platforms, we usually categorize the data into dimension and fact data. While dimensions contain information about entities (name, address, serial number, etc.), facts contain events related to such entities (clicks, sales, bank transactions, readings from IoT devices, etc.). In general, fact data includes a timestamp attribute, denoting the moment when the event happened (or was observed).
 
 When the timestamped data is processed on a streaming platform, it is often processed with _stream windowing functions_ in order to organize the data into time windows.
-In this post, we will show how to apply stream windows on static timestamped fact data in DuckDB, as part of a data analysis task to compute train service summaries, trends and interruptions at Amsterdam Centraal Station.
+In this post, we will show how to apply stream windows on static timestamped fact data in DuckDB, as part of a data analysis task to compute train service summaries, trends, and interruptions at Amsterdam Centraal Station.
 
 > In a future post, we'll cover streaming design patterns with DuckDB.
 

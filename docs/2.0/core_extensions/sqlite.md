@@ -103,7 +103,7 @@ When querying SQLite, DuckDB must deduce a specific column type mapping. DuckDB 
 1. If the declared type contains the string `INT` then it is translated into the type `BIGINT`
 2. If the declared type of the column contains any of the strings `CHAR`, `CLOB`, or `TEXT` then it is translated into `VARCHAR`.
 3. If the declared type for a column contains the string `BLOB` or if no type is specified then it is translated into `BLOB`.
-4. If the declared type for a column contains any of the strings `REAL`, `FLOA`, `DOUB`, `DEC` or `NUM` then it is translated into `DOUBLE`.
+4. If the declared type for a column contains any of the strings `REAL`, `FLOA`, `DOUB`, `DEC`, or `NUM` then it is translated into `DOUBLE`.
 5. If the declared type is `DATE`, then it is translated into `DATE`.
 6. If the declared type contains the string `TIME`, then it is translated into `TIMESTAMP`.
 7. If none of the above apply, then it is translated into `VARCHAR`.
@@ -146,7 +146,7 @@ LIMIT 3;
 
 ## Writing Data to SQLite
 
-In addition to reading data from SQLite, the extension also allows you to create new SQLite database files, create tables, ingest data into SQLite and make other modifications to SQLite database files using standard SQL queries.
+In addition to reading data from SQLite, the extension also allows you to create new SQLite database files, create tables, ingest data into SQLite, and make other modifications to SQLite database files using standard SQL queries.
 
 This allows you to use DuckDB to, for example, export data that is stored in a SQLite database to Parquet, or read data from a Parquet file into SQLite.
 

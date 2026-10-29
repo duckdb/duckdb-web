@@ -111,7 +111,7 @@ focus on its seamless CMake integration.
 ## Using vcpkg with DuckDB
 
 Now that we covered DuckDB extensions and vcpkg, we have shown how DuckDB can manage dependencies without sacrificing
-portability, maintainability and stability more than necessary. Next, we'll make things a bit more tangible by looking at
+portability, maintainability, and stability more than necessary. Next, we'll make things a bit more tangible by looking at
 one of DuckDB's extensions and how it uses vcpkg to manage its dependencies.
 
 ### Example: Azure Extension
@@ -155,14 +155,14 @@ target_include_directories(${EXTENSION_NAME} PRIVATE Azure::azure-identity Azure
 ```
 
 And that's basically it! Every time the Azure extension is built, vcpkg will be called first to
-ensure `azure-identity-cpp`, `azure-storage-blobs-cpp` and `azure-storage-files-datalake-cpp` are built using the correct platform-specific flags and
+ensure `azure-identity-cpp`, `azure-storage-blobs-cpp`, and `azure-storage-files-datalake-cpp` are built using the correct platform-specific flags and
 available in CMake through `find_package`.
 
 ## Building Your Own DuckDB Extension
 
 Up until this part, we've focused on managing dependencies from a point-of-view of the developers of core DuckDB
 contributors. However, all of this applies to anyone who wants to build an extension. DuckDB maintains a [C++ Extension Template](https://github.com/duckdb/extension-template),
-which contains all the necessary build scripts, CI/CD pipeline and vcpkg configuration to build, test and deploy a DuckDB extension in
+which contains all the necessary build scripts, CI/CD pipeline, and vcpkg configuration to build, test, and deploy a DuckDB extension in
 minutes. It can automatically build the loadable extension binaries for all available platforms, including Wasm.
 
 ### Setting Up the Extension Template

@@ -58,7 +58,7 @@ ccache -M 50G
 
 ### Platforms with Full Support
 
-DuckDB fully supports Linux, macOS and Windows. Both x86_64 (amd64) and AArch64 (ARM64) builds are available for these platforms (except for macOS on x86_64, which only has partial support, see below), and almost all extensions are distributed for these platforms.
+DuckDB fully supports Linux, macOS, and Windows. Both x86_64 (amd64) and AArch64 (ARM64) builds are available for these platforms (except for macOS on x86_64, which only has partial support, see below), and almost all extensions are distributed for these platforms.
 
 | Platform name      | Description                                                            | Comment |
 |--------------------|------------------------------------------------------------------------|---------|

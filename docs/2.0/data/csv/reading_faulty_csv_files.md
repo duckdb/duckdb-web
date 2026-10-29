@@ -9,7 +9,7 @@ redirect_from:
 title: Reading Faulty CSV Files
 ---
 
-CSV files can come in all shapes and forms, with some presenting many errors that make the process of cleanly reading them inherently difficult. To help users read these files, DuckDB supports detailed error messages, the ability to skip faulty lines and the possibility of storing faulty lines in a temporary table to assist users with a data cleaning step.
+CSV files can come in all shapes and forms, with some presenting many errors that make the process of cleanly reading them inherently difficult. To help users read these files, DuckDB supports detailed error messages, the ability to skip faulty lines, and the possibility of storing faulty lines in a temporary table to assist users with a data cleaning step.
 
 ## Structural Errors
 
@@ -27,7 +27,7 @@ DuckDB detects the following error types:
 * `TOO MANY COLUMNS`: This error occurs if a line in the CSV has more columns than expected. In our example, any line with more than two columns would cause this error, e.g., `Pedro,01-01-1992,pdet`.
 * `UNQUOTED VALUE`: Quoted values in CSV lines must always be unquoted at the end; if a quoted value remains quoted throughout, it will cause an error. For example, assuming our scanner uses `quote='"'`, the line `"pedro"holanda, 01-01-1992` would present an unquoted value error.
 * `LINE SIZE OVER MAXIMUM`: DuckDB has a parameter that sets the maximum line size a CSV file can have, which by default is set to 2,000,000 bytes. Assuming our scanner is set to `max_line_size = 25`, the line `Pedro Holanda, 01-01-1992` would produce an error, as it exceeds 25 bytes.
-* `INVALID ENCODING`: DuckDB supports UTF-8 strings, UTF-16 and Latin-1 encodings. Lines containing other characters will produce an error. For example, the line `pedro\xff\xff, 01-01-1992` would be problematic.
+* `INVALID ENCODING`: DuckDB supports UTF-8 strings, UTF-16, and Latin-1 encodings. Lines containing other characters will produce an error. For example, the line `pedro\xff\xff, 01-01-1992` would be problematic.
 
 ### Anatomy of a CSV Error
 
@@ -64,7 +64,7 @@ Possible solutions:
   all_varchar=0
 ```
 
-The first block provides us with information regarding where the error occurred, including the line number, the original CSV line and which field was problematic:
+The first block provides us with information regarding where the error occurred, including the line number, the original CSV line, and which field was problematic:
 
 ```console
 Conversion Error:

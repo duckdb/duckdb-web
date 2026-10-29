@@ -36,7 +36,7 @@ Avro “object container” files are encoded using a comparatively simple binar
 }
 ```
 
-The Avro schema defines a record structure. Records can contain scalar data fields (like `int`, `double`, `string`, etc.) but also more complex types like records (similar to [DuckDB `STRUCT`s]({% link docs/2.0/sql/data_types/struct.md %})), unions and lists. As a sidenote, it is quite strange that a data format for the definition of record structures would fall back to another format like JSON to describe itself, but such are the oddities of Avro.
+The Avro schema defines a record structure. Records can contain scalar data fields (like `int`, `double`, `string`, etc.) but also more complex types like records (similar to [DuckDB `STRUCT`s]({% link docs/2.0/sql/data_types/struct.md %})), unions, and lists. As a sidenote, it is quite strange that a data format for the definition of record structures would fall back to another format like JSON to describe itself, but such are the oddities of Avro.
 
 ### Data Blocks
 

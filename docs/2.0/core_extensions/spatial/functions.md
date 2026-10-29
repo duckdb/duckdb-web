@@ -62,15 +62,15 @@ title: Spatial Functions
 | [`ST_ExteriorRing`](#st_exteriorring) | Returns the exterior ring (shell) of a polygon geometry. |
 | [`ST_FlipCoordinates`](#st_flipcoordinates) | Returns a new geometry with the coordinates of the input geometry "flipped" so that x = y and y = x |
 | [`ST_Force2D`](#st_force2d) | Forces the vertices of a geometry to have X and Y components |
-| [`ST_Force3DM`](#st_force3dm) | Forces the vertices of a geometry to have X, Y and M components |
-| [`ST_Force3DZ`](#st_force3dz) | Forces the vertices of a geometry to have X, Y and Z components |
-| [`ST_Force4D`](#st_force4d) | Forces the vertices of a geometry to have X, Y, Z and M components |
+| [`ST_Force3DM`](#st_force3dm) | Forces the vertices of a geometry to have X, Y, and M components |
+| [`ST_Force3DZ`](#st_force3dz) | Forces the vertices of a geometry to have X, Y, and Z components |
+| [`ST_Force4D`](#st_force4d) | Forces the vertices of a geometry to have X, Y, Z, and M components |
 | [`ST_GeomFromGeoJSON`](#st_geomfromgeojson) | Deserializes a GEOMETRY from a GeoJSON fragment. |
 | [`ST_GeomFromHEXEWKB`](#st_geomfromhexewkb) | Deserialize a GEOMETRY from a HEX(E)WKB encoded string |
 | [`ST_GeomFromHEXWKB`](#st_geomfromhexwkb) | Deserialize a GEOMETRY from a HEX(E)WKB encoded string |
 | [`ST_GeomFromText`](#st_geomfromtext) | Deserialize a GEOMETRY from a WKT encoded string |
 | [`ST_GeomFromWKB`](#st_geomfromwkb) | Deserializes a GEOMETRY from a WKB encoded blob |
-| [`ST_GeometryType`](#st_geometrytype) | Returns a `GEOMETRY_TYPE` enum identifying the input geometry type. Possible enum return types are: `POINT`, `LINESTRING`, `POLYGON`, `MULTIPOINT`, `MULTILINESTRING`, `MULTIPOLYGON` and `GEOMETRYCOLLECTION`. |
+| [`ST_GeometryType`](#st_geometrytype) | Returns a `GEOMETRY_TYPE` enum identifying the input geometry type. Possible enum return types are: `POINT`, `LINESTRING`, `POLYGON`, `MULTIPOINT`, `MULTILINESTRING`, `MULTIPOLYGON`, and `GEOMETRYCOLLECTION`. |
 | [`ST_HasM`](#st_hasm) | Check if the input geometry has M values. |
 | [`ST_HasZ`](#st_hasz) | Check if the input geometry has Z values. |
 | [`ST_Hilbert`](#st_hilbert) | Encodes the X and Y values as the hilbert curve index for a curve covering the given bounding box. |
@@ -320,7 +320,7 @@ DOUBLE ST_Area (box BOX_2D)
 
 Compute the area of a geometry.
 
-Returns `0.0` for any geometry that is not a `POLYGON`, `MULTIPOLYGON` or `GEOMETRYCOLLECTION` containing polygon
+Returns `0.0` for any geometry that is not a `POLYGON`, `MULTIPOLYGON`, or `GEOMETRYCOLLECTION` containing polygon
 geometries.
 
 The area is in the same units as the spatial reference system of the geometry.
@@ -352,7 +352,7 @@ Returns the area of a geometry in meters, using an ellipsoidal model of the eart
 
 The input geometry is assumed to be in the [EPSG:4326](https://en.wikipedia.org/wiki/World_Geodetic_System) coordinate system (WGS84), with [latitude, longitude] axis order and the area is returned in square meters. This function uses the [GeographicLib](https://geographiclib.sourceforge.io/) library, calculating the area using an ellipsoidal model of the earth. This is a highly accurate method for calculating the area of a polygon taking the curvature of the earth into account, but is also the slowest.
 
-Returns `0.0` for any geometry that is not a `POLYGON`, `MULTIPOLYGON` or `GEOMETRYCOLLECTION` containing polygon geometries.
+Returns `0.0` for any geometry that is not a `POLYGON`, `MULTIPOLYGON`, or `GEOMETRYCOLLECTION` containing polygon geometries.
 
 ----
 
@@ -1259,7 +1259,7 @@ GEOMETRY ST_Force3DM (geom GEOMETRY, m DOUBLE)
 
 #### Description
 
-Forces the vertices of a geometry to have X, Y and M components
+Forces the vertices of a geometry to have X, Y, and M components
 
 The following cases apply:
 * If the input geometry has a Z component but no M component, the Z component will be replaced with the new M value.
@@ -1280,7 +1280,7 @@ GEOMETRY ST_Force3DZ (geom GEOMETRY, z DOUBLE)
 
 #### Description
 
-Forces the vertices of a geometry to have X, Y and Z components
+Forces the vertices of a geometry to have X, Y, and Z components
 
 The following cases apply:
 * If the input geometry has a M component but no Z component, the M component will be replaced with the new Z value.
@@ -1301,7 +1301,7 @@ GEOMETRY ST_Force4D (geom GEOMETRY, z DOUBLE, m DOUBLE)
 
 #### Description
 
-Forces the vertices of a geometry to have X, Y, Z and M components
+Forces the vertices of a geometry to have X, Y, Z, and M components
 
 The following cases apply:
 * If the input geometry has a Z component but no M component, the new M value will be added to the vertices of the input geometry.
@@ -1416,7 +1416,7 @@ ANY ST_GeometryType (wkb WKB_BLOB)
 
 #### Description
 
-Returns a `GEOMETRY_TYPE` enum identifying the input geometry type. Possible enum return types are: `POINT`, `LINESTRING`, `POLYGON`, `MULTIPOINT`, `MULTILINESTRING`, `MULTIPOLYGON` and `GEOMETRYCOLLECTION`.
+Returns a `GEOMETRY_TYPE` enum identifying the input geometry type. Possible enum return types are: `POINT`, `LINESTRING`, `POLYGON`, `MULTIPOINT`, `MULTILINESTRING`, `MULTIPOLYGON`, and `GEOMETRYCOLLECTION`.
 
 #### Example
 
@@ -1703,7 +1703,7 @@ Returns the length of the input geometry in meters, using an ellipsoidal model o
 
 The input geometry is assumed to be in the [EPSG:4326](https://en.wikipedia.org/wiki/World_Geodetic_System) coordinate system (WGS84), with [latitude, longitude] axis order and the length is returned in meters. This function uses the [GeographicLib](https://geographiclib.sourceforge.io/) library, calculating the length using an ellipsoidal model of the earth. This is a highly accurate method for calculating the length of a line geometry taking the curvature of the earth into account, but is also the slowest.
 
-Returns `0.0` for any geometry that is not a `LINESTRING`, `MULTILINESTRING` or `GEOMETRYCOLLECTION` containing line geometries.
+Returns `0.0` for any geometry that is not a `LINESTRING`, `MULTILINESTRING`, or `GEOMETRYCOLLECTION` containing line geometries.
 
 ----
 
@@ -2053,7 +2053,7 @@ STRUCT(center GEOMETRY, nearest GEOMETRY, radius DOUBLE) ST_MaximumInscribedCirc
 Returns the maximum inscribed circle of the input geometry, optionally with a tolerance.
 
 By default, the tolerance is computed as `max(width, height) / 1000`.
-The return value is a struct with the center of the circle, the nearest point to the center on the boundary of the geometry and the radius of the circle.
+The return value is a struct with the center of the circle, the nearest point to the center on the boundary of the geometry, and the radius of the circle.
 
 #### Example
 
@@ -2307,7 +2307,7 @@ Returns the length of the perimeter in meters using an ellipsoidal model of the 
 
 The input geometry is assumed to be in the [EPSG:4326](https://en.wikipedia.org/wiki/World_Geodetic_System) coordinate system (WGS84), with [latitude, longitude] axis order and the length is returned in meters. This function uses the [GeographicLib](https://geographiclib.sourceforge.io/) library, calculating the perimeter using an ellipsoidal model of the earth. This is a highly accurate method for calculating the perimeter of a polygon taking the curvature of the earth into account, but is also the slowest.
 
-Returns `0.0` for any geometry that is not a `POLYGON`, `MULTIPOLYGON` or `GEOMETRYCOLLECTION` containing polygon geometries.
+Returns `0.0` for any geometry that is not a `POLYGON`, `MULTIPOLYGON`, or `GEOMETRYCOLLECTION` containing polygon geometries.
 
 ----
 
@@ -3454,7 +3454,7 @@ ST_GeneratePoints (col0 BOX_2D, col1 BIGINT, col2 BIGINT)
 
 Generates a set of random points within the specified bounding box.
 
-Takes a bounding box (`min_x`, `min_y`, `max_x`, `max_y`), a count of points to generate and optionally a seed for the random number generator.
+Takes a bounding box (`min_x`, `min_y`, `max_x`, `max_y`), a count of points to generate, and optionally a seed for the random number generator.
 
 #### Example
 

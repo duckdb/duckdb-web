@@ -89,7 +89,7 @@ SELECT * FROM test;
 
 Because Excel itself only really stores numbers or strings in cells, and does not enforce that all cells in a column are of the same type, the `excel` extension has to do some guesswork to "infer" and decide the types of the columns when importing an Excel sheet. While almost all columns are inferred as either `DOUBLE` or `VARCHAR`, there are some caveats:
 
-* `TIMESTAMP`, `TIME`, `DATE` and `BOOLEAN` types are inferred when possible based on the _format_ applied to the cell.
+* `TIMESTAMP`, `TIME`, `DATE`, and `BOOLEAN` types are inferred when possible based on the _format_ applied to the cell.
 * Text cells containing `TRUE` and `FALSE` are inferred as `BOOLEAN`.
 * Empty cells are considered to be `DOUBLE` by default, unless the `empty_as_varchar` option is set to `true`, in which case they are typed as `VARCHAR`.
 

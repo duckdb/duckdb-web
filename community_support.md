@@ -32,12 +32,12 @@ Starting this fall, the [DuckDB Foundation](https://duckdb.foundation/) will als
 ## Scope
 
 - **Client APIs:**
-  - We provide first-tier support for the command line shell as well as the C, Go, Java (JDBC), ODBC, Node.js, Python, R, Rust and WebAssembly client APIs.
+  - We provide first-tier support for the command line shell as well as the C, Go, Java (JDBC), ODBC, Node.js, Python, R, Rust, and WebAssembly client APIs.
   - The C++ API is intended for internal use and is not designed as a stable user-facing API. See the [Client overview page]({% link docs/2.0/clients/overview.md %}) for more details.
 - **Extensions:** The community support policy only covers the primary extensions from the [core extensions]({% link docs/2.0/core_extensions/overview.md %}).
 - **Crashes and internal errors:** Issues that cause crashes (segfault, bus error, abort) and issues that result in [internal errors]({% link docs/2.0/dev/internal_errors.md %}) get higher priority.
 - **Platforms:** We only support the following platforms:
-  - Linux x86_64 & aarch64 (mainstream distributions under support by distributor running with glibc). The last three Ubuntu LTS releases are safe bets (currently: Ubuntu 22.04, 24.04 and 26.04)
+  - Linux x86_64 & aarch64 (mainstream distributions under support by distributor running with glibc). The last three Ubuntu LTS releases are safe bets (currently: Ubuntu 22.04, 24.04, and 26.04)
   - macOS latest
   - Windows 11+ on x86_64
 - **Versions:** We support the following versions:

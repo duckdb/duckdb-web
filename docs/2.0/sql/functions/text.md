@@ -1069,7 +1069,7 @@ SELECT format('{:t }', 123_456_789); -- 123 456 789
 SELECT format('{:tX}', 123_456_789); -- 123X456X789
 ```
 
-Float, double and decimal:
+Float, double, and decimal:
 
 ```sql
 SELECT format('{:,f}',    123456.789); -- 123,456.789000
@@ -1190,7 +1190,7 @@ SELECT printf('%''d', 123_456_789); -- 123'456'789
 SELECT printf('%_d',  123_456_789); -- 123_456_789
 ```
 
-Float, double and decimal:
+Float, double, and decimal:
 
 ```sql
 SELECT printf('%,f',   123456.789); -- 123,456.789000

@@ -19,7 +19,7 @@ An extension in DuckDB-Wasm is a regular Wasm file to be dynamically loaded via 
 
 ## `INSTALL` and `LOAD`
 
-The `INSTALL` semantic in native embeddings of DuckDB is to fetch, decompress from `gzip` and store data in local disk.
+The `INSTALL` semantic in native embeddings of DuckDB is to fetch, decompress from `gzip`, and store data in local disk.
 The `LOAD` semantic in native embeddings of DuckDB is to (optionally) perform signature checks *and* dynamic load the binary with the main DuckDB binary.
 
 In DuckDB-Wasm, `INSTALL` performs no durable installation, because there is no cross-session storage; it only records where an extension will be fetched from (for example, with `INSTALL ⟨name⟩ FROM community`), deferring the actual fetch to `LOAD`. The `LOAD` operation will fetch (and decompress on the fly), perform signature checks *and* dynamically load via the Emscripten implementation of `dlopen`.

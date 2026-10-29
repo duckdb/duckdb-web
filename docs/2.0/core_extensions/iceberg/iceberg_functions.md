@@ -90,12 +90,12 @@ FROM iceberg_snapshots('data/iceberg/lineitem_iceberg');
 | 1               | 3776207205136740581 | 2023-02-15 15:07:54.504 | lineitem_iceberg/metadata/snap-3776207205136740581-1-cf3d0be5-cf70-453d-ad8f-48fdc412e608.avro |
 | 2               | 7635660646343998149 | 2023-02-15 15:08:14.73  | lineitem_iceberg/metadata/snap-7635660646343998149-1-10eaca8a-1e1c-421e-ad6d-b232e5ee23d3.avro |
 
-> `iceberg_snapshots` does not take `allow_moved_paths`, `snapshot_from_id` or `snapshot_from_timestamp` as parameters.
+> `iceberg_snapshots` does not take `allow_moved_paths`, `snapshot_from_id`, or `snapshot_from_timestamp` as parameters.
 
 ## `iceberg_column_stats`
 
 The `iceberg_column_stats` function returns the statistics stored in the manifests for every data file and column.
-Its columns include `file_path`, `column_name`, `column_type`, `lower_bound`, `upper_bound`, `value_count`, `null_value_count` and `nan_value_count`.
+Its columns include `file_path`, `column_name`, `column_type`, `lower_bound`, `upper_bound`, `value_count`, `null_value_count`, and `nan_value_count`.
 
 ```sql
 SELECT *
@@ -105,7 +105,7 @@ FROM iceberg_column_stats('data/iceberg/lineitem_iceberg', allow_moved_paths = t
 ## `iceberg_partition_stats`
 
 The `iceberg_partition_stats` function returns statistics per partition field.
-Its columns include `partition_field_name`, `partition_source_columns`, `partition_field_transform`, `lower_bound` and `upper_bound`.
+Its columns include `partition_field_name`, `partition_source_columns`, `partition_field_transform`, `lower_bound`, and `upper_bound`.
 
 ```sql
 SELECT *
@@ -115,7 +115,7 @@ FROM iceberg_partition_stats(my_datalake.default.t);
 ## `iceberg_load_table_response`
 
 The `iceberg_load_table_response` function is an advanced function that only works with an [attached Iceberg REST Catalog]({% link docs/2.0/core_extensions/iceberg/catalogs.md %}).
-It returns the raw `LoadTable` response of the catalog with the columns `metadata_location`, `metadata` (`VARIANT`), `config` (`MAP`), `storage_credentials` and `request_url`.
+It returns the raw `LoadTable` response of the catalog with the columns `metadata_location`, `metadata` (`VARIANT`), `config` (`MAP`), `storage_credentials`, and `request_url`.
 
 ```sql
 SELECT *
@@ -218,15 +218,15 @@ Schema properties are written through the Iceberg REST Catalog, so any other Ice
 
 ## Metadata Table Functions
 
-The following functions expose the [Iceberg metadata tables](https://iceberg.apache.org/docs/latest/spark-queries/#inspecting-tables). Like `iceberg_metadata` and `iceberg_snapshots`, they accept either a table path (along with the [scan options]({% link docs/2.0/core_extensions/iceberg/iceberg_options.md %}#scan-options) `metadata_compression_codec`, `version` and `version_name_format`) or a table in an attached catalog.
+The following functions expose the [Iceberg metadata tables](https://iceberg.apache.org/docs/latest/spark-queries/#inspecting-tables). Like `iceberg_metadata` and `iceberg_snapshots`, they accept either a table path (along with the [scan options]({% link docs/2.0/core_extensions/iceberg/iceberg_options.md %}#scan-options) `metadata_compression_codec`, `version`, and `version_name_format`) or a table in an attached catalog.
 
 | Function | Additional parameters | Description |
 | --- | --- | --- |
-| `iceberg_files(source)` | `allow_moved_paths`, `snapshot_from_id`, `snapshot_from_timestamp` | Returns one row per data file and delete file of the snapshot, including the file path, format, partition, record count, file size and column-level statistics (`column_sizes`, `value_counts`, `null_value_counts`, `lower_bounds`, `upper_bounds`, `readable_metrics`, etc.). |
+| `iceberg_files(source)` | `allow_moved_paths`, `snapshot_from_id`, `snapshot_from_timestamp` | Returns one row per data file and delete file of the snapshot, including the file path, format, partition, record count, file size, and column-level statistics (`column_sizes`, `value_counts`, `null_value_counts`, `lower_bounds`, `upper_bounds`, `readable_metrics`, etc.). |
 | `iceberg_manifests(source)` | `allow_moved_paths`, `snapshot_from_id`, `snapshot_from_timestamp` | Returns one row per manifest file of the snapshot, with the manifest path and length, partition spec ID, the snapshot that added it, counts of added/existing/deleted data and delete files, and partition summaries. |
-| `iceberg_history(source)` | | Returns the snapshot log of the table with the columns `made_current_at`, `snapshot_id`, `parent_id` and `is_current_ancestor`. |
-| `iceberg_refs(source)` | | Returns the branches and tags of the table with the columns `name`, `type`, `snapshot_id`, `max_reference_age_in_ms`, `min_snapshots_to_keep` and `max_snapshot_age_in_ms`. |
-| `iceberg_partition_specs(source)` | | Returns one row per partition field of each partition spec with the columns `spec_id`, `is_default`, `field_id`, `name`, `transform`, `source_id` and `source_column`. |
+| `iceberg_history(source)` | | Returns the snapshot log of the table with the columns `made_current_at`, `snapshot_id`, `parent_id`, and `is_current_ancestor`. |
+| `iceberg_refs(source)` | | Returns the branches and tags of the table with the columns `name`, `type`, `snapshot_id`, `max_reference_age_in_ms`, `min_snapshots_to_keep`, and `max_snapshot_age_in_ms`. |
+| `iceberg_partition_specs(source)` | | Returns one row per partition field of each partition spec with the columns `spec_id`, `is_default`, `field_id`, `name`, `transform`, `source_id`, and `source_column`. |
 
 ```sql
 SELECT file_path, record_count, file_size_in_bytes
@@ -252,7 +252,7 @@ If the [`iceberg_use_server_side_scan_planning` setting]({% link docs/2.0/core_e
 
 ## `iceberg_view_metadata`
 
-The `iceberg_view_metadata(view)` function is the counterpart of [`iceberg_load_table_response`](#iceberg_load_table_response) for views: it returns the raw `LoadView` response of an [attached Iceberg REST Catalog]({% link docs/2.0/core_extensions/iceberg/catalogs.md %}) with the columns `metadata_location`, `metadata` (`VARIANT`), `config` (`MAP`) and `request_url`. This is useful for inspecting views, including views defined in a SQL dialect DuckDB cannot parse.
+The `iceberg_view_metadata(view)` function is the counterpart of [`iceberg_load_table_response`](#iceberg_load_table_response) for views: it returns the raw `LoadView` response of an [attached Iceberg REST Catalog]({% link docs/2.0/core_extensions/iceberg/catalogs.md %}) with the columns `metadata_location`, `metadata` (`VARIANT`), `config` (`MAP`), and `request_url`. This is useful for inspecting views, including views defined in a SQL dialect DuckDB cannot parse.
 
 ```sql
 SELECT *
@@ -271,7 +271,7 @@ CALL iceberg_rollback_to_snapshot('my_datalake.default.t', ⟨snapshot_id⟩);
 
 ### `iceberg_rewrite_data_files`
 
-The `iceberg_rewrite_data_files(table)` function compacts the data files of a table in an attached Iceberg catalog: it rewrites small (and overly large) data files into files close to the target file size, applying any pending position and equality deletes. It returns the columns `rewritten_data_files_count`, `added_data_files_count`, `rewritten_bytes_count`, `failed_data_files_count` and `removed_delete_files_count`.
+The `iceberg_rewrite_data_files(table)` function compacts the data files of a table in an attached Iceberg catalog: it rewrites small (and overly large) data files into files close to the target file size, applying any pending position and equality deletes. It returns the columns `rewritten_data_files_count`, `added_data_files_count`, `rewritten_bytes_count`, `failed_data_files_count`, and `removed_delete_files_count`.
 
 | Parameter | Type | Default | Description |
 | --- | --- | --- | --- |

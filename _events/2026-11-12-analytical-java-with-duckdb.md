@@ -21,6 +21,6 @@ Your Java service just needs to answer a few analytical questions: top products 
 
 DuckDB is a free open source in-process analytical database: columnar, vectorized, zero infrastructure, and available to Java through a plain JDBC driver.
 
-In this session, we'll use it to query Parquet, CSV and JSON files directly, run analytical SQL over in-memory data, and push results straight into Java records and Apache Arrow.
+In this session, we'll use it to query Parquet, CSV, and JSON files directly, run analytical SQL over in-memory data, and push results straight into Java records and Apache Arrow.
 
-Along the way, we'll look at where it beats a traditional RDBMS, where it doesn't, and how it fits into your services, batch jobs, tests and CLIs… without any new operational setup or infrastructure.
+Along the way, we'll look at where it beats a traditional RDBMS, where it doesn't, and how it fits into your services, batch jobs, tests, and CLIs… without any new operational setup or infrastructure.

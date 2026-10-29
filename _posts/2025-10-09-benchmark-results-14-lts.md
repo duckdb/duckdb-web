@@ -39,7 +39,7 @@ We estimated the number of Fortune-100 companies who use DuckDB by cross-checkin
 
 ## 25M+ Downloads / Month
 
-DuckDB's Python packages has almost 25 million monthly downloads on [PyPI alone](https://pypistats.org/packages/duckdb). This is complemented with the downloads of other popular clients such as the CLI, Go, Node.js, Java, R, Rust and so on.
+DuckDB's Python packages has almost 25 million monthly downloads on [PyPI alone](https://pypistats.org/packages/duckdb). This is complemented with the downloads of other popular clients such as the CLI, Go, Node.js, Java, R, Rust, and so on.
 
 ## TPC-H SF 100,000
 

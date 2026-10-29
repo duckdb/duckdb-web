@@ -76,7 +76,7 @@ We can use the statistics inside the Parquet file to great advantage here. Any r
 
 To illustrate how effective these automatic optimizations are, we will run a number of queries on top of Parquet files using both Pandas and DuckDB.
 
-In these queries, we use a part of the infamous New York Taxi dataset stored as Parquet files, specifically data from April, May and June 2019. These files are ca. 360 MB in size together and contain around 21 million rows of 18 columns each. The three files are placed into the `taxi/` folder.
+In these queries, we use a part of the infamous New York Taxi dataset stored as Parquet files, specifically data from April, May, and June 2019. These files are ca. 360 MB in size together and contain around 21 million rows of 18 columns each. The three files are placed into the `taxi/` folder.
 
 The examples are available as [an interactive notebook over at Google Colab](https://colab.research.google.com/drive/1e1beWqYOcFidKl2IxHtxT5s9i_6KYuNY). The timings reported here are from this environment for reproducibility.
 

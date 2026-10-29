@@ -206,7 +206,7 @@ SELECT list(DISTINCT name) OVER (ORDER BY time) FROM sales;
 All aggregate window functions support using an `ORDER BY` argument clause that is *different* from the window ordering.
 When the `ORDER BY` argument clause is provided, the values being aggregated are sorted before applying the function.
 Usually this is not important, but there are some order-sensitive aggregates that can have indeterminate results (e.g.,
-`mode`, `list` and `string_agg`). These can be made deterministic by ordering the arguments. For order-insensitive
+`mode`, `list`, and `string_agg`). These can be made deterministic by ordering the arguments. For order-insensitive
 aggregates, this clause is parsed and ignored.
 
 ```sql
@@ -468,7 +468,7 @@ There are four options for `EXCLUDE` that specify how to treat the current row:
 * `TIES` – exclude all peer rows, but _not_ the current row (this makes a hole on either side)
 * `NO OTHERS` – don't exclude anything (the default)
 
-Exclusion is implemented for both windowed aggregates as well as for the `first`, `last` and `nth_value` functions.
+Exclusion is implemented for both windowed aggregates as well as for the `first`, `last`, and `nth_value` functions.
 
 ### `WINDOW` Clauses
 

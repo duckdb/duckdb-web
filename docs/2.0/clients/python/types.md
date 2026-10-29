@@ -10,7 +10,7 @@ redirect_from:
 title: Types API
 ---
 
-The `DuckDBPyType` class, `duckdb.sqltypes.DuckDBPyType`, represents one of the [data types]({% link docs/2.0/sql/data_types/overview.md %}). Use `DuckDBPyType` to describe SQL types when declaring function parameters, return types or casts. Python types such as `int` are accepted too: `int` describes `BIGINT`. Converting a data value such as `5` follows different rules; see [Python Object Conversion]({% link docs/2.0/clients/python/conversion.md %}#object-conversion-python-object-to-duckdb).
+The `DuckDBPyType` class, `duckdb.sqltypes.DuckDBPyType`, represents one of the [data types]({% link docs/2.0/sql/data_types/overview.md %}). Use `DuckDBPyType` to describe SQL types when declaring function parameters, return types, or casts. Python types such as `int` are accepted too: `int` describes `BIGINT`. Converting a data value such as `5` follows different rules; see [Python Object Conversion]({% link docs/2.0/clients/python/conversion.md %}#object-conversion-python-object-to-duckdb).
 
 ## Converting from Other Types
 
@@ -53,7 +53,7 @@ The table below shows the mapping of NumPy scalar types to DuckDB type. A NumPy 
 
 ### Type Names
 
-A string is read as a SQL type name, such as `"INTEGER"`, `"INT[]"`, `"STRUCT(a INT)"` or `"MAP(INT, VARCHAR)"`:
+A string is read as a SQL type name, such as `"INTEGER"`, `"INT[]"`, `"STRUCT(a INT)"`, or `"MAP(INT, VARCHAR)"`:
 
 ```python
 import duckdb
@@ -217,7 +217,7 @@ Parameters:
 
 * `fields: Union[list[DuckDBPyType], dict[str, DuckDBPyType]]`
 
-A list names the fields `v1`, `v2` and so on. An empty dict or list gives an empty `STRUCT`.
+A list names the fields `v1`, `v2`, and so on. An empty dict or list gives an empty `STRUCT`.
 
 #### `map_type`
 
@@ -253,7 +253,7 @@ Parameters:
 
 ## Inspecting Types
 
-A `DuckDBPyType` has an `id`, such as `'struct'`. A nested type, an `ENUM` or a `DECIMAL` also has `children`, a list of pairs of a name and a type or a value. The field of a `STRUCT` type is also available by attribute or by key:
+A `DuckDBPyType` has an `id`, such as `'struct'`. A nested type, an `ENUM`, or a `DECIMAL` also has `children`, a list of pairs of a name and a type or a value. The field of a `STRUCT` type is also available by attribute or by key:
 
 ```python
 point = duckdb.struct_type({"x": INTEGER, "y": VARCHAR})

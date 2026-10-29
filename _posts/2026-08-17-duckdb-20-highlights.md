@@ -232,7 +232,7 @@ SELECT * FROM t WHERE substr(code, 1, 3) = 'NL-';
 SELECT * FROM 'data/*.parquet' WHERE id IN (1, 5, 9);
 ```
 
-Query planning also becomes **partition-aware** ([#22336](https://github.com/duckdb/duckdb/pull/22336)). [Lakehouse formats]({% link docs/2.0/lakehouse_formats.md %}) (DuckLake, Iceberg and plain Hive-partitioned Parquet on S3) are all partitioned, and exploiting that partitioning is often the difference between scanning a dataset and skipping most of it. In v2.0, the planner and optimizer take full advantage of existing partitioning, and partitioned writes have been reworked as well ([#22225](https://github.com/duckdb/duckdb/pull/22225), [#22620](https://github.com/duckdb/duckdb/pull/22620)).
+Query planning also becomes **partition-aware** ([#22336](https://github.com/duckdb/duckdb/pull/22336)). [Lakehouse formats]({% link docs/2.0/lakehouse_formats.md %}) (DuckLake, Iceberg, and plain Hive-partitioned Parquet on S3) are all partitioned, and exploiting that partitioning is often the difference between scanning a dataset and skipping most of it. In v2.0, the planner and optimizer take full advantage of existing partitioning, and partitioned writes have been reworked as well ([#22225](https://github.com/duckdb/duckdb/pull/22225), [#22620](https://github.com/duckdb/duckdb/pull/22620)).
 
 ## 7. Storage Format v2.0
 

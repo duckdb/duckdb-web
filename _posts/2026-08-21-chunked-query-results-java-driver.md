@@ -12,9 +12,9 @@ image: "/images/blog/thumbs/java.png"
 
 DuckDB is a columnar, vectorized database. Every operator inside the engine works on [*data chunks:*]({% link docs/2.0/clients/c/data_chunk.md %}) batches of column vectors, 2,048 rows at a time. That is a big part of why DuckDB is fast: the engine amortizes interpretation overhead over thousands of values instead of paying it once per value.
 
-JDBC, on the other hand, was designed in 1997 around a very different idea. The `ResultSet` API hands you one row at a time (`next()`) and one value at a time (`getInt(1)`, `getString(2)` and so on). It is a solid, familiar API, supported across the Java ecosystem, but it forces the data into a form that DuckDB never used internally.
+JDBC, on the other hand, was designed in 1997 around a very different idea. The `ResultSet` API hands you one row at a time (`next()`) and one value at a time (`getInt(1)`, `getString(2)`, and so on). It is a solid, familiar API, supported across the Java ecosystem, but it forces the data into a form that DuckDB never used internally.
 
-The DuckDB Java driver has to bridge the two. It embeds the native DuckDB library and talks to it over JNI. When the engine has already produced a columnar chunk of 2,048 rows, the JDBC specification requires the driver to slice it back into rows and cells before you can read it. If your application is going to put those values right back into columnar form, such as arrays, Arrow buffers or a machine learning feature matrix, the data is split into rows only to be reassembled into columns, wasting work on both sides.
+The DuckDB Java driver has to bridge the two. It embeds the native DuckDB library and talks to it over JNI. When the engine has already produced a columnar chunk of 2,048 rows, the JDBC specification requires the driver to slice it back into rows and cells before you can read it. If your application is going to put those values right back into columnar form, such as arrays, Arrow buffers, or a machine learning feature matrix, the data is split into rows only to be reassembled into columns, wasting work on both sides.
 
 Version 1.5.3.0 of the Java driver adds an alternative.
 
@@ -83,7 +83,7 @@ This approach has a few notable properties:
 
 * **Laziness.** `nextChunk()` pulls one chunk at a time from the engine. The full result is never materialized on the native side or the Java side, so you can stream through results far larger than your heap, the same way the engine itself produces them.
 
-* **Columnar access.** Inside a chunk you work vector by vector. If your destination is columnar too, such as a `long[]`, an Arrow `VectorSchemaRoot` or a Parquet writer, you copy values in tight, monomorphic loops instead of switching columns on every row.
+* **Columnar access.** Inside a chunk you work vector by vector. If your destination is columnar too, such as a `long[]`, an Arrow `VectorSchemaRoot`, or a Parquet writer, you copy values in tight, monomorphic loops instead of switching columns on every row.
 
 * **Enough metadata to dispatch.** Each result still reports its column count and column types, so you can pick the right `get*` call per vector without carrying a separate schema description alongside the data.
 

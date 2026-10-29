@@ -47,7 +47,7 @@ DuckDB supports different logging levels that control the verbosity of the logs:
 * `FATAL`: Only logs fatal errors
 * `ERROR`: Logs error messages
 * `WARNING`: Logs warnings and errors
-* `INFO`: Logs general information, warnings and errors (default)
+* `INFO`: Logs general information, warnings, and errors (default)
 * `DEBUG`: Logs detailed debugging information
 * `TRACE`: Logs very detailed tracing information
 
@@ -149,7 +149,7 @@ the following log storage types are implemented in core DuckDB.
 | `file`              | Log to (a) csv file(s)                                                    |
 | `shell_log_storage` | Print log messages to the console (default in the CLI)                    |
 
-The `shell_log_storage` cannot be queried: `duckdb_logs`, `duckdb_logs_parsed()` and `truncate_duckdb_logs()` all return an error. It also does not accept configuration options such as `storage_config` or `storage_buffer_size`. To query logs in the CLI, switch to a queryable storage such as `memory` or `file`:
+The `shell_log_storage` cannot be queried: `duckdb_logs`, `duckdb_logs_parsed()`, and `truncate_duckdb_logs()` all return an error. It also does not accept configuration options such as `storage_config` or `storage_buffer_size`. To query logs in the CLI, switch to a queryable storage such as `memory` or `file`:
 
 ```sql
 CALL enable_logging(storage = 'memory');

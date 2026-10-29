@@ -19,9 +19,9 @@ The `iceberg` extension implements support for the [Apache Iceberg open table fo
 
 This page covers the basics of both. See also:
 
-* [Writing to Iceberg]({% link docs/2.0/core_extensions/iceberg/writing_to_iceberg.md %}) describes the supported write operations, partitioning and schema evolution.
+* [Writing to Iceberg]({% link docs/2.0/core_extensions/iceberg/writing_to_iceberg.md %}) describes the supported write operations, partitioning, and schema evolution.
 * [Iceberg Functions]({% link docs/2.0/core_extensions/iceberg/iceberg_functions.md %}) documents the functions provided by the extension.
-* [Iceberg Options]({% link docs/2.0/core_extensions/iceberg/iceberg_options.md %}) documents the scan parameters, `ATTACH` options, secret options and settings.
+* [Iceberg Options]({% link docs/2.0/core_extensions/iceberg/iceberg_options.md %}) documents the scan parameters, `ATTACH` options, secret options, and settings.
 * [Catalogs]({% link docs/2.0/core_extensions/iceberg/catalogs.md %}) explains how to attach an Iceberg REST Catalog, with instructions for specific catalogs.
 * [Troubleshooting]({% link docs/2.0/core_extensions/iceberg/troubleshooting.md %}) lists common problems and their solutions.
 

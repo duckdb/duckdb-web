@@ -88,7 +88,7 @@ Link tags cause build failures if the target doesn't exist, catching broken link
 - Page title goes in front matter `title:` only — do not repeat as an `h1` in the body
 - Body headers: `##`, `###`, `####` only
 - Header capitalization: [Chicago Manual of Style](https://capitalizemytitle.com/style/Chicago/)
-- Spelling: American English, no Oxford comma
+- Spelling: American English, use the Oxford comma (“CSV, Parquet, and JSON”)
 
 ### Code Block Language Tags
 

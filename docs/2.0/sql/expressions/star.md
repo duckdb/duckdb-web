@@ -90,7 +90,7 @@ FROM tbl;
 
 ### Column Filtering via Pattern Matching Operators
 
-The [pattern matching operators]({% link docs/2.0/sql/functions/pattern_matching.md %}) `LIKE`, `GLOB`, `SIMILAR TO` and their variants allow you to select columns by matching their names to patterns.
+The [pattern matching operators]({% link docs/2.0/sql/functions/pattern_matching.md %}) `LIKE`, `GLOB`, `SIMILAR TO`, and their variants allow you to select columns by matching their names to patterns.
 
 ```sql
 SELECT * LIKE 'col%'

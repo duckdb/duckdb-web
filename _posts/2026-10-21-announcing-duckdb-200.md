@@ -10,7 +10,7 @@ redirect_from:
 - /200
 - /2.0
 - /2.0.0
-excerpt: "The DuckDB team is happy to announce that today we're releasing DuckDB version 2.0.0 LTS, codenamed “Cinnamon Teal” (Spatula cyanoptera). This is our biggest feature release so far, and it ships a polished version of the Quack protocol, asynchronous I/O, a first-class `VARIANT` type, agent mode, triggers, an extensible SQL parser and much more, built from close to 20,000 commits since DuckDB 1.5."
+excerpt: "The DuckDB team is happy to announce that today we're releasing DuckDB version 2.0.0 LTS, codenamed “Cinnamon Teal” (Spatula cyanoptera). This is our biggest feature release so far, and it ships a polished version of the Quack protocol, asynchronous I/O, a first-class `VARIANT` type, agent mode, triggers, an extensible SQL parser, and much more, built from close to 20,000 commits since DuckDB 1.5."
 tag: release
 ---
 
@@ -191,7 +191,7 @@ FROM events;
 
 ### Agent Mode in the CLI
 
-Coding agents such as Claude Code, Codex and Cursor increasingly drive the DuckDB CLI on their users' behalf. The 2.0 CLI detects when it is being run by an agent and switches to [agent mode]({% post_url 2026-10-09-agent-mode %}): it prints compact Markdown tables instead of padded boxes, says clearly when a result was truncated, stops runaway queries early and reports errors as JSON.
+Coding agents such as Claude Code, Codex, and Cursor increasingly drive the DuckDB CLI on their users' behalf. The 2.0 CLI detects when it is being run by an agent and switches to [agent mode]({% post_url 2026-10-09-agent-mode %}): it prints compact Markdown tables instead of padded boxes, says clearly when a result was truncated, stops runaway queries early, and reports errors as JSON.
 
 Long-running SQL queries report their expected cost prior to running, so the agent can decide whether to wait. In our experiments on TPC-H, agent mode cut the amount of DuckDB output the model had to read by 59%. You can turn it _on_ for manual testing using the [`-agent` flag]({% link docs/2.0/clients/cli/agent_mode.md %}#activating-agent-mode) or instruct your agent to turn it _off_ using the `-no-agent` flag.
 
@@ -218,23 +218,23 @@ CREATE EXTENSION REPOSITORY my_repo
 INSTALL AND LOAD my_ext FROM my_repo;
 ```
 
-A repository is a name, a URL prefix and one or more RSA public keys that are trusted to sign the extensions served from it. The prefix can point at anything DuckDB can read: a local path, `https`, `s3`, you name it. At `CREATE` time, DuckDB fetches the repository's public keys and pins them into the repository definition, printing each key's SHA-256 fingerprint so you can compare it against one published out of band.
+A repository is a name, a URL prefix, and one or more RSA public keys that are trusted to sign the extensions served from it. The prefix can point at anything DuckDB can read: a local path, `https`, `s3`, you name it. At `CREATE` time, DuckDB fetches the repository's public keys and pins them into the repository definition, printing each key's SHA-256 fingerprint so you can compare it against one published out of band.
 
 This feature is still a work in progress and its syntax may change in future releases. For more details, see the [Extension Repositories page]({% link docs/2.0/extensions/extension_repositories.md %}).
 
 ### Core Extension Updates
 
-DuckDB's [core extensions]({% link docs/2.0/core_extensions/overview.md %}) are also shipping several new features, fixes and performance optimizations. These are too numerous to all list here, so we only highlight a few of them and will cover them in dedicated blog posts in the coming weeks:
+DuckDB's [core extensions]({% link docs/2.0/core_extensions/overview.md %}) are also shipping several new features, fixes, and performance optimizations. These are too numerous to all list here, so we only highlight a few of them and will cover them in dedicated blog posts in the coming weeks:
 
 * We released [DuckLake 1.1](https://ducklake.select/2026/10/21/ducklake-11/), including a new specification and [reference implementation]({% link docs/2.0/core_extensions/ducklake.md %}).
 * The [Iceberg extension]({% link docs/2.0/core_extensions/iceberg/overview.md %}) strives to become a feature-complete implementation. To this end, it adds REST catalog [`ATTACH` options]({% link docs/2.0/core_extensions/iceberg/iceberg_options.md %}#attach-options) that derive a table's location from its namespace or load table metadata from the `metadata-location` file returned by the catalog. Further options control the URL prefix and the namespace separator.
-* The [Delta extension]({% link docs/2.0/core_extensions/delta.md %}) can create Delta tables with `CREATE TABLE` (including partitioning and Delta table properties), supports time travel and improves `VARIANT` support.
+* The [Delta extension]({% link docs/2.0/core_extensions/delta.md %}) can create Delta tables with `CREATE TABLE` (including partitioning and Delta table properties), supports time travel, and improves `VARIANT` support.
 
 ## SQL Features
 
 ### Triggers
 
-DuckDB 2.0 delivers triggers: the [`CREATE TRIGGER` statement]({% link docs/2.0/sql/statements/create_trigger.md %}) with `BEFORE` and `AFTER` triggers, `FOR EACH ROW` and `FOR EACH STATEMENT`, transition tables via `REFERENCING OLD/NEW TABLE`, multiple triggers per event, `RETURNING` on triggered tables and `DROP TRIGGER`. The classic use case is audit tables, where a trigger records what changed in response to a table modification. Some combinations, such as `BEFORE ... FOR EACH ROW` and `UPDATE ... FOR EACH ROW` triggers, are not yet supported; see the [limitations]({% link docs/2.0/sql/statements/create_trigger.md %}#limitations).
+DuckDB 2.0 delivers triggers: the [`CREATE TRIGGER` statement]({% link docs/2.0/sql/statements/create_trigger.md %}) with `BEFORE` and `AFTER` triggers, `FOR EACH ROW` and `FOR EACH STATEMENT`, transition tables via `REFERENCING OLD/NEW TABLE`, multiple triggers per event, `RETURNING` on triggered tables, and `DROP TRIGGER`. The classic use case is audit tables, where a trigger records what changed in response to a table modification. Some combinations, such as `BEFORE ... FOR EACH ROW` and `UPDATE ... FOR EACH ROW` triggers, are not yet supported; see the [limitations]({% link docs/2.0/sql/statements/create_trigger.md %}#limitations).
 
 ```sql
 CREATE TRIGGER trg_audit
@@ -352,10 +352,10 @@ Triggers bring us one step closer to materialized views, a long-standing item in
 As always, DuckDB's [friendly SQL dialect]({% link docs/2.0/sql/dialect/friendly_sql.md %}) keeps growing. A few favorites from this release cycle:
 
 * The [`$⟨variable⟩`{:.language-sql .highlight} shorthand]({% link docs/2.0/sql/statements/set_variable.md %}#the-name-shorthand) lets you write `$x` in most places where an expression is allowed, instead of `getvariable('x')`{:.language-sql .highlight}.
-* [Data-modifying CTEs]({% link docs/2.0/sql/query_syntax/with.md %}#data-modifying-ctes) let you use `INSERT`, `UPDATE`, `DELETE` and `COPY` as pipeline steps.
+* [Data-modifying CTEs]({% link docs/2.0/sql/query_syntax/with.md %}#data-modifying-ctes) let you use `INSERT`, `UPDATE`, `DELETE`, and `COPY` as pipeline steps.
 * [`NEAREST` joins]({% link docs/2.0/sql/query_syntax/from.md %}#nearest-joins) turn top-k similarity search into a join clause, handy for vector and embedding workloads.
 * [Nested schemas]({% link docs/2.0/sql/statements/create_schema.md %}#nested-schemas) allow schemas within schemas, e.g., `CREATE SCHEMA finance.reports`.
-* [JSON mutation functions]({% link docs/2.0/data/json/json_functions.md %}#json-mutation-functions) `json_set`, `json_insert`, `json_replace` and `json_remove` return modified copies of JSON documents (see also our [blog post on JSON patches]({% post_url 2026-08-18-reconciling-json %})).
+* [JSON mutation functions]({% link docs/2.0/data/json/json_functions.md %}#json-mutation-functions) `json_set`, `json_insert`, `json_replace`, and `json_remove` return modified copies of JSON documents (see also our [blog post on JSON patches]({% post_url 2026-08-18-reconciling-json %})).
 
 There is more: DuckDB 2.0.0 supports the SQL-standard [`FETCH FIRST`]({% link docs/2.0/sql/query_syntax/limit.md %}#fetch-first) and allows [`UNNEST` in the `GROUP BY` clause]({% link docs/2.0/sql/query_syntax/groupby.md %}#grouping-by-unnest). It also ensures well-defined [`MERGE`]({% link docs/2.0/sql/statements/merge_into.md %}) and [`UPDATE ... FROM`]({% link docs/2.0/sql/statements/update.md %}) semantics for cases when multiple rows are matched.
 
@@ -373,9 +373,9 @@ Following DuckDB's long stint on C++11, DuckDB 2.0 now [requires a C++17 compile
 
 We also switched to Clang as the default compiler for our release builds. On Linux and macOS, both DuckDB and its core extensions are built with Clang. On Windows, the CLI is built with Clang, while most core extensions are still built with MSVC. We may move more Windows builds to Clang in the future, but this requires further changes.
 
-### Timezones, Calendars and Collations without ICU
+### Timezones, Calendars, and Collations without ICU
 
-Timezone-aware timestamps, calendars and collations have always been powered by the ICU library. In 2.0, the ICU library is gone entirely: the [`icu` extension]({% link docs/2.0/core_extensions/icu.md %}) now implements timezones, calendars and collations itself, with the timezone data built directly from the IANA database and compressed down to around 45 kB.
+Timezone-aware timestamps, calendars, and collations have always been powered by the ICU library. In 2.0, the ICU library is gone entirely: the [`icu` extension]({% link docs/2.0/core_extensions/icu.md %}) now implements timezones, calendars, and collations itself, with the timezone data built directly from the IANA database and compressed down to around 45 kB.
 
 Everything keeps working exactly as before, and the native implementation is also faster. If you find any issues, please [let us know](https://github.com/duckdb/duckdb/issues)!
 

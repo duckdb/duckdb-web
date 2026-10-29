@@ -418,7 +418,7 @@ The functions and a brief description of each follows.
 ### Core Pivoting Logic Functions
 
 * `build_my_enum`: Determine which new columns to create when pivoting horizontally. Returns a table. See below for details.
-* `pivot_table`: Based on inputs, decide whether to call `no_columns`, `columns_values_axis_columns` or `columns_values_axis_rows`. Execute `query` on the SQL string that is generated. Returns a table. See below for details.
+* `pivot_table`: Based on inputs, decide whether to call `no_columns`, `columns_values_axis_columns`, or `columns_values_axis_rows`. Execute `query` on the SQL string that is generated. Returns a table. See below for details.
     * `no_columns`: Build up the SQL string for `query` to execute when no `columns` are pivoted out.
     * `columns_values_axis_columns`: Build up the SQL string for `query` to execute when pivoting horizontally with each entry in `values` receiving a separate column.
     * `columns_values_axis_rows`: Build up the SQL string for `query` to execute when pivoting horizontally with each entry in `values` receiving a separate row.

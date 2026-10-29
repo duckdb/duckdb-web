@@ -33,7 +33,7 @@ The special value `:default:` can be used to get this default connection.
 ### File-Based Connection
 
 If the `database` is a file path, a connection to a persistent database is established.
-If the file does not exist the file will be created (the extension of the file is irrelevant and can be `.db`, `.duckdb` or anything else).
+If the file does not exist the file will be created (the extension of the file is irrelevant and can be `.db`, `.duckdb`, or anything else).
 
 #### `read_only` Connections
 

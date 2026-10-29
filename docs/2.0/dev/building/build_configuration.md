@@ -19,7 +19,7 @@ This build has been stripped of all the assertions and debug symbols and code, o
 
 ### `debug`
 
-This build runs with all the debug information, including symbols, assertions and `#ifdef DEBUG` blocks.
+This build runs with all the debug information, including symbols, assertions, and `#ifdef DEBUG` blocks.
 Due to these, binaries of this build are expected to be slow.
 Note: the special debug defines are not automatically set for this build.
 
@@ -71,7 +71,7 @@ These can be enabled by either setting them in the current `env`, through set up
 BUILD_BENCHMARK=1 make debug
 ```
 
-> The Python, Java (JDBC) and ODBC clients are maintained in separate repositories and are no longer built from the main DuckDB repository. See the [Python](https://github.com/duckdb/duckdb-python), [Java](https://github.com/duckdb/duckdb-java) and [ODBC](https://github.com/duckdb/duckdb-odbc) repositories for their build instructions.
+> The Python, Java (JDBC), and ODBC clients are maintained in separate repositories and are no longer built from the main DuckDB repository. See the [Python](https://github.com/duckdb/duckdb-python), [Java](https://github.com/duckdb/duckdb-java), and [ODBC](https://github.com/duckdb/duckdb-odbc) repositories for their build instructions.
 
 ### `BUILD_BENCHMARK`
 

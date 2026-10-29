@@ -75,7 +75,7 @@ The first step is to connect to the data source so that the application can perf
 
 #### Connection String
 
-A [connection string](https://learn.microsoft.com/en-us/sql/odbc/reference/develop-app/connection-strings?view=sql-server-ver16) is a string which contains the information needed to connect to a data source. It is formatted as a semicolon separated list of key-value pairs, e.g., `DSN=DuckDB;access_mode=READ_ONLY`, where the keys can be the DSN, `Database` or any of the [DuckDB configuration options]({% link docs/2.0/configuration/overview.md %}).
+A [connection string](https://learn.microsoft.com/en-us/sql/odbc/reference/develop-app/connection-strings?view=sql-server-ver16) is a string which contains the information needed to connect to a data source. It is formatted as a semicolon separated list of key-value pairs, e.g., `DSN=DuckDB;access_mode=READ_ONLY`, where the keys can be the DSN, `Database`, or any of the [DuckDB configuration options]({% link docs/2.0/configuration/overview.md %}).
 
 #### DSN
 

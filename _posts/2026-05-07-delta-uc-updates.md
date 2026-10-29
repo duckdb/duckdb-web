@@ -1,9 +1,9 @@
 ---
 layout: post
-title: "Delta Grows Up: Writes, Unity Catalog and Time Travel"
+title: "Delta Grows Up: Writes, Unity Catalog, and Time Travel"
 authors:
   - Ben Fleis
-excerpt: "DuckDB's Delta and Unity Catalog extensions shed their experimental tags — now with writes, Unity Catalog and time travel support."
+excerpt: "DuckDB's Delta and Unity Catalog extensions shed their experimental tags — now with writes, Unity Catalog, and time travel support."
 tag: extensions
 thumb: "/images/blog/thumbs/delta-uc-updates.svg"
 image: "/images/blog/thumbs/delta-uc-updates.png"
@@ -28,7 +28,7 @@ Extension]({% link docs/2.0/core_extensions/delta.md %}).
 
 In that last update we highlighted performance wins, particularly file skipping
 via filter pushdowns, and metadata caching with snapshot pinning. Now we build
-on these, and add writes, time travel and Unity Catalog support, plus
+on these, and add writes, time travel, and Unity Catalog support, plus
 more performance gains!
 
 ### Building Up the Delta (Lake): Writes

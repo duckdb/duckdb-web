@@ -5,7 +5,7 @@ authors:
   - The DuckDB team
 thumb: "/images/blog/thumbs/iceberg-writes.svg"
 image: "/images/blog/thumbs/iceberg-writes.png"
-excerpt: "An Iceberg table is a tree of JSON, Avro and Parquet files. DuckDB can read every one of them, so you can walk the tree yourself with SQL: from the metadata file, through the manifest list and manifests, down to the data files and delete files."
+excerpt: "An Iceberg table is a tree of JSON, Avro, and Parquet files. DuckDB can read every one of them, so you can walk the tree yourself with SQL: from the metadata file, through the manifest list and manifests, down to the data files and delete files."
 tag: deep-dive
 ---
 
@@ -15,7 +15,7 @@ DuckDB can read all three formats, so you can inspect every layer with plain SQL
 
 ## Getting Started
 
-You need DuckDB with the [`iceberg` extension]({% link docs/2.0/core_extensions/iceberg/overview.md %}) and an [Iceberg REST catalog](https://iceberg.apache.org/) to attach to. The [catalogs page]({% link docs/2.0/core_extensions/iceberg/catalogs.md %}) has instructions for catalogs such as [Apache Polaris](https://polaris.apache.org/), [Lakekeeper](https://lakekeeper.io/) and Amazon S3 Tables.
+You need DuckDB with the [`iceberg` extension]({% link docs/2.0/core_extensions/iceberg/overview.md %}) and an [Iceberg REST catalog](https://iceberg.apache.org/) to attach to. The [catalogs page]({% link docs/2.0/core_extensions/iceberg/catalogs.md %}) has instructions for catalogs such as [Apache Polaris](https://polaris.apache.org/), [Lakekeeper](https://lakekeeper.io/), and Amazon S3 Tables.
 
 A catalog is needed because the files on their own cannot tell you which version of the table is current. An Iceberg table writes a new `metadata.json` on every change and never overwrites the old one. The catalog holds the one piece of mutable state: a pointer to the current metadata file. When you query the table, DuckDB asks the catalog for that pointer first, then follows the tree of files down from there.
 
@@ -33,7 +33,7 @@ docker run -p 8181:8181 \
 Each part of that command maps to something DuckDB relies on later:
 
 * `-p 8181:8181` publishes the catalog's REST API on `localhost:8181`, the address DuckDB connects to.
-* `-v /data/lake:/data/lake` mounts a host directory into the container, so the metadata, manifest and Parquet files survive after the container stops and you can read them directly.
+* `-v /data/lake:/data/lake` mounts a host directory into the container, so the metadata, manifest, and Parquet files survive after the container stops and you can read them directly.
 * `-e CATALOG_WAREHOUSE=/data/lake` tells the catalog where to write those files, which is why every path in the output below begins with `/data/lake`.
 
 > Note Run the examples below in the local DuckDB [CLI]({% link docs/2.0/clients/cli/overview.md %}), not in the browser-based [DuckDB Shell](https://shell.duckdb.org/), because a page served from the web cannot reach a catalog on your own `localhost`.
@@ -237,7 +237,7 @@ The latest snapshot still includes the manifests written by the two earlier snap
 
 ## Layer 3: The Manifests
 
-The manifests list the actual files, one entry per file, with the partition values, the row count and per-column statistics. They are Avro too:
+The manifests list the actual files, one entry per file, with the partition values, the row count, and per-column statistics. They are Avro too:
 
 ```sql
 SELECT

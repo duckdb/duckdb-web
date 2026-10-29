@@ -54,7 +54,7 @@ DuckDB logos cannot be altered, combined with other logos, used for co-branding,
 
 Any use of DuckDB Marks in dashboards, menus, marketplace listings, or developer consoles requires written approval.
 
-### Forks, Extensions and Derivative Software
+### Forks, Extensions, and Derivative Software
 
 If you maintain a modified version of DuckDB or an extension, you must clearly distinguish it from the official project and may not label it using DuckDB Marks in a way that suggests official maintenance or oversight. 
 

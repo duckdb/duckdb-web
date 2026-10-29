@@ -12,7 +12,7 @@ how_to_topic: python
 
 DuckDB can query multiple different types of Apache Arrow objects.
 
-> DuckDB pushes the filters of a query that it can translate, such as comparisons, into the scan of an Arrow dataset. Arrow tables, record batches, scanners and RecordBatchReaders are read in full and filtered afterwards. A RecordBatchReader can be scanned only once; to query its data more than once, read it into a table with `read_all()` before the first query. Arrow tables are scanned on all threads, so an aggregate that depends on row order, such as `first(i)` without `ORDER BY`, can return a different row on each run.
+> DuckDB pushes the filters of a query that it can translate, such as comparisons, into the scan of an Arrow dataset. Arrow tables, record batches, scanners, and RecordBatchReaders are read in full and filtered afterwards. A RecordBatchReader can be scanned only once; to query its data more than once, read it into a table with `read_all()` before the first query. Arrow tables are scanned on all threads, so an aggregate that depends on row order, such as `first(i)` without `ORDER BY`, can return a different row on each run.
 
 ## Apache Arrow Tables
 

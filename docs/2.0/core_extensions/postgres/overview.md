@@ -140,7 +140,7 @@ CREATE TABLE duckdb_table AS FROM postgres_db.postgres_tbl;
 
 ## Writing Data to PostgreSQL
 
-In addition to reading data from PostgreSQL, the extension allows you to create tables, ingest data into PostgreSQL and make other modifications to a PostgreSQL database using standard SQL queries.
+In addition to reading data from PostgreSQL, the extension allows you to create tables, ingest data into PostgreSQL, and make other modifications to a PostgreSQL database using standard SQL queries.
 
 This allows you to use DuckDB to, for example, export data that is stored in a PostgreSQL database to Parquet, or read data from a Parquet file into PostgreSQL.
 

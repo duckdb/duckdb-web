@@ -13,7 +13,7 @@ excerpt: "DuckDB v1.3.0 significantly improved the scalability of geospatial joi
 
 Spatial joins are join operations that match rows based on the (geo-)spatial relationship between column(s). In practice they are often used to answer questions like “which of these points are within which of these polygons?”. Being able to connect datasets based on the **physical location(s)** they model is fundamental to the whole field of geospatial data science, but at a high level, also an extremely powerful way to correlate and enrich otherwise disparate data sources, anchor insights to the real world, and more often than not tell a great story with your analysis.
 
-Ever since its inception, DuckDB's `spatial` extension has provided a `GEOMETRY` column type to represent locations, regions and shapes, along with plenty of _spatial predicate_ functions to use when `JOIN`ing. However, it wasn't until recently in [DuckDB v1.3.0]({% post_url 2025-05-21-announcing-duckdb-130 %}) that spatial joins really became _scalable_ thanks to the introduction of the dedicated `SPATIAL_JOIN` query **operator**.
+Ever since its inception, DuckDB's `spatial` extension has provided a `GEOMETRY` column type to represent locations, regions, and shapes, along with plenty of _spatial predicate_ functions to use when `JOIN`ing. However, it wasn't until recently in [DuckDB v1.3.0]({% post_url 2025-05-21-announcing-duckdb-130 %}) that spatial joins really became _scalable_ thanks to the introduction of the dedicated `SPATIAL_JOIN` query **operator**.
 
 We managed to hastily sneak in some information about this new operator towards [the end of the v1.3.0 release notes]({% post_url 2025-05-21-announcing-duckdb-130 %}#spatial-join-operator), but we figured we got enough to talk about to justify a separate blog post. So in this post, we will take a closer look at some of the challenges involved in optimizing spatial joins, and how the new `SPATIAL_JOIN` operator addresses them to achieve new levels of efficiency.
 
@@ -314,7 +314,7 @@ While being a lot more complex to implement compared to the `PIECEWISE_MERGE_JOI
 * The query re-write rule is much simpler, we just have to detect a nested loop join with a spatial predicate and replace it with a `SPATIAL_JOIN` operator. No other modifications to the query plan are needed.
 * Only the smaller side input needs to be materialized and (sorted to construct the R-tree). The left side can be streamed in parallel, and matching rows can be emitted immediately as they are found.
 * The hierarchical structure of the R-tree allows us to prune more of the right side input more accurately
-* Since all logic is in one operator, we don't need to rely on a separate `FILTER` operator and can therefore support `LEFT`, `RIGHT` and `FULL OUTER` joins as well as `INNER` joins.
+* Since all logic is in one operator, we don't need to rely on a separate `FILTER` operator and can therefore support `LEFT`, `RIGHT`, and `FULL OUTER` joins as well as `INNER` joins.
 
 ### Experiment
 
@@ -424,7 +424,7 @@ The `SPATIAL_JOIN` operator currently only supports the case where the join cond
 
 ### `ANTI` / `SEMI` Joins
 
-The `SPATIAL_JOIN` operator currently only supports `INNER`, `LEFT`, `RIGHT` and `FULL OUTER` joins. We plan to add support for `ANTI` and `SEMI` joins in the future.
+The `SPATIAL_JOIN` operator currently only supports `INNER`, `LEFT`, `RIGHT`, and `FULL OUTER` joins. We plan to add support for `ANTI` and `SEMI` joins in the future.
 
 ## Conclusion
 

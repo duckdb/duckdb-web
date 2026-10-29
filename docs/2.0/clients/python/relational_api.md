@@ -118,7 +118,7 @@ Create a relation object from an Arrow object.
 
 * **arrow_object** : object
 
-    The Arrow object to create a relation from: a table, a record batch, a record batch reader, a dataset, a scanner, a polars DataFrame or an object that exports the Arrow PyCapsule interface.
+    The Arrow object to create a relation from: a table, a record batch, a record batch reader, a dataset, a scanner, a polars DataFrame, or an object that exports the Arrow PyCapsule interface.
 
 **Example**
 
@@ -240,7 +240,7 @@ read_csv(self: _duckdb.DuckDBPyConnection, *args: object, **kwargs: object) -> D
 
 Create a relation object from the CSV file in 'name'.
 
-The options other than `path_or_buffer` are keyword arguments; an unknown one raises `InvalidInputException`. Most are the option of the same name of the SQL [`read_csv` function]({% link docs/2.0/data/csv/overview.md %}#parameters); `sep` and `delimiter` are `delim`, `dtype` is `dtypes`, `na_values` is `nullstr`, `skiprows` is `skip`, `quotechar` is `quote`, `escapechar` is `escape`, `date_format` is `dateformat`, `timestamp_format` is `timestampformat`, `lineterminator` is `new_line` and `decimal` is `decimal_separator`.
+The options other than `path_or_buffer` are keyword arguments; an unknown one raises `InvalidInputException`. Most are the option of the same name of the SQL [`read_csv` function]({% link docs/2.0/data/csv/overview.md %}#parameters); `sep` and `delimiter` are `delim`, `dtype` is `dtypes`, `na_values` is `nullstr`, `skiprows` is `skip`, `quotechar` is `quote`, `escapechar` is `escape`, `date_format` is `dateformat`, `timestamp_format` is `timestampformat`, `lineterminator` is `new_line`, and `decimal` is `decimal_separator`.
 
 **Aliases**: [`from_csv_auto`](#from_csv_auto)
 
@@ -248,13 +248,13 @@ The options other than `path_or_buffer` are keyword arguments; an unknown one ra
 
 * **path_or_buffer** : str, list[str], file-like object
 
-    Path to the file, a glob pattern, a list of paths or a file-like object such as `io.StringIO` or `io.BytesIO`.
+    Path to the file, a glob pattern, a list of paths, or a file-like object such as `io.StringIO` or `io.BytesIO`.
 * **header** : bool, int, keyword-only, default: None
 
     Whether the first line holds the column names; `0` means `True`. Detected when omitted.
 * **compression** : str, keyword-only, default: None
 
-    Compression of the files: `'none'`, `'gzip'` or `'zstd'`. Detected from the file extension when omitted.
+    Compression of the files: `'none'`, `'gzip'`, or `'zstd'`. Detected from the file extension when omitted.
 * **sep** : str, keyword-only, default: None
 
     Delimiter between the columns, up to 4 bytes; cannot be combined with `delimiter`. Detected when omitted.
@@ -302,7 +302,7 @@ The options other than `path_or_buffer` are keyword arguments; an unknown one ra
     Number of files sampled to detect the schema when reading several files; `-1` samples all of them.
 * **auto_detect** : bool, keyword-only, default: None
 
-    Whether to detect the dialect, the header and the types. Detected when omitted.
+    Whether to detect the dialect, the header, and the types. Detected when omitted.
 * **all_varchar** : bool, keyword-only, default: None
 
     Read every column as `VARCHAR`, without detecting the types.
@@ -320,7 +320,7 @@ The options other than `path_or_buffer` are keyword arguments; an unknown one ra
     Column names, as a list.
 * **lineterminator** : str, CSVLineTerminator, keyword-only, default: None
 
-    The line ending: one of `duckdb.CSVLineTerminator.LINE_FEED`, `duckdb.CSVLineTerminator.CARRIAGE_RETURN_LINE_FEED`, `'\\n'` and `'\\r\\n'`, the last two being escape text as written in Python; a string that holds the newline character itself, such as `'\n'`, is refused.
+    The line ending: one of `duckdb.CSVLineTerminator.LINE_FEED`, `duckdb.CSVLineTerminator.CARRIAGE_RETURN_LINE_FEED`, `'\\n'`, and `'\\r\\n'`, the last two being escape text as written in Python; a string that holds the newline character itself, such as `'\n'`, is refused.
 * **columns** : dict[str, str], keyword-only, default: None
 
     Column names and types, as a dict of column name to type name; the types are then not detected.
@@ -419,7 +419,7 @@ The options other than `path_or_buffer` are keyword arguments; an unknown one ra
 
 * **path_or_buffer** : str, list[str], file-like object
 
-    Path to the file, a glob pattern, a list of paths or a file-like object such as `io.StringIO` or `io.BytesIO`.
+    Path to the file, a glob pattern, a list of paths, or a file-like object such as `io.StringIO` or `io.BytesIO`.
 * **columns** : dict[str, str], keyword-only, default: None
 
     Key names and types, as a dict of key name to type name; the schema is then not detected.
@@ -434,7 +434,7 @@ The options other than `path_or_buffer` are keyword arguments; an unknown one ra
     `'true'` to read each object as a row of columns, `'false'` to read each as one value, `'auto'` to detect it.
 * **format** : str, keyword-only, default: None
 
-    `'auto'`, `'unstructured'`, `'newline_delimited'` or `'array'`.
+    `'auto'`, `'unstructured'`, `'newline_delimited'`, or `'array'`.
 * **date_format** : str, keyword-only, default: None
 
     [Format]({% link docs/2.0/sql/functions/dateformat.md %}) used to parse dates.
@@ -443,7 +443,7 @@ The options other than `path_or_buffer` are keyword arguments; an unknown one ra
     [Format]({% link docs/2.0/sql/functions/dateformat.md %}) used to parse timestamps.
 * **compression** : str, keyword-only, default: None
 
-    Compression of the files: `'none'`, `'gzip'`, `'zstd'` or `'auto_detect'`. Detected from the file extension when omitted.
+    Compression of the files: `'none'`, `'gzip'`, `'zstd'`, or `'auto_detect'`. Detected from the file extension when omitted.
 * **maximum_object_size** : int, keyword-only, default: None
 
     Maximum size of a JSON object, in bytes.
@@ -523,7 +523,7 @@ Each option is the option of the same name of the SQL [`read_parquet` function](
 
 * **path_or_buffer** : str, list[str], file-like object
 
-    Path to the Parquet file, a glob pattern, a list of paths or a file object opened in binary mode.
+    Path to the Parquet file, a glob pattern, a list of paths, or a file object opened in binary mode.
 * **binary_as_string** : bool, default: False
 
     Read binary columns as strings, for files from writers that do not mark their strings as UTF-8.
@@ -596,7 +596,7 @@ Run a SQL query. A statement that only reads returns a relation that runs the qu
     Alias of the relation.
 * **params** : list, dict, keyword-only, default: None
 
-    Values of the query parameters: a list for `?` and `$1` markers, a dict for `$name` markers. The list or dict is copied at the call, as is any list, tuple or dict inside it; the values in it are converted each time the relation runs, so a `bytearray` changed in place afterwards is read changed.
+    Values of the query parameters: a list for `?` and `$1` markers, a dict for `$name` markers. The list or dict is copied at the call, as is any list, tuple, or dict inside it; the values in it are converted each time the relation runs, so a `bytearray` changed in place afterwards is read changed.
 
 **Example**
 
@@ -726,7 +726,7 @@ Python values are converted once, at the call, so a later change to the Python o
 
 * **\*args** : list, tuple, object
 
-    The rows: one list holding the values of one row, several tuples for several rows or the values of one row as separate arguments. A value is a Python value or an Expression.
+    The rows: one list holding the values of one row, several tuples for several rows, or the values of one row as separate arguments. A value is a Python value or an Expression.
 
 **Example**
 
@@ -986,7 +986,7 @@ With `analyze=True` or with `type` set to `'analyze'` or `duckdb.ExplainType.ANA
     `'standard'` or `duckdb.ExplainType.STANDARD` for the plan, `'analyze'` or `duckdb.ExplainType.ANALYZE` to run the query and profile it.
 * **format** : str, default: None
 
-    The output format, such as `'text'`, `'json'`, `'html'`, `'graphviz'` or `'yaml'`. The default draws the plan as text, and as HTML under Jupyter.
+    The output format, such as `'text'`, `'json'`, `'html'`, `'graphviz'`, or `'yaml'`. The default draws the plan as text, and as HTML under Jupyter.
 * **analyze** : bool, keyword-only, default: False
 
     Run the query and profile it, as `type='analyze'` does.
@@ -1614,7 +1614,7 @@ Retrieve distinct rows from this relation object, or the first row of each disti
 
 * **on** : str, Expression, list, default: None
 
-    A column name, an Expression or a list of them: keep one row for each distinct value of these columns, as SQL `DISTINCT ON` does. Omitted, only fully duplicate rows are removed.
+    A column name, an Expression, or a list of them: keep one row for each distinct value of these columns, as SQL `DISTINCT ON` does. Omitted, only fully duplicate rows are removed.
 
 **Example**
 
@@ -1980,9 +1980,9 @@ join(self, other_rel: object, condition: object = None, how: str = 'inner', suff
 
 Join the relation object with another relation object in other_rel.
 
-The condition is SQL text, a column name or a list of them for a USING join, an Expression, or a function of the two sides. Types supported are 'inner', 'left', 'right', 'outer', 'full', 'semi', 'anti', 'cross', 'positional', 'natural' and 'asof'. With `suffix`, a column of the right side whose name the left side already has is renamed with the suffix appended.
+The condition is SQL text, a column name or a list of them for a USING join, an Expression, or a function of the two sides. Types supported are 'inner', 'left', 'right', 'outer', 'full', 'semi', 'anti', 'cross', 'positional', 'natural', and 'asof'. With `suffix`, a column of the right side whose name the left side already has is renamed with the suffix appended.
 
-An `'inner'`, `'left'`, `'right'`, `'outer'`, `'full'`, `'semi'`, `'anti'` or `'asof'` join needs a `condition`, and raises `InvalidInputException` without one; a `'cross'`, `'positional'` or `'natural'` join takes none. The [joins section of the `FROM` clause]({% link docs/2.0/sql/query_syntax/from.md %}#joins) says what each join type does. A `CROSS` join is also provided through the [`cross()`](#cross) method.
+An `'inner'`, `'left'`, `'right'`, `'outer'`, `'full'`, `'semi'`, `'anti'`, or `'asof'` join needs a `condition`, and raises `InvalidInputException` without one; a `'cross'`, `'positional'`, or `'natural'` join takes none. The [joins section of the `FROM` clause]({% link docs/2.0/sql/query_syntax/from.md %}#joins) says what each join type does. A `CROSS` join is also provided through the [`cross()`](#cross) method.
 
 **Parameters**
 
@@ -1991,10 +1991,10 @@ An `'inner'`, `'left'`, `'right'`, `'outer'`, `'full'`, `'semi'`, `'anti'` or `'
     The relation to join with the current relation.
 * **condition** : str, list[str], Expression, Callable, default: None
 
-    The join condition: SQL text such as `'a.id = b.id'`, a column name or a list of column names for a `USING` join, an Expression or a function that takes the two sides and returns an Expression, where `side['id']` is the column `id` of that side.
+    The join condition: SQL text such as `'a.id = b.id'`, a column name or a list of column names for a `USING` join, an Expression, or a function that takes the two sides and returns an Expression, where `side['id']` is the column `id` of that side.
 * **how** : str, default: 'inner'
 
-    The type of join: `'inner'`, `'left'`, `'right'`, `'outer'`, `'full'`, `'semi'`, `'anti'`, `'cross'`, `'positional'`, `'natural'` or `'asof'`.
+    The type of join: `'inner'`, `'left'`, `'right'`, `'outer'`, `'full'`, `'semi'`, `'anti'`, `'cross'`, `'positional'`, `'natural'`, or `'asof'`.
 * **suffix** : str, default: None
 
     Rename each column of the right side whose name the left side also has, by appending the suffix; the columns of a `USING` or natural join, which appear once, keep their names.
@@ -2387,7 +2387,7 @@ See [Samples]({% link docs/2.0/sql/query_syntax/samples.md %}) for the sampling 
     The seed of the random draw.
 * **method** : str, keyword-only, default: None
 
-    `'reservoir'`, `'bernoulli'` or `'system'`; `'reservoir'` for `n` and `'bernoulli'` for `percent` when omitted.
+    `'reservoir'`, `'bernoulli'`, or `'system'`; `'reservoir'` for `n` and `'bernoulli'` for `percent` when omitted.
 
 **Example**
 
@@ -2805,7 +2805,7 @@ Add columns, replacing any of the same name in place.
 
 * **\*\*columns** : Expression, object
 
-    The columns, as `name=value`, where a value is an Expression, a column name or a Python value; a column of the same name is replaced in place, any other is added at the end.
+    The columns, as `name=value`, where a value is an Expression, a column name, or a Python value; a column of the same name is replaced in place, any other is added at the end.
 
 **Example**
 
@@ -5583,7 +5583,7 @@ Alias of [`var_samp()`](#var_samp).
 
 ## Output 
 
-This section contains the methods which read the relation, store it in a table, a view or a file, or write to the table it reads.
+This section contains the methods which read the relation, store it in a table, a view, or a file, or write to the table it reads.
 
 | Name | Description |
 |:--|:-------|
@@ -5672,13 +5672,13 @@ insert_into(self, table_name: str) -> None
 
 Inserts the relation object into an existing table named table_name.
 
-The name is table, schema.table or catalog.schema.table, and a part may be double quoted; a name of more than three parts needs SQL (INSERT INTO) for now.
+The name is table, schema.table, or catalog.schema.table, and a part may be double quoted; a name of more than three parts needs SQL (INSERT INTO) for now.
 
 **Parameters**
 
 * **table_name** : str
 
-    The name of the table: `table`, `schema.table` or `catalog.schema.table`; a name of more parts raises `NotImplementedException`. The table must exist, and the relation must have its columns in the table's column order.
+    The name of the table: `table`, `schema.table`, or `catalog.schema.table`; a name of more parts raises `NotImplementedException`. The table must exist, and the relation must have its columns in the table's column order.
 
 **Example**
 
@@ -5790,7 +5790,7 @@ create(self, table_name: str) -> None
 
 Creates a new table named table_name with the contents of the relation object.
 
-The name is table, schema.table or catalog.schema.table, and a part may be double quoted; a name of more than three parts needs SQL (CREATE TABLE AS) for now.
+The name is table, schema.table, or catalog.schema.table, and a part may be double quoted; a name of more than three parts needs SQL (CREATE TABLE AS) for now.
 
 **Aliases**: [`to_table`](#to_table)
 
@@ -5798,7 +5798,7 @@ The name is table, schema.table or catalog.schema.table, and a part may be doubl
 
 * **table_name** : str
 
-    The name of the table: `table`, `schema.table` or `catalog.schema.table`; a name of more parts raises `NotImplementedException`. There must not be a table of that name already.
+    The name of the table: `table`, `schema.table`, or `catalog.schema.table`; a name of more parts raises `NotImplementedException`. There must not be a table of that name already.
 
 **Example**
 
@@ -6454,7 +6454,7 @@ write_csv(self, file_name: str, *, sep: str | None = None, na_rep: str | None = 
 
 Write the relation object to a CSV file in 'file_name'.
 
-Most options are the option of the same name of the [`COPY ... TO` statement]({% link docs/2.0/sql/statements/copy.md %}); `sep` is `DELIMITER`, `na_rep` is `NULL`, `quotechar` is `QUOTE`, `escapechar` is `ESCAPE`, `quoting` sets `FORCE_QUOTE` for every column and `overwrite` is `OVERWRITE_OR_IGNORE`.
+Most options are the option of the same name of the [`COPY ... TO` statement]({% link docs/2.0/sql/statements/copy.md %}); `sep` is `DELIMITER`, `na_rep` is `NULL`, `quotechar` is `QUOTE`, `escapechar` is `ESCAPE`, `quoting` sets `FORCE_QUOTE` for every column, and `overwrite` is `OVERWRITE_OR_IGNORE`.
 
 **Aliases**: [`to_csv`](#to_csv)
 
@@ -6486,13 +6486,13 @@ Most options are the option of the same name of the [`COPY ... TO` statement]({%
     [Format]({% link docs/2.0/sql/functions/dateformat.md %}) used to write timestamps.
 * **quoting** : str, int, keyword-only, default: None
 
-    Quote every value: pass `csv.QUOTE_ALL`, `'ALL'` or `'FORCE'`; any other value is refused. Values are quoted only where needed when omitted.
+    Quote every value: pass `csv.QUOTE_ALL`, `'ALL'`, or `'FORCE'`; any other value is refused. Values are quoted only where needed when omitted.
 * **encoding** : str, keyword-only, default: None
 
     Only UTF-8 is accepted, written `'utf-8'` or `'utf8'`.
 * **compression** : str, keyword-only, default: None
 
-    Compression of the file: `'none'`, `'gzip'` or `'zstd'`. Chosen from the file extension when omitted.
+    Compression of the file: `'none'`, `'gzip'`, or `'zstd'`. Chosen from the file extension when omitted.
 * **overwrite** : bool, keyword-only, default: None
 
     Whether an existing file may be replaced. Omitted or `True`, an existing file is replaced; `False` refuses an existing file with `IOException`. With `partition_by`, only `True` writes into a directory that already holds files.
@@ -6549,10 +6549,10 @@ Each option is the option of the same name of the [`COPY ... TO` statement]({% l
 
 * **file_name** : str
 
-    Path of the Parquet file to write; a directory with `partition_by`, `per_thread_output` or `file_size_bytes`.
+    Path of the Parquet file to write; a directory with `partition_by`, `per_thread_output`, or `file_size_bytes`.
 * **compression** : str, keyword-only, default: None
 
-    Compression codec: `'uncompressed'`, `'snappy'`, `'gzip'`, `'zstd'`, `'brotli'`, `'lz4'` or `'lz4_raw'`; `'snappy'` when omitted.
+    Compression codec: `'uncompressed'`, `'snappy'`, `'gzip'`, `'zstd'`, `'brotli'`, `'lz4'`, or `'lz4_raw'`; `'snappy'` when omitted.
 * **field_ids** : dict, str, keyword-only, default: None
 
     The Parquet `field_id` of each column, as a dict of column name to id, or `'auto'` to assign them.

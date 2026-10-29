@@ -11,7 +11,7 @@ redirect_from:
 title: Unity Catalog Extension
 ---
 
-The `unity_catalog` extension attaches a [Unity Catalog](https://www.unitycatalog.io/) catalog, on Databricks or Unity Catalog OSS, as a DuckDB database. You can list, read, insert into and create its [Delta Lake](https://delta.io/) tables. It uses the [`delta` extension]({% link docs/2.0/core_extensions/delta.md %}) to access the tables.
+The `unity_catalog` extension attaches a [Unity Catalog](https://www.unitycatalog.io/) catalog, on Databricks or Unity Catalog OSS, as a DuckDB database. You can list, read, insert into, and create its [Delta Lake](https://delta.io/) tables. It uses the [`delta` extension]({% link docs/2.0/core_extensions/delta.md %}) to access the tables.
 
 For implementation details, see the [“Delta Grows Up: Writes, Unity Catalog and Time Travel” blog post]({% post_url 2026-05-07-delta-uc-updates %}).
 
@@ -28,7 +28,7 @@ INSTALL AND LOAD unity_catalog;
 
 ## Usage
 
-To connect to Unity Catalog on Databricks or Unity Catalog OSS, create a secret with your token, endpoint and region, then attach a catalog:
+To connect to Unity Catalog on Databricks or Unity Catalog OSS, create a secret with your token, endpoint, and region, then attach a catalog:
 
 ```sql
 CREATE SECRET (
@@ -101,7 +101,7 @@ Unity Catalog column types map to DuckDB types as follows. Since v1.5.6, DuckDB 
 
 > New Support for `VARIANT` columns was introduced in DuckDB 2.0.
 
-Unity Catalog's `variant` maps to `VARIANT`. `VARIANT` columns can be read whether their files are shredded or not. Inserts write shredded variants if the table sets `delta.enableVariantShredding`. An `INSERT` into a table with a `VARIANT` inside a struct, list or map fails with an error.
+Unity Catalog's `variant` maps to `VARIANT`. `VARIANT` columns can be read whether their files are shredded or not. Inserts write shredded variants if the table sets `delta.enableVariantShredding`. An `INSERT` into a table with a `VARIANT` inside a struct, list, or map fails with an error.
 
 ### Creating Tables
 

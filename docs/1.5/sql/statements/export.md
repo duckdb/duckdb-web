@@ -52,7 +52,7 @@ For details regarding the writing of Parquet files, see the [Parquet Files page 
 
 ## `EXPORT DATABASE`
 
-The `EXPORT DATABASE` command exports the full contents of the database – including schema information, tables, views and sequences – to a specific directory that can then be loaded again. The created directory will be structured as follows:
+The `EXPORT DATABASE` command exports the full contents of the database – including schema information, tables, views, and sequences – to a specific directory that can then be loaded again. The created directory will be structured as follows:
 
 ```text
 target_directory/schema.sql
@@ -62,7 +62,7 @@ target_directory/t_1.csv
 target_directory/t_n.csv
 ```
 
-The `schema.sql` file contains the schema statements that are found in the database. It contains any `CREATE SCHEMA`, `CREATE TABLE`, `CREATE VIEW` and `CREATE SEQUENCE` commands that are necessary to re-construct the database.
+The `schema.sql` file contains the schema statements that are found in the database. It contains any `CREATE SCHEMA`, `CREATE TABLE`, `CREATE VIEW`, and `CREATE SEQUENCE` commands that are necessary to re-construct the database.
 
 The `load.sql` file contains a set of `COPY` statements that can be used to read the data from the CSV files again. The file contains a single `COPY` statement for every table found in the schema.
 

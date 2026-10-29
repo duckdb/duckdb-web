@@ -17,7 +17,7 @@ Acknowledging these quirks is the best we can do, which is why we have compiled 
 
 ## Aggregating Empty Groups
 
-On empty groups, the aggregate functions `sum`, `list`, and `string_agg` all return `NULL` instead of `0`, `[]` and `''`, respectively. This is dictated by the SQL Standard and obeyed by all SQL implementations we know. This behavior is inherited by the list aggregate [`list_sum`]({% link docs/2.0/sql/functions/list.md %}#list_-rewrite-functions), but not by the DuckDB original [`list_dot_product`]({% link docs/2.0/sql/functions/list.md %}#list_dot_productlist1-list2) which returns `0` on empty lists.
+On empty groups, the aggregate functions `sum`, `list`, and `string_agg` all return `NULL` instead of `0`, `[]`, and `''`, respectively. This is dictated by the SQL Standard and obeyed by all SQL implementations we know. This behavior is inherited by the list aggregate [`list_sum`]({% link docs/2.0/sql/functions/list.md %}#list_-rewrite-functions), but not by the DuckDB original [`list_dot_product`]({% link docs/2.0/sql/functions/list.md %}#list_dot_productlist1-list2) which returns `0` on empty lists.
 
 ## 0 vs. 1-Based Indexing
 
@@ -33,7 +33,7 @@ To comply with standard SQL, one-based indexing is used almost everywhere, e.g.,
 * `INT8` corresponds to `BIGINT` because it's an _8-byte_ signed integer
 
 Explanation: the `n` in the numeric type `INTn` and `UINTn` denote the width of the number in either bytes or bits.
-`INT1`, `INT2`, `INT4` correspond to the number of bytes, while `INT16`, `INT32` and `INT64` correspond to the number of bits.
+`INT1`, `INT2`, `INT4` correspond to the number of bytes, while `INT16`, `INT32`, and `INT64` correspond to the number of bits.
 The same applies to `UINT` values.
 However, the value `n = 8` is a valid choice for both the number of bits and bytes.
 For unsigned values, `UINT8` corresponds to `UTINYINT` (8 bits).
