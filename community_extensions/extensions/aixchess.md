@@ -47,8 +47,8 @@ docs:
     [provides scalar functions](https://github.com/thomas-daniels/aix/blob/main/docs/functions.md) to decode and query these games directly within DuckDB.
 
     See the [GitHub repository](https://github.com/thomas-daniels/aix) or [blog post](https://thomasd.be/2026/02/01/aix-storing-querying-chess-games.html) for more details.
-extension_star_count: 29
-extension_star_count_pretty: 29
+extension_star_count: 30
+extension_star_count_pretty: 30
 extension_download_count: 20003
 extension_download_count_pretty: 20.0k
 image: '/images/community_extensions/social_preview/preview_community_extension_aixchess.png'

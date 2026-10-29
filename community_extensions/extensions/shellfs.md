@@ -24,8 +24,8 @@ repo:
   ref: aa33b9b8db9f838e535df467228593a2a95418da
   variegata: d762423eea333f7ea044e4dbf4e86b8289d7e296
 
-extension_star_count: 96
-extension_star_count_pretty: 96
+extension_star_count: 97
+extension_star_count_pretty: 97
 extension_download_count: 22530
 extension_download_count_pretty: 22.5k
 image: '/images/community_extensions/social_preview/preview_community_extension_shellfs.png'
