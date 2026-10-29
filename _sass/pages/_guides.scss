@@ -74,6 +74,7 @@ body.documentation.guides-index {
     }
 
     #main_content_wrap .guides-list .guide-card {
+        @include navigation-card;
         display: grid;
         grid-template-columns: minmax(0, 1fr);
         grid-template-rows: auto 1fr;
@@ -83,22 +84,6 @@ body.documentation.guides-index {
         min-height: 96px;
         margin: 0;
         padding: 16px;
-        border: 1px solid var(--border-color, #E6E6E6);
-        border-radius: var(--page-radius-box-inner, 8px);
-        background: var(--main-body-background-color, #FAFAFA);
-        color: var(--main-text-primary-color, #0D0D0D);
-        text-decoration: none;
-        transition: background-color .2s, border-color .2s;
-
-        &:hover {
-            background: var(--doc-sidebar-selected-background-color, #F2F2F2);
-            border-color: var(--main-text-tertiary-color, #B2B2B2);
-        }
-
-        &:focus-visible {
-            outline: 2px solid var(--main-text-primary-color, #0D0D0D);
-            outline-offset: -3px;
-        }
 
         .guide-card-topic {
             @include tiny;

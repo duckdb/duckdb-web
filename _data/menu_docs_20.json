@@ -1,39 +1,29 @@
 {
   "docsmenu": [
     {
+      "page": "Overview",
+      "slug": "",
+      "url": "/docs/2.0/index"
+    },
+    {
       "page": "Installation",
       "slug": "",
-      "url": "/install/"
+      "url": "/docs/2.0/installation"
     },
     {
-      "page": "What's New in the Docs for 2.0",
+      "page": "Quickstart",
       "slug": "",
-      "url": "/docs/2.0/whats_new_in_the_docs"
+      "url": "/docs/2.0/quickstart"
     },
     {
-      "page": "Get Started",
-      "slug": "connect",
-      "mainfolderitems": [
-        {
-          "page": "Getting Started",
-          "path": "/docs/2.0/index"
-        },
-        {
-          "page": "Installation",
-          "path": "/install/"
-        },
-        {
-          "page": "Connect",
-          "path": "/docs/2.0/connect/overview"
-        },
-        {
-          "page": "Concurrency",
-          "path": "/docs/2.0/connect/concurrency"
-        }
-      ]
+      "page": "How-to Guides",
+      "slug": "",
+      "url": "/docs/2.0/guides/"
     },
     {
       "page": "Import & Export",
+      "group_start": true,
+      "overview": "/docs/2.0/data/overview",
       "slug": "data",
       "mainfolderitems": [
         {
@@ -132,14 +122,6 @@
           ]
         },
         {
-          "page": "Excel",
-          "path": "/docs/2.0/core_extensions/excel"
-        },
-        {
-          "page": "Avro",
-          "path": "/docs/2.0/core_extensions/avro"
-        },
-        {
           "page": "Multiple Files",
           "subfolderitems": [
             {
@@ -166,85 +148,11 @@
           ]
         },
         {
-          "page": "Cloud Storage",
-          "subfolderitems": [
-            {
-              "page": "httpfs Overview",
-              "path": "/docs/2.0/core_extensions/httpfs/overview"
-            },
-            {
-              "page": "HTTP(S) Support",
-              "path": "/docs/2.0/core_extensions/httpfs/https"
-            },
-            {
-              "page": "S3 API Support",
-              "path": "/docs/2.0/core_extensions/httpfs/s3api"
-            },
-            {
-              "page": "S3 and AWS Authentication",
-              "path": "/docs/2.0/core_extensions/httpfs/authentication"
-            },
-            {
-              "page": "Hugging Face",
-              "path": "/docs/2.0/core_extensions/httpfs/hugging_face"
-            },
-            {
-              "page": "Legacy Authentication Scheme for S3 API",
-              "path": "/docs/2.0/core_extensions/httpfs/s3api_legacy_authentication"
-            },
-            {
-              "page": "Azure",
-              "path": "/docs/2.0/core_extensions/azure"
-            },
-            {
-              "page": "AWS",
-              "path": "/docs/2.0/core_extensions/aws"
-            },
-            {
-              "page": "Secrets",
-              "path": "/docs/2.0/configuration/secrets_manager"
-            }
-          ]
-        },
-        {
-          "page": "Databases",
-          "subfolderitems": [
-            {
-              "page": "PostgreSQL",
-              "path": "/docs/2.0/core_extensions/postgres/overview"
-            },
-            {
-              "page": "MySQL",
-              "path": "/docs/2.0/core_extensions/mysql"
-            },
-            {
-              "page": "SQLite",
-              "path": "/docs/2.0/core_extensions/sqlite"
-            }
-          ]
-        },
-        {
           "page": "Lakehouse",
           "subfolderitems": [
             {
               "page": "Overview",
               "path": "/docs/2.0/lakehouse_formats"
-            },
-            {
-              "page": "DuckLake",
-              "path": "/docs/2.0/core_extensions/ducklake"
-            },
-            {
-              "page": "Iceberg",
-              "path": "/docs/2.0/core_extensions/iceberg/overview"
-            },
-            {
-              "page": "Delta",
-              "path": "/docs/2.0/core_extensions/delta"
-            },
-            {
-              "page": "Unity Catalog",
-              "path": "/docs/2.0/core_extensions/unity_catalog"
             }
           ]
         },
@@ -264,6 +172,7 @@
     },
     {
       "page": "SQL",
+      "overview": "/docs/2.0/sql/introduction",
       "slug": "sql",
       "mainfolderitems": [
         {
@@ -804,10 +713,6 @@
               "path": "/docs/2.0/sql/dialect/indexing"
             },
             {
-              "page": "Friendly SQL",
-              "path": "/docs/2.0/sql/dialect/friendly_sql"
-            },
-            {
               "page": "Keywords and Identifiers",
               "path": "/docs/2.0/sql/dialect/keywords_and_identifiers"
             },
@@ -833,11 +738,16 @@
     },
     {
       "page": "Client APIs",
+      "overview": "/docs/2.0/clients/overview",
       "slug": "clients",
       "mainfolderitems": [
         {
           "page": "Overview",
           "path": "/docs/2.0/clients/overview"
+        },
+        {
+          "page": "Connecting to DuckDB",
+          "path": "/docs/2.0/connect/overview"
         },
         {
           "page": "Python",
@@ -1297,6 +1207,7 @@
     },
     {
       "page": "Extensions",
+      "overview": "/docs/2.0/extensions/overview",
       "slug": "extensions",
       "mainfolderitems": [
         {
@@ -1369,7 +1280,32 @@
             },
             {
               "page": "httpfs (HTTP and S3)",
-              "path": "/docs/2.0/core_extensions/httpfs/overview"
+              "subsubfolderitems": [
+                {
+                  "page": "Overview",
+                  "path": "/docs/2.0/core_extensions/httpfs/overview"
+                },
+                {
+                  "page": "HTTP(S) Support",
+                  "path": "/docs/2.0/core_extensions/httpfs/https"
+                },
+                {
+                  "page": "S3 API Support",
+                  "path": "/docs/2.0/core_extensions/httpfs/s3api"
+                },
+                {
+                  "page": "S3 and AWS Authentication",
+                  "path": "/docs/2.0/core_extensions/httpfs/authentication"
+                },
+                {
+                  "page": "Hugging Face",
+                  "path": "/docs/2.0/core_extensions/httpfs/hugging_face"
+                },
+                {
+                  "page": "Legacy Authentication Scheme for S3 API",
+                  "path": "/docs/2.0/core_extensions/httpfs/s3api_legacy_authentication"
+                }
+              ]
             },
             {
               "page": "Iceberg",
@@ -1467,14 +1403,6 @@
             {
               "page": "Extension Repositories",
               "path": "/docs/2.0/extensions/extension_repositories"
-            },
-            {
-              "page": "Building Extensions",
-              "path": "/docs/2.0/dev/building/building_extensions"
-            },
-            {
-              "page": "Statically Linking Extensions",
-              "path": "/docs/2.0/dev/building/linking_extensions"
             }
           ]
         }
@@ -1482,6 +1410,7 @@
     },
     {
       "page": "Server & Remote",
+      "overview": "/docs/2.0/quack/overview",
       "slug": "quack",
       "mainfolderitems": [
         {
@@ -1510,10 +1439,6 @@
           ]
         },
         {
-          "page": "CONNECT",
-          "path": "/docs/2.0/sql/statements/connect"
-        },
-        {
           "page": "Security",
           "path": "/docs/2.0/quack/security"
         },
@@ -1529,6 +1454,7 @@
     },
     {
       "page": "Performance & Operations",
+      "overview": "/docs/2.0/operations_manual/overview",
       "slug": "operations_manual",
       "mainfolderitems": [
         {
@@ -1594,6 +1520,10 @@
             {
               "page": "Overview",
               "path": "/docs/2.0/configuration/overview"
+            },
+            {
+              "page": "Secrets",
+              "path": "/docs/2.0/configuration/secrets_manager"
             },
             {
               "page": "Pragmas",
@@ -1689,6 +1619,7 @@
     },
     {
       "page": "Development & Internals",
+      "overview": "/docs/2.0/dev/overview",
       "slug": "dev",
       "mainfolderitems": [
         {

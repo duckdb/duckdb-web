@@ -259,6 +259,14 @@ body.documentation {
         
             &.mac {
                 display: none;
+
+                html.platform-mac & {
+                    display: inline;
+                }
+            }
+
+            html.platform-mac &.win {
+                display: none;
             }
         }
 
@@ -433,6 +441,12 @@ body.documentation {
             display: none;
         }
     }
+}
+
+body.documentation.docs-overview .box-link {
+    @include navigation-card;
+    padding: 12px;
+    gap: 12px;
 }
 
 // Box links

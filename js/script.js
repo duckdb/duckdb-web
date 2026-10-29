@@ -303,8 +303,22 @@ $(document).ready(function(){
 
 	/* SIDENAVIGATION Documentation */
 	const $drillNav = $('.sidenav-drill');
+	const $navRoot = $drillNav.children('.sidenav');
+	const navMotionKey = 'docs-sidebar-enter';
+
+	$drillNav.on('click', '.sidenav > .hasSub > a.nav-row', function(e) {
+		if ($navRoot.hasClass('is-drilled') || e.ctrlKey || e.metaKey || e.shiftKey || e.altKey || e.button !== 0) return;
+		try { sessionStorage.setItem(navMotionKey, new URL(this.href).pathname); } catch (e) {}
+	});
+
+	$navRoot.on('animationend', function(e) {
+		if (e.originalEvent.animationName !== 'docs-sidebar-enter') return;
+		$(this).removeClass('nav-motion');
+		document.documentElement.classList.remove('docs-sidebar-enter');
+	});
 
 	function setDrill($item, open) {
+		$navRoot.addClass('nav-motion');
 		$item.toggleClass('is-open', open);
 		$item.children('.nav-drill').attr('aria-expanded', open);
 		$item.parent('.nav-list').toggleClass('is-drilled', open);
@@ -320,7 +334,7 @@ $(document).ready(function(){
 	$drillNav.on('click', '.nav-back button', function() {
 		const $item = $(this).closest('.nav-list').parent('.nav-item');
 		setDrill($item, false);
-		$item.children('.nav-drill').trigger('focus');
+		$item.children('.nav-row').trigger('focus');
 	});
 
 	$drillNav.on('click', '.nav-expand', function() {
@@ -739,7 +753,7 @@ $('#main_content_wrap, .singleentry .content').find('a.externallink, a.downloadl
 	// SEARCH 
 	var base_url = window.location.origin;
 	var resultSelected;
-	if( OSdatid == "macos" && $('.sidenavigation').length ){
+	if( OSdatid == "macos" && $('.sidenavigation').length && !$drillNav.length ){
 		$('.opensearch .shortcut.win').hide();
 		$('.opensearch .shortcut.mac').show();
 	}

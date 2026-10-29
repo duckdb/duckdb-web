@@ -5,6 +5,7 @@
 {%- assign nav_url_parts = nav_page | split: "/" -%}
 {%- assign menudocfile = "menu_docs_" | append: version_viewed | replace: ".", "" -%}
 {%- assign nav_menu = site.data[menudocfile].docsmenu -%}
+{%- assign nav_groups = nav_menu | where: "group_start", true -%}
 
 {%- capture nav_items -%}{%- include menu_sidebar_tree.html -%}{%- endcapture -%}
 {%- unless nav_items contains 'aria-current="page"' -%}
@@ -17,9 +18,7 @@
 		<span class="sidenav-search-hint"><svg class="icon"><use href="#search-md"></use></svg><span class="mac shortcut">⌘K</span><span class="win shortcut">ctrl+k</span></span>
 	</button>
 	<ul class="sidenav nav-list{% if nav_items contains 'is-open' %} is-drilled{% endif %}">
+		{% if nav_groups.size > 0 %}<li class="nav-label">Start</li>{% endif %}
 		{{- nav_items -}}
-		{%- for item in site.data.menu_side.sidemenu -%}
-			<li class="nav-item"><a class="nav-row" href="{{ item.url }}">{{ item.page }}</a></li>
-		{%- endfor -%}
 	</ul>
 </nav>

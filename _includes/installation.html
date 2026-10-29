@@ -1,16 +1,20 @@
+{% unless include.hide_title %}
 <div class="wrap pagetitle pagetitle--small mb-5">
     <h1>DuckDB Installation</h1>
 </div>
+{% endunless %}
 
-<div class="installationselection">
+<p>Choose a client, platform and release below to see installation instructions. For other integrations, see <a href="{% link docs/2.0/clients/overview.md %}">all client APIs</a>. After installing, follow the <a href="{% link docs/2.0/quickstart.md %}">Quickstart</a> to run your first query.</p>
+
+<div class="installationselection"{% if include.default_version %} data-default-version="{{ include.default_version }}"{% endif %}>
 
 
     <div class="selection-foldout open" data-foldout="environment">
         <div class="selection-head">
-            <h3>Client<span class="selected"></span></h3>
+            <h3><button type="button" aria-expanded="true" aria-controls="installation-client-options">Client<span class="selected"></span><span class="foldout-icon" aria-hidden="true"><svg class="icon"><use href="#chevron-down"></use></svg></span></button></h3>
         </div>
 
-        <div class="selection-content">
+        <div class="selection-content" id="installation-client-options">
             <div class="selection-options" data-role="environment">
                 <div class="option" aria-checked="false" tabindex="0" data-value="cli" data-display-label="Command Line Interface (CLI)"><span class="symbol"><img src="/images/icons/cli.svg" aria-hidden="true"></span><span class="label">Command line</span></div>
                 <div class="option" aria-checked="false" tabindex="-1" data-value="python"><span class="symbol"><img src="/images/icons/python.svg" aria-hidden="true"></span><span class="label">Python</span></div>
@@ -23,7 +27,6 @@
                 <div class="option" aria-checked="false" tabindex="-1" data-value="odbc"><span class="symbol"><img src="/images/icons/odbc.svg" aria-hidden="true"></span><span class="label">ODBC</span></div>
                 <div class="option" aria-checked="false" tabindex="-1" data-value="wasm" data-display-label="WebAssembly (Wasm)"><span class="symbol"><img src="/images/icons/webassembly.svg" aria-hidden="true"></span><span class="label">Wasm</span></div>
                 <div class="option" aria-checked="false" tabindex="-1" data-value="claude"><span class="symbol"><img src="/images/icons/claude.svg" aria-hidden="true"></span><span class="label">Claude</span></div>
-                <a class="option" href="{% link docs/2.0/clients/overview.md %}" tabindex="-1"><span class="label">More</span><svg class="icon arrow-right" aria-hidden="true"><use href="#arrow-right"></use></svg></a>
             </div>
         </div>
 
@@ -31,10 +34,10 @@
 
     <div class="selection-foldout" data-foldout="platform">
         <div class="selection-head">
-            <h3>Platform<span class="selected"></span></h3>
+            <h3><button type="button" aria-expanded="false" aria-controls="installation-platform-options">Platform<span class="selected"></span><span class="foldout-icon" aria-hidden="true"><svg class="icon"><use href="#chevron-down"></use></svg></span></button></h3>
         </div>
 
-        <div class="selection-content">
+        <div class="selection-content" id="installation-platform-options">
             <div class="selection-options" data-role="platform">
                 <div class="option" aria-checked="false" tabindex="-1" data-value="linux"><span class="symbol"><img src="/images/icons/linux.svg" aria-hidden="true"></span><span class="label">Linux</span></div>
                 <div class="option" aria-checked="false" tabindex="-1" data-value="macos"><span class="symbol"><img src="/images/icons/macos.svg" aria-hidden="true"></span><span class="label">macOS</span></div>
@@ -47,7 +50,7 @@
     <div class="installation-instructions">
 
         <div class="installation-heading">
-            <h2>Installation</h2>
+            <h2>Install DuckDB</h2>
             <div class="version-switch">
                 <span class="version-switch-toggle" role="radiogroup" aria-label="Version selection">
                     {%- for r in site.data.releases %}

@@ -1,5 +1,6 @@
 ---
 layout: docu
+breadcrumbs: false
 permalink: /docs/2.0/guides/
 isotope: true
 body_class: guides-index
