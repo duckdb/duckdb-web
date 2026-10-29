@@ -50,7 +50,7 @@ WHERE seen_at >= DATE '2026-01-01'
 GROUP BY species;
 ```
 
-**Tip: Check the sniffer's work.** When a CSV comes in with odd types, ask DuckDB what it guessed before you fight it.
+> Tip **Check the sniffer's work.** When a CSV comes in with odd types, ask DuckDB what it guessed before you fight it.
 
 ```sql
 DESCRIBE SELECT * FROM 'ponds.csv';
@@ -60,7 +60,7 @@ FROM sniff_csv('ponds.csv');
 SELECT * FROM read_csv('ponds.csv', types = {'pond_id': 'VARCHAR'});
 ```
 
-**Tip: Hive partitions become columns.** A path like `year=2026/month=10/` turns into `year` and `month` columns, and filters on them skip folders entirely.
+> Tip **Hive partitions become columns.** A path like `year=2026/month=10/` turns into `year` and `month` columns, and filters on them skip folders entirely.
 
 ```sql
 SELECT count(*)
@@ -109,7 +109,7 @@ SELECT {'species': species, 'pond': pond} AS duck FROM sightings;
 SELECT duck.* FROM (SELECT {'species': species, 'pond': pond} AS duck FROM sightings);
 ```
 
-**Tip: Let DuckDB tell you about the columns.** `SUMMARIZE` profiles every column in one pass: type, min, max, approximate distinct count, null percentage and quartiles.
+> Tip **Let DuckDB tell you about the columns.** `SUMMARIZE` profiles every column in one pass: type, min, max, approximate distinct count, null percentage and quartiles.
 
 ```sql
 SUMMARIZE sightings;
@@ -161,7 +161,7 @@ ON COLUMNS(* EXCLUDE pond)
 INTO NAME month VALUE ducks;
 ```
 
-**Tip: Approximate when exact is expensive.** On billions of rows, `approx_count_distinct` and `approx_quantile` use a fraction of the memory of their exact cousins.
+> Tip **Approximate when exact is expensive.** On billions of rows, `approx_count_distinct` and `approx_quantile` use a fraction of the memory of their exact cousins.
 
 ```sql
 SELECT approx_count_distinct(ring_id), approx_quantile(weight_g, 0.9)
@@ -201,7 +201,7 @@ ASOF JOIN weather w
  AND s.seen_at >= w.read_at;
 ```
 
-**Tip: Lists are ducks in a column, inside a column.** `list()` gathers a group into one array, and list functions work on it without unnesting.
+> Tip **Lists are ducks in a column, inside a column.** `list()` gathers a group into one array, and list functions work on it without unnesting.
 
 ```sql
 SELECT pond,
@@ -244,9 +244,9 @@ EXPLAIN ANALYZE
 SELECT species, count(*) FROM 'lake/**/*.parquet' WHERE pond = 'north' GROUP BY ALL;
 ```
 
-**Tip: Name your columns; avoid `SELECT *` in production.** Every column you leave out is a column DuckDB never decompresses. On a 60-column table, asking for 4 can cut I/O by an order of magnitude.
+> Tip **Name your columns; avoid `SELECT *` in production.** Every column you leave out is a column DuckDB never decompresses. On a 60-column table, asking for 4 can cut I/O by an order of magnitude.
 
-**Tip: Hand ducks to Python without copying.** DuckDB queries pandas and Polars DataFrames and Arrow tables in place, and returns results in the same formats.
+> Tip **Hand ducks to Python without copying.** DuckDB queries pandas and Polars DataFrames and Arrow tables in place, and returns results in the same formats.
 
 ```python
 import duckdb
