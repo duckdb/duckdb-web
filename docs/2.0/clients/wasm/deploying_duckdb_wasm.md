@@ -32,25 +32,23 @@ It cannot be served as-is: it requires transpilation, because it needs to know t
 
 ## JS Worker Component
 
-This is distributed as a JavaScript file in three different flavors, `mvp`, `eh` and `coi`, and needs to be served as-is. The main library component needs to be informed of the actual location.
+This is distributed as a JavaScript file in two different flavors, `base` and `threads`, and needs to be served as-is. The main library component needs to be informed of the actual location.
 
-The three variants target three different WebAssembly feature sets:
+The two variants target two different WebAssembly feature sets:
 
-* `mvp` targets the WebAssembly 1.0 (MVP) spec
-* `eh` targets WebAssembly with Wasm-level exception handling added, which improves performance
-* `coi` targets WebAssembly with exception handling and threading, which enables parallel query execution; it requires the deployment to be cross-origin isolated (see [Cross-Origin Isolation](#cross-origin-isolation))
+* `base` targets WebAssembly with Wasm-level exception handling. It is single-threaded and runs in every modern browser. DuckDB-Wasm requires exception handling, so this is the baseline bundle. It corresponds to the former `eh` flavor; the former `mvp` flavor, which targeted the WebAssembly 1.0 spec without exception handling, has been removed.
+* `threads` targets WebAssembly with exception handling, SIMD, and threading, which enables parallel query execution; it requires the deployment to be cross-origin isolated (see [Cross-Origin Isolation](#cross-origin-isolation)). It replaces the former `coi` flavor.
 
-You can serve all three and let the library feature-detect the best one with `selectBundle`, or serve a single variant and instruct the DuckDB-Wasm library on which one to use. The served artifacts are named after the flavor, for example `duckdb-browser-coi.worker.js`. The `coi` flavor corresponds to the `wasm_threads` extension platform.
+You can serve both and let the library feature-detect the best one with `selectBundle`, or serve a single variant and instruct the DuckDB-Wasm library on which one to use. The served artifacts are named after the flavor, for example `duckdb-browser-threads.worker.js`. The `base` flavor corresponds to the `wasm_base` extension platform, and the `threads` flavor to `wasm_threads`.
 
 ## Wasm Worker Component
 
-This is the DuckDB engine itself, compiled to WebAssembly and instantiated by the browser. Like the JS Worker component, it comes in the same three flavors, each paired with the JS worker of the same flavor:
+This is the DuckDB engine itself, compiled to WebAssembly and instantiated by the browser. Like the JS Worker component, it comes in the same two flavors, each paired with the JS worker of the same flavor:
 
-* `mvp` — for example `duckdb-mvp.wasm`, loaded by the `mvp` JS worker
-* `eh` — for example `duckdb-eh.wasm`, loaded by the `eh` JS worker
-* `coi` — for example `duckdb-coi.wasm`, loaded by the `coi` JS worker
+* `base` — for example `duckdb-base.wasm`, loaded by the `base` JS worker
+* `threads` — for example `duckdb-threads.wasm`, loaded by the `threads` JS worker
 
-Each JS worker loads the WebAssembly module of its own flavor, so serve the module (or modules) that correspond to the JS workers you deploy. If you serve all three JS workers and let `selectBundle` feature-detect the best one, serve all three modules as well.
+Each JS worker loads the WebAssembly module of its own flavor, so serve the module (or modules) that correspond to the JS workers you deploy. If you serve both JS workers and let `selectBundle` feature-detect the best one, serve both modules as well. The `threads` flavor additionally has a pthread worker (for example `duckdb-browser-threads.pthread.worker.js`) that the browser instantiates once per thread; serve it alongside the `threads` module and worker.
 
 When serving these files, keep the following in mind:
 
@@ -81,14 +79,14 @@ Please review the [Extension Distribution page]({% link docs/2.0/extensions/exte
 
 ## Cross-Origin Isolation
 
-The `coi` bundle runs multiple threads, which relies on `SharedArrayBuffer`. Browsers only expose `SharedArrayBuffer` to pages that are [cross-origin isolated](https://web.dev/articles/coop-coep). To serve the threaded bundle, the top-level document must be delivered with the following HTTP headers:
+The `threads` bundle runs multiple threads, which relies on `SharedArrayBuffer`. Browsers only expose `SharedArrayBuffer` to pages that are [cross-origin isolated](https://web.dev/articles/coop-coep). To serve the threaded bundle, the top-level document must be delivered with the following HTTP headers:
 
 ```text
 Cross-Origin-Embedder-Policy: require-corp
 Cross-Origin-Opener-Policy: same-origin
 ```
 
-These headers isolate the document from other cross-origin documents and require any cross-origin resource it embeds to explicitly opt in. Because many third-party endpoints do not yet send the headers needed to be embedded under these policies, most deployments run on non-isolated pages, where DuckDB-Wasm falls back to the single-threaded `mvp` or `eh` bundle.
+These headers isolate the document from other cross-origin documents and require any cross-origin resource it embeds to explicitly opt in. Because many third-party endpoints do not yet send the headers needed to be embedded under these policies, most deployments run on non-isolated pages, where DuckDB-Wasm falls back to the single-threaded `base` bundle.
 
 For more background on why these headers are required and how they unlock `SharedArrayBuffer`, see the following resources:
 
