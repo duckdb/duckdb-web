@@ -4,6 +4,7 @@ redirect_from:
 - /docs/current/quack/troubleshooting
 - /docs/lts/quack/troubleshooting
 - /docs/preview/quack/troubleshooting
+- /docs/stable/quack/troubleshooting
 title: Troubleshooting Quack
 ---
 

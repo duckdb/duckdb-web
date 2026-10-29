@@ -4,6 +4,7 @@ redirect_from:
 - /docs/current/guides/sql_editors/libredb_studio
 - /docs/lts/guides/sql_editors/libredb_studio
 - /docs/preview/guides/sql_editors/libredb_studio
+- /docs/stable/guides/sql_editors/libredb_studio
 title: LibreDB Studio SQL Editor
 ---
 

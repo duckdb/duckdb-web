@@ -4,6 +4,7 @@ redirect_from:
 - /docs/current/clients/java/deploy_native_image
 - /docs/lts/clients/java/deploy_native_image
 - /docs/preview/clients/java/deploy_native_image
+- /docs/stable/clients/java/deploy_native_image
 title: Deploy as Native Image
 ---
 

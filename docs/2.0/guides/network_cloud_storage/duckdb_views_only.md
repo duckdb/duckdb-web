@@ -4,6 +4,7 @@ redirect_from:
 - /docs/current/guides/network_cloud_storage/duckdb_views_only
 - /docs/lts/guides/network_cloud_storage/duckdb_views_only
 - /docs/preview/guides/network_cloud_storage/duckdb_views_only
+- /docs/stable/guides/network_cloud_storage/duckdb_views_only
 title: Share a DuckDB Database That Only Stores Views
 ---
 

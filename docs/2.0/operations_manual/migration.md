@@ -4,6 +4,7 @@ redirect_from:
 - /docs/current/operations_manual/migration
 - /docs/lts/operations_manual/migration
 - /docs/preview/operations_manual/migration
+- /docs/stable/operations_manual/migration
 title: Migrating to DuckDB 2.0
 ---
 

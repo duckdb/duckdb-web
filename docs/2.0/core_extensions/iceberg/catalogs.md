@@ -15,6 +15,7 @@ redirect_from:
 - /docs/current/core_extensions/iceberg/catalogs
 - /docs/lts/core_extensions/iceberg/catalogs
 - /docs/preview/core_extensions/iceberg/catalogs
+- /docs/stable/core_extensions/iceberg/catalogs
 title: Catalogs
 ---
 

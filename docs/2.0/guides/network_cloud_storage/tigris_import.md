@@ -4,6 +4,7 @@ redirect_from:
 - /docs/current/guides/network_cloud_storage/tigris_import
 - /docs/lts/guides/network_cloud_storage/tigris_import
 - /docs/preview/guides/network_cloud_storage/tigris_import
+- /docs/stable/guides/network_cloud_storage/tigris_import
 title: Tigris Import
 ---
 

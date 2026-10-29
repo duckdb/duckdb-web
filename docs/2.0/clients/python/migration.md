@@ -1,5 +1,7 @@
 ---
 layout: docu
+redirect_from:
+- /docs/stable/clients/python/migration
 title: Migrating Python Code to DuckDB 2.0
 ---
 

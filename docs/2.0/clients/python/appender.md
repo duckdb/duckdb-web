@@ -4,6 +4,7 @@ redirect_from:
 - /docs/current/clients/python/appender
 - /docs/lts/clients/python/appender
 - /docs/preview/clients/python/appender
+- /docs/stable/clients/python/appender
 title: Appender
 ---
 

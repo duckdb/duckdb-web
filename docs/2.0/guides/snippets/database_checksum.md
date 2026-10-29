@@ -4,6 +4,7 @@ redirect_from:
 - /docs/current/guides/snippets/database_checksum
 - /docs/lts/guides/snippets/database_checksum
 - /docs/preview/guides/snippets/database_checksum
+- /docs/stable/guides/snippets/database_checksum
 title: Calculating a Database Checksum
 ---
 

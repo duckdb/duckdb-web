@@ -4,6 +4,7 @@ redirect_from:
 - /docs/current/operations_manual/installing_duckdb/requirements
 - /docs/lts/operations_manual/installing_duckdb/requirements
 - /docs/preview/operations_manual/installing_duckdb/requirements
+- /docs/stable/operations_manual/installing_duckdb/requirements
 title: Requirements
 ---
 

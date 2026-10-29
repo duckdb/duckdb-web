@@ -6,6 +6,7 @@ redirect_from:
 - /docs/current/quack/overview
 - /docs/lts/quack/overview
 - /docs/preview/quack/overview
+- /docs/stable/quack/overview
 title: Quack Remote Protocol
 ---
 

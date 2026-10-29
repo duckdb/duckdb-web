@@ -4,6 +4,7 @@ redirect_from:
 - /docs/current/dev/building/linking_extensions
 - /docs/lts/dev/building/linking_extensions
 - /docs/preview/dev/building/linking_extensions
+- /docs/stable/dev/building/linking_extensions
 title: Statically Linking Extensions
 ---
 

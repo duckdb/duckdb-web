@@ -4,6 +4,7 @@ redirect_from:
 - /docs/current/dev/overview
 - /docs/lts/dev/overview
 - /docs/preview/dev/overview
+- /docs/stable/dev/overview
 title: Overview
 ---
 

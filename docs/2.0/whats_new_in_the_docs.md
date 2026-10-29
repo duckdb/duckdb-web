@@ -4,6 +4,7 @@ redirect_from:
 - /docs/current/whats_new_in_the_docs
 - /docs/lts/whats_new_in_the_docs
 - /docs/preview/whats_new_in_the_docs
+- /docs/stable/whats_new_in_the_docs
 title: What's New in the Docs for 2.0
 ---
 

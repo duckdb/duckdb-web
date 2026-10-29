@@ -4,6 +4,7 @@ redirect_from:
 - /docs/current/extensions/window_function_extensions
 - /docs/lts/extensions/window_function_extensions
 - /docs/preview/extensions/window_function_extensions
+- /docs/stable/extensions/window_function_extensions
 title: Window Function Extensions
 ---
 

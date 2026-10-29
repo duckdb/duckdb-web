@@ -4,6 +4,7 @@ redirect_from:
 - /docs/current/quack/setup/reverse_proxy
 - /docs/lts/quack/setup/reverse_proxy
 - /docs/preview/quack/setup/reverse_proxy
+- /docs/stable/quack/setup/reverse_proxy
 title: Securing Quack with a Reverse Proxy
 ---
 

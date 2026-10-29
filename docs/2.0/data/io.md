@@ -5,6 +5,7 @@ redirect_from:
 - /docs/current/data/io
 - /docs/lts/data/io
 - /docs/preview/data/io
+- /docs/stable/data/io
 title: I/O
 ---
 

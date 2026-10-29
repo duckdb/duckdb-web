@@ -4,6 +4,7 @@ redirect_from:
 - /docs/current/quack/security
 - /docs/lts/quack/security
 - /docs/preview/quack/security
+- /docs/stable/quack/security
 title: Security
 ---
 

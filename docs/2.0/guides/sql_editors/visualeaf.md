@@ -4,6 +4,7 @@ redirect_from:
 - /docs/current/guides/sql_editors/visualeaf
 - /docs/lts/guides/sql_editors/visualeaf
 - /docs/preview/guides/sql_editors/visualeaf
+- /docs/stable/guides/sql_editors/visualeaf
 title: VisuaLeaf SQL Editor
 ---
 

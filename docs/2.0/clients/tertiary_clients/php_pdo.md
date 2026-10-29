@@ -5,6 +5,7 @@ redirect_from:
 - /docs/current/clients/tertiary_clients/php_pdo
 - /docs/lts/clients/tertiary_clients/php_pdo
 - /docs/preview/clients/tertiary_clients/php_pdo
+- /docs/stable/clients/tertiary_clients/php_pdo
 title: PHP Client (PDO)
 ---
 

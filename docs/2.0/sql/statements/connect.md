@@ -4,6 +4,7 @@ redirect_from:
 - /docs/current/sql/statements/connect
 - /docs/lts/sql/statements/connect
 - /docs/preview/sql/statements/connect
+- /docs/stable/sql/statements/connect
 title: CONNECT and DISCONNECT Statements
 ---
 

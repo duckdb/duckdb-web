@@ -4,6 +4,7 @@ redirect_from:
 - /docs/current/sql/functions/variant
 - /docs/lts/sql/functions/variant
 - /docs/preview/sql/functions/variant
+- /docs/stable/sql/functions/variant
 title: Variant Functions
 ---
 

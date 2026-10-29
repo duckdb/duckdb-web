@@ -6,6 +6,7 @@ redirect_from:
 - /docs/current/clients/go/troubleshoot
 - /docs/lts/clients/go/troubleshoot
 - /docs/preview/clients/go/troubleshoot
+- /docs/stable/clients/go/troubleshoot
 title: Troubleshoot
 ---
 

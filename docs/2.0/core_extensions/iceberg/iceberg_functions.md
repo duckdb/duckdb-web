@@ -6,6 +6,7 @@ redirect_from:
 - /docs/current/core_extensions/iceberg/iceberg_functions
 - /docs/lts/core_extensions/iceberg/iceberg_functions
 - /docs/preview/core_extensions/iceberg/iceberg_functions
+- /docs/stable/core_extensions/iceberg/iceberg_functions
 title: Iceberg Functions
 ---
 

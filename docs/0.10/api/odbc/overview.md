@@ -2,7 +2,6 @@
 layout: docu
 redirect_from:
 - /docs/archive/0.10/api/odbc
-- /docs/archive/0.10/api/odbc/
 title: ODBC API Overview
 ---
 

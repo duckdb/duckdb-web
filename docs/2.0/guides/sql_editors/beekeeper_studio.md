@@ -4,6 +4,7 @@ redirect_from:
 - /docs/current/guides/sql_editors/beekeeper_studio
 - /docs/lts/guides/sql_editors/beekeeper_studio
 - /docs/preview/guides/sql_editors/beekeeper_studio
+- /docs/stable/guides/sql_editors/beekeeper_studio
 title: Beekeeper Studio SQL Editor
 ---
 

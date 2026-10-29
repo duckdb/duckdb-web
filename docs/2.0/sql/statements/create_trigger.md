@@ -5,6 +5,7 @@ redirect_from:
 - /docs/current/sql/statements/create_trigger
 - /docs/lts/sql/statements/create_trigger
 - /docs/preview/sql/statements/create_trigger
+- /docs/stable/sql/statements/create_trigger
 title: CREATE TRIGGER Statement
 ---
 

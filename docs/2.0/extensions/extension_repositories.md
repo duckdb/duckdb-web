@@ -4,6 +4,7 @@ redirect_from:
 - /docs/current/extensions/extension_repositories
 - /docs/lts/extensions/extension_repositories
 - /docs/preview/extensions/extension_repositories
+- /docs/stable/extensions/extension_repositories
 title: Extension Repositories
 ---
 

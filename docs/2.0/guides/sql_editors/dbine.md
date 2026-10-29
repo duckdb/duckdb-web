@@ -1,5 +1,7 @@
 ---
 layout: docu
+redirect_from:
+- /docs/stable/guides/sql_editors/dbine
 title: DBine SQL Editor
 ---
 

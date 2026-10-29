@@ -4,6 +4,7 @@ redirect_from:
 - /docs/current/quack/reference
 - /docs/lts/quack/reference
 - /docs/preview/quack/reference
+- /docs/stable/quack/reference
 title: Reference
 ---
 

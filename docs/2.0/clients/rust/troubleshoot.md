@@ -6,6 +6,7 @@ redirect_from:
 - /docs/current/clients/rust/troubleshoot
 - /docs/lts/clients/rust/troubleshoot
 - /docs/preview/clients/rust/troubleshoot
+- /docs/stable/clients/rust/troubleshoot
 title: Troubleshoot
 ---
 

@@ -4,6 +4,7 @@ redirect_from:
 - /docs/current/sql/peg_parser
 - /docs/lts/sql/peg_parser
 - /docs/preview/sql/peg_parser
+- /docs/stable/sql/peg_parser
 title: PEG Parser
 ---
 

@@ -4,6 +4,7 @@ redirect_from:
 - /docs/current/quack/setup/deployment
 - /docs/lts/quack/setup/deployment
 - /docs/preview/quack/setup/deployment
+- /docs/stable/quack/setup/deployment
 title: Deploying Quack
 ---
 

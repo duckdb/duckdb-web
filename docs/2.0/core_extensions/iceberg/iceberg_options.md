@@ -4,6 +4,7 @@ redirect_from:
 - /docs/current/core_extensions/iceberg/iceberg_options
 - /docs/lts/core_extensions/iceberg/iceberg_options
 - /docs/preview/core_extensions/iceberg/iceberg_options
+- /docs/stable/core_extensions/iceberg/iceberg_options
 title: Iceberg Options
 ---
 

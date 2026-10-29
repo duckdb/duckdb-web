@@ -7,6 +7,7 @@ redirect_from:
 - /docs/current/sql/samples
 - /docs/lts/sql/samples
 - /docs/preview/sql/samples
+- /docs/stable/sql/query_syntax/samples
 title: Samples
 ---
 

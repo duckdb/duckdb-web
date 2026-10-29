@@ -4,6 +4,7 @@ redirect_from:
 - /docs/current/core_extensions/httpfs/authentication
 - /docs/lts/core_extensions/httpfs/authentication
 - /docs/preview/core_extensions/httpfs/authentication
+- /docs/stable/core_extensions/httpfs/authentication
 title: S3 and AWS Authentication
 ---
 
