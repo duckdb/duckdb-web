@@ -549,6 +549,89 @@
 	list-style: none;
 }
 
+@mixin nav-element-row {
+	@include tiny;
+	position: relative;
+	display: flex;
+	align-items: center;
+	min-height: 28px;
+	padding: 6px 12px;
+	border-left: 1px solid var(--border-color, rgba(217, 217, 217, 0.6));
+	font-weight: 400;
+	letter-spacing: 0.02em;
+	color: var(--main-text-secondary-color, #666);
+	text-decoration: none;
+	transition: color .2s;
+
+	&:hover {
+		color: var(--main-text-primary-color, #0D0D0D);
+	}
+}
+
+@mixin nav-element-indicator($left: -2px) {
+	&::before {
+		content: "";
+		position: absolute;
+		z-index: 1;
+		top: 6px;
+		left: $left;
+		width: 3px;
+		height: 17px;
+		border-radius: 10px;
+		background: var(--main-text-primary-color, #0D0D0D);
+	}
+}
+
+@mixin nav-element-selected {
+	font-weight: 600;
+	color: var(--main-text-primary-color, #0D0D0D);
+	@include nav-element-indicator;
+}
+
+@mixin toc-nav($margin-top: 0) {
+	list-style: none;
+	padding: 0 0 0 1px;
+	margin: $margin-top 0 0;
+
+	li {
+		position: relative;
+		list-style: none;
+		margin: 0;
+	}
+
+	a {
+		@include nav-element-row;
+		display: block;
+		line-height: 16px;
+		white-space: nowrap;
+		overflow: hidden;
+		text-overflow: ellipsis;
+	}
+
+	li.current {
+		@include nav-element-indicator(-1px);
+
+		> a {
+			font-weight: 600;
+			color: var(--main-text-primary-color, #0D0D0D);
+		}
+	}
+
+	ul {
+		list-style: none;
+		padding: 0;
+		margin: 0;
+
+		a {
+			padding-left: 24px;
+		}
+
+		ul {
+			display: none;
+		}
+	}
+}
+
 @mixin scroll-x-faded($inset) {
 	$scrollbar-height: 2px;
 	$fade: linear-gradient(to right, transparent, #000 $inset, #000 calc(100% - #{$inset}), transparent);

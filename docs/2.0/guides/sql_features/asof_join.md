@@ -8,6 +8,7 @@ redirect_from:
 - /docs/preview/guides/sql_features/asof_join
 tested: true
 title: AsOf Join
+how_to_topic: sql-features
 ---
 
 ## What is an AsOf Join?

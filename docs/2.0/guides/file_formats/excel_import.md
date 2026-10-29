@@ -8,6 +8,7 @@ redirect_from:
 - /docs/lts/guides/file_formats/excel_import
 - /docs/preview/guides/file_formats/excel_import
 title: Excel Import
+how_to_topic: file-formats
 ---
 
 DuckDB supports reading Excel `.xlsx` files. However, `.xls` files are not supported.

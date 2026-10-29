@@ -6,6 +6,7 @@ redirect_from:
 - /docs/preview/guides/sql_editors/beekeeper_studio
 - /docs/stable/guides/sql_editors/beekeeper_studio
 title: Beekeeper Studio SQL Editor
+how_to_topic: tools-meta
 ---
 
 [Beekeeper Studio](https://www.beekeeperstudio.io/db/duckdb-client/) is a free, open-source SQL editor and database manager with a modern, easy-to-use interface. It is available for Windows, macOS, and Linux, and also offers a paid Ultimate tier with cloud sync and team-sharing features. Beekeeper Studio connects to DuckDB natively rather than through a JDBC or ODBC driver, so no separate driver installation is required.

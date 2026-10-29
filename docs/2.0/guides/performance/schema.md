@@ -7,6 +7,7 @@ redirect_from:
 - /docs/lts/guides/performance/schema
 - /docs/preview/guides/performance/schema
 title: Schema
+how_to_topic: performance
 ---
 
 ## Types

@@ -8,6 +8,7 @@ redirect_from:
 - /docs/lts/guides/performance/import
 - /docs/preview/guides/performance/import
 title: Data Import
+how_to_topic: performance
 ---
 
 ## Recommended Import Methods

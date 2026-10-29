@@ -7,6 +7,7 @@ redirect_from:
 - /docs/lts/guides/python/jupyter
 - /docs/preview/guides/python/jupyter
 title: Jupyter Notebooks
+how_to_topic: python
 ---
 
 DuckDB's Python client can be used directly in Jupyter notebooks with no additional configuration, as the first section shows.

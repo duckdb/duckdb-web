@@ -11,2200 +11,1863 @@
       "url": "/docs/2.0/whats_new_in_the_docs"
     },
     {
-      "page": "Documentation",
-      "slug": "",
+      "page": "Get Started",
+      "slug": "connect",
       "mainfolderitems": [
         {
           "page": "Getting Started",
-          "url": "index"
+          "path": "/docs/2.0/index"
+        },
+        {
+          "page": "Installation",
+          "path": "/install/"
         },
         {
           "page": "Connect",
-          "slug": "connect",
+          "path": "/docs/2.0/connect/overview"
+        },
+        {
+          "page": "Concurrency",
+          "path": "/docs/2.0/connect/concurrency"
+        }
+      ]
+    },
+    {
+      "page": "Import & Export",
+      "slug": "data",
+      "mainfolderitems": [
+        {
+          "page": "Overview",
+          "path": "/docs/2.0/data/overview"
+        },
+        {
+          "page": "Data Sources",
+          "path": "/docs/2.0/data/data_sources"
+        },
+        {
+          "page": "CSV Files",
           "subfolderitems": [
             {
               "page": "Overview",
-              "url": "overview"
+              "path": "/docs/2.0/data/csv/overview"
             },
             {
-              "page": "Concurrency",
-              "url": "concurrency"
+              "page": "Auto Detection",
+              "path": "/docs/2.0/data/csv/auto_detection"
+            },
+            {
+              "page": "Reading Faulty CSV Files",
+              "path": "/docs/2.0/data/csv/reading_faulty_csv_files"
+            },
+            {
+              "page": "Tips",
+              "path": "/docs/2.0/data/csv/tips"
             }
           ]
         },
         {
-          "page": "Data Import and Export",
-          "slug": "data",
+          "page": "JSON Files",
           "subfolderitems": [
             {
               "page": "Overview",
-              "url": "overview"
+              "path": "/docs/2.0/data/json/overview"
             },
             {
-              "page": "Data Sources",
-              "url": "data_sources"
+              "page": "Creating JSON",
+              "path": "/docs/2.0/data/json/creating_json"
             },
             {
-              "page": "CSV Files",
-              "slug": "csv",
-              "subsubfolderitems": [
-                {
-                  "page": "Overview",
-                  "url": "overview"
-                },
-                {
-                  "page": "Auto Detection",
-                  "url": "auto_detection"
-                },
-                {
-                  "page": "Reading Faulty CSV Files",
-                  "url": "reading_faulty_csv_files"
-                },
-                {
-                  "page": "Tips",
-                  "url": "tips"
-                }
-              ]
+              "page": "Loading JSON",
+              "path": "/docs/2.0/data/json/loading_json"
             },
             {
-              "page": "IO",
-              "url": "io"
+              "page": "Writing JSON",
+              "path": "/docs/2.0/data/json/writing_json"
             },
             {
-              "page": "JSON Files",
-              "slug": "json",
-              "subsubfolderitems": [
-                {
-                  "page": "Overview",
-                  "url": "overview"
-                },
-                {
-                  "page": "Creating JSON",
-                  "url": "creating_json"
-                },
-                {
-                  "page": "Loading JSON",
-                  "url": "loading_json"
-                },
-                {
-                  "page": "Writing JSON",
-                  "url": "writing_json"
-                },
-                {
-                  "page": "JSON Type",
-                  "url": "json_type"
-                },
-                {
-                  "page": "JSON Functions",
-                  "url": "json_functions"
-                },
-                {
-                  "page": "Format Settings",
-                  "url": "format_settings"
-                },
-                {
-                  "page": "Installing and Loading",
-                  "url": "installing_and_loading"
-                },
-                {
-                  "page": "SQL to / from JSON",
-                  "url": "sql_to_and_from_json"
-                },
-                {
-                  "page": "Caveats",
-                  "url": "caveats"
-                }
-              ]
+              "page": "JSON Type",
+              "path": "/docs/2.0/data/json/json_type"
             },
             {
-              "page": "Multiple Files",
-              "slug": "multiple_files",
-              "subsubfolderitems": [
-                {
-                  "page": "Overview",
-                  "url": "overview"
-                },
-                {
-                  "page": "Combining Schemas",
-                  "url": "combining_schemas"
-                }
-              ]
+              "page": "JSON Functions",
+              "path": "/docs/2.0/data/json/json_functions"
             },
             {
-              "page": "Parquet Files",
-              "slug": "parquet",
-              "subsubfolderitems": [
-                {
-                  "page": "Overview",
-                  "url": "overview"
-                },
-                {
-                  "page": "Metadata",
-                  "url": "metadata"
-                },
-                {
-                  "page": "Encryption",
-                  "url": "encryption"
-                },
-                {
-                  "page": "Tips",
-                  "url": "tips"
-                }
-              ]
+              "page": "Format Settings",
+              "path": "/docs/2.0/data/json/format_settings"
             },
             {
-              "page": "Partitioning",
-              "slug": "partitioning",
-              "subsubfolderitems": [
-                {
-                  "page": "Hive Partitioning",
-                  "url": "hive_partitioning"
-                },
-                {
-                  "page": "Partitioned Writes",
-                  "url": "partitioned_writes"
-                }
-              ]
+              "page": "Installing and Loading",
+              "path": "/docs/2.0/data/json/installing_and_loading"
+            },
+            {
+              "page": "SQL to / from JSON",
+              "path": "/docs/2.0/data/json/sql_to_and_from_json"
+            },
+            {
+              "page": "Caveats",
+              "path": "/docs/2.0/data/json/caveats"
+            }
+          ]
+        },
+        {
+          "page": "Parquet Files",
+          "subfolderitems": [
+            {
+              "page": "Overview",
+              "path": "/docs/2.0/data/parquet/overview"
+            },
+            {
+              "page": "Metadata",
+              "path": "/docs/2.0/data/parquet/metadata"
+            },
+            {
+              "page": "Encryption",
+              "path": "/docs/2.0/data/parquet/encryption"
+            },
+            {
+              "page": "Tips",
+              "path": "/docs/2.0/data/parquet/tips"
+            }
+          ]
+        },
+        {
+          "page": "Excel",
+          "path": "/docs/2.0/core_extensions/excel"
+        },
+        {
+          "page": "Avro",
+          "path": "/docs/2.0/core_extensions/avro"
+        },
+        {
+          "page": "Multiple Files",
+          "subfolderitems": [
+            {
+              "page": "Overview",
+              "path": "/docs/2.0/data/multiple_files/overview"
+            },
+            {
+              "page": "Combining Schemas",
+              "path": "/docs/2.0/data/multiple_files/combining_schemas"
+            }
+          ]
+        },
+        {
+          "page": "Partitioning",
+          "subfolderitems": [
+            {
+              "page": "Hive Partitioning",
+              "path": "/docs/2.0/data/partitioning/hive_partitioning"
+            },
+            {
+              "page": "Partitioned Writes",
+              "path": "/docs/2.0/data/partitioning/partitioned_writes"
+            }
+          ]
+        },
+        {
+          "page": "Cloud Storage",
+          "subfolderitems": [
+            {
+              "page": "httpfs Overview",
+              "path": "/docs/2.0/core_extensions/httpfs/overview"
+            },
+            {
+              "page": "HTTP(S) Support",
+              "path": "/docs/2.0/core_extensions/httpfs/https"
+            },
+            {
+              "page": "S3 API Support",
+              "path": "/docs/2.0/core_extensions/httpfs/s3api"
+            },
+            {
+              "page": "S3 and AWS Authentication",
+              "path": "/docs/2.0/core_extensions/httpfs/authentication"
+            },
+            {
+              "page": "Hugging Face",
+              "path": "/docs/2.0/core_extensions/httpfs/hugging_face"
+            },
+            {
+              "page": "Legacy Authentication Scheme for S3 API",
+              "path": "/docs/2.0/core_extensions/httpfs/s3api_legacy_authentication"
+            },
+            {
+              "page": "Azure",
+              "path": "/docs/2.0/core_extensions/azure"
+            },
+            {
+              "page": "AWS",
+              "path": "/docs/2.0/core_extensions/aws"
+            },
+            {
+              "page": "Secrets",
+              "path": "/docs/2.0/configuration/secrets_manager"
+            }
+          ]
+        },
+        {
+          "page": "Databases",
+          "subfolderitems": [
+            {
+              "page": "PostgreSQL",
+              "path": "/docs/2.0/core_extensions/postgres/overview"
+            },
+            {
+              "page": "MySQL",
+              "path": "/docs/2.0/core_extensions/mysql"
+            },
+            {
+              "page": "SQLite",
+              "path": "/docs/2.0/core_extensions/sqlite"
+            }
+          ]
+        },
+        {
+          "page": "Lakehouse",
+          "subfolderitems": [
+            {
+              "page": "Overview",
+              "path": "/docs/2.0/lakehouse_formats"
+            },
+            {
+              "page": "DuckLake",
+              "path": "/docs/2.0/core_extensions/ducklake"
+            },
+            {
+              "page": "Iceberg",
+              "path": "/docs/2.0/core_extensions/iceberg/overview"
+            },
+            {
+              "page": "Delta",
+              "path": "/docs/2.0/core_extensions/delta"
+            },
+            {
+              "page": "Unity Catalog",
+              "path": "/docs/2.0/core_extensions/unity_catalog"
+            }
+          ]
+        },
+        {
+          "page": "IO",
+          "path": "/docs/2.0/data/io"
+        },
+        {
+          "page": "Appender",
+          "path": "/docs/2.0/data/appender"
+        },
+        {
+          "page": "INSERT Statements",
+          "path": "/docs/2.0/data/insert"
+        }
+      ]
+    },
+    {
+      "page": "SQL",
+      "slug": "sql",
+      "mainfolderitems": [
+        {
+          "page": "Introduction",
+          "path": "/docs/2.0/sql/introduction"
+        },
+        {
+          "page": "Friendly SQL",
+          "path": "/docs/2.0/sql/dialect/friendly_sql"
+        },
+        {
+          "page": "Statements",
+          "subfolderitems": [
+            {
+              "page": "Overview",
+              "path": "/docs/2.0/sql/statements/overview"
+            },
+            {
+              "page": "ANALYZE",
+              "path": "/docs/2.0/sql/statements/analyze"
+            },
+            {
+              "page": "ALTER DATABASE",
+              "path": "/docs/2.0/sql/statements/alter_database"
+            },
+            {
+              "page": "ALTER TABLE",
+              "path": "/docs/2.0/sql/statements/alter_table"
+            },
+            {
+              "page": "ALTER VIEW",
+              "path": "/docs/2.0/sql/statements/alter_view"
+            },
+            {
+              "page": "ATTACH and DETACH",
+              "path": "/docs/2.0/sql/statements/attach"
+            },
+            {
+              "page": "CALL",
+              "path": "/docs/2.0/sql/statements/call"
+            },
+            {
+              "page": "CHECKPOINT",
+              "path": "/docs/2.0/sql/statements/checkpoint"
+            },
+            {
+              "page": "COMMENT ON",
+              "path": "/docs/2.0/sql/statements/comment_on"
+            },
+            {
+              "page": "CONNECT and DISCONNECT",
+              "path": "/docs/2.0/sql/statements/connect"
+            },
+            {
+              "page": "COPY",
+              "path": "/docs/2.0/sql/statements/copy"
+            },
+            {
+              "page": "CREATE INDEX",
+              "path": "/docs/2.0/sql/statements/create_index"
+            },
+            {
+              "page": "CREATE MACRO",
+              "path": "/docs/2.0/sql/statements/create_macro"
+            },
+            {
+              "page": "CREATE SCHEMA",
+              "path": "/docs/2.0/sql/statements/create_schema"
+            },
+            {
+              "page": "CREATE SECRET",
+              "path": "/docs/2.0/sql/statements/create_secret"
+            },
+            {
+              "page": "CREATE SEQUENCE",
+              "path": "/docs/2.0/sql/statements/create_sequence"
+            },
+            {
+              "page": "CREATE TABLE",
+              "path": "/docs/2.0/sql/statements/create_table"
+            },
+            {
+              "page": "CREATE VIEW",
+              "path": "/docs/2.0/sql/statements/create_view"
+            },
+            {
+              "page": "CREATE TRIGGER",
+              "path": "/docs/2.0/sql/statements/create_trigger"
+            },
+            {
+              "page": "CREATE TYPE",
+              "path": "/docs/2.0/sql/statements/create_type"
+            },
+            {
+              "page": "DELETE",
+              "path": "/docs/2.0/sql/statements/delete"
+            },
+            {
+              "page": "DESCRIBE",
+              "path": "/docs/2.0/sql/statements/describe"
+            },
+            {
+              "page": "DROP",
+              "path": "/docs/2.0/sql/statements/drop"
+            },
+            {
+              "page": "EXPORT and IMPORT DATABASE",
+              "path": "/docs/2.0/sql/statements/export"
+            },
+            {
+              "page": "INSERT",
+              "path": "/docs/2.0/sql/statements/insert"
+            },
+            {
+              "page": "LOAD / INSTALL",
+              "path": "/docs/2.0/sql/statements/load_and_install"
+            },
+            {
+              "page": "MERGE INTO",
+              "path": "/docs/2.0/sql/statements/merge_into"
+            },
+            {
+              "page": "PIVOT",
+              "path": "/docs/2.0/sql/statements/pivot"
+            },
+            {
+              "page": "Profiling",
+              "path": "/docs/2.0/sql/statements/profiling"
+            },
+            {
+              "page": "PREPARE, EXECUTE, and DEALLOCATE",
+              "path": "/docs/2.0/sql/statements/prepare"
+            },
+            {
+              "page": "SELECT",
+              "path": "/docs/2.0/sql/statements/select"
+            },
+            {
+              "page": "SET / RESET",
+              "path": "/docs/2.0/sql/statements/set"
+            },
+            {
+              "page": "SET VARIABLE",
+              "path": "/docs/2.0/sql/statements/set_variable"
+            },
+            {
+              "page": "SHOW and SHOW DATABASES",
+              "path": "/docs/2.0/sql/statements/show"
+            },
+            {
+              "page": "SUMMARIZE",
+              "path": "/docs/2.0/sql/statements/summarize"
+            },
+            {
+              "page": "Transaction Management",
+              "path": "/docs/2.0/sql/statements/transactions"
+            },
+            {
+              "page": "UNPIVOT",
+              "path": "/docs/2.0/sql/statements/unpivot"
+            },
+            {
+              "page": "UPDATE",
+              "path": "/docs/2.0/sql/statements/update"
+            },
+            {
+              "page": "UPDATE EXTENSIONS",
+              "path": "/docs/2.0/sql/statements/update_extensions"
+            },
+            {
+              "page": "USE",
+              "path": "/docs/2.0/sql/statements/use"
+            },
+            {
+              "page": "VACUUM",
+              "path": "/docs/2.0/sql/statements/vacuum"
+            }
+          ]
+        },
+        {
+          "page": "Query Syntax",
+          "subfolderitems": [
+            {
+              "page": "SELECT",
+              "path": "/docs/2.0/sql/query_syntax/select"
+            },
+            {
+              "page": "FROM and JOIN",
+              "path": "/docs/2.0/sql/query_syntax/from"
+            },
+            {
+              "page": "WHERE",
+              "path": "/docs/2.0/sql/query_syntax/where"
+            },
+            {
+              "page": "GROUP BY",
+              "path": "/docs/2.0/sql/query_syntax/groupby"
+            },
+            {
+              "page": "GROUPING SETS",
+              "path": "/docs/2.0/sql/query_syntax/grouping_sets"
+            },
+            {
+              "page": "HAVING",
+              "path": "/docs/2.0/sql/query_syntax/having"
+            },
+            {
+              "page": "ORDER BY",
+              "path": "/docs/2.0/sql/query_syntax/orderby"
+            },
+            {
+              "page": "LIMIT and OFFSET",
+              "path": "/docs/2.0/sql/query_syntax/limit"
+            },
+            {
+              "page": "SAMPLE",
+              "path": "/docs/2.0/sql/query_syntax/sample"
+            },
+            {
+              "page": "Samples",
+              "path": "/docs/2.0/sql/query_syntax/samples"
+            },
+            {
+              "page": "Unnesting",
+              "path": "/docs/2.0/sql/query_syntax/unnest"
+            },
+            {
+              "page": "WITH",
+              "path": "/docs/2.0/sql/query_syntax/with"
+            },
+            {
+              "page": "WINDOW",
+              "path": "/docs/2.0/sql/query_syntax/window"
+            },
+            {
+              "page": "QUALIFY",
+              "path": "/docs/2.0/sql/query_syntax/qualify"
+            },
+            {
+              "page": "VALUES",
+              "path": "/docs/2.0/sql/query_syntax/values"
+            },
+            {
+              "page": "FILTER",
+              "path": "/docs/2.0/sql/query_syntax/filter"
+            },
+            {
+              "page": "Set Operations",
+              "path": "/docs/2.0/sql/query_syntax/setops"
+            },
+            {
+              "page": "Prepared Statements",
+              "path": "/docs/2.0/sql/query_syntax/prepared_statements"
+            }
+          ]
+        },
+        {
+          "page": "Data Types",
+          "subfolderitems": [
+            {
+              "page": "Overview",
+              "path": "/docs/2.0/sql/data_types/overview"
+            },
+            {
+              "page": "Array",
+              "path": "/docs/2.0/sql/data_types/array"
+            },
+            {
+              "page": "Bitstring",
+              "path": "/docs/2.0/sql/data_types/bitstring"
+            },
+            {
+              "page": "Blob",
+              "path": "/docs/2.0/sql/data_types/blob"
+            },
+            {
+              "page": "Boolean",
+              "path": "/docs/2.0/sql/data_types/boolean"
+            },
+            {
+              "page": "Date",
+              "path": "/docs/2.0/sql/data_types/date"
+            },
+            {
+              "page": "Enum",
+              "path": "/docs/2.0/sql/data_types/enum"
+            },
+            {
+              "page": "Geometry",
+              "path": "/docs/2.0/sql/data_types/geometry"
+            },
+            {
+              "page": "Interval",
+              "path": "/docs/2.0/sql/data_types/interval"
+            },
+            {
+              "page": "List",
+              "path": "/docs/2.0/sql/data_types/list"
+            },
+            {
+              "page": "Literal Types",
+              "path": "/docs/2.0/sql/data_types/literal_types"
+            },
+            {
+              "page": "Map",
+              "path": "/docs/2.0/sql/data_types/map"
+            },
+            {
+              "page": "NULL Values",
+              "path": "/docs/2.0/sql/data_types/nulls"
+            },
+            {
+              "page": "Numeric",
+              "path": "/docs/2.0/sql/data_types/numeric"
+            },
+            {
+              "page": "Struct",
+              "path": "/docs/2.0/sql/data_types/struct"
+            },
+            {
+              "page": "Text",
+              "path": "/docs/2.0/sql/data_types/text"
+            },
+            {
+              "page": "Time",
+              "path": "/docs/2.0/sql/data_types/time"
+            },
+            {
+              "page": "Timestamp",
+              "path": "/docs/2.0/sql/data_types/timestamp"
+            },
+            {
+              "page": "Time Zones",
+              "path": "/docs/2.0/sql/data_types/timezones"
+            },
+            {
+              "page": "Union",
+              "path": "/docs/2.0/sql/data_types/union"
+            },
+            {
+              "page": "Typecasting",
+              "path": "/docs/2.0/sql/data_types/typecasting"
+            },
+            {
+              "page": "Variant",
+              "path": "/docs/2.0/sql/data_types/variant"
+            }
+          ]
+        },
+        {
+          "page": "Functions",
+          "subfolderitems": [
+            {
+              "page": "Overview",
+              "path": "/docs/2.0/sql/functions/overview"
+            },
+            {
+              "page": "Aggregate Functions",
+              "path": "/docs/2.0/sql/functions/aggregates"
+            },
+            {
+              "page": "Array Functions",
+              "path": "/docs/2.0/sql/functions/array"
+            },
+            {
+              "page": "Bitstring Functions",
+              "path": "/docs/2.0/sql/functions/bitstring"
+            },
+            {
+              "page": "Blob Functions",
+              "path": "/docs/2.0/sql/functions/blob"
+            },
+            {
+              "page": "Date Format Functions",
+              "path": "/docs/2.0/sql/functions/dateformat"
+            },
+            {
+              "page": "Date Functions",
+              "path": "/docs/2.0/sql/functions/date"
+            },
+            {
+              "page": "Date Part Functions",
+              "path": "/docs/2.0/sql/functions/datepart"
+            },
+            {
+              "page": "Enum Functions",
+              "path": "/docs/2.0/sql/functions/enum"
+            },
+            {
+              "page": "Geometry Functions",
+              "path": "/docs/2.0/sql/functions/geometry"
+            },
+            {
+              "page": "Interval Functions",
+              "path": "/docs/2.0/sql/functions/interval"
+            },
+            {
+              "page": "Lambda Functions",
+              "path": "/docs/2.0/sql/functions/lambda"
+            },
+            {
+              "page": "List Functions",
+              "path": "/docs/2.0/sql/functions/list"
+            },
+            {
+              "page": "Map Functions",
+              "path": "/docs/2.0/sql/functions/map"
+            },
+            {
+              "page": "Nested Functions",
+              "path": "/docs/2.0/sql/functions/nested"
+            },
+            {
+              "page": "Numeric Functions",
+              "path": "/docs/2.0/sql/functions/numeric"
+            },
+            {
+              "page": "Pattern Matching",
+              "path": "/docs/2.0/sql/functions/pattern_matching"
+            },
+            {
+              "page": "Regular Expressions",
+              "path": "/docs/2.0/sql/functions/regular_expressions"
+            },
+            {
+              "page": "Struct Functions",
+              "path": "/docs/2.0/sql/functions/struct"
+            },
+            {
+              "page": "Text Functions",
+              "path": "/docs/2.0/sql/functions/text"
+            },
+            {
+              "page": "Time Functions",
+              "path": "/docs/2.0/sql/functions/time"
+            },
+            {
+              "page": "Timestamp Functions",
+              "path": "/docs/2.0/sql/functions/timestamp"
+            },
+            {
+              "page": "Timestamp with Time Zone Functions",
+              "path": "/docs/2.0/sql/functions/timestamptz"
+            },
+            {
+              "page": "Union Functions",
+              "path": "/docs/2.0/sql/functions/union"
+            },
+            {
+              "page": "Utility Functions",
+              "path": "/docs/2.0/sql/functions/utility"
+            },
+            {
+              "page": "Variant Functions",
+              "path": "/docs/2.0/sql/functions/variant"
+            },
+            {
+              "page": "Window Functions",
+              "path": "/docs/2.0/sql/functions/window_functions"
+            }
+          ]
+        },
+        {
+          "page": "Expressions",
+          "subfolderitems": [
+            {
+              "page": "Overview",
+              "path": "/docs/2.0/sql/expressions/overview"
+            },
+            {
+              "page": "CASE Expression",
+              "path": "/docs/2.0/sql/expressions/case"
+            },
+            {
+              "page": "Casting",
+              "path": "/docs/2.0/sql/expressions/cast"
+            },
+            {
+              "page": "Collations",
+              "path": "/docs/2.0/sql/expressions/collations"
+            },
+            {
+              "page": "Comparisons",
+              "path": "/docs/2.0/sql/expressions/comparison_operators"
+            },
+            {
+              "page": "IN Operator",
+              "path": "/docs/2.0/sql/expressions/in"
+            },
+            {
+              "page": "Logical Operators",
+              "path": "/docs/2.0/sql/expressions/logical_operators"
+            },
+            {
+              "page": "Star Expression",
+              "path": "/docs/2.0/sql/expressions/star"
+            },
+            {
+              "page": "Subqueries",
+              "path": "/docs/2.0/sql/expressions/subqueries"
+            },
+            {
+              "page": "TRY",
+              "path": "/docs/2.0/sql/expressions/try"
+            }
+          ]
+        },
+        {
+          "page": "Meta Queries",
+          "subfolderitems": [
+            {
+              "page": "Information Schema",
+              "path": "/docs/2.0/sql/meta/information_schema"
+            },
+            {
+              "page": "Metadata Functions",
+              "path": "/docs/2.0/sql/meta/duckdb_table_functions"
+            }
+          ]
+        },
+        {
+          "page": "Constraints",
+          "path": "/docs/2.0/sql/constraints"
+        },
+        {
+          "page": "Indexes",
+          "path": "/docs/2.0/sql/indexes"
+        },
+        {
+          "page": "DuckDB's SQL Dialect",
+          "subfolderitems": [
+            {
+              "page": "Overview",
+              "path": "/docs/2.0/sql/dialect/overview"
+            },
+            {
+              "page": "Indexing",
+              "path": "/docs/2.0/sql/dialect/indexing"
+            },
+            {
+              "page": "Friendly SQL",
+              "path": "/docs/2.0/sql/dialect/friendly_sql"
+            },
+            {
+              "page": "Keywords and Identifiers",
+              "path": "/docs/2.0/sql/dialect/keywords_and_identifiers"
+            },
+            {
+              "page": "Order Preservation",
+              "path": "/docs/2.0/sql/dialect/order_preservation"
+            },
+            {
+              "page": "PostgreSQL Compatibility",
+              "path": "/docs/2.0/sql/dialect/postgresql_compatibility"
+            },
+            {
+              "page": "SQL Quirks",
+              "path": "/docs/2.0/sql/dialect/sql_quirks"
+            }
+          ]
+        },
+        {
+          "page": "PEG Parser",
+          "path": "/docs/2.0/sql/peg_parser"
+        }
+      ]
+    },
+    {
+      "page": "Client APIs",
+      "slug": "clients",
+      "mainfolderitems": [
+        {
+          "page": "Overview",
+          "path": "/docs/2.0/clients/overview"
+        },
+        {
+          "page": "Python",
+          "subfolderitems": [
+            {
+              "page": "Overview",
+              "path": "/docs/2.0/clients/python/overview"
+            },
+            {
+              "page": "Data Ingestion",
+              "path": "/docs/2.0/clients/python/data_ingestion"
             },
             {
               "page": "Appender",
-              "url": "appender"
+              "path": "/docs/2.0/clients/python/appender"
             },
             {
-              "page": "INSERT Statements",
-              "url": "insert"
+              "page": "Conversion between DuckDB and Python",
+              "path": "/docs/2.0/clients/python/conversion"
+            },
+            {
+              "page": "DB API",
+              "path": "/docs/2.0/clients/python/dbapi"
+            },
+            {
+              "page": "Relational API",
+              "path": "/docs/2.0/clients/python/relational_api"
+            },
+            {
+              "page": "Function API",
+              "path": "/docs/2.0/clients/python/function"
+            },
+            {
+              "page": "Types API",
+              "path": "/docs/2.0/clients/python/types"
+            },
+            {
+              "page": "Expression API",
+              "path": "/docs/2.0/clients/python/expression"
+            },
+            {
+              "page": "Spark API",
+              "path": "/docs/2.0/clients/python/spark_api"
+            },
+            {
+              "page": "API Reference",
+              "path": "/docs/2.0/clients/python/reference"
+            },
+            {
+              "page": "Known Python Issues",
+              "path": "/docs/2.0/clients/python/known_issues"
+            },
+            {
+              "page": "Migrating to 2.0",
+              "path": "/docs/2.0/clients/python/migration"
+            },
+            {
+              "page": "Installation",
+              "path": "/docs/2.0/guides/python/install"
+            },
+            {
+              "page": "Executing SQL",
+              "path": "/docs/2.0/guides/python/execute_sql"
+            },
+            {
+              "page": "Jupyter Notebooks",
+              "path": "/docs/2.0/guides/python/jupyter"
+            },
+            {
+              "page": "marimo Notebooks",
+              "path": "/docs/2.0/guides/python/marimo"
+            },
+            {
+              "page": "SQL on Pandas",
+              "path": "/docs/2.0/guides/python/sql_on_pandas"
+            },
+            {
+              "page": "Import from Pandas",
+              "path": "/docs/2.0/guides/python/import_pandas"
+            },
+            {
+              "page": "Export to Pandas",
+              "path": "/docs/2.0/guides/python/export_pandas"
+            },
+            {
+              "page": "Import from Numpy",
+              "path": "/docs/2.0/guides/python/import_numpy"
+            },
+            {
+              "page": "Export to Numpy",
+              "path": "/docs/2.0/guides/python/export_numpy"
+            },
+            {
+              "page": "SQL on Arrow",
+              "path": "/docs/2.0/guides/python/sql_on_arrow"
+            },
+            {
+              "page": "Import from Arrow",
+              "path": "/docs/2.0/guides/python/import_arrow"
+            },
+            {
+              "page": "Export to Arrow",
+              "path": "/docs/2.0/guides/python/export_arrow"
+            },
+            {
+              "page": "Relational API on Pandas",
+              "path": "/docs/2.0/guides/python/relational_api_pandas"
+            },
+            {
+              "page": "Multiple Python Threads",
+              "path": "/docs/2.0/guides/python/multiple_threads"
+            },
+            {
+              "page": "Integration with Ibis",
+              "path": "/docs/2.0/guides/python/ibis"
+            },
+            {
+              "page": "Integration with Polars",
+              "path": "/docs/2.0/guides/python/polars"
+            },
+            {
+              "page": "Integration with PyTorch",
+              "path": "/docs/2.0/guides/python/pytorch"
+            },
+            {
+              "page": "Using fsspec Filesystems",
+              "path": "/docs/2.0/guides/python/filesystems"
             }
           ]
         },
         {
-          "page": "Lakehouse Formats",
-          "url": "lakehouse_formats"
-        },
-        {
-          "page": "Client APIs",
-          "slug": "clients",
+          "page": "CLI",
           "subfolderitems": [
             {
               "page": "Overview",
-              "url": "overview"
+              "path": "/docs/2.0/clients/cli/overview"
             },
             {
-              "page": "ADBC",
-              "url": "adbc"
+              "page": "Arguments",
+              "path": "/docs/2.0/clients/cli/arguments"
             },
             {
-              "page": "C",
-              "slug": "c",
-              "subsubfolderitems": [
-                {
-                  "page": "Overview",
-                  "url": "overview"
-                },
-                {
-                  "page": "Startup",
-                  "url": "connect"
-                },
-                {
-                  "page": "Configuration",
-                  "url": "config"
-                },
-                {
-                  "page": "Query",
-                  "url": "query"
-                },
-                {
-                  "page": "Data Chunks",
-                  "url": "data_chunk"
-                },
-                {
-                  "page": "Vectors",
-                  "url": "vector"
-                },
-                {
-                  "page": "Values",
-                  "url": "value"
-                },
-                {
-                  "page": "Types",
-                  "url": "types"
-                },
-                {
-                  "page": "Prepared Statements",
-                  "url": "prepared"
-                },
-                {
-                  "page": "Appender",
-                  "url": "appender"
-                },
-                {
-                  "page": "Table Functions",
-                  "url": "table_functions"
-                },
-                {
-                  "page": "Replacement Scans",
-                  "url": "replacement_scans"
-                },
-                {
-                  "page": "API Reference",
-                  "url": "api"
-                }
-              ]
+              "page": "Dot Commands",
+              "path": "/docs/2.0/clients/cli/dot_commands"
+            },
+            {
+              "page": "Output Formats",
+              "path": "/docs/2.0/clients/cli/output_formats"
+            },
+            {
+              "page": "Agent Mode",
+              "path": "/docs/2.0/clients/cli/agent_mode"
+            },
+            {
+              "page": "Editing",
+              "path": "/docs/2.0/clients/cli/editing"
+            },
+            {
+              "page": "Friendly CLI",
+              "path": "/docs/2.0/clients/cli/friendly_cli"
+            },
+            {
+              "page": "Safe Mode",
+              "path": "/docs/2.0/clients/cli/safe_mode"
+            },
+            {
+              "page": "Autocomplete",
+              "path": "/docs/2.0/clients/cli/autocomplete"
+            },
+            {
+              "page": "Syntax Highlighting",
+              "path": "/docs/2.0/clients/cli/syntax_highlighting"
+            },
+            {
+              "page": "Known Issues",
+              "path": "/docs/2.0/clients/cli/known_issues"
+            }
+          ]
+        },
+        {
+          "page": "Node.js (Neo)",
+          "subfolderitems": [
+            {
+              "page": "Overview",
+              "path": "/docs/2.0/clients/node_neo/overview"
+            }
+          ]
+        },
+        {
+          "page": "Java (JDBC)",
+          "subfolderitems": [
+            {
+              "page": "Overview",
+              "path": "/docs/2.0/clients/java/overview"
+            },
+            {
+              "page": "Connect",
+              "path": "/docs/2.0/clients/java/connecting"
+            },
+            {
+              "page": "Import Data",
+              "path": "/docs/2.0/clients/java/data_import"
+            },
+            {
+              "page": "Run Queries",
+              "path": "/docs/2.0/clients/java/querying"
+            },
+            {
+              "page": "Handle Results",
+              "path": "/docs/2.0/clients/java/result_handling"
+            },
+            {
+              "page": "Write User Defined Functions",
+              "path": "/docs/2.0/clients/java/functions"
+            },
+            {
+              "page": "Profile and Monitor",
+              "path": "/docs/2.0/clients/java/profiling"
+            },
+            {
+              "page": "Deploy as Native Image",
+              "path": "/docs/2.0/clients/java/deploy_native_image"
+            },
+            {
+              "page": "Troubleshoot",
+              "path": "/docs/2.0/clients/java/troubleshoot"
+            }
+          ]
+        },
+        {
+          "page": "R",
+          "path": "/docs/2.0/clients/r"
+        },
+        {
+          "page": "Go",
+          "subfolderitems": [
+            {
+              "page": "Overview",
+              "path": "/docs/2.0/clients/go/overview"
+            },
+            {
+              "page": "Connect",
+              "path": "/docs/2.0/clients/go/connecting"
+            },
+            {
+              "page": "Import Data",
+              "path": "/docs/2.0/clients/go/data_import"
+            },
+            {
+              "page": "Run Queries",
+              "path": "/docs/2.0/clients/go/querying"
+            },
+            {
+              "page": "Handle Results",
+              "path": "/docs/2.0/clients/go/result_handling"
+            },
+            {
+              "page": "Write User Defined Functions",
+              "path": "/docs/2.0/clients/go/functions"
+            },
+            {
+              "page": "Profile and Monitor",
+              "path": "/docs/2.0/clients/go/profiling"
+            },
+            {
+              "page": "Troubleshoot",
+              "path": "/docs/2.0/clients/go/troubleshoot"
+            }
+          ]
+        },
+        {
+          "page": "Rust",
+          "subfolderitems": [
+            {
+              "page": "Overview",
+              "path": "/docs/2.0/clients/rust/overview"
+            },
+            {
+              "page": "Connect",
+              "path": "/docs/2.0/clients/rust/connecting"
+            },
+            {
+              "page": "Import Data",
+              "path": "/docs/2.0/clients/rust/data_import"
+            },
+            {
+              "page": "Run Queries",
+              "path": "/docs/2.0/clients/rust/querying"
+            },
+            {
+              "page": "Handle Results",
+              "path": "/docs/2.0/clients/rust/result_handling"
+            },
+            {
+              "page": "Write User Defined Functions",
+              "path": "/docs/2.0/clients/rust/functions"
+            },
+            {
+              "page": "Profile and Monitor",
+              "path": "/docs/2.0/clients/rust/profiling"
+            },
+            {
+              "page": "Troubleshoot",
+              "path": "/docs/2.0/clients/rust/troubleshoot"
+            }
+          ]
+        },
+        {
+          "page": "C/C++",
+          "subfolderitems": [
+            {
+              "page": "Overview",
+              "path": "/docs/2.0/clients/c/overview"
+            },
+            {
+              "page": "Startup",
+              "path": "/docs/2.0/clients/c/connect"
+            },
+            {
+              "page": "Configuration",
+              "path": "/docs/2.0/clients/c/config"
+            },
+            {
+              "page": "Query",
+              "path": "/docs/2.0/clients/c/query"
+            },
+            {
+              "page": "Data Chunks",
+              "path": "/docs/2.0/clients/c/data_chunk"
+            },
+            {
+              "page": "Vectors",
+              "path": "/docs/2.0/clients/c/vector"
+            },
+            {
+              "page": "Values",
+              "path": "/docs/2.0/clients/c/value"
+            },
+            {
+              "page": "Types",
+              "path": "/docs/2.0/clients/c/types"
+            },
+            {
+              "page": "Prepared Statements",
+              "path": "/docs/2.0/clients/c/prepared"
+            },
+            {
+              "page": "Appender",
+              "path": "/docs/2.0/clients/c/appender"
+            },
+            {
+              "page": "Table Functions",
+              "path": "/docs/2.0/clients/c/table_functions"
+            },
+            {
+              "page": "Replacement Scans",
+              "path": "/docs/2.0/clients/c/replacement_scans"
+            },
+            {
+              "page": "API Reference",
+              "path": "/docs/2.0/clients/c/api"
             },
             {
               "page": "C++",
-              "url": "cpp"
-            },
-            {
-              "page": "CLI",
-              "slug": "cli",
-              "subsubfolderitems": [
-                {
-                  "page": "Overview",
-                  "url": "overview"
-                },
-                {
-                  "page": "Arguments",
-                  "url": "arguments"
-                },
-                {
-                  "page": "Dot Commands",
-                  "url": "dot_commands"
-                },
-                {
-                  "page": "Output Formats",
-                  "url": "output_formats"
-                },
-                {
-                  "page": "Agent Mode",
-                  "url": "agent_mode"
-                },
-                {
-                  "page": "Editing",
-                  "url": "editing"
-                },
-                {
-                  "page": "Friendly CLI",
-                  "url": "friendly_cli"
-                },
-                {
-                  "page": "Safe Mode",
-                  "url": "safe_mode"
-                },
-                {
-                  "page": "Autocomplete",
-                  "url": "autocomplete"
-                },
-                {
-                  "page": "Syntax Highlighting",
-                  "url": "syntax_highlighting"
-                },
-                {
-                  "page": "Known Issues",
-                  "url": "known_issues"
-                }
-              ]
-            },
-            {
-              "page": "Go",
-              "slug": "go",
-              "subsubfolderitems": [
-                {
-                  "page": "Overview",
-                  "url": "overview"
-                },
-                {
-                  "page": "Connect",
-                  "url": "connecting"
-                },
-                {
-                  "page": "Import Data",
-                  "url": "data_import"
-                },
-                {
-                  "page": "Run Queries",
-                  "url": "querying"
-                },
-                {
-                  "page": "Handle Results",
-                  "url": "result_handling"
-                },
-                {
-                  "page": "Write User Defined Functions",
-                  "url": "functions"
-                },
-                {
-                  "page": "Profile and Monitor",
-                  "url": "profiling"
-                },
-                {
-                  "page": "Troubleshoot",
-                  "url": "troubleshoot"
-                }
-              ]
-            },
-            {
-              "page": "Java (JDBC)",
-              "slug": "java",
-              "subsubfolderitems": [
-                {
-                  "page": "Overview",
-                  "url": "overview"
-                },
-                {
-                  "page": "Connect",
-                  "url": "connecting"
-                },
-                {
-                  "page": "Import Data",
-                  "url": "data_import"
-                },
-                {
-                  "page": "Run Queries",
-                  "url": "querying"
-                },
-                {
-                  "page": "Handle Results",
-                  "url": "result_handling"
-                },
-                {
-                  "page": "Write User Defined Functions",
-                  "url": "functions"
-                },
-                {
-                  "page": "Profile and Monitor",
-                  "url": "profiling"
-                },
-                {
-                  "page": "Deploy as Native Image",
-                  "url": "deploy_native_image"
-                },
-                {
-                  "page": "Troubleshoot",
-                  "url": "troubleshoot"
-                }
-              ]
-            },
-            {
-              "page": "Node.js (Neo)",
-              "slug": "node_neo",
-              "subsubfolderitems": [
-                {
-                  "page": "Overview",
-                  "url": "overview"
-                }
-              ]
-            },
-            {
-              "page": "ODBC",
-              "slug": "odbc",
-              "subsubfolderitems": [
-                {
-                  "page": "Overview",
-                  "url": "overview"
-                },
-                {
-                  "page": "Linux Setup",
-                  "url": "linux"
-                },
-                {
-                  "page": "Windows Setup",
-                  "url": "windows"
-                },
-                {
-                  "page": "macOS Setup",
-                  "url": "macos"
-                },
-                {
-                  "page": "Configuration",
-                  "url": "configuration"
-                }
-              ]
-            },
-            {
-              "page": "Python",
-              "slug": "python",
-              "subsubfolderitems": [
-                {
-                  "page": "Overview",
-                  "url": "overview"
-                },
-                {
-                  "page": "Data Ingestion",
-                  "url": "data_ingestion"
-                },
-                {
-                  "page": "Appender",
-                  "url": "appender"
-                },
-                {
-                  "page": "Conversion between DuckDB and Python",
-                  "url": "conversion"
-                },
-                {
-                  "page": "DB API",
-                  "url": "dbapi"
-                },
-                {
-                  "page": "Relational API",
-                  "url": "relational_api"
-                },
-                {
-                  "page": "Function API",
-                  "url": "function"
-                },
-                {
-                  "page": "Types API",
-                  "url": "types"
-                },
-                {
-                  "page": "Expression API",
-                  "url": "expression"
-                },
-                {
-                  "page": "Spark API",
-                  "url": "spark_api"
-                },
-                {
-                  "page": "API Reference",
-                  "url": "reference"
-                },
-                {
-                  "page": "Known Python Issues",
-                  "url": "known_issues"
-                },
-                {
-                  "page": "Migrating to 2.0",
-                  "url": "migration"
-                }
-              ]
-            },
-            {
-              "page": "R",
-              "url": "r"
-            },
-            {
-              "page": "Rust",
-              "slug": "rust",
-              "subsubfolderitems": [
-                {
-                  "page": "Overview",
-                  "url": "overview"
-                },
-                {
-                  "page": "Connect",
-                  "url": "connecting"
-                },
-                {
-                  "page": "Import Data",
-                  "url": "data_import"
-                },
-                {
-                  "page": "Run Queries",
-                  "url": "querying"
-                },
-                {
-                  "page": "Handle Results",
-                  "url": "result_handling"
-                },
-                {
-                  "page": "Write User Defined Functions",
-                  "url": "functions"
-                },
-                {
-                  "page": "Profile and Monitor",
-                  "url": "profiling"
-                },
-                {
-                  "page": "Troubleshoot",
-                  "url": "troubleshoot"
-                }
-              ]
-            },
-            {
-              "page": "Wasm",
-              "slug": "wasm",
-              "subsubfolderitems": [
-                {
-                  "page": "Overview",
-                  "url": "overview"
-                },
-                {
-                  "page": "Instantiate",
-                  "url": "instantiation"
-                },
-                {
-                  "page": "Import Data",
-                  "url": "data_ingestion"
-                },
-                {
-                  "page": "Run Queries",
-                  "url": "query"
-                },
-                {
-                  "page": "Load Extensions",
-                  "url": "extensions"
-                },
-                {
-                  "page": "Deploy",
-                  "url": "deploying_duckdb_wasm"
-                },
-                {
-                  "page": "Troubleshoot",
-                  "url": "troubleshoot"
-                }
-              ]
-            },
-            {
-              "page": "Tertiary Clients",
-              "slug": "tertiary_clients",
-              "subsubfolderitems": [
-                {
-                  "page": "Overview",
-                  "url": "overview"
-                },
-                {
-                  "page": "Julia",
-                  "url": "julia"
-                },
-                {
-                  "page": "PHP",
-                  "url": "php"
-                },
-                {
-                  "page": "PHP (PDO)",
-                  "url": "php_pdo"
-                },
-                {
-                  "page": "Swift",
-                  "url": "swift"
-                }
-              ]
+              "path": "/docs/2.0/clients/cpp"
             }
           ]
         },
         {
-          "page": "SQL",
-          "slug": "sql",
-          "subfolderitems": [
-            {
-              "page": "Introduction",
-              "url": "introduction"
-            },
-            {
-              "page": "Statements",
-              "slug": "statements",
-              "subsubfolderitems": [
-                {
-                  "page": "Overview",
-                  "url": "overview"
-                },
-                {
-                  "page": "ANALYZE",
-                  "url": "analyze"
-                },
-                {
-                  "page": "ALTER DATABASE",
-                  "url": "alter_database"
-                },
-                {
-                  "page": "ALTER TABLE",
-                  "url": "alter_table"
-                },
-                {
-                  "page": "ALTER VIEW",
-                  "url": "alter_view"
-                },
-                {
-                  "page": "ATTACH and DETACH",
-                  "url": "attach"
-                },
-                {
-                  "page": "CALL",
-                  "url": "call"
-                },
-                {
-                  "page": "CHECKPOINT",
-                  "url": "checkpoint"
-                },
-                {
-                  "page": "COMMENT ON",
-                  "url": "comment_on"
-                },
-                {
-                  "page": "CONNECT and DISCONNECT",
-                  "url": "connect"
-                },
-                {
-                  "page": "COPY",
-                  "url": "copy"
-                },
-                {
-                  "page": "CREATE INDEX",
-                  "url": "create_index"
-                },
-                {
-                  "page": "CREATE MACRO",
-                  "url": "create_macro"
-                },
-                {
-                  "page": "CREATE SCHEMA",
-                  "url": "create_schema"
-                },
-                {
-                  "page": "CREATE SECRET",
-                  "url": "create_secret"
-                },
-                {
-                  "page": "CREATE SEQUENCE",
-                  "url": "create_sequence"
-                },
-                {
-                  "page": "CREATE TABLE",
-                  "url": "create_table"
-                },
-                {
-                  "page": "CREATE VIEW",
-                  "url": "create_view"
-                },
-                {
-                  "page": "CREATE TRIGGER",
-                  "url": "create_trigger"
-                },
-                {
-                  "page": "CREATE TYPE",
-                  "url": "create_type"
-                },
-                {
-                  "page": "DELETE",
-                  "url": "delete"
-                },
-                {
-                  "page": "DESCRIBE",
-                  "url": "describe"
-                },
-                {
-                  "page": "DROP",
-                  "url": "drop"
-                },
-                {
-                  "page": "EXPORT and IMPORT DATABASE",
-                  "url": "export"
-                },
-                {
-                  "page": "INSERT",
-                  "url": "insert"
-                },
-                {
-                  "page": "LOAD / INSTALL",
-                  "url": "load_and_install"
-                },
-                {
-                  "page": "MERGE INTO",
-                  "url": "merge_into"
-                },
-                {
-                  "page": "PIVOT",
-                  "url": "pivot"
-                },
-                {
-                  "page": "Profiling",
-                  "url": "profiling"
-                },
-                {
-                  "page": "PREPARE, EXECUTE, and DEALLOCATE",
-                  "url": "prepare"
-                },
-                {
-                  "page": "SELECT",
-                  "url": "select"
-                },
-                {
-                  "page": "SET / RESET",
-                  "url": "set"
-                },
-                {
-                  "page": "SET VARIABLE",
-                  "url": "set_variable"
-                },
-                {
-                  "page": "SHOW and SHOW DATABASES",
-                  "url": "show"
-                },
-                {
-                  "page": "SUMMARIZE",
-                  "url": "summarize"
-                },
-                {
-                  "page": "Transaction Management",
-                  "url": "transactions"
-                },
-                {
-                  "page": "UNPIVOT",
-                  "url": "unpivot"
-                },
-                {
-                  "page": "UPDATE",
-                  "url": "update"
-                },
-                {
-                  "page": "UPDATE EXTENSIONS",
-                  "url": "update_extensions"
-                },
-                {
-                  "page": "USE",
-                  "url": "use"
-                },
-                {
-                  "page": "VACUUM",
-                  "url": "vacuum"
-                }
-              ]
-            },
-            {
-              "page": "Query Syntax",
-              "slug": "query_syntax",
-              "subsubfolderitems": [
-                {
-                  "page": "SELECT",
-                  "url": "select"
-                },
-                {
-                  "page": "FROM and JOIN",
-                  "url": "from"
-                },
-                {
-                  "page": "WHERE",
-                  "url": "where"
-                },
-                {
-                  "page": "GROUP BY",
-                  "url": "groupby"
-                },
-                {
-                  "page": "GROUPING SETS",
-                  "url": "grouping_sets"
-                },
-                {
-                  "page": "HAVING",
-                  "url": "having"
-                },
-                {
-                  "page": "ORDER BY",
-                  "url": "orderby"
-                },
-                {
-                  "page": "LIMIT and OFFSET",
-                  "url": "limit"
-                },
-                {
-                  "page": "SAMPLE",
-                  "url": "sample"
-                },
-                {
-                  "page": "Samples",
-                  "url": "samples"
-                },
-                {
-                  "page": "Unnesting",
-                  "url": "unnest"
-                },
-                {
-                  "page": "WITH",
-                  "url": "with"
-                },
-                {
-                  "page": "WINDOW",
-                  "url": "window"
-                },
-                {
-                  "page": "QUALIFY",
-                  "url": "qualify"
-                },
-                {
-                  "page": "VALUES",
-                  "url": "values"
-                },
-                {
-                  "page": "FILTER",
-                  "url": "filter"
-                },
-                {
-                  "page": "Set Operations",
-                  "url": "setops"
-                },
-                {
-                  "page": "Prepared Statements",
-                  "url": "prepared_statements"
-                }
-              ]
-            },
-            {
-              "page": "Data Types",
-              "slug": "data_types",
-              "subsubfolderitems": [
-                {
-                  "page": "Overview",
-                  "url": "overview"
-                },
-                {
-                  "page": "Array",
-                  "url": "array"
-                },
-                {
-                  "page": "Bitstring",
-                  "url": "bitstring"
-                },
-                {
-                  "page": "Blob",
-                  "url": "blob"
-                },
-                {
-                  "page": "Boolean",
-                  "url": "boolean"
-                },
-                {
-                  "page": "Date",
-                  "url": "date"
-                },
-                {
-                  "page": "Enum",
-                  "url": "enum"
-                },
-                {
-                  "page": "Geometry",
-                  "url": "geometry"
-                },
-                {
-                  "page": "Interval",
-                  "url": "interval"
-                },
-                {
-                  "page": "List",
-                  "url": "list"
-                },
-                {
-                  "page": "Literal Types",
-                  "url": "literal_types"
-                },
-                {
-                  "page": "Map",
-                  "url": "map"
-                },
-                {
-                  "page": "NULL Values",
-                  "url": "nulls"
-                },
-                {
-                  "page": "Numeric",
-                  "url": "numeric"
-                },
-                {
-                  "page": "Struct",
-                  "url": "struct"
-                },
-                {
-                  "page": "Text",
-                  "url": "text"
-                },
-                {
-                  "page": "Time",
-                  "url": "time"
-                },
-                {
-                  "page": "Timestamp",
-                  "url": "timestamp"
-                },
-                {
-                  "page": "Time Zones",
-                  "url": "timezones"
-                },
-                {
-                  "page": "Union",
-                  "url": "union"
-                },
-                {
-                  "page": "Typecasting",
-                  "url": "typecasting"
-                },
-                {
-                  "page": "Variant",
-                  "url": "variant"
-                }
-              ]
-            },
-            {
-              "page": "Expressions",
-              "slug": "expressions",
-              "subsubfolderitems": [
-                {
-                  "page": "Overview",
-                  "url": "overview"
-                },
-                {
-                  "page": "CASE Expression",
-                  "url": "case"
-                },
-                {
-                  "page": "Casting",
-                  "url": "cast"
-                },
-                {
-                  "page": "Collations",
-                  "url": "collations"
-                },
-                {
-                  "page": "Comparisons",
-                  "url": "comparison_operators"
-                },
-                {
-                  "page": "IN Operator",
-                  "url": "in"
-                },
-                {
-                  "page": "Logical Operators",
-                  "url": "logical_operators"
-                },
-                {
-                  "page": "Star Expression",
-                  "url": "star"
-                },
-                {
-                  "page": "Subqueries",
-                  "url": "subqueries"
-                },
-                {
-                  "page": "TRY",
-                  "url": "try"
-                }
-              ]
-            },
-            {
-              "page": "Functions",
-              "slug": "functions",
-              "subsubfolderitems": [
-                {
-                  "page": "Overview",
-                  "url": "overview"
-                },
-                {
-                  "page": "Aggregate Functions",
-                  "url": "aggregates"
-                },
-                {
-                  "page": "Array Functions",
-                  "url": "array"
-                },
-                {
-                  "page": "Bitstring Functions",
-                  "url": "bitstring"
-                },
-                {
-                  "page": "Blob Functions",
-                  "url": "blob"
-                },
-                {
-                  "page": "Date Format Functions",
-                  "url": "dateformat"
-                },
-                {
-                  "page": "Date Functions",
-                  "url": "date"
-                },
-                {
-                  "page": "Date Part Functions",
-                  "url": "datepart"
-                },
-                {
-                  "page": "Enum Functions",
-                  "url": "enum"
-                },
-                {
-                  "page": "Geometry Functions",
-                  "url": "geometry"
-                },
-                {
-                  "page": "Interval Functions",
-                  "url": "interval"
-                },
-                {
-                  "page": "Lambda Functions",
-                  "url": "lambda"
-                },
-                {
-                  "page": "List Functions",
-                  "url": "list"
-                },
-                {
-                  "page": "Map Functions",
-                  "url": "map"
-                },
-                {
-                  "page": "Nested Functions",
-                  "url": "nested"
-                },
-                {
-                  "page": "Numeric Functions",
-                  "url": "numeric"
-                },
-                {
-                  "page": "Pattern Matching",
-                  "url": "pattern_matching"
-                },
-                {
-                  "page": "Regular Expressions",
-                  "url": "regular_expressions"
-                },
-                {
-                  "page": "Struct Functions",
-                  "url": "struct"
-                },
-                {
-                  "page": "Text Functions",
-                  "url": "text"
-                },
-                {
-                  "page": "Time Functions",
-                  "url": "time"
-                },
-                {
-                  "page": "Timestamp Functions",
-                  "url": "timestamp"
-                },
-                {
-                  "page": "Timestamp with Time Zone Functions",
-                  "url": "timestamptz"
-                },
-                {
-                  "page": "Union Functions",
-                  "url": "union"
-                },
-                {
-                  "page": "Utility Functions",
-                  "url": "utility"
-                },
-                {
-                  "page": "Variant Functions",
-                  "url": "variant"
-                },
-                {
-                  "page": "Window Functions",
-                  "url": "window_functions"
-                }
-              ]
-            },
-            {
-              "page": "Constraints",
-              "url": "constraints"
-            },
-            {
-              "page": "Indexes",
-              "url": "indexes"
-            },
-            {
-              "page": "Meta Queries",
-              "slug": "meta",
-              "subsubfolderitems": [
-                {
-                  "page": "Information Schema",
-                  "url": "information_schema"
-                },
-                {
-                  "page": "Metadata Functions",
-                  "url": "duckdb_table_functions"
-                }
-              ]
-            },
-            {
-              "page": "DuckDB's SQL Dialect",
-              "slug": "dialect",
-              "subsubfolderitems": [
-                {
-                  "page": "Overview",
-                  "url": "overview"
-                },
-                {
-                  "page": "Indexing",
-                  "url": "indexing"
-                },
-                {
-                  "page": "Friendly SQL",
-                  "url": "friendly_sql"
-                },
-                {
-                  "page": "Keywords and Identifiers",
-                  "url": "keywords_and_identifiers"
-                },
-                {
-                  "page": "Order Preservation",
-                  "url": "order_preservation"
-                },
-                {
-                  "page": "PostgreSQL Compatibility",
-                  "url": "postgresql_compatibility"
-                },
-                {
-                  "page": "SQL Quirks",
-                  "url": "sql_quirks"
-                }
-              ]
-            },
-            {
-              "page": "PEG Parser",
-              "url": "peg_parser"
-            }
-          ]
-        },
-        {
-          "page": "Configuration",
-          "slug": "configuration",
+          "page": "Wasm",
           "subfolderitems": [
             {
               "page": "Overview",
-              "url": "overview"
+              "path": "/docs/2.0/clients/wasm/overview"
             },
             {
-              "page": "Pragmas",
-              "url": "pragmas"
+              "page": "Instantiate",
+              "path": "/docs/2.0/clients/wasm/instantiation"
             },
             {
-              "page": "Secrets Manager",
-              "url": "secrets_manager"
+              "page": "Import Data",
+              "path": "/docs/2.0/clients/wasm/data_ingestion"
+            },
+            {
+              "page": "Run Queries",
+              "path": "/docs/2.0/clients/wasm/query"
+            },
+            {
+              "page": "Load Extensions",
+              "path": "/docs/2.0/clients/wasm/extensions"
+            },
+            {
+              "page": "Deploy",
+              "path": "/docs/2.0/clients/wasm/deploying_duckdb_wasm"
+            },
+            {
+              "page": "Troubleshoot",
+              "path": "/docs/2.0/clients/wasm/troubleshoot"
             }
           ]
         },
         {
-          "page": "Extensions",
-          "slug": "extensions",
+          "page": "ODBC/ADBC",
           "subfolderitems": [
             {
               "page": "Overview",
-              "url": "overview"
+              "path": "/docs/2.0/clients/odbc/overview"
+            },
+            {
+              "page": "Linux Setup",
+              "path": "/docs/2.0/clients/odbc/linux"
+            },
+            {
+              "page": "Windows Setup",
+              "path": "/docs/2.0/clients/odbc/windows"
+            },
+            {
+              "page": "macOS Setup",
+              "path": "/docs/2.0/clients/odbc/macos"
+            },
+            {
+              "page": "Configuration",
+              "path": "/docs/2.0/clients/odbc/configuration"
+            },
+            {
+              "page": "ADBC",
+              "path": "/docs/2.0/clients/adbc"
+            }
+          ]
+        },
+        {
+          "page": "Other Clients",
+          "subfolderitems": [
+            {
+              "page": "Overview",
+              "path": "/docs/2.0/clients/tertiary_clients/overview"
+            },
+            {
+              "page": "Julia",
+              "path": "/docs/2.0/clients/tertiary_clients/julia"
+            },
+            {
+              "page": "PHP",
+              "path": "/docs/2.0/clients/tertiary_clients/php"
+            },
+            {
+              "page": "PHP (PDO)",
+              "path": "/docs/2.0/clients/tertiary_clients/php_pdo"
+            },
+            {
+              "page": "Swift",
+              "path": "/docs/2.0/clients/tertiary_clients/swift"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "page": "Extensions",
+      "slug": "extensions",
+      "mainfolderitems": [
+        {
+          "page": "Using Extensions",
+          "subfolderitems": [
+            {
+              "page": "Overview",
+              "path": "/docs/2.0/extensions/overview"
             },
             {
               "page": "Installing Extensions",
-              "url": "installing_extensions"
+              "path": "/docs/2.0/extensions/installing_extensions"
             },
             {
               "page": "Advanced Installation Methods",
-              "url": "advanced_installation_methods"
-            },
-            {
-              "page": "Window Function Extensions",
-              "url": "window_function_extensions"
-            },
-            {
-              "page": "Distributing Extensions",
-              "url": "extension_distribution"
-            },
-            {
-              "page": "Extension Repositories",
-              "url": "extension_repositories"
-            },
-            {
-              "page": "Community Extensions",
-              "url": "community_extensions"
+              "path": "/docs/2.0/extensions/advanced_installation_methods"
             },
             {
               "page": "Versioning of Extensions",
-              "url": "versioning_of_extensions"
+              "path": "/docs/2.0/extensions/versioning_of_extensions"
             },
             {
               "page": "Troubleshooting of Extensions",
-              "url": "troubleshooting"
+              "path": "/docs/2.0/extensions/troubleshooting"
             }
           ]
         },
         {
           "page": "Core Extensions",
-          "slug": "core_extensions",
           "subfolderitems": [
             {
               "page": "Overview",
-              "url": "overview"
+              "path": "/docs/2.0/core_extensions/overview"
             },
             {
               "page": "AutoComplete",
-              "url": "autocomplete"
+              "path": "/docs/2.0/core_extensions/autocomplete"
             },
             {
               "page": "Avro",
-              "url": "avro"
+              "path": "/docs/2.0/core_extensions/avro"
             },
             {
               "page": "AWS",
-              "url": "aws"
+              "path": "/docs/2.0/core_extensions/aws"
             },
             {
               "page": "Azure",
-              "url": "azure"
+              "path": "/docs/2.0/core_extensions/azure"
             },
             {
               "page": "Delta",
-              "url": "delta"
+              "path": "/docs/2.0/core_extensions/delta"
             },
             {
               "page": "DuckLake",
-              "url": "ducklake"
+              "path": "/docs/2.0/core_extensions/ducklake"
             },
             {
               "page": "Encodings",
-              "url": "encodings"
+              "path": "/docs/2.0/core_extensions/encodings"
             },
             {
               "page": "Excel",
-              "url": "excel"
+              "path": "/docs/2.0/core_extensions/excel"
             },
             {
               "page": "Full Text Search",
-              "url": "full_text_search"
+              "path": "/docs/2.0/core_extensions/full_text_search"
             },
             {
               "page": "httpfs (HTTP and S3)",
-              "slug": "httpfs",
-              "subsubfolderitems": [
-                {
-                  "page": "Overview",
-                  "url": "overview"
-                },
-                {
-                  "page": "HTTP(S) Support",
-                  "url": "https"
-                },
-                {
-                  "page": "Hugging Face",
-                  "url": "hugging_face"
-                },
-                {
-                  "page": "S3 API Support",
-                  "url": "s3api"
-                },
-                {
-                  "page": "S3 and AWS Authentication",
-                  "url": "authentication"
-                },
-                {
-                  "page": "Legacy Authentication Scheme for S3 API",
-                  "url": "s3api_legacy_authentication"
-                }
-              ]
+              "path": "/docs/2.0/core_extensions/httpfs/overview"
             },
             {
               "page": "Iceberg",
-              "slug": "iceberg",
-              "subsubfolderitems": [
-                {
-                  "page": "Overview",
-                  "url": "overview"
-                },
-                {
-                  "page": "Writing to Iceberg",
-                  "url": "writing_to_iceberg"
-                },
-                {
-                  "page": "Iceberg Functions",
-                  "url": "iceberg_functions"
-                },
-                {
-                  "page": "Iceberg Options",
-                  "url": "iceberg_options"
-                },
-                {
-                  "page": "Iceberg REST Catalogs",
-                  "url": "catalogs"
-                },
-                {
-                  "page": "Troubleshooting",
-                  "url": "troubleshooting"
-                }
-              ]
+              "path": "/docs/2.0/core_extensions/iceberg/overview"
             },
             {
               "page": "ICU",
-              "url": "icu"
+              "path": "/docs/2.0/core_extensions/icu"
             },
             {
               "page": "inet",
-              "url": "inet"
+              "path": "/docs/2.0/core_extensions/inet"
             },
             {
               "page": "Lance",
-              "url": "lance"
+              "path": "/docs/2.0/core_extensions/lance"
             },
             {
               "page": "Legacy Parser",
-              "url": "legacy_parser"
+              "path": "/docs/2.0/core_extensions/legacy_parser"
             },
             {
               "page": "MotherDuck",
-              "url": "motherduck"
+              "path": "/docs/2.0/core_extensions/motherduck"
             },
             {
               "page": "MySQL",
-              "url": "mysql"
+              "path": "/docs/2.0/core_extensions/mysql"
             },
             {
               "page": "ODBC",
-              "slug": "odbc",
-              "subsubfolderitems": [
-                {
-                  "page": "Overview",
-                  "url": "overview"
-                },
-                {
-                  "page": "ODBC Functions",
-                  "url": "functions"
-                }
-              ]
+              "path": "/docs/2.0/core_extensions/odbc/overview"
             },
             {
               "page": "Quack",
-              "url": "quack"
+              "path": "/docs/2.0/core_extensions/quack"
             },
             {
               "page": "PostgreSQL",
-              "slug": "postgres",
-              "subsubfolderitems": [
-                {
-                  "page": "Overview",
-                  "url": "overview"
-                },
-                {
-                  "page": "Secrets",
-                  "url": "secrets"
-                },
-                {
-                  "page": "Connection Pool",
-                  "url": "connection_pool"
-                },
-                {
-                  "page": "Functions",
-                  "url": "functions"
-                }
-              ]
+              "path": "/docs/2.0/core_extensions/postgres/overview"
             },
             {
               "page": "Sirius",
-              "url": "sirius"
+              "path": "/docs/2.0/core_extensions/sirius"
             },
             {
               "page": "Spatial",
-              "slug": "spatial",
-              "subsubfolderitems": [
-                {
-                  "page": "Overview",
-                  "url": "overview"
-                },
-                {
-                  "page": "Function Reference",
-                  "url": "functions"
-                },
-                {
-                  "page": "R-Tree Indexes",
-                  "url": "r-tree_indexes"
-                },
-                {
-                  "page": "GDAL Integration",
-                  "url": "gdal"
-                }
-              ]
+              "path": "/docs/2.0/core_extensions/spatial/overview"
             },
             {
               "page": "SQLite",
-              "url": "sqlite"
+              "path": "/docs/2.0/core_extensions/sqlite"
             },
             {
               "page": "SQLSmith",
-              "url": "sqlsmith"
+              "path": "/docs/2.0/core_extensions/sqlsmith"
             },
             {
               "page": "TPC-DS",
-              "url": "tpcds"
+              "path": "/docs/2.0/core_extensions/tpcds"
             },
             {
               "page": "TPC-H",
-              "url": "tpch"
+              "path": "/docs/2.0/core_extensions/tpch"
             },
             {
               "page": "UI",
-              "url": "ui"
+              "path": "/docs/2.0/core_extensions/ui"
             },
             {
               "page": "Unity Catalog",
-              "url": "unity_catalog"
+              "path": "/docs/2.0/core_extensions/unity_catalog"
             },
             {
               "page": "Vortex",
-              "url": "vortex"
+              "path": "/docs/2.0/core_extensions/vortex"
             },
             {
               "page": "VSS",
-              "url": "vss"
+              "path": "/docs/2.0/core_extensions/vss"
             }
           ]
         },
         {
-          "page": "Quack Remote Protocol",
-          "slug": "quack",
+          "page": "Community Extensions",
+          "path": "/docs/2.0/extensions/community_extensions"
+        },
+        {
+          "page": "Building Extensions",
+          "subfolderitems": [
+            {
+              "page": "Distributing Extensions",
+              "path": "/docs/2.0/extensions/extension_distribution"
+            },
+            {
+              "page": "Extension Repositories",
+              "path": "/docs/2.0/extensions/extension_repositories"
+            },
+            {
+              "page": "Building Extensions",
+              "path": "/docs/2.0/dev/building/building_extensions"
+            },
+            {
+              "page": "Statically Linking Extensions",
+              "path": "/docs/2.0/dev/building/linking_extensions"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "page": "Server & Remote",
+      "slug": "quack",
+      "mainfolderitems": [
+        {
+          "page": "Overview",
+          "path": "/docs/2.0/quack/overview"
+        },
+        {
+          "page": "Setup",
           "subfolderitems": [
             {
               "page": "Overview",
-              "url": "overview"
+              "path": "/docs/2.0/quack/setup/overview"
             },
             {
-              "page": "Reference",
-              "url": "reference"
+              "page": "Reverse Proxy",
+              "path": "/docs/2.0/quack/setup/reverse_proxy"
             },
             {
-              "page": "Security",
-              "url": "security"
+              "page": "Deployment",
+              "path": "/docs/2.0/quack/setup/deployment"
             },
             {
-              "page": "Setup",
-              "slug": "setup",
-              "subsubfolderitems": [
-                {
-                  "page": "Overview",
-                  "url": "overview"
-                },
-                {
-                  "page": "Reverse Proxy",
-                  "url": "reverse_proxy"
-                },
-                {
-                  "page": "Deployment",
-                  "url": "deployment"
-                },
-                {
-                  "page": "Using from Wasm",
-                  "url": "quack_wasm"
-                }
-              ]
-            },
-            {
-              "page": "Troubleshooting",
-              "url": "troubleshooting"
+              "page": "Using from Wasm",
+              "path": "/docs/2.0/quack/setup/quack_wasm"
             }
           ]
         },
         {
-          "page": "Guides",
-          "slug": "guides",
+          "page": "CONNECT",
+          "path": "/docs/2.0/sql/statements/connect"
+        },
+        {
+          "page": "Security",
+          "path": "/docs/2.0/quack/security"
+        },
+        {
+          "page": "Reference",
+          "path": "/docs/2.0/quack/reference"
+        },
+        {
+          "page": "Troubleshooting",
+          "path": "/docs/2.0/quack/troubleshooting"
+        }
+      ]
+    },
+    {
+      "page": "Performance & Operations",
+      "slug": "operations_manual",
+      "mainfolderitems": [
+        {
+          "page": "Overview",
+          "path": "/docs/2.0/operations_manual/overview"
+        },
+        {
+          "page": "Performance",
           "subfolderitems": [
             {
               "page": "Overview",
-              "url": "overview"
+              "path": "/docs/2.0/guides/performance/overview"
             },
             {
-              "page": "Data Viewers",
-              "slug": "data_viewers",
-              "subsubfolderitems": [
-                {
-                  "page": "Tableau",
-                  "url": "tableau"
-                },
-                {
-                  "page": "CLI Charting with YouPlot",
-                  "url": "youplot"
-                }
-              ]
+              "page": "Environment",
+              "path": "/docs/2.0/guides/performance/environment"
             },
             {
-              "page": "Database Integration",
-              "slug": "database_integration",
-              "subsubfolderitems": [
-                {
-                  "page": "Overview",
-                  "url": "overview"
-                },
-                {
-                  "page": "MySQL Import",
-                  "url": "mysql"
-                },
-                {
-                  "page": "PostgreSQL Import",
-                  "url": "postgres"
-                },
-                {
-                  "page": "SQLite Import",
-                  "url": "sqlite"
-                },
-                {
-                  "page": "Amazon RDS with IAM Authentication",
-                  "url": "rds_iam"
-                }
-              ]
+              "page": "Import",
+              "path": "/docs/2.0/guides/performance/import"
+            },
+            {
+              "page": "Schema",
+              "path": "/docs/2.0/guides/performance/schema"
+            },
+            {
+              "page": "Indexing",
+              "path": "/docs/2.0/guides/performance/indexing"
+            },
+            {
+              "page": "Join Operations",
+              "path": "/docs/2.0/guides/performance/join_operations"
             },
             {
               "page": "File Formats",
-              "slug": "file_formats",
+              "path": "/docs/2.0/guides/performance/file_formats"
+            },
+            {
+              "page": "How to Tune Workloads",
+              "path": "/docs/2.0/guides/performance/how_to_tune_workloads"
+            },
+            {
+              "page": "My Workload Is Slow",
+              "path": "/docs/2.0/guides/performance/my_workload_is_slow"
+            },
+            {
+              "page": "Out-of-Memory Issues",
+              "path": "/docs/2.0/guides/performance/oom"
+            },
+            {
+              "page": "Benchmarks",
+              "path": "/docs/2.0/guides/performance/benchmarks"
+            },
+            {
+              "page": "Working with Huge Databases",
+              "path": "/docs/2.0/guides/performance/working_with_huge_databases"
+            }
+          ]
+        },
+        {
+          "page": "Configuration",
+          "subfolderitems": [
+            {
+              "page": "Overview",
+              "path": "/docs/2.0/configuration/overview"
+            },
+            {
+              "page": "Pragmas",
+              "path": "/docs/2.0/configuration/pragmas"
+            },
+            {
+              "page": "Concurrency",
+              "path": "/docs/2.0/connect/concurrency"
+            },
+            {
+              "page": "Non-Deterministic Behavior",
+              "path": "/docs/2.0/operations_manual/non-deterministic_behavior"
+            }
+          ]
+        },
+        {
+          "page": "Security",
+          "subfolderitems": [
+            {
+              "page": "Overview",
+              "path": "/docs/2.0/operations_manual/securing_duckdb/overview"
+            },
+            {
+              "page": "Embedding DuckDB",
+              "path": "/docs/2.0/operations_manual/securing_duckdb/embedding_duckdb"
+            },
+            {
+              "page": "Securing Extensions",
+              "path": "/docs/2.0/operations_manual/securing_duckdb/securing_extensions"
+            }
+          ]
+        },
+        {
+          "page": "Deployment",
+          "subfolderitems": [
+            {
+              "page": "Installing DuckDB",
               "subsubfolderitems": [
                 {
-                  "page": "Overview",
-                  "url": "overview"
+                  "page": "Install Script",
+                  "path": "/docs/2.0/operations_manual/installing_duckdb/install_script"
                 },
                 {
-                  "page": "CSV Import",
-                  "url": "csv_import"
-                },
-                {
-                  "page": "CSV Export",
-                  "url": "csv_export"
-                },
-                {
-                  "page": "Directly Reading Files",
-                  "url": "read_file"
-                },
-                {
-                  "page": "Directly Reading DuckDB Databases",
-                  "url": "read_duckdb"
-                },
-                {
-                  "page": "Excel Import",
-                  "url": "excel_import"
-                },
-                {
-                  "page": "Excel Export",
-                  "url": "excel_export"
-                },
-                {
-                  "page": "JSON Import",
-                  "url": "json_import"
-                },
-                {
-                  "page": "JSON Export",
-                  "url": "json_export"
-                },
-                {
-                  "page": "Parquet Import",
-                  "url": "parquet_import"
-                },
-                {
-                  "page": "Parquet Export",
-                  "url": "parquet_export"
-                },
-                {
-                  "page": "Querying Parquet Files",
-                  "url": "query_parquet"
-                },
-                {
-                  "page": "File Access with the file: Protocol",
-                  "url": "file_access"
+                  "page": "Requirements",
+                  "path": "/docs/2.0/operations_manual/installing_duckdb/requirements"
                 }
               ]
             },
             {
-              "page": "Meta Queries",
-              "slug": "meta",
-              "subsubfolderitems": [
-                {
-                  "page": "Describe Table",
-                  "url": "describe"
-                },
-                {
-                  "page": "EXPLAIN: Inspect Query Plans",
-                  "url": "explain"
-                },
-                {
-                  "page": "EXPLAIN ANALYZE: Profile Queries",
-                  "url": "explain_analyze"
-                },
-                {
-                  "page": "List Tables",
-                  "url": "list_tables"
-                },
-                {
-                  "page": "Summarize",
-                  "url": "summarize"
-                },
-                {
-                  "page": "DuckDB Environment",
-                  "url": "duckdb_environment"
-                }
-              ]
+              "page": "Docker",
+              "path": "/docs/2.0/operations_manual/duckdb_docker"
             },
             {
-              "page": "Network and Cloud Storage",
-              "slug": "network_cloud_storage",
-              "subsubfolderitems": [
-                {
-                  "page": "Overview",
-                  "url": "overview"
-                },
-                {
-                  "page": "HTTP Parquet Import",
-                  "url": "http_import"
-                },
-                {
-                  "page": "HTTP CSV Import",
-                  "url": "http_csv_import"
-                },
-                {
-                  "page": "S3 Parquet Import",
-                  "url": "s3_import"
-                },
-                {
-                  "page": "S3 Parquet Export",
-                  "url": "s3_export"
-                },
-                {
-                  "page": "S3 Iceberg Import",
-                  "url": "s3_iceberg_import"
-                },
-                {
-                  "page": "S3 Express One",
-                  "url": "s3_express_one"
-                },
-                {
-                  "page": "GCS Import",
-                  "url": "gcs_import"
-                },
-                {
-                  "page": "Cloudflare R2 Import",
-                  "url": "cloudflare_r2_import"
-                },
-                {
-                  "page": "DuckDB over HTTPS / S3",
-                  "url": "duckdb_over_https_or_s3"
-                },
-                {
-                  "page": "Share a Views-Only Database",
-                  "url": "duckdb_views_only"
-                },
-                {
-                  "page": "Fastly Object Storage Import",
-                  "url": "fastly_object_storage_import"
-                },
-                {
-                  "page": "SeaweedFS Import",
-                  "url": "seaweedfs_import"
-                },
-                {
-                  "page": "Tigris Import",
-                  "url": "tigris_import"
-                }
-              ]
+              "page": "User Agents",
+              "path": "/docs/2.0/operations_manual/user_agents"
             },
             {
-              "page": "ODBC",
-              "slug": "odbc",
-              "subsubfolderitems": [
-                {
-                  "page": "ODBC Guide",
-                  "url": "general"
-                }
-              ]
+              "page": "Limits",
+              "path": "/docs/2.0/operations_manual/limits"
             },
             {
-              "page": "Performance",
-              "slug": "performance",
-              "subsubfolderitems": [
-                {
-                  "page": "Overview",
-                  "url": "overview"
-                },
-                {
-                  "page": "Environment",
-                  "url": "environment"
-                },
-                {
-                  "page": "Import",
-                  "url": "import"
-                },
-                {
-                  "page": "Schema",
-                  "url": "schema"
-                },
-                {
-                  "page": "Indexing",
-                  "url": "indexing"
-                },
-                {
-                  "page": "Join Operations",
-                  "url": "join_operations"
-                },
-                {
-                  "page": "File Formats",
-                  "url": "file_formats"
-                },
-                {
-                  "page": "How to Tune Workloads",
-                  "url": "how_to_tune_workloads"
-                },
-                {
-                  "page": "My Workload Is Slow",
-                  "url": "my_workload_is_slow"
-                },
-                {
-                  "page": "Out-of-Memory Issues",
-                  "url": "oom"
-                },
-                {
-                  "page": "Benchmarks",
-                  "url": "benchmarks"
-                },
-                {
-                  "page": "Working with Huge Databases",
-                  "url": "working_with_huge_databases"
-                }
-              ]
+              "page": "Migrating to DuckDB v2.0",
+              "path": "/docs/2.0/operations_manual/migration"
             },
             {
-              "page": "Python",
-              "slug": "python",
-              "subsubfolderitems": [
-                {
-                  "page": "Installation",
-                  "url": "install"
-                },
-                {
-                  "page": "Executing SQL",
-                  "url": "execute_sql"
-                },
-                {
-                  "page": "Jupyter Notebooks",
-                  "url": "jupyter"
-                },
-                {
-                  "page": "marimo Notebooks",
-                  "url": "marimo"
-                },
-                {
-                  "page": "SQL on Pandas",
-                  "url": "sql_on_pandas"
-                },
-                {
-                  "page": "Import from Pandas",
-                  "url": "import_pandas"
-                },
-                {
-                  "page": "Export to Pandas",
-                  "url": "export_pandas"
-                },
-                {
-                  "page": "Import from Numpy",
-                  "url": "import_numpy"
-                },
-                {
-                  "page": "Export to Numpy",
-                  "url": "export_numpy"
-                },
-                {
-                  "page": "SQL on Arrow",
-                  "url": "sql_on_arrow"
-                },
-                {
-                  "page": "Import from Arrow",
-                  "url": "import_arrow"
-                },
-                {
-                  "page": "Export to Arrow",
-                  "url": "export_arrow"
-                },
-                {
-                  "page": "Relational API on Pandas",
-                  "url": "relational_api_pandas"
-                },
-                {
-                  "page": "Multiple Python Threads",
-                  "url": "multiple_threads"
-                },
-                {
-                  "page": "Integration with Ibis",
-                  "url": "ibis"
-                },
-                {
-                  "page": "Integration with Polars",
-                  "url": "polars"
-                },
-                {
-                  "page": "Integration with PyTorch",
-                  "url": "pytorch"
-                },
-                {
-                  "page": "Using fsspec Filesystems",
-                  "url": "filesystems"
-                }
-              ]
+              "page": "Backup Extension Repositories",
+              "path": "/docs/2.0/operations_manual/backup_extension_repositories"
+            }
+          ]
+        },
+        {
+          "page": "Storage Footprint",
+          "subfolderitems": [
+            {
+              "page": "Files Created by DuckDB",
+              "path": "/docs/2.0/operations_manual/footprint_of_duckdb/files_created_by_duckdb"
             },
             {
-              "page": "SQL Editors",
-              "slug": "sql_editors",
-              "subsubfolderitems": [
-                {
-                  "page": "Beekeeper Studio SQL Editor",
-                  "url": "beekeeper_studio"
-                },
-                {
-                  "page": "DBeaver SQL IDE",
-                  "url": "dbeaver"
-                },
-                {
-                  "page": "DBine SQL Editor",
-                  "url": "dbine"
-                },
-                {
-                  "page": "LibreDB Studio SQL Editor",
-                  "url": "libredb_studio"
-                },
-                {
-                  "page": "VisuaLeaf SQL Editor",
-                  "url": "visualeaf"
-                }
-              ]
+              "page": "Gitignore for DuckDB",
+              "path": "/docs/2.0/operations_manual/footprint_of_duckdb/gitignore_for_duckdb"
             },
             {
-              "page": "SQL Features",
-              "slug": "sql_features",
-              "subsubfolderitems": [
-                {
-                  "page": "AsOf Join",
-                  "url": "asof_join"
-                },
-                {
-                  "page": "Full-Text Search",
-                  "url": "full_text_search"
-                },
-                {
-                  "page": "Graph Queries",
-                  "url": "graph_queries"
-                },
-                {
-                  "page": "query and query_table Functions",
-                  "url": "query_and_query_table_functions"
-                },
-                {
-                  "page": "Merge Statement for SCD Type 2",
-                  "url": "merge"
-                },
-                {
-                  "page": "Timestamp Issues",
-                  "url": "timestamps"
-                }
-              ]
+              "page": "Reclaiming Space",
+              "path": "/docs/2.0/operations_manual/footprint_of_duckdb/reclaiming_space"
+            }
+          ]
+        },
+        {
+          "page": "Logging",
+          "path": "/docs/2.0/operations_manual/logging/overview"
+        }
+      ]
+    },
+    {
+      "page": "Development & Internals",
+      "slug": "dev",
+      "mainfolderitems": [
+        {
+          "page": "Overview",
+          "path": "/docs/2.0/dev/overview"
+        },
+        {
+          "page": "Building DuckDB",
+          "subfolderitems": [
+            {
+              "page": "Overview",
+              "path": "/docs/2.0/dev/building/overview"
             },
             {
-              "page": "Snippets",
-              "slug": "snippets",
+              "page": "Build Configuration",
+              "path": "/docs/2.0/dev/building/build_configuration"
+            },
+            {
+              "page": "Building Extensions",
+              "path": "/docs/2.0/dev/building/building_extensions"
+            },
+            {
+              "page": "Statically Linking Extensions",
+              "path": "/docs/2.0/dev/building/linking_extensions"
+            },
+            {
+              "page": "Platforms",
               "subsubfolderitems": [
                 {
-                  "page": "Creating Synthetic Data",
-                  "url": "create_synthetic_data"
+                  "page": "Android",
+                  "path": "/docs/2.0/dev/building/android"
                 },
                 {
-                  "page": "Dutch Railway Datasets",
-                  "url": "dutch_railway_datasets"
+                  "page": "OpenHarmony",
+                  "path": "/docs/2.0/dev/building/openharmony"
                 },
                 {
-                  "page": "Sharing Macros",
-                  "url": "sharing_macros"
+                  "page": "Linux",
+                  "path": "/docs/2.0/dev/building/linux"
                 },
                 {
-                  "page": "Analyzing a Git Repository",
-                  "url": "analyze_git_repository"
+                  "page": "macOS",
+                  "path": "/docs/2.0/dev/building/macos"
                 },
                 {
-                  "page": "Importing Duckbox Tables",
-                  "url": "importing_duckbox_tables"
+                  "page": "Raspberry Pi",
+                  "path": "/docs/2.0/dev/building/raspberry_pi"
                 },
                 {
-                  "page": "Copying an In-Memory Database to a File",
-                  "url": "copy_in-memory_database_to_file"
+                  "page": "Windows",
+                  "path": "/docs/2.0/dev/building/windows"
                 },
                 {
-                  "page": "Calculating a Database Checksum",
-                  "url": "database_checksum"
+                  "page": "Python",
+                  "path": "/docs/2.0/dev/building/python"
+                },
+                {
+                  "page": "R",
+                  "path": "/docs/2.0/dev/building/r"
+                },
+                {
+                  "page": "Unofficial and Unsupported Platforms",
+                  "path": "/docs/2.0/dev/building/unofficial_and_unsupported_platforms"
                 }
               ]
             },
             {
               "page": "Troubleshooting",
-              "slug": "troubleshooting",
-              "subsubfolderitems": [
-                {
-                  "page": "Command Line",
-                  "url": "command_line"
-                },
-                {
-                  "page": "Crashes",
-                  "url": "crashes"
-                },
-                {
-                  "page": "Out of Memory Errors",
-                  "url": "oom_errors"
-                }
-              ]
-            },
-            {
-              "page": "Glossary of Terms",
-              "url": "glossary"
-            },
-            {
-              "page": "Browsing Offline",
-              "url": "offline-copy"
+              "path": "/docs/2.0/dev/building/troubleshooting"
             }
           ]
         },
         {
-          "page": "Operations Manual",
-          "slug": "operations_manual",
+          "page": "Testing",
           "subfolderitems": [
             {
               "page": "Overview",
-              "url": "overview"
+              "path": "/docs/2.0/dev/sqllogictest/overview"
             },
             {
-              "page": "Migrating to DuckDB v2.0",
-              "url": "migration"
+              "page": "sqllogictest Introduction",
+              "path": "/docs/2.0/dev/sqllogictest/intro"
             },
             {
-              "page": "Backup Extension Repositories",
-              "url": "backup_extension_repositories"
+              "page": "Writing Tests",
+              "path": "/docs/2.0/dev/sqllogictest/writing_tests"
             },
             {
-              "page": "DuckDB's Footprint",
-              "slug": "footprint_of_duckdb",
-              "subsubfolderitems": [
-                {
-                  "page": "Files Created by DuckDB",
-                  "url": "files_created_by_duckdb"
-                },
-                {
-                  "page": "Gitignore for DuckDB",
-                  "url": "gitignore_for_duckdb"
-                },
-                {
-                  "page": "Reclaiming Space",
-                  "url": "reclaiming_space"
-                }
-              ]
+              "page": "Unit Tester Configuration",
+              "path": "/docs/2.0/dev/sqllogictest/test_configuration"
             },
             {
-              "page": "Installing DuckDB",
-              "slug": "installing_duckdb",
-              "subsubfolderitems": [
-                {
-                  "page": "Install Script",
-                  "url": "install_script"
-                },
-                {
-                  "page": "Requirements",
-                  "url": "requirements"
-                }
-              ]
+              "page": "Debugging",
+              "path": "/docs/2.0/dev/sqllogictest/debugging"
             },
             {
-              "page": "Logging",
-              "slug": "logging",
-              "subsubfolderitems": [
-                {
-                  "page": "Overview",
-                  "url": "overview"
-                }
-              ]
+              "page": "Result Verification",
+              "path": "/docs/2.0/dev/sqllogictest/result_verification"
             },
             {
-              "page": "User Agents",
-              "url": "user_agents"
+              "page": "Persistent Testing",
+              "path": "/docs/2.0/dev/sqllogictest/persistent_testing"
             },
             {
-              "page": "Securing DuckDB",
-              "slug": "securing_duckdb",
-              "subsubfolderitems": [
-                {
-                  "page": "Overview",
-                  "url": "overview"
-                },
-                {
-                  "page": "Embedding DuckDB",
-                  "url": "embedding_duckdb"
-                },
-                {
-                  "page": "Securing Extensions",
-                  "url": "securing_extensions"
-                }
-              ]
+              "page": "Loops",
+              "path": "/docs/2.0/dev/sqllogictest/loops"
             },
             {
-              "page": "Non-Deterministic Behavior",
-              "url": "non-deterministic_behavior"
+              "page": "Multiple Connections",
+              "path": "/docs/2.0/dev/sqllogictest/multiple_connections"
             },
             {
-              "page": "Limits",
-              "url": "limits"
-            },
-            {
-              "page": "DuckDB Docker Container",
-              "url": "duckdb_docker"
-            }
-          ]
-        },
-        {
-          "page": "Development",
-          "slug": "dev",
-          "subfolderitems": [
-            {
-              "page": "Overview",
-              "url": "overview"
-            },
-            {
-              "page": "DuckDB Repositories",
-              "url": "repositories"
-            },
-            {
-              "page": "Release Cycle",
-              "url": "release_cycle"
-            },
-            {
-              "page": "Metrics",
-              "url": "metrics"
-            },
-            {
-              "page": "Profiling",
-              "url": "profiling"
-            },
-            {
-              "page": "Building DuckDB",
-              "slug": "building",
-              "subsubfolderitems": [
-                {
-                  "page": "Overview",
-                  "url": "overview"
-                },
-                {
-                  "page": "Build Configuration",
-                  "url": "build_configuration"
-                },
-                {
-                  "page": "Building Extensions",
-                  "url": "building_extensions"
-                },
-                {
-                  "page": "Statically Linking Extensions",
-                  "url": "linking_extensions"
-                },
-                {
-                  "page": "Android",
-                  "url": "android"
-                },
-                {
-                  "page": "OpenHarmony",
-                  "url": "openharmony"
-                },
-                {
-                  "page": "Linux",
-                  "url": "linux"
-                },
-                {
-                  "page": "macOS",
-                  "url": "macos"
-                },
-                {
-                  "page": "Raspberry Pi",
-                  "url": "raspberry_pi"
-                },
-                {
-                  "page": "Windows",
-                  "url": "windows"
-                },
-                {
-                  "page": "Python",
-                  "url": "python"
-                },
-                {
-                  "page": "R",
-                  "url": "r"
-                },
-                {
-                  "page": "Troubleshooting",
-                  "url": "troubleshooting"
-                },
-                {
-                  "page": "Unofficial and Unsupported Platforms",
-                  "url": "unofficial_and_unsupported_platforms"
-                }
-              ]
-            },
-            {
-              "page": "Benchmark Suite",
-              "url": "benchmark"
-            },
-            {
-              "page": "Testing",
-              "slug": "sqllogictest",
-              "subsubfolderitems": [
-                {
-                  "page": "Overview",
-                  "url": "overview"
-                },
-                {
-                  "page": "sqllogictest Introduction",
-                  "url": "intro"
-                },
-                {
-                  "page": "Writing Tests",
-                  "url": "writing_tests"
-                },
-                {
-                  "page": "Unit Tester Configuration",
-                  "url": "test_configuration"
-                },
-                {
-                  "page": "Debugging",
-                  "url": "debugging"
-                },
-                {
-                  "page": "Result Verification",
-                  "url": "result_verification"
-                },
-                {
-                  "page": "Persistent Testing",
-                  "url": "persistent_testing"
-                },
-                {
-                  "page": "Loops",
-                  "url": "loops"
-                },
-                {
-                  "page": "Multiple Connections",
-                  "url": "multiple_connections"
-                },
-                {
-                  "page": "Catch",
-                  "url": "catch"
-                }
-              ]
-            },
-            {
-              "page": "Internal Errors",
-              "url": "internal_errors"
+              "page": "Catch",
+              "path": "/docs/2.0/dev/sqllogictest/catch"
             }
           ]
         },
         {
           "page": "Internals",
-          "slug": "internals",
           "subfolderitems": [
             {
               "page": "Overview",
-              "url": "overview"
+              "path": "/docs/2.0/internals/overview"
             },
             {
               "page": "Storage Versions and Format",
-              "url": "storage"
+              "path": "/docs/2.0/internals/storage"
             },
             {
               "page": "Execution Format",
-              "url": "vector"
+              "path": "/docs/2.0/internals/vector"
             },
             {
               "page": "Jemalloc",
-              "url": "jemalloc"
+              "path": "/docs/2.0/internals/jemalloc"
             },
             {
               "page": "Pivot",
-              "url": "pivot"
+              "path": "/docs/2.0/internals/pivot"
+            },
+            {
+              "page": "Internal Errors",
+              "path": "/docs/2.0/dev/internal_errors"
             }
           ]
+        },
+        {
+          "page": "Profiling & Benchmarking",
+          "subfolderitems": [
+            {
+              "page": "Profiling",
+              "path": "/docs/2.0/dev/profiling"
+            },
+            {
+              "page": "Metrics",
+              "path": "/docs/2.0/dev/metrics"
+            },
+            {
+              "page": "Benchmark Suite",
+              "path": "/docs/2.0/dev/benchmark"
+            }
+          ]
+        },
+        {
+          "page": "Project",
+          "subfolderitems": [
+            {
+              "page": "Release Cycle",
+              "path": "/docs/2.0/dev/release_cycle"
+            },
+            {
+              "page": "DuckDB Repositories",
+              "path": "/docs/2.0/dev/repositories"
+            }
+          ]
+        },
+        {
+          "page": "Troubleshooting",
+          "path": "/docs/2.0/troubleshooting"
         }
       ]
     }

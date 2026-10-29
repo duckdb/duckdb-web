@@ -7,6 +7,7 @@ redirect_from:
 - /docs/lts/guides/performance/join_operations
 - /docs/preview/guides/performance/join_operations
 title: Join Operations
+how_to_topic: performance
 ---
 
 ## How to Force a Join Order

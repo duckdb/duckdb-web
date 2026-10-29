@@ -6,6 +6,7 @@ redirect_from:
 - /docs/lts/guides/troubleshooting/crashes
 - /docs/preview/guides/troubleshooting/crashes
 title: Crashes
+how_to_topic: troubleshooting
 ---
 
 DuckDB is [thoroughly tested]({% link why_duckdb.md %}#thoroughly-tested) via an extensive test suite.

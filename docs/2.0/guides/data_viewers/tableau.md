@@ -7,6 +7,7 @@ redirect_from:
 - /docs/lts/guides/data_viewers/tableau
 - /docs/preview/guides/data_viewers/tableau
 title: Tableau – A Data Visualization Tool
+how_to_topic: tools-meta
 ---
 
 [Tableau](https://www.tableau.com/) is a popular commercial data visualization tool.

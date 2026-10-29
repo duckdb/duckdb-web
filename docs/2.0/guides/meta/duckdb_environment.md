@@ -7,6 +7,7 @@ redirect_from:
 - /docs/lts/guides/meta/duckdb_environment
 - /docs/preview/guides/meta/duckdb_environment
 title: DuckDB Environment
+how_to_topic: tools-meta
 ---
 
 DuckDB provides a number of functions and `PRAGMA` options to retrieve information on the running DuckDB instance and its environment.

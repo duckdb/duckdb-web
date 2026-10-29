@@ -7,6 +7,7 @@ redirect_from:
 - /docs/lts/guides/python/export_pandas
 - /docs/preview/guides/python/export_pandas
 title: Export to Pandas
+how_to_topic: python
 ---
 
 The result of a query can be converted to a [Pandas](https://pandas.pydata.org/) DataFrame using the `df()` function.

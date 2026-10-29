@@ -6,6 +6,7 @@ redirect_from:
 - /docs/lts/guides/performance/working_with_huge_databases
 - /docs/preview/guides/performance/working_with_huge_databases
 title: Working with Huge Databases
+how_to_topic: performance
 ---
 
 This page contains information for working with huge DuckDB database files.

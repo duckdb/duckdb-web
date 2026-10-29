@@ -6,6 +6,7 @@ redirect_from:
 - /docs/lts/guides/python/marimo
 - /docs/preview/guides/python/marimo
 title: marimo Notebooks
+how_to_topic: python
 ---
 
 [marimo](https://github.com/marimo-team/marimo) is an open-source reactive

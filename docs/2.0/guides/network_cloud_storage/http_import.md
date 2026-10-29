@@ -8,6 +8,7 @@ redirect_from:
 - /docs/lts/guides/network_cloud_storage/http_import
 - /docs/preview/guides/network_cloud_storage/http_import
 title: HTTP Parquet Import
+how_to_topic: network-cloud-storage
 ---
 
 To load a Parquet file over HTTP(S), the [`httpfs` extension]({% link docs/2.0/core_extensions/httpfs/overview.md %}) is required. This can be installed using the `INSTALL` SQL command. This only needs to be run once.

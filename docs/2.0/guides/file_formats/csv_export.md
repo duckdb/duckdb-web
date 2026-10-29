@@ -8,6 +8,7 @@ redirect_from:
 - /docs/lts/guides/file_formats/csv_export
 - /docs/preview/guides/file_formats/csv_export
 title: CSV Export
+how_to_topic: file-formats
 ---
 
 To export the data from a table to a CSV file, use the `COPY` statement:

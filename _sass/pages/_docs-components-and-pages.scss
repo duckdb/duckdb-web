@@ -145,19 +145,17 @@ body.documentation {
             margin-left: 2px;
         }
 
-        >ul>li.hasSub,
         >ul>li {
             @include title-1();
             margin-top: 40px;
             margin-bottom: 10px;
         }
 
-        >ul>ul>li.hasSub {
+        >ul>li>ul {
             @include body-standard();
         }
 
-        >ul>ul>li,
-        >ul>ul>li.hasSub {
+        >ul>li>ul>li {
             margin-top: 20px;
         }
     }

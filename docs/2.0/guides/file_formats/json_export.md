@@ -8,6 +8,7 @@ redirect_from:
 - /docs/lts/guides/file_formats/json_export
 - /docs/preview/guides/file_formats/json_export
 title: JSON Export
+how_to_topic: file-formats
 ---
 
 To export the data from a table to a JSON file, use the `COPY` statement:

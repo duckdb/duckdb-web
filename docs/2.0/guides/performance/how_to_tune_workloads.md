@@ -8,6 +8,7 @@ redirect_from:
 - /docs/lts/guides/performance/how_to_tune_workloads
 - /docs/preview/guides/performance/how_to_tune_workloads
 title: Tuning Workloads
+how_to_topic: performance
 ---
 
 DuckDB aims to perform well out of the box, so most workloads do not require any tuning.

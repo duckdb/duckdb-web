@@ -64,7 +64,7 @@ Page URL: <https://duckdb.org{{ page.url }}>
 {% assign version_prefix = "docs/" | append: version_viewed | append: "/" %}
 {% assign basename = page.path | remove_first: version_prefix %}
 
-<body class="documentation layout_docu{% if page.body_class %} {{ page.body_class }}{% endif %} {{ version_viewed_status }}">
+<body class="documentation layout_docu sidenav-drilldown{% if page.body_class %} {{ page.body_class }}{% endif %} {{ version_viewed_status }}">
 
 	{% if page.url contains '/docs/' %}{% include banner_docversion.html %}{% endif %}
 
@@ -210,6 +210,7 @@ Page URL: <https://duckdb.org{{ page.url }}>
 	<script src="/js/search.js" defer></script>
 
 	<script src="/js/noteboxes.js" defer></script>
+	{% if page.isotope %}<script src="/js/isotope.pkgd.min.js" defer></script>{% endif %}
 	<script src="/js/script.js?{{ site.time | date: '%s' }}" defer></script>
 	<script src="/js/copy_button.js" defer></script>
 

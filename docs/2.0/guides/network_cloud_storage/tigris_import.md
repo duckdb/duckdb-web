@@ -6,6 +6,7 @@ redirect_from:
 - /docs/preview/guides/network_cloud_storage/tigris_import
 - /docs/stable/guides/network_cloud_storage/tigris_import
 title: Tigris Import
+how_to_topic: network-cloud-storage
 ---
 
 ## Prerequisites

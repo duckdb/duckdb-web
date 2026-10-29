@@ -8,6 +8,7 @@ redirect_from:
 - /docs/lts/guides/performance/file_formats
 - /docs/preview/guides/performance/file_formats
 title: File Formats
+how_to_topic: performance
 ---
 
 ## Handling Parquet Files

@@ -7,6 +7,7 @@ redirect_from:
 - /docs/lts/guides/performance/benchmarks
 - /docs/preview/guides/performance/benchmarks
 title: Benchmarks
+how_to_topic: performance
 ---
 
 For several of the recommendations in our performance guide, we use microbenchmarks to back up our claims. For these benchmarks, we use datasets from the [TPC-H benchmark]({% link docs/2.0/core_extensions/tpch.md %}) and the [LDBC Social Network Benchmark’s BI workload](https://github.com/ldbc/ldbc_snb_bi/blob/main/snb-bi-pre-generated-data-sets.md#compressed-csvs-in-the-composite-merged-fk-format).

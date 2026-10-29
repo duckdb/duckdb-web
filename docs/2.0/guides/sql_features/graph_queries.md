@@ -6,6 +6,7 @@ redirect_from:
 - /docs/lts/guides/sql_features/graph_queries
 - /docs/preview/guides/sql_features/graph_queries
 title: Graph Queries
+how_to_topic: sql-features
 ---
 
 DuckDB supports graph queries via the [DuckPGQ community extension](https://duckpgq.org), which implements the SQL/PGQ syntax from the SQL:2023 standard.

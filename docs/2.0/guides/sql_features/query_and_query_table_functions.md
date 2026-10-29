@@ -7,6 +7,7 @@ redirect_from:
 - /docs/lts/guides/sql_features/query_and_query_table_functions
 - /docs/preview/guides/sql_features/query_and_query_table_functions
 title: query and query_table Functions
+how_to_topic: sql-features
 ---
 
 The [`query_table`]({% link docs/2.0/sql/functions/utility.md %}#query_tabletbl_name)
