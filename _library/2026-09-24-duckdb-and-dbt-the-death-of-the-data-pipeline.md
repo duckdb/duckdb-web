@@ -3,6 +3,8 @@ layout: post
 title: "DuckDB + dbt: The Death of the Data Pipeline"
 authors:
   - Sylvain Utard
+thumb: "/images/library/thumbs/2026-09-24-paris-meetup-sylvain-utard.png"
+image: "/images/library/thumbs/2026-09-24-paris-meetup-sylvain-utard.png"
 tag: talk
 length: "11 min"
 category: community

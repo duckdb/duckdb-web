@@ -3,6 +3,8 @@ layout: post
 title: "Why DuckDB Is the Missing Piece of Your Agentic Setup"
 authors:
   - Christophe Blefari
+thumb: "/images/library/thumbs/2026-09-24-paris-meetup-christophe-blefari.png"
+image: "/images/library/thumbs/2026-09-24-paris-meetup-christophe-blefari.png"
 tag: talk
 length: "20 min"
 category: community

@@ -3,6 +3,8 @@ layout: post
 title: "DuckDB + Apache Iceberg at Taktile"
 authors:
   - Tom Larkworthy
+thumb: "/images/library/thumbs/2026-09-24-paris-meetup-tom-larkworthy.png"
+image: "/images/library/thumbs/2026-09-24-paris-meetup-tom-larkworthy.png"
 tag: talk
 length: "13 min"
 category: community
