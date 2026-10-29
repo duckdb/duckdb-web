@@ -89,7 +89,7 @@ docs:
 
 extension_star_count: 4
 extension_star_count_pretty: 4
-extension_download_count: 11836
+extension_download_count: 11768
 extension_download_count_pretty: 11.8k
 image: '/images/community_extensions/social_preview/preview_community_extension_three_d.png'
 layout: community_extension_doc

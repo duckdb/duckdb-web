@@ -46,7 +46,7 @@ docs:
 
 extension_star_count: 3
 extension_star_count_pretty: 3
-extension_download_count: 11405
+extension_download_count: 11364
 extension_download_count_pretty: 11.4k
 image: '/images/community_extensions/social_preview/preview_community_extension_pintail.png'
 layout: community_extension_doc

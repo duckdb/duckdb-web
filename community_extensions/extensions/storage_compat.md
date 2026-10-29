@@ -87,8 +87,8 @@ docs:
 
 extension_star_count: 1
 extension_star_count_pretty: 1
-extension_download_count: 3032
-extension_download_count_pretty: 3.0k
+extension_download_count: 3290
+extension_download_count_pretty: 3.3k
 image: '/images/community_extensions/social_preview/preview_community_extension_storage_compat.png'
 layout: community_extension_doc
 ---

@@ -136,8 +136,8 @@ docs:
 
 extension_star_count: 54
 extension_star_count_pretty: 54
-extension_download_count: 4297
-extension_download_count_pretty: 4.3k
+extension_download_count: 4599
+extension_download_count_pretty: 4.6k
 image: '/images/community_extensions/social_preview/preview_community_extension_duckgql.png'
 layout: community_extension_doc
 ---
