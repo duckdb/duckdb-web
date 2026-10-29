@@ -8,12 +8,12 @@ excerpt: |
 extension:
   name: differential
   description: Versioned DuckDB databases - snapshots, time travel, branches, clones and S3 export over native storage
-  version: 1.0.0
+  version: 1.1.0
   language: C++
   build: cmake
   license: MIT
-  # POSIX file locking, fsync and mmap: no Windows or wasm builds.
-  excluded_platforms: "windows_amd64;windows_arm64;windows_amd64_mingw;windows_amd64_rtools;wasm_mvp;wasm_eh;wasm_threads"
+  # POSIX file locking, fsync and mmap: no Windows or wasm builds. Intel Macs are not supported.
+  excluded_platforms: "windows_amd64;windows_arm64;windows_amd64_mingw;windows_amd64_rtools;wasm_mvp;wasm_eh;wasm_threads;osx_amd64"
   # vcpkg commit providing AWS SDK 1.11.820, SQLite 3.53.2 and OpenSSL 3.6.3.
   vcpkg_commit: cd61e1e26a038e82d6550a3ebbe0fbbfe7da78e3
   maintainers:
@@ -21,7 +21,7 @@ extension:
 
 repo:
   github: tobilg/duckdb-differential
-  ref: 844ae5fcb686b26ca401f27d03ccf4e77636fe58
+  ref: 43203569f46b3a7f0c3a88fa8b4c34a50052ceb0
 
 docs:
   hello_world: |
@@ -65,16 +65,27 @@ docs:
     SELECT sum(amount) FROM sales_copy.orders;                  -- 30
     DETACH sales_copy;
 
-    -- Restore requires a detached branch and preserves its previous contents.
+    -- Merge dev back into main: a three-way merge against their common ancestor
+    -- (snapshot 1). main added order 3 and dev added order 4, so nothing conflicts.
+    SELECT base_snapshot_id, ours_snapshot_id, theirs_snapshot_id, conflicts, validation_state
+    FROM differential_merge_branch_preview('sales', 'main', 'dev', validate => true); -- 1, 2, 3, 0, valid
+    -- Merging into an existing branch (destination = ours) needs it detached.
     -- DETACH also releases the hidden reader pins taken by AT queries.
     DETACH sales;
-    CALL differential_restore('sales', 1);                      -- restored snapshot 4
+    SELECT snapshot_id, merge_action FROM differential_merge_branch('sales', 'main', 'dev', 'main',
+        request_id => 'sales-merge-dev');                       -- snapshot 4, merged
+    ATTACH 'differential:sales' AS sales;
+    SELECT sum(amount) FROM sales.orders;                       -- 100
+    DETACH sales;
+
+    -- Restore also requires a detached branch and preserves its previous contents.
+    CALL differential_restore('sales', 1);                      -- restored snapshot 5
     ATTACH 'differential:sales' AS sales;
     SELECT sum(amount) FROM sales.orders;                       -- 30
     DETACH sales;
     CALL differential_drop_branch('sales', 'dev');
-    CALL differential_expire_snapshots('sales', versions => [2, 3], dry_run => true);
-    CALL differential_expire_snapshots('sales', versions => [2, 3]);
+    CALL differential_expire_snapshots('sales', versions => [2, 3, 4], dry_run => true);
+    CALL differential_expire_snapshots('sales', versions => [2, 3, 4]);
     CALL differential_cleanup_old_files(cleanup_all => true);
     CALL differential_delete_orphaned_files(dry_run => true);
     CALL differential_compact();
@@ -191,18 +202,37 @@ docs:
       publication through conditional S3 writes;
     - have unreachable S3 data collected (`differential_cleanup_remote_files`).
 
+    Branches can be merged in local and single-writer S3 databases: a three-way merge against
+    the best common ancestor that reconciles rows and cells by primary key (every table needs
+    one):
+    - `differential_merge_branch` merges one branch into another, either into a new branch or
+      into the existing `ours` branch (a merge snapshot, fast-forward or already up to date);
+      `differential_merge_snapshots` merges three explicit snapshots into a new branch;
+    - `differential_merge_branch_preview`, `differential_merge_snapshots_preview` and
+      `differential_merge_branch_preflight` report conflicts and readiness without writing;
+      the reviewed snapshot IDs can guard the merge (`expected_*_snapshot_id`);
+    - conflicts are resolved with explicit `resolution_tables`; `schema_mode` `'strict'`,
+      `'additive'` or `'catalog'` controls which schema changes merge;
+    - `differential_merge_ancestry` explains base selection, `differential_merge_status` shows
+      running merges, `differential_merge_requests` and `differential_merge_resolutions`
+      inspect durable, retryable requests, and `differential_abort_merge` abandons a pending one;
+    - `SET differential_merge_max_concurrent` limits concurrent merges per process.
+
+    Shared (`WRITERS 'shared'`) databases cannot be merged.
+
     The SQL surface follows DuckLake's conventions: `ATTACH 'differential:<db>'` options
     (`BRANCH`, `SNAPSHOT_VERSION`, `SNAPSHOT_TIME`, `SNAPSHOT_NAME`, `DATA_PATH`),
     `SET differential_*` settings and database-first `differential_*` functions.
 
-    Built for DuckDB 2.0. Version 1.0.0 uses store format 2 and refuses repositories and
-    exports written by 0.1.0; there is no migration.
+    Built for DuckDB 2.0. Store format 2 has been used since 1.0.0, which refuses repositories
+    and exports written by 0.1.0; there is no migration. 1.1.0 opens 1.0.0 repositories, but once
+    1.1.0 has written to a repository, downgrading to 1.0.0 is not supported.
 
-    Status: experimental. Linux and macOS only. Commits are durable at DuckDB's sync points;
-    exports are durable once complete. S3 is tested against MinIO and exercised on AWS;
-    power-loss behaviour is not yet verified. See the
+    Status: experimental. Linux (amd64, arm64) and macOS (Apple silicon) only. Commits are
+    durable at DuckDB's sync points; exports are durable once complete. S3 is tested against
+    MinIO and exercised on AWS; power-loss behaviour is not yet verified. See the
     [repository](https://github.com/tobilg/duckdb-differential) for the SQL reference, the
-    lifecycle guide and the storage format.
+    lifecycle guide, branch merging and the storage format.
 
 extension_star_count: 38
 extension_star_count_pretty: 38
@@ -247,38 +277,38 @@ LOAD {{ page.extension.name }};
 
 <div class="extension_functions_table"></div>
 
-|           function_name            | function_type |                                                                                      description                                                                                       | comment |                                                       examples                                                        |
-|------------------------------------|---------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|---------|-----------------------------------------------------------------------------------------------------------------------|
-| differential_branches              | table         | Lists the branches of a differential database with their head snapshot and, for shared databases, their state relative to the S3 branch head.                                          | NULL    | [SELECT branch_name, head_snapshot_id, remote_state FROM differential_branches('sales');]                             |
-| differential_claim_branch_heads    | table         | Takes a single-writer database's S3 branch heads over after a copy of the repository wrote them.                                                                                       | NULL    | [SELECT branch_name, snapshot_id FROM differential_claim_branch_heads('sales');]                                      |
-| differential_cleanup_old_files     | table         | Collects local data that no snapshot, branch, pin or pending export references any more.                                                                                               | NULL    | [SELECT deleted_objects FROM differential_cleanup_old_files(cleanup_all => true);]                                    |
-| differential_clone_database        | table         | Creates an independent database from a snapshot of another one, on the same data path and sharing its data.                                                                            | NULL    | [SELECT database_id FROM differential_clone_database('sales', 'sales_copy');]                                         |
-| differential_compact               | table         | Returns free pages of the repository's metadata store to the file system.                                                                                                              | NULL    | [SELECT pages_reclaimed FROM differential_compact(max_pages => 1000);]                                                |
-| differential_create_branch         | table         | Creates a writable branch from a snapshot, sharing all data with it.                                                                                                                   | NULL    | [SELECT branch_id FROM differential_create_branch('sales', 'dev', snapshot => 1);]                                    |
-| differential_create_snapshot       | table         | Checkpoints an attached writable branch and publishes it as an immutable snapshot with optional commit metadata; exports it to S3 and, for shared databases, moves the S3 branch head. | NULL    | [SELECT snapshot_id, export_state FROM differential_create_snapshot('sales', name => 'v1', message => 'first load');] |
-| differential_current_snapshot      | table         | Returns the snapshot an attachment reads, or the latest snapshot of the attached branch or database.                                                                                   | NULL    | [SELECT id FROM differential_current_snapshot('sales');]                                                              |
-| differential_databases             | table         | Lists the databases of the differential repository with their data path and writer mode.                                                                                               | NULL    | [SELECT database_name, data_path, writers FROM differential_databases();]                                             |
-| differential_delete_orphaned_files | table         | Removes files in local pools that no mapping references, left behind by crashes.                                                                                                       | NULL    | [SELECT orphaned_files FROM differential_delete_orphaned_files(dry_run => true);]                                     |
-| differential_drop_branch           | table         | Preserves a detached branch's contents as a snapshot and drops the branch (in a shared database, for every writer).                                                                    | NULL    | [SELECT preservation_snapshot_id FROM differential_drop_branch('sales', 'dev');]                                      |
-| differential_evict_snapshots       | table         | Drops the local copy of snapshots whose S3 export completed; they are then read through S3.                                                                                            | NULL    | [SELECT snapshot_id FROM differential_evict_snapshots('sales', versions => [1], dry_run => true);]                    |
-| differential_expire_snapshots      | table         | Retires snapshots selected by version list and/or age so their local data can be collected; S3 exports remain.                                                                         | NULL    | [SELECT snapshot_id FROM differential_expire_snapshots('sales', versions => [1], dry_run => true);]                   |
-| differential_import_database       | table         | Copies an offline native DuckDB file into a new differential database and publishes it as snapshot 1.                                                                                  | NULL    | [SELECT database_id FROM differential_import_database('/data/native.duckdb', 'imported');]                            |
-| differential_operations            | table         | Lists the durable operation records of the repository, used to replay requests by request_id.                                                                                          | NULL    | [SELECT kind, state, snapshot_id FROM differential_operations();]                                                     |
-| differential_providers             | table         | Lists the repository's storage locations (metadata store, local pools, S3 locations) with their S3 configuration and credential source, never credentials.                             | NULL    | [SELECT data_path, credential_source FROM differential_providers();]                                                  |
-| differential_recover_export        | table         | Copies an exported snapshot from S3 into a new writable differential database, verifying every chunk.                                                                                  | NULL    | [SELECT database_id FROM differential_recover_export('s3://my-bucket/lake/descriptors/<sha256>', 'restored');]        |
-| differential_remote_heads          | table         | Lists the branch heads exported to an S3 location, each with the path to ATTACH its latest snapshot.                                                                                   | NULL    | [SELECT database_name, branch_name, head FROM differential_remote_heads('s3://my-bucket/lake/');]                     |
-| differential_resolve_conflict      | table         | Reconciles a diverged branch of a shared database with its S3 head, keeping local work as a new branch or as a local snapshot.                                                         | NULL    | [SELECT kept_snapshot_id, kept_branch FROM differential_resolve_conflict('team', keep => 'branch');]                  |
-| differential_restore               | table         | Resets a detached branch to a snapshot after preserving its current contents as a snapshot.                                                                                            | NULL    | [SELECT snapshot_id, preservation_snapshot_id FROM differential_restore('sales', 1, branch => 'dev');]                |
-| differential_retention_roots       | table         | Lists why each stored database image is retained (snapshots, branches, pins, exports).                                                                                                 | NULL    | [SELECT reason, identity FROM differential_retention_roots();]                                                        |
-| differential_retry_export          | table         | Finishes pending S3 exports of a database (all, or one snapshot) and republishes its branch heads.                                                                                     | NULL    | [SELECT snapshot_id, export_state FROM differential_retry_export('sales');]                                           |
-| differential_snapshots             | table         | Lists every snapshot of a differential database (for a shared database also other writers' snapshots, read from S3) with commit metadata, publication and S3 export state.             | NULL    | [SELECT snapshot_id, snapshot_name, export_state FROM differential_snapshots('sales');]                               |
-| differential_status                | table         | Reports the extension's capabilities, durability profiles, limits and last background publication error as capability/status rows.                                                     | NULL    | [SELECT capability, status FROM differential_status();]                                                               |
-| differential_storage_stats         | table         | Returns storage, S3, cache and timing counters of the repository and process as metric/value rows.                                                                                     | NULL    | [SELECT metric, value FROM differential_storage_stats() WHERE metric = 'local_payload_bytes';]                        |
-| differential_writers               | table         | Lists the advisory 'being written' markers of a shared database in S3: which hosts are writing which branches.                                                                         | NULL    | [SELECT branch_name, host, live FROM differential_writers('team');]                                                   |
-| differential_cleanup_metadata      | table         | NULL                                                                                                                                                                                   | NULL    | NULL                                                                                                                  |
-| differential_recover_branch        | table         | NULL                                                                                                                                                                                   | NULL    | NULL                                                                                                                  |
-| differential_cleanup_remote_files  | table         | NULL                                                                                                                                                                                   | NULL    | NULL                                                                                                                  |
-| differential_followers             | table         | NULL                                                                                                                                                                                   | NULL    | NULL                                                                                                                  |
+|           function_name            | function_type |                                                                                                                                     description                                                                                                                                     | comment |                                                             examples                                                             |
+|------------------------------------|---------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|---------|----------------------------------------------------------------------------------------------------------------------------------|
+| differential_branches              | table         | Lists the branches of a differential database with their head snapshot and, for shared databases, their state relative to the S3 branch head.                                                                                                                                       | NULL    | [SELECT branch_name, head_snapshot_id, remote_state FROM differential_branches('sales');]                                        |
+| differential_claim_branch_heads    | table         | Takes a single-writer database's S3 branch heads over after a copy of the repository wrote them.                                                                                                                                                                                    | NULL    | [SELECT branch_name, snapshot_id FROM differential_claim_branch_heads('sales');]                                                 |
+| differential_cleanup_metadata      | table         | Deletes completed operation records and history entries of expired snapshots older than older_than; request IDs of deleted operations no longer replay.                                                                                                                             | NULL    | [SELECT table_name, rows FROM differential_cleanup_metadata(older_than => now() - INTERVAL 30 DAY, dry_run => true);]            |
+| differential_cleanup_old_files     | table         | Collects local data that no snapshot, branch, pin or pending export references any more.                                                                                                                                                                                            | NULL    | [SELECT deleted_objects FROM differential_cleanup_old_files(cleanup_all => true);]                                               |
+| differential_cleanup_remote_files  | table         | Garbage-collects an S3 location in two phases: condemns data no branch head or unexpired snapshot references, and deletes what stayed condemned and unreachable since before older_than (default: a week ago).                                                                      | NULL    | [SELECT condemned_objects, deleted_bytes FROM differential_cleanup_remote_files('s3://my-bucket/lake/', dry_run => true);]       |
+| differential_clone_database        | table         | Creates an independent database from a snapshot of another one, on the same data path and sharing its data.                                                                                                                                                                         | NULL    | [SELECT database_id FROM differential_clone_database('sales', 'sales_copy');]                                                    |
+| differential_compact               | table         | Returns free pages of the repository's metadata store to the file system.                                                                                                                                                                                                           | NULL    | [SELECT pages_reclaimed FROM differential_compact(max_pages => 1000);]                                                           |
+| differential_create_branch         | table         | Creates a writable branch from a snapshot, sharing all data with it.                                                                                                                                                                                                                | NULL    | [SELECT branch_id FROM differential_create_branch('sales', 'dev', snapshot => 1);]                                               |
+| differential_create_snapshot       | table         | Checkpoints an attached writable branch and publishes it as an immutable snapshot with optional commit metadata; exports it to S3 and, for shared databases, moves the S3 branch head.                                                                                              | NULL    | [SELECT snapshot_id, export_state FROM differential_create_snapshot('sales', name => 'v1', message => 'first load');]            |
+| differential_current_snapshot      | table         | Returns the snapshot an attachment reads, or the latest snapshot of the attached branch or database.                                                                                                                                                                                | NULL    | [SELECT id FROM differential_current_snapshot('sales');]                                                                         |
+| differential_databases             | table         | Lists the databases of the differential repository with their data path and writer mode.                                                                                                                                                                                            | NULL    | [SELECT database_name, data_path, writers FROM differential_databases();]                                                        |
+| differential_delete_orphaned_files | table         | Removes files in local pools that no mapping references, left behind by crashes.                                                                                                                                                                                                    | NULL    | [SELECT orphaned_files FROM differential_delete_orphaned_files(dry_run => true);]                                                |
+| differential_drop_branch           | table         | Preserves a detached branch's contents as a snapshot and drops the branch (in a shared database, for every writer).                                                                                                                                                                 | NULL    | [SELECT preservation_snapshot_id FROM differential_drop_branch('sales', 'dev');]                                                 |
+| differential_evict_snapshots       | table         | Drops the local copy of snapshots whose S3 export completed; they are then read through S3.                                                                                                                                                                                         | NULL    | [SELECT snapshot_id FROM differential_evict_snapshots('sales', versions => [1], dry_run => true);]                               |
+| differential_expire_snapshots      | table         | Retires snapshots selected by version list and/or age so their local data can be collected; S3 exports remain.                                                                                                                                                                      | NULL    | [SELECT snapshot_id FROM differential_expire_snapshots('sales', versions => [1], dry_run => true);]                              |
+| differential_followers             | table         | Lists this process's followers (ATTACH ... FOLLOW true): what each follows, the state it reads, when it last checked S3 and its last error.                                                                                                                                         | NULL    | [SELECT alias, follows, epoch, checked_at FROM differential_followers();]                                                        |
+| differential_import_database       | table         | Copies an offline native DuckDB file into a new differential database and publishes it as snapshot 1.                                                                                                                                                                               | NULL    | [SELECT database_id FROM differential_import_database('/data/native.duckdb', 'imported');]                                       |
+| differential_operations            | table         | Lists the durable operation records of the repository, used to replay requests by request_id.                                                                                                                                                                                       | NULL    | [SELECT kind, state, snapshot_id FROM differential_operations();]                                                                |
+| differential_providers             | table         | Lists the repository's storage locations (metadata store, local pools, S3 locations) with their S3 configuration and credential source, never credentials.                                                                                                                          | NULL    | [SELECT data_path, credential_source FROM differential_providers();]                                                             |
+| differential_recover_branch        | table         | Recovers the newest shipped state of a branch (SHIP_WAL) from S3 into a new local database: its chain's base, read on demand, plus every shipped epoch; DuckDB replays the WAL at the first ATTACH. same_identity => true keeps the original identities (a failover of the writer). | NULL    | [SELECT database_id, shipped_epoch FROM differential_recover_branch('s3://my-bucket/lake/heads/sales/main', 'sales_recovered');] |
+| differential_recover_export        | table         | Copies an exported snapshot from S3 into a new writable differential database, verifying every chunk.                                                                                                                                                                               | NULL    | [SELECT database_id FROM differential_recover_export('s3://my-bucket/lake/descriptors/<sha256>', 'restored');]                   |
+| differential_remote_heads          | table         | Lists the branch heads exported to an S3 location, each with the path to ATTACH its latest snapshot.                                                                                                                                                                                | NULL    | [SELECT database_name, branch_name, head FROM differential_remote_heads('s3://my-bucket/lake/');]                                |
+| differential_resolve_conflict      | table         | Reconciles a diverged branch of a shared database with its S3 head, keeping local work as a new branch or as a local snapshot.                                                                                                                                                      | NULL    | [SELECT kept_snapshot_id, kept_branch FROM differential_resolve_conflict('team', keep => 'branch');]                             |
+| differential_restore               | table         | Resets a detached branch to a snapshot after preserving its current contents as a snapshot.                                                                                                                                                                                         | NULL    | [SELECT snapshot_id, preservation_snapshot_id FROM differential_restore('sales', 1, branch => 'dev');]                           |
+| differential_retention_roots       | table         | Lists why each stored database image is retained (snapshots, branches, pins, exports).                                                                                                                                                                                              | NULL    | [SELECT reason, identity FROM differential_retention_roots();]                                                                   |
+| differential_retry_export          | table         | Finishes pending S3 exports of a database (all, or one snapshot) and republishes its branch heads.                                                                                                                                                                                  | NULL    | [SELECT snapshot_id, export_state FROM differential_retry_export('sales');]                                                      |
+| differential_snapshots             | table         | Lists every snapshot of a differential database (for a shared database also other writers' snapshots, read from S3) with commit metadata, publication and S3 export state.                                                                                                          | NULL    | [SELECT snapshot_id, snapshot_name, export_state FROM differential_snapshots('sales');]                                          |
+| differential_status                | table         | Reports the extension's capabilities, durability profiles, limits and last background publication error as capability/status rows.                                                                                                                                                  | NULL    | [SELECT capability, status FROM differential_status();]                                                                          |
+| differential_storage_stats         | table         | Returns storage, S3, cache and timing counters of the repository and process as metric/value rows.                                                                                                                                                                                  | NULL    | [SELECT metric, value FROM differential_storage_stats() WHERE metric = 'local_payload_bytes';]                                   |
+| differential_writers               | table         | Lists the advisory 'being written' markers of a shared database in S3: which hosts are writing which branches.                                                                                                                                                                      | NULL    | [SELECT branch_name, host, live FROM differential_writers('team');]                                                              |
 
 ### Overloaded Functions
 
