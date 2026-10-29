@@ -2,7 +2,9 @@
 layout: post
 title: "From Spreadsheets to DuckLake: A Data Engineer's Road to DuckDB"
 authors:
-  - Matt Martin in conversation with Geertjan Wielenga & Tim Cox
+  - Matt Martin
+  - Geertjan Wielenga
+  - Tim Cox
 thumb: "/images/blog/thumbs/user-matt-martin.svg"
 image: "/images/blog/thumbs/user-matt-martin.png"
 excerpt: "After nearly two decades working with increasingly sophisticated data infrastructure, data engineer [Matt Martin](https://www.linkedin.com/in/mattmartin14/) discovered DuckDB could handle many of the analytical tasks he cared about without the operational complexity he had come to associate with big data. The same preference for familiar SQL and simpler infrastructure drew him to DuckLake, and he has since become an active tester and advocate of DuckDB's evolving capabilities."
