@@ -208,6 +208,30 @@
 	font-family: "JetBrainsMono-Regular";
 }
 
+@mixin card-surface {
+	border: 1px solid var(--border-color, #E6E6E6);
+	border-radius: var(--page-radius-box-inner, 8px);
+	background: var(--main-body-background-color, #FAFAFA);
+	color: var(--main-text-primary-color, #0D0D0D);
+}
+
+@mixin navigation-card {
+	@include card-surface;
+	text-decoration: none;
+	transition: background-color .2s, border-color .2s;
+
+	&:hover {
+		background: var(--doc-sidebar-selected-background-color, #F2F2F2);
+		border-color: var(--main-text-tertiary-color, #B2B2B2);
+		color: var(--main-text-primary-color, #0D0D0D);
+	}
+
+	&:focus-visible {
+		outline: 2px solid var(--main-text-primary-color, #0D0D0D);
+		outline-offset: -3px;
+	}
+}
+
 @mixin glass-card {
 	background: var(--main-codebox-main-background-color, rgba(250, 250, 250, 0.8));
 	border: 1px solid var(--border-color);
@@ -582,13 +606,22 @@
 	list-style: none;
 }
 
+@mixin nav-section-label {
+	@include label-2;
+	text-transform: uppercase;
+	line-height: 1.5;
+	color: var(--main-text-primary-color, #0D0D0D);
+}
+
 @mixin nav-element-row {
-	@include tiny;
+	@include side-menu;
+	line-height: 16px;
 	position: relative;
 	display: flex;
 	align-items: center;
 	min-height: 28px;
 	padding: 6px 12px;
+	padding-left: var(--nav-text-indent, 12px);
 	border-left: 1px solid var(--border-color, rgba(217, 217, 217, 0.6));
 	font-weight: 400;
 	letter-spacing: 0.02em;
@@ -601,14 +634,14 @@
 	}
 }
 
-@mixin nav-element-indicator($left: -2px) {
+@mixin nav-element-indicator($left: -1.5px) {
 	&::before {
 		content: "";
 		position: absolute;
 		z-index: 1;
 		top: 6px;
 		left: $left;
-		width: 3px;
+		width: 2px;
 		height: 17px;
 		border-radius: 10px;
 		background: var(--main-text-primary-color, #0D0D0D);
@@ -635,14 +668,10 @@
 	a {
 		@include nav-element-row;
 		display: block;
-		line-height: 16px;
-		white-space: nowrap;
-		overflow: hidden;
-		text-overflow: ellipsis;
 	}
 
 	li.current {
-		@include nav-element-indicator(-1px);
+		@include nav-element-indicator(-0.5px);
 
 		> a {
 			font-weight: 600;
@@ -655,9 +684,7 @@
 		padding: 0;
 		margin: 0;
 
-		a {
-			padding-left: 24px;
-		}
+		--nav-text-indent: 24px;
 
 		ul {
 			display: none;

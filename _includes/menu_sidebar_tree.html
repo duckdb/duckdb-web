@@ -6,10 +6,12 @@
 {%- assign nav_found = false -%}
 {%- assign nav_trail = "" -%}
 {%- for item in nav_menu -%}
+	{%- if item.group_start -%}<li class="nav-label">Reference</li>{%- endif -%}
 	{%- if item.mainfolderitems[0] -%}
 		{%- assign first = item.mainfolderitems[0] -%}
 		{%- assign crumb_href = "" -%}
 		{%- if first.page == "Overview" and first.subfolderitems[0] == nil -%}{%- if first.path -%}{%- assign crumb_href = first.path -%}{%- else -%}{%- assign crumb_href = nav_base | append: item.slug | append: first.url -%}{%- endif -%}{%- endif -%}
+		{%- assign section_href = item.overview | default: crumb_href -%}
 		{%- capture item_crumb -%}{{ " " }}<span class="slash">/</span> <span>{% if crumb_href != "" %}<a href="{{ crumb_href }}">{{ item.page }}</a>{% else %}{{ item.page }}{% endif %}</span>{%- endcapture -%}
 		{%- capture l2_items -%}
 		{%- for main in item.mainfolderitems -%}
@@ -55,10 +57,13 @@
 		{%- if l2_items contains 'aria-current="page"' or l2_items contains 'is-open' -%}{%- assign open = true -%}{%- endif -%}
 		{%- assign item_slug = item.slug | remove: "/" -%}
 		{%- if include.fallback and item_slug != "" and nav_url_parts contains item_slug -%}{%- assign open = true -%}{%- endif -%}
-		<li class="nav-item hasSub{% if open %} is-open{% endif %}"><button type="button" class="nav-row nav-drill" aria-expanded="{{ open }}">{{ item.page }}<svg class="show"><use href="#chevron-right"></use></svg></button><ul class="nav-list"><li class="nav-back"><button type="button" class="nav-row"><svg><use href="#chevron-left"></use></svg>{{ item.page }}</button></li>{{ l2_items }}</ul></li>
+		<li class="nav-item hasSub{% if item.group_start %} nav-group-start{% endif %}{% if open %} is-open{% endif %}">{% if section_href != "" %}<a class="nav-row" href="{{ section_href }}">{{ item.page }}<svg class="show" aria-hidden="true"><use href="#chevron-right"></use></svg></a>{% else %}<button type="button" class="nav-row nav-drill" aria-expanded="{{ open }}">{{ item.page }}<svg class="show"><use href="#chevron-right"></use></svg></button>{% endif %}<ul class="nav-list"><li class="nav-back"><button type="button" class="nav-row"><svg><use href="#chevron-left"></use></svg>{{ item.page }}</button></li>{{ l2_items }}</ul></li>
 	{%- else -%}
 		{%- assign first_char = item.url | slice: 0 -%}
 		{%- if first_char == "/" -%}{%- assign href = item.url -%}{%- else -%}{%- assign href = nav_base | append: item.slug | append: item.url -%}{%- endif -%}
-		<li class="nav-item"><a class="nav-row" href="{{ href }}"{% if href == nav_page and nav_found == false %}{% assign nav_found = true %} aria-current="page"{% endif %}>{{ item.page }}</a></li>
+		{%- assign normalized_href = href | replace: ".html", "" -%}
+		{%- assign last_char = normalized_href | slice: -1 -%}
+		{%- if last_char == "/" -%}{%- assign normalized_href = normalized_href | append: "index" -%}{%- endif -%}
+		<li class="nav-item"><a class="nav-row" href="{{ href }}"{% if normalized_href == nav_page and nav_found == false %}{% assign nav_found = true %} aria-current="page"{% endif %}>{{ item.page }}</a></li>
 	{%- endif -%}
 {%- endfor -%}

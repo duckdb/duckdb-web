@@ -12,7 +12,7 @@ tag: release
 
 Last week we released [DuckDB 2.0.0 LTS]({% post_url 2026-10-21-announcing-duckdb-200 %}), our biggest feature release so far.
 The announcement covered the headline items: the Quack protocol, asynchronous I/O, the first-class `VARIANT` type, agent mode, the PEG parser, and triggers.
-DuckDB 2.0.0 is now available in [all primary clients]({% link docs/2.0/clients/overview.md %}) – check the [installation page]({% link install/index.html %}) for instructions on installing or upgrading.
+DuckDB 2.0.0 is now available in [all primary clients]({% link docs/2.0/clients/overview.md %}) – check the [installation page]({% link docs/2.0/installation.html %}) for instructions on installing or upgrading.
 
 A release of this size ships many smaller improvements that never make it into the original announcement.
 In this post, we highlight a few of these gems.

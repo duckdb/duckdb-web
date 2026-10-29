@@ -23,7 +23,7 @@ In this blog post, we summarize the highlights and then walk through the breakin
 We showcased many of the new features in [“A Preview of DuckDB v2.0”]({% post_url 2026-08-17-duckdb-20-highlights %}), which covers each one in more depth.
 For the complete release notes, see the [release page on GitHub](https://github.com/duckdb/duckdb/releases/tag/v2.0.0).
 
-> Tip To install the new version, please visit the [installation page]({% link install/index.html %}).
+> Tip To install the new version, please visit the [installation page]({% link docs/2.0/installation.html %}).
 
 With this release, there are currently three DuckDB lines available.
 DuckDB 2.0 is a long-term support (LTS) release with support until at least October 2027.

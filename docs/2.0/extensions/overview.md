@@ -119,6 +119,10 @@ INSTALL tarfs FROM community;
 
 Community extensions are contributed by community members but they are built, [signed]({% link docs/2.0/extensions/extension_distribution.md %}#signed-extensions), and distributed in a centralized repository.
 
+## Building Extensions
+
+For compiling extensions yourself, see [Building Extensions]({% link docs/2.0/dev/building/building_extensions.md %}) and [Statically Linking Extensions]({% link docs/2.0/dev/building/linking_extensions.md %}) under **Development & Internals**.
+
 ## Updating Extensions
 
 While built-in extensions are tied to a DuckDB release due to their nature of being built into the DuckDB binary, installable extensions

@@ -41,7 +41,7 @@ DuckDB supports both Iceberg interaction models.
 In the *client–server model,* DuckDB runs on the server to read the Iceberg datasets.
 From the user's point of view, the choice of engine is transparent, and DuckDB is just one of many engines that the server could use in the background.
 The *client-is-the-server* model is more interesting:
-here, users [install a DuckDB client locally]({% link install/index.html %})
+here, users [install a DuckDB client locally]({% link docs/2.0/installation.html %})
 and use it through its SQL interface to query Iceberg catalogs.
 For example:
 

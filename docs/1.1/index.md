@@ -83,7 +83,7 @@ title: Documentation
         <span class="chevron"></span>
     </div>
     <div class="box-link half-width">
-        <a href="{% link install/index.html %}"></a>
+        <a href="{% link docs/2.0/installation.html %}"></a>
         <span class="symbol"><svg class="icon"><use href="#download-01"></use></svg></span>
         <span>Installation</span>
         <span class="chevron"></span>

@@ -6,6 +6,9 @@
 /** SPECIAL INSTALLATION PAGE **/
 
 body.installation{
+	.installationselection {
+		margin-top: 24px;
+	}
 	
 	.pagetitle h1{
 		@include headline-1;
@@ -23,29 +26,49 @@ body.installation{
 		visibility: hidden;
 	}
 	
-	.selection-head{
+	.installationselection .selection-head{
 		-webkit-user-select: none;
 		user-select: none;
 
 		h3{
 			@include title-1;
-			cursor: pointer;
-			position: relative;
 			margin: 0;
-			padding-right: 55px;
+			button{
+				display: flex;
+				align-items: baseline;
+				gap: 16px;
+				width: 100%;
+				padding: 0;
+				border: 0;
+				background: none;
+				color: inherit;
+				font: inherit;
+				text-align: left;
+				cursor: pointer;
+
+				&:focus-visible{
+					outline: 2px solid var(--main-text-primary-color);
+					outline-offset: 4px;
+					border-radius: var(--page-radius-xs);
+				}
+
+				&:hover .foldout-icon{
+					background-color: var(--doc-codebox-button-background-color-hover, #b2b2b299);
+				}
+			}
 			.selected{
 				@include label-1;
-				margin-left: 20px;
+				flex: 1;
+				min-width: 0;
+				color: var(--main-text-secondary-color, #666);
 			}
 			.foldout-icon{
 				background-color: var(--doc-codebox-button-background-color, #E6E6E6);
+				flex: 0 0 30px;
+				align-self: center;
 				width: 30px;
 				height: 30px;
 				border-radius: 50%;
-				position: absolute;
-				right: -6px;
-				top: -6px;
-				cursor: pointer;
 				display: flex;
 				align-items: center;
 				justify-content: center;
@@ -63,9 +86,6 @@ body.installation{
 					transition: transform .3s;
 					transition: transform .3s, -webkit-transform .3s;
 				}
-				&:hover{
-					background-color: var(--doc-codebox-button-background-color-hover, #b2b2b299);
-				}
 			}
 		}
 		
@@ -74,26 +94,18 @@ body.installation{
 		}
 	}
 	.selection-foldout{
-		padding: 16px;
-		background: var(--doc-codebox-background-color, #F2F2F2);
-		-webkit-transition: background-color .3s;
-		-o-transition: background-color .3s;
-		transition: background-color .3s;
-		margin-bottom: 8px;
-		border-radius: var(--page-radius-m);
-		border: 1px solid transparent;
-		-webkit-transition: border .3s;
-		-o-transition: border .3s;
-		transition: border .3s;
+		@include card-surface;
+		padding: 24px;
+		margin: 0;
+
+		+ .selection-foldout{
+			margin-top: 16px;
+		}
 
 		&.open h3 .foldout-icon svg.icon{
 			-webkit-transform: rotate(180deg);
 				-ms-transform: rotate(180deg);
 					transform: rotate(180deg);
-		}
-		
-		&:hover{
-			border-color: var(--border-color);
 		}
 		
 		h4{
@@ -106,7 +118,13 @@ body.installation{
 		}
 		
 		&.disabled{
-			display: none;
+			.selection-head button{
+				cursor: default;
+			}
+
+			.foldout-icon{
+				visibility: hidden;
+			}
 		}
 		
 	}
@@ -115,27 +133,21 @@ body.installation{
 	}
 	
 	.selection-head + .selection-content{
-		padding-top: 24px;
+		padding-top: 16px;
 	}
 	
 	.selection-options{
 		display: flex;
 		flex-wrap: wrap;
 		justify-content: flex-start;
-		gap: 12px;
+		gap: 16px;
 		
-		a.option{
-			text-decoration: none;
-			color: inherit;
-			padding: 8px 12px;
-		}
-
 		.option{
 			border-radius: var(--page-radius-box-inner);
 			display: flex;
-			gap: 6px;
-			height: 50px;
-			padding: 5px 15px 5px 5px;
+			gap: 8px;
+			height: 52px;
+			padding: 5px 8px;
 			align-items: center;
 			cursor: pointer;
 			z-index: 4;
@@ -160,8 +172,8 @@ body.installation{
 				transition: all .3s;
 			
 				img {
-					max-width: 21px;
-					max-height: 21px;
+					max-width: 20px;
+					max-height: 20px;
 					margin: 0 !important;
 				}
 			}
@@ -173,12 +185,13 @@ body.installation{
 			}
 
 			&:hover{
-				background: var(--menu-dropdown-item-background-hover, #E6E6E6);
+				background: color-mix(in srgb, var(--menu-dropdown-item-background-hover) 50%, transparent);
 				border: 1px solid var(--border-color);
 			}
 
 			&:focus-visible{
-				outline: none;
+				outline: 2px solid var(--main-text-primary-color);
+				outline-offset: -2px;
 			}
 		}
 
@@ -195,14 +208,14 @@ body.installation{
 	
 	.installation-instructions,
 	.instruction-collection{
-		margin-top: 50px;
+		margin-top: 32px;
 
 		.installation-heading{
 			display: flex;
 			align-items: center;
 			flex-wrap: wrap;
 			gap: 16px 24px;
-			margin-bottom: 30px;
+			margin-bottom: 16px;
 
 			h2{
 				margin: 0;
@@ -251,7 +264,7 @@ body.installation{
 			}
 
 			&:focus-visible{
-				outline: 2px solid var(--interactive-installation-box-border, #BEB3FF);
+				outline: 2px solid var(--main-text-primary-color);
 				outline-offset: -2px;
 			}
 		}

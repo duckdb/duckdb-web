@@ -1,6 +1,9 @@
 ---
 copy_markdown: false
 layout: docu
+body_class: docs-overview
+breadcrumbs: false
+toc: false
 redirect_from:
 - /docs/index
 - /docs/stable/index
@@ -10,142 +13,114 @@ redirect_from:
 title: Documentation
 ---
 
+Find installation instructions, practical guides and reference material for DuckDB.
+See [what's new in the 2.0 documentation]({% link docs/2.0/whats_new_in_the_docs.md %}).
+
+## Start Here
+
+<div class="box-link-wrapper">
+    <a class="box-link third-width" href="{% link docs/2.0/installation.html %}">
+        <span class="symbol"><svg class="icon"><use href="#download-01"></use></svg></span>
+        <span>Installation</span>
+    </a>
+    <a class="box-link third-width" href="{% link docs/2.0/quickstart.md %}">
+        <span class="symbol"><svg class="icon"><use href="#code-snippet-02"></use></svg></span>
+        <span>Quickstart</span>
+    </a>
+    <a class="box-link third-width" href="{% link docs/2.0/guides/overview.md %}">
+        <span class="symbol"><svg class="icon"><use href="#folder"></use></svg></span>
+        <span>How-to Guides</span>
+    </a>
+</div>
+
 ## Connecting to DuckDB
 
 <div class="box-link-wrapper">
-    <div class="box-link third-width">
-        <a href="{% link docs/2.0/connect/overview.md %}"></a>
+    <a class="box-link third-width" href="{% link docs/2.0/connect/overview.md %}">
         <span class="symbol"><svg class="icon"><use href="#link-01"></use></svg></span>
         <span>DuckDB connection overview</span>
-        <svg class="chevron"><use href="#chevron-right"></use></svg>
-    </div>
-    <div class="box-link third-width">
-        <a href="{% link docs/2.0/quack/overview.md %}"></a>
+    </a>
+    <a class="box-link third-width" href="{% link docs/2.0/quack/overview.md %}">
         <span class="symbol"><img src="{% link images/icons/quack.svg %}"></span>
         <span>Quack remote protocol</span>
-        <svg class="chevron"><use href="#chevron-right"></use></svg>
-    </div>
+    </a>
 </div>
 
 ## Client APIs
 
 <div class="box-link-wrapper">
-    <div class="box-link third-width">
-        <a href="{% link docs/2.0/clients/c/overview.md %}"></a>
+    <a class="box-link third-width" href="{% link docs/2.0/clients/c/overview.md %}">
         <span class="symbol"><img src="{% link images/icons/c.svg %}"></span>
         <span>C</span>
-        <svg class="chevron"><use href="#chevron-right"></use></svg>
-    </div>
-    <div class="box-link third-width">
-        <a href="{% link docs/2.0/clients/cpp.md %}"></a>
+    </a>
+    <a class="box-link third-width" href="{% link docs/2.0/clients/cpp.md %}">
         <span class="symbol"><img src="{% link images/icons/cpp.svg %}"></span>
         <span>C++</span>
-        <svg class="chevron"><use href="#chevron-right"></use></svg>
-    </div>
-    <div class="box-link third-width">
-        <a href="{% link docs/2.0/clients/cli/overview.md %}"></a>
+    </a>
+    <a class="box-link third-width" href="{% link docs/2.0/clients/cli/overview.md %}">
         <span class="symbol"><img src="{% link images/icons/cli.svg %}"></span>
         <span>CLI (command line interface)</span>
-        <svg class="chevron"><use href="#chevron-right"></use></svg>
-    </div>
-    <div class="box-link third-width">
-        <a href="{% link docs/2.0/clients/go/overview.md %}"></a>
+    </a>
+    <a class="box-link third-width" href="{% link docs/2.0/clients/go/overview.md %}">
         <span class="symbol"><img src="{% link images/icons/go.svg %}"></span>
         <span>Go</span>
-        <svg class="chevron"><use href="#chevron-right"></use></svg>
-    </div>
-    <div class="box-link third-width">
-        <a href="{% link docs/2.0/clients/java/overview.md %}"></a>
+    </a>
+    <a class="box-link third-width" href="{% link docs/2.0/clients/java/overview.md %}">
         <span class="symbol"><img src="{% link images/icons/java.svg %}"></span>
         <span>Java (JDBC)</span>
-        <svg class="chevron"><use href="#chevron-right"></use></svg>
-    </div>
-    <div class="box-link third-width">
-        <a href="{% link docs/2.0/clients/node_neo/overview.md %}"></a>
+    </a>
+    <a class="box-link third-width" href="{% link docs/2.0/clients/node_neo/overview.md %}">
         <span class="symbol"><img src="{% link images/icons/nodejs.svg %}"></span>
         <span>Node.js</span>
-        <svg class="chevron"><use href="#chevron-right"></use></svg>
-    </div>
-    <div class="box-link third-width">
-        <a href="{% link docs/2.0/clients/odbc/overview.md %}"></a>
+    </a>
+    <a class="box-link third-width" href="{% link docs/2.0/clients/odbc/overview.md %}">
         <span class="symbol"><img src="{% link images/icons/odbc.svg %}"></span>
         <span>ODBC</span>
-        <svg class="chevron"><use href="#chevron-right"></use></svg>
-    </div>
-    <div class="box-link third-width">
-        <a href="{% link docs/2.0/clients/python/overview.md %}"></a>
+    </a>
+    <a class="box-link third-width" href="{% link docs/2.0/clients/python/overview.md %}">
         <span class="symbol"><img src="{% link images/icons/python.svg %}"></span>
         <span>Python</span>
-        <svg class="chevron"><use href="#chevron-right"></use></svg>
-    </div>
-    <div class="box-link third-width">
-        <a href="{% link docs/2.0/clients/r.md %}"></a>
+    </a>
+    <a class="box-link third-width" href="{% link docs/2.0/clients/r.md %}">
         <span class="symbol"><img src="{% link images/icons/r.svg %}"></span>
         <span>R</span>
-        <svg class="chevron"><use href="#chevron-right"></use></svg>
-    </div>
-    <div class="box-link third-width">
-        <a href="{% link docs/2.0/clients/rust/overview.md %}"></a>
+    </a>
+    <a class="box-link third-width" href="{% link docs/2.0/clients/rust/overview.md %}">
         <span class="symbol"><img src="{% link images/icons/rust.svg %}"></span>
         <span>Rust</span>
-        <svg class="chevron"><use href="#chevron-right"></use></svg>
-    </div>
-    <div class="box-link third-width">
-        <a href="{% link docs/2.0/clients/wasm/overview.md %}"></a>
+    </a>
+    <a class="box-link third-width" href="{% link docs/2.0/clients/wasm/overview.md %}">
         <span class="symbol"><img src="{% link images/icons/webassembly.svg %}"></span>
         <span>WebAssembly</span>
-        <svg class="chevron"><use href="#chevron-right"></use></svg>
-    </div>
-    <div class="box-link third-width">
-        <a href="{% link docs/2.0/clients/overview.md %}"></a>
+    </a>
+    <a class="box-link third-width" href="{% link docs/2.0/clients/overview.md %}">
         <span class="symbol"><svg class="icon"><use href="#grid-01"></use></svg></span>
         <span>All client APIs</span>
-        <svg class="chevron"><use href="#chevron-right"></use></svg>
-    </div>
+    </a>
 </div>
 
 ## SQL
 
 <div class="box-link-wrapper">
-    <div class="box-link third-width">
-        <a href="{% link docs/2.0/sql/introduction.md %}"></a>
+    <a class="box-link third-width" href="{% link docs/2.0/sql/introduction.md %}">
         <span class="symbol"><svg class="icon"><use href="#book-open-01"></use></svg></span>
         <span>Introduction</span>
-        <svg class="chevron"><use href="#chevron-right"></use></svg>
-    </div>
-    <div class="box-link third-width">
-        <a href="{% link docs/2.0/sql/statements/overview.md %}"></a>
+    </a>
+    <a class="box-link third-width" href="{% link docs/2.0/sql/statements/overview.md %}">
         <span class="symbol"><svg class="icon"><use href="#code-snippet-02"></use></svg></span>
         <span>Statements</span>
-        <svg class="chevron"><use href="#chevron-right"></use></svg>
-    </div>
+    </a>
 </div>
 
-## Other
+## More Resources
 
 <div class="box-link-wrapper">
-    <div class="box-link third-width">
-        <a href="{% link docs/2.0/guides/overview.md %}"></a>
-        <span class="symbol"><svg class="icon"><use href="#folder"></use></svg></span>
-        <span>Guides</span>
-        <svg class="chevron"><use href="#chevron-right"></use></svg>
-    </div>
-    <div class="box-link third-width">
-        <a href="{% link install/index.html %}"></a>
-        <span class="symbol"><svg class="icon"><use href="#download-01"></use></svg></span>
-        <span>Installation</span>
-        <svg class="chevron"><use href="#chevron-right"></use></svg>
-    </div>
-    <div class="box-link third-width">
-        <a href="{% link docs/2.0/dev/building/overview.md %}"></a>
+    <a class="box-link third-width" href="{% link docs/2.0/dev/building/overview.md %}">
         <span class="symbol"><svg class="icon"><use href="#tool-02"></use></svg></span>
         <span>Building DuckDB</span>
-        <svg class="chevron"><use href="#chevron-right"></use></svg>
-    </div>
-    <div class="box-link third-width">
-        <a href="{% link docs/2.0/guides/offline-copy.md %}"></a>
+    </a>
+    <a class="box-link third-width" href="{% link docs/2.0/guides/offline-copy.md %}">
         <span class="symbol"><svg class="icon"><use href="#book-open-01"></use></svg></span>
         <span>Browsing offline</span>
-        <svg class="chevron"><use href="#chevron-right"></use></svg>
-    </div>
+    </a>
 </div>

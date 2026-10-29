@@ -12,7 +12,7 @@ tag: release
 In this blog post, we highlight a few important fixes in DuckDB v1.4.4, the fourth patch release in [DuckDB's 1.4 LTS line]({% post_url 2025-09-16-announcing-duckdb-140 %}).
 The release ships bugfixes, performance improvements, and security patches. You can find the complete [release notes on GitHub](https://github.com/duckdb/duckdb/releases/tag/v1.4.4).
 
-To install the new version, please visit the [installation page]({% link install/index.html %}#version=lts).
+To install the new version, please visit the [installation page]({% link docs/2.0/installation.html %}#version=lts).
 
 ## Fixes
 

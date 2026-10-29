@@ -3,13 +3,13 @@ layout: docu
 title: Command Line Client
 ---
 
-> Installation To use the DuckDB CLI client, visit the [CLI installation page]({% link install/index.html %}?environment=cli).
+> Installation To use the DuckDB CLI client, visit the [CLI installation page]({% link docs/2.0/installation.html %}?environment=cli).
 >
 > The latest stable version of the DuckDB command line client is {{ site.maintained_duckdb_version }}.
 
 ## Installation
 
-The DuckDB CLI (Command Line Interface) is a single, dependency-free executable. It is precompiled for Windows, Mac, and Linux for both the stable version and for nightly builds produced by GitHub Actions. Please see the [installation page]({% link install/index.html %}) under the CLI tab for download links.
+The DuckDB CLI (Command Line Interface) is a single, dependency-free executable. It is precompiled for Windows, Mac, and Linux for both the stable version and for nightly builds produced by GitHub Actions. Please see the [installation page]({% link docs/2.0/installation.html %}) under the CLI tab for download links.
 
 The DuckDB CLI is based on the SQLite command line shell, so CLI-client-specific functionality is similar to what is described in the [SQLite documentation](https://www.sqlite.org/cli.html) (although DuckDB's SQL syntax follows PostgreSQL conventions with a [few exceptions]({% link docs/1.5/sql/dialect/postgresql_compatibility.md %})).
 
