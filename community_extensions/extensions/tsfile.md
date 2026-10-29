@@ -42,7 +42,7 @@ docs:
 
 extension_star_count: 6
 extension_star_count_pretty: 6
-extension_download_count: 9830
+extension_download_count: 9797
 extension_download_count_pretty: 9.8k
 image: '/images/community_extensions/social_preview/preview_community_extension_tsfile.png'
 layout: community_extension_doc

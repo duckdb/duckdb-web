@@ -271,8 +271,8 @@ docs:
 
 extension_star_count: 20
 extension_star_count_pretty: 20
-extension_download_count: 19208
-extension_download_count_pretty: 19.2k
+extension_download_count: 19416
+extension_download_count_pretty: 19.4k
 image: '/images/community_extensions/social_preview/preview_community_extension_duckhts.png'
 layout: community_extension_doc
 ---

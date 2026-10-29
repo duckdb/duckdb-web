@@ -147,8 +147,8 @@ docs:
 
 extension_star_count: 0
 extension_star_count_pretty: 0
-extension_download_count: 8543
-extension_download_count_pretty: 8.5k
+extension_download_count: 8850
+extension_download_count_pretty: 8.8k
 image: '/images/community_extensions/social_preview/preview_community_extension_lance_conversion.png'
 layout: community_extension_doc
 ---
