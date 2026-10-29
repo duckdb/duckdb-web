@@ -25,7 +25,7 @@ There are currently the following DuckDB versions under development:
 * v2.0: an LTS release.
 * v2.1: the upcoming DuckDB version, in an early stage of the development.
 
-Note that for most users, we recommend the [stable DuckDB releases]({% link install/index.html %}).
+Note that for most users, we recommend the [stable DuckDB releases]({% link docs/2.0/installation.html %}).
 
 ## Python
 

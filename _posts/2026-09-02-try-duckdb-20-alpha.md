@@ -21,7 +21,7 @@ The DuckDB ecosystem has `duckdb/duckdb` at its center: it's a dependency for mo
 
 ## Clients
 
-Several DuckDB clients are already available as [alpha versions]({% link install/index.html %}?version=preview).
+Several DuckDB clients are already available as [alpha versions]({% link docs/2.0/installation.html %}?version=preview).
 
 ### CLI
 

@@ -4,7 +4,7 @@ layout: docu
 title: Go Client
 ---
 
-> Tip To use the DuckDB Go client, visit the [Go installation page]({% link install/index.html %}?environment=go).
+> Tip To use the DuckDB Go client, visit the [Go installation page]({% link docs/2.0/installation.html %}?environment=go).
 >
 > The latest stable version of the DuckDB Go client is {% if site.maintained_duckdb_go_version != "" %}{{ site.maintained_duckdb_go_version }}{% else %}{{ site.old_lts_duckdb_go_version }}{% endif %}.
 

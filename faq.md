@@ -135,7 +135,7 @@ The following projects, domains, and events are officially affiliated with DuckD
 * [DuckDB (`duckdb.org`)](https://duckdb.org/)
 * [DuckLake (`ducklake.select`)](https://ducklake.select), an open lakehouse format
 * [Quack (`quack.duckdb.org`)](https://quack.duckdb.org/)
-* all [primary client libraries]({% link install/index.html %})
+* all [primary client libraries]({% link docs/2.0/installation.html %})
 * all [core DuckDB extensions]({% link docs/2.0/core_extensions/overview.md %}), including the [DuckDB UI](https://github.com/duckdb/duckdb-ui)
 * [`dbt-duckdb`](https://github.com/duckdb/dbt-duckdb), a dbt connector for DuckDB
 * [DuckCon (`duckcon.org`)](https://duckcon.org/), our technical conference series

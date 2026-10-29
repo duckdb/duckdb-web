@@ -4,7 +4,7 @@ github_repository: https://github.com/duckdb/duckdb-node-neo/
 title: Node.js Client (Neo)
 ---
 
-> Installation To use the DuckDB Node.js client, visit the [Node.js installation page]({% link install/index.html %}?environment=nodejs).
+> Installation To use the DuckDB Node.js client, visit the [Node.js installation page]({% link docs/2.0/installation.html %}?environment=nodejs).
 >
 > The latest stable version of the DuckDB Node.js (Neo) client is {% if site.maintained_duckdb_node_neo_version != "" %}{{ site.maintained_duckdb_node_neo_version }}{% else %}{{ site.old_lts_duckdb_node_neo_version }}{% endif %}.
 

@@ -13,7 +13,7 @@ We are proud to release DuckDB v1.5.0, codenamed “Variegata” after the _Para
 
 In this blog post, we cover the most important updates for this release around support, features, and extensions. As always, there is more: for the complete release notes, see the [release page on GitHub](https://github.com/duckdb/duckdb/releases/tag/v1.5.0).
 
-> To install the new version, please visit the [installation page]({% link install/index.html %}). Note that it can take a few days to release some extensions (e.g., the [UI]({% link docs/2.0/core_extensions/ui.md %})) client libraries (e.g., Go, R, Java) due to the extra changes and review rounds required.
+> To install the new version, please visit the [installation page]({% link docs/2.0/installation.html %}). Note that it can take a few days to release some extensions (e.g., the [UI]({% link docs/2.0/core_extensions/ui.md %})) client libraries (e.g., Go, R, Java) due to the extra changes and review rounds required.
 
 With this release, we will have two DuckDB releases available: v1.4 (LTS) and v1.5 (current).
 The next release – planned for September – will ship a major version, DuckDB v2.0.

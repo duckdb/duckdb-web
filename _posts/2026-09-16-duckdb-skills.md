@@ -24,7 +24,7 @@ In Claude Code, install `duckdb-skills` from the official plugins:
 /plugin install duckdb-skills@claude-plugins-official
 ```
 
-The skills are then available as `/duckdb-skills:⟨skill-name⟩`{:.language-sql .highlight} in all subsequent sessions. You need the [DuckDB CLI]({% link install/index.html %}) installed; if it is not found, the skills will offer to install it.
+The skills are then available as `/duckdb-skills:⟨skill-name⟩`{:.language-sql .highlight} in all subsequent sessions. You need the [DuckDB CLI]({% link docs/2.0/installation.html %}) installed; if it is not found, the skills will offer to install it.
 
 Alternatively, you can add our repository as a plugin marketplace and install the plugin from there:
 
