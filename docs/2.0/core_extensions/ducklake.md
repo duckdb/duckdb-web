@@ -183,7 +183,7 @@ It returns the expired snapshots, using the same columns as [`ducklake_snapshots
 ### `ducklake_merge_adjacent_files`
 
 The `ducklake_merge_adjacent_files` function merges adjacent files in the storage.
-It returns one row per table with the columns `schema_name`, `table_name`, `files_processed` and `files_created`.
+It returns one row per table with the columns `schema_name`, `table_name`, `files_processed`, and `files_created`.
 
 | Parameter name | Parameter type | Named parameter | Description |
 | -------------- | -------------- | --------------- | ----------- |

@@ -83,7 +83,7 @@ This view describes all columns in the current database that are used by some co
 | `update_rule` | Update rule of the foreign key constraint. Always `NO ACTION`. | `VARCHAR` | `NO ACTION` |
 | `delete_rule` | Delete rule of the foreign key constraint. Always `NO ACTION`. | `VARCHAR` | `NO ACTION` |
 
-### `schemata`: Database, Catalog and Schema
+### `schemata`: Database, Catalog, and Schema
 
 The top level catalog view is `information_schema.schemata`. It lists the catalogs and the schemas present in the database and has the following layout:
 

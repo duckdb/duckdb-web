@@ -38,7 +38,7 @@ This will iterate over the extensions and return their repositories and the upda
 └────────────────┴──────────────┴─────────────────────┴──────────────────┴─────────────────┘
 ```
 
-Extensions that are statically linked into the DuckDB binary, such as `json`, `parquet` and `icu` in the official DuckDB builds, are not updated by this statement.
+Extensions that are statically linked into the DuckDB binary, such as `json`, `parquet`, and `icu` in the official DuckDB builds, are not updated by this statement.
 
 ## Updating Selected Extensions
 

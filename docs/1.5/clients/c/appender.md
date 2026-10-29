@@ -168,8 +168,8 @@ Note that the object must be destroyed with `duckdb_appender_destroy`.
 * `query`: The query to execute, can be an INSERT, DELETE, UPDATE or MERGE INTO statement.
 * `column_count`: The number of columns to append.
 * `types`: The types of the columns to append.
-* `table_name`: (optionally) the table name used to refer to the appended data, defaults to "appended_data".
-* `column_names`: (optionally) the list of column names, defaults to "col1", "col2", ...
+* `table_name`: (optionally) the table name used to refer to the appended data, defaults to `appended_data`.
+* `column_names`: (optionally) the list of column names, defaults to `col1`, `col2`, ...
 * `out_appender`: The resulting appender object.
 
 ##### Return Value

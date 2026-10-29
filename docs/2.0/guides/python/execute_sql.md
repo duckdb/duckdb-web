@@ -77,7 +77,7 @@ con.sql(
 ).fetchall()
 ```
 
-The `params` list or dictionary is copied when `sql` is called, together with any list, tuple or dictionary inside it. Other values are converted each time the relation is read, so a `bytearray` changed in place afterwards is read changed.
+The `params` list or dictionary is copied when `sql` is called, together with any list, tuple, or dictionary inside it. Other values are converted each time the relation is read, so a `bytearray` changed in place afterwards is read changed.
 
 To run the same parameterized statement for many sets of values, for example when inserting multiple rows, use `executemany`:
 

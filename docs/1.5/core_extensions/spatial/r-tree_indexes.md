@@ -13,7 +13,7 @@ When working with geospatial datasets, it is very common that you want to filter
 
 An R-tree is a balanced tree data structure that stores the approximate _minimum bounding rectangle_ of each geometry (and the internal ID of the corresponding row) in the leaf nodes, and the bounding rectangle enclosing all of the child nodes in each internal node.
 
-> The _minimum bounding rectangle_ (MBR) of a geometry is the smallest rectangle that completely encloses the geometry. Usually when we talk about the bounding rectangle of a geometry (or the bounding "box" in the context of 2D geometry), we mean the minimum bounding rectangle. Additionally, we tend to assume that bounding boxes/rectangles are _axis-aligned,_ i.e., the rectangle is **not** rotated – the sides are always parallel to the coordinate axes. The MBR of a point is the point itself.
+> The _minimum bounding rectangle_ (MBR) of a geometry is the smallest rectangle that completely encloses the geometry. Usually when we talk about the bounding rectangle of a geometry (or the bounding “box” in the context of 2D geometry), we mean the minimum bounding rectangle. Additionally, we tend to assume that bounding boxes/rectangles are _axis-aligned,_ i.e., the rectangle is **not** rotated – the sides are always parallel to the coordinate axes. The MBR of a point is the point itself.
 
 By traversing the R-tree from top to bottom, it is possible to very quickly search a R-tree-indexed table for only those rows where the indexed geometry column intersect a specific region of interest, as you can skip searching entire sub-trees if the bounding rectangles of their parent nodes don't intersect the query region at all. Once the leaf nodes are reached, only the specific rows whose geometries intersect the query region have to be fetched from disk, and the often much more expensive exact spatial predicate check (and any other filters) only have to be executed for these rows.
 
@@ -22,8 +22,8 @@ By traversing the R-tree from top to bottom, it is possible to very quickly sear
 Before you get started using the R-tree index, there are some limitations to be aware of:
 
 * The R-tree index is only supported for the `GEOMETRY` data type.
-* The R-tree index will only be used to perform "index scans" when the table is filtered (using a `WHERE` clause) with one of the following spatial predicate functions (as they all imply intersection): `ST_Equals`, `ST_Intersects`, `ST_Touches`, `ST_Crosses`, `ST_Within`, `ST_Contains`, `ST_Overlaps`, `ST_Covers`, `ST_CoveredBy`, `ST_ContainsProperly`.
-* One of the arguments to the spatial predicate function must be a "constant" (i.e., an expression whose result is known at query planning time). This is because the query planner needs to know the bounding box of the query region _before_ the query itself is executed to use the R-tree index scan.
+* The R-tree index will only be used to perform “index scans” when the table is filtered (using a `WHERE` clause) with one of the following spatial predicate functions (as they all imply intersection): `ST_Equals`, `ST_Intersects`, `ST_Touches`, `ST_Crosses`, `ST_Within`, `ST_Contains`, `ST_Overlaps`, `ST_Covers`, `ST_CoveredBy`, `ST_ContainsProperly`.
+* One of the arguments to the spatial predicate function must be a “constant” (i.e., an expression whose result is known at query planning time). This is because the query planner needs to know the bounding box of the query region _before_ the query itself is executed to use the R-tree index scan.
 
 In the future we want to enable R-tree indexes to be used to accelerate additional predicate functions and more complex queries such a spatial joins.
 
@@ -45,7 +45,7 @@ You can also pass in additional options when creating an R-tree index using the 
 CREATE INDEX my_idx ON my_table USING RTREE (geom) WITH (max_node_capacity = 16);
 ```
 
-The impact tweaking these options will have on performance is highly dependent on the system setup DuckDB is running on, the spatial distribution of the dataset and the query patterns of your specific workload. The defaults should be good enough, but you if you want to experiment with different parameters, see the [full list of options here](#options).
+The impact tweaking these options will have on performance is highly dependent on the system setup DuckDB is running on, the spatial distribution of the dataset, and the query patterns of your specific workload. The defaults should be good enough, but you if you want to experiment with different parameters, see the [full list of options here](#options).
 
 ## Example
 
@@ -107,7 +107,7 @@ EXPLAIN SELECT count(*) FROM t1 WHERE ST_Within(geom, ST_MakeEnvelope(45, 45, 65
 
 ### Bulk Loading & Maintenance
 
-Creating R-trees on top of an already populated table is much faster than first creating the index and then inserting the data. This is because the R-tree will have to periodically rebalance itself and perform a somewhat costly splitting operation when a node reaches max capacity after an insert, potentially causing additional splits to cascade up the tree. However, when the R-tree index is created on an already populated table, a special bottom up "bulk loading algorithm" (Sort-Tile-Recursive) is used, which divides all entries into an already balanced tree as the total number of required nodes can be computed from the beginning.
+Creating R-trees on top of an already populated table is much faster than first creating the index and then inserting the data. This is because the R-tree will have to periodically rebalance itself and perform a somewhat costly splitting operation when a node reaches max capacity after an insert, potentially causing additional splits to cascade up the tree. However, when the R-tree index is created on an already populated table, a special bottom up “bulk loading algorithm” (Sort-Tile-Recursive) is used, which divides all entries into an already balanced tree as the total number of required nodes can be computed from the beginning.
 
 Additionally, using the bulk loading algorithm tends to create a R-tree with a better structure (less overlap between bounding boxes), which usually leads to better query performance. If you find that the performance of querying the R-tree starts to deteriorate after a large number of updates or deletions, dropping and re-creating the index might produce a higher quality R-tree.
 
@@ -132,7 +132,7 @@ The following options can be passed to the `WITH` clause when creating an R-tree
 
 ## R-Tree Table Functions
 
-The `rtree_index_dump(VARCHAR)` table function can be used to return all the nodes within an R-tree index which might come on handy when debugging, profiling or otherwise just inspecting the structure of the index. The function takes the name of the R-tree index as an argument and returns a table with the following columns:
+The `rtree_index_dump(VARCHAR)` table function can be used to return all the nodes within an R-tree index which might come on handy when debugging, profiling, or otherwise just inspecting the structure of the index. The function takes the name of the R-tree index as an argument and returns a table with the following columns:
 
 | Column name | Type       | Description                                                                   |
 |-------------|------------|-------------------------------------------------------------------------------|

@@ -19,7 +19,7 @@ SELECT true, false, NULL::BOOLEAN;
 
 Boolean values can be explicitly created using the literals `true` and `false`. However, they are most often created as a result of comparisons or conjunctions. For example, the comparison `i > 10` results in a Boolean value. Boolean values can be used in the `WHERE` and `HAVING` clauses of a SQL statement to filter out tuples from the result. In this case, tuples for which the predicate evaluates to `true` will pass the filter, and tuples for which the predicate evaluates to `false` or `NULL` will be filtered out. Consider the following example:
 
-Create a table with the values 5, 15 and `NULL`:
+Create a table with the values 5, 15, and `NULL`:
 
 ```sql
 CREATE TABLE integers (i INTEGER);

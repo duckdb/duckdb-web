@@ -43,7 +43,7 @@ Additional constructors target tables outside the default schema: `appender_to_d
 
 The `Appender` is `Sync` but not `Send`, because it borrows the `Connection`. To append from another thread, move the `Connection` to that thread and create the appender there.
 
-### Appending Inside a Transaction
+### Appending inside a Transaction
 
 For a large load, wrapping the appends in a transaction lets DuckDB commit them as a single unit. Begin a transaction with `Connection::transaction()`, set it to commit on drop, and create the appender from the transaction. The following bulk-inserts ten million rows, adapted from the crate's [`appender` example](https://github.com/duckdb/duckdb-rs/blob/main/crates/duckdb/examples/appender.rs):
 

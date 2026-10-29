@@ -683,4 +683,4 @@ you the user can write queries saying this is *what* you want – and we are fre
 One of the most interesting parts of working on DuckDB is that it stretches the traditional SQL model of unordered data.
 DuckDB makes it easy to query *ordered* data sets such as data frames and Parquet files,
 and when you have data like that, you expect to be able to do ordered analysis!
-Implementing Fast Sorting, Fast Windowing and Fast AsOf joins is how we are making this expectation a reality.
+Implementing Fast Sorting, Fast Windowing, and Fast AsOf joins is how we are making this expectation a reality.

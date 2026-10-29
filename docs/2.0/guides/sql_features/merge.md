@@ -46,7 +46,7 @@ We’ll track ducks and preserve history whenever their name, breed, or location
 > The UI ships with the DuckDB CLI, so if you have the CLI installed you can use the front end.
 > To start the notebook front end just run: `duckdb -ui` and you can navigate to [http://localhost:4213/](http://localhost:4213/) to start writing your SQL code inside of your notebooks. Just copy and paste the following code blocks to follow this guide.
 
-### Step 1: Create the Incoming (source) Table
+### Step 1: Create the Incoming (Source) Table
 
 This table represents today’s transactional data.
 
@@ -68,7 +68,7 @@ INSERT INTO incoming_ducks VALUES
     (105, 'Puddles',    'Indian Runner', 'Relocated',   CURRENT_DATE - INTERVAL '1 day', NULL, true);
 ```
 
-### Step 2: Create the Master (target) Table
+### Step 2: Create the Master (Target) Table
 
 This table represents the type 2 SCD data (i.e., transaction data with history).
 
@@ -153,7 +153,7 @@ WHERE target.is_current = false
   AND target.end_date = CURRENT_DATE - INTERVAL '1 day';
 ```
 
-### Step 5: Query The Results
+### Step 5: Query the Results
 
 The following queries can be used to examine the data resulting from the `MERGE` statement.
 

@@ -160,7 +160,7 @@ print(duckdb.sql("SELECT * FROM test_df").fetchall())
 [(1, 'one'), (2, 'two'), (3, 'three'), (4, 'four')]
 ```
 
-The same works for Pandas Series, Polars DataFrames, LazyFrames and Series, NumPy arrays, a `dict` of one-dimensional NumPy arrays, [relations]({% link docs/2.0/clients/python/relational_api.md %}) and Arrow objects.
+The same works for Pandas Series, Polars DataFrames, LazyFrames and Series, NumPy arrays, a `dict` of one-dimensional NumPy arrays, [relations]({% link docs/2.0/clients/python/relational_api.md %}), and Arrow objects.
 
 The masked elements in a NumPy masked array are `NULL`. In a `dict` of arrays, names that differ only in case get a suffix, so the keys `a` and `A` become the columns `a` and `A_1`.
 
@@ -204,9 +204,9 @@ The precedence of objects with the same name is as follows:
 * Native DuckDB tables and views
 * [Replacement scans]({% link docs/2.0/clients/c/replacement_scans.md %})
 
-DuckDB supports querying multiple types of Apache Arrow objects including [tables](https://arrow.apache.org/docs/python/generated/pyarrow.Table.html), record batches, arrays and chunked arrays, [datasets](https://arrow.apache.org/docs/python/generated/pyarrow.dataset.Dataset.html), [RecordBatchReaders](https://arrow.apache.org/docs/python/generated/pyarrow.RecordBatchReader.html) and [scanners](https://arrow.apache.org/docs/python/generated/pyarrow.dataset.Scanner.html). See the Python [guides]({% link docs/2.0/guides/overview.md %}#python-client) for more examples.
+DuckDB supports querying multiple types of Apache Arrow objects including [tables](https://arrow.apache.org/docs/python/generated/pyarrow.Table.html), record batches, arrays and chunked arrays, [datasets](https://arrow.apache.org/docs/python/generated/pyarrow.dataset.Dataset.html), [RecordBatchReaders](https://arrow.apache.org/docs/python/generated/pyarrow.RecordBatchReader.html), and [scanners](https://arrow.apache.org/docs/python/generated/pyarrow.dataset.Scanner.html). See the Python [guides]({% link docs/2.0/guides/overview.md %}#python-client) for more examples.
 
-* The filters of a query are pushed into Arrow datasets and Polars LazyFrames. Tables, record batches, readers, scanners and Polars DataFrames are read whole, and the filter applies to what they return.
+* The filters of a query are pushed into Arrow datasets and Polars LazyFrames. Tables, record batches, readers, scanners, and Polars DataFrames are read whole, and the filter applies to what they return.
 * A `RecordBatchReader` can be read once. A second scan raises `InvalidInputException: This RecordBatchReader has already been consumed and cannot be scanned again.` To scan its data more than once, read it into a table first, for example with `read_all()`.
 * Arrow tables and Polars DataFrames are scanned on all threads, even when they hold a single chunk. A query that depends on the order of rows without an `ORDER BY`, such as one using `first()`, can return different rows between runs.
 

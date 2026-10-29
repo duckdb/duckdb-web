@@ -172,7 +172,7 @@ Database encryption implies using [storage version](#explicit-storage-versions) 
 
 > New Using expressions for the database path was introduced in DuckDB 2.0. In earlier versions, the path had to be a string literal.
 
-The database path and the [option values](#options) can be arbitrary scalar expressions rather than string literals. DuckDB evaluates these expressions while binding the `ATTACH` statement, so you can build them from [variables]({% link docs/2.0/sql/statements/set_variable.md %}), [environment variables]({% link docs/2.0/sql/functions/utility.md %}#getenvvar) or string concatenation. This keeps credentials and environment-specific identifiers, such as account numbers, out of your SQL scripts.
+The database path and the [option values](#options) can be arbitrary scalar expressions rather than string literals. DuckDB evaluates these expressions while binding the `ATTACH` statement, so you can build them from [variables]({% link docs/2.0/sql/statements/set_variable.md %}), [environment variables]({% link docs/2.0/sql/functions/utility.md %}#getenvvar), or string concatenation. This keeps credentials and environment-specific identifiers, such as account numbers, out of your SQL scripts.
 
 Read the database path from a variable:
 
@@ -210,7 +210,7 @@ Zero or more copy options may be provided within parentheses following the `ATTA
 | `ROW_GROUP_SIZE`    | The row group size of a new database file.                                                                                  | `UBIGINT` | `122880`      |
 | `STORAGE_VERSION`   | The version of the storage used.                                                                                            | `VARCHAR` | `latest`      |
 | `ENCRYPTION_KEY`    | The encryption key used for encrypting the database.                                                                        | `VARCHAR` | -             |
-| `ENCRYPTION_CIPHER` | The encryption cipher used for encrypting the database (`CBC`, `CTR` or `GCM`).                                             | `VARCHAR` | -             |
+| `ENCRYPTION_CIPHER` | The encryption cipher used for encrypting the database (`CBC`, `CTR`, or `GCM`).                                             | `VARCHAR` | -             |
 | `RECOVERY_MODE`     | Recovery mode for the database. `no_wal_writes` disables WAL writes, improving performance at the cost of crash recovery.   | `VARCHAR` | -             |
 
 > The options above apply when attaching DuckDB and SQLite database files. Attaching a database managed by another system accepts additional type-specific options, such as `SECRET` and `SCHEMA`. See the relevant extension page for the full list: [PostgreSQL]({% link docs/2.0/core_extensions/postgres/overview.md %}), [MySQL]({% link docs/2.0/core_extensions/mysql.md %}), and [Iceberg]({% link docs/2.0/core_extensions/iceberg/iceberg_options.md %}#attach-options).
@@ -257,7 +257,7 @@ USE memory_db;
 
 ## Name Qualification
 
-The fully qualified name of catalog objects contains the _catalog_, the _schema_ and the _name_ of the object. For example:
+The fully qualified name of catalog objects contains the _catalog_, the _schema_, and the _name_ of the object. For example:
 
 Attach the database `new_db`:
 
@@ -283,7 +283,7 @@ Refer to the column `col` inside the table `my_table`:
 SELECT new_db.my_schema.my_table.col FROM new_db.my_schema.my_table;
 ```
 
-Note that often the fully qualified name is not required. When a name is not fully qualified, the system looks for which entries to reference using the _catalog search path_. The default catalog search path includes the system catalog, the temporary catalog and the initially attached database together with the `main` schema.
+Note that often the fully qualified name is not required. When a name is not fully qualified, the system looks for which entries to reference using the _catalog search path_. The default catalog search path includes the system catalog, the temporary catalog, and the initially attached database together with the `main` schema.
 
 Also note the rules on [identifiers and database names in particular]({% link docs/2.0/sql/dialect/keywords_and_identifiers.md %}#database-names).
 

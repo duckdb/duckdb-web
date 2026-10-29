@@ -140,7 +140,7 @@ CREATE TABLE duckdb_table AS FROM postgres_db.postgres_tbl;
 
 ## Writing Data to PostgreSQL
 
-In addition to reading data from PostgreSQL, the extension allows you to create tables, ingest data into PostgreSQL and make other modifications to a PostgreSQL database using standard SQL queries.
+In addition to reading data from PostgreSQL, the extension allows you to create tables, ingest data into PostgreSQL, and make other modifications to a PostgreSQL database using standard SQL queries.
 
 This allows you to use DuckDB to, for example, export data that is stored in a PostgreSQL database to Parquet, or read data from a Parquet file into PostgreSQL.
 
@@ -377,13 +377,13 @@ To avoid having to continuously fetch schema data from PostgreSQL, DuckDB keeps 
 CALL postgres_clear_cache();
 ```
 
-In version 1.5.5 a support for automatic detection of schema changes was added using a "staleness query"
+In version 1.5.5 a support for automatic detection of schema changes was added using a “staleness query”
 (contributed by Brandon Freeman in [duckdb/duckdb-postgres#514](https://github.com/duckdb/duckdb-postgres/pull/514)):
 
  - when `pg_staleness_query_enabled` option (`BOOLEAN`, default: enabled for PostgreSQL, disabled when `pg_use_information_schema_introspection` is set) is enabled, on every catalog access a query is run that
    checks Postgres' `pg_class.xmin` column value in every table and reloads the cache automatically, if a change is detected
 
- - for Postgres-wire-compatible databases a custom "staleness query" can be set using `pg_staleness_query` option.
+ - for Postgres-wire-compatible databases a custom “staleness query” can be set using `pg_staleness_query` option.
 
 ## Working with hstore Columns
 

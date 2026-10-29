@@ -100,7 +100,7 @@ INSERT INTO mvcc_test_100
         generate_series(1, 100_000) s2(s2);
 ```
 
-We then run three transactions on both tables that increment a single column, with an increasing number of affected rows, 1%, 10% and 100%:
+We then run three transactions on both tables that increment a single column, with an increasing number of affected rows, 1%, 10%, and 100%:
 
 ```sql
 UPDATE mvcc_test_... SET i = i + 1 WHERE i <= 1;

@@ -131,4 +131,4 @@ First, the high memory bandwidth enables fast scans.
 Second, combined with low memory latency, it keeps the cores continuously occupied during processing.
 Finally, the Olympus cores' large caches allow efficient access to the hash tables built during aggregations and joins.
 
-We are looking forward to continuing this benchmark by using DuckDB v2.0.0's stable build, running on the full dual-socket setup and incorporating different benchmarks.
+We are looking forward to continuing this benchmark by using DuckDB v2.0.0's stable build, running on the full dual-socket setup, and incorporating different benchmarks.

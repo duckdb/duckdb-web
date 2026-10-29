@@ -19,13 +19,13 @@ Conceptually, the `GEOMETRY` type follows the core data model defined in the [Si
 |:--|:--|
 | **Point** | A single location in space, defined by its coordinates (e.g., longitude and latitude). |
 | **LineString** | A sequence of points connected by straight lines, representing a path or route. |
-| **Polygon** | A set of closed rings defined by a sequence of points, representing an area such as a country border or a building footprint. The first ring is the "shell", and "interior" rings represent holes in the polygon. |
+| **Polygon** | A set of closed rings defined by a sequence of points, representing an area such as a country border or a building footprint. The first ring is the “shell”, and “interior” rings represent holes in the polygon. |
 | **MultiPoint** | A collection of points. |
 | **MultiLineString** | A collection of LineStrings. |
 | **MultiPolygon** | A collection of Polygons. |
 | **GeometryCollection** | A collection of different geometry types, allowing for complex geometries that combine points, lines, and polygons or even other nested geometry collections. |
 
-The textual representation of geometries uses ["Well-Known Text" (WKT)](https://en.wikipedia.org/wiki/Well-known_text_representation_of_geometry) format. Geometries can be cast to and from WKT strings, so you can use string literals to create geometries directly in SQL statements.
+The textual representation of geometries uses [“Well-Known Text” (WKT)](https://en.wikipedia.org/wiki/Well-known_text_representation_of_geometry) format. Geometries can be cast to and from WKT strings, so you can use string literals to create geometries directly in SQL statements.
 
 In the following example, we create a `GEOMETRY` column with the 7 different types of supported geometries:
 
@@ -62,13 +62,13 @@ SELECT * FROM geometries;
 
 ## Multi-Dimensional Geometries
 
-The `GEOMETRY` type is primarily used to model shapes in two dimensions (e.g. `X`/`Y` or `longitude`/`latitude`), but it also supports shapes with additional vertex dimensions such as `Z` for elevation or `M` for "measure", or both.
+The `GEOMETRY` type is primarily used to model shapes in two dimensions (e.g. `X`/`Y` or `longitude`/`latitude`), but it also supports shapes with additional vertex dimensions such as `Z` for elevation or `M` for “measure”, or both.
 
 The vertex dimensions of a `GEOMETRY` value must be consistent across all vertices. For example, if one vertex has `X`, `Y`, and `Z` coordinates, then all other vertices in that geometry must also have `X`, `Y`, and `Z` coordinates. This means that you cannot have a mix of 2D and 3D vertices within the same geometry. This also applies for collections of geometries, such as `MULTIPOINT` or `GEOMETRYCOLLECTION`, where all geometries within the collection must have the same vertex dimensions.
 
 Functions that operate on `GEOMETRY` values typically ignore any additional dimensions beyond the `X` and `Y` unless explicitly specified, but they can still be stored and can be retrieved if needed.
 
-In the following example, we create a `GEOMETRY` table with 2D, 3D(Z), 3D(M) and 4D(ZM) points:
+In the following example, we create a `GEOMETRY` table with 2D, 3D(Z), 3D(M), and 4D(ZM) points:
 
 ```sql
 CREATE TABLE points (
@@ -104,7 +104,7 @@ Geometry has inconsistent Z/M dimension
 
 ## Empty Geometries
 
-Geometries can also be "empty" (e.g., `POINT EMPTY`, `LINESTRING EMPTY`, `MULTIPOLYGON EMPTY`, etc.) which means they don't contain any vertices. Empty geometries are still valid geometries and can be used in spatial operations, but they are mostly useful for representing the result of topological operations that don't have a valid geometrical representation (e.g., the intersection of two non-overlapping geometries is an empty geometry).
+Geometries can also be “empty” (e.g., `POINT EMPTY`, `LINESTRING EMPTY`, `MULTIPOLYGON EMPTY`, etc.) which means they don't contain any vertices. Empty geometries are still valid geometries and can be used in spatial operations, but they are mostly useful for representing the result of topological operations that don't have a valid geometrical representation (e.g., the intersection of two non-overlapping geometries is an empty geometry).
 
 ## Geometry Storage
 
@@ -112,7 +112,7 @@ Internally `GEOMETRY` values are stored as a sequence of bytes, similarly to Duc
 
 ### Shredding and Compression
 
-The `GEOMETRY` type supports a storage optimization called "shredding", which improves compression for geometry columns where all values share the same geometry type and vertex dimensions.
+The `GEOMETRY` type supports a storage optimization called “shredding”, which improves compression for geometry columns where all values share the same geometry type and vertex dimensions.
 
 When a row group qualifies, DuckDB splits the geometry segment within the row group into primitive `STRUCT`, `LIST`, and `DOUBLE` segments that can be compressed independently using lightweight algorithms - far more efficiently than storing variable-size binary blobs.
 
@@ -137,7 +137,7 @@ SET geometry_minimum_shredding_size = -1;
 SET geometry_minimum_shredding_size = 0;
 ```
 
-The primary benefit of shredding is significantly improved compression, but in the future we plan to add ways to expose the shredded representation directly to the execution engine without having to "reassemble" the geometry back into binary again.
+The primary benefit of shredding is significantly improved compression, but in the future we plan to add ways to expose the shredded representation directly to the execution engine without having to “reassemble” the geometry back into binary again.
 
 The following example illustrates the effects of shredding on the storage footprint of a `GEOMETRY` column.
 
@@ -234,21 +234,21 @@ These statistics can be used by the query optimizer to skip row groups that don'
 
 Currently, only the `&&` operator, which is used to check if the bounding box of a geometry intersects the bounding box of another geometry, can take advantage of geometry statistics when used in a `WHERE` clause. There is ongoing work to add support for more statistics-based optimizations to the functions in the `spatial` extension, such as `ST_Intersects`, `ST_Distance`, etc.
 
-Persisting geometry statistics is only possible in storage versions v1.5 and above, and so if you are using an older storage version, the geometry statistics will turn into "unknown" statistics when checkpointing. In other words, the bounding box will be set to an infinitely large bounding box and all geometry types and vertex dimensions will be marked as maybe present, which means that the execution engine will not be able to do any optimizations based on the geometry statistics.
+Persisting geometry statistics is only possible in storage versions v1.5 and above, and so if you are using an older storage version, the geometry statistics will turn into “unknown” statistics when checkpointing. In other words, the bounding box will be set to an infinitely large bounding box and all geometry types and vertex dimensions will be marked as maybe present, which means that the execution engine will not be able to do any optimizations based on the geometry statistics.
 
 ## Coordinate Reference Systems
 
 As far as the execution engine is concerned, geometries are considered to exist in a Cartesian coordinate system. In practice, however, most geospatial data is associated with a specific **Coordinate Reference System** (CRS) that defines how the coordinates relate to real-world locations on the Earth's surface.
 
-A helpful analogy is to think of CRSs as the equivalent of "time zones", but for geospatial data. Just like how time zones define how local time relates to a standard reference time (e.g., UTC), CRSs define how the coordinates of a geometry relate to a standard reference system (e.g., WGS 84). CRSs are usually either geographic (e.g., WGS 84, which uses latitude and longitude) or projected (e.g., UTM, which uses linear units like meters).
+A helpful analogy is to think of CRSs as the equivalent of “time zones”, but for geospatial data. Just like how time zones define how local time relates to a standard reference time (e.g., UTC), CRSs define how the coordinates of a geometry relate to a standard reference system (e.g., WGS 84). CRSs are usually either geographic (e.g., WGS 84, which uses latitude and longitude) or projected (e.g., UTM, which uses linear units like meters).
 
 When working with geospatial data, it's important to be aware of the CRS associated with different datasets. Performing spatial operations on geometries in different CRSs without proper transformation will most likely lead to incorrect results.
 
-### How are Coordinate Reference Systems Stored in DuckDB?
+### How Are Coordinate Reference Systems Stored in DuckDB?
 
 To avoid these kinds of mistakes, DuckDB makes it possible to explicitly associate a CRS with a `GEOMETRY` column. 
 
-This is done by passing a CRS "identifier" as a parameter of the `GEOMETRY` type. For example, a column of type `GEOMETRY('OGC:CRS84')` stores geometries that are associated with the "OGC CRS84" coordinate reference system. 
+This is done by passing a CRS “identifier” as a parameter of the `GEOMETRY` type. For example, a column of type `GEOMETRY('OGC:CRS84')` stores geometries that are associated with the “OGC CRS84” coordinate reference system. 
 
 CRS identifiers in DuckDB are always strings. `OGC:CRS84` is the identifier for a common geographic coordinate system spanning the whole globe where the `X` coordinate represents longitude and the `Y` coordinate represents latitude. DuckDB only knows this because the identifier 'OGC:CRS84' is registered as a _known_ CRS in the system catalog.
 
@@ -270,7 +270,7 @@ SELECT * FROM duckdb_coordinate_systems();
 
 ### Handling Unknown Coordinate Reference Systems
 
-As mentioned above, only coordinate systems that are registered in the system catalog (and therefore "known" to DuckDB) can be used when creating `GEOMETRY` columns.
+As mentioned above, only coordinate systems that are registered in the system catalog (and therefore “known” to DuckDB) can be used when creating `GEOMETRY` columns.
 If you try to create a `GEOMETRY` column with an unknown CRS identifier, either manually or by importing an external geospatial dataset, the statement will fail with an error.
 
 ```sql

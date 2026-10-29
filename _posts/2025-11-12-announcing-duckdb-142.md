@@ -169,7 +169,7 @@ SELECT * FROM read_vortex('my.vortex');
 
 ## Fixes
 
-We fixed a vulnerability, several crashes, internal errors, incorrect results and regressions.
+We fixed a vulnerability, several crashes, internal errors, incorrect results, and regressions.
 We also fixed several issues discovered by our [fuzzer](https://github.com/duckdb/duckdb-fuzzer/).
 
 ### Vulnerabilities

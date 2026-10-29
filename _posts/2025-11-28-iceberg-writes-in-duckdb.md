@@ -25,7 +25,7 @@ ATTACH '⟨warehouse_name⟩' AS iceberg_catalog (
 );
 ```
 
-## Inserts, Deletes and Updates
+## Inserts, Deletes, and Updates
 
 Support for creating tables and inserting to tables was already added in DuckDB v1.4.0: you can use standard DuckDB SQL syntax to insert data into your Iceberg table.
 
@@ -71,7 +71,7 @@ FROM iceberg_catalog.default.simple_table;
 
 > The Iceberg write support current has two limitations:
 >
-> The update support is limited to _tables that are not partitioned and not sorted._ Attempting to perform update, insert or delete operations on partitioned or sorted tables using DuckDB-Iceberg will result in an error.
+> The update support is limited to _tables that are not partitioned and not sorted._ Attempting to perform update, insert, or delete operations on partitioned or sorted tables using DuckDB-Iceberg will result in an error.
 >
 > DuckDB-Iceberg only writes positional deletes for `DELETE` and `UPDATE` statements. Copy-on-write functionality is not yet supported.
 
@@ -230,7 +230,7 @@ DuckDB is an ACID-compliant database that supports [transactions]({% link docs/2
 Work on DuckDB-Iceberg has been made with this in mind. Within a transaction, the following conditions will hold for Iceberg tables.
 
 1. The first time a table is read in a transaction, its snapshot information is stored in the transaction and will remain consistent within that transaction.
-2. Updates, inserts and deletes will only be committed to an Iceberg Table when the transaction is committed (i.e., `COMMIT`);
+2. Updates, inserts, and deletes will only be committed to an Iceberg Table when the transaction is committed (i.e., `COMMIT`);
 
 Point #1 is important for read performance. If you wish to do analytics on an Iceberg table and you do not need to get the latest version of the table every time, running your analytics in a transaction will prevent fetching the latest version for every query.
 

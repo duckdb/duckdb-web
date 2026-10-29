@@ -77,7 +77,7 @@ This extension supports:
 It does not currently support:
 
 - `DELETE`{:.language-sql .highlight} or `UPDATE`{:.language-sql .highlight}
-- Creation or manipulation of tables, views or schemas
+- Creation or manipulation of tables, views, or schemas
 
 ## Supported DuckDB Versions and Platforms
 

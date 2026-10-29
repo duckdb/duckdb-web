@@ -39,7 +39,7 @@ There are three other temporal types in SQL:
 
 * `DATE` – an integral count of days from a fixed date. In DuckDB, the fixed date is `1970-01-01`, again in UTC.
 * `TIME` – a (positive) count of microseconds up to a single day
-* `INTERVAL` – a set of fields for counting time differences. In DuckDB, intervals count months, days and microseconds. (Months are not completely well-defined, but when present, they represent 30 days.)
+* `INTERVAL` – a set of fields for counting time differences. In DuckDB, intervals count months, days, and microseconds. (Months are not completely well-defined, but when present, they represent 30 days.)
 
 None of these other temporal types except `TIME` can have a `WITH TIME ZONE` modifier (and shorter `TZ` suffix),
 but to understand what that modifier means, we first need to talk about *temporal binning*.

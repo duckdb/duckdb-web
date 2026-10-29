@@ -226,7 +226,7 @@ WHERE priority_level >= 'medium';
 | b    | medium          |
 
 
-So, if you want to e.g. "get all priorities at or above `medium`" then explicitly cast to the enum type:
+So, if you want to e.g. “get all priorities at or above `medium`” then explicitly cast to the enum type:
 
 ```sql
 SELECT * FROM tasks

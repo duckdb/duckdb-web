@@ -167,7 +167,7 @@ However, with fewer row groups than threads, we lose parallelism and can no long
 
 #### Concurrent Queries
 
-The effect becomes even clearer when several queries run at the same time. For this experiment, we ran TPC-H queries 1, 6, 9, and 18 concurrently against the same SF100 Parquet dataset on S3, using a single DuckDB instance. We picked these queries because they cover a mix of scans, aggregations, and joins, with different CPU and memory requirements. We repeated the experiment with the default memory configuration and with memory limits of 16 GB and 8 GB. The total runtime is the wall-clock time until all four queries finish. We report the average and peak CPU utilization (number of cores utilized), the peak bandwidth (bw.) and the peak resident set size (RSS).
+The effect becomes even clearer when several queries run at the same time. For this experiment, we ran TPC-H queries 1, 6, 9, and 18 concurrently against the same SF100 Parquet dataset on S3, using a single DuckDB instance. We picked these queries because they cover a mix of scans, aggregations, and joins, with different CPU and memory requirements. We repeated the experiment with the default memory configuration and with memory limits of 16 GB and 8 GB. The total runtime is the wall-clock time until all four queries finish. We report the average and peak CPU utilization (number of cores utilized), the peak bandwidth (bw.), and the peak resident set size (RSS).
 
 | Version    | Mem. limit | Runtime | Avg. CPU | Peak CPU |    Peak bw. | Peak RSS |
 | ---------- | ---------: | ------: | -------: | -------: | ----------: | -------: |

@@ -48,7 +48,7 @@ If DuckDB is installed through `pkg-config` or Vcpkg, the build finds it automat
 
 ## ICU Extension Missing from the Bundled Build
 
-Because crates.io imposes a 10 MB package-size limit, the `bundled` source of earlier crate versions excluded the [`icu` extension]({% link docs/2.0/core_extensions/icu.md %}). In DuckDB 2.0, the `icu` extension no longer depends on the ICU library and implements time zones, calendars and collations natively. If some collation or time-zone-aware date/time operations still fail out of the box with your crate version, install and load the extension at runtime:
+Because crates.io imposes a 10 MB package-size limit, the `bundled` source of earlier crate versions excluded the [`icu` extension]({% link docs/2.0/core_extensions/icu.md %}). In DuckDB 2.0, the `icu` extension no longer depends on the ICU library and implements time zones, calendars, and collations natively. If some collation or time-zone-aware date/time operations still fail out of the box with your crate version, install and load the extension at runtime:
 
 ```rust
 conn.execute_batch("INSTALL icu; LOAD icu;")?;

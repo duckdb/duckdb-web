@@ -2029,7 +2029,7 @@ converted. The result must be freed with `duckdb_free`.
 > Warning Deprecation notice. This method is scheduled for removal in a future release.
 
 No support for nested types, and for other complex types.
-The resulting field "string.data" must be freed with `duckdb_free.`
+The resulting field `string.data` must be freed with `duckdb_free.`
 
 
 ##### Return Value
@@ -2099,7 +2099,7 @@ The result must NOT be freed.
 ##### Return Value
 
 The duckdb_blob value at the specified location. Returns a blob with blob.data set to nullptr if the
-value cannot be converted. The resulting field "blob.data" must be freed with `duckdb_free.`
+value cannot be converted. The resulting field `blob.data` must be freed with `duckdb_free.`
 
 ##### Syntax
 
@@ -8509,8 +8509,8 @@ Note that the object must be destroyed with `duckdb_appender_destroy`.
 * `query`: The query to execute, can be an INSERT, DELETE, UPDATE or MERGE INTO statement.
 * `column_count`: The number of columns to append.
 * `types`: The types of the columns to append.
-* `table_name`: (optionally) the table name used to refer to the appended data, defaults to "appended_data".
-* `column_names`: (optionally) the list of column names, defaults to "col1", "col2", ...
+* `table_name`: (optionally) the table name used to refer to the appended data, defaults to `appended_data`.
+* `column_names`: (optionally) the list of column names, defaults to `col1`, `col2`, ...
 * `out_appender`: The resulting appender object.
 
 ##### Return Value
@@ -10033,7 +10033,7 @@ Sets the target type of the cast function.
 
 #### `duckdb_cast_function_set_implicit_cast_cost`
 
-Sets the "cost" of implicitly casting the source type to the target type using this function.
+Sets the “cost” of implicitly casting the source type to the target type using this function.
 
 ##### Syntax
 

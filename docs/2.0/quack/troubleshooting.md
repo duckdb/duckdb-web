@@ -62,7 +62,7 @@ Eager resolution adds metadata-loading work and can increase catalog enumeration
 
 Resolving only some tables before attaching is not enough: if any other unresolved table remains, the attachment still fails. Warming every table individually is a workaround, but restarting the server or adding new unresolved tables brings the problem back, so eager server-side resolution is the more reliable fix.
 
-### Querying Without Attaching
+### Querying without Attaching
 
 If you want to keep lazy resolution, use `quack_query()`, which runs SQL directly on the server without importing its catalog:
 

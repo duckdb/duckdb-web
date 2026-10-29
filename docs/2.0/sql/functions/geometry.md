@@ -31,7 +31,7 @@ The table below lists the operators that can be used with `GEOMETRY` values.
 | [`ST_CRS`](#st_crs-function) | Returns the Coordinate Reference System (CRS) identifier of the geometry |
 | [`ST_SetCRS`](#st_setcrs-function) | Sets the Coordinate Reference System (CRS) identifier of the geometry |
 
-### `ST_GeomFromWKB` function
+### `ST_GeomFromWKB` Function
 
 <div class="nostroke_table"></div>
 
@@ -39,7 +39,7 @@ The table below lists the operators that can be used with `GEOMETRY` values.
 | **Example** | `ST_GeomFromWKB('\x01\x01\x00\x00\x00\x00\x00\x00\x00\x00\x00\xF0?\x00\x00\x00\x00\x00\x00\x00@')` |
 | **Result** | `POINT(1 2)` |
 
-### `ST_AsWKB` function
+### `ST_AsWKB` Function
 
 <div class="nostroke_table"></div>
 
@@ -48,7 +48,7 @@ The table below lists the operators that can be used with `GEOMETRY` values.
 | **Result** | `\x01\x01\x00\x00\x00\x00\x00\x00\x00\x00\x00\xF0?\x00\x00\x00\x00\x00\x00\x00@` |
 | **Alias** | `ST_AsBinary` |
 
-### `ST_AsWKT` function
+### `ST_AsWKT` Function
 
 <div class="nostroke_table"></div>
 
@@ -57,7 +57,7 @@ The table below lists the operators that can be used with `GEOMETRY` values.
 | **Result** | `POINT (1 2)` |
 | **Alias** | `ST_AsText` |
 
-### `ST_Intersects_Extent` function
+### `ST_Intersects_Extent` Function
 
 <div class="nostroke_table"></div>
 
@@ -66,7 +66,7 @@ The table below lists the operators that can be used with `GEOMETRY` values.
 | **Result** | `true` |
 | **Alias** | `&&` |
 
-### `ST_CRS` function
+### `ST_CRS` Function
 
 <div class="nostroke_table"></div>
 
@@ -74,7 +74,7 @@ The table below lists the operators that can be used with `GEOMETRY` values.
 | **Example** | `ST_CRS('POINT(1 2)'::GEOMETRY('OGC:CRS84'))` |
 | **Result** | `OGC:CRS84` |
 
-### `ST_SetCRS` function
+### `ST_SetCRS` Function
 
 <div class="nostroke_table"></div>
 

@@ -20,7 +20,7 @@ Please refer to the [ADBC documentation page](https://arrow.apache.org/adbc/curr
 
 ## Implemented Functionality
 
-The DuckDB-ADBC driver implements the full ADBC specification, with the exception of the `ConnectionReadPartition`, `StatementExecutePartitions` and `StatementSetSubstraitPlan` functions. The first two exist to support systems that internally partition the query results, which does not apply to DuckDB. Substrait plans are not supported.
+The DuckDB-ADBC driver implements the full ADBC specification, with the exception of the `ConnectionReadPartition`, `StatementExecutePartitions`, and `StatementSetSubstraitPlan` functions. The first two exist to support systems that internally partition the query results, which does not apply to DuckDB. Substrait plans are not supported.
 In this section, we will describe the main functions that exist in ADBC, along with the arguments they take and provide examples for each function.
 
 ### Database
@@ -59,7 +59,7 @@ A set of functions that retrieve metadata about the database. In general, these 
 | Function name | Description | Arguments | Example |
 |:---|:-|:---|:----|
 | `ConnectionGetInfo` | Get metadata about the driver and database. | `(AdbcConnection*, const uint32_t*, size_t, ArrowArrayStream*, AdbcError*)` | `AdbcConnectionGetInfo(&adbc_connection, NULL, 0, &arrow_stream, &adbc_error)` |
-| `ConnectionGetObjects` | Get a hierarchical view of all catalogs, database schemas, tables and columns. | `(AdbcConnection*, int, const char*, const char*, const char*, const char**, const char*, ArrowArrayStream*, AdbcError*)` | `AdbcConnectionGetObjects(&adbc_connection, ADBC_OBJECT_DEPTH_ALL, NULL, NULL, NULL, NULL, NULL, &arrow_stream, &adbc_error)` |
+| `ConnectionGetObjects` | Get a hierarchical view of all catalogs, database schemas, tables, and columns. | `(AdbcConnection*, int, const char*, const char*, const char*, const char**, const char*, ArrowArrayStream*, AdbcError*)` | `AdbcConnectionGetObjects(&adbc_connection, ADBC_OBJECT_DEPTH_ALL, NULL, NULL, NULL, NULL, NULL, &arrow_stream, &adbc_error)` |
 | `ConnectionGetTableSchema` | Get the Arrow schema of a table. | `(AdbcConnection*, const char*, const char*, const char*, ArrowSchema*, AdbcError*)` | `AdbcConnectionGetTableSchema(&adbc_connection, NULL, NULL, "my_table", &arrow_schema, &adbc_error)` |
 | `ConnectionGetTableTypes` | Get a list of table types in the database. | `(AdbcConnection*, ArrowArrayStream*, AdbcError*)` | `AdbcConnectionGetTableTypes(&adbc_connection, &arrow_stream, &adbc_error)` |
 
@@ -87,7 +87,7 @@ A set of functions with transaction semantics for the connection. By default, al
 
 Statements hold state related to query execution. They represent both one-off queries and prepared statements. They can be reused; however, doing so will invalidate prior result sets from that statement.
 
-The functions used to create, destroy and set options for a statement:
+The functions used to create, destroy, and set options for a statement:
 
 | Function name | Description | Arguments | Example |
 |:---|:-|:---|:----|
@@ -215,7 +215,7 @@ Regardless of the programming language being used, there are two database option
 
 ### C++
 
-We begin our C++ example by declaring the essential variables for querying data through ADBC. These variables include Error, Database, Connection, Statement handling and an Arrow Stream to transfer data between DuckDB and the application.
+We begin our C++ example by declaring the essential variables for querying data through ADBC. These variables include Error, Database, Connection, Statement handling, and an Arrow Stream to transfer data between DuckDB and the application.
 
 ```cpp
 AdbcError adbc_error;
@@ -253,7 +253,7 @@ AdbcStatementExecuteQuery(&adbc_statement, &arrow_stream, &rows_affected, &adbc_
 arrow_stream.release(arrow_stream)
 ```
 
-Besides running queries, we can also ingest data via `arrow_stream`s. For this we need to set an option with the table name we want to insert to, bind the stream and then execute the query.
+Besides running queries, we can also ingest data via `arrow_stream`s. For this we need to set an option with the table name we want to insert to, bind the stream, and then execute the query.
 
 ```cpp
 StatementSetOption(&adbc_statement, ADBC_INGEST_OPTION_TARGET_TABLE, "AnswerToEverything", &adbc_error);
@@ -285,7 +285,7 @@ with adbc_driver_duckdb.dbapi.connect("test.db") as conn, conn.cursor() as cur:
     print(tbl)
 ```
 
-Alongside `fetch_arrow_table`, the cursor implements the standard DB-API methods, such as `fetchone` and `fetchall`. To load Arrow data into a table, pass the table name and the data, such as a `pyarrow` record batch or table, to `cur.adbc_ingest`. By default it creates the table and fails if the table exists; its `mode` argument also takes `"append"`, `"create_append"` and `"replace"`, as in the [ingestion modes](#ingestion-modes) above.
+Alongside `fetch_arrow_table`, the cursor implements the standard DB-API methods, such as `fetchone` and `fetchall`. To load Arrow data into a table, pass the table name and the data, such as a `pyarrow` record batch or table, to `cur.adbc_ingest`. By default it creates the table and fails if the table exists; its `mode` argument also takes `"append"`, `"create_append"`, and `"replace"`, as in the [ingestion modes](#ingestion-modes) above.
 
 ```python
 import adbc_driver_duckdb.dbapi

@@ -9,7 +9,7 @@ excerpt: "DuckDB used for streaming analytics? This post will show you some patt
 tag: using-duckdb
 ---
 
-The words “DuckDB” and “streaming” don't usually make it into the same sentence. Maybe this is because DuckDB has been positioned as an all powerful (but very lightweight) OLAP database. Or maybe this is because the ecosystem of streaming analytics has centered around names such as Kafka, Flink and Spark Streaming, and most recently players trying to change the game like Materialize or RisingWave. But can DuckDB be used in the context of streaming analytics? What is streaming analytics in the first place?
+The words “DuckDB” and “streaming” don't usually make it into the same sentence. Maybe this is because DuckDB has been positioned as an all powerful (but very lightweight) OLAP database. Or maybe this is because the ecosystem of streaming analytics has centered around names such as Kafka, Flink, and Spark Streaming, and most recently players trying to change the game like Materialize or RisingWave. But can DuckDB be used in the context of streaming analytics? What is streaming analytics in the first place?
 
 ## Streaming Analytics Patterns
 
@@ -23,7 +23,7 @@ Now that we have a definition, let's take a look at three common architectural p
 
 - In the **Materialized View Pattern**, it is very common to use a cloud data warehouse with support for materialized views (such as BigQuery or Snowflake). The stream of events is usually sunk to a raw table and a materialized view is created on top. This pattern is generally conceived as having a higher latency than the next two. However, there is not that much benchmarking around to conclude anything.
 
-- The **Streaming Engine Pattern** uses the more traditional ETL approach. A separate process using a streaming engine consumes the messages from the source, queries are then done on the fly and results are stored in a persisted table. Common engines are Spark Streaming, Flink, Kafka Streams or most recently Arroyo. This has traditionally come with a set of complications (e.g., dealing with watermarks, state management, increased memory load for infinite queries, etc.).
+- The **Streaming Engine Pattern** uses the more traditional ETL approach. A separate process using a streaming engine consumes the messages from the source, queries are then done on the fly, and results are stored in a persisted table. Common engines are Spark Streaming, Flink, Kafka Streams, or most recently Arroyo. This has traditionally come with a set of complications (e.g., dealing with watermarks, state management, increased memory load for infinite queries, etc.).
 
 - The **Streaming Database Pattern** is similar to the previous one in terms of latency but drastically simplifies the experience. Streaming databases like RisingWave or Materialize can directly read from the streaming source and update your materialized view on the fly. They aim at keeping ACID consistency and allowing clients to query data using the PostgreSQL wire protocol.
 

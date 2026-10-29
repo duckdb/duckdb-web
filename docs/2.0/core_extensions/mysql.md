@@ -162,7 +162,7 @@ CREATE TABLE duckdb_table AS FROM mysqlscanner.mysql_table;
 
 ## Writing Data to MySQL
 
-In addition to reading data from MySQL, create tables, ingest data into MySQL and make other modifications to a MySQL database using standard SQL queries.
+In addition to reading data from MySQL, create tables, ingest data into MySQL, and make other modifications to a MySQL database using standard SQL queries.
 
 This allows you to use DuckDB to, for example, export data that is stored in a MySQL database to Parquet, or read data from a Parquet file into MySQL.
 

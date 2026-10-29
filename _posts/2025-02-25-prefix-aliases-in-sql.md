@@ -79,7 +79,7 @@ Aliases can be quoted if necessary using *double* quotes:
 SELECT "forty two": 42;
 ```
 
-Prefix aliases can be used to name just about everything, for example expressions, function calls and subqueries in the `SELECT` clause:
+Prefix aliases can be used to name just about everything, for example expressions, function calls, and subqueries in the `SELECT` clause:
 
 ```sql
 SELECT

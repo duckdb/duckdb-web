@@ -217,7 +217,7 @@ FROM 'https://d37ci6vzurychx.cloudfront.net/trip-data/yellow_tripdata_2021-01.pa
 WHERE trip_distance < 6.3
 ```
 
-To create a histogram, call `%sqlplot histogram` and pass the name of the table, the column to plot and the number of bins.
+To create a histogram, call `%sqlplot histogram` and pass the name of the table, the column to plot, and the number of bins.
 This uses `--with short_trips` so JupySQL uses the query defined previously and therefore only plots a subset of the data.
 
 ```python

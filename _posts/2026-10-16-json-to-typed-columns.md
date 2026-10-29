@@ -29,7 +29,7 @@ INSERT INTO events VALUES
 
 Like most real payloads, the objects do not all have the same keys. Only the second event has a `duration_ms`, only the third has `items`, and the third has no `country`.
 
-## Picking out a Few Fields
+## Picking Out a Few Fields
 
 If you only need a handful of fields, the [JSON extraction operators]({% link docs/2.0/data/json/json_functions.md %}) are enough. `->` returns `JSON` and `->>` returns `VARCHAR`. Both accept a key name or a JSON path:
 

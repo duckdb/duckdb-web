@@ -16,7 +16,7 @@ Core DuckDB sets the default user-agent as follows:
 duckdb/v2.0.0(osx_arm64) cli
 ```
 
-which indicates the DuckDB version, the platform and the client API (the value of the `duckdb_api` setting, e.g., `cli`, `capi` or `cpp`). If the `custom_user_agent` setting is set, its value is appended to the user-agent string. Note that `custom_user_agent` can only be set when starting DuckDB (e.g., via the connection configuration), not while the database is running, see [Configuration]({% link docs/2.0/configuration/overview.md %}). The currently generated user-agent string can be seen via `PRAGMA user_agent;`, see [Configuration/Pragmas]({% link docs/2.0/configuration/pragmas.md %}#user-agent).
+which indicates the DuckDB version, the platform, and the client API (the value of the `duckdb_api` setting, e.g., `cli`, `capi`, or `cpp`). If the `custom_user_agent` setting is set, its value is appended to the user-agent string. Note that `custom_user_agent` can only be set when starting DuckDB (e.g., via the connection configuration), not while the database is running, see [Configuration]({% link docs/2.0/configuration/overview.md %}). The currently generated user-agent string can be seen via `PRAGMA user_agent;`, see [Configuration/Pragmas]({% link docs/2.0/configuration/pragmas.md %}#user-agent).
 
 In addition, some extensions set their own user agents; notable examples here include the following.
 

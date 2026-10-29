@@ -22,7 +22,7 @@ To set the stage, let's recall the [Unix philosophy](https://en.wikipedia.org/wi
 * work together, and
 * handle text streams.
 
-Unix-like systems such as macOS, Linux and [WSL in Windows](https://en.wikipedia.org/wiki/Windows_Subsystem_for_Linux) have embraced this philosophy.
+Unix-like systems such as macOS, Linux, and [WSL in Windows](https://en.wikipedia.org/wiki/Windows_Subsystem_for_Linux) have embraced this philosophy.
 Tools such as
 [`grep`](https://man7.org/linux/man-pages/man1/grep.1.html),
 [`sed`](https://man7.org/linux/man-pages/man1/sed.1.html), and
@@ -278,7 +278,7 @@ The Hague
 
 #### DuckDB: `INTERSECT ALL`
 
-The DuckDB solution reads the CSV files, projects the `city` fields and applies the [`INTERSECT ALL` clause]({% link docs/2.0/sql/query_syntax/setops.md %}#intersect-all-bag-semantics) to calculate the intersection:
+The DuckDB solution reads the CSV files, projects the `city` fields, and applies the [`INTERSECT ALL` clause]({% link docs/2.0/sql/query_syntax/setops.md %}#intersect-all-bag-semantics) to calculate the intersection:
 
 ```plsql
 COPY (

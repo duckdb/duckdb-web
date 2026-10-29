@@ -54,7 +54,7 @@ duckdb.sql("SELECT * FROM 'example.json'")    # directly query a JSON file
 
 ### DataFrames
 
-DuckDB can directly query Pandas DataFrames, Polars DataFrames and Arrow tables.
+DuckDB can directly query Pandas DataFrames, Polars DataFrames, and Arrow tables.
 Note that these are read-only, i.e., editing these tables via [`INSERT`]({% link docs/1.5/sql/statements/insert.md %}) or [`UPDATE` statements]({% link docs/1.5/sql/statements/update.md %}) is not possible.
 
 #### Pandas

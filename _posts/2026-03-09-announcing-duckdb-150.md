@@ -11,7 +11,7 @@ tag: release
 
 We are proud to release DuckDB v1.5.0, codenamed “Variegata” after the _Paradise shelduck_ (Tadorna variegata) endemic to New Zealand.
 
-In this blog post, we cover the most important updates for this release around support, features and extensions. As always, there is more: for the complete release notes, see the [release page on GitHub](https://github.com/duckdb/duckdb/releases/tag/v1.5.0).
+In this blog post, we cover the most important updates for this release around support, features, and extensions. As always, there is more: for the complete release notes, see the [release page on GitHub](https://github.com/duckdb/duckdb/releases/tag/v1.5.0).
 
 > To install the new version, please visit the [installation page]({% link install/index.html %}). Note that it can take a few days to release some extensions (e.g., the [UI]({% link docs/2.0/core_extensions/ui.md %})) client libraries (e.g., Go, R, Java) due to the extra changes and review rounds required.
 
@@ -22,11 +22,11 @@ The next release – planned for September – will ship a major version, DuckDB
 
 ### Command Line Client
 
-For users who use DuckDB through the terminal, the highlight of the new release is a rework of the CLI client with a new color scheme, dynamic prompts, a pager and many other convenience features.
+For users who use DuckDB through the terminal, the highlight of the new release is a rework of the CLI client with a new color scheme, dynamic prompts, a pager, and many other convenience features.
 
 #### Color Scheme
 
-We shipped a [new color palette]({% link docs/2.0/clients/cli/friendly_cli.md %}) and harmonized it with the documentation. The color palette is available in both dark mode and light mode. Both use two shades of gray, and five colors for keywords, strings, errors, functions and numbers. You can find the color palette in the [Design Manual]({% link design/manual/index.html %}#color-palette).
+We shipped a [new color palette]({% link docs/2.0/clients/cli/friendly_cli.md %}) and harmonized it with the documentation. The color palette is available in both dark mode and light mode. Both use two shades of gray, and five colors for keywords, strings, errors, functions, and numbers. You can find the color palette in the [Design Manual]({% link design/manual/index.html %}#color-palette).
 
 You can customize the color scheme using the `.highlight_colors` dot command:
 
@@ -312,7 +312,7 @@ We'll announce more details about these features in the blog post for DuckLake v
 
 #### Delta Lake
 
-For the [Delta Lake extension]({% link docs/2.0/core_extensions/delta.md %}), the team has focused on improving support for writes via [Unity Catalog]({% link docs/2.0/core_extensions/unity_catalog.md %}), Delta idempotent writes and table `CHECKPOINT`s.
+For the [Delta Lake extension]({% link docs/2.0/core_extensions/delta.md %}), the team has focused on improving support for writes via [Unity Catalog]({% link docs/2.0/core_extensions/unity_catalog.md %}), Delta idempotent writes, and table `CHECKPOINT`s.
 
 #### Iceberg
 
@@ -389,7 +389,7 @@ Most functions in `spatial` operate in Cartesian space and are unaffected by axi
 
 Additionally, `ST_Transform` also expects that the input geometries are in the same axis order as defined by the source coordinate reference system, which in the case of e.g., `EPSG:4326` is also (x = latitude, y = longitude).
 
-This has been a long-standing source of confusion and numerous issues, as other databases, formats and GIS systems tend to always treat `X` as “easting”, “left-right” or “longitude”, and `Y` as “northing”, “up-down” or “latitude”.
+This has been a long-standing source of confusion and numerous issues, as other databases, formats, and GIS systems tend to always treat `X` as “easting”, “left-right”, or “longitude”, and `Y` as “northing”, “up-down”, or “latitude”.
 
 We are changing how this currently works in DuckDB to be consistent with how other systems operate, and hopefully cause less confusion for new users in the future. However, to avoid silently breaking existing workflows that have adapted to this quirk (e.g., by using `ST_FlipCoordinates`), we are rolling out this change gradually via a new `geometry_always_xy` setting:
 
@@ -431,7 +431,7 @@ The `GEOMETRY` type now accepts an optional CRS parameter (e.g., `GEOMETRY('OGC:
 
 #### Non-Blocking Checkpointing
 
-During checkpointing, it's now possible to run concurrent reads ([#19867](https://github.com/duckdb/duckdb/pull/19867)), writes ([#20052](https://github.com/duckdb/duckdb/pull/20052)), insertions with indexes ([#20160](https://github.com/duckdb/duckdb/pull/20160)) and deletes ([#20286](https://github.com/duckdb/duckdb/pull/20286)). The rework of checkpointing benefits concurrent RW workloads and increases the TPC-H throughput score on SF100 from 246,115.60 to 287,122.97, a **17% improvement**.
+During checkpointing, it's now possible to run concurrent reads ([#19867](https://github.com/duckdb/duckdb/pull/19867)), writes ([#20052](https://github.com/duckdb/duckdb/pull/20052)), insertions with indexes ([#20160](https://github.com/duckdb/duckdb/pull/20160)), and deletes ([#20286](https://github.com/duckdb/duckdb/pull/20286)). The rework of checkpointing benefits concurrent RW workloads and increases the TPC-H throughput score on SF100 from 246,115.60 to 287,122.97, a **17% improvement**.
 
 #### Aggregates
 

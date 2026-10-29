@@ -1,11 +1,11 @@
 ---
 layout: post
-title: "Catching up with Windowing"
+title: "Catching Up with Windowing"
 authors:
   - Richard Wesley
 thumb: "/images/blog/thumbs/window-functions-1.svg"
 image: "/images/blog/thumbs/window-functions-1.png"
-excerpt: "DuckDB implements a number of modern windowing features, some of which are extensions to the SQL standard. This posts presents a few of these features, including GROUPS framing, QUALIFY and aggregate/function modifiers."
+excerpt: "DuckDB implements a number of modern windowing features, some of which are extensions to the SQL standard. This posts presents a few of these features, including GROUPS framing, QUALIFY, and aggregate/function modifiers."
 tag: using-duckdb
 ---
 
@@ -93,7 +93,7 @@ There are four options for `EXCLUDE` that specify how to treat the current row:
 * `TIES` – exclude all peer rows, but _not_ the current row (this makes a hole on either side)
 * `NO OTHERS` – don't exclude anything (the default)
 
-Exclusion is implemented for both windowed aggregates and for the `first`, `last` and `nth_value` functions.
+Exclusion is implemented for both windowed aggregates and for the `first`, `last`, and `nth_value` functions.
 
 ## `QUALIFY` Clause
 
@@ -144,7 +144,7 @@ QUALIFY row_number() OVER w = 3;
 
 ## Aggregate Modifiers
 
-There are several modifiers for ordinary aggregate functions (`FILTER`, `DISTINCT` and `ORDER BY` as an argument)
+There are several modifiers for ordinary aggregate functions (`FILTER`, `DISTINCT`, and `ORDER BY` as an argument)
 that are not part of the SQL:2003 standard for windowing, but which are also useful in a windowing context.
 `FILTER` is pretty straightforward (and DuckDB has supported it for a while)
 but the others are not easy to implement efficiently.

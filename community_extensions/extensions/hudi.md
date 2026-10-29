@@ -112,7 +112,14 @@ LOAD {{ page.extension.name }};
 
 <div class="extension_functions_table"></div>
 
-This extension does not add any functions.
+| function_name | function_type | description | comment | examples |
+|---------------|---------------|-------------|---------|----------|
+| hudi_commits  | table         | NULL        | NULL    |          |
+| hudi_files    | scalar        | NULL        | NULL    |          |
+| hudi_info     | scalar        | NULL        | NULL    |          |
+| hudi_mdt      | table         | NULL        | NULL    |          |
+| hudi_stats    | table         | NULL        | NULL    |          |
+| read_hudi     | table         | NULL        | NULL    |          |
 
 ### Overloaded Functions
 
@@ -130,6 +137,9 @@ This extension does not add any types.
 
 <div class="extension_settings_table"></div>
 
-This extension does not add any settings.
+|       name        |                                                                               description                                                                                | input_type | scope  | aliases | typed_value |
+|-------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------|------------|--------|---------|-------------|
+| hudi_row_estimate | Report the kernel's row count of the planned file slices as the estimated cardinality of a read_hudi scan (the count is size-based unless the metadata table records it) | BOOLEAN    | GLOBAL | []      | false       |
+| temp_directory    | Set the directory to which temporary files are written.                                                                                                                  | VARCHAR    | GLOBAL | []      | post.db.tmp |
 
 

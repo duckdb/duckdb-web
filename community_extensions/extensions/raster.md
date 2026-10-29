@@ -396,11 +396,11 @@ This table covers all DuckDB releases that have not reached [end-of-life](https:
 
 | Platform | 1.4.4 | 1.4.5 | 1.5.5 | 1.5.6 | 2.0.0 |
 | :--- | :---: | :---: | :---: | :---: | :---: |
-| Linux AMD64 | ❌ | ❌ | ✅ | ✅ | ❌ |
-| Linux ARM64 | ❌ | ❌ | ✅ | ✅ | ❌ |
+| Linux AMD64 | ❌ | ❌ | ✅ | ✅ | ✅ |
+| Linux ARM64 | ❌ | ❌ | ✅ | ✅ | ✅ |
 | macOS AMD64 | ❌ | ❌ | ✅ | ✅ | ❌ |
-| macOS ARM64 | ❌ | ❌ | ✅ | ✅ | ❌ |
-| Windows AMD64 | ❌ | ❌ | ✅ | ✅ | ❌ |
+| macOS ARM64 | ❌ | ❌ | ✅ | ✅ | ✅ |
+| Windows AMD64 | ❌ | ❌ | ✅ | ✅ | ✅ |
 | Windows ARM64 | ❌ | ❌ | ❌ | ❌ | ❌ |
 | WebAssembly | ❌ | ❌ | ❌ | ❌ | ❌ |
 
@@ -468,14 +468,18 @@ LOAD {{ page.extension.name }};
 | RT_Read             | table         | Opens a raster file (or a mosaic of raster files) and returns a table with the raster data. Supports filter pushdown on all non-BLOB columns.                                                        | NULL    | [SELECT * FROM RT_Read('path/to/raster/file.tif');]                                                                                              |
 | RT_ReadCells        | table         | Reads a raster file (or a mosaic of raster files) and returns a table with one row per value cell in the raster.                                                                                     | NULL    | [SELECT id, x, y, geometry, col, row, band_1, band_2, band_3 FROM RT_ReadCells('path/to/raster/file.tif');]                                      |
 | RT_Stats            | scalar        | Calculates statistics for a specific band (0-based index) of a raster, optionally within a geometry.                                                                                                 | NULL    | [SELECT * FROM RT_Stats('path/to/raster/file.tif', 0);]                                                                                          |
+| -                   | scalar        | NULL                                                                                                                                                                                                 | NULL    | NULL                                                                                                                                             |
 | RT_Cube2ArrayInt32  | scalar        | NULL                                                                                                                                                                                                 | NULL    | NULL                                                                                                                                             |
 | RT_Cube2TypeUInt64  | scalar        | NULL                                                                                                                                                                                                 | NULL    | NULL                                                                                                                                             |
+| /                   | scalar        | NULL                                                                                                                                                                                                 | NULL    | NULL                                                                                                                                             |
 | RT_Cube2TypeInt8    | scalar        | NULL                                                                                                                                                                                                 | NULL    | NULL                                                                                                                                             |
 | RT_Cube2ArrayFloat  | scalar        | NULL                                                                                                                                                                                                 | NULL    | NULL                                                                                                                                             |
+| +                   | scalar        | NULL                                                                                                                                                                                                 | NULL    | NULL                                                                                                                                             |
 | RT_Create           | table         | NULL                                                                                                                                                                                                 | NULL    | NULL                                                                                                                                             |
 | RT_Cube2ArrayUInt32 | scalar        | NULL                                                                                                                                                                                                 | NULL    | NULL                                                                                                                                             |
 | RT_Cube2ArrayDouble | scalar        | NULL                                                                                                                                                                                                 | NULL    | NULL                                                                                                                                             |
 | RT_Cube2TypeUInt8   | scalar        | NULL                                                                                                                                                                                                 | NULL    | NULL                                                                                                                                             |
+| *                   | scalar        | NULL                                                                                                                                                                                                 | NULL    | NULL                                                                                                                                             |
 | RT_Cube2ArrayInt64  | scalar        | NULL                                                                                                                                                                                                 | NULL    | NULL                                                                                                                                             |
 | RT_Cube2TypeUInt16  | scalar        | NULL                                                                                                                                                                                                 | NULL    | NULL                                                                                                                                             |
 | RT_Cube2TypeDouble  | scalar        | NULL                                                                                                                                                                                                 | NULL    | NULL                                                                                                                                             |
@@ -484,24 +488,19 @@ LOAD {{ page.extension.name }};
 | RT_Cube2ArrayInt16  | scalar        | NULL                                                                                                                                                                                                 | NULL    | NULL                                                                                                                                             |
 | RT_Cube2ArrayInt8   | scalar        | NULL                                                                                                                                                                                                 | NULL    | NULL                                                                                                                                             |
 | RT_Cube2ArrayUInt8  | scalar        | NULL                                                                                                                                                                                                 | NULL    | NULL                                                                                                                                             |
+| %                   | scalar        | NULL                                                                                                                                                                                                 | NULL    | NULL                                                                                                                                             |
 | RT_Cube2TypeFloat   | scalar        | NULL                                                                                                                                                                                                 | NULL    | NULL                                                                                                                                             |
 | RT_Cube2TypeInt16   | scalar        | NULL                                                                                                                                                                                                 | NULL    | NULL                                                                                                                                             |
 | RT_Cube2ArrayUInt16 | scalar        | NULL                                                                                                                                                                                                 | NULL    | NULL                                                                                                                                             |
 | RT_Cube2TypeUInt32  | scalar        | NULL                                                                                                                                                                                                 | NULL    | NULL                                                                                                                                             |
+| ^                   | scalar        | NULL                                                                                                                                                                                                 | NULL    | NULL                                                                                                                                             |
 | RT_Cube2ArrayUInt64 | scalar        | NULL                                                                                                                                                                                                 | NULL    | NULL                                                                                                                                             |
 
 ### Overloaded Functions
 
 <div class="extension_functions_table"></div>
 
-| function_name | function_type | description | comment | examples |
-|---------------|---------------|-------------|---------|----------|
-| -             | scalar        | NULL        | NULL    | NULL     |
-| /             | scalar        | NULL        | NULL    | NULL     |
-| +             | scalar        | NULL        | NULL    | NULL     |
-| *             | scalar        | NULL        | NULL    | NULL     |
-| %             | scalar        | NULL        | NULL    | NULL     |
-| ^             | scalar        | NULL        | NULL    | NULL     |
+This extension does not add any function overloads.
 
 ### Added Types
 
@@ -517,6 +516,8 @@ LOAD {{ page.extension.name }};
 
 <div class="extension_settings_table"></div>
 
-This extension does not add any settings.
+|      name      |                       description                       | input_type | scope  | aliases | typed_value |
+|----------------|---------------------------------------------------------|------------|--------|---------|-------------|
+| temp_directory | Set the directory to which temporary files are written. | VARCHAR    | GLOBAL | []      | post.db.tmp |
 
 

@@ -10,7 +10,7 @@ redirect_from:
 title: Overview of DuckDB Internals
 ---
 
-> Tip For a detailed explanation of DuckDB internals, see the [Design and Implementation of DuckDB Internals ("DiDi")]({% link _library/2026-03-19-design-and-implementation-of-duckdb-internals.md %}) library entry.
+> Tip For a detailed explanation of DuckDB internals, see the [Design and Implementation of DuckDB Internals (“DiDi”)]({% link _library/2026-03-19-design-and-implementation-of-duckdb-internals.md %}) library entry.
 
 On this page is a brief description of the internals of the DuckDB engine.
 
@@ -27,17 +27,17 @@ The parser is not aware of the catalog or any other aspect of the database. It w
 
 ### ParsedExpression
 
-The ParsedExpression represents an expression within a SQL statement. This can be e.g., a reference to a column, an addition operator or a constant value. The type of the ParsedExpression indicates what it represents, e.g., a comparison is represented as a [`ComparisonExpression`](https://github.com/duckdb/duckdb/blob/main/src/include/duckdb/parser/expression/comparison_expression.hpp).
+The ParsedExpression represents an expression within a SQL statement. This can be e.g., a reference to a column, an addition operator, or a constant value. The type of the ParsedExpression indicates what it represents, e.g., a comparison is represented as a [`ComparisonExpression`](https://github.com/duckdb/duckdb/blob/main/src/include/duckdb/parser/expression/comparison_expression.hpp).
 
 ParsedExpressions do **not** have types, except for nodes with explicit types such as `CAST` statements. The types for expressions are resolved in the Binder, not in the Parser.
 
 ### TableRef
 
-The TableRef represents any table source. This can be a reference to a base table, but it can also be a join, a table-producing function or a subquery.
+The TableRef represents any table source. This can be a reference to a base table, but it can also be a join, a table-producing function, or a subquery.
 
 ### QueryNode
 
-The QueryNode represents either (1) a `SELECT` statement, or (2) a set operation (i.e., `UNION`, `INTERSECT` or `DIFFERENCE`).
+The QueryNode represents either (1) a `SELECT` statement, or (2) a set operation (i.e., `UNION`, `INTERSECT`, or `DIFFERENCE`).
 
 ### SQL Statement
 

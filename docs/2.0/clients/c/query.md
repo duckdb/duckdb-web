@@ -51,7 +51,7 @@ Values can be extracted using either the `duckdb_fetch_chunk` function, or using
 See the [Types]({% link docs/2.0/clients/c/types.md %}) page for more information.
 
 > For optimal performance, use `duckdb_fetch_chunk` to extract data from the query result.
-> The `duckdb_value` functions perform internal type-checking, bounds-checking and casting which makes them slower.
+> The `duckdb_value` functions perform internal type-checking, bounds-checking, and casting which makes them slower.
 
 ### `duckdb_fetch_chunk`
 

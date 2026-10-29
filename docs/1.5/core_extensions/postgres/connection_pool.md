@@ -29,19 +29,19 @@ Thus in deployment environments with connection proxies it may be better to set 
 
 ## Reaper Thread
 
-The `postgres` extension supports running a background thread (so called "reaper thread") that periodically scans idle connections in the pool and closes the ones of them that exceed `idle_timeout_millis` or `max_lifetime_millis` values.
+The `postgres` extension supports running a background thread (so called “reaper thread”) that periodically scans idle connections in the pool and closes the ones of them that exceed `idle_timeout_millis` or `max_lifetime_millis` values.
 
 Separate thread is run for each connections pool, it can be enabled/disabled using `pg_pool_enable_reaper_thread` configuraton option.
 
 When the reaper thread is not running, `idle_timeout_millis` or `max_lifetime_millis` values of the connections still can be checked, but they are only checked when a connection is taken from the pool or returned to the pool.
 
-## Thread-local Cache
+## Thread-Local Cache
 
 Idle connection in a pool are available for any caller thread, be it a DuckDB internal worker thread or a new client thread. In some cases it may be beneficial to ensure, that subsequent queries from the same thread are run on the same connection as the first query.
 To support this the `pg_pool_enable_thread_local_cache` configuration option can be used - it makes an idle connection to be returned to a thread-local (and thread-private) cache instead of the main cache shared between all threads.
 
 > Warning 
-> Thread-local connection are not checked and not cleaned up by the reaper thread. Thread-local cache should be used with caution as cached connections, while not available to other threads, are still take the place in the pool, so can cause a "pool startvation".
+> Thread-local connection are not checked and not cleaned up by the reaper thread. Thread-local cache should be used with caution as cached connections, while not available to other threads, are still take the place in the pool, so can cause a “pool startvation”.
 
 ## Configuration Options
 

@@ -9,7 +9,7 @@ redirect_from:
 title: Date Format Functions
 ---
 
-The `strftime` and `strptime` functions can be used to convert between [`DATE`]({% link docs/2.0/sql/data_types/date.md %}) / [`TIMESTAMP`]({% link docs/2.0/sql/data_types/timestamp.md %}) values and strings. This is often required when parsing CSV files, displaying output to the user or transferring information between programs. Because there are many possible date representations, these functions accept a [format string](#format-specifiers) that describes how the date or timestamp should be structured.
+The `strftime` and `strptime` functions can be used to convert between [`DATE`]({% link docs/2.0/sql/data_types/date.md %}) / [`TIMESTAMP`]({% link docs/2.0/sql/data_types/timestamp.md %}) values and strings. This is often required when parsing CSV files, displaying output to the user, or transferring information between programs. Because there are many possible date representations, these functions accept a [format string](#format-specifiers) that describes how the date or timestamp should be structured.
 
 ## `strftime` Examples
 

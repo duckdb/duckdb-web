@@ -6,7 +6,7 @@ authors:
   - Hannes Mühleisen
 thumb: "/images/blog/thumbs/encryption-in-duckdb.svg"
 image: "/images/blog/thumbs/encryption-in-duckdb.png"
-excerpt: "DuckDB v1.4 ships database encryption capabilities. In this blog post, we dive into the implementation details of the encryption, show how to use it and demonstrate its performance implications."
+excerpt: "DuckDB v1.4 ships database encryption capabilities. In this blog post, we dive into the implementation details of the encryption, show how to use it, and demonstrate its performance implications."
 tag: deep-dive
 ---
 
@@ -35,7 +35,7 @@ For this reason, most systems choose to only support *randomized* encryption, me
 
 DuckDB v1.4 supports encryption at rest using AES-GCM-256 and AES-CTR-256 (counter mode) ciphers. AES-CTR is a simpler and faster version of AES-GCM, but less secure, since it does not provide authentication by calculating a tag. The 256 refers to the size of the key in bits, meaning that DuckDB now only supports GCM with 32-byte keys.
 
-GCM and CTR both require as input a (1) plaintext, (2) an initialization vector (IV) and (3) an encryption key. Plaintext is the text that a user wants to encrypt. An IV is a unique bytestream of usually 16 bytes, that ensures that identical plaintexts get encrypted into different ciphertexts. A *number used once* (nonce) is a bytestream of usually 12 bytes, that together with a 4-byte counter construct the IV. Note that the IV needs to be unique for every encrypted block, but it does not necessarily have to be random. Reuse of the same IV is problematic, since an attacker could XOR the two ciphertexts and extract both messages. The tag in AES-GCM is calculated after all blocks are encrypted, pretty much like a checksum, but it adds an integrity check that securely authenticates the entire ciphertext.
+GCM and CTR both require as input a (1) plaintext, (2) an initialization vector (IV), and (3) an encryption key. Plaintext is the text that a user wants to encrypt. An IV is a unique bytestream of usually 16 bytes, that ensures that identical plaintexts get encrypted into different ciphertexts. A *number used once* (nonce) is a bytestream of usually 12 bytes, that together with a 4-byte counter construct the IV. Note that the IV needs to be unique for every encrypted block, but it does not necessarily have to be random. Reuse of the same IV is problematic, since an attacker could XOR the two ciphertexts and extract both messages. The tag in AES-GCM is calculated after all blocks are encrypted, pretty much like a checksum, but it adds an integrity check that securely authenticates the entire ciphertext.
 
 ## Implementation in DuckDB
 
@@ -136,11 +136,11 @@ Encrypting the WAL is triggered by default when an encryption key is given for a
 
 ### Temporary File Encryption
 
-Temporary files are used to store intermediate data that is often necessary for large, out-of-core operations such as [sorting]({% post_url 2025-09-24-sorting-again %}), large joins and [window functions]({% post_url 2021-10-13-windowing %}). This data could contain sensitive information and can, in case of a crash, remain on disk. To protect this leftover data, DuckDB automatically encrypts temporary files too.
+Temporary files are used to store intermediate data that is often necessary for large, out-of-core operations such as [sorting]({% post_url 2025-09-24-sorting-again %}), large joins, and [window functions]({% post_url 2021-10-13-windowing %}). This data could contain sensitive information and can, in case of a crash, remain on disk. To protect this leftover data, DuckDB automatically encrypts temporary files too.
 
 #### The Structure of Temporary Files
 
-There are three different types of temporary files in DuckDB: (1) temporary files that have the same layout as a regular 256KB block, (2) compressed temporary files and (3) temporary files that exceed the standard 256KB block size. The former two are suffixed with .tmp, while the latter is distinguished by a suffix with .block. To keep track of the size of .block temporary files, they are always prefixed with its length. As opposed to regular database blocks, temporary files do not contain a checksum to check for data corruption, since the calculation of a checksum is somewhat expensive.
+There are three different types of temporary files in DuckDB: (1) temporary files that have the same layout as a regular 256KB block, (2) compressed temporary files, and (3) temporary files that exceed the standard 256KB block size. The former two are suffixed with .tmp, while the latter is distinguished by a suffix with .block. To keep track of the size of .block temporary files, they are always prefixed with its length. As opposed to regular database blocks, temporary files do not contain a checksum to check for data corruption, since the calculation of a checksum is somewhat expensive.
 
 #### Encrypting Temporary Files
 
@@ -171,7 +171,7 @@ This sequence of commands will result in encrypted temporary files being written
 
 ## How to Use Encryption in DuckDB
 
-In DuckDB, you can (1) encrypt an existing database, (2) initialize a new, empty encrypted database or (3) reencrypt a database. For example, let's create a new database, load this database with TPC-H data of scale factor 1 and then encrypt this database.
+In DuckDB, you can (1) encrypt an existing database, (2) initialize a new, empty encrypted database, or (3) reencrypt a database. For example, let's create a new database, load this database with TPC-H data of scale factor 1, and then encrypt this database.
 
 ```sql
 INSTALL tpch;

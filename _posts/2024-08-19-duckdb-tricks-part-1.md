@@ -23,7 +23,7 @@ The operations are summarized in the following table:
 
 ## Creating the Example Data Set
 
-We start by creating a data set that we'll use in the rest of the blog post. To this end, we define a table, populate it with some data and export it to a CSV file.
+We start by creating a data set that we'll use in the rest of the blog post. To this end, we define a table, populate it with some data, and export it to a CSV file.
 
 ```sql
 CREATE TABLE example (s STRING, x DOUBLE);
@@ -176,7 +176,7 @@ Note that the `+ 42` is only necessary to nudge the first row from its position 
 
 ## Specifying Types in the CSV Loader
 
-DuckDB’s CSV loader auto-detects types from a [short list]({% link docs/2.0/data/csv/auto_detection.md %}#type-detection) of `BOOLEAN`, `BIGINT`, `DOUBLE`, `TIME`, `DATE`, `TIMESTAMP` and `VARCHAR`.
+DuckDB’s CSV loader auto-detects types from a [short list]({% link docs/2.0/data/csv/auto_detection.md %}#type-detection) of `BOOLEAN`, `BIGINT`, `DOUBLE`, `TIME`, `DATE`, `TIMESTAMP`, and `VARCHAR`.
 In some cases, it’s desirable to override the detected type of a given column with a type outside of this list.
 For example, we may want to treat column `x` as a `DECIMAL` value from the get-go.
 We can do this on a per-column basis with the `types` argument of the `read_csv` function:
@@ -205,7 +205,7 @@ FROM example;
 
 ## Updating CSV Files In-Place
 
-In DuckDB, it is possible to read, process and write CSV files in-place. For example, to project the column `s` into the same file, we can simply run:
+In DuckDB, it is possible to read, process, and write CSV files in-place. For example, to project the column `s` into the same file, we can simply run:
 
 ```sql
 COPY (SELECT s FROM 'example.csv') TO 'example.csv';

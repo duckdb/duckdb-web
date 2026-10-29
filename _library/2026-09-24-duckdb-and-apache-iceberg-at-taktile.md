@@ -23,4 +23,4 @@ venue: "DuckDB Paris Meetup"
 
 ## Abstract
 
-Tom Larkworthy, Staff Engineer at Taktile, shares how Taktile combines DuckDB with Apache Iceberg to run fast analytical workloads. The talk explores how these technologies fit together, the architectural decisions behind the approach and what teams can learn from using DuckDB with an open lakehouse table format.
+Tom Larkworthy, Staff Engineer at Taktile, shares how Taktile combines DuckDB with Apache Iceberg to run fast analytical workloads. The talk explores how these technologies fit together, the architectural decisions behind the approach, and what teams can learn from using DuckDB with an open lakehouse table format.

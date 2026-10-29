@@ -20,7 +20,7 @@ pip install -U duckdb numpy pyarrow torch
 
 ## DuckDB to PyTorch
 
-This example queries a Parquet-backed Arrow dataset, streams the result as `RecordBatch` objects and converts each batch into feature and label tensors.
+This example queries a Parquet-backed Arrow dataset, streams the result as `RecordBatch` objects, and converts each batch into feature and label tensors.
 
 ```python
 import pathlib

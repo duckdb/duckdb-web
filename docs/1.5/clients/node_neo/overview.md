@@ -835,7 +835,7 @@ DuckDBTimestampTZValue.timezoneOffsetInMinutes =
   reader.getColumns()[0][0];
 ```
 
-### Append To Table
+### Append to Table
 
 ```ts
 await connection.run(
@@ -886,7 +886,7 @@ appender.appendDataChunk(chunk);
 appender.flushSync();
 ```
 
-See "Specifying Values" above for how to supply values to the appender.
+See “Specifying Values” above for how to supply values to the appender.
 
 ### Extract Statements
 

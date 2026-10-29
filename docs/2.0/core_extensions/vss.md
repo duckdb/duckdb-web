@@ -124,13 +124,13 @@ Due to some known issues related to persistence of custom extension indexes, the
 
 The reasoning for locking this feature behind an experimental flag is that “WAL” recovery is not yet properly implemented for custom indexes, meaning that if a crash occurs or the database is shut down unexpectedly while there are uncommitted changes to a `HNSW`-indexed table, you can end up with **data loss or corruption of the index**.
 
-If you enable this option and experience an unexpected shutdown, you can try to recover the index by first starting DuckDB separately, loading the `vss` extension and then `ATTACH`ing the database file, which ensures that the `HNSW` index functionality is available during WAL-playback, allowing DuckDB's recovery process to proceed without issues. But we still recommend that you do not use this feature in production environments.
+If you enable this option and experience an unexpected shutdown, you can try to recover the index by first starting DuckDB separately, loading the `vss` extension, and then `ATTACH`ing the database file, which ensures that the `HNSW` index functionality is available during WAL-playback, allowing DuckDB's recovery process to proceed without issues. But we still recommend that you do not use this feature in production environments.
 
 With the `hnsw_enable_experimental_persistence` option enabled, the index will be persisted into the DuckDB database file (if you run DuckDB with a disk-backed database file), which means that after a database restart, the index can be loaded back into memory from disk instead of having to be re-created. With that in mind, there are no incremental updates to persistent index storage, so every time DuckDB performs a checkpoint the entire index will be serialized to disk and overwrite itself. Similarly, after a restart of the database, the index will be deserialized back into main memory in its entirety. Although this will be deferred until you first access the table associated with the index. Depending on how large the index is, the deserialization process may take some time, but it should still be faster than simply dropping and re-creating the index.
 
-## Inserts, Updates, Deletes and Re-Compaction
+## Inserts, Updates, Deletes, and Re-Compaction
 
-The HNSW index does support inserting, updating and deleting rows from the table after index creation. However, there are two things to keep in mind:
+The HNSW index does support inserting, updating, and deleting rows from the table after index creation. However, there are two things to keep in mind:
 
 * It's faster to create the index after the table has been populated with data as the initial bulk load can make better use of parallelism on large tables.
 * Deletes are not immediately reflected in the index, but are instead “marked” as deleted, which can cause the index to grow stale over time and negatively impact query quality and performance.
@@ -139,7 +139,7 @@ To remedy the last point, you can call the `PRAGMA hnsw_compact_index('⟨index_
 
 ## Bonus: Vector Similarity Search Joins
 
-The `vss` extension also provides a couple of table macros to simplify matching multiple vectors against each other, so called "fuzzy joins". These are:
+The `vss` extension also provides a couple of table macros to simplify matching multiple vectors against each other, so called “fuzzy joins”. These are:
 
 * `vss_join(left_table, right_table, left_col, right_col, k, metric := 'l2sq')`
 * `vss_match(right_table", left_col, right_col, k, metric := 'l2sq')`

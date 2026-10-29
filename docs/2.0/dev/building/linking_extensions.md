@@ -62,7 +62,7 @@ Queries that depend on them then fail at runtime. For example, `SELECT to_minute
 A program can also skip the generated loader and call `duckdb_register_static_extension` directly on the describe functions it declares itself.
 An archive whose describe function is never registered contributes nothing, and a registered extension whose archive is missing fails the link.
 
-### Calling the Loader Before `main`
+### Calling the Loader before `main`
 
 A C++ program that wants registration to happen automatically before `main` compiles `extension/loader/static_extension_autoregister.cpp` alongside the loader.
 Compile it into the program itself, not into an archive, or the linker drops it.

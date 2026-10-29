@@ -9,7 +9,7 @@ title: Command Line Client
 
 ## Installation
 
-The DuckDB CLI (Command Line Interface) is a single, dependency-free executable. It is precompiled for Windows, Mac and Linux for both the stable version and for nightly builds produced by GitHub Actions. Please see the [installation page]({% link install/index.html %}) under the CLI tab for download links.
+The DuckDB CLI (Command Line Interface) is a single, dependency-free executable. It is precompiled for Windows, Mac, and Linux for both the stable version and for nightly builds produced by GitHub Actions. Please see the [installation page]({% link install/index.html %}) under the CLI tab for download links.
 
 The DuckDB CLI is based on the SQLite command line shell, so CLI-client-specific functionality is similar to what is described in the [SQLite documentation](https://www.sqlite.org/cli.html) (although DuckDB's SQL syntax follows PostgreSQL conventions with a [few exceptions]({% link docs/1.5/sql/dialect/postgresql_compatibility.md %})).
 
@@ -43,7 +43,7 @@ For a full list of options, see the [command line arguments page]({% link docs/1
 ### In-Memory vs. Persistent Database
 
 When no `⟨FILENAME⟩`{:.language-sql .highlight} argument is provided, the DuckDB CLI will open a temporary [in-memory database]({% link docs/1.5/connect/overview.md %}#in-memory-database).
-You will see DuckDB's version number, the information on the connection and a prompt starting with a `D`.
+You will see DuckDB's version number, the information on the connection, and a prompt starting with a `D`.
 
 ```batch
 duckdb
@@ -75,11 +75,11 @@ SELECT 'quack' AS my_column;
 |-----------|
 | quack     |
 
-The CLI supports all of DuckDB's rich [SQL syntax]({% link docs/1.5/sql/introduction.md %}) including `SELECT`, `CREATE` and `ALTER` statements.
+The CLI supports all of DuckDB's rich [SQL syntax]({% link docs/1.5/sql/introduction.md %}) including `SELECT`, `CREATE`, and `ALTER` statements.
 
 ### Editor Features
 
-The CLI supports [autocompletion]({% link docs/1.5/clients/cli/autocomplete.md %}), and has sophisticated [editor features]({% link docs/1.5/clients/cli/editing.md %}) and [syntax highlighting]({% link docs/1.5/clients/cli/syntax_highlighting.md %}) on macOS, Linux and Windows.
+The CLI supports [autocompletion]({% link docs/1.5/clients/cli/autocomplete.md %}), and has sophisticated [editor features]({% link docs/1.5/clients/cli/editing.md %}) and [syntax highlighting]({% link docs/1.5/clients/cli/syntax_highlighting.md %}) on macOS, Linux, and Windows.
 
 ### Exiting the CLI
 
@@ -130,7 +130,7 @@ The `--sql` option allows setting the database path using a SQL expression:
 #### Output Formats
 
 The `.mode` [dot command]({% link docs/1.5/clients/cli/dot_commands.md %}#mode) may be used to change the appearance of the tables returned in the terminal output.
-These include the default `duckbox` mode, `csv` and `json` mode for ingestion by other tools, `markdown` and `latex` for documents and `insert` mode for generating SQL statements.
+These include the default `duckbox` mode, `csv` and `json` mode for ingestion by other tools, `markdown` and `latex` for documents, and `insert` mode for generating SQL statements.
 
 #### Writing Results to a File
 
@@ -346,7 +346,7 @@ DuckDB calculates the estimated time to completion through the following process
 
 The Kalman filter adapts to changing execution conditions such as memory pressure, I/O bottlenecks, or network delays. This adaptive approach means estimated completion times may not always decrease linearly—estimates can increase when query execution becomes less predictable.
 
-### Factors Affecting The Accuracy of Query Completion ETA
+### Factors Affecting the Accuracy of Query Completion ETA
 
 Completion time estimates may be less reliable under these conditions:
 

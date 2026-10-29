@@ -13,23 +13,23 @@ tag: using-duckdb
 
 ## From Copy-Paste to Code
 
-Matt's career started in 2008 the way many data careers do: with spreadsheets. As a fresh graduate, he spent his days copying and pasting between Excel, Microsoft Access and SQL Server. Assembling a single report could take three hours, and one mistake meant starting over.
+Matt's career started in 2008 the way many data careers do: with spreadsheets. As a fresh graduate, he spent his days copying and pasting between Excel, Microsoft Access, and SQL Server. Assembling a single report could take three hours, and one mistake meant starting over.
 
 **“There's got to be an easier way,”** he remembers thinking. His dad taught him how to write VBA macros, and that was the first step. Next, he got access to the SQL Server and Oracle databases behind those spreadsheets and started querying the source directly instead of other people's workbooks. Macros turned into scheduled stored procedures, and stored procedures turned into automated pipelines. 
 
 When he started, the team published its 20 to 30 daily reports by 10 AM. By the time he had automated the process, the reports were out by 6 AM, before anyone had touched anything.
 
-## Teradata, BigQuery and the Spark Years
+## Teradata, BigQuery, and the Spark Years
 
 From there, Matt moved into big data. Teradata gave him his first taste of massively parallel processing, along with lessons about data skew and distributing work evenly across nodes. Around 2016, at The Home Depot, he moved to Google BigQuery. BigQuery did not support stored procedures at the time, so Matt picked up Python, then pandas and eventually Apache Spark.
 
-Spark was powerful, but it was also heavy. Even local testing meant aligning JVM and Spark versions, deciphering stack traces that ran for hundreds of lines and waiting three to five minutes for the cluster to warm up before processing a few hundred files. **“A lot of battle scars,”** as Matt puts it.
+Spark was powerful, but it was also heavy. Even local testing meant aligning JVM and Spark versions, deciphering stack traces that ran for hundreds of lines, and waiting three to five minutes for the cluster to warm up before processing a few hundred files. **“A lot of battle scars,”** as Matt puts it.
 
-He is also skeptical that most teams need that machinery. Outside a handful of domains such as aerospace, fraud detection and high-frequency trading, he rarely sees workloads that truly need to churn through petabytes at speed. More often, it is the classic meme: someone insists on real-time data, and it turns out to be for a monthly report.
+He is also skeptical that most teams need that machinery. Outside a handful of domains such as aerospace, fraud detection, and high-frequency trading, he rarely sees workloads that truly need to churn through petabytes at speed. More often, it is the classic meme: someone insists on real-time data, and it turns out to be for a monthly report.
 
 ## Meeting DuckDB
 
-Matt first came across DuckDB around 2022. At first, he was not sure what to make of it: it was not pandas, not Spark and not SQLite, yet it promised SQL for transforming data. Then he installed it and read a CSV file with two lines of code:
+Matt first came across DuckDB around 2022. At first, he was not sure what to make of it: it was not pandas, not Spark, and not SQLite, yet it promised SQL for transforming data. Then he installed it and read a CSV file with two lines of code:
 
 ```python
 import duckdb
@@ -45,7 +45,7 @@ SELECT count(*) AS num_rows
 FROM 's3://⟨bucket⟩/exports/*.parquet';
 ```
 
-And from there, to mixing CSV, Parquet and Iceberg tables in a single query:
+And from there, to mixing CSV, Parquet, and Iceberg tables in a single query:
 
 ```sql
 INSTALL iceberg;
@@ -80,7 +80,7 @@ He is experimenting with LLM-based assistants for this, but likes knowing that h
 
 ## Why DuckLake
 
-As open table formats took off, Matt worked extensively with Apache Iceberg and Delta Lake. Both are good at managing large datasets and their version history. The trouble starts when the metadata grows. Iceberg writes several metadata files per transaction, including metadata JSON, manifest lists and manifests. Over time, a query that used to plan in seconds can slow down significantly because thousands of metadata files need to be resolved first.
+As open table formats took off, Matt worked extensively with Apache Iceberg and Delta Lake. Both are good at managing large datasets and their version history. The trouble starts when the metadata grows. Iceberg writes several metadata files per transaction, including metadata JSON, manifest lists, and manifests. Over time, a query that used to plan in seconds can slow down significantly because thousands of metadata files need to be resolved first.
 
 [DuckLake](https://ducklake.select/) takes a different approach: it stores all metadata in a SQL database. **“Organizations have been doing SQL for over four decades and have gotten very, very good at optimizing queries,”** Matt says. In his experience, catalog operations that take seconds with Iceberg resolve in under a millisecond with DuckLake, because they are queries against indexed tables. 
 
@@ -114,7 +114,7 @@ Matt has been testing the DuckDB v2.0 alpha and has not run into any regressions
 
 **Dynamic `ATTACH` statements.** While writing the book, Matt needed to attach AWS Glue catalogs in examples. Up to v1.5, the `ATTACH` path had to be a literal, so the account number had to be hard-coded in the script, as calling `getenv` raised an error. 
 
-Matt filed a feature request, and a pull request followed within two days. In v2.0, `ATTACH` accepts expressions, so account IDs, usernames, passwords and connection strings can come from environment variables at runtime instead of living in the script:
+Matt filed a feature request, and a pull request followed within two days. In v2.0, `ATTACH` accepts expressions, so account IDs, usernames, passwords, and connection strings can come from environment variables at runtime instead of living in the script:
 
 ```sql
 ATTACH getenv('AWS_ACCOUNT_ID') AS glue_catalog (
@@ -132,7 +132,7 @@ SELECT count(*) AS num_events
 FROM read_json('s3://⟨bucket⟩/logs/*.json');
 ```
 
-For workloads such as log analytics over large numbers of raw files in S3, Google Cloud Storage or Azure, where teams would traditionally spin up a wide Spark cluster, a single DuckDB process can now keep up, with less overhead and lower cost.
+For workloads such as log analytics over large numbers of raw files in S3, Google Cloud Storage, or Azure, where teams would traditionally spin up a wide Spark cluster, a single DuckDB process can now keep up, with less overhead and lower cost.
 
 **Quack.** The [Quack remote protocol]({% link docs/2.0/quack/overview.md %}) turns a DuckDB instance into a server that other DuckDB instances can connect to over HTTP. Matt likes the cleaner connect and disconnect syntax in v2.0 and the official DuckLake support. 
 

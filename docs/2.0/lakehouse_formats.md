@@ -13,7 +13,7 @@ Lakehouse formats, often referred to as open table formats, are specifications f
 
 ## DuckDB Lakehouse Support Matrix
 
-DuckDB supports Iceberg, Delta, Lance and DuckLake as first-class citizens. The following matrix represents what DuckDB natively supports out of the box through core extensions.
+DuckDB supports Iceberg, Delta, Lance, and DuckLake as first-class citizens. The following matrix represents what DuckDB natively supports out of the box through core extensions.
 
 |                              | DuckLake                                                              | Iceberg                                                                 | Delta                                                      | Lance                                                      |
 | ---------------------------- | :-------------------------------------------------------------------- | :---------------------------------------------------------------------- | :--------------------------------------------------------- | :--------------------------------------------------------- |

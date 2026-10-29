@@ -168,8 +168,8 @@ Each statically links the matching bundled extension. All imply `bundled-cmake`,
 | Feature | Enables |
 |--|--|
 | `vtab-full` | `vtab-arrow` and `appender-arrow`, plus the deprecated `vtab-excel`. |
-| `extensions-full` | `json`, `parquet` and `vtab-full`. |
-| `modern-full` | `chrono`, `serde_json`, `url`, `r2d2`, `uuid`, `polars` and `rust_decimal`. |
+| `extensions-full` | `json`, `parquet`, and `vtab-full`. |
+| `modern-full` | `chrono`, `serde_json`, `url`, `r2d2`, `uuid`, `polars`, and `rust_decimal`. |
 
 ### Deprecated Features
 
