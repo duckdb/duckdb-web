@@ -114,7 +114,7 @@ Now that we covered DuckDB extensions and vcpkg, we have shown how DuckDB can ma
 portability, maintainability and stability more than necessary. Next, we'll make things a bit more tangible by looking at
 one of DuckDB's extensions and how it uses vcpkg to manage its dependencies.
 
-### Example: Azure extension
+### Example: Azure Extension
 
 The [Azure]({% link docs/2.0/core_extensions/azure.md %}) extension provides functionality related to [Microsoft Azure](https://azure.microsoft.com/),
 one of the major cloud providers. DuckDB's Azure extension depends on the Azure C++ SDK to support reading directly from
@@ -165,7 +165,7 @@ contributors. However, all of this applies to anyone who wants to build an exten
 which contains all the necessary build scripts, CI/CD pipeline and vcpkg configuration to build, test and deploy a DuckDB extension in
 minutes. It can automatically build the loadable extension binaries for all available platforms, including Wasm.
 
-### Setting up the Extension Template
+### Setting Up the Extension Template
 
 To demonstrate how simple this process is, let's go through all the steps of building a DuckDB extension from scratch,
 including adding a vcpkg-managed external dependency.

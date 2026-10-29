@@ -11,7 +11,7 @@ title: AsOf Join
 how_to_topic: sql-features
 ---
 
-## What is an AsOf Join?
+## What Is an AsOf Join?
 
 Time series data is not always perfectly aligned.
 Clocks may be slightly off, or there may be a delay between cause and effect.

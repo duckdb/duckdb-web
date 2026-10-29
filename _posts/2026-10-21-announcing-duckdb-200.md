@@ -48,7 +48,7 @@ DuckDB 2.0.0 ships a polished version of the Quack protocol with substantial per
 
 <div class="duck-diagram-box" markdown="1">
 
-#### <svg class="icon"><use href="#database-01"></use></svg> DuckDB server
+#### <svg class="icon"><use href="#database-01"></use></svg> DuckDB Server
 
 ```sql
 CALL quack_serve(
@@ -69,7 +69,7 @@ INSERT INTO events VALUES
 
 <div class="duck-diagram-box" markdown="1">
 
-#### <svg class="icon"><use href="#database-01"></use></svg> DuckDB client
+#### <svg class="icon"><use href="#database-01"></use></svg> DuckDB Client
 
 ```sql
 ATTACH 'quack:localhost'
@@ -106,7 +106,7 @@ The CLI also has shortcuts for setting up a Quack client-server pair: the new [`
 
 <div class="duck-diagram-box" markdown="1">
 
-#### <svg class="icon"><use href="#database-01"></use></svg> CLI server
+#### <svg class="icon"><use href="#database-01"></use></svg> CLI Server
 
 ```batch
 duckdb -serve
@@ -124,7 +124,7 @@ CREATE TABLE t AS
 
 <div class="duck-diagram-box" markdown="1">
 
-#### <svg class="icon"><use href="#database-01"></use></svg> CLI client
+#### <svg class="icon"><use href="#database-01"></use></svg> CLI Client
 
 ```batch
 duckdb -connect
@@ -373,7 +373,7 @@ Following DuckDB's long stint on C++11, DuckDB 2.0 now [requires a C++17 compile
 
 We also switched to Clang as the default compiler for our release builds. On Linux and macOS, both DuckDB and its core extensions are built with Clang. On Windows, the CLI is built with Clang, while most core extensions are still built with MSVC. We may move more Windows builds to Clang in the future, but this requires further changes.
 
-### Timezones, Calendars and Collations Without ICU
+### Timezones, Calendars and Collations without ICU
 
 Timezone-aware timestamps, calendars and collations have always been powered by the ICU library. In 2.0, the ICU library is gone entirely: the [`icu` extension]({% link docs/2.0/core_extensions/icu.md %}) now implements timezones, calendars and collations itself, with the timezone data built directly from the IANA database and compressed down to around 45 kB.
 

@@ -281,7 +281,7 @@ Starting from this release, the DuckDB command line utility (`duckdb`) and the d
 curl https://install.duckdb.org | bash
 ```
 
-### Moved Python Integration to its Own Repository
+### Moved Python Integration to Its Own Repository
 
 We have been slowly moving language integrations (“clients”) into their own repositories from `duckdb/duckdb`. For this release, we moved the Python client to its [own repository](https://github.com/duckdb/duckdb-python), `duckdb/duckdb-python`. Please make sure to [file issues](https://github.com/duckdb/duckdb-python/issues/new) related to the Python client there.
 

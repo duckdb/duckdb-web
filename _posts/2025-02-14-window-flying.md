@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Flying Through Windows"
+title: "Flying through Windows"
 authors:
   - Richard Wesley
 thumb: "/images/blog/thumbs/window-functions-2.svg"

@@ -244,7 +244,7 @@ A helpful analogy is to think of CRSs as the equivalent of "time zones", but for
 
 When working with geospatial data, it's important to be aware of the CRS associated with different datasets. Performing spatial operations on geometries in different CRSs without proper transformation will most likely lead to incorrect results.
 
-### How are Coordinate Reference Systems Stored in DuckDB?
+### How Are Coordinate Reference Systems Stored in DuckDB?
 
 To avoid these kinds of mistakes, DuckDB makes it possible to explicitly associate a CRS with a `GEOMETRY` column. 
 

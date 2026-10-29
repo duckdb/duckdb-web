@@ -346,7 +346,7 @@ DuckDB calculates the estimated time to completion through the following process
 
 The Kalman filter adapts to changing execution conditions such as memory pressure, I/O bottlenecks, or network delays. This adaptive approach means estimated completion times may not always decrease linearly—estimates can increase when query execution becomes less predictable.
 
-### Factors Affecting The Accuracy of Query Completion ETA
+### Factors Affecting the Accuracy of Query Completion ETA
 
 Completion time estimates may be less reliable under these conditions:
 

@@ -209,7 +209,7 @@ ALTER TABLE test RENAME COLUMN s.j TO l;
 
 Altering structs is also supported [inside `LIST` and `MAP` columns](https://github.com/duckdb/duckdb/pull/17462).
 
-### Swapping in New Databases
+### Swapping In New Databases
 
 The [`ATTACH OR REPLACE` clause](https://github.com/duckdb/duckdb/pull/15355) allows you to replace a database,
 so you can swap a database on the fly.

@@ -58,7 +58,7 @@ DuckDB 2.0 issues reads in the background and keeps multiple requests in flight,
 * [Thread pools]({% link docs/2.0/data/io.md %}#thread-pools) and [read-ahead]({% link docs/2.0/data/io.md %}#read-ahead)
 * [Asynchronous I/O configuration settings]({% link docs/2.0/configuration/overview.md %})
 
-## Faster Queries Across the Board
+## Faster Queries across the Board
 
 DuckDB 2.0 included optimizer and engine improvements, including faster recursive CTEs and better row-group pruning.
 
@@ -80,7 +80,7 @@ DuckDB 2.0 introduced a PEG-based SQL parser that replaces the PostgreSQL-derive
 * [PEG parser]({% link docs/2.0/sql/peg_parser.md %})
 * [Legacy parser extension]({% link docs/2.0/core_extensions/legacy_parser.md %}) for switching back to the old parser
 
-## Timezones, Calendars and Collations Without ICU
+## Timezones, Calendars and Collations without ICU
 
 DuckDB 2.0 replaces the ICU library with a smaller, faster native implementation of timezone, calendar and collation support in the `icu` extension.
 

@@ -50,7 +50,7 @@ caddy run --config Caddyfile
 
 The first run will prompt for elevation to install Caddy's local CA into your system trust store. After that, certs issued by Caddy for `localhost` are trusted system-wide.
 
-### 2. Start Quack and Connect Through the Proxy
+### 2. Start Quack and Connect through the Proxy
 
 In one DuckDB session, start the server (this prints an authentication token):
 

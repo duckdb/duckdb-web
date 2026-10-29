@@ -118,7 +118,7 @@ overview](https://unitycatalog.io/blogs/what-is-a-data-catalog-and-why-do-i-need
 if you'd like to go deeper; the concepts apply broadly regardless of which
 catalog you use.
 
-### What is Unity Catalog?
+### What Is Unity Catalog?
 
 Unity Catalog (UC for short) is an open standard for governing data and AI
 assets, including tables, volumes, models, and functions, across engines and

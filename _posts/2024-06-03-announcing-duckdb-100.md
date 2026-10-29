@@ -36,7 +36,7 @@ We’ve observed the frankly staggering growth in the amount and breadth of use 
 
 Another core aspect of stability with the 1.0.0 release is stability across versions. While [never breaking anyone's workflow is likely impossible](https://xkcd.com/1172/), we plan to be much more careful with user-facing changes going forward. In particular, we plan to focus on providing stability for the SQL dialect, as well as the C API. While we do not guarantee that we will never change semantics in these layers in the future – we will try to provide ample warning when doing so, as well as providing workarounds that allow previously working code to keep on working.
 
-## Looking ahead
+## Looking Ahead
 
 Unlike many open-source projects, DuckDB also has a healthy long-term funding strategy. [DuckLabs](https://ducklabs.com/), the company that employs DuckDB’s core contributors, has not had any outside investments, and as a result, the company is fully owned by the team. Labs’ business model is to provide consulting and support services for DuckDB, and we’re happy to report that this is going well. With the revenue from contracts, we fund long-term and strategic DuckDB development with a team of almost 20 people. At the same time, the intellectual property in the project is guarded by the independent [DuckDB Foundation](https://duckdb.foundation/). This non-profit foundation ensures that DuckDB will be around long-term under the MIT license.
 

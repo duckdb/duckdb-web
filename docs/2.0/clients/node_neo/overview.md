@@ -900,7 +900,7 @@ DuckDBTimestampTZValue.timezoneOffsetInMinutes =
   reader.getColumns()[0][0];
 ```
 
-### Append To Table
+### Append to Table
 
 ```ts
 await connection.run(

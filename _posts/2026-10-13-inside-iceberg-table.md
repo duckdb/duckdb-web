@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "What Is Inside an Iceberg Table?"
+title: "What Is inside an Iceberg Table?"
 authors:
   - The DuckDB team
 thumb: "/images/blog/thumbs/iceberg-writes.svg"

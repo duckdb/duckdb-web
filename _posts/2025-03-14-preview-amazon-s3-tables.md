@@ -53,7 +53,7 @@ FORCE INSTALL iceberg FROM core_nightly;
 With these extensions installed, your DuckDB is now capable of using Apache Iceberg REST Catalogs.
 Let's find some data.
 
-### Setting up an Amazon S3 Table Bucket
+### Setting Up an Amazon S3 Table Bucket
 
 (If you already have Iceberg tables in Amazon S3 Tables, you can skip to the [“Reading Iceberg Catalogs with DuckDB” section](#reading-amazon-s3-tables-with-duckdb).)
 

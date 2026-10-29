@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Importing Data using Java Table Functions"
+title: "Importing Data Using Java Table Functions"
 authors:
   - Guest Author
   - Geertjan Wielenga

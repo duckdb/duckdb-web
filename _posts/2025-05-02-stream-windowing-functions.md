@@ -387,4 +387,4 @@ Something must have happened on 29 April 2024! We observe that, during the 18 ho
 
 ## Conclusion
 
-In this post we have demonstrated how stream windowing functions can be implemented on historical timestamped data in DuckDB, offering a starting point in time (series) data analysis. We also recommend [“Catching up with Windowing”]({% post_url 2025-02-10-window-catchup %}), a post about DuckDB's windowing features, which can be adopted in the functions presented herein.
+In this post we have demonstrated how stream windowing functions can be implemented on historical timestamped data in DuckDB, offering a starting point in time (series) data analysis. We also recommend [“Catching Up with Windowing”]({% post_url 2025-02-10-window-catchup %}), a post about DuckDB's windowing features, which can be adopted in the functions presented herein.

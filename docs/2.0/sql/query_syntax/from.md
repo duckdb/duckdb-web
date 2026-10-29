@@ -468,7 +468,7 @@ POSITIONAL JOIN t2;
 
 Positional joins are always `FULL OUTER` joins, i.e., the resulting table has the length of the longer input table and the missing entries are filled with `NULL` values.
 
-### As-Of Joins
+### As-of Joins
 
 A common operation when working with temporal or similarly-ordered data
 is to find the nearest (first) event in a reference table (such as prices).

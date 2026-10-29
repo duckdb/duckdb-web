@@ -410,7 +410,7 @@ The functions and a brief description of each follows.
 * `sq_concat`: Concatenate a list of strings together, wrapping each in single quotes. Uses `sq_list`.
 * `dq_concat`: Concatenate a list of strings together, wrapping each in double quotes. Uses `dq_list`.
 
-### Functions Creating During Refactoring for Modularity
+### Functions Creating during Refactoring for Modularity
 
 * `totals_list`: Build up a list as a part of enabling `subtotals` and `grand_totals`.
 * `replace_zzz`: Rename `subtotal` and `grand_total` indicators after sorting so they are more friendly.

@@ -13,7 +13,7 @@ tag: benchmark
 
 I think it is worth starting this intro by talking a little bit about the established format for columnar data. Parquet has done some amazing things for analytics. If you go back to the times where CSV was the better alternative, then you know how important Parquet is. However, even if the  specification has evolved over time, Parquet has some design constraints. A particular limitation is that it is block-compressed and engines need to decompress pages in order to do further operations like filtering, decoding values, etc. For a while, [researchers and private companies](https://www.cs.cmu.edu/~pavlo/blog/2026/01/2025-databases-retrospective.html?#fileformats) have been working on alternatives to Parquet that could improve on some of Parquet’s shortcomings. Vortex, from the SpiralDB team, is one of them.
 
-## What is Vortex?
+## What Is Vortex?
 
 [Vortex](https://vortex.dev/) is an extensible, open source format for columnar data. It was created to handle heterogeneous compute patterns and different data modalities. But, what does this mean?
 

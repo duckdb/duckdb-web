@@ -31,7 +31,7 @@ GitHub: [pdo-duckdb-php](https://github.com/thomas-0816/pdo-duckdb-php)
 
 Packagist: [pdo-duckdb-php](https://packagist.org/packages/thomas-0816/pdo-duckdb-php)
 
-## Installation and setup
+## Installation and Setup
 
 `pdo_duckdb` is fully compatible with the PHP Installer for Extensions ([PIE](https://github.com/php/pie)) and can be installed with:
 
@@ -55,7 +55,7 @@ php -r 'print_r((new PDO("duckdb::memory:"))->query("SELECT 42 as n")->fetch(PDO
 # )
 ```
 
-## Installation and load on demand
+## Installation and Load on Demand
 
 ```bash
 # DuckDB 1.x
@@ -79,7 +79,7 @@ Doctrine DBAL for DuckDB: [doctrine-dbal-duckdb](https://github.com/thomas-0816/
 
 ## Examples
 
-### Basic usage
+### Basic Usage
 
 ```php
 <?php
@@ -104,7 +104,7 @@ print_r($statement->fetchAll(PDO::FETCH_ASSOC));
 # )
 ```
 
-### Open databases from disk or in-memory
+### Open Databases from Disk or In-Memory
 
 ```php
 <?php
@@ -117,7 +117,7 @@ $db = new PDO('duckdb:/tmp/test.db'); // open database file from disk
 $db = new PDO('duckdb:/tmp/test.db', null, null, [PDO::DUCKDB_ATTR_CONFIG => ['access_mode' => 'read_only']]);
 ```
 
-### Read and write Parquet files
+### Read and Write Parquet Files
 
 ```php
 <?php
@@ -146,7 +146,7 @@ foreach ($db->query("SELECT * FROM '/tmp/table1.parquet'", PDO::FETCH_ASSOC) as 
 # )
 ```
 
-### Read CSV files
+### Read CSV Files
 
 ```php
 <?php
@@ -183,7 +183,7 @@ print_r($statement->fetchAll(PDO::FETCH_ASSOC));
 # )
 ```
 
-### Read JSON files
+### Read JSON Files
 
 ```php
 <?php
@@ -210,7 +210,7 @@ print_r($statement->fetchAll(PDO::FETCH_ASSOC));
 $db->exec("COPY (SELECT * FROM '/tmp/logs.json') TO '/tmp/logs_json.parquet' (COMPRESSION zstd)");
 ```
 
-### Use structured columns with a fixed schema
+### Use Structured Columns with a Fixed Schema
 
 ```php
 <?php
@@ -242,7 +242,7 @@ print_r($statement->fetch(PDO::FETCH_ASSOC));
 # )
 ```
 
-### Auto increment columns
+### Auto Increment Columns
 
 ```php
 <?php

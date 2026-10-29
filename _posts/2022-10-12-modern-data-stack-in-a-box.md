@@ -38,7 +38,7 @@ If you contribute to an open-source community or provide a product within the Mo
     * [Dagster's example project](https://github.com/dagster-io/dagster/blob/master/examples/project_fully_featured/README.md) uses DuckDB for this already!
     * Reach out on the DuckDB [Twitter](https://twitter.com/duckdb?s=20&t=yBKUNLGHVZGEj1jL-P_PsQ), [GitHub](https://github.com/duckdb/duckdb/discussions), or [Discord](https://discord.com/invite/tcvwpjfnZx), or the [dbt slack](https://www.getdbt.com/community/join-the-community/) to share an example using your tool with the community!
 
-## Trade-offs
+## Trade-Offs
 
 One key component of the MDS is the unlimited scalability of compute. How does that align with the MDS-in-a-box approach? Today, cloud computing instances can vertically scale significantly more than in the past (for example, [224 cores and 24 TB of RAM on AWS](https://aws.amazon.com/ec2/instance-types/high-memory/)!). Laptops are more powerful than ever. Now that new OLAP tools like DuckDB can take better advantage of that compute, horizontal scaling is no longer necessary for many analyses! Also, this MDS-in-a-box can be duplicated with ease to as many boxes as needed if partitioned by data subject area. So, while infinite compute is sacrificed, significant scale is still easily achievable.
 

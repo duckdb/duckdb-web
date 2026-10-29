@@ -385,7 +385,7 @@ Nice, we're back to a single join condition again. So how does this perform? We 
 
 The `SPATIAL_JOIN` operator is able to execute the full 58 million row dataset faster than the original naive nested loop join could execute the 1 million row dataset. That's a 58× improvement!
 
-## Limitations and Future work
+## Limitations and Future Work
 
 Even though we've made a lot of improvements, spatial joins in DuckDB are not quite perfect just yet. Like always, there's plenty more to do, and we have a few ideas for how to improve the `SPATIAL_JOIN` operator even further.
 

@@ -36,7 +36,7 @@ BUILD_BENCHMARK=1 make # build with benchmarks
 
 > `debug` buids use a lot of disk space – make sure you have at least 25 GB available.
 
-### Speeding up Subsequent Builds
+### Speeding Up Subsequent Builds
 
 You can speed up subsequent builds using [ccache](https://ccache.dev/).
 On macOS, you can install and configure it as follows:

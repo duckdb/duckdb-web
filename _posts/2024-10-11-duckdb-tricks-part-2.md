@@ -89,7 +89,7 @@ Note that we use the [dot operator for function chaining]({% link docs/2.0/sql/f
 └─────────────────────┴──────────────┴──────────────────┘
 ```
 
-## Filling in Missing Values
+## Filling In Missing Values
 
 Next, we would like to derive a schedule that includes the full picture: *every timeslot* for *every location* should have its line in the table. For the timeslot-location combinations, where there is no event specified, we would like to explicitly add a string that says `<empty>`.
 

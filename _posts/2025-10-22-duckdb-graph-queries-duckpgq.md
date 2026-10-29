@@ -206,7 +206,7 @@ The results confirm our suspicions. Our query found multiple non-obvious paths b
 
 Each row represents a hidden chain of transactions connecting two of the person's accounts. More interestingly, we can see clear cyclical patterns. For instance, the query found a 9-step path from account `4753267931712848113` to `4769874955338776819`, and another 9-step path flowing in the opposite direction. This suggests a sophisticated and intentional effort to move money between accounts, a strong indicator that warrants further investigation.
 
-## Doing it the Old-Fashioned Way
+## Doing It the Old-Fashioned Way
 
 Earlier, we challenged you to think about how you would find these ownership cycles using traditional SQL. As promised, here is the answer.
 

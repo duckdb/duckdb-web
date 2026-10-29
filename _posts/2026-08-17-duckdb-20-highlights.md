@@ -28,7 +28,7 @@ DuckDB has been an in-process database since day one. But people have asked us â
 
 <div class="duck-diagram-box" markdown="1">
 
-#### <svg class="icon"><use href="#database-01"></use></svg> DuckDB server
+#### <svg class="icon"><use href="#database-01"></use></svg> DuckDB Server
 
 ```sql
 CALL quack_serve(
@@ -42,7 +42,7 @@ CALL quack_serve(
 
 <div class="duck-diagram-box" markdown="1">
 
-#### <svg class="icon"><use href="#database-01"></use></svg> DuckDB client
+#### <svg class="icon"><use href="#database-01"></use></svg> DuckDB Client
 
 ```sql
 ATTACH 'quack:server.example.com'
@@ -194,7 +194,7 @@ Interacting with object stores like S3 is central to the DuckDB experience: your
 
 Thanks to asynchronous access, the I/O layer now scales independently from the query processing layer, which means far more parallelism for remote reads and dramatically faster queries on network storage. Parquet support came first ([#23662](https://github.com/duckdb/duckdb/pull/23662)), with CSV ([#23961](https://github.com/duckdb/duckdb/pull/23961)) and DuckDB's own file format ([#24654](https://github.com/duckdb/duckdb/pull/24654)) following, along with asynchronous Parquet writes ([#23283](https://github.com/duckdb/duckdb/pull/23283)) and new `MMAP` and `DIRECT_IO` modes ([#22988](https://github.com/duckdb/duckdb/pull/22988)). Local storage benefits a little too, but network storage is where you will see the big gains.
 
-## 6. Faster Queries Across the Board
+## 6. Faster Queries across the Board
 
 As with every release, a lot of work went into making your existing queries faster without you doing anything. To pick some highlights: partial aggregates are now pushed below joins ([#22572](https://github.com/duckdb/duckdb/pull/22572)) and redundant aggregations are reused ([#24543](https://github.com/duckdb/duckdb/pull/24543)), the recursive CTE engine has been rewritten ([#22211](https://github.com/duckdb/duckdb/pull/22211)), aggregations now spill to disk when they outgrow memory ([#24499](https://github.com/duckdb/duckdb/pull/24499)), and the Windows CLI got approximately 2.2Ã— faster at multi-threaded result materialization ([#24036](https://github.com/duckdb/duckdb/pull/24036)).
 
@@ -250,7 +250,7 @@ You should not actually notice anything from the parser swap as we designed it t
 
 > Update We published a new blog post on the [PEG parser]({% post_url 2026-08-20-duckdb-20-peg-parser %}).
 
-## 9. Timezones, Calendars, and Collations Without ICU
+## 9. Timezones, Calendars, and Collations without ICU
 
 Timezone-aware timestamps, calendars, and collations in DuckDB have always been powered by the ICU library. ICU is a fine library, but we only ever used a small slice of it, while still carrying it around in every DuckDB distribution. In v2.0, the ICU library is gone entirely: the `icu` extension now implements timezones, calendars, and collations itself ([#24463](https://github.com/duckdb/duckdb/pull/24463), [#24403](https://github.com/duckdb/duckdb/pull/24403)), with the timezone data built directly from the IANA database and compressed down to around 45 kB. Everything keeps working exactly as before:
 

@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Catching up with Windowing"
+title: "Catching Up with Windowing"
 authors:
   - Richard Wesley
 thumb: "/images/blog/thumbs/window-functions-1.svg"
