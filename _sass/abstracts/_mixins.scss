@@ -156,6 +156,39 @@
 	font-family: "SuisseIntl", sans-serif;
 }
 
+@mixin menu-dropdown-padding {
+	padding: 15px 10px;
+}
+
+@mixin menu-dropdown-item-spacing {
+	line-height: 1;
+	padding: 15px 20px;
+	margin: 0;
+}
+
+@mixin menu-dropdown-list {
+	display: flex;
+	flex-direction: column;
+	gap: 4px;
+}
+
+@mixin menu-dropdown-item-states {
+	&:hover {
+		background: color-mix(in srgb, var(--menu-dropdown-item-background-hover) 50%, transparent);
+	}
+
+	&[aria-current="true"],
+	&[aria-current="page"] {
+		background: var(--menu-dropdown-item-background-hover);
+		font-weight: 500;
+	}
+
+	&:focus-visible {
+		outline: 2px solid var(--main-text-primary-color);
+		outline-offset: -2px;
+	}
+}
+
 @mixin side-menu {
 	font-size: var(--type-side-menu, 13px);
 	font-weight: 450;

@@ -108,7 +108,7 @@ $(document).ready(function(){
 			itemSelector: '.postpreview',
 			layoutMode: 'fitRows',
 			fitRows: {
-				gutter: 32,
+				gutter: $('.guides-list').length ? 16 : 32,
 				equalheight: true
 			}
 		});
@@ -116,6 +116,7 @@ $(document).ready(function(){
 		var $heading = $('.pagetitle h1').first();
 		var defaultHeading = $.trim($heading.text());
 		var $search = $('#search-input');
+		var $topicFilter = $('#topic-filter');
 		var $coreToggle = $('#core-toggle');
 		var $empty = $('.filter-empty');
 		var activeFilter = '*';
@@ -132,6 +133,12 @@ $(document).ready(function(){
 
 		function setActiveFilter(value) {
 			activeFilter = value;
+			var $topics = $topicFilter.find('[data-filter]');
+			var $topic = $topics.filter(function() { return $(this).attr('data-filter') === value; });
+			$topics.removeAttr('aria-current').parent().removeClass('current');
+			$topic.attr('aria-current', 'true').parent().addClass('current');
+			$topicFilter.find('.selectedversion').text($topic.text());
+			$topicFilter.find('.versiontrigger').attr('aria-label', 'Filter guides by topic: ' + $topic.text());
 			$('.filterbar .filtertags').each(function() {
 				var $buttons = $(this).find('.filter-btn').removeClass('active');
 				var $match = $buttons.filter('[data-filter="' + value + '"]').addClass('active');
@@ -144,7 +151,9 @@ $(document).ready(function(){
 		function readFiltersFromURL() {
 			var params = new URLSearchParams(window.location.search);
 			var type = params.get('type');
-			if (type && $('.filterbar .filter-btn[data-filter=".' + type + '"]').length) {
+			if (type && $('.filterbar [data-filter]').filter(function() {
+				return $(this).attr('data-filter') === '.' + type;
+			}).length) {
 				setActiveFilter('.' + type);
 			}
 			if (params.get('q')) {
@@ -195,10 +204,14 @@ $(document).ready(function(){
 			$empty.prop('hidden', visible > 0);
 		}
 
-		$('.filterbar').on('click', 'button.filter-btn', function() {
+		$('.filterbar').on('click', '[data-filter]', function(e) {
+			e.preventDefault();
 			setActiveFilter($(this).attr('data-filter'));
 			applyFilters();
 			writeFiltersToURL();
+			if ($(this).closest($topicFilter).length) {
+				$topicFilter.removeClass('active').find('.versiontrigger').attr('aria-expanded', 'false').trigger('focus');
+			}
 		});
 
 		$search.on('input', function() {
@@ -310,6 +323,11 @@ $(document).ready(function(){
 		$item.children('.nav-drill').trigger('focus');
 	});
 
+	$drillNav.on('click', '.nav-expand', function() {
+		const open = $(this).attr('aria-expanded') !== 'true';
+		$(this).attr('aria-expanded', open).parent().toggleClass('is-open', open);
+	});
+
 	const currentNavRow = document.querySelector('.sidenav-drill [aria-current="page"]');
 	if (currentNavRow) {
 		const navScroller = currentNavRow.closest('.sidenav-drill');
@@ -416,7 +434,7 @@ $(document).ready(function(){
 	function cleanNavClone($list) {
 		$list.find('.nav-back').remove();
 		$list.find('svg').remove();
-		$list.find('.nav-drill').replaceWith(function() {
+		$list.find('.nav-drill, .nav-expand').replaceWith(function() {
 			return $('<span>').text($(this).text());
 		});
 		$list.removeClass('is-drilled').find('.is-open, .is-drilled').removeClass('is-open is-drilled');
@@ -608,30 +626,51 @@ $('#main_content_wrap, .singleentry .content').find('a.externallink, a.downloadl
 	}
 	
 	
-	// CHANGE DOC VERSION
+	// Documentation version and topic dropdowns share the same interaction.
+	var $docDropdowns = $('.options .version, #topic-filter');
 	function closeVersionSelect() {
-		var $open = $('.options .version.active');
+		var $open = $docDropdowns.filter('.active');
 		if (!$open.length) return false;
 		$open.removeClass('active').find('.versiontrigger').attr('aria-expanded', 'false');
 		return true;
 	}
 
-	$('.options .version .versiontrigger').click(function(){
+	$docDropdowns.find('.versiontrigger').click(function(){
 		var $version = $(this).closest('.version');
 		var open = !$version.hasClass('active');
+		closeVersionSelect();
 		$version.toggleClass('active', open);
 		$(this).attr('aria-expanded', open ? 'true' : 'false');
 	});
 
 	$(document).on('click', function(e){
-		if ($(e.target).closest('.options .version').length) return;
+		if ($(e.target).closest('.options .version, #topic-filter').length) return;
 		closeVersionSelect();
 	});
 
 	$(document).on('keydown', function(e){
 		if (e.key !== 'Escape') return;
+		var $trigger = $docDropdowns.filter('.active').find('.versiontrigger');
 		if (closeVersionSelect()) {
-			$('.options .version .versiontrigger').trigger('focus');
+			$trigger.trigger('focus');
+		}
+	});
+
+	$docDropdowns.on('keydown', function(e) {
+		if (e.key !== 'ArrowDown' && e.key !== 'ArrowUp') return;
+		e.preventDefault();
+		var $dropdown = $(this);
+		var $links = $dropdown.find('.versionsidebar a');
+		var index = $links.index(document.activeElement);
+		closeVersionSelect();
+		$dropdown.addClass('active').find('.versiontrigger').attr('aria-expanded', 'true');
+		index = e.key === 'ArrowDown' ? (index + 1) % $links.length : (index <= 0 ? $links.length - 1 : index - 1);
+		$links.eq(index).trigger('focus');
+	});
+
+	$docDropdowns.on('focusout', function(e) {
+		if (!this.contains(e.relatedTarget)) {
+			$(this).removeClass('active').find('.versiontrigger').attr('aria-expanded', 'false');
 		}
 	});
 

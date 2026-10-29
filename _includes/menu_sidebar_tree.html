@@ -34,7 +34,7 @@
 						{%- assign open = false -%}
 						{%- if l4_items contains 'aria-current="page"' -%}{%- assign open = true -%}{%- endif -%}
 						{%- if include.fallback and entry.slug and nav_url_parts contains entry.slug -%}{%- assign open = true -%}{%- endif -%}
-						<li class="nav-item hasSub{% if open %} is-open{% endif %}"><button type="button" class="nav-row nav-drill" aria-expanded="{{ open }}">{{ entry.page }}<svg class="show"><use href="#chevron-right"></use></svg></button><ul class="nav-list"><li class="nav-back"><button type="button" class="nav-row"><svg><use href="#chevron-left"></use></svg>{{ entry.page }}</button></li>{{ l4_items }}</ul></li>
+						<li class="nav-item hasSub{% if open %} is-open{% endif %}"><button type="button" class="nav-row nav-expand" aria-expanded="{{ open }}">{{ entry.page }}<svg class="show"><use href="#chevron-right"></use></svg></button><ul class="nav-list">{{ l4_items }}</ul></li>
 					{%- else -%}
 						{%- if entry.path -%}{%- assign href = entry.path -%}{%- else -%}{%- assign href = nav_base | append: item.slug | append: main.slug | append: "/" | append: entry.url -%}{%- endif -%}
 						<li class="nav-item"><a class="nav-row" href="{{ href }}"{% if href == nav_page and nav_found == false %}{% assign nav_found = true %}{% assign nav_trail = main_crumb %} aria-current="page"{% endif %}>{{ entry.page }}</a></li>
@@ -44,7 +44,7 @@
 				{%- assign open = false -%}
 				{%- if l3_items contains 'aria-current="page"' or l3_items contains 'is-open' -%}{%- assign open = true -%}{%- endif -%}
 				{%- if include.fallback and main.slug and nav_url_parts contains main.slug -%}{%- assign open = true -%}{%- endif -%}
-				<li class="nav-item hasSub{% if open %} is-open{% endif %}"><button type="button" class="nav-row nav-drill" aria-expanded="{{ open }}">{{ main.page }}<svg class="show"><use href="#chevron-right"></use></svg></button><ul class="nav-list{% if l3_items contains 'is-open' %} is-drilled{% endif %}"><li class="nav-back"><button type="button" class="nav-row"><svg><use href="#chevron-left"></use></svg>{{ main.page }}</button></li>{{ l3_items }}</ul></li>
+				<li class="nav-item hasSub{% if open %} is-open{% endif %}"><button type="button" class="nav-row nav-expand" aria-expanded="{{ open }}">{{ main.page }}<svg class="show"><use href="#chevron-right"></use></svg></button><ul class="nav-list">{{ l3_items }}</ul></li>
 			{%- else -%}
 				{%- if main.path -%}{%- assign href = main.path -%}{%- else -%}{%- assign href = nav_base | append: item.slug | append: main.url -%}{%- endif -%}
 				<li class="nav-item"><a class="nav-row" href="{{ href }}"{% if href == nav_page and nav_found == false %}{% assign nav_found = true %}{% assign nav_trail = item_crumb %} aria-current="page"{% endif %}>{{ main.page }}</a></li>
@@ -55,7 +55,7 @@
 		{%- if l2_items contains 'aria-current="page"' or l2_items contains 'is-open' -%}{%- assign open = true -%}{%- endif -%}
 		{%- assign item_slug = item.slug | remove: "/" -%}
 		{%- if include.fallback and item_slug != "" and nav_url_parts contains item_slug -%}{%- assign open = true -%}{%- endif -%}
-		<li class="nav-item hasSub{% if open %} is-open{% endif %}"><button type="button" class="nav-row nav-drill" aria-expanded="{{ open }}">{{ item.page }}<svg class="show"><use href="#chevron-right"></use></svg></button><ul class="nav-list{% if l2_items contains 'is-open' %} is-drilled{% endif %}"><li class="nav-back"><button type="button" class="nav-row"><svg><use href="#chevron-left"></use></svg>{{ item.page }}</button></li>{{ l2_items }}</ul></li>
+		<li class="nav-item hasSub{% if open %} is-open{% endif %}"><button type="button" class="nav-row nav-drill" aria-expanded="{{ open }}">{{ item.page }}<svg class="show"><use href="#chevron-right"></use></svg></button><ul class="nav-list"><li class="nav-back"><button type="button" class="nav-row"><svg><use href="#chevron-left"></use></svg>{{ item.page }}</button></li>{{ l2_items }}</ul></li>
 	{%- else -%}
 		{%- assign first_char = item.url | slice: 0 -%}
 		{%- if first_char == "/" -%}{%- assign href = item.url -%}{%- else -%}{%- assign href = nav_base | append: item.slug | append: item.url -%}{%- endif -%}

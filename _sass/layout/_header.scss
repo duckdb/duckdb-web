@@ -107,10 +107,9 @@ header .headerline {
 						border-radius: var(--page-radius-box);
 						border: 1px solid var(--border-color);
 						backdrop-filter: blur(15px);
-						padding: 15px 10px;
+						@include menu-dropdown-padding;
 						margin: 0;
-						display: flex;
-						flex-direction: column;
+						@include menu-dropdown-list;
 						transition: all 0.1s ease;
 						transform: scale(0.9);
 						li a {
@@ -118,16 +117,14 @@ header .headerline {
 							text-decoration: none;
 							color: inherit;
 							@include menu-item();
-							line-height: 1;
-							padding: 15px 20px;
+							@include menu-dropdown-item-spacing;
 							border-radius: var(--page-radius-pill);
 							white-space: nowrap;
 							transition: all 0.2s;
-							margin: -3px 0;
 							background: transparent;
+							@include menu-dropdown-item-states;
 			
 							&:hover {
-								background: var(--menu-dropdown-item-background-hover, #E6E6E6);
 								color: var(--main-link-hover, #665d00);
 							}
 						}
