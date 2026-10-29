@@ -21,40 +21,40 @@ title: Spatial Functions
 | [`ST_AsText`](#st_astext) | Returns the geometry as a WKT string |
 | [`ST_AsWKB`](#st_aswkb) | Returns the geometry as a WKB (Well-Known-Binary) blob |
 | [`ST_Azimuth`](#st_azimuth) | Returns the azimuth (a clockwise angle measured from north) of two points in radian. |
-| [`ST_Boundary`](#st_boundary) | Returns the "boundary" of a geometry |
+| [`ST_Boundary`](#st_boundary) | Returns the “boundary” of a geometry |
 | [`ST_Buffer`](#st_buffer) | Returns a buffer around the input geometry at the target distance |
-| [`ST_BuildArea`](#st_buildarea) | Creates a polygonal geometry by attempting to "fill in" the input geometry. |
+| [`ST_BuildArea`](#st_buildarea) | Creates a polygonal geometry by attempting to “fill in” the input geometry. |
 | [`ST_Centroid`](#st_centroid) | Returns the centroid of a geometry |
 | [`ST_Collect`](#st_collect) | Collects a list of geometries into a collection geometry. |
 | [`ST_CollectionExtract`](#st_collectionextract) | Extracts geometries from a GeometryCollection into a typed multi geometry. |
 | [`ST_ConcaveHull`](#st_concavehull) | Returns the 'concave' hull of the input geometry, containing all of the source input's points, and which can be used to create polygons from points. The ratio parameter dictates the level of concavity; 1.0 returns the convex hull; and 0 indicates to return the most concave hull possible. Set allowHoles to a non-zero value to allow output containing holes. |
 | [`ST_Contains`](#st_contains) | Returns true if the first geometry contains the second geometry |
-| [`ST_ContainsProperly`](#st_containsproperly) | Returns true if the first geometry \"properly\" contains the second geometry |
+| [`ST_ContainsProperly`](#st_containsproperly) | Returns true if the first geometry “properly” contains the second geometry |
 | [`ST_ConvexHull`](#st_convexhull) | Returns the convex hull enclosing the geometry |
 | [`ST_CoverageInvalidEdges`](#st_coverageinvalidedges) | Returns the invalid edges in a polygonal coverage, which are edges that are not shared by two polygons. |
 | [`ST_CoverageSimplify`](#st_coveragesimplify) | Simplify the edges in a polygonal coverage, preserving the coverage by ensuring that there are no seams between the resulting simplified polygons. |
 | [`ST_CoverageUnion`](#st_coverageunion) | Union all geometries in a polygonal coverage into a single geometry. |
-| [`ST_CoveredBy`](#st_coveredby) | Returns true if geom1 is "covered by" geom2 |
-| [`ST_Covers`](#st_covers) | Returns true if the geom1 "covers" geom2 |
-| [`ST_Crosses`](#st_crosses) | Returns true if geom1 "crosses" geom2 |
+| [`ST_CoveredBy`](#st_coveredby) | Returns true if geom1 is “covered by” geom2 |
+| [`ST_Covers`](#st_covers) | Returns true if the geom1 “covers” geom2 |
+| [`ST_Crosses`](#st_crosses) | Returns true if geom1 “crosses” geom2 |
 | [`ST_DWithin`](#st_dwithin) | Returns if two geometries are within a target distance of each-other |
 | [`ST_DWithin_GEOS`](#st_dwithin_geos) | Returns if two geometries are within a target distance of each-other |
 | [`ST_DWithin_Spheroid`](#st_dwithin_spheroid) | Returns if two POINT_2D's are within a target distance in meters, using an ellipsoidal model of the earths surface |
-| [`ST_Difference`](#st_difference) | Returns the "difference" between two geometries |
-| [`ST_Dimension`](#st_dimension) | Returns the "topological dimension" of a geometry. |
+| [`ST_Difference`](#st_difference) | Returns the “difference” between two geometries |
+| [`ST_Dimension`](#st_dimension) | Returns the “topological dimension” of a geometry. |
 | [`ST_Disjoint`](#st_disjoint) | Returns true if the geometries are disjoint |
 | [`ST_Distance`](#st_distance) | Returns the planar distance between two geometries |
 | [`ST_Distance_GEOS`](#st_distance_geos) | Returns the planar distance between two geometries |
 | [`ST_Distance_Sphere`](#st_distance_sphere) | Returns the haversine (great circle) distance between two geometries. |
 | [`ST_Distance_Spheroid`](#st_distance_spheroid) | Returns the distance between two geometries in meters using an ellipsoidal model of the earths surface |
-| [`ST_Dump`](#st_dump) | Dumps a geometry into a list of sub-geometries and their "path" in the original geometry. |
+| [`ST_Dump`](#st_dump) | Dumps a geometry into a list of sub-geometries and their “path” in the original geometry. |
 | [`ST_EndPoint`](#st_endpoint) | Returns the end point of a LINESTRING. |
 | [`ST_Envelope`](#st_envelope) | Returns the minimum bounding rectangle of a geometry as a polygon geometry |
-| [`ST_Equals`](#st_equals) | Returns true if the geometries are "equal" |
+| [`ST_Equals`](#st_equals) | Returns true if the geometries are “equal” |
 | [`ST_Extent`](#st_extent) | Returns the minimal bounding box enclosing the input geometry |
 | [`ST_Extent_Approx`](#st_extent_approx) | Returns the approximate bounding box of a geometry, if available. |
 | [`ST_ExteriorRing`](#st_exteriorring) | Returns the exterior ring (shell) of a polygon geometry. |
-| [`ST_FlipCoordinates`](#st_flipcoordinates) | Returns a new geometry with the coordinates of the input geometry "flipped" so that x = y and y = x |
+| [`ST_FlipCoordinates`](#st_flipcoordinates) | Returns a new geometry with the coordinates of the input geometry “flipped” so that x = y and y = x |
 | [`ST_Force2D`](#st_force2d) | Forces the vertices of a geometry to have X and Y components |
 | [`ST_Force3DM`](#st_force3dm) | Forces the vertices of a geometry to have X, Y, and M components |
 | [`ST_Force3DZ`](#st_force3dz) | Forces the vertices of a geometry to have X, Y, and Z components |
@@ -73,7 +73,7 @@ title: Spatial Functions
 | [`ST_Intersects`](#st_intersects) | Returns true if the geometries intersect |
 | [`ST_Intersects_Extent`](#st_intersects_extent) | Returns true if the extent of two geometries intersects |
 | [`ST_IsClosed`](#st_isclosed) | Check if a geometry is 'closed' |
-| [`ST_IsEmpty`](#st_isempty) | Returns true if the geometry is "empty". |
+| [`ST_IsEmpty`](#st_isempty) | Returns true if the geometry is “empty”. |
 | [`ST_IsRing`](#st_isring) | Returns true if the geometry is a ring (both ST_IsClosed and ST_IsSimple). |
 | [`ST_IsSimple`](#st_issimple) | Returns true if the geometry is simple |
 | [`ST_IsValid`](#st_isvalid) | Returns true if the geometry is valid |
@@ -82,11 +82,11 @@ title: Spatial Functions
 | [`ST_LineInterpolatePoint`](#st_lineinterpolatepoint) | Returns a point interpolated along a line at a fraction of total 2D length. |
 | [`ST_LineInterpolatePoints`](#st_lineinterpolatepoints) | Returns a multi-point interpolated along a line at a fraction of total 2D length. |
 | [`ST_LineLocatePoint`](#st_linelocatepoint) | Returns the location on a line closest to a point as a fraction of the total 2D length of the line. |
-| [`ST_LineMerge`](#st_linemerge) | "Merges" the input line geometry, optionally taking direction into account. |
+| [`ST_LineMerge`](#st_linemerge) | “Merges” the input line geometry, optionally taking direction into account. |
 | [`ST_LineString2DFromWKB`](#st_linestring2dfromwkb) | Deserialize a LINESTRING_2D from a WKB encoded blob |
 | [`ST_LineSubstring`](#st_linesubstring) | Returns a substring of a line between two fractions of total 2D length. |
 | [`ST_LocateAlong`](#st_locatealong) | Returns a point or multi-point, containing the point(s) at the geometry with the given measure |
-| [`ST_LocateBetween`](#st_locatebetween) | Returns a geometry or geometry collection created by filtering and interpolating vertices within a range of "M" values |
+| [`ST_LocateBetween`](#st_locatebetween) | Returns a geometry or geometry collection created by filtering and interpolating vertices within a range of “M” values |
 | [`ST_M`](#st_m) | Returns the M coordinate of a point geometry |
 | [`ST_MMax`](#st_mmax) | Returns the maximum M coordinate of a geometry |
 | [`ST_MMin`](#st_mmin) | Returns the minimum M coordinate of a geometry |
@@ -102,8 +102,8 @@ title: Spatial Functions
 | [`ST_NGeometries`](#st_ngeometries) | Returns the number of component geometries in a collection geometry. |
 | [`ST_NInteriorRings`](#st_ninteriorrings) | Returns the number of interior rings of a polygon |
 | [`ST_NPoints`](#st_npoints) | Returns the number of vertices within a geometry |
-| [`ST_Node`](#st_node) | Returns a "noded" MultiLinestring, produced by combining a collection of input linestrings and adding additional vertices where they intersect. |
-| [`ST_Normalize`](#st_normalize) | Returns the "normalized" representation of the geometry |
+| [`ST_Node`](#st_node) | Returns a “noded” MultiLinestring, produced by combining a collection of input linestrings and adding additional vertices where they intersect. |
+| [`ST_Normalize`](#st_normalize) | Returns the “normalized” representation of the geometry |
 | [`ST_NumGeometries`](#st_numgeometries) | Returns the number of component geometries in a collection geometry. |
 | [`ST_NumInteriorRings`](#st_numinteriorrings) | Returns the number of interior rings of a polygon |
 | [`ST_NumPoints`](#st_numpoints) | Returns the number of vertices within a geometry |
@@ -134,7 +134,7 @@ title: Spatial Functions
 | [`ST_Union`](#st_union) | Returns the union of two geometries |
 | [`ST_VoronoiDiagram`](#st_voronoidiagram) | Returns the Voronoi diagram of the supplied MultiPoint geometry |
 | [`ST_Within`](#st_within) | Returns true if the first geometry is within the second |
-| [`ST_WithinProperly`](#st_withinproperly) | Returns true if the first geometry \"properly\" is contained by the second geometry |
+| [`ST_WithinProperly`](#st_withinproperly) | Returns true if the first geometry “properly” is contained by the second geometry |
 | [`ST_X`](#st_x) | Returns the X coordinate of a point geometry |
 | [`ST_XMax`](#st_xmax) | Returns the maximum X coordinate of a geometry |
 | [`ST_XMin`](#st_xmin) | Returns the minimum X coordinate of a geometry |
@@ -427,7 +427,7 @@ GEOMETRY ST_AsMVTGeom (geom GEOMETRY, bounds BOX_2D)
 
 Transform and clip geometry to a tile boundary
 
-See "ST_AsMVT" for more details
+See `ST_AsMVT` for more details
 
 ----
 
@@ -545,7 +545,7 @@ GEOMETRY ST_Boundary (geom GEOMETRY)
 
 #### Description
 
-Returns the "boundary" of a geometry
+Returns the “boundary” of a geometry
 
 ----
 
@@ -570,11 +570,11 @@ Returns a buffer around the input geometry at the target distance
 
 `num_triangles` represents how many triangles that will be produced to approximate a quarter circle. The larger the number, the smoother the resulting geometry. The default value is 8.
 
-`cap_style` must be one of "CAP_ROUND", "CAP_FLAT", "CAP_SQUARE". This parameter is case-insensitive.
+`cap_style` must be one of `'CAP_ROUND'`, `'CAP_FLAT'`, `'CAP_SQUARE'`. This parameter is case-insensitive.
 
-`join_style` must be one of "JOIN_ROUND", "JOIN_MITRE", "JOIN_BEVEL". This parameter is case-insensitive.
+`join_style` must be one of `'JOIN_ROUND'`, `'JOIN_MITRE'`, `'JOIN_BEVEL'`. This parameter is case-insensitive.
 
-`mitre_limit` only applies when `join_style` is "JOIN_MITRE". It is the ratio of the distance from the corner to the mitre point to the corner radius. The default value is 1.0.
+`mitre_limit` only applies when `join_style` is `'JOIN_MITRE'`. It is the ratio of the distance from the corner to the mitre point to the corner radius. The default value is 1.0.
 
 This is a planar operation and will not take into account the curvature of the earth.
 
@@ -591,7 +591,7 @@ GEOMETRY ST_BuildArea (geom GEOMETRY)
 
 #### Description
 
-Creates a polygonal geometry by attempting to "fill in" the input geometry.
+Creates a polygonal geometry by attempting to “fill in” the input geometry.
 
 Unlike ST_Polygonize, this function does not fill in holes.
 
@@ -691,7 +691,7 @@ If the input geometry is a GeometryCollection, the function will return a multi 
 * If `type` = 2, returns a MultiLineString containing all the LineStrings in the collection.
 * If `type` = 3, returns a MultiPolygon containing all the Polygons in the collection.
 
-If no `type` parameters is provided, the function will return a multi geometry matching the highest "surface dimension"
+If no `type` parameters is provided, the function will return a multi geometry matching the highest “surface dimension”
 of the contained geometries. E.g. if the collection contains only Points, a MultiPoint will be returned. But if the
 collection contains both Points and LineStrings, a MultiLineString will be returned. Similarly, if the collection
 contains Polygons, a MultiPolygon will be returned. Contained geometries of a lower surface dimension will be ignored.
@@ -755,7 +755,7 @@ BOOLEAN ST_ContainsProperly (geom1 GEOMETRY, geom2 GEOMETRY)
 
 #### Description
 
-Returns true if the first geometry \"properly\" contains the second geometry
+Returns true if the first geometry “properly” contains the second geometry
 
 In contrast to `ST_Contains`, this function does not return true if `geom2` is contained strictly on the boundary of `geom1`.
 A geometry always `ST_Contains` itself, but does not `ST_ContainsProperly` itself.
@@ -840,7 +840,7 @@ BOOLEAN ST_CoveredBy (geom1 GEOMETRY, geom2 GEOMETRY)
 
 #### Description
 
-Returns true if geom1 is "covered by" geom2
+Returns true if geom1 is “covered by” geom2
 
 ----
 
@@ -855,7 +855,7 @@ BOOLEAN ST_Covers (geom1 GEOMETRY, geom2 GEOMETRY)
 
 #### Description
 
-Returns true if the geom1 "covers" geom2
+Returns true if the geom1 “covers” geom2
 
 ----
 
@@ -870,7 +870,7 @@ BOOLEAN ST_Crosses (geom1 GEOMETRY, geom2 GEOMETRY)
 
 #### Description
 
-Returns true if geom1 "crosses" geom2
+Returns true if geom1 “crosses” geom2
 
 ----
 
@@ -932,7 +932,7 @@ GEOMETRY ST_Difference (geom1 GEOMETRY, geom2 GEOMETRY)
 
 #### Description
 
-Returns the "difference" between two geometries
+Returns the “difference” between two geometries
 
 ----
 
@@ -947,7 +947,7 @@ INTEGER ST_Dimension (geom GEOMETRY)
 
 #### Description
 
-Returns the "topological dimension" of a geometry.
+Returns the “topological dimension” of a geometry.
 
 * For POINT and MULTIPOINT geometries, returns `0`.
 * For LINESTRING and MULTILINESTRING, returns `1`.
@@ -1087,7 +1087,7 @@ STRUCT(geom GEOMETRY, path INTEGER[])[] ST_Dump (geom GEOMETRY)
 
 #### Description
 
-Dumps a geometry into a list of sub-geometries and their "path" in the original geometry.
+Dumps a geometry into a list of sub-geometries and their “path” in the original geometry.
 
 You can use the `UNNEST(res, recursive := true)` function to explode  resulting list of structs into multiple rows.
 
@@ -1152,7 +1152,7 @@ BOOLEAN ST_Equals (geom1 GEOMETRY, geom2 GEOMETRY)
 
 #### Description
 
-Returns true if the geometries are "equal"
+Returns true if the geometries are “equal”
 
 ----
 
@@ -1221,7 +1221,7 @@ BOX_2D ST_FlipCoordinates (box BOX_2D)
 
 #### Description
 
-Returns a new geometry with the coordinates of the input geometry "flipped" so that x = y and y = x
+Returns a new geometry with the coordinates of the input geometry “flipped” so that x = y and y = x
 
 ----
 
@@ -1616,7 +1616,7 @@ BOOLEAN ST_IsEmpty (polygon POLYGON_2D)
 
 #### Description
 
-Returns true if the geometry is "empty".
+Returns true if the geometry is “empty”.
 
 ----
 
@@ -1761,7 +1761,7 @@ GEOMETRY ST_LineMerge (geom GEOMETRY, preserve_direction BOOLEAN)
 
 #### Description
 
-"Merges" the input line geometry, optionally taking direction into account.
+“Merges” the input line geometry, optionally taking direction into account.
 
 ----
 
@@ -1829,12 +1829,12 @@ GEOMETRY ST_LocateBetween (line GEOMETRY, start_measure DOUBLE, end_measure DOUB
 
 #### Description
 
-Returns a geometry or geometry collection created by filtering and interpolating vertices within a range of "M" values
+Returns a geometry or geometry collection created by filtering and interpolating vertices within a range of “M” values
 
-Creates a geometry or geometry collection, containing the parts formed by vertices that have an "M" value within the "start_measure" and "end_measure" range
+Creates a geometry or geometry collection, containing the parts formed by vertices that have an “M” value within the `start_measure` and `end_measure` range
 
-For LINESTRING or MULTILINESTRING, if a line segment would cross either the upper or lower bound, a vertex is added by interpolating the coordinates at the "intersection"
-For a POINT and MULTIPOINT, the point is added to the collection if its vertex has an "M" value within the range, otherwise it is skipped
+For LINESTRING or MULTILINESTRING, if a line segment would cross either the upper or lower bound, a vertex is added by interpolating the coordinates at the “intersection”
+For a POINT and MULTIPOINT, the point is added to the collection if its vertex has an “M” value within the range, otherwise it is skipped
 For a POLYGON, only the exterior ring is considered, and treated like a LINESTRING
 
 If offset is provided, the resulting vertices are offset by the given amount perpendicular to the line direction.
@@ -2172,7 +2172,7 @@ GEOMETRY ST_Node (geom GEOMETRY)
 
 #### Description
 
-Returns a "noded" MultiLinestring, produced by combining a collection of input linestrings and adding additional vertices where they intersect.
+Returns a “noded” MultiLinestring, produced by combining a collection of input linestrings and adding additional vertices where they intersect.
 
 #### Example
 
@@ -2198,7 +2198,7 @@ GEOMETRY ST_Normalize (geom GEOMETRY)
 
 #### Description
 
-Returns the "normalized" representation of the geometry
+Returns the “normalized” representation of the geometry
 
 ----
 
@@ -2692,7 +2692,7 @@ Transforms a geometry between two coordinate systems
 
 The source and target coordinate systems can be specified using any format that the [PROJ library](https://proj.org) supports.
 
-The third optional `always_xy` parameter can be used to force the input and output geometries to be interpreted as having a [easting, northing] coordinate axis order regardless of what the source and target coordinate system definition says. This is particularly useful when transforming to/from the [WGS84/EPSG:4326](https://en.wikipedia.org/wiki/World_Geodetic_System) coordinate system (what most people think of when they hear "longitude"/"latitude" or "GPS coordinates"), which is defined as having a [latitude, longitude] axis order even though [longitude, latitude] is commonly used in practice (e.g. in [GeoJSON](https://tools.ietf.org/html/rfc7946)). More details available in the [PROJ documentation](https://proj.org/en/9.3/faq.html#why-is-the-axis-ordering-in-proj-not-consistent).
+The third optional `always_xy` parameter can be used to force the input and output geometries to be interpreted as having a [easting, northing] coordinate axis order regardless of what the source and target coordinate system definition says. This is particularly useful when transforming to/from the [WGS84/EPSG:4326](https://en.wikipedia.org/wiki/World_Geodetic_System) coordinate system (what most people think of when they hear “longitude”/“latitude” or “GPS coordinates”), which is defined as having a [latitude, longitude] axis order even though [longitude, latitude] is commonly used in practice (e.g. in [GeoJSON](https://tools.ietf.org/html/rfc7946)). More details available in the [PROJ documentation](https://proj.org/en/9.3/faq.html#why-is-the-axis-ordering-in-proj-not-consistent).
 
 DuckDB spatial vendors its own static copy of the PROJ database of coordinate systems, so if you have your own installation of PROJ on your system the available coordinate systems may differ to what's available in other GIS software.
 
@@ -2810,7 +2810,7 @@ BOOLEAN ST_WithinProperly (geom1 GEOMETRY, geom2 GEOMETRY)
 
 #### Description
 
-Returns true if the first geometry \"properly\" is contained by the second geometry
+Returns true if the first geometry “properly” is contained by the second geometry
 
 This function functions the same as `ST_ContainsProperly`, but the arguments are swapped.
 
@@ -3113,7 +3113,7 @@ FROM cities;
 This example creates a vector tile named 'cities' with an extent of 4096 from the 'cities' table, using 'geom' as the geometry column and 'id' as the feature id column.
 
 However, you probably want to use the ST_AsMVTGeom function to first transform and clip your geometries to the tile extent.
-The following example assumes the geometry is in WebMercator ("EPSG:3857") coordinates.
+The following example assumes the geometry is in WebMercator (“EPSG:3857”) coordinates.
 Replace `⟨z⟩`{:.language-sql .highlight}, `⟨x⟩`{:.language-sql .highlight}, and `⟨y⟩`{:.language-sql .highlight} with the appropriate tile coordinates, `⟨your_table⟩`{:.language-sql .highlight} with your table name, and `⟨tile_path⟩` with the path to write the tile to.
 
 ```sql
@@ -3253,7 +3253,7 @@ GEOMETRY ST_MemUnion_Agg (col0 GEOMETRY)
 #### Description
 
 Computes the union of a set of input geometries.
-                "Slower, but might be more memory efficient than ST_UnionAgg as each geometry is merged into the union individually rather than all at once.
+Slower, but might be more memory efficient than ST_UnionAgg as each geometry is merged into the union individually rather than all at once.
 
 ----
 
@@ -3531,7 +3531,7 @@ ST_ReadOSM (col0 VARCHAR)
 The `ST_ReadOsm()` table function enables reading compressed OpenStreetMap data directly from a `.osm.pbf file.`
 
 This function uses multithreading and zero-copy protobuf parsing which makes it a lot faster than using the `ST_Read()` OSM driver, however it only outputs the raw OSM data (Nodes, Ways, Relations), without constructing any geometries. For simple node entities (like PoI's) you can trivially construct POINT geometries, but it is also possible to construct LINESTRING and POLYGON geometries by manually joining refs and nodes together in SQL, although with available memory usually being a limiting factor.
-The `ST_ReadOSM()` function also provides a "replacement scan" to enable reading from a file directly as if it were a table. This is just syntax sugar for calling `ST_ReadOSM()` though. Example:
+The `ST_ReadOSM()` function also provides a “replacement scan” to enable reading from a file directly as if it were a table. This is just syntax sugar for calling `ST_ReadOSM()` though. Example:
 
 ```sql
 SELECT * FROM 'tmp/data/germany.osm.pbf' LIMIT 5;

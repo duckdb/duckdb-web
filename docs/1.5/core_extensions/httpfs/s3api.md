@@ -78,7 +78,7 @@ Below is a complete list of the supported parameters that can be used for both t
 | `VERIFY_SSL`                  | Whether to verify the SSL certificate of the server                                   | `S3`, `GCS`, `R2` | `BOOLEAN` | `true`                                      |
 | `ACCOUNT_ID`                  | The R2 account ID to use for generating the endpoint URL                              | `R2`              | `STRING`  | -                                           |
 | `KMS_KEY_ID`                  | AWS KMS (Key Management Service) key for Server Side Encryption S3                    | `S3`              | `STRING`  | -                                           |
-| `REQUESTER_PAYS`              | Allows use of "requester pays" S3 buckets                                             | `S3`              | `BOOLEAN` | `false`                                     |
+| `REQUESTER_PAYS`              | Allows use of “requester pays” S3 buckets                                             | `S3`              | `BOOLEAN` | `false`                                     |
 | `REFRESH`                     | Set to `auto` to periodically refresh credentials (see the [`aws` extension]({% link docs/1.5/core_extensions/aws.md %}#auto-refresh)) | `S3`, `GCS`, `R2` | `STRING`  | -                                           |
 
 ### Automatic Credential Refresh

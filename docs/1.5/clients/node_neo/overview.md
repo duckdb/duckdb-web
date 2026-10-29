@@ -886,7 +886,7 @@ appender.appendDataChunk(chunk);
 appender.flushSync();
 ```
 
-See "Specifying Values" above for how to supply values to the appender.
+See “Specifying Values” above for how to supply values to the appender.
 
 ### Extract Statements
 

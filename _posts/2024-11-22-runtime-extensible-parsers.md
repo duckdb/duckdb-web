@@ -173,7 +173,7 @@ TableReference <-
     PropertyGraphReference / ...
 ```
 
-`dplyr`, the ["Grammar of Data Manipulation"](https://dplyr.tidyverse.org), is the de facto standard data transformation language in the R Environment for Statistical Computing. The language uses function calls and a special chaining operator (`%>%`) to combine operators. Below is an example dplyr query:
+`dplyr`, the [“Grammar of Data Manipulation”](https://dplyr.tidyverse.org), is the de facto standard data transformation language in the R Environment for Statistical Computing. The language uses function calls and a special chaining operator (`%>%`) to combine operators. Below is an example dplyr query:
 
 ```R
 df %>%
@@ -221,7 +221,7 @@ ORDER BY customer
 GROUP BY customer;
 ```
 
-By default, both the YACC and the PEG parsers will report a similar error message about an `unexpected 'GROUP' keyword` with a byte position. However, with a PEG parser we can define a "recovery" syntax rule that will create a useful error message. We modify the `OrderByClause` from our experimental grammar like so:
+By default, both the YACC and the PEG parsers will report a similar error message about an `unexpected 'GROUP' keyword` with a byte position. However, with a PEG parser we can define a “recovery” syntax rule that will create a useful error message. We modify the `OrderByClause` from our experimental grammar like so:
 
 ```text
 OrderByClause <- 'ORDER'i 'BY'i List(OrderByExpression)

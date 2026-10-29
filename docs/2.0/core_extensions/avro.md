@@ -34,7 +34,7 @@ FROM read_avro('https://blobs.duckdb.org/data/userdata1.avro');
 FROM read_avro('s3://⟨your-bucket⟩/⟨some_file⟩.avro');
 ```
 
-should "just" work.
+should “just” work.
 
 You can also *glob* multiple files in a single read call or pass a list of files to the functions:
 
@@ -55,15 +55,15 @@ This will result in an additional column in the result set that contains the act
 
 This extension automatically translates the Avro Schema to the DuckDB schema. *All* Avro types can be translated, except for *recursive type definitions*, which DuckDB does not support.
 
-The type mapping is very straightforward except for Avro's "unique" way of handling `NULL`. Unlike other systems, Avro does not treat `NULL` as a possible value in a range of e.g. `INTEGER` but instead represents `NULL` as a union of the actual type with a special `NULL` type. This is different to DuckDB, where any value can be `NULL`. Of course DuckDB also supports `UNION` types, but this would be quite cumbersome to work with.
+The type mapping is very straightforward except for Avro's “unique” way of handling `NULL`. Unlike other systems, Avro does not treat `NULL` as a possible value in a range of e.g. `INTEGER` but instead represents `NULL` as a union of the actual type with a special `NULL` type. This is different to DuckDB, where any value can be `NULL`. Of course DuckDB also supports `UNION` types, but this would be quite cumbersome to work with.
 
 This extension *simplifies* the Avro schema where possible: An Avro union of any type and the special null type is simplified to just the non-null type. For example, an Avro record of the union type `["int","null"]` becomes a DuckDB `INTEGER`, which just happens to be `NULL` sometimes. Similarly, an Avro union that contains only a single type is converted to the type it contains. For example, an Avro record of the union type `["int"]` also becomes a DuckDB `INTEGER`.
 
-The extension also "flattens" the Avro schema. Avro defines tables as root-level "record" fields, which are the same as DuckDB `STRUCT` fields. For more convenient handling, this extension turns the entries of a single top-level record into top-level columns.
+The extension also “flattens” the Avro schema. Avro defines tables as root-level “record” fields, which are the same as DuckDB `STRUCT` fields. For more convenient handling, this extension turns the entries of a single top-level record into top-level columns.
 
 ## Implementation
 
-Internally, this extension uses the "official" [Apache Avro C API](https://avro.apache.org/docs/++version++/api/c/), albeit with some minor patching to allow reading of Avro files from memory.
+Internally, this extension uses the “official” [Apache Avro C API](https://avro.apache.org/docs/++version++/api/c/), albeit with some minor patching to allow reading of Avro files from memory.
 
 ## Limitations and Future Plans
 

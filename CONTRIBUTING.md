@@ -51,7 +51,7 @@ Before creating a pull request, please perform the following steps:
 * Preview your changes in the browser using the [site build guide](BUILDING.md).
 * Run the linters with `scripts/lint.sh` to show potential issues and run `scripts/lint.sh -f` to perform the fixes for markdownlint.
 
-When creating a PR, please check the box to "Allow edits from maintainers". This allows the maintainers to make small adjustments before merging a pull request.
+When creating a PR, please check the box to “Allow edits from maintainers”. This allows the maintainers to make small adjustments before merging a pull request.
 
 ## Blog Posts, Library Entries, Events, and Everywhere Entries
 
@@ -184,7 +184,7 @@ Some of this style guide is automated with GitHub Actions, but feel free to run 
     * Note that the paths must contain the correct extension (most often `.md`) and they must be relative to the repository root.
     * :x: ```see [the `SELECT` statement](../../sql/statements/select)```
     * :white_check_mark: ```see [the `SELECT` statement]({% link docs/current/sql/statements/select.md %})```
-* Avoid using the term "here" for links. For the rationale, see a [detailed explanation on why your links should never say "click here"](https://uxmovement.com/content/why-your-links-should-never-say-click-here/).
+* Avoid using the term “here” for links. For the rationale, see a [detailed explanation on why your links should never say “click here”](https://uxmovement.com/content/why-your-links-should-never-say-click-here/).
     * :x: `see [here]({% link docs/current/sql/statements/copy.md %}#copy-from)`
     * :white_check_mark: ```see the [`COPY ... FROM` statement]({% link docs/current/sql/statements/copy.md %}#copy-from)```
 * Reference a specific section when possible:

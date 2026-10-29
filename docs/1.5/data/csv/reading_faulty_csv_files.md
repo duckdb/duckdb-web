@@ -151,8 +151,8 @@ The CSV Reject Scans Table returns the following information:
 | `file_id` | A scanner might happen over multiple files, so the file_id represents a unique file in a scanner | `UBIGINT` |
 | `file_path` | The file path | `VARCHAR` |
 | `delimiter` | The delimiter used e.g., ; | `VARCHAR` |
-| `quote` | The quote used e.g., " | `VARCHAR` |
-| `escape` | The escape used e.g., " | `VARCHAR` |
+| `quote` | The quote used e.g., `"` | `VARCHAR` |
+| `escape` | The escape used e.g., `"` | `VARCHAR` |
 | `newline_delimiter` | The newline delimiter used e.g., \r\n | `VARCHAR` |
 | `skip_rows` | If any rows were skipped from the top of the file | `UINTEGER` |
 | `has_header` | If the file has a header | `BOOLEAN` |

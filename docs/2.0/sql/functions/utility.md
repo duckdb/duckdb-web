@@ -47,7 +47,7 @@ The functions below are difficult to categorize into specific function types and
 | [`if(a, b, c)`](#ifa-b-c) | Ternary conditional operator. |
 | [`ifnull(expr, other)`](#ifnullexpr-other) | A two-argument version of coalesce. |
 | [`in_search_path(database_name, schema_name)`](#in_search_pathdatabase_name-schema_name) | Returns whether or not the given database and schema are in the search path. |
-| [`is_histogram_other_bin(arg)`](#is_histogram_other_binarg) | Returns `true` when `arg` is the "catch-all element" of its datatype for the purpose of the [`histogram_exact`]({% link docs/2.0/sql/functions/aggregates.md %}#histogram_exactargelements) function, which is equal to the "right-most boundary" of its datatype for the purpose of the [`histogram`]({% link docs/2.0/sql/functions/aggregates.md %}#histogramargboundaries) function. |
+| [`is_histogram_other_bin(arg)`](#is_histogram_other_binarg) | Returns `true` when `arg` is the “catch-all element” of its datatype for the purpose of the [`histogram_exact`]({% link docs/2.0/sql/functions/aggregates.md %}#histogram_exactargelements) function, which is equal to the “right-most boundary” of its datatype for the purpose of the [`histogram`]({% link docs/2.0/sql/functions/aggregates.md %}#histogramargboundaries) function. |
 | [`make_type(name, ...)`](#make_typename-) | Constructs a value of type `TYPE` from a type name and optional type parameters. |
 | [`md5(string)`](#md5string) | Returns the MD5 hash of the `string` as a `VARCHAR`. |
 | [`md5_number(string)`](#md5_numberstring) | Returns the MD5 hash of the `string` as a `UHUGEINT`. |
@@ -307,7 +307,7 @@ The functions below are difficult to categorize into specific function types and
 
 <div class="nostroke_table"></div>
 
-| **Description** | Returns `true` when `arg` is the "catch-all element" of its datatype for the purpose of the [`histogram_exact`]({% link docs/2.0/sql/functions/aggregates.md %}#histogram_exactargelements) function, which is equal to the "right-most boundary" of its datatype for the purpose of the [`histogram`]({% link docs/2.0/sql/functions/aggregates.md %}#histogramargboundaries) function. |
+| **Description** | Returns `true` when `arg` is the “catch-all element” of its datatype for the purpose of the [`histogram_exact`]({% link docs/2.0/sql/functions/aggregates.md %}#histogram_exactargelements) function, which is equal to the “right-most boundary” of its datatype for the purpose of the [`histogram`]({% link docs/2.0/sql/functions/aggregates.md %}#histogramargboundaries) function. |
 | **Example** | `is_histogram_other_bin('')` |
 | **Result** | `true` |
 

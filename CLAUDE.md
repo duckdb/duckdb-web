@@ -84,7 +84,7 @@ Link tags cause build failures if the target doesn't exist, catching broken link
 ### Markdown
 - No hard line breaks; do not use `<br/>` or double trailing spaces
 - Unordered lists use `*` (not `-`); 4-space indentation for nesting
-- Use `"` `"` and `'` `'` for smart quotes
+- Use `“` `”` and `‘` `’` for quotation marks in prose (straight quotes are not converted automatically); keep straight quotes in code and query results
 - Page title goes in front matter `title:` only — do not repeat as an `h1` in the body
 - Body headers: `##`, `###`, `####` only
 - Header capitalization: [Chicago Manual of Style](https://capitalizemytitle.com/style/Chicago/)
