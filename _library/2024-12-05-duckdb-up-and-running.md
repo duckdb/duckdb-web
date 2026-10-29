@@ -3,6 +3,8 @@ layout: post
 title: "DuckDB: Up and Running"
 authors:
   - Wei-Meng Lee
+thumb: "/images/library/thumbs/duckdb-up-and-running.jpg"
+image: "/images/library/thumbs/duckdb-up-and-running.jpg"
 tag: book
 category: community
 excerpt: ""

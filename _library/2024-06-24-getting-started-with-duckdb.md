@@ -4,6 +4,8 @@ title: "Getting Started with DuckDB"
 authors:
   - Simon Aubury
   - Ned Letcher
+thumb: "/images/library/thumbs/getting-started-with-duckdb.jpg"
+image: "/images/library/thumbs/getting-started-with-duckdb.jpg"
 tag: book
 category: community
 excerpt: ""
