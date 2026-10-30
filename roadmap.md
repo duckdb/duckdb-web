@@ -24,11 +24,13 @@ This section lists the features that the DuckDB team plans to work on **in the c
 
 ### Coming Soon
 
+Many of the planned features are in flight for [DuckDB 2.1](% link release_calendar.md %).
+
 * Stabilizing the [C API v2]({% link docs/2.0/clients/c/overview.md %}) and the [C extension API](https://github.com/duckdb/extension-template-c)
-* [`MATCH_RECOGNIZE`](https://github.com/duckdb/duckdb/discussions/3994) for pattern matching – in flight for DuckDB 2.1
-* [Support for PL/SQL stored procedures](https://github.com/duckdb/duckdb/discussions/8104) (see Denis Hirn's [DuckPL talk]({% link _library/2026-01-30-duckpl-a-procedural-language-in-duckdb.md %})) – in flight for DuckDB 2.1
-* [Better error messages](https://github.com/duckdb/duckdb/pull/27387) using the new PEG parser – in flight for DuckDB 2.1
-* Memory allocator improvements, including fully-tracked allocations
+* [`MATCH_RECOGNIZE`](https://github.com/duckdb/duckdb/discussions/3994) for pattern matching
+* [Support for PL/SQL stored procedures](https://github.com/duckdb/duckdb/discussions/8104) (see Denis Hirn's [DuckPL talk]({% link _library/2026-01-30-duckpl-a-procedural-language-in-duckdb.md %}))
+* [Better error messages](https://github.com/duckdb/duckdb/pull/27387) using the new PEG parser
+* [Memory allocator improvements](https://github.com/duckdb/duckdb/pull/27520), including time-based decay, bounded background reclamation and fully-tracked allocations
 
 ### Major Features
 
