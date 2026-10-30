@@ -52,6 +52,12 @@ Load the [`spatial`]({% link docs/2.0/core_extensions/spatial/overview.md %}) ex
 LOAD spatial;
 ```
 
+Load an extension that was installed from a [custom extension repository]({% link docs/2.0/extensions/extension_repositories.md %}):
+
+```sql
+LOAD my_ext FROM my_repo;
+```
+
 ### Syntax
 
 <div id="rrdiagram1"></div>

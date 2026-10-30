@@ -179,7 +179,7 @@ The `duckdb_extension_repositories()` function provides metadata about the [exte
 |:-|:---|:-|
 | `repository_name` | The name of the repository. | `VARCHAR` |
 | `prefix` | The URL prefix (or path) from which extensions are installed. | `VARCHAR` |
-| `type` | The type of the repository, e.g., `CORE` or `COMMUNITY`. | `VARCHAR` |
+| `type` | The type of the repository: `CORE`, `COMMUNITY`, or `USER_PROVIDED`. | `VARCHAR` |
 | `key_fingerprints` | The SHA-256 fingerprints of the public keys pinned for the repository. `NULL` for built-in repositories. | `VARCHAR[]` |
 | `public_keys` | The public keys pinned for the repository. `NULL` for built-in repositories. | `VARCHAR[]` |
 
@@ -198,6 +198,7 @@ The `duckdb_extensions()` function provides metadata about the extensions availa
 | `extension_version` | The version of the extension (`vX.Y.Z` for stable versions and 6-character hash for unstable versions). | `VARCHAR` |
 | `install_mode` | The installation mode that was used to install the extension: `UNKNOWN`, `REPOSITORY`, `CUSTOM_PATH`, `STATICALLY_LINKED`, `NOT_INSTALLED`, `NULL`. | `VARCHAR` |
 | `installed_from` | Name of the repository the extension was installed from, e.g., `community` or `core_nightly`. The empty string denotes the `core` repository. | `VARCHAR` |
+| `signature_key_fingerprint` | The SHA-256 fingerprint of the public key that verified the extension when it was installed. `NULL` if no fingerprint is available, e.g., for built-in extensions and for extensions from [custom extension repositories]({% link docs/2.0/extensions/extension_repositories.md %}#using-a-repository). Available as of DuckDB 2.0. | `VARCHAR` |
 
 ## `duckdb_functions`
 

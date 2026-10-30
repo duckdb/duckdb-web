@@ -52,7 +52,7 @@ which itself is supported through an extension ([`httpfs`]({% link docs/2.0/core
 > Avoid loading unsigned extensions over HTTP.
 > Consult the [Securing DuckDB page]({% link docs/2.0/operations_manual/securing_duckdb/securing_extensions.md %}) for guidelines on how to set up DuckDB in a secure manner.
 
-If you wish to load your own extensions or extensions from third-parties you will need to enable the `allow_unsigned_extensions` flag.
+If you wish to load your own extensions or extensions from third-parties without signing them and [registering a custom repository]({% link docs/2.0/extensions/extension_repositories.md %}), you will need to enable the `allow_unsigned_extensions` flag.
 To load unsigned extensions using the [CLI client]({% link docs/2.0/clients/cli/overview.md %}), pass the `-unsigned` flag to it on startup:
 
 ```batch
@@ -117,6 +117,12 @@ base_repository_path_or_url
 See the [`extension-template` repository](https://github.com/duckdb/extension-template/) for all necessary code and scripts
 to set up a repository.
 
+To support [installing a specific version]({% link docs/2.0/extensions/versioning_of_extensions.md %}#installing-a-specific-extension-version) of an extension, also serve it at the following path:
+
+```text
+base_repository_path_or_url/⟨extension_name⟩/⟨extension_version⟩/v⟨duckdb_version⟩/⟨platform_name⟩/⟨extension_name⟩.duckdb_extension.gz
+```
+
 When installing an extension from a custom repository, DuckDB will search for both a gzipped and non-gzipped version. For example:
 
 ```sql
@@ -124,6 +130,9 @@ INSTALL icu FROM '⟨custom_repository⟩';
 ```
 
 The execution of this statement will first look for `icu.duckdb_extension.gz`, then `icu.duckdb_extension` in the repository's directory structure.
+This fallback only applies to repositories that are read through a file system, i.e., local paths and HTTPS or S3 URLs. For `http://` repositories, DuckDB only requests `icu.duckdb_extension.gz`, so they have to serve gzipped files.
 
 If the custom repository is served over HTTPS or S3, the [`httpfs` extension]({% link docs/2.0/core_extensions/httpfs/overview.md %}) is required. DuckDB will attempt to [autoload]({% link docs/2.0/extensions/overview.md %}#autoloading-extensions)
 the `httpfs` extension when an installation over HTTPS or S3 is attempted.
+
+Installing from an `http://` repository does not require `httpfs`. If `httpfs` is loaded, DuckDB rewrites the URL to `https://` before downloading. DuckDB does not follow redirects for these downloads, so if `httpfs` is not loaded, a server that redirects `http://` to `https://` makes the installation fail with an HTTP 301 error.

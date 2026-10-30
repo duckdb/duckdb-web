@@ -64,6 +64,8 @@ Alternatively, the `custom_extension_repository` setting can be used to change t
 SET custom_extension_repository = 'http://nightly-extensions.duckdb.org';
 ```
 
+> Note Extensions installed from a URL or through the `custom_extension_repository` setting are verified against DuckDB's built-in keys. To install extensions signed with your own keys, [register a custom extension repository]({% link docs/2.0/extensions/extension_repositories.md %}) and install from it by name.
+
 DuckDB contains the following predefined repositories:
 
 | Alias                 | URL                                      | Description                                                                            |
