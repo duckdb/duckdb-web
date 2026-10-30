@@ -60,16 +60,16 @@ LIMIT 3;
 The `query` function allows for even more flexibility. For example, users who prefer pandas' `stack` syntax over SQL's [`UNPIVOT` syntax]({% link docs/2.0/sql/statements/unpivot.md %}), may use:
 
 ```sql
-CREATE OR REPLACE MACRO stack(table_name, index, name, values) AS TABLE 
+CREATE OR REPLACE MACRO stack(table_name, index, name, values) AS TABLE
 FROM query(
-    'UNPIVOT ' || table_name 
-    || ' ON COLUMNS(* EXCLUDE (' || array_to_string(index, ', ') 
+    'UNPIVOT ' || table_name
+    || ' ON COLUMNS(* EXCLUDE (' || array_to_string(index, ', ')
     || ')) INTO NAME ' || name || ' VALUES ' || values
 );
 
 WITH cities AS (
     FROM (
-        VALUES 
+        VALUES
             ('NL', 'Amsterdam', '10', '12', '15'),
             ('US', 'New York', '100', '120', '150')
     ) _(country, city, '2000', '2010', '2020')

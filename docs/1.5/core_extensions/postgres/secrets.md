@@ -141,7 +141,7 @@ When IAM authentication is performed using `psql` command line tool, the followi
 * Pass this token as a `password` connection option:
 
   ```bash
-  export RDSHOST="database-1-instance-1.xxx.eu-west-1.rds.amazonaws.com" 
+  export RDSHOST="database-1-instance-1.xxx.eu-west-1.rds.amazonaws.com"
   psql "host=$RDSHOST port=5432 dbname=postgres user=postgres sslmode=require password=$(aws rds generate-db-auth-token --hostname $RDSHOST --port 5432 --username postgres --region eu-west-1)"
   ```
 
@@ -203,7 +203,7 @@ CREATE OR REPLACE SECRET s3_secret1 IN postgres_p1 (
 
 When `IN postgres_⟨attached_database⟩`{:.language-sql .highlight} clause of `CREATE SECRET` is specified, the secret is persisted to the `duckdb_secrets` table in the specified attached database.
 
-> Warning 
+> Warning
 > Secrets are written to the database table in unencrypted binary format. It is advised to use this provider for secrets that do not include confidential credentials (like the `s3` example above). For multi-tenant scenarios it is expected that [Postgres Row-Level Security policies](https://www.postgresql.org/docs/18/ddl-rowsecurity.html) can be used to prevent users to see secrets of other users.
 
 Different table name (for example, in a different schema) can be specified in the `SECRET_STORAGE_TABLE` parameter to the `ATTACH` command.

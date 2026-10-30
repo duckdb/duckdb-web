@@ -3,7 +3,7 @@ layout: docu
 title: Spatial Functions
 ---
 
-## Function Index 
+## Function Index
 
 **[Scalar Functions](#scalar-functions)**
 
@@ -1537,7 +1537,7 @@ DOUBLE ST_InterpolatePoint (line GEOMETRY, point GEOMETRY)
 
 Computes the closest point on a LINESTRING to a given POINT and returns the interpolated M value of that point.
 
-First argument must be a linestring and must have a M dimension. The second argument must be a point. 
+First argument must be a linestring and must have a M dimension. The second argument must be a point.
 Neither argument can be empty.
 
 ----
@@ -2720,7 +2720,7 @@ POINT (544615.0239773799 6867874.103539125)
 -- a [northing, easting] axis order instead, even though the source coordinate
 -- reference system definition (WGS84) says otherwise.
 
-SELECT 
+SELECT
     ST_Transform(
         -- note the axis order is reversed here
         st_point(4.892360, 52.373123),

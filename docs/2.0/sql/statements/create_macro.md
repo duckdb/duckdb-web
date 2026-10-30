@@ -33,7 +33,7 @@ CREATE [OR REPLACE] [TEMPORARY] MACRO [IF NOT EXISTS] ⟨identifier⟩( [⟨para
 * The `TABLE` keyword may appear right after the `AS` keyword, directly before the expression, indicating the macro is a [table macro](#types-of-macros) and returns a result set. When omitted, the macro is automatically a scalar macro.
 * The expression can be any valid SQL expression provided the expression's type is aligned with the [macro's type](#types-of-macros).
 
-Please review the [syntax diagram](#syntax) for a more precise and detailed overview of the `CREATE MACRO` statement. 
+Please review the [syntax diagram](#syntax) for a more precise and detailed overview of the `CREATE MACRO` statement.
 
 ## Types of Macros
 
@@ -50,9 +50,9 @@ Macros may declare parameters. The parameter declarations appear as a comma-sepa
 ```
 * The parameter name is mandatory and can be any valid SQL identifier. Parameter names must be unique within the parameter list. An attempt to define multiple parameters with the same name results in a `Duplicate parameter` error.
 * Optionally, a parameter may explicitly specify a particular datatype. This can be any of the existing DuckDB [data types]({% link docs/2.0/sql/data_types/overview.md %}). Note: there is no way to specify a parameter of a `TABLE` type.
-* A parameter can optionally specify a default value. This is done with the assignment operator `:=`, followed by the expression that is to be used as default value. 
+* A parameter can optionally specify a default value. This is done with the assignment operator `:=`, followed by the expression that is to be used as default value.
 * The default value expression is in principle evaluated at definition-time - NOT at run-time. (There are a few exceptions, like `CURRENT_SCHEMA`. But it's best not to rely on that: if you need a default value to be dynamic, use a well-known value like `NULL` as default and use conditional logic in the expression to produce the run-time value).
-* Specifying a default value expression effectively makes the parameter optional: when the macro is called, the DuckDb binder will find candidate signatures based on passed parameters, but backfilled by signatures that specify default values for missing parameters.  
+* Specifying a default value expression effectively makes the parameter optional: when the macro is called, the DuckDb binder will find candidate signatures based on passed parameters, but backfilled by signatures that specify default values for missing parameters.
 * A parameter that specifies a default value cannot appear before a definition of a parameter that does not have a default value. In other words, parameters without default values have to be defined “in the front”; any parameters with default values appear “at the back”.
 * Multiple parameter declarations are separated from one another with a comma.
 
@@ -68,11 +68,11 @@ Macros support overloading:
 
 ## Calling Macros
 
-Macros are called by mentioning their name, followed by parentheses. A comma-separated list of value-expressions may appear between the parentheses - these are the actual parameters. 
+Macros are called by mentioning their name, followed by parentheses. A comma-separated list of value-expressions may appear between the parentheses - these are the actual parameters.
 The DuckDB binder examines the data types of the actual parameters and tries to find an implementation of the macro that has a matching signature.
 If an implementation is found, the parameter values are passed and the implementation's expression is evaluated; finally, its resulting value is returned and used in place where the macro was called.
 This is similar to calling a [function]({% link docs/2.0/sql/functions/overview.md %}).
- 
+
 In general, a call to a macro is valid if its expression could also appear in that context:
 * A call to a scalar macro can be used in the `SELECT` clause or in the `WHERE` clause of a `SELECT`statement.
 * If the expression of a scalar macro references an [aggregate function]({% link docs/2.0/sql/functions/aggregates.md %}), then the macro behaves like an aggregate function too.
@@ -85,8 +85,8 @@ Parameter values can be passed to the macro as a comma-separated list of express
 Parameter values may be passed either positionally or by name.
 
 * Positional parameter passing means that only the value expression is passed;
-* In contrast to positional parameter passing, named parameter passing explicitly assigns the actual parameter value to a specific formal parameter. This is done by mentioning the parameter name followed by the assignment operator `:=`, followed by the parameter value expression. 
-* Note that some built-in functions also allow named parameters, but allow `=` as assignment operator. For macros, this won't work! Instead, the `=` is interpreted as comparison operator. This effectively turns the - intended - named parameter into a positional parameter passing the result of comparing the parameter name with the parameter value expression. 
+* In contrast to positional parameter passing, named parameter passing explicitly assigns the actual parameter value to a specific formal parameter. This is done by mentioning the parameter name followed by the assignment operator `:=`, followed by the parameter value expression.
+* Note that some built-in functions also allow named parameters, but allow `=` as assignment operator. For macros, this won't work! Instead, the `=` is interpreted as comparison operator. This effectively turns the - intended - named parameter into a positional parameter passing the result of comparing the parameter name with the parameter value expression.
 * If a macro call contains named parameters, then they must appear after any positional parameters. In other words, any positional parameters must appear “in the front”; while all named parameters must appear “at the back”.
 * By definition, positional parameters are passed in the same order as they were declared. But named parameters can appear in any order (provided they appear after any of the positional parameters).
 

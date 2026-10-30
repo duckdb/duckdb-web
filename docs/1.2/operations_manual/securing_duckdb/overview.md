@@ -65,16 +65,16 @@ These options allows fine-grained access control for the file system.
 For example, you can set DuckDB to only use the `/tmp` directory.
 
 ```sql
-SET allowed_directories = ['/tmp'];  
-SET enable_external_access = false;  
-FROM read_csv('test.csv');  
+SET allowed_directories = ['/tmp'];
+SET enable_external_access = false;
+FROM read_csv('test.csv');
 ```
 
 With the setting applied, DuckDB will refuse to read files in the current working directory:
 
 ```console
 Permission Error:
-Cannot access file "test.csv" - file system operations are disabled by configuration  
+Cannot access file "test.csv" - file system operations are disabled by configuration
 ```
 
 ## Secrets

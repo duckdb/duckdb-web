@@ -194,7 +194,7 @@ INSERT INTO tasks VALUES ('a', 'low'), ('b', 'medium'), ('c', 'high');
 -- WARNING!
 -- Equivalent to `WHERE priority_level::VARCHAR >= 'medium'`
 SELECT * FROM tasks
-WHERE priority_level >= 'medium';  
+WHERE priority_level >= 'medium';
 -- Misses the 'high' priority task!
 ```
 

@@ -85,7 +85,7 @@ print(counted.fetchall(), held.fetchall())
 
 
 
-## Relation Creation 
+## Relation Creation
 
 This section contains the details on how a relation is created. A relation over a query that reads is [lazy evaluated](#lazy-evaluation).
 
@@ -792,7 +792,7 @@ rel.show()
 └───────┘
 ```
 
-## Relation Definition Details 
+## Relation Definition Details
 
 This section contains the details on how to inspect a relation.
 
@@ -1396,7 +1396,7 @@ rel.types
 [INTEGER, VARCHAR, VARCHAR, INTEGER, BOOLEAN]
 ```
 
-## Transformation 
+## Transformation
 
 This section contains the methods which can be used to chain queries. They build a new query from the relation and run nothing.
 
@@ -2847,7 +2847,7 @@ rel.with_columns(price=col("price") * 2, currency=lit("EUR"))
 └───────┴─────────────┴──────────┴───────┴──────────┴──────────┘
 ```
 
-## Functions 
+## Functions
 
 This section contains the functions which can be applied to a relation, in order to get a (scalar) result. They build a new query and run nothing.
 
@@ -5581,7 +5581,7 @@ variance(self, expression: str, groups: str = '', window_spec: str = '', project
 
 Alias of [`var_samp()`](#var_samp).
 
-## Output 
+## Output
 
 This section contains the methods which read the relation, store it in a table, a view, or a file, or write to the table it reads.
 

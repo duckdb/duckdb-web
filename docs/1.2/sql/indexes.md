@@ -42,7 +42,7 @@ ART indexes create a secondary copy of the data in a second location – this co
 `UPDATE` statements on indexed columns and columns that cannot be updated in place are transformed into a `DELETE` of the original row followed by an `INSERT` of the updated row.
 This rewrite has performance implications, particularly for wide tables, as entire rows are rewritten instead of only the affected columns.
 
-Additionally, it causes the following constraint-checking limitation of `UPDATE` statements. 
+Additionally, it causes the following constraint-checking limitation of `UPDATE` statements.
 The same limitation exists in other DBMSs, like PostgreSQL.
 
 In the example below, note how the number of rows exceeds DuckDB's standard vector size, which is 2048.
@@ -81,7 +81,7 @@ COMMIT;
 ```
 
 In other clients, you might be able to fetch the result of `DELETE ... RETURNING ...`.
-Then, you can use that result in a subsequent `INSERT ...` statements, 
+Then, you can use that result in a subsequent `INSERT ...` statements,
 or potentially make use of DuckDB's `Appender` (if available in the client).
 
 ### Over-Eager Constraint Checking in Foreign Keys
@@ -112,7 +112,7 @@ During the `INSERT`, it is unaware it will reinsert the foreign key value as par
 
 ### Constraint Checking After Delete With Concurrent Transactions
 
-When a delete is committed on a table with an index, data can only be removed from the index when no further transactions exist that refer to the deleted entry. This means that for indices which enforce constraint violations, if you perform a delete transaction, constraint checking can fail for a subsequent transaction which inserts a record with the same key as the deleted record if there is a concurrent transaction referencing the deleted record. Note that constraint violations are only relevant for primary key, foreign key, and UNIQUE indexes. 
+When a delete is committed on a table with an index, data can only be removed from the index when no further transactions exist that refer to the deleted entry. This means that for indices which enforce constraint violations, if you perform a delete transaction, constraint checking can fail for a subsequent transaction which inserts a record with the same key as the deleted record if there is a concurrent transaction referencing the deleted record. Note that constraint violations are only relevant for primary key, foreign key, and UNIQUE indexes.
 
 There are two main ways that constraint checking can fail:
 

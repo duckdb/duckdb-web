@@ -369,7 +369,7 @@ Here, `recurring.counter` gives access to all rows accumulated across all previo
 
 > Deprecated DuckDB 1.5.0 deprecated the use of recursive `UNION`s for
 > `USING KEY` CTEs in favor of recursive `UNION ALL`s.
-> 
+>
 > The recursive `UNION`s imply that not all rows that are produced in one
 > iteration are passed to the next, as would be the case for regular recursive
 > CTEs. Since the opposite is true, i.e., all rows are passed from one iteration
@@ -468,7 +468,7 @@ WITH RECURSIVE connected_components(id, comp) USING KEY (id) AS (
     FROM nodes AS n
         UNION ALL (
     SELECT DISTINCT ON (previous_iter.id) previous_iter.id, initial_iter.comp
-    FROM 
+    FROM
         recurring.connected_components AS previous_iter,
         connected_components AS initial_iter,
         edges AS e

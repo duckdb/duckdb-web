@@ -12,7 +12,7 @@ DuckDB supports two levels of variable scopes:
 
 | Scope | Description |
 |---|---|
-| `SESSION` | Variables with a `SESSION` scope are local to you and only affect the current session. | 
+| `SESSION` | Variables with a `SESSION` scope are local to you and only affect the current session. |
 | `GLOBAL` | Variables with a `GLOBAL` scope are specific [configuration option variables]({% link docs/1.5/configuration/overview.md %}#global-configuration-options) that affect the entire DuckDB instance and all sessions. For example, see [Set a Global Variable]({% link docs/1.5/sql/statements/set.md %}#set-a-global-variable). |
 
 ## `SET VARIABLE`

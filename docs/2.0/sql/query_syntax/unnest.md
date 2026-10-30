@@ -46,7 +46,7 @@ The `generate_subscripts` macro takes a value of the `LIST`-type as first argume
 
 #### `unnest()` as Table Function
 
-Since a call to `unnest` on a value of the `LIST`-type yields a rowset, it may also be treated as a [table function]({% link docs/2.0/sql/query_syntax/from.md %}#table-functions). 
+Since a call to `unnest` on a value of the `LIST`-type yields a rowset, it may also be treated as a [table function]({% link docs/2.0/sql/query_syntax/from.md %}#table-functions).
 This means it may appear in the [`FROM`-clause]({% link docs/2.0/sql/query_syntax/from.md %}) or a [`CALL`-statement]({% link docs/2.0/sql/statements/call.md %}).
 
 Calls to `unnest()` in a `FROM`-clause or `CALL`-statement do not accept additional parameters, and can thus not be used for [recursive unnesting](#recursive-unnesting).

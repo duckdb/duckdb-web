@@ -89,7 +89,7 @@ When this flag is set, we disable this and don't inline small strings.
 
 #### `DISABLE_MEMORY_SAFETY`
 
-Our data structures that are used extensively throughout the non-performance-critical code have extra checks to ensure memory safety, these checks include:  
+Our data structures that are used extensively throughout the non-performance-critical code have extra checks to ensure memory safety, these checks include:
 
 * Making sure `nullptr` is never dereferenced.
 * Making sure index out of bounds accesses don't trigger a crash.

@@ -56,7 +56,7 @@ if (result->HasError()) {
 }
 ```
 
-`Query` will not throw exceptions under normal circumstances. Instead, invalid queries or other issues cause the `HasError()` method of the returned `QueryResult` to return `true`. In this case, the error message is available via `GetError()`. The methods `GetErrorType()` and `GetErrorObject()` are also available for any `QueryResult` instance which may aid in more explicit error handling. 
+`Query` will not throw exceptions under normal circumstances. Instead, invalid queries or other issues cause the `HasError()` method of the returned `QueryResult` to return `true`. In this case, the error message is available via `GetError()`. The methods `GetErrorType()` and `GetErrorObject()` are also available for any `QueryResult` instance which may aid in more explicit error handling.
 
 ```cpp
 auto result = con.Query("INSERT INTO integers VALUES (1, 2)");
@@ -66,7 +66,7 @@ if (result->HasError()) {
     case duckdb::ExceptionType::CONSTRAINT: {
         // Example handling
         auto errorObject = result->GetErrorObject();
-        errorObject.ConvertErrorToJSON(); 
+        errorObject.ConvertErrorToJSON();
         std::cout << errorObject.Message() << std::endl;
         break;
     }

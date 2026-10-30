@@ -3,7 +3,7 @@ layout: docu
 title: Spatial Functions
 ---
 
-## Function Index 
+## Function Index
 
 **[Scalar Functions](#scalar-functions)**
 
@@ -2561,7 +2561,7 @@ POINT (544615.0239773799 6867874.103539125)
 -- a [northing, easting] axis order instead, even though the source coordinate
 -- reference system definition (WGS84) says otherwise.
 
-SELECT 
+SELECT
     ST_Transform(
         -- note the axis order is reversed here
         st_point(4.892360, 52.373123),

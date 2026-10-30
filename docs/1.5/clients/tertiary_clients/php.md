@@ -23,7 +23,7 @@ check [installation](https://duckdb-php.readthedocs.io/en/latest/installation) f
 ## Quick Start
 
 ```php
-DuckDB::sql("SELECT 'quack' as my_column")->print();    
+DuckDB::sql("SELECT 'quack' as my_column")->print();
 ```
 
 ```text
@@ -102,7 +102,7 @@ $appender->flush();
 
 ### DuckDB-Powerful
 
-DuckDB provides some amazing features. For example, 
+DuckDB provides some amazing features. For example,
 you can query remote files directly.
 
 Let's use an aggregate function to calculate the average of a column
@@ -110,8 +110,8 @@ for a Parquet remote file:
 
 ```php
 DuckDB::sql(
-    'SELECT "Reporting Year", avg("Gas Produced, MCF") as "AVG Gas Produced" 
-    FROM "https://github.com/plotly/datasets/raw/refs/heads/master/oil-and-gas.parquet" 
+    'SELECT "Reporting Year", avg("Gas Produced, MCF") as "AVG Gas Produced"
+    FROM "https://github.com/plotly/datasets/raw/refs/heads/master/oil-and-gas.parquet"
     WHERE "Reporting Year" BETWEEN 1985 AND 1990
     GROUP BY "Reporting Year";'
 )->print();

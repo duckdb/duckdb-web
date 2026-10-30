@@ -52,7 +52,7 @@ In the previous example we are updating the whole row if `id` matches. However, 
 MERGE INTO people
     USING (
         SELECT
-            1 AS id, 
+            1 AS id,
             98_000.0 AS salary
     ) AS salary_updates
     USING (id)
@@ -74,7 +74,7 @@ Another common pattern is to receive a _delete set_ of rows, which may only cont
 MERGE INTO people
     USING (
         SELECT
-            1 AS id, 
+            1 AS id,
     ) AS deletes
     USING (id)
     WHEN MATCHED THEN DELETE;
@@ -94,7 +94,7 @@ ORDER BY id;
 MERGE INTO people
     USING (
         SELECT
-            unnest([3, 2]) AS id, 
+            unnest([3, 2]) AS id,
     ) AS deletes
     USING (id)
     WHEN MATCHED AND people.salary >= 100_000.0 THEN DELETE;

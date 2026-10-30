@@ -176,19 +176,19 @@ CREATE TABLE walkers (animal VARCHAR);
 
 The DuckDB CLI client's progress bar supports customization through components.
 
-The `.progress_bar` command supports `--add` and `--clear` parameters for adding and removing components. 
+The `.progress_bar` command supports `--add` and `--clear` parameters for adding and removing components.
 
 For details on specific usage, see the examples below.
 
 ### Configuring the Progress Bar Display
 
-To check if the progress bar is enabled: 
+To check if the progress bar is enabled:
 
 ```sql
 SELECT * FROM duckdb_settings() WHERE name = 'enable_progress_bar';
 ```
 
-To check the current minimum amount of time (in milliseconds) a query needs to take before displaying a progress bar: 
+To check the current minimum amount of time (in milliseconds) a query needs to take before displaying a progress bar:
 
 ```sql
 SELECT * FROM duckdb_settings() WHERE name = 'progress_bar_time';
@@ -225,7 +225,7 @@ To set that progress bar component to a blue text that displays the file cache R
      width="400"
      />
 
-To resets all existing progress bar components: 
+To resets all existing progress bar components:
 
 ```sql
 .progress_bar --clear

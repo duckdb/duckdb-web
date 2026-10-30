@@ -65,9 +65,9 @@ Write a single log message with a `debug` level and a `connection` scope and a c
 
 ```sql
 SELECT write_log(
-        'A new duck has connected to the lake.', 
-        level := 'debug', 
-        scope := 'connection', 
+        'A new duck has connected to the lake.',
+        level := 'debug',
+        scope := 'connection',
         log_type := 'duckdb.docs.example.quack'
     );
 ```

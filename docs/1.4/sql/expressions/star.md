@@ -279,12 +279,12 @@ FROM (SELECT NULL a, 42 AS b, true AS c);
 | 42     |
 
 > Warning In the following example, replacing `UNPACK` by `*` results in a syntax error:
-> 
+>
 > ```sql
 > SELECT greatest(UNPACK(COLUMNS(*) + 1)) AS result
 > FROM (SELECT 1 AS a, 2 AS b, 3 AS c);
 > ```
-> 
+>
 > | result |
 > |-------:|
 > | 4      |

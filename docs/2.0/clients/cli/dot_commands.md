@@ -361,19 +361,19 @@ duckdb -manual regexp_extract
 
 The DuckDB CLI client's progress bar supports customization through components.
 
-The `.progress_bar` command supports `--add` and `--clear` parameters for adding and removing components. 
+The `.progress_bar` command supports `--add` and `--clear` parameters for adding and removing components.
 
 For details on specific usage, see the examples below.
 
 ### Configuring the Progress Bar Display
 
-To check if the progress bar is enabled: 
+To check if the progress bar is enabled:
 
 ```sql
 SELECT * FROM duckdb_settings() WHERE name = 'enable_progress_bar';
 ```
 
-To check the current minimum amount of time (in milliseconds) a query needs to take before displaying a progress bar: 
+To check the current minimum amount of time (in milliseconds) a query needs to take before displaying a progress bar:
 
 ```sql
 SELECT * FROM duckdb_settings() WHERE name = 'progress_bar_time';

@@ -228,7 +228,7 @@ In **Settings** → **Build, Execution, Deployment** → **CMake**, create a Deb
   -DCMAKE_PREFIX_PATH=$CMakeProjectDir$/.venv;$CMAKE_PREFIX_PATH
   ```
 
-### Python Debug Configuration  
+### Python Debug Configuration
 
 Create a **CMake Application** run configuration:
 

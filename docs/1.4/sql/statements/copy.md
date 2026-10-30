@@ -136,7 +136,7 @@ Read the contents of a JSON file `lineitem.json` into the `lineitem` table:
 COPY lineitem FROM 'lineitem.json' (FORMAT json, ARRAY true);
 ```
 
-An expression may be used as the source of a `COPY ... FROM` command if it is placed within parentheses. 
+An expression may be used as the source of a `COPY ... FROM` command if it is placed within parentheses.
 
 Read the contents of a file whose path is stored in a variable into the `lineitem` table:
 
@@ -228,7 +228,7 @@ COPY (SELECT l_orderkey, l_comment FROM lineitem) TO 'lineitem_part.parquet' (RE
 
 Note: for nested columns (e.g., structs) the column statistics are defined for each part. For example, if we have a column `name STRUCT(field1 INTEGER, field2 INTEGER)` the column statistics will have stats for `name.field1` and `name.field2`.
 
-An expression may be used as the target of a `COPY ... TO` command if it is placed within parentheses. 
+An expression may be used as the target of a `COPY ... TO` command if it is placed within parentheses.
 
 Copy the result of a query to a file whose path is stored in a variable:
 
@@ -445,7 +445,7 @@ COPY (SELECT 1 AS id, 'Alice' AS name, [1, 2, 3] AS numbers
       SELECT 2, 'Bob', [4, 5, 6] AS numbers)
 TO 'array_true.json' (FORMAT json, ARRAY true);
 
--- RETURNS: 
+-- RETURNS:
 /*
 [
 	{"id":1,"name":"Alice","numbers":[1,2,3]},
@@ -472,7 +472,7 @@ TO 'array_false.json' (FORMAT json, ARRAY false);
 ### BLOB Options
 
 The `BLOB` format option allows you to select a single column of a DuckDB table into a `.blob` file.
-The column must be cast to the `BLOB` data type. For details on typecasting, see the 
+The column must be cast to the `BLOB` data type. For details on typecasting, see the
 [Casting Operations Matrix]({% link docs/1.4/sql/data_types/typecasting.md %}#Casting-Operations-Matrix).
 
 The below options are applicable when writing `BLOB` files.

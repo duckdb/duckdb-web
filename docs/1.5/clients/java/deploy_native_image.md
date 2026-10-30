@@ -7,7 +7,7 @@ title: Deploy as Native Image
 
 The JDBC driver runs inside [GraalVM Native Image](https://www.graalvm.org/latest/reference-manual/native-image/) executables. Graal Native Image compiles a Java application ahead of time into a standalone binary that starts in milliseconds and requires no JVM on the target machine, which suits command line tools, serverless functions, and small containers.
 
-Recent driver versions ship the JNI reachability metadata that `native-image` needs, and the build picks it up automatically from the class path. 
+Recent driver versions ship the JNI reachability metadata that `native-image` needs, and the build picks it up automatically from the class path.
 
 Two things remain for the application to configure: native access and the location of DuckDB's shared library.
 
@@ -45,7 +45,7 @@ Add a resource entry naming your platform's library, either in a configuration d
 { "resources": { "includes": [ { "pattern": "libduckdb_java\\.so_linux_amd64" } ] } }
 ```
 
-The bundled library names are `libduckdb_java.so_linux_amd64`, `libduckdb_java.so_linux_arm64`, `libduckdb_java.so_osx_universal`, and `libduckdb_java.so_windows_amd64`. 
+The bundled library names are `libduckdb_java.so_linux_amd64`, `libduckdb_java.so_linux_arm64`, `libduckdb_java.so_osx_universal`, and `libduckdb_java.so_windows_amd64`.
 
 Name the one for your target platform explicitly. A wildcard matching all of them adds roughly 260 MB to the executable.
 

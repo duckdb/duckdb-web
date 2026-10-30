@@ -3,8 +3,8 @@ layout: docu
 title: Securing DuckDB
 ---
 
-DuckDB is a powerful analytical database engine. It can read and write files, access the network, load extensions, 
-and use system resources. Like any powerful tool, these capabilities require appropriate configuration when 
+DuckDB is a powerful analytical database engine. It can read and write files, access the network, load extensions,
+and use system resources. Like any powerful tool, these capabilities require appropriate configuration when
 working with sensitive data or in shared environments.
 
 This page documents DuckDB's security model and security-related settings. The right configuration depends on your use case, environment, and threat model.
@@ -29,7 +29,7 @@ If your application must execute SQL from untrusted sources, use additional safe
 * Implement strict query timeouts at the application level
 
 The settings described on this page provide **defense-in-depth** and can limit certain capabilities, but they are not a substitute for proper sandboxing. Also keep in mind that
-sandboxing should not just be considered for security purposes, but also for preventing denial of service (DoS) attacks: malicious inputs can easily cause DuckDB to consume excessive resources such 
+sandboxing should not just be considered for security purposes, but also for preventing denial of service (DoS) attacks: malicious inputs can easily cause DuckDB to consume excessive resources such
 as memory, disk, CPU, or network.
 
 ### Untrusted Non-SQL Input

@@ -33,7 +33,7 @@ The exponential part indicates that the preceding value should be multiplied by 
 SELECT 1e2;           -- 100
 SELECT 6.02214e23;    -- Avogadro's constant
 SELECT 1e-10;         -- 1 ångström
-```  
+```
 
 ## Underscores in Numeric Literals
 

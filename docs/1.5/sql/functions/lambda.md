@@ -4,13 +4,13 @@ title: Lambda Functions
 tested: true
 ---
 
-DuckDB lambda functions (a.k.a. 'lambdas' or 'lambda expressions') are expressions that define an inline anonymous function. 
-Lambdas are passed as argument to certain [list functions]({% link docs/1.5/sql/functions/list.md %}), which evaluate the passed lambda expression against its elements. 
+DuckDB lambda functions (a.k.a. 'lambdas' or 'lambda expressions') are expressions that define an inline anonymous function.
+Lambdas are passed as argument to certain [list functions]({% link docs/1.5/sql/functions/list.md %}), which evaluate the passed lambda expression against its elements.
 The value resulting from the lambda's evaluation is then processed further by the list function to create its return value.
 
 Lambdas may also be used in the [`COLUMNS` clause]({% link docs/1.5/sql/expressions/star.md %}#columns-lambda-function).
 In that context, the lambda function acts as a filter: if it evaluates to `true`, the column is retained, and discarded otherwise.
-`COLUMNS`-clause lambdas have a mandatory parameter that receives the column name. Optionally, a second parameter may be declared that receives the (1-based) column index. 
+`COLUMNS`-clause lambdas have a mandatory parameter that receives the column name. Optionally, a second parameter may be declared that receives the (1-based) column index.
 
 The syntax for a lambda expression is:
 
@@ -295,7 +295,7 @@ INITIAL - 1 - a - 2 - b - 3 - c - 4 - d
   ```sql
   SELECT list_apply([1, 2, 3], lambda x: (SELECT 42) + x);
   ```
-  
+
   ```console
   Binder Error:
   subqueries in lambda expressions are not supported

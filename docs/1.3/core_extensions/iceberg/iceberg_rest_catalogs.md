@@ -46,9 +46,9 @@ SHOW ALL TABLES;
 
 ### ATTACH OPTIONS
 
-A REST Catalog with OAuth2 authorization can also be attached with just an `ATTACH` statement. See the complete list of `ATTACH` options for a REST catalog below. 
+A REST Catalog with OAuth2 authorization can also be attached with just an `ATTACH` statement. See the complete list of `ATTACH` options for a REST catalog below.
 
- 
+
 | Parameter                    | Type       | Default  | Description                                                |
 | ---------------------------- | ---------- | -------- | ---------------------------------------------------------- |
 | `ENDPOINT_TYPE`              | `VARCHAR`  | `NULL`   | Used for attaching S3Tables or Glue catalogs. Allowed values are 'GLUE' and 'S3_TABLES' |
@@ -72,7 +72,7 @@ The following options can only be passed to a `CREATE SECRET` statement, and the
 
 ### R2 Catalog
 
-To attach to an [R2 cloudflare](https://developers.cloudflare.com/r2/data-catalog/) managed catalog follow the attach steps below. 
+To attach to an [R2 cloudflare](https://developers.cloudflare.com/r2/data-catalog/) managed catalog follow the attach steps below.
 
 
 ```sql

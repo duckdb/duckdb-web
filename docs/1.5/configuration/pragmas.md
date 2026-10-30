@@ -395,7 +395,7 @@ The output of this mode includes profiling of the planner and optimizer stages.
 SET profiling_mode = 'detailed';
 ```
 
-To access all available metrics, set the `profiling_mode` to `all`. 
+To access all available metrics, set the `profiling_mode` to `all`.
 
 ```sql
 SET profiling_mode = 'all';

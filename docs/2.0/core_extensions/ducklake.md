@@ -14,7 +14,7 @@ title: DuckLake
 > DuckLake 1.1 was released together with DuckDB 2.0.
 > Read the [announcement blog post](https://ducklake.select/2026/10/21/ducklake-11/).
 
-The `ducklake` extension adds support for attaching to databases stored in the [DuckLake format](http://ducklake.select/). 
+The `ducklake` extension adds support for attaching to databases stored in the [DuckLake format](http://ducklake.select/).
 The complete documentation of this extension is available at the [DuckLake website](https://ducklake.select/docs/stable/duckdb/introduction).
 
 ## Installing and Loading

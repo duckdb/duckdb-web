@@ -34,7 +34,7 @@ To drop an [ART index](#adaptive-radix-tree-art), use the [`DROP INDEX` statemen
 ## Limitations of ART Indexes
 
 ART indexes create a secondary copy of the data in a second location.
-Maintaining that second copy complicates processing, particularly when combined with transactions. 
+Maintaining that second copy complicates processing, particularly when combined with transactions.
 Thus, certain limitations currently apply when it comes to modifying data that is also stored in secondary indexes.
 
 > As expected, indexes have a strong effect on performance, slowing down loading and updates, but speeding up certain queries. Please consult the [Performance Guide]({% link docs/1.4/guides/performance/indexing.md %}) for details.
@@ -143,7 +143,7 @@ As this is a limitation in DuckDB, there is currently no pure-SQL workaround.
 If you have concurrent reads and writes on a table with indexes, then you need to add application-side locks.
 I.e., if you have multiple writes happening while a concurrent read is running, then these have to wait for the read(s) to finish.
 
-You might also consider not using indexes altogether. 
+You might also consider not using indexes altogether.
 Instead, DuckDB's `MERGE INTO` statement might suit your needs better.
 
 #### Over-Eager Unique Constraint Checking

@@ -189,7 +189,7 @@ source_queries=[
 
 Optional named parameters (destination):
 
- - `dest_table` (`VARCHAR`): destination table name in remote DB, will be used in `INSERT` and `CREATE TABLE` queries, cannot be specified if `dest_query` is specified; different DBs have different rules regarding case sensitivity and the default case, thus the name of the destination table may need to be specified in upper-case: `TAB1` or in quoted form: `"tab1"` (or with a schema name: `"schema1"."tab1"`) 
+ - `dest_table` (`VARCHAR`): destination table name in remote DB, will be used in `INSERT` and `CREATE TABLE` queries, cannot be specified if `dest_query` is specified; different DBs have different rules regarding case sensitivity and the default case, thus the name of the destination table may need to be specified in upper-case: `TAB1` or in quoted form: `"tab1"` (or with a schema name: `"schema1"."tab1"`)
  - `dest_query` (`VARCHAR`): query to be executed in remote DB for each source batch, must have the number of ODBC parameter placeholders `?` equal to the `source_columns_count * batch_size`, cannot be specified if `dest_table` is specified, example: `CALL import_city(?,?,?,?)`
  - `dest_query_single` (`VARCHAR`): only used when the `batch_size>0` and the number of rows read in the last source batch are less than the `batch_size`, in this case used instead of `dest_query`, must have the number of ODBC parameter placeholders `?` equal to the `source_columns_count`
 
@@ -391,7 +391,7 @@ A table with the query result.
 ### Example:
 
 ```sql
-FROM odbc_query(getvariable('conn'), 
+FROM odbc_query(getvariable('conn'),
   'SELECT CAST(? AS NVARCHAR2(2)) || CAST(? AS VARCHAR2(5)) FROM dual',
   params=row('🦆', 'quack')
 )

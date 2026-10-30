@@ -132,29 +132,29 @@ Anywhere a `DuckDBPyType` is accepted, we will also accept one of the type objec
 
 #### `list_type` | `array_type`
 
-Parameters:  
+Parameters:
 - `child_type: DuckDBPyType`
 
 #### `struct_type` | `row_type`
 
-Parameters:  
+Parameters:
 - `fields: Union[list[DuckDBPyType], dict[str, DuckDBPyType]]`
 
 #### `map_type`
 
-Parameters:  
+Parameters:
 - `key_type: DuckDBPyType`
 - `value_type: DuckDBPyType`
 
 #### `decimal_type`
 
-Parameters:  
+Parameters:
 - `width: int`
 - `scale: int`
 
 #### `union_type`
 
-Parameters:  
+Parameters:
 - `members: Union[list[DuckDBPyType], dict[str, DuckDBPyType]]`
 
 #### `string_type`

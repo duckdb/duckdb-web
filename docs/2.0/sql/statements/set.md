@@ -58,7 +58,7 @@ Set the default sort order globally:
 SET GLOBAL default_order = 'DESC';
 ```
 
-Set the default threads globally: 
+Set the default threads globally:
 
 ```sql
 SET GLOBAL threads = 4;

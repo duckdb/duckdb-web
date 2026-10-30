@@ -69,7 +69,7 @@ The following table describes how these parts are extracted by `datepart` in for
 |----------------------|--------------------------------------------------|
 | `year`               | `#months // 12`                                  |
 | `month`              | `#months % 12`                                   |
-| `day`                | `#days`                                          | 
+| `day`                | `#days`                                          |
 | `hour`               | `#microseconds // (60 * 60 * 1_000_000)`         |
 | `minute`             | `(#microseconds // (60 * 1_000_000)) % 60`       |
 | `microsecond`        | `#microseconds % (60 * 1_000_000)`               |
@@ -80,7 +80,7 @@ Additionally, `datepart` may be used to extract centuries, decades, quarters, se
 |----------------------|--------------------------------------------------|
 | `century`            | `datepart('year', interval) // 100`              |
 | `decade`             | `datepart('year', interval) // 10`               |
-| `quarter`            | `datepart('month', interval) // 3 + 1`           | 
+| `quarter`            | `datepart('month', interval) // 3 + 1`           |
 | `second`             | `datepart('microsecond', interval) // 1_000_000` |
 | `millisecond`        | `datepart('microsecond', interval) // 1_000`     |
 

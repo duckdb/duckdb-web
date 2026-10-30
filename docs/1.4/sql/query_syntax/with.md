@@ -414,7 +414,7 @@ WITH RECURSIVE connected_components(id, comp) USING KEY (id) AS (
     FROM nodes AS n
         UNION (
     SELECT DISTINCT ON (previous_iter.id) previous_iter.id, initial_iter.comp
-    FROM 
+    FROM
         recurring.connected_components AS previous_iter,
         connected_components AS initial_iter,
         edges AS e

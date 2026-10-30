@@ -122,7 +122,7 @@ The shredded layout depends on the geometry type:
 - `LINESTRING` - STRUCT(X DOUBLE, Y DOUBLE)[]
 - `POLYGON` - STRUCT(X DOUBLE, Y DOUBLE)[][]
 - `MULTIPOINT`, `MULTILINESTRING`, `MULTIPOLYGON` - same as above, with one additional level of list nesting
- 
+
 Row groups are not shredded if they contain `GEOMETRYCOLLECTION`s, any `EMPTY` geometries, or multiple geometry sub-types.
 
 Additionally, row groups are not shredded if they fall below the minimum size threshold (default: ~25% of the maximum row group size, i.e., 30,000 rows).
@@ -150,7 +150,7 @@ USE geometry_db;
 -- Disable shredding completely and create a table with 1 million 2D points
 SET geometry_minimum_shredding_size = -1;
 
-CREATE OR REPLACE TABLE points AS SELECT printf('POINT (%d %d)', x, y)::GEOMETRY AS geom 
+CREATE OR REPLACE TABLE points AS SELECT printf('POINT (%d %d)', x, y)::GEOMETRY AS geom
 FROM range(0, 1000) AS rx(x), range(0, 1000) AS ry(y);
 
 -- Checkpoint the database to persist the data and storage layout to disk
@@ -165,7 +165,7 @@ USE shredded_db;
 -- and create the same table with 1 million 2D points
 SET geometry_minimum_shredding_size = 0;
 
-CREATE OR REPLACE TABLE points AS SELECT printf('POINT (%d %d)', x, y)::GEOMETRY AS geom 
+CREATE OR REPLACE TABLE points AS SELECT printf('POINT (%d %d)', x, y)::GEOMETRY AS geom
 FROM range(0, 1000) AS rx(x), range(0, 1000) AS ry(y);
 
 -- Checkpoint to persist the data and storage layout to disk, and apply shredding
@@ -179,12 +179,12 @@ SELECT database_name, database_size FROM pragma_database_size();
 │    varchar    │    varchar    │
 ├───────────────┼───────────────┤
 │ shredded_db   │ 2.2 MiB       │ -- Almost 3x smaller storage thanks to shredding!
-│ geometry_db   │ 6.5 MiB       │ 
+│ geometry_db   │ 6.5 MiB       │
 │ memory        │ 0 bytes       │
 └───────────────┴───────────────┘
 
--- We can inspect what type of segments are used to store the geometry column 
--- in each database using the `pragma_storage_info` function. 
+-- We can inspect what type of segments are used to store the geometry column
+-- in each database using the `pragma_storage_info` function.
 
 -- The geometry column in `geometry_db` is stored as regular GEOMETRY segments
 SELECT DISTINCT(segment_type) FROM pragma_storage_info('geometry_db.points');
@@ -210,7 +210,7 @@ SELECT DISTINCT(segment_type) FROM pragma_storage_info('shredded_db.points');
 └──────────────┘
 ```
 
-### Geometry Statistics 
+### Geometry Statistics
 
 `GEOMETRY` columns contain geometry-specific statistics that track the bounding box of the geometries in each row group, as well as the set of geometry types and vertex dimensions that are present within the row group.
 
@@ -246,13 +246,13 @@ When working with geospatial data, it's important to be aware of the CRS associa
 
 ### How Are Coordinate Reference Systems Stored in DuckDB?
 
-To avoid these kinds of mistakes, DuckDB makes it possible to explicitly associate a CRS with a `GEOMETRY` column. 
+To avoid these kinds of mistakes, DuckDB makes it possible to explicitly associate a CRS with a `GEOMETRY` column.
 
-This is done by passing a CRS “identifier” as a parameter of the `GEOMETRY` type. For example, a column of type `GEOMETRY('OGC:CRS84')` stores geometries that are associated with the “OGC CRS84” coordinate reference system. 
+This is done by passing a CRS “identifier” as a parameter of the `GEOMETRY` type. For example, a column of type `GEOMETRY('OGC:CRS84')` stores geometries that are associated with the “OGC CRS84” coordinate reference system.
 
 CRS identifiers in DuckDB are always strings. `OGC:CRS84` is the identifier for a common geographic coordinate system spanning the whole globe where the `X` coordinate represents longitude and the `Y` coordinate represents latitude. DuckDB only knows this because the identifier 'OGC:CRS84' is registered as a _known_ CRS in the system catalog.
 
-By default, only a handful of common CRSs are registered as known, but extensions can also register additional known CRSs. In particular, the `spatial` extension registers over 7000 CRSs from the [EPSG Geodetic Parameter Dataset](https://epsg.org/home.html), which is arguably the most widely used database of coordinate reference systems. 
+By default, only a handful of common CRSs are registered as known, but extensions can also register additional known CRSs. In particular, the `spatial` extension registers over 7000 CRSs from the [EPSG Geodetic Parameter Dataset](https://epsg.org/home.html), which is arguably the most widely used database of coordinate reference systems.
 
 You can list all available CRSs known to DuckDB using the [`duckdb_coordinate_systems()`]({% link docs/1.5/sql/meta/duckdb_table_functions.md %}#duckdb_coordinate_systems) function:
 
@@ -308,7 +308,7 @@ It is currently not possible to define a custom CRS from within SQL, or to persi
 
 One benefit of tracking CRSs as part of the type system is that it prevents a lot of common mistakes that can occur when working with geometries from different coordinate systems. Most spatial functions that operate on multiple `GEOMETRY` values verify that all input expressions have the same CRS before performing the operation. Similarly, `GEOMETRY` columns can only be implicitly cast to and from other `GEOMETRY` columns if the source or the target don't have a CRS specified.
 
-To convert a geometry from one CRS to another, you can use the `ST_Transform(geom, crs)` function from the `spatial` extension. 
+To convert a geometry from one CRS to another, you can use the `ST_Transform(geom, crs)` function from the `spatial` extension.
 
 ```sql
 

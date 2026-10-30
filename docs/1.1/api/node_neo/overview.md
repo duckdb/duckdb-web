@@ -136,14 +136,14 @@ Read chunk data (column-major):
 
 ```ts
 // array of columns, each as an array of values
-const columns = chunk.getColumns(); 
+const columns = chunk.getColumns();
 ```
 
 Read chunk data (row-major):
 
 ```ts
 // array of rows, each as an array of values
-const rows = chunk.getRows(); 
+const rows = chunk.getRows();
 ```
 
 Read chunk data (one value at a time):

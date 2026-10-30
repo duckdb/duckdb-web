@@ -218,7 +218,7 @@ The connection object and the `duckdb` module can be used interchangeably – th
 
 > If you are developing a package designed for others to use, and use DuckDB in the package, it is recommended that you create connection objects instead of using the methods on the `duckdb` module. That is because the `duckdb` module uses a shared global database – which can cause hard to debug issues if used from within multiple different packages.
 
-### Using Connections in Parallel Python Programs 
+### Using Connections in Parallel Python Programs
 
 #### Thread Safety of `duckdb.sql()` and the Global Connection
 
@@ -245,12 +245,12 @@ Or:
 ```python
 def also_bad():
     return duckdb.sql("SELECT 1").fetchall()
-    # uses global connection 
+    # uses global connection
 ```
 
-Avoid using `duckdb.sql()` or sharing a single connection across threads. 
+Avoid using `duckdb.sql()` or sharing a single connection across threads.
 
-#### About `cursor()` 
+#### About `cursor()`
 
 A single `DuckDBPyConnection` object is not safe for concurrent use: calls on the same handle from multiple threads are serialized. The [`DuckDBPyConnection.cursor()` method]({% link docs/1.5/clients/python/reference/index.md %}#duckdb.DuckDBPyConnection.cursor) creates a new connection to the same database instance, with its own session settings and transaction context. Because cursors share the underlying instance but not their session state, they can execute queries in parallel. To run queries concurrently, create one cursor per thread.
 
