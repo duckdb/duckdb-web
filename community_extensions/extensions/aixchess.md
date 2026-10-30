@@ -49,8 +49,8 @@ docs:
     See the [GitHub repository](https://github.com/thomas-daniels/aix) or [blog post](https://thomasd.be/2026/02/01/aix-storing-querying-chess-games.html) for more details.
 extension_star_count: 30
 extension_star_count_pretty: 30
-extension_download_count: 20003
-extension_download_count_pretty: 20.0k
+extension_download_count: 20593
+extension_download_count_pretty: 20.6k
 image: '/images/community_extensions/social_preview/preview_community_extension_aixchess.png'
 layout: community_extension_doc
 ---

@@ -95,8 +95,8 @@ repo:
 
 extension_star_count: 7
 extension_star_count_pretty: 7
-extension_download_count: 29302
-extension_download_count_pretty: 29.3k
+extension_download_count: 29742
+extension_download_count_pretty: 29.7k
 image: '/images/community_extensions/social_preview/preview_community_extension_tsid.png'
 layout: community_extension_doc
 ---

@@ -42,8 +42,8 @@ docs:
 
 extension_star_count: 1
 extension_star_count_pretty: 1
-extension_download_count: 13607
-extension_download_count_pretty: 13.6k
+extension_download_count: 14125
+extension_download_count_pretty: 14.1k
 image: '/images/community_extensions/social_preview/preview_community_extension_huggingface.png'
 layout: community_extension_doc
 ---
