@@ -13,7 +13,7 @@ tag: benchmark
 
 I think it is worth starting this intro by talking a little bit about the established format for columnar data. Parquet has done some amazing things for analytics. If you go back to the times where CSV was the better alternative, then you know how important Parquet is. However, even if the  specification has evolved over time, Parquet has some design constraints. A particular limitation is that it is block-compressed and engines need to decompress pages in order to do further operations like filtering, decoding values, etc. For a while, [researchers and private companies](https://www.cs.cmu.edu/~pavlo/blog/2026/01/2025-databases-retrospective.html?#fileformats) have been working on alternatives to Parquet that could improve on some of Parquet’s shortcomings. Vortex, from the SpiralDB team, is one of them.
 
-## What is Vortex?
+## What Is Vortex?
 
 [Vortex](https://vortex.dev/) is an extensible, open source format for columnar data. It was created to handle heterogeneous compute patterns and different data modalities. But, what does this mean?
 
@@ -21,11 +21,11 @@ I think it is worth starting this intro by talking a little bit about the establ
 
 Vortex provides different layouts and encodings for different data types. Some of the most notable are [ALP]({% link _library/2024-06-09-alp.md %}) for floating point encoding or [FSST]({% post_url 2022-10-28-lightweight-compression %}) for string encoding. This lightweight compression strategy keeps data sizes down while allowing one of Vortex’s most important features: compute functions. By knowing the encoded layout of the data, Vortex is able to run arbitrary expressions on compressed data. This allows a Vortex reader to execute, for example, filter expressions within storage segments without decompressing data.
 
-We mentioned heterogeneous compute to emphasize that Vortex was designed with the idea of having optimized layouts for different data types, including vectors, large text or even image or audio, but also to maximize CPU or GPU saturation. The idea is that decompression is deferred all the way to the GPU or CPU, enabling what Vortex calls “late materialization”. The [FastLanes]({% link _library/2025-09-01-fastlanes.md %}) encoding, a project originating at CWI (like DuckDB), is one of the main drivers behind this feature.
+We mentioned heterogeneous compute to emphasize that Vortex was designed with the idea of having optimized layouts for different data types, including vectors, large text, or even image or audio, but also to maximize CPU or GPU saturation. The idea is that decompression is deferred all the way to the GPU or CPU, enabling what Vortex calls “late materialization”. The [FastLanes]({% link _library/2025-09-01-fastlanes.md %}) encoding, a project originating at CWI (like DuckDB), is one of the main drivers behind this feature.
 
 Vortex also supports dynamically loaded libraries (similar to DuckDB extensions) to provide new encodings for specific types as well as specific compute functions, e.g. for geospatial data. Another very interesting feature is encoding WebAssembly into the file, which can allow the reader to benefit from specific compute kernels applied to the file.
 
-Besides DuckDB, other engines such as DataFusion, Spark and Arrow already offer integration with Vortex.
+Besides DuckDB, other engines such as DataFusion, Spark, and Arrow already offer integration with Vortex.
 
 > For more information, check out the [Vortex documentation](https://spiraldb.com/post/vortex-a-linux-foundation-project).
 
@@ -33,9 +33,9 @@ Besides DuckDB, other engines such as DataFusion, Spark and Arrow already offer 
 
 DuckDB is a database as the name says, yes, but it is also widely used as an engine to query many different data sources. Through core or community extensions, DuckDB can integrate with:
 
-- Databases like Snowflake, BigQuery or PostgreSQL.  
-- Lakehouse formats like Delta, Iceberg or DuckLake.  
-- File formats, most notably JSON, CSV, Parquet and most recently Vortex.
+- Databases like Snowflake, BigQuery, or PostgreSQL.  
+- Lakehouse formats like Delta, Iceberg, or DuckLake.  
+- File formats, most notably JSON, CSV, Parquet, and most recently Vortex.
 
 > The community has gotten very creative, though, so these days you can even read YAML and Markdown with DuckDB using [community extensions]({% link community_extensions/index.md %}).
 
@@ -66,7 +66,7 @@ TO 'my.vortex' (FORMAT vortex);
 Vortex claims to do well primarily at three use cases:
 
 - Traditional SQL analytics: Through late decompression and compute expressions on compressed data, Vortex can filter down data within the storage segment, reducing IO and memory consumption.  
-- Machine learning pre-processing pipelines: By supporting a wide variety of encodings for different data types, Vortex claims to be effective at reading and writing data, whether it is audio, text, images or vectors.  
+- Machine learning pre-processing pipelines: By supporting a wide variety of encodings for different data types, Vortex claims to be effective at reading and writing data, whether it is audio, text, images, or vectors.  
 - AI model training: Encodings such as FastLanes allow for a very efficient copy of data to the GPU. Vortex is aiming at being able to copy data directly from S3 object storage to the GPU.
 
 The promise of more efficient IO and memory use through late decompression is a good reason to try DuckDB and Vortex for SQL analytics. On another note, if you are looking at running analytics on unified datasets that are used for multiple use cases, including pre-processing pipelines and AI training, then Vortex may be a good candidate since it is designed to fit all of these use cases well.
@@ -125,6 +125,6 @@ The following is the summary of the sizes of the datasets. Note that both Parque
 
 ## Conclusion
 
-Vortex is a very interesting alternative to established columnar formats like Parquet. Its focus on lightweight compression encodings, late decompression and being able to run compute expressions on compressed data makes it very interesting for a wide range of use cases. With regard to DuckDB, we see that Vortex is already very performant for analytical queries, where it is on par or better than Parquet v2 on the TPC-H benchmark queries.
+Vortex is a very interesting alternative to established columnar formats like Parquet. Its focus on lightweight compression encodings, late decompression, and being able to run compute expressions on compressed data makes it very interesting for a wide range of use cases. With regard to DuckDB, we see that Vortex is already very performant for analytical queries, where it is on par or better than Parquet v2 on the TPC-H benchmark queries.
 
 > Vortex has been [backwards compatible](https://docs.vortex.dev/specs/file-format) since version 0.36.0, which was released more than 6 months ago. Vortex is now at version 0.56.0.

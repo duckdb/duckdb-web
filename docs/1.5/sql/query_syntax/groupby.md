@@ -19,7 +19,7 @@ See examples below and additional examples in the [“Friendlier SQL with DuckDB
 ## Multiple Dimensions
 
 Normally, the `GROUP BY` clause groups along a single dimension.
-Using the [`GROUPING SETS`, `CUBE` or `ROLLUP` clauses]({% link docs/1.5/sql/query_syntax/grouping_sets.md %}) it is possible to group along multiple dimensions.
+Using the [`GROUPING SETS`, `CUBE`, or `ROLLUP` clauses]({% link docs/1.5/sql/query_syntax/grouping_sets.md %}) it is possible to group along multiple dimensions.
 See the [`GROUPING SETS`]({% link docs/1.5/sql/query_syntax/grouping_sets.md %}) page for more information.
 
 ## Examples

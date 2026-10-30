@@ -8,16 +8,18 @@ excerpt: |
 extension:
   name: stac
   description: DuckDB extension for reading data from SpatioTemporal Asset Catalogs (STAC) using SQL.
-  version: 0.3.0
+  version: 0.4.0
   language: C++
   build: cmake
+  excluded_platforms: "windows_amd64_mingw"
   license: MIT
   maintainers:
     - ahuarte47
 
 repo:
   github: ahuarte47/duckdb-stac
-  ref: e7bd5a1ea81f4e9b0f3cc59ec8c3773febc4fc12
+  ref: ac3b2545ea19a74e61e2fd422d18315bfffaa2ce
+  variegata: ee9694262e37d6865ae5889dda1fbe0e39752414
 
 docs:
   hello_world: |
@@ -136,8 +138,8 @@ docs:
 
 extension_star_count: 26
 extension_star_count_pretty: 26
-extension_download_count: 10490
-extension_download_count_pretty: 10.5k
+extension_download_count: 11591
+extension_download_count_pretty: 11.6k
 image: '/images/community_extensions/social_preview/preview_community_extension_stac.png'
 layout: community_extension_doc
 ---
@@ -149,13 +151,13 @@ This table covers all DuckDB releases that have not reached [end-of-life](https:
 
 | Platform | 1.4.4 | 1.4.5 | 1.5.5 | 1.5.6 | 2.0.0 |
 | :--- | :---: | :---: | :---: | :---: | :---: |
-| Linux AMD64 | ❌ | ❌ | ✅ | ✅ | ❌ |
-| Linux ARM64 | ❌ | ❌ | ✅ | ✅ | ❌ |
+| Linux AMD64 | ❌ | ❌ | ✅ | ✅ | ✅ |
+| Linux ARM64 | ❌ | ❌ | ✅ | ✅ | ✅ |
 | macOS AMD64 | ❌ | ❌ | ✅ | ✅ | ❌ |
-| macOS ARM64 | ❌ | ❌ | ✅ | ✅ | ❌ |
-| Windows AMD64 | ❌ | ❌ | ✅ | ✅ | ❌ |
+| macOS ARM64 | ❌ | ❌ | ✅ | ✅ | ✅ |
+| Windows AMD64 | ❌ | ❌ | ✅ | ✅ | ✅ |
 | Windows ARM64 | ❌ | ❌ | ❌ | ❌ | ❌ |
-| WebAssembly | ❌ | ❌ | ✅ | ✅ | ❌ |
+| WebAssembly | ❌ | ❌ | ✅ | ✅ | ✅ |
 
 ### Installing and Loading
 ```sql
@@ -177,17 +179,11 @@ LOAD {{ page.extension.name }};
 
 <div class="extension_functions_table"></div>
 
-|  function_name   | function_type | description | comment | examples  |
-|------------------|---------------|-------------|---------|-----------|
-| STAC_Collections | table         |             | NULL    | [
-		SELECT * FROM STAC_Collections('https://example.com/stac/catalog.json');
-	] |
-| STAC_Read        | table         |             | NULL    | [
-		SELECT * FROM STAC_Read('https://example.com/stac/collection.json');
-	] |
-| STAC_Search      | table         |             | NULL    | [
-		SELECT * FROM STAC_Search('https://example.com/stac/collection.json', collections:='my_collection', bbox:=[-180, -90, 180, 90], max_items:=10);
-	] |
+|  function_name   | function_type |                                                 description                                                  | comment |                                                                     examples                                                                      |
+|------------------|---------------|--------------------------------------------------------------------------------------------------------------|---------|---------------------------------------------------------------------------------------------------------------------------------------------------|
+| STAC_Collections | table         | Returns the collections available in a SpatioTemporal Asset Catalog (STAC) catalog.                          | NULL    | [SELECT * FROM STAC_Collections('https://example.com/stac/catalog.json');]                                                                        |
+| STAC_Read        | table         | Reads the content of a SpatioTemporal Asset Catalog (STAC) catalog from the given URL or JSON file           | NULL    | [SELECT * FROM STAC_Read('https://example.com/stac/collection.json');]                                                                            |
+| STAC_Search      | table         | Searches the content of a SpatioTemporal Asset Catalog (STAC) catalog using the given STAC API - Item Search | NULL    | [SELECT * FROM STAC_Search('https://example.com/stac/collection.json', collections:='my_collection', bbox:=[-180, -90, 180, 90], max_items:=10);] |
 
 ### Overloaded Functions
 
@@ -209,6 +205,8 @@ This extension does not add any function overloads.
 
 <div class="extension_settings_table"></div>
 
-This extension does not add any settings.
+|      name      |                       description                       | input_type | scope  | aliases | typed_value |
+|----------------|---------------------------------------------------------|------------|--------|---------|-------------|
+| temp_directory | Set the directory to which temporary files are written. | VARCHAR    | GLOBAL | []      | post.db.tmp |
 
 

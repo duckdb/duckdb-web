@@ -4,6 +4,7 @@ redirect_from:
 - /docs/current/core_extensions/iceberg/iceberg_options
 - /docs/lts/core_extensions/iceberg/iceberg_options
 - /docs/preview/core_extensions/iceberg/iceberg_options
+- /docs/stable/core_extensions/iceberg/iceberg_options
 title: Iceberg Options
 ---
 
@@ -137,7 +138,7 @@ The following parameters can be passed to `iceberg_scan`, `iceberg_column_stats`
 | `version`                    | `VARCHAR`   | `NULL` (use `version-hint.text`)           | Provides an explicit version string, a version hint file, or `'?'` to guess the latest version (see [Selecting Metadata Versions](#selecting-metadata-versions)) |
 | `version_name_format`        | `VARCHAR`   | `'v%s%s.metadata.json,%s%s.metadata.json'` | Controls how versions are converted to metadata file names |
 
-> `iceberg_snapshots` does not take `allow_moved_paths`, `snapshot_from_id` or `snapshot_from_timestamp` as parameters.
+> `iceberg_snapshots` does not take `allow_moved_paths`, `snapshot_from_id`, or `snapshot_from_timestamp` as parameters.
 
 
 ## Selecting Metadata Versions
@@ -166,7 +167,7 @@ FROM iceberg_snapshots(
 ```
 
 The `iceberg` extension will open this file and use the **entire content** of the file as a provided version number.
-Note that the entire content of the `version-hint.txt` file will be treated as a literal version name, with no encoding, escaping or trimming. This includes any whitespace, or unsafe characters  which will be explicitly passed formatted into filenames in the logic described below.
+Note that the entire content of the `version-hint.txt` file will be treated as a literal version name, with no encoding, escaping, or trimming. This includes any whitespace, or unsafe characters  which will be explicitly passed formatted into filenames in the logic described below.
 
 ## Working with Alternative Metadata Naming Conventions
 

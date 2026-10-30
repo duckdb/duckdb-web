@@ -12,6 +12,7 @@ extension:
   language: C++
   build: cmake
   license: MIT
+  opt_in_platforms: "windows_arm64"
   maintainers:
     - Dtenwolde
 
@@ -65,10 +66,10 @@ docs:
 
     *Disclaimer:* As this extension is part of an ongoing research project by the Database Architectures group at CWI, some features may still be under development. We appreciate your understanding and patience as we continue to improve it.
 
-extension_star_count: 506
-extension_star_count_pretty: 506
-extension_download_count: 25008
-extension_download_count_pretty: 25.0k
+extension_star_count: 508
+extension_star_count_pretty: 508
+extension_download_count: 27300
+extension_download_count_pretty: 27.3k
 image: '/images/community_extensions/social_preview/preview_community_extension_duckpgq.png'
 layout: community_extension_doc
 ---
@@ -85,7 +86,7 @@ This table covers all DuckDB releases that have not reached [end-of-life](https:
 | macOS AMD64 | ✅ | ❌ | ❌ | ✅ | ✅ |
 | macOS ARM64 | ✅ | ❌ | ❌ | ✅ | ✅ |
 | Windows AMD64 | ✅ | ❌ | ❌ | ✅ | ✅ |
-| Windows ARM64 | ❌ | ❌ | ❌ | ❌ | ❌ |
+| Windows ARM64 | ❌ | ❌ | ❌ | ❌ | ✅ |
 | WebAssembly | ✅ | ❌ | ❌ | ✅ | ✅ |
 
 ### Installing and Loading

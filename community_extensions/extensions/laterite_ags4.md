@@ -118,8 +118,8 @@ docs:
 
 extension_star_count: 2
 extension_star_count_pretty: 2
-extension_download_count: 12315
-extension_download_count_pretty: 12.3k
+extension_download_count: 14769
+extension_download_count_pretty: 14.8k
 image: '/images/community_extensions/social_preview/preview_community_extension_laterite_ags4.png'
 layout: community_extension_doc
 ---

@@ -6,13 +6,13 @@ authors:
   - Geertjan Wielenga
 thumb: "/images/blog/thumbs/gems-of-duckdb-2-0-0.svg"
 image: "/images/blog/thumbs/gems-of-duckdb-2-0-0.png"
-excerpt: "We released DuckDB 2.0.0 last week with an improved Quack protocol and `VARIANT` support, asynchronous I/O and many other features. In this blog post, we highlight a few smaller features and improvements that did not make it into the release announcement."
+excerpt: "We released DuckDB 2.0.0 last week with an improved Quack protocol and `VARIANT` support, asynchronous I/O, and many other features. In this blog post, we highlight a few smaller features and improvements that did not make it into the release announcement."
 tag: release
 ---
 
 Last week we released [DuckDB 2.0.0 LTS]({% post_url 2026-10-21-announcing-duckdb-200 %}), our biggest feature release so far.
-The announcement covered the headline items: the Quack protocol, asynchronous I/O, the first-class `VARIANT` type, agent mode, the PEG parser and triggers.
-DuckDB 2.0.0 is now available in [all primary clients]({% link docs/2.0/clients/overview.md %}) – check the [installation page]({% link install/index.html %}) for instructions on installing or upgrading.
+The announcement covered the headline items: the Quack protocol, asynchronous I/O, the first-class `VARIANT` type, agent mode, the PEG parser, and triggers.
+DuckDB 2.0.0 is now available in [all primary clients]({% link docs/2.0/clients/overview.md %}) – check the [installation page]({% link docs/2.0/installation.html %}) for instructions on installing or upgrading.
 
 A release of this size ships many smaller improvements that never make it into the original announcement.
 In this post, we highlight a few of these gems.
@@ -56,7 +56,7 @@ duckdb mydata.duckdb ".schema --no-indent"
 
 ### `.manual` Dot Command
 
-DuckDB 2.0 introduces the [`.manual` dot command]({% link docs/2.0/clients/cli/dot_commands.md %}#displaying-function-documentation), which shows the signatures, description and examples of a SQL function.
+DuckDB 2.0 introduces the [`.manual` dot command]({% link docs/2.0/clients/cli/dot_commands.md %}#displaying-function-documentation), which shows the signatures, description, and examples of a SQL function.
 For example, to get the details of the `bar` function, run:
 
 ```sql
@@ -149,9 +149,9 @@ SHOW threads;
 
 This is much more succinct than the previous formulation that used the [`current_setting` function]({% link docs/2.0/sql/functions/utility.md %}#current_settingsetting_name) (e.g., `SELECT current_setting('threads') AS threads;`).
 
-When a table and a setting share a name, DuckDB prioritizes the table by default. You can control this with the `show_behavior` setting, which takes `'auto'` (the default), `'table'` or `'setting'`.
+When a table and a setting share a name, DuckDB prioritizes the table by default. You can control this with the `show_behavior` setting, which takes `'auto'` (the default), `'table'`, or `'setting'`.
 
-> Deprecated Using `SHOW` to describe a table, view or query (e.g., `SHOW my_table`) is deprecated as of DuckDB 2.0 and prints a warning. Use [`DESCRIBE`]({% link docs/2.0/sql/statements/describe.md %}) instead.
+> Deprecated Using `SHOW` to describe a table, view, or query (e.g., `SHOW my_table`) is deprecated as of DuckDB 2.0 and prints a warning. Use [`DESCRIBE`]({% link docs/2.0/sql/statements/describe.md %}) instead.
 
 ### `CREATE SECURE VIEW` Statement
 
@@ -308,7 +308,7 @@ Not every extension is available for every DuckDB version and platform, so each 
 
 Every aggregate function can be used as a window function, but not every windowed operation is an aggregate. In DuckDB 2.0, window functions became catalog entries, so [extensions can now define their own window functions]({% link docs/2.0/extensions/window_function_extensions.md %}) using the same C++ API as the built-in ones.
 
-An extension derives from the `WindowFunction` class, registers it with the `ExtensionLoader` and implements a blocking interface, which builds its data structures and evaluates the function in parallel. Optionally, it can also implement a streaming interface for windows without `PARTITION BY` and `ORDER BY` clauses. As a side effect, window functions are now listed in `duckdb_functions()` and can be looked up with the `.manual` dot command.
+An extension derives from the `WindowFunction` class, registers it with the `ExtensionLoader`, and implements a blocking interface, which builds its data structures and evaluates the function in parallel. Optionally, it can also implement a streaming interface for windows without `PARTITION BY` and `ORDER BY` clauses. As a side effect, window functions are now listed in `duckdb_functions()` and can be looked up with the `.manual` dot command.
 
 For more details, see [Richard Wesley's slides on window extensions](https://blobs.duckdb.org/events/duckdb-boston/meetup/richard-wesley-windowing.pdf) (presented in September at our [Boston meetup]({% link _events/2026-09-03-duckdb-boston-meetup.md %})).
 
@@ -316,7 +316,7 @@ For more details, see [Richard Wesley's slides on window extensions](https://blo
 
 In this blog post, we listed a few of the smaller features in DuckDB 2.0.0. For everything else, see the [announcement blog post]({% post_url 2026-10-21-announcing-duckdb-200 %}) and the [release notes](https://github.com/duckdb/duckdb/releases/tag/v2.0.0). There are even more things in the release as part our [core extensions]({% link docs/2.0/core_extensions/overview.md %}) – we'll release more posts on these in the coming weeks.
 
-The ecosystem around DuckDB keeps growing: many projects are built both with DuckDB and within it. The community-driven [`awesome-duckdb` repository](https://github.com/davidgasquez/awesome-duckdb), maintained by [David Gasquez](https://github.com/davidgasquez), collects extensions, integrations and articles in one place and is a great starting point for exploring what people are building.
+The ecosystem around DuckDB keeps growing: many projects are built both with DuckDB and within it. The community-driven [`awesome-duckdb` repository](https://github.com/davidgasquez/awesome-duckdb), maintained by [David Gasquez](https://github.com/davidgasquez), collects extensions, integrations, and articles in one place and is a great starting point for exploring what people are building.
 
 We are also in the process of updating our [roadmap]({% link roadmap.md %}) with upcoming features. We already picked the codename for DuckDB 2.1, coming in 2027: we will name it after [Barrow's goldeneye](https://en.wikipedia.org/wiki/Barrow%27s_goldeneye) _(Bucephala islandica),_ so:
 

@@ -5,15 +5,15 @@ authors:
   - The DuckDB team
 thumb: "/images/blog/thumbs/duckdb-release-1-4-0-lts.svg"
 image: "/images/blog/thumbs/duckdb-release-1-4-0-lts.png"
-excerpt: "We're releasing DuckDB version 1.4.0, codenamed “Andium”. This is an LTS release with one year of community support, and it packs several new features including database encryption, the MERGE statement and Iceberg writes."
+excerpt: "We're releasing DuckDB version 1.4.0, codenamed “Andium”. This is an LTS release with one year of community support, and it packs several new features including database encryption, the MERGE statement, and Iceberg writes."
 tag: release
 ---
 
-We are proud to release DuckDB v1.4.0, named “Andium” after the _Andean teal_ (Anas andium), which lives in the Andean highlands of Colombia, Venezuela and Ecuador.
+We are proud to release DuckDB v1.4.0, named “Andium” after the _Andean teal_ (Anas andium), which lives in the Andean highlands of Colombia, Venezuela, and Ecuador.
 
-In this blog post, we cover the most important updates for this release around support, features and extensions. DuckDB is moving rather quickly, and we could cover only a small fraction of the changes in this release. For the complete release notes, see the [release page on GitHub](https://github.com/duckdb/duckdb/releases/tag/v1.4.0).
+In this blog post, we cover the most important updates for this release around support, features, and extensions. DuckDB is moving rather quickly, and we could cover only a small fraction of the changes in this release. For the complete release notes, see the [release page on GitHub](https://github.com/duckdb/duckdb/releases/tag/v1.4.0).
 
-> To install the new version, please visit the [installation page]({% link install/index.html %}#version=lts). Note that it can take a few days to release some client libraries (e.g., Go, R, Java) due to the extra changes and review rounds required.
+> To install the new version, please visit the [installation page]({% link docs/2.0/installation.html %}#version=lts). Note that it can take a few days to release some client libraries (e.g., Go, R, Java) due to the extra changes and review rounds required.
 
 ## Long-Term Support (LTS) Edition
 
@@ -268,7 +268,7 @@ This feature was [implemented](https://github.com/duckdb/duckdb/pull/17459) by [
 
 ### Additional Optimizations
 
-DuckBB v1.4.0 fixes some [scaling issues](https://github.com/duckdb/duckdb/pull/17985), supports [caching for hashes of string dictionaries](https://github.com/duckdb/duckdb/pull/18580) and has several [aggregation optimizations](https://github.com/duckdb/duckdb/pull/17718).
+DuckBB v1.4.0 fixes some [scaling issues](https://github.com/duckdb/duckdb/pull/17985), supports [caching for hashes of string dictionaries](https://github.com/duckdb/duckdb/pull/18580), and has several [aggregation optimizations](https://github.com/duckdb/duckdb/pull/17718).
 
 ## Distribution
 
@@ -281,7 +281,7 @@ Starting from this release, the DuckDB command line utility (`duckdb`) and the d
 curl https://install.duckdb.org | bash
 ```
 
-### Moved Python Integration to its Own Repository
+### Moved Python Integration to Its Own Repository
 
 We have been slowly moving language integrations (“clients”) into their own repositories from `duckdb/duckdb`. For this release, we moved the Python client to its [own repository](https://github.com/duckdb/duckdb-python), `duckdb/duckdb-python`. Please make sure to [file issues](https://github.com/duckdb/duckdb-python/issues/new) related to the Python client there.
 

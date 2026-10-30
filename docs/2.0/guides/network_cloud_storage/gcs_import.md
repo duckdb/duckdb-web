@@ -8,6 +8,7 @@ redirect_from:
 - /docs/lts/guides/network_cloud_storage/gcs_import
 - /docs/preview/guides/network_cloud_storage/gcs_import
 title: Google Cloud Storage Import
+how_to_topic: network-cloud-storage
 ---
 
 ## Prerequisites

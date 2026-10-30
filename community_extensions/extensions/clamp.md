@@ -100,8 +100,8 @@ docs:
 
 extension_star_count: 2
 extension_star_count_pretty: 2
-extension_download_count: 22003
-extension_download_count_pretty: 22.0k
+extension_download_count: 23872
+extension_download_count_pretty: 23.9k
 image: '/images/community_extensions/social_preview/preview_community_extension_clamp.png'
 layout: community_extension_doc
 ---

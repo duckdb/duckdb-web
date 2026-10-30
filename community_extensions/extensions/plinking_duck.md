@@ -106,8 +106,8 @@ docs:
 
 extension_star_count: 6
 extension_star_count_pretty: 6
-extension_download_count: 14035
-extension_download_count_pretty: 14.0k
+extension_download_count: 16058
+extension_download_count_pretty: 16.1k
 image: '/images/community_extensions/social_preview/preview_community_extension_plinking_duck.png'
 layout: community_extension_doc
 ---

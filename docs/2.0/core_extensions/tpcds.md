@@ -67,7 +67,7 @@ To produce the expected results for all queries on scale factors 1 and 10, run t
 FROM tpcds_answers();
 ```
 
-This function returns a table with columns `query_nr`, `scale_factor` and `answer`.
+This function returns a table with columns `query_nr`, `scale_factor`, and `answer`.
 
 ## Generating the Schema
 

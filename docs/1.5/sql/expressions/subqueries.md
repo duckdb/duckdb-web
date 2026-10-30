@@ -62,12 +62,12 @@ SELECT ARRAY(SELECT grade FROM grades) AS all_grades;
 
 
 
-## Subquery Comparisons: `ALL`, `ANY` and `SOME`
+## Subquery Comparisons: `ALL`, `ANY`, and `SOME`
 
 In the section on [scalar subqueries](#scalar-subquery), a scalar expression was compared directly to a subquery using the equality [comparison operator]({% link docs/1.5/sql/expressions/comparison_operators.md %}#comparison-operators) (`=`).
 Such direct comparisons only make sense with scalar subqueries.
 
-Scalar expressions can still be compared to single-column subqueries returning multiple rows by specifying a quantifier. Available quantifiers are `ALL`, `ANY` and `SOME`. The quantifiers `ANY` and `SOME` are equivalent.
+Scalar expressions can still be compared to single-column subqueries returning multiple rows by specifying a quantifier. Available quantifiers are `ALL`, `ANY`, and `SOME`. The quantifiers `ANY` and `SOME` are equivalent.
 
 ### `ALL`
 
@@ -83,7 +83,7 @@ returns:
 |----------|
 | true     |
 
-because 6 is less than or equal to each of the subquery results 7, 8 and 9.
+because 6 is less than or equal to each of the subquery results 7, 8, and 9.
 
 However, the following query
 

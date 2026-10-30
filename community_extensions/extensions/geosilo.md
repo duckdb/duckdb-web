@@ -23,8 +23,8 @@ repo:
 
 extension_star_count: 25
 extension_star_count_pretty: 25
-extension_download_count: 15128
-extension_download_count_pretty: 15.1k
+extension_download_count: 17745
+extension_download_count_pretty: 17.7k
 image: '/images/community_extensions/social_preview/preview_community_extension_geosilo.png'
 layout: community_extension_doc
 ---

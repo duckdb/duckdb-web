@@ -28,7 +28,7 @@ To find a list of these tools, check out the [Awesome DuckDB repository](https:/
 * [How to export a table to a Parquet file]({% link docs/1.5/guides/file_formats/parquet_export.md %})
 * [How to run a query directly on a Parquet file]({% link docs/1.5/guides/file_formats/query_parquet.md %})
 
-### HTTP(S), S3 and GCP
+### HTTP(S), S3, and GCP
 
 * [How to authenticate to S3 / AWS]({% link docs/1.5/core_extensions/aws.md %}#configuration-and-authentication)
 * [How to load a Parquet file directly from HTTP(S)]({% link docs/1.5/guides/network_cloud_storage/http_import.md %})

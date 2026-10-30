@@ -2,7 +2,6 @@
 layout: docu
 redirect_from:
 - /docs/archive/1.0/sql/pragmas
-- /docs/archive/1.0/sql/pragmas/
 title: Pragmas
 ---
 

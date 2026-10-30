@@ -4,6 +4,7 @@ redirect_from:
 - /docs/current/quack/setup/overview
 - /docs/lts/quack/setup/overview
 - /docs/preview/quack/setup/overview
+- /docs/stable/quack/setup/overview
 title: Quack Setup
 ---
 

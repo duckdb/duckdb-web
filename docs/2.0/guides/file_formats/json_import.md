@@ -8,6 +8,7 @@ redirect_from:
 - /docs/lts/guides/file_formats/json_import
 - /docs/preview/guides/file_formats/json_import
 title: JSON Import
+how_to_topic: file-formats
 ---
 
 To read data from a JSON file, use the [`read_json` function]({% link docs/2.0/data/json/loading_json.md %}) in the `FROM` clause of a query:

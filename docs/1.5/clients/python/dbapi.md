@@ -16,7 +16,7 @@ The 'config' keyword argument can be used to provide a `dict` that contains key-
 
 The special value `:memory:` can be used to create an **in-memory database**. Note that for an in-memory database no data is persisted to disk (i.e., all data is lost when you exit the Python process).
 
-#### Named In-memory Connections
+#### Named In-Memory Connections
 
 The special value `:memory:` can also be postfixed with a name, for example: `:memory:conn3`.
 When a name is provided, subsequent `duckdb.connect` calls will create a new connection to the same database, sharing the catalogs (views, tables, macros etc.).
@@ -33,7 +33,7 @@ The special value `:default:` can be used to get this default connection.
 ### File-Based Connection
 
 If the `database` is a file path, a connection to a persistent database is established.
-If the file does not exist the file will be created (the extension of the file is irrelevant and can be `.db`, `.duckdb` or anything else).
+If the file does not exist the file will be created (the extension of the file is irrelevant and can be `.db`, `.duckdb`, or anything else).
 
 #### `read_only` Connections
 

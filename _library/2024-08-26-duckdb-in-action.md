@@ -5,6 +5,8 @@ authors:
   - Mark Needham
   - Michael Hunger
   - Michael Simons
+thumb: "/images/library/thumbs/duckdb-in-action.jpg"
+image: "/images/library/thumbs/duckdb-in-action.jpg"
 tag: book
 category: community
 excerpt: ""

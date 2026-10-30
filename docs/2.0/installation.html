@@ -1,10 +1,11 @@
 ---
-layout: default
-title: DuckDB Installation
+layout: docu
+breadcrumbs: false
+title: Installation
 body_class: installation
-excerpt: DuckDB installation page
-max_page_width: large
+install_version: "2.0"
 toc: false
+copy_markdown: false
 redirect_from:
 - /docs/installation
 - /dl
@@ -34,4 +35,4 @@ redirect_from:
 - /docs/1.2/installation/index
 ---
 
-{% include installation.html %}
+{% include installation.html hide_title=true default_version=page.install_version %}

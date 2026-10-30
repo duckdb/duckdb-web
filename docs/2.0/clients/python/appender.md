@@ -4,6 +4,7 @@ redirect_from:
 - /docs/current/clients/python/appender
 - /docs/lts/clients/python/appender
 - /docs/preview/clients/python/appender
+- /docs/stable/clients/python/appender
 title: Appender
 ---
 
@@ -50,9 +51,9 @@ appender.append_row("logout")
 appender.flush()
 ```
 
-## Updates, Upserts and Deletes
+## Updates, Upserts, and Deletes
 
-The `action` argument picks the statement: `"insert"` (the default), `"upsert"`, `"update"` or `"delete"`. An upsert inserts new rows and updates existing rows that have the same primary key or unique key.
+The `action` argument picks the statement: `"insert"` (the default), `"upsert"`, `"update"`, or `"delete"`. An upsert inserts new rows and updates existing rows that have the same primary key or unique key.
 
 ```python
 con.execute("CREATE TABLE stock (sku VARCHAR PRIMARY KEY, qty INTEGER)")
@@ -103,8 +104,8 @@ appender.append_row("widget", 2)
 appender.flush()
 ```
 
-* The statement is one `INSERT` (including `INSERT OR REPLACE` and `ON CONFLICT`), `UPDATE`, `DELETE` or [`MERGE INTO`]({% link docs/2.0/sql/statements/merge_into.md %}).
-* A type is anything the [Types API]({% link docs/2.0/clients/python/types.md %}) accepts, such as `"INTEGER"`, `duckdb.sqltypes.INTEGER` or `int`.
+* The statement is one `INSERT` (including `INSERT OR REPLACE` and `ON CONFLICT`), `UPDATE`, `DELETE`, or [`MERGE INTO`]({% link docs/2.0/sql/statements/merge_into.md %}).
+* A type is anything the [Types API]({% link docs/2.0/clients/python/types.md %}) accepts, such as `"INTEGER"`, `duckdb.sqltypes.INTEGER`, or `int`.
 * A declared column that the statement does not read is allowed.
 * DataFrames and other Python objects named in `source` or in the statement are looked up once, where the appender is created, and reused at every flush. If you later create a DuckDB table with the same name, later flushes use that table instead.
 
@@ -112,20 +113,20 @@ appender.flush()
 
 Each `flush()` applies the rows collected since the previous flush. It runs in your transaction if you started one with `BEGIN` or `con.begin()`, and otherwise commits by itself. A flush with no rows does nothing.
 
-A `with` block flushes on successful exit. When an exception leaves the block, the buffered rows are discarded and the exception propagates. Outside a `with` block, call `flush()` to write the rows and `clear()` to discard them. There is no `close()` method. The appender remains usable after `flush()`, `clear()` or leaving a `with` block.
+A `with` block flushes on successful exit. When an exception leaves the block, the buffered rows are discarded and the exception propagates. Outside a `with` block, call `flush()` to write the rows and `clear()` to discard them. There is no `close()` method. The appender remains usable after `flush()`, `clear()`, or leaving a `with` block.
 
 > Warning Garbage collection discards buffered rows and emits a `ResourceWarning`. Call `flush()` or use a `with` block to write the rows.
 
 ## Errors and Retrying
 
-* The appender checks its statement when you create it, without running it. Invalid SQL, incorrect column counts, unsupported statement types, `RETURNING` clauses and SQL parameter placeholders such as `?` raise an exception at creation. These errors leave the transaction usable. Cast errors and constraint violations raise an exception during `flush()`.
+* The appender checks its statement when you create it, without running it. Invalid SQL, incorrect column counts, unsupported statement types, `RETURNING` clauses, and SQL parameter placeholders such as `?` raise an exception at creation. These errors leave the transaction usable. Cast errors and constraint violations raise an exception during `flush()`.
 * A flush that raises because an earlier result is still open or another call is running on the connection keeps its buffered rows, and so does an interrupted flush. Finish the result or wait for the other call, then call `flush()` again. Other failures discard the rows and raise an exception.
 * An interrupted flush inside your transaction keeps its buffered rows but aborts the transaction. Roll back before retrying. Start a new transaction if the retry must be part of one.
 * If you press Ctrl-C while a Python function called from SQL is running during a flush, DuckDB treats it as an error in that function and discards the buffered rows.
 
 ## Memory Use
 
-The rows waiting to be flushed count toward DuckDB's `memory_limit`. When they no longer fit in memory, DuckDB can store them in temporary files. If DuckDB has no temporary directory, a full buffer makes every query on the connection raise an `OutOfMemoryException` until you call `flush()` or `clear()`. If a write into the buffer fails, `append_row`, `append_rows` and `flush()` raise an exception until you call `clear()`.
+The rows waiting to be flushed count toward DuckDB's `memory_limit`. When they no longer fit in memory, DuckDB can store them in temporary files. If DuckDB has no temporary directory, a full buffer makes every query on the connection raise an `OutOfMemoryException` until you call `flush()` or `clear()`. If a write into the buffer fails, `append_row`, `append_rows`, and `flush()` raise an exception until you call `clear()`.
 
 ## Connections and Threads
 

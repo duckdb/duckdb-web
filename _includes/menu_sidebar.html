@@ -1,109 +1,24 @@
-<div class="sidenavigation" data-selected="{{page.selected}}" data-expanded="{{page.expanded}}">
-		
-	{% assign starting_url = "docs/" | append: version_viewed | append: "/" %}
-	{% assign url_parts = page.url | replace: ".html", "" | split: "/" %}
-	{% assign current_main = url_parts[3] %}
-	{% if url_parts[1] == "docs" %}
-		{% assign current_main = url_parts[3] | default: "index" %}
-	{% endif %}
+{%- assign nav_base = "/docs/" | append: version_viewed | append: "/" -%}
+{%- assign nav_page = page.url | replace: ".html", "" -%}
+{%- assign nav_last_char = nav_page | slice: -1 -%}
+{%- if nav_last_char == "/" -%}{%- assign nav_page = nav_page | append: "index" -%}{%- endif -%}
+{%- assign nav_url_parts = nav_page | split: "/" -%}
+{%- assign menudocfile = "menu_docs_" | append: version_viewed | replace: ".", "" -%}
+{%- assign nav_menu = site.data[menudocfile].docsmenu -%}
+{%- assign nav_groups = nav_menu | where: "group_start", true -%}
 
-	{%- assign menudocfile = "menu_docs_" | append: version_viewed | replace: ".", "" -%}
+{%- capture nav_items -%}{%- include menu_sidebar_tree.html -%}{%- endcapture -%}
+{%- unless nav_items contains 'aria-current="page"' -%}
+	{%- capture nav_items -%}{%- include menu_sidebar_tree.html fallback=true -%}{%- endcapture -%}
+{%- endunless -%}
 
-	<ul class="sidenav">
-		{% if site.data[menudocfile].docsmenu %}
-			{% for item in site.data[menudocfile].docsmenu %}
-				{% if item.slug == nil or item.slug == "" %}
-					{% assign slug_parts = item.url | split: "/" %}
-				{% else %}
-					{% assign slug_parts = item.slug | split: "/" %}
-				{% endif %}
-				{% assign url_contains = true %}
-				{% for slug_part in slug_parts %}
-					{% if url_parts contains slug_part %}
-					{% else %}
-						{% assign url_contains = false %}
-					{% endif %}
-				{% endfor %}
-				{% assign base_slash = '' %}
-				{% if item.slug != nil and item.url != nil %}
-					{% assign base_slash = '/' %}
-				{% endif %}
-				<li class="item-menu
-					{%- if url_contains %} active opened{% endif -%}
-					{%- if item.mainfolderitems[0] %} hasSub{% endif -%}
-				">
-				{% if item.url %}
-					{% assign first_char = page.url | slice: 0 %}
-					{% if first_char == '/' %}
-						{% assign target_url = item.url %}
-					{% else %}
-						{% assign target_url = base_slash | append: starting_url | append: item.slug | append: item.url %}
-					{% endif %}
-					<a href="{{ target_url }}">{{ item.page }}</a> {% if item.mainfolderitems[0] %} <svg class="show"><use href="#chevron-right"></use></svg> {% endif %} {% else %} {% if item.mainfolderitems[0] %} <svg class="show"><use href="#chevron-right"></use></svg> {% endif %} {{ item.page }}
-				{% endif %}
-				</li>
-			
-				{% if item.mainfolderitems[0] %}
-					<ul style="display: {% if url_contains %}block;{% else %}none{% endif %}">
-						{% for mainentry in item.mainfolderitems %}
-
-						<li class="mainentry-menu
-								{%- if mainentry.url and current_main == mainentry.url %} active{% endif -%}
-								{%- if mainentry.url %} {{ mainentry.url }}{% endif -%}
-								{%- if url_parts[3] %} {{ url_parts[3]}}{% endif -%}
-								{%- if mainentry.subfolderitems[0] %} hasSub{% endif -%}
-								{%- if mainentry.open or url_parts contains mainentry.url or url_parts contains mainentry.slug %} opened{% endif -%}
-							">
-							{% if mainentry.url %} <a href="/{{starting_url}}{{item.slug}}{{ mainentry.url }}">{{ mainentry.page }}</a> {% if mainentry.subfolderitems[0] %} <svg class="show"><use href="#chevron-right"></use></svg> {% endif %} {% else %} {{ mainentry.page }} {% if mainentry.subfolderitems[0] %} <svg class="show"><use href="#chevron-right"></use></svg> {% endif %} {% endif %} </li>
-						{% if mainentry.subfolderitems[0] %}
-						<ul style="display:{% if mainentry.open or url_parts contains mainentry.url or url_parts contains mainentry.slug %}block{% else %}none{% endif %};">
-							{% for entry in mainentry.subfolderitems %}
-							{% if mainentry.subfolderitems %}
-							<li class="entry-menu
-									{%- if url_parts[3] == mainentry.slug and url_parts[4] == entry.url %} active{% endif -%}
-									{%- if entry.subsubfolderitems[0] %} hasSub{% endif -%}
-									{%- if entry.open or url_parts contains entry.url or url_parts contains entry.slug %} opened{% endif -%}
-								">
-								{% if entry.url %} <a href="/{{starting_url}}{{item.slug}}{{mainentry.slug}}/{{ entry.url }}">{{ entry.page }}</a> {% if entry.subsubfolderitems[0] %} <svg class="show"><use href="#chevron-right"></use></svg> {% endif %} {% else %} {{ entry.page }} {% if entry.subsubfolderitems[0] %} <svg class="show"><use href="#chevron-right"></use></svg> {% endif %} {% endif %}
-							</li>
-							{% endif %}
-							{% if entry.subsubfolderitems[0] %}
-							<ul style="display:{% if entry.open or url_parts contains entry.url or url_parts contains entry.slug %}block{% else %}none{% endif %};">
-								{% for subentry in entry.subsubfolderitems %}
-								{% if entry.subsubfolderitems %}
-								<li class="subentry-menu
-									{%- if url_parts[4] == entry.slug and url_parts[5] == subentry.url %} active{% endif -%}
-									{%- if subentry.open or url_parts contains subentry.url or url_parts contains subentry.slug %} opened{% endif -%}
-								">
-									{% if subentry.url %} <a href="/{{starting_url}}{{item.slug}}{{mainentry.slug}}/{{ entry.slug }}/{{ subentry.url }}"> {{ subentry.page }} </a> {% else %} {{ subentry.page }} {% endif %}
-								</li>
-								{% endif %}
-								{% endfor %}
-							</ul>
-							{% endif %}
-							{% endfor %}
-						</ul>
-						{% endif %}
-						{% endfor %}
-					</ul>
-				{% endif %}
-			{% endfor %}
-		{% endif %}
-
-		{% assign pageUrl = page.url | replace: ".html", "" %}
-
-		{% if site.data.menu_side.sidemenu %}
-			{% for item in site.data.menu_side.sidemenu %}
-				{% assign itemUrl = item.url | replace: ".html", "" %}
-				<li class="
-					{%- if pageUrl == itemUrl %} active{% endif -%}
-					{%- if item.mainfolderitems[0] %} hasSub{% endif -%}
-					{%- if pageUrl contains itemUrl %} opened{% endif -%}
-				">
-
-				{% if item.url %} <a href="{{ item.url }}">{{ item.page }}</a> {% if item.mainfolderitems[0] %} <svg class="show"><use href="#chevron-right"></use></svg> {% endif %} {% else %} {{ item.page }} {% if item.mainfolderitems[0] %} <svg class="show"><use href="#chevron-right"></use></svg> {% endif %} {% endif %} </li>
-			{% endfor %}
-		{% endif %}
-	
+<nav class="sidenavigation sidenav-drill" aria-label="Documentation">
+	<button type="button" class="opensearch sidenav-search">
+		<span class="sidenav-search-label">Search docs</span>
+		<span class="sidenav-search-hint"><svg class="icon"><use href="#search-md"></use></svg><span class="mac shortcut">⌘K</span><span class="win shortcut">ctrl+k</span></span>
+	</button>
+	<ul class="sidenav nav-list{% if nav_items contains 'is-open' %} is-drilled{% endif %}">
+		{% if nav_groups.size > 0 %}<li class="nav-label">Start</li>{% endif %}
+		{{- nav_items -}}
 	</ul>
-</div>
+</nav>

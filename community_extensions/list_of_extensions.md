@@ -1,6 +1,6 @@
 ---
 layout: community_extension_doc
-title: List of Community Extensions
+title: List of Extensions
 excerpt: |
   This page lists DuckDB's Community Extensions.
 ---

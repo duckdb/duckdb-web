@@ -21,7 +21,7 @@ In this blog post we will cover these aspects of memory management within DuckDB
 
 ## Streaming Execution
 
-DuckDB uses a streaming execution engine to process queries. Data sources, such as tables, CSV files or Parquet files, are never fully materialized in memory. Instead, data is read and processed one chunk at a time. For example, consider the execution of the following query:
+DuckDB uses a streaming execution engine to process queries. Data sources, such as tables, CSV files, or Parquet files, are never fully materialized in memory. Instead, data is read and processed one chunk at a time. For example, consider the execution of the following query:
 
 ```sql
 SELECT

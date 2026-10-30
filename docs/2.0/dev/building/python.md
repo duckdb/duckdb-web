@@ -58,7 +58,7 @@ git fetch --all
 
 * Python 3.11 or later; free-threaded builds of CPython are not supported
 * uv >= 0.8.0 required
-* CMake, Ninja, nanobind and the NumPy headers (installed via UV)
+* CMake, Ninja, nanobind, and the NumPy headers (installed via UV)
 * C++ compiler toolchain
 
 #### Linux
@@ -119,7 +119,7 @@ The result is an editable Debug build in `build/debug/`. Editable builds use the
 
 ### 3. Enable Pre-Commit Hooks
 
-We run a number of linting, formatting and type-checking in CI. You can run all of these manually, but to make your life easier you can install the exact same checks we run in CI as git hooks with [pre-commit](https://pre-commit.com). Install it pinned to Python 3.12, so the hooks do not depend on your build interpreter:
+We run a number of linting, formatting, and type-checking in CI. You can run all of these manually, but to make your life easier you can install the exact same checks we run in CI as git hooks with [pre-commit](https://pre-commit.com). Install it pinned to Python 3.12, so the hooks do not depend on your build interpreter:
 
 ```bash
 uv tool install --python 3.12 pre-commit
@@ -270,7 +270,7 @@ In lldb:
 
 ## Cross-Platform Testing
 
-You can run the Packaging workflow manually on your fork for any branch via the GitHub Actions web interface. Its inputs choose a minimal set of wheels or all of them, the test suite to run (none, fast or all), the commits of the package and of the DuckDB submodule to build and a forced package or DuckDB version.
+You can run the Packaging workflow manually on your fork for any branch via the GitHub Actions web interface. Its inputs choose a minimal set of wheels or all of them, the test suite to run (none, fast, or all), the commits of the package and of the DuckDB submodule to build, and a forced package or DuckDB version.
 
 ## Troubleshooting
 

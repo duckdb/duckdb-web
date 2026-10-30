@@ -2,7 +2,6 @@
 layout: docu
 redirect_from:
 - /docs/archive/1.1/extensions/troubleshooting
-- /docs/archive/1.1/extensions/troubleshooting/
 title: Working with Extensions
 ---
 

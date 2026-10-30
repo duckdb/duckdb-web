@@ -7,9 +7,10 @@ redirect_from:
 - /docs/lts/guides/python/relational_api_pandas
 - /docs/preview/guides/python/relational_api_pandas
 title: Relational API on Pandas
+how_to_topic: python
 ---
 
-DuckDB offers a relational API that can be used to chain together query operations. These are lazily evaluated so that DuckDB can optimize their execution. These operators can act on Pandas DataFrames, DuckDB tables or views (which can point to any underlying storage format that DuckDB can read, such as CSV or Parquet files, etc.). Here we show a simple example of reading from a Pandas DataFrame and returning a DataFrame.
+DuckDB offers a relational API that can be used to chain together query operations. These are lazily evaluated so that DuckDB can optimize their execution. These operators can act on Pandas DataFrames, DuckDB tables, or views (which can point to any underlying storage format that DuckDB can read, such as CSV or Parquet files, etc.). Here we show a simple example of reading from a Pandas DataFrame and returning a DataFrame.
 
 ```python
 import duckdb
@@ -33,6 +34,6 @@ transformed_rel = rel.filter('i >= 2').select('i, j, i*2 AS two_i').order('i DES
 output_df = transformed_rel.df()
 ```
 
-Relational operators can also be used to group rows, aggregate, find distinct combinations of values, join, union and more. They are also able to directly insert results into a DuckDB table or write to a CSV.
+Relational operators can also be used to group rows, aggregate, find distinct combinations of values, join, union, and more. They are also able to directly insert results into a DuckDB table or write to a CSV.
 
 Please see the [Relational API page]({% link docs/2.0/clients/python/relational_api.md %}) for more examples and the [available relational methods on the `DuckDBPyRelation` class]({% link docs/2.0/clients/python/reference/index.md %}#duckdb.DuckDBPyRelation).

@@ -2,8 +2,8 @@
   "docsmenu": [
     {
       "page": "Installation",
-      "slug": "installation/",
-      "url": "index"
+      "slug": "",
+      "url": "/install/"
     },
     {
       "page": "Documentation",

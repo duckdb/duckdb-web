@@ -246,7 +246,7 @@ INSERT INTO edge VALUES
     (6, 3), (6, 4), (7, 4), (8, 1), (9, 4);
 ```
 
-Note that the graph contains directed cycles, e.g., between nodes 1, 5 and 8.
+Note that the graph contains directed cycles, e.g., between nodes 1, 5, and 8.
 
 #### Enumerate All Paths from a Node
 
@@ -481,7 +481,7 @@ TABLE tbl;
 
 ### `UNION` vs. `UNION ALL` in `USING KEY` CTEs
 
-Both `UNION` and `UNION ALL` update the union table in the same way: all rows produced by an iteration (the candidates) are applied to the union table, i.e., they insert new keys, overwrite payloads or are combined by the payload aggregates. The two forms differ in which rows are passed to the next iteration:
+Both `UNION` and `UNION ALL` update the union table in the same way: all rows produced by an iteration (the candidates) are applied to the union table, i.e., they insert new keys, overwrite payloads, or are combined by the payload aggregates. The two forms differ in which rows are passed to the next iteration:
 
 * With `UNION ALL`, every candidate row produced by the recursive term is forwarded to the next iteration, even if it did not change the union table.
 * With `UNION`, only rows for keys that are new or whose (finalized) payload changed are forwarded to the next iteration. Therefore, the recursion stops once the union table stops changing.

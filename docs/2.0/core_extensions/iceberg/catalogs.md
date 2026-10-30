@@ -15,12 +15,13 @@ redirect_from:
 - /docs/current/core_extensions/iceberg/catalogs
 - /docs/lts/core_extensions/iceberg/catalogs
 - /docs/preview/core_extensions/iceberg/catalogs
+- /docs/stable/core_extensions/iceberg/catalogs
 title: Catalogs
 ---
 
 The `iceberg` extension supports attaching Iceberg REST Catalogs. Attaching a catalog is required for [writing to Iceberg]({% link docs/2.0/core_extensions/iceberg/writing_to_iceberg.md %}). Before attaching an Iceberg REST Catalog, you must install the `iceberg` extension by following the instructions located in the [overview]({% link docs/2.0/core_extensions/iceberg/overview.md %}).
 
-The section below describes the generic way of attaching an Iceberg REST Catalog. For instructions specific to a catalog implementation, see [Amazon S3 Tables](#amazon-s3-tables), [AWS Glue](#aws-glue-amazon-sagemaker-lakehouse), [Cloudflare R2 Data Catalog](#cloudflare-r2-data-catalog), [Apache Polaris](#apache-polaris), [Lakekeeper](#lakekeeper), [SeaweedFS](#seaweedfs) and [Google Cloud BigLake](#google-cloud-biglake).
+The section below describes the generic way of attaching an Iceberg REST Catalog. For instructions specific to a catalog implementation, see [Amazon S3 Tables](#amazon-s3-tables), [AWS Glue](#aws-glue-amazon-sagemaker-lakehouse), [Cloudflare R2 Data Catalog](#cloudflare-r2-data-catalog), [Apache Polaris](#apache-polaris), [Lakekeeper](#lakekeeper), [SeaweedFS](#seaweedfs), and [Google Cloud BigLake](#google-cloud-biglake).
 
 ## Attaching an Iceberg REST Catalog
 
@@ -391,4 +392,4 @@ ATTACH '⟨warehouse⟩' AS horizon_catalog (
 
 ## Limitations
 
-DuckDB supports Iceberg REST Catalogs backed by S3, S3 Tables, Google Cloud Storage (GCS) and Azure Data Lake Storage (ADLS).
+DuckDB supports Iceberg REST Catalogs backed by S3, S3 Tables, Google Cloud Storage (GCS), and Azure Data Lake Storage (ADLS).

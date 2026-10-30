@@ -68,7 +68,7 @@ We illustrate the effect of using primary keys with the [LDBC Comment table at s
 This table has approx. 554 million entries.
 In the first experiment, we create the schema *with* a primary key, then load the data.
 In the second experiment, we create the schema *without* a primary key, then load the data.
-In the third experiment, we create the schema *without* a primary key, load the data and then add the primary key constraint.
+In the third experiment, we create the schema *without* a primary key, load the data, and then add the primary key constraint.
 In all cases, we take the data from `.csv.gz` files, and measure the time required to perform the loading.
 
 |                  Operation                    | Execution time |

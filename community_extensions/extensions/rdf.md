@@ -8,7 +8,7 @@ excerpt: |
 extension:
   name: rdf
   description: Read and write RDF, query using SPARQL
-  version: 2.8.3
+  version: 2.9.0
   language: C++
   build: cmake
   license: MIT
@@ -18,7 +18,7 @@ extension:
 repo:
   github: nonodename/duck_rdf
   variegata: de345a85c40ccb023d09509181a597ba99c28ffe
-  ref: 290b86c1366865442b3726305613e87eedc1224c
+  ref: badeb50fd12f0004528352bb879f72e055e4dd7b 
 
 docs:
   hello_world: |
@@ -151,8 +151,8 @@ docs:
 
 extension_star_count: 43
 extension_star_count_pretty: 43
-extension_download_count: 11788
-extension_download_count_pretty: 11.8k
+extension_download_count: 12922
+extension_download_count_pretty: 12.9k
 image: '/images/community_extensions/social_preview/preview_community_extension_rdf.png'
 layout: community_extension_doc
 ---
@@ -164,13 +164,13 @@ This table covers all DuckDB releases that have not reached [end-of-life](https:
 
 | Platform | 1.4.4 | 1.4.5 | 1.5.5 | 1.5.6 | 2.0.0 |
 | :--- | :---: | :---: | :---: | :---: | :---: |
-| Linux AMD64 | ❌ | ❌ | ✅ | ✅ | ❌ |
-| Linux ARM64 | ❌ | ❌ | ✅ | ✅ | ❌ |
+| Linux AMD64 | ❌ | ❌ | ✅ | ✅ | ✅ |
+| Linux ARM64 | ❌ | ❌ | ✅ | ✅ | ✅ |
 | macOS AMD64 | ❌ | ❌ | ✅ | ✅ | ❌ |
-| macOS ARM64 | ❌ | ❌ | ✅ | ✅ | ❌ |
-| Windows AMD64 | ❌ | ❌ | ✅ | ✅ | ❌ |
+| macOS ARM64 | ❌ | ❌ | ✅ | ✅ | ✅ |
+| Windows AMD64 | ❌ | ❌ | ✅ | ✅ | ✅ |
 | Windows ARM64 | ❌ | ❌ | ❌ | ❌ | ❌ |
-| WebAssembly | ❌ | ❌ | ✅ | ✅ | ❌ |
+| WebAssembly | ❌ | ❌ | ✅ | ✅ | ✅ |
 
 ### Installing and Loading
 ```sql
@@ -222,6 +222,8 @@ This extension does not add any types.
 
 <div class="extension_settings_table"></div>
 
-This extension does not add any settings.
+|      name      |                       description                       | input_type | scope  | aliases | typed_value |
+|----------------|---------------------------------------------------------|------------|--------|---------|-------------|
+| temp_directory | Set the directory to which temporary files are written. | VARCHAR    | GLOBAL | []      | post.db.tmp |
 
 

@@ -4,7 +4,9 @@ redirect_from:
 - /docs/current/guides/network_cloud_storage/http_csv_import
 - /docs/lts/guides/network_cloud_storage/http_csv_import
 - /docs/preview/guides/network_cloud_storage/http_csv_import
+- /docs/stable/guides/network_cloud_storage/http_csv_import
 title: HTTP CSV Import
+how_to_topic: network-cloud-storage
 ---
 
 To load a CSV file directly over HTTP(S), the [`httpfs` extension]({% link docs/2.0/core_extensions/httpfs/overview.md %}) is required. This can be installed using the `INSTALL` SQL command. This only needs to be run once.

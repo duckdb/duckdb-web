@@ -6,7 +6,6 @@
     if (!$('body').hasClass('installation')) return;
 
     var $container = $('.installationselection');
-    $container.find('.selection-head h3').append('<span class="foldout-icon"><svg class="icon"><use href="#chevron-down"></use></svg></span>');
     var $result = $('#result');
     var $templates = $('.instruction-collection');
     var $inst = $('.installation-instructions');
@@ -34,10 +33,13 @@
       });
     });
 
+    var defaultVersion = $container.attr('data-default-version');
+    if (VERSIONS.indexOf(defaultVersion) < 0) defaultVersion = VERSIONS[0];
+
     var state = {
       platform: null,
       environment: null,
-      version: VERSIONS[0] // the release selected by the user, see shownVersion()
+      version: defaultVersion // the release selected by the user, see shownVersion()
     };
 
     function readURL() {
@@ -56,7 +58,7 @@
         var params = new URLSearchParams(window.location.search);
         setOrDelete(params, 'platform', state.platform);
         setOrDelete(params, 'environment', state.environment);
-        setOrDelete(params, 'version', state.version !== VERSIONS[0] ? state.version : null);
+        setOrDelete(params, 'version', state.version !== defaultVersion ? state.version : null);
         var newQuery = params.toString();
         var newUrl = window.location.pathname + (newQuery ? '?' + newQuery : '') + window.location.hash;
         var prevQuery = window.location.search.replace(/^\?/, '');
@@ -117,8 +119,7 @@
       $opt
         .addClass('active')
         .attr('aria-checked', 'true')
-        .attr('tabindex', '0')
-        .focus();
+        .attr('tabindex', '0');
 
       state[role] = value;
     }
@@ -140,6 +141,7 @@
 
     function setFoldoutOpen($foldout, open, animate) {
       var $content = $foldout.children('.selection-content');
+      $foldout.find('.selection-head button').attr('aria-expanded', String(open));
       if (open) {
         $foldout.addClass('open');
         if (animate) $content.stop(true, true).slideDown(150); else $content.show();
@@ -159,7 +161,7 @@
         platLabel = '';
       }
       var text = platLabel ? ' ' + platLabel : '';
-      $foldPlat.find('.selection-head .selected').text(text);
+      $foldPlat.find('.selection-head .selected').text(needsPlatform ? text : 'Not required');
 
       var $live = $container.find('.live-region');
       if (!$live.length) {
@@ -226,6 +228,7 @@
 
     function updateFoldouts(animate) {
       var needsPlatform = environmentRequiresPlatform(state.environment);
+      $foldPlat.find('.selection-head button').prop('disabled', !needsPlatform);
 
       if (!needsPlatform) {
         setFoldoutOpen($foldPlat, false, !!animate);
@@ -363,6 +366,7 @@
       if (!role || !value) return;
 
       selectOption(role, value);
+      $opt.focus();
 
       writeURL();
       render();
@@ -389,9 +393,7 @@
         var $fold = $(this);
         if ($fold.hasClass('disabled')) return;
         if (!$fold.hasClass('open')) {
-          var $content = $fold.children('.selection-content');
-          $content.stop(true, true).slideDown(150);
-          $fold.addClass('open');
+          setFoldoutOpen($fold, true, true);
         }
       });
 
@@ -399,21 +401,12 @@
         e.stopPropagation();
         var $fold = $(this).closest('.selection-foldout');
         if ($fold.hasClass('disabled')) return;
-        var $content = $fold.children('.selection-content');
-        if ($fold.hasClass('open')) {
-          $content.stop(true, true).slideUp(150);
-          $fold.removeClass('open');
-        } else {
-          $content.stop(true, true).slideDown(150);
-          $fold.addClass('open');
-        }
+        setFoldoutOpen($fold, !$fold.hasClass('open'), true);
       });
 
       $container.find('.selection-foldout').each(function () {
         var $fold = $(this);
-        var isOpen = $fold.hasClass('open');
-        var $content = $fold.children('.selection-content');
-        if (isOpen) $content.css('display', 'block'); else $content.hide();
+        setFoldoutOpen($fold, $fold.hasClass('open'), false);
       });
 
       $container.find('.selection-options[data-role]').each(function () {

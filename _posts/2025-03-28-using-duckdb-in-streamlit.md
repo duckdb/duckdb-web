@@ -370,4 +370,4 @@ The code of implementing interactive maps with Folium in Streamlit is available 
 
 ## Conclusion
 
-In this post, we illustrated how DuckDB can be used in Streamlit, how the Python relational API can make our code cleaner by chaining queries and how to implement interactive maps with Plotly and Folium, while leveraging the Streamlit caching mechanism.  
+In this post, we illustrated how DuckDB can be used in Streamlit, how the Python relational API can make our code cleaner by chaining queries, and how to implement interactive maps with Plotly and Folium, while leveraging the Streamlit caching mechanism.  

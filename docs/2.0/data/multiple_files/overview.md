@@ -147,7 +147,7 @@ IO Error:
 No files found that match the pattern "test/*.parquet"
 ```
 
-Starting with DuckDB 2.0, the CSV, JSON and Parquet readers accept the `allow_empty` option, which returns an empty result (with a single `empty` column of type `BOOLEAN`) instead of raising an error:
+Starting with DuckDB 2.0, the CSV, JSON, and Parquet readers accept the `allow_empty` option, which returns an empty result (with a single `empty` column of type `BOOLEAN`) instead of raising an error:
 
 ```sql
 SELECT *

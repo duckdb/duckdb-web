@@ -25,7 +25,7 @@ The datasets are organized into:
 - a provinces GeoJSON file, containing the geographic information about the Dutch provinces, hosted on GitHub;
 - a municipalities GeoJSON file, containing the geographic information about Dutch municipalities, stored together with the code.
 
-After doing an initial exploration of the above data, we can observe that a province can have one or many municipalities, a municipality can have none or many train stations and a train service record is connected to one and only one train station. Therefore we decide on the following data model:
+After doing an initial exploration of the above data, we can observe that a province can have one or many municipalities, a municipality can have none or many train stations, and a train service record is connected to one and only one train station. Therefore we decide on the following data model:
 
 - a dimension table, `dim_nl_provinces`, to hold information about the Dutch provinces;
 - a dimension table, `dim_nl_municipalities`, to hold information about the Dutch municipalities, linked to `dim_nl_provinces`;
@@ -158,7 +158,7 @@ WHERE tr_st.country = 'NL';
 
 ## Exporting Data from DuckDB
 
-One major benefit of using DuckDB for data processing is the ability to export data to files (such as CSV, JSON and Parquet) and to refresh data directly in PostgreSQL or MySQL databases.
+One major benefit of using DuckDB for data processing is the ability to export data to files (such as CSV, JSON, and Parquet) and to refresh data directly in PostgreSQL or MySQL databases.
 
 ### External Files
 
@@ -351,4 +351,4 @@ The above implementation consists of 10 models and 20 data tests, processing 400
 
 ## Conclusion
 
-In this post we have demonstrated how DuckDB integrates with `dbt` and how it is part of the data processing ecosystem by showcasing data mart creation, file exports and reverse ETL to a PostgreSQL database.
+In this post we have demonstrated how DuckDB integrates with `dbt` and how it is part of the data processing ecosystem by showcasing data mart creation, file exports, and reverse ETL to a PostgreSQL database.

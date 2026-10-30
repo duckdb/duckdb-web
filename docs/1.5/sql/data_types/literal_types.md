@@ -4,7 +4,7 @@ title: Literal Types
 tested: true
 ---
 
-DuckDB has special literal types for representing `NULL`, integer and string literals in queries. These have their own binding and conversion rules.
+DuckDB has special literal types for representing `NULL`, integer, and string literals in queries. These have their own binding and conversion rules.
 
 > Prior to DuckDB version 0.10.0, integer and string literals behaved identically to the `INTEGER` and `VARCHAR` types.
 
@@ -42,7 +42,7 @@ SELECT 1e-10;         -- 1 ångström
 
 DuckDB's SQL dialect allows using the underscore character `_` in numeric literals as an optional separator. The rules for using underscores are as follows:
 
-* Underscores are allowed in integer, decimal, hexadecimal and binary notation.
+* Underscores are allowed in integer, decimal, hexadecimal, and binary notation.
 * Underscores cannot be the first or last character in a literal.
 * Underscores have to have an integer/numeric part on either side of them, i.e., there cannot be multiple underscores in a row and underscores cannot appear immediately before or after a decimal or exponent.
 

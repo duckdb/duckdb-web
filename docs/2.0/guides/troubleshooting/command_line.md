@@ -6,6 +6,7 @@ redirect_from:
 - /docs/lts/guides/troubleshooting/command_line
 - /docs/preview/guides/troubleshooting/command_line
 title: Command Line
+how_to_topic: troubleshooting
 ---
 
 ## Unexpected Markdown Output When Piping

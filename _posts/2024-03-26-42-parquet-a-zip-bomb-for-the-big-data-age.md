@@ -9,7 +9,7 @@ excerpt: A 42 kB Parquet file can contain over 4 PB of data.
 tag: deep-dive
 ---
 
-[Apache Parquet](https://parquet.apache.org) has become the de-facto standard for tabular data interchange. It is greatly superior to its scary cousin CSV by using a binary, columnar and *compressed* data representation. In addition, Parquet files come with enough metadata so that files can be correctly interpreted without additional information. Most modern data tools and services support reading and writing Parquet files.
+[Apache Parquet](https://parquet.apache.org) has become the de-facto standard for tabular data interchange. It is greatly superior to its scary cousin CSV by using a binary, columnar, and *compressed* data representation. In addition, Parquet files come with enough metadata so that files can be correctly interpreted without additional information. Most modern data tools and services support reading and writing Parquet files.
 
 However, Parquet files are not without their dangers: For example, corrupt files can crash readers that are not being very careful in interpreting internal offsets and such. But even perfectly valid files can be problematic and lead to crashes and service downtime as we will show below.
 

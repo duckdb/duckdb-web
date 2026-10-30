@@ -83,8 +83,8 @@ docs:
 
 extension_star_count: 2
 extension_star_count_pretty: 2
-extension_download_count: 3673
-extension_download_count_pretty: 3.7k
+extension_download_count: 4492
+extension_download_count_pretty: 4.5k
 image: '/images/community_extensions/social_preview/preview_community_extension_jsono.png'
 layout: community_extension_doc
 ---

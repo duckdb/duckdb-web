@@ -13,7 +13,7 @@ redirect_from:
   <div class="pagetitle-heading" role="heading" aria-level="1">Security</div>
 </div>
 
-This page describes DuckDB's security model, how to report a potential vulnerability, and the CVEs that have been filed against DuckDB. For a detailed discussion of DuckDB's security-related settings, see the ["Securing DuckDB"](https://duckdb.org/docs/stable/operations_manual/securing_duckdb/overview) page.
+This page describes DuckDB's security model, how to report a potential vulnerability, and the CVEs that have been filed against DuckDB. For a detailed discussion of DuckDB's security-related settings, see the [“Securing DuckDB”](https://duckdb.org/docs/stable/operations_manual/securing_duckdb/overview) page.
 
 ## Security Model
 

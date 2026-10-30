@@ -102,7 +102,7 @@ selection_query = (
 
 ## Model Training
 
-Our scope is to predict a penguin's specie based on its characteristics (features), such as bill length and depth, flipper length, body mass and island. Such a model is called a classification model because it predicts the category to which the input data belongs.`scikit-learn` offers [multiple classification models](https://scikit-learn.org/stable/auto_examples/classification/plot_classifier_comparison.html). For our dataset, we have chosen to implement a [random forest classifier](https://en.wikipedia.org/wiki/Random_forest), based on decision trees:
+Our scope is to predict a penguin's specie based on its characteristics (features), such as bill length and depth, flipper length, body mass, and island. Such a model is called a classification model because it predicts the category to which the input data belongs.`scikit-learn` offers [multiple classification models](https://scikit-learn.org/stable/auto_examples/classification/plot_classifier_comparison.html). For our dataset, we have chosen to implement a [random forest classifier](https://en.wikipedia.org/wiki/Random_forest), based on decision trees:
 
 <div align="center" style="margin:10px">
     <a href="/images/blog/scikit-learn-duckdb/decision_tree.png">

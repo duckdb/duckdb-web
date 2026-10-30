@@ -8,7 +8,7 @@ excerpt: |
 extension:
   name: lance_conversion
   description: Stream any DuckDB query into Lance datasets with Blob v2 storage and scalar, vector, text, and Bloom filter indexes
-  version: 0.2.0
+  version: 0.2.1
   language: C++ & Rust
   build: cmake
   license: MIT
@@ -19,7 +19,7 @@ extension:
 
 repo:
   github: dentiny/duckdb_lance_conversion
-  ref: eaa66ae5906d6747f489aa7e4b69299ad3d5e0da
+  ref: 46a105d76e886df3bac24d47322345664225b733
 
 docs:
   hello_world: |
@@ -108,6 +108,19 @@ docs:
     COPY events TO 'events_sample.lance' (FORMAT LANCE, SAMPLE_ROWS 1000);
     ```
 
+    `GENERATED_COLUMNS` adds columns computed by DuckDB SQL expressions from
+    each source row. Lance stores each expression in the column's metadata,
+    and `APPEND` must use the same definitions:
+
+    ```sql
+    COPY (
+      SELECT * FROM read_warc('archive.warc.gz') WHERE type = 'response'
+    ) TO 'responses.lance' (FORMAT LANCE, GENERATED_COLUMNS {
+      'doc_id': $$ sha256(id || ':' || target_uri) $$,
+      'body_size': 'octet_length(body)'
+    });
+    ```
+
     Blob v2 layout, data file sizing, and indexes are configurable directly
     from the `COPY` statement:
 
@@ -134,8 +147,8 @@ docs:
 
 extension_star_count: 0
 extension_star_count_pretty: 0
-extension_download_count: 7200
-extension_download_count_pretty: 7.2k
+extension_download_count: 8850
+extension_download_count_pretty: 8.8k
 image: '/images/community_extensions/social_preview/preview_community_extension_lance_conversion.png'
 layout: community_extension_doc
 ---

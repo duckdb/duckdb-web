@@ -52,7 +52,7 @@ Hence, the SQL statement `FROM 'services-2023.csv.gz';` is a shorthand for `SELE
 
 * Third, the query creates a table called `services` and populates it with the result from the CSV reader. This is achieved using a [`CREATE TABLE ... AS` statement]({% link docs/2.0/sql/statements/create_table.md %}#create-table--as-select-ctas).
 
-Using [DuckDB v0.10.3]({% link install/index.html %}), loading the dataset takes approximately 5&nbsp;seconds on an M2 MacBook Pro. To check the amount of data loaded, we can run the following query which [pretty-prints]({% link docs/2.0/sql/functions/text.md %}#print-numbers-with-thousand-separators) the number of rows in the `services` table:
+Using [DuckDB v0.10.3]({% link docs/2.0/installation.html %}), loading the dataset takes approximately 5&nbsp;seconds on an M2 MacBook Pro. To check the amount of data loaded, we can run the following query which [pretty-prints]({% link docs/2.0/sql/functions/text.md %}#print-numbers-with-thousand-separators) the number of rows in the `services` table:
 
 ```sql
 SELECT format('{:,}', count(*)) AS num_services
@@ -130,7 +130,7 @@ The `arg_max()` function only helps us find the top-1 value but it is not suffic
 ### Using a Window Function (`OVER`)
 
 DuckDB has extensive support for SQL features, including [window functions]({% link docs/2.0/sql/functions/window_functions.md %}) and we can use the [`rank()` function]({% link docs/2.0/sql/functions/window_functions.md %}#rank) to find top-k values.
-Additionally, we use [`make_date`]({% link docs/2.0/sql/functions/date.md %}#make_dateyear-month-day) to reconstruct the date, [`strftime`]({% link docs/2.0/sql/functions/timestamptz.md %}#strftimetimestamptz-format) to turn it into the month's name and [`array_agg`]({% link docs/2.0/sql/functions/aggregates.md %}#array_aggarg):
+Additionally, we use [`make_date`]({% link docs/2.0/sql/functions/date.md %}#make_dateyear-month-day) to reconstruct the date, [`strftime`]({% link docs/2.0/sql/functions/timestamptz.md %}#strftimetimestamptz-format) to turn it into the month's name, and [`array_agg`]({% link docs/2.0/sql/functions/aggregates.md %}#array_aggarg):
 
 ```sql
 SELECT month, month_name, array_agg(station) AS top3_stations

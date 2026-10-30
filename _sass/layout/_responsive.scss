@@ -709,23 +709,8 @@
 	}
 	
 	body.installation {
-		.selection-options {
-			gap: 10px;
-	
-			.option {
-				height: 54px;
-				padding: 8px;
-	
-				.symbol {
-					width: 36px;
-					height: 36px;
-	
-					img {
-						max-width: 16px;
-						max-height: 16px;
-					}
-				}
-			}
+		.selection-foldout {
+			padding: 16px;
 		}
 	
 		.installation-instructions {
@@ -737,10 +722,6 @@
 			#result .more {
 				gap: 15px;
 			}
-		}
-	
-		.selection-head h3 .selected {
-			margin-left: 15px;
 		}
 	
 		.shainfo {

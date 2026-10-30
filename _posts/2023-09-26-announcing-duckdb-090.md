@@ -17,7 +17,7 @@ tag: release
 
 The DuckDB team is happy to announce the latest DuckDB release (0.9.0). This release is named Undulata after the [Yellow-billed duck](https://en.wikipedia.org/wiki/Yellow-billed_duck) native to Africa.
 
-To install the new version, please visit the [installation guide]({% link install/index.html %}). The full release notes can be found on [GitHub](https://github.com/duckdb/duckdb/releases/tag/v0.9.0).
+To install the new version, please visit the [installation guide]({% link docs/2.0/installation.html %}). The full release notes can be found on [GitHub](https://github.com/duckdb/duckdb/releases/tag/v0.9.0).
 
 ## What's New in 0.9.0
 
@@ -122,7 +122,7 @@ trent005 -> 500tnert
 
 By reducing the size of query intermediates, we can prevent/reduce spilling data to disk, reducing the need for costly I/O operations, thereby improving query performance.
 
-**Window Function Performance Improvements ([#7831](https://github.com/duckdb/duckdb/pull/7831), [#7996](https://github.com/duckdb/duckdb/pull/7996), [#8050](https://github.com/duckdb/duckdb/pull/8050), [#8491](https://github.com/duckdb/duckdb/pull/8491)).** This release features many improvements to the performance of Window functions due to improved vectorization of the code, more re-use of partial aggregates and improved parallelism through work stealing of tasks. As a result, performance of [Window functions has improved significantly, particularly in scenarios where there are no or few partitions](https://github.com/duckdb/duckdb/issues/7809#issuecomment-1679387022).
+**Window Function Performance Improvements ([#7831](https://github.com/duckdb/duckdb/pull/7831), [#7996](https://github.com/duckdb/duckdb/pull/7996), [#8050](https://github.com/duckdb/duckdb/pull/8050), [#8491](https://github.com/duckdb/duckdb/pull/8491)).** This release features many improvements to the performance of Window functions due to improved vectorization of the code, more re-use of partial aggregates, and improved parallelism through work stealing of tasks. As a result, performance of [Window functions has improved significantly, particularly in scenarios where there are no or few partitions](https://github.com/duckdb/duckdb/issues/7809#issuecomment-1679387022).
 
 ```sql
 SELECT
@@ -145,7 +145,7 @@ FROM tripdata;
 
 [**Vacuuming of Deleted Row Groups**](https://github.com/duckdb/duckdb/pull/7794). Starting with this release, when deleting data using `DELETE` statements, entire row groups that are deleted will be automatically cleaned up. Support is also added to [truncate the database file on checkpoint](https://github.com/duckdb/duckdb/pull/7824) which allows the database file to be reduced in size after data is deleted. Note that this only occurs if the deleted row groups are located at the end of the file. The system does not yet move around data in order to reduce the size of the file on disk. Instead, free blocks earlier on in the file are re-used to store later data.
 
-**Index Storage Improvements ([#7930](https://github.com/duckdb/duckdb/pull/7930), [#8112](https://github.com/duckdb/duckdb/pull/8112), [#8437](https://github.com/duckdb/duckdb/pull/8437), [#8703](https://github.com/duckdb/duckdb/pull/8703))**. Many improvements have been made to both the in-memory footprint, and the on-disk footprint of ART indexes. In particular for indexes created to maintain `PRIMARY KEY`, `UNIQUE` or `FOREIGN KEY` constraints the storage and in-memory footprint is drastically reduced.
+**Index Storage Improvements ([#7930](https://github.com/duckdb/duckdb/pull/7930), [#8112](https://github.com/duckdb/duckdb/pull/8112), [#8437](https://github.com/duckdb/duckdb/pull/8437), [#8703](https://github.com/duckdb/duckdb/pull/8703))**. Many improvements have been made to both the in-memory footprint, and the on-disk footprint of ART indexes. In particular for indexes created to maintain `PRIMARY KEY`, `UNIQUE`, or `FOREIGN KEY` constraints the storage and in-memory footprint is drastically reduced.
 
 ```sql
 CREATE TABLE integers (i INTEGER PRIMARY KEY);

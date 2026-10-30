@@ -8,7 +8,7 @@ excerpt: |
 extension:
   name: pql
   description: Predictive queries as SQL. TRAIN a model on the tables you already have, PREDICT with it, BACKTEST it.
-  version: 0.1.0
+  version: 0.2.0
   language: C++
   build: cmake
   license: MIT
@@ -17,8 +17,8 @@ extension:
 
 repo:
   github: Guepard-Corp/duckdb-pql
-  variegata: 251ef707575e54d38261f0e4a7b7bbcc89f3bbf0
-  ref: 08756a401016a325e80685170a7e1cd4968bee7b
+  variegata: 87692e362ebb0a08cc1f880ce8d44feac1f79239
+  ref: 2ec718717aae50a9af8ee9f26a52d93e5633cbb0
 
 docs:
   hello_world: |
@@ -174,10 +174,10 @@ docs:
       features, leakage, the two model architectures.
     - Issues and questions: https://github.com/Guepard-Corp/duckdb-pql/issues
 
-extension_star_count: 19
-extension_star_count_pretty: 19
-extension_download_count: 14531
-extension_download_count_pretty: 14.5k
+extension_star_count: 24
+extension_star_count_pretty: 24
+extension_download_count: 16741
+extension_download_count_pretty: 16.7k
 image: '/images/community_extensions/social_preview/preview_community_extension_pql.png'
 layout: community_extension_doc
 ---

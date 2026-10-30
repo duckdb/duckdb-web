@@ -10,7 +10,7 @@ redirect_from:
 title: C++ API
 ---
 
-> Installation To use the DuckDB C++ API, download the [`libduckdb` archive]({% link install/index.html %}?environment=c) for your platform.
+> Installation To use the DuckDB C++ API, download the [`libduckdb` archive]({% link docs/2.0/installation.html %}?environment=c) for your platform.
 >
 > The latest stable version of the DuckDB C++ API is {{ site.latest_duckdb_version }}.
 
@@ -20,11 +20,11 @@ title: C++ API
 
 ## Installation
 
-The DuckDB C++ API can be installed as part of the `libduckdb` packages. Please see the [installation page]({% link install/index.html %}?environment=c) for details. Starting with DuckDB 2.0, using the C++ API requires a [C++17 compiler]({% link docs/2.0/dev/building/overview.md %}#prerequisites).
+The DuckDB C++ API can be installed as part of the `libduckdb` packages. Please see the [installation page]({% link docs/2.0/installation.html %}?environment=c) for details. Starting with DuckDB 2.0, using the C++ API requires a [C++17 compiler]({% link docs/2.0/dev/building/overview.md %}#prerequisites).
 
 ## Basic API Usage
 
-DuckDB implements a custom C++ API. This is built around the abstractions of a database instance (`DuckDB` class), multiple `Connection`s to the database instance and `QueryResult` instances as the result of queries. The header file for the C++ API is `duckdb.hpp`.
+DuckDB implements a custom C++ API. This is built around the abstractions of a database instance (`DuckDB` class), multiple `Connection`s to the database instance, and `QueryResult` instances as the result of queries. The header file for the C++ API is `duckdb.hpp`.
 
 ### Startup & Shutdown
 
@@ -113,4 +113,4 @@ std::unique_ptr<QueryResult> result = prepare->Execute(12);
 
 ### UDF API
 
-> Deprecated The `Connection` methods `CreateScalarFunction()`, `CreateVectorizedFunction()` and `CreateAggregateFunction()` were removed in DuckDB 2.0. To define user-defined functions, use the [scalar function interface of the C API]({% link docs/2.0/clients/c/api.md %}#scalar-functions) or write an [extension]({% link docs/2.0/extensions/overview.md %}).
+> Deprecated The `Connection` methods `CreateScalarFunction()`, `CreateVectorizedFunction()`, and `CreateAggregateFunction()` were removed in DuckDB 2.0. To define user-defined functions, use the [scalar function interface of the C API]({% link docs/2.0/clients/c/api.md %}#scalar-functions) or write an [extension]({% link docs/2.0/extensions/overview.md %}).

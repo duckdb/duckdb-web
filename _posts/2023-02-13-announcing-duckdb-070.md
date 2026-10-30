@@ -16,7 +16,7 @@ tag: release
 
 The DuckDB team is happy to announce the latest DuckDB version (0.7.0) has been released. This release of DuckDB is named “Labradorius” after the [Labrador Duck (Camptorhynchus labradorius)](https://en.wikipedia.org/wiki/Labrador_duck) that was native to North America.
 
-To install the new version, please visit the [installation guide]({% link install/index.html %}). The full release notes can be found on [GitHub](https://github.com/duckdb/duckdb/releases/tag/v0.7.0).
+To install the new version, please visit the [installation guide]({% link docs/2.0/installation.html %}). The full release notes can be found on [GitHub](https://github.com/duckdb/duckdb/releases/tag/v0.7.0).
 
 ## What's in 0.7.0
 
@@ -93,7 +93,7 @@ INSERT INTO sqlite.tbl VALUES (1), (2), (3);
 SELECT * FROM sqlite.tbl;
 ```
 
-Using this, SQLite database files can be attached, queried and modified as if they are native DuckDB database files. This allows data to be quickly transferred between SQLite and DuckDB – and allows you to use DuckDB's rich SQL dialect to query data stored in SQLite tables.
+Using this, SQLite database files can be attached, queried, and modified as if they are native DuckDB database files. This allows data to be quickly transferred between SQLite and DuckDB – and allows you to use DuckDB's rich SQL dialect to query data stored in SQLite tables.
 
 ## New SQL Features
 

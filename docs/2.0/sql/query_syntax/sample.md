@@ -52,6 +52,6 @@ USING SAMPLE 10 ROWS;
 
 ## Placement in a Query
 
-The statement above that the sample clause is "applied right after anything in the `FROM` clause" describes the *logical* point at which sampling takes effect, not where the clause is written. Syntactically, the `USING SAMPLE` clause appears at the end of the `SELECT` statement body: after the `WHERE`, `GROUP BY`, `HAVING`, and [`QUALIFY`]({% link docs/2.0/sql/query_syntax/qualify.md %}) clauses, and before `ORDER BY` and `LIMIT`. So it is written after grouping and filtering, but it is *applied* to the result of the `FROM` clause before those operations run.
+The statement above that the sample clause is “applied right after anything in the `FROM` clause” describes the *logical* point at which sampling takes effect, not where the clause is written. Syntactically, the `USING SAMPLE` clause appears at the end of the `SELECT` statement body: after the `WHERE`, `GROUP BY`, `HAVING`, and [`QUALIFY`]({% link docs/2.0/sql/query_syntax/qualify.md %}) clauses, and before `ORDER BY` and `LIMIT`. So it is written after grouping and filtering, but it is *applied* to the result of the `FROM` clause before those operations run.
 
 To sample an individual table expression rather than the result of the entire `FROM` clause, use the `TABLESAMPLE` clause, which is written directly after the table expression it applies to. See [Table Samples]({% link docs/2.0/sql/query_syntax/samples.md %}#table-samples).

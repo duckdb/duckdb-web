@@ -6,6 +6,7 @@ redirect_from:
 - /docs/current/clients/wasm/troubleshoot
 - /docs/lts/clients/wasm/troubleshoot
 - /docs/preview/clients/wasm/troubleshoot
+- /docs/stable/clients/wasm/troubleshoot
 title: Troubleshoot
 ---
 

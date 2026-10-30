@@ -8,6 +8,7 @@ redirect_from:
 - /docs/lts/guides/database_integration/mysql
 - /docs/preview/guides/database_integration/mysql
 title: MySQL Import
+how_to_topic: database-integration
 ---
 
 To run a query directly on a running MySQL database, the [`mysql` extension]({% link docs/2.0/core_extensions/mysql.md %}) is required.

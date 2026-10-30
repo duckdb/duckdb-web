@@ -14,7 +14,7 @@ and use system resources. Like any powerful tool, these capabilities require app
 working with sensitive data or in shared environments.
 
 This page documents DuckDB's security model and security-related settings. The right configuration depends on your use case, environment, and threat model.
-If you plan to embed DuckDB in your application, also consult the ["Embedding DuckDB"]({% link docs/2.0/operations_manual/securing_duckdb/embedding_duckdb.md %}) page.
+If you plan to embed DuckDB in your application, also consult the [“Embedding DuckDB”]({% link docs/2.0/operations_manual/securing_duckdb/embedding_duckdb.md %}) page.
 
 ## Untrusted Input
 
@@ -99,7 +99,7 @@ relied upon as comprehensive security mechanisms in all configurations. These se
 measures to limit the impact of potential security issues, but they cannot provide complete protection against all
 attack vectors, especially when executing untrusted SQL. For robust security when dealing with untrusted input, combine
 these settings with proper sandboxing at the operating system or container level, as described in
-the ["Untrusted SQL Input"](#untrusted-sql-input) section.
+the [“Untrusted SQL Input”](#untrusted-sql-input) section.
 
 ### Safe Mode (CLI)
 
@@ -206,7 +206,7 @@ Queries can access the secrets defined in the Secrets Manager. For example, if t
 
 Similarly to other SQL databases, it's recommended to use [prepared statements]({% link docs/2.0/sql/query_syntax/prepared_statements.md %}) in DuckDB to prevent [SQL injection](https://en.wikipedia.org/wiki/SQL_injection).
 
-> Important Prepared statements protect against SQL injection when **you control the query structure** but accept **untrusted data values** (e.g., user-provided search terms or IDs). If users can supply the SQL query itself, this is equivalent to allowing them to run arbitrary code – see ["Untrusted SQL Input"](#untrusted-sql-input).
+> Important Prepared statements protect against SQL injection when **you control the query structure** but accept **untrusted data values** (e.g., user-provided search terms or IDs). If users can supply the SQL query itself, this is equivalent to allowing them to run arbitrary code – see [“Untrusted SQL Input”](#untrusted-sql-input).
 
 **Therefore, avoid concatenating strings for queries:**
 

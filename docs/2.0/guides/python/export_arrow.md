@@ -7,13 +7,14 @@ redirect_from:
 - /docs/lts/guides/python/export_arrow
 - /docs/preview/guides/python/export_arrow
 title: Export to Apache Arrow
+how_to_topic: python
 ---
 
 All results of a query can be exported to an [Apache Arrow Table](https://arrow.apache.org/docs/python/generated/pyarrow.Table.html) using the `to_arrow_table` function. Alternatively, results can be returned as a [RecordBatchReader](https://arrow.apache.org/docs/python/generated/pyarrow.RecordBatchReader.html) using the `to_arrow_reader` function and results can be read one batch at a time.
 
-Call these functions on the relation that `duckdb.sql`, `con.sql` or DuckDB's [Relational API]({% link docs/2.0/guides/python/relational_api_pandas.md %}) returns: its reader streams the result. On a `con.execute()` result they first copy all rows and warn with a `UserWarning`, and the reader does not stream. While a reader is partly read, other queries on its connection raise a `ResourceInUseException`. Read the reader to the end or close it first, or run the other queries on a cursor from `con.cursor()`.
+Call these functions on the relation that `duckdb.sql`, `con.sql`, or DuckDB's [Relational API]({% link docs/2.0/guides/python/relational_api_pandas.md %}) returns: its reader streams the result. On a `con.execute()` result they first copy all rows and warn with a `UserWarning`, and the reader does not stream. While a reader is partly read, other queries on its connection raise a `ResourceInUseException`. Read the reader to the end or close it first, or run the other queries on a cursor from `con.cursor()`.
 
-> Deprecated On relations, `fetch_arrow_table`, `fetch_record_batch` and `fetch_arrow_reader` are deprecated aliases of `to_arrow_table` and `to_arrow_reader`. Results of `con.execute()` and the `duckdb` module no longer have them.
+> Deprecated On relations, `fetch_arrow_table`, `fetch_record_batch`, and `fetch_arrow_reader` are deprecated aliases of `to_arrow_table` and `to_arrow_reader`. Results of `con.execute()` and the `duckdb` module no longer have them.
 
 ## Export to an Arrow Table
 
@@ -78,7 +79,7 @@ for batch in arrow_batch_reader:
 
 ## Export through the Arrow PyCapsule Interface
 
-A relation implements `__arrow_c_stream__` of the [Arrow PyCapsule interface](https://arrow.apache.org/docs/format/CDataInterface/PyCapsuleInterface.html), so libraries that accept an Arrow stream read it directly: `pyarrow.table(rel)`, `pyarrow.RecordBatchReader.from_stream(rel)` and `polars.DataFrame(rel)`. Polars reads it this way even without `pyarrow` installed.
+A relation implements `__arrow_c_stream__` of the [Arrow PyCapsule interface](https://arrow.apache.org/docs/format/CDataInterface/PyCapsuleInterface.html), so libraries that accept an Arrow stream read it directly: `pyarrow.table(rel)`, `pyarrow.RecordBatchReader.from_stream(rel)`, and `polars.DataFrame(rel)`. Polars reads it this way even without `pyarrow` installed.
 
 ```python
 import duckdb

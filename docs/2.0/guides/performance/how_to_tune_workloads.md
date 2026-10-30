@@ -8,6 +8,7 @@ redirect_from:
 - /docs/lts/guides/performance/how_to_tune_workloads
 - /docs/preview/guides/performance/how_to_tune_workloads
 title: Tuning Workloads
+how_to_topic: performance
 ---
 
 DuckDB aims to perform well out of the box, so most workloads do not require any tuning.
@@ -122,7 +123,7 @@ Note that it is not a primary design goal for DuckDB to quickly execute many sma
 
 ## Querying Remote Files
 
-Starting with version 2.0, DuckDB uses [asynchronous I/O]({% link docs/2.0/data/io.md %}#asynchronous-io) when reading Parquet files, uncompressed, seekable UTF-8 CSV files and DuckDB database files (e.g., attached over HTTPS or S3), as well as when Parquet and CSV files are read through data lake formats such as DuckLake. For these formats, DuckDB keeps multiple requests in flight automatically, so there is no need to raise the number of threads. If the defaults do not saturate your network bandwidth, tune the [`async_threads` and `read_ahead_depth` settings]({% link docs/2.0/data/io.md %}#tuning) instead.
+Starting with version 2.0, DuckDB uses [asynchronous I/O]({% link docs/2.0/data/io.md %}#asynchronous-io) when reading Parquet files, uncompressed, seekable UTF-8 CSV files, and DuckDB database files (e.g., attached over HTTPS or S3), as well as when Parquet and CSV files are read through data lake formats such as DuckLake. For these formats, DuckDB keeps multiple requests in flight automatically, so there is no need to raise the number of threads. If the defaults do not saturate your network bandwidth, tune the [`async_threads` and `read_ahead_depth` settings]({% link docs/2.0/data/io.md %}#tuning) instead.
 
 Other formats, such as JSON files and compressed CSV files, still use synchronous I/O: each DuckDB thread can make at most one HTTP request at a time. If a query on such files must make many small requests over the network, increasing DuckDB's [`threads` setting]({% link docs/2.0/configuration/pragmas.md %}#threads) to larger than the total number of CPU cores (approx. 2-5 times CPU cores) can improve parallelism and performance.
 
@@ -146,7 +147,7 @@ Starting with version 1.3.0, DuckDB supports caching remote data. To inspect the
 FROM duckdb_external_file_cache();
 ```
 
-The external file cache follows the `Cache-Control` headers of HTTP responses: data from a response marked `no-store`, `no-cache` or `private`, or from a response that is already stale (e.g., `max-age=0`), is not reused. Object stores often send such headers on authenticated reads. For example, Google Cloud Storage returns `Cache-Control: private, max-age=0` for every read of a non-public object, so by default, these files are read from the object store again on every query.
+The external file cache follows the `Cache-Control` headers of HTTP responses: data from a response marked `no-store`, `no-cache`, or `private`, or from a response that is already stale (e.g., `max-age=0`), is not reused. Object stores often send such headers on authenticated reads. For example, Google Cloud Storage returns `Cache-Control: private, max-age=0` for every read of a non-public object, so by default, these files are read from the object store again on every query.
 
 To reuse cached data regardless of these headers, set `enable_external_file_cache` explicitly, even though it is enabled by default:
 

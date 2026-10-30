@@ -3,6 +3,8 @@ layout: post
 title: "Integrating Analytics with Relational Databases"
 authors:
   - Mark Raasveldt
+thumb: "/images/library/thumbs/integrating-analytics-with-relational-databases.jpg"
+image: "/images/library/thumbs/integrating-analytics-with-relational-databases.jpg"
 tag: book
 category: core
 excerpt: ""

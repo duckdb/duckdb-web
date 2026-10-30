@@ -46,7 +46,7 @@ SELECT 1 = '1.1';
 
 Besides the standard comparison operators there are also the `BETWEEN` and `IS (NOT) NULL` operators. These behave much like operators, but have special syntax mandated by the SQL standard. They are shown in the table below.
 
-Note that `BETWEEN` and `NOT BETWEEN` are only equivalent to the examples below in the cases where both `a`, `x` and `y` are of the same type, as `BETWEEN` will cast all of its inputs to the same type.
+Note that `BETWEEN` and `NOT BETWEEN` are only equivalent to the examples below in the cases where both `a`, `x`, and `y` are of the same type, as `BETWEEN` will cast all of its inputs to the same type.
 
 | Predicate | Description |
 |:---|:---|

@@ -172,7 +172,7 @@ SET default_collation = 'nocase';
 
 ## Default Ordering for NULLs
 
-Set the default ordering for NULLs to be either `NULLS_FIRST`, `NULLS_LAST`, `NULLS_FIRST_ON_ASC_LAST_ON_DESC` or `NULLS_LAST_ON_ASC_FIRST_ON_DESC`:
+Set the default ordering for NULLs to be either `NULLS_FIRST`, `NULLS_LAST`, `NULLS_FIRST_ON_ASC_LAST_ON_DESC`, or `NULLS_LAST_ON_ASC_FIRST_ON_DESC`:
 
 ```sql
 SET default_null_order = 'NULLS_FIRST';
@@ -614,7 +614,7 @@ DuckDB follows IEEE floating-point operation semantics. If you would like to tur
 SET ieee_floating_point_ops = false;
 ```
 
-In this case, floating point division by zero (e.g., `1.0 / 0.0`, `0.0 / 0.0` and `-1.0 / 0.0`) will all return `NULL`.
+In this case, floating point division by zero (e.g., `1.0 / 0.0`, `0.0 / 0.0`, and `-1.0 / 0.0`) will all return `NULL`.
 
 ## Query Verification (for Development)
 

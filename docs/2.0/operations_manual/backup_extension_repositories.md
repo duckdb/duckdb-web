@@ -4,6 +4,7 @@ redirect_from:
 - /docs/current/operations_manual/backup_extension_repositories
 - /docs/lts/operations_manual/backup_extension_repositories
 - /docs/preview/operations_manual/backup_extension_repositories
+- /docs/stable/operations_manual/backup_extension_repositories
 title: Backup Extension Repositories
 ---
 

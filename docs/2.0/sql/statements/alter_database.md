@@ -1,6 +1,8 @@
 ---
 layout: docu
 railroad: statements/alter_database.js
+redirect_from:
+- /docs/stable/sql/statements/alter_database
 title: ALTER DATABASE Statement
 ---
 

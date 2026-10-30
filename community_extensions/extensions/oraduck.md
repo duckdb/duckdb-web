@@ -68,8 +68,8 @@ docs:
 
 extension_star_count: 3
 extension_star_count_pretty: 3
-extension_download_count: 5831
-extension_download_count_pretty: 5.8k
+extension_download_count: 7876
+extension_download_count_pretty: 7.9k
 image: '/images/community_extensions/social_preview/preview_community_extension_oraduck.png'
 layout: community_extension_doc
 ---

@@ -31,7 +31,7 @@ let info = conn.get_profiling_info().expect("profiling should be enabled");
 println!("profiled children: {}", info.children.len());
 ```
 
-`get_profiling_info()` returns an `Option<ProfilingInfo>`, which is `None` when profiling is not enabled. `ProfilingInfo` is a tree whose metrics are grouped and named in lowercase (see the [metrics list]({% link docs/2.0/dev/metrics.md %})): the root's children are the root plan operator, with metrics such as `type`, `timing` and `intermediate_rows`, followed by one node per metric group, such as `query` with `total_time`. Read a node's metrics through its `metrics` map and its children through `children`.
+`get_profiling_info()` returns an `Option<ProfilingInfo>`, which is `None` when profiling is not enabled. `ProfilingInfo` is a tree whose metrics are grouped and named in lowercase (see the [metrics list]({% link docs/2.0/dev/metrics.md %})): the root's children are the root plan operator, with metrics such as `type`, `timing`, and `intermediate_rows`, followed by one node per metric group, such as `query` with `total_time`. Read a node's metrics through its `metrics` map and its children through `children`.
 
 ## Interrupting Queries
 

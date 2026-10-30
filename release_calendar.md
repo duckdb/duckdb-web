@@ -7,7 +7,6 @@ redirect_from:
 - /dev/release-calendar
 - /docs/dev/release_calendar
 - /docs/current/dev/release_calendar
-- /docs/current/dev/release_calendar
 title: Release Calendar
 body_class: release-calendar blog_typography post
 max_page_width: medium
@@ -24,14 +23,14 @@ while patch versions mostly contain bugfixes.
 
 ## Upcoming Releases
 
-The planned dates of upcoming DuckDB releases are shown below.
+The planned dates of upcoming DuckDB releases and related logistics (e.g., feature freezes) are shown below.
 **Please note that these dates are tentative** and DuckDB maintainers may decide to push back release dates to ensure the stability and quality of releases.
 
 <!-- markdownlint-disable MD055 MD056 MD058 -->
 
 {% if site.data.upcoming_releases.size > 0 %}
-| Date | Version |
-|:-----|--------:|
+| Date | Event |
+|:-----|:------|
 {%- for release in site.data.upcoming_releases %}
 | {{ release.start_date }} | {{ release.title }} |
 {%- endfor %}

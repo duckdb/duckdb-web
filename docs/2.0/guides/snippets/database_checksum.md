@@ -4,7 +4,9 @@ redirect_from:
 - /docs/current/guides/snippets/database_checksum
 - /docs/lts/guides/snippets/database_checksum
 - /docs/preview/guides/snippets/database_checksum
+- /docs/stable/guides/snippets/database_checksum
 title: Calculating a Database Checksum
+how_to_topic: tools-meta
 ---
 
 To calculate a database checksum, use a commutative operation such as `bit_xor` on all columns, all rows, and all tables.

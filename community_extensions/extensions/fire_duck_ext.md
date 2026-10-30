@@ -8,17 +8,18 @@ excerpt: |
 extension:
   name: fire_duck_ext
   description: Query Google Cloud Firestore directly from DuckDB using SQL
-  version: 0.4.0
+  version: 0.4.1
   language: C++
   build: cmake
   license: MIT
   excluded_platforms: "windows_amd64_mingw"
+  opt_in_platforms: "windows_arm64"
   maintainers:
     - BorisBesky
 
 repo:
   github: BorisBesky/fire_duck_ext
-  ref: 89f1537c55ec894c7f2c79ca726d2f028f68fdca
+  ref: e9c376b107c02e456aa7f36175657f0c193e6505
 
 docs:
   hello_world: |
@@ -85,15 +86,15 @@ docs:
     The extension also builds and runs under DuckDB-WASM using API-key or
     Firebase-user auth (service-account auth needs OpenSSL and is native-only).
 
-    Builds for DuckDB 2.0 and DuckDB 1.5.
+    Builds for DuckDB 2.0 (including Windows ARM64) and DuckDB 1.5.
 
     See the project README for the parameter and settings reference, type
     mapping, pushdown semantics, and platform notes.
 
 extension_star_count: 4
 extension_star_count_pretty: 4
-extension_download_count: 19224
-extension_download_count_pretty: 19.2k
+extension_download_count: 23577
+extension_download_count_pretty: 23.6k
 image: '/images/community_extensions/social_preview/preview_community_extension_fire_duck_ext.png'
 layout: community_extension_doc
 ---
@@ -110,7 +111,7 @@ This table covers all DuckDB releases that have not reached [end-of-life](https:
 | macOS AMD64 | ✅ | ❌ | ✅ | ✅ | ✅ |
 | macOS ARM64 | ✅ | ❌ | ✅ | ✅ | ✅ |
 | Windows AMD64 | ✅ | ❌ | ✅ | ✅ | ✅ |
-| Windows ARM64 | ❌ | ❌ | ❌ | ❌ | ❌ |
+| Windows ARM64 | ❌ | ❌ | ❌ | ❌ | ✅ |
 | WebAssembly | ✅ | ❌ | ✅ | ✅ | ✅ |
 
 ### Installing and Loading

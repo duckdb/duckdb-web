@@ -37,8 +37,8 @@ docs:
 
 extension_star_count: 0
 extension_star_count_pretty: 0
-extension_download_count: 3041
-extension_download_count_pretty: 3.0k
+extension_download_count: 3809
+extension_download_count_pretty: 3.8k
 image: '/images/community_extensions/social_preview/preview_community_extension_interlis.png'
 layout: community_extension_doc
 ---

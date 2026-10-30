@@ -8,7 +8,7 @@ excerpt: |
 extension:
   name: prql
   description: Support for PRQL, the Pipelined Relational Query Language
-  version: 1.0.0
+  version: 1.1.0
   language: C++
   build: cmake
   requires_toolchains: "rust"
@@ -19,7 +19,8 @@ extension:
 
 repo:
   github: ywelsch/duckdb-prql
-  ref: 17368b6881efcd7a045dcbc26fc617edfaf2fd09
+  ref: 96562b93570a6ec9be8fac10b7cc0af91578b55c
+  variegata: 17368b6881efcd7a045dcbc26fc617edfaf2fd09
 
 docs:
   hello_world: |
@@ -52,8 +53,8 @@ docs:
 
 extension_star_count: 333
 extension_star_count_pretty: 333
-extension_download_count: 17507
-extension_download_count_pretty: 17.5k
+extension_download_count: 18869
+extension_download_count_pretty: 18.9k
 image: '/images/community_extensions/social_preview/preview_community_extension_prql.png'
 layout: community_extension_doc
 ---
@@ -65,13 +66,13 @@ This table covers all DuckDB releases that have not reached [end-of-life](https:
 
 | Platform | 1.4.4 | 1.4.5 | 1.5.5 | 1.5.6 | 2.0.0 |
 | :--- | :---: | :---: | :---: | :---: | :---: |
-| Linux AMD64 | ✅ | ❌ | ✅ | ✅ | ❌ |
-| Linux ARM64 | ✅ | ❌ | ✅ | ✅ | ❌ |
+| Linux AMD64 | ✅ | ❌ | ✅ | ✅ | ✅ |
+| Linux ARM64 | ✅ | ❌ | ✅ | ✅ | ✅ |
 | macOS AMD64 | ✅ | ❌ | ✅ | ✅ | ❌ |
-| macOS ARM64 | ✅ | ❌ | ✅ | ✅ | ❌ |
-| Windows AMD64 | ✅ | ❌ | ✅ | ✅ | ❌ |
+| macOS ARM64 | ✅ | ❌ | ✅ | ✅ | ✅ |
+| Windows AMD64 | ✅ | ❌ | ✅ | ✅ | ✅ |
 | Windows ARM64 | ❌ | ❌ | ❌ | ❌ | ❌ |
-| WebAssembly | ✅ | ❌ | ✅ | ✅ | ❌ |
+| WebAssembly | ✅ | ❌ | ✅ | ✅ | ✅ |
 
 ### Installing and Loading
 ```sql
@@ -111,6 +112,8 @@ This extension does not add any types.
 
 <div class="extension_settings_table"></div>
 
-This extension does not add any settings.
+|      name      |                       description                       | input_type | scope  | aliases | typed_value |
+|----------------|---------------------------------------------------------|------------|--------|---------|-------------|
+| temp_directory | Set the directory to which temporary files are written. | VARCHAR    | GLOBAL | []      | post.db.tmp |
 
 

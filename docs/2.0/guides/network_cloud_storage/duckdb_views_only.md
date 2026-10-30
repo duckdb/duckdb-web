@@ -4,7 +4,9 @@ redirect_from:
 - /docs/current/guides/network_cloud_storage/duckdb_views_only
 - /docs/lts/guides/network_cloud_storage/duckdb_views_only
 - /docs/preview/guides/network_cloud_storage/duckdb_views_only
+- /docs/stable/guides/network_cloud_storage/duckdb_views_only
 title: Share a DuckDB Database That Only Stores Views
+how_to_topic: network-cloud-storage
 ---
 
 A DuckDB database file does not have to contain any data: it can store only [view]({% link docs/2.0/sql/statements/create_view.md %}) definitions that point at remote data such as Parquet files on object storage. The resulting file is only a few hundred kilobytes, yet it behaves like a shared catalog: anyone who attaches it sees a set of named, ready-to-query relations, while the underlying data stays in its original location and format.

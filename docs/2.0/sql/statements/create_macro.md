@@ -53,7 +53,7 @@ Macros may declare parameters. The parameter declarations appear as a comma-sepa
 * A parameter can optionally specify a default value. This is done with the assignment operator `:=`, followed by the expression that is to be used as default value. 
 * The default value expression is in principle evaluated at definition-time - NOT at run-time. (There are a few exceptions, like `CURRENT_SCHEMA`. But it's best not to rely on that: if you need a default value to be dynamic, use a well-known value like `NULL` as default and use conditional logic in the expression to produce the run-time value).
 * Specifying a default value expression effectively makes the parameter optional: when the macro is called, the DuckDb binder will find candidate signatures based on passed parameters, but backfilled by signatures that specify default values for missing parameters.  
-* A parameter that specifies a default value cannot appear before a definition of a parameter that does not have a default value. In other words, parameters without default values have to be defined "in the front"; any parameters with default values appear "at the back".
+* A parameter that specifies a default value cannot appear before a definition of a parameter that does not have a default value. In other words, parameters without default values have to be defined “in the front”; any parameters with default values appear “at the back”.
 * Multiple parameter declarations are separated from one another with a comma.
 
 ### Overloading
@@ -87,7 +87,7 @@ Parameter values may be passed either positionally or by name.
 * Positional parameter passing means that only the value expression is passed;
 * In contrast to positional parameter passing, named parameter passing explicitly assigns the actual parameter value to a specific formal parameter. This is done by mentioning the parameter name followed by the assignment operator `:=`, followed by the parameter value expression. 
 * Note that some built-in functions also allow named parameters, but allow `=` as assignment operator. For macros, this won't work! Instead, the `=` is interpreted as comparison operator. This effectively turns the - intended - named parameter into a positional parameter passing the result of comparing the parameter name with the parameter value expression. 
-* If a macro call contains named parameters, then they must appear after any positional parameters. In other words, any positional parameters must appear "in the front"; while all named parameters must appear "at the back".
+* If a macro call contains named parameters, then they must appear after any positional parameters. In other words, any positional parameters must appear “in the front”; while all named parameters must appear “at the back”.
 * By definition, positional parameters are passed in the same order as they were declared. But named parameters can appear in any order (provided they appear after any of the positional parameters).
 
 ## Examples

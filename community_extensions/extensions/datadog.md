@@ -57,8 +57,8 @@ docs:
 
 extension_star_count: 3
 extension_star_count_pretty: 3
-extension_download_count: 10645
-extension_download_count_pretty: 10.6k
+extension_download_count: 11510
+extension_download_count_pretty: 11.5k
 image: '/images/community_extensions/social_preview/preview_community_extension_datadog.png'
 layout: community_extension_doc
 ---

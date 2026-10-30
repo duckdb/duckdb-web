@@ -5,6 +5,7 @@ redirect_from:
 - /docs/current/clients/tertiary_clients/php_pdo
 - /docs/lts/clients/tertiary_clients/php_pdo
 - /docs/preview/clients/tertiary_clients/php_pdo
+- /docs/stable/clients/tertiary_clients/php_pdo
 title: PHP Client (PDO)
 ---
 
@@ -17,7 +18,7 @@ title: PHP Client (PDO)
 [pdo_duckdb](https://github.com/thomas-0816/pdo-duckdb-php) is a native DuckDB database driver for the [PHP Data Objects (PDO)](https://www.php.net/manual/en/book.pdo.php) interface.
 
 Any application or framework compatible with PDO can directly use `pdo_duckdb`.\
-It is thread safe and fully tested with php-cli, php-fpm, mod_php, FrankenPHP (PHP-ZTS), TrueAsync and Swoole.
+It is thread safe and fully tested with php-cli, php-fpm, mod_php, FrankenPHP (PHP-ZTS), TrueAsync, and Swoole.
 
 As a native PHP extension, it is implemented in C/C++ and does not require PHP FFI or preloading.\
 The [release packages](https://github.com/thomas-0816/pdo-duckdb-php/releases/latest) contain pre-compiled binaries for all supported platforms and DuckDB is directly included.\
@@ -25,16 +26,16 @@ DuckDB extensions work the same way as they do in DuckDB CLI.
 
 Supported PHP versions: [8.2 or newer](https://www.php.net/supported-versions.php)
 
-Operating systems: Ubuntu 22+, Debian 12+, Fedora 42+, openSUSE 16+, AmazonLinux 2023+, Arch, Alma, Rocky, Alpine, Wolfi OS, Windows Server 2022+ (x64) and macOS 15+ (arm64)
+Operating systems: Ubuntu 22+, Debian 12+, Fedora 42+, openSUSE 16+, AmazonLinux 2023+, Arch, Alma, Rocky, Alpine, Wolfi OS, Windows Server 2022+ (x64), and macOS 15+ (arm64)
 
 All DuckDB types are supported:\
-Text, Numeric, Date, Time, Interval, JSON, Array, Struct, Map, List, Enum, Variant, Geometry, Union, Bitstring, Blob and Boolean
+Text, Numeric, Date, Time, Interval, JSON, Array, Struct, Map, List, Enum, Variant, Geometry, Union, Bitstring, Blob, and Boolean
 
 GitHub: [pdo-duckdb-php](https://github.com/thomas-0816/pdo-duckdb-php)
 
 Packagist: [pdo-duckdb-php](https://packagist.org/packages/thomas-0816/pdo-duckdb-php)
 
-## Installation and setup
+## Installation and Setup
 
 `pdo_duckdb` is fully compatible with the PHP Installer for Extensions ([PIE](https://github.com/php/pie)) and can be installed with:
 
@@ -58,7 +59,7 @@ php -r 'print_r((new PDO("duckdb::memory:"))->query("SELECT 42 as n")->fetch(PDO
 # )
 ```
 
-## Installation and load on demand
+## Installation and Load on Demand
 
 ```bash
 # DuckDB 1.x
@@ -82,7 +83,7 @@ Doctrine DBAL for DuckDB: [doctrine-dbal-duckdb](https://github.com/thomas-0816/
 
 ## Examples
 
-### Basic usage
+### Basic Usage
 
 ```php
 <?php
@@ -107,7 +108,7 @@ print_r($statement->fetchAll(PDO::FETCH_ASSOC));
 # )
 ```
 
-### Open databases from disk or in-memory
+### Open Databases from Disk or In-Memory
 
 ```php
 <?php
@@ -120,7 +121,7 @@ $db = new PDO('duckdb:/tmp/test.db'); // open database file from disk
 $db = new PDO('duckdb:/tmp/test.db', null, null, [PDO::DUCKDB_ATTR_CONFIG => ['access_mode' => 'read_only']]);
 ```
 
-### Read and write Parquet files
+### Read and Write Parquet Files
 
 ```php
 <?php
@@ -149,7 +150,7 @@ foreach ($db->query("SELECT * FROM '/tmp/table1.parquet'", PDO::FETCH_ASSOC) as 
 # )
 ```
 
-### Read CSV files
+### Read CSV Files
 
 ```php
 <?php
@@ -186,7 +187,7 @@ print_r($statement->fetchAll(PDO::FETCH_ASSOC));
 # )
 ```
 
-### Read JSON files
+### Read JSON Files
 
 ```php
 <?php
@@ -213,7 +214,7 @@ print_r($statement->fetchAll(PDO::FETCH_ASSOC));
 $db->exec("COPY (SELECT * FROM '/tmp/logs.json') TO '/tmp/logs_json.parquet' (COMPRESSION zstd)");
 ```
 
-### Use structured columns with a fixed schema
+### Use Structured Columns with a Fixed Schema
 
 ```php
 <?php
@@ -245,7 +246,7 @@ print_r($statement->fetch(PDO::FETCH_ASSOC));
 # )
 ```
 
-### Auto increment columns
+### Auto Increment Columns
 
 ```php
 <?php

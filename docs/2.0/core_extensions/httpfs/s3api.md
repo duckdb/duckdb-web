@@ -14,7 +14,7 @@ The `httpfs` extension supports reading/writing/[globbing](#globbing) files on o
 
 ## Platforms
 
-The `httpfs` filesystem is tested with [AWS S3](https://aws.amazon.com/s3/), [Minio](https://min.io/), [Google Cloud](https://cloud.google.com/storage/docs/interoperability) and [lakeFS](https://docs.lakefs.io/integrations/duckdb.html). Other services that implement the S3 API (such as [Cloudflare R2](https://www.cloudflare.com/en-gb/developer-platform/r2/), [SeaweedFS](https://github.com/seaweedfs/seaweedfs), and [Tigris](https://www.tigrisdata.com/)) should also work, but not all features may be supported.
+The `httpfs` filesystem is tested with [AWS S3](https://aws.amazon.com/s3/), [Minio](https://min.io/), [Google Cloud](https://cloud.google.com/storage/docs/interoperability), and [lakeFS](https://docs.lakefs.io/integrations/duckdb.html). Other services that implement the S3 API (such as [Cloudflare R2](https://www.cloudflare.com/en-gb/developer-platform/r2/), [SeaweedFS](https://github.com/seaweedfs/seaweedfs), and [Tigris](https://www.tigrisdata.com/)) should also work, but not all features may be supported.
 
 The following table shows which parts of the S3 API are required for each `httpfs` feature.
 
@@ -87,7 +87,7 @@ Below is a complete list of the supported parameters that can be used for both t
 | `VERIFY_SSL`                  | Whether to verify the SSL certificate of the server                                   | `S3`, `GCS`, `R2` | `BOOLEAN` | `true`                                      |
 | `ACCOUNT_ID`                  | The R2 account ID to use for generating the endpoint URL                              | `R2`              | `STRING`  | -                                           |
 | `KMS_KEY_ID`                  | AWS KMS (Key Management Service) key for Server Side Encryption S3                    | `S3`              | `STRING`  | -                                           |
-| `REQUESTER_PAYS`              | Allows use of "requester pays" S3 buckets                                             | `S3`              | `BOOLEAN` | `false`                                     |
+| `REQUESTER_PAYS`              | Allows use of “requester pays” S3 buckets                                             | `S3`              | `BOOLEAN` | `false`                                     |
 | `REFRESH`                     | Set to `auto` to periodically refresh credentials (see the [`aws` extension]({% link docs/2.0/core_extensions/aws.md %}#auto-refresh)) | `S3`, `GCS`, `R2` | `STRING`  | -                                           |
 
 ### Automatic Credential Refresh
@@ -202,7 +202,7 @@ FROM read_parquet('s3://⟨your-bucket⟩/*.parquet');
 
 This query matches all files in the root of the bucket with the [Parquet extension]({% link docs/2.0/data/parquet/overview.md %}).
 
-Several features for matching are supported, such as `*` to match any number of any character, `?` for any single character or `[0-9]` for a single character in a range of characters:
+Several features for matching are supported, such as `*` to match any number of any character, `?` for any single character, or `[0-9]` for a single character in a range of characters:
 
 ```sql
 SELECT count(*) FROM read_parquet('s3://⟨your-bucket⟩/folder*/100?/t[0-9].parquet');

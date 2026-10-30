@@ -34,7 +34,7 @@ DuckDB has supported reading Iceberg tables [since September 2023]({% post_url 2
 To connect to Apache Iceberg REST Catalogs in DuckDB,
 make sure you are running the **latest stable** DuckDB release (version 1.2.1).
 For our example steps, we'll use the DuckDB [CLI client]({% link docs/2.0/clients/overview.md %}).
-You can obtain this client from the [installation page]({% link install/index.html %}) and start it with:
+You can obtain this client from the [installation page]({% link docs/2.0/installation.html %}) and start it with:
 
 ```batch
 duckdb
@@ -53,7 +53,7 @@ FORCE INSTALL iceberg FROM core_nightly;
 With these extensions installed, your DuckDB is now capable of using Apache Iceberg REST Catalogs.
 Let's find some data.
 
-### Setting up an Amazon S3 Table Bucket
+### Setting Up an Amazon S3 Table Bucket
 
 (If you already have Iceberg tables in Amazon S3 Tables, you can skip to the [“Reading Iceberg Catalogs with DuckDB” section](#reading-amazon-s3-tables-with-duckdb).)
 

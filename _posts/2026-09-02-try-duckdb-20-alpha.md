@@ -15,13 +15,13 @@ tag: release
 
 A few weeks ago, we published a [preview of DuckDB v2.0]({% post_url 2026-08-17-duckdb-20-highlights %}).
 
-Today, we branched off `v2.0-cyanoptera` from the `main` development branch in the `duckdb/duckdb` repository. This marks a feature freeze – in the coming weeks, development work will focus on testing, bugfixing and iterating toward the best DuckDB release to date: v2.0 Cyanoptera, [projected for the second half of October]({% link release_calendar.md %}).
+Today, we branched off `v2.0-cyanoptera` from the `main` development branch in the `duckdb/duckdb` repository. This marks a feature freeze – in the coming weeks, development work will focus on testing, bugfixing, and iterating toward the best DuckDB release to date: v2.0 Cyanoptera, [projected for the second half of October]({% link release_calendar.md %}).
 
 The DuckDB ecosystem has `duckdb/duckdb` at its center: it's a dependency for most other work, so stabilizing it unlocks work across the other repositories. There are two main directions: clients and extensions.
 
 ## Clients
 
-Several DuckDB clients are already available as [alpha versions]({% link install/index.html %}?version=preview).
+Several DuckDB clients are already available as [alpha versions]({% link docs/2.0/installation.html %}?version=preview).
 
 ### CLI
 
@@ -50,7 +50,7 @@ On Windows, run the following PowerShell script:
 $env:DUCKDB_VERSION = "alpha"; irm https://install.duckdb.org/install.ps1 | iex
 ```
 
-Alternatively, download the tarball, extract it and run `duckdb.exe`:
+Alternatively, download the tarball, extract it, and run `duckdb.exe`:
 
 <!-- markdownlint-disable MD034 -->
 
@@ -85,13 +85,13 @@ We'll gradually add other clients to this list. Each new client that moves to 2.
 
 In DuckDB v2.0, the [`quack` extension]({% link quack/index.html %}) will move from version 0.x to 1.0. The new version will unlock higher throughput for queries (both server to client *and* client to server) and better compatibility.
 
-Other core extensions, such as `httpfs`, `ducklake`, `iceberg` or `spatial`, are also available in the alpha stage – please report any issues that you might encounter.
+Other core extensions, such as `httpfs`, `ducklake`, `iceberg`, or `spatial`, are also available in the alpha stage – please report any issues that you might encounter.
 
 Community extensions can already be tested by providing a `ref_next` SHA, which builds them against the `v2.0-cyanoptera` branch before the release date. If no `ref_next` is provided, the `ref` SHA will be used once v2.0.0 is finalized.
 
 ## Can I Help?
 
-Yes, you can! DuckDB alpha clients are explicitly **not** production-ready, but you can already install them and throw some SQL queries at them to see whether your existing workloads work. Most are expected to be fine, some are expected to complete visibly faster, and some might result in an error. For the next few weeks, we are particularly interested in the latter group: are there environments, situations or queries where the DuckDB v2.0 alpha releases fall short?
+Yes, you can! DuckDB alpha clients are explicitly **not** production-ready, but you can already install them and throw some SQL queries at them to see whether your existing workloads work. Most are expected to be fine, some are expected to complete visibly faster, and some might result in an error. For the next few weeks, we are particularly interested in the latter group: are there environments, situations, or queries where the DuckDB v2.0 alpha releases fall short?
 
 If you find an issue, please open a bug report with a reproducible example, either in [`duckdb/duckdb`](https://github.com/duckdb/duckdb/issues/new/choose) or in the repository of the relevant client or extension.
 

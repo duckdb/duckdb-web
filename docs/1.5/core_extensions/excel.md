@@ -87,16 +87,16 @@ SELECT * FROM test;
 
 ### Type and Range Inference
 
-Because Excel itself only really stores numbers or strings in cells, and does not enforce that all cells in a column are of the same type, the `excel` extension has to do some guesswork to "infer" and decide the types of the columns when importing an Excel sheet. While almost all columns are inferred as either `DOUBLE` or `VARCHAR`, there are some caveats:
+Because Excel itself only really stores numbers or strings in cells, and does not enforce that all cells in a column are of the same type, the `excel` extension has to do some guesswork to “infer” and decide the types of the columns when importing an Excel sheet. While almost all columns are inferred as either `DOUBLE` or `VARCHAR`, there are some caveats:
 
-* `TIMESTAMP`, `TIME`, `DATE` and `BOOLEAN` types are inferred when possible based on the _format_ applied to the cell.
+* `TIMESTAMP`, `TIME`, `DATE`, and `BOOLEAN` types are inferred when possible based on the _format_ applied to the cell.
 * Text cells containing `TRUE` and `FALSE` are inferred as `BOOLEAN`.
 * Empty cells are considered to be `DOUBLE` by default, unless the `empty_as_varchar` option is set to `true`, in which case they are typed as `VARCHAR`.
 
 If the `all_varchar` option is set to `true`, none of the above applies and all cells are read as `VARCHAR`.
 
 When no types are specified explicitly, (e.g., when using the `read_xlsx` function instead of `COPY TO ... FROM '⟨file⟩.xlsx'`{:.language-sql .highlight})
-the types of the resulting columns are inferred based on the first "data" row in the sheet, that is:
+the types of the resulting columns are inferred based on the first “data” row in the sheet, that is:
 
 * If no explicit range is given
   * The first row after the header if a header is found or forced by the `header` option
@@ -105,7 +105,7 @@ the types of the resulting columns are inferred based on the first "data" row in
   * The second row of the range if a header is found in the first row or forced by the `header` option
   * The first row of the range if no header is found or forced
 
-This can sometimes lead to issues if the first "data row" is not representative of the rest of the sheet (e.g., it contains empty cells) in which case the `ignore_errors` or `empty_as_varchar` options can be used to work around this.
+This can sometimes lead to issues if the first “data row” is not representative of the rest of the sheet (e.g., it contains empty cells) in which case the `ignore_errors` or `empty_as_varchar` options can be used to work around this.
 
 However, when the `COPY TO ... FROM '⟨file⟩.xlsx'`{:.language-sql .highlight} syntax is used, no type inference is done and the types of the resulting columns are determined by the types of the columns in the table being copied to. All cells will simply be converted by casting from `DOUBLE` or `VARCHAR` to the target column type.
 
@@ -135,7 +135,7 @@ COPY test TO 'test.xlsx' WITH (FORMAT xlsx, HEADER true);
 Because XLSX files only really support storing numbers or strings – the equivalent of `VARCHAR` and `DOUBLE`, the following type conversions are applied when writing XLSX files.
 
 * Numeric types are cast to `DOUBLE` when writing to an XLSX file.
-* Temporal types (`TIMESTAMP`, `DATE`, `TIME`, etc.) are converted to excel "serial" numbers, that is the number of days since 1900-01-01 for dates and the fraction of a day for times. These are then styled with a "number format" so that they appear as dates or times when opened in Excel.
+* Temporal types (`TIMESTAMP`, `DATE`, `TIME`, etc.) are converted to excel “serial” numbers, that is the number of days since 1900-01-01 for dates and the fraction of a day for times. These are then styled with a “number format” so that they appear as dates or times when opened in Excel.
 * `TIMESTAMP_TZ` and `TIME_TZ` are cast to UTC `TIMESTAMP` and `TIME` respectively, with the timezone information being lost.
-* `BOOLEAN`s are converted to `1` and `0`, with a "number format" applied to make them appear as `TRUE` and `FALSE` in Excel.
+* `BOOLEAN`s are converted to `1` and `0`, with a “number format” applied to make them appear as `TRUE` and `FALSE` in Excel.
 * All other types are cast to `VARCHAR` and then written as text cells.

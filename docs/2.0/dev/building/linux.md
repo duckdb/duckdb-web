@@ -27,7 +27,7 @@ cd duckdb
 GEN=ninja make
 ```
 
-### Fedora, CentOS and Red Hat
+### Fedora, CentOS, and Red Hat
 
 #### CLI Client
 

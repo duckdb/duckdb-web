@@ -75,7 +75,7 @@ SELECT json_merge_patch_diff(
 
 This function is particularly useful for CDC pipelines, where most events on a metadata catalog touch one or two fields out of dozens. Shipping the output of `json_merge_patch_diff(prev_state, new_state)` downstream, instead of the full new state, cuts the change payload to a small fraction of its previous size. The diff is the change itself, so there is nothing extra to filter on the consumer side, and a `json_merge_patch` on the other end reconstructs the new state from `prev_state` and the patch.
 
-## `json_deep_merge`: Recursive Merge where `null` Means “Skip”
+## `json_deep_merge`: Recursive Merge Where `null` Means “Skip”
 
 The patches from the previous section are applied with `json_merge_patch`, which strictly follows RFC 7396: `null` in the patch deletes the key. That is the right rule for the round trip with `json_merge_patch_diff`, but it is the wrong rule when you are reconciling fragments from multiple upstreams that emit `null` to mean “I do not have a value for this field on this message.”
 `json_deep_merge` covers that case.

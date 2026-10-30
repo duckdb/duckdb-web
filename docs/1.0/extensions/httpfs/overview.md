@@ -2,7 +2,6 @@
 layout: docu
 redirect_from:
 - /docs/archive/1.0/extensions/httpfs
-- /docs/archive/1.0/extensions/httpfs/
 title: httpfs Extension for HTTP and S3 Support
 ---
 

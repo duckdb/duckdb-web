@@ -5,14 +5,14 @@ authors:
   - The DuckDB team
 thumb: "/images/blog/thumbs/duckdb-release-1-5-1.svg"
 image: "/images/blog/thumbs/duckdb-release-1-5-1.png"
-excerpt: "We are releasing DuckDB version 1.5.1, a patch release with bugfixes, performance improvements and support for the Lance lakehouse format."
+excerpt: "We are releasing DuckDB version 1.5.1, a patch release with bugfixes, performance improvements, and support for the Lance lakehouse format."
 tag: release
 ---
 
 In this blog post, we highlight a few important fixes in DuckDB v1.5.1, the first patch release in [DuckDB's v1.5 line]({% post_url 2026-03-09-announcing-duckdb-150 %}).
 You can find the complete [release notes on GitHub](https://github.com/duckdb/duckdb/releases/tag/v1.5.1).
 
-To install the new version, please visit the [installation page]({% link install/index.html %}).
+To install the new version, please visit the [installation page]({% link docs/2.0/installation.html %}).
 
 ## Data Lake and Lakehouse Formats
 

@@ -2,7 +2,6 @@
 layout: docu
 redirect_from:
 - /docs/archive/1.1/extensions
-- /docs/archive/1.1/extensions/
 title: Extensions
 ---
 

@@ -19,7 +19,7 @@ Dot commands are available in the DuckDB CLI client. To use one of these command
 
 | Command                                                               | Description                                                                                                                                                                      |
 | --------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `.about`{:.language-sql .highlight}                                   | Prints version, description and license information about DuckDB.                                                                                                                |
+| `.about`{:.language-sql .highlight}                                   | Prints version, description, and license information about DuckDB.                                                                                                                |
 | `.auto_format ⟨on/off⟩`{:.language-sql .highlight}                    | Automatically format SQL before execution. Default: `off`                                                                                                                        |
 | `.bail ⟨on/off⟩`{:.language-sql .highlight}                           | Stop after hitting an error. Default: `off`                                                                                                                                      |
 | `.binary ⟨on/off⟩`{:.language-sql .highlight}                         | Turn binary output `on` or `off`. Default: `off`                                                                                                                                 |
@@ -48,7 +48,7 @@ Dot commands are available in the DuckDB CLI client. To use one of these command
 | `.large_number_rendering ⟨all/footer/off⟩`{:.language-sql .highlight} | Toggle readable rendering of large numbers (duckbox only, default: `footer`)                                                                                                     |
 | `.last`{:.language-sql .highlight}                                    | Render the last result without truncating. Useful for navigating with the pager                                                                                                  |
 | `.log ⟨FILE/off⟩`{:.language-sql .highlight}                          | Turn logging `on` or `off`. `FILE` can be `stderr` / `stdout`                                                                                                                    |
-| `.manual ⟨FUNCTION⟩`{:.language-sql .highlight}                       | Show the manual page (signatures, descriptions and examples) for a SQL function. See the [manual section](#displaying-function-documentation)                                    |
+| `.manual ⟨FUNCTION⟩`{:.language-sql .highlight}                       | Show the manual page (signatures, descriptions, and examples) for a SQL function. See the [manual section](#displaying-function-documentation)                                    |
 | `.maxbytes ⟨COUNT⟩`{:.language-sql .highlight}                        | Sets the maximum number of bytes of rows for display (`0` = all). Only for [agent mode]({% link docs/2.0/clients/cli/agent_mode.md %})                                       |
 | `.maxcellwidth ⟨COUNT⟩`{:.language-sql .highlight}                    | Sets the maximum number of characters per cell (`0` = all). Only for [agent mode]({% link docs/2.0/clients/cli/agent_mode.md %})                                             |
 | `.maxrows ⟨COUNT⟩`{:.language-sql .highlight}                         | Sets the maximum number of rows for display (default: `40`, `-1` = all). For [duckbox mode]({% link docs/2.0/clients/cli/output_formats.md %}) and [agent mode]({% link docs/2.0/clients/cli/agent_mode.md %}) |
@@ -78,7 +78,7 @@ Dot commands are available in the DuckDB CLI client. To use one of these command
 | `.singleline`{:.language-sql .highlight}                              | Set single-line mode                                                                                                                                                             |
 | `.startup_text ⟨none/version/all⟩`{:.language-sql .highlight}         | Controls the start-up text displayed when launching the CLI. Set this as the first line in `~/.duckdbrc`                                                                         |
 | `.system ⟨CMD⟩ ⟨ARGS...⟩`{:.language-sql .highlight}                  | Run `CMD` with `ARGS...` in a system shell                                                                                                                                       |
-| `.tables ⟨TABLE⟩`{:.language-sql .highlight}                          | List tables [matching `LIKE` pattern]({% link docs/2.0/sql/functions/pattern_matching.md %}) `TABLE` with column names, types and row counts, grouped by database and schema |
+| `.tables ⟨TABLE⟩`{:.language-sql .highlight}                          | List tables [matching `LIKE` pattern]({% link docs/2.0/sql/functions/pattern_matching.md %}) `TABLE` with column names, types, and row counts, grouped by database and schema |
 | `.thousand_sep ⟨SEP⟩`{:.language-sql .highlight}                      | Set the thousand separator used when rendering numbers. Only for duckbox mode                                                                                                    |
 | `.timer ⟨on/off⟩ ⟨DIGITS⟩`{:.language-sql .highlight}                 | Turn SQL timer `on` or `off`, with `DIGITS` decimals for the real time (default: 3). SQL statements separated by `;` but _not_ separated via newline are measured together                                |
 | `.ui_command ⟨COMMAND⟩`{:.language-sql .highlight}                    | Set the command executed by the `-ui` [argument]({% link docs/2.0/clients/cli/arguments.md %}). `CALL` is prepended to `COMMAND`. Default: `CALL start_ui()`                     |
@@ -314,7 +314,7 @@ The history reflects the interactive shell session, so it is only populated in i
 
 > New The `.manual` dot command (and the `-manual` command line argument) was introduced in DuckDB 2.0.
 
-The `.manual` command displays a manual page for a SQL function, including its signatures (overloads), description and examples. This information is retrieved from the [`duckdb_functions()` table function]({% link docs/2.0/sql/meta/duckdb_table_functions.md %}#duckdb_functions).
+The `.manual` command displays a manual page for a SQL function, including its signatures (overloads), description, and examples. This information is retrieved from the [`duckdb_functions()` table function]({% link docs/2.0/sql/meta/duckdb_table_functions.md %}#duckdb_functions).
 
 ```sql
 .manual map

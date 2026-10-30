@@ -174,7 +174,7 @@ Optional named parameters (source):
 > then run `odbc_copy` on that file.
 
  - `source_conn_string` (`VARCHAR`, default: `:memory:`): DuckDB connection string to the source DB, example: `ducklake:postgres:postgresql://username:pwd@127.0.0.1:5432/lake1`
- - `source_file` (`VARCHAR`): path to a Parquet, CSV or JSON file (remote or local) to be read with DuckDB, example: `https://blobs.duckdb.org/nl_stations.csv`, equivalent to `source_query='SELECT * FROM '<source_file>'`
+ - `source_file` (`VARCHAR`): path to a Parquet, CSV, or JSON file (remote or local) to be read with DuckDB, example: `https://blobs.duckdb.org/nl_stations.csv`, equivalent to `source_query='SELECT * FROM '<source_file>'`
  - `source_query` (`VARCHAR`): DuckDB SQL query to read the data, example: `FROM nl_train_stations`
  - `source_queries` (`LIST(VARCHAR)`): multiple DuckDB SQL queries executed one by one, last query must return the result set to copy, results of previous queries are discarded, results of all queries are materialized in memory, example:
 
@@ -211,7 +211,7 @@ column_types=MAP {
 Optional named parameters (query parameters handling):
 
  - `decimal_params_as_chars` (`BOOLEAN`, default: `false`): pass `DECIMAL` parameters as `VARCHAR`s
- - `integral_params_as_decimals` (`BOOLEAN`, default: `false`): pass (unsigned) `TINYINT`, `SMALLINT`, `INTEGER` and `BIGINT` parameters as `SQL_C_NUMERIC`.
+ - `integral_params_as_decimals` (`BOOLEAN`, default: `false`): pass (unsigned) `TINYINT`, `SMALLINT`, `INTEGER`, and `BIGINT` parameters as `SQL_C_NUMERIC`.
 
 Optional named parameters (other):
 
@@ -357,10 +357,10 @@ Optional named parameters that can change types mapping:
 The extension supports a number of options that can be used to change how the query parameters are passed and how the resulting data is handled. For known DBs these options are set automatically. They also can be passed as named parameters to [`odbc_query`](#odbc_query) function to override the autoconfiguration:
 
  - `decimal_columns_as_chars` (`BOOLEAN`, default: `false`): read `DECIMAL` values as `VARCHAR`s that are parsed back into `DECIMAL`s before returning them to client
- - `decimal_columns_precision_through_ard` (`BOOLEAN`, default: `false`): when reading a `DECIMAL` specify its `precision` and `scale` through "Application Row Descriptor"
+ - `decimal_columns_precision_through_ard` (`BOOLEAN`, default: `false`): when reading a `DECIMAL` specify its `precision` and `scale` through “Application Row Descriptor”
  - `decimal_columns_as_ard_type` (`BOOLEAN`, default: `false`): when reading a `DECIMAL` use `SQL_ARD_TYPE` instead of `SQL_C_NUMERIC`
  - `decimal_params_as_chars` (`BOOLEAN`, default: `false`): pass `DECIMAL` parameters as `VARCHAR`s
- - `integral_params_as_decimals` (`BOOLEAN`, default: `false`): pass (unsigned) `TINYINT`, `SMALLINT`, `INTEGER` and `BIGINT` parameters as `SQL_C_NUMERIC`.
+ - `integral_params_as_decimals` (`BOOLEAN`, default: `false`): pass (unsigned) `TINYINT`, `SMALLINT`, `INTEGER`, and `BIGINT` parameters as `SQL_C_NUMERIC`.
  - `reset_stmt_before_execute` (`BOOLEAN`, default: `false`): reset the prepared statement (using `SQLFreeStmt(h, SQL_CLOSE)`) before executing it
  - `time_params_as_ss_time2` (`BOOLEAN`, default: `false`): pass `TIME` parameters as SQL Server's `TIME2` values
  - `timestamp_columns_as_timestamp_ns` (`BOOLEAN`, default: `false`): read `TIMESTAMP`-like (`TIMESTAMP WITH LOCAL TIME ZONE`, `DATETIME2`, `TIMESTAMP_NTZ` etc) columns with nanosecond precision (with nine fractional digits)

@@ -8,7 +8,7 @@ For several of the recommendations in our performance guide, we use microbenchma
 <!--
 ## Benchmark Environment
 
-The benchmarks in the performance guide executed on a 2022 MacBook Pro with a 12-core M2 Pro CPU, 32 GiB RAM and 1 TB disk.
+The benchmarks in the performance guide executed on a 2022 MacBook Pro with a 12-core M2 Pro CPU, 32 GiB RAM, and 1 TB disk.
 -->
 
 ## Datasets
@@ -21,7 +21,7 @@ The TPC datasets used in the benchmark are generated with the DuckDB [tpch exten
 ## A Note on Benchmarks
 
 Running [fair benchmarks is difficult](https://hannes.muehleisen.org/publications/DBTEST2018-performance-testing.pdf), especially when performing system-to-system comparison.
-When running benchmarks on DuckDB, please make sure you are using the latest version (preferably the [preview build]({% link install/index.html %}?version=main)).
+When running benchmarks on DuckDB, please make sure you are using the latest version (preferably the [preview build]({% link docs/2.0/installation.html %}?version=main)).
 If in doubt about your benchmark results, feel free to contact us at `gabor@duckdb.org`.
 
 ## Disclaimer on Benchmarks

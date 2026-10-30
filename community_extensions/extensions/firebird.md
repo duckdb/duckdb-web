@@ -8,7 +8,7 @@ excerpt: |
 extension:
   name: firebird
   description: The first Firebird extension in the DuckDB Community Extensions registry. Federated read-only access to Firebird (3.0/4.0/5.0) databases from DuckDB, with projection + filter pushdown, INT128 / DECIMAL(38) / TIMESTAMP_TZ support, native ATTACH, and CHARACTER SET NONE handling (default win1252; strict / iso8859_1 / blob also available) with filter-pushdown correctness on transcoded columns.
-  version: 1.2.1
+  version: 1.3.1
   language: C++
   build: cmake
   license: MIT
@@ -28,8 +28,8 @@ extension:
 
 repo:
   github: flozer/duckdb-firebird
-  # v1.2.1 (immutable commit pin)
-  ref: 21b6d651389c022ab4420c096ba29094e45ebe52
+  # v1.3.1 (immutable commit pin)
+  ref: 46d034ff7d377d257476f00ea846fdaf3333b57b
 
 docs:
   hello_world: |
@@ -119,6 +119,12 @@ docs:
     - Since v1.2.1, `none_encoding` / `none_pushdown` are also accepted
       inside the connection string (URI query and key=value DSN forms),
       with strict booleans and documented precedence.
+    - DuckDB v2.0 support (v1.3.0/v1.3.1): the same source supports
+      DuckDB v1.5.6+ and v2.0+ through dual-path C++ API compilation,
+      with binaries built per DuckDB line. v1.3.1 recognizes v2.0's
+      normalized `NOT IN` expression, restoring pushdown, residual-filter
+      telemetry, and `firebird_unpushed_mode` guards without changing
+      default behavior.
     - Row estimate and scan advisories (v1.1.0): `firebird_profile_table`
       reports `estimated_rows` (cheap PK-range upper bound, or an opt-in
       exact `COUNT(*)` via `exact_row_count=true`) and structured
@@ -200,13 +206,14 @@ docs:
 
     - Firebird 3.0 (apt `firebird3.0-server`, CI fixture)
     - Firebird 4.0.x (`firebirdsql/firebird:4-noble`)
-    - Firebird 5.0.4 (Windows local + `firebirdsql/firebird:5-noble`)
-    - DuckDB v1.5.3 - v1.5.5 (`StorageExtension::Register` API)
+    - Firebird 5.0.x (Windows local + `firebirdsql/firebird:5-noble`)
+    - DuckDB v1.5.6 and v2.0.0 (`StorageExtension::Register` API;
+      dual-path C++ compilation)
 
 extension_star_count: 5
 extension_star_count_pretty: 5
-extension_download_count: 9530
-extension_download_count_pretty: 9.5k
+extension_download_count: 10616
+extension_download_count_pretty: 10.6k
 image: '/images/community_extensions/social_preview/preview_community_extension_firebird.png'
 layout: community_extension_doc
 ---
@@ -218,11 +225,11 @@ This table covers all DuckDB releases that have not reached [end-of-life](https:
 
 | Platform | 1.4.4 | 1.4.5 | 1.5.5 | 1.5.6 | 2.0.0 |
 | :--- | :---: | :---: | :---: | :---: | :---: |
-| Linux AMD64 | ❌ | ❌ | ✅ | ✅ | ❌ |
-| Linux ARM64 | ❌ | ❌ | ✅ | ✅ | ❌ |
+| Linux AMD64 | ❌ | ❌ | ✅ | ✅ | ✅ |
+| Linux ARM64 | ❌ | ❌ | ✅ | ✅ | ✅ |
 | macOS AMD64 | ❌ | ❌ | ✅ | ✅ | ❌ |
-| macOS ARM64 | ❌ | ❌ | ✅ | ✅ | ❌ |
-| Windows AMD64 | ❌ | ❌ | ✅ | ✅ | ❌ |
+| macOS ARM64 | ❌ | ❌ | ✅ | ✅ | ✅ |
+| Windows AMD64 | ❌ | ❌ | ✅ | ✅ | ✅ |
 | Windows ARM64 | ❌ | ❌ | ❌ | ❌ | ❌ |
 | WebAssembly | ❌ | ❌ | ❌ | ❌ | ❌ |
 
@@ -284,13 +291,14 @@ This extension does not add any types.
 
 <div class="extension_settings_table"></div>
 
-|              name              |                                                                                                                                                                                                description                                                                                                                                                                                                | input_type | scope  | aliases |
-|--------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|------------|--------|---------|
-| firebird_dummy_packet_interval | Keepalive interval, in SECONDS, sent to Firebird as isc_dpb_dummy_packet_interval on every connection (0 = disabled, default). Helps when NAT/firewall idle timeouts drop long fetches (-504 cursor lost / -902 connection shutdown). Effectiveness depends on the server honoring the per-attachment DPB value; on some server versions the server-side DummyPacketInterval setting is required instead. | BIGINT     | GLOBAL | []      |
-| firebird_pool_enabled          | Enable the per-ATTACH FirebirdConnectionPool. When false, every Acquire opens a fresh connection and Release destroys it.                                                                                                                                                                                                                                                                                 | BOOLEAN    | GLOBAL | []      |
-| firebird_pool_idle_timeout_ms  | How long (in milliseconds) a released connection may sit in the idle queue before it is discarded on the next Acquire. 0 = no expiry (default). Clock starts at Release().                                                                                                                                                                                                                                | BIGINT     | GLOBAL | []      |
-| firebird_pool_max_size         | Maximum number of idle connections kept in the pool. 0 = unlimited (default). Caps the idle queue, not active leases.                                                                                                                                                                                                                                                                                     | BIGINT     | GLOBAL | []      |
-| firebird_query_log_size        | Maximum entries kept by firebird_query_log() per session. 0 disables the log (default).                                                                                                                                                                                                                                                                                                                   | BIGINT     | GLOBAL | []      |
-| firebird_unpushed_mode         | What to do when a Firebird scan keeps filters in DuckDB that were not pushed down to Firebird (see not_pushed_reasons in firebird_last_query()). 'silent' (default) does nothing, 'warn' emits a warning, 'error' fails the query with an actionable message.                                                                                                                                             | VARCHAR    | GLOBAL | []      |
+|              name              |                                                                                                                                                                                                description                                                                                                                                                                                                | input_type | scope  | aliases | typed_value |
+|--------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|------------|--------|---------|-------------|
+| firebird_dummy_packet_interval | Keepalive interval, in SECONDS, sent to Firebird as isc_dpb_dummy_packet_interval on every connection (0 = disabled, default). Helps when NAT/firewall idle timeouts drop long fetches (-504 cursor lost / -902 connection shutdown). Effectiveness depends on the server honoring the per-attachment DPB value; on some server versions the server-side DummyPacketInterval setting is required instead. | BIGINT     | GLOBAL | []      | 0           |
+| firebird_pool_enabled          | Enable the per-ATTACH FirebirdConnectionPool. When false, every Acquire opens a fresh connection and Release destroys it.                                                                                                                                                                                                                                                                                 | BOOLEAN    | GLOBAL | []      | true        |
+| firebird_pool_idle_timeout_ms  | How long (in milliseconds) a released connection may sit in the idle queue before it is discarded on the next Acquire. 0 = no expiry (default). Clock starts at Release().                                                                                                                                                                                                                                | BIGINT     | GLOBAL | []      | 0           |
+| firebird_pool_max_size         | Maximum number of idle connections kept in the pool. 0 = unlimited (default). Caps the idle queue, not active leases.                                                                                                                                                                                                                                                                                     | BIGINT     | GLOBAL | []      | 0           |
+| firebird_query_log_size        | Maximum entries kept by firebird_query_log() per session. 0 disables the log (default).                                                                                                                                                                                                                                                                                                                   | BIGINT     | GLOBAL | []      | 0           |
+| firebird_unpushed_mode         | What to do when a Firebird scan keeps filters in DuckDB that were not pushed down to Firebird (see not_pushed_reasons in firebird_last_query()). 'silent' (default) does nothing, 'warn' emits a warning, 'error' fails the query with an actionable message.                                                                                                                                             | VARCHAR    | GLOBAL | []      | silent      |
+| temp_directory                 | Set the directory to which temporary files are written.                                                                                                                                                                                                                                                                                                                                                   | VARCHAR    | GLOBAL | []      | post.db.tmp |
 
 

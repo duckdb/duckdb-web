@@ -107,7 +107,7 @@ FROM read_parquet(
 );
 ```
 
-`hive_types` will be auto-detected for the following types: `DATE`, `TIMESTAMP` and `BIGINT`. To switch off the auto-detection, the flag `hive_types_autocast = 0` can be set.
+`hive_types` will be auto-detected for the following types: `DATE`, `TIMESTAMP`, and `BIGINT`. To switch off the auto-detection, the flag `hive_types_autocast = 0` can be set.
 
 ### Writing Partitioned Files
 

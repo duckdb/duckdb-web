@@ -7,6 +7,7 @@ redirect_from:
 - /docs/lts/guides/python/import_numpy
 - /docs/preview/guides/python/import_numpy
 title: Import from Numpy
+how_to_topic: python
 ---
 
 It is possible to query Numpy arrays from DuckDB.

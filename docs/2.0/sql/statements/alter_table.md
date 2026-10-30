@@ -239,7 +239,7 @@ ALTER col TYPE USING struct_insert(col, a := 42, b := NULL::VARCHAR);
 #### `ALTER TABLE` with `ADD COLUMN` / `DROP COLUMN` / `RENAME COLUMN`
 
 Starting with DuckDB 1.3.0, `ALTER TABLE` supports the
-[`ADD COLUMN`, `DROP COLUMN` and `RENAME COLUMN` clauses]({% link docs/2.0/sql/data_types/struct.md %}#updating-the-schema)
+[`ADD COLUMN`, `DROP COLUMN`, and `RENAME COLUMN` clauses]({% link docs/2.0/sql/data_types/struct.md %}#updating-the-schema)
 to update the sub-schema of a `STRUCT`.
 
 ## `SET` / `DROP DEFAULT`
@@ -260,7 +260,7 @@ ALTER COLUMN i DROP DEFAULT;
 
 The `SET/DROP DEFAULT` clause modifies the `DEFAULT` value of an existing column. Note that this does not modify any existing data in the column. Dropping the default is equivalent to setting the default value to NULL.
 
-> Warning At the moment, DuckDB does not allow most `ALTER TABLE` operations (e.g., renaming the table, renaming, dropping or changing the type of columns, or setting or dropping `NOT NULL`) on a table that has an index. Adding columns and setting or dropping column defaults are allowed. For other changes, drop the index, alter the table, and then recreate the index. Otherwise, you will get a `Dependency Error`.
+> Warning At the moment, DuckDB does not allow most `ALTER TABLE` operations (e.g., renaming the table, renaming, dropping, or changing the type of columns, or setting or dropping `NOT NULL`) on a table that has an index. Adding columns and setting or dropping column defaults are allowed. For other changes, drop the index, alter the table, and then recreate the index. Otherwise, you will get a `Dependency Error`.
 
 ## `ADD PRIMARY KEY` / `ADD UNIQUE`
 

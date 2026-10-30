@@ -88,9 +88,9 @@ These functions have the following parameters:
 | Name | Description | Type | Default |
 |:--|:-----|:-|:-|
 | `allow_empty` | If the file pattern or file list matches no files, return an empty result (with a single `empty` column of type `BOOL`) instead of throwing an error. Added in DuckDB 2.0. | `BOOL` | `false` |
-| `compression` | The compression type for the file. By default this will be detected automatically from the file extension (e.g., `t.json.gz` will use gzip, `t.json` will use none). Options are `none`, `gzip`, `zstd` and `auto_detect`. | `VARCHAR` | `auto_detect` |
+| `compression` | The compression type for the file. By default this will be detected automatically from the file extension (e.g., `t.json.gz` will use gzip, `t.json` will use none). Options are `none`, `gzip`, `zstd`, and `auto_detect`. | `VARCHAR` | `auto_detect` |
 | `filename` | Whether or not an extra `filename` column should be included in the result. Since DuckDB 1.3.0, the `filename` column is added automatically as a virtual column and this option is only kept for compatibility reasons. | `BOOL` | `false` |
-| `format` | Can be one of `auto`, `unstructured`, `newline_delimited` and `array`. | `VARCHAR` | `auto` |
+| `format` | Can be one of `auto`, `unstructured`, `newline_delimited`, and `array`. | `VARCHAR` | `auto` |
 | `hive_partitioning` | Whether or not to interpret the path as a [Hive partitioned path]({% link docs/2.0/data/partitioning/hive_partitioning.md %}). | `BOOL` | (auto-detected) |
 | `ignore_errors` | Whether to ignore parse errors (only possible when `format` is `newline_delimited`). | `BOOL` | `false` |
 | `maximum_sample_files` | The maximum number of JSON files sampled for auto-detection. | `BIGINT` | `32` |
@@ -189,7 +189,7 @@ DuckDB also supports reading JSON as a table, using the following functions:
 
 ### Parameters
 
-Besides the `maximum_object_size`, `format`, `ignore_errors` and `compression`, these functions have additional parameters:
+Besides the `maximum_object_size`, `format`, `ignore_errors`, and `compression`, these functions have additional parameters:
 
 | Name | Description | Type | Default |
 |:--|:------|:-|:-|

@@ -10,7 +10,7 @@ excerpt: "The DuckDB team is <i>very happy</i> to announce that today we’re re
 tag: release
 ---
 
-To install the new version, please visit the [installation guide]({% link install/index.html %}).
+To install the new version, please visit the [installation guide]({% link docs/2.0/installation.html %}).
 For the release notes, see the [release page](https://github.com/duckdb/duckdb/releases/tag/v1.0.0).
 
 <img src="{% link images/blog/paddling-of-ducks.svg %}"
@@ -36,7 +36,7 @@ We’ve observed the frankly staggering growth in the amount and breadth of use 
 
 Another core aspect of stability with the 1.0.0 release is stability across versions. While [never breaking anyone's workflow is likely impossible](https://xkcd.com/1172/), we plan to be much more careful with user-facing changes going forward. In particular, we plan to focus on providing stability for the SQL dialect, as well as the C API. While we do not guarantee that we will never change semantics in these layers in the future – we will try to provide ample warning when doing so, as well as providing workarounds that allow previously working code to keep on working.
 
-## Looking ahead
+## Looking Ahead
 
 Unlike many open-source projects, DuckDB also has a healthy long-term funding strategy. [DuckLabs](https://ducklabs.com/), the company that employs DuckDB’s core contributors, has not had any outside investments, and as a result, the company is fully owned by the team. Labs’ business model is to provide consulting and support services for DuckDB, and we’re happy to report that this is going well. With the revenue from contracts, we fund long-term and strategic DuckDB development with a team of almost 20 people. At the same time, the intellectual property in the project is guarded by the independent [DuckDB Foundation](https://duckdb.foundation/). This non-profit foundation ensures that DuckDB will be around long-term under the MIT license.
 
@@ -48,10 +48,10 @@ Of course, there will be issues found in today’s release. But rest assured, th
 
 First of all, we are very, very grateful to you all. Our massive and heartfelt thanks go to everyone who has contributed code, filed issues or engaged in discussions, promoted DuckDB in their environment, and, of course, all DuckDB users. We could not have done it without you!
 
-We would also like to thank the [CWI Database Architectures group](https://www.cwi.nl/en/groups/database-architectures/) for providing us with the environment and expertise to build DuckDB, the organizations that provided us with research grants early on, the excellent [customers of DuckLabs](https://ducklabs.com/#collaborators) that make it all work (especially the early ones), and the generous donors to the [DuckDB Foundation](https://duckdb.foundation/). We are particularly grateful to our long-standing Gold sponsors [MotherDuck](https://motherduck.com/), [Voltron Data](https://voltrondata.com/) and [Posit](https://posit.co/).
+We would also like to thank the [CWI Database Architectures group](https://www.cwi.nl/en/groups/database-architectures/) for providing us with the environment and expertise to build DuckDB, the organizations that provided us with research grants early on, the excellent [customers of DuckLabs](https://ducklabs.com/#collaborators) that make it all work (especially the early ones), and the generous donors to the [DuckDB Foundation](https://duckdb.foundation/). We are particularly grateful to our long-standing Gold sponsors [MotherDuck](https://motherduck.com/), [Voltron Data](https://voltrondata.com/), and [Posit](https://posit.co/).
 
 Finally, we would like to thank the [excellent and amazing team at DuckLabs](https://ducklabs.com/#about).
 
-So join us now in being nostalgic, teary-eyed and excited for what’s to come for DuckDB and celebrate the release of DuckDB 1.0.0 with us. We certainly will.
+So join us now in being nostalgic, teary-eyed, and excited for what’s to come for DuckDB and celebrate the release of DuckDB 1.0.0 with us. We certainly will.
 
 Mark and Hannes

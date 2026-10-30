@@ -70,12 +70,12 @@ FROM iceberg_snapshots('data/iceberg/lineitem_iceberg');
 | 1               | 3776207205136740581 | 2023-02-15 15:07:54.504 | lineitem_iceberg/metadata/snap-3776207205136740581-1-cf3d0be5-cf70-453d-ad8f-48fdc412e608.avro |
 | 2               | 7635660646343998149 | 2023-02-15 15:08:14.73  | lineitem_iceberg/metadata/snap-7635660646343998149-1-10eaca8a-1e1c-421e-ad6d-b232e5ee23d3.avro |
 
-> `iceberg_snapshots` does not take `allow_moved_paths`, `snapshot_from_id` or `snapshot_from_timestamp` as parameters.
+> `iceberg_snapshots` does not take `allow_moved_paths`, `snapshot_from_id`, or `snapshot_from_timestamp` as parameters.
 
 ## `iceberg_column_stats`
 
 The `iceberg_column_stats` function returns the statistics stored in the manifests for every data file and column.
-Its columns include `file_path`, `column_name`, `column_type`, `lower_bound`, `upper_bound`, `value_count`, `null_value_count` and `nan_value_count`.
+Its columns include `file_path`, `column_name`, `column_type`, `lower_bound`, `upper_bound`, `value_count`, `null_value_count`, and `nan_value_count`.
 
 ```sql
 SELECT *
@@ -85,7 +85,7 @@ FROM iceberg_column_stats('data/iceberg/lineitem_iceberg', allow_moved_paths = t
 ## `iceberg_partition_stats`
 
 The `iceberg_partition_stats` function returns statistics per partition field.
-Its columns include `partition_field_name`, `partition_source_columns`, `partition_field_transform`, `lower_bound` and `upper_bound`.
+Its columns include `partition_field_name`, `partition_source_columns`, `partition_field_transform`, `lower_bound`, and `upper_bound`.
 
 ```sql
 SELECT *
@@ -95,7 +95,7 @@ FROM iceberg_partition_stats(my_datalake.default.t);
 ## `iceberg_load_table_response`
 
 The `iceberg_load_table_response` function is an advanced function that only works with an [attached Iceberg REST Catalog]({% link docs/1.5/core_extensions/iceberg/catalogs.md %}).
-It returns the raw `LoadTable` response of the catalog with the columns `metadata_location`, `metadata` (`VARIANT`), `config` (`MAP`), `storage_credentials` and `request_url`.
+It returns the raw `LoadTable` response of the catalog with the columns `metadata_location`, `metadata` (`VARIANT`), `config` (`MAP`), `storage_credentials`, and `request_url`.
 
 ```sql
 SELECT *

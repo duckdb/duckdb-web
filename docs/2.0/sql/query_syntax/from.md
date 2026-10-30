@@ -270,7 +270,7 @@ WHERE s1.time > s2.time
 
 Natural joins join two tables based on attributes that share the same name.
 
-For example, take the following example with cities, airport codes and airport names. Note that both tables are intentionally incomplete, i.e., they do not have a matching pair in the other table.
+For example, take the following example with cities, airport codes, and airport names. Note that both tables are intentionally incomplete, i.e., they do not have a matching pair in the other table.
 
 ```sql
 CREATE TABLE city_airport (city_name VARCHAR, iata VARCHAR);
@@ -468,7 +468,7 @@ POSITIONAL JOIN t2;
 
 Positional joins are always `FULL OUTER` joins, i.e., the resulting table has the length of the longer input table and the missing entries are filled with `NULL` values.
 
-### As-Of Joins
+### As-of Joins
 
 A common operation when working with temporal or similarly-ordered data
 is to find the nearest (first) event in a reference table (such as prices).

@@ -213,7 +213,7 @@ cases where the executor has a single MI available, no configuration is needed.
 
 If your execution environment has multiple Identities, use the `MANAGED_IDENTITY` provider and specify
 which identity to use. This provider allows identity specification via one of 
-`CLIENT_ID`, `OBJECT_ID` or `RESOURCE_ID`, e.g.:
+`CLIENT_ID`, `OBJECT_ID`, or `RESOURCE_ID`, e.g.:
 
 ```sql
 CREATE SECRET secret1 (
@@ -262,7 +262,7 @@ CREATE SECRET azure_spn_cert (
 
 #### Configuring a Proxy
 
-To configure proxy information when using secrets, you can add `HTTP_PROXY`, `PROXY_USER_NAME` and `PROXY_PASSWORD` in the secret definition. For example:
+To configure proxy information when using secrets, you can add `HTTP_PROXY`, `PROXY_USER_NAME`, and `PROXY_PASSWORD` in the secret definition. For example:
 
 ```sql
 CREATE SECRET secret5 (

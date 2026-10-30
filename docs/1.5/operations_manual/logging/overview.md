@@ -39,7 +39,7 @@ DuckDB supports different logging levels that control the verbosity of the logs:
 
 * `ERROR`: Only logs error messages
 * `WARN`: Logs warnings and errors
-* `INFO`: Logs general information, warnings and errors (default)
+* `INFO`: Logs general information, warnings, and errors (default)
 * `DEBUG`: Logs detailed debugging information
 * `TRACE`: Logs very detailed tracing information
 

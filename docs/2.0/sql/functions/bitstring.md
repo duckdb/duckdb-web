@@ -13,7 +13,7 @@ title: Bitstring Functions
 <!-- markdownlint-disable MD001 -->
 
 This section describes functions and operators for examining and manipulating [`BITSTRING`]({% link docs/2.0/sql/data_types/bitstring.md %}) values.
-Bitstrings must be of equal length when performing the bitwise operands AND, OR and XOR. When bit shifting, the original length of the string is preserved.
+Bitstrings must be of equal length when performing the bitwise operands AND, OR, and XOR. When bit shifting, the original length of the string is preserved.
 
 ## Bitstring Operators
 

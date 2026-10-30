@@ -8,6 +8,7 @@ redirect_from:
 - /docs/lts/guides/file_formats/query_parquet
 - /docs/preview/guides/file_formats/query_parquet
 title: Querying Parquet Files
+how_to_topic: file-formats
 ---
 
 To run a query directly on a Parquet file, use the [`read_parquet` function]({% link docs/2.0/data/parquet/overview.md %}) in the `FROM` clause of a query.

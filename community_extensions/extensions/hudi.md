@@ -12,14 +12,14 @@ extension:
   language: Rust
   build: cmake
   license: MIT
-  excluded_platforms: "wasm_mvp;wasm_eh;wasm_threads;linux_amd64_musl;windows_amd64_mingw;windows_amd64_rtools"
+  excluded_platforms: "wasm_mvp;wasm_eh;wasm_threads;linux_amd64_musl;windows_amd64;windows_amd64_mingw;windows_amd64_rtools"
   requires_toolchains: "rust"
   maintainers:
     - alitrack
 
 repo:
   github: alitrack/duckdb-hudi
-  ref: 61f134c28956784b486cc815611b1b718bb95398
+  ref: 942dfb3fbc173d3157ae6a9e240a81e4f800d8e1
   variegata: c15d5e6c4960ba429d804653da60834cff2fbfb8
 
 docs:
@@ -71,8 +71,8 @@ docs:
 
 extension_star_count: 3
 extension_star_count_pretty: 3
-extension_download_count: 5999
-extension_download_count_pretty: 6.0k
+extension_download_count: 7878
+extension_download_count_pretty: 7.9k
 image: '/images/community_extensions/social_preview/preview_community_extension_hudi.png'
 layout: community_extension_doc
 ---
@@ -112,7 +112,14 @@ LOAD {{ page.extension.name }};
 
 <div class="extension_functions_table"></div>
 
-This extension does not add any functions.
+| function_name | function_type | description | comment | examples |
+|---------------|---------------|-------------|---------|----------|
+| hudi_commits  | table         | NULL        | NULL    |          |
+| hudi_files    | scalar        | NULL        | NULL    |          |
+| hudi_info     | scalar        | NULL        | NULL    |          |
+| hudi_mdt      | table         | NULL        | NULL    |          |
+| hudi_stats    | table         | NULL        | NULL    |          |
+| read_hudi     | table         | NULL        | NULL    |          |
 
 ### Overloaded Functions
 
@@ -130,6 +137,9 @@ This extension does not add any types.
 
 <div class="extension_settings_table"></div>
 
-This extension does not add any settings.
+|       name        |                                                                               description                                                                                | input_type | scope  | aliases | typed_value |
+|-------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------|------------|--------|---------|-------------|
+| hudi_row_estimate | Report the kernel's row count of the planned file slices as the estimated cardinality of a read_hudi scan (the count is size-based unless the metadata table records it) | BOOLEAN    | GLOBAL | []      | false       |
+| temp_directory    | Set the directory to which temporary files are written.                                                                                                                  | VARCHAR    | GLOBAL | []      | post.db.tmp |
 
 

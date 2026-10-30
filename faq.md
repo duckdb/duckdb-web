@@ -40,7 +40,7 @@ In 2026, [DuckLabs joined Amazon Web Services]({% post_url 2026-08-26-ducklabs-t
 
 <div class="answer" markdown="1">
 
-Ducks are amazing animals. They can fly, walk and swim. They can also live off pretty much everything. They are quite resilient to environmental challenges. A duck's song will bring people back from the dead and [inspires database research](/images/wilbur.jpg). They are thus the perfect mascot for a versatile and resilient data management system.
+Ducks are amazing animals. They can fly, walk, and swim. They can also live off pretty much everything. They are quite resilient to environmental challenges. A duck's song will bring people back from the dead and [inspires database research](/images/wilbur.jpg). They are thus the perfect mascot for a versatile and resilient data management system.
 
 </div>
 
@@ -130,18 +130,18 @@ Please consult the [trademark guidelines for DuckDB™]({% link trademark_guidel
 
 <div class="answer" markdown="1">
 
-The following projects, domains and events are officially affiliated with DuckDB:
+The following projects, domains, and events are officially affiliated with DuckDB:
 
 * [DuckDB (`duckdb.org`)](https://duckdb.org/)
 * [DuckLake (`ducklake.select`)](https://ducklake.select), an open lakehouse format
 * [Quack (`quack.duckdb.org`)](https://quack.duckdb.org/)
-* all [primary client libraries]({% link install/index.html %})
+* all [primary client libraries]({% link docs/2.0/installation.html %})
 * all [core DuckDB extensions]({% link docs/2.0/core_extensions/overview.md %}), including the [DuckDB UI](https://github.com/duckdb/duckdb-ui)
 * [`dbt-duckdb`](https://github.com/duckdb/dbt-duckdb), a dbt connector for DuckDB
 * [DuckCon (`duckcon.org`)](https://duckcon.org/), our technical conference series
 * [DuckDB Backup (`duckdb-backup.org`)](https://www.duckdb-backup.org/)
 
-Other projects and events are likely _not affiliated_ with DuckDB. Please check their websites, descriptions and licenses for more details.
+Other projects and events are likely _not affiliated_ with DuckDB. Please check their websites, descriptions, and licenses for more details.
 
 </div>
 
@@ -299,7 +299,7 @@ If you are unsure about the DuckDB version used in a process, run the `PRAGMA ve
 
 <div class="answer" markdown="1">
 
-DuckDB has the official [documentation]({% link docs/2.0/index.md %}), [blog]({% link news/index.html %}) and [library]({% link library/index.html %}).
+DuckDB has the official [documentation]({% link docs/2.0/index.md %}), [blog]({% link news/index.html %}), and [library]({% link library/index.html %}).
 There are also few third-party resources which can help you learn more about DuckDB:
 
 * To discover projects using DuckDB, we recommend visiting the [`awesome-duckdb` repository](https://github.com/davidgasquez/awesome-duckdb).

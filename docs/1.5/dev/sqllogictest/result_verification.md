@@ -128,7 +128,7 @@ In a similar manner, `mode output_result` can be used to force the program to pr
 
 Queries can have an optional field that indicates that the result should be sorted in a specific manner. This field goes in the same location as the connection label. Because of that, connection labels and result sorting cannot be mixed.
 
-The possible values of this field are `nosort`, `rowsort` and `valuesort`. An example of how this might be used is given below:
+The possible values of this field are `nosort`, `rowsort`, and `valuesort`. An example of how this might be used is given below:
 
 ```sql
 query I rowsort

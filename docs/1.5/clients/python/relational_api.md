@@ -1691,7 +1691,7 @@ This section contains the methods which can be used to chain queries.        The
 | [`insert`](#insert) | Inserts the given values into the relation |
 | [`insert_into`](#insert_into) | Inserts the relation object into an existing table named table_name |
 | [`intersect`](#intersect) | Create the set intersection of this relation object with another relation object in other_rel |
-| [`join`](#join) | Join the relation object with another relation object in other_rel using the join condition expression in join_condition. Types supported are 'inner', 'left', 'right', 'outer', 'semi' and 'anti' |
+| [`join`](#join) | Join the relation object with another relation object in other_rel using the join condition expression in join_condition. Types supported are 'inner', 'left', 'right', 'outer', 'semi', and 'anti' |
 | [`limit`](#limit) | Only retrieve the first n rows from this relation object, starting at offset |
 | [`map`](#map) | Calls the passed function on the relation |
 | [`order`](#order) | Reorder the relation object by order_expr |
@@ -2179,7 +2179,7 @@ join(self: _duckdb.DuckDBPyRelation, other_rel: _duckdb.DuckDBPyRelation, condit
 
 ##### Description
 
-Join the relation object with another relation object in other_rel using the join condition expression in join_condition. Types supported are 'inner', 'left', 'right', 'outer', 'semi' and 'anti'
+Join the relation object with another relation object in other_rel using the join condition expression in join_condition. Types supported are 'inner', 'left', 'right', 'outer', 'semi', and 'anti'
 
 Depending on how the `condition` parameter is provided, the JOIN clause generated is:
 - `USING`
@@ -2240,7 +2240,7 @@ INNER JOIN (
 ON ((unnamed_relation_41bc15e744037078.id = unnamed_relation_307e245965aa2c2b.id))
 ```
 
-> `NATURAL`, `POSITIONAL` and `ASOF` joins are not provided by the relational API.
+> `NATURAL`, `POSITIONAL`, and `ASOF` joins are not provided by the relational API.
 > `CROSS` joins are provided through the [cross method](#cross). 
 
 
@@ -2254,7 +2254,7 @@ ON ((unnamed_relation_41bc15e744037078.id = unnamed_relation_307e245965aa2c2b.id
     The join condition, typically a SQL expression or the duplicated column name to join on.
 - **how** : str, default: 'inner'
                             
-    The type of join to perform: 'inner', 'left', 'right', 'outer', 'semi' and 'anti'.
+    The type of join to perform: 'inner', 'left', 'right', 'outer', 'semi', and 'anti'.
 
 ##### Example
 

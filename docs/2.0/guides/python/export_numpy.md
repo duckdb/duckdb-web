@@ -7,6 +7,7 @@ redirect_from:
 - /docs/lts/guides/python/export_numpy
 - /docs/preview/guides/python/export_numpy
 title: Export to Numpy
+how_to_topic: python
 ---
 
 The result of a query can be converted to Numpy arrays using the `fetchnumpy()` function, which returns a dictionary that maps each column name to a Numpy array. For example:

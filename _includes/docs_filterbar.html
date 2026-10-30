@@ -1,0 +1,24 @@
+{% comment %}
+	Guide search with a topic select using the documentation dropdown styling.
+	include.types is a key in _data/post_types.yml (e.g. how_to).
+{% endcomment %}
+{% assign cfg = site.data.post_types[include.types] %}
+
+<div class="controls filterbar">
+	{% if cfg.filters.size > 0 %}
+	<div class="version" id="topic-filter">
+		<button type="button" class="versiontrigger" aria-expanded="false" aria-controls="topic-options" aria-label="Filter guides by topic: All topics"><span class="selectedversion">All topics</span><svg class="arrow" aria-hidden="true"><use href="#chevron-down"></use></svg></button>
+		<div class="versionsidebar" id="topic-options">
+			<ul>
+				<li class="current"><a href="{{ page.url }}" data-filter="*" aria-current="true">All topics</a></li>
+				{% for filter in cfg.filters %}
+				<li><a href="{{ page.url }}?type={{ filter.value }}" data-filter=".{{ filter.value }}">{{ filter.label }}</a></li>
+				{% endfor %}
+			</ul>
+		</div>
+	</div>
+	{% endif %}
+	<input type="text" id="search-input" placeholder="Search guides" aria-label="Search guides">
+</div>
+
+<p class="filter-empty" role="status" hidden>No guides match your selection.</p>

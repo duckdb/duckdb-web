@@ -17,7 +17,7 @@ tag: release
 
 The DuckDB team is happy to announce the latest DuckDB release (0.8.0). This release is named “Fulvigula” after the [Mottled Duck](https://en.wikipedia.org/wiki/Mottled_duck) (Anas Fulvigula) native to the Gulf of Mexico.
 
-To install the new version, please visit the [installation guide]({% link install/index.html %}). The full release notes can be found on [GitHub](https://github.com/duckdb/duckdb/releases/tag/v0.8.0).
+To install the new version, please visit the [installation guide]({% link docs/2.0/installation.html %}). The full release notes can be found on [GitHub](https://github.com/duckdb/duckdb/releases/tag/v0.8.0).
 
 ## What's New in 0.8.0
 
@@ -43,7 +43,7 @@ SET integer_division = true;
 SET default_null_order = 'NULLS_FIRST';
 ```
 
-[**Division Operator**](https://github.com/duckdb/duckdb/pull/7082). The division operator `/` will now always perform a floating point division even with integer parameters. The new operator `//` retains the old semantics and can be used to perform integer division. This makes DuckDB's division operator less error prone for beginners, and consistent with the division operator in Python 3 and other systems in the OLAP space like Spark, Snowflake and BigQuery.
+[**Division Operator**](https://github.com/duckdb/duckdb/pull/7082). The division operator `/` will now always perform a floating point division even with integer parameters. The new operator `//` retains the old semantics and can be used to perform integer division. This makes DuckDB's division operator less error prone for beginners, and consistent with the division operator in Python 3 and other systems in the OLAP space like Spark, Snowflake, and BigQuery.
 
 ```sql
 SELECT 42 / 5, 42 // 5;
@@ -115,7 +115,7 @@ CREATE TABLE lineitem AS FROM lineitem.csv;
 | -----: | -----: |
 |  4.1 s |  1.2 s |
 
-**Parallel [Parquet](https://github.com/duckdb/duckdb/pull/7375), [CSV and JSON Writing](https://github.com/duckdb/duckdb/pull/7368)**. This release includes support for parallel *order-preserving* writing of Parquet, CSV and JSON files. As a result, writing to these file formats is parallel by default, also without disabling insertion order preservation, and writing to these formats is greatly sped up.
+**Parallel [Parquet](https://github.com/duckdb/duckdb/pull/7375), [CSV, and JSON Writing](https://github.com/duckdb/duckdb/pull/7368)**. This release includes support for parallel *order-preserving* writing of Parquet, CSV, and JSON files. As a result, writing to these file formats is parallel by default, also without disabling insertion order preservation, and writing to these formats is greatly sped up.
 
 ```sql
 COPY lineitem TO 'lineitem.csv';

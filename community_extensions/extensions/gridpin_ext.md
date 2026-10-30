@@ -86,8 +86,8 @@ docs:
 
 extension_star_count: 1
 extension_star_count_pretty: 1
-extension_download_count: 11535
-extension_download_count_pretty: 11.5k
+extension_download_count: 14185
+extension_download_count_pretty: 14.2k
 image: '/images/community_extensions/social_preview/preview_community_extension_gridpin_ext.png'
 layout: community_extension_doc
 ---

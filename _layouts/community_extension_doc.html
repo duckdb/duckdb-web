@@ -37,8 +37,6 @@
 				</a>
 				<div class="landingmenu">
 
-					{% include menu_secondary_ce.html %}
-
 					<nav class="mobile">
 						<div class="search_icon"></div>
 						<div class="hamburger hamburger--squeeze">
@@ -69,43 +67,43 @@
 			
 			<div id="main_content_wrap">
 				<div class="headlinebar">
-					<div class="breadcrumbs">{% include breadcrumbs.html %}</div>
+					<nav class="breadcrumbs" aria-label="Breadcrumb"><a href="{% link community_extensions/index.md %}">Community Extensions</a></nav>
 
-					<div class="title">{{ page.title }}</div>
+					<div class="titlebar">
+						<h1 class="title">{{ page.title }}</h1>
+					</div>
 				
 				</div>
 				
-				<div class="box-link-wrapper">
+				{% assign has_extension_descriptor = false %}
+				{% if page.repo.github and page.extension.name %}
+					{% assign has_extension_descriptor = true %}
+				{% endif %}
+				{% if page.extension_download_count_pretty or page.extension_star_count_pretty or has_extension_descriptor %}
+				<div class="extension-meta">
 					{% if page.extension_download_count_pretty %}
-					<div class="box-link third-width downloads">
-						<a href="/community_extensions/download_metrics" aria-label="Download Metrics"></a>
-						<span class="symbol"><svg class="icon"><use href="#download-01"></use></svg></span>
-						<span>Downloads</span>
-						<span class="week"><span class="num">{{ page.extension_download_count_pretty }}</span>this week</span>
-						<svg class="chevron"><use href="#chevron-right"></use></svg>
-					</div>
+					<a class="extension-meta-item" href="/community_extensions/download_metrics">
+						<svg class="icon extension-meta-icon" aria-hidden="true"><use href="#download-01"></use></svg>
+						<span><strong>{{ page.extension_download_count_pretty }}</strong> {% if page.extension_download_count == 1 %}download{% else %}downloads{% endif %} <span class="extension-meta-context">this week</span></span>
+					</a>
 					{% endif %}
 					{% if page.extension_star_count_pretty %}
-					<div class="box-link third-width stars">
-						<a href="https://github.com/{{ page.repo.github }}" target="_blank" aria-label="GitHub" rel="noopener noreferrer"></a>
-						<span class="symbol"><img src="{% link images/icons/github.svg %}"></span>
-						<span>GitHub stars</span>
-						<span class="num">{{ page.extension_star_count_pretty }}</span>
-						<svg class="chevron"><use href="#chevron-right"></use></svg>
-					</div>
+					<a class="extension-meta-item" href="https://github.com/{{ page.repo.github }}" target="_blank" rel="noopener noreferrer">
+						<span class="extension-meta-icon extension-meta-github"><img src="{% link images/icons/github.svg %}" alt="GitHub"></span>
+						<span><strong>{{ page.extension_star_count_pretty }}</strong> {% if page.extension_star_count == 1 %}star{% else %}stars{% endif %}</span>
+					</a>
 					{% endif %}
 
 					{% if page.repo.github %}
 						{% if page.extension.name %}
-						<div class="box-link third-width">
-							<a href="https://github.com/duckdb/community-extensions/blob/main/extensions/{{ page.extension.name }}/description.yml" target="_blank" rel="noopener noreferrer" aria-label="Extension descriptor (YAML)"></a>
-							<span class="symbol"><img src="{% link images/icons/yaml.svg %}"></span>
-							<span>Extension descriptor (YAML)</span>
-							<svg class="chevron"><use href="#chevron-right"></use></svg>
-						</div>
+							<a class="extension-meta-item" href="https://github.com/duckdb/community-extensions/blob/main/extensions/{{ page.extension.name }}/description.yml" target="_blank" rel="noopener noreferrer">
+								<svg class="icon extension-meta-icon" aria-hidden="true"><use href="#file-code-01"></use></svg>
+								<span>Extension descriptor</span>
+							</a>
 						{% endif %}
 					{% endif %}
 				</div>
+				{% endif %}
 
 				{{ page.extension.description | markdownify }}
 				
@@ -119,8 +117,9 @@
 					</div>
 				{% endif %}
 
-				{% assign ct = content | toc %}
-				{% include anchor_headings.html html=content %}
+				{% assign extension_content = content | community_extension_headings: page.extension.name %}
+				{% assign ct = extension_content | toc %}
+				{% include anchor_headings.html html=extension_content %}
 				
 				{% if page.url contains 'overview' %}
 				<div class="index">
@@ -128,10 +127,31 @@
 				</div>
 				{% endif %}
 				
+				{% capture issue_title %}Issue found on page '{{ page.title }}'{% endcapture %}
+				{% capture issue_body %}Please describe the problem with the community extension documentation.
+
+Page URL: <{{ site.url }}{{ page.url }}>
+				{% endcapture %}
+				{% assign extension_repository = 'https://github.com/duckdb/community-extensions' %}
+				{% if page.repo.github %}
+					{% assign extension_repository = 'https://github.com/' | append: page.repo.github %}
+				{% endif %}
+				{% include page_actions.html repository=extension_repository %}
+
+				<div class="bottomline">
+					<div>© {{ "now" | date: "%Y" }} DuckDB Foundation, Amsterdam NL</div>
+					<div>
+						<a href="{{ site.url }}/">DuckDB Home</a>
+						<a href="/code_of_conduct.html">Code of Conduct</a>
+						<a href="/trademark_guidelines.html">Trademark Use</a>
+						<a href="{% link news/index.html %}">Blog</a>
+					</div>
+				</div>
+
 			</div>
 			
 			<div id="sidebar">
-				{% assign toc_only = content | toc_only %}
+				{% assign toc_only = extension_content | toc_only %}
 				{% assign toc_text_only = toc_only | strip_html | remove: ' ' %}
 				{% if toc_text_only.size > 10 %}
 					<div class="toc_menu">

@@ -4,7 +4,7 @@ title: Array Type
 tested: true
 ---
 
-An `ARRAY` column stores fixed-sized arrays. All fields in the column must have the same length and the same underlying type. Arrays are typically used to store arrays of numbers, but can contain any uniform data type, including `ARRAY`, [`LIST`]({% link docs/1.5/sql/data_types/list.md %}) and [`STRUCT`]({% link docs/1.5/sql/data_types/struct.md %}) types.
+An `ARRAY` column stores fixed-sized arrays. All fields in the column must have the same length and the same underlying type. Arrays are typically used to store arrays of numbers, but can contain any uniform data type, including `ARRAY`, [`LIST`]({% link docs/1.5/sql/data_types/list.md %}), and [`STRUCT`]({% link docs/1.5/sql/data_types/struct.md %}) types.
 
 Arrays can be used to store vectors such as [word embeddings](https://en.wikipedia.org/wiki/Word_embedding) or image embeddings.
 

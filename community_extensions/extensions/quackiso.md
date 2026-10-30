@@ -11,7 +11,7 @@ excerpt: |
 extension:
   name: quackiso
   description: Query ISO 20022 (camt, pacs, pain) and SWIFT MT financial messages as SQL
-  version: 1.7.0
+  version: 1.9.0
   language: Rust
   build: cargo
   license: MIT
@@ -22,7 +22,7 @@ extension:
 
 repo:
   github: tempoloss/quackiso
-  ref: e8d69f85cad1130032f1b34e50a65e5ce206d64d
+  ref: 686d46679c923f6c8895ddcc7e8e50dbb45f8dba
 
 docs:
   hello_world: |
@@ -32,10 +32,55 @@ docs:
     FROM read_iso20022('statements/*.xml', threads := 8)
     ORDER BY booking_date;
 
-    -- On 14 November 2026 CBPR+ stops accepting a fully unstructured postal
-    -- address, with no grace period. This is the question that comes before the
-    -- migration, over SWIFT MT and ISO 20022 at once: of the traffic already on
-    -- disk, which parties would be refused, and what is wrong with them.
+    -- An entry is not always one payment. A batch posts as one <Ntry> holding
+    -- three <NtryDtls> of one transaction each, and the entry row says so in
+    -- transaction_count rather than answering with the first one's details.
+    SELECT e.entry_ref, e.amount AS entry_total, e.transaction_count,
+           t.end_to_end_id, t.amount, t.creditor_name
+    FROM read_iso20022('statements/*.xml') e
+    JOIN read_camt_transactions('statements/*.xml') t
+      ON t.source_file = e.source_file
+     AND t.statement_index = e.statement_index
+     AND t.entry_index = e.entry_index
+    ORDER BY e.entry_ref, t.entry_details_index, t.transaction_index;
+
+    -- An account with no movements is a valid statement, and the balances are
+    -- all of it. Opening plus the entries signed by their own direction equals
+    -- closing, exactly, because the amounts are DECIMAL and not floats.
+    SELECT statement_id, balance_type, balance_type_scheme, amount, currency,
+           credit_debit, balance_date
+    FROM read_camt_balances('statements/*.xml')
+    ORDER BY statement_index, balance_index;
+
+    -- What the bank actually applied to a cross-currency entry: the instructed
+    -- amount, the settled one, and the rate and contract between them.
+    -- exchange_rate is text, because a rate is not money.
+    SELECT entry_ref, scope, amount_kind, amount, currency,
+           exchange_source_currency, exchange_target_currency, exchange_rate
+    FROM read_camt_amount_details('statements/*.xml')
+    ORDER BY entry_index, scope, amount_index;
+
+    -- Every remittance leaf, not the first one joined by spaces: two invoice
+    -- numbers in two <Ustrd> are two rows, and slot says which kind each is.
+    SELECT entry_ref, transaction_index, remittance_index, slot, text
+    FROM read_camt_remittance('statements/*.xml')
+    ORDER BY entry_index, transaction_index, remittance_index;
+
+    -- What a statement says about itself, one row per statement: its sequence
+    -- number, the period it covers and the entries and balances the reader
+    -- found, beside the entry count the bank states. A short statement, a gap
+    -- and a duplicate are all queries on this one row.
+    SELECT account_iban, electronic_sequence, from_date, to_date,
+           summary_entries, entry_count, balance_count
+    FROM read_camt_statements('statements/*.xml')
+    ORDER BY account_iban, electronic_sequence;
+
+    -- CBPR+ was to stop accepting a fully unstructured postal address on 14
+    -- November 2026. Swift delayed that release on 27 August 2026 and promised a
+    -- revised schedule by December 2026. The work stays and the time to measure
+    -- it grew: of the traffic already on disk, over SWIFT MT and ISO 20022 at
+    -- once, which parties would be refused once the rule lands, and what is
+    -- wrong with them.
     SELECT family, role, address_format, count(*) AS parties, count(finding) AS refused
     FROM audit_addresses('inbox/**/*')
     GROUP BY family, role, address_format
@@ -139,20 +184,27 @@ docs:
     function at bank XML or at a folder of MT statements and get transactions as
     rows.
 
-    Thirty-seven functions: thirty-five readers covering the payment lifecycle end
-    to end, in both directions, a sniffer that routes files to them, and an
-    address audit that reads both wire formats at once.
+    Forty-three functions: forty readers covering the payment lifecycle end
+    to end, in both directions, a sniffer that routes files to them, an
+    address audit that reads both wire formats at once, and a catalogue that
+    describes every function with an example. Six of the readers cover
+    cash management, one per grain a statement has: the booked entry, the
+    transactions inside a batched one, the balances, the amount blocks with the
+    exchange the bank applied, every remittance text leaf, and the statement
+    header with its sequence number.
 
-    One of them has a date attached. On 14 November 2026 CBPR+ stops accepting a
-    fully unstructured postal address, with no grace period, and
-    `audit_addresses(path)` answers the question that comes before that migration:
-    of the traffic already on disk, which parties would be refused, and why. It
-    reads SWIFT MT as well as ISO 20022, and that is the point rather than a
-    bonus - an MT `:50K:` is a name and then free-text address lines, which is
-    exactly the shape that stops being accepted, so a migration answered on the
-    XML half alone is answered on the easier half. One classifier grades both
-    wires, so an MT party and an ISO 20022 party cannot disagree about what
-    UNSTRUCTURED means.
+    One of them has a date attached. CBPR+ was to stop accepting a fully
+    unstructured postal address on 14 November 2026. On 27 August 2026 Swift
+    delayed that release and promised a revised schedule by December 2026, which
+    does not remove the work but gives time to measure it, and
+    `audit_addresses(path)` answers the question that comes before that
+    migration: of the traffic already on disk, which parties would be refused
+    once the rule lands, and why. It reads SWIFT MT as well as ISO 20022, and
+    that is the point rather than a bonus - an MT `:50K:` is a name and then
+    free-text address lines, which is exactly the shape the rule stops
+    accepting, so a migration answered on the XML half alone is answered on the
+    easier half. One classifier grades both wires, so an MT party and an ISO
+    20022 party cannot disagree about what UNSTRUCTURED means.
 
     It reports the address lines themselves beside the counts, because a refusal
     names what is missing while the lines are what there is to work with, and
@@ -164,6 +216,11 @@ docs:
 
     * `read_iso20022(path)` - camt.053 statements, camt.054 notifications and
       camt.052 reports; one row per booked entry.
+    * `read_camt_statements(path)` - the header of each statement, beside its
+      entries: the electronic and legal sequence numbers, the period, the page,
+      the totals the bank states, and the number of entries and balances the
+      reader found, so a missing statement, a duplicate and a short one are
+      queries.
     * `read_camt057(path)` - notifications to receive: money on its way in and
       not yet booked; one row per expected item, with the account carried down
       from its notification.
@@ -233,17 +290,23 @@ docs:
       `error` column instead of aborting the scan, so a folder of mixed
       downloads is a table rather than a failure.
     * `audit_addresses(path)` - every party of every message beside the shape of
-      its postal address, classified against the CBPR+ rule that takes effect on
-      14 November 2026, when a fully unstructured address stops being accepted.
-      One row per party occurrence rather than per transaction, because the
-      question is asked across families: of the traffic already on disk, which
-      parties would be refused and why. It reads ISO 20022 and SWIFT MT through
-      one classifier, which is the point - an MT `:50K:` is a name and then
+      its postal address, classified against the CBPR+ rule that was to take
+      effect on 14 November 2026 and is deferred until a revised schedule that
+      Swift promised by December 2026, so `finding` names what the rule will
+      refuse once it lands and not what is refused today. One row per party
+      occurrence rather than per transaction, because the question is asked
+      across families: of the traffic already on disk, which parties would be
+      refused and why. It reads ISO 20022 and SWIFT MT through one classifier,
+      which is the point - an MT `:50K:` is a name and then
       free-text lines, the shape the rule refuses, and `:50F:` states the town
       and the country in a subfield where a translator can find them. The facts
       and the verdict are separate columns: `address_format`, the counts and the
       leaves are read off the wire, and `finding` is NULL when nothing in the
       party would be refused.
+    * `quackiso_functions()` - this extension's own function list: one row per
+      function with a one-sentence description and a runnable example, because
+      the C API a loadable extension registers through has no description field
+      for `duckdb_functions()` to show.
 
     All exception and status readers expose the original references (UETR,
     end-to-end id, original message id), so one payment joins across its whole
@@ -261,12 +324,16 @@ docs:
 
     Parsing is a streaming pass over XML events, so the peak is one output batch
     plus the largest single XML subtree rather than the file: a 1.7 GB statement
-    of three million entries parses in 1.23 MiB of live heap and about 2 MB
-    resident, measured by `cargo test --release membound -- --ignored`, and
-    adds 7.7 MiB to a running DuckDB. A glob is parsed in parallel, one worker
-    per file - XML has no safe split points, so a single document is never
-    divided - with `threads := n` to pin the pool, itself capped at four times
-    the machine's parallelism; measured 6.9x on 8 files of 35 MB.
+    of three million entries parses in 1.73 MiB of live heap and about 1 MiB of
+    added resident memory, measured by
+    `cargo test --release membound -- --ignored`, and adds 9.0 MiB to a running
+    DuckDB. The five supplementary camt readers walk the same statement and then
+    a two-integer cursor over the entry they were handed, so an entry of 32,000
+    transactions is 32,000 rows taken one batch at a time. A glob is parsed in
+    parallel, one worker per file - XML has no safe split points, so a single
+    document is never divided - with `threads := n` to pin the pool, itself
+    capped at four times the machine's parallelism; measured 6.9x on 8 files of
+    35 MB.
 
     A file of the wrong message type fails loudly instead of returning an empty
     table. The transaction element names collide across families (camt.056 and
@@ -294,14 +361,19 @@ docs:
     sides that reverse in a return. Every behaviour that looks like a special
     case came from one of those files.
 
-    Paths are local files or globs; every row records its `source_file`. Remote
-    URIs and XSD validation are deliberately absent, with the reasoning recorded
-    in `docs/adr/`.
+    Paths are local files, globs or a list of them; every row records its
+    `source_file`. Remote URIs and XSD validation are deliberately absent, with
+    the reasoning recorded in `docs/adr/`.
+
+    Release 1.9.0 loads into DuckDB 2.0.0 and into DuckDB 1.5.6 and later, from
+    one binary: it is built against the stable C API at minimum version v1.5.6
+    rather than for one exact DuckDB, which DuckDB 2.0 refuses. It does not load
+    into DuckDB 1.5.5 or earlier, where 1.7.0 is the last build.
 
 extension_star_count: 6
 extension_star_count_pretty: 6
-extension_download_count: 3065
-extension_download_count_pretty: 3.1k
+extension_download_count: 3826
+extension_download_count_pretty: 3.8k
 image: '/images/community_extensions/social_preview/preview_community_extension_quackiso.png'
 layout: community_extension_doc
 ---
@@ -313,11 +385,11 @@ This table covers all DuckDB releases that have not reached [end-of-life](https:
 
 | Platform | 1.4.4 | 1.4.5 | 1.5.5 | 1.5.6 | 2.0.0 |
 | :--- | :---: | :---: | :---: | :---: | :---: |
-| Linux AMD64 | ❌ | ❌ | ✅ | ❌ | ❌ |
-| Linux ARM64 | ❌ | ❌ | ✅ | ❌ | ❌ |
+| Linux AMD64 | ❌ | ❌ | ✅ | ❌ | ✅ |
+| Linux ARM64 | ❌ | ❌ | ✅ | ❌ | ✅ |
 | macOS AMD64 | ❌ | ❌ | ✅ | ❌ | ❌ |
-| macOS ARM64 | ❌ | ❌ | ✅ | ❌ | ❌ |
-| Windows AMD64 | ❌ | ❌ | ✅ | ❌ | ❌ |
+| macOS ARM64 | ❌ | ❌ | ✅ | ❌ | ✅ |
+| Windows AMD64 | ❌ | ❌ | ✅ | ❌ | ✅ |
 | Windows ARM64 | ❌ | ❌ | ❌ | ❌ | ❌ |
 | WebAssembly | ❌ | ❌ | ❌ | ❌ | ❌ |
 
@@ -341,45 +413,51 @@ LOAD {{ page.extension.name }};
 
 <div class="extension_functions_table"></div>
 
-|  function_name  | function_type | description | comment | examples |
-|-----------------|---------------|-------------|---------|----------|
-| audit_addresses | table         | NULL        | NULL    |          |
-| read_camt027    | table         | NULL        | NULL    |          |
-| read_camt028    | table         | NULL        | NULL    |          |
-| read_camt029    | table         | NULL        | NULL    |          |
-| read_camt030    | table         | NULL        | NULL    |          |
-| read_camt031    | table         | NULL        | NULL    |          |
-| read_camt036    | table         | NULL        | NULL    |          |
-| read_camt037    | table         | NULL        | NULL    |          |
-| read_camt055    | table         | NULL        | NULL    |          |
-| read_camt056    | table         | NULL        | NULL    |          |
-| read_camt057    | table         | NULL        | NULL    |          |
-| read_camt087    | table         | NULL        | NULL    |          |
-| read_iso20022   | table         | NULL        | NULL    |          |
-| read_mt101      | table         | NULL        | NULL    |          |
-| read_mt103      | table         | NULL        | NULL    |          |
-| read_mt104      | table         | NULL        | NULL    |          |
-| read_mt202      | table         | NULL        | NULL    |          |
-| read_mt940      | table         | NULL        | NULL    |          |
-| read_mt942      | table         | NULL        | NULL    |          |
-| read_pacs002    | table         | NULL        | NULL    |          |
-| read_pacs003    | table         | NULL        | NULL    |          |
-| read_pacs004    | table         | NULL        | NULL    |          |
-| read_pacs007    | table         | NULL        | NULL    |          |
-| read_pacs008    | table         | NULL        | NULL    |          |
-| read_pacs009    | table         | NULL        | NULL    |          |
-| read_pacs010    | table         | NULL        | NULL    |          |
-| read_pacs028    | table         | NULL        | NULL    |          |
-| read_pain001    | table         | NULL        | NULL    |          |
-| read_pain002    | table         | NULL        | NULL    |          |
-| read_pain008    | table         | NULL        | NULL    |          |
-| read_pain009    | table         | NULL        | NULL    |          |
-| read_pain010    | table         | NULL        | NULL    |          |
-| read_pain011    | table         | NULL        | NULL    |          |
-| read_pain012    | table         | NULL        | NULL    |          |
-| read_pain013    | table         | NULL        | NULL    |          |
-| read_pain014    | table         | NULL        | NULL    |          |
-| sniff_iso20022  | table         | NULL        | NULL    |          |
+|      function_name       | function_type | description | comment | examples |
+|--------------------------|---------------|-------------|---------|----------|
+| audit_addresses          | table         | NULL        | NULL    |          |
+| quackiso_functions       | table         | NULL        | NULL    |          |
+| read_camt027             | table         | NULL        | NULL    |          |
+| read_camt028             | table         | NULL        | NULL    |          |
+| read_camt029             | table         | NULL        | NULL    |          |
+| read_camt030             | table         | NULL        | NULL    |          |
+| read_camt031             | table         | NULL        | NULL    |          |
+| read_camt036             | table         | NULL        | NULL    |          |
+| read_camt037             | table         | NULL        | NULL    |          |
+| read_camt055             | table         | NULL        | NULL    |          |
+| read_camt056             | table         | NULL        | NULL    |          |
+| read_camt057             | table         | NULL        | NULL    |          |
+| read_camt087             | table         | NULL        | NULL    |          |
+| read_camt_amount_details | table         | NULL        | NULL    |          |
+| read_camt_balances       | table         | NULL        | NULL    |          |
+| read_camt_remittance     | table         | NULL        | NULL    |          |
+| read_camt_statements     | table         | NULL        | NULL    |          |
+| read_camt_transactions   | table         | NULL        | NULL    |          |
+| read_iso20022            | table         | NULL        | NULL    |          |
+| read_mt101               | table         | NULL        | NULL    |          |
+| read_mt103               | table         | NULL        | NULL    |          |
+| read_mt104               | table         | NULL        | NULL    |          |
+| read_mt202               | table         | NULL        | NULL    |          |
+| read_mt940               | table         | NULL        | NULL    |          |
+| read_mt942               | table         | NULL        | NULL    |          |
+| read_pacs002             | table         | NULL        | NULL    |          |
+| read_pacs003             | table         | NULL        | NULL    |          |
+| read_pacs004             | table         | NULL        | NULL    |          |
+| read_pacs007             | table         | NULL        | NULL    |          |
+| read_pacs008             | table         | NULL        | NULL    |          |
+| read_pacs009             | table         | NULL        | NULL    |          |
+| read_pacs010             | table         | NULL        | NULL    |          |
+| read_pacs028             | table         | NULL        | NULL    |          |
+| read_pain001             | table         | NULL        | NULL    |          |
+| read_pain002             | table         | NULL        | NULL    |          |
+| read_pain008             | table         | NULL        | NULL    |          |
+| read_pain009             | table         | NULL        | NULL    |          |
+| read_pain010             | table         | NULL        | NULL    |          |
+| read_pain011             | table         | NULL        | NULL    |          |
+| read_pain012             | table         | NULL        | NULL    |          |
+| read_pain013             | table         | NULL        | NULL    |          |
+| read_pain014             | table         | NULL        | NULL    |          |
+| sniff_iso20022           | table         | NULL        | NULL    |          |
 
 ### Overloaded Functions
 
@@ -397,6 +475,8 @@ This extension does not add any types.
 
 <div class="extension_settings_table"></div>
 
-This extension does not add any settings.
+|      name      |                       description                       | input_type | scope  | aliases | typed_value |
+|----------------|---------------------------------------------------------|------------|--------|---------|-------------|
+| temp_directory | Set the directory to which temporary files are written. | VARCHAR    | GLOBAL | []      | post.db.tmp |
 
 

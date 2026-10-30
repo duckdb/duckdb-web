@@ -26,7 +26,7 @@ Array data also has its own world of highly specialized file formats and compres
 
 But what would it feel like to turn a movie into a table? (Very) deep down, a movie is just a series of fast-moving pictures (“frames”), typically at something around 25 frames per second. At that speed, our monkey-brain cannot distinguish the separate images any more and is fooled into thinking that we are watching smooth movement. Side note for the younger generations, a strip of pictures was the way we [shipped around movies](https://en.wikipedia.org/wiki/Film_stock#/media/File:ButterflyDancebis.jpg) for more than 100 years.
 
-So a series of pictures it is. Each picture can be further deconstructed into a two-dimensional array (a “matrix”) of points, so-called “pixels”. Every pixel in turn consists of three numbers, one each for the intensity of red, green and blue, or [RGB](https://en.wikipedia.org/wiki/RGB_color_model) for short. Note that we're ignoring the audio tracks in this post, but in principle it would work the exact same way, just with a different kind of intensity.
+So a series of pictures it is. Each picture can be further deconstructed into a two-dimensional array (a “matrix”) of points, so-called “pixels”. Every pixel in turn consists of three numbers, one each for the intensity of red, green, and blue, or [RGB](https://en.wikipedia.org/wiki/RGB_color_model) for short. Note that we're ignoring the audio tracks in this post, but in principle it would work the exact same way, just with a different kind of intensity.
 
 As an added complexity, the relational model (famously) [does not require](https://www.reddit.com/r/Database/comments/1l7tbrc/why_is_inherent_order_in_rdbms_so_neglected/) an absolute order of records. So all the various offsets have to be made explicit to not lose information. This of course greatly increases the size of our data set. We end up with a table that looks like this:
 
@@ -43,9 +43,9 @@ As an added complexity, the relational model (famously) [does not require](https
 |    0 |    0 |    8 |    9 |   10 |    5 |
 |    0 |    0 |    9 |    9 |   10 |    5 |
 
-We have the time offset or frame number `i`, we have `x` and `y` for the pixel position in the frame, and `r`, `g` and `b` for the color components red, green and blue. Quite involved.
+We have the time offset or frame number `i`, we have `x` and `y` for the pixel position in the frame, and `r`, `g`, and `b` for the color components red, green, and blue. Quite involved.
 
-But now the movie is just a single table. If only just we had a conventional and guaranteed total order of rows, we could in theory skip all columns except for `r`, `g` and `b`, because with a known resolution all other columns can be inferred. This is coincidentally also how actual movie data files are stored, ignoring compression. This is another reason why maybe relational tables are not the best place for a movie to live in, but if [all you have is a hammer](https://en.wikipedia.org/wiki/Law_of_the_instrument). We could also have used some more modern features of SQL and use nested fields (a `LIST` in DuckDB), but let's keep it to a table even [System R](https://en.wikipedia.org/wiki/IBM_System_R) could have dealt with.  In addition, having explicit offsets  does not require nebulous conventions or additional metadata to know along with axis order the array data was serialized.
+But now the movie is just a single table. If only just we had a conventional and guaranteed total order of rows, we could in theory skip all columns except for `r`, `g`, and `b`, because with a known resolution all other columns can be inferred. This is coincidentally also how actual movie data files are stored, ignoring compression. This is another reason why maybe relational tables are not the best place for a movie to live in, but if [all you have is a hammer](https://en.wikipedia.org/wiki/Law_of_the_instrument). We could also have used some more modern features of SQL and use nested fields (a `LIST` in DuckDB), but let's keep it to a table even [System R](https://en.wikipedia.org/wiki/IBM_System_R) could have dealt with.  In addition, having explicit offsets  does not require nebulous conventions or additional metadata to know along with axis order the array data was serialized.
 
 
 ## Experiments
@@ -173,7 +173,7 @@ This one is admittedly a bit of a flex. DuckDB can compute elaborate summary sta
 |           b | UTINYINT    |    0 |    255 |           252 | 43.249715985643995 |  38.39218963268899 |    16 |    28 |     61 | 47857461120 |            0.00 |
 
 
-Since we're basically storing a lot of colors, just how many different combinations of red, green and blue are there, DuckDB?
+Since we're basically storing a lot of colors, just how many different combinations of red, green, and blue are there, DuckDB?
 
 ```sql
 FROM (FROM movie SELECT DISTINCT r, g, b)

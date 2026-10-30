@@ -86,8 +86,8 @@ docs:
 
 extension_star_count: 8
 extension_star_count_pretty: 8
-extension_download_count: 7428
-extension_download_count_pretty: 7.4k
+extension_download_count: 9102
+extension_download_count_pretty: 9.1k
 image: '/images/community_extensions/social_preview/preview_community_extension_turbovec.png'
 layout: community_extension_doc
 ---

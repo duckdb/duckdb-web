@@ -109,7 +109,7 @@ SELECT ⟨aggregate_function⟩(⟨arg⟩, ⟨sep⟩ ORDER BY ⟨ordering_criter
 
 This clause ensures that the values being aggregated are sorted before applying the function.
 Most aggregate functions are order-insensitive, and for them this clause is parsed and discarded.
-However, there are some order-sensitive aggregates that can have non-deterministic results without ordering, e.g., `first`, `last`, `list` and `string_agg` / `group_concat` / `listagg`.
+However, there are some order-sensitive aggregates that can have non-deterministic results without ordering, e.g., `first`, `last`, `list`, and `string_agg` / `group_concat` / `listagg`.
 These can be made deterministic by ordering the arguments.
 
 When `DISTINCT` is used, every expression in the aggregate-local `ORDER BY` clause must also appear in the aggregate's argument list. For example, the first query below is valid, while the second fails because `y` is not an aggregate argument.
@@ -138,7 +138,7 @@ FROM tbl;
 
 ### Handling `NULL` Values
 
-All general aggregate functions ignore `NULL`s, except for [`list`](#listarg) ([`array_agg`](#listarg)), [`first`](#firstarg) ([`arbitrary`](#firstarg)) and [`last`](#lastarg).
+All general aggregate functions ignore `NULL`s, except for [`list`](#listarg) ([`array_agg`](#listarg)), [`first`](#firstarg) ([`arbitrary`](#firstarg)), and [`last`](#lastarg).
 To exclude `NULL`s from `list`, use a [`FILTER` clause]({% link docs/2.0/sql/query_syntax/filter.md %}) that excludes rows with null input, such as `list(x) FILTER (WHERE x IS NOT NULL)`. A filter on another column may still leave `NULL` values in the list.
 To ignore `NULL`s from `first`, you can use the [`any_value` aggregate](#any_valuearg).
 
@@ -157,7 +157,7 @@ The table below shows the available general aggregate functions.
 | [`arg_max_null(arg, val)`](#arg_max_nullarg-val) | Finds the row with the maximum `val` and calculates the `arg` expression at that row. Rows where the `val` expression evaluates to `NULL` are ignored. This function is [affected by ordering](#order-by-clause-in-aggregate-functions). |
 | [`arg_max_nulls_last(arg, val[, n])`](#arg_max_nulls_lastarg-val-n) | Finds the row with the maximum `val` and calculates the `arg` expression at that row. Unlike [`arg_max`](#arg_maxarg-val), `NULL` values of `arg` are not ignored and rows where `val` is `NULL` are sorted last, i.e., they are only selected if there are no other rows. If `n` is specified, returns a `LIST` containing the `arg` expressions for the top `n` rows ordered by `val` descending, with `NULL` values of `val` last. This function is [affected by ordering](#order-by-clause-in-aggregate-functions). |
 | [`arg_min(arg, val)`](#arg_minarg-val) | Finds the row with the minimum `val` and calculates the `arg` expression at that row. Rows where the value of the `arg` or `val` expression is `NULL` are ignored. This function is [affected by ordering](#order-by-clause-in-aggregate-functions). |
-| [`arg_min(arg, val, n)`](#arg_minarg-val-n) | Returns a `LIST` containing the `arg` expressions for the "bottom" `n` rows ordered by `val` ascending. This function is [affected by ordering](#order-by-clause-in-aggregate-functions). |
+| [`arg_min(arg, val, n)`](#arg_minarg-val-n) | Returns a `LIST` containing the `arg` expressions for the “bottom” `n` rows ordered by `val` ascending. This function is [affected by ordering](#order-by-clause-in-aggregate-functions). |
 | [`arg_min_null(arg, val)`](#arg_min_nullarg-val) | Finds the row with the minimum `val` and calculates the `arg` expression at that row. Rows where the `val` expression evaluates to `NULL` are ignored. This function is [affected by ordering](#order-by-clause-in-aggregate-functions). |
 | [`arg_min_nulls_last(arg, val[, n])`](#arg_min_nulls_lastarg-val-n) | Finds the row with the minimum `val` and calculates the `arg` expression at that row. Unlike [`arg_min`](#arg_minarg-val), `NULL` values of `arg` are not ignored and rows where `val` is `NULL` are sorted last, i.e., they are only selected if there are no other rows. If `n` is specified, returns a `LIST` containing the `arg` expressions for the top `n` rows ordered by `val` ascending, with `NULL` values of `val` last. This function is [affected by ordering](#order-by-clause-in-aggregate-functions). |
 | [`avg(arg)`](#avgarg) | Calculates the average of all non-null values in `arg`. This function is [affected by ordering](#order-by-clause-in-aggregate-functions). |
@@ -183,9 +183,9 @@ The table below shows the available general aggregate functions.
 | [`list(arg)`](#listarg) | Returns a `LIST` containing all the values of a column. This function is [affected by ordering](#order-by-clause-in-aggregate-functions). |
 | [`lttb(x, y, n)`](#lttbx-y-n) | Downsamples the series of `(x, y)` points to at most `n` representative points using the Largest-Triangle-Three-Buckets (LTTB) algorithm. This function is [affected by ordering](#order-by-clause-in-aggregate-functions). |
 | [`max(arg)`](#maxarg) | Returns the maximum value present in `arg`. This function is [unaffected by distinctness](#distinct-clause-in-aggregate-functions). |
-| [`max(arg, n)`](#maxarg-n) | Returns a `LIST` containing the `arg` values for the "top" `n` rows ordered by `arg` descending. |
+| [`max(arg, n)`](#maxarg-n) | Returns a `LIST` containing the `arg` values for the “top” `n` rows ordered by `arg` descending. |
 | [`min(arg)`](#minarg) | Returns the minimum value present in `arg`. This function is [unaffected by distinctness](#distinct-clause-in-aggregate-functions). |
-| [`min(arg, n)`](#minarg-n) | Returns a `LIST` containing the `arg` values for the "bottom" `n` rows ordered by `arg` ascending. |
+| [`min(arg, n)`](#minarg-n) | Returns a `LIST` containing the `arg` values for the “bottom” `n` rows ordered by `arg` ascending. |
 | [`product(arg)`](#productarg) | Calculates the product of all non-null values in `arg`. This function is [affected by ordering](#order-by-clause-in-aggregate-functions). |
 | [`string_agg(arg)`](#string_aggarg-sep) | Concatenates the column string values with a comma separator (`,`). This function is [affected by ordering](#order-by-clause-in-aggregate-functions). |
 | [`string_agg(arg, sep)`](#string_aggarg-sep) | Concatenates the column string values with a separator. This function is [affected by ordering](#order-by-clause-in-aggregate-functions). |
@@ -434,7 +434,7 @@ The table below shows the available general aggregate functions.
 
 <div class="nostroke_table"></div>
 
-| **Description** |  Returns a `LIST` containing the `arg` values for the "top" `n` rows ordered by `arg` descending. |
+| **Description** |  Returns a `LIST` containing the `arg` values for the “top” `n` rows ordered by `arg` descending. |
 | **Example** | `max(A, 2)` |
 
 #### `min(arg)`
@@ -448,7 +448,7 @@ The table below shows the available general aggregate functions.
 
 <div class="nostroke_table"></div>
 
-| **Description** | Returns a `LIST` containing the `arg` values for the "bottom" `n` rows ordered by `arg` ascending. |
+| **Description** | Returns a `LIST` containing the `arg` values for the “bottom” `n` rows ordered by `arg` ascending. |
 | **Example** | `min(A, 2)` |
 
 #### `product(arg)`

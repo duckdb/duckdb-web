@@ -33,7 +33,7 @@ Our setup included two server platforms: an x86 baseline (Intel Xeon 6) and NVID
 
 Both machines ran Ubuntu 26.04.
 Their hardware included 768 GB of memory and a single NVMe SSD with 3+ TB of storage, formatted as ext4.
-At the time of writing, DuckDB v2.0 was [not released yet]({% post_url 2026-09-02-try-duckdb-20-alpha %}), so we used a [preview build]({% link install/index.html %}?version=preview), `1.6.0.dev379`.
+At the time of writing, DuckDB v2.0 was [not released yet]({% post_url 2026-09-02-try-duckdb-20-alpha %}), so we used a [preview build]({% link docs/2.0/installation.html %}?version=preview), `1.6.0.dev379`.
 
 To run the experiments, we used the [`duckdb-tpch` benchmark harness](https://github.com/duckdb/duckdb-tpch/).
 To re-create our benchmark environment, see our script below.
@@ -131,4 +131,4 @@ First, the high memory bandwidth enables fast scans.
 Second, combined with low memory latency, it keeps the cores continuously occupied during processing.
 Finally, the Olympus cores' large caches allow efficient access to the hash tables built during aggregations and joins.
 
-We are looking forward to continuing this benchmark by using DuckDB v2.0.0's stable build, running on the full dual-socket setup and incorporating different benchmarks.
+We are looking forward to continuing this benchmark by using DuckDB v2.0.0's stable build, running on the full dual-socket setup, and incorporating different benchmarks.
