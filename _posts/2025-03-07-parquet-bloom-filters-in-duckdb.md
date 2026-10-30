@@ -83,7 +83,7 @@ SELECT sum(r) FROM 'nofilter.parquet' WHERE r = 501;
 ```
 
 The first query completes in ca. than 0.002 s, where the second query takes 0.1 s. This large difference can be explained by Bloom filters! Since `501` does not actually occur in the query, DuckDB can automatically exclude all row groups and not actually read any data besides the Bloom filters. We can explore this further using the `parquet_metadata` function:
- 
+
 ```sql
 FROM parquet_metadata('filter.parquet')
 SELECT row_group_id, stats_min, stats_max,

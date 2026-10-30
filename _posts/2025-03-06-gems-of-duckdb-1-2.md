@@ -67,16 +67,16 @@ These options allows fine-grained access control for the file system.
 For example, you can set DuckDB to only use the `/tmp` directory.
 
 ```sql
-SET allowed_directories = ['/tmp'];  
-SET enable_external_access = false;  
-FROM read_csv('test.csv');  
+SET allowed_directories = ['/tmp'];
+SET enable_external_access = false;
+FROM read_csv('test.csv');
 ```
 
 With the setting applied, DuckDB will refuse to read files in the current working directory:
 
 ```console
 Permission Error:
-Cannot access file "test.csv" - file system operations are disabled by configuration  
+Cannot access file "test.csv" - file system operations are disabled by configuration
 ```
 
 ### `sum(BOOLEAN)`
@@ -84,13 +84,13 @@ Cannot access file "test.csv" - file system operations are disabled by configura
 You can now directly [compute the sum of `BOOLEAN` expressions](https://github.com/duckdb/duckdb/pull/15042) without wrapping them into a `CASE` expression:
 
 ```sql
-SELECT sum(l_extendedprice > 500) FROM lineitem;  
+SELECT sum(l_extendedprice > 500) FROM lineitem;
 ```
 
 This is equivalent to:
 
 ```sql
-SELECT sum(CASE WHEN l_extendedprice > 500 THEN 1 END) FROM lineitem;  
+SELECT sum(CASE WHEN l_extendedprice > 500 THEN 1 END) FROM lineitem;
 ```
 
 ### Excel Extension
@@ -99,7 +99,7 @@ Prior to DuckDB 1.2, Excel files were only supported by the [`spatial` extension
 Starting with 1.2, the [`excel` extension]({% link docs/2.0/core_extensions/excel.md %}) – which was previously limited to computing a few formulas – can read and write Excel sheets. For example:
 
 ```sql
-FROM read_xlsx('test.xlsx', header = true);  
+FROM read_xlsx('test.xlsx', header = true);
 ```
 
 > If you would like to work with _Google Sheets_ sheets, take a look at the [`gsheets` community extension]({% post_url 2025-02-26-google-sheets-community-extension %}).

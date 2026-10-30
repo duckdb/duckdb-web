@@ -303,9 +303,9 @@ The main [DuckLake](https://ducklake.select/) change for DuckDB 1.5 is updating 
 We are aiming for this to be the same specification that ships with DuckLake 1.0, which will be released in April.
 Its main highlights include:
 
-* Macro support.  
-* Sorted tables.  
-* Deletion inlining and addition of partial delete files.  
+* Macro support.
+* Sorted tables.
+* Deletion inlining and addition of partial delete files.
 * Internal rework of DuckLake options.
 
 We'll announce more details about these features in the blog post for DuckLake 1.0.
@@ -344,7 +344,7 @@ If you are interested in more details, click here.
 </summary>
 Due to technical reasons, `httplib` is still the library we use for downloading the `httpfs` extension. When `httpfs` is loaded with the (now default) `curl` backend, subsequent extension installations go through `https://`, with the default endpoint for core extensions pointing to [`https://extensions.duckdb.org`](https://extensions.duckdb.org).
 
-All core and community extensions are cryptographically signed, so installing them through `http://` does not pose a security risk. However, some users reported issues about `http://` extension installs in environments with firewalls.  
+All core and community extensions are cryptographically signed, so installing them through `http://` does not pose a security risk. However, some users reported issues about `http://` extension installs in environments with firewalls.
 </details>
 
 ### Lambda Syntax
@@ -393,8 +393,8 @@ This has been a long-standing source of confusion and numerous issues, as other 
 
 We are changing how this currently works in DuckDB to be consistent with how other systems operate, and hopefully cause less confusion for new users in the future. However, to avoid silently breaking existing workflows that have adapted to this quirk (e.g., by using `ST_FlipCoordinates`), we are rolling out this change gradually via a new `geometry_always_xy` setting:
 
-* In DuckDB 1.5, setting `geometry_always_xy = true` enables the new behavior (x = longitude, y = latitude). Without it, affected functions emit a warning.  
-* In DuckDB 2.0, the warning will become an error. Set `geometry_always_xy = false` to preserve the old behavior.  
+* In DuckDB 1.5, setting `geometry_always_xy = true` enables the new behavior (x = longitude, y = latitude). Without it, affected functions emit a warning.
+* In DuckDB 2.0, the warning will become an error. Set `geometry_always_xy = false` to preserve the old behavior.
 * In DuckDB 2.1, `geometry_always_xy = true` will become the default.
 
 So to summarize, nothing is changing by default in this release, but to avoid being affected by this change in the future, set `geometry_always_xy` explicitly now. Set it to `true` to opt into the new behavior, or `false` to keep the existing one.

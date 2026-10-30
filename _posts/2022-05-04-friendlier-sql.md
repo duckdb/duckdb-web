@@ -1,5 +1,5 @@
 ---
-layout: post  
+layout: post
 title: "Friendlier SQL with DuckDB"
 tested: true
 authors:
@@ -53,7 +53,7 @@ INSERT INTO squadron_two VALUES ('green_two');
 SELECT * EXCLUDE (jar_jar_binks, midichlorians) FROM star_wars;
 ```
 
-Now we can save time repeatedly typing all columns, improve code readability, and retain flexibility as additional columns are added to underlying tables.  
+Now we can save time repeatedly typing all columns, improve code readability, and retain flexibility as additional columns are added to underlying tables.
 
 DuckDB's implementation of this concept can even handle exclusions from multiple tables within a single statement:
 
@@ -149,7 +149,7 @@ DuckDB allows queries to be case insensitive, while maintaining the specified ca
 ```sql
 CREATE TABLE mandalorian AS SELECT 1 AS "THIS_IS_THE_WAY";
 SELECT this_is_the_way FROM mandalorian;
-```  
+```
 
 | THIS_IS_THE_WAY |
 | --------------: |
@@ -191,7 +191,7 @@ Even as SQL fans, we know that SQL can learn a thing or two from newer languages
 
 ```sql
 SELECT 'I love you! I know'[:-3] AS nearly_soloed;
-```  
+```
 
 
 | nearly_soloed   |
@@ -216,7 +216,7 @@ Bracket syntax may also be used to slice a `LIST`. Again, note that this is 1-in
 SELECT
     starfighter_list[2:2] AS dont_forget_the_b_wing
 FROM (SELECT ['A-Wing', 'B-Wing', 'X-Wing', 'Y-Wing'] AS starfighter_list);
-```  
+```
 
 
 | dont_forget_the_b_wing |
@@ -275,7 +275,7 @@ FROM (
     FROM squadron_one s1
     CROSS JOIN squadron_two s2
     ) theyre_coming_in_too_fast;
-```  
+```
 
 | tie_fighter | tie_fighter:1 |
 | :---------- | :------------ |
@@ -302,11 +302,11 @@ JOIN sith_count_varchar s_char
 
 ## Other Friendly Features
 
-There are many other features of DuckDB that make it easier to analyze data with SQL!  
+There are many other features of DuckDB that make it easier to analyze data with SQL!
 
-DuckDB [makes working with time easier in many ways]({% post_url 2022-01-06-time-zones %}), including by accepting multiple different syntaxes (from other databases) for the [`INTERVAL` data type]({% link docs/2.0/sql/data_types/interval.md %}) used to specify a length of time.  
+DuckDB [makes working with time easier in many ways]({% post_url 2022-01-06-time-zones %}), including by accepting multiple different syntaxes (from other databases) for the [`INTERVAL` data type]({% link docs/2.0/sql/data_types/interval.md %}) used to specify a length of time.
 
-DuckDB also implements multiple SQL clauses outside of the traditional core clauses including the [`SAMPLE` clause]({% link docs/2.0/sql/query_syntax/sample.md %}) for quickly selecting a random subset of your data and the [`QUALIFY` clause]({% link docs/2.0/sql/query_syntax/qualify.md %}) that allows filtering of the results of window functions (much like a `HAVING` clause does for aggregates).  
+DuckDB also implements multiple SQL clauses outside of the traditional core clauses including the [`SAMPLE` clause]({% link docs/2.0/sql/query_syntax/sample.md %}) for quickly selecting a random subset of your data and the [`QUALIFY` clause]({% link docs/2.0/sql/query_syntax/qualify.md %}) that allows filtering of the results of window functions (much like a `HAVING` clause does for aggregates).
 
 The [`DISTINCT ON` clause]({% link docs/2.0/sql/query_syntax/select.md %}#distinct-on-clause) allows DuckDB to select unique combinations of a subset of the columns in a `SELECT` clause, while returning the first row of data for columns not checked for uniqueness.
 

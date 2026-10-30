@@ -53,7 +53,7 @@ But now the movie is just a single table. If only just we had a conventional and
 To investigate this daft idea further (for [Science](https://www.ru.nl/personen/muhleisen-h)!), we convert the 1963 classic [“Charade”](https://en.wikipedia.org/wiki/Charade_(1963_film)), a “romantic screwball comedy mystery film” starring Audrey Hepburn and Cary Grant to a DuckDB table. This movie was picked because it is *accidentally in the Public Domain* because a screw-up in the wording of the copyright notice (no, really). Because of this, you can actually [freely download this movie](https://archive.org/details/Charade19631280x696) from the Internet Archive.
 
 <img src="{% link images/blog/movies/charade-poster.jpg %}" width="400" />
- 
+
 Since we're just creating a table, we will use DuckDB's native storage format. Here is the *complete* code snippet we used to convert the movie. In fact, this code should actually be generic enough to convert anything that `ffmpeg` can read to a table. Just in case you would want to try this at home on your own movies.
 
 

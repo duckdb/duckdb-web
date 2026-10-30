@@ -320,7 +320,7 @@ FROM main_public.rep_fact_train_services_daily_agg;
 ```
 
 ```text
- count  |   sum    
+ count  |   sum
 --------+----------
  240826 | 17438151
 ```
@@ -335,7 +335,7 @@ The above implementation consists of 10 models and 20 data tests, processing 400
 05:48:07  Running with dbt=1.9.3
 05:48:08  Registered adapter: duckdb=1.9.2
 05:48:08  Found 10 models, 20 data tests, 4 sources, 565 macros
-05:48:08  
+05:48:08
 05:48:08  Concurrency: 1 threads (target='dev')
 ...
 05:48:45  19 of 30 OK created sql table model main_main.fact_services .................... [OK in 32.60s]
@@ -343,9 +343,9 @@ The above implementation consists of 10 models and 20 data tests, processing 400
 05:48:50  26 of 30 OK created sql incremental model postgres_db.main_public.rep_fact_train_services_daily_agg  [OK in 3.74s]
 ...
 05:48:51  Finished running 2 external models, 1 incremental model, 7 table models, 20 data tests in 0 hours 0 minutes and 42.63 seconds (42.63s).
-05:48:51  
+05:48:51
 05:48:51  Completed successfully
-05:48:51  
+05:48:51
 05:48:51  Done. PASS=30 WARN=0 ERROR=0 SKIP=0 TOTAL=30
 ```
 

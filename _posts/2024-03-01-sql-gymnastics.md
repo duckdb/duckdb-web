@@ -185,7 +185,7 @@ We made it!
 
 > Extra credit! In the next release of DuckDB, version 0.10.1, we will be able to [apply a dynamic alias](https://github.com/duckdb/duckdb/pull/10774) to the result of a `COLUMNS` expression.
 > For example, each new aggregate column could be renamed in the pattern `agg_[the original column name]`.
-> This will unlock the ability to chain together these type of macros, as the naming will be predictable.  
+> This will unlock the ability to chain together these type of macros, as the naming will be predictable.
 
 #### Takeaways
 

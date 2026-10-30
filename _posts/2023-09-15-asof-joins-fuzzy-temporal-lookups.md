@@ -673,7 +673,7 @@ there are a couple of planning optimisations that could be applied here.
 * When there are selective equality conditions, it is likely that a hash join with filtering against a materialised state table would be significantly faster. If we can detect this and suitable sentinel values are available, the planner could choose to use a hash join instead of the default AsOf implementation.
 * There are also use cases where the probe table is much smaller than the build table, along with equality conditions, and performing a hash join against the *probe* table could yield significant performance improvements.
 
-Nevertheless, remember that one of the advantages of SQL is that it is a declarative language:  
+Nevertheless, remember that one of the advantages of SQL is that it is a declarative language:
 You specify *what* you want and leave it up to the database to figure out *how*.
 Now that we have defined the semantics of the AsOf join,
 you the user can write queries saying this is *what* you want – and we are free to keep improving the *how*!

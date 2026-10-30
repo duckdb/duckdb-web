@@ -1,5 +1,5 @@
 ---
-layout: post  
+layout: post
 title: "Fastest Table Sort in the West – Redesigning DuckDB’s Sort"
 authors:
   - Laurens Kuiper

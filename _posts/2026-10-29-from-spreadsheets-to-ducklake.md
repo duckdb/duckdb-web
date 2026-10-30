@@ -15,7 +15,7 @@ tag: using-duckdb
 
 Matt's career started in 2008 the way many data careers do: with spreadsheets. As a fresh graduate, he spent his days copying and pasting between Excel, Microsoft Access, and SQL Server. Assembling a single report could take three hours, and one mistake meant starting over.
 
-**“There's got to be an easier way,”** he remembers thinking. His dad taught him how to write VBA macros, and that was the first step. Next, he got access to the SQL Server and Oracle databases behind those spreadsheets and started querying the source directly instead of other people's workbooks. Macros turned into scheduled stored procedures, and stored procedures turned into automated pipelines. 
+**“There's got to be an easier way,”** he remembers thinking. His dad taught him how to write VBA macros, and that was the first step. Next, he got access to the SQL Server and Oracle databases behind those spreadsheets and started querying the source directly instead of other people's workbooks. Macros turned into scheduled stored procedures, and stored procedures turned into automated pipelines.
 
 When he started, the team published its 20 to 30 daily reports by 10 AM. By the time he had automated the process, the reports were out by 6 AM, before anyone had touched anything.
 
@@ -82,7 +82,7 @@ He is experimenting with LLM-based assistants for this, but likes knowing that h
 
 As open table formats took off, Matt worked extensively with Apache Iceberg and Delta Lake. Both are good at managing large datasets and their version history. The trouble starts when the metadata grows. Iceberg writes several metadata files per transaction, including metadata JSON, manifest lists, and manifests. Over time, a query that used to plan in seconds can slow down significantly because thousands of metadata files need to be resolved first.
 
-[DuckLake](https://ducklake.select/) takes a different approach: it stores all metadata in a SQL database. **“Organizations have been doing SQL for over four decades and have gotten very, very good at optimizing queries,”** Matt says. In his experience, catalog operations that take seconds with Iceberg resolve in under a millisecond with DuckLake, because they are queries against indexed tables. 
+[DuckLake](https://ducklake.select/) takes a different approach: it stores all metadata in a SQL database. **“Organizations have been doing SQL for over four decades and have gotten very, very good at optimizing queries,”** Matt says. In his experience, catalog operations that take seconds with Iceberg resolve in under a millisecond with DuckLake, because they are queries against indexed tables.
 
 What Matt likes most is how little setup it takes: standing up an Iceberg lakehouse involves a lot of tooling, while a DuckLake on object storage takes two statements, one to create a secret for the bucket and one to attach the lake:
 
@@ -112,7 +112,7 @@ ATTACH '⟨aws_account_id⟩' AS glue_catalog (
 
 Matt has been testing the DuckDB 2.0 alpha and has not run into any regressions so far. Several features stand out for him.
 
-**Dynamic `ATTACH` statements.** While writing the book, Matt needed to attach AWS Glue catalogs in examples. Up to v1.5, the `ATTACH` path had to be a literal, so the account number had to be hard-coded in the script, as calling `getenv` raised an error. 
+**Dynamic `ATTACH` statements.** While writing the book, Matt needed to attach AWS Glue catalogs in examples. Up to v1.5, the `ATTACH` path had to be a literal, so the account number had to be hard-coded in the script, as calling `getenv` raised an error.
 
 Matt filed a feature request, and a pull request followed within two days. In v2.0, `ATTACH` accepts expressions, so account IDs, usernames, passwords, and connection strings can come from environment variables at runtime instead of living in the script:
 
@@ -123,7 +123,7 @@ ATTACH getenv('AWS_ACCOUNT_ID') AS glue_catalog (
 );
 ```
 
-**Asynchronous I/O.** This is the feature Matt calls a game changer. In his [benchmarks, published on his Substack](https://performancede.substack.com/p/duckdb-20-and-s3-file-read-performance), reading 1,000 and 10,000 files from Amazon S3 consistently took 67% to 70% less time with the v2.0 alpha. 
+**Asynchronous I/O.** This is the feature Matt calls a game changer. In his [benchmarks, published on his Substack](https://performancede.substack.com/p/duckdb-20-and-s3-file-read-performance), reading 1,000 and 10,000 files from Amazon S3 consistently took 67% to 70% less time with the v2.0 alpha.
 
 Much of the time used to go into sequential requests to list and fetch files. In v2.0, DuckDB issues these in the background. No code changes are needed: a query like the following simply runs faster on v2.0.
 
@@ -134,7 +134,7 @@ FROM read_json('s3://⟨bucket⟩/logs/*.json');
 
 For workloads such as log analytics over large numbers of raw files in S3, Google Cloud Storage, or Azure, where teams would traditionally spin up a wide Spark cluster, a single DuckDB process can now keep up, with less overhead and lower cost.
 
-**Quack.** The [Quack remote protocol]({% link docs/2.0/quack/overview.md %}) turns a DuckDB instance into a server that other DuckDB instances can connect to over HTTP. Matt likes the cleaner connect and disconnect syntax in v2.0 and the official DuckLake support. 
+**Quack.** The [Quack remote protocol]({% link docs/2.0/quack/overview.md %}) turns a DuckDB instance into a server that other DuckDB instances can connect to over HTTP. Matt likes the cleaner connect and disconnect syntax in v2.0 and the official DuckLake support.
 
 He has written about [serving a DuckLake on an Amazon EC2 instance via Quack](https://performancede.substack.com/p/serving-a-ducklake-on-ec2-via-quack). End users only need the Quack address and a token, with no AWS credentials and no knowledge of the DuckLake behind it. He has also built a DuckDB-Wasm dashboard on top of this setup, which he covers in the DuckLake book he is writing. The Wasm build is still on v1.5 and will be updated for the v2.0 release.
 

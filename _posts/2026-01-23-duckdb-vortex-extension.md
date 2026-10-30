@@ -33,8 +33,8 @@ Besides DuckDB, other engines such as DataFusion, Spark, and Arrow already offer
 
 DuckDB is a database as the name says, yes, but it is also widely used as an engine to query many different data sources. Through core or community extensions, DuckDB can integrate with:
 
-- Databases like Snowflake, BigQuery, or PostgreSQL.  
-- Lakehouse formats like Delta, Iceberg, or DuckLake.  
+- Databases like Snowflake, BigQuery, or PostgreSQL.
+- Lakehouse formats like Delta, Iceberg, or DuckLake.
 - File formats, most notably JSON, CSV, Parquet, and most recently Vortex.
 
 > The community has gotten very creative, though, so these days you can even read YAML and Markdown with DuckDB using [community extensions]({% link community_extensions/index.md %}).
@@ -65,8 +65,8 @@ TO 'my.vortex' (FORMAT vortex);
 
 Vortex claims to do well primarily at three use cases:
 
-- Traditional SQL analytics: Through late decompression and compute expressions on compressed data, Vortex can filter down data within the storage segment, reducing IO and memory consumption.  
-- Machine learning pre-processing pipelines: By supporting a wide variety of encodings for different data types, Vortex claims to be effective at reading and writing data, whether it is audio, text, images, or vectors.  
+- Traditional SQL analytics: Through late decompression and compute expressions on compressed data, Vortex can filter down data within the storage segment, reducing IO and memory consumption.
+- Machine learning pre-processing pipelines: By supporting a wide variety of encodings for different data types, Vortex claims to be effective at reading and writing data, whether it is audio, text, images, or vectors.
 - AI model training: Encodings such as FastLanes allow for a very efficient copy of data to the GPU. Vortex is aiming at being able to copy data directly from S3 object storage to the GPU.
 
 The promise of more efficient IO and memory use through late decompression is a good reason to try DuckDB and Vortex for SQL analytics. On another note, if you are looking at running analytics on unified datasets that are used for multiple use cases, including pre-processing pipelines and AI training, then Vortex may be a good candidate since it is designed to fit all of these use cases well.
@@ -75,11 +75,11 @@ The promise of more efficient IO and memory use through late decompression is a 
 
 For those who are number hungry, we decided to run a TPC-H benchmark scale factor 100 with DuckDB to understand how Vortex can perform as a storage format compared to Parquet. We tried to make the benchmark as fair as possible. These are the parameters:
 
-- Run on Mac M1 with 10 cores & 32 GB of memory.  
-- The benchmark runs each query 5 times and the average is used for the final report.  
-- The DuckDB connection is closed after each query to try to make runs “colder” and avoid DuckDB's caching (particularly with Parquet) from influencing the results. OS page caching does have an influence in subsequent runs but we decided to acknowledge this factor and still keep the first run.  
-- Each TPC-H table is a single file, which means that lineitem files for Parquet and Vortex are quite large (both around 20 GB). This allows us to ignore the effect of globbing and having many small files.  
-- Data files used for the benchmark are generated with [tpchgen-rs](https://github.com/clflushopt/tpchgen-rs) and are copied out using DuckDB’s Parquet and Vortex extensions.  
+- Run on Mac M1 with 10 cores & 32 GB of memory.
+- The benchmark runs each query 5 times and the average is used for the final report.
+- The DuckDB connection is closed after each query to try to make runs “colder” and avoid DuckDB's caching (particularly with Parquet) from influencing the results. OS page caching does have an influence in subsequent runs but we decided to acknowledge this factor and still keep the first run.
+- Each TPC-H table is a single file, which means that lineitem files for Parquet and Vortex are quite large (both around 20 GB). This allows us to ignore the effect of globbing and having many small files.
+- Data files used for the benchmark are generated with [tpchgen-rs](https://github.com/clflushopt/tpchgen-rs) and are copied out using DuckDB’s Parquet and Vortex extensions.
 - We compared Vortex against Parquet v1 and v2. The v2 specification allows for considerably faster reading than the v1 specification but many writers do not support this, so we thought it was worth including both.
 
 **The results are very good.** The TPC-H benchmark runs 18% faster with respect to Parquet V2 and 35% faster than Parquet V1 (using the geometric means, which is the recommended approach).
@@ -103,8 +103,8 @@ Another interesting result is the standard deviation across runs. There was a co
 Click here to see a more detailed breakdown of the benchmark results.
 </summary>
 
-This figure shows the results per query, including the standard deviation error bar.  
-![mean_per_query](/images/blog/duckdb-vortex/tpch_rowgram.png)  
+This figure shows the results per query, including the standard deviation error bar.
+![mean_per_query](/images/blog/duckdb-vortex/tpch_rowgram.png)
 The following is the summary of the sizes of the datasets. Note that both Parquet v1 and v2 are using the default compression used by the DuckDB Parquet writer, which is Snappy. In this case, Vortex is not using any general-purpose compression but still keeps the data sizes competitive.
 
 | Table | parquet_v1 | parquet_v2 | vortex |
@@ -118,7 +118,7 @@ The following is the summary of the sizes of the datasets. Note that both Parque
 | region | 0.00 | 0.00 | 0.00 |
 | supplier | 0.07 | 0.06 | 0.07 |
 | **total** | 33.06 | 25.40 | 28.57 |
- 
+
 </details>
 
 <!-- markdownlint-enable MD040 MD046 -->
