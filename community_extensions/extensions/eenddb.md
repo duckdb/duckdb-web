@@ -42,8 +42,8 @@ docs:
 
 extension_star_count: 6
 extension_star_count_pretty: 6
-extension_download_count: 12567
-extension_download_count_pretty: 12.6k
+extension_download_count: 12522
+extension_download_count_pretty: 12.5k
 image: '/images/community_extensions/social_preview/preview_community_extension_eenddb.png'
 layout: community_extension_doc
 ---

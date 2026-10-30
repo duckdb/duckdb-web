@@ -30,8 +30,8 @@ docs:
 
 extension_star_count: 14
 extension_star_count_pretty: 14
-extension_download_count: 2962
-extension_download_count_pretty: 3.0k
+extension_download_count: 3263
+extension_download_count_pretty: 3.3k
 image: '/images/community_extensions/social_preview/preview_community_extension_duckhog.png'
 layout: community_extension_doc
 ---

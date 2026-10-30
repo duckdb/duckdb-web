@@ -22,7 +22,7 @@ repo:
 
 extension_star_count: 15
 extension_star_count_pretty: 15
-extension_download_count: 6125
+extension_download_count: 6116
 extension_download_count_pretty: 6.1k
 image: '/images/community_extensions/social_preview/preview_community_extension_duckdb_rdkit.png'
 layout: community_extension_doc

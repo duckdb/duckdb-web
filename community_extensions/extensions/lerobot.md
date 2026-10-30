@@ -55,7 +55,7 @@ docs:
 
 extension_star_count: 2
 extension_star_count_pretty: 2
-extension_download_count: 9680
+extension_download_count: 9696
 extension_download_count_pretty: 9.7k
 image: '/images/community_extensions/social_preview/preview_community_extension_lerobot.png'
 layout: community_extension_doc

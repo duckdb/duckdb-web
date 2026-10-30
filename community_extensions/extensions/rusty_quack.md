@@ -21,19 +21,20 @@ extension:
 repo:
   github: duckdb/extension-template-rs
   andium: 2381c7e1c5026f21c92b7ffe3ae7a6b1d8d177c0
-  ref: abb7b2f3f954a47f90fc37a99cda3ce0618e6094
+  ref: e2492247ab8e8176aab7ab95ef1c9afa346f4938
+  variegata: abb7b2f3f954a47f90fc37a99cda3ce0618e6094
 
 docs:
   hello_world: |
-    FROM rusty_quack('world');
+    FROM rusty_quack(['world']);
   extended_description: |
     The quack extension is based on DuckDB's [Rust Extension Template](https://github.com/duckdb/extension-template-rs/), and it's a great starting point to get started building DuckDB extensions in Rust.
 
 
-extension_star_count: 114
-extension_star_count_pretty: 114
-extension_download_count: 7374
-extension_download_count_pretty: 7.4k
+extension_star_count: 117
+extension_star_count_pretty: 117
+extension_download_count: 8036
+extension_download_count_pretty: 8.0k
 image: '/images/community_extensions/social_preview/preview_community_extension_rusty_quack.png'
 layout: community_extension_doc
 ---
@@ -45,11 +46,11 @@ This table covers all DuckDB releases that have not reached [end-of-life](https:
 
 | Platform | 1.4.4 | 1.4.5 | 1.5.5 | 1.5.6 | 2.0.0 |
 | :--- | :---: | :---: | :---: | :---: | :---: |
-| Linux AMD64 | ✅ | ❌ | ✅ | ❌ | ❌ |
-| Linux ARM64 | ✅ | ❌ | ✅ | ❌ | ❌ |
+| Linux AMD64 | ✅ | ❌ | ✅ | ❌ | ✅ |
+| Linux ARM64 | ✅ | ❌ | ✅ | ❌ | ✅ |
 | macOS AMD64 | ✅ | ❌ | ✅ | ❌ | ❌ |
-| macOS ARM64 | ✅ | ❌ | ✅ | ❌ | ❌ |
-| Windows AMD64 | ✅ | ❌ | ✅ | ❌ | ❌ |
+| macOS ARM64 | ✅ | ❌ | ✅ | ❌ | ✅ |
+| Windows AMD64 | ✅ | ❌ | ✅ | ❌ | ✅ |
 | Windows ARM64 | ❌ | ❌ | ❌ | ❌ | ❌ |
 | WebAssembly | ❌ | ❌ | ❌ | ❌ | ❌ |
 
@@ -73,10 +74,10 @@ LOAD {{ page.extension.name }};
 
 <div class="extension_functions_table"></div>
 
-| function_name | function_type | description | comment | examples |
-|---------------|---------------|-------------|---------|----------|
-| rusty_echo    | scalar        | NULL        | NULL    |          |
-| rusty_quack   | table         | NULL        | NULL    |          |
+| function_name | function_type |                        description                        | comment |    examples     |
+|---------------|---------------|-----------------------------------------------------------|---------|-----------------|
+| rusty_echo    | scalar        | Echo back the input you provided, but with a rusty twist! | NULL    | [echo('hello')] |
+| rusty_quack   | table         | NULL                                                      | NULL    |                 |
 
 ### Overloaded Functions
 
@@ -88,12 +89,16 @@ This extension does not add any function overloads.
 
 <div class="extension_types_table"></div>
 
-This extension does not add any types.
+| type_name | type_size | logical_type | type_category | internal |
+|-----------|----------:|--------------|---------------|----------|
+| LIST      | 16        | LIST         | COMPOSITE     | true     |
 
 ### Added Settings
 
 <div class="extension_settings_table"></div>
 
-This extension does not add any settings.
+|      name      |                       description                       | input_type | scope  | aliases | typed_value |
+|----------------|---------------------------------------------------------|------------|--------|---------|-------------|
+| temp_directory | Set the directory to which temporary files are written. | VARCHAR    | GLOBAL | []      | post.db.tmp |
 
 

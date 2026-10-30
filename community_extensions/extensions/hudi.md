@@ -71,8 +71,8 @@ docs:
 
 extension_star_count: 3
 extension_star_count_pretty: 3
-extension_download_count: 7878
-extension_download_count_pretty: 7.9k
+extension_download_count: 8142
+extension_download_count_pretty: 8.1k
 image: '/images/community_extensions/social_preview/preview_community_extension_hudi.png'
 layout: community_extension_doc
 ---

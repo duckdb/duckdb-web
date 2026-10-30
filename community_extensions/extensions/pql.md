@@ -176,8 +176,8 @@ docs:
 
 extension_star_count: 24
 extension_star_count_pretty: 24
-extension_download_count: 16741
-extension_download_count_pretty: 16.7k
+extension_download_count: 16830
+extension_download_count_pretty: 16.8k
 image: '/images/community_extensions/social_preview/preview_community_extension_pql.png'
 layout: community_extension_doc
 ---

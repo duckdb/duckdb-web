@@ -422,8 +422,8 @@ docs:
 
 extension_star_count: 0
 extension_star_count_pretty: 0
-extension_download_count: 13987
-extension_download_count_pretty: 14.0k
+extension_download_count: 14149
+extension_download_count_pretty: 14.1k
 image: '/images/community_extensions/social_preview/preview_community_extension_subtoken.png'
 layout: community_extension_doc
 ---
