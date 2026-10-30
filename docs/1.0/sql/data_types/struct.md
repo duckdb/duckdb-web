@@ -209,7 +209,7 @@ FROM
     (SELECT {'x': 42} AS a);
 ```
 
-> This behavior was introduced in DuckDB v0.9.0. Previously, this query ran successfully and returned struct `{'y': 42}` as column `b`.
+> This behavior was introduced in DuckDB 0.9.0. Previously, this query ran successfully and returned struct `{'y': 42}` as column `b`.
 
 The `row` function can be used to return unnamed structs. For example:
 

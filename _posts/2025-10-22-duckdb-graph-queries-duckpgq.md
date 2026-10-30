@@ -24,7 +24,7 @@ ATTACH 'https://blobs.duckdb.org/data/finbench.duckdb' AS finbench;
 USE finbench;
 ```
 
-> To follow along with the examples in this post, it is recommended to use DuckDB v1.4.1.
+> To follow along with the examples in this post, it is recommended to use DuckDB 1.4.1.
 
 In this blog post we will use a subset of the dataset with tables for `Person`, `Account`, and the `AccountTransferAccount` table that links them.
 

@@ -25,7 +25,7 @@ The amount of memory is fixed to 8 GB.
 And while there is only a single CPU option, it is quite an interesting one:
 this laptop is powered by the 6-core [Apple A18 Pro](https://en.wikipedia.org/wiki/Apple_A18#CPU), originally built for the iPhone 16 Pro.
 
-It turns out that we have already [tested this phone]({% post_url 2024-12-06-duckdb-tpch-sf100-on-mobile %}#a-song-of-dry-ice-and-fire) under some unusual circumstances. Back in 2024, with DuckDB v1.2-dev, we found that the iPhone 16 Pro could complete all [TPC-H]({% link docs/2.0/core_extensions/tpch.md %}) queries at scale factor 100 in about 10 minutes when air-cooled and in less than 8 minutes while lying in a box of dry ice. The MacBook Neo should definitely be able to handle this workload – but maybe it can even handle a bit more. Cue the inevitable benchmarks!
+It turns out that we have already [tested this phone]({% post_url 2024-12-06-duckdb-tpch-sf100-on-mobile %}#a-song-of-dry-ice-and-fire) under some unusual circumstances. Back in 2024, with DuckDB 1.2-dev, we found that the iPhone 16 Pro could complete all [TPC-H]({% link docs/2.0/core_extensions/tpch.md %}) queries at scale factor 100 in about 10 minutes when air-cooled and in less than 8 minutes while lying in a box of dry ice. The MacBook Neo should definitely be able to handle this workload – but maybe it can even handle a bit more. Cue the inevitable benchmarks!
 
 ## ClickBench
 
@@ -38,7 +38,7 @@ We only applied a small tweak: as suggested in [our performance guide]({% link d
 
 <img src="{% link images/blog/macbook-neo/laptop.jpg %}" width="600" />
 
-We also re-ran ClickBench with DuckDB v1.5.0 on two cloud instances, yielding the following lineup:
+We also re-ran ClickBench with DuckDB 1.5.0 on two cloud instances, yielding the following lineup:
 
 * The star of our show, the MacBook Neo with 2 performance cores, 4 efficiency cores, and 8 GB RAM
 * [c6a.4xlarge](https://instances.vantage.sh/aws/ec2/c6a.4xlarge) with 16 AMD EPYC vCPU cores and 32 GB RAM. This instance is [popular in ClickBench](https://benchmark.clickhouse.com/#system=-&type=-&machine=+ca4e&cluster_size=-&opensource=-&hardware=+c&tuned=+n&metric=combined&queries=-) with about 80 individual results reported.

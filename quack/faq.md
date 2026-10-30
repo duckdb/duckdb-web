@@ -129,7 +129,7 @@ Quack uses HTTP v2.0 for communication. This allows Quack to work in environment
 
 <div class="answer" markdown="1">
 
-Yes. Quack was introduced in DuckDB v1.5.3 and DuckDB v2.0 ships a polished version of it. To install it, run:
+Yes. Quack was introduced in DuckDB 1.5.3 and DuckDB 2.0 ships a polished version of it. To install it, run:
 
 ```sql
 INSTALL quack;
@@ -223,7 +223,7 @@ Please consult the DuckDB FAQ's [“I would like feature X to be implemented in 
 
 <div class="answer" markdown="1">
 
-Not yet. Quack is currently in a beta state. You can use Quack for prototyping but it is still in development, and breaking changes are expected to happen. These may include the protocol, function names, and default settings. [DuckDB v2.0]({% post_url 2026-10-21-announcing-duckdb-200 %}) ships a polished version of Quack with substantial performance and stability improvements, but the protocol is not yet stable.
+Not yet. Quack is currently in a beta state. You can use Quack for prototyping but it is still in development, and breaking changes are expected to happen. These may include the protocol, function names, and default settings. [DuckDB 2.0]({% post_url 2026-10-21-announcing-duckdb-200 %}) ships a polished version of Quack with substantial performance and stability improvements, but the protocol is not yet stable.
 
 </div>
 

@@ -108,9 +108,9 @@ ATTACH '⟨aws_account_id⟩' AS glue_catalog (
 );
 ```
 
-## Looking Forward to DuckDB v2.0
+## Looking Forward to DuckDB 2.0
 
-Matt has been testing the DuckDB v2.0 alpha and has not run into any regressions so far. Several features stand out for him.
+Matt has been testing the DuckDB 2.0 alpha and has not run into any regressions so far. Several features stand out for him.
 
 **Dynamic `ATTACH` statements.** While writing the book, Matt needed to attach AWS Glue catalogs in examples. Up to v1.5, the `ATTACH` path had to be a literal, so the account number had to be hard-coded in the script, as calling `getenv` raised an error. 
 

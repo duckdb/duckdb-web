@@ -36,7 +36,7 @@ duckdb -light-mode
 
 ## 8-Bit Colors
 
-Since DuckDB v1.5, the CLI supports 8-bit colors corresponding to [Xterm system colors](https://www.ditig.com/256-colors-cheat-sheet#xterm-system-colors):
+Since DuckDB 1.5, the CLI supports 8-bit colors corresponding to [Xterm system colors](https://www.ditig.com/256-colors-cheat-sheet#xterm-system-colors):
 
 ```.sql
 .display_colors

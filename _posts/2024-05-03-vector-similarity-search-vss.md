@@ -9,7 +9,7 @@ excerpt: "This blog post shows a preview of DuckDB's new `vss` extension, which 
 tag: extensions
 ---
 
-In DuckDB v0.10.0, we introduced the [`ARRAY` data type]({% link docs/2.0/sql/data_types/array.md %}), which stores fixed-sized lists, to complement the existing variable-size [`LIST` data type]({% link docs/2.0/sql/data_types/list.md %}).
+In DuckDB 0.10.0, we introduced the [`ARRAY` data type]({% link docs/2.0/sql/data_types/array.md %}), which stores fixed-sized lists, to complement the existing variable-size [`LIST` data type]({% link docs/2.0/sql/data_types/list.md %}).
 
 The initial motivation for adding this data type was to provide optimized operations for lists that can utilize the positional semantics of their child elements and avoid branching as all lists have the same length. Think e.g., the sort of array manipulations you'd do in NumPy: stacking, shifting, multiplying – you name it. Additionally, we wanted to improve our interoperability with Apache Arrow, as previously Arrow's fixed-size list types would be converted to regular variable-size lists when ingested into DuckDB, losing some type information.
 
@@ -114,7 +114,7 @@ The big limitation as of now is that the `HNSW` index can only be created in in-
 
 The reasoning for locking this feature behind an experimental flag is that we still have some known issues related to persistence of custom indexes that we want to address before enabling it by default. In particular, WAL recovery is not yet properly implemented for custom indexes, meaning that if a crash occurs or the database is shut down unexpectedly while there are uncommitted changes to a `HNSW`-indexed table, you can end up with data loss or corruption of the index. While it is technically possible to recover from a unexpected shutdown manually by first starting DuckDB separately, loading the `vss` extension, and then `ATTACH`ing the database file, which ensures that the `HNSW` index functionality is available during WAL-playback, you should not rely on this for production workloads.
 
-We're actively working on addressing this and other issues related to index persistence, which will hopefully make it into [DuckDB v0.10.3]({% link release_calendar.md %}#upcoming-releases), but for now we recommend using the `HNSW` index in in-memory databases only.
+We're actively working on addressing this and other issues related to index persistence, which will hopefully make it into [DuckDB 0.10.3]({% link release_calendar.md %}#upcoming-releases), but for now we recommend using the `HNSW` index in in-memory databases only.
 
 At runtime however, much like the `ART` the `HNSW` index must be able to fit into RAM in its entirety, and the memory allocated by the `HNSW` at runtime is allocated “outside” of the DuckDB memory management system, meaning that it won't respect DuckDB's `memory_limit` configuration parameter.
 
@@ -122,7 +122,7 @@ Another current limitation with the `HNSW` index so far is that it only supports
 
 ## Conclusion
 
-The `vss` extension for DuckDB is a new extension that adds support for creating HNSW indexes on fixed-size list columns in DuckDB, accelerating vector similarity search queries. The extension can currently be installed on DuckDB v0.10.2 on all supported platforms (including Wasm!) by running `INSTALL vss; LOAD vss`. The `vss` extension treads new ground for DuckDB extensions by providing a custom index type and we're excited to refine and expand on this functionality going forward.
+The `vss` extension for DuckDB is a new extension that adds support for creating HNSW indexes on fixed-size list columns in DuckDB, accelerating vector similarity search queries. The extension can currently be installed on DuckDB 0.10.2 on all supported platforms (including Wasm!) by running `INSTALL vss; LOAD vss`. The `vss` extension treads new ground for DuckDB extensions by providing a custom index type and we're excited to refine and expand on this functionality going forward.
 
 While we're still working on addressing some of the limitations above, particularly those related to persistence (and performance), we still really want to share this early version the `vss` extension as we believe this will open up a lot of cool opportunities for the community. So make sure to check out the [`vss` extension documentation]({% link docs/2.0/core_extensions/vss.md %}) for more information on how to work with this extension!
 

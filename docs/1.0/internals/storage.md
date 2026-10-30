@@ -7,13 +7,13 @@ title: Storage
 
 ### Backward Compatibility
 
-_Backward compatibility_ refers to the ability of a newer DuckDB version to read storage files created by an older DuckDB version. Version 0.10 is the first release of DuckDB that supports backward compatibility in the storage format. DuckDB v0.10 can read and operate on files created by the previous DuckDB version – DuckDB v0.9.
+_Backward compatibility_ refers to the ability of a newer DuckDB version to read storage files created by an older DuckDB version. Version 0.10 is the first release of DuckDB that supports backward compatibility in the storage format. DuckDB 0.10 can read and operate on files created by the previous DuckDB version – DuckDB 0.9.
 
 For future DuckDB versions, our goal is to ensure that any DuckDB version released **after** can read files created by previous versions, starting from this release. We want to ensure that the file format is fully backward compatible. This allows you to keep data stored in DuckDB files around and guarantees that you will be able to read the files without having to worry about which version the file was written with or having to convert files between versions.
 
 ### Forward Compatibility
 
-_Forward compatibility_ refers to the ability of an older DuckDB version to read storage files produced by a newer DuckDB version. DuckDB v0.9 is [**partially** forward compatible with DuckDB v0.10]({% post_url 2024-02-13-announcing-duckdb-0100 %}#forward-compatibility). Certain files created by DuckDB v0.10 can be read by DuckDB v0.9.
+_Forward compatibility_ refers to the ability of an older DuckDB version to read storage files produced by a newer DuckDB version. DuckDB 0.9 is [**partially** forward compatible with DuckDB 0.10]({% post_url 2024-02-13-announcing-duckdb-0100 %}#forward-compatibility). Certain files created by DuckDB 0.10 can be read by DuckDB 0.9.
 
 Forward compatibility is provided on a **best effort** basis. While stability of the storage format is important – there are still many improvements and innovations that we want to make to the storage format in the future. As such, forward compatibility may be (partially) broken on occasion.
 

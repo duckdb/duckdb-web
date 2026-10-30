@@ -33,7 +33,7 @@ SHOW DATABASES;
 
 ## `SHOW SCHEMAS` Statement
 
-> This statement was introduced in DuckDB v1.5.
+> This statement was introduced in DuckDB 1.5.
 
 The `SHOW SCHEMAS` statement shows a list of all schemas across non-internal databases:
 

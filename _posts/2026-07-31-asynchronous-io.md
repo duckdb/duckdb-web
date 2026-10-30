@@ -31,7 +31,7 @@ A Parquet scan is partitioned into row-group-based jobs, with each job containin
 
 To address this, we have been implementing asynchronous I/O pipelines in DuckDB. They are currently implemented for Parquet and for uncompressed, seekable UTF-8 CSV files, with support for other formats, such as DuckDB's native format and JSON, still to come. In the remainder of this blog post, we will give a simple explanation of how asynchronous I/O is implemented in DuckDB and provide benchmarks for both Parquet and CSV files.
 
-> If you would like to try asynchronous I/O now, you can do so by using [DuckDB's v2.0.0-dev preview builds](https://duckdb.org/install/preview).
+> If you would like to try asynchronous I/O now, you can do so by using [DuckDB's 2.0.0-dev preview builds](https://duckdb.org/install/preview).
 > Asynchronous I/O will be used by default from the next major DuckDB version, v2.0, released [in the fall]({% link release_calendar.md %}).
 
 ## Asynchronous I/O
@@ -101,7 +101,7 @@ When the memory-heavy operator finishes, the memory manager has more budget to g
 
 ## Benchmarks
 
-Asynchronous I/O should have the largest effect when the latency of synchronous requests prevents us from using the available remote bandwidth. To measure this effect, we ran [TPC-H Query 6 at SF100](https://duckdb.org/docs/current/core_extensions/tpch), with the data sitting on S3, and compared the results against [DuckDB v1.5.5]({% post_url 2026-07-22-announcing-duckdb-155 %}), our latest stable release. The SF100 dataset was written as a single file per table for both the Parquet and CSV benchmarks, with the `lineitem` table containing 600,037,902 rows.
+Asynchronous I/O should have the largest effect when the latency of synchronous requests prevents us from using the available remote bandwidth. To measure this effect, we ran [TPC-H Query 6 at SF100](https://duckdb.org/docs/current/core_extensions/tpch), with the data sitting on S3, and compared the results against [DuckDB 1.5.5]({% post_url 2026-07-22-announcing-duckdb-155 %}), our latest stable release. The SF100 dataset was written as a single file per table for both the Parquet and CSV benchmarks, with the `lineitem` table containing 600,037,902 rows.
 
 For compute, we used an EC2 [r7i.16xlarge](http://instances.vantage.sh/aws/ec2/r7i.16xlarge) machine (64 vCPUs and 512 GB of RAM), with both the machine and the S3 bucket with the data located in the same region. We executed the query five times and report the mean execution time. The files were never cached (i.e., `SET enable_external_file_cache = false;`{:.language-sql .highlight}), meaning that every execution read the data straight from S3.
 
@@ -120,7 +120,7 @@ Below we also show the network throughput over the course of the query:
 ![Network throughput]({% link images/blog/async/q6_network_throughput_3way-dark.svg %}){: .darkmode-img }
 *Network throughput*{: .caption }
 
-In it, we run DuckDB v1.5.5 and two variations of DuckDB v2.0.0-dev. One with the read-ahead depth determined by the memory governor, and one tuned for this machine, where we cap the read-ahead at 64 in-flight jobs and adjust the I/O settings (`SET async_threads = 48; SET http_retries = 8; SET http_retry_wait_ms = 50; SET http_retry_backoff = 2`{:.language-sql .highlight}). We can see that v2.0.0-dev uses the available bandwidth much more effectively, approaching the network limit and reaching it at several points. The tuned version goes further. With fewer, hotter connections and cheap retries, the throughput variance drops to a minimum and the 25 Gbit/s network stays almost fully saturated. Its query time was 2.227 seconds, reducing the runtime of the untuned v2.0.0-dev run by 21.7% and making it about 3.7× faster than DuckDB v1.5.5. In comparison, v1.5.5 stays around 5 Gbit/s because its synchronous reads do not keep enough requests in flight to saturate the network.
+In it, we run DuckDB 1.5.5 and two variations of DuckDB 2.0.0-dev. One with the read-ahead depth determined by the memory governor, and one tuned for this machine, where we cap the read-ahead at 64 in-flight jobs and adjust the I/O settings (`SET async_threads = 48; SET http_retries = 8; SET http_retry_wait_ms = 50; SET http_retry_backoff = 2`{:.language-sql .highlight}). We can see that v2.0.0-dev uses the available bandwidth much more effectively, approaching the network limit and reaching it at several points. The tuned version goes further. With fewer, hotter connections and cheap retries, the throughput variance drops to a minimum and the 25 Gbit/s network stays almost fully saturated. Its query time was 2.227 seconds, reducing the runtime of the untuned v2.0.0-dev run by 21.7% and making it about 3.7× faster than DuckDB 1.5.5. In comparison, v1.5.5 stays around 5 Gbit/s because its synchronous reads do not keep enough requests in flight to saturate the network.
 
 One other detail worth noting is that, in all experiments, a few hundred milliseconds pass before the first bump in network traffic, followed by another few hundred milliseconds before the main data transfer begins. The first gap is the time needed to open a DuckDB connection, perform the first TLS handshake, and open the file. The bump corresponds to downloading the file footer, while the second gap comes from processing the information in the footer before executing the query. We believe this is an area we can investigate and optimize further before the v2.0 release.
 
@@ -150,7 +150,7 @@ We can see that v2.0.0-dev delivers a similar performance improvement here as it
 
 #### Large Row Groups
 
-We also wanted to see what happens at the other extreme, when a Parquet file has only a few very large row groups. For this experiment, we generated six versions of the same TPC-H SF100 `lineitem` table as a single file, changing only the requested row group (RG) size, and ran Q6 using DuckDB v2.0.0-dev. The table below reports the runtime for each version.
+We also wanted to see what happens at the other extreme, when a Parquet file has only a few very large row groups. For this experiment, we generated six versions of the same TPC-H SF100 `lineitem` table as a single file, changing only the requested row group (RG) size, and ran Q6 using DuckDB 2.0.0-dev. The table below reports the runtime for each version.
 
 |   Rows / RG |   RGs | Approx. RG size (MB) | Total file size (MB) |    Time |
 | ----------: | ----: | -------------------: | -------------------: | ------: |
@@ -178,9 +178,9 @@ The effect becomes even clearer when several queries run at the same time. For t
 | v1.5.5     |       8 GB |  35.9 s |      6.9 |     38.8 | 16.8 Gbit/s |  10.4 GB |
 | v2.0.0-dev |       8 GB |  24.2 s |     30.3 |     63.7 | 25.0 Gbit/s |  11.5 GB |
 
-With the default memory configuration, DuckDB v1.5.5 keeps an average of only about 6 of the 64 cores busy. In other words, around 90% of the machine sits idle waiting for synchronous S3 reads. DuckDB v2.0.0-dev, on the other hand, averages 48 busy cores, reaches all 64 at its peak, and saturates the 25 Gbit/s network. As a result, all four queries finish in less than half the time.
+With the default memory configuration, DuckDB 1.5.5 keeps an average of only about 6 of the 64 cores busy. In other words, around 90% of the machine sits idle waiting for synchronous S3 reads. DuckDB 2.0.0-dev, on the other hand, averages 48 busy cores, reaches all 64 at its peak, and saturates the 25 Gbit/s network. As a result, all four queries finish in less than half the time.
 
-The memory results are also interesting. As we lower the limit, the memory governor reduces the read-ahead backlog, while memory-heavy operators such as those in Q18 can spill to disk. This lowers the peak physical memory used by the DuckDB process (i.e., RSS) of DuckDB v2.0.0-dev from 20.1 GB with the default configuration to 15.7 GB with a 16 GB limit and 11.5 GB with an 8 GB limit. The additional spilling and reduced read-ahead also lower average CPU utilization and increase the runtime, but v2.0.0-dev continues to saturate the network and remains substantially faster than v1.5.5 in both cases.
+The memory results are also interesting. As we lower the limit, the memory governor reduces the read-ahead backlog, while memory-heavy operators such as those in Q18 can spill to disk. This lowers the peak physical memory used by the DuckDB process (i.e., RSS) of DuckDB 2.0.0-dev from 20.1 GB with the default configuration to 15.7 GB with a 16 GB limit and 11.5 GB with an 8 GB limit. The additional spilling and reduced read-ahead also lower average CPU utilization and increase the runtime, but v2.0.0-dev continues to saturate the network and remains substantially faster than v1.5.5 in both cases.
 
 > One might notice that the 8 GB result still peaks at 11.5 GB of RSS. This is because [jemalloc]({% link docs/2.0/internals/jemalloc.md %}) keeps recently freed pages resident for about one second so they can be reused. This memory is no longer counted by DuckDB's memory manager, and v1.5.5 shows the same allocator behavior.
 

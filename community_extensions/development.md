@@ -45,7 +45,7 @@ If an extension is *not* compatible with both branches at the same time, the rec
 3. This allows the extension to be tested both versus latest stable *and* against current `main`.
 4. Once a release hash is set, community extensions will be built for that DuckDB hash and `ref_next` (if present) swapped for `ref`.
 
-See for example the descriptor for [`hannes/duckdb_avro`](https://github.com/hannes/duckdb_avro) that was published a few weeks before DuckDB v1.2.0.
+See for example the descriptor for [`hannes/duckdb_avro`](https://github.com/hannes/duckdb_avro) that was published a few weeks before DuckDB 1.2.0.
 It changed in <https://github.com/duckdb/community-extensions/pull/252/files> from:
 
 ```yaml
@@ -63,7 +63,7 @@ repo:
   ref_next: c8941c92ec103f7825eb88207c04512f8a714b23
 ```
 
-Here, the `ref` commit is compatible with DuckDB version v1.1.3, and `ref_next` is compatible with current main.
+Here, the `ref` commit is compatible with DuckDB version 1.1.3, and `ref_next` is compatible with current main.
 
 Note that being compatible with current main can't guarantee compatibility with v1.2.0, since changes affecting the extension might still land, but it should allow iterating early before a new stable DuckDB release.
 

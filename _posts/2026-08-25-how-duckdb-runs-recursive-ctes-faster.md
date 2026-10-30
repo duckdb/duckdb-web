@@ -11,7 +11,7 @@ image: "/images/blog/thumbs/recursive-queries.png"
 
 When I implemented [DuckDB's first recursive CTE operator](https://github.com/duckdb/duckdb/pull/404) in 2020, correctness determined the design: evaluate the non-recursive term once, then evaluate the recursive term until the next working table is empty. That established the right semantic contract, but reusable runtime state was scoped too narrowly. Across iterations, the recursive input changes while most of the machinery that evaluates it remains reusable. The implementation nevertheless treated every iteration almost like a new query and repeatedly paid for pipeline scheduling, operator setup, execution, and teardown. I have wanted to remove that mismatch ever since.
 
-In the upcoming DuckDB v2.0, we assign those scopes explicitly. The query plan owns the physical operator tree, precomputed pipeline schedules, and a pool of reusable pipeline executors. Each recursive invocation borrows executors from that pool and owns the accumulated recursive state and retained materializations whose lifetime spans the complete fixed-point computation, while each iteration owns only frontier-dependent state. This separation enables retained hash builds, per-iteration selection between inline and scheduled execution, and direct probes into keyed state. The physical execution changes are accompanied by one semantic change: for `USING KEY`, `UNION` now makes new keys and keys whose finalized payload changed visible to the next iteration.
+In the upcoming DuckDB 2.0, we assign those scopes explicitly. The query plan owns the physical operator tree, precomputed pipeline schedules, and a pool of reusable pipeline executors. Each recursive invocation borrows executors from that pool and owns the accumulated recursive state and retained materializations whose lifetime spans the complete fixed-point computation, while each iteration owns only frontier-dependent state. This separation enables retained hash builds, per-iteration selection between inline and scheduled execution, and direct probes into keyed state. The physical execution changes are accompanied by one semantic change: for `USING KEY`, `UNION` now makes new keys and keys whose finalized payload changed visible to the next iteration.
 
 To illustrate the performance impact, we compare the original and new engines on a small reachability query. The table contains one million edges over 100,000 nodes. Ten identical edges leave each source node, and following them from node 0 visits 20,000 nodes:
 
@@ -32,7 +32,7 @@ SELECT count(*)
 FROM reachable;
 ```
 
-With the optimizations described below, median runtime falls from 4.051 seconds with DuckDB v1.5.5 to 0.095 seconds with the DuckDB v2.0 preview, a 42.6× speedup without changing the SQL.
+With the optimizations described below, median runtime falls from 4.051 seconds with DuckDB 1.5.5 to 0.095 seconds with the DuckDB 2.0 preview, a 42.6× speedup without changing the SQL.
 
 ## Reusable Execution State Outlives the Frontier
 
@@ -61,7 +61,7 @@ A large epoch can amortize fixed scheduling and setup costs across many frontier
 ![The old engine builds a hash table from each REC_CTE_SCAN frontier and probes it by scanning edges; the new engine scans edges and builds a retained hash table once, then probes it with each frontier.]({% link images/blog/recursive-cte-engine/execution-reuse-light.svg %}){: .lightmode-img }
 ![The old engine builds a hash table from each REC_CTE_SCAN frontier and probes it by scanning edges; the new engine scans edges and builds a retained hash table once, then probes it with each frontier.]({% link images/blog/recursive-cte-engine/execution-reuse-dark.svg %}){: .darkmode-img }
 
-*DuckDB v1.5.5 rebuilds a hash table from each frontier and revisits `edges` as the probe input. The new engine reverses the join, builds the edge hash table once, and probes it with each frontier.*{: .caption }
+*DuckDB 1.5.5 rebuilds a hash table from each frontier and revisits `edges` as the probe input. The new engine reverses the join, builds the edge hash table once, and probes it with each frontier.*{: .caption }
 
 The resulting ownership boundary is:
 
@@ -76,9 +76,9 @@ The resulting ownership boundary is:
 | Recursive scans | Epoch | Rebind to current recursive state |
 | Candidate output | Epoch | Clear or combine |
 
-The hash join in the opening query requires both a join reorientation and retained state. DuckDB v1.5.5 builds a hash table from the current `reachable` frontier and scans `edges` as the probe input in every epoch. The new planner places the recursion-independent `edges` relation on the build side where valid. The first epoch scans `edges` and builds the hash table; later epochs rebind `reachable` as the probe and reuse that table.
+The hash join in the opening query requires both a join reorientation and retained state. DuckDB 1.5.5 builds a hash table from the current `reachable` frontier and scans `edges` as the probe input in every epoch. The new planner places the recursion-independent `edges` relation on the build side where valid. The first epoch scans `edges` and builds the hash table; later epochs rebind `reachable` as the probe and reuse that table.
 
-`EXPLAIN (ANALYZE, FORMAT JSON)` makes the avoided input work concrete. Both versions return the expected 20,000 nodes. DuckDB v1.5.5 reports `operator_rows_scanned: 19,718,328,320` on the `edges` scan, equivalent in row volume to about 19,718 complete scans, while the DuckDB v2.0 preview reports the table's one million rows once. Dynamic filtering skips parts of some v1.5.5 edge scans, but it cannot prevent the base relation from being revisited in every epoch.
+`EXPLAIN (ANALYZE, FORMAT JSON)` makes the avoided input work concrete. Both versions return the expected 20,000 nodes. DuckDB 1.5.5 reports `operator_rows_scanned: 19,718,328,320` on the `edges` scan, equivalent in row volume to about 19,718 complete scans, while the DuckDB 2.0 preview reports the table's one million rows once. Dynamic filtering skips parts of some v1.5.5 edge scans, but it cannot prevent the base relation from being revisited in every epoch.
 
 ### Retention Requires a Repeatability Proof
 
@@ -144,7 +144,7 @@ The candidate bag can be nonempty even when keyed state does not change. If cand
 
 ### Finalized State Belongs to the Commit Layer
 
-Before this change, DuckDB followed the original design and treated `USING KEY ... UNION` and `USING KEY ... UNION ALL` alike. Every candidate produced by the recursive term became input to the next epoch, even if applying it left the recurring table unchanged. Because plain `UNION` had the same candidate-frontier behavior as `UNION ALL`, DuckDB v1.5 deprecated it for `USING KEY`. The changed-key semantics introduced here give the two keywords distinct meanings, so the upcoming v2.0 retains both. The observable aggregate result for a key is determined only after every candidate for the epoch has been applied. Consequently, the epoch-commit layer owns the decision whether a key changed.
+Before this change, DuckDB followed the original design and treated `USING KEY ... UNION` and `USING KEY ... UNION ALL` alike. Every candidate produced by the recursive term became input to the next epoch, even if applying it left the recurring table unchanged. Because plain `UNION` had the same candidate-frontier behavior as `UNION ALL`, DuckDB 1.5 deprecated it for `USING KEY`. The changed-key semantics introduced here give the two keywords distinct meanings, so the upcoming v2.0 retains both. The observable aggregate result for a key is determined only after every candidate for the epoch has been applied. Consequently, the epoch-commit layer owns the decision whether a key changed.
 
 A shortest-path epoch demonstrates why candidates cannot decide this themselves. Several routes may reach the same node, and every route must participate in `min(distance)`. Only the finalized minimum is observable in keyed state. Forwarding every inferior route multiplies the work of the next epoch; forwarding an unchanged minimum can keep candidate production alive after state convergence.
 

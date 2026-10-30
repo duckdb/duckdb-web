@@ -599,7 +599,7 @@ FROM tbl;
 
 ## Time Travel Using `AT`
 
-DuckDB v1.3.0 introduced support for [time travel queries](https://docs.snowflake.com/en/user-guide/data-time-travel)
+DuckDB 1.3.0 introduced support for [time travel queries](https://docs.snowflake.com/en/user-guide/data-time-travel)
 on data lake formats such as
 [Delta]({% link docs/1.3/core_extensions/delta.md %}),
 [DuckLake]({% link docs/1.3/core_extensions/ducklake.md %}) and

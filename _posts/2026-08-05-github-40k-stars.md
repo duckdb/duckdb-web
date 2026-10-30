@@ -56,7 +56,7 @@ Here are just a few of the projects, extensions, and announcements that happened
 * **Video:** Barry Smart walks you through 20 years of wind data while [auditing UK energy policy without a cluster](https://www.youtube.com/watch?v=7dUEgMLuUcI) (DuckCon).
 * **Blog:** Interested in [building DuckDB extensions in C#](https://duckdb.org/2026/03/20/duckdb-extensionkit-csharp)? Giorgi Dalakishvili shows you how to build DuckDB extensions in C# with DuckDB.ExtensionKit.
 * **Talk:** Kian Mehrabani takes you on a tour of [how Spotify is using DuckDB](https://www.youtube.com/watch?v=-9GY1CCJG5o) as a SQL layer over user listening history in this video from DuckCon.
-* **Preview:** In DuckDB v2.0, scheduled for fall 2026, DuckDB will support async reads of Parquet and CSV files. Pedro Holanda walks you through the details of [asynchronous I/O](https://duckdb.org/2026/07/31/asynchronous-io).
+* **Preview:** In DuckDB 2.0, scheduled for fall 2026, DuckDB will support async reads of Parquet and CSV files. Pedro Holanda walks you through the details of [asynchronous I/O](https://duckdb.org/2026/07/31/asynchronous-io).
 
 ## Closing Thoughts
 

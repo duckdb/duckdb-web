@@ -177,7 +177,7 @@ INSERT INTO my_lists
 ```
 
 Then, we ran both our normalized and list-native queries on this data.
-Both queries were run in the CLI with DuckDB v1.0.0 on a MacBook Pro 2021 with a M1 Max chip.
+Both queries were run in the CLI with DuckDB 1.0.0 on a MacBook Pro 2021 with a M1 Max chip.
 
 | Normalized |  Native |
 | ---------: | ------: |

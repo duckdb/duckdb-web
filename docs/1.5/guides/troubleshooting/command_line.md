@@ -5,7 +5,7 @@ title: Command Line
 
 ## Attaching to HTTPS Databases in v1.5.2
 
-DuckDB v1.5.2 has a known issue where opening an HTTPS database directly from the command line fails with an error during httpfs extension autoloading:
+DuckDB 1.5.2 has a known issue where opening an HTTPS database directly from the command line fails with an error during httpfs extension autoloading:
 
 ```bash
 duckdb https://blobs.duckdb.org/data/tpch-sf1.db
@@ -26,7 +26,7 @@ duckdb duckdb:https://blobs.duckdb.org/data/tpch-sf1.db
 
 ## Piped Scripts Not Running in v1.5.0
 
-On Linux and macOS, DuckDB v1.5.0 has a known issue that the [command line client]({% link docs/1.5/clients/cli/overview.md %}) does not interpret piped scripts ([#21243](https://github.com/duckdb/duckdb/issues/21243)).
+On Linux and macOS, DuckDB 1.5.0 has a known issue that the [command line client]({% link docs/1.5/clients/cli/overview.md %}) does not interpret piped scripts ([#21243](https://github.com/duckdb/duckdb/issues/21243)).
 
 To demonstrate the problem, create a `test.sql` file:
 

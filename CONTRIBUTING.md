@@ -170,6 +170,7 @@ Some of this style guide is automated with GitHub Actions, but feel free to run 
 
 * Use [American English (en-US) spelling](https://en.wikipedia.org/wiki/Oxford_spelling#Language_tag_comparison).
 * Use the [Oxford comma](https://en.wikipedia.org/wiki/Serial_comma) in lists of three or more items, e.g., “CSV, Parquet, and JSON”.
+* Refer to versions without the `v` prefix, e.g., “DuckDB 1.5.0” and “DuckLake 1.0” (not “DuckDB v1.5.0” and “DuckLake v1.0”). The form “DuckDB version 1.5.0” is also acceptable. Keep the original form in titles of talks, podcasts, papers, and blog posts, and in verbatim program output (e.g., `DuckDB v1.3.1 (Ossivalis) 2063dda3e6`).
 
 ## Example Code Snippets
 

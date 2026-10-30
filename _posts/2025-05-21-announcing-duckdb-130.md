@@ -226,7 +226,7 @@ This feature was implemented by external contributor [`xevix`](https://github.co
 ### UUID v7 Support
 
 > Warning **Update (2025-05-23).**
-> The [UUID v7 implementation in DuckDB v1.3.0 is not consistent with the UUID standard](https://github.com/duckdb/duckdb/issues/17611), causing the timestamp values to be off.
+> The [UUID v7 implementation in DuckDB 1.3.0 is not consistent with the UUID standard](https://github.com/duckdb/duckdb/issues/17611), causing the timestamp values to be off.
 > This means that the timestamps in the generated UUID v7 values will only be correct if they are used exclusively within DuckDB.
 > Importing or exporting UUID v7 values from/to systems will yield incorrect timestamps.
 > We [patched this bug](https://github.com/duckdb/duckdb/pull/17612) and the fix will soon be available in the preview builds and the [upcoming 1.3.1 patch release]({% link release_calendar.md %}#upcoming-releases).
@@ -299,7 +299,7 @@ MY_SECRET=asdf duckdb -c \
 
 ### Unpacking Columns
 
-DuckDB v1.3.0 brings a further boost to the popular [`COLUMNS(*)` expression]({% link docs/2.0/sql/expressions/star.md %}#columns-expression).
+DuckDB 1.3.0 brings a further boost to the popular [`COLUMNS(*)` expression]({% link docs/2.0/sql/expressions/star.md %}#columns-expression).
 Previously, _unpacking_ the entities into a list was possible by adding a leading `*` character:
 
 ```sql
@@ -356,7 +356,7 @@ Similarly to a `HASH_JOIN`, the `SPATIAL_JOIN` builds a temporary lookup data-st
 
 While the query optimizer will try to instantiate this new operator for `LEFT`, `OUTER`, `INNER`, and `RIGHT` spatial joins, one limitation currently is that the join can only contain a single join condition, or the optimizer will fall back to use a less efficient join strategy.
 
-The following example illustrates how the `SPATIAL_JOIN` operator becomes part of the query plan. It's a relatively small query, but on my machine it executes almost 100× faster than it used to do in DuckDB v1.2.2!
+The following example illustrates how the `SPATIAL_JOIN` operator becomes part of the query plan. It's a relatively small query, but on my machine it executes almost 100× faster than it used to do in DuckDB 1.2.2!
 
 ```sql
 LOAD spatial;

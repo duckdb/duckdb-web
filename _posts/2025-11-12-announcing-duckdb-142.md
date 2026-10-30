@@ -9,7 +9,7 @@ excerpt: "Today we are releasing DuckDB 1.4.2, the second patch release of our L
 tag: release
 ---
 
-In this blog post, we highlight a few important fixes and convenience improvements in DuckDB v1.4.2, the second patch release in [DuckDB's 1.4 LTS line]({% post_url 2025-09-16-announcing-duckdb-140 %}). To see the complete list of updates, please consult the [release notes on GitHub](https://github.com/duckdb/duckdb/releases/tag/v1.4.2).
+In this blog post, we highlight a few important fixes and convenience improvements in DuckDB 1.4.2, the second patch release in [DuckDB's 1.4 LTS line]({% post_url 2025-09-16-announcing-duckdb-140 %}). To see the complete list of updates, please consult the [release notes on GitHub](https://github.com/duckdb/duckdb/releases/tag/v1.4.2).
 
 While this is a patch release, we are shipping some small features. In LTS releases, these can come in two forms:
 
@@ -22,7 +22,7 @@ While this is a patch release, we are shipping some small features. In LTS relea
 
 ### Iceberg Improvements
 
-Similarly to the [v1.4.1 release blog post]({% post_url 2025-10-07-announcing-duckdb-141 %}#iceberg-improvements), we can start with some good news for our Iceberg users: DuckDB v1.4.2 ships a number of improvements for the [`iceberg` extension]({% link docs/2.0/core_extensions/iceberg/overview.md %}). Insert, update, and delete statements are all supported now:
+Similarly to the [v1.4.1 release blog post]({% post_url 2025-10-07-announcing-duckdb-141 %}#iceberg-improvements), we can start with some good news for our Iceberg users: DuckDB 1.4.2 ships a number of improvements for the [`iceberg` extension]({% link docs/2.0/core_extensions/iceberg/overview.md %}). Insert, update, and delete statements are all supported now:
 
 <!-- markdownlint-disable MD040 -->
 
@@ -127,7 +127,7 @@ These allow you the get a deeper understanding on where the execution time is sp
 
 ### Performance Improvements
 
-DuckDB v1.4.2 also ships some small performance improvements:
+DuckDB 1.4.2 also ships some small performance improvements:
 
 * [`#19477` DuckDB now buffers WAL index deletes, not only appends](https://github.com/duckdb/duckdb/pull/19477)
 * [`#19644` Detaching from a database is now faster](https://github.com/duckdb/duckdb/pull/19644)
@@ -183,7 +183,7 @@ We fixed [four vulnerabilities](https://github.com/duckdb/duckdb/security/adviso
 
 See the [security advisory](https://github.com/duckdb/duckdb/security/advisories/GHSA-vmp8-hg63-v2hp) for more details.
 
-If you are using database encryption, you are strongly encouraged to update to DuckDB v1.4.2.
+If you are using database encryption, you are strongly encouraged to update to DuckDB 1.4.2.
 
 > We would like to thank [Greg Rubin](https://github.com/SalusaSecondus) and [Sławek Kosowski](https://github.com/skosowski) for reporting these vulnerabilities!
 

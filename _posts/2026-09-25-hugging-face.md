@@ -11,7 +11,7 @@ tag: extensions
 
 [Hugging Face](https://huggingface.co/) is where much of the machine learning community publishes and finds its datasets, while DuckDB is the in-process analytical database that queries files like CSV and Parquet directly, with no server or warehouse to install or run.
 
-Did you know that, since DuckDB [v0.10.3](https://github.com/duckdb/duckdb/releases/tag/v0.10.3) (released on May 22, 2024), you can point a `SELECT` at a dataset on the [Hugging Face Hub](https://huggingface.co/docs/hub), using the DuckDB `hf://` protocol, and query it, without downloading it first? This post covers how that integration works and the use cases it fits.
+Did you know that, since DuckDB [0.10.3](https://github.com/duckdb/duckdb/releases/tag/v0.10.3) (released on May 22, 2024), you can point a `SELECT` at a dataset on the [Hugging Face Hub](https://huggingface.co/docs/hub), using the DuckDB `hf://` protocol, and query it, without downloading it first? This post covers how that integration works and the use cases it fits.
 
 ## Background
 
@@ -21,7 +21,7 @@ Before the Hugging Face integration, getting at that data from DuckDB meant down
 
 DuckDB was already able to read remote files over HTTP through its [`httpfs` extension](/docs/current/core_extensions/httpfs/overview.md %}), so reading a URL directly was not new. Hugging Face datasets are also increasingly published as Parquet, the columnar format DuckDB reads natively and can scan without materializing everything in memory.
 
-DuckDB and Hugging Face [worked together]({% post_url 2024-05-29-access-150k-plus-datasets-from-hugging-face-with-duckdb %}) to add the [`hf://` path scheme](/docs/1.4/core_extensions/httpfs/hugging_face) on top of `httpfs`, [announced in May 2024]({% post_url 2024-05-29-access-150k-plus-datasets-from-hugging-face-with-duckdb %}) with DuckDB [v0.10.3](https://github.com/duckdb/duckdb/releases/tag/v0.10.3). As a result, DuckDB can resolve a dataset repository to the files inside it, so that a query can read and analyze them exactly where they are located, instead of via a downloaded copy.
+DuckDB and Hugging Face [worked together]({% post_url 2024-05-29-access-150k-plus-datasets-from-hugging-face-with-duckdb %}) to add the [`hf://` path scheme](/docs/1.4/core_extensions/httpfs/hugging_face) on top of `httpfs`, [announced in May 2024]({% post_url 2024-05-29-access-150k-plus-datasets-from-hugging-face-with-duckdb %}) with DuckDB [0.10.3](https://github.com/duckdb/duckdb/releases/tag/v0.10.3). As a result, DuckDB can resolve a dataset repository to the files inside it, so that a query can read and analyze them exactly where they are located, instead of via a downloaded copy.
 
 ## Reading Hugging Face Datasets Directly
 

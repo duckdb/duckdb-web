@@ -27,4 +27,4 @@ We integrate these techniques into DuckDB and experimentally show that when proc
 
 ## Implementation
 
-The techniques described in this paper are integrated in DuckDB v1.2.0.
+The techniques described in this paper are integrated in DuckDB 1.2.0.

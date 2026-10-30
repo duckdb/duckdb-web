@@ -5,11 +5,11 @@ authors:
   - Daniël ten Wolde
 thumb: "/images/blog/thumbs/duckdb-20-peg-parser.svg"
 image: "/images/blog/thumbs/duckdb-20-peg-parser.png"
-excerpt: "DuckDB v2.0 replaces its PostgreSQL-derived SQL parser with a PEG-based parser that is easier to evolve and can be extended at runtime."
+excerpt: "DuckDB 2.0 replaces its PostgreSQL-derived SQL parser with a PEG-based parser that is easier to evolve and can be extended at runtime."
 tag: release
 ---
 
-At DuckDB, one of our goals is to make working with a database system as easy as possible. Users interact with the system through the widely understood Structured Query Language (SQL). Previous blog posts have covered DuckDB’s [friendly](https://duckdb.org/2022/05/04/friendlier-sql) [SQL](https://duckdb.org/2023/08/23/even-friendlier-sql), including `GROUP BY ALL` and column selection using `SELECT * EXCLUDE (...)`. Before DuckDB can execute a query using these features, however, it first has to determine whether its syntax is valid. That is the job of the *parser*, and in DuckDB v2.0 we are completely replacing it without you noticing.
+At DuckDB, one of our goals is to make working with a database system as easy as possible. Users interact with the system through the widely understood Structured Query Language (SQL). Previous blog posts have covered DuckDB’s [friendly](https://duckdb.org/2022/05/04/friendlier-sql) [SQL](https://duckdb.org/2023/08/23/even-friendlier-sql), including `GROUP BY ALL` and column selection using `SELECT * EXCLUDE (...)`. Before DuckDB can execute a query using these features, however, it first has to determine whether its syntax is valid. That is the job of the *parser*, and in DuckDB 2.0 we are completely replacing it without you noticing.
 
 ## What Is the Role of a Parser?
 
@@ -64,7 +64,7 @@ Although a SQL standard exists, every database system supports different parts o
 
 DuckDB’s SQL closely follows PostgreSQL conventions, but it has evolved considerably over the years. We have added features of our own, such as `GROUP BY ALL`, as well as features inspired by other database systems. At the same time, DuckDB does not implement every aspect of PostgreSQL’s behavior. DuckDB therefore speaks its own SQL dialect, which we will refer to as **DuckSQL** in this post, even though it remains strongly influenced by PostgreSQL.
 
-This distinction is important when talking about the parser. The SQL dialect that DuckDB accepts and the implementation used to parse that SQL are two separate things. For DuckDB v2.0, we are replacing the parser implementation and rewriting its grammar. What we are **not** replacing is DuckSQL itself.
+This distinction is important when talking about the parser. The SQL dialect that DuckDB accepts and the implementation used to parse that SQL are two separate things. For DuckDB 2.0, we are replacing the parser implementation and rewriting its grammar. What we are **not** replacing is DuckSQL itself.
 
 ## Outgrowing the PostgreSQL-Derived Parser
 
@@ -110,7 +110,7 @@ In DuckDB, these rules operate on the tokens produced by the tokenizer. The matc
 
 The research prototype demonstrated that a PEG-based SQL parser was feasible. Replacing DuckDB’s existing parser, however, required considerably more than parsing a subset of SQL. The new parser had to accept all of DuckSQL and produce the same AST expected by DuckDB’s binder.
 
-The PEG grammar was first introduced in DuckDB `v1.2`, where it handled autocomplete in the CLI. Later, in DuckDB `v1.5`, we introduced the complete PEG parser as an experimental, opt-in feature. We also used it for an April Fools' joke that made [DuckDB speak Dutch](https://duckdb.org/2026/04/01/duckdb-now-speaks-dutch). Since then, the grammar, matcher, and transformer have been steadily improved to make the PEG parser the default for DuckDB v2.0.
+The PEG grammar was first introduced in DuckDB 1.2, where it handled autocomplete in the CLI. Later, in DuckDB 1.5, we introduced the complete PEG parser as an experimental, opt-in feature. We also used it for an April Fools' joke that made [DuckDB speak Dutch](https://duckdb.org/2026/04/01/duckdb-now-speaks-dutch). Since then, the grammar, matcher, and transformer have been steadily improved to make the PEG parser the default for DuckDB 2.0.
 
 Among other things, the parser had to support:
 
@@ -158,7 +158,7 @@ The resulting architecture replaces the PostgreSQL-derived parser front end, whi
 
 ## Evolving DuckSQL
 
-With the PEG parser now in place for [DuckDB v2.0]({% post_url 2026-08-17-duckdb-20-highlights %}), we have also continued to extend DuckSQL with new syntax.
+With the PEG parser now in place for [DuckDB 2.0]({% post_url 2026-08-17-duckdb-20-highlights %}), we have also continued to extend DuckSQL with new syntax.
 
 One example is the new expression-statement syntax. Until now, executing a query consisting only of expressions always required writing a `SELECT`:
 
@@ -218,7 +218,7 @@ Extensions that add new syntax already exist, such as [`psql`](https://duckdb.or
 
 With the PEG parser, extensions can instead extend individual parts of DuckDB’s parser. They can extend the tokenizer, add grammar rules, and register custom matchers while continuing to reuse the rest of DuckSQL.
 
-> Warning The API shown below is still a preview and may change before [DuckDB v2.0]({% post_url 2026-08-17-duckdb-20-highlights %}). You can follow the ongoing development [on GitHub](https://github.com/duckdb/duckdb/pull/24919).
+> Warning The API shown below is still a preview and may change before [DuckDB 2.0]({% post_url 2026-08-17-duckdb-20-highlights %}). You can follow the ongoing development [on GitHub](https://github.com/duckdb/duckdb/pull/24919).
 
 To make this concrete, we use Google’s [pipe query syntax](https://docs.cloud.google.com/bigquery/docs/reference/standard-sql/pipe-syntax). This is an extension to SQL that adds piped data flow syntax. Pipe syntax expresses a query as a sequence of operators, where each operator consumes the result of the previous one.
 
@@ -347,7 +347,7 @@ The extension only defines the pipe-specific syntax. Expressions, table referenc
 
 ## To Conclude
 
-With DuckDB v2.0, we are replacing the PostgreSQL-derived parser with a new PEG parser. Existing DuckSQL queries should continue working as before. Under the hood, however, the new parser gives us something that is easier to evolve and designed for runtime extensibility.
+With DuckDB 2.0, we are replacing the PostgreSQL-derived parser with a new PEG parser. Existing DuckSQL queries should continue working as before. Under the hood, however, the new parser gives us something that is easier to evolve and designed for runtime extensibility.
 
 The runtime grammar extension API shown in this post is still a preview and may change before v2.0 is released. However, the underlying idea is already working. Extensions can add their own syntax directly to DuckDB's grammar while reusing its existing rules and transformations. This means they no longer need to parse the rest of SQL themselves.
 

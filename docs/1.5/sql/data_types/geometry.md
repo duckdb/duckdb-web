@@ -9,7 +9,7 @@ title: Geometry Data Type
 
 The `GEOMETRY` data type is used to store and manipulate geometric objects, such as points, lines, and polygons.
 
-The `GEOMETRY` type was part of the [`spatial` extension]({% link docs/1.5/core_extensions/spatial/overview.md %}) but became a built-in data type in DuckDB v1.5. Most of the benefits of having `GEOMETRY` as a built-in type (e.g., storage optimizations, statistics, etc.) are therefore only available in databases using [storage version v1.5]({% link docs/1.5/internals/storage.md %}) and above. However, almost all of the associated functions for working with geometries (e.g., calculating distances, areas, intersections) are still part of `spatial`.
+The `GEOMETRY` type was part of the [`spatial` extension]({% link docs/1.5/core_extensions/spatial/overview.md %}) but became a built-in data type in DuckDB 1.5. Most of the benefits of having `GEOMETRY` as a built-in type (e.g., storage optimizations, statistics, etc.) are therefore only available in databases using [storage version v1.5]({% link docs/1.5/internals/storage.md %}) and above. However, almost all of the associated functions for working with geometries (e.g., calculating distances, areas, intersections) are still part of `spatial`.
 
 ## Types of Geometries
 

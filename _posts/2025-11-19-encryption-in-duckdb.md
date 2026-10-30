@@ -6,7 +6,7 @@ authors:
   - Hannes Mühleisen
 thumb: "/images/blog/thumbs/encryption-in-duckdb.svg"
 image: "/images/blog/thumbs/encryption-in-duckdb.png"
-excerpt: "DuckDB v1.4 ships database encryption capabilities. In this blog post, we dive into the implementation details of the encryption, show how to use it, and demonstrate its performance implications."
+excerpt: "DuckDB 1.4 ships database encryption capabilities. In this blog post, we dive into the implementation details of the encryption, show how to use it, and demonstrate its performance implications."
 tag: deep-dive
 ---
 
@@ -33,7 +33,7 @@ There are many different ways to encrypt data, some more secure than others. In 
 
 For this reason, most systems choose to only support *randomized* encryption, meaning that identical plaintexts will always yield different ciphertexts (if used correctly!). The most commonly used industry standard and recommended encryption algorithm is AES – [Galois Counter Mode](https://en.wikipedia.org/wiki/Galois/Counter_Mode) (AES-GCM). This is because on top of its ability to randomize encryption, it also *authenticates* data by calculating a tag to ensure data has not been tampered with.
 
-DuckDB v1.4 supports encryption at rest using AES-GCM-256 and AES-CTR-256 (counter mode) ciphers. AES-CTR is a simpler and faster version of AES-GCM, but less secure, since it does not provide authentication by calculating a tag. The 256 refers to the size of the key in bits, meaning that DuckDB now only supports GCM with 32-byte keys.
+DuckDB 1.4 supports encryption at rest using AES-GCM-256 and AES-CTR-256 (counter mode) ciphers. AES-CTR is a simpler and faster version of AES-GCM, but less secure, since it does not provide authentication by calculating a tag. The 256 refers to the size of the key in bits, meaning that DuckDB now only supports GCM with 32-byte keys.
 
 GCM and CTR both require as input a (1) plaintext, (2) an initialization vector (IV), and (3) an encryption key. Plaintext is the text that a user wants to encrypt. An IV is a unique bytestream of usually 16 bytes, that ensures that identical plaintexts get encrypted into different ciphertexts. A *number used once* (nonce) is a bytestream of usually 12 bytes, that together with a 4-byte counter construct the IV. Note that the IV needs to be unique for every encrypted block, but it does not necessarily have to be random. Reuse of the same IV is problematic, since an attacker could XOR the two ciphertexts and extract both messages. The tag in AES-GCM is calculated after all blocks are encrypted, pretty much like a checksum, but it adds an integrity check that securely authenticates the entire ciphertext.
 

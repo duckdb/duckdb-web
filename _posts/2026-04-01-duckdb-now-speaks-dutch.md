@@ -15,7 +15,7 @@ Well, wonder no longer. Today we're releasing [**EendDB**]({% link community_ext
 
 Want joins? We've got `SAMENVOEGEN`. Aggregates? `GROEP PER`. Window functions? Those work too — though you'll have to look up the Dutch keywords in the repository yourself.
 
-You can try it out right now in [DuckDB v1.5.1]({% post_url 2026-03-23-announcing-duckdb-151 %}):
+You can try it out right now in [DuckDB 1.5.1]({% post_url 2026-03-23-announcing-duckdb-151 %}):
 
 ```sql
 INSTALL eenddb FROM community;

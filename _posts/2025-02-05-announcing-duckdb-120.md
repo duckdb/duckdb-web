@@ -36,10 +36,10 @@ If you would like to return a list, use the [`map_extract` function]({% link doc
 
 ### Explicit Storage Versions
 
-DuckDB v1.2.0 ships new compression methods but *they are not yet enabled by default* to ensure that older DuckDB versions can read files produced by DuckDB v1.2.0.
+DuckDB 1.2.0 ships new compression methods but *they are not yet enabled by default* to ensure that older DuckDB versions can read files produced by DuckDB 1.2.0.
 
-In practice, this means that DuckDB v1.2.0 can read database files written by past stable DuckDB versions such as v1.0.0.
-When using DuckDB v1.2.0 with default settings, older versions can read files written by DuckDB v1.2.0.
+In practice, this means that DuckDB 1.2.0 can read database files written by past stable DuckDB versions such as v1.0.0.
+When using DuckDB 1.2.0 with default settings, older versions can read files written by DuckDB 1.2.0.
 
 You can *opt-in to newer forwards-incompatible features* using the following syntax:
 
@@ -70,7 +70,7 @@ This shows the storage versions:
 
 This means that `file2` can be opened by past DuckDB versions while `file1` is compatible only with `v1.2.0` (or future versions).
 
-To convert from the new format to the old format for compatibility, use the following sequence in DuckDB v1.2.0:
+To convert from the new format to the old format for compatibility, use the following sequence in DuckDB 1.2.0:
 
 ```sql
 ATTACH 'file1.db';

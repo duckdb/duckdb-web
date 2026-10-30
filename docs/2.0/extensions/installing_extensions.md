@@ -159,7 +159,7 @@ By default, extensions are installed under the user's home directory:
 ```
 
 For stable DuckDB releases, the `⟨duckdb_version⟩`{:.language-sql .highlight} will be equal to the version tag of that release. For nightly DuckDB builds, it will be equal
-to the first 10 characters of the build's commit hash. So for example, the extensions for DuckDB version v0.10.3 on macOS ARM64 (Apple Silicon) are installed to `~/.duckdb/extensions/v0.10.3/osx_arm64/`.
+to the first 10 characters of the build's commit hash. So for example, the extensions for DuckDB version 0.10.3 on macOS ARM64 (Apple Silicon) are installed to `~/.duckdb/extensions/v0.10.3/osx_arm64/`.
 An example installation path for a nightly DuckDB build could be `~/.duckdb/extensions/fc2e4b26a6/linux_amd64`.
 
 To change the location where DuckDB stores and loads its extensions, use the `extension_directories` configuration option. It takes a list of directories: extensions are installed into the first directory and loaded from any of them, which is useful, e.g., for package managers or air-gapped environments:

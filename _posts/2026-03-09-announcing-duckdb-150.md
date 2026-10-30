@@ -9,14 +9,14 @@ excerpt: "We are releasing DuckDB version 1.5.0, codenamed “Variegata”. This
 tag: release
 ---
 
-We are proud to release DuckDB v1.5.0, codenamed “Variegata” after the _Paradise shelduck_ (Tadorna variegata) endemic to New Zealand.
+We are proud to release DuckDB 1.5.0, codenamed “Variegata” after the _Paradise shelduck_ (Tadorna variegata) endemic to New Zealand.
 
 In this blog post, we cover the most important updates for this release around support, features, and extensions. As always, there is more: for the complete release notes, see the [release page on GitHub](https://github.com/duckdb/duckdb/releases/tag/v1.5.0).
 
 > To install the new version, please visit the [installation page]({% link docs/2.0/installation.html %}). Note that it can take a few days to release some extensions (e.g., the [UI]({% link docs/2.0/core_extensions/ui.md %})) client libraries (e.g., Go, R, Java) due to the extra changes and review rounds required.
 
 With this release, we will have two DuckDB releases available: v1.4 (LTS) and v1.5 (current).
-The next release – planned for September – will ship a major version, DuckDB v2.0.
+The next release – planned for September – will ship a major version, DuckDB 2.0.
 
 ## New Features
 
@@ -42,7 +42,7 @@ FROM ducks;
 
 #### Dynamic Prompts in the CLI
 
-DuckDB v1.5.0 introduces dynamic prompts for the CLI ([PR #19579](https://github.com/duckdb/duckdb/pull/19579)). By default, these show the database and schema that you are currently connected to:
+DuckDB 1.5.0 introduces dynamic prompts for the CLI ([PR #19579](https://github.com/duckdb/duckdb/pull/19579)). By default, these show the database and schema that you are currently connected to:
 
 ```batch
 duckdb
@@ -153,7 +153,7 @@ The initial implementation of the pager was provided by [`tobwen`](https://githu
 
 ### PEG Parser
 
-DuckDB v1.5 ships an experimental parser based on PEG (Parser Expression Grammars). The new parser enables better suggestions, improved error messages, and allows extensions to extend the grammar. The PEG parser is currently disabled by default but you can opt-in using:
+DuckDB 1.5 ships an experimental parser based on PEG (Parser Expression Grammars). The new parser enables better suggestions, improved error messages, and allows extensions to extend the grammar. The PEG parser is currently disabled by default but you can opt-in using:
 
 ```sql
 CALL enable_peg_parser();
@@ -295,12 +295,12 @@ SELECT typeof(date_trunc('month', DATE('2026-03-27')));
 
 ### Lakehouse Updates
 
-All of DuckDB’s supported Lakehouse formats have received some updates in DuckDB v1.5.
+All of DuckDB’s supported Lakehouse formats have received some updates in DuckDB 1.5.
 
 #### DuckLake
 
-The main [DuckLake](https://ducklake.select/) change for DuckDB v1.5 is updating the DuckLake specification to v0.4.
-We are aiming for this to be the same specification that ships with DuckLake v1.0, which will be released in April.
+The main [DuckLake](https://ducklake.select/) change for DuckDB 1.5 is updating the DuckLake specification to v0.4.
+We are aiming for this to be the same specification that ships with DuckLake 1.0, which will be released in April.
 Its main highlights include:
 
 * Macro support.  
@@ -308,7 +308,7 @@ Its main highlights include:
 * Deletion inlining and addition of partial delete files.  
 * Internal rework of DuckLake options.
 
-We'll announce more details about these features in the blog post for DuckLake v1.0.
+We'll announce more details about these features in the blog post for DuckLake 1.0.
 
 #### Delta Lake
 
@@ -349,9 +349,9 @@ All core and community extensions are cryptographically signed, so installing th
 
 ### Lambda Syntax
 
-Up to DuckDB v1.2, the syntax for defining lambda expressions used the arrow notation `x -> x + 1`. While this was a nice syntax, it clashed with the JSON extract operator (`->`) due to operator precedence and led to error messages that some users found difficult to troubleshoot. To work around this, we introduced a new, Python-style [lambda syntax in v1.3]({% post_url 2025-05-21-announcing-duckdb-130 %}#lambda-function-syntax), `lambda x: x + 1`.
+Up to DuckDB 1.2, the syntax for defining lambda expressions used the arrow notation `x -> x + 1`. While this was a nice syntax, it clashed with the JSON extract operator (`->`) due to operator precedence and led to error messages that some users found difficult to troubleshoot. To work around this, we introduced a new, Python-style [lambda syntax in v1.3]({% post_url 2025-05-21-announcing-duckdb-130 %}#lambda-function-syntax), `lambda x: x + 1`.
 
-While DuckDB v1.5 supports both styles of writing lambda expressions, using the deprecated arrow syntax will now throw a warning:
+While DuckDB 1.5 supports both styles of writing lambda expressions, using the deprecated arrow syntax will now throw a warning:
 
 ```sql
 SELECT list_transform([1, 2, 3], x -> x + 1);
@@ -393,9 +393,9 @@ This has been a long-standing source of confusion and numerous issues, as other 
 
 We are changing how this currently works in DuckDB to be consistent with how other systems operate, and hopefully cause less confusion for new users in the future. However, to avoid silently breaking existing workflows that have adapted to this quirk (e.g., by using `ST_FlipCoordinates`), we are rolling out this change gradually via a new `geometry_always_xy` setting:
 
-* In DuckDB v1.5, setting `geometry_always_xy = true` enables the new behavior (x = longitude, y = latitude). Without it, affected functions emit a warning.  
-* In DuckDB v2.0, the warning will become an error. Set `geometry_always_xy = false` to preserve the old behavior.  
-* In DuckDB v2.1, `geometry_always_xy = true` will become the default.
+* In DuckDB 1.5, setting `geometry_always_xy = true` enables the new behavior (x = longitude, y = latitude). Without it, affected functions emit a warning.  
+* In DuckDB 2.0, the warning will become an error. Set `geometry_always_xy = false` to preserve the old behavior.  
+* In DuckDB 2.1, `geometry_always_xy = true` will become the default.
 
 So to summarize, nothing is changing by default in this release, but to avoid being affected by this change in the future, set `geometry_always_xy` explicitly now. Set it to `true` to opt into the new behavior, or `false` to keep the existing one.
 
@@ -455,7 +455,7 @@ You can then launch DuckDB in your virtual environment using:
 duckdb
 ```
 
-Both DuckDB v1.4 and v1.5 are supported. We are working on shipping extensions as extras using the `duckdb[extension_name]` syntax – stay tuned!
+Both DuckDB 1.4 and 1.5 are supported. We are working on shipping extensions as extras using the `duckdb[extension_name]` syntax – stay tuned!
 
 #### Windows Install Script (Beta)
 

@@ -9,14 +9,14 @@ excerpt: "Today we are releasing DuckDB 1.5.6 with bugfixes and performance impr
 tag: release
 ---
 
-In this blog post, we highlight a few important fixes in DuckDB v1.5.6, the sixth patch release in [DuckDB's 1.5 (Variegata) line]({% post_url 2026-03-09-announcing-duckdb-150 %}).
+In this blog post, we highlight a few important fixes in DuckDB 1.5.6, the sixth patch release in [DuckDB's 1.5 (Variegata) line]({% post_url 2026-03-09-announcing-duckdb-150 %}).
 The release ships bugfixes, performance improvements, and security patches. You can find the full [release notes on GitHub](https://github.com/duckdb/duckdb/releases/tag/v1.5.6).
 
 To install the new version, please visit the [installation page]({% link docs/2.0/installation.html %}).
 
 ## Fixes
 
-Here are the most important fixes from the DuckDB v1.5.6 release, organized by category:
+Here are the most important fixes from the DuckDB 1.5.6 release, organized by category:
 
 ### Correctness
 
@@ -45,7 +45,7 @@ Here are the most important fixes from the DuckDB v1.5.6 release, organized by c
 
 * [`#24065`](https://github.com/duckdb/duckdb/pull/24065) – Automatically roll back failed implicitly wrapped multi-statements on all paths
 * [`#25693`](https://github.com/duckdb/duckdb/pull/25693) – Fix dead node counting in ART indexes
-* [`#25573`](https://github.com/duckdb/duckdb/pull/25573) – Report the real storage version when opening a DuckDB v2.0+ database file
+* [`#25573`](https://github.com/duckdb/duckdb/pull/25573) – Report the real storage version when opening a DuckDB 2.0+ database file
 * [`#25808`](https://github.com/duckdb/duckdb/pull/25808) – Reject invalid UTF-8 produced by `printf`'s `%c` conversion
 
 ### Miscellaneous
@@ -55,16 +55,16 @@ Here are the most important fixes from the DuckDB v1.5.6 release, organized by c
 * [`#24362`](https://github.com/duckdb/duckdb/pull/24362) – Unify C API symbol versioning for clients and extensions, stabilize all v1 APIs
 * [`#25214`](https://github.com/duckdb/duckdb/pull/25214) – Always quote identifiers in error messages
 
-## Looking Ahead: DuckDB v2.0 on Windows
+## Looking Ahead: DuckDB 2.0 on Windows
 
-If you have read this far, don't miss out on a sneak peek at [DuckDB v2.0.0-dev]({% post_url 2026-09-02-try-duckdb-20-alpha %}) for Windows.
+If you have read this far, don't miss out on a sneak peek at [DuckDB 2.0.0-dev]({% post_url 2026-09-02-try-duckdb-20-alpha %}) for Windows.
 First, extensions are now available for [these clients]({% link install/preview.md %}).
 Second, we recently ran a benchmark to measure the performance improvement that the new clients bring, and the results blew our minds!
 
 We used Windows 11 25H2 on a [laptop]({% post_url 2025-09-08-duckdb-on-the-framework-laptop-13 %}) with 128 GB RAM and 12 AMD Ryzen AI 300 CPU cores with simultaneous multithreading (yielding 24 threads).
-We used the [TPC-H]({% link docs/2.0/core_extensions/tpch.md %}) SF300 dataset and ran each query twice on both DuckDB v1.5.6 and v2.0.0-dev (alpha43586).
+We used the [TPC-H]({% link docs/2.0/core_extensions/tpch.md %}) SF300 dataset and ran each query twice on both DuckDB 1.5.6 and 2.0.0-dev (alpha43586).
 For each query, we took the runtime of the second (hot) run.
-The total runtime for DuckDB v1.5.6 was 822 seconds, while for v2.0.0-dev it was 129 seconds.
+The total runtime for DuckDB 1.5.6 was 822 seconds, while for DuckDB 2.0.0-dev it was 129 seconds.
 That's more than 6× faster!
 
 ![Windows performance on v1.5.6 vs. v2.0.0-dev]({% link images/blog/windows-tpch-sf300.svg %})
@@ -99,7 +99,7 @@ The detailed results are as follows:
 |    22 |     79.726 |          1.533 |
 
 This improvement is thanks to several optimizations, including a [switch to the `clang-cl` compiler](https://github.com/duckdb/duckdb/pull/24391) and a [new allocator](https://github.com/duckdb/duckdb/pull/24036).
-That said, you can observe that there are some regressions for the time being (we are working on them!) and the 6× speedup may not generalize to all workloads – but rest assured that you should see significant improvements for most workloads on Windows once you upgrade to DuckDB v2.0.
+That said, you can observe that there are some regressions for the time being (we are working on them!) and the 6× speedup may not generalize to all workloads – but rest assured that you should see significant improvements for most workloads on Windows once you upgrade to DuckDB 2.0.
 
 ## Conclusion
 
