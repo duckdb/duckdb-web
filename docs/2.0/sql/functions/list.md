@@ -1041,7 +1041,7 @@ The arguments are as follows:
     * **Bracket Notation:** When `end` is omitted, it defaults to the end of the list. When `end` is omitted and a `step` is provided, `end` must be replaced with a `-`
 * `step` *(optional)*
     * Is the step size between elements in the slice
-    * When `step < 0` the slice is reversed, and `begin` and `end` are swapped
+    * When `step < 0` the slice is reversed, and `begin` and `end` are swapped before the `begin` and `end` rules above are applied
     * Must be non-zero
 
 Examples:
@@ -1069,6 +1069,18 @@ SELECT([1, 2, 3, 4, 5])[4:2:-2];
 ```text
 [4, 2]
 ```
+
+```sql
+SELECT ([1, 2, 3, 4, 5])[1:99:-1];
+```
+
+```text
+[]
+```
+
+The negative step swaps the bounds before the `begin` and `end` rules above are
+applied. The example above therefore becomes `begin=99, end=1`, and `begin`
+exceeds the list length.
 
 ```sql
 SELECT ([1, 2, 3, 4, 5])[:];
