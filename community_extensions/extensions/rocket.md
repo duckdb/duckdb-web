@@ -81,8 +81,8 @@ docs:
 
 extension_star_count: 2
 extension_star_count_pretty: 2
-extension_download_count: 4863
-extension_download_count_pretty: 4.9k
+extension_download_count: 5081
+extension_download_count_pretty: 5.1k
 image: '/images/community_extensions/social_preview/preview_community_extension_rocket.png'
 layout: community_extension_doc
 ---

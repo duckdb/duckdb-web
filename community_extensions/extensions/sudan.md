@@ -56,8 +56,8 @@ docs:
 
 extension_star_count: 0
 extension_star_count_pretty: 0
-extension_download_count: 3498
-extension_download_count_pretty: 3.5k
+extension_download_count: 3722
+extension_download_count_pretty: 3.7k
 image: '/images/community_extensions/social_preview/preview_community_extension_sudan.png'
 layout: community_extension_doc
 ---

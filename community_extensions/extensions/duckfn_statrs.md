@@ -63,10 +63,10 @@ docs:
     Development notes and the full function table live in the repository:
     <https://github.com/shijianjs/duckfn-statrs>.
 
-extension_star_count: 0
-extension_star_count_pretty: 0
-extension_download_count: 9580
-extension_download_count_pretty: 9.6k
+extension_star_count: 1
+extension_star_count_pretty: 1
+extension_download_count: 9814
+extension_download_count_pretty: 9.8k
 image: '/images/community_extensions/social_preview/preview_community_extension_duckfn_statrs.png'
 layout: community_extension_doc
 ---

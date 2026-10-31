@@ -24,10 +24,10 @@ repo:
   ref: 2770b12cf880f88cab0e83848e0d37d29ee31733
   variegata: 414a4c145dfacecb66028f8d0148c44067630206
 
-extension_star_count: 53
-extension_star_count_pretty: 53
-extension_download_count: 127747
-extension_download_count_pretty: 127.7k
+extension_star_count: 54
+extension_star_count_pretty: 54
+extension_download_count: 130075
+extension_download_count_pretty: 130.1k
 image: '/images/community_extensions/social_preview/preview_community_extension_datasketches.png'
 layout: community_extension_doc
 ---

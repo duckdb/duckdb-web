@@ -60,8 +60,8 @@ docs:
 
 extension_star_count: 0
 extension_star_count_pretty: 0
-extension_download_count: 2500
-extension_download_count_pretty: 2.5k
+extension_download_count: 2852
+extension_download_count_pretty: 2.9k
 image: '/images/community_extensions/social_preview/preview_community_extension_tick.png'
 layout: community_extension_doc
 ---

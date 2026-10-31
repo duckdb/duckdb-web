@@ -37,8 +37,8 @@ docs:
     →  [GitHub](https://github.com/gropaul/dash) · [Web Version](https://www.app.dash.builders/) · [Documentation & Demo](https://www.dash.builders/)
 extension_star_count: 113
 extension_star_count_pretty: 113
-extension_download_count: 19393
-extension_download_count_pretty: 19.4k
+extension_download_count: 19655
+extension_download_count_pretty: 19.7k
 image: '/images/community_extensions/social_preview/preview_community_extension_dash.png'
 layout: community_extension_doc
 ---

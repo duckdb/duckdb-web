@@ -25,10 +25,10 @@ repo:
   # DuckDB 1.5.6 stays on v0.4.0, the last release built for that line.
   variegata: d4aa50f9bf23ca44b44f0df48fb0065ba751f5be
 
-extension_star_count: 5
-extension_star_count_pretty: 5
-extension_download_count: 14086
-extension_download_count_pretty: 14.1k
+extension_star_count: 6
+extension_star_count_pretty: 6
+extension_download_count: 14458
+extension_download_count_pretty: 14.5k
 image: '/images/community_extensions/social_preview/preview_community_extension_oracle_scanner.png'
 layout: community_extension_doc
 ---

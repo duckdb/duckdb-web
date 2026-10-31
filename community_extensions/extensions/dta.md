@@ -54,7 +54,7 @@ docs:
 
 extension_star_count: 2
 extension_star_count_pretty: 2
-extension_download_count: 11974
+extension_download_count: 12019
 extension_download_count_pretty: 12.0k
 image: '/images/community_extensions/social_preview/preview_community_extension_dta.png'
 layout: community_extension_doc
