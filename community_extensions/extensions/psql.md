@@ -73,8 +73,8 @@ docs:
 
     See the [README](https://github.com/ywelsch/duckdb-psql) for more examples, and for the BigQuery operators that PSQL leaves out because DuckDB's SQL doesn't need them.
 
-extension_star_count: 109
-extension_star_count_pretty: 109
+extension_star_count: 110
+extension_star_count_pretty: 110
 extension_download_count: 24651
 extension_download_count_pretty: 24.7k
 image: '/images/community_extensions/social_preview/preview_community_extension_psql.png'

@@ -174,8 +174,8 @@ docs:
       features, leakage, the two model architectures.
     - Issues and questions: https://github.com/Guepard-Corp/duckdb-pql/issues
 
-extension_star_count: 26
-extension_star_count_pretty: 26
+extension_star_count: 27
+extension_star_count_pretty: 27
 extension_download_count: 17183
 extension_download_count_pretty: 17.2k
 image: '/images/community_extensions/social_preview/preview_community_extension_pql.png'
