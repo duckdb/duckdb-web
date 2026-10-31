@@ -234,8 +234,8 @@ docs:
 
     For more information, see the [FineType documentation](https://github.com/meridian-online/finetype).
 
-extension_star_count: 6
-extension_star_count_pretty: 6
+extension_star_count: 7
+extension_star_count_pretty: 7
 extension_download_count: 19592
 extension_download_count_pretty: 19.6k
 image: '/images/community_extensions/social_preview/preview_community_extension_finetype.png'
