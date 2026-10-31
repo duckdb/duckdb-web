@@ -89,8 +89,8 @@ docs:
 
 extension_star_count: 2
 extension_star_count_pretty: 2
-extension_download_count: 3236
-extension_download_count_pretty: 3.2k
+extension_download_count: 3436
+extension_download_count_pretty: 3.4k
 image: '/images/community_extensions/social_preview/preview_community_extension_cassandra.png'
 layout: community_extension_doc
 ---

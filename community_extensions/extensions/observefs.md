@@ -34,10 +34,10 @@ docs:
     - Provides cache access insight to duckdb external file cache
     - Allows registering ANY duckdb compatible filesystems (i.e., azure filesystem)
 
-extension_star_count: 18
-extension_star_count_pretty: 18
-extension_download_count: 19951
-extension_download_count_pretty: 20.0k
+extension_star_count: 17
+extension_star_count_pretty: 17
+extension_download_count: 23941
+extension_download_count_pretty: 23.9k
 image: '/images/community_extensions/social_preview/preview_community_extension_observefs.png'
 layout: community_extension_doc
 ---

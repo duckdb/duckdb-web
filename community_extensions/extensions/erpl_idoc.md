@@ -23,8 +23,8 @@ repo:
 
 extension_star_count: 3
 extension_star_count_pretty: 3
-extension_download_count: 9823
-extension_download_count_pretty: 9.8k
+extension_download_count: 9864
+extension_download_count_pretty: 9.9k
 image: '/images/community_extensions/social_preview/preview_community_extension_erpl_idoc.png'
 layout: community_extension_doc
 ---

@@ -46,8 +46,8 @@ docs:
 
 extension_star_count: 33
 extension_star_count_pretty: 33
-extension_download_count: 18768
-extension_download_count_pretty: 18.8k
+extension_download_count: 19610
+extension_download_count_pretty: 19.6k
 image: '/images/community_extensions/social_preview/preview_community_extension_faiss.png'
 layout: community_extension_doc
 ---

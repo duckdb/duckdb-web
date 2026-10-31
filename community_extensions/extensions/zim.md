@@ -174,8 +174,8 @@ docs:
 
 extension_star_count: 7
 extension_star_count_pretty: 7
-extension_download_count: 14510
-extension_download_count_pretty: 14.5k
+extension_download_count: 14760
+extension_download_count_pretty: 14.8k
 image: '/images/community_extensions/social_preview/preview_community_extension_zim.png'
 layout: community_extension_doc
 ---

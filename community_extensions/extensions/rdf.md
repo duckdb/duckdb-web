@@ -151,8 +151,8 @@ docs:
 
 extension_star_count: 44
 extension_star_count_pretty: 44
-extension_download_count: 13409
-extension_download_count_pretty: 13.4k
+extension_download_count: 14222
+extension_download_count_pretty: 14.2k
 image: '/images/community_extensions/social_preview/preview_community_extension_rdf.png'
 layout: community_extension_doc
 ---

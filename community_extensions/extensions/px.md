@@ -30,8 +30,8 @@ docs:
 
 extension_star_count: 0
 extension_star_count_pretty: 0
-extension_download_count: 8708
-extension_download_count_pretty: 8.7k
+extension_download_count: 9168
+extension_download_count_pretty: 9.2k
 image: '/images/community_extensions/social_preview/preview_community_extension_px.png'
 layout: community_extension_doc
 ---

@@ -46,8 +46,8 @@ docs:
 
 extension_star_count: 4
 extension_star_count_pretty: 4
-extension_download_count: 16016
-extension_download_count_pretty: 16.0k
+extension_download_count: 16117
+extension_download_count_pretty: 16.1k
 image: '/images/community_extensions/social_preview/preview_community_extension_us_address_standardizer.png'
 layout: community_extension_doc
 ---
