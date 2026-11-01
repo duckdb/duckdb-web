@@ -125,7 +125,7 @@ docs:
 
 extension_star_count: 31
 extension_star_count_pretty: 31
-extension_download_count: 15254
+extension_download_count: 15340
 extension_download_count_pretty: 15.3k
 image: '/images/community_extensions/social_preview/preview_community_extension_agent_data.png'
 layout: community_extension_doc

@@ -131,8 +131,8 @@ docs:
 
 extension_star_count: 5
 extension_star_count_pretty: 5
-extension_download_count: 12642
-extension_download_count_pretty: 12.6k
+extension_download_count: 12862
+extension_download_count_pretty: 12.9k
 image: '/images/community_extensions/social_preview/preview_community_extension_hive_metastore.png'
 layout: community_extension_doc
 ---

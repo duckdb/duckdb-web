@@ -120,8 +120,8 @@ docs:
 
 extension_star_count: 1
 extension_star_count_pretty: 1
-extension_download_count: 16918
-extension_download_count_pretty: 16.9k
+extension_download_count: 17085
+extension_download_count_pretty: 17.1k
 image: '/images/community_extensions/social_preview/preview_community_extension_trino_parity.png'
 layout: community_extension_doc
 ---
