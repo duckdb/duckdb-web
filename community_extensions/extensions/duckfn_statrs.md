@@ -65,8 +65,8 @@ docs:
 
 extension_star_count: 1
 extension_star_count_pretty: 1
-extension_download_count: 9814
-extension_download_count_pretty: 9.8k
+extension_download_count: 10069
+extension_download_count_pretty: 10.1k
 image: '/images/community_extensions/social_preview/preview_community_extension_duckfn_statrs.png'
 layout: community_extension_doc
 ---

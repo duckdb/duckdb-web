@@ -75,8 +75,8 @@ docs:
 
 extension_star_count: 136
 extension_star_count_pretty: 136
-extension_download_count: 130097
-extension_download_count_pretty: 130.1k
+extension_download_count: 127349
+extension_download_count_pretty: 127.3k
 image: '/images/community_extensions/social_preview/preview_community_extension_mssql.png'
 layout: community_extension_doc
 ---

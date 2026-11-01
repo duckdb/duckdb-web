@@ -303,8 +303,8 @@ docs:
 
 extension_star_count: 18
 extension_star_count_pretty: 18
-extension_download_count: 20378
-extension_download_count_pretty: 20.4k
+extension_download_count: 20622
+extension_download_count_pretty: 20.6k
 image: '/images/community_extensions/social_preview/preview_community_extension_dns.png'
 layout: community_extension_doc
 ---

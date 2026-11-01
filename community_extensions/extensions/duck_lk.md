@@ -37,10 +37,10 @@ docs:
 
     For full documentation, see the [GitHub repository](https://github.com/nrminor/duck-lk).
 
-extension_star_count: 0
-extension_star_count_pretty: 0
-extension_download_count: 2974
-extension_download_count_pretty: 3.0k
+extension_star_count: 1
+extension_star_count_pretty: 1
+extension_download_count: 3226
+extension_download_count_pretty: 3.2k
 image: '/images/community_extensions/social_preview/preview_community_extension_duck_lk.png'
 layout: community_extension_doc
 ---

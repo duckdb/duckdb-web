@@ -34,8 +34,8 @@ docs:
 
 extension_star_count: 3
 extension_star_count_pretty: 3
-extension_download_count: 20429
-extension_download_count_pretty: 20.4k
+extension_download_count: 20733
+extension_download_count_pretty: 20.7k
 image: '/images/community_extensions/social_preview/preview_community_extension_rate_limit_fs.png'
 layout: community_extension_doc
 ---
