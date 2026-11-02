@@ -15,7 +15,7 @@ excerpt: |
 extension:
   name: lakemon
   description: Smart DuckLake table maintain (adaptive rewrite + merge) and catalog-global expire/cleanup
-  version: 0.1.1
+  version: 0.2.0
   language: C++
   build: cmake
   license: MIT
@@ -24,10 +24,8 @@ extension:
 
 repo:
   github: paulosuzart/lakemon-duckdb-ext
-  # Replace with the commit SHA you want the community builder to compile.
-  ref: 6a1b8bf88a3e3893d9bbbcb27baa3e98db5a6215
-  # Optional: SHA compatible with DuckDB 2.x / upcoming stable.
-  # ref_next: REPLACE_WITH_2X_COMMIT_SHA
+  # Built against latest stable DuckDB (v2.0.0); v1.5.6 rebuilds use the same ref.
+  ref: 31e6fe098ecff4f0d29f2044d47f86fd6c4f5829
 
 docs:
   hello_world: |
@@ -57,7 +55,7 @@ docs:
     * Optional stderr step logs with duration and byte-weighted progress
 
     Requires the core ducklake extension in the same session and an attached DuckLake catalog.
-    Compatible with DuckDB 1.5.* and DuckDB 2.x.
+    Compatible with DuckDB 1.5.6 and DuckDB 2.0.0 (lakemon 0.2.0+). Older DuckDB 1.5.x builds are no longer produced.
 
 extension_star_count: 1
 extension_star_count_pretty: 1

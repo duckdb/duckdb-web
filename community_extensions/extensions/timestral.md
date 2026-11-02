@@ -128,9 +128,9 @@ This extension does not add any types.
 |---------------------------|------------------------------------------------------------------------------------|------------|--------|---------|-------------------------------------------|
 | active_grammar_extensions | The grammar extensions used by the parser.                                         | VARCHAR[]  | LOCAL  | []      | [shell, timestral]                        |
 | temp_directory            | Set the directory to which temporary files are written.                            | VARCHAR    | GLOBAL | []      | post.db.tmp                               |
-| timestral_cache_dir       | Directory downloaded Timestral models are cached in                                | VARCHAR    | GLOBAL | []      | ~/.duckdb/timestral/v1                    |
+| timestral_cache_dir       | Directory downloaded Timestral models are cached in                                | VARCHAR    | GLOBAL | []      | ~/.duckdb/timestral/v2                    |
 | timestral_model           | Default Timestral model size: 5m, 28m, 123m or 209m                                | VARCHAR    | GLOBAL | []      | 5m                                        |
 | timestral_model_path      | Explicit local .onnx file to use instead of the download cache (no checksum check) | VARCHAR    | GLOBAL | []      |                                           |
-| timestral_model_url       | Base URL the Timestral .onnx files are downloaded from                             | VARCHAR    | GLOBAL | []      | https://assets.altertable.ai/timestral/v1 |
+| timestral_model_url       | Base URL the Timestral .onnx files are downloaded from                             | VARCHAR    | GLOBAL | []      | https://assets.altertable.ai/timestral/v2 |
 
 
