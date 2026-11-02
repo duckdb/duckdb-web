@@ -132,8 +132,7 @@ Then, we conducted three complete runs in sequence and took the median value of 
 | Run 3            | 2,482,589.73     | 3,052,102.87       |
 | **Median score** | **2,482,589.73** | **3,073,292.99**   |
 
-DuckDB 2.0.0-alpha shows a 24% improvement over DuckDB 1.5.5 – and this is something all users will benefit from once [DuckDB 2.0.0 is o
-ut]({% link release_calendar.md %}).
+DuckDB 2.0.0-alpha shows a 24% improvement over DuckDB 1.5.5 – and this is something all users will benefit from once [DuckDB 2.0.0 is out]({% link release_calendar.md %}).
 
 > Update DuckDB 2.0 [is out]({% post_url 2026-10-21-announcing-duckdb-200 %})!
 
