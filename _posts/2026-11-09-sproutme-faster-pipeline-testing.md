@@ -1,29 +1,27 @@
 ---
 layout: post
-title: "From Forty Minutes to Five: How SproutMe Tests Its Data Pipeline with DuckDB"
+title: "How SproutMe Cut Integration Test Time by 92.9% with DuckDB"
 authors:
   - Archit Dukhande
   - Geertjan Wielenga
   - Tim Cox
 thumb: "/images/blog/thumbs/user-archit-dukhande.svg"
 image: "/images/blog/thumbs/user-archit-dukhande.png"
-excerpt: "At the early-stage marketing startup [SproutMe](https://www.linkedin.com/in/archit-dukhande/), data engineer Archit Dukhande added DuckDB to the local development and CI workflow behind a data-heavy AI product. BigQuery remains the production warehouse, but running the team's end-to-end pipeline locally on DuckDB cut a daily test run from roughly forty minutes to a few, letting a small team iterate quickly without risking regressions for its pilot users."
+excerpt: "At the early-stage marketing startup [SproutMe](https://www.linkedin.com/in/archit-dukhande/), data engineer Archit Dukhande added DuckDB to the local development and CI workflow for a data-heavy AI product. BigQuery remains the production warehouse. Running the integration tests on DuckDB cut the step per merge by 92.9 percent, from 10.65 minutes to 0.76 minutes, so a small team can keep iterating without putting pilot users at risk."
 tag: using-duckdb
 ---
 
-> This post describes how SproutMe uses DuckDB in its development and continuous integration workflow. DuckDB is not part of the production product. SproutMe's production data warehouse is Google BigQuery.
-
 ## Why Iteration Speed Matters at SproutMe
 
-[SproutMe](https://www.linkedin.com/in/archit-dukhande/) is an advertising-technology startup, about a year old, building an AI workspace for small businesses and marketing agencies. The idea is to bring Google Ads, Meta Ads, and Google Analytics 4 into a single environment that combines analytics, reports, and recommendations, so that even a one-person marketing team can manage campaigns across platforms from one place. A Shopify integration is in progress, and the platform already serves more than 20 pilot accounts.
+[SproutMe](https://www.linkedin.com/in/archit-dukhande/) is an advertising technology startup, about a year old, that builds an AI workspace for small businesses and marketing agencies. The product brings Google Ads, Meta Ads, and Google Analytics 4 into one place, with analytics, reports, and recommendations. A one-person marketing team can manage campaigns across platforms without switching tools. A Shopify integration is in progress, and the platform already serves more than 20 pilot accounts.
 
-Archit Dukhande is the data engineer who built SproutMe's data platform from scratch. For a team this size, the speed of the development loop is a business concern, not a convenience. **“Because we are a startup, we have to work very fast,”** he says. In practice that means shipping two to three pull requests a day while making sure nothing breaks for the businesses already relying on the product. **“We don't want the businesses to face problems when we push it,”** Archit explains, so every change is run end to end locally and in CI before it reaches the main branch.
+Archit Dukhande built SproutMe's data platform from scratch. At a team this size, development speed directly affects the business. **“Because we are a startup, we have to work very fast,”** he says. In practice, that means shipping two to three pull requests a day without breaking anything for the businesses already using the product. **“We don't want the businesses to face problems when we push it,”** Archit explains, so every change runs end to end, both locally and in CI, before it reaches the main branch.
 
-The problem was that these local and CI runs were slow. The pipeline processes a lot of data: when a new customer joins, SproutMe pulls roughly 365 days of history across its ad and analytics sources, which adds up to millions of rows to load and transform. Testing a change against data at that scale on BigQuery was taking long enough to interrupt the team's daily rhythm.
+Local and CI runs were slow. The pipeline handles a lot of data. When a new customer joins, SproutMe pulls about 365 days of history across its ad and analytics sources, which means millions of rows to load and transform. On BigQuery, testing a change at that scale took long enough to disrupt the team's daily rhythm.
 
 ## Where DuckDB Fits
 
-Archit first heard about DuckDB through posts on LinkedIn describing how fast it was. With the development loop slowing the team down, he decided to try it on a few small runs, and from there it worked its way into the everyday workflow. SproutMe now uses DuckDB for two things: local end-to-end testing and CI integration tests.
+Archit first heard about DuckDB in LinkedIn posts about its speed. He decided to try it on a few small runs, and it soon became part of the daily workflow. SproutMe now uses DuckDB for local end-to-end testing and CI integration tests.
 
 The pipeline looks like this:
 
@@ -32,22 +30,33 @@ The pipeline looks like this:
 3. [dbt](https://www.getdbt.com/) runs the transformations on DuckDB, following a medallion architecture: bronze for raw data, silver for cleaned and standardized data, and gold for the user-facing models.
 4. The same logic runs locally and in CI before any change is deployed.
 
-The transformation stage is where DuckDB earns its place. **“This is where we are saving a lot of time, the transformation part,”** Archit says, with the extraction step benefiting too, since Dagster writes straight into DuckDB. The important point is scope: **“It is part of the local development pipeline.”** Production still runs on BigQuery.
+The transformation stage is where DuckDB saves the most time. **“This is where we are saving a lot of time, the transformation part,”** Archit says. Extraction benefits as well, because Dagster writes directly into DuckDB. The scope matters, though: **“It is part of the local development pipeline.”** Production still runs on BigQuery.
 
 ## The Numbers
 
-SproutMe chose BigQuery early because the team was already comfortable with Google's infrastructure, and a full end-to-end run there can take one to two hours. That is fine for production, but far too slow for a team pushing several changes a day and waiting on local and CI feedback each time.
+SproutMe chose BigQuery early because the team was already familiar with Google's infrastructure. A full end-to-end run there can take one to two hours. That works for production, but it is too slow for a team pushing several changes a day and waiting on feedback from local and CI runs each time.
 
-Running the same daily pipeline locally on DuckDB changed the shape of the workday. In SproutMe's own measurements, a daily end-to-end run that took around 30 to 40 minutes on BigQuery dropped to **“around four to five minutes”** on DuckDB, a reduction of more than 80 percent in elapsed time. The comparison is specific to SproutMe's development and testing workflow rather than a general claim that one system is faster than the other, and SproutMe is preparing a detailed benchmark with the workload, data volumes, and configuration so that others can judge it for themselves.
+Running the same pipeline on DuckDB shortens the wait between changes. In SproutMe's measurements, the same dbt project, command, and real data ran on both engines. The integration test step, which runs on every merge, fell from a median of 10.65 minutes to **0.76 minutes**. That is a 92.9 percent reduction across 88 CI/CD runs. The dbt runs gained less, but still substantially: a full backfill dropped from 180.2 seconds to 104.6 seconds, and a daily incremental build dropped from 300.3 seconds to 120.7 seconds. DuckDB times are medians of five runs.
 
-For Archit, the practical effect is faster debugging. Instead of spending hours reproducing an issue, he can identify a bug in a few minutes. **“First one is the development speed. It is super fast,”** he says, naming it the first of DuckDB's advantages. The second is ease of use on local machines, including for the AI coding assistants the team relies on, which can inspect errors and help debug them directly. The third is compatibility: the same setup runs locally and in CI without changes.
+<div class="center_aligned_header_table"></div>
+
+| What we measured | BigQuery | DuckDB | Time saved |
+|---|---|---|---|
+| Integration test step, per merge | 10.65 min | 0.76 min | 92.9% |
+| Full dbt backfill | 180.2 s | 104.6 s | 42.0% |
+| Daily incremental dbt build | 300.3 s | 120.7 s | 59.8% |
+| Backfill and daily build together | 480.5 s | 225.3 s | 53.1% |
+
+These results apply to SproutMe's development and testing workflow. They do not show that one engine is faster in general.
+
+For Archit, the main gain is faster debugging. Instead of spending hours reproducing an issue, he can find a bug in minutes. **“First one is the development speed. It is super fast,”** he says, calling it the first of DuckDB's advantages. The second is how easily it runs on local machines, including with the AI coding assistants the team uses, which can inspect errors and help debug them directly. The third is compatibility: the same setup runs locally and in CI without changes.
 
 ## What Comes Next
 
-SproutMe only started using DuckDB a month or two ago, and the results so far have made the team curious about going further. Archit is open to using DuckDB in the production product if additional testing and benchmarking justify it, though he is careful to note that migrating a production workload that already serves pilot accounts is a separate decision that needs its own evaluation. For now, the story is about a faster, safer development loop, not a change to the production warehouse.
+SproutMe has used DuckDB for only a month or two, but the results have made the team curious about going further. Archit is open to using DuckDB in production if more testing and benchmarking support it. He also points out that moving a production workload that already serves pilot accounts needs its own evaluation. For now, the change is limited to development, and the production warehouse stays the same.
 
 ## The Takeaway
 
-SproutMe's experience is a reminder that DuckDB can earn a role inside an existing Cloud data architecture without replacing anything in production. By making local development and CI runs fast enough to keep up with a startup's pace, it shortens feedback loops and lowers the risk of shipping a regression, all while BigQuery continues to serve the live product.
+SproutMe shows that DuckDB can fit into an existing cloud data architecture without replacing anything in production. Local development and CI runs now finish fast enough to match the team's pace. Feedback arrives sooner, which lowers the risk of shipping a regression, and BigQuery keeps serving the live product.
 
-We would like to thank Archit for the conversation. If you are using DuckDB and would like to share your story, drop us a line at [quack@duckdb.org](mailto:quack@duckdb.org).
+We would like to thank Archit for the conversation. If you use DuckDB and want to share your story, email [quack@duckdb.org](mailto:quack@duckdb.org).
