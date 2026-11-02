@@ -37,13 +37,7 @@ That let him give smaller firms a straight recommendation. DuckDB might not scal
 
 The clearest illustration is [QStudio](https://www.timestored.com/qstudio/), the analytics IDE Ryan released about 13 years ago. It was originally built for kdb+ and now connects to around 15 databases. He leaves database administration to tools like [DBeaver](https://dbeaver.io/) and focuses QStudio on analytics and charting.
 
-DuckDB was the first deep integration, and it changed how quants work with expensive queries. The workflow runs like this. An analyst runs a heavy query against a remote database. Some of these take up to 20 minutes. QStudio captures the result locally to Parquet through DuckDB:
-
-```sql
-COPY (
-    ⟨expensive_remote_query⟩
-) TO 'results/trades_2026-11-10.parquet' (FORMAT parquet);
-```
+DuckDB was the first deep integration, and it changed how quants work with expensive queries. The workflow runs like this. An analyst runs a heavy query against a remote database. Some of these take up to 20 minutes. QStudio then saves the result locally as Parquet through DuckDB, with a click in the UI.
 
 The next day, the analyst queries that saved result directly, without rerunning the original workload:
 
@@ -59,7 +53,7 @@ ORDER BY total_volume DESC;
 
 The result is a personal sandbox where quants can build on their own earlier work. It proved popular, and Ryan found its performance close to kdb+.
 
-Because QStudio is a Java Swing desktop application deployed inside banks, the integration depends on DuckDB's [Java client]({% link docs/current/clients/java/overview.md %}). Ryan's early version relied on hacky workarounds to get appending working. Once a dedicated Java developer joined and rebuilt the [Appender]({% link docs/current/clients/java/data_import.md %}) properly, every kink was ironed out:
+Because QStudio is a Java Swing desktop application deployed inside banks, the integration depends on DuckDB's [Java client]({% link docs/current/clients/java/overview.md %}). Ryan's early version relied on inefficient workarounds to get appending working. Once a dedicated Java developer joined and rebuilt the [Appender]({% link docs/current/clients/java/data_import.md %}) properly, every kink was ironed out:
 
 ```java
 DuckDBConnection conn = (DuckDBConnection) DriverManager.getConnection("jdbc:duckdb:");
@@ -78,7 +72,7 @@ That experience became the basis of his DuckCon talk. His argument was that an o
 
 ## Pulse: DuckDB by Default
 
-QStudio never made much money directly, but it got a very small company onto the approved-vendor lists of some very large firms, which is hard for small vendors to do. When TimeStored launched [Pulse](https://www.timestored.com/pulse/), a real-time HTML visualization tool that is now Ryan's main product, that path into large firms already existed.
+QStudio was never a significant direct revenue generator, but it got a very small company onto the approved-vendor lists of some very large firms, which is hard for small vendors to do. When TimeStored launched [Pulse](https://www.timestored.com/pulse/), a real-time HTML visualization tool that is now Ryan's main product, that path into large firms already existed.
 
 Ryan reached for DuckDB again. Pulse uses it to snapshot and cache data. What began as an integration experiment had become a repeated TimeStored architecture pattern. DuckDB sits in the embedded storage and query layer, and increasingly supports AI-assisted data exploration. Excel exports and similar user-facing features stay in the application's UI. That is partly to keep styling intact, and partly because bank users often can't install extensions at all.
 
@@ -86,7 +80,7 @@ Ryan reached for DuckDB again. Pulse uses it to snapshot and cache data. What be
 
 Ryan's newest project is [PeachQ](https://peachq.org/), an open-source implementation of the q language. Ryan loves q as a language but thinks DuckDB is ahead as a database, so PeachQ separates the two.
 
-The first release focuses on q compatibility and runs on the RayForce in-memory engine. DuckDB-backed storage is aimed at version two, which is still taking shape. That is where Ryan's recent work on C extensions is heading, along with experiments with newer formats such as [Vortex]({% link docs/current/core_extensions/vortex.md %}) and custom table formats. He credits DuckDB's [extension API]({% link docs/current/extensions/overview.md %}) with letting people add features cleanly, unlike the fragile workarounds he and others once built into closed systems. Often, he notes, DuckDB later builds those features itself.
+PeachQ uses the Rayforce in-memory engine and DuckDB-backed historical storage to deliver a modern, open-source alternative to kdb+, bringing together real-time processing, powerful analytics, and efficient storage in a single system. Ryan's recent work on C extensions points the same way, along with experiments with newer formats such as [Vortex]({% link docs/current/core_extensions/vortex.md %}) and custom table formats. He credits DuckDB's [extension API]({% link docs/current/extensions/overview.md %}) with letting people add features cleanly, unlike the fragile workarounds he and others once built into closed systems. Often, he notes, DuckDB later builds those features itself.
 
 ## Further Reading
 
