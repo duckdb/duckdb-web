@@ -111,7 +111,7 @@ docs:
 
 extension_star_count: 0
 extension_star_count_pretty: 0
-extension_download_count: 10168
+extension_download_count: 10194
 extension_download_count_pretty: 10.2k
 image: '/images/community_extensions/social_preview/preview_community_extension_duckfn_kuva.png'
 layout: community_extension_doc

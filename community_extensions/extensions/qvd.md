@@ -53,8 +53,8 @@ docs:
 
 extension_star_count: 2
 extension_star_count_pretty: 2
-extension_download_count: 8108
-extension_download_count_pretty: 8.1k
+extension_download_count: 8253
+extension_download_count_pretty: 8.3k
 image: '/images/community_extensions/social_preview/preview_community_extension_qvd.png'
 layout: community_extension_doc
 ---

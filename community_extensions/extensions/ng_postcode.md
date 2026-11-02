@@ -49,7 +49,7 @@ docs:
 
 extension_star_count: 0
 extension_star_count_pretty: 0
-extension_download_count: 8695
+extension_download_count: 8675
 extension_download_count_pretty: 8.7k
 image: '/images/community_extensions/social_preview/preview_community_extension_ng_postcode.png'
 layout: community_extension_doc

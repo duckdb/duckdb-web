@@ -8,7 +8,7 @@ excerpt: |
 extension:
   name: mongo
   description: Integrates DuckDB with MongoDB, enabling direct SQL queries and writes over MongoDB collections without ETL
-  version: 0.4.0
+  version: 0.5.0
   language: C++
   build: cmake
   license: MIT
@@ -19,7 +19,7 @@ extension:
 
 repo:
   github: stephaniewang526/duckdb-mongo
-  ref: 50e20bdfb3649d6d4ff296a41557caddb69763cc
+  ref: ba1c8360807b68da3e08b8aedc368f488f8c078e
 
 docs:
   hello_world: |
@@ -40,6 +40,7 @@ docs:
     - Automatic schema inference from sampled documents, with nested document flattening
     - User-provided schemas and Atlas SQL `__schema` document support
     - Query pushdown to MongoDB for filters (including struct field predicates), projections, limits, TopN, and aggregations (COUNT, SUM, MIN, MAX, AVG)
+    - `VARIANT` columns that keep each value's own BSON type: opt-in per column, as the inference fallback (`nested_type := 'variant'`), or for whole documents (`raw := true`), with path projection and predicate pushdown
     - `mongo_sample_size` setting to control schema inference sampling
     - `MongoQuery` log type to inspect the exact commands sent to MongoDB
     - BSON type mapping including ObjectId, Decimal128, arrays, and nested documents
@@ -59,8 +60,8 @@ docs:
 
 extension_star_count: 61
 extension_star_count_pretty: 61
-extension_download_count: 29687
-extension_download_count_pretty: 29.7k
+extension_download_count: 29554
+extension_download_count_pretty: 29.6k
 image: '/images/community_extensions/social_preview/preview_community_extension_mongo.png'
 layout: community_extension_doc
 ---
@@ -121,10 +122,11 @@ This extension does not add any types.
 
 <div class="extension_settings_table"></div>
 
-|           name           |                                                                                                                                                             description                                                                                                                                                              | input_type | scope  | aliases | typed_value |
-|--------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|------------|--------|---------|-------------|
-| mongo_enable_direct_scan | Allow mongo_scan to use a connection string that is not from an attached MongoDB database. When false, mongo_scan is only allowed if the connection string exactly matches an attached Mongo catalog.                                                                                                                                | BOOLEAN    | GLOBAL | []      | true        |
-| mongo_sample_size        | Number of documents sampled for schema inference when mongo_scan is called without an explicit sample_size, including collections queried through an attached catalog. Inferred schemas are cached per attached collection; call mongo_clear_cache() or re-ATTACH after changing this to re-infer. Must be between 1 and 2147483647. | BIGINT     | GLOBAL | []      | 100         |
-| temp_directory           | Set the directory to which temporary files are written.                                                                                                                                                                                                                                                                              | VARCHAR    | GLOBAL | []      | post.db.tmp |
+|           name           |                                                                                                                                                                                                       description                                                                                                                                                                                                        | input_type | scope  | aliases | typed_value |
+|--------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|------------|--------|---------|-------------|
+| mongo_enable_direct_scan | Allow mongo_scan to use a connection string that is not from an attached MongoDB database. When false, mongo_scan is only allowed if the connection string exactly matches an attached Mongo catalog.                                                                                                                                                                                                                    | BOOLEAN    | GLOBAL | []      | true        |
+| mongo_nested_type        | How inferred schemas represent nested documents, irregular arrays and type conflicts: 'json' (VARCHAR holding JSON text) or 'variant' (DuckDB VARIANT built from BSON). Applies when mongo_scan is called without an explicit nested_type, including collections queried through an attached catalog; inferred schemas are cached per attached collection, so call mongo_clear_cache() or re-ATTACH after changing this. | VARCHAR    | GLOBAL | []      | json        |
+| mongo_sample_size        | Number of documents sampled for schema inference when mongo_scan is called without an explicit sample_size, including collections queried through an attached catalog. Inferred schemas are cached per attached collection; call mongo_clear_cache() or re-ATTACH after changing this to re-infer. Must be between 1 and 2147483647.                                                                                     | BIGINT     | GLOBAL | []      | 100         |
+| temp_directory           | Set the directory to which temporary files are written.                                                                                                                                                                                                                                                                                                                                                                  | VARCHAR    | GLOBAL | []      | post.db.tmp |
 
 

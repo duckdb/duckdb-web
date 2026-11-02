@@ -148,7 +148,7 @@ docs:
 
 extension_star_count: 5
 extension_star_count_pretty: 5
-extension_download_count: 12508
+extension_download_count: 12517
 extension_download_count_pretty: 12.5k
 image: '/images/community_extensions/social_preview/preview_community_extension_spxlsx.png'
 layout: community_extension_doc
