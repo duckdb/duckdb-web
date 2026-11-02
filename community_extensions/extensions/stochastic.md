@@ -24,8 +24,8 @@ repo:
   ref: 50fb2aeb031c26a10b099b4dcfb0729010a7d91f
   variegata: 4f9f691e2e9cf8abab3d481061eadbd97ef59675
 
-extension_star_count: 31
-extension_star_count_pretty: 31
+extension_star_count: 32
+extension_star_count_pretty: 32
 extension_download_count: 64678
 extension_download_count_pretty: 64.7k
 image: '/images/community_extensions/social_preview/preview_community_extension_stochastic.png'
