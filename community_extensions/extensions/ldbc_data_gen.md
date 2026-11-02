@@ -56,7 +56,7 @@ docs:
 
 extension_star_count: 1
 extension_star_count_pretty: 1
-extension_download_count: 11718
+extension_download_count: 11668
 extension_download_count_pretty: 11.7k
 image: '/images/community_extensions/social_preview/preview_community_extension_ldbc_data_gen.png'
 layout: community_extension_doc

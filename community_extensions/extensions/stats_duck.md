@@ -21,6 +21,8 @@ extension:
 repo:
   github: KoliStat/the-stats-duck
   ref: 98aa4e305ddd426ba94a1aca0e835edd707e949f
+  variegata: 98aa4e305ddd426ba94a1aca0e835edd707e949f
+  andium: 98aa4e305ddd426ba94a1aca0e835edd707e949f
 
 docs:
   hello_world: |
@@ -100,8 +102,8 @@ docs:
 
 extension_star_count: 62
 extension_star_count_pretty: 62
-extension_download_count: 14265
-extension_download_count_pretty: 14.3k
+extension_download_count: 15074
+extension_download_count_pretty: 15.1k
 image: '/images/community_extensions/social_preview/preview_community_extension_stats_duck.png'
 layout: community_extension_doc
 ---
@@ -118,7 +120,7 @@ This table covers all DuckDB releases that have not reached [end-of-life](https:
 | macOS AMD64 | ❌ | ❌ | ✅ | ✅ | ✅ |
 | macOS ARM64 | ❌ | ❌ | ✅ | ✅ | ✅ |
 | Windows AMD64 | ❌ | ❌ | ✅ | ✅ | ✅ |
-| Windows ARM64 | ❌ | ❌ | ❌ | ❌ | ✅ |
+| Windows ARM64 | ❌ | ❌ | ❌ | ✅ | ✅ |
 | WebAssembly | ❌ | ❌ | ✅ | ✅ | ✅ |
 
 ### Installing and Loading

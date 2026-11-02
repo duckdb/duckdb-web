@@ -136,8 +136,8 @@ docs:
 
 extension_star_count: 0
 extension_star_count_pretty: 0
-extension_download_count: 3227
-extension_download_count_pretty: 3.2k
+extension_download_count: 3423
+extension_download_count_pretty: 3.4k
 image: '/images/community_extensions/social_preview/preview_community_extension_yorc.png'
 layout: community_extension_doc
 ---

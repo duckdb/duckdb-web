@@ -35,8 +35,8 @@ docs:
 
 extension_star_count: 9
 extension_star_count_pretty: 9
-extension_download_count: 13778
-extension_download_count_pretty: 13.8k
+extension_download_count: 14395
+extension_download_count_pretty: 14.4k
 image: '/images/community_extensions/social_preview/preview_community_extension_finance.png'
 layout: community_extension_doc
 ---

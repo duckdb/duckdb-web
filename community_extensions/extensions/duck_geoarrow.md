@@ -132,7 +132,7 @@ docs:
 
 extension_star_count: 9
 extension_star_count_pretty: 9
-extension_download_count: 18428
+extension_download_count: 18405
 extension_download_count_pretty: 18.4k
 image: '/images/community_extensions/social_preview/preview_community_extension_duck_geoarrow.png'
 layout: community_extension_doc
