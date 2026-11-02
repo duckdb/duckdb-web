@@ -117,6 +117,40 @@ INSTALL AND LOAD legacy_parser;
 SET enable_legacy_parser = true;
 ```
 
+### Errors in Transactions
+
+In DuckDB 2.0.0, any error inside an explicit transaction aborts the transaction.
+Previously, parser and binder errors, such as a reference to a table or column that does not exist, left the transaction usable, so later statements in the same transaction could still run and commit.
+Now the transaction has to be rolled back:
+
+```sql
+CREATE TABLE t (x INTEGER);
+BEGIN;
+SELECT * FROM missing_table;
+```
+
+```console
+Catalog Error: Table with name missing_table does not exist!
+```
+
+```sql
+INSERT INTO t VALUES (1);
+```
+
+```console
+TransactionContext Error: Current transaction is aborted (please ROLLBACK)
+```
+
+Code that runs a statement which may fail inside a transaction and carries on after the error, for example to skip a table that may not exist, needs to check first or run the statement outside the transaction.
+
+To restore the previous behavior, set the `default_transaction_invalidation_policy` option:
+
+```sql
+SET default_transaction_invalidation_policy = 'SYNTACTIC_ERRORS_DO_NOT_INVALIDATE';
+```
+
+For the list of configuration options, see the [Configuration page]({% link docs/2.0/configuration/overview.md %}).
+
 ### C API v2
 
 DuckDB 2.0.0 ships a revamped [C API]({% link docs/2.0/clients/c/overview.md %}#c-api-v2), which is considerably more powerful than its predecessor and exposes components such as file systems and table functions to extensions.
