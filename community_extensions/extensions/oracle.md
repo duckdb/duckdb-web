@@ -19,6 +19,7 @@ extension:
 repo:
   github: cofin/duckdb-oracle
   ref: fa61951bdd3edf18bb6bf8e7169255d5ca6de635
+  variegata: 79a0fe896398d0e12533241bf101d66e5650e6b6
 
 docs:
   hello_world: |
@@ -79,11 +80,11 @@ This table covers all DuckDB releases that have not reached [end-of-life](https:
 
 | Platform | 1.4.4 | 1.4.5 | 1.5.5 | 1.5.6 | 2.0.0 |
 | :--- | :---: | :---: | :---: | :---: | :---: |
-| Linux AMD64 | ❌ | ❌ | ❌ | ❌ | ✅ |
-| Linux ARM64 | ❌ | ❌ | ❌ | ❌ | ✅ |
+| Linux AMD64 | ❌ | ❌ | ❌ | ✅ | ✅ |
+| Linux ARM64 | ❌ | ❌ | ❌ | ✅ | ✅ |
 | macOS AMD64 | ❌ | ❌ | ❌ | ❌ | ❌ |
-| macOS ARM64 | ❌ | ❌ | ❌ | ❌ | ✅ |
-| Windows AMD64 | ❌ | ❌ | ❌ | ❌ | ✅ |
+| macOS ARM64 | ❌ | ❌ | ❌ | ✅ | ✅ |
+| Windows AMD64 | ❌ | ❌ | ❌ | ✅ | ✅ |
 | Windows ARM64 | ❌ | ❌ | ❌ | ❌ | ❌ |
 | WebAssembly | ❌ | ❌ | ❌ | ❌ | ❌ |
 
