@@ -28,6 +28,7 @@ Tertiary clients come without any support guarantees.
 | [Perl](https://metacpan.org/pod/DBD::DuckDB)                       | [Giuseppe Di Terlizzi](https://github.com/giterlizzi) |
 | [PHP]({% link docs/2.0/clients/tertiary_clients/php.md %})     | [satur-io](https://github.com/satur-io/duckdb-php)    |
 | [PHP (PDO)]({% link docs/2.0/clients/tertiary_clients/php_pdo.md %}) | [Thomas Bley](https://github.com/thomas-0816)   |
+| [PHP](https://github.com/martin-juul/php-duckdb)               | [martin-juul](https://github.com/martin-juul)               |
 | [Pyodide](https://github.com/duckdb/duckdb-pyodide)                | The DuckDB team                                       |
 | [Raku](https://raku.land/zef:bduggan/Duckie)                       | [bduggan](https://github.com/bduggan)                 |
 | [Ruby](https://suketa.github.io/ruby-duckdb/)                      | [suketa](https://github.com/suketa)                   |
