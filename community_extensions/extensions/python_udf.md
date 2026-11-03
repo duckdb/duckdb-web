@@ -71,8 +71,8 @@ docs:
 
 extension_star_count: 8
 extension_star_count_pretty: 8
-extension_download_count: 8076
-extension_download_count_pretty: 8.1k
+extension_download_count: 776
+extension_download_count_pretty: 776
 image: '/images/community_extensions/social_preview/preview_community_extension_python_udf.png'
 layout: community_extension_doc
 ---

@@ -108,10 +108,10 @@ docs:
 
     Documentation: https://github.com/altertable-ai/duckdb-semantic_layer
 
-extension_star_count: 3
-extension_star_count_pretty: 3
-extension_download_count: 2576
-extension_download_count_pretty: 2.6k
+extension_star_count: 6
+extension_star_count_pretty: 6
+extension_download_count: 559
+extension_download_count_pretty: 559
 image: '/images/community_extensions/social_preview/preview_community_extension_semantic_layer.png'
 layout: community_extension_doc
 ---
