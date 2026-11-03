@@ -68,12 +68,27 @@ $(document).ready(function(){
 		$blockquote.wrapInner('<div class="content"></div>');
 
 		if (className === "quote") {
+				$first.remove();
+			}
 			var $last = $blockquote.find('.content > p:last-child');
 			if (/^(\u2013|\u2014|--)/.test($last.text().trim())) {
 				$last.addClass('quote-author');
+				var authorName = $last.text().trim().replace(/^(\u2013|\u2014|--)\s*/, '');
+				var $author = $('.postheader-author').filter(function() {
+					return $(this).find('.name').text().trim() === authorName;
+				}).first();
+				if (!$last.find('img').length) {
+					$last.prepend($author.find('img.avatar').clone());
+				}
 			}
-			$blockquote.find('.content').prepend('<span class="sr-only">Quote</span>');
-			$blockquote.prepend('<div class="symbol" title="Quote"><svg class="icon"><use href="#' + icons.quote + '"></use></svg></div>');
+			var $quoteText = $content.children('p').not('.quote-author');
+			$quoteText.first().addClass('quote-open').html(function(_, html) {
+				return html.replace(/^(\s*(?:<[^>]+>\s*)*)[“"]/, '$1');
+			});
+			if (!/[”"]$/.test($quoteText.last().text().trim())) {
+				$quoteText.last().addClass('quote-close');
+			}
+			$content.prepend('<span class="sr-only">Quote</span>');
 		} else {
 			var label = (className == "bestpractice") ? 'Best practice' : (hasKeyword ? firstWord : 'Note');
 			$blockquote.find('.content').prepend('<span class="sr-only">' + label + '</span>');

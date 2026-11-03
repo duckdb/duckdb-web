@@ -1,11 +1,6 @@
 @use '../abstracts/mixins' as *;
 
 body.documentation.guides-index {
-    main > .wrap #main_content_wrap {
-        width: 100%;
-        max-width: 1200px;
-    }
-
     .filterbar {
         flex-wrap: nowrap;
         margin-top: 24px;

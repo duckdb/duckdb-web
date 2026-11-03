@@ -103,24 +103,51 @@ div.singleentry {
 		}
 
 		&.quote {
-			padding: 18px 20px;
+			--quote-size: var(--type-body-normal, 15px);
+			margin-block: 2rem;
+			padding: 0;
+			border: 0;
+			background: transparent;
 
-			.symbol {
-				margin-top: 4px;
+			&.quote-large {
+				--quote-size: var(--type-body-large, 22.5px);
 			}
-			border-radius: var(--page-radius-m, 10px);
-			background: var(--doc-codebox-background-color, #F2F2F2);
-			border-color: var(--border-color);
 
 			p {
-				font-size: var(--type-body-normal, 15px);
-				line-height: 1.5;
+				font-size: var(--quote-size);
+				font-weight: 400;
+				line-height: 1.4;
+				color: var(--main-text-primary-color, #0D0D0D);
+			}
+
+			.quote-open {
+				position: relative;
+
+				&::before {
+					content: "“";
+					position: absolute;
+					inset-inline-end: 100%;
+				}
+			}
+
+			.quote-close::after {
+				content: "”";
 			}
 
 			p.quote-author {
-				@include body-small();
+				@include body-small;
 				color: var(--main-text-secondary-color, #666);
-				margin-top: 20px;
+				margin-top: 0.75rem;
+
+				img {
+					display: inline-block;
+					width: 18px;
+					height: 18px;
+					margin: 0 4px 0 0;
+					border-radius: 50%;
+					object-fit: cover;
+					vertical-align: middle;
+				}
 			}
 		}
 	}
@@ -149,6 +176,7 @@ div.singleentry {
 		blockquote.quote {
 			margin: 0;
 			height: 100%;
+			padding-inline-start: 0.75rem;
 		}
 	}
 

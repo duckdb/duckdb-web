@@ -94,15 +94,15 @@ body.documentation {
         }
 
         #main_content_wrap {
-            :is(blockquote, div.highlighter-rouge, div.highlight) {
+            :is(blockquote:not(.quote), div.highlighter-rouge, div.highlight) {
                 margin-bottom: 0;
             }
 
-            :is(blockquote, div.highlighter-rouge, div.highlight) + :is(blockquote, div.highlighter-rouge, div.highlight) {
+            :is(blockquote:not(.quote), div.highlighter-rouge, div.highlight) + :is(blockquote:not(.quote), div.highlighter-rouge, div.highlight) {
                 margin-top: 1rem;
             }
 
-            :is(blockquote, div.highlighter-rouge, div.highlight) + p {
+            :is(blockquote:not(.quote), div.highlighter-rouge, div.highlight) + p {
                 margin-top: 1.5rem;
             }
         }
