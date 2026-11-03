@@ -82,10 +82,10 @@ docs:
 
     A Quarto notebook in the repository turns these tables into a PDF security report.
 
-extension_star_count: 0
-extension_star_count_pretty: 0
-extension_download_count: null
-extension_download_count_pretty: n/a
+extension_star_count: 1
+extension_star_count_pretty: 1
+extension_download_count: 57
+extension_download_count_pretty: 57
 image: '/images/community_extensions/social_preview/preview_community_extension_apt.png'
 layout: community_extension_doc
 ---
