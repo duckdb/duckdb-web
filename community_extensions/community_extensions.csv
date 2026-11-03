@@ -239,7 +239,7 @@ onager,CogitatorTech/onager,c45146bc4b259cfcbd32ddace34eb8fc112e061d,"A DuckDB e
 open_prompt,quackscience/duckdb-extension-openprompt,725b1a99a20c1f627b81fa86c026f7d2b9146576,"Interact with LLMs with a simple DuckDB Extension"
 opendal,chitralverma/duckdb-opendal,6e998efad81618458518fbc061f1797354f13c56,"Access S3, local filesystem, and other storage services through Apache OpenDAL"
 oracle,cofin/duckdb-oracle,fa61951bdd3edf18bb6bf8e7169255d5ca6de635,"Connect DuckDB directly to Oracle databases for reading and writing tables, with catalog integration, pushdown, spatial geometry, and vector support"
-oracle_scanner,krokozyab/quack-oracle,62a2d77685c8365c80639e8f6110d68efb83660b,"Read and write Oracle Database with no Oracle client"
+oracle_scanner,krokozyab/quack-oracle,61a2b96f85d5f29006bc4c423f3ad292ae0764af,"Read and write Oracle Database with no Oracle client"
 oraduck,hugues31/oraduck,e8f04ef00b37851a5f291e0b411365c9377dcf13,"Read Oracle tables in parallel, load query results into Oracle through the OCI Direct Path API and run statements in Oracle"
 orc,alitrack/duckdb_orc,e2bb83eb1f50531dddf3074b14eb56d85401b8f3,"A DuckDB extension for reading Apache ORC files, written in pure Rust. Supports all ORC primitives, struct, list, map types and all compression codecs (Zlib, Snappy, LZO, LZ4, ZSTD)."
 ortools,prasanthj/duckdb-ortools,c657da7900676c05dbc46b8eeb022ed70b182ad6,"Native CP-SAT constraint solving and GLOP linear optimization with relational resource allocation"
