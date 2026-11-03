@@ -8,7 +8,7 @@ excerpt: |
 extension:
   name: mongo
   description: Integrates DuckDB with MongoDB, enabling direct SQL queries and writes over MongoDB collections without ETL
-  version: 0.5.0
+  version: 0.5.1
   language: C++
   build: cmake
   license: MIT
@@ -19,7 +19,7 @@ extension:
 
 repo:
   github: stephaniewang526/duckdb-mongo
-  ref: ba1c8360807b68da3e08b8aedc368f488f8c078e
+  ref: ddd29de6116bd56d66ff1e063afd6ba24c6fabf2
 
 docs:
   hello_world: |
@@ -52,7 +52,7 @@ docs:
     - `DROP TABLE` -- drop MongoDB collections
 
     **Connections and security:**
-    - MongoDB Atlas support via connection strings or DuckDB Secrets
+    - MongoDB Atlas support via connection strings or DuckDB Secrets, including arbitrary URI options (e.g. `readPreference`) via the secret's `OPTIONS` key
     - TLS/SSL encryption, custom CA certificates
     - `mongo_enable_direct_scan` setting to restrict `mongo_scan` to attached catalogs only
 
@@ -60,8 +60,8 @@ docs:
 
 extension_star_count: 61
 extension_star_count_pretty: 61
-extension_download_count: 29554
-extension_download_count_pretty: 29.6k
+extension_download_count: 6066
+extension_download_count_pretty: 6.1k
 image: '/images/community_extensions/social_preview/preview_community_extension_mongo.png'
 layout: community_extension_doc
 ---

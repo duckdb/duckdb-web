@@ -75,8 +75,8 @@ docs:
 
 extension_star_count: 4
 extension_star_count_pretty: 4
-extension_download_count: 1669
-extension_download_count_pretty: 1.7k
+extension_download_count: 419
+extension_download_count_pretty: 419
 image: '/images/community_extensions/social_preview/preview_community_extension_decision_tune.png'
 layout: community_extension_doc
 ---
