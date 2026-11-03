@@ -121,8 +121,8 @@ WHERE i % 2 = 0;
 
 ### Table Functions
 
-Some functions in DuckDB return entire tables rather than individual values. These functions are accordingly called _table functions_ and can be used with a `FROM` clause like regular table references. 
-Examples include [`read_csv`]({% link docs/1.5/data/csv/overview.md %}#csv-functions), [`read_parquet`]({% link docs/1.5/data/parquet/overview.md %}#read_parquet-function), [`range`]({% link docs/1.5/sql/functions/list.md %}#rangestart-stop-step), [`generate_series`]({% link docs/1.5/sql/functions/list.md %}#generate_seriesstart-stop-step), [`repeat`]({% link docs/1.5/sql/functions/utility.md %}#repeat_rowvarargs-num_rows), [`unnest`]({% link docs/1.5/sql/query_syntax/unnest.md %}), and [`glob`]({% link docs/1.5/sql/functions/utility.md %}#globsearch_path) (note that some of the examples here can be used as both scalar and table functions). 
+Some functions in DuckDB return entire tables rather than individual values. These functions are accordingly called _table functions_ and can be used with a `FROM` clause like regular table references.
+Examples include [`read_csv`]({% link docs/1.5/data/csv/overview.md %}#csv-functions), [`read_parquet`]({% link docs/1.5/data/parquet/overview.md %}#read_parquet-function), [`range`]({% link docs/1.5/sql/functions/list.md %}#rangestart-stop-step), [`generate_series`]({% link docs/1.5/sql/functions/list.md %}#generate_seriesstart-stop-step), [`repeat`]({% link docs/1.5/sql/functions/utility.md %}#repeat_rowvarargs-num_rows), [`unnest`]({% link docs/1.5/sql/query_syntax/unnest.md %}), and [`glob`]({% link docs/1.5/sql/functions/utility.md %}#globsearch_path) (note that some of the examples here can be used as both scalar and table functions).
 
 For example,
 
@@ -142,7 +142,7 @@ FROM read_csv('test.csv');
 All table functions support a `WITH ORDINALITY` suffix, which extends the returned table by an integer column `ordinality` that enumerates the generated rows starting at `1`.
 
 ```sql
-SELECT * 
+SELECT *
 FROM read_csv('test.csv') WITH ORDINALITY;
 ```
 
@@ -264,7 +264,7 @@ WHERE s1.time > s2.time
 
 Natural joins join two tables based on attributes that share the same name.
 
-For example, take the following example with cities, airport codes and airport names. Note that both tables are intentionally incomplete, i.e., they do not have a matching pair in the other table.
+For example, take the following example with cities, airport codes, and airport names. Note that both tables are intentionally incomplete, i.e., they do not have a matching pair in the other table.
 
 ```sql
 CREATE TABLE city_airport (city_name VARCHAR, iata VARCHAR);
@@ -462,7 +462,7 @@ POSITIONAL JOIN t2;
 
 Positional joins are always `FULL OUTER` joins, i.e., the resulting table has the length of the longer input table and the missing entries are filled with `NULL` values.
 
-### As-Of Joins
+### As-of Joins
 
 A common operation when working with temporal or similarly-ordered data
 is to find the nearest (first) event in a reference table (such as prices).

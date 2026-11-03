@@ -8,6 +8,7 @@ redirect_from:
 - /docs/lts/guides/file_formats/read_file
 - /docs/preview/guides/file_formats/read_file
 title: Directly Reading Files
+how_to_topic: file-formats
 ---
 
 DuckDB allows directly reading files via the [`read_text`](#read_text) and [`read_blob`](#read_blob) functions.

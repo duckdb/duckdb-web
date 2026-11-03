@@ -3,12 +3,12 @@ layout: docu
 title: Securing DuckDB
 ---
 
-DuckDB is a powerful analytical database engine. It can read and write files, access the network, load extensions, 
-and use system resources. Like any powerful tool, these capabilities require appropriate configuration when 
+DuckDB is a powerful analytical database engine. It can read and write files, access the network, load extensions,
+and use system resources. Like any powerful tool, these capabilities require appropriate configuration when
 working with sensitive data or in shared environments.
 
 This page documents DuckDB's security model and security-related settings. The right configuration depends on your use case, environment, and threat model.
-If you plan to embed DuckDB in your application, also consult the ["Embedding DuckDB"]({% link docs/1.5/operations_manual/securing_duckdb/embedding_duckdb.md %}) page.
+If you plan to embed DuckDB in your application, also consult the [“Embedding DuckDB”]({% link docs/1.5/operations_manual/securing_duckdb/embedding_duckdb.md %}) page.
 
 ## Untrusted Input
 
@@ -29,7 +29,7 @@ If your application must execute SQL from untrusted sources, use additional safe
 * Implement strict query timeouts at the application level
 
 The settings described on this page provide **defense-in-depth** and can limit certain capabilities, but they are not a substitute for proper sandboxing. Also keep in mind that
-sandboxing should not just be considered for security purposes, but also for preventing denial of service (DoS) attacks: malicious inputs can easily cause DuckDB to consume excessive resources such 
+sandboxing should not just be considered for security purposes, but also for preventing denial of service (DoS) attacks: malicious inputs can easily cause DuckDB to consume excessive resources such
 as memory, disk, CPU, or network.
 
 ### Untrusted Non-SQL Input
@@ -89,7 +89,7 @@ relied upon as comprehensive security mechanisms in all configurations. These se
 measures to limit the impact of potential security issues, but they cannot provide complete protection against all
 attack vectors, especially when executing untrusted SQL. For robust security when dealing with untrusted input, combine
 these settings with proper sandboxing at the operating system or container level, as described in
-the ["Untrusted SQL Input"](#untrusted-sql-input) section.
+the [“Untrusted SQL Input”](#untrusted-sql-input) section.
 
 ### Safe Mode (CLI)
 
@@ -194,7 +194,7 @@ Queries can access the secrets defined in the Secrets Manager. For example, if t
 
 Similarly to other SQL databases, it's recommended to use [prepared statements]({% link docs/1.5/sql/query_syntax/prepared_statements.md %}) in DuckDB to prevent [SQL injection](https://en.wikipedia.org/wiki/SQL_injection).
 
-> Important Prepared statements protect against SQL injection when **you control the query structure** but accept **untrusted data values** (e.g., user-provided search terms or IDs). If users can supply the SQL query itself, this is equivalent to allowing them to run arbitrary code – see ["Untrusted SQL Input"](#untrusted-sql-input).
+> Important Prepared statements protect against SQL injection when **you control the query structure** but accept **untrusted data values** (e.g., user-provided search terms or IDs). If users can supply the SQL query itself, this is equivalent to allowing them to run arbitrary code – see [“Untrusted SQL Input”](#untrusted-sql-input).
 
 **Therefore, avoid concatenating strings for queries:**
 

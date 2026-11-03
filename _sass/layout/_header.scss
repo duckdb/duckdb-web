@@ -4,6 +4,7 @@
 
 /* Header Container */
 header .headerline {
+	--header-control-size: 33px;
 	border-bottom: 1px solid var(--border-color);
 	height: 70px;
 	width: 100%;
@@ -107,10 +108,9 @@ header .headerline {
 						border-radius: var(--page-radius-box);
 						border: 1px solid var(--border-color);
 						backdrop-filter: blur(15px);
-						padding: 15px 10px;
+						@include menu-dropdown-padding;
 						margin: 0;
-						display: flex;
-						flex-direction: column;
+						@include menu-dropdown-list;
 						transition: all 0.1s ease;
 						transform: scale(0.9);
 						li a {
@@ -118,16 +118,14 @@ header .headerline {
 							text-decoration: none;
 							color: inherit;
 							@include menu-item();
-							line-height: 1;
-							padding: 15px 20px;
+							@include menu-dropdown-item-spacing;
 							border-radius: var(--page-radius-pill);
 							white-space: nowrap;
 							transition: all 0.2s;
-							margin: -3px 0;
 							background: transparent;
+							@include menu-dropdown-item-states;
 			
 							&:hover {
-								background: var(--menu-dropdown-item-background-hover, #E6E6E6);
 								color: var(--main-link-hover, #665d00);
 							}
 						}
@@ -205,8 +203,14 @@ header .headerline {
 		}
 		/* Button */
 		.button {
+			align-self: center;
+			display: inline-flex;
+			align-items: center;
+			height: var(--header-control-size);
+			font-size: var(--type-side-menu, 13px);
 			line-height: 1;
 			margin: 0;
+			padding: 0 16px;
 		}
 		/* Options (Theme Toggle & Banner) */
 		.options {
@@ -220,8 +224,8 @@ header .headerline {
 				background-color: var(--menu-topmenu-background-color, rgba(250, 250, 250, 0.60));
 				background-repeat: no-repeat;
 				background-position: center center;
-				width: 40px;
-				height: 40px;
+				width: var(--header-control-size);
+				height: var(--header-control-size);
 				flex-shrink: 0;
 				aspect-ratio: 1 / 1;
 				display: flex;
@@ -254,8 +258,8 @@ header .headerline {
 
 				.icon-sun,
 				.icon-moon{
-					width: 16px;
-					height: 16px;
+					width: 14px;
+					height: 14px;
 				}
 
 			}

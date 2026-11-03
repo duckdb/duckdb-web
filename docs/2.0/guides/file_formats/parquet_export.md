@@ -8,6 +8,7 @@ redirect_from:
 - /docs/lts/guides/file_formats/parquet_export
 - /docs/preview/guides/file_formats/parquet_export
 title: Parquet Export
+how_to_topic: file-formats
 ---
 
 To export the data from a table to a Parquet file, use the [`COPY` statement]({% link docs/2.0/sql/statements/copy.md %}):

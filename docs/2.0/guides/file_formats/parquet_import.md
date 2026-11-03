@@ -8,6 +8,7 @@ redirect_from:
 - /docs/lts/guides/file_formats/parquet_import
 - /docs/preview/guides/file_formats/parquet_import
 title: Parquet Import
+how_to_topic: file-formats
 ---
 
 To read data from a Parquet file, use the `read_parquet` function in the `FROM` clause of a query:

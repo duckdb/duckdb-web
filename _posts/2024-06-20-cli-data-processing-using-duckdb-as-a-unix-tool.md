@@ -22,7 +22,7 @@ To set the stage, let's recall the [Unix philosophy](https://en.wikipedia.org/wi
 * work together, and
 * handle text streams.
 
-Unix-like systems such as macOS, Linux and [WSL in Windows](https://en.wikipedia.org/wiki/Windows_Subsystem_for_Linux) have embraced this philosophy.
+Unix-like systems such as macOS, Linux, and [WSL in Windows](https://en.wikipedia.org/wiki/Windows_Subsystem_for_Linux) have embraced this philosophy.
 Tools such as
 [`grep`](https://man7.org/linux/man-pages/man1/grep.1.html),
 [`sed`](https://man7.org/linux/man-pages/man1/sed.1.html), and
@@ -53,7 +53,7 @@ Another attractive feature of DuckDB is that it offers an interactive shell, whi
 ## Data Processing with Unix Tools and DuckDB
 
 In the following, we give examples for implementing simple data processing tasks using the CLI tools provided in most Unix shells and using DuckDB SQL queries.
-We use DuckDB v1.0.0 and run it in [in-memory mode]({% link docs/2.0/connect/overview.md %}#in-memory-database).
+We use DuckDB 1.0.0 and run it in [in-memory mode]({% link docs/2.0/connect/overview.md %}#in-memory-database).
 This mode makes sense for the problems we are tackling, as we do not create any tables and the operations are not memory-intensive, so there is no data to persist or to spill on disk.
 
 ### Datasets
@@ -278,7 +278,7 @@ The Hague
 
 #### DuckDB: `INTERSECT ALL`
 
-The DuckDB solution reads the CSV files, projects the `city` fields and applies the [`INTERSECT ALL` clause]({% link docs/2.0/sql/query_syntax/setops.md %}#intersect-all-bag-semantics) to calculate the intersection:
+The DuckDB solution reads the CSV files, projects the `city` fields, and applies the [`INTERSECT ALL` clause]({% link docs/2.0/sql/query_syntax/setops.md %}#intersect-all-bag-semantics) to calculate the intersection:
 
 ```plsql
 COPY (

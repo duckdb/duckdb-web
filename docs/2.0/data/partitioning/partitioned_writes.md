@@ -130,7 +130,7 @@ Two helper functions are available to build Hive-style paths inside a `PARTITION
     dir/subdir/file.txt
     ```
 
-### Sorting Rows Within Partitions
+### Sorting Rows within Partitions
 
 > New As of DuckDB 2.0, the `ORDER_BY` copy option sorts the rows before they are written. When combined with `PARTITION_BY`, the rows are sorted within each partition:
 

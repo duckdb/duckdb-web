@@ -4,7 +4,7 @@ layout: docu
 title: Rust Client
 ---
 
-> Installation To use the DuckDB Rust client, visit the [Rust installation page]({% link install/index.html %}?environment=rust).
+> Installation To use the DuckDB Rust client, visit the [Rust installation page]({% link docs/2.0/installation.html %}?environment=rust).
 >
 > The latest stable version of the DuckDB Rust client is {% if site.maintained_duckdb_rust_version != "" %}{{ site.maintained_duckdb_rust_version }}{% else %}{{ site.old_lts_duckdb_rust_version }}{% endif %}.
 
@@ -18,7 +18,7 @@ The DuckDB Rust client is published on [crates.io](https://crates.io/crates/duck
 cargo add 'duckdb@~{{ site.maintained_duckdb_rust_crate_version }}' --features bundled
 ```
 
-The equivalent `Cargo.toml` entry pins the version. Starting with DuckDB v1.5.0 the crate version has the form `1.⟨major_minor_patch⟩.x`. A tilde requirement receives patch releases without changing the bundled DuckDB version:
+The equivalent `Cargo.toml` entry pins the version. Starting with DuckDB 1.5.0 the crate version has the form `1.⟨major_minor_patch⟩.x`. A tilde requirement receives patch releases without changing the bundled DuckDB version:
 
 ```toml
 [dependencies]
@@ -168,8 +168,8 @@ Each statically links the matching bundled extension. All imply `bundled-cmake`,
 | Feature | Enables |
 |--|--|
 | `vtab-full` | `vtab-arrow` and `appender-arrow`, plus the deprecated `vtab-excel`. |
-| `extensions-full` | `json`, `parquet` and `vtab-full`. |
-| `modern-full` | `chrono`, `serde_json`, `url`, `r2d2`, `uuid`, `polars` and `rust_decimal`. |
+| `extensions-full` | `json`, `parquet`, and `vtab-full`. |
+| `modern-full` | `chrono`, `serde_json`, `url`, `r2d2`, `uuid`, `polars`, and `rust_decimal`. |
 
 ### Deprecated Features
 

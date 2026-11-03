@@ -22,11 +22,11 @@ Available options:
 
 * `FORMAT`: is the only required option and must be set to `GDAL` to use the GDAL based copy function.
 * `DRIVER`: is the GDAL driver to use for the export. Use `ST_Drivers()` to list the names of all available drivers.
-* `GEOMETRY_TYPE` : the geometry type for the created layer to pass to the GDAL driver. One of `POINT`, `LINESTRING`, `POLYGON`, `MULTIPOINT`, `MULTILINESTRING`, `MULTIPOLYGON` and `GEOMETRYCOLLECTION`.
+* `GEOMETRY_TYPE` : the geometry type for the created layer to pass to the GDAL driver. One of `POINT`, `LINESTRING`, `POLYGON`, `MULTIPOINT`, `MULTILINESTRING`, `MULTIPOLYGON`, and `GEOMETRYCOLLECTION`.
 * `LAYER_NAME` : assign an alternate name to the new layer
 * `LAYER_CREATION_OPTIONS`: list of layer creation options to pass to the GDAL driver. Use parenthesis to pass a list of options. See the GDAL docs for the driver you are using for a list of available options.
 * `DATASET_CREATION_OPTIONS`: list of dataset creation options to pass to the GDAL driver. Use parenthesis to pass a list of options. See the GDAL docs for the driver you are using for a list of available options.
-* `SRS` or `CRS`: Set a spatial reference system as metadata to use for the export. This can be a WKT string, an EPSG code or a proj-string, basically anything you would normally be able to pass to GDAL. Note that this will **not** perform any reprojection of the input geometry, it just sets the metadata if the target driver supports it.
+* `SRS` or `CRS`: Set a spatial reference system as metadata to use for the export. This can be a WKT string, an EPSG code, or a proj-string, basically anything you would normally be able to pass to GDAL. Note that this will **not** perform any reprojection of the input geometry, it just sets the metadata if the target driver supports it.
 
 ## Limitations
 

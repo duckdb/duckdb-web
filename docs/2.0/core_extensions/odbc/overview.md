@@ -159,61 +159,61 @@ ODBC connection can be established using a data source name in a form `DSN=data_
 
 Example of connection strings without a configured data source:
 
-Oracle: 
- 
+Oracle:
+
 ```text
 Driver={Oracle in instantclient_23_0};DBQ=//127.0.0.1:1521/XE;UID=scott;PWD=tiger;
 ```
 
-SQL Server: 
- 
+SQL Server:
+
 ```text
 Driver={ODBC Driver 18 for SQL Server};Server=tcp:127.0.0.1,1433;UID=sa;PWD=pwd;TrustServerCertificate=Yes;Database=test_db;
 ```
 
-DB2: 
+DB2:
 
 ```text
 Driver={IBM DB2 ODBC DRIVER};HostName=127.0.0.1;Port=50000;Database=testdb;UID=db2inst1;PWD=pwd;
 ```
 
-PostgreSQL: 
+PostgreSQL:
 
 ```text
 Driver={PostgreSQL Unicode};Server=127.0.0.1;Port=5432;Username=postgres;Password=postgres;Database=test_db;
 ```
 
-MySQL/MariaDB: 
+MySQL/MariaDB:
 
 ```text
 Driver={MariaDB ODBC 3.1 Driver};SERVER=127.0.0.1;PORT=3306;USER=root;PASSWORD=root;DATABASE=test_db;
 ```
 
-Firebird: 
+Firebird:
 
 ```text
 Driver={Firebird ODBC Driver};Database=127.0.0.1/3050:C:/path/to/test.fdb;UID=SYSDBA;PWD=pwd;CHARSET=UTF8;
 ```
 
-Snowflake: 
+Snowflake:
 
 ```text
 Driver={SnowflakeDSIIDriver};Server=foobar-ab12345.snowflakecomputing.com;Database=SNOWFLAKE_SAMPLE_DATA;UID=username;PWD=pwd;
 ```
 
-ClickHouse: 
+ClickHouse:
 
 ```text
 Driver={ClickHouse ODBC Driver (Unicode)};Server=127.0.0.1;Port=8123;
 ```
 
-Spark: 
+Spark:
 
 ```text
 Driver={Simba Spark ODBC Driver};Host=127.0.0.1;Port=10000;
 ```
 
-Arrow Flight SQL (Dremio ODBC + GizmoSQL): 
+Arrow Flight SQL (Dremio ODBC + GizmoSQL):
 
 ```text
 Driver={Dremio Flight SQL ODBC Driver};Host=127.0.0.1;Port=31337;UID=gizmosql_username;PWD=gizmosql_password;useEncryption=true;
@@ -232,7 +232,7 @@ FROM odbc_query(
     getvariable('conn'),
     '
       SELECT CAST(? AS VARCHAR2(3)) || CAST(? AS VARCHAR2(3)) FROM DUAL
-    ', 
+    ',
     params = row(?, ?))
 ```
 
@@ -254,7 +254,7 @@ FROM odbc_query(
     getvariable('conn'),
     '
       SELECT CAST(? AS VARCHAR2(3)) || CAST(? AS VARCHAR2(3)) FROM DUAL
-    ', 
+    ',
     params_handle = getvariable('params'));
 
 -- now we can repeatedly bind new parameters to the handle using 'odbc_bind_params()'

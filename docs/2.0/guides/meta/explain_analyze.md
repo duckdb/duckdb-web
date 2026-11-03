@@ -7,6 +7,7 @@ redirect_from:
 - /docs/lts/guides/meta/explain_analyze
 - /docs/preview/guides/meta/explain_analyze
 title: 'EXPLAIN ANALYZE: Profile Queries'
+how_to_topic: tools-meta
 ---
 
 Prepending a query with `EXPLAIN ANALYZE` both pretty-prints the query plan,

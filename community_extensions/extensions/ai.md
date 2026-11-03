@@ -8,7 +8,7 @@ excerpt: |
 extension:
   name: ai
   description: "Call LLMs from SQL to classify, summarize, extract typed fields, embed and search text, or query your tables, with local models or 35+ hosted APIs"
-  version: 0.9.0
+  version: 0.9.2
   language: C++
   build: cmake
   license: MIT
@@ -18,7 +18,7 @@ extension:
 
 repo:
   github: leonardovida/duckdb-ai
-  ref: f2a9675ea79956d68882fbb0b238321f89e5d3dd
+  ref: dadadb86415feafde773def906ce95624e8aa9e8
 
 docs:
   hello_world: |
@@ -103,8 +103,8 @@ docs:
 
 extension_star_count: 18
 extension_star_count_pretty: 18
-extension_download_count: 10170
-extension_download_count_pretty: 10.2k
+extension_download_count: 952
+extension_download_count_pretty: 952
 image: '/images/community_extensions/social_preview/preview_community_extension_ai.png'
 layout: community_extension_doc
 ---

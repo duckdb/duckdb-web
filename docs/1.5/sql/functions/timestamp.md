@@ -187,7 +187,7 @@ In general, if the function needs to examine the parts of the infinite date, the
 | **Example** | `epoch('2022-11-07 08:43:04'::TIMESTAMP)` |
 | **Result** | `1667810584.0` |
 
-> Unlike `epoch_ms`, `epoch_us` and `epoch_ns`, which return `BIGINT`, `epoch` returns a `DOUBLE` and therefore retains sub-second precision.
+> Unlike `epoch_ms`, `epoch_us`, and `epoch_ns`, which return `BIGINT`, `epoch` returns a `DOUBLE` and therefore retains sub-second precision.
 
 #### `extract(field FROM timestamp)`
 

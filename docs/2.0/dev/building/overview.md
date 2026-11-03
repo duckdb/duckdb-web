@@ -13,7 +13,7 @@ title: Building DuckDB from Source
 
 ## When Should You Build DuckDB?
 
-DuckDB binaries are available for _stable_ and _preview_ builds on the [installation page]({% link install/index.html %}).
+DuckDB binaries are available for _stable_ and _preview_ builds on the [installation page]({% link docs/2.0/installation.html %}).
 In most cases, it's recommended to use these binaries.
 When you are running on an experimental platform (e.g., [Raspberry Pi]({% link docs/2.0/dev/building/raspberry_pi.md %})) or you would like to build the project for an unmerged pull request,
 you can build DuckDB from source based on the [`duckdb/duckdb` repository hosted on GitHub](https://github.com/duckdb/duckdb/).
@@ -44,7 +44,7 @@ BUILD_BENCHMARK=1 make # build with benchmarks
 
 > `debug` builds use a lot of disk space – make sure you have at least 25 GB available.
 
-### Speeding up Subsequent Builds
+### Speeding Up Subsequent Builds
 
 You can speed up subsequent builds using [ccache](https://ccache.dev/).
 On macOS, you can install and configure it as follows:
@@ -58,7 +58,7 @@ ccache -M 50G
 
 ### Platforms with Full Support
 
-DuckDB fully supports Linux, macOS and Windows. Both x86_64 (amd64) and AArch64 (ARM64) builds are available for these platforms (except for macOS on x86_64, which only has partial support, see below), and almost all extensions are distributed for these platforms.
+DuckDB fully supports Linux, macOS, and Windows. Both x86_64 (amd64) and AArch64 (ARM64) builds are available for these platforms (except for macOS on x86_64, which only has partial support, see below), and almost all extensions are distributed for these platforms.
 
 | Platform name      | Description                                                            | Comment |
 |--------------------|------------------------------------------------------------------------|---------|

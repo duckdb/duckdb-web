@@ -410,7 +410,7 @@ The functions and a brief description of each follows.
 * `sq_concat`: Concatenate a list of strings together, wrapping each in single quotes. Uses `sq_list`.
 * `dq_concat`: Concatenate a list of strings together, wrapping each in double quotes. Uses `dq_list`.
 
-### Functions Creating During Refactoring for Modularity
+### Functions Creating during Refactoring for Modularity
 
 * `totals_list`: Build up a list as a part of enabling `subtotals` and `grand_totals`.
 * `replace_zzz`: Rename `subtotal` and `grand_total` indicators after sorting so they are more friendly.
@@ -418,7 +418,7 @@ The functions and a brief description of each follows.
 ### Core Pivoting Logic Functions
 
 * `build_my_enum`: Determine which new columns to create when pivoting horizontally. Returns a table. See below for details.
-* `pivot_table`: Based on inputs, decide whether to call `no_columns`, `columns_values_axis_columns` or `columns_values_axis_rows`. Execute `query` on the SQL string that is generated. Returns a table. See below for details.
+* `pivot_table`: Based on inputs, decide whether to call `no_columns`, `columns_values_axis_columns`, or `columns_values_axis_rows`. Execute `query` on the SQL string that is generated. Returns a table. See below for details.
     * `no_columns`: Build up the SQL string for `query` to execute when no `columns` are pivoted out.
     * `columns_values_axis_columns`: Build up the SQL string for `query` to execute when pivoting horizontally with each entry in `values` receiving a separate column.
     * `columns_values_axis_rows`: Build up the SQL string for `query` to execute when pivoting horizontally with each entry in `values` receiving a separate row.

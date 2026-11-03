@@ -158,7 +158,7 @@ Since v1.5.6, if the table schema declares `CHAR(n)` or `VARCHAR(n)` (Spark writ
 
 > New Time travel by timestamp was introduced in DuckDB 2.0.
 
-To read a table as it was at an earlier version or point in time, use the `AT` clause, an `ATTACH` option or a `delta_scan` parameter:
+To read a table as it was at an earlier version or point in time, use the `AT` clause, an `ATTACH` option, or a `delta_scan` parameter:
 
 ```sql
 -- Query an attached table
@@ -289,7 +289,7 @@ A Delta table with the `catalogManaged` feature, such as a Unity Catalog managed
 
 For some network operations, the `delta` extension uses `delta-kernel-rs` and `object_store`, which try credential sources in a different order than DuckDB and include different ones by default. If more than one source is available, e.g., a service principal in the environment and the Azure CLI, credential loading may be inconsistent. Configure exactly one credential type in the chain of your secret.
 
-Since v1.5.6, the `delta` extension supports [Azure workload identity](https://learn.microsoft.com/en-us/entra/workload-id/workload-identities-overview) (for example on AKS): name `workload_identity` in the `CHAIN` of an [Azure `credential_chain` secret]({% link docs/2.0/core_extensions/azure.md %}#credential_chain-provider), and set the `AZURE_FEDERATED_TOKEN_FILE`, `AZURE_CLIENT_ID` and `AZURE_TENANT_ID` environment variables.
+Since v1.5.6, the `delta` extension supports [Azure workload identity](https://learn.microsoft.com/en-us/entra/workload-id/workload-identities-overview) (for example on AKS): name `workload_identity` in the `CHAIN` of an [Azure `credential_chain` secret]({% link docs/2.0/core_extensions/azure.md %}#credential_chain-provider), and set the `AZURE_FEDERATED_TOKEN_FILE`, `AZURE_CLIENT_ID`, and `AZURE_TENANT_ID` environment variables.
 
 ## Settings
 
@@ -314,7 +314,7 @@ The `delta` extension supports:
 * [column mapping](#column-mapping) in `name` and `id` mode
 * [time travel](#time-travel) by version or timestamp
 * all primitive types except intervals
-* nested types (structs, lists and maps)
+* nested types (structs, lists, and maps)
 * creating tables (`CREATE TABLE`)
 * blind appends (`INSERT INTO`), with file statistics for data skipping
 * [idempotent appends](#idempotent-appends)
@@ -324,7 +324,7 @@ The `delta` extension supports:
 ## Limitations
 
 * `CREATE OR REPLACE TABLE` and `CREATE TABLE ... AS SELECT` are not supported. Create the table, then `INSERT` into it.
-* `UPDATE`, `DELETE`, [`MERGE INTO`]({% link docs/2.0/sql/statements/merge_into.md %}), `ALTER TABLE` and `DROP TABLE` are not supported, nor are `RETURNING` and `ON CONFLICT` clauses on `INSERT`.
+* `UPDATE`, `DELETE`, [`MERGE INTO`]({% link docs/2.0/sql/statements/merge_into.md %}), `ALTER TABLE`, and `DROP TABLE` are not supported, nor are `RETURNING` and `ON CONFLICT` clauses on `INSERT`.
 * `CREATE TABLE` does not support:
     * constraints, including `NOT NULL`
     * `DEFAULT` values and generated columns
@@ -332,10 +332,10 @@ The `delta` extension supports:
     * column types without a Delta equivalent, such as `TIME` or unsigned integers
     * a table whose columns are all partition columns
 * A table created with [column mapping](#column-mapping) cannot have nested or partition columns, because DuckDB cannot write to such tables yet.
-* Tables with an interval (`interval year to month` or `interval day to second`), `geometry` or `geography` column cannot be read.
+* Tables with an interval (`interval year to month` or `interval day to second`), `geometry`, or `geography` column cannot be read.
 * Writing to a table with the `allowColumnDefaults` writer feature fails, even if no column has a default yet: DuckDB cannot fill in Delta defaults and does not write `NULL` instead. Reading works.
 * Writing to a table that declares a `CHAR(n)` or `VARCHAR(n)` width on a nested field, such as `ARRAY<VARCHAR(5)>`, is not supported.
-* Writing to a table with a `VARIANT` inside a struct, list or map is not supported.
+* Writing to a table with a `VARIANT` inside a struct, list, or map is not supported.
 
 ## Supported Platforms
 

@@ -53,10 +53,10 @@ docs:
     - writes with `INSERT`, `COPY`, `CREATE TABLE AS`, `UPDATE`, `DELETE`, and `TRUNCATE`
     - `databricks_query` and `databricks_execute` for Databricks SQL that DuckDB cannot express
 
-extension_star_count: 2
-extension_star_count_pretty: 2
-extension_download_count: 8091
-extension_download_count_pretty: 8.1k
+extension_star_count: 3
+extension_star_count_pretty: 3
+extension_download_count: 1433
+extension_download_count_pretty: 1.4k
 image: '/images/community_extensions/social_preview/preview_community_extension_databricks.png'
 layout: community_extension_doc
 ---

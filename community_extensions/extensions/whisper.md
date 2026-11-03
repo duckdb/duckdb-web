@@ -8,7 +8,7 @@ excerpt: |
 extension:
   name: whisper
   description: Speech-to-text transcription using whisper.cpp, OpenAI's Whisper model
-  version: 0.7.0
+  version: 0.7.1
   language: C++
   build: cmake
   license: MIT
@@ -19,7 +19,7 @@ extension:
 
 repo:
   github: tobilg/duckdb-whisper
-  ref: dca64c5e5f86b67864c832756d2fdcdade2d0691
+  ref: ea3e28cec89677e0940806297af7bf37a43228d0
   variegata: d6ca92023f952818f7568d599fc1a63696c32343
 
 docs:
@@ -275,8 +275,8 @@ docs:
 
 extension_star_count: 12
 extension_star_count_pretty: 12
-extension_download_count: 8532
-extension_download_count_pretty: 8.5k
+extension_download_count: 1005
+extension_download_count_pretty: 1.0k
 image: '/images/community_extensions/social_preview/preview_community_extension_whisper.png'
 layout: community_extension_doc
 ---
@@ -316,7 +316,33 @@ LOAD {{ page.extension.name }};
 
 <div class="extension_functions_table"></div>
 
-This extension does not add any functions.
+|          function_name           | function_type |                                                                                                                                description                                                                                                                                 |          comment           |                                           examples                                            |
+|----------------------------------|---------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|----------------------------|-----------------------------------------------------------------------------------------------|
+| whisper_transcribe               | scalar        | Transcribes speech from an audio file path (VARCHAR) or from audio bytes (BLOB) and returns the full text. The optional model overrides the whisper_model setting.                                                                                                         | NULL                       | [SELECT whisper_transcribe('audio.wav', 'tiny.en');]                                          |
+| whisper_translate                | scalar        | Translates speech in any supported language from an audio file path (VARCHAR) or from audio bytes (BLOB) into English text. Requires a multilingual (non-.en) model.                                                                                                       | NULL                       | [SELECT whisper_translate('german_speech.mp3', 'small');]                                     |
+| whisper_transcribe_segments      | table         | Transcribes an audio file path (VARCHAR) or audio bytes (BLOB) into timestamped segments: segment_id, start_time, end_time, text, confidence and language. Optional arguments override the model and language settings; translate = true translates the speech to English. | NULL                       | [SELECT start_time, end_time, text FROM whisper_transcribe_segments('audio.wav', 'tiny.en');] |
+| whisper_list_models              | table         | Lists all supported Whisper models with their download status: name, is_downloaded, file_size, file_path and description.                                                                                                                                                  | NULL                       | [SELECT * FROM whisper_list_models() WHERE is_downloaded;]                                    |
+| whisper_download_model           | scalar        | Downloads a Whisper model into the whisper_model_path directory and returns a status message. Does nothing if the model is already downloaded.                                                                                                                             | NULL                       | [SELECT whisper_download_model('tiny.en');]                                                   |
+| whisper_model_info               | table         | Returns one row describing the currently configured model: current_model, model_path, is_downloaded, file_size, language and threads.                                                                                                                                      | NULL                       | [SELECT * FROM whisper_model_info();]                                                         |
+| whisper_list_devices             | table         | Lists the available audio input devices (device_id, device_name). Use a device_id with the recording functions or the whisper_device_id setting.                                                                                                                           | NULL                       | [SELECT * FROM whisper_list_devices();]                                                       |
+| whisper_record                   | scalar        | Records audio from the microphone for a fixed number of seconds and returns the transcribed text. Optional arguments override the model and input device.                                                                                                                  | NULL                       | [SELECT whisper_record(5, 'tiny.en');]                                                        |
+| whisper_record_auto              | scalar        | Records audio from the microphone until silence_seconds of silence are detected or max_seconds is reached, then returns the transcribed text. Omitted arguments fall back to the whisper_silence_duration, whisper_model and whisper_silence_threshold settings.           | NULL                       | [SELECT whisper_record_auto(30, 2.0, 'tiny.en');]                                             |
+| whisper_record_translate         | scalar        | Records audio from the microphone for a fixed number of seconds and returns the speech translated to English. Requires a multilingual (non-.en) model.                                                                                                                     | NULL                       | [SELECT whisper_record_translate(5, 'small');]                                                |
+| whisper_mic_level                | scalar        | Samples the microphone for a few seconds and reports the peak and RMS amplitude with a suggested whisper_silence_threshold value.                                                                                                                                          | NULL                       | [SELECT whisper_mic_level(3);]                                                                |
+| whisper_voice_to_sql             | scalar        | Records a spoken question from the microphone and returns the SQL generated by the text-to-SQL proxy at whisper_text_to_sql_url, without executing it.                                                                                                                     | Requires text-to-sql-proxy | [SELECT whisper_voice_to_sql();]                                                              |
+| whisper_voice_query              | table         | Records a spoken question from the microphone, converts it to SQL via the text-to-SQL proxy at whisper_text_to_sql_url, executes the query and returns its result.                                                                                                         | Requires text-to-sql-proxy | [SELECT * FROM whisper_voice_query();]                                                        |
+| whisper_voice_query_with_sql     | table         | Like whisper_voice_query, but prepends _generated_sql and _transcription columns to the query result.                                                                                                                                                                      | Requires text-to-sql-proxy | [SELECT * FROM whisper_voice_query_with_sql();]                                               |
+| whisper_version                  | scalar        | Returns the whisper extension version and the bundled whisper.cpp version.                                                                                                                                                                                                 | NULL                       | [SELECT whisper_version();]                                                                   |
+| whisper_check_audio              | scalar        | Checks whether an audio file can be opened and decoded by FFmpeg. Returns 'OK' on success, or 'Error: <reason>' otherwise.                                                                                                                                                 | NULL                       | [SELECT whisper_check_audio('audio.wav');]                                                    |
+| whisper_audio_info               | table         | Returns one row of audio file metadata: file_path, duration_seconds, sample_rate, channels, format and file_size.                                                                                                                                                          | NULL                       | [SELECT * FROM whisper_audio_info('audio.wav');]                                              |
+| whisper_get_config               | scalar        | Returns all effective whisper settings as a comma-separated key=value string.                                                                                                                                                                                              | NULL                       | [SELECT whisper_get_config();]                                                                |
+| whisper_get_device_id            | scalar        | Returns the current whisper_device_id setting (-1 means the default device).                                                                                                                                                                                               | NULL                       | [SELECT whisper_get_device_id();]                                                             |
+| whisper_get_max_duration         | scalar        | Returns the current whisper_max_duration setting in seconds.                                                                                                                                                                                                               | NULL                       | [SELECT whisper_get_max_duration();]                                                          |
+| whisper_get_silence_duration     | scalar        | Returns the current whisper_silence_duration setting in seconds.                                                                                                                                                                                                           | NULL                       | [SELECT whisper_get_silence_duration();]                                                      |
+| whisper_get_silence_threshold    | scalar        | Returns the current whisper_silence_threshold setting (RMS amplitude).                                                                                                                                                                                                     | NULL                       | [SELECT whisper_get_silence_threshold();]                                                     |
+| whisper_get_text_to_sql_url      | scalar        | Returns the current whisper_text_to_sql_url setting (the text-to-SQL proxy URL).                                                                                                                                                                                           | NULL                       | [SELECT whisper_get_text_to_sql_url();]                                                       |
+| whisper_get_text_to_sql_timeout  | scalar        | Returns the current whisper_text_to_sql_timeout setting in seconds.                                                                                                                                                                                                        | NULL                       | [SELECT whisper_get_text_to_sql_timeout();]                                                   |
+| whisper_get_voice_query_show_sql | scalar        | Returns the current whisper_voice_query_show_sql setting.                                                                                                                                                                                                                  | NULL                       | [SELECT whisper_get_voice_query_show_sql();]                                                  |
 
 ### Overloaded Functions
 
@@ -334,6 +360,23 @@ This extension does not add any types.
 
 <div class="extension_settings_table"></div>
 
-This extension does not add any settings.
+|             name             |                             description                              | input_type | scope  | aliases |             typed_value             |
+|------------------------------|----------------------------------------------------------------------|------------|--------|---------|-------------------------------------|
+| temp_directory               | Set the directory to which temporary files are written.              | VARCHAR    | GLOBAL | []      | post.db.tmp                         |
+| whisper_device_id            | Audio input device ID (-1 = system default)                          | INTEGER    | GLOBAL | []      | -1                                  |
+| whisper_ffmpeg_logging       | Enable FFmpeg log output (warnings, info messages)                   | BOOLEAN    | GLOBAL | []      | false                               |
+| whisper_language             | Target language code or 'auto' for detection                         | VARCHAR    | GLOBAL | []      | auto                                |
+| whisper_max_duration         | Maximum recording duration in seconds                                | DOUBLE     | GLOBAL | []      | 15.0                                |
+| whisper_model                | Whisper model name (e.g., tiny.en, base.en, small, medium, large-v3) | VARCHAR    | GLOBAL | []      | base.en                             |
+| whisper_model_path           | Path to store Whisper models                                         | VARCHAR    | GLOBAL | []      | /home/runner/.duckdb/whisper/models |
+| whisper_silence_duration     | Silence duration to stop recording (seconds)                         | DOUBLE     | GLOBAL | []      | 1.0                                 |
+| whisper_silence_threshold    | Amplitude threshold for silence detection                            | DOUBLE     | GLOBAL | []      | 0.001                               |
+| whisper_text_to_sql_timeout  | Timeout for text-to-sql proxy requests (seconds)                     | INTEGER    | GLOBAL | []      | 15                                  |
+| whisper_text_to_sql_url      | URL of the text-to-sql proxy service                                 | VARCHAR    | GLOBAL | []      | http://localhost:4000/generate-sql  |
+| whisper_threads              | Number of processing threads (0 = auto-detect)                       | INTEGER    | GLOBAL | []      | 0                                   |
+| whisper_use_gpu              | Use GPU acceleration if available (Metal on macOS)                   | BOOLEAN    | GLOBAL | []      | true                                |
+| whisper_verbose              | Show status messages during recording and voice query operations     | BOOLEAN    | GLOBAL | []      | false                               |
+| whisper_voice_query_show_sql | Show generated SQL in voice query output                             | BOOLEAN    | GLOBAL | []      | false                               |
+| whisper_voice_query_timeout  | Timeout for entire voice query operation (seconds)                   | INTEGER    | GLOBAL | []      | 30                                  |
 
 

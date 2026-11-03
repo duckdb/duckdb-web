@@ -80,8 +80,8 @@ You can also set the scope for an HTTP proxy using the `SCOPE` keyword.
 
 ```sql
 CREATE SECRET http_proxy (
-    TYPE HTTP, 
-    SCOPE ['⟨https://duckdb.org⟩', '⟨https://some-other-website.org⟩'], 
+    TYPE HTTP,
+    SCOPE ['⟨https://duckdb.org⟩', '⟨https://some-other-website.org⟩'],
     HTTP_PROXY '⟨http_proxy_url⟩',
     HTTP_PROXY_USERNAME '⟨username⟩',
     HTTP_PROXY_PASSWORD '⟨password⟩'
@@ -112,7 +112,7 @@ If you would like to disable SSL verification for all HTTP requests using an HTT
 
 ```sql
 CREATE SECRET disable_ssl (
-    TYPE HTTP, 
+    TYPE HTTP,
     VERIFY_SSL 0
 );
 ```
@@ -121,8 +121,8 @@ To enable it again for one specific endpoint, you can take advantage of the scop
 
 ```sql
 CREATE SECRET enable_ssl_for_your_website (
-    TYPE HTTP, 
-    SCOPE 'https://⟨your-website.com⟩', 
+    TYPE HTTP,
+    SCOPE 'https://⟨your-website.com⟩',
     VERIFY_SSL 1
-); 
+);
 ```

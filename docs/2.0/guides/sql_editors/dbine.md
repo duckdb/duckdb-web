@@ -3,6 +3,7 @@ layout: docu
 redirect_from:
 - /docs/stable/guides/sql_editors/dbine
 title: DBine SQL Editor
+how_to_topic: tools-meta
 ---
 
 [DBine](https://dbine.com) is a free, open-source (Apache 2.0) desktop database manager for Windows, macOS, and Linux that works with 130+ databases and cloud services. Besides a SQL editor, it includes notebooks, charts built from query results, and schema compare. DBine downloads the official DuckDB library the first time a DuckDB connection is opened, so no separate driver installation is required.

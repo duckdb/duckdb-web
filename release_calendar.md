@@ -40,7 +40,7 @@ _There are no upcoming releases announced at the moment. Please check back later
 
 <!-- markdownlint-enable MD055 MD056 MD058 -->
 
-DuckDB v2.1 will be released sometime in 2027 H1 with the codename “Islandica”.
+DuckDB 2.1 will be released sometime in 2027 H1 with the codename “Islandica”.
 
 For planned new features, see the [DuckDB Development Roadmap]({% link roadmap.md %}).
 
@@ -48,7 +48,7 @@ For planned new features, see the [DuckDB Development Roadmap]({% link roadmap.m
 
 Starting with v1.4.0, every _other_ DuckDB version is going to be a Long-Term Support (LTS) edition.
 For LTS DuckDB versions, the support period for [community support](https://ducklabs.com/community_support_policy/) is currently a year after the release.
-As exceptions, the support for DuckDB v1.4 was extended until November 17, 2026 and the support for DuckDB v1.5 (a non-LTS version) was extended until March 2027.
+As exceptions, the support for DuckDB 1.4 was extended until November 17, 2026 and the support for DuckDB 1.5 (a non-LTS version) was extended until March 2027.
 
 <img src="{% link images/blog/lts-support-light.svg %}" alt="DuckDB LTS support" width="900" class="lightmode-img">
 <img src="{% link images/blog/lts-support-dark.svg %}" alt="DuckDB LTS support" width="900" class="darkmode-img">

@@ -129,11 +129,11 @@ The [`WINDOW` clause]({% link docs/2.0/sql/query_syntax/window.md %}) allows you
 
 The [`QUALIFY` clause]({% link docs/2.0/sql/query_syntax/qualify.md %}) is used to filter the result of [`WINDOW` functions]({% link docs/2.0/sql/functions/window_functions.md %}).
 
-### `ORDER BY`, `LIMIT` and `OFFSET` Clauses
+### `ORDER BY`, `LIMIT`, and `OFFSET` Clauses
 
 <div id="rrdiagram8"></div>
 
-[`ORDER BY`]({% link docs/2.0/sql/query_syntax/orderby.md %}), [`LIMIT` and `OFFSET`]({% link docs/2.0/sql/query_syntax/limit.md %}) are output modifiers.
+[`ORDER BY`]({% link docs/2.0/sql/query_syntax/orderby.md %}), [`LIMIT`, and `OFFSET`]({% link docs/2.0/sql/query_syntax/limit.md %}) are output modifiers.
 Logically they are applied at the very end of the query.
 The `ORDER BY` clause sorts the rows on the sorting criteria in either ascending or descending order.
 The `LIMIT` clause restricts the amount of rows fetched, while the `OFFSET` clause indicates at which position to start reading the values.
