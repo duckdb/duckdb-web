@@ -6,7 +6,7 @@ authors:
 thumb: "/images/blog/thumbs/quants-desktop.svg"
 image: "/images/blog/thumbs/quants-desktop.png"
 excerpt: "After years building kdb+-based data platforms for banks and hedge funds, Ryan Hamilton wanted an analytical engine he could recommend to smaller teams without specialized infrastructure or expensive licensing. DuckDB gave him a small, embedded way to bring fast local analytics into QStudio and Pulse, and it is now shaping his next open-source project, PeachQ."
-tag: using-duckdb
+tag: case-study
 ---
 
 > Quote

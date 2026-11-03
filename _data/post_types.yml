@@ -6,6 +6,9 @@ blog:
     - value: using-duckdb
       label: Using DuckDB
       heading: Using DuckDB
+    - value: case-study
+      label: Case study
+      heading: Case Studies
     - value: benchmark
       label: Benchmarks
       heading: Benchmarks
@@ -93,6 +96,7 @@ tag_labels:
   tools-meta: Tools & Meta
   troubleshooting: Troubleshooting
   using-duckdb: Using DuckDB
+  case-study: Case Study
   benchmark: Benchmark
   deep-dive: Deep Dive
   extensions: Extensions
