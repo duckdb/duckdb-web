@@ -53,7 +53,7 @@ ORDER BY total_volume DESC;
 
 The result is a personal sandbox where quants can build on their own earlier work. It proved popular, and Ryan found its performance close to kdb+.
 
-Because QStudio is a Java Swing desktop application deployed inside banks, the integration depends on DuckDB's [Java client]({% link docs/current/clients/java/overview.md %}). Ryan's early version relied on inefficient workarounds to get appending working. Once a dedicated Java developer joined and rebuilt the [Appender]({% link docs/current/clients/java/data_import.md %}) properly, every kink was ironed out:
+Because QStudio is a Java Swing desktop application deployed inside banks, the integration depends on DuckDB's [Java client]({% link docs/2.0/clients/java/overview.md %}). Ryan's early version relied on inefficient workarounds to get appending working. Once a dedicated Java developer joined and rebuilt the [Appender]({% link docs/2.0/clients/java/data_import.md %}) properly, every kink was ironed out:
 
 ```java
 DuckDBConnection conn = (DuckDBConnection) DriverManager.getConnection("jdbc:duckdb:");
@@ -80,7 +80,7 @@ Ryan reached for DuckDB again. Pulse uses it to snapshot and cache data. What be
 
 Ryan's newest project is [PeachQ](https://peachq.org/), an open-source implementation of the q language. Ryan loves q as a language but thinks DuckDB is ahead as a database, so PeachQ separates the two.
 
-PeachQ uses the Rayforce in-memory engine and DuckDB-backed historical storage to deliver a modern, open-source alternative to kdb+, bringing together real-time processing, powerful analytics, and efficient storage in a single system. Ryan's recent work on C extensions points the same way, along with experiments with newer formats such as [Vortex]({% link docs/current/core_extensions/vortex.md %}) and custom table formats. He credits DuckDB's [extension API]({% link docs/current/extensions/overview.md %}) with letting people add features cleanly, unlike the fragile workarounds he and others once built into closed systems. Often, he notes, DuckDB later builds those features itself.
+PeachQ uses the Rayforce in-memory engine and DuckDB-backed historical storage to deliver a modern, open-source alternative to kdb+, bringing together real-time processing, powerful analytics, and efficient storage in a single system. Ryan's recent work on C extensions points the same way, along with experiments with newer formats such as [Vortex]({% link docs/2.0/core_extensions/vortex.md %}) and custom table formats. He credits DuckDB's [extension API]({% link docs/2.0/extensions/overview.md %}) with letting people add features cleanly, unlike the fragile workarounds he and others once built into closed systems. Often, he notes, DuckDB later builds those features itself.
 
 ## Further Reading
 
