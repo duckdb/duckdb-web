@@ -92,11 +92,11 @@ To download the v2.0-dev command line client, use the following links:
 | Windows  | `arm64`            | [tar.gz](https://artifacts.duckdb.org/v2.0-cyanoptera/duckdb-cli-windows-arm64.tar.gz) |
 | Windows  | `x86_64`           | [tar.gz](https://artifacts.duckdb.org/v2.0-cyanoptera/duckdb-cli-windows-amd64.tar.gz) |
 
-#### v2.0-dev CLI Packages
+### v2.1-dev CLI
 
-To download the v2.0-dev command line client, use the following links:
+To download the v2.1-dev command line client, use the following links:
 
-| Platform | Architecture       | v2.0-dev CLI client                                                         |
+| Platform | Architecture       | v2.1-dev CLI client                                                         |
 | -------- | ------------------ | --------------------------------------------------------------------------- |
 | Linux    | `arm64`            | [tar.gz](https://artifacts.duckdb.org/main/duckdb-cli-linux-arm64.tar.gz)   |
 | Linux    | `x86_64`           | [tar.gz](https://artifacts.duckdb.org/main/duckdb-cli-linux-amd64.tar.gz)   |
@@ -106,18 +106,20 @@ To download the v2.0-dev command line client, use the following links:
 
 ## Java
 
-The following Maven snippet imports the latest version of the Java package.
-To determine the version number, please visit the [latest CI builds](https://github.com/duckdb/duckdb-java/actions/workflows/Java.yml) and search for a _Java JDBC_ task that succeeded.
-In that job, consult the _Maven S3 Deploy_ job's _Deploy snapshot to S3_ task and find the version tag, e.g., `{{ site.latest_duckdb_java_alpha_version }}`.
+The following snippets import the latest preview builds of the Java package.
+To determine the version number, please visit the [latest CI builds](https://github.com/duckdb/duckdb-java/actions/workflows/Java.yml) and search for a _Java JDBC_ task that succeeded on the `v2.0-cyanoptera` branch (for v2.0-dev) or the `main` branch (for v2.1-dev).
+In that job, consult the _Maven S3 Deploy_ job's _Deploy snapshot to S3_ task and find the version tag, e.g., `{{ site.latest_duckdb_java_dev_version }}`.
 
-### Maven
+### Java v2.0-dev
+
+#### Maven
 
 ```xml
 <dependencies>
     <dependency>
         <groupId>org.duckdb</groupId>
         <artifactId>duckdb_jdbc</artifactId>
-        <version>{{ site.latest_duckdb_java_alpha_version }}</version>
+        <version>{{ site.latest_duckdb_java_dev_version }}</version>
     </dependency>
 </dependencies>
 
@@ -129,7 +131,7 @@ In that job, consult the _Maven S3 Deploy_ job's _Deploy snapshot to S3_ task an
 </repositories>
 ```
 
-### Gradle (Groovy)
+#### Gradle (Groovy)
 
 ```groovy
 repositories {
@@ -139,11 +141,11 @@ repositories {
 }
 
 dependencies {
-    implementation 'org.duckdb:duckdb_jdbc:{{ site.latest_duckdb_java_alpha_version }}'
+    implementation 'org.duckdb:duckdb_jdbc:{{ site.latest_duckdb_java_dev_version }}'
 }
 ```
 
-### Gradle (Kotlin)
+#### Gradle (Kotlin)
 
 ```kotlin
 repositories {
@@ -153,13 +155,66 @@ repositories {
 }
 
 dependencies {
-    implementation("org.duckdb:duckdb_jdbc:{{ site.latest_duckdb_java_alpha_version }}")
+    implementation("org.duckdb:duckdb_jdbc:{{ site.latest_duckdb_java_dev_version }}")
 }
 ```
 
-### Direct Download
+#### Direct Download
 
-<a href="https://duckdb-staging.duckdb.org/duckdb/duckdb-java/maven/org/duckdb/duckdb_jdbc/{{ site.latest_duckdb_java_alpha_version }}/duckdb_jdbc-{{ site.latest_duckdb_java_alpha_version }}.jar" class="download-btn">duckdb_jdbc-{{ site.latest_duckdb_java_alpha_version }}.jar</a>
+<a href="https://duckdb-staging.duckdb.org/duckdb/duckdb-java/maven/org/duckdb/duckdb_jdbc/{{ site.latest_duckdb_java_dev_version }}/duckdb_jdbc-{{ site.latest_duckdb_java_dev_version }}.jar" class="download-btn">duckdb_jdbc-{{ site.latest_duckdb_java_dev_version }}.jar</a>
+
+### Java v2.1-dev
+
+#### Maven
+
+```xml
+<dependencies>
+    <dependency>
+        <groupId>org.duckdb</groupId>
+        <artifactId>duckdb_jdbc</artifactId>
+        <version>{{ site.next_duckdb_java_dev_version }}</version>
+    </dependency>
+</dependencies>
+
+<repositories>
+    <repository>
+        <id>duckdb</id>
+        <url>https://duckdb-staging.duckdb.org/duckdb/duckdb-java/maven/</url>
+    </repository>
+</repositories>
+```
+
+#### Gradle (Groovy)
+
+```groovy
+repositories {
+    maven {
+        url 'https://duckdb-staging.duckdb.org/duckdb/duckdb-java/maven/'
+    }
+}
+
+dependencies {
+    implementation 'org.duckdb:duckdb_jdbc:{{ site.next_duckdb_java_dev_version }}'
+}
+```
+
+#### Gradle (Kotlin)
+
+```kotlin
+repositories {
+    maven {
+        url = uri("https://duckdb-staging.duckdb.org/duckdb/duckdb-java/maven/")
+    }
+}
+
+dependencies {
+    implementation("org.duckdb:duckdb_jdbc:{{ site.next_duckdb_java_dev_version }}")
+}
+```
+
+#### Direct Download
+
+<a href="https://duckdb-staging.duckdb.org/duckdb/duckdb-java/maven/org/duckdb/duckdb_jdbc/{{ site.next_duckdb_java_dev_version }}/duckdb_jdbc-{{ site.next_duckdb_java_dev_version }}.jar" class="download-btn">duckdb_jdbc-{{ site.next_duckdb_java_dev_version }}.jar</a>
 
 ## ODBC
 
