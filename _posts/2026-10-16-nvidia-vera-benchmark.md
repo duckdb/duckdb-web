@@ -143,6 +143,7 @@ Our implementation deviates from the specification in the following ways:
 
 * The results were not audited by a TPC-certified auditor, and we did not publish a Full Disclosure Report or an Executive Summary.
 * We did not price the system, so there is no price/performance figure.
+* We do not list power and frequency data for the CPUs, as this information was not reliably available (see above).
 * DuckDB 2.0.0-alpha was a pre-release version, not generally available at the time of the benchmark.
 * We restricted DuckDB to a single socket of the dual-socket Vera server.
 * We generated the base tables with `tpchgen-cli` instead of `dbgen`.
