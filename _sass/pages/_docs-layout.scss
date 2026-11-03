@@ -2,6 +2,8 @@
 @use '../abstracts/variables' as *;
 @use '../abstracts/mixins' as *;
 
+$docs-sidebar-width: 280px;
+
 // Base styles
 body {
     background: var(--main-body-background-color, #FAFAFA);
@@ -69,8 +71,8 @@ body.documentation {
     // Main content wrapper
     @media only screen and (min-width: 901px) {
         &.sidenav-drilldown main .wrap {
-            width: calc(100% - 249px);
-            margin-left: 249px;
+            width: calc(100% - $docs-sidebar-width);
+            margin-left: $docs-sidebar-width;
             padding-left: 32px;
         }
 
@@ -80,25 +82,26 @@ body.documentation {
     }
 
     main .wrap {
-        width: calc(100% - 275px);
+        width: calc(100% - $docs-sidebar-width);
         min-height: 100vh;
-        display: flex;
-        justify-content: space-between;
+        display: grid;
+        grid-template-columns: minmax(0, 1000px) min(22%, 282px);
+        justify-content: center;
         max-width: unset;
-        margin-left: 275px;
+        margin-left: $docs-sidebar-width;
         padding: 0 0 0 30px;
         position: relative;
 
+        @media only screen and (max-width: 1200px) {
+            grid-template-columns: minmax(0, 1fr);
+        }
+
         #main_content_wrap {
-            width: calc(100% - 22%);
-            max-width: 1000px;
+            width: 100%;
+            margin-inline: auto;
             margin-top: calc(55px + var(--docbanner-height, 0px));
             padding: 30px 30px 30px 0;
 
-            @media only screen and (max-width: 1200px) {
-                width: 100%;
-                max-width: 100%;
-            }
         }
     }
     
@@ -199,7 +202,7 @@ body.documentation {
     #sidebar {
         background: transparent;
         position: relative;
-        width: 22%;
+        min-width: 0;
         padding: calc(85px + var(--docbanner-height, 0px)) 20px 20px 20px;
 
         @media only screen and (max-width: 1200px) {
@@ -236,7 +239,7 @@ body.documentation {
         position: fixed;
         top: calc(55px + var(--docbanner-height, 0px));
         border-right: 1px solid var(--border-color);
-        width: 275px;
+        width: $docs-sidebar-width;
         height: calc(100vh - 55px - var(--docbanner-height, 0px));
         padding: 15px;
         z-index: 999;
@@ -396,7 +399,7 @@ body.documentation {
             gap: 16px;
 
             @media only screen and (min-width: 901px) {
-                width: 249px;
+                width: $docs-sidebar-width;
                 padding: 20px;
                 border-right-color: var(--doc-codebox-background-color-secondary, #EDEDED);
             }

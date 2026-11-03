@@ -46,6 +46,10 @@ body.installation{
 				text-align: left;
 				cursor: pointer;
 
+				&[aria-expanded="false"]{
+					align-items: center;
+				}
+
 				&:focus-visible{
 					outline: 2px solid var(--main-text-primary-color);
 					outline-offset: 4px;

@@ -18,6 +18,10 @@ body.documentation {
             margin-block: 2.5rem 0;
         }
 
+        #main_content_wrap .installationselection :is(.selection-head > h3, .installation-heading > h2) {
+            margin-block: 0;
+        }
+
         #main_content_wrap :is(blockquote, table, .monospace_table, .highlighter-rouge, .highlight) + :is(h1, h2, h3, h4, h5, h6) {
             margin-top: 2rem;
         }
@@ -94,15 +98,15 @@ body.documentation {
         }
 
         #main_content_wrap {
-            :is(blockquote, div.highlighter-rouge, div.highlight) {
+            :is(blockquote:not(.quote), div.highlighter-rouge, div.highlight) {
                 margin-bottom: 0;
             }
 
-            :is(blockquote, div.highlighter-rouge, div.highlight) + :is(blockquote, div.highlighter-rouge, div.highlight) {
+            :is(blockquote:not(.quote), div.highlighter-rouge, div.highlight) + :is(blockquote:not(.quote), div.highlighter-rouge, div.highlight) {
                 margin-top: 1rem;
             }
 
-            :is(blockquote, div.highlighter-rouge, div.highlight) + p {
+            :is(blockquote:not(.quote), div.highlighter-rouge, div.highlight) + p {
                 margin-top: 1.5rem;
             }
         }

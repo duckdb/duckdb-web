@@ -11,6 +11,13 @@ excerpt: "After nearly two decades working with increasingly sophisticated data 
 tag: using-duckdb
 ---
 
+> Quote
+>
+> There actually is something out there that's easy to use and doesn't require a bunch of infrastructure overhead.
+>
+> — Matt Martin
+{: .quote-large}
+
 ## From Copy-Paste to Code
 
 Matt's career started in 2008 the way many data careers do: with spreadsheets. As a fresh graduate, he spent his days copying and pasting between Excel, Microsoft Access, and SQL Server. Assembling a single report could take three hours, and one mistake meant starting over.
