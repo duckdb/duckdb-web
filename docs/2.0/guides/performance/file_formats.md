@@ -34,7 +34,7 @@ When deciding on whether to query these files directly or to first load them to 
 
 #### Microbenchmark: Running TPC-H on a DuckDB Database vs. Parquet
 
-The queries on the [TPC-H benchmark]({% link docs/2.0/core_extensions/tpch.md %}) run approximately 1.1-5.0× slower on Parquet files than on a DuckDB database.
+On the scale factor 30 dataset of the [TPC-H benchmark]({% link docs/2.0/core_extensions/tpch.md %}), the queries run approximately 1.1-4.1× slower (2.8× in the median) on Parquet files written with the default settings than on a DuckDB database.
 
 > Bestpractice If you have the storage space available, and have a join-heavy workload and/or plan to run many queries on the same dataset, load the Parquet files into the database first. The compression algorithm and the row group sizes in the Parquet files have a large effect on performance: study these using the [`parquet_metadata` function]({% link docs/2.0/data/parquet/metadata.md %}#parquet-metadata).
 
@@ -44,24 +44,25 @@ DuckDB works best on Parquet files with row groups of 100K-1M rows each. The rea
 
 #### Microbenchmark: Running Aggregation Query at Different Row Group Sizes
 
-We run a simple aggregation query over Parquet files using different row group sizes, selected between 960 and 1,966,080. The results are as follows.
+We run a simple aggregation query over Parquet files using different row group sizes, selected between 2,048 and 1,966,080. The results are as follows.
 
 | Row group size | Execution time |
 |---------------:|---------------:|
-| 960            | 8.77 s         |
-| 1920           | 8.95 s         |
-| 3840           | 4.33 s         |
-| 7680           | 2.35 s         |
-| 15360          | 1.58 s         |
-| 30720          | 1.17 s         |
-| 61440          | 0.94 s         |
-| 122880         | 0.87 s         |
-| 245760         | 0.93 s         |
-| 491520         | 0.95 s         |
-| 983040         | 0.97 s         |
-| 1966080        | 0.88 s         |
+| 2048           | 10.35 s        |
+| 4096           | 4.81 s         |
+| 8192           | 3.38 s         |
+| 16384          | 3.08 s         |
+| 30720          | 3.00 s         |
+| 61440          | 2.87 s         |
+| 122880         | 2.81 s         |
+| 245760         | 2.79 s         |
+| 491520         | 2.79 s         |
+| 983040         | 2.92 s         |
+| 1966080        | 2.81 s         |
 
-The results show that row group sizes <5,000 have a strongly detrimental effect, making runtimes more than 5-10× larger than ideally-sized row groups, while row group sizes between 5,000 and 20,000 are still 1.5-2.5× off from best performance. Above row group size of 100,000, the differences are small: the gap is about 10% between the best and the worst runtime.
+The results show that small row group sizes have a strongly detrimental effect: with 2,048 rows per row group, the query is approx. 3.7× slower than with ideally-sized row groups, and with 4,096 rows, it is still 1.7× slower. Row group sizes between 8,192 and 30,720 are 5-20% off from the best performance. Above a row group size of 60,000, the differences are small: the gap is about 5% between the best and the worst runtime.
+
+> DuckDB's Parquet writer rounds the `ROW_GROUP_SIZE` up to a multiple of 2,048 rows (the [vector size]({% link docs/2.0/internals/vector.md %})).
 
 ### Parquet File Sizes
 
@@ -80,11 +81,12 @@ For tips on reading and writing Parquet files, see the [Parquet Tips page]({% li
 ## Loading CSV Files
 
 CSV files are often distributed in compressed format such as GZIP archives (`.csv.gz`). DuckDB can decompress these files on the fly. In fact, this is typically faster than decompressing the files first and loading them due to reduced IO.
+For example, loading the [LDBC Comment table at scale factor 100](https://blobs.duckdb.org/data/ldbc-sf100-comments.tar.zst) (7.3 GiB of `.csv.gz` files, 24 GiB when decompressed) yields the following results:
 
 | Schema | Load time |
 |---|--:|
-| Load from GZIP-compressed CSV files (`.csv.gz`) | 107.1 s |
-| Decompressing (using parallel `gunzip`) and loading from decompressed CSV files | 121.3 s |
+| Load from GZIP-compressed CSV files (`.csv.gz`) | 13.5 s |
+| Decompressing (using parallel `gzip` processes) and loading from decompressed CSV files | 18.5 s |
 
 ### Loading Many Small CSV Files
 

@@ -33,11 +33,12 @@ For an example, let’s repeat the [microbenchmark for timestamps]({% link docs/
 
 | Column type | Ordered | Storage size | Query time |
 |---|---|--:|--:|
-| `DATETIME` | yes | 1.3 GB | 0.6 s |
-| `DATETIME` | no  | 3.3 GB | 0.9 s |
+| `DATETIME` | yes | 1.3 GiB | 0.17 s |
+| `DATETIME` | no  | 3.3 GiB | 0.19 s |
 
 The results show that simply keeping the column order allows for improved compression, yielding a 2.5× smaller storage size.
-It also allows the computation to be 1.5× faster.
+As this query reads the entire column, ordering only makes it approx. 10% faster.
+The speedup is larger for queries with selective filters on the ordered column, which can skip row groups using the zonemaps.
 
 ### Ordered Integers
 
