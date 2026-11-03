@@ -87,7 +87,7 @@ em.caption{
 }
 
 .figure-title{
-	@include title-2();
+	@include headline-4();
 	margin-bottom: 12px;
 }
 
@@ -161,13 +161,13 @@ h3{
 	@include headline-3();
 }
 h4{
-	@include title-1();
+	@include headline-4();
 }
 h5{
-	@include title-2();
+	@include headline-5();
 }
 h6{
-	@include title-3();
+	@include headline-5();
 }
 
 h1, h2, h3, h4, h5, h6 {

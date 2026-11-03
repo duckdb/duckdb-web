@@ -244,7 +244,7 @@ Query plan with HNSW index (operators and expected cardinalities)
 
 We can see that this plan is drastically simplified, but most importantly, the new `HNSW_INDEX_JOIN` operator replaces the `CROSS_PRODUCT` node that was there before and the estimated cardinality went from 5,000,000 to 50,000! Executing this query now takes about 0.15 seconds. That's an almost 66× speedup!
 
-This optimization was just recently added to the VSS extension, so if you've already installed `vss` for DuckDB v1.1.2, run the following command to get the latest version:
+This optimization was just recently added to the VSS extension, so if you've already installed `vss` for DuckDB 1.1.2, run the following command to get the latest version:
 
 ```sql
 UPDATE EXTENSIONS (vss);

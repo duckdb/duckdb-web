@@ -8,7 +8,7 @@ excerpt: |
 extension:
   name: pintail
   description: Lightweight Geohash utilities for DuckDB, including coordinate and geometry encoding, cell decoding, bounding boxes, and neighbors.
-  version: 0.2.0
+  version: 0.2.1
   language: C++
   build: cmake
   license: Apache-2.0
@@ -17,7 +17,9 @@ extension:
 
 repo:
   github: tshelianthus/duckdb-pintail
-  ref: a91b8018c00a9e889f8215e968e42f0c6eb964dc
+  # ref builds against DuckDB 2.0; variegata against v1.5.6. Same verified source.
+  ref: 59ff51b7589bbcb611eaa556535087532af76265
+  variegata: 59ff51b7589bbcb611eaa556535087532af76265
 
 docs:
   hello_world: |
@@ -46,8 +48,8 @@ docs:
 
 extension_star_count: 3
 extension_star_count_pretty: 3
-extension_download_count: 11321
-extension_download_count_pretty: 11.3k
+extension_download_count: 897
+extension_download_count_pretty: 897
 image: '/images/community_extensions/social_preview/preview_community_extension_pintail.png'
 layout: community_extension_doc
 ---
@@ -59,13 +61,13 @@ This table covers all DuckDB releases that have not reached [end-of-life](https:
 
 | Platform | 1.4.4 | 1.4.5 | 1.5.5 | 1.5.6 | 2.0.0 |
 | :--- | :---: | :---: | :---: | :---: | :---: |
-| Linux AMD64 | ❌ | ❌ | ✅ | ✅ | ❌ |
-| Linux ARM64 | ❌ | ❌ | ✅ | ✅ | ❌ |
+| Linux AMD64 | ❌ | ❌ | ✅ | ✅ | ✅ |
+| Linux ARM64 | ❌ | ❌ | ✅ | ✅ | ✅ |
 | macOS AMD64 | ❌ | ❌ | ✅ | ✅ | ❌ |
-| macOS ARM64 | ❌ | ❌ | ✅ | ✅ | ❌ |
-| Windows AMD64 | ❌ | ❌ | ✅ | ✅ | ❌ |
+| macOS ARM64 | ❌ | ❌ | ✅ | ✅ | ✅ |
+| Windows AMD64 | ❌ | ❌ | ✅ | ✅ | ✅ |
 | Windows ARM64 | ❌ | ❌ | ❌ | ❌ | ❌ |
-| WebAssembly | ❌ | ❌ | ✅ | ✅ | ❌ |
+| WebAssembly | ❌ | ❌ | ✅ | ✅ | ✅ |
 
 ### Installing and Loading
 ```sql
@@ -87,22 +89,21 @@ LOAD {{ page.extension.name }};
 
 <div class="extension_functions_table"></div>
 
-|    function_name     | function_type |                                   description                                   | comment |                          examples                          |
-|----------------------|---------------|---------------------------------------------------------------------------------|---------|------------------------------------------------------------|
-| pintail              | scalar        | Internal load-path smoke function; returns a Pintail diagnostic string.         | NULL    | [pintail('load-smoke')]                                    |
-| st_box2dfromgeohash  | scalar        | Decode a Geohash prefix to a BOX2D-compatible latitude/longitude bounding box.  | NULL    | [st_box2dfromgeohash('ezs42-extra', 5)]                    |
-| st_box2dfromgeohash  | scalar        | Decode a Geohash to a BOX2D-compatible latitude/longitude bounding box.         | NULL    | [st_box2dfromgeohash('ezs42')]                             |
-| st_geohash           | scalar        | Encode a geometry extent as a Geohash with an optional maximum character count. | NULL    | [st_geohash('POINT(121.4737 31.2304)'::GEOMETRY, 6)]       |
-| st_geohash           | scalar        | Encode latitude and longitude as a standard Geohash Base32 string.              | NULL    | [st_geohash(31.2304, 121.4737, 6)]                         |
-| st_geohash           | scalar        | Encode latitude and longitude using the default Geohash precision.              | NULL    | [st_geohash(31.2304, 121.4737)]                            |
-| st_geohash           | scalar        | Encode the smallest Geohash cell containing a geometry's complete XY extent.    | NULL    | [st_geohash('LINESTRING(-126 48, -126.1 48.1)'::GEOMETRY)] |
-| st_geohash_bbox      | scalar        | Decode a Geohash prefix to its latitude/longitude bounding box.                 | NULL    | [st_geohash_bbox('ezs42-extra', 5)]                        |
-| st_geohash_bbox      | scalar        | Decode a Geohash to its latitude/longitude bounding box.                        | NULL    | [st_geohash_bbox('ezs42')]                                 |
-| st_geohash_neighbors | scalar        | Return the eight adjacent Geohash cells in [N, NE, E, SE, S, SW, W, NW] order.  | NULL    | [st_geohash_neighbors('ezs42')]                            |
-| st_geomfromgeohash   | scalar        | Decode a Geohash prefix to the polygon boundary of its cell.                    | NULL    | [st_geomfromgeohash('c0w3h-extra', 5)]                     |
-| st_geomfromgeohash   | scalar        | Decode a Geohash to the polygon boundary of its cell.                           | NULL    | [st_geomfromgeohash('c0w3h')]                              |
-| st_pointfromgeohash  | scalar        | Decode a Geohash prefix to the center point of the selected cell.               | NULL    | [st_pointfromgeohash('wtw3sj-extra', 6)]                   |
-| st_pointfromgeohash  | scalar        | Decode a Geohash to the center point of its cell.                               | NULL    | [st_pointfromgeohash('wtw3sj')]                            |
+|    function_name     | function_type |                                  description                                   | comment |                 examples                 |
+|----------------------|---------------|--------------------------------------------------------------------------------|---------|------------------------------------------|
+| pintail              | scalar        | Internal load-path smoke function; returns a Pintail diagnostic string.        | NULL    | [pintail('load-smoke')]                  |
+| st_box2dfromgeohash  | scalar        | Decode a Geohash prefix to a BOX2D-compatible latitude/longitude bounding box. | NULL    | [st_box2dfromgeohash('ezs42-extra', 5)]  |
+| st_box2dfromgeohash  | scalar        | Decode a Geohash to a BOX2D-compatible latitude/longitude bounding box.        | NULL    | [st_box2dfromgeohash('ezs42')]           |
+| st_geohash           | scalar        | Encode latitude and longitude as a standard Geohash Base32 string.             | NULL    | [st_geohash(31.2304, 121.4737, 6)]       |
+| st_geohash           | scalar        | Encode latitude and longitude using the default Geohash precision.             | NULL    | [st_geohash(31.2304, 121.4737)]          |
+| st_geohash           | scalar        | NULL                                                                           | NULL    |                                          |
+| st_geohash_bbox      | scalar        | Decode a Geohash prefix to its latitude/longitude bounding box.                | NULL    | [st_geohash_bbox('ezs42-extra', 5)]      |
+| st_geohash_bbox      | scalar        | Decode a Geohash to its latitude/longitude bounding box.                       | NULL    | [st_geohash_bbox('ezs42')]               |
+| st_geohash_neighbors | scalar        | Return the eight adjacent Geohash cells in [N, NE, E, SE, S, SW, W, NW] order. | NULL    | [st_geohash_neighbors('ezs42')]          |
+| st_geomfromgeohash   | scalar        | Decode a Geohash prefix to the polygon boundary of its cell.                   | NULL    | [st_geomfromgeohash('c0w3h-extra', 5)]   |
+| st_geomfromgeohash   | scalar        | Decode a Geohash to the polygon boundary of its cell.                          | NULL    | [st_geomfromgeohash('c0w3h')]            |
+| st_pointfromgeohash  | scalar        | Decode a Geohash prefix to the center point of the selected cell.              | NULL    | [st_pointfromgeohash('wtw3sj-extra', 6)] |
+| st_pointfromgeohash  | scalar        | Decode a Geohash to the center point of its cell.                              | NULL    | [st_pointfromgeohash('wtw3sj')]          |
 
 ### Overloaded Functions
 
@@ -120,6 +121,8 @@ This extension does not add any types.
 
 <div class="extension_settings_table"></div>
 
-This extension does not add any settings.
+|      name      |                       description                       | input_type | scope  | aliases | typed_value |
+|----------------|---------------------------------------------------------|------------|--------|---------|-------------|
+| temp_directory | Set the directory to which temporary files are written. | VARCHAR    | GLOBAL | []      | post.db.tmp |
 
 

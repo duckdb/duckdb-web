@@ -40,7 +40,7 @@ The resulting file looks like this:
 Start DuckDB and read the log as a <s>CSV</s> 🍥SV:
 
 ```sql
-CREATE TABLE commits AS 
+CREATE TABLE commits AS
     FROM read_csv(
             'git-log.csv',
             delim = '🍥',
@@ -111,7 +111,7 @@ CREATE TABLE words AS
             .regexp_replace('\W', ' ')
             .trim(' ')
             .string_split_regex('\W')
-        ) AS word    
+        ) AS word
 FROM commits;
 ```
 

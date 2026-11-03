@@ -100,7 +100,7 @@ Cannot compare values of type DATE and type VARCHAR – an explicit cast is requ
 
 ## Backward Compatibility
 
-Backward compatibility refers to the ability of a newer DuckDB version to read storage files created by an older DuckDB version. This release is the first release of DuckDB that supports backward compatibility in the storage format. DuckDB v0.10 can read and operate on files created by the previous DuckDB version – DuckDB v0.9. [This is made possible by the implementation of a new serialization framework](https://github.com/duckdb/duckdb/pull/8156).
+Backward compatibility refers to the ability of a newer DuckDB version to read storage files created by an older DuckDB version. This release is the first release of DuckDB that supports backward compatibility in the storage format. DuckDB 0.10 can read and operate on files created by the previous DuckDB version – DuckDB 0.9. [This is made possible by the implementation of a new serialization framework](https://github.com/duckdb/duckdb/pull/8156).
 
 Write with v0.9:
 
@@ -138,7 +138,7 @@ For future DuckDB versions, our goal is to ensure that any DuckDB version releas
 
 ## Forward Compatibility
 
-Forward compatibility refers to the ability of an older DuckDB version to read storage files produced by a newer DuckDB version. DuckDB v0.9 is **partially** forward compatible with DuckDB v0.10. Certain files created by DuckDB v0.10 can be read by DuckDB v0.9.
+Forward compatibility refers to the ability of an older DuckDB version to read storage files produced by a newer DuckDB version. DuckDB 0.9 is **partially** forward compatible with DuckDB 0.10. Certain files created by DuckDB 0.10 can be read by DuckDB 0.9.
 
 Write with v0.10:
 
@@ -174,7 +174,7 @@ LIMIT 1;
 
 Forward compatibility is provided on a **best effort** basis. While stability of the storage format is important – there are still many improvements and innovations that we want to make to the storage format in the future. As such, forward compatibility may be (partially) broken on occasion.
 
-For this release, DuckDB v0.9 is able to read files created by DuckDB v0.10 provided that:
+For this release, DuckDB 0.9 is able to read files created by DuckDB 0.10 provided that:
 
 * The database file does not contain views
 * The database file does not contain new types (`ARRAY`, `UHUGEINT`)

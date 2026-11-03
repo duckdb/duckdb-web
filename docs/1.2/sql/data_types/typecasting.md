@@ -134,7 +134,7 @@ This logic also applies recursively to potentially nested structs.
 
 ```sql
 SELECT {'outer1': {'inner1': 42, 'inner2': 42}} AS c
-UNION ALL BY NAME 
+UNION ALL BY NAME
 SELECT {'outer1': {'inner2': 'hello', 'inner3': 'world'}, 'outer2': '100'} AS c;
 ```
 

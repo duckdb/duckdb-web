@@ -254,7 +254,7 @@ and the section on [“Multiple Processes”]({% link docs/2.0/connect/concurren
 To work on the same data set with multiple DuckDB clients (“multi-player experience”), there are now two options:
 
 1. The [DuckLake format](http://ducklake.select/) through the [`ducklake` extension]({% link docs/2.0/core_extensions/ducklake.md %}) with PostgreSQL as the catalog database. This is a [production-ready solution](https://ducklake.select/2026/04/13/ducklake-10/).
-2. The [Quack remote protocol]({% link docs/2.0/quack/overview.md %}), which turns DuckDB into a client-server database. Quack was introduced in DuckDB v1.5.3, and [DuckDB v2.0]({% post_url 2026-10-21-announcing-duckdb-200 %}#duckdb-as-a-server) ships a polished version of the protocol.
+2. The [Quack remote protocol]({% link docs/2.0/quack/overview.md %}), which turns DuckDB into a client-server database. Quack was introduced in DuckDB 1.5.3, and [DuckDB 2.0]({% post_url 2026-10-21-announcing-duckdb-200 %}#duckdb-as-a-server) ships a polished version of the protocol.
 </div>
 
 </div>
@@ -464,9 +464,9 @@ Currently, the official community support applies to the following components:
 
 This support covers the following minor versions:
 
-* DuckDB v2.0 (LTS, supported until October 2027)
-* DuckDB v1.5 (extended support until March 2027)
-* DuckDB v1.4 (LTS, supported until November 2026)
+* DuckDB 2.0 (LTS, supported until October 2027)
+* DuckDB 1.5 (extended support until March 2027)
+* DuckDB 1.4 (LTS, supported until November 2026)
 
 For end-of-life dates, see the [release calendar]({% link release_calendar.md %}#past-releases).
 

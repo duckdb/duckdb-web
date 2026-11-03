@@ -130,7 +130,7 @@ DuckDB provides functions to view and modify [Iceberg table properties](https://
 | Function                                                | Description                                    |
 | ------------------------------------------------------- | ---------------------------------------------- |
 | `iceberg_table_properties(table)`                       | Returns all properties of the specified table. |
- 
+
 You can use `ALTER TABLE ... SET` and `ALTER TABLE ... RESET` to modify table properties
 ```sql
 -- View table properties
@@ -139,7 +139,7 @@ FROM iceberg_table_properties(iceberg_catalog.default.my_table);
 
 -- Set table properties
 ALTER TABLE iceberg_catalog.default.my_table SET (
-    'write.update.mode'='merge-on-read', 
+    'write.update.mode'='merge-on-read',
     'write.delete.mode'='merge-on-read',
     'format-version'=3
 );

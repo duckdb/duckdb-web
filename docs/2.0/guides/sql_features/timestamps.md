@@ -11,7 +11,7 @@ how_to_topic: sql-features
 
 ## Timestamp with Time Zone Promotion Casts
 
-Working with time zones in SQL can be quite confusing at times. 
+Working with time zones in SQL can be quite confusing at times.
 For example, when filtering to a date range, one might try the following query:
 
 ```sql
@@ -68,12 +68,12 @@ FROM times WHERE t <= '2025-08-30';
 ```
 
 These confusing results are due to the SQL casting rules from `DATE` to `TIMESTAMP WITH TIME ZONE`.
-This cast is required to promote the date to midnight _in the current time zone_. 
+This cast is required to promote the date to midnight _in the current time zone_.
 
-In general, unless you need to use the current time zone for display (or 
-[other temporal binning]({% post_url 2022-01-06-time-zones %}) operations) 
+In general, unless you need to use the current time zone for display (or
+[other temporal binning]({% post_url 2022-01-06-time-zones %}) operations)
 you should use plain `TIMESTAMP`s for temporal data.
-This will avoid confusing issues such as this, and the arithmetic operations are generally faster. 
+This will avoid confusing issues such as this, and the arithmetic operations are generally faster.
 
 ## Time Zone Performance
 
@@ -90,8 +90,8 @@ one can create the calendar table like so:
 SET timezone = 'Europe/Amsterdam';
 
 CREATE OR REPLACE TABLE hourly AS
-    SELECT 
-        ts, 
+    SELECT
+        ts,
         year::SMALLINT AS year,
         month::TINYINT AS month,
         day::TINYINT AS day,
@@ -99,15 +99,15 @@ CREATE OR REPLACE TABLE hourly AS
     FROM (
         SELECT ts, unnest(date_part(['year', 'month', 'day', 'hour',], ts))
         FROM generate_series(
-            '2020-01-01'::DATE::TIMESTAMPTZ, 
-            '2100-01-01'::DATE::TIMESTAMPTZ, 
+            '2020-01-01'::DATE::TIMESTAMPTZ,
+            '2100-01-01'::DATE::TIMESTAMPTZ,
             INTERVAL 1 HOUR) tbl(ts)
     ) parts;
 ```
 
-You can then join this ~700K row table against any timestamp column 
+You can then join this ~700K row table against any timestamp column
 to quickly obtain the temporal bin values for the time zone in question.
-The inner casts are not required, but result in a smaller table 
+The inner casts are not required, but result in a smaller table
 because `date_part` returns 64 bit integers for all parts.
 
 Notice that we can extract _all_ of the parts with a single call to `date_part`.
@@ -115,14 +115,14 @@ This part list version of the function is faster than extracting the parts one b
 because the underlying binning computation computes all parts,
 so picking out the ones in the list avoids duplicate time zone conversions.
 
-Also notice that we are leveraging the `DATE` cast rules from the previous section 
+Also notice that we are leveraging the `DATE` cast rules from the previous section
 to bound the calendar to the model domain.
 
 ## Half-Open Intervals
 
 Another subtle problem in using SQL for temporal analytics is the `BETWEEN` operator.
-Temporal analytics almost always uses 
-[half-open binning intervals](https://www.cs.arizona.edu/~rts/tdbbook.pdf) 
+Temporal analytics almost always uses
+[half-open binning intervals](https://www.cs.arizona.edu/~rts/tdbbook.pdf)
 to avoid overlaps at the ends.
 Unfortunately, the `BETWEEN` operator is a closed-closed interval:
 

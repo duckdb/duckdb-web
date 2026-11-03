@@ -9,7 +9,7 @@ excerpt: "We're releasing DuckDB version 1.4.0, codenamed “Andium”. This is 
 tag: release
 ---
 
-We are proud to release DuckDB v1.4.0, named “Andium” after the _Andean teal_ (Anas andium), which lives in the Andean highlands of Colombia, Venezuela, and Ecuador.
+We are proud to release DuckDB 1.4.0, named “Andium” after the _Andean teal_ (Anas andium), which lives in the Andean highlands of Colombia, Venezuela, and Ecuador.
 
 In this blog post, we cover the most important updates for this release around support, features, and extensions. DuckDB is moving rather quickly, and we could cover only a small fraction of the changes in this release. For the complete release notes, see the [release page on GitHub](https://github.com/duckdb/duckdb/releases/tag/v1.4.0).
 
@@ -240,7 +240,7 @@ A separate blog post will be coming.
 
 ## Performance and Optimizations
 
-DuckDB v1.4.0 received a number of performance optimizations.
+DuckDB 1.4.0 received a number of performance optimizations.
 
 ### Checkpointing In-Memory Tables
 

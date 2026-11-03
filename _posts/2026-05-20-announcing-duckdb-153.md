@@ -5,18 +5,18 @@ authors:
   - The DuckDB team
 thumb: "/images/blog/thumbs/duckdb-release-1-5-3.svg"
 image: "/images/blog/thumbs/duckdb-release-1-5-3.png"
-excerpt: "We are releasing DuckDB version v1.5.3. While updates in DuckDB itself are limited bugfixes, the upgraded extensions shipped with v1.5.3 bring a ton of new features. These include the Quack client-server protocol, which is now available as a core extension, support for Quack in DuckLake, and several new features for Iceberg, AWS, and HTTPS."
+excerpt: "We are releasing DuckDB version 1.5.3. While updates in DuckDB itself are limited bugfixes, the upgraded extensions shipped with v1.5.3 bring a ton of new features. These include the Quack client-server protocol, which is now available as a core extension, support for Quack in DuckLake, and several new features for Iceberg, AWS, and HTTPS."
 tag: release
 ---
 
-In this blog post, we highlight a few important features shipped in DuckDB v1.5.3, the third patch release in [DuckDB's v1.5 line]({% post_url 2026-03-09-announcing-duckdb-150 %}).
+In this blog post, we highlight a few important features shipped in DuckDB 1.5.3, the third patch release in [DuckDB's 1.5 line]({% post_url 2026-03-09-announcing-duckdb-150 %}).
 You can find the complete [release notes on GitHub](https://github.com/duckdb/duckdb/releases/tag/v1.5.3).
 
 To install the new version, please visit the [installation page]({% link docs/2.0/installation.html %}).
 
 ## What's New
 
-While DuckDB v1.5.3 is a patch release, its extensions brings various new features.
+While DuckDB 1.5.3 is a patch release, its extensions brings various new features.
 We list these below.
 
 ### Quack as a Core Extension
@@ -28,7 +28,7 @@ If you are new to Quack and don't know where to start, check out the following r
 * For the rationale and history behind Quack, along with an introduction of the protocol and its features, see the [announcement blog post]({% post_url 2026-05-12-quack-remote-protocol %}).
 * For the reference manual and setup guide, check out the [Quack documentation]({% link docs/2.0/quack/overview.md %}).
 
-Starting from DuckDB v1.5.3, we ship Quack as a [core extension]({% link docs/2.0/core_extensions/quack.md %}). This means that you can now start using Quack right away from any client running DuckDB:
+Starting from DuckDB 1.5.3, we ship Quack as a [core extension]({% link docs/2.0/core_extensions/quack.md %}). This means that you can now start using Quack right away from any client running DuckDB:
 it will be transparently autoinstalled and [autoloaded]({% link docs/2.0/extensions/overview.md %}#autoloading-extension) on first use.
 
 <!-- markdownlint-disable MD001 -->
@@ -74,7 +74,7 @@ FROM remote.hello;
 <!-- markdownlint-enable MD001 -->
 
 Please note that Quack is still in beta state and breaking changes may happen in the protocol, in function names, etc.
-We plan to release the production-ready version of Quack together with [DuckDB v2.0]({% link release_calendar.md %}) in fall 2026.
+We plan to release the production-ready version of Quack together with [DuckDB 2.0]({% link release_calendar.md %}) in fall 2026.
 
 ### DuckLake with Quack
 
@@ -149,7 +149,7 @@ Note that since the [introduction of `curl` into DuckDB's network stack]({% post
 
 ### Iceberg
 
-The DuckDB-Iceberg extension has shipped a number of features between DuckDB v1.5.2 and v1.5.3. Most notably:
+The DuckDB-Iceberg extension has shipped a number of features between DuckDB 1.5.2 and 1.5.3. Most notably:
 
 * `MERGE INTO` is now supported for Iceberg tables ([iceberg#788](https://github.com/duckdb/duckdb-iceberg/pull/788))
 * The `INSERT` and `UPDATE` statements are now supported on partitioned Iceberg tables with a `truncate` or `bucket` transform ([iceberg#879](https://github.com/duckdb/duckdb-iceberg/pull/879))

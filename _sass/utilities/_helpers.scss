@@ -120,10 +120,6 @@ a.blocklink{
 	@include display-2;
 }
 
-.display-3 {
-	@include display-3;
-}
-
 .headline-1 {
 	@include headline-1;
 }
@@ -136,20 +132,12 @@ a.blocklink{
 	@include headline-3;
 }
 
-.title-1 {
-	@include title-1;
+.headline-4 {
+	@include headline-4;
 }
 
-.title-2 {
-	@include title-2;
-}
-
-.title-3 {
-	@include title-3;
-}
-
-.label-1 {
-	@include label-1;
+.headline-5 {
+	@include headline-5;
 }
 
 .label-2 {

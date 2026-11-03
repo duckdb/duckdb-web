@@ -173,7 +173,7 @@ SELECT * FROM master_ducks WHERE is_current = false ORDER BY duck_id, begin_date
 To better illustrate the concept, let's examine a single duck, to drive home the value add for type 2 SCDs.
 If we select from the master table after running the merge statement and the post update insert statement, we can see the individual rows for `Quackers`.
 
-To view the original row of data that is historical: 
+To view the original row of data that is historical:
 
 ```sql
 SELECT * FROM master_ducks WHERE duck_name = 'Quackers' AND is_current = false;
@@ -185,7 +185,7 @@ Returns:
 |----------:|--------:|----------:|---------|----------|-------------|--------------|------------|
 | 1         | 101     | Quackers  | Mallard | Pond A   | 2025-11-24  | 2025-11-25   | false      |
 
-**Note**: 
+**Note**:
 
 * The `end date` is NOT NULL, it has the date when this duck's data was updated.
 * The `is_current` is `false` indicating this is a historical record.
@@ -203,7 +203,7 @@ SELECT * FROM master_ducks WHERE duck_name = 'Quackers' AND is_current = true;
 |----------:|--------:|----------:|---------|----------|-------------|----------|------------|
 | 10        | 101     | Quackers  | Mallard | Pond B   | 2025-11-26  | NULL     | true       |
 
-**Note**: 
+**Note**:
 
 * The `end date` is NULL, the NULL in this context indicates this is the latest record for this `duck_id`.
 * The `is_current` is `true` also indicating this is a current record.

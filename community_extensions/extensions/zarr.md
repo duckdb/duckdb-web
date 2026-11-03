@@ -8,11 +8,11 @@ excerpt: |
 extension:
   name: zarr
   description: Query Zarr array stores (v2 and v3) with SQL — read xarray-convention datasets as tables
-  version: 0.1.3
+  version: 0.2.1
   language: Rust
   build: cargo
   requires_toolchains: "rust;python3"
-  excluded_platforms: "wasm_mvp;wasm_eh;wasm_threads;linux_amd64_musl"
+  excluded_platforms: "linux_amd64_musl"
   license: MIT
   maintainers:
     - alxmrs
@@ -20,7 +20,8 @@ extension:
 
 repo:
   github: xqlsystems/duckdb-zarr
-  ref: v0.1.3
+  ref: 473cb3b203ff0c2f7f330bc6a4c0cbe4ed5c6474
+  variegata: 473cb3b203ff0c2f7f330bc6a4c0cbe4ed5c6474
 
 docs:
   hello_world: |
@@ -47,10 +48,14 @@ docs:
     **Functions**
 
     - `read_zarr(path)` — scan all rows from a single-group Zarr store.
-    - `read_zarr(path, dims=['time','lat','lon'])` — select one dim group from a multi-group store
-      (`dims` is a list of dimension names).
+    - `read_zarr(path, table_name := 'time_lat_lon')` — select one table when a group has several
+      (by the name `read_zarr_tables` gives it; `dims := [...]` selects by its dimensions).
+    - `read_zarr(path, group_path := 'a/b')` — read a nested group, as xarray's `group=`.
     - `read_zarr_metadata(path)` — inspect array names, dtypes, shapes, and roles.
-    - `read_zarr_groups(path)` — enumerate distinct dimension groups in a store.
+    - `read_zarr_tables(path)` — list every group's tables, with the schema and table name each maps to
+      (`read_zarr_groups` is the 0.1.x name).
+    - `read_zarr_views(path, 'db')` — the statements that mount every table as a view in database `db`
+      (`view_names := MAP {...}` renames them); run them to get `db.main.time_lat_lon` and so on.
 
     **Automatic path interception**
 
@@ -95,8 +100,8 @@ docs:
 
 extension_star_count: 66
 extension_star_count_pretty: 66
-extension_download_count: 4031
-extension_download_count_pretty: 4.0k
+extension_download_count: 751
+extension_download_count_pretty: 751
 image: '/images/community_extensions/social_preview/preview_community_extension_zarr.png'
 layout: community_extension_doc
 ---
@@ -108,13 +113,13 @@ This table covers all DuckDB releases that have not reached [end-of-life](https:
 
 | Platform | 1.4.4 | 1.4.5 | 1.5.5 | 1.5.6 | 2.0.0 |
 | :--- | :---: | :---: | :---: | :---: | :---: |
-| Linux AMD64 | ❌ | ❌ | ✅ | ❌ | ❌ |
-| Linux ARM64 | ❌ | ❌ | ✅ | ❌ | ❌ |
+| Linux AMD64 | ❌ | ❌ | ✅ | ❌ | ✅ |
+| Linux ARM64 | ❌ | ❌ | ✅ | ❌ | ✅ |
 | macOS AMD64 | ❌ | ❌ | ✅ | ❌ | ❌ |
-| macOS ARM64 | ❌ | ❌ | ✅ | ❌ | ❌ |
-| Windows AMD64 | ❌ | ❌ | ✅ | ❌ | ❌ |
+| macOS ARM64 | ❌ | ❌ | ✅ | ❌ | ✅ |
+| Windows AMD64 | ❌ | ❌ | ✅ | ❌ | ✅ |
 | Windows ARM64 | ❌ | ❌ | ❌ | ❌ | ❌ |
-| WebAssembly | ❌ | ❌ | ❌ | ❌ | ❌ |
+| WebAssembly | ❌ | ❌ | ❌ | ❌ | ✅ |
 
 ### Installing and Loading
 ```sql
@@ -141,6 +146,8 @@ LOAD {{ page.extension.name }};
 | read_zarr          | table         | NULL        | NULL    |          |
 | read_zarr_groups   | table         | NULL        | NULL    |          |
 | read_zarr_metadata | table         | NULL        | NULL    |          |
+| read_zarr_tables   | table         | NULL        | NULL    |          |
+| read_zarr_views    | table         | NULL        | NULL    |          |
 
 ### Overloaded Functions
 
@@ -158,6 +165,8 @@ This extension does not add any types.
 
 <div class="extension_settings_table"></div>
 
-This extension does not add any settings.
+|      name      |                       description                       | input_type | scope  | aliases | typed_value |
+|----------------|---------------------------------------------------------|------------|--------|---------|-------------|
+| temp_directory | Set the directory to which temporary files are written. | VARCHAR    | GLOBAL | []      | post.db.tmp |
 
 

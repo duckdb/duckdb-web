@@ -8,7 +8,7 @@ excerpt: |
 extension:
   name: bloom
   description: Accelerate multi-join queries with adaptive predicate transfer
-  version: 0.0.3
+  version: 0.0.4
   language: C++
   build: cmake
   license: MIT
@@ -18,7 +18,7 @@ extension:
 
 repo:
   github: YimingQiao/bloom
-  ref: e81c0f02891a4bc9b962a8acf748312b3376c4e5
+  ref: 42747a464683ab1e3891a0bc1fafa442aad64927
 
 docs:
   hello_world: |
@@ -38,8 +38,8 @@ docs:
 
 extension_star_count: 6
 extension_star_count_pretty: 6
-extension_download_count: 285
-extension_download_count_pretty: 285
+extension_download_count: 369
+extension_download_count_pretty: 369
 image: '/images/community_extensions/social_preview/preview_community_extension_bloom.png'
 layout: community_extension_doc
 ---

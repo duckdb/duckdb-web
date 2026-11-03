@@ -19,7 +19,7 @@ permalink: /history/
     <div class="timeline-body">
       <h2 id="hello-world">Hello World</h2>
       <p>Mark Raasveldt and Hannes Mühleisen began developing DuckDB in 2018 while working as database researchers at Centrum Wiskunde &amp; Informatica (CWI) in Amsterdam. Their work grew from database systems research, later documented in <a href="{% link library/index.html %}?category=core&amp;format=paper">papers on DuckDB's design and architecture</a>, including its embedded analytical model.</p>
-      <p>DuckDB was open source from day one. In 2019, Mark and Hannes announced <a href="/library/duckdb-sigmod-demo/">DuckDB v0.1</a> at the SIGMOD conference in Amsterdam. DuckDB could run as a single binary or inside Python, R, or another host process, giving users an analytical SQL engine without requiring them to deploy and maintain a separate database server.</p>
+      <p>DuckDB was open source from day one. In 2019, Mark and Hannes announced <a href="/library/duckdb-sigmod-demo/">DuckDB 0.1</a> at the SIGMOD conference in Amsterdam. DuckDB could run as a single binary or inside Python, R, or another host process, giving users an analytical SQL engine without requiring them to deploy and maintain a separate database server.</p>
       <p>This in-process architecture removed a familiar source of friction. Developers could query files and data where they were already working. Data scientists could bring SQL into a notebook without first deploying database infrastructure. Product teams could embed analytical processing directly in their applications.</p>
       <p>As more people began using DuckDB, the project needed a permanent engineering home and a structure that could support long-term development.</p>
     </div>
@@ -49,7 +49,7 @@ permalink: /history/
     <div class="timeline-marker"><span class="timeline-year">2024</span></div>
     <div class="timeline-body">
       <h2 id="duckdb-reaches-10">DuckDB Reaches v1.0</h2>
-      <p>On June 3, 2024, the team <a href="{% post_url 2024-06-03-announcing-duckdb-100 %}">released DuckDB v1.0.0</a>.</p>
+      <p>On June 3, 2024, the team <a href="{% post_url 2024-06-03-announcing-duckdb-100 %}">released DuckDB 1.0.0</a>.</p>
       <p>The release emphasized stability rather than a long list of new features. DuckDB had gained backward compatibility for its storage format, extensive testing across the engine, and a more cautious approach to changes in the SQL dialect and C API. Version 1.0 expressed the team's confidence that developers could build applications on DuckDB with clearer expectations about compatibility over time.</p>
       <p>It was also a marker of adoption. Six years after the first code was written, DuckDB had moved from a research project into production systems, data workflows, and embedded products across a growing community.</p>
       <p>Later that year, MotherDuck made significant contributions to the <a href="{% post_url 2024-12-18-duckdb-node-neo-client %}">new DuckDB Node.js client</a>, another example of technical work shared across the ecosystem.</p>
@@ -71,7 +71,7 @@ permalink: /history/
     <div class="timeline-body">
       <h2 id="the-broader-direction-becomes-explicit">Broader Horizons</h2>
       <p>DuckLake reached <a href="https://ducklake.select/2026/04/13/ducklake-10/">version 1.0 on April 13, 2026</a>, establishing a production-ready specification and reference implementation.</p>
-      <p>The Quack technical preview followed in May. Quack is the DuckDB client-server protocol, designed for workloads that need remote connections or multiple clients. It was introduced as a beta release, and <a href="{% post_url 2026-10-21-announcing-duckdb-200 %}">DuckDB v2.0</a> shipped a polished version, although the protocol is not yet stable.</p>
+      <p>The Quack technical preview followed in May. Quack is the DuckDB client-server protocol, designed for workloads that need remote connections or multiple clients. It was introduced as a beta release, and <a href="{% post_url 2026-10-21-announcing-duckdb-200 %}">DuckDB 2.0</a> shipped a polished version, although the protocol is not yet stable.</p>
       <p>The change from <a href="https://ducklabs.com/news/2026/05/27/duckdb-labs-becomes-ducklabs">DuckDB Labs to DuckLabs</a> came later that month. By then, the company employed more than 30 people working across DuckDB, DuckLake, Quack, extensions, language bindings, and related systems engineering.</p>
     </div>
   </div>
@@ -89,7 +89,7 @@ permalink: /history/
     <div class="timeline-marker"><span class="timeline-year">2026, Q4</span></div>
     <div class="timeline-body">
       <h2 id="duckdb-reaches-20">DuckDB Reaches v2.0</h2>
-      <p>On October 21, 2026, the team <a href="{% post_url 2026-10-21-announcing-duckdb-200 %}">released DuckDB v2.0.0 LTS</a>, the project's biggest feature release so far. It ships a polished version of the Quack protocol, asynchronous I/O, a first-class <code>VARIANT</code> type, triggers, and an extensible SQL parser.</p>
+      <p>On October 21, 2026, the team <a href="{% post_url 2026-10-21-announcing-duckdb-200 %}">released DuckDB 2.0.0 LTS</a>, the project's biggest feature release so far. It ships a polished version of the Quack protocol, asynchronous I/O, a first-class <code>VARIANT</code> type, triggers, and an extensible SQL parser.</p>
     </div>
   </div>
 

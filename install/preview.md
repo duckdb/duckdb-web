@@ -20,7 +20,6 @@ The preview (nightly) builds provide development versions of DuckDB. As such, th
 
 There are currently the following DuckDB versions under development:
 
-* v1.4: an LTS release.
 * v1.5: a regular release with extended support to allow users sufficient time to transition to v2.0.
 * v2.0: an LTS release.
 * v2.1: the upcoming DuckDB version, in an early stage of the development.
@@ -31,11 +30,6 @@ Note that for most users, we recommend the [stable DuckDB releases]({% link docs
 
 For Python, we distribute different nightly builds. Note that not all of them are available at all times and a few days can be skipped when nightly builds fail.
 
-### Python v1.4-dev
-
-```batch
-pip install "duckdb<1.5.0" --pre --upgrade
-```
 
 ### Python v1.5-dev
 
@@ -44,6 +38,12 @@ pip install "duckdb<1.6.0" --pre --upgrade
 ```
 
 ### Python v2.0-dev
+
+```batch
+pip install "duckdb<2.1.0" --pre --upgrade
+```
+
+### Python v2.1-dev
 
 ```batch
 pip install duckdb --pre --upgrade
@@ -84,28 +84,42 @@ $env:DUCKDB_VERSION = "alpha"; irm https://install.duckdb.org/install.ps1 | iex
 
 To download the v2.0-dev command line client, use the following links:
 
-| Platform | Architecture       | v2.0-dev CLI client                                                                                                                                             |
-| -------- | ------------------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Linux    | `arm64`            | [tar.gz](https://artifacts.duckdb.org/v2.0-cyanoptera/duckdb-cli-linux-arm64.tar.gz)                                                                            |
-| Linux    | `x86_64`           | [tar.gz](https://artifacts.duckdb.org/v2.0-cyanoptera/duckdb-cli-linux-amd64.tar.gz)                                                                            |
-| macOS    | `arm64` / `x86_64` | [tar.gz](https://artifacts.duckdb.org/v2.0-cyanoptera/duckdb-cli-osx-universal.tar.gz)                                                                          |
-| Windows  | `arm64`            | [tar.gz](https://duckdb-staging.duckdb.org/96063b9e39/v2.0.0-alpha43763/duckdb/duckdb/github_release/duckdb-cli-windows-arm64.tar.gz) |
-| Windows  | `x86_64`           | [tar.gz](https://duckdb-staging.duckdb.org/96063b9e39/v2.0.0-alpha43763/duckdb/duckdb/github_release/duckdb-cli-windows-amd64.tar.gz) |
+| Platform | Architecture       | v2.0-dev CLI client                                                                    |
+| -------- | ------------------ | -------------------------------------------------------------------------------------- |
+| Linux    | `arm64`            | [tar.gz](https://artifacts.duckdb.org/v2.0-cyanoptera/duckdb-cli-linux-arm64.tar.gz)   |
+| Linux    | `x86_64`           | [tar.gz](https://artifacts.duckdb.org/v2.0-cyanoptera/duckdb-cli-linux-amd64.tar.gz)   |
+| macOS    | `arm64` / `x86_64` | [tar.gz](https://artifacts.duckdb.org/v2.0-cyanoptera/duckdb-cli-osx-universal.tar.gz) |
+| Windows  | `arm64`            | [tar.gz](https://artifacts.duckdb.org/v2.0-cyanoptera/duckdb-cli-windows-arm64.tar.gz) |
+| Windows  | `x86_64`           | [tar.gz](https://artifacts.duckdb.org/v2.0-cyanoptera/duckdb-cli-windows-amd64.tar.gz) |
+
+### v2.1-dev CLI
+
+To download the v2.1-dev command line client, use the following links:
+
+| Platform | Architecture       | v2.1-dev CLI client                                                         |
+| -------- | ------------------ | --------------------------------------------------------------------------- |
+| Linux    | `arm64`            | [tar.gz](https://artifacts.duckdb.org/main/duckdb-cli-linux-arm64.tar.gz)   |
+| Linux    | `x86_64`           | [tar.gz](https://artifacts.duckdb.org/main/duckdb-cli-linux-amd64.tar.gz)   |
+| macOS    | `arm64` / `x86_64` | [tar.gz](https://artifacts.duckdb.org/main/duckdb-cli-osx-universal.tar.gz) |
+| Windows  | `arm64`            | [tar.gz](https://artifacts.duckdb.org/main/duckdb-cli-windows-arm64.tar.gz) |
+| Windows  | `x86_64`           | [tar.gz](https://artifacts.duckdb.org/main/duckdb-cli-windows-amd64.tar.gz) |
 
 ## Java
 
-The following Maven snippet imports the latest version of the Java package.
-To determine the version number, please visit the [latest CI builds](https://github.com/duckdb/duckdb-java/actions/workflows/Java.yml) and search for a _Java JDBC_ task that succeeded.
-In that job, consult the _Maven S3 Deploy_ job's _Deploy snapshot to S3_ task and find the version tag, e.g., `2.0.0-alpha44738-892`.
+The following snippets import the latest preview builds of the Java package.
+To determine the version number, please visit the [latest CI builds](https://github.com/duckdb/duckdb-java/actions/workflows/Java.yml) and search for a _Java JDBC_ task that succeeded on the `v2.0-cyanoptera` branch (for v2.0-dev) or the `main` branch (for v2.1-dev).
+In that job, consult the _Maven S3 Deploy_ job's _Deploy snapshot to S3_ task and find the version tag, e.g., `{{ site.latest_duckdb_java_dev_version }}`.
 
-### Maven
+### Java v2.0-dev
+
+#### Maven
 
 ```xml
 <dependencies>
     <dependency>
         <groupId>org.duckdb</groupId>
         <artifactId>duckdb_jdbc</artifactId>
-        <version>2.0.0-alpha44738-892</version>
+        <version>{{ site.latest_duckdb_java_dev_version }}</version>
     </dependency>
 </dependencies>
 
@@ -117,7 +131,7 @@ In that job, consult the _Maven S3 Deploy_ job's _Deploy snapshot to S3_ task an
 </repositories>
 ```
 
-### Gradle (Groovy)
+#### Gradle (Groovy)
 
 ```groovy
 repositories {
@@ -127,11 +141,11 @@ repositories {
 }
 
 dependencies {
-    implementation 'org.duckdb:duckdb_jdbc:2.0.0-alpha44738-892'
+    implementation 'org.duckdb:duckdb_jdbc:{{ site.latest_duckdb_java_dev_version }}'
 }
 ```
 
-### Gradle (Kotlin)
+#### Gradle (Kotlin)
 
 ```kotlin
 repositories {
@@ -141,26 +155,79 @@ repositories {
 }
 
 dependencies {
-    implementation("org.duckdb:duckdb_jdbc:2.0.0-alpha44738-892")
+    implementation("org.duckdb:duckdb_jdbc:{{ site.latest_duckdb_java_dev_version }}")
 }
 ```
 
-### Direct Download
+#### Direct Download
 
-<a href="https://duckdb-staging.duckdb.org/duckdb/duckdb-java/maven/org/duckdb/duckdb_jdbc/2.0.0-alpha44738-892/duckdb_jdbc-2.0.0-alpha44738-892.jar" class="download-btn">duckdb_jdbc-2.0.0-alpha44738-892.jar</a>
+<a href="https://duckdb-staging.duckdb.org/duckdb/duckdb-java/maven/org/duckdb/duckdb_jdbc/{{ site.latest_duckdb_java_dev_version }}/duckdb_jdbc-{{ site.latest_duckdb_java_dev_version }}.jar" class="download-btn">duckdb_jdbc-{{ site.latest_duckdb_java_dev_version }}.jar</a>
+
+### Java v2.1-dev
+
+#### Maven
+
+```xml
+<dependencies>
+    <dependency>
+        <groupId>org.duckdb</groupId>
+        <artifactId>duckdb_jdbc</artifactId>
+        <version>{{ site.next_duckdb_java_dev_version }}</version>
+    </dependency>
+</dependencies>
+
+<repositories>
+    <repository>
+        <id>duckdb</id>
+        <url>https://duckdb-staging.duckdb.org/duckdb/duckdb-java/maven/</url>
+    </repository>
+</repositories>
+```
+
+#### Gradle (Groovy)
+
+```groovy
+repositories {
+    maven {
+        url 'https://duckdb-staging.duckdb.org/duckdb/duckdb-java/maven/'
+    }
+}
+
+dependencies {
+    implementation 'org.duckdb:duckdb_jdbc:{{ site.next_duckdb_java_dev_version }}'
+}
+```
+
+#### Gradle (Kotlin)
+
+```kotlin
+repositories {
+    maven {
+        url = uri("https://duckdb-staging.duckdb.org/duckdb/duckdb-java/maven/")
+    }
+}
+
+dependencies {
+    implementation("org.duckdb:duckdb_jdbc:{{ site.next_duckdb_java_dev_version }}")
+}
+```
+
+#### Direct Download
+
+<a href="https://duckdb-staging.duckdb.org/duckdb/duckdb-java/maven/org/duckdb/duckdb_jdbc/{{ site.next_duckdb_java_dev_version }}/duckdb_jdbc-{{ site.next_duckdb_java_dev_version }}.jar" class="download-btn">duckdb_jdbc-{{ site.next_duckdb_java_dev_version }}.jar</a>
 
 ## ODBC
 
 For ODBC, the preview builds are based on the `main` branch of the [`duckdb/duckdb-odbc` repository](https://github.com/duckdb/duckdb-odbc/).
 
-| Platform | Architecture       | ODBC client                                                                 |
-| -------- | ------------------ | --------------------------------------------------------------------------- |
-| Linux    | `arm64`            | [zip](https://artifacts.duckdb.org/duckdb-odbc/main/odbc-linux-arm64.zip)   |
-| Linux    | `x86_64`           | [zip](https://artifacts.duckdb.org/duckdb-odbc/main/odbc-linux-amd64.zip)   |
-| macOS    | `arm64`            | [zip](https://artifacts.duckdb.org/duckdb-odbc/main/odbc-macos-arm64.zip)   |
-| macOS    | `x86_64`           | [zip](https://artifacts.duckdb.org/duckdb-odbc/main/odbc-macos-amd64.zip)   |
-| Windows  | `arm64`            | [zip](https://artifacts.duckdb.org/duckdb-odbc/main/odbc-windows-arm64.zip) |
-| Windows  | `x86_64`           | [zip](https://artifacts.duckdb.org/duckdb-odbc/main/odbc-windows-amd64.zip) |
+| Platform | Architecture | ODBC client                                                                 |
+| -------- | ------------ | --------------------------------------------------------------------------- |
+| Linux    | `arm64`      | [zip](https://artifacts.duckdb.org/duckdb-odbc/main/odbc-linux-arm64.zip)   |
+| Linux    | `x86_64`     | [zip](https://artifacts.duckdb.org/duckdb-odbc/main/odbc-linux-amd64.zip)   |
+| macOS    | `arm64`      | [zip](https://artifacts.duckdb.org/duckdb-odbc/main/odbc-macos-arm64.zip)   |
+| macOS    | `x86_64`     | [zip](https://artifacts.duckdb.org/duckdb-odbc/main/odbc-macos-amd64.zip)   |
+| Windows  | `arm64`      | [zip](https://artifacts.duckdb.org/duckdb-odbc/main/odbc-windows-arm64.zip) |
+| Windows  | `x86_64`     | [zip](https://artifacts.duckdb.org/duckdb-odbc/main/odbc-windows-amd64.zip) |
 
 ## R
 

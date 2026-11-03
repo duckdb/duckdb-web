@@ -18,7 +18,7 @@ extension:
 
 repo:
   github: neuesql/atm_talib
-  ref: 5caac83a9a6f89c49985482cd634ed1f6f17cffe
+  ref: 631348e25c178b08cdb97134400cfa05cb1630f6
 
 docs:
   hello_world: |
@@ -106,8 +106,8 @@ docs:
 
 extension_star_count: 8
 extension_star_count_pretty: 8
-extension_download_count: 16335
-extension_download_count_pretty: 16.3k
+extension_download_count: 1858
+extension_download_count_pretty: 1.9k
 image: '/images/community_extensions/social_preview/preview_community_extension_talib.png'
 layout: community_extension_doc
 ---

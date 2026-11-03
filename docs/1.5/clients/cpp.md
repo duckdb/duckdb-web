@@ -49,7 +49,7 @@ if (result->HasError()) {
 }
 ```
 
-The `MaterializedQueryResult` instance contains firstly two fields that indicate whether the query was successful. `Query` will not throw exceptions under normal circumstances. Instead, invalid queries or other issues will lead to the `success` Boolean field in the query result instance to be set to `false`. In this case an error message may be available in `error` as a string. The methods `GetErrorType()` and `GetErrorObject()` are also available for any `QueryResult` instance which may aid in more explicit error handling. 
+The `MaterializedQueryResult` instance contains firstly two fields that indicate whether the query was successful. `Query` will not throw exceptions under normal circumstances. Instead, invalid queries or other issues will lead to the `success` Boolean field in the query result instance to be set to `false`. In this case an error message may be available in `error` as a string. The methods `GetErrorType()` and `GetErrorObject()` are also available for any `QueryResult` instance which may aid in more explicit error handling.
 
 ```cpp
 auto result = con.Query("INSERT INTO integers VALUES (1, 2)");
@@ -59,7 +59,7 @@ if (result->HasError()) {
     case duckdb::ExceptionType::CONSTRAINT: {
         // Example handling
         auto errorObject = result->GetErrorObject();
-        errorObject.ConvertErrorToJSON(); 
+        errorObject.ConvertErrorToJSON();
         std::cout << errorObject.Message() << std::endl;
         break;
     }

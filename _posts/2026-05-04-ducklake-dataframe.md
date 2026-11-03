@@ -8,5 +8,5 @@ authors:
   - Dr. Peter van Holland
 external_post_url: "https://ducklake.select/2026/05/04/ducklake-dataframe/"
 tag: extensions
-excerpt: "We are showcasing the simplicity of DuckLake's v1.0 specification by developing a dataframe reader/writer with AI."
+excerpt: "We are showcasing the simplicity of DuckLake's 1.0 specification by developing a dataframe reader/writer with AI."
 ---

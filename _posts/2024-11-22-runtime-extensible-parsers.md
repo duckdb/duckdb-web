@@ -10,7 +10,7 @@ tag: deep-dive
 excerpt: "Despite their central role in processing queries, parsers have not received any noticeable attention in the data systems space. State-of-the art systems are content with ancient old parser generators. These generators create monolithic, inflexible, and unforgiving parsers that hinder innovation in query languages and frustrate users. Instead, parsers should be rewritten using modern abstractions like Parsing Expression Grammars (PEG), which allow dynamic changes to the accepted query syntax and better error recovery. In this post, we discuss how parsers could be re-designed using PEG, and validate our recommendations using experiments for both effectiveness and efficiency."
 ---
 
-> Update In March 2026, DuckDB v1.5 [shipped an experimental parser]({% post_url 2026-03-09-announcing-duckdb-150 %}#peg-parser). You can opt-in to use it via:
+> Update In March 2026, DuckDB 1.5 [shipped an experimental parser]({% post_url 2026-03-09-announcing-duckdb-150 %}#peg-parser). You can opt-in to use it via:
 >
 > ```sql
 > CALL enable_peg_parser();

@@ -10,8 +10,8 @@ excerpt: "DuckDB-Iceberg now has a number of new features supporting Iceberg Tab
 tag: extensions
 ---
 
-Despite the work required to develop the features needed for DuckLake v1.0 and Quack, the DuckLabs team is still hard at work on the [DuckDB-Iceberg extension]({% link docs/2.0/core_extensions/iceberg/overview.md %}).
-In this blog post, we will demonstrate some of the features that are available in [DuckDB v1.5.3]({% post_url 2026-05-20-announcing-duckdb-153 %}). Many of these features were earmarked for a future release in our last Iceberg-themed blog post [“Writes in DuckDB-Iceberg”]({% post_url 2025-11-28-iceberg-writes-in-duckdb %}) – you can think of this post as “Part 2” to that blog post.
+Despite the work required to develop the features needed for DuckLake 1.0 and Quack, the DuckLabs team is still hard at work on the [DuckDB-Iceberg extension]({% link docs/2.0/core_extensions/iceberg/overview.md %}).
+In this blog post, we will demonstrate some of the features that are available in [DuckDB 1.5.3]({% post_url 2026-05-20-announcing-duckdb-153 %}). Many of these features were earmarked for a future release in our last Iceberg-themed blog post [“Writes in DuckDB-Iceberg”]({% post_url 2025-11-28-iceberg-writes-in-duckdb %}) – you can think of this post as “Part 2” to that blog post.
 
 ## Getting Started
 
@@ -89,7 +89,7 @@ You can also combine matched and unmatched branches with `WHEN MATCHED THEN DELE
 
 ## `ALTER TABLE` Support
 
-In DuckDB v1.4's Iceberg extension, the lack of schema evolution of Iceberg tables was a [documented limitation](/docs/1.4/core_extensions/iceberg/iceberg_rest_catalogs#unsupported-operations).
+In DuckDB 1.4's Iceberg extension, the lack of schema evolution of Iceberg tables was a [documented limitation](/docs/1.4/core_extensions/iceberg/iceberg_rest_catalogs#unsupported-operations).
 In v1.5.3, the `ALTER TABLE` statement is now supported against Iceberg tables, covering the most common schema-evolution operations.
 
 ```sql
@@ -271,7 +271,7 @@ FROM iceberg_metadata(my_datalake.default.v3_table);
 └──────────────────┴──────────────────┴─────────────┘
 ```
 
-> The Geography type and Unknown type are not yet supported in DuckDB-Iceberg; we are planning to add those in DuckDB v2.0.0.
+> The Geography type and Unknown type are not yet supported in DuckDB-Iceberg; we are planning to add those in DuckDB 2.0.0.
 
 ## Conclusion and Future Work
 

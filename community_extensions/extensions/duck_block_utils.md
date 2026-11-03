@@ -8,7 +8,7 @@ excerpt: |
 extension:
   name: duck_block_utils
   description: Build, transform, validate, and extract content from structured documents using the duck_block type
-  version: 3.5.1
+  version: 4.0.0
   language: C++
   build: cmake
   license: MIT
@@ -21,13 +21,13 @@ repo:
   # so advancing this pin would point a v1.4.5 build at a tree that cannot build for
   # it. v1.4.5 users should move to the v1.5.x track.
   andium: 125662df9e5450105dc9b7957ad955cb53d7beec
-  ref: 531b0596017773ec5d3eee1e71e25361a5d49525
+  ref: 65f03cb7f776549a68ae9efba0b5a6d6adc259d3
   # variegata pins the v1.5.6 track. scripts/build.py sends a v1.5.6 build here when
   # present and to `ref` otherwise, and unlike ref_next it has no skip branch -- so
   # once `ref` is 2.0-only a v1.5.6 build would fail rather than be skipped. Equal to
   # `ref` while both lines build; advance only to a commit v1.5.6 can still build.
-  variegata: 531b0596017773ec5d3eee1e71e25361a5d49525
-  ref_next: 531b0596017773ec5d3eee1e71e25361a5d49525
+  variegata: 65f03cb7f776549a68ae9efba0b5a6d6adc259d3
+  ref_next: 65f03cb7f776549a68ae9efba0b5a6d6adc259d3
 docs:
   hello_world: |
     -- Build a document programmatically
@@ -67,6 +67,22 @@ docs:
     unified representation for document elements that works across formats.
 
     **Documentation:** [duck-block-utils.readthedocs.io](https://duck-block-utils.readthedocs.io)
+
+    ## 4.0.0 moves the Pandoc converter out
+
+    Nine names and eleven overloads left this extension for
+    [duckdb_panduck](https://github.com/teaguesterling/duckdb_panduck), with no
+    alias path: `pandoc_ast_to_blocks`, `read_pandoc_ast`, `write_pandoc_ast`,
+    `duck_blocks_to_pandoc_ast`, `duck_blocks_to_pandoc_blocks`, `pandoc_ast`,
+    `pandoc_inlines_to_db_inlines`, `pandoc_inlines_to_text` and
+    `duck_blocks_inlines_to_pandoc`. This extension is utility macros over the
+    `duck_block` type; the Pandoc AST is panduck's subject.
+
+    **Upgrade both sides.** One extension must own each name, and `pandoc_ast`
+    has an identical signature in both, so loading 3.5.1 together with panduck
+    0.7.0 makes the second `LOAD` fail. Every other combination is fine.
+
+    No spec change: `duck_block_spec_version()` is unchanged at spec 1.4.
 
     ## 2.0.0 is a breaking rename
 
@@ -180,16 +196,16 @@ docs:
     |----------|-------------|
     | `duck_blocks_render_ansi(blocks, width)` | Terminal rendering with themes |
 
-    ## Pandoc integration
+    ## Pandoc integration moved to panduck in 4.0.0
 
-    Convert between Pandoc's JSON AST and `duck_block` without invoking Pandoc:
+    The Pandoc converter now lives in
+    [duckdb_panduck](https://github.com/teaguesterling/duckdb_panduck), under the
+    same names. `LOAD panduck;` and the call sites are unchanged.
 
-    | Function | Description |
-    |----------|-------------|
-    | `pandoc_ast_to_blocks(json)` | Parse a Pandoc AST |
-    | `duck_blocks_to_pandoc_ast(blocks)` | Emit a full Pandoc document |
-    | `duck_blocks_to_pandoc_blocks(blocks)` | Emit just the block list |
-    | `read_pandoc_ast(path)` / `write_pandoc_ast(path, blocks)` | Read and write AST files |
+    ```sql
+    LOAD panduck;
+    SELECT pandoc_ast_to_blocks(ast_json);
+    ```
 
     ## Ecosystem
 
@@ -214,8 +230,8 @@ docs:
 
 extension_star_count: 5
 extension_star_count_pretty: 5
-extension_download_count: 29828
-extension_download_count_pretty: 29.8k
+extension_download_count: 1331
+extension_download_count_pretty: 1.3k
 image: '/images/community_extensions/social_preview/preview_community_extension_duck_block_utils.png'
 layout: community_extension_doc
 ---
@@ -286,8 +302,7 @@ LOAD {{ page.extension.name }};
 | duck_block_list_block           | scalar        | NULL                                                                     | NULL    |                                                                                                                                              |
 | duck_block_list_item            | scalar        | NULL                                                                     | NULL    |                                                                                                                                              |
 | duck_block_math                 | scalar        | NULL                                                                     | NULL    |                                                                                                                                              |
-| duck_block_metadata             | scalar        | Build a document metadata block from YAML string (V2).                   | NULL    | [duck_block_metadata('title: Document
-author: Me')]                                                                                                                                |
+| duck_block_metadata             | scalar        | Build a document metadata block from YAML string (V2).                   | NULL    | [duck_block_metadata('title: Document<br>author: Me')]                                                                                       |
 | duck_block_note                 | scalar        | NULL                                                                     | NULL    |                                                                                                                                              |
 | duck_block_order                | scalar        | Get the element_order field of a duck_block struct.                      | NULL    | [duck_block_order(duck_block('paragraph', 'Hello'))]                                                                                         |
 | duck_block_paragraph            | scalar        | NULL                                                                     | NULL    |                                                                                                                                              |
@@ -329,7 +344,6 @@ author: Me')]                                                                   
 | duck_blocks_get_section_text    | macro         | NULL                                                                     | NULL    |                                                                                                                                              |
 | duck_blocks_headings            | scalar        | Extract heading blocks from a block list.                                | NULL    | [duck_blocks_headings(blocks)]                                                                                                               |
 | duck_blocks_headings_structs    | scalar        | Extract headings as list of structs.                                     | NULL    | [duck_blocks_headings_structs(blocks)]                                                                                                       |
-| duck_blocks_inlines_to_pandoc   | scalar        | NULL                                                                     | NULL    |                                                                                                                                              |
 | duck_blocks_links               | scalar        | Extract links from a block list.                                         | NULL    | [duck_blocks_links(blocks)]                                                                                                                  |
 | duck_blocks_links_structs       | scalar        | Extract links as list of structs.                                        | NULL    | [duck_blocks_links_structs(blocks)]                                                                                                          |
 | duck_blocks_lint                | scalar        | Lint a block list for structural style and issues.                       | NULL    | [duck_blocks_lint(blocks)]                                                                                                                   |
@@ -348,21 +362,13 @@ author: Me')]                                                                   
 | duck_blocks_stats               | scalar        | Compute summary statistics of elements in block list.                    | NULL    | [duck_blocks_stats(blocks)]                                                                                                                  |
 | duck_blocks_structure           | scalar        | Analyze structural composition of a block list.                          | NULL    | [duck_blocks_structure(blocks)]                                                                                                              |
 | duck_blocks_to_match_text       | macro         | NULL                                                                     | NULL    |                                                                                                                                              |
-| duck_blocks_to_pandoc_ast       | scalar        | Convert duck_blocks to complete Pandoc AST struct.                       | NULL    | [duck_blocks_to_pandoc_ast(blocks)]                                                                                                          |
-| duck_blocks_to_pandoc_blocks    | scalar        | Convert duck_blocks to Pandoc blocks JSON string.                        | NULL    | [duck_blocks_to_pandoc_blocks(blocks)]                                                                                                       |
 | duck_blocks_to_text             | scalar        | NULL                                                                     | NULL    |                                                                                                                                              |
 | duck_blocks_toc                 | scalar        | Extract table of contents as bullet list blocks.                         | NULL    | [duck_blocks_toc(blocks)]                                                                                                                    |
 | duck_blocks_toc_rows            | table_macro   | NULL                                                                     | NULL    |                                                                                                                                              |
 | duck_blocks_toc_structs         | scalar        | Extract table of contents as list of structs.                            | NULL    | [duck_blocks_toc_structs(blocks)]                                                                                                            |
 | duck_blocks_validate            | scalar        | Validate structural correctness of block list.                           | NULL    | [duck_blocks_validate(blocks)]                                                                                                               |
 | duck_blocks_version             | scalar        | Return the stamped spec version of a duck_blocks list.                   | NULL    | [duck_blocks_version(blocks)]                                                                                                                |
-| pandoc_ast                      | table         | Table function returning Pandoc AST rows.                                | NULL    | [SELECT * FROM pandoc_ast(blocks)]                                                                                                           |
-| pandoc_ast_to_blocks            | scalar        | Parse Pandoc AST JSON into duck_blocks.                                  | NULL    | [pandoc_ast_to_blocks('{"blocks":[]}')]                                                                                                      |
-| pandoc_inlines_to_db_inlines    | scalar        | Parse Pandoc inlines JSON into duck_blocks.                              | NULL    | [pandoc_inlines_to_db_inlines('[{"t":"Str","c":"hi"}]')]                                                                                     |
-| pandoc_inlines_to_text          | scalar        | NULL                                                                     | NULL    |                                                                                                                                              |
-| read_pandoc_ast                 | scalar        | Read Pandoc AST JSON file into duck_blocks.                              | NULL    | [read_pandoc_ast('document.json')]                                                                                                           |
 | to_duck_block                   | scalar        | Convert a compatible struct to a duck_block struct.                      | NULL    | [to_duck_block({'element_type': 'paragraph', 'content': 'Hello', 'level': 1, 'encoding': 'text', 'attributes': MAP {}, 'element_order': 1})] |
-| write_pandoc_ast                | scalar        | Write duck_blocks to file as Pandoc AST JSON.                            | NULL    | [write_pandoc_ast('out.json', blocks)]                                                                                                       |
 
 ### Overloaded Functions
 

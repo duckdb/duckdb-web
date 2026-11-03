@@ -8,7 +8,7 @@ excerpt: |
 extension:
   name: yaml
   description: Read YAML files into DuckDB with native YAML type support, comprehensive extraction functions, and seamless JSON interoperability
-  version: 1.9.2
+  version: 1.10.1
   language: C++
   build: cmake
   license: MIT
@@ -21,13 +21,13 @@ extension:
 repo:
   github: teaguesterling/duckdb_yaml
   andium: 0bdc812c064fa7b85617f75680d9c1177263f741
-  ref: 84f5de21e39eab9994c691d1ed06ade04d9e02df
+  ref: 4d9aaffb613d1e381087866414d25c329d7501a3
   # variegata pins the v1.5.6 track. scripts/build.py sends a v1.5.6 build here when
   # present and to `ref` otherwise, and unlike ref_next it has no skip branch -- so
   # once `ref` is 2.0-only a v1.5.6 build would fail rather than be skipped. Equal to
   # `ref` while both lines build; advance only to a commit v1.5.6 can still build.
-  variegata: 84f5de21e39eab9994c691d1ed06ade04d9e02df
-  ref_next: 84f5de21e39eab9994c691d1ed06ade04d9e02df
+  variegata: 4d9aaffb613d1e381087866414d25c329d7501a3
+  ref_next: 4d9aaffb613d1e381087866414d25c329d7501a3
 
 docs:
   hello_world: |
@@ -96,8 +96,8 @@ docs:
 
 extension_star_count: 23
 extension_star_count_pretty: 23
-extension_download_count: 55229
-extension_download_count_pretty: 55.2k
+extension_download_count: 27679
+extension_download_count_pretty: 27.7k
 image: '/images/community_extensions/social_preview/preview_community_extension_yaml.png'
 layout: community_extension_doc
 ---
@@ -142,10 +142,8 @@ LOAD {{ page.extension.name }};
 | ->>                          | scalar        | Extract a scalar value as VARCHAR from a YAML document at the specified path.                                 | NULL    | ['name: Alice' ->> '$.name']                                                                      |
 | copy_format_yaml             | scalar        | NULL                                                                                                          | NULL    |                                                                                                   |
 | format_yaml                  | scalar        | Format a SQL value as YAML with configurable style, multiline, and indentation options.                       | NULL    | [format_yaml({'name': 'Alice', 'hobbies': ['reading', 'gaming']}, style := 'block', indent := 4)] |
-| from_yaml                    | scalar        | Parse a YAML string or document into a structured DuckDB type.                                                | NULL    | [from_yaml('name: Alice
-age: 30', {'name': 'VARCHAR', 'age': 'INTEGER'})]                                                 |
-| parse_yaml                   | table         | Parse a YAML string into a table.                                                                             | NULL    | [SELECT * FROM parse_yaml('a: 1
-b: 2')]                                                                                           |
+| from_yaml                    | scalar        | Parse a YAML string or document into a structured DuckDB type.                                                | NULL    | [from_yaml('name: Alice<br>age: 30', {'name': 'VARCHAR', 'age': 'INTEGER'})]                      |
+| parse_yaml                   | table         | Parse a YAML string into a table.                                                                             | NULL    | [SELECT * FROM parse_yaml('a: 1<br>b: 2')]                                                        |
 | read_yaml                    | table         | Read YAML files into a tabular format.                                                                        | NULL    | [SELECT * FROM read_yaml('data.yaml')]                                                            |
 | read_yaml_frontmatter        | table         | Read YAML frontmatter from documents.                                                                         | NULL    | [SELECT * FROM read_yaml_frontmatter('doc.md')]                                                   |
 | read_yaml_objects            | table         | Read YAML files as structured YAML objects.                                                                   | NULL    | [SELECT * FROM read_yaml_objects('data.yaml')]                                                    |
@@ -156,10 +154,8 @@ b: 2')]                                                                         
 | yaml_array_elements          | table         | Unnest a YAML array into rows of YAML values.                                                                 | NULL    | [SELECT * FROM yaml_array_elements('[10, 20, 30]')]                                               |
 | yaml_array_length            | scalar        | Return the number of elements in a YAML array, optionally at a given path.                                    | NULL    | [yaml_array_length('[1, 2, 3]'), yaml_array_length('items: [a, b]', '$.items')]                   |
 | yaml_build_object            | scalar        | Construct a YAML mapping from alternating key and value arguments.                                            | NULL    | [yaml_build_object('name', 'Alice', 'age', 30)]                                                   |
-| yaml_contains                | scalar        | Check if target YAML document contains candidate YAML document.                                               | NULL    | [yaml_contains('a: 1
-b: 2', 'a: 1')]                                                                                   |
-| yaml_each                    | table         | Unnest a YAML mapping into key-value pairs.                                                                   | NULL    | [SELECT * FROM yaml_each('a: 1
-b: 2')]                                                                                           |
+| yaml_contains                | scalar        | Check if target YAML document contains candidate YAML document.                                               | NULL    | [yaml_contains('a: 1<br>b: 2', 'a: 1')]                                                           |
+| yaml_each                    | table         | Unnest a YAML mapping into key-value pairs.                                                                   | NULL    | [SELECT * FROM yaml_each('a: 1<br>b: 2')]                                                         |
 | yaml_exists                  | scalar        | Check if a path exists within a YAML document.                                                                | NULL    | [yaml_exists('a: 1', '$.a')]                                                                      |
 | yaml_extract                 | scalar        | Extract a YAML value from a YAML document at the specified path.                                              | NULL    | [yaml_extract('a: {b: 2}', '$.a.b')]                                                              |
 | yaml_extract_path            | scalar        | Extract a YAML value from a YAML document at the specified path (alias for yaml_extract).                     | NULL    | [yaml_extract_path('a: {b: 2}', '$.a.b')]                                                         |
@@ -169,19 +165,14 @@ b: 2')]                                                                         
 | yaml_get_max_expansion_nodes | scalar        | Get the maximum number of YAML nodes allowed during alias/anchor expansion.                                   | NULL    | [yaml_get_max_expansion_nodes()]                                                                  |
 | yaml_get_max_input_size      | scalar        | Get the maximum allowed byte size for a YAML document.                                                        | NULL    | [yaml_get_max_input_size()]                                                                       |
 | yaml_get_max_nesting_depth   | scalar        | Get the maximum allowed nesting depth for YAML parsing.                                                       | NULL    | [yaml_get_max_nesting_depth()]                                                                    |
-| yaml_keys                    | scalar        | Return the keys of a YAML mapping as a list of VARCHAR, optionally at a given path.                           | NULL    | [yaml_keys('a: 1
-b: 2'), yaml_keys('root: {x: 10, y: 20}', '$.root')]                                              |
-| yaml_merge_patch             | scalar        | Apply a JSON Merge Patch (RFC 7386) to a target YAML document.                                                | NULL    | [yaml_merge_patch('a: 1
-b: 2', 'a: 3
-c: 4')]                                                                                           |
+| yaml_keys                    | scalar        | Return the keys of a YAML mapping as a list of VARCHAR, optionally at a given path.                           | NULL    | [yaml_keys('a: 1<br>b: 2'), yaml_keys('root: {x: 10, y: 20}', '$.root')]                          |
+| yaml_merge_patch             | scalar        | Apply a JSON Merge Patch (RFC 7386) to a target YAML document.                                                | NULL    | [yaml_merge_patch('a: 1<br>b: 2', 'a: 3<br>c: 4')]                                                |
 | yaml_set_default_style       | scalar        | Set the default output style for YAML functions ('flow' or 'block').                                          | NULL    | [yaml_set_default_style('block')]                                                                 |
 | yaml_set_max_expansion_nodes | scalar        | Set the maximum number of YAML nodes created during alias/anchor expansion.                                   | NULL    | [yaml_set_max_expansion_nodes(100000)]                                                            |
 | yaml_set_max_input_size      | scalar        | Set the maximum allowed byte size for a YAML document.                                                        | NULL    | [yaml_set_max_input_size(10485760)]                                                               |
 | yaml_set_max_nesting_depth   | scalar        | Set the maximum allowed nesting depth for YAML parsing.                                                       | NULL    | [yaml_set_max_nesting_depth(1000)]                                                                |
-| yaml_structure               | scalar        | Return a JSON representation describing the structure and types of the YAML document.                         | NULL    | [yaml_structure('a: 1
-b: [2, 3]')]                                                                                      |
-| yaml_to_json                 | scalar        | Convert a YAML string or document to a JSON string.                                                           | NULL    | [yaml_to_json('name: Alice
-age: 30')]                                                                                        |
+| yaml_structure               | scalar        | Return a JSON representation describing the structure and types of the YAML document.                         | NULL    | [yaml_structure('a: 1<br>b: [2, 3]')]                                                             |
+| yaml_to_json                 | scalar        | Convert a YAML string or document to a JSON string.                                                           | NULL    | [yaml_to_json('name: Alice<br>age: 30')]                                                          |
 | yaml_type                    | scalar        | Return the YAML type of the input value or at a given path ('null', 'scalar', 'array', 'object').             | NULL    | [yaml_type('[1, 2, 3]'), yaml_type('a: 1', '$.a')]                                                |
 | yaml_valid                   | scalar        | Return true if the input string is valid YAML, false otherwise.                                               | NULL    | [yaml_valid('name: Alice')]                                                                       |
 | yaml_value                   | scalar        | Extract a scalar value only as VARCHAR from a YAML document, returning NULL for non-scalars.                  | NULL    | [yaml_value('a: 1', '$.a')]                                                                       |

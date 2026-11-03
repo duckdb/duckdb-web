@@ -96,7 +96,7 @@ It is a common data cleaning problem to disambiguate such observations, which ma
 The conversion between strings *without* UTC offsets or IANA time zone names and `WITHOUT TIME ZONE` types is unambiguous and straightforward.
 The conversion between strings *with* UTC offsets or time zone names and `WITH TIME ZONE` types is also unambiguous, but requires the `ICU` extension to handle time zone names.
 
-When strings *without* UTC offsets or time zone names are converted to a `WITH TIME ZONE` type, the string is interpreted in the configured time zone. 
+When strings *without* UTC offsets or time zone names are converted to a `WITH TIME ZONE` type, the string is interpreted in the configured time zone.
 When strings with UTC offsets are passed to a `WITHOUT TIME ZONE` type, the offsets or time zone specifications are ignored.
 Starting with DuckDB 2.0, time zone names in strings passed to a `WITHOUT TIME ZONE` type are also ignored (in earlier versions, names other than `UTC` raised an error).
 

@@ -53,7 +53,7 @@ Another attractive feature of DuckDB is that it offers an interactive shell, whi
 ## Data Processing with Unix Tools and DuckDB
 
 In the following, we give examples for implementing simple data processing tasks using the CLI tools provided in most Unix shells and using DuckDB SQL queries.
-We use DuckDB v1.0.0 and run it in [in-memory mode]({% link docs/2.0/connect/overview.md %}#in-memory-database).
+We use DuckDB 1.0.0 and run it in [in-memory mode]({% link docs/2.0/connect/overview.md %}#in-memory-database).
 This mode makes sense for the problems we are tackling, as we do not create any tables and the operations are not memory-intensive, so there is no data to persist or to spill on disk.
 
 ### Datasets

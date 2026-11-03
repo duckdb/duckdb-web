@@ -308,6 +308,11 @@ $(document).ready(function(){
 
 	$drillNav.on('click', '.sidenav > .hasSub > a.nav-row', function(e) {
 		if ($navRoot.hasClass('is-drilled') || e.ctrlKey || e.metaKey || e.shiftKey || e.altKey || e.button !== 0) return;
+		if (window.matchMedia('(max-width: 900px)').matches) {
+			e.preventDefault();
+			enterDrill($(this).parent());
+			return;
+		}
 		try { sessionStorage.setItem(navMotionKey, new URL(this.href).pathname); } catch (e) {}
 	});
 
@@ -324,11 +329,14 @@ $(document).ready(function(){
 		$item.parent('.nav-list').toggleClass('is-drilled', open);
 	}
 
-	$drillNav.on('click', '.nav-drill', function() {
-		const $item = $(this).parent();
+	function enterDrill($item) {
 		setDrill($item, true);
 		$drillNav.add($drillNav.children('.sidenav')).scrollTop(0);
 		$item.find('> .nav-list > .nav-back > button').trigger('focus');
+	}
+
+	$drillNav.on('click', '.nav-drill', function() {
+		enterDrill($(this).parent());
 	});
 
 	$drillNav.on('click', '.nav-back button', function() {

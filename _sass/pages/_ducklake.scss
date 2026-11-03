@@ -19,7 +19,7 @@
 
 main h1,
 h1{
-	@include display-2();
+	@include display-1();
 }
 
 /*
@@ -330,14 +330,14 @@ body.landing{
 		}
 	}
 	h1{
-		@include display-2();
+		@include display-1();
 	}
 	h2{
-		@include display-3();
+		@include display-2();
 		text-align: left;
 	}
 	h3{
-		@include display-3();
+		@include display-2();
 	}
 	
 	h2 + div{
@@ -466,7 +466,7 @@ section.architecture {
 				height: 0;
 			}
 			li{
-				@include label-1;
+				@include label;
 				padding: 13px 17px;
 				border-radius: var(--page-radius-pill);
 				color: var(--interactive-filter-unselected-text-color, #666);
@@ -499,7 +499,7 @@ section.architecture {
 			position: relative;
 
 			h4 {
-				@include label-1;
+				@include label;
 				margin: 0;
 			}
 		}
@@ -728,7 +728,7 @@ section.architecture {
 			padding-bottom: 8px;
 			padding-left: 3px;
 			h4{
-				@include label-1;
+				@include label;
 				margin: 0;
 			}
 		}

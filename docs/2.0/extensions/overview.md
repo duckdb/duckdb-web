@@ -38,6 +38,19 @@ The list includes most, but not all, available core extensions. For the full lis
 
 > Tip We provide an endpoint that serves weekly extension download statistics as JSON files: [core extensions](https://extensions.duckdb.org/downloads-last-week.json) and [community extensions](https://community-extensions.duckdb.org/downloads-last-week.json).
 
+For example, to return the 20 most downloaded core extensions in the last week, run:
+
+```sql
+UNPIVOT (
+    SELECT * EXCLUDE _last_update
+    FROM 'https://extensions.duckdb.org/downloads-last-week.json'
+)
+ON COLUMNS(*)
+INTO NAME extension VALUE downloads_last_week
+ORDER BY downloads_last_week DESC
+LIMIT 20;
+```
+
 ## Built-In Extensions
 
 DuckDB's binary distribution comes standard with a few built-in extensions. They are statically linked into the binary and can be used as is.

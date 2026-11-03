@@ -11,7 +11,7 @@ max_page_width: large
 <section class="quack-hero">
 	<div class="wrap">
 		<div class="hero-content">
-			<h1 class="display-2">Quack: Turn DuckDB<br>into a client-server database</h1>
+			<h1 class="display-1">Quack: Turn DuckDB<br>into a client-server database</h1>
 			<p class="hero-subtitle">
 				The Quack protocol unlocks multi-client access for DuckDB,<br>
 				turning it into a general-purpose database system
@@ -290,13 +290,11 @@ CREATE TABLE hello AS
 				<p class="pre-title step-label">Step 3</p>
 				<h3>Connect from the client</h3>
 {% highlight sql %}
-CREATE SECRET (
-    TYPE quack,
+CONNECT 'quack:localhost' (
     TOKEN 'super_secret'
 );
 
-ATTACH 'quack:localhost' AS remote;
-FROM remote.hello;
+FROM hello;
 {% endhighlight %}
 			</div>
 		</div>

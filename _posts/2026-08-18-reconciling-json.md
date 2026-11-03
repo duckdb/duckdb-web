@@ -6,13 +6,13 @@ authors:
   - Mustafa Khan
 thumb: "/images/blog/thumbs/json.svg"
 image: "/images/blog/thumbs/json.png"
-excerpt: "DuckDB v2.0 will ship JSON functions that allow you to easily apply JSON patches."
+excerpt: "DuckDB 2.0 will ship JSON functions that allow you to easily apply JSON patches."
 tag: extensions
 ---
 
 > Guest blog post by [Mustafa Khan](https://www.linkedin.com/in/mustafahasankhan/) ([Atlan](https://atlan.com/)).
 
-DuckDB's JSON extension already covers reading JSON, extracting paths, applying RFC 7396 merge patches, and the usual scalar accessors. The [upcoming v2.0]({% post_url 2026-08-17-duckdb-20-highlights %}) release will extend it with four new scalar functions: `json_merge_patch_diff` computes the inverse of an RFC 7396 merge patch, `json_deep_merge` applies patches with skip-on-`null` semantics, `json_normalize` canonicalizes key order, and `json_strip_nulls` recursively removes `null`-valued keys. You can try these primitives today by installing the [preview version of DuckDB v2.0-dev]({% link install/preview.md %}).
+DuckDB's JSON extension already covers reading JSON, extracting paths, applying RFC 7396 merge patches, and the usual scalar accessors. The [upcoming v2.0]({% post_url 2026-08-17-duckdb-20-highlights %}) release will extend it with four new scalar functions: `json_merge_patch_diff` computes the inverse of an RFC 7396 merge patch, `json_deep_merge` applies patches with skip-on-`null` semantics, `json_normalize` canonicalizes key order, and `json_strip_nulls` recursively removes `null`-valued keys. You can try these primitives today by installing the [preview version of DuckDB 2.0-dev]({% link install/preview.md %}).
 
 These primitives address a handful of recurring problems in data pipelines that reconcile state between systems. The examples in this post come from [Atlan](https://atlan.com/). Atlan is a _context layer_ for AI: a platform that gathers metadata, lineage, and semantics from a company's data systems so that data teams and AI agents can find and understand the data. Keeping that layer up to date means constantly reconciling entity documents from many upstream sources. Two upstream services may describe the same entity with different key orderings. Partial updates may carry `null` in a field to indicate either deletion or absence of data. Most events change only one or two fields out of dozens. Handling these cases in SQL previously required leaving the database. The four new functions allow you to perform the work in a single query.
 
@@ -331,7 +331,7 @@ There are a few characteristics worth pointing out:
 
 ## Trying the Functions
 
-The four functions will ship in DuckDB v2.0. To try them today, install [a v2.0-dev preview build]({% link install/preview.md %}), then load the JSON extension:
+The four functions will ship in DuckDB 2.0. To try them today, install [a v2.0-dev preview build]({% link install/preview.md %}), then load the JSON extension:
 
 ```sql
 LOAD json;
@@ -343,6 +343,6 @@ SELECT json_normalize('{"z":1,"a":2}');
 
 These four functions extend the DuckDB JSON extension with primitives for diffing, merging, normalizing, and stripping `null` values. They compose into reconciliation pipelines that previously required transformations outside SQL.
 
-That's not all. The functions `json_set(json, path, value)`, `json_remove`, `json_insert`, and `json_replace` are also available in DuckDB v2.0 preview ([#23786](https://github.com/duckdb/duckdb/pull/23786)), completing the set of edit primitives defined in the SQL/JSON specification. For the implementations, see the JSON extension source in [`extension/json`](https://github.com/duckdb/duckdb/tree/main/extension/json).
+That's not all. The functions `json_set(json, path, value)`, `json_remove`, `json_insert`, and `json_replace` are also available in DuckDB 2.0 preview ([#23786](https://github.com/duckdb/duckdb/pull/23786)), completing the set of edit primitives defined in the SQL/JSON specification. For the implementations, see the JSON extension source in [`extension/json`](https://github.com/duckdb/duckdb/tree/main/extension/json).
 
 Feedback and bug reports are welcome on [Discord](https://discord.duckdb.org) or [GitHub](https://github.com/duckdb/duckdb).

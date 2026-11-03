@@ -97,7 +97,7 @@ body.about{
 		.section-text{
 			margin-bottom: var(--page-element-spacing-large, 50px);
 			h1{
-				@include display-2;
+				@include display-1;
 				margin: 0 0 12px;
 			}
 			p{
@@ -114,7 +114,7 @@ body.about{
 		.section-text{
 			margin-bottom: var(--page-element-spacing-large, 50px);
 			h1{
-				@include display-2;
+				@include display-1;
 				margin: 0;
 			}
 		}
@@ -128,7 +128,7 @@ body.about{
 		padding: 105px 15px;
 
 		h1{
-			@include display-2;
+			@include display-1;
 			margin: 0 0 50px;
 		}
 

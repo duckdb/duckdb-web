@@ -202,7 +202,7 @@ body.landing{
 						align-items: flex-start;
 				border-radius: var(--page-radius-pill);
 				li {
-					@include label-1;
+					@include label;
 					border-radius: var(--page-radius-pill);
 					padding: 12px 16px;
 					margin-right: -4px;
@@ -371,7 +371,7 @@ body.landing{
 	
 	/** STYLE SELECT BOX ANYWAYS – SO IT IS COLORED DIRECTLY **/
 	select {
-	 @include label-1();
+	 @include label();
 	  -webkit-appearance: none;
 		 -moz-appearance: none;
 			  appearance: none;
@@ -455,7 +455,7 @@ body.landing{
 		position: relative;
 		color: black;
 		min-width: $select-width;
-		@include label-1();
+		@include label();
 	}
 	
 	.select-styled {
@@ -476,7 +476,7 @@ body.landing{
 		z-index: 710;
 		word-break: keep-all;
 		> span{
-			@include label-1();
+			@include label();
 			color: inherit;
 			line-height: 1;
 		}
@@ -607,7 +607,7 @@ body.landing{
 	}
 
 	.ecosystem-diagram .ecosystem-header h2{
-		font-size: var(--type-display-3, 36px);
+		font-size: var(--type-display-2, 34px);
 	}
 
 	section.bento{
@@ -656,8 +656,8 @@ body.landing{
 					display: block;
 				}
 				h3{
-					@include title-1;
-					margin: 0 0 12px;
+					@include headline-4;
+					margin: 0 0 8px;
 					color: var(--main-text-primary-color-strong, #050505);
 				}
 				p{
@@ -670,7 +670,7 @@ body.landing{
 				display: inline-flex;
 				align-items: center;
 				gap: 7px;
-				font-size: var(--type-label-1, 14px);
+				font-size: var(--type-body-small, 13px);
 				font-weight: var(--type-weight-standard, 450);
 				line-height: 1;
 				color: var(--main-text-secondary-color, #666);
@@ -1059,7 +1059,7 @@ body.landing{
 				border: 0;
 				padding: 0 4px;
 				.system span{
-					@include tiny;
+					@include meta;
 				}
 			}
 		}
@@ -1140,7 +1140,7 @@ body.landing{
 		}
 	
 		.number {
-			@include display-2;
+			@include display-1;
 		}
 	
 		.info {
@@ -1154,10 +1154,10 @@ body.landing{
 	}
 	
 	.numbersbox-reference {
+		@include meta;
 		width: 100%;
 		margin-top: 16px;
 		text-align: right;
-		font-size: var(--type-tiny, 12px);
 		color: var(--main-text-tertiary-color, #B2B2B2);
 	
 		a {

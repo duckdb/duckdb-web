@@ -15,8 +15,8 @@ In the article [Analyzing Railway Traffic in the Netherlands]({% post_url 2024-0
 
 Using the above open data, in this post we will build an application, in which a user can:
 
-- Understand the railway traffic data;  
-- Visualize the railway network traffic in 2024, by using Plotly;  
+- Understand the railway traffic data;
+- Visualize the railway network traffic in 2024, by using Plotly;
 - Visualize the five closest train stations on any point selected on the map, by using the Streamlit Folium component.
 
 The application will be developed with [Streamlit](https://streamlit.io/), an open source framework in which one can implement data applications easily with Python. The application code is available on [GitHub](https://github.com/duckdb/duckdb-blog-examples/tree/main/duckdb_streamlit).
@@ -26,7 +26,7 @@ The application will be developed with [Streamlit](https://streamlit.io/), an op
 To load the railway traffic data, we write a function, which creates the two tables we will be working with, `services` and `stations`:
 
 ```python
-def prepare_duckdb(duckdb_conn):  
+def prepare_duckdb(duckdb_conn):
 
     duckdb_conn.sql("""
         create table if not exists services as
@@ -41,15 +41,15 @@ def prepare_duckdb(duckdb_conn):
 
 From a Streamlit application there are three ways to connect to DuckDB:
 
-- In-memory connection;  
-- Persisted local file connection;  
+- In-memory connection;
+- Persisted local file connection;
 - Attaching an external database.
 
 ### In-Memory Connection
 
 Connecting to an in-memory database involves loading the data into memory, whenever a DuckDB connection is established. Depending on the resources of the application server and the amount of data, creating a new in-memory DuckDB connection and loading the required data on every request will slow down the application. In Streamlit this behavior is addressed by [caching the resource](https://docs.streamlit.io/develop/concepts/architecture/caching#stcache_resource), which can be done as:
 
-- caching the DuckDB connection as a global shared connection in the application;  
+- caching the DuckDB connection as a global shared connection in the application;
 - caching the DuckDB connection for the user session.
 
 ```python
@@ -65,14 +65,14 @@ def get_duckdb_memory(session_id):
     duckdb_conn = duckdb.connect()
     prepare_duckdb(duckdb_conn=duckdb_conn)
 
-    return duckdb_conn  
+    return duckdb_conn
 ```
 
 ### Persisted Local File Connection
 
 A DuckDB connection can be established against a persisted database file on the server of the application. The database file can be created:
 
-- during the deployment, before the application starts;  
+- during the deployment, before the application starts;
 - a standalone process, which creates the database and copies it to the application server. Depending on the freshness requirement of the application, one might schedule a process to refresh the data.
 
 ```python
@@ -97,9 +97,9 @@ More details about attaching an external database can be found in the [DuckDB do
 
 ### Considerations
 
-1. DuckDB works best if you have allocated 1-4GB of memory per thread, therefore configure the appropriate resources when deploying the Streamlit application.  
-2. The recommendation is to use a new connection for each database interaction or at least one at user session level, and not a global connection at application level. Using a global connection might result in unexpected behaviour, depending on the number of users using the application at the same time.  
-3. When using a persisted local database, take into account that when there is a database connection established no other process can write to it. One workaround is to have a process which creates and replaces the database file on the server.  
+1. DuckDB works best if you have allocated 1-4GB of memory per thread, therefore configure the appropriate resources when deploying the Streamlit application.
+2. The recommendation is to use a new connection for each database interaction or at least one at user session level, and not a global connection at application level. Using a global connection might result in unexpected behaviour, depending on the number of users using the application at the same time.
+3. When using a persisted local database, take into account that when there is a database connection established no other process can write to it. One workaround is to have a process which creates and replaces the database file on the server.
 4. When using an attached database, take into account that the application can have a performance impact depending on the storage solution chosen.
 
 Starting from this point, we will work with the external database.
@@ -135,7 +135,7 @@ bringing the above code together in a function.
 
 ```python
 def get_stations_services_query(duckdb_conn):
-    
+
     # create a relation for the station selection
     stations_selection = ...
 
@@ -164,9 +164,9 @@ When we run `get_stations_services_query(get_duckdb_conn())`, there is yet no da
 
 The query will be executed when one of the following methods is encountered:
 
-- `stations_query.df()` to extract to a Pandas dataframe;  
-- `stations_query.fetchall()` to extract in a list;  
-- `stations_query.write_to()` to export the data in a file;  
+- `stations_query.df()` to extract to a Pandas dataframe;
+- `stations_query.fetchall()` to extract in a list;
+- `stations_query.write_to()` to export the data in a file;
 - any other calculation method, such as `.sum`, `.row_number` etc. The relational methods can be found in the [DuckDB documentation]({% link docs/2.0/clients/python/reference/index.md %}).
 
 <div align="center" style="margin:10px">
@@ -370,4 +370,4 @@ The code of implementing interactive maps with Folium in Streamlit is available 
 
 ## Conclusion
 
-In this post, we illustrated how DuckDB can be used in Streamlit, how the Python relational API can make our code cleaner by chaining queries, and how to implement interactive maps with Plotly and Folium, while leveraging the Streamlit caching mechanism.  
+In this post, we illustrated how DuckDB can be used in Streamlit, how the Python relational API can make our code cleaner by chaining queries, and how to implement interactive maps with Plotly and Folium, while leveraging the Streamlit caching mechanism.

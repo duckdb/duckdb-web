@@ -9,7 +9,7 @@ excerpt: "After four years, we've decided to redesign DuckDB's sort implementati
 tag: deep-dive
 ---
 
-[DuckDB v1.4.0 was just released]({% post_url 2025-09-16-announcing-duckdb-140 %}), which includes a complete redesign of DuckDB's sort implementation.
+[DuckDB 1.4.0 was just released]({% post_url 2025-09-16-announcing-duckdb-140 %}), which includes a complete redesign of DuckDB's sort implementation.
 We [redesigned DuckDB's sort just four years ago]({% post_url 2021-08-27-external-sorting %}), which allowed DuckDB to sort more data than fits in main memory, in parallel, with highly efficient comparisons.
 This implementation served us well, but since then we've implemented larger-than-memory query processing for more operators, such as the [hash join](https://github.com/duckdb/duckdb/pull/4189) and [hash aggregation](https://github.com/duckdb/duckdb/pull/7931), which both use a new and improved [spillable page layout](https://github.com/duckdb/duckdb/pull/6998). We presented this layout in an [earlier blog post]({% post_url 2024-03-29-external-aggregation %}).
 We decided to integrate this layout in DuckDB's sort, and [completely redesigned the implementation](https://github.com/duckdb/duckdb/pull/17584).
@@ -29,7 +29,7 @@ In DuckDB's implementation of this framework, blocking operators, i.e., _operato
 For many decades, the preferred option to implement larger-than-memory sorting in database systems has been to [generate multiple sorted runs, followed by a merge sort](https://dl.acm.org/doi/abs/10.1145/1132960.1132964).
 Specifically, a [_k_-way merge sort](https://en.wikipedia.org/wiki/K-way_merge_algorithm) produces the lowest amount of I/O during larger-than-memory sorting, which is critical to performance.
 This approach maps well to Morsel-Driven Parallelism: DuckDB performs thread-local sorting in the _Sink_ phase, followed by a parallel merge sort in the _Finalize_ or _GetData_ phase.
-Both have been redesigned for DuckDB v1.4.0.
+Both have been redesigned for DuckDB 1.4.0.
 We first discuss the new thread-local sort implementation before presenting the new merge design.
 
 ## Thread-Local Sorting
