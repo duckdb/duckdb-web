@@ -365,7 +365,7 @@ webbed,teaguesterling/duckdb_webbed,18c22232ebdb387014f4e024c5e41a2326358c88,"Co
 webdavfs,midwork-finds-jobs/duckdb-webdavfs,a32c98ef9dd21b00b24990d71c4493273f60ae14,"Allows reading and writing files over WebDAV protocol"
 webmacro,quackscience/duckdb-extension-webmacro,a9694a967c289aa62f2fadf4e3c82d9d2391dca9,"Load DuckDB Macros from the web"
 whisper,tobilg/duckdb-whisper,ea3e28cec89677e0940806297af7bf37a43228d0,"Speech-to-text transcription using whisper.cpp, OpenAI's Whisper model"
-yaml,teaguesterling/duckdb_yaml,9fe514bd392e6d39ef2fb4ee045056c1e16fab4a,"Read YAML files into DuckDB with native YAML type support, comprehensive extraction functions, and seamless JSON interoperability"
+yaml,teaguesterling/duckdb_yaml,4d9aaffb613d1e381087866414d25c329d7501a3,"Read YAML files into DuckDB with native YAML type support, comprehensive extraction functions, and seamless JSON interoperability"
 yardstick,sidequery/yardstick,6b5e9ead9dd69ee1f79323407c2469d5f1619481,"Measure-aware SQL implementing Julian Hyde's 'Measures in SQL' paper"
 yorc,mgbilby/yorc-duckdb,bf20534dedcc291003d0b092077b87aa77a37853,"Cultivate your research identity and networks: read and convert ORCID v3.0 researcher records, XML and JSON (API documents and the ORCID Public Data File dumps), as tables. An independent open-source project, not affiliated with, endorsed by or sponsored by ORCID, Inc.; no access to the ORCID Sandbox or the ORCID Member API, and no requests to ORCID."
 zarr,xqlsystems/duckdb-zarr,473cb3b203ff0c2f7f330bc6a4c0cbe4ed5c6474,"Query Zarr array stores (v2 and v3) with SQL — read xarray-convention datasets as tables"
