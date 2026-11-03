@@ -38,7 +38,7 @@ If you contribute to an open-source community or provide a product within the Mo
     * [Dagster's example project](https://github.com/dagster-io/dagster/blob/master/examples/project_fully_featured/README.md) uses DuckDB for this already!
     * Reach out on the DuckDB [Twitter](https://twitter.com/duckdb?s=20&t=yBKUNLGHVZGEj1jL-P_PsQ), [GitHub](https://github.com/duckdb/duckdb/discussions), or [Discord](https://discord.com/invite/tcvwpjfnZx), or the [dbt slack](https://www.getdbt.com/community/join-the-community/) to share an example using your tool with the community!
 
-## Trade-offs
+## Trade-Offs
 
 One key component of the MDS is the unlimited scalability of compute. How does that align with the MDS-in-a-box approach? Today, cloud computing instances can vertically scale significantly more than in the past (for example, [224 cores and 24 TB of RAM on AWS](https://aws.amazon.com/ec2/instance-types/high-memory/)!). Laptops are more powerful than ever. Now that new OLAP tools like DuckDB can take better advantage of that compute, horizontal scaling is no longer necessary for many analyses! Also, this MDS-in-a-box can be duplicated with ease to as many boxes as needed if partitioned by data subject area. So, while infinite compute is sacrificed, significant scale is still easily achievable.
 
@@ -96,7 +96,7 @@ Next is the transformer: '[dbt-duckdb](https://github.com/jwills/dbt-duckdb)'. d
       path: /tmp/mdsbox.db
 ```
 
-Lastly, [Apache Superset](https://superset.apache.org/) is included as a [Meltano utility](https://hub.meltano.com/utilities/superset/) to enable some data querying and visualization. Superset leverages DuckDB's SQLAlchemy driver, [duckdb_engine](https://github.com/Mause/duckdb_engine), so it can query DuckDB directly as well. 
+Lastly, [Apache Superset](https://superset.apache.org/) is included as a [Meltano utility](https://hub.meltano.com/utilities/superset/) to enable some data querying and visualization. Superset leverages DuckDB's SQLAlchemy driver, [duckdb_engine](https://github.com/Mause/duckdb_engine), so it can query DuckDB directly as well.
 
 ```yaml
   utilities:
@@ -147,7 +147,7 @@ The ecosystem around DuckDB has grown such that it integrates well with the Mode
 
 ## Next Steps
 
-There are additional directions to take this project. One next step could be to Dockerize this workflow for even easier deployments. If you want to put together a Docker example, please reach out! Another adjustment to the approach could be to land the final outputs in Parquet files, and to read them with in-memory DuckDB connections. Those files could even be landed in an S3-compatible object store (and still read by DuckDB), although that adds complexity compared with the in-a-box approach! Additional MDS components could also be integrated for data quality monitoring, lineage tracking, etc. 
+There are additional directions to take this project. One next step could be to Dockerize this workflow for even easier deployments. If you want to put together a Docker example, please reach out! Another adjustment to the approach could be to land the final outputs in Parquet files, and to read them with in-memory DuckDB connections. Those files could even be landed in an S3-compatible object store (and still read by DuckDB), although that adds complexity compared with the in-a-box approach! Additional MDS components could also be integrated for data quality monitoring, lineage tracking, etc.
 
 Josh Wills is also in the process of making [an interesting enhancement to dbt-duckdb](https://github.com/jwills/dbt-duckdb/pull/22)! Using the [sqlglot](https://github.com/tobymao/sqlglot) library, dbt-duckdb would be able to automatically transpile dbt models written using the SQL dialect of other databases (including Snowflake and BigQuery) to DuckDB. Imagine if you could test out your queries locally before pushing to production... Join the DuckDB channel of the [dbt slack](https://www.getdbt.com/community/join-the-community/) to discuss the possibilities!
 

@@ -9,7 +9,7 @@ excerpt: "The DuckDB team is happy to announce that today we're releasing DuckDB
 tag: release
 ---
 
-> To install the new version, please visit the [installation guide]({% link install/index.html %}). Note that it can take a few hours to days to release some client libraries (e.g., Go, R, Java) and extensions (e.g., the UI) due to the extra changes and review rounds required.
+> To install the new version, please visit the [installation guide]({% link docs/2.0/installation.html %}). Note that it can take a few hours to days to release some client libraries (e.g., Go, R, Java) and extensions (e.g., the UI) due to the extra changes and review rounds required.
 
 We are proud to release DuckDB 1.3.0. This release of DuckDB is named “Ossivalis” after Bucephala Ossivalis, an ancestor of the [Goldeneye duck](https://en.wikipedia.org/wiki/Common_goldeneye) that lived millions of years ago.
 
@@ -21,12 +21,12 @@ In this blog post, we cover the most important features of the new release. Duck
 
 Now that all mainstream Linux distributions use [glibc 2.28](https://lists.gnu.org/archive/html/info-gnu/2018-08/msg00000.html) or newer, DuckDB's official Linux binaries require at least glibc 2.28 or newer. The release is [built using the `manylinux_2_28` image from Python](https://github.com/duckdb/duckdb/pull/16956), which combines an older glibc with a newer compiler. This change also implies that extensions are no longer distributed for the `linux_amd64_gcc4` platform.
 
-We highly value [portability]({% link why_duckdb.md %}#portable), so it is of course still possible to [build DuckDB from source]({% link docs/current/dev/building/overview.md %}) for older versions of glibc.
+We highly value [portability]({% link why_duckdb.md %}#portable), so it is of course still possible to [build DuckDB from source]({% link docs/2.0/dev/building/overview.md %}) for older versions of glibc.
 
 ### Lambda Function Syntax
 
 Previously, lambda functions in DuckDB could be specified using the single arrow syntax: `x -> x + 1`.
-The single arrow operator is also used by the JSON extension to express [JSON extraction]({% link docs/current/data/json/json_functions.md %}#json-extraction-functions) using the syntax `->'field'`.
+The single arrow operator is also used by the JSON extension to express [JSON extraction]({% link docs/2.0/data/json/json_functions.md %}#json-extraction-functions) using the syntax `->'field'`.
 The two meanings of the single arrow operator are treated the same by the binder, thus they share the same (low) precedence, necessitating extra parentheses in JSON expression with equality checks:
 
 ```sql
@@ -48,12 +48,12 @@ To make the transition smoother, the deprecation will happen in several steps ov
 First, DuckDB 1.3.0 [introduces a new setting to configure the lambda syntax](https://github.com/duckdb/duckdb/pull/17235):
 
 ```sql
-SET lambda_syntax = 'DEFAULT';
-SET lambda_syntax = 'ENABLE_SINGLE_ARROW';
-SET lambda_syntax = 'DISABLE_SINGLE_ARROW';
+SET lambda_syntax = 'default';
+SET lambda_syntax = 'enable_single_arrow';
+SET lambda_syntax = 'disable_single_arrow';
 ```
 
-Currently, `DEFAULT` enables both syntax styles, i.e., the old single arrow syntax and the Python-style syntax.
+Currently, `default` enables both syntax styles, i.e., the old single arrow syntax and the Python-style syntax.
 We will gradually phase out the old syntax.
 DuckDB 1.5.0 will be the last release supporting the single arrow syntax without explicitly enabling it.
 Following versions will first disable the single arrow syntax by default,
@@ -71,7 +71,7 @@ SELECT ['hello ''my'' world'] AS s;
 
 DuckDB version 1.2.2 returns `[hello 'my' world]` while DuckDB 1.3.0 returns `['hello \'my\' world']`.
 
-To serialize a list of strings with the old behavior, use the [`array_to_string` function]({% link docs/current/sql/functions/list.md %}#array_to_string):
+To serialize a list of strings with the old behavior, use the [`array_to_string` function]({% link docs/2.0/sql/functions/list.md %}#array_to_string):
 
 ```sql
 SELECT printf('[%s]', array_to_string(
@@ -137,7 +137,7 @@ SET enable_external_file_cache = false;
 
 ### Directly Query Data Files with the CLI
 
-DuckDB's command line interface (CLI) gained the capability to [directly query Parquet, CSV or JSON files](https://github.com/duckdb/duckdb/pull/17415). This works by just using e.g. a Parquet file instead of the database file. This will expose a view that can be queried. For example, say we have a Parquet file called `region.parquet`, this will work:
+DuckDB's command line interface (CLI) gained the capability to [directly query Parquet, CSV, or JSON files](https://github.com/duckdb/duckdb/pull/17415). This works by just using e.g. a Parquet file instead of the database file. This will expose a view that can be queried. For example, say we have a Parquet file called `region.parquet`, this will work:
 
 ```batch
 duckdb region.parquet -c 'FROM region;'
@@ -167,7 +167,7 @@ The main advantage of this feature is usability: we can use the regular shell to
 
 ### `TRY` Expression
 
-DuckDB already supported [`TRY_CAST`]({% link docs/current/sql/expressions/cast.md %}#TRY_CAST), which was trying to cast a value but did not fail the query if this was not possible. For example:
+DuckDB already supported [`TRY_CAST`]({% link docs/2.0/sql/expressions/cast.md %}#TRY_CAST), which was trying to cast a value but did not fail the query if this was not possible. For example:
 
 ```sql
 SELECT TRY_CAST('asdf' AS INTEGER);
@@ -209,7 +209,7 @@ ALTER TABLE test RENAME COLUMN s.j TO l;
 
 Altering structs is also supported [inside `LIST` and `MAP` columns](https://github.com/duckdb/duckdb/pull/17462).
 
-### Swapping in New Databases
+### Swapping In New Databases
 
 The [`ATTACH OR REPLACE` clause](https://github.com/duckdb/duckdb/pull/15355) allows you to replace a database,
 so you can swap a database on the fly.
@@ -226,7 +226,7 @@ This feature was implemented by external contributor [`xevix`](https://github.co
 ### UUID v7 Support
 
 > Warning **Update (2025-05-23).**
-> The [UUID v7 implementation in DuckDB v1.3.0 is not consistent with the UUID standard](https://github.com/duckdb/duckdb/issues/17611), causing the timestamp values to be off.
+> The [UUID v7 implementation in DuckDB 1.3.0 is not consistent with the UUID standard](https://github.com/duckdb/duckdb/issues/17611), causing the timestamp values to be off.
 > This means that the timestamps in the generated UUID v7 values will only be correct if they are used exclusively within DuckDB.
 > Importing or exporting UUID v7 values from/to systems will yield incorrect timestamps.
 > We [patched this bug](https://github.com/duckdb/duckdb/pull/17612) and the fix will soon be available in the preview builds and the [upcoming 1.3.1 patch release]({% link release_calendar.md %}#upcoming-releases).
@@ -299,7 +299,7 @@ MY_SECRET=asdf duckdb -c \
 
 ### Unpacking Columns
 
-DuckDB v1.3.0 brings a further boost to the popular [`COLUMNS(*)` expression]({% link docs/current/sql/expressions/star.md %}#columns-expression).
+DuckDB 1.3.0 brings a further boost to the popular [`COLUMNS(*)` expression]({% link docs/2.0/sql/expressions/star.md %}#columns-expression).
 Previously, _unpacking_ the entities into a list was possible by adding a leading `*` character:
 
 ```sql
@@ -350,13 +350,13 @@ SELECT [a::VARCHAR, b::VARCHAR] AS col_exp FROM tbl;
 
 ### Spatial `JOIN` Operator
 
-We added a new specialized join operator as part of the [`spatial` extension]({% link docs/current/core_extensions/spatial/overview.md %}), which greatly improves the efficiency of _spatial joins_, that is, queries that `JOIN` two geometry columns using specific spatial predicate functions, such as `ST_Intersects` and `ST_Contains`.
+We added a new specialized join operator as part of the [`spatial` extension]({% link docs/2.0/core_extensions/spatial/overview.md %}), which greatly improves the efficiency of _spatial joins_, that is, queries that `JOIN` two geometry columns using specific spatial predicate functions, such as `ST_Intersects` and `ST_Contains`.
 
 Similarly to a `HASH_JOIN`, the `SPATIAL_JOIN` builds a temporary lookup data-structure for the smaller side of the join, except it's an R-Tree, instead of a hash table. What this means for you is that you don't need to create an index first, or do any other pre-processing to optimize your spatial joins. It's all handled by the join operator internally.
 
-While the query optimizer will try to instantiate this new operator for `LEFT`, `OUTER`, `INNER` and `RIGHT` spatial joins, one limitation currently is that the join can only contain a single join condition, or the optimizer will fall back to use a less efficient join strategy.
+While the query optimizer will try to instantiate this new operator for `LEFT`, `OUTER`, `INNER`, and `RIGHT` spatial joins, one limitation currently is that the join can only contain a single join condition, or the optimizer will fall back to use a less efficient join strategy.
 
-The following example illustrates how the `SPATIAL_JOIN` operator becomes part of the query plan. It's a relatively small query, but on my machine it executes almost 100× faster than it used to do in DuckDB v1.2.2!
+The following example illustrates how the `SPATIAL_JOIN` operator becomes part of the query plan. It's a relatively small query, but on my machine it executes almost 100× faster than it used to do in DuckDB 1.2.2!
 
 ```sql
 LOAD spatial;

@@ -13,3 +13,5 @@ category: core
 
 The iPhone 17 Pro can DuckDB with DuckLake – even when submerged in water.
 See more details in the [Compass AI & Data Summit 2025 slide deck](https://blobs.duckdb.org/slides/compass-ai-data-summit-duckdb-unplugged-gabor-szarnyas.pdf#page=75).
+
+> Update For a similar experiment, see George Fraser's [TPC-H SF200 experiments]({% link _everywhere/iphone-17-pro-vs-databricks.md %}).

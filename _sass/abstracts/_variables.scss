@@ -221,6 +221,8 @@ $docuh5: 18px;
   --yellow-transparent-98: #fffff599;
 
   // LIGHT MODE
+  --border-color: var(--grey-transparent-85);
+  --element-background-color: var(--grey-transparent-85);
   --cli-background: #f7f7f7;
   --cli-bar: #f1f1f1;
   --cli-error: #d70000;
@@ -285,8 +287,8 @@ $docuh5: 18px;
   --interactive-button-purple-text-hover: var(--purple-70);
   --interactive-button-white-background-color-hover: var(--grey-10);
   --interactive-constant: #b82476;
-  --interactive-filter-selected-background-color: var(--grey-90);
-  --interactive-filter-selected-background-color-hover: var(--grey-80);
+  --interactive-filter-selected-background-color: var(--element-background-color);
+  --interactive-filter-selected-background-color-hover: var(--element-background-color);
   --interactive-filter-selected-text-color: var(--grey-10);
   --interactive-filter-unselected-text-color: var(--grey-40);
   --interactive-filter-unselected-text-color-hover: var(--grey-05);
@@ -304,7 +306,7 @@ $docuh5: 18px;
   --interactive-installation-icon-background: var(--grey-transparent-90);
   --interactive-installation-icon-background-selected: #f1e65e99;
   --interactive-installation-icon-border: var(--grey-80);
-  --interactive-table-row-hover: var(--grey-95);
+  --interactive-table-row-hover: var(--element-background-color);
   --labs-nav-icon: var(--orange-40);
   --labs-nav-icon-hover: var(--orange-50);
   --lake-animated-column-background-gradient-start: var(--blue-85);
@@ -449,6 +451,8 @@ $docuh5: 18px;
 
 // DARK MODE 
 html.darkmode {
+  --border-color: var(--grey-transparent-20);
+  --element-background-color: var(--grey-transparent-20);
   --cli-background: #141414;
   --cli-bar: #464646;
   --cli-error: #ff6a6a;
@@ -513,8 +517,8 @@ html.darkmode {
   --interactive-button-purple-text-hover: var(--purple-80);
   --interactive-button-white-background-color-hover: var(--grey-90);
   --interactive-constant: #ec3b9d;
-  --interactive-filter-selected-background-color: var(--grey-15);
-  --interactive-filter-selected-background-color-hover: var(--grey-20);
+  --interactive-filter-selected-background-color: var(--element-background-color);
+  --interactive-filter-selected-background-color-hover: var(--element-background-color);
   --interactive-filter-selected-text-color: var(--grey-90);
   --interactive-filter-unselected-text-color: var(--grey-70);
   --interactive-filter-unselected-text-color-hover: var(--grey-95);
@@ -532,7 +536,7 @@ html.darkmode {
   --interactive-installation-icon-background: var(--grey-transparent-20);
   --interactive-installation-icon-background-selected: var(--yellow-transparent-20);
   --interactive-installation-icon-border: var(--grey-transparent-30);
-  --interactive-table-row-hover: var(--grey-10);
+  --interactive-table-row-hover: var(--element-background-color);
   --labs-nav-icon: var(--orange-40);
   --labs-nav-icon-hover: var(--orange-50);
   --lake-animated-column-background-gradient-start: var(--blue-20);
@@ -714,25 +718,24 @@ html.darkmode {
   --type-label-2: 12px;
   --type-pre-title: 12px;
   --type-tiny: 12px;
+  --type-meta: 12px;
   --type-side-menu: 13px;
-  --type-body-small: 14px;
+  --type-body-small: 13px;
   --type-code: 14px;
-  --type-label-1: 14px;
+  --type-label: 14px;
   --type-menu-items-m: 14px;
   --type-menu-items-l: 14.5px;
   --type-body-docs: 15px;
-  --type-body-normal: 16px;
+  --type-body-normal: 15px;
   --type-code-large: 16px;
-  --type-title-3: 16px;
-  --type-title-2: 17px;
-  --type-body-large: 18px;
-  --type-title-1: 20px;
-  --type-headline-3: 24px;
-  --type-headline-2: 28px;
-  --type-display-3: 34px;
-  --type-headline-1: 34px;
-  --type-display-2: 44px;
-  --type-display-1: 56px;
+  --type-body-large: 22.5px;
+  --type-headline-5: 13px;
+  --type-headline-4: 15px;
+  --type-headline-3: 18px;
+  --type-headline-2: 22.5px;
+  --type-headline-1: 26px;
+  --type-display-2: 34px;
+  --type-display-1: 44px;
 }
 
 // MOBILE SIZES
@@ -772,7 +775,8 @@ html.darkmode {
     --type-label-3: 10px;
     --type-label-2: 11px;
     --type-tiny: 11px;
-    --type-label-1: 13px;
+    --type-meta: 11px;
+    --type-label: 13px;
     --type-pre-title: 12px;
     --type-body-small: 13px;
     --type-code: 13px;
@@ -781,16 +785,12 @@ html.darkmode {
     --type-menu-items-l: 14px;
     --type-menu-items-m: 14px;
     --type-code-large: 15px;
-    --type-title-3: 15px;
-    --type-body-normal: 16px;
-    --type-title-2: 16px;
-    --type-body-large: 17px;
-    --type-title-1: 18px;
-    --type-headline-3: 20px;
-    --type-headline-2: 22px;
-    --type-display-3: 26px;
+    --type-body-normal: 15px;
+    --type-body-large: 18px;
+    --type-headline-3: 18px;
+    --type-headline-2: 20px;
     --type-headline-1: 26px;
-    --type-display-2: 30px;
-    --type-display-1: 36px;
+    --type-display-2: 26px;
+    --type-display-1: 30px;
   }
 }

@@ -3,7 +3,7 @@ layout: docu
 title: Internal Errors
 ---
 
-Internal errors signal an assertion failure within DuckDB. They usually occur due to unexpected conditions or errors in the program's logic. 
+Internal errors signal an assertion failure within DuckDB. They usually occur due to unexpected conditions or errors in the program's logic.
 
 After encountering an internal error, DuckDB enters safe mode where any further operations will result in the following error message:
 

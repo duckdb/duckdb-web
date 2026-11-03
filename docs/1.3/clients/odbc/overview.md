@@ -4,7 +4,7 @@ layout: docu
 title: ODBC API Overview
 ---
 
-> The latest version of the DuckDB ODBC client is {{ site.current_duckdb_odbc_short_version }}.
+> The latest version of the DuckDB ODBC client is {{ site.maintained_duckdb_odbc_short_version }}.
 
 The ODBC (Open Database Connectivity) is a C-style API that provides access to different flavors of Database Management Systems (DBMSs).
 The ODBC API consists of the Driver Manager (DM) and the ODBC drivers.
@@ -20,4 +20,4 @@ The DM maps user application calls of ODBC functions to the correct ODBC driver 
 
 DuckDB supports the ODBC version 3.0 according to the [Core Interface Conformance](https://docs.microsoft.com/en-us/sql/odbc/reference/develop-app/core-interface-conformance?view=sql-server-ver15).
 
-The ODBC driver is available for all operating systems. Visit the [installation page]({% link install/index.html %}) for direct links.
+The ODBC driver is available for all operating systems. Visit the [installation page]({% link docs/2.0/installation.html %}) for direct links.

@@ -6,14 +6,14 @@ authors:
 tag: deep-dive
 thumb: "/images/blog/thumbs/spatial-joins.svg"
 image: "/images/blog/thumbs/spatial-joins.png"
-excerpt: "DuckDB v1.3.0 significantly improved the scalability of geospatial joins with a dedicated `SPATIAL_JOIN` operator."
+excerpt: "DuckDB 1.3.0 significantly improved the scalability of geospatial joins with a dedicated `SPATIAL_JOIN` operator."
 ---
 
 ## Introduction
 
 Spatial joins are join operations that match rows based on the (geo-)spatial relationship between column(s). In practice they are often used to answer questions like “which of these points are within which of these polygons?”. Being able to connect datasets based on the **physical location(s)** they model is fundamental to the whole field of geospatial data science, but at a high level, also an extremely powerful way to correlate and enrich otherwise disparate data sources, anchor insights to the real world, and more often than not tell a great story with your analysis.
 
-Ever since its inception, DuckDB's `spatial` extension has provided a `GEOMETRY` column type to represent locations, regions and shapes, along with plenty of _spatial predicate_ functions to use when `JOIN`ing. However, it wasn't until recently in [DuckDB v1.3.0]({% post_url 2025-05-21-announcing-duckdb-130 %}) that spatial joins really became _scalable_ thanks to the introduction of the dedicated `SPATIAL_JOIN` query **operator**.
+Ever since its inception, DuckDB's `spatial` extension has provided a `GEOMETRY` column type to represent locations, regions, and shapes, along with plenty of _spatial predicate_ functions to use when `JOIN`ing. However, it wasn't until recently in [DuckDB 1.3.0]({% post_url 2025-05-21-announcing-duckdb-130 %}) that spatial joins really became _scalable_ thanks to the introduction of the dedicated `SPATIAL_JOIN` query **operator**.
 
 We managed to hastily sneak in some information about this new operator towards [the end of the v1.3.0 release notes]({% post_url 2025-05-21-announcing-duckdb-130 %}#spatial-join-operator), but we figured we got enough to talk about to justify a separate blog post. So in this post, we will take a closer look at some of the challenges involved in optimizing spatial joins, and how the new `SPATIAL_JOIN` operator addresses them to achieve new levels of efficiency.
 
@@ -191,12 +191,12 @@ To leverage this, we made the following changes to `spatial`:
     * `PIECEWISE_MERGE_JOIN`, a “IE” (inequality) range-join operator joining on the intersection of the bounding boxes, written as a series of `BETWEEN` clauses on the min/max values of the bounding boxes
     * `FILTER` operator that filters the resulting rows on the actual spatial predicate function.
 
-To show how this affects the query plan, we're going to go [back in time]({% link release_calendar.md %}#past-releases) and use DuckDB **v1.2.0** (which does contain the `PIECEWISE_MERGE_JOIN` optimization, but **not** the `SPATIAL_JOIN` operator) to re-run the query from above.
+To show how this affects the query plan, we're going to go [back in time]({% link release_calendar.md %}#past-releases) and use DuckDB **1.2.0** (which does contain the `PIECEWISE_MERGE_JOIN` optimization, but **not** the `SPATIAL_JOIN` operator) to re-run the query from above.
 
 ```sql
 LOAD spatial; -- Load the spatial extension
 
--- Check that we are using DuckDB v1.2.0
+-- Check that we are using DuckDB 1.2.0
 PRAGMA version;
 ```
 
@@ -303,7 +303,7 @@ DuckDB has since optimized sorting considerably, and `spatial` and its functions
 
 To quickly recap how an [r-tree](https://en.wikipedia.org/wiki/R-tree) works, it is a balanced tree data structure where internal nodes contain bounding boxes that cover the bounding boxes of their child nodes, and leaf nodes contain a bounding box for the geometry and a pointer to the row in the table they correspond to. This makes it possible to quickly look up all geometries that intersect a given bounding box by traversing the tree from the top down, only following branches that intersect the search box.
 
-One of the motivations for implementing the [`RTREE` index]({% link docs/current/core_extensions/spatial/r-tree_indexes.md %}) in the `spatial` extension last year, was to eventually be able to replace `PIECEWISE_MERGE_JOIN` optimization with an index-based join strategy. However, after implementing the `RTREE`, we realized that creating an R-tree based index on top of existing data is actually surprisingly fast. Instead of requiring the user to always have to load data into a table and then index it just to accelerate their spatial joins, what if we just create a temporary R-tree index on-the-fly when executing the join? Kind of like how we create a temporary hash table when performing a `HASH_JOIN`.
+One of the motivations for implementing the [`RTREE` index]({% link docs/2.0/core_extensions/spatial/r-tree_indexes.md %}) in the `spatial` extension last year, was to eventually be able to replace `PIECEWISE_MERGE_JOIN` optimization with an index-based join strategy. However, after implementing the `RTREE`, we realized that creating an R-tree based index on top of existing data is actually surprisingly fast. Instead of requiring the user to always have to load data into a table and then index it just to accelerate their spatial joins, what if we just create a temporary R-tree index on-the-fly when executing the join? Kind of like how we create a temporary hash table when performing a `HASH_JOIN`.
 
 ### Joining with R-Trees
 
@@ -314,11 +314,11 @@ While being a lot more complex to implement compared to the `PIECEWISE_MERGE_JOI
 * The query re-write rule is much simpler, we just have to detect a nested loop join with a spatial predicate and replace it with a `SPATIAL_JOIN` operator. No other modifications to the query plan are needed.
 * Only the smaller side input needs to be materialized and (sorted to construct the R-tree). The left side can be streamed in parallel, and matching rows can be emitted immediately as they are found.
 * The hierarchical structure of the R-tree allows us to prune more of the right side input more accurately
-* Since all logic is in one operator, we don't need to rely on a separate `FILTER` operator and can therefore support `LEFT`, `RIGHT` and `FULL OUTER` joins as well as `INNER` joins.
+* Since all logic is in one operator, we don't need to rely on a separate `FILTER` operator and can therefore support `LEFT`, `RIGHT`, and `FULL OUTER` joins as well as `INNER` joins.
 
 ### Experiment
 
-Just to show what this plan looks like, this is what you get when you run the same query but on DuckDB v1.3.0 or later with the `SPATIAL_JOIN` operator enabled:
+Just to show what this plan looks like, this is what you get when you run the same query but on DuckDB 1.3.0 or later with the `SPATIAL_JOIN` operator enabled:
 
 ```sql
 LOAD spatial; -- Load the spatial extension
@@ -375,7 +375,7 @@ Result of EXPLAIN
 
 </details>
 
-Nice, we're back to a single join condition again. So how does this perform? We already saw in the first example that DuckDB v1.3.2 was able to execute the original query in about 30 seconds using the `SPATIAL_JOIN` operator, but here are the precise results for all the different sizes and join strategies for comparison. All queries were run on the same Apple MacBook M3 Pro with 36 GB of memory and timings averaged over 3 runs:
+Nice, we're back to a single join condition again. So how does this perform? We already saw in the first example that DuckDB 1.3.2 was able to execute the original query in about 30 seconds using the `SPATIAL_JOIN` operator, but here are the precise results for all the different sizes and join strategies for comparison. All queries were run on the same Apple MacBook M3 Pro with 36 GB of memory and timings averaged over 3 runs:
 
 | Number of rows in `rides` | Nested loop join | Piecewise merge join | Spatial join |
 | ------------------------: | ---------------: | -------------------: | -----------: |
@@ -385,7 +385,7 @@ Nice, we're back to a single join condition again. So how does this perform? We 
 
 The `SPATIAL_JOIN` operator is able to execute the full 58 million row dataset faster than the original naive nested loop join could execute the 1 million row dataset. That's a 58× improvement!
 
-## Limitations and Future work
+## Limitations and Future Work
 
 Even though we've made a lot of improvements, spatial joins in DuckDB are not quite perfect just yet. Like always, there's plenty more to do, and we have a few ideas for how to improve the `SPATIAL_JOIN` operator even further.
 
@@ -395,7 +395,7 @@ The current implementation of the `SPATIAL_JOIN` operator buffers the entire rig
 
 ### Increased Parallelism
 
-DuckDB's execution engine dynamically adjusts the number of threads used in a query based on the number of rows scanned, but since the spatial predicates are so expensive to evaluate, we could potentially benefit from more parallelism as the spatial joins are mostly CPU bound. In particular, we are considering buffering and partitioning the left side of the join as well, which would allow us to spawn our own worker tasks within the operator to evaluate the join condition across a number of threads decoupled from the cardinality of the input. This would increase memory usage and prevent the join from being streamed, but we've been able to employ a similar technique when constructing the [`HNSW` (Hierarchical Navigable Small Worlds) index over in the `vss` extension]({% link docs/current/core_extensions/vss.md %}) to great effect.
+DuckDB's execution engine dynamically adjusts the number of threads used in a query based on the number of rows scanned, but since the spatial predicates are so expensive to evaluate, we could potentially benefit from more parallelism as the spatial joins are mostly CPU bound. In particular, we are considering buffering and partitioning the left side of the join as well, which would allow us to spawn our own worker tasks within the operator to evaluate the join condition across a number of threads decoupled from the cardinality of the input. This would increase memory usage and prevent the join from being streamed, but we've been able to employ a similar technique when constructing the [`HNSW` (Hierarchical Navigable Small Worlds) index over in the `vss` extension]({% link docs/2.0/core_extensions/vss.md %}) to great effect.
 
 ### Faster Predicate Functions
 
@@ -424,9 +424,9 @@ The `SPATIAL_JOIN` operator currently only supports the case where the join cond
 
 ### `ANTI` / `SEMI` Joins
 
-The `SPATIAL_JOIN` operator currently only supports `INNER`, `LEFT`, `RIGHT` and `FULL OUTER` joins. We plan to add support for `ANTI` and `SEMI` joins in the future.
+The `SPATIAL_JOIN` operator currently only supports `INNER`, `LEFT`, `RIGHT`, and `FULL OUTER` joins. We plan to add support for `ANTI` and `SEMI` joins in the future.
 
 ## Conclusion
 
-Spatial joins are a powerful way to connect and enrich datasets based on their geospatial relationship. DuckDB's `spatial` extension provides a wide assortment of spatial predicate functions that can be used to perform spatial joins in SQL. While the performance of spatial joins has been challenging to deal with in the past due to the complexity of the spatial predicates and the limitations of the join strategies, the new `SPATIAL_JOIN` operator introduced in DuckDB v1.3.0 significantly raises the efficiency and scalability of these workloads, making spatial joins a first-class citizen in DuckDB's execution engine.
+Spatial joins are a powerful way to connect and enrich datasets based on their geospatial relationship. DuckDB's `spatial` extension provides a wide assortment of spatial predicate functions that can be used to perform spatial joins in SQL. While the performance of spatial joins has been challenging to deal with in the past due to the complexity of the spatial predicates and the limitations of the join strategies, the new `SPATIAL_JOIN` operator introduced in DuckDB 1.3.0 significantly raises the efficiency and scalability of these workloads, making spatial joins a first-class citizen in DuckDB's execution engine.
 

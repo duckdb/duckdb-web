@@ -4,7 +4,7 @@ title: "DuckDB on LoongArch"
 authors:
   - Hannes Mühleisen
 thumb: "/images/blog/thumbs/morefine-m700s.svg"
-image: "/images/blog/thumbs/morefine-m700s.jpg"
+image: "/images/blog/thumbs/morefine-m700s.png"
 excerpt: "In today's “What's on your desk?” episode, we test a Loongson CPU with the LoongArch architecture."
 tag: benchmark
 ---
@@ -17,11 +17,11 @@ The M700S contains a Loongson CPU. Also called “LoongArch” or “Godson” p
 
 It is probably safe to assume that – given the ongoing trade shenanigans – the Loongson will become much more popular in China as time goes on. DuckDB already sees quite a lot of usage from China, so naturally we want to make sure that DuckDB runs well on the Loongson. Thankfully, one of our community members has already opened a [pull request](https://github.com/duckdb/duckdb/pull/19962) with two minimal changes to allow DuckDB to compile. We became curious.
 
-We purchased the M700S on (where else?) [AliExpress](https://nl.aliexpress.com/item/1005008047862187.html?spm=a2g0o.order_list.order_list_main.5.685479d21SDmQG&gatewayAdapt=glo2nld) for around 500 EUR. Besides the Loongson 8-core 3A6000 CPU it contains 16 GB of main memory and a 256 GB solid-state disk. 
+We purchased the M700S on (where else?) [AliExpress](https://nl.aliexpress.com/item/1005008047862187.html?spm=a2g0o.order_list.order_list_main.5.685479d21SDmQG&gatewayAdapt=glo2nld) for around 500 EUR. Besides the Loongson 8-core 3A6000 CPU it contains 16 GB of main memory and a 256 GB solid-state disk.
 
 <img src="{% link images/blog/loongarch/morefine-aliexpress-listing.png %}" width="800" />
 
-Once plugged in and booted up, things feel pretty normal besides the loud fan that seems to be always on. On the screen, a variant of Debian called [Loongnix](https://www.loongson.cn/EN/system/loongnix) boots up. The GUI seems to be KDE-based and comes with a custom browser “LBrowser” which is a fork of Chromium. Just because it was not obvious we document it here: the default `root` password is `M700S`. There is also a user account `m700s` with the same password. 
+Once plugged in and booted up, things feel pretty normal besides the loud fan that seems to be always on. On the screen, a variant of Debian called [Loongnix](https://www.loongson.cn/EN/system/loongnix) boots up. The GUI seems to be KDE-based and comes with a custom browser “LBrowser” which is a fork of Chromium. Just because it was not obvious we document it here: the default `root` password is `M700S`. There is also a user account `m700s` with the same password.
 
 <img src="{% link images/blog/loongarch/loongnix.jpg %}" width="800" />
 
@@ -222,4 +222,4 @@ It is always exciting to get DuckDB running on a new platform. Of course, we hav
 
 Of course, there are many opportunities for improvement. For starters, the `gcc` toolchain on LoongArch is likely not as advanced by far compared with its x86/ARM counterpart, so advances there could make a big difference. The same applies of course to IO performance, which we have not measured separately. But hey, the “glass half full” department could also rightfully claim that the Loongson CPU can complete TPC-H SF300!
 
-One could also argue that a MacBook Pro is much more expensive than 500 EUR MOREFINE. However, a recent M4 Mac Mini with the same memory and storage specs will cost around 700 EUR, not that much more all things considered. It will run circles around the MOREFINE. And it will not constantly annoy you with its fan. 
+One could also argue that a MacBook Pro is much more expensive than 500 EUR MOREFINE. However, a recent M4 Mac Mini with the same memory and storage specs will cost around 700 EUR, not that much more all things considered. It will run circles around the MOREFINE. And it will not constantly annoy you with its fan.

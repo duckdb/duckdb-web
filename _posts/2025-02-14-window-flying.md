@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Flying Through Windows"
+title: "Flying through Windows"
 authors:
   - Richard Wesley
 thumb: "/images/blog/thumbs/window-functions-2.svg"
@@ -46,7 +46,7 @@ The chart below shows the speedups achieved by the vectorization improvements:
 Once segment trees were vectorized,
 we could use the same approach when implementing `DISTINCT` aggregates with merge sort trees.
 It may be worth updating the custom window API to handle vectorization at some point,
-because although most custom window aggregates are quite slow (e.g., `quantile`, `mad` and `mode`),
+because although most custom window aggregates are quite slow (e.g., `quantile`, `mad`, and `mode`),
 `count(*)` is also implemented as a custom aggregate and would likely benefit from a vectorized implementation.
 
 ## Constant Aggregation
@@ -93,7 +93,7 @@ and hand each group off to a separate _physical_ window operator that handles th
 In order to use the “natural order” we have to group those functions that can be streamed and execute them first
 (or the order will have been destroyed!) and hand them off to the _streaming_ physical window operator.
 
-So which [window functions]({% link docs/current/sql/functions/window_functions.md %}) can we stream?
+So which [window functions]({% link docs/2.0/sql/functions/window_functions.md %}) can we stream?
 It turns out there are quite a few:
 
 * Aggregates `BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW` (we just update the aggregate)
@@ -106,7 +106,7 @@ It turns out there are quite a few:
 
 There are a few more restrictions:
 
-* `IGNORE NULLS`, `EXCLUDE` and `ORDER BY` arguments are not allowed
+* `IGNORE NULLS`, `EXCLUDE`, and `ORDER BY` arguments are not allowed
 * `lead` and `lag` distances are restricted to a constant within ±2048 (one vector). this is not really a big deal because the distance is usually 1.
 
 The improvements for streaming `LEAD` were quite dramatic:
@@ -114,7 +114,7 @@ The improvements for streaming `LEAD` were quite dramatic:
 ```sql
 SELECT setseed(0.8675309);
 CREATE OR REPLACE TABLE df AS
-    SELECT 
+    SELECT
         random() AS a,
         random() AS b,
         random() AS c,
@@ -233,7 +233,7 @@ This not only reduces memory, but in this example we will also reduce disk pagin
 because all three functions will be accessing the same values.
 
 There are a number of places where we are sharing expressions, including `ORDER BY` arguments,
-`range` expressions and “value” functions like `lead`, `lag` and `nth_value`,
+`range` expressions and “value” functions like `lead`, `lag`, and `nth_value`,
 and we are always on the lookout for more (such as frame boundaries – or even segment trees).
 
 ## Future Work

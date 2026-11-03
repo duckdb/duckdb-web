@@ -1,11 +1,11 @@
 ---
 layout: post
-title: "Catching up with Windowing"
+title: "Catching Up with Windowing"
 authors:
   - Richard Wesley
 thumb: "/images/blog/thumbs/window-functions-1.svg"
 image: "/images/blog/thumbs/window-functions-1.png"
-excerpt: "DuckDB implements a number of modern windowing features, some of which are extensions to the SQL standard. This posts presents a few of these features, including GROUPS framing, QUALIFY and aggregate/function modifiers."
+excerpt: "DuckDB implements a number of modern windowing features, some of which are extensions to the SQL standard. This posts presents a few of these features, including GROUPS framing, QUALIFY, and aggregate/function modifiers."
 tag: using-duckdb
 ---
 
@@ -27,7 +27,7 @@ DuckDB has had support for window functions since the early days,
 but if they are new to you, you might want to start with my earlier blog posts
 on [Windowing in DuckDB]({% post_url 2021-10-13-windowing %})
 and [Fast Moving Holistic Aggregates]({% post_url 2021-11-12-moving-holistic %}),
-or just the [window function documentation]({% link docs/current/sql/functions/window_functions.md %}).
+or just the [window function documentation]({% link docs/2.0/sql/functions/window_functions.md %}).
 In this post, I will start by introducing the more recent functionality additions.
 In a follow-up post, I will spelunk into the internals to talk about some performance and scaling improvements.
 
@@ -93,7 +93,7 @@ There are four options for `EXCLUDE` that specify how to treat the current row:
 * `TIES` – exclude all peer rows, but _not_ the current row (this makes a hole on either side)
 * `NO OTHERS` – don't exclude anything (the default)
 
-Exclusion is implemented for both windowed aggregates and for the `first`, `last` and `nth_value` functions.
+Exclusion is implemented for both windowed aggregates and for the `first`, `last`, and `nth_value` functions.
 
 ## `QUALIFY` Clause
 
@@ -144,7 +144,7 @@ QUALIFY row_number() OVER w = 3;
 
 ## Aggregate Modifiers
 
-There are several modifiers for ordinary aggregate functions (`FILTER`, `DISTINCT` and `ORDER BY` as an argument)
+There are several modifiers for ordinary aggregate functions (`FILTER`, `DISTINCT`, and `ORDER BY` as an argument)
 that are not part of the SQL:2003 standard for windowing, but which are also useful in a windowing context.
 `FILTER` is pretty straightforward (and DuckDB has supported it for a while)
 but the others are not easy to implement efficiently.
@@ -236,7 +236,7 @@ but it is at odds with traditional unordered query processing.
 Nevertheless, since 2003 the SQL language has provided syntax for expressing a wide range of such queries.
 In recent years, the community has also considered further extensions to the language
 (such as `QUALIFY` and argument modifiers like `DISTINCT` and `ORDER BY`) to improve expressivity.
-Here at DuckDB we love providing this kind of expressiveness as part of our [“friendly SQL”]({% link docs/current/sql/dialect/friendly_sql.md %}) work.
+Here at DuckDB we love providing this kind of expressiveness as part of our [“friendly SQL”]({% link docs/2.0/sql/dialect/friendly_sql.md %}) work.
 What may  be less obvious is that when we enable users to express their problem more naturally,
 it helps us provide more performant solutions!
 In my next post, I will go deeper into recent improvements in windowing's performance and resource utilization.
