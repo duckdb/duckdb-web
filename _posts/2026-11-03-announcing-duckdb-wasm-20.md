@@ -53,7 +53,7 @@ DuckDB-Wasm uses [Apache Arrow](https://arrow.apache.org/) for both data import 
 
 The result is a smaller download and a simpler build, with no change to the data protocol on the JavaScript side. Your code keeps exchanging `apache-arrow` tables exactly as before. As in earlier releases, pin your `apache-arrow` install to the major version DuckDB-Wasm depends on (currently `^17`), because a newer major version can cause Arrow inserts to fail. See [Import Data]({% link docs/2.0/clients/wasm/data_ingestion.md %}#apache-arrow).
 
-## Larger-Than-Memory Queries
+## Larger-than-Memory Queries
 
 WebAssembly [limits a module to 4 GB of memory](https://v8.dev/blog/4gb-wasm-memory), and browsers may impose stricter limits, so queries that native DuckDB handles comfortably could run out of memory in the browser. DuckDB-Wasm 2.0 spills intermediate data that does not fit in memory to a temporary directory, so many larger-than-memory queries that previously failed now complete.
 
