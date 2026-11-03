@@ -2,7 +2,9 @@
 layout: post
 title: "How JetBrains Built Cross-Database Queries into DataGrip with DuckDB"
 authors:
-  - Ilia Epelbaum in conversation with Geertjan Wielenga and Tim Cox
+  - Ilia Epelbaum
+  - Geertjan Wielenga
+  - Tim Cox
 thumb: "/images/blog/thumbs/datagrip.svg"
 image: "/images/blog/thumbs/datagrip.png"
 excerpt: "JetBrains users had long asked to join data across different database connections in a single query. Rather than build its own cross-database query engine, JetBrains embedded DuckDB in DataGrip, using DuckDB's custom table functions to connect it to the IDE's existing query execution. This is why DuckDB won out over the alternatives, and where the integration goes next."
