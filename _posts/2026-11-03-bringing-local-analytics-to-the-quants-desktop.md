@@ -9,9 +9,12 @@ excerpt: "After years building kdb+-based data platforms for banks and hedge fun
 tag: using-duckdb
 ---
 
-> Quote I like the simplicity of just a small thing running and working. And then you can get more complex.
+> Quote
 >
-> -- Ryan Hamilton, founder, [TimeStored](https://www.timestored.com/)
+> I like the simplicity of just a small thing running and working. And then you can get more complex.
+>
+> — Ryan Hamilton, founder, [TimeStored](https://www.timestored.com/)
+{: .quote-large}
 
 ## Fifteen Years of Heavyweight Infrastructure
 
