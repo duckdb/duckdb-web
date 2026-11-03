@@ -123,6 +123,8 @@ PARTITIONED BY (region);
 INSERT INTO events VALUES (1, 'eu');
 ```
 
+A partition key matches its column in any case, and the column's own spelling is recorded; this also holds for `CREATE TABLE ... AS SELECT` and for `COPY`'s `PARTITION_BY`.
+
 Only `CREATE TABLE` needs the full `events.events` name: without the database name, it creates the table in the default database.
 
 The table can be read and written without attaching it again.
@@ -142,6 +144,61 @@ WITH ('delta.enableDeletionVectors' = 'true', 'delta.appendOnly' = 'true');
 Properties that enable a Delta feature, such as deletion vectors, also upgrade the table's protocol as needed. Values can be any constant expression except `NULL`. Some properties cannot be set at creation, such as `'delta.enableVariantShredding'`.
 
 To create a table with [column mapping](#column-mapping), set `'delta.columnMapping.mode'` to `'name'` or `'id'`.
+
+### Creating Tables from a Query
+
+> New This feature was introduced in DuckDB 2.0.1.
+
+To create a Delta table from a query, attach its location and use `CREATE TABLE ... AS SELECT`:
+
+```sql
+ATTACH 's3://⟨my_bucket⟩/⟨path⟩' AS sales (TYPE delta);
+CREATE TABLE sales.sales PARTITIONED BY (region)
+WITH ('delta.columnMapping.mode' = 'name') AS
+    SELECT * FROM read_parquet('sales/*.parquet');
+```
+
+The column names and types are the query's. `PARTITIONED BY` and `WITH` work as for [`CREATE TABLE`](#creating-tables), column mapping in `name` and `id` mode included, with nested columns too.
+
+To write a query's result as a new Delta table without attaching it, use `COPY` with `FORMAT delta`, then read the table with `delta_scan` or `ATTACH`:
+
+```sql
+COPY (SELECT * FROM read_parquet('sales/*.parquet'))
+TO 's3://⟨my_bucket⟩/⟨other_path⟩' (FORMAT delta, PARTITION_BY (region));
+SELECT count(*) FROM delta_scan('s3://⟨my_bucket⟩/⟨other_path⟩');
+```
+
+`COPY` takes table properties in `WITH_PROPERTIES`, a struct or a map whose keys keep their case. A known `delta.` property can also be given as an option of its own, in double quotes:
+
+```sql
+COPY (SELECT 1 AS id, 'x' AS name) TO 'audit_copy' (FORMAT delta,
+    WITH_PROPERTIES {'delta.appendOnly': 'true', 'owner': 'data-team'});
+COPY (SELECT 1 AS id) TO 'mapped_copy' (FORMAT delta, "delta.columnMapping.mode" 'id');
+```
+
+A `delta.` key must name a known Delta property. In `WITH` and in `WITH_PROPERTIES`, it must be spelled with its exact case: `'delta.columnmapping.mode'` fails and suggests `'delta.columnMapping.mode'`. As a `COPY` option of its own, its case does not matter, since DuckDB lowercases option names: it is stored under the property's own spelling. A key outside `delta.` is stored as given. A property can be given only once, either as an option or in `WITH_PROPERTIES`. In `WITH_PROPERTIES`, `'location'` must name the `COPY` target and `'path'` is refused, as in `CREATE TABLE`.
+
+Both statements write the new table in a single commit: version 0 holds the table's protocol and metadata together with every data file, with file statistics, as Spark writes it. If the statement fails before it commits, for example because the query fails partway through, it creates no table and removes the files it wrote, on a best-effort basis. An empty query result creates an empty table.
+
+The table is created when the statement ends, not when the transaction commits, as for `CREATE TABLE`. A `ROLLBACK` does not remove it:
+
+```sql
+BEGIN;
+CREATE TABLE sales.sales AS SELECT 1 AS id;
+ROLLBACK;
+-- sales.sales exists, with its row
+```
+
+The following are not supported:
+
+* Columns whose type Delta cannot store, such as `UHUGEINT`, `TIME`, intervals, or an untyped `NULL`: the statement fails before anything is written, naming the column. Cast the column in the query, e.g., `SELECT x::BIGINT AS x`, `SELECT x::VARCHAR AS x` for `UHUGEINT` values beyond the 38 digits of `DECIMAL(38, 0)`, or `SELECT NULL::INTEGER AS n`.
+* Writing to a path that already holds a Delta table: `COPY` does not append or overwrite, and `CREATE TABLE ... AS SELECT` fails as `CREATE TABLE` does. With `IF NOT EXISTS`, an existing table is left as it is and the query does not run.
+* `CREATE OR REPLACE TABLE ... AS SELECT`.
+* `COPY` options for files, such as `OVERWRITE` or `PER_THREAD_OUTPUT`, and options outside `delta.` given on their own: put the latter in `WITH_PROPERTIES`. Both fail with an error that names the option.
+
+In a [Unity Catalog]({% link docs/2.0/core_extensions/unity_catalog.md %}#creating-tables) catalog, `CREATE TABLE ... AS SELECT` goes through the `unity_catalog` extension, which also registers the table.
+
+Readers see two differences from a table Spark creates. Its history records the operation as `CREATE TABLE`, not `CREATE TABLE AS SELECT`. And in a column-mapped, partitioned table, the data files of the create leave the partition columns out (their values are in the log, as the Delta protocol allows); files that later `INSERT`s write include them. A table whose features require the partition columns in its files (`materializePartitionColumns`, `icebergCompatV2`, or `icebergCompatV3`) gets them in every file.
 
 ### Appending Data
 
@@ -315,7 +372,7 @@ The `delta` extension supports:
 * [time travel](#time-travel) by version or timestamp
 * all primitive types except intervals
 * nested types (structs, lists, and maps)
-* creating tables (`CREATE TABLE`)
+* creating tables (`CREATE TABLE`, and since v2.0.1 [`CREATE TABLE ... AS SELECT` and `COPY ... TO ... (FORMAT delta)`](#creating-tables-from-a-query))
 * blind appends (`INSERT INTO`), with file statistics for data skipping
 * [idempotent appends](#idempotent-appends)
 * [checkpoints](#checkpointing) (`CHECKPOINT`)
@@ -323,7 +380,7 @@ The `delta` extension supports:
 
 ## Limitations
 
-* `CREATE OR REPLACE TABLE` and `CREATE TABLE ... AS SELECT` are not supported. Create the table, then `INSERT` into it.
+* `CREATE OR REPLACE TABLE` is not supported. Before v2.0.1, `CREATE TABLE ... AS SELECT` is not supported either: create the table, then `INSERT` into it.
 * `UPDATE`, `DELETE`, [`MERGE INTO`]({% link docs/2.0/sql/statements/merge_into.md %}), `ALTER TABLE`, and `DROP TABLE` are not supported, nor are `RETURNING` and `ON CONFLICT` clauses on `INSERT`.
 * `CREATE TABLE` does not support:
     * constraints, including `NOT NULL`
