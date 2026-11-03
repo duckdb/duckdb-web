@@ -1,11 +1,12 @@
 #!/usr/bin/env python3
-"""Update the SHA-256 hashes in _data/checksums_XY.yml from a DuckDB GitHub release.
+"""Update the SHA-256 hashes in _data/checksums_XY.yml from a DuckDB GitHub release and Maven Central.
 
 Usage: python scripts/update_checksums.py 1.5.6
 
 For version X.Y.Z, the default file is _data/checksums_XY.yml (e.g., checksums_15.yml for 1.5.6).
-Artifacts that are not published in the duckdb/duckdb release (e.g., the JDBC and ODBC drivers)
-are left unchanged and reported.
+The JDBC driver's hash is fetched from Maven Central, using the version in its filename
+(e.g., duckdb_jdbc-1.5.6.0.jar). Other artifacts that are not published in the duckdb/duckdb
+release (e.g., the ODBC drivers) are left unchanged and reported.
 """
 
 import argparse
@@ -18,6 +19,8 @@ import urllib.request
 from pathlib import Path
 
 DATA_DIR = Path(__file__).resolve().parent.parent / "_data"
+MAVEN_URL = "https://repo1.maven.org/maven2/org/duckdb/duckdb_jdbc"
+JDBC_FILENAME = re.compile(r"duckdb_jdbc-(.+)\.jar")
 
 
 def default_file(version):
@@ -44,6 +47,16 @@ def fetch_digests(version):
     return digests
 
 
+def fetch_maven_digest(filename):
+    jdbc_version = JDBC_FILENAME.fullmatch(filename).group(1)
+    url = f"{MAVEN_URL}/{jdbc_version}/{filename}.sha256"
+    with urllib.request.urlopen(url) as response:
+        digest = response.read().decode().split()[0].lower()
+    if not re.fullmatch(r"[0-9a-f]{64}", digest):
+        raise ValueError(f"Unexpected SHA-256 digest from {url}: {digest}")
+    return digest
+
+
 def update_file(path, digests):
     # Edit line by line to preserve the file's comments and formatting
     lines = path.read_text().splitlines(keepends=True)
@@ -52,6 +65,11 @@ def update_file(path, digests):
     for i, line in enumerate(lines):
         if m := re.match(r'\s*filename:\s*"?([^"\s]+)"?', line):
             filename = m.group(1)
+            if JDBC_FILENAME.fullmatch(filename) and filename not in digests:
+                try:
+                    digests[filename] = fetch_maven_digest(filename)
+                except (urllib.error.HTTPError, ValueError) as e:
+                    print(f"Failed to fetch {filename} from Maven Central: {e}")
         elif filename and (m := re.match(r'(\s*sha256:\s*)"?[^"\s]*"?\s*$', line)):
             if filename in digests:
                 lines[i] = f'{m.group(1)}"{digests[filename]}"\n'
@@ -89,7 +107,7 @@ def main():
     updated, missing = update_file(path, digests)
     print(f"Updated {len(updated)} hashes in {path}")
     for filename in sorted(set(missing)):
-        print(f"Not found in release v{version}, left unchanged: {filename}")
+        print(f"Not found, left unchanged: {filename}")
 
 
 if __name__ == "__main__":
