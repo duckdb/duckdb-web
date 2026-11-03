@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "From kdb+ to DuckDB: Bringing Local Analytics to the Quant's Desktop"
+title: "Bringing Local Analytics to the Quant's Desktop"
 authors:
   - Ryan Hamilton in conversation with Geertjan Wielenga and Tim Cox
 thumb: "/images/blog/thumbs/quants-desktop.svg"
