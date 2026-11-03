@@ -24,5 +24,5 @@ LOAD quack;
 
 ## Limitations
 
-> Warning As of DuckDB v1.5.3, `quack` is in an experimental state. The protocol, the function names, and implementation details are all subject to change.
-> Quack is expected to reach stable status in DuckDB v2.0.0, scheduled for [September 2026]({% link release_calendar.md %}#upcoming-releases).
+> Warning As of DuckDB 1.5.3, `quack` is in an experimental state. The protocol, the function names, and implementation details are all subject to change.
+> Quack is expected to reach stable status in DuckDB 2.0.0, scheduled for [September 2026]({% link release_calendar.md %}#upcoming-releases).

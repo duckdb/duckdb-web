@@ -15,7 +15,7 @@ body.foundation {
 		margin-bottom: var(--page-element-spacing-large, 50px);
 
 		h2 {
-			@include display-3;
+			@include display-2;
 			margin: 0 0 16px;
 		}
 
@@ -39,7 +39,7 @@ body.foundation {
 		gap: 8px;
 
 		h3 {
-			@include title-3;
+			@include headline-4;
 			color: var(--main-text-primary-color-strong, #050505);
 			margin: 0;
 		}
@@ -55,7 +55,7 @@ body.foundation {
 		text-align: center;
 
 		h1 {
-			@include display-2;
+			@include display-1;
 			margin: 0 auto;
 			max-width: 725px;
 		}
@@ -99,7 +99,7 @@ body.foundation {
 				}
 
 				span {
-					@include title-2;
+					@include headline-4;
 					color: var(--main-text-primary-color-strong, #050505);
 				}
 			}
@@ -231,7 +231,7 @@ body.foundation {
 				gap: 2px;
 
 				.name {
-					@include title-2;
+					@include headline-4;
 					color: var(--main-text-primary-color-strong, #050505);
 				}
 
@@ -274,7 +274,7 @@ body.foundation {
 				border-bottom: 1px solid var(--border-color);
 
 				h3 {
-					@include title-1;
+					@include headline-3;
 				}
 			}
 

@@ -11,7 +11,7 @@ The Quack extension turns a DuckDB instance into a server that other DuckDB inst
 This page covers the protocol at a glance and walks through basic usage on both sides of the wire.
 For the full list of functions, settings, and logging knobs, see the [Reference]({% link docs/1.5/quack/reference.md %}). For configuring TLS and authentication / authorization, see [Security]({% link docs/1.5/quack/security.md %}). For user guides, see [Guides]({% link docs/1.5/quack/setup/overview.md %}).
 
-> Warning Quack is under active development and the protocol, function names, settings, and defaults are still subject to change. This page documents the beta release of Quack, available in [DuckDB v1.5.3]({% post_url 2026-05-20-announcing-duckdb-153 %}), shipped via the `core` repository.
+> Warning Quack is under active development and the protocol, function names, settings, and defaults are still subject to change. This page documents the beta release of Quack, available in [DuckDB 1.5.3]({% post_url 2026-05-20-announcing-duckdb-153 %}), shipped via the `core` repository.
 
 ## Quack in a Nutshell
 

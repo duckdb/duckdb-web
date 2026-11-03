@@ -71,7 +71,7 @@ await worker.terminate();
 
 DuckDB-Wasm uses [Apache Arrow](https://arrow.apache.org/) as its data protocol for both data import and query results. Arrow is a columnar, database-friendly format that the `apache-arrow` npm package implements in the browser, letting DuckDB-Wasm exchange data efficiently and interoperate with other JavaScript data tools without reimplementing SQL type logic in JavaScript.
 
-DuckDB-Wasm is built on a virtual filesystem that treats local files, remote HTTP(S) servers and in-memory buffers uniformly.
+DuckDB-Wasm is built on a virtual filesystem that treats local files, remote HTTP(S) servers, and in-memory buffers uniformly.
 
 Because DuckDB understands file formats such as Parquet, it reads only the bytes a query needs rather than downloading an entire file: `SELECT count(*) FROM 'file.parquet'` can be answered from the file metadata alone, and selective filters or `LIMIT` … `OFFSET` clauses let entire row groups be skipped. This makes it practical to query large Parquet files hosted on a remote server directly from the browser.
 

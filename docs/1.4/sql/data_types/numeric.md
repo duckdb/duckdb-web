@@ -31,9 +31,9 @@ The type integer is the common choice, as it offers the best balance between ran
 ## Variable-Length Integers
 
 The previously mentioned integer types all have in common that the numbers in the minimum and maximum range all have the same storage size, `UTINYINT` is 1 byte, `SMALLINT` is 2 bytes, etc.
-But sometimes you need numbers that are even bigger than what is supported by a `HUGEINT`! In these situations, you can use the `BIGNUM` type, which stores positive numbers in a similar fashion as other integer types, but uses three additional bytes to store the required size and a sign bit. A number with `N` decimal digits requires approximately `0.415 * N + 3` bytes when stored in a `BIGNUM`. 
+But sometimes you need numbers that are even bigger than what is supported by a `HUGEINT`! In these situations, you can use the `BIGNUM` type, which stores positive numbers in a similar fashion as other integer types, but uses three additional bytes to store the required size and a sign bit. A number with `N` decimal digits requires approximately `0.415 * N + 3` bytes when stored in a `BIGNUM`.
 
-Unlike variable-length integer implementations in other systems, there are limits to `BIGNUM`: the maximal and minimal representable values are approximately `±4.27e20201778`. Those are numbers with 20,201,779 decimal digits and storing a single such number requires 8 megabytes. 
+Unlike variable-length integer implementations in other systems, there are limits to `BIGNUM`: the maximal and minimal representable values are approximately `±4.27e20201778`. Those are numbers with 20,201,779 decimal digits and storing a single such number requires 8 megabytes.
 
 ## Fixed-Point Decimals
 

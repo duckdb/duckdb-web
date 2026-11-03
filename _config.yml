@@ -63,9 +63,10 @@ latest_duckdb_codename: "Cyanoptera"
 latest_duckdb_version: "2.0.0"
 latest_short_duckdb_version: "2.0"
 latest_duckdb_java_short_version: "2.0.0"
-latest_duckdb_java_version: "2.0.0.0"
+latest_duckdb_java_version: "2.0.0.1"
+latest_duckdb_java_dev_version: "2.0.1-dev-506971b"
 latest_duckdb_odbc_short_version: "2.0.0"
-latest_duckdb_odbc_version: "2.0.0.0"
+latest_duckdb_odbc_version: "2.0.0.1"
 latest_duckdb_go_version: "2.0.0"
 latest_duckdb_go_tag: "v2.20000.0"
 latest_duckdb_node_neo_version: "2.0.0"
@@ -75,6 +76,8 @@ latest_duckdb_wasm_version: "2.0.0"
 latest_duckdb_csharp_version: ""
 latest_duckdb_hash: "d54cbbe3df"
 latest_duckdb_r_version: "2.0.0"
+# preview (v2.1-dev) version information
+next_duckdb_java_dev_version: "2.0.0-dev-679d526"
 # more Jekyll config
 livereload: true
 highlighter: rouge
@@ -144,7 +147,7 @@ repository: "duckdb/duckdb-web"
 #   - vendor/gems/
 #   - vendor/ruby/
 
-star_count: '42.6k'
+star_count: '42.8k'
 
 toc:
   min_level: 1

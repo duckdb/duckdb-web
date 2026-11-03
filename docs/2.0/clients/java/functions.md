@@ -280,7 +280,7 @@ DuckDBFunctions.tableFunction()
 
 Calling `FROM java_series(5000)` drives `apply` three times — two full 2,048-row chunks and a final partial one — before the fourth call returns `0`.
 
-### Cleaning up Resources
+### Cleaning Up Resources
 
 A table function may hold open resources such as files, sockets, or iterators that have to be released when the scan finishes. A state that owns such a resource can implement `DuckDBTableFunctionState` to receive a deterministic `close()` call once DuckDB no longer needs it:
 

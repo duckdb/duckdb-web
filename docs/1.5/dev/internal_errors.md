@@ -5,14 +5,14 @@ title: Internal Errors
 
 Internal errors signal an assertion failure within DuckDB. They usually occur due to unexpected conditions or errors in the program's logic.
 
-For example, running [issue 17002](https://github.com/duckdb/duckdb/issues/17002) on DuckDB v1.2.1 results in an internal error.
+For example, running [issue 17002](https://github.com/duckdb/duckdb/issues/17002) on DuckDB 1.2.1 results in an internal error.
 
 ```console
 INTERNAL Error:
 Attempted to access index 3 within vector of size 3
 ```
 
-> The issue is fixed in DuckDB v1.2.2 and newer versions.
+> The issue is fixed in DuckDB 1.2.2 and newer versions.
 
 After encountering an internal error, DuckDB enters “restricted mode”, where any further operations will result in the following error message:
 

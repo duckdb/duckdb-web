@@ -5,7 +5,9 @@ redirect_from:
 - /docs/current/guides/performance/oom
 - /docs/lts/guides/performance/oom
 - /docs/preview/guides/performance/oom
+- /docs/stable/guides/performance/oom
 title: Out-of-Memory Issues
+how_to_topic: performance
 ---
 
 ## Configuration Options

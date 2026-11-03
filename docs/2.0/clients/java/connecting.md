@@ -241,7 +241,7 @@ SET async_threads = 4;
 
 Two consequences are worth calling out for Java applications:
 
-* **Attached databases do not add threads.** [`ATTACH`]({% link docs/2.0/sql/statements/attach.md %}) adds a catalog to the database instance the connection already belongs to. All attached databases share that instance's thread pools, memory limit and temporary directory. Only opening a *new* JDBC connection to a different database name creates a second instance, and with it a second set of pools.
+* **Attached databases do not add threads.** [`ATTACH`]({% link docs/2.0/sql/statements/attach.md %}) adds a catalog to the database instance the connection already belongs to. All attached databases share that instance's thread pools, memory limit, and temporary directory. Only opening a *new* JDBC connection to a different database name creates a second instance, and with it a second set of pools.
 * **Multiple instances multiply the thread count.** An application that opens a dozen private in-memory databases with `jdbc:duckdb:` on a 16-core machine starts more than 900 native threads, each with its own stack, and each instance has its own share of the memory limit.
 
 > Warning Each private (uncached) in-memory database creates its own instance with independent thread pools. An application that opens many connections with the default `jdbc:duckdb:` URL can therefore create a large number of operating system threads. Use a named in-memory database, share one instance through the [instance cache](#database-instances-and-instance-caching), or set both the `threads` and `async_threads` options to bound the thread count, e.g., `jdbc:duckdb:;threads=4;async_threads=4`.
@@ -388,7 +388,7 @@ stmt.execute("ATTACH 'quack:⟨hostname⟩' AS remote_db");
 
 Once attached, remote tables behave like local ones, so the whole JDBC API applies to them. Run [`CONNECT remote_db`]({% link docs/2.0/sql/statements/connect.md %}) to [route the whole session]({% link docs/2.0/quack/overview.md %}#routing-a-session-with-connect) to the server, so that unqualified table names resolve against it and queries execute remotely. The local instance still holds its own thread pool and memory limit, and the connection is subject to the same instance rules as any other JDBC connection, so a client that only forwards queries to a server can be opened with a small `threads` value.
 
-> For server setup, authentication and other ways to query a remote server, see the [Quack documentation]({% link docs/2.0/quack/overview.md %}).
+> For server setup, authentication, and other ways to query a remote server, see the [Quack documentation]({% link docs/2.0/quack/overview.md %}).
 
 ## Closing Connections
 

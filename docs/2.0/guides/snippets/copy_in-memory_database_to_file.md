@@ -7,6 +7,7 @@ redirect_from:
 - /docs/lts/guides/snippets/copy_in-memory_database_to_file
 - /docs/preview/guides/snippets/copy_in-memory_database_to_file
 title: Copying an In-Memory Database to a File
+how_to_topic: tools-meta
 ---
 
 Imagine the following situation – you started DuckDB in in-memory mode but would like to persist the state of your database to disk.

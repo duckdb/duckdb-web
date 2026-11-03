@@ -4,13 +4,13 @@ layout: docu
 title: Python API
 ---
 
-> Installation To use the DuckDB Python client, visit the [Python installation page]({% link install/index.html %}?environment=python).
+> Installation To use the DuckDB Python client, visit the [Python installation page]({% link docs/2.0/installation.html %}?environment=python).
 >
 > The latest stable version of the DuckDB Python client is {{ site.maintained_duckdb_version }}.
 
 ## Installation
 
-The DuckDB Python API can be installed using [pip](https://pip.pypa.io): `pip install duckdb`. Please see the [installation page]({% link install/index.html %}?environment=python) for details. It is also possible to install DuckDB using [conda](https://docs.conda.io): `conda install python-duckdb -c conda-forge`.
+The DuckDB Python API can be installed using [pip](https://pip.pypa.io): `pip install duckdb`. Please see the [installation page]({% link docs/2.0/installation.html %}?environment=python) for details. It is also possible to install DuckDB using [conda](https://docs.conda.io): `conda install python-duckdb -c conda-forge`.
 
 **Python version:**
 DuckDB requires Python 3.10 or newer.
@@ -54,7 +54,7 @@ duckdb.sql("SELECT * FROM 'example.json'")    # directly query a JSON file
 
 ### DataFrames
 
-DuckDB can directly query Pandas DataFrames, Polars DataFrames and Arrow tables.
+DuckDB can directly query Pandas DataFrames, Polars DataFrames, and Arrow tables.
 Note that these are read-only, i.e., editing these tables via [`INSERT`]({% link docs/1.5/sql/statements/insert.md %}) or [`UPDATE` statements]({% link docs/1.5/sql/statements/update.md %}) is not possible.
 
 #### Pandas
@@ -218,7 +218,7 @@ The connection object and the `duckdb` module can be used interchangeably – th
 
 > If you are developing a package designed for others to use, and use DuckDB in the package, it is recommended that you create connection objects instead of using the methods on the `duckdb` module. That is because the `duckdb` module uses a shared global database – which can cause hard to debug issues if used from within multiple different packages.
 
-### Using Connections in Parallel Python Programs 
+### Using Connections in Parallel Python Programs
 
 #### Thread Safety of `duckdb.sql()` and the Global Connection
 
@@ -245,12 +245,12 @@ Or:
 ```python
 def also_bad():
     return duckdb.sql("SELECT 1").fetchall()
-    # uses global connection 
+    # uses global connection
 ```
 
-Avoid using `duckdb.sql()` or sharing a single connection across threads. 
+Avoid using `duckdb.sql()` or sharing a single connection across threads.
 
-#### About `cursor()` 
+#### About `cursor()`
 
 A single `DuckDBPyConnection` object is not safe for concurrent use: calls on the same handle from multiple threads are serialized. The [`DuckDBPyConnection.cursor()` method]({% link docs/1.5/clients/python/reference/index.md %}#duckdb.DuckDBPyConnection.cursor) creates a new connection to the same database instance, with its own session settings and transaction context. Because cursors share the underlying instance but not their session state, they can execute queries in parallel. To run queries concurrently, create one cursor per thread.
 

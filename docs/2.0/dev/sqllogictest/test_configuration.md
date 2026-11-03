@@ -32,7 +32,7 @@ unittest --no-checkpoint-on-shutdown
 unittest --checkpoint-wal-size 100000
 ```
 
-Command line options `--settings`, `--on-init` and `--init-script` can be used to specify [DuckDB configuration]({% link docs/2.0/configuration/overview.md %}).
+Command line options `--settings`, `--on-init`, and `--init-script` can be used to specify [DuckDB configuration]({% link docs/2.0/configuration/overview.md %}).
 
 ## Configuration File
 

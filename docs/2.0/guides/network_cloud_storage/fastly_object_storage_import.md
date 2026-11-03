@@ -8,6 +8,7 @@ redirect_from:
 - /docs/lts/guides/network_cloud_storage/fastly_object_storage_import
 - /docs/preview/guides/network_cloud_storage/fastly_object_storage_import
 title: Fastly Object Storage Import
+how_to_topic: network-cloud-storage
 ---
 
 ## Prerequisites

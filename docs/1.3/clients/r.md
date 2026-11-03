@@ -16,7 +16,7 @@ The DuckDB R client can be installed using the following command:
 install.packages("duckdb")
 ```
 
-Please see the [installation page]({% link install/index.html %}?environment=r) for details.
+Please see the [installation page]({% link docs/2.0/installation.html %}?environment=r) for details.
 
 ### `duckplyr`: dplyr Client
 

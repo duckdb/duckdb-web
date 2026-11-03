@@ -49,8 +49,8 @@ docs:
 
 extension_star_count: 0
 extension_star_count_pretty: 0
-extension_download_count: 5843
-extension_download_count_pretty: 5.8k
+extension_download_count: 855
+extension_download_count_pretty: 855
 image: '/images/community_extensions/social_preview/preview_community_extension_ng_postcode.png'
 layout: community_extension_doc
 ---

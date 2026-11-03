@@ -8,7 +8,7 @@ excerpt: |
 extension:
   name: semantic_profile
   description: Profiles what the values in a table mean rather than what shape they are — semantic type per column, PII and format drift, and cross-column contradictions
-  version: 0.2.0
+  version: 0.3.0
   language: Rust
   build: cargo
   license: MIT
@@ -22,7 +22,8 @@ extension:
 
 repo:
   github: patricktrainer/duckdb-semantic-profile
-  ref: ff9a481e322c9c984ceb7d038bace8df9461f36c
+  ref: 5d0a34f1972535ec42b1bada0c55c0b491951699
+  variegata: 5d0a34f1972535ec42b1bada0c55c0b491951699
 
 docs:
   hello_world: |
@@ -106,7 +107,7 @@ docs:
     ### Functions
 
     `sem_profile`, `sem_columns`, `sem_probes`, `sem_values`, `sem_report`,
-    `sem_row_fields`, `sem_findings`, `sem_cost`, `sem_catalog`; the primitives `ts_ask`, `ts_noul`,
+    `sem_report_rows`, `sem_row_fields`, `sem_findings`, `sem_cost`, `sem_catalog`; the primitives `ts_ask`, `ts_noul`,
     `ts_choice`, `ts_score`; and `sem_config`, `sem_settings`, `sem_stats`,
     `sem_status`, `sem_sql`.
 
@@ -121,8 +122,8 @@ docs:
 
 extension_star_count: 0
 extension_star_count_pretty: 0
-extension_download_count: 8862
-extension_download_count_pretty: 8.9k
+extension_download_count: 907
+extension_download_count_pretty: 907
 image: '/images/community_extensions/social_preview/preview_community_extension_semantic_profile.png'
 layout: community_extension_doc
 ---
@@ -134,11 +135,11 @@ This table covers all DuckDB releases that have not reached [end-of-life](https:
 
 | Platform | 1.4.4 | 1.4.5 | 1.5.5 | 1.5.6 | 2.0.0 |
 | :--- | :---: | :---: | :---: | :---: | :---: |
-| Linux AMD64 | ❌ | ❌ | ✅ | ✅ | ❌ |
-| Linux ARM64 | ❌ | ❌ | ✅ | ✅ | ❌ |
+| Linux AMD64 | ❌ | ❌ | ✅ | ✅ | ✅ |
+| Linux ARM64 | ❌ | ❌ | ✅ | ✅ | ✅ |
 | macOS AMD64 | ❌ | ❌ | ✅ | ✅ | ❌ |
-| macOS ARM64 | ❌ | ❌ | ✅ | ✅ | ❌ |
-| Windows AMD64 | ❌ | ❌ | ✅ | ✅ | ❌ |
+| macOS ARM64 | ❌ | ❌ | ✅ | ✅ | ✅ |
+| Windows AMD64 | ❌ | ❌ | ✅ | ✅ | ✅ |
 | Windows ARM64 | ❌ | ❌ | ❌ | ❌ | ❌ |
 | WebAssembly | ❌ | ❌ | ❌ | ❌ | ❌ |
 
@@ -188,6 +189,8 @@ This extension does not add any types.
 
 <div class="extension_settings_table"></div>
 
-This extension does not add any settings.
+|      name      |                       description                       | input_type | scope  | aliases | typed_value |
+|----------------|---------------------------------------------------------|------------|--------|---------|-------------|
+| temp_directory | Set the directory to which temporary files are written. | VARCHAR    | GLOBAL | []      | post.db.tmp |
 
 

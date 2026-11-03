@@ -3,7 +3,6 @@ github_directory: https://github.com/duckdb/duckdb-httpfs
 layout: docu
 redirect_from:
 - /docs/archive/0.10/extensions/httpfs
-- /docs/archive/0.10/extensions/httpfs/
 title: httpfs Extension for HTTP and S3 Support
 ---
 

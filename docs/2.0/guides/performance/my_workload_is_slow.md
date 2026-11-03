@@ -8,6 +8,7 @@ redirect_from:
 - /docs/lts/guides/performance/my_workload_is_slow
 - /docs/preview/guides/performance/my_workload_is_slow
 title: My Workload Is Slow
+how_to_topic: performance
 ---
 
 If you find that your workload in DuckDB is slow, we recommend performing the following checks. More detailed instructions are linked for each point.

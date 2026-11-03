@@ -126,7 +126,7 @@ duckdb.sql("SELECT * FROM read_json('example.json')")
 ## Directly Accessing DataFrames and Arrow Objects
 
 DuckDB is automatically able to query certain Python variables by referring to their variable name (as if it was a table).
-These types include the following: Pandas DataFrame, Polars DataFrame, Polars LazyFrame, NumPy arrays, [relations]({% link docs/1.5/clients/python/relational_api.md %}) and Arrow objects.
+These types include the following: Pandas DataFrame, Polars DataFrame, Polars LazyFrame, NumPy arrays, [relations]({% link docs/1.5/clients/python/relational_api.md %}), and Arrow objects.
 
 Only variables that are visible to Python code at the location of the `sql()` or `execute()` call can be used in this manner.
 Accessing these variables is made possible by [replacement scans]({% link docs/1.5/clients/c/replacement_scans.md %}). To disable replacement scans entirely, use:
@@ -135,7 +135,7 @@ Accessing these variables is made possible by [replacement scans]({% link docs/1
 SET python_enable_replacements = false;
 ```
 
-DuckDB supports querying multiple types of Apache Arrow objects including [tables](https://arrow.apache.org/docs/python/generated/pyarrow.Table.html), [datasets](https://arrow.apache.org/docs/python/generated/pyarrow.dataset.Dataset.html), [RecordBatchReaders](https://arrow.apache.org/docs/python/generated/pyarrow.ipc.RecordBatchStreamReader.html) and [scanners](https://arrow.apache.org/docs/python/generated/pyarrow.dataset.Scanner.html). See the Python [guides]({% link docs/1.5/guides/overview.md %}#python-client) for more examples.
+DuckDB supports querying multiple types of Apache Arrow objects including [tables](https://arrow.apache.org/docs/python/generated/pyarrow.Table.html), [datasets](https://arrow.apache.org/docs/python/generated/pyarrow.dataset.Dataset.html), [RecordBatchReaders](https://arrow.apache.org/docs/python/generated/pyarrow.ipc.RecordBatchStreamReader.html), and [scanners](https://arrow.apache.org/docs/python/generated/pyarrow.dataset.Scanner.html). See the Python [guides]({% link docs/1.5/guides/overview.md %}#python-client) for more examples.
 
 DuckDB can also consume any object that implements the [Arrow PyCapsule interface](https://arrow.apache.org/docs/format/CDataInterface/PyCapsuleInterface.html) through an `__arrow_c_stream__` method, even if it is not a native Arrow object. Such objects can be queried directly through replacement scans and passed to `duckdb.from_arrow()`:
 

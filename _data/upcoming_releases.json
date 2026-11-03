@@ -1,6 +1,14 @@
 [
     {
-        "title": "2.0.1",
+        "title": "Feature freeze 2.0.1",
+        "start_date": "2026-11-04"
+    },
+    {
+        "title": "Merge freeze 2.0.1",
+        "start_date": "2026-11-11"
+    },
+    {
+        "title": "Release 2.0.1",
         "start_date": "2026-11-18"
     }
 ]
