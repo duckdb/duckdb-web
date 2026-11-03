@@ -118,7 +118,6 @@
 				{% endif %}
 
 				{% assign extension_content = content | community_extension_headings: page.extension.name %}
-				{% assign ct = extension_content | toc %}
 				{% include anchor_headings.html html=extension_content %}
 				
 				{% if page.url contains 'overview' %}

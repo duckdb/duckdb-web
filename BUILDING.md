@@ -63,6 +63,14 @@ Note that to save time on building, the `serve-latest.sh` script only deploys th
 scripts/serve.sh
 ```
 
+### Parallel rendering
+
+To speed up the build, the documentation and Community Extensions pages are rendered in parallel by forked worker processes (see [`_plugins/parallel_render.rb`](_plugins/parallel_render.rb)). By default, the build uses as many processes as there are CPUs, up to 8. To change this, set the `JEKYLL_WORKERS` environment variable. For example, to render the pages sequentially, run:
+
+```batch
+JEKYLL_WORKERS=1 bundle exec jekyll build
+```
+
 ## Using Docker
 
 ### Prerequisites
