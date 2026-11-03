@@ -57,7 +57,7 @@ body.installation{
 				}
 
 				&:hover .foldout-icon{
-					background-color: var(--doc-codebox-button-background-color-hover, #b2b2b299);
+					border-color: var(--border-color-hover);
 				}
 			}
 			.selected{
@@ -68,6 +68,7 @@ body.installation{
 			}
 			.foldout-icon{
 				background-color: var(--doc-codebox-button-background-color, #E6E6E6);
+				border: 1px solid transparent;
 				flex: 0 0 30px;
 				align-self: center;
 				width: 30px;
@@ -76,9 +77,9 @@ body.installation{
 				display: flex;
 				align-items: center;
 				justify-content: center;
-				-webkit-transition: background-color .3s;
-				-o-transition: background-color .3s;
-				transition: background-color .3s;
+				-webkit-transition: border-color .2s;
+				-o-transition: border-color .2s;
+				transition: border-color .2s;
 				svg.icon{
 					width: 18px;
 					height: 18px;
@@ -151,11 +152,11 @@ body.installation{
 			display: flex;
 			gap: 8px;
 			height: 52px;
-			padding: 5px 8px;
+			padding: 5px 20px 5px 8px;
 			align-items: center;
 			cursor: pointer;
 			z-index: 4;
-			transition: background-color .3s;
+			transition: border-color .2s;
 			border: 1px solid transparent;
 			
 			.label{
@@ -188,9 +189,12 @@ body.installation{
 				stroke-width: 2.2;
 			}
 
-			&:hover{
-				background: color-mix(in srgb, var(--menu-dropdown-item-background-hover) 50%, transparent);
-				border: 1px solid var(--border-color);
+			&:hover:not(.active){
+				border-color: var(--border-color-hover);
+
+				.symbol{
+					border-color: transparent;
+				}
 			}
 
 			&:focus-visible{
@@ -204,8 +208,8 @@ body.installation{
 			border: 1px solid var(--interactive-installation-box-border);
 
 			.symbol{
-				border: 1px solid var(--interactive-installation-box-border);
-				background: var(--interactive-installation-icon-background-selected);
+				border-color: transparent;
+				background: transparent;
 			}
 		}
 	}
@@ -349,7 +353,7 @@ body.installation{
 				}
 				
 				&:hover{
-					border: 1px solid var(--border-color);
+					border-color: var(--border-color-hover);
 				}
 			}
 			.alternative-options{
@@ -381,7 +385,7 @@ body.installation{
 				}
 
 				&:hover{
-					border: 1px solid var(--border-color);
+					border-color: var(--border-color-hover);
 				}
 			}
 			.alternative-options[aria-expanded="true"]{
@@ -606,7 +610,7 @@ body.installation{
 					color: color.scale($duckDBlightgrey, $lightness: -40%);
 				}
 				&:hover{
-					border: 1px solid var(--border-color);
+					border-color: var(--border-color-hover);
 					//background-color: var(--element-background-color);
 				}
 				&.selected{
@@ -720,13 +724,10 @@ body.installation{
 		border: 1px solid var(--border-color);
 		text-decoration: none;
 		padding: 0px 7px;
-		-webkit-transition: background-color .3s, border-color 3s;
-		-o-transition: background-color .3s, border-color 3s;
-		transition: background-color .3s, border-color 3s;
+		transition: border-color .2s;
+
 		&:hover{
-			color: black;
-			background-color: color.scale($black300, $lightness: -4%);
-			border: 1px solid var(--border-color);
+			border-color: var(--border-color-hover);
 		}
 	}
 	#sidebar{
@@ -796,5 +797,15 @@ a.download-btn{
 .nightly_install{
 	&.layout_default.blog_typography #main_content_wrap div.highlight{
 		max-width: unset;
+	}
+}
+
+body.installation a.download-btn {
+	border: 1px solid transparent;
+	transition: border-color .2s;
+
+	&:hover {
+		border-color: var(--border-color-hover);
+		background: transparent;
 	}
 }

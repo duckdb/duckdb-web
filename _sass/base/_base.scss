@@ -122,7 +122,7 @@ main.f-md{
 }
 
 main > .pagehead{
-	margin-top: 70px;
+	margin-top: $site-header-height;
 }
 
 
@@ -139,7 +139,7 @@ main{
 		margin: 0 auto;
 	}
 	#main_content_wrap{
-		margin-top: 70px;
+		margin-top: $site-header-height;
 	}
 	> .pagehead + .wrap > #main_content_wrap{
 		margin-top: 0;

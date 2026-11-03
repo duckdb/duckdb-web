@@ -6,7 +6,7 @@
 header .headerline {
 	--header-control-size: 33px;
 	border-bottom: 1px solid var(--border-color);
-	height: 70px;
+	height: $site-header-height;
 	width: 100%;
 	position: fixed;
 	top: 0;
@@ -82,7 +82,7 @@ header .headerline {
 					color: var(--menu-topmenu-text-color, #1A1A1A);
 					text-decoration: none;
 					transition: color .3s;
-					line-height: 70px;
+					line-height: $site-header-height;
 					
 					&:hover {
 						color: var(--main-link-hover, #665d00);
@@ -96,7 +96,7 @@ header .headerline {
 				/* Dropdown Menus */
 				.hasSub+.submenuwrap {
 					position: absolute;
-					top: 45px;
+					top: $site-header-height - 25px;
 					left: -15px;
 					padding-top: 30px;
 					opacity: 0;
@@ -187,7 +187,7 @@ header .headerline {
 				/* Search Icon */
 				.search_icon {
 					width: 16px;
-					height: 70px;
+					height: $site-header-height;
 					display: flex;
 					justify-content: center;
 					align-items: center;
