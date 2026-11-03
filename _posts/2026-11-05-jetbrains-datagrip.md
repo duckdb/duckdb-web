@@ -11,11 +11,14 @@ tag: using-duckdb
 
 When [JetBrains](https://www.jetbrains.com/) set out to let developers join data across different database connections in a single query, it chose not to build its own cross-database query engine. Instead, [DataGrip](https://www.jetbrains.com/datagrip/), its database IDE, embeds DuckDB to execute those queries, and exposes DuckDB's SQL dialect directly to the developers writing them.
 
-> Quote DuckDB turned out to be the simplest option to integrate.
+> Quote
 >
-> -- Ilia Epelbaum, DataGrip, JetBrains
+> DuckDB turned out to be the simplest option to integrate.
+>
+> — Ilia Epelbaum, DataGrip, JetBrains
+{: .quote-large}
 
-## Querying Across Data Sources
+## Querying across Data Sources
 
 DataGrip is JetBrains' IDE for working with databases and writing SQL, developed since 2015. The same database functionality is also available as a plugin inside the other JetBrains IDEs, so the feature reaches well beyond DataGrip itself.
 
@@ -25,21 +28,21 @@ For a long time, users had been asking for one thing in particular: the ability 
 
 JetBrains explored several approaches. It considered [Apache Calcite](https://calcite.apache.org/), handling the queries itself using PSI (the internal code representation JetBrains uses across its IDEs), and DuckDB.
 
-DuckDB won on ease of integration. **"DuckDB turned out to be the simplest option to integrate,"** says Ilia Epelbaum, who works on the DataGrip team. The deciding feature was the ability to register a custom table function: it gave JetBrains a straightforward way to connect DuckDB to the query-execution functionality DataGrip already had. DuckDB was also preferred over lighter alternatives such as H2 because it brought more capabilities, including query optimizations like projection pushdown.
+DuckDB won on ease of integration. **“DuckDB turned out to be the simplest option to integrate,”** says Ilia Epelbaum, who works on the DataGrip team. The deciding feature was the ability to register a custom table function: it gave JetBrains a straightforward way to connect DuckDB to the query-execution functionality DataGrip already had. DuckDB was also preferred over lighter alternatives such as H2 because it brought more capabilities, including query optimizations like projection pushdown.
 
-Maxim Sobolevskiy, Head of Database Ecosystem at JetBrains, puts the result in concrete terms. **"With DuckDB and its support for custom table functions, cross-database queries have finally become practical in DataGrip,"** he says. **"Users can join data from PostgreSQL, MySQL, MongoDB, or any other supported database in one query, without setting up extra infrastructure."** The embedded alternatives the team evaluated could not do this, because **"extending them required either native code or a complicated implementation."**
+Maxim Sobolevskiy, Head of Database Ecosystem at JetBrains, puts the result in concrete terms. **“With DuckDB and its support for custom table functions, cross-database queries have finally become practical in DataGrip,”** he says. **“Users can join data from PostgreSQL, MySQL, MongoDB, or any other supported database in one query, without setting up extra infrastructure.”** The embedded alternatives the team evaluated could not do this, because **“extending them required either native code or a complicated implementation.”**
 
 Epelbaum came to the project knowing the territory. He had been a database developer working on [Trino](https://trino.io/) before moving into database tooling, and already knew how flexible DuckDB was. That background is part of why the team reached for it rather than writing and maintaining a cross-database query engine of its own.
 
 ## DuckDB in Plain Sight
 
-Developers know DuckDB is there. Because a cross-source join runs through a DuckDB table function, the query itself is written in DuckDB's SQL dialect, and DataGrip tells developers so. **"We highlight that it's DuckDB,"** Epelbaum says, so that someone writing a join across connections knows they are writing a DuckDB query.
+Developers know DuckDB is there. Because a cross-source join runs through a DuckDB table function, the query itself is written in DuckDB's SQL dialect, and DataGrip tells developers so. **“We highlight that it's DuckDB,”** Epelbaum says, so that someone writing a join across connections knows they are writing a DuckDB query.
 
 JetBrains has gone further and supports DuckDB as a first-class dialect in its own right, not only as the engine behind cross-source joins. Epelbaum contributed syntax highlighting for DuckDB, including the syntax introduced in [DuckDB 2.0]({% post_url 2026-10-21-announcing-duckdb-200 %}).
 
 ## An Initial Solution, Still Evolving
 
-This is still a first version. **"We've built the initial solution, and we want to see how users actually use it in practice,"** Epelbaum says. Only after that does it plan to layer on more of DuckDB's optimizations.
+This is still a first version. **“We've built the initial solution, and we want to see how users actually use it in practice,”** Epelbaum says. Only after that does the team plan to layer on more of DuckDB's optimizations.
 
 Two directions are on the roadmap. The first is to take fuller advantage of DuckDB's query optimizations. The second is to use DuckDB for file-based data sources, reading files the way it already reads across connections. Epelbaum also singled out DuckDB's [friendly SQL]({% link docs/2.0/sql/dialect/friendly_sql.md %}) as something the team values in day-to-day use.
 
