@@ -114,11 +114,15 @@ header .headerline {
 						transition: all 0.1s ease;
 						transform: scale(0.9);
 						li a {
-							display: block;
+							display: flex;
+							align-items: center;
 							text-decoration: none;
 							color: inherit;
 							@include menu-item();
-							@include menu-dropdown-item-spacing;
+							min-height: var(--header-control-size);
+							padding: 0 16px;
+							font-size: var(--type-side-menu, 13px);
+							line-height: 1;
 							border-radius: var(--page-radius-pill);
 							white-space: nowrap;
 							transition: all 0.2s;
@@ -271,7 +275,7 @@ header .headerline {
 /* GitHub Star Count */
 .starcount {
 	color: var(--menu-topmenu-text-color, #1A1A1A);
-	margin-left: 25px;
+	margin-left: 20px;
 	position: relative;
 	transition: color .3s;
 	
@@ -281,12 +285,14 @@ header .headerline {
 		mask-size: contain;
 		mask-repeat: no-repeat;
 		background-color: currentColor;
-		width: 18px;
-		height: 17px;
+		width: 15px;
+		height: 14px;
 		position: absolute;
-		left: -22px;
-		top: 1px;
-		transition: all 350ms cubic-bezier(.47,1.64,.41,.8);
+		left: -18px;
+		top: calc(50% - 1px);
+		transform: translateY(-50%);
+		transform-origin: center;
+		transition: transform 350ms cubic-bezier(.47,1.64,.41,.8);
 	}
 }
 
@@ -294,7 +300,7 @@ a.github:hover .starcount {
 	color: var(--main-link-hover, #665d00);
 
 	&::before {
-		scale: 1.25;
+		transform: translateY(-50%) scale(1.25);
 	}
 }
 
