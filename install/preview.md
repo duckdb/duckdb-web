@@ -51,7 +51,7 @@ pip install duckdb --pre --upgrade
 
 ## Command Line Interface (CLI) Client
 
-### v1.5-dev CLI
+### CLI v1.5-dev
 
 To download the v1.5-dev command line client, use the following links:
 
@@ -62,7 +62,7 @@ To download the v1.5-dev command line client, use the following links:
 | macOS    | `arm64` / `x86_64` | [zip](https://artifacts.duckdb.org/v1.5-variegata/duckdb-binaries-osx.zip)         |
 | Windows  | `arm64` / `x86_64` | [zip](https://artifacts.duckdb.org/v1.5-variegata/duckdb-binaries-windows.zip)     |
 
-### v2.0-dev CLI
+### CLI v2.0-dev
 
 #### v2.0-dev macOS and Linux Install Script
 
@@ -92,7 +92,7 @@ To download the v2.0-dev command line client, use the following links:
 | Windows  | `arm64`            | [tar.gz](https://artifacts.duckdb.org/v2.0-cyanoptera/duckdb-cli-windows-arm64.tar.gz) |
 | Windows  | `x86_64`           | [tar.gz](https://artifacts.duckdb.org/v2.0-cyanoptera/duckdb-cli-windows-amd64.tar.gz) |
 
-### v2.1-dev CLI
+### CLI v2.1-dev
 
 To download the v2.1-dev command line client, use the following links:
 
