@@ -53,9 +53,9 @@ artifacts:
 
   java:
     jar:
-      filename: "duckdb_jdbc-2.0.0.0.jar"
+      filename: "duckdb_jdbc-2.0.0.1.jar"
       hashes:
-        sha256: "5170daa90a43296705127ef3c80834ba1cd275ec9d765a9f7eee346ab0087186"
+        sha256: "6cb8b0e0fc51b2e45aead2d2c1e1fd09dd10267db2966e69aaab0de67319f826"
 
   odbc:
     linux:
