@@ -179,7 +179,7 @@ section.speakers,
 			}
 		}
 		.postdetails h3{
-			@include title-3();
+			@include headline-4();
 			color: var(--main-text-primary-color, #0D0D0D);
 			margin: 0;
 			a{
@@ -279,7 +279,7 @@ section.speakers,
 	}
 
 	#search-input {
-		@include label-1();
+		@include label();
 		height: 44px;
 		padding: 0 15px 0 40px;
 		border: 1px solid var(--border-color);
@@ -301,7 +301,7 @@ section.speakers,
 	}
 
 	.core-toggle {
-		@include label-1;
+		@include label;
 		order: 3;
 		display: flex;
 		align-items: center;
@@ -420,7 +420,7 @@ section.speakers,
 		}
 
 		.filter-btn {
-			@include label-1;
+			@include label;
 			white-space: nowrap;
 			position: relative;
 			z-index: 2;
@@ -569,16 +569,16 @@ h5 a {
 			margin: 0 auto;
 			@include blog-typography;
 			details summary{
-				font-size: var(--type-body-normal, 16px);
+				font-size: var(--type-body-normal, 15px);
 			}
 			// Match the compatibility matrix on community extension pages
 			.extension_compatibility_table + table{
 				thead th{
-					font-size: var(--type-body-small, 14px);
+					font-size: var(--type-body-small, 13px);
 					font-weight: 700;
 				}
 				tbody td{
-					font-size: var(--type-body-small, 14px);
+					font-size: var(--type-body-small, 13px);
 					font-weight: var(--type-weight-standard, 450);
 					line-height: 1.55;
 				}

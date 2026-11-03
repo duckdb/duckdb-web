@@ -44,7 +44,7 @@ body.documentation.guides-index {
 
         .versiontrigger,
         #topic-filter .versionsidebar li {
-            @include label-1;
+            @include label;
         }
 
         .versiontrigger {
@@ -92,7 +92,7 @@ body.documentation.guides-index {
         }
 
         .guide-card-title {
-            @include title-3;
+            @include headline-4;
             overflow-wrap: anywhere;
         }
 

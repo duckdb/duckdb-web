@@ -4,6 +4,7 @@
 
 /* Header Container */
 header .headerline {
+	--header-control-size: 33px;
 	border-bottom: 1px solid var(--border-color);
 	height: 70px;
 	width: 100%;
@@ -202,8 +203,14 @@ header .headerline {
 		}
 		/* Button */
 		.button {
+			align-self: center;
+			display: inline-flex;
+			align-items: center;
+			height: var(--header-control-size);
+			font-size: var(--type-side-menu, 13px);
 			line-height: 1;
 			margin: 0;
+			padding: 0 16px;
 		}
 		/* Options (Theme Toggle & Banner) */
 		.options {
@@ -217,8 +224,8 @@ header .headerline {
 				background-color: var(--menu-topmenu-background-color, rgba(250, 250, 250, 0.60));
 				background-repeat: no-repeat;
 				background-position: center center;
-				width: 40px;
-				height: 40px;
+				width: var(--header-control-size);
+				height: var(--header-control-size);
 				flex-shrink: 0;
 				aspect-ratio: 1 / 1;
 				display: flex;
@@ -251,8 +258,8 @@ header .headerline {
 
 				.icon-sun,
 				.icon-moon{
-					width: 16px;
-					height: 16px;
+					width: 14px;
+					height: 14px;
 				}
 
 			}

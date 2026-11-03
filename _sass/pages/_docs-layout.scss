@@ -135,7 +135,7 @@ body.documentation {
         }
 
         .title {
-            @include display-3;
+            @include headline-1;
             min-width: 0;
             margin: 0;
         }
@@ -179,17 +179,9 @@ body.documentation {
         }
 
         .breadcrumbs {
-            @include pre-title;
-            text-transform: none;
-            letter-spacing: normal;
+            @include nav-section-label;
             min-width: 0;
             margin-bottom: 10px;
-
-            a,
-            span.slash,
-            span:not(.current) {
-                color: var(--main-text-tertiary-color, #B2B2B2);
-            }
 
             a {
                 color: inherit;
@@ -412,8 +404,8 @@ body.documentation {
             .sidenav-search {
                 flex-shrink: 0;
                 justify-content: space-between;
-                height: 28px;
-                padding: 0 12px;
+                height: auto;
+                padding: 12px;
                 border: 1px solid var(--menu-dropdown-border-color, #E6E6E6);
                 border-radius: var(--page-radius-s, 6px);
                 background: none;

@@ -19,7 +19,7 @@ div.singleentry {
 		line-height: 1.5;
 
 		h1, h2, h3, h4, h5, h6 {
-			@include label-1;
+			@include label;
 			margin: 0 !important;
 		}
 
@@ -30,7 +30,7 @@ div.singleentry {
 		}
 
 		ul {
-			font-size: var(--type-body-small, 14px);
+			font-size: var(--type-body-small, 13px);
 			margin: 0.8em 0 0 0;
 		}
 
@@ -113,7 +113,7 @@ div.singleentry {
 			border-color: var(--border-color);
 
 			p {
-				font-size: var(--type-body-normal, 16px);
+				font-size: var(--type-body-normal, 15px);
 				line-height: 1.5;
 			}
 
