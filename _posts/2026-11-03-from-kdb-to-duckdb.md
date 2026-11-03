@@ -21,9 +21,9 @@ His users are typically teams of 10 to 15 quants. They are deep specialists in f
 
 ## Problems That Didn't Need a Heavyweight Answer
 
-Alongside that work, startups, smaller tech firms and smaller funds kept asking Ryan the same question: what should we run this on? For years he had no good answer.
+Alongside that work, startups, smaller tech firms and smaller funds kept asking Ryan the same question: what should we run this on?
 
-kdb+ was the natural technical fit, but under the licensing model he encountered, he couldn't recommend it to a small firm. He told KX that a startup-friendly license would pay off, since a firm that can't pay half a million today might pay millions once it grows. He also tried the alternatives. [MonetDB](https://www.monetdb.org/) didn't give him the simple embedded option he was looking for. [ClickHouse](https://clickhouse.com/), which he persuaded one firm to deploy, was more operationally involved than he wanted at the time. For some clients, the honest answer was that he would write something in C for their narrow use case.
+For years he had no good answer. He tried other systems but found that their license was prohibitively expensive, their setup didn't offer an embedded mode of operation, or they were much more operationally involved than he wanted at the time. For some clients, the honest answer was that he would write something in C for their narrow use case.
 
 ## A Different Starting Point
 
@@ -33,7 +33,7 @@ DuckDB was different. It was small, embedded, reliable and analytically capable,
 
 That let him give smaller firms a straight recommendation. DuckDB might not scale to everything, but it would run well and serve them for a long time. For roughly 90% of use cases, he reasoned, it would carry a team for years. By the time they outgrew it, they would understand their workload well enough to choose what came next. In many cases, DuckDB has expanded quickly enough that they never needed to move.
 
-## QStudio: a Local Analytical Sandbox
+## QStudio: A Local Analytical Sandbox
 
 The clearest illustration is [QStudio](https://www.timestored.com/qstudio/), the analytics IDE Ryan released about 13 years ago. It was originally built for kdb+ and now connects to around 15 databases. He leaves database administration to tools like [DBeaver](https://dbeaver.io/) and focuses QStudio on analytics and charting.
 
@@ -53,18 +53,7 @@ ORDER BY total_volume DESC;
 
 The result is a personal sandbox where quants can build on their own earlier work. It proved popular, and Ryan found its performance close to kdb+.
 
-Because QStudio is a Java Swing desktop application deployed inside banks, the integration depends on DuckDB's [Java client]({% link docs/2.0/clients/java/overview.md %}). Ryan's early version relied on inefficient workarounds to get appending working. Once a dedicated Java developer joined and rebuilt the [Appender]({% link docs/2.0/clients/java/data_import.md %}) properly, every kink was ironed out:
-
-```java
-DuckDBConnection conn = (DuckDBConnection) DriverManager.getConnection("jdbc:duckdb:");
-try (var appender = conn.createAppender(DuckDBConnection.DEFAULT_SCHEMA, "trades")) {
-    appender.beginRow();
-    appender.append("DUCK");
-    appender.append(42.0);
-    appender.append(1_000);
-    appender.endRow();
-}
-```
+Because QStudio is a Java Swing desktop application deployed inside banks, the integration depends on DuckDB's [Java client]({% link docs/2.0/clients/java/overview.md %}). Ryan's early version relied on inefficient workarounds to get appending working. Once a dedicated Java developer joined and rebuilt the [Appender]({% link docs/2.0/clients/java/data_import.md %}) properly, every kink was ironed out.
 
 **“It just worked,”** Ryan says, **“which is the highest praise I would give any engineering thing.”**
 
@@ -72,17 +61,17 @@ That experience became the basis of his DuckCon talk. His argument was that an o
 
 ## Pulse: DuckDB by Default
 
-QStudio was never a significant direct revenue generator, but it got a very small company onto the approved-vendor lists of some very large firms, which is hard for small vendors to do. When TimeStored launched [Pulse](https://www.timestored.com/pulse/), a real-time HTML visualization tool that is now Ryan's main product, that path into large firms already existed.
+QStudio was never a significant direct revenue generator, but it got a very small company onto the approved-vendor lists of some very large firms, which is hard for small vendors to do. When Ryan's company, TimeStored, launched [Pulse](https://www.timestored.com/pulse/), a real-time HTML visualization tool that is now its main product, that path into large firms already existed.
 
 Ryan reached for DuckDB again. Pulse uses it to snapshot and cache data. What began as an integration experiment had become a repeated TimeStored architecture pattern. DuckDB sits in the embedded storage and query layer, and increasingly supports AI-assisted data exploration. Excel exports and similar user-facing features stay in the application's UI. That is partly to keep styling intact, and partly because bank users often can't install extensions at all.
 
-## PeachQ: Back to q
+## PeachQ: Back to Q
 
-Ryan's newest project is [PeachQ](https://peachq.org/), an open-source implementation of the q language. Ryan loves q as a language but thinks DuckDB is ahead as a database, so PeachQ separates the two.
+Ryan's newest project is [PeachQ](https://peachq.org/), an open-source implementation of the [Q language](https://en.wikipedia.org/wiki/Q_(programming_language_from_Kx_Systems)). Ryan loves Q as a language but thinks DuckDB is ahead as a database, so PeachQ separates the two.
 
-PeachQ uses the Rayforce in-memory engine and DuckDB-backed historical storage to deliver a modern, open-source alternative to kdb+, bringing together real-time processing, powerful analytics, and efficient storage in a single system. Ryan's recent work on C extensions points the same way, along with experiments with newer formats such as [Vortex]({% link docs/2.0/core_extensions/vortex.md %}) and custom table formats. He credits DuckDB's [extension API]({% link docs/2.0/extensions/overview.md %}) with letting people add features cleanly, unlike the fragile workarounds he and others once built into closed systems. Often, he notes, DuckDB later builds those features itself.
+PeachQ uses the Rayforce in-memory engine and DuckDB-backed historical storage to deliver a modern, open-source alternative to kdb+, bringing together real-time processing, powerful analytics, and efficient storage in a single system. Ryan's recent work on C extensions points the same way, along with experiments with newer formats such as [Vortex]({% link docs/2.0/core_extensions/vortex.md %}) and custom table formats. He credits DuckDB's [extension]({% link docs/2.0/extensions/overview.md %}) API with letting people add features cleanly, unlike the fragile workarounds he and others once built into closed systems. Often, he notes, DuckDB later builds those features itself.
 
-## Further Reading
+## Learn More
 
 Ryan's DuckCon talk gives a short tour of this work.
 
@@ -90,6 +79,6 @@ Ryan's DuckCon talk gives a short tour of this work.
 <iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/viMXP_TG6tU" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 </div>
 
-You can explore QStudio, now open source, and try PeachQ at peachq.org.
+You can explore QStudio, now open source, and try PeachQ at [peachq.org](https://peachq.org/).
 
-We would like to thank Ryan for the conversation. You can follow his work on DuckDB, q and TimeStored at [timestored.com](https://www.timestored.com/). And if you are reading this, are using DuckDB, and would like to share your story, drop us a line at [quack@duckdb.org](mailto:quack@duckdb.org).
+We would like to thank Ryan for the conversation. You can follow his work on DuckDB, Q and TimeStored at [timestored.com](https://www.timestored.com/). And if you are reading this, are using DuckDB, and would like to share your story, drop us a line at [geertjan@ducklabs.com](mailto:geertjan@ducklabs.com).
