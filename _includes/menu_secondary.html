@@ -12,7 +12,7 @@
 					{% if mainentry.url %}
 						{% assign myurl = mainentry.url | slice: 0, 5 %}
 						{% if myurl == 'https' or myurl == 'http:' %}
-						<div class="external"><a href="{{ mainentry.url }}" target="_blank" class="{{ mainentry.page | downcase }}">{{ mainentry.page }} {% if mainentry.page == 'GitHub' and site.star_count %} <span class="starcount">{{ site.star_count }}</span>{% endif %}</a></div>
+						<div class="external"><a href="{{ mainentry.url }}" target="_blank" class="{{ mainentry.page | downcase }}">{{ mainentry.page }}{%- if mainentry.page == 'GitHub' and site.star_count %}<span class="starcount">{{ site.star_count }}</span>{% endif %}</a></div>
 						{% else %}
 						<div><a href="{{ mainentry.url | replace: '/docs', archive_url_slug }}">{{ mainentry.page }}</a>{% if mainentry.subfolderitems[0] %}<svg class="icon chevron-down"><use href="#chevron-down"></use></svg>{% endif %}</div>
 						{% endif %}
